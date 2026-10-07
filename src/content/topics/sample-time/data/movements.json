@@ -1,0 +1,12 @@
+[
+  {
+    "id": "sample-crossing",
+    "from": "2000-02-01",
+    "to": "2000-06-01",
+    "path": { "type": "LineString", "coordinates": [[-150, 13], [-150.5, 11.5], [-150, 9.5]] },
+    "holder": "north-sample",
+    "strength": 12000,
+    "label": { "en": "Sample movement", "zh": "示例行动" },
+    "kind": "land"
+  }
+]

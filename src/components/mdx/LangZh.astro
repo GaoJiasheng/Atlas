@@ -1,0 +1,9 @@
+---
+/** `<Lang zh>…</Lang>` on Chinese pages: renders children only for `zh`. */
+interface Props {
+  en?: boolean;
+  zh?: boolean;
+}
+const { zh = false } = Astro.props;
+---
+{zh && <slot />}

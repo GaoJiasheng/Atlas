@@ -1,0 +1,58 @@
+import { z } from 'zod';
+import { bilingual, kebabId, level, theme } from './common';
+
+export const SUBJECTS = [
+  'social-studies',
+  'science',
+  'geography',
+  'history',
+  'biology',
+  'math',
+  'extension',
+] as const;
+export const subject = z.enum(SUBJECTS);
+export type Subject = z.infer<typeof subject>;
+
+export const ENGINES = ['time-scene', 'space-scene', 'simulation'] as const;
+export const engineId = z.enum(ENGINES);
+export type EngineId = z.infer<typeof engineId>;
+
+/** Stages each engine knows how to render (docs/03). */
+export const ENGINE_STAGES = {
+  'time-scene': ['geo', 'diagram'],
+  'space-scene': ['model3d', 'layer2d'],
+  simulation: ['chart', 'diagram'],
+} as const satisfies Record<EngineId, readonly string[]>;
+
+/** `src/content/topics/<slug>/topic.yaml` (docs/02). */
+export const topicSchema = z
+  .object({
+    id: kebabId,
+    title: bilingual,
+    subtitle: bilingual,
+    subject,
+    levels: z.array(level).min(1),
+    moe: z.array(z.string().min(1)).default([]),
+    mode: z.enum(['time', 'space', 'both']),
+    engine: engineId,
+    stage: z.string().min(1),
+    theme: theme.default('paper'),
+    sensitivity: z.enum(['open', 'guarded']).default('open'),
+    status: z.enum(['draft', 'ready', 'published']).default('draft'),
+    /** Path relative to the topic directory, e.g. `./cover.jpg`. */
+    cover: z.string().min(1).optional(),
+  })
+  .strict()
+  .superRefine((topic, ctx) => {
+    const stages: readonly string[] = ENGINE_STAGES[topic.engine];
+    if (!stages.includes(topic.stage)) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['stage'],
+        message: `engine "${topic.engine}" has no stage "${topic.stage}" (expected ${stages.join(' | ')})`,
+      });
+    }
+  });
+
+export type TopicInput = z.input<typeof topicSchema>;
+export type TopicMeta = z.output<typeof topicSchema>;

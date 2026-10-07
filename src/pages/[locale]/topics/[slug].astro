@@ -1,0 +1,61 @@
+---
+/**
+ * Topic page: loads topic + chapters + engine data at build time and mounts
+ * the SceneHost island. Every chapter's MDX body is rendered for this locale
+ * into the island's default slot as `<article data-chapter-body=id>`; the
+ * InfoPanel shows the current one (first chapter visible without JS).
+ */
+import { render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SceneHost from '../../../engines/core/SceneHost';
+import LangEn from '../../../components/mdx/LangEn.astro';
+import LangZh from '../../../components/mdx/LangZh.astro';
+import Soft from '../../../components/mdx/Soft.astro';
+import Full from '../../../components/mdx/Full.astro';
+import { LOCALES, localeHref, tx, type Locale } from '../../../i18n';
+import { chapterThemeMap, getTopicChapters, getTopics, topicEngineData, type TopicEntry } from '../../../lib/content';
+
+export async function getStaticPaths() {
+  const topics = await getTopics();
+  return LOCALES.flatMap((locale) => topics.map((topic) => ({ params: { locale, slug: topic.id }, props: { topic } })));
+}
+
+interface Props {
+  topic: TopicEntry;
+}
+
+const { topic } = Astro.props;
+const locale = Astro.params.locale as Locale;
+
+const chapterEntries = await getTopicChapters(topic.id);
+const chapters = chapterEntries.map((entry) => entry.data);
+const bodies = await Promise.all(chapterEntries.map((entry) => render(entry)));
+const data = topicEngineData(topic);
+
+const components = { Lang: locale === 'zh' ? LangZh : LangEn, Soft, Full };
+---
+<BaseLayout
+  locale={locale}
+  title={tx(topic.data.title, locale)}
+  description={tx(topic.data.subtitle, locale)}
+  themeDefault={topic.data.theme}
+  chapterThemes={chapterThemeMap(chapters)}
+>
+  <SceneHost
+    client:visible
+    topic={topic.data}
+    chapters={chapters}
+    data={data}
+    locale={locale}
+    path={Astro.url.pathname}
+    indexHref={localeHref(locale, '/')}
+  >
+    {
+      bodies.map(({ Content }, index) => (
+        <article data-chapter-body={chapters[index]?.id} hidden={index !== 0}>
+          <Content components={components} />
+        </article>
+      ))
+    }
+  </SceneHost>
+</BaseLayout>

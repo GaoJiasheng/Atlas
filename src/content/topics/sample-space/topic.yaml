@@ -1,0 +1,13 @@
+# PLACEHOLDER topic: exercises the SpaceScene schema and chapter flow only.
+id: sample-space
+title: { en: "Sample: Space Scene", zh: "示例：空间场景" }
+subtitle: { en: "A placeholder topic for testing the space engine", zh: "用于测试空间引擎的占位主题" }
+subject: science
+levels: [P3, P5]
+moe: []
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: draft

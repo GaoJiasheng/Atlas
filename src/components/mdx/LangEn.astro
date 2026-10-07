@@ -1,0 +1,12 @@
+---
+/**
+ * `<Lang en>…</Lang>` on English pages: renders children only for `en`.
+ * The topic page maps `Lang` to LangEn or LangZh by locale.
+ */
+interface Props {
+  en?: boolean;
+  zh?: boolean;
+}
+const { en = false } = Astro.props;
+---
+{en && <slot />}

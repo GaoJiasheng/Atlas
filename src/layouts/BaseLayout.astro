@@ -1,0 +1,70 @@
+---
+/**
+ * Document shell for every page: <html lang>, theme applied before first
+ * paint (no flash), parent-mode flag, hreflang alternates, global CSS.
+ */
+import '../styles/global.css';
+import { HTML_LANG, LOCALES, switchLocalePath, t, type Locale } from '../i18n';
+import type { Theme } from '../theme/theme';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  description?: string;
+  /** Theme when the user has no override and the URL/chapter says nothing. */
+  themeDefault?: Theme;
+  /** Theme per chapter id (topic pages), so `?ch=` deep links paint correctly. */
+  chapterThemes?: Record<string, Theme>;
+}
+
+const { locale, title, description = t(locale, 'site.description'), themeDefault = 'paper', chapterThemes = {} } =
+  Astro.props;
+const pathname = Astro.url.pathname;
+const fullTitle = title === t(locale, 'site.name') ? title : `${title} · ${t(locale, 'site.name')}`;
+const favicon = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/favicon.svg`;
+---
+<!doctype html>
+<html
+  lang={HTML_LANG[locale]}
+  data-theme={themeDefault}
+  data-theme-default={themeDefault}
+  data-chapter-themes={JSON.stringify(chapterThemes)}
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f4ecd8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0e1116" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" type="image/svg+xml" href={favicon} />
+    {LOCALES.map((l) => <link rel="alternate" hreflang={HTML_LANG[l]} href={switchLocalePath(pathname, l)} />)}
+    <!-- Theme + parent mode before first paint. Mirrors src/theme/theme.ts resolveTheme(). -->
+    <script is:inline>
+      (function () {
+        var d = document.documentElement;
+        var th = d.getAttribute('data-theme-default') || 'paper';
+        var ok = function (v) { return v === 'paper' || v === 'cinema'; };
+        try {
+          var q = new URLSearchParams(location.search);
+          var map = JSON.parse(d.getAttribute('data-chapter-themes') || '{}');
+          var ch = q.get('ch');
+          if (ch && ok(map[ch])) th = map[ch];
+          if (ok(q.get('theme'))) th = q.get('theme');
+          var o = localStorage.getItem('atlas:theme');
+          if (ok(o)) th = o;
+          d.setAttribute('data-parent', localStorage.getItem('atlas:parent') === '1' ? '1' : '0');
+        } catch (e) {}
+        d.setAttribute('data-theme', th);
+      })();
+    </script>
+  </head>
+  <body>
+    <a
+      href="#atlas-main"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-50 atlas-control"
+      >{t(locale, 'a11y.skipToContent')}</a
+    >
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,85 @@
+{
+  "site.name": "Atlas",
+  "site.tagline": "会动的课本",
+  "site.description": "给好奇的小学生的双语互动场景。",
+  "a11y.skipToContent": "跳到正文",
+
+  "nav.topics": "全部主题",
+  "nav.backToTopics": "返回全部主题",
+
+  "index.heading": "去探索",
+  "index.intro": "选一个主题。每个画面都会动，每个画面都有能分享的链接。",
+  "index.filter.subject": "学科",
+  "index.filter.level": "年级",
+  "index.filter.all": "全部",
+  "index.filter.clear": "清除筛选",
+  "index.count": "{n} 个主题",
+  "index.empty": "暂时没有符合筛选的主题。",
+  "index.chapters": "{n} 章",
+
+  "subject.social-studies": "社会",
+  "subject.science": "科学",
+  "subject.geography": "地理",
+  "subject.history": "历史",
+  "subject.biology": "生物",
+  "subject.math": "数学",
+  "subject.extension": "课外拓展",
+
+  "mode.time": "看它怎么变",
+  "mode.space": "看里面是什么",
+  "mode.both": "时间与空间",
+
+  "status.draft": "草稿",
+  "status.ready": "待发布",
+  "status.published": "已发布",
+
+  "scene.loading": "场景加载中…",
+  "scene.stage": "场景",
+  "scene.chapters": "章节",
+  "scene.controls": "场景控制",
+  "scene.details": "详情",
+  "scene.error": "这个场景没能加载出来。",
+
+  "chapter.prev": "上一章",
+  "chapter.next": "下一章",
+  "chapter.prevShort": "上一章",
+  "chapter.nextShort": "下一章",
+  "chapter.position": "第 {n} 章，共 {total} 章",
+  "chapter.guarded": "需要大人陪着看",
+  "chapter.guardedHint": "本章部分内容做了柔化处理，家长模式可看完整版。",
+  "chapter.tooYoung": "再长大一点再看",
+  "chapter.tooYoungHint": "请大人帮你调整年级，或打开家长模式。",
+  "chapter.level": "{level} 年级",
+
+  "level.label": "我的年级",
+
+  "parent.label": "家长模式",
+  "parent.on": "家长模式已开启",
+  "parent.off": "家长模式已关闭",
+  "parent.confirm": "再点一次开启",
+
+  "settings.label": "设置",
+
+  "theme.label": "外观",
+  "theme.auto": "自动",
+  "theme.paper": "纸张",
+  "theme.cinema": "电影",
+
+  "lang.label": "语言",
+  "lang.switchTo": "English",
+  "lang.switchToLabel": "切换到英文",
+
+  "quiz.heading": "考考你",
+  "quiz.correct": "答对了！",
+  "quiz.wrong": "差一点。",
+  "quiz.tryAgain": "再试一次",
+  "quiz.close": "收起问题",
+  "quiz.show": "显示问题",
+
+  "layers.heading": "图层",
+  "legend.heading": "图例",
+  "counter.each": "一个图标 = {n}",
+
+  "stub.notice": "引擎预览。真正的 {engine} 舞台在第二期上线。",
+  "stub.state": "当前场景状态"
+}

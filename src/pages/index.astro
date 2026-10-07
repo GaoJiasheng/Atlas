@@ -1,0 +1,32 @@
+---
+/**
+ * `/` -> `/en/` (or the locale the reader picked last time). Static meta
+ * refresh as a no-JS fallback.
+ */
+import { siteBase } from '../i18n';
+
+const base = siteBase();
+const target = `${base}/en/`;
+---
+<!doctype html>
+<html lang="en" style="background:#f4ecd8">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Atlas</title>
+    <script is:inline define:vars={{ base }}>
+      try {
+        var saved = localStorage.getItem('atlas:locale');
+        var locale = saved === 'zh' || saved === 'en' ? saved : 'en';
+        location.replace(base + '/' + locale + '/' + location.search + location.hash);
+      } catch (e) {
+        location.replace(base + '/en/');
+      }
+    </script>
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <link rel="canonical" href={target} />
+  </head>
+  <body style="background:#f4ecd8;color:#2b2117;font-family:system-ui,sans-serif">
+    <p><a href={target}>Atlas</a></p>
+  </body>
+</html>

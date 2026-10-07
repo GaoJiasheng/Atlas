@@ -1,0 +1,14 @@
+# PLACEHOLDER topic: exercises the TimeScene schema and chapter flow only.
+id: sample-time
+title: { en: "Sample: Time Scene", zh: "示例：时间场景" }
+subtitle: { en: "A placeholder topic for testing the time engine", zh: "用于测试时间引擎的占位主题" }
+subject: extension
+levels: [P3, P4]
+moe:
+  - "Placeholder: no syllabus anchor"
+mode: time
+engine: time-scene
+stage: geo
+theme: paper
+sensitivity: guarded
+status: draft

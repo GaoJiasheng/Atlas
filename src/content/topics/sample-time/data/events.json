@@ -1,0 +1,24 @@
+[
+  {
+    "id": "sample-meeting",
+    "t": "2000-03-10",
+    "until": "2000-03-12",
+    "at": [-150.3, 10.8],
+    "kind": "battle",
+    "sides": { "attacker": "north-sample", "defender": "south-sample" },
+    "forces": { "north-sample": 12000, "south-sample": 7500 },
+    "result": "attacker",
+    "importance": 2,
+    "title": { "en": "Sample event one", "zh": "示例事件一" },
+    "summary": { "en": "A placeholder battle used to test event rendering.", "zh": "用于测试事件显示的占位战斗。" }
+  },
+  {
+    "id": "sample-agreement",
+    "t": "2000-06-15",
+    "at": [-149.5, 9],
+    "kind": "political",
+    "importance": 3,
+    "title": { "en": "Sample event two", "zh": "示例事件二" },
+    "summary": { "en": "A placeholder political event without sides.", "zh": "没有交战双方的占位政治事件。" }
+  }
+]

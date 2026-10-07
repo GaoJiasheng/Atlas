@@ -1,0 +1,55 @@
+{
+  "parts": [
+    {
+      "id": "sample-box",
+      "name": { "en": "Sample box", "zh": "示例盒子" },
+      "group": "sample-group",
+      "summary": { "en": "A placeholder box.", "zh": "一个占位盒子。" },
+      "detail": { "en": "Exists only to test box primitives.", "zh": "仅用于测试盒子基本体。" },
+      "primitive": { "kind": "box", "size": [1.2, 0.6, 0.6], "at": [0, 0, 0], "color": "plastic" },
+      "explode": { "dir": [0, -1, 0], "dist": 0.8 },
+      "connects": ["sample-drum"],
+      "level": "P3"
+    },
+    {
+      "id": "sample-drum",
+      "name": { "en": "Sample drum", "zh": "示例滚筒" },
+      "group": "sample-group",
+      "summary": { "en": "A placeholder cylinder that spins.", "zh": "一个会转的占位圆柱。" },
+      "detail": { "en": "Exists only to test cylinder primitives and animations.", "zh": "仅用于测试圆柱基本体和动画。" },
+      "primitive": { "kind": "cylinder", "size": [0.25, 0.25, 0.5], "at": [1, 0.6, 0], "rotation": [0, 0, 90], "color": "metal" },
+      "explode": { "dir": [1, 0.3, 0], "dist": 1.2 },
+      "connects": ["sample-box", "sample-ball"],
+      "level": "P3"
+    },
+    {
+      "id": "sample-ball",
+      "name": { "en": "Sample ball", "zh": "示例球" },
+      "group": "sample-group",
+      "summary": { "en": "A placeholder sphere.", "zh": "一个占位球体。" },
+      "detail": { "en": "Exists only to test sphere primitives.", "zh": "仅用于测试球体基本体。" },
+      "primitive": { "kind": "sphere", "size": [0.3], "at": [-1, 0.6, 0], "color": "token:accent-2" },
+      "explode": { "dir": [-1, 0.4, 0], "dist": 1 },
+      "connects": ["sample-drum"],
+      "level": "P5"
+    }
+  ],
+  "groups": [{ "id": "sample-group", "name": { "en": "Sample group", "zh": "示例组" }, "color": "token:accent-1" }],
+  "flows": [
+    {
+      "id": "sample-flow",
+      "group": "sample-group",
+      "path": [[-1, 0.6, 0], [0, 0.3, 0], [1, 0.6, 0]],
+      "speed": 1,
+      "color": "token:accent-1",
+      "whenRun": true
+    }
+  ],
+  "animations": [
+    { "id": "sample-spin", "target": "sample-drum", "kind": "rotate", "axis": [1, 0, 0], "rpm": 60, "whenRun": true }
+  ],
+  "views": {
+    "assembled": { "camera": { "position": [3, 2, 4], "target": [0, 0, 0] } },
+    "exploded": { "camera": { "position": [5, 3, 6], "target": [0, 0.3, 0] } }
+  }
+}

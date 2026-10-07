@@ -1,0 +1,781 @@
+/*
+ * Scene layout and widget styles. Plain CSS on tokens (not utility classes)
+ * because these are shared, stateful components with many states; pages use
+ * Tailwind utilities.
+ */
+
+/* ------------------------------------------------------------------ */
+/* Layout                                                              */
+/* ------------------------------------------------------------------ */
+
+.atlas-scene {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "top"
+    "rail"
+    "main"
+    "panel";
+  min-height: 100dvh;
+  background: var(--bg);
+}
+
+.atlas-topbar {
+  grid-area: top;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: var(--topbar-height);
+  padding: 0.5rem max(0.75rem, env(safe-area-inset-right)) 0.5rem max(0.75rem, env(safe-area-inset-left));
+  padding-top: max(0.5rem, env(safe-area-inset-top));
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+.atlas-topbar__title {
+  flex: 1;
+  min-width: 0;
+}
+.atlas-topbar__title h1 {
+  margin: 0;
+  font-size: 1.125rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.atlas-topbar__title p {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--ink-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.atlas-scene__rail {
+  grid-area: rail;
+  min-width: 0;
+  border-bottom: 1px solid var(--border);
+}
+.atlas-scene__main {
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+.atlas-scene__panel {
+  grid-area: panel;
+  min-width: 0;
+  min-height: 0;
+  border-top: 1px solid var(--border);
+}
+
+.atlas-stage {
+  position: relative;
+  flex: 1;
+  min-height: 56vh;
+  overflow: hidden;
+  background: var(--stage-bg);
+  /* Engines set touch-action on their own canvas (map / WebGL) as needed. */
+}
+.atlas-stage__overlay {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: min(260px, 60%);
+  pointer-events: none;
+}
+.atlas-stage__overlay > * {
+  pointer-events: auto;
+}
+.atlas-stage__placeholder {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 0.75rem;
+  color: var(--ink-muted);
+}
+.atlas-stage__spinner {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  animation: atlas-spin 900ms linear infinite;
+}
+@keyframes atlas-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.atlas-bottombar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+.atlas-bottombar:empty {
+  display: none;
+}
+.atlas-bottombar__readout {
+  min-width: 6.5rem;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.9375rem;
+}
+
+@media (min-width: 1024px) {
+  .atlas-scene {
+    height: 100dvh;
+    grid-template-columns: var(--rail-width) minmax(0, 1fr) var(--panel-width);
+    grid-template-rows: auto minmax(0, 1fr);
+    grid-template-areas:
+      "top top top"
+      "rail main panel";
+  }
+  .atlas-scene__rail {
+    border-bottom: 0;
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+  }
+  .atlas-scene__panel {
+    border-top: 0;
+    border-left: 1px solid var(--border);
+    display: flex;
+  }
+  .atlas-stage {
+    min-height: 0;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  :root {
+    --rail-width: 232px;
+    --panel-width: 340px;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Controls                                                            */
+/* ------------------------------------------------------------------ */
+
+.atlas-control__label {
+  white-space: nowrap;
+}
+@media (max-width: 639px) {
+  .atlas-topbar__back .atlas-control__label {
+    display: none;
+  }
+}
+
+.atlas-segmented {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 2px;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius-md) + 2px);
+  background: var(--surface-2);
+}
+.atlas-segmented .atlas-control {
+  border-color: transparent;
+  background: transparent;
+}
+.atlas-segmented .atlas-control[aria-checked="true"] {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.atlas-select {
+  appearance: none;
+  padding-right: 2rem;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
+    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position:
+    calc(100% - 16px) 50%,
+    calc(100% - 11px) 50%;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+}
+
+.atlas-level {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.atlas-level__label {
+  font-size: 0.8125rem;
+  color: var(--ink-muted);
+}
+
+.atlas-range {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: var(--hit);
+  font-size: 0.9375rem;
+}
+.atlas-range input[type="range"] {
+  width: 160px;
+  height: var(--hit);
+  accent-color: var(--accent);
+}
+
+/* Global toggles: inline on wide screens, dropdown on narrow ones. */
+.atlas-toggles {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.atlas-toggles__panel {
+  display: none;
+}
+.atlas-toggles[data-open="true"] .atlas-toggles__panel {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.5rem;
+  min-width: 240px;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+.atlas-toggles[data-open="true"] .atlas-level {
+  justify-content: space-between;
+}
+@media (min-width: 900px) {
+  .atlas-toggles__trigger {
+    display: none;
+  }
+  .atlas-toggles .atlas-toggles__panel,
+  .atlas-toggles[data-open="true"] .atlas-toggles__panel {
+    position: static;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    box-shadow: none;
+  }
+}
+.atlas-control[data-arming] {
+  border-color: var(--warning);
+  color: var(--warning);
+}
+
+/* ------------------------------------------------------------------ */
+/* ChapterRail                                                         */
+/* ------------------------------------------------------------------ */
+
+.atlas-rail {
+  padding: 0.5rem;
+}
+.atlas-rail__heading {
+  margin: 0.25rem 0.5rem 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.atlas-rail__list {
+  display: flex;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+}
+.atlas-rail__list > li {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+.atlas-rail__item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.625rem;
+  width: 100%;
+  min-height: 52px;
+  max-width: 280px;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  background: transparent;
+  text-align: left;
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+.atlas-rail__item:active {
+  background: var(--overlay);
+}
+.atlas-rail__item[aria-current="step"] {
+  background: var(--accent-soft);
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+}
+.atlas-rail__item[aria-current="step"] .atlas-rail__num {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.atlas-rail__num {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.atlas-rail__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  min-width: 0;
+}
+.atlas-rail__title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-family: var(--font-serif);
+  font-size: 0.9875rem;
+  line-height: 1.3;
+}
+.atlas-rail__hint {
+  font-size: 0.8125rem;
+  color: var(--ink-muted);
+}
+.atlas-rail__item--collapsed {
+  color: var(--ink-faint);
+}
+.atlas-rail__item--collapsed .atlas-rail__title {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-style: italic;
+}
+@media (min-width: 1024px) {
+  .atlas-rail__list {
+    flex-direction: column;
+    overflow-x: visible;
+  }
+  .atlas-rail__item {
+    max-width: none;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* InfoPanel                                                           */
+/* ------------------------------------------------------------------ */
+
+.atlas-panel {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  background: var(--surface);
+}
+.atlas-panel__scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 1.25rem 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.atlas-panel__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.atlas-panel__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--ink-muted);
+}
+.atlas-panel__title {
+  margin: 0;
+  font-size: 1.5rem;
+}
+.atlas-panel__notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0.625rem 0.75rem;
+  border-radius: var(--radius-md);
+  background: var(--overlay);
+  font-size: 0.875rem;
+  color: var(--ink-muted);
+}
+.atlas-panel__notice svg {
+  flex: none;
+  margin-top: 2px;
+}
+.atlas-panel__notice--guarded {
+  background: var(--warning-soft);
+  color: var(--warning);
+}
+.atlas-panel__footer .atlas-control {
+  flex: 1;
+  white-space: nowrap;
+}
+.atlas-panel__footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+  border-top: 1px solid var(--border);
+}
+.atlas-inspector:empty {
+  display: none;
+}
+
+/* ------------------------------------------------------------------ */
+/* Overlay cards: layers + legend                                      */
+/* ------------------------------------------------------------------ */
+
+.atlas-overlay-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.625rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  backdrop-filter: blur(6px);
+  box-shadow: var(--shadow);
+}
+.atlas-overlay__heading {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin: 0 0 0.25rem;
+  padding: 0;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.atlas-layers {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: flex;
+  flex-direction: column;
+}
+.atlas-layers__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: var(--hit);
+  padding: 0 0.5rem;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  text-align: left;
+  font-size: 0.9375rem;
+}
+.atlas-layers__row:active {
+  background: var(--overlay);
+}
+.atlas-layers__box {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--border-strong);
+  border-radius: 6px;
+}
+.atlas-layers__box[data-on="true"] {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.atlas-legend ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+.atlas-legend__item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+.atlas-legend__fill {
+  display: inline-block;
+  width: 16px;
+  height: 12px;
+  border-radius: 3px;
+  flex: none;
+}
+
+/* ------------------------------------------------------------------ */
+/* QuizCard                                                            */
+/* ------------------------------------------------------------------ */
+
+.atlas-quiz {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg);
+}
+.atlas-quiz--closed {
+  padding: 0;
+  border: 0;
+  background: none;
+}
+.atlas-quiz__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: -0.5rem -0.5rem 0 0;
+}
+.atlas-quiz__heading {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.atlas-quiz__question {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+}
+.atlas-quiz__options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.atlas-quiz__option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  min-height: 52px;
+  padding: 0.5rem 0.75rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  text-align: left;
+  font-size: 1rem;
+}
+.atlas-quiz__option:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+.atlas-quiz__option[data-state="correct"] {
+  border-color: var(--success);
+  background: color-mix(in srgb, var(--success) 12%, var(--surface));
+}
+.atlas-quiz__option[data-state="wrong"] {
+  border-color: var(--warning);
+  background: var(--warning-soft);
+}
+.atlas-quiz__letter {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  font-weight: 650;
+  font-size: 0.8125rem;
+}
+.atlas-quiz__mark {
+  margin-left: auto;
+  flex: none;
+}
+.atlas-quiz__feedback p {
+  margin: 0;
+}
+.atlas-quiz__correct {
+  color: var(--success);
+  font-weight: 600;
+}
+.atlas-quiz__wrong {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+/* ------------------------------------------------------------------ */
+/* Counter                                                             */
+/* ------------------------------------------------------------------ */
+
+.atlas-counter {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+.atlas-counter__grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+.atlas-counter__icon {
+  position: relative;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+}
+.atlas-counter__ghost {
+  position: absolute;
+  inset: 0;
+  opacity: 0.18;
+}
+.atlas-counter__fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  overflow: hidden;
+}
+.atlas-counter__more {
+  font-weight: 700;
+  color: var(--ink-muted);
+}
+.atlas-counter__caption {
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+}
+.atlas-counter__unit {
+  margin-left: 0.25rem;
+  color: var(--ink-muted);
+}
+
+/* ------------------------------------------------------------------ */
+/* Phase 1 stub stage                                                  */
+/* ------------------------------------------------------------------ */
+
+.atlas-stub {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  overflow: auto;
+  background: var(--bg);
+}
+.atlas-stub__notice {
+  margin: 0;
+  padding: 0.5rem 0.75rem;
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  color: var(--ink-muted);
+}
+.atlas-stub__canvas {
+  flex: 1;
+  min-height: 220px;
+  display: flex;
+}
+.atlas-stub__svg {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  max-height: 60vh;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--surface-sunken);
+}
+.atlas-stub__state {
+  font-size: 0.8125rem;
+}
+.atlas-stub__state summary {
+  min-height: var(--hit);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: var(--ink-muted);
+}
+.atlas-stub__state pre {
+  margin: 0;
+  padding: 0.75rem;
+  border-radius: var(--radius-md);
+  background: var(--surface-sunken);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  overflow: auto;
+  max-height: 32vh;
+}
+.atlas-stub__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.atlas-stub__detail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: var(--radius-md);
+  background: var(--overlay);
+}
+.atlas-stub__detail h3,
+.atlas-stub__detail p {
+  margin: 0;
+}
+.atlas-stub__muted {
+  color: var(--ink-muted);
+  font-size: 0.9375rem;
+}
+.atlas-stub__pulse {
+  animation: atlas-pulse 1.2s var(--ease-out) infinite;
+}
+@keyframes atlas-pulse {
+  50% {
+    fill-opacity: 0.7;
+  }
+}

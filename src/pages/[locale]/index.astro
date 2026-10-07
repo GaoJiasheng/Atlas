@@ -1,0 +1,110 @@
+---
+/**
+ * Topic index with subject and level filters. Filters are progressive
+ * enhancement (src/scripts/topic-filters.ts) and live in the query string.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteToggles from '../../components/SiteToggles';
+import { LOCALES, localeHref, t, tx, type Locale, type UiKey } from '../../i18n';
+import { getChapterCounts, getTopics } from '../../lib/content';
+import { LEVELS } from '../../lib/levels';
+import { SUBJECTS } from '../../content/schema/topic';
+
+export function getStaticPaths() {
+  return LOCALES.map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as Locale;
+const topics = await getTopics();
+const counts = await getChapterCounts();
+const subjects = SUBJECTS.filter((s) => topics.some((topic) => topic.data.subject === s));
+const subjectKey = (s: string) => `subject.${s}` as UiKey;
+---
+<BaseLayout locale={locale} title={t(locale, 'site.name')}>
+  <header
+    class="sticky top-0 z-20 flex items-center gap-3 border-b border-border bg-bg/90 px-4 py-2 backdrop-blur sm:px-6"
+  >
+    <a href={localeHref(locale, '/')} class="flex min-h-hit items-center gap-2 no-underline">
+      <img src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/favicon.svg`} alt="" width="28" height="28" />
+      <span class="font-serif text-xl font-semibold">{t(locale, 'site.name')}</span>
+      <span class="hidden text-sm text-ink-muted sm:inline">· {t(locale, 'site.tagline')}</span>
+    </a>
+    <div class="flex-1"></div>
+    <SiteToggles client:idle locale={locale} path={Astro.url.pathname} />
+  </header>
+
+  <main id="atlas-main" class="mx-auto max-w-6xl px-4 pt-8 pb-16 sm:px-6">
+    <h1 class="m-0 text-4xl sm:text-5xl">{t(locale, 'index.heading')}</h1>
+    <p class="mt-3 max-w-2xl text-lg text-ink-muted">{t(locale, 'index.intro')}</p>
+
+    <section class="mt-8 flex flex-col gap-4" aria-label={t(locale, 'index.filter.subject')} data-topic-filters>
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="w-16 text-sm font-semibold text-ink-muted">{t(locale, 'index.filter.subject')}</span>
+        <button type="button" class="atlas-control" data-filter="subject" data-value="" aria-pressed="true">
+          {t(locale, 'index.filter.all')}
+        </button>
+        {
+          subjects.map((s) => (
+            <button type="button" class="atlas-control" data-filter="subject" data-value={s} aria-pressed="false">
+              {t(locale, subjectKey(s))}
+            </button>
+          ))
+        }
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="w-16 text-sm font-semibold text-ink-muted">{t(locale, 'index.filter.level')}</span>
+        <button type="button" class="atlas-control" data-filter="level" data-value="" aria-pressed="true">
+          {t(locale, 'index.filter.all')}
+        </button>
+        {
+          LEVELS.map((l) => (
+            <button type="button" class="atlas-control" data-filter="level" data-value={l} aria-pressed="false">
+              {l}
+            </button>
+          ))
+        }
+      </div>
+      <p class="m-0 text-sm text-ink-muted" aria-live="polite" data-count data-template={t(locale, 'index.count')}>
+        {t(locale, 'index.count', { n: topics.length })}
+      </p>
+    </section>
+
+    <ul class="mt-6 grid list-none gap-4 p-0 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        topics.map((topic) => {
+          const d = topic.data;
+          return (
+            <li data-topic data-subject={d.subject} data-levels={d.levels.join(' ')}>
+              <a
+                href={localeHref(locale, `/topics/${topic.id}/`)}
+                class="group flex h-full flex-col gap-3 rounded-lg border border-border bg-surface p-5 no-underline shadow-panel transition-colors hover:border-border-strong"
+              >
+                <div class="flex flex-wrap items-center gap-2">
+                  <span class="atlas-badge atlas-badge--accent">{t(locale, subjectKey(d.subject))}</span>
+                  <span class="atlas-badge">{t(locale, `mode.${d.mode}` as UiKey)}</span>
+                  {d.status !== 'published' && <span class="atlas-badge">{t(locale, `status.${d.status}` as UiKey)}</span>}
+                  {d.sensitivity === 'guarded' && (
+                    <span class="atlas-badge atlas-badge--warning">{t(locale, 'chapter.guarded')}</span>
+                  )}
+                </div>
+                <h2 class="m-0 text-2xl">{tx(d.title, locale)}</h2>
+                <p class="m-0 flex-1 text-ink-muted">{tx(d.subtitle, locale)}</p>
+                <p class="m-0 flex items-center gap-2 text-sm text-ink-faint">
+                  <span>{d.levels.join(' · ')}</span>
+                  <span aria-hidden="true">·</span>
+                  <span>{t(locale, 'index.chapters', { n: counts.get(topic.id) ?? 0 })}</span>
+                </p>
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+    <p class="mt-6 hidden text-ink-muted" data-empty>{t(locale, 'index.empty')}</p>
+  </main>
+</BaseLayout>
+
+<script>
+  import { initTopicFilters } from '../../scripts/topic-filters';
+  initTopicFilters();
+</script>

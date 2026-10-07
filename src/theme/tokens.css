@@ -1,0 +1,142 @@
+/*
+ * Atlas design tokens. Two themes switch via `data-theme` on <html>:
+ *   paper  (site default) warm paper, ink, matte
+ *   cinema (war / night topics) near-black, light ink, glowing accents
+ *
+ * Engines and map styles read these variables at runtime
+ * (see src/theme/map-style.ts and readThemeTokens()). Never hard-code colours
+ * in components; add a token here instead.
+ */
+
+:root {
+  /* Type. System stacks only in Phase 1 (no webfont files). */
+  --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, "Songti SC",
+    "Noto Serif CJK SC", "Source Han Serif SC", "STSong", serif;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC",
+    "Hiragino Sans GB", "Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+
+  /* Shape and rhythm. */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --hit: 44px; /* minimum touch target */
+  --rail-width: 272px;
+  --panel-width: 380px;
+  --topbar-height: 60px;
+
+  /* Motion. */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 140ms;
+  --dur-med: 260ms;
+  --dur-slow: 600ms;
+}
+
+:root[lang="zh-Hans"] {
+  /* Prefer CJK faces first for Chinese pages so Latin falls back gracefully. */
+  --font-serif: "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC", "STSong", "Iowan Old Style", Georgia, serif;
+  --font-sans: "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei",
+    system-ui, -apple-system, sans-serif;
+}
+
+/* ------------------------------------------------------------------ */
+/* paper (default)                                                     */
+/* ------------------------------------------------------------------ */
+:root,
+:root[data-theme="paper"] {
+  color-scheme: light;
+
+  --bg: #f4ecd8;
+  --surface: #fbf6ea;
+  --surface-2: #efe4c9;
+  --surface-sunken: #e9dcbd;
+  --ink: #2b2117;
+  --ink-muted: #65553f;
+  --ink-faint: #8f7e66;
+  --border: #d6c6a2;
+  --border-strong: #b49f76;
+  --focus: #33407a;
+  --overlay: rgba(43, 33, 23, 0.06);
+
+  /* Map */
+  --land: #ebdfc1;
+  --land-edge: #c9b48a;
+  --water: #cfe1df;
+  --rivers: #9fc2c4;
+
+  /* Blocs (TimeScene) */
+  --accent-axis: #a63d2f;
+  --accent-allied: #33407a;
+  --accent-neutral: #8a7b66;
+
+  /* Generic accents (SpaceScene groups, charts) */
+  --accent-1: #a63d2f;
+  --accent-2: #2f6f8f;
+  --accent-3: #b7832f;
+  --accent-4: #5c7a3a;
+
+  /* UI accent: links, current chapter, selection */
+  --accent: #33407a;
+  --accent-ink: #fbf6ea;
+  --accent-soft: rgba(51, 64, 122, 0.12);
+
+  --success: #3f6b35;
+  --warning: #9a5b12;
+  --warning-soft: rgba(154, 91, 18, 0.12);
+
+  /* Glow: none in paper */
+  --glow: transparent;
+  --glow-blur: 0px;
+  --glow-strength: 0;
+
+  --shadow: 0 1px 0 rgba(43, 33, 23, 0.06), 0 6px 20px -8px rgba(43, 33, 23, 0.22);
+  --stage-bg: var(--water);
+}
+
+/* ------------------------------------------------------------------ */
+/* cinema                                                              */
+/* ------------------------------------------------------------------ */
+:root[data-theme="cinema"] {
+  color-scheme: dark;
+
+  --bg: #0e1116;
+  --surface: #151a21;
+  --surface-2: #1c222b;
+  --surface-sunken: #0a0d11;
+  --ink: #e6e6e6;
+  --ink-muted: #a3abb5;
+  --ink-faint: #7a828d;
+  --border: #2a313b;
+  --border-strong: #3b4450;
+  --focus: #3dc6ff;
+  --overlay: rgba(255, 255, 255, 0.04);
+
+  --land: #2a2f36;
+  --land-edge: #3c434d;
+  --water: #0a111c;
+  --rivers: #1f3346;
+
+  --accent-axis: #ff6a3d;
+  --accent-allied: #3dc6ff;
+  --accent-neutral: #8c9096;
+
+  --accent-1: #ff6a3d;
+  --accent-2: #3dc6ff;
+  --accent-3: #f5c451;
+  --accent-4: #7fd17a;
+
+  --accent: #3dc6ff;
+  --accent-ink: #0e1116;
+  --accent-soft: rgba(61, 198, 255, 0.14);
+
+  --success: #7fd17a;
+  --warning: #f5c451;
+  --warning-soft: rgba(245, 196, 81, 0.14);
+
+  --glow: rgba(255, 150, 90, 0.65);
+  --glow-blur: 8px;
+  --glow-strength: 1;
+
+  --shadow: 0 1px 0 rgba(0, 0, 0, 0.4), 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+  --stage-bg: var(--water);
+}
