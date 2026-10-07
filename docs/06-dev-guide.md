@@ -175,3 +175,151 @@ SceneHost 渲染公共布局：顶栏（返回、标题、全局开关）、左�
 - 客户端不引 zod（构建期解析）；首屏 JS ≤ 300 KB gz（当前主题页约 90 KB gz）
 - 所有文案双语；界面文案进 `ui.*.json`，内容文案用 `{ en, zh }`
 - `pnpm check && pnpm validate && pnpm test && pnpm build` 全绿
+
+## TimeScene（二期 A：GeoStage + Timeline）
+
+代码在 `src/engines/time-scene/`：
+
+```
+index.ts              descriptor（扩展字段 t / highlight，未变）
+schema.ts             zod（构建期），客户端只 import type
+View.tsx              组装：GeoStage + Timeline + 图层/图例 + 事件详情；store ↔ 播放头同步
+stages/geo/GeoStage.tsx    React 壳，懒加载 controller（MapLibre 在这个 chunk 里）
+stages/geo/controller.ts   命令式驱动 MapLibre：图层、标签、箭头、脉冲、镜头、主题
+timeline/Timeline.tsx      章节节点 + 细拖条 + 播放/倍速（渲染进 bottomBar 插槽）
+timeline/usePlayback.ts    播放循环（全程约 60 s @×1，遇章节节点停 1.5 s）
+EventInspector.tsx         点事件 → inspector 插槽（Counter；sensitive 事件的伤亡仅家长模式）
+lib/time.ts  lib/format.ts  lib/geo.ts  lib/model.ts  lib/frame.ts  lib/playhead.ts   纯函数，单测在 tests/time-scene/
+strings.ts  colors.ts  time-scene.css
+```
+
+### 作者怎么写数据
+
+四个文件放 `data/`（schema 见 docs/03 §A 与 `schema.ts`）：
+
+| 文件 | 要点 |
+|---|---|
+| `entities.json` | `id, name, bloc(axis/allied/neutral), joined, left?, color?`。颜色默认取阵营 token，`color: "token:accent-3"` 或 `#hex` 覆盖。`joined` 驱动 participation 图层"点亮"。 |
+| `control.json` | `keyframes[]`，按时间严格升序；每帧一个 FeatureCollection，`properties.holder` = 实体 id。同一实体可有多个面（或 MultiPolygon）。 |
+| `movements.json` | `from/to` 时间区间 + LineString `path`（从起点画到终点）。`strength` 决定线宽（相对全主题最大值）。 |
+| `events.json` | `t`、可选 `until`、`at`、`kind`、`importance`（**3 最重要 = 点最大**，1 最小）、`sides/forces/casualties/result`。`sensitive: true` 的事件伤亡数字只在家长模式显示。 |
+
+章节 `state`：`time`（ISO 三种精度或 `{ ma }`）、`camera`、`layers`、`highlight`（实体/行动/事件 id）、`theme`。章节节点在时间轴上的位置 = 该章累积目标的 `t`。
+
+### 图层（`layers` 里的 id）
+
+| id | 渲染 | 开关 |
+|---|---|---|
+| `base` | 陆地/海洋（`public/geo/land-50m.json`） | 永远开 |
+| `control` | 两个 GeoJSON source（前帧/后帧）交叉淡化：区间最后 30% 内前帧 1→0.4、后帧 0→1；落在关键帧上只显示该帧 | 可关 |
+| `borders` | 今天的国界 + 国名（`countries-50m.json`，第一次打开时才下载） | 默认关 |
+| `movements` | 已走过的路径 + 流动虚线（约 12 fps）+ 头部箭头（HTML marker）；cinema 主题加 glow 底线 | 可关 |
+| `battles` | 已发生的事件点（按 importance 定大小，进行中的更实），进入 `[t, until]` 时脉冲一次（~900 ms）；点击（44 px 命中框）→ 详情 + `highlight` | 可关 |
+| `participation` | 实体在当前关键帧的面：加入后描边，加入那一刻闪亮（时长 = 全程 4%） | 默认关 |
+
+标签都是 HTML marker（无 glyphs），最多 12 个，按 高亮 > 进行中事件 > 实体 > 行动 > 国名 排序并做屏幕避让；`highlight` 的对象标签永远显示。
+
+### 时间
+
+- `toNumber(t)`：ISO → 十进制年（取时段起点：`1942-02` = 1942 年 2 月 1 日）；`{ ma }` → 负的年数（`{ ma: 200 }` = -2e8）。`fromNumber(n, scale)` 反向，日期按日向下取整，地质时间保留 2 位小数 Ma。
+- 时间轴范围 = 关键帧、事件（含 `until`）、行动起止、章节时间的最小/最大值。
+- store 里的 `t` 是日精度 TimePoint（进 URL）；地图按连续的"播放头"渲染。跳章时播放头 1.6 s 缓动到新时间；拖动/播放/Shift+←→ 直接移动播放头并 `patch({ t })`。
+- 读数格式 `formatTime(t, locale)`：`15 Feb 1942` / `1942年2月15日`；`200 Ma` / `2亿年前`、`6600万年前`。跨度 >12 年时读数降到月，>100 年降到年。
+
+### 交互约定
+
+- ← → 换章（核心处理；焦点在拖条上时由 Timeline 自己转发）；Shift+← → 按一步微调时间；焦点在时间轴里时空格 = 播放/暂停；Home/End 到头尾。
+- 地图容器 `data-keys="own"`；点地图不会抢键盘焦点（canvas 被点击聚焦后立即 blur），Tab 进入地图仍可用方向键平移。
+- 用户平移/缩放 `moveend` 后 250 ms 防抖 `setCamera()`；章节切换 `flyTo`（2.2 s），首次加载/深链接 `jumpTo`；`prefers-reduced-motion` 时不飞、不脉冲、虚线不流动。
+- 主题切换：观察 `<html data-theme>`，重读 token、`setPaintProperty`，不重建地图。
+
+### 底图数据
+
+```bash
+pnpm tsx scripts/build-geo.ts   # world-atlas(Natural Earth 1:50m) → public/geo/*.json，产物入库
+```
+
+陆地 3 位小数（~110 m），国界简化到 ~2 km，合计约 1.75 MB（预算 2 MB）。来源与许可见 `public/geo/README.md`（Natural Earth，公有领域）。
+
+### 包体
+
+MapLibre 只在 `controller` chunk 里，View 挂载后才加载（时间轴先出来）。实测 sample-time 页全部 JS：约 374 KB gz / 312 KB br，其中 MapLibre 5.24 自身约 275 KB gz（含内联 worker），本引擎自有代码约 13 KB gz（View 8 KB + controller 约 5 KB）。**超出 docs/02 的 300 KB gz 预算**，需要产品层决定：按 brotli 计、对 geo 主题放宽到 ~400 KB gz，或换更小的地图库版本。
+
+## SpaceScene（空间拆解引擎，Phase 2B）
+
+`engine: space-scene`、`stage: model3d`。代码在 `src/engines/space-scene/`：
+
+```
+index.ts                 descriptor（part/view/explode/run/cutaway）
+schema.ts                parts.json 的 zod（构建期）
+View.tsx                 挂 Model3DStage（再懒加载一层）+ Explorer 控件
+lib/                     纯函数，有单测：explode / visibility / flow-curve / color / animation / camera / math
+stages/model3d/          R3F 舞台：Model3DStage（createRoot 宿主）、SceneRoot、PartNode、Flows + flowMaterial（自写 shader）、
+                         CameraRig（OrbitControls + 章节运镜）、Lighting（主题灯光 + RoomEnvironment）、GroundShadow、GltfSource（懒加载）
+explorer/                ExplorerBar（bottomBar）、ExplorerOverlay（stageOverlay）、Inspector（inspector）
+space-scene.css          舞台、标签、控件样式（只用 token）
+```
+
+### 作者怎么写数据（`data/parts.json`）
+
+```jsonc
+{
+  "model": "/models/aircon.glb",          // 可选；有 mesh 零件时必填，放 public/models/，引擎自动加 base
+  "parts": [{
+    "id": "compressor", "name": {en, zh}, "group": "refrigerant",
+    "summary": {en, zh}, "detail": {en, zh},   // detail 在详情卡里折叠在「了解更多」后面
+    "primitive": { "kind": "cylinder", "size": [0.3, 0.3, 0.5], "at": [1, 0, 0], "rotation": [0, 0, 90], "color": "metal" },
+    "mesh": "Compressor",                  // 或者：glb 里的节点名（Blender 物体名）；两者都写时 glb 加载后替换积木
+    "explode": { "dir": [1, 0, 0.3], "dist": 1.2 },   // dir 会归一化；位移 = dir × dist × explode
+    "connects": ["condenser"],             // 详情卡里变成可点的芯片
+    "level": "P5"
+  }],
+  "groups": [{ "id": "refrigerant", "name": {en, zh}, "color": "token:accent-1" }],
+  "flows": [{ "id": "loop", "group": "refrigerant", "path": [[x,y,z], ...], "speed": 1, "color": "token:accent-1", "whenRun": true }],
+  "animations": [
+    { "id": "fan-spin", "target": "fan", "kind": "rotate", "axis": [0,0,1], "rpm": 120 },
+    { "id": "flap", "target": "louver", "kind": "oscillate", "axis": [1,0,0], "amplitude": 20, "hz": 0.5 },   // amplitude 单位：度
+    { "id": "beat", "target": "pump", "kind": "pulse", "scale": 1.15, "hz": 1 }                                // scale 是峰值缩放
+  ],
+  "views": {
+    "assembled": { "camera": { "position": [3,2,4], "target": [0,0,0], "fov": 40 } },
+    "exploded":  { "camera": { ... } },     // 每个视图可选一个预设镜头
+    "cutaway":   { "normal": [-1,0,0], "offset": 0 }   // 可选剖切面；默认切掉 x>0 一半
+  }
+}
+```
+
+- **积木尺寸**（`size`）：box `[宽,高,深]`、cylinder `[上半径,下半径,高]`、cone `[半径,高]`、sphere `[半径]`、torus `[半径,管粗]`、capsule `[半径,长度]`、plane `[宽,高]`（双面）。`rotation` 是 XYZ 欧拉角（度）。
+- **颜色**：材质预设 `metal | plastic | copper | glass | rubber | matte`（每个主题一套色板，`lib/color.ts`），或 `token:<name>`、`#hex`。glb 零件用所在组的颜色。主题决定质感：paper 哑光（roughness 0.85 / metalness 0.05）、暖光、米色背景；cinema 金属（0.6 / 0.35）、冷光 + 轮廓光、近黑背景，选中零件发 `--glow` 色的脉动光。
+- **流场**：`path` 首尾点相同 = 闭环。路径做成 centripetal Catmull-Rom，按弧长烘焙 64 个点进 shader，每条 200 粒子，`speed` 是场景单位/秒。`whenRun: false` 的流/动画一直播放（只受图层开关）。
+- **glb**：不要用 Draco/meshopt 压缩（drei 默认去 CDN 拉 Draco 解码器，Atlas 不允许运行时外部请求，所以我们关掉了）。mesh 名找不到会 console.warn，该零件不显示；glb 整体加载失败时积木零件照常显示。
+
+### 章节怎么写（`state`）
+
+```yaml
+state:
+  view: exploded        # assembled | xray | exploded | isolate
+  explode: 0.8          # 0..1，只在 exploded 视图生效
+  part: compressor      # 选中零件；null 取消
+  run: true             # 通电：播放 animations + flows（渐入渐出）
+  cutaway: half         # none | half
+  layers: [refrigerant, air]   # 可见的组
+  camera: { position: [4, 3, 5], target: [0, 0.3, 0] }
+```
+
+章节目标照常累积。**镜头规则**：本章自己写了 `camera`（或 URL 有 `cam=`）就用它；否则用 `views[当前 view].camera`；都没有就沿用上一章。用户在底栏切视图时，如果该视图有预设镜头，也会飞过去。切章 ~800 ms 缓动，首次加载/深链接/`prefers-reduced-motion` 直接跳。窄屏（竖屏手机）自动把镜头往后拉，回写 URL 时再换算回来，链接与设备无关。
+
+### 交互（Explorer）
+
+- 点零件选中（高亮 + 描边，InfoPanel 出详情）；点空白处取消；拖动（OrbitControls，带阻尼）旋转，停手 400 ms 后 `setCamera()` 回写 URL。
+- 鼠标悬停显示零件名标签；触摸设备没有悬停，长按 ≥ 400 ms 选中并显示标签。有选中零件时只显示它的标签。
+- 视图：`xray` 未选中零件透明 0.15；`isolate` 只显示选中零件和同组零件；图层开关对所有视图生效（包括选中的零件）。可见性规则在 `lib/visibility.ts`，有单测。
+- 底栏：视图分段按钮（←→ 在组内切换）、拆开程度滑块（仅 exploded，44 px 拇指）、通电开关、剖开开关。舞台浮层：图层开关 + 图例（窄屏只留图层开关）。
+
+### 实现约定
+
+- R3F 用 `createRoot` 驱动，不用 `<Canvas>`：`<Canvas>` 会 `extend(THREE)` 整个命名空间，tree-shaking 失效（多 ~50 KB gz）。新用到的 three 类要在 `stages/model3d/extend.ts` 里登记，否则 JSX `<xxx>` 会报 "not part of the THREE namespace"。
+- 舞台是独立 reconciler，React context 不穿透：store、data、主题 look 都以 props 传入 `SceneRoot`，组件里用 `zustand` 的 `useStore(store, …)`。
+- `frameloop: 'demand'`：只有在缓动（拆开、淡入淡出、运镜）、运转、cinema 选中发光时才请求下一帧；标签页隐藏时不请求，回到前台再 invalidate。几何体/材质都由我们自己创建和 dispose（`dispose={null}` 交给组件卸载时清理）。
+- 包体：sample-space 页实测加载 JS 共 287 KB gz（站点公共 ~83 KB + 舞台 chunk 202 KB，其中 three + R3F 占绝大部分）。GLTF 加载器单独成 chunk（21 KB gz），只有写了 `mesh` 的主题才加载。
+- `extend.ts` 里的 `r3f()` 是类型桥：当前 node_modules 里 `@react-three/fiber` 解析到一份残留的 `@types/three@0.186`（锁文件里只有 0.180）。干净地 `pnpm install` 后可以删掉。

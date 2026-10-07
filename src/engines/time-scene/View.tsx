@@ -1,206 +1,255 @@
 /**
- * Phase 1 TimeScene stub. Shows the contract in use:
- *  - reads scene state with useScene / writes with the store actions
- *  - renders layer toggles + legend into `stageOverlay`
- *  - renders time controls into `bottomBar`
- *  - renders selected-event details (with a Counter) into `inspector`
- * The SVG sketch is equirectangular and deliberately crude. Phase 2 replaces
- * this file with GeoStage (MapLibre) + Timeline.
+ * TimeScene view: GeoStage (MapLibre) + Timeline + legend / layer toggles +
+ * event inspector. See docs/06 "TimeScene".
+ *
+ * Time flows through two layers:
+ *  - the store's `t` (TimePoint, in the URL, set by chapters and deep links)
+ *  - the playhead (continuous number the map renders at; lib/playhead.ts)
+ * Chapter changes tween the playhead to the chapter's time; scrubbing and
+ * playback move the playhead and write a rounded `t` back with `patch()`.
  */
-import { useMemo, useState } from 'react';
-import type { EngineViewProps } from '../core/types';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import type { Chapter, EngineViewProps } from '../core/types';
 import { SceneSlot, useScene, useSceneStore } from '../core/context';
-import { StubStage } from '../core/StubStage';
 import { SceneLayerToggles, type LayerItem } from '../widgets/LayerToggles';
 import { Legend, type LegendItem } from '../widgets/Legend';
-import { Counter } from '../widgets/Counter';
-import { tx, type BilingualText } from '../../i18n';
-import { compareTime, formatTimeParam } from '../../lib/time';
+import { isChapterCollapsed } from '../widgets/ChapterRail';
+import { Icon } from '../widgets/icons';
+import { tx } from '../../i18n';
+import { formatTimeParam } from '../../lib/time';
+import { useLevel, useParentMode } from '../../lib/prefs';
 import type { TimeSceneExt } from './index';
-import type { Bloc, TimeSceneGeoData } from './schema';
+import type { TimeSceneGeoData } from './schema';
+import { buildTimeModel, type ChapterNode } from './lib/model';
+import { createPlayhead } from './lib/playhead';
+import { clamp, fromNumber, stepFor, toNumber } from './lib/time';
+import { GeoStage } from './stages/geo/GeoStage';
+import { Timeline, formatNumber } from './timeline/Timeline';
+import { usePlayback } from './timeline/usePlayback';
+import { EventInspector } from './EventInspector';
+import { BLOC_CSS, entityCssColor } from './colors';
+import { BLOC_LABELS, LAYER_LABELS, S, fill } from './strings';
+import './time-scene.css';
 
-const BLOC_COLOR: Record<Bloc, string> = {
-  axis: 'var(--accent-axis)',
-  allied: 'var(--accent-allied)',
-  neutral: 'var(--accent-neutral)',
-};
+const CHAPTER_TWEEN_MS = 1600;
+const TOGGLE_LAYERS = ['control', 'borders', 'movements', 'battles', 'participation'] as const;
+/** Up to this many entities, the legend names each one; above, it groups by bloc. */
+const LEGEND_ENTITY_LIMIT = 6;
+const OVERLAY_OPEN_MIN_WIDTH = 720;
+const TEXT_INPUTS = 'input, select, textarea, [contenteditable="true"], [data-keys="own"], [role="slider"]';
 
-const BLOC_LABEL: Record<Bloc, BilingualText> = {
-  axis: { en: 'Axis', zh: '轴心国' },
-  allied: { en: 'Allies', zh: '同盟国' },
-  neutral: { en: 'Neutral', zh: '中立' },
-};
-
-const LAYER_ITEMS: LayerItem[] = [
-  { id: 'control', label: { en: 'Who controls where', zh: '控制区' } },
-  { id: 'movements', label: { en: 'Movements', zh: '行军路线' } },
-  { id: 'battles', label: { en: 'Events', zh: '事件' } },
-];
-
-type Ring = number[][];
-
-export default function TimeSceneView({ data, locale }: EngineViewProps) {
+export default function TimeSceneView({ data, chapters, locale }: EngineViewProps) {
   const geo = data as TimeSceneGeoData;
   const store = useSceneStore<TimeSceneExt>();
-  const { t, layers, highlight } = useScene<TimeSceneExt, Pick<TimeSceneExt, 't' | 'highlight'> & { layers: string[] }>(
-    (s) => ({ t: s.t, layers: s.layers, highlight: s.highlight }),
+  const currentChapter = useScene<TimeSceneExt, string | null>((s) => s.chapter);
+  const layers = useScene<TimeSceneExt, string[]>((s) => s.layers);
+  const [readerLevel] = useLevel();
+  const [parentMode] = useParentMode();
+
+  /* ---------- model + playhead ---------- */
+  const model = useMemo(
+    () =>
+      buildTimeModel(
+        geo,
+        chapters.map((c) => ({ id: c.id, t: store.getState().chapterTarget(c.id).t })),
+      ),
+    [geo, chapters, store],
   );
-  const [selected, setSelected] = useState<string | null>(null);
+  const [playhead] = useState(() => {
+    const t0 = store.getState().t;
+    const n = t0 !== null ? toNumber(t0) : Number.NaN;
+    return createPlayhead(Number.isFinite(n) ? n : model.min);
+  });
+  useEffect(() => () => playhead.destroy(), [playhead]);
 
-  const entityById = useMemo(() => new Map(geo.entities.map((e) => [e.id, e])), [geo.entities]);
+  /** Last `t` this view wrote, so the store echo is not treated as a jump. */
+  const lastWritten = useRef<string | null>(null);
 
-  // Latest keyframe at or before t (first one if t is earlier / unset).
-  const keyframe = useMemo(() => {
-    const frames = geo.control.keyframes;
-    if (!t) return frames[0];
-    let current = frames[0];
-    for (const kf of frames) if ((compareTime(kf.t, t) ?? 1) <= 0) current = kf;
-    return current;
-  }, [geo.control.keyframes, t]);
-
-  // Fit all geometry into the sketch.
-  const view = useMemo(() => {
-    const pts: number[][] = [];
-    for (const kf of geo.control.keyframes)
-      for (const f of kf.features.features) {
-        const polys = f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.coordinates;
-        for (const poly of polys) for (const ring of poly) pts.push(...ring);
+  const commit = useCallback(
+    (n: number) => {
+      const v = clamp(n, model.min, model.max);
+      playhead.set(v);
+      const tp = fromNumber(v, model.scale);
+      const key = formatTimeParam(tp);
+      if (key !== lastWritten.current) {
+        lastWritten.current = key;
+        store.getState().patch({ t: tp });
       }
-    for (const m of geo.movements) pts.push(...m.path.coordinates);
-    for (const e of geo.events) pts.push(e.at);
-    const xs = pts.map((p) => p[0] ?? 0);
-    const ys = pts.map((p) => p[1] ?? 0);
-    const pad = 1;
-    const minX = Math.min(...xs) - pad;
-    const maxX = Math.max(...xs) + pad;
-    const minY = Math.min(...ys) - pad;
-    const maxY = Math.max(...ys) + pad;
-    return { minX, minY, w: maxX - minX, h: maxY - minY, maxY };
-  }, [geo]);
+    },
+    [playhead, model, store],
+  );
 
-  const toPath = (ring: Ring) =>
-    ring.map((p, i) => `${i ? 'L' : 'M'}${(p[0] ?? 0) - view.minX},${view.maxY - (p[1] ?? 0)}`).join('') + 'Z';
-  const toLine = (coords: number[][]) =>
-    coords.map((p, i) => `${i ? 'L' : 'M'}${(p[0] ?? 0) - view.minX},${view.maxY - (p[1] ?? 0)}`).join('');
+  const isLocked = useCallback(
+    (c: Chapter) => isChapterCollapsed(c, readerLevel, parentMode),
+    [readerLevel, parentMode],
+  );
+  const canStopAt = useCallback(
+    (node: ChapterNode) => {
+      const c = chapters.find((x) => x.id === node.id);
+      return !!c && !isLocked(c);
+    },
+    [chapters, isLocked],
+  );
+  const playback = usePlayback(playhead, model, commit, canStopAt);
+  const { setPlaying } = playback;
 
-  const blocOf = (id: string): Bloc => entityById.get(id)?.bloc ?? 'neutral';
-  const legend: LegendItem[] = (['axis', 'allied', 'neutral'] as const)
-    .filter((b) => geo.entities.some((e) => e.bloc === b))
-    .map((b) => ({ id: b, label: BLOC_LABEL[b], color: BLOC_COLOR[b] }));
+  /* ---------- selected event (inspector) ---------- */
+  const [selected, setSelected] = useState<string | null>(null);
+  const selectEvent = useCallback(
+    (id: string) => {
+      setSelected(id);
+      store.getState().patch({ highlight: [id] });
+    },
+    [store],
+  );
+  const closeEvent = useCallback(() => {
+    setSelected(null);
+    const s = store.getState();
+    s.patch({ highlight: s.chapterTarget(s.chapter).highlight });
+  }, [store]);
 
-  const event = geo.events.find((e) => e.id === selected) ?? null;
-  const stroke = Math.max(view.w, view.h) / 200;
+  /* ---------- store -> playhead ---------- */
+  useEffect(
+    () =>
+      store.subscribe((s, prev) => {
+        const transitioned = s.transition.id !== prev.transition.id;
+        if (transitioned) {
+          setPlaying(false);
+          setSelected(null);
+        }
+        if (!transitioned && s.t === prev.t) return;
+        if (s.t === null) return;
+        const key = formatTimeParam(s.t);
+        if (!transitioned && key === lastWritten.current) return;
+        lastWritten.current = key;
+        const target = clamp(toNumber(s.t), model.min, model.max);
+        if (!Number.isFinite(target)) return;
+        if (transitioned && !s.transition.instant) playhead.tweenTo(target, CHAPTER_TWEEN_MS);
+        else playhead.set(target);
+      }),
+    [store, playhead, model, setPlaying],
+  );
+
+  /* ---------- user time controls ---------- */
+  const step = stepFor(model.span, model.scale);
+  const nudge = useCallback(
+    (dir: 1 | -1, big = false) => {
+      setPlaying(false);
+      commit(playhead.get() + dir * step * (big ? 10 : 1));
+    },
+    [commit, playhead, step, setPlaying],
+  );
+  const scrubStart = useCallback(() => {
+    setPlaying(false);
+    playhead.cancelTween();
+  }, [playhead, setPlaying]);
+  const stepChapter = useCallback(
+    (dir: 1 | -1) => store.getState().stepChapter(dir, (c) => !isLocked(c)),
+    [store, isLocked],
+  );
+
+  // Shift+←/→ anywhere (outside text fields, the map and the timeline itself) nudges time.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (!e.shiftKey || e.altKey || e.ctrlKey || e.metaKey || e.defaultPrevented) return;
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      const target = e.target instanceof Element ? e.target : null;
+      if (target?.closest(TEXT_INPUTS)) return;
+      e.preventDefault();
+      nudge(e.key === 'ArrowRight' ? 1 : -1);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [nudge]);
+
+  /* ---------- legend ---------- */
+  const legend = useMemo<LegendItem[]>(() => {
+    const items: LegendItem[] = [];
+    if (layers.includes('control') || layers.includes('participation')) {
+      if (geo.entities.length <= LEGEND_ENTITY_LIMIT) {
+        for (const e of geo.entities) items.push({ id: `entity-${e.id}`, label: e.name, color: entityCssColor(e) });
+      } else {
+        for (const b of ['axis', 'allied', 'neutral'] as const)
+          if (geo.entities.some((e) => e.bloc === b)) items.push({ id: `bloc-${b}`, label: BLOC_LABELS[b], color: BLOC_CSS[b] });
+      }
+    }
+    if (layers.includes('movements') && geo.movements.length)
+      items.push({ id: 'movement', label: S.movement, color: 'var(--ink-muted)', kind: 'arrow' });
+    if (layers.includes('battles') && geo.events.length)
+      items.push({ id: 'event', label: S.event, color: 'var(--ink-muted)', kind: 'point' });
+    return items;
+  }, [geo, layers]);
+
+  const layerItems = useMemo<LayerItem[]>(
+    () => TOGGLE_LAYERS.map((id) => ({ id, label: LAYER_LABELS[id] })),
+    [],
+  );
+
+  /* ---------- overlay: open by default only when the stage is roomy ---------- */
+  const stageRef = useRef<HTMLDivElement>(null);
+  const [overlayOpen, setOverlayOpen] = useState(false);
+  useEffect(() => {
+    setOverlayOpen((stageRef.current?.clientWidth ?? 0) >= OVERLAY_OPEN_MIN_WIDTH);
+  }, []);
+
+  const selectedEvent = selected ? geo.events.find((e) => e.id === selected) ?? null : null;
+  const stopChapter = playback.stop ? chapters.find((c) => c.id === playback.stop?.id) : undefined;
 
   return (
-    <>
-      <StubStage engineLabel="TimeScene · GeoStage">
-        <svg
-          viewBox={`0 0 ${view.w} ${view.h}`}
-          className="atlas-stub__svg"
-          role="img"
-          aria-label={keyframe ? `${formatTimeParam(keyframe.t)}` : undefined}
-        >
-          <rect width={view.w} height={view.h} fill="var(--water)" />
-          {layers.includes('control') &&
-            keyframe?.features.features.map((f, i) => {
-              const polys = f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.coordinates;
-              return polys.map((poly, j) => (
-                <path
-                  key={`${i}-${j}`}
-                  d={poly.map(toPath).join('')}
-                  fill={BLOC_COLOR[blocOf(f.properties.holder)]}
-                  fillOpacity={0.45}
-                  stroke="var(--land-edge)"
-                  strokeWidth={stroke}
-                />
-              ));
-            })}
-          {layers.includes('movements') &&
-            geo.movements.map((m) => (
-              <path
-                key={m.id}
-                d={toLine(m.path.coordinates)}
-                fill="none"
-                stroke={BLOC_COLOR[blocOf(m.holder)]}
-                strokeWidth={stroke * (highlight.includes(m.id) ? 4 : 2)}
-                strokeDasharray={`${stroke * 6} ${stroke * 3}`}
-                strokeLinecap="round"
-              />
-            ))}
-          {layers.includes('battles') &&
-            geo.events.map((e) => (
-              <circle
-                key={e.id}
-                cx={e.at[0] - view.minX}
-                cy={view.maxY - e.at[1]}
-                r={stroke * (highlight.includes(e.id) || selected === e.id ? 6 : 4)}
-                fill="var(--ink)"
-                stroke="var(--bg)"
-                strokeWidth={stroke}
-              />
-            ))}
-        </svg>
-      </StubStage>
+    <div className="ts-stage" ref={stageRef}>
+      <GeoStage store={store} playhead={playhead} model={model} locale={locale} onSelectEvent={selectEvent} />
+
+      <div className="ts-stop" role="status" aria-live="polite">
+        {stopChapter && playback.stop && (
+          <div className="ts-stop__card">
+            <span className="ts-stop__eyebrow">
+              {fill(tx(S.chapterShort, locale), { n: chapters.indexOf(stopChapter) + 1 })} ·{' '}
+              {formatNumber(playback.stop.t, model, locale)}
+            </span>
+            <span className="ts-stop__title">{tx(stopChapter.title, locale)}</span>
+          </div>
+        )}
+      </div>
 
       <SceneSlot name="stageOverlay">
-        <div className="atlas-overlay-card">
-          <SceneLayerToggles items={LAYER_ITEMS} />
+        <details className="atlas-overlay-card ts-overlay" open={overlayOpen} onToggle={(e) => setOverlayOpen(e.currentTarget.open)}>
+          <summary className="ts-overlay__summary" aria-label={tx(S.layersAndKey, locale)}>
+            <span className="ts-overlay__closed">
+              <Icon name="layers" size={18} />
+              <span>{tx(S.layersAndKey, locale)}</span>
+            </span>
+            <Icon name="close" size={18} className="ts-overlay__open" />
+          </summary>
+          <SceneLayerToggles items={layerItems} />
           <Legend items={legend} locale={locale} />
-        </div>
+        </details>
       </SceneSlot>
 
       <SceneSlot name="bottomBar">
-        <span className="atlas-bottombar__readout">{t ? formatTimeParam(t) : '—'}</span>
-        <div className="atlas-segmented" role="radiogroup" aria-label={tx({ en: "Keyframes", zh: "关键帧" }, locale)}>
-          {geo.control.keyframes.map((kf) => {
-            const value = formatTimeParam(kf.t);
-            return (
-              <button
-                key={value}
-                type="button"
-                role="radio"
-                aria-checked={t !== null && formatTimeParam(t) === value}
-                className="atlas-control"
-                onClick={() => store.getState().patch({ t: kf.t })}
-              >
-                {value}
-              </button>
-            );
-          })}
-        </div>
+        <Timeline
+          model={model}
+          playhead={playhead}
+          locale={locale}
+          chapters={chapters}
+          currentChapter={currentChapter}
+          isLocked={isLocked}
+          playing={playback.playing}
+          speed={playback.speed}
+          onTogglePlay={() => setPlaying(!playback.playing)}
+          onSpeed={playback.setSpeed}
+          onScrub={commit}
+          onScrubStart={scrubStart}
+          onNudge={nudge}
+          onChapter={(id) => store.getState().goToChapter(id)}
+          onStepChapter={stepChapter}
+        />
       </SceneSlot>
 
-      <SceneSlot name="inspector">
-        <ul className="atlas-stub__list">
-          {geo.events.map((e) => (
-            <li key={e.id}>
-              <button
-                type="button"
-                className="atlas-control atlas-control--ghost"
-                aria-pressed={selected === e.id}
-                onClick={() => setSelected(selected === e.id ? null : e.id)}
-              >
-                {formatTimeParam(e.t)} · {tx(e.title, locale)}
-              </button>
-            </li>
-          ))}
-        </ul>
-        {event && (
-          <div className="atlas-stub__detail">
-            <p>{tx(event.summary, locale)}</p>
-            {Object.entries(event.forces ?? {}).map(([id, n]) => (
-              <Counter
-                key={id}
-                value={n}
-                per={1000}
-                locale={locale}
-                label={entityById.get(id)?.name ?? id}
-                color={BLOC_COLOR[blocOf(id)]}
-              />
-            ))}
-          </div>
-        )}
-      </SceneSlot>
-    </>
+      {selectedEvent && (
+        <SceneSlot name="inspector">
+          <EventInspector event={selectedEvent} model={model} locale={locale} onClose={closeEvent} />
+        </SceneSlot>
+      )}
+    </div>
   );
 }

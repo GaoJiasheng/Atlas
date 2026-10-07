@@ -126,11 +126,14 @@ export const animationSchema = z.discriminatedUnion('kind', [
       ...animationBase,
       kind: z.literal('oscillate'),
       axis: vec3,
+      /** Peak swing in degrees. */
       amplitude: z.number().nonnegative(),
+      /** Swings per second. */
       hz: z.number().positive(),
     })
     .strict(),
   z
+    /** `scale` is the peak scale factor (e.g. 1.15), `hz` breaths per second. */
     .object({ ...animationBase, kind: z.literal('pulse'), scale: z.number().positive(), hz: z.number().positive() })
     .strict(),
 ]);
@@ -141,12 +144,28 @@ export type SpaceView = (typeof SPACE_VIEWS)[number];
 
 const viewPreset = z.object({ camera: orbitCamera }).strict();
 
+/**
+ * Cutaway plane used when `cutaway: half`. Everything on the side the
+ * `normal` points away from is cut off: points p with dot(normal, p) + offset < 0
+ * are clipped (three.js Plane semantics). Default: normal [-1, 0, 0], offset 0
+ * (keeps x <= 0, i.e. removes the right half).
+ */
+export const cutawayPlaneSchema = z
+  .object({
+    normal: vec3,
+    offset: z.number().default(0),
+  })
+  .strict();
+export type CutawayPlane = z.output<typeof cutawayPlaneSchema>;
+
 export const viewsSchema = z
   .object({
     assembled: viewPreset.optional(),
     xray: viewPreset.optional(),
     exploded: viewPreset.optional(),
     isolate: viewPreset.optional(),
+    /** Optional cutaway plane (see cutawayPlaneSchema). */
+    cutaway: cutawayPlaneSchema.optional(),
   })
   .strict();
 export type ViewPresets = z.output<typeof viewsSchema>;
@@ -157,6 +176,15 @@ export type ViewPresets = z.output<typeof viewsSchema>;
 
 export const partsFile = z
   .object({
+    /**
+     * glb model for parts that use `mesh`, as a site path under `public/`
+     * (e.g. `/models/aircon.glb`; the engine prefixes the base). Required when
+     * any part has `mesh`.
+     */
+    model: z
+      .string()
+      .regex(/^\/models\/[a-z0-9][a-z0-9._-]*\.glb$/, 'must be /models/<name>.glb')
+      .optional(),
     parts: z.array(partSchema).min(1),
     groups: z.array(groupSchema).default([]),
     flows: z.array(flowSchema).default([]),
@@ -182,6 +210,17 @@ export const partsFile = z
         ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['flows', i, 'group'], message: `unknown group "${f.group}"` });
       }
     });
+    if (file.model === undefined) {
+      file.parts.forEach((p, i) => {
+        if (p.mesh !== undefined && p.primitive === undefined) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            path: ['parts', i, 'mesh'],
+            message: 'a part with `mesh` needs a top-level `model` (glb path)',
+          });
+        }
+      });
+    }
     file.animations.forEach((a, i) => {
       if (!parts.has(a.target)) {
         ctx.addIssue({

@@ -7,42 +7,341 @@
         "features": [
           {
             "type": "Feature",
-            "properties": { "holder": "north-sample" },
+            "properties": {
+              "holder": "north-sample"
+            },
             "geometry": {
               "type": "Polygon",
-              "coordinates": [[[-153, 11], [-147, 11], [-147, 14], [-153, 14], [-153, 11]]]
+              "coordinates": [
+                [
+                  [
+                    -153,
+                    11
+                  ],
+                  [
+                    -147,
+                    11
+                  ],
+                  [
+                    -147,
+                    14
+                  ],
+                  [
+                    -153,
+                    14
+                  ],
+                  [
+                    -153,
+                    11
+                  ]
+                ]
+              ]
             }
           },
           {
             "type": "Feature",
-            "properties": { "holder": "south-sample" },
+            "properties": {
+              "holder": "south-sample"
+            },
             "geometry": {
               "type": "Polygon",
-              "coordinates": [[[-153, 6], [-147, 6], [-147, 11], [-153, 11], [-153, 6]]]
+              "coordinates": [
+                [
+                  [
+                    -153,
+                    6
+                  ],
+                  [
+                    -147,
+                    6
+                  ],
+                  [
+                    -147,
+                    11
+                  ],
+                  [
+                    -153,
+                    11
+                  ],
+                  [
+                    -153,
+                    6
+                  ]
+                ]
+              ]
             }
           }
         ]
       }
     },
     {
-      "t": "2000-06-15",
+      "t": "2000-04-01",
       "features": {
         "type": "FeatureCollection",
         "features": [
           {
             "type": "Feature",
-            "properties": { "holder": "north-sample" },
+            "properties": {
+              "holder": "north-sample"
+            },
             "geometry": {
               "type": "Polygon",
-              "coordinates": [[[-153, 9], [-147, 9], [-147, 14], [-153, 14], [-153, 9]]]
+              "coordinates": [
+                [
+                  [
+                    -153,
+                    9.5
+                  ],
+                  [
+                    -147,
+                    9.5
+                  ],
+                  [
+                    -147,
+                    14
+                  ],
+                  [
+                    -153,
+                    14
+                  ],
+                  [
+                    -153,
+                    9.5
+                  ]
+                ]
+              ]
             }
           },
           {
             "type": "Feature",
-            "properties": { "holder": "south-sample" },
+            "properties": {
+              "holder": "south-sample"
+            },
             "geometry": {
               "type": "Polygon",
-              "coordinates": [[[-153, 6], [-147, 6], [-147, 9], [-153, 9], [-153, 6]]]
+              "coordinates": [
+                [
+                  [
+                    -153,
+                    6
+                  ],
+                  [
+                    -147,
+                    6
+                  ],
+                  [
+                    -147,
+                    9.5
+                  ],
+                  [
+                    -153,
+                    9.5
+                  ],
+                  [
+                    -153,
+                    6
+                  ]
+                ]
+              ]
+            }
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "holder": "east-sample"
+            },
+            "geometry": {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [
+                    -147,
+                    6
+                  ],
+                  [
+                    -143,
+                    6
+                  ],
+                  [
+                    -143,
+                    12
+                  ],
+                  [
+                    -147,
+                    12
+                  ],
+                  [
+                    -147,
+                    6
+                  ]
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "t": "2000-08-01",
+      "features": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "properties": {
+              "holder": "north-sample"
+            },
+            "geometry": {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [
+                    -153,
+                    9
+                  ],
+                  [
+                    -147,
+                    9
+                  ],
+                  [
+                    -147,
+                    14
+                  ],
+                  [
+                    -153,
+                    14
+                  ],
+                  [
+                    -153,
+                    9
+                  ]
+                ]
+              ]
+            }
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "holder": "south-sample"
+            },
+            "geometry": {
+              "type": "MultiPolygon",
+              "coordinates": [
+                [
+                  [
+                    [
+                      -153,
+                      6
+                    ],
+                    [
+                      -149,
+                      6
+                    ],
+                    [
+                      -149,
+                      9
+                    ],
+                    [
+                      -153,
+                      9
+                    ],
+                    [
+                      -153,
+                      6
+                    ]
+                  ]
+                ],
+                [
+                  [
+                    [
+                      -152.5,
+                      4
+                    ],
+                    [
+                      -151,
+                      4
+                    ],
+                    [
+                      -151,
+                      5.2
+                    ],
+                    [
+                      -152.5,
+                      5.2
+                    ],
+                    [
+                      -152.5,
+                      4
+                    ]
+                  ]
+                ]
+              ]
+            }
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "holder": "east-sample"
+            },
+            "geometry": {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [
+                    -149,
+                    6
+                  ],
+                  [
+                    -143,
+                    6
+                  ],
+                  [
+                    -143,
+                    9
+                  ],
+                  [
+                    -149,
+                    9
+                  ],
+                  [
+                    -149,
+                    6
+                  ]
+                ]
+              ]
+            }
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "holder": "east-sample"
+            },
+            "geometry": {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [
+                    -147,
+                    9
+                  ],
+                  [
+                    -143,
+                    9
+                  ],
+                  [
+                    -143,
+                    12
+                  ],
+                  [
+                    -147,
+                    12
+                  ],
+                  [
+                    -147,
+                    9
+                  ]
+                ]
+              ]
             }
           }
         ]

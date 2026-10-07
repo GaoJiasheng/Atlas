@@ -179,7 +179,7 @@ Scene store 的可序列化部分双向绑定到 query string，用 `history.rep
 3. 所有交互用 Pointer Events，可点目标 ≥ 44px，关键操作不依赖 hover
 4. 底图、模型、字体全部本地资源，无运行时外部请求（Wikipedia 图片等外链一期不接）
 5. PWA：manifest + service worker 预缓存，离线能打开已访问主题
-6. 性能预算：单主题首屏 JS ≤ 300 KB gz，GeoJSON ≤ 2 MB，glb ≤ 10 MB
+6. 性能预算：单主题首屏 JS ≤ 300 KB gz；地图类主题（MapLibre 本身约 275 KB gz）放宽到 ≤ 400 KB gz；GeoJSON ≤ 2 MB，glb ≤ 10 MB
 7. 不用 `localStorage` 存关键状态（家长模式、语言偏好可以）
 
 ## 质量门槛

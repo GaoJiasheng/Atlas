@@ -3,22 +3,82 @@
     "id": "sample-meeting",
     "t": "2000-03-10",
     "until": "2000-03-12",
-    "at": [-150.3, 10.8],
+    "at": [
+      -150.3,
+      10.8
+    ],
     "kind": "battle",
-    "sides": { "attacker": "north-sample", "defender": "south-sample" },
-    "forces": { "north-sample": 12000, "south-sample": 7500 },
+    "sides": {
+      "attacker": "north-sample",
+      "defender": "south-sample"
+    },
+    "forces": {
+      "north-sample": 12000,
+      "south-sample": 7500
+    },
+    "casualties": {
+      "north-sample": 900,
+      "south-sample": 1400
+    },
     "result": "attacker",
     "importance": 2,
-    "title": { "en": "Sample event one", "zh": "示例事件一" },
-    "summary": { "en": "A placeholder battle used to test event rendering.", "zh": "用于测试事件显示的占位战斗。" }
+    "sensitive": true,
+    "title": {
+      "en": "Sample event one",
+      "zh": "示例事件一"
+    },
+    "summary": {
+      "en": "A placeholder battle used to test event rendering. Its casualty numbers are marked sensitive.",
+      "zh": "用于测试事件显示的占位战斗。它的伤亡数字标记为敏感内容。"
+    }
+  },
+  {
+    "id": "sample-landing",
+    "t": "2000-06-20",
+    "at": [
+      -148.2,
+      6.3
+    ],
+    "kind": "landing",
+    "sides": {
+      "attacker": "south-sample",
+      "defender": "east-sample"
+    },
+    "forces": {
+      "south-sample": 4000,
+      "east-sample": 2500
+    },
+    "casualties": {
+      "south-sample": 120,
+      "east-sample": 80
+    },
+    "result": "defender",
+    "importance": 1,
+    "title": {
+      "en": "Sample event two",
+      "zh": "示例事件二"
+    },
+    "summary": {
+      "en": "A placeholder landing with a small importance, to test smaller markers.",
+      "zh": "一次重要性较低的占位登陆，用来测试较小的标记。"
+    }
   },
   {
     "id": "sample-agreement",
-    "t": "2000-06-15",
-    "at": [-149.5, 9],
+    "t": "2000-08-01",
+    "at": [
+      -149.5,
+      9
+    ],
     "kind": "political",
     "importance": 3,
-    "title": { "en": "Sample event two", "zh": "示例事件二" },
-    "summary": { "en": "A placeholder political event without sides.", "zh": "没有交战双方的占位政治事件。" }
+    "title": {
+      "en": "Sample event three",
+      "zh": "示例事件三"
+    },
+    "summary": {
+      "en": "A placeholder political event without sides.",
+      "zh": "没有交战双方的占位政治事件。"
+    }
   }
 ]

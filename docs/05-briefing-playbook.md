@@ -28,7 +28,7 @@ Atlas 是给新加坡小学生（P3–P6）用的双语可视化课本。仓库�
 - Astro 静态 + React 岛，MapLibre GeoJSON source，无外部瓦片
 - 数据严格按 docs/03 的 schema，放 src/content/topics/ww2/data/
 - 状态可序列化到 URL（ch, t, layers, cam）
-- 首屏 JS ≤ 300 KB gz，GeoJSON ≤ 2 MB
+- 首屏 JS ≤ 400 KB gz（MapLibre 占 275 KB），GeoJSON ≤ 2 MB
 - 遵守 docs/02 的 iPad 封装约束
 
 设计标准

@@ -58,10 +58,10 @@ describe('sample-time topic', () => {
 
   it('engine data parses', () => {
     const data = timeSceneGeoData.parse(loadData('sample-time'));
-    expect(data.entities).toHaveLength(2);
-    expect(data.control.keyframes).toHaveLength(2);
-    expect(data.movements).toHaveLength(1);
-    expect(data.events).toHaveLength(2);
+    expect(data.entities).toHaveLength(3);
+    expect(data.control.keyframes).toHaveLength(3);
+    expect(data.movements).toHaveLength(2);
+    expect(data.events).toHaveLength(3);
   });
 
   it('chapters and their states parse', () => {
@@ -92,10 +92,10 @@ describe('sample-space topic', () => {
 
   it('engine data parses', () => {
     const data = spaceSceneData.parse(loadData('sample-space'));
-    expect(data.parts.parts).toHaveLength(3);
-    expect(data.parts.groups).toHaveLength(1);
-    expect(data.parts.flows).toHaveLength(1);
-    expect(data.parts.animations).toHaveLength(1);
+    expect(data.parts.parts).toHaveLength(7);
+    expect(data.parts.groups).toHaveLength(2);
+    expect(data.parts.flows).toHaveLength(2);
+    expect(data.parts.animations).toHaveLength(3);
   });
 
   it('chapters and their states parse', () => {
