@@ -1,14 +1,29 @@
 [
   {
     "id": "north-sample",
-    "name": { "en": "North Sample", "zh": "北示例" },
+    "name": {
+      "en": "North Sample",
+      "zh": "北示例"
+    },
     "bloc": "axis",
     "joined": "2000-01-01"
   },
   {
     "id": "south-sample",
-    "name": { "en": "South Sample", "zh": "南示例" },
+    "name": {
+      "en": "South Sample",
+      "zh": "南示例"
+    },
     "bloc": "allied",
     "joined": "2000-01-01"
+  },
+  {
+    "id": "east-sample",
+    "name": {
+      "en": "East Sample",
+      "zh": "东示例"
+    },
+    "bloc": "neutral",
+    "joined": "2000-04-01"
   }
 ]

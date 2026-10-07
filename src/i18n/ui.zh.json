@@ -81,5 +81,22 @@
   "counter.each": "一个图标 = {n}",
 
   "stub.notice": "引擎预览。真正的 {engine} 舞台在第二期上线。",
-  "stub.state": "当前场景状态"
+  "stub.state": "当前场景状态",
+
+  "space.stage": "3D 模型。拖动可以转动，双指捏合或滚轮可以缩放，点一下零件可以选中它。",
+  "space.loading": "正在搭建模型…",
+  "space.view": "视图",
+  "space.view.assembled": "整体",
+  "space.view.xray": "透视",
+  "space.view.exploded": "拆开",
+  "space.view.isolate": "单独看",
+  "space.explode": "拆开程度",
+  "space.run": "通电运转",
+  "space.cutaway": "剖开看",
+  "space.hint": "点一个零件，看看它是做什么的。",
+  "space.more": "了解更多",
+  "space.less": "收起",
+  "space.group": "所属系统",
+  "space.connects": "和它相连",
+  "space.deselect": "取消选中"
 }
