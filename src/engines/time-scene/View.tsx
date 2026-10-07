@@ -10,7 +10,7 @@
  */
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { Chapter, EngineViewProps } from '../core/types';
-import { SceneSlot, useScene, useSceneStore } from '../core/context';
+import { SceneSlot, useScene, useSceneStore, useT } from '../core/context';
 import { SceneLayerToggles, type LayerItem } from '../widgets/LayerToggles';
 import { Legend, type LegendItem } from '../widgets/Legend';
 import { isChapterCollapsed } from '../widgets/ChapterRail';
@@ -28,7 +28,6 @@ import { Timeline, formatNumber } from './timeline/Timeline';
 import { usePlayback } from './timeline/usePlayback';
 import { EventInspector } from './EventInspector';
 import { BLOC_CSS, entityCssColor } from './colors';
-import { BLOC_LABELS, LAYER_LABELS, S, fill } from './strings';
 import './time-scene.css';
 
 const CHAPTER_TWEEN_MS = 1600;
@@ -39,6 +38,7 @@ const OVERLAY_OPEN_MIN_WIDTH = 720;
 const TEXT_INPUTS = 'input, select, textarea, [contenteditable="true"], [data-keys="own"], [role="slider"]';
 
 export default function TimeSceneView({ data, chapters, locale }: EngineViewProps) {
+  const t = useT();
   const geo = data as TimeSceneGeoData;
   const store = useSceneStore<TimeSceneExt>();
   const currentChapter = useScene<TimeSceneExt, string | null>((s) => s.chapter);
@@ -170,19 +170,19 @@ export default function TimeSceneView({ data, chapters, locale }: EngineViewProp
         for (const e of geo.entities) items.push({ id: `entity-${e.id}`, label: e.name, color: entityCssColor(e) });
       } else {
         for (const b of ['axis', 'allied', 'neutral'] as const)
-          if (geo.entities.some((e) => e.bloc === b)) items.push({ id: `bloc-${b}`, label: BLOC_LABELS[b], color: BLOC_CSS[b] });
+          if (geo.entities.some((e) => e.bloc === b)) items.push({ id: `bloc-${b}`, label: t(`time.bloc.${b}`), color: BLOC_CSS[b] });
       }
     }
     if (layers.includes('movements') && geo.movements.length)
-      items.push({ id: 'movement', label: S.movement, color: 'var(--ink-muted)', kind: 'arrow' });
+      items.push({ id: 'movement', label: t('time.movement'), color: 'var(--ink-muted)', kind: 'arrow' });
     if (layers.includes('battles') && geo.events.length)
-      items.push({ id: 'event', label: S.event, color: 'var(--ink-muted)', kind: 'point' });
+      items.push({ id: 'event', label: t('time.event'), color: 'var(--ink-muted)', kind: 'point' });
     return items;
-  }, [geo, layers]);
+  }, [geo, layers, locale]); // `t` is bound to `locale`
 
   const layerItems = useMemo<LayerItem[]>(
-    () => TOGGLE_LAYERS.map((id) => ({ id, label: LAYER_LABELS[id] })),
-    [],
+    () => TOGGLE_LAYERS.map((id) => ({ id, label: t(`time.layer.${id}`) })),
+    [locale],
   );
 
   /* ---------- overlay: open by default only when the stage is roomy ---------- */
@@ -203,7 +203,7 @@ export default function TimeSceneView({ data, chapters, locale }: EngineViewProp
         {stopChapter && playback.stop && (
           <div className="ts-stop__card">
             <span className="ts-stop__eyebrow">
-              {fill(tx(S.chapterShort, locale), { n: chapters.indexOf(stopChapter) + 1 })} ·{' '}
+              {t('time.chapterShort', { n: chapters.indexOf(stopChapter) + 1 })} ·{' '}
               {formatNumber(playback.stop.t, model, locale)}
             </span>
             <span className="ts-stop__title">{tx(stopChapter.title, locale)}</span>
@@ -213,10 +213,10 @@ export default function TimeSceneView({ data, chapters, locale }: EngineViewProp
 
       <SceneSlot name="stageOverlay">
         <details className="atlas-overlay-card ts-overlay" open={overlayOpen} onToggle={(e) => setOverlayOpen(e.currentTarget.open)}>
-          <summary className="ts-overlay__summary" aria-label={tx(S.layersAndKey, locale)}>
+          <summary className="ts-overlay__summary" aria-label={t('time.layersAndKey')}>
             <span className="ts-overlay__closed">
               <Icon name="layers" size={18} />
-              <span>{tx(S.layersAndKey, locale)}</span>
+              <span>{t('time.layersAndKey')}</span>
             </span>
             <Icon name="close" size={18} className="ts-overlay__open" />
           </summary>

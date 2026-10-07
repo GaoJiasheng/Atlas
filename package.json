@@ -6,7 +6,7 @@
   "description": "Atlas: a bilingual interactive textbook (time-evolution and space-exploration scenes).",
   "packageManager": "pnpm@9.15.9",
   "engines": {
-    "node": ">=20.19"
+    "node": ">=22"
   },
   "scripts": {
     "dev": "astro dev",
@@ -15,25 +15,30 @@
     "check": "astro check && tsc --noEmit",
     "validate": "tsx scripts/validate-content.ts",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "e2e": "playwright test",
+    "deploy": "pnpm build && pnpm dlx wrangler pages deploy dist --project-name atlas"
   },
   "dependencies": {
     "@astrojs/mdx": "4.3.14",
     "@astrojs/react": "4.4.2",
     "@react-three/drei": "10.7.9",
     "@react-three/fiber": "9.8.1",
+    "@vite-pwa/astro": "1.2.0",
     "astro": "5.18.2",
     "maplibre-gl": "5.24.0",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "three": "0.180.0",
     "topojson-client": "3.1.0",
+    "vite-plugin-pwa": "1.2.0",
     "zod": "3.25.76",
     "zustand": "5.0.15"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",
     "@maplibre/maplibre-gl-style-spec": "26.4.4",
+    "@playwright/test": "1.63.0",
     "@tailwindcss/vite": "4.3.3",
     "@types/geojson": "7946.0.16",
     "@types/node": "25.9.9",
@@ -41,6 +46,7 @@
     "@types/react-dom": "19.3.0",
     "@types/three": "0.180.0",
     "@types/topojson-client": "3.1.5",
+    "sharp": "0.35.5",
     "tailwindcss": "4.3.3",
     "tsx": "4.23.15",
     "typescript": "5.9.3",

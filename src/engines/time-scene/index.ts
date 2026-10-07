@@ -36,7 +36,10 @@ export const timeSceneEngine = defineEngine<TimeSceneExt, TimeSceneGeoData>({
     return out;
   },
   fromUrl(fields) {
-    return fields.t !== undefined ? { t: fields.t } : {};
+    const out: Partial<TimeSceneExt> = {};
+    if (fields.t !== undefined) out.t = fields.t;
+    if (fields.highlight !== undefined) out.highlight = fields.highlight;
+    return out;
   },
   load: () => import('./View'),
 });

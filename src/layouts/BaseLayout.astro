@@ -21,7 +21,10 @@ const { locale, title, description = t(locale, 'site.description'), themeDefault
   Astro.props;
 const pathname = Astro.url.pathname;
 const fullTitle = title === t(locale, 'site.name') ? title : `${title} · ${t(locale, 'site.name')}`;
-const favicon = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/favicon.svg`;
+const root = import.meta.env.BASE_URL.replace(/\/$/, '');
+const favicon = `${root}/favicon.svg`;
+// Manifest + service worker exist only in production builds (the dev server has none).
+const pwa = import.meta.env.PROD;
 ---
 <!doctype html>
 <html
@@ -38,6 +41,8 @@ const favicon = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/favicon.svg`;
     <meta name="theme-color" content="#f4ecd8" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0e1116" media="(prefers-color-scheme: dark)" />
     <link rel="icon" type="image/svg+xml" href={favicon} />
+    <link rel="apple-touch-icon" href={`${root}/icons/apple-touch-icon.png`} />
+    {pwa && <link rel="manifest" href={`${root}/manifest.webmanifest`} />}
     {LOCALES.map((l) => <link rel="alternate" hreflang={HTML_LANG[l]} href={switchLocalePath(pathname, l)} />)}
     <!-- Theme + parent mode before first paint. Mirrors src/theme/theme.ts resolveTheme(). -->
     <script is:inline>
@@ -66,5 +71,6 @@ const favicon = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/favicon.svg`;
       >{t(locale, 'a11y.skipToContent')}</a
     >
     <slot />
+    {pwa && <script is:inline src={`${root}/registerSW.js`}></script>}
   </body>
 </html>

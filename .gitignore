@@ -7,3 +7,8 @@ dist/
 .env.*
 !.env.example
 coverage/
+
+# Playwright
+tests-e2e/__screenshots__/
+test-results/
+playwright-report/

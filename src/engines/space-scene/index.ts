@@ -51,6 +51,7 @@ export const spaceSceneEngine = defineEngine<SpaceSceneExt, SpaceSceneData>({
     if (isView(fields.view)) out.view = fields.view;
     if (fields.explode !== undefined) out.explode = clamp01(fields.explode);
     if (fields.run !== undefined) out.run = fields.run;
+    if (fields.cutaway === 'none' || fields.cutaway === 'half') out.cutaway = fields.cutaway;
     return out;
   },
   load: () => import('./View'),

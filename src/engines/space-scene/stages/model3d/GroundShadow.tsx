@@ -5,7 +5,6 @@
 import { useEffect, useMemo } from 'react';
 import { Color, PlaneGeometry, ShaderMaterial } from 'three';
 import type { StageLook } from './look';
-import { r3f } from './extend';
 import { resolveDataColor } from '../../lib/color';
 
 const vertexShader = /* glsl */ `
@@ -54,8 +53,8 @@ export function GroundShadow({ y, radius, look }: { y: number; radius: number; l
   }, [material, look]);
   return (
     <mesh
-      geometry={r3f(geometry)}
-      material={r3f(material)}
+      geometry={geometry}
+      material={material}
       rotation={[-Math.PI / 2, 0, 0]}
       position={[0, y, 0]}
       scale={[radius * 2.4, radius * 2.4, 1]}
