@@ -5,12 +5,11 @@
 import { useEffect, useRef, useState } from 'react';
 import type { Locale } from '../../../core/types';
 import type { SceneStore } from '../../../core/store';
-import { tx } from '../../../../i18n';
+import { useT } from '../../../core/context';
 import type { TimeSceneExt } from '../../index';
 import type { TimeModel } from '../../lib/model';
 import type { Playhead } from '../../lib/playhead';
 import type { GeoController } from './controller';
-import { S } from '../../strings';
 
 export interface GeoStageProps {
   store: SceneStore<TimeSceneExt>;
@@ -21,6 +20,7 @@ export interface GeoStageProps {
 }
 
 export function GeoStage({ store, playhead, model, locale, onSelectEvent }: GeoStageProps) {
+  const t = useT();
   const containerRef = useRef<HTMLDivElement>(null);
   const controllerRef = useRef<GeoController | null>(null);
   const selectRef = useRef(onSelectEvent);
@@ -66,7 +66,7 @@ export function GeoStage({ store, playhead, model, locale, onSelectEvent }: GeoS
       <div ref={containerRef} className="ts-geo__map" />
       {status === 'failed' && (
         <p className="ts-geo__notice" role="status">
-          {tx(S.mapFailed, locale)}
+          {t('time.mapFailed')}
         </p>
       )}
     </div>

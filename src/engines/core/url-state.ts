@@ -4,8 +4,8 @@
  *   /en/topics/ww2/?ch=fall-of-singapore&t=1942-02-10&layers=control,battles&cam=103.8,1.35,7.5
  *   /en/topics/aircon/?ch=power-on&part=compressor&view=xray&run=1
  *
- * Keys: `ch`, `layers`, `cam`, `theme` (core) and `t`, `part`, `view`,
- * `explode`, `run` (engine passthrough). Values equal to the current chapter's
+ * Keys: `ch`, `layers`, `cam`, `theme` (core) and `t`, `hl`, `part`, `view`,
+ * `explode`, `run`, `cut` (engine passthrough). Values equal to the current chapter's
  * target are omitted, so a plain chapter link is just `?ch=<id>`.
  * Unknown query parameters (utm_*, etc.) are preserved.
  *
@@ -20,9 +20,9 @@ import { isTheme } from '../../theme/theme';
 export type UrlState = Partial<SceneState & UrlEngineFields>;
 
 export const CORE_URL_KEYS = ['ch', 'layers', 'cam', 'theme'] as const;
-export const ENGINE_URL_KEYS = ['t', 'part', 'view', 'explode', 'run'] as const;
+export const ENGINE_URL_KEYS = ['t', 'hl', 'part', 'view', 'explode', 'run', 'cut'] as const;
 /** Order in which keys are written (most meaningful first). */
-export const URL_KEY_ORDER = ['ch', 't', 'part', 'view', 'explode', 'run', 'layers', 'cam', 'theme'] as const;
+export const URL_KEY_ORDER = ['ch', 't', 'hl', 'part', 'view', 'explode', 'run', 'cut', 'layers', 'cam', 'theme'] as const;
 export type UrlKey = (typeof URL_KEY_ORDER)[number];
 
 const ID_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -50,6 +50,8 @@ function encodeField(key: UrlKey, state: UrlState): string | null {
       return state.theme ?? null;
     case 't':
       return state.t === undefined ? null : state.t === null ? '' : formatTimeParam(state.t);
+    case 'hl':
+      return state.highlight === undefined ? null : state.highlight.join(',');
     case 'part':
       return state.part === undefined ? null : (state.part ?? '');
     case 'view':
@@ -58,6 +60,8 @@ function encodeField(key: UrlKey, state: UrlState): string | null {
       return state.explode === undefined ? null : roundTo(Math.min(1, Math.max(0, state.explode)), 2);
     case 'run':
       return state.run === undefined ? null : state.run ? '1' : '0';
+    case 'cut':
+      return state.cutaway ?? null;
   }
 }
 
@@ -111,6 +115,9 @@ export function decodeSceneState(input: string | URLSearchParams): UrlState {
     }
   }
 
+  const hl = params.get('hl');
+  if (hl !== null) out.highlight = hl === '' ? [] : hl.split(',').filter((id) => ID_RE.test(id));
+
   const part = params.get('part');
   if (part !== null) {
     if (part === '') out.part = null;
@@ -129,6 +136,9 @@ export function decodeSceneState(input: string | URLSearchParams): UrlState {
   const run = params.get('run');
   if (run === '1' || run === 'true') out.run = true;
   else if (run === '0' || run === 'false') out.run = false;
+
+  const cut = params.get('cut');
+  if (cut === 'none' || cut === 'half') out.cutaway = cut;
 
   return out;
 }

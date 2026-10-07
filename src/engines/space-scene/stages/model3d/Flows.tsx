@@ -12,7 +12,6 @@ import { resolveDataColor } from '../../lib/color';
 import { damp } from '../../lib/math';
 import { createFlowMaterial, styleFlowMaterial } from './flowMaterial';
 import { keepAnimating, MAX_DT, useRuntime } from './runtime';
-import { r3f } from './extend';
 import type { StageLook } from './look';
 
 export const PARTICLES_PER_FLOW = 200;
@@ -97,7 +96,7 @@ function FlowParticles({
     if (fade.current > 0 || strength > 0) keepAnimating(state.invalidate);
   });
 
-  return <points ref={ref} geometry={r3f(geometry)} material={r3f(material)} frustumCulled={false} dispose={null} visible={false} />;
+  return <points ref={ref} geometry={geometry} material={material} frustumCulled={false} dispose={null} visible={false} />;
 }
 
 export function Flows({

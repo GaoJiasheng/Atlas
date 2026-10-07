@@ -29,7 +29,6 @@ import { explodedPosition } from '../../lib/explode';
 import { resolveDataColor, resolveMaterialLook, parseCssColor } from '../../lib/color';
 import { damp } from '../../lib/math';
 import { keepAnimating, MAX_DT, prefersReducedMotion, useRuntime } from './runtime';
-import { r3f } from './extend';
 import type { StageLook } from './look';
 
 /** Geometry + rest transform of a part (from a primitive or a glb mesh). */
@@ -251,10 +250,10 @@ export function PartNode(props: PartNodeProps) {
       <group ref={animRef}>
         <mesh
           ref={meshRef}
-          geometry={r3f(shape.geometry)}
-          material={r3f(material)}
-          quaternion={r3f(shape.quaternion)}
-          scale={r3f(shape.scale)}
+          geometry={shape.geometry}
+          material={material}
+          quaternion={shape.quaternion}
+          scale={shape.scale}
           dispose={null}
           onClick={onClick}
           onPointerOver={onPointerOver}
@@ -268,8 +267,8 @@ export function PartNode(props: PartNodeProps) {
         >
           <mesh
             ref={hullRef}
-            geometry={r3f(shape.geometry)}
-            material={r3f(hullMaterial)}
+            geometry={shape.geometry}
+            material={hullMaterial}
             scale={hullScale}
             visible={false}
             dispose={null}

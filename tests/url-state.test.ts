@@ -24,6 +24,30 @@ describe('url-state encode/decode', () => {
     expect(decodeSceneState(search)).toEqual(state);
   });
 
+  it('round-trips highlight (hl) and cutaway (cut)', () => {
+    const time: UrlState = { chapter: 'a', t: '1942-02', highlight: ['battle-of-singapore', 'japan'] };
+    expect(toSearch(time)).toBe('?ch=a&t=1942-02&hl=battle-of-singapore,japan');
+    expect(decodeSceneState(toSearch(time))).toEqual(time);
+
+    const space: UrlState = { chapter: 'b', part: 'fan', run: true, cutaway: 'half' };
+    expect(toSearch(space)).toBe('?ch=b&part=fan&run=1&cut=half');
+    expect(decodeSceneState(toSearch(space))).toEqual(space);
+  });
+
+  it('encodes an explicitly cleared highlight and omits highlight/cutaway equal to the baseline', () => {
+    const baseline: UrlState = { chapter: 'a', highlight: ['x-1'], cutaway: 'none' };
+    expect(toSearch({ ...baseline }, baseline)).toBe('?ch=a');
+    expect(toSearch({ ...baseline, highlight: [] }, baseline)).toBe('?ch=a&hl=');
+    expect(decodeSceneState('?hl=')).toEqual({ highlight: [] });
+    expect(toSearch({ ...baseline, highlight: ['x-1', 'y-2'] }, baseline)).toBe('?ch=a&hl=x-1,y-2');
+    expect(toSearch({ ...baseline, cutaway: 'half' }, baseline)).toBe('?ch=a&cut=half');
+  });
+
+  it('drops invalid hl ids and cut values', () => {
+    expect(decodeSceneState('?hl=ok-id,Bad%20Id,also-ok')).toEqual({ highlight: ['ok-id', 'also-ok'] });
+    expect(decodeSceneState('?cut=full')).toEqual({});
+  });
+
   it('round-trips geological time, orbit cameras, theme and nulls', () => {
     const state: UrlState = {
       chapter: 'pangaea',

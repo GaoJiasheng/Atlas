@@ -101,8 +101,8 @@ export default function SceneHost(props: SceneHostProps) {
   // Deep link in, then keep the URL in sync.
   useEffect(() => {
     const decoded = decodeSceneState(window.location.search);
-    const { t: time, part, view, explode, run, ...common } = decoded;
-    const engineFields: UrlEngineFields = { t: time, part, view, explode, run };
+    const { t: time, highlight, part, view, explode, run, cutaway, ...common } = decoded;
+    const engineFields: UrlEngineFields = { t: time, highlight, part, view, explode, run, cutaway };
     const patch = { ...common, ...engine.fromUrl(engineFields) };
     if (Object.keys(patch).length > 0) store.getState().hydrate(patch);
     return startUrlSync({

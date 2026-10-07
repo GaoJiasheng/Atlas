@@ -556,7 +556,10 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     color?: string;
     kind: 'entity' | 'event' | 'movement' | 'place';
   }
-  const labels = new Map<string, { marker: Marker; text: string }>();
+  const labels = new Map<string, { marker: Marker; text: string; label: Label }>();
+  /** Collision priority: lower = wins. Highlighted labels beat everything, then events > entities > movements > places. */
+  const KIND_RANK: Record<Label['kind'], number> = { event: 1, entity: 2, movement: 3, place: 4 };
+  const rankOf = (l: Label) => (l.pinned ? 0 : KIND_RANK[l.kind]);
 
   const labelCandidates = (): Label[] => {
     const frame = lastFrame;
@@ -610,18 +613,11 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     const candidates = labelCandidates()
       .filter((l) => l.pinned || bounds.contains(l.at))
       .sort((a, b) => Number(b.pinned) - Number(a.pinned) || b.priority - a.priority);
-    const boxes: { x0: number; y0: number; x1: number; y1: number }[] = [];
     const chosen: Label[] = [];
     for (const l of candidates) {
       if (!l.pinned && chosen.length >= MAX_LABELS) break;
       const p = map.project(l.at);
       if (!l.pinned && (p.x < 0 || p.y < 0 || p.x > width || p.y > height)) continue;
-      const w = [...l.text].reduce((s, ch) => s + (ch.charCodeAt(0) > 0x2e80 ? 14 : 7.5), 16);
-      // Events and movements hang 12px below their point; the rest are centred.
-      const top = l.kind === 'event' || l.kind === 'movement' ? p.y + 12 : p.y - 13;
-      const box = { x0: p.x - w / 2, y0: top, x1: p.x + w / 2, y1: top + 26 };
-      if (!l.pinned && boxes.some((b) => box.x0 < b.x1 && box.x1 > b.x0 && box.y0 < b.y1 && box.y1 > b.y0)) continue;
-      boxes.push(box);
       chosen.push(l);
     }
     const keep = new Set(chosen.map((l) => l.key));
@@ -642,9 +638,10 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
         const below = l.kind === 'event' || l.kind === 'movement';
         const marker = new Marker({ element: el, anchor: below ? 'top' : 'center', offset: below ? [0, 12] : [0, 0] });
         marker.setLngLat(l.at).addTo(map);
-        entry = { marker, text: '' };
+        entry = { marker, text: '', label: l };
         labels.set(l.key, entry);
       }
+      entry.label = l;
       const el = entry.marker.getElement();
       if (entry.text !== l.text) {
         (el.firstChild as HTMLElement).textContent = l.text;
@@ -654,6 +651,37 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
       el.dataset.pinned = String(l.pinned);
       if (l.color) el.style.setProperty('--ts-color', l.color);
       else el.style.removeProperty('--ts-color');
+    }
+    resolveLabelCollisions();
+  };
+
+  /**
+   * Greedy collision pass over the placed markers, on real screen rects:
+   * walk labels in priority order (highlighted > events > entities >
+   * movements > places) and hide any label that overlaps (4px padding) one
+   * already kept. Highlighted labels are never hidden. At most ~12 rects.
+   */
+  const LABEL_PAD = 4;
+  const resolveLabelCollisions = () => {
+    const ordered = [...labels.values()].sort(
+      (a, b) => rankOf(a.label) - rankOf(b.label) || b.label.priority - a.label.priority,
+    );
+    const occupied: DOMRect[] = [];
+    for (const entry of ordered) {
+      const el = entry.marker.getElement();
+      const rect = (el.firstElementChild ?? el).getBoundingClientRect();
+      const hit =
+        rect.width > 0 &&
+        occupied.some(
+          (o) =>
+            rect.left < o.right + LABEL_PAD &&
+            rect.right > o.left - LABEL_PAD &&
+            rect.top < o.bottom + LABEL_PAD &&
+            rect.bottom > o.top - LABEL_PAD,
+        );
+      const hide = hit && !entry.label.pinned;
+      el.dataset.collided = String(hide);
+      if (!hide) occupied.push(rect);
     }
   };
 

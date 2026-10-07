@@ -1,6 +1,6 @@
 # 06 · 开发指南
 
-一期地基（Phase 1）已就位：站点框架、i18n、主题、内容集合、Scene 契约、共享部件、两个占位主题。引擎（TimeScene / SpaceScene）目前是 stub，二期替换 `View.tsx` 即可，不动地基。
+Phase 1 地基（站点框架、i18n、主题、内容集合、Scene 契约、共享部件）、Phase 2 两个引擎（TimeScene / SpaceScene）和 Phase 3 上线准备（PWA、Cloudflare Pages、e2e）都已就位，带两个占位主题。
 
 ## 跑起来
 
@@ -12,10 +12,11 @@ pnpm preview      # 预览 dist/
 pnpm check        # astro check + tsc --noEmit
 pnpm validate     # 内容校验（schema、双语、id、引用）
 pnpm test         # vitest（数据层单测）
+pnpm build && pnpm e2e   # Playwright 冒烟（chromium，针对 pnpm preview 的 dist/）
 ```
 
 - 子路径部署 / Capacitor：`ATLAS_BASE=/atlas pnpm build`，所有链接和资源都带 base。代码里拼路径一律用 `localeHref()` / `withBase()`（`src/i18n/index.ts`），不要手写 `/en/...`。
-- Node ≥ 20.19，pnpm 9。依赖版本全部锁死在 `package.json`（Astro 5.18、React 19、Tailwind 4、zod 3）。
+- Node ≥ 22（`.node-version` = 22，Cloudflare Pages 读它），pnpm 9。依赖版本全部锁死在 `package.json`（Astro 5.18、React 19、Tailwind 4、zod 3）。
 
 ## 目录速查
 
@@ -137,7 +138,7 @@ store.getState().chapterTarget(id);                                // 某章的�
 
 ### URL 同步
 
-- key：`ch, layers, cam, theme` + 引擎 `t, part, view, explode, run`。与当前章节目标相同的字段不写进 URL（普通章节链接就是 `?ch=<id>`）；其它 query 参数原样保留。
+- key：`ch, layers, cam, theme` + 引擎 `t, hl, part, view, explode, run, cut`（完整说明见文末「URL 参数」）。与当前章节目标相同的字段不写进 URL（普通章节链接就是 `?ch=<id>`）；其它 query 参数原样保留。
 - 写入用 `history.replaceState`，250 ms 防抖；切语言前自动 flush。纯函数 `encodeSceneState / decodeSceneState / mergeSearch` 有单测。
 - 新增可链接字段：在 `UrlEngineFields`（core/types.ts）和 `url-state.ts` 的编解码里各加一处，再在 descriptor 的 `fromUrl` 接收。
 
@@ -190,7 +191,7 @@ timeline/Timeline.tsx      章节节点 + 细拖条 + 播放/倍速（渲染进 
 timeline/usePlayback.ts    播放循环（全程约 60 s @×1，遇章节节点停 1.5 s）
 EventInspector.tsx         点事件 → inspector 插槽（Counter；sensitive 事件的伤亡仅家长模式）
 lib/time.ts  lib/format.ts  lib/geo.ts  lib/model.ts  lib/frame.ts  lib/playhead.ts   纯函数，单测在 tests/time-scene/
-strings.ts  colors.ts  time-scene.css
+colors.ts  time-scene.css
 ```
 
 ### 作者怎么写数据
@@ -217,7 +218,7 @@ strings.ts  colors.ts  time-scene.css
 | `battles` | 已发生的事件点（按 importance 定大小，进行中的更实），进入 `[t, until]` 时脉冲一次（~900 ms）；点击（44 px 命中框）→ 详情 + `highlight` | 可关 |
 | `participation` | 实体在当前关键帧的面：加入后描边，加入那一刻闪亮（时长 = 全程 4%） | 默认关 |
 
-标签都是 HTML marker（无 glyphs），最多 12 个，按 高亮 > 进行中事件 > 实体 > 行动 > 国名 排序并做屏幕避让；`highlight` 的对象标签永远显示。
+标签都是 HTML marker（无 glyphs），最多 12 个。每次放置后（时间变化、`moveend`、换语言）跑一遍贪心避让：按 高亮 > 事件 > 实体 > 行动 > 国名 排序，用真实屏幕矩形（4 px 间隙）检测，与已保留标签相交的低优先级标签被隐藏（`data-collided`）；`highlight` 的对象标签永远显示。
 
 ### 时间
 
@@ -322,4 +323,30 @@ state:
 - 舞台是独立 reconciler，React context 不穿透：store、data、主题 look 都以 props 传入 `SceneRoot`，组件里用 `zustand` 的 `useStore(store, …)`。
 - `frameloop: 'demand'`：只有在缓动（拆开、淡入淡出、运镜）、运转、cinema 选中发光时才请求下一帧；标签页隐藏时不请求，回到前台再 invalidate。几何体/材质都由我们自己创建和 dispose（`dispose={null}` 交给组件卸载时清理）。
 - 包体：sample-space 页实测加载 JS 共 287 KB gz（站点公共 ~83 KB + 舞台 chunk 202 KB，其中 three + R3F 占绝大部分）。GLTF 加载器单独成 chunk（21 KB gz），只有写了 `mesh` 的主题才加载。
-- `extend.ts` 里的 `r3f()` 是类型桥：当前 node_modules 里 `@react-three/fiber` 解析到一份残留的 `@types/three@0.186`（锁文件里只有 0.180）。干净地 `pnpm install` 后可以删掉。
+
+## PWA、部署与 e2e（Phase 3）
+
+- **PWA**：`@vite-pwa/astro`（`astro.config.mjs`），`generateSW` + `autoUpdate`。预缓存构建出的页面、JS、CSS、图标；`/geo/*.json` 与 `/models/*.glb` **不**预缓存，走 CacheFirst 运行时缓存。scope / start_url 跟随 `ATLAS_BASE`。仅生产构建注册（BaseLayout 里 `import.meta.env.PROD`），`pnpm dev` 无 service worker。
+- **图标**：`pnpm tsx scripts/build-icons.ts` 用 sharp 生成 `public/icons/*.png`（192 / 512 / maskable-512 / apple-touch-icon），产物入库。
+- **部署**：见 [07-deploy.md](07-deploy.md)。`public/_headers` 管缓存与安全头。
+- **e2e**：`tests-e2e/smoke.spec.ts`，`playwright.config.ts` 用 `pnpm preview` 起 `dist/`，所以先 `pnpm build`。首次需 `pnpm exec playwright install chromium`。截图写入 `tests-e2e/__screenshots__/`（git 忽略，本地肉眼检查用）。
+
+## URL 参数
+
+页面 URL 就是场景状态。与「当前章节目标」相同的值不会写进 URL，所以普通章节链接只有 `?ch=<id>`；其它 query（如 `utm_*`）原样保留。非法值被丢弃，不报错。
+
+| key | 含义 | 取值 | 引擎 | 例 |
+|---|---|---|---|---|
+| `ch` | 当前章节 | 章节 id | 通用 | `ch=power-on` |
+| `layers` | 打开的图层 / 组 | 逗号分隔 id；空值 = 全关 | 通用 | `layers=control,battles` |
+| `cam` | 镜头 | 地图 `lng,lat,zoom[,pitch[,bearing]]`；3D `px,py,pz,tx,ty,tz`；空值 = 无 | 通用 | `cam=103.8,1.35,7.5` |
+| `theme` | 场景主题 | `paper` \| `cinema` | 通用 | `theme=cinema` |
+| `t` | 当前时间 | `YYYY` / `YYYY-MM` / `YYYY-MM-DD` / `<n>ma`（地质时间，如 `200ma`）；空值 = 无 | TimeScene | `t=1942-02-10` |
+| `hl` | 高亮对象 | 逗号分隔的实体 / 行动 / 事件 id；空值 = 取消高亮 | TimeScene | `hl=battle-of-singapore` |
+| `part` | 选中零件 | 零件 id；空值 = 不选 | SpaceScene | `part=compressor` |
+| `view` | 视图 | `assembled` \| `xray` \| `exploded` \| `isolate` | SpaceScene | `view=xray` |
+| `explode` | 拆开程度 | 0 到 1 | SpaceScene | `explode=0.35` |
+| `run` | 通电运转 | `1` \| `0` | SpaceScene | `run=1` |
+| `cut` | 剖切 | `none` \| `half` | SpaceScene | `cut=half` |
+
+新增可链接字段：改 `core/types.ts` 的 `UrlEngineFields`、`core/url-state.ts`（`ENGINE_URL_KEYS`、`URL_KEY_ORDER`、编解码）、`SceneHost.tsx` 里解构的字段、descriptor 的 `fromUrl`，并补 `tests/url-state.test.ts`。

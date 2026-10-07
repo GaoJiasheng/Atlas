@@ -9,12 +9,12 @@
 import { useRef, useSyncExternalStore, type KeyboardEvent, type PointerEvent } from 'react';
 import type { Chapter, Locale } from '../../core/types';
 import { tx } from '../../../i18n';
+import { useT } from '../../core/context';
 import { Icon } from '../../widgets/icons';
 import type { TimeModel } from '../lib/model';
 import type { Playhead } from '../lib/playhead';
 import { clamp, fromNumber, precisionFor } from '../lib/time';
 import { formatTime } from '../lib/format';
-import { S, fill } from '../strings';
 import type { Speed } from './usePlayback';
 
 export interface TimelineProps {
@@ -44,6 +44,7 @@ export function formatNumber(t: number, model: TimeModel, locale: Locale): strin
 
 export function Timeline(props: TimelineProps) {
   const { model, playhead, locale, chapters, currentChapter, playing, speed } = props;
+  const tr = useT();
   const t = useSyncExternalStore(playhead.subscribe, playhead.get, playhead.get);
   const railRef = useRef<HTMLDivElement>(null);
   const dragging = useRef(false);
@@ -95,13 +96,13 @@ export function Timeline(props: TimelineProps) {
   const position = new Map(chapters.map((c, i) => [c.id, i]));
 
   return (
-    <div className="ts-timeline" onKeyDown={onRootKey} role="group" aria-label={tx(S.timeline, locale)}>
+    <div className="ts-timeline" onKeyDown={onRootKey} role="group" aria-label={tr('time.timeline')}>
       <div className="ts-timeline__controls">
         <button
           type="button"
           className="atlas-control atlas-control--icon ts-timeline__play"
-          aria-label={tx(playing ? S.pause : S.play, locale)}
-          title={tx(playing ? S.pause : S.play, locale)}
+          aria-label={tr(playing ? 'time.pause' : 'time.play')}
+          title={tr(playing ? 'time.pause' : 'time.play')}
           aria-pressed={playing}
           onClick={props.onTogglePlay}
         >
@@ -109,7 +110,7 @@ export function Timeline(props: TimelineProps) {
             {playing ? <path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" /> : <path d="M8 5.5v13l10.5-6.5z" />}
           </svg>
         </button>
-        <div className="atlas-segmented ts-timeline__speed" role="radiogroup" aria-label={tx(S.speed, locale)}>
+        <div className="atlas-segmented ts-timeline__speed" role="radiogroup" aria-label={tr('time.speed')}>
           {SPEEDS.map((s) => (
             <button
               key={s}
@@ -136,8 +137,8 @@ export function Timeline(props: TimelineProps) {
             const n = (position.get(node.id) ?? 0) + 1;
             const locked = props.isLocked(chapter);
             const label = locked
-              ? fill(tx(S.lockedNode, locale), { n })
-              : fill(tx(S.chapterNode, locale), {
+              ? tr('time.lockedNode', { n })
+              : tr('time.chapterNode', {
                   n,
                   title: tx(chapter.title, locale),
                   time: formatNumber(node.t, model, locale),
@@ -165,7 +166,7 @@ export function Timeline(props: TimelineProps) {
           className="ts-timeline__rail"
           role="slider"
           tabIndex={0}
-          aria-label={tx(S.time, locale)}
+          aria-label={tr('time.time')}
           aria-valuemin={0}
           aria-valuemax={1000}
           aria-valuenow={Math.round(clamp((t - model.min) / model.span, 0, 1) * 1000)}

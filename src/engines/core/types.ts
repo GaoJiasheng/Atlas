@@ -41,6 +41,10 @@ export interface UrlEngineFields {
   explode?: number;
   /** SpaceScene: running animation. URL `run`. */
   run?: boolean;
+  /** TimeScene: emphasised entity / movement / event ids. URL `hl` (comma-separated). */
+  highlight?: string[];
+  /** SpaceScene: cutaway mode. URL `cut`. */
+  cutaway?: 'none' | 'half';
 }
 
 /**
