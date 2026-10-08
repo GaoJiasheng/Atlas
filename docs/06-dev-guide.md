@@ -28,7 +28,8 @@ src/
                               # topic, chapter, camera, geojson —— 纯 zod，构建/校验/测试共用
     topics/<slug>/            # 一个主题一个目录
   engines/
-    core/                     # Scene 契约：types, store, url-state, camera, context, SceneHost
+    core/                     # Scene 契约：types, store, url-state, camera, context, SceneHost,
+                              # controls（HUD 注册 + 动作）, keys（键盘）, test-api（window.__atlas）, Hud（顶栏/标题块/面板框）
     widgets/                  # ChapterRail InfoPanel Legend LayerToggles QuizCard Counter
                               # LangToggle ThemeToggle ParentModeToggle LevelPicker GlobalToggles
     time-scene/               # index.ts（descriptor）+ schema.ts（zod）+ View.tsx（stub）
@@ -42,7 +43,7 @@ src/
   components/                 # SiteToggles 岛、MDX 组件（Lang / Soft / Full）
   layouts/BaseLayout.astro    # <html lang>、首帧前主题脚本、hreflang
   pages/                      # index.astro（跳转）, [locale]/index.astro, [locale]/topics/[slug].astro
-  styles/                     # global.css（Tailwind + token 映射）, scene.css（布局与部件）
+  styles/                     # global.css（Tailwind + token 映射）, fonts.css（自托管 Plex woff2）, scene.css（HUD 布局与部件）
 scripts/validate-content.ts
 tests/                        # vitest
 ```
@@ -142,23 +143,106 @@ store.getState().chapterTarget(id);                                // 某章的�
 - 写入用 `history.replaceState`，250 ms 防抖；切语言前自动 flush。纯函数 `encodeSceneState / decodeSceneState / mergeSearch` 有单测。
 - 新增可链接字段：在 `UrlEngineFields`（core/types.ts）和 `url-state.ts` 的编解码里各加一处，再在 descriptor 的 `fromUrl` 接收。
 
-### 布局插槽（引擎往哪里画控件）
+### 布局（技术图版 HUD，docs/08 §2）
 
-SceneHost 渲染公共布局：顶栏（返回、标题、全局开关）、左侧 ChapterRail、中间舞台、右侧 InfoPanel、舞台下方 bottom bar。引擎通过 portal 往插槽里渲染：
+舞台铺满页面，HUD 浮在上面；阅读用的 InfoPanel 在 ≥1024px 是右侧停靠列，以下是底部抽屉（收起时只有章节标题 +「阅读」按钮）。SceneHost 用 CSS grid 排布，各块贴在自己的角上，结构上不可能互相重叠：
 
-```tsx
-<SceneSlot name="bottomBar">   {/* 时间轴 / Explorer 控件 */}
-<SceneSlot name="stageOverlay">{/* 舞台右上浮层：SceneLayerToggles、Legend */}
-<SceneSlot name="inspector">   {/* InfoPanel 里的选中对象详情，可放 Counter */}
+```
+顶栏  ◇ ATLAS · 学科 │ ATL-{TOPIC6}-{NN} │ VIEW [01][02]…  MODE [X][E]…  LEVEL PARENT LOOK 中文
+      状态行 VIEW 02 · PAUSED · X-RAY              键位提示
+左列  标题块（PLATE NN · 章节名 / 主题名 / 副标题 / 规格 dl / 声明）+ ChapterRail
+右列  card（右上示意卡）+ stageOverlay（图层 / 图例）
+底部  perf（安静读数）→ panel01‖panel02‖panel03 → bottomBar（引擎控件）
 ```
 
-- bottom bar 为空时自动隐藏。
-- 键盘 ← → 由 SceneHost 全局绑定为上一章/下一章。引擎区域需要自己用方向键（地图平移）时给容器加 `data-keys="own"`；`input / select / [role=slider] / [role=radiogroup]` 内自动让出。
-- 触控：所有交互用 Pointer Events，可点目标 ≥ 44px（`.atlas-control` 已满足），不依赖 hover。舞台不设全局 `touch-action`，引擎在自己的 canvas 上设。
+### 布局插槽（引擎往哪里画）
+
+引擎用 `<SceneSlot name=…>` portal 进插槽；空插槽什么都不渲染（没有空框）。
+
+| 插槽 | 位置 | 说明 |
+|---|---|---|
+| `bottomBar` | 底部最下 | 时间轴 / Explorer 控件（44px 触控，不随 HUD 缩小，4K 时放大） |
+| `stageOverlay` | 右列，示意卡下 | 图层开关、图例 |
+| `inspector` | InfoPanel 内 | 选中对象详情 |
+| `card` | 右列顶 | 示意 SVG 卡的**内容**；标题由 `controls.card` 注册，宿主画框和 `A NAME 中文` 表头 |
+| `panel01` `panel02` `panel03` | 底部三块等高面板 | 面板**内容**；标题由 `controls.panels` 注册，宿主画框和 `01 NAME 中文` 表头；没注册标题的面板不出现 |
+| `perf` | 底部右上，安静小字 | `60 FPS · 54 DRAW CALLS · …` / `FEATURES · ZOOM` |
+| `leaders` | 覆盖舞台的 `<svg>` | 引线标注；往里 portal SVG 元素（`<path>`、`<circle>`） |
+
+- HUD 尺寸用设计像素（1920×1080 下的 px）乘 `--u` 写：`height: calc(18 * var(--u))`。卡片、面板里的 SVG 用 viewBox + 100% 宽高。
+- 交互元素 ≥ 44px：HUD 按钮视觉 18px，触屏（`pointer: coarse`）时用透明 `::after` 撑到 44px；引擎自己的控件继续用 `.atlas-control`（44px，已改成 hairline 皮肤）。
+- 舞台不设全局 `touch-action`，引擎在自己的 canvas 上设。
+
+### HUD 控件注册（`core/controls.ts`）
+
+引擎 View 里注册一次（传 `useMemo` 过的对象，身份变了就重新注册），宿主据此画 VIEW / MODE 按钮、状态行、键位提示、规格表、卡片和面板框，并绑定键盘和 `window.__atlas`：
+
+```ts
+import { useSceneControls, useHud } from '../core/context';
+import type { SceneControls } from '../core/controls';
+
+const controls = useMemo<SceneControls>(() => ({
+  presets: { items: [{ id, label: '01', title?, chapter? }], set(id, { instant }) {} },   // 数字键 1–9
+  modes:   { items: [{ id: 'xray', key: 'x', label, on, disabled?, status?: 'EXPLODED 70', tone?: 'xray' | 'hot' | 'cold' | 'cut' | 'signal' }],
+             set(id, on, { instant }) {} },                                                 // 字母键
+  pause:   { paused, set(paused) {} },                                                     // SPACE
+  labels:  true,                     // 引擎认宿主的 LABELS 开关 → 宿主加 `labels` 模式（L）
+  stats:   () => ({ calls, triangles, fps, features, zoom, gpu }),                          // 合并进 __atlas.stats()
+  specRows: [{ id, label: { en, zh }, value, mono?, source?: 'fact' | 'ref' | 'reconstruction' | 'simulated' }],
+  status:  ['SIMULATED'],            // 状态行追加段（大写）
+  card:    { en: 'Process flow', zh: '工艺流程' },
+  panels:  { panel01: { en, zh }, panel02: …, panel03: … },
+  escape:  () => boolean,            // ESC：退出选中 / focus，处理了返回 true
+}), [deps]);
+useSceneControls(controls);
+const labelsOn = useHud((s) => s.labels);   // 或 CSS：.atlas-scene[data-labels="off"] .my-label { display: none }
+```
+
+- 非 React 场合用 `registerSceneControls(hudStore, controls)`，返回注销函数。
+- **镜头预设**：调用 `store.getState().applyCameraPreset(camera, { instant })`，它改 `camera` 并发一次 `transition.reason = 'preset'`（舞台照常飞过去；TimeScene 不因此停播放）。当前预设由宿主推导：显式选的 > 当前章节自己的（`preset.chapter`）；用户拖动 / 平移写回相机后变为 FREE CAMERA。
+- **立即完成**：`store.getState().snap()` 发 `reason: 'snap'`、`instant: true` 的过渡，舞台跳到终态（测试、截图用）。
+- 规格表：宿主先放默认行（学科 / 年级 / 章节数 / 课纲锚点数），引擎行追加在后，最多 8 行。
+- 一期接线：TimeScene 预设 = 各章镜头，模式 `flow`（F，行军图层）+ labels，SPACE = 播放；SpaceScene 预设 = 各章镜头（本章镜头 > 视图预设 > 继承），模式 `xray` / `exploded` / `cutaway` / `flow`（= run）+ labels，SPACE = run，ESC 取消选中。
+
+### 键盘（`core/keys.ts`，宿主统一处理）
+
+| 键 | 作用 |
+|---|---|
+| ← → | 上一章 / 下一章（跳过折叠章节） |
+| 1–9 | 镜头预设 |
+| 注册的字母 | 模式开关（L = 标注；`h`、空格、数字保留给宿主） |
+| SPACE | 暂停 / 运行（没注册 `pause` 时不拦截） |
+| H | 隐藏 / 显示 HUD（只进 HUD store，不进 URL；0.35 s 淡出，左下留「H 显示界面」可点） |
+| ESC | HUD 隐藏时恢复；否则交给引擎 `escape` |
+
+带 Ctrl / Cmd / Alt 的不处理；已被处理（`defaultPrevented`）的不处理；焦点在 `input / textarea / select / contenteditable / [data-keys="own"]` 里不处理；方向键还让给 `[role=slider|radiogroup|tablist]`；空格让给获得焦点的按钮类元素（鼠标点完 HUD 按钮会自动失焦）。Shift+← → 留给 TimeScene 微调时间。
+
+### `window.__atlas`（`core/test-api.ts`，docs/08 §7）
+
+```ts
+await __atlas.ready                 // 视图已挂载且舞台 canvas 有尺寸 → true；20 s 超时 → false
+__atlas.chapters(); __atlas.goToChapter(id, { instant })
+__atlas.presets();  __atlas.setPreset(id, { instant })           // instant 默认 false
+__atlas.modes();    __atlas.setMode(id, on, { instant })          // instant 默认 true（会 snap）
+__atlas.keymap()    // [{ key, type: 'preset'|'mode'|'pause'|'hud'|'escape'|'chapter', name }]
+__atlas.setPaused(on); __atlas.setHud(on); __atlas.setTheme('paper' | 'cinema')   // setTheme 写用户覆盖
+__atlas.state()     // 场景快照 + { hud, paused, labels, preset, modes: {id: on}, appliedTheme }
+__atlas.stats()     // { buffer, pixelRatio } 取自舞台 canvas，再合并引擎 stats()
+```
+
+按钮带 `data-preset` / `data-mode`、`aria-pressed`；HUD 块带 `data-hud-panel`。
+
+### HUD 缩放与响应式
+
+- `--k = clamp(min(W/1920, H/1080), .6, 1.6)`（手机 = 1），SceneHost 在 resize 时写到 `.atlas-scene`。
+- 实际排版用 `--u = --kt px`，`--kt = max(--k, .8)`：HUD 文字不小于 1080p 尺寸的 80%（720p、平板的可读性下限）。`--kb = max(1, --k)`：触控控件和阅读正文只放大不缩小（4K 时 `bottomBar` / `stageOverlay` 用 `zoom: var(--kb)` 放大）。
+- ≥1440 完整；1080 完整略小；高度 ≤ 820（720p）底部三面板折成一行标签页（点开一块）；< 1024 InfoPanel 变底部抽屉；< 760（手机）隐藏示意卡、三面板、perf、引线、规格表、键位提示和 VIEW 组，章节轨折成编号芯片条，全局开关收进齿轮菜单。
+- 任何尺寸不得重叠、不得横向溢出：`tests-e2e/hud-layout.ts` 的 `hudLayoutIssues()` 在 3840×2160 / 2560×1440 / 1920×1080 / 1280×720 / 900×1200 / 390×844 × 每章 × 中英检查所有可见 `[data-hud-panel]`（`tests-e2e/hud.spec.ts`，`pnpm e2e` 的一部分）。
 
 ### 主题
 
-- token 在 `src/theme/tokens.css`（`paper` / `cinema`）。组件里只用 `var(--x)` 或 Tailwind 映射类（`bg-surface text-ink-muted border-border`），不写死颜色。
+- token 在 `src/theme/tokens.css`（`paper` = 技术图版标准实现 / `cinema` = dark plate）。功能色每个只表达一个含义：`--cold` `--hot` `--loop` `--neutral` `--signal` `--xray` `--cut`；墨与线：`--ink` `--ink-2` `--ink-3` `--hair` `--line`；旧名（`--accent-*`、`--bg`、`--surface`、`--border`…）映射到它们上。HUD 元素圆角 `--radius-hud`（1px），阅读面板 6px。
+- 字体：`IBM Plex Sans Condensed`（`--font-hud`，400/500/600，latin + latin-ext）与 `IBM Plex Mono`（`--font-mono`，400/500，latin）由 `src/styles/fonts.css` 自托管（只引 woff2，构建进 `/_astro/`）；中文回退系统字体；孩子读的正文保留 `--font-serif`。组件里只用 `var(--x)` 或 Tailwind 映射类（`bg-surface text-ink-muted border-border`），不写死颜色。
 - 优先级：用户全局覆盖（localStorage `atlas:theme`）> 场景主题（URL `theme=` 或章节累积的 `state.theme`）> `topic.yaml theme` > `paper`。首帧前由 BaseLayout 内联脚本按同一规则设置 `data-theme`，无闪烁。
 - 数据里的颜色写 `token:accent-1` / `#hex`；DOM/SVG 用 `resolveColorRef(ref)`（得到 `var(--accent-1)`，随主题自动变），canvas/WebGL 用 `resolveColorRef(ref, readThemeTokens())` 取实值，并在主题切换后重读。
 - MapLibre：`buildMapStyle({ sources: { land, water?, rivers? } })` 从当前 token 生成底图 style（只有 GeoJSON source，无 glyphs/sprite/瓦片）。二期加 symbol 标签需要本地 glyphs，放 `public/fonts/`。主题切换时重建 style（监听 `<html data-theme>` 变化即可）。
@@ -172,10 +256,10 @@ SceneHost 渲染公共布局：顶栏（返回、标题、全局开关）、左�
 ## 约束清单（每次改动自查）
 
 - 纯静态：无 SSR、无 API 路由、客户端无 Node API
-- 无运行时外部请求：无 CDN、无 webfont、无瓦片
+- 无运行时外部请求：无 CDN、无外部 webfont（字体自托管）、无瓦片
 - 客户端不引 zod（构建期解析）；首屏 JS ≤ 300 KB gz（当前主题页约 90 KB gz）
 - 所有文案双语；界面文案进 `ui.*.json`，内容文案用 `{ en, zh }`
-- `pnpm check && pnpm validate && pnpm test && pnpm build` 全绿
+- `pnpm check && pnpm validate && pnpm test && pnpm build && pnpm e2e` 全绿
 
 ## TimeScene（二期 A：GeoStage + Timeline）
 
@@ -329,7 +413,7 @@ state:
 - **PWA**：`@vite-pwa/astro`（`astro.config.mjs`），`generateSW` + `autoUpdate`。预缓存构建出的页面、JS、CSS、图标；`/geo/*.json` 与 `/models/*.glb` **不**预缓存，走 CacheFirst 运行时缓存。scope / start_url 跟随 `ATLAS_BASE`。仅生产构建注册（BaseLayout 里 `import.meta.env.PROD`），`pnpm dev` 无 service worker。
 - **图标**：`pnpm tsx scripts/build-icons.ts` 用 sharp 生成 `public/icons/*.png`（192 / 512 / maskable-512 / apple-touch-icon），产物入库。
 - **部署**：见 [07-deploy.md](07-deploy.md)。`public/_headers` 管缓存与安全头。
-- **e2e**：`tests-e2e/smoke.spec.ts`，`playwright.config.ts` 用 `pnpm preview` 起 `dist/`，所以先 `pnpm build`。首次需 `pnpm exec playwright install chromium`。截图写入 `tests-e2e/__screenshots__/`（git 忽略，本地肉眼检查用）。
+- **e2e**：`tests-e2e/smoke.spec.ts`（冒烟）+ `tests-e2e/hud.spec.ts`（六尺寸 HUD 布局、键与按钮同步、`__atlas`），`playwright.config.ts` 用 `pnpm preview` 起 `dist/`，所以先 `pnpm build`。首次需 `pnpm exec playwright install chromium`。截图写入 `tests-e2e/__screenshots__/`（git 忽略，本地肉眼检查用）。
 
 ## URL 参数
 

@@ -458,3 +458,8 @@
     animation: none;
   }
 }
+
+/* Host LABELS switch (`L`, docs/08 §3). */
+.atlas-scene[data-labels="off"] .ts-label {
+  display: none;
+}

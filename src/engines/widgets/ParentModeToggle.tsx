@@ -11,7 +11,7 @@ const CONFIRM_WINDOW_MS = 3000;
  * the reader's level. Turning it on needs a second tap within 3 s (a small
  * guard against accidental taps; no hover, no long-press). Off is one tap.
  */
-export function ParentModeToggle({ locale }: { locale: Locale }) {
+export function ParentModeToggle({ locale, variant = 'site' }: { locale: Locale; variant?: 'site' | 'hud' }) {
   const [on, setOn] = useParentMode();
   const [arming, setArming] = useState(false);
 
@@ -33,6 +33,22 @@ export function ParentModeToggle({ locale }: { locale: Locale }) {
   };
 
   const label = arming ? t(locale, 'parent.confirm') : on ? t(locale, 'parent.on') : t(locale, 'parent.off');
+
+  if (variant === 'hud') {
+    return (
+      <button
+        type="button"
+        className={on ? 'hud-btn on' : 'hud-btn'}
+        aria-pressed={on}
+        data-arming={arming || undefined}
+        aria-label={label}
+        title={label}
+        onClick={onClick}
+      >
+        {arming ? t(locale, 'parent.confirm') : t(locale, 'hud.parent')}
+      </button>
+    );
+  }
 
   return (
     <button

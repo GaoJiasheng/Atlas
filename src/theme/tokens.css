@@ -1,142 +1,213 @@
 /*
- * Atlas design tokens. Two themes switch via `data-theme` on <html>:
- *   paper  (site default) warm paper, ink, matte
- *   cinema (war / night topics) near-black, light ink, glowing accents
+ * Atlas design tokens: the "technical plate" language (docs/08 §1).
+ * Two themes switch via `data-theme` on <html>:
+ *   paper  (standard) warm paper ground, graphite ink, hairlines, matte
+ *   cinema (variant)  "dark plate": warm dark grey ground, light ink, same
+ *                     functional colours lifted ~12% lightness, faint glow
+ *
+ * Functional colours carry exactly one meaning each:
+ *   --cold    cold / primary side / Allied        --hot   hot / combustion / Axis
+ *   --loop    secondary loop                      --neutral  neutral side
+ *   --signal  emphasis: selection, current chapter
+ *   --xray    X-RAY state                         --cut   cutaway face (ochre)
+ * Older names (`--accent-*`, `--bg`, `--surface`, `--border` ...) are mapped
+ * onto these so engines and data refs (`token:accent-1`) keep working.
  *
  * Engines and map styles read these variables at runtime
- * (see src/theme/map-style.ts and readThemeTokens()). Never hard-code colours
- * in components; add a token here instead.
+ * (src/theme/map-style.ts, readThemeTokens()). Never hard-code colours in
+ * components; add a token here instead.
  */
 
 :root {
-  /* Type. System stacks only in Phase 1 (no webfont files). */
+  /* Type (docs/08 §1). Latin faces are self-hosted (src/styles/fonts.css);
+     CJK falls back to system faces. */
+  --font-hud: "IBM Plex Sans Condensed", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Source Han Sans SC",
+    "Microsoft YaHei", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, "PingFang SC", "Noto Sans CJK SC", monospace;
+  /* Child-facing reading body (InfoPanel prose, quiz questions). */
   --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, "Songti SC",
     "Noto Serif CJK SC", "Source Han Serif SC", "STSong", serif;
-  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC",
-    "Hiragino Sans GB", "Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei", sans-serif;
-  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --font-sans: var(--font-hud);
 
-  /* Shape and rhythm. */
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
+  /* HUD type scale in design px at --k = 1 (1920×1080); multiply by --u. */
+  --hud-font-label: 7.8;
+  --hud-font-btn: 9.2;
+  --hud-font-status: 8.4;
+  --hud-font-body: 9.6;
+  --hud-font-title: 30;
+  --hud-track: 0.12em;
+
+  /* HUD scale: --k = clamp(min(W/1920, H/1080), .6, 1.6), set by SceneHost on
+     resize (1 on phones). --kt = max(--k, .8) is the legibility floor the HUD
+     actually lays out with; --u is one HUD design pixel (--kt px). --kb never
+     shrinks below 1 (touch controls and the reading column). */
+  --k: 1;
+  --kt: 1;
+  --u: calc(var(--kt) * 1px);
+  --kb: 1;
+
+  /* Shape and rhythm. HUD elements 0–2px; reading panels 6px. */
+  --radius-hud: 1px;
+  --radius-sm: 2px;
+  --radius-md: 2px;
+  --radius-lg: 6px;
   --hit: 44px; /* minimum touch target */
-  --rail-width: 272px;
-  --panel-width: 380px;
-  --topbar-height: 60px;
+  --reader-width: clamp(340px, calc(400px * var(--kb)), 640px);
 
   /* Motion. */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
   --dur-fast: 140ms;
   --dur-med: 260ms;
+  --dur-hud: 350ms;
   --dur-slow: 600ms;
 }
 
 :root[lang="zh-Hans"] {
-  /* Prefer CJK faces first for Chinese pages so Latin falls back gracefully. */
+  /* Chinese pages: CJK serif first so Latin falls back gracefully. */
   --font-serif: "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC", "STSong", "Iowan Old Style", Georgia, serif;
-  --font-sans: "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei",
-    system-ui, -apple-system, sans-serif;
 }
 
 /* ------------------------------------------------------------------ */
-/* paper (default)                                                     */
+/* paper (standard)                                                    */
 /* ------------------------------------------------------------------ */
 :root,
 :root[data-theme="paper"] {
   color-scheme: light;
 
-  --bg: #f4ecd8;
-  --surface: #fbf6ea;
-  --surface-2: #efe4c9;
-  --surface-sunken: #e9dcbd;
-  --ink: #2b2117;
-  --ink-muted: #65553f;
-  --ink-faint: #8f7e66;
-  --border: #d6c6a2;
-  --border-strong: #b49f76;
-  --focus: #33407a;
-  --overlay: rgba(43, 33, 23, 0.06);
+  /* Ground, panels, ink. */
+  --paper: #e9e4d8;
+  --panel: rgba(241, 237, 228, 0.9);
+  --panel-solid: #f1ede4;
+  --ink: #2a2824;
+  --ink-2: #555047;
+  --ink-3: #857d70;
+  --hair: rgba(42, 40, 36, 0.3);
+  --line: rgba(42, 40, 36, 0.6);
+  --ink-on: #f3eee4; /* text on an ink-filled (.on) button */
 
-  /* Map */
-  --land: #ebdfc1;
-  --land-edge: #c9b48a;
-  --water: #cfe1df;
-  --rivers: #9fc2c4;
+  /* Functional colours. */
+  --cold: #4f7f8c;
+  --hot: #b8602e;
+  --loop: #5e8c86;
+  --neutral: #8a8378;
+  --signal: #cc6328;
+  --xray: #3a9aa0;
+  --cut: #b8973c;
 
-  /* Blocs (TimeScene) */
-  --accent-axis: #a63d2f;
-  --accent-allied: #33407a;
-  --accent-neutral: #8a7b66;
+  /* Legacy names mapped onto the plate palette. */
+  --bg: var(--paper);
+  --surface: var(--panel-solid);
+  --surface-2: #e4dfd2;
+  --surface-sunken: #dfd9cb;
+  --ink-muted: var(--ink-2);
+  --ink-faint: var(--ink-3);
+  --border: var(--hair);
+  --border-strong: var(--line);
+  --focus: var(--signal);
+  --overlay: rgba(42, 40, 36, 0.05);
 
-  /* Generic accents (SpaceScene groups, charts) */
-  --accent-1: #a63d2f;
-  --accent-2: #2f6f8f;
-  --accent-3: #b7832f;
-  --accent-4: #5c7a3a;
+  /* Map: printed on the sheet. */
+  --land: #e1dbcc;
+  --land-edge: var(--hair);
+  --water: #dde2df;
+  --rivers: #c3cfcb;
 
-  /* UI accent: links, current chapter, selection */
-  --accent: #33407a;
-  --accent-ink: #fbf6ea;
-  --accent-soft: rgba(51, 64, 122, 0.12);
+  /* Blocs (TimeScene). */
+  --accent-allied: var(--cold);
+  --accent-axis: var(--hot);
+  --accent-neutral: var(--neutral);
 
-  --success: #3f6b35;
-  --warning: #9a5b12;
-  --warning-soft: rgba(154, 91, 18, 0.12);
+  /* Generic accents (SpaceScene groups, charts): hot / cold / cut / loop. */
+  --accent-1: var(--hot);
+  --accent-2: var(--cold);
+  --accent-3: var(--cut);
+  --accent-4: var(--loop);
 
-  /* Glow: none in paper */
+  /* UI accent: current chapter, selection. */
+  --accent: var(--signal);
+  --accent-ink: var(--ink-on);
+  --accent-soft: rgba(204, 99, 40, 0.1);
+
+  --success: var(--loop);
+  --warning: var(--hot);
+  --warning-soft: rgba(184, 96, 46, 0.1);
+
+  /* Glow: none on paper. */
   --glow: transparent;
   --glow-blur: 0px;
   --glow-strength: 0;
 
-  --shadow: 0 1px 0 rgba(43, 33, 23, 0.06), 0 6px 20px -8px rgba(43, 33, 23, 0.22);
-  --stage-bg: var(--water);
+  /* No heavy card shadows on a plate. */
+  --shadow: 0 1px 0 rgba(42, 40, 36, 0.04);
+  --stage-bg: var(--paper);
+  --grain-opacity: 0.22;
 }
 
 /* ------------------------------------------------------------------ */
-/* cinema                                                              */
+/* cinema = dark plate                                                 */
 /* ------------------------------------------------------------------ */
 :root[data-theme="cinema"] {
   color-scheme: dark;
 
-  --bg: #0e1116;
-  --surface: #151a21;
-  --surface-2: #1c222b;
-  --surface-sunken: #0a0d11;
-  --ink: #e6e6e6;
-  --ink-muted: #a3abb5;
-  --ink-faint: #7a828d;
-  --border: #2a313b;
-  --border-strong: #3b4450;
-  --focus: #3dc6ff;
-  --overlay: rgba(255, 255, 255, 0.04);
+  --paper: #1f2124;
+  --panel: rgba(36, 38, 41, 0.9);
+  --panel-solid: #242629;
+  --ink: #e7e5df;
+  --ink-2: #b9b4a8;
+  --ink-3: #8c877c;
+  --hair: rgba(231, 229, 223, 0.28);
+  --line: rgba(231, 229, 223, 0.55);
+  --ink-on: #1f2124;
 
-  --land: #2a2f36;
-  --land-edge: #3c434d;
-  --water: #0a111c;
-  --rivers: #1f3346;
+  /* Same hues, ~12% lighter. */
+  --cold: #6c9eac;
+  --hot: #d38050;
+  --loop: #7ea9a3;
+  --neutral: #a6a199;
+  --signal: #dd8554;
+  --xray: #56bbc2;
+  --cut: #cdb165;
 
-  --accent-axis: #ff6a3d;
-  --accent-allied: #3dc6ff;
-  --accent-neutral: #8c9096;
+  --bg: var(--paper);
+  --surface: var(--panel-solid);
+  --surface-2: #2b2d31;
+  --surface-sunken: #1a1c1f;
+  --ink-muted: var(--ink-2);
+  --ink-faint: var(--ink-3);
+  --border: var(--hair);
+  --border-strong: var(--line);
+  --focus: var(--signal);
+  --overlay: rgba(231, 229, 223, 0.05);
 
-  --accent-1: #ff6a3d;
-  --accent-2: #3dc6ff;
-  --accent-3: #f5c451;
-  --accent-4: #7fd17a;
+  --land: #2a2c30;
+  --land-edge: var(--hair);
+  --water: #1b1d20;
+  --rivers: #2e3438;
 
-  --accent: #3dc6ff;
-  --accent-ink: #0e1116;
-  --accent-soft: rgba(61, 198, 255, 0.14);
+  --accent-allied: var(--cold);
+  --accent-axis: var(--hot);
+  --accent-neutral: var(--neutral);
 
-  --success: #7fd17a;
-  --warning: #f5c451;
-  --warning-soft: rgba(245, 196, 81, 0.14);
+  --accent-1: var(--hot);
+  --accent-2: var(--cold);
+  --accent-3: var(--cut);
+  --accent-4: var(--loop);
 
-  --glow: rgba(255, 150, 90, 0.65);
-  --glow-blur: 8px;
-  --glow-strength: 1;
+  --accent: var(--signal);
+  --accent-ink: var(--ink-on);
+  --accent-soft: rgba(221, 133, 84, 0.14);
 
-  --shadow: 0 1px 0 rgba(0, 0, 0, 0.4), 0 10px 30px -10px rgba(0, 0, 0, 0.7);
-  --stage-bg: var(--water);
+  --success: var(--loop);
+  --warning: var(--hot);
+  --warning-soft: rgba(211, 128, 80, 0.14);
+
+  /* Faint glow: arrow heads and pulses only. */
+  --glow: rgba(204, 99, 40, 0.35);
+  --glow-blur: 6px;
+  --glow-strength: 0.35;
+
+  --shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+  --stage-bg: var(--paper);
+  --grain-opacity: 0;
 }

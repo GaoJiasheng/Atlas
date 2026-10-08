@@ -31,6 +31,19 @@ export function applyTheme(theme: Theme): void {
 
 /** Token names engines can read. Keep in sync with tokens.css. */
 export const TOKEN_NAMES = [
+  'paper',
+  'panel',
+  'ink-2',
+  'ink-3',
+  'hair',
+  'line',
+  'cold',
+  'hot',
+  'loop',
+  'neutral',
+  'signal',
+  'xray',
+  'cut',
   'bg',
   'surface',
   'surface-2',

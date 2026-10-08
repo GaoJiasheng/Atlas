@@ -19,9 +19,21 @@ export interface InfoPanelProps {
   onNext(): void;
   /** Quiz, inspector slot, engine details. */
   children?: ReactNode;
+  /**
+   * Bottom-sheet state on narrow layouts (< 1024px): collapsed shows the
+   * header and chapter buttons only. Ignored by the docked column.
+   */
+  expanded?: boolean;
+  onToggleExpanded?(): void;
 }
 
-/** Right-hand panel: chapter title, body, quiz, selected-object details. */
+const pad2 = (n: number) => String(n).padStart(2, '0');
+
+/**
+ * Reading panel: chapter header (HUD grammar), child-facing body (serif),
+ * quiz and selected-object details, chapter buttons. A docked column on wide
+ * layouts, a bottom sheet below 1024px.
+ */
 export function InfoPanel({
   chapter,
   index,
@@ -34,61 +46,83 @@ export function InfoPanel({
   onPrev,
   onNext,
   children,
+  expanded = false,
+  onToggleExpanded,
 }: InfoPanelProps) {
   return (
-    <section className="atlas-panel" aria-labelledby="atlas-panel-title" aria-live="polite">
-      <div className="atlas-panel__scroll">
-        {chapter ? (
-          <>
-            <header className="atlas-panel__header">
-              <p className="atlas-panel__eyebrow">
-                {t(locale, 'chapter.position', { n: index + 1, total })}
-                <span className="atlas-badge">{t(locale, 'chapter.level', { level: chapter.level })}</span>
-              </p>
-              <h2 id="atlas-panel-title" className="atlas-panel__title">
-                {tx(chapter.title, locale)}
-              </h2>
-              {chapter.sensitive && (
-                <p className="atlas-panel__notice atlas-panel__notice--guarded">
-                  <Icon name="shield" size={16} />
-                  <span>
-                    <strong>{t(locale, 'chapter.guarded')}.</strong> {t(locale, 'chapter.guardedHint')}
-                  </span>
-                </p>
-              )}
-              {tooYoung && (
-                <p className="atlas-panel__notice">
-                  <Icon name="lock" size={16} />
-                  <span>{t(locale, 'chapter.tooYoungHint')}</span>
-                </p>
-              )}
-            </header>
-            {body && <div className="atlas-prose">{body}</div>}
-          </>
-        ) : null}
+    <section
+      className="atlas-panel"
+      data-expanded={expanded}
+      aria-labelledby="atlas-panel-title"
+    >
+      {chapter && (
+        <header className="atlas-panel__header">
+          <p className="atlas-panel__eyebrow">
+            <span>
+              {pad2(index + 1)} / {pad2(total)}
+            </span>
+            <span>{t(locale, 'chapter.level', { level: chapter.level })}</span>
+            {chapter.sensitive && (
+              <span className="atlas-panel__guard">
+                <Icon name="lock" size={11} /> {t(locale, 'chapter.guarded')}
+              </span>
+            )}
+          </p>
+          <h2 id="atlas-panel-title" className="atlas-panel__title" aria-live="polite">
+            {tx(chapter.title, locale)}
+          </h2>
+          {onToggleExpanded && (
+            <button
+              type="button"
+              className="atlas-panel__toggle hud-btn"
+              aria-expanded={expanded}
+              aria-controls="atlas-panel-scroll"
+              onClick={onToggleExpanded}
+            >
+              {expanded ? t(locale, 'hud.collapse') : t(locale, 'hud.read')}
+            </button>
+          )}
+        </header>
+      )}
+      <div id="atlas-panel-scroll" className="atlas-panel__scroll">
+        {chapter && chapter.sensitive && (
+          <p className="atlas-panel__notice atlas-panel__notice--guarded">
+            <Icon name="shield" size={16} />
+            <span>
+              <strong>{t(locale, 'chapter.guarded')}.</strong> {t(locale, 'chapter.guardedHint')}
+            </span>
+          </p>
+        )}
+        {chapter && tooYoung && (
+          <p className="atlas-panel__notice">
+            <Icon name="lock" size={16} />
+            <span>{t(locale, 'chapter.tooYoungHint')}</span>
+          </p>
+        )}
+        {chapter && body && <div className="atlas-prose">{body}</div>}
         {children}
       </div>
       <footer className="atlas-panel__footer">
         <button
           type="button"
-          className="atlas-control"
+          className="atlas-control atlas-panel__prev"
           aria-label={t(locale, 'chapter.prev')}
           onClick={onPrev}
           disabled={!hasPrev}
         >
-          <Icon name="chevron-left" />
-          <span>{t(locale, 'chapter.prevShort')}</span>
+          <Icon name="chevron-left" size={18} />
+          <span className="atlas-control__label">{t(locale, 'chapter.prevShort')}</span>
         </button>
         <button
           type="button"
-          className="atlas-control"
+          className="atlas-control atlas-panel__next"
           data-active="true"
           aria-label={t(locale, 'chapter.next')}
           onClick={onNext}
           disabled={!hasNext}
         >
-          <span>{t(locale, 'chapter.nextShort')}</span>
-          <Icon name="chevron-right" />
+          <span className="atlas-control__label">{t(locale, 'chapter.nextShort')}</span>
+          <Icon name="chevron-right" size={18} />
         </button>
       </footer>
     </section>

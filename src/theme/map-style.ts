@@ -41,10 +41,10 @@ function num(value: string | undefined, fallback: number): number {
 
 /** Fallbacks match the paper theme so a style can be built without a DOM. */
 const FALLBACK: Pick<ThemeTokens, 'land' | 'land-edge' | 'water' | 'rivers' | 'glow' | 'glow-blur' | 'glow-strength'> = {
-  land: '#ebdfc1',
-  'land-edge': '#c9b48a',
-  water: '#cfe1df',
-  rivers: '#9fc2c4',
+  land: '#e1dbcc',
+  'land-edge': 'rgba(42, 40, 36, 0.3)',
+  water: '#dde2df',
+  rivers: '#c3cfcb',
   glow: 'transparent',
   'glow-blur': '0px',
   'glow-strength': '0',

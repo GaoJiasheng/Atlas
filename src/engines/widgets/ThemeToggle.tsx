@@ -13,8 +13,29 @@ const OPTIONS: { value: Theme | null; key: UiKey; icon: IconName }[] = [
  * Global look override: Auto (topic / chapter decides), Paper, Cinema.
  * Stored per device; applied by the host's theme effect.
  */
-export function ThemeToggle({ locale }: { locale: Locale }) {
+export function ThemeToggle({ locale, variant = 'site' }: { locale: Locale; variant?: 'site' | 'hud' }) {
   const [override, setOverride] = useThemeOverride();
+  if (variant === 'hud') {
+    return (
+      <div role="radiogroup" aria-label={t(locale, 'theme.label')} className="hud-group">
+        <span className="hud-group__label" aria-hidden="true">
+          {t(locale, 'hud.theme')}
+        </span>
+        {OPTIONS.map((opt) => (
+          <button
+            key={opt.key}
+            type="button"
+            role="radio"
+            aria-checked={override === opt.value}
+            className={override === opt.value ? 'hud-btn on' : 'hud-btn'}
+            onClick={() => setOverride(opt.value)}
+          >
+            {t(locale, opt.key)}
+          </button>
+        ))}
+      </div>
+    );
+  }
   return (
     <div role="radiogroup" aria-label={t(locale, 'theme.label')} className="atlas-segmented">
       {OPTIONS.map((opt) => (
