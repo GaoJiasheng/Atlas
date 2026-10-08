@@ -39,15 +39,15 @@
 |---|---|---|---|---|---|---|
 | 01 | asia-1937 | Asia fights first / 亚洲先打起来了 | 1937-12-13 | 115, 32, 3.6 | marco-polo-bridge, shanghai-1937, nanjing | K1 1937-07-07, K2 1938-10-27 |
 | 02 | world-1939 | The world before the war / 开战前的世界 | 1939-08-31 | 20, 20, 1.5 | — | K2 |
-| 03 | poland | Poland: the war begins / 波兰：战争开始 | 1939-09-17 | 21, 52, 4.2 | invasion-poland, soviet-poland | K3 1939-10-06 |
+| 03 | poland-1939 | Poland: the war begins / 波兰：战争开始 | 1939-09-17 | 21, 52, 4.2 | invasion-poland, soviet-poland | K3 1939-10-06 |
 | 04 | blitzkrieg | Blitzkrieg: France falls / 闪电战：法国沦陷 | 1940-06-22 | 3, 49, 4.4 | sickle-cut, dunkirk, paris-falls, battle-of-britain | K4 1940-07-01 |
 | 05 | barbarossa | Barbarossa: turning east / 巴巴罗萨：转向东方 | 1941-10-02 | 32, 53, 3.8 | barbarossa-n, barbarossa-c, barbarossa-s, leningrad-siege | K5 1941-12-05 |
-| 06 | pearl-harbor | Pearl Harbor / 珍珠港 | 1941-12-07 | -160, 25, 2.6 | kido-butai, pearl-harbor | K5 |
-| 07 | fall-of-singapore | Malaya and Singapore / 马来亚与新加坡 | 1942-02-15 | 103.0, 3.0, 5.6 → 103.8, 1.35, 10 | kota-bharu, force-z, slim-river, johor-crossing, bukit-timah, surrender-ford | K6 1942-03-09 |
-| 08 | syonan | Syonan: Singapore under Japan / 昭南岛：日据下的新加坡 | 1943-10-10 | 103.82, 1.33, 11 | sook-ching, death-railway, double-tenth | K6 |
-| 09 | turning-points | The tide turns / 转折 | 1943-02-02 | 40, 25, 2.2 | midway, stalingrad, el-alamein, guadalcanal | K7 1942-11-08, K8 1943-07-12 |
+| 06 | pearl-harbor-1941 | Pearl Harbor / 珍珠港 | 1941-12-07 | -160, 25, 2.6 | kido-butai, pearl-harbor | K5 |
+| 07 | fall-of-singapore | Malaya and Singapore / 马来亚与新加坡 | 1942-02-15 | 103.0, 3.0, 5.6 → 103.8, 1.36, 10 | kota-bharu, force-z, slim-river, johor-crossing, bukit-timah, surrender-ford | K6 1942-03-09 |
+| 08 | syonan | Syonan: Singapore under Japan / 昭南岛：日据下的新加坡 | 1943-10-10 | 103.85, 1.36, 10 | sook-ching, death-railway, double-tenth | K6 |
+| 09 | turning-points | The tide turns / 转折 | 1943-02-02 | 100, 22, 1.4 | midway, stalingrad, el-alamein, guadalcanal | K7 1942-11-08, K8 1943-07-12 |
 | 10 | liberation | The Allies advance / 反攻 | 1945-05-08 | 15, 50, 3.6 | d-day, bagration, auschwitz-liberated, berlin | K9 1944-06-05, K10 1944-12-16, K11 1945-05-08 |
-| 11 | end-and-home | The end, and coming home / 结束与回家 | 1945-09-12 | 125, 20, 2.8 → 103.85, 1.29, 12 | hiroshima, nagasaki, manchuria-1945, tokyo-bay, singapore-ceremony | K12 1945-09-02 |
+| 11 | end-and-home | The end, and coming home / 结束与回家 | 1945-09-12 | 125, 20, 2.8 → 103.8, 1.36, 10 | hiroshima, nagasaki, manchuria-1945, tokyo-bay, singapore-ceremony | K12 1945-09-02 |
 
 第 7 章和第 11 章有两个镜头：章节 `camera` 用第一个，正文里放一个"看近一点"按钮触发第二个（引擎已有 `applyCameraPreset`，内容层用 MDX 组件 `<FlyTo preset="singapore-island">`，需新增，见 §8）。
 
@@ -99,38 +99,9 @@
 
 ## 4. 数据清单
 
-### 4.1 参与者 entities.json（28）
+### 4.1 参与者 entities.json（34）
 
-| id | bloc | joined | left | 备注 |
-|---|---|---|---|---|
-| germany | axis | 1939-09-01 | 1945-05-08 | |
-| italy | axis | 1940-06-10 | 1943-09-08 | 1943-10-13 对德宣战，换阵营：用第二条 `italy-cobelligerent` allied 1943-10-13 |
-| japan | axis | 1937-07-07 | 1945-09-02 | |
-| hungary | axis | 1941-04-11 | 1945-01-20 | |
-| romania | axis | 1941-06-22 | 1944-08-23 | 之后转同盟，同上法处理 |
-| bulgaria | axis | 1941-03-01 | 1944-09-08 | |
-| finland | axis | 1941-06-25 | 1944-09-19 | 继续战争，标注"与德国并肩但非轴心成员" |
-| thailand | axis | 1942-01-25 | 1945-08-16 | |
-| manchukuo | axis | 1937-07-07 | 1945-08-20 | 傀儡 |
-| vichy-france | neutral | 1940-07-10 | 1942-11-11 | 标注"合作政权" |
-| uk | allied | 1939-09-03 | 1945-09-02 | 含殖民地：马来亚、新加坡、缅甸、印度（地图上同色） |
-| france | allied | 1939-09-03 | 1940-06-22 | 自由法国 `free-france` allied 1940-06-18 起 |
-| poland | allied | 1939-09-01 | 1945-09-02 | |
-| china | allied | 1937-07-07 | 1945-09-02 | |
-| ussr | allied | 1941-06-22 | 1945-09-02 | 1939-09-17 至 1941-06-21 标 neutral（与德国瓜分波兰） |
-| usa | allied | 1941-12-08 | 1945-09-02 | |
-| australia | allied | 1939-09-03 | 1945-09-02 | |
-| canada | allied | 1939-09-10 | 1945-09-02 | |
-| new-zealand | allied | 1939-09-03 | 1945-09-02 | |
-| india | allied | 1939-09-03 | 1945-09-02 | 英属印度 |
-| netherlands | allied | 1940-05-10 | 1945-09-02 | 含荷属东印度 |
-| belgium | allied | 1940-05-10 | 1945-09-02 | |
-| norway | allied | 1940-04-09 | 1945-09-02 | |
-| greece | allied | 1940-10-28 | 1945-09-02 | |
-| yugoslavia | allied | 1941-04-06 | 1945-09-02 | |
-| philippines | allied | 1941-12-08 | 1945-09-02 | 美属 |
-| brazil | allied | 1942-08-22 | 1945-09-02 | |
-| switzerland, sweden, spain, portugal, turkey, ireland | neutral | — | — | 合并为 6 条 neutral |
+中立国 6 条已实现（switzerland, sweden, spain, portugal, turkey, ireland）；轴心与同盟方使用动态 bloc 数组支持换阵营（italy 1943-10-13 切换、romania 1944-08-23 切换、bulgaria 1944-09-08 切换）。
 
 ### 4.2 控制区关键帧 control.json（12）
 
@@ -149,45 +120,25 @@
 | K11 | 1945-05-08 | 欧战结束：盟军与苏军占领线；日本：硫磺岛失守，冲绳战役中，缅甸仰光收复（05-03） |
 | K12 | 1945-09-02 | 日本投降：满洲、朝鲜北部苏军；各占领区归还；新加坡英军返回（09-05 登陆） |
 
-### 4.3 事件 events.json（42）
+### 4.3 事件 events.json（78）
 
-格式：`id · t（until）· 地点 · kind · importance · 一句话`。伤亡与兵力字段按 §1 规则填写，来源编号在 `detail` 末尾。
+已实现 78 个事件，包括战役、轰炸、大屠杀、亚洲和欧洲各战区。格式：`id · t（until）· 地点 · kind`。
 
-**亚洲 1937–38**：mukden-1931 (1931-09-18, 沈阳, political, 2) · marco-polo-bridge (1937-07-07, 北京西南, battle, 3) · shanghai-1937 (1937-08-13→11-26, 上海, battle, 3) · nanjing (1937-12-13→1938-01, 南京, massacre, 3) · wuhan-1938 (1938-06-11→10-27, 武汉, battle, 2)
-**欧洲 1939–41**：munich-1938 (1938-09-30, 慕尼黑, political, 2) · molotov-ribbentrop (1939-08-23, 莫斯科, political, 2) · invasion-poland (1939-09-01→10-06, 华沙, battle, 3) · soviet-poland (1939-09-17, 布列斯特, battle, 2) · katyn (1940-04→05, 卡廷, massacre, 2) · norway-1940 (1940-04-09→06-10, 纳尔维克, battle, 2) · sickle-cut (1940-05-10→05-20, 色当, battle, 3) · dunkirk (1940-05-26→06-04, 敦刻尔克, evacuation, 3) · paris-falls (1940-06-14, 巴黎, surrender, 2) · battle-of-britain (1940-07-10→10-31, 伦敦, bombing, 3) · barbarossa-start (1941-06-22, 布列斯特, battle, 3) · kiev-1941 (1941-08-23→09-26, 基辅, battle, 2) · leningrad-siege (1941-09-08→1944-01-27, 列宁格勒, siege, 3) · moscow-1941 (1941-10-02→1942-01-07, 莫斯科, battle, 3)
-**太平洋与东南亚 1941–42**：pearl-harbor (1941-12-07, 瓦胡岛, bombing, 3) · japanese-internment (1942-02-19, 美国西岸, political, 2) · bataan (1942-01-07→04-09, 巴丹, battle, 2) · kota-bharu (1941-12-08, 哥打巴鲁, landing, 3) · force-z (1941-12-10, 关丹外海, battle, 2) · hong-kong-1941 (1941-12-08→12-25, 香港, battle, 2) · slim-river (1942-01-07, 仕林河, battle, 1) · johor-crossing (1942-02-08, 林厝港, landing, 3) · bukit-timah (1942-02-10→02-11, 武吉知马, battle, 2) · bukit-chandu (1942-02-14, 鸦片山, battle, 1) · alexandra-hospital (1942-02-14, 亚历山大医院, massacre, 2) · surrender-ford (1942-02-15, 福特车厂, surrender, 3) · sook-ching (1942-02-18→03-04, 樟宜海滩等, massacre, 3) · java-1942 (1942-03-09, 万隆, surrender, 1)
-**日据新加坡**（kind: site，静态点位，第 8 章图层 `sites`）：site-ford-factory · site-changi-prison · site-kempeitai-ymca · site-changi-beach · site-punggol-beach · site-alexandra-hospital · site-municipal-building
-**转折与反攻**：midway (1942-06-04→06-07, 中途岛, battle, 3) · stalingrad (1942-08-23→1943-02-02, 斯大林格勒, battle, 3) · el-alamein (1942-10-23→11-11, 阿拉曼, battle, 2) · guadalcanal (1942-08-07→1943-02-09, 瓜岛, battle, 2) · kursk (1943-07-05→08-23, 库尔斯克, battle, 2) · double-tenth (1943-10-10, 新加坡, political, 2) · death-railway (1942-10→1943-10, 桂河, atrocity, 3) · imphal-kohima (1944-03-08→07-03, 英帕尔, battle, 2) · d-day (1944-06-06, 诺曼底, landing, 3) · bagration (1944-06-22→08-19, 明斯克, battle, 3) · warsaw-uprising (1944-08-01→10-02, 华沙, battle, 2) · bulge (1944-12-16→1945-01-25, 阿登, battle, 2) · auschwitz-liberated (1945-01-27, 奥斯威辛, liberation, 3) · berlin (1945-04-16→05-02, 柏林, battle, 3) · dresden (1945-02-13→02-15, 德累斯顿, bombing, 2) · tokyo-firebombing (1945-03-09→03-10, 东京, bombing, 3) · ve-day (1945-05-08, 柏林/伦敦, political, 3) · okinawa (1945-04-01→06-22, 冲绳, battle, 2) · hiroshima (1945-08-06, 广岛, bombing, 3) · manchuria-1945 (1945-08-09→08-20, 哈尔滨, battle, 2) · nagasaki (1945-08-09, 长崎, bombing, 3) · vj-day (1945-08-15, 东京, political, 3) · tokyo-bay (1945-09-02, 东京湾, surrender, 3) · singapore-ceremony (1945-09-12, 新加坡市政厅, surrender, 3)
+**1931–1938 亚洲**（5）：mukden-1931 · marco-polo-bridge · shanghai-1937 · nanjing · wuhan-1938 · singapore-naval-base · anschluss
 
-事件 kind 需要在 schema 里**新增**：`massacre`、`siege`、`evacuation`、`liberation`、`atrocity`、`site`（见 §8）。
+**1939–1941 欧洲**（14）：munich-1938 · molotov-ribbentrop · invasion-poland · soviet-poland · katyn · norway-1940 · sickle-cut · dunkirk · paris-falls · compiegne-1940 · battle-of-britain · barbarossa-start · oil-embargo · kiev-1941 · babi-yar · leningrad-siege · moscow-1941
 
-### 4.4 行军 / 航线 movements.json（24）
+**1941–1942 太平洋与东南亚**（14）：pearl-harbor · kota-bharu · hong-kong-1941 · singapore-air-raid-1941 · clark-field · us-declares-war · japanese-internment · bataan · force-z · slim-river · johor-crossing · bukit-timah · bukit-chandu · alexandra-hospital · surrender-ford · sook-ching · sook-ching-trial-1947
 
-| id | from → to | holder | kind | strength | 路径描述（施工时按真实路线数字化） |
-|---|---|---|---|---|---|
-| japan-north-china | 1937-07-07 → 1937-12 | japan | land | 300000 | 北平 → 太原 / 济南 |
-| japan-shanghai-nanjing | 1937-08-13 → 1937-12-13 | japan | land | 200000 | 上海 → 苏州 → 南京 |
-| japan-wuhan | 1938-06 → 1938-10-27 | japan | land | 350000 | 南京 → 九江 → 武汉 |
-| germany-poland | 1939-09-01 → 1939-09-28 | germany | land | 1500000 | 西里西亚 / 东普鲁士 → 华沙（两路） |
-| ussr-poland | 1939-09-17 → 1939-09-28 | ussr | land | 500000 | 明斯克 → 布列斯特 |
-| germany-norway | 1940-04-09 → 1940-06-10 | germany | sea | 100000 | 基尔 → 奥斯陆 / 纳尔维克 |
-| sickle-cut | 1940-05-10 → 1940-05-24 | germany | land | 1000000 | 阿登 → 色当 → 阿布维尔 |
-| dunkirk-evac | 1940-05-26 → 1940-06-04 | uk | sea | 338000 | 敦刻尔克 → 多佛 |
-| barbarossa-n / -c / -s | 1941-06-22 → 1941-12-05 | germany | land | 3000000（三路分配） | 列宁格勒 / 莫斯科 / 基辅—罗斯托夫 |
-| kido-butai | 1941-11-26 → 1941-12-07 | japan | sea | 30000 | 单冠湾 → 北太平洋 → 瓦胡岛北 |
-| japan-malaya | 1941-12-08 → 1942-02-15 | japan | land | 36000 | 宋卡 / 哥打巴鲁 → 吉隆坡 → 新山 → 新加坡 |
-| japan-philippines | 1941-12-22 → 1942-05-06 | japan | sea | 43000 | 台湾 → 林加延湾 → 马尼拉 |
-| japan-dei | 1942-01-11 → 1942-03-09 | japan | sea | 55000 | 婆罗洲 → 爪哇 |
-| japan-burma | 1942-01-15 → 1942-05 | japan | land | 35000 | 泰国 → 仰光 → 曼德勒 |
-| midway-japan / midway-us | 1942-05-27 → 1942-06-07 | japan / usa | sea | — | 两支舰队航线 |
-| torch | 1942-11-08 → 1942-11-11 | usa | sea | 107000 | 大西洋 → 卡萨布兰卡 / 奥兰 / 阿尔及尔 |
-| uranus | 1942-11-19 → 1942-11-23 | ussr | land | 1100000 | 斯大林格勒南北合围 |
-| sicily-italy | 1943-07-10 → 1944-06-04 | uk | sea | 160000 | 西西里 → 萨勒诺 → 罗马 |
-| overlord | 1944-06-06 → 1944-08-25 | usa | sea | 156000 | 朴茨茅斯 → 诺曼底 → 巴黎 |
-| bagration-berlin | 1944-06-22 → 1945-05-02 | ussr | land | 2400000 | 明斯克 → 华沙 → 柏林 |
-| burma-return | 1944-07 → 1945-05-03 | uk | land | 300000 | 英帕尔 → 曼德勒 → 仰光 |
-| manchuria-1945 | 1945-08-09 → 1945-08-20 | ussr | land | 1500000 | 三路入满洲 |
-| tiderace | 1945-09-02 → 1945-09-12 | uk | sea | 60000 | 仰光 / 锡兰 → 新加坡 |
+**日据新加坡静态点位**（7 sites）：site-ford-factory · site-changi-prison · site-kempeitai-ymca · site-changi-beach · site-punggol-beach · site-alexandra-hospital · site-municipal-building
+
+**1942–1945 转折与反攻**（38）：midway · guadalcanal · el-alamein · stalingrad · kursk · changde-1943 · tunisia-1943 · death-railway · double-tenth · leyte · iwo-jima · imphal-kohima · d-day · bagration · warsaw-uprising · bulge · auschwitz-liberated · berlin · dresden · tokyo-firebombing · ve-day · okinawa · hiroshima · nagasaki · manchuria-1945 · tokyo-bay · singapore-ceremony · vj-day · torch-landings · paris-liberated
+
+Schema 已新增 kind：`massacre`、`siege`、`evacuation`、`liberation`、`atrocity`、`site`；部分事件支持 `detail: Bilingual` 与 `sources: string[]`。
+
+### 4.4 行军 / 航线 movements.json（31）
+
+已实现 31 条路线。亚洲：japan-north-china · japan-shanghai-nanjing · japan-wuhan · japan-malaya · japan-malaya-patani · japan-malaya-east · kido-butai · japan-philippines · japan-burma（含 DEI 群岛与仰光）；欧洲初期：germany-poland-n · germany-poland-s · germany-norway · sickle-cut-route · dunkirk-evac · ussr-poland；东线：barbarossa-n · barbarossa-c · barbarossa-s · manchuria-transbaikal · manchuria-north · manchuria-east；转折与反攻：torch · torch-west · uranus · uranus-south · sicily-italy · overlord · bagration-berlin · burma-return · tiderace · midway-japan · midway-us。
 
 ### 4.5 规格表（HUD 左上）
 
@@ -266,6 +217,31 @@ check.ts            # 对每帧渲染截图，与来源地图并排输出 docs/s
 | 7 | 整体打磨：按 skill `rounds.md` R2（几何 / 路线准确）→ R4（动画：箭头节奏、脉冲）→ R9（事实审计、死代码） | Sonnet | `status: published` |
 
 每步完成提交一次。第 3 步做完先给 Gavin 看，再铺后面。
+
+## 11. 实现记录
+
+| 步骤 | 提交 | 内容 |
+|---|---|---|
+| 1 | 81efd71 | 引擎 schema 扩展（event kind、bloc 数组、MDX 组件） |
+| 2 | dd3d64f | K1/K6 地图管线与国界底图 |
+| 3 | 4693dbb | TopoJSON 简化与控制区合并 |
+| 4 | d71b479 | 国际日期线与数据持久化（stale-while-revalidate） |
+| 5 | b1cd1ce | 模板章：第 1、7 章正文（EN/ZH）+ 细看块 + 事件 + 行军 + 来源 |
+| 6 | e09eb62 | 第 2–6 章（欧洲开战、闪电战、巴巴罗萨、珍珠港）|
+| 7 | aa67735 | K2–K12 关键帧 + 10m 东南亚精度底图 + 路线地理参考 |
+| 8 | 06ebe50 | 运行时数据加载（dist/topics/ww2/data.json）|
+| 9 | fc2434a | 第 8–11 章（昭南、转折、反攻、结束） + 78 个事件 + 31 条路线 |
+
+## 已知差距（v1 计划外或源验证待补）
+
+- 意大利在法国南部的占领区未单独分离（显示为 vichy-france）
+- 西西里登陆、英帕尔突出部、托卜鲁克/埃及前线未显示为地图范围内的独立战线
+- K10 布达佩斯显示为苏联占领（实际 1944-12 时尚在交战）
+- 4 条行军缺乏有效的兵力强度验证（中途岛两舰队、火炬登陆强度、铁路用图标代替具体数字）
+- Uranus 行动分支近似化（南北合围路线按历史描述简化）
+- Torch 计划兵力与实际登陆数据有争议
+- Uranus 与 Tiderace 缺乏地形制图（无公开 PD 源地图）
+- 数十条支线/分支路线（如马来亚的三路登陆、满洲三路进攻）因精度或源限制未全部数字化
 
 ## 10. 待 Gavin 确认的小点
 
