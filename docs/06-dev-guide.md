@@ -323,7 +323,7 @@ timeline/Timeline.tsx      工程标尺时间轴（渲染进 bottomBar 插槽）
 timeline/usePlayback.ts    播放循环（全程约 60 s @×1，遇章节节点停 1.5 s）
 hud/HudPanels.tsx          card 条带图、panel01 时间标尺、panel02 问题/概述、panel03 状态、perf 读数
 EventInspector.tsx         点事件 → inspector 插槽（Counter / 双方 CounterVersus；细看折叠块；来源上标；sensitive 事件的伤亡仅家长模式）
-lib/time.ts lib/format.ts lib/geo.ts lib/model.ts lib/frame.ts lib/playhead.ts lib/ticks.ts lib/stats.ts lib/bloc.ts   纯函数，单测在 tests/time-scene/
+lib/time.ts lib/format.ts lib/geo.ts lib/model.ts lib/frame.ts lib/playhead.ts lib/ticks.ts lib/stats.ts lib/bloc.ts lib/control.ts lib/bandRows.ts   纯函数，单测在 tests/time-scene/
 colors.ts  time-scene.css
 ```
 
@@ -334,7 +334,7 @@ colors.ts  time-scene.css
 | 文件 | 要点 |
 |---|---|
 | `entities.json` | `id, name, bloc, joined, left?, color?`。`bloc` 是 `axis/allied/neutral` 之一，或**换阵营**时按时间排的数组 `[{ "bloc": "axis", "from": "1940-06-10", "to": "1943-10-13" }, { "bloc": "allied", "from": "1943-10-13" }]`（`[from, to)`，只有最后一段可省 `to`，段不能重叠；第一段之前按第一段算，空档里按刚结束的那段算，`blocAt(entity, t)` 在 `lib/bloc.ts`）。颜色默认取 `t` 时所在阵营的 token：地图控制区、participation、地名、实体引线说明、右上卡的面积带都跟 `t` 走，卡上的参与线按段分色；行动和事件用它们开始时的阵营色；图例对换阵营的实体每个阵营列一行。`color: "token:accent-3"` 或 `#hex` 覆盖（不随阵营变）。`joined` 驱动 participation 图层"点亮"和右上卡的参与线。 |
-| `control.json` | `keyframes[]`，按时间严格升序；每帧一个 FeatureCollection，`properties.holder` = 实体 id。同一实体可有多个面（或 MultiPolygon）。面积（右上卡）在客户端按球面公式算，不用写。 |
+| `control.json` | `keyframes[]`，按时间严格升序，`properties.holder` = 实体 id，同一实体可有多个面（或 MultiPolygon）。**两种写法任选**：① GeoJSON：`{ "keyframes": [{ "t", "features": FeatureCollection }] }`（小主题、手写，如 sample-time）；② TopoJSON：`{ "topology": Topology, "keyframes": [{ "t", "object": "<topology.objects 里的名字>" }] }`——所有关键帧共用一份拓扑（不变的海岸、边界只存一次，量化 + 差分编码），大主题（ww2 的 12 帧）用它。拓扑只做宽松校验（`type: "Topology"`、`arcs` 数组、`objects` 记录、`transform` 可选），解码后每个要素按普通控制区要素再校验（`holder` 存在于 entities、环闭合、经纬度范围）。引擎在建 `TimeModel` 时用 `topojson-client` 的 `feature()` 把每帧解成 FeatureCollection（`lib/control.ts` 的 `decodeControl`，顺手把环改回 RFC 7946 绕向，MapLibre 靠绕向分外环和洞），之后的帧、面积、渲染全都不知道有两种写法。ww2 的 `control.json` 由管线生成（见「WW2 geo pipeline」），不手写。面积（右上卡）在客户端按球面公式算，不用写。 |
 | `movements.json` | `from/to` 时间区间 + LineString `path`（从起点画到终点）。`strength` 决定线宽（1–3 px，相对全主题最大值）。 |
 | `events.json` | `t`、可选 `until`、`at`、`kind`、`importance`（**3 最重要 = 点最大**，1 最小）、`sides/forces/casualties/result`。`kind`：`battle`、`landing`（这两种必须有 `sides` + `result`）、`bombing`（必须有 `sides`）、`surrender`、`political`、`massacre`、`siege`、`evacuation`、`liberation`、`atrocity`、`site`（新增六种的 `sides`/`result` 都可选）。可选 `detail: { en, zh }`（inspector 里默认收起的"细看 / More"）与 `sources: ["S1", "S7"]`（`sources.json` 的编号，inspector 摘要后显示 mono 上标，点开来源弹层）。`sensitive: true` 的事件伤亡数字只在家长模式显示。 |
 | `presets.json`（可选） | `{ "presets": [{ "id": "singapore-island", "label": { "en": "Singapore", "zh": "新加坡" }, "camera": { "center": [103.82, 1.35], "zoom": 9.2 } }] }`。注册成镜头预设，排在 `world` / `theatre` 之后（数字键接着编号，1–9 之外只有按钮）；`label` 是按钮文字（一两个词）；正文 `<FlyTo preset>` 用这些 id。 |
@@ -402,7 +402,7 @@ colors.ts  time-scene.css
 - **REFERENCE（R）**：版图对照用"叠加"实现（不分屏）：当前主导关键帧照常，相邻关键帧（前一帧；当前是第一帧时取后一帧）的边界以墨色虚线叠上，2 s 淡入（`instant` 时直接到位）；暂停播放，舞台顶部横幅写"实线 K2 … · 虚线 K1 …"。再按恢复，之前在播放就继续播放。少于两个关键帧时禁用；演示中禁用。
 - **PRESENTATION（P）**：隐藏 HUD（宿主 `hud = false`），只在舞台上留主题标题和底部章节字幕（编号 · 章名 · 日期）；按顺序走所有未锁定章节，每章 = 镜头飞行 2.2 s + 停 1.5 s，走完自动退出并恢复 HUD。P / ESC / H / "显示界面"都会结束演示（HUD 一恢复就结束）。
 - 插槽内容（`hud/HudPanels.tsx`，SVG 按面板实际像素画，字号走 `--u`）：
-  - `card` PARTICIPATION AND AREA：每个实体一条带——参与线（joined → left，起点小空心圆），关键帧间线性插值的近似控制面积（球面面积，斜线 + 淡底），行首写 EN 名 / 中文 / 当前 `≈面积 KM²`；当前章节窗口淡 signal 底，`t` 一条 signal 竖线，底部自适应刻度。
+  - `card` PARTICIPATION AND AREA：每个实体一条带——参与线（joined → left，起点小空心圆），关键帧间线性插值的近似控制面积（球面面积，斜线 + 淡底），行首写 EN 名 / 中文 / 当前 `≈面积 KM²`；当前章节窗口淡 signal 底，`t` 一条 signal 竖线，底部自适应刻度。**行数规则**（`lib/bandRows.ts` 的 `planBandRows`，有单测）：每行至少 25 设计 px（EN 名 + 中文两行不互相压）；全部放得下就按数据顺序全画（实体再多也画）；放不下就最多画 12 行（还要给"其余"那一行留 15 px，所以小卡片只有 4–6 行），挑法是 ①有控制区面积的实体在前，按各关键帧的最大面积从大到小，②其余按 `joined` 从早到晚，同值按数据顺序；剩下的合并成一行弱色小字 `+N OTHERS / 另 N 方`（贴在时间轴上方）。画出的行保持阵营分色（参与线按段分色，面积带按 `t` 时阵营）。已验证：ww2（34 个实体）在 1920×1080 / 1280×720 / 2560×1440 下 EN 与中文标签、行与行之间没有重叠；`pnpm shoot <topic> --layout` 只查面板之间的重叠，卡片内部标签要另量（量 `.ts-card text` 的包围盒）。
   - `panel01` TIMELINE：整段时间的小标尺 + 章节编号圆 + 三条泳道：KEYFRAMES（菱形 K1…）、MOVEMENTS（起止条，重叠自动分行）、EVENTS（点 + 进行窗口），当前章节窗口与 `t` 竖线同上。
   - `panel02` QUESTION：章节编号 + 章名，`state.question`（衬线），`state.answer` 在下方。没有问题时面板标题换成 SUMMARY / 概述，显示 `state.summary`；没有 summary 就取本章正文（当前语言）第一段（跳过 `<More>` 折叠块、家长模式版 `<Full>` 和来源上标，最多三行）；正文为空时退回本章高亮事件的摘要，再没有就是主题副标题。
   - `panel03` STATE：TIME、PARTICIPANTS（已加入 / 总数）、ACTIVE BATTLES（battle/landing/bombing/siege 且在窗口内）、ACTIVE MOVEMENTS、CONTROL KEYFRAME（K1 → K2 · 37% + 小进度条）。都是数据统计，不标 SIM。
@@ -600,11 +600,13 @@ pnpm tsx scripts/geo/ww2/ohm-export.ts --list 1942-03-09 --levels 1-3   # 查某
 pnpm tsx scripts/geo/ww2/georef-svg.ts    # Commons SVG → GeoJSON：控制点拟合（投影 + 仿射 / 二次多项式，auto 取留一法 RMS 最小），打印残差 km
 pnpm tsx scripts/geo/ww2/georef-svg.ts --fills <svg>   # 列填充色（选类别）；--dots 列城市点和最近标注（选控制点）
 pnpm tsx scripts/geo/ww2/compose.ts       # CShapes 底 + OHM / SVG / Natural Earth 省份叠加 → work/K#.geojson（properties.holder）
-pnpm tsx scripts/geo/ww2/simplify.ts      # 拓扑保持简化 → control.json；预算 1.5 MB × 现有帧数 / 12，自动调间隔
+pnpm tsx scripts/geo/ww2/simplify.ts      # 全部关键帧一个拓扑、拓扑保持简化 → control.json（TopoJSON 写法）；预算 2.0 MB × 现有帧数 / 12，自动调间隔
 pnpm tsx scripts/geo/ww2/check.ts         # MapLibre（Playwright）渲染每帧，与来源地图并排 → docs/screenshots/ww2/geo-K#.png
 ```
 
 - 不改 `package.json`：几何运算用 mapshaper（`.tools/`，`fetch.ts` 安装），截图用已装的 Playwright + `maplibre-gl`。
 - 加一个关键帧：在 `sources.json` 的 `ohm` 加该日期的关系集（先 `--list` 查），需要的话加 SVG 来源和控制点（≥ 4 个，欧洲残差 ≤ 30 km、亚太 ≤ 60 km），在 `keyframes` 写配方和 `checks` 视图，然后依次跑上面 6 步，看 `geo-K#.png` 与来源图并排是否一致，把方法和残差写进 `SOURCES-GEO.md` 与 `data/SOURCES.md`。
 - 选择器（`compose.ts`）：`cshapes`（可用 `partsAt` 只取包含某点的岛）、`ohm`、`admin1`（Natural Earth 省份）、`svg`（类别，`coastFillKm` 让占领区沿底图海岸补齐）、`svgFrame`、`bbox`、`union` / `intersect` / `difference`。不允许手画多边形；`bbox` 只用来选取已有几何的一部分。
-- 简化按区域：焦点框（欧洲 / 中东、东亚 / 东南亚 / 西太平洋）内细、框外粗（50 km），两半沿框边拼回再按实体合并。坐标 0.01°。
+- 简化（`simplify.ts`）：`compose.ts` 仍每帧写一份 GeoJSON（`work/K#.geojson`，中间产物）；`simplify.ts` 把所有帧放进**同一个** mapshaper 数据集——相邻实体、也包括相邻关键帧之间重合的边界是同一条弧，只简化一次、只存一次——再导出一个带量化的 TopoJSON，写成 `{ topology, keyframes: [{ t, object: "K1" }] }`。按区域：焦点框（欧洲 / 中东、东亚 / 东南亚 / 西太平洋）内细、框外粗（50 km），两半沿框边拼回再按实体合并。默认方法 `dp`（Douglas–Peucker，间隔就是最大偏差；`--method weighted` 是 Visvalingam，更平滑但会把细长峡湾整条删掉）。
+- **预算旋钮**：`--budget <MB>`（默认 2.0 = 12 帧的总预算，按帧数等比）。不给 `--fine` 时从 1.5 km 起每次 +0.25 km 直到放得进预算，所以"焦点区容差"是预算允许的最细档；`--fine / --coarse`（km）固定间隔，`--quant`（默认 50000 个量化格，≈ 赤道 0.8 km、北纬 60° 约 0.4 km），`--method`，`--out` 写到别处，`--no-measure` 跳过偏差统计。脚本最后打印焦点框内原始顶点到成品边界的偏差 p50 / p95 / p99 / max（km）。新增关键帧后重跑本步即可，帧多了容差会变粗；超预算时它自己警告。
+- 实测（K1 + K6 两帧）：原 GeoJSON 简化（10 km、Visvalingam）259 KB → 现 TopoJSON 焦点区 3 km、336 KB（预算 341 KB）；焦点框内偏差 p95 2.3 km、p99 2.8 km。

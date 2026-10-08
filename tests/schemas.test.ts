@@ -5,7 +5,7 @@ import { parse as parseYaml } from 'yaml';
 import { SUBJECTS, topicSchema } from '../src/content/schema/topic';
 import { chapterSchema } from '../src/content/schema/chapter';
 import { bilingual, isoDate, timePoint } from '../src/content/schema/common';
-import { EVENT_KINDS, entitySchema, presetsFile, timeChapterState, timeSceneGeoData } from '../src/engines/time-scene/schema';
+import { EVENT_KINDS, controlFile, entitySchema, presetsFile, timeChapterState, timeSceneGeoData } from '../src/engines/time-scene/schema';
 import { sourcesFile } from '../src/content/schema/sources';
 import { spaceChapterState, spaceSceneData } from '../src/engines/space-scene/schema';
 
@@ -84,6 +84,17 @@ describe('sample-time topic', () => {
     const messages = result.success ? [] : result.error.issues.map((i) => i.message);
     expect(messages).toContain('unknown entity "nobody"');
     expect(messages).toContain('keyframes must be in strictly ascending time order');
+  });
+});
+
+describe('control.json shapes', () => {
+  it('accepts the plain GeoJSON shape (sample-time) and the TopoJSON shape (ww2, written by the pipeline)', () => {
+    const plain = controlFile.parse(loadData('sample-time').control);
+    expect('topology' in plain).toBe(false);
+    const topo = controlFile.parse(loadData('ww2').control);
+    expect('topology' in topo).toBe(true);
+    expect(topo.keyframes.length).toBeGreaterThanOrEqual(2);
+    for (const kf of topo.keyframes) expect(kf).toHaveProperty('object');
   });
 });
 

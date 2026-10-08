@@ -6,6 +6,7 @@
 import type { Bloc, ControlKeyframe, Entity, Movement, SceneEvent, TimeSceneGeoData } from '../schema';
 import { periodEnd, toNumber, type TimePoint, type TimeScale } from './time';
 import { blocAtSpans, blocSpansN } from './bloc';
+import { decodeControl } from './control';
 
 export interface KeyframeN {
   t: number;
@@ -67,10 +68,12 @@ export function buildTimeModel(
   data: TimeSceneGeoData,
   chapterTimes: readonly { id: string; t: TimePoint | null | undefined }[],
 ): TimeModel {
-  const first = data.control.keyframes[0];
+  // Either control.json shape (GeoJSON or TopoJSON) becomes plain FeatureCollections here, once.
+  const decoded = decodeControl(data.control);
+  const first = decoded[0];
   const scale: TimeScale = first && typeof first.t === 'object' ? 'ma' : 'date';
 
-  const keyframes = data.control.keyframes.map((keyframe) => ({ t: toNumber(keyframe.t), keyframe }));
+  const keyframes = decoded.map((keyframe) => ({ t: toNumber(keyframe.t), keyframe }));
   const movements = data.movements
     .map((movement) => ({ movement, start: toNumber(movement.from), end: toNumber(movement.to) }))
     .filter((m) => finite(m.start) && finite(m.end));
@@ -130,7 +133,7 @@ export function buildTimeModel(
     entities,
     chapterNodes,
     maxStrength: Math.max(1, ...data.movements.map((m) => m.strength)),
-    bounds: dataBounds(data),
+    bounds: dataBounds(data, keyframes),
   };
 }
 
@@ -140,7 +143,7 @@ export function entityBlocAt(model: TimeModel, id: string, t: number): Bloc {
   return en ? blocAtSpans(en.spans, t) : 'neutral';
 }
 
-function dataBounds(data: TimeSceneGeoData): [number, number, number, number] | null {
+function dataBounds(data: TimeSceneGeoData, keyframes: readonly KeyframeN[]): [number, number, number, number] | null {
   let w = Infinity;
   let s = Infinity;
   let e = -Infinity;
@@ -152,7 +155,7 @@ function dataBounds(data: TimeSceneGeoData): [number, number, number, number] | 
     if (y < s) s = y;
     if (y > n) n = y;
   };
-  for (const kf of data.control.keyframes)
+  for (const { keyframe: kf } of keyframes)
     for (const f of kf.features.features) {
       const polys = f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.coordinates;
       for (const poly of polys) for (const ring of poly) ring.forEach(add);

@@ -22,16 +22,16 @@ function collectConsoleErrors(page: Page): string[] {
 }
 
 for (const locale of LOCALES) {
-  test(`index (${locale}) lists both sample topics`, async ({ page }) => {
+  test(`index (${locale}) lists all topics`, async ({ page }) => {
     const errors = collectConsoleErrors(page);
     await page.goto(`/${locale}/`);
-    await expect(page.locator('[data-topic]')).toHaveCount(2);
+    await expect(page.locator('[data-topic]')).toHaveCount(3);
     await expect(page.locator('[data-filter="subject"]:not([data-value=""])')).toHaveCount(6);
     await expect(page.locator('[data-filter="subject"][data-value="math"]')).toBeDisabled();
     await page.locator('[data-filter="subject"][data-value="history"]').click();
-    await expect(page.locator('[data-topic]:visible')).toHaveCount(1);
-    await page.locator('[data-filter="subject"][data-value=""]').click();
     await expect(page.locator('[data-topic]:visible')).toHaveCount(2);
+    await page.locator('[data-filter="subject"][data-value=""]').click();
+    await expect(page.locator('[data-topic]:visible')).toHaveCount(3);
     await page.screenshot({ path: `tests-e2e/__screenshots__/index-${locale}.png` });
     expect(errors).toEqual([]);
   });
