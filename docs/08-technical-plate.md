@@ -144,5 +144,5 @@
 | P1 设计语言 | `6ef934a` | 技术图版 token（paper / dark plate）、自托管字体、SceneHost HUD 布局契约、`controls` 注册表、`window.__atlas`、H / 数字键 / 状态行、六尺寸 HUD e2e | — |
 | P2 SpaceScene | `e8c3a44` | 材质族与程序化贴图、产品灯光、剖面线剖切面、引线标注、ORBIT / REFERENCE、程序化零件（bevelBox / tube / flange / fins / vessel、实例化）、零件链路卡与三面板、perf 读数 | 无 FXAA（靠 pixelRatio 与分辨率调节）；无 THERMAL 模式；无 SpaceScene PRESENTATION；X-RAY 没有"外壳 / 内核"标记（所有零件同为 .15 透明，不能只透外壳）；dark plate 下 `powder` 粉末涂层读起来偏中灰 |
 | P3 TimeScene | `19797d1` | 纸面底图、斜线填充、经纬网、工程流线、引线标注、标尺时间轴、参与 / 面积条带卡、三面板、REFERENCE、PRESENTATION、跨 180° 经线环修复 | REFERENCE 用叠加（虚线边界）而非分屏对照；地图主题整页 JS 约 391 KB gz，超过 docs/02 的 300 KB 预算（MapLibre 本体 ~270 KB），待产品层决定 |
-| P4 QA 与审计 | 本轮（未提交） | `pnpm shoot`（`scripts/shoot.ts`）；HUD 字号刻度上调（最小 10 px / 状态行 ≥ 10.5 px）；手机顶栏 `SceneMode.phone`；SpaceScene 引线标注避让模型、窄带只标选中；删未用 i18n 键与死导出；docs/06 对齐代码；截图收拢到 `docs/screenshots/<topic>/` | 未跑 Lighthouse（不新增依赖）；`simulation` 仍是后期占位引擎；软件 GL 下 fps 数字不代表真机，4K60 未在真 GPU 上验证 |
+| P4 QA 与审计 | `c6134d1` | `pnpm shoot`（`scripts/shoot.ts`）；HUD 字号刻度上调（最小 10 px / 状态行 ≥ 10.5 px）；手机顶栏 `SceneMode.phone`；SpaceScene 引线标注避让模型、窄带只标选中；删未用 i18n 键与死导出；docs/06 对齐代码；截图收拢到 `docs/screenshots/<topic>/` | 未跑 Lighthouse（不新增依赖）；`simulation` 仍是后期占位引擎；软件 GL 下 fps 数字不代表真机，4K60 未在真 GPU 上验证 |
 | P5 内容期 | — | — | 未开始（等 Gavin 定稿内容） |
