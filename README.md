@@ -5,6 +5,8 @@ A bilingual (EN / 中文) interactive textbook for a Singapore primary school st
 - **Time**: watch history and deep time unfold on a map with a timeline (WWII, plate tectonics).
 - **Space**: take things apart in 3D and see how they work (how an air conditioner works).
 
+The first real topic, World War II (11 chapters, bilingual, fully sourced), is live in draft.
+
 Content is plain MDX + JSON, rules-driven, no accounts and no external requests at runtime. Scene state lives in the URL, so every view is a shareable link.
 
 | Time scene (placeholder topic) | Space scene (placeholder topic) |

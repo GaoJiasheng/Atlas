@@ -4,9 +4,9 @@
 
 ## 主题池（按六类：science / math / history / geography / biology / computer）
 
-| 主题 | 分类 | 形态 | 引擎/舞台 | 对齐 | 建议年份 |
-|---|---|---|---|---|---|
-| 第二次世界大战 | history | time | TimeScene/Geo | SS P4 二战结束；SS P5 新加坡沦陷、日据 | **2026 首发** |
+| 主题 | 分类 | 形态 | 引擎/舞台 | 对齐 | 建议年份 | 状态 |
+|---|---|---|---|---|---|---|
+| 第二次世界大战 | history | time | TimeScene/Geo | SS P4 二战结束；SS P5 新加坡沦陷、日据 | **2026 首发** | 已完成 11 章（待审） |
 | 空调是怎么把房间变冷的 | science | space | SpaceScene/Model3D | Sci P5 热；课外 | 2026 第二个（验证 SpaceScene） |
 | 新加坡 1819–1965 | history | time | TimeScene/Geo | SS P4 新加坡故事 | 2027 |
 | 植物的身体（根茎叶花） | biology | space | SpaceScene/Layer2D | Sci P3/P4 植物系统 | 2027 |
