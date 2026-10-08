@@ -1,7 +1,7 @@
 ---
 /**
  * Topic page: loads topic + chapters + engine data at build time and mounts
- * the SceneHost island. Every chapter's MDX body is rendered for this locale
+ * the SceneHost island (small props only; engine data is fetched at runtime). Every chapter's MDX body is rendered for this locale
  * into the island's default slot as `<article data-chapter-body=id>`; the
  * InfoPanel shows the current one (first chapter visible without JS).
  */
@@ -15,7 +15,7 @@ import Full from '../../../components/mdx/Full.astro';
 import More from '../../../components/mdx/More.astro';
 import Num from '../../../components/mdx/Num.astro';
 import FlyTo from '../../../components/mdx/FlyTo.astro';
-import { LOCALES, localeHref, tx, type Locale } from '../../../i18n';
+import { LOCALES, localeHref, tx, withBase, type Locale } from '../../../i18n';
 import { chapterThemeMap, getTopicChapters, getTopics, topicEngineData, type TopicEntry } from '../../../lib/content';
 
 export async function getStaticPaths() {
@@ -33,7 +33,13 @@ const locale = Astro.params.locale as Locale;
 const chapterEntries = await getTopicChapters(topic.id);
 const chapters = chapterEntries.map((entry) => entry.data);
 const bodies = await Promise.all(chapterEntries.map((entry) => render(entry)));
-const data = topicEngineData(topic);
+// Engine data is validated here (a bad data file fails the page build) but NOT embedded in the
+// island props: it is written once per topic to /topics/<slug>/data.json (src/pages/topics) and the
+// SceneHost fetches it on the client.
+topicEngineData(topic);
+// (`trailingSlash: 'always'`: the dev server only routes the endpoint with a trailing slash; the
+// built file is dist/topics/<slug>/data.json.)
+const dataUrl = withBase(`/topics/${topic.id}/data.json`) + (import.meta.env.DEV ? '/' : '');
 
 // MDX components chapter bodies use without imports.
 const components = { Lang: locale === 'zh' ? LangZh : LangEn, Soft, Full, More, Num, FlyTo };
@@ -49,7 +55,7 @@ const components = { Lang: locale === 'zh' ? LangZh : LangEn, Soft, Full, More, 
     client:visible
     topic={topic.data}
     chapters={chapters}
-    data={data}
+    dataUrl={dataUrl}
     locale={locale}
     path={Astro.url.pathname}
     indexHref={localeHref(locale, '/')}

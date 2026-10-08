@@ -17,7 +17,7 @@
  *    (`data-labels="off"`, `data-hud="off"`).
  */
 import type { Map as MlMap } from 'maplibre-gl';
-import type { LngLat } from '../../lib/geo';
+import { projectNearCentre, type LngLat } from '../../lib/geo';
 
 export interface LeaderItem {
   /** Unique key (`event:sample-meeting`). */
@@ -295,7 +295,8 @@ export function createLeaders(options: {
 
     const cols: Record<'L' | 'R', Entry[]> = { L: [], R: [] };
     for (const e of entries.values()) {
-      const p = map.project(e.item.at);
+      // The world copy the camera is looking at (a path across the antimeridian sits in the neighbouring copy).
+      const p = projectNearCentre((q) => map.project(q), e.item.at, width / 2);
       e.sx = p.x;
       e.sy = p.y;
       const onStage = p.x >= 0 && p.x <= width && p.y >= 0 && p.y <= height;

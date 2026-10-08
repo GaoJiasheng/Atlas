@@ -30,7 +30,7 @@ import type { SceneEvent } from '../../schema';
 import { changesBloc } from '../../lib/bloc';
 import type { Playhead } from '../../lib/playhead';
 import { frameAt, type Frame } from '../../lib/frame';
-import { areaLabelPoint, metresPerPixel, pointAlong, scaleBar, type LngLat } from '../../lib/geo';
+import { areaLabelPoint, metresPerPixel, pickWorldCopy, pointAlong, projectNearCentre, scaleBar, type LngLat } from '../../lib/geo';
 import { referencePair } from '../../lib/stats';
 import { formatTime } from '../../lib/format';
 import { createLeaders, intersects, type LeaderItem } from './leaders';
@@ -953,13 +953,16 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     if (!loaded) return;
     const bounds = map.getBounds();
     const { width, height } = container.getBoundingClientRect();
+    // Test each position in the world copy the camera is looking at (bounds run past ±180 near the antimeridian).
+    const project = (q: LngLat) => map.project(q);
+    const nearLng = (at: LngLat) => pickWorldCopy(at[0], (lng) => project([lng, at[1]]).x, width / 2);
     const candidates = labelCandidates()
-      .filter((l) => bounds.contains(l.at))
+      .filter((l) => bounds.contains([nearLng(l.at), l.at[1]]))
       .sort((a, b) => b.priority - a.priority);
     const chosen: Label[] = [];
     for (const l of candidates) {
       if (chosen.length >= MAX_PLACE_LABELS) break;
-      const p = map.project(l.at);
+      const p = projectNearCentre(project, l.at, width / 2);
       if (p.x < 0 || p.y < 0 || p.x > width || p.y > height) continue;
       chosen.push(l);
     }
@@ -1057,7 +1060,8 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
       const id = (f.properties as { id?: string }).id;
       const g = f.geometry;
       if (!id || g.type !== 'Point') continue;
-      const p = map.project(g.coordinates as [number, number]);
+      // Tile geometry sits in the main world copy; compare in the copy under the click.
+      const p = projectNearCentre((q) => map.project(q), g.coordinates as LngLat, x);
       const d = Math.hypot(p.x - x, p.y - y);
       if (!best || d < best.d) best = { id, d };
     }
