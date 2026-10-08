@@ -22,6 +22,8 @@
   "dependencies": {
     "@astrojs/mdx": "4.3.14",
     "@astrojs/react": "4.4.2",
+    "@fontsource/ibm-plex-mono": "5.2.5",
+    "@fontsource/ibm-plex-sans-condensed": "5.2.5",
     "@react-three/drei": "10.7.9",
     "@react-three/fiber": "9.8.1",
     "@vite-pwa/astro": "1.2.0",
