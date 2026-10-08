@@ -65,6 +65,9 @@ export default defineConfig({
         // models (/models) are deliberately NOT precached; they are cached on first use below.
         globPatterns: ['**/*.{html,js,css,svg,png,webmanifest}'],
         globIgnores: ['geo/**', 'models/**'],
+        // Topic pages carry their engine data as island props (Astro roughly doubles
+        // JSON in that encoding): the ww2 page with its 12 control keyframes is ~3 MB.
+        maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
         // Deep links carry scene state in the query string (?ch=...&t=...).
         ignoreURLParametersMatching: [/.*/],
         navigateFallback: null,

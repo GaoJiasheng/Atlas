@@ -1,6 +1,6 @@
 # WW2 map data — source survey and per-keyframe provenance
 
-Survey done 2026-10-08 for docs/09 §5 (step 2: K1 1937-07-07 and K6 1942-03-09). Every edge in `src/content/topics/ww2/data/control.json` comes from one of the datasets below; nothing is drawn by hand. Reference ids `[G#]` are the same as in the topic's `data/SOURCES.md`.
+Survey done 2026-10-08 for docs/09 §5 (step 2: K1 1937-07-07 and K6 1942-03-09; step 4: the other ten keyframes K2-K5, K7-K12). Every edge in `src/content/topics/ww2/data/control.json` comes from one of the datasets below; nothing is drawn by hand. Reference ids `[G#]` are the same as in the topic's `data/SOURCES.md`.
 
 ## 1. Survey
 
@@ -35,6 +35,25 @@ Survey done 2026-10-08 for docs/09 §5 (step 2: K1 1937-07-07 and K6 1942-03-09)
 Public-domain campaign maps used for **dates only** (which units had fallen by 9 March 1942; nothing traced):
 [G8] `File:Japanese_advance_in_Burma,_20_January-19_March_1942.jpg` (US Army CMH, Romanus & Sunderland 1953) and [G9] `File:Pacific_War_-_Dutch_East_Indies_1941-42_-_Map.jpg` (USMA Department of History).
 
+Added in step 4 (licences checked on each file page; all downloaded by `fetch.ts`):
+
+| ref | file | author | license | what it shows | used for |
+|---|---|---|---|---|---|
+| [G10]–[G14] | `File:Second_World_War_Europe_09_1939_de.svg`, `…_06_1940_de.svg`, `…_11_1941_de.svg`, `…_10_1942_de.svg`, `…_12_1942_de.svg` | San Jose (after OKH GenStdH *Lagekarten*, BArch RH 2, and USMA) | **public domain** (released by the author) | monthly situation at the end of the month: Axis states and satellites / Axis-occupied / Allied / Allied-occupied / Soviet / neutral; 14 city dots; all five drawn on one base map (identical viewBox and coastline), so they share one set of control points (`controlPointsFrom`) | G10 K3 check image; G11 K4 demarcation line in France; G12 K5 and G13 K7 Axis Europe and Eastern Front (traced); G14 K8 occupied west and Balkans (traced) |
+| [G15] | `File:Eastern_Front_1943-02_to_1943-08-es.svg` | Gdr (PNG), Rowanwindwhistler (SVG) | CC BY-SA 3.0 | Soviet-held area after the German counter-offensive of Feb–Mar 1943 (Kursk salient) | K8–K10 Eastern Front; drawn on the [G7] base, reuses its 51 control points |
+| [G16] | `File:Eastern_Front_1943-08_to_1944-12-es.svg` | Gdr, Zocky, Mahahahaneapneap, Julieta39, Claude Zygiel | CC BY-SA 4.0 | Soviet advances to 1 Dec 1943, 30 Apr 1944, 19 Aug 1944, 30 Aug 1944, 31 Dec 1944 | K9–K11 Eastern Front (traced) |
+| [G17] | `File:Eastern_Front_1945-01_to_1945-05.png` (raster) | Gdr | CC BY-SA 3.0 | Soviet advances to 30 Mar and to 11 May 1945 | K11 (traced by `georef-raster.ts`) |
+| [G18] | `File:Second_world_war_europe_1943-1945_map_en.png` (raster) | San Jose (2005), English by Jarry1250 | CC BY-SA 3.0 | Allied-held area and Allied gains by Oct 1943 / Apr 1944 / Dec 1944 / May 1945; area of German control May 1945 | K9 Italy, K10 west / Italy / Balkans, K11 German pockets (traced) |
+| [G19] | `File:Situation_at_the_End_of_World_War_Two.PNG` (raster) | USMA Department of History, *China 1900–1949* map 5 (same series as the source of [G3]) | **public domain** (US Government) | Japanese-occupied China at the end of the war incl. the Ichi-Go corridor; Communist base areas hatched | K9 (Henan only), K10, K11 (traced; union with G3) |
+
+Dates only (nothing traced): [G20] `File:The_New_Guinea_Area_-_Allied_Advance_(AMH-43).jpg` (US Army CMH, *American Military History*, public domain); [G21] `File:Allied_Third_Burma_Campaign_June_1944-May_1945.jpg` (USMA, public domain); [G22] `File:Pacific_War_-_Micronesia,_Melanesia_and_New_Guinea_1941-42_-_Map.jpg` (USMA, public domain).
+
+Evaluated and **not used**: `File:Second_world_war_asia_1943-1945_map_en.png` (San Jose, CC BY-SA 3.0; 780 × 600 px, its coastline is too generalised: 26 cape control points gave RMS 44 km, max 94 km, over the 60 km budget); `File:Operation_Ichi-Go-es.svg` (front drawn as open dashed lines, no areas); `File:Japanese_zones_of_control.png` (wartime propaganda film still, undated); the Eastern Front maps of 1941-06→12 and 1942-11→1943-03 (the San Jose monthly maps cover those dates). No Commons map of Japanese-occupied China in 1938 or 1939 was found (searched Commons for 1938/1939 occupation maps, the USMA *China 1900–1949* series, JM-179 maps): K2 and K3 use the 1940 map with dataset cuts (below).
+
+### (f) Raster maps — `georef-raster.ts`
+
+PNG maps are traced like the SVGs, by colour: each palette colour is one class (`sources.json` `raster.<id>.palette`, RGB tolerance); pixels of no class (labels, arrows, rivers, borders, legend boxes in `exclude`) take the class of the nearest classified pixel, a 3 × 3 majority filter and a minimum patch size (`minRegionPx`) remove anti-aliasing and the white centres of city rings, and each class is vectorised as unioned pixel runs, simplified by 0.75 px and then projected through the fitted model. `--preview <id>` writes the class image for checking; `--circles` lists city-ring centres; `--propose --region europe|asia` predicts cape positions from a first fit and snaps them to the land pixels and to the CShapes coast (`capes.ts`, shared with `georef-svg.ts --propose`).
+
 ### (d) UMN Historical National Boundaries (cross-check)
 
 - Kropelnicki, Johnson, Kne (U-Spatial, University of Minnesota, 2022), handle https://hdl.handle.net/11299/227302; layers 1800, 1914, 1918, **1939, 1945**, 1970, 1990, 2000; Shapefile, 94.8 MB; "may be freely downloaded for research, study, or teaching, but must be cited" (catalogue text).
@@ -62,7 +81,58 @@ Public-domain campaign maps used for **dates only** (which units had fallen by 9
 - **Eastern Front**: [G7] Soviet-held area at 1942-05-05 (after the winter counter-offensive) → `ussr`, clipped to the CShapes USSR. Its front is used for 9 March: the line moved little between March and early May 1942 (Demyansk and Rzhev salients, Izium bulge already formed). Known differences: Sevastopol and the Kerch peninsula were still Soviet-held on 9 March (fell May–July 1942); [G7] shows only the Kerch bridgehead.
 - **Why these sources**: CShapes and OHM give exact dated polygons where they exist; no dataset holds occupation lines for China, the Eastern Front or the German/Italian zones, so those come from georeferenced Commons maps. [G6] is not traced because it shows the May 1942 maximum, not 9 March.
 
-## 3. Control-point residuals (georef-svg.ts)
+### K2 — 1938-10-27 (Wuhan and Canton fall)
+
+- **Method**: dataset query + cut trace. CShapes on the day: Germany (255) already includes the Sudetenland (from 1938-09-30) and Austria (305) is assigned to Germany; the post-Munich Czechoslovakia is left out like in K1. OHM Empire of Japan r2889894, Manchukuo r2885965, British Hong Kong r2694575.
+- **Occupied China**: [G3] (1940) clipped to CShapes China, **minus** Jiangxi province (Natural Earth; Nanchang fell on 27 Mar 1939 — Jiujiang, held since July 1938, is lost with it) and minus G3's Shantou and two Fujian pockets (1939–41). Known overstatement: the Hubei salients west and north-west of Wuhan (Suixian–Zaoyang May 1939, Yichang June 1940) are in G3 and cannot be cut on a dataset line.
+- **Residuals**: G3 as in §3.
+
+### K3 — 1939-10-06 (Poland partitioned)
+
+- **Method**: dataset query. CShapes keeps pre-war Poland, Czechoslovakia (Nov 1938 borders) and Albania; they go to the occupier: Poland → Germany ("German-occupied Poland"), Czechoslovakia → Germany ("Protectorate of Bohemia and Moravia"), Albania → Italy. OHM German Reich r2704709 (Memel, Danzig), Slovak Republic r2692768 (Germany, client-state label), Kingdom of Hungary r2747871 (with Carpatho-Ukraine), and the **Soviet Union of 6 Oct 1939 r2848248 clipped to pre-war Poland** (CShapes of 31 Aug 1939) = the Soviet-occupied east up to the Molotov–Ribbentrop line, incl. Vilnius (handed to Lithuania on 10 Oct). Japan: K2 + Hainan (Feb 1939) and G3 in full. Check image G10 (end of September).
+- **Residuals**: none for the European part; G3 as in §3.
+
+### K4 — 1940-07-01 (France falls)
+
+- **Method**: CShapes on the day (the USSR polygon already includes the Baltic states, Bessarabia and Northern Bukovina); occupied states assigned to Germany (Denmark labelled). OHM German Reich r2704714, Generalgouvernement r2693083 (labelled), Soviet Union r2848258 within pre-war Poland, Italy r2696324 (with the strip of south-eastern France), Albania r2855615, Slovakia r2747847, Hungary r2747871, Romania r2693258 (after the June cessions), Finland r2692833, Guernsey/Jersey (occupied 30 Jun / 1 Jul). Baltic states: CShapes Estonia/Latvia/Lithuania of 31 May 1940 → USSR, labelled "Soviet-occupied, June 1940". **Demarcation line** in France from [G11] (San Jose draws Vichy France as an Axis satellite and the occupied zone as occupied; OHM's "French State" covers all of France and Algeria, so it is not used). All French colonies → Vichy France (Free French colonies only from late July / August 1940).
+- **Residuals**: G11 = San Jose base, §3.
+
+### K5 — 1941-12-05 (Moscow, Leningrad besieged)
+
+- **Method**: CShapes base (K6 base without the 1942 conquests: Malaya, Borneo, NEI, Philippines, Timor, Hong Kong still Allied). Axis Europe and the Eastern Front from [G12] (end of November 1941; Rostov retaken 29 Nov, front before Moscow): G12 Axis classes within the European states → Germany; G5 "allies" class inside it → Italy, then Finnish-held Karelia and Romanian Transnistria (as in K6); Vichy zone = G12 "Axis" class within France; OHM Italy, Albania, Montenegro, Hungary r2747817, Romania (with Transnistria), Bulgaria (with Macedonia and Thrace), Finland, Slovakia and Croatia (client labels). **Soviet-held = G12 "Allied" class within the USSR**, coast-filled 25 km and painted last (a USSR-minus-Axis rule lost Leningrad, which lies in G12's sea at the Neva mouth). French Indochina Japanese-occupied (OHM r2745895).
+- **Simplifications**: North Africa: Libya whole Italian (Crusader front around Tobruk not shown; Egypt not an entity). Kalinin (German-held 14 Oct–16 Dec) is Soviet in G12.
+
+### K7 — 1942-11-08 (Axis peak; Torch landings)
+
+- **Method**: CShapes base with the 1942 conquests (Burma, Malaya and Singapore, NEI, Philippines, British Borneo, Portuguese Timor; Madagascar British since May–Nov 1942). Europe as K5 from [G13] (end of October 1942: Stalingrad, Caucasus front, El Alamein; Vichy zone still unoccupied until 11 Nov; the Torch landings of 8 Nov are not shown). Pacific: New Britain, New Ireland, Bougainville, Manus (CShapes islands); Morobe province (Lae, Salamaua, Finschhafen); the Bird's Head of Dutch New Guinea (Papua Barat, Natural Earth) — the rest of Dutch New Guinea stays Dutch; Choiseul, New Georgia, Santa Isabel (CShapes islands; Guadalcanal contested, left British); Attu and Kiska (Natural Earth Alaska parts; CShapes has no western Aleutians); Andaman and Nicobar (OHM). Dates from [G22].
+- **Simplification**: Axis-held western Egypt is not shown (Egypt is not an entity and neither G5 nor G13 covers it).
+
+### K8 — 1943-07-12 (Kursk, Sicily)
+
+- **Method**: CShapes base; all former Vichy colonies to Free France (Indochina stays Japanese-occupied), Libya British military administration, Fezzan French (OHM r2831553); France "Occupied France" (Germany). Europe outside the USSR from [G14] (end of Dec 1942; zones unchanged to July 1943; the Italian zone in south-eastern France and Corsica is **not separated** — no source found); G5 split; OHM states (Italy r2747832, Bulgaria r2920397). **Eastern Front from [G15]**: Axis-held USSR = CShapes USSR between 42.5° and 60° N west of 42° E (inside G15) minus G15's Soviet-held area; Karelia north of 60° N from G14; Soviet-held = G15 Soviet class, painted last. Pacific: K7 without Guadalcanal (Feb 1943) and Attu (May 1943); Madang, East Sepik, Sandaun (Dec 1942) added to Morobe (dates [G20]).
+- **Simplification**: the Sicily beachheads of 10–12 July are not shown (Sicily Italian).
+
+### K9 — 1944-06-05 (eve of Normandy)
+
+- **Method**: K8 base; Italy, Albania, Yugoslavia and Greece German-occupied (labels for Italy and Albania). **Italy**: [G18] Allied area to April 1944 (south, Sardinia) + Natural Earth provinces Roma, Latina, Frosinone (Rome 4 June) → Italy; Corsica (G18) → Free France. **Eastern Front**: Axis-held USSR = USSR box minus ([G15] ∪ [G16] to 30 Apr 1944); Soviet-held = G15 ∪ G16 (to 30 Apr) within the USSR, Romania and pre-war Poland (Volhynia), painted last — Crimea (cleared 12 May) is in G16's April phase. Finnish Karelia (G5). OHM Hungary r2692359 (German-occupied since 19 Mar, Hungarian state), Romania r2693255 (used past its OHM end date 1944-04-01; its Soviet-held north follows from G16), Bulgaria r2920397, Croatia r2747830. Asia: Thailand with the 1943 annexations (OHM r2848473); occupied China = G3 ∪ ([G19] within Henan: Ichi-Go's first phase, Apr–May 1944); New Guinea: Rabaul, New Ireland, Bougainville, East Sepik (Wewak), Bird's Head still Japanese.
+- **Simplifications**: the Imphal–Kohima salient inside India and the Allied advance in northern Burma (Myitkyina siege) are not shown (no area source); Kiska, Gilberts, Marshalls too small.
+
+### K10 — 1944-12-16 (Ardennes)
+
+- **Method**: CShapes base (France Free France, Belgium, Greece; Albania left out after liberation; Luxembourg left out — not an entity). **West, Italy, Balkans** from [G18] (Allied area to December 1944): south of the Netherlands, Aachen (USA, labelled), Italy to the Gothic Line, Yugoslavia (also [G16]); western Crete (G18 German May 1945) and the Dodecanese (OHM r2920370) German pockets. **East** from G15 + [G16] (all phases, to 31 Dec): Soviet-held USSR; liberated Poland west of the 1939 Soviet border → Poland; pre-war eastern Poland → USSR (OHM Soviet Union r2957472 within pre-war Poland); eastern Hungary, eastern Slovakia, East Prussia's edge → USSR; Courland → Germany. Romania with Northern Transylvania = CShapes Romania of 1 Aug 1940 minus the USSR; Bulgaria 1940 borders (OHM r2848877); Finland after the armistice (OHM r2855285; Petsamo, ceded de jure only in 1947, stays Finnish in OHM and here). Asia: occupied China = G3 ∪ [G19]; Saipan and Tinian (OHM Japan parts) → USA; Leyte → Philippines; Morotai, Biak → Netherlands; Kachin state → UK.
+- **Known differences**: G16's last phase ends on 31 Dec, so Budapest (encircled 26 Dec) shows Soviet; the French Atlantic pockets and the Colmar pocket are below G18's resolution and not shown.
+
+### K11 — 1945-05-08 (VE Day)
+
+- **Method**: CShapes on the day (post-war Poland and USSR; Germany as the later two states, both defaulting to "Western Allied-held Germany", USA; Austria Western-held default; Czechoslovakia and Hungary Soviet-held). Soviet-held Germany and Austria = [G16] ∪ [G17] (to 11 May); British-held Germany = OHM British occupation zone of 8 May (r2856522). **German-held at the capitulation** = [G18] "German control May 1945" (Norway, Denmark, north-west Netherlands and Germany, Bohemia–Moravia, Alpine pocket, western Crete) minus the Soviet-held area outside Czechoslovakia, without Italy (surrendered 2 May) and the USSR; Courland = CShapes USSR in western Latvia minus G15/G16; Dodecanese (OHM r2920370 of the K10 set, valid to 8 May) and the Channel Islands. OHM Romania r2877966 (with N Transylvania), Bulgaria, Finland. Asia: Burma UK except Mon, Kayin, Kayah, Tanintharyi (Japanese, Natural Earth; Rangoon 3 May, dates [G21]); Philippines retaken; Iwo Jima, Saipan, Tinian USA; Okinawa Japanese, labelled "battle since 1 April"; Indochina under direct Japanese control (Empire of Vietnam OHM r2746076).
+- **Known differences**: G18 shows the German area of early May (it includes Hamburg and Schleswig, surrendered 4–5 May, labelled "German-held until the capitulation"); Prague and Bohemia stay German (liberated 9 May) because G17's last phase is 11 May.
+
+### K12 — 1945-09-02 (Japan surrenders)
+
+- **Method**: dataset query. CShapes on the day: the western Germany polygon = Western zones, split by OHM American zone r2855433 (USA) and British zone r2852444 (UK), the rest = French zone (incl. the Saar); the eastern polygon = Soviet zone. OHM zones in Austria (r2746442/3/4, r2747810; Vienna labelled as four-power city, Soviet). Poland and USSR (CShapes post-war); Korea north of the 38th parallel = OHM Soviet Civil Administration r2801070 (USSR), south = CShapes Republic of Korea (Japan, labelled "US forces landed 8 Sept"); Manchuria = the OHM Manchukuo outline (USSR); southern Sakhalin and the Kurils (OHM Soviet Union r2851155); Empire of Japan r2889870; Taiwan Japanese until 25 Oct; Okinawa, Iwo Jima, Marianas US-occupied. Occupied territories return to their pre-war administrations (China, British Burma, Malaya and Singapore — labelled with the British landings of 5–12 Sept, Hong Kong OHM r2694460, Borneo, NEI, Indochina, Philippines, Timor).
+- **Holders without their own entity** (see report): NEI → `netherlands` (Indonesian independence proclaimed 17 Aug, in the label); Indochina → `free-france` (Vietnamese independence proclaimed 2 Sept, in the label).
+
+## 3. Control-point residuals (georef-svg.ts, georef-raster.ts)
 
 Residual = great-circle distance between the control point and where the fitted model puts its SVG position; leave-one-out = predicted by a fit without that point. Budget docs/09 §5.3: ≤ 30 km Europe, ≤ 60 km Asia-Pacific.
 
@@ -71,8 +141,14 @@ Residual = great-circle distance between the control point and where the fitted 
 | [G3] China 1940 | 29 city dots | Lambert conformal conic (109° E; 25.3°/38.5° N) + 2nd-order polynomial | 19.8 km | 54.4 km (Xiamen) | 25.4 / 71.8 km |
 | [G5] Europe 1942 | 33 capes and island centres | Lambert azimuthal equal-area (12.4° E, 52.9° N) + affine | 9.2 km | 16.1 km (Lizard Point) | 10.1 / 17.3 km |
 | [G7] Eastern Front 1942 | 51 city dots | Lambert conformal conic (29.1° E; 46.1°/57.4° N) + 2nd-order polynomial | 10.1 km | 22.4 km (Stockholm) | 12.2 / 28.6 km |
+| [G10]–[G14] San Jose monthly series (one base) | 14 city dots + 28 capes / island tips | Lambert conformal conic (10.3° E; 41.3°/65.1° N) + 2nd-order polynomial | 3.8 km | 12.9 km (Cape Sarych) | 4.6 / 15.9 km |
+| [G15] Eastern Front 1943 | the 51 city dots of [G7] (same base) | as [G7] | 10.1 km | 22.4 km (Stockholm) | 12.2 / 28.6 km |
+| [G16] Eastern Front 1943–44 | 76 city dots | Lambert conformal conic (28.9° E; 46.1°/57.4° N) + 2nd-order polynomial | 10.3 km | 22.9 km (Stockholm) | 11.5 / 30.0 km |
+| [G17] Eastern Front 1945 (PNG) | 78 city rings | Lambert conformal conic (30.6° E; 46.1°/57.4° N) + 2nd-order polynomial | 10.3 km | 22.6 km (Sarajevo) | 11.6 / 30.2 km |
+| [G18] Europe 1943–45 (PNG) | 33 capes / island tips (7 mis-snapped capes dropped) | Lambert azimuthal equal-area (5.9° E, 49.6° N) + 2nd-order polynomial | 14.1 km | 27.5 km (Cape Kaliakra) | 17.2 / 32.6 km |
+| [G19] China 1945 (PNG) | 16 city dots | Lambert conformal conic (114° E; 26.6°/40.4° N) + affine | 15.1 km | 28.3 km (Shenyang) | 19.0 / 35.5 km |
 
-All fits are inside budget. [G3] is a hand-drawn map traced from a scan, so its own city positions scatter (Xiamen 54 km, Myitkyina 43 km, Chengdu 36 km); the occupied-China edge therefore carries about ±20–50 km. Per-point residuals are printed by `georef-svg.ts` and kept in `work/svg-<id>-fit.json`; control points are listed in `sources.json`.
+All fits are inside budget (Europe ≤ 30 km, Asia ≤ 60 km at every control point; the leave-one-out maxima of G16–G18 are 30–33 km, i.e. an edge point predicted without itself). The raster maps add up to about half a pixel of tracing error (G17 ≈ 1.6 km, G18 ≈ 2 km, G19 ≈ 2.5 km per pixel). [G3] is a hand-drawn map traced from a scan, so its own city positions scatter (Xiamen 54 km, Myitkyina 43 km, Chengdu 36 km); the occupied-China edge therefore carries about ±20–50 km. Per-point residuals are printed by `georef-svg.ts` and kept in `work/svg-<id>-fit.json`; control points are listed in `sources.json`.
 
 ## 4. Licences of the output
 
@@ -80,4 +156,6 @@ All fits are inside budget. [G3] is a hand-drawn map traced from a scan, so its 
 
 ## 5. Size
 
-All keyframes share one budget of 1.5 MB for the 12 keyframes of docs/09 §4.2 (`simplify.ts` scales it to the keyframes present). K1 + K6 = 253 KB at a 10.6 km simplification interval inside the focus boxes (Europe / Middle East, East and Southeast Asia) and 50 km elsewhere. With the full 12 keyframes at this budget the interval stays around 10 km; a TopoJSON control file with arcs shared across keyframes (most borders do not change between keyframes) would allow 2–3 km detail inside the same budget, but needs an engine/schema change.
+`control.json` is TopoJSON with arcs shared across all keyframes (`simplify.ts`). All 12 keyframes: **1371 KB** at a 1.5 km Douglas–Peucker interval inside the focus boxes (Europe / Middle East, East and Southeast Asia) and 50 km elsewhere (budget 2.0 MB); deviation of the original focus-box vertices from the written boundaries p50 0.24 km, p95 1.17 km, p99 1.47 km (max 37 km: dropped islets under 20 km²). At 3 km the file is 1215 KB (p95 2.24 km). Two thirds of the size is the arc references of ~800 polygons per keyframe, so coarser intervals save little (40 km: 916 KB).
+
+The topic page passes the engine data as Astro island props, which roughly doubles JSON (each number becomes `[0,n]`, quotes are escaped): the ww2 page is ~3.0 MB, above Workbox's default 2 MiB precache limit; `astro.config.mjs` raises `maximumFileSizeToCacheInBytes` to 4 MiB. Serving `control.json` as a fetched static file (like `public/geo/`) would cut the page by ~2.7 MB.

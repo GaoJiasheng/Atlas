@@ -14,13 +14,14 @@
  *
  * Loaded lazily (dynamic import) so MapLibre stays out of the View chunk.
  */
-import { Map as MlMap, Marker, type GeoJSONSource, type LayerSpecification, type StyleSpecification } from 'maplibre-gl';
+import { Map as MlMap, Marker, type ExpressionSpecification, type FilterSpecification, type GeoJSONSource, type LayerSpecification, type StyleSpecification } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import type { Feature, FeatureCollection } from 'geojson';
+import { feature as topoFeature } from 'topojson-client';
 import type { SceneStore } from '../../../core/store';
 import type { GeoCamera, Locale } from '../../../core/types';
 import { isGeoCamera } from '../../../core/camera';
-import { buildMapStyle } from '../../../../theme/map-style';
+import { BASE_LAYER_IDS, buildMapStyle } from '../../../../theme/map-style';
 import { readThemeTokens, resolveColorRef, type ThemeTokens } from '../../../../theme/theme';
 import { t as translate, tx, withBase } from '../../../../i18n';
 import type { TimeSceneExt } from '../../index';
@@ -105,6 +106,29 @@ const GROUPS: Record<string, string[]> = {
   battles: [LAYER.eventRing, LAYER.eventDot],
   sites: [LAYER.siteHit],
 };
+
+/**
+ * Regional 1:10m land (Southeast Asia, `public/geo/land-10m-sea.json`, built by
+ * scripts/build-geo.ts): close-ups of Singapore and Johor (zoom 9-11) need more
+ * than the 1:50m coastline. Drawn from zoom 7 and fully at 8 above the 50m land:
+ * the box (`frame`) fades in in the water colour and hides the 50m land under
+ * it, the 10m land and coastline sit on top. Fetched only once the camera is at
+ * zoom >= 6.5 over the box, so other topics never load it.
+ */
+const HI = { src: 'ts-land-hi', mask: 'ts-land-hi-mask', fill: 'ts-land-hi-fill', edge: 'ts-land-hi-edge' } as const;
+const HI_BBOX: [number, number, number, number] = [95, -9, 125, 22];
+const HI_MIN_ZOOM = 7;
+const HI_LOAD_ZOOM = 6.5;
+
+function hiResLayers(tk: ThemeTokens): LayerSpecification[] {
+  const fade: ExpressionSpecification = ['interpolate', ['linear'], ['zoom'], HI_MIN_ZOOM, 0, HI_MIN_ZOOM + 1, 1];
+  const kind = (k: string): FilterSpecification => ['==', ['get', 'kind'], k];
+  return [
+    { id: HI.mask, type: 'fill', source: HI.src, minzoom: HI_MIN_ZOOM, filter: kind('frame'), paint: { 'fill-color': tk.water || '#dde2df', 'fill-opacity': fade, 'fill-antialias': false } },
+    { id: HI.fill, type: 'fill', source: HI.src, minzoom: HI_MIN_ZOOM, filter: kind('land'), paint: { 'fill-color': tk.land || '#e1dbcc', 'fill-antialias': true } },
+    { id: HI.edge, type: 'line', source: HI.src, minzoom: HI_MIN_ZOOM, filter: kind('coast'), paint: { 'line-color': tk['land-edge'] || 'rgba(42, 40, 36, 0.3)', 'line-width': 1.2, 'line-opacity': fade } },
+  ];
+}
 
 /** Event kinds drawn as a hollow square (HTML marker) instead of the ring + dot. */
 const SQUARE_KINDS = new Set<string>(['massacre', 'atrocity']);
@@ -314,6 +338,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   let locale = options.locale;
   let tokens = readThemeTokens();
   const landUrl = withBase('/geo/land-50m.json');
+  const landHiUrl = withBase('/geo/land-10m-sea.json');
   const countriesUrl = withBase('/geo/countries-50m.json');
   const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
   const pixelRatio = Math.min(3, Math.max(1, Math.round(window.devicePixelRatio || 1)));
@@ -326,6 +351,8 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
 
   const style = baseStyle(tokens);
   for (const id of Object.values(SRC)) style.sources[id] = { type: 'geojson', data: id === SRC.graticule ? graticuleData : EMPTY };
+  style.sources[HI.src] = { type: 'geojson', data: EMPTY };
+  style.layers.splice(style.layers.findIndex((l) => l.id === BASE_LAYER_IDS.landEdge) + 1, 0, ...hiResLayers(tokens));
   style.layers.push(...dataLayers(tokens));
 
   const initial = store.getState();
@@ -1037,6 +1064,29 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     if (best) options.onSelectEvent(best.id);
   });
 
+  /* ---------- regional 1:10m land (lazy: zoomed in over Southeast Asia) ---------- */
+  let hiState: 'idle' | 'loading' | 'done' = 'idle';
+  const ensureHiResLand = async () => {
+    if (hiState !== 'idle' || !loaded || map.getZoom() < HI_LOAD_ZOOM) return;
+    const b = map.getBounds();
+    const [w, s, e, n] = HI_BBOX;
+    if (b.getEast() < w || b.getWest() > e || b.getNorth() < s || b.getSouth() > n) return;
+    hiState = 'loading';
+    try {
+      const res = await fetch(landHiUrl);
+      if (!res.ok) throw new Error(`${res.status} ${landHiUrl}`);
+      const topo = (await res.json()) as Parameters<typeof topoFeature>[0];
+      if (destroyed) return;
+      const fc = topoFeature(topo, (topo.objects as Record<string, Parameters<typeof topoFeature>[1]>).sea!) as FeatureCollection;
+      source(HI.src)?.setData(fc);
+      hiState = 'done';
+    } catch (err) {
+      hiState = 'idle';
+      console.warn('[atlas] regional coastline unavailable:', err);
+    }
+  };
+  map.on('moveend', () => void ensureHiResLand());
+
   /* ---------- camera ---------- */
   const applyCamera = (camera: GeoCamera, instant: boolean) => {
     const target = { center: camera.center, zoom: camera.zoom, pitch: camera.pitch ?? 0, bearing: camera.bearing ?? 0 };
@@ -1094,7 +1144,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     tokens = readThemeTokens();
     applyHatches();
     const next = baseStyle(tokens);
-    for (const layer of [...next.layers, ...dataLayers(tokens)]) {
+    for (const layer of [...next.layers, ...hiResLayers(tokens), ...dataLayers(tokens)]) {
       if (!map.getLayer(layer.id) || !('paint' in layer) || !layer.paint) continue;
       for (const [key, value] of Object.entries(layer.paint)) {
         // Animated opacities (control crossfade, reference fade) and the dash are re-applied by render().
@@ -1119,6 +1169,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     loaded = true;
     // The theme may have changed while the style was loading.
     applyTheme();
+    void ensureHiResLand();
     updateScale();
     leaders.relayout();
     const s = store.getState();
