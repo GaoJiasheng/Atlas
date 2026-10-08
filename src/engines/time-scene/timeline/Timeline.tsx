@@ -14,7 +14,6 @@ import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type Keyboa
 import type { Chapter, Locale } from '../../core/types';
 import { tx } from '../../../i18n';
 import { useT } from '../../core/context';
-import { Icon } from '../../widgets/icons';
 import type { TimeModel } from '../lib/model';
 import type { Playhead } from '../lib/playhead';
 import { clamp, fromNumber, precisionFor } from '../lib/time';
@@ -28,7 +27,6 @@ export interface TimelineProps {
   locale: Locale;
   chapters: readonly Chapter[];
   currentChapter: string | null;
-  isLocked(chapter: Chapter): boolean;
   playing: boolean;
   speed: Speed;
   onTogglePlay(): void;
@@ -225,22 +223,17 @@ export function Timeline(props: TimelineProps) {
             const chapter = chapters.find((c) => c.id === node.id);
             if (!chapter) return null;
             const n = (position.get(node.id) ?? 0) + 1;
-            const locked = props.isLocked(chapter);
-            const label = locked
-              ? tr('time.lockedNode', { n })
-              : tr('time.chapterNode', {
-                  n,
-                  title: tx(chapter.title, locale),
-                  time: formatNumber(node.t, model, locale),
-                });
+            const label = tr('time.chapterNode', {
+              n,
+              title: tx(chapter.title, locale),
+              time: formatNumber(node.t, model, locale),
+            });
             return (
               <li key={node.id} style={{ left: pct(node.t) }}>
                 <button
                   type="button"
                   className="ts-rule__node"
                   aria-current={node.id === currentChapter ? 'step' : undefined}
-                  data-locked={locked || undefined}
-                  disabled={locked && node.id !== currentChapter}
                   aria-label={label}
                   title={label}
                   onClick={(e) => {
@@ -248,7 +241,7 @@ export function Timeline(props: TimelineProps) {
                     blurAfterPointer(e);
                   }}
                 >
-                  <span aria-hidden="true">{locked ? <Icon name="lock" size={9} /> : String(n).padStart(2, '0')}</span>
+                  <span aria-hidden="true">{String(n).padStart(2, '0')}</span>
                 </button>
               </li>
             );

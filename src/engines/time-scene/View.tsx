@@ -16,14 +16,12 @@ import { SceneSlot, useScene, useSceneContext, useSceneControls, useSceneStore, 
 import type { SceneControls, SpecRow } from '../core/controls';
 import { SceneLayerToggles, type LayerItem } from '../widgets/LayerToggles';
 import { Legend, type LegendItem } from '../widgets/Legend';
-import { isChapterCollapsed } from '../widgets/ChapterRail';
 import { Icon } from '../widgets/icons';
 import { t as translate, tx, type BilingualText, type UiKey } from '../../i18n';
 import { formatTimeParam } from '../../lib/time';
-import { useLevel, useParentMode } from '../../lib/prefs';
 import type { TimeSceneExt } from './index';
 import type { TimeSceneGeoData } from './schema';
-import { buildTimeModel, type ChapterNode, type TimeModel } from './lib/model';
+import { buildTimeModel, type TimeModel } from './lib/model';
 import { createPlayhead, type Playhead } from './lib/playhead';
 import { clamp, fromNumber, stepFor, toNumber, type TimePoint } from './lib/time';
 import { frameAt } from './lib/frame';
@@ -67,8 +65,6 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   const layers = useScene<TimeSceneExt, string[]>((s) => s.layers);
   const highlight = useScene<TimeSceneExt, string[]>((s) => s.highlight);
   const storeT = useScene<TimeSceneExt, TimePoint | null>((s) => s.t);
-  const [readerLevel] = useLevel();
-  const [parentMode] = useParentMode();
 
   /* ---------- model + playhead ---------- */
   const model = useMemo(
@@ -103,18 +99,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     [playhead, model, store],
   );
 
-  const isLocked = useCallback(
-    (c: Chapter) => isChapterCollapsed(c, readerLevel, parentMode),
-    [readerLevel, parentMode],
-  );
-  const canStopAt = useCallback(
-    (node: ChapterNode) => {
-      const c = chapters.find((x) => x.id === node.id);
-      return !!c && !isLocked(c);
-    },
-    [chapters, isLocked],
-  );
-  const playback = usePlayback(playhead, model, commit, canStopAt);
+  const playback = usePlayback(playhead, model, commit);
   const { setPlaying } = playback;
 
   /* ---------- selected event (inspector) ---------- */
@@ -169,10 +154,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     setPlaying(false);
     playhead.cancelTween();
   }, [playhead, setPlaying]);
-  const stepChapter = useCallback(
-    (dir: 1 | -1) => store.getState().stepChapter(dir, (c) => !isLocked(c)),
-    [store, isLocked],
-  );
+  const stepChapter = useCallback((dir: 1 | -1) => store.getState().stepChapter(dir), [store]);
 
   // Shift+←/→ anywhere (outside text fields, the map and the timeline itself) nudges time.
   useEffect(() => {
@@ -238,7 +220,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     presentingRef.current = true;
     setPresenting(true);
     hud.setState({ hud: false });
-    const list = chapters.filter((c) => !isLocked(c));
+    const list = chapters;
     let i = 0;
     const next = () => {
       const chapter = list[i++];
@@ -250,7 +232,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
       presentTimer.current = setTimeout(next, PRESENT_STEP_MS);
     };
     next();
-  }, [reference, setReferenceMode, setPlaying, hud, chapters, isLocked, store, stopPresentation]);
+  }, [reference, setReferenceMode, setPlaying, hud, chapters, store, stopPresentation]);
   // ESC / H / "show HUD" bring the HUD back: that ends the presentation.
   useEffect(
     () =>
@@ -517,7 +499,6 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
           locale={locale}
           chapters={chapters}
           currentChapter={currentChapter}
-          isLocked={isLocked}
           playing={playback.playing}
           speed={playback.speed}
           onTogglePlay={() => setPlaying(!playback.playing)}

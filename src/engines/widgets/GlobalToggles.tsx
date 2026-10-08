@@ -3,7 +3,6 @@ import type { Locale } from '../core/types';
 import { t } from '../../i18n';
 import { Icon } from './icons';
 import { LangToggle } from './LangToggle';
-import { LevelPicker } from './LevelPicker';
 import { ParentModeToggle } from './ParentModeToggle';
 import { ThemeToggle } from './ThemeToggle';
 
@@ -16,7 +15,7 @@ export interface GlobalTogglesProps {
 }
 
 /**
- * Level, parent mode, look and language. Inline on wide screens; behind a
+ * Parent mode, look and language. Inline on wide screens; behind a
  * settings button (tap to open, tap outside / Esc to close) on narrow ones
  * (< 900px for `site`, < 760px for `hud`).
  */
@@ -52,7 +51,6 @@ export function GlobalToggles({ locale, path, variant = 'site' }: GlobalTogglesP
         <Icon name="settings" size={variant === 'hud' ? 14 : 20} />
       </button>
       <div className="atlas-toggles__panel">
-        <LevelPicker locale={locale} variant={variant} />
         <ParentModeToggle locale={locale} variant={variant} />
         <ThemeToggle locale={locale} variant={variant} />
         <LangToggle locale={locale} path={path} variant={variant} />

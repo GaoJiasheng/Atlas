@@ -111,7 +111,7 @@ export interface SceneControls {
   labels?: boolean;
   /** Renderer numbers for `__atlas.stats()` (merged over the host's canvas defaults). */
   stats?(): Partial<SceneStats>;
-  /** Extra spec rows after the host's defaults (subject, levels, chapters, syllabus). */
+  /** Extra spec rows after the host's defaults (subject, chapters, syllabus). */
   specRows?: readonly SpecRow[];
   /** Extra status-line segments, already upper-case. */
   status?: readonly string[];

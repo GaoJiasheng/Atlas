@@ -182,11 +182,6 @@ class Session {
     // tsx compiles with keepNames: page.evaluate callbacks reference a helper that only exists in Node.
     await context.addInitScript(() => {
       (window as unknown as { __name: <T>(fn: T) => T }).__name = (fn) => fn;
-      try {
-        window.localStorage.setItem('atlas:level', 'P6'); // show every chapter
-      } catch {
-        /* storage unavailable */
-      }
     });
     const page = await context.newPage();
     const s = new Session(page, origin);

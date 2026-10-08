@@ -31,7 +31,8 @@ export const topicSchema = z
     title: bilingual,
     subtitle: bilingual,
     subject,
-    levels: z.array(level).min(1),
+    /** Content-planning metadata (school levels the topic targets); never rendered. */
+    levels: z.array(level).min(1).optional(),
     moe: z.array(z.string().min(1)).default([]),
     mode: z.enum(['time', 'space', 'both']),
     engine: engineId,

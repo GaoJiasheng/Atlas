@@ -7,8 +7,7 @@ import { Icon } from './icons';
 const CONFIRM_WINDOW_MS = 3000;
 
 /**
- * Parent mode unlocks full versions of sensitive passages and chapters above
- * the reader's level. Turning it on needs a second tap within 3 s (a small
+ * Parent mode unlocks full versions of sensitive passages. Turning it on needs a second tap within 3 s (a small
  * guard against accidental taps; no hover, no long-press). Off is one tap.
  */
 export function ParentModeToggle({ locale, variant = 'site' }: { locale: Locale; variant?: 'site' | 'hud' }) {

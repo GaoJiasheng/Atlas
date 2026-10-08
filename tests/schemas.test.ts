@@ -121,4 +121,16 @@ describe('topic schema', () => {
     const raw = parseYaml(readFileSync(join(TOPICS, 'sample-time/topic.yaml'), 'utf8')) as Record<string, unknown>;
     expect(topicSchema.safeParse({ ...raw, stage: 'model3d' }).success).toBe(false);
   });
+
+  it('treats `levels` as optional planning metadata', () => {
+    const { levels: _levels, ...raw } = parseYaml(readFileSync(join(TOPICS, 'sample-time/topic.yaml'), 'utf8')) as Record<string, unknown>;
+    expect(topicSchema.safeParse(raw).success).toBe(true);
+  });
+});
+
+describe('chapter schema', () => {
+  it('treats `level` as optional planning metadata', () => {
+    const result = chapterSchema.safeParse({ id: 'one', order: 1, title: { en: 'One', zh: '一' } });
+    expect(result.success).toBe(true);
+  });
 });

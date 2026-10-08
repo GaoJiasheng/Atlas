@@ -34,7 +34,7 @@ src/
     core/                     # Scene 契约：types, store, url-state, camera, context, SceneHost,
                               # controls（HUD 注册 + 动作）, keys（键盘）, test-api（window.__atlas）, Hud（顶栏/标题块/面板框）
     widgets/                  # ChapterRail ChapterBodies InfoPanel Legend LayerToggles QuizCard Counter
-                              # LangToggle ThemeToggle ParentModeToggle LevelPicker GlobalToggles icons
+                              # LangToggle ThemeToggle ParentModeToggle GlobalToggles icons
     time-scene/               # descriptor + schema + View + stages/geo + timeline + hud（见「TimeScene」）
     space-scene/              # descriptor + schema + View + stages/model3d + hud + explorer（见「SpaceScene」）
     simulation/               # 后期占位引擎（只有 descriptor + schema + StubStage；不在一期范围）
@@ -42,7 +42,7 @@ src/
     schemas.ts                # 构建期引擎 schema 注册表（含 zod，禁止进客户端）
   i18n/                       # ui.en.json ui.zh.json + t() / tx() / 路径工具
   theme/                      # tokens.css, theme.ts（解析/应用/读 token）, map-style.ts
-  lib/                        # content.ts（构建期取内容）, prefs.ts（localStorage）, time.ts, levels.ts
+  lib/                        # content.ts（构建期取内容）, prefs.ts（localStorage）, time.ts, levels.ts（仅供 schema 校验可选的规划字段 `level`）
   components/                 # SiteToggles 岛、MDX 组件（Lang / Soft / Full）
   layouts/BaseLayout.astro    # <html lang>、首帧前主题脚本、hreflang
   pages/                      # index.astro（跳转）, [locale]/index.astro, [locale]/topics/[slug].astro
@@ -56,7 +56,7 @@ tests-e2e/                    # Playwright：smoke.spec.ts, hud.spec.ts, hud-lay
 
 1. 建目录 `src/content/topics/<slug>/`，`<slug>` 就是 URL 和 `topic.yaml` 里的 `id`（kebab-case，必须一致）。
 2. 写 `topic.yaml`（字段见 docs/02）。`engine` + `stage` 必须是引擎支持的组合：`time-scene: geo | diagram`，`space-scene: model3d | layer2d`。
-3. 写章节 `chapters/<nn>-<id>.mdx`，frontmatter：`id, order, title, level, sensitive, state, quiz`。
+3. 写章节 `chapters/<nn>-<id>.mdx`，frontmatter：`id, order, title, sensitive, state, quiz`（`level` 可选，仅作内容规划，不渲染）。
    - `state` 由引擎解释，见下文「章节状态」。
    - 正文双语写在同一个文件里，**标签前后要空行**，否则里面的 Markdown 不会被解析：
 
@@ -131,7 +131,7 @@ const t = useScene<TimeSceneExt, TimePoint | null>((s) => s.t);   // 选择器�
 const store = useSceneStore<TimeSceneExt>();                       // 拿 store 调 action
 store.getState().patch({ t: '1942-02-10' });                       // 用户交互（拖条、点零件）
 store.getState().goToChapter('fall-of-singapore');                 // 跳章（会 bump transition）
-store.getState().stepChapter(1, canEnter);                         // 上一章/下一章
+store.getState().stepChapter(1);                                   // 上一章/下一章（逐章，到头返回 null）
 store.getState().toggleLayer('battles'); setLayers([...]); setCamera(cam); setTheme('cinema');
 store.getState().chapterTarget(id);                                // 某章的目标状态（纯函数）
 ```
@@ -152,7 +152,7 @@ store.getState().chapterTarget(id);                                // 某章的�
 舞台铺满页面，HUD 浮在上面；阅读用的 InfoPanel 在 ≥1024px 是右侧停靠列，以下是底部抽屉（收起时只有章节标题 +「阅读」按钮）。SceneHost 用 CSS grid 排布，各块贴在自己的角上，结构上不可能互相重叠：
 
 ```
-顶栏  ◇ ATLAS · 学科 │ ATL-{TOPIC6}-{NN} │ VIEW [01][02]…  MODE [X][E]…  LEVEL PARENT LOOK 中文
+顶栏  ◇ ATLAS · 学科 │ ATL-{TOPIC6}-{NN} │ VIEW [01][02]…  MODE [X][E]…  PARENT LOOK 中文
       状态行 VIEW 02 · PAUSED · X-RAY              键位提示
 左列  标题块（PLATE NN · 章节名 / 主题名 / 副标题 / 规格 dl / 声明）+ ChapterRail
 右列  card（右上示意卡）+ stageOverlay（图层 / 图例）
@@ -206,7 +206,7 @@ const labelsOn = useHud((s) => s.labels);   // 或 CSS：.atlas-scene[data-label
 - 非 React 场合用 `registerSceneControls(hudStore, controls)`，返回注销函数。
 - **镜头预设**：调用 `store.getState().applyCameraPreset(camera, { instant })`，它改 `camera` 并发一次 `transition.reason = 'preset'`（舞台照常飞过去；TimeScene 不因此停播放）。当前预设由宿主推导：显式选的 > 当前章节自己的（`preset.chapter`）；用户拖动 / 平移写回相机后变为 FREE CAMERA。
 - **立即完成**：`store.getState().snap()` 发 `reason: 'snap'`、`instant: true` 的过渡，舞台跳到终态（测试、截图用）。
-- 规格表：宿主先放默认行（学科 / 年级 / 章节数 / 课纲锚点数），引擎行追加在后，最多 8 行。
+- 规格表：宿主先放默认行（学科 / 章节数 / 课纲锚点数），引擎行追加在后，最多 8 行。
 - 接线现状：
   - **TimeScene**：预设 = 各章镜头 + `world` + `theatre`；模式 `flow`（F）/ `borders`（B）/ `graticule`（G）/ `reference`（R）/ `presentation`（P）+ 宿主 `labels`（L）；SPACE = 播放 / 暂停；ESC 依次退出演示、REFERENCE、事件详情、高亮。G / P 手机上不画按钮（`phone: false`）。
   - **SpaceScene**：预设 = 各章镜头（本章镜头 > 视图预设 > 继承）+ `ORBIT`（转台）+ `REF.`（= REFERENCE 模式的预设入口）；模式 `xray`（X）/ `exploded`（E）/ `cutaway`（C）/ `flow`（F，= run）/ `reference`（R）+ 宿主 `labels`（L）；SPACE = run；ESC 依次取消选中、退出 REFERENCE、停 ORBIT。R 手机上不画按钮（`phone: false`）。
@@ -252,7 +252,7 @@ pnpm shoot sample-space --perf --json out.json   # 每张图后多等 2 s，打�
 pnpm shoot sample-time --shots mine.json hero    # 自定义截图表（{name: {chapter?, preset?, modes?, hud?, wait?, js?}}）
 ```
 
-- `--locale en|zh|all`、`--theme paper|cinema|all`（也接受逗号列表），默认 `en` + `paper`；`shots/` 已 gitignore。主题用 `__atlas.setTheme()` 切换，`atlas:level` 固定 P6（所有章节可见）。`--gpu` 改用真 GPU（macOS 走 Metal），默认软件 GL（SwiftShader，与 e2e 相同），fps 数字只在 `--gpu` 下有意义。
+- `--locale en|zh|all`、`--theme paper|cinema|all`（也接受逗号列表），默认 `en` + `paper`；`shots/` 已 gitignore。主题用 `__atlas.setTheme()` 切换。`--gpu` 改用真 GPU（macOS 走 Metal），默认软件 GL（SwiftShader，与 e2e 相同），fps 数字只在 `--gpu` 下有意义。
 - 默认截图：每章一张（镜头 = 本章预设）；首章上每个注册模式各一张（`presentation` 除外；默认开着的模式截"关"，文件名 `mode-<id>-off`）；非章节预设（`orbit` / `reference` / `world` / `theatre`）各一张；`hero-clean`（HUD 关）。每次截图前把模式、HUD、暂停恢复到加载时的状态。
 - `--keys`：对 `keymap()` 逐项按键：预设（`state().preset` + `[data-preset]` 的 `aria-pressed`）、模式（状态翻转 + `[data-mode]` 的 `aria-pressed`，再按一次恢复；按钮被禁用则跳过）、SPACE、H（HUD 隐藏且"H 显示界面"可见）、ESC（HUD 隐藏后恢复）、← →；最后拖动舞台应变 FREE CAMERA（没有预设亮着），再按预设应收回。
 - `--layout`：3840×2160 / 2560×1440 / 1920×1080 / 1280×720 / 900×1200 / 390×844 × 每章 × 额外预设，用 `tests-e2e/hud-layout.ts` 的 `hudLayoutIssues()`（与 `pnpm e2e` 共用同一份逻辑）查 `[data-hud-panel]` 出屏 / 重叠（1 px 容差）/ 横向溢出，并存 `layout-WxH.png`。
@@ -275,11 +275,11 @@ pnpm shoot sample-time --shots mine.json hero    # 自定义截图表（{name: {
 - 数据里的颜色写 `token:accent-1` / `#hex`；DOM/SVG 用 `resolveColorRef(ref)`（得到 `var(--accent-1)`，随主题自动变），canvas/WebGL 用 `resolveColorRef(ref, readThemeTokens())` 取实值，并在主题切换后重读。
 - MapLibre：`buildMapStyle({ sources: { land, water?, rivers? } })` 从当前 token 生成底图 style（只有 GeoJSON source，无 glyphs/sprite/瓦片）。二期加 symbol 标签需要本地 glyphs，放 `public/fonts/`。主题切换时重建 style（监听 `<html data-theme>` 变化即可）。
 
-### 年级与家长模式
+### 家长模式
 
-- `LevelPicker`（默认 P3，localStorage `atlas:level`）：高于所选年级的章节在 ChapterRail 折叠为"再长大一点再看"，←→ 和上下章按钮会跳过它们；通过深链接进入时仍显示正文并提示。
-- `ParentModeToggle`（localStorage `atlas:parent`，开启需 3 秒内连点两次）：展开所有章节，显示 `<Full>` 版本。
-- 读写偏好走 `src/lib/prefs.ts` 的 hook（`useLevel / useParentMode / useThemeOverride`），不要直接碰 localStorage；场景状态不进 localStorage，只进 URL。
+- 站点不展示年级：没有年级选择器、章节轨没有年级芯片、规格表没有年级行、索引页只按学科筛选；所有章节始终可进入，←→ 和上下章按钮逐章走。`level` / `levels` 只是 `topic.yaml` / 章节 / 零件上可选的规划元数据（schema 接受缺省，不渲染）。
+- `ParentModeToggle`（localStorage `atlas:parent`，开启需 3 秒内连点两次）：显示敏感段落的 `<Full>` 版本；`sensitive` 章节在章节轨和信息面板上仍带"需要大人陪着看"标记。
+- 读写偏好走 `src/lib/prefs.ts` 的 hook（`useParentMode / useThemeOverride`），不要直接碰 localStorage；场景状态不进 localStorage，只进 URL。
 
 ## 约束清单（每次改动自查）
 
@@ -439,7 +439,7 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
     "mesh": "Compressor",                  // 或者：glb 里的节点名；两者都写时 glb 加载后替换积木
     "explode": { "dir": [1, 0, 0.3], "dist": 1.2 },   // dir 会归一化；位移 = dir × dist × explode
     "connects": ["condenser"],             // 详情卡芯片 + 右上零件链路的连线
-    "level": "P5"
+    "level": "P5"                          // 可选，规划用，不渲染
   }],
   "groups": [{ "id": "refrigerant", "name": {en, zh}, "color": "token:accent-1" }],
   "flows": [{ "id": "loop", "group": "refrigerant", "path": [[x,y,z], ...], "speed": 1, "color": "token:accent-1", "whenRun": true }],

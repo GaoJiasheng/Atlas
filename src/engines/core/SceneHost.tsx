@@ -38,9 +38,8 @@ import { BottomPanels, CardFrame, TitleBlock, TopBar } from './Hud';
 import { getEngine, getEngineView } from '../registry';
 import { t } from '../../i18n';
 import { applyTheme, resolveTheme } from '../../theme/theme';
-import { setThemeOverride, useLevel, useParentMode, useThemeOverride } from '../../lib/prefs';
-import { isAboveLevel } from '../../lib/levels';
-import { ChapterRail, isChapterCollapsed } from '../widgets/ChapterRail';
+import { setThemeOverride, useThemeOverride } from '../../lib/prefs';
+import { ChapterRail } from '../widgets/ChapterRail';
 import { InfoPanel } from '../widgets/InfoPanel';
 import { ChapterBodies } from '../widgets/ChapterBodies';
 import { QuizCard } from '../widgets/QuizCard';
@@ -158,24 +157,18 @@ export default function SceneHost(props: SceneHostProps) {
   }, [themeOverride, sceneTheme, topic.theme]);
 
   /* ---------------- chapters ---------------- */
-  const [readerLevel] = useLevel();
-  const [parentMode] = useParentMode();
   const currentId = useStore(store, (s) => s.chapter);
   const index = chapters.findIndex((c) => c.id === currentId);
   const chapter: Chapter | null = chapters[index] ?? null;
   const chapterNumber = Math.max(0, index) + 1;
 
-  const canEnter = useCallback(
-    (c: Chapter) => !isChapterCollapsed(c, readerLevel, parentMode),
-    [readerLevel, parentMode],
-  );
-  const hasPrev = chapters.slice(0, Math.max(0, index)).some(canEnter);
-  const hasNext = chapters.slice(index + 1).some(canEnter);
+  const hasPrev = index > 0;
+  const hasNext = index < chapters.length - 1;
   const step = useCallback(
     (delta: 1 | -1) => {
-      store.getState().stepChapter(delta, canEnter);
+      store.getState().stepChapter(delta);
     },
-    [store, canEnter],
+    [store],
   );
 
   useSceneKeys(hud, actions, step);
@@ -238,8 +231,6 @@ export default function SceneHost(props: SceneHostProps) {
     [store, hud, actions, chapters, viewMounted],
   );
 
-  const tooYoung = chapter ? !parentMode && isAboveLevel(chapter.level, readerLevel) : false;
-
   return (
     <SceneContext.Provider value={context}>
       <div
@@ -294,8 +285,6 @@ export default function SceneHost(props: SceneHostProps) {
               chapters={chapters}
               currentId={currentId}
               locale={locale}
-              readerLevel={readerLevel}
-              parentMode={parentMode}
               onSelect={(id) => store.getState().goToChapter(id)}
             />
           </div>
@@ -323,7 +312,6 @@ export default function SceneHost(props: SceneHostProps) {
             total={chapters.length}
             locale={locale}
             body={props.children ? <ChapterBodies currentId={currentId}>{props.children}</ChapterBodies> : undefined}
-            tooYoung={tooYoung}
             hasPrev={hasPrev}
             hasNext={hasNext}
             onPrev={() => step(-1)}

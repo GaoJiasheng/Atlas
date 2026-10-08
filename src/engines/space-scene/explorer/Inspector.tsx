@@ -1,6 +1,6 @@
 /**
  * Selected part details (InfoPanel "inspector" slot), in the plate's hairline
- * grammar: part number + name (中文 beneath), level chip, summary, detail
+ * grammar: part number + name (中文 beneath), summary, detail
  * behind "more", group swatch, and "connected to" chips that select the
  * connected part.
  */
@@ -36,7 +36,6 @@ function PartDetails({ part, file }: { part: Part; file: PartsFile }) {
             <small lang="zh-Hans">{part.name.zh}</small>
           )}
         </h3>
-        <span className="atlas-badge">{t('chapter.level', { level: part.level })}</span>
         <button
           type="button"
           className="atlas-control atlas-control--ghost atlas-control--icon space-inspector__close"

@@ -24,7 +24,6 @@ export function usePlayback(
   playhead: Playhead,
   model: TimeModel,
   commit: (t: number) => void,
-  canStopAt: (node: ChapterNode) => boolean,
 ): Playback {
   const [playing, setPlaying] = useState(false);
   const [speed, setSpeed] = useState<Speed>(1);
@@ -51,7 +50,7 @@ export function usePlayback(
         return;
       }
       let next = Math.min(model.max, cur + perMs * speed * dt);
-      const node = model.chapterNodes.find((c) => c.t > cur && c.t <= next && canStopAt(c));
+      const node = model.chapterNodes.find((c) => c.t > cur && c.t <= next);
       if (node) {
         next = node.t;
         holdUntil = now + NODE_HOLD_MS;
@@ -63,7 +62,7 @@ export function usePlayback(
       cancelAnimationFrame(raf);
       setStop(null);
     };
-  }, [playing, speed, playhead, model, commit, canStopAt]);
+  }, [playing, speed, playhead, model, commit]);
 
   return { playing, speed, stop, setPlaying, setSpeed };
 }

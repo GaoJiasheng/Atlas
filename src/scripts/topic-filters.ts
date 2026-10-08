@@ -1,8 +1,8 @@
 /**
- * Index page filters (subject, level). Plain DOM, no framework. State lives in
- * the query string (`?subject=science&level=P4`) so filtered lists are shareable.
+ * Index page filters (subject). Plain DOM, no framework. State lives in
+ * the query string (`?subject=science`) so filtered lists are shareable.
  */
-type FilterKey = 'subject' | 'level';
+type FilterKey = 'subject';
 
 export function initTopicFilters(root: ParentNode = document): void {
   const buttons = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-filter]'));
@@ -14,15 +14,13 @@ export function initTopicFilters(root: ParentNode = document): void {
   const params = new URLSearchParams(window.location.search);
   const state: Record<FilterKey, string> = {
     subject: params.get('subject') ?? '',
-    level: params.get('level') ?? '',
   };
 
   const apply = () => {
     let visible = 0;
     for (const card of cards) {
       const okSubject = !state.subject || card.dataset.subject === state.subject;
-      const okLevel = !state.level || (card.dataset.levels ?? '').split(' ').includes(state.level);
-      const show = okSubject && okLevel;
+      const show = okSubject;
       card.hidden = !show;
       if (show) visible++;
     }
@@ -35,7 +33,7 @@ export function initTopicFilters(root: ParentNode = document): void {
     if (empty) empty.classList.toggle('hidden', visible > 0);
 
     const next = new URLSearchParams(window.location.search);
-    for (const key of ['subject', 'level'] as const) {
+    for (const key of ['subject'] as const) {
       if (state[key]) next.set(key, state[key]);
       else next.delete(key);
     }

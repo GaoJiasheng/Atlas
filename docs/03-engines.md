@@ -153,7 +153,7 @@ interface SceneState {         // 可序列化，和 URL 双向绑定
     primitive?: { kind: 'cylinder', size: [0.3, 0.3, 0.5], at: [1, 0, 0], color: 'metal' },
     explode: { dir: [1, 0, 0.3], dist: 1.2 },
     connects: ['condenser', 'evaporator'],
-    level: 'P5' }
+    level?: 'P5' }   // 可选，规划用，不渲染
 ],
   groups: [{ id: 'refrigerant', name: {en, zh}, color: 'token:accent-1' }],
   flows: [

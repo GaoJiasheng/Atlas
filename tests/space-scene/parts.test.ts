@@ -10,7 +10,6 @@ const base = {
   summary: { en: 'What it does.' },
   detail: { en: 'More.' },
   explode: { dir: [0, 1, 0], dist: 1 },
-  level: 'P3',
 };
 
 const part = (id: string, primitive: Record<string, unknown>, extra: Record<string, unknown> = {}) =>
