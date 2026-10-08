@@ -1,6 +1,7 @@
 /**
- * Selected part details (InfoPanel "inspector" slot): name, level, summary,
- * detail behind "more", group chip, and "connected to" chips that select the
+ * Selected part details (InfoPanel "inspector" slot), in the plate's hairline
+ * grammar: part number + name (中文 beneath), level chip, summary, detail
+ * behind "more", group swatch, and "connected to" chips that select the
  * connected part.
  */
 import { useId, useState } from 'react';
@@ -26,7 +27,15 @@ function PartDetails({ part, file }: { part: Part; file: PartsFile }) {
   return (
     <section className="space-inspector" aria-label={tx(part.name, locale)}>
       <header className="space-inspector__header">
-        <h3 className="space-inspector__title">{tx(part.name, locale)}</h3>
+        <span className="space-inspector__no" aria-hidden="true">
+          {String(file.parts.indexOf(part) + 1).padStart(2, '0')}
+        </span>
+        <h3 className="space-inspector__title">
+          {tx(part.name, locale)}
+          {locale === 'en' && part.name.zh && (
+            <small lang="zh-Hans">{part.name.zh}</small>
+          )}
+        </h3>
         <span className="atlas-badge">{t('chapter.level', { level: part.level })}</span>
         <button
           type="button"

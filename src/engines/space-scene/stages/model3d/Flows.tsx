@@ -14,7 +14,7 @@ import { createFlowMaterial, styleFlowMaterial } from './flowMaterial';
 import { keepAnimating, MAX_DT, useRuntime } from './runtime';
 import type { StageLook } from './look';
 
-export const PARTICLES_PER_FLOW = 200;
+export const PARTICLES_PER_FLOW = 360;
 
 /** Deterministic PRNG so every load looks the same (screenshots, tests). */
 function mulberry32(seed: number): () => number {
@@ -68,7 +68,7 @@ function FlowParticles({
   const fade = useRef(0);
   const baked = useMemo(() => bakeFlowPath(flow.path), [flow.path]);
   const material = useMemo(() => createFlowMaterial(baked, flow.speed), [baked, flow.speed]);
-  const geometry = useMemo(() => particleGeometry(PARTICLES_PER_FLOW, 1013 + index * 7919, 0.035), [index]);
+  const geometry = useMemo(() => particleGeometry(PARTICLES_PER_FLOW, 1013 + index * 7919, 0.012), [index]);
   useEffect(() => () => material.dispose(), [material]);
   useEffect(() => () => geometry.dispose(), [geometry]);
 

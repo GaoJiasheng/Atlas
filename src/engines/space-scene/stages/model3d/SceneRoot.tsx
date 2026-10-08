@@ -1,7 +1,7 @@
 /**
  * The R3F scene graph of Model3DStage. Lives in its own reconciler root (see
- * Model3DStage.tsx), so it gets the scene store and data as props rather than
- * through React context.
+ * Model3DStage.tsx), so it gets the scene store, engine UI store, bridge and
+ * data as props rather than through React context.
  */
 import { Component, lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
@@ -9,32 +9,48 @@ import { Plane, Vector3 } from 'three';
 import { useStore } from 'zustand';
 import { useShallow } from 'zustand/react/shallow';
 import type { SceneStore } from '../../../core/store';
-import type { Chapter, Locale } from '../../../core/types';
-import { tx, withBase } from '../../../../i18n';
+import type { Chapter } from '../../../core/types';
+import { withBase } from '../../../../i18n';
 import type { SpaceSceneExt } from '../../index';
 import type { PartsFile } from '../../schema';
+import type { SpaceUiStore } from '../../ui';
+import type { StageBridge } from '../../bridge';
 import { resolveAllPartDisplays } from '../../lib/visibility';
 import { targetExplodeAmount } from '../../lib/explode';
 import { animationsByPart } from '../../lib/animation';
-import { damp, normalize3 } from '../../lib/math';
-import { createRuntime, keepAnimating, MAX_DT, RuntimeContext, useRuntime } from './runtime';
-import { PartNode, type PartShape } from './PartNode';
+import { resolveDataColor, resolveMaterialLook } from '../../lib/color';
+import { damp, easeInOutCubic, normalize3, type Vec3 } from '../../lib/math';
+import { createRuntime, keepAnimating, MAX_DT, RuntimeContext, useRuntime, type StageRuntime } from './runtime';
+import { PartNode, type PartHandle, type PartShape } from './PartNode';
 import { Flows } from './Flows';
 import { CameraRig } from './CameraRig';
 import { Lighting } from './Lighting';
 import { GroundShadow } from './GroundShadow';
-import { primitiveShape, stageBounds } from './shapes';
+import { LabelProbe, ResolutionGovernor, ShadowUpdater, StatsProbe } from './probes';
+import { anchorOffset, primitiveShape, stageBounds } from './shapes';
+import { createTextureKit } from './textures';
+import type { PartStyle } from './materials';
 import type { StageLook } from './look';
+import { stageDpr } from './dpr';
 
 const GltfSource = lazy(() => import('./GltfSource'));
 
 export interface SceneRootProps {
   store: SceneStore<SpaceSceneExt>;
+  ui: SpaceUiStore;
+  bridge: StageBridge;
   data: PartsFile;
   chapters: readonly Chapter[];
-  locale: Locale;
   look: StageLook;
 }
+
+/** FLOW fade-in (master-spec H: ~0.6 s). */
+const RUN_RATE = 5;
+/** EXPLODED toggle (master-spec H: ~2 s easeInOut); slider drags follow quickly. */
+const EXPLODE_MS = 2000;
+const EXPLODE_DRAG_MS = 220;
+/** Parts at least this fraction of the model radius cast the key light's shadow. */
+const SHADOW_CASTER_RATIO = 0.28;
 
 /** Eases `run` in/out and advances the shared clocks. */
 function RunClock({ run, alwaysOn }: { run: boolean; alwaysOn: boolean }) {
@@ -44,11 +60,40 @@ function RunClock({ run, alwaysOn }: { run: boolean; alwaysOn: boolean }) {
   useFrame((state, delta) => {
     const dt = Math.min(delta, MAX_DT);
     runtime.elapsed += dt;
-    runtime.energy = damp(runtime.energy, run ? 1 : 0, 2.5, dt);
-    if (run && runtime.energy > 0.999) runtime.energy = 1;
-    if (!run && runtime.energy < 0.002) runtime.energy = 0;
+    runtime.energy = damp(runtime.energy, run ? 1 : 0, RUN_RATE, dt);
+    if (run && runtime.energy > 0.995) runtime.energy = 1;
+    if (!run && runtime.energy < 0.01) runtime.energy = 0;
     runtime.phase += dt * runtime.energy;
     if (runtime.energy > 0 || alwaysOn) keepAnimating(state.invalidate);
+  });
+  return null;
+}
+
+/** Eases the shared explode amount: 2 s for mode switches, quick for slider drags. */
+function ExplodeClock({ target, snapKey }: { target: number; snapKey: number }) {
+  const runtime = useRuntime();
+  const invalidate = useThree((s) => s.invalidate);
+  const tw = useRef<{ from: number; to: number; start: number; ms: number } | null>(null);
+  useEffect(() => {
+    const from = runtime.explode;
+    if (from === target) return;
+    tw.current = { from, to: target, start: performance.now(), ms: Math.abs(target - from) > 0.15 ? EXPLODE_MS : EXPLODE_DRAG_MS };
+    invalidate();
+  }, [target, runtime, invalidate]);
+  useEffect(() => {
+    tw.current = null;
+    runtime.explode = target;
+    runtime.shadowDirty = true;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [snapKey]);
+  useFrame((state) => {
+    const t = tw.current;
+    if (!t) return;
+    const k = Math.min(1, (performance.now() - t.start) / t.ms);
+    runtime.explode = t.from + (t.to - t.from) * easeInOutCubic(k);
+    runtime.shadowDirty = true;
+    if (k >= 1) tw.current = null;
+    keepAnimating(state.invalidate);
   });
   return null;
 }
@@ -67,14 +112,7 @@ class GltfBoundary extends Component<{ children: ReactNode }, { failed: boolean 
   }
 }
 
-/** A part whose rest centre is cut away by the cutaway plane gets no label. */
-function isClipped(at: readonly number[], clipping: Plane[] | null): boolean {
-  if (!clipping) return false;
-  const p = new Vector3(at[0], at[1], at[2]);
-  return clipping.some((plane) => plane.distanceToPoint(p) < 0);
-}
-
-export function SceneRoot({ store, data, chapters, locale, look }: SceneRootProps) {
+export function SceneRoot({ store, ui, bridge, data, chapters, look }: SceneRootProps) {
   const s = useStore(
     store,
     useShallow((st) => ({
@@ -90,8 +128,19 @@ export function SceneRoot({ store, data, chapters, locale, look }: SceneRootProp
   );
   const invalidate = useThree((st) => st.invalidate);
   const gl = useThree((st) => st.gl);
-  const [runtime] = useState(() => createRuntime(store.getState().run));
+  const dpr = useThree((st) => st.viewport.dpr);
+  const [runtime] = useState<StageRuntime>(() =>
+    createRuntime(store.getState().run, targetExplodeAmount(store.getState().view, store.getState().explode)),
+  );
   const [hovered, setHovered] = useState<string | null>(null);
+  const [handles] = useState(() => new Map<string, PartHandle>());
+
+  useEffect(() => {
+    bridge.invalidate = invalidate;
+    return () => {
+      bridge.invalidate = () => {};
+    };
+  }, [bridge, invalidate]);
 
   /* ---------------- shapes ---------------- */
   const primitiveShapes = useMemo(() => {
@@ -102,7 +151,7 @@ export function SceneRoot({ store, data, chapters, locale, look }: SceneRootProp
     }
     return out;
   }, [data.parts]);
-  useEffect(() => () => primitiveShapes.forEach((sh) => sh.geometry.dispose()), [primitiveShapes]);
+  useEffect(() => () => primitiveShapes.forEach((sh) => sh.pieces.forEach((p) => p.geometry.dispose())), [primitiveShapes]);
 
   const meshNames = useMemo(
     () => new Map(data.parts.filter((p) => p.mesh).map((p) => [p.id, p.mesh!] as [string, string])),
@@ -118,6 +167,36 @@ export function SceneRoot({ store, data, chapters, locale, look }: SceneRootProp
     return out;
   }, [primitiveShapes, meshShapes]);
   const bounds = useMemo(() => stageBounds(data.parts, shapes), [data.parts, shapes]);
+  const anchors = useMemo(() => new Map(data.parts.map((p) => [p.id, anchorOffset(p)] as [string, Vec3])), [data.parts]);
+  useEffect(() => {
+    bridge.modelRadius = bounds.modelRadius;
+  }, [bridge, bounds]);
+
+  /* ---------------- materials ---------------- */
+  const kit = useMemo(() => createTextureKit(), []);
+  useEffect(() => () => kit.dispose(), [kit]);
+  const groupColors = useMemo(() => new Map(data.groups.map((g) => [g.id, g.color])), [data.groups]);
+  const styles = useMemo(() => {
+    const cinema = look.theme === 'cinema';
+    const signal = resolveDataColor('token:signal', look.tokens, look.theme, '#cc6328');
+    const cut = resolveDataColor('token:cut', look.tokens, look.theme, '#b8973c');
+    const ink = resolveDataColor('token:ink', look.tokens, look.theme, '#2a2824');
+    const out = new Map<string, PartStyle>();
+    for (const part of data.parts) {
+      const ref = part.primitive?.color ?? groupColors.get(part.group) ?? 'steel';
+      out.set(part.id, {
+        look: resolveMaterialLook(ref, look.tokens, look.theme),
+        kit,
+        signal,
+        cut,
+        ink: cinema ? '#1f2124' : ink,
+        rim: cinema ? 0.35 : 0.75,
+        tint: cinema ? 0.03 : 0.02,
+        hatchPx: Math.round(7 * dpr),
+      });
+    }
+    return out;
+  }, [data.parts, groupColors, look, kit, dpr]);
 
   /* ---------------- explorer state -> display ---------------- */
   const displays = useMemo(
@@ -125,7 +204,6 @@ export function SceneRoot({ store, data, chapters, locale, look }: SceneRootProp
     [data.parts, s.view, s.part, s.layers],
   );
   const explodeTarget = targetExplodeAmount(s.view, s.explode);
-  const groupColors = useMemo(() => new Map(data.groups.map((g) => [g.id, g.color])), [data.groups]);
   const anims = useMemo(() => animationsByPart(data.animations), [data.animations]);
   const alwaysOn = useMemo(
     () => data.animations.some((a) => !a.whenRun) || data.flows.some((f) => !f.whenRun),
@@ -139,24 +217,22 @@ export function SceneRoot({ store, data, chapters, locale, look }: SceneRootProp
     return [new Plane(new Vector3(n[0], n[1], n[2]), plane?.offset ?? 0)];
   }, [s.cutaway, plane]);
 
-  // Instant transitions (deep links, first load) jump instead of easing.
+  // Instant transitions (deep links, first load, snap) jump instead of easing.
   const snap = useRef({ id: -1, key: 0 });
   if (snap.current.id !== s.transitionId) {
     snap.current.id = s.transitionId;
     if (s.instant) snap.current.key += 1;
   }
 
-  const selected = s.part && displays.get(s.part)?.visible ? s.part : null;
   const hoverVisible = hovered && displays.get(hovered)?.visible ? hovered : null;
-  const labelFor = selected ?? hoverVisible;
-
   useEffect(() => {
     gl.domElement.style.cursor = hoverVisible ? 'pointer' : '';
   }, [gl, hoverVisible]);
 
   useEffect(() => {
+    runtime.shadowDirty = true;
     invalidate();
-  }, [invalidate, s, look, hovered, shapes, clipping]);
+  }, [invalidate, runtime, s, look, hovered, shapes, clipping]);
 
   const onSelect = useCallback((id: string) => store.getState().patch({ part: id }), [store]);
   const onHover = useCallback((id: string | null) => setHovered(id), []);
@@ -164,26 +240,27 @@ export function SceneRoot({ store, data, chapters, locale, look }: SceneRootProp
   return (
     <RuntimeContext.Provider value={runtime}>
       <RunClock run={s.run} alwaysOn={alwaysOn} />
-      <Lighting look={look} />
-      <GroundShadow y={bounds.floor} radius={bounds.radius} look={look} />
+      <ExplodeClock target={explodeTarget} snapKey={snap.current.key} />
+      <Lighting look={look} center={bounds.center} radius={bounds.modelRadius} runtime={runtime} />
+      <GroundShadow floor={bounds.floor} radius={bounds.radius} look={look} runtime={runtime} />
       {data.parts.map((part) => {
         const shape = shapes.get(part.id);
         const display = displays.get(part.id);
-        if (!shape || !display) return null;
+        const style = styles.get(part.id);
+        if (!shape || !display || !style) return null;
         return (
           <PartNode
             key={part.id}
             part={part}
             shape={shape}
-            colorRef={part.primitive?.color ?? groupColors.get(part.group) ?? 'metal'}
+            style={style}
             display={display}
-            explodeTarget={explodeTarget}
             animations={anims.get(part.id) ?? []}
-            look={look}
             hovered={hovered === part.id}
-            showLabel={labelFor === part.id && !isClipped(shape.position, clipping)}
-            label={tx(part.name, locale)}
             clipping={clipping}
+            castShadow={style.look.opacity === 1 && shape.radius >= bounds.modelRadius * SHADOW_CASTER_RATIO}
+            anchorOffset={anchors.get(part.id) ?? [0, 0, 0]}
+            handles={handles}
             snapKey={snap.current.key}
             onSelect={onSelect}
             onHover={onHover}
@@ -191,7 +268,7 @@ export function SceneRoot({ store, data, chapters, locale, look }: SceneRootProp
         );
       })}
       <Flows flows={data.flows} layers={s.layers} look={look} clipping={clipping} />
-      <CameraRig store={store} chapters={chapters} views={data.views} />
+      <CameraRig store={store} ui={ui} bridge={bridge} chapters={chapters} views={data.views} minDistance={bounds.modelRadius * 0.9} />
       {data.model && meshNames.size > 0 && (
         <GltfBoundary>
           <Suspense fallback={null}>
@@ -199,6 +276,10 @@ export function SceneRoot({ store, data, chapters, locale, look }: SceneRootProp
           </Suspense>
         </GltfBoundary>
       )}
+      <LabelProbe bridge={bridge} handles={handles} clipping={clipping} xray={s.view === 'xray'} runtime={runtime} />
+      <StatsProbe bridge={bridge} />
+      <ShadowUpdater runtime={runtime} />
+      <ResolutionGovernor bridge={bridge} base={stageDpr} />
     </RuntimeContext.Provider>
   );
 }

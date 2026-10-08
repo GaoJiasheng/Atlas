@@ -1,3 +1,19 @@
 /** Material preset ids (mirrors MATERIAL_PRESETS in ../schema.ts, kept zod-free for the client). */
-export const MATERIAL_PRESET_IDS = ['metal', 'plastic', 'copper', 'glass', 'rubber', 'matte'] as const;
+export const MATERIAL_PRESET_IDS = [
+  'casing',
+  'steel',
+  'powder',
+  'stainless',
+  'copper',
+  'rubber',
+  'plastic',
+  'glass',
+  'metal',
+  'matte',
+] as const;
 export type MaterialPreset = (typeof MATERIAL_PRESET_IDS)[number];
+
+/** The eight material families; `metal` and `matte` are aliases. */
+export type MaterialFamily = Exclude<MaterialPreset, 'metal' | 'matte'>;
+
+export const PRESET_ALIASES: Record<'metal' | 'matte', MaterialFamily> = { metal: 'steel', matte: 'plastic' };

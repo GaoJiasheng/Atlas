@@ -1,0 +1,204 @@
+/**
+ * Layout maths for the SpaceScene HUD drawings (pure, unit-tested):
+ *
+ *  - partChain: the top-right card — groups as columns, parts as numbered
+ *    nodes, `connects` as orthogonal hairlines
+ *  - elevation: the ARCHITECTURE panel — every primitive part's rest bounds
+ *    projected on the section plane, with a scale bar step
+ *  - labelBudget / stackColumn: leader-label count by camera distance and
+ *    the one-column de-overlap used by the leader labels
+ */
+import type { Part, PartGroup, SectionPlane } from '../schema';
+import { explodeOffset } from './explode';
+import { partBounds } from './parts';
+
+/* ------------------------------------------------------------------ */
+/* Part chain (card)                                                   */
+/* ------------------------------------------------------------------ */
+
+export interface ChainNode {
+  id: string;
+  group: string;
+  /** 1-based part number in data order (also used by the ARCHITECTURE panel). */
+  n: number;
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+}
+
+export interface ChainLink {
+  a: string;
+  b: string;
+  /** Group both ends belong to (null when the link crosses groups). */
+  group: string | null;
+  d: string;
+}
+
+export interface ChainColumn {
+  id: string;
+  x: number;
+  w: number;
+}
+
+export interface ChainLayout {
+  width: number;
+  height: number;
+  header: number;
+  columns: ChainColumn[];
+  nodes: ChainNode[];
+  links: ChainLink[];
+}
+
+/** Lay the part chain out in a `width`-wide box; height follows the longest column. */
+export function partChain(
+  parts: readonly Pick<Part, 'id' | 'group' | 'connects'>[],
+  groups: readonly Pick<PartGroup, 'id'>[],
+  width = 330,
+  opts: { header?: number; row?: number; gap?: number; pad?: number } = {},
+): ChainLayout {
+  const header = opts.header ?? 16;
+  const row = opts.row ?? 19;
+  const gap = opts.gap ?? 22;
+  const pad = opts.pad ?? 6;
+  const cols = groups.length > 0 ? groups.map((g) => g.id) : [...new Set(parts.map((p) => p.group))];
+  const colW = (width - pad * 2 - gap * (cols.length - 1)) / Math.max(1, cols.length);
+  const columns = cols.map((id, i) => ({ id, x: pad + i * (colW + gap), w: colW }));
+  const nodes: ChainNode[] = [];
+  const rowsUsed = new Map<string, number>();
+  parts.forEach((p, i) => {
+    const c = columns.find((col) => col.id === p.group);
+    if (!c) return;
+    const r = rowsUsed.get(p.group) ?? 0;
+    rowsUsed.set(p.group, r + 1);
+    nodes.push({ id: p.id, group: p.group, n: i + 1, x: c.x, y: header + 6 + r * row, w: c.w, h: row - 6 });
+  });
+  const byId = new Map(nodes.map((n) => [n.id, n]));
+  const seen = new Set<string>();
+  const links: ChainLink[] = [];
+  let lane = 0;
+  for (const p of parts) {
+    for (const q of p.connects) {
+      const key = [p.id, q].sort().join('|');
+      if (seen.has(key)) continue;
+      seen.add(key);
+      const a = byId.get(p.id);
+      const b = byId.get(q);
+      if (!a || !b) continue;
+      const ay = a.y + a.h / 2;
+      const by = b.y + b.h / 2;
+      let d: string;
+      if (a.group === b.group) {
+        // Same column: a bracket on the left edge.
+        const x = a.x;
+        const off = 3 + (lane++ % 3) * 2;
+        d = `M${x} ${ay}H${x - off}V${by}H${x}`;
+      } else {
+        const [l, r] = a.x < b.x ? [a, b] : [b, a];
+        const ly = l === a ? ay : by;
+        const ry = l === a ? by : ay;
+        const x1 = l.x + l.w;
+        const x2 = r.x;
+        const mid = (x1 + x2) / 2 + ((lane++ % 3) - 1) * 3;
+        d = `M${x1} ${ly}H${mid}V${ry}H${x2}`;
+      }
+      links.push({ a: a.id, b: b.id, group: a.group === b.group ? a.group : null, d });
+    }
+  }
+  const rows = Math.max(1, ...[...rowsUsed.values()]);
+  return { width, height: header + 6 + rows * row, header, columns, nodes, links };
+}
+
+/* ------------------------------------------------------------------ */
+/* Elevation (ARCHITECTURE panel)                                      */
+/* ------------------------------------------------------------------ */
+
+export interface ElevationRect {
+  id: string;
+  group: string;
+  /** Plane coordinates, model units; v points up for elevations, towards the viewer for a plan. */
+  u0: number;
+  u1: number;
+  v0: number;
+  v1: number;
+  /** Depth along the view axis (larger = nearer), for back-to-front drawing. */
+  depth: number;
+}
+
+export interface Elevation {
+  rects: ElevationRect[];
+  u0: number;
+  u1: number;
+  v0: number;
+  v1: number;
+}
+
+/** [u axis, v axis, view axis] indices for a section plane. */
+export function planeAxes(plane: SectionPlane): [number, number, number] {
+  if (plane === 'zy') return [2, 1, 0];
+  if (plane === 'xz') return [0, 2, 1];
+  return [0, 1, 2];
+}
+
+/**
+ * Rest bounds of every primitive part projected on the section plane
+ * (exploded by `explode` 0..1 along each part's explode direction),
+ * sorted back to front.
+ */
+export function elevation(
+  parts: readonly Pick<Part, 'id' | 'group' | 'primitive' | 'repeat' | 'explode'>[],
+  plane: SectionPlane,
+  explode = 0,
+): Elevation {
+  const [u, v, w] = planeAxes(plane);
+  const rects: ElevationRect[] = [];
+  let u0 = Infinity, u1 = -Infinity, v0 = Infinity, v1 = -Infinity;
+  for (const p of parts) {
+    const b = partBounds(p, explodeOffset(p.explode, explode));
+    if (!b) continue;
+    const r: ElevationRect = { id: p.id, group: p.group, u0: b.min[u]!, u1: b.max[u]!, v0: b.min[v]!, v1: b.max[v]!, depth: b.max[w]! };
+    rects.push(r);
+    u0 = Math.min(u0, r.u0);
+    u1 = Math.max(u1, r.u1);
+    v0 = Math.min(v0, r.v0);
+    v1 = Math.max(v1, r.v1);
+  }
+  rects.sort((a, b) => a.depth - b.depth);
+  return rects.length ? { rects, u0, u1, v0, v1 } : { rects, u0: -1, u1: 1, v0: -1, v1: 1 };
+}
+
+/** A "nice" scale-bar length (1, 2 or 5 × 10^n) near a quarter of `span`. */
+export function scaleStep(span: number): number {
+  const raw = Math.max(1e-6, span / 4);
+  const p = 10 ** Math.floor(Math.log10(raw));
+  const m = raw / p;
+  return (m >= 5 ? 5 : m >= 2 ? 2 : 1) * p;
+}
+
+/* ------------------------------------------------------------------ */
+/* Leader labels                                                       */
+/* ------------------------------------------------------------------ */
+
+/**
+ * How many leader labels a camera distance allows (master-spec J: fewer in
+ * close-ups): `ratio` = camera distance / model bounding radius.
+ */
+export function labelBudget(ratio: number, max = 10, min = 3): number {
+  const k = Math.min(1, Math.max(0, (ratio - 1.6) / (3.4 - 1.6)));
+  return Math.round(min + (max - min) * k);
+}
+
+/**
+ * De-overlap one label column: `want` are desired top edges (sorted by the
+ * caller in screen order), `heights` the label heights; labels keep at least
+ * `gap` between them and stay inside [top, bottom]. Returns the top edges.
+ */
+export function stackColumn(want: readonly number[], heights: readonly number[], top: number, bottom: number, gap: number): number[] {
+  const out = want.map((y, i) => Math.min(Math.max(y, top), bottom - heights[i]!));
+  for (let i = 1; i < out.length; i++) out[i] = Math.max(out[i]!, out[i - 1]! + heights[i - 1]! + gap);
+  for (let i = out.length - 1; i >= 0; i--) {
+    const limit = i === out.length - 1 ? bottom - heights[i]! : out[i + 1]! - heights[i]! - gap;
+    out[i] = Math.min(out[i]!, limit);
+  }
+  return out;
+}

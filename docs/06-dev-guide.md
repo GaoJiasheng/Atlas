@@ -261,20 +261,22 @@ __atlas.stats()     // { buffer, pixelRatio } 取自舞台 canvas，再合并引
 - 所有文案双语；界面文案进 `ui.*.json`，内容文案用 `{ en, zh }`
 - `pnpm check && pnpm validate && pnpm test && pnpm build && pnpm e2e` 全绿
 
-## TimeScene（二期 A：GeoStage + Timeline）
+## TimeScene（二期 A：GeoStage + Timeline；P3 技术图版）
 
 代码在 `src/engines/time-scene/`：
 
 ```
 index.ts              descriptor（扩展字段 t / highlight，未变）
 schema.ts             zod（构建期），客户端只 import type
-View.tsx              组装：GeoStage + Timeline + 图层/图例 + 事件详情；store ↔ 播放头同步
-stages/geo/GeoStage.tsx    React 壳，懒加载 controller（MapLibre 在这个 chunk 里）
-stages/geo/controller.ts   命令式驱动 MapLibre：图层、标签、箭头、脉冲、镜头、主题
-timeline/Timeline.tsx      章节节点 + 细拖条 + 播放/倍速（渲染进 bottomBar 插槽）
+View.tsx              组装：GeoStage + 时间轴标尺 + HUD 内容 + 图层/图例 + 事件详情；store ↔ 播放头同步；控件注册（预设、模式、PRESENTATION）
+stages/geo/GeoStage.tsx    React 壳，懒加载 controller（MapLibre 在这个 chunk 里），提供引线标签层、比例尺和宿主 leaders svg
+stages/geo/controller.ts   命令式驱动 MapLibre：图层、斜线填充、流线、事件环、地名、比例尺、REFERENCE、镜头、主题
+stages/geo/leaders.ts      引线标注（两列、避让、逐帧投影）
+timeline/Timeline.tsx      工程标尺时间轴（渲染进 bottomBar 插槽）
 timeline/usePlayback.ts    播放循环（全程约 60 s @×1，遇章节节点停 1.5 s）
+hud/HudPanels.tsx          card 条带图、panel01 时间标尺、panel02 问题、panel03 状态、perf 读数
 EventInspector.tsx         点事件 → inspector 插槽（Counter；sensitive 事件的伤亡仅家长模式）
-lib/time.ts  lib/format.ts  lib/geo.ts  lib/model.ts  lib/frame.ts  lib/playhead.ts   纯函数，单测在 tests/time-scene/
+lib/time.ts lib/format.ts lib/geo.ts lib/model.ts lib/frame.ts lib/playhead.ts lib/ticks.ts lib/stats.ts   纯函数，单测在 tests/time-scene/
 colors.ts  time-scene.css
 ```
 
@@ -284,39 +286,83 @@ colors.ts  time-scene.css
 
 | 文件 | 要点 |
 |---|---|
-| `entities.json` | `id, name, bloc(axis/allied/neutral), joined, left?, color?`。颜色默认取阵营 token，`color: "token:accent-3"` 或 `#hex` 覆盖。`joined` 驱动 participation 图层"点亮"。 |
-| `control.json` | `keyframes[]`，按时间严格升序；每帧一个 FeatureCollection，`properties.holder` = 实体 id。同一实体可有多个面（或 MultiPolygon）。 |
-| `movements.json` | `from/to` 时间区间 + LineString `path`（从起点画到终点）。`strength` 决定线宽（相对全主题最大值）。 |
+| `entities.json` | `id, name, bloc(axis/allied/neutral), joined, left?, color?`。颜色默认取阵营 token，`color: "token:accent-3"` 或 `#hex` 覆盖。`joined` 驱动 participation 图层"点亮"和右上卡的参与线。 |
+| `control.json` | `keyframes[]`，按时间严格升序；每帧一个 FeatureCollection，`properties.holder` = 实体 id。同一实体可有多个面（或 MultiPolygon）。面积（右上卡）在客户端按球面公式算，不用写。 |
+| `movements.json` | `from/to` 时间区间 + LineString `path`（从起点画到终点）。`strength` 决定线宽（1–3 px，相对全主题最大值）。 |
 | `events.json` | `t`、可选 `until`、`at`、`kind`、`importance`（**3 最重要 = 点最大**，1 最小）、`sides/forces/casualties/result`。`sensitive: true` 的事件伤亡数字只在家长模式显示。 |
 
-章节 `state`：`time`（ISO 三种精度或 `{ ma }`）、`camera`、`layers`、`highlight`（实体/行动/事件 id）、`theme`。章节节点在时间轴上的位置 = 该章累积目标的 `t`。
+章节 `state`：`time`（ISO 三种精度或 `{ ma }`）、`camera`、`layers`、`highlight`（实体/行动/事件 id）、`theme`，以及 P3 新增的 `question` / `answer`（`{ en, zh }`，panel02 显示；`answer` 必须配 `question`）。章节节点在时间轴上的位置 = 该章累积目标的 `t`。
 
-### 图层（`layers` 里的 id）
+### 图层（`layers` 里的 id）与地图语法（docs/08 §5）
 
 | id | 渲染 | 开关 |
 |---|---|---|
-| `base` | 陆地/海洋（`public/geo/land-50m.json`） | 永远开 |
-| `control` | 两个 GeoJSON source（前帧/后帧）交叉淡化：区间最后 30% 内前帧 1→0.4、后帧 0→1；落在关键帧上只显示该帧 | 可关 |
-| `borders` | 今天的国界 + 国名（`countries-50m.json`，第一次打开时才下载） | 默认关 |
-| `movements` | 已走过的路径 + 流动虚线（约 12 fps）+ 头部箭头（HTML marker）；cinema 主题加 glow 底线 | 可关 |
-| `battles` | 已发生的事件点（按 importance 定大小，进行中的更实），进入 `[t, until]` 时脉冲一次（~900 ms）；点击（44 px 命中框）→ 详情 + `highlight` | 可关 |
+| `base` | 陆地纸色 `--land`、海洋 `--water`（背景）、海岸 hairline（`buildMapStyle`，`public/geo/land-50m.json`） | 永远开 |
+| 经纬网 | 10° 经纬线，代码生成（不是文件），hairline，普通 .22 / 赤道与本初子午线 .4 | `graticule` 模式（G），默认开，不进 URL |
+| `control` | 每个关键帧三层：阵营色淡底（.28）+ 45° 斜线 `fill-pattern`（每个实体一张 canvas 图，按 pixelRatio `addImage`，换主题 `updateImage`）+ 阵营色描边。前帧/后帧两个 source 交叉淡化：区间最后 30% 内前帧 1→0.4、后帧 0→1，三层同一个系数 | 可关 |
+| `borders` | 今天的国界 hairline（ink .4，0.4–0.9 px 随缩放）+ 国名（`countries-50m.json`，第一次打开时才下载） | B 模式 / 图层开关 |
+| `movements` | 工程流线：已走过的路径一条实线（.3）+ 一条步进虚线（约 12 fps 流动），宽 1–3 px；头部 12 px 小箭头（HTML marker）。paper 无发光；dark plate 只在箭头头部有 ≤ .35 的微光（`--glow`） | F 模式（`flow`）/ 图层开关 |
+| `battles` | 已发生的事件：空心 hairline 圆环 + 实心点（按 importance 定大小），进入 `[t, until]` 时圆环用进攻方颜色、实线；高亮用 signal 色；进入时放一个扩散 hairline 环（~900 ms）。点击（44 px 命中框）→ 详情 + `highlight` | 可关 |
 | `participation` | 实体在当前关键帧的面：加入后描边，加入那一刻闪亮（时长 = 全程 4%） | 默认关 |
 
-标签都是 HTML marker（无 glyphs），最多 12 个。每次放置后（时间变化、`moveend`、换语言）跑一遍贪心避让：按 高亮 > 事件 > 实体 > 行动 > 国名 排序，用真实屏幕矩形（4 px 间隙）检测，与已保留标签相交的低优先级标签被隐藏（`data-collided`）；`highlight` 的对象标签永远显示。
+- 地名（HTML marker，无 glyphs，最多 12 个）：区域名（实体，大写宽字距）和国名（borders 开时）。贪心避让：按优先级用真实屏幕矩形（4 px 间隙）检测，**先给引线标注让位**，再互相避让（`data-collided`）。
+- 比例尺：舞台左下、底部面板之上（被左列挡住就挪到左列右侧），按当前缩放和中心纬度取 1/2/5×10ⁿ km 的整数长度，半实半空 hairline 条。HUD 隐藏时跟着隐藏；手机不显示。
+- 底图数据跨 180° 经线的环已在构建时展开（见"底图数据"），不会再出现横贯全图的直线。
+
+### 引线标注（`leaders.ts`，docs/08 §5 + skill master-spec J）
+
+- 谁有标注：`highlight` 里的 id（事件 / 行动 / 实体）+ 处在 `[t, until]` 窗口里的事件，最多 8 条，高亮优先。高亮的实体不再出区域名，改出引线标注。
+- 内容：EN 粗体大写 + 中文 + 一行说明（mono 日期 + 摘要，单行省略）。行动的说明是"陆路 · 12,000 人"，实体是"阵营 · 某日加入"。
+- 锚点：事件 = `at`；行动 = 已画部分的中点（不压箭头）；实体 = 当前关键帧最大面的形心。`map.project` 投影。
+- 布局：量出没被 `[data-hud-panel]` 占住的舞台带（左列右缘、右列左缘、底部 dock 上缘），两列分别贴在带的左右边缘（左列右对齐、右列左对齐），按锚点在带中线哪一侧分列（带 40 px 滞回，播放时不来回跳）；列内按投影 y 排序 + 最小间距避让，夹在带内；仍与任何面板相交的标签隐藏。带太窄时退成一列，再窄全隐藏。标签最大宽度 = 列宽（210 设计 px 封顶）。
+- 引线：标签边 → 14 px 水平短线 → 直线到锚点，锚点是空心小圆；高亮的引线用 signal 色。线画进宿主 `leaders` svg（随 HUD 淡出）。
+- 性能：只在地图 `render` 事件里重投影，只写 `transform` / `opacity` / SVG 属性；尺寸和面板矩形在 resize（ResizeObserver 盯面板）、换内容时和每秒一次量。
+- 开关：宿主 LABELS（L）→ `data-labels="off"` 隐藏标注和地名；HUD 隐藏时隐藏；手机不显示。锚点出屏时标签和线淡出。
+- 事件标签是按钮：点它 = 打开 inspector + `highlight`（点完自动失焦，键盘照常）。
 
 ### 时间
 
 - `toNumber(t)`：ISO → 十进制年（取时段起点：`1942-02` = 1942 年 2 月 1 日）；`{ ma }` → 负的年数（`{ ma: 200 }` = -2e8）。`fromNumber(n, scale)` 反向，日期按日向下取整，地质时间保留 2 位小数 Ma。
 - 时间轴范围 = 关键帧、事件（含 `until`）、行动起止、章节时间的最小/最大值。
 - store 里的 `t` 是日精度 TimePoint（进 URL）；地图按连续的"播放头"渲染。跳章时播放头 1.6 s 缓动到新时间；拖动/播放/Shift+←→ 直接移动播放头并 `patch({ t })`。
-- 读数格式 `formatTime(t, locale)`：`15 Feb 1942` / `1942年2月15日`；`200 Ma` / `2亿年前`、`6600万年前`。跨度 >12 年时读数降到月，>100 年降到年。
+- 读数格式 `formatTime(t, locale)`：`15 Feb 1942` / `1942年2月15日`；`200 Ma` / `2亿年前`、`6600万年前`。跨度 >12 年时读数降到月，>100 年降到年。HUD 里的 mono 读数用 `formatReadout`（英文大写：`15 FEB 1942`）。
+- 刻度 `ruleTicks(min, max, scale, maxMajors, locale)`（`lib/ticks.ts`）：按跨度和宽度自适应，取主刻度数 ≤ `maxMajors` 的最细一档——几个月：主 = 月（1 月写年份）、次 = 每月 8/15/22 日；几年：主 = 年、次 = 月；更长：5/10/25/50/100… 年；地质：0.1–1000 Ma 档（如 10 Ma / 1 Ma），标尺右端写单位 `MA` / `百万年前`。
+
+### 时间轴标尺（`bottomBar`）
+
+- 一条工程标尺：主刻度（墨色、带 mono 标签）、次刻度（弱墨）、关键帧小空心菱形、已走过的部分加粗；章节节点是坐在标尺上的编号 hairline 圆（当前章 signal 实心，锁定章虚线圈 + 锁）；播放头是一条 signal 细线，日期写在线上方（贴边时夹在标尺内）。
+- 播放 / 倍速是 18 px hairline HUD 按钮（`hud-btn`，触屏 44 px 命中）。行为不变：拖动 = 连续时间不换章；点节点 = 换章；播放全程约 60 s @×1，遇章节节点停 1.5 s 并在舞台顶部显示章节卡；Shift+← → 微调；焦点在标尺上时 ← → 换章、↑ ↓ 微调、PageUp/PageDown 大步、Home/End 到头尾；时间轴里空格 = 播放/暂停。
+
+### HUD 控件与内容（docs/08 §2、§3）
+
+注册（`View.tsx` 的 `useSceneControls`）：
+
+| 项 | 内容 |
+|---|---|
+| 预设 | 各章镜头（`01`…）+ `world`（center [20, 10]，zoom 1.4）+ `theatre`（地图 `cameraForBounds` 套住全部数据；地图未就绪时按包围盒估算）。数字键 1–9 |
+| 模式 | `flow`（F，= movements 图层，状态 `FLOW`）· `borders`（B，= borders 图层）· `graticule`（G，引擎本地状态）· `reference`（R）· `presentation`（P）· 宿主 `labels`（L） |
+| `pause` | 播放 / 暂停（SPACE） |
+| `status` | `2000-03-11 · ×1`（与 `FLOW`、`REFERENCE` 等模式段一起出现在状态行） |
+| `specRows` | ENTITIES / KEYFRAMES / EVENTS / MOVEMENTS 计数（mono） |
+| `stats()` | `{ features, zoom, fps }`：features = 当前可见数据要素 + 经纬线 + 国界（开时）；fps = 页面 rAF 帧率 |
+| `escape` | 依次：退出 PRESENTATION → 退出 REFERENCE → 关闭事件详情 → 清空 highlight |
+
+- **REFERENCE（R）**：版图对照用"叠加"实现（不分屏）：当前主导关键帧照常，相邻关键帧（前一帧；当前是第一帧时取后一帧）的边界以墨色虚线叠上，2 s 淡入（`instant` 时直接到位）；暂停播放，舞台顶部横幅写"实线 K2 … · 虚线 K1 …"。再按恢复，之前在播放就继续播放。少于两个关键帧时禁用；演示中禁用。
+- **PRESENTATION（P）**：隐藏 HUD（宿主 `hud = false`），只在舞台上留主题标题和底部章节字幕（编号 · 章名 · 日期）；按顺序走所有未锁定章节，每章 = 镜头飞行 2.2 s + 停 1.5 s，走完自动退出并恢复 HUD。P / ESC / H / "显示界面"都会结束演示（HUD 一恢复就结束）。
+- 插槽内容（`hud/HudPanels.tsx`，SVG 按面板实际像素画，字号走 `--u`）：
+  - `card` PARTICIPATION AND AREA：每个实体一条带——参与线（joined → left，起点小空心圆），关键帧间线性插值的近似控制面积（球面面积，斜线 + 淡底），行首写 EN 名 / 中文 / 当前 `≈面积 KM²`；当前章节窗口淡 signal 底，`t` 一条 signal 竖线，底部自适应刻度。
+  - `panel01` TIMELINE：整段时间的小标尺 + 章节编号圆 + 三条泳道：KEYFRAMES（菱形 K1…）、MOVEMENTS（起止条，重叠自动分行）、EVENTS（点 + 进行窗口），当前章节窗口与 `t` 竖线同上。
+  - `panel02` QUESTION：章节编号 + 章名，`state.question`（衬线，孩子读），`state.answer` 在下方；没有问题时显示本章高亮事件的摘要，再没有就是主题副标题。
+  - `panel03` STATE：TIME、PARTICIPANTS（已加入 / 总数）、ACTIVE BATTLES（battle/landing/bombing 且在窗口内）、ACTIVE MOVEMENTS、CONTROL KEYFRAME（K1 → K2 · 37% + 小进度条）。都是数据统计，不标 SIM。
+  - `perf`：`FEATURES 63 · ZOOM 5.5 · 60 FPS`（500 ms 更新）。
+  - `inspector`：hairline 框，`E-01 · BATTLE · 日期` mono 眉题，标题大写 + 另一语言小字，摘要，进攻/防守/结果的 dl（斜线色块），Counter 兵力；伤亡仍只在家长模式。
 
 ### 交互约定
 
-- ← → 换章（核心处理；焦点在拖条上时由 Timeline 自己转发）；Shift+← → 按一步微调时间；焦点在时间轴里时空格 = 播放/暂停；Home/End 到头尾。
+- ← → 换章（核心处理；焦点在标尺上时由 Timeline 自己转发）；Shift+← → 按一步微调时间。
 - 地图容器 `data-keys="own"`；点地图不会抢键盘焦点（canvas 被点击聚焦后立即 blur），Tab 进入地图仍可用方向键平移。
-- 用户平移/缩放 `moveend` 后 250 ms 防抖 `setCamera()`；章节切换 `flyTo`（2.2 s），首次加载/深链接 `jumpTo`；`prefers-reduced-motion` 时不飞、不脉冲、虚线不流动。
-- 主题切换：观察 `<html data-theme>`，重读 token、`setPaintProperty`，不重建地图。
+- 用户平移/缩放 `moveend` 后 250 ms 防抖 `setCamera()`；章节切换 `flyTo`（2.2 s），首次加载/深链接 `jumpTo`；`prefers-reduced-motion` 时不飞、不脉冲、虚线不流动、REFERENCE 不渐变。
+- 主题切换：观察 `<html data-theme>`，重读 token、`setPaintProperty`、重画斜线图，不重建地图。
 
 ### 底图数据
 
@@ -324,25 +370,32 @@ colors.ts  time-scene.css
 pnpm tsx scripts/build-geo.ts   # world-atlas(Natural Earth 1:50m) → public/geo/*.json，产物入库
 ```
 
-陆地 3 位小数（~110 m），国界简化到 ~2 km，合计约 1.75 MB（预算 2 MB）。来源与许可见 `public/geo/README.md`（Natural Earth，公有领域）。
+陆地 3 位小数（~110 m），国界简化到 ~2 km，合计约 1.75 MB（预算 2 MB）。world-atlas 里跨 ±180° 的环（斐济、楚科奇、弗兰格尔岛、南极洲）原本在一条线段里从 180 跳到 -180，平面渲染会画出横贯全图的直线（P1 截图里的那条横线就是斐济的一个碎片）；构建时用 `unwrapRing`（`lib/geo.ts`，有单测）把环展开成经度连续（允许超出 ±180，MapLibre 自动画进相邻世界副本），绕极点的环（南极洲）沿极点闭合。来源与许可见 `public/geo/README.md`（Natural Earth，公有领域）。
 
 ### 包体
 
-MapLibre 只在 `controller` chunk 里，View 挂载后才加载（时间轴先出来）。实测 sample-time 页全部 JS：约 374 KB gz / 312 KB br，其中 MapLibre 5.24 自身约 275 KB gz（含内联 worker），本引擎自有代码约 13 KB gz（View 8 KB + controller 约 5 KB）。**超出 docs/02 的 300 KB gz 预算**，需要产品层决定：按 brotli 计、对 geo 主题放宽到 ~400 KB gz，或换更小的地图库版本。
+MapLibre 只在 `controller` chunk 里，View 挂载后才加载（时间轴先出来）。P3 后实测（gzip -9）：TimeScene View chunk 约 15 KB gz（含 HUD 面板、标尺），controller chunk 约 292 KB gz（MapLibre 5.24 约 275 KB + 引擎地图代码约 17 KB）；加上宿主 client/SceneHost 约 75 KB，整页 JS 约 380 KB gz。**超出 docs/02 的 300 KB gz 预算**，需要产品层决定：按 brotli 计、对 geo 主题放宽到 ~400 KB gz，或换更小的地图库版本。
 
-## SpaceScene（空间拆解引擎，Phase 2B）
+## SpaceScene（空间拆解引擎，Phase 2B；P2 技术图版）
 
 `engine: space-scene`、`stage: model3d`。代码在 `src/engines/space-scene/`：
 
 ```
 index.ts                 descriptor（part/view/explode/run/cutaway）
 schema.ts                parts.json 的 zod（构建期）
-View.tsx                 挂 Model3DStage（再懒加载一层）+ Explorer 控件
-lib/                     纯函数，有单测：explode / visibility / flow-curve / color / animation / camera / math
-stages/model3d/          R3F 舞台：Model3DStage（createRoot 宿主）、SceneRoot、PartNode、Flows + flowMaterial（自写 shader）、
-                         CameraRig（OrbitControls + 章节运镜）、Lighting（主题灯光 + RoomEnvironment）、GroundShadow、GltfSource（懒加载）
-explorer/                ExplorerBar（bottomBar）、ExplorerOverlay（stageOverlay）、Inspector（inspector）
-space-scene.css          舞台、标签、控件样式（只用 token）
+View.tsx                 HUD 控件注册（预设 / 模式 / 规格行 / 卡片与面板标题）+ 各插槽内容 + 懒加载 Model3DStage
+ui.ts                    引擎内 UI store（ORBIT、REFERENCE；不进 URL，View 与舞台共用）
+bridge.ts                舞台 → HUD 的桥：每帧投影好的标注锚点、渲染计数、帧回调（View 侧不 import three）
+lib/                     纯函数，有单测：explode / visibility / flow-curve / color（材质族）/ animation /
+                         camera（球坐标插值、REFERENCE 镜头、过渡目标）/ parts（零件包围盒、repeat 变换）/
+                         schematic（零件链路、立面、标注预算与列避让）/ xform / math
+stages/model3d/          R3F 舞台：Model3DStage（createRoot 宿主）、SceneRoot、PartNode、geometry（程序化零件）、
+                         materials（材质 + 选中边缘 / 剖面 shader 补丁）、textures（程序化贴图）、Lighting、
+                         GroundShadow、CameraRig、Flows + flowMaterial、probes（标注投影 / 计数 / 阴影更新）、GltfSource
+hud/                     LeaderLabels（leaders）、PartChainCard（card）、ArchitecturePanel / DetailPanel / StatePanel
+                         （panel01–03）、PerfReadout（perf）
+explorer/                ExplorerBar（bottomBar：只剩拆开滑块）、ExplorerOverlay（stageOverlay）、Inspector（inspector）
+space-scene.css          舞台、标注、卡片与面板绘图、滑块、详情样式（只用 token，尺寸 × --u）
 ```
 
 ### 作者怎么写数据（`data/parts.json`）
@@ -352,11 +405,12 @@ space-scene.css          舞台、标签、控件样式（只用 token）
   "model": "/models/aircon.glb",          // 可选；有 mesh 零件时必填，放 public/models/，引擎自动加 base
   "parts": [{
     "id": "compressor", "name": {en, zh}, "group": "refrigerant",
-    "summary": {en, zh}, "detail": {en, zh},   // detail 在详情卡里折叠在「了解更多」后面
-    "primitive": { "kind": "cylinder", "size": [0.3, 0.3, 0.5], "at": [1, 0, 0], "rotation": [0, 0, 90], "color": "metal" },
-    "mesh": "Compressor",                  // 或者：glb 里的节点名（Blender 物体名）；两者都写时 glb 加载后替换积木
+    "summary": {en, zh}, "detail": {en, zh},   // summary 也是引线标注的一行说明；detail 在详情卡「了解更多」后
+    "primitive": { "kind": "cylinder", "size": [0.3, 0.3, 0.5], "at": [1, 0, 0], "rotation": [0, 0, 90], "color": "steel" },
+    "repeat": { "count": 4, "axis": [1, 0, 0], "spacing": 0.76 },   // 可选：实例化重复（一次绘制）
+    "mesh": "Compressor",                  // 或者：glb 里的节点名；两者都写时 glb 加载后替换积木
     "explode": { "dir": [1, 0, 0.3], "dist": 1.2 },   // dir 会归一化；位移 = dir × dist × explode
-    "connects": ["condenser"],             // 详情卡里变成可点的芯片
+    "connects": ["condenser"],             // 详情卡芯片 + 右上零件链路的连线
     "level": "P5"
   }],
   "groups": [{ "id": "refrigerant", "name": {en, zh}, "color": "token:accent-1" }],
@@ -367,16 +421,25 @@ space-scene.css          舞台、标签、控件样式（只用 token）
     { "id": "beat", "target": "pump", "kind": "pulse", "scale": 1.15, "hz": 1 }                                // scale 是峰值缩放
   ],
   "views": {
-    "assembled": { "camera": { "position": [3,2,4], "target": [0,0,0], "fov": 40 } },
+    "assembled": { "camera": { "position": [3,2,4], "target": [0,0,0], "fov": 34 } },
     "exploded":  { "camera": { ... } },     // 每个视图可选一个预设镜头
-    "cutaway":   { "normal": [-1,0,0], "offset": 0 }   // 可选剖切面；默认切掉 x>0 一半
+    "cutaway":   { "normal": [-1,0,0], "offset": 0 },   // 可选剖切面；默认切掉 x>0 一半
+    "section":   { "plane": "xy" },         // 可选：ARCHITECTURE 立面与 REFERENCE 正视方向（xy 正面 / zy 侧面 / xz 俯视）
+    "reference": { "camera": { ... } }      // 可选：自定 REFERENCE 镜头（默认按包围盒自动取长焦正视）
   }
 }
 ```
 
-- **积木尺寸**（`size`）：box `[宽,高,深]`、cylinder `[上半径,下半径,高]`、cone `[半径,高]`、sphere `[半径]`、torus `[半径,管粗]`、capsule `[半径,长度]`、plane `[宽,高]`（双面）。`rotation` 是 XYZ 欧拉角（度）。
-- **颜色**：材质预设 `metal | plastic | copper | glass | rubber | matte`（每个主题一套色板，`lib/color.ts`），或 `token:<name>`、`#hex`。glb 零件用所在组的颜色。主题决定质感：paper 哑光（roughness 0.85 / metalness 0.05）、暖光、米色背景；cinema 金属（0.6 / 0.35）、冷光 + 轮廓光、近黑背景，选中零件发 `--glow` 色的脉动光。
-- **流场**：`path` 首尾点相同 = 闭环。路径做成 centripetal Catmull-Rom，按弧长烘焙 64 个点进 shader，每条 200 粒子，`speed` 是场景单位/秒。`whenRun: false` 的流/动画一直播放（只受图层开关）。
+- **积木**（`size`）：box `[宽,高,深]`、cylinder `[上半径,下半径,高]`、cone `[半径,高]`、sphere `[半径]`、torus `[半径,管粗]`、capsule `[半径,长度]`、plane `[宽,高]`（双面）。`rotation` 是 XYZ 欧拉角（度）。
+- **工程零件**（docs/08 §4，参数各自不同，zod 校验尺寸合理性）：
+  - `bevelBox {size:[w,h,d], bevel}`：每条边都是真实圆角（bevel < 最短边一半）
+  - `tube {path:[[x,y,z]...], radius, bendRadius?}`：path 相对 `at`；每个拐角用同一弯曲半径（默认 3×radius，不得小于 radius），管端开口
+  - `flange {radius, thickness, boltCount, boltRadius}`：XZ 平面里的圆盘（轴 Y），螺栓圆上 `boltCount` 个六角螺栓头（实例化）；boltRadius < radius
+  - `fins {size:[a,b,t], count, gap, axis}`：`count` 片 a×b、厚 t 的板沿 `axis`（x | y | z）等间距排列（实例化）
+  - `vessel {radius, length, headRatio}`：沿 Y 的筒体 + 两端椭圆封头（封头深 = radius × headRatio，0.5 = 2:1 封头）
+- **repeat**：`{count, axis, spacing}`（沿轴、以 `at` 为中心等距）或 `{count, axis, radius}`（绕过 `at` 的轴一圈，每个实例朝外转）。轴是场景坐标。整件变成一个 InstancedMesh。
+- **材质族**（`color`）：`casing`（拉丝铝，各向异性）、`steel`（机加工钢）、`powder`（缎面黑粉末涂层，轻微橘皮）、`stainless`（轴向拉丝不锈钢）、`copper`、`rubber`（近黑，roughness .78）、`plastic`（哑光暖砂色，不是默认灰）、`glass`（半透明）；旧名 `metal` = steel、`matte` = plastic。或者 `token:<name>` / `#hex`：缎面漆。程序化 canvas 贴图给拉丝方向、粗糙度变化、橘皮法线（`stages/model3d/textures.ts`，种子固定，截图可复现）。
+- **流场**：`path` 首尾点相同 = 闭环。centripetal Catmull-Rom，按弧长烘焙 64 个点进 shader，每条 360 个细粒子（贴着中心线，像 CFD 流线而不是魔法粒子），`speed` 是场景单位/秒。`whenRun: false` 的流/动画一直播放（只受图层开关）。
 - **glb**：不要用 Draco/meshopt 压缩（drei 默认去 CDN 拉 Draco 解码器，Atlas 不允许运行时外部请求，所以我们关掉了）。mesh 名找不到会 console.warn，该零件不显示；glb 整体加载失败时积木零件照常显示。
 
 ### 章节怎么写（`state`）
@@ -389,24 +452,60 @@ state:
   run: true             # 通电：播放 animations + flows（渐入渐出）
   cutaway: half         # none | half
   layers: [refrigerant, air]   # 可见的组
-  camera: { position: [4, 3, 5], target: [0, 0.3, 0] }
+  labels: [compressor, fan]    # 可选：本章引线标注哪些零件（默认：所有可见零件，大件优先，按镜头距离限量）
+  camera: { position: [4, 3, 5], target: [0, 0.3, 0], fov: 34 }
 ```
 
-章节目标照常累积。**镜头规则**：本章自己写了 `camera`（或 URL 有 `cam=`）就用它；否则用 `views[当前 view].camera`；都没有就沿用上一章。用户在底栏切视图时，如果该视图有预设镜头，也会飞过去。切章 ~800 ms 缓动，首次加载/深链接/`prefers-reduced-motion` 直接跳。窄屏（竖屏手机）自动把镜头往后拉，回写 URL 时再换算回来，链接与设备无关。
+章节目标照常累积（`labels` 不累积，只看本章）。**镜头规则**（`lib/camera.ts transitionCamera`，有单测）：切章 / 首次加载 / URL：本章自己写了 `camera`（或 URL `cam=` 与本章基线不同）就用它；否则 `views[当前 view].camera`；都没有就沿用。**预设（VIEW 按钮 / 数字键）永远落在该预设的镜头上**（P1 遗留问题：本章没有自己镜头时，基线是继承来的，曾被误判成"非显式"而飞去视图预设；已修）。模式切换（X / E / C / F）不动镜头。较窄的舞台（宽高比 < 1.6：HUD 占去两侧的桌面、平板、竖屏手机）自动把镜头往后拉，回写 URL 时换算回来，链接与设备无关。
 
-### 交互（Explorer）
+### HUD 控件与内容（docs/08 §2、§3）
 
-- 点零件选中（高亮 + 描边，InfoPanel 出详情）；点空白处取消；拖动（OrbitControls，带阻尼）旋转，停手 400 ms 后 `setCamera()` 回写 URL。
-- 鼠标悬停显示零件名标签；触摸设备没有悬停，长按 ≥ 400 ms 选中并显示标签。有选中零件时只显示它的标签。
-- 视图：`xray` 未选中零件透明 0.15；`isolate` 只显示选中零件和同组零件；图层开关对所有视图生效（包括选中的零件）。可见性规则在 `lib/visibility.ts`，有单测。
-- 底栏：视图分段按钮（←→ 在组内切换）、拆开程度滑块（仅 exploded，44 px 拇指）、通电开关、剖开开关。舞台浮层：图层开关 + 图例（窄屏只留图层开关）。
+| 控件 | 行为 |
+|---|---|
+| VIEW `01..NN` | 各章镜头（1.6 s easeInOut，target 直线 + 相机相对 target 的球坐标插值，绕着模型转，不穿模） |
+| VIEW `ORBIT` | 慢速转台：绕 target 的竖轴 1 圈 / 40 s，1 s 渐入；一拖动即停（→ FREE CAMERA） |
+| VIEW `REF.` = MODE `REFERENCE`（R） | 长焦（fov 16）正视（`views.section`，默认正面），2 s；暂停运转、收起爆炸、隐藏流场；EXPLODED 与 FLOW / SPACE 显式禁用，状态行写 `EXPLODE AND FLOW LOCKED`；再按 R（或 ESC）2 s 回到进入前的镜头与状态；选别的预设 = 退出但不回镜头 |
+| MODE `X-RAY`（X） | 未选中零件 .15 透明（.3 s）；只有这时材质变透明（forceSinglePass） |
+| MODE `EXPLODED`（E） | 2 s easeInOut 拆开到 0.7（或章节值）；拖滑块时快速跟随 |
+| MODE `CUTAWAY`（C） | 单剖切面；封闭零件的背面画成 `--cut` 赭色 + 屏幕空间 45° 墨色剖面线（像博物馆剖面模型，不是删掉一半）；管、平面不填 |
+| MODE `FLOW`（F）= SPACE | run：动画与流场 .6 s 渐入 |
+| `L` | 标注开关（宿主） |
+| ESC | 取消选中 → 退出 REFERENCE → 停 ORBIT |
+
+- 状态行追加：选中零件 `#06 SAMPLE DRUM`、`EXPLODE 80`、`CUTAWAY 50`、REFERENCE 时的锁定说明。规格行追加 PARTS / GROUPS / FLOWS。
+- `card`：零件链路示意（组 = 列、零件 = 带编号节点、`connects` = 细线）；选中零件填 signal 色；运转时有流的组内连线变成流色并步进。
+- `panel01` ARCHITECTURE：由零件包围盒直接画的立面（`views.section`，默认 XY），按组编号的分区括号 + 图例、地面线、模型单位比例尺；选中零件描 signal 色。
+- `panel02` DETAIL：选中零件（编号、EN + 中文、所属组、相连零件编号、一行说明、迷你爆炸图：静止虚线框 + 拆开实线框 + 位移线）；无选中时显示本章标题与模型概要。
+- `panel03` STATE：RUN / FLOW / ANIMATIONS / VIEW / EXPLODE 实时值（mono），运行时数值带 `SIM` 芯片。
+- `perf`：`60 FPS · 16 CALLS · 0.02M TRIS · 1520×1026`（滚动平均；按需渲染空闲时显示 `IDLE`）。
+- `bottomBar`：只有 EXPLODED 时出现拆开滑块（44 px 拇指）；其余模式都在顶栏，不重复。
+- `inspector`：选中零件详情（编号 + 名称 + 中文、级别、说明、了解更多、所属组、相连芯片），hairline 皮肤。
+- `__atlas.stats()` 合并 `{calls, triangles, geometries, textures, fps, gpu}`（renderer.info + 滚动 FPS + WEBGL_debug_renderer_info）。
+
+### 引线标注（`hud/LeaderLabels.tsx`，master-spec J）
+
+- 每条：编号 + EN 名（粗、大写）/ 中文 / 一行说明（`summary` 截断）。左列右对齐、右列左对齐并带小三角；细引线 = 标签边 → 16 px 水平短线 → 直线到投影锚点（零件包围盒中心）上的空心圆。
+- 舞台每帧（`probes.tsx LabelProbe`）把锚点投影到舞台像素写进 bridge，HUD 侧只写 `transform` / `opacity` / `d` / `cx` / `cy`；字号、文字宽度与 `[data-hud-panel]` 矩形只在 resize、字体加载、标签集合变化时测量。
+- 先按投影 y 排序、最小间距堆叠（`stackColumn`），再把列放在锚点外侧（引线向内，不穿过文字），列宽避开本列高度范围内的 HUD 块；镜头动时列平滑滑动。
+- 锚点在背后 / 出屏 / 被剖掉 / 被遮挡（节流 raycast，每帧最多 2 个、只在镜头或零件动过之后）/ 落在 HUD 块下 → 淡出；X-RAY 时不判遮挡；选中零件永远标注、signal 色高亮、不因遮挡隐藏。
+- 数量：`labelBudget(镜头距离 / 模型半径)` 3–10 条（近景少），再受可用高度限制；放不下两列时退成一列，再放不下就不标。手机（< 760）宿主隐藏 `leaders`。
+- 点标签（触屏点一下）= 选中零件；标签热区高 ≥ 44 px。
+
+### 交互（舞台）
+
+- 点零件选中（拖动结束在零件上不算点击）；点空白处取消；拖动（OrbitControls，带阻尼）旋转，停手 400 ms 后 `setCamera()` 回写 URL（→ FREE CAMERA）。
+- 悬停零件：signal 色弱边缘；触摸长按 ≥ 400 ms 选中。选中：signal 色菲涅尔边缘 + 极淡染色（paper 边缘清晰；dark plate 边缘发光 ≤ .35，不脉动）。
+- 视图：`xray` 未选中零件透明 .15；`isolate` 只显示选中零件和同组零件；图层开关对所有视图生效（包括选中的零件）。可见性规则在 `lib/visibility.ts`，有单测。
 
 ### 实现约定
 
 - R3F 用 `createRoot` 驱动，不用 `<Canvas>`：`<Canvas>` 会 `extend(THREE)` 整个命名空间，tree-shaking 失效（多 ~50 KB gz）。新用到的 three 类要在 `stages/model3d/extend.ts` 里登记，否则 JSX `<xxx>` 会报 "not part of the THREE namespace"。
-- 舞台是独立 reconciler，React context 不穿透：store、data、主题 look 都以 props 传入 `SceneRoot`，组件里用 `zustand` 的 `useStore(store, …)`。
-- `frameloop: 'demand'`：只有在缓动（拆开、淡入淡出、运镜）、运转、cinema 选中发光时才请求下一帧；标签页隐藏时不请求，回到前台再 invalidate。几何体/材质都由我们自己创建和 dispose（`dispose={null}` 交给组件卸载时清理）。
-- 包体：sample-space 页实测加载 JS 共 287 KB gz（站点公共 ~83 KB + 舞台 chunk 202 KB，其中 three + R3F 占绝大部分）。GLTF 加载器单独成 chunk（21 KB gz），只有写了 `mesh` 的主题才加载。
+- 舞台是独立 reconciler，React context 不穿透：store、ui、bridge、data、主题 look 都以 props 传入 `SceneRoot`，组件里用 `zustand` 的 `useStore(store, …)`。
+- 渲染：ACES Filmic + sRGB；pixelRatio = `min(dpr, 3840 / innerWidth, 2)`；灯光 = 一盏大柔 key（唯一投影光源，阴影相机按模型包围盒收紧，PCF 软边）+ 弱 fill + 中性 rim + 半球 + RoomEnvironment（无网络、无 HDR 文件）；paper 暖 key，dark plate 冷 key + 稍强 rim；雾色 = 纸色。只有大件（≥ 模型半径 28%）投影；地面 = 径向接触阴影 + ShadowMaterial 接影面，随拆开下移。`shadowMap.autoUpdate = false`，拆开 / 淡入淡出 / 剖切 / 可见性 / 运转中的投影件变化时才 `needsUpdate`。
+- 材质：每个零件一个 MeshPhysicalMaterial（同一 shader 补丁、同一 program cache key）：选中边缘（菲涅尔，`uSel`）和剖面填充（背面 + `gl_FrontFacing`，`uCut`）都在片元里，零额外 draw call。
+- `frameloop: 'demand'`：只有在缓动（拆开、淡入淡出、运镜、转台、标注滑动 / 遮挡复查）、运转时才请求下一帧；标签页隐藏时不请求。每帧路径不 new 对象（模块级临时向量、预先算好的拆开向量与动画轴）。几何体、材质、贴图都由我们创建并在卸载时 dispose。
+- 计数（sample-space，1920×1080）：静止 16 draw calls、~19 k 三角形、27 geometries、7 textures；FLOW +2 calls。
+- 包体：舞台 chunk ~212 KB gz（three + R3F 为主；圆角盒用 `RoundedBoxGeometry`，不引 ExtrudeGeometry/Shape）。GLTF 加载器单独成 chunk（21 KB gz），只有写了 `mesh` 的主题才加载。
 
 ## PWA、部署与 e2e（Phase 3）
 

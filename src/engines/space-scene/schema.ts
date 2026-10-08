@@ -28,6 +28,20 @@ import { orbitCamera } from '../../content/schema/camera';
  */
 export const PRIMITIVE_KINDS = ['box', 'cylinder', 'cone', 'sphere', 'torus', 'capsule', 'plane'] as const;
 
+/**
+ * Engineered parts (docs/08 §4), each with its own parameters:
+ *   bevelBox  {size: [w, h, d], bevel}            box with a real rounded bevel on every edge
+ *   tube      {path: [[x,y,z]...], radius, bendRadius?}  pipe along a polyline (points relative
+ *             to `at`); every corner is bent with the same radius (default 3 × radius)
+ *   flange    {radius, thickness, boltCount, boltRadius}  disc in the XZ plane (axis Y) with
+ *             `boltCount` hex bolt heads on the bolt circle `boltRadius`
+ *   fins      {size: [a, b, t], count, gap, axis}  `count` plates a × b, thickness t, stacked
+ *             along `axis` (x | y | z) with a clear `gap` between plates
+ *   vessel    {radius, length, headRatio}          cylinder along Y (`length` = straight shell)
+ *             with domed heads of depth radius × headRatio (0.5 = 2:1 ellipsoidal head)
+ */
+export const ENGINEERED_KINDS = ['bevelBox', 'tube', 'flange', 'fins', 'vessel'] as const;
+
 const PRIMITIVE_ARITY: Record<(typeof PRIMITIVE_KINDS)[number], number> = {
   box: 3,
   cylinder: 3,
@@ -38,31 +52,124 @@ const PRIMITIVE_ARITY: Record<(typeof PRIMITIVE_KINDS)[number], number> = {
   plane: 2,
 };
 
-/** Material presets; the engine tints them from theme tokens. */
-export const MATERIAL_PRESETS = ['metal', 'plastic', 'copper', 'glass', 'rubber', 'matte'] as const;
+/**
+ * Material families (docs/08 §4, master-spec E). The engine builds each one
+ * per theme (colour, metalness, roughness, procedural brushed / orange-peel
+ * maps). `metal` and `matte` are older names kept as aliases of `steel` and
+ * `plastic`.
+ */
+export const MATERIAL_PRESETS = [
+  'casing',
+  'steel',
+  'powder',
+  'stainless',
+  'copper',
+  'rubber',
+  'plastic',
+  'glass',
+  'metal',
+  'matte',
+] as const;
+
+const positive = z.number().positive();
+const positiveVec3 = z.tuple([positive, positive, positive]);
+
+/** Fields every primitive has: placement and material. */
+const placement = {
+  /** Position of the part centre. */
+  at: vec3,
+  /** Euler rotation in degrees (XYZ). */
+  rotation: vec3.optional(),
+  color: z.union([z.enum(MATERIAL_PRESETS), colorRef]),
+};
 
 export const primitiveSchema = z
-  .object({
-    kind: z.enum(PRIMITIVE_KINDS),
-    size: z.array(z.number().positive()).min(1).max(3),
-    /** Position of the part centre. */
-    at: vec3,
-    /** Euler rotation in degrees (XYZ). */
-    rotation: vec3.optional(),
-    color: z.union([z.enum(MATERIAL_PRESETS), colorRef]),
-  })
-  .strict()
+  .discriminatedUnion('kind', [
+    z.object({ kind: z.enum(PRIMITIVE_KINDS), size: z.array(positive).min(1).max(3), ...placement }).strict(),
+    z.object({ kind: z.literal('bevelBox'), size: positiveVec3, bevel: positive, ...placement }).strict(),
+    z
+      .object({
+        kind: z.literal('tube'),
+        path: z.array(vec3).min(2).max(64),
+        radius: positive,
+        bendRadius: positive.optional(),
+        ...placement,
+      })
+      .strict(),
+    z
+      .object({
+        kind: z.literal('flange'),
+        radius: positive,
+        thickness: positive,
+        boltCount: z.number().int().min(3).max(64),
+        boltRadius: positive,
+        ...placement,
+      })
+      .strict(),
+    z
+      .object({
+        kind: z.literal('fins'),
+        size: positiveVec3,
+        count: z.number().int().min(2).max(256),
+        gap: positive,
+        axis: z.enum(['x', 'y', 'z']).default('x'),
+        ...placement,
+      })
+      .strict(),
+    z
+      .object({
+        kind: z.literal('vessel'),
+        radius: positive,
+        length: z.number().nonnegative(),
+        headRatio: z.number().min(0).max(1).default(0.5),
+        ...placement,
+      })
+      .strict(),
+  ])
   .superRefine((p, ctx) => {
-    const want = PRIMITIVE_ARITY[p.kind];
-    if (p.size.length !== want) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        path: ['size'],
-        message: `${p.kind} needs ${want} size value(s), got ${p.size.length}`,
-      });
+    const issue = (path: (string | number)[], message: string) =>
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path, message });
+    switch (p.kind) {
+      case 'bevelBox':
+        if (p.bevel * 2 >= Math.min(...p.size)) issue(['bevel'], `bevel ${p.bevel} must be less than half the smallest size`);
+        break;
+      case 'tube': {
+        p.path.forEach((pt, i) => {
+          const prev = p.path[i - 1];
+          if (prev && Math.hypot(pt[0] - prev[0], pt[1] - prev[1], pt[2] - prev[2]) < 1e-6)
+            issue(['path', i], 'repeats the previous point');
+        });
+        if (p.bendRadius !== undefined && p.bendRadius < p.radius)
+          issue(['bendRadius'], `bendRadius ${p.bendRadius} is tighter than the pipe radius ${p.radius}`);
+        break;
+      }
+      case 'flange':
+        if (p.boltRadius >= p.radius) issue(['boltRadius'], `bolt circle ${p.boltRadius} must be inside radius ${p.radius}`);
+        break;
+      case 'fins':
+        break;
+      case 'vessel':
+        if (p.length === 0 && p.headRatio === 0) issue(['length'], 'a vessel needs a length or domed heads');
+        break;
+      default: {
+        const want = PRIMITIVE_ARITY[p.kind];
+        if (p.size.length !== want) issue(['size'], `${p.kind} needs ${want} size value(s), got ${p.size.length}`);
+      }
     }
   });
 export type Primitive = z.output<typeof primitiveSchema>;
+
+/**
+ * Repeat a part as instances (one draw call): `count` copies along `axis`
+ * `spacing` apart, centred on `at` (linear), or `count` copies on a circle of
+ * `radius` around `axis` through `at`, each turned to face outwards (radial).
+ * Axes are in scene coordinates.
+ */
+export const repeatSchema = z.union([
+  z.object({ count: z.number().int().min(2).max(512), axis: vec3, spacing: positive }).strict(),
+  z.object({ count: z.number().int().min(2).max(512), axis: vec3, radius: positive }).strict(),
+]);
+export type PartRepeat = z.output<typeof repeatSchema>;
 
 export const partSchema = z
   .object({
@@ -74,6 +181,8 @@ export const partSchema = z
     /** Mesh name inside a glb model; the name is the part id's counterpart. */
     mesh: z.string().min(1).optional(),
     primitive: primitiveSchema.optional(),
+    /** Instanced copies of the primitive (see repeatSchema). */
+    repeat: repeatSchema.optional(),
     explode: z.object({ dir: vec3, dist: z.number().nonnegative() }).strict(),
     connects: z.array(kebabId).default([]),
     level,
@@ -82,6 +191,10 @@ export const partSchema = z
   .refine((p) => p.mesh !== undefined || p.primitive !== undefined, {
     message: 'a part needs either `mesh` or `primitive`',
     path: ['primitive'],
+  })
+  .refine((p) => p.repeat === undefined || Math.hypot(...p.repeat.axis) > 1e-9, {
+    message: 'repeat axis must not be zero',
+    path: ['repeat', 'axis'],
   });
 export type Part = z.output<typeof partSchema>;
 
@@ -158,6 +271,14 @@ export const cutawayPlaneSchema = z
   .strict();
 export type CutawayPlane = z.output<typeof cutawayPlaneSchema>;
 
+/**
+ * Elevation plane of the ARCHITECTURE panel and the REFERENCE camera:
+ * `xy` = front elevation (seen from +Z, default), `zy` = side (from +X),
+ * `xz` = plan (from +Y).
+ */
+export const SECTION_PLANES = ['xy', 'zy', 'xz'] as const;
+export type SectionPlane = (typeof SECTION_PLANES)[number];
+
 export const viewsSchema = z
   .object({
     assembled: viewPreset.optional(),
@@ -166,6 +287,10 @@ export const viewsSchema = z
     isolate: viewPreset.optional(),
     /** Optional cutaway plane (see cutawayPlaneSchema). */
     cutaway: cutawayPlaneSchema.optional(),
+    /** Optional elevation plane for the ARCHITECTURE panel and REFERENCE view. */
+    section: z.object({ plane: z.enum(SECTION_PLANES) }).strict().optional(),
+    /** Optional REFERENCE camera; default: a long-lens straight view on the section plane. */
+    reference: viewPreset.optional(),
   })
   .strict();
 export type ViewPresets = z.output<typeof viewsSchema>;
@@ -253,6 +378,8 @@ export const spaceChapterState = z
     camera: orbitCamera.optional(),
     cutaway: z.enum(['none', 'half']).optional(),
     theme: theme.optional(),
+    /** Parts that get leader labels in this chapter (default: every visible part, capped by camera distance). */
+    labels: z.array(kebabId).optional(),
   })
   .strict();
 export type SpaceChapterState = z.output<typeof spaceChapterState>;
@@ -272,5 +399,5 @@ export function spaceSceneIds(data: SpaceSceneData): { kind: string; id: string 
 }
 
 export function spaceChapterRefs(state: SpaceChapterState): string[] {
-  return [...(state.part ? [state.part] : []), ...(state.layers ?? [])];
+  return [...(state.part ? [state.part] : []), ...(state.layers ?? []), ...(state.labels ?? [])];
 }

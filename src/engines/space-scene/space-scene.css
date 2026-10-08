@@ -1,6 +1,7 @@
 /*
- * SpaceScene engine styles (Model3DStage, part labels, Explorer controls,
- * inspector). Tokens only; loaded with the lazily imported View chunk.
+ * SpaceScene engine styles (Model3DStage, leader labels, card and panel
+ * drawings, perf readout, explode slider, inspector). Tokens only; HUD sizes
+ * in design pixels × --u (docs/06); loaded with the lazily imported View chunk.
  */
 
 /* ------------------------------------------------------------------ */
@@ -24,33 +25,6 @@
   width: 100%;
   height: 100%;
   outline: none;
-}
-
-/* drei <Html> label wrappers (positioned by drei; never take pointer input). */
-.space-label-wrap {
-  pointer-events: none;
-}
-.space-label {
-  padding: 0.3125rem 0.75rem;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--surface) 94%, transparent);
-  color: var(--ink);
-  box-shadow: var(--shadow);
-  font-family: var(--font-sans);
-  font-size: 0.875rem;
-  font-weight: 600;
-  line-height: 1.2;
-  white-space: nowrap;
-  user-select: none;
-}
-.space-label[data-selected] {
-  border-color: var(--accent);
-}
-:root[data-theme="cinema"] .space-label[data-selected] {
-  box-shadow:
-    0 0 0 1px var(--glow),
-    0 0 18px var(--glow);
 }
 
 /* ------------------------------------------------------------------ */
@@ -117,6 +91,12 @@
   border-radius: 50%;
   background: radial-gradient(circle, var(--accent) 0 10px, var(--surface) 10.5px 12px, transparent 12.5px);
 }
+.space-range__value {
+  min-width: 2ch;
+  font: 500 0.875rem/1 var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-2);
+}
 .space-range input[type="range"]:focus-visible {
   outline: 3px solid var(--focus);
   outline-offset: 2px;
@@ -139,24 +119,40 @@
   display: flex;
   flex-direction: column;
   gap: 0.625rem;
-  padding: 0.875rem 1rem 1rem;
-  border: 1px solid var(--border);
+  padding: 0.75rem 0.875rem 0.875rem;
+  border: 1px solid var(--hair);
+  border-top: 2px solid var(--signal);
   border-radius: var(--radius-lg);
   background: var(--surface);
-}
-:root[data-theme="cinema"] .space-inspector {
-  border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
 }
 .space-inspector__header {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--hair);
+}
+.space-inspector__no {
+  font: 500 0.8125rem/1 var(--font-mono);
+  letter-spacing: 0.04em;
+  color: var(--signal);
 }
 .space-inspector__title {
   flex: 1;
   min-width: 0;
   margin: 0;
-  font-size: 1.125rem;
+  font: 600 1rem/1.2 var(--font-hud);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.space-inspector__title small {
+  display: block;
+  margin-top: 0.125rem;
+  font-weight: 400;
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  text-transform: none;
+  color: var(--ink-3);
 }
 .space-inspector__close {
   margin: -0.5rem -0.5rem -0.5rem 0;
@@ -181,9 +177,8 @@
   gap: 0.5rem;
 }
 .space-inspector__label {
-  font-size: 0.75rem;
-  font-weight: 650;
-  letter-spacing: 0.06em;
+  font: 500 0.6875rem/1 var(--font-hud);
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink-faint);
 }
@@ -196,14 +191,14 @@
   list-style: none;
 }
 .space-chip {
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   gap: 0.375rem;
 }
 .space-chip--static {
   display: inline-flex;
   align-items: center;
-  padding: 0.25rem 0.75rem;
-  border: 1px solid var(--border);
+  padding: 0.25rem 0.625rem;
+  border: 1px solid var(--hair);
   font-size: 0.875rem;
 }
 
@@ -214,7 +209,364 @@
   }
 }
 
-/* Host LABELS switch (`L`, docs/08 §3). */
-.atlas-scene[data-labels="off"] .space-label-wrap {
-  display: none;
+
+/* ------------------------------------------------------------------ */
+/* Leader labels (slot `leaders`, SVG over the stage)                  */
+/* ------------------------------------------------------------------ */
+
+.space-co {
+  cursor: pointer;
+  pointer-events: auto;
+}
+.space-co__hit {
+  fill: transparent;
+  pointer-events: all;
+}
+.space-co__text {
+  paint-order: stroke;
+  stroke: var(--bg);
+  stroke-width: calc(3 * var(--u));
+  stroke-linejoin: round;
+  fill: var(--ink);
+}
+.space-co__en {
+  font: 600 calc(9.6 * var(--u)) / 1 var(--font-hud);
+  letter-spacing: 0.1em;
+}
+.space-co__n {
+  font: 500 calc(8.6 * var(--u)) / 1 var(--font-mono);
+  letter-spacing: 0.02em;
+  fill: var(--ink-3);
+}
+.space-co__zh {
+  font: 400 calc(8.8 * var(--u)) / 1 var(--font-hud);
+  letter-spacing: 0.08em;
+  fill: var(--ink-2);
+}
+.space-co__note {
+  font: 400 calc(8.2 * var(--u)) / 1 var(--font-hud);
+  letter-spacing: 0.04em;
+  fill: var(--ink-3);
+}
+.space-co__tri {
+  fill: var(--ink);
+}
+.space-co__leader {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 0.7;
+  vector-effect: non-scaling-stroke;
+}
+.space-co__dot {
+  fill: var(--bg);
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+.space-co[data-on] .space-co__en,
+.space-co[data-on] .space-co__n,
+.space-co[data-on] .space-co__tri {
+  fill: var(--signal);
+}
+.space-co__leader[data-on] {
+  stroke: var(--signal);
+  stroke-width: 1;
+}
+.space-co__dot[data-on] {
+  fill: var(--signal);
+  stroke: var(--signal);
+}
+.space-co:hover .space-co__en {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Card: part chain                                                    */
+/* ------------------------------------------------------------------ */
+
+.space-chain {
+  display: block;
+  width: 100%;
+  height: auto;
+  padding: calc(6 * var(--u)) calc(12 * var(--u)) calc(10 * var(--u));
+  box-sizing: border-box;
+  overflow: visible;
+}
+.space-chain__head {
+  font: 600 7.6px/1 var(--font-hud);
+  letter-spacing: 0.12em;
+  fill: var(--ink-2);
+}
+.space-chain__rule {
+  stroke-width: 1.4;
+}
+.space-chain__link {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 0.6;
+}
+.space-chain__link[data-flow] {
+  stroke-width: 1.2;
+  stroke-dasharray: 3 3;
+  animation: space-march 900ms linear infinite;
+}
+@keyframes space-march {
+  to {
+    stroke-dashoffset: -12;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .space-chain__link[data-flow] {
+    animation: none;
+  }
+}
+.space-chain__node rect {
+  fill: var(--panel-solid);
+  stroke: var(--line);
+  stroke-width: 0.6;
+}
+.space-chain__n {
+  font: 500 7.4px/1 var(--font-mono);
+  fill: var(--ink-3);
+}
+.space-chain__name {
+  font: 500 7.6px/1 var(--font-hud);
+  letter-spacing: 0.08em;
+  fill: var(--ink);
+}
+.space-chain__node[data-on] rect {
+  fill: var(--signal);
+  stroke: var(--signal);
+}
+.space-chain__node[data-on] text {
+  fill: var(--ink-on);
+}
+
+/* ------------------------------------------------------------------ */
+/* Panel 01: elevation                                                 */
+/* ------------------------------------------------------------------ */
+
+.space-elev {
+  position: absolute;
+  inset: calc(4 * var(--u)) calc(10 * var(--u)) calc(6 * var(--u));
+  width: calc(100% - 20 * var(--u));
+  height: calc(100% - 10 * var(--u));
+}
+.space-elev__tag,
+.space-elev__zone text,
+.space-elev__legend text,
+.space-elev__scale text {
+  font: 500 7px/1 var(--font-mono);
+  letter-spacing: 0.08em;
+  fill: var(--ink-3);
+}
+.space-elev__ground {
+  stroke: var(--line);
+  stroke-width: 0.6;
+  stroke-dasharray: 6 3 1 3;
+}
+.space-elev__part {
+  fill-opacity: 0.14;
+  stroke: var(--ink);
+  stroke-width: 0.6;
+  vector-effect: non-scaling-stroke;
+}
+.space-elev__part[data-on] {
+  fill: var(--signal);
+  fill-opacity: 0.3;
+  stroke: var(--signal);
+  stroke-width: 1.4;
+}
+.space-elev__zone path {
+  fill: none;
+  stroke-width: 1.2;
+}
+.space-elev__scale path {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 0.8;
+}
+
+/* ------------------------------------------------------------------ */
+/* Panel 02: detail                                                    */
+/* ------------------------------------------------------------------ */
+
+.space-detail {
+  position: absolute;
+  inset: calc(8 * var(--u)) calc(12 * var(--u)) calc(8 * var(--u));
+  display: grid;
+  grid-template-columns: calc(112 * var(--u)) minmax(0, 1fr);
+  gap: calc(12 * var(--u));
+  align-items: start;
+  color: var(--ink);
+  overflow: hidden;
+}
+.space-detail--chapter {
+  grid-template-columns: calc(40 * var(--u)) minmax(0, 1fr);
+}
+.space-detail__icon {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--hair);
+  background: color-mix(in srgb, var(--panel-solid) 60%, transparent);
+}
+.space-detail__rest {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 0.6;
+  stroke-dasharray: 1.5 1.5;
+}
+.space-detail__out {
+  fill-opacity: 0.2;
+  stroke: var(--ink);
+  stroke-width: 0.7;
+}
+.space-detail__out[data-on] {
+  fill: var(--signal);
+  fill-opacity: 0.45;
+  stroke: var(--signal);
+}
+.space-detail__move {
+  stroke: var(--ink-3);
+  stroke-width: 0.5;
+}
+.space-detail__no {
+  margin: 0;
+  font: 500 calc(22 * var(--u)) / 1 var(--font-mono);
+  color: var(--ink-3);
+}
+.space-detail__text {
+  min-width: 0;
+}
+.space-detail__text p {
+  margin: 0;
+}
+.space-detail__en {
+  font: 600 calc(10.4 * var(--u)) / 1.2 var(--font-hud);
+  letter-spacing: 0.1em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.space-detail__en i {
+  font: 500 calc(9.4 * var(--u)) / 1 var(--font-mono);
+  font-style: normal;
+  color: var(--signal);
+}
+.space-detail__zh {
+  margin-top: calc(2 * var(--u)) !important;
+  font: 400 calc(9.2 * var(--u)) / 1.3 var(--font-hud);
+  letter-spacing: 0.08em;
+  color: var(--ink-2);
+}
+.space-detail__dl {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: calc(3 * var(--u)) calc(10 * var(--u));
+  margin: calc(8 * var(--u)) 0 0;
+  padding-top: calc(6 * var(--u));
+  border-top: 1px solid var(--hair);
+}
+.space-detail__dl dt {
+  font: 500 calc(7.8 * var(--u)) / 1.4 var(--font-hud);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.space-detail__dl dd {
+  display: flex;
+  align-items: center;
+  gap: calc(5 * var(--u));
+  min-width: 0;
+  margin: 0;
+  font: 500 calc(9 * var(--u)) / 1.4 var(--font-hud);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.space-detail__mono {
+  font-family: var(--font-mono) !important;
+}
+.space-detail__swatch {
+  flex: none;
+  width: calc(10 * var(--u));
+  height: calc(5 * var(--u));
+}
+.space-detail__line {
+  margin-top: calc(7 * var(--u)) !important;
+  font: 400 calc(9 * var(--u)) / 1.35 var(--font-hud);
+  letter-spacing: 0.03em;
+  color: var(--ink-2);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.space-detail__hint {
+  margin-top: calc(4 * var(--u)) !important;
+  font: 400 calc(8.4 * var(--u)) / 1.35 var(--font-hud);
+  color: var(--ink-3);
+}
+
+/* ------------------------------------------------------------------ */
+/* Panel 03: state                                                     */
+/* ------------------------------------------------------------------ */
+
+.space-state {
+  position: absolute;
+  inset: calc(6 * var(--u)) calc(12 * var(--u)) calc(6 * var(--u));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0;
+}
+.space-state__row {
+  display: grid;
+  grid-template-columns: calc(84 * var(--u)) minmax(0, 1fr);
+  align-items: baseline;
+  padding: calc(2 * var(--u)) 0;
+  border-bottom: 1px solid var(--hair);
+}
+.space-state__row:last-child {
+  border-bottom: 0;
+}
+.space-state__row dt {
+  font: 500 calc(7.8 * var(--u)) / 1.2 var(--font-hud);
+  letter-spacing: 0.12em;
+  color: var(--ink-3);
+}
+.space-state__row dt small {
+  margin-left: calc(5 * var(--u));
+  font-size: calc(7.4 * var(--u));
+  letter-spacing: 0.06em;
+}
+.space-state__row dd {
+  margin: 0;
+  font: 500 calc(9 * var(--u)) / 1.2 var(--font-mono);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--ink-2);
+}
+.space-state__row[data-on] dd {
+  color: var(--ink);
+}
+.space-state__row[data-on] dt::before {
+  content: "";
+  display: inline-block;
+  width: calc(4 * var(--u));
+  height: calc(4 * var(--u));
+  margin-right: calc(4 * var(--u));
+  background: var(--signal);
+  vertical-align: middle;
+}
+
+/* Quiet perf readout (slot `perf`), pressed onto the stage like the title block. */
+.space-perf {
+  font-variant-numeric: tabular-nums;
+  text-shadow:
+    0 0 calc(3 * var(--u)) var(--bg),
+    0 0 calc(6 * var(--u)) var(--bg);
 }
