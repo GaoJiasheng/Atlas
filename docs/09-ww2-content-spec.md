@@ -6,15 +6,24 @@
 
 | # | 决定 |
 |---|---|
-| 1 | 11 章，最前加"1937 · 亚洲先打起来了"；新加坡沦陷是主打章 |
+| 1 | 11 章，最前加"1937 · 亚洲先打起来了"。**全球视角、客观公正**：欧洲、亚洲、太平洋、美国、新加坡各占应有的分量，新加坡只是其中一个视角，不是主线 |
 | 2 | 不强求讲故事口吻，**信息量优先**：正文 + 可展开的"细看"块；文字解释充分；语音以后加 |
 | 3 | 沉重内容**讲细节和数字**，不回避：南京、肃清、集中营、原子弹。用词克制、尊重受害者，数字带来源。本主题 `sensitivity: open`，不走家长模式折叠 |
 | 4 | 日期到天；兵力取整（"约 7 万"）；来源集中在 `data/SOURCES.md`；页面不放 FACT/REF 芯片 |
 | 5 | 默认 paper，cinema 可切 |
 | 6 | 版图精度到"看得出谁占了哪一片"，但**必须来自真实地图数据或真实地图配准描摹**（见 §5），不许几何图形凑合 |
 | 7 | v1 不做配音、视频、肖像；先把模板（第 1、7 章）做完整，再铺其余章 |
+| 8 | **不带有色眼镜，不歪曲立场**：按史实写，谁做了什么就写谁；各方的罪行与牺牲都写，包括同盟国一方（德累斯顿、原子弹、卡廷、日裔拘留）；不写成任何一国的胜利叙事 |
 
 ## 1. 定位、口吻、受众
+
+**立场规则（最高优先级）**
+- 视角是全球的：每章至少照顾两个战区或两方的处境；镜头和篇幅按事件的历史分量分配，不按"和我们有关"分配。
+- 客观：只陈述有来源的事实；评价性的词（英勇、残暴、正义）不进正文，留给读者。对有争议的问题（原子弹、轰炸平民、苏德条约、殖民地的立场）呈现各方论点，不下结论。
+- 对称：轴心国的侵略和屠杀写细节和数字；同盟国造成的平民死亡（德累斯顿约 2.5 万、东京大轰炸约 10 万、广岛长崎）、苏联的卡廷与瓜分波兰、美国的日裔拘留，同样写细节和数字。
+- 殖民地视角也要在：新加坡、马来亚、印度、荷属东印度当时是殖民地，"保卫新加坡"的是谁、为谁，印度国民军为什么会站到日本一边，这些都如实写。
+- 中国战场按其分量写（1937 年起、约 1,500–2,000 万死亡），但不把它写成主线；苏德战场、太平洋、西欧、北非同样成章。
+- 不用"我们""敌人"这类代入词。
 
 - 读者：8–11 岁的孩子，陪读的父母。英文为主，中文独立成文（不是翻译腔）。
 - 每章结构固定：**问题**（孩子会问的一句话）→ **正文**（EN 180–260 词 / ZH 300–450 字，3–5 段）→ **细看**（2–4 个可展开块：人物、数字、为什么、和新加坡 / 中国的关系）→ **测验**（1 题，答错有解释）。
@@ -34,10 +43,10 @@
 | 04 | blitzkrieg | Blitzkrieg: France falls / 闪电战：法国沦陷 | 1940-06-22 | 3, 49, 4.4 | sickle-cut, dunkirk, paris-falls, battle-of-britain | K4 1940-07-01 | 法国有那么多士兵，为什么六个星期就输了？ |
 | 05 | barbarossa | Barbarossa: turning east / 巴巴罗萨：转向东方 | 1941-10-02 | 32, 53, 3.8 | barbarossa-n, barbarossa-c, barbarossa-s, leningrad-siege | K5 1941-12-05 | 这是多少人？ |
 | 06 | pearl-harbor | Pearl Harbor / 珍珠港 | 1941-12-07 | -160, 25, 2.6 | kido-butai, pearl-harbor | K5 | 日本为什么要打美国？ |
-| 07 | fall-of-singapore | The fall of Singapore / 新加坡沦陷 | 1942-02-15 | 103.0, 3.0, 5.6 → 103.8, 1.35, 10 | kota-bharu, force-z, slim-river, johor-crossing, bukit-timah, surrender-ford | K6 1942-03-09 | 英国的大炮和堡垒为什么没用？ |
+| 07 | fall-of-singapore | Malaya and Singapore / 马来亚与新加坡 | 1942-02-15 | 103.0, 3.0, 5.6 → 103.8, 1.35, 10 | kota-bharu, force-z, slim-river, johor-crossing, bukit-timah, surrender-ford | K6 1942-03-09 | 英国的大炮和堡垒为什么没用？ |
 | 08 | syonan | Syonan: Singapore under Japan / 昭南岛：日据下的新加坡 | 1943-10-10 | 103.82, 1.33, 11 | sook-ching, death-railway, double-tenth | K6 | 那时候的小孩怎么生活？ |
 | 09 | turning-points | The tide turns / 转折 | 1943-02-02 | 40, 25, 2.2 | midway, stalingrad, el-alamein, guadalcanal | K7 1942-11-08, K8 1943-07-12 | 什么时候开始知道轴心国要输了？ |
-| 10 | liberation | Liberation / 反攻与解放 | 1945-05-08 | 15, 50, 3.6 | d-day, bagration, auschwitz-liberated, berlin | K9 1944-06-05, K10 1944-12-16, K11 1945-05-08 | 为什么要从东西两边一起打？ |
+| 10 | liberation | The Allies advance / 反攻 | 1945-05-08 | 15, 50, 3.6 | d-day, bagration, auschwitz-liberated, berlin | K9 1944-06-05, K10 1944-12-16, K11 1945-05-08 | 为什么要从东西两边一起打？ |
 | 11 | end-and-home | The end, and coming home / 结束与回家 | 1945-09-12 | 125, 20, 2.8 → 103.85, 1.29, 12 | hiroshima, nagasaki, manchuria-1945, tokyo-bay, singapore-ceremony | K12 1945-09-02 | 后来呢？ |
 
 第 7 章和第 11 章有两个镜头：章节 `camera` 用第一个，正文里放一个"看近一点"按钮触发第二个（引擎已有 `applyCameraPreset`，内容层用 MDX 组件 `<FlyTo preset="singapore-island">`，需新增，见 §8）。
@@ -74,9 +83,9 @@
 - 细看：① 航空母舰为什么改变海战；② 美国的工业产能（1941 vs 1944 飞机产量）；③ 日本在美日裔被拘留约 12 万人。
 - 测验：珍珠港和登陆马来亚是不是同一天？
 
-### 07 fall-of-singapore（主打章）
+### 07 fall-of-singapore
 - 正文：12-08 凌晨哥打巴鲁登陆（比珍珠港早 1 小时多），同时在泰国宋卡、北大年登陆；12-10 威尔士亲王号与反击号被击沉；日军第 25 军约 3.6 万人（山下奉文）沿半岛南下，自行车、轻坦克、丛林迂回；12-11 日得拉，01-07 仕林河，01-31 英军撤入新加坡炸断长堤；02-08 夜日军渡过柔佛海峡在林厝港登陆；02-11 武吉知马；水库被占；02-15 白思华在福特车厂投降，约 8 万人成为战俘——英国史上最大规模投降。镜头从马来半岛推到新加坡岛。
-- 细看：① "堡垒新加坡"的大炮为什么没用（炮能转向北面，但穿甲弹对步兵无效；防御重心一直是海上）；② 兵力对比：英联邦约 8.5 万（英、澳、印、马来团）对日军约 3.6 万；③ 马来团阿德南中尉与鸦片山（Bukit Chandu）1942-02-14；④ 新加坡平民：空袭从 1941-12-08 开始，1942-02 初每天空袭。
+- 细看：① "堡垒新加坡"的大炮为什么没用（炮能转向北面，但穿甲弹对步兵无效；防御重心一直是海上）；② 兵力对比：英联邦约 8.5 万（英、澳、印、马来团）对日军约 3.6 万；③ 同一周的其他战场：香港 12-25 投降、菲律宾巴丹、荷属东印度；④ 殖民地的处境：守军多是印度、澳大利亚士兵，当地华人、马来人、印度人各自的立场，印度国民军 1942 年在新加坡成立；⑤ 新加坡平民：空袭从 1941-12-08 开始。
 - 测验：日军是从哪个方向进攻新加坡的？
 
 ### 08 syonan
@@ -90,7 +99,7 @@
 - 测验：中途岛海战日本损失了几艘航空母舰？
 
 ### 10 liberation
-- 正文：1944-06-06 诺曼底，约 15.6 万人一天登陆；巴黎 08-25；巴格拉季昂行动 06-22 至 08-19，德中央集团军群崩溃；华沙起义 08-01 至 10-02；突出部 12-16；**集中营与大屠杀**：1945-01-27 苏军解放奥斯威辛，那里约 110 万人被杀；整个大屠杀约 600 万犹太人被杀，另有罗姆人、残疾人、战俘、政治犯；04-25 易北河会师；04-30 希特勒自杀；05-08 欧战胜利日。太平洋：英帕尔—科希马 1944-03 至 07，日军在缅甸开始败退；莱特 1944-10；硫磺岛、冲绳 1945。
+- 正文（欧洲与太平洋各半）：1944-06-06 诺曼底，约 15.6 万人一天登陆；巴黎 08-25；巴格拉季昂行动 06-22 至 08-19，德中央集团军群崩溃；华沙起义 08-01 至 10-02；突出部 12-16；**集中营与大屠杀**：1945-01-27 苏军解放奥斯威辛，那里约 110 万人被杀；整个大屠杀约 600 万犹太人被杀，另有罗姆人、残疾人、战俘、政治犯；04-25 易北河会师；04-30 希特勒自杀；05-08 欧战胜利日。太平洋：英帕尔—科希马 1944-03 至 07，日军在缅甸开始败退；莱特 1944-10；硫磺岛、冲绳 1945。
 - 细看：① 诺曼底怎么骗过德军（"坚忍"行动）；② 为什么说"大屠杀"不是战争的一部分而是一桩单独的罪；③ 安妮·弗兰克（1945-02 或 03 死于贝尔根-贝尔森，15 岁）；④ 缅甸战场与新加坡的关系（印度国民军）。
 - 测验：欧战胜利日是哪一天？
 
@@ -151,15 +160,15 @@
 | K11 | 1945-05-08 | 欧战结束：盟军与苏军占领线；日本：硫磺岛失守，冲绳战役中，缅甸仰光收复（05-03） |
 | K12 | 1945-09-02 | 日本投降：满洲、朝鲜北部苏军；各占领区归还；新加坡英军返回（09-05 登陆） |
 
-### 4.3 事件 events.json（38）
+### 4.3 事件 events.json（42）
 
 格式：`id · t（until）· 地点 · kind · importance · 一句话`。伤亡与兵力字段按 §1 规则填写，来源编号在 `detail` 末尾。
 
 **亚洲 1937–38**：mukden-1931 (1931-09-18, 沈阳, political, 2) · marco-polo-bridge (1937-07-07, 北京西南, battle, 3) · shanghai-1937 (1937-08-13→11-26, 上海, battle, 3) · nanjing (1937-12-13→1938-01, 南京, massacre, 3) · wuhan-1938 (1938-06-11→10-27, 武汉, battle, 2)
 **欧洲 1939–41**：munich-1938 (1938-09-30, 慕尼黑, political, 2) · molotov-ribbentrop (1939-08-23, 莫斯科, political, 2) · invasion-poland (1939-09-01→10-06, 华沙, battle, 3) · soviet-poland (1939-09-17, 布列斯特, battle, 2) · katyn (1940-04→05, 卡廷, massacre, 2) · norway-1940 (1940-04-09→06-10, 纳尔维克, battle, 2) · sickle-cut (1940-05-10→05-20, 色当, battle, 3) · dunkirk (1940-05-26→06-04, 敦刻尔克, evacuation, 3) · paris-falls (1940-06-14, 巴黎, surrender, 2) · battle-of-britain (1940-07-10→10-31, 伦敦, bombing, 3) · barbarossa-start (1941-06-22, 布列斯特, battle, 3) · kiev-1941 (1941-08-23→09-26, 基辅, battle, 2) · leningrad-siege (1941-09-08→1944-01-27, 列宁格勒, siege, 3) · moscow-1941 (1941-10-02→1942-01-07, 莫斯科, battle, 3)
-**太平洋与东南亚 1941–42**：pearl-harbor (1941-12-07, 瓦胡岛, bombing, 3) · kota-bharu (1941-12-08, 哥打巴鲁, landing, 3) · force-z (1941-12-10, 关丹外海, battle, 2) · hong-kong-1941 (1941-12-08→12-25, 香港, battle, 2) · slim-river (1942-01-07, 仕林河, battle, 1) · johor-crossing (1942-02-08, 林厝港, landing, 3) · bukit-timah (1942-02-10→02-11, 武吉知马, battle, 2) · bukit-chandu (1942-02-14, 鸦片山, battle, 1) · alexandra-hospital (1942-02-14, 亚历山大医院, massacre, 2) · surrender-ford (1942-02-15, 福特车厂, surrender, 3) · sook-ching (1942-02-18→03-04, 樟宜海滩等, massacre, 3) · java-1942 (1942-03-09, 万隆, surrender, 1)
+**太平洋与东南亚 1941–42**：pearl-harbor (1941-12-07, 瓦胡岛, bombing, 3) · japanese-internment (1942-02-19, 美国西岸, political, 2) · bataan (1942-01-07→04-09, 巴丹, battle, 2) · kota-bharu (1941-12-08, 哥打巴鲁, landing, 3) · force-z (1941-12-10, 关丹外海, battle, 2) · hong-kong-1941 (1941-12-08→12-25, 香港, battle, 2) · slim-river (1942-01-07, 仕林河, battle, 1) · johor-crossing (1942-02-08, 林厝港, landing, 3) · bukit-timah (1942-02-10→02-11, 武吉知马, battle, 2) · bukit-chandu (1942-02-14, 鸦片山, battle, 1) · alexandra-hospital (1942-02-14, 亚历山大医院, massacre, 2) · surrender-ford (1942-02-15, 福特车厂, surrender, 3) · sook-ching (1942-02-18→03-04, 樟宜海滩等, massacre, 3) · java-1942 (1942-03-09, 万隆, surrender, 1)
 **日据新加坡**（kind: site，静态点位，第 8 章图层 `sites`）：site-ford-factory · site-changi-prison · site-kempeitai-ymca · site-changi-beach · site-punggol-beach · site-alexandra-hospital · site-municipal-building
-**转折与反攻**：midway (1942-06-04→06-07, 中途岛, battle, 3) · stalingrad (1942-08-23→1943-02-02, 斯大林格勒, battle, 3) · el-alamein (1942-10-23→11-11, 阿拉曼, battle, 2) · guadalcanal (1942-08-07→1943-02-09, 瓜岛, battle, 2) · kursk (1943-07-05→08-23, 库尔斯克, battle, 2) · double-tenth (1943-10-10, 新加坡, political, 2) · death-railway (1942-10→1943-10, 桂河, atrocity, 3) · imphal-kohima (1944-03-08→07-03, 英帕尔, battle, 2) · d-day (1944-06-06, 诺曼底, landing, 3) · bagration (1944-06-22→08-19, 明斯克, battle, 3) · warsaw-uprising (1944-08-01→10-02, 华沙, battle, 2) · bulge (1944-12-16→1945-01-25, 阿登, battle, 2) · auschwitz-liberated (1945-01-27, 奥斯威辛, liberation, 3) · berlin (1945-04-16→05-02, 柏林, battle, 3) · ve-day (1945-05-08, 柏林/伦敦, political, 3) · okinawa (1945-04-01→06-22, 冲绳, battle, 2) · hiroshima (1945-08-06, 广岛, bombing, 3) · manchuria-1945 (1945-08-09→08-20, 哈尔滨, battle, 2) · nagasaki (1945-08-09, 长崎, bombing, 3) · vj-day (1945-08-15, 东京, political, 3) · tokyo-bay (1945-09-02, 东京湾, surrender, 3) · singapore-ceremony (1945-09-12, 新加坡市政厅, surrender, 3)
+**转折与反攻**：midway (1942-06-04→06-07, 中途岛, battle, 3) · stalingrad (1942-08-23→1943-02-02, 斯大林格勒, battle, 3) · el-alamein (1942-10-23→11-11, 阿拉曼, battle, 2) · guadalcanal (1942-08-07→1943-02-09, 瓜岛, battle, 2) · kursk (1943-07-05→08-23, 库尔斯克, battle, 2) · double-tenth (1943-10-10, 新加坡, political, 2) · death-railway (1942-10→1943-10, 桂河, atrocity, 3) · imphal-kohima (1944-03-08→07-03, 英帕尔, battle, 2) · d-day (1944-06-06, 诺曼底, landing, 3) · bagration (1944-06-22→08-19, 明斯克, battle, 3) · warsaw-uprising (1944-08-01→10-02, 华沙, battle, 2) · bulge (1944-12-16→1945-01-25, 阿登, battle, 2) · auschwitz-liberated (1945-01-27, 奥斯威辛, liberation, 3) · berlin (1945-04-16→05-02, 柏林, battle, 3) · dresden (1945-02-13→02-15, 德累斯顿, bombing, 2) · tokyo-firebombing (1945-03-09→03-10, 东京, bombing, 3) · ve-day (1945-05-08, 柏林/伦敦, political, 3) · okinawa (1945-04-01→06-22, 冲绳, battle, 2) · hiroshima (1945-08-06, 广岛, bombing, 3) · manchuria-1945 (1945-08-09→08-20, 哈尔滨, battle, 2) · nagasaki (1945-08-09, 长崎, bombing, 3) · vj-day (1945-08-15, 东京, political, 3) · tokyo-bay (1945-09-02, 东京湾, surrender, 3) · singapore-ceremony (1945-09-12, 新加坡市政厅, surrender, 3)
 
 事件 kind 需要在 schema 里**新增**：`massacre`、`siege`、`evacuation`、`liberation`、`atrocity`、`site`（见 §8）。
 
@@ -236,6 +245,8 @@ check.ts            # 对每帧渲染截图，与来源地图并排输出 docs/s
 规则：每个数字一条；来源冲突列出区间；优先：法庭判决 / 官方档案 > 学术专著 > 博物馆与国家档案馆页面（NLB Infopedia、国家档案馆、帝国战争博物馆）> 维基百科（只作索引，溯源到其引用）。
 
 ## 7. 沉重内容的写法
+
+- 各方都写：轴心国的（南京、肃清、奥斯威辛、死亡铁路）和同盟国的（德累斯顿、东京大轰炸、广岛长崎、卡廷、日裔拘留）用同一套写法、同一种标记。
 
 - 讲清楚发生了什么、对谁、多少人、谁负责、后来怎么被记住。
 - 不用血腥图片，地图上用事件标记（massacre / atrocity 用空心方形标记而不是圆点，图例注明）。
