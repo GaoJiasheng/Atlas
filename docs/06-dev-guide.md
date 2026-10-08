@@ -74,9 +74,26 @@ tests-e2e/                    # Playwright：smoke.spec.ts, hud.spec.ts, hud-lay
      </Lang>
      ```
    - 敏感段落：`<Soft>柔化版</Soft>` 默认显示，`<Full>完整版</Full>` 只在家长模式显示（两版都进 HTML，CSS 按 `html[data-parent]` 切换）。
+   - 正文组件（免 import，和 `<Lang>` 同一机制，在 `src/pages/[locale]/topics/[slug].astro` 的 `components` 里注册；都是静态 HTML，交互由 SceneHost 委托处理）：
+
+     | 组件 | 写法 | 效果 |
+     |---|---|---|
+     | `<More>` | `<More title={{ en: "The numbers", zh: "数字" }}>`（里面空行再写 Markdown）`</More>` | 细看折叠块：hairline 标题行 + 小三角，默认收起；原生 `<details>`，无 JS 也能用 |
+     | `<Num>` | `<Num s="S3">about 70,000</Num>`；多个来源 `s="S3,S7"` | 数字后跟 mono 上标来源号，点开来源弹层（文本、说明、链接，不联网） |
+     | `<FlyTo>` | `<FlyTo preset="singapore-island">Singapore island</FlyTo>` | 正文里的 hairline 按钮，镜头飞到 `presets.json` 里的预设（与 VIEW 按钮同一动作；手机上顺便收起阅读面板） |
 4. 引擎数据放 `data/*.json`，文件名（去掉 `.json`）就是数据对象的 key：
-   - TimeScene/geo：`entities.json`、`control.json`、`movements.json`、`events.json`
+   - TimeScene/geo：`entities.json`、`control.json`、`movements.json`、`events.json`；可选 `presets.json`（额外镜头）
    - SpaceScene：`parts.json`（含 parts / groups / flows / animations / views）
+   - 两个引擎都可选 `sources.json`（编号来源，共用 schema `src/content/schema/sources.ts`）：
+
+     ```json
+     { "sources": [
+       { "id": "S1", "text": { "en": "IMTFE judgment (1948): over 200,000.", "zh": "远东国际军事法庭判决书（1948）：超过 20 万。" },
+         "url": "https://…", "note": { "en": "Nanjing tribunal (1947): over 300,000. Both listed.", "zh": "南京军事法庭（1947）：30 万以上。两者并列。" } }
+     ] }
+     ```
+
+     `id` 是 `S` + 数字、全主题唯一；`url`（http/https）和 `note` 可选。`data/SOURCES.md` 的编号来源段由脚本生成：`pnpm tsx scripts/sources-md.ts <slug>`——只替换 `<!-- sources:begin … -->` 与 `<!-- sources:end -->` 之间的块（没有就追加到文末），SOURCES.md 里手写的地图来源、许可、配准说明保留。
 5. `pnpm validate`，按报错改到 0 error。缺中文是 warning，缺英文是 error。
 6. `status: draft` 也会出现在索引页（带"草稿"标记）。发布前改 `published`。
 
@@ -89,6 +106,8 @@ tests-e2e/                    # Playwright：smoke.spec.ts, hud.spec.ts, hud-lay
 - 章节 `state` 按引擎的 chapter-state schema 校验；`highlight` / `part` / `layers`（space 的组）引用的 id 必须存在
 - 引擎要求的数据文件必须存在；`cover` 指向的文件必须存在
 - MDX 正文要有 `<Lang en>` 和 `<Lang zh>`
+- `sources.json`：id 形如 `S1`、不重复；事件的 `sources` 和正文 `<Num s="…">` 引用的编号必须在 `sources.json` 里（没有这个文件却引用了也报错）
+- 正文 `<FlyTo preset="…">` 必须是 `presets.json` 里的预设；`<More>` 必须带 `title`；预设 id 与章节等 id 一样全主题唯一，且不能叫 `world` / `theatre`
 - `ui.en.json` 与 `ui.zh.json` key 一致
 
 ## Scene 契约（给二期引擎实现者）
@@ -302,9 +321,9 @@ stages/geo/controller.ts   命令式驱动 MapLibre：图层、斜线填充、�
 stages/geo/leaders.ts      引线标注（两列、避让、逐帧投影）
 timeline/Timeline.tsx      工程标尺时间轴（渲染进 bottomBar 插槽）
 timeline/usePlayback.ts    播放循环（全程约 60 s @×1，遇章节节点停 1.5 s）
-hud/HudPanels.tsx          card 条带图、panel01 时间标尺、panel02 问题、panel03 状态、perf 读数
-EventInspector.tsx         点事件 → inspector 插槽（Counter；sensitive 事件的伤亡仅家长模式）
-lib/time.ts lib/format.ts lib/geo.ts lib/model.ts lib/frame.ts lib/playhead.ts lib/ticks.ts lib/stats.ts   纯函数，单测在 tests/time-scene/
+hud/HudPanels.tsx          card 条带图、panel01 时间标尺、panel02 问题/概述、panel03 状态、perf 读数
+EventInspector.tsx         点事件 → inspector 插槽（Counter / 双方 CounterVersus；细看折叠块；来源上标；sensitive 事件的伤亡仅家长模式）
+lib/time.ts lib/format.ts lib/geo.ts lib/model.ts lib/frame.ts lib/playhead.ts lib/ticks.ts lib/stats.ts lib/bloc.ts   纯函数，单测在 tests/time-scene/
 colors.ts  time-scene.css
 ```
 
@@ -314,12 +333,16 @@ colors.ts  time-scene.css
 
 | 文件 | 要点 |
 |---|---|
-| `entities.json` | `id, name, bloc(axis/allied/neutral), joined, left?, color?`。颜色默认取阵营 token，`color: "token:accent-3"` 或 `#hex` 覆盖。`joined` 驱动 participation 图层"点亮"和右上卡的参与线。 |
+| `entities.json` | `id, name, bloc, joined, left?, color?`。`bloc` 是 `axis/allied/neutral` 之一，或**换阵营**时按时间排的数组 `[{ "bloc": "axis", "from": "1940-06-10", "to": "1943-10-13" }, { "bloc": "allied", "from": "1943-10-13" }]`（`[from, to)`，只有最后一段可省 `to`，段不能重叠；第一段之前按第一段算，空档里按刚结束的那段算，`blocAt(entity, t)` 在 `lib/bloc.ts`）。颜色默认取 `t` 时所在阵营的 token：地图控制区、participation、地名、实体引线说明、右上卡的面积带都跟 `t` 走，卡上的参与线按段分色；行动和事件用它们开始时的阵营色；图例对换阵营的实体每个阵营列一行。`color: "token:accent-3"` 或 `#hex` 覆盖（不随阵营变）。`joined` 驱动 participation 图层"点亮"和右上卡的参与线。 |
 | `control.json` | `keyframes[]`，按时间严格升序；每帧一个 FeatureCollection，`properties.holder` = 实体 id。同一实体可有多个面（或 MultiPolygon）。面积（右上卡）在客户端按球面公式算，不用写。 |
 | `movements.json` | `from/to` 时间区间 + LineString `path`（从起点画到终点）。`strength` 决定线宽（1–3 px，相对全主题最大值）。 |
-| `events.json` | `t`、可选 `until`、`at`、`kind`、`importance`（**3 最重要 = 点最大**，1 最小）、`sides/forces/casualties/result`。`sensitive: true` 的事件伤亡数字只在家长模式显示。 |
+| `events.json` | `t`、可选 `until`、`at`、`kind`、`importance`（**3 最重要 = 点最大**，1 最小）、`sides/forces/casualties/result`。`kind`：`battle`、`landing`（这两种必须有 `sides` + `result`）、`bombing`（必须有 `sides`）、`surrender`、`political`、`massacre`、`siege`、`evacuation`、`liberation`、`atrocity`、`site`（新增六种的 `sides`/`result` 都可选）。可选 `detail: { en, zh }`（inspector 里默认收起的"细看 / More"）与 `sources: ["S1", "S7"]`（`sources.json` 的编号，inspector 摘要后显示 mono 上标，点开来源弹层）。`sensitive: true` 的事件伤亡数字只在家长模式显示。 |
+| `presets.json`（可选） | `{ "presets": [{ "id": "singapore-island", "label": { "en": "Singapore", "zh": "新加坡" }, "camera": { "center": [103.82, 1.35], "zoom": 9.2 } }] }`。注册成镜头预设，排在 `world` / `theatre` 之后（数字键接着编号，1–9 之外只有按钮）；`label` 是按钮文字（一两个词）；正文 `<FlyTo preset>` 用这些 id。 |
+| `sources.json`（可选） | 见上文"加一个主题"第 4 步。 |
 
-章节 `state`：`time`（ISO 三种精度或 `{ ma }`）、`camera`、`layers`、`highlight`（实体/行动/事件 id）、`theme`，以及 P3 新增的 `question` / `answer`（`{ en, zh }`，panel02 显示；`answer` 必须配 `question`）。章节节点在时间轴上的位置 = 该章累积目标的 `t`。
+**`site` 事件**是静态点位（监狱、纪念碑、建筑）：`t` 照写但不参与时间——不进时间轴范围、不进 panel01 泳道和统计、不脉冲；只在 `sites` 图层打开时显示（小空心菱形 + 中心点），点击同样打开 inspector（眉题 `P-01`），高亮时出引线标注。
+
+章节 `state`：`time`（ISO 三种精度或 `{ ma }`）、`camera`、`layers`、`highlight`（实体/行动/事件 id）、`theme`，以及 P3 新增的 `question` / `answer`（`{ en, zh }`，panel02 显示；`answer` 必须配 `question`），和可选的 `summary`（`{ en, zh }`，没有问题时 panel02 的一句话概述）。章节节点在时间轴上的位置 = 该章累积目标的 `t`。
 
 ### 图层（`layers` 里的 id）与地图语法（docs/08 §5）
 
@@ -330,8 +353,9 @@ colors.ts  time-scene.css
 | `control` | 每个关键帧三层：阵营色淡底（.28）+ 45° 斜线 `fill-pattern`（每个实体一张 canvas 图，按 pixelRatio `addImage`，换主题 `updateImage`）+ 阵营色描边。前帧/后帧两个 source 交叉淡化：区间最后 30% 内前帧 1→0.4、后帧 0→1，三层同一个系数 | 可关 |
 | `borders` | 今天的国界 hairline（ink .4，0.4–0.9 px 随缩放）+ 国名（`countries-50m.json`，第一次打开时才下载） | B 模式 / 图层开关 |
 | `movements` | 工程流线：已走过的路径一条实线（.3）+ 一条步进虚线（约 12 fps 流动），宽 1–3 px；头部 12 px 小箭头（HTML marker）。paper 无发光；dark plate 只在箭头头部有 ≤ .35 的微光（`--glow`） | F 模式（`flow`）/ 图层开关 |
-| `battles` | 已发生的事件：空心 hairline 圆环 + 实心点（按 importance 定大小），进入 `[t, until]` 时圆环用进攻方颜色、实线；高亮用 signal 色；进入时放一个扩散 hairline 环（~900 ms）。点击（44 px 命中框）→ 详情 + `highlight` | 可关 |
+| `battles` | 已发生的事件：空心 hairline 圆环 + 实心点（按 importance 定大小），进入 `[t, until]` 时圆环用进攻方颜色、实线；高亮用 signal 色；进入时放一个扩散 hairline 环（~900 ms）。点击（44 px 命中框）→ 详情 + `highlight`。按 `kind`：`massacre` / `atrocity` 画空心方块（墨色 hairline，HTML marker；圆仍在 GL 层里透明地当点击目标），脉冲也是方的；`siege` 圆外加一圈虚线环；`evacuation` / `liberation` 圆用冷色 `--cold`。图例相应出"Massacre / atrocity · 屠杀 / 暴行"（方块）、"Siege · 围城"（虚线环） | 可关 |
 | `participation` | 实体在当前关键帧的面：加入后描边，加入那一刻闪亮（时长 = 全程 4%） | 默认关 |
+| `sites` | `site` 事件：小空心菱形 + 中心点（HTML marker），不随时间变化、不脉冲；高亮 signal 色。章节 `layers` 可含 `sites`；只有主题里有 `site` 事件时图层面板才出这个开关 | 默认关 |
 
 - 地名（HTML marker，无 glyphs，最多 12 个）：区域名（实体，大写宽字距）和国名（borders 开时）。贪心避让：按优先级用真实屏幕矩形（4 px 间隙）检测，**先给引线标注让位**，再互相避让（`data-collided`）。
 - 比例尺：舞台左下、底部面板之上（被左列挡住就挪到左列右侧），按当前缩放和中心纬度取 1/2/5×10ⁿ km 的整数长度，半实半空 hairline 条。HUD 隐藏时跟着隐藏；手机不显示。
@@ -367,23 +391,25 @@ colors.ts  time-scene.css
 
 | 项 | 内容 |
 |---|---|
-| 预设 | 各章镜头（`01`…）+ `world`（center [20, 10]，zoom 1.4）+ `theatre`（地图 `cameraForBounds` 套住全部数据；地图未就绪时按包围盒估算）。数字键 1–9 |
+| 预设 | 各章镜头（`01`…）+ `world`（center [20, 10]，zoom 1.4）+ `theatre`（地图 `cameraForBounds` 套住全部数据；地图未就绪时按包围盒估算）+ `presets.json` 里的预设（按钮文字 = `label`）。数字键 1–9 |
 | 模式 | `flow`（F，= movements 图层，状态 `FLOW`）· `borders`（B，= borders 图层）· `graticule`（G，引擎本地状态）· `reference`（R）· `presentation`（P）· 宿主 `labels`（L） |
 | `pause` | 播放 / 暂停（SPACE） |
 | `status` | `2000-03-11 · ×1`（与 `FLOW`、`REFERENCE` 等模式段一起出现在状态行） |
 | `specRows` | ENTITIES / KEYFRAMES / EVENTS / MOVEMENTS 计数（mono） |
 | `stats()` | `{ features, zoom, fps }`：features = 当前可见数据要素 + 经纬线 + 国界（开时）；fps = 页面 rAF 帧率 |
-| `escape` | 依次：退出 PRESENTATION → 退出 REFERENCE → 关闭事件详情 → 清空 highlight |
+| `escape` | 依次：退出 PRESENTATION → 退出 REFERENCE → 关闭事件详情 → 清空 highlight（来源弹层开着时 ESC 先关弹层，由弹层自己处理） |
 
 - **REFERENCE（R）**：版图对照用"叠加"实现（不分屏）：当前主导关键帧照常，相邻关键帧（前一帧；当前是第一帧时取后一帧）的边界以墨色虚线叠上，2 s 淡入（`instant` 时直接到位）；暂停播放，舞台顶部横幅写"实线 K2 … · 虚线 K1 …"。再按恢复，之前在播放就继续播放。少于两个关键帧时禁用；演示中禁用。
 - **PRESENTATION（P）**：隐藏 HUD（宿主 `hud = false`），只在舞台上留主题标题和底部章节字幕（编号 · 章名 · 日期）；按顺序走所有未锁定章节，每章 = 镜头飞行 2.2 s + 停 1.5 s，走完自动退出并恢复 HUD。P / ESC / H / "显示界面"都会结束演示（HUD 一恢复就结束）。
 - 插槽内容（`hud/HudPanels.tsx`，SVG 按面板实际像素画，字号走 `--u`）：
   - `card` PARTICIPATION AND AREA：每个实体一条带——参与线（joined → left，起点小空心圆），关键帧间线性插值的近似控制面积（球面面积，斜线 + 淡底），行首写 EN 名 / 中文 / 当前 `≈面积 KM²`；当前章节窗口淡 signal 底，`t` 一条 signal 竖线，底部自适应刻度。
   - `panel01` TIMELINE：整段时间的小标尺 + 章节编号圆 + 三条泳道：KEYFRAMES（菱形 K1…）、MOVEMENTS（起止条，重叠自动分行）、EVENTS（点 + 进行窗口），当前章节窗口与 `t` 竖线同上。
-  - `panel02` QUESTION：章节编号 + 章名，`state.question`（衬线，孩子读），`state.answer` 在下方；没有问题时显示本章高亮事件的摘要，再没有就是主题副标题。
-  - `panel03` STATE：TIME、PARTICIPANTS（已加入 / 总数）、ACTIVE BATTLES（battle/landing/bombing 且在窗口内）、ACTIVE MOVEMENTS、CONTROL KEYFRAME（K1 → K2 · 37% + 小进度条）。都是数据统计，不标 SIM。
+  - `panel02` QUESTION：章节编号 + 章名，`state.question`（衬线），`state.answer` 在下方。没有问题时面板标题换成 SUMMARY / 概述，显示 `state.summary`；没有 summary 就取本章正文（当前语言）第一段（跳过 `<More>` 折叠块、家长模式版 `<Full>` 和来源上标，最多三行）；正文为空时退回本章高亮事件的摘要，再没有就是主题副标题。
+  - `panel03` STATE：TIME、PARTICIPANTS（已加入 / 总数）、ACTIVE BATTLES（battle/landing/bombing/siege 且在窗口内）、ACTIVE MOVEMENTS、CONTROL KEYFRAME（K1 → K2 · 37% + 小进度条）。都是数据统计，不标 SIM。
   - `perf`：`FEATURES 63 · ZOOM 5.5 · 60 FPS`（500 ms 更新）。
-  - `inspector`：hairline 框，`E-01 · BATTLE · 日期` mono 眉题，标题大写 + 另一语言小字，摘要，进攻/防守/结果的 dl（斜线色块），Counter 兵力；伤亡仍只在家长模式。
+  - `inspector`：hairline 框，`E-01 · BATTLE · 日期` mono 眉题（`site` 为 `P-01 · SITE`，无日期），标题大写 + 另一语言小字，摘要 + 来源上标（`sources`），进攻/防守/结果的 dl（斜线色块，颜色取事件开始时的阵营），Counter 兵力；伤亡仍只在家长模式；最后是 `detail` 的"细看 / More"折叠块（默认收起）。
+  - Counter：`forces` / `casualties` 恰好两方时画成一个双方并排的 `CounterVersus`（进攻方在左、图标从中线向外长，防守方在右，同一刻度，底部一行刻度说明）；其他情况每方一行。刻度 `counterPer(max)`：最大值在 100 万–500 万之间固定"1 icon = 100,000 people / 一个图标 = 10 万人"（最多 50 个图标），否则取 1/2/5×10ⁿ（`nicePer`）。
+  - 来源弹层（`widgets/SourcePopover.tsx`，宿主挂一个）：场景内任何 `[data-source="S3"]`（正文 `<Num>` 的上标、inspector 的上标）点开都走它——委托监听，静态正文无需 hydration；弹层贴在上标下方（放不下就在上方），写来源号、文本、说明、链接；ESC / 点外面 / 关闭按钮关闭，焦点回到上标。数据来自主题的 `sources.json`，不联网。
 
 ### 交互约定
 

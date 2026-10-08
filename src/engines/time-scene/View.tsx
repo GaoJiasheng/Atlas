@@ -34,10 +34,12 @@ import { usePlayback } from './timeline/usePlayback';
 import { EventInspector } from './EventInspector';
 import { BandCard, PerfReadout, QuestionPanel, StatePanel, TimelinePanel, useFps } from './hud/HudPanels';
 import { BLOC_CSS, entityCssColor } from './colors';
+import { blocsOf, changesBloc } from './lib/bloc';
 import './time-scene.css';
 
 const CHAPTER_TWEEN_MS = 1600;
-const TOGGLE_LAYERS = ['control', 'borders', 'movements', 'battles', 'participation'] as const;
+const TOGGLE_LAYERS = ['control', 'borders', 'movements', 'battles', 'participation', 'sites'] as const;
+const SQUARE_KINDS = new Set<string>(['massacre', 'atrocity']);
 /** Up to this many entities, the legend names each one; above, it groups by bloc. */
 const LEGEND_ENTITY_LIMIT = 6;
 const OVERLAY_OPEN_MIN_WIDTH = 720;
@@ -47,6 +49,24 @@ const PRESENT_STEP_MS = 2200 + 1500;
 const WORLD_CAMERA: GeoCamera = { center: [20, 10], zoom: 1.4 };
 
 const bi = (key: UiKey): BilingualText => ({ en: translate('en', key), zh: translate('zh', key) });
+
+/**
+ * First paragraph of a chapter's pre-rendered body (panel 02 when the chapter
+ * has no question or summary). Skips collapsed `<More>` blocks, the parent-only
+ * `<Full>` text and source superscripts.
+ */
+function firstParagraph(chapterId: string): string | null {
+  const article = document.querySelector(`[data-chapter-body="${CSS.escape(chapterId)}"]`);
+  if (!article) return null;
+  for (const p of article.querySelectorAll('p')) {
+    if (p.closest('details, .atlas-full')) continue;
+    const copy = p.cloneNode(true) as HTMLElement;
+    for (const sup of copy.querySelectorAll('.atlas-src-refs, [data-source]')) sup.remove();
+    const text = (copy.textContent ?? '').replace(/\s+/g, ' ').trim();
+    if (text) return text;
+  }
+  return null;
+}
 const pad2 = (n: number) => String(n).padStart(2, '0');
 
 /** Fallback camera for the `theatre` preset before the map can measure itself. */
@@ -250,22 +270,39 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     const items: LegendItem[] = [];
     if (layers.includes('control') || layers.includes('participation')) {
       if (geo.entities.length <= LEGEND_ENTITY_LIMIT) {
-        for (const e of geo.entities) items.push({ id: `entity-${e.id}`, label: e.name, color: entityCssColor(e) });
+        for (const e of geo.entities) {
+          // An entity that changes sides is listed once per bloc it is in.
+          if (!e.color && changesBloc(e)) {
+            for (const b of blocsOf(e))
+              items.push({ id: `entity-${e.id}-${b}`, label: `${tx(e.name, locale)} · ${t(`time.bloc.${b}`)}`, color: BLOC_CSS[b] });
+          } else {
+            items.push({ id: `entity-${e.id}`, label: e.name, color: entityCssColor(e) });
+          }
+        }
       } else {
         for (const b of ['axis', 'allied', 'neutral'] as const)
-          if (geo.entities.some((e) => e.bloc === b)) items.push({ id: `bloc-${b}`, label: t(`time.bloc.${b}`), color: BLOC_CSS[b] });
+          if (geo.entities.some((e) => blocsOf(e).includes(b))) items.push({ id: `bloc-${b}`, label: t(`time.bloc.${b}`), color: BLOC_CSS[b] });
       }
     }
     if (layers.includes('movements') && geo.movements.length)
       items.push({ id: 'movement', label: t('time.movement'), color: 'var(--ink-muted)', kind: 'arrow' });
-    if (layers.includes('battles') && geo.events.length)
-      items.push({ id: 'event', label: t('time.event'), color: 'var(--ink-muted)', kind: 'point' });
+    if (layers.includes('battles')) {
+      const kinds = new Set(model.events.map((e) => e.event.kind));
+      if ([...kinds].some((k) => !SQUARE_KINDS.has(k)))
+        items.push({ id: 'event', label: t('time.event'), color: 'var(--ink-muted)', kind: 'point' });
+      if (kinds.has('siege')) items.push({ id: 'siege', label: t('time.legend.siege'), color: 'var(--ink-muted)', kind: 'ring-dashed' });
+      if ([...kinds].some((k) => SQUARE_KINDS.has(k)))
+        items.push({ id: 'atrocity', label: bi('time.legend.atrocity'), color: 'var(--ink)', kind: 'square' });
+    }
+    if (layers.includes('sites') && model.sites.length)
+      items.push({ id: 'site', label: t('time.legend.site'), color: 'var(--ink)', kind: 'site' });
     return items;
-  }, [geo, layers, locale]); // `t` is bound to `locale`
+  }, [geo, model, layers, locale]); // `t` is bound to `locale`
 
   const layerItems = useMemo<LayerItem[]>(
-    () => TOGGLE_LAYERS.map((id) => ({ id, label: t(`time.layer.${id}`) })),
-    [locale],
+    () =>
+      TOGGLE_LAYERS.filter((id) => id !== 'sites' || model.sites.length > 0).map((id) => ({ id, label: t(`time.layer.${id}`) })),
+    [model, locale],
   );
 
   /* ---------- overlay: open by default only when the stage is roomy ---------- */
@@ -283,6 +320,10 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     const s = controllerRef.current?.stats();
     return s ? { ...s, fps: fps.current } : null;
   }, [fps]);
+
+  /* ---------- panel 02: question, else summary ---------- */
+  const chapterState = (chapters.find((c) => c.id === currentChapter)?.state ?? {}) as { question?: BilingualText; summary?: BilingualText };
+  const hasQuestion = Boolean(chapterState.question);
 
   /* ---------- HUD controls (docs/08 §3) ---------- */
   const movementsOn = layers.includes('movements');
@@ -302,10 +343,13 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
       const camera = store.getState().chapterTarget(c.id).camera;
       return camera ? [{ id: c.id, label: pad2(i + 1), chapter: c.id, camera: camera as GeoCamera | null }] : [];
     });
+    // presets.json: after `world` / `theatre`, so digit keys keep their meaning; `<FlyTo>` names these ids.
+    const filePresets = (geo.presets?.presets ?? []).map((p) => ({ id: p.id, label: p.label, title: p.label, camera: p.camera as GeoCamera | null }));
     const presets = [
       ...chapterPresets,
       { id: 'world', label: t('time.preset.world'), title: t('time.preset.world'), camera: WORLD_CAMERA },
       { id: 'theatre', label: t('time.preset.theatre'), title: t('time.preset.theatre'), camera: null },
+      ...filePresets,
     ];
     const toggleLayer = (id: string, on: boolean) => {
       if (store.getState().layers.includes(id) !== on) store.getState().toggleLayer(id);
@@ -356,7 +400,11 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
       specRows,
       status: [statusT, `×${playback.speed}`].filter(Boolean),
       card: bi('time.card.title'),
-      panels: { panel01: bi('time.panel.timeline'), panel02: bi('time.panel.question'), panel03: bi('time.panel.state') },
+      panels: {
+        panel01: bi('time.panel.timeline'),
+        panel02: bi(hasQuestion ? 'time.panel.question' : 'time.panel.summary'),
+        panel03: bi('time.panel.state'),
+      },
       escape: () => {
         if (presentingRef.current) {
           stopPresentation(true);
@@ -380,6 +428,8 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   }, [
     chapters,
     store,
+    geo,
+    hasQuestion,
     model,
     movementsOn,
     bordersOn,
@@ -405,11 +455,16 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   const stopChapter = playback.stop ? chapters.find((c) => c.id === playback.stop?.id) : undefined;
   const chapter = chapters.find((c) => c.id === currentChapter) ?? null;
   const chapterNumber = chapter ? chapters.indexOf(chapter) + 1 : 0;
-  const fallbackSummary = useMemo<BilingualText | null>(() => {
-    const target = currentChapter ? store.getState().chapterTarget(currentChapter).highlight : [];
+  // No question: `state.summary`, else the body's first paragraph, else the highlighted event, else the subtitle.
+  const fallbackSummary = useMemo<BilingualText | string | null>(() => {
+    if (!currentChapter) return topic.subtitle;
+    if (chapterState.summary) return chapterState.summary;
+    const first = firstParagraph(currentChapter);
+    if (first) return first;
+    const target = store.getState().chapterTarget(currentChapter).highlight;
     const ev = geo.events.find((e) => target.includes(e.id));
     return ev?.summary ?? topic.subtitle;
-  }, [currentChapter, store, geo, topic]);
+  }, [currentChapter, chapterState.summary, store, geo, topic, locale]);
   const stateLabels = useMemo(
     () => ({
       time: bi('time.state.time'),

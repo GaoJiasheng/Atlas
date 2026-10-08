@@ -9,8 +9,9 @@ import entities from '../../src/content/topics/sample-time/data/entities.json';
 import control from '../../src/content/topics/sample-time/data/control.json';
 import movements from '../../src/content/topics/sample-time/data/movements.json';
 import events from '../../src/content/topics/sample-time/data/events.json';
+import sources from '../../src/content/topics/sample-time/data/sources.json';
 
-const data = timeSceneGeoData.parse({ entities, control, movements, events });
+const data = timeSceneGeoData.parse({ entities, control, movements, events, sources });
 const model = buildTimeModel(data, [
   { id: 'first-look', t: '2000-01-15' },
   { id: 'second-look', t: '2000-03-11' },

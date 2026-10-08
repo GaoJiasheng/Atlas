@@ -114,6 +114,7 @@ state:                           # 引擎进入本章时要达到的状态（引
   layers: [control, movements, battles]
   highlight: [kota-bharu, johor-crossing, bukit-timah]
   theme: cinema
+  summary: { en: "…", zh: "…" }  # 可选（TimeScene）：panel02 的一句话概述；不写则取正文第一段
 quiz:
   - q: { en: "Which direction did the Japanese army come from?", zh: "日军是从哪个方向打过来的？" }
     options: [{ en: "From the sea in the south", zh: "从南边海上" }, { en: "Down the Malay Peninsula from the north", zh: "从北边沿马来半岛南下" }]
@@ -129,6 +130,8 @@ MDX 正文用 `<Lang en>…</Lang><Lang zh>…</Lang>` 或双栏 frontmatter 字
 - 所有展示文本是 `{ en, zh }`
 - 所有 id 是 kebab-case，全主题内唯一
 - 日期用 ISO 字符串，支持 `1942`、`1942-02`、`1942-02-15` 三种精度；地质时间用 `{ ma: 200 }`（百万年前）
+- 数字的来源：主题可带 `data/sources.json`（`{ sources: [{ id: "S1", text: { en, zh }, url?, note? }] }`，所有引擎共用 `src/content/schema/sources.ts`）；事件的 `sources: ["S1"]` 和正文 `<Num s="S1">约 70,000</Num>` 引用它，`pnpm validate` 检查编号都存在；`scripts/sources-md.ts` 把它渲染进 `data/SOURCES.md`
+- 正文除 `<Lang>`、`<Soft>`、`<Full>` 外还可用 `<More title={{ en, zh }}>`（细看折叠块）、`<Num s>`（带来源角标的数字）、`<FlyTo preset>`（镜头跳到 `presets.json` 的预设，TimeScene），免 import；写法见 docs/06
 
 ## 国际化
 

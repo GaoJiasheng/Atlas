@@ -7,8 +7,10 @@
  * The map is drawn as an engineering plate (docs/08 §5): paper land, pale
  * water, hairline coast / borders / 10° graticule, control areas as a faint
  * bloc tint plus a 45° hatch, movements as thin flow lines with a small
- * arrowhead, events as hollow rings with a dot, leader labels for what the
- * chapter emphasises (leaders.ts) and a scale bar.
+ * arrowhead, events as hollow rings with a dot (massacres / atrocities as
+ * hollow squares, sieges with a dashed outer ring), static `site` points on
+ * their own layer, leader labels for what the chapter emphasises (leaders.ts)
+ * and a scale bar. Entity colours follow the bloc valid at `t` (lib/bloc.ts).
  *
  * Loaded lazily (dynamic import) so MapLibre stays out of the View chunk.
  */
@@ -22,7 +24,9 @@ import { buildMapStyle } from '../../../../theme/map-style';
 import { readThemeTokens, resolveColorRef, type ThemeTokens } from '../../../../theme/theme';
 import { t as translate, tx, withBase } from '../../../../i18n';
 import type { TimeSceneExt } from '../../index';
-import type { TimeModel } from '../../lib/model';
+import { entityBlocAt, type TimeModel } from '../../lib/model';
+import type { SceneEvent } from '../../schema';
+import { changesBloc } from '../../lib/bloc';
 import type { Playhead } from '../../lib/playhead';
 import { frameAt, type Frame } from '../../lib/frame';
 import { areaLabelPoint, metresPerPixel, pointAlong, scaleBar, type LngLat } from '../../lib/geo';
@@ -69,6 +73,7 @@ const SRC = {
   reference: 'ts-reference',
   movements: 'ts-movements',
   events: 'ts-events',
+  sites: 'ts-sites',
 } as const;
 
 const LAYER = {
@@ -87,6 +92,8 @@ const LAYER = {
   moveLine: 'ts-movements-line',
   eventRing: 'ts-events-ring',
   eventDot: 'ts-events-dot',
+  /** Invisible hit targets under the site markers (HTML). */
+  siteHit: 'ts-sites-hit',
 } as const;
 
 /** Scene layer id (LayerToggles) -> map layers it shows. `base` is always on. */
@@ -96,7 +103,15 @@ const GROUPS: Record<string, string[]> = {
   borders: [LAYER.borders],
   movements: [LAYER.moveTrail, LAYER.moveLine],
   battles: [LAYER.eventRing, LAYER.eventDot],
+  sites: [LAYER.siteHit],
 };
+
+/** Event kinds drawn as a hollow square (HTML marker) instead of the ring + dot. */
+const SQUARE_KINDS = new Set<string>(['massacre', 'atrocity']);
+/** Event kinds drawn in the cold tone instead of the attacker's colour. */
+const COLD_KINDS = new Set<string>(['evacuation', 'liberation']);
+/** Ring radius of an event mark in px. */
+const eventRadius = (e: SceneEvent, active: boolean, hl: boolean) => (3 + 2 * e.importance) * (active ? 1.15 : 1) + (hl ? 1.5 : 0);
 
 /** Bloc tint under the hatch (docs/08 §5: low saturation, ~.28). */
 const CONTROL_TINT = 0.28;
@@ -241,6 +256,7 @@ function dataLayers(tk: ThemeTokens): LayerSpecification[] {
       paint: {
         'circle-radius': ['get', 'r'],
         'circle-color': tk.paper || '#e9e4d8',
+        // `o` is 0 for square-marked kinds: the circle stays as the click target only.
         'circle-opacity': ['*', 0.55, ['get', 'o']],
         'circle-stroke-color': ['get', 'stroke'],
         'circle-stroke-width': ['get', 'sw'],
@@ -256,6 +272,13 @@ function dataLayers(tk: ThemeTokens): LayerSpecification[] {
         'circle-color': ['get', 'color'],
         'circle-opacity': ['get', 'o'],
       },
+    },
+    {
+      id: LAYER.siteHit,
+      type: 'circle',
+      source: SRC.sites,
+      layout: { visibility: 'none' },
+      paint: { 'circle-radius': 7, 'circle-color': ink, 'circle-opacity': 0, 'circle-stroke-width': 0 },
     },
   ];
 }
@@ -355,23 +378,36 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   const source = (id: string) => map.getSource(id) as GeoJSONSource | undefined;
   const tr = (key: Parameters<typeof translate>[1], vars?: Record<string, string | number>) => translate(locale, key, vars);
 
-  const entityColor = (id: string): string => {
+  /** Colour of entity `id` at numeric time `t` (its override, else its bloc at `t`). */
+  const entityColor = (id: string, t: number): string => {
     const en = model.entities.get(id)?.entity;
     if (en?.color) return resolveColorRef(en.color, tokens) || tokens['accent-neutral'];
-    return tokens[`accent-${en?.bloc ?? 'neutral'}` as 'accent-axis'] || tokens['accent-neutral'] || '#888';
+    return tokens[`accent-${entityBlocAt(model, id, t)}` as 'accent-axis'] || tokens['accent-neutral'] || '#888';
   };
-  const hatchId = (entityId: string) => `ts-hatch-${entityId}`;
+  /** Hatch images are shared per colour: one per bloc, one per entity with its own colour. */
+  const hatchId = (entityId: string, t: number) => {
+    const en = model.entities.get(entityId)?.entity;
+    return en?.color ? `ts-hatch-e-${entityId}` : `ts-hatch-b-${entityBlocAt(model, entityId, t)}`;
+  };
+  /** Entities that change sides: their bloc at `t` goes into source signatures. */
+  const switchers = [...model.entities.values()].filter((en) => !en.entity.color && changesBloc(en.entity)).map((en) => en.entity.id);
+  const blocSig = (t: number) => switchers.map((id) => entityBlocAt(model, id, t)).join(',');
 
   const layersOn = () => new Set(store.getState().layers);
   const highlight = () => store.getState().highlight ?? [];
 
   /* ---------- hatch patterns (one per entity, rebuilt on theme change) ---------- */
   const applyHatches = () => {
-    for (const id of model.entities.keys()) {
-      const image = hatchImage(entityColor(id), pixelRatio);
+    const images = new Map<string, string>();
+    for (const bloc of ['axis', 'allied', 'neutral'] as const) images.set(`ts-hatch-b-${bloc}`, tokens[`accent-${bloc}`] || '#888');
+    for (const { entity } of model.entities.values()) {
+      if (entity.color) images.set(`ts-hatch-e-${entity.id}`, resolveColorRef(entity.color, tokens) || tokens['accent-neutral']);
+    }
+    for (const [id, color] of images) {
+      const image = hatchImage(color, pixelRatio);
       if (!image) continue;
-      if (map.hasImage(hatchId(id))) map.updateImage(hatchId(id), image);
-      else map.addImage(hatchId(id), image, { pixelRatio });
+      if (map.hasImage(id)) map.updateImage(id, image);
+      else map.addImage(id, image, { pixelRatio });
     }
   };
 
@@ -426,7 +462,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     source(id)?.setData(fc);
   };
 
-  const controlFc = (index: number, hl: Set<string>): FeatureCollection => {
+  const controlFc = (index: number, hl: Set<string>, t: number): FeatureCollection => {
     const kf = model.keyframes[index]?.keyframe;
     if (!kf) return EMPTY;
     return {
@@ -436,8 +472,8 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
         geometry: f.geometry,
         properties: {
           holder: f.properties.holder,
-          color: entityColor(f.properties.holder),
-          pattern: hatchId(f.properties.holder),
+          color: entityColor(f.properties.holder, t),
+          pattern: hatchId(f.properties.holder, t),
           hl: hl.has(f.properties.holder),
         },
       })),
@@ -472,15 +508,15 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     const hlList = highlight();
     const hl = new Set(hlList);
     const hlSig = hlList.join(',');
-    const themeSig = `${tokens['accent-axis']}|${tokens.ink}`;
+    const themeSig = `${tokens['accent-axis']}|${tokens.ink}|${blocSig(t)}`;
     const frame = frameAt(model, t, hlList);
     lastFrame = frame;
     const on = layersOn();
 
     /* control: two sources, crossfaded (tint, hatch and edge together) */
     const { control } = frame;
-    setIfChanged(SRC.prev, `${control.prevIndex}|${hlSig}|${themeSig}`, () => controlFc(control.prevIndex, hl));
-    setIfChanged(SRC.next, `${control.nextIndex}|${hlSig}|${themeSig}`, () => controlFc(control.nextIndex, hl));
+    setIfChanged(SRC.prev, `${control.prevIndex}|${hlSig}|${themeSig}`, () => controlFc(control.prevIndex, hl, t));
+    setIfChanged(SRC.next, `${control.nextIndex}|${hlSig}|${themeSig}`, () => controlFc(control.nextIndex, hl, t));
     const fade = (prefix: 'prev' | 'next', o: number) => {
       map.setPaintProperty(prefix === 'prev' ? LAYER.prevFill : LAYER.nextFill, 'fill-opacity', CONTROL_TINT * o);
       map.setPaintProperty(prefix === 'prev' ? LAYER.prevHatch : LAYER.nextHatch, 'fill-opacity', o);
@@ -492,7 +528,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     /* reference: the adjacent keyframe as dashed outlines */
     const pair = referencePair(model, frame);
     setIfChanged(SRC.reference, `${referenceOn ? pair?.other : -1}`, () =>
-      referenceOn && pair ? controlFc(pair.other, new Set()) : EMPTY,
+      referenceOn && pair ? controlFc(pair.other, new Set(), t) : EMPTY,
     );
 
     /* participation: entity areas light up on `joined` */
@@ -503,7 +539,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
         partFeatures.push({
           type: 'Feature',
           geometry: f.geometry,
-          properties: { color: entityColor(p.entityId), flash: Math.round(p.flash * 50) / 50, hl: hl.has(p.entityId) },
+          properties: { color: entityColor(p.entityId, t), flash: Math.round(p.flash * 50) / 50, hl: hl.has(p.entityId) },
         });
       }
     }
@@ -521,7 +557,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
         return {
           type: 'Feature',
           geometry: { type: 'LineString', coordinates: mv.coords },
-          properties: { id, color: entityColor(mv.m.movement.holder), width: hl.has(id) ? base + 0.8 : base },
+          properties: { id, color: entityColor(mv.m.movement.holder, mv.m.start), width: hl.has(id) ? base + 0.8 : base },
         };
       });
     setIfChanged(
@@ -531,23 +567,23 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     );
     updateArrowheads(frame, on.has('movements'));
 
-    /* events: hollow ring (hairline) + dot sized by importance */
+    /* events: hollow ring (hairline) + dot sized by importance; squares and siege rings are HTML (updateMarks) */
     const eventFeatures: Feature[] = frame.events.map((ef) => {
-      const e = model.events.find((x) => x.event.id === ef.id)!.event;
+      const en = model.events.find((x) => x.event.id === ef.id)!;
+      const e = en.event;
       const isHl = hl.has(e.id);
-      const color = e.sides ? entityColor(e.sides.attacker) : tokens.ink;
-      const r = (3 + 2 * e.importance) * (ef.active ? 1.15 : 1) + (isHl ? 1.5 : 0);
+      const color = eventColor(e, en.start);
       return {
         type: 'Feature',
         geometry: { type: 'Point', coordinates: e.at },
         properties: {
           id: e.id,
-          r,
+          r: eventRadius(e, ef.active, isHl),
           dot: 0.8 + 0.7 * e.importance,
           color,
           stroke: isHl ? tokens.signal : ef.active ? color : tokens['ink-2'],
           sw: isHl ? 1.6 : 1,
-          o: ef.active || isHl ? 1 : 0.6,
+          o: SQUARE_KINDS.has(e.kind) ? 0 : ef.active || isHl ? 1 : 0.6,
         },
       };
     });
@@ -563,6 +599,17 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
       for (const id of nowActive) if (!activeEvents.has(id)) pulse(id);
     }
     activeEvents = nowActive;
+
+    /* sites: static points, independent of `t` (hit targets here, diamonds in updateMarks) */
+    setIfChanged(SRC.sites, `${on.has('sites')}`, () =>
+      on.has('sites')
+        ? {
+            type: 'FeatureCollection',
+            features: model.sites.map((e) => ({ type: 'Feature', geometry: { type: 'Point', coordinates: e.at }, properties: { id: e.id } })),
+          }
+        : EMPTY,
+    );
+    updateMarks(frame, on, hl, hlSig);
 
     updateDashAnimation(on.has('movements') && frame.movements.length > 0);
     updateLeaders(frame);
@@ -591,7 +638,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
           marker.setLngLat(mv.head).addTo(map);
           arrows.set(id, marker);
         }
-        marker.getElement().style.setProperty('--ts-color', entityColor(mv.m.movement.holder));
+        marker.getElement().style.setProperty('--ts-color', entityColor(mv.m.movement.holder, mv.m.start));
         marker.setLngLat(mv.head);
         orientArrow(marker, mv.tail, mv.head);
       }
@@ -644,14 +691,77 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     cancelAnimationFrame(dashRaf);
   });
 
+  /** Mark colour: cold tone for evacuations / liberations, else the attacker at the event's start, else ink. */
+  const eventColor = (e: SceneEvent, start: number): string => {
+    if (COLD_KINDS.has(e.kind)) return tokens.cold || tokens.ink;
+    return e.sides ? entityColor(e.sides.attacker, start) : tokens.ink;
+  };
+
+  /* ---------- HTML marks: hollow squares, siege rings, site diamonds ---------- */
+  const marks = new Map<string, Marker>();
+  let marksSig = '';
+  const updateMarks = (frame: Frame, on: Set<string>, hl: Set<string>, hlSig: string) => {
+    const battles = on.has('battles');
+    const sitesOn = on.has('sites');
+    const sig = `${battles ? frame.events.map((e) => `${e.id}:${e.active ? 1 : 0}`).join(',') : '-'}|${sitesOn}|${hlSig}`;
+    if (sig === marksSig) return;
+    marksSig = sig;
+    const want = new Map<string, { at: LngLat; className: string; size: number; active: boolean; hl: boolean; color?: string }>();
+    if (battles) {
+      for (const ef of frame.events) {
+        const en = model.events.find((x) => x.event.id === ef.id)!;
+        const e = en.event;
+        const isHl = hl.has(e.id);
+        const r = eventRadius(e, ef.active, isHl);
+        if (SQUARE_KINDS.has(e.kind)) {
+          want.set(`square:${e.id}`, { at: e.at, className: 'ts-mark ts-mark--square', size: Math.round(r * 1.8), active: ef.active, hl: isHl });
+        } else if (e.kind === 'siege') {
+          want.set(`siege:${e.id}`, {
+            at: e.at,
+            className: 'ts-mark ts-mark--siege',
+            size: Math.round(2 * r + 8),
+            active: ef.active,
+            hl: isHl,
+            color: eventColor(e, en.start),
+          });
+        }
+      }
+    }
+    if (sitesOn) {
+      for (const e of model.sites) want.set(`site:${e.id}`, { at: e.at, className: 'ts-mark ts-mark--site', size: 9, active: true, hl: hl.has(e.id) });
+    }
+    for (const [key, marker] of marks) {
+      if (!want.has(key)) {
+        marker.remove();
+        marks.delete(key);
+      }
+    }
+    for (const [key, m] of want) {
+      let marker = marks.get(key);
+      if (!marker) {
+        const el = document.createElement('div');
+        el.className = m.className;
+        el.appendChild(document.createElement('span'));
+        marker = new Marker({ element: el, anchor: 'center' }).setLngLat(m.at).addTo(map);
+        marks.set(key, marker);
+      }
+      const el = marker.getElement();
+      el.style.setProperty('--ts-size', `${m.size}px`);
+      if (m.color) el.style.setProperty('--ts-color', m.color);
+      el.dataset.active = String(m.active);
+      el.dataset.hl = String(m.hl);
+    }
+  };
+
   /* ---------- pulses: an expanding hairline ring ---------- */
   const pulseTimers = new Set<ReturnType<typeof setTimeout>>();
   const pulse = (id: string) => {
-    const e = model.events.find((x) => x.event.id === id)?.event;
-    if (!e) return;
+    const en = model.events.find((x) => x.event.id === id);
+    if (!en) return;
+    const e = en.event;
     const el = document.createElement('div');
-    el.className = 'ts-pulse';
-    el.style.setProperty('--ts-color', e.sides ? entityColor(e.sides.attacker) : tokens.ink);
+    el.className = SQUARE_KINDS.has(e.kind) ? 'ts-pulse ts-pulse--square' : 'ts-pulse';
+    el.style.setProperty('--ts-color', eventColor(e, en.start));
     el.style.setProperty('--ts-size', `${(3 + 2 * e.importance) * 2}px`);
     const marker = new Marker({ element: el }).setLngLat(e.at).addTo(map);
     const timer = setTimeout(() => {
@@ -710,6 +820,22 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
         });
       }
     }
+    if (on.has('sites')) {
+      for (const e of model.sites) {
+        if (!hl.has(e.id)) continue;
+        items.push({
+          key: `event:${e.id}`,
+          id: e.id,
+          kind: 'event',
+          en: e.title.en,
+          zh: e.title.zh,
+          note: tx(e.summary, locale),
+          at: e.at,
+          pinned: true,
+          clickable: true,
+        });
+      }
+    }
     if (on.has('movements')) {
       for (const m of model.movements) {
         const mv = m.movement;
@@ -745,7 +871,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
           kind: 'entity',
           en: en.name.en,
           zh: en.name.zh,
-          note: `${tr(`time.bloc.${en.bloc}`)} · ${tr('time.joinedOn', { date: formatTime(en.joined, locale) })}`,
+          note: `${tr(`time.bloc.${entityBlocAt(model, id, playhead.get())}`)} · ${tr('time.joinedOn', { date: formatTime(en.joined, locale) })}`,
           at,
           pinned: true,
           clickable: false,
@@ -780,7 +906,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
         if (!en || hl.has(holder)) continue;
         const at = entityAnchor(features);
         if (!at) continue;
-        out.push({ key: `entity:${holder}`, text: tx(en.name, locale), at, priority: 40, color: entityColor(holder), kind: 'entity' });
+        out.push({ key: `entity:${holder}`, text: tx(en.name, locale), at, priority: 40, color: entityColor(holder, playhead.get()), kind: 'entity' });
       }
     }
     if (on.has('borders') && countryLabels) {
@@ -886,14 +1012,16 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
 
   /* ---------- clicks on events (44px hit box) ---------- */
   map.on('click', (e) => {
-    if (!layersOn().has('battles')) return;
+    const on = layersOn();
+    const targets = [...(on.has('battles') ? [LAYER.eventRing] : []), ...(on.has('sites') ? [LAYER.siteHit] : [])];
+    if (targets.length === 0) return;
     const { x, y } = e.point;
     const hits = map.queryRenderedFeatures(
       [
         [x - HIT_RADIUS, y - HIT_RADIUS],
         [x + HIT_RADIUS, y + HIT_RADIUS],
       ],
-      { layers: [LAYER.eventRing] },
+      { layers: targets },
     );
     let best: { id: string; d: number } | null = null;
     for (const f of hits) {
@@ -974,6 +1102,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     }
     applyVisibility();
     for (const key of Object.keys(signatures)) delete signatures[key];
+    marksSig = '';
     render();
   };
   const themeObserver = new MutationObserver(() => {
@@ -1039,6 +1168,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
       for (const [id, n] of Object.entries(featureCounts)) {
         if (id === SRC.movements && !on.has('movements')) continue;
         if (id === SRC.events && !on.has('battles')) continue;
+        if (id === SRC.sites && !on.has('sites')) continue;
         if (id === SRC.participation && !on.has('participation')) continue;
         if ((id === SRC.prev || id === SRC.next) && !on.has('control')) continue;
         features += n;
@@ -1051,8 +1181,10 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
       destroyed = true;
       for (const dispose of disposers) dispose();
       for (const m of arrows.values()) m.remove();
+      for (const m of marks.values()) m.remove();
       for (const { marker } of labels.values()) marker.remove();
       arrows.clear();
+      marks.clear();
       labels.clear();
       map.remove();
     },

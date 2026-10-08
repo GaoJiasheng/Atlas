@@ -5,7 +5,10 @@
  *   entities.json   participants (who)
  *   control.json    control-area keyframes (where, over time)
  *   movements.json  campaign / route arrows
- *   events.json     battles and other dated events
+ *   events.json     battles and other dated events (and static `site` points)
+ * and two optional ones:
+ *   presets.json    extra named camera presets (VIEW buttons, `<FlyTo>`)
+ *   sources.json    numbered sources (shared schema, content/schema/sources.ts)
  *
  * Each file name (without `.json`) becomes a key of the parsed data object.
  * This module is build-time only (zod); client code imports its *types* only.
@@ -21,6 +24,7 @@ import {
 } from '../../content/schema/common';
 import { areaGeometry, feature, featureCollection, lineString } from '../../content/schema/geojson';
 import { geoCamera } from '../../content/schema/camera';
+import { sourceId, sourceIds, sourcesFile } from '../../content/schema/sources';
 import { compareTime } from '../../lib/time';
 
 /* ------------------------------------------------------------------ */
@@ -31,11 +35,51 @@ export const BLOCS = ['axis', 'allied', 'neutral'] as const;
 export const bloc = z.enum(BLOCS);
 export type Bloc = z.infer<typeof bloc>;
 
+/** One stretch of an entity's alignment: `bloc` from `from` until `to` (exclusive; open-ended if omitted). */
+export const blocSpan = z
+  .object({ bloc, from: timePoint, to: timePoint.optional() })
+  .strict()
+  .superRefine((span, ctx) => {
+    if (span.to === undefined) return;
+    const cmp = compareTime(span.from, span.to);
+    if (cmp === null || cmp >= 0) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['to'], message: '`to` must be after `from` on the same time scale' });
+    }
+  });
+export type BlocSpan = z.output<typeof blocSpan>;
+
+/**
+ * An entity's bloc: one bloc for the whole story, or spans in time order for
+ * entities that change sides (Italy 1943: `[{ bloc: "axis", from: "1940-06-10",
+ * to: "1943-10-13" }, { bloc: "allied", from: "1943-10-13" }]`).
+ */
+export const entityBloc = z.union([
+  bloc,
+  z
+    .array(blocSpan)
+    .min(1)
+    .superRefine((spans, ctx) => {
+      for (let i = 1; i < spans.length; i++) {
+        const prev = spans[i - 1]!;
+        const cur = spans[i]!;
+        if (prev.to === undefined) {
+          ctx.addIssue({ code: z.ZodIssueCode.custom, path: [i - 1, 'to'], message: 'only the last span may be open-ended' });
+          continue;
+        }
+        const cmp = compareTime(prev.to, cur.from);
+        if (cmp === null || cmp > 0) {
+          ctx.addIssue({ code: z.ZodIssueCode.custom, path: [i, 'from'], message: 'spans must be in time order and must not overlap' });
+        }
+      }
+    }),
+]);
+export type EntityBloc = z.output<typeof entityBloc>;
+
 export const entitySchema = z
   .object({
     id: kebabId,
     name: bilingual,
-    bloc,
+    bloc: entityBloc,
     /** Date the entity entered the story (e.g. joined the war). */
     joined: timePoint,
     left: timePoint.optional(),
@@ -133,7 +177,21 @@ export const movementsFile = z.array(movementSchema);
 /* events.json                                                         */
 /* ------------------------------------------------------------------ */
 
-export const EVENT_KINDS = ['battle', 'landing', 'surrender', 'bombing', 'political'] as const;
+export const EVENT_KINDS = [
+  'battle',
+  'landing',
+  'surrender',
+  'bombing',
+  'political',
+  'massacre',
+  'siege',
+  'evacuation',
+  'liberation',
+  'atrocity',
+  /** A static place (prison, memorial, building): no pulse, ignores `t`, shown on the `sites` layer only. */
+  'site',
+] as const;
+export type EventKind = (typeof EVENT_KINDS)[number];
 export const EVENT_RESULTS = ['attacker', 'defender', 'draw', 'inconclusive'] as const;
 
 const forceTable = z.record(kebabId, z.number().nonnegative());
@@ -154,6 +212,10 @@ export const eventSchema = z
     importance: z.union([z.literal(1), z.literal(2), z.literal(3)]),
     title: bilingual,
     summary: bilingual,
+    /** Longer text for the inspector's collapsed "More" block. */
+    detail: bilingual.optional(),
+    /** Source ids from `data/sources.json` (`["S1", "S7"]`). */
+    sources: z.array(sourceId).optional(),
     sensitive: z.boolean().default(false),
   })
   .strict()
@@ -176,6 +238,37 @@ export type SceneEvent = z.output<typeof eventSchema>;
 export const eventsFile = z.array(eventSchema);
 
 /* ------------------------------------------------------------------ */
+/* presets.json (optional)                                             */
+/* ------------------------------------------------------------------ */
+
+/** Built-in preset ids the engine always registers. */
+export const BUILTIN_PRESETS = ['world', 'theatre'] as const;
+
+export const cameraPresetSchema = z
+  .object({
+    id: kebabId,
+    /** Button text (keep it to a word or two) and tooltip. */
+    label: bilingual,
+    camera: geoCamera,
+  })
+  .strict();
+export type CameraPresetDef = z.output<typeof cameraPresetSchema>;
+
+export const presetsFile = z
+  .object({ presets: z.array(cameraPresetSchema) })
+  .strict()
+  .superRefine((file, ctx) => {
+    const seen = new Set<string>(BUILTIN_PRESETS);
+    file.presets.forEach((p, i) => {
+      if (seen.has(p.id)) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['presets', i, 'id'], message: `preset id "${p.id}" is taken` });
+      }
+      seen.add(p.id);
+    });
+  });
+export type PresetsFile = z.output<typeof presetsFile>;
+
+/* ------------------------------------------------------------------ */
 /* Whole-topic data                                                    */
 /* ------------------------------------------------------------------ */
 
@@ -186,6 +279,8 @@ export const timeSceneGeoData = z
     control: controlFile,
     movements: movementsFile,
     events: eventsFile,
+    presets: presetsFile.optional(),
+    sources: sourcesFile.optional(),
   })
   .strict()
   .superRefine((data, ctx) => {
@@ -209,6 +304,18 @@ export const timeSceneGeoData = z
       for (const key of Object.keys(e.forces ?? {})) check(key, ['events', i, 'forces', key]);
       for (const key of Object.keys(e.casualties ?? {})) check(key, ['events', i, 'casualties', key]);
     });
+    const sources = sourceIds(data.sources);
+    data.events.forEach((e, i) =>
+      (e.sources ?? []).forEach((id, j) => {
+        if (!sources.has(id)) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            path: ['events', i, 'sources', j],
+            message: data.sources ? `unknown source "${id}" (not in data/sources.json)` : `source "${id}" needs data/sources.json`,
+          });
+        }
+      }),
+    );
   });
 export type TimeSceneGeoData = z.output<typeof timeSceneGeoData>;
 
@@ -233,6 +340,8 @@ export const TIME_LAYERS = [
   'battles',
   'participation',
   'labels',
+  /** Static `site` events (default off). */
+  'sites',
 ] as const;
 export type TimeLayer = (typeof TIME_LAYERS)[number];
 
@@ -248,6 +357,8 @@ export const timeChapterState = z
     theme: theme.optional(),
     /** The child's question for this chapter (panel 02 QUESTION). */
     question: bilingual.optional(),
+    /** One-line overview for panel 02 when there is no question (else the body's first paragraph). */
+    summary: bilingual.optional(),
     /** One-sentence answer shown under the question. */
     answer: bilingual.optional(),
   })
@@ -264,7 +375,13 @@ export function timeSceneIds(data: TimeSceneGeoData): { kind: string; id: string
     ...data.entities.map((e) => ({ kind: 'entity', id: e.id })),
     ...data.movements.map((m) => ({ kind: 'movement', id: m.id })),
     ...data.events.map((e) => ({ kind: 'event', id: e.id })),
+    ...(data.presets?.presets ?? []).map((p) => ({ kind: 'preset', id: p.id })),
   ];
+}
+
+/** Camera preset ids a chapter body may fly to (`<FlyTo preset>`). */
+export function timeScenePresetIds(data: TimeSceneGeoData): string[] {
+  return (data.presets?.presets ?? []).map((p) => p.id);
 }
 
 export function timeChapterRefs(state: TimeChapterState): string[] {

@@ -68,3 +68,13 @@ export function nicePer(max: number, maxIcons = 20): number {
   for (const m of [1, 2, 5, 10]) if (m * exp >= raw) return Math.max(1, m * exp);
   return Math.max(1, 10 * exp);
 }
+
+/**
+ * Units per Counter icon for numbers of people: from 1,000,000 up to
+ * 5,000,000 the fixed "1 icon = 100,000 people" unit (at most 50 icons),
+ * otherwise `nicePer`.
+ */
+export function counterPer(max: number): number {
+  if (max >= 1_000_000 && max <= 5_000_000) return 100_000;
+  return nicePer(max);
+}

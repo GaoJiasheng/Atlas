@@ -1,0 +1,17 @@
+---
+/**
+ * `<Num s="S3">about 70,000</Num>`: a number in the text with its source id
+ * as a superscript (`s="S3,S7"` for several). The superscript opens the
+ * source popover (data/sources.json; widgets/SourcePopover, delegated, so this
+ * stays static HTML). `pnpm validate` checks every id exists.
+ */
+import { t } from '../../i18n';
+import { pageLocale } from './locale';
+
+interface Props {
+  s: string;
+}
+const ids = Astro.props.s.split(/[\s,]+/).filter(Boolean);
+const locale = pageLocale(Astro.url, Astro.currentLocale);
+---
+<span class="atlas-num"><slot /><sup class="atlas-src-refs">{ids.map((id) => <button type="button" class="atlas-src" data-source={id} aria-label={t(locale, 'source.open', { id })}>{id}</button>)}</sup></span>

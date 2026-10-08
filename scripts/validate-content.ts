@@ -10,6 +10,9 @@
  *   - all ids kebab-case and unique within the topic (topic, chapters, data)
  *   - bilingual fields: missing/empty `en` is an error, missing `zh` a warning
  *   - MDX bodies carry both <Lang en> and <Lang zh> blocks (warning otherwise)
+ *   - data/sources.json: ids unique (S1, S2 …); every event `sources` ref and
+ *     every `<Num s="…">` in a chapter body names a listed source
+ *   - `<FlyTo preset="…">` names a preset from data/presets.json; `<More>` has a title
  *   - referenced files (cover) exist
  * Plus: UI dictionaries (src/i18n/ui.*.json) have identical keys.
  *
@@ -23,6 +26,7 @@ import type { z } from 'zod';
 import { topicSchema, type TopicMeta } from '../src/content/schema/topic';
 import { chapterSchema } from '../src/content/schema/chapter';
 import { KEBAB_ID } from '../src/content/schema/common';
+import { sourceIds, type SourcesFile } from '../src/content/schema/sources';
 import { engineSchemas, formatIssues } from '../src/engines/schemas';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -112,6 +116,43 @@ function checkLangBlocks(file: string, body: string): void {
   }
 }
 
+/** Attributes of every `<Tag …>` opening tag in an MDX body (string attributes only). */
+function tagAttrs(body: string, tag: string): { raw: string; attrs: Record<string, string> }[] {
+  const out: { raw: string; attrs: Record<string, string> }[] = [];
+  const re = new RegExp(`<${tag}(?![A-Za-z])([^>]*)>`, 'g');
+  for (const m of body.matchAll(re)) {
+    const attrs: Record<string, string> = {};
+    for (const a of (m[1] ?? '').matchAll(/([A-Za-z]+)\s*=\s*(?:"([^"]*)"|'([^']*)'|\{)/g)) {
+      attrs[a[1]!] = a[2] ?? a[3] ?? '{…}';
+    }
+    out.push({ raw: m[0], attrs });
+  }
+  return out;
+}
+
+/** `<Num s>`, `<FlyTo preset>` and `<More title>` in a chapter body. */
+function checkBodyComponents(file: string, body: string, sources: Set<string> | null, presets: Set<string>): void {
+  for (const { raw, attrs } of tagAttrs(body, 'Num')) {
+    const ids = (attrs.s ?? '').split(/[\s,]+/).filter(Boolean);
+    if (ids.length === 0) {
+      error(file, `<Num> needs a source id, e.g. <Num s="S1">: ${raw}`);
+      continue;
+    }
+    for (const id of ids) {
+      if (!sources) error(file, `<Num s="${id}">: the topic has no data/sources.json`);
+      else if (!sources.has(id)) error(file, `<Num s="${id}">: unknown source "${id}" (not in data/sources.json)`);
+    }
+  }
+  for (const { raw, attrs } of tagAttrs(body, 'FlyTo')) {
+    const id = attrs.preset;
+    if (!id) error(file, `<FlyTo> needs a preset, e.g. <FlyTo preset="singapore-island">: ${raw}`);
+    else if (!presets.has(id)) error(file, `<FlyTo preset="${id}">: unknown preset (not in data/presets.json)`);
+  }
+  for (const { raw, attrs } of tagAttrs(body, 'More')) {
+    if (!attrs.title) error(file, `<More> needs a title={{ en: "…", zh: "…" }}: ${raw}`);
+  }
+}
+
 class IdRegistry {
   private seen = new Map<string, string>();
   constructor(private readonly file: string) {}
@@ -182,6 +223,10 @@ function validateTopic(dir: string): void {
   } else {
     reportZod(dataDir, parsedData.error, 'data.');
   }
+  // Ids chapter bodies may cite / fly to (null: the topic has no sources.json).
+  const sourcesFile = data !== undefined ? (data as { sources?: SourcesFile }).sources : undefined;
+  const sources = sourcesFile ? sourceIds(sourcesFile) : 'sources' in raw ? new Set<string>() : null;
+  const presets = new Set(data !== undefined ? schemas.presetIds(data) : []);
 
   /* ---- chapters ---- */
   const chaptersDir = join(dir, 'chapters');
@@ -208,6 +253,8 @@ function validateTopic(dir: string): void {
     if (front === undefined) continue;
     checkBilingual(file, front);
     checkLangBlocks(file, match[2] ?? '');
+    // Only when the data parsed: otherwise the data errors already explain missing ids.
+    if (data !== undefined) checkBodyComponents(file, match[2] ?? '', sources, presets);
 
     const parsed = chapterSchema.safeParse(front);
     if (!parsed.success) {

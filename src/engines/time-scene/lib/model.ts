@@ -3,8 +3,9 @@
  * turned into a number once (lib/time.ts), the timeline span is derived, and
  * lookups are indexed. Pure; built once per scene in the View.
  */
-import type { ControlKeyframe, Entity, Movement, SceneEvent, TimeSceneGeoData } from '../schema';
+import type { Bloc, ControlKeyframe, Entity, Movement, SceneEvent, TimeSceneGeoData } from '../schema';
 import { periodEnd, toNumber, type TimePoint, type TimeScale } from './time';
+import { blocAtSpans, blocSpansN } from './bloc';
 
 export interface KeyframeN {
   t: number;
@@ -28,6 +29,8 @@ export interface EntityN {
   entity: Entity;
   joined: number;
   left: number;
+  /** Bloc spans `[from, to)` as numbers (one open span for a plain bloc). */
+  spans: { bloc: Bloc; from: number; to: number }[];
 }
 
 export interface ChapterNode {
@@ -41,7 +44,10 @@ export interface TimeModel {
   max: number;
   span: number;
   keyframes: KeyframeN[];
+  /** Dated events (everything but `site`). */
   events: EventN[];
+  /** Static `site` events: no time window, shown on the `sites` layer. */
+  sites: SceneEvent[];
   movements: MovementN[];
   entities: Map<string, EntityN>;
   chapterNodes: ChapterNode[];
@@ -73,7 +79,8 @@ export function buildTimeModel(
     ...keyframes.map((k) => k.t),
     ...movements.flatMap((m) => [m.start, m.end]),
   ];
-  const rawEvents = data.events.map((event) => {
+  const sites = data.events.filter((event) => event.kind === 'site');
+  const rawEvents = data.events.filter((event) => event.kind !== 'site').map((event) => {
     const start = toNumber(event.t);
     const end = event.until !== undefined ? periodEnd(event.until) : periodEnd(event.t);
     points.push(start);
@@ -108,7 +115,7 @@ export function buildTimeModel(
   for (const entity of data.entities) {
     const joined = toNumber(entity.joined);
     const left = entity.left !== undefined ? toNumber(entity.left) : Number.POSITIVE_INFINITY;
-    entities.set(entity.id, { entity, joined: finite(joined) ? joined : min, left });
+    entities.set(entity.id, { entity, joined: finite(joined) ? joined : min, left, spans: blocSpansN(entity) });
   }
 
   return {
@@ -118,12 +125,19 @@ export function buildTimeModel(
     span,
     keyframes,
     events,
+    sites,
     movements,
     entities,
     chapterNodes,
     maxStrength: Math.max(1, ...data.movements.map((m) => m.strength)),
     bounds: dataBounds(data),
   };
+}
+
+/** Bloc of entity `id` at numeric time `t` (`neutral` for unknown ids). */
+export function entityBlocAt(model: TimeModel, id: string, t: number): Bloc {
+  const en = model.entities.get(id);
+  return en ? blocAtSpans(en.spans, t) : 'neutral';
 }
 
 function dataBounds(data: TimeSceneGeoData): [number, number, number, number] | null {
