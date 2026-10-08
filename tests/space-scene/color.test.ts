@@ -37,10 +37,11 @@ describe('resolveDataColor', () => {
     expect(resolveDataColor('#123456', paperTokens, 'paper')).toBe('#123456');
     expect(resolveDataColor('token:nope', paperTokens, 'paper', '#888888')).toBe('#888888');
   });
-  it('maps material presets to the per-theme palette', () => {
-    expect(resolveDataColor('metal', {}, 'paper')).toBe(PRESET_PALETTE.paper.metal);
-    expect(resolveDataColor('metal', {}, 'cinema')).toBe(PRESET_PALETTE.cinema.metal);
-    expect(PRESET_PALETTE.paper.copper).not.toBe(PRESET_PALETTE.cinema.copper);
+  it('maps material presets to the per-theme palette (aliases included)', () => {
+    expect(resolveDataColor('casing', {}, 'paper')).toBe(PRESET_PALETTE.paper.casing);
+    expect(resolveDataColor('metal', {}, 'cinema')).toBe(PRESET_PALETTE.cinema.steel);
+    expect(resolveDataColor('matte', {}, 'paper')).toBe(PRESET_PALETTE.paper.plastic);
+    expect(PRESET_PALETTE.paper.plastic).not.toBe(PRESET_PALETTE.cinema.plastic);
   });
   it('knows every preset the schema allows', () => {
     expect([...MATERIAL_PRESET_IDS]).toEqual([...MATERIAL_PRESETS]);
@@ -48,14 +49,24 @@ describe('resolveDataColor', () => {
 });
 
 describe('resolveMaterialLook', () => {
-  it('paper is matte, cinema is metallic', () => {
-    expect(resolveMaterialLook('plastic', paperTokens, 'paper')).toMatchObject({ metalness: 0.05, roughness: 0.85 });
-    expect(resolveMaterialLook('token:accent-2', cinemaTokens, 'cinema')).toMatchObject({
-      color: '#3dc6ff',
-      metalness: 0.6,
-      roughness: 0.35,
-      opacity: 1,
-    });
+  it('gives every family its own finish', () => {
+    const look = (ref: string) => resolveMaterialLook(ref, paperTokens, 'paper');
+    expect(look('casing')).toMatchObject({ finish: 'brushed', metalness: 0.8 });
+    expect(look('stainless').finish).toBe('brushed-axial');
+    expect(look('powder')).toMatchObject({ finish: 'peel' });
+    expect(look('powder').metalness).toBeGreaterThanOrEqual(0.45);
+    expect(look('powder').roughness).toBeGreaterThanOrEqual(0.48);
+    expect(look('rubber')).toMatchObject({ metalness: 0, roughness: 0.78 });
+    expect(look('plastic').metalness).toBe(0);
+    expect(look('metal')).toEqual(look('steel'));
+    expect(look('matte')).toEqual(look('plastic'));
+  });
+  it('plastic is not the default grey', () => {
+    const c = parseCssColor(resolveMaterialLook('plastic', paperTokens, 'paper').color)!;
+    expect(Math.max(c.r, c.g, c.b) - Math.min(c.r, c.g, c.b)).toBeGreaterThan(0.05);
+  });
+  it('tokens become a satin paint in the theme colour', () => {
+    expect(resolveMaterialLook('token:accent-2', cinemaTokens, 'cinema')).toMatchObject({ color: '#3dc6ff', opacity: 1, finish: 'grain' });
   });
   it('glass is see-through in both themes', () => {
     expect(resolveMaterialLook('glass', paperTokens, 'paper').opacity).toBeLessThan(1);

@@ -111,5 +111,5 @@ export function styleFlowMaterial(material: FlowMaterial, cinema: boolean): void
     material.needsUpdate = true;
   }
   material.uniforms.uCore.value = cinema ? 0.55 : 0;
-  material.uniforms.uSize.value = cinema ? 0.075 : 0.06;
+  material.uniforms.uSize.value = cinema ? 0.03 : 0.024;
 }

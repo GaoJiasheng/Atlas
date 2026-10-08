@@ -69,6 +69,8 @@ export interface SceneStats {
   calls?: number;
   triangles?: number;
   fps?: number;
+  geometries?: number;
+  textures?: number;
   /** Map stages: rendered features and zoom. */
   features?: number;
   zoom?: number;

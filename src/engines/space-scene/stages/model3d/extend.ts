@@ -4,12 +4,12 @@
  * registers the entire THREE namespace and defeats tree-shaking (~50 KB gz).
  */
 import { extend } from '@react-three/fiber';
-import { AmbientLight, DirectionalLight, Group, HemisphereLight, LineSegments, Mesh, Points } from 'three';
+import { DirectionalLight, Group, HemisphereLight, InstancedMesh, Mesh, Points } from 'three';
 
 let done = false;
 
 export function extendThree(): void {
   if (done) return;
   done = true;
-  extend({ AmbientLight, DirectionalLight, Group, HemisphereLight, LineSegments, Mesh, Points });
+  extend({ DirectionalLight, Group, HemisphereLight, InstancedMesh, Mesh, Points });
 }

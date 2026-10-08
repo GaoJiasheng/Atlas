@@ -48,11 +48,13 @@ export default function GltfSource({
       const sphere = mesh.geometry.boundingSphere;
       const maxScale = Math.max(scale.x, scale.y, scale.z);
       out.set(partId, {
-        geometry: mesh.geometry,
+        pieces: [{ geometry: mesh.geometry, matrices: null }],
         position: [position.x, position.y, position.z],
         quaternion,
         scale,
         radius: (sphere?.radius ?? 0.5) * maxScale,
+        closed: true,
+        twoSided: false,
       });
     }
     onShapes(out);

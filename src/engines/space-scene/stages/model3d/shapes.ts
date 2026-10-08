@@ -1,42 +1,77 @@
 /**
- * Part shapes: geometry + rest transform for primitive parts, and helpers
- * for the overall bounds (ground shadow).
+ * Part shapes: pieces + rest transform for primitive parts, label anchors,
+ * and the overall bounds (ground, shadow camera, label budget).
  */
-import { Euler, Quaternion, Vector3 } from 'three';
+import { Quaternion, Vector3 } from 'three';
 import type { Part } from '../../schema';
 import { explodedPosition } from '../../lib/explode';
-import { DEG2RAD } from '../../lib/math';
-import { primitiveGeometry } from './geometry';
+import { partBounds } from '../../lib/parts';
+import type { Vec3 } from '../../lib/math';
+import { isClosedKind, primitivePieces } from './geometry';
 import type { PartShape } from './PartNode';
 
 export function primitiveShape(part: Part): PartShape | null {
   const p = part.primitive;
   if (!p) return null;
-  const geometry = primitiveGeometry(p);
-  geometry.computeBoundingSphere();
-  const [rx = 0, ry = 0, rz = 0] = p.rotation ?? [0, 0, 0];
-  const quaternion = new Quaternion().setFromEuler(new Euler(rx * DEG2RAD, ry * DEG2RAD, rz * DEG2RAD, 'XYZ'));
+  const pieces = primitivePieces(part);
+  const b = partBounds(part)!;
+  const radius = Math.hypot(b.max[0] - b.min[0], b.max[1] - b.min[1], b.max[2] - b.min[2]) / 2;
   return {
-    geometry,
+    pieces,
     position: [p.at[0], p.at[1], p.at[2]],
-    quaternion,
+    quaternion: new Quaternion(),
     scale: new Vector3(1, 1, 1),
-    radius: geometry.boundingSphere?.radius ?? 0.5,
+    radius,
+    closed: isClosedKind(p.kind),
+    twoSided: p.kind === 'plane',
   };
 }
 
-/** Floor height and footprint radius covering all parts, assembled and fully exploded. */
-export function stageBounds(parts: readonly Part[], shapes: ReadonlyMap<string, PartShape>): { floor: number; radius: number } {
-  let floor = Infinity;
+/** Label anchor of a part relative to its centre: the centre of its bounds. */
+export function anchorOffset(part: Part): Vec3 {
+  const b = part.primitive ? partBounds(part) : null;
+  if (!b || !part.primitive) return [0, 0, 0];
+  const at = part.primitive.at;
+  return [(b.min[0] + b.max[0]) / 2 - at[0], (b.min[1] + b.max[1]) / 2 - at[1], (b.min[2] + b.max[2]) / 2 - at[2]];
+}
+
+export interface StageBounds {
+  /** Lowest point of the assembled model, and of the fully exploded one. */
+  floor: [number, number];
+  /** Footprint radius around the Y axis, assembled and fully exploded. */
+  radius: number;
+  /** Centre and bounding radius of the assembled model. */
+  center: Vec3;
+  modelRadius: number;
+}
+
+export function stageBounds(parts: readonly Part[], shapes: ReadonlyMap<string, PartShape>): StageBounds {
+  const floor: [number, number] = [Infinity, Infinity];
   let radius = 0.5;
+  const min: Vec3 = [Infinity, Infinity, Infinity];
+  const max: Vec3 = [-Infinity, -Infinity, -Infinity];
   for (const part of parts) {
     const shape = shapes.get(part.id);
     if (!shape) continue;
-    for (const amount of [0, 1]) {
-      const [x, y, z] = explodedPosition(shape.position, part.explode, amount);
-      floor = Math.min(floor, y - shape.radius);
-      radius = Math.max(radius, Math.hypot(x, z) + shape.radius);
+    const rest = partBounds(part);
+    const r = shape.radius;
+    for (const amount of [0, 1] as const) {
+      const c = explodedPosition(shape.position, part.explode, amount);
+      const dy = c[1] - shape.position[1];
+      const low = rest ? rest.min[1] + dy : c[1] - r;
+      floor[amount] = Math.min(floor[amount], low);
+      radius = Math.max(radius, Math.hypot(c[0], c[2]) + r);
+    }
+    for (let i = 0; i < 3; i++) {
+      min[i] = Math.min(min[i]!, rest ? rest.min[i]! : shape.position[i]! - r);
+      max[i] = Math.max(max[i]!, rest ? rest.max[i]! : shape.position[i]! + r);
     }
   }
-  return { floor: Number.isFinite(floor) ? floor - 0.04 : -1, radius };
+  const ok = Number.isFinite(min[0]);
+  return {
+    floor: ok ? [floor[0] - 0.002, Math.min(floor[0], floor[1]) - 0.002] : [-1, -1],
+    radius,
+    center: ok ? [(min[0] + max[0]) / 2, (min[1] + max[1]) / 2, (min[2] + max[2]) / 2] : [0, 0, 0],
+    modelRadius: ok ? Math.hypot(max[0] - min[0], max[1] - min[1], max[2] - min[2]) / 2 : 1,
+  };
 }

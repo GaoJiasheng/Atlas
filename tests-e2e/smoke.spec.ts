@@ -88,7 +88,7 @@ test('deep link restores scene state (time + highlight, part + cutaway)', async 
 
   await page.goto('/en/topics/sample-space/?ch=pull-apart&cut=half');
   await expect(page.locator('.atlas-stage canvas').first()).toBeVisible({ timeout: 30_000 });
-  await expect(page.getByRole('button', { name: 'Cut in half', pressed: true })).toBeVisible();
+  await expect(page.locator('[data-mode="cutaway"]')).toHaveAttribute('aria-pressed', 'true');
   await page.waitForTimeout(600);
   expect(page.url()).toContain('cut=half');
 });

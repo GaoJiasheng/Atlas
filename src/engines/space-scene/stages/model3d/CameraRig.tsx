@@ -1,11 +1,18 @@
 /**
- * Orbit camera: drei OrbitControls (damped) + chapter/view camera moves.
+ * Orbit camera: drei OrbitControls (damped) + chapter / preset / REFERENCE
+ * moves and the ORBIT turntable (docs/08 §3, master-spec K).
  *
- *  - on `transition.id` change: go to the target camera (explicit chapter/URL
- *    camera, else `views[view].camera`, else inherited), tweened over ~800 ms
- *    unless `transition.instant`
- *  - on a user view switch (no transition): tween to that view's preset if any
- *  - user orbiting writes the camera back with `setCamera` (debounced)
+ *  - chapter / first load / URL: the chapter's own camera (or a URL `cam=`),
+ *    else `views[view].camera`, else the inherited one
+ *  - preset (`applyCameraPreset`, reason `preset`): always the stored camera,
+ *    so a VIEW button lands on exactly its preset even when the current
+ *    chapter has no camera of its own
+ *  - snap: finish any move now
+ *  - moves take 1.6 s (REFERENCE 2 s, see `ui.nextTweenMs`), easeInOut, with
+ *    the offset from the target interpolated spherically (never through the model)
+ *  - ORBIT: slow turntable (one turn / 40 s) around the target until the user drags
+ *  - dragging cancels any move and writes the camera back (`setCamera`, debounced),
+ *    which the host shows as FREE CAMERA
  */
 import { useEffect, useRef, type ComponentRef } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
@@ -17,47 +24,68 @@ import type { Chapter, OrbitCamera } from '../../../core/types';
 import { isOrbitCamera, normalizeCamera } from '../../../core/camera';
 import type { SpaceSceneExt } from '../../index';
 import type { ViewPresets } from '../../schema';
-import { CAMERA_TWEEN_MS, fitCameraToAspect, resolveTargetCamera, roundCamera, tweenCamera } from '../../lib/camera';
-import { keepAnimating, prefersReducedMotion } from './runtime';
+import type { SpaceUiStore } from '../../ui';
+import type { StageBridge } from '../../bridge';
+import {
+  CAMERA_TWEEN_MS,
+  DEFAULT_FOV,
+  fitCameraToAspect,
+  ORBIT_PERIOD_S,
+  roundCamera,
+  transitionCamera,
+  tweenCamera,
+} from '../../lib/camera';
+import { keepAnimating, MAX_DT, prefersReducedMotion } from './runtime';
 
 type Controls = ComponentRef<typeof OrbitControls>;
-
-const close = (a: readonly number[], b: readonly number[]) => a.every((v, i) => Math.abs(v - (b[i] ?? 0)) < 1e-3);
-
-function sameCamera(a: OrbitCamera | null, b: OrbitCamera | null): boolean {
-  if (!a || !b) return a === b;
-  return close(a.position, b.position) && close(a.target, b.target);
-}
 
 function asOrbit(cam: unknown): OrbitCamera | null {
   const n = normalizeCamera(cam);
   return n && isOrbitCamera(n) ? n : null;
 }
 
+/** Every move ends on a defined field of view (REFERENCE narrows it). */
+const withFov = (cam: OrbitCamera): OrbitCamera => ({ ...cam, fov: cam.fov ?? DEFAULT_FOV });
+
 export function CameraRig({
   store,
+  ui,
+  bridge,
   chapters,
   views,
+  minDistance,
 }: {
   store: SceneStore<SpaceSceneExt>;
+  ui: SpaceUiStore;
+  bridge: StageBridge;
   chapters: readonly Chapter[];
   views: ViewPresets;
+  minDistance: number;
 }) {
   const controls = useRef<Controls>(null);
   const camera = useThree((s) => s.camera) as unknown as PerspectiveCamera;
   const invalidate = useThree((s) => s.invalidate);
   const transitionId = useStore(store, (s) => s.transition.id);
-  const view = useStore(store, (s) => s.view);
+  const orbit = useStore(ui, (s) => s.orbit);
 
-  const tween = useRef<{ from: OrbitCamera; to: OrbitCamera; start: number } | null>(null);
-  const last = useRef<{ transitionId: number; view: string } | null>(null);
+  const tween = useRef<{ from: OrbitCamera; to: OrbitCamera; start: number; ms: number } | null>(null);
+  const last = useRef<number | null>(null);
   const user = useRef({ active: false, dragging: false, timer: null as ReturnType<typeof setTimeout> | null });
+  const spin = useRef(0);
 
   const current = (): OrbitCamera => {
     const c = controls.current;
     const t = c ? c.target : { x: 0, y: 0, z: 0 };
     return { position: [camera.position.x, camera.position.y, camera.position.z], target: [t.x, t.y, t.z], fov: camera.fov };
   };
+
+  useEffect(() => {
+    bridge.liveCamera = current;
+    return () => {
+      bridge.liveCamera = () => null;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [bridge, camera]);
 
   const apply = (cam: OrbitCamera) => {
     camera.position.set(...cam.position);
@@ -74,54 +102,78 @@ export function CameraRig({
     }
   };
 
-  useEffect(() => {
-    const state = store.getState();
-    const prev = last.current;
-    last.current = { transitionId, view };
-    const isTransition = !prev || prev.transitionId !== transitionId;
-
-    if (!isTransition) {
-      // User switched the view: frame that view's preset if it has one.
-      if (prev.view === view) return;
-      const preset = views[view]?.camera;
-      if (!preset) return;
-      if (prefersReducedMotion()) {
-        apply(fitCameraToAspect({ ...preset }, camera.aspect));
-        invalidate();
-        return;
-      }
-      tween.current = { from: current(), to: fitCameraToAspect({ ...preset }, camera.aspect), start: performance.now() };
-      invalidate();
-      return;
-    }
-
-    const chapter = chapters.find((c) => c.id === state.chapter) ?? null;
-    const stored = asOrbit(state.camera);
-    const baseline = asOrbit(state.chapterTarget(state.chapter).camera);
-    const own = asOrbit(chapter?.state.camera);
-    const explicit = !sameCamera(stored, baseline) ? stored : own ? stored : null;
-    const target = fitCameraToAspect(
-      resolveTargetCamera({ explicit, view: state.view, views, inherited: stored }),
-      camera.aspect,
-    );
-
-    if (!prev || state.transition.instant || prefersReducedMotion()) {
+  const moveTo = (target: OrbitCamera, instant: boolean) => {
+    const hint = ui.getState().nextTweenMs;
+    if (hint !== null) ui.setState({ nextTweenMs: null });
+    if (instant || prefersReducedMotion()) {
       tween.current = null;
       apply(target);
     } else {
-      tween.current = { from: current(), to: target, start: performance.now() };
+      tween.current = { from: current(), to: target, start: performance.now(), ms: hint ?? CAMERA_TWEEN_MS };
     }
     invalidate();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [transitionId, view]);
+  };
 
-  useFrame((state) => {
+  useEffect(() => {
+    const state = store.getState();
+    const first = last.current === null;
+    if (last.current === transitionId) return;
+    last.current = transitionId;
+    const { reason, instant } = state.transition;
+
+    if (reason === 'snap') {
+      if (tween.current) {
+        apply(tween.current.to);
+        tween.current = null;
+        invalidate();
+      }
+      return;
+    }
+    if (reason === 'chapter' || reason === 'url') ui.setState({ orbit: false, reference: null });
+    const chapter = chapters.find((c) => c.id === state.chapter) ?? null;
+    const target = transitionCamera({
+      reason,
+      stored: asOrbit(state.camera),
+      baseline: asOrbit(state.chapterTarget(state.chapter).camera),
+      own: asOrbit(chapter?.state.camera),
+      view: state.view,
+      views,
+    });
+    if (target) moveTo(fitCameraToAspect(withFov(target), camera.aspect), first || instant);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [transitionId]);
+
+  useEffect(() => {
+    if (orbit) {
+      spin.current = 0;
+      invalidate();
+    }
+  }, [orbit, invalidate]);
+
+  useFrame((state, delta) => {
     const tw = tween.current;
-    if (!tw) return;
-    const k = Math.min(1, (performance.now() - tw.start) / CAMERA_TWEEN_MS);
-    apply(tweenCamera(tw.from, tw.to, k));
-    if (k >= 1) tween.current = null;
-    else keepAnimating(state.invalidate);
+    if (tw) {
+      const k = Math.min(1, (performance.now() - tw.start) / tw.ms);
+      apply(tweenCamera(tw.from, tw.to, k));
+      if (k >= 1) tween.current = null;
+      keepAnimating(state.invalidate);
+    } else if (orbit && !user.current.dragging) {
+      // Ease the turntable in over ~1 s; rotate about the vertical through the target.
+      const dt = Math.min(delta, MAX_DT);
+      spin.current = Math.min(1, spin.current + dt);
+      const c = controls.current;
+      if (c) {
+        const a = ((Math.PI * 2) / ORBIT_PERIOD_S) * dt * spin.current;
+        const x = camera.position.x - c.target.x;
+        const z = camera.position.z - c.target.z;
+        camera.position.x = c.target.x + x * Math.cos(a) + z * Math.sin(a);
+        camera.position.z = c.target.z - x * Math.sin(a) + z * Math.cos(a);
+        c.update();
+      }
+      keepAnimating(state.invalidate);
+    }
+    const t = controls.current?.target;
+    if (t) bridge.cameraDistance = camera.position.distanceTo(t);
   });
 
   useEffect(
@@ -144,12 +196,13 @@ export function CameraRig({
       makeDefault
       enableDamping
       dampingFactor={0.09}
-      minDistance={1.2}
-      maxDistance={24}
+      minDistance={minDistance}
+      maxDistance={minDistance * 20}
       zoomSpeed={0.8}
       maxPolarAngle={Math.PI * 0.82}
       onStart={() => {
         tween.current = null;
+        if (ui.getState().orbit) ui.setState({ orbit: false });
         user.current.active = true;
         user.current.dragging = true;
       }}

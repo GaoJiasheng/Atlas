@@ -4,67 +4,147 @@
       "id": "sample-base",
       "name": { "en": "Sample base", "zh": "示例底座" },
       "group": "sample-core",
-      "summary": { "en": "A placeholder box the other parts sit on.", "zh": "一个占位盒子，其他零件都放在它上面。" },
-      "detail": { "en": "Sample detail text. Exists only to test the box primitive.", "zh": "示例详细说明。仅用于测试盒子基本体。" },
-      "primitive": { "kind": "box", "size": [2.4, 0.24, 1.4], "at": [0, -0.62, 0], "color": "matte" },
-      "explode": { "dir": [0, -1, 0], "dist": 0.7 },
-      "connects": ["sample-drum", "sample-panel"],
+      "summary": { "en": "A placeholder plate the other parts sit on.", "zh": "一块占位底板，其他零件都放在它上面。" },
+      "detail": { "en": "Sample detail text. Tests the box primitive and the powder-coat material.", "zh": "示例详细说明。测试盒子基本体和粉末涂层材质。" },
+      "primitive": { "kind": "box", "size": [2.6, 0.12, 1.3], "at": [0, -0.6, 0], "color": "powder" },
+      "explode": { "dir": [0, -1, 0], "dist": 0.45 },
+      "connects": ["sample-feet", "sample-block", "sample-tank", "sample-panel"],
       "level": "P3"
     },
     {
-      "id": "sample-drum",
-      "name": { "en": "Sample drum", "zh": "示例滚筒" },
+      "id": "sample-feet",
+      "name": { "en": "Sample feet", "zh": "示例支脚" },
       "group": "sample-core",
-      "summary": { "en": "A placeholder cylinder that spins when switched on.", "zh": "一个占位圆柱，通电后会转动。" },
-      "detail": { "en": "Sample detail text. Tests the cylinder primitive, rotation and the rotate animation.", "zh": "示例详细说明。测试圆柱基本体、旋转角度和转动动画。" },
-      "primitive": { "kind": "cylinder", "size": [0.32, 0.32, 0.9], "at": [-0.45, 0.02, 0], "rotation": [0, 0, 90], "color": "metal" },
-      "explode": { "dir": [-1, 0.35, 0.2], "dist": 1.1 },
-      "connects": ["sample-base", "sample-cap"],
-      "level": "P3"
-    },
-    {
-      "id": "sample-cap",
-      "name": { "en": "Sample cap", "zh": "示例尖帽" },
-      "group": "sample-core",
-      "summary": { "en": "A placeholder cone that nods back and forth.", "zh": "一个会来回点头的占位圆锥。" },
-      "detail": { "en": "Sample detail text. Tests the cone primitive and the oscillate animation.", "zh": "示例详细说明。测试圆锥基本体和摆动动画。" },
-      "primitive": { "kind": "cone", "size": [0.24, 0.5], "at": [-0.45, 0.62, 0], "color": "copper" },
-      "explode": { "dir": [0, 1, 0], "dist": 0.9 },
-      "connects": ["sample-drum"],
+      "summary": { "en": "Placeholder pads repeated under the base.", "zh": "底板下面重复排列的占位垫脚。" },
+      "detail": {
+        "en": "Sample detail text. Tests `repeat` (four instances in one draw call) and the rubber material.",
+        "zh": "示例详细说明。测试 repeat（四个实例，一次绘制）和橡胶材质。"
+      },
+      "primitive": { "kind": "box", "size": [0.16, 0.08, 1.12], "at": [0, -0.7, 0], "color": "rubber" },
+      "repeat": { "count": 4, "axis": [1, 0, 0], "spacing": 0.76 },
+      "explode": { "dir": [0, -1, 0], "dist": 0.8 },
+      "connects": ["sample-base"],
       "level": "P3"
     },
     {
       "id": "sample-panel",
       "name": { "en": "Sample panel", "zh": "示例背板" },
       "group": "sample-core",
-      "summary": { "en": "A placeholder flat panel at the back.", "zh": "后面的一块占位平板。" },
-      "detail": { "en": "Sample detail text. Tests the plane primitive (visible from both sides).", "zh": "示例详细说明。测试平面基本体（两面都看得见）。" },
-      "primitive": { "kind": "plane", "size": [2.2, 1.3], "at": [0, 0.08, -0.66], "color": "plastic" },
-      "explode": { "dir": [0, 0, -1], "dist": 0.9 },
+      "summary": { "en": "A placeholder flat panel standing at the back.", "zh": "立在后面的一块占位平板。" },
+      "detail": {
+        "en": "Sample detail text. Tests the plane primitive (visible from both sides) and the plastic material.",
+        "zh": "示例详细说明。测试平面基本体（两面都看得见）和塑料材质。"
+      },
+      "primitive": { "kind": "plane", "size": [1.1, 0.8], "at": [-0.55, -0.14, -0.62], "color": "plastic" },
+      "explode": { "dir": [0, 0.15, -1], "dist": 0.55 },
       "connects": ["sample-base"],
       "level": "P3"
     },
     {
-      "id": "sample-ball",
-      "name": { "en": "Sample ball", "zh": "示例球" },
-      "group": "sample-loop",
-      "summary": { "en": "A placeholder sphere that breathes in and out.", "zh": "一个会一胀一缩的占位球体。" },
-      "detail": { "en": "Sample detail text. Tests the sphere primitive, a token colour and the pulse animation.", "zh": "示例详细说明。测试球体基本体、主题色和脉动动画。" },
-      "primitive": { "kind": "sphere", "size": [0.24], "at": [0.6, 0.02, 0.22], "color": "token:accent-2" },
-      "explode": { "dir": [1, 0.2, 0.7], "dist": 1 },
-      "connects": ["sample-ring", "sample-pod"],
+      "id": "sample-block",
+      "name": { "en": "Sample block", "zh": "示例机体" },
+      "group": "sample-drive",
+      "summary": { "en": "A placeholder housing with rounded edges.", "zh": "一个圆角的占位机壳。" },
+      "detail": {
+        "en": "Sample detail text. Tests the bevelled box and the brushed-aluminium casing material.",
+        "zh": "示例详细说明。测试倒角盒子和拉丝铝外壳材质。"
+      },
+      "primitive": { "kind": "bevelBox", "size": [0.72, 0.46, 0.6], "bevel": 0.04, "at": [-0.74, -0.31, 0.05], "color": "casing" },
+      "explode": { "dir": [-1, 0, 0], "dist": 0.4 },
+      "connects": ["sample-base", "sample-fins", "sample-drum", "sample-pipe"],
       "level": "P3"
     },
     {
-      "id": "sample-ring",
-      "name": { "en": "Sample ring", "zh": "示例圆环" },
-      "group": "sample-loop",
-      "summary": { "en": "A placeholder ring around the ball.", "zh": "套在球外面的占位圆环。" },
-      "detail": { "en": "Sample detail text. Tests the torus primitive.", "zh": "示例详细说明。测试圆环基本体。" },
-      "primitive": { "kind": "torus", "size": [0.38, 0.05], "at": [0.6, 0.02, 0.22], "rotation": [90, 0, 0], "color": "copper" },
-      "explode": { "dir": [1, 0.9, 0.4], "dist": 1.1 },
-      "connects": ["sample-ball"],
+      "id": "sample-fins",
+      "name": { "en": "Sample fins", "zh": "示例散热片" },
+      "group": "sample-drive",
+      "summary": { "en": "A placeholder stack of thin plates on top of the block.", "zh": "机体顶上一排占位薄片。" },
+      "detail": { "en": "Sample detail text. Tests the fins part (instanced plates with an even gap).", "zh": "示例详细说明。测试散热片零件（等间距的实例化薄片）。" },
+      "primitive": {
+        "kind": "fins",
+        "size": [0.5, 0.13, 0.014],
+        "count": 11,
+        "gap": 0.046,
+        "axis": "x",
+        "at": [-0.74, -0.015, 0.05],
+        "color": "casing"
+      },
+      "explode": { "dir": [0, 1, 0], "dist": 0.5 },
+      "connects": ["sample-block"],
       "level": "P3"
+    },
+    {
+      "id": "sample-drum",
+      "name": { "en": "Sample drum", "zh": "示例滚筒" },
+      "group": "sample-drive",
+      "summary": { "en": "A placeholder cylinder that spins when switched on.", "zh": "一个占位圆柱，通电后会转动。" },
+      "detail": {
+        "en": "Sample detail text. Tests the cylinder primitive, rotation and the rotate animation.",
+        "zh": "示例详细说明。测试圆柱基本体、旋转角度和转动动画。"
+      },
+      "primitive": { "kind": "cylinder", "size": [0.19, 0.19, 0.36], "at": [-0.19, -0.33, 0.05], "rotation": [0, 0, 90], "color": "steel" },
+      "explode": { "dir": [1, 0, 0], "dist": 0.3 },
+      "connects": ["sample-block", "sample-cap"],
+      "level": "P3"
+    },
+    {
+      "id": "sample-cap",
+      "name": { "en": "Sample cap", "zh": "示例尖帽" },
+      "group": "sample-drive",
+      "summary": { "en": "A placeholder cone at the end of the drum.", "zh": "滚筒末端的一个占位圆锥。" },
+      "detail": { "en": "Sample detail text. Tests the cone primitive and the copper material.", "zh": "示例详细说明。测试圆锥基本体和铜材质。" },
+      "primitive": { "kind": "cone", "size": [0.15, 0.24], "at": [0.125, -0.33, 0.05], "rotation": [0, 0, -90], "color": "copper" },
+      "explode": { "dir": [1, 0, 0], "dist": 0.62 },
+      "connects": ["sample-drum"],
+      "level": "P3"
+    },
+    {
+      "id": "sample-tank",
+      "name": { "en": "Sample tank", "zh": "示例罐体" },
+      "group": "sample-loop",
+      "summary": { "en": "A placeholder vessel with domed ends.", "zh": "一个两端是圆顶的占位罐。" },
+      "detail": { "en": "Sample detail text. Tests the vessel part and the brushed stainless material.", "zh": "示例详细说明。测试罐体零件和拉丝不锈钢材质。" },
+      "primitive": { "kind": "vessel", "radius": 0.24, "length": 0.42, "headRatio": 0.5, "at": [0.82, -0.21, -0.25], "color": "stainless" },
+      "explode": { "dir": [1, 0, -0.2], "dist": 0.5 },
+      "connects": ["sample-base", "sample-flange", "sample-pod"],
+      "level": "P3"
+    },
+    {
+      "id": "sample-pipe",
+      "name": { "en": "Sample pipe", "zh": "示例管道" },
+      "group": "sample-loop",
+      "summary": { "en": "A placeholder pipe from the block to the tank.", "zh": "从机体通到罐体的一根占位管子。" },
+      "detail": { "en": "Sample detail text. Tests the tube part: one bend radius at every corner.", "zh": "示例详细说明。测试管道零件：每个拐角的弯曲半径都一样。" },
+      "primitive": {
+        "kind": "tube",
+        "path": [[-0.56, -0.08, 0.27], [-0.56, 0.3, 0.27], [0.82, 0.3, 0.27], [0.82, 0.3, -0.25], [0.82, 0.12, -0.25]],
+        "radius": 0.028,
+        "bendRadius": 0.12,
+        "at": [0, 0, 0],
+        "color": "stainless"
+      },
+      "explode": { "dir": [0, 1, 0], "dist": 0.62 },
+      "connects": ["sample-block", "sample-flange"],
+      "level": "P5"
+    },
+    {
+      "id": "sample-flange",
+      "name": { "en": "Sample flange", "zh": "示例法兰" },
+      "group": "sample-loop",
+      "summary": { "en": "A placeholder bolted ring where the pipe meets the tank.", "zh": "管子和罐体连接处的一圈带螺栓的占位法兰。" },
+      "detail": { "en": "Sample detail text. Tests the flange part (ring plus instanced bolt heads).", "zh": "示例详细说明。测试法兰零件（圆环加实例化的螺栓头）。" },
+      "primitive": {
+        "kind": "flange",
+        "radius": 0.085,
+        "thickness": 0.024,
+        "boltCount": 6,
+        "boltRadius": 0.062,
+        "at": [0.82, 0.13, -0.25],
+        "color": "steel"
+      },
+      "explode": { "dir": [0, 1, 0], "dist": 0.32 },
+      "connects": ["sample-pipe", "sample-tank"],
+      "level": "P5"
     },
     {
       "id": "sample-pod",
@@ -72,41 +152,90 @@
       "group": "sample-loop",
       "summary": { "en": "A placeholder see-through capsule.", "zh": "一个透明的占位胶囊。" },
       "detail": { "en": "Sample detail text. Tests the capsule primitive and the glass material.", "zh": "示例详细说明。测试胶囊基本体和玻璃材质。" },
-      "primitive": { "kind": "capsule", "size": [0.13, 0.55], "at": [0.6, 0.02, -0.32], "rotation": [0, 0, 90], "color": "glass" },
-      "explode": { "dir": [0.6, 0, -1], "dist": 0.9 },
-      "connects": ["sample-ball"],
+      "primitive": { "kind": "capsule", "size": [0.075, 0.3], "at": [0.42, -0.42, -0.3], "rotation": [0, 0, 90], "color": "glass" },
+      "explode": { "dir": [0, 0, -1], "dist": 0.45 },
+      "connects": ["sample-tank", "sample-ball"],
       "level": "P5"
+    },
+    {
+      "id": "sample-ball",
+      "name": { "en": "Sample ball", "zh": "示例球" },
+      "group": "sample-loop",
+      "summary": { "en": "A placeholder sphere that breathes in and out.", "zh": "一个会一胀一缩的占位球体。" },
+      "detail": {
+        "en": "Sample detail text. Tests the sphere primitive, a token colour and the pulse animation.",
+        "zh": "示例详细说明。测试球体基本体、主题色和脉动动画。"
+      },
+      "primitive": { "kind": "sphere", "size": [0.12], "at": [0.5, -0.42, 0.3], "color": "token:accent-2" },
+      "explode": { "dir": [0, 0, 1], "dist": 0.5 },
+      "connects": ["sample-ring", "sample-pod"],
+      "level": "P3"
+    },
+    {
+      "id": "sample-ring",
+      "name": { "en": "Sample ring", "zh": "示例圆环" },
+      "group": "sample-loop",
+      "summary": { "en": "A placeholder ring around the ball that rocks back and forth.", "zh": "套在球外面、来回摆动的占位圆环。" },
+      "detail": { "en": "Sample detail text. Tests the torus primitive and the oscillate animation.", "zh": "示例详细说明。测试圆环基本体和摆动动画。" },
+      "primitive": { "kind": "torus", "size": [0.18, 0.018], "at": [0.5, -0.42, 0.3], "rotation": [90, 0, 0], "color": "copper" },
+      "explode": { "dir": [0, 0.55, 1], "dist": 0.72 },
+      "connects": ["sample-ball"],
+      "level": "P3"
     }
   ],
   "groups": [
-    { "id": "sample-core", "name": { "en": "Sample core", "zh": "示例主体" }, "color": "token:accent-1" },
+    { "id": "sample-core", "name": { "en": "Sample frame", "zh": "示例框架" }, "color": "token:neutral" },
+    { "id": "sample-drive", "name": { "en": "Sample drive", "zh": "示例驱动" }, "color": "token:accent-1" },
     { "id": "sample-loop", "name": { "en": "Sample loop", "zh": "示例回路" }, "color": "token:accent-2" }
   ],
   "flows": [
     {
-      "id": "sample-core-flow",
-      "group": "sample-core",
-      "path": [[-1.15, -0.42, 0.5], [-0.45, -0.3, 0.55], [0.05, 0.02, 0.5], [-0.2, 0.5, 0.42], [-0.45, 0.95, 0.2], [-0.45, 1.25, 0]],
-      "speed": 0.6,
+      "id": "sample-drive-flow",
+      "group": "sample-drive",
+      "path": [[-1.08, -0.2, 0.05], [-0.9, 0.06, 0.05], [-0.74, 0.2, 0.05], [-0.62, 0.48, 0.03], [-0.56, 0.82, 0]],
+      "speed": 0.5,
       "color": "token:accent-1",
       "whenRun": true
     },
     {
       "id": "sample-loop-flow",
       "group": "sample-loop",
-      "path": [[0.6, 0.02, 0.72], [1.08, 0.02, 0.22], [1.08, 0.02, -0.32], [0.6, 0.02, -0.72], [0.12, 0.02, -0.32], [0.12, 0.02, 0.22], [0.6, 0.02, 0.72]],
-      "speed": 0.8,
+      "path": [
+        [-0.56, -0.08, 0.27],
+        [-0.56, 0.3, 0.27],
+        [0.15, 0.3, 0.27],
+        [0.82, 0.3, 0.27],
+        [0.82, 0.3, -0.25],
+        [0.82, -0.05, -0.25],
+        [0.62, -0.38, -0.3],
+        [0.42, -0.42, -0.3],
+        [0.3, -0.42, 0.0],
+        [0.5, -0.42, 0.3],
+        [0.0, -0.3, 0.42],
+        [-0.56, -0.08, 0.27]
+      ],
+      "speed": 0.55,
       "color": "token:accent-2",
       "whenRun": true
     }
   ],
   "animations": [
-    { "id": "sample-drum-spin", "target": "sample-drum", "kind": "rotate", "axis": [1, 0, 0], "rpm": 90, "whenRun": true },
-    { "id": "sample-cap-nod", "target": "sample-cap", "kind": "oscillate", "axis": [0, 0, 1], "amplitude": 18, "hz": 0.6, "whenRun": true },
-    { "id": "sample-ball-pulse", "target": "sample-ball", "kind": "pulse", "scale": 1.15, "hz": 0.8, "whenRun": true }
+    { "id": "sample-drum-spin", "target": "sample-drum", "kind": "rotate", "axis": [1, 0, 0], "rpm": 60, "whenRun": true },
+    {
+      "id": "sample-ring-rock",
+      "target": "sample-ring",
+      "kind": "oscillate",
+      "axis": [0, 0, 1],
+      "amplitude": 14,
+      "hz": 0.5,
+      "whenRun": true
+    },
+    { "id": "sample-ball-pulse", "target": "sample-ball", "kind": "pulse", "scale": 1.12, "hz": 0.8, "whenRun": true }
   ],
   "views": {
-    "assembled": { "camera": { "position": [3.2, 2.1, 4.0], "target": [0, 0, 0] } },
-    "exploded": { "camera": { "position": [4.4, 3.0, 5.4], "target": [0, 0.15, 0] } }
+    "assembled": { "camera": { "position": [2.5, 1.3, 3.25], "target": [0, -0.38, 0], "fov": 34 } },
+    "exploded": { "camera": { "position": [3.5, 2.3, 4.6], "target": [0.05, -0.5, 0], "fov": 34 } },
+    "cutaway": { "normal": [0, 0, -1], "offset": 0.05 },
+    "section": { "plane": "xy" }
   }
 }

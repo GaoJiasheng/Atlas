@@ -23,25 +23,27 @@ export interface AnimationPose {
 
 const IDENTITY: AnimationPose = { axis: [0, 1, 0], angle: 0, scale: 1 };
 
+/** Rotation angle (radians, about the animation's axis) at `phase`; 0 for `pulse`. Allocation-free. */
+export function animationAngle(anim: PartAnimation, phase: number, energy = 1): number {
+  if (anim.kind === 'rotate') return (anim.rpm / 60) * 2 * Math.PI * phase;
+  if (anim.kind === 'oscillate') return anim.amplitude * DEG2RAD * Math.sin(2 * Math.PI * anim.hz * phase) * energy;
+  return 0;
+}
+
+/** Uniform scale at `phase`; 1 unless `pulse`. Allocation-free. */
+export function animationScale(anim: PartAnimation, phase: number, energy = 1): number {
+  if (anim.kind !== 'pulse') return 1;
+  const breath = (1 - Math.cos(2 * Math.PI * anim.hz * phase)) / 2; // 0..1..0
+  return 1 + (anim.scale - 1) * breath * energy;
+}
+
 /**
  * Pose of an animation at `phase` seconds of (energy-weighted) running time.
  * With `energy` = 1 and constant running, `phase` is plain elapsed time.
  */
 export function animationPose(anim: PartAnimation, phase: number, energy = 1): AnimationPose {
-  switch (anim.kind) {
-    case 'rotate':
-      return { axis: normalize3(anim.axis), angle: (anim.rpm / 60) * 2 * Math.PI * phase, scale: 1 };
-    case 'oscillate':
-      return {
-        axis: normalize3(anim.axis),
-        angle: anim.amplitude * DEG2RAD * Math.sin(2 * Math.PI * anim.hz * phase) * energy,
-        scale: 1,
-      };
-    case 'pulse': {
-      const breath = (1 - Math.cos(2 * Math.PI * anim.hz * phase)) / 2; // 0..1..0
-      return { ...IDENTITY, scale: 1 + (anim.scale - 1) * breath * energy };
-    }
-  }
+  if (anim.kind === 'pulse') return { ...IDENTITY, scale: animationScale(anim, phase, energy) };
+  return { axis: normalize3(anim.axis), angle: animationAngle(anim, phase, energy), scale: 1 };
 }
 
 /** Animations grouped by target part id. */
