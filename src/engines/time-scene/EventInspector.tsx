@@ -3,7 +3,7 @@
  * Forces and casualties use Counter ("one icon = N", docs/02). Casualties of
  * a `sensitive` event only show in parent mode.
  */
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, type CSSProperties } from 'react';
 import type { Locale } from '../core/types';
 import { tx } from '../../i18n';
 import { useT } from '../core/context';
@@ -66,12 +66,15 @@ export function EventInspector({ event, model, locale, onClose }: EventInspector
   }, [event.id]);
 
   const when = event.until ? `${formatTime(event.t, locale)} – ${formatTime(event.until, locale)}` : formatTime(event.t, locale);
+  const index = model.events.findIndex((e) => e.event.id === event.id) + 1;
+  const other = locale === 'zh' ? event.title.en : event.title.zh;
 
   return (
     <article ref={ref} className="ts-event" aria-labelledby={`ts-event-${event.id}`}>
       <header className="ts-event__header">
         <p className="ts-event__eyebrow">
-          <span className="atlas-badge">{t(`time.kind.${event.kind}`)}</span>
+          <span>E-{String(index).padStart(2, '0')}</span>
+          <span className="ts-event__kind">{t(`time.kind.${event.kind}`)}</span>
           <span>{when}</span>
         </p>
         <button
@@ -85,27 +88,34 @@ export function EventInspector({ event, model, locale, onClose }: EventInspector
       </header>
       <h3 id={`ts-event-${event.id}`} className="ts-event__title">
         {tx(event.title, locale)}
+        {other && other !== tx(event.title, locale) && <small lang={locale === 'zh' ? 'en' : 'zh-Hans'}>{other}</small>}
       </h3>
       <p className="ts-event__summary">{tx(event.summary, locale)}</p>
 
-      {event.sides && (
-        <p className="ts-event__sides">
-          <span className="ts-event__side">
-            <span className="atlas-legend__fill" style={{ background: entityCssColor(model.entities.get(event.sides.attacker)?.entity) }} aria-hidden="true" />
-            <span>
-              <small>{t('time.attacker')}</small> {nameOf(event.sides.attacker)}
-            </span>
-          </span>
-          <span className="ts-event__vs">{t('time.versus')}</span>
-          <span className="ts-event__side">
-            <span className="atlas-legend__fill" style={{ background: entityCssColor(model.entities.get(event.sides.defender)?.entity) }} aria-hidden="true" />
-            <span>
-              <small>{t('time.defender')}</small> {nameOf(event.sides.defender)}
-            </span>
-          </span>
-        </p>
+      {(event.sides || event.result) && (
+        <dl className="ts-event__facts">
+          {event.sides && (
+            <>
+              <dt>{t('time.attacker')}</dt>
+              <dd>
+                <span className="ts-event__swatch" style={{ '--ts-color': entityCssColor(model.entities.get(event.sides.attacker)?.entity) } as CSSProperties} aria-hidden="true" />
+                {nameOf(event.sides.attacker)}
+              </dd>
+              <dt>{t('time.defender')}</dt>
+              <dd>
+                <span className="ts-event__swatch" style={{ '--ts-color': entityCssColor(model.entities.get(event.sides.defender)?.entity) } as CSSProperties} aria-hidden="true" />
+                {nameOf(event.sides.defender)}
+              </dd>
+            </>
+          )}
+          {event.result && (
+            <>
+              <dt>{t('time.resultLabel')}</dt>
+              <dd>{t(`time.result.${event.result}`)}</dd>
+            </>
+          )}
+        </dl>
       )}
-      {event.result && <p className="ts-event__result">{t(`time.result.${event.result}`)}</p>}
 
       {event.forces && Object.keys(event.forces).length > 0 && (
         <ForceTable table={event.forces} model={model} locale={locale} title={t('time.forces')} />

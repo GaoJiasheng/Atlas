@@ -73,3 +73,104 @@ export function areaLabelPoint(polygons: readonly (readonly (readonly Pos[])[])[
   }
   return best ? [best.x, best.y] : null;
 }
+
+/**
+ * Make a ring longitude-continuous (used by scripts/build-geo.ts). Rings from
+ * world-atlas that cross ±180° jump from 180 to -180 in one segment, which a
+ * planar renderer draws as a line across the whole world. Each position is
+ * shifted by a multiple of 360° so no segment spans more than 180°, then the
+ * whole ring is moved by a multiple of 360° so its bounding-box centre lies in
+ * [-180, 180] (MapLibre wraps the overhang into the neighbouring world copy).
+ * A ring that winds around a pole ends 360° from where it started; it is
+ * closed along that pole (|lat| = 90; Web Mercator clamps it to the edge).
+ */
+export function unwrapRing(ring: readonly Pos[]): LngLat[] {
+  const out: LngLat[] = [];
+  let offset = 0;
+  let prev = ring[0]?.[0] ?? 0;
+  for (const p of ring) {
+    const lon = p[0] ?? 0;
+    const d = lon + offset - prev;
+    if (d > 180) offset -= 360 * Math.round(d / 360);
+    else if (d < -180) offset += 360 * Math.round(-d / 360);
+    const x = lon + offset;
+    out.push([x, p[1] ?? 0]);
+    prev = x;
+  }
+  const first = out[0];
+  const last = out[out.length - 1];
+  if (!first || !last) return out;
+  if (Math.abs(last[0] - first[0]) > 180) {
+    const meanLat = out.reduce((sum, p) => sum + p[1], 0) / out.length;
+    const pole = meanLat < 0 ? -90 : 90;
+    out.push([last[0], pole], [first[0], pole], [first[0], first[1]]);
+  }
+  let min = Infinity;
+  let max = -Infinity;
+  for (const p of out) {
+    if (p[0] < min) min = p[0];
+    if (p[0] > max) max = p[0];
+  }
+  const shift = -360 * Math.round((min + max) / 2 / 360);
+  return shift === 0 ? out : out.map((p) => [p[0] + shift, p[1]] as LngLat);
+}
+
+/* ------------------------------------------------------------------ */
+/* Areas                                                               */
+/* ------------------------------------------------------------------ */
+
+/** WGS84 equatorial radius (m), as used by geojson-area / turf. */
+const EARTH_RADIUS = 6_378_137;
+const RAD = Math.PI / 180;
+
+/**
+ * Area of a ring on the sphere in km² (absolute; Chamberlain & Duquette
+ * 2007, the method of geojson-area / turf). Good to well under 1% at the
+ * scales a topic draws.
+ */
+export function ringAreaKm2(ring: readonly Pos[]): number {
+  const n = ring.length;
+  if (n < 3) return 0;
+  let total = 0;
+  for (let i = 0; i < n; i++) {
+    const a = ring[i]!;
+    const b = ring[(i + 1) % n]!;
+    const c = ring[(i + 2) % n]!;
+    total += ((c[0] ?? 0) - (a[0] ?? 0)) * RAD * Math.sin((b[1] ?? 0) * RAD);
+  }
+  return Math.abs((total * EARTH_RADIUS * EARTH_RADIUS) / 2) / 1e6;
+}
+
+/** Area of a Polygon / MultiPolygon in km² (outer rings minus holes). */
+export function areaKm2(geometry: { type: 'Polygon'; coordinates: readonly (readonly Pos[])[] } | { type: 'MultiPolygon'; coordinates: readonly (readonly (readonly Pos[])[])[] }): number {
+  const polys = geometry.type === 'Polygon' ? [geometry.coordinates] : geometry.coordinates;
+  let total = 0;
+  for (const poly of polys) {
+    poly.forEach((ring, i) => {
+      total += (i === 0 ? 1 : -1) * ringAreaKm2(ring);
+    });
+  }
+  return Math.max(0, total);
+}
+
+/** Ground metres per CSS pixel in Web Mercator at `zoom` and latitude `lat` (512 px tiles). */
+export function metresPerPixel(zoom: number, lat: number): number {
+  return (Math.cos(lat * RAD) * 2 * Math.PI * EARTH_RADIUS) / (512 * 2 ** zoom);
+}
+
+/**
+ * A round scale-bar length (1, 2, 5 × 10^k km, or metres below 1 km) that
+ * fits in `maxPx` at `mPerPx`. Returns the bar's length in px and its label.
+ */
+export function scaleBar(mPerPx: number, maxPx: number): { px: number; metres: number; label: string } {
+  const maxM = mPerPx * maxPx;
+  if (!(maxM > 0) || !Number.isFinite(maxM)) return { px: 0, metres: 0, label: '' };
+  const exp = 10 ** Math.floor(Math.log10(maxM));
+  const metres = [5, 2, 1].map((m) => m * exp).find((m) => m <= maxM) ?? exp;
+  const label = metres >= 1000 ? `${groupThousands(metres / 1000)} km` : `${metres} m`;
+  return { px: metres / mPerPx, metres, label };
+}
+
+function groupThousands(n: number): string {
+  return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
