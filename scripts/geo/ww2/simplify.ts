@@ -7,6 +7,7 @@
  *   pnpm tsx scripts/geo/ww2/simplify.ts --fine 3 --coarse 50     # fixed intervals in km
  *   pnpm tsx scripts/geo/ww2/simplify.ts --budget 2.0 --quant 50000 --method dp --no-measure
  *   pnpm tsx scripts/geo/ww2/simplify.ts --out /tmp/control.json  # write elsewhere (default: the topic's data/control.json)
+ *   pnpm tsx scripts/geo/ww2/simplify.ts --islands 20,300         # drop detached parts under these km² (focus, elsewhere)
  *
  * Input: work/K#.geojson from compose.ts (plain GeoJSON per keyframe — the
  * intermediate; compose.ts is unchanged and this script never edits it).
@@ -51,8 +52,9 @@ const FOCUS: [number, number, number, number][] = [
 /** Auto search: start here and add this much (km) until the file fits. */
 const FINE_START = 1.5;
 const FINE_STEP = 0.25;
-const FOCUS_ISLAND_KM2 = 20;
-const COARSE_ISLAND_KM2 = 300;
+/** Detached parts smaller than this are dropped (km²), inside / outside the focus boxes (`--islands fine,coarse`). */
+let FOCUS_ISLAND_KM2 = 20;
+let COARSE_ISLAND_KM2 = 300;
 
 const { values } = parseArgs({
   options: {
@@ -61,6 +63,7 @@ const { values } = parseArgs({
     budget: { type: 'string' },
     quant: { type: 'string' },
     out: { type: 'string' },
+    islands: { type: 'string' },
     method: { type: 'string' },
     'no-measure': { type: 'boolean', default: false },
   },
@@ -70,6 +73,7 @@ const BUDGET_MB = values.budget ? Number(values.budget) : 2.0;
 /** `dp` (Douglas–Peucker: the interval is a real maximum-deviation tolerance) or `weighted` (Visvalingam: smoother, but drops thin fjords). */
 const METHOD = values.method ?? 'dp';
 const QUANTIZATION = values.quant ? Number(values.quant) : 50_000;
+if (values.islands) [FOCUS_ISLAND_KM2 = FOCUS_ISLAND_KM2, COARSE_ISLAND_KM2 = COARSE_ISLAND_KM2] = values.islands.split(',').map(Number);
 
 /* ------------------------------------------------------------------ */
 /* mapshaper                                                           */

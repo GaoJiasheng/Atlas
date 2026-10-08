@@ -9,6 +9,12 @@
  *        # land vertex furthest in a direction near a point (capes as control points)
  *   pnpm tsx scripts/geo/ww2/georef-svg.ts --snap-geo --at 22.48,36.39 --dir S --r 0.3
  *        # the same on the CShapes coastline, in degrees
+ *   pnpm tsx scripts/geo/ww2/georef-svg.ts --propose europe-1942-10 --region europe [--r 25]
+ *        # from the current fit, propose cape control points (see capes.ts)
+ *
+ * A map drawn on the same base as another (same viewBox and coastline, e.g. the
+ * monthly San Jose series) names it in `controlPointsFrom` and reuses its
+ * control points.
  *
  * For each map: fit SVG units -> [lng, lat] on >= 4 control points (model per
  * sources.json, or `auto` = lowest leave-one-out RMS), print residuals in km,
@@ -21,8 +27,9 @@
 import { readFileSync } from 'node:fs';
 import { parseArgs } from 'node:util';
 import type { Feature, Position } from 'geojson';
+import { CAPES_ASIA, CAPES_EUROPE, dirVec, extreme, geoVertices, propose } from './capes';
 import { candidates, evaluate, type FitReport, type Model } from './fit';
-import { loadSources, log, mapshaper, multiPolygonFeature, rawFile, readJson, toFc, warn, workFile, writeJson, type SvgSource } from './lib';
+import { loadSources, log, mapshaper, multiPolygonFeature, rawFile, svgControlPoints, toFc, warn, workFile, writeJson, type SvgSource } from './lib';
 import { readSvg, ringsToPolygons, type Pt, type SvgDoc } from './svg';
 
 const { values, positionals } = parseArgs({
@@ -32,6 +39,8 @@ const { values, positionals } = parseArgs({
     dots: { type: 'boolean', default: false },
     snap: { type: 'boolean', default: false },
     'snap-geo': { type: 'boolean', default: false },
+    propose: { type: 'boolean', default: false },
+    region: { type: 'string', default: 'europe' },
     at: { type: 'string' },
     dir: { type: 'string', default: 'S' },
     r: { type: 'string', default: '50' },
@@ -66,48 +75,8 @@ function ringArea(r: Pt[]): number {
   return Math.abs(a / 2);
 }
 
-/** Unit vector for a compass direction in SVG space (y down) or geo space (y up). */
-function dirVec(dir: string, yDown: boolean): Pt {
-  const d = dir.toUpperCase();
-  let x = 0;
-  let y = 0;
-  if (d.includes('N')) y += 1;
-  if (d.includes('S')) y -= 1;
-  if (d.includes('E')) x += 1;
-  if (d.includes('W')) x -= 1;
-  const n = Math.hypot(x, y) || 1;
-  return [x / n, (yDown ? -y : y) / n];
-}
-
-function extreme(points: Iterable<Pt>, at: Pt, r: number, dir: Pt): Pt | null {
-  let best: Pt | null = null;
-  let bestScore = -Infinity;
-  for (const p of points) {
-    if (Math.hypot(p[0] - at[0], p[1] - at[1]) > r) continue;
-    const s = p[0] * dir[0] + p[1] * dir[1];
-    if (s > bestScore) {
-      bestScore = s;
-      best = p;
-    }
-  }
-  return best;
-}
-
 function* svgLandVertices(doc: SvgDoc, land: string[]): Generator<Pt> {
   for (const s of doc.shapes) if (land.includes(s.fill)) for (const r of s.rings) yield* r;
-}
-
-function* geoVertices(): Generator<Pt> {
-  const sources = loadSources();
-  const ds = sources.datasets.cshapes;
-  if (!ds) return;
-  const fc = readJson<{ features: Feature[] }>(rawFile(ds.file));
-  for (const f of fc.features) {
-    const g = f.geometry;
-    if (!g) continue;
-    const polys = g.type === 'Polygon' ? [g.coordinates] : g.type === 'MultiPolygon' ? g.coordinates : [];
-    for (const p of polys) for (const r of p) for (const v of r) yield [v[0] ?? 0, v[1] ?? 0];
-  }
 }
 
 function densify(ring: Pt[], maxStep: number): Pt[] {
@@ -125,8 +94,10 @@ function densify(ring: Pt[], maxStep: number): Pt[] {
 }
 
 function fit(id: string, src: SvgSource): { model: Model; report: FitReport } {
-  if (src.controlPoints.length < 4) throw new Error(`${id}: needs >= 4 control points (has ${src.controlPoints.length})`);
-  const tried = candidates(src.projection, src.controlPoints).map((c) => evaluate(c.proj, c.kind, src.controlPoints));
+  const cps = svgControlPoints(loadSources(), id);
+  if (src.controlPointsFrom) log(`\n${id}: control points of ${src.controlPointsFrom} (same base map)`);
+  if (cps.length < 4) throw new Error(`${id}: needs >= 4 control points (has ${cps.length})`);
+  const tried = candidates(src.projection, cps).map((c) => evaluate(c.proj, c.kind, cps));
   const key = (r: FitReport) => (Number.isFinite(r.looRmsKm) ? r.looRmsKm : r.rmsKm);
   tried.sort((a, b) => key(a.report) - key(b.report));
   log(`\n${id}: models tried (leave-one-out RMS / fit RMS, km)`);
@@ -252,6 +223,12 @@ if (values['snap-geo']) {
     }
     if (values.fills) listFills(id, src);
     else if (values.dots) listDots(id, src);
+    else if (values.propose) {
+      const doc = loadDoc(src);
+      const { model } = fit(id, src);
+      const [vx, vy, vw, vh] = doc.viewBox;
+      propose(values.region === 'asia' ? CAPES_ASIA : CAPES_EUROPE, svgControlPoints(sources, id), model, [...svgLandVertices(doc, src.land)], [vx, vy, vx + vw, vy + vh], Number(values.r));
+    }
     else if (values.snap) {
       const at = parseAt();
       const p = extreme(svgLandVertices(loadDoc(src), src.land), at, Number(values.r), dirVec(values.dir ?? 'S', true));

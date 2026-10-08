@@ -6,6 +6,10 @@
  *
  *   pnpm tsx scripts/geo/ww2/check.ts          # every keyframe
  *   pnpm tsx scripts/geo/ww2/check.ts K6       # one keyframe
+ *   pnpm tsx scripts/geo/ww2/check.ts --work K6   # the unsimplified work/K6.geojson (quick look before simplify.ts)
+ *
+ * control.json is TopoJSON (simplify.ts): each keyframe object is decoded
+ * with topojson-client, as the engine does.
  *
  * Holders are drawn with distinct flat colours (axis warm / blue, allied
  * green / red / teal, neutral grey) and a label at their largest area, so a
@@ -19,9 +23,27 @@ import type { AddressInfo } from 'node:net';
 import { extname, join } from 'node:path';
 import { parseArgs } from 'node:util';
 import { chromium } from '@playwright/test';
+import type { FeatureCollection } from 'geojson';
+import { feature } from 'topojson-client';
 import { ROOT, SHOTS, TOPIC, loadSources, log, rawFile, readJson, warn, workFile } from './lib';
 
-const { positionals } = parseArgs({ allowPositionals: true });
+const { positionals, values } = parseArgs({ allowPositionals: true, options: { work: { type: 'boolean', default: false } } });
+
+type Topology = Parameters<typeof feature>[0];
+type TopoObject = Parameters<typeof feature>[1];
+
+/** Keyframe areas: the decoded TopoJSON object of control.json, or (--work) the unsimplified compose output. */
+function keyframeData(id: string, t: string): FeatureCollection | null {
+  if (values.work) {
+    const path = workFile(`${id}.geojson`);
+    return existsSync(path) ? readJson<FeatureCollection>(path) : null;
+  }
+  const control = readJson<{ topology: Topology; keyframes: { t: string; object: string }[] }>(join(TOPIC, 'data', 'control.json'));
+  const kf = control.keyframes.find((k) => k.t === t);
+  const obj = kf && (control.topology.objects as Record<string, TopoObject>)[kf.object];
+  if (!obj) return null;
+  return feature(control.topology, obj) as FeatureCollection;
+}
 
 const COLORS: Record<string, string> = {
   japan: '#d4552a',
@@ -107,6 +129,7 @@ window.__ready=Promise.all(rows.map(async (r,i)=>{
   await new Promise(res=>map.once('idle',res));
   const seen=new Set();
   for(const f of kf.features){
+    if(!f.geometry)continue;
     const polys=f.geometry.type==='Polygon'?[f.geometry.coordinates]:f.geometry.coordinates;
     let best=null,ba=0;
     for(const p of polys){const r0=p[0];let a=0,cx=0,cy=0;for(let k=0,j=r0.length-1;k<r0.length;j=k++){const c=r0[j][0]*r0[k][1]-r0[k][0]*r0[j][1];a+=c;cx+=(r0[j][0]+r0[k][0])*c;cy+=(r0[j][1]+r0[k][1])*c;}if(Math.abs(a)>ba){ba=Math.abs(a);best=[cx/(3*a),cy/(3*a)];}}
@@ -121,7 +144,6 @@ window.__ready=Promise.all(rows.map(async (r,i)=>{
 
 async function main(): Promise<void> {
   const sources = loadSources();
-  const control = readJson<{ keyframes: { t: string; features: unknown }[] }>(join(TOPIC, 'data', 'control.json'));
   const wanted = positionals.length ? positionals : sources.keyframes.map((k) => k.id);
   mkdirSync(SHOTS, { recursive: true });
   const files = new Map<string, { body: Buffer | string; type: string }>();
@@ -143,21 +165,29 @@ async function main(): Promise<void> {
   try {
     for (const id of wanted) {
       const kf = sources.keyframes.find((k) => k.id === id);
-      const data = kf && control.keyframes.find((k) => k.t === kf.t);
+      const data = kf && keyframeData(kf.id, kf.t);
       if (!kf || !data) {
-        warn(`keyframe ${id} not in sources.json / control.json`);
+        warn(`keyframe ${id} not in sources.json / ${values.work ? 'work/' : 'control.json'}`);
         continue;
       }
-      files.set('/kf.json', { body: JSON.stringify(data.features), type: MIME['.json']! });
+      if (values.work) {
+        // compose.ts writes flat label_en / label_zh; the page reads properties.label like control.json.
+        for (const f of data.features) {
+          const p = f.properties as Record<string, unknown>;
+          if (p.label_en) p.label = { en: p.label_en, zh: p.label_zh };
+        }
+      }
+      files.set('/kf.json', { body: JSON.stringify(data), type: MIME['.json']! });
       const rows: Row[] = [];
       for (const c of kf.checks) {
         const row: Row = { name: c.name, center: c.center, zoom: c.zoom };
         const ds = c.source ? sources.datasets[c.source] : undefined;
         if (ds && existsSync(rawFile(ds.file))) {
           const url = `/src/${encodeURIComponent(ds.file)}`;
-          files.set(url, { body: readFileSync(rawFile(ds.file)), type: MIME[extname(ds.file)] ?? 'application/octet-stream' });
+          files.set(url, { body: readFileSync(rawFile(ds.file)), type: MIME[extname(ds.file).toLowerCase()] ?? 'application/octet-stream' });
           const svgId = Object.entries(sources.svg).find(([, s]) => s.dataset === c.source)?.[0];
-          const fitPath = svgId ? workFile(`svg-${svgId}-fit.json`) : '';
+          const rasterId = Object.entries(sources.raster ?? {}).find(([, s]) => s.dataset === c.source)?.[0];
+          const fitPath = svgId ? workFile(`svg-${svgId}-fit.json`) : rasterId ? workFile(`raster-${rasterId}-fit.json`) : '';
           const fit = fitPath && existsSync(fitPath) ? readJson<{ model: string; rmsKm: number; maxKm: number }>(fitPath) : null;
           row.source = {
             url,
@@ -173,7 +203,7 @@ async function main(): Promise<void> {
       await p.goto(`http://127.0.0.1:${port}/`);
       await p.waitForFunction('window.__ready !== undefined');
       await p.evaluate('window.__ready');
-      const out = join(SHOTS, `geo-${kf.id}.png`);
+      const out = values.work ? workFile(`check-${kf.id}.png`) : join(SHOTS, `geo-${kf.id}.png`);
       await p.screenshot({ path: out, fullPage: true });
       await p.close();
       log(`wrote ${out.replace(`${ROOT}/`, '')}`);

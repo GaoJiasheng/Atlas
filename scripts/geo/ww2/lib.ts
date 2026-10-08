@@ -44,7 +44,7 @@ export interface ControlPoint {
   name: string;
   /** Known position [lng, lat] (decimal degrees, WGS84). */
   lnglat: [number, number];
-  /** Position in SVG user units (after all transforms). */
+  /** Position on the source map: SVG user units (after all transforms), or raster pixels (x right, y down). */
   svg: [number, number];
 }
 
@@ -63,6 +63,39 @@ export interface SvgSource {
   /** Residual budget in km (docs/09 §5.3: 30 Europe, 60 Asia-Pacific). */
   maxResidualKm: number;
   controlPoints: ControlPoint[];
+  /** Use the control points of another `svg` source drawn on the same base map (same viewBox and coastline). */
+  controlPointsFrom?: string;
+}
+
+/** A raster (PNG / JPG) map traced by georef-raster.ts. */
+export interface RasterSource {
+  dataset: string;
+  projection: string;
+  /** Fill colour (lower-case #rrggbb) -> class name; several colours may share a class. */
+  palette: Record<string, string>;
+  /** RGB distance within which a pixel matches a palette colour (anti-aliasing, JPEG noise). */
+  tolerance: number;
+  /** Classes that are land (`_land`), and classes that are sea (`_sea`). */
+  land: string[];
+  sea: string[];
+  /** Pixel boxes [x0, y0, x1, y1] (legends, insets): treated as unknown and filled from around them. */
+  exclude?: [number, number, number, number][];
+  /**
+   * Connected patches smaller than this (pixels) join the surrounding class
+   * (default 12); per class as { class: px, default: px }, e.g. a high value
+   * for `_sea` so lettering drawn in sea-grey inside land disappears.
+   */
+  minRegionPx?: number | Record<string, number>;
+  maxResidualKm: number;
+  controlPoints: ControlPoint[];
+}
+
+/** Control points of an svg source (its own, or those of the source it shares a base map with). */
+export function svgControlPoints(sources: Sources, id: string): ControlPoint[] {
+  const src = sources.svg[id];
+  if (!src) throw new Error(`unknown svg source ${id}`);
+  if (!src.controlPointsFrom) return src.controlPoints;
+  return svgControlPoints(sources, src.controlPointsFrom);
 }
 
 export interface OhmSet {
@@ -73,11 +106,17 @@ export interface OhmSet {
 
 /** A geometry selector used by compose.ts steps. */
 export type GeomSpec =
-  | { cshapes: number[]; partsAt?: [number, number][] }
-  | { ohm: number }
+  /** CShapes polygons of these GW codes valid on the keyframe date (or on `at`); `partsAt` keeps only the parts containing these points. */
+  | { cshapes: number[]; partsAt?: [number, number][]; at?: string }
+  /** An OpenHistoricalMap relation from the keyframe's OHM set (or from `set`). */
+  | { ohm: number; set?: string }
   | { admin1: string; names: string[] }
   | { svg: string; class: string | string[]; coastFillKm?: number }
   | { svgFrame: string }
+  | { raster: string; class: string | string[]; coastFillKm?: number }
+  | { rasterFrame: string }
+  /** The parts (single polygons) of a geometry that contain any of the points — or, with `drop`, all the other parts. */
+  | { parts: GeomSpec; at: [number, number][]; drop?: boolean }
   | { bbox: [number, number, number, number] }
   | { union: GeomSpec[] }
   | { intersect: [GeomSpec, GeomSpec] }
@@ -113,6 +152,7 @@ export interface Sources {
   datasets: Record<string, Dataset>;
   ohm: Record<string, OhmSet>;
   svg: Record<string, SvgSource>;
+  raster: Record<string, RasterSource>;
   keyframes: Keyframe[];
 }
 

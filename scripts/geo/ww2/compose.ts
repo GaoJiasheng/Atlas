@@ -11,10 +11,13 @@
  *    geometry = `from` ∩ `clip` − `minus`, with `holder`, optional `label`,
  *    and source ids `src`. Selectors (lib.ts GeomSpec) read CShapes
  *    (optionally only the polygons containing given points: one island of an
- *    archipelago), OpenHistoricalMap relations (ohm-export.ts), Natural Earth
- *    provinces, georeferenced SVG classes (georef-svg.ts; `coastFillKm`
- *    extends a class into the source map's sea within that distance so the
- *    coast follows the base data, not the source map's coastline) and boxes.
+ *    archipelago; optionally on another date), OpenHistoricalMap relations
+ *    (ohm-export.ts; optionally from another keyframe's set), Natural Earth
+ *    provinces, georeferenced SVG and raster classes (georef-svg.ts,
+ *    georef-raster.ts; `coastFillKm` extends a class into the source map's sea
+ *    within that distance so the coast follows the base data, not the source
+ *    map's coastline), boxes, and `parts` (keep or drop the single polygons of
+ *    a geometry that contain given points).
  * 3. Dissolve by holder + label. Output: work/<K>.geojson with properties
  *    { holder, label_en, label_zh, src[] }.
  *
@@ -121,10 +124,10 @@ class Inputs {
     return path;
   }
 
-  /** CShapes features valid on the keyframe date (start <= t < end). */
-  cshapesAt(): Feature<Polygon | MultiPolygon, CShapesProps>[] {
+  /** CShapes features valid on the keyframe date, or on `date` (start <= t < end). */
+  cshapesAt(date = this.kf.t): Feature<Polygon | MultiPolygon, CShapesProps>[] {
     const all = this.file('cshapes', () => readJson<FeatureCollection>(this.dataset('cshapes')));
-    const [y, m, d] = this.kf.t.split('-').map(Number);
+    const [y, m, d] = date.split('-').map(Number);
     const day = (y ?? 0) * 10000 + (m ?? 1) * 100 + (d ?? 1);
     return areaFeatures(all).filter((f) => {
       const p = f.properties as unknown as CShapesProps;
@@ -134,14 +137,14 @@ class Inputs {
     }) as Feature<Polygon | MultiPolygon, CShapesProps>[];
   }
 
-  ohm(rel: number): FeatureCollection {
-    const fc = this.file(`ohm-${this.kf.ohm}`, () => {
-      const path = workFile(`ohm-${this.kf.ohm}.geojson`);
-      if (!existsSync(path)) throw new Error(`missing work/ohm-${this.kf.ohm}.geojson: run ohm-export.ts`);
+  ohm(rel: number, set = this.kf.ohm): FeatureCollection {
+    const fc = this.file(`ohm-${set}`, () => {
+      const path = workFile(`ohm-${set}.geojson`);
+      if (!existsSync(path)) throw new Error(`missing work/ohm-${set}.geojson: run ohm-export.ts`);
       return readJson<FeatureCollection>(path);
     });
     const hit = fc.features.filter((f) => f.properties?.ohm === rel);
-    if (!hit.length) throw new Error(`OHM relation ${rel} not in set ${this.kf.ohm}`);
+    if (!hit.length) throw new Error(`OHM relation ${rel} not in set ${set}`);
     return toFc(hit);
   }
 
@@ -153,10 +156,11 @@ class Inputs {
     return toFc(hit);
   }
 
-  svg(id: string): FeatureCollection {
-    return this.file(`svg-${id}`, () => {
-      const path = workFile(`svg-${id}.geojson`);
-      if (!existsSync(path)) throw new Error(`missing work/svg-${id}.geojson: run georef-svg.ts`);
+  /** A georeferenced map: `svg` (georef-svg.ts) or `raster` (georef-raster.ts). */
+  map(kind: 'svg' | 'raster', id: string): FeatureCollection {
+    return this.file(`${kind}-${id}`, () => {
+      const path = workFile(`${kind}-${id}.geojson`);
+      if (!existsSync(path)) throw new Error(`missing work/${kind}-${id}.geojson: run georef-${kind}.ts`);
       return readJson<FeatureCollection>(path);
     });
   }
@@ -166,11 +170,32 @@ class Inputs {
 /* Selectors                                                           */
 /* ------------------------------------------------------------------ */
 
+/** Single polygons of a FeatureCollection. */
+function polygonsOf(fc: FeatureCollection): Position[][][] {
+  const polys: Position[][][] = [];
+  for (const f of areaFeatures(fc)) polys.push(...(f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.coordinates));
+  return polys;
+}
+
+const polygonFc = (polys: Position[][][]) => toFc(polys.map((p) => ({ type: 'Feature', properties: {}, geometry: { type: 'Polygon', coordinates: p } }) as Feature));
+
+async function mapClass(kind: 'svg' | 'raster', id: string, cls: string | string[], coastFillKm: number | undefined, inp: Inputs, kf: Keyframe): Promise<FeatureCollection> {
+  const all = inp.map(kind, id);
+  const classes = Array.isArray(cls) ? cls : [cls];
+  const sel = toFc(all.features.filter((f) => classes.includes(String(f.properties?.class))));
+  if (isEmpty(sel)) warn(`${kf.id}: ${kind} ${id} has no class ${classes.join(', ')}`);
+  if (!coastFillKm) return sel;
+  const sea = toFc(all.features.filter((f) => f.properties?.class === '_sea'));
+  const near = await clip(sea, await buffer(sel, coastFillKm));
+  return toFc([...sel.features, ...near.features]);
+}
+
 async function resolve(spec: GeomSpec, inp: Inputs, kf: Keyframe): Promise<FeatureCollection> {
   if ('cshapes' in spec) {
-    const feats = inp.cshapesAt().filter((f) => spec.cshapes.includes(f.properties.gwcode));
+    const date = spec.at ?? kf.t;
+    const feats = inp.cshapesAt(date).filter((f) => spec.cshapes.includes(f.properties.gwcode));
     const missing = spec.cshapes.filter((g) => !feats.some((f) => f.properties.gwcode === g));
-    if (missing.length) warn(`${kf.id}: CShapes has no polygon for GW ${missing.join(', ')} on ${kf.t}`);
+    if (missing.length) warn(`${kf.id}: CShapes has no polygon for GW ${missing.join(', ')} on ${date}`);
     if (!spec.partsAt) return toFc(feats);
     const polys: Position[][][] = [];
     for (const f of feats) polys.push(...(f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.coordinates));
@@ -182,18 +207,17 @@ async function resolve(spec: GeomSpec, inp: Inputs, kf: Keyframe): Promise<Featu
     }
     return toFc(keep);
   }
-  if ('ohm' in spec) return inp.ohm(spec.ohm);
+  if ('ohm' in spec) return inp.ohm(spec.ohm, spec.set);
   if ('admin1' in spec) return inp.admin1(spec.admin1, spec.names);
-  if ('svgFrame' in spec) return toFc(inp.svg(spec.svgFrame).features.filter((f) => f.properties?.class === '_frame'));
-  if ('svg' in spec) {
-    const all = inp.svg(spec.svg);
-    const classes = Array.isArray(spec.class) ? spec.class : [spec.class];
-    const cls = toFc(all.features.filter((f) => classes.includes(String(f.properties?.class))));
-    if (isEmpty(cls)) warn(`${kf.id}: svg ${spec.svg} has no class ${classes.join(', ')}`);
-    if (!spec.coastFillKm) return cls;
-    const sea = toFc(all.features.filter((f) => f.properties?.class === '_sea'));
-    const near = await clip(sea, await buffer(cls, spec.coastFillKm));
-    return toFc([...cls.features, ...near.features]);
+  if ('svgFrame' in spec) return toFc(inp.map('svg', spec.svgFrame).features.filter((f) => f.properties?.class === '_frame'));
+  if ('rasterFrame' in spec) return toFc(inp.map('raster', spec.rasterFrame).features.filter((f) => f.properties?.class === '_frame'));
+  if ('svg' in spec) return mapClass('svg', spec.svg, spec.class, spec.coastFillKm, inp, kf);
+  if ('raster' in spec) return mapClass('raster', spec.raster, spec.class, spec.coastFillKm, inp, kf);
+  if ('parts' in spec) {
+    const polys = polygonsOf(await dissolve(await resolve(spec.parts, inp, kf)));
+    const hit = (p: Position[][]) => spec.at.some((pt) => pointInPolygon(pt, p));
+    for (const pt of spec.at) if (!polys.some((p) => pointInPolygon(pt, p))) warn(`${kf.id}: no part contains ${pt.join(',')}`);
+    return polygonFc(polys.filter((p) => (spec.drop ? !hit(p) : hit(p))));
   }
   if ('bbox' in spec) return bboxPolygon(spec.bbox);
   if ('union' in spec) {
@@ -246,6 +270,7 @@ async function compose(sources: Sources, kf: Keyframe): Promise<void> {
   }
   // Dissolve by holder + label; keep the union of source ids.
   const out = await mapshaper(`-i a.json -dissolve2 holder,label_en,label_zh calc='src=collect(src)' -filter-slivers min-area=5km2`, { a: acc });
+  out.features = out.features.filter((f) => f.geometry);
   for (const f of out.features) {
     const raw = f.properties?.src as unknown;
     const list = Array.isArray(raw) ? raw : [raw];
