@@ -1176,6 +1176,37 @@
     ]
   },
   {
+    "id": "sook-ching",
+    "t": "1942-02-18",
+    "until": "1942-03-04",
+    "at": [
+      103.8625,
+      1.31
+    ],
+    "kind": "massacre",
+    "importance": 3,
+    "title": {
+      "en": "Sook Ching",
+      "zh": "肃清（大检证）"
+    },
+    "summary": {
+      "en": "Japanese military police and soldiers screen Chinese men aged 18 to 50 across Singapore and take those they suspect of being anti-Japanese to beaches and other remote places to be shot.",
+      "zh": "日本宪兵和军队在新加坡各地甄别 18 至 50 岁的华人男子，把被怀疑“抗日”的人押到海滩等偏僻地方枪杀。"
+    },
+    "detail": {
+      "en": "The screening ran from 18 February to 4 March 1942, carried out mainly by the Kempeitai in the city and by the Imperial Guard Division in the suburbs. Known killing sites include Changi Beach (66 men, 20 February) and Punggol beach (some 400, 28 February). The Japanese figure at the 1947 trial was about 5,000; a 25th Army record of May 1942 lists 11,110 'missing'; most estimates lie between 25,000 and 50,000, and Chinese community estimates go up to 100,000. The marker shows the screening centre at Jalan Besar, one of several.",
+      "zh": "检证从 1942 年 2 月 18 日持续到 3 月 4 日，市区主要由宪兵队执行，郊区由近卫师团执行。已知的屠杀地点包括樟宜海滩（2 月 20 日，66 人）和榜鹅海滩（2 月 28 日，约 400 人）。1947 年审判时日方的数字约 5,000 人；第 25 军 1942 年 5 月的记录写有 11,110 人“失踪”；多数估计在 2.5 万至 5 万人之间，华人社会的估计最高到 10 万人。地图上的标记是惹兰勿刹的检证中心，这样的中心有好几处。"
+    },
+    "sources": [
+      "S98",
+      "S100",
+      "S97",
+      "S96",
+      "S95",
+      "S99"
+    ]
+  },
+  {
     "id": "japanese-internment",
     "t": "1942-02-19",
     "at": [
@@ -1198,6 +1229,1132 @@
     },
     "sources": [
       "S89"
+    ]
+  },
+  {
+    "id": "death-railway",
+    "t": "1942-06",
+    "until": "1943-10-17",
+    "at": [
+      98.39,
+      15.3
+    ],
+    "kind": "atrocity",
+    "importance": 3,
+    "title": {
+      "en": "Burma–Thailand Railway",
+      "zh": "泰缅铁路（死亡铁路）"
+    },
+    "summary": {
+      "en": "Japan forces Allied prisoners of war and Asian labourers to build a 415 km railway between Thailand and Burma; about 12,000 prisoners and 75,000–90,000 labourers die.",
+      "zh": "日本强迫盟军战俘和亚洲劳工修建泰缅之间 415 公里的铁路；约 1.2 万名战俘和 7.5 万至 9 万名劳工死亡。"
+    },
+    "detail": {
+      "en": "The line ran from Nong Pladuk in Thailand to Thanbyuzayat in Burma, crossing the border at the Three Pagodas Pass (marked here), and was joined on 17 October 1943. Prisoners from Changi travelled five days by train to Ban Pong. Of 62,000 Allied prisoners who worked on it, 11,979 died; of about 200,000 Asian labourers, between 75,000 (Australian War Memorial) and 90,000 (Australian Department of Veterans' Affairs) died, most of them with no marked grave. Hunger, cholera, malaria and the 'speedo' push of the 1943 monsoon caused most deaths.",
+      "zh": "铁路从泰国农布拉杜克通到缅甸丹彪扎亚，在三塔山口（图上标记处）越过边界，1943 年 10 月 17 日接通。樟宜的战俘坐五天火车到班蓬。参加修路的 62,000 名盟军战俘中 11,979 人死亡；约 20 万名亚洲劳工中，死亡人数在 7.5 万（澳大利亚战争纪念馆）到 9 万（澳大利亚退伍军人事务部）之间，大多没有标明的坟墓。饥饿、霍乱、疟疾，以及 1943 年雨季里日军喊着“快点”（speedo）的赶工，是大多数人的死因。"
+    },
+    "sources": [
+      "S102",
+      "S103",
+      "S104"
+    ]
+  },
+  {
+    "id": "midway",
+    "t": "1942-06-04",
+    "until": "1942-06-07",
+    "at": [
+      -177.37,
+      28.21
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "japan",
+      "defender": "usa"
+    },
+    "casualties": {
+      "japan": 3057,
+      "usa": 362
+    },
+    "result": "defender",
+    "importance": 3,
+    "title": {
+      "en": "Battle of Midway",
+      "zh": "中途岛海战"
+    },
+    "summary": {
+      "en": "US carrier aircraft sink the four Japanese fleet carriers sent to take Midway; Japan loses about 3,057 men, the United States about 362 and the carrier Yorktown.",
+      "zh": "美国舰载机击沉前来攻占中途岛的四艘日本舰队航母；日本损失约 3,057 人，美国损失约 362 人和约克城号航母。"
+    },
+    "detail": {
+      "en": "Japan planned to take Midway atoll and draw the US Pacific Fleet into a decisive battle. US Navy codebreakers at Station Hypo in Hawaii confirmed the target, code-named 'AF', after Midway sent a false message that it was short of fresh water and a Japanese signal reported that 'AF' was short of water. On 4 June American carrier aircraft sank Akagi, Kaga, Soryu and Hiryu. Yorktown, damaged, was sunk by a Japanese submarine on 7 June. Four of the six carriers that had attacked Pearl Harbor were gone.",
+      "zh": "日本计划攻占中途岛环礁，引美国太平洋舰队出来决战。夏威夷“Hypo 站”的美国海军破译员确认了目标代号“AF”：中途岛故意发出淡水短缺的假电报，随后日方电报报告“AF 缺水”。6 月 4 日，美国舰载机击沉赤城、加贺、苍龙和飞龙。受伤的约克城号 6 月 7 日被日本潜艇击沉。袭击珍珠港的六艘航母，已有四艘沉没。"
+    },
+    "sources": [
+      "S116"
+    ]
+  },
+  {
+    "id": "guadalcanal",
+    "t": "1942-08-07",
+    "until": "1943-02-09",
+    "at": [
+      160.05,
+      -9.43
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "usa",
+      "defender": "japan"
+    },
+    "forces": {
+      "usa": 60000,
+      "japan": 36000
+    },
+    "result": "attacker",
+    "importance": 2,
+    "title": {
+      "en": "Guadalcanal",
+      "zh": "瓜达尔卡纳尔岛战役"
+    },
+    "summary": {
+      "en": "US Marines land on Guadalcanal in the Solomon Islands to take a Japanese airfield; six months of fighting on land, at sea and in the air follow until Japan withdraws in February 1943.",
+      "zh": "美国海军陆战队在所罗门群岛的瓜达尔卡纳尔岛登陆，夺取日军机场；陆上、海上、空中的战斗持续半年，1943 年 2 月日军撤出。"
+    },
+    "detail": {
+      "en": "About 10,000 troops were ashore on Guadalcanal by the evening of 7 August. In all about 60,000 US Army and Marine ground troops served on the island; about 1,600 were killed and 4,245 wounded. Of more than 36,000 Japanese who fought there, over 14,800 were killed or missing, 9,000 died of disease and about 1,000 were taken prisoner. These are ground-force figures; both navies also lost many ships and men in the waters around the island.",
+      "zh": "8 月 7 日晚已有约 1 万人登上瓜岛。先后约 6 万名美国陆军和陆战队地面部队在岛上作战，约 1,600 人阵亡、4,245 人负伤。3.6 万多名日军中，1.48 万多人阵亡或失踪，9,000 人病死，约 1,000 人被俘。这些只是地面部队的数字；双方海军在岛屿周围的海域也损失了大批舰船和人员。"
+    },
+    "sources": [
+      "S117"
+    ]
+  },
+  {
+    "id": "stalingrad",
+    "t": "1942-08-23",
+    "until": "1943-02-02",
+    "at": [
+      44.52,
+      48.71
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "germany",
+      "defender": "ussr"
+    },
+    "result": "defender",
+    "importance": 3,
+    "title": {
+      "en": "Battle of Stalingrad",
+      "zh": "斯大林格勒战役"
+    },
+    "summary": {
+      "en": "German troops fight their way into Stalingrad on the Volga; on 19 November the Red Army counter-attacks and encircles the German Sixth Army, which surrenders by 2 February 1943; over 91,000 men are taken prisoner.",
+      "zh": "德军一条街一条街地打进伏尔加河畔的斯大林格勒；11 月 19 日红军反攻，合围德国第 6 集团军，到 1943 年 2 月 2 日全部投降，9.1 万多人被俘。"
+    },
+    "detail": {
+      "en": "The Soviet counter-offensive of 19 November, about 1,000,000 men, struck the Romanian armies holding the German flanks and closed the ring near Kalach on 22–23 November around almost 290,000 men. Field Marshal Paulus surrendered on 31 January and the last pocket on 2 February. Over 91,000 were captured, 24 generals among them; almost half had died by spring, and only about 5,000 ever came home. The Germans lost somewhat over 200,000 men in the pocket. The Red Army's losses in the campaign were 1.1 million, of whom 485,751 died. The Soviet Union did not publish its own losses at the time.",
+      "zh": "11 月 19 日，约 100 万苏军发起反攻，打击守卫德军两翼的罗马尼亚军队，11 月 22 至 23 日在卡拉奇附近合围了将近 29 万人。保卢斯元帅 1 月 31 日投降，最后一个包围圈 2 月 2 日投降。9.1 万多人被俘，其中有 24 名将军；到春天已死去将近一半，最终只有约 5,000 人回到家乡。德军在包围圈中损失 20 万多人。红军在整个战役中损失 110 万人，其中 485,751 人死亡；苏联当时没有公布自己的损失。"
+    },
+    "sources": [
+      "S121",
+      "S122",
+      "S123"
+    ]
+  },
+  {
+    "id": "el-alamein",
+    "t": "1942-10-23",
+    "until": "1942-11-04",
+    "at": [
+      28.95,
+      30.83
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "uk",
+      "defender": "germany"
+    },
+    "forces": {
+      "uk": 195000,
+      "germany": 50000,
+      "italy": 54000
+    },
+    "casualties": {
+      "uk": 13560
+    },
+    "result": "attacker",
+    "importance": 2,
+    "title": {
+      "en": "Second Battle of El Alamein",
+      "zh": "第二次阿拉曼战役"
+    },
+    "summary": {
+      "en": "Britain's Eighth Army, about 195,000 men, breaks through the German and Italian army in Egypt; by 4 November the Axis forces are retreating west.",
+      "zh": "约 19.5 万人的英国第 8 集团军在埃及突破德意军队防线；到 11 月 4 日，轴心国军队向西撤退。"
+    },
+    "detail": {
+      "en": "The Eighth Army included British, Australian, New Zealand, Indian and South African troops and had 1,029 tanks fit for action against about 50,000 Germans and 54,000 Italians. Its casualties were about 13,560. By 11 November about 30,000 Axis soldiers, 7,802 German and 22,071 Italian, had been taken prisoner.",
+      "zh": "第 8 集团军包括英国、澳大利亚、新西兰、印度和南非的部队，有可用坦克 1,029 辆，对面是约 5 万德军和 5.4 万意军。第 8 集团军伤亡约 13,560 人。到 11 月 11 日，约 3 万名轴心国士兵被俘，其中德军 7,802 人、意军 22,071 人。"
+    },
+    "sources": [
+      "S118"
+    ]
+  },
+  {
+    "id": "torch-landings",
+    "t": "1942-11-08",
+    "until": "1942-11-11",
+    "at": [
+      -0.64,
+      35.72
+    ],
+    "kind": "landing",
+    "sides": {
+      "attacker": "usa",
+      "defender": "vichy-france"
+    },
+    "result": "attacker",
+    "importance": 2,
+    "title": {
+      "en": "Operation Torch",
+      "zh": "火炬行动"
+    },
+    "summary": {
+      "en": "More than 100,000 American and British troops land in French Morocco and Algeria; Vichy French forces resist until a ceasefire on 10–11 November.",
+      "zh": "10 万多名美英军队在法属摩洛哥和阿尔及利亚登陆；维希法国军队抵抗到 11 月 10 至 11 日停火。"
+    },
+    "detail": {
+      "en": "Three task forces landed on 8 November: the Western from the United States near Casablanca (33,843 men), and the Center (Oran) and Eastern (Algiers) from Britain. The marker is at Oran. On 10 November Admiral Darlan ordered the French forces, in Pétain's name, to stop fighting; Casablanca surrendered on 11 November. The campaign that followed ended in Tunisia on 13 May 1943.",
+      "zh": "11 月 8 日三支特遣舰队登陆：西路从美国出发，在卡萨布兰卡附近上岸（33,843 人）；中路（奥兰）和东路（阿尔及尔）从英国出发。图上标记在奥兰。11 月 10 日，达尔朗海军上将以贝当的名义命令法军停火；卡萨布兰卡 11 月 11 日投降。此后的战役在 1943 年 5 月 13 日于突尼斯结束。"
+    },
+    "sources": [
+      "S119",
+      "S120"
+    ]
+  },
+  {
+    "id": "tunisia-1943",
+    "t": "1943-05-13",
+    "at": [
+      10.18,
+      36.8
+    ],
+    "kind": "surrender",
+    "sides": {
+      "attacker": "uk",
+      "defender": "germany"
+    },
+    "importance": 2,
+    "title": {
+      "en": "Axis surrender in Tunisia",
+      "zh": "轴心国军队在突尼斯投降"
+    },
+    "summary": {
+      "en": "The last German and Italian forces in North Africa surrender; about 250,000–275,000 men become prisoners.",
+      "zh": "北非最后的德意军队投降，约 25 万至 27.5 万人被俘。"
+    },
+    "detail": {
+      "en": "The Italian First Army's commander, Marshal Messe, surrendered on 13 May. The US Army history counts about 275,000 prisoners taken in the last week; the National WWII Museum gives a quarter of a million. Both are listed. Two months later the Allies landed in Sicily.",
+      "zh": "意大利第 1 集团军司令梅塞元帅 5 月 13 日投降。美国陆军战史统计最后一周俘虏约 27.5 万人，美国国家二战博物馆的说法是约 25 万人，两者并列。两个月后，盟军在西西里登陆。"
+    },
+    "sources": [
+      "S119",
+      "S120"
+    ]
+  },
+  {
+    "id": "kursk",
+    "t": "1943-07-05",
+    "until": "1943-08-23",
+    "at": [
+      36.19,
+      51.73
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "germany",
+      "defender": "ussr"
+    },
+    "forces": {
+      "germany": 780000,
+      "ussr": 1900000
+    },
+    "result": "defender",
+    "importance": 2,
+    "title": {
+      "en": "Battle of Kursk",
+      "zh": "库尔斯克战役"
+    },
+    "summary": {
+      "en": "Germany's last major offensive in the east, with more than 780,000 men and nearly 3,000 tanks, fails against more than 1.9 million Soviet troops; the Red Army counter-attacks and takes Kharkov on 23 August.",
+      "zh": "德国在东线的最后一次大攻势：78 万多人、近 3,000 辆坦克，对阵 190 多万苏军，进攻失败；红军反攻，8 月 23 日夺回哈尔科夫。"
+    },
+    "detail": {
+      "en": "Germany attacked the Kursk salient from north and south on 5 July. On 12 July, with the Allies ashore in Sicily, Hitler decided to move troops to Italy. From then on the Red Army held the initiative in the east. Other estimates of the forces differ; these are the National WWII Museum's figures.",
+      "zh": "7 月 5 日德军从南北两面进攻库尔斯克突出部。7 月 12 日，盟军已在西西里登陆，希特勒决定调兵去意大利。从此东线的主动权在红军手里。兵力的其他估计不一，这里用的是美国国家二战博物馆的数字。"
+    },
+    "sources": [
+      "S124"
+    ]
+  },
+  {
+    "id": "double-tenth",
+    "t": "1943-10-10",
+    "at": [
+      103.9696,
+      1.3564
+    ],
+    "kind": "political",
+    "importance": 2,
+    "title": {
+      "en": "Double Tenth",
+      "zh": "双十事件"
+    },
+    "summary": {
+      "en": "After an Allied commando raid on Singapore harbour, the Kempeitai raid Changi Prison and take away 57 civilian internees; 15 die under interrogation.",
+      "zh": "盟军突击队袭击新加坡港之后，宪兵队搜查樟宜监狱，带走 57 名被拘留的平民，其中 15 人死于审讯。"
+    },
+    "detail": {
+      "en": "On 26 September 1943 fourteen Australian and British commandos in canoes sank or damaged about 37,000 tonnes of shipping in the harbour (Operation Jaywick). The Kempeitai wrongly suspected the internees and local people of helping the raiders, and found a hidden wireless set in the prison. The suspects, among them Elizabeth Choy and her husband, were held and tortured at the Kempeitai's East District Branch in the old YMCA. From 18 March to 15 April 1946 a British military court in Singapore tried 21 Japanese soldiers and interpreters for the Double Tenth.",
+      "zh": "1943 年 9 月 26 日，14 名澳大利亚和英国突击队员乘独木舟潜入港内，击沉或炸伤约 37,000 吨船只（杰威克行动）。宪兵队错误地怀疑是被拘留者和本地人接应了袭击者，并在监狱里搜出一台藏起来的无线电。嫌疑人，包括伊丽莎白·蔡和她的丈夫，被关在旧基督教青年会大楼里的宪兵队东区分队，遭到拷打。1946 年 3 月 18 日至 4 月 15 日，英国军事法庭在新加坡就双十事件审判了 21 名日本军人和翻译。"
+    },
+    "sources": [
+      "S105",
+      "S106",
+      "S112",
+      "S115"
+    ]
+  },
+  {
+    "id": "changde-1943",
+    "t": "1943-11-02",
+    "until": "1943-12-09",
+    "at": [
+      111.69,
+      29.03
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "japan",
+      "defender": "china"
+    },
+    "result": "inconclusive",
+    "importance": 2,
+    "title": {
+      "en": "Battle of Changde",
+      "zh": "常德会战"
+    },
+    "summary": {
+      "en": "A Japanese offensive in Hunan reaches Changde; the Chinese 57th Division holds the city for eleven days, it falls on 3 December, and Chinese forces retake it six days later.",
+      "zh": "日军在湖南发动攻势，打到常德；中国第 57 师守城 11 天，12 月 3 日城陷，六天后中国军队收复常德。"
+    },
+    "detail": {
+      "en": "The offensive began on 2 November 1943. In the city, 8,529 men of the 57th Division fought the Japanese 116th Division from 23 November; by the division's own report 7,869 of them were killed or wounded. Chinese reports of the time recorded Japanese use of poison gas in the campaign. The Japanese withdrew, and Changde was back in Chinese hands by 9 December.",
+      "zh": "攻势在 1943 年 11 月 2 日开始。11 月 23 日起，第 57 师 8,529 名官兵在城中抵抗日军第 116 师团；据该师战报，伤亡 7,869 人。中国方面当时的报告记载日军在会战中使用了毒气。日军撤走，常德到 12 月 9 日重回中国军队手中。"
+    },
+    "sources": [
+      "S126",
+      "S127"
+    ]
+  },
+  {
+    "id": "imphal-kohima",
+    "t": "1944-03-08",
+    "until": "1944-07-18",
+    "at": [
+      93.94,
+      24.81
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "japan",
+      "defender": "uk"
+    },
+    "forces": {
+      "japan": 85000
+    },
+    "casualties": {
+      "japan": 53000,
+      "uk": 16500
+    },
+    "result": "defender",
+    "importance": 2,
+    "title": {
+      "en": "Imphal and Kohima",
+      "zh": "英帕尔—科希马战役"
+    },
+    "summary": {
+      "en": "A Japanese offensive into north-east India, with an Indian National Army division, is stopped at Imphal and Kohima; Japan's Fifteenth Army loses 53,000 of its 85,000 men, many to hunger.",
+      "zh": "日军连同一个印度国民军师进攻印度东北部，在英帕尔和科希马被挡住；日军第 15 军 8.5 万人中有 5.3 万人死亡或失踪，许多人是饿死的。"
+    },
+    "detail": {
+      "en": "Lieutenant-General Mutaguchi's plan relied on capturing British supplies; when that failed his men starved in the monsoon. The British and Indian garrisons, surrounded, were supplied by air: the RAF flew in nearly 19,000 tons of supplies and over 12,000 men. British and Indian casualties were about 12,500 at Imphal and 4,000 at Kohima. The defeat opened the way for the Fourteenth Army's reconquest of Burma.",
+      "zh": "牟田口廉也中将的计划靠缴获英军物资补给，落空之后，他的部队在雨季中挨饿。被包围的英印守军靠空投维持：皇家空军运进近 1.9 万吨物资和 1.2 万多人。英印军在英帕尔伤亡约 12,500 人，在科希马伤亡 4,000 人。这次失败为第 14 集团军收复缅甸打开了道路。"
+    },
+    "sources": [
+      "S145"
+    ]
+  },
+  {
+    "id": "d-day",
+    "t": "1944-06-06",
+    "at": [
+      -0.75,
+      49.36
+    ],
+    "kind": "landing",
+    "sides": {
+      "attacker": "usa",
+      "defender": "germany"
+    },
+    "result": "attacker",
+    "importance": 3,
+    "title": {
+      "en": "D-Day: Normandy landings",
+      "zh": "诺曼底登陆"
+    },
+    "summary": {
+      "en": "156,115 American, British, Canadian and other Allied soldiers land in Normandy by sea and air; about 10,500 Allied soldiers are killed, wounded, missing or captured on the first day.",
+      "zh": "156,115 名美国、英国、加拿大和其他盟国士兵从海上和空中在诺曼底登陆；第一天盟军伤亡、失踪和被俘约 10,500 人。"
+    },
+    "detail": {
+      "en": "About 132,000 men came ashore on five beaches; the rest came by parachute and glider. A deception plan (Fortitude) had persuaded the Germans that the main landing would come later at the Pas de Calais, so divisions were held there for weeks. German losses on the day are estimated at about 10,000. The Allies broke out of Normandy at the end of July and reached Paris on 25 August.",
+      "zh": "约 13.2 万人在五处海滩上岸，其余的人乘降落伞和滑翔机着陆。欺敌计划（坚忍行动）让德军相信主力登陆会在之后的加来海峡，德军的师因此在那里等了好几周。德军当天的损失估计约 1 万人。盟军 7 月底突破诺曼底，8 月 25 日到达巴黎。"
+    },
+    "sources": [
+      "S131",
+      "S132",
+      "S133"
+    ]
+  },
+  {
+    "id": "bagration",
+    "t": "1944-06-22",
+    "until": "1944-08-19",
+    "at": [
+      27.56,
+      53.9
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "ussr",
+      "defender": "germany"
+    },
+    "forces": {
+      "ussr": 1200000,
+      "germany": 700000
+    },
+    "casualties": {
+      "germany": 400000
+    },
+    "result": "attacker",
+    "importance": 3,
+    "title": {
+      "en": "Operation Bagration",
+      "zh": "巴格拉季昂行动"
+    },
+    "summary": {
+      "en": "The Red Army's summer offensive in Belorussia destroys 28 of the 34 divisions of three German armies; Germany loses about 400,000 men, and Soviet troops reach the Vistula near Warsaw.",
+      "zh": "红军在白俄罗斯的夏季攻势消灭了德军三个集团军 34 个师中的 28 个；德军损失约 40 万人，苏军推进到华沙附近的维斯瓦河。"
+    },
+    "detail": {
+      "en": "About 1.2 million Soviet troops, 2.5 million with reserves, attacked an Army Group Center of slightly over 700,000 men; the offensive opened on 22–23 June, three years after the German invasion. The Red Army lost about 180,000 killed and missing and more than half a million wounded and sick. Minsk was retaken on 3 July.",
+      "zh": "约 120 万苏军（连同预备队 250 万）进攻略多于 70 万人的德国中央集团军群；攻势在 6 月 22 日至 23 日展开，距德国入侵正好三年。红军阵亡和失踪约 18 万人，负伤和患病 50 万人以上。7 月 3 日收复明斯克。"
+    },
+    "sources": [
+      "S134",
+      "S135"
+    ]
+  },
+  {
+    "id": "warsaw-uprising",
+    "t": "1944-08-01",
+    "until": "1944-10-02",
+    "at": [
+      21.01,
+      52.23
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "poland",
+      "defender": "germany"
+    },
+    "result": "defender",
+    "importance": 2,
+    "title": {
+      "en": "Warsaw Uprising",
+      "zh": "华沙起义"
+    },
+    "summary": {
+      "en": "The Polish Home Army rises against the German occupation and fights for 63 days; the Germans crush the uprising, murder about 40,000 civilians in the Wola district alone and raze the city centre.",
+      "zh": "波兰家乡军起义反抗德国占领，坚持 63 天；德军镇压起义，仅在沃拉区就屠杀了约 4 万平民，随后把市中心夷为平地。"
+    },
+    "detail": {
+      "en": "About 45,000 Home Army fighters took part. The Red Army had reached the Vistula east of the city but did not cross to help the insurgents. USHMM gives 166,000 dead, among them perhaps 17,000 Polish Jews who had fought or been found in hiding, and elsewhere more than 180,000; most were civilians. More than 11,000 Home Army soldiers were taken prisoner, and civilians were deported to concentration and forced-labour camps.",
+      "zh": "约 4.5 万名家乡军战士参加了起义。红军已经推进到城东的维斯瓦河边，却没有渡河援助起义者。美国大屠杀纪念馆一处记载死亡 16.6 万人，其中可能有 1.7 万名参战或在藏匿中被发现的波兰犹太人，另一处说超过 18 万人；死者大多是平民。1.1 万多名家乡军士兵被俘，平民被押送到集中营和强迫劳动营。"
+    },
+    "sources": [
+      "S136",
+      "S135"
+    ]
+  },
+  {
+    "id": "paris-liberated",
+    "t": "1944-08-25",
+    "at": [
+      2.35,
+      48.86
+    ],
+    "kind": "liberation",
+    "importance": 2,
+    "title": {
+      "en": "Liberation of Paris",
+      "zh": "巴黎解放"
+    },
+    "summary": {
+      "en": "The French 2nd Armoured Division and French resistance fighters free Paris; the German commander, General von Choltitz, surrenders on the afternoon of 25 August.",
+      "zh": "法国第 2 装甲师和法国抵抗力量解放巴黎；德军指挥官肖尔蒂茨将军 8 月 25 日下午投降。"
+    },
+    "sources": [
+      "S133"
+    ]
+  },
+  {
+    "id": "leyte",
+    "t": "1944-10-20",
+    "until": "1944-10-26",
+    "at": [
+      125.0,
+      11.05
+    ],
+    "kind": "landing",
+    "sides": {
+      "attacker": "usa",
+      "defender": "japan"
+    },
+    "result": "attacker",
+    "importance": 2,
+    "title": {
+      "en": "Leyte and Leyte Gulf",
+      "zh": "莱特岛登陆与莱特湾海战"
+    },
+    "summary": {
+      "en": "US forces land on Leyte to retake the Philippines; in the Battle of Leyte Gulf (23–26 October), the largest naval battle ever fought, Japan loses 26 ships, and the first organised kamikaze attacks begin.",
+      "zh": "美军在莱特岛登陆反攻菲律宾；在史上规模最大的莱特湾海战（10 月 23 日至 26 日）中，日本损失 26 艘舰船，有组织的神风特攻第一次出现。"
+    },
+    "detail": {
+      "en": "Japan lost three battleships, Musashi among them, and four carriers. Kamikaze pilots, who deliberately crashed their aircraft into ships, would kill thousands of Allied sailors in the remaining months of the war.",
+      "zh": "日本损失三艘战列舰（包括武藏号）和四艘航母。神风特攻队员驾机故意撞向军舰，在战争最后几个月里造成数千名盟军水兵死亡。"
+    },
+    "sources": [
+      "S146"
+    ]
+  },
+  {
+    "id": "bulge",
+    "t": "1944-12-16",
+    "until": "1945-01-25",
+    "at": [
+      5.72,
+      50.0
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "germany",
+      "defender": "usa"
+    },
+    "casualties": {
+      "usa": 89000
+    },
+    "result": "defender",
+    "importance": 2,
+    "title": {
+      "en": "Battle of the Bulge",
+      "zh": "突出部战役"
+    },
+    "summary": {
+      "en": "Germany's last offensive in the west strikes through the Ardennes forest; it is stopped and pushed back by late January at a cost of over 89,000 American casualties, 19,000 of them killed.",
+      "zh": "德国在西线的最后一次攻势穿过阿登森林；到 1 月下旬被挡住并击退，美军伤亡 8.9 万多人，其中阵亡 1.9 万人。"
+    },
+    "sources": [
+      "S137"
+    ]
+  },
+  {
+    "id": "auschwitz-liberated",
+    "t": "1945-01-27",
+    "at": [
+      19.18,
+      50.035
+    ],
+    "kind": "liberation",
+    "importance": 3,
+    "title": {
+      "en": "Auschwitz liberated",
+      "zh": "奥斯威辛解放"
+    },
+    "summary": {
+      "en": "Soviet troops reach Auschwitz and find about 7,000 prisoners, most of them ill; about 1.1 million people had been killed there, about 1 million of them Jews.",
+      "zh": "苏军到达奥斯威辛，发现约 7,000 名囚犯，大多病重；约 110 万人在这里被杀害，其中约 100 万是犹太人。"
+    },
+    "detail": {
+      "en": "Auschwitz-Birkenau was the largest of the Nazi camps, both a concentration camp and a killing centre with gas chambers. Its victims were about 1 million Jews, 70,000–75,000 Poles, 21,000 Roma and Sinti, 15,000 Soviet prisoners of war and 10,000–15,000 others. In the weeks before, the SS had driven tens of thousands of prisoners west on death marches, on which at least 9,000 died, and had blown up the crematoria and burned records. 27 January is now International Holocaust Remembrance Day.",
+      "zh": "奥斯威辛—比克瑙是纳粹最大的营地，既是集中营，也是设有毒气室的灭绝营。遇难者包括约 100 万犹太人、7 万至 7.5 万波兰人、2.1 万罗姆人和辛提人、1.5 万苏军战俘以及 1 万至 1.5 万其他人。在此前几周，党卫队把数万名囚犯赶上向西的“死亡行军”，途中至少 9,000 人死亡，又炸毁焚尸场、烧毁档案。1 月 27 日今天是国际大屠杀纪念日。"
+    },
+    "sources": [
+      "S138",
+      "S139",
+      "S140"
+    ]
+  },
+  {
+    "id": "dresden",
+    "t": "1945-02-13",
+    "until": "1945-02-15",
+    "at": [
+      13.74,
+      51.05
+    ],
+    "kind": "bombing",
+    "sides": {
+      "attacker": "uk",
+      "defender": "germany"
+    },
+    "importance": 2,
+    "title": {
+      "en": "Bombing of Dresden",
+      "zh": "德累斯顿大轰炸"
+    },
+    "summary": {
+      "en": "British and American bombers attack Dresden over three days and nights; the firestorm kills up to 25,000 people, according to the city's historians' commission (2010).",
+      "zh": "英美轰炸机连续三天三夜轰炸德累斯顿；据该市历史学家委员会（2010）的结论，大火造成最多 2.5 万人死亡。"
+    },
+    "detail": {
+      "en": "The first RAF wave of 240 Lancasters came at about 10 p.m. on 13 February and a second of about 550 later that night; US B-17s followed on 14 and 15 February. For decades much higher figures were claimed; the commission's figure, from five years of research, is up to 25,000. Whether the raid was militarily necessary is still argued.",
+      "zh": "2 月 13 日晚约 10 时，英国空军第一波 240 架兰开斯特飞到，当夜晚些时候第二波约 550 架；14 日和 15 日美国 B-17 接着轰炸。几十年来流传着高得多的数字；委员会经过五年研究得出的数字是最多 2.5 万人。这次轰炸在军事上是否必要，至今仍有争论。"
+    },
+    "sources": [
+      "S143"
+    ]
+  },
+  {
+    "id": "iwo-jima",
+    "t": "1945-02-19",
+    "until": "1945-03-26",
+    "at": [
+      141.29,
+      24.78
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "usa",
+      "defender": "japan"
+    },
+    "forces": {
+      "usa": 70000,
+      "japan": 18000
+    },
+    "result": "attacker",
+    "importance": 2,
+    "title": {
+      "en": "Iwo Jima",
+      "zh": "硫磺岛战役"
+    },
+    "summary": {
+      "en": "About 70,000 US Marines take the island of Iwo Jima in 36 days; nearly 7,000 Marines are killed, and of 18,000 Japanese defenders only 216 are taken prisoner.",
+      "zh": "约 7 万名美国海军陆战队员用 36 天攻下硫磺岛；近 7,000 名陆战队员阵亡，1.8 万名日本守军只有 216 人被俘。"
+    },
+    "sources": [
+      "S147"
+    ]
+  },
+  {
+    "id": "tokyo-firebombing",
+    "t": "1945-03-09",
+    "until": "1945-03-10",
+    "at": [
+      139.8,
+      35.71
+    ],
+    "kind": "bombing",
+    "sides": {
+      "attacker": "usa",
+      "defender": "japan"
+    },
+    "importance": 3,
+    "title": {
+      "en": "Firebombing of Tokyo",
+      "zh": "东京大轰炸"
+    },
+    "summary": {
+      "en": "279 American B-29s drop incendiary bombs on eastern Tokyo at night; more than 100,000 people die and over a million are left homeless.",
+      "zh": "279 架美国 B-29 夜间向东京东部投下燃烧弹；10 万多人死亡，100 多万人无家可归。"
+    },
+    "detail": {
+      "en": "The bombers came in low, and the fires spread through the wooden houses of the districts along the Sumida River, including Asakusa and Nihonbashi. People died of burns, suffocation, drowning in the canals and cold. Sixteen square miles of the city were burned out.",
+      "zh": "轰炸机低空飞行，大火在隅田川两岸木屋密集的街区蔓延，包括浅草和日本桥。人们被烧死、窒息、在运河里淹死或冻死。城市 16 平方英里被烧光。"
+    },
+    "sources": [
+      "S144"
+    ]
+  },
+  {
+    "id": "okinawa",
+    "t": "1945-04-01",
+    "until": "1945-06-22",
+    "at": [
+      127.75,
+      26.33
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "usa",
+      "defender": "japan"
+    },
+    "result": "attacker",
+    "importance": 2,
+    "title": {
+      "en": "Okinawa",
+      "zh": "冲绳战役"
+    },
+    "summary": {
+      "en": "The last great battle of the Pacific war; about 110,000 Japanese and Okinawan defenders, over 100,000 Okinawan civilians and 12,520 Americans die.",
+      "zh": "太平洋战争最后一场大战；约 11 万名日本和冲绳守军、10 万多名冲绳平民和 12,520 名美国人死亡。"
+    },
+    "detail": {
+      "en": "Estimates of civilian deaths reach a third of the island's pre-war population. Civilians were caught between the armies, and some were driven to suicide. Okinawa Prefecture's Cornerstone of Peace lists 242,225 names of people of all nations who died in the battle and the war in Okinawa (2024).",
+      "zh": "对平民死亡的估计高达全岛战前人口的三分之一。平民夹在两军之间，有些人被逼自杀。冲绳县的“和平基石”刻有 242,225 个名字，是在冲绳战役和冲绳的战争中死去的各国人员（2024）。"
+    },
+    "sources": [
+      "S148"
+    ]
+  },
+  {
+    "id": "berlin",
+    "t": "1945-04-16",
+    "until": "1945-05-02",
+    "at": [
+      13.4,
+      52.52
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "ussr",
+      "defender": "germany"
+    },
+    "forces": {
+      "ussr": 2500000
+    },
+    "result": "attacker",
+    "importance": 3,
+    "title": {
+      "en": "Battle of Berlin",
+      "zh": "柏林战役"
+    },
+    "summary": {
+      "en": "2.5 million Soviet troops attack Berlin; on 25 April American and Soviet soldiers meet on the Elbe at Torgau, Hitler kills himself on 30 April, and the city surrenders on 2 May.",
+      "zh": "250 万苏军进攻柏林；4 月 25 日美苏士兵在易北河畔托尔高会师，4 月 30 日希特勒自杀，5 月 2 日柏林投降。"
+    },
+    "sources": [
+      "S135"
+    ]
+  },
+  {
+    "id": "ve-day",
+    "t": "1945-05-08",
+    "at": [
+      13.53,
+      52.49
+    ],
+    "kind": "political",
+    "importance": 3,
+    "title": {
+      "en": "Germany surrenders (VE Day)",
+      "zh": "德国投降（欧战胜利日）"
+    },
+    "summary": {
+      "en": "Germany's unconditional surrender, signed at Reims on 7 May and ratified in Berlin, takes effect at 23.01 on 8 May; the war in Europe is over. In Moscow it is already 9 May, the date the Soviet Union celebrated.",
+      "zh": "德国 5 月 7 日在兰斯签署、在柏林批准的无条件投降，于 5 月 8 日 23 时 01 分生效，欧洲战争结束。莫斯科那时已是 5 月 9 日，苏联在这一天庆祝胜利。"
+    },
+    "sources": [
+      "S135"
+    ]
+  },
+  {
+    "id": "hiroshima",
+    "t": "1945-08-06",
+    "at": [
+      132.455,
+      34.395
+    ],
+    "kind": "bombing",
+    "sides": {
+      "attacker": "usa",
+      "defender": "japan"
+    },
+    "importance": 3,
+    "title": {
+      "en": "Atomic bombing of Hiroshima",
+      "zh": "广岛原子弹"
+    },
+    "summary": {
+      "en": "A US B-29 drops an atomic bomb on Hiroshima at 8.15 a.m.; about half the people within 1.2 km of the hypocentre die that day, and by the end of 1945 roughly 140,000 are dead.",
+      "zh": "上午 8 时 15 分，一架美国 B-29 在广岛投下原子弹；距爆心 1.2 公里内的人约有一半当天死亡，到 1945 年底死亡约 14 万人。"
+    },
+    "detail": {
+      "en": "An American report of 1946 counted 66,000 killed and 69,000 injured. Later estimates are higher because they include people who died of burns, injuries and radiation sickness in the following months: the City of Hiroshima gives roughly 140,000 by the end of December 1945, and the Japan–US Radiation Effects Research Foundation 90,000–166,000 within two to four months, in a city of 340,000–350,000. Exact numbers are unknown; records were destroyed and whole families died.",
+      "zh": "1946 年美方报告统计死亡 66,000 人、受伤 69,000 人。后来的估计更高，因为计入了此后几个月里死于烧伤、外伤和放射病的人：广岛市的数字是到 1945 年 12 月底约 14 万人，日美合办的放射线影响研究所估计两到四个月内死亡 9 万至 16.6 万人，而当时全市人口是 34 万至 35 万。确切数字无从得知：档案被毁，整户人家死去。"
+    },
+    "sources": [
+      "S152",
+      "S153",
+      "S155"
+    ]
+  },
+  {
+    "id": "manchuria-1945",
+    "t": "1945-08-09",
+    "until": "1945-08-20",
+    "at": [
+      126.63,
+      45.75
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "ussr",
+      "defender": "japan"
+    },
+    "forces": {
+      "ussr": 1577725
+    },
+    "result": "attacker",
+    "importance": 2,
+    "title": {
+      "en": "Soviet invasion of Manchuria",
+      "zh": "苏联进攻满洲"
+    },
+    "summary": {
+      "en": "The Soviet Union declares war on Japan and attacks Manchuria with about 1.58 million men on three fronts; the main operation is over within seven days.",
+      "zh": "苏联对日宣战，约 158 万苏军从三个方向进攻满洲；主要作战七天内结束。"
+    },
+    "detail": {
+      "en": "The Soviet Union had promised at Yalta to enter the war against Japan three months after Germany's defeat. Shortly after midnight on 9 August, Manchurian time, its armies crossed the border from Mongolia, the Soviet Far East and the Amur. Japanese and puppet forces numbered about 1.2 million, many of them newly raised. Soviet estimates give 84,000 Japanese killed and 594,000 taken prisoner, and Soviet losses of 8,000 killed and 24,000 wounded; fighting continued after Japan's announcement of 15 August, until about 20 August. Many of the prisoners were taken to labour camps in the Soviet Union.",
+      "zh": "苏联在雅尔塔承诺德国投降三个月后对日作战。8 月 9 日（满洲时间）午夜刚过，苏军从蒙古、苏联远东和黑龙江对岸越过边界。日本和傀儡军队约 120 万人，其中许多是新征召的。苏方估计日军阵亡 8.4 万、被俘 59.4 万，苏军阵亡 8,000、负伤 2.4 万；日本 8 月 15 日宣布投降后战斗仍在继续，直到 8 月 20 日前后。许多俘虏被押到苏联的劳动营。"
+    },
+    "sources": [
+      "S156"
+    ]
+  },
+  {
+    "id": "nagasaki",
+    "t": "1945-08-09",
+    "at": [
+      129.863,
+      32.773
+    ],
+    "kind": "bombing",
+    "sides": {
+      "attacker": "usa",
+      "defender": "japan"
+    },
+    "importance": 3,
+    "title": {
+      "en": "Atomic bombing of Nagasaki",
+      "zh": "长崎原子弹"
+    },
+    "summary": {
+      "en": "A second atomic bomb destroys the industrial valley of Nagasaki at 11.02 a.m.; by the end of December 1945, 73,884 people have died.",
+      "zh": "上午 11 时 02 分，第二颗原子弹摧毁长崎的工业谷地；到 1945 年 12 月底，73,884 人死亡。"
+    },
+    "detail": {
+      "en": "An American report of 1946 counted 39,000 killed and 25,000 injured; the City of Nagasaki's figure for the end of 1945 is 73,884 killed and 74,909 injured, in a city of about 240,000; the Radiation Effects Research Foundation estimates 60,000–80,000 deaths within two to four months. Survivors, called hibakusha, suffered radiation illness for years afterwards.",
+      "zh": "1946 年美方报告统计死亡 39,000 人、受伤 25,000 人；长崎市的数字是到 1945 年底死亡 73,884 人、受伤 74,909 人，当时全市约 24 万人；放射线影响研究所估计两到四个月内死亡 6 万至 8 万人。幸存者（被爆者）此后多年受放射病之苦。"
+    },
+    "sources": [
+      "S154",
+      "S153",
+      "S155"
+    ]
+  },
+  {
+    "id": "vj-day",
+    "t": "1945-08-15",
+    "at": [
+      139.752,
+      35.685
+    ],
+    "kind": "political",
+    "importance": 3,
+    "title": {
+      "en": "Japan announces surrender",
+      "zh": "日本宣布投降"
+    },
+    "summary": {
+      "en": "At noon Emperor Hirohito's recorded broadcast tells the Japanese people that Japan accepts the Allied terms; the word 'surrender' is not used.",
+      "zh": "正午，裕仁天皇的录音广播告诉日本国民，日本接受盟国的条件；广播里没有用“投降”一词。"
+    },
+    "detail": {
+      "en": "The rescript said the war situation had developed 'not necessarily to Japan's advantage' and that the enemy had begun to use 'a new and most cruel bomb'. 15 August is marked as the end of the war in Japan and Korea and as VJ Day in Britain; China commemorates its victory on 3 September, the day after the formal signing.",
+      "zh": "诏书说战局“未必好转”，敌方使用了“新的残虐炸弹”。在日本和朝鲜半岛，8 月 15 日被视为战争结束的日子，英国称之为对日胜利日；中国把正式签字的次日，9 月 3 日，定为胜利纪念日。"
+    },
+    "sources": [
+      "S158",
+      "S160"
+    ]
+  },
+  {
+    "id": "tokyo-bay",
+    "t": "1945-09-02",
+    "at": [
+      139.75,
+      35.35
+    ],
+    "kind": "surrender",
+    "sides": {
+      "attacker": "usa",
+      "defender": "japan"
+    },
+    "importance": 3,
+    "title": {
+      "en": "Surrender in Tokyo Bay",
+      "zh": "东京湾受降"
+    },
+    "summary": {
+      "en": "Japan's representatives sign the Instrument of Surrender aboard USS Missouri in Tokyo Bay; General MacArthur signs for the Allied Powers.",
+      "zh": "日本代表在东京湾的密苏里号上签署投降书；麦克阿瑟将军代表盟国签字。"
+    },
+    "detail": {
+      "en": "Foreign Minister Shigemitsu Mamoru and General Umezu Yoshijirō signed for Japan at 9.04 a.m.; representatives of the United States, China, the United Kingdom, the Soviet Union, Australia, Canada, France, the Netherlands and New Zealand signed after MacArthur. The Second World War, which in China had begun in 1937, was formally over.",
+      "zh": "上午 9 时 04 分，外务大臣重光葵和梅津美治郎大将代表日本签字；麦克阿瑟之后，美国、中国、英国、苏联、澳大利亚、加拿大、法国、荷兰、新西兰的代表依次签字。在中国从 1937 年打起的这场战争，至此正式结束。"
+    },
+    "sources": [
+      "S159"
+    ]
+  },
+  {
+    "id": "singapore-ceremony",
+    "t": "1945-09-12",
+    "at": [
+      103.8519,
+      1.2909
+    ],
+    "kind": "surrender",
+    "sides": {
+      "attacker": "uk",
+      "defender": "japan"
+    },
+    "importance": 3,
+    "title": {
+      "en": "Surrender ceremony, Singapore",
+      "zh": "新加坡受降仪式"
+    },
+    "summary": {
+      "en": "In the Municipal Building, Admiral Lord Louis Mountbatten accepts the surrender of all Japanese forces in Southeast Asia from General Itagaki Seishirō.",
+      "zh": "在市政大厦，蒙巴顿海军上将接受板垣征四郎大将代表东南亚全部日军投降。"
+    },
+    "detail": {
+      "en": "British troops had landed on 5 September, after the Japanese commanders signed the surrender of Singapore and Johore aboard HMS Sussex on 4 September; there were about 77,000 Japanese army, air force and naval personnel in Singapore and Johore. At the ceremony Itagaki signed eleven copies of the Instrument of Surrender, for the British, American, Chinese, French, Dutch, Australian, Indian and Japanese governments, the King, the Supreme Commander and the command's records. A victory parade followed on the Padang. Itagaki was later tried in Tokyo and hanged in 1948.",
+      "zh": "9 月 4 日日军指挥官在萨塞克斯号上签署新加坡和柔佛的投降书，英军 9 月 5 日登陆；当时新加坡和柔佛有日本陆海空军约 7.7 万人。仪式上，板垣签署了十一份投降书，分别给英国、美国、中国、法国、荷兰、澳大利亚、印度和日本政府，以及英王、最高统帅和司令部存档。随后在大草场举行胜利游行。板垣后来在东京受审，1948 年被处绞刑。"
+    },
+    "sources": [
+      "S161",
+      "S114",
+      "S165"
+    ]
+  },
+  {
+    "id": "sook-ching-trial-1947",
+    "t": "1947-03-10",
+    "until": "1947-04-02",
+    "at": [
+      103.8517,
+      1.2878
+    ],
+    "kind": "political",
+    "importance": 2,
+    "title": {
+      "en": "Sook Ching trial",
+      "zh": "肃清案审判"
+    },
+    "summary": {
+      "en": "A British military court in Singapore tries seven Japanese officers for the Sook Ching massacre; two are sentenced to death and five to life imprisonment.",
+      "zh": "英国军事法庭在新加坡审判七名与肃清屠杀有关的日本军官；两人被判死刑，五人终身监禁。"
+    },
+    "detail": {
+      "en": "The trial was held at the Victoria Memorial Hall from 10 March to 2 April 1947. All seven were found guilty; Lieutenant-General Kawamura Saburō, garrison commander of Singapore Town, and Lieutenant-Colonel Oishi Masayuki, the Kempeitai commander, were sentenced to death. It was one of 131 war-crimes trials held in Singapore between January 1946 and March 1948. The Japanese figure for the dead given at the trial, about 5,000, is far below most estimates.",
+      "zh": "审判 1947 年 3 月 10 日至 4 月 2 日在维多利亚纪念堂举行。七人全部有罪；新加坡市区警备司令河村参郎中将和宪兵队指挥官大石正幸中佐被判死刑。这是 1946 年 1 月至 1948 年 3 月间新加坡 131 场战犯审判之一。审判中日方提出的遇难人数约 5,000 人，远低于大多数估计。"
+    },
+    "sources": [
+      "S115",
+      "S96"
+    ]
+  },
+  {
+    "id": "site-alexandra-hospital",
+    "t": "1942-02-14",
+    "at": [
+      103.8023,
+      1.286
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Alexandra Hospital",
+      "zh": "亚历山大医院"
+    },
+    "summary": {
+      "en": "Where Japanese soldiers killed about 200 patients and staff on 14–15 February 1942, the day before the surrender.",
+      "zh": "1942 年 2 月 14 至 15 日，投降前一天，日军士兵在这里杀害了约 200 名病人和医护人员。"
+    },
+    "sources": [
+      "S38"
+    ]
+  },
+  {
+    "id": "site-ford-factory",
+    "t": "1942-02-15",
+    "at": [
+      103.7696,
+      1.3526
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Former Ford Factory",
+      "zh": "旧福特车厂"
+    },
+    "summary": {
+      "en": "Where Percival signed the surrender of Singapore on 15 February 1942; now a National Monument and museum.",
+      "zh": "1942 年 2 月 15 日白思华签字投降的地方；今天是国家古迹和展馆。"
+    },
+    "detail": {
+      "en": "The factory on Upper Bukit Timah Road had opened in October 1941 as Ford's first car assembly plant in Southeast Asia. Percival signed the unconditional surrender in its boardroom; during the occupation Nissan assembled military vehicles there.",
+      "zh": "这座位于武吉知马路上段的工厂 1941 年 10 月投产，是福特在东南亚的第一座汽车装配厂。白思华在厂里的会议室签署无条件投降书；日据时期日产公司在这里组装军用车辆。"
+    },
+    "sources": [
+      "S113",
+      "S43"
+    ]
+  },
+  {
+    "id": "site-kempeitai-ymca",
+    "t": "1942-02-15",
+    "at": [
+      103.8485,
+      1.2975
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Kempeitai East District Branch (old YMCA)",
+      "zh": "宪兵队东区分队（旧青年会大楼）"
+    },
+    "summary": {
+      "en": "The Japanese military police headquarters for eastern Singapore, where suspects were held and tortured, including after the Double Tenth.",
+      "zh": "日本宪兵在新加坡东区的总部，嫌疑人被关押、拷打的地方，双十事件后也是如此。"
+    },
+    "detail": {
+      "en": "The Art Deco YMCA building on Stamford Road was run by Lieutenant-Colonel Oishi Masayuki, sentenced to death in 1947 for the Sook Ching, with about 200 regular Kempeitai and 1,000 auxiliaries. Elizabeth Choy and her husband were held here. The building was pulled down in 1981; a marker stands at the site.",
+      "zh": "史丹福路上这座装饰艺术风格的青年会大楼，由大石正幸中佐指挥（1947 年他因肃清被判死刑）；手下有正规宪兵约 200 人、辅助宪兵 1,000 人。伊丽莎白·蔡和丈夫曾被关在这里。大楼于 1981 年拆除，原址立有史迹标志。"
+    },
+    "sources": [
+      "S112",
+      "S115"
+    ]
+  },
+  {
+    "id": "site-changi-prison",
+    "t": "1942-02-17",
+    "at": [
+      103.9696,
+      1.3564
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Changi Prison",
+      "zh": "樟宜监狱"
+    },
+    "summary": {
+      "en": "Civilian internment camp from February 1942, when more than 2,500 civilians and POWs were packed into it; scene of the Double Tenth raid.",
+      "zh": "1942 年 2 月起成为平民拘留营，2,500 多名平民和战俘被塞进这里；双十事件的发生地。"
+    },
+    "detail": {
+      "en": "European civilians were marched to Changi on 17 February 1942. Prisoners of war were held in the Changi area; some 87,000 passed through Changi during the war, and many were sent on to the Burma–Thailand Railway. The gate, part of the wall and two turrets of the 1936 prison survive as a National Monument.",
+      "zh": "1942 年 2 月 17 日，欧洲平民被押往樟宜。战俘关在樟宜一带；战争期间约有 87,000 名战俘经过樟宜，许多人又被送去修泰缅铁路。这座 1936 年建成的监狱，大门、一段围墙和两座塔楼保留了下来，是国家古迹。"
+    },
+    "sources": [
+      "S106",
+      "S102"
+    ]
+  },
+  {
+    "id": "site-changi-beach",
+    "t": "1942-02-20",
+    "at": [
+      103.9904,
+      1.3917
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Changi Beach massacre site",
+      "zh": "樟宜海滩屠杀遗址"
+    },
+    "summary": {
+      "en": "On 20 February 1942, 66 Chinese men were shot at the water's edge here by auxiliary military police firing squads during the Sook Ching.",
+      "zh": "1942 年 2 月 20 日，66 名华人男子在这里的水边被辅助宪兵行刑队枪杀，这是肃清的一部分。"
+    },
+    "sources": [
+      "S98"
+    ]
+  },
+  {
+    "id": "site-punggol-beach",
+    "t": "1942-02-28",
+    "at": [
+      103.9106,
+      1.4214
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Punggol Beach massacre site",
+      "zh": "榜鹅海滩屠杀遗址"
+    },
+    "summary": {
+      "en": "On 28 February 1942 some 400 Chinese civilians, victims of the Sook Ching, were killed on this north-eastern shore.",
+      "zh": "1942 年 2 月 28 日，约 400 名华人平民在这片东北海岸被杀，他们是肃清的受害者。"
+    },
+    "sources": [
+      "S99",
+      "S100"
+    ]
+  },
+  {
+    "id": "site-municipal-building",
+    "t": "1945-09-12",
+    "at": [
+      103.8519,
+      1.2909
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Municipal Building (City Hall)",
+      "zh": "市政大厦（旧市政厅）"
+    },
+    "summary": {
+      "en": "Where Mountbatten accepted the surrender of Japanese forces in Southeast Asia on 12 September 1945.",
+      "zh": "1945 年 9 月 12 日蒙巴顿在这里接受东南亚日军投降。"
+    },
+    "detail": {
+      "en": "In February 1942 the Japanese assembled European civilians and prisoners on the Padang in front of the building before marching them to Changi. After the war it was renamed City Hall (1951); Singapore's first elected cabinet was sworn in here in 1959, and the Proclamation of Malaysia was read from its steps on 16 September 1963.",
+      "zh": "1942 年 2 月，日军把欧洲平民和战俘集中在大厦前的大草场，再押往樟宜。战后大厦于 1951 年改称市政厅；1959 年新加坡第一届民选内阁在这里宣誓就职，1963 年 9 月 16 日在大厦台阶上宣读了马来西亚成立宣言。"
+    },
+    "sources": [
+      "S114"
     ]
   }
 ]
