@@ -69,12 +69,16 @@ export interface SceneTransition {
   instant: boolean;
 }
 
-/** docs/03 SceneProps: what a page hands to the scene island. */
-export interface SceneProps<D = unknown> {
+/**
+ * docs/03 SceneProps: what a page hands to the scene island. Engine data is
+ * NOT a prop: it is parsed at build time into `/topics/<slug>/data.json` and
+ * the host fetches it on the client (`dataUrl`) before mounting the view.
+ */
+export interface SceneProps {
   topic: TopicMeta;
   chapters: Chapter[];
-  /** Engine data, already parsed by the engine's zod schema at build time. */
-  data: D;
+  /** URL of the topic's engine data file (base-aware). */
+  dataUrl: string;
   locale: Locale;
   initialState?: Partial<SceneState>;
 }
@@ -100,8 +104,10 @@ export interface EngineDescriptor<E extends EngineExtension = EngineExtension, D
   /**
    * Default values for the engine extension fields, optionally overriding
    * common defaults (e.g. initial `layers`). Chapter states apply on top.
+   * Called twice: with `data` undefined at first render (server and client,
+   * before the data file has loaded), then again with the loaded data.
    */
-  defaults(topic: TopicMeta, data: D): E & Partial<SceneState>;
+  defaults(topic: TopicMeta, data: D | undefined): E & Partial<SceneState>;
   /**
    * Map a chapter's free-form `state` onto store fields. Common keys
    * (`layers`, `camera`, `theme`) are handled by core; return engine fields

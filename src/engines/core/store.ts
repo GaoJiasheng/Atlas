@@ -44,6 +44,12 @@ export interface SceneActions<E extends EngineExtension> {
   chapterTarget(id: string | null): SceneSnapshot<E>;
   /** Current serializable state (no actions, no transition). */
   snapshot(): SceneSnapshot<E>;
+  /**
+   * Replace the defaults once the engine data has loaded (they may depend on
+   * it) and reset to the current chapter's new target. Call before applying a
+   * deep link; instant.
+   */
+  rebase(defaults: SceneSnapshot<E>): void;
 }
 
 export type SceneStoreState<E extends EngineExtension = EngineExtension> = SceneSnapshot<E> & {
@@ -97,9 +103,10 @@ export function resolveChapterTargets<E extends EngineExtension>(
 const SERIALIZABLE_COMMON = ['chapter', 'layers', 'camera', 'theme'] as const;
 
 export function createSceneStore<E extends EngineExtension>(options: CreateSceneStoreOptions<E>): SceneStore<E> {
-  const { chapters, defaults } = options;
-  const targets = resolveChapterTargets(chapters, defaults, options.fromChapterState);
-  const keys = Array.from(new Set<string>([...SERIALIZABLE_COMMON, ...Object.keys(defaults)]));
+  const { chapters } = options;
+  let defaults = options.defaults;
+  let targets = resolveChapterTargets(chapters, defaults, options.fromChapterState);
+  let keys = Array.from(new Set<string>([...SERIALIZABLE_COMMON, ...Object.keys(defaults)]));
   const ids = chapters.map((c) => c.id);
 
   const targetFor = (id: string | null): SceneSnapshot<E> =>
@@ -192,6 +199,17 @@ export function createSceneStore<E extends EngineExtension>(options: CreateScene
 
     chapterTarget(id) {
       return targetFor(id);
+    },
+
+    rebase(next) {
+      defaults = next;
+      targets = resolveChapterTargets(chapters, defaults, options.fromChapterState);
+      keys = Array.from(new Set<string>([...SERIALIZABLE_COMMON, ...Object.keys(defaults)]));
+      const prev = get().transition;
+      set({
+        ...fullTarget(get().chapter),
+        transition: { id: prev.id + 1, reason: 'init', instant: true },
+      } as Partial<SceneStoreState<E>>);
     },
 
     snapshot() {

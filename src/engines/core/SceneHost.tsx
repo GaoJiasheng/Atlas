@@ -13,8 +13,10 @@
  * - handles the static chapter-body controls by delegation: `<FlyTo>`
  *   (`data-flyto` -> the engine's camera preset, same action as the VIEW
  *   buttons) and source superscripts (`data-source` -> SourcePopover)
- * - lazy-loads the engine view on the client only (engines may touch
- *   window / WebGL freely; the server renders a stage placeholder)
+ * - fetches the topic's engine data (`dataUrl`, a build-time static file, so it
+ *   is not embedded in the page HTML) and only then mounts the lazily loaded
+ *   engine view on the client (engines may touch window / WebGL freely; the
+ *   server renders a stage placeholder). `__atlas.ready` waits for both.
  */
 import {
   Component,
@@ -30,7 +32,7 @@ import {
   type ReactNode,
 } from 'react';
 import { useStore } from 'zustand';
-import type { Chapter, SceneProps, UrlEngineFields } from './types';
+import type { Chapter, SceneProps, SceneSnapshot, UrlEngineFields } from './types';
 import { createSceneStore } from './store';
 import { SceneContext, type SceneContextValue, type SlotName } from './context';
 import { decodeSceneState, startUrlSync, type UrlState } from './url-state';
@@ -48,7 +50,7 @@ import { ChapterBodies } from '../widgets/ChapterBodies';
 import { QuizCard } from '../widgets/QuizCard';
 import { SourcePopover, topicSources } from '../widgets/SourcePopover';
 
-export interface SceneHostProps extends SceneProps<unknown> {
+export interface SceneHostProps extends SceneProps {
   /**
    * All chapter bodies (Astro default slot): one `<article data-chapter-body=id>`
    * per chapter, MDX already rendered for this locale. See ChapterBodies.
@@ -100,30 +102,75 @@ function MountSignal({ onMount }: { onMount(): void }) {
   return null;
 }
 
+type DataState = { status: 'loading' } | { status: 'error' } | { status: 'ready'; data: unknown };
+
+/** One fetch per URL per page load (StrictMode / remounts reuse it; a failure is retried). */
+const dataRequests = new Map<string, Promise<unknown>>();
+function loadEngineData(url: string): Promise<unknown> {
+  let request = dataRequests.get(url);
+  if (!request) {
+    request = fetch(url).then((res) => {
+      if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
+      return res.json() as Promise<unknown>;
+    });
+    request.catch(() => dataRequests.delete(url));
+    dataRequests.set(url, request);
+  }
+  return request;
+}
+
 export default function SceneHost(props: SceneHostProps) {
-  const { topic, chapters, data, locale, path, indexHref } = props;
+  const { topic, chapters, dataUrl, locale, path, indexHref } = props;
   const engine = getEngine(topic.engine);
   const EngineView = getEngineView(topic.engine);
+
+  const defaultsFor = useCallback(
+    (data: unknown): SceneSnapshot => ({
+      chapter: null,
+      layers: [],
+      camera: null,
+      theme: undefined,
+      ...engine.defaults(topic, data),
+    }),
+    [engine, topic],
+  );
 
   const [store] = useState(() =>
     createSceneStore({
       chapters,
-      defaults: {
-        chapter: null,
-        layers: [],
-        camera: null,
-        theme: undefined,
-        ...engine.defaults(topic, data),
-      },
+      // Data-dependent defaults are filled in by `rebase` once the data file has loaded.
+      defaults: defaultsFor(undefined),
       fromChapterState: engine.fromChapterState,
       initialChapter: props.initialState?.chapter ?? null,
     }),
   );
+  const [dataState, setDataState] = useState<DataState>({ status: 'loading' });
+  const data = dataState.status === 'ready' ? dataState.data : undefined;
   const [hud] = useState(createHudStore);
 
   /* ---------------- client-only bits ---------------- */
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
+
+  // Engine data: fetched on the client, then the store is rebased onto data-dependent defaults.
+  useEffect(() => {
+    let cancelled = false;
+    loadEngineData(dataUrl).then(
+      (loaded) => {
+        if (cancelled) return;
+        store.getState().rebase(defaultsFor(loaded) as SceneSnapshot);
+        setDataState({ status: 'ready', data: loaded });
+      },
+      (error: unknown) => {
+        console.error('[atlas] engine data failed to load', error);
+        if (!cancelled) setDataState({ status: 'error' });
+      },
+    );
+    return () => {
+      cancelled = true;
+    };
+  }, [dataUrl, store, defaultsFor]);
+  const dataReady = dataState.status === 'ready';
 
   // Camera preset tracking (FREE CAMERA after user moves). Subscribes before the deep link below.
   const [camera] = useState(() => {
@@ -139,8 +186,9 @@ export default function SceneHost(props: SceneHostProps) {
   useEffect(() => camera.start(), [camera]);
   const actions = useMemo(() => createHudActions(hud, camera), [hud, camera]);
 
-  // Deep link in, then keep the URL in sync.
+  // Deep link in (after the data-dependent defaults are in place), then keep the URL in sync.
   useEffect(() => {
+    if (!dataReady) return;
     const decoded = decodeSceneState(window.location.search);
     const { t: time, highlight, part, view, explode, run, cutaway, ...common } = decoded;
     const engineFields: UrlEngineFields = { t: time, highlight, part, view, explode, run, cutaway };
@@ -151,7 +199,7 @@ export default function SceneHost(props: SceneHostProps) {
       baseline: (state) => store.getState().chapterTarget(state.chapter ?? null) as UrlState,
       subscribe: (listener) => store.subscribe(listener),
     });
-  }, [store, engine]);
+  }, [store, engine, dataReady]);
 
   // Theme: user override > scene (URL / chapter) > topic default.
   const sceneTheme = useStore(store, (s) => s.theme);
@@ -237,6 +285,10 @@ export default function SceneHost(props: SceneHostProps) {
     const promise = new Promise<void>((r) => (resolve = r));
     return { promise, resolve };
   });
+  // A failed data load never mounts the view; let `__atlas.ready` settle (it resolves false) instead of hanging.
+  useEffect(() => {
+    if (dataState.status === 'error') viewMounted.resolve();
+  }, [dataState.status, viewMounted]);
   const stageRef = useRef<HTMLDivElement>(null);
   useEffect(
     () =>
@@ -266,7 +318,9 @@ export default function SceneHost(props: SceneHostProps) {
       >
         <main id="atlas-main" className="atlas-stage-area">
           <div ref={stageRef} className="atlas-stage" aria-label={t(locale, 'scene.stage')} role="region">
-            {mounted ? (
+            {dataState.status === 'error' ? (
+              <StagePlaceholder label={t(locale, 'scene.error')} />
+            ) : mounted && dataReady ? (
               <StageErrorBoundary fallback={<StagePlaceholder label={t(locale, 'scene.error')} />}>
                 <Suspense fallback={<StagePlaceholder label={t(locale, 'scene.loading')} />}>
                   <EngineView topic={topic} chapters={chapters} data={data} locale={locale} />

@@ -115,13 +115,18 @@ tests-e2e/                    # Playwright：smoke.spec.ts, hud.spec.ts, hud-lay
 ### 数据怎么到引擎
 
 ```
-data/*.json ──(build: import.meta.glob)──> engineSchemas(engine, stage).data.parse()  ← zod，构建期
-           ──> SceneHost props.data（已解析、已校验，序列化进 HTML）
-           ──> <EngineView data={...}>（客户端直接用，不再引 zod）
+data/*.json ──(build: import.meta.glob)──> engineSchemas(engine, stage).data.parse()  ← zod，构建期（页面和 pnpm validate 都跑）
+           ──> src/pages/topics/[slug]/data.json.ts  ──> dist/topics/<slug>/data.json   （每主题一份静态文件，与语言无关）
+SceneHost props: topic / chapters / locale / dataUrl（小）
+           ──> 客户端 fetch(withBase('/topics/<slug>/data.json')) ──> store.rebase(engine.defaults(topic, data))
+           ──> <EngineView data={...}>（已解析，不再引 zod）
 ```
 
+- 数据**不**作为 island props 内联进页面 HTML（Astro 的 props 编码会把 JSON 体积翻倍：ww2 页面曾达 3 MB）。页面只在构建期跑一次 `topicEngineData()` 校验，数据本身由 `data.json` 端点输出。
+- SceneHost 先按空数据建 store（`engine.defaults(topic, undefined)`，**必须容忍 `data` 为 `undefined`**），数据到了再 `store.rebase()` 并应用 URL 深链、挂载引擎视图。数据加载期间舞台显示占位（`scene.loading`），失败显示 `scene.error`；`__atlas.ready` 在数据加载并且视图挂载之后才 resolve（失败时 resolve 为 `false`）。所以引擎 View 拿到的 `data` 始终是完整的。
 - 引擎客户端代码只能 `import type` schema 里的类型（`TimeSceneGeoData`、`SpaceSceneData` 等），**不要运行时 import `schema.ts`**，否则 zod 进包。
-- 大体量资源（Natural Earth GeoJSON、glb）放 `public/geo/`、`public/models/`，用 `withBase('/geo/xxx.json')` 在客户端 fetch；不要放进 `data/`（`data/` 会内联进页面 HTML）。
+- 大体量资源（Natural Earth GeoJSON、glb）放 `public/geo/`、`public/models/`，用 `withBase('/geo/xxx.json')` 在客户端 fetch。`data/` 现在也是运行时 fetch，不再进页面 HTML，但仍是 JSON 一次性解析进内存：别把底图类大文件放进去。
+- PWA：`topics/**/data.json` 不预缓存，走 CacheFirst 运行时缓存（`atlas-topic-data`）。
 
 ### 引擎由两部分组成
 
@@ -564,7 +569,7 @@ state:
 
 ## PWA、部署与 e2e（Phase 3）
 
-- **PWA**：`@vite-pwa/astro`（`astro.config.mjs`），`generateSW` + `autoUpdate`。预缓存构建出的页面、JS、CSS、图标；`/geo/*.json` 与 `/models/*.glb` **不**预缓存，走 CacheFirst 运行时缓存。scope / start_url 跟随 `ATLAS_BASE`。仅生产构建注册（BaseLayout 里 `import.meta.env.PROD`），`pnpm dev` 无 service worker。
+- **PWA**：`@vite-pwa/astro`（`astro.config.mjs`），`generateSW` + `autoUpdate`。预缓存构建出的页面、JS、CSS、图标；`/geo/*.json`、`/models/*.glb` 与 `/topics/*/data.json`（引擎数据）**不**预缓存，走 CacheFirst 运行时缓存（没有 `maximumFileSizeToCacheInBytes` 例外：预缓存里不该有大文件）。scope / start_url 跟随 `ATLAS_BASE`。仅生产构建注册（BaseLayout 里 `import.meta.env.PROD`），`pnpm dev` 无 service worker。
 - **图标**：`pnpm tsx scripts/build-icons.ts` 用 sharp 生成 `public/icons/*.png`（192 / 512 / maskable-512 / apple-touch-icon），产物入库。
 - **部署**：见 [07-deploy.md](07-deploy.md)。`public/_headers` 管缓存与安全头。
 - **e2e**：`tests-e2e/smoke.spec.ts`（冒烟）+ `tests-e2e/hud.spec.ts`（六尺寸 HUD 布局、键与按钮同步、`__atlas`），`playwright.config.ts` 用 `pnpm preview` 起 `dist/`，所以先 `pnpm build`。首次需 `pnpm exec playwright install chromium`。截图写入 `tests-e2e/__screenshots__/`（git 忽略，本地肉眼检查用）。

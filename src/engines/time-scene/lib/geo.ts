@@ -73,6 +73,37 @@ export function unwrapPathCentred(coords: readonly Pos[]): LngLat[] {
 }
 
 /**
+ * The world copy of `lng` (`lng`, `lng - 360`, `lng + 360`) whose projected x
+ * is closest to `centreX`. MapLibre draws every world copy, but `project()` of
+ * a position in a copy that is off-screen returns off-screen pixels; anything
+ * that follows a position (leader anchors, place names) must pick the copy the
+ * camera is looking at. `xOf` maps a longitude to its screen x.
+ */
+export function pickWorldCopy(lng: number, xOf: (lng: number) => number, centreX: number): number {
+  let best = lng;
+  let bestD = Math.abs(xOf(lng) - centreX);
+  for (const candidate of [lng - 360, lng + 360]) {
+    const d = Math.abs(xOf(candidate) - centreX);
+    if (d < bestD) {
+      best = candidate;
+      bestD = d;
+    }
+  }
+  return best;
+}
+
+/** Screen position of `at` in the world copy nearest `centreX`; also returns the longitude used. */
+export function projectNearCentre(
+  project: (p: LngLat) => { x: number; y: number },
+  at: LngLat,
+  centreX: number,
+): { x: number; y: number; lng: number } {
+  const lng = pickWorldCopy(at[0], (l) => project([l, at[1]]).x, centreX);
+  const p = project([lng, at[1]]);
+  return { x: p.x, y: p.y, lng };
+}
+
+/**
  * The part of the line from its start to `fraction` (0..1) of its length,
  * ending exactly at the interpolated head. Always returns >= 2 positions
  * when the input has >= 2 (a zero-length stub at fraction 0).

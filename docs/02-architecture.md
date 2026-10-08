@@ -184,6 +184,8 @@ Scene store 的可序列化部分双向绑定到 query string，用 `history.rep
 4. 底图、模型、字体全部本地资源，无运行时外部请求（Wikipedia 图片等外链一期不接）
 5. PWA：manifest + service worker 预缓存，离线能打开已访问主题
 6. 性能预算：单主题首屏 JS ≤ 300 KB gz；地图类主题（MapLibre 本身约 275 KB gz）放宽到 ≤ 400 KB gz；GeoJSON ≤ 2 MB，glb ≤ 10 MB
+   - 页面 HTML 只带小 props 和各章正文（ww2 约 100 KB）。引擎数据（`data/*.json` 解析合并后）由 `src/pages/topics/[slug]/data.json.ts` 输出成 `dist/topics/<slug>/data.json`，SceneHost 在客户端 fetch；不内联进 island props（Astro 的 props 编码会让 JSON 体积翻倍，曾让 ww2 页面 3 MB、预缓存 8.5 MB）。
+   - PWA 预缓存只放页面壳、JS、CSS、图标（约 2.7 MB，无体积例外）；`/geo`、`/models`、`/topics/*/data.json` 走 CacheFirst 运行时缓存。
 7. 不用 `localStorage` 存关键状态（家长模式、语言偏好可以）
 
 ## 质量门槛

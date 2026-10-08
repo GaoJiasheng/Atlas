@@ -61,13 +61,11 @@ export default defineConfig({
         ],
       },
       workbox: {
-        // App shell: pages, JS, CSS, icons. The big GeoJSON basemaps (/geo) and
-        // models (/models) are deliberately NOT precached; they are cached on first use below.
+        // App shell: pages, JS, CSS, icons. The big GeoJSON basemaps (/geo), models (/models)
+        // and per-topic engine data (/topics/<slug>/data.json, fetched by SceneHost) are
+        // deliberately NOT precached; they are cached on first use below.
         globPatterns: ['**/*.{html,js,css,svg,png,webmanifest}'],
-        globIgnores: ['geo/**', 'models/**'],
-        // Topic pages carry their engine data as island props (Astro roughly doubles
-        // JSON in that encoding): the ww2 page with its 12 control keyframes is ~3 MB.
-        maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
+        globIgnores: ['geo/**', 'models/**', 'topics/**/data.json'],
         // Deep links carry scene state in the query string (?ch=...&t=...).
         ignoreURLParametersMatching: [/.*/],
         navigateFallback: null,
@@ -79,6 +77,15 @@ export default defineConfig({
             options: {
               cacheName: 'atlas-geo',
               expiration: { maxEntries: 8, maxAgeSeconds: 60 * 60 * 24 * 30 },
+              cacheableResponse: { statuses: [200] },
+            },
+          },
+          {
+            urlPattern: /\/topics\/[^/]+\/data\.json$/,
+            handler: 'StaleWhileRevalidate',
+            options: {
+              cacheName: 'atlas-topic-data',
+              expiration: { maxEntries: 16, maxAgeSeconds: 60 * 60 * 24 * 30 },
               cacheableResponse: { statuses: [200] },
             },
           },

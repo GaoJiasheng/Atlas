@@ -16,6 +16,10 @@
 /models/*
   Cache-Control: public, max-age=604800
 
+# Topic data is content, not hashed: always revalidate (the service worker serves stale-while-revalidate).
+/topics/*
+  Cache-Control: public, max-age=0, must-revalidate
+
 # The service worker and manifest must always revalidate so updates roll out.
 /sw.js
   Cache-Control: no-cache

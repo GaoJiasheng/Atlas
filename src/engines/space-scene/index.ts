@@ -33,7 +33,7 @@ export const spaceSceneEngine = defineEngine<SpaceSceneExt, SpaceSceneData>({
       run: false,
       cutaway: 'none',
       // All groups visible by default.
-      layers: data.parts.groups.map((g) => g.id),
+      layers: data ? data.parts.groups.map((g) => g.id) : [],
     };
   },
   fromChapterState(state: ChapterState) {

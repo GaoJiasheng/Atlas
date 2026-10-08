@@ -97,4 +97,20 @@ describe('scene store', () => {
     store.getState().goToChapter('nope');
     expect(store.getState().chapter).toBe('one');
   });
+
+  it('rebase swaps in data-dependent defaults and keeps the current chapter', () => {
+    const store = createSceneStore<Ext>({
+      chapters: [chapter('a', 1, {}), chapter('b', 2, { highlight: ['y'] })],
+      defaults,
+    });
+    store.getState().goToChapter('b');
+    expect(store.getState().t).toBeNull();
+    store.getState().rebase({ ...defaults, t: '1939-09-01', layers: ['base'] });
+    const s = store.getState();
+    expect(s.chapter).toBe('b');
+    expect(s.t).toBe('1939-09-01');
+    expect(s.layers).toEqual(['base']);
+    expect(s.transition.instant).toBe(true);
+    expect(store.getState().chapterTarget('a').t).toBe('1939-09-01');
+  });
 });
