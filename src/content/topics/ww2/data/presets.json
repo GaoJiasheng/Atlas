@@ -1,0 +1,74 @@
+{
+  "presets": [
+    {
+      "id": "east-asia",
+      "label": {
+        "en": "East Asia",
+        "zh": "东亚"
+      },
+      "camera": {
+        "center": [
+          116,
+          31
+        ],
+        "zoom": 3.4
+      }
+    },
+    {
+      "id": "malaya",
+      "label": {
+        "en": "Malaya",
+        "zh": "马来亚"
+      },
+      "camera": {
+        "center": [
+          102.4,
+          4.2
+        ],
+        "zoom": 5.6
+      }
+    },
+    {
+      "id": "singapore-island",
+      "label": {
+        "en": "Singapore",
+        "zh": "新加坡岛"
+      },
+      "camera": {
+        "center": [
+          103.8,
+          1.36
+        ],
+        "zoom": 10
+      }
+    },
+    {
+      "id": "pacific",
+      "label": {
+        "en": "Pacific",
+        "zh": "太平洋"
+      },
+      "camera": {
+        "center": [
+          -178,
+          28
+        ],
+        "zoom": 2.3
+      }
+    },
+    {
+      "id": "europe",
+      "label": {
+        "en": "Europe",
+        "zh": "欧洲"
+      },
+      "camera": {
+        "center": [
+          15,
+          50
+        ],
+        "zoom": 3.4
+      }
+    }
+  ]
+}
