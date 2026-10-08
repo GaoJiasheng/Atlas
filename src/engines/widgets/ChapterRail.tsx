@@ -19,8 +19,10 @@ export function isChapterCollapsed(chapter: Chapter, readerLevel: Level, parentM
 }
 
 /**
- * Chapter list. Vertical in the left column on wide screens, a horizontal
- * strip on narrow ones. ← / → navigation is bound by the host (window-level).
+ * Chapter rail in the plate grammar: numbered hairline rows `01  Title  P3`,
+ * the current row marked with a signal-orange rule; a lock glyph on guarded
+ * chapters. Vertical in the HUD's left column; on phones a strip of number
+ * chips. ← / → navigation is bound by the host (window-level).
  */
 export function ChapterRail({ chapters, currentId, locale, readerLevel, parentMode, onSelect }: ChapterRailProps) {
   const listRef = useRef<HTMLOListElement>(null);
@@ -32,8 +34,11 @@ export function ChapterRail({ chapters, currentId, locale, readerLevel, parentMo
   }, [currentId]);
 
   return (
-    <nav aria-label={t(locale, 'scene.chapters')} className="atlas-rail">
-      <h2 className="atlas-rail__heading">{t(locale, 'scene.chapters')}</h2>
+    <nav aria-label={t(locale, 'scene.chapters')} className="atlas-rail" data-hud-panel="rail">
+      <h2 className="atlas-rail__heading">
+        <span>{t(locale, 'hud.chapters')}</span>
+        <span className="atlas-rail__count">{String(chapters.length).padStart(2, '0')}</span>
+      </h2>
       <ol ref={listRef} className="atlas-rail__list">
         {chapters.map((chapter, index) => {
           const collapsed = isChapterCollapsed(chapter, readerLevel, parentMode);
@@ -53,11 +58,11 @@ export function ChapterRail({ chapters, currentId, locale, readerLevel, parentMo
                   <span className="atlas-rail__num">{number}</span>
                   <span className="atlas-rail__text">
                     <span className="atlas-rail__title">
-                      <Icon name="lock" size={16} /> {t(locale, 'chapter.tooYoung')}
+                      <Icon name="lock" size={12} /> {t(locale, 'chapter.tooYoung')}
                     </span>
                     {hintOpen && <span className="atlas-rail__hint">{t(locale, 'chapter.tooYoungHint')}</span>}
                   </span>
-                  <span className="atlas-badge">{chapter.level}</span>
+                  <span className="atlas-rail__lvl">{chapter.level}</span>
                 </button>
               </li>
             );
@@ -74,14 +79,16 @@ export function ChapterRail({ chapters, currentId, locale, readerLevel, parentMo
               >
                 <span className="atlas-rail__num">{number}</span>
                 <span className="atlas-rail__text">
-                  <span className="atlas-rail__title">{tx(chapter.title, locale)}</span>
-                  {chapter.sensitive && (
-                    <span className="atlas-badge atlas-badge--warning">
-                      <Icon name="shield" size={12} /> {t(locale, 'chapter.guarded')}
-                    </span>
-                  )}
+                  <span className="atlas-rail__title">
+                    {tx(chapter.title, locale)}
+                    {chapter.sensitive && (
+                      <span className="atlas-rail__guard" title={t(locale, 'chapter.guarded')}>
+                        <Icon name="lock" size={11} label={t(locale, 'chapter.guarded')} />
+                      </span>
+                    )}
+                  </span>
                 </span>
-                <span className="atlas-badge">{chapter.level}</span>
+                <span className="atlas-rail__lvl">{chapter.level}</span>
               </button>
             </li>
           );

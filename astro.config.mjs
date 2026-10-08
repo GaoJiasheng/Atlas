@@ -50,9 +50,9 @@ export default defineConfig({
         start_url: pwaBase,
         scope: pwaBase,
         display: 'standalone',
-        // Paper theme: --bg (#f4ecd8) and --ink (#2b2117), see src/theme/tokens.css.
-        theme_color: '#f4ecd8',
-        background_color: '#f4ecd8',
+        // Paper theme: --paper (#e9e4d8) and --ink (#2a2824), see src/theme/tokens.css.
+        theme_color: '#e9e4d8',
+        background_color: '#e9e4d8',
         // Relative to the manifest, so they follow the base path.
         icons: [
           { src: 'icons/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },

@@ -10,7 +10,8 @@
  */
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { Chapter, EngineViewProps } from '../core/types';
-import { SceneSlot, useScene, useSceneStore, useT } from '../core/context';
+import { SceneSlot, useScene, useSceneControls, useSceneStore, useT } from '../core/context';
+import type { SceneControls } from '../core/controls';
 import { SceneLayerToggles, type LayerItem } from '../widgets/LayerToggles';
 import { Legend, type LegendItem } from '../widgets/Legend';
 import { isChapterCollapsed } from '../widgets/ChapterRail';
@@ -112,7 +113,9 @@ export default function TimeSceneView({ data, chapters, locale }: EngineViewProp
   useEffect(
     () =>
       store.subscribe((s, prev) => {
-        const transitioned = s.transition.id !== prev.transition.id;
+        // Camera presets and snaps only move the camera / finish eases: keep playback and time.
+        const transitioned =
+          s.transition.id !== prev.transition.id && s.transition.reason !== 'preset' && s.transition.reason !== 'snap';
         if (transitioned) {
           setPlaying(false);
           setSelected(null);
@@ -191,6 +194,38 @@ export default function TimeSceneView({ data, chapters, locale }: EngineViewProp
   useEffect(() => {
     setOverlayOpen((stageRef.current?.clientWidth ?? 0) >= OVERLAY_OPEN_MIN_WIDTH);
   }, []);
+
+  /* ---------- HUD controls (docs/08 §3): presets = chapter cameras, F = movements, L = labels, SPACE = play ---------- */
+  const movementsOn = layers.includes('movements');
+  const controls = useMemo<SceneControls>(() => {
+    const presets = chapters.flatMap((c, i) => {
+      const camera = store.getState().chapterTarget(c.id).camera;
+      return camera ? [{ id: c.id, label: String(i + 1).padStart(2, '0'), chapter: c.id, camera }] : [];
+    });
+    return {
+      presets: {
+        items: presets,
+        set: (id, { instant }) => {
+          const preset = presets.find((p) => p.id === id);
+          if (preset) store.getState().applyCameraPreset(preset.camera, { instant });
+        },
+      },
+      modes: {
+        items: [{ id: 'flow', key: 'f', label: t('time.mode.flow'), on: movementsOn, tone: 'hot' }],
+        set: (id, on) => {
+          if (id === 'flow' && store.getState().layers.includes('movements') !== on) store.getState().toggleLayer('movements');
+        },
+      },
+      labels: true,
+      pause: { paused: !playback.playing, set: (paused) => setPlaying(!paused) },
+      escape: () => {
+        if (!selected) return false;
+        closeEvent();
+        return true;
+      },
+    };
+  }, [chapters, store, movementsOn, playback.playing, setPlaying, selected, closeEvent, locale]); // `t` is bound to `locale`
+  useSceneControls(controls);
 
   const selectedEvent = selected ? geo.events.find((e) => e.id === selected) ?? null : null;
   const stopChapter = playback.stop ? chapters.find((c) => c.id === playback.stop?.id) : undefined;

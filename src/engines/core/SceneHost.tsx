@@ -1,11 +1,15 @@
 /**
  * SceneHost: the React island mounted by every topic page.
  *
- * - builds the scene store from the engine descriptor + chapters
+ * - builds the scene store from the engine descriptor + chapters, and the HUD
+ *   store engines register their controls with (controls.ts)
  * - applies deep links (URL -> store) and keeps the URL in sync (store -> URL)
  * - applies the theme (user override > scene > topic)
- * - renders the shared layout: top bar, ChapterRail, stage, InfoPanel,
- *   bottom bar, and exposes slots engines portal into (<SceneSlot>)
+ * - renders the technical-plate layout (docs/08 §2): the stage fills the
+ *   page, the HUD floats over it (top bar, title block + chapter rail, card +
+ *   overlay column, bottom dock with panels and the engine bar), the reading
+ *   InfoPanel is a docked column >= 1024px and a bottom sheet below
+ * - owns the keyboard (keys.ts), HUD scaling (`--k`) and `window.__atlas`
  * - lazy-loads the engine view on the client only (engines may touch
  *   window / WebGL freely; the server renders a stage placeholder)
  */
@@ -14,8 +18,11 @@ import {
   Suspense,
   useCallback,
   useEffect,
+  useLayoutEffect,
   useMemo,
+  useRef,
   useState,
+  type CSSProperties,
   type ErrorInfo,
   type ReactNode,
 } from 'react';
@@ -24,17 +31,19 @@ import type { Chapter, SceneProps, UrlEngineFields } from './types';
 import { createSceneStore } from './store';
 import { SceneContext, type SceneContextValue, type SlotName } from './context';
 import { decodeSceneState, startUrlSync, type UrlState } from './url-state';
+import { createHudActions, createHudStore, trackCamera } from './controls';
+import { useSceneKeys } from './keys';
+import { installTestApi } from './test-api';
+import { BottomPanels, CardFrame, TitleBlock, TopBar } from './Hud';
 import { getEngine, getEngineView } from '../registry';
-import { t, tx } from '../../i18n';
+import { t } from '../../i18n';
 import { applyTheme, resolveTheme } from '../../theme/theme';
-import { useLevel, useParentMode, useThemeOverride } from '../../lib/prefs';
+import { setThemeOverride, useLevel, useParentMode, useThemeOverride } from '../../lib/prefs';
 import { isAboveLevel } from '../../lib/levels';
 import { ChapterRail, isChapterCollapsed } from '../widgets/ChapterRail';
 import { InfoPanel } from '../widgets/InfoPanel';
 import { ChapterBodies } from '../widgets/ChapterBodies';
 import { QuizCard } from '../widgets/QuizCard';
-import { GlobalToggles } from '../widgets/GlobalToggles';
-import { Icon } from '../widgets/icons';
 
 export interface SceneHostProps extends SceneProps<unknown> {
   /**
@@ -48,9 +57,17 @@ export interface SceneHostProps extends SceneProps<unknown> {
   indexHref: string;
 }
 
-/** Elements that use ← / → themselves; chapter navigation keys are ignored inside them. */
-const OWN_ARROW_KEYS =
-  'input, select, textarea, [contenteditable="true"], [role="slider"], [role="radiogroup"], [role="tablist"], [data-keys="own"]';
+/** Below this width the HUD is not scaled (phone layout, docs/08 §2). */
+const PHONE_MAX = 759;
+
+/** HUD type never drops below this share of its 1080p size (`--kt`, legibility floor). */
+const HUD_TYPE_FLOOR = 0.8;
+
+/** `--k = clamp(min(W/1920, H/1080), .6, 1.6)`; 1 on phones. */
+export function hudScale(width: number, height: number): number {
+  if (width <= PHONE_MAX) return 1;
+  return Math.min(1.6, Math.max(0.6, Math.min(width / 1920, height / 1080)));
+}
 
 class StageErrorBoundary extends Component<{ fallback: ReactNode; children: ReactNode }, { failed: boolean }> {
   override state = { failed: false };
@@ -74,6 +91,12 @@ function StagePlaceholder({ label }: { label: string }) {
   );
 }
 
+/** Resolves the host's `mounted` promise once the engine view has committed. */
+function MountSignal({ onMount }: { onMount(): void }) {
+  useEffect(() => onMount(), [onMount]);
+  return null;
+}
+
 export default function SceneHost(props: SceneHostProps) {
   const { topic, chapters, data, locale, path, indexHref } = props;
   const engine = getEngine(topic.engine);
@@ -93,10 +116,25 @@ export default function SceneHost(props: SceneHostProps) {
       initialChapter: props.initialState?.chapter ?? null,
     }),
   );
+  const [hud] = useState(createHudStore);
 
   /* ---------------- client-only bits ---------------- */
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
+
+  // Camera preset tracking (FREE CAMERA after user moves). Subscribes before the deep link below.
+  const [camera] = useState(() => {
+    let tracker: ReturnType<typeof trackCamera> | null = null;
+    return {
+      start: () => {
+        tracker = trackCamera(hud, store, (ch) => store.getState().chapterTarget(ch).camera);
+        return () => tracker?.dispose();
+      },
+      suppress: (fn: () => void) => (tracker ? tracker.suppress(fn) : fn()),
+    };
+  });
+  useEffect(() => camera.start(), [camera]);
+  const actions = useMemo(() => createHudActions(hud, camera), [hud, camera]);
 
   // Deep link in, then keep the URL in sync.
   useEffect(() => {
@@ -125,6 +163,7 @@ export default function SceneHost(props: SceneHostProps) {
   const currentId = useStore(store, (s) => s.chapter);
   const index = chapters.findIndex((c) => c.id === currentId);
   const chapter: Chapter | null = chapters[index] ?? null;
+  const chapterNumber = Math.max(0, index) + 1;
 
   const canEnter = useCallback(
     (c: Chapter) => !isChapterCollapsed(c, readerLevel, parentMode),
@@ -132,79 +171,152 @@ export default function SceneHost(props: SceneHostProps) {
   );
   const hasPrev = chapters.slice(0, Math.max(0, index)).some(canEnter);
   const hasNext = chapters.slice(index + 1).some(canEnter);
-  const step = useCallback((delta: 1 | -1) => store.getState().stepChapter(delta, canEnter), [store, canEnter]);
+  const step = useCallback(
+    (delta: 1 | -1) => {
+      store.getState().stepChapter(delta, canEnter);
+    },
+    [store, canEnter],
+  );
 
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
-      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
-      const target = e.target instanceof Element ? e.target : null;
-      if (target?.closest(OWN_ARROW_KEYS)) return;
-      e.preventDefault();
-      step(e.key === 'ArrowRight' ? 1 : -1);
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [step]);
+  useSceneKeys(hud, actions, step);
+
+  /* ---------------- HUD: visibility, labels, scale ---------------- */
+  const hudOn = useStore(hud, (s) => s.hud);
+  const labelsOn = useStore(hud, (s) => s.labels);
+  const [k, setK] = useState(1);
+  useLayoutEffect(() => {
+    const update = () => setK(hudScale(window.innerWidth, window.innerHeight));
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+  const scaleStyle = {
+    '--k': String(k),
+    '--kt': String(Math.max(HUD_TYPE_FLOOR, k)),
+    '--kb': String(Math.max(1, k)),
+  } as CSSProperties;
+
+  const [sheetOpen, setSheetOpen] = useState(false);
 
   /* ---------------- slots ---------------- */
-  const [slots, setSlots] = useState<Partial<Record<SlotName, HTMLElement | null>>>({});
-  const slotRefs = useMemo(() => {
-    const make = (name: SlotName) => (el: HTMLElement | null) =>
-      setSlots((prev) => (prev[name] === el ? prev : { ...prev, [name]: el }));
-    return { bottomBar: make('bottomBar'), stageOverlay: make('stageOverlay'), inspector: make('inspector') };
+  const [slots, setSlots] = useState<Partial<Record<SlotName, Element | null>>>({});
+  const slotRef = useMemo(() => {
+    const cache = new Map<SlotName, (el: Element | null) => void>();
+    return (name: SlotName) => {
+      let ref = cache.get(name);
+      if (!ref) {
+        ref = (el: Element | null) => setSlots((prev) => (prev[name] === el ? prev : { ...prev, [name]: el }));
+        cache.set(name, ref);
+      }
+      return ref;
+    };
   }, []);
 
   const context = useMemo<SceneContextValue>(
-    () => ({ store, topic, chapters, locale, slots }),
-    [store, topic, chapters, locale, slots],
+    () => ({ store, hud, topic, chapters, locale, slots }),
+    [store, hud, topic, chapters, locale, slots],
+  );
+
+  /* ---------------- window.__atlas ---------------- */
+  const [viewMounted] = useState(() => {
+    let resolve: () => void = () => {};
+    const promise = new Promise<void>((r) => (resolve = r));
+    return { promise, resolve };
+  });
+  const stageRef = useRef<HTMLDivElement>(null);
+  useEffect(
+    () =>
+      installTestApi({
+        store,
+        hud,
+        actions,
+        chapterIds: chapters.map((c) => c.id),
+        mounted: viewMounted.promise,
+        stage: () => stageRef.current,
+        setTheme: (theme) => setThemeOverride(theme),
+      }),
+    [store, hud, actions, chapters, viewMounted],
   );
 
   const tooYoung = chapter ? !parentMode && isAboveLevel(chapter.level, readerLevel) : false;
 
   return (
     <SceneContext.Provider value={context}>
-      <div className="atlas-scene" data-engine={topic.engine} data-stage={topic.stage}>
-        <header className="atlas-topbar">
-          <a className="atlas-control atlas-control--ghost atlas-topbar__back" href={indexHref}>
-            <Icon name="arrow-left" />
-            <span className="atlas-control__label">{t(locale, 'nav.topics')}</span>
-          </a>
-          <div className="atlas-topbar__title">
-            <h1>{tx(topic.title, locale)}</h1>
-            <p>{tx(topic.subtitle, locale)}</p>
-          </div>
-          <GlobalToggles locale={locale} path={path} />
-        </header>
-
-        <aside className="atlas-scene__rail">
-          <ChapterRail
-            chapters={chapters}
-            currentId={currentId}
-            locale={locale}
-            readerLevel={readerLevel}
-            parentMode={parentMode}
-            onSelect={(id) => store.getState().goToChapter(id)}
-          />
-        </aside>
-
-        <main id="atlas-main" className="atlas-scene__main">
-          <div className="atlas-stage" aria-label={t(locale, 'scene.stage')} role="region">
+      <div
+        className="atlas-scene"
+        data-engine={topic.engine}
+        data-stage={topic.stage}
+        data-hud={hudOn ? 'on' : 'off'}
+        data-labels={labelsOn ? 'on' : 'off'}
+        data-sheet={sheetOpen ? 'open' : 'closed'}
+        style={scaleStyle}
+      >
+        <main id="atlas-main" className="atlas-stage-area">
+          <div ref={stageRef} className="atlas-stage" aria-label={t(locale, 'scene.stage')} role="region">
             {mounted ? (
               <StageErrorBoundary fallback={<StagePlaceholder label={t(locale, 'scene.error')} />}>
                 <Suspense fallback={<StagePlaceholder label={t(locale, 'scene.loading')} />}>
                   <EngineView topic={topic} chapters={chapters} data={data} locale={locale} />
+                  <MountSignal onMount={viewMounted.resolve} />
                 </Suspense>
               </StageErrorBoundary>
             ) : (
               <StagePlaceholder label={t(locale, 'scene.loading')} />
             )}
-            <div ref={slotRefs.stageOverlay} className="atlas-stage__overlay" />
           </div>
-          <div ref={slotRefs.bottomBar} className="atlas-bottombar" role="toolbar" aria-label={t(locale, 'scene.controls')} />
+          <svg ref={slotRef('leaders')} className="atlas-leaders hud-fade" aria-hidden="true" />
+          <div className="atlas-grain" aria-hidden="true" />
         </main>
 
-        <aside className="atlas-scene__panel">
+        <TopBar
+          topic={topic}
+          chapters={chapters}
+          chapter={currentId}
+          chapterNumber={chapterNumber}
+          locale={locale}
+          path={path}
+          indexHref={indexHref}
+          hud={hud}
+          actions={actions}
+        />
+
+        <div className="atlas-hud hud-fade">
+          <div className="atlas-hud__left">
+            <TitleBlock
+              topic={topic}
+              chapter={chapter}
+              chapterNumber={chapterNumber}
+              chapterCount={chapters.length}
+              locale={locale}
+              hud={hud}
+            />
+            <ChapterRail
+              chapters={chapters}
+              currentId={currentId}
+              locale={locale}
+              readerLevel={readerLevel}
+              parentMode={parentMode}
+              onSelect={(id) => store.getState().goToChapter(id)}
+            />
+          </div>
+          <div className="atlas-hud__right">
+            <CardFrame hud={hud} slotRef={slotRef} />
+            <div ref={slotRef('stageOverlay')} className="atlas-stage__overlay" data-hud-panel="overlay" />
+          </div>
+          <div className="atlas-hud__dock">
+            <div ref={slotRef('perf')} className="atlas-perf" data-hud-panel="perf" />
+            <BottomPanels hud={hud} slotRef={slotRef} locale={locale} />
+            <div
+              ref={slotRef('bottomBar')}
+              className="atlas-bottombar"
+              role="toolbar"
+              aria-label={t(locale, 'scene.controls')}
+              data-hud-panel="bar"
+            />
+          </div>
+        </div>
+
+        <aside className="atlas-reader hud-fade" data-hud-panel="reader">
           <InfoPanel
             chapter={chapter}
             index={Math.max(0, index)}
@@ -216,11 +328,17 @@ export default function SceneHost(props: SceneHostProps) {
             hasNext={hasNext}
             onPrev={() => step(-1)}
             onNext={() => step(1)}
+            expanded={sheetOpen}
+            onToggleExpanded={() => setSheetOpen((v) => !v)}
           >
-            <div ref={slotRefs.inspector} className="atlas-inspector" aria-label={t(locale, 'scene.details')} />
+            <div ref={slotRef('inspector')} className="atlas-inspector" aria-label={t(locale, 'scene.details')} />
             {chapter?.quiz.map((item, i) => <QuizCard key={`${chapter.id}-${i}`} item={item} locale={locale} />)}
           </InfoPanel>
         </aside>
+
+        <button type="button" className="atlas-hud-restore" onClick={() => actions.setHud(true)} tabIndex={hudOn ? -1 : 0}>
+          <kbd>H</kbd> {t(locale, 'hud.show')}
+        </button>
       </div>
     </SceneContext.Provider>
   );

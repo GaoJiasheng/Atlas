@@ -213,3 +213,8 @@
     display: none;
   }
 }
+
+/* Host LABELS switch (`L`, docs/08 §3). */
+.atlas-scene[data-labels="off"] .space-label-wrap {
+  display: none;
+}

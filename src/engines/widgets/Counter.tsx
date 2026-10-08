@@ -21,7 +21,8 @@ const NUMBER_LOCALE: Record<Locale, string> = { en: 'en-SG', zh: 'zh-CN' };
 
 /**
  * "One icon = N" quantity view (docs/02: casualties and troop numbers are
- * always shown this way, never as images). The last icon is partially filled.
+ * always shown this way, never as images). Icons are drawn in ink with the
+ * functional colour as fill; the last icon is partially filled.
  */
 export function Counter({ value, per, locale, label, icon = 'person', color = 'var(--ink)', maxIcons = 50 }: CounterProps) {
   const safePer = per > 0 ? per : 1;
@@ -38,11 +39,11 @@ export function Counter({ value, per, locale, label, icon = 'person', color = 'v
         {Array.from({ length: shown }, (_, i) => {
           const fill = !capped && i === shown - 1 && exact % 1 !== 0 ? exact % 1 : 1;
           return (
-            <span key={i} className="atlas-counter__icon" style={{ color: c }}>
+            <span key={i} className="atlas-counter__icon">
               <span className="atlas-counter__ghost">
                 <Icon name={icon} size={18} />
               </span>
-              <span className="atlas-counter__fill" style={{ width: `${fill * 100}%` }}>
+              <span className="atlas-counter__fill" style={{ width: `${fill * 100}%`, color: c }}>
                 <Icon name={icon} size={18} />
               </span>
             </span>

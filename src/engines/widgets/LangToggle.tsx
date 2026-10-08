@@ -8,13 +8,14 @@ export interface LangToggleProps {
   locale: Locale;
   /** Current pathname (incl. base) for the server-rendered href. */
   path: string;
+  variant?: 'site' | 'hud';
 }
 
 /**
  * Switch EN <-> 中文 on the same page, keeping the query string (scene state)
  * and hash. Works as a plain link without JS.
  */
-export function LangToggle({ locale, path }: LangToggleProps) {
+export function LangToggle({ locale, path, variant = 'site' }: LangToggleProps) {
   const target: Locale = locale === 'en' ? 'zh' : 'en';
 
   const onClick = (event: MouseEvent<HTMLAnchorElement>) => {
@@ -28,7 +29,7 @@ export function LangToggle({ locale, path }: LangToggleProps) {
 
   return (
     <a
-      className="atlas-control"
+      className={variant === 'hud' ? 'hud-btn hud-btn--lang' : 'atlas-control'}
       href={switchLocalePath(path, target)}
       hrefLang={target === 'zh' ? 'zh-Hans' : 'en'}
       lang={target === 'zh' ? 'zh-Hans' : 'en'}

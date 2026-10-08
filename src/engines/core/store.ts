@@ -33,6 +33,10 @@ export interface SceneActions<E extends EngineExtension> {
   toggleLayer(id: string): void;
   setLayers(ids: string[]): void;
   setCamera(camera: CameraState | null): void;
+  /** Camera preset: set `camera` and bump the transition (reason `preset`) so the stage flies there. */
+  applyCameraPreset(camera: CameraState, options?: { instant?: boolean }): void;
+  /** Bump an instant transition (reason `snap`): stages jump to the current state without easing. */
+  snap(): void;
   setTheme(theme: Theme | undefined): void;
   /** Apply a deep link: chapter target first, then overrides; instant. */
   hydrate(partial: Partial<SceneSnapshot<E>>): void;
@@ -156,6 +160,19 @@ export function createSceneStore<E extends EngineExtension>(options: CreateScene
 
     setCamera(camera) {
       set({ camera } as Partial<SceneStoreState<E>>);
+    },
+
+    applyCameraPreset(camera, opts) {
+      const prev = get().transition;
+      set({
+        camera,
+        transition: { id: prev.id + 1, reason: 'preset', instant: opts?.instant ?? false },
+      } as Partial<SceneStoreState<E>>);
+    },
+
+    snap() {
+      const prev = get().transition;
+      set({ transition: { id: prev.id + 1, reason: 'snap', instant: true } } as Partial<SceneStoreState<E>>);
     },
 
     setTheme(theme) {
