@@ -1,1 +1,513 @@
-[]
+[
+  {
+    "id": "mukden-1931",
+    "t": "1931-09-18",
+    "at": [
+      123.47,
+      41.84
+    ],
+    "kind": "political",
+    "importance": 2,
+    "title": {
+      "en": "Mukden Incident",
+      "zh": "九一八事变"
+    },
+    "summary": {
+      "en": "An explosion on the Japanese-run South Manchuria Railway near Mukden (Shenyang) is used as the pretext for Japan's occupation of north-east China.",
+      "zh": "沈阳附近日本经营的南满铁路发生爆炸，日本以此为借口占领中国东北。"
+    },
+    "detail": {
+      "en": "The post-war Tokyo tribunal found that officers of the Army General Staff and the Kwantung Army had planned the explosion in advance to justify occupying Manchuria. At the time Japan blamed Chinese troops. In 1932 Japan set up Manchukuo, a state under Japanese army control that the League of Nations' Lytton report refused to recognise. Since 2017 Chinese textbooks date the War of Resistance from this day.",
+      "zh": "战后东京审判认定，爆炸是日本陆军参谋本部和关东军军官事先策划的，目的是为占领东北制造借口；事变当时日方指称是中国军队所为。1932 年日本扶植成立“满洲国”，由日本军队控制，国际联盟的李顿报告拒绝承认。2017 年起，中国教材把抗日战争的起点定在这一天。"
+    },
+    "sources": [
+      "S1",
+      "S2",
+      "S16"
+    ]
+  },
+  {
+    "id": "marco-polo-bridge",
+    "t": "1937-07-07",
+    "at": [
+      116.21,
+      39.85
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "japan",
+      "defender": "china"
+    },
+    "result": "attacker",
+    "importance": 3,
+    "title": {
+      "en": "Marco Polo Bridge",
+      "zh": "卢沟桥事变"
+    },
+    "summary": {
+      "en": "Japanese and Chinese troops exchange fire near the Marco Polo Bridge outside Beiping; Japanese forces attack the walled town of Wanping, and the clash grows into full-scale war.",
+      "zh": "日军与中国军队在北平城外卢沟桥附近交火，日军进攻宛平城，冲突随后扩大为全面战争。"
+    },
+    "detail": {
+      "en": "After the night clash of 7 July neither government stepped back, and the fighting spread across north China and, in August, to Shanghai. Neither side declared war: Japan called it the 'China Incident', and China's formal declaration came only on 9 December 1941. The Tokyo tribunal treated 7 July 1937 as the start of the second phase of Japan's war in China.",
+      "zh": "7 月 7 日夜间交火后，两国政府都没有退让，战火蔓延到整个华北，8 月又烧到上海。双方都没有宣战：日本称之为“支那事变”，中国直到 1941 年 12 月 9 日才正式对日宣战。东京审判把 1937 年 7 月 7 日视为日本对华战争第二阶段的开始。"
+    },
+    "sources": [
+      "S3",
+      "S17"
+    ]
+  },
+  {
+    "id": "shanghai-1937",
+    "t": "1937-08-13",
+    "until": "1937-11-26",
+    "at": [
+      121.46,
+      31.26
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "japan",
+      "defender": "china"
+    },
+    "forces": {
+      "japan": 300000,
+      "china": 700000
+    },
+    "casualties": {
+      "japan": 42000,
+      "china": 187000
+    },
+    "result": "attacker",
+    "importance": 3,
+    "title": {
+      "en": "Battle of Shanghai",
+      "zh": "淞沪会战"
+    },
+    "summary": {
+      "en": "Three months of fighting in and around Shanghai, with about 700,000 Chinese and 300,000 Japanese troops committed; the city falls in November.",
+      "zh": "上海及周边三个月的战斗，中国先后投入约 70 万人，日本约 30 万人；11 月上海失守。"
+    },
+    "detail": {
+      "en": "13 August – 26 November 1937. Troops committed over the whole battle: about 700,000 Chinese and 300,000 Japanese (Wilson). A Chinese report of 5 November counted 187,200 Chinese killed and wounded; later estimates are higher (a Japanese estimate put Chinese losses near 250,000). Japanese official records give over 40,000 Japanese killed and wounded (42,202 up to 8 November, not counting sickness).",
+      "zh": "1937 年 8 月 13 日至 11 月 26 日。整场会战先后投入：中国约 70 万人，日本约 30 万人（Wilson）。中方 11 月 5 日的报告统计中国死伤 187,200 人，后来的估计更高（日方估计中国损失约 25 万）。日本官方记录日军死伤 4 万多人（截至 11 月 8 日为 42,202 人，不含病员）。"
+    },
+    "sources": [
+      "S4",
+      "S5",
+      "S6"
+    ]
+  },
+  {
+    "id": "nanjing",
+    "t": "1937-12-13",
+    "until": "1938-01",
+    "at": [
+      118.78,
+      32.05
+    ],
+    "kind": "massacre",
+    "importance": 3,
+    "title": {
+      "en": "Nanjing Massacre",
+      "zh": "南京大屠杀"
+    },
+    "summary": {
+      "en": "After taking Nanjing on 13 December 1937, Japanese troops kill prisoners of war and civilians and rape women and girls over about six weeks.",
+      "zh": "1937 年 12 月 13 日日军攻占南京后，在约六周里屠杀战俘和平民，强奸妇女。"
+    },
+    "detail": {
+      "en": "The International Military Tribunal for the Far East (1948) found that over 200,000 civilians and prisoners of war were killed in Nanjing and its vicinity in the first six weeks, that about 20,000 cases of rape occurred in the city in the first month, and noted that burial societies counted more than 155,000 bodies. The Nanjing War Crimes Tribunal (1947, judgment against Tani Hisao) found over 300,000 victims: more than 190,000 in mass killings and more than 150,000 bodies buried by charitable bodies. The Government of Japan states that the killing of non-combatants, looting and other acts cannot be denied, and that the number of victims is difficult to determine. Atlas lists both tribunal figures and does not choose between them.",
+      "zh": "远东国际军事法庭（1948）认定，最初六周内在南京及附近被杀害的平民和战俘超过 20 万人，第一个月城内发生约 2 万起强奸案，并指出慈善团体掩埋尸体超过 15.5 万具。南京国防部审判战犯军事法庭（1947 年谷寿夫案判决）认定被害者 30 万人以上：集体屠杀 19 万余人，慈善机关收埋尸体 15 万余具。日本政府的立场是：杀害非战斗人员、掠夺等行为无法否认，遇难人数难以确定。本书并列两个法庭的数字，不作取舍。"
+    },
+    "sources": [
+      "S7",
+      "S8",
+      "S9"
+    ]
+  },
+  {
+    "id": "wuhan-1938",
+    "t": "1938-06-11",
+    "until": "1938-10-27",
+    "at": [
+      114.3,
+      30.59
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "japan",
+      "defender": "china"
+    },
+    "casualties": {
+      "japan": 35500
+    },
+    "result": "attacker",
+    "importance": 2,
+    "title": {
+      "en": "Battle of Wuhan",
+      "zh": "武汉会战"
+    },
+    "summary": {
+      "en": "Japanese armies advance up the Yangtze and across the Dabie mountains; China's wartime centre Wuhan falls in late October 1938 and the government moves on to Chongqing.",
+      "zh": "日军沿长江而上并越过大别山，1938 年 10 月下旬中国战时中心武汉失守，国民政府继续西迁重庆。"
+    },
+    "detail": {
+      "en": "The 11th Army advanced along both banks of the Yangtze (Anqing, Jiujiang, Tianjiazhen) while the 2nd Army crossed the Dabie mountains to the north; Japanese troops entered Hankou on 25–27 October. The Japanese official history gives about 9,500 Japanese killed and 26,000 wounded, with illness counted separately. China assembled about 90 divisions; the 9th War Zone alone reported about 200,000 killed, wounded and missing for June–November. After Wuhan, Japan stopped large offensives and the war in central China settled into a stalemate.",
+      "zh": "第 11 军沿长江两岸推进（安庆、九江、田家镇），第 2 军从北面越过大别山；10 月 25 日至 27 日日军进入汉口。日本官方战史记录日军阵亡约 9,500 人、负伤约 2.6 万人，病员另计。中国为此集结了约 90 个师，仅第九战区就报告 6 月至 11 月死伤失踪约 20 万人。武汉失守后，日军停止大规模攻势，华中战局陷入相持。"
+    },
+    "sources": [
+      "S10",
+      "S11",
+      "S12"
+    ]
+  },
+  {
+    "id": "pearl-harbor",
+    "t": "1941-12-07",
+    "at": [
+      -157.95,
+      21.36
+    ],
+    "kind": "bombing",
+    "sides": {
+      "attacker": "japan",
+      "defender": "usa"
+    },
+    "casualties": {
+      "usa": 2400
+    },
+    "importance": 3,
+    "title": {
+      "en": "Pearl Harbor",
+      "zh": "珍珠港"
+    },
+    "summary": {
+      "en": "Japanese carrier aircraft attack the US Pacific Fleet at Pearl Harbor, Hawaii; 2,403 Americans are killed. The US declares war on Japan the next day.",
+      "zh": "日本航母舰载机袭击夏威夷珍珠港的美国太平洋舰队，2,403 名美国人死亡。次日美国对日宣战。"
+    },
+    "detail": {
+      "en": "Two waves of carrier aircraft struck between about 7.55 and 9.45 a.m. local time on Sunday 7 December (8 December in Asia). All eight battleships of the Pacific Fleet were sunk or put out of action, 188 aircraft were destroyed, and 2,403 US service personnel and civilians were killed and 1,178 wounded. Japan lost 29 aircraft and five midget submarines. The three US fleet carriers were not in harbour. The landing at Kota Bharu in Malaya had begun about 70 minutes earlier.",
+      "zh": "两波舰载机在夏威夷时间 12 月 7 日（星期日，亚洲是 12 月 8 日）上午约 7 时 55 分至 9 时 45 分发动攻击。太平洋舰队八艘战列舰全部被击沉或失去战斗力，188 架飞机被毁，美国军人和平民 2,403 人死亡、1,178 人受伤。日方损失飞机 29 架和五艘袖珍潜艇。美国三艘舰队航母当时不在港内。马来亚哥打巴鲁的登陆比这里早约 70 分钟。"
+    },
+    "sources": [
+      "S33",
+      "S25"
+    ]
+  },
+  {
+    "id": "kota-bharu",
+    "t": "1941-12-08",
+    "at": [
+      102.32,
+      6.17
+    ],
+    "kind": "landing",
+    "sides": {
+      "attacker": "japan",
+      "defender": "uk"
+    },
+    "forces": {
+      "japan": 5600
+    },
+    "result": "attacker",
+    "importance": 3,
+    "title": {
+      "en": "Kota Bharu landing",
+      "zh": "哥打巴鲁登陆"
+    },
+    "summary": {
+      "en": "Shortly after midnight on 8 December, about 5,600 Japanese troops land at Kota Bharu in north-east Malaya, about 70 minutes before the attack on Pearl Harbor.",
+      "zh": "12 月 8 日午夜过后，约 5,600 名日军在马来亚东北部的哥打巴鲁登陆，比珍珠港攻击早约 70 分钟。"
+    },
+    "detail": {
+      "en": "The landing was planned for 00:45 local time (17:15 GMT on 7 December), the Pearl Harbor attack for 18:25 GMT. The first flight at Kota Bharu was about 5,590 men of the 56th Infantry Regiment (Takumi Detachment); at the same time about 13,500 landed at Singora and 7,550 at Patani in southern Thailand. Indian troops of 8th Brigade held the beaches; Hudson bombers from the airfield damaged all three transports, and one sank the next day.",
+      "zh": "登陆计划在当地时间 0 时 45 分（格林尼治 7 日 17 时 15 分），珍珠港攻击在格林尼治 18 时 25 分。哥打巴鲁的第一批是第 56 联队（佗美支队）约 5,590 人；同时约 13,500 人在泰国南部宋卡、7,550 人在北大年登陆。守卫海滩的是印度第 8 旅；从机场起飞的哈德逊轰炸机击伤全部三艘运输船，其中一艘次日沉没。"
+    },
+    "sources": [
+      "S25",
+      "S26"
+    ]
+  },
+  {
+    "id": "force-z",
+    "t": "1941-12-10",
+    "at": [
+      104.47,
+      3.56
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "japan",
+      "defender": "uk"
+    },
+    "casualties": {
+      "uk": 840
+    },
+    "result": "attacker",
+    "importance": 2,
+    "title": {
+      "en": "Sinking of Prince of Wales and Repulse",
+      "zh": "威尔士亲王号与反击号沉没"
+    },
+    "summary": {
+      "en": "Japanese naval aircraft from Indochina sink the British battleship Prince of Wales and battlecruiser Repulse off Kuantan; about 840 men are killed.",
+      "zh": "从印度支那起飞的日本海军飞机在关丹外海击沉英国战列舰威尔士亲王号和战列巡洋舰反击号，约 840 人丧生。"
+    },
+    "detail": {
+      "en": "Force Z had sailed from Singapore to attack the landings in Thailand and Malaya without fighter cover. Repulse sank at 12.33 p.m. and Prince of Wales at 1.20 p.m. on 10 December. Of 1,612 aboard Prince of Wales 1,285 were rescued; of 1,309 aboard Repulse 796 were rescued — about 840 lost, including Admiral Tom Phillips. Japan lost three aircraft. With the US fleet hit at Pearl Harbor three days earlier, Japan held control of the seas around Malaya.",
+      "zh": "Z 舰队在没有战斗机掩护的情况下从新加坡出发，准备攻击泰国和马来亚的登陆部队。12 月 10 日中午 12 时 33 分反击号沉没，1 时 20 分威尔士亲王号沉没。威尔士亲王号 1,612 人中获救 1,285 人，反击号 1,309 人中获救 796 人，约 840 人丧生，包括菲利普斯海军上将。日方损失飞机 3 架。加上三天前美国舰队在珍珠港受重创，日本掌握了马来亚周边的制海权。"
+    },
+    "sources": [
+      "S30"
+    ]
+  },
+  {
+    "id": "hong-kong-1941",
+    "t": "1941-12-08",
+    "until": "1941-12-25",
+    "at": [
+      114.17,
+      22.28
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "japan",
+      "defender": "uk"
+    },
+    "casualties": {
+      "uk": 4400,
+      "japan": 2800
+    },
+    "result": "attacker",
+    "importance": 2,
+    "title": {
+      "en": "Battle of Hong Kong",
+      "zh": "香港保卫战"
+    },
+    "summary": {
+      "en": "Japanese forces attack the British colony of Hong Kong on 8 December; the garrison of British, Canadian, Indian and local troops surrenders on 25 December.",
+      "zh": "12 月 8 日日军进攻英国殖民地香港；由英国、加拿大、印度和本地部队组成的守军于 12 月 25 日投降。"
+    },
+    "detail": {
+      "en": "The fighting and the capitulation cost the garrison 11,848 men, most as prisoners; battle casualties were about 4,440, probably an underestimate. Official Japanese casualties were 675 killed and 2,079 wounded.",
+      "zh": "战斗和投降使守军损失 11,848 人，大多数成为战俘；战斗伤亡约 4,440 人，可能偏低。日本官方记录日军阵亡 675 人、负伤 2,079 人。"
+    },
+    "sources": [
+      "S32"
+    ]
+  },
+  {
+    "id": "singapore-air-raid-1941",
+    "t": "1941-12-08",
+    "at": [
+      103.85,
+      1.29
+    ],
+    "kind": "bombing",
+    "sides": {
+      "attacker": "japan",
+      "defender": "uk"
+    },
+    "importance": 1,
+    "title": {
+      "en": "First air raid on Singapore",
+      "zh": "新加坡首次空袭"
+    },
+    "summary": {
+      "en": "Shortly after 4 a.m. on 8 December, 17 Japanese bombers from Indochina attack Singapore's city and air bases; 61 people are killed and 133 injured.",
+      "zh": "12 月 8 日凌晨 4 时过后，17 架从印度支那起飞的日本轰炸机袭击新加坡市区和机场，61 人死亡、133 人受伤。"
+    },
+    "detail": {
+      "en": "The city was fully lit; the street lamps were not put out until the all-clear at 4.40 a.m. By January 1942 there were two to three raids a day. For January, Kirby gives some 600 civilians killed and 1,500 injured; a Singapore government account gives more than 1,000 killed. Both figures are listed.",
+      "zh": "空袭时全城灯火通明，路灯直到凌晨 4 时 40 分解除警报后才熄灭。到 1942 年 1 月，每天有两三次空袭。关于 1 月的伤亡，Kirby 记为平民约 600 人死亡、1,500 人受伤；新加坡政府的资料写 1,000 多人死亡。两者并列。"
+    },
+    "sources": [
+      "S37",
+      "S36"
+    ]
+  },
+  {
+    "id": "slim-river",
+    "t": "1942-01-07",
+    "at": [
+      101.4,
+      3.83
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "japan",
+      "defender": "uk"
+    },
+    "result": "attacker",
+    "importance": 1,
+    "title": {
+      "en": "Slim River",
+      "zh": "仕林河之战"
+    },
+    "summary": {
+      "en": "A Japanese tank column breaks through two Indian brigades at the Slim River; Kuala Lumpur falls four days later.",
+      "zh": "日军坦克纵队在仕林河突破两个印度旅的防线；四天后吉隆坡失守。"
+    },
+    "detail": {
+      "en": "Before dawn on 7 January a company of Japanese tanks with motorised infantry drove down the trunk road through the Trolak and Slim River positions and took the Slim River bridge intact. 12th Indian Brigade virtually ceased to exist and 28th Brigade was reduced to a third of its strength. Japanese troops entered Kuala Lumpur at 8 p.m. on 11 January.",
+      "zh": "1 月 7 日拂晓前，一个日军坦克中队带着摩托化步兵沿干道冲过特罗拉和仕林河阵地，完整夺下仕林河大桥。印度第 12 旅几乎不复存在，第 28 旅只剩三分之一。1 月 11 日晚 8 时日军进入吉隆坡。"
+    },
+    "sources": [
+      "S44"
+    ]
+  },
+  {
+    "id": "johor-crossing",
+    "t": "1942-02-08",
+    "until": "1942-02-09",
+    "at": [
+      103.7,
+      1.413
+    ],
+    "kind": "landing",
+    "sides": {
+      "attacker": "japan",
+      "defender": "australia"
+    },
+    "result": "attacker",
+    "importance": 3,
+    "title": {
+      "en": "Crossing of the Johor Strait",
+      "zh": "渡过柔佛海峡"
+    },
+    "summary": {
+      "en": "On the night of 8 February Japanese troops cross the Johor Strait and land on Singapore's north-west coast near Sarimbun, held by the 22nd Australian Brigade.",
+      "zh": "2 月 8 日夜，日军渡过柔佛海峡，在新加坡西北海岸沙林汶一带登陆，那里由澳大利亚第 22 旅防守。"
+    },
+    "detail": {
+      "en": "After days of shelling, landing craft of the Japanese 5th and 18th Divisions attacked the coast between Tanjong Buloh and Tanjong Murai at about 10.30 p.m.; the heaviest assaults were north of Pulau Sarimbun. The defended localities were far apart and the Japanese moved inland between them. The Causeway had been breached on 31 January when the last Commonwealth troops crossed to the island.",
+      "zh": "经过几天炮击，日军第 5、第 18 师团的登陆艇在晚上约 10 时 30 分进攻丹戎布罗至丹戎木莱一带海岸，最猛烈的进攻在沙林汶岛以北。守军据点相距很远，日军从中间穿插向内陆推进。1 月 31 日最后一批英联邦部队撤到岛上时，长堤已被炸开缺口。"
+    },
+    "sources": [
+      "S45"
+    ]
+  },
+  {
+    "id": "bukit-timah",
+    "t": "1942-02-10",
+    "until": "1942-02-11",
+    "at": [
+      103.776,
+      1.343
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "japan",
+      "defender": "uk"
+    },
+    "result": "attacker",
+    "importance": 2,
+    "title": {
+      "en": "Bukit Timah",
+      "zh": "武吉知马之战"
+    },
+    "summary": {
+      "en": "Japanese troops take Bukit Timah, the island's highest ground, in the centre of the island near the reservoirs that supply the city's water.",
+      "zh": "日军攻占全岛最高处武吉知马，那里位于岛中央，靠近供应全城用水的水库。"
+    },
+    "detail": {
+      "en": "Fighting along the Bukit Timah road lasted from 10 to 11 February. By the morning of 14 February breaks in the water mains from bombing and shelling were losing more than half the supply from the reservoirs, and the municipal water engineer estimated it might last 24 to 48 hours.",
+      "zh": "武吉知马路一带的战斗从 2 月 10 日持续到 11 日。到 2 月 14 日早上，轰炸和炮击打断的水管使水库一半以上的供水白白流失，市政水务工程师估计供水最多还能维持 24 到 48 小时。"
+    },
+    "sources": [
+      "S35"
+    ]
+  },
+  {
+    "id": "bukit-chandu",
+    "t": "1942-02-13",
+    "until": "1942-02-14",
+    "at": [
+      103.79,
+      1.278
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "japan",
+      "defender": "uk"
+    },
+    "result": "attacker",
+    "importance": 1,
+    "title": {
+      "en": "Bukit Chandu",
+      "zh": "武吉知卓之战"
+    },
+    "summary": {
+      "en": "The Malay Regiment defends Pasir Panjang ridge and Bukit Chandu (Opium Hill) against the Japanese 18th Division; Lieutenant Adnan Saidi is captured and killed.",
+      "zh": "马来军团在巴西班让山脊和武吉知卓（鸦片山）抵抗日军第 18 师团；阿南·赛迪中尉被俘后遇害。"
+    },
+    "detail": {
+      "en": "The Japanese 56th Infantry Regiment attacked the Pasir Panjang ridge on 13 February and took The Gap that evening. C Company of the 1st Battalion, Malay Regiment, held Bukit Chandu until the afternoon of 14 February. Second Lieutenant Adnan Saidi was captured and killed. The site is now the Reflections at Bukit Chandu museum.",
+      "zh": "日军第 56 联队 2 月 13 日进攻巴西班让山脊，当晚夺取峡口。马来军团第一营 C 连守住武吉知卓直到 14 日下午。阿南·赛迪少尉被俘后遇害。那里现在是“武吉知卓之忆”纪念馆。"
+    },
+    "sources": [
+      "S39",
+      "S35"
+    ]
+  },
+  {
+    "id": "alexandra-hospital",
+    "t": "1942-02-14",
+    "until": "1942-02-15",
+    "at": [
+      103.801,
+      1.287
+    ],
+    "kind": "massacre",
+    "importance": 2,
+    "title": {
+      "en": "Alexandra Hospital massacre",
+      "zh": "亚历山大医院屠杀"
+    },
+    "summary": {
+      "en": "Japanese soldiers enter the British Military Hospital at Alexandra and kill about 200 patients and staff over two days.",
+      "zh": "日军士兵闯入亚历山大英军医院，两天内杀害约 200 名病人和医护人员。"
+    },
+    "detail": {
+      "en": "On 14 February soldiers bayoneted 50 unarmed patients and medical staff in the wards, including a patient on the operating table. About 200 patients and staff were marched to another building, held overnight without water, and shot the next day. Kirby records the Japanese claim that the hospital had been used as an artillery position. The hospital had twice as many patients as beds.",
+      "zh": "2 月 14 日，日军士兵在病房里用刺刀杀死 50 名手无寸铁的病人和医护人员，其中包括手术台上的病人。约 200 名病人和医护人员被押到另一栋楼，关了一夜，没有水，次日被枪杀。Kirby 记录了日方的说法：医院曾被用作炮兵阵地。当时医院的病人是床位的两倍。"
+    },
+    "sources": [
+      "S38",
+      "S35"
+    ]
+  },
+  {
+    "id": "surrender-ford",
+    "t": "1942-02-15",
+    "at": [
+      103.7693,
+      1.3527
+    ],
+    "kind": "surrender",
+    "sides": {
+      "attacker": "japan",
+      "defender": "uk"
+    },
+    "importance": 3,
+    "title": {
+      "en": "Surrender at the Ford factory",
+      "zh": "福特车厂投降"
+    },
+    "summary": {
+      "en": "Lieutenant-General Percival signs the surrender of Singapore to Lieutenant-General Yamashita at the Ford factory, Bukit Timah; fighting stops at 8.30 p.m.",
+      "zh": "白思华中将在武吉知马福特车厂向山下奉文中将签字投降；晚上 8 时 30 分停火。"
+    },
+    "detail": {
+      "en": "Percival arrived at 5.15 p.m., Yamashita demanded unconditional surrender, and Percival signed at 6.10 p.m. The island garrison was about 85,000 men; over the 70-day campaign more than 130,000 British, Indian, Australian and local troops became prisoners. For Singapore it began three years and eight months of Japanese occupation; 15 February is now Total Defence Day.",
+      "zh": "白思华下午 5 时 15 分到达，山下要求无条件投降，6 时 10 分白思华签字。岛上守军约 85,000 人；整个 70 天的战役中，英国、印度、澳大利亚和本地部队共 13 万多人成为战俘。新加坡由此进入三年零八个月的日据时期；2 月 15 日现在是全面防卫日。"
+    },
+    "sources": [
+      "S35",
+      "S29",
+      "S31",
+      "S43"
+    ]
+  }
+]
