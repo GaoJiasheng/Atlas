@@ -14,6 +14,8 @@
 - 两套主题都要能跑：paper 是技术图版标准实现，cinema 是 dark plate 变体
 - 可点目标 ≥ 44px，关键操作不依赖 hover；快捷键与按钮共用 store
 - 交付物里无 TODO / placeholder / 死代码 / console 噪音
+- **地图类内容必须用真实数据**：版图、国界、前线、路线一律来自公开地理数据集（CShapes、Natural Earth、OpenHistoricalMap、UMN 历史国界等）或把真实出版地图 / 维基共享资源地图配准后描摹，每个关键帧在 `data/SOURCES.md` 记来源、许可、配准方法；禁止用几何图形、随手多边形凑合（Gavin 2026-10-08 明确要求，对所有主题生效）
+- 沉重的历史内容（屠杀、轰炸、集中营）要讲细节和数字，不回避；用词克制、尊重受害者，数字带来源
 
 ## 门槛（改完必须全绿）
 `pnpm check`、`pnpm validate`、`pnpm test`、`pnpm build`、`pnpm e2e`（先 build）；视觉改动另加 `pnpm shoot <topic> --layout --keys` 并看截图。
