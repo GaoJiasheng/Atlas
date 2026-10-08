@@ -15,6 +15,63 @@ export function lineLength(coords: readonly Pos[]): number {
   return total;
 }
 
+/** Great-circle length (km) of a [lng, lat] polyline. Longitudes may run past ±180 (unwrapped paths). */
+export function lineLengthKm(coords: readonly Pos[]): number {
+  const R = 6371.0088;
+  const rad = Math.PI / 180;
+  let total = 0;
+  for (let i = 1; i < coords.length; i++) {
+    const a = coords[i - 1]!;
+    const b = coords[i]!;
+    const dLat = ((b[1] ?? 0) - (a[1] ?? 0)) * rad;
+    const dLng = ((b[0] ?? 0) - (a[0] ?? 0)) * rad;
+    const h = Math.sin(dLat / 2) ** 2 + Math.cos((a[1] ?? 0) * rad) * Math.cos((b[1] ?? 0) * rad) * Math.sin(dLng / 2) ** 2;
+    total += 2 * R * Math.asin(Math.min(1, Math.sqrt(h)));
+  }
+  return total;
+}
+
+/**
+ * Make a path's longitudes continuous: where two consecutive points differ by
+ * more than 180° the second (and everything after it) is moved by a multiple of
+ * 360° so the segment takes the short way. Authors write the jump
+ * (`[179.5, 42]` then `[-179.5, 42]`, schema longitudes stay in -180..180);
+ * MapLibre draws longitudes past ±180 in the neighbouring world copy.
+ */
+export function unwrapPath(coords: readonly Pos[]): LngLat[] {
+  const out: LngLat[] = [];
+  let offset = 0;
+  let prev = coords[0]?.[0] ?? 0;
+  for (const p of coords) {
+    const lon = p[0] ?? 0;
+    const d = lon + offset - prev;
+    if (d > 180) offset -= 360 * Math.round(d / 360);
+    else if (d < -180) offset += 360 * Math.round(-d / 360);
+    const x = lon + offset;
+    out.push([x, p[1] ?? 0]);
+    prev = x;
+  }
+  return out;
+}
+
+/**
+ * `unwrapPath`, then the whole path is moved by a multiple of 360° so its
+ * centre lies in the main world copy (-180..180). One consistent copy for
+ * drawing, labels and the theatre fit.
+ */
+export function unwrapPathCentred(coords: readonly Pos[]): LngLat[] {
+  const out = unwrapPath(coords);
+  if (out.length === 0) return out;
+  let min = Infinity;
+  let max = -Infinity;
+  for (const p of out) {
+    if (p[0] < min) min = p[0];
+    if (p[0] > max) max = p[0];
+  }
+  const shift = -360 * Math.round((min + max) / 2 / 360);
+  return shift === 0 ? out : out.map((p) => [p[0] + shift, p[1]] as LngLat);
+}
+
 /**
  * The part of the line from its start to `fraction` (0..1) of its length,
  * ending exactly at the interpolated head. Always returns >= 2 positions

@@ -16,6 +16,10 @@ export interface MovementFrame {
   head: LngLat;
   /** Point a little behind the head, for the arrow direction. */
   tail: LngLat;
+  /** The movement is over and its finished line is kept (`linger`): `progress` is 1. */
+  lingering: boolean;
+  /** Line and arrowhead opacity: 1 while under way, LINGER_OPACITY while lingering, fading to 0 after `linger`. */
+  opacity: number;
 }
 
 export interface EventFrame {
@@ -41,6 +45,10 @@ export interface Frame {
 
 /** Share of the timeline span over which a newly joined entity glows. */
 export const FLASH_SHARE = 0.04;
+/** Opacity of a finished movement line kept by `linger`. */
+export const LINGER_OPACITY = 0.4;
+/** Share of the timeline span over which a lingering line fades out once `linger` has passed. */
+export const LINGER_FADE_SHARE = 0.02;
 
 export function frameAt(model: TimeModel, t: number, highlight: readonly string[] = []): Frame {
   const hl = new Set(highlight);
@@ -48,9 +56,18 @@ export function frameAt(model: TimeModel, t: number, highlight: readonly string[
 
   const movements: MovementFrame[] = [];
   for (const m of model.movements) {
-    if (t < m.start || t > m.end) continue;
-    const progress = progressAlong(m.start, m.end, t);
-    const path = m.movement.path.coordinates;
+    if (t < m.start) continue;
+    let opacity = 1;
+    if (t > m.end) {
+      // Over: hidden, unless `linger` keeps the finished line (faint, then a short fade).
+      if (m.linger === null) continue;
+      const fade = model.span * LINGER_FADE_SHARE;
+      if (t > m.linger + fade) continue;
+      opacity = t <= m.linger || fade <= 0 ? LINGER_OPACITY : LINGER_OPACITY * (1 - (t - m.linger) / fade);
+    }
+    const lingering = t > m.end;
+    const progress = lingering ? 1 : progressAlong(m.start, m.end, t);
+    const path = m.path;
     const coords = sliceLine(path, progress);
     const head = coords[coords.length - 1] ?? ([path[0]?.[0] ?? 0, path[0]?.[1] ?? 0] as LngLat);
     // Direction: a short way back along the path (mirrored from ahead at the very start).
@@ -59,7 +76,7 @@ export function frameAt(model: TimeModel, t: number, highlight: readonly string[
       behind[0] !== head[0] || behind[1] !== head[1]
         ? behind
         : mirror(head, pointAlong(path, Math.min(1, progress + 0.02)) ?? head);
-    movements.push({ m, progress, coords, head, tail });
+    movements.push({ m, progress, coords, head, tail, lingering, opacity });
   }
 
   const events: EventFrame[] = [];

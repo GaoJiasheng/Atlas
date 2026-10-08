@@ -5,6 +5,7 @@
  */
 import type { Bloc, ControlKeyframe, Entity, Movement, SceneEvent, TimeSceneGeoData } from '../schema';
 import { periodEnd, toNumber, type TimePoint, type TimeScale } from './time';
+import { unwrapPathCentred, type LngLat } from './geo';
 import { blocAtSpans, blocSpansN } from './bloc';
 import { decodeControl } from './control';
 
@@ -24,6 +25,10 @@ export interface MovementN {
   movement: Movement;
   start: number;
   end: number;
+  /** Path with continuous longitudes (may pass ±180; see `unwrapPathCentred`). Use this, not `movement.path`. */
+  path: LngLat[];
+  /** After `end`, the finished line stays (faint) until this time; null = hidden right after `end`. */
+  linger: number | null;
 }
 
 export interface EntityN {
@@ -75,7 +80,17 @@ export function buildTimeModel(
 
   const keyframes = decoded.map((keyframe) => ({ t: toNumber(keyframe.t), keyframe }));
   const movements = data.movements
-    .map((movement) => ({ movement, start: toNumber(movement.from), end: toNumber(movement.to) }))
+    .map((movement) => {
+      const end = toNumber(movement.to);
+      const linger = movement.linger !== undefined ? periodEnd(movement.linger) : Number.NaN;
+      return {
+        movement,
+        start: toNumber(movement.from),
+        end,
+        path: unwrapPathCentred(movement.path.coordinates),
+        linger: finite(linger) && linger > end ? linger : null,
+      };
+    })
     .filter((m) => finite(m.start) && finite(m.end));
 
   const points: number[] = [
@@ -133,7 +148,7 @@ export function buildTimeModel(
     entities,
     chapterNodes,
     maxStrength: Math.max(1, ...data.movements.map((m) => m.strength)),
-    bounds: dataBounds(data, keyframes),
+    bounds: dataBounds(data, keyframes, movements),
   };
 }
 
@@ -143,7 +158,7 @@ export function entityBlocAt(model: TimeModel, id: string, t: number): Bloc {
   return en ? blocAtSpans(en.spans, t) : 'neutral';
 }
 
-function dataBounds(data: TimeSceneGeoData, keyframes: readonly KeyframeN[]): [number, number, number, number] | null {
+function dataBounds(data: TimeSceneGeoData, keyframes: readonly KeyframeN[], movements: readonly MovementN[]): [number, number, number, number] | null {
   let w = Infinity;
   let s = Infinity;
   let e = -Infinity;
@@ -160,7 +175,7 @@ function dataBounds(data: TimeSceneGeoData, keyframes: readonly KeyframeN[]): [n
       const polys = f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.coordinates;
       for (const poly of polys) for (const ring of poly) ring.forEach(add);
     }
-  for (const m of data.movements) m.path.coordinates.forEach(add);
+  for (const m of movements) m.path.forEach(add);
   for (const ev of data.events) add(ev.at);
   return Number.isFinite(w) ? [w, s, e, n] : null;
 }

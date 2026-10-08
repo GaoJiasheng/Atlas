@@ -237,6 +237,11 @@ export const movementSchema = z
     holder: kebabId,
     /** Number of people involved; drives arrow width and Counter widgets. */
     strength: z.number().nonnegative(),
+    /**
+     * Keep the finished line (40% opacity, arrowhead at the end) until this
+     * date, then fade it out. Default: the line disappears right after `to`.
+     */
+    linger: timePoint.optional(),
     label: bilingual,
     kind: z.enum(MOVEMENT_KINDS),
   })
@@ -249,6 +254,16 @@ export const movementSchema = z
         path: ['to'],
         message: '`to` must be on the same time scale as `from` and not before it',
       });
+    }
+    if (m.linger !== undefined) {
+      const lc = compareTime(m.to, m.linger);
+      if (lc === null || lc >= 0) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ['linger'],
+          message: '`linger` must be on the same time scale as `to` and after it',
+        });
+      }
     }
   });
 export type Movement = z.output<typeof movementSchema>;
