@@ -246,8 +246,13 @@ export const timeChapterState = z
     /** Event / movement / entity ids to emphasise. */
     highlight: z.array(kebabId).optional(),
     theme: theme.optional(),
+    /** The child's question for this chapter (panel 02 QUESTION). */
+    question: bilingual.optional(),
+    /** One-sentence answer shown under the question. */
+    answer: bilingual.optional(),
   })
-  .strict();
+  .strict()
+  .refine((s) => !s.answer || s.question, { message: '`answer` needs a `question`', path: ['answer'] });
 export type TimeChapterState = z.output<typeof timeChapterState>;
 
 /* ------------------------------------------------------------------ */

@@ -11,6 +11,14 @@
  * Countries are an optional reference layer (borders + modern names), so they
  * are simplified harder (~2 km, 2 decimals) to stay inside the 2 MB GeoJSON
  * budget (docs/02). Run `pnpm tsx scripts/build-geo.ts` and commit the output.
+ *
+ * Antimeridian: world-atlas rings that cross ±180° jump from 180 to -180 in a
+ * single segment (Fiji, Chukotka, Wrangel Island, Antarctica). Planar
+ * renderers draw such a segment as a line across the whole world (the stray
+ * horizontal line on the TimeScene map). `unwrapRing` makes every ring
+ * longitude-continuous (|Δlon| ≤ 180, so a ring may extend past ±180; MapLibre
+ * wraps that into the neighbouring world copy) and closes rings that wind
+ * around a pole (Antarctica) along that pole.
  */
 import { readFileSync, writeFileSync, mkdirSync, statSync } from 'node:fs';
 import { createRequire } from 'node:module';
@@ -18,6 +26,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { feature } from 'topojson-client';
 import type { Feature, FeatureCollection, Geometry, MultiPolygon, Polygon, Position } from 'geojson';
+import { unwrapRing } from '../src/engines/time-scene/lib/geo';
 
 type Topology = Parameters<typeof feature>[0];
 type TopoObject = Parameters<typeof feature>[1];
@@ -78,9 +87,8 @@ function simplify(points: Position[], tolerance: number): Position[] {
 
 let tolerance = 0;
 
-/** Simplify, round positions and drop consecutive duplicates created by rounding. */
 function roundRing(input: Position[]): Position[] {
-  const ring = simplify(input, tolerance);
+  const ring = simplify(unwrapRing(input), tolerance);
   const out: Position[] = [];
   for (const p of ring) {
     const q = [round(p[0] ?? 0), round(p[1] ?? 0)];
@@ -138,7 +146,9 @@ function labelPoint(g: Polygon | MultiPolygon): { lx: number; ly: number; area: 
     total += s.area;
     if (s.area > best.area) best = s;
   }
-  return { lx: round(best.cx), ly: round(best.cy), area: total };
+  // Rings may extend past ±180 (see unwrapRing); labels go back into range.
+  const lx = ((((best.cx + 180) % 360) + 360) % 360) - 180;
+  return { lx: round(lx), ly: round(best.cy), area: total };
 }
 
 function write(name: string, fc: FeatureCollection): number {

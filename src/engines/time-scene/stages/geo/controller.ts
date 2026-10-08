@@ -4,6 +4,12 @@
  * (time). React only mounts/unmounts it (GeoStage.tsx); nothing here renders
  * through React, so scrubbing and playback never re-render the tree.
  *
+ * The map is drawn as an engineering plate (docs/08 §5): paper land, pale
+ * water, hairline coast / borders / 10° graticule, control areas as a faint
+ * bloc tint plus a 45° hatch, movements as thin flow lines with a small
+ * arrowhead, events as hollow rings with a dot, leader labels for what the
+ * chapter emphasises (leaders.ts) and a scale bar.
+ *
  * Loaded lazily (dynamic import) so MapLibre stays out of the View chunk.
  */
 import { Map as MlMap, Marker, type GeoJSONSource, type LayerSpecification, type StyleSpecification } from 'maplibre-gl';
@@ -14,15 +20,22 @@ import type { GeoCamera, Locale } from '../../../core/types';
 import { isGeoCamera } from '../../../core/camera';
 import { buildMapStyle } from '../../../../theme/map-style';
 import { readThemeTokens, resolveColorRef, type ThemeTokens } from '../../../../theme/theme';
-import { tx, withBase } from '../../../../i18n';
+import { t as translate, tx, withBase } from '../../../../i18n';
 import type { TimeSceneExt } from '../../index';
 import type { TimeModel } from '../../lib/model';
 import type { Playhead } from '../../lib/playhead';
 import { frameAt, type Frame } from '../../lib/frame';
-import { areaLabelPoint, type LngLat } from '../../lib/geo';
+import { areaLabelPoint, metresPerPixel, pointAlong, scaleBar, type LngLat } from '../../lib/geo';
+import { referencePair } from '../../lib/stats';
+import { formatTime } from '../../lib/format';
+import { createLeaders, intersects, type LeaderItem } from './leaders';
 
 export interface GeoControllerOptions {
   container: HTMLElement;
+  /** Layer over the map for leader placards (HTML). */
+  labelRoot: HTMLElement;
+  /** Scale bar element (bottom-left of the free stage band). */
+  scaleRoot: HTMLElement;
   store: SceneStore<TimeSceneExt>;
   playhead: Playhead;
   model: TimeModel;
@@ -32,6 +45,14 @@ export interface GeoControllerOptions {
 
 export interface GeoController {
   setLocale(locale: Locale): void;
+  /** Host `leaders` <svg> (slot); leader paths are drawn into it. */
+  setLeadersSvg(svg: SVGSVGElement | null): void;
+  setGraticule(on: boolean): void;
+  /** REFERENCE: outline the adjacent control keyframe in dashed ink (2 s fade). */
+  setReference(on: boolean, instant: boolean): void;
+  /** Camera that fits all topic data (the `theatre` preset). */
+  fitCamera(): GeoCamera | null;
+  stats(): { features: number; zoom: number };
   destroy(): void;
 }
 
@@ -44,40 +65,50 @@ const SRC = {
   next: 'ts-control-next',
   participation: 'ts-participation',
   countries: 'ts-countries',
+  graticule: 'ts-graticule',
+  reference: 'ts-reference',
   movements: 'ts-movements',
   events: 'ts-events',
 } as const;
 
 const LAYER = {
+  graticule: 'ts-graticule',
   prevFill: 'ts-control-prev-fill',
+  prevHatch: 'ts-control-prev-hatch',
   prevLine: 'ts-control-prev-line',
   nextFill: 'ts-control-next-fill',
+  nextHatch: 'ts-control-next-hatch',
   nextLine: 'ts-control-next-line',
   partFill: 'ts-participation-fill',
   partLine: 'ts-participation-line',
   borders: 'ts-borders',
-  moveGlow: 'ts-movements-glow',
+  reference: 'ts-reference-line',
+  moveTrail: 'ts-movements-trail',
   moveLine: 'ts-movements-line',
-  eventGlow: 'ts-events-glow',
-  events: 'ts-events',
+  eventRing: 'ts-events-ring',
+  eventDot: 'ts-events-dot',
 } as const;
 
 /** Scene layer id (LayerToggles) -> map layers it shows. `base` is always on. */
 const GROUPS: Record<string, string[]> = {
-  control: [LAYER.prevFill, LAYER.prevLine, LAYER.nextFill, LAYER.nextLine],
+  control: [LAYER.prevFill, LAYER.prevHatch, LAYER.prevLine, LAYER.nextFill, LAYER.nextHatch, LAYER.nextLine],
   participation: [LAYER.partFill, LAYER.partLine],
   borders: [LAYER.borders],
-  movements: [LAYER.moveGlow, LAYER.moveLine],
-  battles: [LAYER.eventGlow, LAYER.events],
+  movements: [LAYER.moveTrail, LAYER.moveLine],
+  battles: [LAYER.eventRing, LAYER.eventDot],
 };
-const GLOW_LAYERS: string[] = [LAYER.moveGlow, LAYER.eventGlow];
 
-const CONTROL_FILL = 0.42;
-const MAX_LABELS = 12;
+/** Bloc tint under the hatch (docs/08 §5: low saturation, ~.28). */
+const CONTROL_TINT = 0.28;
+const MAX_PLACE_LABELS = 12;
 const HIT_RADIUS = 22; // 44px hit box around events
 const PULSE_MS = 900;
 const FLY_MS = 2200;
+const REFERENCE_MS = 2000;
 const CAMERA_WRITE_DEBOUNCE = 250;
+/** Hatch tile in CSS px (one 45° line per tile). */
+const HATCH_PX = 7;
+const SCALE_MAX_PX = 120;
 
 /** Flowing dash: the classic stepped dasharray sequence (~12 fps). */
 const DASH_SEQUENCE: number[][] = [
@@ -100,46 +131,66 @@ const DASH_STEP_MS = 83;
 
 const EMPTY: FeatureCollection = { type: 'FeatureCollection', features: [] };
 
+/** 10° graticule as GeoJSON lines (meridians to ±80°, parallels −80…80). */
+function graticule(): FeatureCollection {
+  const features: Feature[] = [];
+  const line = (coordinates: LngLat[], major: boolean): Feature => ({
+    type: 'Feature',
+    properties: { major },
+    geometry: { type: 'LineString', coordinates },
+  });
+  for (let lon = -180; lon < 180; lon += 10) features.push(line([[lon, -80], [lon, 80]], lon === 0));
+  for (let lat = -80; lat <= 80; lat += 10) {
+    const coords: LngLat[] = [];
+    for (let lon = -180; lon <= 180; lon += 10) coords.push([lon, lat]);
+    features.push(line(coords, lat === 0));
+  }
+  return { type: 'FeatureCollection', features };
+}
+
 /* ------------------------------------------------------------------ */
 /* Style                                                               */
 /* ------------------------------------------------------------------ */
 
-function num(v: string | undefined, fallback: number): number {
-  const n = Number.parseFloat(v ?? '');
-  return Number.isFinite(n) ? n : fallback;
-}
-
 /** Data layers on top of the base map. Paint is token-driven; re-applied on theme change. */
 function dataLayers(tk: ThemeTokens): LayerSpecification[] {
-  const glow = num(tk['glow-strength'], 0);
-  const glowBlur = num(tk['glow-blur'], 0);
-  const controlFill = (source: string, id: string): LayerSpecification => ({
-    id,
-    type: 'fill',
-    source,
-    paint: { 'fill-color': ['get', 'color'], 'fill-opacity': 0 },
-  });
-  const controlLine = (source: string, id: string): LayerSpecification => ({
-    id,
-    type: 'line',
-    source,
-    layout: { 'line-join': 'round' },
-    paint: {
-      'line-color': ['get', 'color'],
-      'line-width': ['case', ['get', 'hl'], 3, 1.2],
-      'line-opacity': 0,
+  const ink = tk.ink || '#2a2824';
+  const control = (source: string, fill: string, hatch: string, line: string): LayerSpecification[] => [
+    { id: fill, type: 'fill', source, paint: { 'fill-color': ['get', 'color'], 'fill-opacity': 0, 'fill-antialias': false } },
+    { id: hatch, type: 'fill', source, paint: { 'fill-pattern': ['get', 'pattern'], 'fill-opacity': 0 } },
+    {
+      id: line,
+      type: 'line',
+      source,
+      layout: { 'line-join': 'round' },
+      paint: { 'line-color': ['get', 'color'], 'line-width': ['case', ['get', 'hl'], 2, 1], 'line-opacity': 0 },
     },
-  });
+  ];
   return [
-    controlFill(SRC.prev, LAYER.prevFill),
-    controlLine(SRC.prev, LAYER.prevLine),
-    controlFill(SRC.next, LAYER.nextFill),
-    controlLine(SRC.next, LAYER.nextLine),
+    {
+      id: LAYER.graticule,
+      type: 'line',
+      source: SRC.graticule,
+      paint: {
+        'line-color': ink,
+        'line-width': 0.5,
+        'line-opacity': ['case', ['get', 'major'], 0.4, 0.22],
+      },
+    },
+    {
+      id: LAYER.borders,
+      type: 'line',
+      source: SRC.countries,
+      layout: { visibility: 'none', 'line-join': 'round' },
+      paint: { 'line-color': ink, 'line-opacity': 0.4, 'line-width': ['interpolate', ['linear'], ['zoom'], 1, 0.4, 6, 0.9] },
+    },
+    ...control(SRC.prev, LAYER.prevFill, LAYER.prevHatch, LAYER.prevLine),
+    ...control(SRC.next, LAYER.nextFill, LAYER.nextHatch, LAYER.nextLine),
     {
       id: LAYER.partFill,
       type: 'fill',
       source: SRC.participation,
-      paint: { 'fill-color': ['get', 'color'], 'fill-opacity': ['*', 0.5, ['get', 'flash']] },
+      paint: { 'fill-color': ['get', 'color'], 'fill-opacity': ['*', 0.3, ['get', 'flash']] },
     },
     {
       id: LAYER.partLine,
@@ -148,28 +199,29 @@ function dataLayers(tk: ThemeTokens): LayerSpecification[] {
       layout: { 'line-join': 'round' },
       paint: {
         'line-color': ['get', 'color'],
-        'line-width': ['+', ['case', ['get', 'hl'], 3, 1.8], ['*', 3, ['get', 'flash']]],
+        'line-width': ['+', ['case', ['get', 'hl'], 1.6, 1], ['*', 2, ['get', 'flash']]],
         'line-opacity': 0.9,
       },
     },
     {
-      id: LAYER.borders,
+      id: LAYER.reference,
       type: 'line',
-      source: SRC.countries,
-      layout: { visibility: 'none', 'line-join': 'round' },
-      paint: { 'line-color': tk['ink-muted'] || '#65553f', 'line-opacity': 0.45, 'line-width': 0.8, 'line-dasharray': [3, 2] },
+      source: SRC.reference,
+      layout: { 'line-join': 'round' },
+      paint: {
+        'line-color': ink,
+        'line-width': 1.2,
+        'line-dasharray': [4, 3],
+        'line-opacity': 0,
+        'line-opacity-transition': { duration: REFERENCE_MS, delay: 0 },
+      },
     },
     {
-      id: LAYER.moveGlow,
+      id: LAYER.moveTrail,
       type: 'line',
       source: SRC.movements,
-      layout: { 'line-cap': 'round', 'line-join': 'round', visibility: glow > 0 ? 'visible' : 'none' },
-      paint: {
-        'line-color': tk.glow || 'transparent',
-        'line-width': ['*', 3, ['get', 'width']],
-        'line-blur': Math.max(2, glowBlur),
-        'line-opacity': 0.35 * glow,
-      },
+      layout: { 'line-cap': 'round', 'line-join': 'round' },
+      paint: { 'line-color': ['get', 'color'], 'line-width': ['get', 'width'], 'line-opacity': 0.3 },
     },
     {
       id: LAYER.moveLine,
@@ -183,31 +235,50 @@ function dataLayers(tk: ThemeTokens): LayerSpecification[] {
       },
     },
     {
-      id: LAYER.eventGlow,
-      type: 'circle',
-      source: SRC.events,
-      layout: { visibility: glow > 0 ? 'visible' : 'none' },
-      paint: {
-        'circle-color': tk.glow || 'transparent',
-        'circle-radius': ['*', 2.2, ['get', 'r']],
-        'circle-blur': 1,
-        'circle-opacity': ['*', 0.8 * glow, ['get', 'o']],
-      },
-    },
-    {
-      id: LAYER.events,
+      id: LAYER.eventRing,
       type: 'circle',
       source: SRC.events,
       paint: {
-        'circle-color': ['get', 'color'],
         'circle-radius': ['get', 'r'],
-        'circle-opacity': ['get', 'o'],
-        'circle-stroke-color': ['case', ['get', 'hl'], tk.ink || '#2b2117', tk.surface || '#fbf6ea'],
-        'circle-stroke-width': ['case', ['get', 'hl'], 3, 1.5],
+        'circle-color': tk.paper || '#e9e4d8',
+        'circle-opacity': ['*', 0.55, ['get', 'o']],
+        'circle-stroke-color': ['get', 'stroke'],
+        'circle-stroke-width': ['get', 'sw'],
         'circle-stroke-opacity': ['get', 'o'],
       },
     },
+    {
+      id: LAYER.eventDot,
+      type: 'circle',
+      source: SRC.events,
+      paint: {
+        'circle-radius': ['get', 'dot'],
+        'circle-color': ['get', 'color'],
+        'circle-opacity': ['get', 'o'],
+      },
+    },
   ];
+}
+
+/** A 45° hatch tile in `color` (transparent ground), for `fill-pattern`. */
+function hatchImage(color: string, pixelRatio: number): ImageData | null {
+  const size = Math.round(HATCH_PX * pixelRatio);
+  const canvas = document.createElement('canvas');
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return null;
+  ctx.strokeStyle = color;
+  ctx.globalAlpha = 0.6;
+  ctx.lineWidth = 0.8 * pixelRatio;
+  ctx.lineCap = 'square';
+  ctx.beginPath();
+  for (const k of [-size, 0, size]) {
+    ctx.moveTo(k, size);
+    ctx.lineTo(k + size, 0);
+  }
+  ctx.stroke();
+  return ctx.getImageData(0, 0, size, size);
 }
 
 /* ------------------------------------------------------------------ */
@@ -221,12 +292,16 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   const landUrl = withBase('/geo/land-50m.json');
   const countriesUrl = withBase('/geo/countries-50m.json');
   const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+  const pixelRatio = Math.min(3, Math.max(1, Math.round(window.devicePixelRatio || 1)));
+  const graticuleData = graticule();
+  let graticuleOn = true;
+  let referenceOn = false;
 
   const baseStyle = (tk: ThemeTokens) =>
     buildMapStyle({ sources: { land: landUrl }, tokens: tk, name: 'atlas-time-scene' }) as unknown as StyleSpecification;
 
   const style = baseStyle(tokens);
-  for (const id of Object.values(SRC)) style.sources[id] = { type: 'geojson', data: EMPTY };
+  for (const id of Object.values(SRC)) style.sources[id] = { type: 'geojson', data: id === SRC.graticule ? graticuleData : EMPTY };
   style.layers.push(...dataLayers(tokens));
 
   const initial = store.getState();
@@ -278,27 +353,36 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
 
   /* ---------- helpers ---------- */
   const source = (id: string) => map.getSource(id) as GeoJSONSource | undefined;
+  const tr = (key: Parameters<typeof translate>[1], vars?: Record<string, string | number>) => translate(locale, key, vars);
 
   const entityColor = (id: string): string => {
     const en = model.entities.get(id)?.entity;
     if (en?.color) return resolveColorRef(en.color, tokens) || tokens['accent-neutral'];
     return tokens[`accent-${en?.bloc ?? 'neutral'}` as 'accent-axis'] || tokens['accent-neutral'] || '#888';
   };
+  const hatchId = (entityId: string) => `ts-hatch-${entityId}`;
 
   const layersOn = () => new Set(store.getState().layers);
   const highlight = () => store.getState().highlight ?? [];
+
+  /* ---------- hatch patterns (one per entity, rebuilt on theme change) ---------- */
+  const applyHatches = () => {
+    for (const id of model.entities.keys()) {
+      const image = hatchImage(entityColor(id), pixelRatio);
+      if (!image) continue;
+      if (map.hasImage(hatchId(id))) map.updateImage(hatchId(id), image);
+      else map.addImage(hatchId(id), image, { pixelRatio });
+    }
+  };
 
   /* ---------- visibility ---------- */
   const applyVisibility = () => {
     if (!loaded) return;
     const on = layersOn();
-    const glow = num(tokens['glow-strength'], 0) > 0;
     for (const [group, ids] of Object.entries(GROUPS)) {
-      for (const id of ids) {
-        const visible = on.has(group) && (!GLOW_LAYERS.includes(id) || glow);
-        map.setLayoutProperty(id, 'visibility', visible ? 'visible' : 'none');
-      }
+      for (const id of ids) map.setLayoutProperty(id, 'visibility', on.has(group) ? 'visible' : 'none');
     }
+    map.setLayoutProperty(LAYER.graticule, 'visibility', graticuleOn ? 'visible' : 'none');
     if (on.has('borders')) void ensureCountries();
   };
 
@@ -330,13 +414,16 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   /* ---------- per-frame rendering (coalesced to one rAF) ---------- */
   let renderQueued = 0;
   const signatures: Record<string, string> = {};
+  const featureCounts: Record<string, number> = {};
   let lastFrame: Frame | null = null;
   let activeEvents: Set<string> | null = null;
 
   const setIfChanged = (id: string, sig: string, data: () => FeatureCollection) => {
     if (signatures[id] === sig) return;
     signatures[id] = sig;
-    source(id)?.setData(data());
+    const fc = data();
+    featureCounts[id] = fc.features.length;
+    source(id)?.setData(fc);
   };
 
   const controlFc = (index: number, hl: Set<string>): FeatureCollection => {
@@ -347,7 +434,12 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
       features: kf.features.features.map((f) => ({
         type: 'Feature',
         geometry: f.geometry,
-        properties: { holder: f.properties.holder, color: entityColor(f.properties.holder), hl: hl.has(f.properties.holder) },
+        properties: {
+          holder: f.properties.holder,
+          color: entityColor(f.properties.holder),
+          pattern: hatchId(f.properties.holder),
+          hl: hl.has(f.properties.holder),
+        },
       })),
     };
   };
@@ -365,6 +457,14 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     return byHolder;
   };
 
+  const entityAnchor = (features: Feature[] | undefined): LngLat | null => {
+    if (!features) return null;
+    const polys = features.flatMap((f) =>
+      f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.type === 'MultiPolygon' ? f.geometry.coordinates : [],
+    );
+    return areaLabelPoint(polys);
+  };
+
   const render = () => {
     renderQueued = 0;
     if (!loaded || destroyed) return;
@@ -372,18 +472,28 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     const hlList = highlight();
     const hl = new Set(hlList);
     const hlSig = hlList.join(',');
+    const themeSig = `${tokens['accent-axis']}|${tokens.ink}`;
     const frame = frameAt(model, t, hlList);
     lastFrame = frame;
     const on = layersOn();
 
-    /* control: two sources, crossfaded */
+    /* control: two sources, crossfaded (tint, hatch and edge together) */
     const { control } = frame;
-    setIfChanged(SRC.prev, `${control.prevIndex}|${hlSig}|${tokens['accent-axis']}`, () => controlFc(control.prevIndex, hl));
-    setIfChanged(SRC.next, `${control.nextIndex}|${hlSig}|${tokens['accent-axis']}`, () => controlFc(control.nextIndex, hl));
-    map.setPaintProperty(LAYER.prevFill, 'fill-opacity', CONTROL_FILL * control.prevOpacity);
-    map.setPaintProperty(LAYER.prevLine, 'line-opacity', 0.85 * control.prevOpacity);
-    map.setPaintProperty(LAYER.nextFill, 'fill-opacity', CONTROL_FILL * control.nextOpacity);
-    map.setPaintProperty(LAYER.nextLine, 'line-opacity', 0.85 * control.nextOpacity);
+    setIfChanged(SRC.prev, `${control.prevIndex}|${hlSig}|${themeSig}`, () => controlFc(control.prevIndex, hl));
+    setIfChanged(SRC.next, `${control.nextIndex}|${hlSig}|${themeSig}`, () => controlFc(control.nextIndex, hl));
+    const fade = (prefix: 'prev' | 'next', o: number) => {
+      map.setPaintProperty(prefix === 'prev' ? LAYER.prevFill : LAYER.nextFill, 'fill-opacity', CONTROL_TINT * o);
+      map.setPaintProperty(prefix === 'prev' ? LAYER.prevHatch : LAYER.nextHatch, 'fill-opacity', o);
+      map.setPaintProperty(prefix === 'prev' ? LAYER.prevLine : LAYER.nextLine, 'line-opacity', 0.9 * o);
+    };
+    fade('prev', control.prevOpacity);
+    fade('next', control.nextOpacity);
+
+    /* reference: the adjacent keyframe as dashed outlines */
+    const pair = referencePair(model, frame);
+    setIfChanged(SRC.reference, `${referenceOn ? pair?.other : -1}`, () =>
+      referenceOn && pair ? controlFc(pair.other, new Set()) : EMPTY,
+    );
 
     /* participation: entity areas light up on `joined` */
     const geometry = entityGeometry(frame);
@@ -399,43 +509,51 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     }
     const partSig = `${control.prevIndex}/${control.nextIndex}/${control.blend >= 0.5}|${frame.participation
       .map((p) => `${p.entityId}:${Math.round(p.flash * 50)}`)
-      .join(',')}|${hlSig}|${tokens['accent-axis']}`;
+      .join(',')}|${hlSig}|${themeSig}`;
     setIfChanged(SRC.participation, partSig, () => ({ type: 'FeatureCollection', features: partFeatures }));
 
-    /* movements */
+    /* movements: thin flow lines, width 1–3 px by strength */
     const moveFeatures: Feature[] = frame.movements
       .filter((mv) => mv.coords.length >= 2)
       .map((mv) => {
         const id = mv.m.movement.id;
-        const base = 2.5 + 4 * Math.sqrt(mv.m.movement.strength / model.maxStrength);
+        const base = 1 + 2 * Math.sqrt(mv.m.movement.strength / model.maxStrength);
         return {
           type: 'Feature',
           geometry: { type: 'LineString', coordinates: mv.coords },
-          properties: { id, color: entityColor(mv.m.movement.holder), width: hl.has(id) ? base + 2.5 : base },
+          properties: { id, color: entityColor(mv.m.movement.holder), width: hl.has(id) ? base + 0.8 : base },
         };
       });
     setIfChanged(
       SRC.movements,
-      `${frame.movements.map((m) => `${m.m.movement.id}:${m.progress.toFixed(4)}`).join(',')}|${hlSig}|${tokens['accent-axis']}`,
+      `${frame.movements.map((m) => `${m.m.movement.id}:${m.progress.toFixed(4)}`).join(',')}|${hlSig}|${themeSig}`,
       () => ({ type: 'FeatureCollection', features: moveFeatures }),
     );
     updateArrowheads(frame, on.has('movements'));
 
-    /* events */
+    /* events: hollow ring (hairline) + dot sized by importance */
     const eventFeatures: Feature[] = frame.events.map((ef) => {
       const e = model.events.find((x) => x.event.id === ef.id)!.event;
       const isHl = hl.has(e.id);
-      const r = (4 + 3 * e.importance) * (ef.active ? 1.15 : 1) + (isHl ? 2 : 0);
       const color = e.sides ? entityColor(e.sides.attacker) : tokens.ink;
+      const r = (3 + 2 * e.importance) * (ef.active ? 1.15 : 1) + (isHl ? 1.5 : 0);
       return {
         type: 'Feature',
         geometry: { type: 'Point', coordinates: e.at },
-        properties: { id: e.id, r, color, o: ef.active || isHl ? 1 : 0.55, hl: isHl },
+        properties: {
+          id: e.id,
+          r,
+          dot: 0.8 + 0.7 * e.importance,
+          color,
+          stroke: isHl ? tokens.signal : ef.active ? color : tokens['ink-2'],
+          sw: isHl ? 1.6 : 1,
+          o: ef.active || isHl ? 1 : 0.6,
+        },
       };
     });
     setIfChanged(
       SRC.events,
-      `${frame.events.map((e) => `${e.id}:${e.active ? 1 : 0}`).join(',')}|${hlSig}|${tokens.ink}|${tokens['accent-axis']}`,
+      `${frame.events.map((e) => `${e.id}:${e.active ? 1 : 0}`).join(',')}|${hlSig}|${themeSig}`,
       () => ({ type: 'FeatureCollection', features: eventFeatures }),
     );
 
@@ -447,6 +565,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     activeEvents = nowActive;
 
     updateDashAnimation(on.has('movements') && frame.movements.length > 0);
+    updateLeaders(frame);
     updateLabels();
   };
 
@@ -455,7 +574,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   };
   disposers.push(() => cancelAnimationFrame(renderQueued));
 
-  /* ---------- arrowheads (HTML markers at each movement's head) ---------- */
+  /* ---------- arrowheads (small HTML markers at each movement's head) ---------- */
   const arrows = new Map<string, Marker>();
   const updateArrowheads = (frame: Frame, visible: boolean) => {
     const seen = new Set<string>();
@@ -467,8 +586,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
         if (!marker) {
           const el = document.createElement('div');
           el.className = 'ts-arrowhead';
-          el.innerHTML =
-            '<svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="M10 2 L18 18 L10 13.5 L2 18 Z"/></svg>';
+          el.innerHTML = '<svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M6 0.8 L10.6 11 L6 8.4 L1.4 11 Z"/></svg>';
           marker = new Marker({ element: el, rotationAlignment: 'viewport', pitchAlignment: 'viewport' });
           marker.setLngLat(mv.head).addTo(map);
           arrows.set(id, marker);
@@ -526,7 +644,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     cancelAnimationFrame(dashRaf);
   });
 
-  /* ---------- pulses ---------- */
+  /* ---------- pulses: an expanding hairline ring ---------- */
   const pulseTimers = new Set<ReturnType<typeof setTimeout>>();
   const pulse = (id: string) => {
     const e = model.events.find((x) => x.event.id === id)?.event;
@@ -534,7 +652,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     const el = document.createElement('div');
     el.className = 'ts-pulse';
     el.style.setProperty('--ts-color', e.sides ? entityColor(e.sides.attacker) : tokens.ink);
-    el.style.setProperty('--ts-size', `${(4 + 3 * e.importance) * 2}px`);
+    el.style.setProperty('--ts-size', `${(3 + 2 * e.importance) * 2}px`);
     const marker = new Marker({ element: el }).setLngLat(e.at).addTo(map);
     const timer = setTimeout(() => {
       marker.remove();
@@ -546,20 +664,108 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     for (const timer of pulseTimers) clearTimeout(timer);
   });
 
-  /* ---------- labels (HTML markers, max 12, greedy de-overlap) ---------- */
+  /* ---------- leader labels (highlighted ids + events in their window) ---------- */
+  const scaleRoot = options.scaleRoot;
+  const leaders = createLeaders({
+    map,
+    container,
+    labelRoot: options.labelRoot,
+    onSelect: (id) => options.onSelectEvent(id),
+    onBand: (band) => {
+      // Scale bar: bottom-left of the stage above the dock, or right of the left column when that is in the way.
+      const box = { x: 28 * band.u, y: band.bottom - scaleRoot.offsetHeight, w: scaleRoot.offsetWidth, h: scaleRoot.offsetHeight };
+      if (band.obstacles.some((r) => intersects(box, r))) box.x = band.left;
+      scaleRoot.style.transform = `translate(${box.x.toFixed(1)}px, ${box.y.toFixed(1)}px)`;
+      // HUD panels moved, appeared or hid (H): place labels re-check what they collide with.
+      if (loaded) resolveLabelCollisions();
+    },
+  });
+  disposers.push(() => leaders.destroy());
+
+  const dateText = (from: Parameters<typeof formatTime>[0], to?: Parameters<typeof formatTime>[0]) => {
+    const a = formatTime(from, locale);
+    const s = to !== undefined ? `${a} – ${formatTime(to, locale)}` : a;
+    return locale === 'en' ? s.toLocaleUpperCase('en') : s;
+  };
+
+  const updateLeaders = (frame: Frame) => {
+    const on = layersOn();
+    const hl = new Set(highlight());
+    const items: LeaderItem[] = [];
+    if (on.has('battles')) {
+      for (const ef of frame.events) {
+        if (!ef.active && !hl.has(ef.id)) continue;
+        const e = model.events.find((x) => x.event.id === ef.id)!.event;
+        items.push({
+          key: `event:${e.id}`,
+          id: e.id,
+          kind: 'event',
+          en: e.title.en,
+          zh: e.title.zh,
+          note: tx(e.summary, locale),
+          date: dateText(e.t, e.until),
+          at: e.at,
+          pinned: hl.has(e.id),
+          clickable: true,
+        });
+      }
+    }
+    if (on.has('movements')) {
+      for (const m of model.movements) {
+        const mv = m.movement;
+        if (!hl.has(mv.id)) continue;
+        const live = frame.movements.find((x) => x.m === m);
+        const path = mv.path.coordinates;
+        // Middle of the drawn part, so the anchor never sits on the arrowhead.
+        const at = (live ? pointAlong(live.coords, 0.5) : playhead.get() > m.end ? pointAlong(path, 0.5) : path[0]) as LngLat | undefined;
+        if (!at) continue;
+        items.push({
+          key: `movement:${mv.id}`,
+          id: mv.id,
+          kind: 'movement',
+          en: mv.label.en,
+          zh: mv.label.zh,
+          note: `${tr(`time.movementKind.${mv.kind}`)} · ${tr('time.people', { n: mv.strength.toLocaleString(locale === 'zh' ? 'zh-CN' : 'en-SG') })}`,
+          date: dateText(mv.from, mv.to),
+          at: [at[0] ?? 0, at[1] ?? 0],
+          pinned: true,
+          clickable: false,
+        });
+      }
+    }
+    if (on.has('control') || on.has('participation')) {
+      const geometry = entityGeometry(frame);
+      for (const id of hl) {
+        const en = model.entities.get(id)?.entity;
+        const at = entityAnchor(geometry.get(id));
+        if (!en || !at) continue;
+        items.push({
+          key: `entity:${id}`,
+          id,
+          kind: 'entity',
+          en: en.name.en,
+          zh: en.name.zh,
+          note: `${tr(`time.bloc.${en.bloc}`)} · ${tr('time.joinedOn', { date: formatTime(en.joined, locale) })}`,
+          at,
+          pinned: true,
+          clickable: false,
+        });
+      }
+    }
+    leaders.setItems(items);
+  };
+
+  /* ---------- place labels (HTML markers, max 12, greedy de-overlap) ---------- */
   interface Label {
     key: string;
     text: string;
+    sub?: string;
     at: LngLat;
     priority: number;
-    pinned: boolean;
     color?: string;
-    kind: 'entity' | 'event' | 'movement' | 'place';
+    kind: 'entity' | 'place';
   }
   const labels = new Map<string, { marker: Marker; text: string; label: Label }>();
-  /** Collision priority: lower = wins. Highlighted labels beat everything, then events > entities > movements > places. */
-  const KIND_RANK: Record<Label['kind'], number> = { event: 1, entity: 2, movement: 3, place: 4 };
-  const rankOf = (l: Label) => (l.pinned ? 0 : KIND_RANK[l.kind]);
 
   const labelCandidates = (): Label[] => {
     const frame = lastFrame;
@@ -567,32 +773,14 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     const on = layersOn();
     const hl = new Set(highlight());
     const out: Label[] = [];
-
     if (on.has('control') || on.has('participation')) {
       for (const [holder, features] of entityGeometry(frame)) {
         const en = model.entities.get(holder)?.entity;
-        if (!en) continue;
-        const polys = features.flatMap((f) =>
-          f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.type === 'MultiPolygon' ? f.geometry.coordinates : [],
-        );
-        const at = areaLabelPoint(polys);
+        // Highlighted entities carry a leader label instead.
+        if (!en || hl.has(holder)) continue;
+        const at = entityAnchor(features);
         if (!at) continue;
-        out.push({ key: `entity:${holder}`, text: tx(en.name, locale), at, priority: 40, pinned: hl.has(holder), color: entityColor(holder), kind: 'entity' });
-      }
-    }
-    if (on.has('battles')) {
-      for (const ef of frame.events) {
-        const e = model.events.find((x) => x.event.id === ef.id)!.event;
-        if (!ef.active && !hl.has(e.id)) continue;
-        out.push({ key: `event:${e.id}`, text: tx(e.title, locale), at: e.at, priority: 50 + 5 * e.importance, pinned: hl.has(e.id), kind: 'event' });
-      }
-    }
-    if (on.has('movements')) {
-      for (const mv of frame.movements) {
-        const m = mv.m.movement;
-        // At the movement's origin: never under the moving arrowhead.
-        const origin = mv.coords[0] ?? mv.head;
-        out.push({ key: `movement:${m.id}`, text: tx(m.label, locale), at: origin, priority: 30, pinned: hl.has(m.id), color: entityColor(m.holder), kind: 'movement' });
+        out.push({ key: `entity:${holder}`, text: tx(en.name, locale), at, priority: 40, color: entityColor(holder), kind: 'entity' });
       }
     }
     if (on.has('borders') && countryLabels) {
@@ -600,7 +788,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
       const limit = Math.round(6 * 2 ** Math.max(0, zoom - 1));
       for (const c of countryLabels) {
         if (c.rank > limit) continue;
-        out.push({ key: `place:${c.name}`, text: c.name, at: c.at, priority: 10 - c.rank / 1000, pinned: false, kind: 'place' });
+        out.push({ key: `place:${c.name}`, text: c.name, at: c.at, priority: 10 - c.rank / 1000, kind: 'place' });
       }
     }
     return out;
@@ -611,13 +799,13 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     const bounds = map.getBounds();
     const { width, height } = container.getBoundingClientRect();
     const candidates = labelCandidates()
-      .filter((l) => l.pinned || bounds.contains(l.at))
-      .sort((a, b) => Number(b.pinned) - Number(a.pinned) || b.priority - a.priority);
+      .filter((l) => bounds.contains(l.at))
+      .sort((a, b) => b.priority - a.priority);
     const chosen: Label[] = [];
     for (const l of candidates) {
-      if (!l.pinned && chosen.length >= MAX_LABELS) break;
+      if (chosen.length >= MAX_PLACE_LABELS) break;
       const p = map.project(l.at);
-      if (!l.pinned && (p.x < 0 || p.y < 0 || p.x > width || p.y > height)) continue;
+      if (p.x < 0 || p.y < 0 || p.x > width || p.y > height) continue;
       chosen.push(l);
     }
     const keep = new Set(chosen.map((l) => l.key));
@@ -632,11 +820,8 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
       if (!entry) {
         const el = document.createElement('div');
         el.className = `ts-label ts-label--${l.kind}`;
-        const span = document.createElement('span');
-        el.appendChild(span);
-        // Events: below the dot. Movements: just below their origin.
-        const below = l.kind === 'event' || l.kind === 'movement';
-        const marker = new Marker({ element: el, anchor: below ? 'top' : 'center', offset: below ? [0, 12] : [0, 0] });
+        el.appendChild(document.createElement('span'));
+        const marker = new Marker({ element: el, anchor: 'center' });
         marker.setLngLat(l.at).addTo(map);
         entry = { marker, text: '', label: l };
         labels.set(l.key, entry);
@@ -648,7 +833,6 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
         entry.text = l.text;
       }
       entry.marker.setLngLat(l.at);
-      el.dataset.pinned = String(l.pinned);
       if (l.color) el.style.setProperty('--ts-color', l.color);
       else el.style.removeProperty('--ts-color');
     }
@@ -657,16 +841,14 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
 
   /**
    * Greedy collision pass over the placed markers, on real screen rects:
-   * walk labels in priority order (highlighted > events > entities >
-   * movements > places) and hide any label that overlaps (4px padding) one
-   * already kept. Highlighted labels are never hidden. At most ~12 rects.
+   * walk labels in priority order (entities > places) and hide any label
+   * that overlaps (4px padding) a HUD panel, a leader placard or one
+   * already kept.
    */
   const LABEL_PAD = 4;
   const resolveLabelCollisions = () => {
-    const ordered = [...labels.values()].sort(
-      (a, b) => rankOf(a.label) - rankOf(b.label) || b.label.priority - a.label.priority,
-    );
-    const occupied: DOMRect[] = [];
+    const ordered = [...labels.values()].sort((a, b) => b.label.priority - a.label.priority);
+    const occupied: DOMRect[] = leaders.rects();
     for (const entry of ordered) {
       const el = entry.marker.getElement();
       const rect = (el.firstElementChild ?? el).getBoundingClientRect();
@@ -679,10 +861,27 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
             rect.top < o.bottom + LABEL_PAD &&
             rect.bottom > o.top - LABEL_PAD,
         );
-      const hide = hit && !entry.label.pinned;
-      el.dataset.collided = String(hide);
-      if (!hide) occupied.push(rect);
+      el.dataset.collided = String(hit);
+      if (!hit) occupied.push(rect);
     }
+  };
+
+  /* ---------- scale bar (km, from zoom and latitude) ---------- */
+  const scaleBarEl = scaleRoot.querySelector('svg');
+  const scaleText = scaleRoot.querySelector('span');
+  const updateScale = () => {
+    const kt = Number.parseFloat(getComputedStyle(scaleRoot).getPropertyValue('--kt')) || 1;
+    const { px, label } = scaleBar(metresPerPixel(map.getZoom(), map.getCenter().lat), SCALE_MAX_PX * kt);
+    if (!scaleBarEl || !scaleText || !(px > 0)) return;
+    const w = Math.round(px);
+    const half = Math.round(w / 2);
+    scaleBarEl.setAttribute('width', String(w + 2));
+    scaleBarEl.setAttribute('viewBox', `-1 0 ${w + 2} 8`);
+    scaleBarEl.innerHTML =
+      `<rect x="0" y="3" width="${half}" height="3" class="ts-scale__fill"/>` +
+      `<rect x="${half}" y="3" width="${w - half}" height="3" class="ts-scale__open"/>` +
+      `<path d="M0 0V8M${half} 2V7M${w} 0V8" class="ts-scale__tick"/>`;
+    scaleText.textContent = label.toLocaleUpperCase('en');
   };
 
   /* ---------- clicks on events (44px hit box) ---------- */
@@ -694,7 +893,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
         [x - HIT_RADIUS, y - HIT_RADIUS],
         [x + HIT_RADIUS, y + HIT_RADIUS],
       ],
-      { layers: [LAYER.events] },
+      { layers: [LAYER.eventRing] },
     );
     let best: { id: string; d: number } | null = null;
     for (const f of hits) {
@@ -720,7 +919,11 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   map.on('movestart', (e) => {
     userGesture = Boolean((e as { originalEvent?: Event }).originalEvent);
   });
-  map.on('move', reorientArrows);
+  map.on('move', () => {
+    reorientArrows();
+    updateScale();
+  });
+  map.on('render', () => leaders.update());
   map.on('moveend', (e) => {
     reorientArrows();
     updateLabels();
@@ -759,11 +962,13 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   /* ---------- theme ---------- */
   const applyTheme = () => {
     tokens = readThemeTokens();
+    applyHatches();
     const next = baseStyle(tokens);
     for (const layer of [...next.layers, ...dataLayers(tokens)]) {
       if (!map.getLayer(layer.id) || !('paint' in layer) || !layer.paint) continue;
       for (const [key, value] of Object.entries(layer.paint)) {
-        // Opacity of control layers and the dash are animated; render() re-applies them.
+        // Animated opacities (control crossfade, reference fade) and the dash are re-applied by render().
+        if (layer.id === LAYER.reference && key.startsWith('line-opacity')) continue;
         map.setPaintProperty(layer.id, key, value);
       }
     }
@@ -783,6 +988,8 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     loaded = true;
     // The theme may have changed while the style was loading.
     applyTheme();
+    updateScale();
+    leaders.relayout();
     const s = store.getState();
     if (isGeoCamera(s.camera)) applyCamera(s.camera, true);
   });
@@ -792,7 +999,53 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
       if (next === locale) return;
       locale = next;
       for (const entry of labels.values()) entry.text = '';
+      if (lastFrame) updateLeaders(lastFrame);
       updateLabels();
+    },
+    setLeadersSvg(svg) {
+      leaders.setSvg(svg);
+    },
+    setGraticule(on) {
+      graticuleOn = on;
+      applyVisibility();
+    },
+    setReference(on, instant) {
+      referenceOn = on;
+      if (!loaded) return;
+      const duration = instant || reducedMotion ? 0 : REFERENCE_MS;
+      map.setPaintProperty(LAYER.reference, 'line-opacity-transition', { duration, delay: 0 });
+      map.setPaintProperty(LAYER.reference, 'line-opacity', on ? 0.85 : 0);
+      delete signatures[SRC.reference];
+      requestRender();
+    },
+    fitCamera() {
+      if (!model.bounds) return null;
+      const [w, s, e, n] = model.bounds;
+      const fit = map.cameraForBounds(
+        [
+          [w, s],
+          [e, n],
+        ],
+        { padding: Math.round(Math.min(container.clientWidth, container.clientHeight) * 0.18) },
+      );
+      if (!fit?.center) return null;
+      const c = fit.center as { lng: number; lat: number };
+      const r = (v: number, d: number) => Math.round(v * 10 ** d) / 10 ** d;
+      return { center: [r(c.lng, 3), r(c.lat, 3)], zoom: r(fit.zoom ?? map.getZoom(), 2) };
+    },
+    stats() {
+      const on = layersOn();
+      let features = 0;
+      for (const [id, n] of Object.entries(featureCounts)) {
+        if (id === SRC.movements && !on.has('movements')) continue;
+        if (id === SRC.events && !on.has('battles')) continue;
+        if (id === SRC.participation && !on.has('participation')) continue;
+        if ((id === SRC.prev || id === SRC.next) && !on.has('control')) continue;
+        features += n;
+      }
+      if (graticuleOn) features += graticuleData.features.length;
+      if (on.has('borders') && countryLabels) features += countryLabels.length;
+      return { features, zoom: Math.round(map.getZoom() * 10) / 10 };
     },
     destroy() {
       destroyed = true;
