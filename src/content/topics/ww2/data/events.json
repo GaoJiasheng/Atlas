@@ -127,6 +127,57 @@
     ]
   },
   {
+    "id": "singapore-naval-base",
+    "t": "1938-02-14",
+    "at": [
+      103.82,
+      1.46
+    ],
+    "kind": "political",
+    "importance": 1,
+    "title": {
+      "en": "Singapore Naval Base opens",
+      "zh": "新加坡海军基地启用"
+    },
+    "summary": {
+      "en": "Britain's naval base at Sembawang, begun in 1928, is officially opened with the King George VI Dock; it is called the 'Gibraltar of the East'.",
+      "zh": "英国在三巴旺修建的海军基地 1928 年动工，与乔治六世船坞一同正式启用，被称为“东方直布罗陀”。"
+    },
+    "detail": {
+      "en": "The base was built to receive a British fleet sent from Europe in an emergency; no large fleet was stationed there. Planning assumed the fleet could arrive within 70 days of war breaking out; in September 1939, with war in Europe, the Chiefs of Staff extended this 'period before relief' to 180 days.",
+      "zh": "基地是为了在紧急时接纳从欧洲派来的英国舰队而修的，平时并没有大舰队驻扎。计划假定开战后 70 天内舰队可以赶到；1939 年 9 月欧洲开战后，参谋长委员会把这一“待援期”延长到 180 天。"
+    },
+    "sources": [
+      "S55",
+      "S56"
+    ]
+  },
+  {
+    "id": "anschluss",
+    "t": "1938-03-12",
+    "at": [
+      16.37,
+      48.21
+    ],
+    "kind": "political",
+    "importance": 1,
+    "title": {
+      "en": "Annexation of Austria",
+      "zh": "德奥合并"
+    },
+    "summary": {
+      "en": "German troops march into Austria; the republic is dissolved and its territory incorporated into the German Reich.",
+      "zh": "德军开进奥地利；奥地利共和国被取消，领土并入德国。"
+    },
+    "detail": {
+      "en": "Austria's chancellor Kurt Schuschnigg resigned under German pressure in favour of the Nazi Arthur Seyss-Inquart, and German troops entered the country. The annexation surrounded western Czechoslovakia on three sides.",
+      "zh": "奥地利总理许士尼格在德国压力下辞职，由纳粹党人赛斯-英夸特接任，德军随即开入。合并之后，捷克斯洛伐克西部三面被德国包围。"
+    },
+    "sources": [
+      "S50"
+    ]
+  },
+  {
     "id": "wuhan-1938",
     "t": "1938-06-11",
     "until": "1938-10-27",
@@ -160,6 +211,529 @@
       "S10",
       "S11",
       "S12"
+    ]
+  },
+  {
+    "id": "munich-1938",
+    "t": "1938-09-29",
+    "at": [
+      11.57,
+      48.14
+    ],
+    "kind": "political",
+    "importance": 2,
+    "title": {
+      "en": "Munich Agreement",
+      "zh": "慕尼黑协定"
+    },
+    "summary": {
+      "en": "Britain, France, Germany and Italy agree that Czechoslovakia must hand its Sudeten areas to Germany; Czechoslovakia is not represented.",
+      "zh": "英、法、德、意四国商定，捷克斯洛伐克必须把苏台德地区交给德国；捷克斯洛伐克没有代表在场。"
+    },
+    "detail": {
+      "en": "Signed by Hitler, Chamberlain, Daladier and Mussolini, the agreement set the evacuation of the Sudeten territory for 1–10 October 1938. Germany took areas with about 3.5 million people, 700,000 of them Czechs, and the Czechoslovak border fortifications. On 15 March 1939 German troops occupied the rest of Bohemia and Moravia; on 31 March Britain and France pledged to assist Poland if it were attacked.",
+      "zh": "协定由希特勒、张伯伦、达拉第和墨索里尼签字，规定 1938 年 10 月 1 日至 10 日撤出苏台德地区。德国取得约 350 万人口的地区（其中 70 万是捷克人）以及捷克斯洛伐克的边境要塞。1939 年 3 月 15 日德军占领波希米亚和摩拉维亚其余部分；3 月 31 日英法承诺波兰遭到进攻时给予援助。"
+    },
+    "sources": [
+      "S50",
+      "S51"
+    ]
+  },
+  {
+    "id": "molotov-ribbentrop",
+    "t": "1939-08-23",
+    "at": [
+      37.62,
+      55.75
+    ],
+    "kind": "political",
+    "importance": 2,
+    "title": {
+      "en": "German–Soviet Non-Aggression Pact",
+      "zh": "苏德互不侵犯条约"
+    },
+    "summary": {
+      "en": "Germany and the Soviet Union sign a non-aggression treaty in Moscow; a secret protocol divides eastern Europe into German and Soviet spheres.",
+      "zh": "德国和苏联在莫斯科签订互不侵犯条约；一份秘密议定书把东欧划分为德苏两国的势力范围。"
+    },
+    "detail": {
+      "en": "The secret additional protocol drew the line between the two spheres along the northern border of Lithuania and, in Poland, along the rivers Narew, Vistula and San, and recorded Soviet interest in Bessarabia. Its existence was denied in the Soviet Union for fifty years; on 24 December 1989 the Congress of People's Deputies of the USSR confirmed that it had been signed, condemned it, and declared it invalid from the moment of signing.",
+      "zh": "秘密附加议定书以立陶宛北部边界、并在波兰境内以纳雷夫河、维斯瓦河、桑河一线划分两国势力范围，还写明苏联对比萨拉比亚的利益。五十年间苏联一直否认有这份议定书；1989 年 12 月 24 日，苏联人民代表大会确认它确实签订过，予以谴责，并宣布它自签字之时起无效。"
+    },
+    "sources": [
+      "S52",
+      "S53"
+    ]
+  },
+  {
+    "id": "invasion-poland",
+    "t": "1939-09-01",
+    "until": "1939-10-06",
+    "at": [
+      21.01,
+      52.23
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "germany",
+      "defender": "poland"
+    },
+    "forces": {
+      "germany": 1516000,
+      "poland": 800000
+    },
+    "casualties": {
+      "germany": 40389
+    },
+    "result": "attacker",
+    "importance": 3,
+    "title": {
+      "en": "German invasion of Poland",
+      "zh": "德国入侵波兰"
+    },
+    "summary": {
+      "en": "About 1.5 million German troops attack Poland from the west, north and south; Britain and France declare war on Germany on 3 September.",
+      "zh": "约 150 万德军从西、北、南三面进攻波兰；9 月 3 日英法对德宣战。"
+    },
+    "detail": {
+      "en": "On 31 August 1939 Germany had 55 divisions on the Polish frontier: 630,000 men in Army Group North (Pomerania and East Prussia) and 886,000 in Army Group South (Silesia and Slovakia). Warsaw, besieged and bombed, capitulated on 27 September with 140,000 troops; the last Polish force surrendered at Kock on 6 October. German Army losses were 8,082 killed, 27,278 wounded and 5,029 missing; the Germans claimed 694,000 prisoners of some 800,000 Polish soldiers.",
+      "zh": "1939 年 8 月 31 日，德国在波兰边境部署了 55 个师：北方集团军群（波美拉尼亚和东普鲁士）63 万人，南方集团军群（西里西亚和斯洛伐克）88.6 万人。华沙被围困、轰炸，9 月 27 日投降，守军 14 万人；最后一支波兰部队 10 月 6 日在科克投降。德国陆军阵亡 8,082 人，负伤 27,278 人，失踪 5,029 人；德方称俘虏 69.4 万人，而波兰参战军人约 80 万。"
+    },
+    "sources": [
+      "S60",
+      "S58"
+    ]
+  },
+  {
+    "id": "soviet-poland",
+    "t": "1939-09-17",
+    "until": "1939-10-06",
+    "at": [
+      26.73,
+      53.48
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "ussr",
+      "defender": "poland"
+    },
+    "forces": {
+      "ussr": 600000
+    },
+    "result": "attacker",
+    "importance": 2,
+    "title": {
+      "en": "Soviet invasion of Poland",
+      "zh": "苏联入侵波兰"
+    },
+    "summary": {
+      "en": "Red Army troops cross Poland's eastern border at dawn on 17 September; Germany and the Soviet Union divide the country between them.",
+      "zh": "9 月 17 日拂晓，苏军越过波兰东部边界；德国和苏联随后瓜分了波兰。"
+    },
+    "detail": {
+      "en": "The Soviet government told the German ambassador at 2 a.m. that its troops would cross at 6 a.m. Polish sources give more than 600,000 Soviet soldiers, about 4,700 tanks and 3,300 aircraft; some 250,000 Polish soldiers became Soviet prisoners. A German–Soviet treaty of 28 September fixed the new border, mostly along the rivers Narew, Bug and San. Many of the officers taken prisoner were among those shot at Katyn and elsewhere in spring 1940.",
+      "zh": "苏联政府凌晨 2 时通知德国大使，苏军将在 6 时越境。据波方资料，苏联动用 60 多万军人、约 4,700 辆坦克和 3,300 架飞机；约 25 万名波兰军人成为苏军俘虏。9 月 28 日德苏签订条约确定新的边界，大部分沿纳雷夫河、布格河和桑河划定。被俘的军官中有许多人后来在 1940 年春的卡廷等地被枪杀。"
+    },
+    "sources": [
+      "S61",
+      "S60",
+      "S53"
+    ]
+  },
+  {
+    "id": "katyn",
+    "t": "1940-04",
+    "until": "1940-05",
+    "at": [
+      31.79,
+      54.77
+    ],
+    "kind": "massacre",
+    "importance": 2,
+    "title": {
+      "en": "Katyn massacre",
+      "zh": "卡廷屠杀"
+    },
+    "summary": {
+      "en": "On a Soviet Politburo decision of 5 March 1940, the NKVD shoots about 22,000 Polish officers, police and members of the intelligentsia at Katyn and other sites.",
+      "zh": "根据苏共中央政治局 1940 年 3 月 5 日的决定，内务人民委员部在卡廷等地枪杀了约 2.2 万名波兰军官、警察和知识界人士。"
+    },
+    "detail": {
+      "en": "The prisoners had been taken after the Soviet invasion of Poland. In 1959 the KGB chairman reported to Khrushchev that 21,857 had been shot, 4,421 of them in the Katyn forest near Smolensk; others were killed at Kalinin (Tver), Kharkiv and prisons in the western Ukraine and Belorussia. The Soviet Union blamed Germany for fifty years. On 13 April 1990 it admitted that the NKVD under Beria was responsible.",
+      "zh": "这些人是苏联入侵波兰后被俘的。1959 年克格勃主席向赫鲁晓夫报告，被枪杀者共 21,857 人，其中 4,421 人在斯摩棱斯克附近的卡廷森林，其余在加里宁（特维尔）、哈尔科夫以及乌克兰西部和白俄罗斯西部的监狱。五十年间苏联一直归咎于德国。1990 年 4 月 13 日，苏联承认这是贝利亚领导的内务人民委员部所为。"
+    },
+    "sources": [
+      "S62"
+    ]
+  },
+  {
+    "id": "norway-1940",
+    "t": "1940-04-09",
+    "until": "1940-06-10",
+    "at": [
+      17.43,
+      68.44
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "germany",
+      "defender": "norway"
+    },
+    "casualties": {
+      "germany": 5296
+    },
+    "result": "attacker",
+    "importance": 2,
+    "title": {
+      "en": "Invasion of Denmark and Norway",
+      "zh": "入侵丹麦和挪威"
+    },
+    "summary": {
+      "en": "German forces occupy Denmark and land at the main Norwegian ports, from Oslo to Narvik, on 9 April 1940; Norway's army fights on with British, French and Polish help until 10 June.",
+      "zh": "1940 年 4 月 9 日德军占领丹麦，并在从奥斯陆到纳尔维克的挪威各主要港口登陆；挪威军队在英、法、波兰部队支援下坚持到 6 月 10 日。"
+    },
+    "detail": {
+      "en": "A first echelon of 8,850 German soldiers was carried in warships to take the ports by surprise. Allied troops recaptured Narvik on 28 May but were withdrawn by 8 June because of the German offensive in France. Land casualties: British 1,869, French and Polish about 530, Norwegian 1,335; the German General Staff counted 5,296, including losses at sea.",
+      "zh": "德军第一梯队 8,850 人由军舰运送，突袭夺取各港口。盟军 5 月 28 日夺回纳尔维克，但因德军在法国发动攻势，6 月 8 日前全部撤走。陆上伤亡：英军 1,869 人，法军和波兰军约 530 人，挪威军 1,335 人；德国总参谋部统计德军 5,296 人，含海上损失。"
+    },
+    "sources": [
+      "S65"
+    ]
+  },
+  {
+    "id": "sickle-cut",
+    "t": "1940-05-10",
+    "until": "1940-05-20",
+    "at": [
+      4.94,
+      49.7
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "germany",
+      "defender": "france"
+    },
+    "result": "attacker",
+    "importance": 3,
+    "title": {
+      "en": "Breakthrough at Sedan",
+      "zh": "色当突破"
+    },
+    "summary": {
+      "en": "While Allied armies move into Belgium, German armoured divisions cross the Ardennes, force the Meuse at Sedan on 13 May and reach the Channel at Abbeville on 20 May.",
+      "zh": "盟军主力开进比利时的同时，德军装甲师穿过阿登山区，5 月 13 日在色当强渡默兹河，5 月 20 日在阿布维尔到达英吉利海峡。"
+    },
+    "detail": {
+      "en": "The French command had judged the wooded Ardennes impracticable for tanks and held the Meuse there with second-line divisions. Panzer Group Kleist, about 134,000 men with over 1,200 tanks, came through the forest roads; the drive to the sea cut off the British, French and Belgian armies in the north. German planners later called it the 'sickle cut' (Sichelschnitt).",
+      "zh": "法军统帅部认为树林密布的阿登山区坦克无法通行，那一段默兹河只由二线师防守。约 13.4 万人、1,200 多辆坦克的克莱斯特装甲集群沿林间道路穿过阿登；直插海边的攻势把英、法、比三国在北面的军队切断在包围圈里。德方后来把这次行动称为“镰刀收割”。"
+    },
+    "sources": [
+      "S66",
+      "S74"
+    ]
+  },
+  {
+    "id": "dunkirk",
+    "t": "1940-05-26",
+    "until": "1940-06-04",
+    "at": [
+      2.37,
+      51.04
+    ],
+    "kind": "evacuation",
+    "importance": 3,
+    "title": {
+      "en": "Evacuation from Dunkirk",
+      "zh": "敦刻尔克撤退"
+    },
+    "summary": {
+      "en": "From 26 May to 4 June, 338,226 British and Allied soldiers are taken from Dunkirk to England by naval and civilian ships.",
+      "zh": "5 月 26 日至 6 月 4 日，338,226 名英国和盟国士兵由海军舰艇和民船从敦刻尔克撤到英国。"
+    },
+    "detail": {
+      "en": "Operation Dynamo lifted nearly 100,000 men from the open beaches and the rest from the harbour mole. After the evacuation was opened to them, 139,097 Allied troops, most of them French, were brought away. The British Expeditionary Force left almost all its heavy equipment behind. French rearguards held the perimeter until 4 June; about 1.8 million French soldiers were taken prisoner in the whole campaign.",
+      "zh": "“发电机行动”中近 10 万人是从开阔的海滩上撤走的，其余从港口防波堤登船。撤离向盟军开放后，共撤出 139,097 名盟国军人，大多是法国人。英国远征军几乎丢下了全部重装备。法军后卫守住环形阵地直到 6 月 4 日；整个法国战役中约 180 万法军被俘。"
+    },
+    "sources": [
+      "S66",
+      "S68"
+    ]
+  },
+  {
+    "id": "paris-falls",
+    "t": "1940-06-14",
+    "at": [
+      2.35,
+      48.86
+    ],
+    "kind": "surrender",
+    "sides": {
+      "attacker": "germany",
+      "defender": "france"
+    },
+    "importance": 2,
+    "title": {
+      "en": "Germans enter Paris",
+      "zh": "德军进入巴黎"
+    },
+    "summary": {
+      "en": "German troops enter Paris, which the French government has left undefended; the government has moved to Bordeaux.",
+      "zh": "德军开进巴黎；法国政府没有设防，已迁往波尔多。"
+    },
+    "detail": {
+      "en": "On the morning of 14 June General Weygand told the British commander that organised resistance by the French armies as a whole had come to an end. Italy had declared war on France and Britain on 10 June.",
+      "zh": "6 月 14 日上午，魏刚将军告诉英军指挥官，法军整体上已无法组织抵抗。6 月 10 日意大利已对法英宣战。"
+    },
+    "sources": [
+      "S66"
+    ]
+  },
+  {
+    "id": "compiegne-1940",
+    "t": "1940-06-22",
+    "at": [
+      2.906,
+      49.427
+    ],
+    "kind": "surrender",
+    "sides": {
+      "attacker": "germany",
+      "defender": "france"
+    },
+    "importance": 2,
+    "title": {
+      "en": "French armistice at Compiègne",
+      "zh": "贡比涅停战"
+    },
+    "summary": {
+      "en": "France signs an armistice with Germany at Compiègne; Germany occupies the north and the Atlantic coast, and a French government at Vichy under Marshal Pétain keeps the rest.",
+      "zh": "法国在贡比涅与德国签订停战协定；德国占领北部和大西洋沿岸，其余地区由贝当元帅领导、设在维希的法国政府管辖。"
+    },
+    "detail": {
+      "en": "The armistice was signed at 6.50 p.m. on 22 June 1940 in the Forest of Compiègne. On 10 July the National Assembly gave Pétain full powers by 569 votes to 80; this became the legal basis of the Vichy regime, which collaborated with Germany. In London, General de Gaulle had already called on the French on 18 June to continue the fight.",
+      "zh": "停战协定于 1940 年 6 月 22 日下午 6 时 50 分在贡比涅森林签字。7 月 10 日，国民议会以 569 票对 80 票授予贝当全权，这成了与德国合作的维希政权的法律基础。在此之前的 6 月 18 日，戴高乐将军已在伦敦号召法国人继续战斗。"
+    },
+    "sources": [
+      "S69",
+      "S70",
+      "S71"
+    ]
+  },
+  {
+    "id": "battle-of-britain",
+    "t": "1940-07-10",
+    "until": "1940-10-31",
+    "at": [
+      -0.12,
+      51.51
+    ],
+    "kind": "bombing",
+    "sides": {
+      "attacker": "germany",
+      "defender": "uk"
+    },
+    "result": "defender",
+    "importance": 3,
+    "title": {
+      "en": "Battle of Britain and the Blitz",
+      "zh": "不列颠之战与伦敦大轰炸"
+    },
+    "summary": {
+      "en": "The German air force tries to win control of the air over southern England as a step towards invasion; it does not succeed, and from September it bombs London and other cities at night.",
+      "zh": "德国空军企图夺取英格兰南部上空的制空权，为登陆做准备；它没有成功，从 9 月起转为夜间轰炸伦敦等城市。"
+    },
+    "detail": {
+      "en": "Between 10 July and 31 October 1940 about 1,733 German and 915 British aircraft were destroyed; 544 RAF Fighter Command pilots and about 2,500 German airmen were killed. The German invasion plan was postponed indefinitely on 17 September. Night bombing of British cities continued until May 1941; over the whole war 51,509 civilians in the United Kingdom were killed by bombing.",
+      "zh": "1940 年 7 月 10 日至 10 月 31 日，德国飞机约 1,733 架、英国飞机 915 架被毁；英国皇家空军战斗机司令部 544 名飞行员和约 2,500 名德国空勤人员丧生。9 月 17 日德国无限期推迟了登陆计划。对英国城市的夜间轰炸一直持续到 1941 年 5 月；整个战争中英国有 51,509 名平民死于轰炸。"
+    },
+    "sources": [
+      "S72",
+      "S73",
+      "S75"
+    ]
+  },
+  {
+    "id": "barbarossa-start",
+    "t": "1941-06-22",
+    "at": [
+      23.66,
+      52.08
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "germany",
+      "defender": "ussr"
+    },
+    "forces": {
+      "germany": 3050000,
+      "ussr": 2900000
+    },
+    "result": "attacker",
+    "importance": 3,
+    "title": {
+      "en": "Operation Barbarossa begins",
+      "zh": "巴巴罗萨行动开始"
+    },
+    "summary": {
+      "en": "Germany and its allies invade the Soviet Union along a front from the Baltic to the Black Sea with about 3 million German troops in three army groups.",
+      "zh": "德国及其盟国沿着从波罗的海到黑海的战线入侵苏联，约 300 万德军分三个集团军群进攻。"
+    },
+    "detail": {
+      "en": "The attack began at 3 a.m. on 22 June 1941 with complete tactical surprise. The German Army assembled 145 divisions, 3,050,000 men, 3,350 tanks, 7,184 guns and 625,000 horses; Romanian and, from 25 June, Finnish forces joined. According to most Soviet accounts the western military districts had 2.9 million men.",
+      "zh": "进攻于 1941 年 6 月 22 日凌晨 3 时开始，完全达成了战术突然性。德国陆军集结 145 个师、305 万人、坦克 3,350 辆、火炮 7,184 门、马 62.5 万匹；罗马尼亚军队，以及 6 月 25 日起的芬兰军队一同参战。据多数苏方记载，苏联西部各军区共有 290 万人。"
+    },
+    "sources": [
+      "S75",
+      "S76"
+    ]
+  },
+  {
+    "id": "oil-embargo",
+    "t": "1941-07-26",
+    "at": [
+      106.7,
+      10.78
+    ],
+    "kind": "political",
+    "importance": 2,
+    "title": {
+      "en": "Southern Indochina and the oil embargo",
+      "zh": "进驻南印度支那与石油禁运"
+    },
+    "summary": {
+      "en": "Japanese troops move into southern French Indochina; the United States, Britain and the Netherlands East Indies freeze Japanese assets, cutting off Japan's oil imports.",
+      "zh": "日军进驻法属印度支那南部；美国、英国和荷属东印度冻结日本资产，切断了日本的石油进口。"
+    },
+    "detail": {
+      "en": "Under an agreement forced on the Vichy government, Japanese troops occupied Saigon and Cam Ranh Bay at the end of July 1941. The United States froze Japanese assets on 26 July; Britain and the Netherlands East Indies followed. Japan's own oil production met only about a tenth of its needs, and its reserves would last about three years in peace and much less in war. Japan's leaders prepared to take the oil of the Netherlands East Indies by force if negotiations failed.",
+      "zh": "根据强加给维希政府的协议，日军 1941 年 7 月底占领西贡和金兰湾。美国 7 月 26 日冻结日本资产，英国和荷属东印度随后跟进。日本本国石油产量只够需求的约一成，储备在和平时期约够三年，战时则短得多。日本领导层准备在谈判失败时以武力夺取荷属东印度的石油。"
+    },
+    "sources": [
+      "S84"
+    ]
+  },
+  {
+    "id": "kiev-1941",
+    "t": "1941-08-23",
+    "until": "1941-09-26",
+    "at": [
+      33.27,
+      50.37
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "germany",
+      "defender": "ussr"
+    },
+    "result": "attacker",
+    "importance": 2,
+    "title": {
+      "en": "Kyiv encirclement",
+      "zh": "基辅包围战"
+    },
+    "summary": {
+      "en": "German armies from north and south close a pocket east of Kyiv; the city falls on 19 September and the Germans claim 665,000 prisoners.",
+      "zh": "德军从南北两面在基辅以东合围；基辅 9 月 19 日失守，德方称俘虏 66.5 万人。"
+    },
+    "detail": {
+      "en": "Hitler turned Guderian's Second Panzer Group south from the Moscow axis in late August. The pincers met near Lokhvytsia on 15 September and the pocket was cleared by 26 September. The diversion delayed the attack on Moscow until October.",
+      "zh": "8 月下旬，希特勒把古德里安的第 2 装甲集群从莫斯科方向调往南方。两路钳形攻势 9 月 15 日在洛赫维察附近会合，到 9 月 26 日包围圈被肃清。这次转兵把对莫斯科的进攻推迟到了 10 月。"
+    },
+    "sources": [
+      "S75"
+    ]
+  },
+  {
+    "id": "leningrad-siege",
+    "t": "1941-09-08",
+    "until": "1944-01-27",
+    "at": [
+      30.32,
+      59.94
+    ],
+    "kind": "siege",
+    "sides": {
+      "attacker": "germany",
+      "defender": "ussr"
+    },
+    "result": "defender",
+    "importance": 3,
+    "title": {
+      "en": "Siege of Leningrad",
+      "zh": "列宁格勒围城"
+    },
+    "summary": {
+      "en": "German and Finnish forces cut Leningrad's land links on 8 September 1941; the siege lasts 872 days, and hundreds of thousands of civilians die, most of them of hunger.",
+      "zh": "1941 年 9 月 8 日德国和芬兰军队切断列宁格勒的陆上交通；围城持续 872 天，数十万平民死亡，大多是饿死的。"
+    },
+    "detail": {
+      "en": "Hitler ordered that the city be surrounded and starved rather than taken. The Leningrad commission's figure presented at Nuremberg was 632,253 dead from the hunger blockade; the historian Anna Reid puts the city's total deaths at 700,000–800,000, one in three or four of the pre-siege population. Supplies came only across Lake Ladoga, by boat in summer and over the ice in winter. The siege was fully lifted on 27 January 1944; about 1.5 million soldiers and civilians died in and around the city.",
+      "zh": "希特勒下令包围城市、饿死城中居民，而不是攻进去。列宁格勒调查委员会在纽伦堡提出的数字是因饥饿封锁死亡 632,253 人；历史学家安娜·里德估计全城死亡 70 万到 80 万人，相当于围城前人口的三分之一到四分之一。补给只能经拉多加湖运进：夏天走船，冬天走冰上道路。1944 年 1 月 27 日围城完全解除；城内外军民约 150 万人死亡。"
+    },
+    "sources": [
+      "S79",
+      "S77",
+      "S78",
+      "S76"
+    ]
+  },
+  {
+    "id": "babi-yar",
+    "t": "1941-09-29",
+    "until": "1941-09-30",
+    "at": [
+      30.45,
+      50.47
+    ],
+    "kind": "massacre",
+    "importance": 2,
+    "title": {
+      "en": "Babi Yar (Babyn Yar)",
+      "zh": "娘子谷大屠杀"
+    },
+    "summary": {
+      "en": "Over two days German SS and police units shoot 33,771 Jews from Kyiv at the Babi Yar ravine on the edge of the city.",
+      "zh": "两天内，德国党卫队和警察部队在基辅城边的娘子谷峡谷枪杀了 33,771 名基辅犹太人。"
+    },
+    "detail": {
+      "en": "After explosions in occupied Kyiv, the Jews remaining in the city were ordered to assemble on 29 September. Sonderkommando 4a of Einsatzgruppe C, under Paul Blobel, with SS and police battalions, shot them in small groups; the number comes from the unit's own report to Berlin. Behind the whole Eastern Front the Einsatzgruppen and other units killed well over a million civilians, most of them Jews. Babi Yar remained a killing site throughout the occupation.",
+      "zh": "被占领的基辅发生爆炸后，城内剩下的犹太人被勒令于 9 月 29 日集合。特别行动队 C 队第 4a 特遣队（指挥官保罗·布洛贝尔）会同党卫队和警察营，把他们分成小批枪杀；这个数字来自该部队自己向柏林的报告。在整个东线后方，特别行动队等部队杀害了远超 100 万名平民，大多是犹太人。整个占领期间，娘子谷一直是屠杀地点。"
+    },
+    "sources": [
+      "S80",
+      "S81"
+    ]
+  },
+  {
+    "id": "moscow-1941",
+    "t": "1941-10-02",
+    "until": "1942-01-07",
+    "at": [
+      37.62,
+      55.75
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "germany",
+      "defender": "ussr"
+    },
+    "result": "defender",
+    "importance": 3,
+    "title": {
+      "en": "Battle of Moscow",
+      "zh": "莫斯科会战"
+    },
+    "summary": {
+      "en": "The German offensive on Moscow (Operation Typhoon) reaches the outskirts of the city but stops in the cold; the Red Army counter-attacks on 5–6 December.",
+      "zh": "德军进攻莫斯科（“台风”行动），打到城郊后在严寒中停住；12 月 5 日至 6 日苏军发起反攻。"
+    },
+    "detail": {
+      "en": "Encirclements at Vyazma and Bryansk in October took hundreds of thousands of prisoners, then autumn mud slowed the advance. By late November German losses since 22 June had passed 740,000 men, winter clothing had been ordered for only 60 divisions, and temperatures fell to −38 °F (about −39 °C). The Soviet counter-offensive drove the Germans back from the city by early January 1942.",
+      "zh": "10 月在维亚济马和布良斯克的包围战又俘虏了数十万人，随后秋季泥泞拖慢了进攻。到 11 月下旬，德军自 6 月 22 日以来的损失已超过 74 万人，冬装只为 60 个师订购，气温降到华氏零下 38 度（约零下 39 摄氏度）。到 1942 年 1 月初，苏军反攻把德军从莫斯科城下击退。"
+    },
+    "sources": [
+      "S75",
+      "S76"
     ]
   },
   {
@@ -230,39 +804,6 @@
     ]
   },
   {
-    "id": "force-z",
-    "t": "1941-12-10",
-    "at": [
-      104.47,
-      3.56
-    ],
-    "kind": "battle",
-    "sides": {
-      "attacker": "japan",
-      "defender": "uk"
-    },
-    "casualties": {
-      "uk": 840
-    },
-    "result": "attacker",
-    "importance": 2,
-    "title": {
-      "en": "Sinking of Prince of Wales and Repulse",
-      "zh": "威尔士亲王号与反击号沉没"
-    },
-    "summary": {
-      "en": "Japanese naval aircraft from Indochina sink the British battleship Prince of Wales and battlecruiser Repulse off Kuantan; about 840 men are killed.",
-      "zh": "从印度支那起飞的日本海军飞机在关丹外海击沉英国战列舰威尔士亲王号和战列巡洋舰反击号，约 840 人丧生。"
-    },
-    "detail": {
-      "en": "Force Z had sailed from Singapore to attack the landings in Thailand and Malaya without fighter cover. Repulse sank at 12.33 p.m. and Prince of Wales at 1.20 p.m. on 10 December. Of 1,612 aboard Prince of Wales 1,285 were rescued; of 1,309 aboard Repulse 796 were rescued — about 840 lost, including Admiral Tom Phillips. Japan lost three aircraft. With the US fleet hit at Pearl Harbor three days earlier, Japan held control of the seas around Malaya.",
-      "zh": "Z 舰队在没有战斗机掩护的情况下从新加坡出发，准备攻击泰国和马来亚的登陆部队。12 月 10 日中午 12 时 33 分反击号沉没，1 时 20 分威尔士亲王号沉没。威尔士亲王号 1,612 人中获救 1,285 人，反击号 1,309 人中获救 796 人，约 840 人丧生，包括菲利普斯海军上将。日方损失飞机 3 架。加上三天前美国舰队在珍珠港受重创，日本掌握了马来亚周边的制海权。"
-    },
-    "sources": [
-      "S30"
-    ]
-  },
-  {
     "id": "hong-kong-1941",
     "t": "1941-12-08",
     "until": "1941-12-25",
@@ -328,6 +869,95 @@
     ]
   },
   {
+    "id": "clark-field",
+    "t": "1941-12-08",
+    "at": [
+      120.56,
+      15.18
+    ],
+    "kind": "bombing",
+    "sides": {
+      "attacker": "japan",
+      "defender": "usa"
+    },
+    "importance": 2,
+    "title": {
+      "en": "Air attacks on the Philippines",
+      "zh": "空袭菲律宾"
+    },
+    "summary": {
+      "en": "Hours after Pearl Harbor, Japanese aircraft from Formosa catch much of the US air force in the Philippines on the ground at Clark Field.",
+      "zh": "珍珠港事件几小时后，从台湾起飞的日本飞机在克拉克机场把美国驻菲律宾空军的大部分飞机炸毁在地面上。"
+    },
+    "detail": {
+      "en": "Although news of Pearl Harbor had reached Manila hours earlier, the aircraft were caught on the ground. After one day of war the Far East Air Force had lost half its strength: only 17 of 35 B-17 bombers remained.",
+      "zh": "虽然珍珠港的消息几小时前就已传到马尼拉，飞机仍在地面上遭到袭击。开战一天，远东航空队就损失了一半：35 架 B-17 轰炸机只剩 17 架。"
+    },
+    "sources": [
+      "S88"
+    ]
+  },
+  {
+    "id": "us-declares-war",
+    "t": "1941-12-08",
+    "until": "1941-12-11",
+    "at": [
+      -77.01,
+      38.89
+    ],
+    "kind": "political",
+    "importance": 2,
+    "title": {
+      "en": "The United States declares war",
+      "zh": "美国宣战"
+    },
+    "summary": {
+      "en": "Congress declares war on Japan on 8 December; on 11 December Germany and Italy declare war on the United States, and Congress declares war on them the same day.",
+      "zh": "12 月 8 日美国国会对日宣战；12 月 11 日德国和意大利对美宣战，国会当天也对两国宣战。"
+    },
+    "detail": {
+      "en": "The House voted for war with Japan immediately after President Roosevelt's address; only Representative Jeannette Rankin voted against. With these declarations the wars in Europe, China and the Pacific became one war.",
+      "zh": "罗斯福总统演说后，众议院随即表决对日宣战，只有珍妮特·兰金一人投反对票。这几份宣战书让欧洲、中国和太平洋的战争连成了一场战争。"
+    },
+    "sources": [
+      "S86",
+      "S87"
+    ]
+  },
+  {
+    "id": "force-z",
+    "t": "1941-12-10",
+    "at": [
+      104.47,
+      3.56
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "japan",
+      "defender": "uk"
+    },
+    "casualties": {
+      "uk": 840
+    },
+    "result": "attacker",
+    "importance": 2,
+    "title": {
+      "en": "Sinking of Prince of Wales and Repulse",
+      "zh": "威尔士亲王号与反击号沉没"
+    },
+    "summary": {
+      "en": "Japanese naval aircraft from Indochina sink the British battleship Prince of Wales and battlecruiser Repulse off Kuantan; about 840 men are killed.",
+      "zh": "从印度支那起飞的日本海军飞机在关丹外海击沉英国战列舰威尔士亲王号和战列巡洋舰反击号，约 840 人丧生。"
+    },
+    "detail": {
+      "en": "Force Z had sailed from Singapore to attack the landings in Thailand and Malaya without fighter cover. Repulse sank at 12.33 p.m. and Prince of Wales at 1.20 p.m. on 10 December. Of 1,612 aboard Prince of Wales 1,285 were rescued; of 1,309 aboard Repulse 796 were rescued — about 840 lost, including Admiral Tom Phillips. Japan lost three aircraft. With the US fleet hit at Pearl Harbor three days earlier, Japan held control of the seas around Malaya.",
+      "zh": "Z 舰队在没有战斗机掩护的情况下从新加坡出发，准备攻击泰国和马来亚的登陆部队。12 月 10 日中午 12 时 33 分反击号沉没，1 时 20 分威尔士亲王号沉没。威尔士亲王号 1,612 人中获救 1,285 人，反击号 1,309 人中获救 796 人，约 840 人丧生，包括菲利普斯海军上将。日方损失飞机 3 架。加上三天前美国舰队在珍珠港受重创，日本掌握了马来亚周边的制海权。"
+    },
+    "sources": [
+      "S30"
+    ]
+  },
+  {
     "id": "slim-river",
     "t": "1942-01-07",
     "at": [
@@ -355,6 +985,41 @@
     },
     "sources": [
       "S44"
+    ]
+  },
+  {
+    "id": "bataan",
+    "t": "1942-01-07",
+    "until": "1942-04-09",
+    "at": [
+      120.48,
+      14.6
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "japan",
+      "defender": "usa"
+    },
+    "forces": {
+      "usa": 78000
+    },
+    "result": "attacker",
+    "importance": 2,
+    "title": {
+      "en": "Bataan",
+      "zh": "巴丹半岛战役"
+    },
+    "summary": {
+      "en": "American and Filipino troops hold the Bataan peninsula for three months; about 78,000 surrender on 9 April 1942, and the prisoners are forced on a 65-mile march.",
+      "zh": "美菲军队在巴丹半岛坚持了三个月；1942 年 4 月 9 日约 7.8 万人投降，战俘被迫徒步行军 65 英里。"
+    },
+    "detail": {
+      "en": "After landing at Lingayen Gulf on 22 December with 43,110 men, the Japanese 14th Army entered Manila on 2 January 1942. MacArthur's forces withdrew into Bataan, where hunger and disease wore them down. On the 'death march' from Mariveles to San Fernando prisoners were denied food and water, beaten and bayoneted; thousands died. Corregidor surrendered on 6 May.",
+      "zh": "日军第 14 军 12 月 22 日率 43,110 人在林加延湾登陆，1942 年 1 月 2 日进入马尼拉。麦克阿瑟的部队退入巴丹半岛，在饥饿和疾病中消耗殆尽。在从马里韦莱斯到圣费尔南多的“死亡行军”中，战俘得不到食物和水，遭到殴打和刺刀刺杀，数千人死亡。科雷希多岛 5 月 6 日投降。"
+    },
+    "sources": [
+      "S88",
+      "S42"
     ]
   },
   {
@@ -508,6 +1173,31 @@
       "S29",
       "S31",
       "S43"
+    ]
+  },
+  {
+    "id": "japanese-internment",
+    "t": "1942-02-19",
+    "at": [
+      -118.15,
+      36.73
+    ],
+    "kind": "political",
+    "importance": 2,
+    "title": {
+      "en": "Incarceration of Japanese Americans",
+      "zh": "日裔美国人被关押"
+    },
+    "summary": {
+      "en": "Executive Order 9066 leads to the forced removal of about 122,000 people of Japanese descent from the US West Coast to inland camps such as Manzanar; nearly 70,000 are US citizens.",
+      "zh": "第 9066 号行政令导致约 12.2 万名日裔被强制从美国西海岸迁往曼赞纳等内陆营地；其中近 7 万人是美国公民。"
+    },
+    "detail": {
+      "en": "President Roosevelt signed the order on 19 February 1942. Families were given days to leave their homes, held in assembly centres and then in ten guarded camps in the western states and Arkansas. No charges were made against them and most lost their homes and property. In 1988 Congress acknowledged the injustice, apologised, and paid $20,000 to each surviving person who had been incarcerated.",
+      "zh": "罗斯福总统 1942 年 2 月 19 日签署这项命令。日裔家庭只有几天时间离开住所，先被关进临时集合中心，再被送进西部各州和阿肯色州的十个有人看守的营地。政府没有对他们提出任何指控，多数人失去了住房和财产。1988 年国会承认这是不公正的，正式道歉，并向每位在世的被监禁者赔偿 2 万美元。"
+    },
+    "sources": [
+      "S89"
     ]
   }
 ]
