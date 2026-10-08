@@ -1,0 +1,28 @@
+{
+  "skill_name": "industrial-3d-showcase",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "做一个可交互的 3D 展示页：虚构的深海热液采矿车 ABYSSAL CRAWLER AC-7——四条履带、前端旋转切削滚筒、背部吸料管和两条机械臂，在海底热液区作业。要工业概念设计图那种风格，单个 HTML 文件，1080p 60fps 就行，不需要自动演示模式。我没有参考图。",
+      "expected_output": "Single HTML Three.js page: warm paper background, procedural crawler, bilingual technical-plate HUD (spec table, schematic card, three bottom panels, two-column leader labels, perf readout), eased camera presets, X-ray/cutaway/exploded/reference style modes, synced keys and buttons, no console errors, screenshots.",
+      "files": [],
+      "assertions": [
+        "Delivers exactly one HTML page in the output root",
+        "All geometry procedural (no GLTF/OBJ/FBX loaders)",
+        "Uses InstancedMesh for repeated parts",
+        "No TODO / FIXME / placeholder text in source",
+        "Loads with no console errors or page errors",
+        "Background is a warm light paper tone (not dark / not neon)",
+        "HUD is bilingual (>=30 CJK chars alongside English labels)",
+        "Three bottom engineering panels side by side",
+        "Leader-line overlay with >=6 leader paths",
+        "Performance readout shows FPS and draw calls",
+        "Draw calls per frame within budget (median <= 150)",
+        "Number keys switch between >=4 distinct camera presets",
+        "Active button state follows keyboard preset changes",
+        "X key toggles an X-ray style view",
+        "E key toggles an exploded view"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,846 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>TECHNICAL PLATE STARTER</title>
+<!--
+  STARTER SKELETON for the industrial-3d-showcase skill.
+  Keep: layout contract, HUD scaling, LabelSystem, CameraRig, mode easing, state ↔ button sync,
+        PerformanceMonitor, window.__showcase test API, load-failure message.
+  Replace: CONFIG content, buildSubject() (the demo machine), applyModes(), panel drawings,
+           title/spec/brand text. Remove this comment and every demo leftover before delivery.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@400;500;600&family=Noto+Sans+SC:wght@400;500&display=swap" rel="stylesheet">
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+} }
+</script>
+<style>
+:root{
+  --paper:#E9E4D8; --panel:rgba(241,237,228,.9); --ink:#2A2824; --ink2:#555047; --ink3:#857D70;
+  --hair:rgba(42,40,36,.3); --line:rgba(42,40,36,.6);
+  --hot:#B8602E; --cold:#4F7F8C; --cut:#B8973C;
+  --k:1;
+  --sans:'IBM Plex Sans Condensed','Noto Sans SC','PingFang SC','Microsoft YaHei',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--paper);color:var(--ink);font-family:var(--sans);
+  -webkit-font-smoothing:antialiased;user-select:none}
+#gl{position:fixed;inset:0;display:block;width:100%;height:100%;cursor:grab}
+#gl:active{cursor:grabbing}
+#grain{position:fixed;inset:0;pointer-events:none;opacity:.35;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .55  0 0 0 0 .5  0 0 0 0 .42  0 0 0 .2 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+#hud{position:fixed;inset:0;pointer-events:none;font-size:11px}
+#hud .pe{pointer-events:auto}
+#leaders{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.blk{position:absolute;transform:scale(var(--k))}
+.tl{transform-origin:top left}.tr{transform-origin:top right}.bl{transform-origin:bottom left}.br{transform-origin:bottom right}
+.panel{background:var(--panel);border:1px solid var(--hair)}
+.ph{display:flex;align-items:baseline;gap:8px;padding:9px 12px 0;font:600 9.6px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+.ph i{font-style:normal;font-family:var(--mono);font-weight:500;color:var(--ink3);letter-spacing:.04em}
+.ph em{font-style:normal;font-weight:400;color:var(--ink3);letter-spacing:.06em;font-size:9.4px}
+svg text{font-family:var(--sans)}
+
+/* top bar */
+#top{top:env(safe-area-inset-top,0px);left:0;height:58px;width:calc(100vw / var(--k))}
+#top .brand{position:absolute;left:22px;top:9px;font:600 8.6px/1 var(--sans);letter-spacing:.14em;display:flex;gap:8px;align-items:center}
+#top .brand b{display:inline-block;width:8px;height:8px;border:1px solid var(--ink);transform:rotate(45deg)}
+#top .docid{position:absolute;left:50%;top:10px;transform:translateX(-50%);font:500 8.6px/1 var(--mono);letter-spacing:.08em;display:flex;gap:9px;align-items:center}
+#top .docid::before,#top .docid::after{content:"";width:5px;height:5px;background:var(--ink);transform:rotate(45deg)}
+#top .rule{position:absolute;left:0;right:0;top:27px;border-top:1px solid var(--hair)}
+#ctl{position:absolute;right:28px;top:33px;display:flex;align-items:center;gap:3px}
+#ctl .lab{font:500 7.6px/1 var(--sans);letter-spacing:.16em;color:var(--ink3);margin:0 6px 0 12px}
+.btn{font:500 8.8px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;padding:4px 8px 3px;height:18px;
+  border:1px solid var(--line);background:rgba(246,242,234,.75);color:var(--ink);cursor:pointer;border-radius:0;white-space:nowrap}
+.btn small{font-size:7.6px;color:var(--ink3);margin-left:4px;letter-spacing:.04em}
+.btn:hover{background:#fbf8f2}
+.btn.on{background:var(--ink);color:#f3eee4;border-color:var(--ink)}
+.btn.on small{color:#cfc8ba}
+.btn[data-mode=xray].on{background:var(--cold);border-color:var(--cold)}
+.btn[data-mode=reference].on{background:var(--hot);border-color:var(--hot)}
+.btn:focus-visible{outline:1px solid var(--hot);outline-offset:1px}
+#status{position:absolute;right:28px;top:10px;font:500 7.6px/1 var(--sans);letter-spacing:.14em;color:var(--ink);white-space:nowrap}
+#hint{position:absolute;left:22px;top:39px;font:500 7.2px/1 var(--sans);letter-spacing:.13em;color:var(--ink3);white-space:nowrap}
+
+/* title + spec */
+#title{left:calc(40px * var(--k));top:calc(72px * var(--k));width:300px}
+#title .kick{font:500 8px/1 var(--mono);letter-spacing:.12em;color:var(--ink3);margin-bottom:9px}
+#title h1{font:500 30px/1 var(--sans);letter-spacing:.03em}
+#title h1 span{color:var(--hot)}
+#title .sub{margin-top:9px;font:500 9.6px/1.3 var(--sans);letter-spacing:.07em}
+#title .sub small{display:block;font-size:9px;color:var(--ink3);letter-spacing:.2em;margin-top:2px}
+#spec{margin-top:16px;display:grid;grid-template-columns:96px 1fr;row-gap:7px;border-top:1px solid var(--hair);padding-top:10px}
+#spec dt{font:500 8.4px/1.35 var(--sans);color:var(--ink3);letter-spacing:.1em}
+#spec dt small{display:block;font-size:7.4px;letter-spacing:.08em}
+#spec dd{font:500 9.4px/1.35 var(--sans);letter-spacing:.06em}
+#spec dd b{font-weight:500;font-family:var(--mono);font-size:9.2px}
+#title .note{margin-top:12px;font:400 7.4px/1.5 var(--sans);letter-spacing:.06em;color:var(--ink3);max-width:290px}
+
+/* top-right schematic card */
+#card{right:calc(28px * var(--k));top:calc(72px * var(--k));width:330px;height:150px}
+#card svg{display:block;margin:6px 0 0 0}
+
+/* bottom three panels */
+#bottom{left:calc(28px * var(--k));bottom:calc(14px * var(--k) + env(safe-area-inset-bottom,0px));width:calc(100vw / var(--k) - 56px);height:168px;
+  display:grid;grid-template-columns:1.55fr 1fr 1fr;gap:12px}
+#bottom .panel{position:relative;overflow:hidden}
+#bottom svg{position:absolute;left:0;top:26px}
+
+/* leader labels */
+#calls{position:absolute;inset:0}
+.co{position:absolute;top:0;white-space:nowrap;will-change:transform,opacity}
+.co h4{font:600 8.4px/1.25 var(--sans);letter-spacing:.11em}
+.co h4 i{font-style:normal;font-family:var(--mono);font-weight:500;color:var(--ink3);margin-right:6px}
+.co p{font:400 7.6px/1.4 var(--sans);letter-spacing:.08em;color:var(--ink3);margin-top:2px}
+.co p b{font-weight:500;color:var(--ink2);letter-spacing:.12em}
+.co{transform-origin:top left}
+.co.L{text-align:right}
+.co.R h4::before{content:"";display:inline-block;border:3.5px solid transparent;border-left:5px solid var(--ink);margin-right:5px;transform:translateY(1px)}
+
+#perf{right:calc(30px * var(--k));bottom:calc(192px * var(--k));font:500 8.2px/1 var(--mono);letter-spacing:.08em;color:var(--ink2);white-space:nowrap}
+#inspect{left:50%;top:calc(64px * var(--k));transform:translateX(-50%) scale(var(--k));transform-origin:top center;font:600 8.6px/1 var(--sans);
+  letter-spacing:.2em;padding:6px 14px;border:1px solid var(--hot);color:var(--hot);background:var(--panel);opacity:0;transition:opacity .4s}
+body.inspecting #inspect{opacity:1}
+
+.hideable{transition:opacity .35s}
+body.nohud .hideable{opacity:0;pointer-events:none}
+body.phone #card,body.phone #bottom,body.phone #calls,body.phone #leaders,body.phone #spec,body.phone #title .note,
+body.phone #top .docid,body.phone #ctl .lab,body.phone #hint,body.phone #inspect{display:none}
+body.phone #ctl{left:14px;right:14px;top:34px;flex-wrap:wrap;gap:5px}
+body.phone .btn{height:26px;padding:8px 10px 6px;font-size:10px}
+body.phone #status{left:14px;right:auto;top:auto;bottom:calc(16px + env(safe-area-inset-bottom,0px));position:fixed}
+body.phone #title{left:14px;top:calc(140px + env(safe-area-inset-top,0px))}
+body.phone #perf{right:14px;bottom:calc(36px + env(safe-area-inset-bottom,0px))}
+#boot{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);font:500 10px/1.6 var(--mono);letter-spacing:.2em;color:var(--ink3);text-align:center;max-width:560px}
+#boot.err{color:#9a3a1a;letter-spacing:.06em}
+</style>
+</head>
+<body>
+<canvas id="gl"></canvas>
+<div id="grain"></div>
+<div id="boot">LOADING MODEL · 模型生成中</div>
+
+<div id="hud">
+  <svg id="leaders" class="hideable"></svg>
+  <div id="calls" class="hideable"></div>
+
+  <div id="top" class="blk tl" data-hud-panel>
+    <div class="brand"><b></b>TECHNICAL PLATE · REFERENCE STUDY</div>
+    <div class="docid">TP-DEMO-0001</div>
+    <div class="rule"></div>
+    <div id="status"><span id="st"></span></div>
+    <div id="hint"></div>
+    <div id="ctl" class="pe"></div>
+  </div>
+
+  <div id="title" class="blk tl hideable" data-hud-panel>
+    <div class="kick">PLATE 01 · 技术图版</div>
+    <h1>DEMO <span>MACHINE</span></h1>
+    <div class="sub">AXIAL PROCESS UNIT · CUTAWAY STUDY<small>轴流工艺机组 · 剖视研究</small></div>
+    <dl id="spec">
+      <dt>SYSTEM<small>系统</small></dt><dd>AXIAL PROCESS UNIT</dd>
+      <dt>LENGTH<small>全长</small></dt><dd><b>8.4 m</b></dd>
+      <dt>CASING Ø<small>机匣直径</small></dt><dd><b>2.6 m</b></dd>
+      <dt>STAGES<small>级数</small></dt><dd><b>6</b> ROTOR / <b>6</b> STATOR</dd>
+    </dl>
+    <div class="note">DESIGN STUDY · PROPORTIONS ILLUSTRATIVE<br>设计研究 · 比例示意</div>
+  </div>
+
+  <div id="card" class="blk tr panel hideable" data-hud-panel>
+    <div class="ph"><i>A</i>PROCESS FLOW<em>工艺流程</em></div>
+    <svg id="cardsvg" width="330" height="118"></svg>
+  </div>
+
+  <div id="bottom" class="blk bl hideable">
+    <div class="panel" data-hud-panel><div class="ph"><i>01</i>LONGITUDINAL SECTION<em>纵剖面</em></div><svg id="p1"></svg></div>
+    <div class="panel" data-hud-panel><div class="ph"><i>02</i>STAGE DETAIL<em>级详情</em></div><svg id="p2"></svg></div>
+    <div class="panel" data-hud-panel><div class="ph"><i>03</i>OPERATING CYCLE<em>运行周期</em></div><svg id="p3"></svg></div>
+  </div>
+
+  <div id="inspect" class="blk">REFERENCE SECTION · ENGINEERING INSPECTION · 工程检视</div>
+  <div id="perf" class="blk br hideable" data-hud-panel>— FPS</div>
+</div>
+
+<script>
+  // Show a readable failure instead of a blank sheet (CDN blocked, no WebGL2, script error).
+  const bootFail = msg => { const b = document.getElementById('boot'); b.className = 'err'; b.style.display = 'block';
+    b.textContent = 'VIEWER FAILED TO START · 启动失败 — ' + msg + ' (needs WebGL2 and access to cdn.jsdelivr.net)'; };
+  window.addEventListener('error', e => bootFail(e.message || 'resource failed to load'), true);
+  setTimeout(() => { if (!window.__showcase) bootFail('timeout'); }, 20000);
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
+import { FXAAShader } from 'three/addons/shaders/FXAAShader.js';
+
+/* ============================================================
+   CONFIG — the only place subject-specific text lives (mirror BRIEF.md)
+   ============================================================ */
+const PAPER = '#E9E4D8', INK = '#2A2824', INK3 = '#857D70', HOT = '#B8602E', COLD = '#4F7F8C';
+const AXIS_Y = 1.55;
+const CONFIG = {
+  sections: [
+    { id: '01', en: 'INTAKE', cn: '进气', x0: -4.2, x1: -2.6 },
+    { id: '02', en: 'COMPRESSION', cn: '压缩', x0: -2.6, x1: 0.6 },
+    { id: '03', en: 'CORE', cn: '核心', x0: 0.6, x1: 2.2 },
+    { id: '04', en: 'EXHAUST', cn: '排气', x0: 2.2, x1: 4.2 },
+  ],
+  views: [
+    { id: 'hero', en: 'HERO', cn: '主视图', pos: [5.8, 4.4, 9.4], target: [0.2, 1.25, 0], fov: 34, section: -1 },
+    { id: 'section', en: 'SECTION', cn: '剖面', pos: [0.2, 3.2, 12.6], target: [0.2, 1.4, 0], fov: 32, section: -1 },
+    { id: 'stages', en: 'STAGES', cn: '叶栅', pos: [-0.2, 2.9, 4.6], target: [-1.0, 1.6, 0.2], fov: 38, section: 1, labels: ['rotor', 'stator', 'shaft'] },
+    { id: 'core', en: 'CORE', cn: '核心', pos: [3.6, 3.0, 4.4], target: [1.5, 1.5, 0.2], fov: 38, section: 2, labels: ['core', 'cut', 'shaft'] },
+    { id: 'rear', en: 'REAR', cn: '后部', pos: [9.2, 3.2, 4.2], target: [2.2, 1.4, 0], fov: 34, section: 3 },
+    { id: 'orbit', en: 'ORBIT', cn: '环绕', pos: [-6.5, 4.6, 8.8], target: [0.2, 1.3, 0], fov: 34, section: -1, orbit: true },
+  ],
+  reference: { pos: [0.2, AXIS_Y, 48], target: [0.2, AXIS_Y, 0], fov: 9.5 },
+  modes: [
+    { id: 'cutaway', en: 'CUTAWAY', cn: '剖切', key: 'c', dur: 0.8, on: true },
+    { id: 'xray', en: 'X-RAY', cn: '透视', key: 'x', dur: 0.3 },
+    { id: 'exploded', en: 'EXPLODED', cn: '爆炸', key: 'e', dur: 2.0 },
+    { id: 'flow', en: 'FLOW', cn: '流动', key: 'f', dur: 0.6 },
+    { id: 'reference', en: 'REFERENCE', cn: '检视', key: 'r', dur: 2.0 },
+  ],
+  callouts: [   // p = point in the section group's space (world space while not exploded)
+    { id: 'intake', side: 'L', no: '01', en: 'INTAKE BELL', cn: '进气喇叭口', d: 'FLARED INLET · LOW-LOSS ENTRY', sec: 0, p: [-3.4, AXIS_Y - 0.63, 0.9] },
+    { id: 'rotor', side: 'L', no: '02', en: 'ROTOR BLADE ROWS', cn: '动叶列', d: 'TWIST & HEIGHT VARY BY STAGE', sec: 1, p: [-1.85, AXIS_Y + 0.42, 0.42] },
+    { id: 'shaft', side: 'L', no: '03', en: 'MAIN SHAFT', cn: '主轴', d: 'SINGLE SHAFT · CO-AXIAL ROTORS', sec: 2, p: [1.1, AXIS_Y + 0.12, 0.12] },
+    { id: 'stator', side: 'R', no: '04', en: 'STATOR VANE ROWS', cn: '静叶列', d: 'FIXED TO CASING · TURN THE FLOW', sec: 1, p: [-0.61, AXIS_Y + 0.35, 0.35] },
+    { id: 'core', side: 'R', no: '05', en: 'CORE CHAMBER', cn: '核心腔', d: 'HEAT ADDITION ZONE', sec: 2, p: [1.6, AXIS_Y - 0.3, -0.85] },
+    { id: 'cut', side: 'R', no: '06', en: 'MACHINED CUT FACE', cn: '剖切面', d: 'CASING SECTION · CLIPPED SOLID', sec: 3, p: [2.9, AXIS_Y + 0.001, 0.89] },
+  ],
+  cycle: [
+    { en: 'INTAKE', cn: '吸入' }, { en: 'COMPRESSION', cn: '压缩' }, { en: 'HEAT ADDITION', cn: '加热' }, { en: 'EXPANSION', cn: '膨胀' },
+  ],
+  cycleSeconds: 8,
+};
+
+/* ============================================================
+   helpers
+   ============================================================ */
+const $ = id => document.getElementById(id);
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+const lerp = (a, b, t) => a + (b - a) * t;
+const easeInOut = t => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+const SVGNS = 'http://www.w3.org/2000/svg';
+function svgEl(tag, attrs, parent) {
+  const e = document.createElementNS(SVGNS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+}
+
+/* ============================================================
+   SceneManager — renderer, post chain (no native MSAA), lights, env
+   ============================================================ */
+const canvas = $('gl');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, powerPreference: 'high-performance' });
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.0;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.shadowMap.autoUpdate = false;
+renderer.localClippingEnabled = true;
+renderer.info.autoReset = false;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(PAPER);
+scene.fog = new THREE.Fog(PAPER, 45, 130);
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+scene.environmentIntensity = 0.55;
+
+const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 400);
+const hemi = new THREE.HemisphereLight('#F4F0E6', '#B7AE9C', 0.55);
+const key = new THREE.DirectionalLight('#FFF6EA', 2.3);
+key.position.set(6, 11, 8);
+key.castShadow = true;
+key.shadow.mapSize.set(2048, 2048);
+key.shadow.camera.left = -7; key.shadow.camera.right = 7; key.shadow.camera.top = 6; key.shadow.camera.bottom = -6;
+key.shadow.camera.near = 2; key.shadow.camera.far = 30;
+key.shadow.radius = 4; key.shadow.bias = -0.0004;
+const fill = new THREE.DirectionalLight('#E8EEF2', 0.6);
+fill.position.set(-8, 5, -4);
+const rim = new THREE.DirectionalLight('#FFFFFF', 0.45);
+rim.position.set(-3, 6, -10);
+scene.add(hemi, key, fill, rim);
+
+const composer = new EffectComposer(renderer);
+composer.addPass(new RenderPass(scene, camera));
+composer.addPass(new OutputPass());
+const fxaa = new ShaderPass(FXAAShader);
+composer.addPass(fxaa);
+
+/* ============================================================
+   MaterialLibrary — procedural maps only; no default grey plastic
+   ============================================================ */
+function brushedTexture() {
+  const c = document.createElement('canvas'); c.width = c.height = 256;
+  const g = c.getContext('2d');
+  g.fillStyle = '#8a8a8a'; g.fillRect(0, 0, 256, 256);
+  for (let i = 0; i < 900; i++) {
+    const v = 110 + Math.random() * 60;
+    g.fillStyle = `rgba(${v},${v},${v},0.18)`;
+    g.fillRect(Math.random() * 256, Math.random() * 256, 30 + Math.random() * 120, 1);
+  }
+  const t = new THREE.CanvasTexture(c);
+  t.wrapS = t.wrapT = THREE.RepeatWrapping;
+  t.repeat.set(4, 1);
+  return t;
+}
+const brushed = brushedTexture();
+// clipping wedge around the machine axis: removes polar angles [0, a] measured from +Z toward +Y
+const cutPlanes = [new THREE.Plane(new THREE.Vector3(0, -1, 0), AXIS_Y), new THREE.Plane(new THREE.Vector3(0, 0, -1), 0)];
+const MAT = {
+  casing: new THREE.MeshPhysicalMaterial({ color: '#C4C5C1', metalness: 0.82, roughness: 0.65, roughnessMap: brushed,
+    clippingPlanes: cutPlanes, clipIntersection: true, clipShadows: true }),
+  cut: new THREE.MeshBasicMaterial({ color: '#B8973C', side: THREE.BackSide, clippingPlanes: cutPlanes, clipIntersection: true }),
+  steel: new THREE.MeshStandardMaterial({ color: '#A3A7A8', metalness: 0.9, roughness: 0.3 }),
+  blade: new THREE.MeshStandardMaterial({ color: '#CDCFCA', metalness: 0.78, roughness: 0.34 }),
+  vane: new THREE.MeshStandardMaterial({ color: '#8E9294', metalness: 0.8, roughness: 0.46 }),
+  frame: new THREE.MeshStandardMaterial({ color: '#4A4E4F', metalness: 0.55, roughness: 0.58 }),
+  ground: new THREE.MeshStandardMaterial({ color: '#DFD9CC', metalness: 0, roughness: 1 }),
+};
+const XRAY_MATS = [MAT.casing, MAT.cut];
+
+/* ============================================================
+   ModelFactory — DEMO SUBJECT. Replace buildSubject() entirely.
+   Returns { root, sections[], rotors[], occluders[] }.
+   ============================================================ */
+function casingRadius(x) {               // one profile drives the casing, the flow field and panel 01
+  if (x < -2.6) return 1.0 + 0.32 * Math.pow(clamp((-2.6 - x) / 1.6, 0, 1), 1.6);
+  if (x < 0.6) return lerp(1.0, 0.8, (x + 2.6) / 3.2);
+  if (x < 2.2) return 0.8 + 0.18 * Math.sin(Math.PI * (x - 0.6) / 1.6);
+  return lerp(0.82, 1.28, Math.pow((x - 2.2) / 2.0, 1.4));
+}
+const STAGES = Array.from({ length: 6 }, (_, i) => {
+  const x = -2.35 + i * 0.5, r = casingRadius(x) - 0.08;
+  return { x, hub: 0.24 + i * 0.025, tip: r, n: 34 - i * 2, twist: 0.9 - i * 0.08, stagger: 0.55 + i * 0.05 };
+});
+
+function casingGeometry(x0, x1) {
+  const pts = [], n = 28, t = 0.07;
+  for (let i = 0; i <= n; i++) { const x = lerp(x0, x1, i / n); pts.push(new THREE.Vector2(casingRadius(x), x)); }
+  for (let i = n; i >= 0; i--) { const x = lerp(x0, x1, i / n); pts.push(new THREE.Vector2(casingRadius(x) - t, x)); }
+  pts.push(pts[0].clone());
+  const g = new THREE.LatheGeometry(pts, 96);
+  g.rotateZ(-Math.PI / 2);                // lathe axis Y → machine axis X
+  g.rotateX(Math.PI / 2);                 // put the lathe seam underneath, away from the cut
+  g.translate(0, AXIS_Y, 0);
+  return g;
+}
+function bladeGeometry(chord, thick, twist, stagger) {
+  const g = new THREE.BoxGeometry(chord, 1, thick, 1, 6, 1);
+  g.translate(0, 0.5, 0);
+  const p = g.attributes.position, v = new THREE.Vector3();
+  for (let i = 0; i < p.count; i++) {
+    v.fromBufferAttribute(p, i);
+    const a = stagger + twist * v.y, c = Math.cos(a), s = Math.sin(a);
+    p.setXYZ(i, v.x * c - v.z * s, v.y, v.x * s + v.z * c);
+  }
+  g.computeVertexNormals();
+  return g;
+}
+function bladeRow(geo, mat, stage, x, height, count) {
+  const mesh = new THREE.InstancedMesh(geo, mat, count);
+  const m = new THREE.Matrix4(), q = new THREE.Quaternion(), pos = new THREE.Vector3(), scl = new THREE.Vector3(1, height, 1);
+  for (let i = 0; i < count; i++) {
+    const th = (i / count) * Math.PI * 2;
+    q.setFromAxisAngle(new THREE.Vector3(1, 0, 0), th);
+    pos.set(x, Math.cos(th) * stage.hub, Math.sin(th) * stage.hub);
+    mesh.setMatrixAt(i, m.compose(pos, q, scl));
+  }
+  return mesh;
+}
+function buildSubject() {
+  const root = new THREE.Group(), sections = [], rotors = [], occluders = [];
+  const rotorBlade = bladeGeometry(0.16, 0.014, 0.9, 0.6), statorBlade = bladeGeometry(0.13, 0.016, -0.3, -0.5);
+  CONFIG.sections.forEach((s) => {
+    const g = new THREE.Group(); g.userData.home = 0;
+    const geo = casingGeometry(s.x0, s.x1);
+    const shell = new THREE.Mesh(geo, MAT.casing); shell.castShadow = true;
+    const cut = new THREE.Mesh(geo, MAT.cut);
+    g.add(shell, cut); occluders.push(shell);
+    const rotor = new THREE.Group(); rotor.position.y = AXIS_Y; g.add(rotor); rotors.push(rotor);
+    const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.17, 0.17, s.x1 - s.x0, 32).rotateZ(Math.PI / 2), MAT.steel);
+    shaft.position.x = (s.x0 + s.x1) / 2; rotor.add(shaft);
+    const stator = new THREE.Group(); stator.position.y = AXIS_Y; g.add(stator);
+    STAGES.filter(st => st.x >= s.x0 && st.x < s.x1).forEach(st => {
+      const disk = new THREE.Mesh(new THREE.CylinderGeometry(st.hub, st.hub, 0.12, 40).rotateZ(Math.PI / 2), MAT.steel);
+      disk.position.x = st.x; rotor.add(disk);
+      rotor.add(bladeRow(rotorBlade, MAT.blade, st, st.x, st.tip - st.hub, st.n));
+      stator.add(bladeRow(statorBlade, MAT.vane, { hub: st.hub + 0.02 }, st.x + 0.24, st.tip - st.hub - 0.04, st.n + 8));
+    });
+    root.add(g); sections.push(g);
+  });
+  const parts = [new THREE.BoxGeometry(8.8, 0.22, 2.6).translate(0, 0.11, 0)];
+  [-3.4, -1.0, 1.4, 3.5].forEach(x => parts.push(new THREE.BoxGeometry(0.22, AXIS_Y - casingRadius(x) - 0.18, 1.3).translate(x, 0.22 + (AXIS_Y - casingRadius(x) - 0.18) / 2, 0)));
+  const plinth = new THREE.Mesh(mergeGeometries(parts), MAT.frame); plinth.castShadow = plinth.receiveShadow = true;
+  root.add(plinth); occluders.push(plinth);
+  return { root, sections, rotors, occluders };
+}
+const subject = buildSubject();
+scene.add(subject.root);
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(300, 300).rotateX(-Math.PI / 2), MAT.ground);
+ground.receiveShadow = true;
+scene.add(ground);
+
+/* ============================================================
+   FlowSystem — one draw call; path radius baked into a texture
+   ============================================================ */
+const FLOW_N = 5000, X0 = -4.3, X1 = 4.3;
+const radiusTex = (() => {
+  const w = 256, d = new Float32Array(w * 4);
+  for (let i = 0; i < w; i++) d[i * 4] = casingRadius(lerp(X0, X1, i / (w - 1))) - 0.1;
+  const t = new THREE.DataTexture(d, w, 1, THREE.RGBAFormat, THREE.FloatType);
+  t.needsUpdate = true;
+  return t;
+})();
+const flow = (() => {
+  const g = new THREE.BufferGeometry(), seed = new Float32Array(FLOW_N * 3);
+  for (let i = 0; i < FLOW_N; i++) { seed[i * 3] = Math.random(); seed[i * 3 + 1] = Math.random() * Math.PI * 2; seed[i * 3 + 2] = Math.random(); }
+  g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(FLOW_N * 3), 3));
+  g.setAttribute('seed', new THREE.BufferAttribute(seed, 3));
+  const mat = new THREE.ShaderMaterial({
+    transparent: true, depthWrite: false,
+    uniforms: { uT: { value: 0 }, uAmt: { value: 0 }, uR: { value: radiusTex }, uPx: { value: 600 }, uAxis: { value: AXIS_Y } },
+    vertexShader: `
+      attribute vec3 seed; uniform float uT, uPx, uAxis; uniform sampler2D uR; varying float vU;
+      void main(){
+        float u = fract(seed.z + uT * (0.06 + 0.05 * seed.x));
+        float x = mix(${X0.toFixed(2)}, ${X1.toFixed(2)}, u);
+        float R = texture2D(uR, vec2(u, 0.5)).r;
+        float r = mix(0.28, R, seed.x);
+        vec3 p = vec3(x, uAxis + r * cos(seed.y + u * 2.2), r * sin(seed.y + u * 2.2));
+        vec4 mv = modelViewMatrix * vec4(p, 1.0);
+        gl_Position = projectionMatrix * mv; gl_PointSize = 0.035 * uPx / -mv.z; vU = u;
+      }`,
+    fragmentShader: `
+      uniform float uAmt; varying float vU;
+      void main(){
+        float d = length(gl_PointCoord - 0.5); if (d > 0.5) discard;
+        vec3 cold = vec3(0.43,0.53,0.59), warm = vec3(0.78,0.54,0.24), hot = vec3(0.60,0.27,0.19), out_ = vec3(0.64,0.60,0.55);
+        vec3 c = vU < 0.5 ? mix(cold, cold * 1.15, vU * 2.0) : vU < 0.62 ? mix(warm, hot, (vU - 0.5) / 0.12) : mix(hot, out_, (vU - 0.62) / 0.38);
+        gl_FragColor = vec4(c, uAmt * 0.75 * smoothstep(0.5, 0.15, d));
+      }`,
+  });
+  const pts = new THREE.Points(g, mat);
+  pts.frustumCulled = false;
+  pts.visible = false;
+  scene.add(pts);
+  return pts;
+})();
+
+/* ============================================================
+   App state — single source of truth for buttons, keys and API
+   ============================================================ */
+const state = { view: 'hero', paused: false, hud: true, modes: {}, simT: 0, rotor: 0, before: null };
+const amt = {};
+CONFIG.modes.forEach(m => { state.modes[m.id] = !!m.on; amt[m.id] = m.on ? 1 : 0; });
+
+function applyModes() {
+  // cutaway wedge: 0 → closed casing, 1 → upper-front quadrant removed (closes again under X-RAY)
+  const a = (amt.cutaway * (1 - amt.xray)) * Math.PI / 2;
+  cutPlanes[1].normal.set(0, -Math.sin(a - Math.PI / 2), -Math.cos(a - Math.PI / 2));
+  cutPlanes[1].constant = AXIS_Y * Math.sin(a - Math.PI / 2);
+  const op = lerp(1, 0.14, amt.xray), transparent = amt.xray > 0.001;
+  XRAY_MATS.forEach(m => {
+    if (m.transparent !== transparent) { m.transparent = transparent; m.depthWrite = !transparent; m.needsUpdate = true; }
+    m.opacity = op;
+  });
+  const spread = [-1.5, -0.5, 0.5, 1.5];
+  subject.sections.forEach((g, i) => { g.position.x = spread[i] * 0.7 * easeInOut(amt.exploded); });
+  const f = amt.flow * (1 - amt.reference) * (1 - amt.exploded);
+  flow.material.uniforms.uAmt.value = f;
+  flow.visible = f > 0.001;
+}
+
+/* ============================================================
+   CameraController — eased presets, spherical offset interpolation
+   ============================================================ */
+const controls = new OrbitControls(camera, canvas);
+controls.enableDamping = true; controls.dampingFactor = 0.08;
+controls.maxPolarAngle = Math.PI * 0.49; controls.minDistance = 2; controls.maxDistance = 60;
+controls.autoRotateSpeed = 0.45;
+const rig = { mode: 'hero', t: 1, dur: 1.6,
+  from: { tgt: new THREE.Vector3(), sph: new THREE.Spherical(), fov: 34 },
+  to: { tgt: new THREE.Vector3(), sph: new THREE.Spherical(), fov: 34 } };
+const _off = new THREE.Vector3(), _v = new THREE.Vector3();
+function viewDef(id) { return id === 'reference' ? CONFIG.reference : CONFIG.views.find(v => v.id === id); }
+function fitFov(fov) {                                   // portrait: widen vertical FOV to keep the landscape framing
+  const k = Math.max(1, 1.25 / camera.aspect);
+  return Math.min(100, 2 * Math.atan(Math.tan(fov * Math.PI / 360) * k) * 180 / Math.PI);
+}
+function flyTo(id, dur = 1.6) {
+  const v = viewDef(id);
+  rig.mode = id; rig.t = 0; rig.dur = dur; controls.autoRotate = false;
+  rig.from.tgt.copy(controls.target);
+  rig.from.sph.setFromVector3(_off.subVectors(camera.position, controls.target));
+  rig.from.fov = camera.fov;
+  rig.to.tgt.fromArray(v.target);
+  rig.to.sph.setFromVector3(_off.fromArray(v.pos).sub(rig.to.tgt));
+  rig.to.fov = fitFov(v.fov);
+  let dth = rig.to.sph.theta - rig.from.sph.theta;       // shortest way round
+  if (dth > Math.PI) rig.to.sph.theta -= Math.PI * 2; else if (dth < -Math.PI) rig.to.sph.theta += Math.PI * 2;
+}
+controls.addEventListener('start', () => {             // fires only for user pointer input
+  if (rig.mode !== 'free') { rig.mode = 'free'; rig.t = 1; controls.autoRotate = false; syncUi(); }
+});
+const _s = new THREE.Spherical();
+function updateCamera(dt) {
+  if (rig.t < 1) {
+    rig.t = Math.min(1, rig.t + dt / rig.dur);
+    const e = easeInOut(rig.t);
+    controls.target.lerpVectors(rig.from.tgt, rig.to.tgt, e);
+    _s.set(lerp(rig.from.sph.radius, rig.to.sph.radius, e), lerp(rig.from.sph.phi, rig.to.sph.phi, e), lerp(rig.from.sph.theta, rig.to.sph.theta, e));
+    camera.position.setFromSpherical(_s).add(controls.target);
+    camera.fov = lerp(rig.from.fov, rig.to.fov, e);
+    camera.updateProjectionMatrix();
+    camera.lookAt(controls.target);
+    if (rig.t === 1 && viewDef(rig.mode)?.orbit) controls.autoRotate = true;
+    return;
+  }
+  controls.update(dt);
+}
+function snapCamera() { if (rig.t < 1) { rig.t = 0.9999; updateCamera(1); } }
+
+/* ============================================================
+   HUDController — scale, buttons, status, schematic + panels
+   ============================================================ */
+const hud = { W: 0, H: 0, k: 1, phone: false, bandTop: 0, bandBottom: 0 };
+const ui = { presets: [], modes: [] };
+(function buildControls() {
+  const ctl = $('ctl');
+  const lab = t => { const s = document.createElement('span'); s.className = 'lab'; s.textContent = t; ctl.appendChild(s); };
+  const btn = (html, attrs, title) => { const b = document.createElement('button'); b.className = 'btn'; b.innerHTML = html; b.title = title;
+    for (const k in attrs) b.dataset[k] = attrs[k]; ctl.appendChild(b); return b; };
+  lab('VIEW');
+  CONFIG.views.forEach((v, i) => ui.presets.push(btn(`${v.en}<small>${v.cn}</small>`, { preset: v.id }, String(i + 1))));
+  lab('MODE');
+  CONFIG.modes.forEach(m => ui.modes.push(btn(`${m.en}<small>${m.cn}</small>`, { mode: m.id }, m.key.toUpperCase())));
+  ui.pause = btn('❚❚ PAUSE', { action: 'pause' }, 'Space');
+  ui.presets.forEach(b => b.addEventListener('click', () => App.setView(b.dataset.preset)));
+  ui.modes.forEach(b => b.addEventListener('click', () => App.setMode(b.dataset.mode, !state.modes[b.dataset.mode])));
+  ui.pause.addEventListener('click', () => App.setPaused(!state.paused));
+  $('hint').textContent = `DRAG ORBIT · 1–${CONFIG.views.length} VIEWS · ${CONFIG.modes.map(m => m.key.toUpperCase() + ' ' + m.en).join(' · ')} · SPACE PAUSE · H HUD`;
+})();
+function syncUi() {
+  ui.presets.forEach(b => b.classList.toggle('on', b.dataset.preset === rig.mode));
+  ui.modes.forEach(b => b.classList.toggle('on', !!state.modes[b.dataset.mode]));
+  ui.pause.classList.toggle('on', state.paused);
+  ui.pause.textContent = state.paused ? '▶ PLAY' : '❚❚ PAUSE';
+  [...ui.presets, ...ui.modes, ui.pause].forEach(b => b.setAttribute('aria-pressed', b.classList.contains('on')));
+  document.body.classList.toggle('nohud', !state.hud);
+  document.body.classList.toggle('inspecting', !!state.modes.reference);
+  highlightSection();
+}
+function statusText() {
+  const v = rig.mode === 'free' ? 'FREE CAMERA' : rig.mode === 'reference' ? 'REFERENCE SECTION' : `${viewDef(rig.mode).en} VIEW`;
+  const on = CONFIG.modes.filter(m => state.modes[m.id] && m.id !== 'reference').map(m => m.en);
+  return [v, state.paused ? 'PAUSED' : 'RUNNING', ...on].join(' · ');
+}
+
+const card = { nodes: [] };
+(function drawCard() {
+  const s = $('cardsvg'), n = CONFIG.sections.length, x0 = 22, x1 = 308, y = 34;
+  svgEl('line', { x1: x0, y1: y, x2: x1, y2: y, stroke: INK, 'stroke-width': 0.7 }, s);
+  CONFIG.sections.forEach((sec, i) => {
+    const x = lerp(x0, x1, i / (n - 1));
+    const c = svgEl('circle', { cx: x, cy: y, r: 4, fill: '#F4F0E7', stroke: INK, 'stroke-width': 0.9 }, s);
+    svgEl('text', { x, y: y - 12, 'text-anchor': 'middle', 'font-size': 7.4, fill: INK3, 'letter-spacing': '.08em' }, s).textContent = sec.id;
+    svgEl('text', { x, y: y + 18, 'text-anchor': 'middle', 'font-size': 7.6, 'font-weight': 600, fill: INK, 'letter-spacing': '.1em' }, s).textContent = sec.en;
+    svgEl('text', { x, y: y + 29, 'text-anchor': 'middle', 'font-size': 7.4, fill: INK3 }, s).textContent = sec.cn;
+    card.nodes.push(c);
+  });
+  const grad = svgEl('linearGradient', { id: 'tband' }, svgEl('defs', {}, s));
+  [[0, '#6E8796'], [0.45, '#B9B4A8'], [0.6, '#C8893E'], [0.75, '#9A4630'], [1, '#A39A8C']].forEach(([o, c]) => svgEl('stop', { offset: o, 'stop-color': c }, grad));
+  svgEl('rect', { x: x0, y: 82, width: x1 - x0, height: 4, fill: 'url(#tband)' }, s);
+  svgEl('text', { x: x0, y: 100, 'font-size': 7, fill: INK3, 'letter-spacing': '.08em' }, s).textContent = 'MEDIUM TEMPERATURE · QUALITATIVE · 介质温度（示意）';
+})();
+
+const p1 = { zones: [] }, p3 = { rows: [] };
+function drawPanels() {
+  // 01 — longitudinal section generated from the same casingRadius() that builds the model
+  const s1 = $('p1'), w = Math.max(200, $('p1').parentElement.clientWidth), h = 136;
+  s1.setAttribute('width', w); s1.setAttribute('height', h); s1.replaceChildren();
+  const mx = 18, sx = (w - 2 * mx) / (X1 - X0), cy = 58, sr = 34 / 1.32, X = x => mx + (x - X0) * sx;
+  let top = '', bot = '';
+  for (let i = 0; i <= 120; i++) { const x = lerp(-4.2, 4.2, i / 120), r = casingRadius(x) * sr; top += `${i ? 'L' : 'M'}${X(x).toFixed(1)} ${(cy - r).toFixed(1)}`; bot += `${i ? 'L' : 'M'}${X(x).toFixed(1)} ${(cy + r).toFixed(1)}`; }
+  p1.zones = CONFIG.sections.map(sec => {
+    const z = svgEl('rect', { x: X(sec.x0), y: cy - 46, width: X(sec.x1) - X(sec.x0), height: 92, fill: HOT, opacity: 0 }, s1);
+    svgEl('line', { x1: X(sec.x0), y1: cy - 48, x2: X(sec.x0), y2: cy + 48, stroke: INK, 'stroke-width': 0.4, 'stroke-dasharray': '2 2' }, s1);
+    svgEl('text', { x: (X(sec.x0) + X(sec.x1)) / 2, y: cy - 50, 'text-anchor': 'middle', 'font-size': 7.4, fill: INK, 'letter-spacing': '.08em' }, s1).textContent = `${sec.id} ${sec.en}`;
+    return z;
+  });
+  svgEl('path', { d: top, fill: 'none', stroke: INK, 'stroke-width': 0.9 }, s1);
+  svgEl('path', { d: bot, fill: 'none', stroke: INK, 'stroke-width': 0.9 }, s1);
+  svgEl('line', { x1: X(-4.2), y1: cy, x2: X(4.2), y2: cy, stroke: INK3, 'stroke-width': 0.5, 'stroke-dasharray': '8 2 2 2' }, s1);
+  STAGES.forEach(st => svgEl('line', { x1: X(st.x), y1: cy - st.tip * sr, x2: X(st.x), y2: cy - st.hub * sr, stroke: INK, 'stroke-width': 1.1 }, s1));
+  const sb = X(-4.2);
+  [0, 1, 2].forEach(i => svgEl('rect', { x: sb + i * sx, y: h - 16, width: sx, height: 3, fill: i % 2 ? 'none' : INK, stroke: INK, 'stroke-width': 0.5 }, s1));
+  svgEl('text', { x: sb + 3 * sx + 6, y: h - 12, 'font-size': 7, fill: INK3 }, s1).textContent = '3 m';
+
+  // 02 — stage detail: blade height per stage, from STAGES
+  const s2 = $('p2'), w2 = Math.max(160, $('p2').parentElement.clientWidth);
+  s2.setAttribute('width', w2); s2.setAttribute('height', h); s2.replaceChildren();
+  const bw = (w2 - 60) / STAGES.length;
+  STAGES.forEach((st, i) => {
+    const bh = (st.tip - st.hub) * 120;
+    svgEl('rect', { x: 30 + i * bw + 3, y: 112 - bh, width: bw - 6, height: bh, fill: '#D8D3C8', stroke: INK, 'stroke-width': 0.6 }, s2);
+    svgEl('text', { x: 30 + i * bw + bw / 2, y: 124, 'text-anchor': 'middle', 'font-size': 7, fill: INK3 }, s2).textContent = String(i + 1).padStart(2, '0');
+  });
+  svgEl('text', { x: 30, y: 12, 'font-size': 7.4, fill: INK, 'letter-spacing': '.1em' }, s2).textContent = 'BLADE HEIGHT BY STAGE · 逐级叶高';
+
+  // 03 — cycle rows, highlighted live in updateHud()
+  const s3 = $('p3'), w3 = Math.max(160, $('p3').parentElement.clientWidth);
+  s3.setAttribute('width', w3); s3.setAttribute('height', h); s3.replaceChildren();
+  p3.rows = CONFIG.cycle.map((c, i) => {
+    const y = 10 + i * 30;
+    const hl = svgEl('rect', { x: 10, y, width: w3 - 20, height: 26, fill: HOT, opacity: 0 }, s3);
+    const num = svgEl('text', { x: 20, y: y + 17, 'font-size': 9, 'font-family': 'IBM Plex Mono', fill: INK }, s3); num.textContent = i + 1;
+    svgEl('text', { x: 40, y: y + 12, 'font-size': 8, 'font-weight': 600, fill: INK, 'letter-spacing': '.1em' }, s3).textContent = c.en;
+    svgEl('text', { x: 40, y: y + 22, 'font-size': 7.4, fill: INK3 }, s3).textContent = c.cn;
+    svgEl('line', { x1: 10, y1: y + 28, x2: w3 - 10, y2: y + 28, stroke: INK, 'stroke-width': 0.3 }, s3);
+    return { hl, num };
+  });
+}
+function highlightSection() {
+  const v = viewDef(rig.mode), idx = v && v.section != null ? v.section : -1;
+  card.nodes.forEach((c, i) => c.setAttribute('fill', i === idx ? HOT : '#F4F0E7'));
+  p1.zones.forEach((z, i) => z.setAttribute('opacity', i === idx ? 0.1 : 0));
+}
+
+/* ============================================================
+   LabelSystem — two aligned columns, per-frame projection,
+   column de-overlap, occlusion fade, never over panels
+   ============================================================ */
+const labels = CONFIG.callouts.map(c => {
+  const el = document.createElement('div');
+  el.className = `co ${c.side}`;
+  el.innerHTML = `<h4><i>${c.no}</i>${c.en}</h4><p><b>${c.cn}</b><br>${c.d}</p>`;
+  $('calls').appendChild(el);
+  const line = svgEl('path', { fill: 'none', stroke: INK, 'stroke-width': 0.6 }, $('leaders'));
+  const dot = svgEl('circle', { r: 2.4, fill: '#F6F2EA', stroke: INK, 'stroke-width': 0.9 }, $('leaders'));
+  return { ...c, el, line, dot, w: 0, h: 0, y: -1, vis: 0, base: 0.3, listed: true, occ: false, world: new THREE.Vector3(), sx: 0, sy: 0, front: false };
+});
+const raycaster = new THREE.Raycaster(), _dir = new THREE.Vector3();
+const isClipped = p => amt.cutaway * (1 - amt.xray) > 0.01 && cutPlanes.every(pl => pl.distanceToPoint(p) < 0);
+let occCursor = 0;
+function checkOcclusion(l) {                             // throttled: one label per frame, clipping-aware
+  if (amt.xray > 0.5) { l.occ = false; return; }
+  _dir.subVectors(l.world, camera.position);
+  const dist = _dir.length();
+  raycaster.set(camera.position, _dir.normalize());
+  raycaster.far = dist - 0.05;
+  l.occ = raycaster.intersectObjects(subject.occluders, false).some(hit => !(hit.object.material === MAT.casing && isClipped(hit.point)));
+}
+function measureLabels() {
+  labels.forEach(l => { l.el.style.transform = 'none'; l.w = l.el.offsetWidth * hud.k; l.h = l.el.offsetHeight * hud.k; });
+  const topR = $('top').getBoundingClientRect(), botR = $('bottom').getBoundingClientRect();
+  hud.bandTop = topR.bottom + 16 * hud.k;
+  hud.bandBottom = botR.top - 26 * hud.k;
+}
+const _p = new THREE.Vector3();
+function updateLabels(dt) {
+  const { W, k } = hud, v = viewDef(rig.mode), allow = v && v.labels;
+  labels[occCursor % labels.length] && checkOcclusion(labels[occCursor++ % labels.length]);
+  labels.forEach(l => {
+    subject.sections[l.sec].localToWorld(l.world.fromArray(l.p));
+    _p.copy(l.world).project(camera);
+    l.front = _p.z > -1 && _p.z < 1;
+    l.sx = (_p.x * 0.5 + 0.5) * W; l.sy = (-_p.y * 0.5 + 0.5) * hud.H;
+    l.listed = state.hud && (!allow || allow.includes(l.id)) && amt.exploded < 0.5;
+    const want = l.listed && l.front && l.sx > 0 && l.sx < W && !l.occ;
+    l.vis += ((want ? 1 : 0) - l.vis) * Math.min(1, dt * 6);
+    l.base += ((l.listed ? 0.3 : 0) - l.base) * Math.min(1, dt * 6);
+  });
+  ['L', 'R'].forEach(side => {
+    const col = labels.filter(l => l.side === side).sort((a, b) => a.sy - b.sy);
+    const gap = 10 * k, targets = col.map(l => clamp(l.sy - l.h * 0.3, hud.bandTop, hud.bandBottom - l.h));
+    for (let i = 1; i < col.length; i++) targets[i] = Math.max(targets[i], targets[i - 1] + col[i - 1].h + gap);
+    for (let i = col.length - 1; i >= 0; i--) {
+      const lim = i === col.length - 1 ? hud.bandBottom - col[i].h : targets[i + 1] - col[i].h - gap;
+      targets[i] = Math.min(targets[i], lim);
+    }
+    col.forEach((l, i) => {
+      l.y = l.y < 0 ? targets[i] : l.y + (targets[i] - l.y) * Math.min(1, dt * 8);
+      const colX = side === 'L' ? W * 0.335 : W * 0.665;
+      const x = side === 'L' ? colX - l.w : colX;
+      l.el.style.transform = `translate(${x.toFixed(1)}px,${l.y.toFixed(1)}px) scale(${k})`;
+      l.el.style.opacity = (l.base + (1 - l.base) * l.vis).toFixed(3);
+      const ly = l.y + 5.5 * k, lx = side === 'L' ? colX + 4 * k : colX - 4 * k, ex = lx + (side === 'L' ? 16 : -16) * k;
+      l.line.setAttribute('d', `M${lx.toFixed(1)} ${ly.toFixed(1)}L${ex.toFixed(1)} ${ly.toFixed(1)}L${l.sx.toFixed(1)} ${l.sy.toFixed(1)}`);
+      l.line.setAttribute('opacity', (l.vis * 0.85).toFixed(3));
+      l.dot.setAttribute('cx', l.sx.toFixed(1)); l.dot.setAttribute('cy', l.sy.toFixed(1));
+      l.dot.setAttribute('opacity', l.vis.toFixed(3));
+    });
+  });
+}
+
+function layoutHud() {
+  hud.W = window.innerWidth; hud.H = window.innerHeight;
+  hud.phone = hud.W < 760;
+  hud.k = hud.phone ? clamp(hud.W / 430, 0.75, 1) : clamp(Math.min(hud.W / 1920, hud.H / 1080), 0.5, 1.8);
+  document.body.classList.toggle('phone', hud.phone);
+  document.documentElement.style.setProperty('--k', hud.k.toFixed(4));
+  drawPanels();
+  highlightSection();
+  measureLabels();
+}
+
+/* ============================================================
+   PerformanceMonitor
+   ============================================================ */
+const perf = { acc: 0, n: 0, fps: 0, calls: 0, tris: 0, samples: new Float32Array(900), i: 0 };
+function updatePerf(dtMs) {
+  perf.samples[perf.i++ % 900] = dtMs;
+  perf.acc += dtMs; perf.n++;
+  perf.calls = renderer.info.render.calls; perf.tris = renderer.info.render.triangles;
+  if (perf.acc > 500) {
+    perf.fps = Math.round(1000 * perf.n / perf.acc); perf.acc = 0; perf.n = 0;
+    const b = renderer.getDrawingBufferSize(_v2);
+    $('perf').textContent = `${perf.fps} FPS · ${perf.calls} DRAW CALLS · ${(perf.tris / 1e6).toFixed(2)}M TRIS · ${b.x}×${b.y}`;
+  }
+}
+const _v2 = new THREE.Vector2();
+
+/* ============================================================
+   App — mode semantics in one place
+   ============================================================ */
+const App = {
+  setView(id) {
+    if (state.modes.reference) this.setMode('reference', false, { restore: false });
+    flyTo(id); syncUi();
+  },
+  setMode(id, on, { restore = true } = {}) {
+    if (!(id in state.modes) || state.modes[id] === on) return;
+    if (id === 'reference') {
+      if (on) { state.before = { view: rig.mode, paused: state.paused }; state.paused = true; flyTo('reference', 2.0); }
+      else if (state.before) { state.paused = state.before.paused; if (restore) flyTo(state.before.view === 'free' ? 'hero' : state.before.view, 2.0); state.before = null; }
+    }
+    state.modes[id] = on; syncUi();
+  },
+  setPaused(on) {
+    if (!on && state.modes.reference) this.setMode('reference', false);
+    state.paused = on; syncUi();
+  },
+  setHud(on) { state.hud = on; syncUi(); },
+  snap() {
+    CONFIG.modes.forEach(m => { amt[m.id] = state.modes[m.id] ? 1 : 0; });
+    snapCamera(); applyModes(); renderer.shadowMap.needsUpdate = true;
+  },
+};
+window.addEventListener('keydown', e => {
+  if (e.target.closest && e.target.closest('input,textarea,select')) return;
+  const n = Number(e.key), k = e.key.toLowerCase(), mode = CONFIG.modes.find(m => m.key === k);
+  if (n >= 1 && n <= CONFIG.views.length) App.setView(CONFIG.views[n - 1].id);
+  else if (mode) App.setMode(mode.id, !state.modes[mode.id]);
+  else if (e.code === 'Space') { e.preventDefault(); App.setPaused(!state.paused); }
+  else if (k === 'h') App.setHud(!state.hud);
+  else if (e.key === 'Escape' && state.modes.reference) App.setMode('reference', false);
+  else return;
+  document.activeElement?.blur?.();
+});
+
+/* ============================================================
+   resize + main loop
+   ============================================================ */
+function resize() {
+  const w = window.innerWidth, h = window.innerHeight;
+  const pr = Math.min(window.devicePixelRatio || 1, 3840 / w, 2);
+  renderer.setPixelRatio(pr); renderer.setSize(w, h, false);
+  composer.setPixelRatio(pr); composer.setSize(w, h);
+  fxaa.material.uniforms.resolution.value.set(1 / (w * pr), 1 / (h * pr));
+  camera.aspect = w / h;
+  if (rig.mode !== 'free' && rig.t >= 1) camera.fov = fitFov(viewDef(rig.mode).fov);
+  camera.updateProjectionMatrix();
+  flow.material.uniforms.uPx.value = h * pr / (2 * Math.tan(camera.fov * Math.PI / 360));
+  layoutHud();
+}
+window.addEventListener('resize', resize);
+document.fonts?.ready.then(() => measureLabels());
+
+let last = performance.now(), statusCache = '', readyResolve;
+const ready = new Promise(r => { readyResolve = r; });
+const prevAmt = {};
+function frame(now) {
+  const dtMs = Math.min(100, now - last), dt = Math.min(0.05, dtMs / 1000);
+  last = now;
+  if (!state.paused) { state.simT += dt; state.rotor += dt * 2.2; }
+  let moving = false;
+  CONFIG.modes.forEach(m => {
+    amt[m.id] = clamp(amt[m.id] + (state.modes[m.id] ? 1 : -1) * dt / m.dur, 0, 1);
+    if (amt[m.id] !== prevAmt[m.id]) { moving = true; prevAmt[m.id] = amt[m.id]; }
+  });
+  applyModes();
+  if (moving) renderer.shadowMap.needsUpdate = true;
+  subject.rotors.forEach(r => { r.rotation.x = state.rotor; });
+  flow.material.uniforms.uT.value = state.simT;
+  updateCamera(dt);
+
+  renderer.info.reset();
+  composer.render(dt);
+
+  updateLabels(dt);
+  const phase = Math.floor((state.simT / CONFIG.cycleSeconds) * CONFIG.cycle.length) % CONFIG.cycle.length;
+  p3.rows.forEach((r, i) => r.hl.setAttribute('opacity', i === phase ? 0.1 : 0));
+  const st = statusText();
+  if (st !== statusCache) { $('st').textContent = st; statusCache = st; }
+  updatePerf(dtMs);
+  requestAnimationFrame(frame);
+}
+
+/* ============================================================
+   window.__showcase — test API consumed by scripts/shoot.py
+   ============================================================ */
+window.__showcase = {
+  ready,
+  presets: () => CONFIG.views.map(v => v.id),
+  modes: () => CONFIG.modes.map(m => m.id),
+  keymap: () => [
+    ...CONFIG.views.map((v, i) => ({ key: String(i + 1), type: 'preset', name: v.id })),
+    ...CONFIG.modes.map(m => ({ key: m.key, type: 'mode', name: m.id })),
+    { key: ' ', type: 'pause', name: 'pause' }, { key: 'h', type: 'hud', name: 'hud' },
+  ],
+  setPreset(id, { instant = false } = {}) { App.setView(id); if (instant) App.snap(); },
+  setMode(id, on, { instant = true } = {}) { App.setMode(id, on); if (instant) App.snap(); },
+  setPaused: on => App.setPaused(on),
+  setHud: on => App.setHud(on),
+  state: () => ({ camera: rig.mode, paused: state.paused, hud: state.hud, modes: { ...state.modes }, amt: { ...amt } }),
+  stats() {
+    const gl = renderer.getContext(), dbg = gl.getExtension('WEBGL_debug_renderer_info'), b = renderer.getDrawingBufferSize(new THREE.Vector2());
+    return { calls: perf.calls, triangles: perf.tris, geometries: renderer.info.memory.geometries, textures: renderer.info.memory.textures,
+      programs: renderer.info.programs.length, fps: perf.fps, frameTimes: Array.from(perf.samples).filter(Boolean),
+      buffer: [b.x, b.y], pixelRatio: renderer.getPixelRatio(), gpu: dbg ? gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) : 'n/a' };
+  },
+  benchSync(n = 40) {                                    // forced-complete GPU cost per frame (1-px readback)
+    const gl = renderer.getContext(), px = new Uint8Array(4);
+    const run = k => { const t0 = performance.now(); for (let i = 0; i < k; i++) { composer.render(0); gl.readPixels(0, 0, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, px); } return (performance.now() - t0) / k; };
+    run(4);
+    const ms = run(n);
+    last = performance.now();
+    return ms;
+  },
+};
+
+flyTo('hero'); snapCamera();
+resize();
+App.snap();
+syncUi();
+$('boot').style.display = 'none';
+requestAnimationFrame(t => { last = t; frame(t); readyResolve(true); });
+</script>
+</body>
+</html>
