@@ -1,0 +1,335 @@
+[
+  {
+    "id": "germany",
+    "name": {
+      "en": "Germany",
+      "zh": "德国"
+    },
+    "bloc": "axis",
+    "joined": "1939-09-01",
+    "left": "1945-05-08"
+  },
+  {
+    "id": "italy",
+    "name": {
+      "en": "Italy",
+      "zh": "意大利"
+    },
+    "bloc": "axis",
+    "joined": "1940-06-10",
+    "left": "1943-09-08"
+  },
+  {
+    "id": "japan",
+    "name": {
+      "en": "Japan",
+      "zh": "日本"
+    },
+    "bloc": "axis",
+    "joined": "1937-07-07",
+    "left": "1945-09-02"
+  },
+  {
+    "id": "hungary",
+    "name": {
+      "en": "Hungary",
+      "zh": "匈牙利"
+    },
+    "bloc": "axis",
+    "joined": "1941-04-11",
+    "left": "1945-01-20"
+  },
+  {
+    "id": "romania",
+    "name": {
+      "en": "Romania",
+      "zh": "罗马尼亚"
+    },
+    "bloc": "axis",
+    "joined": "1941-06-22",
+    "left": "1944-08-23"
+  },
+  {
+    "id": "bulgaria",
+    "name": {
+      "en": "Bulgaria",
+      "zh": "保加利亚"
+    },
+    "bloc": "axis",
+    "joined": "1941-03-01",
+    "left": "1944-09-08"
+  },
+  {
+    "id": "finland",
+    "name": {
+      "en": "Finland",
+      "zh": "芬兰"
+    },
+    "bloc": "axis",
+    "joined": "1941-06-25",
+    "left": "1944-09-19"
+  },
+  {
+    "id": "thailand",
+    "name": {
+      "en": "Thailand",
+      "zh": "泰国"
+    },
+    "bloc": "axis",
+    "joined": "1942-01-25",
+    "left": "1945-08-16"
+  },
+  {
+    "id": "manchukuo",
+    "name": {
+      "en": "Manchukuo",
+      "zh": "伪满洲国"
+    },
+    "bloc": "axis",
+    "joined": "1937-07-07",
+    "left": "1945-08-20"
+  },
+  {
+    "id": "vichy-france",
+    "name": {
+      "en": "Vichy France",
+      "zh": "维希法国"
+    },
+    "bloc": "neutral",
+    "joined": "1940-07-10",
+    "left": "1942-11-11"
+  },
+  {
+    "id": "uk",
+    "name": {
+      "en": "United Kingdom",
+      "zh": "英国"
+    },
+    "bloc": "allied",
+    "joined": "1939-09-03",
+    "left": "1945-09-02"
+  },
+  {
+    "id": "france",
+    "name": {
+      "en": "France",
+      "zh": "法国"
+    },
+    "bloc": "allied",
+    "joined": "1939-09-03",
+    "left": "1940-06-22"
+  },
+  {
+    "id": "free-france",
+    "name": {
+      "en": "Free France",
+      "zh": "自由法国"
+    },
+    "bloc": "allied",
+    "joined": "1940-06-18",
+    "left": "1945-09-02"
+  },
+  {
+    "id": "poland",
+    "name": {
+      "en": "Poland",
+      "zh": "波兰"
+    },
+    "bloc": "allied",
+    "joined": "1939-09-01",
+    "left": "1945-09-02"
+  },
+  {
+    "id": "china",
+    "name": {
+      "en": "China",
+      "zh": "中国"
+    },
+    "bloc": "allied",
+    "joined": "1937-07-07",
+    "left": "1945-09-02"
+  },
+  {
+    "id": "ussr",
+    "name": {
+      "en": "Soviet Union",
+      "zh": "苏联"
+    },
+    "bloc": "neutral",
+    "joined": "1939-09-17"
+  },
+  {
+    "id": "usa",
+    "name": {
+      "en": "United States",
+      "zh": "美国"
+    },
+    "bloc": "allied",
+    "joined": "1941-12-08",
+    "left": "1945-09-02"
+  },
+  {
+    "id": "australia",
+    "name": {
+      "en": "Australia",
+      "zh": "澳大利亚"
+    },
+    "bloc": "allied",
+    "joined": "1939-09-03",
+    "left": "1945-09-02"
+  },
+  {
+    "id": "canada",
+    "name": {
+      "en": "Canada",
+      "zh": "加拿大"
+    },
+    "bloc": "allied",
+    "joined": "1939-09-10",
+    "left": "1945-09-02"
+  },
+  {
+    "id": "new-zealand",
+    "name": {
+      "en": "New Zealand",
+      "zh": "新西兰"
+    },
+    "bloc": "allied",
+    "joined": "1939-09-03",
+    "left": "1945-09-02"
+  },
+  {
+    "id": "india",
+    "name": {
+      "en": "British India",
+      "zh": "英属印度"
+    },
+    "bloc": "allied",
+    "joined": "1939-09-03",
+    "left": "1945-09-02"
+  },
+  {
+    "id": "netherlands",
+    "name": {
+      "en": "Netherlands",
+      "zh": "荷兰"
+    },
+    "bloc": "allied",
+    "joined": "1940-05-10",
+    "left": "1945-09-02"
+  },
+  {
+    "id": "belgium",
+    "name": {
+      "en": "Belgium",
+      "zh": "比利时"
+    },
+    "bloc": "allied",
+    "joined": "1940-05-10",
+    "left": "1945-09-02"
+  },
+  {
+    "id": "norway",
+    "name": {
+      "en": "Norway",
+      "zh": "挪威"
+    },
+    "bloc": "allied",
+    "joined": "1940-04-09",
+    "left": "1945-09-02"
+  },
+  {
+    "id": "greece",
+    "name": {
+      "en": "Greece",
+      "zh": "希腊"
+    },
+    "bloc": "allied",
+    "joined": "1940-10-28",
+    "left": "1945-09-02"
+  },
+  {
+    "id": "yugoslavia",
+    "name": {
+      "en": "Yugoslavia",
+      "zh": "南斯拉夫"
+    },
+    "bloc": "allied",
+    "joined": "1941-04-06",
+    "left": "1945-09-02"
+  },
+  {
+    "id": "philippines",
+    "name": {
+      "en": "Philippines",
+      "zh": "菲律宾"
+    },
+    "bloc": "allied",
+    "joined": "1941-12-08",
+    "left": "1945-09-02"
+  },
+  {
+    "id": "brazil",
+    "name": {
+      "en": "Brazil",
+      "zh": "巴西"
+    },
+    "bloc": "allied",
+    "joined": "1942-08-22",
+    "left": "1945-09-02"
+  },
+  {
+    "id": "switzerland",
+    "name": {
+      "en": "Switzerland",
+      "zh": "瑞士"
+    },
+    "bloc": "neutral",
+    "joined": "1939-09-01"
+  },
+  {
+    "id": "sweden",
+    "name": {
+      "en": "Sweden",
+      "zh": "瑞典"
+    },
+    "bloc": "neutral",
+    "joined": "1939-09-01"
+  },
+  {
+    "id": "spain",
+    "name": {
+      "en": "Spain",
+      "zh": "西班牙"
+    },
+    "bloc": "neutral",
+    "joined": "1939-09-01"
+  },
+  {
+    "id": "portugal",
+    "name": {
+      "en": "Portugal",
+      "zh": "葡萄牙"
+    },
+    "bloc": "neutral",
+    "joined": "1939-09-01"
+  },
+  {
+    "id": "turkey",
+    "name": {
+      "en": "Turkey",
+      "zh": "土耳其"
+    },
+    "bloc": "neutral",
+    "joined": "1939-09-01"
+  },
+  {
+    "id": "ireland",
+    "name": {
+      "en": "Ireland",
+      "zh": "爱尔兰"
+    },
+    "bloc": "neutral",
+    "joined": "1939-09-01"
+  }
+]

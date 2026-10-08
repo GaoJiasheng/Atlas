@@ -588,3 +588,23 @@ state:
 | `cut` | 剖切 | `none` \| `half` | SpaceScene | `cut=half` |
 
 新增可链接字段：改 `core/types.ts` 的 `UrlEngineFields`、`core/url-state.ts`（`URL_KEY_ORDER`、编解码）、`SceneHost.tsx` 里解构的字段、descriptor 的 `fromUrl`，并补 `tests/url-state.test.ts`。
+
+## WW2 geo pipeline（`scripts/geo/ww2/`）
+
+二战主题的控制区关键帧（`src/content/topics/ww2/data/control.json`）由这条管线生成，CLAUDE.md 的"地图类内容必须用真实数据"由它落实。来源调查、每帧方法、控制点残差、许可证见 `scripts/geo/ww2/SOURCES-GEO.md`；主题内的来源表是 `data/SOURCES.md`（`[G#]`）。所有输入和步骤写在 `scripts/geo/ww2/sources.json`：数据集（url / license / ref）、OHM 关系集（按日期）、SVG 地图（类别颜色、控制点、残差预算）、关键帧配方（CShapes GW 代码 → 实体，再按顺序叠加的步骤，后者覆盖前者）。
+
+```bash
+pnpm tsx scripts/geo/ww2/fetch.ts         # 下载数据集到 raw/，装 mapshaper + osmtogeojson 到 .tools/（都 gitignore）；失败 WARN 后继续
+pnpm tsx scripts/geo/ww2/ohm-export.ts    # OpenHistoricalMap Overpass → work/ohm-<set>.geojson（按日期校验关系有效期）
+pnpm tsx scripts/geo/ww2/ohm-export.ts --list 1942-03-09 --levels 1-3   # 查某天有效的边界关系
+pnpm tsx scripts/geo/ww2/georef-svg.ts    # Commons SVG → GeoJSON：控制点拟合（投影 + 仿射 / 二次多项式，auto 取留一法 RMS 最小），打印残差 km
+pnpm tsx scripts/geo/ww2/georef-svg.ts --fills <svg>   # 列填充色（选类别）；--dots 列城市点和最近标注（选控制点）
+pnpm tsx scripts/geo/ww2/compose.ts       # CShapes 底 + OHM / SVG / Natural Earth 省份叠加 → work/K#.geojson（properties.holder）
+pnpm tsx scripts/geo/ww2/simplify.ts      # 拓扑保持简化 → control.json；预算 1.5 MB × 现有帧数 / 12，自动调间隔
+pnpm tsx scripts/geo/ww2/check.ts         # MapLibre（Playwright）渲染每帧，与来源地图并排 → docs/screenshots/ww2/geo-K#.png
+```
+
+- 不改 `package.json`：几何运算用 mapshaper（`.tools/`，`fetch.ts` 安装），截图用已装的 Playwright + `maplibre-gl`。
+- 加一个关键帧：在 `sources.json` 的 `ohm` 加该日期的关系集（先 `--list` 查），需要的话加 SVG 来源和控制点（≥ 4 个，欧洲残差 ≤ 30 km、亚太 ≤ 60 km），在 `keyframes` 写配方和 `checks` 视图，然后依次跑上面 6 步，看 `geo-K#.png` 与来源图并排是否一致，把方法和残差写进 `SOURCES-GEO.md` 与 `data/SOURCES.md`。
+- 选择器（`compose.ts`）：`cshapes`（可用 `partsAt` 只取包含某点的岛）、`ohm`、`admin1`（Natural Earth 省份）、`svg`（类别，`coastFillKm` 让占领区沿底图海岸补齐）、`svgFrame`、`bbox`、`union` / `intersect` / `difference`。不允许手画多边形；`bbox` 只用来选取已有几何的一部分。
+- 简化按区域：焦点框（欧洲 / 中东、东亚 / 东南亚 / 西太平洋）内细、框外粗（50 km），两半沿框边拼回再按实体合并。坐标 0.01°。
