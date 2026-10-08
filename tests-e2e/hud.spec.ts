@@ -28,6 +28,28 @@ for (const topic of TOPICS) {
     });
   }
 
+  test(`${topic}: below 1280 px the VIEW row is a compact menu with every preset`, async ({ page }) => {
+    await page.setViewportSize({ width: 900, height: 1200 });
+    await openScene(page, `/en/topics/${topic}/`);
+    const ids = await page.evaluate(() => window.__atlas!.presets());
+    expect(ids.length).toBeGreaterThan(1);
+    await expect(page.locator('[data-preset]').first()).toBeHidden();
+    const trigger = page.locator('.hud-viewmenu__btn');
+    await expect(trigger).toBeVisible();
+    await trigger.click();
+    await expect(page.locator('[data-preset-item]')).toHaveCount(ids.length);
+    await page.keyboard.press('Escape');
+    await expect(page.locator('[data-preset-item]')).toHaveCount(0);
+    await trigger.click();
+    await page.locator(`[data-preset-item="${ids[1]}"]`).click();
+    await expect.poll(async () => (await page.evaluate(() => window.__atlas!.state())).preset).toBe(ids[1]);
+    await expect(page.locator('[data-preset-item]')).toHaveCount(0);
+    // Wide again: the row is back, the menu is gone.
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await expect(page.locator(`[data-preset="${ids[1]}"]`)).toBeVisible();
+    await expect(trigger).toBeHidden();
+  });
+
   test(`${topic}: keys and HUD buttons share one state (window.__atlas)`, async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1080 });
     await openScene(page, `/en/topics/${topic}/`);

@@ -235,8 +235,8 @@ export const movementSchema = z
     to: timePoint,
     path: lineString,
     holder: kebabId,
-    /** Number of people involved; drives arrow width and Counter widgets. */
-    strength: z.number().nonnegative(),
+    /** Number of people involved; drives arrow width. Absent or 0 = unknown: no "people" line is shown. */
+    strength: z.number().nonnegative().optional(),
     /**
      * Keep the finished line (40% opacity, arrowhead at the end) until this
      * date, then fade it out. Default: the line disappears right after `to`.

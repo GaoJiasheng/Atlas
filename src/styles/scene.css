@@ -290,6 +290,75 @@
   white-space: nowrap;
 }
 
+/* VIEW menu: below 1280 px the preset row (11 chapters + extras) collapses into the current view + a ▾ list. */
+.hud-viewmenu {
+  display: none;
+}
+.hud-viewmenu__btn {
+  gap: calc(6 * var(--u));
+}
+.hud-viewmenu__list {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: max(calc(22 * var(--u)), env(safe-area-inset-left));
+  z-index: 30;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(calc(230 * var(--u)), 1fr));
+  gap: calc(3 * var(--u));
+  width: min(calc(100% - 50 * var(--u)), calc(600 * var(--u)));
+  max-height: calc(100vh - 120px);
+  margin: 0;
+  padding: calc(8 * var(--u));
+  overflow-y: auto;
+  list-style: none;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-hud);
+  background: var(--panel-solid);
+}
+.hud-viewmenu__list li {
+  display: flex;
+  min-width: 0;
+}
+.hud-viewmenu__item {
+  flex: 1;
+  justify-content: flex-start;
+  gap: calc(8 * var(--u));
+  min-width: 0;
+  height: auto;
+  min-height: calc(26 * var(--u));
+  padding: calc(4 * var(--u)) calc(8 * var(--u));
+  text-align: left;
+}
+.hud-viewmenu__item b {
+  flex: none;
+  min-width: calc(18 * var(--u));
+  font: 500 calc(10.8 * var(--u)) / 1 var(--font-mono);
+}
+.hud-viewmenu__item span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+@media (pointer: coarse) {
+  .hud-viewmenu__item {
+    min-height: var(--hit);
+  }
+  .hud-viewmenu__item::after {
+    display: none;
+  }
+}
+@media (max-width: 1279px) {
+  .hud-group--view > .hud-btn[data-preset] {
+    display: none;
+  }
+  .hud-group--view > .hud-viewmenu {
+    display: inline-flex;
+  }
+}
+
 /* Panel frame + header `01 NAME 中文` (card, bottom panels). */
 .hud-panel {
   position: relative;

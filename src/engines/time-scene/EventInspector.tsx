@@ -18,7 +18,7 @@ import type { SceneEvent } from './schema';
 import type { TimeModel } from './lib/model';
 import { counterPer, formatTime } from './lib/format';
 import { toNumber } from './lib/time';
-import { entityCssColor } from './colors';
+import { sideCssColor } from './colors';
 
 export interface EventInspectorProps {
   event: SceneEvent;
@@ -47,7 +47,7 @@ function ForceTable({
   const per = counterPer(Math.max(...entries.map(([, n]) => n)));
   const side = (id: string, value: number) => {
     const entity = model.entities.get(id)?.entity;
-    return { value, label: entity?.name ?? id, color: entityCssColor(entity, at) };
+    return { value, label: entity?.name ?? id, color: sideCssColor(entity, at) };
   };
   if (entries.length === 2) {
     // Attacker on the left when the sides are known, else data order.
@@ -77,7 +77,7 @@ export function EventInspector({ event, model, locale, onClose }: EventInspector
   const ref = useRef<HTMLElement>(null);
   const nameOf = (id: string) => tx(model.entities.get(id)?.entity.name ?? id, locale);
   const at = toNumber(event.t);
-  const colorOf = (id: string) => entityCssColor(model.entities.get(id)?.entity, at);
+  const colorOf = (id: string) => sideCssColor(model.entities.get(id)?.entity, at);
 
   useEffect(() => {
     ref.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });

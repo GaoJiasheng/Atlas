@@ -27,7 +27,7 @@ import { t as translate, tx, withBase } from '../../../../i18n';
 import type { TimeSceneExt } from '../../index';
 import { entityBlocAt, type TimeModel } from '../../lib/model';
 import type { SceneEvent } from '../../schema';
-import { changesBloc } from '../../lib/bloc';
+import { sideAt, warStatusAt } from '../../lib/bloc';
 import type { Playhead } from '../../lib/playhead';
 import { frameAt, type Frame } from '../../lib/frame';
 import { areaLabelPoint, metresPerPixel, pickWorldCopy, pointAlong, projectNearCentre, scaleBar, type LngLat } from '../../lib/geo';
@@ -406,20 +406,37 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   const source = (id: string) => map.getSource(id) as GeoJSONSource | undefined;
   const tr = (key: Parameters<typeof translate>[1], vars?: Record<string, string | number>) => translate(locale, key, vars);
 
-  /** Colour of entity `id` at numeric time `t` (its override, else its bloc at `t`). */
+  /** Colour of entity `id` at numeric time `t`: its override, else its bloc at `t`; neutral while not at war (lib/bloc.ts). */
   const entityColor = (id: string, t: number): string => {
-    const en = model.entities.get(id)?.entity;
-    if (en?.color) return resolveColorRef(en.color, tokens) || tokens['accent-neutral'];
+    const en = model.entities.get(id);
+    if (en?.entity.color && warStatusAt(en.entity, t) === 'at-war') return resolveColorRef(en.entity.color, tokens) || tokens['accent-neutral'];
     return tokens[`accent-${entityBlocAt(model, id, t)}` as 'accent-axis'] || tokens['accent-neutral'] || '#888';
+  };
+  /** Colour of the side entity `id` fights on at `t` (movement lines), whether or not it is inside its joined / left window. */
+  const sideColor = (id: string, t: number): string => {
+    const en = model.entities.get(id)?.entity;
+    if (!en) return tokens['accent-neutral'] || '#888';
+    if (en.color) return resolveColorRef(en.color, tokens) || tokens['accent-neutral'];
+    return tokens[`accent-${sideAt(en, t)}` as 'accent-axis'] || tokens['accent-neutral'] || '#888';
   };
   /** Hatch images are shared per colour: one per bloc, one per entity with its own colour. */
   const hatchId = (entityId: string, t: number) => {
     const en = model.entities.get(entityId)?.entity;
-    return en?.color ? `ts-hatch-e-${entityId}` : `ts-hatch-b-${entityBlocAt(model, entityId, t)}`;
+    return en?.color && warStatusAt(en, t) === 'at-war' ? `ts-hatch-e-${entityId}` : `ts-hatch-b-${entityBlocAt(model, entityId, t)}`;
   };
-  /** Entities that change sides: their bloc at `t` goes into source signatures. */
-  const switchers = [...model.entities.values()].filter((en) => !en.entity.color && changesBloc(en.entity)).map((en) => en.entity.id);
-  const blocSig = (t: number) => switchers.map((id) => entityBlocAt(model, id, t)).join(',');
+  /** Colour of every entity at `t` in one string: source signatures redraw when an entity changes side or leaves / joins the war. */
+  const entities = [...model.entities.keys()];
+  const blocSig = (t: number) => entities.map((id) => entityBlocAt(model, id, t).slice(0, 2)).join('');
+
+  /** Inspector line for an entity at `t`: bloc and join date; "no longer at war" / "not yet at war" outside its window. */
+  const entityNote = (id: string, t: number): string => {
+    const en = model.entities.get(id)?.entity;
+    if (!en) return '';
+    const status = warStatusAt(en, t);
+    if (status === 'after') return `${tr('time.bloc.out')}${en.left !== undefined ? ` · ${formatTime(en.left, locale)}` : ''}`;
+    if (status === 'before') return tr('time.bloc.notYet');
+    return `${tr(`time.bloc.${entityBlocAt(model, id, t)}`)} · ${tr('time.joinedOn', { date: formatTime(en.joined, locale) })}`;
+  };
 
   const layersOn = () => new Set(store.getState().layers);
   const highlight = () => store.getState().highlight ?? [];
@@ -581,11 +598,11 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
       .filter((mv) => mv.coords.length >= 2)
       .map((mv) => {
         const id = mv.m.movement.id;
-        const base = 1 + 2 * Math.sqrt(mv.m.movement.strength / model.maxStrength);
+        const base = 1 + 2 * Math.sqrt((mv.m.movement.strength ?? 0) / model.maxStrength);
         return {
           type: 'Feature',
           geometry: { type: 'LineString', coordinates: mv.coords },
-          properties: { id, color: entityColor(mv.m.movement.holder, mv.m.start), width: hl.has(id) ? base + 0.8 : base, op: mv.opacity },
+          properties: { id, color: sideColor(mv.m.movement.holder, mv.m.start), width: hl.has(id) ? base + 0.8 : base, op: mv.opacity },
         };
       });
     setIfChanged(
@@ -666,7 +683,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
           marker.setLngLat(mv.head).addTo(map);
           arrows.set(id, marker);
         }
-        marker.getElement().style.setProperty('--ts-color', entityColor(mv.m.movement.holder, mv.m.start));
+        marker.getElement().style.setProperty('--ts-color', sideColor(mv.m.movement.holder, mv.m.start));
         marker.setLngLat(mv.head);
         marker.getElement().style.opacity = mv.opacity < 1 ? String(mv.opacity) : '';
         orientArrow(marker, mv.tail, mv.head);
@@ -723,7 +740,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   /** Mark colour: cold tone for evacuations / liberations, else the attacker at the event's start, else ink. */
   const eventColor = (e: SceneEvent, start: number): string => {
     if (COLD_KINDS.has(e.kind)) return tokens.cold || tokens.ink;
-    return e.sides ? entityColor(e.sides.attacker, start) : tokens.ink;
+    return e.sides ? sideColor(e.sides.attacker, start) : tokens.ink;
   };
 
   /* ---------- HTML marks: hollow squares, siege rings, site diamonds ---------- */
@@ -880,7 +897,9 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
           kind: 'movement',
           en: mv.label.en,
           zh: mv.label.zh,
-          note: `${tr(`time.movementKind.${mv.kind}`)} · ${tr('time.people', { n: mv.strength.toLocaleString(locale === 'zh' ? 'zh-CN' : 'en-SG') })}`,
+          note: mv.strength
+            ? `${tr(`time.movementKind.${mv.kind}`)} · ${tr('time.people', { n: mv.strength.toLocaleString(locale === 'zh' ? 'zh-CN' : 'en-SG') })}`
+            : tr(`time.movementKind.${mv.kind}`),
           date: dateText(mv.from, mv.to),
           at: [at[0] ?? 0, at[1] ?? 0],
           pinned: true,
@@ -900,7 +919,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
           kind: 'entity',
           en: en.name.en,
           zh: en.name.zh,
-          note: `${tr(`time.bloc.${entityBlocAt(model, id, playhead.get())}`)} · ${tr('time.joinedOn', { date: formatTime(en.joined, locale) })}`,
+          note: entityNote(id, playhead.get()),
           at,
           pinned: true,
           clickable: false,

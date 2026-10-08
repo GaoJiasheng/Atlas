@@ -5,7 +5,7 @@
  *
  *   pnpm tsx scripts/geo/ww2/simplify.ts                          # auto: finest interval that fits the budget
  *   pnpm tsx scripts/geo/ww2/simplify.ts --fine 3 --coarse 50     # fixed intervals in km
- *   pnpm tsx scripts/geo/ww2/simplify.ts --budget 2.0 --quant 50000 --method dp --no-measure
+ *   pnpm tsx scripts/geo/ww2/simplify.ts --budget 2.0 --quant 400000 --method dp --no-measure
  *   pnpm tsx scripts/geo/ww2/simplify.ts --out /tmp/control.json  # write elsewhere (default: the topic's data/control.json)
  *   pnpm tsx scripts/geo/ww2/simplify.ts --islands 20,300         # drop detached parts under these km² (focus, elsewhere)
  *
@@ -22,8 +22,20 @@
  * and are dissolved back per holder. Method `dp` (Douglas–Peucker) makes the
  * interval a genuine deviation bound; `weighted` (Visvalingam) is smoother but
  * drops thin fjords wholesale. keep-shapes either way. Output: TopoJSON with
- * quantisation (`--quant` grid points across the data extent; 5e4 ≈ 0.8 km
- * cells at the equator, half that at 60°N) and delta-coded arcs.
+ * quantisation (`--quant` grid points across the data extent; default 4e5 ≈
+ * 0.1 km cells at the equator, half that at 60°N) and delta-coded arcs.
+ *
+ * Coast in Southeast Asia: after simplification, the part of every keyframe
+ * inside the 1:10m basemap box (`COAST_BOX`, = scripts/build-geo.ts) follows the
+ * basemap's own land (`public/geo/land-10m-sea.json`, see `followCoast`): water
+ * erased, land the simplified polygons missed given to the nearest holder. The
+ * borders between holders keep their 1.5 km tolerance; the coastline is the 10m
+ * data itself, so it lines up with the land drawn at zoom 7+ (Singapore island
+ * at zoom 10). Clipping before simplifying would only get the coast thinned out
+ * again (and 1.5 km corner cuts would leave land uncovered), and a coarser
+ * quantisation would snap it to a grid wider than the 10m vertex spacing. The
+ * clipped coast arcs are the same in every keyframe, so they are stored once.
+ * `--no-coast` skips the step.
  *
  * THE KNOB — size budget: `--budget` MB for the 12 keyframes of docs/09 §4.2
  * (default 2.0), pro rata for fewer: 2.0 MB × (keyframes present / 12). Without
@@ -32,14 +44,16 @@
  * fixed --fine skips the search.
  *
  * Reported "deviation": distance from the original vertices (work/K#.geojson)
- * inside the focus boxes to the written boundaries, in km (p50 / p95 / p99 /
- * max). Islands dropped on purpose are excluded; the max still shows the odd
+ * inside the focus boxes (not the coast box when `followCoast` is on) to the
+ * written boundaries, in km (p50 / p95 / p99 / max). Islands dropped on purpose are excluded; the max still shows the odd
  * peninsula tip or islet that `keep-shapes` / cleaning removed.
  */
 import { createRequire } from 'node:module';
 import { existsSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
+import { feature as topoFeature } from 'topojson-client';
 import type { Feature, FeatureCollection, Position } from 'geojson';
 import { TOOLS, TOPIC, areaFeatures, loadSources, log, mapshaper, readJson, toFc, toolsInstalled, warn, workFile } from './lib';
 
@@ -49,6 +63,12 @@ const FOCUS: [number, number, number, number][] = [
   [-12, 28, 62, 72], // Europe, North Africa coast, Middle East
   [88, -12, 160, 56], // East and Southeast Asia, western Pacific
 ];
+/** The 1:10m basemap box and file (scripts/build-geo.ts `SEA_BBOX`): inside it, control areas are cut to that land. */
+const COAST_BOX: [number, number, number, number] = [95, -9, 125, 22];
+/** Land the simplified polygons miss goes to a holder at most this far (km) away; detached pieces under `COAST_ISLAND_KM2` are dropped. */
+const GAP_KM = 6;
+const COAST_ISLAND_KM2 = 2;
+const COAST_LAND = fileURLToPath(new URL('../../../public/geo/land-10m-sea.json', import.meta.url));
 /** Auto search: start here and add this much (km) until the file fits. */
 const FINE_START = 1.5;
 const FINE_STEP = 0.25;
@@ -66,13 +86,16 @@ const { values } = parseArgs({
     islands: { type: 'string' },
     method: { type: 'string' },
     'no-measure': { type: 'boolean', default: false },
+    'no-coast': { type: 'boolean', default: false },
   },
 });
 /** MB for the 12 planned keyframes. */
 const BUDGET_MB = values.budget ? Number(values.budget) : 2.0;
 /** `dp` (Douglas–Peucker: the interval is a real maximum-deviation tolerance) or `weighted` (Visvalingam: smoother, but drops thin fjords). */
 const METHOD = values.method ?? 'dp';
-const QUANTIZATION = values.quant ? Number(values.quant) : 50_000;
+const QUANTIZATION = values.quant ? Number(values.quant) : 400_000;
+/** Cut control areas to the 10m land inside `COAST_BOX` (`--no-coast` skips it). */
+const COAST = !values['no-coast'];
 if (values.islands) [FOCUS_ISLAND_KM2 = FOCUS_ISLAND_KM2, COARSE_ISLAND_KM2 = COARSE_ISLAND_KM2] = values.islands.split(',').map(Number);
 
 /* ------------------------------------------------------------------ */
@@ -126,6 +149,41 @@ async function cutKeyframe(fc: FeatureCollection): Promise<{ inside: FeatureColl
 
 type Cut = Awaited<ReturnType<typeof cutKeyframe>>;
 
+/** Land, and the open water around it, inside `COAST_BOX` according to the 1:10m basemap. */
+interface Coast {
+  land: FeatureCollection;
+  water: FeatureCollection;
+}
+
+async function loadCoast(): Promise<Coast> {
+  const topo = JSON.parse(readFileSync(COAST_LAND, 'utf8')) as Parameters<typeof topoFeature>[0];
+  const sea = topo.objects.sea as Parameters<typeof topoFeature>[1];
+  const all = topoFeature(topo, sea) as unknown as FeatureCollection;
+  const land = toFc(all.features.filter((f) => f.properties?.kind === 'land'));
+  if (!land.features.length) throw new Error(`${COAST_LAND} has no land`);
+  const water = await mapshaper('-i box.json land.json combine-files -erase target=box land', { box: boxes([COAST_BOX]), land });
+  return { land, water };
+}
+
+/**
+ * Make one keyframe's part inside the focus boxes follow the 10m coast within
+ * `COAST_BOX`: (1) erase the water, so nothing is drawn out to sea; (2) give
+ * the land the simplified polygons miss (their 1.5 km edges cut corners off the
+ * coast) to the nearest holder, as far as `GAP_KM` from it: buffer the holders,
+ * keep the buffer where it covers uncovered land. Land further than that from
+ * every holder stays uncoloured. Pieces of the same holder merge in the final
+ * dissolve; where two buffers meet, `-dissolve2` resolves the overlap.
+ */
+async function followCoast(fc: FeatureCollection, coast: Coast): Promise<FeatureCollection> {
+  const dry = await mapshaper('-i a.json w.json combine-files -erase target=a w', { a: fc, w: coast.water });
+  const held = toFc(dry.features.filter((f) => f.geometry));
+  const gap = await mapshaper('-i land.json a.json combine-files -erase target=land a', { land: coast.land, a: held });
+  if (!areaFeatures(gap).length) return held;
+  const near = await mapshaper(`-i a.json -buffer radius=${GAP_KM}km`, { a: held });
+  const fill = await mapshaper('-i b.json g.json combine-files -clip target=b g', { b: near, g: gap });
+  return toFc([...held.features, ...areaFeatures(fill)]);
+}
+
 /** Wire-format TopoJSON as mapshaper writes it. */
 interface Topo {
   type: 'Topology';
@@ -138,7 +196,7 @@ interface Topo {
  * Simplify all keyframes together: fine inside, coarse outside, merged and
  * dissolved per holder, exported as one topology (objects named by keyframe id).
  */
-async function build(ids: string[], cuts: Cut[], fine: number, coarse: number): Promise<{ topo: Topo; geojson: Record<string, FeatureCollection> }> {
+async function build(ids: string[], cuts: Cut[], fine: number, coarse: number, coast: Coast | null): Promise<{ topo: Topo; geojson: Record<string, FeatureCollection> }> {
   const m = ms();
   const part = async (which: 'inside' | 'outside', km: number, islandKm2: number) => {
     const files: Record<string, unknown> = {};
@@ -155,11 +213,12 @@ async function build(ids: string[], cuts: Cut[], fine: number, coarse: number): 
     return byId;
   };
   const inside = await part('inside', fine, FOCUS_ISLAND_KM2);
+  if (coast) for (const id of ids) inside[id] = await followCoast(inside[id]!, coast);
   const outside = await part('outside', coarse, COARSE_ISLAND_KM2);
   const merged: Record<string, unknown> = {};
   for (const id of ids) merged[`${id}.json`] = toFc([...inside[id]!.features, ...outside[id]!.features]);
   const dissolved = await m.applyCommands(
-    `-i ${ids.map((id) => `${id}.json`).join(' ')} combine-files -dissolve2 holder,label_en,label_zh calc='src=collect(src)' target=* -clean target=* ` +
+    `-i ${ids.map((id) => `${id}.json`).join(' ')} combine-files -dissolve2 holder,label_en,label_zh calc='src=collect(src)' target=* ${coast ? `-filter-islands min-area=${COAST_ISLAND_KM2}km2 target=* ` : ''}-clean target=* ` +
       `-o format=geojson precision=0.0001 target=*`,
     merged,
   );
@@ -304,6 +363,8 @@ function measure(topo: Topo, ids: string[], originals: FeatureCollection[], drop
         for (let i = 0; i < ring.length; i += 2) {
           const [px = 0, py = 0] = ring[i]!;
           if (!inFocus([px, py])) continue;
+          // Inside the coast box the boundary is the 10m coast, not these vertices (coverage is reported separately).
+          if (COAST && px >= COAST_BOX[0] && px <= COAST_BOX[2] && py >= COAST_BOX[1] && py <= COAST_BOX[3]) continue;
           let best = Infinity;
           const cx = Math.floor(px / cell);
           const cy = Math.floor(py / cell);
@@ -361,15 +422,16 @@ async function main(): Promise<void> {
   for (const fc of originals) cuts.push(await cutKeyframe(fc));
 
   const coarse = values.coarse ? Number(values.coarse) : 50;
+  const coast = COAST ? await loadCoast() : null;
   const keyframes = ids.map((id, i) => ({ t: ts[i]!, object: id }));
   let fine = values.fine ? Number(values.fine) : FINE_START;
-  let result = await build(ids, cuts, fine, coarse);
+  let result = await build(ids, cuts, fine, coarse, coast);
   let text = serialise(finalise(result.topo, ids), keyframes);
   if (!values.fine) {
     while (Buffer.byteLength(text) > budget && fine < 40) {
       log(`  fine ${fine} km: ${(Buffer.byteLength(text) / 1024).toFixed(0)} KB > ${(budget / 1024).toFixed(0)} KB`);
       fine += FINE_STEP;
-      result = await build(ids, cuts, fine, coarse);
+      result = await build(ids, cuts, fine, coarse, coast);
       text = serialise(finalise(result.topo, ids), keyframes);
     }
   }

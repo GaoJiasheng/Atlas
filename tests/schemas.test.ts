@@ -113,6 +113,15 @@ describe('TimeScene schema extensions', () => {
   const messages = (r: { success: boolean; error?: { issues: { message: string }[] } }) =>
     r.success ? [] : (r.error?.issues ?? []).map((i) => i.message);
 
+  it('accepts movements with no or zero strength', () => {
+    const data = structuredClone(loadData('sample-time')) as { movements: Record<string, unknown>[] };
+    delete data.movements[0]!.strength;
+    data.movements[1]!.strength = 0;
+    expect(timeSceneGeoData.safeParse(data).success).toBe(true);
+    data.movements[1]!.strength = -1;
+    expect(timeSceneGeoData.safeParse(data).success).toBe(false);
+  });
+
   it('accepts the new kinds without sides or result', () => {
     for (const kind of ['massacre', 'siege', 'evacuation', 'liberation', 'atrocity', 'site']) {
       expect(EVENT_KINDS).toContain(kind);

@@ -147,15 +147,15 @@ export function buildTimeModel(
     movements,
     entities,
     chapterNodes,
-    maxStrength: Math.max(1, ...data.movements.map((m) => m.strength)),
+    maxStrength: Math.max(1, ...data.movements.map((m) => m.strength ?? 0)),
     bounds: dataBounds(data, keyframes, movements),
   };
 }
 
-/** Bloc of entity `id` at numeric time `t` (`neutral` for unknown ids). */
+/** Bloc (map colour) of entity `id` at numeric time `t`: `neutral` for unknown ids and outside its joined / left window (lib/bloc.ts `blocAt`). */
 export function entityBlocAt(model: TimeModel, id: string, t: number): Bloc {
   const en = model.entities.get(id);
-  return en ? blocAtSpans(en.spans, t) : 'neutral';
+  return en ? blocAtSpans(en.spans, t, en.joined, en.left) : 'neutral';
 }
 
 function dataBounds(data: TimeSceneGeoData, keyframes: readonly KeyframeN[], movements: readonly MovementN[]): [number, number, number, number] | null {
