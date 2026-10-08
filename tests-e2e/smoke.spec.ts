@@ -21,17 +21,6 @@ function collectConsoleErrors(page: Page): string[] {
   return errors;
 }
 
-test.beforeEach(async ({ page }) => {
-  // Show every chapter (default reader level P3 folds P4+ chapters, which would stop the arrow-key walk).
-  await page.addInitScript(() => {
-    try {
-      window.localStorage.setItem('atlas:level', 'P6');
-    } catch {
-      /* storage unavailable */
-    }
-  });
-});
-
 for (const locale of LOCALES) {
   test(`index (${locale}) lists both sample topics`, async ({ page }) => {
     const errors = collectConsoleErrors(page);

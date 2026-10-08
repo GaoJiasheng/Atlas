@@ -215,10 +215,8 @@ function Bi({ text }: { text: BilingualText }) {
 const bi = (key: UiKey): BilingualText => ({ en: t('en', key), zh: t('zh', key) });
 
 export function defaultSpecRows(topic: TopicMeta, chapterCount: number, locale: Locale): SpecRow[] {
-  const levels = topic.levels.length > 1 ? `${topic.levels[0]}–${topic.levels[topic.levels.length - 1]}` : topic.levels[0]!;
   return [
     { id: 'subject', label: bi('spec.subject'), value: t(locale, `subject.${topic.subject}` as UiKey) },
-    { id: 'levels', label: bi('spec.levels'), value: levels, mono: true },
     { id: 'chapters', label: bi('spec.chapters'), value: String(chapterCount).padStart(2, '0'), mono: true },
     { id: 'syllabus', label: bi('spec.syllabus'), value: String(topic.moe.length), mono: true },
   ];

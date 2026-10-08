@@ -599,21 +599,12 @@ button.ts-co:focus-visible {
   color: var(--ink-on);
 }
 @media (hover: hover) {
-  .ts-rule__node:not(:disabled):hover > span {
+  .ts-rule__node:hover > span {
     border-color: var(--signal);
   }
 }
 .ts-rule__node:active > span {
   transform: scale(0.92);
-}
-.ts-rule__node[data-locked] {
-  color: var(--ink-3);
-}
-.ts-rule__node[data-locked] > span {
-  border-style: dashed;
-}
-.ts-rule__node:disabled {
-  cursor: default;
 }
 .ts-rule__node:focus-visible {
   outline: none;

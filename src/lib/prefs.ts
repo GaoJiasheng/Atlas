@@ -1,6 +1,6 @@
 /**
  * Per-device preferences in localStorage. Only non-critical preferences live
- * here (docs/02 §iPad): theme override, parent mode, reading level, locale.
+ * here (docs/02 §iPad): theme override, parent mode, locale.
  * Scene state never goes here; it lives in the URL.
  *
  * Reads and writes are wrapped in try/catch: storage can be unavailable
@@ -9,17 +9,13 @@
 import { useCallback, useSyncExternalStore } from 'react';
 import { isTheme, type Theme } from '../theme/theme';
 import { isLocale, type Locale } from '../i18n';
-import { LEVELS, type Level } from './levels';
 
 export const PREF_KEYS = {
   theme: 'atlas:theme',
   parent: 'atlas:parent',
-  level: 'atlas:level',
   locale: 'atlas:locale',
 } as const;
 export type PrefName = keyof typeof PREF_KEYS;
-
-export const DEFAULT_LEVEL: Level = 'P3';
 
 const CHANGE_EVENT = 'atlas:pref-change';
 
@@ -80,14 +76,6 @@ export function setParentMode(on: boolean): void {
   document.documentElement.dataset.parent = on ? '1' : '0';
 }
 
-export function getLevel(): Level {
-  const v = read('level');
-  return (LEVELS as readonly string[]).includes(v ?? '') ? (v as Level) : DEFAULT_LEVEL;
-}
-export function setLevel(level: Level): void {
-  writeRaw('level', level);
-}
-
 export function getSavedLocale(): Locale | null {
   const v = read('locale');
   return isLocale(v) ? v : null;
@@ -108,9 +96,4 @@ export function useThemeOverride(): [Theme | null, (t: Theme | null) => void] {
 export function useParentMode(): [boolean, (on: boolean) => void] {
   const value = useSyncExternalStore(subscribe, getParentMode, () => false);
   return [value, useCallback((on: boolean) => setParentMode(on), [])];
-}
-
-export function useLevel(): [Level, (level: Level) => void] {
-  const value = useSyncExternalStore(subscribe, getLevel, () => DEFAULT_LEVEL);
-  return [value, useCallback((level: Level) => setLevel(level), [])];
 }

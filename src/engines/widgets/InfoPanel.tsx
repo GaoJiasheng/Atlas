@@ -11,8 +11,6 @@ export interface InfoPanelProps {
   locale: Locale;
   /** Rendered MDX body of the chapter (already in the active locale). */
   body?: ReactNode;
-  /** The reader's level is below this chapter (reached via a link). */
-  tooYoung?: boolean;
   hasPrev: boolean;
   hasNext: boolean;
   onPrev(): void;
@@ -40,7 +38,6 @@ export function InfoPanel({
   total,
   locale,
   body,
-  tooYoung,
   hasPrev,
   hasNext,
   onPrev,
@@ -61,7 +58,6 @@ export function InfoPanel({
             <span>
               {pad2(index + 1)} / {pad2(total)}
             </span>
-            <span>{t(locale, 'chapter.level', { level: chapter.level })}</span>
             {chapter.sensitive && (
               <span className="atlas-panel__guard">
                 <Icon name="lock" size={11} /> {t(locale, 'chapter.guarded')}
@@ -91,12 +87,6 @@ export function InfoPanel({
             <span>
               <strong>{t(locale, 'chapter.guarded')}.</strong> {t(locale, 'chapter.guardedHint')}
             </span>
-          </p>
-        )}
-        {chapter && tooYoung && (
-          <p className="atlas-panel__notice">
-            <Icon name="lock" size={16} />
-            <span>{t(locale, 'chapter.tooYoungHint')}</span>
           </p>
         )}
         {chapter && body && <div className="atlas-prose">{body}</div>}

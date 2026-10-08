@@ -12,7 +12,6 @@ import type { TimePoint } from '../../lib/time';
 
 export type { TopicMeta, QuizItem, CameraState, GeoCamera, OrbitCamera, Locale, Theme, TimePoint };
 export type { EngineId, Subject } from '../../content/schema/topic';
-export type { Level } from '../../lib/levels';
 export type { Bilingual } from '../../content/schema/common';
 
 /** A chapter = a story node (time) or a step (space). Sorted by `order`. */

@@ -11,7 +11,6 @@ const chapter = (id: string, order: number, state: Chapter['state']): Chapter =>
   id,
   order,
   title: { en: id, zh: '' },
-  level: 'P3',
   sensitive: false,
   state,
   quiz: [],
@@ -79,9 +78,11 @@ describe('scene store', () => {
     expect(s.transition).toMatchObject({ reason: 'url', instant: true });
   });
 
-  it('stepChapter skips chapters the reader cannot enter', () => {
+  it('stepChapter walks every chapter and stops at the ends', () => {
     const store = makeStore();
-    expect(store.getState().stepChapter(1, (c) => c.id !== 'two')).toBe('three');
+    expect(store.getState().stepChapter(-1)).toBeNull();
+    expect(store.getState().stepChapter(1)).toBe('two');
+    expect(store.getState().stepChapter(1)).toBe('three');
     expect(store.getState().stepChapter(1)).toBeNull();
     expect(store.getState().stepChapter(-1)).toBe('two');
   });

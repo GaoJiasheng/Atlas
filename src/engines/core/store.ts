@@ -24,10 +24,10 @@ export interface SceneActions<E extends EngineExtension> {
   /** Jump to a chapter: state becomes the chapter's target, transition bumps. */
   goToChapter(id: string, options?: { instant?: boolean }): void;
   /**
-   * Move to the previous/next chapter. `canEnter` lets the UI skip chapters
-   * (e.g. collapsed for the reader's level). Returns the new chapter id.
+   * Move to the previous/next chapter. Returns the new chapter id, or null
+   * at either end.
    */
-  stepChapter(delta: 1 | -1, canEnter?: (chapter: Chapter) => boolean): string | null;
+  stepChapter(delta: 1 | -1): string | null;
   /** User-driven change (no transition bump). */
   patch(partial: Partial<SceneSnapshot<E>>): void;
   toggleLayer(id: string): void;
@@ -129,18 +129,13 @@ export function createSceneStore<E extends EngineExtension>(options: CreateScene
       } as Partial<SceneStoreState<E>>);
     },
 
-    stepChapter(delta, canEnter) {
+    stepChapter(delta) {
       const current = get().chapter;
-      let i = current === null ? (delta > 0 ? -1 : ids.length) : ids.indexOf(current);
-      for (;;) {
-        i += delta;
-        const chapter = chapters[i];
-        if (!chapter) return null;
-        if (!canEnter || canEnter(chapter)) {
-          get().goToChapter(chapter.id);
-          return chapter.id;
-        }
-      }
+      const from = current === null ? (delta > 0 ? -1 : ids.length) : ids.indexOf(current);
+      const chapter = chapters[from + delta];
+      if (!chapter) return null;
+      get().goToChapter(chapter.id);
+      return chapter.id;
     },
 
     patch(partial) {

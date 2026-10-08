@@ -1,13 +1,12 @@
 ---
 /**
- * Topic index with subject and level filters. Filters are progressive
+ * Topic index with a subject filter. Filters are progressive
  * enhancement (src/scripts/topic-filters.ts) and live in the query string.
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SiteToggles from '../../components/SiteToggles';
 import { LOCALES, localeHref, t, tx, type Locale, type UiKey } from '../../i18n';
 import { getChapterCounts, getTopics } from '../../lib/content';
-import { LEVELS } from '../../lib/levels';
 import { SUBJECTS } from '../../content/schema/topic';
 
 export function getStaticPaths() {
@@ -51,19 +50,6 @@ const subjectKey = (s: string) => `subject.${s}` as UiKey;
           ))
         }
       </div>
-      <div class="flex flex-wrap items-center gap-2">
-        <span class="w-16 text-sm font-semibold text-ink-muted">{t(locale, 'index.filter.level')}</span>
-        <button type="button" class="atlas-control" data-filter="level" data-value="" aria-pressed="true">
-          {t(locale, 'index.filter.all')}
-        </button>
-        {
-          LEVELS.map((l) => (
-            <button type="button" class="atlas-control" data-filter="level" data-value={l} aria-pressed="false">
-              {l}
-            </button>
-          ))
-        }
-      </div>
       <p class="m-0 text-sm text-ink-muted" aria-live="polite" data-count data-template={t(locale, 'index.count')}>
         {t(locale, 'index.count', { n: topics.length })}
       </p>
@@ -74,7 +60,7 @@ const subjectKey = (s: string) => `subject.${s}` as UiKey;
         topics.map((topic) => {
           const d = topic.data;
           return (
-            <li data-topic data-subject={d.subject} data-levels={d.levels.join(' ')}>
+            <li data-topic data-subject={d.subject}>
               <a
                 href={localeHref(locale, `/topics/${topic.id}/`)}
                 class="group flex h-full flex-col gap-3 rounded-lg border border-border bg-surface p-5 no-underline shadow-panel transition-colors hover:border-border-strong"
@@ -90,8 +76,6 @@ const subjectKey = (s: string) => `subject.${s}` as UiKey;
                 <h2 class="m-0 text-2xl">{tx(d.title, locale)}</h2>
                 <p class="m-0 flex-1 text-ink-muted">{tx(d.subtitle, locale)}</p>
                 <p class="m-0 flex items-center gap-2 text-sm text-ink-faint">
-                  <span>{d.levels.join(' · ')}</span>
-                  <span aria-hidden="true">·</span>
                   <span>{t(locale, 'index.chapters', { n: counts.get(topic.id) ?? 0 })}</span>
                 </p>
               </a>

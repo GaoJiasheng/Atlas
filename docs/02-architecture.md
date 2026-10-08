@@ -36,12 +36,12 @@ atlas/
   docs/                         # 本套文档
   src/
     pages/[locale]/             # /en/... /zh/...
-      index.astro               # 主题索引（按学科/年级筛选）
+      index.astro               # 主题索引（按学科筛选）
       topics/[slug].astro       # 主题页：挂 Scene 岛 + MDX 正文
     content/
       config.ts                 # collections + zod schema
       topics/<slug>/
-        topic.yaml              # 元信息（学科、年级、形态、主题色、状态）
+        topic.yaml              # 元信息（学科、形态、主题色、状态；年级为可选规划字段）
         chapters/<nn>-<id>.mdx  # 章节正文，frontmatter 里是章节状态定义
         data/*.json             # 引擎数据（关键帧、事件、箭头、零件清单）
     engines/
@@ -84,7 +84,7 @@ id: ww2
 title: { en: "World War II", zh: "第二次世界大战" }
 subtitle: { en: "How the world went to war, 1939–1945", zh: "1939–1945，世界如何走向战争" }
 subject: social-studies          # social-studies | science | geography | history | biology | math | extension
-levels: [P4, P5]                 # 适用年级，索引页筛选用
+levels: [P4, P5]                 # 可选。适用年级，仅作内容规划元数据，站点不展示、不筛选
 moe:                             # 对齐 MOE 大纲的锚点，自由文本
   - "SS P4: The End of World War II"
   - "SS P5: The Fall of Singapore; Life Under Japanese Rule"
@@ -105,7 +105,7 @@ cover: ./cover.jpg
 id: fall-of-singapore
 order: 6
 title: { en: "The Fall of Singapore", zh: "新加坡沦陷" }
-level: P4                        # 本章最低适用年级
+level: P4                        # 可选。本章最低适用年级，仅作内容规划元数据，站点不展示
 sensitive: false
 state:                           # 引擎进入本章时要达到的状态（引擎各自解释）
   time: "1942-02-15"
@@ -166,7 +166,7 @@ Scene store 的可序列化部分双向绑定到 query string，用 `history.rep
 
 ## 年龄与敏感内容
 
-- 章节 `level` 低于当前选择年级的照常显示；高于的折叠成"再长大一点再看"
+- 年级（`topic.yaml` 的 `levels`、章节 `level`、零件 `level`）是**内容规划元数据**，全部可选，站点不渲染、不据此折叠或筛选；所有章节始终可进入
 - `sensitive: true` 的段落默认显示柔化版本，家长模式（本地开关，localStorage）显示完整版本
 - 伤亡数字一律用"一个图标代表 N 人"的可视化，不出现血腥图片
 

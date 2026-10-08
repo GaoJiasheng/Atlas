@@ -3,16 +3,6 @@ import { hudLayoutIssues, LAYOUT_SIZES } from './hud-layout';
 
 const TOPICS = ['sample-time', 'sample-space'] as const;
 
-test.beforeEach(async ({ page }) => {
-  await page.addInitScript(() => {
-    try {
-      window.localStorage.setItem('atlas:level', 'P6');
-    } catch {
-      /* storage unavailable */
-    }
-  });
-});
-
 async function openScene(page: Page, url: string) {
   await page.goto(url);
   await page.waitForFunction(() => window.__atlas !== undefined, null, { timeout: 30_000 });

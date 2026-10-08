@@ -18,7 +18,6 @@ const chapter = (id: string, order: number, state: Chapter['state'] = {}): Chapt
   id,
   order,
   title: { en: id, zh: id },
-  level: 'P3',
   sensitive: false,
   state,
   quiz: [],

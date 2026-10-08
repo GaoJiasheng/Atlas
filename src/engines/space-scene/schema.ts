@@ -185,7 +185,8 @@ export const partSchema = z
     repeat: repeatSchema.optional(),
     explode: z.object({ dir: vec3, dist: z.number().nonnegative() }).strict(),
     connects: z.array(kebabId).default([]),
-    level,
+    /** Planning metadata only; never rendered. */
+    level: level.optional(),
   })
   .strict()
   .refine((p) => p.mesh !== undefined || p.primitive !== undefined, {

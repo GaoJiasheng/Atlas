@@ -30,8 +30,8 @@ export const chapterSchema = z
     id: kebabId,
     order: z.number().int().nonnegative(),
     title: bilingual,
-    /** Lowest level this chapter is meant for. */
-    level,
+    /** Content-planning metadata (lowest school level the chapter targets); never rendered. */
+    level: level.optional(),
     sensitive: z.boolean().default(false),
     state: chapterState.default({}),
     quiz: z.array(quizItem).default([]),

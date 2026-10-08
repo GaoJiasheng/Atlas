@@ -1,32 +1,23 @@
-import { useEffect, useRef, useState } from 'react';
-import type { Chapter, Level, Locale } from '../core/types';
+import { useEffect, useRef } from 'react';
+import type { Chapter, Locale } from '../core/types';
 import { t, tx } from '../../i18n';
-import { isAboveLevel } from '../../lib/levels';
 import { Icon } from './icons';
 
 export interface ChapterRailProps {
   chapters: readonly Chapter[];
   currentId: string | null;
   locale: Locale;
-  readerLevel: Level;
-  parentMode: boolean;
   onSelect(id: string): void;
 }
 
-/** Is this chapter folded away for the reader? */
-export function isChapterCollapsed(chapter: Chapter, readerLevel: Level, parentMode: boolean): boolean {
-  return !parentMode && isAboveLevel(chapter.level, readerLevel);
-}
-
 /**
- * Chapter rail in the plate grammar: numbered hairline rows `01  Title  P3`,
+ * Chapter rail in the plate grammar: numbered hairline rows `01  Title`,
  * the current row marked with a signal-orange rule; a lock glyph on guarded
  * chapters. Vertical in the HUD's left column; on phones a strip of number
  * chips. ← / → navigation is bound by the host (window-level).
  */
-export function ChapterRail({ chapters, currentId, locale, readerLevel, parentMode, onSelect }: ChapterRailProps) {
+export function ChapterRail({ chapters, currentId, locale, onSelect }: ChapterRailProps) {
   const listRef = useRef<HTMLOListElement>(null);
-  const [openHint, setOpenHint] = useState<string | null>(null);
 
   useEffect(() => {
     const el = listRef.current?.querySelector<HTMLElement>('[aria-current="step"]');
@@ -41,32 +32,8 @@ export function ChapterRail({ chapters, currentId, locale, readerLevel, parentMo
       </h2>
       <ol ref={listRef} className="atlas-rail__list">
         {chapters.map((chapter, index) => {
-          const collapsed = isChapterCollapsed(chapter, readerLevel, parentMode);
           const current = chapter.id === currentId;
           const number = String(index + 1).padStart(2, '0');
-
-          if (collapsed && !current) {
-            const hintOpen = openHint === chapter.id;
-            return (
-              <li key={chapter.id}>
-                <button
-                  type="button"
-                  className="atlas-rail__item atlas-rail__item--collapsed"
-                  aria-expanded={hintOpen}
-                  onClick={() => setOpenHint(hintOpen ? null : chapter.id)}
-                >
-                  <span className="atlas-rail__num">{number}</span>
-                  <span className="atlas-rail__text">
-                    <span className="atlas-rail__title">
-                      <Icon name="lock" size={12} /> {t(locale, 'chapter.tooYoung')}
-                    </span>
-                    {hintOpen && <span className="atlas-rail__hint">{t(locale, 'chapter.tooYoungHint')}</span>}
-                  </span>
-                  <span className="atlas-rail__lvl">{chapter.level}</span>
-                </button>
-              </li>
-            );
-          }
 
           return (
             <li key={chapter.id}>
@@ -88,7 +55,6 @@ export function ChapterRail({ chapters, currentId, locale, readerLevel, parentMo
                     )}
                   </span>
                 </span>
-                <span className="atlas-rail__lvl">{chapter.level}</span>
               </button>
             </li>
           );
