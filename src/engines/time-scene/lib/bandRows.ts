@@ -5,11 +5,14 @@
  * Rule: if every entity fits at the minimum row height, draw them all in data
  * order. Otherwise draw at most `maxRows` (12) rows, as many as fit once one
  * slim row is reserved for the rest, and collapse everything else into that
- * muted "+N others / 另 N 方" row. Rows are picked
- *   (a) entities that hold control area at some keyframe first, largest peak
- *       area first,
- *   (b) then the others by join date (earliest first),
- * ties broken by data order. The picked rows are drawn in that rank order.
+ * muted "+N others / 另 N 方" row. Rows are ranked by relevance at the
+ * playhead time `t`:
+ *   (a) entities at war at `t` that hold control area at `t`, largest area
+ *       first,
+ *   (b) then the other entities at war at `t`, by join date (earliest first),
+ * ties broken by data order. Entities not at war at `t` (before `joined`,
+ * after `left`) are never drawn once the card collapses; they count in
+ * "+N others".
  */
 import type { EntityN } from './model';
 
@@ -25,8 +28,10 @@ export interface BandRowPlan {
 
 export interface BandRowInput {
   entities: readonly EntityN[];
-  /** Area per keyframe by entity id (`controlAreas`). */
-  areas: ReadonlyMap<string, readonly number[]>;
+  /** Playhead time (numeric, lib/time.ts). */
+  t: number;
+  /** Control area at `t` by entity id (km², 0 = none; missing = 0). */
+  areaNow: ReadonlyMap<string, number>;
   /** Height available for rows (same unit as the two heights below). */
   availableHeight: number;
   /** Smallest row height at which a label (EN + 中文 lines) does not collide with the next row. */
@@ -36,25 +41,31 @@ export interface BandRowInput {
   maxRows?: number;
 }
 
-/** Entities ranked for display: controlled area (largest first), then join date. */
-export function rankBandEntities(entities: readonly EntityN[], areas: ReadonlyMap<string, readonly number[]>): EntityN[] {
-  const peak = (e: EntityN) => Math.max(0, ...(areas.get(e.entity.id) ?? []));
+/** True while `t` is inside the entity's `joined` .. `left` window (`left` itself counts). */
+export const atWarAt = (e: EntityN, t: number): boolean => t >= e.joined && t <= e.left;
+
+/** Entities at war at `t`, ranked: controlled area at `t` (largest first), then join date. */
+export function rankBandEntities(entities: readonly EntityN[], t: number, areaNow: ReadonlyMap<string, number>): EntityN[] {
+  const area = (e: EntityN) => areaNow.get(e.entity.id) ?? 0;
   const order = new Map(entities.map((e, i) => [e, i]));
-  return [...entities].sort((a, b) => {
-    const pa = peak(a);
-    const pb = peak(b);
-    if (pa > 0 !== pb > 0) return pa > 0 ? -1 : 1;
-    if (pa > 0 && pa !== pb) return pb - pa;
-    return a.joined - b.joined || order.get(a)! - order.get(b)!;
-  });
+  return entities
+    .filter((e) => atWarAt(e, t))
+    .sort((a, b) => {
+      const pa = area(a);
+      const pb = area(b);
+      if (pa > 0 !== pb > 0) return pa > 0 ? -1 : 1;
+      if (pa > 0 && pa !== pb) return pb - pa;
+      return a.joined - b.joined || order.get(a)! - order.get(b)!;
+    });
 }
 
 export function planBandRows(input: BandRowInput): BandRowPlan {
-  const { entities, areas, availableHeight, minRowHeight, collapsedHeight, maxRows = BAND_MAX_ROWS } = input;
+  const { entities, t, areaNow, availableHeight, minRowHeight, collapsedHeight, maxRows = BAND_MAX_ROWS } = input;
   const fits = Math.floor(availableHeight / minRowHeight);
   if (entities.length <= fits) return { rows: [...entities], hidden: 0 };
   const room = Math.floor((availableHeight - collapsedHeight) / minRowHeight);
-  const shown = Math.max(1, Math.min(maxRows, room, entities.length));
-  const rows = rankBandEntities(entities, areas).slice(0, shown);
+  const ranked = rankBandEntities(entities, t, areaNow);
+  const shown = Math.min(ranked.length, Math.max(1, Math.min(maxRows, room)));
+  const rows = ranked.slice(0, shown);
   return { rows, hidden: entities.length - rows.length };
 }

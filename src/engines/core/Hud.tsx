@@ -4,7 +4,7 @@
  * the stage; the card / bottom-panel frames engines fill through slots.
  * Sizes are in design pixels scaled by `--u` (see scene.css).
  */
-import { useState, type MouseEvent, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type MouseEvent, type ReactNode } from 'react';
 import { useStore } from 'zustand';
 import type { Chapter, Locale, TopicMeta } from './types';
 import {
@@ -80,6 +80,94 @@ function HudGroup({ label, className, children }: { label: string; className?: s
   );
 }
 
+/**
+ * Compact VIEW control (HUD narrower than 1280 design px, scene.css): the
+ * current view's label and a `▾` that opens the list of every preset. The
+ * wide button row stays in the DOM (CSS hides one of the two), so
+ * `[data-preset]` buttons, `aria-pressed` and the digit keys behave the same.
+ */
+function ViewMenu({
+  items,
+  active,
+  fallback,
+  label,
+  titleOf,
+  locale,
+  onPick,
+}: {
+  items: readonly { id: string; label: HudText; title?: HudText }[];
+  active: string | null;
+  fallback: string;
+  label: string;
+  titleOf(i: number, title?: HudText): string;
+  locale: Locale;
+  onPick(id: string): void;
+}) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!open) return;
+    const close = () => setOpen(false);
+    const onDown = (e: PointerEvent) => {
+      if (!ref.current?.contains(e.target as Node)) close();
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return;
+      e.preventDefault();
+      e.stopPropagation();
+      close();
+    };
+    document.addEventListener('pointerdown', onDown);
+    document.addEventListener('keydown', onKey, true);
+    return () => {
+      document.removeEventListener('pointerdown', onDown);
+      document.removeEventListener('keydown', onKey, true);
+    };
+  }, [open]);
+  const current = items.find((p) => p.id === active);
+  return (
+    <div className="hud-viewmenu" ref={ref} data-open={open}>
+      <button
+        type="button"
+        className="hud-btn hud-viewmenu__btn"
+        aria-haspopup="true"
+        aria-expanded={open}
+        aria-label={label}
+        title={label}
+        onClick={(e) => {
+          setOpen((o) => !o);
+          blurAfterPointer(e);
+        }}
+      >
+        {current ? tx(current.label, locale) : fallback}
+        <i aria-hidden="true">▾</i>
+      </button>
+      {open && (
+        <ul className="hud-viewmenu__list">
+          {items.map((p, i) => (
+            <li key={p.id}>
+              <button
+                type="button"
+                className={p.id === active ? 'hud-btn hud-viewmenu__item on' : 'hud-btn hud-viewmenu__item'}
+                data-preset-item={p.id}
+                aria-pressed={p.id === active}
+                onClick={(e) => {
+                  onPick(p.id);
+                  setOpen(false);
+                  blurAfterPointer(e);
+                }}
+              >
+                <b>{tx(p.label, locale)}</b>
+                <span>{titleOf(i, p.title)}</span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
 /* ------------------------------------------------------------------ */
 /* Top bar                                                             */
 /* ------------------------------------------------------------------ */
@@ -142,6 +230,15 @@ export function TopBar({ topic, chapters, chapter, chapterNumber, locale, path, 
                     {tx(p.label, locale)}
                   </HudButton>
                 ))}
+                <ViewMenu
+                  items={presets}
+                  active={active}
+                  fallback={String(chapterNumber).padStart(2, '0')}
+                  label={upper(tr('hud.view'))}
+                  titleOf={presetTitle}
+                  locale={locale}
+                  onPick={(id) => actions.setPreset(id)}
+                />
               </HudGroup>
             )}
             {modes.length > 0 && (

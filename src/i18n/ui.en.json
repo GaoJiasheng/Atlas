@@ -107,6 +107,8 @@
   "time.bloc.axis": "Axis",
   "time.bloc.allied": "Allies",
   "time.bloc.neutral": "Neutral",
+  "time.bloc.out": "No longer at war",
+  "time.bloc.notYet": "Not yet at war",
   "time.kind.battle": "Battle",
   "time.kind.landing": "Landing",
   "time.kind.surrender": "Surrender",

@@ -6,8 +6,19 @@
 import type { Bloc, Entity } from '../schema';
 import { toNumber } from './time';
 
-/** Bloc valid at `t`: the span holding `t`; before the first span its bloc, in a gap the span that ended last. */
-export function blocAt(entity: Pick<Entity, 'bloc'>, t: number): Bloc {
+type Windowed = Pick<Entity, 'bloc'> & Partial<Pick<Entity, 'joined' | 'left'>>;
+
+/** Where `t` falls against an entity's `joined` / `left` window (`left` itself still counts as at war). */
+export type WarStatus = 'before' | 'at-war' | 'after';
+
+export function warStatusAt(entity: Partial<Pick<Entity, 'joined' | 'left'>>, t: number): WarStatus {
+  if (entity.joined !== undefined && t < toNumber(entity.joined)) return 'before';
+  if (entity.left !== undefined && t > toNumber(entity.left)) return 'after';
+  return 'at-war';
+}
+
+/** The side an entity is on at `t`, ignoring `joined` / `left`: the span holding `t`; before the first span its bloc, in a gap the span that ended last. */
+export function sideAt(entity: Pick<Entity, 'bloc'>, t: number): Bloc {
   const { bloc } = entity;
   if (typeof bloc === 'string') return bloc;
   let current = bloc[0]!.bloc;
@@ -16,6 +27,14 @@ export function blocAt(entity: Pick<Entity, 'bloc'>, t: number): Bloc {
     else break;
   }
   return current;
+}
+
+/**
+ * Bloc (map colour) at `t`: `neutral` before `joined` and after `left`
+ * (not at war then), else the side at `t` (`sideAt`).
+ */
+export function blocAt(entity: Windowed, t: number): Bloc {
+  return warStatusAt(entity, t) === 'at-war' ? sideAt(entity, t) : 'neutral';
 }
 
 /** The bloc the entity starts in (legend swatch, places without a time). */
@@ -44,8 +63,14 @@ export function blocSpansN(entity: Pick<Entity, 'bloc'>): { bloc: Bloc; from: nu
   }));
 }
 
-/** Bloc at `t` from pre-computed spans (hot path: map rendering). */
-export function blocAtSpans(spans: readonly { bloc: Bloc; from: number }[], t: number): Bloc {
+/** Bloc at `t` from pre-computed spans and window (hot path: map rendering); same rule as `blocAt`. */
+export function blocAtSpans(
+  spans: readonly { bloc: Bloc; from: number }[],
+  t: number,
+  joined = Number.NEGATIVE_INFINITY,
+  left = Number.POSITIVE_INFINITY,
+): Bloc {
+  if (t < joined || t > left) return 'neutral';
   let current = spans[0]!.bloc;
   for (const span of spans) {
     if (span.from <= t) current = span.bloc;

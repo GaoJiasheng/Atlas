@@ -22,8 +22,8 @@ import { clamp } from '../lib/time';
 import { frameAt } from '../lib/frame';
 import { ruleTicks } from '../lib/ticks';
 import { areaAt, controlAreas, frameStats } from '../lib/stats';
-import { planBandRows } from '../lib/bandRows';
-import { BLOC_CSS, colorKey, entityCssColor } from '../colors';
+import { planBandRows, type BandRowPlan } from '../lib/bandRows';
+import { BLOC_CSS, colorKey, entityCssColor, sideCssColor, sideColorKey } from '../colors';
 import { blocSpansN } from '../lib/bloc';
 import { formatReadout } from '../timeline/Timeline';
 
@@ -125,11 +125,17 @@ export function BandCard({
   const axisH = 20 * u;
   const top = 6 * u;
   const bottom = h - axisH;
-  // Too many entities for the card: the largest / earliest rows, the rest folded into one muted row.
-  const plan = useMemo(
-    () => planBandRows({ entities: all, areas, availableHeight: bottom - top, minRowHeight: BAND_MIN_ROW * u, collapsedHeight: BAND_REST_ROW * u }),
-    [all, areas, bottom, top, u],
-  );
+  // Too many entities for the card: the most relevant at `t` (largest area, then earliest), the rest folded into one muted row.
+  const planRef = useRef<BandRowPlan | null>(null);
+  const plan = useMemo(() => {
+    const areaNow = new Map(all.map((e) => [e.entity.id, areaAt(model, areas, e.entity.id, t)]));
+    const next = planBandRows({ entities: all, t, areaNow, availableHeight: bottom - top, minRowHeight: BAND_MIN_ROW * u, collapsedHeight: BAND_REST_ROW * u });
+    // Keep the previous object while the same rows stay in the same order, so the band paths are not rebuilt every playhead tick.
+    const prev = planRef.current;
+    const same = prev && prev.hidden === next.hidden && prev.rows.length === next.rows.length && prev.rows.every((r, i) => r === next.rows[i]);
+    planRef.current = same ? prev : next;
+    return planRef.current;
+  }, [model, all, areas, t, bottom, top, u]);
   const entities = plan.rows;
   const restH = plan.hidden > 0 ? BAND_REST_ROW * u : 0;
   const rowH = entities.length ? (bottom - top - restH) / entities.length : 0;
@@ -331,7 +337,7 @@ export function TimelinePanel({
         {model.movements.map((m, i) => {
           const holder = model.entities.get(m.movement.holder)?.entity;
           const y = lanes[1]!.y + 3 * u + moveRows[i]! * 6 * u;
-          const color = entityCssColor(holder, m.start);
+          const color = sideCssColor(holder, m.start);
           return (
             <rect
               key={m.movement.id}
@@ -340,14 +346,14 @@ export function TimelinePanel({
               y={y}
               width={Math.max(1, x(m.end) - x(m.start))}
               height={4 * u}
-              style={{ fill: `url(#ts-p01-hatch-${colorKey(holder, m.start)})`, stroke: color }}
+              style={{ fill: `url(#ts-p01-hatch-${sideColorKey(holder, m.start)})`, stroke: color }}
             />
           );
         })}
         {model.events.map((e) => {
           const holder = e.event.sides ? model.entities.get(e.event.sides.attacker)?.entity : undefined;
           const cy = lastLane.y + 7 * u;
-          const color = entityCssColor(holder, e.start);
+          const color = sideCssColor(holder, e.start);
           return (
             <g key={e.event.id}>
               <line className="ts-svg__span" x1={x(e.start)} x2={x(e.end)} y1={cy} y2={cy} style={{ stroke: color }} />

@@ -283,6 +283,8 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
         for (const b of ['axis', 'allied', 'neutral'] as const)
           if (geo.entities.some((e) => blocsOf(e).includes(b))) items.push({ id: `bloc-${b}`, label: t(`time.bloc.${b}`), color: BLOC_CSS[b] });
       }
+      // Entities with an end date turn neutral once they are out of the war.
+      if (geo.entities.some((e) => e.left !== undefined)) items.push({ id: 'bloc-out', label: bi('time.bloc.out'), color: BLOC_CSS.neutral });
     }
     if (layers.includes('movements') && geo.movements.length)
       items.push({ id: 'movement', label: t('time.movement'), color: 'var(--ink-muted)', kind: 'arrow' });

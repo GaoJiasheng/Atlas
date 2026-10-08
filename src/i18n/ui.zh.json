@@ -107,6 +107,8 @@
   "time.bloc.axis": "轴心国",
   "time.bloc.allied": "同盟国",
   "time.bloc.neutral": "中立",
+  "time.bloc.out": "已退出战争",
+  "time.bloc.notYet": "尚未参战",
   "time.kind.battle": "战斗",
   "time.kind.landing": "登陆",
   "time.kind.surrender": "投降",
