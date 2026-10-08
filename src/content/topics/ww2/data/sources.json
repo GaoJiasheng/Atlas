@@ -450,6 +450,413 @@
         "zh": "Kirby《对日战争》第一卷第 302、359、465 页：日军充分利用自行车保持推进速度（1 月中旬一个骑自行车的步兵营在坦克支援下打头阵进入柔佛）；到 1942 年 1 月底，新加坡市区原本约 55 万的人口因难民涌入几乎翻了一番。"
       },
       "url": "https://archive.org/details/war-against-japan-vol-1"
+    },
+    {
+      "id": "S49",
+      "text": {
+        "en": "Treaty of Versailles (1919), Part V, Article 160: the German Army was not to exceed seven infantry and three cavalry divisions, and its total strength 100,000 men including 4,000 officers.",
+        "zh": "《凡尔赛条约》（1919）第五部分第 160 条：德国陆军不得超过 7 个步兵师和 3 个骑兵师，总兵力不得超过 10 万人，其中军官不超过 4,000 人。"
+      },
+      "url": "https://avalon.law.yale.edu/imt/partv.asp"
+    },
+    {
+      "id": "S50",
+      "text": {
+        "en": "Robert M. Kennedy, The German Campaign in Poland (1939), Department of the Army Pamphlet 20-255 (1956), ch. 1–3, pp. 5–7, 17, 41: Hitler was appointed Chancellor on 30 January 1933; Austria was annexed in March 1938; at Munich on 29 September 1938 Britain, France, Germany and Italy agreed the cession of the Sudeten areas, with Czechoslovakia not represented, after British and French attempts to enlist Soviet support had failed — Germany took areas with 3,500,000 people, 700,000 of them Czechs; Bohemia and Moravia were occupied on 15 March 1939; on 31 March 1939 Britain and France pledged to assist Poland if attacked; in the summer of 1939 British and French negotiations in Moscow for a common front against Germany were slow and the Soviet Union committed itself to no coalition.",
+        "zh": "Robert M. Kennedy，《德国对波兰的战役（1939）》，美国陆军部第 20-255 号小册子（1956），第 1–3 章，第 5–7、17、41 页：希特勒 1933 年 1 月 30 日出任总理；1938 年 3 月吞并奥地利；1938 年 9 月 29 日英、法、德、意在慕尼黑商定割让苏台德地区，捷克斯洛伐克没有代表在场，此前英法争取苏联支持的努力没有成功——德国取得的地区有 350 万人口，其中 70 万是捷克人；1939 年 3 月 15 日德军占领波希米亚和摩拉维亚；1939 年 3 月 31 日英法承诺波兰遭到进攻时给予援助；1939 年夏英法在莫斯科谈判组成对德共同阵线，进展缓慢，苏联没有承诺加入任何联盟。"
+      },
+      "url": "https://www.ibiblio.org/hyperwar/USA/DAP-Poland/index.html"
+    },
+    {
+      "id": "S51",
+      "text": {
+        "en": "Munich Agreement, 29 September 1938 (text, Avalon Project, Yale Law School): signed by Hitler, Chamberlain, Daladier and Mussolini; the evacuation of the Sudeten German territory was to begin on 1 October and be completed by 10 October.",
+        "zh": "《慕尼黑协定》，1938 年 9 月 29 日（文本，耶鲁大学法学院 Avalon 项目）：希特勒、张伯伦、达拉第、墨索里尼签字；苏台德德意志人地区的撤出于 10 月 1 日开始，10 月 10 日前完成。"
+      },
+      "url": "https://avalon.law.yale.edu/imt/munich1.asp"
+    },
+    {
+      "id": "S52",
+      "text": {
+        "en": "Secret Additional Protocol to the German–Soviet Non-Aggression Treaty, Moscow, 23 August 1939 (text, Avalon Project): the northern boundary of Lithuania was to divide the German and Soviet spheres in the Baltic; in Poland the line of the rivers Narew, Vistula and San; the Soviet side declared its interest in Bessarabia; the protocol was to be kept strictly secret.",
+        "zh": "《德苏互不侵犯条约》秘密附加议定书，莫斯科，1939 年 8 月 23 日（文本，Avalon 项目）：波罗的海地区以立陶宛北部边界划分德苏势力范围；在波兰以纳雷夫河、维斯瓦河、桑河一线划分；苏方表明对比萨拉比亚的利益；议定书须严格保密。"
+      },
+      "url": "https://avalon.law.yale.edu/20th_century/addsepro.asp"
+    },
+    {
+      "id": "S53",
+      "text": {
+        "en": "Resolution of the Congress of People's Deputies of the USSR, 24 December 1989, on the political and legal assessment of the 1939 Soviet–German Non-Aggression Treaty: it confirms that the secret protocol was signed and existed, condemns it, and declares the secret protocols legally unjustified and invalid from the moment of signing.",
+        "zh": "苏联人民代表大会 1989 年 12 月 24 日《关于 1939 年苏德互不侵犯条约的政治和法律评价》决议：确认秘密议定书确实签订并存在，予以谴责，宣布各项秘密议定书在法律上站不住脚，自签字之时起无效。"
+      },
+      "url": "https://histdoc.net/history/1989-12-24%20Resolution%20of%20the%20Congress%20of%20People%27s%20Deputies.html"
+    },
+    {
+      "id": "S54",
+      "text": {
+        "en": "United States Holocaust Memorial Museum, Holocaust Encyclopedia, 'Axis Powers in World War II': on 1 November 1936 Mussolini announced a Rome–Berlin 'axis'; Germany and Japan signed the Anti-Comintern Pact on 25 November 1936; Germany, Italy and Japan signed the Tripartite Pact on 27 September 1940.",
+        "zh": "美国大屠杀纪念馆《大屠杀百科》“二战中的轴心国”：1936 年 11 月 1 日墨索里尼宣布罗马—柏林“轴心”；1936 年 11 月 25 日德日签订《反共产国际协定》；1940 年 9 月 27 日德、意、日签订《三国同盟条约》。"
+      },
+      "url": "https://encyclopedia.ushmm.org/content/en/article/axis-powers-in-world-war-ii",
+      "note": {
+        "en": "The museum's site timed out from this workstation; the article text was checked through search-engine extracts.",
+        "zh": "从本机访问该馆网站超时；条目内容通过搜索引擎摘录核对。"
+      }
+    },
+    {
+      "id": "S55",
+      "text": {
+        "en": "Roots.sg (National Heritage Board, Singapore), 'Sembawang Naval Base (King George VI Dock)': construction began in 1928; the base was officially opened on 14 February 1938 together with the King George VI Dock; it made Singapore an 'impregnable fortress', also called the 'Gibraltar of the East'.",
+        "zh": "Roots.sg（新加坡国家文物局）“三巴旺海军基地（乔治六世船坞）”：1928 年动工，1938 年 2 月 14 日与乔治六世船坞同时正式启用；它让新加坡被称为“坚不可摧的堡垒”“东方直布罗陀”。"
+      },
+      "url": "https://www.roots.gov.sg/places/places-landing/places/surveyed-sites/sembawang-naval-base-king-george-vi-dock"
+    },
+    {
+      "id": "S56",
+      "text": {
+        "en": "Kirby, The War Against Japan, vol. I, pp. 18, 28: British planning assumed a fleet would reach Singapore within 70 days of the outbreak of war (the 'period before relief'); in September 1939 the Chiefs of Staff increased the period to 180 days.",
+        "zh": "Kirby《对日战争》第一卷第 18、28 页：英国的防务计划假定开战后 70 天内舰队可以开到新加坡（“待援期”）；1939 年 9 月参谋长委员会把这一期限延长到 180 天。"
+      },
+      "url": "https://archive.org/details/war-against-japan-vol-1"
+    },
+    {
+      "id": "S57",
+      "text": {
+        "en": "US Census Bureau, International Programs, 'Historical Estimates of World Population': estimates of world population in 1940 cluster around 2.3 billion.",
+        "zh": "美国人口普查局国际项目《世界人口历史估计》：1940 年世界人口的各家估计集中在约 23 亿。"
+      },
+      "url": "https://www.census.gov/data/tables/time-series/demo/international-programs/historical-est-worldpop.html"
+    },
+    {
+      "id": "S58",
+      "text": {
+        "en": "Kennedy, The German Campaign in Poland (1939), pp. 25, 51–53, 57: in 1939 the active German Army numbered about 730,000 and its reserve about 1,100,000; Germany had 102 divisions, about 3,000 tanks and more than 4,000 aircraft; the peacetime Polish Army had a ceiling of 280,000, with 1,500,000 reservists available on mobilization, and the Polish air force had 935 aircraft, many of them obsolete.",
+        "zh": "Kennedy《德国对波兰的战役（1939）》第 25、51–53、57 页：1939 年德国现役陆军约 73 万人，预备役约 110 万；德国共有 102 个师、约 3,000 辆坦克、4,000 多架飞机；波兰和平时期陆军员额上限 28 万人，动员时可征召预备役 150 万人，波兰空军有飞机 935 架，其中许多已经过时。"
+      },
+      "url": "https://www.ibiblio.org/hyperwar/USA/DAP-Poland/index.html"
+    },
+    {
+      "id": "S59",
+      "text": {
+        "en": "Biennial Report of the Chief of Staff of the United States Army, July 1, 1939 to June 30, 1941 (George C. Marshall): on 1 July 1939 the active Army of the United States consisted of approximately 174,000 enlisted men.",
+        "zh": "美国陆军参谋长两年度报告（1939 年 7 月 1 日至 1941 年 6 月 30 日，马歇尔）：1939 年 7 月 1 日美国现役陆军约有士兵 17.4 万人。"
+      },
+      "url": "https://ibiblio.org/hyperwar/USA/COS-Biennial/COS-Biennial-1.html"
+    },
+    {
+      "id": "S60",
+      "text": {
+        "en": "Kennedy, The German Campaign in Poland (1939), pp. 44–45, 74, 77, 81–82, 88, 113, 118–120, 123: on the evening of 31 August SS men staged a fake Polish attack on the German radio station at Gleiwitz, leaving behind condemned prisoners in Polish uniforms who had been killed; on 31 August 1939 the German force against Poland comprised 55 divisions, with 630,000 men in Army Group North and 886,000 in Army Group South; Warsaw capitulated on 27 September (140,000 troops); the last Polish force surrendered at Kock on 6 October; the final German–Soviet demarcation line ran along the Pisa, Narew, Bug and San; German Army losses were 8,082 killed, 27,278 wounded and 5,029 missing; the Germans claimed 694,000 prisoners of some 800,000 Polish soldiers; Soviet troops crossed the frontier at 6 a.m. on 17 September; Polish cavalry charged German armour in the Corridor; the Polish air force was destroyed or driven off in the first days; the Polish President and commander-in-chief fled to Romania.",
+        "zh": "Kennedy《德国对波兰的战役（1939）》第 44–45、74、77、81–82、88、113、118–120、123 页：8 月 31 日晚，党卫队在德国格莱维茨电台制造了“波兰人袭击”的假事件，现场留下穿着波兰军服、已被杀死的死囚；1939 年 8 月 31 日德国对波兰共部署 55 个师，北方集团军群 63 万人，南方集团军群 88.6 万人；华沙 9 月 27 日投降（14 万人）；最后一支波兰部队 10 月 6 日在科克投降；德苏最终分界线沿皮萨河、纳雷夫河、布格河和桑河；德国陆军阵亡 8,082 人、负伤 27,278 人、失踪 5,029 人；德方称俘虏 69.4 万人（波兰参战军人约 80 万）；苏军 9 月 17 日早 6 时越过边界；波兰骑兵在走廊地区向德军装甲部队冲锋；波兰空军在开战头几天就被摧毁或被迫撤离；波兰总统和总司令逃往罗马尼亚。"
+      },
+      "url": "https://www.ibiblio.org/hyperwar/USA/DAP-Poland/index.html"
+    },
+    {
+      "id": "S61",
+      "text": {
+        "en": "Institute of National Remembrance (IPN, Poland), 'Soviet aggression on Poland from 17 September 1939': the Soviets used more than 600,000 soldiers, about 4,700 tanks and 3,300 combat aircraft; some 250,000 Polish soldiers were taken prisoner by the Soviets.",
+        "zh": "波兰国家记忆研究所（IPN）《1939 年 9 月 17 日苏联对波兰的侵略》：苏联动用 60 多万军人、约 4,700 辆坦克和 3,300 架作战飞机；约 25 万名波兰军人被苏军俘虏。"
+      },
+      "url": "https://eng.ipn.gov.pl/en/news/4592,Soviet-aggression-on-Poland-from-17-September-1939.html",
+      "note": {
+        "en": "The IPN site refused connections from this workstation; the figures were checked through search-engine extracts of the IPN page. Other estimates of the Soviet force range from about 450,000 to 800,000.",
+        "zh": "IPN 网站拒绝本机连接；数字通过搜索引擎对该页的摘录核对。对苏军兵力的其他估计在约 45 万到 80 万之间。"
+      }
+    },
+    {
+      "id": "S62",
+      "text": {
+        "en": "Brian Crozier, 'Remembering Katyn', Hoover Institution, 30 April 2000: the executions were ordered by Stalin in a decision of 5 March 1940 on Beria's proposal; KGB chairman Shelepin's 1959 memo to Khrushchev gives 21,857 killed, including 4,421 in the Katyn forest; German occupation forces found the mass grave at Katyn in 1943; the Soviet Union blamed Germany until 13 April 1990, when it admitted responsibility.",
+        "zh": "Brian Crozier《记住卡廷》，胡佛研究所，2000 年 4 月 30 日：处决由斯大林根据贝利亚的提议于 1940 年 3 月 5 日决定；克格勃主席谢列平 1959 年给赫鲁晓夫的报告列出被处决者 21,857 人，其中卡廷森林 4,421 人；1943 年占领当地的德军发现了卡廷的万人坑；苏联一直归咎于德国，直到 1990 年 4 月 13 日才承认负有责任。"
+      },
+      "url": "https://www.hoover.org/research/remembering-katyn"
+    },
+    {
+      "id": "S63",
+      "text": {
+        "en": "United States Holocaust Memorial Museum, Holocaust Encyclopedia, 'Jewish Losses during the Holocaust: By Country': Poland's Jewish population was 3,350,000 in 1937; between 2,770,000 and 3,000,000 were killed.",
+        "zh": "美国大屠杀纪念馆《大屠杀百科》“大屠杀中的犹太人损失（按国家）”：1937 年波兰犹太人 335 万，其中 277 万至 300 万人被杀害。"
+      },
+      "url": "https://encyclopedia.ushmm.org/content/en/article/jewish-losses-during-the-holocaust-by-country",
+      "note": {
+        "en": "Checked through search-engine extracts (the museum's site timed out).",
+        "zh": "通过搜索引擎摘录核对（该馆网站访问超时）。"
+      }
+    },
+    {
+      "id": "S64",
+      "text": {
+        "en": "United States Holocaust Memorial Museum, Holocaust Encyclopedia, 'Polish Victims': an estimated 1.8 to 1.9 million non-Jewish Polish civilians were killed by the German occupation and the war.",
+        "zh": "美国大屠杀纪念馆《大屠杀百科》“波兰受害者”：估计有 180 万至 190 万非犹太裔波兰平民死于德国占领和战争。"
+      },
+      "url": "https://encyclopedia.ushmm.org/content/en/article/polish-victims",
+      "note": {
+        "en": "Checked through search-engine extracts (the museum's site timed out).",
+        "zh": "通过搜索引擎摘录核对（该馆网站访问超时）。"
+      }
+    },
+    {
+      "id": "S65",
+      "text": {
+        "en": "T. K. Derry, The Campaign in Norway (HMSO, 1952), pp. 19, 27, 206, 176, 230: the Germans landed a first echelon of 8,850 men carried in warships, the Oslo group via the Baltic and the others from Wilhelmshaven, on 9 April 1940; the Allied assault on Narvik was made on 28 May; the evacuation of the Narvik area was completed on 8 June; land casualties were 1,869 British and about 530 French and Polish; Norwegian casualties 1,335; the German General Staff's figure was 5,296.",
+        "zh": "T. K. Derry《挪威战役》（英国皇家文书局，1952），第 19、27、206、176、230 页：1940 年 4 月 9 日德军第一梯队 8,850 人由军舰运送登陆，奥斯陆一路经波罗的海，其他各路从威廉港出发；盟军 5 月 28 日进攻纳尔维克；6 月 8 日完成从纳尔维克地区撤离；陆上伤亡英军 1,869 人，法军和波兰军约 530 人，挪威军 1,335 人，德国总参谋部统计德军 5,296 人。"
+      },
+      "url": "https://www.ibiblio.org/hyperwar/UN/UK/UK-NWE-Norway/index.html"
+    },
+    {
+      "id": "S66",
+      "text": {
+        "en": "L. F. Ellis, The War in France and Flanders 1939–1940 (HMSO, 1953), pp. 20, 32, 35, 41–42, 80, 208, 247, 274, 294, 298, 326: during the winter of 1939–40 British brigades took turns on the Saar front in front of the Maginot forts; two months after the partition of Poland the Soviet Union invaded Finland, which fought until it sought an armistice in March 1940; on 10 May German troops crossed into Belgium, Holland and Luxembourg; the French command had thought the Ardennes 'impracticable for tanks'; German armour crossed the Meuse on 13 May; the 2nd Panzer Division reached Abbeville on 20 May; Operation Dynamo evacuated 338,226 men from Dunkirk (26 May – 4 June), nearly 100,000 of them from the beaches, 139,097 of them Allied (mostly French) troops after the evacuation was opened to them; the Belgian Army capitulated on 28 May; in June the French still had the equivalent of thirteen fortress divisions in the Maginot Line and on the Swiss frontier; Italy declared war on 10 June; on 14 June the Germans were entering Paris; British Army casualties in the campaign were 68,111.",
+        "zh": "L. F. Ellis《法国和佛兰德斯的战争 1939–1940》（英国皇家文书局，1953），第 20、32、35、41–42、80、208、247、274、294、298、326 页：1939–40 年冬，英军各旅轮流在萨尔前线马奇诺要塞前方值守；瓜分波兰两个月后苏联入侵芬兰，芬兰一直打到 1940 年 3 月才求和；5 月 10 日德军越境进入比利时、荷兰和卢森堡；法军统帅部原以为阿登地区“坦克无法通行”；德军装甲部队 5 月 13 日渡过默兹河；德军第 2 装甲师 5 月 20 日到达阿布维尔；“发电机行动”从敦刻尔克撤出 338,226 人（5 月 26 日至 6 月 4 日），近 10 万人从海滩撤出，其中在撤离向盟军开放后撤出的盟军（主要是法军）139,097 人；比利时军队 5 月 28 日投降；到 6 月，法军仍有相当于 13 个要塞师的兵力留在马奇诺防线和瑞士边境；意大利 6 月 10 日宣战；6 月 14 日德军开进巴黎；英国陆军在这次战役中伤亡 68,111 人。"
+      },
+      "url": "https://www.ibiblio.org/hyperwar/UN/UK/UK-NWE-Flanders/index.html"
+    },
+    {
+      "id": "S67",
+      "text": {
+        "en": "German High Command figures announced in July 1940, as reported in the Auckland Star, 4 July 1940 (Papers Past, National Library of New Zealand): German casualties in the West since 10 May were 27,074 killed, 111,034 wounded and 18,384 missing.",
+        "zh": "1940 年 7 月德国最高统帅部公布的数字，见《奥克兰星报》1940 年 7 月 4 日（新西兰国家图书馆 Papers Past）：5 月 10 日以来德军在西线阵亡 27,074 人，负伤 111,034 人，失踪 18,384 人。"
+      },
+      "url": "https://paperspast.natlib.govt.nz/newspapers/AS19400704.2.53",
+      "note": {
+        "en": "A contemporary German official figure; the page blocks automated access and was checked through search-engine extracts. The German official history (K.-H. Frieser, The Blitzkrieg Legend) gives higher totals.",
+        "zh": "这是当时德方公布的官方数字；该网页拒绝自动访问，通过搜索引擎摘录核对。德国官方战史（Frieser《闪电战的传说》）给出的总数更高。"
+      }
+    },
+    {
+      "id": "S68",
+      "text": {
+        "en": "Nina Wardleworth (University of Leeds), 'What happened to the French army after Dunkirk', The Conversation, 2017: between 50,000 and 90,000 French soldiers were killed in May–June 1940 and about 1.8 million were taken prisoner; of about 340,000 Allied troops evacuated from Dunkirk, 123,000 were French.",
+        "zh": "Nina Wardleworth（利兹大学）《敦刻尔克之后法军怎样了》，The Conversation，2017：1940 年 5–6 月法军阵亡 5 万至 9 万人，约 180 万人被俘；从敦刻尔克撤出的约 34 万盟军中有 12.3 万法国人。"
+      },
+      "url": "https://theconversation.com/what-happened-to-the-french-army-after-dunkirk-80854"
+    },
+    {
+      "id": "S69",
+      "text": {
+        "en": "Franco-German Armistice Agreement, Compiègne, 22 June 1940 (text, Avalon Project): signed at 6.50 p.m. German summer time by Keitel and Huntziger; French territory north and west of the line on the attached map to be occupied by German troops (Article II).",
+        "zh": "《法德停战协定》，贡比涅，1940 年 6 月 22 日（文本，Avalon 项目）：德国夏令时下午 6 时 50 分由凯特尔与洪齐格签字；附图线以北和以西的法国领土由德军占领（第二条）。"
+      },
+      "url": "https://avalon.law.yale.edu/wwii/frgearm.asp"
+    },
+    {
+      "id": "S70",
+      "text": {
+        "en": "Public Sénat, 10 July 2019, on the commemoration of the 'Vichy 80': on 10 July 1940 the National Assembly gave Pétain's government full powers by 569 votes to 80, with 20 abstentions; the act served as the legal basis of the Vichy regime.",
+        "zh": "Public Sénat 2019 年 7 月 10 日关于纪念“维希 80 人”的报道：1940 年 7 月 10 日国民议会以 569 票对 80 票、20 票弃权授予贝当政府全权；这项法律成了维希政权的法律基础。"
+      },
+      "url": "https://www.publicsenat.fr/actualites/non-classe/ferrand-rend-hommage-aux-80-parlementaires-ayant-refuse-les-pleins-pouvoirs-a"
+    },
+    {
+      "id": "S71",
+      "text": {
+        "en": "Mémorial de la Shoah (Paris), 'June 18, 1940, the appeal of General de Gaulle': on 18 June 1940 de Gaulle, in London, broadcast on the BBC calling on French soldiers, engineers and technicians to join him in continuing the fight.",
+        "zh": "巴黎大屠杀纪念馆《1940 年 6 月 18 日，戴高乐将军的号召》：1940 年 6 月 18 日戴高乐在伦敦通过 BBC 广播，号召法国军人、工程师和技术人员与他一起继续战斗。"
+      },
+      "url": "https://www.memorialdelashoah.org/en/18-juin-1940-lappel-du-general-de-gaulle.html"
+    },
+    {
+      "id": "S72",
+      "text": {
+        "en": "Royal Air Force, 'Battle of Britain' (raf.mod.uk): the battle was fought from 10 July to 31 October 1940; about 1,733 German aircraft were destroyed and 915 British; 544 pilots of Fighter Command (about one in six) were killed, and about 2,500 Luftwaffe airmen.",
+        "zh": "英国皇家空军《不列颠之战》（raf.mod.uk）：战役从 1940 年 7 月 10 日持续到 10 月 31 日；德国飞机约 1,733 架被毁，英国 915 架；战斗机司令部 544 名飞行员阵亡（约六分之一），德国空军约 2,500 名机组人员死亡。"
+      },
+      "url": "https://www.raf.mod.uk/what-we-do/our-history/anniversaries/battle-of-britain/",
+      "note": {
+        "en": "The RAF site blocks automated access; the figures were checked through search-engine extracts of the page. Loss claims made during the battle were much higher on both sides.",
+        "zh": "皇家空军网站拒绝自动访问；数字通过搜索引擎对该页的摘录核对。战时双方宣称的战果都大大高于这些数字。"
+      }
+    },
+    {
+      "id": "S73",
+      "text": {
+        "en": "Basil Collier, The Defence of the United Kingdom (HMSO, 1957), ch. XVII and Appendix L: the German night offensive against British cities lasted from September 1940 to May 1941, ending with a big attack on London on 10 May and a raid on Birmingham on 16 May; civilian casualties in the United Kingdom from bombing during the whole war were 51,509 killed and 61,423 seriously injured; with flying bombs, rockets and cross-Channel guns, 60,595 killed.",
+        "zh": "Basil Collier《保卫联合王国》（英国皇家文书局，1957）第十七章与附录 L：德国对英国城市的夜间轰炸从 1940 年 9 月持续到 1941 年 5 月，以 5 月 10 日对伦敦的大空袭和 5 月 16 日对伯明翰的空袭结束；整个战争期间英国平民被轰炸炸死 51,509 人，重伤 61,423 人；加上飞弹、火箭和跨海峡炮击，共死亡 60,595 人。"
+      },
+      "url": "https://www.ibiblio.org/hyperwar/UN/UK/UK-Defence-UK/index.html"
+    },
+    {
+      "id": "S74",
+      "text": {
+        "en": "Karl-Heinz Frieser, The Blitzkrieg Legend: The 1940 Campaign in the West (German official history; English ed. Naval Institute Press, 2005): Panzer Group Kleist, which crossed the Ardennes, had about 134,370 men and 41,140 vehicles, including 1,222 tanks.",
+        "zh": "Karl-Heinz Frieser《闪电战的传说：1940 年西线战役》（德国官方战史；英文版美国海军学会出版社，2005）：穿越阿登的克莱斯特装甲集群约有 134,370 人、41,140 辆车辆，其中坦克 1,222 辆。"
+      },
+      "note": {
+        "en": "Figures taken from the book as cited in the English Wikipedia article on the 1st Panzer Army; the page number was not checked against the book. Used only for the width of the route line.",
+        "zh": "数字取自英文维基百科“第 1 装甲集团军”条目对该书的引用，没有核对原书页码。只用于路线线宽。"
+      }
+    },
+    {
+      "id": "S75",
+      "text": {
+        "en": "George E. Blau, The German Campaign in Russia: Planning and Operations (1940–1942), Department of the Army Pamphlet 20-261a (1955), pp. 5, 38–41, 74, 88–89, 97: on 31 July 1940 Hitler decided that the Soviet Union should be attacked the following spring and defeated within five months, with the Ukraine, Belorussia and the Baltic States to come under German domination; for the invasion the Army had 145 divisions, including 19 armoured — Army Group North 30, Army Group Center 51, Army Group South 43 German and 14 Romanian divisions — and 3,050,000 men, 3,350 tanks, 7,184 guns and 625,000 horses; the Kiev pocket yielded 665,000 prisoners; German Army losses to 26 November 1941 were 743,112, including 156,475 killed, against 3,006,867 prisoners claimed; winter clothing had been ordered for only 60 divisions; temperatures fell as low as −50 °F.",
+        "zh": "George E. Blau《德国对俄战役：计划与作战（1940–1942）》，美国陆军部第 20-261a 号小册子（1955），第 5、38–41、74、88–89、97 页：1940 年 7 月 31 日希特勒决定次年春进攻苏联、五个月内打垮，乌克兰、白俄罗斯和波罗的海国家归德国支配；入侵兵力 145 个师（含装甲师 19 个）——北方集团军群 30 个、中央集团军群 51 个、南方集团军群德军 43 个加罗马尼亚 14 个——共 305 万人、坦克 3,350 辆、火炮 7,184 门、马 62.5 万匹；基辅包围圈俘虏 66.5 万人；截至 1941 年 11 月 26 日德国陆军损失 743,112 人，其中阵亡 156,475 人，德方称俘虏 3,006,867 人；冬装只为 60 个师订购；气温低到华氏零下 50 度。"
+      },
+      "url": "https://archive.org/details/PAM20-261A"
+    },
+    {
+      "id": "S76",
+      "text": {
+        "en": "Earl F. Ziemke and Magna E. Bauer, Moscow to Stalingrad: Decision in the East (US Army Center of Military History, 1987): according to most Soviet accounts the western military districts had 2.9 million men on 22 June 1941; on 12 October 1941 Hitler ordered that Moscow, like Leningrad, be surrounded and starved rather than entered; the Soviet counteroffensive opened on 5–6 December, when temperatures near Moscow fell to −38 °F; besides the armies at the front, eight armies of about 800,000 men were still in the Stavka reserve.",
+        "zh": "Earl F. Ziemke、Magna E. Bauer《从莫斯科到斯大林格勒：东线的决战》（美国陆军军事历史中心，1987）：据多数苏方记载，1941 年 6 月 22 日西部各军区共有 290 万人；1941 年 10 月 12 日希特勒下令对莫斯科像对列宁格勒一样包围、饿死，而不是进城；苏军反攻于 12 月 5–6 日开始，当时莫斯科附近气温降到华氏零下 38 度；除前线部队外，大本营预备队还有 8 个集团军、约 80 万人。"
+      },
+      "url": "https://archive.org/details/MoscowToStalingradDecisionInTheEast"
+    },
+    {
+      "id": "S77",
+      "text": {
+        "en": "Transcript of the International Military Tribunal, Nuremberg, 19 February 1946 (Soviet prosecutor L. N. Smirnov), Harvard Law School Nuremberg Trials Project: 'as a result of the hunger blockade of Leningrad, 632,253 people perished'.",
+        "zh": "纽伦堡国际军事法庭 1946 年 2 月 19 日庭审记录（苏联公诉人斯米尔诺夫），哈佛法学院纽伦堡审判项目：“由于列宁格勒的饥饿封锁，632,253 人死亡”。"
+      },
+      "url": "https://nuremberg.law.harvard.edu/transcripts/7-transcript-for-imt-trial-of-major-war-criminals?seq=4654",
+      "note": {
+        "en": "The Leningrad commission's figure; later research puts the toll higher [S78].",
+        "zh": "这是列宁格勒调查委员会的数字；后来的研究认为更高 [S78]。"
+      }
+    },
+    {
+      "id": "S78",
+      "text": {
+        "en": "Anna Reid, Leningrad: Tragedy of a City under Siege, 1941–44 (Bloomsbury, 2011), as excerpted in The History Reader: the total death toll in the city was somewhere between 700,000 and 800,000, one in every three or four of the pre-siege population, by January 1944.",
+        "zh": "Anna Reid《列宁格勒：围城的悲剧 1941–44》（Bloomsbury，2011），The History Reader 摘录：到 1944 年 1 月，城内总死亡人数在 70 万到 80 万之间，相当于围城前人口的三分之一到四分之一。"
+      },
+      "url": "https://www.thehistoryreader.com/?p=1155"
+    },
+    {
+      "id": "S79",
+      "text": {
+        "en": "The National WWII Museum (New Orleans), 'History Through the Viewfinder: The Siege of Leningrad': the siege lasted from 8 September 1941 to 27 January 1944, 872 days; about 1.5 million soldiers and civilians died.",
+        "zh": "美国国家二战博物馆（新奥尔良）《取景框里的历史：列宁格勒围城》：围城从 1941 年 9 月 8 日持续到 1944 年 1 月 27 日，共 872 天；军民约 150 万人死亡。"
+      },
+      "url": "https://www.nationalww2museum.org/war/articles/history-through-viewfinder-36"
+    },
+    {
+      "id": "S80",
+      "text": {
+        "en": "United States Holocaust Memorial Museum, Holocaust Encyclopedia, 'Mass Shootings at Babyn Yar (Babi Yar)': on 29–30 September 1941, according to reports sent to Einsatzgruppen headquarters in Berlin, 33,771 Jews were shot at the Babyn Yar ravine in Kyiv by Sonderkommando 4a of Einsatzgruppe C under Paul Blobel, with SS and German police units.",
+        "zh": "美国大屠杀纪念馆《大屠杀百科》“娘子谷大屠杀”：据送交柏林特别行动队总部的报告，1941 年 9 月 29 日至 30 日，特别行动队 C 队第 4a 特遣队（指挥官保罗·布洛贝尔）会同党卫队和德国警察部队，在基辅娘子谷峡谷枪杀了 33,771 名犹太人。"
+      },
+      "url": "https://encyclopedia.ushmm.org/content/en/article/kiev-and-babi-yar",
+      "note": {
+        "en": "Checked through search-engine extracts (the museum's site timed out). Babi Yar remained a killing site for the rest of the occupation; Roma, Soviet prisoners of war and others were also killed there.",
+        "zh": "通过搜索引擎摘录核对（该馆网站访问超时）。整个占领期间娘子谷一直是屠杀地点，罗姆人、苏军战俘等也在那里被杀害。"
+      }
+    },
+    {
+      "id": "S81",
+      "text": {
+        "en": "United States Holocaust Memorial Museum, Holocaust Encyclopedia, 'Einsatzgruppen': members of these mobile killing units murdered well over one million civilians, mostly Jews, primarily in mass shootings in the occupied Soviet Union.",
+        "zh": "美国大屠杀纪念馆《大屠杀百科》“特别行动队”：这些流动屠杀部队杀害了远超 100 万名平民，主要是犹太人，大多是在被占领的苏联境内集体枪杀。"
+      },
+      "url": "https://encyclopedia.ushmm.org/content/en/article/einsatzgruppen",
+      "note": {
+        "en": "Checked through search-engine extracts (the museum's site timed out).",
+        "zh": "通过搜索引擎摘录核对（该馆网站访问超时）。"
+      }
+    },
+    {
+      "id": "S82",
+      "text": {
+        "en": "United States Holocaust Memorial Museum, Holocaust Encyclopedia, 'Nazi Persecution of Soviet Prisoners of War': some 5.7 million Soviet soldiers fell into German hands; 3.3 million of them, about 57 percent, were dead by the end of the war; after the Jews they were the largest group of victims of Nazi racial policy.",
+        "zh": "美国大屠杀纪念馆《大屠杀百科》“纳粹对苏军战俘的迫害”：约 570 万名苏军落入德军手中，到战争结束时其中 330 万人（约 57%）死亡；他们是仅次于犹太人的纳粹种族政策最大受害群体。"
+      },
+      "url": "https://encyclopedia.ushmm.org/content/en/article/nazi-persecution-of-soviet-prisoners-of-war",
+      "note": {
+        "en": "Checked through search-engine extracts (the museum's site timed out).",
+        "zh": "通过搜索引擎摘录核对（该馆网站访问超时）。"
+      }
+    },
+    {
+      "id": "S83",
+      "text": {
+        "en": "TASS, 23 January 2025, citing the Russian Ministry of Defence: irrecoverable Soviet losses in the war were 26.6 million people, including about 8.7 million military personnel.",
+        "zh": "塔斯社 2025 年 1 月 23 日援引俄罗斯国防部：苏联在战争中的不可挽回损失为 2,660 万人，其中军人约 870 万。"
+      },
+      "url": "https://tass.com/politics/1903231/amp",
+      "note": {
+        "en": "The 26.6 million figure comes from a 1990 demographic estimate (pre-war population minus post-war population, adjusted); Western estimates such as the National WWII Museum's 24 million [S14] are lower. Both are listed.",
+        "zh": "2,660 万这个数字来自 1990 年的人口学估算（战前人口减去战后人口再做修正）；西方的估计较低，如美国国家二战博物馆的 2,400 万 [S14]。两者并列。"
+      }
+    },
+    {
+      "id": "S84",
+      "text": {
+        "en": "Kirby, The War Against Japan, vol. I, pp. 70–71, 88: after Japanese troops moved into southern Indochina, the United States froze all Japanese assets on 26 July 1941, followed by Britain and the Netherlands East Indies; this cut off Japan's outside oil supplies — its own production met only about ten per cent of its needs and its reserves would last about three years of peace, much less in war; on 26 November 1941 the United States rejected Japan's last proposal and handed its envoys a note calling for, among other things, the evacuation of Japanese forces from China and Indochina.",
+        "zh": "Kirby《对日战争》第一卷第 70–71、88 页：日军进驻印度支那南部后，美国于 1941 年 7 月 26 日冻结日本全部在美资产，英国和荷属东印度随后跟进；日本由此断了外来石油——本国产量只够需求的约一成，储备在和平时期约能维持三年，战时则短得多；1941 年 11 月 26 日，美国拒绝了日本的最后方案，并交给日本特使一份照会，其中要求日军撤出中国和印度支那。"
+      },
+      "url": "https://archive.org/details/war-against-japan-vol-1"
+    },
+    {
+      "id": "S85",
+      "text": {
+        "en": "Kirby, The War Against Japan, vol. I, pp. 97–99: the carrier striking force under Vice-Admiral Nagumo — four fleet carriers and two light fleet carriers, with two battleships, two cruisers, destroyers and eight tankers — assembled in Hitokappu Bay and sailed on 26 November 1941 on its 3,000-mile voyage; 360 aircraft were flown off on the morning of 7 December; the three US fleet carriers were not in harbour.",
+        "zh": "Kirby《对日战争》第一卷第 97–99 页：南云中将指挥的航母打击部队——四艘舰队航母和两艘轻型舰队航母，另有两艘战列舰、两艘巡洋舰、驱逐舰和八艘油船——在单冠湾集结，1941 年 11 月 26 日出发，航程 3,000 英里；12 月 7 日早上共起飞 360 架飞机；美国三艘舰队航母当时都不在港内。"
+      },
+      "url": "https://archive.org/details/war-against-japan-vol-1"
+    },
+    {
+      "id": "S86",
+      "text": {
+        "en": "US House of Representatives, History, Art & Archives, 'The House declaration of war against Japan' (8 December 1941): the House adopted the war resolution immediately after Roosevelt's address; Jeannette Rankin's was the lone dissenting vote.",
+        "zh": "美国众议院历史档案办公室《众议院对日宣战》（1941 年 12 月 8 日）：罗斯福演说后众议院随即通过宣战决议，珍妮特·兰金投了唯一的反对票。"
+      },
+      "url": "https://history.house.gov/HistoricalHighlight/Detail/35284"
+    },
+    {
+      "id": "S87",
+      "text": {
+        "en": "Foreign Relations of the United States, 1941, vol. I, doc. 587: the Joint Resolution of 11 December 1941 declaring a state of war with Germany, which 'has formally declared war against the Government and the people of the United States'; the same resolution, mutatis mutandis, was adopted for Italy.",
+        "zh": "《美国对外关系文件》1941 年第一卷第 587 号：1941 年 12 月 11 日宣布与德国处于战争状态的联合决议，理由是德国“已经正式对美国政府和人民宣战”；对意大利通过了内容相同的决议。"
+      },
+      "url": "https://history.state.gov/historicaldocuments/frus1941v01/d587"
+    },
+    {
+      "id": "S88",
+      "text": {
+        "en": "Louis Morton, The Fall of the Philippines (US Army in World War II, 1953), pp. 88, 125, 236, 455, 467: after the Japanese air attacks of 8 December the Far East Air Force had been cut in half (17 of 35 B-17s left); the 14th Army landing force at Lingayen Gulf on 22–28 December totalled 43,110 men; the Japanese entered Manila on 2 January 1942; General King, responsible for 78,000 men on Bataan, surrendered on 9 April 1942; the 65-mile 'death march' from Mariveles to San Fernando followed.",
+        "zh": "Louis Morton《菲律宾的陷落》（美国陆军二战史，1953），第 88、125、236、455、467 页：12 月 8 日日军空袭后，远东航空队损失过半（35 架 B-17 只剩 17 架）；12 月 22 日至 28 日在林加延湾登陆的第 14 军共 43,110 人；日军 1942 年 1 月 2 日进入马尼拉；负责巴丹半岛 7.8 万人的金少将于 1942 年 4 月 9 日投降；随后是从马里韦莱斯到圣费尔南多 65 英里的“死亡行军”。"
+      },
+      "url": "https://www.ibiblio.org/hyperwar/USA/USA-P-PI/index.html"
+    },
+    {
+      "id": "S89",
+      "text": {
+        "en": "US National Archives, 'Executive Order 9066: Resulting in Japanese-American Incarceration (1942)': issued on 19 February 1942; in the following six months approximately 122,000 men, women and children were forcibly moved, then confined in 10 'relocation centers'; nearly 70,000 were American citizens; no charges were made against them; in 1988 Public Law 100-383 acknowledged the injustice, apologised, and paid $20,000 to each person who had been incarcerated.",
+        "zh": "美国国家档案馆《第 9066 号行政令：导致日裔美国人被监禁（1942）》：1942 年 2 月 19 日发布；此后六个月里约 12.2 万名男女老幼被强制迁移，再被关进 10 个“安置中心”；其中近 7 万人是美国公民；没有对他们提出任何指控；1988 年第 100-383 号公法承认这是不公正的，正式道歉，并向每位被监禁者赔偿 2 万美元。"
+      },
+      "url": "https://www.archives.gov/milestone-documents/executive-order-9066"
+    },
+    {
+      "id": "S90",
+      "text": {
+        "en": "Army Air Forces Statistical Digest, World War II (December 1945), Table 79: factory deliveries of all US military airplanes were 18,466 in 1941 and 96,270 in 1944; 295,959 from July 1940 to August 1945.",
+        "zh": "《陆军航空队统计摘要：第二次世界大战》（1945 年 12 月）表 79：美国各类军用飞机出厂交付量 1941 年 18,466 架，1944 年 96,270 架；1940 年 7 月至 1945 年 8 月共 295,959 架。"
+      },
+      "url": "https://archive.org/details/ArmyAirForcesStatisticalDigestWorldWarII-nsia"
+    },
+    {
+      "id": "S91",
+      "text": {
+        "en": "US Military Academy, Department of History, 'Campaign in Poland, 1939' (public domain; via Wikimedia Commons), with the maps in Kennedy, The German Campaign in Poland (maps 8–10). Route source for germany-poland-n, germany-poland-s and ussr-poland.",
+        "zh": "美国西点军校历史系地图《1939 年波兰战役》（公有领域，维基共享资源），并参照 Kennedy《德国对波兰的战役》的地图 8–10。德军南北两路和苏军入波路线的依据。"
+      },
+      "url": "https://commons.wikimedia.org/wiki/File:Poland1939_GermanPlanMap.jpg"
+    },
+    {
+      "id": "S92",
+      "text": {
+        "en": "'Eastern Front 1941-06 to 1941-12' (Gdr; CC BY-SA 3.0; via Wikimedia Commons), with the situation maps of 19 July, 30 July, mid-September, 6 October and 5 December 1941 in Blau, The German Campaign in Russia (maps 7–12). Route source for barbarossa-n, barbarossa-c and barbarossa-s.",
+        "zh": "《东线 1941 年 6 月至 12 月》（Gdr 绘，CC BY-SA 3.0，维基共享资源），并参照 Blau《德国对俄战役》中 1941 年 7 月 19 日、7 月 30 日、9 月中旬、10 月 6 日和 12 月 5 日的态势图（地图 7–12）。巴巴罗萨三路路线的依据。"
+      },
+      "url": "https://commons.wikimedia.org/wiki/File:Eastern_Front_1941-06_to_1941-12.png"
+    },
+    {
+      "id": "S93",
+      "text": {
+        "en": "US Army Center of Military History, 'Invasion of the Philippines, 1941' (map of Japanese landings and advances on Luzon, 8 December 1941 – 8 January 1942; public domain; via Wikimedia Commons), with Morton, The Fall of the Philippines, ch. VIII. Route source for japan-philippines.",
+        "zh": "美国陆军军事历史中心地图《1941 年入侵菲律宾》（1941 年 12 月 8 日至 1942 年 1 月 8 日日军在吕宋岛的登陆与推进；公有领域，维基共享资源），并参照 Morton《菲律宾的陷落》第八章。日军入菲路线的依据。"
+      },
+      "url": "https://commons.wikimedia.org/wiki/File:Invasion_of_the_Philippines,_1941.jpg"
     }
   ]
 }

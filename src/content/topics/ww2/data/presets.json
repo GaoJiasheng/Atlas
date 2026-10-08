@@ -69,6 +69,48 @@
         ],
         "zoom": 3.4
       }
+    },
+    {
+      "id": "channel-coast",
+      "label": {
+        "en": "Dunkirk",
+        "zh": "敦刻尔克"
+      },
+      "camera": {
+        "center": [
+          1.9,
+          51.1
+        ],
+        "zoom": 7.4
+      }
+    },
+    {
+      "id": "leningrad-area",
+      "label": {
+        "en": "Leningrad",
+        "zh": "列宁格勒"
+      },
+      "camera": {
+        "center": [
+          30.6,
+          59.7
+        ],
+        "zoom": 6.6
+      }
+    },
+    {
+      "id": "oahu",
+      "label": {
+        "en": "Oahu",
+        "zh": "瓦胡岛"
+      },
+      "camera": {
+        "center": [
+          -157.98,
+          21.45
+        ],
+        "zoom": 8.6
+      }
     }
   ]
 }
