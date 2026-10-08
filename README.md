@@ -7,6 +7,13 @@ A bilingual (EN / 中文) interactive textbook for a Singapore primary school st
 
 Content is plain MDX + JSON, rules-driven, no accounts and no external requests at runtime. Scene state lives in the URL, so every view is a shareable link.
 
+| Time scene (placeholder topic) | Space scene (placeholder topic) |
+|---|---|
+| ![Time scene, technical-plate HUD](docs/screenshots/sample-time/hero-paper.png) | ![Space scene, technical-plate HUD](docs/screenshots/sample-space/hero-paper.png) |
+| ![Time scene, dark plate](docs/screenshots/sample-time/hero-dark.png) | ![Space scene, HUD hidden](docs/screenshots/sample-space/hero-clean.png) |
+
+Visual language adapted from the industrial-3d-showcase technical-plate skill. More frames (modes, Chinese, phone) are in [docs/screenshots/](docs/screenshots/).
+
 ## Stack
 
 Astro 5 (static) · React 19 · Tailwind 4 · zustand · MapLibre GL (time scenes, offline GeoJSON basemap) · three.js + react-three-fiber (space scenes) · zod (build-time content validation) · vitest · Playwright · `@vite-pwa/astro` (installable, offline-capable). Deployed on Cloudflare Pages.
@@ -24,6 +31,7 @@ pnpm check      # astro check + tsc
 pnpm validate   # content validator (schemas, bilingual fields, ids, references)
 pnpm test       # vitest unit tests
 pnpm e2e        # Playwright smoke test against dist/ (pnpm build first; pnpm exec playwright install chromium once)
+pnpm shoot sample-space --keys --layout   # screenshots + key/button sync + HUD layout QA (pnpm build first; see docs/06)
 pnpm run deploy # build + `pnpm dlx wrangler pages deploy dist --project-name atlas`
 ```
 

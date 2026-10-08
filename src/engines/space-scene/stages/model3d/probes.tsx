@@ -11,7 +11,7 @@
  */
 import { useEffect, useMemo } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
-import { Matrix4, Raycaster, Vector3, type Intersection, type Object3D, type Plane, type WebGLRenderer } from 'three';
+import { Matrix4, Raycaster, Vector3, type Intersection, type Object3D, type PerspectiveCamera, type Plane, type WebGLRenderer } from 'three';
 import type { ScreenAnchor, StageBridge } from '../../bridge';
 import type { PartHandle } from './PartNode';
 import { keepAnimating, type StageRuntime } from './runtime';
@@ -60,15 +60,18 @@ export function LabelProbe({
       for (const id of handles.keys()) st.stale.add(id);
     }
 
+    const fov = (camera as PerspectiveCamera).fov;
+    const focal = H / 2 / Math.tan((fov * Math.PI) / 360);
     for (const [id, h] of handles) {
       let a: ScreenAnchor | undefined = bridge.anchors.get(id);
       if (!a) {
-        a = { x: 0, y: 0, onScreen: false, occluded: false, shown: false, depth: 0 };
+        a = { x: 0, y: 0, onScreen: false, occluded: false, shown: false, depth: 0, r: 0 };
         bridge.anchors.set(id, a);
       }
       _p.set(h.object.position.x + h.offset[0], h.object.position.y + h.offset[1], h.object.position.z + h.offset[2]);
       a.shown = h.visible && !clipped(_p);
       a.depth = _p.distanceTo(camera.position);
+      a.r = a.depth > 0 ? (h.radius / a.depth) * focal : 0;
       _p.project(camera);
       a.x = (_p.x * 0.5 + 0.5) * W;
       a.y = (-_p.y * 0.5 + 0.5) * H;

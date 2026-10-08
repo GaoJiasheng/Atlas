@@ -190,12 +190,12 @@
     color var(--dur-fast) var(--ease-out);
 }
 .hud-btn small {
-  font: 500 calc(7.4 * var(--u)) / 1 var(--font-mono);
+  font: 500 calc(10.2 * var(--u)) / 1 var(--font-mono);
   letter-spacing: 0.04em;
   color: var(--ink-3);
 }
 .hud-btn i {
-  font: 500 calc(8 * var(--u)) / 1 var(--font-mono);
+  font: 500 calc(10.5 * var(--u)) / 1 var(--font-mono);
   font-style: normal;
   color: var(--ink-3);
 }
@@ -283,7 +283,7 @@
 }
 .hud-group__label {
   margin-right: calc(4 * var(--u));
-  font: 500 calc(7.6 * var(--u)) / 1 var(--font-hud);
+  font: 500 calc(10.3 * var(--u)) / 1 var(--font-hud);
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--ink-3);
@@ -322,7 +322,7 @@
 .hud-ph em {
   font-style: normal;
   font-weight: 400;
-  font-size: calc(9.4 * var(--u));
+  font-size: calc(11.2 * var(--u));
   letter-spacing: 0.06em;
   color: var(--ink-3);
 }
@@ -362,7 +362,7 @@
   gap: calc(9 * var(--u));
   min-height: calc(18 * var(--u));
   color: var(--ink);
-  font: 600 calc(8.8 * var(--u)) / 1 var(--font-hud);
+  font: 600 calc(10.9 * var(--u)) / 1 var(--font-hud);
   letter-spacing: 0.14em;
   text-decoration: none;
   white-space: nowrap;
@@ -387,7 +387,7 @@
   gap: calc(9 * var(--u));
   min-width: 0;
   overflow: hidden;
-  font: 500 calc(8.6 * var(--u)) / 1 var(--font-mono);
+  font: 500 calc(10.8 * var(--u)) / 1 var(--font-mono);
   letter-spacing: 0.08em;
   white-space: nowrap;
 }
@@ -428,7 +428,7 @@
   display: flex;
   gap: calc(14 * var(--u));
   margin: 0;
-  font: 500 calc(var(--hud-font-label) * var(--u)) / 1 var(--font-hud);
+  font: 500 calc(var(--hud-font-status) * var(--u)) / 1 var(--font-hud);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink-3);
@@ -436,7 +436,7 @@
 }
 .atlas-hint kbd {
   margin-right: calc(3 * var(--u));
-  font: 500 calc(var(--hud-font-label) * var(--u)) / 1 var(--font-mono);
+  font: 500 calc(var(--hud-font-status) * var(--u)) / 1 var(--font-mono);
   color: var(--ink-2);
 }
 
@@ -516,13 +516,13 @@
 }
 .atlas-title__kick {
   margin: 0 0 calc(9 * var(--u));
-  font: 500 calc(8 * var(--u)) / 1.35 var(--font-mono);
+  font: 500 calc(10.5 * var(--u)) / 1.35 var(--font-mono);
   letter-spacing: 0.12em;
   color: var(--ink-3);
 }
 .atlas-title__kick small {
   margin-left: calc(6 * var(--u));
-  font: 500 calc(8.4 * var(--u)) / 1 var(--font-hud);
+  font: 500 calc(10.7 * var(--u)) / 1 var(--font-hud);
   letter-spacing: 0.08em;
 }
 .atlas-title__h {
@@ -544,7 +544,7 @@
 .atlas-title__sub small {
   display: block;
   margin-top: calc(3 * var(--u));
-  font-size: calc(9 * var(--u));
+  font-size: calc(11 * var(--u));
   letter-spacing: 0.18em;
   color: var(--ink-3);
 }
@@ -560,38 +560,38 @@
   display: contents;
 }
 .atlas-spec dt {
-  font: 500 calc(8.4 * var(--u)) / 1.35 var(--font-hud);
+  font: 500 calc(10.7 * var(--u)) / 1.35 var(--font-hud);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ink-3);
 }
 .atlas-spec dt small {
   display: block;
-  font-size: calc(7.6 * var(--u));
+  font-size: calc(10.3 * var(--u));
   letter-spacing: 0.08em;
 }
 .atlas-spec dd {
   margin: 0;
-  font: 500 calc(9.4 * var(--u)) / 1.35 var(--font-hud);
+  font: 500 calc(11.2 * var(--u)) / 1.35 var(--font-hud);
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 .atlas-spec dd[data-mono] {
   font-family: var(--font-mono);
-  font-size: calc(9.2 * var(--u));
+  font-size: calc(11.1 * var(--u));
 }
 .atlas-chip {
   display: inline-block;
   margin-left: calc(6 * var(--u));
   padding: calc(1 * var(--u)) calc(3 * var(--u));
   border: 1px solid var(--line);
-  font: 500 calc(7 * var(--u)) / 1 var(--font-mono);
+  font: 500 calc(10 * var(--u)) / 1 var(--font-mono);
   letter-spacing: 0.08em;
   vertical-align: calc(1 * var(--u));
 }
 .atlas-title__note {
   margin: calc(12 * var(--u)) 0 0;
-  font: 400 calc(7.4 * var(--u)) / 1.5 var(--font-hud);
+  font: 400 calc(10.2 * var(--u)) / 1.5 var(--font-hud);
   letter-spacing: 0.08em;
   color: var(--ink-3);
 }
@@ -599,7 +599,7 @@
 /* Card + overlay column */
 .atlas-card {
   flex: none;
-  min-height: calc(150 * var(--u));
+  min-height: calc(190 * var(--u));
 }
 .atlas-stage__overlay {
   display: flex;
@@ -628,7 +628,7 @@
 /* Bottom dock: perf readout, three panels, engine bar */
 .atlas-perf {
   align-self: flex-end;
-  font: 500 calc(8.2 * var(--u)) / 1 var(--font-mono);
+  font: 500 calc(10.6 * var(--u)) / 1 var(--font-mono);
   letter-spacing: 0.08em;
   color: var(--ink-2);
   white-space: nowrap;
@@ -876,6 +876,10 @@
   .hud-group--view {
     display: none;
   }
+  /* Modes flagged `phone: false` (G, R, P) have no button on phones; the keys still work. */
+  .hud-btn[data-phone="off"] {
+    display: none;
+  }
   .hud-btn small {
     display: none;
   }
@@ -883,13 +887,13 @@
     display: none;
   }
   .hud-group__label {
-    font-size: 9px;
+    font-size: 10px;
   }
   .atlas-hint {
     display: none;
   }
   .atlas-status {
-    font-size: 10px;
+    font-size: 10.5px;
   }
   .atlas-topbar__sub {
     min-height: 22px;
@@ -1076,7 +1080,7 @@
   margin: 0;
   padding-bottom: calc(5 * var(--u));
   border-bottom: 1px solid var(--line);
-  font: 600 calc(8 * var(--u)) / 1 var(--font-hud);
+  font: 600 calc(10.5 * var(--u)) / 1 var(--font-hud);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ink-3);
@@ -1106,7 +1110,7 @@
   border-bottom: 1px solid var(--hair);
   background: transparent;
   color: var(--ink-2);
-  font: 500 calc(10.4 * var(--u)) / 1.25 var(--font-hud);
+  font: 500 calc(11.7 * var(--u)) / 1.25 var(--font-hud);
   letter-spacing: 0.02em;
   text-align: left;
 }
@@ -1135,7 +1139,7 @@
   background: var(--signal);
 }
 .atlas-rail__num {
-  font: 500 calc(8.6 * var(--u)) / 1 var(--font-mono);
+  font: 500 calc(10.8 * var(--u)) / 1 var(--font-mono);
   letter-spacing: 0.04em;
   color: var(--ink-3);
 }
@@ -1165,19 +1169,19 @@
 .atlas-rail__lvl {
   padding: calc(1.5 * var(--u)) calc(4 * var(--u));
   border: 1px solid var(--hair);
-  font: 500 calc(7.6 * var(--u)) / 1 var(--font-mono);
+  font: 500 calc(10.3 * var(--u)) / 1 var(--font-mono);
   letter-spacing: 0.04em;
   color: var(--ink-3);
 }
 .atlas-rail__hint {
-  font-size: calc(9 * var(--u));
+  font-size: calc(11 * var(--u));
   color: var(--ink-3);
 }
 .atlas-rail__item--collapsed {
   color: var(--ink-3);
 }
 .atlas-rail__item--collapsed .atlas-rail__title {
-  font-size: calc(9.4 * var(--u));
+  font-size: calc(11.2 * var(--u));
   font-style: italic;
 }
 

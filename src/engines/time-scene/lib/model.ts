@@ -3,7 +3,7 @@
  * turned into a number once (lib/time.ts), the timeline span is derived, and
  * lookups are indexed. Pure; built once per scene in the View.
  */
-import type { Bloc, ControlKeyframe, Entity, Movement, SceneEvent, TimeSceneGeoData } from '../schema';
+import type { ControlKeyframe, Entity, Movement, SceneEvent, TimeSceneGeoData } from '../schema';
 import { periodEnd, toNumber, type TimePoint, type TimeScale } from './time';
 
 export interface KeyframeN {
@@ -49,10 +49,6 @@ export interface TimeModel {
   maxStrength: number;
   /** [west, south, east, north] of all data geometry. */
   bounds: [number, number, number, number] | null;
-}
-
-export function blocOf(model: TimeModel, entityId: string): Bloc {
-  return model.entities.get(entityId)?.entity.bloc ?? 'neutral';
 }
 
 const finite = (n: number) => Number.isFinite(n);

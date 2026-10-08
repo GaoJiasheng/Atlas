@@ -21,10 +21,10 @@ export function PartChainCard({ file }: { file: PartsFile }) {
     run: st.run,
     layers: st.layers,
   }));
-  const layout = useMemo(() => partChain(file.parts, file.groups, W, { row: 21, header: 15 }), [file.parts, file.groups]);
+  const layout = useMemo(() => partChain(file.parts, file.groups, W, { row: 23, header: 18, gap: 10 }), [file.parts, file.groups]);
   const flowing = flowingGroups(file, s.run, s.layers);
   const groups = new Map(file.groups.map((g) => [g.id, g]));
-  const maxChars = Math.max(6, Math.floor((layout.columns[0]?.w ?? 90) / 5.1) - 3);
+  const maxChars = Math.max(6, Math.floor(((layout.columns[0]?.w ?? 90) - 22) / 5.8));
 
   return (
     <svg className="space-chain" viewBox={`0 0 ${W} ${layout.height + 4}`} role="img" aria-label={file.groups.map((g) => tx(g.name, 'en')).join(' · ')}>
@@ -32,10 +32,10 @@ export function PartChainCard({ file }: { file: PartsFile }) {
         const g = groups.get(c.id);
         return (
           <g key={c.id} className="space-chain__col">
-            <text x={c.x} y={9} className="space-chain__head">
+            <text x={c.x} y={11} className="space-chain__head">
               {String(i + 1).padStart(2, '0')} {clip(tx(g?.name, 'en').toUpperCase(), maxChars)}
             </text>
-            <line x1={c.x} x2={c.x + c.w} y1={13} y2={13} className="space-chain__rule" style={{ stroke: resolveColorRef(g?.color ?? 'token:ink') }} />
+            <line x1={c.x} x2={c.x + c.w} y1={16} y2={16} className="space-chain__rule" style={{ stroke: resolveColorRef(g?.color ?? 'token:ink') }} />
           </g>
         );
       })}
@@ -58,10 +58,10 @@ export function PartChainCard({ file }: { file: PartsFile }) {
           <g key={n.id} className="space-chain__node" data-on={on || undefined}>
             <title>{tx(part.name, 'en')} · {tx(part.name, 'zh')}</title>
             <rect x={n.x} y={n.y} width={n.w} height={n.h} />
-            <text x={n.x + 4} y={n.y + n.h / 2 + 2.8} className="space-chain__n">
+            <text x={n.x + 4} y={n.y + n.h / 2 + 3.8} className="space-chain__n">
               {String(n.n).padStart(2, '0')}
             </text>
-            <text x={n.x + 17} y={n.y + n.h / 2 + 2.8} className="space-chain__name">
+            <text x={n.x + 20} y={n.y + n.h / 2 + 3.8} className="space-chain__name">
               {clip(tx(part.name, 'en').toUpperCase(), maxChars)}
             </text>
           </g>

@@ -144,7 +144,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       },
       { id: 'cutaway', key: 'c', label: t('space.mode.cutaway'), on: s.cutaway === 'half', tone: 'cut', status: `${t('space.mode.cutaway')} 50` },
       { id: 'flow', key: 'f', label: t('space.mode.flow'), on: s.run, tone: 'hot', disabled: inReference },
-      { id: 'reference', key: 'r', label: t('space.mode.reference'), on: inReference, tone: 'ink' },
+      { id: 'reference', key: 'r', label: t('space.mode.reference'), on: inReference, tone: 'ink', phone: false },
     ];
     const partIndex = s.part ? file.parts.findIndex((p) => p.id === s.part) : -1;
     const status = [

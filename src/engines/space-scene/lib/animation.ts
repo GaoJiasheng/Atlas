@@ -57,7 +57,3 @@ export function animationsByPart(animations: readonly PartAnimation[]): Map<stri
   return out;
 }
 
-/** Whether an animation plays for the current `run` flag. */
-export function animationActive(anim: Pick<PartAnimation, 'whenRun'>, run: boolean): boolean {
-  return anim.whenRun ? run : true;
-}

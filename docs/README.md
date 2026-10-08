@@ -9,3 +9,4 @@
 | [05-briefing-playbook.md](05-briefing-playbook.md) | 交给施工方的 brief 模板 |
 | [06-dev-guide.md](06-dev-guide.md) | 开发指南：运行、目录、加主题、Scene 契约（给引擎实现者） |
 | [07-deploy.md](07-deploy.md) | 部署：Cloudflare Pages（GitHub / CLI）、自定义域名、上线前检查清单 |
+| [08-technical-plate.md](08-technical-plate.md) | 技术图版视觉与交互语言（skill 适配层）、HUD 契约、打磨轮次与实现状态 |

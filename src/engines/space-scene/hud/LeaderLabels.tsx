@@ -67,6 +67,10 @@ const GAP = 8;
 const HIT = 44;
 const TRI = 8;
 const FADE = 9;
+/** Share of a part's on-screen radius a label column must stay clear of. */
+const CLEARANCE = 0.6;
+/** Free stage band (stage px) below which leader labels are limited to the selected part. */
+const MIN_BAND = 480;
 
 function priority(file: PartsFile): Map<string, number> {
   return new Map(
@@ -201,14 +205,17 @@ export function LeaderLabels({ file, chapters, bridge }: { file: PartsFile; chap
         wR = Math.max(wR, l.w + TRI);
         sumH += l.h;
       }
-      const twoCols = f.right - wR - (f.left + wL) > 60;
-      const oneCol = !twoCols && f.right - f.left > wR + 140;
+      // Band between the HUD blocks too narrow to put columns beside the model (720p laptops): only the selected part is labelled.
+      const roomy = f.right - f.left >= MIN_BAND;
+      const twoCols = roomy && f.right - wR - (f.left + wL) > 60;
+      const oneCol = roomy && !twoCols && f.right - f.left > wR + 140;
       const avgH = map.size ? sumH / map.size : 30;
       const perCol = Math.max(0, Math.floor((f.bottom - f.top + GAP) / (avgH + GAP)));
-      const budget = Math.min(
-        labelBudget(bridge.modelRadius > 0 ? bridge.cameraDistance / bridge.modelRadius : 3),
-        twoCols ? perCol * 2 : oneCol ? perCol : 0,
-      );
+      const budget = roomy
+        ? Math.min(labelBudget(bridge.modelRadius > 0 ? bridge.cameraDistance / bridge.modelRadius : 3), twoCols ? perCol * 2 : oneCol ? perCol : 0)
+        : selected && perCol > 0
+          ? 1
+          : 0;
       const mid = (f.left + f.right) / 2;
       cols.L.length = 0;
       cols.R.length = 0;
@@ -220,6 +227,9 @@ export function LeaderLabels({ file, chapters, bridge }: { file: PartsFile; chap
         let side: 'L' | 'R' = twoCols && a.x < mid ? 'L' : 'R';
         if (cols[side].length >= perCol) side = side === 'L' ? 'R' : 'L';
         if (cols[side].length >= perCol || (side === 'L' && !twoCols)) continue;
+        // A column that cannot sit beside the part (narrow stage, e.g. 720p) would print over the model: skip it.
+        const clear = side === 'L' ? f.left + wL <= a.x - a.r * CLEARANCE : f.right - wR >= a.x + a.r * CLEARANCE;
+        if (!clear && id !== selected) continue;
         cols[side].push([id, l]);
         count++;
       }
@@ -254,8 +264,9 @@ export function LeaderLabels({ file, chapters, bridge }: { file: PartsFile; chap
       };
       let minL = Infinity;
       let maxR = -Infinity;
-      for (const [id] of cols.L) minL = Math.min(minL, bridge.anchors.get(id)!.x);
-      for (const [id] of cols.R) maxR = Math.max(maxR, bridge.anchors.get(id)!.x);
+      // Columns clear the parts' silhouettes (anchor ∓ on-screen radius), not just their centres.
+      for (const [id] of cols.L) minL = Math.min(minL, bridge.anchors.get(id)!.x - bridge.anchors.get(id)!.r);
+      for (const [id] of cols.R) maxR = Math.max(maxR, bridge.anchors.get(id)!.x + bridge.anchors.get(id)!.r);
       const leftEdge = bound('L') + wL;
       const rightEdge = bound('R') - wR;
       const wantL = Math.min(Math.max(minL - 34, leftEdge), Math.max(leftEdge, mid - 10));

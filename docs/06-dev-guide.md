@@ -1,6 +1,8 @@
 # 06 · 开发指南
 
-Phase 1 地基（站点框架、i18n、主题、内容集合、Scene 契约、共享部件）、Phase 2 两个引擎（TimeScene / SpaceScene）和 Phase 3 上线准备（PWA、Cloudflare Pages、e2e）都已就位，带两个占位主题。
+Phase 1 地基（站点框架、i18n、主题、内容集合、Scene 契约、共享部件）、Phase 2 两个引擎（TimeScene / SpaceScene）、Phase 3 上线准备（PWA、Cloudflare Pages、e2e）和技术图版打磨（P1–P4，docs/08）都已就位，带两个占位主题。
+
+**术语**（全文统一）：**预设**（preset）= 相机预设，顶栏按钮组 `VIEW`，数字键 `1–9`；**模式**（mode）= 可开关的显示 / 行为，顶栏按钮组 `MODE`，字母键；**状态行** = 顶栏第二行；**插槽**（slot）= 引擎往宿主 HUD 里画内容的位置；**面板**（panel）= 底部 `panel01–03`；**卡片**（card）= 右上示意卡。SpaceScene 里的 `state.view`（assembled / xray / exploded / isolate）是"显示视图"，与 `VIEW` 按钮组（相机预设）无关。
 
 ## 跑起来
 
@@ -13,6 +15,7 @@ pnpm check        # astro check + tsc --noEmit
 pnpm validate     # 内容校验（schema、双语、id、引用）
 pnpm test         # vitest（数据层单测）
 pnpm build && pnpm e2e   # Playwright 冒烟（chromium，针对 pnpm preview 的 dist/）
+pnpm shoot <topic> …     # 截图 + 键位 + 布局 QA（先 pnpm build，见下文「QA：pnpm shoot」）
 ```
 
 - 子路径部署 / Capacitor：`ATLAS_BASE=/atlas pnpm build`，所有链接和资源都带 base。代码里拼路径一律用 `localeHref()` / `withBase()`（`src/i18n/index.ts`），不要手写 `/en/...`。
@@ -30,11 +33,11 @@ src/
   engines/
     core/                     # Scene 契约：types, store, url-state, camera, context, SceneHost,
                               # controls（HUD 注册 + 动作）, keys（键盘）, test-api（window.__atlas）, Hud（顶栏/标题块/面板框）
-    widgets/                  # ChapterRail InfoPanel Legend LayerToggles QuizCard Counter
-                              # LangToggle ThemeToggle ParentModeToggle LevelPicker GlobalToggles
-    time-scene/               # index.ts（descriptor）+ schema.ts（zod）+ View.tsx（stub）
-    space-scene/              # 同上
-    simulation/               # 占位
+    widgets/                  # ChapterRail ChapterBodies InfoPanel Legend LayerToggles QuizCard Counter
+                              # LangToggle ThemeToggle ParentModeToggle LevelPicker GlobalToggles icons
+    time-scene/               # descriptor + schema + View + stages/geo + timeline + hud（见「TimeScene」）
+    space-scene/              # descriptor + schema + View + stages/model3d + hud + explorer（见「SpaceScene」）
+    simulation/               # 后期占位引擎（只有 descriptor + schema + StubStage；不在一期范围）
     registry.ts               # 客户端引擎注册表（descriptor 同步，View 懒加载）
     schemas.ts                # 构建期引擎 schema 注册表（含 zod，禁止进客户端）
   i18n/                       # ui.en.json ui.zh.json + t() / tx() / 路径工具
@@ -44,8 +47,9 @@ src/
   layouts/BaseLayout.astro    # <html lang>、首帧前主题脚本、hreflang
   pages/                      # index.astro（跳转）, [locale]/index.astro, [locale]/topics/[slug].astro
   styles/                     # global.css（Tailwind + token 映射）, fonts.css（自托管 Plex woff2）, scene.css（HUD 布局与部件）
-scripts/validate-content.ts
-tests/                        # vitest
+scripts/                      # validate-content.ts, build-geo.ts, build-icons.ts, shoot.ts（pnpm shoot）
+tests/                        # vitest（数据层与纯函数）
+tests-e2e/                    # Playwright：smoke.spec.ts, hud.spec.ts, hud-layout.ts（pnpm shoot --layout 共用）
 ```
 
 ## 加一个主题
@@ -134,7 +138,7 @@ store.getState().chapterTarget(id);                                // 某章的�
 
 - **SceneState**：`chapter, layers, camera, theme` + 引擎扩展字段（TimeScene：`t, highlight`；SpaceScene：`part, view, explode, run, cutaway`）。
 - **章节目标是累积的**：第 N 章目标 = 默认值 ⊕ 第 1..N 章的 `state` 依次叠加。作者只写变化的字段；同一章永远得到同一状态，URL 可复现。
-- **过渡**：`transition: { id, reason: 'init' | 'chapter' | 'url', instant }`。引擎监听 `transition.id` 变化，向当前状态做动画（flyTo、时间插值、零件淡入）；`instant: true`（首次加载、深链接）时直接跳过去。用户 `patch()` 不 bump transition，引擎直接跟随。
+- **过渡**：`transition: { id, reason: 'init' | 'chapter' | 'url' | 'preset' | 'snap', instant }`（`preset` = 镜头预设、`snap` = 立即完成，见下文 HUD 控件注册）。引擎监听 `transition.id` 变化，向当前状态做动画（flyTo、时间插值、零件淡入）；`instant: true`（首次加载、深链接）时直接跳过去。用户 `patch()` 不 bump transition，引擎直接跟随。
 - **相机**：`GeoCamera { center, zoom, pitch?, bearing? }` 或 `OrbitCamera { position, target, fov? }`。地图 `moveend` 后 `setCamera()` 回写，URL 会自动同步。
 
 ### URL 同步
@@ -166,7 +170,7 @@ store.getState().chapterTarget(id);                                // 某章的�
 | `inspector` | InfoPanel 内 | 选中对象详情 |
 | `card` | 右列顶 | 示意 SVG 卡的**内容**；标题由 `controls.card` 注册，宿主画框和 `A NAME 中文` 表头 |
 | `panel01` `panel02` `panel03` | 底部三块等高面板 | 面板**内容**；标题由 `controls.panels` 注册，宿主画框和 `01 NAME 中文` 表头；没注册标题的面板不出现 |
-| `perf` | 底部右上，安静小字 | `60 FPS · 54 DRAW CALLS · …` / `FEATURES · ZOOM` |
+| `perf` | 底部右上，安静小字 | `60 FPS · 16 CALLS · 0.02M TRIS · 1520×1026` / `FEATURES 63 · ZOOM 5.5 · 60 FPS` |
 | `leaders` | 覆盖舞台的 `<svg>` | 引线标注；往里 portal SVG 元素（`<path>`、`<circle>`） |
 
 - HUD 尺寸用设计像素（1920×1080 下的 px）乘 `--u` 写：`height: calc(18 * var(--u))`。卡片、面板里的 SVG 用 viewBox + 100% 宽高。
@@ -183,7 +187,8 @@ import type { SceneControls } from '../core/controls';
 
 const controls = useMemo<SceneControls>(() => ({
   presets: { items: [{ id, label: '01', title?, chapter? }], set(id, { instant }) {} },   // 数字键 1–9
-  modes:   { items: [{ id: 'xray', key: 'x', label, on, disabled?, status?: 'EXPLODED 70', tone?: 'xray' | 'hot' | 'cold' | 'cut' | 'signal' }],
+  modes:   { items: [{ id: 'xray', key: 'x', label, on, disabled?, status?: 'EXPLODED 70', tone?: 'xray' | 'hot' | 'cold' | 'cut' | 'signal',
+                      phone?: false }],   // phone:false = < 760 px 宽（手机）顶栏不画这个按钮（键仍可用）
              set(id, on, { instant }) {} },                                                 // 字母键
   pause:   { paused, set(paused) {} },                                                     // SPACE
   labels:  true,                     // 引擎认宿主的 LABELS 开关 → 宿主加 `labels` 模式（L）
@@ -202,7 +207,10 @@ const labelsOn = useHud((s) => s.labels);   // 或 CSS：.atlas-scene[data-label
 - **镜头预设**：调用 `store.getState().applyCameraPreset(camera, { instant })`，它改 `camera` 并发一次 `transition.reason = 'preset'`（舞台照常飞过去；TimeScene 不因此停播放）。当前预设由宿主推导：显式选的 > 当前章节自己的（`preset.chapter`）；用户拖动 / 平移写回相机后变为 FREE CAMERA。
 - **立即完成**：`store.getState().snap()` 发 `reason: 'snap'`、`instant: true` 的过渡，舞台跳到终态（测试、截图用）。
 - 规格表：宿主先放默认行（学科 / 年级 / 章节数 / 课纲锚点数），引擎行追加在后，最多 8 行。
-- 一期接线：TimeScene 预设 = 各章镜头，模式 `flow`（F，行军图层）+ labels，SPACE = 播放；SpaceScene 预设 = 各章镜头（本章镜头 > 视图预设 > 继承），模式 `xray` / `exploded` / `cutaway` / `flow`（= run）+ labels，SPACE = run，ESC 取消选中。
+- 接线现状：
+  - **TimeScene**：预设 = 各章镜头 + `world` + `theatre`；模式 `flow`（F）/ `borders`（B）/ `graticule`（G）/ `reference`（R）/ `presentation`（P）+ 宿主 `labels`（L）；SPACE = 播放 / 暂停；ESC 依次退出演示、REFERENCE、事件详情、高亮。G / P 手机上不画按钮（`phone: false`）。
+  - **SpaceScene**：预设 = 各章镜头（本章镜头 > 视图预设 > 继承）+ `ORBIT`（转台）+ `REF.`（= REFERENCE 模式的预设入口）；模式 `xray`（X）/ `exploded`（E）/ `cutaway`（C）/ `flow`（F，= run）/ `reference`（R）+ 宿主 `labels`（L）；SPACE = run；ESC 依次取消选中、退出 REFERENCE、停 ORBIT。R 手机上不画按钮（`phone: false`）。
+  - SpaceScene 没有 PRESENTATION（P）；TimeScene 的 PRESENTATION 在 docs/08 §3 的"按章自动演示"之外没有别的演示模式。
 
 ### 键盘（`core/keys.ts`，宿主统一处理）
 
@@ -232,11 +240,31 @@ __atlas.stats()     // { buffer, pixelRatio } 取自舞台 canvas，再合并引
 
 按钮带 `data-preset` / `data-mode`、`aria-pressed`；HUD 块带 `data-hud-panel`。
 
+### QA：`pnpm shoot`（`scripts/shoot.ts`）
+
+skill 里 `shoot.py` 的 Playwright / TypeScript 版，驱动 `window.__atlas`。**先 `pnpm build`**（脚本自己在随机端口上起一个只读静态服务器服务 `dist/`，不起 dev server；`dist/` 不存在会直接报错退出）。
+
+```bash
+pnpm shoot sample-space                      # 每章 + 每个模式 + 额外预设 + hero-clean -> shots/sample-space/en-paper/*.png
+pnpm shoot sample-time --locale zh --theme cinema --size 3840x2160 --suffix _4k
+pnpm shoot sample-time --keys --layout       # 键位同步 + 六尺寸 HUD 布局（有这两个开关且没给截图名时不截默认图）
+pnpm shoot sample-space --perf --json out.json   # 每张图后多等 2 s，打印 calls / triangles / fps / gpu；--json 写全部结果
+pnpm shoot sample-time --shots mine.json hero    # 自定义截图表（{name: {chapter?, preset?, modes?, hud?, wait?, js?}}）
+```
+
+- `--locale en|zh|all`、`--theme paper|cinema|all`（也接受逗号列表），默认 `en` + `paper`；`shots/` 已 gitignore。主题用 `__atlas.setTheme()` 切换，`atlas:level` 固定 P6（所有章节可见）。`--gpu` 改用真 GPU（macOS 走 Metal），默认软件 GL（SwiftShader，与 e2e 相同），fps 数字只在 `--gpu` 下有意义。
+- 默认截图：每章一张（镜头 = 本章预设）；首章上每个注册模式各一张（`presentation` 除外；默认开着的模式截"关"，文件名 `mode-<id>-off`）；非章节预设（`orbit` / `reference` / `world` / `theatre`）各一张；`hero-clean`（HUD 关）。每次截图前把模式、HUD、暂停恢复到加载时的状态。
+- `--keys`：对 `keymap()` 逐项按键：预设（`state().preset` + `[data-preset]` 的 `aria-pressed`）、模式（状态翻转 + `[data-mode]` 的 `aria-pressed`，再按一次恢复；按钮被禁用则跳过）、SPACE、H（HUD 隐藏且"H 显示界面"可见）、ESC（HUD 隐藏后恢复）、← →；最后拖动舞台应变 FREE CAMERA（没有预设亮着），再按预设应收回。
+- `--layout`：3840×2160 / 2560×1440 / 1920×1080 / 1280×720 / 900×1200 / 390×844 × 每章 × 额外预设，用 `tests-e2e/hud-layout.ts` 的 `hudLayoutIssues()`（与 `pnpm e2e` 共用同一份逻辑）查 `[data-hud-panel]` 出屏 / 重叠（1 px 容差）/ 横向溢出，并存 `layout-WxH.png`。
+- 一直收集 console error / warning、pageerror、同源 4xx/5xx 和任何指向外部主机的请求（违反"无运行时外部请求"）；GPU / SwiftShader 噪音与 smoke.spec.ts 同一过滤。退出码 1 = 有 error / pageerror / 外部请求 / 键位失败 / 布局问题（warning 只打印）。
+- 轨道阻尼按帧数衰减，软件 GL 下拖动后要几秒才回写相机，`--keys` 的 FREE CAMERA 检查已按此放宽。
+
 ### HUD 缩放与响应式
 
 - `--k = clamp(min(W/1920, H/1080), .6, 1.6)`（手机 = 1），SceneHost 在 resize 时写到 `.atlas-scene`。
-- 实际排版用 `--u = --kt px`，`--kt = max(--k, .8)`：HUD 文字不小于 1080p 尺寸的 80%（720p、平板的可读性下限）。`--kb = max(1, --k)`：触控控件和阅读正文只放大不缩小（4K 时 `bottomBar` / `stageOverlay` 用 `zoom: var(--kb)` 放大）。
-- ≥1440 完整；1080 完整略小；高度 ≤ 820（720p）底部三面板折成一行标签页（点开一块）；< 1024 InfoPanel 变底部抽屉；< 760（手机）隐藏示意卡、三面板、perf、引线、规格表、键位提示和 VIEW 组，章节轨折成编号芯片条，全局开关收进齿轮菜单。
+- 实际排版用 `--u = --kt px`，`--kt = max(--k, .8)`：HUD 文字不小于 1080p 尺寸的 80%（720p、平板的可读性下限）。
+- **HUD 字号刻度**（设计像素，k = 1；`tokens.css` 的 `--hud-font-*`，面向小学生的笔记本屏）：最小 10 px（`label` 10.4 / SVG 里的 mono 刻度 10）、状态行与键位提示 ≥ 10.5（`status` 10.8）、按钮 11.1、面板标题与正文 11.3、标题块 30。写新 HUD 文字用这些 token，不要再写 < 10 的 `calc(N * var(--u))`；viewBox 里的 SVG 文字（部件链路卡）按渲染比例折算，保证渲染后 ≥ 10 px。`--kb = max(1, --k)`：触控控件和阅读正文只放大不缩小（4K 时 `bottomBar` / `stageOverlay` 用 `zoom: var(--kb)` 放大）。
+- ≥1440 完整；1080 完整略小；高度 ≤ 820（720p）底部三面板折成一行标签页（点开一块）；< 1024 InfoPanel 变底部抽屉；< 760（手机）隐藏示意卡、三面板、perf、引线、规格表、键位提示和 VIEW 组，章节轨折成编号芯片条，全局开关收进齿轮菜单；标了 `phone: false` 的模式（TimeScene G / P、SpaceScene R）不画按钮，手机顶栏的 MODE 组因此留在两行以内。
 - 任何尺寸不得重叠、不得横向溢出：`tests-e2e/hud-layout.ts` 的 `hudLayoutIssues()` 在 3840×2160 / 2560×1440 / 1920×1080 / 1280×720 / 900×1200 / 390×844 × 每章 × 中英检查所有可见 `[data-hud-panel]`（`tests-e2e/hud.spec.ts`，`pnpm e2e` 的一部分）。
 
 ### 主题
@@ -257,7 +285,7 @@ __atlas.stats()     // { buffer, pixelRatio } 取自舞台 canvas，再合并引
 
 - 纯静态：无 SSR、无 API 路由、客户端无 Node API
 - 无运行时外部请求：无 CDN、无外部 webfont（字体自托管）、无瓦片
-- 客户端不引 zod（构建期解析）；首屏 JS ≤ 300 KB gz（当前主题页约 90 KB gz）
+- 客户端不引 zod（构建期解析）；JS 预算 300 KB gz（docs/02）。实测（`pnpm shoot` 打印的 page JS，gzip -9）：宿主 + HUD + 引擎 View 首屏约 105 KB；SpaceScene 页整页约 310 KB（three + R3F 舞台 chunk 207 KB 懒加载）；TimeScene 页整页约 391 KB（MapLibre 在 controller chunk 285 KB 懒加载）。**地图主题超预算，是已知遗留，待产品层决定**
 - 所有文案双语；界面文案进 `ui.*.json`，内容文案用 `{ en, zh }`
 - `pnpm check && pnpm validate && pnpm test && pnpm build && pnpm e2e` 全绿
 
@@ -374,7 +402,7 @@ pnpm tsx scripts/build-geo.ts   # world-atlas(Natural Earth 1:50m) → public/ge
 
 ### 包体
 
-MapLibre 只在 `controller` chunk 里，View 挂载后才加载（时间轴先出来）。P3 后实测（gzip -9）：TimeScene View chunk 约 15 KB gz（含 HUD 面板、标尺），controller chunk 约 292 KB gz（MapLibre 5.24 约 275 KB + 引擎地图代码约 17 KB）；加上宿主 client/SceneHost 约 75 KB，整页 JS 约 380 KB gz。**超出 docs/02 的 300 KB gz 预算**，需要产品层决定：按 brotli 计、对 geo 主题放宽到 ~400 KB gz，或换更小的地图库版本。
+MapLibre 只在 `controller` chunk 里，View 挂载后才加载（时间轴先出来）。P4 实测（gzip -9）：TimeScene View chunk 约 15 KB gz（含 HUD 面板、标尺），controller chunk 约 286 KB gz（MapLibre 5.24 约 270 KB + 引擎地图代码约 16 KB）；加上宿主 client / SceneHost / GlobalToggles 约 84 KB，整页 JS 约 391 KB gz。**超出 docs/02 的 300 KB gz 预算**，需要产品层决定：按 brotli 计、对 geo 主题放宽到 ~400 KB gz，或换更小的地图库版本。
 
 ## SpaceScene（空间拆解引擎，Phase 2B；P2 技术图版）
 
@@ -386,7 +414,7 @@ schema.ts                parts.json 的 zod（构建期）
 View.tsx                 HUD 控件注册（预设 / 模式 / 规格行 / 卡片与面板标题）+ 各插槽内容 + 懒加载 Model3DStage
 ui.ts                    引擎内 UI store（ORBIT、REFERENCE；不进 URL，View 与舞台共用）
 bridge.ts                舞台 → HUD 的桥：每帧投影好的标注锚点、渲染计数、帧回调（View 侧不 import three）
-lib/                     纯函数，有单测：explode / visibility / flow-curve / color（材质族）/ animation /
+lib/                     纯函数，有单测：explode / visibility / flow-curve / color（材质族）/ presets（材质名，无 zod）/ animation /
                          camera（球坐标插值、REFERENCE 镜头、过渡目标）/ parts（零件包围盒、repeat 变换）/
                          schematic（零件链路、立面、标注预算与列避让）/ xform / math
 stages/model3d/          R3F 舞台：Model3DStage（createRoot 宿主）、SceneRoot、PartNode、geometry（程序化零件）、
@@ -489,6 +517,7 @@ state:
 - 先按投影 y 排序、最小间距堆叠（`stackColumn`），再把列放在锚点外侧（引线向内，不穿过文字），列宽避开本列高度范围内的 HUD 块；镜头动时列平滑滑动。
 - 锚点在背后 / 出屏 / 被剖掉 / 被遮挡（节流 raycast，每帧最多 2 个、只在镜头或零件动过之后）/ 落在 HUD 块下 → 淡出；X-RAY 时不判遮挡；选中零件永远标注、signal 色高亮、不因遮挡隐藏。
 - 数量：`labelBudget(镜头距离 / 模型半径)` 3–10 条（近景少），再受可用高度限制；放不下两列时退成一列，再放不下就不标。手机（< 760）宿主隐藏 `leaders`。
+- 避让模型：每个锚点带投影半径 `r`（零件包围盒的约 3/8 对角线 × 焦距 / 深度，`bridge.anchors[id].r`）；列放在锚点 ∓ `r` 之外，放不下的标签（列在空带里到不了离自己零件 0.6 `r` 以外）不画，选中的零件例外。HUD 之间的空带 < 480 px（720p 笔记本）时只标选中的零件，其余靠右上零件链路卡和点选。
 - 点标签（触屏点一下）= 选中零件；标签热区高 ≥ 44 px。
 
 ### 交互（舞台）
@@ -505,7 +534,7 @@ state:
 - 材质：每个零件一个 MeshPhysicalMaterial（同一 shader 补丁、同一 program cache key）：选中边缘（菲涅尔，`uSel`）和剖面填充（背面 + `gl_FrontFacing`，`uCut`）都在片元里，零额外 draw call。
 - `frameloop: 'demand'`：只有在缓动（拆开、淡入淡出、运镜、转台、标注滑动 / 遮挡复查）、运转时才请求下一帧；标签页隐藏时不请求。每帧路径不 new 对象（模块级临时向量、预先算好的拆开向量与动画轴）。几何体、材质、贴图都由我们创建并在卸载时 dispose。
 - 计数（sample-space，1920×1080）：静止 16 draw calls、~19 k 三角形、27 geometries、7 textures；FLOW +2 calls。
-- 包体：舞台 chunk ~212 KB gz（three + R3F 为主；圆角盒用 `RoundedBoxGeometry`，不引 ExtrudeGeometry/Shape）。GLTF 加载器单独成 chunk（21 KB gz），只有写了 `mesh` 的主题才加载。
+- 包体：舞台 chunk ~207 KB gz（three + R3F 为主；圆角盒用 `RoundedBoxGeometry`，不引 ExtrudeGeometry/Shape）。GLTF 加载器单独成 chunk（21 KB gz），只有写了 `mesh` 的主题才加载。
 
 ## PWA、部署与 e2e（Phase 3）
 
@@ -532,4 +561,4 @@ state:
 | `run` | 通电运转 | `1` \| `0` | SpaceScene | `run=1` |
 | `cut` | 剖切 | `none` \| `half` | SpaceScene | `cut=half` |
 
-新增可链接字段：改 `core/types.ts` 的 `UrlEngineFields`、`core/url-state.ts`（`ENGINE_URL_KEYS`、`URL_KEY_ORDER`、编解码）、`SceneHost.tsx` 里解构的字段、descriptor 的 `fromUrl`，并补 `tests/url-state.test.ts`。
+新增可链接字段：改 `core/types.ts` 的 `UrlEngineFields`、`core/url-state.ts`（`URL_KEY_ORDER`、编解码）、`SceneHost.tsx` 里解构的字段、descriptor 的 `fromUrl`，并补 `tests/url-state.test.ts`。

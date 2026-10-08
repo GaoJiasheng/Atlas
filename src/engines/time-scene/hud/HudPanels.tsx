@@ -108,7 +108,7 @@ export function BandCard({
   const entities = useMemo(() => [...model.entities.values()], [model]);
 
   const pad = 10 * u;
-  const x0 = 92 * u;
+  const x0 = 104 * u;
   const x1 = w - pad;
   const axisH = 20 * u;
   const top = 6 * u;
@@ -154,16 +154,16 @@ export function BandCard({
           const left = Number.isFinite(en.left) ? en.left : model.max;
           return (
             <g key={entity.id} data-hl={hl.has(entity.id) || undefined}>
-              <text className="ts-svg__name" x={pad} y={base - rowH + 16 * u}>
+              <text className="ts-svg__name" x={pad} y={base - rowH + 14 * u}>
                 {upper(entity.name.en)}
               </text>
-              {rowH > 26 * u && (
-                <text className="ts-svg__sub" x={pad} y={base - rowH + 25 * u} lang="zh-Hans">
+              {rowH > 30 * u && (
+                <text className="ts-svg__sub" x={pad} y={base - rowH + 26 * u} lang="zh-Hans">
                   {entity.name.zh}
                 </text>
               )}
-              {rowH > 34 * u && (
-                <text className="ts-svg__mono" x={pad} y={base - rowH + 34 * u}>
+              {rowH > 42 * u && (
+                <text className="ts-svg__mono" x={pad} y={base - rowH + 38 * u}>
                   {fmtArea(areaAt(model, areas, entity.id, t))}
                 </text>
               )}
@@ -213,7 +213,7 @@ export function TimelinePanel({
   const t = usePlayheadT(playhead);
   const [ref, { w, h }] = useSize<HTMLDivElement>();
   const u = useUnit(ref, w);
-  const gutter = 78 * u;
+  const gutter = 92 * u;
   const pad = 12 * u;
   const x0 = gutter;
   const x1 = w - pad;
@@ -277,7 +277,7 @@ export function TimelinePanel({
         {lanes.map((l) => (
           <g key={l.key}>
             <line className="ts-svg__lane" x1={pad} x2={x1} y1={l.y + l.h} y2={l.y + l.h} />
-            <text className="ts-svg__name" x={pad} y={l.y + 9 * u}>
+            <text className="ts-svg__name" x={pad} y={l.y + 10.5 * u}>
               {upper(l.label.en)}
             </text>
           </g>
@@ -288,7 +288,7 @@ export function TimelinePanel({
             <text
               className="ts-svg__mono"
               x={x(k.t) + (x(k.t) > x1 - 24 * u ? -6 : 6) * u}
-              y={lanes[0]!.y + 8 * u}
+              y={lanes[0]!.y + 10.5 * u}
               textAnchor={x(k.t) > x1 - 24 * u ? 'end' : 'start'}
             >
               K{i + 1}
