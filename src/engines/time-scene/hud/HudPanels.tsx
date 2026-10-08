@@ -22,6 +22,7 @@ import { clamp } from '../lib/time';
 import { frameAt } from '../lib/frame';
 import { ruleTicks } from '../lib/ticks';
 import { areaAt, controlAreas, frameStats } from '../lib/stats';
+import { planBandRows } from '../lib/bandRows';
 import { BLOC_CSS, colorKey, entityCssColor } from '../colors';
 import { blocSpansN } from '../lib/bloc';
 import { formatReadout } from '../timeline/Timeline';
@@ -90,6 +91,11 @@ function chapterWindow(model: TimeModel, chapter: string | null): [number, numbe
 /* Card: participation + area band chart                               */
 /* ------------------------------------------------------------------ */
 
+/** Smallest band row (design px): EN name line + 中文 line with a gap before the next row's name. */
+const BAND_MIN_ROW = 25;
+/** The slim "+N others" row that stands in for the entities that do not fit. */
+const BAND_REST_ROW = 15;
+
 const fmtArea = (km2: number) =>
   km2 >= 1e6 ? `≈${(km2 / 1e6).toFixed(2)}M KM²` : km2 >= 1e3 ? `≈${Math.round(km2 / 1e3)}K KM²` : `≈${Math.round(km2)} KM²`;
 
@@ -111,7 +117,7 @@ export function BandCard({
   const u = useUnit(ref, w);
   const areas = useMemo(() => controlAreas(model), [model]);
   const maxArea = useMemo(() => Math.max(1, ...[...areas.values()].flat()), [areas]);
-  const entities = useMemo(() => [...model.entities.values()], [model]);
+  const all = useMemo(() => [...model.entities.values()], [model]);
 
   const pad = 10 * u;
   const x0 = 104 * u;
@@ -119,7 +125,14 @@ export function BandCard({
   const axisH = 20 * u;
   const top = 6 * u;
   const bottom = h - axisH;
-  const rowH = entities.length ? (bottom - top) / entities.length : 0;
+  // Too many entities for the card: the largest / earliest rows, the rest folded into one muted row.
+  const plan = useMemo(
+    () => planBandRows({ entities: all, areas, availableHeight: bottom - top, minRowHeight: BAND_MIN_ROW * u, collapsedHeight: BAND_REST_ROW * u }),
+    [all, areas, bottom, top, u],
+  );
+  const entities = plan.rows;
+  const restH = plan.hidden > 0 ? BAND_REST_ROW * u : 0;
+  const rowH = entities.length ? (bottom - top - restH) / entities.length : 0;
   const x = (n: number) => x0 + clamp((n - model.min) / model.span, 0, 1) * (x1 - x0);
   const ticks = useMemo(
     () => ruleTicks(model.min, model.max, model.scale, Math.max(2, (x1 - x0) / (64 * u)), locale),
@@ -169,7 +182,7 @@ export function BandCard({
               <text className="ts-svg__name" x={pad} y={base - rowH + 14 * u}>
                 {upper(entity.name.en)}
               </text>
-              {rowH > 30 * u && (
+              {rowH >= BAND_MIN_ROW * u - 0.5 && (
                 <text className="ts-svg__sub" x={pad} y={base - rowH + 26 * u} lang="zh-Hans">
                   {entity.name.zh}
                 </text>
@@ -188,6 +201,12 @@ export function BandCard({
             </g>
           );
         })}
+        {plan.hidden > 0 && (
+          <text className="ts-svg__sub ts-svg__rest" x={pad} y={bottom - 4 * u} data-hidden-rows={plan.hidden}>
+            {`+${plan.hidden} OTHERS / `}
+            <tspan lang="zh-Hans">{`另 ${plan.hidden} 方`}</tspan>
+          </text>
+        )}
         <line className="ts-svg__axis" x1={x0} x2={x1} y1={bottom} y2={bottom} />
         {ticks.minor.map((m) => (
           <line key={m} className="ts-svg__tick" x1={x(m)} x2={x(m)} y1={bottom} y2={bottom + 2.5 * u} />

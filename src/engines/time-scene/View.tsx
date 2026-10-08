@@ -332,11 +332,11 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   const specRows = useMemo<SpecRow[]>(
     () => [
       { id: 'entities', label: bi('time.spec.entities'), value: pad2(geo.entities.length), mono: true },
-      { id: 'keyframes', label: bi('time.spec.keyframes'), value: pad2(geo.control.keyframes.length), mono: true },
+      { id: 'keyframes', label: bi('time.spec.keyframes'), value: pad2(model.keyframes.length), mono: true },
       { id: 'events', label: bi('time.spec.events'), value: pad2(geo.events.length), mono: true },
       { id: 'movements', label: bi('time.spec.movements'), value: pad2(geo.movements.length), mono: true },
     ],
-    [geo],
+    [geo, model],
   );
   const controls = useMemo<SceneControls>(() => {
     const chapterPresets = chapters.flatMap((c, i) => {

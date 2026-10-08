@@ -26,6 +26,7 @@ import { areaGeometry, feature, featureCollection, lineString } from '../../cont
 import { geoCamera } from '../../content/schema/camera';
 import { sourceId, sourceIds, sourcesFile } from '../../content/schema/sources';
 import { compareTime } from '../../lib/time';
+import { decodeControl, decodeTopologyObject } from './lib/control';
 
 /* ------------------------------------------------------------------ */
 /* entities.json                                                       */
@@ -106,6 +107,7 @@ export const controlProperties = z
 export const controlFeature = feature(areaGeometry, controlProperties);
 export type ControlFeature = z.output<typeof controlFeature>;
 
+/** Plain GeoJSON keyframe: `features` inline. */
 export const controlKeyframe = z
   .object({
     t: timePoint,
@@ -114,31 +116,111 @@ export const controlKeyframe = z
   .strict();
 export type ControlKeyframe = z.output<typeof controlKeyframe>;
 
-export const controlFile = z
+/** TopoJSON keyframe: `object` names an entry of the file's shared `topology.objects`. */
+export const controlTopologyKeyframe = z
+  .object({
+    t: timePoint,
+    object: z.string().min(1),
+  })
+  .strict();
+export type ControlTopologyKeyframe = z.output<typeof controlTopologyKeyframe>;
+
+const xy = z.tuple([z.number(), z.number()]);
+
+/**
+ * A TopoJSON topology, checked loosely: `arcs` is an array of arcs (each an
+ * array of >= 2-number positions), `objects` a record of objects with a `type`,
+ * `transform` (quantisation) optional. The geometry itself is validated after
+ * decoding, as ordinary control features.
+ */
+export const topologySchema = z
+  .object({
+    type: z.literal('Topology'),
+    arcs: z.array(z.array(z.array(z.number()).min(2))),
+    objects: z.record(z.string(), z.object({ type: z.string() }).passthrough()),
+    transform: z.object({ scale: xy, translate: xy }).strict().optional(),
+    bbox: z.array(z.number()).optional(),
+  })
+  .passthrough();
+export type ControlTopology = z.output<typeof topologySchema>;
+
+function checkKeyframeOrder(keyframes: readonly { t: TimePointInput }[], ctx: z.RefinementCtx): void {
+  for (let i = 1; i < keyframes.length; i++) {
+    const prev = keyframes[i - 1];
+    const cur = keyframes[i];
+    if (!prev || !cur) continue;
+    const cmp = compareTime(prev.t, cur.t);
+    if (cmp === null) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['keyframes', i, 't'],
+        message: 'keyframes mix date and geological time scales',
+      });
+    } else if (cmp >= 0) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['keyframes', i, 't'],
+        message: 'keyframes must be in strictly ascending time order',
+      });
+    }
+  }
+}
+type TimePointInput = z.output<typeof timePoint>;
+
+const geoControlFile = z
   .object({ keyframes: z.array(controlKeyframe).min(1) })
   .strict()
+  .superRefine((file, ctx) => checkKeyframeOrder(file.keyframes, ctx));
+export type GeoControlFile = z.output<typeof geoControlFile>;
+
+const topologyControlFile = z
+  .object({ topology: topologySchema, keyframes: z.array(controlTopologyKeyframe).min(1) })
+  .strict()
   .superRefine((file, ctx) => {
-    for (let i = 1; i < file.keyframes.length; i++) {
-      const prev = file.keyframes[i - 1];
-      const cur = file.keyframes[i];
-      if (!prev || !cur) continue;
-      const cmp = compareTime(prev.t, cur.t);
-      if (cmp === null) {
+    checkKeyframeOrder(file.keyframes, ctx);
+    file.keyframes.forEach((kf, i) => {
+      if (!Object.hasOwn(file.topology.objects, kf.object)) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          path: ['keyframes', i, 't'],
-          message: 'keyframes mix date and geological time scales',
+          path: ['keyframes', i, 'object'],
+          message: `topology has no object "${kf.object}"`,
         });
-      } else if (cmp >= 0) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          path: ['keyframes', i, 't'],
-          message: 'keyframes must be in strictly ascending time order',
-        });
+        return;
       }
-    }
+      // The geometry is only checked once decoded: every feature must be an ordinary control feature.
+      let decoded;
+      try {
+        decoded = decodeTopologyObject(file.topology, kf.object);
+      } catch (error) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['keyframes', i, 'object'], message: `cannot decode "${kf.object}": ${(error as Error).message}` });
+        return;
+      }
+      const result = featureCollection(controlFeature).safeParse(decoded);
+      if (!result.success) {
+        for (const issue of result.error.issues.slice(0, 10)) {
+          ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['keyframes', i, 'object', ...issue.path], message: `${kf.object}: ${issue.message}` });
+        }
+      }
+    });
   });
-export type ControlFile = z.output<typeof controlFile>;
+export type TopologyControlFile = z.output<typeof topologyControlFile>;
+
+/**
+ * `control.json`: plain GeoJSON keyframes `{ keyframes: [{ t, features }] }`, or
+ * one shared topology `{ topology, keyframes: [{ t, object }] }`. The shape is
+ * picked by the presence of `topology`, so errors point into the right one.
+ * Engines read it through `decodeControl` (lib/control.ts).
+ */
+export const controlFile = z.unknown().transform((raw, ctx): GeoControlFile | TopologyControlFile => {
+  const schema = raw !== null && typeof raw === 'object' && 'topology' in raw ? topologyControlFile : geoControlFile;
+  const result = schema.safeParse(raw);
+  if (!result.success) {
+    for (const issue of result.error.issues) ctx.addIssue(issue);
+    return z.NEVER;
+  }
+  return result.data;
+});
+export type ControlFile = GeoControlFile | TopologyControlFile;
 
 /* ------------------------------------------------------------------ */
 /* movements.json                                                      */
@@ -290,7 +372,8 @@ export const timeSceneGeoData = z
         ctx.addIssue({ code: z.ZodIssueCode.custom, path, message: `unknown entity "${id}"` });
       }
     };
-    data.control.keyframes.forEach((kf, k) =>
+    // An invalid control file already reported its own issues (the transform yields nothing then).
+    (Array.isArray(data.control?.keyframes) ? decodeControl(data.control) : []).forEach((kf, k) =>
       kf.features.features.forEach((f, i) =>
         check(f.properties.holder, ['control', 'keyframes', k, 'features', 'features', i, 'properties', 'holder']),
       ),
