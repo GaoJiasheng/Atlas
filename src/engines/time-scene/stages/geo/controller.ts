@@ -236,7 +236,7 @@ function dataLayers(tk: ThemeTokens): LayerSpecification[] {
       type: 'line',
       source: SRC.movements,
       layout: { 'line-cap': 'round', 'line-join': 'round' },
-      paint: { 'line-color': ['get', 'color'], 'line-width': ['get', 'width'], 'line-opacity': 0.3 },
+      paint: { 'line-color': ['get', 'color'], 'line-width': ['get', 'width'], 'line-opacity': ['*', 0.3, ['get', 'op']] },
     },
     {
       id: LAYER.moveLine,
@@ -246,6 +246,7 @@ function dataLayers(tk: ThemeTokens): LayerSpecification[] {
       paint: {
         'line-color': ['get', 'color'],
         'line-width': ['get', 'width'],
+        'line-opacity': ['get', 'op'],
         'line-dasharray': DASH_SEQUENCE[0] as number[],
       },
     },
@@ -557,12 +558,12 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
         return {
           type: 'Feature',
           geometry: { type: 'LineString', coordinates: mv.coords },
-          properties: { id, color: entityColor(mv.m.movement.holder, mv.m.start), width: hl.has(id) ? base + 0.8 : base },
+          properties: { id, color: entityColor(mv.m.movement.holder, mv.m.start), width: hl.has(id) ? base + 0.8 : base, op: mv.opacity },
         };
       });
     setIfChanged(
       SRC.movements,
-      `${frame.movements.map((m) => `${m.m.movement.id}:${m.progress.toFixed(4)}`).join(',')}|${hlSig}|${themeSig}`,
+      `${frame.movements.map((m) => `${m.m.movement.id}:${m.progress.toFixed(4)}:${m.opacity.toFixed(2)}`).join(',')}|${hlSig}|${themeSig}`,
       () => ({ type: 'FeatureCollection', features: moveFeatures }),
     );
     updateArrowheads(frame, on.has('movements'));
@@ -640,6 +641,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
         }
         marker.getElement().style.setProperty('--ts-color', entityColor(mv.m.movement.holder, mv.m.start));
         marker.setLngLat(mv.head);
+        marker.getElement().style.opacity = mv.opacity < 1 ? String(mv.opacity) : '';
         orientArrow(marker, mv.tail, mv.head);
       }
     }
@@ -841,7 +843,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
         const mv = m.movement;
         if (!hl.has(mv.id)) continue;
         const live = frame.movements.find((x) => x.m === m);
-        const path = mv.path.coordinates;
+        const path = m.path;
         // Middle of the drawn part, so the anchor never sits on the arrowhead.
         const at = (live ? pointAlong(live.coords, 0.5) : playhead.get() > m.end ? pointAlong(path, 0.5) : path[0]) as LngLat | undefined;
         if (!at) continue;

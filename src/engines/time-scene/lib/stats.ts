@@ -64,7 +64,7 @@ export function frameStats(model: TimeModel, frame: Frame): FrameStats {
     participants: frame.participation.length,
     entities: model.entities.size,
     activeBattles,
-    activeMovements: frame.movements.length,
+    activeMovements: frame.movements.filter((m) => !m.lingering).length,
     prevIndex: frame.control.prevIndex,
     nextIndex: frame.control.nextIndex,
     blend: frame.control.blend,
