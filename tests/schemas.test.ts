@@ -2,7 +2,7 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { parse as parseYaml } from 'yaml';
-import { topicSchema } from '../src/content/schema/topic';
+import { SUBJECTS, topicSchema } from '../src/content/schema/topic';
 import { chapterSchema } from '../src/content/schema/chapter';
 import { bilingual, isoDate, timePoint } from '../src/content/schema/common';
 import { timeChapterState, timeSceneGeoData } from '../src/engines/time-scene/schema';
@@ -132,5 +132,24 @@ describe('chapter schema', () => {
   it('treats `level` as optional planning metadata', () => {
     const result = chapterSchema.safeParse({ id: 'one', order: 1, title: { en: 'One', zh: '一' } });
     expect(result.success).toBe(true);
+  });
+});
+
+describe('subject taxonomy', () => {
+  const base = parseYaml(readFileSync(join(TOPICS, 'sample-space/topic.yaml'), 'utf8')) as Record<string, unknown>;
+
+  it('has exactly the six fixed categories in order', () => {
+    expect(SUBJECTS).toEqual(['science', 'math', 'history', 'geography', 'biology', 'computer']);
+  });
+
+  it('rejects removed categories', () => {
+    for (const subject of ['social-studies', 'extension']) {
+      expect(topicSchema.safeParse({ ...base, subject }).success).toBe(false);
+    }
+  });
+
+  it('accepts kebab-case tags only', () => {
+    expect(topicSchema.safeParse({ ...base, tags: ['beyond-syllabus', 'singapore'] }).success).toBe(true);
+    expect(topicSchema.safeParse({ ...base, tags: ['Beyond Syllabus'] }).success).toBe(false);
   });
 });

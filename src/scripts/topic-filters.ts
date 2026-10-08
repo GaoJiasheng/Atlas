@@ -28,7 +28,10 @@ export function initTopicFilters(root: ParentNode = document): void {
       const key = button.dataset.filter as FilterKey;
       button.setAttribute('aria-pressed', String((button.dataset.value ?? '') === state[key]));
     }
-    if (count) count.textContent = (count.dataset.template ?? '{n}').replace('{n}', String(visible));
+    if (count) {
+      const template = visible === 1 ? count.dataset.templateOne : count.dataset.template;
+      count.textContent = (template ?? '{n}').replace('{n}', String(visible));
+    }
     if (empty) empty.hidden = visible > 0;
     if (empty) empty.classList.toggle('hidden', visible > 0);
 

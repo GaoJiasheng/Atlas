@@ -1,6 +1,7 @@
 ---
 /**
- * Topic index with a subject filter. Filters are progressive
+ * Topic index. The six fixed categories (SUBJECTS) are the primary entry and
+ * double as the filter. Filters are progressive
  * enhancement (src/scripts/topic-filters.ts) and live in the query string.
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
@@ -16,7 +17,8 @@ export function getStaticPaths() {
 const locale = Astro.params.locale as Locale;
 const topics = await getTopics();
 const counts = await getChapterCounts();
-const subjects = SUBJECTS.filter((s) => topics.some((topic) => topic.data.subject === s));
+const subjectCount = (s: string) => topics.filter((topic) => topic.data.subject === s).length;
+const countLabel = (n: number) => t(locale, n === 1 ? 'index.count.one' : 'index.count', { n });
 const subjectKey = (s: string) => `subject.${s}` as UiKey;
 ---
 <BaseLayout locale={locale} title={t(locale, 'site.name')}>
@@ -37,21 +39,34 @@ const subjectKey = (s: string) => `subject.${s}` as UiKey;
     <p class="mt-3 max-w-2xl text-lg text-ink-muted">{t(locale, 'index.intro')}</p>
 
     <section class="mt-8 flex flex-col gap-4" aria-label={t(locale, 'index.filter.subject')} data-topic-filters>
-      <div class="flex flex-wrap items-center gap-2">
-        <span class="w-16 text-sm font-semibold text-ink-muted">{t(locale, 'index.filter.subject')}</span>
-        <button type="button" class="atlas-control" data-filter="subject" data-value="" aria-pressed="true">
-          {t(locale, 'index.filter.all')}
+      <div class="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-7">
+        <button type="button" class="atlas-control atlas-category" data-filter="subject" data-value="" aria-pressed="true">
+          <span>{t(locale, 'index.filter.all')}</span>
+          <span class="atlas-category__meta">{countLabel(topics.length)}</span>
         </button>
         {
-          subjects.map((s) => (
-            <button type="button" class="atlas-control" data-filter="subject" data-value={s} aria-pressed="false">
-              {t(locale, subjectKey(s))}
-            </button>
-          ))
+          SUBJECTS.map((s) => {
+            const n = subjectCount(s);
+            return (
+              <button
+                type="button"
+                class="atlas-control atlas-category"
+                data-filter="subject"
+                data-value={s}
+                aria-pressed="false"
+                disabled={n === 0}
+              >
+                <span>{t(locale, subjectKey(s))}</span>
+                <span class="atlas-category__meta">
+                  {n === 0 ? t(locale, 'index.category.soon') : countLabel(n)}
+                </span>
+              </button>
+            );
+          })
         }
       </div>
-      <p class="m-0 text-sm text-ink-muted" aria-live="polite" data-count data-template={t(locale, 'index.count')}>
-        {t(locale, 'index.count', { n: topics.length })}
+      <p class="m-0 text-sm text-ink-muted" aria-live="polite" data-count data-template={t(locale, 'index.count')} data-template-one={t(locale, 'index.count.one')}>
+        {countLabel(topics.length)}
       </p>
     </section>
 

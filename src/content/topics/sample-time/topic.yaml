@@ -2,7 +2,8 @@
 id: sample-time
 title: { en: "Sample: Time Scene", zh: "示例：时间场景" }
 subtitle: { en: "A placeholder topic for testing the time engine", zh: "用于测试时间引擎的占位主题" }
-subject: extension
+subject: history
+tags: [beyond-syllabus]
 levels: [P3, P4]
 moe:
   - "Placeholder: no syllabus anchor"

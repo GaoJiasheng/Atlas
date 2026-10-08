@@ -36,12 +36,12 @@ atlas/
   docs/                         # 本套文档
   src/
     pages/[locale]/             # /en/... /zh/...
-      index.astro               # 主题索引（按学科筛选）
+      index.astro               # 主题索引（六类入口，按类筛选）
       topics/[slug].astro       # 主题页：挂 Scene 岛 + MDX 正文
     content/
       config.ts                 # collections + zod schema
       topics/<slug>/
-        topic.yaml              # 元信息（学科、形态、主题色、状态；年级为可选规划字段）
+        topic.yaml              # 元信息（分类、规划标签、形态、主题色、状态；年级为可选规划字段）
         chapters/<nn>-<id>.mdx  # 章节正文，frontmatter 里是章节状态定义
         data/*.json             # 引擎数据（关键帧、事件、箭头、零件清单）
     engines/
@@ -83,7 +83,8 @@ atlas/
 id: ww2
 title: { en: "World War II", zh: "第二次世界大战" }
 subtitle: { en: "How the world went to war, 1939–1945", zh: "1939–1945，世界如何走向战争" }
-subject: social-studies          # social-studies | science | geography | history | biology | math | extension
+subject: history                 # 固定六类：science | math | history | geography | biology | computer（索引页的主入口，按此顺序）
+tags: [singapore]                # 可选。kebab-case 规划标签（如 beyond-syllabus），站点不渲染
 levels: [P4, P5]                 # 可选。适用年级，仅作内容规划元数据，站点不展示、不筛选
 moe:                             # 对齐 MOE 大纲的锚点，自由文本
   - "SS P4: The End of World War II"
