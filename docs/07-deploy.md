@@ -1,5 +1,7 @@
 # 07 · 部署
 
+**现状（2026-10-08 已上线）**：Pages 项目 `atlas`（经典 Pages，CLI 部署，未连 GitHub），生产地址 `https://atlas-565.pages.dev`，自定义域 `https://atlas.gavin.pub`。更新线上：`git push` 后 `pnpm run deploy`。wrangler 4.148 第一次建项目需要 `--force` 走经典 Pages，之后不用。
+
 Atlas 是纯静态站点（`pnpm build` → `dist/`），没有服务端、没有 API。推荐 Cloudflare Pages。
 
 ## A. Cloudflare Pages（GitHub 集成，推荐）
