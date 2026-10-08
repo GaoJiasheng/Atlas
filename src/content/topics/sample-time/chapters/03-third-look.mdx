@@ -7,7 +7,7 @@ sensitive: false
 state:
   time: "2000-07-01"
   camera: { center: [-149, 8.5], zoom: 5 }
-  layers: [base, control, borders, movements, battles, participation]
+  layers: [base, control, borders, movements, battles, participation, sites]
   highlight: [east-sample]
   theme: paper
   question: { en: "Sample question: what changes when a new entity joins?", zh: "示例问题：新的参与者加入时，地图有什么变化？" }
@@ -25,8 +25,16 @@ quiz:
 
 Sample chapter three. The time lands between two control keyframes, so the areas are starting to crossfade.
 
-- The **East Sample** area is highlighted.
-- Borders and the "who joined when" layer are switched on.
+- The **East Sample** area is highlighted. It changes from neutral to the allied side in June of the sample year.
+- Borders, the "who joined when" layer and the sites layer are switched on.
+
+A placeholder number with a source: <Num s="S1">about 1,000</Num>. <FlyTo preset="sample-east">Go to the east area</FlyTo>
+
+<More title={{ en: "Sample: look closer", zh: "示例：细看" }}>
+
+Placeholder text inside a collapsed More block. It is closed by default.
+
+</More>
 
 </Lang>
 
@@ -34,7 +42,15 @@ Sample chapter three. The time lands between two control keyframes, so the areas
 
 示例第三章。这个时间点落在两个控制区关键帧之间，所以区域开始交叉淡入淡出。
 
-- **东示例**的区域被高亮。
-- 打开了国界和“何时加入”图层。
+- **东示例**的区域被高亮。它在示例年份的六月从中立转到同盟一方。
+- 打开了国界、“何时加入”和“地点”图层。
+
+一个带来源的占位数字：<Num s="S1">约 1,000</Num>。<FlyTo preset="sample-east">去东部区域</FlyTo>
+
+<More title={{ en: "Sample: look closer", zh: "示例：细看" }}>
+
+折叠“细看”块里的占位文字，默认是收起的。
+
+</More>
 
 </Lang>

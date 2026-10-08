@@ -23,7 +23,17 @@
       "en": "East Sample",
       "zh": "东示例"
     },
-    "bloc": "neutral",
+    "bloc": [
+      {
+        "bloc": "neutral",
+        "from": "2000-04-01",
+        "to": "2000-06-01"
+      },
+      {
+        "bloc": "allied",
+        "from": "2000-06-01"
+      }
+    ],
     "joined": "2000-04-01"
   }
 ]

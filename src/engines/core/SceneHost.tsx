@@ -10,6 +10,9 @@
  *   overlay column, bottom dock with panels and the engine bar), the reading
  *   InfoPanel is a docked column >= 1024px and a bottom sheet below
  * - owns the keyboard (keys.ts), HUD scaling (`--k`) and `window.__atlas`
+ * - handles the static chapter-body controls by delegation: `<FlyTo>`
+ *   (`data-flyto` -> the engine's camera preset, same action as the VIEW
+ *   buttons) and source superscripts (`data-source` -> SourcePopover)
  * - lazy-loads the engine view on the client only (engines may touch
  *   window / WebGL freely; the server renders a stage placeholder)
  */
@@ -43,6 +46,7 @@ import { ChapterRail } from '../widgets/ChapterRail';
 import { InfoPanel } from '../widgets/InfoPanel';
 import { ChapterBodies } from '../widgets/ChapterBodies';
 import { QuizCard } from '../widgets/QuizCard';
+import { SourcePopover, topicSources } from '../widgets/SourcePopover';
 
 export interface SceneHostProps extends SceneProps<unknown> {
   /**
@@ -191,6 +195,23 @@ export default function SceneHost(props: SceneHostProps) {
 
   const [sheetOpen, setSheetOpen] = useState(false);
 
+  /* ---------------- chapter-body controls (static HTML, delegated) ---------------- */
+  const sceneRef = useRef<HTMLDivElement>(null);
+  const sources = useMemo(() => topicSources(data), [data]);
+  useEffect(() => {
+    const el = sceneRef.current;
+    if (!el) return;
+    const onClick = (e: MouseEvent) => {
+      const button = e.target instanceof Element ? e.target.closest<HTMLElement>('[data-flyto]') : null;
+      if (!button || !el.contains(button)) return;
+      e.preventDefault();
+      // Same path as the VIEW buttons and digit keys; on phones fold the sheet so the map shows.
+      if (actions.setPreset(button.dataset.flyto ?? '')) setSheetOpen(false);
+    };
+    el.addEventListener('click', onClick);
+    return () => el.removeEventListener('click', onClick);
+  }, [actions]);
+
   /* ---------------- slots ---------------- */
   const [slots, setSlots] = useState<Partial<Record<SlotName, Element | null>>>({});
   const slotRef = useMemo(() => {
@@ -234,6 +255,7 @@ export default function SceneHost(props: SceneHostProps) {
   return (
     <SceneContext.Provider value={context}>
       <div
+        ref={sceneRef}
         className="atlas-scene"
         data-engine={topic.engine}
         data-stage={topic.stage}
@@ -327,6 +349,7 @@ export default function SceneHost(props: SceneHostProps) {
         <button type="button" className="atlas-hud-restore" onClick={() => actions.setHud(true)} tabIndex={hudOn ? -1 : 0}>
           <kbd>H</kbd> {t(locale, 'hud.show')}
         </button>
+        {mounted && <SourcePopover root={sceneRef} sources={sources} locale={locale} />}
       </div>
     </SceneContext.Provider>
   );

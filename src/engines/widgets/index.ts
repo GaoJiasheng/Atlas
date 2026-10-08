@@ -3,7 +3,7 @@ export { InfoPanel, type InfoPanelProps } from './InfoPanel';
 export { Legend, type LegendItem, type LegendProps } from './Legend';
 export { LayerToggles, SceneLayerToggles, type LayerItem, type LayerTogglesProps } from './LayerToggles';
 export { QuizCard, type QuizCardProps } from './QuizCard';
-export { Counter, type CounterProps } from './Counter';
+export { Counter, CounterVersus, COUNTER_UNIT_100K, type CounterProps, type CounterSide, type CounterVersusProps } from './Counter';
 export { LangToggle } from './LangToggle';
 export { ThemeToggle } from './ThemeToggle';
 export { ParentModeToggle } from './ParentModeToggle';

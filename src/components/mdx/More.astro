@@ -1,0 +1,19 @@
+---
+/**
+ * `<More title={{ en: "…", zh: "…" }}>…</More>`: a "look closer" block in a
+ * chapter body (people, numbers, disputes). Closed by default; a native
+ * `<details>`, so it works without JS. Leave blank lines inside, as with <Lang>.
+ */
+import { tx, type BilingualText } from '../../i18n';
+import { pageLocale } from './locale';
+
+interface Props {
+  title: BilingualText | string;
+}
+const { title } = Astro.props;
+const locale = pageLocale(Astro.url, Astro.currentLocale);
+---
+<details class="atlas-more">
+  <summary class="atlas-more__summary"><span class="atlas-more__tri" aria-hidden="true"></span><span>{tx(title, locale)}</span></summary>
+  <div class="atlas-more__body"><slot /></div>
+</details>

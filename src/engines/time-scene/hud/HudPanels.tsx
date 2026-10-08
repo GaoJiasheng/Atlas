@@ -5,7 +5,8 @@
  *               current chapter window shaded
  *  - `panel01`  TimelinePanel: the whole span as a compact rule with chapter
  *               numbers, plus keyframe / movement / event lanes
- *  - `panel02`  QuestionPanel: the chapter's question (+ answer) or a summary
+ *  - `panel02`  QuestionPanel: the chapter's question (+ answer), else its
+ *               summary (`state.summary` or the body's first paragraph)
  *  - `panel03`  StatePanel: data counts at `t` (no SIM chip: these are counts)
  *  - `perf`     PerfReadout: FEATURES · ZOOM · FPS
  * SVGs are drawn in pixels of the measured panel body; type sizes come from
@@ -21,7 +22,8 @@ import { clamp } from '../lib/time';
 import { frameAt } from '../lib/frame';
 import { ruleTicks } from '../lib/ticks';
 import { areaAt, controlAreas, frameStats } from '../lib/stats';
-import { entityCssColor } from '../colors';
+import { BLOC_CSS, colorKey, entityCssColor } from '../colors';
+import { blocSpansN } from '../lib/bloc';
 import { formatReadout } from '../timeline/Timeline';
 
 /* ------------------------------------------------------------------ */
@@ -60,14 +62,18 @@ function useUnit(ref: RefObject<Element | null>, deps: unknown): number {
 
 const upper = (s: string) => s.toLocaleUpperCase('en');
 
+/** Hatch patterns, one per colour (`colorKey`): each bloc, plus entities with their own colour. */
 function HatchDefs({ model, prefix }: { model: TimeModel; prefix: string }) {
+  const own = [...model.entities.values()].filter(({ entity }) => entity.color);
+  const pattern = (key: string, color: string) => (
+    <pattern key={key} id={`${prefix}-${key}`} width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="5" stroke={color} strokeWidth="0.9" opacity="0.7" />
+    </pattern>
+  );
   return (
     <defs>
-      {[...model.entities.values()].map(({ entity }) => (
-        <pattern key={entity.id} id={`${prefix}-${entity.id}`} width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-          <line x1="0" y1="0" x2="0" y2="5" stroke={entityCssColor(entity)} strokeWidth="0.9" opacity="0.7" />
-        </pattern>
-      ))}
+      {(['axis', 'allied', 'neutral'] as const).map((b) => pattern(`b-${b}`, BLOC_CSS[b]))}
+      {own.map(({ entity }) => pattern(`e-${entity.id}`, entityCssColor(entity)))}
     </defs>
   );
 }
@@ -150,8 +156,14 @@ export function BandCard({
         {win && <rect className="ts-svg__window" x={x(win[0])} y={top} width={Math.max(1, x(win[1]) - x(win[0]))} height={bottom - top} />}
         {bands.map(({ entity, base, d }) => {
           const en = model.entities.get(entity.id)!;
-          const color = entityCssColor(entity);
+          // Area band in the colour of the bloc at `t`; the participation line is split where the entity changes sides.
+          const color = entityCssColor(entity, t);
           const left = Number.isFinite(en.left) ? en.left : model.max;
+          const segments = entity.color
+            ? [{ from: en.joined, to: left, color }]
+            : blocSpansN(entity)
+                .map((sp) => ({ from: Math.max(en.joined, sp.from), to: Math.min(left, sp.to), color: BLOC_CSS[sp.bloc] }))
+                .filter((sp) => sp.to > sp.from);
           return (
             <g key={entity.id} data-hl={hl.has(entity.id) || undefined}>
               <text className="ts-svg__name" x={pad} y={base - rowH + 14 * u}>
@@ -167,10 +179,12 @@ export function BandCard({
                   {fmtArea(areaAt(model, areas, entity.id, t))}
                 </text>
               )}
-              {d && <path d={d} fill={`url(#ts-card-hatch-${entity.id})`} />}
+              {d && <path d={d} fill={`url(#ts-card-hatch-${colorKey(entity, t)})`} />}
               {d && <path d={d} className="ts-svg__band" style={{ fill: color, stroke: color }} />}
-              <line className="ts-svg__part" x1={x(en.joined)} x2={x(left)} y1={base} y2={base} style={{ stroke: color }} />
-              <circle className="ts-svg__joined" cx={x(en.joined)} cy={base} r={2.4 * u} style={{ stroke: color }} />
+              {segments.map((sp) => (
+                <line key={sp.from} className="ts-svg__part" x1={x(sp.from)} x2={x(sp.to)} y1={base} y2={base} style={{ stroke: sp.color }} />
+              ))}
+              <circle className="ts-svg__joined" cx={x(en.joined)} cy={base} r={2.4 * u} style={{ stroke: segments[0]?.color ?? color }} />
             </g>
           );
         })}
@@ -298,6 +312,7 @@ export function TimelinePanel({
         {model.movements.map((m, i) => {
           const holder = model.entities.get(m.movement.holder)?.entity;
           const y = lanes[1]!.y + 3 * u + moveRows[i]! * 6 * u;
+          const color = entityCssColor(holder, m.start);
           return (
             <rect
               key={m.movement.id}
@@ -306,17 +321,18 @@ export function TimelinePanel({
               y={y}
               width={Math.max(1, x(m.end) - x(m.start))}
               height={4 * u}
-              style={{ fill: `url(#ts-p01-hatch-${holder?.id ?? ''})`, stroke: entityCssColor(holder) }}
+              style={{ fill: `url(#ts-p01-hatch-${colorKey(holder, m.start)})`, stroke: color }}
             />
           );
         })}
         {model.events.map((e) => {
           const holder = e.event.sides ? model.entities.get(e.event.sides.attacker)?.entity : undefined;
           const cy = lastLane.y + 7 * u;
+          const color = entityCssColor(holder, e.start);
           return (
             <g key={e.event.id}>
-              <line className="ts-svg__span" x1={x(e.start)} x2={x(e.end)} y1={cy} y2={cy} style={{ stroke: entityCssColor(holder) }} />
-              <circle className="ts-svg__event" cx={x(e.start)} cy={cy} r={(1.5 + e.event.importance) * u} style={{ stroke: entityCssColor(holder) }} />
+              <line className="ts-svg__span" x1={x(e.start)} x2={x(e.end)} y1={cy} y2={cy} style={{ stroke: color }} />
+              <circle className="ts-svg__event" cx={x(e.start)} cy={cy} r={(1.5 + e.event.importance) * u} style={{ stroke: color }} />
             </g>
           );
         })}
@@ -339,7 +355,8 @@ export function QuestionPanel({
   chapter: Chapter | null;
   number: number;
   locale: Locale;
-  fallback: BilingualText | null;
+  /** Shown when the chapter has no question: its summary (bilingual) or first paragraph (already localised). */
+  fallback: BilingualText | string | null;
 }) {
   const tr = useT();
   const state = (chapter?.state ?? {}) as { question?: BilingualText; answer?: BilingualText };

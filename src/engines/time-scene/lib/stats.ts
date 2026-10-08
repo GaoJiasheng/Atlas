@@ -8,7 +8,7 @@ import type { Frame } from './frame';
 import type { TimeModel } from './model';
 
 /** Event kinds counted as battles in panel 03. */
-const BATTLE_KINDS = new Set(['battle', 'landing', 'bombing']);
+const BATTLE_KINDS = new Set(['battle', 'landing', 'bombing', 'siege']);
 
 /** Controlled area (km²) per entity at each keyframe, indexed like `model.keyframes`. */
 export function controlAreas(model: TimeModel): Map<string, number[]> {

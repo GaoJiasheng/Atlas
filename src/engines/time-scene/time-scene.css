@@ -287,6 +287,67 @@
   }
 }
 
+.ts-pulse--square::after {
+  border-radius: 0;
+}
+
+/* HTML event marks (controller updateMarks): the GL circle under each stays the click target. */
+.ts-mark {
+  pointer-events: none;
+  width: var(--ts-size, 12px);
+  height: var(--ts-size, 12px);
+}
+.ts-mark > span {
+  position: absolute;
+  inset: 0;
+}
+/* Massacre / atrocity: hollow square, ink hairline. */
+.ts-mark--square > span {
+  border: 1px solid var(--ink-2);
+  background: color-mix(in srgb, var(--paper) 55%, transparent);
+  opacity: 0.6;
+}
+.ts-mark--square[data-active="true"] > span {
+  border-color: var(--ink);
+  opacity: 1;
+}
+.ts-mark--square[data-hl="true"] > span {
+  border: 1.6px solid var(--signal);
+  opacity: 1;
+}
+/* Siege: dashed ring around the event circle. */
+.ts-mark--siege > span {
+  border: 1px dashed var(--ink-2);
+  border-radius: 50%;
+  opacity: 0.6;
+}
+.ts-mark--siege[data-active="true"] > span {
+  border-color: var(--ts-color, var(--ink));
+  opacity: 1;
+}
+.ts-mark--siege[data-hl="true"] > span {
+  border-color: var(--signal);
+  opacity: 1;
+}
+/* Site: small static diamond with a centre dot (no pulse, ignores time). */
+.ts-mark--site > span {
+  inset: 1px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  transform: rotate(45deg);
+}
+.ts-mark--site > span::after {
+  content: "";
+  position: absolute;
+  inset: 2.5px;
+  background: var(--ink);
+}
+.ts-mark--site[data-hl="true"] > span {
+  border-color: var(--signal);
+}
+.ts-mark--site[data-hl="true"] > span::after {
+  background: var(--signal);
+}
 /* ------------------------------------------------------------------ */
 /* Leader labels (leaders.ts): placards + host `leaders` svg paths     */
 /* ------------------------------------------------------------------ */

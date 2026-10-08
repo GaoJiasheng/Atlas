@@ -1,0 +1,18 @@
+{
+  "presets": [
+    {
+      "id": "sample-east",
+      "label": {
+        "en": "East",
+        "zh": "东部"
+      },
+      "camera": {
+        "center": [
+          -145.5,
+          7.5
+        ],
+        "zoom": 6
+      }
+    }
+  ]
+}

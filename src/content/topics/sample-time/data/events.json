@@ -30,7 +30,15 @@
     "summary": {
       "en": "A placeholder battle used to test event rendering. Its casualty numbers are marked sensitive.",
       "zh": "用于测试事件显示的占位战斗。它的伤亡数字标记为敏感内容。"
-    }
+    },
+    "detail": {
+      "en": "Placeholder detail text for the collapsed More block in the event panel. It stands in for longer notes, such as how a number was counted.",
+      "zh": "事件面板里“细看”折叠块的占位文字，用来代替较长的说明，比如某个数字是怎么统计的。"
+    },
+    "sources": [
+      "S1",
+      "S2"
+    ]
   },
   {
     "id": "sample-landing",
@@ -79,6 +87,24 @@
     "summary": {
       "en": "A placeholder political event without sides.",
       "zh": "没有交战双方的占位政治事件。"
+    }
+  },
+  {
+    "id": "sample-site",
+    "t": "2000-04-01",
+    "at": [
+      -145.5,
+      7.5
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Sample site",
+      "zh": "示例地点"
+    },
+    "summary": {
+      "en": "A placeholder static site. It shows only when the Sites layer is on and does not change with time.",
+      "zh": "一个占位的固定地点。只有打开“地点”图层时才显示，不随时间变化。"
     }
   }
 ]

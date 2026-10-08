@@ -2,14 +2,16 @@ import { describe, expect, it } from 'vitest';
 import { timeSceneGeoData } from '../../src/engines/time-scene/schema';
 import { buildTimeModel } from '../../src/engines/time-scene/lib/model';
 import { frameAt } from '../../src/engines/time-scene/lib/frame';
+import { blocsOf, changesBloc } from '../../src/engines/time-scene/lib/bloc';
 import { areaLabelPoint, lineLength, pointAlong, sliceLine } from '../../src/engines/time-scene/lib/geo';
 import { toNumber } from '../../src/engines/time-scene/lib/time';
 import entities from '../../src/content/topics/sample-time/data/entities.json';
 import control from '../../src/content/topics/sample-time/data/control.json';
 import movements from '../../src/content/topics/sample-time/data/movements.json';
 import events from '../../src/content/topics/sample-time/data/events.json';
+import sources from '../../src/content/topics/sample-time/data/sources.json';
 
-const data = timeSceneGeoData.parse({ entities, control, movements, events });
+const data = timeSceneGeoData.parse({ entities, control, movements, events, sources });
 const model = buildTimeModel(data, [
   { id: 'first-look', t: '2000-01-15' },
   { id: 'second-look', t: '2000-03-11' },
@@ -133,11 +135,14 @@ describe('frameAt', () => {
 });
 
 describe('sample-time data exercises every layer', () => {
-  it('has 3 entities (one per bloc), 3 keyframes, 2 movements, 3 events', () => {
-    expect(new Set(data.entities.map((e) => e.bloc))).toEqual(new Set(['axis', 'allied', 'neutral']));
+  it('has 3 entities (every bloc, one changing sides), 3 keyframes, 2 movements, 3 dated events + 1 site', () => {
+    expect(new Set(data.entities.flatMap((e) => blocsOf(e)))).toEqual(new Set(['axis', 'allied', 'neutral']));
+    expect(data.entities.some((e) => changesBloc(e))).toBe(true);
     expect(data.control.keyframes).toHaveLength(3);
     expect(data.movements).toHaveLength(2);
-    expect(new Set(data.events.map((e) => e.kind)).size).toBe(3);
+    expect(new Set(data.events.map((e) => e.kind)).size).toBe(4);
+    expect(model.events).toHaveLength(3);
+    expect(model.sites.map((e) => e.id)).toEqual(['sample-site']);
     expect(new Set(data.events.map((e) => e.importance)).size).toBe(3);
     expect(data.events.some((e) => e.sensitive)).toBe(true);
   });

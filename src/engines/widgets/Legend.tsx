@@ -7,7 +7,8 @@ export interface LegendItem {
   label: BilingualText | string;
   /** CSS colour, `var(--x)`, or a data colour ref (`token:accent-axis`). */
   color: string;
-  kind?: 'fill' | 'line' | 'point' | 'arrow';
+  /** `square`: hollow hairline square; `ring-dashed`: dot in a dashed ring; `site`: small hollow diamond. */
+  kind?: 'fill' | 'line' | 'point' | 'arrow' | 'square' | 'ring-dashed' | 'site';
 }
 
 export interface LegendProps {
@@ -29,6 +30,17 @@ function Swatch({ color, kind = 'fill' }: { color: string; kind?: LegendItem['ki
       );
     case 'point':
       return <svg width="24" height="12" aria-hidden="true"><circle cx="12" cy="6" r="5" fill={c} /></svg>;
+    case 'square':
+      return <svg width="24" height="12" aria-hidden="true"><rect x="7.5" y="1.5" width="9" height="9" fill="none" stroke={c} strokeWidth="1" /></svg>;
+    case 'ring-dashed':
+      return (
+        <svg width="24" height="12" aria-hidden="true">
+          <circle cx="12" cy="6" r="5.2" fill="none" stroke={c} strokeWidth="1" strokeDasharray="2 1.6" />
+          <circle cx="12" cy="6" r="2" fill={c} />
+        </svg>
+      );
+    case 'site':
+      return <svg width="24" height="12" aria-hidden="true"><path d="M12 1.5L16.5 6L12 10.5L7.5 6Z" fill="none" stroke={c} strokeWidth="1" /><circle cx="12" cy="6" r="1.2" fill={c} /></svg>;
     default:
       return <span className="atlas-legend__fill" style={{ background: c }} aria-hidden="true" />;
   }

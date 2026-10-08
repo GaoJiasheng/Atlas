@@ -1,0 +1,17 @@
+---
+/**
+ * `<FlyTo preset="singapore-island">Singapore island</FlyTo>`: a hairline
+ * button in the chapter body that flies the map to a camera preset from
+ * `data/presets.json` (the same action as the VIEW buttons; SceneHost handles
+ * `data-flyto` by delegation). `pnpm validate` checks the preset exists.
+ */
+import { t } from '../../i18n';
+import { pageLocale } from './locale';
+
+interface Props {
+  preset: string;
+}
+const { preset } = Astro.props;
+const locale = pageLocale(Astro.url, Astro.currentLocale);
+---
+<button type="button" class="atlas-flyto" data-flyto={preset} title={t(locale, 'flyto.hint')}><svg class="atlas-flyto__icon" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><circle cx="6" cy="6" r="3.6" /><path d="M6 0.5V3M6 9V11.5M0.5 6H3M9 6H11.5" /></svg><span><slot /></span></button>

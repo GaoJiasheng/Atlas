@@ -1,0 +1,23 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": {
+        "en": "Placeholder source one: a sample record used to test source ids.",
+        "zh": "占位来源一：用来测试来源编号的示例记录。"
+      },
+      "url": "https://example.org/atlas/sample-source-1"
+    },
+    {
+      "id": "S2",
+      "text": {
+        "en": "Placeholder source two: a second sample record with a note.",
+        "zh": "占位来源二：带说明的第二条示例记录。"
+      },
+      "note": {
+        "en": "Sample note: two placeholder sources give different numbers; both are listed.",
+        "zh": "示例说明：两个占位来源的数字不同，两个都列出。"
+      }
+    }
+  ]
+}

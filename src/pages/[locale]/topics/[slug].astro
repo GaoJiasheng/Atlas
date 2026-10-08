@@ -12,6 +12,9 @@ import LangEn from '../../../components/mdx/LangEn.astro';
 import LangZh from '../../../components/mdx/LangZh.astro';
 import Soft from '../../../components/mdx/Soft.astro';
 import Full from '../../../components/mdx/Full.astro';
+import More from '../../../components/mdx/More.astro';
+import Num from '../../../components/mdx/Num.astro';
+import FlyTo from '../../../components/mdx/FlyTo.astro';
 import { LOCALES, localeHref, tx, type Locale } from '../../../i18n';
 import { chapterThemeMap, getTopicChapters, getTopics, topicEngineData, type TopicEntry } from '../../../lib/content';
 
@@ -32,7 +35,8 @@ const chapters = chapterEntries.map((entry) => entry.data);
 const bodies = await Promise.all(chapterEntries.map((entry) => render(entry)));
 const data = topicEngineData(topic);
 
-const components = { Lang: locale === 'zh' ? LangZh : LangEn, Soft, Full };
+// MDX components chapter bodies use without imports.
+const components = { Lang: locale === 'zh' ? LangZh : LangEn, Soft, Full, More, Num, FlyTo };
 ---
 <BaseLayout
   locale={locale}
