@@ -147,6 +147,24 @@
     opacity: 0.4;
     cursor: not-allowed;
   }
+  /* Index category tile: name over a small mono count line. */
+  .atlas-category {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.25rem;
+    min-height: 4rem;
+    padding: 0.5rem 0.875rem;
+    text-align: left;
+  }
+  .atlas-category__meta {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.04em;
+    opacity: 0.75;
+    text-transform: uppercase;
+  }
+
   .atlas-control--ghost {
     background: transparent;
     border-color: transparent;

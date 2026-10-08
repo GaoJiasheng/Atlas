@@ -277,7 +277,7 @@ pnpm shoot sample-time --shots mine.json hero    # 自定义截图表（{name: {
 
 ### 家长模式
 
-- 站点不展示年级：没有年级选择器、章节轨没有年级芯片、规格表没有年级行、索引页只按学科筛选；所有章节始终可进入，←→ 和上下章按钮逐章走。`level` / `levels` 只是 `topic.yaml` / 章节 / 零件上可选的规划元数据（schema 接受缺省，不渲染）。
+- 站点不展示年级：没有年级选择器、章节轨没有年级芯片、规格表没有年级行、索引页以固定六类（science / math / history / geography / biology / computer）为主入口并按类筛选，无主题的类别置灰标“即将推出”；所有章节始终可进入，←→ 和上下章按钮逐章走。`level` / `levels` 只是 `topic.yaml` / 章节 / 零件上可选的规划元数据（schema 接受缺省，不渲染）。
 - `ParentModeToggle`（localStorage `atlas:parent`，开启需 3 秒内连点两次）：显示敏感段落的 `<Full>` 版本；`sensitive` 章节在章节轨和信息面板上仍带"需要大人陪着看"标记。
 - 读写偏好走 `src/lib/prefs.ts` 的 hook（`useParentMode / useThemeOverride`），不要直接碰 localStorage；场景状态不进 localStorage，只进 URL。
 

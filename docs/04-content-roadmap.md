@@ -2,28 +2,30 @@
 
 按女儿年级推进：2026 P2 → 2027 P3 → 2028 P4 → 2029 P5 → 2030 P6/PSLE。先做框架和二战，其它主题随年级补。
 
-## 主题池（按学科）
+## 主题池（按六类：science / math / history / geography / biology / computer）
 
-| 主题 | 形态 | 引擎/舞台 | 对齐 | 建议年份 |
-|---|---|---|---|---|
-| 第二次世界大战 | time | TimeScene/Geo | SS P4 二战结束；SS P5 新加坡沦陷、日据 | **2026 首发** |
-| 空调是怎么把房间变冷的 | space | SpaceScene/Model3D | Sci P5 热；课外 | 2026 第二个（验证 SpaceScene） |
-| 新加坡 1819–1965 | time | TimeScene/Geo | SS P4 新加坡故事 | 2027 |
-| 植物的身体（根茎叶花） | space | SpaceScene/Layer2D | Sci P3/P4 植物系统 | 2027 |
-| 生物分类与多样性 | space（树状） | Layer2D | Sci P3 Diversity | 2027 |
-| 磁铁 | sim | Simulation | Sci P4 磁 | 2028 |
-| 消化系统 | space | Layer2D | Sci P4 人体系统 | 2028 |
-| 水循环 | time | TimeScene/Diagram | Sci P5 Cycles | 2029 |
-| 光与影 | sim | Simulation | Sci P5 光 | 2029 |
-| 大陆漂移与板块 | time | TimeScene/Geo+morph | 课外拓展（地理） | 2028–2029 |
-| 山脉与火山形成 | time + space | Diagram + Model3D | 课外拓展 | 2029 |
-| 电路 | space + sim | Layer2D + Simulation | Sci P6 电 | 2030 |
-| 呼吸与循环系统 | space | Layer2D/Model3D | Sci P6 | 2030 |
-| 力（摩擦、重力、弹力） | sim | Simulation | Sci P6 | 2030 |
-| 气候带与季风 | time | TimeScene/Geo | 课外拓展 | 随时 |
-| 丝绸之路 / 郑和下西洋 | time | TimeScene/Geo | 课外拓展（历史） | 随时 |
+| 主题 | 分类 | 形态 | 引擎/舞台 | 对齐 | 建议年份 |
+|---|---|---|---|---|---|
+| 第二次世界大战 | history | time | TimeScene/Geo | SS P4 二战结束；SS P5 新加坡沦陷、日据 | **2026 首发** |
+| 空调是怎么把房间变冷的 | science | space | SpaceScene/Model3D | Sci P5 热；课外 | 2026 第二个（验证 SpaceScene） |
+| 新加坡 1819–1965 | history | time | TimeScene/Geo | SS P4 新加坡故事 | 2027 |
+| 植物的身体（根茎叶花） | biology | space | SpaceScene/Layer2D | Sci P3/P4 植物系统 | 2027 |
+| 生物分类与多样性 | biology | space（树状） | Layer2D | Sci P3 Diversity | 2027 |
+| 磁铁 | science | sim | Simulation | Sci P4 磁 | 2028 |
+| 消化系统 | biology | space | Layer2D | Sci P4 人体系统 | 2028 |
+| 水循环 | science | time | TimeScene/Diagram | Sci P5 Cycles | 2029 |
+| 光与影 | science | sim | Simulation | Sci P5 光 | 2029 |
+| 大陆漂移与板块 | geography | time | TimeScene/Geo+morph | 课外拓展（地理） | 2028–2029 |
+| 山脉与火山形成 | geography | time + space | Diagram + Model3D | 课外拓展 | 2029 |
+| 电路 | science | space + sim | Layer2D + Simulation | Sci P6 电 | 2030 |
+| 呼吸与循环系统 | biology | space | Layer2D/Model3D | Sci P6 | 2030 |
+| 力（摩擦、重力、弹力） | science | sim | Simulation | Sci P6 | 2030 |
+| 气候带与季风 | geography | time | TimeScene/Geo | 课外拓展 | 随时 |
+| 丝绸之路 / 郑和下西洋 | history | time | TimeScene/Geo | 课外拓展（历史） | 随时 |
+| 分数与比例 | math | 待定 | 待定 | 待定 | 待定 |
+| 二进制与像素 | computer | 待定 | 待定 | 待定 | 待定 |
 
-数学类（分数、比例、面积、速度）归 Simulation，二期引擎做好后再排。
+数学类（分数、比例、面积、速度）归 Simulation，二期引擎做好后再排；computer 类同样待定。
 
 ## 二战主题大纲（一期 10 章）
 

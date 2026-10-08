@@ -1,14 +1,14 @@
 import { z } from 'zod';
 import { bilingual, kebabId, level, theme } from './common';
 
+/** The six fixed top-level categories, in display order. */
 export const SUBJECTS = [
-  'social-studies',
   'science',
-  'geography',
-  'history',
-  'biology',
   'math',
-  'extension',
+  'history',
+  'geography',
+  'biology',
+  'computer',
 ] as const;
 export const subject = z.enum(SUBJECTS);
 export type Subject = z.infer<typeof subject>;
@@ -33,6 +33,8 @@ export const topicSchema = z
     subject,
     /** Content-planning metadata (school levels the topic targets); never rendered. */
     levels: z.array(level).min(1).optional(),
+    /** Planning metadata (e.g. `beyond-syllabus`, `singapore`); never rendered. */
+    tags: z.array(kebabId).optional(),
     moe: z.array(z.string().min(1)).default([]),
     mode: z.enum(['time', 'space', 'both']),
     engine: engineId,
