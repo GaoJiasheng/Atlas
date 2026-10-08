@@ -1,0 +1,11 @@
+# World War II (docs/09-ww2-content-spec.md). Draft: K1 and K6 control keyframes only.
+id: ww2
+title: { en: "World War II", zh: "第二次世界大战" }
+subtitle: { en: "1937–1945", zh: "1937–1945" }
+subject: history
+mode: time
+engine: time-scene
+stage: geo
+theme: paper
+sensitivity: open
+status: draft

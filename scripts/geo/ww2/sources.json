@@ -1,0 +1,2456 @@
+{
+  "datasets": {
+    "cshapes": {
+      "ref": "G1",
+      "title": "CShapes 2.0 (GW version), borders of independent states and dependent territories 1886-2019",
+      "url": "https://icr.ethz.ch/data/cshapes/CShapes-2.0.geojson",
+      "file": "cshapes-2.0.geojson",
+      "page": "https://icr.ethz.ch/data/cshapes/",
+      "author": "Schvitz, Rüegger, Girardin, Cederman, Weidmann, Gleditsch (ETH Zürich ICR), 2022",
+      "license": "CC BY-NC-SA 4.0",
+      "role": "sovereign and colonial base borders on each keyframe date"
+    },
+    "ne-admin1": {
+      "ref": "G4",
+      "title": "Natural Earth 1:10m Admin 1 states and provinces (v5)",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_admin_1_states_provinces.geojson",
+      "file": "ne_10m_admin_1_states_provinces.geojson",
+      "page": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/",
+      "author": "Natural Earth",
+      "license": "Public domain",
+      "role": "province units to cut partially occupied colonies (Burma, Philippines, Sumatra) at the dated front"
+    },
+    "svg-china-1940": {
+      "ref": "G3",
+      "title": "Japanese Occupation of China 1940 (SVG)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Japanese_Occupation_of_China_1940.svg",
+      "file": "Japanese_Occupation_of_China_1940.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:Japanese_Occupation_of_China_1940.svg",
+      "author": "Rowanwindwhistler (SVG from File:Japanese_Occupation_-_Map.jpg), Odie5533 (English)",
+      "license": "CC BY-SA 3.0",
+      "role": "Japanese-occupied China (front line 1940, static until 1944 apart from Nanning withdrawn 1940)"
+    },
+    "svg-europe-1942": {
+      "ref": "G5",
+      "title": "World War II in Europe, 1942 (no labels) (SVG)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/99/World_War_II_in_Europe%2C_1942_%28no_labels%29.svg",
+      "file": "World_War_II_in_Europe,_1942_(no_labels).svg",
+      "page": "https://commons.wikimedia.org/wiki/File:World_War_II_in_Europe,_1942_(no_labels).svg",
+      "author": "Goran tek-en",
+      "license": "CC BY-SA 4.0",
+      "role": "Axis-held Europe: Reich, German-occupied, allied/client, nominally unoccupied; areas retaken in the Soviet 1941-42 winter offensive"
+    },
+    "svg-asia-1937-1942": {
+      "ref": "G6",
+      "title": "Second world war asia 1937-1942 map (French) (SVG)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Second_world_war_asia_1937-1942_map-fr.svg",
+      "file": "Second_world_war_asia_1937-1942_map-fr.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:Second_world_war_asia_1937-1942_map-fr.svg",
+      "author": "RedTony (original), Skimel (French translation and corrections)",
+      "license": "CC BY-SA 4.0",
+      "role": "cross-check image for K1 (Japanese Empire 1936) and K6 (conquests Dec 1941 - May 1942)"
+    },
+    "eastern-front-1942": {
+      "ref": "G7",
+      "title": "Eastern Front 1941-12 to 1942-05 (Spanish) (SVG)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Eastern_Front_1941-12_to_1942-05-es.svg",
+      "file": "Eastern_Front_1941-12_to_1942-05-es.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:Eastern_Front_1941-12_to_1942-05-es.svg",
+      "author": "Gdr (original PNG), Rowanwindwhistler (SVG)",
+      "license": "CC BY-SA 3.0",
+      "role": "cross-check for the Eastern Front line after the 1941-42 winter offensive"
+    },
+    "pd-burma-1942": {
+      "ref": "G8",
+      "title": "Japanese advance in Burma, 20 January - 19 March 1942 (Map 3)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Japanese_advance_in_Burma%2C_20_January-19_March_1942.jpg",
+      "file": "burma-1942-cmh.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Japanese_advance_in_Burma,_20_January-19_March_1942.jpg",
+      "author": "C. F. Romanus, R. Sunderland, Stilwell's Mission to China (US Army CMH, 1953)",
+      "license": "Public domain (US Government work)",
+      "role": "dates for the Burma cut (Moulmein 30 Jan, Sittang 21 Feb, Pegu/Rangoon 7-8 Mar)"
+    },
+    "pd-dei-1942": {
+      "ref": "G9",
+      "title": "Netherlands East Indies 1941: Japanese centrifugal offensive, Dec 1941 - Apr 1942 (Map 10)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/85/Pacific_War_-_Dutch_East_Indies_1941-42_-_Map.jpg",
+      "file": "dei-1941-42-usma.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Pacific_War_-_Dutch_East_Indies_1941-42_-_Map.jpg",
+      "author": "US Military Academy, Department of History",
+      "license": "Public domain (US Government work)",
+      "role": "dates for the DEI / Philippines cut (landings and surrenders before 9 Mar 1942)"
+    }
+  },
+  "ohm": {
+    "k1": {
+      "date": "1937-07-07",
+      "relations": {
+        "2889894": "Empire of Japan",
+        "2885965": "Manchukuo",
+        "2694575": "British Hong Kong"
+      }
+    },
+    "k6": {
+      "date": "1942-03-09",
+      "relations": {
+        "2948948": "Empire of Japan",
+        "2885965": "Manchukuo",
+        "2694574": "Hong Kong Occupied Territory",
+        "2874870": "Thailand",
+        "2745895": "Indochinese Federation",
+        "2692359": "Kingdom of Hungary",
+        "2693255": "Kingdom of Romania",
+        "2695478": "Tsardom of Bulgaria",
+        "2692833": "Finland",
+        "2747847": "Slovak Republic",
+        "2692713": "Independent State of Croatia",
+        "2747829": "Italy",
+        "2695459": "Italian protectorate of Albania",
+        "2695479": "Governorate of Montenegro",
+        "2828270": "Guernsey",
+        "2828299": "Jersey"
+      }
+    }
+  },
+  "svg": {
+    "china-1940": {
+      "dataset": "svg-china-1940",
+      "projection": "auto",
+      "classes": {
+        "#e5abd1": "occupied"
+      },
+      "land": [
+        "#eeffed",
+        "#ee660f",
+        "#e5abd1"
+      ],
+      "maxResidualKm": 60,
+      "controlPoints": [
+        {
+          "name": "Lhasa",
+          "lnglat": [
+            91.117,
+            29.65
+          ],
+          "svg": [
+            56.15,
+            559.96
+          ]
+        },
+        {
+          "name": "Xining",
+          "lnglat": [
+            101.778,
+            36.617
+          ],
+          "svg": [
+            377.93,
+            341.83
+          ]
+        },
+        {
+          "name": "Lanzhou",
+          "lnglat": [
+            103.834,
+            36.061
+          ],
+          "svg": [
+            433.31,
+            358.12
+          ]
+        },
+        {
+          "name": "Yinchuan",
+          "lnglat": [
+            106.231,
+            38.487
+          ],
+          "svg": [
+            494.4,
+            270.15
+          ]
+        },
+        {
+          "name": "Xi'an",
+          "lnglat": [
+            108.94,
+            34.341
+          ],
+          "svg": [
+            579.51,
+            411.06
+          ]
+        },
+        {
+          "name": "Chengdu",
+          "lnglat": [
+            104.066,
+            30.657
+          ],
+          "svg": [
+            459.78,
+            547.49
+          ]
+        },
+        {
+          "name": "Chongqing",
+          "lnglat": [
+            106.551,
+            29.563
+          ],
+          "svg": [
+            518.02,
+            583.33
+          ]
+        },
+        {
+          "name": "Kunming",
+          "lnglat": [
+            102.712,
+            25.04
+          ],
+          "svg": [
+            409.28,
+            738.08
+          ]
+        },
+        {
+          "name": "Guiyang",
+          "lnglat": [
+            106.713,
+            26.578
+          ],
+          "svg": [
+            531.87,
+            682.7
+          ]
+        },
+        {
+          "name": "Guilin",
+          "lnglat": [
+            110.29,
+            25.274
+          ],
+          "svg": [
+            647.12,
+            716.91
+          ]
+        },
+        {
+          "name": "Nanning",
+          "lnglat": [
+            108.32,
+            22.817
+          ],
+          "svg": [
+            592.95,
+            805.28
+          ]
+        },
+        {
+          "name": "Guangzhou",
+          "lnglat": [
+            113.264,
+            23.129
+          ],
+          "svg": [
+            753.0,
+            781.66
+          ]
+        },
+        {
+          "name": "Changsha",
+          "lnglat": [
+            112.939,
+            28.228
+          ],
+          "svg": [
+            724.5,
+            611.02
+          ]
+        },
+        {
+          "name": "Hankou",
+          "lnglat": [
+            114.27,
+            30.583
+          ],
+          "svg": [
+            748.93,
+            515.73
+          ]
+        },
+        {
+          "name": "Xiamen",
+          "lnglat": [
+            118.089,
+            24.479
+          ],
+          "svg": [
+            913.05,
+            696.95
+          ]
+        },
+        {
+          "name": "Wenzhou",
+          "lnglat": [
+            120.672,
+            28.0
+          ],
+          "svg": [
+            951.74,
+            575.59
+          ]
+        },
+        {
+          "name": "Shanghai",
+          "lnglat": [
+            121.473,
+            31.23
+          ],
+          "svg": [
+            954.59,
+            455.86
+          ]
+        },
+        {
+          "name": "Qingdao",
+          "lnglat": [
+            120.383,
+            36.067
+          ],
+          "svg": [
+            893.91,
+            297.84
+          ]
+        },
+        {
+          "name": "Jinan",
+          "lnglat": [
+            117.0,
+            36.675
+          ],
+          "svg": [
+            796.99,
+            298.25
+          ]
+        },
+        {
+          "name": "Beijing",
+          "lnglat": [
+            116.397,
+            39.907
+          ],
+          "svg": [
+            762.37,
+            191.96
+          ]
+        },
+        {
+          "name": "Taiyuan",
+          "lnglat": [
+            112.549,
+            37.87
+          ],
+          "svg": [
+            674.0,
+            277.89
+          ]
+        },
+        {
+          "name": "Kaifeng",
+          "lnglat": [
+            114.307,
+            34.797
+          ],
+          "svg": [
+            730.61,
+            376.85
+          ]
+        },
+        {
+          "name": "Zhangjiakou",
+          "lnglat": [
+            114.884,
+            40.811
+          ],
+          "svg": [
+            714.32,
+            170.78
+          ]
+        },
+        {
+          "name": "Shenyang",
+          "lnglat": [
+            123.431,
+            41.805
+          ],
+          "svg": [
+            922.83,
+            95.03
+          ]
+        },
+        {
+          "name": "Seoul",
+          "lnglat": [
+            126.978,
+            37.566
+          ],
+          "svg": [
+            1041.75,
+            205.4
+          ]
+        },
+        {
+          "name": "Dalian",
+          "lnglat": [
+            121.614,
+            38.914
+          ],
+          "svg": [
+            898.8,
+            199.7
+          ]
+        },
+        {
+          "name": "Taipei",
+          "lnglat": [
+            121.565,
+            25.033
+          ],
+          "svg": [
+            999.39,
+            670.89
+          ]
+        },
+        {
+          "name": "Mandalay",
+          "lnglat": [
+            96.084,
+            21.975
+          ],
+          "svg": [
+            190.59,
+            839.08
+          ]
+        },
+        {
+          "name": "Myitkyina",
+          "lnglat": [
+            97.395,
+            25.383
+          ],
+          "svg": [
+            250.05,
+            711.21
+          ]
+        }
+      ]
+    },
+    "europe-1942": {
+      "dataset": "svg-europe-1942",
+      "projection": "auto",
+      "classes": {
+        "#4068b8": "reich",
+        "#6283c8": "occupied",
+        "#9ab8f5": "allies",
+        "#c8dafd": "nominal",
+        "clip:clipPath5317": "retaken",
+        "clip:clipPath5340": "retaken"
+      },
+      "land": [
+        "#4068b8",
+        "#6283c8",
+        "#9ab8f5",
+        "#c8dafd",
+        "#41c236",
+        "#e8493a",
+        "#bfbfbf"
+      ],
+      "maxResidualKm": 30,
+      "controlPoints": [
+        {
+          "name": "Cape Akritas",
+          "lnglat": [
+            21.876,
+            36.718
+          ],
+          "svg": [
+            6400,
+            7083
+          ]
+        },
+        {
+          "name": "Cape Matapan",
+          "lnglat": [
+            22.483,
+            36.386
+          ],
+          "svg": [
+            6503,
+            7132
+          ]
+        },
+        {
+          "name": "Cape Maleas",
+          "lnglat": [
+            23.196,
+            36.441
+          ],
+          "svg": [
+            6600,
+            7110
+          ]
+        },
+        {
+          "name": "Skagen (Grenen)",
+          "lnglat": [
+            10.644,
+            57.744
+          ],
+          "svg": [
+            4640.0,
+            3300.0
+          ]
+        },
+        {
+          "name": "Pointe du Raz",
+          "lnglat": [
+            -4.737,
+            48.039
+          ],
+          "svg": [
+            2742.0,
+            4925.0
+          ]
+        },
+        {
+          "name": "Land's End",
+          "lnglat": [
+            -5.714,
+            50.066
+          ],
+          "svg": [
+            2715.0,
+            4518.0
+          ]
+        },
+        {
+          "name": "Lizard Point",
+          "lnglat": [
+            -5.206,
+            49.959
+          ],
+          "svg": [
+            2775.0,
+            4543.0
+          ]
+        },
+        {
+          "name": "Cap de la Hague",
+          "lnglat": [
+            -1.941,
+            49.724
+          ],
+          "svg": [
+            3142.0,
+            4688.0
+          ]
+        },
+        {
+          "name": "Capo Passero",
+          "lnglat": [
+            15.134,
+            36.688
+          ],
+          "svg": [
+            5364.0,
+            7215.0
+          ]
+        },
+        {
+          "name": "Capo Peloro",
+          "lnglat": [
+            15.652,
+            38.267
+          ],
+          "svg": [
+            5416.0,
+            6916.0
+          ]
+        },
+        {
+          "name": "Santa Maria di Leuca",
+          "lnglat": [
+            18.358,
+            39.797
+          ],
+          "svg": [
+            5800.0,
+            6589.0
+          ]
+        },
+        {
+          "name": "Malta (centre)",
+          "lnglat": [
+            14.44,
+            35.89
+          ],
+          "svg": [
+            5254.0,
+            7378.0
+          ]
+        },
+        {
+          "name": "Cape Sarych",
+          "lnglat": [
+            33.728,
+            44.391
+          ],
+          "svg": [
+            7740.0,
+            5266.0
+          ]
+        },
+        {
+          "name": "Cape Tarkhankut",
+          "lnglat": [
+            32.494,
+            45.347
+          ],
+          "svg": [
+            7520.0,
+            5140.0
+          ]
+        },
+        {
+          "name": "Cape Apostolos Andreas",
+          "lnglat": [
+            34.586,
+            35.688
+          ],
+          "svg": [
+            8320.0,
+            6812.0
+          ]
+        },
+        {
+          "name": "Cape Arnauti",
+          "lnglat": [
+            32.272,
+            35.101
+          ],
+          "svg": [
+            8015.0,
+            7023.0
+          ]
+        },
+        {
+          "name": "Cape Gata",
+          "lnglat": [
+            32.968,
+            34.566
+          ],
+          "svg": [
+            8145.0,
+            7083.0
+          ]
+        },
+        {
+          "name": "Punta de Tarifa",
+          "lnglat": [
+            -5.61,
+            36.006
+          ],
+          "svg": [
+            2186.0,
+            7109.0
+          ]
+        },
+        {
+          "name": "Cabo de Gata",
+          "lnglat": [
+            -2.19,
+            36.722
+          ],
+          "svg": [
+            2726.0,
+            7082.0
+          ]
+        },
+        {
+          "name": "Cabo de la Nao",
+          "lnglat": [
+            0.233,
+            38.732
+          ],
+          "svg": [
+            3131.0,
+            6762.0
+          ]
+        },
+        {
+          "name": "Mizen Head",
+          "lnglat": [
+            -9.819,
+            51.447
+          ],
+          "svg": [
+            2264.0,
+            4152.0
+          ]
+        },
+        {
+          "name": "Malin Head",
+          "lnglat": [
+            -7.373,
+            55.381
+          ],
+          "svg": [
+            2728.0,
+            3504.0
+          ]
+        },
+        {
+          "name": "North Foreland",
+          "lnglat": [
+            1.446,
+            51.375
+          ],
+          "svg": [
+            3581.0,
+            4419.0
+          ]
+        },
+        {
+          "name": "Ness Point",
+          "lnglat": [
+            1.762,
+            52.481
+          ],
+          "svg": [
+            3648.0,
+            4200.0
+          ]
+        },
+        {
+          "name": "St David's Head",
+          "lnglat": [
+            -5.311,
+            51.903
+          ],
+          "svg": [
+            2840.0,
+            4195.0
+          ]
+        },
+        {
+          "name": "Cape Sideros (Crete E)",
+          "lnglat": [
+            26.316,
+            35.311
+          ],
+          "svg": [
+            7115,
+            7239
+          ]
+        },
+        {
+          "name": "Rhodes (centre)",
+          "lnglat": [
+            27.97,
+            36.2
+          ],
+          "svg": [
+            7332,
+            7018
+          ]
+        },
+        {
+          "name": "Lesbos (centre)",
+          "lnglat": [
+            26.27,
+            39.17
+          ],
+          "svg": [
+            6948,
+            6518
+          ]
+        },
+        {
+          "name": "Lindesnes",
+          "lnglat": [
+            7.047,
+            57.983
+          ],
+          "svg": [
+            4290,
+            3235
+          ]
+        },
+        {
+          "name": "Sõrve (Saaremaa S)",
+          "lnglat": [
+            22.06,
+            57.91
+          ],
+          "svg": [
+            5770,
+            3155
+          ]
+        },
+        {
+          "name": "Kõpu (Hiiumaa W)",
+          "lnglat": [
+            22.2,
+            58.92
+          ],
+          "svg": [
+            5745,
+            2965
+          ]
+        },
+        {
+          "name": "North Cape (Magerøya)",
+          "lnglat": [
+            25.783,
+            71.17
+          ],
+          "svg": [
+            5546,
+            658
+          ]
+        },
+        {
+          "name": "Kinnarodden (Nordkinn)",
+          "lnglat": [
+            27.65,
+            71.135
+          ],
+          "svg": [
+            5676,
+            644
+          ]
+        }
+      ],
+      "exclude": [
+        [
+          7150,
+          250,
+          9332,
+          2900
+        ]
+      ]
+    },
+    "eastern-front-1942": {
+      "dataset": "eastern-front-1942",
+      "projection": "auto",
+      "classes": {
+        "#c83737": "soviet",
+        "#d35f5f": "soviet"
+      },
+      "land": [
+        "#ffffff",
+        "#c83737",
+        "#d35f5f",
+        "#afc6e9"
+      ],
+      "maxResidualKm": 30,
+      "controlPoints": [
+        {
+          "name": "Leningrad",
+          "lnglat": [
+            30.316,
+            59.939
+          ],
+          "svg": [
+            1124.56,
+            80.77
+          ]
+        },
+        {
+          "name": "Helsinki",
+          "lnglat": [
+            24.938,
+            60.17
+          ],
+          "svg": [
+            861.42,
+            46.88
+          ]
+        },
+        {
+          "name": "Tallinn",
+          "lnglat": [
+            24.745,
+            59.437
+          ],
+          "svg": [
+            842.86,
+            117.9
+          ]
+        },
+        {
+          "name": "Riga",
+          "lnglat": [
+            24.105,
+            56.949
+          ],
+          "svg": [
+            804.11,
+            358.47
+          ]
+        },
+        {
+          "name": "Daugavpils",
+          "lnglat": [
+            26.536,
+            55.874
+          ],
+          "svg": [
+            913.89,
+            474.71
+          ]
+        },
+        {
+          "name": "Kaunas",
+          "lnglat": [
+            23.904,
+            54.898
+          ],
+          "svg": [
+            774.39,
+            562.84
+          ]
+        },
+        {
+          "name": "Vilnius",
+          "lnglat": [
+            25.28,
+            54.687
+          ],
+          "svg": [
+            840.43,
+            590.12
+          ]
+        },
+        {
+          "name": "Minsk",
+          "lnglat": [
+            27.567,
+            53.9
+          ],
+          "svg": [
+            959.9,
+            678.13
+          ]
+        },
+        {
+          "name": "Königsberg",
+          "lnglat": [
+            20.511,
+            54.71
+          ],
+          "svg": [
+            573.26,
+            553.81
+          ]
+        },
+        {
+          "name": "Danzig",
+          "lnglat": [
+            18.646,
+            54.352
+          ],
+          "svg": [
+            442.49,
+            582.07
+          ]
+        },
+        {
+          "name": "Tilsit",
+          "lnglat": [
+            21.88,
+            55.083
+          ],
+          "svg": [
+            655.67,
+            538.86
+          ]
+        },
+        {
+          "name": "Warsaw",
+          "lnglat": [
+            21.012,
+            52.23
+          ],
+          "svg": [
+            564.38,
+            803.24
+          ]
+        },
+        {
+          "name": "Lublin",
+          "lnglat": [
+            22.568,
+            51.246
+          ],
+          "svg": [
+            649.13,
+            920.27
+          ]
+        },
+        {
+          "name": "Brest",
+          "lnglat": [
+            23.686,
+            52.098
+          ],
+          "svg": [
+            724.73,
+            834.53
+          ]
+        },
+        {
+          "name": "Kraków",
+          "lnglat": [
+            19.945,
+            50.065
+          ],
+          "svg": [
+            469.32,
+            1006.65
+          ]
+        },
+        {
+          "name": "Lviv",
+          "lnglat": [
+            24.031,
+            49.842
+          ],
+          "svg": [
+            723.59,
+            1066.84
+          ]
+        },
+        {
+          "name": "Kiev",
+          "lnglat": [
+            30.523,
+            50.45
+          ],
+          "svg": [
+            1130.21,
+            1025.22
+          ]
+        },
+        {
+          "name": "Odessa",
+          "lnglat": [
+            30.723,
+            46.482
+          ],
+          "svg": [
+            1144.74,
+            1415.91
+          ]
+        },
+        {
+          "name": "Sevastopol",
+          "lnglat": [
+            33.522,
+            44.616
+          ],
+          "svg": [
+            1335.24,
+            1604.8
+          ]
+        },
+        {
+          "name": "Yalta",
+          "lnglat": [
+            34.16,
+            44.495
+          ],
+          "svg": [
+            1369.95,
+            1617.71
+          ]
+        },
+        {
+          "name": "Kerch",
+          "lnglat": [
+            36.474,
+            45.357
+          ],
+          "svg": [
+            1533.81,
+            1520.03
+          ]
+        },
+        {
+          "name": "Novorossiysk",
+          "lnglat": [
+            37.77,
+            44.723
+          ],
+          "svg": [
+            1635.1,
+            1573.12
+          ]
+        },
+        {
+          "name": "Maikop",
+          "lnglat": [
+            40.1,
+            44.609
+          ],
+          "svg": [
+            1783.23,
+            1566.07
+          ]
+        },
+        {
+          "name": "Grozny",
+          "lnglat": [
+            45.694,
+            43.317
+          ],
+          "svg": [
+            2196.5,
+            1633.87
+          ]
+        },
+        {
+          "name": "Elista",
+          "lnglat": [
+            44.27,
+            46.307
+          ],
+          "svg": [
+            2057.67,
+            1354.56
+          ]
+        },
+        {
+          "name": "Stalingrad",
+          "lnglat": [
+            44.516,
+            48.708
+          ],
+          "svg": [
+            2022.15,
+            1117.24
+          ]
+        },
+        {
+          "name": "Rostov-on-Don",
+          "lnglat": [
+            39.701,
+            47.236
+          ],
+          "svg": [
+            1730.76,
+            1310.16
+          ]
+        },
+        {
+          "name": "Voronezh",
+          "lnglat": [
+            39.2,
+            51.672
+          ],
+          "svg": [
+            1654.88,
+            883.16
+          ]
+        },
+        {
+          "name": "Kursk",
+          "lnglat": [
+            36.193,
+            51.73
+          ],
+          "svg": [
+            1479.72,
+            887.99
+          ]
+        },
+        {
+          "name": "Kharkiv",
+          "lnglat": [
+            36.23,
+            49.993
+          ],
+          "svg": [
+            1498.29,
+            1061.54
+          ]
+        },
+        {
+          "name": "Tula",
+          "lnglat": [
+            37.617,
+            54.193
+          ],
+          "svg": [
+            1542.68,
+            624.03
+          ]
+        },
+        {
+          "name": "Kalinin (Tver)",
+          "lnglat": [
+            35.912,
+            56.859
+          ],
+          "svg": [
+            1426.45,
+            367.35
+          ]
+        },
+        {
+          "name": "Smolensk",
+          "lnglat": [
+            32.045,
+            54.782
+          ],
+          "svg": [
+            1219.0,
+            590.93
+          ]
+        },
+        {
+          "name": "Novgorod",
+          "lnglat": [
+            31.27,
+            58.522
+          ],
+          "svg": [
+            1171.26,
+            214.62
+          ]
+        },
+        {
+          "name": "Gomel",
+          "lnglat": [
+            30.983,
+            52.441
+          ],
+          "svg": [
+            1166.54,
+            825.04
+          ]
+        },
+        {
+          "name": "Dnipropetrovsk",
+          "lnglat": [
+            35.046,
+            48.465
+          ],
+          "svg": [
+            1424.03,
+            1217.33
+          ]
+        },
+        {
+          "name": "Orel",
+          "lnglat": [
+            36.064,
+            52.968
+          ],
+          "svg": [
+            1456.32,
+            770.15
+          ]
+        },
+        {
+          "name": "Bryansk",
+          "lnglat": [
+            34.364,
+            53.243
+          ],
+          "svg": [
+            1353.8,
+            737.06
+          ]
+        },
+        {
+          "name": "Rzhev",
+          "lnglat": [
+            34.326,
+            56.262
+          ],
+          "svg": [
+            1347.35,
+            450.48
+          ]
+        },
+        {
+          "name": "Demyansk",
+          "lnglat": [
+            32.465,
+            57.64
+          ],
+          "svg": [
+            1237.57,
+            311.64
+          ]
+        },
+        {
+          "name": "Vitebsk",
+          "lnglat": [
+            30.204,
+            55.184
+          ],
+          "svg": [
+            1121.33,
+            551.38
+          ]
+        },
+        {
+          "name": "Uman",
+          "lnglat": [
+            30.221,
+            48.749
+          ],
+          "svg": [
+            1118.91,
+            1196.35
+          ]
+        },
+        {
+          "name": "Belgrade",
+          "lnglat": [
+            20.457,
+            44.787
+          ],
+          "svg": [
+            440.88,
+            1542.65
+          ]
+        },
+        {
+          "name": "Ploiești",
+          "lnglat": [
+            26.013,
+            44.946
+          ],
+          "svg": [
+            816.63,
+            1553.72
+          ]
+        },
+        {
+          "name": "Stockholm",
+          "lnglat": [
+            18.069,
+            59.329
+          ],
+          "svg": [
+            497.0,
+            109.63
+          ]
+        },
+        {
+          "name": "Copenhagen",
+          "lnglat": [
+            12.568,
+            55.676
+          ],
+          "svg": [
+            115.58,
+            385.11
+          ]
+        },
+        {
+          "name": "Stettin",
+          "lnglat": [
+            14.553,
+            53.428
+          ],
+          "svg": [
+            178.54,
+            626.46
+          ]
+        },
+        {
+          "name": "Poznań",
+          "lnglat": [
+            16.925,
+            52.406
+          ],
+          "svg": [
+            310.12,
+            747.55
+          ]
+        },
+        {
+          "name": "Breslau",
+          "lnglat": [
+            17.038,
+            51.108
+          ],
+          "svg": [
+            291.55,
+            887.19
+          ]
+        },
+        {
+          "name": "Prague",
+          "lnglat": [
+            14.438,
+            50.075
+          ],
+          "svg": [
+            113.97,
+            962.27
+          ]
+        },
+        {
+          "name": "Sarajevo",
+          "lnglat": [
+            18.413,
+            43.856
+          ],
+          "svg": [
+            258.42,
+            1632.49
+          ]
+        }
+      ],
+      "sea": [
+        "#c6ecff"
+      ]
+    }
+  },
+  "keyframes": [
+    {
+      "id": "K1",
+      "t": "1937-07-07",
+      "ohm": "k1",
+      "method": "Dataset query: CShapes 2.0 borders valid on 1937-07-07 (GW code -> holder) with OpenHistoricalMap relations for the Empire of Japan (home islands, Korea, Taiwan, Karafuto, Kwantung, South Seas Mandate), Manchukuo (incl. Rehe) and British Hong Kong painted over. No georeferencing needed.",
+      "base": {
+        "2": "usa",
+        "3": "usa",
+        "4": "usa",
+        "6": "usa",
+        "20": "canada",
+        "21": "uk",
+        "31": "uk",
+        "51": "uk",
+        "52": "uk",
+        "53": "uk",
+        "65": "france",
+        "66": "france",
+        "80": "uk",
+        "110": "uk",
+        "115": "netherlands",
+        "120": "france",
+        "1201": "france",
+        "140": "brazil",
+        "200": "uk",
+        "205": "ireland",
+        "210": "netherlands",
+        "211": "belgium",
+        "220": "france",
+        "225": "switzerland",
+        "230": "spain",
+        "235": "portugal",
+        "255": "germany",
+        "290": "poland",
+        "310": "hungary",
+        "325": "italy",
+        "338": "uk",
+        "345": "yugoslavia",
+        "350": "greece",
+        "352": "uk",
+        "355": "bulgaria",
+        "360": "romania",
+        "365": "ussr",
+        "375": "finland",
+        "380": "sweden",
+        "385": "norway",
+        "402": "portugal",
+        "404": "portugal",
+        "411": "spain",
+        "420": "uk",
+        "432": "france",
+        "433": "france",
+        "434": "france",
+        "435": "france",
+        "436": "france",
+        "437": "france",
+        "438": "france",
+        "451": "uk",
+        "452": "uk",
+        "461": "france",
+        "462": "uk",
+        "471": "france",
+        "472": "uk",
+        "475": "uk",
+        "481": "france",
+        "482": "france",
+        "483": "france",
+        "484": "france",
+        "490": "belgium",
+        "500": "uk",
+        "501": "uk",
+        "510": "uk",
+        "511": "uk",
+        "515": "belgium",
+        "521": "uk",
+        "522": "france",
+        "530": {
+          "holder": "italy",
+          "label": {
+            "en": "Ethiopia (Italian-occupied since 1936)",
+            "zh": "埃塞俄比亚（1936 年起被意大利占领）"
+          }
+        },
+        "531": "italy",
+        "540": "portugal",
+        "541": "portugal",
+        "551": "uk",
+        "552": "uk",
+        "553": "uk",
+        "570": "uk",
+        "571": "uk",
+        "572": "uk",
+        "580": "france",
+        "585": "france",
+        "590": "uk",
+        "600": "france",
+        "602": "spain",
+        "610": "spain",
+        "615": "france",
+        "616": "france",
+        "620": "italy",
+        "625": "uk",
+        "640": "turkey",
+        "652": "france",
+        "660": "france",
+        "663": "uk",
+        "665": "uk",
+        "681": "uk",
+        "6812": "uk",
+        "694": "uk",
+        "696": "uk",
+        "710": "china",
+        "713": "japan",
+        "730": "japan",
+        "740": "japan",
+        "7351": "japan",
+        "750": "india",
+        "775": "uk",
+        "780": "uk",
+        "781": "uk",
+        "800": "thailand",
+        "811": "france",
+        "812": "france",
+        "815": "france",
+        "821": "uk",
+        "822": "uk",
+        "823": "uk",
+        "824": "uk",
+        "827": "uk",
+        "835": "uk",
+        "840": "philippines",
+        "850": "netherlands",
+        "860": "portugal",
+        "900": "australia",
+        "911": "australia",
+        "912": "australia",
+        "920": "new-zealand",
+        "930": "france",
+        "940": "uk",
+        "950": "uk",
+        "960": "france",
+        "5200": "italy"
+      },
+      "steps": [
+        {
+          "note": "Manchukuo incl. Rehe (OHM r2885965)",
+          "holder": "manchukuo",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2885965
+          }
+        },
+        {
+          "note": "Empire of Japan incl. Korea, Taiwan, Karafuto, Kwantung, South Seas Mandate (OHM r2889894)",
+          "holder": "japan",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2889894
+          }
+        },
+        {
+          "note": "British Hong Kong (OHM r2694575)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2694575
+          }
+        }
+      ],
+      "checks": [
+        {
+          "name": "east-asia",
+          "center": [
+            118,
+            22
+          ],
+          "zoom": 2.25,
+          "source": "svg-asia-1937-1942"
+        },
+        {
+          "name": "world",
+          "center": [
+            20,
+            25
+          ],
+          "zoom": 0.9
+        }
+      ]
+    },
+    {
+      "id": "K6",
+      "t": "1942-03-09",
+      "ohm": "k6",
+      "method": "CShapes 2.0 borders valid on 1942-03-09 as the base; OpenHistoricalMap relations for Japan, Manchukuo, occupied Hong Kong, Thailand, French Indochina and the European Axis states; Japanese-occupied China and Axis-held Europe from georeferenced Commons SVG maps (control-point fit, residuals below); the Eastern Front from the 1942-05-05 front of a georeferenced Commons SVG; Southeast Asia from whole CShapes units / islands and Natural Earth provinces captured by 9 March 1942 (dates from US Army CMH and USMA maps).",
+      "base": {
+        "2": "usa",
+        "3": "usa",
+        "4": "usa",
+        "6": "usa",
+        "20": "canada",
+        "21": "uk",
+        "31": "uk",
+        "51": "uk",
+        "52": "uk",
+        "53": "uk",
+        "65": "vichy-france",
+        "66": "vichy-france",
+        "80": "uk",
+        "110": "uk",
+        "115": "netherlands",
+        "120": "vichy-france",
+        "1201": "vichy-france",
+        "140": "brazil",
+        "200": "uk",
+        "205": "ireland",
+        "210": "germany",
+        "211": "germany",
+        "220": "germany",
+        "225": "switzerland",
+        "230": "spain",
+        "235": "portugal",
+        "255": "germany",
+        "290": "germany",
+        "310": "hungary",
+        "325": "italy",
+        "338": "uk",
+        "345": "germany",
+        "350": "germany",
+        "352": "uk",
+        "355": "bulgaria",
+        "360": "romania",
+        "365": "ussr",
+        "375": "finland",
+        "380": "sweden",
+        "385": "germany",
+        "402": "portugal",
+        "404": "portugal",
+        "411": "spain",
+        "420": "uk",
+        "432": "vichy-france",
+        "433": "vichy-france",
+        "434": "vichy-france",
+        "435": "vichy-france",
+        "436": "vichy-france",
+        "437": "vichy-france",
+        "438": "vichy-france",
+        "451": "uk",
+        "452": "uk",
+        "461": "vichy-france",
+        "462": "uk",
+        "471": "free-france",
+        "472": "uk",
+        "475": "uk",
+        "481": "free-france",
+        "482": "free-france",
+        "483": "free-france",
+        "484": "free-france",
+        "490": "belgium",
+        "500": "uk",
+        "501": "uk",
+        "510": "uk",
+        "511": "uk",
+        "515": "belgium",
+        "521": "uk",
+        "522": "vichy-france",
+        "531": {
+          "holder": "uk",
+          "label": {
+            "en": "Eritrea (British military administration)",
+            "zh": "厄立特里亚（英国军事管理）"
+          }
+        },
+        "540": "portugal",
+        "541": "portugal",
+        "551": "uk",
+        "552": "uk",
+        "553": "uk",
+        "570": "uk",
+        "571": "uk",
+        "572": "uk",
+        "580": "vichy-france",
+        "585": "vichy-france",
+        "590": "uk",
+        "600": "vichy-france",
+        "602": "spain",
+        "610": "spain",
+        "615": "vichy-france",
+        "616": "vichy-france",
+        "620": "italy",
+        "625": "uk",
+        "640": "turkey",
+        "652": "free-france",
+        "660": "free-france",
+        "663": "uk",
+        "665": "uk",
+        "681": "uk",
+        "6812": "uk",
+        "694": "uk",
+        "696": "uk",
+        "710": "china",
+        "713": "japan",
+        "730": "japan",
+        "740": "japan",
+        "7351": "japan",
+        "750": "india",
+        "775": "uk",
+        "780": "uk",
+        "781": "uk",
+        "800": "thailand",
+        "811": "japan",
+        "812": "japan",
+        "815": "japan",
+        "821": "uk",
+        "822": "uk",
+        "823": "uk",
+        "824": "uk",
+        "827": "uk",
+        "835": "uk",
+        "840": "philippines",
+        "850": "netherlands",
+        "860": "japan",
+        "900": "australia",
+        "911": "australia",
+        "912": "australia",
+        "920": "new-zealand",
+        "930": "free-france",
+        "940": "uk",
+        "950": "uk",
+        "960": "free-france",
+        "5200": {
+          "holder": "uk",
+          "label": {
+            "en": "Somalia (British military administration)",
+            "zh": "索马里（英国军事管理）"
+          }
+        },
+        "212": "germany",
+        "305": "germany",
+        "315": "germany",
+        "390": {
+          "holder": "germany",
+          "label": {
+            "en": "Denmark (German-occupied)",
+            "zh": "丹麦（德国占领）"
+          }
+        },
+        "339": "italy"
+      },
+      "steps": [
+        {
+          "note": "Japanese-occupied China, front of 1940 (Commons SVG, georeferenced)",
+          "holder": "japan",
+          "label": {
+            "en": "Japanese-occupied China",
+            "zh": "日占中国"
+          },
+          "src": [
+            "G3"
+          ],
+          "from": {
+            "svg": "china-1940",
+            "class": "occupied",
+            "coastFillKm": 40
+          },
+          "clip": {
+            "cshapes": [
+              710
+            ]
+          }
+        },
+        {
+          "note": "Hainan (occupied Feb 1939)",
+          "holder": "japan",
+          "label": {
+            "en": "Japanese-occupied China",
+            "zh": "日占中国"
+          },
+          "src": [
+            "G1"
+          ],
+          "from": {
+            "cshapes": [
+              710
+            ],
+            "partsAt": [
+              [
+                109.7,
+                19.2
+              ]
+            ]
+          }
+        },
+        {
+          "note": "Manchukuo (OHM r2885965)",
+          "holder": "manchukuo",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2885965
+          }
+        },
+        {
+          "note": "Empire of Japan incl. colonies and mandate (OHM r2948948)",
+          "holder": "japan",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2948948
+          }
+        },
+        {
+          "note": "Hong Kong, surrendered 1941-12-25 (OHM r2694574)",
+          "holder": "japan",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2694574
+          }
+        },
+        {
+          "note": "Thailand incl. 1941 gains from Indochina (OHM r2874870)",
+          "holder": "thailand",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2874870
+          }
+        },
+        {
+          "note": "French Indochina under Japanese occupation (OHM r2745895)",
+          "holder": "japan",
+          "label": {
+            "en": "French Indochina (Japanese-occupied, Vichy administration)",
+            "zh": "法属印度支那（日军进驻，维希政府管理）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2745895
+          }
+        },
+        {
+          "note": "Malaya and Singapore, surrendered 1942-02-15",
+          "holder": "japan",
+          "label": {
+            "en": "Malaya and Singapore (Japanese-occupied)",
+            "zh": "马来亚与新加坡（日占）"
+          },
+          "src": [
+            "G1"
+          ],
+          "from": {
+            "cshapes": [
+              821,
+              822,
+              827
+            ]
+          }
+        },
+        {
+          "note": "British Borneo (Sarawak, Brunei, North Borneo), Dec 1941 - Jan 1942",
+          "holder": "japan",
+          "src": [
+            "G1",
+            "G9"
+          ],
+          "from": {
+            "cshapes": [
+              823,
+              824,
+              835
+            ]
+          }
+        },
+        {
+          "note": "NEI: Dutch Borneo, Celebes, Java, Madura, Bali, Bangka, Ambon, West Timor (by 9 Mar 1942)",
+          "holder": "japan",
+          "label": {
+            "en": "Netherlands East Indies (Japanese-occupied part)",
+            "zh": "荷属东印度（日占部分）"
+          },
+          "src": [
+            "G1",
+            "G9"
+          ],
+          "from": {
+            "cshapes": [
+              850
+            ],
+            "partsAt": [
+              [
+                114.0,
+                0.5
+              ],
+              [
+                120.5,
+                -2.0
+              ],
+              [
+                110.0,
+                -7.3
+              ],
+              [
+                113.3,
+                -7.05
+              ],
+              [
+                115.1,
+                -8.35
+              ],
+              [
+                106.1,
+                -2.2
+              ],
+              [
+                128.0,
+                -3.62
+              ],
+              [
+                124.0,
+                -9.8
+              ]
+            ]
+          }
+        },
+        {
+          "note": "NEI: southern Sumatra (Palembang 14-16 Feb, Lampung)",
+          "holder": "japan",
+          "label": {
+            "en": "Netherlands East Indies (Japanese-occupied part)",
+            "zh": "荷属东印度（日占部分）"
+          },
+          "src": [
+            "G4",
+            "G9"
+          ],
+          "from": {
+            "admin1": "Indonesia",
+            "names": [
+              "Sumatera Selatan",
+              "Lampung"
+            ]
+          },
+          "clip": {
+            "cshapes": [
+              850
+            ]
+          }
+        },
+        {
+          "note": "Portuguese Timor (landing 20 Feb 1942)",
+          "holder": "japan",
+          "src": [
+            "G1",
+            "G9"
+          ],
+          "from": {
+            "cshapes": [
+              860
+            ]
+          }
+        },
+        {
+          "note": "Philippines: Luzon except Bataan, Mindoro, Jolo",
+          "holder": "japan",
+          "label": {
+            "en": "Philippines (Japanese-occupied part)",
+            "zh": "菲律宾（日占部分）"
+          },
+          "src": [
+            "G1",
+            "G4",
+            "G9"
+          ],
+          "from": {
+            "cshapes": [
+              840
+            ],
+            "partsAt": [
+              [
+                121.0,
+                16.0
+              ],
+              [
+                121.0,
+                12.9
+              ],
+              [
+                121.05,
+                6.0
+              ]
+            ]
+          },
+          "minus": {
+            "admin1": "Philippines",
+            "names": [
+              "Bataan"
+            ]
+          }
+        },
+        {
+          "note": "Lower Burma: Tenasserim, Mon, Karen, Rangoon (Rangoon 8 Mar 1942)",
+          "holder": "japan",
+          "label": {
+            "en": "Lower Burma (Japanese-occupied)",
+            "zh": "下缅甸（日占）"
+          },
+          "src": [
+            "G4",
+            "G8"
+          ],
+          "from": {
+            "admin1": "Myanmar",
+            "names": [
+              "Tanintharyi",
+              "Mon",
+              "Kayin",
+              "Yangon"
+            ]
+          },
+          "clip": {
+            "cshapes": [
+              775
+            ]
+          }
+        },
+        {
+          "note": "New Britain and New Ireland (Rabaul and Kavieng, 23 Jan 1942)",
+          "holder": "japan",
+          "src": [
+            "G1",
+            "G9"
+          ],
+          "from": {
+            "cshapes": [
+              912
+            ],
+            "partsAt": [
+              [
+                151.0,
+                -5.5
+              ],
+              [
+                151.85,
+                -3.27
+              ]
+            ]
+          }
+        },
+        {
+          "note": "Europe: German Reich and German-occupied areas (Commons SVG, georeferenced)",
+          "holder": "germany",
+          "src": [
+            "G5"
+          ],
+          "from": {
+            "svg": "europe-1942",
+            "class": [
+              "reich",
+              "occupied"
+            ],
+            "coastFillKm": 25
+          },
+          "clip": {
+            "difference": [
+              {
+                "cshapes": [
+                  210,
+                  211,
+                  212,
+                  220,
+                  255,
+                  290,
+                  305,
+                  310,
+                  315,
+                  325,
+                  339,
+                  345,
+                  350,
+                  355,
+                  360,
+                  365,
+                  375,
+                  385,
+                  390
+                ]
+              },
+              {
+                "intersect": [
+                  {
+                    "difference": [
+                      {
+                        "cshapes": [
+                          365
+                        ]
+                      },
+                      {
+                        "svgFrame": "eastern-front-1942"
+                      }
+                    ]
+                  },
+                  {
+                    "bbox": [
+                      20,
+                      35,
+                      80,
+                      58
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "note": "Channel Islands, German-occupied since 1940 (OHM r2828270 Guernsey, r2828299 Jersey)",
+          "holder": "germany",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "union": [
+              {
+                "ohm": 2828270
+              },
+              {
+                "ohm": 2828299
+              }
+            ]
+          }
+        },
+        {
+          "note": "Europe: Axis allies and client states, default Italy (Commons SVG)",
+          "holder": "italy",
+          "src": [
+            "G5"
+          ],
+          "from": {
+            "svg": "europe-1942",
+            "class": "allies",
+            "coastFillKm": 25
+          },
+          "clip": {
+            "difference": [
+              {
+                "cshapes": [
+                  210,
+                  211,
+                  212,
+                  220,
+                  255,
+                  290,
+                  305,
+                  310,
+                  315,
+                  325,
+                  339,
+                  345,
+                  350,
+                  355,
+                  360,
+                  365,
+                  375,
+                  385,
+                  390
+                ]
+              },
+              {
+                "intersect": [
+                  {
+                    "difference": [
+                      {
+                        "cshapes": [
+                          365
+                        ]
+                      },
+                      {
+                        "svgFrame": "eastern-front-1942"
+                      }
+                    ]
+                  },
+                  {
+                    "bbox": [
+                      20,
+                      35,
+                      80,
+                      58
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "note": "Finnish-held Soviet Karelia",
+          "holder": "finland",
+          "src": [
+            "G5"
+          ],
+          "from": {
+            "svg": "europe-1942",
+            "class": "allies",
+            "coastFillKm": 25
+          },
+          "clip": {
+            "intersect": [
+              {
+                "cshapes": [
+                  365
+                ]
+              },
+              {
+                "bbox": [
+                  26,
+                  58,
+                  42,
+                  71
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "note": "Romanian-held Transnistria",
+          "holder": "romania",
+          "src": [
+            "G5"
+          ],
+          "from": {
+            "svg": "europe-1942",
+            "class": "allies",
+            "coastFillKm": 25
+          },
+          "clip": {
+            "intersect": [
+              {
+                "cshapes": [
+                  365
+                ]
+              },
+              {
+                "bbox": [
+                  26,
+                  44,
+                  33,
+                  49
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "note": "Vichy France: unoccupied zone and Corsica",
+          "holder": "vichy-france",
+          "src": [
+            "G5"
+          ],
+          "from": {
+            "svg": "europe-1942",
+            "class": "nominal",
+            "coastFillKm": 25
+          },
+          "clip": {
+            "cshapes": [
+              220
+            ]
+          }
+        },
+        {
+          "note": "Kingdom of Italy incl. 1941 annexations (OHM r2747829)",
+          "holder": "italy",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2747829
+          }
+        },
+        {
+          "note": "Albania under Italy (OHM r2695459)",
+          "holder": "italy",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2695459
+          }
+        },
+        {
+          "note": "Montenegro under Italy (OHM r2695479)",
+          "holder": "italy",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2695479
+          }
+        },
+        {
+          "note": "Kingdom of Hungary incl. 1938-41 gains (OHM r2692359)",
+          "holder": "hungary",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2692359
+          }
+        },
+        {
+          "note": "Kingdom of Romania incl. Transnistria (OHM r2693255)",
+          "holder": "romania",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2693255
+          }
+        },
+        {
+          "note": "Bulgaria incl. occupied Macedonia and Thrace (OHM r2695478)",
+          "holder": "bulgaria",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2695478
+          }
+        },
+        {
+          "note": "Finland, 1940 borders (OHM r2692833)",
+          "holder": "finland",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2692833
+          }
+        },
+        {
+          "note": "Slovak Republic (OHM r2747847)",
+          "holder": "germany",
+          "label": {
+            "en": "Slovak Republic (German client state)",
+            "zh": "斯洛伐克共和国（德国附庸国）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2747847
+          }
+        },
+        {
+          "note": "Independent State of Croatia (OHM r2692713)",
+          "holder": "germany",
+          "label": {
+            "en": "Independent State of Croatia (Axis client state)",
+            "zh": "克罗地亚独立国（轴心国附庸国）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2692713
+          }
+        },
+        {
+          "note": "Eastern Front: Soviet-held area after the 1941-42 winter offensive (front of 1942-05-05, Commons SVG)",
+          "holder": "ussr",
+          "src": [
+            "G7"
+          ],
+          "from": {
+            "svg": "eastern-front-1942",
+            "class": "soviet",
+            "coastFillKm": 25
+          },
+          "clip": {
+            "cshapes": [
+              365
+            ]
+          }
+        }
+      ],
+      "checks": [
+        {
+          "name": "asia-pacific",
+          "center": [
+            118,
+            12
+          ],
+          "zoom": 2.25,
+          "source": "svg-asia-1937-1942"
+        },
+        {
+          "name": "europe",
+          "center": [
+            18,
+            52
+          ],
+          "zoom": 2.45,
+          "source": "svg-europe-1942"
+        },
+        {
+          "name": "eastern-front",
+          "center": [
+            34,
+            51.5
+          ],
+          "zoom": 3.75,
+          "source": "eastern-front-1942"
+        }
+      ]
+    }
+  ]
+}
