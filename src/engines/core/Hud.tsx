@@ -47,6 +47,7 @@ export function HudButton({
   onClick(): void;
   'data-preset'?: string;
   'data-mode'?: string;
+  'data-phone'?: 'off';
 }) {
   return (
     <button
@@ -151,6 +152,7 @@ export function TopBar({ topic, chapters, chapter, chapterNumber, locale, path, 
                     data-mode={m.id}
                     on={m.on}
                     tone={m.tone}
+                    data-phone={m.phone === false ? 'off' : undefined}
                     disabled={m.disabled && !m.on}
                     title={tx(m.label, locale) + (m.key ? ` (${upper(m.key)})` : '')}
                     onClick={() => actions.setMode(m.id, !m.on)}

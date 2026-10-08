@@ -30,10 +30,6 @@ function yearStartMs(year: number): number {
   return d.getTime();
 }
 
-export function scaleOf(t: TimePoint): TimeScale {
-  return isGeoTime(t) ? 'ma' : 'date';
-}
-
 /** Precision of an ISO date string (`null` for geological time). */
 export function precisionOf(t: TimePoint): DatePrecision | null {
   if (isGeoTime(t)) return null;

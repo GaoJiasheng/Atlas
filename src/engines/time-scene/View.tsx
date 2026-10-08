@@ -342,7 +342,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
         items: [
           { id: 'flow', key: 'f', label: t('time.mode.flow'), on: movementsOn, tone: 'hot', status: 'FLOW' },
           { id: 'borders', key: 'b', label: t('time.mode.borders'), on: bordersOn },
-          { id: 'graticule', key: 'g', label: t('time.mode.graticule'), on: graticuleOn },
+          { id: 'graticule', key: 'g', label: t('time.mode.graticule'), on: graticuleOn, phone: false },
           {
             id: 'reference',
             key: 'r',
@@ -352,7 +352,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
             tone: 'cold',
             status: 'REFERENCE',
           },
-          { id: 'presentation', key: 'p', label: t('time.mode.presentation'), on: presenting, tone: 'signal', status: 'PRESENTATION' },
+          { id: 'presentation', key: 'p', label: t('time.mode.presentation'), on: presenting, tone: 'signal', status: 'PRESENTATION', phone: false },
         ],
         set: (id, on, { instant }) => {
           if (id === 'flow') toggleLayer('movements', on);

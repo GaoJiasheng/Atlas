@@ -35,6 +35,13 @@ export function anchorOffset(part: Part): Vec3 {
   return [(b.min[0] + b.max[0]) / 2 - at[0], (b.min[1] + b.max[1]) / 2 - at[1], (b.min[2] + b.max[2]) / 2 - at[2]];
 }
 
+/** Leader-label clearance of a part: about the radius of its bounds (scene units). */
+export function anchorRadius(part: Part): number {
+  const b = part.primitive ? partBounds(part) : null;
+  if (!b) return 0;
+  return Math.hypot(b.max[0] - b.min[0], b.max[1] - b.min[1], b.max[2] - b.min[2]) * 0.375;
+}
+
 export interface StageBounds {
   /** Lowest point of the assembled model, and of the fully exploded one. */
   floor: [number, number];

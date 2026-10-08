@@ -37,7 +37,7 @@
   place-content: center;
   margin: 0;
   color: var(--ink-2);
-  font: 500 calc(9.6 * var(--u)) / 1.4 var(--font-hud);
+  font: 500 calc(11.3 * var(--u)) / 1.4 var(--font-hud);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -65,13 +65,13 @@
   animation: ts-stop-in var(--dur-med) var(--ease-out);
 }
 .ts-stop__eyebrow {
-  font: 500 calc(8.4 * var(--u)) / 1.3 var(--font-mono);
+  font: 500 calc(10.7 * var(--u)) / 1.3 var(--font-mono);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ink-2);
 }
 .ts-stop__title {
-  font: 500 calc(13 * var(--u)) / 1.2 var(--font-hud);
+  font: 500 calc(13.5 * var(--u)) / 1.2 var(--font-hud);
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -110,7 +110,7 @@
   max-width: 60%;
 }
 .ts-present__title small {
-  font: 500 calc(8.4 * var(--u)) / 1 var(--font-mono);
+  font: 500 calc(10.7 * var(--u)) / 1 var(--font-mono);
   letter-spacing: 0.14em;
   color: var(--signal);
 }
@@ -120,7 +120,7 @@
   text-transform: uppercase;
 }
 .ts-present__title span + span {
-  font: 400 calc(11 * var(--u)) / 1.2 var(--font-hud);
+  font: 400 calc(12 * var(--u)) / 1.2 var(--font-hud);
   letter-spacing: 0.18em;
   color: var(--ink-2);
 }
@@ -139,7 +139,7 @@
   animation: ts-stop-in var(--dur-slow) var(--ease-out);
 }
 .ts-present__caption i {
-  font: 500 calc(9 * var(--u)) / 1 var(--font-mono);
+  font: 500 calc(11 * var(--u)) / 1 var(--font-mono);
   font-style: normal;
   letter-spacing: 0.08em;
   color: var(--ink-3);
@@ -150,7 +150,7 @@
   text-transform: uppercase;
 }
 .ts-present__caption b {
-  font: 500 calc(10 * var(--u)) / 1 var(--font-mono);
+  font: 500 calc(11.5 * var(--u)) / 1 var(--font-mono);
   letter-spacing: 0.06em;
   color: var(--signal);
 }
@@ -236,13 +236,13 @@
     0 0 6px var(--bg);
 }
 .ts-label--entity span {
-  font-size: calc(10 * var(--u));
+  font-size: calc(11.5 * var(--u));
   font-weight: 500;
   letter-spacing: 0.16em;
   color: color-mix(in srgb, var(--ts-color, var(--ink)) 55%, var(--ink));
 }
 .ts-label--place span {
-  font-size: calc(7.8 * var(--u));
+  font-size: calc(10.4 * var(--u));
   font-weight: 500;
   letter-spacing: 0.14em;
   color: var(--ink-3);
@@ -330,7 +330,7 @@ button.ts-co {
 }
 .ts-co__en {
   display: block;
-  font: 600 calc(9.4 * var(--u)) / 1.25 var(--font-hud);
+  font: 600 calc(11.2 * var(--u)) / 1.25 var(--font-hud);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -348,14 +348,14 @@ button.ts-co {
 }
 .ts-co__zh {
   display: block;
-  font: 400 calc(9 * var(--u)) / 1.3 var(--font-hud);
+  font: 400 calc(11 * var(--u)) / 1.3 var(--font-hud);
   letter-spacing: 0.06em;
   color: var(--ink-2);
 }
 .ts-co__note {
   display: block;
   overflow: hidden;
-  font: 400 calc(8 * var(--u)) / 1.35 var(--font-hud);
+  font: 400 calc(10.5 * var(--u)) / 1.35 var(--font-hud);
   letter-spacing: 0.03em;
   color: var(--ink-3);
   text-overflow: ellipsis;
@@ -363,7 +363,7 @@ button.ts-co {
 }
 .ts-co__note i {
   margin-right: calc(6 * var(--u));
-  font: 500 calc(7.6 * var(--u)) / 1 var(--font-mono);
+  font: 500 calc(10.3 * var(--u)) / 1 var(--font-mono);
   font-style: normal;
   letter-spacing: 0.04em;
   color: var(--ink-2);
@@ -426,7 +426,7 @@ button.ts-co:focus-visible {
   align-items: center;
   gap: calc(6 * var(--u));
   pointer-events: none;
-  font: 500 calc(7.8 * var(--u)) / 1 var(--font-mono);
+  font: 500 calc(10.4 * var(--u)) / 1 var(--font-mono);
   letter-spacing: 0.06em;
   color: var(--ink-2);
 }
@@ -640,19 +640,19 @@ button.ts-co:focus-visible {
   fill: var(--ink);
 }
 .ts-svg .ts-svg__name {
-  font: 600 calc(7.4 * var(--u)) / 1 var(--font-hud);
+  font: 600 calc(10.2 * var(--u)) / 1 var(--font-hud);
   letter-spacing: 0.1em;
 }
 .ts-svg [data-hl] .ts-svg__name {
   fill: var(--signal);
 }
 .ts-svg .ts-svg__sub {
-  font: 400 calc(7.4 * var(--u)) / 1 var(--font-hud);
+  font: 400 calc(10.2 * var(--u)) / 1 var(--font-hud);
   letter-spacing: 0.06em;
   fill: var(--ink-3);
 }
 .ts-svg .ts-svg__mono {
-  font: 500 calc(6.8 * var(--u)) / 1 var(--font-mono);
+  font: 500 calc(10 * var(--u)) / 1 var(--font-mono);
   letter-spacing: 0.02em;
   fill: var(--ink-2);
 }
@@ -695,7 +695,7 @@ button.ts-co:focus-visible {
   stroke-width: 0.8;
 }
 .ts-svg .ts-svg__node text {
-  font: 500 calc(6.4 * var(--u)) / 1 var(--font-mono);
+  font: 500 calc(10 * var(--u)) / 1 var(--font-mono);
   fill: var(--ink);
 }
 .ts-svg__node[data-current] circle {
@@ -732,7 +732,7 @@ button.ts-co:focus-visible {
   margin: 0;
 }
 .ts-p02__kick {
-  font: 500 calc(7.8 * var(--u)) / 1.3 var(--font-mono);
+  font: 500 calc(10.4 * var(--u)) / 1.3 var(--font-mono);
   letter-spacing: 0.1em;
   color: var(--ink-3);
 }
@@ -751,7 +751,7 @@ button.ts-co:focus-visible {
   color: var(--ink);
 }
 .ts-p02__summary {
-  font-size: calc(11.5 * var(--u));
+  font-size: calc(12.5 * var(--u));
   color: var(--ink-2);
 }
 .ts-p02__a {
@@ -762,13 +762,13 @@ button.ts-co:focus-visible {
   line-clamp: 2;
   padding-top: calc(6 * var(--u));
   border-top: 1px solid var(--hair);
-  font: 400 calc(9.6 * var(--u)) / 1.35 var(--font-hud);
+  font: 400 calc(11.3 * var(--u)) / 1.35 var(--font-hud);
   letter-spacing: 0.02em;
   color: var(--ink-2);
 }
 .ts-p02__a b {
   margin-right: calc(6 * var(--u));
-  font: 500 calc(7.6 * var(--u)) / 1 var(--font-mono);
+  font: 500 calc(10.3 * var(--u)) / 1 var(--font-mono);
   letter-spacing: 0.1em;
   color: var(--ink-3);
 }
@@ -796,14 +796,14 @@ button.ts-co:focus-visible {
   border-bottom: 0;
 }
 .ts-p03 dt {
-  font: 500 calc(7.6 * var(--u)) / 1.2 var(--font-hud);
+  font: 500 calc(10.3 * var(--u)) / 1.2 var(--font-hud);
   letter-spacing: 0.1em;
   color: var(--ink-3);
   white-space: nowrap;
 }
 .ts-p03 dt small {
   margin-left: calc(5 * var(--u));
-  font-size: calc(7.4 * var(--u));
+  font-size: calc(10.2 * var(--u));
   letter-spacing: 0.04em;
 }
 .ts-p03 dd {
@@ -811,7 +811,7 @@ button.ts-co:focus-visible {
   align-items: center;
   gap: calc(6 * var(--u));
   margin: 0;
-  font: 500 calc(9.2 * var(--u)) / 1 var(--font-mono);
+  font: 500 calc(11.1 * var(--u)) / 1 var(--font-mono);
   letter-spacing: 0.02em;
   color: var(--ink);
   white-space: nowrap;

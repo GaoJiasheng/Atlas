@@ -27,7 +27,7 @@ import { CameraRig } from './CameraRig';
 import { Lighting } from './Lighting';
 import { GroundShadow } from './GroundShadow';
 import { LabelProbe, ResolutionGovernor, ShadowUpdater, StatsProbe } from './probes';
-import { anchorOffset, primitiveShape, stageBounds } from './shapes';
+import { anchorOffset, anchorRadius, primitiveShape, stageBounds } from './shapes';
 import { createTextureKit } from './textures';
 import type { PartStyle } from './materials';
 import type { StageLook } from './look';
@@ -168,6 +168,7 @@ export function SceneRoot({ store, ui, bridge, data, chapters, look }: SceneRoot
   }, [primitiveShapes, meshShapes]);
   const bounds = useMemo(() => stageBounds(data.parts, shapes), [data.parts, shapes]);
   const anchors = useMemo(() => new Map(data.parts.map((p) => [p.id, anchorOffset(p)] as [string, Vec3])), [data.parts]);
+  const radii = useMemo(() => new Map(data.parts.map((p) => [p.id, anchorRadius(p)] as [string, number])), [data.parts]);
   useEffect(() => {
     bridge.modelRadius = bounds.modelRadius;
   }, [bridge, bounds]);
@@ -260,6 +261,7 @@ export function SceneRoot({ store, ui, bridge, data, chapters, look }: SceneRoot
             clipping={clipping}
             castShadow={style.look.opacity === 1 && shape.radius >= bounds.modelRadius * SHADOW_CASTER_RATIO}
             anchorOffset={anchors.get(part.id) ?? [0, 0, 0]}
+            anchorRadius={radii.get(part.id) ?? 0}
             handles={handles}
             snapKey={snap.current.key}
             onSelect={onSelect}

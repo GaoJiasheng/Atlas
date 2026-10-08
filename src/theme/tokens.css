@@ -30,10 +30,10 @@
   --font-sans: var(--font-hud);
 
   /* HUD type scale in design px at --k = 1 (1920×1080); multiply by --u. */
-  --hud-font-label: 7.8;
-  --hud-font-btn: 9.2;
-  --hud-font-status: 8.4;
-  --hud-font-body: 9.6;
+  --hud-font-label: 10.4;
+  --hud-font-btn: 11.1;
+  --hud-font-status: 10.8;
+  --hud-font-body: 11.3;
   --hud-font-title: 30;
   --hud-track: 0.12em;
 

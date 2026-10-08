@@ -46,6 +46,8 @@ export interface SceneMode {
   /** Status-line text while on (e.g. `EXPLODED 70`); defaults to the label. */
   status?: string;
   tone?: ModeTone;
+  /** `false`: no button below 760 px wide (phone top bar); the key still works. Default shown. */
+  phone?: boolean;
 }
 
 /** docs/08 §6 source tags for spec values. */

@@ -30,7 +30,7 @@
 | X-RAY | cyan `#3A9AA0` | 透视态 |
 | 剖切面 | ochre `#B8973C` + 45° 剖面线 | CUTAWAY 切口 |
 
-**字体**：标题与 HUD `IBM Plex Sans Condensed`，数字 `IBM Plex Mono`，正文（信息面板里给孩子读的段落）保留衬线以示区分；中文回退 `PingFang SC / Noto Sans CJK SC`，不自托管中文字体。小号大写 + 宽字距（.08–.16em）只用于 HUD 标签，孩子读的正文不大写。
+**字体**：标题与 HUD `IBM Plex Sans Condensed`，数字 `IBM Plex Mono`，正文（信息面板里给孩子读的段落）保留衬线以示区分；中文回退 `PingFang SC / Noto Sans CJK SC`，不自托管中文字体。小号大写 + 宽字距（.08–.16em）只用于 HUD 标签，孩子读的正文不大写。**HUD 最小字号 10 px、状态行 / 键位提示 ≥ 10.5 px（1080p，k = 1）**，面向小学生的笔记本屏，不为"技术图版味"再往下压（token 见 docs/06「HUD 缩放与响应式」）。
 
 **禁止**：三方库默认灰塑料材质、随机堆细节、大面积黑底、霓虹、lens flare、游戏式六边形 HUD、厚重卡片阴影、圆角大于 2px 的 HUD 元素（孩子读的面板允许 6px）。
 
@@ -118,7 +118,7 @@
   state(): SceneSnapshot & {hud, paused}, stats(): {calls?, triangles?, fps?, buffer, pixelRatio, gpu?} }
 ```
 
-`pnpm shoot <topic> [--size 3840x2160] [--keys] [--layout] [--theme cinema] [--locale zh]`：每章 × 每模式截图到 `shots/<topic>/`，收集 console error，`--keys` 核对键与按钮同步，`--layout` 在 3840 / 2560 / 1920 / 1280 / 900 / 390 宽度检查 `data-hud-panel` 重叠与溢出。退出码非 0 即失败。e2e 冒烟继续用 Playwright。
+`pnpm shoot <topic> [--locale en|zh|all] [--theme paper|cinema|all] [--size 3840x2160] [--suffix _4k] [--shots file.json] [--keys] [--layout] [--perf] [--json out.json] [names…]`：每章 + 每模式 + 额外预设 + `hero-clean` 截图到 `shots/<topic>/<locale>-<theme>/`，收集 console error / 外部请求，`--keys` 核对键与按钮同步，`--layout` 在 3840 / 2560 / 1920 / 1280 / 900 / 390 宽度检查 `data-hud-panel` 重叠与溢出（与 e2e 共用 `tests-e2e/hud-layout.ts`），`--perf` 打印渲染计数。退出码非 0 即失败。用法细节见 docs/06 「QA：pnpm shoot」；e2e 冒烟继续用 Playwright。
 
 ## 8. 打磨轮次（Atlas 版）
 
@@ -135,3 +135,14 @@
 ## 9. 给施工方的一句话
 
 做任何视觉或引擎改动前，先读本文件和 `.claude/skills/industrial-3d-showcase/references/master-spec.md`，再读 `docs/06-dev-guide.md`。做完用 `pnpm shoot` 截图自证，不要只交报告。
+
+## 10. 实现状态（P4 收口）
+
+| 轮 | 提交 | 做了什么 | 没做 / 遗留 |
+|---|---|---|---|
+| 准备 | `e6c8fcb` `f882209` | 自托管 IBM Plex Sans Condensed / Mono；安装 skill、本适配文档、CLAUDE.md | — |
+| P1 设计语言 | `6ef934a` | 技术图版 token（paper / dark plate）、自托管字体、SceneHost HUD 布局契约、`controls` 注册表、`window.__atlas`、H / 数字键 / 状态行、六尺寸 HUD e2e | — |
+| P2 SpaceScene | `e8c3a44` | 材质族与程序化贴图、产品灯光、剖面线剖切面、引线标注、ORBIT / REFERENCE、程序化零件（bevelBox / tube / flange / fins / vessel、实例化）、零件链路卡与三面板、perf 读数 | 无 FXAA（靠 pixelRatio 与分辨率调节）；无 THERMAL 模式；无 SpaceScene PRESENTATION；X-RAY 没有"外壳 / 内核"标记（所有零件同为 .15 透明，不能只透外壳）；dark plate 下 `powder` 粉末涂层读起来偏中灰 |
+| P3 TimeScene | `19797d1` | 纸面底图、斜线填充、经纬网、工程流线、引线标注、标尺时间轴、参与 / 面积条带卡、三面板、REFERENCE、PRESENTATION、跨 180° 经线环修复 | REFERENCE 用叠加（虚线边界）而非分屏对照；地图主题整页 JS 约 391 KB gz，超过 docs/02 的 300 KB 预算（MapLibre 本体 ~270 KB），待产品层决定 |
+| P4 QA 与审计 | 本轮（未提交） | `pnpm shoot`（`scripts/shoot.ts`）；HUD 字号刻度上调（最小 10 px / 状态行 ≥ 10.5 px）；手机顶栏 `SceneMode.phone`；SpaceScene 引线标注避让模型、窄带只标选中；删未用 i18n 键与死导出；docs/06 对齐代码；截图收拢到 `docs/screenshots/<topic>/` | 未跑 Lighthouse（不新增依赖）；`simulation` 仍是后期占位引擎；软件 GL 下 fps 数字不代表真机，4K60 未在真 GPU 上验证 |
+| P5 内容期 | — | — | 未开始（等 Gavin 定稿内容） |

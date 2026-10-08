@@ -19,6 +19,8 @@ export interface ScreenAnchor {
   shown: boolean;
   /** Distance camera → anchor, scene units. */
   depth: number;
+  /** Rough on-screen radius of the part, stage pixels (labels keep clear of it). */
+  r: number;
 }
 
 export interface StageStats {

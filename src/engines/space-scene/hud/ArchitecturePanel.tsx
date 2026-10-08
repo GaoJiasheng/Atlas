@@ -16,7 +16,7 @@ import { clip } from './common';
 const VW = 620;
 const VH = 140;
 /** Drawing area; the zone legend and scale bar sit in the right-hand column. */
-const PAD = { l: 14, r: 170, t: 16, b: 30 };
+const PAD = { l: 14, r: 170, t: 18, b: 40 };
 const LEGEND_X = VW - 150;
 
 const f2 = (n: number) => Number(n.toFixed(2));
@@ -49,7 +49,7 @@ export function ArchitecturePanel({ file }: { file: PartsFile }) {
 
   return (
     <svg className="space-elev" viewBox={`0 0 ${VW} ${VH}`} preserveAspectRatio="xMidYMid meet" role="img" aria-label={t('space.panel.architecture')}>
-      <text x={PAD.l} y={9} className="space-elev__tag">
+      <text x={PAD.l} y={11} className="space-elev__tag">
         {plane.toUpperCase()} · {String(file.parts.length).padStart(2, '0')} {t('space.spec.parts').toLocaleUpperCase()}
       </text>
       <line x1={PAD.l} x2={VW - PAD.r} y1={groundY} y2={groundY} className="space-elev__ground" />
@@ -69,11 +69,11 @@ export function ArchitecturePanel({ file }: { file: PartsFile }) {
         );
       })}
       {zones.map((z, i) => {
-        const yy = VH - PAD.b + 8 + i * 7;
+        const yy = VH - PAD.b + 8 + i * 11;
         return (
           <g key={z.id} className="space-elev__zone">
             <path d={`M${x(z.u0)} ${yy - 3}V${yy}H${x(z.u1)}V${yy - 3}`} style={{ stroke: resolveColorRef(z.color) }} />
-            <text x={x(z.u1) + 3} y={yy + 2.4}>
+            <text x={x(z.u1) + 3} y={yy + 3.6}>
               {String(z.n).padStart(2, '0')}
             </text>
           </g>
@@ -81,17 +81,17 @@ export function ArchitecturePanel({ file }: { file: PartsFile }) {
       })}
       <g className="space-elev__legend">
         {zones.map((z, i) => (
-          <g key={z.id} transform={`translate(${LEGEND_X} ${PAD.t + 6 + i * 15})`}>
-            <rect x={0} y={-5} width={12} height={6} style={{ fill: resolveColorRef(z.color) }} />
+          <g key={z.id} transform={`translate(${LEGEND_X} ${PAD.t + 8 + i * 17})`}>
+            <rect x={0} y={-7} width={12} height={7} style={{ fill: resolveColorRef(z.color) }} />
             <text x={18} y={0}>
-              {String(z.n).padStart(2, '0')} {clip(z.name.toUpperCase(), 22)}
+              {String(z.n).padStart(2, '0')} {clip(z.name.toUpperCase(), 17)}
             </text>
           </g>
         ))}
       </g>
       <g className="space-elev__scale">
         <path d={`M${LEGEND_X} ${VH - 8}h${f2(step * k)}M${LEGEND_X} ${VH - 11}v6M${f2(LEGEND_X + step * k)} ${VH - 11}v6`} />
-        <text x={LEGEND_X} y={VH - 14}>
+        <text x={LEGEND_X} y={VH - 16}>
           {t('space.scale').toLocaleUpperCase()} {step} U
         </text>
       </g>

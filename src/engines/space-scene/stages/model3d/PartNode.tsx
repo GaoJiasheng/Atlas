@@ -37,6 +37,8 @@ export interface PartHandle {
   object: Object3D;
   /** Label anchor relative to the part centre (bounds centre). */
   offset: Vec3;
+  /** Rough radius of the part's bounds (scene units): labels stay clear of it. */
+  radius: number;
   meshes: Object3D[];
   /** Current fade (0 hidden .. 1 solid). */
   fade: number;
@@ -53,6 +55,7 @@ export interface PartNodeProps {
   clipping: Plane[] | null;
   castShadow: boolean;
   anchorOffset: Vec3;
+  anchorRadius: number;
   handles: Map<string, PartHandle>;
   /** Changes when the stage must jump without easing (instant transitions). */
   snapKey: number;
@@ -137,8 +140,8 @@ export function PartNode(props: PartNodeProps) {
 
   // Handle for leader labels / occlusion.
   const handle = useMemo<PartHandle>(
-    () => ({ object: null as unknown as Object3D, offset: props.anchorOffset, meshes: [], fade: 0, visible: false }),
-    [props.anchorOffset],
+    () => ({ object: null as unknown as Object3D, offset: props.anchorOffset, radius: props.anchorRadius, meshes: [], fade: 0, visible: false }),
+    [props.anchorOffset, props.anchorRadius],
   );
   const { handles } = props;
   useLayoutEffect(() => {

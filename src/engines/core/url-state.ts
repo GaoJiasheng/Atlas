@@ -19,8 +19,6 @@ import { isTheme } from '../../theme/theme';
 
 export type UrlState = Partial<SceneState & UrlEngineFields>;
 
-export const CORE_URL_KEYS = ['ch', 'layers', 'cam', 'theme'] as const;
-export const ENGINE_URL_KEYS = ['t', 'hl', 'part', 'view', 'explode', 'run', 'cut'] as const;
 /** Order in which keys are written (most meaningful first). */
 export const URL_KEY_ORDER = ['ch', 't', 'hl', 'part', 'view', 'explode', 'run', 'cut', 'layers', 'cam', 'theme'] as const;
 export type UrlKey = (typeof URL_KEY_ORDER)[number];
