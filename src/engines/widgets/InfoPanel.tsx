@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import type { Chapter, Locale } from '../core/types';
-import { t, tx } from '../../i18n';
+import { t, tx, type BilingualText } from '../../i18n';
 import { Icon } from './icons';
 
 export interface InfoPanelProps {
@@ -9,6 +9,8 @@ export interface InfoPanelProps {
   index: number;
   total: number;
   locale: Locale;
+  /** One sentence under the title (the chapter's `summary`), muted serif. */
+  summary?: BilingualText | null;
   /** Rendered MDX body of the chapter (already in the active locale). */
   body?: ReactNode;
   hasPrev: boolean;
@@ -28,7 +30,8 @@ export interface InfoPanelProps {
 const pad2 = (n: number) => String(n).padStart(2, '0');
 
 /**
- * Reading panel: chapter header (HUD grammar), child-facing body (serif),
+ * Reading panel: chapter header (HUD grammar: number, title, the summary
+ * sentence in muted serif), child-facing body (serif),
  * quiz and selected-object details, chapter buttons. A docked column on wide
  * layouts, a bottom sheet below 1024px.
  */
@@ -37,6 +40,7 @@ export function InfoPanel({
   index,
   total,
   locale,
+  summary,
   body,
   hasPrev,
   hasNext,
@@ -62,6 +66,7 @@ export function InfoPanel({
           <h2 id="atlas-panel-title" className="atlas-panel__title" aria-live="polite">
             {tx(chapter.title, locale)}
           </h2>
+          {summary && <p className="atlas-panel__summary">{tx(summary, locale)}</p>}
           {onToggleExpanded && (
             <button
               type="button"

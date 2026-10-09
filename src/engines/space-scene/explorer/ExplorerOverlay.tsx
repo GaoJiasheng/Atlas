@@ -1,13 +1,24 @@
-/** Stage overlay: group (layer) toggles and a colour key of the groups. */
-import { useSceneContext } from '../../core/context';
-import { SceneLayerToggles, type LayerItem } from '../../widgets/LayerToggles';
-import { Legend, type LegendItem } from '../../widgets/Legend';
+/**
+ * Stage overlay: the control panel (docs/06) — group (layer) toggles, the
+ * mode switches (X-RAY, EXPLODED, CUTAWAY, FLOW, REFERENCE, LABELS) and
+ * Hide HUD as tools, and a colour key of the groups and flows.
+ */
+import { ControlPanel, type ControlRow } from '../../widgets/ControlPanel';
+import type { LegendItem } from '../../widgets/Legend';
 import type { PartsFile } from '../schema';
 
+const TOOLS: ControlRow[] = [
+  { kind: 'mode', id: 'xray' },
+  { kind: 'mode', id: 'exploded' },
+  { kind: 'mode', id: 'cutaway' },
+  { kind: 'mode', id: 'flow' },
+  { kind: 'mode', id: 'reference' },
+  { kind: 'mode', id: 'labels' },
+  { kind: 'hud' },
+];
+
 export function ExplorerOverlay({ file }: { file: PartsFile }) {
-  const { locale } = useSceneContext();
-  if (file.groups.length === 0) return null;
-  const layers: LayerItem[] = file.groups.map((g) => ({ id: g.id, label: g.name, color: g.color }));
+  const layers: ControlRow[] = file.groups.map((g) => ({ kind: 'layer', id: g.id, label: g.name, color: g.color }));
   const legend: LegendItem[] = [
     ...file.groups.map((g) => ({ id: `group-${g.id}`, label: g.name, color: g.color, kind: 'fill' as const })),
     ...file.flows.map((f) => {
@@ -17,8 +28,7 @@ export function ExplorerOverlay({ file }: { file: PartsFile }) {
   ];
   return (
     <div className="atlas-overlay-card space-overlay">
-      <SceneLayerToggles items={layers} />
-      <Legend items={legend} locale={locale} />
+      <ControlPanel layers={layers} tools={TOOLS} legend={legend} />
     </div>
   );
 }

@@ -31,7 +31,7 @@ interface SceneState {         // 可序列化，和 URL 双向绑定
 | ChapterRail | 章节节点列表（左侧或底部），当前章高亮，支持键盘 ←→ |
 | InfoPanel | 章节正文、选中对象详情，双语 |
 | Legend | 图例，随 layers 变 |
-| LayerToggles | 图层开关 |
+| ControlPanel | 控制面板：图层开关（LAYERS）、模式与工具（TOOLS）、图例 |
 | QuizCard | 二选一/四选一，答错有解释，不记分 |
 | Counter | "一个图标 = N" 的数量可视化（兵力、伤亡、人口） |
 | LangToggle / ThemeToggle（Dropdown 菜单） | 全局开关 |
@@ -178,7 +178,7 @@ interface SceneState {         // 可序列化，和 URL 双向绑定
 ## 一期实现顺序
 
 1. core：Scene 契约、章节驱动、URL 状态、i18n、主题 token
-2. widgets：ChapterRail、InfoPanel、Legend、LayerToggles、Counter
+2. widgets：ChapterRail、InfoPanel、Legend、ControlPanel、Counter
 3. TimeScene + GeoStage + Timeline，用二战数据跑通
 4. SpaceScene + Model3DStage（primitive 搭积木）+ Explorer，用空调跑通
 5. QuizCard、PWA

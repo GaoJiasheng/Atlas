@@ -202,7 +202,8 @@ function dataLayers(tk: ThemeTokens): LayerSpecification[] {
       type: 'line',
       source,
       layout: { 'line-join': 'round' },
-      paint: { 'line-color': ['get', 'color'], 'line-width': ['case', ['get', 'hl'], 2, 1], 'line-opacity': 0 },
+      // Highlighted holder (chapter highlight, or a participation-card row): a brighter, heavier edge.
+      paint: { 'line-color': ['get', 'color'], 'line-width': ['case', ['get', 'hl'], 2.8, 1], 'line-opacity': 0 },
     },
   ];
   return [

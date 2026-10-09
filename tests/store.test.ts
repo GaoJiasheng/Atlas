@@ -113,4 +113,19 @@ describe('scene store', () => {
     expect(s.transition.instant).toBe(true);
     expect(store.getState().chapterTarget('a').t).toBe('1939-09-01');
   });
+
+  it('applyState sets several fields at once, keeps the rest and animates (reason state)', () => {
+    const store = makeStore();
+    store.getState().applyState({ chapter: 'three', t: '1941-12-08', highlight: ['y'] }, { instant: false });
+    const s = store.getState();
+    expect(s.chapter).toBe('three');
+    expect(s.t).toBe('1941-12-08');
+    expect(s.highlight).toEqual(['y']);
+    // Not reset to chapter three's target: layers stay where they were.
+    expect(s.layers).toEqual(['control']);
+    expect(s.transition).toMatchObject({ reason: 'state', instant: false });
+    store.getState().applyState({ chapter: 'nope' }, { instant: true });
+    expect(store.getState().chapter).toBe('three');
+    expect(store.getState().transition.instant).toBe(true);
+  });
 });

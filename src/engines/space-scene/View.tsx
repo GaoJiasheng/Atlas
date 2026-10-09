@@ -2,9 +2,9 @@
  * SpaceScene view: Model3DStage (react-three-fiber, lazy-loaded so the HUD
  * appears before three.js arrives) + the technical-plate HUD content in the
  * host's slots (docs/08 §2–§3): VIEW presets (chapter cameras, ORBIT,
- * REFERENCE), MODE switches (X / E / C / F / R), part-chain card, the three
- * bottom panels, perf readout, two-column leader labels, explode slider,
- * layer overlay and the part inspector.
+ * REFERENCE), mode switches (X / E / C / F / R, buttons in the overlay's
+ * control panel), part-chain card, the three bottom panels, perf readout,
+ * two-column leader labels, explode slider and the part inspector.
  */
 import { lazy, Suspense, useCallback, useMemo, useState } from 'react';
 import { useStore } from 'zustand';

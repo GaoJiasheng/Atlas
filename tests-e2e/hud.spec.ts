@@ -28,26 +28,24 @@ for (const topic of TOPICS) {
     });
   }
 
-  test(`${topic}: below 1280 px the VIEW row is a compact menu with every preset`, async ({ page }) => {
+  test(`${topic}: the VIEW row wraps (no menu, no MODE group); every mode button is in the control panel`, async ({ page }) => {
     await page.setViewportSize({ width: 900, height: 1200 });
     await openScene(page, `/en/topics/${topic}/`);
     const ids = await page.evaluate(() => window.__atlas!.presets());
     expect(ids.length).toBeGreaterThan(1);
-    await expect(page.locator('[data-preset]').first()).toBeHidden();
-    const trigger = page.locator('.hud-viewmenu__btn');
-    await expect(trigger).toBeVisible();
-    await trigger.click();
-    await expect(page.locator('[data-preset-item]')).toHaveCount(ids.length);
-    await page.keyboard.press('Escape');
-    await expect(page.locator('[data-preset-item]')).toHaveCount(0);
-    await trigger.click();
-    await page.locator(`[data-preset-item="${ids[1]}"]`).click();
+    for (const id of ids) await expect(page.locator(`[data-preset="${id}"]`)).toBeVisible();
+    await expect(page.locator('.hud-viewmenu')).toHaveCount(0);
+    await expect(page.locator('.atlas-topbar [data-mode]')).toHaveCount(0);
+    for (const mode of await page.evaluate(() => window.__atlas!.modes()))
+      await expect(page.locator(`[data-hud-panel="overlay"] [data-mode="${mode}"]`)).toHaveCount(1);
+    if (topic === 'sample-time') {
+      // Geographic presets only: chapters are reached through the rail, the rule and ← →.
+      const chapters = await page.evaluate(() => window.__atlas!.chapters());
+      expect(ids.slice(0, 2)).toEqual(['world', 'theatre']);
+      expect(ids.filter((id) => chapters.includes(id))).toEqual([]);
+    }
+    await page.locator(`[data-preset="${ids[1]}"]`).click();
     await expect.poll(async () => (await page.evaluate(() => window.__atlas!.state())).preset).toBe(ids[1]);
-    await expect(page.locator('[data-preset-item]')).toHaveCount(0);
-    // Wide again: the row is back, the menu is gone.
-    await page.setViewportSize({ width: 1440, height: 900 });
-    await expect(page.locator(`[data-preset="${ids[1]}"]`)).toBeVisible();
-    await expect(trigger).toBeHidden();
   });
 
   test(`${topic}: keys and HUD buttons share one state (window.__atlas)`, async ({ page }) => {
@@ -99,6 +97,110 @@ for (const topic of TOPICS) {
     expect(stats.buffer[0]).toBeGreaterThan(0);
   });
 }
+
+test('reading panel: collapses to a strip, survives a reload (sessionStorage, not the URL), a rail chapter opens it', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await openScene(page, '/en/topics/sample-time/');
+  const reader = page.locator('[data-hud-panel="reader"]');
+  const stage = page.locator('.atlas-stage');
+  const width = async (l: typeof reader) => (await l.boundingBox())?.width ?? 0;
+  const stageWide = await width(stage);
+  await page.locator('.atlas-reader__handle').click();
+  await expect.poll(() => width(reader)).toBeLessThanOrEqual(29);
+  await expect.poll(() => width(stage)).toBeGreaterThan(stageWide + 300);
+  await expect.poll(async () => (await page.evaluate(() => window.__atlas!.state())).reader).toBe(false);
+  expect(await page.evaluate(() => sessionStorage.getItem('atlas:reader'))).toBe('collapsed');
+  await page.waitForTimeout(400);
+  expect(page.url()).not.toContain('reader');
+
+  await page.reload();
+  await page.waitForFunction(() => window.__atlas !== undefined);
+  expect(await page.evaluate(() => window.__atlas!.ready)).toBe(true);
+  await expect.poll(() => width(reader)).toBeLessThanOrEqual(29);
+  await page.locator('.atlas-rail__item').nth(1).click();
+  await expect.poll(() => width(reader)).toBeGreaterThan(300);
+
+  await page.locator('.atlas-reader__handle').click();
+  await expect.poll(() => width(reader)).toBeLessThanOrEqual(29);
+  await page.locator('.atlas-reader__strip').click();
+  await expect.poll(() => width(reader)).toBeGreaterThan(300);
+  // The header carries the chapter summary sentence (sample: its question).
+  await expect(page.locator('.atlas-panel__summary')).toHaveText(/Sample question/);
+});
+
+test('timeline: chapter nodes at least 56 px apart, one bottom bar with the state cluster, lanes on demand', async ({ page }) => {
+  await page.setViewportSize({ width: 1920, height: 1080 });
+  await openScene(page, '/en/topics/sample-time/');
+  await expect(page.locator('[data-hud-panel^="panel0"]')).toHaveCount(0);
+  const alpha = Number(await page.locator('.ts-rule__rail').getAttribute('data-alpha'));
+  expect(alpha).toBeGreaterThanOrEqual(0);
+  expect(alpha).toBeLessThanOrEqual(1);
+  const xs = await page.locator('.ts-rule__nodes > li').evaluateAll((els) => els.map((e) => e.getBoundingClientRect().left + e.getBoundingClientRect().width / 2));
+  const sorted = [...xs].sort((a, b) => a - b);
+  for (let i = 1; i < sorted.length; i++) expect(sorted[i]! - sorted[i - 1]!).toBeGreaterThanOrEqual(55.5);
+  await expect(page.locator('.ts-state [data-stat]')).toHaveCount(4);
+  await expect(page.locator('.ts-lanes')).toHaveCount(0);
+  await page.locator('.ts-timeline__lanes').click();
+  await expect(page.locator('.ts-lanes svg')).toBeVisible();
+});
+
+test('participation card: expands in place, a row selects its entity (map + inspector), ESC folds it', async ({ page }) => {
+  await page.setViewportSize({ width: 1920, height: 1080 });
+  await openScene(page, '/en/topics/sample-time/');
+  const card = page.locator('[data-hud-panel="card"]');
+  await expect(card).toHaveAttribute('data-expanded', 'false');
+  await page.locator('.atlas-card__toggle').click();
+  await expect(card).toHaveAttribute('data-expanded', 'true');
+  const rows = page.locator('.ts-card__row[data-entity]');
+  await expect(rows).toHaveCount(3);
+  const id = await rows.first().getAttribute('data-entity');
+  await rows.first().click();
+  await expect.poll(async () => (await page.evaluate(() => window.__atlas!.state() as unknown as { highlight: string[] })).highlight).toEqual([id]);
+  await expect(page.locator('.ts-entity')).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(card).toHaveAttribute('data-expanded', 'false');
+  await expect(page.locator('.ts-entity')).toHaveCount(0);
+});
+
+test('PRESENTATION: user-paced beats (keys, dots, click), no auto-advance, ESC and P restore the scene', async ({ page }) => {
+  await page.setViewportSize({ width: 1920, height: 1080 });
+  await openScene(page, '/en/topics/sample-time/?ch=first-look');
+  const api = () => page.evaluate(() => window.__atlas!.state());
+  const beats = await page.evaluate(() => window.__atlas!.beats());
+  expect(beats.map((b) => b.chapter)).toEqual(['first-look', 'second-look', 'third-look']);
+  const before = await api();
+
+  await page.keyboard.press('p');
+  await expect.poll(async () => (await api()).modes.presentation).toBe(true);
+  expect((await api()).hud).toBe(false);
+  await expect(page.locator('.ts-present__caption')).toHaveText(/who holds which area/);
+  await expect(page.locator('.ts-present__dot')).toHaveCount(3);
+
+  await page.keyboard.press('ArrowRight');
+  await expect.poll(async () => (await api()).chapter).toBe('second-look');
+  await page.waitForTimeout(2500);
+  expect((await api()).chapter).toBe('second-look');
+  await page.locator('.ts-present__dot').nth(2).click();
+  await expect.poll(async () => (await api()).chapter).toBe('third-look');
+  await page.keyboard.press('ArrowLeft');
+  await expect.poll(async () => (await api()).chapter).toBe('second-look');
+  await page.mouse.click(960, 400);
+  await expect.poll(async () => (await api()).chapter).toBe('third-look');
+
+  await page.keyboard.press('Escape');
+  await expect.poll(async () => (await api()).modes.presentation).toBe(false);
+  expect((await api()).hud).toBe(true);
+  await expect.poll(async () => (await api()).chapter).toBe(before.chapter);
+  const timeOf = (s: object) => (s as { t?: unknown }).t;
+  expect(timeOf(await api())).toEqual(timeOf(before));
+
+  await page.evaluate(() => window.__atlas!.goToBeat(1, { instant: true }));
+  await expect.poll(async () => (await api()).modes.presentation).toBe(true);
+  await expect.poll(async () => (await api()).chapter).toBe('second-look');
+  await page.keyboard.press('p');
+  await expect.poll(async () => (await api()).modes.presentation).toBe(false);
+  await expect.poll(async () => (await api()).chapter).toBe('first-look');
+});
 
 test('LOOK and language are hairline dropdowns in the HUD: menu, Esc, outside click, theme, locale keeps the query', async ({ page }) => {
   await openScene(page, '/en/topics/sample-time/?ch=second-look&t=2000-03-01');

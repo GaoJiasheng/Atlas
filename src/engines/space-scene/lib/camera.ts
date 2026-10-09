@@ -1,7 +1,7 @@
 /**
  * Camera targets and tweening for the orbit stage (pure, unit-tested).
  */
-import type { OrbitCamera } from '../../core/types';
+import type { OrbitCamera, SceneTransition } from '../../core/types';
 import type { SectionPlane, SpaceView, ViewPresets } from '../schema';
 import type { Box3Like } from './parts';
 import { easeInOutCubic, lerp, lerp3, type Vec3 } from './math';
@@ -37,7 +37,8 @@ export function resolveTargetCamera(input: {
 
 /**
  * The camera a scene transition should end on (`null` = do not move):
- *  - `preset` (a VIEW button / digit key): always the stored camera, so a preset
+ *  - `preset` (a VIEW button / digit key) and `state` (several fields applied at
+ *    once): always the stored camera, so a preset
  *    lands on exactly its camera even when the current chapter has no camera of
  *    its own (its baseline is then inherited and may equal the preset)
  *  - `snap`: no new target (the rig only finishes a running move)
@@ -46,7 +47,7 @@ export function resolveTargetCamera(input: {
  *    preset, else the inherited one
  */
 export function transitionCamera(input: {
-  reason: 'init' | 'chapter' | 'url' | 'preset' | 'snap';
+  reason: SceneTransition['reason'];
   stored: OrbitCamera | null;
   baseline: OrbitCamera | null;
   own: OrbitCamera | null;
@@ -55,7 +56,7 @@ export function transitionCamera(input: {
 }): OrbitCamera | null {
   const { reason, stored, baseline, own } = input;
   if (reason === 'snap') return null;
-  if (reason === 'preset') return stored;
+  if (reason === 'preset' || reason === 'state') return stored;
   const same = (a: OrbitCamera | null, b: OrbitCamera | null) =>
     !a || !b
       ? a === b

@@ -37,6 +37,12 @@ export interface SceneActions<E extends EngineExtension> {
   applyCameraPreset(camera: CameraState, options?: { instant?: boolean }): void;
   /** Bump an instant transition (reason `snap`): stages jump to the current state without easing. */
   snap(): void;
+  /**
+   * Set several fields at once (chapter included, no chapter-target reset)
+   * and bump the transition (reason `state`) so the stage animates toward
+   * them: presentation beats, and restoring the scene afterwards.
+   */
+  applyState(partial: Partial<SceneSnapshot<E>>, options?: { instant?: boolean }): void;
   setTheme(theme: Theme | undefined): void;
   /** Apply a deep link: chapter target first, then overrides; instant. */
   hydrate(partial: Partial<SceneSnapshot<E>>): void;
@@ -175,6 +181,16 @@ export function createSceneStore<E extends EngineExtension>(options: CreateScene
     snap() {
       const prev = get().transition;
       set({ transition: { id: prev.id + 1, reason: 'snap', instant: true } } as Partial<SceneStoreState<E>>);
+    },
+
+    applyState(partial, opts) {
+      const prev = get().transition;
+      const next: Record<string, unknown> = {};
+      for (const [key, value] of Object.entries(partial)) if (key !== 'chapter' || (value !== null && targets.has(value as string))) next[key] = value;
+      set({
+        ...next,
+        transition: { id: prev.id + 1, reason: 'state', instant: opts?.instant ?? false },
+      } as Partial<SceneStoreState<E>>);
     },
 
     setTheme(theme) {

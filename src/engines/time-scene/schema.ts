@@ -444,6 +444,28 @@ export const TIME_LAYERS = [
 ] as const;
 export type TimeLayer = (typeof TIME_LAYERS)[number];
 
+/**
+ * One presentation beat (PRESENTATION, `P`): where the camera goes, the time,
+ * layers and highlight for that step (each optional, on top of the chapter's
+ * own target) and the caption shown once the flight is done. `audio` is a
+ * site path (under `public/`) played on entering the beat; the presentation
+ * still waits for the reader to advance.
+ */
+export const timeBeat = z
+  .object({
+    t: timePoint.optional(),
+    camera: geoCamera.optional(),
+    layers: z.array(z.enum(TIME_LAYERS)).optional(),
+    highlight: z.array(kebabId).optional(),
+    caption: bilingual,
+    audio: z
+      .string()
+      .regex(/^\/[^\s?#]+\.(mp3|m4a|aac|ogg|opus|wav)$/i, 'audio: a site path such as /audio/ww2/ch07-1.mp3')
+      .optional(),
+  })
+  .strict();
+export type TimeBeat = z.output<typeof timeBeat>;
+
 /** `state:` in a TimeScene chapter's frontmatter. */
 export const timeChapterState = z
   .object({
@@ -454,12 +476,14 @@ export const timeChapterState = z
     /** Event / movement / entity ids to emphasise. */
     highlight: z.array(kebabId).optional(),
     theme: theme.optional(),
-    /** The child's question for this chapter (panel 02 QUESTION). */
+    /** The child's question for this chapter (reading panel header when there is no `summary`). */
     question: bilingual.optional(),
-    /** One-line overview for panel 02 when there is no question (else the body's first paragraph). */
+    /** One-sentence overview under the chapter title in the reading panel (and the default presentation caption). */
     summary: bilingual.optional(),
     /** One-sentence answer shown under the question. */
     answer: bilingual.optional(),
+    /** PRESENTATION beats for this chapter; default = one beat (the chapter's state, `summary` as caption). */
+    beats: z.array(timeBeat).min(1).optional(),
   })
   .strict()
   .refine((s) => !s.answer || s.question, { message: '`answer` needs a `question`', path: ['answer'] });
@@ -484,5 +508,5 @@ export function timeScenePresetIds(data: TimeSceneGeoData): string[] {
 }
 
 export function timeChapterRefs(state: TimeChapterState): string[] {
-  return state.highlight ?? [];
+  return [...(state.highlight ?? []), ...(state.beats ?? []).flatMap((b) => b.highlight ?? [])];
 }

@@ -1,6 +1,7 @@
 /**
  * Scene controls: what an engine registers so the host can draw the HUD
- * (VIEW / MODE buttons, status line, spec table, card and bottom panels),
+ * (VIEW buttons, status line, spec table, card and bottom panels; engines
+ * place the mode buttons themselves, in their control panel),
  * bind the keyboard and drive the `window.__atlas` test API (docs/08 §2, §3, §7).
  *
  * One HUD store per scene island holds the registration plus host-owned UI
@@ -34,7 +35,7 @@ export interface ScenePreset {
 /** Colour of a mode button's `.on` state (docs/08 §1 functional colours). */
 export type ModeTone = 'ink' | 'xray' | 'hot' | 'cold' | 'cut' | 'signal';
 
-/** A mode switch (MODE button, letter key). */
+/** A mode switch (letter key; its button sits in the engine's control panel, `widgets/ControlPanel.tsx`). */
 export interface SceneMode {
   id: string;
   /** Single lowercase letter. Digits, space, `h` are reserved by the host. */
@@ -46,7 +47,7 @@ export interface SceneMode {
   /** Status-line text while on (e.g. `EXPLODED 70`); defaults to the label. */
   status?: string;
   tone?: ModeTone;
-  /** `false`: no button below 760 px wide (phone top bar); the key still works. Default shown. */
+  /** `false`: no button below 760 px wide (phones); the key still works. Default shown. */
   phone?: boolean;
 }
 
@@ -86,6 +87,15 @@ export interface InstantOption {
   instant: boolean;
 }
 
+/** One presentation beat as the test API lists it (`__atlas.beats()`). */
+export interface BeatInfo {
+  /** Chapter the beat belongs to. */
+  chapter: string;
+  /** Position inside its chapter (0-based). */
+  index: number;
+  caption: BilingualText;
+}
+
 /** What an engine registers. Every field is optional. */
 export interface SceneControls {
   /** Camera presets, in key order (digit `1` = first). */
@@ -117,8 +127,21 @@ export interface SceneControls {
   status?: readonly string[];
   /** Title of the top-right schematic card; the host draws the frame, the engine portals into slot `card`. */
   card?: BilingualText;
+  /**
+   * The card can expand in place: the host turns its header into a toggle
+   * (`aria-expanded`) and marks the frame `data-expanded`.
+   */
+  cardToggle?: {
+    expanded: boolean;
+    set(expanded: boolean): void;
+  };
   /** Titles of the bottom panels; the host draws frame + header, the engine portals into `panel01..03`. */
   panels?: Partial<Record<PanelSlot, BilingualText>>;
+  /** Presentation beats (`__atlas.beats()` / `goToBeat()`); `go` enters the presentation when needed. */
+  beats?: {
+    list(): BeatInfo[];
+    go(index: number, options: InstantOption): void;
+  };
   /** ESC: leave a focus/selection. Return true when something was undone. */
   escape?(): boolean;
 }
@@ -133,6 +156,11 @@ export interface HudState {
   presetId: string | null;
   /** The user moved the camera since the last preset / chapter change. */
   cameraFree: boolean;
+  /**
+   * Reading panel expanded (docked column >= 1024 px; collapsed = a 28 px
+   * strip). Kept in sessionStorage by the host, never in the URL.
+   */
+  reader: boolean;
 }
 
 export type HudStore = StoreApi<HudState>;
@@ -144,6 +172,7 @@ export function createHudStore(): HudStore {
     labels: true,
     presetId: null,
     cameraFree: false,
+    reader: true,
   }));
 }
 
@@ -221,6 +250,8 @@ export interface HudActions {
   setPaused(paused: boolean): void;
   setHud(on: boolean): void;
   setLabels(on: boolean): void;
+  /** Expand / collapse the docked reading panel. */
+  setReader(expanded: boolean): void;
   escape(): void;
 }
 
@@ -258,6 +289,9 @@ export function createHudActions(hud: HudStore, camera: { suppress(fn: () => voi
     setLabels(on) {
       hud.setState({ labels: on });
     },
+    setReader(expanded) {
+      hud.setState({ reader: expanded });
+    },
     escape() {
       if (!hud.getState().hud) {
         hud.setState({ hud: true });
@@ -284,7 +318,7 @@ export function trackCamera<S extends { transition: SceneTransition; camera: Cam
     if (s.transition.id !== prev.transition.id) {
       const { reason } = s.transition;
       if (reason === 'chapter' || reason === 'init') hud.setState({ presetId: null, cameraFree: false });
-      else if (reason === 'url') hud.setState({ presetId: null, cameraFree: !same(s.camera, baselineCamera(s.chapter)) });
+      else if (reason === 'url' || reason === 'state') hud.setState({ presetId: null, cameraFree: !same(s.camera, baselineCamera(s.chapter)) });
       return;
     }
     if (s.camera !== prev.camera && !suppressed) hud.setState({ cameraFree: true });

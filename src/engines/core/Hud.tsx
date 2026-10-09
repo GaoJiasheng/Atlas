@@ -1,10 +1,13 @@
 /**
  * Technical-plate HUD pieces drawn by SceneHost (docs/08 §2): top bar with
- * VIEW / MODE groups, status line and key hint; the title block pressed onto
- * the stage; the card / bottom-panel frames engines fill through slots.
+ * the VIEW group (camera presets, wrapping onto more rows when needed),
+ * status line and key hint; the title block pressed onto the stage; the
+ * card / bottom-panel frames engines fill through slots. Mode switches are
+ * not in the top bar: engines place them in their control panel
+ * (`widgets/ControlPanel.tsx`, stage overlay).
  * Sizes are in design pixels scaled by `--u` (see scene.css).
  */
-import { useEffect, useRef, useState, type MouseEvent, type ReactNode } from 'react';
+import { useState, type MouseEvent, type ReactNode } from 'react';
 import { useStore } from 'zustand';
 import type { Chapter, Locale, TopicMeta } from './types';
 import {
@@ -46,8 +49,6 @@ export function HudButton({
   children: ReactNode;
   onClick(): void;
   'data-preset'?: string;
-  'data-mode'?: string;
-  'data-phone'?: 'off';
 }) {
   return (
     <button
@@ -80,94 +81,6 @@ function HudGroup({ label, className, children }: { label: string; className?: s
   );
 }
 
-/**
- * Compact VIEW control (HUD narrower than 1280 design px, scene.css): the
- * current view's label and a `▾` that opens the list of every preset. The
- * wide button row stays in the DOM (CSS hides one of the two), so
- * `[data-preset]` buttons, `aria-pressed` and the digit keys behave the same.
- */
-function ViewMenu({
-  items,
-  active,
-  fallback,
-  label,
-  titleOf,
-  locale,
-  onPick,
-}: {
-  items: readonly { id: string; label: HudText; title?: HudText }[];
-  active: string | null;
-  fallback: string;
-  label: string;
-  titleOf(i: number, title?: HudText): string;
-  locale: Locale;
-  onPick(id: string): void;
-}) {
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (!open) return;
-    const close = () => setOpen(false);
-    const onDown = (e: PointerEvent) => {
-      if (!ref.current?.contains(e.target as Node)) close();
-    };
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key !== 'Escape') return;
-      e.preventDefault();
-      e.stopPropagation();
-      close();
-    };
-    document.addEventListener('pointerdown', onDown);
-    document.addEventListener('keydown', onKey, true);
-    return () => {
-      document.removeEventListener('pointerdown', onDown);
-      document.removeEventListener('keydown', onKey, true);
-    };
-  }, [open]);
-  const current = items.find((p) => p.id === active);
-  return (
-    <div className="hud-viewmenu" ref={ref} data-open={open}>
-      <button
-        type="button"
-        className="hud-btn hud-viewmenu__btn"
-        aria-haspopup="true"
-        aria-expanded={open}
-        aria-label={label}
-        title={label}
-        onClick={(e) => {
-          setOpen((o) => !o);
-          blurAfterPointer(e);
-        }}
-      >
-        {current ? tx(current.label, locale) : fallback}
-        <i aria-hidden="true">▾</i>
-      </button>
-      {open && (
-        <ul className="hud-viewmenu__list">
-          {items.map((p, i) => (
-            <li key={p.id}>
-              <button
-                type="button"
-                className={p.id === active ? 'hud-btn hud-viewmenu__item on' : 'hud-btn hud-viewmenu__item'}
-                data-preset-item={p.id}
-                aria-pressed={p.id === active}
-                onClick={(e) => {
-                  onPick(p.id);
-                  setOpen(false);
-                  blurAfterPointer(e);
-                }}
-              >
-                <b>{tx(p.label, locale)}</b>
-                <span>{titleOf(i, p.title)}</span>
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
-}
-
 /* ------------------------------------------------------------------ */
 /* Top bar                                                             */
 /* ------------------------------------------------------------------ */
@@ -188,14 +101,21 @@ export function TopBar({ topic, chapters, chapter, chapterNumber, locale, path, 
   const tr = (key: UiKey, vars?: Record<string, string | number>) => t(locale, key, vars);
   const controls = useStore(hud, (s) => s.controls);
   const labels = useStore(hud, (s) => s.labels);
+  const free = useStore(hud, (s) => s.cameraFree);
   const active = useStore(hud, (s) => activePreset(s, chapter));
   const presets = controls.presets?.items ?? [];
   const modes = allModes(controls, labels, tr('hud.mode.labels'));
   const pause = controls.pause;
 
   const presetIndex = presets.findIndex((p) => p.id === active);
+  const view =
+    presetIndex >= 0
+      ? tr('hud.viewN', { n: tx(presets[presetIndex]!.label, locale) })
+      : free || !chapter
+        ? tr('hud.free')
+        : tr('hud.chapterView', { n: String(chapterNumber).padStart(2, '0') });
   const status = [
-    presetIndex >= 0 ? tr('hud.viewN', { n: tx(presets[presetIndex]!.label, locale) }) : tr('hud.free'),
+    view,
     ...(pause ? [pause.paused ? tr('hud.paused') : tr('hud.running')] : []),
     ...modes.filter((m) => m.on && m.id !== 'labels').map((m) => m.status ?? tx(m.label, locale)),
     ...(controls.status ?? []),
@@ -204,6 +124,8 @@ export function TopBar({ topic, chapters, chapter, chapterNumber, locale, path, 
   const modeKeys = modes.map((m) => m.key).filter((k): k is string => !!k);
   const presetTitle = (i: number, title?: HudText) =>
     title ? tx(title, locale) : tr('hud.presetTitle', { n: i + 1, title: tx(chapters[i]?.title, locale) });
+  // A digit beside the label, unless the label already is the number (`01`).
+  const digit = (i: number, label: HudText) => (i < 9 && !/^\d+$/.test(tx(label, 'en')) ? String(i + 1) : null);
 
   return (
     <header className="atlas-topbar" data-hud-panel="topbar">
@@ -215,51 +137,25 @@ export function TopBar({ topic, chapters, chapter, chapterNumber, locale, path, 
           </span>
         </a>
         <span className="atlas-docid">{docId(topic.id, chapterNumber)}</span>
-        {(presets.length > 0 || modes.length > 0) && (
+        {presets.length > 0 && (
           <div className="atlas-topbar__ctl">
-            {presets.length > 0 && (
-              <HudGroup label={upper(tr('hud.view'))} className="hud-group--view">
-                {presets.map((p, i) => (
+            <HudGroup label={upper(tr('hud.view'))} className="hud-group--view">
+              {presets.map((p, i) => {
+                const d = digit(i, p.label);
+                return (
                   <HudButton
                     key={p.id}
                     data-preset={p.id}
                     on={p.id === active}
-                    title={presetTitle(i, p.title)}
+                    title={presetTitle(i, p.title) + (d ? ` (${d})` : '')}
                     onClick={() => actions.setPreset(p.id)}
                   >
                     {tx(p.label, locale)}
+                    {d && <small aria-hidden="true">{d}</small>}
                   </HudButton>
-                ))}
-                <ViewMenu
-                  items={presets}
-                  active={active}
-                  fallback={String(chapterNumber).padStart(2, '0')}
-                  label={upper(tr('hud.view'))}
-                  titleOf={presetTitle}
-                  locale={locale}
-                  onPick={(id) => actions.setPreset(id)}
-                />
-              </HudGroup>
-            )}
-            {modes.length > 0 && (
-              <HudGroup label={upper(tr('hud.mode'))} className="hud-group--mode">
-                {modes.map((m) => (
-                  <HudButton
-                    key={m.id}
-                    data-mode={m.id}
-                    on={m.on}
-                    tone={m.tone}
-                    data-phone={m.phone === false ? 'off' : undefined}
-                    disabled={m.disabled && !m.on}
-                    title={tx(m.label, locale) + (m.key ? ` (${upper(m.key)})` : '')}
-                    onClick={() => actions.setMode(m.id, !m.on)}
-                  >
-                    {tx(m.label, locale)}
-                    {m.key && <small aria-hidden="true">{upper(m.key)}</small>}
-                  </HudButton>
-                ))}
-              </HudGroup>
-            )}
+                );
+              })}
+            </HudGroup>
           </div>
         )}
         <GlobalToggles locale={locale} path={path} variant="hud" />
@@ -400,12 +296,29 @@ function PanelHeader({ n, title }: { n: string; title: BilingualText }) {
 
 type SlotRef = (name: SlotName) => (el: Element | null) => void;
 
-export function CardFrame({ hud, slotRef }: { hud: HudStore; slotRef: SlotRef }) {
+export function CardFrame({ hud, slotRef, locale }: { hud: HudStore; slotRef: SlotRef; locale: Locale }) {
   const title = useStore(hud, (s) => s.controls.card);
+  const toggle = useStore(hud, (s) => s.controls.cardToggle);
   if (!title) return null;
   return (
-    <section className="hud-panel atlas-card" data-hud-panel="card">
-      <PanelHeader n="A" title={title} />
+    <section className="hud-panel atlas-card" data-hud-panel="card" data-expanded={toggle ? toggle.expanded : undefined}>
+      {toggle ? (
+        <button
+          type="button"
+          className="atlas-card__toggle"
+          aria-expanded={toggle.expanded}
+          title={t(locale, toggle.expanded ? 'hud.card.collapse' : 'hud.card.expand')}
+          onClick={(e) => {
+            toggle.set(!toggle.expanded);
+            blurAfterPointer(e);
+          }}
+        >
+          <PanelHeader n="A" title={title} />
+          <i className="atlas-card__chev" aria-hidden="true" />
+        </button>
+      ) : (
+        <PanelHeader n="A" title={title} />
+      )}
       <div ref={slotRef('card')} className="hud-panel__body" />
     </section>
   );

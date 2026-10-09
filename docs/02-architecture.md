@@ -54,7 +54,7 @@ atlas/
         stages/model3d/         # R3F 舞台
         stages/layer2d/         # SVG 分层舞台
         explorer/               # 选中/隔离/透视/爆炸/运转 控制
-      widgets/                  # InfoPanel Legend LayerToggles QuizCard Counter
+      widgets/                  # InfoPanel Legend ControlPanel QuizCard Counter
     i18n/
       ui.en.json ui.zh.json     # 界面文案
       index.ts                  # t() + locale 路由
@@ -114,7 +114,7 @@ state:                           # 引擎进入本章时要达到的状态（引
   layers: [control, movements, battles]
   highlight: [kota-bharu, johor-crossing, bukit-timah]
   theme: cinema
-  summary: { en: "…", zh: "…" }  # 可选（TimeScene）：panel02 的一句话概述；不写则取正文第一段
+  summary: { en: "…", zh: "…" }  # 可选（TimeScene）：阅读面板标题下的一句话概述，也是默认演示字幕
 quiz:
   - q: { en: "Which direction did the Japanese army come from?", zh: "日军是从哪个方向打过来的？" }
     options: [{ en: "From the sea in the south", zh: "从南边海上" }, { en: "Down the Malay Peninsula from the north", zh: "从北边沿马来半岛南下" }]

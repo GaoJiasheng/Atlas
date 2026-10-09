@@ -8,7 +8,8 @@
  * - renders the technical-plate layout (docs/08 §2): the stage fills the
  *   page, the HUD floats over it (top bar, title block + chapter rail, card +
  *   overlay column, bottom dock with panels and the engine bar), the reading
- *   InfoPanel is a docked column >= 1024px and a bottom sheet below
+ *   InfoPanel is a docked column >= 1024px (collapsible to a 28 px strip,
+ *   kept per tab in sessionStorage) and a bottom sheet below
  * - owns the keyboard (keys.ts), HUD scaling (`--k`) and `window.__atlas`
  * - handles the static chapter-body controls by delegation: `<FlyTo>`
  *   (`data-flyto` -> the engine's camera preset, same action as the VIEW
@@ -41,9 +42,9 @@ import { useSceneKeys } from './keys';
 import { installTestApi } from './test-api';
 import { BottomPanels, CardFrame, TitleBlock, TopBar } from './Hud';
 import { getEngine, getEngineView } from '../registry';
-import { t } from '../../i18n';
+import { t, tx, type BilingualText } from '../../i18n';
 import { applyTheme, resolveTheme } from '../../theme/theme';
-import { setThemeOverride, useThemeOverride } from '../../lib/prefs';
+import { getReaderExpanded, setReaderExpanded, setThemeOverride, useThemeOverride } from '../../lib/prefs';
 import { ChapterRail } from '../widgets/ChapterRail';
 import { InfoPanel } from '../widgets/InfoPanel';
 import { ChapterBodies } from '../widgets/ChapterBodies';
@@ -94,6 +95,17 @@ function StagePlaceholder({ label }: { label: string }) {
       <span>{label}</span>
     </div>
   );
+}
+
+const isBilingual = (v: unknown): v is BilingualText =>
+  typeof v === 'object' && v !== null && typeof (v as { en?: unknown }).en === 'string';
+
+/** The reading panel's header sentence: the chapter's `summary`, else its `question`. */
+function chapterSummary(chapter: Chapter | null): BilingualText | null {
+  const state = (chapter?.state ?? {}) as { summary?: unknown; question?: unknown };
+  if (isBilingual(state.summary)) return state.summary;
+  if (isBilingual(state.question)) return state.question;
+  return null;
 }
 
 /** Resolves the host's `mounted` promise once the engine view has committed. */
@@ -228,6 +240,14 @@ export default function SceneHost(props: SceneHostProps) {
   /* ---------------- HUD: visibility, labels, scale ---------------- */
   const hudOn = useStore(hud, (s) => s.hud);
   const labelsOn = useStore(hud, (s) => s.labels);
+  const readerOpen = useStore(hud, (s) => s.reader);
+  // Docked reading panel: expanded unless this tab collapsed it (sessionStorage, not the URL).
+  useEffect(() => {
+    hud.setState({ reader: getReaderExpanded() });
+    return hud.subscribe((s, prev) => {
+      if (s.reader !== prev.reader) setReaderExpanded(s.reader);
+    });
+  }, [hud]);
   const [k, setK] = useState(1);
   useLayoutEffect(() => {
     const update = () => setK(hudScale(window.innerWidth, window.innerHeight));
@@ -275,8 +295,8 @@ export default function SceneHost(props: SceneHostProps) {
   }, []);
 
   const context = useMemo<SceneContextValue>(
-    () => ({ store, hud, topic, chapters, locale, slots }),
-    [store, hud, topic, chapters, locale, slots],
+    () => ({ store, hud, actions, topic, chapters, locale, slots }),
+    [store, hud, actions, topic, chapters, locale, slots],
   );
 
   /* ---------------- window.__atlas ---------------- */
@@ -314,6 +334,7 @@ export default function SceneHost(props: SceneHostProps) {
         data-hud={hudOn ? 'on' : 'off'}
         data-labels={labelsOn ? 'on' : 'off'}
         data-sheet={sheetOpen ? 'open' : 'closed'}
+        data-reader={readerOpen ? 'open' : 'collapsed'}
         style={scaleStyle}
       >
         <main id="atlas-main" className="atlas-stage-area">
@@ -361,11 +382,14 @@ export default function SceneHost(props: SceneHostProps) {
               chapters={chapters}
               currentId={currentId}
               locale={locale}
-              onSelect={(id) => store.getState().goToChapter(id)}
+              onSelect={(id) => {
+                store.getState().goToChapter(id);
+                actions.setReader(true);
+              }}
             />
           </div>
           <div className="atlas-hud__right">
-            <CardFrame hud={hud} slotRef={slotRef} />
+            <CardFrame hud={hud} slotRef={slotRef} locale={locale} />
             <div ref={slotRef('stageOverlay')} className="atlas-stage__overlay" data-hud-panel="overlay" />
           </div>
           <div className="atlas-hud__dock">
@@ -382,11 +406,41 @@ export default function SceneHost(props: SceneHostProps) {
         </div>
 
         <aside className="atlas-reader hud-fade" data-hud-panel="reader">
+          <button
+            type="button"
+            className="atlas-reader__handle"
+            aria-expanded={true}
+            aria-controls="atlas-panel-scroll"
+            aria-label={t(locale, 'hud.reader.collapse')}
+            title={t(locale, 'hud.reader.collapse')}
+            onClick={(e) => {
+              actions.setReader(false);
+              if (e.detail > 0) e.currentTarget.blur();
+            }}
+          >
+            <i aria-hidden="true" />
+          </button>
+          <button
+            type="button"
+            className="atlas-reader__strip"
+            aria-expanded={false}
+            aria-label={t(locale, 'hud.reader.expand')}
+            title={t(locale, 'hud.reader.expand')}
+            onClick={(e) => {
+              actions.setReader(true);
+              if (e.detail > 0) e.currentTarget.blur();
+            }}
+          >
+            <i aria-hidden="true" />
+            <b>{String(chapterNumber).padStart(2, '0')}</b>
+            {chapter && <span>{tx(chapter.title, locale)}</span>}
+          </button>
           <InfoPanel
             chapter={chapter}
             index={Math.max(0, index)}
             total={chapters.length}
             locale={locale}
+            summary={chapterSummary(chapter)}
             body={props.children ? <ChapterBodies currentId={currentId}>{props.children}</ChapterBodies> : undefined}
             hasPrev={hasPrev}
             hasNext={hasNext}

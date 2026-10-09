@@ -7,7 +7,7 @@ import { createPortal } from 'react-dom';
 import { useStore } from 'zustand';
 import { useShallow } from 'zustand/react/shallow';
 import type { SceneStore, SceneStoreState } from './store';
-import { registerSceneControls, type HudState, type HudStore, type SceneControls } from './controls';
+import { registerSceneControls, type HudActions, type HudState, type HudStore, type SceneControls } from './controls';
 import type { Chapter, EngineExtension, Locale, TopicMeta } from './types';
 import { translator, type UiKey, type TemplateVars } from '../../i18n';
 
@@ -15,7 +15,7 @@ import { translator, type UiKey, type TemplateVars } from '../../i18n';
  * Layout regions an engine can render into with `<SceneSlot name=…>`
  * (docs/06 "布局插槽"). Empty slots render nothing.
  *  - `bottomBar`    engine controls at the bottom of the stage (timeline, explorer)
- *  - `stageOverlay` floating UI, right column under the card (layer toggles, legend)
+ *  - `stageOverlay` floating UI, right column under the card (control panel: layers, tools, key)
  *  - `inspector`    details of the selected object, inside the InfoPanel
  *  - `card`         body of the top-right schematic card (title via `controls.card`)
  *  - `panel01..03`  bodies of the three bottom panels (titles via `controls.panels`)
@@ -39,8 +39,10 @@ export interface SceneContextValue {
    * `useSceneStore<MyExt>()`; this is the engine-extension boundary.
    */
   store: SceneStore<EngineExtension>;
-  /** HUD registration + host UI state (hud, labels, active preset). */
+  /** HUD registration + host UI state (hud, labels, active preset, reader). */
   hud: HudStore;
+  /** The actions behind the HUD buttons and keys (modes, presets, HUD, reader). */
+  actions: HudActions;
   topic: TopicMeta;
   chapters: readonly Chapter[];
   locale: Locale;
