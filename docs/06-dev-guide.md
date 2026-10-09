@@ -183,7 +183,7 @@ store.getState().chapterTarget(id);                                // 某章的�
 阅读面板  编号 / 章名 / summary 一句（衬线、弱墨）→ 正文 → inspector → 测验；左缘把手收起成 28 px 竖条
 ```
 
-- **阅读面板收起**（≥1024px）：左缘一个 hairline 小把手（`.atlas-reader__handle`）把它收成 28 px 竖条（`.atlas-reader__strip`：小箭头 + 章节号 + 竖排章名，点它展开）；舞台随之占满宽度（地图的 ResizeObserver 调 `map.resize()`）。默认展开；点章节轨或时间轴节点会重新展开（`actions.setReader(true)`）。状态在 HUD store 的 `reader`，按标签页存 `sessionStorage['atlas:reader']`（`lib/prefs.ts` 的 `getReaderExpanded / setReaderExpanded`），**不进 URL**。< 1024 的底部抽屉不受影响。
+- **阅读面板收起**（≥1024px）：左缘一个 hairline 小把手（`.atlas-reader__handle`）把它收成 28 px 竖条（`.atlas-reader__strip`：小箭头 + 章节号 + 竖排章名，点它展开）；舞台随之占满宽度（地图的 ResizeObserver 调 `map.resize()`）。默认展开。**收起是用户的选择，粘住**：点章节轨、时间轴节点、← →、Next / Back 换章**都不会**重新展开；只有点把手或竖条才展开（`actions.setReader`）。收起时换章（章 id 变了才算）会让竖条闪一下提示有新文字：`.atlas-reader` 上 `data-flash` 约 900 ms，CSS 画两次 signal 橙 2 px 轮廓脉冲（`atlas-reader-flash`，450 ms × 2；`prefers-reduced-motion` 下改为静态轮廓）；已展开则不闪。演示进入时 HUD 整体隐藏（阅读面板随之消失），退出时恢复，不改 `reader`。状态在 HUD store 的 `reader`，按标签页存 `sessionStorage['atlas:reader']`（`lib/prefs.ts` 的 `getReaderExpanded / setReaderExpanded`），**不进 URL**。< 1024 的底部抽屉不受影响。
 - 阅读面板头部：章节号、章名，下面一句 `state.summary`（没有就用 `state.question`），弱墨衬线；手机抽屉收起时不显示这一句。
 
 ### 布局插槽（引擎往哪里画）
@@ -261,14 +261,16 @@ const labelsOn = useHud((s) => s.labels);   // 或 CSS：.atlas-scene[data-label
 ```ts
 await __atlas.ready                 // 视图已挂载且舞台 canvas 有尺寸 → true；20 s 超时 → false
 __atlas.chapters(); __atlas.goToChapter(id, { instant })
+__atlas.runChapter(id)                           // 同点章节轨：飞镜头；TimeScene 另外自动跑本章时间（instant 为 false），同一章再调一次 = 重跑
 __atlas.presets();  __atlas.setPreset(id, { instant })           // instant 默认 false
 __atlas.modes();    __atlas.setMode(id, on, { instant })          // instant 默认 true（会 snap）
 __atlas.keymap()    // [{ key, type: 'preset'|'mode'|'pause'|'hud'|'escape'|'chapter', name }]
 __atlas.beats();    __atlas.goToBeat(i, { instant })    // 演示节拍（TimeScene）：beats() = [{ chapter, index, caption }]（index = 本章内第几拍，0 起）；goToBeat 需要时先进入演示，instant 默认 false
-__atlas.state().presentation                    // 正在演示的拍 { chapter, beat, autoplay }（beat = 本章内位置，0 起）；没在演示 = null
+__atlas.state().presentation                    // 正在演示的拍 { chapter, beat, autoplay, voice }（beat = 本章内位置，0 起）；没在演示 = null
 __atlas.setAutoplay(on)                         // 演示自动播放开关（TimeScene；写 sessionStorage `atlas:autoplay`）；引擎没有就返回 false
+__atlas.setVoice(on)                            // 演示语音朗读开关（TimeScene；写 sessionStorage `atlas:voice`）；引擎没有或设备没有可用的声音就返回 false
 __atlas.setPaused(on); __atlas.setHud(on); __atlas.setTheme('paper' | 'cinema')   // setPaused 在场景没注册 `pause` 时（TimeScene）什么都不做、返回 false；setTheme 写用户覆盖
-__atlas.state()     // 场景快照 + { hud, paused, labels, reader, preset, modes: {id: on}, appliedTheme }
+__atlas.state()     // 场景快照 + { hud, paused, labels, reader, running, playhead, preset, modes: {id: on}, appliedTheme }；running = 章节自动跑进行中（只有 TimeScene 会 true），playhead = 引擎正在显示的连续时间（数字；没有就 null）。截图脚本在每张章节图前等 running === false
 __atlas.stats()     // { buffer, pixelRatio } 取自舞台 canvas，再合并引擎 stats()
 ```
 
@@ -416,7 +418,7 @@ beats:
 
 - `toNumber(t)`：ISO → 十进制年（取时段起点：`1942-02` = 1942 年 2 月 1 日）；`{ ma }` → 负的年数（`{ ma: 200 }` = -2e8）。`fromNumber(n, scale)` 反向，日期按日向下取整，地质时间保留 2 位小数 Ma。
 - 时间轴范围 = 关键帧、事件（含 `until`）、行动起止、章节时间的最小/最大值。
-- store 里的 `t` 是日精度 TimePoint（进 URL）；地图按连续的"播放头"渲染。跳章时播放头 1.6 s 缓动到新时间；拖动 / Shift+←→ 直接移动播放头并 `patch({ t })`。没有自由播放（时间只随章节、演示节拍和拖动走）。
+- store 里的 `t` 是日精度 TimePoint（进 URL）；地图按连续的"播放头"渲染。**章节自动跑**：用户选章（章节轨、时间轴节点、← →、Next / Back；不含深链、不含演示）时，镜头照常飞，同时播放头从本章**跨度起点**用 5 s easeInOut 跑到本章 `state.time`（行动逐步推进、事件按顺序脉冲；store 的 `t` 从一开始就是章节时间，URL 不抖）。跨度起点 = 本章第一拍的 `t`，没有就取上一章的时间，再没有就取数据最小值（每个候选都要严格早于本章时间，否则取下一个；`View.tsx` 的 `chapterSpan`）。跑的时候状态行有 `RUNNING`，`__atlas.state().running === true`，结束后播放头**精确**等于章节时间（`playhead.tweenTo` 最后一帧直接落在目标值）。再点同一章 = 重跑。**随时可以拖播放头**：按下播放头（或点标尺）就取消自动跑，松手时 `t` 留在原处；Shift+←→ 等任何改 `t` 的键同样取消。非用户选章的过渡（深链、演示节拍、演示结束恢复、`instant` 跳章）仍是直接跳 / 1.6 s 缓动。拖动 / Shift+←→ 直接移动播放头并 `patch({ t })`。没有自由播放（时间只随章节自动跑、演示节拍和拖动走）。
 - 读数格式 `formatTime(t, locale)`：`15 Feb 1942` / `1942年2月15日`；`200 Ma` / `2亿年前`、`6600万年前`。跨度 >12 年时读数降到月，>100 年降到年。HUD 里的 mono 读数用 `formatReadout`（英文大写：`15 FEB 1942`）。
 - 刻度 `ruleTicks(min, max, scale, maxMajors, locale)`（`lib/ticks.ts`）：按跨度和宽度自适应，取主刻度数 ≤ `maxMajors` 的最细一档——几个月：主 = 月（1 月写年份）、次 = 每月 8/15/22 日；几年：主 = 年、次 = 月；更长：5/10/25/50/100… 年；地质：0.1–1000 Ma 档（如 10 Ma / 1 Ma），标尺右端写单位 `MA` / `百万年前`。
 
@@ -432,10 +434,10 @@ TimeScene 不注册 `panel01–03`，宿主因此不画底部三面板带；原�
 ```
 
 - 左：泳道开关（小 chevron，`aria-expanded`）、PRESENT / 演示（18 px hairline `hud-btn`，触屏 44 px 命中；`aria-pressed` = 演示中，按下 = 模式 `presentation`，同 P 键）。原来的播放 / 暂停和 ×1 ×2 ×4 已去掉（Gavin 2026-10-09），时间轴不再自己跑。
-- 中：工程标尺：主刻度（墨色、带 mono 标签）、次刻度（弱墨）、关键帧小空心菱形、已走过的部分加粗；章节节点是坐在标尺上的编号 hairline 圆（当前章 signal 实心）；播放头是一条 signal 细线，日期写在线上方（贴边时夹在标尺内）。
+- 中：工程标尺：主刻度（墨色、带 mono 标签）、次刻度（弱墨）、关键帧小空心菱形、已走过的部分加粗；章节节点是坐在标尺上的编号 hairline 圆（当前章 signal 实心）；播放头是 12 px 的 signal 圆点加一条 hairline 竖线（压在章节节点**下面**，停在节点上时只露出竖线），日期写在线上方（贴边时夹在标尺内）；它的 44 px 命中区（`.ts-rule__grab`，`role="slider"`，唯一的 Tab 停靠点，`cursor: ew-resize`，`touch-action: none`）压在节点**上面**，所以停在节点上也抓得住——不拖动地点它（位移 < 3 px）等于点了离指针 22 px 内最近的节点（重跑那一章）。抓住播放头拖动不会跳到指针（保持抓取偏移），点标尺其他地方则跳过去。鼠标和触屏都走 pointer events。
 - 右：状态串（mono）：参战方 `已加入 / 总数` · 进行中的战斗 · 进行中的行动 · 控制区关键帧 `K8→K9 23 %`；每段的 `title` 写双语全称（Participants / 参与方 …）。都是数据统计，不标 SIM。条窄于 860 px（容器查询）时状态串换到标尺下面一行。
 - 泳道（默认收起）：KEYFRAMES（菱形）、MOVEMENTS（起止条，重叠自动分行）、EVENTS（点 + 进行窗口），当前章节窗口淡 signal 底，`t` 一条 signal 竖线；横坐标与标尺完全一致。
-- 行为：拖动 = 连续时间不换章；点节点 = 换章（并展开阅读面板）；Shift+← → 微调；焦点在标尺上时 ← → 换章、↑ ↓ 微调、PageUp/PageDown 大步、Home/End 到头尾。
+- 行为：拖动播放头或标尺 = 连续时间不换章（并取消章节自动跑）；点节点 = 换章并自动跑（不再展开阅读面板，见「阅读面板收起」）；Shift+← → 全局微调；焦点在播放头上时 ← → ↑ ↓ 微调一格、PageUp/PageDown 十格、Home/End 跳到**当前章跨度**的两端（自动跑起点 / 章节时间）。换章只用页面级 ← →、章节轨和节点。
 
 **横坐标：最小间距混合映射**（`lib/timeScale.ts`，单测 `tests/time-scene/timeScale.test.ts`）
 
@@ -461,7 +463,8 @@ chap(t) = 过结点 {min, 各章时间…, max}（去重、排序）的分段线
 | 预设 | `world`（center [20, 10]，zoom 1.4）+ `theatre`（整片区域：地图 `cameraForBounds` 套住全部数据；地图未就绪时按包围盒估算）+ `presets.json` 里的预设（按钮文字 = `label`，旁边小字写数字键）。数字键 1–9。没有章节预设 |
 | 模式 | `flow`（F，= movements 图层，状态 `FLOW`）· `borders`（B，= borders 图层）· `graticule`（G，引擎本地状态）· `territory`（N，领土名称，引擎本地状态，默认开）· `reference`（R）· `presentation`（P，状态 `PRESENTATION 08/17`；底部条也有 PRESENT 按钮）· 宿主 `labels`（L） |
 | 控制面板 | `stageOverlay` 里的「图层和图例」卡（舞台 ≥ 720 px 宽时默认展开）：**LAYERS** 控制区 / 领土名称（N）/ 国界（B）/ 经纬网（G）/ 行动路线（F）/ 事件 / 何时加入 / 地点（有 `site` 事件才出）/ 标注（L）；**TOOLS** 与上一关键帧对照（R）/ 演示（P）/ 隐藏界面（H）；**KEY** 图例 |
-| `pause` | 不注册（没有自由播放）：状态行没有 PAUSED / RUNNING，键位表没有 SPACE，`__atlas.setPaused` 返回 false |
+| `time` | 章节自动跑：`running()` / `now()`，供 `__atlas.state().running / playhead`；状态行在跑时写 `RUNNING` |
+| `pause` | 不注册（没有自由播放）：状态行没有 PAUSED，键位表没有 SPACE，`__atlas.setPaused` 返回 false |
 | `status` | `2000-03-11`（与 `FLOW`、`REFERENCE` 等模式段一起出现在状态行） |
 | `specRows` | ENTITIES / KEYFRAMES / EVENTS / MOVEMENTS 计数（mono） |
 | `stats()` | `{ features, zoom, fps }`：features = 当前可见数据要素 + 经纬线 + 国界（开时）；fps = 页面 rAF 帧率 |
@@ -470,7 +473,7 @@ chap(t) = 过结点 {min, 各章时间…, max}（去重、排序）的分段线
 | `escape` | 依次：退出 PRESENTATION → 退出 REFERENCE → 收起展开的参与卡（连同选中的实体）→ 取消选中实体 → 关闭事件详情 → 清空 highlight（来源弹层开着时 ESC 先关弹层，由弹层自己处理） |
 
 - **REFERENCE（R）**：版图对照用"叠加"实现（不分屏）：当前主导关键帧照常，相邻关键帧（前一帧；当前是第一帧时取后一帧）的边界以墨色虚线叠上，2 s 淡入（`instant` 时直接到位）；舞台顶部横幅写"实线 K2 … · 虚线 K1 …"。再按恢复。少于两个关键帧时禁用；演示中禁用。
-- **PRESENTATION（P）= 用户翻页的节拍**：节拍列表 = 各章 `state.beats`（没写就一章一拍）。进入时记下当前场景，隐藏 HUD（宿主 `hud = false`，阅读面板随之收起、舞台占满），从当前章的第一拍开始；舞台上只剩标题块、一张纸质字幕卡（底部居中，宽 ≤ 1080 设计 px，细边框）和这拍高亮 id 的引线标注。字幕卡自上而下：**表头** `04 / 11 · 闪电战：法国沦陷 · 1940年6月 · 2 / 3`（章序 · 章名 · 日期 · 本章第几拍，本章只有一拍就不写最后一段）；**字幕**（大号衬线，28 设计 px，镜头飞完后约 1.6 s 淡入；最多约四行，更长的在卡内滚动，不撑高卡片）；**两级进度条**（取代了原来的圆点行）：卡片同宽的一条发丝线，每章一段（等宽，段下方用等宽字体写 `01…11`，当前章的编号用 signal 橙），当前章那一段再按它的节拍切成小段；已读过的章整段填墨色，当前章按"进度到当前这一拍"填 signal（单拍的当前章整段填）。点章段 = 跳到那一章的第一拍，点小段 = 跳到那一拍（段是 `<button>`，带 `aria-label`）；手机宽度（< 760 px）同一条进度条，只是不画 `01…11`。地图上盖一层透明点击层，拖动 / 缩放不再作用于地图。点击舞台 / 字幕 / → / 空格 = 下一拍，← = 上一拍；每拍用 `applyState` 飞镜头（2.2 s）、缓动 `t`（1.6 s），默认**不自动前进**，到最后一拍停住。**自动播放**：进度条右边一个"Auto-play / 自动播放"勾选框（默认不勾，记在 sessionStorage `atlas:autoplay`，刷新后仍在；`__atlas.setAutoplay(on)`，`state().presentation.autoplay`）。勾上后，每拍在镜头落定、字幕淡入之后（拍开始后 2.3 s；`instant` 时立即）开始计时：这拍有 `audio` 且在播放就等它播完，否则停留 clamp(4 s + 60 ms × 当前语言字幕字数, 6 s, 20 s)，然后自动下一拍；期间任何用户输入（点击、按键、滚轮、点进度条）让这一拍停住（勾选框仍勾着、文字变弱），下一拍不管怎么来的都重新计时；到最后一拍停。**引线标注**：HUD 隐藏时地图上仍画这拍 `highlight`（没写就是本章的）里的事件 / 行动 / 实体的引线标注（上限 6 个，字号比平时大 20%，遵守 L 开关；要对应图层开着），**只有这些**——别的事件标注、地名、实体名在演示里都不画（控制器 `setPresentation(true)`）；字幕卡和标题块算引线栏的障碍，标注让开它们；演示中引线栏**只**把这两块当障碍（HUD 面板淡出时 `visibility` 还留着，不能算），并且进入演示、换拍（字幕卡出现 / 变高）和镜头落定（`moveend`）时立刻重新量一次，不等 1 s 的兜底定时器——所以没有镜头动作时标注立即出现，有飞行时锚点一进画面就出现。`audio` 有就预加载、进入那一拍时播放（浏览器拒绝自动播放时静默；自动播放这时退回按字数停留），不勾自动播放时仍等用户翻页。领土名称在演示中照常显示。ESC / P / H / "显示界面"结束演示并用 `applyState` 恢复进入前的场景（章节、镜头、`t`、图层、高亮）和 HUD。演示中 REFERENCE 禁用。
+- **PRESENTATION（P）= 用户翻页的节拍**：节拍列表 = 各章 `state.beats`（没写就一章一拍）。进入时记下当前场景，隐藏 HUD（宿主 `hud = false`，阅读面板随之收起、舞台占满），从当前章的第一拍开始；舞台上只剩标题块、一张纸质字幕卡（底部居中，宽 ≤ 1080 设计 px，细边框）和这拍高亮 id 的引线标注。字幕卡自上而下：**表头** `04 / 11 · 闪电战：法国沦陷 · 1940年6月 · 2 / 3`（章序 · 章名 · 日期 · 本章第几拍，本章只有一拍就不写最后一段）；**字幕**（大号衬线，28 设计 px，镜头飞完后约 1.6 s 淡入；最多约四行，更长的在卡内滚动，不撑高卡片）；**两级进度条**（取代了原来的圆点行）：卡片同宽的一条发丝线，每章一段（等宽，段下方用等宽字体写 `01…11`，当前章的编号用 signal 橙），当前章那一段再按它的节拍切成小段；已读过的章整段填墨色，当前章按"进度到当前这一拍"填 signal（单拍的当前章整段填）。点章段 = 跳到那一章的第一拍，点小段 = 跳到那一拍（段是 `<button>`，带 `aria-label`）；手机宽度（< 760 px）同一条进度条，只是不画 `01…11`。地图上盖一层透明点击层，拖动 / 缩放不再作用于地图。点击舞台 / 字幕 / → / 空格 = 下一拍，← = 上一拍；每拍用 `applyState` 飞镜头（2.2 s）、缓动 `t`（1.6 s），默认**不自动前进**，到最后一拍停住。**自动播放**：进度条右边一个"Auto-play / 自动播放"勾选框（默认不勾，记在 sessionStorage `atlas:autoplay`，刷新后仍在；`__atlas.setAutoplay(on)`，`state().presentation.autoplay`）。勾上后，每拍在镜头落定、字幕淡入之后（拍开始后 2.3 s；`instant` 时立即）开始计时：这拍有 `audio` 且在播放就等它播完，否则停留 clamp(4 s + 60 ms × 当前语言字幕字数, 6 s, 20 s)，然后自动下一拍；期间任何用户输入（点击、按键、滚轮、点进度条）让这一拍停住（勾选框仍勾着、文字变弱），下一拍不管怎么来的都重新计时；到最后一拍停。**引线标注**：HUD 隐藏时地图上仍画这拍 `highlight`（没写就是本章的）里的事件 / 行动 / 实体的引线标注（上限 6 个，字号比平时大 20%，遵守 L 开关；要对应图层开着），**只有这些**——别的事件标注、地名、实体名在演示里都不画（控制器 `setPresentation(true)`）；字幕卡和标题块算引线栏的障碍，标注让开它们；演示中引线栏**只**把这两块当障碍（HUD 面板淡出时 `visibility` 还留着，不能算），并且进入演示、换拍（字幕卡出现 / 变高）和镜头落定（`moveend`）时立刻重新量一次，不等 1 s 的兜底定时器——所以没有镜头动作时标注立即出现，有飞行时锚点一进画面就出现。`audio` 有就预加载、进入那一拍时播放（浏览器拒绝自动播放时静默；自动播放这时退回按字数停留），不勾自动播放时仍等用户翻页。**语音（Voice / 语音）**：自动播放旁边的第二个勾选框（默认不勾，记在 sessionStorage `atlas:voice`；`__atlas.setVoice(on)`，`state().presentation.voice`），用浏览器的 Web Speech API（`speechSynthesis`）朗读字幕，不用音频文件、不联网（`lib/speech.ts`）。勾上后每拍在镜头落定、字幕淡入之后（同自动播放的 2.3 s；`instant` 时立即）读当前语言的字幕（`speakableText` 去掉标记和来源上标，数字照写）；换拍、关掉 Voice、结束演示都会 `cancel()`；每次 `speak` 前先 `cancel()`（避开 Chrome 队列卡死），标签页回到前台时 `resume()`；勾选框点击时静音预热一次（iOS / Safari 需要用户手势）。选声（`pickVoice`）：先按语言——en 用 en-GB，其次 en-*；zh 用 zh-CN / zh-SG，其次其他 zh-*，繁体（zh-TW / zh-HK）和粤语只在没有别的时才用；再本地声音优先于联网声音；再偏好名字（zh：Tingting、Meijia、Lili、Xiaoxiao；en：Daniel、Samantha、Aria、Libby）；语速 0.95，音高 1，`utterance.lang` 取所选声音的 lang。声音列表在 Chrome 里异步加载，监听 `voiceschanged`。没有 `speechSynthesis` 或没有匹配的声音时勾选框禁用，title 为「No voice available / 此设备没有可用的语音」（`setVoice(true)` 返回 false）。**与自动播放**：Voice 开着时自动播放等这段朗读 `end`（或 `error`）后再停 0.6 s 翻页，而不是按字数停留（引擎卡住时三倍停留时间兜底）；这拍有 `audio` 文件则以文件为准，不朗读。领土名称在演示中照常显示。ESC / P / H / "显示界面"结束演示并用 `applyState` 恢复进入前的场景（章节、镜头、`t`、图层、高亮）和 HUD。演示中 REFERENCE 禁用。
 - 插槽内容（`hud/HudPanels.tsx`，SVG 按卡片实际像素画，字号走 `--u`）：
   - `card` PARTICIPATION AND AREA（横坐标用标尺的映射）：每个实体一条带——参与线（joined → left，起点小空心圆），关键帧间线性插值的近似控制面积（球面面积，斜线 + 淡底），行首写 EN 名 / 中文 / 当前 `≈面积 KM²`；当前章节窗口淡 signal 底，`t` 一条 signal 竖线，底部自适应刻度。**行数规则**（`lib/bandRows.ts` 的 `planBandRows`，有单测）：每行至少 25 设计 px（EN 名 + 中文两行不互相压）；全部放得下就按数据顺序全画（实体再多也画）；放不下就最多画 12 行（还要给"其余"那一行留 15 px，所以小卡片只有 4–6 行），挑法是 ①有控制区面积的实体在前，按各关键帧的最大面积从大到小，②其余按 `joined` 从早到晚，同值按数据顺序；剩下的合并成一行弱色小字 `+N OTHERS / 另 N 方 ▾`（贴在时间轴上方）。**展开**：点卡片表头（宿主按 `cardToggle` 画成按钮）或「另 N 方」那一行，卡片原地变长（≤ 右列 60%），列出全部实体（在战的按面积 / 加入时间排在前，其余按加入时间），行高 30 设计 px，卡片内滚动、时间轴吸底；再点表头或 ESC 收起。**点一行**（展开与否都可以，键盘 Enter / 空格）= 选中这个实体：`highlight = [id]`（地图上它的控制区描边加粗到 2.8 px）+ inspector 插槽出实体详情（`EntityInspector`：EN / 中文名、阵营时段、加入 / 退出日期、当前近似面积）；再点同一行取消，恢复本章高亮。画出的行保持阵营分色（参与线按段分色，面积带按 `t` 时阵营）。已验证：ww2（34 个实体）在 1920×1080 / 1280×720 / 2560×1440 下 EN 与中文标签、行与行之间没有重叠；`pnpm shoot <topic> --layout` 只查面板之间的重叠，卡片内部标签要另量（量 `.ts-card text` 的包围盒）。
   - 原 `panel01`（时间标尺 + 泳道）、`panel03`（状态）并进底部条；原 `panel02`（问题 / 概述）由阅读面板头部的 `summary` 一句代替。

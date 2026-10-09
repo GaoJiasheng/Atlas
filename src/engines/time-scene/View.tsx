@@ -8,9 +8,13 @@
  * Time flows through two layers:
  *  - the store's `t` (TimePoint, in the URL, set by chapters and deep links)
  *  - the playhead (continuous number the map renders at; lib/playhead.ts)
- * Chapter changes tween the playhead to the chapter's time; scrubbing moves
- * the playhead and writes a rounded `t` back with `patch()`. There is no
- * free-running playback: the bar's PRESENT button starts the presentation.
+ * Picking a chapter (rail, node, ← →, Next / Back) AUTO-RUNS it: the playhead
+ * eases from the chapter's span start to its time over 5 s (movements advance,
+ * events pulse in order; the store's `t` is already the chapter time). The
+ * playhead is draggable at any time: touching it, or any key that changes `t`,
+ * cancels the run and leaves `t` where it is. Scrubbing writes a rounded `t`
+ * back with `patch()`. There is no other free-running playback: the bar's
+ * PRESENT button starts the presentation.
  *
  * PRESENTATION (P) is a sequence of user-paced beats: every chapter's
  * `state.beats`, or one beat per chapter (its state, `summary` as caption).
@@ -20,8 +24,10 @@
  * HUD is hidden, the map takes no input. ESC or P ends it and restores the
  * scene as it was. AUTO-PLAY (a checkbox by the progress bar, remembered for
  * the session) advances by itself once the camera has settled and the caption
- * has faded in: after the narration ends, else after a dwell that grows with
- * the caption's length; any input pauses it for that beat.
+ * has faded in: after the audio clip or the spoken caption (VOICE) ends, else
+ * after a dwell that grows with the caption's length; any input pauses it for
+ * that beat. VOICE (a checkbox beside it, remembered for the session) speaks
+ * each caption with the browser's speech synthesis (lib/speech.ts).
  */
 import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
 import type { Chapter, EngineViewProps, GeoCamera, SceneSnapshot } from '../core/types';
@@ -36,6 +42,7 @@ import type { TimeSceneExt } from './index';
 import type { TimeChapterState, TimeSceneGeoData } from './schema';
 import { buildTimeModel, type TimeModel } from './lib/model';
 import { createPlayhead, type Playhead } from './lib/playhead';
+import { onVoicesChanged, primeSpeech, speak, speakableText, stopSpeech, voiceFor, type Narration } from './lib/speech';
 import { clamp, fromNumber, stepFor, toNumber, type TimePoint } from './lib/time';
 import { frameAt } from './lib/frame';
 import { referencePair } from './lib/stats';
@@ -51,6 +58,8 @@ import { blocsOf, changesBloc } from './lib/bloc';
 import './time-scene.css';
 
 const CHAPTER_TWEEN_MS = 1600;
+/** A chapter's auto-run: the playhead eases from the span start to the chapter time. */
+const CHAPTER_RUN_MS = 5000;
 /** A beat's camera flight (controller FLY_MS) and caption fade-in end about here; auto-play counts from then. */
 const BEAT_SETTLE_MS = 2300;
 /** Auto-play dwell: 4 s + 60 ms per caption character, within 6–20 s. */
@@ -66,6 +75,21 @@ const readAutoplay = () => {
 const writeAutoplay = (on: boolean) => {
   try {
     sessionStorage.setItem(AUTOPLAY_KEY, on ? '1' : '0');
+  } catch {
+    // Storage unavailable (private mode): the switch still works for this page.
+  }
+};
+const VOICE_KEY = 'atlas:voice';
+const readVoice = () => {
+  try {
+    return sessionStorage.getItem(VOICE_KEY) === '1';
+  } catch {
+    return false;
+  }
+};
+const writeVoice = (on: boolean) => {
+  try {
+    sessionStorage.setItem(VOICE_KEY, on ? '1' : '0');
   } catch {
     // Storage unavailable (private mode): the switch still works for this page.
   }
@@ -123,7 +147,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   const t = useT();
   const geo = data as TimeSceneGeoData;
   const store = useSceneStore<TimeSceneExt>();
-  const { hud, actions } = useSceneContext();
+  const { hud } = useSceneContext();
   const currentChapter = useScene<TimeSceneExt, string | null>((s) => s.chapter);
   const layers = useScene<TimeSceneExt, string[]>((s) => s.layers);
   const highlight = useScene<TimeSceneExt, string[]>((s) => s.highlight);
@@ -160,6 +184,57 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
       }
     },
     [playhead, model, store],
+  );
+
+  /* ---------- chapter auto-run ---------- */
+  const [running, setRunning] = useState(false);
+  const runningRef = useRef(false);
+  const runToken = useRef(0);
+  /**
+   * Where a chapter's run starts and ends: its first beat's `t` if it has one, else the previous
+   * chapter's time, else the data minimum (each only when it is before the chapter time).
+   */
+  const chapterSpan = useCallback(
+    (id: string | null): [number, number] | null => {
+      const i = chapters.findIndex((c) => c.id === id);
+      const chapter = chapters[i];
+      const end = chapter ? store.getState().chapterTarget(chapter.id).t : null;
+      if (!chapter || end === null) return null;
+      const to = clamp(toNumber(end), model.min, model.max);
+      const beatT = (chapter.state as TimeChapterState).beats?.[0]?.t;
+      const prev = i > 0 ? store.getState().chapterTarget(chapters[i - 1]!.id).t : null;
+      const candidates = [beatT !== undefined ? toNumber(beatT as TimePoint) : null, prev !== null ? toNumber(prev) : null, model.min];
+      for (const c of candidates) {
+        if (c === null || !Number.isFinite(c)) continue;
+        const from = clamp(c, model.min, model.max);
+        if (from < to) return [from, to];
+      }
+      return [to, to];
+    },
+    [chapters, store, model],
+  );
+  const startRun = useCallback(
+    (chapter: string | null, target: number) => {
+      const span = chapterSpan(chapter);
+      const token = ++runToken.current;
+      if (!span || span[0] >= span[1]) {
+        runningRef.current = false;
+        setRunning(false);
+        playhead.tweenTo(target, CHAPTER_TWEEN_MS);
+        return;
+      }
+      runningRef.current = true;
+      setRunning(true);
+      playhead.tweenTo(span[1], CHAPTER_RUN_MS, {
+        from: span[0],
+        onDone: () => {
+          if (token !== runToken.current) return;
+          runningRef.current = false;
+          setRunning(false);
+        },
+      });
+    },
+    [chapterSpan, playhead],
   );
 
   /** α of the timeline mapping, fitted by the rule to its width; the band card reuses it. */
@@ -221,10 +296,11 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
         lastWritten.current = key;
         const target = clamp(toNumber(s.t), model.min, model.max);
         if (!Number.isFinite(target)) return;
-        if (transitioned && !s.transition.instant) playhead.tweenTo(target, CHAPTER_TWEEN_MS);
-        else playhead.set(target);
+        if (!transitioned || s.transition.instant) playhead.set(target);
+        else if (s.transition.reason === 'chapter' && !presentingRef.current) startRun(s.chapter, target);
+        else playhead.tweenTo(target, CHAPTER_TWEEN_MS);
       }),
-    [store, playhead, model],
+    [store, playhead, model, startRun],
   );
 
   /* ---------- user time controls ---------- */
@@ -234,14 +310,8 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     [commit, playhead, step],
   );
   const scrubStart = useCallback(() => playhead.cancelTween(), [playhead]);
-  const stepChapter = useCallback((dir: 1 | -1) => store.getState().stepChapter(dir), [store]);
-  const goToChapterFromRule = useCallback(
-    (id: string) => {
-      store.getState().goToChapter(id);
-      actions.setReader(true);
-    },
-    [store, actions],
-  );
+  const goToChapterFromRule = useCallback((id: string) => store.getState().goToChapter(id), [store]);
+  const currentSpan = useMemo(() => chapterSpan(currentChapter), [chapterSpan, currentChapter]);
 
   // Shift+←/→ anywhere (outside text fields, the map and the timeline itself) nudges time.
   useEffect(() => {
@@ -375,6 +445,26 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   const setAutoplay = useCallback((on: boolean) => {
     writeAutoplay(on);
     setAutoplayState(on);
+  }, []);
+  /* VOICE: the caption is narrated with the browser's speech synthesis. Off by default, remembered for the session. */
+  const [voiceWanted, setVoiceWanted] = useState(false);
+  useEffect(() => setVoiceWanted(readVoice()), []);
+  const [voiceAvailable, setVoiceAvailable] = useState(false);
+  const voiceAvailableRef = useRef(false);
+  voiceAvailableRef.current = voiceAvailable;
+  useEffect(() => {
+    const update = () => setVoiceAvailable(voiceFor(locale) !== null);
+    update();
+    return onVoicesChanged(update); // Chrome loads voices asynchronously
+  }, [locale]);
+  const voiceRef = useRef(false);
+  voiceRef.current = voiceWanted;
+  const setVoice = useCallback((on: boolean) => {
+    if (on && !voiceAvailableRef.current) return false;
+    writeVoice(on);
+    if (on) primeSpeech(); // inside the click: iOS / Safari only speak after a gesture
+    setVoiceWanted(on);
+    return true;
   }, []);
   // ESC / H / "show HUD" bring the HUD back: that ends the presentation.
   useEffect(
@@ -560,7 +650,8 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
         return s ?? {};
       },
       specRows,
-      status: [statusT].filter(Boolean),
+      status: [statusT, running ? 'RUNNING' : ''].filter(Boolean),
+      time: { running: () => runningRef.current, now: () => playhead.get() },
       card: bi('time.card.title'),
       cardToggle: { expanded: cardExpanded, set: setCardExpanded },
       beats: {
@@ -568,9 +659,10 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
         go: (i, { instant }) => startPresentation(i, instant),
         current: () => {
           const b = beatRef.current !== null ? beats[beatRef.current] : undefined;
-          return b ? { chapter: b.chapter, beat: b.index, autoplay: autoplayRef.current } : null;
+          return b ? { chapter: b.chapter, beat: b.index, autoplay: autoplayRef.current, voice: voiceRef.current } : null;
         },
         setAutoplay,
+        setVoice,
       },
       escape: () => {
         if (presentingRef.current) {
@@ -614,12 +706,15 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     beat,
     beats,
     setAutoplay,
+    setVoice,
     setReferenceMode,
     startPresentation,
     stopPresentation,
     readStats,
     specRows,
     statusT,
+    running,
+    playhead,
     cardExpanded,
     selected,
     selectedEntity,
@@ -665,6 +760,9 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
           audio={beatAudio}
           autoplay={autoplay}
           onAutoplay={setAutoplay}
+          voice={voiceWanted && voiceAvailable}
+          voiceAvailable={voiceAvailable}
+          onVoice={setVoice}
         />
       )}
 
@@ -713,7 +811,8 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
           onScrubStart={scrubStart}
           onNudge={nudge}
           onChapter={goToChapterFromRule}
-          onStepChapter={stepChapter}
+          span={currentSpan}
+          running={running}
           onAlpha={setAlpha}
         />
       </SceneSlot>
@@ -775,6 +874,9 @@ function Presentation({
   audio,
   autoplay,
   onAutoplay,
+  voice,
+  voiceAvailable,
+  onVoice,
 }: {
   title: BilingualText;
   beats: readonly Beat[];
@@ -790,6 +892,10 @@ function Presentation({
   audio: HTMLAudioElement | null;
   autoplay: boolean;
   onAutoplay(on: boolean): void;
+  /** Narrate the caption (switched on and a voice exists). */
+  voice: boolean;
+  voiceAvailable: boolean;
+  onVoice(on: boolean): void;
 }) {
   const tr = useT();
   const now = useSyncExternalStore(playhead.subscribe, playhead.get, playhead.get);
@@ -824,15 +930,65 @@ function Presentation({
   useEffect(() => setHeld(false), [index]);
   const last = index >= beats.length - 1;
   const captionText = tx(b.caption, locale);
+
+  /*
+   * VOICE: once the caption has faded in, speak it (a beat's `audio` clip takes priority).
+   * A new beat, turning Voice off and leaving the presentation cancel it. `speech` tells the
+   * auto-play below whether an utterance is on its way, so it can wait for the end of it.
+   */
+  const speech = useRef<{ state: 'idle' | 'pending' | 'speaking' | 'ended'; listeners: Set<() => void> }>({ state: 'idle', listeners: new Set() });
+  const spoken = speakableText(captionText);
+  const voiceOn = voice && !audio && spoken !== '';
+  useEffect(() => {
+    const sp = speech.current;
+    const voiceChoice = voiceOn ? voiceFor(locale) : null;
+    if (!voiceChoice) {
+      sp.state = 'idle';
+      return;
+    }
+    sp.state = 'pending';
+    let narration: Narration | null = null;
+    const timer = window.setTimeout(
+      () => {
+        sp.state = 'speaking';
+        narration = speak(spoken, voiceChoice, () => {
+          sp.state = 'ended';
+          for (const l of [...sp.listeners]) l();
+        });
+      },
+      instant ? 0 : BEAT_SETTLE_MS,
+    );
+    return () => {
+      window.clearTimeout(timer);
+      narration?.cancel();
+      stopSpeech();
+      sp.state = 'idle';
+    };
+  }, [voiceOn, index, instant, locale, spoken]);
+
   useEffect(() => {
     if (!autoplay || held || last) return;
     let dwell = 0;
+    let stopWaiting = () => {};
     const advance = () => onStep(1);
     const settle = window.setTimeout(
       () => {
         if (audio?.ended) advance();
         else if (audio && !audio.paused) audio.addEventListener('ended', advance, { once: true });
-        else dwell = window.setTimeout(advance, autoplayDwell([...captionText].length));
+        else if (voiceOn && speech.current.state !== 'idle') {
+          // Wait for the utterance to end (a short breath after it); a stuck engine falls back to three dwells.
+          const sp = speech.current;
+          const afterEnd = () => {
+            window.clearTimeout(dwell);
+            dwell = window.setTimeout(advance, 600);
+          };
+          if (sp.state === 'ended') afterEnd();
+          else {
+            sp.listeners.add(afterEnd);
+            stopWaiting = () => sp.listeners.delete(afterEnd);
+            dwell = window.setTimeout(advance, 3 * autoplayDwell([...captionText].length));
+          }
+        } else dwell = window.setTimeout(advance, autoplayDwell([...captionText].length));
       },
       instant ? 0 : BEAT_SETTLE_MS,
     );
@@ -846,12 +1002,13 @@ function Presentation({
     return () => {
       window.clearTimeout(settle);
       window.clearTimeout(dwell);
+      stopWaiting();
       audio?.removeEventListener('ended', advance);
       window.removeEventListener('pointerdown', hold, true);
       window.removeEventListener('keydown', hold, true);
       window.removeEventListener('wheel', hold, true);
     };
-  }, [autoplay, held, last, index, instant, audio, captionText, onStep]);
+  }, [autoplay, held, last, index, instant, audio, captionText, onStep, voiceOn]);
   return (
     <div className="ts-present" data-instant={instant || undefined}>
       <div className="ts-present__hit" onClick={() => onStep(1)} aria-hidden="true" />
@@ -921,17 +1078,35 @@ function Presentation({
               })}
             </ol>
           </nav>
-          <label className="ts-present__auto" title={tr('time.autoplayHint')} data-held={(autoplay && held) || undefined}>
-            <input
-              type="checkbox"
-              checked={autoplay}
-              onChange={(e) => onAutoplay(e.currentTarget.checked)}
-              onClick={(e) => {
-                if (e.detail > 0) e.currentTarget.blur();
-              }}
-            />
-            <span>{tr('time.autoplay')}</span>
-          </label>
+          <div className="ts-present__opts">
+            <label className="ts-present__auto" title={tr('time.autoplayHint')} data-held={(autoplay && held) || undefined}>
+              <input
+                type="checkbox"
+                checked={autoplay}
+                onChange={(e) => onAutoplay(e.currentTarget.checked)}
+                onClick={(e) => {
+                  if (e.detail > 0) e.currentTarget.blur();
+                }}
+              />
+              <span>{tr('time.autoplay')}</span>
+            </label>
+            <label
+              className="ts-present__auto ts-present__voice"
+              title={voiceAvailable ? tr('time.voiceHint') : tr('time.voiceNone')}
+              data-disabled={!voiceAvailable || undefined}
+            >
+              <input
+                type="checkbox"
+                checked={voice}
+                disabled={!voiceAvailable}
+                onChange={(e) => onVoice(e.currentTarget.checked)}
+                onClick={(e) => {
+                  if (e.detail > 0) e.currentTarget.blur();
+                }}
+              />
+              <span>{tr('time.voice')}</span>
+            </label>
+          </div>
         </div>
       </div>
     </div>

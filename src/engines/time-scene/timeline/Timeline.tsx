@@ -4,8 +4,10 @@
  *  - a chevron that opens the swimlanes and the PRESENT button (P: the
  *    user-paced presentation beats; the bar has no free-running playback)
  *  - the rule: year / month ticks at real dates, chapter nodes (numbered
- *    hairline circles; click = go), keyframe diamonds, the playhead with its
- *    date above; drag anywhere on it = continuous `t`, no chapter change
+ *    hairline circles; click = go and auto-run the chapter), keyframe diamonds,
+ *    the playhead (a 12 px dot on a hairline stem) with its date above; drag
+ *    the playhead or anywhere on the rule = continuous `t`, no chapter change.
+ *    A chapter's auto-run moves the playhead; touching it cancels the run
  *  - a mono state cluster: participants · active battles · active movements ·
  *    control keyframe blend (bilingual labels in the titles)
  * Below the rule, collapsed by default, three swimlanes (keyframes /
@@ -16,9 +18,10 @@
  * The fitted α is reported upwards (`onAlpha`) so the band card draws on the
  * same mapping.
  *
- * Keyboard: on the rule ←/→ change chapter,
- * Shift+←/→ and ↑/↓ nudge `t`, PageUp/PageDown take big steps, Home/End jump
- * to the ends.
+ * Keyboard: the playhead is the one tab stop (a slider): ←/→ and ↑/↓ nudge `t`
+ * by one tick, PageUp/PageDown by ten, Home/End jump to the ends of the current
+ * chapter's span (its auto-run start and its time). Chapters have ← → on the
+ * page, the rail and the nodes.
  */
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type KeyboardEvent, type PointerEvent, type RefObject } from 'react';
 import type { Chapter, Locale } from '../../core/types';
@@ -50,7 +53,10 @@ export interface TimelineProps {
   onScrubStart(): void;
   onNudge(direction: 1 | -1, big?: boolean): void;
   onChapter(id: string): void;
-  onStepChapter(direction: 1 | -1): void;
+  /** The current chapter's span `[auto-run start, chapter time]` (Home / End on the playhead); `null` = the data span. */
+  span: readonly [number, number] | null;
+  /** A chapter auto-run is moving the playhead. */
+  running: boolean;
   /** The α the rule fitted to its width (band card reuses it). */
   onAlpha(alpha: number): void;
 }
@@ -59,6 +65,10 @@ export interface TimelineProps {
 const RULE_Y = 27;
 const RULE_H = 50;
 const MAJOR_PX = 72;
+/** A press that moves less than this (px) is a click, not a drag. */
+const CLICK_SLOP = 3;
+/** A click on the playhead within this distance (px) of a chapter node counts as a click on that node. */
+const NODE_HIT = 22;
 /** Smallest distance between two year / month labels on the rule. */
 const LABEL_GAP = 34;
 /** Swimlanes: keyframes, movements, events (px). */
@@ -99,7 +109,6 @@ export function Timeline(props: TimelineProps) {
   const tr = useT();
   const t = useSyncExternalStore(playhead.subscribe, playhead.get, playhead.get);
   const [railRef, width] = useWidth<HTMLDivElement>();
-  const dragging = useRef(false);
   const [lanesOpen, setLanesOpen] = useState(false);
 
   const scale = useMemo(
@@ -123,30 +132,50 @@ export function Timeline(props: TimelineProps) {
     return scale.invert(clientX - rect.left);
   };
 
+  /** Drag in progress: where inside the playhead it was grabbed, and whether it moved. */
+  const drag = useRef<{ grab: number; startX: number; head: boolean; moved: boolean } | null>(null);
   const onPointerDown = (e: PointerEvent<HTMLDivElement>) => {
     if (e.button !== 0) return;
-    dragging.current = true;
+    const rect = railRef.current?.getBoundingClientRect();
+    const head = e.target instanceof Element && e.target.closest('.ts-rule__grab') !== null;
+    // Grabbing the playhead keeps the pointer's offset inside it (no jump); the rule itself jumps to the pointer.
+    const grab = head && rect ? e.clientX - (rect.left + x(t)) : 0;
+    drag.current = { grab, startX: e.clientX, head, moved: false };
     e.currentTarget.setPointerCapture(e.pointerId);
     props.onScrubStart();
-    props.onScrub(timeAt(e.clientX));
+    if (!head) props.onScrub(timeAt(e.clientX));
   };
   const onPointerMove = (e: PointerEvent<HTMLDivElement>) => {
-    if (dragging.current) props.onScrub(timeAt(e.clientX));
+    const d = drag.current;
+    if (!d) return;
+    if (Math.abs(e.clientX - d.startX) > CLICK_SLOP) d.moved = true;
+    if (d.head && !d.moved) return;
+    props.onScrub(timeAt(e.clientX - d.grab));
   };
   const onPointerEnd = (e: PointerEvent<HTMLDivElement>) => {
-    dragging.current = false;
+    const d = drag.current;
+    drag.current = null;
     if (e.currentTarget.hasPointerCapture(e.pointerId)) e.currentTarget.releasePointerCapture(e.pointerId);
+    // The playhead rests on top of its chapter's node: a click (no drag) there is a click on the node.
+    const rect = railRef.current?.getBoundingClientRect();
+    if (d?.head && !d.moved && e.type === 'pointerup' && rect) {
+      const px = e.clientX - rect.left;
+      let best: { id: string; dist: number } | null = null;
+      for (const n of model.chapterNodes) {
+        const dist = Math.abs(x(n.t) - px);
+        if (dist <= NODE_HIT && (!best || dist < best.dist)) best = { id: n.id, dist };
+      }
+      if (best) props.onChapter(best.id);
+    }
   };
 
-  const onRailKey = (e: KeyboardEvent<HTMLDivElement>) => {
+  const onHeadKey = (e: KeyboardEvent<HTMLElement>) => {
     if (e.altKey || e.ctrlKey || e.metaKey) return;
     const dir = e.key === 'ArrowRight' || e.key === 'ArrowUp' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowDown' ? -1 : 0;
-    if (dir && e.shiftKey) props.onNudge(dir);
-    else if (dir && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) props.onStepChapter(dir);
-    else if (dir) props.onNudge(dir);
+    if (dir) props.onNudge(dir);
     else if (e.key === 'PageUp' || e.key === 'PageDown') props.onNudge(e.key === 'PageUp' ? 1 : -1, true);
-    else if (e.key === 'Home') props.onScrub(model.min);
-    else if (e.key === 'End') props.onScrub(model.max);
+    else if (e.key === 'Home') props.onScrub(props.span?.[0] ?? model.min);
+    else if (e.key === 'End') props.onScrub(props.span?.[1] ?? model.max);
     else return;
     e.preventDefault();
     e.stopPropagation();
@@ -191,19 +220,12 @@ export function Timeline(props: TimelineProps) {
           <div
             ref={railRef}
             className="ts-rule__rail"
-            role="slider"
-            tabIndex={0}
-            aria-label={tr('time.time')}
-            aria-valuemin={0}
-            aria-valuemax={1000}
-            aria-valuenow={width > 0 ? Math.round((headX / width) * 1000) : 0}
-            aria-valuetext={formatNumber(t, model, locale)}
             data-alpha={scale.alpha.toFixed(3)}
+            data-running={props.running || undefined}
             onPointerDown={onPointerDown}
             onPointerMove={onPointerMove}
             onPointerUp={onPointerEnd}
             onPointerCancel={onPointerEnd}
-            onKeyDown={onRailKey}
           >
             {width > 0 && (
               <svg className="ts-rule__svg" width={width} height={RULE_H} aria-hidden="true">
@@ -241,6 +263,22 @@ export function Timeline(props: TimelineProps) {
             <output className="ts-rule__date" style={{ left: `clamp(3.4em, ${headX}px, calc(100% - 3.4em))` }} aria-hidden="true">
               {readout}
             </output>
+            {/* The playhead's 44 px hit area: the one tab stop of the rule, above the chapter nodes so it can be grabbed where it rests on one. */}
+            {width > 0 && (
+              <span
+                className="ts-rule__grab"
+                role="slider"
+                tabIndex={0}
+                aria-label={tr('time.time')}
+                aria-orientation="horizontal"
+                aria-valuemin={model.min}
+                aria-valuemax={model.max}
+                aria-valuenow={t}
+                aria-valuetext={formatNumber(t, model, locale)}
+                style={{ left: `${headX}px` }}
+                onKeyDown={onHeadKey}
+              />
+            )}
           </div>
           <ol className="ts-rule__nodes">
             {width > 0 &&
