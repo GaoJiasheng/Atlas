@@ -5,7 +5,7 @@ import { parse as parseYaml } from 'yaml';
 import { SUBJECTS, topicSchema } from '../src/content/schema/topic';
 import { chapterSchema } from '../src/content/schema/chapter';
 import { bilingual, isoDate, timePoint } from '../src/content/schema/common';
-import { EVENT_KINDS, controlFile, entitySchema, presetsFile, timeChapterState, timeSceneGeoData } from '../src/engines/time-scene/schema';
+import { EVENT_KINDS, controlFile, entitySchema, presetsFile, timeChapterRefs, timeChapterState, timeSceneGeoData } from '../src/engines/time-scene/schema';
 import { sourcesFile } from '../src/content/schema/sources';
 import { spaceChapterState, spaceSceneData } from '../src/engines/space-scene/schema';
 
@@ -201,6 +201,34 @@ describe('TimeScene schema extensions', () => {
   it('accepts `summary` and the `sites` layer in chapter state', () => {
     expect(timeChapterState.safeParse({ summary: { en: 'One line.', zh: '一句话。' }, layers: ['base', 'sites'] }).success).toBe(true);
     expect(timeChapterState.safeParse({ layers: ['monuments'] }).success).toBe(false);
+  });
+
+  it('accepts presentation beats (caption required, audio a site path) and lists their highlight refs', () => {
+    const caption = { en: 'Step.', zh: '一步。' };
+    const ok = timeChapterState.safeParse({
+      beats: [
+        { t: '1942-02-09', camera: { center: [103.7, 1.4], zoom: 9.6 }, highlight: ['johor-crossing'], caption },
+        { caption, layers: ['base', 'control'], audio: '/audio/ww2/ch07-2.mp3' },
+      ],
+    });
+    expect(ok.success).toBe(true);
+    expect(timeChapterRefs(ok.data!)).toEqual(['johor-crossing']);
+    expect(timeChapterState.safeParse({ beats: [] }).success).toBe(false);
+    expect(timeChapterState.safeParse({ beats: [{ t: '1942' }] }).success).toBe(false);
+    expect(timeChapterState.safeParse({ beats: [{ caption, audio: 'https://example.org/a.mp3' }] }).success).toBe(false);
+    expect(timeChapterState.safeParse({ beats: [{ caption, speed: 2 }] }).success).toBe(false);
+  });
+
+  it('ww2 chapters are in time order and chapters 07 and 11 carry four beats each', () => {
+    const states = readdirSync(join(TOPICS, 'ww2/chapters'))
+      .filter((f) => f.endsWith('.mdx'))
+      .sort()
+      .map((f) => parseYaml(readFileSync(join(TOPICS, 'ww2/chapters', f), 'utf8').split('---')[1]!) as { id: string; state: { time: string; beats?: unknown[] } });
+    const times = states.map((c) => c.state.time);
+    expect([...times].sort()).toEqual(times);
+    expect(states.find((c) => c.id === 'syonan')!.state.time).toBe('1942-02-18');
+    expect(states.find((c) => c.id === 'fall-of-singapore')!.state.beats).toHaveLength(4);
+    expect(states.find((c) => c.id === 'end-and-home')!.state.beats).toHaveLength(4);
   });
 });
 

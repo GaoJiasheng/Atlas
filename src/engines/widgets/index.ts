@@ -1,7 +1,7 @@
 export { ChapterRail, type ChapterRailProps } from './ChapterRail';
 export { InfoPanel, type InfoPanelProps } from './InfoPanel';
 export { Legend, type LegendItem, type LegendProps } from './Legend';
-export { LayerToggles, SceneLayerToggles, type LayerItem, type LayerTogglesProps } from './LayerToggles';
+export { ControlPanel, type ControlPanelProps, type ControlRow } from './ControlPanel';
 export { QuizCard, type QuizCardProps } from './QuizCard';
 export { Counter, CounterVersus, COUNTER_UNIT_100K, type CounterProps, type CounterSide, type CounterVersusProps } from './Counter';
 export { LangToggle } from './LangToggle';

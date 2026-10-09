@@ -12,7 +12,7 @@ import {
 } from '../src/engines/core/controls';
 import { createSceneStore } from '../src/engines/core/store';
 import { hudScale } from '../src/engines/core/SceneHost';
-import type { Chapter } from '../src/engines/core/types';
+import type { Chapter, SceneSnapshot } from '../src/engines/core/types';
 
 const chapter = (id: string, order: number, state: Chapter['state'] = {}): Chapter => ({
   id,
@@ -107,6 +107,10 @@ describe('registration, modes and keymap', () => {
     actions.setHud(false);
     actions.escape();
     expect(hud.getState().hud).toBe(true);
+    // The docked reading panel: expanded by default, host state only.
+    expect(hud.getState().reader).toBe(true);
+    actions.setReader(false);
+    expect(hud.getState().reader).toBe(false);
   });
 });
 
@@ -116,7 +120,7 @@ describe('active preset tracking', () => {
     chapter('two', 2, { camera: { center: [5, 5], zoom: 4 } }),
   ];
   const setup = () => {
-    const store = createSceneStore({ chapters, defaults: { chapter: null, layers: [], camera: null } });
+    const store = createSceneStore({ chapters, defaults: { chapter: null, layers: [], camera: null } as SceneSnapshot });
     const hud = createHudStore();
     const tracker = trackCamera(hud, store, (id) => store.getState().chapterTarget(id).camera);
     registerSceneControls(hud, {
@@ -138,6 +142,15 @@ describe('active preset tracking', () => {
     expect(store.getState().transition.reason).toBe('preset');
     expect(store.getState().chapter).toBe('one');
     store.getState().goToChapter('two');
+    expect(active()).toBe('two');
+  });
+
+  it('treats an applied state (presentation beat) like a deep link: free only off the chapter camera', () => {
+    const { store, active } = setup();
+    store.getState().applyState({ chapter: 'two', camera: { center: [9, 9], zoom: 6 } });
+    expect(store.getState().transition.reason).toBe('state');
+    expect(active()).toBeNull();
+    store.getState().applyState({ chapter: 'two', camera: { center: [5, 5], zoom: 4 } });
     expect(active()).toBe('two');
   });
 

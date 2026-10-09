@@ -2,7 +2,7 @@
 
 Phase 1 地基（站点框架、i18n、主题、内容集合、Scene 契约、共享部件）、Phase 2 两个引擎（TimeScene / SpaceScene）、Phase 3 上线准备（PWA、Cloudflare Pages、e2e）和技术图版打磨（P1–P4，docs/08）都已就位，带两个占位主题。
 
-**术语**（全文统一）：**预设**（preset）= 相机预设，顶栏按钮组 `VIEW`，数字键 `1–9`；**模式**（mode）= 可开关的显示 / 行为，顶栏按钮组 `MODE`，字母键；**状态行** = 顶栏第二行；**插槽**（slot）= 引擎往宿主 HUD 里画内容的位置；**面板**（panel）= 底部 `panel01–03`；**卡片**（card）= 右上示意卡。SpaceScene 里的 `state.view`（assembled / xray / exploded / isolate）是"显示视图"，与 `VIEW` 按钮组（相机预设）无关。
+**术语**（全文统一）：**预设**（preset）= 相机预设，顶栏按钮组 `VIEW`，数字键 `1–9`（TimeScene 只放地理预设）；**模式**（mode）= 可开关的显示 / 行为，字母键，按钮在右列的**控制面板**（`widgets/ControlPanel.tsx`，LAYERS / TOOLS 两节）里，顶栏不再有 `MODE` 组；**状态行** = 顶栏第二行；**插槽**（slot）= 引擎往宿主 HUD 里画内容的位置；**面板**（panel）= 底部 `panel01–03`（目前只有 SpaceScene 用）；**卡片**（card）= 右上示意卡；**阅读面板**（reader）= 右侧停靠的 InfoPanel。SpaceScene 里的 `state.view`（assembled / xray / exploded / isolate）是"显示视图"，与 `VIEW` 按钮组（相机预设）无关。
 
 ## 跑起来
 
@@ -33,7 +33,7 @@ src/
   engines/
     core/                     # Scene 契约：types, store, url-state, camera, context, SceneHost,
                               # controls（HUD 注册 + 动作）, keys（键盘）, test-api（window.__atlas）, Hud（顶栏/标题块/面板框）
-    widgets/                  # ChapterRail ChapterBodies InfoPanel Legend LayerToggles QuizCard Counter
+    widgets/                  # ChapterRail ChapterBodies InfoPanel Legend ControlPanel QuizCard Counter
                               # LangToggle ThemeToggle（均基于 Dropdown）GlobalToggles icons
     time-scene/               # descriptor + schema + View + stages/geo + timeline + hud（见「TimeScene」）
     space-scene/              # descriptor + schema + View + stages/model3d + hud + explorer（见「SpaceScene」）
@@ -175,12 +175,16 @@ store.getState().chapterTarget(id);                                // 某章的�
 舞台铺满页面，HUD 浮在上面；阅读用的 InfoPanel 在 ≥1024px 是右侧停靠列，以下是底部抽屉（收起时只有章节标题 +「阅读」按钮）。SceneHost 用 CSS grid 排布，各块贴在自己的角上，结构上不可能互相重叠：
 
 ```
-顶栏  ◇ ATLAS · 学科 │ ATL-{TOPIC6}-{NN} │ VIEW [01][02]…  MODE [X][E]…  LOOK ▾  EN ▾
-      状态行 VIEW 02 · PAUSED · X-RAY              键位提示
+顶栏  ◇ ATLAS · 学科 │ ATL-{TOPIC6}-{NN} │ VIEW [WORLD 1][WHOLE AREA 2]…（放不下就折行）  LOOK ▾  EN ▾
+      状态行 CHAPTER 07 VIEW · PAUSED · FLOW          键位提示
 左列  标题块（PLATE NN · 章节名 / 主题名 / 副标题 / 规格 dl / 声明）+ ChapterRail
-右列  card（右上示意卡）+ stageOverlay（图层 / 图例）
-底部  perf（安静读数）→ panel01‖panel02‖panel03 → bottomBar（引擎控件）
+右列  card（右上示意卡，可展开）+ stageOverlay（控制面板：LAYERS / TOOLS / KEY）
+底部  perf（安静读数）→ panel01‖panel02‖panel03（引擎注册了才有）→ bottomBar（引擎控件）
+阅读面板  编号 / 章名 / summary 一句（衬线、弱墨）→ 正文 → inspector → 测验；左缘把手收起成 28 px 竖条
 ```
+
+- **阅读面板收起**（≥1024px）：左缘一个 hairline 小把手（`.atlas-reader__handle`）把它收成 28 px 竖条（`.atlas-reader__strip`：小箭头 + 章节号 + 竖排章名，点它展开）；舞台随之占满宽度（地图的 ResizeObserver 调 `map.resize()`）。默认展开；点章节轨或时间轴节点会重新展开（`actions.setReader(true)`）。状态在 HUD store 的 `reader`，按标签页存 `sessionStorage['atlas:reader']`（`lib/prefs.ts` 的 `getReaderExpanded / setReaderExpanded`），**不进 URL**。< 1024 的底部抽屉不受影响。
+- 阅读面板头部：章节号、章名，下面一句 `state.summary`（没有就用 `state.question`），弱墨衬线；手机抽屉收起时不显示这一句。
 
 ### 布局插槽（引擎往哪里画）
 
@@ -189,10 +193,10 @@ store.getState().chapterTarget(id);                                // 某章的�
 | 插槽 | 位置 | 说明 |
 |---|---|---|
 | `bottomBar` | 底部最下 | 时间轴 / Explorer 控件（44px 触控，不随 HUD 缩小，4K 时放大） |
-| `stageOverlay` | 右列，示意卡下 | 图层开关、图例 |
+| `stageOverlay` | 右列，示意卡下 | 控制面板 `ControlPanel`：LAYERS（图层 + 绘制类模式）、TOOLS（其余模式 + 隐藏 HUD）、KEY（图例） |
 | `inspector` | InfoPanel 内 | 选中对象详情 |
-| `card` | 右列顶 | 示意 SVG 卡的**内容**；标题由 `controls.card` 注册，宿主画框和 `A NAME 中文` 表头 |
-| `panel01` `panel02` `panel03` | 底部三块等高面板 | 面板**内容**；标题由 `controls.panels` 注册，宿主画框和 `01 NAME 中文` 表头；没注册标题的面板不出现 |
+| `card` | 右列顶 | 示意 SVG 卡的**内容**；标题由 `controls.card` 注册，宿主画框和 `A NAME 中文` 表头；注册了 `cardToggle` 时表头是展开按钮（`aria-expanded`），框带 `data-expanded`，展开后高 ≤ 右列 60%，内容自己滚动 |
+| `panel01` `panel02` `panel03` | 底部三块等高面板 | 面板**内容**；标题由 `controls.panels` 注册，宿主画框和 `01 NAME 中文` 表头；没注册标题的面板不出现，一个都没注册时整条面板带不出现（TimeScene 就是这样） |
 | `perf` | 底部右上，安静小字 | `60 FPS · 16 CALLS · 0.02M TRIS · 1520×1026` / `FEATURES 63 · ZOOM 5.5 · 60 FPS` |
 | `leaders` | 覆盖舞台的 `<svg>` | 引线标注；往里 portal SVG 元素（`<path>`、`<circle>`） |
 
@@ -202,7 +206,7 @@ store.getState().chapterTarget(id);                                // 某章的�
 
 ### HUD 控件注册（`core/controls.ts`）
 
-引擎 View 里注册一次（传 `useMemo` 过的对象，身份变了就重新注册），宿主据此画 VIEW / MODE 按钮、状态行、键位提示、规格表、卡片和面板框，并绑定键盘和 `window.__atlas`：
+引擎 View 里注册一次（传 `useMemo` 过的对象，身份变了就重新注册），宿主据此画 VIEW 按钮、状态行、键位提示、规格表、卡片和面板框，并绑定键盘和 `window.__atlas`；模式按钮由引擎放进自己的控制面板（见下）：
 
 ```ts
 import { useSceneControls, useHud } from '../core/context';
@@ -211,7 +215,7 @@ import type { SceneControls } from '../core/controls';
 const controls = useMemo<SceneControls>(() => ({
   presets: { items: [{ id, label: '01', title?, chapter? }], set(id, { instant }) {} },   // 数字键 1–9
   modes:   { items: [{ id: 'xray', key: 'x', label, on, disabled?, status?: 'EXPLODED 70', tone?: 'xray' | 'hot' | 'cold' | 'cut' | 'signal',
-                      phone?: false }],   // phone:false = < 760 px 宽（手机）顶栏不画这个按钮（键仍可用）
+                      phone?: false }],   // phone:false = < 760 px 宽（手机）控制面板不画这一行（键仍可用）
              set(id, on, { instant }) {} },                                                 // 字母键
   pause:   { paused, set(paused) {} },                                                     // SPACE
   labels:  true,                     // 引擎认宿主的 LABELS 开关 → 宿主加 `labels` 模式（L）
@@ -219,7 +223,9 @@ const controls = useMemo<SceneControls>(() => ({
   specRows: [{ id, label: { en, zh }, value, mono?, source?: 'fact' | 'ref' | 'reconstruction' | 'simulated' }],
   status:  ['SIMULATED'],            // 状态行追加段（大写）
   card:    { en: 'Process flow', zh: '工艺流程' },
+  cardToggle: { expanded, set(expanded) {} },   // 可选：卡片表头变成展开按钮
   panels:  { panel01: { en, zh }, panel02: …, panel03: … },
+  beats:   { list: () => [{ chapter, index, caption }], go(i, { instant }) {} },   // 可选：演示节拍（__atlas.beats / goToBeat）
   escape:  () => boolean,            // ESC：退出选中 / focus，处理了返回 true
 }), [deps]);
 useSceneControls(controls);
@@ -227,20 +233,22 @@ const labelsOn = useHud((s) => s.labels);   // 或 CSS：.atlas-scene[data-label
 ```
 
 - 非 React 场合用 `registerSceneControls(hudStore, controls)`，返回注销函数。
-- **镜头预设**：调用 `store.getState().applyCameraPreset(camera, { instant })`，它改 `camera` 并发一次 `transition.reason = 'preset'`（舞台照常飞过去；TimeScene 不因此停播放）。当前预设由宿主推导：显式选的 > 当前章节自己的（`preset.chapter`）；用户拖动 / 平移写回相机后变为 FREE CAMERA。
+- **控制面板**（`widgets/ControlPanel.tsx`）：引擎在 `stageOverlay` 里放 `<ControlPanel layers={[…]} tools={[…]} legend={[…]} />`，行是 `{ kind: 'layer', id, label, color? }`（切 store 的 `layers`）、`{ kind: 'mode', id, label? }`（走 `actions.setMode`，与字母键同一路径，按钮带 `data-mode` + `aria-pressed`）或 `{ kind: 'hud' }`（隐藏 HUD，H）。每行右侧写键位字母；`phone: false` 的模式在手机上不画。注册表仍是唯一状态来源，面板只是 UI；`pnpm shoot --keys` 照样按 `[data-mode]` 核对。宿主的 `HudActions`（模式、预设、HUD、阅读面板）经 `useSceneContext().actions` 拿到。
+- **镜头预设**：调用 `store.getState().applyCameraPreset(camera, { instant })`，它改 `camera` 并发一次 `transition.reason = 'preset'`（舞台照常飞过去；TimeScene 不因此停播放）。当前预设由宿主推导：显式选的 > 当前章节自己的（`preset.chapter`）；用户拖动 / 平移写回相机后变为 FREE CAMERA。没有亮着的预设但镜头没动过时，状态行写 `CHAPTER 07 VIEW`（本章镜头）。
+- **一次设多个字段**：`store.getState().applyState(partial, { instant })` 直接写这些字段（`chapter` 也可以，不重置成章节目标），发 `reason: 'state'` 的过渡，舞台照常飞镜头、缓动时间（TimeScene 演示节拍、演示结束时恢复原场景用它）。宿主把它当深链处理：镜头和本章基线不同就是 FREE CAMERA。
 - **立即完成**：`store.getState().snap()` 发 `reason: 'snap'`、`instant: true` 的过渡，舞台跳到终态（测试、截图用）。
 - 规格表：宿主先放默认行（学科 / 章节数 / 课纲锚点数），引擎行追加在后，最多 8 行。
 - 接线现状：
-  - **TimeScene**：预设 = 各章镜头 + `world` + `theatre`；模式 `flow`（F）/ `borders`（B）/ `graticule`（G）/ `reference`（R）/ `presentation`（P）+ 宿主 `labels`（L）；SPACE = 播放 / 暂停；ESC 依次退出演示、REFERENCE、事件详情、高亮。G / P 手机上不画按钮（`phone: false`）。
-  - **SpaceScene**：预设 = 各章镜头（本章镜头 > 视图预设 > 继承）+ `ORBIT`（转台）+ `REF.`（= REFERENCE 模式的预设入口）；模式 `xray`（X）/ `exploded`（E）/ `cutaway`（C）/ `flow`（F，= run）/ `reference`（R）+ 宿主 `labels`（L）；SPACE = run；ESC 依次取消选中、退出 REFERENCE、停 ORBIT。R 手机上不画按钮（`phone: false`）。
-  - SpaceScene 没有 PRESENTATION（P）；TimeScene 的 PRESENTATION 在 docs/08 §3 的"按章自动演示"之外没有别的演示模式。
+  - **TimeScene**：预设 = `world` + `theatre`（整片区域）+ `presets.json` 的地理预设（**不再有章节预设**：换章走章节轨、时间轴节点和 ← →）；模式 `flow`（F）/ `borders`（B）/ `graticule`（G）/ `reference`（R）/ `presentation`（P）+ 宿主 `labels`（L），全在控制面板里；SPACE = 播放 / 暂停；ESC 依次退出演示、REFERENCE、收起展开的参与卡（连同选中的实体）、取消选中实体、关闭事件详情、清空高亮。G / P 手机上不画行（`phone: false`）。
+  - **SpaceScene**：预设 = 各章镜头（本章镜头 > 视图预设 > 继承）+ `ORBIT`（转台）+ `REF.`（= REFERENCE 模式的预设入口），模型视角，不是地理预设，保留；模式 `xray`（X）/ `exploded`（E）/ `cutaway`（C）/ `flow`（F，= run）/ `reference`（R）+ 宿主 `labels`（L），在 ExplorerOverlay 的控制面板 TOOLS 节里（LAYERS 节是零件组）；SPACE = run；ESC 依次取消选中、退出 REFERENCE、停 ORBIT。R 手机上不画行（`phone: false`）。
+  - SpaceScene 没有 PRESENTATION（P）；TimeScene 的 PRESENTATION 是用户翻页的节拍序列（见「TimeScene」）。
 
 ### 键盘（`core/keys.ts`，宿主统一处理）
 
 | 键 | 作用 |
 |---|---|
 | ← → | 上一章 / 下一章（跳过折叠章节） |
-| 1–9 | 镜头预设 |
+| 1–9 | 镜头预设（TimeScene：地理预设，按 VIEW 组顺序） |
 | 注册的字母 | 模式开关（L = 标注；`h`、空格、数字保留给宿主） |
 | SPACE | 暂停 / 运行（没注册 `pause` 时不拦截） |
 | H | 隐藏 / 显示 HUD（只进 HUD store，不进 URL；0.35 s 淡出，左下留「H 显示界面」可点） |
@@ -256,8 +264,9 @@ __atlas.chapters(); __atlas.goToChapter(id, { instant })
 __atlas.presets();  __atlas.setPreset(id, { instant })           // instant 默认 false
 __atlas.modes();    __atlas.setMode(id, on, { instant })          // instant 默认 true（会 snap）
 __atlas.keymap()    // [{ key, type: 'preset'|'mode'|'pause'|'hud'|'escape'|'chapter', name }]
+__atlas.beats();    __atlas.goToBeat(i, { instant })    // 演示节拍（TimeScene）；goToBeat 需要时先进入演示，instant 默认 false
 __atlas.setPaused(on); __atlas.setHud(on); __atlas.setTheme('paper' | 'cinema')   // setTheme 写用户覆盖
-__atlas.state()     // 场景快照 + { hud, paused, labels, preset, modes: {id: on}, appliedTheme }
+__atlas.state()     // 场景快照 + { hud, paused, labels, reader, preset, modes: {id: on}, appliedTheme }
 __atlas.stats()     // { buffer, pixelRatio } 取自舞台 canvas，再合并引擎 stats()
 ```
 
@@ -276,8 +285,8 @@ pnpm shoot sample-time --shots mine.json hero    # 自定义截图表（{name: {
 ```
 
 - `--locale en|zh|all`、`--theme paper|cinema|all`（也接受逗号列表），默认 `en` + `paper`；`shots/` 已 gitignore。主题用 `__atlas.setTheme()` 切换。`--gpu` 改用真 GPU（macOS 走 Metal），默认软件 GL（SwiftShader，与 e2e 相同），fps 数字只在 `--gpu` 下有意义。
-- 默认截图：每章一张（镜头 = 本章预设）；首章上每个注册模式各一张（`presentation` 除外；默认开着的模式截"关"，文件名 `mode-<id>-off`）；非章节预设（`orbit` / `reference` / `world` / `theatre`）各一张；`hero-clean`（HUD 关）。每次截图前把模式、HUD、暂停恢复到加载时的状态。
-- `--keys`：对 `keymap()` 逐项按键：预设（`state().preset` + `[data-preset]` 的 `aria-pressed`）、模式（状态翻转 + `[data-mode]` 的 `aria-pressed`，再按一次恢复；按钮被禁用则跳过）、SPACE、H（HUD 隐藏且"H 显示界面"可见）、ESC（HUD 隐藏后恢复）、← →；最后拖动舞台应变 FREE CAMERA（没有预设亮着），再按预设应收回。
+- 默认截图：每章一张；首章上每个注册模式各一张（`presentation` 除外；默认开着的模式截"关"，文件名 `mode-<id>-off`）；非章节预设（`orbit` / `reference` / `world` / `theatre` / `presets.json` 里的）各一张；`hero-clean`（HUD 关）。每次截图前把模式、HUD、暂停恢复到加载时的状态（阅读面板、卡片、泳道这些宿主 / 引擎 UI 状态不复位，自定截图表里的 `js` 要自己摆好）。
+- `--keys`：对 `keymap()` 逐项按键：预设（`state().preset` + `[data-preset]` 的 `aria-pressed`）、模式（状态翻转 + `[data-mode]` 的 `aria-pressed`，再按一次恢复；按钮在控制面板里，面板收起也照样在 DOM 里；按钮被禁用则跳过）、SPACE、H（HUD 隐藏且"H 显示界面"可见）、ESC（HUD 隐藏后恢复）、← →；最后拖动舞台应变 FREE CAMERA（没有预设亮着），再按预设应收回。
 - `--layout`：3840×2160 / 2560×1440 / 1920×1080 / 1280×720 / 900×1200 / 390×844 × 每章 × 额外预设，用 `tests-e2e/hud-layout.ts` 的 `hudLayoutIssues()`（与 `pnpm e2e` 共用同一份逻辑）查 `[data-hud-panel]` 出屏 / 重叠（1 px 容差）/ 横向溢出，并存 `layout-WxH.png`。
 - 一直收集 console error / warning、pageerror、同源 4xx/5xx 和任何指向外部主机的请求（违反"无运行时外部请求"）；GPU / SwiftShader 噪音与 smoke.spec.ts 同一过滤。退出码 1 = 有 error / pageerror / 外部请求 / 键位失败 / 布局问题（warning 只打印）。
 - 轨道阻尼按帧数衰减，软件 GL 下拖动后要几秒才回写相机，`--keys` 的 FREE CAMERA 检查已按此放宽。
@@ -287,7 +296,7 @@ pnpm shoot sample-time --shots mine.json hero    # 自定义截图表（{name: {
 - `--k = clamp(min(W/1920, H/1080), .6, 1.6)`（手机 = 1），SceneHost 在 resize 时写到 `.atlas-scene`。
 - 实际排版用 `--u = --kt px`，`--kt = max(--k, .8)`：HUD 文字不小于 1080p 尺寸的 80%（720p、平板的可读性下限）。
 - **HUD 字号刻度**（设计像素，k = 1；`tokens.css` 的 `--hud-font-*`，面向小学生的笔记本屏）：最小 10 px（`label` 10.4 / SVG 里的 mono 刻度 10）、状态行与键位提示 ≥ 10.5（`status` 10.8）、按钮 11.1、面板标题与正文 11.3、标题块 30。写新 HUD 文字用这些 token，不要再写 < 10 的 `calc(N * var(--u))`；viewBox 里的 SVG 文字（部件链路卡）按渲染比例折算，保证渲染后 ≥ 10 px。`--kb = max(1, --k)`：触控控件和阅读正文只放大不缩小（4K 时 `bottomBar` / `stageOverlay` 用 `zoom: var(--kb)` 放大）。
-- ≥1440 完整；1080 完整略小；高度 ≤ 820（720p）底部三面板折成一行标签页（点开一块）；< 1024 InfoPanel 变底部抽屉；< 1280 的 VIEW 组只画当前视图编号 + `▾` 菜单（列出全部预设，数字键照常；宽排按钮仍在 DOM 里，只是被 CSS 藏起），MODE 组需要时折到第二行；< 760（手机）隐藏示意卡、三面板、perf、引线、规格表、键位提示和 VIEW 组，章节轨折成编号芯片条，全局开关收进齿轮菜单；标了 `phone: false` 的模式（TimeScene G / P、SpaceScene R）不画按钮，手机顶栏的 MODE 组因此留在两行以内。
+- ≥1440 完整；1080 完整略小；高度 ≤ 820（720p）底部三面板折成一行标签页（点开一块）；< 1024 InfoPanel 变底部抽屉（不能收成竖条）；VIEW 组放不下就折成多行（没有下拉菜单）；< 760（手机）隐藏示意卡、三面板、perf、引线、规格表、键位提示和 VIEW 组，章节轨折成编号芯片条；标了 `phone: false` 的模式（TimeScene G / P、SpaceScene R）在控制面板里不画行。
 - 任何尺寸不得重叠、不得横向溢出：`tests-e2e/hud-layout.ts` 的 `hudLayoutIssues()` 在 3840×2160 / 2560×1440 / 1920×1080 / 1280×720 / 900×1200 / 390×844 × 每章 × 中英检查所有可见 `[data-hud-panel]`（`tests-e2e/hud.spec.ts`，`pnpm e2e` 的一部分）。
 
 ### 主题
@@ -302,8 +311,8 @@ pnpm shoot sample-time --shots mine.json hero    # 自定义截图表（{name: {
 
 - 站点不展示年级：没有年级选择器、章节轨没有年级芯片、规格表没有年级行；所有章节始终可进入，←→ 和上下章按钮逐章走。`level` / `levels` 只是 `topic.yaml` / 章节 / 零件上可选的规划元数据（schema 接受缺省，不渲染）。
 - 索引页**只列 `status: published` 的主题**，以固定六类（science / math / history / geography / biology / computer）为主入口并按类筛选；类别计数只数已发布主题，没有已发布主题的类别置灰标“即将推出”。卡片标签只有学科和类型（`mode`：`time` → 时间 / Time，`space` → 空间 / Space，`both` 两个都有），再加章数。
-- 外观与语言是两个 hairline 下拉菜单（`widgets/Dropdown.tsx`，`hud-btn` 语法，与 VIEW 菜单同族）：“LOOK ▾”（Auto / Paper / Cinema）、“EN ▾ / 中文 ▾”（English / 中文）。索引页和主题 HUD 共用；键盘可用（Enter/空格/↓ 打开，↑↓ Home End 移动，Esc 或点外面关闭），点击区 ≥ 44px。语言切换保留路径、query 和 hash。
-- 读写偏好走 `src/lib/prefs.ts` 的 hook（`useThemeOverride`；语言偏好用 `setSavedLocale`），不要直接碰 localStorage；场景状态不进 localStorage，只进 URL。
+- 外观与语言是两个 hairline 下拉菜单（`widgets/Dropdown.tsx`，`hud-btn` 语法）：“LOOK ▾”（Auto / Paper / Cinema）、“EN ▾ / 中文 ▾”（English / 中文）。索引页和主题 HUD 共用；键盘可用（Enter/空格/↓ 打开，↑↓ Home End 移动，Esc 或点外面关闭），点击区 ≥ 44px。语言切换保留路径、query 和 hash。
+- 读写偏好走 `src/lib/prefs.ts` 的 hook（`useThemeOverride`；语言偏好用 `setSavedLocale`；阅读面板收起用 `getReaderExpanded / setReaderExpanded`，sessionStorage），不要直接碰 storage；场景状态不进 storage，只进 URL。
 
 ## 约束清单（每次改动自查）
 
@@ -320,15 +329,17 @@ pnpm shoot sample-time --shots mine.json hero    # 自定义截图表（{name: {
 ```
 index.ts              descriptor（扩展字段 t / highlight，未变）
 schema.ts             zod（构建期），客户端只 import type
-View.tsx              组装：GeoStage + 时间轴标尺 + HUD 内容 + 图层/图例 + 事件详情；store ↔ 播放头同步；控件注册（预设、模式、PRESENTATION）
+View.tsx              组装：GeoStage + 底部条 + 参与卡 + 控制面板 + 事件 / 实体详情；store ↔ 播放头同步；控件注册（地理预设、模式、演示节拍）
 stages/geo/GeoStage.tsx    React 壳，懒加载 controller（MapLibre 在这个 chunk 里），提供引线标签层、比例尺和宿主 leaders svg
 stages/geo/controller.ts   命令式驱动 MapLibre：图层、斜线填充、流线、事件环、地名、比例尺、REFERENCE、镜头、主题
 stages/geo/leaders.ts      引线标注（两列、避让、逐帧投影）
-timeline/Timeline.tsx      工程标尺时间轴（渲染进 bottomBar 插槽）
+timeline/Timeline.tsx      唯一的底部条（bottomBar）：泳道开关 + 播放 / 倍速 · 标尺 · 状态串，下方可展开三条泳道
 timeline/usePlayback.ts    播放循环（全程约 60 s @×1，遇章节节点停 1.5 s）
-hud/HudPanels.tsx          card 条带图、panel01 时间标尺、panel02 问题/概述、panel03 状态、perf 读数
+hud/HudPanels.tsx          card 参与与面积条带卡（可展开、行可点）、perf 读数
+hud/shared.tsx             useSize / usePlayheadT / useUnit / 斜线图案 / 章节时间窗
 EventInspector.tsx         点事件 → inspector 插槽（Counter / 双方 CounterVersus；细看折叠块；来源上标；伤亡始终显示）
-lib/time.ts lib/format.ts lib/geo.ts lib/model.ts lib/frame.ts lib/playhead.ts lib/ticks.ts lib/stats.ts lib/bloc.ts lib/control.ts lib/bandRows.ts   纯函数，单测在 tests/time-scene/
+EntityInspector.tsx        点参与卡的一行 → inspector 插槽（名称、阵营时段、加入 / 退出、当前面积）
+lib/time.ts lib/format.ts lib/geo.ts lib/model.ts lib/frame.ts lib/playhead.ts lib/ticks.ts lib/timeScale.ts lib/stats.ts lib/bloc.ts lib/control.ts lib/bandRows.ts   纯函数，单测在 tests/time-scene/
 colors.ts  time-scene.css
 ```
 
@@ -340,14 +351,28 @@ colors.ts  time-scene.css
 |---|---|
 | `entities.json` | `id, name, bloc, joined, left?, color?`。`bloc` 是 `axis/allied/neutral` 之一，或**换阵营**时按时间排的数组 `[{ "bloc": "axis", "from": "1940-06-10", "to": "1943-10-13" }, { "bloc": "allied", "from": "1943-10-13" }]`（`[from, to)`，只有最后一段可省 `to`，段不能重叠；第一段之前按第一段算，空档里按刚结束的那段算，`sideAt(entity, t)` 在 `lib/bloc.ts`）。**`joined` 之前和 `left` 之后一律按 `neutral`（`blocAt`）**：地图填充、participation、地名、右上卡面积带、图例的“已退出战争”项（`time.bloc.out`）都用它；事件 / 行动的阵营色仍用 `sideAt`；右上卡行数多时只画 `t` 时在战的实体（有面积的在前，按 `t` 时面积；其余按 `joined`），不在战的进“+N others”。颜色默认取 `t` 时所在阵营的 token：地图控制区、participation、地名、实体引线说明、右上卡的面积带都跟 `t` 走，卡上的参与线按段分色；行动和事件用它们开始时的阵营色；图例对换阵营的实体每个阵营列一行。`color: "token:accent-3"` 或 `#hex` 覆盖（不随阵营变）。`joined` 驱动 participation 图层"点亮"和右上卡的参与线。 |
 | `control.json` | `keyframes[]`，按时间严格升序，`properties.holder` = 实体 id，同一实体可有多个面（或 MultiPolygon）。**两种写法任选**：① GeoJSON：`{ "keyframes": [{ "t", "features": FeatureCollection }] }`（小主题、手写，如 sample-time）；② TopoJSON：`{ "topology": Topology, "keyframes": [{ "t", "object": "<topology.objects 里的名字>" }] }`——所有关键帧共用一份拓扑（不变的海岸、边界只存一次，量化 + 差分编码），大主题（ww2 的 12 帧）用它。拓扑只做宽松校验（`type: "Topology"`、`arcs` 数组、`objects` 记录、`transform` 可选），解码后每个要素按普通控制区要素再校验（`holder` 存在于 entities、环闭合、经纬度范围）。引擎在建 `TimeModel` 时用 `topojson-client` 的 `feature()` 把每帧解成 FeatureCollection（`lib/control.ts` 的 `decodeControl`，顺手把环改回 RFC 7946 绕向，MapLibre 靠绕向分外环和洞），之后的帧、面积、渲染全都不知道有两种写法。ww2 的 `control.json` 由管线生成（见「WW2 geo pipeline」），不手写。面积（右上卡）在客户端按球面公式算，不用写。 |
-| `movements.json` | `from/to` 时间区间 + LineString `path`（从起点画到终点）。`strength`（可选，0 或缺省 = 未知，不显示“N 人”）决定线宽（1–3 px，相对全主题最大值）。**过日界线**：schema 把经度限在 -180..180，作者照实写跳变即可（`… [179.5, 38], [-175, 33] …`）；建 `TimeModel` 时 `unwrapPathCentred`（`lib/geo.ts`，思路同 `unwrapRing`）把相邻点经度差超过 180° 的后续点整体 ±360°，让线走近路（MapLibre 会把 >180 的经度画进邻近世界副本），再把整条路径平移 ∓360° 使其中心落在 -180..180。之后切线（`sliceLine`）、箭头头部、引线锚点、剧场镜头的包围盒（`model.bounds`）全部用 `MovementN.path`（展开后的坐标），不要再读 `movement.path.coordinates`。珍珠港航线（147.7°E 44.9°N → 158°W 23°N）展开后经度 147.7 → 202，长约 5,800 km，不是绕地球一圈的 30,000 km。可选 `linger`（`timePoint`，须晚于 `to`、同一时间标尺）：默认 `to` 之后整条线立刻消失；写了 `linger`，`to` 到 `linger` 之间画完成的整条线（40% 不透明，箭头停在终点），过了 `linger` 在约 2% 时间跨度内淡出。lingering 的线不计入 panel03 的 ACTIVE MOVEMENTS。 |
+| `movements.json` | `from/to` 时间区间 + LineString `path`（从起点画到终点）。`strength`（可选，0 或缺省 = 未知，不显示“N 人”）决定线宽（1–3 px，相对全主题最大值）。**过日界线**：schema 把经度限在 -180..180，作者照实写跳变即可（`… [179.5, 38], [-175, 33] …`）；建 `TimeModel` 时 `unwrapPathCentred`（`lib/geo.ts`，思路同 `unwrapRing`）把相邻点经度差超过 180° 的后续点整体 ±360°，让线走近路（MapLibre 会把 >180 的经度画进邻近世界副本），再把整条路径平移 ∓360° 使其中心落在 -180..180。之后切线（`sliceLine`）、箭头头部、引线锚点、剧场镜头的包围盒（`model.bounds`）全部用 `MovementN.path`（展开后的坐标），不要再读 `movement.path.coordinates`。珍珠港航线（147.7°E 44.9°N → 158°W 23°N）展开后经度 147.7 → 202，长约 5,800 km，不是绕地球一圈的 30,000 km。可选 `linger`（`timePoint`，须晚于 `to`、同一时间标尺）：默认 `to` 之后整条线立刻消失；写了 `linger`，`to` 到 `linger` 之间画完成的整条线（40% 不透明，箭头停在终点），过了 `linger` 在约 2% 时间跨度内淡出。lingering 的线不计入状态串的 MOVEMENTS。 |
 | `events.json` | `t`、可选 `until`、`at`、`kind`、`importance`（**3 最重要 = 点最大**，1 最小）、`sides/forces/casualties/result`。`kind`：`battle`、`landing`（这两种必须有 `sides` + `result`）、`bombing`（必须有 `sides`）、`surrender`、`political`、`massacre`、`siege`、`evacuation`、`liberation`、`atrocity`、`site`（新增六种的 `sides`/`result` 都可选）。可选 `detail: { en, zh }`（inspector 里默认收起的"细看 / More"）与 `sources: ["S1", "S7"]`（`sources.json` 的编号，inspector 摘要后显示 mono 上标，点开来源弹层）。`sensitive` 只是可选元数据，不影响显示。 |
-| `presets.json`（可选） | `{ "presets": [{ "id": "singapore-island", "label": { "en": "Singapore", "zh": "新加坡" }, "camera": { "center": [103.82, 1.35], "zoom": 9.2 } }] }`。注册成镜头预设，排在 `world` / `theatre` 之后（数字键接着编号，1–9 之外只有按钮）；`label` 是按钮文字（一两个词）；正文 `<FlyTo preset>` 用这些 id。 |
+| `presets.json`（可选） | `{ "presets": [{ "id": "singapore-island", "label": { "en": "Singapore", "zh": "新加坡" }, "camera": { "center": [103.82, 1.35], "zoom": 9.2 } }] }`。注册成镜头预设，排在 `world` / `theatre` 之后（`world` = 1、`theatre` = 2，这些从 3 起编号，1–9 之外只有按钮）；`label` 是按钮文字（一两个词）；正文 `<FlyTo preset>` 用这些 id。VIEW 组只放地理预设，章节不是预设。 |
 | `sources.json`（可选） | 见上文"加一个主题"第 4 步。 |
 
-**`site` 事件**是静态点位（监狱、纪念碑、建筑）：`t` 照写但不参与时间——不进时间轴范围、不进 panel01 泳道和统计、不脉冲；只在 `sites` 图层打开时显示（小空心菱形 + 中心点），点击同样打开 inspector（眉题 `P-01`），高亮时出引线标注。
+**`site` 事件**是静态点位（监狱、纪念碑、建筑）：`t` 照写但不参与时间——不进时间轴范围、不进泳道和统计、不脉冲；只在 `sites` 图层打开时显示（小空心菱形 + 中心点），点击同样打开 inspector（眉题 `P-01`），高亮时出引线标注。
 
-章节 `state`：`time`（ISO 三种精度或 `{ ma }`）、`camera`、`layers`、`highlight`（实体/行动/事件 id）、`theme`，以及 P3 新增的 `question` / `answer`（`{ en, zh }`，panel02 显示；`answer` 必须配 `question`），和可选的 `summary`（`{ en, zh }`，没有问题时 panel02 的一句话概述）。章节节点在时间轴上的位置 = 该章累积目标的 `t`。
+章节 `state`：`time`（ISO 三种精度或 `{ ma }`）、`camera`、`layers`、`highlight`（实体/行动/事件 id）、`theme`、`summary`（`{ en, zh }`，阅读面板标题下的一句话，也是默认演示字幕）、`question` / `answer`（`{ en, zh }`；没有 `summary` 时阅读面板头部显示 `question`；`answer` 必须配 `question`，目前不渲染），以及可选的 `beats`（演示节拍，见下）。章节节点在时间轴上的位置 = 该章累积目标的 `t`；**章节顺序必须等于时间顺序**（`tests/schemas.test.ts` 对 ww2 有检查）。
+
+演示节拍（`state.beats`，可选，加法）：
+
+```yaml
+beats:
+  - t: "1942-02-09"                                  # 可选：这一拍的时间（缓动过去）
+    camera: { center: [103.74, 1.4], zoom: 9.6 }    # 可选：镜头（飞过去）
+    layers: [base, control, movements, battles]     # 可选
+    highlight: [johor-crossing, bukit-timah]        # 可选：id 照常校验
+    caption: { en: "Night of 8 February 1942: …", zh: "1942 年 2 月 8 日夜：…" }   # 必填
+    audio: /audio/ww2/ch07-3.mp3                     # 预留：public/ 下的路径，进入这一拍时播放
+```
+
+每拍 = 本章累积目标 ⊕ 拍里写的字段。没写 `beats` 的章 = 一拍（本章状态，字幕 = `summary`，没有就 `question`，再没有就章名）。ww2 的第 07 章（哥打巴鲁 → 半岛南下 → 渡柔佛海峡 → 投降）和第 11 章（广岛 → 满洲 → 东京湾 → 新加坡受降）各写了四拍。
 
 ### 图层（`layers` 里的 id）与地图语法（docs/08 §5）
 
@@ -385,10 +410,37 @@ colors.ts  time-scene.css
 - 读数格式 `formatTime(t, locale)`：`15 Feb 1942` / `1942年2月15日`；`200 Ma` / `2亿年前`、`6600万年前`。跨度 >12 年时读数降到月，>100 年降到年。HUD 里的 mono 读数用 `formatReadout`（英文大写：`15 FEB 1942`）。
 - 刻度 `ruleTicks(min, max, scale, maxMajors, locale)`（`lib/ticks.ts`）：按跨度和宽度自适应，取主刻度数 ≤ `maxMajors` 的最细一档——几个月：主 = 月（1 月写年份）、次 = 每月 8/15/22 日；几年：主 = 年、次 = 月；更长：5/10/25/50/100… 年；地质：0.1–1000 Ma 档（如 10 Ma / 1 Ma），标尺右端写单位 `MA` / `百万年前`。
 
-### 时间轴标尺（`bottomBar`）
+### 底部条（`bottomBar`，TimeScene 唯一的底部块）
 
-- 一条工程标尺：主刻度（墨色、带 mono 标签）、次刻度（弱墨）、关键帧小空心菱形、已走过的部分加粗；章节节点是坐在标尺上的编号 hairline 圆（当前章 signal 实心，锁定章虚线圈 + 锁）；播放头是一条 signal 细线，日期写在线上方（贴边时夹在标尺内）。
-- 播放 / 倍速是 18 px hairline HUD 按钮（`hud-btn`，触屏 44 px 命中）。行为不变：拖动 = 连续时间不换章；点节点 = 换章；播放全程约 60 s @×1，遇章节节点停 1.5 s 并在舞台顶部显示章节卡；Shift+← → 微调；焦点在标尺上时 ← → 换章、↑ ↓ 微调、PageUp/PageDown 大步、Home/End 到头尾；时间轴里空格 = 播放/暂停。
+TimeScene 不注册 `panel01–03`，宿主因此不画底部三面板带；原来三块的内容并进这一条：
+
+```
+[▾][▶][×1 ×2 ×4]  ──┼──01──┼──02─03──…──◆──07─08──…──11──┼──   32 / 34 · 3 BATTLES · 1 MOVEMENT · K8→K9 23 %
+ KEYFRAMES          ◇      ◇   ◇       ◇  …                      （泳道，默认收起，点 ▾ 展开约 48 px）
+ MOVEMENTS          ▭▭  ▭▭▭▭ …
+ EVENTS             ○ ○○──○ …
+```
+
+- 左：泳道开关（小 chevron，`aria-expanded`）、播放 / 暂停、×1 ×2 ×4（18 px hairline `hud-btn`，触屏 44 px 命中）。
+- 中：工程标尺：主刻度（墨色、带 mono 标签）、次刻度（弱墨）、关键帧小空心菱形、已走过的部分加粗；章节节点是坐在标尺上的编号 hairline 圆（当前章 signal 实心）；播放头是一条 signal 细线，日期写在线上方（贴边时夹在标尺内）。
+- 右：状态串（mono）：参战方 `已加入 / 总数` · 进行中的战斗 · 进行中的行动 · 控制区关键帧 `K8→K9 23 %`；每段的 `title` 写双语全称（Participants / 参与方 …）。都是数据统计，不标 SIM。条窄于 860 px（容器查询）时状态串换到标尺下面一行。
+- 泳道（默认收起）：KEYFRAMES（菱形）、MOVEMENTS（起止条，重叠自动分行）、EVENTS（点 + 进行窗口），当前章节窗口淡 signal 底，`t` 一条 signal 竖线；横坐标与标尺完全一致。
+- 行为：拖动 = 连续时间不换章；点节点 = 换章（并展开阅读面板）；播放全程约 60 s @×1（按真实时间匀速推进），遇章节节点停 1.5 s 并在舞台顶部显示章节卡；Shift+← → 微调；焦点在标尺上时 ← → 换章、↑ ↓ 微调、PageUp/PageDown 大步、Home/End 到头尾；条里空格 = 播放/暂停。
+
+**横坐标：最小间距混合映射**（`lib/timeScale.ts`，单测 `tests/time-scene/timeScale.test.ts`）
+
+```
+x(t)    = α · lin(t) + (1 − α) · chap(t)
+lin(t)  = (t − min) / span · W                                    线性时间
+chap(t) = 过结点 {min, 各章时间…, max}（去重、排序）的分段线性，
+          结点 k 在 k · W / (K − 1)                                章节等距
+```
+
+α ∈ [0, 1] 取**最大**的、能让每对相邻（不同时间的）章节节点相距 ≥ 56 px 的值。两项在相邻结点之间都是线性的，且章节项等距（Δc = W / (K − 1)），所以对线性间距 Δl 不够的那一对，约束 α·Δl + (1 − α)·Δc ≥ 56 给出 α ≤ (Δc − 56) / (Δc − Δl)，取所有这类上界的最小值（都够时 α = 1）；连等距都不到 56 px（Δc < 56，窄屏）时取 α = 0（等距，已是最好）。宽度变化（ResizeObserver）时重算。x 严格单调、结点间线性，所以反函数（指针 → 时间，拖动用）逐段精确。
+
+- 刻度画在真实日期上、经映射落位：被压缩的年代刻度更密；主刻度标签彼此小于 34 px 的跳过标签，次刻度彼此小于 3 px 的不画（`thinTicks`）。刻度档位仍按 `W / 72` 个主刻度选（`ruleTicks`）。
+- 用同一映射的：标尺刻度、章节节点、关键帧菱形、播放头、拖动（反函数）、泳道、参与卡（卡片用标尺拟合出的 α，套在自己的宽度上）。播放仍按真实时间匀速走，所以播放头在被拉宽的年代走得快。
+- 标尺的 α 写在 `.ts-rule__rail[data-alpha]` 上，便于测试和量。ww2（1931-09 → 1945-09，11 章，第 07 / 08 章只差 3 天）：第 07 章、阅读面板展开时实测：1920×1080 标尺 885 px，α = 0.242（最近一对正好 56 px）；1280×720 标尺 611 px、900×1200 标尺 631 px，等距也只有 51 / 53 px，α = 0（等距）。窗口宽度不是标尺宽度：标尺还要让出阅读面板、左侧按钮和状态串；收起阅读面板标尺变宽，α 随之变大。
 
 ### HUD 控件与内容（docs/08 §2、§3）
 
@@ -396,23 +448,25 @@ colors.ts  time-scene.css
 
 | 项 | 内容 |
 |---|---|
-| 预设 | 各章镜头（`01`…）+ `world`（center [20, 10]，zoom 1.4）+ `theatre`（地图 `cameraForBounds` 套住全部数据；地图未就绪时按包围盒估算）+ `presets.json` 里的预设（按钮文字 = `label`）。数字键 1–9 |
-| 模式 | `flow`（F，= movements 图层，状态 `FLOW`）· `borders`（B，= borders 图层）· `graticule`（G，引擎本地状态）· `reference`（R）· `presentation`（P）· 宿主 `labels`（L） |
+| 预设 | `world`（center [20, 10]，zoom 1.4）+ `theatre`（整片区域：地图 `cameraForBounds` 套住全部数据；地图未就绪时按包围盒估算）+ `presets.json` 里的预设（按钮文字 = `label`，旁边小字写数字键）。数字键 1–9。没有章节预设 |
+| 模式 | `flow`（F，= movements 图层，状态 `FLOW`）· `borders`（B，= borders 图层）· `graticule`（G，引擎本地状态）· `reference`（R）· `presentation`（P，状态 `PRESENTATION 08/17`）· 宿主 `labels`（L） |
+| 控制面板 | `stageOverlay` 里的「图层和图例」卡（舞台 ≥ 720 px 宽时默认展开）：**LAYERS** 控制区 / 国界（B）/ 经纬网（G）/ 行动路线（F）/ 事件 / 何时加入 / 地点（有 `site` 事件才出）/ 标注（L）；**TOOLS** 与上一关键帧对照（R）/ 演示（P）/ 隐藏界面（H）；**KEY** 图例 |
 | `pause` | 播放 / 暂停（SPACE） |
 | `status` | `2000-03-11 · ×1`（与 `FLOW`、`REFERENCE` 等模式段一起出现在状态行） |
 | `specRows` | ENTITIES / KEYFRAMES / EVENTS / MOVEMENTS 计数（mono） |
 | `stats()` | `{ features, zoom, fps }`：features = 当前可见数据要素 + 经纬线 + 国界（开时）；fps = 页面 rAF 帧率 |
-| `escape` | 依次：退出 PRESENTATION → 退出 REFERENCE → 关闭事件详情 → 清空 highlight（来源弹层开着时 ESC 先关弹层，由弹层自己处理） |
+| `cardToggle` | 参与卡展开 / 收起 |
+| `beats` | 演示节拍列表与跳转（`__atlas.beats()` / `goToBeat(i)`） |
+| `escape` | 依次：退出 PRESENTATION → 退出 REFERENCE → 收起展开的参与卡（连同选中的实体）→ 取消选中实体 → 关闭事件详情 → 清空 highlight（来源弹层开着时 ESC 先关弹层，由弹层自己处理） |
 
 - **REFERENCE（R）**：版图对照用"叠加"实现（不分屏）：当前主导关键帧照常，相邻关键帧（前一帧；当前是第一帧时取后一帧）的边界以墨色虚线叠上，2 s 淡入（`instant` 时直接到位）；暂停播放，舞台顶部横幅写"实线 K2 … · 虚线 K1 …"。再按恢复，之前在播放就继续播放。少于两个关键帧时禁用；演示中禁用。
-- **PRESENTATION（P）**：隐藏 HUD（宿主 `hud = false`），只在舞台上留主题标题和底部章节字幕（编号 · 章名 · 日期）；按顺序走所有未锁定章节，每章 = 镜头飞行 2.2 s + 停 1.5 s，走完自动退出并恢复 HUD。P / ESC / H / "显示界面"都会结束演示（HUD 一恢复就结束）。
-- 插槽内容（`hud/HudPanels.tsx`，SVG 按面板实际像素画，字号走 `--u`）：
-  - `card` PARTICIPATION AND AREA：每个实体一条带——参与线（joined → left，起点小空心圆），关键帧间线性插值的近似控制面积（球面面积，斜线 + 淡底），行首写 EN 名 / 中文 / 当前 `≈面积 KM²`；当前章节窗口淡 signal 底，`t` 一条 signal 竖线，底部自适应刻度。**行数规则**（`lib/bandRows.ts` 的 `planBandRows`，有单测）：每行至少 25 设计 px（EN 名 + 中文两行不互相压）；全部放得下就按数据顺序全画（实体再多也画）；放不下就最多画 12 行（还要给"其余"那一行留 15 px，所以小卡片只有 4–6 行），挑法是 ①有控制区面积的实体在前，按各关键帧的最大面积从大到小，②其余按 `joined` 从早到晚，同值按数据顺序；剩下的合并成一行弱色小字 `+N OTHERS / 另 N 方`（贴在时间轴上方）。画出的行保持阵营分色（参与线按段分色，面积带按 `t` 时阵营）。已验证：ww2（34 个实体）在 1920×1080 / 1280×720 / 2560×1440 下 EN 与中文标签、行与行之间没有重叠；`pnpm shoot <topic> --layout` 只查面板之间的重叠，卡片内部标签要另量（量 `.ts-card text` 的包围盒）。
-  - `panel01` TIMELINE：整段时间的小标尺 + 章节编号圆 + 三条泳道：KEYFRAMES（菱形 K1…）、MOVEMENTS（起止条，重叠自动分行）、EVENTS（点 + 进行窗口），当前章节窗口与 `t` 竖线同上。
-  - `panel02` QUESTION：章节编号 + 章名，`state.question`（衬线），`state.answer` 在下方。没有问题时面板标题换成 SUMMARY / 概述，显示 `state.summary`；没有 summary 就取本章正文（当前语言）第一段（跳过 `<More>` 折叠块、家长模式版 `<Full>` 和来源上标，最多三行）；正文为空时退回本章高亮事件的摘要，再没有就是主题副标题。
-  - `panel03` STATE：TIME、PARTICIPANTS（已加入 / 总数）、ACTIVE BATTLES（battle/landing/bombing/siege 且在窗口内）、ACTIVE MOVEMENTS、CONTROL KEYFRAME（K1 → K2 · 37% + 小进度条）。都是数据统计，不标 SIM。
+- **PRESENTATION（P）= 用户翻页的节拍**：节拍列表 = 各章 `state.beats`（没写就一章一拍）。进入时记下当前场景，隐藏 HUD（宿主 `hud = false`，阅读面板随之收起、舞台占满），从当前章的第一拍开始；舞台上只剩标题块、章节行（编号 · 章名 · 日期 · 第几拍）、大号衬线字幕（底部居中，镜头飞完后约 1.6 s 淡入）和一排按章分组的节拍点。地图上盖一层透明点击层，拖动 / 缩放不再作用于地图。点击舞台 / → / 空格 = 下一拍，← = 上一拍，点节拍点 = 跳到那一拍；每拍用 `applyState` 飞镜头（2.2 s）、缓动 `t`（1.6 s），**不自动前进**，到最后一拍停住。`audio` 有就预加载、进入那一拍时播放（浏览器拒绝自动播放时静默），仍等用户翻页。ESC / P / H / "显示界面"结束演示并用 `applyState` 恢复进入前的场景（章节、镜头、`t`、图层、高亮）和 HUD。演示中 REFERENCE 禁用。
+- 插槽内容（`hud/HudPanels.tsx`，SVG 按卡片实际像素画，字号走 `--u`）：
+  - `card` PARTICIPATION AND AREA（横坐标用标尺的映射）：每个实体一条带——参与线（joined → left，起点小空心圆），关键帧间线性插值的近似控制面积（球面面积，斜线 + 淡底），行首写 EN 名 / 中文 / 当前 `≈面积 KM²`；当前章节窗口淡 signal 底，`t` 一条 signal 竖线，底部自适应刻度。**行数规则**（`lib/bandRows.ts` 的 `planBandRows`，有单测）：每行至少 25 设计 px（EN 名 + 中文两行不互相压）；全部放得下就按数据顺序全画（实体再多也画）；放不下就最多画 12 行（还要给"其余"那一行留 15 px，所以小卡片只有 4–6 行），挑法是 ①有控制区面积的实体在前，按各关键帧的最大面积从大到小，②其余按 `joined` 从早到晚，同值按数据顺序；剩下的合并成一行弱色小字 `+N OTHERS / 另 N 方 ▾`（贴在时间轴上方）。**展开**：点卡片表头（宿主按 `cardToggle` 画成按钮）或「另 N 方」那一行，卡片原地变长（≤ 右列 60%），列出全部实体（在战的按面积 / 加入时间排在前，其余按加入时间），行高 30 设计 px，卡片内滚动、时间轴吸底；再点表头或 ESC 收起。**点一行**（展开与否都可以，键盘 Enter / 空格）= 选中这个实体：`highlight = [id]`（地图上它的控制区描边加粗到 2.8 px）+ inspector 插槽出实体详情（`EntityInspector`：EN / 中文名、阵营时段、加入 / 退出日期、当前近似面积）；再点同一行取消，恢复本章高亮。画出的行保持阵营分色（参与线按段分色，面积带按 `t` 时阵营）。已验证：ww2（34 个实体）在 1920×1080 / 1280×720 / 2560×1440 下 EN 与中文标签、行与行之间没有重叠；`pnpm shoot <topic> --layout` 只查面板之间的重叠，卡片内部标签要另量（量 `.ts-card text` 的包围盒）。
+  - 原 `panel01`（时间标尺 + 泳道）、`panel03`（状态）并进底部条；原 `panel02`（问题 / 概述）由阅读面板头部的 `summary` 一句代替。
   - `perf`：`FEATURES 63 · ZOOM 5.5 · 60 FPS`（500 ms 更新）。
-  - `inspector`：hairline 框，`E-01 · BATTLE · 日期` mono 眉题（`site` 为 `P-01 · SITE`，无日期），标题大写 + 另一语言小字，摘要 + 来源上标（`sources`），进攻/防守/结果的 dl（斜线色块，颜色取事件开始时的阵营），Counter 兵力；伤亡仍只在家长模式；最后是 `detail` 的"细看 / More"折叠块（默认收起）。
+  - `inspector`（实体）：`N-03 · PARTICIPANT` 眉题，阵营色块 + 名称、另一语言小字，SIDE（每段阵营 + 起止日期）/ JOINED / LEFT / AREA NOW。
+  - `inspector`（事件）：hairline 框，`E-01 · BATTLE · 日期` mono 眉题（`site` 为 `P-01 · SITE`，无日期），标题大写 + 另一语言小字，摘要 + 来源上标（`sources`），进攻/防守/结果的 dl（斜线色块，颜色取事件开始时的阵营），Counter 兵力与伤亡；最后是 `detail` 的"细看 / More"折叠块（默认收起）。
   - Counter：`forces` / `casualties` 恰好两方时画成一个双方并排的 `CounterVersus`（进攻方在左、图标从中线向外长，防守方在右，同一刻度，底部一行刻度说明）；其他情况每方一行。刻度 `counterPer(max)`：最大值在 100 万–500 万之间固定"1 icon = 100,000 people / 一个图标 = 10 万人"（最多 50 个图标），否则取 1/2/5×10ⁿ（`nicePer`）。
   - 来源弹层（`widgets/SourcePopover.tsx`，宿主挂一个）：场景内任何 `[data-source="S3"]`（正文 `<Num>` 的上标、inspector 的上标）点开都走它——委托监听，静态正文无需 hydration；弹层贴在上标下方（放不下就在上方），写来源号、文本、说明、链接；ESC / 点外面 / 关闭按钮关闭，焦点回到上标。数据来自主题的 `sources.json`，不联网。
 
@@ -537,7 +591,8 @@ state:
 - `panel02` DETAIL：选中零件（编号、EN + 中文、所属组、相连零件编号、一行说明、迷你爆炸图：静止虚线框 + 拆开实线框 + 位移线）；无选中时显示本章标题与模型概要。
 - `panel03` STATE：RUN / FLOW / ANIMATIONS / VIEW / EXPLODE 实时值（mono），运行时数值带 `SIM` 芯片。
 - `perf`：`60 FPS · 16 CALLS · 0.02M TRIS · 1520×1026`（滚动平均；按需渲染空闲时显示 `IDLE`）。
-- `bottomBar`：只有 EXPLODED 时出现拆开滑块（44 px 拇指）；其余模式都在顶栏，不重复。
+- `bottomBar`：只有 EXPLODED 时出现拆开滑块（44 px 拇指）；模式开关都在控制面板，不重复。
+- `stageOverlay`：控制面板（`explorer/ExplorerOverlay.tsx`）：LAYERS = 零件组，TOOLS = X-RAY / EXPLODED / CUTAWAY / FLOW / REFERENCE / LABELS / 隐藏界面，KEY = 组与流的图例。
 - `inspector`：选中零件详情（编号 + 名称 + 中文、级别、说明、了解更多、所属组、相连芯片），hairline 皮肤。
 - `__atlas.stats()` 合并 `{calls, triangles, geometries, textures, fps, gpu}`（renderer.info + 滚动 FPS + WEBGL_debug_renderer_info）。
 

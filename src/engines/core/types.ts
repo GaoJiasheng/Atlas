@@ -57,14 +57,16 @@ export type SceneSnapshot<E extends EngineExtension = EngineExtension> = SceneSt
 
 /** Why the store last changed in a way engines should animate toward. */
 export interface SceneTransition {
-  /** Increments on every chapter change / URL hydration / camera preset / snap. */
+  /** Increments on every chapter change / URL hydration / camera preset / snap / applied state. */
   id: number;
   /**
    * `init` first load · `chapter` chapter change · `url` deep link ·
    * `preset` a camera preset was picked (only `camera` changed) ·
-   * `snap` finish running eases now (tests, screenshots; always instant).
+   * `snap` finish running eases now (tests, screenshots; always instant) ·
+   * `state` several fields set at once by the engine (`applyState`: a
+   * presentation beat, or restoring the scene when a presentation ends).
    */
-  reason: 'init' | 'chapter' | 'url' | 'preset' | 'snap';
+  reason: 'init' | 'chapter' | 'url' | 'preset' | 'snap' | 'state';
   /** Jump without animating (initial load, deep link). */
   instant: boolean;
 }

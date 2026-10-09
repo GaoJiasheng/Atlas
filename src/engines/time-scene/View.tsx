@@ -1,26 +1,34 @@
 /**
- * TimeScene view: GeoStage (MapLibre) + Timeline rule + HUD content (card,
- * three panels, perf) + legend / layer toggles + event inspector, and the
- * scene controls (presets, modes, pause, status, spec rows). See docs/06
- * "TimeScene".
+ * TimeScene view: GeoStage (MapLibre) + the bottom bar (timeline rule, state
+ * cluster, swimlanes) + HUD content (participation card, perf) + the control
+ * panel (layers, tools, key) + inspectors (event, entity), and the scene
+ * controls (geographic presets, modes, pause, status, spec rows, beats). See
+ * docs/06 "TimeScene".
  *
  * Time flows through two layers:
  *  - the store's `t` (TimePoint, in the URL, set by chapters and deep links)
  *  - the playhead (continuous number the map renders at; lib/playhead.ts)
  * Chapter changes tween the playhead to the chapter's time; scrubbing and
  * playback move the playhead and write a rounded `t` back with `patch()`.
+ *
+ * PRESENTATION (P) is a sequence of user-paced beats: every chapter's
+ * `state.beats`, or one beat per chapter (its state, `summary` as caption).
+ * Each beat flies the camera and eases `t` (store `applyState`), then fades
+ * its caption in; click / → / SPACE = next, ← = previous, a dot = jump. The
+ * HUD is hidden, the map takes no input. ESC or P ends it and restores the
+ * scene as it was.
  */
 import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
-import type { Chapter, EngineViewProps, GeoCamera } from '../core/types';
+import type { Chapter, EngineViewProps, GeoCamera, SceneSnapshot } from '../core/types';
 import { SceneSlot, useScene, useSceneContext, useSceneControls, useSceneStore, useT } from '../core/context';
-import type { SceneControls, SpecRow } from '../core/controls';
-import { SceneLayerToggles, type LayerItem } from '../widgets/LayerToggles';
-import { Legend, type LegendItem } from '../widgets/Legend';
+import type { BeatInfo, SceneControls, SpecRow } from '../core/controls';
+import { ControlPanel, type ControlRow } from '../widgets/ControlPanel';
+import type { LegendItem } from '../widgets/Legend';
 import { Icon } from '../widgets/icons';
-import { t as translate, tx, type BilingualText, type UiKey } from '../../i18n';
+import { t as translate, tx, withBase, type BilingualText, type UiKey } from '../../i18n';
 import { formatTimeParam } from '../../lib/time';
 import type { TimeSceneExt } from './index';
-import type { TimeSceneGeoData } from './schema';
+import type { TimeChapterState, TimeSceneGeoData } from './schema';
 import { buildTimeModel, type TimeModel } from './lib/model';
 import { createPlayhead, type Playhead } from './lib/playhead';
 import { clamp, fromNumber, stepFor, toNumber, type TimePoint } from './lib/time';
@@ -32,41 +40,21 @@ import type { GeoController } from './stages/geo/controller';
 import { Timeline, formatReadout } from './timeline/Timeline';
 import { usePlayback } from './timeline/usePlayback';
 import { EventInspector } from './EventInspector';
-import { BandCard, PerfReadout, QuestionPanel, StatePanel, TimelinePanel, useFps } from './hud/HudPanels';
+import { EntityInspector } from './EntityInspector';
+import { BandCard, PerfReadout, useFps } from './hud/HudPanels';
 import { BLOC_CSS, entityCssColor } from './colors';
 import { blocsOf, changesBloc } from './lib/bloc';
 import './time-scene.css';
 
 const CHAPTER_TWEEN_MS = 1600;
-const TOGGLE_LAYERS = ['control', 'borders', 'movements', 'battles', 'participation', 'sites'] as const;
 const SQUARE_KINDS = new Set<string>(['massacre', 'atrocity']);
 /** Up to this many entities, the legend names each one; above, it groups by bloc. */
 const LEGEND_ENTITY_LIMIT = 6;
 const OVERLAY_OPEN_MIN_WIDTH = 720;
 const TEXT_INPUTS = 'input, select, textarea, [contenteditable="true"], [data-keys="own"], [role="slider"]';
-/** PRESENTATION: camera flight + 1.5 s hold per chapter. */
-const PRESENT_STEP_MS = 2200 + 1500;
 const WORLD_CAMERA: GeoCamera = { center: [20, 10], zoom: 1.4 };
 
 const bi = (key: UiKey): BilingualText => ({ en: translate('en', key), zh: translate('zh', key) });
-
-/**
- * First paragraph of a chapter's pre-rendered body (panel 02 when the chapter
- * has no question or summary). Skips collapsed `<More>` blocks and source
- * superscripts.
- */
-function firstParagraph(chapterId: string): string | null {
-  const article = document.querySelector(`[data-chapter-body="${CSS.escape(chapterId)}"]`);
-  if (!article) return null;
-  for (const p of article.querySelectorAll('p')) {
-    if (p.closest('details')) continue;
-    const copy = p.cloneNode(true) as HTMLElement;
-    for (const sup of copy.querySelectorAll('.atlas-src-refs, [data-source]')) sup.remove();
-    const text = (copy.textContent ?? '').replace(/\s+/g, ' ').trim();
-    if (text) return text;
-  }
-  return null;
-}
 const pad2 = (n: number) => String(n).padStart(2, '0');
 
 /** Fallback camera for the `theatre` preset before the map can measure itself. */
@@ -76,11 +64,43 @@ function boundsCamera(model: TimeModel): GeoCamera {
   return { center: [(w + e) / 2, (s + n) / 2], zoom: Math.max(1, Math.min(8, Math.log2(360 / span))) };
 }
 
+/** One presentation beat, flattened across chapters. */
+interface Beat extends BeatInfo {
+  /** 0-based chapter position. */
+  chapterIndex: number;
+  /** Beats in this chapter. */
+  count: number;
+  t?: TimePoint;
+  camera?: GeoCamera;
+  layers?: string[];
+  highlight?: string[];
+  audio?: string;
+}
+
+function buildBeats(chapters: readonly Chapter[]): Beat[] {
+  return chapters.flatMap((c, ci) => {
+    const state = c.state as TimeChapterState;
+    const list = state.beats ?? [{ caption: state.summary ?? state.question ?? c.title }];
+    return list.map((b, i) => ({
+      chapter: c.id,
+      chapterIndex: ci,
+      index: i,
+      count: list.length,
+      caption: b.caption,
+      ...('t' in b && b.t !== undefined ? { t: b.t as TimePoint } : {}),
+      ...('camera' in b && b.camera ? { camera: b.camera as GeoCamera } : {}),
+      ...('layers' in b && b.layers ? { layers: [...b.layers] } : {}),
+      ...('highlight' in b && b.highlight ? { highlight: [...b.highlight] } : {}),
+      ...('audio' in b && b.audio ? { audio: b.audio } : {}),
+    }));
+  });
+}
+
 export default function TimeSceneView({ topic, data, chapters, locale }: EngineViewProps) {
   const t = useT();
   const geo = data as TimeSceneGeoData;
   const store = useSceneStore<TimeSceneExt>();
-  const { hud } = useSceneContext();
+  const { hud, actions } = useSceneContext();
   const currentChapter = useScene<TimeSceneExt, string | null>((s) => s.chapter);
   const layers = useScene<TimeSceneExt, string[]>((s) => s.layers);
   const highlight = useScene<TimeSceneExt, string[]>((s) => s.highlight);
@@ -122,10 +142,20 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   const playback = usePlayback(playhead, model, commit);
   const { setPlaying } = playback;
 
-  /* ---------- selected event (inspector) ---------- */
+  /** α of the timeline mapping, fitted by the rule to its width; the band card reuses it. */
+  const [alpha, setAlpha] = useState(1);
+
+  /* ---------- selection: an event (map / labels) or an entity (card row) ---------- */
   const [selected, setSelected] = useState<string | null>(null);
+  const [selectedEntity, setSelectedEntity] = useState<string | null>(null);
+  const [cardExpanded, setCardExpanded] = useState(false);
+  const restoreHighlight = useCallback(() => {
+    const s = store.getState();
+    s.patch({ highlight: s.chapterTarget(s.chapter).highlight });
+  }, [store]);
   const selectEvent = useCallback(
     (id: string) => {
+      setSelectedEntity(null);
       setSelected(id);
       store.getState().patch({ highlight: [id] });
     },
@@ -133,9 +163,25 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   );
   const closeEvent = useCallback(() => {
     setSelected(null);
-    const s = store.getState();
-    s.patch({ highlight: s.chapterTarget(s.chapter).highlight });
-  }, [store]);
+    restoreHighlight();
+  }, [restoreHighlight]);
+  const selectEntity = useCallback(
+    (id: string) => {
+      setSelected(null);
+      if (selectedEntity === id) {
+        setSelectedEntity(null);
+        restoreHighlight();
+        return;
+      }
+      setSelectedEntity(id);
+      store.getState().patch({ highlight: [id] });
+    },
+    [store, selectedEntity, restoreHighlight],
+  );
+  const closeEntity = useCallback(() => {
+    setSelectedEntity(null);
+    restoreHighlight();
+  }, [restoreHighlight]);
 
   /* ---------- store -> playhead ---------- */
   useEffect(
@@ -147,6 +193,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
         if (transitioned) {
           setPlaying(false);
           setSelected(null);
+          setSelectedEntity(null);
         }
         if (!transitioned && s.t === prev.t) return;
         if (s.t === null) return;
@@ -175,6 +222,13 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     playhead.cancelTween();
   }, [playhead, setPlaying]);
   const stepChapter = useCallback((dir: 1 | -1) => store.getState().stepChapter(dir), [store]);
+  const goToChapterFromRule = useCallback(
+    (id: string) => {
+      store.getState().goToChapter(id);
+      actions.setReader(true);
+    },
+    [store, actions],
+  );
 
   // Shift+←/→ anywhere (outside text fields, the map and the timeline itself) nudges time.
   useEffect(() => {
@@ -219,40 +273,93 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     if (controller && referenceRef.current) controller.setReference(true, true);
   }, [controller]);
 
-  /* ---------- PRESENTATION (P): chapters in order, HUD hidden but title + caption ---------- */
-  const [presenting, setPresenting] = useState(false);
+  /* ---------- PRESENTATION (P): user-paced beats ---------- */
+  const beats = useMemo(() => buildBeats(chapters), [chapters]);
+  const [beat, setBeat] = useState<{ index: number; instant: boolean } | null>(null);
+  const presenting = beat !== null;
   const presentingRef = useRef(false);
-  const presentTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const beatRef = useRef<number | null>(null);
+  /** The scene before the presentation started (restored when it ends). */
+  const savedScene = useRef<SceneSnapshot<TimeSceneExt> | null>(null);
+  const audio = useRef(new Map<string, HTMLAudioElement>());
+
+  const stopAudio = useCallback(() => {
+    for (const a of audio.current.values()) {
+      a.pause();
+      a.currentTime = 0;
+    }
+  }, []);
+  const applyBeat = useCallback(
+    (i: number, instant: boolean) => {
+      const b = beats[i];
+      if (!b) return;
+      beatRef.current = i;
+      setBeat({ index: i, instant });
+      const s = store.getState();
+      const target = s.chapterTarget(b.chapter);
+      s.applyState(
+        {
+          ...target,
+          ...(b.t !== undefined ? { t: b.t } : {}),
+          ...(b.camera ? { camera: b.camera } : {}),
+          ...(b.layers ? { layers: b.layers } : {}),
+          ...(b.highlight ? { highlight: b.highlight } : {}),
+        },
+        { instant },
+      );
+      stopAudio();
+      const clip = b.audio ? audio.current.get(b.audio) : undefined;
+      // Autoplay may be refused until the reader has interacted; the beat works without sound.
+      if (clip) clip.play().catch(() => {});
+    },
+    [beats, store, stopAudio],
+  );
   const stopPresentation = useCallback(
     (restoreHud: boolean) => {
-      if (presentTimer.current) clearTimeout(presentTimer.current);
-      presentTimer.current = null;
+      if (!presentingRef.current) return;
       presentingRef.current = false;
-      setPresenting(false);
+      beatRef.current = null;
+      setBeat(null);
+      stopAudio();
+      if (savedScene.current) store.getState().applyState(savedScene.current, { instant: false });
       if (restoreHud) hud.setState({ hud: true });
     },
-    [hud],
+    [hud, store, stopAudio],
   );
-  const startPresentation = useCallback(() => {
-    if (reference) setReferenceMode(false, true);
-    setPlaying(false);
-    setSelected(null);
-    presentingRef.current = true;
-    setPresenting(true);
-    hud.setState({ hud: false });
-    const list = chapters;
-    let i = 0;
-    const next = () => {
-      const chapter = list[i++];
-      if (!chapter) {
-        stopPresentation(true);
-        return;
+  const startPresentation = useCallback(
+    (start: number | null, instant: boolean) => {
+      if (beats.length === 0) return;
+      if (!presentingRef.current) {
+        if (reference) setReferenceMode(false, true);
+        setPlaying(false);
+        setSelected(null);
+        setSelectedEntity(null);
+        setCardExpanded(false);
+        savedScene.current = store.getState().snapshot();
+        presentingRef.current = true;
+        hud.setState({ hud: false });
+        // Preload the narration of every beat that has one.
+        for (const b of beats) {
+          if (!b.audio || audio.current.has(b.audio)) continue;
+          const clip = new Audio(withBase(b.audio));
+          clip.preload = 'auto';
+          audio.current.set(b.audio, clip);
+        }
       }
-      store.getState().goToChapter(chapter.id);
-      presentTimer.current = setTimeout(next, PRESENT_STEP_MS);
-    };
-    next();
-  }, [reference, setReferenceMode, setPlaying, hud, chapters, store, stopPresentation]);
+      const here = beats.findIndex((b) => b.chapter === store.getState().chapter);
+      applyBeat(clamp(start ?? Math.max(0, here), 0, beats.length - 1), instant);
+    },
+    [beats, reference, setReferenceMode, setPlaying, store, hud, applyBeat],
+  );
+  const stepBeat = useCallback(
+    (dir: 1 | -1) => {
+      const i = beatRef.current;
+      if (i === null) return;
+      const next = i + dir;
+      if (next >= 0 && next < beats.length) applyBeat(next, false);
+    },
+    [beats.length, applyBeat],
+  );
   // ESC / H / "show HUD" bring the HUD back: that ends the presentation.
   useEffect(
     () =>
@@ -261,9 +368,21 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
       }),
     [hud, stopPresentation],
   );
-  useEffect(() => () => {
-    if (presentTimer.current) clearTimeout(presentTimer.current);
-  }, []);
+  // Beat keys: → / SPACE next, ← previous. Captured before the host's chapter / pause keys.
+  useEffect(() => {
+    if (!presenting) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+      const dir = e.key === 'ArrowRight' || e.key === ' ' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (!dir) return;
+      e.preventDefault();
+      e.stopPropagation();
+      stepBeat(dir);
+    };
+    window.addEventListener('keydown', onKey, true);
+    return () => window.removeEventListener('keydown', onKey, true);
+  }, [presenting, stepBeat]);
+  useEffect(() => () => stopAudio(), [stopAudio]);
 
   /* ---------- legend ---------- */
   const legend = useMemo<LegendItem[]>(() => {
@@ -301,10 +420,27 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     return items;
   }, [geo, model, layers, locale]); // `t` is bound to `locale`
 
-  const layerItems = useMemo<LayerItem[]>(
-    () =>
-      TOGGLE_LAYERS.filter((id) => id !== 'sites' || model.sites.length > 0).map((id) => ({ id, label: t(`time.layer.${id}`) })),
-    [model, locale],
+  /* ---------- control panel: LAYERS (store layers + drawing modes) and TOOLS ---------- */
+  const panelLayers = useMemo<ControlRow[]>(
+    () => [
+      { kind: 'layer', id: 'control', label: t('time.layer.control') },
+      { kind: 'mode', id: 'borders', label: t('time.layer.borders') },
+      { kind: 'mode', id: 'graticule', label: t('time.layer.graticule') },
+      { kind: 'mode', id: 'flow', label: t('time.layer.movements') },
+      { kind: 'layer', id: 'battles', label: t('time.layer.battles') },
+      { kind: 'layer', id: 'participation', label: t('time.layer.participation') },
+      ...(model.sites.length > 0 ? [{ kind: 'layer' as const, id: 'sites', label: t('time.layer.sites') }] : []),
+      { kind: 'mode', id: 'labels', label: t('time.layer.labels') },
+    ],
+    [model, locale], // `t` is bound to `locale`
+  );
+  const panelTools = useMemo<ControlRow[]>(
+    () => [
+      { kind: 'mode', id: 'reference', label: t('time.tool.reference') },
+      { kind: 'mode', id: 'presentation', label: t('time.tool.presentation') },
+      { kind: 'hud' },
+    ],
+    [locale], // `t` is bound to `locale`
   );
 
   /* ---------- overlay: open by default only when the stage is roomy ---------- */
@@ -323,10 +459,6 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     return s ? { ...s, fps: fps.current } : null;
   }, [fps]);
 
-  /* ---------- panel 02: question, else summary ---------- */
-  const chapterState = (chapters.find((c) => c.id === currentChapter)?.state ?? {}) as { question?: BilingualText; summary?: BilingualText };
-  const hasQuestion = Boolean(chapterState.question);
-
   /* ---------- HUD controls (docs/08 §3) ---------- */
   const movementsOn = layers.includes('movements');
   const bordersOn = layers.includes('borders');
@@ -341,21 +473,16 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     [geo, model],
   );
   const controls = useMemo<SceneControls>(() => {
-    const chapterPresets = chapters.flatMap((c, i) => {
-      const camera = store.getState().chapterTarget(c.id).camera;
-      return camera ? [{ id: c.id, label: pad2(i + 1), chapter: c.id, camera: camera as GeoCamera | null }] : [];
-    });
-    // presets.json: after `world` / `theatre`, so digit keys keep their meaning; `<FlyTo>` names these ids.
-    const filePresets = (geo.presets?.presets ?? []).map((p) => ({ id: p.id, label: p.label, title: p.label, camera: p.camera as GeoCamera | null }));
+    // Geographic presets only (chapters have the rail, the rule and ← →): world, the whole area, then presets.json.
     const presets = [
-      ...chapterPresets,
-      { id: 'world', label: t('time.preset.world'), title: t('time.preset.world'), camera: WORLD_CAMERA },
+      { id: 'world', label: t('time.preset.world'), title: t('time.preset.world'), camera: WORLD_CAMERA as GeoCamera | null },
       { id: 'theatre', label: t('time.preset.theatre'), title: t('time.preset.theatre'), camera: null },
-      ...filePresets,
+      ...(geo.presets?.presets ?? []).map((p) => ({ id: p.id, label: p.label, title: p.label, camera: p.camera as GeoCamera | null })),
     ];
     const toggleLayer = (id: string, on: boolean) => {
       if (store.getState().layers.includes(id) !== on) store.getState().toggleLayer(id);
     };
+    const step = beat ? `${pad2(beat.index + 1)}/${pad2(beats.length)}` : '';
     return {
       presets: {
         items: presets,
@@ -380,7 +507,15 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
             tone: 'cold',
             status: 'REFERENCE',
           },
-          { id: 'presentation', key: 'p', label: t('time.mode.presentation'), on: presenting, tone: 'signal', status: 'PRESENTATION', phone: false },
+          {
+            id: 'presentation',
+            key: 'p',
+            label: t('time.mode.presentation'),
+            on: presenting,
+            tone: 'signal',
+            status: `PRESENTATION ${step}`.trim(),
+            phone: false,
+          },
         ],
         set: (id, on, { instant }) => {
           if (id === 'flow') toggleLayer('movements', on);
@@ -388,7 +523,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
           else if (id === 'graticule') setGraticuleOn(on);
           else if (id === 'reference') setReferenceMode(on, instant);
           else if (id === 'presentation') {
-            if (on) startPresentation();
+            if (on) startPresentation(null, instant);
             else stopPresentation(true);
           }
         },
@@ -402,10 +537,10 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
       specRows,
       status: [statusT, `×${playback.speed}`].filter(Boolean),
       card: bi('time.card.title'),
-      panels: {
-        panel01: bi('time.panel.timeline'),
-        panel02: bi(hasQuestion ? 'time.panel.question' : 'time.panel.summary'),
-        panel03: bi('time.panel.state'),
+      cardToggle: { expanded: cardExpanded, set: setCardExpanded },
+      beats: {
+        list: () => beats.map(({ chapter, index, caption }) => ({ chapter, index, caption })),
+        go: (i, { instant }) => startPresentation(i, instant),
       },
       escape: () => {
         if (presentingRef.current) {
@@ -414,6 +549,15 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
         }
         if (reference) {
           setReferenceMode(false, false);
+          return true;
+        }
+        if (cardExpanded) {
+          setCardExpanded(false);
+          if (selectedEntity) closeEntity();
+          return true;
+        }
+        if (selectedEntity) {
+          closeEntity();
           return true;
         }
         if (selected) {
@@ -428,16 +572,16 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
       },
     };
   }, [
-    chapters,
     store,
     geo,
-    hasQuestion,
     model,
     movementsOn,
     bordersOn,
     graticuleOn,
     reference,
     presenting,
+    beat,
+    beats,
     playback.playing,
     playback.speed,
     setPlaying,
@@ -447,39 +591,21 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     readStats,
     specRows,
     statusT,
+    cardExpanded,
     selected,
+    selectedEntity,
     closeEvent,
+    closeEntity,
     locale, // `t` is bound to `locale`
   ]);
   useSceneControls(controls);
 
   const selectedEvent = selected ? geo.events.find((e) => e.id === selected) ?? null : null;
+  const pickedEntity = selectedEntity ? geo.entities.find((e) => e.id === selectedEntity) ?? null : null;
   const stopChapter = playback.stop ? chapters.find((c) => c.id === playback.stop?.id) : undefined;
-  const chapter = chapters.find((c) => c.id === currentChapter) ?? null;
-  const chapterNumber = chapter ? chapters.indexOf(chapter) + 1 : 0;
-  // No question: `state.summary`, else the body's first paragraph, else the highlighted event, else the subtitle.
-  const fallbackSummary = useMemo<BilingualText | string | null>(() => {
-    if (!currentChapter) return topic.subtitle;
-    if (chapterState.summary) return chapterState.summary;
-    const first = firstParagraph(currentChapter);
-    if (first) return first;
-    const target = store.getState().chapterTarget(currentChapter).highlight;
-    const ev = geo.events.find((e) => target.includes(e.id));
-    return ev?.summary ?? topic.subtitle;
-  }, [currentChapter, chapterState.summary, store, geo, topic, locale]);
-  const stateLabels = useMemo(
-    () => ({
-      time: bi('time.state.time'),
-      participants: bi('time.state.participants'),
-      battles: bi('time.state.battles'),
-      movements: bi('time.state.movements'),
-      keyframe: bi('time.state.keyframe'),
-    }),
-    [],
-  );
 
   return (
-    <div className="ts-stage" ref={stageRef} data-reference={reference || undefined}>
+    <div className="ts-stage" ref={stageRef} data-reference={reference || undefined} data-presenting={presenting || undefined}>
       <GeoStage
         store={store}
         playhead={playhead}
@@ -506,16 +632,18 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
         )}
       </div>
 
-      {presenting && (
-        <PresentationCaption
+      {beat && (
+        <Presentation
           title={topic.title}
-          chapter={chapter}
-          number={chapterNumber}
-          total={chapters.length}
+          beats={beats}
+          index={beat.index}
+          instant={beat.instant}
+          chapters={chapters}
           model={model}
           playhead={playhead}
           locale={locale}
-          label={t('time.presentation')}
+          onStep={stepBeat}
+          onGo={(i) => applyBeat(i, false)}
         />
       )}
 
@@ -528,22 +656,23 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
             </span>
             <Icon name="close" size={18} className="ts-overlay__open" />
           </summary>
-          <SceneLayerToggles items={layerItems} />
-          <Legend items={legend} locale={locale} />
+          <ControlPanel layers={panelLayers} tools={panelTools} legend={legend} />
         </details>
       </SceneSlot>
 
       <SceneSlot name="card">
-        <BandCard model={model} playhead={playhead} locale={locale} chapter={currentChapter} highlight={highlight} />
-      </SceneSlot>
-      <SceneSlot name="panel01">
-        <TimelinePanel model={model} playhead={playhead} locale={locale} chapters={chapters} chapter={currentChapter} />
-      </SceneSlot>
-      <SceneSlot name="panel02">
-        <QuestionPanel chapter={chapter} number={chapterNumber} locale={locale} fallback={fallbackSummary} />
-      </SceneSlot>
-      <SceneSlot name="panel03">
-        <StatePanel model={model} playhead={playhead} locale={locale} highlight={highlight} labels={stateLabels} />
+        <BandCard
+          model={model}
+          playhead={playhead}
+          locale={locale}
+          chapter={currentChapter}
+          highlight={highlight}
+          alpha={alpha}
+          expanded={cardExpanded}
+          selected={selectedEntity}
+          onSelect={selectEntity}
+          onExpand={() => setCardExpanded(true)}
+        />
       </SceneSlot>
       <SceneSlot name="perf">
         <PerfReadout read={readStats} />
@@ -556,6 +685,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
           locale={locale}
           chapters={chapters}
           currentChapter={currentChapter}
+          highlight={highlight}
           playing={playback.playing}
           speed={playback.speed}
           onTogglePlay={() => setPlaying(!playback.playing)}
@@ -563,14 +693,20 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
           onScrub={commit}
           onScrubStart={scrubStart}
           onNudge={nudge}
-          onChapter={(id) => store.getState().goToChapter(id)}
+          onChapter={goToChapterFromRule}
           onStepChapter={stepChapter}
+          onAlpha={setAlpha}
         />
       </SceneSlot>
 
       {selectedEvent && (
         <SceneSlot name="inspector">
           <EventInspector event={selectedEvent} model={model} locale={locale} onClose={closeEvent} />
+        </SceneSlot>
+      )}
+      {pickedEntity && (
+        <SceneSlot name="inspector">
+          <EntityInspector entity={pickedEntity} model={model} playhead={playhead} locale={locale} onClose={closeEntity} />
         </SceneSlot>
       )}
     </div>
@@ -595,43 +731,93 @@ function ReferenceBanner({ model, playhead, locale }: { model: TimeModel; playhe
   );
 }
 
-/** PRESENTATION: the only HUD left on the stage — title and chapter caption. */
-function PresentationCaption({
+/**
+ * PRESENTATION: the only HUD left on the stage — the title block, the chapter
+ * line, the beat caption (large serif, bottom centre, fades in once the
+ * flight is done) and a row of beat dots grouped by chapter. A transparent
+ * layer over the map takes clicks (= next beat) and keeps the map still.
+ */
+function Presentation({
   title,
-  chapter,
-  number,
-  total,
+  beats,
+  index,
+  instant,
+  chapters,
   model,
   playhead,
   locale,
-  label,
+  onStep,
+  onGo,
 }: {
   title: BilingualText;
-  chapter: Chapter | null;
-  number: number;
-  total: number;
+  beats: readonly Beat[];
+  index: number;
+  instant: boolean;
+  chapters: readonly Chapter[];
   model: TimeModel;
   playhead: Playhead;
   locale: EngineViewProps['locale'];
-  label: string;
+  onStep(dir: 1 | -1): void;
+  onGo(index: number): void;
 }) {
+  const tr = useT();
   const now = useSyncExternalStore(playhead.subscribe, playhead.get, playhead.get);
+  const b = beats[index]!;
+  const chapter = chapters[b.chapterIndex];
+  const groups = useMemo(() => {
+    const out: { chapter: number; items: { beat: Beat; i: number }[] }[] = [];
+    beats.forEach((beat, i) => {
+      const last = out[out.length - 1];
+      if (last && last.chapter === beat.chapterIndex) last.items.push({ beat, i });
+      else out.push({ chapter: beat.chapterIndex, items: [{ beat, i }] });
+    });
+    return out;
+  }, [beats]);
   return (
-    <div className="ts-present" aria-live="polite">
+    <div className="ts-present" data-instant={instant || undefined}>
+      <div className="ts-present__hit" onClick={() => onStep(1)} aria-hidden="true" />
       <p className="ts-present__title">
-        <small>{label.toLocaleUpperCase('en')}</small>
+        <small>{tr('time.presentation').toLocaleUpperCase('en')}</small>
         <span lang="en">{title.en}</span>
         {title.zh && <span lang="zh-Hans">{title.zh}</span>}
       </p>
-      {chapter && (
-        <p className="ts-present__caption">
+      <div className="ts-present__foot">
+        <p className="ts-present__chapter">
           <i>
-            {pad2(number)} / {pad2(total)}
+            {pad2(b.chapterIndex + 1)} / {pad2(chapters.length)}
           </i>
-          <span>{tx(chapter.title, locale)}</span>
+          {chapter && <span>{tx(chapter.title, locale)}</span>}
           <b>{formatReadout(now, model, locale)}</b>
+          {b.count > 1 && (
+            <em>
+              {b.index + 1} / {b.count}
+            </em>
+          )}
         </p>
-      )}
+        <p className="ts-present__caption" key={index} aria-live="polite">
+          {tx(b.caption, locale)}
+        </p>
+        <nav className="ts-present__dots" aria-label={tr('time.beats')}>
+          {groups.map((g) => (
+            <span key={g.chapter} className="ts-present__group">
+              {g.items.map(({ beat, i }) => (
+                <button
+                  key={i}
+                  type="button"
+                  className="ts-present__dot"
+                  aria-current={i === index ? 'step' : undefined}
+                  aria-label={tr('time.beat', { n: beat.chapterIndex + 1, k: beat.index + 1, caption: tx(beat.caption, locale) })}
+                  title={`${pad2(beat.chapterIndex + 1)}${beat.count > 1 ? `.${beat.index + 1}` : ''} · ${tx(chapters[beat.chapterIndex]?.title, locale)}`}
+                  onClick={(e) => {
+                    onGo(i);
+                    if (e.detail > 0) e.currentTarget.blur();
+                  }}
+                />
+              ))}
+            </span>
+          ))}
+        </nav>
+      </div>
     </div>
   );
 }

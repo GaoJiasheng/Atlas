@@ -1,6 +1,7 @@
 /**
  * Per-device preferences in localStorage. Only non-critical preferences live
- * here (docs/02 §iPad): theme override, locale.
+ * here (docs/02 §iPad): theme override, locale. One session-only UI flag
+ * (reading panel collapsed) lives in sessionStorage.
  * Scene state never goes here; it lives in the URL.
  *
  * Reads and writes are wrapped in try/catch: storage can be unavailable
@@ -82,4 +83,27 @@ export function setSavedLocale(locale: Locale): void {
 export function useThemeOverride(): [Theme | null, (t: Theme | null) => void] {
   const value = useSyncExternalStore(subscribe, getThemeOverride, () => null);
   return [value, useCallback((t: Theme | null) => setThemeOverride(t), [])];
+}
+
+/* ------------------------------------------------------------------ */
+/* Session-only UI state (sessionStorage)                              */
+/* ------------------------------------------------------------------ */
+
+/** Docked reading panel collapsed / expanded: per tab, never in the URL. */
+export const READER_KEY = 'atlas:reader';
+
+/** `true` = expanded (the default, also when storage is unavailable). */
+export function getReaderExpanded(): boolean {
+  try {
+    return window.sessionStorage.getItem(READER_KEY) !== 'collapsed';
+  } catch {
+    return true;
+  }
+}
+export function setReaderExpanded(expanded: boolean): void {
+  try {
+    window.sessionStorage.setItem(READER_KEY, expanded ? 'open' : 'collapsed');
+  } catch {
+    /* storage unavailable: the state lasts for this page view */
+  }
 }

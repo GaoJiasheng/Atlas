@@ -433,6 +433,9 @@ async function runKeys(s: Session, o: Options, report: RunReport): Promise<void>
   await s.apply({ chapter: firstChapter, wait: 1200 });
   const first = keymap.find((k) => k.type === 'preset');
   if (first) {
+    // Light a preset first: a chapter's own view is not a preset (TimeScene has geographic presets only), so "free" must be earned by the drag.
+    await page.keyboard.press(first.key);
+    await page.waitForTimeout(2400);
     await page.mouse.move(w * 0.5, h * 0.5);
     await page.mouse.down();
     await page.mouse.move(w * 0.5 + 140, h * 0.5 + 30, { steps: 8 });
