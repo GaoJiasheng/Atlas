@@ -16,8 +16,13 @@
  * back with `patch()`. There is no other free-running playback: the bar's
  * PRESENT button starts the presentation.
  *
+ * A background chapter (`kind: background`, core/chapters.ts) has no time of
+ * its own: no timeline node, no auto-run, ignored by the rule's hybrid scale;
+ * its map is the first keyframe (or its `state.time`).
+ *
  * PRESENTATION (P) is a sequence of user-paced beats: every chapter's
- * `state.beats`, or one beat per chapter (its state, `summary` as caption).
+ * `state.beats`, or one beat per chapter (its state, `summary` as caption);
+ * the background chapter's beats come first.
  * Each beat flies the camera and eases `t` (store `applyState`), then fades
  * its caption in; click / → / SPACE = next, ← = previous, a chapter segment or
  * beat tick of the progress bar = jump. The
@@ -32,6 +37,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
 import type { Chapter, EngineViewProps, GeoCamera, SceneSnapshot } from '../core/types';
 import { SceneSlot, useScene, useSceneContext, useSceneControls, useSceneStore, useT } from '../core/context';
+import { chapterNumbers, isBackground, storyChapters } from '../core/chapters';
 import type { BeatInfo, SceneControls, SpecRow } from '../core/controls';
 import { ControlPanel, type ControlRow } from '../widgets/ControlPanel';
 import type { LegendItem } from '../widgets/Legend';
@@ -154,13 +160,15 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   const storeT = useScene<TimeSceneExt, TimePoint | null>((s) => s.t);
 
   /* ---------- model + playhead ---------- */
+  /** Chapters with a place on the timeline (the background chapter has none). */
+  const story = useMemo(() => storyChapters(chapters), [chapters]);
   const model = useMemo(
     () =>
       buildTimeModel(
         geo,
-        chapters.map((c) => ({ id: c.id, t: store.getState().chapterTarget(c.id).t })),
+        story.map((c) => ({ id: c.id, t: store.getState().chapterTarget(c.id).t })),
       ),
-    [geo, chapters, store],
+    [geo, story, store],
   );
   const [playhead] = useState(() => {
     const t0 = store.getState().t;
@@ -192,17 +200,18 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   const runToken = useRef(0);
   /**
    * Where a chapter's run starts and ends: its first beat's `t` if it has one, else the previous
-   * chapter's time, else the data minimum (each only when it is before the chapter time).
+   * story chapter's time, else the data minimum (each only when it is before the chapter time).
+   * The background chapter has no span (it eases to its time, it does not run).
    */
   const chapterSpan = useCallback(
     (id: string | null): [number, number] | null => {
-      const i = chapters.findIndex((c) => c.id === id);
-      const chapter = chapters[i];
+      const i = story.findIndex((c) => c.id === id);
+      const chapter = story[i];
       const end = chapter ? store.getState().chapterTarget(chapter.id).t : null;
       if (!chapter || end === null) return null;
       const to = clamp(toNumber(end), model.min, model.max);
       const beatT = (chapter.state as TimeChapterState).beats?.[0]?.t;
-      const prev = i > 0 ? store.getState().chapterTarget(chapters[i - 1]!.id).t : null;
+      const prev = i > 0 ? store.getState().chapterTarget(story[i - 1]!.id).t : null;
       const candidates = [beatT !== undefined ? toNumber(beatT as TimePoint) : null, prev !== null ? toNumber(prev) : null, model.min];
       for (const c of candidates) {
         if (c === null || !Number.isFinite(c)) continue;
@@ -211,7 +220,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
       }
       return [to, to];
     },
-    [chapters, store, model],
+    [story, store, model],
   );
   const startRun = useCallback(
     (chapter: string | null, target: number) => {
@@ -548,13 +557,15 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     ],
     [model, locale], // `t` is bound to `locale`
   );
+  const hasGlossary = (geo.glossary?.terms.length ?? 0) > 0;
   const panelTools = useMemo<ControlRow[]>(
     () => [
       { kind: 'mode', id: 'reference', label: t('time.tool.reference') },
       { kind: 'mode', id: 'presentation', label: t('time.tool.presentation') },
+      ...(hasGlossary ? [{ kind: 'glossary' as const }] : []),
       { kind: 'hud' },
     ],
-    [locale], // `t` is bound to `locale`
+    [locale, hasGlossary], // `t` is bound to `locale`
   );
 
   /* ---------- overlay: open by default only when the stage is roomy ---------- */
@@ -803,7 +814,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
           model={model}
           playhead={playhead}
           locale={locale}
-          chapters={chapters}
+          chapters={story}
           currentChapter={currentChapter}
           highlight={highlight}
           presenting={presenting}
@@ -902,6 +913,18 @@ function Presentation({
   const now = useSyncExternalStore(playhead.subscribe, playhead.get, playhead.get);
   const b = beats[index]!;
   const chapter = chapters[b.chapterIndex];
+  /** Display numbers: the background chapter is 00 ("Background"), story chapters 01..n. */
+  const numbers = useMemo(() => chapterNumbers(chapters), [chapters]);
+  const storyTotal = useMemo(() => storyChapters(chapters).length, [chapters]);
+  const numberOf = (ci: number) => numbers.get(chapters[ci]?.id ?? '') ?? ci + 1;
+  /** Short mark of a chapter in the progress bar and tooltips: `07`, or `BG` / 背景. */
+  const markOf = (ci: number) => (isBackground(chapters[ci]) ? tr('chapter.backgroundShort') : pad2(numberOf(ci)));
+  /** Accessible name of a chapter segment. */
+  const chapterLabel = (ci: number) => {
+    const c = chapters[ci];
+    const title = c ? tx(c.title, locale) : '';
+    return isBackground(c) ? tr('time.beatBackground', { title }) : tr('time.beatChapter', { n: numberOf(ci), title });
+  };
   /** First beat and beat count of every chapter. */
   const spans = useMemo(
     () =>
@@ -951,6 +974,8 @@ function Presentation({
   const voiceOn = voice && !audio && spoken !== '';
   const chapterTitle = chapter ? speakableText(tx(chapter.title, locale)) : '';
   const chapterIndex = b.chapterIndex;
+  /** The announcement's first part: the chapter number in words, or "Background". */
+  const chapterOpening = isBackground(chapter) ? tr('chapter.background') : chapterNumberText(numberOf(chapterIndex), locale === 'zh' ? 'zh' : 'en');
   const firstOfChapter = b.index === 0;
   useEffect(() => {
     const sp = speech.current;
@@ -968,7 +993,7 @@ function Presentation({
         sp.state = 'speaking';
         const parts: { part: 'chapter' | 'title' | 'caption'; text: string }[] = [];
         if (firstOfChapter || sp.chapter !== chapterIndex) {
-          parts.push({ part: 'chapter', text: chapterNumberText(chapterIndex + 1, lang) });
+          parts.push({ part: 'chapter', text: chapterOpening });
           if (chapterTitle) parts.push({ part: 'title', text: chapterTitle });
         }
         parts.push({ part: 'caption', text: spoken });
@@ -996,7 +1021,7 @@ function Presentation({
       stopSpeech();
       sp.state = 'idle';
     };
-  }, [voiceOn, index, instant, locale, spoken, chapterIndex, chapterTitle, firstOfChapter]);
+  }, [voiceOn, index, instant, locale, spoken, chapterIndex, chapterTitle, chapterOpening, firstOfChapter]);
 
   useEffect(() => {
     if (!autoplay || held || last) return;
@@ -1051,9 +1076,7 @@ function Presentation({
       </p>
       <div className="ts-present__foot" data-hud-panel="present">
         <p className="ts-present__chapter">
-          <i>
-            {pad2(b.chapterIndex + 1)} / {pad2(chapters.length)}
-          </i>
+          <i>{isBackground(chapter) ? tr('chapter.background') : `${pad2(numberOf(b.chapterIndex))} / ${pad2(storyTotal)}`}</i>
           {chapter && <span>{tx(chapter.title, locale)}</span>}
           <b>{formatReadout(now, model, locale)}</b>
           {b.count > 1 && (
@@ -1071,7 +1094,7 @@ function Presentation({
               {chapters.map((c, ci) => {
                 const { first, count } = spans[ci]!;
                 const state = ci < b.chapterIndex ? 'done' : ci === b.chapterIndex ? 'current' : 'todo';
-                const label = <span className="ts-present__no">{pad2(ci + 1)}</span>;
+                const label = <span className="ts-present__no">{markOf(ci)}</span>;
                 return (
                   <li key={c.id} className="ts-present__seg" data-state={state}>
                     {state === 'current' && count > 1 ? (
@@ -1084,8 +1107,12 @@ function Presentation({
                               className="ts-present__tick"
                               data-state={k <= b.index ? 'done' : 'todo'}
                               aria-current={k === b.index ? 'step' : undefined}
-                              aria-label={tr('time.beat', { n: ci + 1, k: k + 1, caption: tx(beats[first + k]!.caption, locale) })}
-                              title={`${pad2(ci + 1)}.${k + 1} · ${tx(c.title, locale)}`}
+                              aria-label={
+                                isBackground(c)
+                                  ? `${chapterLabel(ci)} · ${k + 1}: ${tx(beats[first + k]!.caption, locale)}`
+                                  : tr('time.beat', { n: numberOf(ci), k: k + 1, caption: tx(beats[first + k]!.caption, locale) })
+                              }
+                              title={`${markOf(ci)}.${k + 1} · ${tx(c.title, locale)}`}
                               onClick={go(first + k)}
                             />
                           ))}
@@ -1097,8 +1124,8 @@ function Presentation({
                         type="button"
                         className="ts-present__chap"
                         aria-current={state === 'current' ? 'step' : undefined}
-                        aria-label={tr('time.beatChapter', { n: ci + 1, title: tx(c.title, locale) })}
-                        title={`${pad2(ci + 1)} · ${tx(c.title, locale)}`}
+                        aria-label={chapterLabel(ci)}
+                        title={`${markOf(ci)} · ${tx(c.title, locale)}`}
                         onClick={go(first)}
                       >
                         <i className="ts-present__line" />

@@ -1,0 +1,175 @@
+{
+  "terms": [
+    {
+      "id": "occupation",
+      "term": {
+        "en": "Occupation",
+        "zh": "占领"
+      },
+      "definition": {
+        "en": "Rule over a territory by a foreign army that has taken it by force. The occupying power controls the government, the economy and the police, and usually punishes resistance harshly.",
+        "zh": "一国军队用武力夺取别国领土后在当地实行统治。占领者控制当地的政府、经济和警察，对反抗者通常严厉惩罚。"
+      },
+      "see": [
+        "armistice"
+      ]
+    },
+    {
+      "id": "massacre",
+      "term": {
+        "en": "Massacre",
+        "zh": "屠杀"
+      },
+      "definition": {
+        "en": "The deliberate killing of many people who cannot defend themselves, such as prisoners or civilians.",
+        "zh": "有意地成批杀害没有抵抗能力的人，例如俘虏和平民。"
+      },
+      "see": [
+        "holocaust",
+        "war-crimes-tribunal"
+      ]
+    },
+    {
+      "id": "prisoner-of-war",
+      "term": {
+        "en": "Prisoner of war",
+        "zh": "战俘"
+      },
+      "definition": {
+        "en": "A member of the armed forces captured by the enemy. The Geneva Convention of 1929 required prisoners to be treated humanely; in this war very many were not, and large numbers died in captivity.",
+        "zh": "被敌方俘获的军人。1929 年的《日内瓦公约》要求人道对待战俘；但在这场战争中，许多战俘遭到虐待，大量战俘死于关押期间。"
+      },
+      "see": [
+        "war-crimes-tribunal"
+      ]
+    },
+    {
+      "id": "war-crimes-tribunal",
+      "term": {
+        "en": "War crimes tribunal",
+        "zh": "战犯审判"
+      },
+      "definition": {
+        "en": "A court that tries people accused of war crimes. After the war the Allies held the Nuremberg trials (1945–1946) and the International Military Tribunal for the Far East in Tokyo (1946–1948); national courts, including in Nanjing and Singapore, tried many more cases.",
+        "zh": "审判战争罪行被告的法庭。战后，同盟国在纽伦堡（1945–1946）和东京（远东国际军事法庭，1946–1948）进行审判；南京、新加坡等地的法庭还审理了大量案件。"
+      },
+      "see": [
+        "massacre"
+      ]
+    },
+    {
+      "id": "axis",
+      "term": {
+        "en": "Axis",
+        "zh": "轴心国"
+      },
+      "definition": {
+        "en": "Germany, Italy and Japan, and the states that later joined their side. The name comes from the 1936 “Rome–Berlin axis”; the three signed the Tripartite Pact in September 1940.",
+        "zh": "指德国、意大利、日本以及后来加入它们一方的国家。名称来自 1936 年的“罗马—柏林轴心”；三国于 1940 年 9 月签订《三国同盟条约》。"
+      },
+      "see": [
+        "allies"
+      ]
+    },
+    {
+      "id": "allies",
+      "term": {
+        "en": "Allies",
+        "zh": "同盟国"
+      },
+      "definition": {
+        "en": "The countries that fought the Axis. In 1939 they were Britain, France and Poland with the British dominions and colonies; the Soviet Union and the United States joined in 1941, and China had been at war with Japan since 1937. The name was taken from the First World War.",
+        "zh": "与轴心国作战的国家。1939 年是英国、法国、波兰以及英国的自治领和殖民地；苏联和美国在 1941 年加入，中国则自 1937 年起已在对日作战。这个名称沿用自第一次世界大战。"
+      },
+      "see": [
+        "axis"
+      ]
+    },
+    {
+      "id": "non-aggression-pact",
+      "term": {
+        "en": "Non-aggression pact",
+        "zh": "互不侵犯条约"
+      },
+      "definition": {
+        "en": "A treaty in which two states promise not to attack each other. The German–Soviet pact of 23 August 1939 had a secret protocol that divided eastern Europe between them.",
+        "zh": "两国承诺互不进攻的条约。1939 年 8 月 23 日的苏德互不侵犯条约附有一份秘密议定书，把东欧划分为两国的势力范围。"
+      },
+      "see": [
+        "occupation"
+      ]
+    },
+    {
+      "id": "blitzkrieg",
+      "term": {
+        "en": "Blitzkrieg",
+        "zh": "闪电战"
+      },
+      "definition": {
+        "en": "German for “lightning war”: tanks and motorised infantry massed to break through on a narrow front and drive deep, with aircraft attacking ahead of them, so that the defender has no time to form a new line.",
+        "zh": "德语，意为“闪电般的战争”：把坦克和摩托化步兵集中起来，在狭窄的正面突破后向纵深猛插，飞机在前方配合攻击，让防守一方来不及建立新的防线。"
+      },
+      "see": [
+        "encirclement"
+      ]
+    },
+    {
+      "id": "armistice",
+      "term": {
+        "en": "Armistice",
+        "zh": "停战协定"
+      },
+      "definition": {
+        "en": "An agreement to stop fighting, made before any peace treaty. Under France’s armistice with Germany of 22 June 1940, the north and the Atlantic coast of France were occupied by Germany.",
+        "zh": "交战各方在签订和约之前停止作战的协议。按照 1940 年 6 月 22 日的法德停战协定，法国北部和大西洋沿岸由德国占领。"
+      },
+      "see": [
+        "occupation"
+      ]
+    },
+    {
+      "id": "encirclement",
+      "term": {
+        "en": "Encirclement",
+        "zh": "包围"
+      },
+      "definition": {
+        "en": "Columns breaking through on both sides of an enemy army and meeting behind it, trapping it in a “pocket”. Encircled troops must break out or surrender.",
+        "zh": "部队从敌军两翼突破，在其背后会合，把对方围在“口袋”里。被包围的部队只能突围或投降。"
+      },
+      "see": [
+        "blitzkrieg",
+        "siege"
+      ]
+    },
+    {
+      "id": "siege",
+      "term": {
+        "en": "Siege",
+        "zh": "围城"
+      },
+      "definition": {
+        "en": "Surrounding a city or fortress and cutting off its supplies to force it to surrender. The siege of Leningrad lasted 872 days.",
+        "zh": "包围一座城市或要塞，切断它的补给，迫使它投降。列宁格勒围城持续了 872 天。"
+      },
+      "see": [
+        "encirclement"
+      ]
+    },
+    {
+      "id": "holocaust",
+      "term": {
+        "en": "Holocaust",
+        "zh": "大屠杀（犹太人）"
+      },
+      "definition": {
+        "en": "The murder of about six million European Jews by Nazi Germany and its collaborators during the Second World War, by mass shooting, starvation and in the gas chambers of extermination camps such as Auschwitz. Roma, disabled people and other groups were also murdered.",
+        "zh": "第二次世界大战期间纳粹德国及其合作者杀害约 600 万欧洲犹太人的罪行，手段包括集体枪杀、饥饿，以及在奥斯威辛等灭绝营的毒气室中杀害。罗姆人、残疾人等群体也遭到杀害。"
+      },
+      "see": [
+        "massacre",
+        "war-crimes-tribunal"
+      ]
+    }
+  ]
+}

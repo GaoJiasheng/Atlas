@@ -9,3 +9,4 @@ export { ThemeToggle } from './ThemeToggle';
 export { Dropdown, type DropdownItem, type DropdownProps } from './Dropdown';
 export { GlobalToggles } from './GlobalToggles';
 export { Icon, type IconName } from './icons';
+export { GlossaryCard, topicGlossary, type GlossaryCardProps } from './GlossaryCard';

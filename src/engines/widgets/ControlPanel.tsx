@@ -11,12 +11,13 @@
  * right. A `layer` row toggles the store's `layers`; a `mode` row calls the
  * HUD actions (the same path as its letter key) and carries `data-mode`, so
  * the registry stays the single source of state; the `hud` row hides the HUD
- * (H). Rows of modes flagged `phone: false` are not drawn below 760 px.
+ * (H); the `glossary` row lists the topic's terms in the reader (HUD store
+ * `glossary`, no key). Rows of modes flagged `phone: false` are not drawn below 760 px.
  */
 import type { ReactNode } from 'react';
 import { useStore } from 'zustand';
 import { useScene, useSceneContext } from '../core/context';
-import { allModes, type HudText, type ModeTone } from '../core/controls';
+import { allModes, GLOSSARY_ALL, type HudText, type ModeTone } from '../core/controls';
 import { t, tx } from '../../i18n';
 import { resolveColorRef } from '../../theme/theme';
 import { Legend, type LegendItem } from './Legend';
@@ -26,7 +27,9 @@ export type ControlRow =
   | { kind: 'layer'; id: string; label: HudText; color?: string }
   /** A registered mode; the label defaults to the mode's own. */
   | { kind: 'mode'; id: string; label?: HudText }
-  | { kind: 'hud' };
+  | { kind: 'hud' }
+  /** "Glossary": the list of every term in the reader's inspector (only for topics with data/glossary.json). */
+  | { kind: 'glossary' };
 
 export interface ControlPanelProps {
   layers: readonly ControlRow[];
@@ -104,6 +107,7 @@ export function ControlPanel({ layers, tools, legend }: ControlPanelProps) {
   const controls = useStore(hud, (s) => s.controls);
   const labelsOn = useStore(hud, (s) => s.labels);
   const hudOn = useStore(hud, (s) => s.hud);
+  const glossaryOpen = useStore(hud, (s) => s.glossary);
   const modes = allModes(controls, labelsOn, t(locale, 'hud.mode.labels'));
 
   const row = (r: ControlRow) => {
@@ -129,6 +133,17 @@ export function ControlPanel({ layers, tools, legend }: ControlPanelProps) {
           keyHint="H"
           onClick={() => actions.setHud(!hudOn)}
           data={{ 'data-hud-toggle': '' }}
+        />
+      );
+    }
+    if (r.kind === 'glossary') {
+      return (
+        <Row
+          key="glossary"
+          on={glossaryOpen !== null}
+          label={t(locale, 'controls.glossary')}
+          onClick={() => actions.setGlossary(glossaryOpen === null ? GLOSSARY_ALL : null)}
+          data={{ 'data-glossary-toggle': '' }}
         />
       );
     }

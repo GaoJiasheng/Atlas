@@ -13,6 +13,10 @@
  *   - data/sources.json: ids unique (S1, S2 …); every event `sources` ref and
  *     every `<Num s="…">` in a chapter body names a listed source
  *   - `<FlyTo preset="…">` names a preset from data/presets.json; `<More>` has a title
+ *   - data/glossary.json: term ids unique, `see` refs exist; every `<Term id="…">`
+ *     in a chapter body names a listed term
+ *   - at most one `kind: background` chapter, with `order: 0`; `state.note`
+ *     only on the background chapter
  *   - referenced files (cover) exist
  * Plus: UI dictionaries (src/i18n/ui.*.json) have identical keys.
  *
@@ -27,6 +31,7 @@ import { topicSchema, type TopicMeta } from '../src/content/schema/topic';
 import { chapterSchema } from '../src/content/schema/chapter';
 import { KEBAB_ID } from '../src/content/schema/common';
 import { sourceIds, type SourcesFile } from '../src/content/schema/sources';
+import { glossaryIds, type GlossaryFile } from '../src/content/schema/glossary';
 import { engineSchemas, formatIssues } from '../src/engines/schemas';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -130,8 +135,8 @@ function tagAttrs(body: string, tag: string): { raw: string; attrs: Record<strin
   return out;
 }
 
-/** `<Num s>`, `<FlyTo preset>` and `<More title>` in a chapter body. */
-function checkBodyComponents(file: string, body: string, sources: Set<string> | null, presets: Set<string>): void {
+/** `<Num s>`, `<FlyTo preset>`, `<More title>` and `<Term id>` in a chapter body. */
+function checkBodyComponents(file: string, body: string, sources: Set<string> | null, presets: Set<string>, terms: Set<string> | null): void {
   for (const { raw, attrs } of tagAttrs(body, 'Num')) {
     const ids = (attrs.s ?? '').split(/[\s,]+/).filter(Boolean);
     if (ids.length === 0) {
@@ -150,6 +155,12 @@ function checkBodyComponents(file: string, body: string, sources: Set<string> | 
   }
   for (const { raw, attrs } of tagAttrs(body, 'More')) {
     if (!attrs.title) error(file, `<More> needs a title={{ en: "…", zh: "…" }}: ${raw}`);
+  }
+  for (const { raw, attrs } of tagAttrs(body, 'Term')) {
+    const id = attrs.id;
+    if (!id) error(file, `<Term> needs an id, e.g. <Term id="blitzkrieg">: ${raw}`);
+    else if (!terms) error(file, `<Term id="${id}">: the topic has no data/glossary.json`);
+    else if (!terms.has(id)) error(file, `<Term id="${id}">: unknown term (not in data/glossary.json)`);
   }
 }
 
@@ -227,6 +238,8 @@ function validateTopic(dir: string): void {
   const sourcesFile = data !== undefined ? (data as { sources?: SourcesFile }).sources : undefined;
   const sources = sourcesFile ? sourceIds(sourcesFile) : 'sources' in raw ? new Set<string>() : null;
   const presets = new Set(data !== undefined ? schemas.presetIds(data) : []);
+  const glossaryFile = data !== undefined ? (data as { glossary?: GlossaryFile }).glossary : undefined;
+  const terms = glossaryFile ? glossaryIds(glossaryFile) : 'glossary' in raw ? new Set<string>() : null;
 
   /* ---- chapters ---- */
   const chaptersDir = join(dir, 'chapters');
@@ -241,6 +254,7 @@ function validateTopic(dir: string): void {
   }
 
   const orders = new Map<number, string>();
+  let background: string | null = null;
   for (const name of files) {
     const file = join(chaptersDir, name);
     const text = readFileSync(file, 'utf8');
@@ -254,7 +268,7 @@ function validateTopic(dir: string): void {
     checkBilingual(file, front);
     checkLangBlocks(file, match[2] ?? '');
     // Only when the data parsed: otherwise the data errors already explain missing ids.
-    if (data !== undefined) checkBodyComponents(file, match[2] ?? '', sources, presets);
+    if (data !== undefined) checkBodyComponents(file, match[2] ?? '', sources, presets, terms);
 
     const parsed = chapterSchema.safeParse(front);
     if (!parsed.success) {
@@ -267,6 +281,14 @@ function validateTopic(dir: string): void {
     const prev = orders.get(chapter.order);
     if (prev) error(file, `order ${chapter.order} duplicates ${prev}`);
     else orders.set(chapter.order, name);
+
+    if (chapter.kind === 'background') {
+      if (chapter.order !== 0) error(file, `the background chapter must have order 0 (has ${chapter.order})`);
+      if (background) error(file, `only one background chapter per topic (${background} is one already)`);
+      else background = name;
+    } else if ((chapter.state as { note?: unknown }).note !== undefined) {
+      error(file, 'state.note (the reading note) belongs on the background chapter (kind: background)');
+    }
 
     const expected = new RegExp(`^\\d+-${chapter.id}\\.mdx$`);
     if (!expected.test(name)) warn(file, `file name should be <nn>-${chapter.id}.mdx`);

@@ -11,6 +11,7 @@ import { z } from 'zod';
 import { bilingual, colorRef, kebabId, level, theme, vec3 } from '../../content/schema/common';
 import { orbitCamera } from '../../content/schema/camera';
 import { sourcesFile } from '../../content/schema/sources';
+import { glossaryFile } from '../../content/schema/glossary';
 
 /* ------------------------------------------------------------------ */
 /* Parts                                                               */
@@ -362,7 +363,7 @@ export type PartsFile = z.output<typeof partsFile>;
 
 /** Parsed `data/*.json` of a SpaceScene topic, keyed by file name. */
 /** `parts.json`, plus the optional shared `sources.json` (content/schema/sources.ts). */
-export const spaceSceneData = z.object({ parts: partsFile, sources: sourcesFile.optional() }).strict();
+export const spaceSceneData = z.object({ parts: partsFile, sources: sourcesFile.optional(), glossary: glossaryFile.optional() }).strict();
 export type SpaceSceneData = z.output<typeof spaceSceneData>;
 
 /* ------------------------------------------------------------------ */

@@ -20,7 +20,7 @@
  */
 import sharp from 'sharp';
 import type { Feature, FeatureCollection, Position } from 'geojson';
-import { areaFeatures, mapshaper, toFc } from './lib';
+import { areaFeatures, mapshaper, toFc } from './common';
 
 export interface Image {
   width: number;

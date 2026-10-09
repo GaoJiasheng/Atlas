@@ -32,10 +32,11 @@ export async function getTopicChapters(slug: string): Promise<ChapterEntry[]> {
   return chapters.sort((a, b) => a.data.order - b.data.order);
 }
 
-/** Chapter counts per topic slug (for the index). */
+/** Chapter counts per topic slug (for the index); the background chapter is not counted. */
 export async function getChapterCounts(): Promise<Map<string, number>> {
   const counts = new Map<string, number>();
   for (const entry of await getCollection('chapters')) {
+    if (entry.data.kind === 'background') continue;
     const slug = chapterTopicSlug(entry);
     counts.set(slug, (counts.get(slug) ?? 0) + 1);
   }

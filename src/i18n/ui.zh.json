@@ -235,5 +235,15 @@
   "time.beat": "第 {n} 章第 {k} 步：{caption}",
   "time.scale": "比例尺",
   "time.area": "近似面积",
-  "time.resultLabel": "结果"
+  "time.resultLabel": "结果",
+  "chapter.background": "背景",
+  "chapter.backgroundShort": "背景",
+  "chapter.note": "阅读说明",
+  "controls.glossary": "名词",
+  "glossary.heading": "名词",
+  "glossary.all": "全部名词",
+  "glossary.see": "参见",
+  "glossary.close": "关闭名词解释",
+  "glossary.missing": "名词表里没有这个词。",
+  "time.beatBackground": "背景：{title}"
 }

@@ -25,6 +25,18 @@ function topic(slug: string, edit: (root: string) => void = () => {}) {
   edit(root);
 }
 
+/** A chapter file: frontmatter lines + a bilingual body. */
+function chapterFile(front: string[], body = 'Text.'): string {
+  return ['---', ...front, '---', '', '<Lang en>', '', body, '', '</Lang>', '', '<Lang zh>', '', '文字。', '', '</Lang>', ''].join('\n');
+}
+
+const GLOSSARY = {
+  terms: [
+    { id: 'front', term: { en: 'Front', zh: '前线' }, definition: { en: 'Where two armies meet.', zh: '两军交锋的地方。' }, see: ['siege'] },
+    { id: 'siege', term: { en: 'Siege', zh: '围城' }, definition: { en: 'A city cut off.', zh: '被切断的城市。' } },
+  ],
+};
+
 function editJson(file: string, edit: (value: never) => void) {
   const value = JSON.parse(readFileSync(file, 'utf8'));
   edit(value as never);
@@ -54,6 +66,35 @@ beforeAll(() => {
       .replace('<FlyTo preset="sample-east">Go', '<FlyTo preset="nowhere">Go');
     writeFileSync(file, text);
   });
+  topic('with-background', (root) => {
+    writeFileSync(
+      join(root, 'chapters/00-before.mdx'),
+      chapterFile(
+        ['id: before', 'order: 0', 'kind: background', 'title: { en: "Before", zh: "之前" }', 'state:', '  note: { en: "How it is written.", zh: "怎么写的。" }', '  summary: { en: "Before.", zh: "之前。" }'],
+        'A <Term id="front">front</Term> line.',
+      ),
+    );
+    writeFileSync(join(root, 'data/glossary.json'), JSON.stringify(GLOSSARY));
+  });
+  topic('bad-background', (root) => {
+    writeFileSync(join(root, 'chapters/09-late.mdx'), chapterFile(['id: late', 'order: 9', 'kind: background', 'title: { en: "Late", zh: "晚" }']));
+    writeFileSync(
+      join(root, 'chapters/10-noted.mdx'),
+      chapterFile(['id: noted', 'order: 10', 'title: { en: "Noted", zh: "注" }', 'state:', '  note: { en: "A note.", zh: "说明。" }']),
+    );
+  });
+  topic('term-without-glossary', (root) => {
+    writeFileSync(join(root, 'chapters/09-term.mdx'), chapterFile(['id: term', 'order: 9', 'title: { en: "Term", zh: "词" }'], 'A <Term id="front">front</Term>.'));
+  });
+  topic('bad-glossary', (root) => {
+    const glossary = structuredClone(GLOSSARY);
+    glossary.terms[0]!.see = ['nowhere'];
+    writeFileSync(join(root, 'data/glossary.json'), JSON.stringify(glossary));
+  });
+  topic('unknown-term', (root) => {
+    writeFileSync(join(root, 'data/glossary.json'), JSON.stringify(GLOSSARY));
+    writeFileSync(join(root, 'chapters/09-term.mdx'), chapterFile(['id: term', 'order: 9', 'title: { en: "Term", zh: "词" }'], 'A <Term id="trench">trench</Term>.'));
+  });
   try {
     output = execFileSync(join(ROOT, 'node_modules/.bin/tsx'), ['scripts/validate-content.ts'], {
       cwd: ROOT,
@@ -74,7 +115,7 @@ afterAll(() => {
 describe('validate-content', () => {
   it('fails the run when any topic has errors', () => {
     expect(status).toBe(1);
-    expect(output).toMatch(/4 topic\(s\)/);
+    expect(output).toMatch(/9 topic\(s\)/);
   });
 
   it('passes an unmodified copy', () => {
@@ -93,6 +134,22 @@ describe('validate-content', () => {
     const lines = linesFor('bad-body').join('\n');
     expect(lines).toContain('<Num s="S7">: unknown source "S7"');
     expect(lines).toContain('<FlyTo preset="nowhere">: unknown preset');
+  });
+
+  it('accepts a background chapter (order 0, reading note) and <Term> refs to the glossary', () => {
+    expect(linesFor('with-background').filter((l) => l.startsWith('error'))).toEqual([]);
+  });
+
+  it('requires the background chapter to come first, and the reading note to sit on it', () => {
+    const lines = linesFor('bad-background').join('\n');
+    expect(lines).toContain('the background chapter must have order 0 (has 9)');
+    expect(lines).toContain('state.note (the reading note) belongs on the background chapter');
+  });
+
+  it('checks <Term> ids and glossary references', () => {
+    expect(linesFor('term-without-glossary').join('\n')).toContain('<Term id="front">: the topic has no data/glossary.json');
+    expect(linesFor('bad-glossary').join('\n')).toContain('data.glossary.terms.0.see.0: unknown term "nowhere"');
+    expect(linesFor('unknown-term').join('\n')).toContain('<Term id="trench">: unknown term (not in data/glossary.json)');
   });
 });
 

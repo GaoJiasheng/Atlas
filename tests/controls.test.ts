@@ -26,10 +26,10 @@ const chapter = (id: string, order: number, state: Chapter['state'] = {}): Chapt
 const noSuppress = { suppress: (fn: () => void) => fn() };
 
 describe('docId', () => {
-  it('uses the first six letters of the topic and a two-digit chapter number', () => {
+  it('uses the first six letters of the topic and a two-digit chapter number (00 = background)', () => {
     expect(docId('sample-space', 2)).toBe('ATL-SAMPLE-02');
     expect(docId('ww2-pacific', 11)).toBe('ATL-WW2PAC-11');
-    expect(docId('ab', 0)).toBe('ATL-AB-01');
+    expect(docId('ab', 0)).toBe('ATL-AB-00');
   });
 });
 

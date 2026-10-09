@@ -24,12 +24,22 @@ export type QuizItem = z.output<typeof quizItem>;
  */
 export const chapterState = z.record(z.string(), z.unknown());
 
+/**
+ * `chapter` (default): a story node with its own time. `background`: the
+ * topic's prologue (at most one, `order: 0`): no timeline node, no number
+ * (doc id `00`, the rail says "Background"), the reader opens on first entry.
+ */
+export const CHAPTER_KINDS = ['chapter', 'background'] as const;
+export type ChapterKind = (typeof CHAPTER_KINDS)[number];
+
 /** Frontmatter of `src/content/topics/<slug>/chapters/<nn>-<id>.mdx` (docs/02). */
 export const chapterSchema = z
   .object({
     id: kebabId,
     order: z.number().int().nonnegative(),
     title: bilingual,
+    /** Omitted = `chapter`. */
+    kind: z.enum(CHAPTER_KINDS).optional(),
     /** Content-planning metadata (lowest school level the chapter targets); never rendered. */
     level: level.optional(),
     /** Optional metadata only; nothing is hidden or gated on it. */

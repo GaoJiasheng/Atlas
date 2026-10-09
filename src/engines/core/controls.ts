@@ -192,7 +192,15 @@ export interface HudState {
    * strip). Kept in sessionStorage by the host, never in the URL.
    */
   reader: boolean;
+  /**
+   * Glossary in the reader's inspector: a term id (`<Term>` click, a related
+   * term), `GLOSSARY_ALL` (the list, TOOLS "Glossary"), or `null` (closed).
+   */
+  glossary: string | null;
 }
+
+/** `HudState.glossary` value that lists every term. */
+export const GLOSSARY_ALL = '*';
 
 export type HudStore = StoreApi<HudState>;
 
@@ -204,6 +212,7 @@ export function createHudStore(): HudStore {
     presetId: null,
     cameraFree: false,
     reader: true,
+    glossary: null,
   }));
 }
 
@@ -264,10 +273,10 @@ export function buildKeymap(controls: SceneControls): KeyBinding[] {
   return out;
 }
 
-/** `ATL-{first 6 of the topic id, upper-case, no hyphens}-{chapter number, 2 digits}`. */
+/** `ATL-{first 6 of the topic id, upper-case, no hyphens}-{chapter number, 2 digits}`; the background chapter is `00`. */
 export function docId(topicId: string, chapterNumber: number): string {
   const topic = topicId.replace(/[^a-z0-9]/gi, '').toUpperCase().slice(0, 6);
-  return `ATL-${topic}-${String(Math.max(1, chapterNumber)).padStart(2, '0')}`;
+  return `ATL-${topic}-${String(Math.max(0, Math.round(chapterNumber))).padStart(2, '0')}`;
 }
 
 /* ------------------------------------------------------------------ */
@@ -283,6 +292,8 @@ export interface HudActions {
   setLabels(on: boolean): void;
   /** Expand / collapse the docked reading panel. */
   setReader(expanded: boolean): void;
+  /** Open a glossary term (`GLOSSARY_ALL` = the list) in the reader's inspector; `null` closes it. */
+  setGlossary(id: string | null): void;
   escape(): void;
 }
 
@@ -323,9 +334,16 @@ export function createHudActions(hud: HudStore, camera: { suppress(fn: () => voi
     setReader(expanded) {
       hud.setState({ reader: expanded });
     },
+    setGlossary(id) {
+      hud.setState({ glossary: id });
+    },
     escape() {
       if (!hud.getState().hud) {
         hud.setState({ hud: true });
+        return;
+      }
+      if (hud.getState().glossary !== null) {
+        hud.setState({ glossary: null });
         return;
       }
       controls().escape?.();

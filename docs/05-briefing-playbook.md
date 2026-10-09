@@ -1,5 +1,7 @@
 # 05 · 施工 brief 模板
 
+> **历史主题（时间线 + 地图）**：不要从下面的通用 brief 起步，直接用项目级 skill `.claude/skills/atlas-history-topic/`（docs/10）：spec 模板、写作规则、数据速查、地图管线、施工顺序与验收都在里面，脚手架 `pnpm tsx scripts/new-topic.ts`。本文保留作通用 brief 结构与一期历史记录。
+
 网上没有现成的"做交互式历史地图"的 prompt 可以直接抄。Claude Academy 的交互图解用例总结的结构最有用，照它来：
 
 1. **描述体验**：学什么、怎么交互、数据来源、审美标准
@@ -85,4 +87,4 @@ Atlas 是给新加坡小学生（P3–P6）用的双语可视化课本。仓库�
 3. 数据来源清单
 4. 沉重内容清单（照实呈现，只作元数据 `sensitive`）
 
-其余由引擎和 brief 模板补齐。
+其余由引擎和 brief 模板补齐。历史主题按 skill `atlas-history-topic` 的 `spec-template.md` 写完整 spec。

@@ -43,20 +43,29 @@ src/
   i18n/                       # ui.en.json ui.zh.json + t() / tx() / 路径工具
   theme/                      # tokens.css, theme.ts（解析/应用/读 token）, map-style.ts
   lib/                        # content.ts（构建期取内容）, prefs.ts（localStorage）, time.ts, levels.ts（仅供 schema 校验可选的规划字段 `level`）
-  components/                 # SiteToggles 岛、MDX 组件（Lang / More / Num / FlyTo）
+  components/                 # SiteToggles 岛、MDX 组件（Lang / More / Num / FlyTo / Term）
   layouts/BaseLayout.astro    # <html lang>、首帧前主题脚本、hreflang
   pages/                      # index.astro（跳转）, [locale]/index.astro, [locale]/topics/[slug].astro
   styles/                     # global.css（Tailwind + token 映射）, fonts.css（自托管 Plex woff2）, scene.css（HUD 布局与部件）
-scripts/                      # validate-content.ts, build-geo.ts, build-icons.ts, shoot.ts（pnpm shoot）
+scripts/                      # validate-content.ts, build-geo.ts, build-icons.ts, shoot.ts（pnpm shoot）,
+                              # new-topic.ts（主题脚手架）, sources-md.ts, geo/lib/（真实地图管线）+ geo/<slug>/（每主题清单）
 tests/                        # vitest（数据层与纯函数）
 tests-e2e/                    # Playwright：smoke.spec.ts, hud.spec.ts, hud-layout.ts（pnpm shoot --layout 共用）
 ```
 
 ## 加一个主题
 
+历史主题（时间线 + 地图）走项目级 skill `.claude/skills/atlas-history-topic/`（docs/10），先用脚手架：
+
+```bash
+pnpm tsx scripts/new-topic.ts <slug> --engine time-scene --subject history --title-en "…" --title-zh "…" [--subtitle-en … --subtitle-zh …] [--start YYYY-MM-DD --end YYYY-MM-DD]
+```
+
+它建 `topic.yaml`（`status: draft`）、`chapters/00-background.mdx`（`kind: background` + 阅读说明）、`chapters/01-chapter-one.mdx`（完整 TimeScene frontmatter：state、summary、beats 示例）、`data/{entities,control,movements,events,presets,sources,glossary}.json`（最小合法：无实体、一个空的控制区关键帧）、`data/SOURCES.md`（带生成块标记），以及 `scripts/geo/<slug>/sources.json` + `SOURCES-GEO.md`；已存在就拒绝，最后打印下一步。只支持 `--engine time-scene`（stage geo）。`--start / --end` 缺省是 1900 年的占位日期，记得改。手工建主题按下面的步骤：
+
 1. 建目录 `src/content/topics/<slug>/`，`<slug>` 就是 URL 和 `topic.yaml` 里的 `id`（kebab-case，必须一致）。
 2. 写 `topic.yaml`（字段见 docs/02）。`engine` + `stage` 必须是引擎支持的组合：`time-scene: geo | diagram`，`space-scene: model3d | layer2d`。
-3. 写章节 `chapters/<nn>-<id>.mdx`，frontmatter：`id, order, title, sensitive, state, quiz`（`level` 可选，仅作内容规划，不渲染）。
+3. 写章节 `chapters/<nn>-<id>.mdx`，frontmatter：`id, order, title, sensitive, state, quiz`（`level` 可选，仅作内容规划，不渲染；`kind` 可选：`chapter` 默认 / `background` 背景章，见「背景章」）。
    - `state` 由引擎解释，见下文「章节状态」。
    - 正文双语写在同一个文件里，**标签前后要空行**，否则里面的 Markdown 不会被解析：
 
@@ -80,10 +89,11 @@ tests-e2e/                    # Playwright：smoke.spec.ts, hud.spec.ts, hud-lay
      | `<More>` | `<More title={{ en: "The numbers", zh: "数字" }}>`（里面空行再写 Markdown）`</More>` | 细看折叠块：hairline 标题行 + 小三角，默认收起；原生 `<details>`，无 JS 也能用 |
      | `<Num>` | `<Num s="S3">about 70,000</Num>`；多个来源 `s="S3,S7"` | 数字后跟 mono 上标来源号，点开来源弹层（文本、说明、链接，不联网） |
      | `<FlyTo>` | `<FlyTo preset="singapore-island">Singapore island</FlyTo>` | 正文里的 hairline 按钮，镜头飞到 `presets.json` 里的预设（与 VIEW 按钮同一动作；手机上顺便收起阅读面板） |
+     | `<Term>` | `<Term id="blitzkrieg">闪电战</Term>` | 名词：点状下划线的 `span`（`role="button"`，Enter / 空格也能开），点开在阅读面板 inspector 区显示 `glossary.json` 里的定义和相关词（见「名词表」）；只包全主题第一次出现处 |
 4. 引擎数据放 `data/*.json`，文件名（去掉 `.json`）就是数据对象的 key：
    - TimeScene/geo：`entities.json`、`control.json`、`movements.json`、`events.json`；可选 `presets.json`（额外镜头）
    - SpaceScene：`parts.json`（含 parts / groups / flows / animations / views）
-   - 两个引擎都可选 `sources.json`（编号来源，共用 schema `src/content/schema/sources.ts`）：
+   - 两个引擎都可选 `glossary.json`（名词表，共用 schema `src/content/schema/glossary.ts`，见「名词表」）和 `sources.json`（编号来源，共用 schema `src/content/schema/sources.ts`）：
 
      ```json
      { "sources": [
@@ -107,7 +117,33 @@ tests-e2e/                    # Playwright：smoke.spec.ts, hud.spec.ts, hud-lay
 - MDX 正文要有 `<Lang en>` 和 `<Lang zh>`
 - `sources.json`：id 形如 `S1`、不重复；事件的 `sources` 和正文 `<Num s="…">` 引用的编号必须在 `sources.json` 里（没有这个文件却引用了也报错）
 - 正文 `<FlyTo preset="…">` 必须是 `presets.json` 里的预设；`<More>` 必须带 `title`；预设 id 与章节等 id 一样全主题唯一，且不能叫 `world` / `theatre`
+- `glossary.json`：名词 id 唯一，`see` 必须指向已有名词且不能指向自己；正文 `<Term id="…">` 必须在名词表里（没有这个文件却用了也报错）
+- 背景章（`kind: background`）至多一个且 `order: 0`；`state.note`（阅读说明）只能写在背景章
 - `ui.en.json` 与 `ui.zh.json` key 一致
+
+## 背景章（`kind: background`）
+
+主题可以有一个开场的背景章（`order: 0`），讲"开始之前"。客户端判断在 `src/engines/core/chapters.ts`（`isBackground`、`storyChapters`、`chapterNumbers`）：
+
+- **编号**：背景章是 00，其余章节从 01 起照常编号（加不加背景章，后面的章号不变）。doc id `ATL-…-00`；章节轨里它没有编号，画一个空心菱形 + "Background / 背景"（手机芯片写"BG / 背景"），title 是章名；阅读面板眉题写"Background / 背景"，收起的竖条写短名；规格表 CHAPTERS 和索引页章数只数正式章节。
+- **时间**：没有时间轴节点、不进混合时间刻度（TimeScene 只把 `storyChapters` 交给 `buildTimeModel` 和 Timeline）、不自动跑（`chapterSpan` 对它返回 `null`，进入时只缓动到目标时间）；目标时间按累积规则 = 默认值（第一个控制区关键帧）或它自己的 `state.time`。下一章的自动跑起点取"上一个正式章节"，跳过背景章。
+- **阅读面板**：第一次进入背景章时（每次页面加载一次）阅读面板展开，不管之前是否收起（`SceneHost` 的 `openBackground`，结果照常写回 sessionStorage）；之后照常粘住。< 1024 的底部抽屉不受影响。
+- **阅读说明**：背景章的 `state.note`（`{ en, zh }`，TimeScene chapter-state schema）在阅读面板正文顶部画成细框（`.atlas-note`），标题是 UI 文案 `chapter.note`："How this topic is written / 阅读说明"。
+- ← → 和 Back / Next 照常经过它（它在最前）。演示的节拍列表包含它（默认一拍 = `summary`），排在第 01 章之前；字幕卡表头写"Background"，进度条段落写"BG / 背景"；语音开场读"Background / 背景"而不是章号。
+
+## 名词表（`data/glossary.json`）
+
+```json
+{ "terms": [
+  { "id": "blitzkrieg", "term": { "en": "Blitzkrieg", "zh": "闪电战" },
+    "definition": { "en": "German for “lightning war”: …", "zh": "德语，意为“闪电般的战争”：…" }, "see": ["encirclement"] }
+] }
+```
+
+- schema `src/content/schema/glossary.ts`（两个引擎的数据 schema 都接受可选的 `glossary`）；客户端 `topicGlossary(data)`（`widgets/GlossaryCard.tsx`）。
+- 正文 `<Term id>`（`components/mdx/Term.astro`）渲染静态 `span.atlas-term[data-term]`；SceneHost 委托 click / Enter / 空格 → `actions.setGlossary(id)`。
+- 状态在 HUD store 的 `glossary`（名词 id、`GLOSSARY_ALL` = `'*'` 列表、`null` 关闭），不进 URL。打开时宿主展开阅读面板（手机打开抽屉），`GlossaryCard` 画在阅读面板的 inspector 区（`inspector` 插槽之前）并滚到可见：眉题"Glossary / 名词"、名词（另一语言小字）、定义、"See also / 参见"链接、"All terms / 全部名词"；列表视图按当前语言排序。ESC 先关名词卡（`actions.escape`），再交给引擎。
+- 控制面板 `ControlPanel` 的行类型 `{ kind: 'glossary' }`（按钮 `data-glossary-toggle`，`aria-pressed` = 名词卡开着）；TimeScene 在主题有名词时把它放进 TOOLS（演示之后、隐藏界面之前），没有快捷键。
 
 ## Scene 契约（给二期引擎实现者）
 
@@ -355,15 +391,16 @@ colors.ts  time-scene.css
 | 文件 | 要点 |
 |---|---|
 | `entities.json` | `id, name, bloc, joined, left?, color?`。`bloc` 是 `axis/allied/neutral` 之一，或**换阵营**时按时间排的数组 `[{ "bloc": "axis", "from": "1940-06-10", "to": "1943-10-13" }, { "bloc": "allied", "from": "1943-10-13" }]`（`[from, to)`，只有最后一段可省 `to`，段不能重叠；第一段之前按第一段算，空档里按刚结束的那段算，`sideAt(entity, t)` 在 `lib/bloc.ts`）。**`joined` 之前和 `left` 之后一律按 `neutral`（`blocAt`）**：地图填充、participation、地名、右上卡面积带、图例的“已退出战争”项（`time.bloc.out`）都用它；事件 / 行动的阵营色仍用 `sideAt`；右上卡行数多时只画 `t` 时在战的实体（有面积的在前，按 `t` 时面积；其余按 `joined`），不在战的进“+N others”。颜色默认取 `t` 时所在阵营的 token：地图控制区、participation、地名、实体引线说明、右上卡的面积带都跟 `t` 走，卡上的参与线按段分色；行动和事件用它们开始时的阵营色；图例对换阵营的实体每个阵营列一行。`color: "token:accent-3"` 或 `#hex` 覆盖（不随阵营变）。`joined` 驱动 participation 图层"点亮"和右上卡的参与线。 |
-| `control.json` | `keyframes[]`，按时间严格升序，`properties.holder` = 实体 id，同一实体可有多个面（或 MultiPolygon）。**两种写法任选**：① GeoJSON：`{ "keyframes": [{ "t", "features": FeatureCollection }] }`（小主题、手写，如 sample-time）；② TopoJSON：`{ "topology": Topology, "keyframes": [{ "t", "object": "<topology.objects 里的名字>" }] }`——所有关键帧共用一份拓扑（不变的海岸、边界只存一次，量化 + 差分编码），大主题（ww2 的 12 帧）用它。拓扑只做宽松校验（`type: "Topology"`、`arcs` 数组、`objects` 记录、`transform` 可选），解码后每个要素按普通控制区要素再校验（`holder` 存在于 entities、环闭合、经纬度范围）。引擎在建 `TimeModel` 时用 `topojson-client` 的 `feature()` 把每帧解成 FeatureCollection（`lib/control.ts` 的 `decodeControl`，顺手把环改回 RFC 7946 绕向，MapLibre 靠绕向分外环和洞），之后的帧、面积、渲染全都不知道有两种写法。ww2 的 `control.json` 由管线生成（见「WW2 geo pipeline」），不手写。面积（右上卡）在客户端按球面公式算，不用写。 |
+| `control.json` | `keyframes[]`，按时间严格升序，`properties.holder` = 实体 id，同一实体可有多个面（或 MultiPolygon）。**两种写法任选**：① GeoJSON：`{ "keyframes": [{ "t", "features": FeatureCollection }] }`（小主题、手写，如 sample-time）；② TopoJSON：`{ "topology": Topology, "keyframes": [{ "t", "object": "<topology.objects 里的名字>" }] }`——所有关键帧共用一份拓扑（不变的海岸、边界只存一次，量化 + 差分编码），大主题（ww2 的 12 帧）用它。拓扑只做宽松校验（`type: "Topology"`、`arcs` 数组、`objects` 记录、`transform` 可选），解码后每个要素按普通控制区要素再校验（`holder` 存在于 entities、环闭合、经纬度范围）。引擎在建 `TimeModel` 时用 `topojson-client` 的 `feature()` 把每帧解成 FeatureCollection（`lib/control.ts` 的 `decodeControl`，顺手把环改回 RFC 7946 绕向，MapLibre 靠绕向分外环和洞），之后的帧、面积、渲染全都不知道有两种写法。ww2 的 `control.json` 由管线生成（见「Geo pipeline」），不手写。面积（右上卡）在客户端按球面公式算，不用写。 |
 | `movements.json` | `from/to` 时间区间 + LineString `path`（从起点画到终点）。`strength`（可选，0 或缺省 = 未知，不显示“N 人”）决定线宽（1–3 px，相对全主题最大值）。**过日界线**：schema 把经度限在 -180..180，作者照实写跳变即可（`… [179.5, 38], [-175, 33] …`）；建 `TimeModel` 时 `unwrapPathCentred`（`lib/geo.ts`，思路同 `unwrapRing`）把相邻点经度差超过 180° 的后续点整体 ±360°，让线走近路（MapLibre 会把 >180 的经度画进邻近世界副本），再把整条路径平移 ∓360° 使其中心落在 -180..180。之后切线（`sliceLine`）、箭头头部、引线锚点、剧场镜头的包围盒（`model.bounds`）全部用 `MovementN.path`（展开后的坐标），不要再读 `movement.path.coordinates`。珍珠港航线（147.7°E 44.9°N → 158°W 23°N）展开后经度 147.7 → 202，长约 5,800 km，不是绕地球一圈的 30,000 km。可选 `linger`（`timePoint`，须晚于 `to`、同一时间标尺）：默认 `to` 之后整条线立刻消失；写了 `linger`，`to` 到 `linger` 之间画完成的整条线（40% 不透明，箭头停在终点），过了 `linger` 在约 2% 时间跨度内淡出。lingering 的线不计入状态串的 MOVEMENTS。 |
 | `events.json` | `t`、可选 `until`、`at`、`kind`、`importance`（**3 最重要 = 点最大**，1 最小）、`sides/forces/casualties/result`。`kind`：`battle`、`landing`（这两种必须有 `sides` + `result`）、`bombing`（必须有 `sides`）、`surrender`、`political`、`massacre`、`siege`、`evacuation`、`liberation`、`atrocity`、`site`（新增六种的 `sides`/`result` 都可选）。可选 `detail: { en, zh }`（inspector 里默认收起的"细看 / More"）与 `sources: ["S1", "S7"]`（`sources.json` 的编号，inspector 摘要后显示 mono 上标，点开来源弹层）。`sensitive` 只是可选元数据，不影响显示。 |
 | `presets.json`（可选） | `{ "presets": [{ "id": "singapore-island", "label": { "en": "Singapore", "zh": "新加坡" }, "camera": { "center": [103.82, 1.35], "zoom": 9.2 } }] }`。注册成镜头预设，排在 `world` / `theatre` 之后（`world` = 1、`theatre` = 2，这些从 3 起编号，1–9 之外只有按钮）；`label` 是按钮文字（一两个词）；正文 `<FlyTo preset>` 用这些 id。VIEW 组只放地理预设，章节不是预设。 |
 | `sources.json`（可选） | 见上文"加一个主题"第 4 步。 |
+| `glossary.json`（可选） | 名词表，见「名词表」。 |
 
 **`site` 事件**是静态点位（监狱、纪念碑、建筑）：`t` 照写但不参与时间——不进时间轴范围、不进泳道和统计、不脉冲；只在 `sites` 图层打开时显示（小空心菱形 + 中心点），点击同样打开 inspector（眉题 `P-01`），高亮时出引线标注。
 
-章节 `state`：`time`（ISO 三种精度或 `{ ma }`）、`camera`、`layers`、`highlight`（实体/行动/事件 id）、`theme`、`summary`（`{ en, zh }`，阅读面板标题下的一句话，也是默认演示字幕）、`question` / `answer`（`{ en, zh }`；没有 `summary` 时阅读面板头部显示 `question`；`answer` 必须配 `question`，目前不渲染），以及可选的 `beats`（演示节拍，见下）。章节节点在时间轴上的位置 = 该章累积目标的 `t`；**章节顺序必须等于时间顺序**（`tests/schemas.test.ts` 对 ww2 有检查）。
+章节 `state`：`time`（ISO 三种精度或 `{ ma }`）、`camera`、`layers`、`highlight`（实体/行动/事件 id）、`theme`、`note`（只在背景章：阅读说明）、`summary`（`{ en, zh }`，阅读面板标题下的一句话，也是默认演示字幕）、`question` / `answer`（`{ en, zh }`；没有 `summary` 时阅读面板头部显示 `question`；`answer` 必须配 `question`，目前不渲染），以及可选的 `beats`（演示节拍，见下）。章节节点在时间轴上的位置 = 该章累积目标的 `t`；**章节顺序必须等于时间顺序**（`tests/schemas.test.ts` 对 ww2 有检查）。
 
 演示节拍（`state.beats`，可选，加法）：
 
@@ -383,7 +420,7 @@ beats:
 
 | id | 渲染 | 开关 |
 |---|---|---|
-| `base` | 陆地纸色 `--land`、海洋 `--water`（背景）、海岸 hairline（`buildMapStyle`，`public/geo/land-50m.json`；东南亚 zoom ≥ 7 叠 `land-10m-sea.json`，见「WW2 geo pipeline」） | 永远开 |
+| `base` | 陆地纸色 `--land`、海洋 `--water`（背景）、海岸 hairline（`buildMapStyle`，`public/geo/land-50m.json`；东南亚 zoom ≥ 7 叠 `land-10m-sea.json`，见「Geo pipeline」） | 永远开 |
 | 经纬网 | 10° 经纬线，代码生成（不是文件），hairline，普通 .22 / 赤道与本初子午线 .4 | `graticule` 模式（G），默认开，不进 URL |
 | `control` | 每个关键帧三层：阵营色淡底（.28）+ 45° 斜线 `fill-pattern`（每个实体一张 canvas 图，按 pixelRatio `addImage`，换主题 `updateImage`）+ **边界线**。边界线只画**内陆分界**：同一关键帧里两个**不同 holder** 的要素共用的弧（TopoJSON `mesh(topology, object, (a, b) => a !== b && a.properties.holder !== b.properties.holder)`，`lib/control.ts` 的 `frontierOf`，载入时每帧算一次放进模型 `keyframe.frontier`），一条 `--line` token 色的 0.8 px hairline；海岸**不画**控制边（海岸只有 `base` 那一条 `land-edge`），同一 holder 的两个要素之间的接缝也不画。高亮的 holder 因为没有自己的描边，改成淡底加深（×1.7）。纯 GeoJSON 形态（sample-time）没有拓扑，退回给每个多边形按阵营色描边（高亮 2.8 px）。前帧/后帧两个 source 交叉淡化：区间最后 30% 内前帧 1→0.4、后帧 0→1，淡底、斜线、边界线同一个系数 | 可关 |
 | `borders` | 今天的**内陆**国界 hairline（ink .4，0.4–0.9 px 随缩放）：`borders-50m.json` 是国家间共用弧的 TopoJSON mesh（`mesh(countries, (a, b) => a !== b)`，无海岸线），不再描国家多边形的轮廓；外加国名（`countries-50m.json`）。两个文件第一次打开时才下载。**默认关**（引擎 `defaults` 的 `layers` 不含它；章节 `state.layers` 写了 `borders` 才开） | B 模式 / 图层开关 |
@@ -462,7 +499,7 @@ chap(t) = 过结点 {min, 各章时间…, max}（去重、排序）的分段线
 |---|---|
 | 预设 | `world`（center [20, 10]，zoom 1.4）+ `theatre`（整片区域：地图 `cameraForBounds` 套住全部数据；地图未就绪时按包围盒估算）+ `presets.json` 里的预设（按钮文字 = `label`，旁边小字写数字键）。数字键 1–9。没有章节预设 |
 | 模式 | `flow`（F，= movements 图层，状态 `FLOW`）· `borders`（B，= borders 图层）· `graticule`（G，引擎本地状态）· `territory`（N，领土名称，引擎本地状态，默认开）· `reference`（R）· `presentation`（P，状态 `PRESENTATION 08/17`；底部条也有 PRESENT 按钮）· 宿主 `labels`（L） |
-| 控制面板 | `stageOverlay` 里的「图层和图例」卡（舞台 ≥ 720 px 宽时默认展开）：**LAYERS** 控制区 / 领土名称（N）/ 国界（B）/ 经纬网（G）/ 行动路线（F）/ 事件 / 何时加入 / 地点（有 `site` 事件才出）/ 标注（L）；**TOOLS** 与上一关键帧对照（R）/ 演示（P）/ 隐藏界面（H）；**KEY** 图例 |
+| 控制面板 | `stageOverlay` 里的「图层和图例」卡（舞台 ≥ 720 px 宽时默认展开）：**LAYERS** 控制区 / 领土名称（N）/ 国界（B）/ 经纬网（G）/ 行动路线（F）/ 事件 / 何时加入 / 地点（有 `site` 事件才出）/ 标注（L）；**TOOLS** 与上一关键帧对照（R）/ 演示（P）/ 名词（有 `glossary.json` 才出）/ 隐藏界面（H）；**KEY** 图例 |
 | `time` | 章节自动跑：`running()` / `now()`，供 `__atlas.state().running / playhead`；状态行在跑时写 `RUNNING` |
 | `pause` | 不注册（没有自由播放）：状态行没有 PAUSED，键位表没有 SPACE，`__atlas.setPaused` 返回 false |
 | `status` | `2000-03-11`（与 `FLOW`、`REFERENCE` 等模式段一起出现在状态行） |
@@ -662,33 +699,37 @@ state:
 
 新增可链接字段：改 `core/types.ts` 的 `UrlEngineFields`、`core/url-state.ts`（`URL_KEY_ORDER`、编解码）、`SceneHost.tsx` 里解构的字段、descriptor 的 `fromUrl`，并补 `tests/url-state.test.ts`。
 
-## WW2 geo pipeline（`scripts/geo/ww2/`）
+## Geo pipeline（`scripts/geo/lib/`，每个主题 `scripts/geo/<slug>/`）
 
-二战主题的控制区关键帧（`src/content/topics/ww2/data/control.json`）由这条管线生成，CLAUDE.md 的"地图类内容必须用真实数据"由它落实。来源调查、每帧方法、控制点残差、许可证见 `scripts/geo/ww2/SOURCES-GEO.md`；主题内的来源表是 `data/SOURCES.md`（`[G#]`）。所有输入和步骤写在 `scripts/geo/ww2/sources.json`：数据集（url / license / ref）、OHM 关系集（按日期）、SVG 地图（类别颜色、控制点、残差预算）、关键帧配方（CShapes GW 代码 → 实体，再按顺序叠加的步骤，后者覆盖前者）。
+真实地图主题的控制区关键帧（`src/content/topics/<slug>/data/control.json`）由这条管线生成，CLAUDE.md 的"地图类内容必须用真实数据"由它落实。代码在 `scripts/geo/lib/`：`common.ts`（路径、工具、mapshaper、几何）、`manifest.ts`（清单类型、`PIPELINE_DEFAULTS`、`pipelineConfig()`）、`topic.ts`（按 `--topic` 定位主题目录与清单），库模块 `fit.ts svg.ts raster.ts capes.ts`，以及七个可运行步骤。每个主题一个目录 `scripts/geo/<slug>/`：清单 `sources.json`、来源记录 `SOURCES-GEO.md`、可选 `check-colors.json`，以及 gitignore 的 `raw/`（下载）和 `work/`（中间 GeoJSON）。工具（mapshaper、osmtogeojson）装在共享的 `scripts/geo/.tools/`（gitignore）。ww2 的来源调查、每帧方法、控制点残差、许可证见 `scripts/geo/ww2/SOURCES-GEO.md`；主题内的来源表是 `data/SOURCES.md`（`[G#]`）。操作手册：skill `atlas-history-topic` 的 `references/geo-runbook.md`。
+
+清单 `sources.json`：数据集（`ref` / url / license；`cshapes` 是底图，底图要素标它的 `ref`；`ne-admin1` 供省份选择器）、OHM 关系集（按日期）、SVG / 位图地图（类别颜色、控制点、残差预算）、关键帧配方（CShapes GW 代码 → 实体，再按顺序叠加的步骤，后者覆盖前者），以及可选的 `pipeline` 块：焦点框、预算、量化、简化与海岸规则，缺省值 = ww2 的取值（`PIPELINE_DEFAULTS`）——`plannedKeyframes` 12、`budgetMB` 2.0、`focus`（欧洲 / 中东、东亚 / 西太平洋两个框）、`fineStartKm` 1.5、`fineStepKm` 0.25、`coarseKm` 50、`method` dp、`quantization` 400000、`islandsKm2 { focus 20, coarse 300 }`、`coast { enabled true, land public/geo/land-50m.json, detailLand public/geo/land-10m-sea.json, detailBox [95,-9,125,22], worldBox [-180,-60,180,86], gapKm 6, islandKm2 2, outsideKm 2, skipKm 15 }`、`checkColors`、`shots`（默认 `docs/screenshots/<slug>`）。`detailLand` / `detailBox` 要么都给、要么都 `null`（没有细海岸区）。命令行参数覆盖清单。
 
 ```bash
-pnpm tsx scripts/geo/ww2/fetch.ts         # 下载数据集到 raw/，装 mapshaper + osmtogeojson 到 .tools/（都 gitignore）；失败 WARN 后继续
-pnpm tsx scripts/geo/ww2/ohm-export.ts    # OpenHistoricalMap Overpass → work/ohm-<set>.geojson（按日期校验关系有效期）
-pnpm tsx scripts/geo/ww2/ohm-export.ts --list 1942-03-09 --levels 1-3   # 查某天有效的边界关系
-pnpm tsx scripts/geo/ww2/georef-svg.ts    # Commons SVG → GeoJSON：控制点拟合（投影 + 仿射 / 二次多项式，auto 取留一法 RMS 最小），打印残差 km
-pnpm tsx scripts/geo/ww2/georef-svg.ts --fills <svg>   # 列填充色（选类别）；--dots 列城市点和最近标注（选控制点）
-pnpm tsx scripts/geo/ww2/georef-svg.ts --propose <svg> --region europe|asia --r 6   # 用现有拟合预测海角位置并吸附到地图陆地 / CShapes 海岸，打印候选控制点
-pnpm tsx scripts/geo/ww2/georef-raster.ts  # PNG / JPG 地图 → GeoJSON：按调色板分类像素，标注/箭头/河流按最近类别填充，矢量化后同样控制点拟合
-pnpm tsx scripts/geo/ww2/georef-raster.ts --colors|--preview|--circles <id>   # 颜色直方图 / 分类结果图 work/raster-<id>-classes.png / 城市圆圈中心
-pnpm tsx scripts/geo/ww2/compose.ts       # CShapes 底 + OHM / SVG / Natural Earth 省份叠加 → work/K#.geojson（properties.holder）
-pnpm tsx scripts/geo/ww2/simplify.ts      # 全部关键帧一个拓扑、拓扑保持简化 → control.json（TopoJSON 写法）；预算 2.0 MB × 现有帧数 / 12，自动调间隔
-pnpm tsx scripts/geo/ww2/check.ts         # MapLibre（Playwright）渲染每帧，与来源地图并排 → docs/screenshots/ww2/geo-K#.png
+pnpm tsx scripts/geo/lib/fetch.ts --topic ww2         # 下载数据集到 raw/，装 mapshaper + osmtogeojson 到 scripts/geo/.tools/；失败 WARN 后继续
+pnpm tsx scripts/geo/lib/ohm-export.ts --topic ww2    # OpenHistoricalMap Overpass → work/ohm-<set>.geojson（按日期校验关系有效期）
+pnpm tsx scripts/geo/lib/ohm-export.ts --topic ww2 --list 1942-03-09 --levels 1-3   # 查某天有效的边界关系
+pnpm tsx scripts/geo/lib/georef-svg.ts --topic ww2    # Commons SVG → GeoJSON：控制点拟合（投影 + 仿射 / 二次多项式，auto 取留一法 RMS 最小），打印残差 km
+pnpm tsx scripts/geo/lib/georef-svg.ts --topic ww2 --fills <svg>   # 列填充色（选类别）；--dots 列城市点和最近标注（选控制点）
+pnpm tsx scripts/geo/lib/georef-svg.ts --topic ww2 --propose <svg> --region europe|asia --r 6   # 用现有拟合预测海角位置并吸附到地图陆地 / CShapes 海岸，打印候选控制点
+pnpm tsx scripts/geo/lib/georef-raster.ts --topic ww2  # PNG / JPG 地图 → GeoJSON：按调色板分类像素，标注/箭头/河流按最近类别填充，矢量化后同样控制点拟合
+pnpm tsx scripts/geo/lib/georef-raster.ts --topic ww2 --colors|--preview|--circles <id>   # 颜色直方图 / 分类结果图 work/raster-<id>-classes.png / 城市圆圈中心
+pnpm tsx scripts/geo/lib/compose.ts --topic ww2       # CShapes 底 + OHM / SVG / Natural Earth 省份叠加 → work/K#.geojson（properties.holder）
+pnpm tsx scripts/geo/lib/simplify.ts --topic ww2      # 全部关键帧一个拓扑、拓扑保持简化 → control.json（TopoJSON 写法）；预算 budgetMB × 现有帧数 / plannedKeyframes，自动调间隔
+pnpm tsx scripts/geo/lib/check.ts --topic ww2         # MapLibre（Playwright）渲染每帧，与来源地图并排 → docs/screenshots/ww2/geo-K#.png（--work 看未简化的 work/K#.geojson）
 ```
 
+- 缺 `--topic` 或主题不存在：打印可用主题（`scripts/geo/` 下有 `sources.json` 的目录），退出码 2。
+- 2026-10-09 从 `scripts/geo/ww2/*.ts` 迁移到 `lib/`：旧代码和新代码对同一份 `work/` 跑 simplify，产物逐字节相同（默认参数：2.5 km、2120 KB、15000 弧；`--fine 1.5`：2120 KB、15550 弧）；compose K1、ohm-export 也逐字节相同。**注意**：仓库里的 `control.json` 与 `--fine 1.5` 的产物逐字节相同（2120 KB，比 2 MB 预算多约 70 KB），而下面"实测"写的 2.5 km / 2120 KB 是默认跑法；下次重生成前先定用哪个。
 - 不改 `package.json`：几何运算用 mapshaper（`.tools/`，`fetch.ts` 安装），截图用已装的 Playwright + `maplibre-gl`。
-- 加一个关键帧：在 `sources.json` 的 `ohm` 加该日期的关系集（先 `--list` 查），需要的话加 SVG 来源和控制点（≥ 4 个，欧洲残差 ≤ 30 km、亚太 ≤ 60 km），在 `keyframes` 写配方和 `checks` 视图，然后依次跑上面 6 步，看 `geo-K#.png` 与来源图并排是否一致，把方法和残差写进 `SOURCES-GEO.md` 与 `data/SOURCES.md`。
+- 加一个关键帧：在 `sources.json` 的 `ohm` 加该日期的关系集（先 `--list` 查），需要的话加 SVG 来源和控制点（≥ 4 个，欧洲残差 ≤ 30 km、亚太 ≤ 60 km），在 `keyframes` 写配方和 `checks` 视图，然后依次跑上面的步骤，看 `geo-K#.png` 与来源图并排是否一致，把方法和残差写进 `SOURCES-GEO.md` 与 `data/SOURCES.md`。
 - 选择器（`compose.ts`）：`cshapes`（`partsAt` 只取包含某点的岛，`at` 取另一天的国界）、`ohm`（`set` 取另一关键帧的关系集）、`admin1`（Natural Earth 省份）、`svg` / `raster`（类别，`coastFillKm` 让占领区沿底图海岸补齐）、`svgFrame` / `rasterFrame`、`parts`（保留或 `drop` 包含某点的单个多边形）、`bbox`、`union` / `intersect` / `difference`。不允许手画多边形；`bbox` 只用来选取已有几何的一部分。
 - 同一底图的系列地图（San Jose 的月度二战欧洲 SVG、Gdr 的东线 SVG）在 `sources.json` 里用 `controlPointsFrom` 共用一套控制点。位图来源（`raster`）写调色板、容差、`exclude`（图例框）和 `minRegionPx`（可按类别，`_sea` 设大值把海色描边的字母吞回陆地）。
 - 一条前线要"苏占区"时，用来源图里的苏方类别（带海岸补齐）作为**最后**一步绘制，而不是"苏联减去轴心区"：海岸不重合处（列宁格勒在来源图的海里）后者会把苏方城市划给轴心。
 - 简化（`simplify.ts`）：`compose.ts` 仍每帧写一份 GeoJSON（`work/K#.geojson`，中间产物）；`simplify.ts` 把所有帧放进**同一个** mapshaper 数据集——相邻实体、也包括相邻关键帧之间重合的边界是同一条弧，只简化一次、只存一次——再导出一个带量化的 TopoJSON，写成 `{ topology, keyframes: [{ t, object: "K1" }] }`。按区域：焦点框（欧洲 / 中东、东亚 / 东南亚 / 西太平洋）内细、框外粗（50 km），两半沿框边拼回再按实体合并；最后每帧**沿底图海岸裁剪**（`followCoast`，见下）。默认方法 `dp`（Douglas–Peucker，间隔就是最大偏差；`--method weighted` 是 Visvalingam，更平滑但会把细长峡湾整条删掉）。
 - **预算旋钮**：`--budget <MB>`（默认 2.0 = 12 帧的总预算，按帧数等比）。不给 `--fine` 时从 1.5 km 起每次 +0.25 km 直到放得进预算，所以"焦点区容差"是预算允许的最细档；`--fine / --coarse`（km）固定间隔，`--quant`（默认 400000 个量化格，≈ 赤道 0.1 km；`followCoast` 把海岸交给底图陆地，格子要细过 10m 顶点间距），`--no-coast` 跳过这一步，`--method`，`--out` 写到别处，`--no-measure` 跳过偏差统计。脚本最后打印焦点框内原始顶点到成品边界的偏差 p50 / p95 / p99 / max（km）。新增关键帧后重跑本步即可，帧多了容差会变粗；超预算时它自己警告。
 - 实测（K1 + K6 两帧）：原 GeoJSON 简化（10 km、Visvalingam）259 KB → 现 TopoJSON 焦点区 3 km、336 KB（预算 341 KB）；焦点框内偏差 p95 2.3 km、p99 2.8 km。
-- **沿底图海岸裁剪**（`simplify.ts` `followCoast`，2026-10-09）：控制区的边缘不能自带一条跟底图不重合的海岸。每帧简化后，对**整个世界**用底图陆地裁：`land-50m.json`，东南亚 10m 框（95–125°E，9°S–22°N）内用 `land-10m-sea.json`；先擦掉水，再把简化多边形漏掉的陆地给最近的 holder——焦点框内 6 km，框外在**未简化的原始多边形**周围 6 km 内（粗简化 50 km 会让海岸漂移，但不能让它把没有 holder 的邻国陆地吞进来）；孤立的小片 < 2 km² 丢弃，焦点框外还丢 < 300 km² 的岛、框内丢 < 20 km² 的岛（东南亚框保留到 2 km²）。框外的底图海岸先用 2 km 的 DP 疏化再裁（`COAST_OUT_KM`，缩放 ≤ 5 时 ≤ 1 px），为了留在预算里。陆地里没有湖（NE `land` 把湖算作陆），所以控制区会盖住原始多边形里被挖掉的湖和海湾（梅拉伦湖、拉多加湖）。偏差统计不算离海岸 < 15 km 的点和在海里的点（水是故意擦掉的）。实测：焦点区 2.5 km、2033 KB（预算 2048 KB；1.5 km 时 2148 KB，全球海岸占约 600 KB），偏差 p50 0.32 / p95 6.3 km（p95 主要是上面说的湖和海湾）。
+- **沿底图海岸裁剪**（`simplify.ts` `followCoast`，2026-10-09）：控制区的边缘不能自带一条跟底图不重合的海岸。每帧简化后，对**整个世界**用底图陆地裁：`land-50m.json`，东南亚 10m 框（95–125°E，9°S–22°N）内用 `land-10m-sea.json`；先擦掉水，再把简化多边形漏掉的陆地给最近的 holder——焦点框内 6 km，框外在**未简化的原始多边形**周围 6 km 内（粗简化 50 km 会让海岸漂移，但不能让它把没有 holder 的邻国陆地吞进来）；孤立的小片 < 2 km² 丢弃，焦点框外还丢 < 300 km² 的岛、框内丢 < 20 km² 的岛（东南亚框保留到 2 km²）。框外的底图海岸先用 2 km 的 DP 疏化再裁（`COAST_OUT_KM`，缩放 ≤ 5 时 ≤ 1 px），为了留在预算里。陆地里没有湖（NE `land` 把湖算作陆），所以控制区会盖住原始多边形里被挖掉的湖和海湾（梅拉伦湖、拉多加湖）。偏差统计不算离海岸 < 15 km 的点和在海里的点（水是故意擦掉的）。实测：焦点区 2.5 km、2120 KB（预算 2048 KB；1.5 km 时 2148 KB，全球海岸占约 600 KB），偏差 p50 0.32 / p95 6.3 km（p95 主要是上面说的湖和海湾）。
 - 旧实测（12 帧，2026-10-08，还没有全球海岸裁剪）：焦点区 1.5 km、1371 KB（预算 2048 KB），偏差 p50 0.24 / p95 1.17 / p99 1.47 km；3 km 时 1215 KB。体积的大头是每帧约 800 个多边形的弧引用，间隔再粗也省不多（40 km 仍 916 KB）。`--islands fine,coarse` 调丢弃小岛的面积阈值（km²）。
 - 页面体积：主题数据作为岛组件 props 序列化进 HTML，JSON 约翻倍，ww2 页约 3 MB，超过 Workbox 默认 2 MiB 预缓存上限，`astro.config.mjs` 已把 `maximumFileSizeToCacheInBytes` 提到 4 MiB。若要缩小页面，把 `control.json` 改成像 `public/geo/` 那样运行时 fetch 的静态文件。
 - 内陆国界：`scripts/build-geo.ts` 出 `public/geo/borders-50m.json`（world-atlas 国家拓扑的 `mesh(countries, (a, b) => a !== b)`，只含国与国共用的弧，无海岸；DP 2 km，量化 0.01°，TopoJSON，约 69 KB）。`borders` 图层画它，不再描国家多边形。
