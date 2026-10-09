@@ -1,1 +1,824 @@
-[]
+[
+  {
+    "id": "sarajevo",
+    "t": "1914-06-28",
+    "at": [
+      18.428,
+      43.858
+    ],
+    "kind": "political",
+    "importance": 3,
+    "title": {
+      "en": "Assassination in Sarajevo",
+      "zh": "萨拉热窝刺杀事件"
+    },
+    "summary": {
+      "en": "Archduke Franz Ferdinand, heir to Austria-Hungary's throne, and his wife Sophie are shot dead in Sarajevo by Gavrilo Princip, a Bosnian Serb student.",
+      "zh": "奥匈帝国皇储弗朗茨·斐迪南大公和妻子索菲在萨拉热窝被波斯尼亚塞族学生加夫里洛·普林西普开枪打死。"
+    },
+    "detail": {
+      "en": "Princip was one of seven young conspirators of the Young Bosnia movement posted along the archduke's route (one account counts six armed men). They had received weapons and help from the Black Hand, a secret society led by Colonel Dragutin Dimitrijević ('Apis'), head of Serbian military intelligence. A bomb thrown earlier that morning missed; Princip fired after the archduke's car took a wrong turn near the Latin Bridge. Princip, a month short of 20, was too young for the death penalty; he was sentenced to 20 years and died of tuberculosis in prison in April 1918.",
+      "zh": "普林西普是“青年波斯尼亚”运动的七名青年密谋者之一，他们分布在大公车队经过的路线上（另一说持武器的是六人）。他们的武器和帮助来自“黑手会”——由塞尔维亚军事情报首脑德拉古廷·迪米特里耶维奇上校（外号“阿皮斯”）领导的秘密组织。当天上午早些时候有人投掷炸弹，没有击中；后来大公的汽车在拉丁桥附近拐错了路，普林西普开了枪。他离 20 岁还差一个月，按法律不能判死刑，被判 20 年徒刑，1918 年 4 月死于狱中结核病。"
+    },
+    "sources": [
+      "S20",
+      "S21",
+      "S22",
+      "S23"
+    ]
+  },
+  {
+    "id": "blank-cheque",
+    "t": "1914-07-06",
+    "at": [
+      13.06,
+      52.4
+    ],
+    "kind": "political",
+    "importance": 1,
+    "title": {
+      "en": "Germany's 'blank cheque'",
+      "zh": "德国的“空白支票”"
+    },
+    "summary": {
+      "en": "At Potsdam and Berlin on 5–6 July, Germany assures Austria-Hungary of its full support in whatever action it takes against Serbia.",
+      "zh": "7 月 5–6 日，德国在波茨坦和柏林向奥匈帝国保证：无论它对塞尔维亚采取什么行动，德国都全力支持。"
+    },
+    "detail": {
+      "en": "Chancellor Bethmann Hollweg's telegram of 6 July told Vienna that the Kaiser would 'faithfully stand by Austria-Hungary'. Historians call this promise the 'blank cheque' because it left the decision, and its risks, to Austria-Hungary.",
+      "zh": "首相贝特曼·霍尔韦格 7 月 6 日的电报告诉维也纳：德皇将“忠实地站在奥匈帝国一边”。历史学家把这一承诺称为“空白支票”，因为它把决定和风险都交给了奥匈帝国。"
+    },
+    "sources": [
+      "S24",
+      "S25"
+    ]
+  },
+  {
+    "id": "austrian-ultimatum",
+    "t": "1914-07-23",
+    "at": [
+      20.465,
+      44.812
+    ],
+    "kind": "political",
+    "importance": 2,
+    "title": {
+      "en": "Austro-Hungarian ultimatum",
+      "zh": "奥匈帝国的最后通牒"
+    },
+    "summary": {
+      "en": "Austria-Hungary's envoy in Belgrade hands Serbia a note with ten demands and 48 hours to answer.",
+      "zh": "奥匈帝国驻贝尔格莱德公使向塞尔维亚递交照会，提出十条要求，限 48 小时答复。"
+    },
+    "detail": {
+      "en": "The note demanded that Serbia suppress anti-Austrian propaganda and organisations, dismiss named officers and let Austro-Hungarian officials take part in the investigation of the plot on Serbian soil. Serbia's reply, delivered on 25 July just before the 6 p.m. deadline, accepted most points but refused point 6 as a breach of its constitution. Austria-Hungary broke off relations the same evening.",
+      "zh": "照会要求塞尔维亚取缔反奥宣传和组织、撤换点名的军官，并允许奥匈官员到塞尔维亚境内参与调查刺杀阴谋。塞尔维亚在 7 月 25 日下午 6 时期限前递交答复，接受了大部分条件，但以违反宪法为由拒绝第 6 条。奥匈帝国当晚即与塞尔维亚断交。"
+    },
+    "sources": [
+      "S26",
+      "S27",
+      "S28"
+    ]
+  },
+  {
+    "id": "war-on-serbia",
+    "t": "1914-07-28",
+    "at": [
+      16.373,
+      48.208
+    ],
+    "kind": "political",
+    "importance": 3,
+    "title": {
+      "en": "Austria-Hungary declares war on Serbia",
+      "zh": "奥匈帝国对塞尔维亚宣战"
+    },
+    "summary": {
+      "en": "Austria-Hungary declares war on Serbia; early on 29 July its Danube monitors shell Belgrade.",
+      "zh": "奥匈帝国对塞尔维亚宣战；7 月 29 日凌晨，它的多瑙河浅水重炮舰炮击贝尔格莱德。"
+    },
+    "detail": {
+      "en": "The declaration was sent by telegram from Vienna. At 2.20 a.m. on 29 July the river monitors Temes, Bodrog and Számos opened fire on Belgrade across the Sava and Danube. Russia ordered partial mobilisation on 29 July and general mobilisation on 30 July.",
+      "zh": "宣战书从维也纳以电报发出。7 月 29 日凌晨 2 时 20 分，浅水重炮舰“泰梅什号”“博德罗格号”“萨莫什号”隔着萨瓦河和多瑙河向贝尔格莱德开炮。俄国 7 月 29 日宣布局部动员，30 日宣布总动员。"
+    },
+    "sources": [
+      "S25",
+      "S29"
+    ]
+  },
+  {
+    "id": "russian-mobilisation",
+    "t": "1914-07-30",
+    "at": [
+      30.316,
+      59.939
+    ],
+    "kind": "political",
+    "importance": 2,
+    "title": {
+      "en": "Russian general mobilisation",
+      "zh": "俄国总动员"
+    },
+    "summary": {
+      "en": "Tsar Nicholas II signs the order for general mobilisation, after a day of partial mobilisation against Austria-Hungary only.",
+      "zh": "沙皇尼古拉二世签署总动员令；此前一天，俄国只针对奥匈帝国实行了局部动员。"
+    },
+    "sources": [
+      "S21",
+      "S25"
+    ]
+  },
+  {
+    "id": "germany-declares-war",
+    "t": "1914-08-01",
+    "at": [
+      13.395,
+      52.517
+    ],
+    "kind": "political",
+    "importance": 2,
+    "title": {
+      "en": "Germany declares war on Russia",
+      "zh": "德国对俄国宣战"
+    },
+    "summary": {
+      "en": "Germany mobilises and declares war on Russia; on 3 August it declares war on France.",
+      "zh": "德国宣布总动员并对俄国宣战；8 月 3 日又对法国宣战。"
+    },
+    "sources": [
+      "S25"
+    ]
+  },
+  {
+    "id": "uk-enters",
+    "t": "1914-08-04",
+    "at": [
+      -0.128,
+      51.507
+    ],
+    "kind": "political",
+    "importance": 2,
+    "title": {
+      "en": "Britain declares war on Germany",
+      "zh": "英国对德国宣战"
+    },
+    "summary": {
+      "en": "After Germany invades neutral Belgium, Britain declares war on Germany; its dominions, India and colonies, Singapore and Malaya among them, are at war with it.",
+      "zh": "德国入侵中立的比利时之后，英国对德宣战；英国的自治领、印度和各殖民地——包括新加坡和马来亚——随之进入战争状态。"
+    },
+    "detail": {
+      "en": "Britain, France, Prussia, Austria and Russia had guaranteed Belgium's neutrality in the Treaty of London (1839). The declaration on 4 August covered the whole British Empire; the dominions' governments decided only how much to contribute.",
+      "zh": "英国、法国、普鲁士、奥地利和俄国在 1839 年的《伦敦条约》中保证比利时中立。8 月 4 日的宣战适用于整个大英帝国；各自治领政府能决定的只是出多少力。"
+    },
+    "sources": [
+      "S20",
+      "S25"
+    ]
+  },
+  {
+    "id": "liege",
+    "t": "1914-08-05",
+    "until": "1914-08-16",
+    "at": [
+      5.574,
+      50.645
+    ],
+    "kind": "siege",
+    "sides": {
+      "attacker": "germany",
+      "defender": "belgium"
+    },
+    "importance": 2,
+    "title": {
+      "en": "Siege of Liège",
+      "zh": "列日之围"
+    },
+    "summary": {
+      "en": "German troops attack the ring of twelve forts around Liège; the last forts fall on 16 August, about nine days later than planned.",
+      "zh": "德军进攻列日周围由 12 座要塞组成的防御圈；最后几座要塞 8 月 16 日才陷落，比计划晚了约九天。"
+    },
+    "detail": {
+      "en": "The siege took eleven days instead of the two the German plan allowed. Heavy German and Austro-Hungarian siege howitzers finally destroyed the forts. Around Liège nearly 850 civilians were killed by the invading army between 5 and 8 August alone.",
+      "zh": "这场围攻用了 11 天，而德国计划只留了两天。最后是德国和奥匈的重型攻城榴弹炮摧毁了要塞。仅 8 月 5 日至 8 日，列日周围就有近 850 名平民被入侵军队杀害。"
+    },
+    "sources": [
+      "S35",
+      "S36"
+    ],
+    "sensitive": true
+  },
+  {
+    "id": "andenne",
+    "t": "1914-08-20",
+    "at": [
+      5.097,
+      50.489
+    ],
+    "kind": "massacre",
+    "importance": 1,
+    "title": {
+      "en": "Andenne",
+      "zh": "昂代讷屠杀"
+    },
+    "summary": {
+      "en": "German troops kill about 200 inhabitants of Andenne on the Meuse, shot in the streets and in their homes.",
+      "zh": "德军在默兹河畔的昂代讷杀害约 200 名居民，有的在街上被枪杀，有的死在家中。"
+    },
+    "detail": {
+      "en": "A local count gives 199 people shot or killed in their homes and 18 missing, 217 victims in all, and 43 more in Seilles across the river.",
+      "zh": "当地的统计是：199 人被枪杀或死在家中，18 人失踪，共 217 名遇难者；河对岸的塞耶另有 43 人。"
+    },
+    "sources": [
+      "S56"
+    ],
+    "sensitive": true
+  },
+  {
+    "id": "frontiers",
+    "t": "1914-08-14",
+    "until": "1914-08-24",
+    "at": [
+      5.487,
+      49.71
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "france",
+      "defender": "germany"
+    },
+    "result": "defender",
+    "importance": 2,
+    "title": {
+      "en": "Battle of the Frontiers",
+      "zh": "边境之战"
+    },
+    "summary": {
+      "en": "French offensives in Lorraine and the Ardennes are thrown back; on 22 August alone more than 27,000 French soldiers are killed.",
+      "zh": "法军在洛林和阿登地区的攻势被击退；仅 8 月 22 日一天，法军阵亡就超过 27,000 人。"
+    },
+    "detail": {
+      "en": "Under Plan XVII the French attacked into Lorraine from 14 August and into the Belgian Ardennes from 21 August, in red trousers and dark-blue coats, against German machine guns and artillery. The marker stands at Rossignol in the Ardennes, where a French colonial division was destroyed on 22 August. Between 20 and 27 August the French army lost 40,000 men. Britannica gives Allied losses in the whole battle as more than 200,000 of about 1.5 million engaged.",
+      "zh": "按照第十七号计划，法军 8 月 14 日起攻入洛林，21 日起攻入比利时阿登地区，士兵穿着红裤子和深蓝色上衣，迎着德军的机枪和火炮前进。图上标记在阿登的罗西尼奥尔，8 月 22 日一个法国殖民地师在那里几乎全军覆没。8 月 20 日至 27 日，法军损失 4 万人。《不列颠百科全书》估计整个边境之战中，协约国参战约 150 万人，损失 20 万以上。"
+    },
+    "sources": [
+      "S10",
+      "S41",
+      "S42"
+    ]
+  },
+  {
+    "id": "tamines",
+    "t": "1914-08-22",
+    "at": [
+      4.613,
+      50.431
+    ],
+    "kind": "massacre",
+    "importance": 2,
+    "title": {
+      "en": "Tamines",
+      "zh": "塔明屠杀"
+    },
+    "summary": {
+      "en": "German troops kill 383 civilians at Tamines on the Sambre, 269 of them in one mass execution beside the church.",
+      "zh": "德军在桑布尔河畔的塔明杀害 383 名平民，其中 269 人在教堂旁的一次集体枪决中被杀。"
+    },
+    "detail": {
+      "en": "Tamines lay on the line of the German Second Army's advance across the Sambre. The troops said they had been fired on by civilians; Horne and Kramer found no evidence of civilian resistance there or elsewhere.",
+      "zh": "塔明位于德军第 2 集团军渡过桑布尔河的进军路线上。德军声称遭到平民射击；霍恩和克雷默的研究在这里和其他地方都没有找到平民抵抗的证据。"
+    },
+    "sources": [
+      "S39",
+      "S37"
+    ],
+    "sensitive": true
+  },
+  {
+    "id": "dinant",
+    "t": "1914-08-23",
+    "at": [
+      4.913,
+      50.259
+    ],
+    "kind": "massacre",
+    "importance": 3,
+    "title": {
+      "en": "Dinant",
+      "zh": "迪南屠杀"
+    },
+    "summary": {
+      "en": "Saxon troops of the German Third Army kill 674 civilians in Dinant, one in ten of the town's people, from infants to the elderly.",
+      "zh": "德军第 3 集团军的萨克森部队在迪南杀害 674 名平民，占全城人口的十分之一，从婴儿到老人都有。"
+    },
+    "detail": {
+      "en": "The killings took place on 23 August as the Germans fought to cross the Meuse against French troops on the west bank. In the largest single execution 137 people were shot. Much of the town was burned. The German army justified the killings by claiming that civilians had fired on its soldiers; post-war research found that the shots came from French soldiers and from German troops' own confusion.",
+      "zh": "屠杀发生在 8 月 23 日，当时德军正与默兹河西岸的法军交战、强渡默兹河。规模最大的一次集体处决中，137 人被枪杀。城区大半被焚毁。德军以平民向士兵开枪为由为杀戮辩护；战后研究认为，枪声来自法军和德军自己的混乱。"
+    },
+    "sources": [
+      "S37",
+      "S39"
+    ],
+    "sensitive": true
+  },
+  {
+    "id": "mons",
+    "t": "1914-08-23",
+    "at": [
+      3.952,
+      50.455
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "germany",
+      "defender": "uk"
+    },
+    "forces": {
+      "uk": 70000,
+      "germany": 160000
+    },
+    "casualties": {
+      "uk": 4200,
+      "germany": 4900
+    },
+    "result": "attacker",
+    "importance": 2,
+    "title": {
+      "en": "Battle of Mons",
+      "zh": "蒙斯之战"
+    },
+    "summary": {
+      "en": "The British Expeditionary Force holds the canal line at Mons for a day against Kluck's First Army, then begins a long retreat.",
+      "zh": "英国远征军在蒙斯运河一线抵挡克卢克的德军第 1 集团军一整天，随后开始长距离撤退。"
+    },
+    "detail": {
+      "en": "About 70,000 British professional soldiers met about 160,000 Germans. Losses on 23–24 August were about 4,200 British and 4,900 German (other counts give about 1,600 British for 23 August alone). At Le Cateau on 26 August the British lost 7,812 men in a rearguard battle.",
+      "zh": "约 7 万名英国职业军人对阵约 16 万德军。8 月 23–24 日，英军损失约 4,200 人，德军约 4,900 人（另一统计仅 23 日英军伤亡约 1,600 人）。8 月 26 日在勒卡托的后卫战中，英军又损失 7,812 人。"
+    },
+    "sources": [
+      "S45",
+      "S47"
+    ]
+  },
+  {
+    "id": "leuven",
+    "t": "1914-08-25",
+    "until": "1914-08-28",
+    "at": [
+      4.701,
+      50.879
+    ],
+    "kind": "massacre",
+    "importance": 3,
+    "title": {
+      "en": "Leuven (Louvain)",
+      "zh": "鲁汶屠杀"
+    },
+    "summary": {
+      "en": "German troops kill 248 civilians in the university town of Leuven and burn the university library with about 300,000 books and 1,000 manuscripts.",
+      "zh": "德军在大学城鲁汶杀害 248 名平民，并焚毁大学图书馆，约 30 万册图书和 1,000 份手稿化为灰烬。"
+    },
+    "detail": {
+      "en": "On the evening of 25 August panicked shooting among German troops in the town was blamed on civilians. Over the next days soldiers shot residents, burned houses across the town and set fire to the library. The destruction of the library became known around the world; it was rebuilt after the war with international help.",
+      "zh": "8 月 25 日晚，城里德军之间因惊慌而相互开枪，却被归咎于平民。此后几天，士兵枪杀居民，焚烧全城各处的房屋，并纵火焚烧图书馆。图书馆被毁的消息传遍世界；战后在各国帮助下重建。"
+    },
+    "sources": [
+      "S39",
+      "S40",
+      "S37"
+    ],
+    "sensitive": true
+  },
+  {
+    "id": "marne",
+    "t": "1914-09-05",
+    "until": "1914-09-12",
+    "at": [
+      3.3,
+      48.95
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "france",
+      "defender": "germany"
+    },
+    "result": "attacker",
+    "importance": 3,
+    "title": {
+      "en": "First Battle of the Marne",
+      "zh": "第一次马恩河战役"
+    },
+    "summary": {
+      "en": "French and British armies counter-attack east of Paris; about 2 million men fight, and on 9 September the German armies begin to retreat to the Aisne.",
+      "zh": "法军和英军在巴黎以东反击；约 200 万人投入战斗，9 月 9 日德军开始向埃纳河撤退。"
+    },
+    "detail": {
+      "en": "The French Sixth Army struck the flank of Kluck's First Army on the Ourcq; Kluck turned to face it, opening a gap between his army and Bülow's Second Army. The British and the French Fifth Army advanced into the gap, and the Germans withdrew. Some French reinforcements were carried from Paris in about 600 taxis, though most troops travelled by train. About 500,000 soldiers of both sides were killed or wounded.",
+      "zh": "法军第 6 集团军在乌尔克河打击克卢克第 1 集团军的侧翼；克卢克转身迎战，与比洛的第 2 集团军之间拉开了缺口。英军和法军第 5 集团军乘隙推进，德军被迫后撤。约 600 辆巴黎出租车运送了一部分法军援兵，但多数部队是坐火车赶到的。双方共有约 50 万士兵死伤。"
+    },
+    "sources": [
+      "S48",
+      "S49",
+      "S19"
+    ]
+  },
+  {
+    "id": "first-ypres",
+    "t": "1914-10-19",
+    "until": "1914-11-22",
+    "at": [
+      2.885,
+      50.852
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "germany",
+      "defender": "uk"
+    },
+    "casualties": {
+      "germany": 130000
+    },
+    "result": "defender",
+    "importance": 2,
+    "title": {
+      "en": "First Battle of Ypres",
+      "zh": "第一次伊普尔战役"
+    },
+    "summary": {
+      "en": "German attacks fail to break through around Ypres; Germany loses about 130,000 men and the Entente about 100,000, among them soldiers of the Indian Corps.",
+      "zh": "德军在伊普尔周围的进攻没能突破；德军损失约 13 万人，协约国约 10 万人，其中有印度军团的士兵。"
+    },
+    "detail": {
+      "en": "The battle ended the 'race to the sea'. Britannica gives more than 54,000 British, at least 50,000 French, more than 20,000 Belgian and more than 130,000 German casualties in the fighting from La Bassée to the Yser. Near Langemarck on 10 November more than 10,000 German soldiers, many of them young volunteers, were killed or wounded; German propaganda later turned this into a myth of student regiments.",
+      "zh": "这场战役结束了“奔向大海”。《不列颠百科全书》统计，从拉巴塞到伊瑟河的战斗中，英军伤亡 5.4 万余人，法军至少 5 万，比利时军 2 万以上，德军 13 万以上。11 月 10 日在朗厄马克附近，1 万多名德军士兵死伤，其中不少是年轻志愿兵；德国宣传后来把这件事渲染成“学生军团”的神话。"
+    },
+    "sources": [
+      "S50",
+      "S51",
+      "S52",
+      "S53"
+    ]
+  },
+  {
+    "id": "cer",
+    "t": "1914-08-15",
+    "until": "1914-08-24",
+    "at": [
+      19.488,
+      44.606
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "austria-hungary",
+      "defender": "serbia"
+    },
+    "result": "defender",
+    "importance": 2,
+    "title": {
+      "en": "Battle of Cer",
+      "zh": "采尔山之战"
+    },
+    "summary": {
+      "en": "The Serbian army defeats the invading Austro-Hungarian forces on Cer mountain and drives them back across the Drina: the Entente's first victory of the war.",
+      "zh": "塞尔维亚军队在采尔山击败入侵的奥匈军队，把他们赶回德里纳河对岸，这是协约国一方在这场战争中的第一次胜利。"
+    },
+    "detail": {
+      "en": "Dates differ: Tasić gives the decisive fighting on Cer as 17–19 August; Britannica gives 15–20 August, with further fighting at Šabac until 24 August.",
+      "zh": "日期说法不一：塔西奇把采尔山的决定性战斗定在 8 月 17–19 日；《不列颠百科全书》作 8 月 15–20 日，沙巴茨一带的战斗持续到 24 日。"
+    },
+    "sources": [
+      "S67",
+      "S69",
+      "S58"
+    ]
+  },
+  {
+    "id": "macva-1914",
+    "t": "1914-08-12",
+    "until": "1914-08-24",
+    "at": [
+      19.695,
+      44.757
+    ],
+    "kind": "massacre",
+    "importance": 2,
+    "title": {
+      "en": "Killings of civilians in Mačva",
+      "zh": "马奇瓦平民屠杀"
+    },
+    "summary": {
+      "en": "During their first invasion of Serbia, Austro-Hungarian troops kill or cause the disappearance of up to 4,000 civilians in the Mačva region; at Šabac some 80 people are shot in a churchyard.",
+      "zh": "奥匈军队第一次入侵塞尔维亚期间，在马奇瓦地区杀害或致使失踪的平民多达 4,000 人；在沙巴茨，约 80 人在教堂墓地被枪杀。"
+    },
+    "detail": {
+      "en": "The Swiss criminologist R. A. Reiss, who investigated for the Serbian government, counted about 3,500 to 4,000 civilian victims of the first invasion, not including Šabac; at Lešnica 109 people were killed. Austro-Hungarian commanders treated the Serbian population as hostile and ordered hostages taken and suspects shot. At Šabac on 17 August about 80 people were ordered to be shot; the killings there cost some 200 lives.",
+      "zh": "受塞尔维亚政府委托调查的瑞士犯罪学家 R. A. 赖斯统计，第一次入侵造成约 3,500 到 4,000 名平民遇难，不含沙巴茨；莱什尼察有 109 人被杀。奥匈指挥官把塞尔维亚居民视为敌对人群，下令扣押人质、枪决嫌疑人。8 月 17 日在沙巴茨，约 80 人被下令枪决；那里的杀戮共夺去约 200 人的生命。"
+    },
+    "sources": [
+      "S70",
+      "S71",
+      "S72"
+    ],
+    "sensitive": true
+  },
+  {
+    "id": "gumbinnen",
+    "t": "1914-08-20",
+    "at": [
+      22.201,
+      54.592
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "russia",
+      "defender": "germany"
+    },
+    "casualties": {
+      "germany": 14000
+    },
+    "result": "attacker",
+    "importance": 1,
+    "title": {
+      "en": "Battle of Gumbinnen",
+      "zh": "贡宾嫩之战"
+    },
+    "summary": {
+      "en": "The Russian First Army defeats the German Eighth Army at Gumbinnen in East Prussia; the Germans lose over 14,000 men here and at Stallupönen.",
+      "zh": "俄军第 1 集团军在东普鲁士的贡宾嫩击败德军第 8 集团军；德军在这里和施塔卢普嫩共伤亡 1.4 万余人。"
+    },
+    "sources": [
+      "S62"
+    ]
+  },
+  {
+    "id": "tannenberg",
+    "t": "1914-08-26",
+    "until": "1914-08-30",
+    "at": [
+      20.134,
+      53.495
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "germany",
+      "defender": "russia"
+    },
+    "casualties": {
+      "russia": 120000,
+      "germany": 13000
+    },
+    "result": "attacker",
+    "importance": 3,
+    "title": {
+      "en": "Battle of Tannenberg",
+      "zh": "坦嫩贝格之战"
+    },
+    "summary": {
+      "en": "The German Eighth Army surrounds Samsonov's Russian Second Army; 92,000 to 95,000 Russians are captured and Samsonov shoots himself.",
+      "zh": "德军第 8 集团军包围萨姆索诺夫的俄军第 2 集团军；9.2 万到 9.5 万名俄军被俘，萨姆索诺夫开枪自杀。"
+    },
+    "detail": {
+      "en": "After Gumbinnen the Eighth Army, now led by Paul von Hindenburg and Erich Ludendorff, moved most of its strength by rail against the Second Army while the Russian First Army stayed passive. Russian losses are given as 30,000 killed or wounded and about 92,000 prisoners (Britannica), or about 120,000 to 125,000 in all, including 95,000 prisoners (Nagornaja, Dowling). German losses were about 10,000 to 15,000. Samsonov shot himself on 29 or 30 August. The Germans named the battle after Tannenberg, where the Teutonic Knights had been defeated in 1410.",
+      "zh": "贡宾嫩之后，由保罗·冯·兴登堡和埃里希·鲁登道夫指挥的第 8 集团军把大部分兵力用铁路调去对付俄军第 2 集团军，而俄军第 1 集团军按兵不动。俄军损失一说为死伤 3 万、被俘约 9.2 万（《不列颠百科全书》），一说共约 12 万到 12.5 万，其中被俘 9.5 万（纳戈尔纳娅、道林）。德军损失约 1 万到 1.5 万。萨姆索诺夫于 8 月 29 日或 30 日自杀。德国人用坦嫩贝格为这场战役命名，因为 1410 年条顿骑士团曾在那里战败。"
+    },
+    "sources": [
+      "S60",
+      "S61",
+      "S62",
+      "S69",
+      "S57"
+    ]
+  },
+  {
+    "id": "masurian-lakes",
+    "t": "1914-09-07",
+    "until": "1914-09-14",
+    "at": [
+      21.765,
+      54.038
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "germany",
+      "defender": "russia"
+    },
+    "casualties": {
+      "russia": 100000,
+      "germany": 70000
+    },
+    "result": "attacker",
+    "importance": 2,
+    "title": {
+      "en": "First Battle of the Masurian Lakes",
+      "zh": "第一次马祖里湖战役"
+    },
+    "summary": {
+      "en": "The German Eighth Army turns on the Russian First Army and drives it out of East Prussia; the Russians lose some 100,000 men.",
+      "zh": "德军第 8 集团军转而攻击俄军第 1 集团军，把它赶出东普鲁士；俄军损失约 10 万人。"
+    },
+    "detail": {
+      "en": "Rennenkampf's army inflicted nearly 70,000 casualties but suffered some 100,000 of its own. During their invasions of East Prussia Russian troops deliberately killed 1,491 German civilians in executions and individual murders.",
+      "zh": "伦宁坎普的部队使德军伤亡近 7 万人，自身损失约 10 万人。俄军入侵东普鲁士期间，通过处决和个别杀害，蓄意杀死德国平民 1,491 人。"
+    },
+    "sources": [
+      "S62",
+      "S37"
+    ]
+  },
+  {
+    "id": "lemberg",
+    "t": "1914-08-23",
+    "until": "1914-09-11",
+    "at": [
+      24.032,
+      49.842
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "russia",
+      "defender": "austria-hungary"
+    },
+    "casualties": {
+      "austria-hungary": 360000,
+      "russia": 230000
+    },
+    "result": "attacker",
+    "importance": 3,
+    "title": {
+      "en": "Battle of Galicia (Lemberg)",
+      "zh": "加利西亚战役（伦贝格）"
+    },
+    "summary": {
+      "en": "Russian armies defeat Austria-Hungary in Galicia and take Lemberg (Lviv) on 3 September; Austria-Hungary loses about 300,000 to 360,000 men.",
+      "zh": "俄军在加利西亚击败奥匈军队，9 月 3 日攻占伦贝格（今利沃夫）；奥匈损失约 30 万到 36 万人。"
+    },
+    "detail": {
+      "en": "The Battle of Galicia was a series of battles from late August to mid-September. The Russian Presidential Library gives Russian losses of 230,000 and Austro-Hungarian losses of about 360,000, including about 120,000 prisoners; Dowling gives over 300,000 Austro-Hungarian losses, nearly a third of the force. The Austro-Hungarian armies retreated towards the Carpathians, leaving the fortress of Przemyśl to be besieged.",
+      "zh": "加利西亚战役是 8 月下旬到 9 月中旬的一连串战斗。俄罗斯总统图书馆给出的数字是俄军损失 23 万，奥匈约 36 万，其中被俘约 12 万；道林的数字是奥匈损失 30 万以上，接近其兵力的三分之一。奥匈军队向喀尔巴阡山方向撤退，普热梅希尔要塞随后被围。"
+    },
+    "sources": [
+      "S64",
+      "S62",
+      "S57"
+    ]
+  },
+  {
+    "id": "przemysl",
+    "t": "1914-09-24",
+    "until": "1915-03-22",
+    "at": [
+      22.789,
+      49.784
+    ],
+    "kind": "siege",
+    "sides": {
+      "attacker": "russia",
+      "defender": "austria-hungary"
+    },
+    "importance": 1,
+    "title": {
+      "en": "Siege of Przemyśl",
+      "zh": "普热梅希尔之围"
+    },
+    "summary": {
+      "en": "Russian troops besiege the Austro-Hungarian fortress of Przemyśl and its garrison of about 130,000; it holds out until 22 March 1915.",
+      "zh": "俄军围攻奥匈帝国的普热梅希尔要塞，守军约 13 万人；要塞一直坚守到 1915 年 3 月 22 日。"
+    },
+    "sources": [
+      "S65",
+      "S66"
+    ]
+  },
+  {
+    "id": "ottoman-black-sea-raid",
+    "t": "1914-10-29",
+    "at": [
+      33.522,
+      44.605
+    ],
+    "kind": "bombing",
+    "sides": {
+      "attacker": "ottoman",
+      "defender": "russia"
+    },
+    "importance": 2,
+    "title": {
+      "en": "Ottoman raid on Russia's Black Sea ports",
+      "zh": "奥斯曼舰队袭击俄国黑海港口"
+    },
+    "summary": {
+      "en": "Ottoman warships, among them the former German cruisers Goeben and Breslau, shell Sevastopol, Odessa and Novorossiysk; the Ottoman Empire enters the war.",
+      "zh": "奥斯曼军舰——其中包括原属德国的巡洋舰“戈本号”和“布雷斯劳号”——炮击塞瓦斯托波尔、敖德萨和新罗西斯克，奥斯曼帝国由此参战。"
+    },
+    "detail": {
+      "en": "Russia declared war on 2 November (1 November in some accounts), and Britain and France on 5 November. On 14 November the Ottoman religious authority declared a jihad against the Entente powers.",
+      "zh": "俄国 11 月 2 日宣战（一说 11 月 1 日），英国和法国 11 月 5 日宣战。11 月 14 日，奥斯曼宗教最高机构宣布对协约国进行圣战。"
+    },
+    "sources": [
+      "S75",
+      "S20",
+      "S80"
+    ]
+  },
+  {
+    "id": "basra-1914",
+    "t": "1914-11-06",
+    "until": "1914-11-23",
+    "at": [
+      47.809,
+      30.495
+    ],
+    "kind": "landing",
+    "sides": {
+      "attacker": "india",
+      "defender": "ottoman"
+    },
+    "result": "attacker",
+    "importance": 1,
+    "title": {
+      "en": "Fao and Basra",
+      "zh": "法奥登陆与巴士拉"
+    },
+    "summary": {
+      "en": "British-Indian troops land at Fao at the head of the Persian Gulf on 6 November and take Basra later in the month.",
+      "zh": "英印军 11 月 6 日在波斯湾顶端的法奥登陆，当月晚些时候攻占巴士拉。"
+    },
+    "detail": {
+      "en": "The force came from the Indian Army and was sent to protect the Anglo-Persian oil installations at Abadan. Sources date the capture of Basra between 20 and 23 November.",
+      "zh": "这支部队来自英属印度陆军，任务是保护阿巴丹的英波石油设施。各来源对攻占巴士拉的日期记载在 11 月 20 日到 23 日之间。"
+    },
+    "sources": [
+      "S79",
+      "S20",
+      "S76"
+    ]
+  },
+  {
+    "id": "kolubara",
+    "t": "1914-11-16",
+    "until": "1914-12-15",
+    "at": [
+      20.166,
+      44.37
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "austria-hungary",
+      "defender": "serbia"
+    },
+    "casualties": {
+      "austria-hungary": 275000,
+      "serbia": 163500
+    },
+    "result": "defender",
+    "importance": 2,
+    "title": {
+      "en": "Battle of the Kolubara",
+      "zh": "科卢巴拉战役"
+    },
+    "summary": {
+      "en": "After a second Austro-Hungarian invasion pushes deep into Serbia, a Serbian counter-offensive from 3 December drives it out; Belgrade is retaken on 15 December.",
+      "zh": "奥匈第二次入侵深入塞尔维亚之后，塞军从 12 月 3 日起反攻，把奥匈军队赶出国境，12 月 15 日收复贝尔格莱德。"
+    },
+    "detail": {
+      "en": "In the whole 1914 campaign Austria-Hungary lost about 275,000 men in Serbia: 28,276 killed, 122,122 wounded, 76,644 missing, 2,046 captured and 46,716 sick. Serbian losses were about 163,500 killed, wounded, captured and missing.",
+      "zh": "1914 年整个战役中，奥匈在塞尔维亚损失约 27.5 万人：阵亡 28,276、负伤 122,122、失踪 76,644、被俘 2,046、患病 46,716。塞军死伤、被俘和失踪约 16.35 万人。"
+    },
+    "sources": [
+      "S68",
+      "S67",
+      "S69"
+    ]
+  },
+  {
+    "id": "sarikamish",
+    "t": "1914-12-22",
+    "until": "1915-01-17",
+    "at": [
+      42.577,
+      40.336
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "ottoman",
+      "defender": "russia"
+    },
+    "result": "defender",
+    "importance": 2,
+    "title": {
+      "en": "Battle of Sarıkamış",
+      "zh": "萨勒卡默什之战"
+    },
+    "summary": {
+      "en": "Enver Pasha's winter offensive against the Russians in the Caucasus fails; the Ottoman Third Army loses between 60,000 and 90,000 men, many of them frozen to death.",
+      "zh": "恩维尔帕夏在高加索对俄军发动冬季攻势，以失败告终；奥斯曼第 3 集团军损失 6 万到 9 万人，许多人冻死。"
+    },
+    "detail": {
+      "en": "Enver took direct command and sent two corps on a flanking march through mountains in deep snow. Estimates of Ottoman strength run from about 75,000 to over 118,000. Losses: about 60,000 by the Turkish official history (including 20,000 dead of frostbite and disease), 70,000 by a Russian staff officer (up to 30,000 frozen), 90,000 by a French officer. Russian losses were around 20,000, about 6,000 from frostbite.",
+      "zh": "恩维尔亲自指挥，派两个军在深雪中翻山迂回。对奥斯曼兵力的估计从约 7.5 万到 11.8 万以上。损失：土耳其官方战史约 6 万（其中冻伤和疾病致死 2 万），一位俄国参谋军官估计 7 万（冻死多达 3 万），一位法国军官估计 9 万。俄军损失约 2 万，其中约 6,000 人因冻伤。"
+    },
+    "sources": [
+      "S77",
+      "S76"
+    ]
+  }
+]

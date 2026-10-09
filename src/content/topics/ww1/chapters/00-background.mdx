@@ -5,6 +5,7 @@ kind: background
 title: { en: "Background", zh: "背景" }
 sensitive: false
 state:
+  time: "1914-08-05"
   camera: { center: [20, 30], zoom: 1.6 }
   layers: [base, control]
   summary:
@@ -13,16 +14,85 @@ state:
   note:
     en: "This topic follows the war from every side that fought it and from the places it reached, not from one country's point of view. Numbers are rounded and each one names its source; where sources disagree, the range is given. The map's territories come from published historical border datasets and dated maps listed in the sources. The two sides are called the Entente, with the powers associated with it, and the Central Powers: Germany, Austria-Hungary, the Ottoman Empire and Bulgaria."
     zh: "本主题从参战各方以及战火所到之处讲述这场战争，不站在某一个国家的立场。数字都取整并注明来源；来源说法不一时列出区间。地图上的版图来自公开的历史国界数据集和注明日期的地图，见来源表。本主题中交战双方是协约国（及其合作国）和同盟国；注意一战的“同盟国”指德国一方，与二战的“同盟国”不是一回事。"
+  beats:
+    - t: "1914-08-05"
+      camera: { center: [20, 30], zoom: 1.6 }
+      layers: [base, control, participation]
+      caption:
+        en: "5 August 1914, the first week of the war: France, Russia, Britain, Belgium and Serbia stand against Germany and Austria-Hungary. The colonies of the European empires in Africa, Asia and the Pacific are drawn in the colour of the power that rules them."
+        zh: "1914 年 8 月 5 日，开战第一周：法国、俄国、英国、比利时和塞尔维亚站在一边，德国和奥匈帝国站在另一边。欧洲各帝国在非洲、亚洲和太平洋的殖民地，按统治它们的国家着色。"
+    - t: "1914-08-05"
+      camera: { center: [14, 46], zoom: 3.6 }
+      highlight: [austria-hungary]
+      caption:
+        en: "Europe: Germany and Austria-Hungary face France and Russia, which allied in 1892, and Britain, which reached agreements with France in 1904 and Russia in 1907. Italy, a partner of Germany and Austria-Hungary since 1882, stays neutral."
+        zh: "欧洲：德国和奥匈帝国一边，对面是 1892 年结盟的法国和俄国，以及分别在 1904 年、1907 年与法、俄达成协议的英国。1882 年起与德奥结盟的意大利保持中立。"
+    - t: "1914-08-05"
+      camera: { center: [21.5, 42.5], zoom: 5.4 }
+      highlight: [serbia, austria-hungary]
+      caption:
+        en: "The Balkans: Austria-Hungary annexed Bosnia and Herzegovina in 1908. In the Balkan Wars of 1912 and 1913 the Ottoman Empire lost almost all its land in Europe, and Serbia grew by four-fifths."
+        zh: "巴尔干：奥匈帝国 1908 年吞并了波斯尼亚和黑塞哥维那。在 1912 年和 1913 年的两次巴尔干战争中，奥斯曼帝国几乎失去了全部欧洲领土，塞尔维亚的面积扩大了五分之四。"
+    - t: "1914-08-05"
+      camera: { center: [124, 30], zoom: 3.6 }
+      highlight: [japan, china]
+      caption:
+        en: "East Asia: China became a republic in 1912. Japan, allied with Britain since 1902, rules Korea and Taiwan, and Germany holds the leased port of Tsingtao on China's coast."
+        zh: "东亚：中国在 1912 年成为共和国。1902 年起与英国结盟的日本统治着朝鲜和台湾，德国则租借着中国沿海的青岛。"
 ---
 
 <Lang en>
 
-In 1914 Europe was split into two alliance blocs, and its empires ruled much of Africa, Asia and the Pacific; a crisis in the Balkans set the blocs against each other.
+In the summer of 1914 Europe's great powers stood in two blocs. Germany, Austria-Hungary and Italy had signed the Triple Alliance in 1882. France and Russia answered with a military alliance in 1892, and Britain settled its quarrels with France in 1904 and with Russia in 1907. When war came, the side around France, Russia and Britain was called the <Term id="entente">Entente</Term>; Germany and Austria-Hungary, later joined by the Ottoman Empire and Bulgaria, were the <Term id="central-powers">Central Powers</Term>. Italy stayed neutral and joined the Entente in 1915.
+
+The large areas of colour on the map are mostly empires. By 1914 Europeans or their descendants controlled about <Num s="S1">84 percent</Num> of the world. The British Empire covered about <Num s="S2">a quarter</Num> of the earth's land, with some <Num s="S2">425 million</Num> people, Singapore and Malaya among them. France ruled much of Africa and Indochina; Germany held colonies in Africa and the Pacific and the port of Tsingtao (Qingdao) in China. When the empires went to war, their colonies went with them.
+
+Asia was changing too. China's Qing dynasty fell in 1911–12 and Yuan Shikai became president of the new Republic of China. Japan, allied with Britain since 1902, had defeated Russia in 1904–05 and annexed Korea in 1910. The Ottoman Empire had been losing land for a century; from 1913 it was ruled by the Young Turk leaders Enver, Talat and Djemal.
+
+The Balkans were the most dangerous corner. Austria-Hungary annexed Bosnia and Herzegovina in 1908, angering Serbia, which hoped to unite the South Slavs. In the Balkan Wars of 1912–13 the Ottoman Empire lost almost all its land in Europe, and Serbia grew by <Num s="S13">81 percent</Num>.
+
+Meanwhile the powers armed. Britain and Germany raced to build battleships, and the continental armies relied on conscription and on <Term id="mobilisation">mobilisation</Term> plans timed to the railway. Germany planned to defeat France quickly by marching through neutral Belgium before Russia was ready. When war began the Central Powers had about <Num s="S11">3.8 million</Num> soldiers and the Entente states about <Num s="S11">5.7 million</Num>.
+
+<More title={{ en: "How to read the map", zh: "怎样读这张地图" }}>
+
+Each area is coloured by the side it belonged to on the date shown: the Entente and the powers that fought with it, the Central Powers, or neutral. A country counts as at war only from the day it entered the war, so the colours change as the war spreads; Italy, the Ottoman Empire, Japan and the United States all start out neutral. Colonies take the colour of the power that ruled them, because their people were taken into the war by that power's decision. Borders come from the CShapes and OpenHistoricalMap datasets for each date (see Sources). Place names are given as they were in 1914, with today's name in brackets the first time: Lemberg (Lviv), Tsingtao (Qingdao).
+
+</More>
+
+<More title={{ en: "Dreadnoughts and railway timetables", zh: "无畏舰与铁路时刻表" }}>
+
+In 1906 Britain launched HMS Dreadnought, a battleship so much faster and better armed than earlier ships that every navy's older battleships became second-class. Germany, whose navy laws aimed to challenge British sea power, built its own, and the two countries raced. On 4 August 1914 Britain's main fleet had <Num s="S8">20</Num> dreadnought battleships and <Num s="S8">4</Num> battlecruisers ready to fight; Germany's had <Num s="S8">13</Num> and <Num s="S8">3</Num>.
+
+On land the race was in men and trains. France, Germany, Russia and Austria-Hungary conscripted young men for two or three years and kept them as reservists afterwards. In a crisis, millions were called up and carried to the frontiers by railway timetables worked out years in advance. Germany's plan, drawn up under General Alfred von Schlieffen, was to beat France in the weeks Russia needed to mobilise and then turn the same troops east. France's Plan XVII was an offensive across the border into Alsace-Lorraine. Because the plans depended on speed, a general mobilisation was widely read as the step before war.
+
+</More>
 
 </Lang>
 
 <Lang zh>
 
-1914 年的欧洲分成两大军事集团，欧洲各帝国统治着非洲、亚洲和太平洋的大片土地；巴尔干的一场危机让两个集团兵戎相见。
+1914 年夏，欧洲列强分成了两大集团。德国、奥匈帝国和意大利在 1882 年签订了三国同盟条约。法国和俄国随后在 1892 年结成军事同盟；英国又在 1904 年和 1907 年先后与法国、俄国解决了彼此的争端。战争爆发后，以法、俄、英为核心的一方称为<Term id="entente">协约国</Term>；德国和奥匈帝国一方，后来加上奥斯曼帝国和保加利亚，称为<Term id="central-powers">同盟国</Term>。意大利开战时保持中立，1915 年加入协约国一方。
+
+地图上的大片颜色，多半是帝国。到 1914 年，世界上约 <Num s="S1">84%</Num> 的土地处在欧洲人或其后裔的控制之下。大英帝国占地球陆地的约<Num s="S2">四分之一</Num>，人口约 <Num s="S2">4.25 亿</Num>，新加坡和马来亚也在其中。法国统治着非洲大片土地和印度支那；德国在非洲和太平洋有殖民地，还租借着中国的青岛。帝国一旦开战，它的殖民地也就被卷进了战争。
+
+亚洲也在剧变。1911 至 1912 年，清朝灭亡，袁世凯出任新成立的中华民国的大总统。日本 1902 年与英国结盟，1904 至 1905 年打败俄国，1910 年吞并朝鲜。奥斯曼帝国一百年来不断丧失领土，1913 年起由青年土耳其党的恩维尔、塔拉特、杰马尔三人掌权。
+
+巴尔干是最危险的地方。1908 年，奥匈帝国吞并了波斯尼亚和黑塞哥维那，激怒了想把南方斯拉夫人统一起来的塞尔维亚。1912 至 1913 年的两次巴尔干战争中，奥斯曼帝国几乎失去了全部欧洲领土，塞尔维亚的面积扩大了 <Num s="S13">81%</Num>。
+
+与此同时，列强都在扩军备战。英国和德国竞相建造战列舰；欧洲大陆各国实行征兵制，并按铁路时刻表制定了<Term id="mobilisation">动员</Term>计划。德国打算借道中立的比利时，在俄国准备好之前迅速打败法国。开战时，同盟国共有约 <Num s="S11">380 万</Num>士兵，协约国各国约 <Num s="S11">570 万</Num>。
+
+<More title={{ en: "How to read the map", zh: "怎样读这张地图" }}>
+
+地图上每一块地方，按它在所示日期属于哪一方着色：协约国及与之并肩作战的国家、同盟国，或中立国。一个国家从参战那天起才算交战国，所以颜色会随着战火蔓延而变化；意大利、奥斯曼帝国、日本和美国一开始都是中立的。殖民地按统治它的国家着色，因为那里的人是由宗主国决定被带进战争的。国界按日期取自 CShapes 和 OpenHistoricalMap 两个数据集（见来源表）。地名用 1914 年的叫法，第一次出现时在括号里注今名，例如伦贝格（今利沃夫）、青岛。
+
+</More>
+
+<More title={{ en: "Dreadnoughts and railway timetables", zh: "无畏舰与铁路时刻表" }}>
+
+1906 年，英国的“无畏号”战列舰下水。它比以往的战舰快得多、火力强得多，各国原有的战列舰一下子都落伍了。德国按照海军法案要向英国的海上霸权发起挑战，也开始建造同类战舰，两国展开了竞赛。1914 年 8 月 4 日，英国主力舰队有可以作战的无畏舰 <Num s="S8">20</Num> 艘、战列巡洋舰 <Num s="S8">4</Num> 艘；德国分别是 <Num s="S8">13</Num> 艘和 <Num s="S8">3</Num> 艘。
+
+陆地上比的是人数和火车。法国、德国、俄国和奥匈帝国都征召青年服役两三年，退役后编为预备役。一旦有危机，数以百万计的人被征召，按多年前就排好的铁路时刻表运往边境。德国在施利芬将军主持下制定的计划，是趁俄国动员的这段时间打败法国，再把同一批部队调往东线。法国的第十七号计划则是越过边境进攻阿尔萨斯—洛林。由于各国计划都讲求速度，一国宣布总动员，往往被看成开战前的最后一步。
+
+</More>
 
 </Lang>
