@@ -93,6 +93,19 @@ test('deep link restores scene state (time + highlight, part + cutaway)', async 
   expect(page.url()).toContain('cut=half');
 });
 
+test('per-topic bloc labels: the ww1 key names the Entente, not the site-wide "Allies"', async ({ page }) => {
+  // ww1 is a draft: reachable by URL only. topic.yaml blocLabels: allied = Allies (Entente) / 协约国, axis = Central Powers / 同盟国.
+  await page.goto('/zh/topics/ww1/');
+  await expect(page.locator('.atlas-stage canvas').first()).toBeVisible({ timeout: 30_000 });
+  const legend = page.locator('.atlas-legend').first();
+  await expect(legend).toContainText('协约国');
+  await expect(legend).toContainText('同盟国');
+  await expect(legend).not.toContainText('轴心国');
+  await page.goto('/en/topics/ww1/');
+  await expect(page.locator('.atlas-legend').first()).toContainText('Allies (Entente)');
+  await expect(page.locator('.atlas-legend').first()).toContainText('Central Powers');
+});
+
 test('PWA: manifest linked, manifest and service worker served', async ({ page, request }) => {
   await page.goto('/en/');
   const href = await page.locator('link[rel="manifest"]').getAttribute('href');

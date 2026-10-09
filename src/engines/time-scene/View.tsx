@@ -61,6 +61,7 @@ import { EntityInspector } from './EntityInspector';
 import { BandCard, PerfReadout, useFps } from './hud/HudPanels';
 import { BLOC_CSS, entityCssColor } from './colors';
 import { blocsOf, changesBloc } from './lib/bloc';
+import { blocLabel, blocLabelText } from './lib/blocLabels';
 import './time-scene.css';
 
 const CHAPTER_TWEEN_MS = 1600;
@@ -101,6 +102,7 @@ const writeVoice = (on: boolean) => {
   }
 };
 const SQUARE_KINDS = new Set<string>(['massacre', 'atrocity']);
+const TRIANGLE_KINDS = new Set<string>(['disaster']);
 /** Up to this many entities, the legend names each one; above, it groups by bloc. */
 const LEGEND_ENTITY_LIMIT = 6;
 const OVERLAY_OPEN_MIN_WIDTH = 720;
@@ -515,32 +517,34 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
           // An entity that changes sides is listed once per bloc it is in.
           if (!e.color && changesBloc(e)) {
             for (const b of blocsOf(e))
-              items.push({ id: `entity-${e.id}-${b}`, label: `${tx(e.name, locale)} · ${t(`time.bloc.${b}`)}`, color: BLOC_CSS[b] });
+              items.push({ id: `entity-${e.id}-${b}`, label: `${tx(e.name, locale)} · ${blocLabel(topic.blocLabels, b, locale)}`, color: BLOC_CSS[b] });
           } else {
             items.push({ id: `entity-${e.id}`, label: e.name, color: entityCssColor(e) });
           }
         }
       } else {
         for (const b of ['axis', 'allied', 'neutral'] as const)
-          if (geo.entities.some((e) => blocsOf(e).includes(b))) items.push({ id: `bloc-${b}`, label: t(`time.bloc.${b}`), color: BLOC_CSS[b] });
+          if (geo.entities.some((e) => blocsOf(e).includes(b))) items.push({ id: `bloc-${b}`, label: blocLabel(topic.blocLabels, b, locale), color: BLOC_CSS[b] });
       }
       // Entities with an end date turn neutral once they are out of the war.
-      if (geo.entities.some((e) => e.left !== undefined)) items.push({ id: 'bloc-out', label: bi('time.bloc.out'), color: BLOC_CSS.neutral });
+      if (geo.entities.some((e) => e.left !== undefined)) items.push({ id: 'bloc-out', label: blocLabelText(topic.blocLabels, 'out'), color: BLOC_CSS.neutral });
     }
     if (layers.includes('movements') && geo.movements.length)
       items.push({ id: 'movement', label: t('time.movement'), color: 'var(--ink-muted)', kind: 'arrow' });
     if (layers.includes('battles')) {
       const kinds = new Set(model.events.map((e) => e.event.kind));
-      if ([...kinds].some((k) => !SQUARE_KINDS.has(k)))
+      if ([...kinds].some((k) => !SQUARE_KINDS.has(k) && !TRIANGLE_KINDS.has(k)))
         items.push({ id: 'event', label: t('time.event'), color: 'var(--ink-muted)', kind: 'point' });
       if (kinds.has('siege')) items.push({ id: 'siege', label: t('time.legend.siege'), color: 'var(--ink-muted)', kind: 'ring-dashed' });
       if ([...kinds].some((k) => SQUARE_KINDS.has(k)))
         items.push({ id: 'atrocity', label: bi('time.legend.atrocity'), color: 'var(--ink)', kind: 'square' });
+      if ([...kinds].some((k) => TRIANGLE_KINDS.has(k)))
+        items.push({ id: 'disaster', label: bi('time.legend.disaster'), color: 'var(--ink)', kind: 'triangle' });
     }
     if (layers.includes('sites') && model.sites.length)
       items.push({ id: 'site', label: t('time.legend.site'), color: 'var(--ink)', kind: 'site' });
     return items;
-  }, [geo, model, layers, locale]); // `t` is bound to `locale`
+  }, [geo, model, layers, locale, topic.blocLabels]); // `t` is bound to `locale`
 
   /* ---------- control panel: LAYERS (store layers + drawing modes) and TOOLS ---------- */
   const panelLayers = useMemo<ControlRow[]>(

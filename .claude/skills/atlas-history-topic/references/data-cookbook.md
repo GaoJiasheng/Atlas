@@ -26,7 +26,8 @@
 ]
 ```
 
-- `bloc`：`axis | allied | neutral`，或换阵营的时段数组（`[from, to)`，只有最后一段可省 `to`，按时间排、不重叠）。新主题的阵营名沿用这三个值，图例文字在 `ui.*.json` 的 `time.bloc.*`。
+- `bloc`：`axis | allied | neutral`，或换阵营的时段数组（`[from, to)`，只有最后一段可省 `to`，按时间排、不重叠）。值只有这三个，但**显示名按主题**：`topic.yaml` 的可选 `blocLabels: { axis?, allied?, neutral?, out? }`（每项 `{ en, zh }`，`out` = “已退出战争”）；图例、实体详情、引线说明都读它，缺省回退全站 `time.bloc.*`（Axis / 轴心国，Allies / 同盟国）。**非二战主题必须设**：先在 spec 决定映射（一战：`allied` = Entente，`axis` = Central Powers；注意中文“同盟国”在二战指 Allies、在一战指 Central Powers，必须靠 `blocLabels` 写对）。
+- 实体 id 对应一个固定名字，**不能随时间改名**；国家换名（俄国→苏俄）写在控制区要素的 `label` 里，实体详情仍显示原名。
 - `joined` 之前、`left` 之后一律按中立显示（地图、参与卡、地名）；`joined` 驱动"何时加入"图层和参与卡的线。
 - `color` 只在必须区分同阵营实体时用，写 token。
 
@@ -72,6 +73,7 @@
 | `bombing` | 空袭、轰炸城市（含原子弹） | `sides` | 圆点 |
 | `siege` | 围城（有 `until`） | — | 外加虚线环 |
 | `massacre` / `atrocity` | 屠杀 / 其他暴行（各方都用） | — | 空心方块（墨色） |
+| `disaster` | 流感、饥荒、击沉客轮等非作战灾难（不分阵营，不写 `sides`） | — | 空心三角（墨色），图例“Disaster / 灾难” |
 | `surrender` / `political` | 投降、条约、宣战、政权变化 | — | 圆点 |
 | `evacuation` / `liberation` | 撤退、解放（冷色） | — | 冷色圆点 |
 | `site` | 静态地点（监狱、纪念碑） | — | `sites` 图层的菱形，不进时间轴 |

@@ -28,6 +28,8 @@ import type { TimeSceneExt } from '../../index';
 import { entityBlocAt, type TimeModel } from '../../lib/model';
 import type { SceneEvent } from '../../schema';
 import { sideAt, warStatusAt } from '../../lib/bloc';
+import { blocLabel } from '../../lib/blocLabels';
+import type { BlocLabels } from '../../../../content/schema/topic';
 import type { Playhead } from '../../lib/playhead';
 import { frameAt, type Frame } from '../../lib/frame';
 import { areaLabelPoint, metresPerPixel, pickWorldCopy, pointAlong, projectNearCentre, scaleBar, type LngLat } from '../../lib/geo';
@@ -48,6 +50,8 @@ export interface GeoControllerOptions {
   playhead: Playhead;
   model: TimeModel;
   locale: Locale;
+  /** The topic's own bloc names (`topic.blocLabels`); the UI strings when absent. */
+  blocLabels?: BlocLabels;
   onSelectEvent(id: string): void;
 }
 
@@ -144,6 +148,11 @@ function hiResLayers(tk: ThemeTokens): LayerSpecification[] {
 
 /** Event kinds drawn as a hollow square (HTML marker) instead of the ring + dot. */
 const SQUARE_KINDS = new Set<string>(['massacre', 'atrocity']);
+/** Event kinds drawn as a hollow triangle (epidemic, famine, sinking); no sides, ink only. */
+const TRIANGLE_KINDS = new Set<string>(['disaster']);
+/** Hairline triangle for the `disaster` mark (stroke follows `color` in CSS). */
+const TRIANGLE_SVG =
+  '<svg viewBox="0 0 10 10" width="100%" height="100%" aria-hidden="true"><path d="M5 0.9L9.5 9.1H0.5Z" fill="var(--ts-fill)" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="miter"/></svg>';
 /** Event kinds drawn in the cold tone instead of the attacker's colour. */
 const COLD_KINDS = new Set<string>(['evacuation', 'liberation']);
 /** Ring radius of an event mark in px. */
@@ -459,9 +468,9 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     const en = model.entities.get(id)?.entity;
     if (!en) return '';
     const status = warStatusAt(en, t);
-    if (status === 'after') return `${tr('time.bloc.out')}${en.left !== undefined ? ` · ${formatTime(en.left, locale)}` : ''}`;
+    if (status === 'after') return `${blocLabel(options.blocLabels, 'out', locale)}${en.left !== undefined ? ` · ${formatTime(en.left, locale)}` : ''}`;
     if (status === 'before') return tr('time.bloc.notYet');
-    return `${tr(`time.bloc.${entityBlocAt(model, id, t)}`)} · ${tr('time.joinedOn', { date: formatTime(en.joined, locale) })}`;
+    return `${blocLabel(options.blocLabels, entityBlocAt(model, id, t), locale)} · ${tr('time.joinedOn', { date: formatTime(en.joined, locale) })}`;
   };
 
   const layersOn = () => new Set(store.getState().layers);
@@ -681,7 +690,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
           color,
           stroke: isHl ? tokens.signal : ef.active ? color : tokens['ink-2'],
           sw: isHl ? 1.6 : 1,
-          o: SQUARE_KINDS.has(e.kind) ? 0 : ef.active || isHl ? 1 : 0.6,
+          o: SQUARE_KINDS.has(e.kind) || TRIANGLE_KINDS.has(e.kind) ? 0 : ef.active || isHl ? 1 : 0.6,
         },
       };
     });
@@ -815,6 +824,8 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
         const r = eventRadius(e, ef.active, isHl);
         if (SQUARE_KINDS.has(e.kind)) {
           want.set(`square:${e.id}`, { at: e.at, className: 'ts-mark ts-mark--square', size: Math.round(r * 1.8), active: ef.active, hl: isHl });
+        } else if (TRIANGLE_KINDS.has(e.kind)) {
+          want.set(`triangle:${e.id}`, { at: e.at, className: 'ts-mark ts-mark--triangle', size: Math.round(r * 2), active: ef.active, hl: isHl });
         } else if (e.kind === 'siege') {
           want.set(`siege:${e.id}`, {
             at: e.at,
@@ -841,7 +852,9 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
       if (!marker) {
         const el = document.createElement('div');
         el.className = m.className;
-        el.appendChild(document.createElement('span'));
+        const body = document.createElement('span');
+        if (m.className.includes('--triangle')) body.innerHTML = TRIANGLE_SVG;
+        el.appendChild(body);
         marker = new Marker({ element: el, anchor: 'center' }).setLngLat(m.at).addTo(map);
         marks.set(key, marker);
       }

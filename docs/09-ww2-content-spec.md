@@ -149,7 +149,7 @@ Schema 已新增 kind：`massacre`、`siege`、`evacuation`、`liberation`、`at
 ### 5.1 来源优先级
 
 1. **CShapes 2.0**（Schvitz 等，CC BY 4.0）：1886–2019 逐日主权国界，用作每个关键帧的国界底图，按 `t` 查询。
-2. **OpenHistoricalMap**（ODbL）：通过其 Overpass 接口按 `start_date / end_date` 导出 1937–1945 的占领区、傀儡政权、前线关系（如 Reichskommissariat、满洲国、汪伪政权、日占区）。导出后离线存 GeoJSON，运行时不请求。
+2. **OpenHistoricalMap**（CC0（OHM 版权页：除标 license=* 的要素外为 CC0））：通过其 Overpass 接口按 `start_date / end_date` 导出 1937–1945 的占领区、傀儡政权、前线关系（如 Reichskommissariat、满洲国、汪伪政权、日占区）。导出后离线存 GeoJSON，运行时不请求。
 3. **维基共享资源的矢量地图**（CC BY-SA）：如 `Second World War Europe 1939-1941`、`WWII Europe 1942`、`Greater East Asia Co-prosperity Sphere 1942`、`Pacific War 1942` 等 SVG。这些地图有明确投影；用 4–6 个控制点（已知城市坐标）求仿射 / 投影变换，把 SVG 路径转成 GeoJSON。
 4. **位图历史地图**（如美国西点军校地图集，公有领域）：配准后描摹。只在 1–3 都没有时用。
 

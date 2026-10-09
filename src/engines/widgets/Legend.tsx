@@ -7,8 +7,8 @@ export interface LegendItem {
   label: BilingualText | string;
   /** CSS colour, `var(--x)`, or a data colour ref (`token:accent-axis`). */
   color: string;
-  /** `square`: hollow hairline square; `ring-dashed`: dot in a dashed ring; `site`: small hollow diamond. */
-  kind?: 'fill' | 'line' | 'point' | 'arrow' | 'square' | 'ring-dashed' | 'site';
+  /** `square`: hollow hairline square; `ring-dashed`: dot in a dashed ring; `site`: small hollow diamond; `triangle`: hollow hairline triangle. */
+  kind?: 'fill' | 'line' | 'point' | 'arrow' | 'square' | 'ring-dashed' | 'site' | 'triangle';
 }
 
 export interface LegendProps {
@@ -32,6 +32,8 @@ function Swatch({ color, kind = 'fill' }: { color: string; kind?: LegendItem['ki
       return <svg width="24" height="12" aria-hidden="true"><circle cx="12" cy="6" r="5" fill={c} /></svg>;
     case 'square':
       return <svg width="24" height="12" aria-hidden="true"><rect x="7.5" y="1.5" width="9" height="9" fill="none" stroke={c} strokeWidth="1" /></svg>;
+    case 'triangle':
+      return <svg width="24" height="12" aria-hidden="true"><path d="M12 1.4L16.6 10.6H7.4Z" fill="none" stroke={c} strokeWidth="1" /></svg>;
     case 'ring-dashed':
       return (
         <svg width="24" height="12" aria-hidden="true">

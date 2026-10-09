@@ -24,6 +24,18 @@ export const ENGINE_STAGES = {
   simulation: ['chart', 'diagram'],
 } as const satisfies Record<EngineId, readonly string[]>;
 
+/** Bloc names a topic may override; each needs both languages (the site-wide `time.bloc.*` strings are the fallback). */
+export const BLOC_LABEL_KEYS = ['axis', 'allied', 'neutral', 'out'] as const;
+export const blocLabels = z
+  .object({
+    axis: bilingual.optional(),
+    allied: bilingual.optional(),
+    neutral: bilingual.optional(),
+    out: bilingual.optional(),
+  })
+  .strict();
+export type BlocLabels = z.output<typeof blocLabels>;
+
 /** `src/content/topics/<slug>/topic.yaml` (docs/02). */
 export const topicSchema = z
   .object({
@@ -45,6 +57,11 @@ export const topicSchema = z
     status: z.enum(['draft', 'ready', 'published']).default('draft'),
     /** Path relative to the topic directory, e.g. `./cover.jpg`. */
     cover: z.string().min(1).optional(),
+    /**
+     * TimeScene: per-topic names of the engine's blocs (legend, entity inspector, leader notes),
+     * overriding the site-wide `time.bloc.*` strings. `out` = "no longer at war".
+     */
+    blocLabels: blocLabels.optional(),
   })
   .strict()
   .superRefine((topic, ctx) => {

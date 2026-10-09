@@ -6,7 +6,7 @@
 import { useEffect, useMemo, useRef, type CSSProperties } from 'react';
 import type { Locale } from '../core/types';
 import { tx } from '../../i18n';
-import { useT } from '../core/context';
+import { useSceneContext, useT } from '../core/context';
 import { Icon } from '../widgets/icons';
 import type { Entity } from './schema';
 import type { TimeModel } from './lib/model';
@@ -14,6 +14,7 @@ import type { Playhead } from './lib/playhead';
 import { formatTime } from './lib/format';
 import { areaAt, controlAreas } from './lib/stats';
 import { BLOC_CSS, entityCssColor } from './colors';
+import { blocLabel } from './lib/blocLabels';
 import { usePlayheadT } from './hud/shared';
 import { fmtArea } from './hud/HudPanels';
 
@@ -27,6 +28,7 @@ export interface EntityInspectorProps {
 
 export function EntityInspector({ entity, model, playhead, locale, onClose }: EntityInspectorProps) {
   const t = useT();
+  const { topic } = useSceneContext();
   const ref = useRef<HTMLElement>(null);
   const now = usePlayheadT(playhead);
   const areas = useMemo(() => controlAreas(model), [model]);
@@ -62,7 +64,7 @@ export function EntityInspector({ entity, model, playhead, locale, onClose }: En
           {spans.map((sp, i) => (
             <span key={i}>
               <span className="ts-event__swatch" style={{ '--ts-color': BLOC_CSS[sp.bloc] } as CSSProperties} aria-hidden="true" />
-              {t(`time.bloc.${sp.bloc}`)}
+              {blocLabel(topic.blocLabels, sp.bloc, locale)}
               {(sp.from || sp.to) && (
                 <small>
                   {sp.from ? formatTime(sp.from, locale) : '…'} – {sp.to ? formatTime(sp.to, locale) : '…'}

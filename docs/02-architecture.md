@@ -94,7 +94,10 @@ engine: time-scene
 stage: geo
 theme: cinema                    # 该主题偏好的主题，可被用户全局设置覆盖
 sensitivity: open                # open | guarded，可选元数据，不影响显示
-status: draft                    # draft | ready | published
+status: draft                    # draft | ready | published（索引页只列 published，其余用 URL 进入）
+blocLabels:                      # 可选，TimeScene：按主题改三个阵营和“已退出战争”的显示名（axis / allied / neutral / out），缺省用全站 time.bloc.*
+  axis: { en: "Central Powers", zh: "同盟国" }
+  allied: { en: "Allies (Entente)", zh: "协约国" }
 cover: ./cover.jpg
 ```
 
