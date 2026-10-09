@@ -101,6 +101,8 @@ export interface VoiceLogEntry {
   text: string;
   lang: string;
   voice: string;
+  /** `chapter` ("Chapter seven"), `title`, `caption`: a chapter's first beat speaks all three, later beats the caption. */
+  part: 'chapter' | 'title' | 'caption';
   started: number | null;
   ended: number | null;
   /** How it stopped: `end`, `cancelled`, `spurious-end`, `error:<code>`; `null` while speaking. */

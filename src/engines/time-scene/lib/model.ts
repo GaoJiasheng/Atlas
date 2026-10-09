@@ -3,15 +3,15 @@
  * turned into a number once (lib/time.ts), the timeline span is derived, and
  * lookups are indexed. Pure; built once per scene in the View.
  */
-import type { Bloc, ControlKeyframe, Entity, Movement, SceneEvent, TimeSceneGeoData } from '../schema';
+import type { Bloc, Entity, Movement, SceneEvent, TimeSceneGeoData } from '../schema';
 import { periodEnd, toNumber, type TimePoint, type TimeScale } from './time';
 import { unwrapPathCentred, type LngLat } from './geo';
 import { blocAtSpans, blocSpansN } from './bloc';
-import { decodeControl } from './control';
+import { decodeControl, type DecodedKeyframe } from './control';
 
 export interface KeyframeN {
   t: number;
-  keyframe: ControlKeyframe;
+  keyframe: DecodedKeyframe;
 }
 
 export interface EventN {

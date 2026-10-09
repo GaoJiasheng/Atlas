@@ -25,17 +25,23 @@
  * quantisation (`--quant` grid points across the data extent; default 4e5 ≈
  * 0.1 km cells at the equator, half that at 60°N) and delta-coded arcs.
  *
- * Coast in Southeast Asia: after simplification, the part of every keyframe
- * inside the 1:10m basemap box (`COAST_BOX`, = scripts/build-geo.ts) follows the
- * basemap's own land (`public/geo/land-10m-sea.json`, see `followCoast`): water
- * erased, land the simplified polygons missed given to the nearest holder. The
- * borders between holders keep their 1.5 km tolerance; the coastline is the 10m
- * data itself, so it lines up with the land drawn at zoom 7+ (Singapore island
- * at zoom 10). Clipping before simplifying would only get the coast thinned out
- * again (and 1.5 km corner cuts would leave land uncovered), and a coarser
- * quantisation would snap it to a grid wider than the 10m vertex spacing. The
- * clipped coast arcs are the same in every keyframe, so they are stored once.
- * `--no-coast` skips the step.
+ * Coast, everywhere: after simplification every keyframe follows the basemap's
+ * own land (`followCoast`): water erased, land the simplified polygons missed
+ * given to the nearest holder. The land is the 1:50m basemap
+ * (`public/geo/land-50m.json`) worldwide and the 1:10m one
+ * (`public/geo/land-10m-sea.json`) inside the Southeast Asia box (`COAST_BOX`,
+ * = scripts/build-geo.ts), so the control tint stops exactly where the one
+ * drawn coastline is, at every zoom (Singapore island at zoom 10). Land
+ * is handed over within `GAP_KM` (6 km) of a holder in the focus boxes and
+ * within the coarse interval (50 km: that is how far the coarse simplification
+ * can move a coast) elsewhere; further than that it stays uncoloured. The
+ * borders between holders keep their tolerance; clipping before simplifying
+ * would only get the coast thinned out again (and 1.5 km corner cuts would
+ * leave land uncovered), and a coarser quantisation would snap it to a grid
+ * wider than the 10m vertex spacing. The clipped coast arcs are the same in
+ * every keyframe, so they are stored once. At run time the engine draws edges
+ * only along arcs shared by two holders (lib/control.ts `frontierOf`), never
+ * along the coast. `--no-coast` skips the step.
  *
  * THE KNOB — size budget: `--budget` MB for the 12 keyframes of docs/09 §4.2
  * (default 2.0), pro rata for fewer: 2.0 MB × (keyframes present / 12). Without
@@ -44,7 +50,8 @@
  * fixed --fine skips the search.
  *
  * Reported "deviation": distance from the original vertices (work/K#.geojson)
- * inside the focus boxes (not the coast box when `followCoast` is on) to the
+ * inside the focus boxes (not those within `COAST_SKIP_KM` of the basemap
+ * coast or out at sea when `followCoast` is on: there the boundary is the basemap) to the
  * written boundaries, in km (p50 / p95 / p99 / max). Islands dropped on purpose are excluded; the max still shows the odd
  * peninsula tip or islet that `keep-shapes` / cleaning removed.
  */
@@ -55,7 +62,7 @@ import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
 import { feature as topoFeature } from 'topojson-client';
 import type { Feature, FeatureCollection, Position } from 'geojson';
-import { TOOLS, TOPIC, areaFeatures, loadSources, log, mapshaper, readJson, toFc, toolsInstalled, warn, workFile } from './lib';
+import { TOOLS, TOPIC, areaFeatures, loadSources, log, mapshaper, pointInPolygon, readJson, toFc, toolsInstalled, warn, workFile } from './lib';
 
 const PLANNED_KEYFRAMES = 12;
 /** [west, south, east, north] boxes that keep the fine interval. */
@@ -63,12 +70,19 @@ const FOCUS: [number, number, number, number][] = [
   [-12, 28, 62, 72], // Europe, North Africa coast, Middle East
   [88, -12, 160, 56], // East and Southeast Asia, western Pacific
 ];
-/** The 1:10m basemap box and file (scripts/build-geo.ts `SEA_BBOX`): inside it, control areas are cut to that land. */
+/** The 1:10m basemap box and file (scripts/build-geo.ts `SEA_BBOX`): inside it the coast is the 10m land. */
 const COAST_BOX: [number, number, number, number] = [95, -9, 125, 22];
-/** Land the simplified polygons miss goes to a holder at most this far (km) away; detached pieces under `COAST_ISLAND_KM2` are dropped. */
+/** The control data's extent: coast and water outside it do not matter (Antarctica is closed along the pole, which a planar clip would choke on). */
+const WORLD_BOX: [number, number, number, number] = [-180, -60, 180, 86];
+/** In the focus boxes, land the simplified polygons miss goes to a holder at most this far (km) away; elsewhere the coarse interval is the reach. Detached pieces under `COAST_ISLAND_KM2` are dropped. */
 const GAP_KM = 6;
 const COAST_ISLAND_KM2 = 2;
-const COAST_LAND = fileURLToPath(new URL('../../../public/geo/land-10m-sea.json', import.meta.url));
+/** Outside the focus boxes the basemap coast is thinned to this tolerance (km) before the clip: invisible at the zoom those regions are shown at (<= 1 px), a third of the arcs. */
+const COAST_OUT_KM = 2;
+const COAST_LAND_10M = fileURLToPath(new URL('../../../public/geo/land-10m-sea.json', import.meta.url));
+const COAST_LAND_50M = fileURLToPath(new URL('../../../public/geo/land-50m.json', import.meta.url));
+/** Deviation is not measured for original vertices this close (km) to the basemap coast: there the boundary is the basemap's. */
+const COAST_SKIP_KM = 15;
 /** Auto search: start here and add this much (km) until the file fits. */
 const FINE_START = 1.5;
 const FINE_STEP = 0.25;
@@ -94,7 +108,7 @@ const BUDGET_MB = values.budget ? Number(values.budget) : 2.0;
 /** `dp` (Douglas–Peucker: the interval is a real maximum-deviation tolerance) or `weighted` (Visvalingam: smoother, but drops thin fjords). */
 const METHOD = values.method ?? 'dp';
 const QUANTIZATION = values.quant ? Number(values.quant) : 400_000;
-/** Cut control areas to the 10m land inside `COAST_BOX` (`--no-coast` skips it). */
+/** Cut control areas to the basemap land (`--no-coast` skips it). */
 const COAST = !values['no-coast'];
 if (values.islands) [FOCUS_ISLAND_KM2 = FOCUS_ISLAND_KM2, COARSE_ISLAND_KM2 = COARSE_ISLAND_KM2] = values.islands.split(',').map(Number);
 
@@ -149,39 +163,87 @@ async function cutKeyframe(fc: FeatureCollection): Promise<{ inside: FeatureColl
 
 type Cut = Awaited<ReturnType<typeof cutKeyframe>>;
 
-/** Land, and the open water around it, inside `COAST_BOX` according to the 1:10m basemap. */
+/** The basemap's land (50m worldwide, 10m inside `COAST_BOX`) and the open water around it, split by the focus boxes. */
 interface Coast {
-  land: FeatureCollection;
+  /** Land inside the focus boxes / outside them (where the gap is filled within different reaches). */
+  landIn: FeatureCollection;
+  landOut: FeatureCollection;
+  /** `WORLD_BOX` minus all land (thinned outside the focus boxes). */
   water: FeatureCollection;
 }
 
+/** `fc` with every polygon that reaches past ±180° also copied to the other side of the antimeridian (build-geo.ts makes rings longitude-continuous, control data is wrapped). */
+function withWrappedCopies(fc: FeatureCollection): FeatureCollection {
+  const shift = (pos: Position, d: number): Position => [(pos[0] ?? 0) + d, pos[1] ?? 0];
+  const out: Feature[] = [...fc.features];
+  for (const f of fc.features) {
+    const g = f.geometry;
+    const polys = g.type === 'Polygon' ? [g.coordinates] : g.type === 'MultiPolygon' ? g.coordinates : [];
+    for (const poly of polys) {
+      const xs = poly[0]!.map((p) => p[0] ?? 0);
+      const lo = Math.min(...xs);
+      const hi = Math.max(...xs);
+      for (const [wanted, d] of [[hi > 180, -360], [lo < -180, 360]] as const) {
+        if (wanted) out.push({ type: 'Feature', properties: {}, geometry: { type: 'Polygon', coordinates: poly.map((r) => r.map((p) => shift(p, d))) } });
+      }
+    }
+  }
+  return toFc(out);
+}
+
 async function loadCoast(): Promise<Coast> {
-  const topo = JSON.parse(readFileSync(COAST_LAND, 'utf8')) as Parameters<typeof topoFeature>[0];
+  const topo = JSON.parse(readFileSync(COAST_LAND_10M, 'utf8')) as Parameters<typeof topoFeature>[0];
   const sea = topo.objects.sea as Parameters<typeof topoFeature>[1];
   const all = topoFeature(topo, sea) as unknown as FeatureCollection;
-  const land = toFc(all.features.filter((f) => f.properties?.kind === 'land'));
-  if (!land.features.length) throw new Error(`${COAST_LAND} has no land`);
-  const water = await mapshaper('-i box.json land.json combine-files -erase target=box land', { box: boxes([COAST_BOX]), land });
-  return { land, water };
+  const land10 = toFc(all.features.filter((f) => f.properties?.kind === 'land'));
+  if (!land10.features.length) throw new Error(`${COAST_LAND_10M} has no land`);
+  const land50 = withWrappedCopies(readJson<FeatureCollection>(COAST_LAND_50M));
+  const world = boxes([WORLD_BOX]);
+  const focus = boxes(FOCUS);
+  // 50m land without the 10m box, plus the 10m land that fills it.
+  const outer = await mapshaper('-i land.json box.json world.json combine-files -erase target=land box -clip target=land world', { land: land50, box: boxes([COAST_BOX]), world });
+  const land = toFc([...areaFeatures(outer), ...land10.features]);
+  const landIn = await mapshaper('-i land.json focus.json combine-files -clip target=land focus', { land, focus });
+  const outRaw = await mapshaper('-i land.json focus.json combine-files -erase target=land focus', { land, focus });
+  const landOut = await mapshaper(`-i land.json -simplify dp interval=${COAST_OUT_KM * 1000} keep-shapes`, { land: outRaw });
+  const water = await mapshaper('-i box.json land.json combine-files -erase target=box land', { box: world, land: toFc([...areaFeatures(landIn), ...areaFeatures(landOut)]) });
+  return { landIn, landOut, water };
 }
 
 /**
- * Make one keyframe's part inside the focus boxes follow the 10m coast within
- * `COAST_BOX`: (1) erase the water, so nothing is drawn out to sea; (2) give
- * the land the simplified polygons miss (their 1.5 km edges cut corners off the
- * coast) to the nearest holder, as far as `GAP_KM` from it: buffer the holders,
- * keep the buffer where it covers uncovered land. Land further than that from
- * every holder stays uncoloured. Pieces of the same holder merge in the final
- * dissolve; where two buffers meet, `-dissolve2` resolves the overlap.
+ * Make one keyframe part follow the basemap coast: (1) erase the water, so
+ * nothing is drawn out to sea; (2) give the land the simplified polygons miss
+ * (their edges cut corners off the coast) to the nearest holder, as far as
+ * `reachKm` from it: buffer the holders (`reachFrom`: the part as simplified,
+ * or the source polygons when the simplification is coarse, so that land of
+ * neighbours that hold nothing is not taken for 50 km), keep the buffer where
+ * it covers uncovered `land` (the part's own region, so a part never takes
+ * land of the other). Land further than that from every holder stays uncoloured. Pieces
+ * of the same holder merge in the final dissolve; where two buffers meet,
+ * `-dissolve2` resolves the overlap.
  */
-async function followCoast(fc: FeatureCollection, coast: Coast): Promise<FeatureCollection> {
-  const dry = await mapshaper('-i a.json w.json combine-files -erase target=a w', { a: fc, w: coast.water });
+async function followCoast(fc: FeatureCollection, land: FeatureCollection, water: FeatureCollection, reachKm: number, reachFrom: FeatureCollection = fc): Promise<FeatureCollection> {
+  const dry = await mapshaper('-i a.json w.json combine-files -erase target=a w', { a: fc, w: water });
   const held = toFc(dry.features.filter((f) => f.geometry));
-  const gap = await mapshaper('-i land.json a.json combine-files -erase target=land a', { land: coast.land, a: held });
+  if (!held.features.length) return held;
+  const gap = await mapshaper('-i land.json a.json combine-files -erase target=land a', { land, a: held });
   if (!areaFeatures(gap).length) return held;
-  const near = await mapshaper(`-i a.json -buffer radius=${GAP_KM}km`, { a: held });
+  const near = await mapshaper(`-i a.json -buffer radius=${reachKm}km`, { a: reachFrom === fc ? held : reachFrom });
   const fill = await mapshaper('-i b.json g.json combine-files -clip target=b g', { b: near, g: gap });
   return toFc([...held.features, ...areaFeatures(fill)]);
+}
+
+/**
+ * Detached parts under `minKm2` dropped, except inside `COAST_BOX` (Singapore,
+ * Johor and the Riau islands keep everything down to `COAST_ISLAND_KM2`). Following
+ * the coast brings back every island the simplification had dropped: those under the
+ * part's threshold are not worth their arcs (no tint, the basemap still draws them).
+ */
+async function trimIslands(fc: FeatureCollection, minKm2: number): Promise<FeatureCollection> {
+  const box = boxes([COAST_BOX]);
+  const rest = await mapshaper(`-i a.json b.json combine-files -erase target=a b -filter-islands min-area=${minKm2}km2`, { a: fc, b: box });
+  const kept = await mapshaper('-i a.json b.json combine-files -clip target=a b', { a: fc, b: box });
+  return toFc([...areaFeatures(rest), ...areaFeatures(kept)]);
 }
 
 /** Wire-format TopoJSON as mapshaper writes it. */
@@ -213,8 +275,13 @@ async function build(ids: string[], cuts: Cut[], fine: number, coarse: number, c
     return byId;
   };
   const inside = await part('inside', fine, FOCUS_ISLAND_KM2);
-  if (coast) for (const id of ids) inside[id] = await followCoast(inside[id]!, coast);
   const outside = await part('outside', coarse, COARSE_ISLAND_KM2);
+  if (coast) {
+    for (const [i, id] of ids.entries()) {
+      inside[id] = await trimIslands(await followCoast(inside[id]!, coast.landIn, coast.water, GAP_KM), FOCUS_ISLAND_KM2);
+      outside[id] = await trimIslands(await followCoast(outside[id]!, coast.landOut, coast.water, GAP_KM, cuts[i]!.outside), COARSE_ISLAND_KM2);
+    }
+  }
   const merged: Record<string, unknown> = {};
   for (const id of ids) merged[`${id}.json`] = toFc([...inside[id]!.features, ...outside[id]!.features]);
   const dissolved = await m.applyCommands(
@@ -323,37 +390,76 @@ const inFocus = ([x = 0, y = 0]: readonly number[]) => FOCUS.some(([w, s, e, n])
 /** km per degree of latitude; longitude is scaled by cos(lat) of the point. */
 const KM_LAT = 111.195;
 
-function measure(topo: Topo, ids: string[], originals: FeatureCollection[], droppedIslands: boolean): { p50: number; p95: number; p99: number; max: number; n: number } {
-  const dev: number[] = [];
-  ids.forEach((id, k) => {
-    // Grid of the written segments (0.5° cells) for nearest-segment queries.
-    const cell = 0.5;
-    const grid = new Map<string, [number, number, number, number][]>();
-    const key = (cx: number, cy: number) => `${cx},${cy}`;
-    for (const ring of decodeRings(topo, id)) {
-      for (let i = 0; i + 1 < ring.length; i++) {
-        const a = ring[i]!;
-        const b = ring[i + 1]!;
-        const seg: [number, number, number, number] = [a[0]!, a[1]!, b[0]!, b[1]!];
-        const x0 = Math.floor(Math.min(a[0]!, b[0]!) / cell);
-        const x1 = Math.floor(Math.max(a[0]!, b[0]!) / cell);
-        const y0 = Math.floor(Math.min(a[1]!, b[1]!) / cell);
-        const y1 = Math.floor(Math.max(a[1]!, b[1]!) / cell);
-        for (let cx = x0; cx <= x1; cx++) for (let cy = y0; cy <= y1; cy++) (grid.get(key(cx, cy)) ?? grid.set(key(cx, cy), []).get(key(cx, cy))!).push(seg);
-      }
+type Seg = [number, number, number, number];
+type SegGrid = Map<string, Seg[]>;
+const GRID_CELL = 0.5;
+const cellKey = (cx: number, cy: number) => `${cx},${cy}`;
+
+/** Grid of segments (0.5° cells) for nearest-segment queries. */
+function segGrid(rings: readonly (readonly Position[])[]): SegGrid {
+  const grid: SegGrid = new Map();
+  for (const ring of rings) {
+    for (let i = 0; i + 1 < ring.length; i++) {
+      const a = ring[i]!;
+      const b = ring[i + 1]!;
+      const seg: Seg = [a[0]!, a[1]!, b[0]!, b[1]!];
+      const x0 = Math.floor(Math.min(a[0]!, b[0]!) / GRID_CELL);
+      const x1 = Math.floor(Math.max(a[0]!, b[0]!) / GRID_CELL);
+      const y0 = Math.floor(Math.min(a[1]!, b[1]!) / GRID_CELL);
+      const y1 = Math.floor(Math.max(a[1]!, b[1]!) / GRID_CELL);
+      for (let cx = x0; cx <= x1; cx++) for (let cy = y0; cy <= y1; cy++) (grid.get(cellKey(cx, cy)) ?? grid.set(cellKey(cx, cy), []).get(cellKey(cx, cy))!).push(seg);
     }
-    const dist = (px: number, py: number, s: [number, number, number, number]) => {
-      const kx = Math.cos((py * Math.PI) / 180) * KM_LAT;
-      const ax = (s[0] - px) * kx;
-      const ay = (s[1] - py) * KM_LAT;
-      const bx = (s[2] - px) * kx;
-      const by = (s[3] - py) * KM_LAT;
-      const dx = bx - ax;
-      const dy = by - ay;
-      const l2 = dx * dx + dy * dy;
-      const u = l2 === 0 ? 0 : Math.max(0, Math.min(1, -(ax * dx + ay * dy) / l2));
-      return Math.hypot(ax + u * dx, ay + u * dy);
-    };
+  }
+  return grid;
+}
+
+const segDistKm = (px: number, py: number, s: Seg) => {
+  const kx = Math.cos((py * Math.PI) / 180) * KM_LAT;
+  const ax = (s[0] - px) * kx;
+  const ay = (s[1] - py) * KM_LAT;
+  const bx = (s[2] - px) * kx;
+  const by = (s[3] - py) * KM_LAT;
+  const dx = bx - ax;
+  const dy = by - ay;
+  const l2 = dx * dx + dy * dy;
+  const u = l2 === 0 ? 0 : Math.max(0, Math.min(1, -(ax * dx + ay * dy) / l2));
+  return Math.hypot(ax + u * dx, ay + u * dy);
+};
+
+/** Distance (km) from a point to the nearest segment of the grid, Infinity beyond ~4 cells. */
+function nearestKm(grid: SegGrid, px: number, py: number): number {
+  let best = Infinity;
+  const cx = Math.floor(px / GRID_CELL);
+  const cy = Math.floor(py / GRID_CELL);
+  for (let r = 0; r <= 4 && best > r * GRID_CELL * 90; r++)
+    for (let ix = cx - r; ix <= cx + r; ix++)
+      for (let iy = cy - r; iy <= cy + r; iy++) {
+        if (Math.max(Math.abs(ix - cx), Math.abs(iy - cy)) !== r) continue;
+        for (const s of grid.get(cellKey(ix, iy)) ?? []) best = Math.min(best, segDistKm(px, py, s));
+      }
+  return best;
+}
+
+const polyRings = (fc: FeatureCollection): Position[][] =>
+  areaFeatures(fc).flatMap((f) => (f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.coordinates).flatMap((poly) => poly));
+
+/** Point-in-land test against the basemap land (polygon boxes first). */
+function landIndex(coast: Coast): (x: number, y: number) => boolean {
+  const polys = [...areaFeatures(coast.landIn), ...areaFeatures(coast.landOut)].flatMap((f) => (f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.coordinates));
+  const boxed = polys.map((poly) => {
+    const xs = poly[0]!.map((p) => p[0] ?? 0);
+    const ys = poly[0]!.map((p) => p[1] ?? 0);
+    return { poly, w: Math.min(...xs), e: Math.max(...xs), s: Math.min(...ys), n: Math.max(...ys) };
+  });
+  return (x, y) => boxed.some((b) => x >= b.w && x <= b.e && y >= b.s && y <= b.n && pointInPolygon([x, y], b.poly));
+}
+
+function measure(topo: Topo, ids: string[], originals: FeatureCollection[], droppedIslands: boolean, coast: Coast | null): { p50: number; p95: number; p99: number; max: number; n: number } {
+  const dev: number[] = [];
+  const coastGrid = coast ? segGrid([...polyRings(coast.landIn), ...polyRings(coast.landOut)]) : null;
+  const onLand = coast ? landIndex(coast) : null;
+  ids.forEach((id, k) => {
+    const grid = segGrid(decodeRings(topo, id));
     for (const f of areaFeatures(originals[k]!)) {
       const polys = f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.coordinates;
       for (const poly of polys) {
@@ -363,17 +469,11 @@ function measure(topo: Topo, ids: string[], originals: FeatureCollection[], drop
         for (let i = 0; i < ring.length; i += 2) {
           const [px = 0, py = 0] = ring[i]!;
           if (!inFocus([px, py])) continue;
-          // Inside the coast box the boundary is the 10m coast, not these vertices (coverage is reported separately).
-          if (COAST && px >= COAST_BOX[0] && px <= COAST_BOX[2] && py >= COAST_BOX[1] && py <= COAST_BOX[3]) continue;
-          let best = Infinity;
-          const cx = Math.floor(px / cell);
-          const cy = Math.floor(py / cell);
-          for (let r = 0; r <= 4 && best > r * cell * 90; r++)
-            for (let ix = cx - r; ix <= cx + r; ix++)
-              for (let iy = cy - r; iy <= cy + r; iy++) {
-                if (Math.max(Math.abs(ix - cx), Math.abs(iy - cy)) !== r) continue;
-                for (const s of grid.get(key(ix, iy)) ?? []) best = Math.min(best, dist(px, py, s));
-              }
+          // Near the basemap coast the boundary is the basemap, not these vertices (coverage is reported separately).
+          if (coastGrid && nearestKm(coastGrid, px, py) < COAST_SKIP_KM) continue;
+          // Out at sea (the source map's sea or a coast further out than the skip distance): the water is erased on purpose.
+          if (onLand && !onLand(px, py)) continue;
+          const best = nearestKm(grid, px, py);
           if (Number.isFinite(best)) dev.push(best);
         }
       }
@@ -444,7 +544,7 @@ async function main(): Promise<void> {
   );
   if (size > budget) warn('control.json is over budget');
   if (!values['no-measure']) {
-    const d = measure(JSON.parse(readFileSync(file, 'utf8')).topology as Topo, ids, originals, true);
+    const d = measure(JSON.parse(readFileSync(file, 'utf8')).topology as Topo, ids, originals, true, coast);
     log(`deviation of original focus-box vertices from the written boundary (km): p50 ${d.p50.toFixed(2)}, p95 ${d.p95.toFixed(2)}, p99 ${d.p99.toFixed(2)}, max ${d.max.toFixed(2)} (${d.n} vertices)`);
   }
 }

@@ -11,8 +11,8 @@
  * rendering) only ever sees FeatureCollections. Pure and client-safe (schema
  * types only, no zod at runtime).
  */
-import { feature } from 'topojson-client';
-import type { Feature, FeatureCollection, Geometry, Position } from 'geojson';
+import { feature, mesh } from 'topojson-client';
+import type { Feature, FeatureCollection, Geometry, MultiLineString, Position } from 'geojson';
 import type { ControlFile, ControlKeyframe } from '../schema';
 
 type Topology = Parameters<typeof feature>[0];
@@ -57,8 +57,44 @@ export function decodeTopologyObject(topology: unknown, name: string): FeatureCo
   };
 }
 
-/** `[{ t, features }]` for either shape of `control.json` (the plain shape passes through unchanged). */
-export function decodeControl(control: ControlFile): ControlKeyframe[] {
+/** A decoded keyframe: its control areas, and (TopoJSON shape only) the frontier between holders. */
+export interface DecodedKeyframe extends ControlKeyframe {
+  /**
+   * Only the arcs shared by two features of **different holders**: the inland
+   * frontiers, never a coastline (an arc with a single feature on it is a
+   * coast) and never the seam between two features of one holder. Absent for
+   * plain GeoJSON, where nothing tells a coast from a border: the renderer
+   * outlines the polygons instead.
+   */
+  frontier?: MultiLineString;
+}
+
+/**
+ * The frontier of one named object: `mesh` of the arcs two features of
+ * different holders share. `null` when there is none.
+ */
+export function frontierOf(topology: unknown, name: string): MultiLineString | null {
+  const topo = topology as Topology;
+  const object = (topo.objects as Record<string, TopoObject | undefined>)[name];
+  if (!object) throw new Error(`control topology has no object "${name}"`);
+  const holder = (g: unknown) => (g as { properties?: { holder?: unknown } }).properties?.holder;
+  const lines = mesh(topo, object as Parameters<typeof mesh>[1], (a, b) => a !== b && holder(a) !== holder(b));
+  return lines.coordinates.length ? lines : null;
+}
+
+/**
+ * `[{ t, features, frontier? }]` for either shape of `control.json` (the plain
+ * shape passes through unchanged). The frontier of every keyframe is computed
+ * here, once, with the keyframe; the model keeps it.
+ */
+export function decodeControl(control: ControlFile): DecodedKeyframe[] {
   if (!('topology' in control)) return control.keyframes;
-  return control.keyframes.map((kf) => ({ t: kf.t, features: decodeTopologyObject(control.topology, kf.object) as ControlKeyframe['features'] }));
+  return control.keyframes.map((kf) => {
+    const frontier = frontierOf(control.topology, kf.object);
+    return {
+      t: kf.t,
+      features: decodeTopologyObject(control.topology, kf.object) as ControlKeyframe['features'],
+      ...(frontier ? { frontier } : {}),
+    };
+  });
 }
