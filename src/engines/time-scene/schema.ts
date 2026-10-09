@@ -287,6 +287,8 @@ export const EVENT_KINDS = [
   'evacuation',
   'liberation',
   'atrocity',
+  /** Epidemic, famine, ship sinking: hollow ink triangle, no sides or result needed. */
+  'disaster',
   /** A static place (prison, memorial, building): no pulse, ignores `t`, shown on the `sites` layer only. */
   'site',
 ] as const;
@@ -302,7 +304,7 @@ export const eventSchema = z
     until: timePoint.optional(),
     at: lngLat,
     kind: z.enum(EVENT_KINDS),
-    /** Required for battle / landing / bombing; optional for the others. */
+    /** Required for battle / landing / bombing; optional for the others (`disaster` too). */
     sides: z.object({ attacker: kebabId, defender: kebabId }).strict().optional(),
     forces: forceTable.optional(),
     casualties: forceTable.optional(),

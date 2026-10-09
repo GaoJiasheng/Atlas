@@ -95,6 +95,10 @@ stage: geo
 theme: paper
 sensitivity: open
 status: draft
+# TimeScene blocs are axis / allied / neutral; rename them for this war (docs/06 blocLabels), e.g.
+# blocLabels:
+#   axis: { en: "Central Powers", zh: "同盟国" }
+#   allied: { en: "Allies (Entente)", zh: "协约国" }
 `,
 );
 
@@ -237,6 +241,8 @@ ${END}
 write(
   join(geoDir, 'sources.json'),
   json({
+    _comment:
+      'Placeholders to edit: pipeline.plannedKeyframes (how many control keyframes the spec lists) and pipeline.focus (boxes [w,s,e,n] the chapters zoom into; the default is Europe). Datasets, ohm sets, svg/raster maps and keyframes are filled in step by step (skill atlas-history-topic, references/geo-runbook.md).',
     datasets: {
       cshapes: {
         ref: 'G1',
@@ -254,8 +260,8 @@ write(
     raster: {},
     keyframes: [],
     pipeline: {
-      plannedKeyframes: 8,
-      focus: [[-12, 28, 62, 72]],
+      plannedKeyframes: 8, // EDIT: number of keyframes in the spec
+      focus: [[-12, 28, 62, 72]], // EDIT: fine-simplification boxes [w, s, e, n]
       coast: { detailBox: null, detailLand: null },
     },
   }),
@@ -284,12 +290,18 @@ console.log(`new-topic: created ${slug}\n  ${written.join('\n  ')}\n`);
 console.log(`Next steps (skill .claude/skills/atlas-history-topic, references/build-order.md):
   1. Write the content spec (references/spec-template.md) and get it signed off before writing chapters.
   2. Set --start / --end dates in the chapter files, the control keyframe and topic.yaml subtitle if they were not given.
-  3. Geo: fill scripts/geo/${slug}/sources.json (datasets, keyframes, pipeline.focus), then
+  3. Geo: edit pipeline.plannedKeyframes and pipeline.focus in scripts/geo/${slug}/sources.json, add datasets and keyframes, then
        pnpm tsx scripts/geo/lib/fetch.ts --topic ${slug}
+       pnpm tsx scripts/geo/lib/ohm-export.ts --topic ${slug} --list <YYYY-MM-DD> --levels 1-3   # which OpenHistoricalMap relations are valid that day
+       pnpm tsx scripts/geo/lib/ohm-export.ts --topic ${slug}                                    # export the relation sets named in sources.json
+       pnpm tsx scripts/geo/lib/georef-svg.ts --topic ${slug}                                    # Commons SVG maps: control points, fit, residuals (--fills / --dots / --propose help)
+       pnpm tsx scripts/geo/lib/georef-raster.ts --topic ${slug}                                 # PNG / JPG maps, same idea
        pnpm tsx scripts/geo/lib/compose.ts --topic ${slug}
-       pnpm tsx scripts/geo/lib/simplify.ts --topic ${slug}
+       pnpm tsx scripts/geo/lib/simplify.ts --topic ${slug} --fine 1.5                           # --fine while only some keyframes exist; automatic search only with all of them
        pnpm tsx scripts/geo/lib/check.ts --topic ${slug}
      (first and last keyframe first; log every source in SOURCES-GEO.md and data/SOURCES.md).
   4. Data: entities.json, events.json, movements.json, presets.json, sources.json, glossary.json (references/data-cookbook.md).
   5. Chapters: the background chapter and two template chapters first, then the rest in batches; beats last.
-  6. pnpm validate && pnpm build && pnpm shoot ${slug} --keys --layout --beats; acceptance: references/acceptance.md.`);
+  6. Blocs: if the war is not WW2, set blocLabels in topic.yaml (axis / allied are only engine slots).
+  7. The topic is a draft: reachable at /en/topics/${slug}/ but not listed on the index until status: published.
+  8. pnpm validate && pnpm build && pnpm shoot ${slug} --keys --layout --beats; acceptance: references/acceptance.md.`);

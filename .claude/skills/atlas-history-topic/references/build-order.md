@@ -32,6 +32,10 @@ ww2 实际走过并验证的顺序（docs/09 §9、§11）。主会话负责 bri
 
 两个代理不得同时改同一个 JSON 数组文件；冲突时主会话按 id 合并、重跑 `pnpm validate`。
 
+## 草稿与索引页
+
+`status: draft` / `ready` 的主题照常构建，直接输入 URL（`/en/topics/<slug>/`、`/zh/topics/<slug>/`）进入，`pnpm shoot`、e2e 都用 URL；**索引页只列 `published`**，草稿不会出现在上面，也没有草稿标记。别因为索引页上看不到就以为主题没建出来。
+
 ## 每步收尾
 
 `pnpm check && pnpm validate && pnpm test && pnpm build && pnpm e2e`，视觉改动加 `pnpm shoot <slug> --keys --layout`（节拍改动加 `--beats`）并**看截图**，再提交。

@@ -9,3 +9,7 @@ stage: geo
 theme: paper
 sensitivity: open
 status: draft
+# The engine's fixed blocs, named for this war (docs/06 blocLabels): allied = the Entente and its partners.
+blocLabels:
+  axis: { en: "Central Powers", zh: "同盟国" }
+  allied: { en: "Allies (Entente)", zh: "协约国" }

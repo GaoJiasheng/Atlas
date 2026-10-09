@@ -123,7 +123,7 @@ describe('TimeScene schema extensions', () => {
   });
 
   it('accepts the new kinds without sides or result', () => {
-    for (const kind of ['massacre', 'siege', 'evacuation', 'liberation', 'atrocity', 'site']) {
+    for (const kind of ['massacre', 'siege', 'evacuation', 'liberation', 'atrocity', 'disaster', 'site']) {
       expect(EVENT_KINDS).toContain(kind);
       const data = base();
       data.events.push(political({ kind }));
@@ -299,5 +299,14 @@ describe('subject taxonomy', () => {
   it('accepts kebab-case tags only', () => {
     expect(topicSchema.safeParse({ ...base, tags: ['beyond-syllabus', 'singapore'] }).success).toBe(true);
     expect(topicSchema.safeParse({ ...base, tags: ['Beyond Syllabus'] }).success).toBe(false);
+  });
+
+  it('accepts optional per-topic bloc labels, bilingual and from the known keys only', () => {
+    const labels = { axis: { en: 'Central Powers', zh: '同盟国' }, allied: { en: 'Allies (Entente)', zh: '协约国' } };
+    expect(topicSchema.safeParse({ ...base, blocLabels: labels }).success).toBe(true);
+    expect(topicSchema.safeParse({ ...base, blocLabels: { ...labels, out: { en: 'Out of the war', zh: '已退出战争' } } }).success).toBe(true);
+    expect(topicSchema.safeParse({ ...base, blocLabels: { axis: 'Central Powers' } }).success).toBe(false);
+    expect(topicSchema.safeParse({ ...base, blocLabels: { rebels: { en: 'Rebels', zh: '叛军' } } }).success).toBe(false);
+    expect(topicSchema.safeParse({ ...base, blocLabels: { axis: { zh: '同盟国' } } }).success).toBe(false);
   });
 });

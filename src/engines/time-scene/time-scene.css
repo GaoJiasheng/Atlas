@@ -581,6 +581,26 @@
   border: 1.6px solid var(--signal);
   opacity: 1;
 }
+/* Disaster: hollow triangle (SVG hairline), ink. */
+.ts-mark--triangle {
+  --ts-fill: color-mix(in srgb, var(--paper) 55%, transparent);
+}
+.ts-mark--triangle > span {
+  color: var(--ink-2);
+  opacity: 0.6;
+}
+.ts-mark--triangle > span > svg {
+  display: block;
+  overflow: visible;
+}
+.ts-mark--triangle[data-active="true"] > span {
+  color: var(--ink);
+  opacity: 1;
+}
+.ts-mark--triangle[data-hl="true"] > span {
+  color: var(--signal);
+  opacity: 1;
+}
 /* Siege: dashed ring around the event circle. */
 .ts-mark--siege > span {
   border: 1px dashed var(--ink-2);
