@@ -225,6 +225,7 @@
   "time.reference.banner": "Reference · solid {current} · dashed {other}",
   "time.presentation": "Presentation",
   "time.beats": "Presentation steps",
+  "time.beatChapter": "Chapter {n}: {title}",
   "time.beat": "Chapter {n}, step {k}: {caption}",
   "time.scale": "Map scale",
   "time.area": "Approximate area",

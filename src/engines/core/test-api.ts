@@ -27,6 +27,8 @@ export type AtlasState = SceneSnapshot & {
   modes: Record<string, boolean>;
   /** Theme actually applied (`<html data-theme>`). */
   appliedTheme: string | undefined;
+  /** The presentation beat on show (`beat` = 0-based position inside the chapter); `null` outside the presentation. */
+  presentation: { chapter: string; beat: number } | null;
 };
 
 export interface AtlasTestApi {
@@ -132,6 +134,7 @@ export function installTestApi(deps: TestApiDeps): () => void {
         preset: activePreset(h, snapshot.chapter),
         modes: Object.fromEntries(allModes(h.controls, h.labels, '').map((m) => [m.id, m.on])),
         appliedTheme: document.documentElement.dataset.theme,
+        presentation: h.controls.beats?.current() ?? null,
       };
     },
     stats: () => ({ ...canvasStats(deps.stage()), ...(hud.getState().controls.stats?.() ?? {}) }),

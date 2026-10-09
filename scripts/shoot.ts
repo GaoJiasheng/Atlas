@@ -9,10 +9,11 @@
  *   pnpm shoot sample-time --shots my-shots.json     # custom shot list (format below)
  *   pnpm shoot sample-time --keys                    # every key changes state + its button
  *   pnpm shoot sample-time --layout                  # HUD overlap / overflow at six sizes
+ *   pnpm shoot ww2 --beats                           # every presentation beat -> shots/<topic>/<locale>-<theme>/beat-<chapter>-<n>.png
  *   pnpm shoot sample-space --perf --json out.json   # renderer numbers per shot
  *
  * `--locale` and `--theme` take a value, a comma list, or `all` (default: en, paper).
- * `--keys` / `--layout` replace the shot run unless shot names or `--shots` are given.
+ * `--keys` / `--layout` / `--beats` replace the shot run unless shot names or `--shots` are given.
  *
  * shots.json: { "name": { "chapter": "id", "preset": "id", "modes": { "xray": true }, "hud": false, "wait": 900, "js": "window.__atlas…" } }
  *
@@ -84,6 +85,8 @@ interface RunReport {
   shots: Record<string, Stats>;
   keys: KeyResult[];
   layout: LayoutResult[];
+  /** Presentation beats that did not land (empty = every beat shot). */
+  beatFailures: string[];
   /** JavaScript the page loaded (gzip -9 of the files in dist/). */
   js: { files: number; gzKB: number };
   logs: { type: string; text: string }[];
@@ -96,7 +99,7 @@ interface RunReport {
 function usage(): never {
   console.error(
     'usage: pnpm shoot <topic> [--locale en|zh|all] [--theme paper|cinema|all] [--size WxH] [--suffix _4k]\n' +
-      '                          [--shots file.json] [--keys] [--layout] [--perf] [--gpu] [--json out.json] [names...]',
+      '                          [--shots file.json] [--keys] [--layout] [--beats] [--perf] [--gpu] [--json out.json] [names...]',
   );
   process.exit(2);
 }
@@ -317,6 +320,31 @@ async function runShots(s: Session, o: Options, out: string, report: RunReport):
 }
 
 /* ------------------------------------------------------------------ */
+/* Beats                                                               */
+/* ------------------------------------------------------------------ */
+
+/** One screenshot per presentation beat: `beat-<chapter id>-<n>.png` (n = 1-based position inside the chapter). */
+async function runBeats(s: Session, o: Options, out: string, report: RunReport): Promise<void> {
+  const beats = await s.ev(() => window.__atlas!.beats());
+  mkdirSync(out, { recursive: true });
+  if (beats.length === 0) console.log('  (this topic has no presentation beats)');
+  for (const [i, b] of beats.entries()) {
+    const name = `beat-${b.chapter}-${b.index + 1}`;
+    await s.apply({ wait: 300 });
+    await s.page.evaluate((n) => window.__atlas!.goToBeat(n, { instant: true }), i);
+    // The camera snaps; the map needs a few frames for tiles, leader placards and the caption.
+    await s.page.waitForTimeout(o.perf ? 2400 : 1500);
+    const st = await s.state();
+    const landed = st.presentation?.chapter === b.chapter && st.presentation.beat === b.index && st.hud === false;
+    if (!landed) report.beatFailures.push(`${name}: state.presentation=${JSON.stringify(st.presentation)} hud=${st.hud}`);
+    await s.page.screenshot({ path: join(out, `${name}${o.suffix}.png`) });
+    console.log(`  ${name.padEnd(36)} ${landed ? 'OK' : 'FAIL'}`);
+  }
+  await s.apply({ wait: 300 });
+  console.log(`  beats -> ${out} (${beats.length})`);
+}
+
+/* ------------------------------------------------------------------ */
 /* Keys                                                                */
 /* ------------------------------------------------------------------ */
 
@@ -502,6 +530,7 @@ interface Options {
   shotsFile?: string;
   keys: boolean;
   layout: boolean;
+  beats: boolean;
   perf: boolean;
   gpu: boolean;
   json?: string;
@@ -519,6 +548,7 @@ function parse(): Options {
       shots: { type: 'string' },
       keys: { type: 'boolean', default: false },
       layout: { type: 'boolean', default: false },
+      beats: { type: 'boolean', default: false },
       perf: { type: 'boolean', default: false },
       gpu: { type: 'boolean', default: false },
       json: { type: 'string' },
@@ -536,6 +566,7 @@ function parse(): Options {
     shotsFile: values.shots,
     keys: values.keys,
     layout: values.layout,
+    beats: values.beats,
     perf: values.perf,
     gpu: values.gpu,
     json: values.json,
@@ -553,7 +584,7 @@ async function main(): Promise<number> {
     console.error(`dist/ has no page for topic "${o.topic}" (rebuild with \`pnpm build\`, or check the id).`);
     return 1;
   }
-  const checksOnly = (o.keys || o.layout) && o.names.length === 0 && !o.shotsFile;
+  const checksOnly = (o.keys || o.layout || o.beats) && o.names.length === 0 && !o.shotsFile;
   const { server, origin } = await serveDist();
   const browser = await chromium.launch({ headless: true, args: o.gpu ? HARDWARE_GL : SOFTWARE_GL });
   const reports: RunReport[] = [];
@@ -564,9 +595,13 @@ async function main(): Promise<number> {
         const out = join(ROOT, 'shots', o.topic, `${locale}-${theme}`);
         console.log(`\n== ${o.topic} · ${locale} · ${theme} · ${o.size.join('x')}`);
         const s = await Session.open(browser, origin, o.topic, locale, theme, o.size);
-        const report: RunReport = { topic: o.topic, locale, theme, size: o.size.join('x'), shots: {}, keys: [], layout: [], js: { files: 0, gzKB: 0 }, logs: [] };
+        const report: RunReport = { topic: o.topic, locale, theme, size: o.size.join('x'), shots: {}, keys: [], layout: [], beatFailures: [], js: { files: 0, gzKB: 0 }, logs: [] };
         try {
           if (!checksOnly) await runShots(s, o, out, report);
+          if (o.beats) {
+            console.log('  -- beats');
+            await runBeats(s, o, out, report);
+          }
           if (o.keys) {
             console.log('  -- keys');
             await runKeys(s, o, report);
@@ -588,7 +623,8 @@ async function main(): Promise<number> {
         for (const l of report.logs) console.log(`    [${l.type}] ${l.text.slice(0, 300)}`);
         if (o.keys) console.log(`  key failures: ${keyFails}`);
         if (o.layout) console.log(`  layout issues: ${report.layout.length}`);
-        if (keyFails || report.layout.length || bad.length) failed = true;
+        if (o.beats) console.log(`  beat failures: ${report.beatFailures.length}`);
+        if (keyFails || report.layout.length || report.beatFailures.length || bad.length) failed = true;
         reports.push(report);
       }
     }
