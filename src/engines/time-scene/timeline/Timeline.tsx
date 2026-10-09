@@ -1,7 +1,8 @@
 /**
  * TimeScene's single bottom bar (docs/06 "时间轴标尺", docs/08 §5), rendered
  * into `bottomBar`. Left to right:
- *  - a chevron that opens the swimlanes, play / pause and ×1 ×2 ×4
+ *  - a chevron that opens the swimlanes and the PRESENT button (P: the
+ *    user-paced presentation beats; the bar has no free-running playback)
  *  - the rule: year / month ticks at real dates, chapter nodes (numbered
  *    hairline circles; click = go), keyframe diamonds, the playhead with its
  *    date above; drag anywhere on it = continuous `t`, no chapter change
@@ -11,12 +12,11 @@
  * movements / events) on the same x mapping.
  *
  * The x mapping is the minimum-gap hybrid of lib/timeScale.ts: chapters stay
- * ≥ 56 px apart, time stays as linear as that allows. Scrubbing inverts it;
- * playback advances `t` at a constant rate, so the playhead moves faster
- * across stretches the mapping widened. The fitted α is reported upwards
- * (`onAlpha`) so the band card draws on the same mapping.
+ * ≥ 56 px apart, time stays as linear as that allows. Scrubbing inverts it.
+ * The fitted α is reported upwards (`onAlpha`) so the band card draws on the
+ * same mapping.
  *
- * Keyboard: Space toggles play inside the bar; on the rule ←/→ change chapter,
+ * Keyboard: on the rule ←/→ change chapter,
  * Shift+←/→ and ↑/↓ nudge `t`, PageUp/PageDown take big steps, Home/End jump
  * to the ends.
  */
@@ -34,7 +34,6 @@ import { frameAt } from '../lib/frame';
 import { frameStats } from '../lib/stats';
 import { sideCssColor, sideColorKey } from '../colors';
 import { chapterWindow, HatchDefs } from '../hud/shared';
-import type { Speed } from './usePlayback';
 
 export interface TimelineProps {
   model: TimeModel;
@@ -43,10 +42,9 @@ export interface TimelineProps {
   chapters: readonly Chapter[];
   currentChapter: string | null;
   highlight: readonly string[];
-  playing: boolean;
-  speed: Speed;
-  onTogglePlay(): void;
-  onSpeed(speed: Speed): void;
+  /** The presentation is on (PRESENT button pressed). */
+  presenting: boolean;
+  onPresent(): void;
   /** User moved the playhead to `t` (continuous). */
   onScrub(t: number): void;
   onScrubStart(): void;
@@ -57,7 +55,6 @@ export interface TimelineProps {
   onAlpha(alpha: number): void;
 }
 
-const SPEEDS: Speed[] = [1, 2, 4];
 /** Rule geometry (px inside the bottom bar). */
 const RULE_Y = 27;
 const RULE_H = 50;
@@ -98,7 +95,7 @@ const blurAfterPointer = (e: { detail: number; currentTarget: HTMLElement }) => 
 };
 
 export function Timeline(props: TimelineProps) {
-  const { model, playhead, locale, chapters, currentChapter, playing, speed, onAlpha } = props;
+  const { model, playhead, locale, chapters, currentChapter, presenting, onAlpha } = props;
   const tr = useT();
   const t = useSyncExternalStore(playhead.subscribe, playhead.get, playhead.get);
   const [railRef, width] = useWidth<HTMLDivElement>();
@@ -155,18 +152,11 @@ export function Timeline(props: TimelineProps) {
     e.stopPropagation();
   };
 
-  const onRootKey = (e: KeyboardEvent<HTMLDivElement>) => {
-    if (e.key !== ' ' || e.altKey || e.ctrlKey || e.metaKey) return;
-    if (e.target instanceof HTMLButtonElement && e.target.closest('.ts-timeline__controls')) return;
-    e.preventDefault();
-    props.onTogglePlay();
-  };
-
   const position = new Map(chapters.map((c, i) => [c.id, i]));
   const headX = width > 0 ? x(t) : 0;
 
   return (
-    <div className="ts-timeline" onKeyDown={onRootKey} role="group" aria-label={tr('time.timeline')} data-lanes={lanesOpen ? 'open' : 'closed'}>
+    <div className="ts-timeline" role="group" aria-label={tr('time.timeline')} data-lanes={lanesOpen ? 'open' : 'closed'}>
       <div className="ts-timeline__grid">
         <div className="ts-timeline__controls">
           <button
@@ -185,36 +175,16 @@ export function Timeline(props: TimelineProps) {
           </button>
           <button
             type="button"
-            className={playing ? 'hud-btn on ts-timeline__play' : 'hud-btn ts-timeline__play'}
-            aria-label={tr(playing ? 'time.pause' : 'time.play')}
-            title={tr(playing ? 'time.pause' : 'time.play')}
-            aria-pressed={playing}
+            className="hud-btn ts-timeline__present"
+            aria-pressed={presenting}
+            title={`${tr('time.presentHint')} (P)`}
             onClick={(e) => {
-              props.onTogglePlay();
+              props.onPresent();
               blurAfterPointer(e);
             }}
           >
-            <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true" fill="currentColor">
-              {playing ? <path d="M2 1h2.2v8H2zM5.8 1H8v8H5.8z" /> : <path d="M2.2 1v8L9 5z" />}
-            </svg>
+            {tr('time.present')}
           </button>
-          <div className="ts-timeline__speed" role="radiogroup" aria-label={tr('time.speed')}>
-            {SPEEDS.map((s) => (
-              <button
-                key={s}
-                type="button"
-                role="radio"
-                aria-checked={speed === s}
-                className="hud-btn"
-                onClick={(e) => {
-                  props.onSpeed(s);
-                  blurAfterPointer(e);
-                }}
-              >
-                ×{s}
-              </button>
-            ))}
-          </div>
         </div>
 
         <div className="ts-rule">

@@ -72,12 +72,17 @@ for (const topic of TOPICS) {
       await expect(page.locator(`[data-preset="${binding.name}"]`)).toHaveAttribute('aria-pressed', 'true');
     }
 
-    // SPACE toggles pause; H hides the HUD and ESC brings it back.
+    // SPACE toggles pause where the scene has something to pause (TimeScene has no free-running playback); H hides the HUD and ESC brings it back.
     const paused = (await api()).paused;
-    await page.keyboard.press(' ');
-    await expect.poll(async () => (await api()).paused).toBe(!paused);
-    await page.keyboard.press(' ');
-    await expect.poll(async () => (await api()).paused).toBe(paused);
+    if (paused !== null) {
+      await page.keyboard.press(' ');
+      await expect.poll(async () => (await api()).paused).toBe(!paused);
+      await page.keyboard.press(' ');
+      await expect.poll(async () => (await api()).paused).toBe(paused);
+    } else {
+      expect(keymap.some((k) => k.type === 'pause')).toBe(false);
+      expect(await page.evaluate(() => window.__atlas!.setPaused(true))).toBe(false);
+    }
 
     await page.keyboard.press('h');
     await expect.poll(async () => (await api()).hud).toBe(false);
@@ -139,6 +144,16 @@ test('timeline: chapter nodes at least 56 px apart, one bottom bar with the stat
   const sorted = [...xs].sort((a, b) => a - b);
   for (let i = 1; i < sorted.length; i++) expect(sorted[i]! - sorted[i - 1]!).toBeGreaterThanOrEqual(55.5);
   await expect(page.locator('.ts-state [data-stat]')).toHaveCount(4);
+  // No free-running playback: the bar's only button besides the lanes chevron is PRESENT (= the presentation mode).
+  await expect(page.locator('.ts-timeline__play, .ts-timeline__speed')).toHaveCount(0);
+  const present = page.locator('.ts-timeline__present');
+  await expect(present).toHaveText(/present/i);
+  await expect(present).toHaveAttribute('aria-pressed', 'false');
+  await present.click();
+  await expect.poll(async () => (await page.evaluate(() => window.__atlas!.state())).modes.presentation).toBe(true);
+  await page.keyboard.press('Escape');
+  await expect.poll(async () => (await page.evaluate(() => window.__atlas!.state())).modes.presentation).toBe(false);
+  await expect(present).toHaveAttribute('aria-pressed', 'false');
   await expect(page.locator('.ts-lanes')).toHaveCount(0);
   await page.locator('.ts-timeline__lanes').click();
   await expect(page.locator('.ts-lanes svg')).toBeVisible();
@@ -178,7 +193,7 @@ test('PRESENTATION: user-paced beats (keys, dots, click), no auto-advance, ESC a
   await expect(page.locator('.ts-present__seg')).toHaveCount(3);
   await expect(page.locator('.ts-present__tick')).toHaveCount(0);
   await expect(page.locator('.ts-present__seg[data-state="current"] .ts-present__no')).toHaveText('01');
-  expect((await api()).presentation).toEqual({ chapter: 'first-look', beat: 0 });
+  expect((await api()).presentation).toEqual({ chapter: 'first-look', beat: 0, autoplay: false });
 
   await page.keyboard.press('ArrowRight');
   await expect.poll(async () => (await api()).chapter).toBe('second-look');
@@ -223,7 +238,7 @@ test('PRESENTATION progress bar: chapter segments, beat ticks, header, jumps, be
   const at = beats.findIndex((b) => b.chapter === 'fall-of-singapore');
   await page.evaluate((i) => window.__atlas!.goToBeat(i + 1, { instant: true }), at);
   await expect.poll(async () => (await api()).modes.presentation).toBe(true);
-  await expect.poll(async () => (await api()).presentation).toEqual({ chapter: 'fall-of-singapore', beat: 1 });
+  await expect.poll(async () => (await api()).presentation).toEqual({ chapter: 'fall-of-singapore', beat: 1, autoplay: false });
 
   // Segments: one per chapter, labelled 01..NN, the current one (07) in the signal colour and split into its beats.
   const segs = page.locator('.ts-present__seg');
@@ -237,17 +252,20 @@ test('PRESENTATION progress bar: chapter segments, beat ticks, header, jumps, be
   const n = (k: number) => String(k).padStart(2, '0');
   await expect(page.locator('.ts-present__chapter')).toContainText(`${n(chapters.indexOf('fall-of-singapore') + 1)} / ${n(chapters.length)}`);
   await expect(page.locator('.ts-present__chapter em')).toHaveText(`2 / ${own.length}`);
-  // The progress bar spans the caption card.
+  // The progress bar spans the caption card, next to the AUTO-PLAY checkbox (off by default).
   const card = (await page.locator('.ts-present__foot').boundingBox())!;
   const bar = (await page.locator('.ts-present__bar').boundingBox())!;
-  expect(bar.width).toBeGreaterThan(card.width * 0.9);
+  const auto = (await page.locator('.ts-present__auto').boundingBox())!;
+  expect(bar.width + auto.width).toBeGreaterThan(card.width * 0.85);
   expect(bar.width).toBeLessThanOrEqual(card.width);
+  expect(auto.x).toBeGreaterThan(bar.x + bar.width);
+  await expect(page.locator('.ts-present__auto input')).not.toBeChecked();
 
   // A beat tick jumps within the chapter; a chapter segment jumps to that chapter's first beat.
   await current.locator('.ts-present__tick').first().click();
-  await expect.poll(async () => (await api()).presentation).toEqual({ chapter: 'fall-of-singapore', beat: 0 });
+  await expect.poll(async () => (await api()).presentation).toEqual({ chapter: 'fall-of-singapore', beat: 0, autoplay: false });
   await segs.nth(0).locator('.ts-present__chap').click();
-  await expect.poll(async () => (await api()).presentation).toEqual({ chapter: chapters[0], beat: 0 });
+  await expect.poll(async () => (await api()).presentation).toEqual({ chapter: chapters[0], beat: 0, autoplay: false });
 
   // Leader labels for the beat's highlighted ids are still on the map with the HUD hidden (cap 6); nothing else.
   await page.evaluate((i) => window.__atlas!.goToBeat(i, { instant: true }), at);
@@ -255,7 +273,9 @@ test('PRESENTATION progress bar: chapter segments, beat ticks, header, jumps, be
   await expect.poll(() => page.locator('.ts-co:not([data-hidden="true"])').count(), { timeout: 8000 }).toBeGreaterThan(0);
   expect(await page.locator('.ts-co').count()).toBeLessThanOrEqual(6);
   expect(await page.locator('.ts-co[data-pinned="false"]').count()).toBe(0);
-  await expect(page.locator('.ts-label--place:visible, .ts-label--entity:visible')).toHaveCount(0);
+  await expect(page.locator('.ts-label--place:visible')).toHaveCount(0);
+  // Territory names are part of the map: they stay.
+  await expect.poll(() => page.locator('.ts-terr').count()).toBeGreaterThan(0);
 
   // A long caption scrolls inside the card instead of growing it.
   const grown = await page.evaluate(() => {
@@ -330,4 +350,74 @@ test('index: LOOK and language dropdowns work with 44 px hit areas', async ({ pa
   await page.getByRole('menuitemradio', { name: '中文' }).click();
   await page.waitForURL(/\/zh\/\?subject=history/);
   await expect(page.locator('h1')).toHaveText('这个世界值得探索');
+});
+
+test('PRESENTATION auto-play: advances by itself after the dwell, input holds it for the beat, remembered for the session', async ({ page }) => {
+  await page.setViewportSize({ width: 1600, height: 900 });
+  await openScene(page, '/en/topics/sample-time/?ch=first-look');
+  const api = () => page.evaluate(() => window.__atlas!.state());
+  await page.evaluate(() => window.__atlas!.goToBeat(0, { instant: true }));
+  await expect.poll(async () => (await api()).presentation).toEqual({ chapter: 'first-look', beat: 0, autoplay: false });
+  // Off: nothing moves on its own.
+  await page.waitForTimeout(3000);
+  expect((await api()).chapter).toBe('first-look');
+
+  // On (the checkbox): the next beat comes within the dwell (settle 2.3 s + dwell 6–20 s; sample captions are short, so ~6 s).
+  await page.locator('.ts-present__auto input').check();
+  expect((await api()).presentation?.autoplay).toBe(true);
+  expect(await page.evaluate(() => sessionStorage.getItem('atlas:autoplay'))).toBe('1');
+  const started = Date.now();
+  await expect.poll(async () => (await api()).chapter, { timeout: 12_000 }).toBe('second-look');
+  expect(Date.now() - started).toBeGreaterThan(5_000);
+
+  // Any input holds it for this beat (the checkbox stays checked).
+  await page.keyboard.press('a');
+  await page.waitForTimeout(9_000);
+  expect((await api()).chapter).toBe('second-look');
+  await expect(page.locator('.ts-present__auto input')).toBeChecked();
+
+  // The API switch; a reload keeps it for the session.
+  expect(await page.evaluate(() => window.__atlas!.setAutoplay(false))).toBe(true);
+  await expect.poll(async () => (await api()).presentation?.autoplay).toBe(false);
+  await page.evaluate(() => window.__atlas!.setAutoplay(true));
+  await page.reload();
+  await page.waitForFunction(() => window.__atlas !== undefined, null, { timeout: 30_000 });
+  expect(await page.evaluate(() => window.__atlas!.ready)).toBe(true);
+  await page.evaluate(() => window.__atlas!.goToBeat(2, { instant: true }));
+  await expect.poll(async () => (await api()).presentation?.autoplay).toBe(true);
+  // The last beat: auto-play stops there.
+  await page.waitForTimeout(9_000);
+  expect((await api()).presentation).toEqual({ chapter: 'third-look', beat: 0, autoplay: true });
+});
+
+test('territory names: on by default, N toggles them (mode `territory`), they follow the keyframes', async ({ page }) => {
+  await page.setViewportSize({ width: 1600, height: 900 });
+  await openScene(page, '/en/topics/ww2/?ch=blitzkrieg');
+  const api = () => page.evaluate(() => window.__atlas!.state());
+  expect(await page.evaluate(() => window.__atlas!.modes())).toContain('territory');
+  expect((await api()).modes.territory).toBe(true);
+  const names = () => page.locator('.ts-terr[data-text]').evaluateAll((els) => els.map((e) => (e as HTMLElement).dataset.text));
+  await expect.poll(async () => (await names()).length, { timeout: 10_000 }).toBeGreaterThan(2);
+  expect((await names()).length).toBeLessThanOrEqual(24);
+  expect(await names()).toContain('Germany|德国');
+  // EN small caps over Chinese, inside the stage.
+  const first = page.locator('.ts-terr[data-text]').first();
+  await expect(first.locator('.ts-terr__en')).toBeVisible();
+  await expect(first.locator('.ts-terr__zh')).toBeVisible();
+
+  await page.keyboard.press('n');
+  await expect.poll(async () => (await api()).modes.territory).toBe(false);
+  await expect(page.locator('.ts-terr[data-text]')).toHaveCount(0);
+  await page.keyboard.press('n');
+  await expect.poll(async () => (await api()).modes.territory).toBe(true);
+  await expect.poll(async () => (await names()).length).toBeGreaterThan(2);
+
+  // LABELS (L) hides leader placards, not territory names.
+  await page.keyboard.press('l');
+  await expect.poll(async () => (await names()).length).toBeGreaterThan(2);
+  await page.keyboard.press('l');
+
+  // Another chapter, another keyframe: the names follow who holds what.
+  await page.evaluate(() => window.__atlas!.goToChapter('end-and-home', { instant: true }));
+  await expect.poll(async () => (await names()).includes('Germany|德国'), { timeout: 10_000 }).toBe(false);
 });

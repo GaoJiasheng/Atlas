@@ -10,7 +10,12 @@
  *  - `update()` runs on every map render frame and only writes transforms,
  *    opacity and SVG attributes. Sizes and HUD panel rects are measured in
  *    `relayout()` (resize, new items, a slow interval), never per frame.
- *  - Columns avoid each other by projected y (sort + minimum gap), stay inside
+ *  - Each placard goes to the column on its anchor's side (anchors in the
+ *    middle third of the band take the nearer column). A column sits at the
+ *    band's edge when HUD panels bound it, else no further out than 22 % /
+ *    78 % of the stage, and moves in towards its anchors as far as that edge
+ *    allows, so leaders stay short. Within a column placards sit level with
+ *    their anchors as far as stacking (sort + minimum gap) allows, stay inside
  *    the band left free by `[data-hud-panel]` blocks, and a placard that would
  *    still touch a panel is hidden. Anchors off the stage fade out.
  *  - Visibility follows the host switches through CSS
@@ -46,6 +51,10 @@ export interface LeaderSystem {
   relayout(): void;
   /** Viewport rects of the placards on show and of the HUD panels over the stage (place labels yield to both). */
   rects(): DOMRect[];
+  /** Container-local boxes of the placards on show, from the last placement (no layout read). */
+  boxes(): { x: number; y: number; w: number; h: number }[];
+  /** The last measured free band (null before the first measure). */
+  band(): Band | null;
   destroy(): void;
 }
 
@@ -58,6 +67,10 @@ const ELBOW = 14;
 const MIN_COL = 120;
 const MAX_COL = 210;
 const SIDE_HYSTERESIS = 40;
+/** Outermost column position (share of the stage width) when no HUD panel bounds the band. */
+const COLUMN_SHARE = 0.22;
+/** A placard switches to the far column only if its leader stays under this share of the stage width. */
+const MAX_LEADER_SHARE = 0.35;
 
 interface Entry {
   item: LeaderItem;
@@ -71,6 +84,8 @@ interface Entry {
   clear: boolean;
   sx: number;
   sy: number;
+  /** Placed box (container px), when shown. */
+  box: { x: number; y: number; w: number; h: number } | null;
 }
 
 /** Free stage band between the HUD blocks, in container px. */
@@ -145,7 +160,7 @@ export function createLeaders(options: {
     dot.setAttribute('r', '3');
     labelRoot.appendChild(el);
     ensureGroup()?.append(path, dot);
-    return { item, el, path, dot, w: 0, h: 0, side: null, clear: true, sx: 0, sy: 0 };
+    return { item, el, path, dot, w: 0, h: 0, side: null, clear: true, sx: 0, sy: 0, box: null };
   };
 
   const fill = (e: Entry) => {
@@ -278,6 +293,7 @@ export function createLeaders(options: {
   }
 
   const hide = (e: Entry) => {
+    e.box = null;
     e.el.style.opacity = '0';
     e.el.dataset.hidden = 'true';
     e.path.setAttribute('opacity', '0');
@@ -293,11 +309,15 @@ export function createLeaders(options: {
     const twoColumns = room >= 2 * MIN_COL * b.u + 6 * GAP * b.u;
     const oneColumn = room >= MIN_COL * b.u + 2 * GAP * b.u;
     const colW = Math.max(...[...entries.values()].map((e) => e.w), MIN_COL * b.u);
-    const mid = (b.left + b.right) / 2;
-    const xL = b.left + colW;
-    const xR = b.right - colW;
+    const elbow = ELBOW * b.u;
+    // Column edges facing the map: the band edge when a HUD panel bounds it, else no further out than 22 % / 78 % of the stage.
+    const baseL = b.left + colW;
+    const baseR = b.right - colW;
+    const innerL = twoColumns ? Math.max(baseL, Math.min(width * COLUMN_SHARE, (b.left + b.right) / 2 - 3 * GAP * b.u)) : baseL;
+    const innerR = twoColumns ? Math.min(baseR, Math.max(width * (1 - COLUMN_SHARE), (b.left + b.right) / 2 + 3 * GAP * b.u)) : baseR;
+    const third = room / 3;
 
-    const cols: Record<'L' | 'R', Entry[]> = { L: [], R: [] };
+    const shown: Entry[] = [];
     for (const e of entries.values()) {
       // The world copy the camera is looking at (a path across the antimeridian sits in the neighbouring copy).
       const p = projectNearCentre((q) => map.project(q), e.item.at, width / 2);
@@ -309,13 +329,41 @@ export function createLeaders(options: {
         e.side = null;
         continue;
       }
-      let side: 'L' | 'R' = !twoColumns ? 'R' : p.x < mid ? 'L' : 'R';
-      if (twoColumns && e.side && e.side !== side && Math.abs(p.x - mid) < SIDE_HYSTERESIS * b.u) side = e.side;
-      // An anchor under its column (narrow bands) moves to the other column if that one is clear of it.
-      const clear = (s: 'L' | 'R') => (s === 'L' ? p.x >= xL + ELBOW * b.u : p.x <= xR - ELBOW * b.u);
-      if (twoColumns && !clear(side) && clear(side === 'L' ? 'R' : 'L')) side = side === 'L' ? 'R' : 'L';
+      shown.push(e);
+      if (!twoColumns) {
+        e.side = 'R';
+        continue;
+      }
+      // Same side as the anchor; the middle third of the band takes the nearer column (with hysteresis while it moves).
+      let side: 'L' | 'R';
+      if (p.x < b.left + third) side = 'L';
+      else if (p.x > b.right - third) side = 'R';
+      else {
+        const dl = Math.abs(p.x - innerL);
+        const dr = Math.abs(innerR - p.x);
+        side = dl <= dr ? 'L' : 'R';
+        if (e.side && e.side !== side && Math.abs(dl - dr) < SIDE_HYSTERESIS * b.u) side = e.side;
+      }
       e.side = side;
-      e.clear = clear(side);
+    }
+
+    // Each column moves in towards its anchors (never past them, never out of the band).
+    const anchorsL = shown.filter((e) => e.side === 'L').map((e) => e.sx);
+    const anchorsR = shown.filter((e) => e.side === 'R').map((e) => e.sx);
+    const xL = anchorsL.length ? Math.max(baseL, Math.min(innerL, Math.min(...anchorsL) - 2 * elbow)) : innerL;
+    const xR = anchorsR.length ? Math.min(baseR, Math.max(innerR, Math.max(...anchorsR) + 2 * elbow)) : innerR;
+    const clear = (e: Entry, s: 'L' | 'R') => (s === 'L' ? e.sx >= xL + elbow : e.sx <= xR - elbow);
+    const cols: Record<'L' | 'R', Entry[]> = { L: [], R: [] };
+    for (const e of shown) {
+      let side = e.side!;
+      // An anchor under its own column (it hugs the band edge) may use the other column, but only for a short leader.
+      if (twoColumns && !clear(e, side)) {
+        const other = side === 'L' ? 'R' : 'L';
+        const reach = Math.abs(e.sx - (other === 'L' ? xL : xR));
+        if (clear(e, other) && reach < width * MAX_LEADER_SHARE) side = other;
+      }
+      e.side = side;
+      e.clear = clear(e, side);
       cols[side].push(e);
     }
 
@@ -337,6 +385,7 @@ export function createLeaders(options: {
           hide(e);
           return;
         }
+        e.box = box;
         e.el.dataset.side = side;
         e.el.dataset.hidden = 'false';
         e.el.style.transform = `translate(${x.toFixed(1)}px,${y.toFixed(1)}px)`;
@@ -370,6 +419,12 @@ export function createLeaders(options: {
     },
     update,
     relayout,
+    boxes() {
+      const out: { x: number; y: number; w: number; h: number }[] = [];
+      for (const e of entries.values()) if (e.box) out.push(e.box);
+      return out;
+    },
+    band: () => band,
     rects() {
       const out: DOMRect[] = [...panelRects];
       for (const e of entries.values()) if (e.el.dataset.hidden === 'false') out.push(e.el.getBoundingClientRect());
