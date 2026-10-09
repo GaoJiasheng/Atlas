@@ -60,6 +60,8 @@ export interface GeoController {
    * place / entity name labels, so the caption and the map agree.
    */
   setPresentation(on: boolean): void;
+  /** Re-measure the leader labels now (the presentation card appeared or changed size). */
+  refreshLabels(): void;
   /** Camera that fits all topic data (the `theatre` preset). */
   fitCamera(): GeoCamera | null;
   stats(): { features: number; zoom: number };
@@ -836,6 +838,8 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     container,
     labelRoot: options.labelRoot,
     onSelect: (id) => options.onSelectEvent(id),
+    // PRESENTATION: the HUD panels are on their way out (they keep `visibility` for the fade), so only the caption card and title block count.
+    panelFilter: (el) => !presenting || (el.getAttribute('data-hud-panel') ?? '').startsWith('present'),
     onBand: (band) => {
       // Scale bar: bottom-left of the stage above the dock, or right of the left column when that is in the way.
       const box = { x: 28 * band.u, y: band.bottom - scaleRoot.offsetHeight, w: scaleRoot.offsetWidth, h: scaleRoot.offsetHeight };
@@ -1140,6 +1144,8 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   map.on('moveend', (e) => {
     reorientArrows();
     updateLabels();
+    // The camera settled: re-measure so the beat's labels sit in the final band right away (no waiting for the slow interval).
+    if (presenting) leaders.relayout();
     const fromUser = userGesture || Boolean((e as { originalEvent?: Event }).originalEvent);
     userGesture = false;
     if (!fromUser) return;
@@ -1223,6 +1229,9 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     setGraticule(on) {
       graticuleOn = on;
       applyVisibility();
+    },
+    refreshLabels() {
+      leaders.relayout();
     },
     setPresentation(on) {
       if (on === presenting) return;

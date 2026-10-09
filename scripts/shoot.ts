@@ -87,6 +87,8 @@ interface RunReport {
   layout: LayoutResult[];
   /** Presentation beats that did not land (empty = every beat shot). */
   beatFailures: string[];
+  /** Beats whose highlighted ids have no label on screen (content issues, not failures). */
+  beatNotes: string[];
   /** JavaScript the page loaded (gzip -9 of the files in dist/). */
   js: { files: number; gzKB: number };
   logs: { type: string; text: string }[];
@@ -337,8 +339,17 @@ async function runBeats(s: Session, o: Options, out: string, report: RunReport):
     const st = await s.state();
     const landed = st.presentation?.chapter === b.chapter && st.presentation.beat === b.index && st.hud === false;
     if (!landed) report.beatFailures.push(`${name}: state.presentation=${JSON.stringify(st.presentation)} hud=${st.hud}`);
+    // Labels for the beat's highlighted ids: a missing one means no anchor on screen (or its layer is off), usually a content issue.
+    const missing = await s.page.evaluate(() => {
+      const shown = new Set(
+        [...document.querySelectorAll<HTMLElement>('.ts-co')].filter((e) => e.dataset.hidden === 'false' && e.style.opacity === '1').map((e) => e.dataset.id),
+      );
+      const highlight = (window.__atlas!.state() as { highlight?: string[] }).highlight ?? [];
+      return highlight.filter((id) => !shown.has(id));
+    });
+    if (missing.length) report.beatNotes.push(`${name}: no label for ${missing.join(', ')}`);
     await s.page.screenshot({ path: join(out, `${name}${o.suffix}.png`) });
-    console.log(`  ${name.padEnd(36)} ${landed ? 'OK' : 'FAIL'}`);
+    console.log(`  ${name.padEnd(36)} ${landed ? 'OK' : 'FAIL'}${missing.length ? `  (no label: ${missing.join(', ')})` : ''}`);
   }
   await s.apply({ wait: 300 });
   console.log(`  beats -> ${out} (${beats.length})`);
@@ -595,7 +606,7 @@ async function main(): Promise<number> {
         const out = join(ROOT, 'shots', o.topic, `${locale}-${theme}`);
         console.log(`\n== ${o.topic} · ${locale} · ${theme} · ${o.size.join('x')}`);
         const s = await Session.open(browser, origin, o.topic, locale, theme, o.size);
-        const report: RunReport = { topic: o.topic, locale, theme, size: o.size.join('x'), shots: {}, keys: [], layout: [], beatFailures: [], js: { files: 0, gzKB: 0 }, logs: [] };
+        const report: RunReport = { topic: o.topic, locale, theme, size: o.size.join('x'), shots: {}, keys: [], layout: [], beatFailures: [], beatNotes: [], js: { files: 0, gzKB: 0 }, logs: [] };
         try {
           if (!checksOnly) await runShots(s, o, out, report);
           if (o.beats) {
