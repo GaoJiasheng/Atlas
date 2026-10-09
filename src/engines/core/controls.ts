@@ -142,9 +142,21 @@ export interface SceneControls {
     list(): BeatInfo[];
     go(index: number, options: InstantOption): void;
     /** The beat on show (`__atlas.state().presentation`, with the auto-play switch when the engine has one); `null` when no presentation is running. */
-    current(): { chapter: string; beat: number; autoplay?: boolean } | null;
+    current(): { chapter: string; beat: number; autoplay?: boolean; voice?: boolean } | null;
     /** Auto-play switch of the presentation (`__atlas.setAutoplay`); omit when the engine has none. */
     setAutoplay?(on: boolean): void;
+    /** Voice (caption narration) switch (`__atlas.setVoice`); returns false when the device has no voice. Omit when the engine has none. */
+    setVoice?(on: boolean): boolean;
+  };
+  /**
+   * Chapter auto-run (TimeScene): picking a chapter animates the engine's time
+   * from the chapter's span start to its own time. `running` is true while it
+   * plays (`__atlas.state().running`); `now` is the continuous time on show
+   * (`__atlas.state().playhead`), `null` when the engine has none.
+   */
+  time?: {
+    running(): boolean;
+    now(): number | null;
   };
   /** ESC: leave a focus/selection. Return true when something was undone. */
   escape?(): boolean;

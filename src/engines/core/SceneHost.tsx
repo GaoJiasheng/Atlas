@@ -10,6 +10,8 @@
  *   overlay column, bottom dock with panels and the engine bar), the reading
  *   InfoPanel is a docked column >= 1024px (collapsible to a 28 px strip,
  *   kept per tab in sessionStorage) and a bottom sheet below
+ * - the reading panel's collapse is the user's choice and sticky: a chapter
+ *   change never re-expands it, it only flashes the handle / strip (`data-flash`)
  * - owns the keyboard (keys.ts), HUD scaling (`--k`) and `window.__atlas`
  * - handles the static chapter-body controls by delegation: `<FlyTo>`
  *   (`data-flyto` -> the engine's camera preset, same action as the VIEW
@@ -68,6 +70,9 @@ const PHONE_MAX = 759;
 
 /** HUD type never drops below this share of its 1080p size (`--kt`, legibility floor). */
 const HUD_TYPE_FLOOR = 0.8;
+
+/** How long the collapsed reader's handle flashes after a chapter change (two pulses). */
+const READER_FLASH_MS = 900;
 
 /** `--k = clamp(min(W/1920, H/1080), .6, 1.6)`; 1 on phones. */
 export function hudScale(width: number, height: number): number {
@@ -248,6 +253,27 @@ export default function SceneHost(props: SceneHostProps) {
       if (s.reader !== prev.reader) setReaderExpanded(s.reader);
     });
   }, [hud]);
+  // A collapsed reader stays collapsed when the chapter changes; its handle flashes to say new text is there.
+  const readerRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    let timer = 0;
+    const flash = () => {
+      const el = readerRef.current;
+      if (!el) return;
+      el.removeAttribute('data-flash');
+      void el.offsetWidth; // restart the animation
+      el.setAttribute('data-flash', '');
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => el.removeAttribute('data-flash'), READER_FLASH_MS);
+    };
+    const unsubscribe = store.subscribe((s, prev) => {
+      if (s.transition.id !== prev.transition.id && s.transition.reason === 'chapter' && s.chapter !== prev.chapter && !hud.getState().reader) flash();
+    });
+    return () => {
+      unsubscribe();
+      window.clearTimeout(timer);
+    };
+  }, [store, hud]);
   const [k, setK] = useState(1);
   useLayoutEffect(() => {
     const update = () => setK(hudScale(window.innerWidth, window.innerHeight));
@@ -382,10 +408,7 @@ export default function SceneHost(props: SceneHostProps) {
               chapters={chapters}
               currentId={currentId}
               locale={locale}
-              onSelect={(id) => {
-                store.getState().goToChapter(id);
-                actions.setReader(true);
-              }}
+              onSelect={(id) => store.getState().goToChapter(id)}
             />
           </div>
           <div className="atlas-hud__right">
@@ -405,7 +428,7 @@ export default function SceneHost(props: SceneHostProps) {
           </div>
         </div>
 
-        <aside className="atlas-reader hud-fade" data-hud-panel="reader">
+        <aside ref={readerRef} className="atlas-reader hud-fade" data-hud-panel="reader">
           <button
             type="button"
             className="atlas-reader__handle"

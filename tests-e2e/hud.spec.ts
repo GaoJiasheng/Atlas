@@ -103,17 +103,18 @@ for (const topic of TOPICS) {
   });
 }
 
-test('reading panel: collapses to a strip, survives a reload (sessionStorage, not the URL), a rail chapter opens it', async ({ page }) => {
+test('reading panel: collapse is sticky (survives a reload and chapter changes, which only flash the strip); handle and strip toggle it', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await openScene(page, '/en/topics/sample-time/');
   const reader = page.locator('[data-hud-panel="reader"]');
   const stage = page.locator('.atlas-stage');
   const width = async (l: typeof reader) => (await l.boundingBox())?.width ?? 0;
+  const api = () => page.evaluate(() => window.__atlas!.state());
   const stageWide = await width(stage);
   await page.locator('.atlas-reader__handle').click();
   await expect.poll(() => width(reader)).toBeLessThanOrEqual(29);
   await expect.poll(() => width(stage)).toBeGreaterThan(stageWide + 300);
-  await expect.poll(async () => (await page.evaluate(() => window.__atlas!.state())).reader).toBe(false);
+  await expect.poll(async () => (await api()).reader).toBe(false);
   expect(await page.evaluate(() => sessionStorage.getItem('atlas:reader'))).toBe('collapsed');
   await page.waitForTimeout(400);
   expect(page.url()).not.toContain('reader');
@@ -122,15 +123,154 @@ test('reading panel: collapses to a strip, survives a reload (sessionStorage, no
   await page.waitForFunction(() => window.__atlas !== undefined);
   expect(await page.evaluate(() => window.__atlas!.ready)).toBe(true);
   await expect.poll(() => width(reader)).toBeLessThanOrEqual(29);
-  await page.locator('.atlas-rail__item').nth(1).click();
-  await expect.poll(() => width(reader)).toBeGreaterThan(300);
 
+  // A rail row, a timeline node and ← → each change the chapter, never the fold; the strip flashes (two pulses, ~900 ms).
+  // Counted by a MutationObserver (a 900 ms window is easy to miss when polling under software GL).
+  await page.evaluate(() => {
+    const el = document.querySelector('.atlas-reader')!;
+    const w = window as unknown as { __flashes: number };
+    w.__flashes = 0;
+    new MutationObserver((records) => {
+      for (const r of records) if (r.oldValue === null && el.hasAttribute('data-flash')) w.__flashes++;
+    }).observe(el, { attributes: true, attributeFilter: ['data-flash'], attributeOldValue: true });
+  });
+  const flashes = () => page.evaluate(() => (window as unknown as { __flashes: number }).__flashes);
+  const flashing = page.locator('.atlas-reader[data-flash]');
+  await expect(flashing).toHaveCount(0);
+  await page.locator('.atlas-rail__item').nth(1).click();
+  await expect.poll(async () => (await api()).chapter).toBe('second-look');
+  await expect.poll(flashes).toBe(1);
+  await expect(page.locator('.atlas-reader__strip')).toBeVisible();
+  // Two pulses of the signal outline on the strip (the handle is hidden while folded).
+  const animation = await page.locator('.atlas-reader__strip').evaluate((el) => {
+    const a = el.getAnimations().find((x) => (x as CSSAnimation).animationName === 'atlas-reader-flash') as CSSAnimation | undefined;
+    return a ? { iterations: a.effect?.getTiming().iterations, duration: a.effect?.getTiming().duration } : null;
+  });
+  if (animation) expect(animation).toEqual({ iterations: 2, duration: 450 });
+  await expect(flashing).toHaveCount(0, { timeout: 3000 });
+  expect(await width(reader)).toBeLessThanOrEqual(29);
+  expect((await api()).reader).toBe(false);
+
+  await page.locator('.ts-rule__node').nth(2).click();
+  await expect.poll(async () => (await api()).chapter).toBe('third-look');
+  await expect.poll(flashes).toBe(2);
+  await expect(flashing).toHaveCount(0, { timeout: 3000 });
+  await page.keyboard.press('ArrowLeft');
+  await expect.poll(async () => (await api()).chapter).toBe('second-look');
+  await expect.poll(flashes).toBe(3);
+  expect(await width(reader)).toBeLessThanOrEqual(29);
+  expect((await api()).reader).toBe(false);
+  expect(await page.evaluate(() => sessionStorage.getItem('atlas:reader'))).toBe('collapsed');
+  await expect(flashing).toHaveCount(0, { timeout: 3000 });
+
+  // Only the strip (or the handle) opens it.
+  await page.locator('.atlas-reader__strip').click();
+  await expect.poll(() => width(reader)).toBeGreaterThan(300);
+  expect(await flashes()).toBe(3);
   await page.locator('.atlas-reader__handle').click();
   await expect.poll(() => width(reader)).toBeLessThanOrEqual(29);
   await page.locator('.atlas-reader__strip').click();
   await expect.poll(() => width(reader)).toBeGreaterThan(300);
+  // An open reader does not flash on a chapter change.
+  await page.locator('.atlas-rail__item').nth(2).click();
+  await expect.poll(async () => (await api()).chapter).toBe('third-look');
+  await page.waitForTimeout(300);
+  expect(await flashes()).toBe(3);
   // The header carries the chapter summary sentence (sample: its question).
   await expect(page.locator('.atlas-panel__summary')).toHaveText(/Sample question/);
+});
+
+test('chapter auto-run: the playhead runs from the span start to the chapter time and lands exactly; the playhead drags, nudges and jumps; any touch cancels the run', async ({ page }) => {
+  test.setTimeout(90_000);
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await openScene(page, '/en/topics/sample-time/?ch=first-look');
+  const api = () => page.evaluate(() => window.__atlas!.state());
+  const running = async () => (await api()).running;
+  const head = async () => (await api()).playhead!;
+  const grab = page.locator('.ts-rule__grab');
+  const readout = page.locator('.ts-rule__date');
+  await expect.poll(running).toBe(false);
+  const p1 = await head(); // first-look rests on its own time
+
+  // Rail row: second-look runs from the previous chapter's time (= p1) to its own. Status line says RUNNING meanwhile.
+  await page.locator('.atlas-rail__item').nth(1).click();
+  await expect.poll(running, { timeout: 2000 }).toBe(true);
+  const early = await head();
+  expect(early).toBeGreaterThanOrEqual(p1);
+  await expect(page.locator('.atlas-topbar')).toContainText('RUNNING');
+  await expect.poll(async () => (await api()).chapter).toBe('second-look');
+  await expect.poll(running, { timeout: 10_000 }).toBe(false);
+  const p2 = await head();
+  expect(p2).toBeGreaterThan(p1);
+  expect(early).toBeLessThan(p1 + (p2 - p1) * 0.3);
+  await expect(readout).toHaveText(/11 MAR 2000/);
+  await expect(page.locator('.atlas-topbar')).not.toContainText('RUNNING');
+  expect(page.url()).not.toContain('t='); // the chapter time is the chapter's own baseline, so the URL carries none
+
+  // A second click on the same chapter re-runs it, and ends on exactly the same time.
+  await page.locator('.atlas-rail__item').nth(1).click();
+  await expect.poll(running, { timeout: 2000 }).toBe(true);
+  expect(await head()).toBeLessThan(p2);
+  await expect.poll(running, { timeout: 10_000 }).toBe(false);
+  expect(await head()).toBe(p2);
+
+  // Timeline node, then the programmatic API, run the same way.
+  await page.locator('.ts-rule__node').nth(2).click();
+  await expect.poll(running, { timeout: 2000 }).toBe(true);
+  await expect.poll(running, { timeout: 10_000 }).toBe(false);
+  const p3 = await head();
+  expect(p3).toBeGreaterThan(p2);
+  await page.evaluate(() => window.__atlas!.runChapter('second-look'));
+  await expect.poll(running, { timeout: 2000 }).toBe(true);
+  await expect.poll(running, { timeout: 10_000 }).toBe(false);
+  expect(await head()).toBe(p2);
+
+  // Dragging the playhead mid-run cancels it, and releasing leaves t where it is.
+  await page.locator('.atlas-rail__item').nth(2).click();
+  await expect.poll(running, { timeout: 2000 }).toBe(true);
+  await page.waitForTimeout(1500);
+  const box = (await grab.boundingBox())!;
+  expect(box.width).toBeGreaterThanOrEqual(44);
+  const [cx, cy] = [box.x + box.width / 2, box.y + box.height / 2];
+  await page.mouse.move(cx, cy);
+  await page.mouse.down();
+  await page.mouse.move(cx + 40, cy, { steps: 4 });
+  expect(await running()).toBe(false);
+  await page.mouse.move(cx - 90, cy, { steps: 8 });
+  await page.mouse.up();
+  const dropped = await head();
+  expect(dropped).toBeLessThan(p3);
+  expect(dropped).toBeGreaterThan(p1);
+  await page.waitForTimeout(900);
+  expect(await head()).toBe(dropped);
+  expect(await running()).toBe(false);
+  await expect.poll(() => page.url()).toContain('t=2000-0'); // a scrubbed time is written back
+
+  // Keyboard on the focused playhead: Home / End jump to the chapter's span ends, arrows nudge one tick.
+  await grab.focus();
+  await page.keyboard.press('Home');
+  expect(await head()).toBe(p2);
+  await page.keyboard.press('End');
+  expect(await head()).toBe(p3);
+  await page.keyboard.press('ArrowLeft');
+  const nudged = await head();
+  expect(nudged).toBeLessThan(p3);
+  await page.keyboard.press('ArrowRight');
+  expect(await head()).toBeGreaterThan(nudged);
+  expect((await api()).chapter).toBe('third-look'); // arrows on the playhead never change chapter
+
+  // Clicking the rule scrubs too (and cancels), and Shift+← cancels a run started by ← →.
+  await page.keyboard.press('Home');
+  await page.locator('.atlas-rail__item').nth(1).click();
+  await expect.poll(running, { timeout: 2000 }).toBe(true);
+  await page.keyboard.press('Shift+ArrowRight');
+  expect(await running()).toBe(false);
+  await page.locator('.atlas-rail__item').nth(2).click();
+  await expect.poll(running, { timeout: 2000 }).toBe(true);
+  const rail = (await page.locator('.ts-rule__rail').boundingBox())!;
+  await page.mouse.click(rail.x + rail.width * 0.15, rail.y + 8);
+  expect(await running()).toBe(false);
+  expect(await head()).toBeLessThan(p2);
 });
 
 test('timeline: chapter nodes at least 56 px apart, one bottom bar with the state cluster, lanes on demand', async ({ page }) => {
@@ -193,7 +333,7 @@ test('PRESENTATION: user-paced beats (keys, dots, click), no auto-advance, ESC a
   await expect(page.locator('.ts-present__seg')).toHaveCount(3);
   await expect(page.locator('.ts-present__tick')).toHaveCount(0);
   await expect(page.locator('.ts-present__seg[data-state="current"] .ts-present__no')).toHaveText('01');
-  expect((await api()).presentation).toEqual({ chapter: 'first-look', beat: 0, autoplay: false });
+  expect((await api()).presentation).toEqual({ chapter: 'first-look', beat: 0, autoplay: false, voice: false });
 
   await page.keyboard.press('ArrowRight');
   await expect.poll(async () => (await api()).chapter).toBe('second-look');
@@ -238,7 +378,7 @@ test('PRESENTATION progress bar: chapter segments, beat ticks, header, jumps, be
   const at = beats.findIndex((b) => b.chapter === 'fall-of-singapore');
   await page.evaluate((i) => window.__atlas!.goToBeat(i + 1, { instant: true }), at);
   await expect.poll(async () => (await api()).modes.presentation).toBe(true);
-  await expect.poll(async () => (await api()).presentation).toEqual({ chapter: 'fall-of-singapore', beat: 1, autoplay: false });
+  await expect.poll(async () => (await api()).presentation).toEqual({ chapter: 'fall-of-singapore', beat: 1, autoplay: false, voice: false });
 
   // Segments: one per chapter, labelled 01..NN, the current one (07) in the signal colour and split into its beats.
   const segs = page.locator('.ts-present__seg');
@@ -255,17 +395,17 @@ test('PRESENTATION progress bar: chapter segments, beat ticks, header, jumps, be
   // The progress bar spans the caption card, next to the AUTO-PLAY checkbox (off by default).
   const card = (await page.locator('.ts-present__foot').boundingBox())!;
   const bar = (await page.locator('.ts-present__bar').boundingBox())!;
-  const auto = (await page.locator('.ts-present__auto').boundingBox())!;
+  const auto = (await page.locator('.ts-present__opts').boundingBox())!;
   expect(bar.width + auto.width).toBeGreaterThan(card.width * 0.85);
   expect(bar.width).toBeLessThanOrEqual(card.width);
   expect(auto.x).toBeGreaterThan(bar.x + bar.width);
-  await expect(page.locator('.ts-present__auto input')).not.toBeChecked();
+  await expect(page.locator('.ts-present__auto:not(.ts-present__voice) input')).not.toBeChecked();
 
   // A beat tick jumps within the chapter; a chapter segment jumps to that chapter's first beat.
   await current.locator('.ts-present__tick').first().click();
-  await expect.poll(async () => (await api()).presentation).toEqual({ chapter: 'fall-of-singapore', beat: 0, autoplay: false });
+  await expect.poll(async () => (await api()).presentation).toEqual({ chapter: 'fall-of-singapore', beat: 0, autoplay: false, voice: false });
   await segs.nth(0).locator('.ts-present__chap').click();
-  await expect.poll(async () => (await api()).presentation).toEqual({ chapter: chapters[0], beat: 0, autoplay: false });
+  await expect.poll(async () => (await api()).presentation).toEqual({ chapter: chapters[0], beat: 0, autoplay: false, voice: false });
 
   // Leader labels for the beat's highlighted ids are still on the map with the HUD hidden (cap 6); nothing else.
   await page.evaluate((i) => window.__atlas!.goToBeat(i, { instant: true }), at);
@@ -357,13 +497,13 @@ test('PRESENTATION auto-play: advances by itself after the dwell, input holds it
   await openScene(page, '/en/topics/sample-time/?ch=first-look');
   const api = () => page.evaluate(() => window.__atlas!.state());
   await page.evaluate(() => window.__atlas!.goToBeat(0, { instant: true }));
-  await expect.poll(async () => (await api()).presentation).toEqual({ chapter: 'first-look', beat: 0, autoplay: false });
+  await expect.poll(async () => (await api()).presentation).toEqual({ chapter: 'first-look', beat: 0, autoplay: false, voice: false });
   // Off: nothing moves on its own.
   await page.waitForTimeout(3000);
   expect((await api()).chapter).toBe('first-look');
 
   // On (the checkbox): the next beat comes within the dwell (settle 2.3 s + dwell 6–20 s; sample captions are short, so ~6 s).
-  await page.locator('.ts-present__auto input').check();
+  await page.locator('.ts-present__auto:not(.ts-present__voice) input').check();
   expect((await api()).presentation?.autoplay).toBe(true);
   expect(await page.evaluate(() => sessionStorage.getItem('atlas:autoplay'))).toBe('1');
   const started = Date.now();
@@ -374,7 +514,7 @@ test('PRESENTATION auto-play: advances by itself after the dwell, input holds it
   await page.keyboard.press('a');
   await page.waitForTimeout(9_000);
   expect((await api()).chapter).toBe('second-look');
-  await expect(page.locator('.ts-present__auto input')).toBeChecked();
+  await expect(page.locator('.ts-present__auto:not(.ts-present__voice) input')).toBeChecked();
 
   // The API switch; a reload keeps it for the session.
   expect(await page.evaluate(() => window.__atlas!.setAutoplay(false))).toBe(true);
@@ -387,7 +527,7 @@ test('PRESENTATION auto-play: advances by itself after the dwell, input holds it
   await expect.poll(async () => (await api()).presentation?.autoplay).toBe(true);
   // The last beat: auto-play stops there.
   await page.waitForTimeout(9_000);
-  expect((await api()).presentation).toEqual({ chapter: 'third-look', beat: 0, autoplay: true });
+  expect((await api()).presentation).toEqual({ chapter: 'third-look', beat: 0, autoplay: true, voice: false });
 });
 
 test('territory names: on by default, N toggles them (mode `territory`), they follow the keyframes', async ({ page }) => {
@@ -420,4 +560,87 @@ test('territory names: on by default, N toggles them (mode `territory`), they fo
   // Another chapter, another keyframe: the names follow who holds what.
   await page.evaluate(() => window.__atlas!.goToChapter('end-and-home', { instant: true }));
   await expect.poll(async () => (await names()).includes('Germany|德国'), { timeout: 10_000 }).toBe(false);
+});
+
+/** A fake `speechSynthesis` that records every utterance (`window.__spoken`) and ends each one 150 ms after it starts. */
+const FAKE_SPEECH = (voices: { name: string; lang: string; localService: boolean }[]) => `
+  class U { constructor(text) { this.text = text; this.lang = ''; this.voice = null; this.rate = 1; this.pitch = 1; this.volume = 1; this.onend = null; this.onerror = null; } }
+  window.SpeechSynthesisUtterance = U;
+  window.__spoken = [];
+  window.__cancels = 0;
+  Object.defineProperty(window, 'speechSynthesis', { configurable: true, value: {
+    getVoices: () => ${JSON.stringify(voices)},
+    speak(u) { window.__spoken.push({ text: u.text, lang: u.lang, voice: u.voice && u.voice.name, rate: u.rate, pitch: u.pitch, volume: u.volume }); setTimeout(() => u.onend && u.onend(), 150); },
+    cancel() { window.__cancels++; }, resume() {}, addEventListener() {}, removeEventListener() {},
+  } });
+`;
+const FAKE_VOICES = [
+  { name: 'Samantha', lang: 'en-US', localService: true },
+  { name: 'Daniel', lang: 'en-GB', localService: true },
+  { name: 'Meijia', lang: 'zh-TW', localService: true },
+  { name: 'Tingting', lang: 'zh-CN', localService: true },
+];
+
+for (const [locale, lang, voice] of [['en', 'en-GB', 'Daniel'], ['zh', 'zh-CN', 'Tingting']] as const) {
+  test(`PRESENTATION voice (${locale}): the checkbox speaks each caption in the page language, cancels on a new beat, and auto-play waits for the end`, async ({ page }) => {
+    test.setTimeout(60_000);
+    await page.addInitScript(FAKE_SPEECH(FAKE_VOICES));
+    await page.setViewportSize({ width: 1920, height: 1080 });
+    await openScene(page, `/${locale}/topics/sample-time/?ch=first-look`);
+    const api = () => page.evaluate(() => window.__atlas!.state());
+    const spoken = () => page.evaluate(() => (window as unknown as { __spoken: { text: string; lang: string; voice: string; rate: number; pitch: number }[] }).__spoken.filter((u) => u.text.trim() !== ''));
+
+    await page.keyboard.press('p');
+    await expect.poll(async () => (await api()).modes.presentation).toBe(true);
+    const box = page.locator('.ts-present__voice input');
+    await expect(box).toBeEnabled();
+    await expect(box).not.toBeChecked();
+    expect((await api()).presentation?.voice).toBe(false);
+    await box.click();
+    await expect(box).toBeChecked();
+    await expect.poll(async () => (await api()).presentation?.voice).toBe(true);
+    expect(await page.evaluate(() => sessionStorage.getItem('atlas:voice'))).toBe('1');
+
+    // Spoken once the caption has faded in: the caption text, the picked voice's language, rate 0.95.
+    const caption = (await page.locator('.ts-present__caption').textContent())!.trim();
+    await expect.poll(async () => (await spoken()).length, { timeout: 8000 }).toBe(1);
+    expect((await spoken())[0]).toMatchObject({ text: caption, lang, voice, rate: 0.95, pitch: 1 });
+
+    // A new beat cancels and speaks the next caption.
+    const cancels = await page.evaluate(() => (window as unknown as { __cancels: number }).__cancels);
+    await page.keyboard.press('ArrowRight');
+    await expect.poll(async () => (await api()).presentation?.chapter).toBe('second-look');
+    expect(await page.evaluate(() => (window as unknown as { __cancels: number }).__cancels)).toBeGreaterThan(cancels);
+    const caption2 = (await page.locator('.ts-present__caption').textContent())!.trim();
+    await expect.poll(async () => (await spoken()).length, { timeout: 8000 }).toBe(2);
+    expect((await spoken())[1]!.text).toBe(caption2);
+
+    // Auto-play with Voice: the next beat comes right after the utterance ends (2.3 s settle + 0.15 s + 0.6 s), not after the 6 s dwell.
+    expect(await page.evaluate(() => window.__atlas!.setAutoplay(true))).toBe(true);
+    await page.waitForTimeout(100);
+    await page.keyboard.press('ArrowLeft');
+    await expect.poll(async () => (await api()).presentation?.chapter).toBe('first-look');
+    const started = Date.now();
+    await expect.poll(async () => (await api()).presentation?.chapter, { timeout: 5600 }).toBe('second-look');
+    expect(Date.now() - started).toBeLessThan(5600);
+
+    // Switching Voice off stops it; leaving the presentation cancels.
+    expect(await page.evaluate(() => window.__atlas!.setVoice(false))).toBe(true);
+    await expect.poll(async () => (await api()).presentation?.voice).toBe(false);
+    await page.keyboard.press('Escape');
+    await expect.poll(async () => (await api()).modes.presentation).toBe(false);
+  });
+}
+
+test('PRESENTATION voice: without a matching voice (or speechSynthesis) the checkbox is disabled with a hint', async ({ page }) => {
+  await page.addInitScript(FAKE_SPEECH([{ name: 'Meijia', lang: 'zh-TW', localService: true }]));
+  await page.setViewportSize({ width: 1920, height: 1080 });
+  await openScene(page, '/en/topics/sample-time/?ch=first-look');
+  await page.keyboard.press('p');
+  await expect.poll(async () => (await page.evaluate(() => window.__atlas!.state())).modes.presentation).toBe(true);
+  const label = page.locator('.ts-present__voice');
+  await expect(label.locator('input')).toBeDisabled();
+  await expect(label).toHaveAttribute('title', /No voice available/);
+  expect(await page.evaluate(() => window.__atlas!.setVoice(true))).toBe(false);
+  expect((await page.evaluate(() => window.__atlas!.state())).presentation?.voice).toBe(false);
 });

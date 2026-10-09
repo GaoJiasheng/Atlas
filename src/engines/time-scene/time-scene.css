@@ -213,6 +213,11 @@
   min-width: 0;
   pointer-events: auto;
 }
+.ts-present__opts {
+  display: flex;
+  flex: none;
+  gap: calc(16 * var(--u));
+}
 .ts-present__auto {
   display: inline-flex;
   flex: none;
@@ -232,6 +237,13 @@
   margin: 0;
   accent-color: var(--signal);
   cursor: pointer;
+}
+.ts-present__voice[data-disabled] {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+.ts-present__voice[data-disabled] input {
+  cursor: not-allowed;
 }
 .ts-present__auto[data-held] span {
   color: var(--ink-3);
@@ -937,13 +949,46 @@ button.ts-co:focus-visible {
   stroke-width: 0.8;
 }
 .ts-rule__head {
+  /* Visual playhead: a 12 px dot on a hairline stem, under the chapter nodes. The 44 px hit area is .ts-rule__grab. */
   position: absolute;
   top: 12px;
-  height: 26px;
+  height: 30px;
   width: 0;
-  border-left: 1.5px solid var(--signal);
-  transform: translateX(-0.75px);
+  border-left: 1px solid var(--signal);
+  transform: translateX(-0.5px);
   pointer-events: none;
+}
+.ts-rule__head::after {
+  content: "";
+  position: absolute;
+  left: -6.5px; /* 12 px dot centred on the stem, on the rule line */
+  top: 9px;
+  width: 12px;
+  height: 12px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 1.5px solid var(--signal);
+  background: var(--signal);
+  box-shadow: 0 0 0 2px var(--panel-solid);
+}
+.ts-rule__rail[data-running] .ts-rule__head::after {
+  background: var(--panel-solid);
+}
+.ts-rule__grab {
+  position: absolute;
+  z-index: 2; /* above the chapter nodes: the playhead rests on its chapter's node and must stay grabbable */
+  top: 5px; /* 44 px box centred on the rule line */
+  width: 44px;
+  height: 44px;
+  margin-left: -22px;
+  border-radius: 50%;
+  cursor: ew-resize;
+  touch-action: none;
+  outline: none;
+}
+.ts-rule__grab:focus-visible {
+  outline: 1px solid var(--signal);
+  outline-offset: -14px; /* a ring around the dot */
 }
 .ts-rule__date {
   position: absolute;
@@ -955,10 +1000,6 @@ button.ts-co:focus-visible {
   white-space: nowrap;
   pointer-events: none;
   text-shadow: 0 0 3px var(--panel-solid);
-}
-.ts-rule__rail:focus-visible .ts-rule__date {
-  outline: 1px solid var(--signal);
-  outline-offset: 2px;
 }
 .ts-rule__nodes {
   position: absolute;

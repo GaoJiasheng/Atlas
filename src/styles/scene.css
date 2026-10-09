@@ -934,6 +934,20 @@
     outline: 1px solid var(--signal);
     outline-offset: -2px;
   }
+  /* A chapter changed while the reader is folded: two signal pulses on the handle / strip (SceneHost sets data-flash for 900 ms). */
+  .atlas-reader[data-flash] .atlas-reader__handle,
+  .atlas-reader[data-flash] .atlas-reader__strip {
+    outline: 2px solid transparent;
+    outline-offset: -2px;
+    animation: atlas-reader-flash 450ms ease-in-out 2;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .atlas-reader[data-flash] .atlas-reader__handle,
+    .atlas-reader[data-flash] .atlas-reader__strip {
+      outline-color: var(--signal);
+      animation: none;
+    }
+  }
   .atlas-scene[data-reader="collapsed"] .atlas-reader__handle,
   .atlas-scene[data-reader="collapsed"] .atlas-panel {
     display: none;
@@ -966,6 +980,16 @@
     text-transform: uppercase;
     white-space: nowrap;
     writing-mode: vertical-rl;
+  }
+}
+
+@keyframes atlas-reader-flash {
+  0%,
+  100% {
+    outline-color: transparent;
+  }
+  50% {
+    outline-color: var(--signal);
   }
 }
 

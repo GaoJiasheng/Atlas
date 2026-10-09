@@ -22,13 +22,17 @@ export type AtlasState = SceneSnapshot & {
   labels: boolean;
   /** Reading panel expanded (docked column; the phone sheet ignores it). */
   reader: boolean;
+  /** A chapter auto-run is animating the engine's time (TimeScene); always false elsewhere. */
+  running: boolean;
+  /** The continuous time on show (TimeScene: the playhead as a number); `null` when the engine has none. */
+  playhead: number | null;
   /** Active camera preset, `null` = free camera. */
   preset: string | null;
   modes: Record<string, boolean>;
   /** Theme actually applied (`<html data-theme>`). */
   appliedTheme: string | undefined;
   /** The presentation beat on show (`beat` = 0-based position inside the chapter); `null` outside the presentation. */
-  presentation: { chapter: string; beat: number; autoplay?: boolean } | null;
+  presentation: { chapter: string; beat: number; autoplay?: boolean; voice?: boolean } | null;
 };
 
 export interface AtlasTestApi {
@@ -36,6 +40,8 @@ export interface AtlasTestApi {
   ready: Promise<boolean>;
   chapters(): string[];
   goToChapter(id: string, options?: { instant?: boolean }): void;
+  /** Pick a chapter as the rail does (camera flight, and in TimeScene the time auto-run); a second call re-runs it. */
+  runChapter(id: string): void;
   presets(): string[];
   setPreset(id: string, options?: { instant?: boolean }): void;
   modes(): string[];
@@ -49,6 +55,8 @@ export interface AtlasTestApi {
   setPaused(on: boolean): boolean;
   /** Presentation auto-play on / off; returns false when the engine has no auto-play. */
   setAutoplay(on: boolean): boolean;
+  /** Presentation voice (caption narration) on / off; false when the engine has none or the device has no voice. */
+  setVoice(on: boolean): boolean;
   setHud(on: boolean): void;
   setTheme(theme: Theme): void;
   state(): AtlasState;
@@ -110,6 +118,7 @@ export function installTestApi(deps: TestApiDeps): () => void {
     ready,
     chapters: () => [...deps.chapterIds],
     goToChapter: (id, options) => store.getState().goToChapter(id, { instant: options?.instant ?? false }),
+    runChapter: (id) => store.getState().goToChapter(id, { instant: false }),
     presets: () => (hud.getState().controls.presets?.items ?? []).map((p) => p.id),
     setPreset: (id, options) => {
       actions.setPreset(id, { instant: options?.instant ?? false });
@@ -133,6 +142,7 @@ export function installTestApi(deps: TestApiDeps): () => void {
       set(on);
       return true;
     },
+    setVoice: (on) => hud.getState().controls.beats?.setVoice?.(on) ?? false,
     setHud: (on) => actions.setHud(on),
     setTheme: (theme) => deps.setTheme(theme),
     state: () => {
@@ -144,6 +154,8 @@ export function installTestApi(deps: TestApiDeps): () => void {
         paused: h.controls.pause ? h.controls.pause.paused : null,
         labels: h.labels,
         reader: h.reader,
+        running: h.controls.time?.running() ?? false,
+        playhead: h.controls.time?.now() ?? null,
         preset: activePreset(h, snapshot.chapter),
         modes: Object.fromEntries(allModes(h.controls, h.labels, '').map((m) => [m.id, m.on])),
         appliedTheme: document.documentElement.dataset.theme,
