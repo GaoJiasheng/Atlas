@@ -1,0 +1,11 @@
+# The First World War (docs/11-ww1-content-spec.md). Draft: spec awaiting sign-off; K1 and K9 control keyframes only; chapters 00–09 are frontmatter stubs.
+id: ww1
+title: { en: "The First World War", zh: "第一次世界大战" }
+subtitle: { en: "1914–1919", zh: "1914–1919" }
+subject: history
+mode: time
+engine: time-scene
+stage: geo
+theme: paper
+sensitivity: open
+status: draft

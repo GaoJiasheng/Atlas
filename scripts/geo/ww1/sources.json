@@ -1,0 +1,1191 @@
+{
+  "datasets": {
+    "cshapes": {
+      "ref": "G1",
+      "title": "CShapes 2.0 (GW version), borders of independent states and dependent territories 1886-2019",
+      "url": "https://icr.ethz.ch/data/cshapes/CShapes-2.0.geojson",
+      "file": "cshapes-2.0.geojson",
+      "page": "https://icr.ethz.ch/data/cshapes/",
+      "author": "Schvitz, Rüegger, Girardin, Cederman, Weidmann, Gleditsch (ETH Zürich ICR), 2022",
+      "license": "CC BY-NC-SA 4.0",
+      "role": "sovereign and colonial base borders on each keyframe date"
+    },
+    "alliances-1914": {
+      "ref": "G3",
+      "title": "Map Europe alliances 1914 (English SVG)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/26/Map_Europe_alliances_1914-en.svg",
+      "file": "Map_Europe_alliances_1914-en.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:Map_Europe_alliances_1914-en.svg",
+      "author": "historicair (French original), Fluteflute and Bibi Saint-Pol (English translation)",
+      "license": "CC BY-SA 2.5",
+      "role": "K1 cross-check image: the Triple Entente, the Triple Alliance and the neutrals in Europe, 1914 (not traced)"
+    },
+    "german-colonies-1914": {
+      "ref": "G4",
+      "title": "German colonial empire (SVG)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/9e/German_colonial_empire.svg",
+      "file": "German_colonial_empire.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:German_colonial_empire.svg",
+      "author": "Ketsdekaeru",
+      "license": "CC0 1.0",
+      "role": "K1 cross-check image: German colonies and Kiautschou in 1914 (not traced)"
+    },
+    "europe-1923": {
+      "ref": "G5",
+      "title": "Map Europe 1923 (English SVG)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/41/Map_Europe_1923-en.svg",
+      "file": "Map_Europe_1923-en.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:Map_Europe_1923-en.svg",
+      "author": "Historicair (French original), Fluteflute (English derivative)",
+      "license": "CC BY-SA 2.5",
+      "role": "K9 cross-check image: the post-war states and territorial changes after the 1919-1920 treaties (dated 1923, not traced)"
+    }
+  },
+  "ohm": {
+    "k1": {
+      "date": "1914-07-28",
+      "relations": {
+        "2889899": "Kiautschou Bay Leased Territory",
+        "2889769": "German New Guinea",
+        "2961788": "German Samoa",
+        "2848364": "Protectorate of Kuwait",
+        "2848318": "Protectorate of Bahrain",
+        "2848211": "British Weihaiwei",
+        "2694575": "British Hong Kong",
+        "2889933": "Kwangchowan",
+        "2694462": "Portuguese Macau",
+        "2848135": "British Occupation of Cyprus",
+        "2846175": "New Hebrides / Nouvelles-Hébrides",
+        "2831184": "Gilbert and Ellice Islands Protectorate",
+        "2846200": "Protectorate of Tonga",
+        "2846264": "Cook Islands"
+      }
+    },
+    "k9": {
+      "date": "1919-06-28",
+      "relations": {
+        "2698116": "Armenia",
+        "2698117": "Azerbaijan",
+        "2698086": "Georgia",
+        "2889768": "Empire of Japan",
+        "2889899": "Kiautschou Bay Leased Territory",
+        "2961774": "Australian occupation of German New Guinea",
+        "2846178": "Australian occupation of Nauru",
+        "2846171": "British occupation of German Samoa",
+        "2863621": "Belgian occupation of Ruanda-Urundi",
+        "2694159": "British Togoland",
+        "2848364": "Protectorate of Kuwait",
+        "2848318": "Protectorate of Bahrain",
+        "2848319": "Protectorate of Qatar",
+        "2848211": "British Weihaiwei",
+        "2694575": "British Hong Kong",
+        "2889933": "Kwangchowan",
+        "2694462": "Portuguese Macau",
+        "2848214": "Ukrainian SSR"
+      }
+    }
+  },
+  "svg": {},
+  "raster": {},
+  "keyframes": [
+    {
+      "id": "K1",
+      "t": "1914-07-28",
+      "ohm": "k1",
+      "method": "Dataset query: CShapes 2.0 sovereign and colonial borders valid on 1914-07-28 (GW code -> holder), with OpenHistoricalMap relations painted over for what CShapes lacks: the German Pacific colonies and Micronesia, Kiautschou and the other leased ports in China, Cyprus, Kuwait, Bahrain and the British and New Zealand Pacific protectorates. No georeferencing.",
+      "base": {
+        "2": "usa",
+        "3": "usa",
+        "4": "usa",
+        "6": "usa",
+        "20": "canada",
+        "21": {
+          "holder": "uk",
+          "label": {
+            "en": "Newfoundland (British dominion)",
+            "zh": "纽芬兰（英国自治领）"
+          }
+        },
+        "31": "uk",
+        "51": "uk",
+        "52": "uk",
+        "53": "uk",
+        "80": "uk",
+        "110": "uk",
+        "65": "france",
+        "66": "france",
+        "120": "france",
+        "115": "netherlands",
+        "140": "brazil",
+        "200": "uk",
+        "210": "netherlands",
+        "211": "belgium",
+        "212": "luxembourg",
+        "220": "france",
+        "225": "switzerland",
+        "230": "spain",
+        "235": "portugal",
+        "338": "uk",
+        "339": "albania",
+        "350": "greece",
+        "355": "bulgaria",
+        "380": "sweden",
+        "385": "norway",
+        "390": "denmark",
+        "402": "portugal",
+        "404": "portugal",
+        "411": "spain",
+        "420": "uk",
+        "432": "france",
+        "433": "france",
+        "434": "france",
+        "435": "france",
+        "436": "france",
+        "437": "france",
+        "438": "france",
+        "451": "uk",
+        "452": "uk",
+        "475": "uk",
+        "481": "france",
+        "482": "france",
+        "483": "france",
+        "484": "france",
+        "490": "belgium",
+        "500": "uk",
+        "501": "uk",
+        "511": "uk",
+        "521": "uk",
+        "522": "france",
+        "531": "italy",
+        "540": "portugal",
+        "541": "portugal",
+        "551": "uk",
+        "552": "uk",
+        "553": "uk",
+        "560": "south-africa",
+        "570": "uk",
+        "571": "uk",
+        "572": "uk",
+        "580": "france",
+        "585": "france",
+        "590": "uk",
+        "600": "france",
+        "602": "spain",
+        "610": "spain",
+        "615": "france",
+        "616": "france",
+        "620": "italy",
+        "625": {
+          "holder": "uk",
+          "label": {
+            "en": "Anglo-Egyptian Sudan",
+            "zh": "英埃苏丹"
+          }
+        },
+        "630": "persia",
+        "640": "ottoman",
+        "696": "uk",
+        "710": "china",
+        "713": "japan",
+        "730": "japan",
+        "740": "japan",
+        "7351": "japan",
+        "750": "india",
+        "780": "uk",
+        "781": "uk",
+        "800": "siam",
+        "811": "france",
+        "812": "france",
+        "815": "france",
+        "821": "uk",
+        "822": "uk",
+        "823": "uk",
+        "824": "uk",
+        "835": "uk",
+        "827": {
+          "holder": "uk",
+          "label": {
+            "en": "Straits Settlements (incl. Singapore)",
+            "zh": "海峡殖民地（含新加坡）"
+          }
+        },
+        "840": "usa",
+        "850": "netherlands",
+        "860": "portugal",
+        "900": "australia",
+        "911": "australia",
+        "920": "new-zealand",
+        "930": "france",
+        "940": "uk",
+        "950": "uk",
+        "960": "france",
+        "5200": "italy",
+        "7020": {
+          "holder": "russia",
+          "label": {
+            "en": "Emirate of Bukhara (Russian protectorate)",
+            "zh": "布哈拉酋长国（俄国保护国）"
+          }
+        },
+        "7030": {
+          "holder": "russia",
+          "label": {
+            "en": "Khanate of Khiva (Russian protectorate)",
+            "zh": "希瓦汗国（俄国保护国）"
+          }
+        },
+        "255": "germany",
+        "300": "austria-hungary",
+        "325": "italy",
+        "340": "serbia",
+        "341": "montenegro",
+        "360": "romania",
+        "365": "russia",
+        "395": {
+          "holder": "denmark",
+          "label": {
+            "en": "Iceland (Danish dependency)",
+            "zh": "冰岛（丹麦属地）"
+          }
+        },
+        "460": "germany",
+        "470": "germany",
+        "510": "germany",
+        "565": "germany",
+        "912": "germany",
+        "651": {
+          "holder": "uk",
+          "label": {
+            "en": "Egypt (British-occupied, under Ottoman suzerainty)",
+            "zh": "埃及（英国占领，奥斯曼名义宗主）"
+          }
+        }
+      },
+      "steps": [
+        {
+          "note": "German New Guinea incl. the Bismarck Archipelago, northern Solomons, Carolines, Marianas, Palau, Marshalls and Nauru (OHM r2889769)",
+          "holder": "germany",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2889769
+          },
+          "label": {
+            "en": "German New Guinea and Micronesia",
+            "zh": "德属新几内亚与密克罗尼西亚"
+          }
+        },
+        {
+          "note": "German Samoa (OHM r2961788)",
+          "holder": "germany",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2961788
+          },
+          "label": {
+            "en": "German Samoa",
+            "zh": "德属萨摩亚"
+          }
+        },
+        {
+          "note": "Kiautschou Bay leased territory, Tsingtao (OHM r2889899)",
+          "holder": "germany",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2889899
+          },
+          "label": {
+            "en": "Kiautschou (German-leased, Tsingtao)",
+            "zh": "胶州湾（德国租借地，青岛）"
+          }
+        },
+        {
+          "note": "Weihaiwei (OHM r2848211)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2848211
+          },
+          "label": {
+            "en": "Weihaiwei (British-leased)",
+            "zh": "威海卫（英国租借地）"
+          }
+        },
+        {
+          "note": "Hong Kong (OHM r2694575)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2694575
+          }
+        },
+        {
+          "note": "Kwangchowan (OHM r2889933)",
+          "holder": "france",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2889933
+          },
+          "label": {
+            "en": "Kwangchowan (French-leased)",
+            "zh": "广州湾（法国租借地）"
+          }
+        },
+        {
+          "note": "Macau (OHM r2694462)",
+          "holder": "portugal",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2694462
+          }
+        },
+        {
+          "note": "Cyprus (OHM r2848135)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2848135
+          },
+          "label": {
+            "en": "Cyprus (British-administered, Ottoman sovereignty)",
+            "zh": "塞浦路斯（英国管理，奥斯曼主权）"
+          }
+        },
+        {
+          "note": "Kuwait (OHM r2848364)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2848364
+          },
+          "label": {
+            "en": "Kuwait (British-protected sheikhdom)",
+            "zh": "科威特（英国保护的酋长国）"
+          }
+        },
+        {
+          "note": "Bahrain (OHM r2848318)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2848318
+          },
+          "label": {
+            "en": "Bahrain (British protectorate)",
+            "zh": "巴林（英国保护国）"
+          }
+        },
+        {
+          "note": "New Hebrides (OHM r2846175)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846175
+          },
+          "label": {
+            "en": "New Hebrides (Anglo-French condominium)",
+            "zh": "新赫布里底（英法共管）"
+          }
+        },
+        {
+          "note": "Gilbert and Ellice Islands (OHM r2831184)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2831184
+          }
+        },
+        {
+          "note": "Tonga (OHM r2846200)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846200
+          },
+          "label": {
+            "en": "Tonga (British protectorate)",
+            "zh": "汤加（英国保护国）"
+          }
+        },
+        {
+          "note": "Cook Islands (OHM r2846264)",
+          "holder": "new-zealand",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846264
+          }
+        }
+      ],
+      "checks": [
+        {
+          "name": "europe",
+          "center": [
+            17,
+            47
+          ],
+          "zoom": 2.9,
+          "source": "alliances-1914"
+        },
+        {
+          "name": "balkans",
+          "center": [
+            22,
+            43
+          ],
+          "zoom": 4.3,
+          "source": "alliances-1914"
+        },
+        {
+          "name": "world",
+          "center": [
+            40,
+            15
+          ],
+          "zoom": 0.9,
+          "source": "german-colonies-1914"
+        },
+        {
+          "name": "east-asia-pacific",
+          "center": [
+            140,
+            10
+          ],
+          "zoom": 2.2
+        }
+      ]
+    },
+    {
+      "id": "K9",
+      "t": "1919-06-28",
+      "ohm": "k9",
+      "method": "Settlement map on the day the Treaty of Versailles was signed. Base: CShapes 2.0 borders valid on 1919-06-28 (Germany, Poland, Danzig, Czechoslovakia, the Baltic states and Finland as on that day). Central Europe on the lines the peace conference drew: Austria and Italy on the Saint-Germain line (CShapes 1919-09-10), Hungary and the Kingdom of Serbs, Croats and Slovenes on the Trianon line (CShapes 1920-06-05), Galicia to Poland (Allied authorisation of 25 June 1919), Greater Romania with Bessarabia (CShapes 1920-10-28); Ukraine and the three Transcaucasian republics, Japan with Micronesia and Kiautschou, and the occupied German colonies from OpenHistoricalMap. The Ottoman Empire stays one de jure unit (occupation zones not drawn: no fill-coded source found). Russia is one unit labelled as in civil war (no sourced front map for this date).",
+      "base": {
+        "2": "usa",
+        "3": "usa",
+        "4": "usa",
+        "6": "usa",
+        "20": "canada",
+        "21": {
+          "holder": "uk",
+          "label": {
+            "en": "Newfoundland (British dominion)",
+            "zh": "纽芬兰（英国自治领）"
+          }
+        },
+        "31": "uk",
+        "51": "uk",
+        "52": "uk",
+        "53": "uk",
+        "80": "uk",
+        "110": "uk",
+        "65": "france",
+        "66": "france",
+        "120": "france",
+        "115": "netherlands",
+        "140": "brazil",
+        "200": "uk",
+        "210": "netherlands",
+        "211": "belgium",
+        "212": "luxembourg",
+        "220": "france",
+        "225": "switzerland",
+        "230": "spain",
+        "235": "portugal",
+        "338": "uk",
+        "339": "albania",
+        "350": "greece",
+        "355": "bulgaria",
+        "380": "sweden",
+        "385": "norway",
+        "390": "denmark",
+        "402": "portugal",
+        "404": "portugal",
+        "411": "spain",
+        "420": "uk",
+        "432": "france",
+        "433": "france",
+        "434": "france",
+        "435": "france",
+        "436": "france",
+        "437": "france",
+        "438": "france",
+        "451": "uk",
+        "452": "uk",
+        "475": "uk",
+        "481": "france",
+        "482": "france",
+        "483": "france",
+        "484": "france",
+        "490": "belgium",
+        "500": "uk",
+        "501": "uk",
+        "511": "uk",
+        "521": "uk",
+        "522": "france",
+        "531": "italy",
+        "540": "portugal",
+        "541": "portugal",
+        "551": "uk",
+        "552": "uk",
+        "553": "uk",
+        "560": "south-africa",
+        "570": "uk",
+        "571": "uk",
+        "572": "uk",
+        "580": "france",
+        "585": "france",
+        "590": "uk",
+        "600": "france",
+        "602": "spain",
+        "610": "spain",
+        "615": "france",
+        "616": "france",
+        "620": "italy",
+        "625": {
+          "holder": "uk",
+          "label": {
+            "en": "Anglo-Egyptian Sudan",
+            "zh": "英埃苏丹"
+          }
+        },
+        "630": "persia",
+        "640": {
+          "holder": "ottoman",
+          "label": {
+            "en": "Ottoman Empire (under the Mudros armistice; Arab provinces and Constantinople under Allied occupation)",
+            "zh": "奥斯曼帝国（穆兹罗斯停战协定下，阿拉伯诸省与君士坦丁堡由协约国军占领）"
+          }
+        },
+        "696": "uk",
+        "710": "china",
+        "713": "japan",
+        "730": "japan",
+        "740": "japan",
+        "7351": "japan",
+        "750": "india",
+        "780": "uk",
+        "781": "uk",
+        "800": "siam",
+        "811": "france",
+        "812": "france",
+        "815": "france",
+        "821": "uk",
+        "822": "uk",
+        "823": "uk",
+        "824": "uk",
+        "835": "uk",
+        "827": {
+          "holder": "uk",
+          "label": {
+            "en": "Straits Settlements (incl. Singapore)",
+            "zh": "海峡殖民地（含新加坡）"
+          }
+        },
+        "840": "usa",
+        "850": "netherlands",
+        "860": "portugal",
+        "900": "australia",
+        "911": "australia",
+        "920": "new-zealand",
+        "930": "france",
+        "940": "uk",
+        "950": "uk",
+        "960": "france",
+        "5200": "italy",
+        "7020": {
+          "holder": "russia",
+          "label": {
+            "en": "Emirate of Bukhara (Russian protectorate)",
+            "zh": "布哈拉酋长国（俄国保护国）"
+          }
+        },
+        "7030": {
+          "holder": "russia",
+          "label": {
+            "en": "Khanate of Khiva (Russian protectorate)",
+            "zh": "希瓦汗国（俄国保护国）"
+          }
+        },
+        "255": {
+          "holder": "germany",
+          "label": {
+            "en": "Germany (Weimar Republic; Versailles borders)",
+            "zh": "德国（魏玛共和国，凡尔赛条约边界）"
+          }
+        },
+        "290": "poland",
+        "291": {
+          "holder": "germany",
+          "label": {
+            "en": "Danzig (to become a Free City under the League of Nations)",
+            "zh": "但泽（将成为国际联盟保护下的自由市）"
+          }
+        },
+        "305": {
+          "holder": "austria-hungary",
+          "label": {
+            "en": "Austria (Republic of German-Austria)",
+            "zh": "奥地利（德意志奥地利共和国）"
+          }
+        },
+        "310": {
+          "holder": "austria-hungary",
+          "label": {
+            "en": "Hungary (Hungarian Soviet Republic)",
+            "zh": "匈牙利（匈牙利苏维埃共和国）"
+          }
+        },
+        "315": "czechoslovakia",
+        "325": "italy",
+        "345": {
+          "holder": "serbia",
+          "label": {
+            "en": "Kingdom of Serbs, Croats and Slovenes",
+            "zh": "塞尔维亚人、克罗地亚人和斯洛文尼亚人王国"
+          }
+        },
+        "352": "uk",
+        "360": {
+          "holder": "romania",
+          "label": {
+            "en": "Romania (unions with Bessarabia, Bukovina and Transylvania declared 1918)",
+            "zh": "罗马尼亚（1918 年宣布与比萨拉比亚、布科维纳、特兰西瓦尼亚合并）"
+          }
+        },
+        "365": {
+          "holder": "russia",
+          "label": {
+            "en": "Russia (civil war: Soviet, White and national governments)",
+            "zh": "俄国（内战：苏维埃政权、白军与各民族政府）"
+          }
+        },
+        "366": "estonia",
+        "367": "latvia",
+        "368": "lithuania",
+        "375": "finland",
+        "439": "france",
+        "460": {
+          "holder": "uk",
+          "label": {
+            "en": "Togoland (British-occupied; League mandate from 1922)",
+            "zh": "多哥（英国占领，1922 年起为国联委任统治地）"
+          }
+        },
+        "471": {
+          "holder": "france",
+          "label": {
+            "en": "Cameroon (French-occupied; League mandate from 1922)",
+            "zh": "喀麦隆（法国占领，1922 年起为国联委任统治地）"
+          }
+        },
+        "472": {
+          "holder": "uk",
+          "label": {
+            "en": "Cameroons (British-occupied; League mandate from 1922)",
+            "zh": "喀麦隆（英国占领，1922 年起为国联委任统治地）"
+          }
+        },
+        "510": {
+          "holder": "uk",
+          "label": {
+            "en": "Tanganyika (British-occupied German East Africa)",
+            "zh": "坦噶尼喀（英国占领的德属东非）"
+          }
+        },
+        "565": {
+          "holder": "south-africa",
+          "label": {
+            "en": "South West Africa (occupied by South Africa since 1915)",
+            "zh": "西南非洲（1915 年起由南非占领）"
+          }
+        },
+        "912": {
+          "holder": "australia",
+          "label": {
+            "en": "New Guinea (Australian-occupied since 1914)",
+            "zh": "新几内亚（1914 年起由澳大利亚占领）"
+          }
+        },
+        "651": {
+          "holder": "uk",
+          "label": {
+            "en": "Egypt (British protectorate since December 1914)",
+            "zh": "埃及（1914 年 12 月起为英国保护国）"
+          }
+        },
+        "694": "uk"
+      },
+      "steps": [
+        {
+          "note": "Republic of German-Austria on the Saint-Germain line (CShapes on 1919-09-10)",
+          "holder": "austria-hungary",
+          "label": {
+            "en": "Austria (Republic of German-Austria)",
+            "zh": "奥地利（德意志奥地利共和国）"
+          },
+          "src": [
+            "G1"
+          ],
+          "from": {
+            "cshapes": [
+              305
+            ],
+            "at": "1919-09-10"
+          }
+        },
+        {
+          "note": "Italy incl. South Tyrol, Trieste and Istria (occupied since November 1918; Saint-Germain line, CShapes on 1919-09-10)",
+          "holder": "italy",
+          "label": {
+            "en": "Italy (incl. South Tyrol, Trieste and Istria, occupied since November 1918)",
+            "zh": "意大利（含 1918 年 11 月起占领的南蒂罗尔、的里雅斯特与伊斯特拉）"
+          },
+          "src": [
+            "G1"
+          ],
+          "from": {
+            "cshapes": [
+              325
+            ],
+            "at": "1919-09-10"
+          }
+        },
+        {
+          "note": "Kingdom of Serbs, Croats and Slovenes (proclaimed 1 December 1918) on the Trianon lines (CShapes on 1920-06-05)",
+          "holder": "serbia",
+          "label": {
+            "en": "Kingdom of Serbs, Croats and Slovenes",
+            "zh": "塞尔维亚人、克罗地亚人和斯洛文尼亚人王国"
+          },
+          "src": [
+            "G1"
+          ],
+          "from": {
+            "cshapes": [
+              345
+            ],
+            "at": "1920-06-05"
+          }
+        },
+        {
+          "note": "Hungary on the Trianon line (CShapes on 1920-06-05)",
+          "holder": "austria-hungary",
+          "label": {
+            "en": "Hungary (Hungarian Soviet Republic)",
+            "zh": "匈牙利（匈牙利苏维埃共和国）"
+          },
+          "src": [
+            "G1"
+          ],
+          "from": {
+            "cshapes": [
+              310
+            ],
+            "at": "1920-06-05"
+          }
+        },
+        {
+          "note": "Galicia: Polish administration authorised by the Allied Supreme Council on 25 June 1919 (Poland on CShapes 1919-09-10, inside the 1919-06-28 Austria)",
+          "holder": "poland",
+          "label": {
+            "en": "Galicia (Polish administration authorised 25 June 1919)",
+            "zh": "加利西亚（1919 年 6 月 25 日获准由波兰管理）"
+          },
+          "src": [
+            "G1"
+          ],
+          "from": {
+            "cshapes": [
+              290
+            ],
+            "at": "1919-09-10"
+          },
+          "clip": {
+            "cshapes": [
+              305
+            ]
+          }
+        },
+        {
+          "note": "Ukraine, fought over in the civil war (OHM r2848214, Ukrainian SSR claim of 1919)",
+          "holder": "russia",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2848214
+          },
+          "label": {
+            "en": "Ukraine (contested: Soviet, Ukrainian People's Republic, White and Polish forces)",
+            "zh": "乌克兰（争夺中：苏维埃、乌克兰人民共和国、白军与波兰军队）"
+          }
+        },
+        {
+          "note": "Greater Romania: unions with Bessarabia (April 1918), Bukovina and Transylvania (November-December 1918), on the lines later confirmed (CShapes on 1920-10-28)",
+          "holder": "romania",
+          "label": {
+            "en": "Romania (unions with Bessarabia, Bukovina and Transylvania declared 1918)",
+            "zh": "罗马尼亚（1918 年宣布与比萨拉比亚、布科维纳、特兰西瓦尼亚合并）"
+          },
+          "src": [
+            "G1"
+          ],
+          "from": {
+            "cshapes": [
+              360
+            ],
+            "at": "1920-10-28"
+          }
+        },
+        {
+          "note": "Democratic Republic of Georgia (OHM r2698086)",
+          "holder": "georgia",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2698086
+          }
+        },
+        {
+          "note": "Republic of Armenia (OHM r2698116)",
+          "holder": "armenia",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2698116
+          }
+        },
+        {
+          "note": "Azerbaijan Democratic Republic (OHM r2698117)",
+          "holder": "azerbaijan",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2698117
+          }
+        },
+        {
+          "note": "Empire of Japan incl. Micronesia occupied since October 1914 (OHM r2889768)",
+          "holder": "japan",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2889768
+          }
+        },
+        {
+          "note": "Kiautschou: Japanese-occupied since November 1914; German rights in Shandong transferred to Japan, Versailles arts. 156-158 (OHM r2889899)",
+          "holder": "japan",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2889899
+          },
+          "label": {
+            "en": "Kiautschou (Japanese-occupied; German rights transferred to Japan at Versailles)",
+            "zh": "胶州湾（日本占领，凡尔赛和约将德国权益转给日本）"
+          }
+        },
+        {
+          "note": "German New Guinea under Australian occupation (OHM r2961774)",
+          "holder": "australia",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2961774
+          },
+          "label": {
+            "en": "New Guinea (Australian-occupied since 1914)",
+            "zh": "新几内亚（1914 年起由澳大利亚占领）"
+          }
+        },
+        {
+          "note": "Nauru under Australian occupation (OHM r2846178)",
+          "holder": "australia",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846178
+          },
+          "label": {
+            "en": "Nauru (Australian-occupied since 1914)",
+            "zh": "瑙鲁（1914 年起由澳大利亚占领）"
+          }
+        },
+        {
+          "note": "German Samoa under New Zealand occupation (OHM r2846171)",
+          "holder": "new-zealand",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846171
+          },
+          "label": {
+            "en": "Samoa (New Zealand-occupied since 1914)",
+            "zh": "萨摩亚（1914 年起由新西兰占领）"
+          }
+        },
+        {
+          "note": "Ruanda-Urundi under Belgian occupation (OHM r2863621)",
+          "holder": "belgium",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2863621
+          },
+          "label": {
+            "en": "Ruanda-Urundi (Belgian-occupied since 1916)",
+            "zh": "卢旺达-乌隆迪（1916 年起由比利时占领）"
+          }
+        },
+        {
+          "note": "British Togoland (OHM r2694159)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2694159
+          },
+          "label": {
+            "en": "Togoland (British-occupied; League mandate from 1922)",
+            "zh": "多哥（英国占领，1922 年起为国联委任统治地）"
+          }
+        },
+        {
+          "note": "Weihaiwei (OHM r2848211)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2848211
+          },
+          "label": {
+            "en": "Weihaiwei (British-leased)",
+            "zh": "威海卫（英国租借地）"
+          }
+        },
+        {
+          "note": "Hong Kong (OHM r2694575)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2694575
+          }
+        },
+        {
+          "note": "Kwangchowan (OHM r2889933)",
+          "holder": "france",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2889933
+          },
+          "label": {
+            "en": "Kwangchowan (French-leased)",
+            "zh": "广州湾（法国租借地）"
+          }
+        },
+        {
+          "note": "Macau (OHM r2694462)",
+          "holder": "portugal",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2694462
+          }
+        },
+        {
+          "note": "Kuwait (OHM r2848364)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2848364
+          },
+          "label": {
+            "en": "Kuwait (British protectorate)",
+            "zh": "科威特（英国保护国）"
+          }
+        },
+        {
+          "note": "Bahrain (OHM r2848318)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2848318
+          },
+          "label": {
+            "en": "Bahrain (British protectorate)",
+            "zh": "巴林（英国保护国）"
+          }
+        },
+        {
+          "note": "Qatar (OHM r2848319)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2848319
+          },
+          "label": {
+            "en": "Qatar (British protectorate since 1916)",
+            "zh": "卡塔尔（1916 年起为英国保护国）"
+          }
+        },
+        {
+          "note": "New Hebrides (OHM r2846175)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846175,
+            "set": "k1"
+          },
+          "label": {
+            "en": "New Hebrides (Anglo-French condominium)",
+            "zh": "新赫布里底（英法共管）"
+          }
+        },
+        {
+          "note": "Tonga (OHM r2846200)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846200,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Tonga (British protectorate)",
+            "zh": "汤加（英国保护国）"
+          }
+        },
+        {
+          "note": "Cook Islands (OHM r2846264)",
+          "holder": "new-zealand",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846264,
+            "set": "k1"
+          }
+        }
+      ],
+      "checks": [
+        {
+          "name": "europe",
+          "center": [
+            17,
+            50
+          ],
+          "zoom": 2.9,
+          "source": "europe-1923"
+        },
+        {
+          "name": "central-europe",
+          "center": [
+            20,
+            48
+          ],
+          "zoom": 4.3,
+          "source": "europe-1923"
+        },
+        {
+          "name": "middle-east",
+          "center": [
+            40,
+            30
+          ],
+          "zoom": 3.4
+        },
+        {
+          "name": "world",
+          "center": [
+            40,
+            15
+          ],
+          "zoom": 0.9
+        },
+        {
+          "name": "east-asia-pacific",
+          "center": [
+            140,
+            10
+          ],
+          "zoom": 2.2
+        }
+      ]
+    }
+  ],
+  "pipeline": {
+    "plannedKeyframes": 9,
+    "budgetMB": 2.5,
+    "focus": [
+      [
+        -12,
+        28,
+        62,
+        72
+      ],
+      [
+        100,
+        -12,
+        180,
+        50
+      ]
+    ],
+    "coast": {
+      "detailBox": null,
+      "detailLand": null
+    }
+  }
+}
