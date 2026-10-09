@@ -29,6 +29,7 @@ import { parseArgs } from 'node:util';
 import type { Feature, FeatureCollection, MultiPolygon, Polygon, Position } from 'geojson';
 import { areaFeatures, emptyFc, log, mapshaper, pointInPolygon, readJson, toFc, warn, writeJson } from './common';
 import type { GeomSpec, Keyframe, Sources } from './manifest';
+import { unwrapRing } from '../../../src/engines/time-scene/lib/geo';
 import { openTopic } from './topic';
 
 const { values, positionals } = parseArgs({ allowPositionals: true, options: { topic: { type: 'string' } } });
@@ -75,6 +76,50 @@ function bboxPolygon([w, s, e, n]: [number, number, number, number]): FeatureCol
   for (let i = 1; i <= steps; i++) ring.push([e - ((e - w) * i) / steps, n]);
   for (let i = 1; i <= steps; i++) ring.push([w, n - ((n - s) * i) / steps]);
   return toFc([{ type: 'Feature', properties: {}, geometry: { type: 'Polygon', coordinates: [ring] } }]);
+}
+
+
+/**
+ * Rings that cross the antimeridian (longitude extent > 180°, e.g. an OHM
+ * Pacific relation or Fiji written as -179.9 … 179.9) would be filled the long
+ * way round the globe. Such a polygon is unwrapped to continuous longitudes
+ * (engine `unwrapRing`) and cut at ±180 into the parts inside each world copy,
+ * shifted back into [-180, 180]. Everything else passes through untouched.
+ */
+async function splitAntimeridian(fc: FeatureCollection): Promise<FeatureCollection> {
+  const wide = (poly: Position[][]) => poly.some((r) => {
+    let lo = Infinity;
+    let hi = -Infinity;
+    for (const p of r) {
+      lo = Math.min(lo, p[0] ?? 0);
+      hi = Math.max(hi, p[0] ?? 0);
+    }
+    return hi - lo > 180;
+  });
+  const out: Feature[] = [];
+  let split = 0;
+  for (const f of areaFeatures(fc)) {
+    const polys = f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.coordinates;
+    const keep = polys.filter((p) => !wide(p));
+    const bad = polys.filter(wide);
+    if (keep.length) out.push({ ...f, geometry: { type: 'MultiPolygon', coordinates: keep } as MultiPolygon });
+    for (const poly of bad) {
+      split++;
+      const unwrapped = poly.map((r) => unwrapRing(r) as Position[]);
+      const one = toFc([{ type: 'Feature', properties: f.properties, geometry: { type: 'Polygon', coordinates: unwrapped } }]);
+      for (const shift of [-360, 0, 360]) {
+        const w = -180 - shift;
+        const piece = await mapshaper(`-i a.json -clip bbox=${w},-90,${w + 360},90`, { a: one });
+        for (const g of areaFeatures(piece)) {
+          const move = (r: Position[]) => r.map((p) => [(p[0] ?? 0) + shift, p[1] ?? 0]);
+          const coords = g.geometry.type === 'Polygon' ? [g.geometry.coordinates.map(move)] : g.geometry.coordinates.map((pp) => pp.map(move));
+          out.push({ type: 'Feature', properties: f.properties, geometry: { type: 'MultiPolygon', coordinates: coords } as MultiPolygon });
+        }
+      }
+    }
+  }
+  if (split) log(`  split ${split} polygon(s) across the antimeridian`);
+  return split ? toFc(out) : fc;
 }
 
 /* ------------------------------------------------------------------ */
@@ -184,7 +229,7 @@ async function resolve(spec: GeomSpec, inp: Inputs, kf: Keyframe): Promise<Featu
     const feats = inp.cshapesAt(date).filter((f) => spec.cshapes.includes(f.properties.gwcode));
     const missing = spec.cshapes.filter((g) => !feats.some((f) => f.properties.gwcode === g));
     if (missing.length) warn(`${kf.id}: CShapes has no polygon for GW ${missing.join(', ')} on ${date}`);
-    if (!spec.partsAt) return toFc(feats);
+    if (!spec.partsAt) return splitAntimeridian(toFc(feats));
     const polys: Position[][][] = [];
     for (const f of feats) polys.push(...(f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.coordinates));
     const keep: Feature[] = [];
@@ -195,7 +240,7 @@ async function resolve(spec: GeomSpec, inp: Inputs, kf: Keyframe): Promise<Featu
     }
     return toFc(keep);
   }
-  if ('ohm' in spec) return inp.ohm(spec.ohm, spec.set);
+  if ('ohm' in spec) return splitAntimeridian(inp.ohm(spec.ohm, spec.set));
   if ('admin1' in spec) return inp.admin1(spec.admin1, spec.names);
   if ('svgFrame' in spec) return toFc(inp.map('svg', spec.svgFrame).features.filter((f) => f.properties?.class === '_frame'));
   if ('rasterFrame' in spec) return toFc(inp.map('raster', spec.rasterFrame).features.filter((f) => f.properties?.class === '_frame'));
@@ -243,7 +288,7 @@ async function compose(sources: Sources, kf: Keyframe): Promise<void> {
     base.push({ type: 'Feature', geometry: f.geometry, properties: props(holder, label, [baseRef], `CShapes GW ${f.properties.gwcode} ${f.properties.cntry_name}`) });
   }
   log(`${kf.id} ${kf.t}: base ${base.length} CShapes polygons (${unmapped.length} states not in this topic left out)`);
-  let acc = await light(toFc(base));
+  let acc = await light(await splitAntimeridian(toFc(base)));
   for (const step of kf.steps) {
     let geom = await resolve(step.from, inp, kf);
     if (step.clip) geom = await clip(geom, await resolve(step.clip, inp, kf));

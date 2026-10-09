@@ -114,6 +114,17 @@ const BUDGET_MB = values.budget ? Number(values.budget) : config.budgetMB;
 /** `dp` (Douglas–Peucker: the interval is a real maximum-deviation tolerance) or `weighted` (Visvalingam: smoother, but drops thin fjords). */
 const METHOD = values.method ?? config.method;
 const QUANTIZATION = values.quant ? Number(values.quant) : config.quantization;
+/**
+ * Post-quantisation clean: vertices closer than SNAP_DEG (at least one grid cell,
+ * and at least SNAP_MIN_DEG ≈ 0.5 km) are merged, and rings under SLIVER_KM2 km²
+ * (collapsed holes, specks) dropped. Narrower necks and near-touching parts of a
+ * ring (a 50 km border chord passing 300 m from a lake shore, ww1 Canada; the
+ * Petsamo spike of Finland) cross once MapLibre's geojson-vt quantises them into
+ * low-zoom tiles, and earcut then fills a stray wedge across the map.
+ */
+const SNAP_MIN_DEG = 0.005;
+const SNAP_DEG = Math.max(360 / QUANTIZATION, SNAP_MIN_DEG);
+const SLIVER_KM2 = 1;
 /** Cut control areas to the basemap land (`pipeline.coast.enabled`; `--no-coast` skips it). */
 const COAST = config.coast.enabled && !values['no-coast'];
 if (values.islands) [FOCUS_ISLAND_KM2 = FOCUS_ISLAND_KM2, COARSE_ISLAND_KM2 = COARSE_ISLAND_KM2] = values.islands.split(',').map(Number);
@@ -315,9 +326,19 @@ async function build(ids: string[], cuts: Cut[], fine: number, coarse: number, c
   // One dataset again for the export, so identical borders across keyframes become shared arcs.
   const files: Record<string, unknown> = {};
   for (const id of ids) files[`${id}.json`] = geojson[id];
-  const out = await m.applyCommands(
+  const first = await m.applyCommands(
     `-i ${ids.map((id) => `${id}.json`).join(' ')} combine-files -o out.json format=topojson quantization=${QUANTIZATION} target=*`,
     files,
+  );
+  const quantised = first['out.json'] ?? Object.values(first)[0];
+  if (quantised === undefined) throw new Error('mapshaper wrote no topology');
+  // Quantisation can collapse a small hole into a zero-area or self-touching ring and
+  // make a simplified ring cross itself; MapLibre's triangulation (earcut) then draws
+  // stray wedges across the map (ww1: a band from the Pacific to Montreal). Clean the
+  // quantised topology once more (SNAP_DEG, SLIVER_KM2 above) and export again on the same grid.
+  const out = await m.applyCommands(
+    `-i topo.json -clean snap-interval=${SNAP_DEG} target=* -filter-slivers min-area=${SLIVER_KM2}km2 target=* -o out.json format=topojson quantization=${QUANTIZATION} target=*`,
+    { 'topo.json': JSON.parse(quantised.toString()) as unknown },
   );
   const raw = out['out.json'] ?? Object.values(out)[0];
   if (raw === undefined) throw new Error('mapshaper wrote no topology');
