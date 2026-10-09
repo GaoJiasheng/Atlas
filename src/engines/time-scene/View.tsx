@@ -52,14 +52,14 @@ const bi = (key: UiKey): BilingualText => ({ en: translate('en', key), zh: trans
 
 /**
  * First paragraph of a chapter's pre-rendered body (panel 02 when the chapter
- * has no question or summary). Skips collapsed `<More>` blocks, the parent-only
- * `<Full>` text and source superscripts.
+ * has no question or summary). Skips collapsed `<More>` blocks and source
+ * superscripts.
  */
 function firstParagraph(chapterId: string): string | null {
   const article = document.querySelector(`[data-chapter-body="${CSS.escape(chapterId)}"]`);
   if (!article) return null;
   for (const p of article.querySelectorAll('p')) {
-    if (p.closest('details, .atlas-full')) continue;
+    if (p.closest('details')) continue;
     const copy = p.cloneNode(true) as HTMLElement;
     for (const sup of copy.querySelectorAll('.atlas-src-refs, [data-source]')) sup.remove();
     const text = (copy.textContent ?? '').replace(/\s+/g, ' ').trim();

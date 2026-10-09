@@ -40,6 +40,7 @@ export const topicSchema = z
     engine: engineId,
     stage: z.string().min(1),
     theme: theme.default('paper'),
+    /** Optional metadata only; nothing is hidden or gated on it. */
     sensitivity: z.enum(['open', 'guarded']).default('open'),
     status: z.enum(['draft', 'ready', 'published']).default('draft'),
     /** Path relative to the topic directory, e.g. `./cover.jpg`. */

@@ -1,6 +1,6 @@
 ---
 /**
- * Topic index. The six fixed categories (SUBJECTS) are the primary entry and
+ * Topic index (published topics only). The six fixed categories (SUBJECTS) are the primary entry and
  * double as the filter. Filters are progressive
  * enhancement (src/scripts/topic-filters.ts) and live in the query string.
  */
@@ -15,11 +15,14 @@ export function getStaticPaths() {
 }
 
 const locale = Astro.params.locale as Locale;
-const topics = await getTopics();
+// Draft and ready topics stay buildable and reachable by URL, but only published ones are listed.
+const topics = (await getTopics()).filter((topic) => topic.data.status === 'published');
 const counts = await getChapterCounts();
 const subjectCount = (s: string) => topics.filter((topic) => topic.data.subject === s).length;
 const countLabel = (n: number) => t(locale, n === 1 ? 'index.count.one' : 'index.count', { n });
 const subjectKey = (s: string) => `subject.${s}` as UiKey;
+const typeKeys = (mode: 'time' | 'space' | 'both'): UiKey[] =>
+  mode === 'both' ? ['type.time', 'type.space'] : [mode === 'time' ? 'type.time' : 'type.space'];
 ---
 <BaseLayout locale={locale} title={t(locale, 'site.name')}>
   <header
@@ -82,11 +85,7 @@ const subjectKey = (s: string) => `subject.${s}` as UiKey;
               >
                 <div class="flex flex-wrap items-center gap-2">
                   <span class="atlas-badge atlas-badge--accent">{t(locale, subjectKey(d.subject))}</span>
-                  <span class="atlas-badge">{t(locale, `mode.${d.mode}` as UiKey)}</span>
-                  {d.status !== 'published' && <span class="atlas-badge">{t(locale, `status.${d.status}` as UiKey)}</span>}
-                  {d.sensitivity === 'guarded' && (
-                    <span class="atlas-badge atlas-badge--warning">{t(locale, 'chapter.guarded')}</span>
-                  )}
+                  {typeKeys(d.mode).map((key) => <span class="atlas-badge">{t(locale, key)}</span>)}
                 </div>
                 <h2 class="m-0 text-2xl">{tx(d.title, locale)}</h2>
                 <p class="m-0 flex-1 text-ink-muted">{tx(d.subtitle, locale)}</p>

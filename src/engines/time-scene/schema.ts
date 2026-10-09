@@ -313,6 +313,7 @@ export const eventSchema = z
     detail: bilingual.optional(),
     /** Source ids from `data/sources.json` (`["S1", "S7"]`). */
     sources: z.array(sourceId).optional(),
+    /** Optional metadata only; nothing is hidden or gated on it. */
     sensitive: z.boolean().default(false),
   })
   .strict()

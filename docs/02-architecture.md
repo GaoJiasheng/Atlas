@@ -93,7 +93,7 @@ mode: time                       # time | space | both
 engine: time-scene
 stage: geo
 theme: cinema                    # 该主题偏好的主题，可被用户全局设置覆盖
-sensitivity: guarded             # open | guarded（有家长模式内容）
+sensitivity: open                # open | guarded，可选元数据，不影响显示
 status: draft                    # draft | ready | published
 cover: ./cover.jpg
 ```
@@ -131,7 +131,7 @@ MDX 正文用 `<Lang en>…</Lang><Lang zh>…</Lang>` 或双栏 frontmatter 字
 - 所有 id 是 kebab-case，全主题内唯一
 - 日期用 ISO 字符串，支持 `1942`、`1942-02`、`1942-02-15` 三种精度；地质时间用 `{ ma: 200 }`（百万年前）
 - 数字的来源：主题可带 `data/sources.json`（`{ sources: [{ id: "S1", text: { en, zh }, url?, note? }] }`，所有引擎共用 `src/content/schema/sources.ts`）；事件的 `sources: ["S1"]` 和正文 `<Num s="S1">约 70,000</Num>` 引用它，`pnpm validate` 检查编号都存在；`scripts/sources-md.ts` 把它渲染进 `data/SOURCES.md`
-- 正文除 `<Lang>`、`<Soft>`、`<Full>` 外还可用 `<More title={{ en, zh }}>`（细看折叠块）、`<Num s>`（带来源角标的数字）、`<FlyTo preset>`（镜头跳到 `presets.json` 的预设，TimeScene），免 import；写法见 docs/06
+- 正文除 `<Lang>` 外还可用 `<More title={{ en, zh }}>`（细看折叠块）、`<Num s>`（带来源角标的数字）、`<FlyTo preset>`（镜头跳到 `presets.json` 的预设，TimeScene），免 import；写法见 docs/06
 
 ## 国际化
 
@@ -171,7 +171,7 @@ Scene store 的可序列化部分双向绑定到 query string，用 `history.rep
 ## 年龄与敏感内容
 
 - 年级（`topic.yaml` 的 `levels`、章节 `level`、零件 `level`）是**内容规划元数据**，全部可选，站点不渲染、不据此折叠或筛选；所有章节始终可进入
-- `sensitive: true` 的段落默认显示柔化版本，家长模式（本地开关，localStorage）显示完整版本
+- 所有内容照实显示；`sensitive`（章节、事件）和 `sensitivity`（主题）只是可选元数据，不隐藏、不柔化、不加标记
 - 伤亡数字一律用"一个图标代表 N 人"的可视化，不出现血腥图片
 
 ## iPad 封装准备（一期就遵守）
@@ -186,7 +186,7 @@ Scene store 的可序列化部分双向绑定到 query string，用 `history.rep
 6. 性能预算：单主题首屏 JS ≤ 300 KB gz；地图类主题（MapLibre 本身约 275 KB gz）放宽到 ≤ 400 KB gz；GeoJSON ≤ 2 MB，glb ≤ 10 MB
    - 页面 HTML 只带小 props 和各章正文（ww2 约 100 KB）。引擎数据（`data/*.json` 解析合并后）由 `src/pages/topics/[slug]/data.json.ts` 输出成 `dist/topics/<slug>/data.json`，SceneHost 在客户端 fetch；不内联进 island props（Astro 的 props 编码会让 JSON 体积翻倍，曾让 ww2 页面 3 MB、预缓存 8.5 MB）。
    - PWA 预缓存只放页面壳、JS、CSS、图标（约 2.7 MB，无体积例外）；`/geo`、`/models`、`/topics/*/data.json` 走 CacheFirst 运行时缓存。
-7. 不用 `localStorage` 存关键状态（家长模式、语言偏好可以）
+7. 不用 `localStorage` 存关键状态（主题覆盖、语言偏好可以）
 
 ## 质量门槛
 

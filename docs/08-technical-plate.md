@@ -11,7 +11,7 @@
 | 单一主体、4K60 | 两个引擎、小学生、Web + 未来 iPad | 目标 1080p60，4K 不出布局错误；触控优先级高于快捷键 |
 | 纸底是唯一合法底色 | Gavin 要两套主题 | **paper 是标准实现**；cinema 改为"dark plate"：同一套排版语法、克制的功能色、暗部不蓝不紫、glow 降到微弱 |
 | 全程序化建模，禁 glTF | SpaceScene 数据里有 `primitive` 和 `mesh` 两种 | 程序化优先；`mesh` 只给确实画不出来的复杂有机体（人体器官）；引擎提供更丰富的程序化零件（见 §4） |
-| 课程无关 | 家长模式、测验 | HUD 里保留章节轨、信息面板、测验卡，只是按技术图版排版 |
+| 课程无关 | 测验 | HUD 里保留章节轨、信息面板、测验卡，只是按技术图版排版 |
 
 ## 1. 视觉语法（两套主题共用）
 
@@ -41,7 +41,7 @@
 ```text
 ┌ 顶栏：◇ ATLAS · {学科}        {DOC-ID}          VIEW [1][2][3]…  MODE [X][E][C][F]…  ┐
 │       状态行：{VIEW} · {RUNNING|PAUSED} · {MODE 50}        快捷键提示                 │
-├ 左：章节轨（编号 01–NN、敏感锁）                                           │
+├ 左：章节轨（编号 01–NN）                                           │
 │ 左上贴画布：标题 / 副标题 EN+中文 / 规格 dl（4–8 行，mono 数字，来源芯片）            │
 │ 右上：一张示意 SVG 卡（引擎决定：过程链 / 时间条 / 剖面）随状态高亮                   │
 │ 舞台中央：地图或 3D；两列引线标注                                                     │
@@ -104,7 +104,7 @@
 - 引擎数据 schema 增加 `source?: { tag: 'fact' | 'ref' | 'reconstruction' | 'simulated'; label?: Bilingual; url?: string }`，事件、零件、规格行都可带。
 - HUD 芯片：`FACT` / `REF.` / `RECON.` / `SIM`，1px 框、小号大写、中文。
 - 每个主题 `data/SOURCES.md`：每条数字一条来源 URL；来源冲突列出来，不偷偷选。
-- 伤亡、人口等敏感数字：家长模式外只显示量级图标（Counter），不显示精确值。
+- 伤亡、人口等数字：用 Counter（一个图标代表 N 人）可视化，同时给出带来源的精确值，不做隐藏。
 - 页脚一行双语声明：`Independent educational visualization · not an official publication / 独立教学可视化 · 非官方发布`。
 
 ## 7. 测试 API 与 QA

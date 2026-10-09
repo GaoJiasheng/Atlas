@@ -22,16 +22,21 @@ function collectConsoleErrors(page: Page): string[] {
 }
 
 for (const locale of LOCALES) {
-  test(`index (${locale}) lists all topics`, async ({ page }) => {
+  test(`index (${locale}) lists published topics only`, async ({ page }) => {
     const errors = collectConsoleErrors(page);
     await page.goto(`/${locale}/`);
-    await expect(page.locator('[data-topic]')).toHaveCount(3);
+    // Draft sample topics are reachable by URL but not listed.
+    await expect(page.locator('[data-topic]')).toHaveCount(1);
+    await expect(page.locator('[data-topic] a')).toHaveAttribute('href', new RegExp(`/${locale}/topics/ww2/$`));
     await expect(page.locator('[data-filter="subject"]:not([data-value=""])')).toHaveCount(6);
+    await expect(page.locator('[data-filter="subject"][data-value="science"]')).toBeDisabled();
     await expect(page.locator('[data-filter="subject"][data-value="math"]')).toBeDisabled();
+    // Card tags: subject, then Time (ww2 is a time topic). No status or sensitivity tags.
+    await expect(page.locator('[data-topic] .atlas-badge')).toHaveCount(2);
     await page.locator('[data-filter="subject"][data-value="history"]').click();
-    await expect(page.locator('[data-topic]:visible')).toHaveCount(2);
+    await expect(page.locator('[data-topic]:visible')).toHaveCount(1);
     await page.locator('[data-filter="subject"][data-value=""]').click();
-    await expect(page.locator('[data-topic]:visible')).toHaveCount(3);
+    await expect(page.locator('[data-topic]:visible')).toHaveCount(1);
     await page.screenshot({ path: `tests-e2e/__screenshots__/index-${locale}.png` });
     expect(errors).toEqual([]);
   });
