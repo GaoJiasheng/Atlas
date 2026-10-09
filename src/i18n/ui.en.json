@@ -235,5 +235,15 @@
   "time.beat": "Chapter {n}, step {k}: {caption}",
   "time.scale": "Map scale",
   "time.area": "Approximate area",
-  "time.resultLabel": "Result"
+  "time.resultLabel": "Result",
+  "chapter.background": "Background",
+  "chapter.backgroundShort": "BG",
+  "chapter.note": "How this topic is written",
+  "controls.glossary": "Glossary",
+  "glossary.heading": "Glossary",
+  "glossary.all": "All terms",
+  "glossary.see": "See also",
+  "glossary.close": "Close the glossary",
+  "glossary.missing": "This term is not in the glossary.",
+  "time.beatBackground": "Background: {title}"
 }

@@ -6,9 +6,10 @@
  *   control.json    control-area keyframes (where, over time)
  *   movements.json  campaign / route arrows
  *   events.json     battles and other dated events (and static `site` points)
- * and two optional ones:
+ * and three optional ones:
  *   presets.json    extra named camera presets (VIEW buttons, `<FlyTo>`)
  *   sources.json    numbered sources (shared schema, content/schema/sources.ts)
+ *   glossary.json   terms for `<Term>` (shared schema, content/schema/glossary.ts)
  *
  * Each file name (without `.json`) becomes a key of the parsed data object.
  * This module is build-time only (zod); client code imports its *types* only.
@@ -25,6 +26,7 @@ import {
 import { areaGeometry, feature, featureCollection, lineString } from '../../content/schema/geojson';
 import { geoCamera } from '../../content/schema/camera';
 import { sourceId, sourceIds, sourcesFile } from '../../content/schema/sources';
+import { glossaryFile } from '../../content/schema/glossary';
 import { compareTime } from '../../lib/time';
 import { decodeControl, decodeTopologyObject } from './lib/control';
 
@@ -379,6 +381,7 @@ export const timeSceneGeoData = z
     events: eventsFile,
     presets: presetsFile.optional(),
     sources: sourcesFile.optional(),
+    glossary: glossaryFile.optional(),
   })
   .strict()
   .superRefine((data, ctx) => {
@@ -482,6 +485,11 @@ export const timeChapterState = z
     summary: bilingual.optional(),
     /** One-sentence answer shown under the question. */
     answer: bilingual.optional(),
+    /**
+     * Background chapter only: the "How this topic is written" note, a
+     * hairline box at the top of the reader body (`pnpm validate` rejects it elsewhere).
+     */
+    note: bilingual.optional(),
     /** PRESENTATION beats for this chapter; default = one beat (the chapter's state, `summary` as caption). */
     beats: z.array(timeBeat).min(1).optional(),
   })

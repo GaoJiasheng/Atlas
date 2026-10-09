@@ -1,8 +1,8 @@
 /**
  * Step 2 — OpenHistoricalMap (ODbL) boundary relations -> GeoJSON, per date.
  *
- *   pnpm tsx scripts/geo/ww2/ohm-export.ts                 # every set in sources.json `ohm`
- *   pnpm tsx scripts/geo/ww2/ohm-export.ts --list 1942-03-09 [--bbox s,w,n,e] [--levels 1-4]
+ *   pnpm tsx scripts/geo/lib/ohm-export.ts --topic <slug>      # every set in sources.json `ohm`
+ *   pnpm tsx scripts/geo/lib/ohm-export.ts --topic <slug> --list 1942-03-09 [--bbox s,w,n,e] [--levels 1-4]
  *        # discovery: print every boundary relation valid on that date (name, dates, id)
  *
  * Sets name their relations explicitly (id -> expected name) so a re-run is
@@ -13,18 +13,21 @@
 import { existsSync } from 'node:fs';
 import { parseArgs } from 'node:util';
 import type { Feature } from 'geojson';
-import { ensureDirs, loadSources, log, osmToGeoJson, rawFile, readJson, warn, workFile, writeJson } from './lib';
+import { log, osmToGeoJson, readJson, warn, writeJson } from './common';
+import { openTopic } from './topic';
 
 const OVERPASS = 'https://overpass-api.openhistoricalmap.org/api/interpreter';
 
 const { values } = parseArgs({
   options: {
+    topic: { type: 'string' },
     list: { type: 'string' },
     bbox: { type: 'string' },
     levels: { type: 'string', default: '1-3' },
     force: { type: 'boolean', default: false },
   },
 });
+const topic = openTopic(values.topic);
 
 async function overpass(query: string): Promise<unknown> {
   let lastError: unknown;
@@ -57,7 +60,7 @@ function dayOf(value: string | undefined, edge: 'start' | 'end'): number | null 
   return y * 10000 + mo * 100 + d;
 }
 
-export function validOn(tags: Record<string, string>, date: string): boolean {
+function validOn(tags: Record<string, string>, date: string): boolean {
   const day = dayOf(date, 'start')!;
   const start = dayOf(tags.start_date, 'start');
   const end = dayOf(tags.end_date, 'start');
@@ -77,9 +80,8 @@ out tags;`;
 }
 
 async function exportSets(): Promise<void> {
-  const sources = loadSources();
-  for (const [id, set] of Object.entries(sources.ohm)) {
-    const rawPath = rawFile(`ohm-${id}.json`);
+  for (const [id, set] of Object.entries(topic.sources.ohm ?? {})) {
+    const rawPath = topic.rawFile(`ohm-${id}.json`);
     const ids = Object.keys(set.relations);
     let data: unknown;
     if (existsSync(rawPath) && !values.force) {
@@ -113,11 +115,11 @@ async function exportSets(): Promise<void> {
         geometry: f.geometry,
       });
     }
-    writeJson(workFile(`ohm-${id}.geojson`), { type: 'FeatureCollection', features });
+    writeJson(topic.workFile(`ohm-${id}.geojson`), { type: 'FeatureCollection', features });
     log(`wrote     work/ohm-${id}.geojson (${features.length} features, date ${set.date})`);
   }
 }
 
-ensureDirs();
+topic.ensureDirs();
 if (values.list) await list(values.list);
 else await exportSets();

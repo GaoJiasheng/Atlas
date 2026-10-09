@@ -1,14 +1,14 @@
 /**
  * Step 3b — georeference raster (PNG / JPG) Commons maps: colour classes -> GeoJSON.
  *
- *   pnpm tsx scripts/geo/ww2/georef-raster.ts                       # every map in sources.json `raster`
- *   pnpm tsx scripts/geo/ww2/georef-raster.ts europe-1943-1945       # one map
- *   pnpm tsx scripts/geo/ww2/georef-raster.ts --colors <id>          # colour histogram (pick the palette)
- *   pnpm tsx scripts/geo/ww2/georef-raster.ts --preview <id>         # work/raster-<id>-classes.png (classes after filling)
- *   pnpm tsx scripts/geo/ww2/georef-raster.ts --circles <id>         # small ring symbols (city dots) for control points
- *   pnpm tsx scripts/geo/ww2/georef-raster.ts --snap <id> --at 412,380 --dir S --r 15
+ *   pnpm tsx scripts/geo/lib/georef-raster.ts --topic <slug>                       # every map in sources.json `raster`
+ *   pnpm tsx scripts/geo/lib/georef-raster.ts --topic <slug> europe-1943-1945       # one map
+ *   pnpm tsx scripts/geo/lib/georef-raster.ts --topic <slug> --colors <id>          # colour histogram (pick the palette)
+ *   pnpm tsx scripts/geo/lib/georef-raster.ts --topic <slug> --preview <id>         # work/raster-<id>-classes.png (classes after filling)
+ *   pnpm tsx scripts/geo/lib/georef-raster.ts --topic <slug> --circles <id>         # small ring symbols (city dots) for control points
+ *   pnpm tsx scripts/geo/lib/georef-raster.ts --topic <slug> --snap <id> --at 412,380 --dir S --r 15
  *        # land pixel furthest in a direction near a point (capes as control points)
- *   pnpm tsx scripts/geo/ww2/georef-raster.ts --propose <id> --region europe|asia [--r 12]
+ *   pnpm tsx scripts/geo/lib/georef-raster.ts --topic <slug> --propose <id> --region europe|asia [--r 12]
  *        # from the current fit, propose cape control points (see capes.ts)
  *
  * For each map: classify pixels by palette colour, fill labels / arrows /
@@ -24,12 +24,15 @@ import type { Feature, Position } from 'geojson';
 import sharp from 'sharp';
 import { CAPES_ASIA, CAPES_EUROPE, dirVec, extreme, propose, type Pt } from './capes';
 import { candidates, evaluate, type FitReport, type Model } from './fit';
-import { loadSources, log, mapshaper, multiPolygonFeature, rawFile, toFc, warn, workFile, writeJson, type RasterSource } from './lib';
+import { log, mapshaper, multiPolygonFeature, toFc, warn, writeJson } from './common';
+import type { RasterSource } from './manifest';
 import { absorbSmall, classify, fillUnknown, histogram, majority, readImage, vectorise, type Image } from './raster';
+import { openTopic } from './topic';
 
 const { values, positionals } = parseArgs({
   allowPositionals: true,
   options: {
+    topic: { type: 'string' },
     colors: { type: 'boolean', default: false },
     preview: { type: 'boolean', default: false },
     circles: { type: 'boolean', default: false },
@@ -41,11 +44,13 @@ const { values, positionals } = parseArgs({
     r: { type: 'string', default: '12' },
   },
 });
+const topic = openTopic(values.topic);
+const sources = topic.sources;
 
 async function load(src: RasterSource): Promise<Image> {
-  const ds = loadSources().datasets[src.dataset];
+  const ds = sources.datasets[src.dataset];
   if (!ds) throw new Error(`unknown dataset ${src.dataset}`);
-  return readImage(rawFile(ds.file));
+  return readImage(topic.rawFile(ds.file));
 }
 
 /** Class grid after palette matching, filling and the majority filter. */
@@ -125,8 +130,8 @@ async function georef(id: string, src: RasterSource): Promise<void> {
   await add('_sea', src.sea.map((c) => names.indexOf(c)).filter((k) => k >= 0));
   const frame: Position[] = [[0, 0], [img.width, 0], [img.width, img.height], [0, img.height], [0, 0]];
   features.push(multiPolygonFeature([[toGeo(frame)]], { class: '_frame' }));
-  writeJson(workFile(`raster-${id}.geojson`), toFc(features));
-  writeJson(workFile(`raster-${id}-fit.json`), report, true);
+  writeJson(topic.workFile(`raster-${id}.geojson`), toFc(features));
+  writeJson(topic.workFile(`raster-${id}-fit.json`), report, true);
   log(`  wrote work/raster-${id}.geojson (${features.length} features) and work/raster-${id}-fit.json`);
 }
 
@@ -170,7 +175,7 @@ async function preview(id: string, src: RasterSource): Promise<void> {
     out[p * 3 + 1] = (n >> 8) & 255;
     out[p * 3 + 2] = n & 255;
   }
-  const file = workFile(`raster-${id}-classes.png`);
+  const file = topic.workFile(`raster-${id}-classes.png`);
   await sharp(out, { raw: { width: img.width, height: img.height, channels: 3 } }).png().toFile(file);
   log(`wrote ${file}`);
 }
@@ -181,7 +186,6 @@ function parseAt(): Pt {
   return [x, y];
 }
 
-const sources = loadSources();
 const ids = positionals.length ? positionals : Object.keys(sources.raster ?? {});
 for (const id of ids) {
   const src = sources.raster?.[id];
@@ -203,6 +207,6 @@ for (const id of ids) {
   } else if (values.propose) {
     const img = await load(src);
     const { model } = fit(id, src);
-    propose(values.region === 'asia' ? CAPES_ASIA : CAPES_EUROPE, src.controlPoints, model, landPixels(img, src), [0, 0, img.width, img.height], Number(values.r));
+    propose(topic, values.region === 'asia' ? CAPES_ASIA : CAPES_EUROPE, src.controlPoints, model, landPixels(img, src), [0, 0, img.width, img.height], Number(values.r));
   } else await georef(id, src);
 }

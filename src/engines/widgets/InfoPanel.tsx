@@ -5,12 +5,13 @@ import { Icon } from './icons';
 
 export interface InfoPanelProps {
   chapter: Chapter | null;
-  /** 0-based position of the chapter and total count. */
-  index: number;
-  total: number;
+  /** Mono eyebrow above the title: `07 / 11`, or "Background" for the background chapter. */
+  eyebrow: string;
   locale: Locale;
   /** One sentence under the title (the chapter's `summary`), muted serif. */
   summary?: BilingualText | null;
+  /** The background chapter's reading note (`state.note`): a hairline box at the top of the body. */
+  note?: BilingualText | null;
   /** Rendered MDX body of the chapter (already in the active locale). */
   body?: ReactNode;
   hasPrev: boolean;
@@ -27,20 +28,18 @@ export interface InfoPanelProps {
   onToggleExpanded?(): void;
 }
 
-const pad2 = (n: number) => String(n).padStart(2, '0');
-
 /**
  * Reading panel: chapter header (HUD grammar: number, title, the summary
- * sentence in muted serif), child-facing body (serif),
+ * sentence in muted serif), the background chapter's reading note, the body (serif),
  * quiz and selected-object details, chapter buttons. A docked column on wide
  * layouts, a bottom sheet below 1024px.
  */
 export function InfoPanel({
   chapter,
-  index,
-  total,
+  eyebrow,
   locale,
   summary,
+  note,
   body,
   hasPrev,
   hasNext,
@@ -59,9 +58,7 @@ export function InfoPanel({
       {chapter && (
         <header className="atlas-panel__header">
           <p className="atlas-panel__eyebrow">
-            <span>
-              {pad2(index + 1)} / {pad2(total)}
-            </span>
+            <span>{eyebrow}</span>
           </p>
           <h2 id="atlas-panel-title" className="atlas-panel__title" aria-live="polite">
             {tx(chapter.title, locale)}
@@ -81,6 +78,14 @@ export function InfoPanel({
         </header>
       )}
       <div id="atlas-panel-scroll" className="atlas-panel__scroll">
+        {chapter && note && (
+          <aside className="atlas-note" aria-labelledby="atlas-note-title">
+            <h3 id="atlas-note-title" className="atlas-note__title">
+              {t(locale, 'chapter.note')}
+            </h3>
+            <p className="atlas-note__text">{tx(note, locale)}</p>
+          </aside>
+        )}
         {chapter && body && <div className="atlas-prose">{body}</div>}
         {children}
       </div>

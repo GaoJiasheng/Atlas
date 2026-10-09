@@ -1,0 +1,18 @@
+---
+/**
+ * `<Term id="blitzkrieg">闪电战</Term>`: a glossary word in a chapter body,
+ * dotted underline. Clicking it (or Enter / Space) opens the term from
+ * `data/glossary.json` in the reading panel's inspector (SceneHost delegates
+ * `data-term`, so this stays static HTML). Wrap the first occurrence in a
+ * chapter only. `pnpm validate` checks every id exists.
+ */
+import { t } from '../../i18n';
+import { pageLocale } from './locale';
+
+interface Props {
+  id: string;
+}
+const { id } = Astro.props;
+const locale = pageLocale(Astro.url, Astro.currentLocale);
+---
+<span class="atlas-term" data-term={id} role="button" tabindex="0" title={t(locale, 'glossary.heading')}><slot /></span>

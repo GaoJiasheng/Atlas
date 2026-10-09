@@ -9,7 +9,8 @@
  * RMS (each point predicted by a fit without it) is the honest error figure
  * and is what `auto` minimises.
  */
-import { haversineKm, type ControlPoint } from './lib';
+import { haversineKm } from './common';
+import type { ControlPoint } from './manifest';
 
 const RAD = Math.PI / 180;
 

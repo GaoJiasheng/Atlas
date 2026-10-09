@@ -1,0 +1,6 @@
+# Pipeline-only tools (mapshaper, osmtogeojson), shared by every topic, installed by lib/fetch.ts
+.tools/
+# Per topic: downloaded source data (re-created by fetch.ts / ohm-export.ts)
+*/raw/
+# Per topic: intermediate GeoJSON (re-created by georef-svg.ts / georef-raster.ts / compose.ts)
+*/work/

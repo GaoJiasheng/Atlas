@@ -12,7 +12,9 @@
  */
 import type { Feature } from 'geojson';
 import { fitModel, laea, type Model } from './fit';
-import { haversineKm, loadSources, rawFile, readJson, type ControlPoint } from './lib';
+import { haversineKm, readJson } from './common';
+import type { ControlPoint } from './manifest';
+import type { Topic } from './topic';
 
 export type Pt = [number, number];
 
@@ -145,13 +147,13 @@ export function extreme(points: Iterable<Pt>, at: Pt, r: number, dir: Pt, metric
 }
 
 let geoCache: Pt[] | null = null;
-/** Every CShapes coastline vertex (the geo side of a cape). */
-export function geoVertices(): Pt[] {
+/** Every CShapes coastline vertex (the geo side of a cape): the topic's `cshapes` dataset. */
+export function geoVertices(topic: Topic): Pt[] {
   if (geoCache) return geoCache;
-  const ds = loadSources().datasets.cshapes;
+  const ds = topic.sources.datasets.cshapes;
   const out: Pt[] = [];
   if (ds) {
-    const fc = readJson<{ features: Feature[] }>(rawFile(ds.file));
+    const fc = readJson<{ features: Feature[] }>(topic.rawFile(ds.file));
     for (const f of fc.features) {
       const g = f.geometry;
       if (!g) continue;
@@ -186,6 +188,7 @@ export function inverseModel(cps: ControlPoint[]): (lng: number, lat: number) =>
  * land, cape -> snap to CShapes; print the pair and its residual under `model`.
  */
 export function propose(
+  topic: Topic,
   capes: Cape[],
   cps: ControlPoint[],
   model: Model,
@@ -194,7 +197,7 @@ export function propose(
   srcRadius: number,
 ): void {
   const inv = inverseModel(cps);
-  const geo = geoVertices();
+  const geo = geoVertices(topic);
   const out: ControlPoint[] = [];
   for (const cape of capes) {
     const g = extreme(geo, cape.at, 0.35, dirVec(cape.dir, false));

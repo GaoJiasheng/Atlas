@@ -11,11 +11,16 @@
  *   InfoPanel is a docked column >= 1024px (collapsible to a 28 px strip,
  *   kept per tab in sessionStorage) and a bottom sheet below
  * - the reading panel's collapse is the user's choice and sticky: a chapter
- *   change never re-expands it, it only flashes the handle / strip (`data-flash`)
+ *   change never re-expands it, it only flashes the handle / strip (`data-flash`);
+ *   the one exception is the background chapter (`kind: background`), whose
+ *   reader opens once, on first entry
+ * - numbers chapters (core/chapters.ts): the background chapter is `00` and
+ *   says "Background", story chapters are 1..n
  * - owns the keyboard (keys.ts), HUD scaling (`--k`) and `window.__atlas`
  * - handles the static chapter-body controls by delegation: `<FlyTo>`
  *   (`data-flyto` -> the engine's camera preset, same action as the VIEW
- *   buttons) and source superscripts (`data-source` -> SourcePopover)
+ *   buttons), source superscripts (`data-source` -> SourcePopover) and
+ *   glossary terms (`<Term>`, `data-term` -> GlossaryCard in the reader)
  * - fetches the topic's engine data (`dataUrl`, a build-time static file, so it
  *   is not embedded in the page HTML) and only then mounts the lazily loaded
  *   engine view on the client (engines may touch window / WebGL freely; the
@@ -40,6 +45,7 @@ import { createSceneStore } from './store';
 import { SceneContext, type SceneContextValue, type SlotName } from './context';
 import { decodeSceneState, startUrlSync, type UrlState } from './url-state';
 import { createHudActions, createHudStore, trackCamera } from './controls';
+import { chapterNumbers, isBackground, storyChapters } from './chapters';
 import { useSceneKeys } from './keys';
 import { installTestApi } from './test-api';
 import { BottomPanels, CardFrame, TitleBlock, TopBar } from './Hud';
@@ -52,6 +58,7 @@ import { InfoPanel } from '../widgets/InfoPanel';
 import { ChapterBodies } from '../widgets/ChapterBodies';
 import { QuizCard } from '../widgets/QuizCard';
 import { SourcePopover, topicSources } from '../widgets/SourcePopover';
+import { GlossaryCard, topicGlossary } from '../widgets/GlossaryCard';
 
 export interface SceneHostProps extends SceneProps {
   /**
@@ -112,6 +119,14 @@ function chapterSummary(chapter: Chapter | null): BilingualText | null {
   if (isBilingual(state.question)) return state.question;
   return null;
 }
+
+/** The background chapter's reading note (`state.note`). */
+function chapterNote(chapter: Chapter | null): BilingualText | null {
+  const note = (chapter?.state as { note?: unknown } | undefined)?.note;
+  return isBackground(chapter) && isBilingual(note) ? note : null;
+}
+
+const pad2 = (n: number) => String(n).padStart(2, '0');
 
 /** Resolves the host's `mounted` promise once the engine view has committed. */
 function MountSignal({ onMount }: { onMount(): void }) {
@@ -229,7 +244,10 @@ export default function SceneHost(props: SceneHostProps) {
   const currentId = useStore(store, (s) => s.chapter);
   const index = chapters.findIndex((c) => c.id === currentId);
   const chapter: Chapter | null = chapters[index] ?? null;
-  const chapterNumber = Math.max(0, index) + 1;
+  const numbers = useMemo(() => chapterNumbers(chapters), [chapters]);
+  const storyCount = useMemo(() => storyChapters(chapters).length, [chapters]);
+  const background = isBackground(chapter);
+  const chapterNumber = chapter ? (numbers.get(chapter.id) ?? 1) : 1;
 
   const hasPrev = index > 0;
   const hasNext = index < chapters.length - 1;
@@ -247,12 +265,24 @@ export default function SceneHost(props: SceneHostProps) {
   const labelsOn = useStore(hud, (s) => s.labels);
   const readerOpen = useStore(hud, (s) => s.reader);
   // Docked reading panel: expanded unless this tab collapsed it (sessionStorage, not the URL).
+  // The background chapter overrides that once, on its first entry: its reader opens.
+  const backgroundShown = useRef(false);
+  const openBackground = useCallback(
+    (id: string | null) => {
+      if (backgroundShown.current || !isBackground(chapters.find((c) => c.id === id))) return false;
+      backgroundShown.current = true;
+      hud.setState({ reader: true });
+      return true;
+    },
+    [chapters, hud],
+  );
   useEffect(() => {
     hud.setState({ reader: getReaderExpanded() });
+    openBackground(store.getState().chapter);
     return hud.subscribe((s, prev) => {
       if (s.reader !== prev.reader) setReaderExpanded(s.reader);
     });
-  }, [hud]);
+  }, [hud, store, openBackground]);
   // A collapsed reader stays collapsed when the chapter changes; its handle flashes to say new text is there.
   const readerRef = useRef<HTMLElement>(null);
   useEffect(() => {
@@ -267,13 +297,14 @@ export default function SceneHost(props: SceneHostProps) {
       timer = window.setTimeout(() => el.removeAttribute('data-flash'), READER_FLASH_MS);
     };
     const unsubscribe = store.subscribe((s, prev) => {
-      if (s.transition.id !== prev.transition.id && s.transition.reason === 'chapter' && s.chapter !== prev.chapter && !hud.getState().reader) flash();
+      if (s.chapter === prev.chapter || openBackground(s.chapter)) return;
+      if (s.transition.id !== prev.transition.id && s.transition.reason === 'chapter' && !hud.getState().reader) flash();
     });
     return () => {
       unsubscribe();
       window.clearTimeout(timer);
     };
-  }, [store, hud]);
+  }, [store, hud, openBackground]);
   const [k, setK] = useState(1);
   useLayoutEffect(() => {
     const update = () => setK(hudScale(window.innerWidth, window.innerHeight));
@@ -292,19 +323,53 @@ export default function SceneHost(props: SceneHostProps) {
   /* ---------------- chapter-body controls (static HTML, delegated) ---------------- */
   const sceneRef = useRef<HTMLDivElement>(null);
   const sources = useMemo(() => topicSources(data), [data]);
+  const glossary = useMemo(() => topicGlossary(data), [data]);
+  const glossaryOpen = useStore(hud, (s) => s.glossary);
   useEffect(() => {
     const el = sceneRef.current;
     if (!el) return;
+    const termOf = (e: Event) => {
+      const term = e.target instanceof Element ? e.target.closest<HTMLElement>('[data-term]') : null;
+      return term && el.contains(term) ? term : null;
+    };
     const onClick = (e: MouseEvent) => {
+      const term = termOf(e);
+      if (term) {
+        e.preventDefault();
+        actions.setGlossary(term.dataset.term ?? null);
+        return;
+      }
       const button = e.target instanceof Element ? e.target.closest<HTMLElement>('[data-flyto]') : null;
       if (!button || !el.contains(button)) return;
       e.preventDefault();
       // Same path as the VIEW buttons and digit keys; on phones fold the sheet so the map shows.
       if (actions.setPreset(button.dataset.flyto ?? '')) setSheetOpen(false);
     };
+    // `<Term>` is a span with role="button": Enter and Space open it too.
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      const term = termOf(e);
+      if (!term) return;
+      e.preventDefault();
+      actions.setGlossary(term.dataset.term ?? null);
+    };
     el.addEventListener('click', onClick);
-    return () => el.removeEventListener('click', onClick);
+    el.addEventListener('keydown', onKeyDown);
+    return () => {
+      el.removeEventListener('click', onClick);
+      el.removeEventListener('keydown', onKeyDown);
+    };
   }, [actions]);
+  // Opening a term shows the reader (docked column, or the phone sheet) so the card is visible.
+  useEffect(
+    () =>
+      hud.subscribe((s, prev) => {
+        if (s.glossary === null || s.glossary === prev.glossary) return;
+        if (!s.reader) hud.setState({ reader: true });
+        setSheetOpen(true);
+      }),
+    [hud],
+  );
 
   /* ---------------- slots ---------------- */
   const [slots, setSlots] = useState<Partial<Record<SlotName, Element | null>>>({});
@@ -400,7 +465,7 @@ export default function SceneHost(props: SceneHostProps) {
               topic={topic}
               chapter={chapter}
               chapterNumber={chapterNumber}
-              chapterCount={chapters.length}
+              chapterCount={storyCount}
               locale={locale}
               hud={hud}
             />
@@ -455,15 +520,15 @@ export default function SceneHost(props: SceneHostProps) {
             }}
           >
             <i aria-hidden="true" />
-            <b>{String(chapterNumber).padStart(2, '0')}</b>
+            <b>{background ? t(locale, 'chapter.backgroundShort') : pad2(chapterNumber)}</b>
             {chapter && <span>{tx(chapter.title, locale)}</span>}
           </button>
           <InfoPanel
             chapter={chapter}
-            index={Math.max(0, index)}
-            total={chapters.length}
+            eyebrow={background ? t(locale, 'chapter.background') : `${pad2(chapterNumber)} / ${pad2(storyCount)}`}
             locale={locale}
             summary={chapterSummary(chapter)}
+            note={chapterNote(chapter)}
             body={props.children ? <ChapterBodies currentId={currentId}>{props.children}</ChapterBodies> : undefined}
             hasPrev={hasPrev}
             hasNext={hasNext}
@@ -472,6 +537,9 @@ export default function SceneHost(props: SceneHostProps) {
             expanded={sheetOpen}
             onToggleExpanded={() => setSheetOpen((v) => !v)}
           >
+            {glossaryOpen !== null && glossary.length > 0 && (
+              <GlossaryCard terms={glossary} open={glossaryOpen} locale={locale} onOpen={actions.setGlossary} />
+            )}
             <div ref={slotRef('inspector')} className="atlas-inspector" aria-label={t(locale, 'scene.details')} />
             {chapter?.quiz.map((item, i) => <QuizCard key={`${chapter.id}-${i}`} item={item} locale={locale} />)}
           </InfoPanel>

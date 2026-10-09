@@ -1,13 +1,17 @@
 /**
  * Step 5 — simplify the composed keyframes and write the topic data file
- * src/content/topics/ww2/data/control.json, in the TopoJSON shape: one shared
+ * src/content/topics/<slug>/data/control.json, in the TopoJSON shape: one shared
  * topology, `{ topology, keyframes: [{ t, object }] }` (see docs/06 "TimeScene").
  *
- *   pnpm tsx scripts/geo/ww2/simplify.ts                          # auto: finest interval that fits the budget
- *   pnpm tsx scripts/geo/ww2/simplify.ts --fine 3 --coarse 50     # fixed intervals in km
- *   pnpm tsx scripts/geo/ww2/simplify.ts --budget 2.0 --quant 400000 --method dp --no-measure
- *   pnpm tsx scripts/geo/ww2/simplify.ts --out /tmp/control.json  # write elsewhere (default: the topic's data/control.json)
- *   pnpm tsx scripts/geo/ww2/simplify.ts --islands 20,300         # drop detached parts under these km² (focus, elsewhere)
+ *   pnpm tsx scripts/geo/lib/simplify.ts --topic <slug>                          # auto: finest interval that fits the budget
+ *   pnpm tsx scripts/geo/lib/simplify.ts --topic <slug> --fine 3 --coarse 50     # fixed intervals in km
+ *   pnpm tsx scripts/geo/lib/simplify.ts --topic <slug> --budget 2.0 --quant 400000 --method dp --no-measure
+ *   pnpm tsx scripts/geo/lib/simplify.ts --topic <slug> --out /tmp/control.json  # write elsewhere (default: the topic's data/control.json)
+ *   pnpm tsx scripts/geo/lib/simplify.ts --topic <slug> --islands 20,300         # drop detached parts under these km² (focus, elsewhere)
+ *
+ * Every knob has a default in sources.json `pipeline` (manifest.ts
+ * `PipelineConfig`; the defaults are the ww2 values quoted below); the flags
+ * override it for one run.
  *
  * Input: work/K#.geojson from compose.ts (plain GeoJSON per keyframe — the
  * intermediate; compose.ts is unchanged and this script never edits it).
@@ -15,22 +19,23 @@
  * Topology-preserving, and across keyframes: all keyframes go into ONE
  * mapshaper dataset, so a border shared by two holders — or by two keyframes —
  * is one arc, simplified once, stored once. Detail is regional: each keyframe is
- * cut along the focus boxes (the theatres the chapters zoom into: Europe /
- * North Africa / Middle East, and East and Southeast Asia / western Pacific).
- * Inside, the `fine` interval applies (detached islands under 20 km² dropped),
- * outside the `coarse` one (300 km²). The halves meet on the straight box edges
+ * cut along the focus boxes (`pipeline.focus`, the theatres the chapters zoom
+ * into; ww2: Europe / North Africa / Middle East, and East and Southeast Asia /
+ * western Pacific). Inside, the `fine` interval applies (detached islands under
+ * `islandsKm2.focus` = 20 km² dropped), outside the `coarse` one (300 km²). The halves meet on the straight box edges
  * and are dissolved back per holder. Method `dp` (Douglas–Peucker) makes the
  * interval a genuine deviation bound; `weighted` (Visvalingam) is smoother but
  * drops thin fjords wholesale. keep-shapes either way. Output: TopoJSON with
  * quantisation (`--quant` grid points across the data extent; default 4e5 ≈
  * 0.1 km cells at the equator, half that at 60°N) and delta-coded arcs.
  *
- * Coast, everywhere: after simplification every keyframe follows the basemap's
- * own land (`followCoast`): water erased, land the simplified polygons missed
- * given to the nearest holder. The land is the 1:50m basemap
- * (`public/geo/land-50m.json`) worldwide and the 1:10m one
- * (`public/geo/land-10m-sea.json`) inside the Southeast Asia box (`COAST_BOX`,
- * = scripts/build-geo.ts), so the control tint stops exactly where the one
+ * Coast, everywhere (`pipeline.coast`): after simplification every keyframe
+ * follows the basemap's own land (`followCoast`): water erased, land the
+ * simplified polygons missed given to the nearest holder. The land is
+ * `coast.land` (the 1:50m basemap `public/geo/land-50m.json`) worldwide and
+ * `coast.detailLand` (the 1:10m `public/geo/land-10m-sea.json`) inside
+ * `coast.detailBox` (the Southeast Asia box of scripts/build-geo.ts; with both
+ * null the 50m land is used everywhere), so the control tint stops exactly where the one
  * drawn coastline is, at every zoom (Singapore island at zoom 10). Land
  * is handed over within `GAP_KM` (6 km) of a holder in the focus boxes and
  * within the coarse interval (50 km: that is how far the coarse simplification
@@ -43,9 +48,10 @@
  * only along arcs shared by two holders (lib/control.ts `frontierOf`), never
  * along the coast. `--no-coast` skips the step.
  *
- * THE KNOB — size budget: `--budget` MB for the 12 keyframes of docs/09 §4.2
- * (default 2.0), pro rata for fewer: 2.0 MB × (keyframes present / 12). Without
- * --fine the script starts at 1.5 km and adds 0.25 km until the file fits, so
+ * THE KNOB — size budget: `--budget` MB (`budgetMB`, default 2.0) for the
+ * `plannedKeyframes` (12, docs/09 §4.2), pro rata for fewer: 2.0 MB × (keyframes
+ * present / 12). Without --fine the script starts at `fineStartKm` (1.5 km) and
+ * adds `fineStepKm` (0.25 km) until the file fits, so
  * the tolerance you get is what the budget allows; more keyframes → coarser. A
  * fixed --fine skips the search.
  *
@@ -55,43 +61,18 @@
  * written boundaries, in km (p50 / p95 / p99 / max). Islands dropped on purpose are excluded; the max still shows the odd
  * peninsula tip or islet that `keep-shapes` / cleaning removed.
  */
-import { createRequire } from 'node:module';
 import { existsSync, readFileSync, statSync, writeFileSync } from 'node:fs';
-import { join, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { resolve } from 'node:path';
 import { parseArgs } from 'node:util';
 import { feature as topoFeature } from 'topojson-client';
 import type { Feature, FeatureCollection, Position } from 'geojson';
-import { TOOLS, TOPIC, areaFeatures, loadSources, log, mapshaper, pointInPolygon, readJson, toFc, toolsInstalled, warn, workFile } from './lib';
-
-const PLANNED_KEYFRAMES = 12;
-/** [west, south, east, north] boxes that keep the fine interval. */
-const FOCUS: [number, number, number, number][] = [
-  [-12, 28, 62, 72], // Europe, North Africa coast, Middle East
-  [88, -12, 160, 56], // East and Southeast Asia, western Pacific
-];
-/** The 1:10m basemap box and file (scripts/build-geo.ts `SEA_BBOX`): inside it the coast is the 10m land. */
-const COAST_BOX: [number, number, number, number] = [95, -9, 125, 22];
-/** The control data's extent: coast and water outside it do not matter (Antarctica is closed along the pole, which a planar clip would choke on). */
-const WORLD_BOX: [number, number, number, number] = [-180, -60, 180, 86];
-/** In the focus boxes, land the simplified polygons miss goes to a holder at most this far (km) away; elsewhere the coarse interval is the reach. Detached pieces under `COAST_ISLAND_KM2` are dropped. */
-const GAP_KM = 6;
-const COAST_ISLAND_KM2 = 2;
-/** Outside the focus boxes the basemap coast is thinned to this tolerance (km) before the clip: invisible at the zoom those regions are shown at (<= 1 px), a third of the arcs. */
-const COAST_OUT_KM = 2;
-const COAST_LAND_10M = fileURLToPath(new URL('../../../public/geo/land-10m-sea.json', import.meta.url));
-const COAST_LAND_50M = fileURLToPath(new URL('../../../public/geo/land-50m.json', import.meta.url));
-/** Deviation is not measured for original vertices this close (km) to the basemap coast: there the boundary is the basemap's. */
-const COAST_SKIP_KM = 15;
-/** Auto search: start here and add this much (km) until the file fits. */
-const FINE_START = 1.5;
-const FINE_STEP = 0.25;
-/** Detached parts smaller than this are dropped (km²), inside / outside the focus boxes (`--islands fine,coarse`). */
-let FOCUS_ISLAND_KM2 = 20;
-let COARSE_ISLAND_KM2 = 300;
+import { areaFeatures, log, mapshaper, mapshaperApi, pointInPolygon, readJson, toFc, warn } from './common';
+import type { Box } from './manifest';
+import { openTopic, repoPath } from './topic';
 
 const { values } = parseArgs({
   options: {
+    topic: { type: 'string' },
     fine: { type: 'string' },
     coarse: { type: 'string' },
     budget: { type: 'string' },
@@ -103,28 +84,45 @@ const { values } = parseArgs({
     'no-coast': { type: 'boolean', default: false },
   },
 });
-/** MB for the 12 planned keyframes. */
-const BUDGET_MB = values.budget ? Number(values.budget) : 2.0;
+const topic = openTopic(values.topic);
+const config = topic.config;
+
+const PLANNED_KEYFRAMES = config.plannedKeyframes;
+/** [west, south, east, north] boxes that keep the fine interval. */
+const FOCUS: Box[] = config.focus;
+/** The detail basemap box and file (ww2: scripts/build-geo.ts `SEA_BBOX`, 1:10m): inside it the coast is the detail land; null = none. */
+const COAST_BOX: Box | null = config.coast.detailBox;
+const COAST_LAND_DETAIL = config.coast.detailLand === null ? null : repoPath(config.coast.detailLand);
+const COAST_LAND = repoPath(config.coast.land);
+/** The control data's extent: coast and water outside it do not matter (Antarctica is closed along the pole, which a planar clip would choke on). */
+const WORLD_BOX: Box = config.coast.worldBox;
+/** In the focus boxes, land the simplified polygons miss goes to a holder at most this far (km) away; elsewhere the coarse interval is the reach. Detached pieces under `COAST_ISLAND_KM2` are dropped. */
+const GAP_KM = config.coast.gapKm;
+const COAST_ISLAND_KM2 = config.coast.islandKm2;
+/** Outside the focus boxes the basemap coast is thinned to this tolerance (km) before the clip: invisible at the zoom those regions are shown at (<= 1 px), a third of the arcs. */
+const COAST_OUT_KM = config.coast.outsideKm;
+/** Deviation is not measured for original vertices this close (km) to the basemap coast: there the boundary is the basemap's. */
+const COAST_SKIP_KM = config.coast.skipKm;
+/** Auto search: start here and add this much (km) until the file fits. */
+const FINE_START = config.fineStartKm;
+const FINE_STEP = config.fineStepKm;
+/** Detached parts smaller than this are dropped (km²), inside / outside the focus boxes (`--islands fine,coarse`). */
+let FOCUS_ISLAND_KM2 = config.islandsKm2.focus;
+let COARSE_ISLAND_KM2 = config.islandsKm2.coarse;
+/** MB for the planned keyframes. */
+const BUDGET_MB = values.budget ? Number(values.budget) : config.budgetMB;
 /** `dp` (Douglas–Peucker: the interval is a real maximum-deviation tolerance) or `weighted` (Visvalingam: smoother, but drops thin fjords). */
-const METHOD = values.method ?? 'dp';
-const QUANTIZATION = values.quant ? Number(values.quant) : 400_000;
-/** Cut control areas to the basemap land (`--no-coast` skips it). */
-const COAST = !values['no-coast'];
+const METHOD = values.method ?? config.method;
+const QUANTIZATION = values.quant ? Number(values.quant) : config.quantization;
+/** Cut control areas to the basemap land (`pipeline.coast.enabled`; `--no-coast` skips it). */
+const COAST = config.coast.enabled && !values['no-coast'];
 if (values.islands) [FOCUS_ISLAND_KM2 = FOCUS_ISLAND_KM2, COARSE_ISLAND_KM2 = COARSE_ISLAND_KM2] = values.islands.split(',').map(Number);
 
 /* ------------------------------------------------------------------ */
 /* mapshaper                                                           */
 /* ------------------------------------------------------------------ */
 
-interface Mapshaper {
-  applyCommands(cmd: string, input: Record<string, unknown>): Promise<Record<string, Buffer | string>>;
-}
-const ms = (): Mapshaper => {
-  if (!toolsInstalled()) throw new Error('pipeline tools missing: run `pnpm tsx scripts/geo/ww2/fetch.ts` first');
-  return createRequire(join(TOOLS, 'package.json'))('mapshaper') as Mapshaper;
-};
-
-function boxes(list: [number, number, number, number][]): FeatureCollection {
+function boxes(list: Box[]): FeatureCollection {
   return toFc(
     list.map(([w, so, e, n]) => {
       const ring: Position[] = [];
@@ -163,7 +161,7 @@ async function cutKeyframe(fc: FeatureCollection): Promise<{ inside: FeatureColl
 
 type Cut = Awaited<ReturnType<typeof cutKeyframe>>;
 
-/** The basemap's land (50m worldwide, 10m inside `COAST_BOX`) and the open water around it, split by the focus boxes. */
+/** The basemap's land (`COAST_LAND` worldwide, `COAST_LAND_DETAIL` inside `COAST_BOX`) and the open water around it, split by the focus boxes. */
 interface Coast {
   /** Land inside the focus boxes / outside them (where the gap is filled within different reaches). */
   landIn: FeatureCollection;
@@ -191,18 +189,39 @@ function withWrappedCopies(fc: FeatureCollection): FeatureCollection {
   return toFc(out);
 }
 
+type Topology = Parameters<typeof topoFeature>[0];
+type TopoObject = Parameters<typeof topoFeature>[1];
+
+/**
+ * A land file: GeoJSON as is, or TopoJSON decoded object by object. Features
+ * tagged with `kind` (the 1:10m basemap has `land`, `coast` and `frame`) keep
+ * only `kind: land`.
+ */
+function readLand(file: string): FeatureCollection {
+  const data = readJson<FeatureCollection | Topology>(file);
+  if (data.type !== 'Topology') return data;
+  const topo = data;
+  const all = Object.values(topo.objects).flatMap((o) => (topoFeature(topo, o as TopoObject) as unknown as FeatureCollection).features);
+  const tagged = all.some((f) => f.properties?.kind !== undefined);
+  const land = toFc(tagged ? all.filter((f) => f.properties?.kind === 'land') : all);
+  if (!land.features.length) throw new Error(`${file} has no land`);
+  return land;
+}
+
 async function loadCoast(): Promise<Coast> {
-  const topo = JSON.parse(readFileSync(COAST_LAND_10M, 'utf8')) as Parameters<typeof topoFeature>[0];
-  const sea = topo.objects.sea as Parameters<typeof topoFeature>[1];
-  const all = topoFeature(topo, sea) as unknown as FeatureCollection;
-  const land10 = toFc(all.features.filter((f) => f.properties?.kind === 'land'));
-  if (!land10.features.length) throw new Error(`${COAST_LAND_10M} has no land`);
-  const land50 = withWrappedCopies(readJson<FeatureCollection>(COAST_LAND_50M));
+  const base = withWrappedCopies(readLand(COAST_LAND));
   const world = boxes([WORLD_BOX]);
   const focus = boxes(FOCUS);
-  // 50m land without the 10m box, plus the 10m land that fills it.
-  const outer = await mapshaper('-i land.json box.json world.json combine-files -erase target=land box -clip target=land world', { land: land50, box: boxes([COAST_BOX]), world });
-  const land = toFc([...areaFeatures(outer), ...land10.features]);
+  let land: FeatureCollection;
+  if (COAST_BOX && COAST_LAND_DETAIL) {
+    // Base land without the detail box, plus the detail land that fills it.
+    const detail = readLand(COAST_LAND_DETAIL);
+    const outer = await mapshaper('-i land.json box.json world.json combine-files -erase target=land box -clip target=land world', { land: base, box: boxes([COAST_BOX]), world });
+    land = toFc([...areaFeatures(outer), ...detail.features]);
+  } else {
+    const outer = await mapshaper('-i land.json world.json combine-files -clip target=land world', { land: base, world });
+    land = toFc(areaFeatures(outer));
+  }
   const landIn = await mapshaper('-i land.json focus.json combine-files -clip target=land focus', { land, focus });
   const outRaw = await mapshaper('-i land.json focus.json combine-files -erase target=land focus', { land, focus });
   const landOut = await mapshaper(`-i land.json -simplify dp interval=${COAST_OUT_KM * 1000} keep-shapes`, { land: outRaw });
@@ -234,12 +253,14 @@ async function followCoast(fc: FeatureCollection, land: FeatureCollection, water
 }
 
 /**
- * Detached parts under `minKm2` dropped, except inside `COAST_BOX` (Singapore,
- * Johor and the Riau islands keep everything down to `COAST_ISLAND_KM2`). Following
- * the coast brings back every island the simplification had dropped: those under the
- * part's threshold are not worth their arcs (no tint, the basemap still draws them).
+ * Detached parts under `minKm2` dropped, except inside `COAST_BOX` (ww2:
+ * Singapore, Johor and the Riau islands keep everything down to
+ * `COAST_ISLAND_KM2`). Following the coast brings back every island the
+ * simplification had dropped: those under the part's threshold are not worth
+ * their arcs (no tint, the basemap still draws them).
  */
 async function trimIslands(fc: FeatureCollection, minKm2: number): Promise<FeatureCollection> {
+  if (!COAST_BOX) return toFc(areaFeatures(await mapshaper(`-i a.json -filter-islands min-area=${minKm2}km2`, { a: fc })));
   const box = boxes([COAST_BOX]);
   const rest = await mapshaper(`-i a.json b.json combine-files -erase target=a b -filter-islands min-area=${minKm2}km2`, { a: fc, b: box });
   const kept = await mapshaper('-i a.json b.json combine-files -clip target=a b', { a: fc, b: box });
@@ -259,7 +280,7 @@ interface Topo {
  * dissolved per holder, exported as one topology (objects named by keyframe id).
  */
 async function build(ids: string[], cuts: Cut[], fine: number, coarse: number, coast: Coast | null): Promise<{ topo: Topo; geojson: Record<string, FeatureCollection> }> {
-  const m = ms();
+  const m = mapshaperApi();
   const part = async (which: 'inside' | 'outside', km: number, islandKm2: number) => {
     const files: Record<string, unknown> = {};
     ids.forEach((id, i) => (files[`${id}.json`] = cuts[i]![which]));
@@ -501,12 +522,12 @@ function ringKm2(ring: readonly Position[]): number {
 /* ------------------------------------------------------------------ */
 
 async function main(): Promise<void> {
-  const sources = loadSources();
+  const sources = topic.sources;
   const ids: string[] = [];
   const ts: string[] = [];
   const originals: FeatureCollection[] = [];
   for (const k of sources.keyframes) {
-    const path = workFile(`${k.id}.geojson`);
+    const path = topic.workFile(`${k.id}.geojson`);
     if (!existsSync(path)) {
       warn(`missing work/${k.id}.geojson (run compose.ts) — keyframe skipped`);
       continue;
@@ -521,7 +542,7 @@ async function main(): Promise<void> {
   const cuts: Cut[] = [];
   for (const fc of originals) cuts.push(await cutKeyframe(fc));
 
-  const coarse = values.coarse ? Number(values.coarse) : 50;
+  const coarse = values.coarse ? Number(values.coarse) : config.coarseKm;
   const coast = COAST ? await loadCoast() : null;
   const keyframes = ids.map((id, i) => ({ t: ts[i]!, object: id }));
   let fine = values.fine ? Number(values.fine) : FINE_START;
@@ -535,7 +556,7 @@ async function main(): Promise<void> {
       text = serialise(finalise(result.topo, ids), keyframes);
     }
   }
-  const file = values.out ? resolve(values.out) : join(TOPIC, 'data', 'control.json');
+  const file = values.out ? resolve(values.out) : topic.controlFile;
   writeFileSync(file, text);
   const size = statSync(file).size;
   log(

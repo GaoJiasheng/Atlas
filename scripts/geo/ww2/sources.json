@@ -12125,5 +12125,8 @@
         "default": 30
       }
     }
+  },
+  "pipeline": {
+    "budgetMB": 2.5
   }
 }

@@ -1,18 +1,20 @@
 /**
- * Step 6 — visual check: render each keyframe of control.json on the Natural
- * Earth basemap with MapLibre (from node_modules, in headless Chromium via
- * Playwright) next to the source map it was taken from, one row per view in
- * sources.json `keyframes[].checks`, and save docs/screenshots/ww2/geo-<K>.png.
+ * Step 6 — visual check: render each keyframe of the topic's control.json on
+ * the Natural Earth basemap (`pipeline.coast.land`) with MapLibre (from
+ * node_modules, in headless Chromium via Playwright) next to the source map it
+ * was taken from, one row per view in sources.json `keyframes[].checks`, and
+ * save <pipeline.shots>/geo-<K>.png (default docs/screenshots/<slug>/).
  *
- *   pnpm tsx scripts/geo/ww2/check.ts          # every keyframe
- *   pnpm tsx scripts/geo/ww2/check.ts K6       # one keyframe
- *   pnpm tsx scripts/geo/ww2/check.ts --work K6   # the unsimplified work/K6.geojson (quick look before simplify.ts)
+ *   pnpm tsx scripts/geo/lib/check.ts --topic <slug>             # every keyframe
+ *   pnpm tsx scripts/geo/lib/check.ts --topic <slug> K6          # one keyframe
+ *   pnpm tsx scripts/geo/lib/check.ts --topic <slug> --work K6   # the unsimplified work/K6.geojson (quick look before simplify.ts)
  *
  * control.json is TopoJSON (simplify.ts): each keyframe object is decoded
  * with topojson-client, as the engine does.
  *
- * Holders are drawn with distinct flat colours (axis warm / blue, allied
- * green / red / teal, neutral grey) and a label at their largest area, so a
+ * Holders are drawn with distinct flat colours — `pipeline.checkColors` over
+ * scripts/geo/<slug>/check-colors.json, and a colour hashed from the holder id
+ * for any holder in neither — and a label at their largest area, so a
  * reviewer can compare territory by territory with the source on the right.
  * The page is served from a throwaway local HTTP server; nothing external is
  * requested.
@@ -25,9 +27,11 @@ import { parseArgs } from 'node:util';
 import { chromium } from '@playwright/test';
 import type { FeatureCollection } from 'geojson';
 import { feature } from 'topojson-client';
-import { ROOT, SHOTS, TOPIC, loadSources, log, rawFile, readJson, warn, workFile } from './lib';
+import { ROOT, log, readJson, warn } from './common';
+import { openTopic, repoPath } from './topic';
 
-const { positionals, values } = parseArgs({ allowPositionals: true, options: { work: { type: 'boolean', default: false } } });
+const { positionals, values } = parseArgs({ allowPositionals: true, options: { topic: { type: 'string' }, work: { type: 'boolean', default: false } } });
+const topic = openTopic(values.topic);
 
 type Topology = Parameters<typeof feature>[0];
 type TopoObject = Parameters<typeof feature>[1];
@@ -35,47 +39,37 @@ type TopoObject = Parameters<typeof feature>[1];
 /** Keyframe areas: the decoded TopoJSON object of control.json, or (--work) the unsimplified compose output. */
 function keyframeData(id: string, t: string): FeatureCollection | null {
   if (values.work) {
-    const path = workFile(`${id}.geojson`);
+    const path = topic.workFile(`${id}.geojson`);
     return existsSync(path) ? readJson<FeatureCollection>(path) : null;
   }
-  const control = readJson<{ topology: Topology; keyframes: { t: string; object: string }[] }>(join(TOPIC, 'data', 'control.json'));
+  const control = readJson<{ topology: Topology; keyframes: { t: string; object: string }[] }>(topic.controlFile);
   const kf = control.keyframes.find((k) => k.t === t);
   const obj = kf && (control.topology.objects as Record<string, TopoObject>)[kf.object];
   if (!obj) return null;
   return feature(control.topology, obj) as FeatureCollection;
 }
 
-const COLORS: Record<string, string> = {
-  japan: '#d4552a',
-  manchukuo: '#ef9a5a',
-  thailand: '#f2c46d',
-  germany: '#3d5a99',
-  italy: '#7b95d6',
-  hungary: '#9a8fd1',
-  romania: '#a9c2ee',
-  bulgaria: '#7fb2c9',
-  finland: '#c5d3f2',
-  'vichy-france': '#d9c9ef',
-  uk: '#3f9a4f',
-  india: '#82c47d',
-  australia: '#2f7f5f',
-  'new-zealand': '#5aa57f',
-  canada: '#6aa36a',
-  usa: '#2a8a96',
-  philippines: '#7cc8cf',
-  netherlands: '#e3b23c',
-  belgium: '#c8a050',
-  france: '#8d6cc4',
-  'free-france': '#b39ad9',
-  ussr: '#c83737',
-  china: '#d98c8c',
-  poland: '#e07070',
-  norway: '#9fb7a0',
-  greece: '#88b8d8',
-  yugoslavia: '#b0a080',
-  brazil: '#9bc46a',
-};
-const NEUTRAL = '#bdbdbd';
+/** Deterministic colour for a holder without one in `checkColors`: hue from an FNV-1a hash of its id. */
+function hashColor(id: string): string {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < id.length; i++) h = Math.imul(h ^ id.charCodeAt(i), 0x01000193) >>> 0;
+  const hue = h % 360;
+  const s = 0.5;
+  const l = 0.6;
+  const k = (n: number) => (n + hue / 30) % 12;
+  const f = (n: number) => l - s * Math.min(l, 1 - l) * Math.max(-1, Math.min(k(n) - 3, 9 - k(n), 1));
+  return `#${[f(0), f(8), f(4)].map((v) => Math.round(v * 255).toString(16).padStart(2, '0')).join('')}`;
+}
+
+/** holder -> colour for every holder in `fc`: the topic's `checkColors`, else a hashed colour. */
+function colorsFor(fc: FeatureCollection): Record<string, string> {
+  const out: Record<string, string> = {};
+  for (const f of fc.features) {
+    const holder = String(f.properties?.holder);
+    out[holder] ??= topic.config.checkColors[holder] ?? hashColor(holder);
+  }
+  return out;
+}
 
 const MIME: Record<string, string> = {
   '.html': 'text/html',
@@ -94,7 +88,7 @@ interface Row {
   source?: { url: string; caption: string };
 }
 
-function page(id: string, t: string, rows: Row[], caption: string): string {
+function page(id: string, t: string, rows: Row[], caption: string, colors: Record<string, string>): string {
   const rowsHtml = rows
     .map(
       (r, i) => `<section><div class="map" id="m${i}"></div><figure>${r.source ? `<img src="${r.source.url}"><figcaption>${r.source.caption}</figcaption>` : '<figcaption>no source image for this view</figcaption>'}</figure><h2>${id} · ${t} · ${r.name}</h2></section>`,
@@ -114,11 +108,11 @@ figcaption{font-size:11px;color:#555;padding:2px 6px}
 </style></head><body><header><b>${id} · ${t}</b> — ${caption}</header>${rowsHtml}
 <script src="/maplibre-gl.js"></script>
 <script>
-const COLORS=${JSON.stringify(COLORS)};const NEUTRAL='${NEUTRAL}';
+const COLORS=${JSON.stringify(colors)};
 const rows=${JSON.stringify(rows)};
 window.__ready=Promise.all(rows.map(async (r,i)=>{
   const [land,kf]=await Promise.all([fetch('/land.json').then(x=>x.json()),fetch('/kf.json').then(x=>x.json())]);
-  for(const f of kf.features){f.properties.color=COLORS[f.properties.holder]||NEUTRAL;}
+  for(const f of kf.features){f.properties.color=COLORS[f.properties.holder];}
   const map=new maplibregl.Map({container:'m'+i,center:r.center,zoom:r.zoom,attributionControl:false,fadeDuration:0,canvasContextAttributes:{preserveDrawingBuffer:true},
     style:{version:8,sources:{land:{type:'geojson',data:land},kf:{type:'geojson',data:kf}},layers:[
       {id:'bg',type:'background',paint:{'background-color':'#dfe9f0'}},
@@ -143,9 +137,9 @@ window.__ready=Promise.all(rows.map(async (r,i)=>{
 }
 
 async function main(): Promise<void> {
-  const sources = loadSources();
+  const sources = topic.sources;
   const wanted = positionals.length ? positionals : sources.keyframes.map((k) => k.id);
-  mkdirSync(SHOTS, { recursive: true });
+  mkdirSync(topic.shots, { recursive: true });
   const files = new Map<string, { body: Buffer | string; type: string }>();
   const server = createServer((req, res) => {
     const f = files.get((req.url ?? '/').split('?')[0] ?? '/');
@@ -160,7 +154,7 @@ async function main(): Promise<void> {
   const mapDist = join(ROOT, 'node_modules', 'maplibre-gl', 'dist');
   files.set('/maplibre-gl.js', { body: readFileSync(join(mapDist, 'maplibre-gl.js')), type: MIME['.js']! });
   files.set('/maplibre-gl.css', { body: readFileSync(join(mapDist, 'maplibre-gl.css')), type: MIME['.css']! });
-  files.set('/land.json', { body: readFileSync(join(ROOT, 'public', 'geo', 'land-50m.json')), type: MIME['.json']! });
+  files.set('/land.json', { body: readFileSync(repoPath(topic.config.coast.land)), type: MIME['.json']! });
   const browser = await chromium.launch({ headless: true, args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
   try {
     for (const id of wanted) {
@@ -182,12 +176,12 @@ async function main(): Promise<void> {
       for (const c of kf.checks) {
         const row: Row = { name: c.name, center: c.center, zoom: c.zoom };
         const ds = c.source ? sources.datasets[c.source] : undefined;
-        if (ds && existsSync(rawFile(ds.file))) {
+        if (ds && existsSync(topic.rawFile(ds.file))) {
           const url = `/src/${encodeURIComponent(ds.file)}`;
-          files.set(url, { body: readFileSync(rawFile(ds.file)), type: MIME[extname(ds.file).toLowerCase()] ?? 'application/octet-stream' });
-          const svgId = Object.entries(sources.svg).find(([, s]) => s.dataset === c.source)?.[0];
+          files.set(url, { body: readFileSync(topic.rawFile(ds.file)), type: MIME[extname(ds.file).toLowerCase()] ?? 'application/octet-stream' });
+          const svgId = Object.entries(sources.svg ?? {}).find(([, s]) => s.dataset === c.source)?.[0];
           const rasterId = Object.entries(sources.raster ?? {}).find(([, s]) => s.dataset === c.source)?.[0];
-          const fitPath = svgId ? workFile(`svg-${svgId}-fit.json`) : rasterId ? workFile(`raster-${rasterId}-fit.json`) : '';
+          const fitPath = svgId ? topic.workFile(`svg-${svgId}-fit.json`) : rasterId ? topic.workFile(`raster-${rasterId}-fit.json`) : '';
           const fit = fitPath && existsSync(fitPath) ? readJson<{ model: string; rmsKm: number; maxKm: number }>(fitPath) : null;
           row.source = {
             url,
@@ -196,14 +190,14 @@ async function main(): Promise<void> {
         }
         rows.push(row);
       }
-      const html = page(kf.id, kf.t, rows, kf.method);
+      const html = page(kf.id, kf.t, rows, kf.method, colorsFor(data));
       files.set('/', { body: html, type: MIME['.html']! });
       const p = await browser.newPage({ viewport: { width: 1820, height: 100 + rows.length * 664 } });
       p.on('pageerror', (e) => warn(`page error: ${e.message}`));
       await p.goto(`http://127.0.0.1:${port}/`);
       await p.waitForFunction('window.__ready !== undefined');
       await p.evaluate('window.__ready');
-      const out = values.work ? workFile(`check-${kf.id}.png`) : join(SHOTS, `geo-${kf.id}.png`);
+      const out = values.work ? topic.workFile(`check-${kf.id}.png`) : join(topic.shots, `geo-${kf.id}.png`);
       await p.screenshot({ path: out, fullPage: true });
       await p.close();
       log(`wrote ${out.replace(`${ROOT}/`, '')}`);

@@ -1,15 +1,16 @@
 /**
  * Step 4 — compose each keyframe's control areas.
  *
- *   pnpm tsx scripts/geo/ww2/compose.ts          # every keyframe in sources.json
- *   pnpm tsx scripts/geo/ww2/compose.ts K6       # one keyframe
+ *   pnpm tsx scripts/geo/lib/compose.ts --topic <slug>          # every keyframe in sources.json
+ *   pnpm tsx scripts/geo/lib/compose.ts --topic <slug> K6       # one keyframe
  *
- * 1. Base: CShapes 2.0 polygons valid on the keyframe date, each mapped to a
- *    holder entity by its GW code (`keyframes[].base`). Unmapped states (not
- *    an entity in this topic) are left out.
+ * 1. Base: CShapes 2.0 polygons (the `cshapes` dataset, cited by its `ref`)
+ *    valid on the keyframe date, each mapped to a holder entity by its GW code
+ *    (`keyframes[].base`). Unmapped states (not an entity in this topic) are
+ *    left out. `admin1` selectors read the `ne-admin1` dataset.
  * 2. Steps, in order, each painted over everything before it (later wins):
  *    geometry = `from` ∩ `clip` − `minus`, with `holder`, optional `label`,
- *    and source ids `src`. Selectors (lib.ts GeomSpec) read CShapes
+ *    and source ids `src`. Selectors (manifest.ts GeomSpec) read CShapes
  *    (optionally only the polygons containing given points: one island of an
  *    archipelago; optionally on another date), OpenHistoricalMap relations
  *    (ohm-export.ts; optionally from another keyframe's set), Natural Earth
@@ -26,25 +27,12 @@
 import { existsSync } from 'node:fs';
 import { parseArgs } from 'node:util';
 import type { Feature, FeatureCollection, MultiPolygon, Polygon, Position } from 'geojson';
-import {
-  areaFeatures,
-  emptyFc,
-  loadSources,
-  log,
-  mapshaper,
-  pointInPolygon,
-  rawFile,
-  readJson,
-  toFc,
-  warn,
-  workFile,
-  writeJson,
-  type GeomSpec,
-  type Keyframe,
-  type Sources,
-} from './lib';
+import { areaFeatures, emptyFc, log, mapshaper, pointInPolygon, readJson, toFc, warn, writeJson } from './common';
+import type { GeomSpec, Keyframe, Sources } from './manifest';
+import { openTopic } from './topic';
 
-const { positionals } = parseArgs({ allowPositionals: true });
+const { values, positionals } = parseArgs({ allowPositionals: true, options: { topic: { type: 'string' } } });
+const topic = openTopic(values.topic);
 
 /* ------------------------------------------------------------------ */
 /* Geometry ops (mapshaper)                                            */
@@ -119,7 +107,7 @@ class Inputs {
   private dataset(id: string): string {
     const ds = this.sources.datasets[id];
     if (!ds) throw new Error(`unknown dataset ${id}`);
-    const path = rawFile(ds.file);
+    const path = topic.rawFile(ds.file);
     if (!existsSync(path)) throw new Error(`missing raw/${ds.file}: run fetch.ts`);
     return path;
   }
@@ -139,7 +127,7 @@ class Inputs {
 
   ohm(rel: number, set = this.kf.ohm): FeatureCollection {
     const fc = this.file(`ohm-${set}`, () => {
-      const path = workFile(`ohm-${set}.geojson`);
+      const path = topic.workFile(`ohm-${set}.geojson`);
       if (!existsSync(path)) throw new Error(`missing work/ohm-${set}.geojson: run ohm-export.ts`);
       return readJson<FeatureCollection>(path);
     });
@@ -159,7 +147,7 @@ class Inputs {
   /** A georeferenced map: `svg` (georef-svg.ts) or `raster` (georef-raster.ts). */
   map(kind: 'svg' | 'raster', id: string): FeatureCollection {
     return this.file(`${kind}-${id}`, () => {
-      const path = workFile(`${kind}-${id}.geojson`);
+      const path = topic.workFile(`${kind}-${id}.geojson`);
       if (!existsSync(path)) throw new Error(`missing work/${kind}-${id}.geojson: run georef-${kind}.ts`);
       return readJson<FeatureCollection>(path);
     });
@@ -238,6 +226,8 @@ function props(holder: string, label: { en: string; zh: string } | undefined, sr
 
 async function compose(sources: Sources, kf: Keyframe): Promise<void> {
   const inp = new Inputs(sources, kf);
+  const baseRef = sources.datasets.cshapes?.ref;
+  if (!baseRef) throw new Error('sources.json has no `cshapes` dataset (the sovereign base)');
   const t0 = Date.now();
   // Base.
   const base: Feature[] = [];
@@ -250,7 +240,7 @@ async function compose(sources: Sources, kf: Keyframe): Promise<void> {
     }
     const holder = typeof entry === 'string' ? entry : entry.holder;
     const label = typeof entry === 'string' ? undefined : entry.label;
-    base.push({ type: 'Feature', geometry: f.geometry, properties: props(holder, label, ['G1'], `CShapes GW ${f.properties.gwcode} ${f.properties.cntry_name}`) });
+    base.push({ type: 'Feature', geometry: f.geometry, properties: props(holder, label, [baseRef], `CShapes GW ${f.properties.gwcode} ${f.properties.cntry_name}`) });
   }
   log(`${kf.id} ${kf.t}: base ${base.length} CShapes polygons (${unmapped.length} states not in this topic left out)`);
   let acc = await light(toFc(base));
@@ -277,11 +267,11 @@ async function compose(sources: Sources, kf: Keyframe): Promise<void> {
     const ids = [...new Set(list.flatMap((s) => String(s ?? '').split(',')).filter(Boolean))].sort((a, b) => Number(a.slice(1)) - Number(b.slice(1)));
     f.properties = { ...f.properties, src: ids };
   }
-  writeJson(workFile(`${kf.id}.geojson`), out);
+  writeJson(topic.workFile(`${kf.id}.geojson`), out);
   log(`  wrote work/${kf.id}.geojson: ${out.features.length} features in ${((Date.now() - t0) / 1000).toFixed(0)} s`);
 }
 
-const sources = loadSources();
+const sources = topic.sources;
 const wanted = positionals.length ? positionals : sources.keyframes.map((k) => k.id);
 for (const id of wanted) {
   const kf = sources.keyframes.find((k) => k.id === id);

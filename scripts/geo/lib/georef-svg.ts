@@ -1,15 +1,15 @@
 /**
  * Step 3 — georeference Wikimedia Commons vector maps: SVG paths -> GeoJSON.
  *
- *   pnpm tsx scripts/geo/ww2/georef-svg.ts                  # every map in sources.json `svg`
- *   pnpm tsx scripts/geo/ww2/georef-svg.ts china-1940        # one map
- *   pnpm tsx scripts/geo/ww2/georef-svg.ts --fills china-1940              # fill colours + areas (pick classes)
- *   pnpm tsx scripts/geo/ww2/georef-svg.ts --dots china-1940               # city dots + nearest label (control points)
- *   pnpm tsx scripts/geo/ww2/georef-svg.ts --snap europe-1942 --at 2100,6200 --dir S --r 120
+ *   pnpm tsx scripts/geo/lib/georef-svg.ts --topic <slug>                  # every map in sources.json `svg`
+ *   pnpm tsx scripts/geo/lib/georef-svg.ts --topic <slug> china-1940        # one map
+ *   pnpm tsx scripts/geo/lib/georef-svg.ts --topic <slug> --fills china-1940              # fill colours + areas (pick classes)
+ *   pnpm tsx scripts/geo/lib/georef-svg.ts --topic <slug> --dots china-1940               # city dots + nearest label (control points)
+ *   pnpm tsx scripts/geo/lib/georef-svg.ts --topic <slug> --snap europe-1942 --at 2100,6200 --dir S --r 120
  *        # land vertex furthest in a direction near a point (capes as control points)
- *   pnpm tsx scripts/geo/ww2/georef-svg.ts --snap-geo --at 22.48,36.39 --dir S --r 0.3
+ *   pnpm tsx scripts/geo/lib/georef-svg.ts --topic <slug> --snap-geo --at 22.48,36.39 --dir S --r 0.3
  *        # the same on the CShapes coastline, in degrees
- *   pnpm tsx scripts/geo/ww2/georef-svg.ts --propose europe-1942-10 --region europe [--r 25]
+ *   pnpm tsx scripts/geo/lib/georef-svg.ts --topic <slug> --propose europe-1942-10 --region europe [--r 25]
  *        # from the current fit, propose cape control points (see capes.ts)
  *
  * A map drawn on the same base as another (same viewBox and coastline, e.g. the
@@ -29,12 +29,15 @@ import { parseArgs } from 'node:util';
 import type { Feature, Position } from 'geojson';
 import { CAPES_ASIA, CAPES_EUROPE, dirVec, extreme, geoVertices, propose } from './capes';
 import { candidates, evaluate, type FitReport, type Model } from './fit';
-import { loadSources, log, mapshaper, multiPolygonFeature, rawFile, svgControlPoints, toFc, warn, workFile, writeJson, type SvgSource } from './lib';
+import { log, mapshaper, multiPolygonFeature, toFc, warn, writeJson } from './common';
+import { svgControlPoints, type SvgSource } from './manifest';
 import { readSvg, ringsToPolygons, type Pt, type SvgDoc } from './svg';
+import { openTopic } from './topic';
 
 const { values, positionals } = parseArgs({
   allowPositionals: true,
   options: {
+    topic: { type: 'string' },
     fills: { type: 'boolean', default: false },
     dots: { type: 'boolean', default: false },
     snap: { type: 'boolean', default: false },
@@ -46,12 +49,13 @@ const { values, positionals } = parseArgs({
     r: { type: 'string', default: '50' },
   },
 });
+const topic = openTopic(values.topic);
+const sources = topic.sources;
 
 function loadDoc(src: SvgSource): SvgDoc {
-  const sources = loadSources();
   const ds = sources.datasets[src.dataset];
   if (!ds) throw new Error(`unknown dataset ${src.dataset}`);
-  return readSvg(readFileSync(rawFile(ds.file), 'utf8'));
+  return readSvg(readFileSync(topic.rawFile(ds.file), 'utf8'));
 }
 
 function bbox(rings: Pt[][]): [number, number, number, number] {
@@ -94,7 +98,7 @@ function densify(ring: Pt[], maxStep: number): Pt[] {
 }
 
 function fit(id: string, src: SvgSource): { model: Model; report: FitReport } {
-  const cps = svgControlPoints(loadSources(), id);
+  const cps = svgControlPoints(sources, id);
   if (src.controlPointsFrom) log(`\n${id}: control points of ${src.controlPointsFrom} (same base map)`);
   if (cps.length < 4) throw new Error(`${id}: needs >= 4 control points (has ${cps.length})`);
   const tried = candidates(src.projection, cps).map((c) => evaluate(c.proj, c.kind, cps));
@@ -159,8 +163,8 @@ async function georef(id: string, src: SvgSource): Promise<void> {
   kept.push(...frameFc.features);
   features.length = 0;
   features.push(...kept);
-  writeJson(workFile(`svg-${id}.geojson`), toFc(features));
-  writeJson(workFile(`svg-${id}-fit.json`), report, true);
+  writeJson(topic.workFile(`svg-${id}.geojson`), toFc(features));
+  writeJson(topic.workFile(`svg-${id}-fit.json`), report, true);
   log(`  wrote work/svg-${id}.geojson (${features.length} features) and work/svg-${id}-fit.json`);
 }
 
@@ -208,15 +212,14 @@ function parseAt(): Pt {
   return [x, y];
 }
 
-const sources = loadSources();
 if (values['snap-geo']) {
   const at = parseAt();
-  const p = extreme(geoVertices(), at, Number(values.r), dirVec(values.dir ?? 'S', false));
+  const p = extreme(geoVertices(topic), at, Number(values.r), dirVec(values.dir ?? 'S', false));
   log(p ? `geo ${values.dir} extreme near ${at.join(',')}: ${p[0].toFixed(4)},${p[1].toFixed(4)}` : 'no vertex in range');
 } else {
-  const ids = positionals.length ? positionals : Object.keys(sources.svg);
+  const ids = positionals.length ? positionals : Object.keys(sources.svg ?? {});
   for (const id of ids) {
-    const src = sources.svg[id];
+    const src = sources.svg?.[id];
     if (!src) {
       warn(`unknown svg source ${id}`);
       continue;
@@ -227,7 +230,7 @@ if (values['snap-geo']) {
       const doc = loadDoc(src);
       const { model } = fit(id, src);
       const [vx, vy, vw, vh] = doc.viewBox;
-      propose(values.region === 'asia' ? CAPES_ASIA : CAPES_EUROPE, svgControlPoints(sources, id), model, [...svgLandVertices(doc, src.land)], [vx, vy, vx + vw, vy + vh], Number(values.r));
+      propose(topic, values.region === 'asia' ? CAPES_ASIA : CAPES_EUROPE, svgControlPoints(sources, id), model, [...svgLandVertices(doc, src.land)], [vx, vy, vx + vw, vy + vh], Number(values.r));
     }
     else if (values.snap) {
       const at = parseAt();

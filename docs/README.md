@@ -11,3 +11,4 @@
 | [07-deploy.md](07-deploy.md) | 部署：Cloudflare Pages（GitHub / CLI）、自定义域名、上线前检查清单 |
 | [08-technical-plate.md](08-technical-plate.md) | 技术图版视觉与交互语言（skill 适配层）、HUD 契约、打磨轮次与实现状态 |
 | [09-ww2-content-spec.md](09-ww2-content-spec.md) | 二战主题内容实现记录：11 章、78 个事件、31 条行军、34 个参与者、地图数据与来源、已知差距 |
+| [10-history-topic-template.md](10-history-topic-template.md) | 历史主题模板（时间线 + 地图）：skill `atlas-history-topic`、脚手架 `scripts/new-topic.ts`、背景章与名词表约定 |

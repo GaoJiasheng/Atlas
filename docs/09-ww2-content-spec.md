@@ -155,7 +155,9 @@ Schema 已新增 kind：`massacre`、`siege`、`evacuation`、`liberation`、`at
 
 每个关键帧在 `data/SOURCES.md` 写：来源 URL、许可、方法（数据集查询 / SVG 配准 / 位图描摹）、控制点残差（km）、校对人。
 
-### 5.2 管线 `scripts/geo/ww2/`
+### 5.2 管线（现为 `scripts/geo/lib/` + `scripts/geo/ww2/` 清单）
+
+2026-10-09 起代码在 `scripts/geo/lib/<step>.ts`，用 `--topic ww2` 运行；`scripts/geo/ww2/` 只留 `sources.json`、`SOURCES-GEO.md`、`check-colors.json`（见 docs/06「Geo pipeline」、docs/10）。下面是最初的步骤规划：
 
 ```text
 sources.json        # 每个关键帧 / 图层的来源清单（url、license、method、controlPoints）
@@ -231,6 +233,7 @@ check.ts            # 对每帧渲染截图，与来源地图并排输出 docs/s
 | 7 | aa67735 | K2–K12 关键帧 + 10m 东南亚精度底图 + 路线地理参考 |
 | 8 | 06ebe50 | 运行时数据加载（dist/topics/ww2/data.json）|
 | 9 | fc2434a | 第 8–11 章（昭南、转折、反攻、结束） + 78 个事件 + 31 条路线 |
+| 10 | 2026-10-09 | 模板固化（docs/10、skill `atlas-history-topic`）：地图管线迁到 `scripts/geo/lib/`（`--topic ww2`，产物逐字节不变）；名词表 `data/glossary.json` 12 个词，正文首次出现处包 `<Term>`；不加背景章 |
 
 ## 已知差距（v1 计划外或源验证待补）
 

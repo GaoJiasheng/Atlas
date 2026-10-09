@@ -1,9 +1,10 @@
 /**
- * Step 1 — download every dataset listed in sources.json into raw/ and install
- * the pipeline tools into .tools/ (both gitignored).
+ * Step 1 — download every dataset listed in the topic's sources.json into its
+ * raw/ and install the pipeline tools into the shared scripts/geo/.tools/
+ * (all gitignored).
  *
- *   pnpm tsx scripts/geo/ww2/fetch.ts            # skip files already present
- *   pnpm tsx scripts/geo/ww2/fetch.ts --force    # re-download everything
+ *   pnpm tsx scripts/geo/lib/fetch.ts --topic <slug>            # skip files already present
+ *   pnpm tsx scripts/geo/lib/fetch.ts --topic <slug> --force    # re-download everything
  *
  * Each download is retried 3 times with backoff; a dataset that still fails
  * prints a WARN and the run continues (later steps say which input is missing).
@@ -12,11 +13,13 @@
 import { execFileSync } from 'node:child_process';
 import { existsSync, statSync, writeFileSync } from 'node:fs';
 import { parseArgs } from 'node:util';
-import { TOOLS, TOOL_PACKAGES, ensureDirs, loadSources, log, rawFile, toolsInstalled, warn, writeJson } from './lib';
+import { TOOLS, TOOLS_PACKAGE_NAME, TOOL_PACKAGES, log, toolsInstalled, warn, writeJson } from './common';
+import { openTopic } from './topic';
 
 const USER_AGENT = 'AtlasGeoPipeline/0.1 (non-commercial education; https://github.com/)';
 
-const { values } = parseArgs({ options: { force: { type: 'boolean', default: false } } });
+const { values } = parseArgs({ options: { topic: { type: 'string' }, force: { type: 'boolean', default: false } } });
+const topic = openTopic(values.topic);
 
 async function download(url: string, file: string): Promise<number> {
   let lastError: unknown;
@@ -40,7 +43,7 @@ function installTools(): void {
     log(`tools     present in ${TOOLS}`);
     return;
   }
-  writeJson(`${TOOLS}/package.json`, { name: 'ww2-geo-tools', private: true }, true);
+  writeJson(`${TOOLS}/package.json`, { name: TOOLS_PACKAGE_NAME, private: true }, true);
   log(`tools     npm install ${TOOL_PACKAGES.join(' ')}`);
   try {
     execFileSync('npm', ['install', '--no-audit', '--no-fund', '--silent', ...TOOL_PACKAGES], { cwd: TOOLS, stdio: 'inherit' });
@@ -50,12 +53,11 @@ function installTools(): void {
 }
 
 async function main(): Promise<void> {
-  ensureDirs();
+  topic.ensureDirs();
   installTools();
-  const sources = loadSources();
   let failed = 0;
-  for (const [id, ds] of Object.entries(sources.datasets)) {
-    const file = rawFile(ds.file);
+  for (const [id, ds] of Object.entries(topic.sources.datasets)) {
+    const file = topic.rawFile(ds.file);
     if (existsSync(file) && statSync(file).size > 0 && !values.force) {
       log(`skip      ${id} (${ds.file}, ${(statSync(file).size / 1e6).toFixed(1)} MB)`);
       continue;

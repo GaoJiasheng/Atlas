@@ -1,6 +1,0 @@
-# Downloaded source data (re-created by fetch.ts / ohm-export.ts)
-raw/
-# Intermediate GeoJSON (re-created by georef-svg.ts / compose.ts)
-work/
-# Pipeline-only tools (mapshaper, osmtogeojson), installed by fetch.ts
-.tools/
