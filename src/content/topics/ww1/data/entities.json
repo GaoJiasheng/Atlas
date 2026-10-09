@@ -1,0 +1,409 @@
+[
+  {
+    "id": "austria-hungary",
+    "name": {
+      "en": "Austria-Hungary",
+      "zh": "奥匈帝国"
+    },
+    "bloc": "axis",
+    "joined": "1914-07-28",
+    "left": "1918-11-03"
+  },
+  {
+    "id": "germany",
+    "name": {
+      "en": "Germany",
+      "zh": "德国"
+    },
+    "bloc": "axis",
+    "joined": "1914-08-01",
+    "left": "1918-11-11"
+  },
+  {
+    "id": "ottoman",
+    "name": {
+      "en": "Ottoman Empire",
+      "zh": "奥斯曼帝国"
+    },
+    "bloc": "axis",
+    "joined": "1914-10-29",
+    "left": "1918-10-30"
+  },
+  {
+    "id": "bulgaria",
+    "name": {
+      "en": "Bulgaria",
+      "zh": "保加利亚"
+    },
+    "bloc": "axis",
+    "joined": "1915-10-14",
+    "left": "1918-09-29"
+  },
+  {
+    "id": "serbia",
+    "name": {
+      "en": "Serbia",
+      "zh": "塞尔维亚"
+    },
+    "bloc": "allied",
+    "joined": "1914-07-28"
+  },
+  {
+    "id": "russia",
+    "name": {
+      "en": "Russia",
+      "zh": "俄国"
+    },
+    "bloc": "allied",
+    "joined": "1914-08-01",
+    "left": "1918-03-03"
+  },
+  {
+    "id": "france",
+    "name": {
+      "en": "France",
+      "zh": "法国"
+    },
+    "bloc": "allied",
+    "joined": "1914-08-03"
+  },
+  {
+    "id": "belgium",
+    "name": {
+      "en": "Belgium",
+      "zh": "比利时"
+    },
+    "bloc": "allied",
+    "joined": "1914-08-04"
+  },
+  {
+    "id": "uk",
+    "name": {
+      "en": "United Kingdom",
+      "zh": "英国"
+    },
+    "bloc": "allied",
+    "joined": "1914-08-04"
+  },
+  {
+    "id": "canada",
+    "name": {
+      "en": "Canada",
+      "zh": "加拿大"
+    },
+    "bloc": "allied",
+    "joined": "1914-08-04"
+  },
+  {
+    "id": "australia",
+    "name": {
+      "en": "Australia",
+      "zh": "澳大利亚"
+    },
+    "bloc": "allied",
+    "joined": "1914-08-04"
+  },
+  {
+    "id": "new-zealand",
+    "name": {
+      "en": "New Zealand",
+      "zh": "新西兰"
+    },
+    "bloc": "allied",
+    "joined": "1914-08-04"
+  },
+  {
+    "id": "south-africa",
+    "name": {
+      "en": "South Africa",
+      "zh": "南非"
+    },
+    "bloc": "allied",
+    "joined": "1914-08-04"
+  },
+  {
+    "id": "india",
+    "name": {
+      "en": "British India",
+      "zh": "英属印度"
+    },
+    "bloc": "allied",
+    "joined": "1914-08-04"
+  },
+  {
+    "id": "montenegro",
+    "name": {
+      "en": "Montenegro",
+      "zh": "黑山"
+    },
+    "bloc": "allied",
+    "joined": "1914-08-05"
+  },
+  {
+    "id": "japan",
+    "name": {
+      "en": "Japan",
+      "zh": "日本"
+    },
+    "bloc": "allied",
+    "joined": "1914-08-23"
+  },
+  {
+    "id": "italy",
+    "name": {
+      "en": "Italy",
+      "zh": "意大利"
+    },
+    "bloc": "allied",
+    "joined": "1915-05-23"
+  },
+  {
+    "id": "portugal",
+    "name": {
+      "en": "Portugal",
+      "zh": "葡萄牙"
+    },
+    "bloc": "allied",
+    "joined": "1916-03-09"
+  },
+  {
+    "id": "hejaz",
+    "name": {
+      "en": "Hejaz",
+      "zh": "汉志"
+    },
+    "bloc": "allied",
+    "joined": "1916-06-10"
+  },
+  {
+    "id": "romania",
+    "name": {
+      "en": "Romania",
+      "zh": "罗马尼亚"
+    },
+    "bloc": [
+      {
+        "bloc": "allied",
+        "from": "1916-08-27",
+        "to": "1918-05-07"
+      },
+      {
+        "bloc": "neutral",
+        "from": "1918-05-07",
+        "to": "1918-11-10"
+      },
+      {
+        "bloc": "allied",
+        "from": "1918-11-10"
+      }
+    ],
+    "joined": "1916-08-27"
+  },
+  {
+    "id": "usa",
+    "name": {
+      "en": "United States",
+      "zh": "美国"
+    },
+    "bloc": "allied",
+    "joined": "1917-04-06"
+  },
+  {
+    "id": "greece",
+    "name": {
+      "en": "Greece",
+      "zh": "希腊"
+    },
+    "bloc": "allied",
+    "joined": "1917-06-29"
+  },
+  {
+    "id": "siam",
+    "name": {
+      "en": "Siam",
+      "zh": "暹罗"
+    },
+    "bloc": "allied",
+    "joined": "1917-07-22"
+  },
+  {
+    "id": "china",
+    "name": {
+      "en": "China",
+      "zh": "中国"
+    },
+    "bloc": "allied",
+    "joined": "1917-08-14"
+  },
+  {
+    "id": "brazil",
+    "name": {
+      "en": "Brazil",
+      "zh": "巴西"
+    },
+    "bloc": "allied",
+    "joined": "1917-10-26"
+  },
+  {
+    "id": "czechoslovakia",
+    "name": {
+      "en": "Czechoslovakia",
+      "zh": "捷克斯洛伐克"
+    },
+    "bloc": "allied",
+    "joined": "1918-10-28"
+  },
+  {
+    "id": "poland",
+    "name": {
+      "en": "Poland",
+      "zh": "波兰"
+    },
+    "bloc": "allied",
+    "joined": "1918-11-11"
+  },
+  {
+    "id": "netherlands",
+    "name": {
+      "en": "Netherlands",
+      "zh": "荷兰"
+    },
+    "bloc": "neutral",
+    "joined": "1914-07-28"
+  },
+  {
+    "id": "switzerland",
+    "name": {
+      "en": "Switzerland",
+      "zh": "瑞士"
+    },
+    "bloc": "neutral",
+    "joined": "1914-07-28"
+  },
+  {
+    "id": "spain",
+    "name": {
+      "en": "Spain",
+      "zh": "西班牙"
+    },
+    "bloc": "neutral",
+    "joined": "1914-07-28"
+  },
+  {
+    "id": "sweden",
+    "name": {
+      "en": "Sweden",
+      "zh": "瑞典"
+    },
+    "bloc": "neutral",
+    "joined": "1914-07-28"
+  },
+  {
+    "id": "norway",
+    "name": {
+      "en": "Norway",
+      "zh": "挪威"
+    },
+    "bloc": "neutral",
+    "joined": "1914-07-28"
+  },
+  {
+    "id": "denmark",
+    "name": {
+      "en": "Denmark",
+      "zh": "丹麦"
+    },
+    "bloc": "neutral",
+    "joined": "1914-07-28"
+  },
+  {
+    "id": "luxembourg",
+    "name": {
+      "en": "Luxembourg",
+      "zh": "卢森堡"
+    },
+    "bloc": "neutral",
+    "joined": "1914-07-28"
+  },
+  {
+    "id": "albania",
+    "name": {
+      "en": "Albania",
+      "zh": "阿尔巴尼亚"
+    },
+    "bloc": "neutral",
+    "joined": "1914-07-28"
+  },
+  {
+    "id": "persia",
+    "name": {
+      "en": "Persia",
+      "zh": "波斯"
+    },
+    "bloc": "neutral",
+    "joined": "1914-07-28"
+  },
+  {
+    "id": "finland",
+    "name": {
+      "en": "Finland",
+      "zh": "芬兰"
+    },
+    "bloc": "neutral",
+    "joined": "1917-12-06"
+  },
+  {
+    "id": "lithuania",
+    "name": {
+      "en": "Lithuania",
+      "zh": "立陶宛"
+    },
+    "bloc": "neutral",
+    "joined": "1918-02-16"
+  },
+  {
+    "id": "estonia",
+    "name": {
+      "en": "Estonia",
+      "zh": "爱沙尼亚"
+    },
+    "bloc": "neutral",
+    "joined": "1918-02-24"
+  },
+  {
+    "id": "georgia",
+    "name": {
+      "en": "Georgia",
+      "zh": "格鲁吉亚"
+    },
+    "bloc": "neutral",
+    "joined": "1918-05-26"
+  },
+  {
+    "id": "armenia",
+    "name": {
+      "en": "Armenia",
+      "zh": "亚美尼亚"
+    },
+    "bloc": "neutral",
+    "joined": "1918-05-28"
+  },
+  {
+    "id": "azerbaijan",
+    "name": {
+      "en": "Azerbaijan",
+      "zh": "阿塞拜疆"
+    },
+    "bloc": "neutral",
+    "joined": "1918-05-28"
+  },
+  {
+    "id": "latvia",
+    "name": {
+      "en": "Latvia",
+      "zh": "拉脱维亚"
+    },
+    "bloc": "neutral",
+    "joined": "1918-11-18"
+  }
+]

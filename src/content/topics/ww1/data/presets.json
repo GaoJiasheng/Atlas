@@ -1,0 +1,144 @@
+{
+  "presets": [
+    {
+      "id": "europe",
+      "label": {
+        "en": "Europe",
+        "zh": "欧洲"
+      },
+      "camera": {
+        "center": [
+          15,
+          49
+        ],
+        "zoom": 3.6
+      }
+    },
+    {
+      "id": "western-front",
+      "label": {
+        "en": "Western Front",
+        "zh": "西线"
+      },
+      "camera": {
+        "center": [
+          3.6,
+          50.0
+        ],
+        "zoom": 6.4
+      }
+    },
+    {
+      "id": "eastern-front",
+      "label": {
+        "en": "Eastern Front",
+        "zh": "东线"
+      },
+      "camera": {
+        "center": [
+          24,
+          51
+        ],
+        "zoom": 4.6
+      }
+    },
+    {
+      "id": "balkans",
+      "label": {
+        "en": "Balkans",
+        "zh": "巴尔干"
+      },
+      "camera": {
+        "center": [
+          21.5,
+          42.5
+        ],
+        "zoom": 5.4
+      }
+    },
+    {
+      "id": "gallipoli",
+      "label": {
+        "en": "Gallipoli",
+        "zh": "加里波利"
+      },
+      "camera": {
+        "center": [
+          26.4,
+          40.2
+        ],
+        "zoom": 8.6
+      }
+    },
+    {
+      "id": "middle-east",
+      "label": {
+        "en": "Middle East",
+        "zh": "中东"
+      },
+      "camera": {
+        "center": [
+          40,
+          31
+        ],
+        "zoom": 4.0
+      }
+    },
+    {
+      "id": "africa",
+      "label": {
+        "en": "Africa",
+        "zh": "非洲"
+      },
+      "camera": {
+        "center": [
+          22,
+          -2
+        ],
+        "zoom": 2.8
+      }
+    },
+    {
+      "id": "east-asia",
+      "label": {
+        "en": "East Asia",
+        "zh": "东亚"
+      },
+      "camera": {
+        "center": [
+          124,
+          30
+        ],
+        "zoom": 3.6
+      }
+    },
+    {
+      "id": "tsingtao",
+      "label": {
+        "en": "Tsingtao",
+        "zh": "青岛"
+      },
+      "camera": {
+        "center": [
+          120.3,
+          36.1
+        ],
+        "zoom": 9.0
+      }
+    },
+    {
+      "id": "singapore-penang",
+      "label": {
+        "en": "Singapore",
+        "zh": "新加坡"
+      },
+      "camera": {
+        "center": [
+          102.3,
+          3.4
+        ],
+        "zoom": 6.0
+      }
+    }
+  ]
+}

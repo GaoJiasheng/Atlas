@@ -1,0 +1,231 @@
+{
+  "terms": [
+    {
+      "id": "entente",
+      "term": {
+        "en": "Entente",
+        "zh": "协约国"
+      },
+      "definition": {
+        "en": "The side formed around France, Russia and the United Kingdom, whose 1904 and 1907 agreements were called the Triple Entente. Serbia, Belgium, Japan, Italy, Romania, the United States, China and others fought with it; the United States called itself an associated power, not an ally.",
+        "zh": "以法国、俄国和英国为核心的一方，三国在 1904 年和 1907 年达成的协议合称“三国协约”。塞尔维亚、比利时、日本、意大利、罗马尼亚、美国、中国等国先后站在这一方作战；美国自称“合作国”，不称盟国。"
+      },
+      "see": [
+        "central-powers"
+      ]
+    },
+    {
+      "id": "central-powers",
+      "term": {
+        "en": "Central Powers",
+        "zh": "同盟国"
+      },
+      "definition": {
+        "en": "Germany and Austria-Hungary, joined by the Ottoman Empire in 1914 and Bulgaria in 1915; the name comes from their position in the middle of Europe. Not to be confused with the Allies of the Second World War, which Chinese also calls 同盟国.",
+        "zh": "德国和奥匈帝国，1914 年奥斯曼帝国、1915 年保加利亚加入；因为位于欧洲中部而得名。中文里二战的反法西斯一方也叫“同盟国”，两者不是一回事：一战的同盟国是德国一方。"
+      },
+      "see": [
+        "entente"
+      ]
+    },
+    {
+      "id": "ultimatum",
+      "term": {
+        "en": "Ultimatum",
+        "zh": "最后通牒"
+      },
+      "definition": {
+        "en": "A final list of demands with a deadline, after which the sender threatens force. Austria-Hungary's ultimatum to Serbia on 23 July 1914 gave 48 hours.",
+        "zh": "附有期限的最后要求，过期不接受就以武力相威胁。1914 年 7 月 23 日奥匈帝国给塞尔维亚的最后通牒限期 48 小时。"
+      },
+      "see": [
+        "mobilisation"
+      ]
+    },
+    {
+      "id": "mobilisation",
+      "term": {
+        "en": "Mobilisation",
+        "zh": "动员"
+      },
+      "definition": {
+        "en": "Calling up reservists and moving an army onto a war footing by railway timetables prepared in advance. In 1914 general mobilisation by one great power was widely read by the others as a step to war.",
+        "zh": "征召预备役人员、按照事先排定的铁路时刻表把军队转入战时状态。1914 年，一个大国宣布总动员，往往被其他大国看成走向战争的一步。"
+      },
+      "see": [
+        "ultimatum"
+      ]
+    },
+    {
+      "id": "trench-warfare",
+      "term": {
+        "en": "Trench warfare",
+        "zh": "堑壕战"
+      },
+      "definition": {
+        "en": "Fighting from lines of dug-in trenches protected by barbed wire, machine guns and artillery. From late 1914 it fixed the Western Front in place for more than three years.",
+        "zh": "双方从挖好的壕沟里作战，壕沟前有铁丝网、机枪和火炮掩护。1914 年底起，堑壕战让西线基本固定了三年多。"
+      },
+      "see": [
+        "attrition"
+      ]
+    },
+    {
+      "id": "attrition",
+      "term": {
+        "en": "Attrition",
+        "zh": "消耗战"
+      },
+      "definition": {
+        "en": "A way of fighting that aims to wear the enemy down by killing and wounding more soldiers and using up more supplies than the enemy can replace, rather than by taking ground.",
+        "zh": "一种作战方式：目标不是夺取土地，而是让对方的人员伤亡和物资消耗超过其补充能力，把对方拖垮。"
+      },
+      "see": [
+        "trench-warfare"
+      ]
+    },
+    {
+      "id": "blockade",
+      "term": {
+        "en": "Blockade",
+        "zh": "封锁"
+      },
+      "definition": {
+        "en": "Using warships to stop goods from reaching an enemy's ports. Britain's blockade of Germany cut imports of food and fertiliser; Germany answered with submarine attacks on shipping.",
+        "zh": "用军舰阻止货物运进敌方港口。英国对德国的封锁切断了粮食和化肥的进口；德国则以潜艇袭击商船作为回应。"
+      },
+      "see": [
+        "unrestricted-submarine-warfare"
+      ]
+    },
+    {
+      "id": "unrestricted-submarine-warfare",
+      "term": {
+        "en": "Unrestricted submarine warfare",
+        "zh": "无限制潜艇战"
+      },
+      "definition": {
+        "en": "Sinking merchant ships, including neutral ones, without warning and without first ensuring the safety of crews and passengers. Germany declared it from 1 February 1917.",
+        "zh": "不经警告、也不先保证船员和乘客安全就击沉商船，包括中立国商船。德国自 1917 年 2 月 1 日起宣布实行。"
+      },
+      "see": [
+        "blockade"
+      ]
+    },
+    {
+      "id": "genocide",
+      "term": {
+        "en": "Genocide",
+        "zh": "种族灭绝"
+      },
+      "definition": {
+        "en": "Acts committed with intent to destroy, in whole or in part, a national, ethnic, racial or religious group, as defined in the 1948 UN Genocide Convention. The lawyer Raphael Lemkin, who coined the word in 1944, later said the fate of the Ottoman Armenians was one of the cases that led him to it.",
+        "zh": "1948 年联合国《防止及惩治灭绝种族罪公约》的定义：蓄意全部或部分消灭某一民族、族裔、种族或宗教群体的行为。1944 年创造这个词的律师拉斐尔·莱姆金后来说，奥斯曼帝国亚美尼亚人的遭遇是促使他提出这一概念的事例之一。"
+      },
+      "see": [
+        "armistice"
+      ]
+    },
+    {
+      "id": "labour-corps",
+      "term": {
+        "en": "Labour corps",
+        "zh": "劳工团"
+      },
+      "definition": {
+        "en": "Non-combatant workers recruited, often from colonies or neutral countries, to dig trenches, unload ships and work in depots behind the lines. The Chinese Labour Corps served the British and French armies in France.",
+        "zh": "从殖民地或中立国招募的非战斗人员，在前线后方挖战壕、卸船、在仓库工作。华工团为英法军队在法国服务。"
+      },
+      "see": [
+        "mobilisation"
+      ]
+    },
+    {
+      "id": "bolsheviks",
+      "term": {
+        "en": "Bolsheviks",
+        "zh": "布尔什维克"
+      },
+      "definition": {
+        "en": "The faction of Russian Marxists led by Vladimir Lenin, which seized power in Petrograd in the October Revolution of 1917 and took Russia out of the war.",
+        "zh": "列宁领导的俄国马克思主义派别，1917 年在彼得格勒发动十月革命夺取政权，随后使俄国退出战争。"
+      },
+      "see": [
+        "armistice"
+      ]
+    },
+    {
+      "id": "armistice",
+      "term": {
+        "en": "Armistice",
+        "zh": "停战协定"
+      },
+      "definition": {
+        "en": "An agreement between the fighting sides to stop fighting, which is not yet a peace treaty. Bulgaria, the Ottoman Empire, Austria-Hungary and Germany each signed one in autumn 1918.",
+        "zh": "交战双方达成的停止作战协议，还不是和约。1918 年秋，保加利亚、奥斯曼帝国、奥匈帝国和德国先后签订停战协定。"
+      },
+      "see": [
+        "reparations"
+      ]
+    },
+    {
+      "id": "reparations",
+      "term": {
+        "en": "Reparations",
+        "zh": "赔款"
+      },
+      "definition": {
+        "en": "Payments that a defeated state is required to make for war damage. The Treaty of Versailles made Germany liable for them and left the amount to a commission, which set it in 1921.",
+        "zh": "战败国被要求为战争损失支付的款项。《凡尔赛和约》规定德国承担赔偿责任，具体金额交给一个委员会，1921 年才确定。"
+      },
+      "see": [
+        "armistice",
+        "mandate"
+      ]
+    },
+    {
+      "id": "self-determination",
+      "term": {
+        "en": "Self-determination",
+        "zh": "民族自决"
+      },
+      "definition": {
+        "en": "The principle that a people should choose its own government and state. It was used to justify new states in Europe in 1918–1919, but was not applied to most colonies.",
+        "zh": "一个民族应当自己选择政府和国家的原则。1918—1919 年它被用来论证欧洲新国家的建立，但大多数殖民地并没有获得这一权利。"
+      },
+      "see": [
+        "mandate",
+        "league-of-nations"
+      ]
+    },
+    {
+      "id": "mandate",
+      "term": {
+        "en": "Mandate",
+        "zh": "委任统治"
+      },
+      "definition": {
+        "en": "A territory taken from Germany or the Ottoman Empire that the League of Nations placed under the administration of one of the victorious powers, which was to report to the League on its government.",
+        "zh": "从德国或奥斯曼帝国手中拿走的领土，由国际联盟交给某个战胜国管理，管理国须向国际联盟报告施政情况。"
+      },
+      "see": [
+        "league-of-nations",
+        "self-determination"
+      ]
+    },
+    {
+      "id": "league-of-nations",
+      "term": {
+        "en": "League of Nations",
+        "zh": "国际联盟"
+      },
+      "definition": {
+        "en": "An organisation of states set up by the peace treaties of 1919 to settle disputes and prevent war; the United States did not join.",
+        "zh": "1919 年和约设立的国家间组织，宗旨是调解争端、防止战争；美国最终没有加入。"
+      },
+      "see": [
+        "mandate"
+      ]
+    }
+  ]
+}
