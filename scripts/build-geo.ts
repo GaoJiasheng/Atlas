@@ -6,6 +6,10 @@
  *   countries-50m.json  FeatureCollection of country polygons with
  *                       properties { name, lx, ly, rank } — (lx, ly) is a label
  *                       point (centroid of the largest ring), rank 1 = largest
+ *   borders-50m.json    TopoJSON mesh of the modern country frontiers: only the
+ *                       arcs two countries share (`mesh(countries, (a, b) => a !== b)`),
+ *                       never a coastline; one object `borders`, a MultiLineString.
+ *                       Simplified like the countries (~2 km), quantised to 0.01°.
  *   land-10m-sea.json   TopoJSON: Natural Earth 1:10m land for Southeast Asia
  *                       only (bbox 95,-9 -> 125,22), for close-ups (zoom >= 7.5)
  *                       where the 50m coastline is too coarse (Singapore, Johor,
@@ -33,7 +37,7 @@ import { readFileSync, writeFileSync, mkdirSync, statSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { feature } from 'topojson-client';
+import { feature, mesh } from 'topojson-client';
 import type { Feature, FeatureCollection, Geometry, MultiPolygon, Polygon, Position } from 'geojson';
 import { unwrapRing } from '../src/engines/time-scene/lib/geo';
 
@@ -206,7 +210,52 @@ countryFeatures.sort((a, b) => b.area - a.area);
 countryFeatures.forEach((c, i) => ((c.f.properties as Record<string, unknown>).rank = i + 1));
 const countries: FeatureCollection = { type: 'FeatureCollection', features: countryFeatures.map((c) => c.f) };
 
-const total = write('land-50m.json', land) + write('countries-50m.json', countries);
+/* borders: the country-country mesh as a TopoJSON, one arc per stitched line */
+const meshLines = mesh(countriesTopo, countriesTopo.objects.countries as Parameters<typeof mesh>[1], (a, b) => a !== b);
+const bordersScale = 0.01;
+const bordersArcs: number[][][] = [];
+let bordersPoints = 0;
+for (const line of meshLines.coordinates) {
+  // Longitude-continuous (|Δlon| ≤ 180), like the rings.
+  const unwrapped: Position[] = [];
+  for (const p of line) {
+    let x = p[0] ?? 0;
+    const prev = unwrapped[unwrapped.length - 1];
+    if (prev) while (x - (prev[0] ?? 0) > 180) x -= 360;
+    if (prev) while (x - (prev[0] ?? 0) < -180) x += 360;
+    unwrapped.push([x, p[1] ?? 0]);
+  }
+  const grid: [number, number][] = [];
+  for (const p of simplify(unwrapped, COUNTRY_TOLERANCE)) {
+    const q: [number, number] = [Math.round(((p[0] ?? 0) + 180) / bordersScale), Math.round(((p[1] ?? 0) + 90) / bordersScale)];
+    const last = grid[grid.length - 1];
+    if (!last || last[0] !== q[0] || last[1] !== q[1]) grid.push(q);
+  }
+  if (grid.length < 2) continue;
+  let px = 0;
+  let py = 0;
+  bordersArcs.push(
+    grid.map(([x, y]) => {
+      const d = [x - px, y - py];
+      px = x;
+      py = y;
+      return d;
+    }),
+  );
+  bordersPoints += grid.length;
+}
+const bordersTopo = {
+  type: 'Topology',
+  transform: { scale: [bordersScale, bordersScale], translate: [-180, -90] },
+  objects: { borders: { type: 'MultiLineString', arcs: bordersArcs.map((_, i) => [i]) } },
+  arcs: bordersArcs,
+};
+const bordersPath = join(outDir, 'borders-50m.json');
+writeFileSync(bordersPath, JSON.stringify(bordersTopo));
+const bordersSize = statSync(bordersPath).size;
+console.log(`  ${'borders-50m.json'.padEnd(22)} ${(bordersSize / 1024).toFixed(0).padStart(6)} KB  (TopoJSON mesh, ${bordersArcs.length} lines, ${bordersPoints} vertices)`);
+
+const total = write('land-50m.json', land) + write('countries-50m.json', countries) + bordersSize;
 console.log(`  total ${(total / 1024).toFixed(0)} KB (budget ${(BUDGET_BYTES / 1024).toFixed(0)} KB)`);
 if (total > BUDGET_BYTES) {
   console.error('build-geo: over the 2 MB GeoJSON budget');

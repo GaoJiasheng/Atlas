@@ -42,7 +42,7 @@ import type { TimeSceneExt } from './index';
 import type { TimeChapterState, TimeSceneGeoData } from './schema';
 import { buildTimeModel, type TimeModel } from './lib/model';
 import { createPlayhead, type Playhead } from './lib/playhead';
-import { onVoicesChanged, primeSpeech, speak, speakableText, SPEECH_LANG, stopSpeech, voiceLog, voiceFor, type Narration } from './lib/speech';
+import { chapterNumberText, onVoicesChanged, primeSpeech, speakSequence, speakableText, SPEECH_LANG, stopSpeech, voiceLog, voiceFor, type Narration } from './lib/speech';
 import { clamp, fromNumber, stepFor, toNumber, type TimePoint } from './lib/time';
 import { frameAt } from './lib/frame';
 import { referencePair } from './lib/stats';
@@ -934,28 +934,59 @@ function Presentation({
 
   /*
    * VOICE: once the caption has faded in, speak it (a beat's `audio` clip takes priority).
-   * A new beat, turning Voice off and leaving the presentation cancel it. `speech` tells the
-   * auto-play below whether an utterance is on its way, so it can wait for the end of it.
+   * A chapter's first beat (or any beat of a chapter other than the one spoken last, after a
+   * jump) first announces the chapter: its number, its title, the caption, three utterances
+   * ~350 ms apart as one narration. A new beat, turning Voice off and leaving the presentation
+   * cancel all of them. `speech` tells the auto-play below whether an utterance is on its way,
+   * so it can wait for the end of the last one.
    */
-  const speech = useRef<{ state: 'idle' | 'pending' | 'speaking' | 'ended'; listeners: Set<() => void> }>({ state: 'idle', listeners: new Set() });
+  const speech = useRef<{ state: 'idle' | 'pending' | 'speaking' | 'ended'; listeners: Set<() => void>; chars: number; parts: number; chapter: number }>({
+    state: 'idle',
+    listeners: new Set(),
+    chars: 0,
+    parts: 1,
+    chapter: -1,
+  });
   const spoken = speakableText(captionText);
   const voiceOn = voice && !audio && spoken !== '';
+  const chapterTitle = chapter ? speakableText(tx(chapter.title, locale)) : '';
+  const chapterIndex = b.chapterIndex;
+  const firstOfChapter = b.index === 0;
   useEffect(() => {
     const sp = speech.current;
     const voiceChoice = voiceOn ? voiceFor(locale) : null;
     if (!voiceChoice) {
       sp.state = 'idle';
+      sp.chapter = -1;
       return;
     }
     sp.state = 'pending';
     let narration: Narration | null = null;
+    const lang = locale === 'zh' ? 'zh' : 'en';
     const timer = window.setTimeout(
       () => {
         sp.state = 'speaking';
-        narration = speak(spoken, SPEECH_LANG[locale === 'zh' ? 'zh' : 'en'], voiceChoice, () => {
-          sp.state = 'ended';
-          for (const l of [...sp.listeners]) l();
-        });
+        const parts: { part: 'chapter' | 'title' | 'caption'; text: string }[] = [];
+        if (firstOfChapter || sp.chapter !== chapterIndex) {
+          parts.push({ part: 'chapter', text: chapterNumberText(chapterIndex + 1, lang) });
+          if (chapterTitle) parts.push({ part: 'title', text: chapterTitle });
+        }
+        parts.push({ part: 'caption', text: spoken });
+        sp.chars = parts.reduce((n, p) => n + [...p.text].length, 0);
+        sp.parts = parts.length;
+        narration = speakSequence(
+          parts,
+          SPEECH_LANG[lang],
+          voiceChoice,
+          () => {
+            sp.state = 'ended';
+            for (const l of [...sp.listeners]) l();
+          },
+          (part) => {
+            // The chapter counts as announced once its caption starts (a jump during the announcement repeats it).
+            if (part === 'caption') sp.chapter = chapterIndex;
+          },
+        );
       },
       instant ? 0 : BEAT_SETTLE_MS,
     );
@@ -965,7 +996,7 @@ function Presentation({
       stopSpeech();
       sp.state = 'idle';
     };
-  }, [voiceOn, index, instant, locale, spoken]);
+  }, [voiceOn, index, instant, locale, spoken, chapterIndex, chapterTitle, firstOfChapter]);
 
   useEffect(() => {
     if (!autoplay || held || last) return;
@@ -977,7 +1008,7 @@ function Presentation({
         if (audio?.ended) advance();
         else if (audio && !audio.paused) audio.addEventListener('ended', advance, { once: true });
         else if (voiceOn && speech.current.state !== 'idle') {
-          // Wait for the utterance to genuinely end (a short breath after it). A lost `end` falls back to 3x the expected speech time (12 chars/s).
+          // Wait for the utterance to genuinely end (a short breath after it). A lost `end` falls back to 3x the expected speech time (12 chars/s, 3 s more per extra part).
           const sp = speech.current;
           const afterEnd = () => {
             window.clearTimeout(dwell);
@@ -987,7 +1018,7 @@ function Presentation({
           else {
             sp.listeners.add(afterEnd);
             stopWaiting = () => sp.listeners.delete(afterEnd);
-            dwell = window.setTimeout(advance, Math.max(6_000, 3 * ([...spoken].length / 12) * 1000));
+            dwell = window.setTimeout(advance, Math.max(6_000, 3 * (sp.chars / 12) * 1000) + (sp.parts - 1) * 3_000);
           }
         } else dwell = window.setTimeout(advance, autoplayDwell([...captionText].length));
       },

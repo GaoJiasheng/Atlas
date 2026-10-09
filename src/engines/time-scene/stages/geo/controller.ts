@@ -81,7 +81,7 @@ const SRC = {
   prev: 'ts-control-prev',
   next: 'ts-control-next',
   participation: 'ts-participation',
-  countries: 'ts-countries',
+  borders: 'ts-borders-mesh',
   graticule: 'ts-graticule',
   reference: 'ts-reference',
   movements: 'ts-movements',
@@ -151,6 +151,10 @@ const eventRadius = (e: SceneEvent, active: boolean, hl: boolean) => (3 + 2 * e.
 
 /** Bloc tint under the hatch (docs/08 §5: low saturation, ~.28). */
 const CONTROL_TINT = 0.28;
+/** Tint multiplier of a highlighted holder (its outline would also run along the coast, so the area itself is drawn stronger). */
+const HIGHLIGHT_TINT = 1.7;
+/** Width of the frontier between two holders (px). */
+const FRONTIER_PX = 0.8;
 /** Modern country names (borders on): a secondary class, only close in and away from territory names. */
 const MAX_PLACE_LABELS = 8;
 const PLACE_MIN_ZOOM = 5;
@@ -219,8 +223,9 @@ function dataLayers(tk: ThemeTokens): LayerSpecification[] {
       type: 'line',
       source,
       layout: { 'line-join': 'round' },
-      // Highlighted holder (chapter highlight, or a participation-card row): a brighter, heavier edge.
-      paint: { 'line-color': ['get', 'color'], 'line-width': ['case', ['get', 'hl'], 2.8, 1], 'line-opacity': 0 },
+      // Colour and width come with the feature: the frontier between holders is one ink hairline (`--line`, 0.8 px);
+      // control data without topology has no frontier, so its polygons are outlined in their holder's colour (heavier when highlighted).
+      paint: { 'line-color': ['get', 'lc'], 'line-width': ['get', 'lw'], 'line-opacity': 0 },
     },
   ];
   return [
@@ -237,7 +242,7 @@ function dataLayers(tk: ThemeTokens): LayerSpecification[] {
     {
       id: LAYER.borders,
       type: 'line',
-      source: SRC.countries,
+      source: SRC.borders,
       layout: { visibility: 'none', 'line-join': 'round' },
       paint: { 'line-color': ink, 'line-opacity': 0.4, 'line-width': ['interpolate', ['linear'], ['zoom'], 1, 0.4, 6, 0.9] },
     },
@@ -358,6 +363,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   const landUrl = withBase('/geo/land-50m.json');
   const landHiUrl = withBase('/geo/land-10m-sea.json');
   const countriesUrl = withBase('/geo/countries-50m.json');
+  const bordersUrl = withBase('/geo/borders-50m.json');
   const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
   const pixelRatio = Math.min(3, Math.max(1, Math.round(window.devicePixelRatio || 1)));
   const graticuleData = graticule();
@@ -487,19 +493,23 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     if (on.has('borders')) void ensureCountries();
   };
 
-  /* ---------- countries (lazy: only fetched when borders are first shown) ---------- */
+  /* ---------- borders (lazy: only fetched when first shown): the frontier mesh and the country names ---------- */
   type CountryLabel = { name: string; at: LngLat; rank: number };
   let countryLabels: CountryLabel[] | null = null;
   let countriesLoading = false;
+  const fetchJson = async <T,>(url: string): Promise<T> => {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`${res.status} ${url}`);
+    return (await res.json()) as T;
+  };
   const ensureCountries = async () => {
     if (countryLabels || countriesLoading) return;
     countriesLoading = true;
     try {
-      const res = await fetch(countriesUrl);
-      if (!res.ok) throw new Error(`${res.status} ${countriesUrl}`);
-      const fc = (await res.json()) as FeatureCollection;
+      const [mesh, fc] = await Promise.all([fetchJson<Parameters<typeof topoFeature>[0]>(bordersUrl), fetchJson<FeatureCollection>(countriesUrl)]);
       if (destroyed) return;
-      source(SRC.countries)?.setData(fc);
+      // Country-country frontiers only (shared arcs, no coastline): one MultiLineString.
+      source(SRC.borders)?.setData(topoFeature(mesh, mesh.objects.borders as Parameters<typeof topoFeature>[1]) as Feature);
       countryLabels = fc.features.map((f) => {
         const p = (f.properties ?? {}) as { name?: string; lx?: number; ly?: number; rank?: number };
         return { name: p.name ?? '', at: [p.lx ?? 0, p.ly ?? 0] as LngLat, rank: p.rank ?? 999 };
@@ -527,22 +537,45 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     source(id)?.setData(fc);
   };
 
+  /**
+   * One keyframe as map features: the polygons (tint and hatch) and, for the edge layer, the frontier between
+   * holders when the data has topology (the coast is the basemap's own line, so it gets no second one), else
+   * the polygon outlines.
+   */
   const controlFc = (index: number, hl: Set<string>, t: number): FeatureCollection => {
     const kf = model.keyframes[index]?.keyframe;
     if (!kf) return EMPTY;
-    return {
-      type: 'FeatureCollection',
-      features: kf.features.features.map((f) => ({
+    const frontier = kf.frontier;
+    const lineColor = tokens.line || tokens.ink || '#2a2824';
+    const features: Feature[] = kf.features.features.map((f) => {
+      const color = entityColor(f.properties.holder, t);
+      const marked = hl.has(f.properties.holder);
+      return {
         type: 'Feature',
         geometry: f.geometry,
         properties: {
           holder: f.properties.holder,
-          color: entityColor(f.properties.holder, t),
+          color,
           pattern: hatchId(f.properties.holder, t),
-          hl: hl.has(f.properties.holder),
+          hl: marked,
+          // A highlighted holder is tinted stronger where its outline is not drawn.
+          tint: frontier && marked ? HIGHLIGHT_TINT : 1,
+          lc: color,
+          lw: frontier ? 0 : marked ? 2.8 : 1,
         },
-      })),
-    };
+      };
+    });
+    // The fill layers never draw a line, but they still evaluate their colour and pattern on it: give it harmless ones.
+    if (frontier) features.push({ type: 'Feature', geometry: frontier, properties: { lc: lineColor, lw: FRONTIER_PX, color: lineColor, pattern: 'ts-hatch-b-neutral', tint: 0 } });
+    return { type: 'FeatureCollection', features };
+  };
+
+  /** The adjacent keyframe for REFERENCE: its frontier (else its outlines) as dashed ink lines, nothing filled. */
+  const referenceFc = (index: number): FeatureCollection => {
+    const kf = model.keyframes[index]?.keyframe;
+    if (!kf) return EMPTY;
+    if (kf.frontier) return { type: 'FeatureCollection', features: [{ type: 'Feature', geometry: kf.frontier, properties: {} }] };
+    return { type: 'FeatureCollection', features: kf.features.features.map((f) => ({ type: 'Feature', geometry: f.geometry, properties: {} })) };
   };
 
   /** Polygons of an entity in the keyframe currently dominant at `frame`. */
@@ -573,7 +606,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     const hlList = highlight();
     const hl = new Set(hlList);
     const hlSig = hlList.join(',');
-    const themeSig = `${tokens['accent-axis']}|${tokens.ink}|${blocSig(t)}`;
+    const themeSig = `${tokens['accent-axis']}|${tokens.ink}|${tokens.line}|${blocSig(t)}`;
     const frame = frameAt(model, t, hlList);
     lastFrame = frame;
     const on = layersOn();
@@ -583,9 +616,9 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     setIfChanged(SRC.prev, `${control.prevIndex}|${hlSig}|${themeSig}`, () => controlFc(control.prevIndex, hl, t));
     setIfChanged(SRC.next, `${control.nextIndex}|${hlSig}|${themeSig}`, () => controlFc(control.nextIndex, hl, t));
     const fade = (prefix: 'prev' | 'next', o: number) => {
-      map.setPaintProperty(prefix === 'prev' ? LAYER.prevFill : LAYER.nextFill, 'fill-opacity', CONTROL_TINT * o);
+      map.setPaintProperty(prefix === 'prev' ? LAYER.prevFill : LAYER.nextFill, 'fill-opacity', ['*', CONTROL_TINT * o, ['get', 'tint']]);
       map.setPaintProperty(prefix === 'prev' ? LAYER.prevHatch : LAYER.nextHatch, 'fill-opacity', o);
-      map.setPaintProperty(prefix === 'prev' ? LAYER.prevLine : LAYER.nextLine, 'line-opacity', 0.9 * o);
+      map.setPaintProperty(prefix === 'prev' ? LAYER.prevLine : LAYER.nextLine, 'line-opacity', o);
     };
     fade('prev', control.prevOpacity);
     fade('next', control.nextOpacity);
@@ -593,7 +626,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     /* reference: the adjacent keyframe as dashed outlines */
     const pair = referencePair(model, frame);
     setIfChanged(SRC.reference, `${referenceOn ? pair?.other : -1}`, () =>
-      referenceOn && pair ? controlFc(pair.other, new Set(), t) : EMPTY,
+      referenceOn && pair ? referenceFc(pair.other) : EMPTY,
     );
 
     /* participation: entity areas light up on `joined` */

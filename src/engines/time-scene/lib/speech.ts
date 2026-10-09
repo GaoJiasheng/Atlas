@@ -82,6 +82,9 @@ export function onVoicesChanged(listener: () => void): () => void {
   return () => synth.removeEventListener?.('voiceschanged', listener);
 }
 
+/** Which part of a beat an utterance is: the chapter number and title announce a chapter, then the caption. */
+export type SpeechPart = 'chapter' | 'title' | 'caption';
+
 export interface Narration {
   /** Stop speaking; `onEnd` does not fire after this. */
   cancel(): void;
@@ -115,15 +118,15 @@ const needsKeepAlive = () => typeof navigator !== 'undefined' && /Chrome|Chromiu
  * frame so the two cannot race; a hidden tab pauses speech and coming back
  * resumes it.
  */
-export function speak(text: string, lang: string, voice: SpeechSynthesisVoice, onEnd: () => void): Narration {
-  active?.cancel();
+export function speak(text: string, lang: string, voice: SpeechSynthesisVoice, onEnd: () => void, part: SpeechPart = 'caption', chained = false): Narration {
+  if (!chained) active?.cancel();
   const synth = window.speechSynthesis;
   const utterance = new SpeechSynthesisUtterance(text);
   utterance.voice = voice;
   utterance.lang = lang;
   utterance.rate = 0.95;
   utterance.pitch = 1;
-  const entry: VoiceLogEntry = { text, lang, voice: voice.name, started: null, ended: null, reason: null };
+  const entry: VoiceLogEntry = { text, lang, voice: voice.name, part, started: null, ended: null, reason: null };
   log.push(entry);
   if (log.length > LOG_SIZE) log.shift();
 
@@ -182,13 +185,88 @@ export function speak(text: string, lang: string, voice: SpeechSynthesisVoice, o
       synth.cancel();
     },
   };
-  active = narration;
+  if (!chained) active = narration;
   document.addEventListener('visibilitychange', onVisible);
   synth.cancel();
   // speak() on the next frame (a hidden tab has none: the timer covers it).
   raf = requestAnimationFrame(go);
   timer = window.setTimeout(go, 120);
   return narration;
+}
+
+/** Pause between the parts of a chapter announcement (ms): a timer, not SSML. */
+export const PART_GAP_MS = 350;
+
+/**
+ * Speak `parts` one after the other, `PART_GAP_MS` apart, as one narration:
+ * `cancel()` stops whatever is speaking and drops the parts still to come, and
+ * `onEnd` fires once, when the last part genuinely ended. `onPart` is called
+ * as each part starts.
+ */
+export function speakSequence(
+  parts: readonly { part: SpeechPart; text: string }[],
+  lang: string,
+  voice: SpeechSynthesisVoice,
+  onEnd: () => void,
+  onPart?: (part: SpeechPart) => void,
+): Narration {
+  active?.cancel();
+  let cancelled = false;
+  let timer = 0;
+  let current: Narration | null = null;
+  const run = (i: number) => {
+    const p = parts[i];
+    if (cancelled || !p) return;
+    onPart?.(p.part);
+    current = speak(
+      p.text,
+      lang,
+      voice,
+      () => {
+        current = null;
+        if (i + 1 < parts.length) timer = window.setTimeout(() => run(i + 1), PART_GAP_MS);
+        else {
+          if (active === narration) active = null;
+          onEnd();
+        }
+      },
+      p.part,
+      true,
+    );
+  };
+  const narration: Narration = {
+    cancel() {
+      if (cancelled) return;
+      cancelled = true;
+      window.clearTimeout(timer);
+      current?.cancel();
+      if (active === narration) active = null;
+    },
+  };
+  active = narration;
+  run(0);
+  return narration;
+}
+
+const EN_NUMBERS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
+const EN_TENS = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+const ZH_DIGITS = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
+
+/** A whole number 1-99 spelled out: "seven" / "twenty-one" (en), "七" / "十一" / "二十一" (zh). */
+export function spellNumber(n: number, locale: 'en' | 'zh'): string {
+  const k = Math.max(0, Math.min(99, Math.round(n)));
+  if (locale === 'en') {
+    if (k < 20) return EN_NUMBERS[k]!;
+    return EN_TENS[Math.floor(k / 10)]! + (k % 10 ? `-${EN_NUMBERS[k % 10]!}` : '');
+  }
+  if (k < 10) return ZH_DIGITS[k]!;
+  const tens = Math.floor(k / 10);
+  return (tens > 1 ? ZH_DIGITS[tens]! : '') + '十' + (k % 10 ? ZH_DIGITS[k % 10]! : '');
+}
+
+/** "Chapter seven" / "第七章" for the 1-based chapter number `n`. */
+export function chapterNumberText(n: number, locale: 'en' | 'zh'): string {
+  return locale === 'zh' ? `第${spellNumber(n, 'zh')}章` : `Chapter ${spellNumber(n, 'en')}`;
 }
 
 /** Stop all speech (leaving the presentation, changing beat). */

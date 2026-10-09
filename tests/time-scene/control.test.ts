@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { controlFile, timeSceneGeoData } from '../../src/engines/time-scene/schema';
-import { decodeControl, decodeTopologyObject } from '../../src/engines/time-scene/lib/control';
+import { decodeControl, decodeTopologyObject, frontierOf } from '../../src/engines/time-scene/lib/control';
 import { buildTimeModel } from '../../src/engines/time-scene/lib/model';
 import entities from '../../src/content/topics/sample-time/data/entities.json';
 import control from '../../src/content/topics/sample-time/data/control.json';
@@ -84,6 +84,26 @@ describe('TopoJSON control keyframes', () => {
     expect(decoded.map((k) => k.t)).toEqual(['2000-01-01', '2000-06-01']);
     expect(decoded[0]!.features.features).toHaveLength(2);
     expect(decoded[1]!.features.features).toHaveLength(1);
+  });
+
+  it('frontier: only the arc two different holders share, never a coast or a same-holder seam', () => {
+    // A: the two squares belong to different holders and share the edge x = 1; the other three sides of each are coast.
+    const edge = frontierOf(topology, 'A');
+    expect(edge?.type).toBe('MultiLineString');
+    expect(edge!.coordinates).toHaveLength(1);
+    expect(edge!.coordinates[0]).toEqual([[1, 0], [1, 1]]);
+    // B has one feature: all its arcs are coast.
+    expect(frontierOf(topology, 'B')).toBeNull();
+    // Same holder on both sides: the seam is not a frontier.
+    const same = structuredClone(topology) as typeof topology;
+    same.objects.A.geometries[1]!.properties.holder = 'north-sample';
+    expect(frontierOf(same, 'A')).toBeNull();
+    expect(() => frontierOf(topology, 'nope')).toThrow(/no object "nope"/);
+    // decodeControl carries it with the keyframe (topology shape only).
+    const decoded = decodeControl(controlFile.parse(topoControl()));
+    expect(decoded[0]!.frontier?.coordinates[0]).toEqual([[1, 0], [1, 1]]);
+    expect(decoded[1]!.frontier).toBeUndefined();
+    expect(decodeControl(controlFile.parse(control)).every((k) => k.frontier === undefined)).toBe(true);
   });
 
   it('feeds the model like the plain shape does', () => {

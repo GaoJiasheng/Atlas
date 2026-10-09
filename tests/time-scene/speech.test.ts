@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { pickVoice, speakableText } from '../../src/engines/time-scene/lib/speech';
+import { chapterNumberText, pickVoice, spellNumber, speakableText } from '../../src/engines/time-scene/lib/speech';
 
 const v = (name: string, lang: string, localService = true) => ({ name, lang, localService });
 
@@ -32,5 +32,22 @@ describe('speakableText', () => {
     expect(speakableText('Fell on 15 Feb 1942<sup>3</sup>, after <b>70</b> days.')).toBe('Fell on 15 Feb 1942, after 70 days.');
     expect(speakableText('  a\n\n b  ')).toBe('a b');
     expect(speakableText('Plain 1,000 text')).toBe('Plain 1,000 text');
+  });
+});
+
+describe('chapterNumberText', () => {
+  it('spells the chapter number: "Chapter seven" / 第七章', () => {
+    expect(chapterNumberText(7, 'en')).toBe('Chapter seven');
+    expect(chapterNumberText(7, 'zh')).toBe('第七章');
+    expect(chapterNumberText(1, 'zh')).toBe('第一章');
+    expect(chapterNumberText(10, 'zh')).toBe('第十章');
+    expect(chapterNumberText(11, 'zh')).toBe('第十一章');
+    expect(chapterNumberText(11, 'en')).toBe('Chapter eleven');
+  });
+  it('spells larger numbers too', () => {
+    expect(spellNumber(21, 'en')).toBe('twenty-one');
+    expect(spellNumber(20, 'zh')).toBe('二十');
+    expect(spellNumber(35, 'zh')).toBe('三十五');
+    expect(spellNumber(40, 'en')).toBe('forty');
   });
 });
