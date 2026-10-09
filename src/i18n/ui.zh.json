@@ -225,6 +225,7 @@
   "time.reference.banner": "对照 · 实线 {current} · 虚线 {other}",
   "time.presentation": "演示",
   "time.beats": "演示步骤",
+  "time.beatChapter": "第 {n} 章：{title}",
   "time.beat": "第 {n} 章第 {k} 步：{caption}",
   "time.scale": "比例尺",
   "time.area": "近似面积",

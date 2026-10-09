@@ -14,7 +14,8 @@
  * PRESENTATION (P) is a sequence of user-paced beats: every chapter's
  * `state.beats`, or one beat per chapter (its state, `summary` as caption).
  * Each beat flies the camera and eases `t` (store `applyState`), then fades
- * its caption in; click / → / SPACE = next, ← = previous, a dot = jump. The
+ * its caption in; click / → / SPACE = next, ← = previous, a chapter segment or
+ * beat tick of the progress bar = jump. The
  * HUD is hidden, the map takes no input. ESC or P ends it and restores the
  * scene as it was.
  */
@@ -249,6 +250,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   const [graticuleOn, setGraticuleOn] = useState(true);
   useEffect(() => controller?.setGraticule(graticuleOn), [controller, graticuleOn]);
 
+
   /* ---------- REFERENCE (R): adjacent keyframe as dashed outlines, playback paused ---------- */
   const [reference, setReference] = useState(false);
   const referenceRef = useRef(false);
@@ -383,6 +385,8 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     return () => window.removeEventListener('keydown', onKey, true);
   }, [presenting, stepBeat]);
   useEffect(() => () => stopAudio(), [stopAudio]);
+  // Leader labels for the beat's highlighted ids only (the caption and the map agree).
+  useEffect(() => controller?.setPresentation(presenting), [controller, presenting]);
 
   /* ---------- legend ---------- */
   const legend = useMemo<LegendItem[]>(() => {
@@ -541,6 +545,10 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
       beats: {
         list: () => beats.map(({ chapter, index, caption }) => ({ chapter, index, caption })),
         go: (i, { instant }) => startPresentation(i, instant),
+        current: () => {
+          const b = beatRef.current !== null ? beats[beatRef.current] : undefined;
+          return b ? { chapter: b.chapter, beat: b.index } : null;
+        },
       },
       escape: () => {
         if (presentingRef.current) {
@@ -732,10 +740,15 @@ function ReferenceBanner({ model, playhead, locale }: { model: TimeModel; playhe
 }
 
 /**
- * PRESENTATION: the only HUD left on the stage — the title block, the chapter
- * line, the beat caption (large serif, bottom centre, fades in once the
- * flight is done) and a row of beat dots grouped by chapter. A transparent
- * layer over the map takes clicks (= next beat) and keeps the map still.
+ * PRESENTATION: the only HUD left on the stage — the title block and one
+ * paper caption card at the bottom (fades in once the flight is done): a
+ * header line (`04 / 11 · chapter · date · 2 / 3`), the caption (large serif,
+ * scrolls inside the card when it is long) and a two-level progress bar — one
+ * hairline segment per chapter, the current chapter's segment split into its
+ * beats; the filled part is the progress up to the current beat. Leader labels
+ * for the beat's highlighted ids come from the map (controller
+ * `setPresentation`). A transparent layer over the map takes clicks (= next
+ * beat) and keeps the map still.
  */
 function Presentation({
   title,
@@ -764,24 +777,33 @@ function Presentation({
   const now = useSyncExternalStore(playhead.subscribe, playhead.get, playhead.get);
   const b = beats[index]!;
   const chapter = chapters[b.chapterIndex];
-  const groups = useMemo(() => {
-    const out: { chapter: number; items: { beat: Beat; i: number }[] }[] = [];
-    beats.forEach((beat, i) => {
-      const last = out[out.length - 1];
-      if (last && last.chapter === beat.chapterIndex) last.items.push({ beat, i });
-      else out.push({ chapter: beat.chapterIndex, items: [{ beat, i }] });
-    });
-    return out;
-  }, [beats]);
+  /** First beat and beat count of every chapter. */
+  const spans = useMemo(
+    () =>
+      chapters.map((_, ci) => {
+        const first = beats.findIndex((x) => x.chapterIndex === ci);
+        return { first, count: first < 0 ? 0 : beats.filter((x) => x.chapterIndex === ci).length };
+      }),
+    [chapters, beats],
+  );
+  const caption = useRef<HTMLParagraphElement>(null);
+  // A new beat starts at the top of its caption.
+  useEffect(() => {
+    caption.current?.scrollTo({ top: 0 });
+  }, [index]);
+  const go = (i: number) => (e: { detail: number; currentTarget: HTMLElement }) => {
+    onGo(i);
+    if (e.detail > 0) e.currentTarget.blur();
+  };
   return (
     <div className="ts-present" data-instant={instant || undefined}>
       <div className="ts-present__hit" onClick={() => onStep(1)} aria-hidden="true" />
-      <p className="ts-present__title">
+      <p className="ts-present__title" data-hud-panel="present-title">
         <small>{tr('time.presentation').toLocaleUpperCase('en')}</small>
         <span lang="en">{title.en}</span>
         {title.zh && <span lang="zh-Hans">{title.zh}</span>}
       </p>
-      <div className="ts-present__foot">
+      <div className="ts-present__foot" data-hud-panel="present">
         <p className="ts-present__chapter">
           <i>
             {pad2(b.chapterIndex + 1)} / {pad2(chapters.length)}
@@ -794,28 +816,52 @@ function Presentation({
             </em>
           )}
         </p>
-        <p className="ts-present__caption" key={index} aria-live="polite">
+        <p className="ts-present__caption" key={index} ref={caption} aria-live="polite" onClick={() => onStep(1)}>
           {tx(b.caption, locale)}
         </p>
-        <nav className="ts-present__dots" aria-label={tr('time.beats')}>
-          {groups.map((g) => (
-            <span key={g.chapter} className="ts-present__group">
-              {g.items.map(({ beat, i }) => (
-                <button
-                  key={i}
-                  type="button"
-                  className="ts-present__dot"
-                  aria-current={i === index ? 'step' : undefined}
-                  aria-label={tr('time.beat', { n: beat.chapterIndex + 1, k: beat.index + 1, caption: tx(beat.caption, locale) })}
-                  title={`${pad2(beat.chapterIndex + 1)}${beat.count > 1 ? `.${beat.index + 1}` : ''} · ${tx(chapters[beat.chapterIndex]?.title, locale)}`}
-                  onClick={(e) => {
-                    onGo(i);
-                    if (e.detail > 0) e.currentTarget.blur();
-                  }}
-                />
-              ))}
-            </span>
-          ))}
+        <nav className="ts-present__bar" aria-label={tr('time.beats')}>
+          <ol>
+            {chapters.map((c, ci) => {
+              const { first, count } = spans[ci]!;
+              const state = ci < b.chapterIndex ? 'done' : ci === b.chapterIndex ? 'current' : 'todo';
+              const label = <span className="ts-present__no">{pad2(ci + 1)}</span>;
+              return (
+                <li key={c.id} className="ts-present__seg" data-state={state}>
+                  {state === 'current' && count > 1 ? (
+                    <>
+                      <div className="ts-present__ticks">
+                        {Array.from({ length: count }, (_, k) => (
+                          <button
+                            key={k}
+                            type="button"
+                            className="ts-present__tick"
+                            data-state={k <= b.index ? 'done' : 'todo'}
+                            aria-current={k === b.index ? 'step' : undefined}
+                            aria-label={tr('time.beat', { n: ci + 1, k: k + 1, caption: tx(beats[first + k]!.caption, locale) })}
+                            title={`${pad2(ci + 1)}.${k + 1} · ${tx(c.title, locale)}`}
+                            onClick={go(first + k)}
+                          />
+                        ))}
+                      </div>
+                      {label}
+                    </>
+                  ) : (
+                    <button
+                      type="button"
+                      className="ts-present__chap"
+                      aria-current={state === 'current' ? 'step' : undefined}
+                      aria-label={tr('time.beatChapter', { n: ci + 1, title: tx(c.title, locale) })}
+                      title={`${pad2(ci + 1)} · ${tx(c.title, locale)}`}
+                      onClick={go(first)}
+                    >
+                      <i className="ts-present__line" />
+                      {label}
+                    </button>
+                  )}
+                </li>
+              );
+            })}
+          </ol>
         </nav>
       </div>
     </div>

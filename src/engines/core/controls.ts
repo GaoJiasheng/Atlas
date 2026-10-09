@@ -141,6 +141,8 @@ export interface SceneControls {
   beats?: {
     list(): BeatInfo[];
     go(index: number, options: InstantOption): void;
+    /** The beat on show (`__atlas.state().presentation`); `null` when no presentation is running. */
+    current(): { chapter: string; beat: number } | null;
   };
   /** ESC: leave a focus/selection. Return true when something was undone. */
   escape?(): boolean;

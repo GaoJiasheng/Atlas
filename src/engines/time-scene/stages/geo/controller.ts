@@ -55,6 +55,11 @@ export interface GeoController {
   setGraticule(on: boolean): void;
   /** REFERENCE: outline the adjacent control keyframe in dashed ink (2 s fade). */
   setReference(on: boolean, instant: boolean): void;
+  /**
+   * PRESENTATION: leader labels for the highlighted ids only (cap 6) and no
+   * place / entity name labels, so the caption and the map agree.
+   */
+  setPresentation(on: boolean): void;
   /** Camera that fits all topic data (the `theatre` preset). */
   fitCamera(): GeoCamera | null;
   stats(): { features: number; zoom: number };
@@ -140,6 +145,8 @@ const eventRadius = (e: SceneEvent, active: boolean, hl: boolean) => (3 + 2 * e.
 /** Bloc tint under the hatch (docs/08 §5: low saturation, ~.28). */
 const CONTROL_TINT = 0.28;
 const MAX_PLACE_LABELS = 12;
+/** Leader labels shown for a presentation beat (its highlighted ids). */
+const PRESENTATION_MAX_LABELS = 6;
 const HIT_RADIUS = 22; // 44px hit box around events
 const PULSE_MS = 900;
 const FLY_MS = 2200;
@@ -346,6 +353,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   const graticuleData = graticule();
   let graticuleOn = true;
   let referenceOn = false;
+  let presenting = false;
 
   const baseStyle = (tk: ThemeTokens) =>
     buildMapStyle({ sources: { land: landUrl }, tokens: tk, name: 'atlas-time-scene' }) as unknown as StyleSpecification;
@@ -852,6 +860,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     if (on.has('battles')) {
       for (const ef of frame.events) {
         if (!ef.active && !hl.has(ef.id)) continue;
+        if (presenting && !hl.has(ef.id)) continue;
         const e = model.events.find((x) => x.event.id === ef.id)!.event;
         items.push({
           key: `event:${e.id}`,
@@ -927,7 +936,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
         });
       }
     }
-    leaders.setItems(items);
+    leaders.setItems(presenting ? items.filter((i) => i.pinned).slice(0, PRESENTATION_MAX_LABELS) : items);
   };
 
   /* ---------- place labels (HTML markers, max 12, greedy de-overlap) ---------- */
@@ -944,7 +953,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
 
   const labelCandidates = (): Label[] => {
     const frame = lastFrame;
-    if (!frame) return [];
+    if (!frame || presenting) return [];
     const on = layersOn();
     const hl = new Set(highlight());
     const out: Label[] = [];
@@ -1214,6 +1223,14 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     setGraticule(on) {
       graticuleOn = on;
       applyVisibility();
+    },
+    setPresentation(on) {
+      if (on === presenting) return;
+      presenting = on;
+      requestRender();
+      updateLabels();
+      // Placards are a little larger on the presentation stage: measure them again.
+      leaders.relayout();
     },
     setReference(on, instant) {
       referenceOn = on;

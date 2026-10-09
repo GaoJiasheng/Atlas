@@ -174,13 +174,17 @@ test('PRESENTATION: user-paced beats (keys, dots, click), no auto-advance, ESC a
   await expect.poll(async () => (await api()).modes.presentation).toBe(true);
   expect((await api()).hud).toBe(false);
   await expect(page.locator('.ts-present__caption')).toHaveText(/who holds which area/);
-  await expect(page.locator('.ts-present__dot')).toHaveCount(3);
+  // One segment per chapter (all three have a single beat, so nothing is subdivided); the current one is lit.
+  await expect(page.locator('.ts-present__seg')).toHaveCount(3);
+  await expect(page.locator('.ts-present__tick')).toHaveCount(0);
+  await expect(page.locator('.ts-present__seg[data-state="current"] .ts-present__no')).toHaveText('01');
+  expect((await api()).presentation).toEqual({ chapter: 'first-look', beat: 0 });
 
   await page.keyboard.press('ArrowRight');
   await expect.poll(async () => (await api()).chapter).toBe('second-look');
   await page.waitForTimeout(2500);
   expect((await api()).chapter).toBe('second-look');
-  await page.locator('.ts-present__dot').nth(2).click();
+  await page.locator('.ts-present__chap').nth(2).click();
   await expect.poll(async () => (await api()).chapter).toBe('third-look');
   await page.keyboard.press('ArrowLeft');
   await expect.poll(async () => (await api()).chapter).toBe('second-look');
@@ -190,6 +194,7 @@ test('PRESENTATION: user-paced beats (keys, dots, click), no auto-advance, ESC a
   await page.keyboard.press('Escape');
   await expect.poll(async () => (await api()).modes.presentation).toBe(false);
   expect((await api()).hud).toBe(true);
+  expect((await api()).presentation).toBeNull();
   await expect.poll(async () => (await api()).chapter).toBe(before.chapter);
   const timeOf = (s: object) => (s as { t?: unknown }).t;
   expect(timeOf(await api())).toEqual(timeOf(before));
@@ -200,6 +205,71 @@ test('PRESENTATION: user-paced beats (keys, dots, click), no auto-advance, ESC a
   await page.keyboard.press('p');
   await expect.poll(async () => (await api()).modes.presentation).toBe(false);
   await expect.poll(async () => (await api()).chapter).toBe('first-look');
+});
+
+test('PRESENTATION progress bar: chapter segments, beat ticks, header, jumps, beat labels, scrolling caption', async ({ page }) => {
+  await page.setViewportSize({ width: 1600, height: 900 });
+  await openScene(page, '/en/topics/ww2/?ch=fall-of-singapore');
+  const api = () => page.evaluate(() => window.__atlas!.state());
+  const beats = await page.evaluate(() => window.__atlas!.beats());
+  const chapters = await page.evaluate(() => window.__atlas!.chapters());
+  const own = beats.filter((b) => b.chapter === 'fall-of-singapore');
+  expect(own.length).toBeGreaterThan(1);
+  expect(own.map((b) => b.index)).toEqual(own.map((_, i) => i));
+  expect(own.every((b) => b.caption.en.length > 0)).toBe(true);
+  expect((await api()).presentation).toBeNull();
+
+  // Chapter 07, second beat (instant); `goToBeat` enters the presentation.
+  const at = beats.findIndex((b) => b.chapter === 'fall-of-singapore');
+  await page.evaluate((i) => window.__atlas!.goToBeat(i + 1, { instant: true }), at);
+  await expect.poll(async () => (await api()).modes.presentation).toBe(true);
+  await expect.poll(async () => (await api()).presentation).toEqual({ chapter: 'fall-of-singapore', beat: 1 });
+
+  // Segments: one per chapter, labelled 01..NN, the current one (07) in the signal colour and split into its beats.
+  const segs = page.locator('.ts-present__seg');
+  await expect(segs).toHaveCount(chapters.length);
+  await expect(page.locator('.ts-present__no')).toHaveText(chapters.map((_, i) => String(i + 1).padStart(2, '0')));
+  const current = page.locator('.ts-present__seg[data-state="current"]');
+  await expect(current.locator('.ts-present__no')).toHaveText(String(chapters.indexOf('fall-of-singapore') + 1).padStart(2, '0'));
+  await expect(current.locator('.ts-present__tick')).toHaveCount(own.length);
+  await expect(current.locator('.ts-present__tick[data-state="done"]')).toHaveCount(2);
+  await expect(page.locator('.ts-present__seg[data-state="done"]')).toHaveCount(chapters.indexOf('fall-of-singapore'));
+  const n = (k: number) => String(k).padStart(2, '0');
+  await expect(page.locator('.ts-present__chapter')).toContainText(`${n(chapters.indexOf('fall-of-singapore') + 1)} / ${n(chapters.length)}`);
+  await expect(page.locator('.ts-present__chapter em')).toHaveText(`2 / ${own.length}`);
+  // The progress bar spans the caption card.
+  const card = (await page.locator('.ts-present__foot').boundingBox())!;
+  const bar = (await page.locator('.ts-present__bar').boundingBox())!;
+  expect(bar.width).toBeGreaterThan(card.width * 0.9);
+  expect(bar.width).toBeLessThanOrEqual(card.width);
+
+  // A beat tick jumps within the chapter; a chapter segment jumps to that chapter's first beat.
+  await current.locator('.ts-present__tick').first().click();
+  await expect.poll(async () => (await api()).presentation).toEqual({ chapter: 'fall-of-singapore', beat: 0 });
+  await segs.nth(0).locator('.ts-present__chap').click();
+  await expect.poll(async () => (await api()).presentation).toEqual({ chapter: chapters[0], beat: 0 });
+
+  // Leader labels for the beat's highlighted ids are still on the map with the HUD hidden (cap 6); nothing else.
+  await page.evaluate((i) => window.__atlas!.goToBeat(i, { instant: true }), at);
+  await expect.poll(async () => (await api()).hud).toBe(false);
+  await expect.poll(() => page.locator('.ts-co:not([data-hidden="true"])').count(), { timeout: 8000 }).toBeGreaterThan(0);
+  expect(await page.locator('.ts-co').count()).toBeLessThanOrEqual(6);
+  expect(await page.locator('.ts-co[data-pinned="false"]').count()).toBe(0);
+  await expect(page.locator('.ts-label--place:visible, .ts-label--entity:visible')).toHaveCount(0);
+
+  // A long caption scrolls inside the card instead of growing it.
+  const grown = await page.evaluate(() => {
+    const el = document.querySelector('.ts-present__caption') as HTMLElement;
+    el.textContent = 'A long caption that goes on. '.repeat(80);
+    const foot = document.querySelector('.ts-present__foot') as HTMLElement;
+    return { scrolls: el.scrollHeight > el.clientHeight, lines: el.clientHeight / Number.parseFloat(getComputedStyle(el).lineHeight), foot: foot.getBoundingClientRect().height };
+  });
+  expect(grown.scrolls).toBe(true);
+  expect(grown.lines).toBeLessThanOrEqual(4.05);
+  expect(grown.foot).toBeLessThan(450);
+
+  await page.keyboard.press('Escape');
+  await expect.poll(async () => (await api()).presentation).toBeNull();
 });
 
 test('LOOK and language are hairline dropdowns in the HUD: menu, Esc, outside click, theme, locale keeps the query', async ({ page }) => {
