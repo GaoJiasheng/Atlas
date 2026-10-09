@@ -96,6 +96,17 @@ export interface BeatInfo {
   caption: BilingualText;
 }
 
+/** One narrated utterance as `__atlas.voiceLog()` lists it (times are `performance.now()` ms; `null` = not yet). */
+export interface VoiceLogEntry {
+  text: string;
+  lang: string;
+  voice: string;
+  started: number | null;
+  ended: number | null;
+  /** How it stopped: `end`, `cancelled`, `spurious-end`, `error:<code>`; `null` while speaking. */
+  reason: string | null;
+}
+
 /** What an engine registers. Every field is optional. */
 export interface SceneControls {
   /** Camera presets, in key order (digit `1` = first). */
@@ -147,6 +158,8 @@ export interface SceneControls {
     setAutoplay?(on: boolean): void;
     /** Voice (caption narration) switch (`__atlas.setVoice`); returns false when the device has no voice. Omit when the engine has none. */
     setVoice?(on: boolean): boolean;
+    /** The last 10 utterances of the caption narration (`__atlas.voiceLog()`). */
+    voiceLog?(): VoiceLogEntry[];
   };
   /**
    * Chapter auto-run (TimeScene): picking a chapter animates the engine's time

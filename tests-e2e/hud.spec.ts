@@ -562,16 +562,24 @@ test('territory names: on by default, N toggles them (mode `territory`), they fo
   await expect.poll(async () => (await names()).includes('Germany|德国'), { timeout: 10_000 }).toBe(false);
 });
 
-/** A fake `speechSynthesis` that records every utterance (`window.__spoken`) and ends each one 150 ms after it starts. */
-const FAKE_SPEECH = (voices: { name: string; lang: string; localService: boolean }[]) => `
-  class U { constructor(text) { this.text = text; this.lang = ''; this.voice = null; this.rate = 1; this.pitch = 1; this.volume = 1; this.onend = null; this.onerror = null; } }
+/**
+ * A fake `speechSynthesis` like Chrome's: `speak` starts an utterance on the next tick (`onstart`), it ends `endMs` later (`onend`);
+ * `cancel()` fails the one in progress with `error: 'interrupted'`. Every utterance is recorded in `window.__spoken`.
+ */
+const FAKE_SPEECH = (voices: { name: string; lang: string; localService: boolean }[], endMs = 2000) => `
+  class U { constructor(text) { this.text = text; this.lang = ''; this.voice = null; this.rate = 1; this.pitch = 1; this.volume = 1; this.onstart = null; this.onend = null; this.onerror = null; } }
   window.SpeechSynthesisUtterance = U;
   window.__spoken = [];
-  window.__cancels = 0;
+  let cur = null;
   Object.defineProperty(window, 'speechSynthesis', { configurable: true, value: {
     getVoices: () => ${JSON.stringify(voices)},
-    speak(u) { window.__spoken.push({ text: u.text, lang: u.lang, voice: u.voice && u.voice.name, rate: u.rate, pitch: u.pitch, volume: u.volume }); setTimeout(() => u.onend && u.onend(), 150); },
-    cancel() { window.__cancels++; }, resume() {}, addEventListener() {}, removeEventListener() {},
+    speak(u) {
+      cur = u;
+      window.__spoken.push({ text: u.text, lang: u.lang, voice: u.voice && u.voice.name, rate: u.rate, pitch: u.pitch, at: performance.now() });
+      setTimeout(() => { if (cur === u) { u.onstart && u.onstart({}); u.__t = setTimeout(() => { if (cur === u) { cur = null; u.onend && u.onend({}); } }, ${endMs}); } }, 0);
+    },
+    cancel() { if (cur) { const u = cur; cur = null; clearTimeout(u.__t); u.onerror && u.onerror({ error: 'interrupted' }); } },
+    pause() {}, resume() {}, speaking: false, addEventListener() {}, removeEventListener() {},
   } });
 `;
 const FAKE_VOICES = [
@@ -582,16 +590,18 @@ const FAKE_VOICES = [
 ];
 
 for (const [locale, lang, voice] of [['en', 'en-GB', 'Daniel'], ['zh', 'zh-CN', 'Tingting']] as const) {
-  test(`PRESENTATION voice (${locale}): the checkbox speaks each caption in the page language, cancels on a new beat, and auto-play waits for the end`, async ({ page }) => {
+  test(`PRESENTATION voice (${locale}): speaks exactly the ${locale} caption, auto-play advances only after the utterance ends, a manual jump cancels and restarts`, async ({ page }) => {
     test.setTimeout(60_000);
-    await page.addInitScript(FAKE_SPEECH(FAKE_VOICES));
+    await page.addInitScript(FAKE_SPEECH(FAKE_VOICES, 2000));
     await page.setViewportSize({ width: 1920, height: 1080 });
     await openScene(page, `/${locale}/topics/sample-time/?ch=first-look`);
     const api = () => page.evaluate(() => window.__atlas!.state());
-    const spoken = () => page.evaluate(() => (window as unknown as { __spoken: { text: string; lang: string; voice: string; rate: number; pitch: number }[] }).__spoken.filter((u) => u.text.trim() !== ''));
+    const log = () => page.evaluate(() => window.__atlas!.voiceLog());
+    const captionText = async () => (await page.locator('.ts-present__caption').textContent())!.trim();
 
     await page.keyboard.press('p');
     await expect.poll(async () => (await api()).modes.presentation).toBe(true);
+    expect(await page.evaluate(() => window.__atlas!.setAutoplay(true))).toBe(true);
     const box = page.locator('.ts-present__voice input');
     await expect(box).toBeEnabled();
     await expect(box).not.toBeChecked();
@@ -601,36 +611,67 @@ for (const [locale, lang, voice] of [['en', 'en-GB', 'Daniel'], ['zh', 'zh-CN', 
     await expect.poll(async () => (await api()).presentation?.voice).toBe(true);
     expect(await page.evaluate(() => sessionStorage.getItem('atlas:voice'))).toBe('1');
 
-    // Spoken once the caption has faded in: the caption text, the picked voice's language, rate 0.95.
-    const caption = (await page.locator('.ts-present__caption').textContent())!.trim();
-    await expect.poll(async () => (await spoken()).length, { timeout: 8000 }).toBe(1);
-    expect((await spoken())[0]).toMatchObject({ text: caption, lang, voice, rate: 0.95, pitch: 1 });
+    // The whole caption of the page language (no header, no other language), the page locale's lang, that language's voice.
+    const caption1 = await captionText();
+    await expect.poll(async () => (await log()).length, { timeout: 8000 }).toBe(1);
+    const first = (await log())[0]!;
+    expect(first).toMatchObject({ text: caption1, lang, voice, reason: null });
+    expect(first.text).not.toMatch(/^\d{2} \/ \d{2}/);
+    if (locale === 'zh') expect(first.text).toMatch(/[\u4e00-\u9fff]/);
+    else expect(first.text).not.toMatch(/[\u4e00-\u9fff]/);
 
-    // A new beat cancels and speaks the next caption.
-    const cancels = await page.evaluate(() => (window as unknown as { __cancels: number }).__cancels);
-    await page.keyboard.press('ArrowRight');
-    await expect.poll(async () => (await api()).presentation?.chapter).toBe('second-look');
-    expect(await page.evaluate(() => (window as unknown as { __cancels: number }).__cancels)).toBeGreaterThan(cancels);
-    const caption2 = (await page.locator('.ts-present__caption').textContent())!.trim();
-    await expect.poll(async () => (await spoken()).length, { timeout: 8000 }).toBe(2);
-    expect((await spoken())[1]!.text).toBe(caption2);
+    // Nothing advances while it is speaking (2 s long): sampled in one call, so a slow frame cannot blur it.
+    await expect.poll(async () => (await log())[0]!.started).not.toBeNull();
+    const mid = await page.evaluate(() => ({ ended: window.__atlas!.voiceLog()[0]!.ended, chapter: window.__atlas!.state().presentation?.chapter }));
+    if (mid.ended === null) expect(mid.chapter).toBe('first-look');
+    // It ends for real, then (and only then) the presentation moves on and speaks the next caption from its start.
+    await expect.poll(async () => (await log())[0]!.reason, { timeout: 5000 }).toBe('end');
+    await expect.poll(async () => (await api()).presentation?.chapter, { timeout: 5000 }).toBe('second-look');
+    const gap = await page.evaluate(() => {
+      const spoken = (window as unknown as { __spoken: { at: number }[] }).__spoken.filter((u) => (u as unknown as { text: string }).text.trim() !== '');
+      return spoken[1] ? spoken[1].at - window.__atlas!.voiceLog()[0]!.ended! : null;
+    });
+    if (gap !== null) expect(gap).toBeGreaterThanOrEqual(0);
+    const caption2 = await captionText();
+    expect(caption2).not.toBe(caption1);
+    await expect.poll(async () => (await log()).length, { timeout: 8000 }).toBe(2);
+    expect((await log())[1]).toMatchObject({ text: caption2, lang, voice, reason: null });
 
-    // Auto-play with Voice: the next beat comes right after the utterance ends (2.3 s settle + 0.15 s + 0.6 s), not after the 6 s dwell.
-    expect(await page.evaluate(() => window.__atlas!.setAutoplay(true))).toBe(true);
-    await page.waitForTimeout(100);
+    // A manual jump cancels the current utterance (no advance from the cancellation) and reads the new beat's caption from the start.
+    await expect.poll(async () => (await log())[1]!.started).not.toBeNull();
     await page.keyboard.press('ArrowLeft');
     await expect.poll(async () => (await api()).presentation?.chapter).toBe('first-look');
-    const started = Date.now();
-    await expect.poll(async () => (await api()).presentation?.chapter, { timeout: 5600 }).toBe('second-look');
-    expect(Date.now() - started).toBeLessThan(5600);
+    await expect.poll(async () => (await log())[1]!.reason).toBe('cancelled');
+    await expect.poll(async () => (await log()).length, { timeout: 8000 }).toBe(3);
+    expect((await log())[2]).toMatchObject({ text: caption1, lang, voice, reason: null });
+    await page.waitForTimeout(800);
+    expect((await api()).presentation?.chapter).toBe('first-look');
 
-    // Switching Voice off stops it; leaving the presentation cancels.
+    // Voice off stops it; leaving the presentation cancels.
     expect(await page.evaluate(() => window.__atlas!.setVoice(false))).toBe(true);
     await expect.poll(async () => (await api()).presentation?.voice).toBe(false);
+    await expect.poll(async () => (await log())[2]!.reason).toBe('cancelled');
     await page.keyboard.press('Escape');
     await expect.poll(async () => (await api()).modes.presentation).toBe(false);
   });
 }
+
+test('PRESENTATION voice: a spurious early `end` is not the end (auto-play keeps waiting)', async ({ page }) => {
+  await page.addInitScript(FAKE_SPEECH(FAKE_VOICES, 5));
+  await page.setViewportSize({ width: 1920, height: 1080 });
+  await openScene(page, '/en/topics/sample-time/?ch=first-look');
+  const api = () => page.evaluate(() => window.__atlas!.state());
+  await page.keyboard.press('p');
+  await expect.poll(async () => (await api()).modes.presentation).toBe(true);
+  await page.evaluate(() => window.__atlas!.setAutoplay(true));
+  await page.locator('.ts-present__voice input').click();
+  await expect.poll(async () => (await page.evaluate(() => window.__atlas!.voiceLog())).length, { timeout: 8000 }).toBe(1);
+  await expect.poll(async () => (await page.evaluate(() => window.__atlas!.voiceLog()))[0]!.reason).toBe('spurious-end');
+  const chapter = (await api()).presentation?.chapter;
+  await page.waitForTimeout(2500);
+  expect((await api()).presentation?.chapter).toBe(chapter);
+  expect((await api()).presentation?.beat).toBe(0);
+});
 
 test('PRESENTATION voice: without a matching voice (or speechSynthesis) the checkbox is disabled with a hint', async ({ page }) => {
   await page.addInitScript(FAKE_SPEECH([{ name: 'Meijia', lang: 'zh-TW', localService: true }]));

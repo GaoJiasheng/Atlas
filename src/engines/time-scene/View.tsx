@@ -42,7 +42,7 @@ import type { TimeSceneExt } from './index';
 import type { TimeChapterState, TimeSceneGeoData } from './schema';
 import { buildTimeModel, type TimeModel } from './lib/model';
 import { createPlayhead, type Playhead } from './lib/playhead';
-import { onVoicesChanged, primeSpeech, speak, speakableText, stopSpeech, voiceFor, type Narration } from './lib/speech';
+import { onVoicesChanged, primeSpeech, speak, speakableText, SPEECH_LANG, stopSpeech, voiceLog, voiceFor, type Narration } from './lib/speech';
 import { clamp, fromNumber, stepFor, toNumber, type TimePoint } from './lib/time';
 import { frameAt } from './lib/frame';
 import { referencePair } from './lib/stats';
@@ -663,6 +663,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
         },
         setAutoplay,
         setVoice,
+        voiceLog,
       },
       escape: () => {
         if (presentingRef.current) {
@@ -951,7 +952,7 @@ function Presentation({
     const timer = window.setTimeout(
       () => {
         sp.state = 'speaking';
-        narration = speak(spoken, voiceChoice, () => {
+        narration = speak(spoken, SPEECH_LANG[locale === 'zh' ? 'zh' : 'en'], voiceChoice, () => {
           sp.state = 'ended';
           for (const l of [...sp.listeners]) l();
         });
@@ -976,7 +977,7 @@ function Presentation({
         if (audio?.ended) advance();
         else if (audio && !audio.paused) audio.addEventListener('ended', advance, { once: true });
         else if (voiceOn && speech.current.state !== 'idle') {
-          // Wait for the utterance to end (a short breath after it); a stuck engine falls back to three dwells.
+          // Wait for the utterance to genuinely end (a short breath after it). A lost `end` falls back to 3x the expected speech time (12 chars/s).
           const sp = speech.current;
           const afterEnd = () => {
             window.clearTimeout(dwell);
@@ -986,7 +987,7 @@ function Presentation({
           else {
             sp.listeners.add(afterEnd);
             stopWaiting = () => sp.listeners.delete(afterEnd);
-            dwell = window.setTimeout(advance, 3 * autoplayDwell([...captionText].length));
+            dwell = window.setTimeout(advance, Math.max(6_000, 3 * ([...spoken].length / 12) * 1000));
           }
         } else dwell = window.setTimeout(advance, autoplayDwell([...captionText].length));
       },
@@ -1008,7 +1009,7 @@ function Presentation({
       window.removeEventListener('keydown', hold, true);
       window.removeEventListener('wheel', hold, true);
     };
-  }, [autoplay, held, last, index, instant, audio, captionText, onStep, voiceOn]);
+  }, [autoplay, held, last, index, instant, audio, captionText, spoken, onStep, voiceOn]);
   return (
     <div className="ts-present" data-instant={instant || undefined}>
       <div className="ts-present__hit" onClick={() => onStep(1)} aria-hidden="true" />

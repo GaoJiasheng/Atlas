@@ -14,6 +14,7 @@ import {
   type HudStore,
   type KeyBinding,
   type SceneStats,
+  type VoiceLogEntry,
 } from './controls';
 
 export type AtlasState = SceneSnapshot & {
@@ -57,6 +58,8 @@ export interface AtlasTestApi {
   setAutoplay(on: boolean): boolean;
   /** Presentation voice (caption narration) on / off; false when the engine has none or the device has no voice. */
   setVoice(on: boolean): boolean;
+  /** Debug: the last 10 narrated utterances `{ text, lang, voice, started, ended, reason }`. */
+  voiceLog(): VoiceLogEntry[];
   setHud(on: boolean): void;
   setTheme(theme: Theme): void;
   state(): AtlasState;
@@ -143,6 +146,7 @@ export function installTestApi(deps: TestApiDeps): () => void {
       return true;
     },
     setVoice: (on) => hud.getState().controls.beats?.setVoice?.(on) ?? false,
+    voiceLog: () => hud.getState().controls.beats?.voiceLog?.() ?? [],
     setHud: (on) => actions.setHud(on),
     setTheme: (theme) => deps.setTheme(theme),
     state: () => {
