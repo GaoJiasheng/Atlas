@@ -1,16 +1,16 @@
 /**
- * ww1 step 3c — front lines drawn as strokes on georeferenced maps -> areas.
+ * Step 3c — front lines drawn as strokes on georeferenced maps -> areas.
  *
- *   pnpm tsx scripts/geo/ww1/lines.ts                       # every line in lines.json -> work/svg-lines.geojson
- *   pnpm tsx scripts/geo/ww1/lines.ts --crop <map> --box x0,y0,x1,y1 [--grid 50] [--scale 1]
+ *   pnpm tsx scripts/geo/lib/lines.ts --topic <slug>        # every line in scripts/geo/<slug>/lines.json -> work/svg-lines.geojson
+ *   pnpm tsx scripts/geo/lib/lines.ts --topic <slug> --crop <map> --box x0,y0,x1,y1 [--grid 50] [--scale 1]
  *        # work/lines-crop.png: the source map with a coordinate grid (pick `via` points)
- *   pnpm tsx scripts/geo/ww1/lines.ts --show <line> [--pad 40] [--scale 1]
+ *   pnpm tsx scripts/geo/lib/lines.ts --topic <slug> --show <line> [--pad 40] [--scale 1]
  *        # work/lines-show-<line>.png: the traced line over its source map
  *
  * Most First World War front maps (the West Point atlas and its Commons
  * redraws) draw fronts as coloured lines, not as filled areas, so the class
  * tracer (georef-svg.ts / georef-raster.ts) has nothing to fill. For each
- * entry of `scripts/geo/ww1/lines.json`:
+ * entry of `scripts/geo/<slug>/lines.json`:
  *
  * 1. The source map is an entry of `maps` in lines.json (a sources.json
  *    dataset with its own control points, or `controlPointsFrom` another map
@@ -44,13 +44,14 @@ import { existsSync, readFileSync } from 'node:fs';
 import { parseArgs } from 'node:util';
 import type { Feature, Position } from 'geojson';
 import sharp from 'sharp';
-import { candidates, evaluate, type FitReport, type Model } from '../lib/fit';
-import { log, mapshaper, readJson, toFc, warn, writeJson } from '../lib/common';
-import { svgControlPoints, type ControlPoint } from '../lib/manifest';
-import { openTopic } from '../lib/topic';
+import { candidates, evaluate, type FitReport, type Model } from './fit';
+import { log, mapshaper, readJson, toFc, warn, writeJson } from './common';
+import { svgControlPoints, type ControlPoint } from './manifest';
+import { openTopic } from './topic';
 
 const { values } = parseArgs({
   options: {
+    topic: { type: 'string' },
     crop: { type: 'string' },
     box: { type: 'string' },
     grid: { type: 'string', default: '50' },
@@ -59,7 +60,7 @@ const { values } = parseArgs({
     scale: { type: 'string', default: '1' },
   },
 });
-const topic = openTopic('ww1');
+const topic = openTopic(values.topic);
 const sources = topic.sources;
 
 type Pt = [number, number];
