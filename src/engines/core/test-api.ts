@@ -28,7 +28,7 @@ export type AtlasState = SceneSnapshot & {
   /** Theme actually applied (`<html data-theme>`). */
   appliedTheme: string | undefined;
   /** The presentation beat on show (`beat` = 0-based position inside the chapter); `null` outside the presentation. */
-  presentation: { chapter: string; beat: number } | null;
+  presentation: { chapter: string; beat: number; autoplay?: boolean } | null;
 };
 
 export interface AtlasTestApi {
@@ -45,7 +45,10 @@ export interface AtlasTestApi {
   beats(): BeatInfo[];
   /** Enter the presentation if needed and go to beat `i` (`instant` default false). */
   goToBeat(index: number, options?: { instant?: boolean }): void;
-  setPaused(on: boolean): void;
+  /** Run / pause; returns false (and does nothing) when the scene has nothing to pause. */
+  setPaused(on: boolean): boolean;
+  /** Presentation auto-play on / off; returns false when the engine has no auto-play. */
+  setAutoplay(on: boolean): boolean;
   setHud(on: boolean): void;
   setTheme(theme: Theme): void;
   state(): AtlasState;
@@ -119,7 +122,17 @@ export function installTestApi(deps: TestApiDeps): () => void {
     keymap: () => buildKeymap(hud.getState().controls),
     beats: () => hud.getState().controls.beats?.list() ?? [],
     goToBeat: (index, options) => hud.getState().controls.beats?.go(index, { instant: options?.instant ?? false }),
-    setPaused: (on) => actions.setPaused(on),
+    setPaused: (on) => {
+      if (!hud.getState().controls.pause) return false;
+      actions.setPaused(on);
+      return true;
+    },
+    setAutoplay: (on) => {
+      const set = hud.getState().controls.beats?.setAutoplay;
+      if (!set) return false;
+      set(on);
+      return true;
+    },
     setHud: (on) => actions.setHud(on),
     setTheme: (theme) => deps.setTheme(theme),
     state: () => {

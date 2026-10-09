@@ -9,8 +9,8 @@
  * bloc tint plus a 45° hatch, movements as thin flow lines with a small
  * arrowhead, events as hollow rings with a dot (massacres / atrocities as
  * hollow squares, sieges with a dashed outer ring), static `site` points on
- * their own layer, leader labels for what the chapter emphasises (leaders.ts)
- * and a scale bar. Entity colours follow the bloc valid at `t` (lib/bloc.ts).
+ * their own layer, territory names for who holds what (territory.ts), leader
+ * labels for what the chapter emphasises (leaders.ts) and a scale bar. Entity colours follow the bloc valid at `t` (lib/bloc.ts).
  *
  * Loaded lazily (dynamic import) so MapLibre stays out of the View chunk.
  */
@@ -34,6 +34,7 @@ import { areaLabelPoint, metresPerPixel, pickWorldCopy, pointAlong, projectNearC
 import { referencePair } from '../../lib/stats';
 import { formatTime } from '../../lib/format';
 import { createLeaders, intersects, type LeaderItem } from './leaders';
+import { createTerritoryLabels } from './territory';
 
 export interface GeoControllerOptions {
   container: HTMLElement;
@@ -41,6 +42,8 @@ export interface GeoControllerOptions {
   labelRoot: HTMLElement;
   /** Scale bar element (bottom-left of the free stage band). */
   scaleRoot: HTMLElement;
+  /** Layer over the map for territory names (outside the host LABELS / HUD switches). */
+  territoryRoot: HTMLElement;
   store: SceneStore<TimeSceneExt>;
   playhead: Playhead;
   model: TimeModel;
@@ -53,6 +56,8 @@ export interface GeoController {
   /** Host `leaders` <svg> (slot); leader paths are drawn into it. */
   setLeadersSvg(svg: SVGSVGElement | null): void;
   setGraticule(on: boolean): void;
+  /** Territory names (N): who holds each control area, sized by its area on screen. */
+  setTerritory(on: boolean): void;
   /** REFERENCE: outline the adjacent control keyframe in dashed ink (2 s fade). */
   setReference(on: boolean, instant: boolean): void;
   /**
@@ -146,7 +151,10 @@ const eventRadius = (e: SceneEvent, active: boolean, hl: boolean) => (3 + 2 * e.
 
 /** Bloc tint under the hatch (docs/08 §5: low saturation, ~.28). */
 const CONTROL_TINT = 0.28;
-const MAX_PLACE_LABELS = 12;
+/** Modern country names (borders on): a secondary class, only close in and away from territory names. */
+const MAX_PLACE_LABELS = 8;
+const PLACE_MIN_ZOOM = 5;
+const PLACE_CLEAR_PX = 60;
 /** Leader labels shown for a presentation beat (its highlighted ids). */
 const PRESENTATION_MAX_LABELS = 6;
 const HIT_RADIUS = 22; // 44px hit box around events
@@ -354,6 +362,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   const pixelRatio = Math.min(3, Math.max(1, Math.round(window.devicePixelRatio || 1)));
   const graticuleData = graticule();
   let graticuleOn = true;
+  let territoryOn = true;
   let referenceOn = false;
   let presenting = false;
 
@@ -669,6 +678,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
 
     updateDashAnimation(on.has('movements') && frame.movements.length > 0);
     updateLeaders(frame);
+    updateTerritory(false);
     updateLabels();
   };
 
@@ -845,11 +855,59 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
       const box = { x: 28 * band.u, y: band.bottom - scaleRoot.offsetHeight, w: scaleRoot.offsetWidth, h: scaleRoot.offsetHeight };
       if (band.obstacles.some((r) => intersects(box, r))) box.x = band.left;
       scaleRoot.style.transform = `translate(${box.x.toFixed(1)}px, ${box.y.toFixed(1)}px)`;
-      // HUD panels moved, appeared or hid (H): place labels re-check what they collide with.
-      if (loaded) resolveLabelCollisions();
+      // HUD panels moved, appeared or hid (H): territory and place names re-check what they collide with.
+      if (loaded) {
+        updateTerritory(true);
+        resolveLabelCollisions();
+      }
     },
   });
   disposers.push(() => leaders.destroy());
+
+  /* ---------- territory names (who holds what at `t`; N) ---------- */
+  const territory = createTerritoryLabels({ map, container, root: options.territoryRoot, model });
+  disposers.push(() => territory.destroy());
+  let territorySig = '';
+  /**
+   * Re-place territory names when what they depend on changed (keyframe pair,
+   * blend in 5 % steps, highlight, leader placards, switches) or on `force`
+   * (camera settled, HUD band changed); otherwise only move / fade them.
+   */
+  const updateTerritory = (force: boolean) => {
+    const frame = lastFrame;
+    if (!loaded || !frame) return;
+    const on = territoryOn && layersOn().has('control');
+    const { control } = frame;
+    const boxes = leaders.boxes();
+    const sig = [
+      on,
+      control.prevIndex,
+      control.nextIndex,
+      Math.round(control.blend * 20),
+      highlight().join(','),
+      presenting,
+      boxes.map((b) => `${Math.round(b.x / 8)},${Math.round(b.y / 8)}`).join(';'),
+    ].join('|');
+    if (!force && sig === territorySig) {
+      territory.reproject(control.nextIndex >= 0 ? control.blend : 0);
+      return;
+    }
+    territorySig = sig;
+    if (!on) {
+      territory.place(null);
+      return;
+    }
+    // Highlighted entities get a leader placard; their unlabelled areas skip the territory name.
+    const skip = new Set(layersOn().has('control') || layersOn().has('participation') ? highlight() : []);
+    const band = leaders.band();
+    territory.place({
+      prevIndex: control.prevIndex,
+      nextIndex: control.nextIndex,
+      blend: control.blend,
+      skipHolders: skip,
+      obstacles: [...boxes, ...(band?.obstacles ?? []).map((r) => ({ x: r.x, y: r.y, w: r.width, h: r.height }))],
+    });
+  };
 
   const dateText = (from: Parameters<typeof formatTime>[0], to?: Parameters<typeof formatTime>[0]) => {
     const a = formatTime(from, locale);
@@ -943,43 +1001,21 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     leaders.setItems(presenting ? items.filter((i) => i.pinned).slice(0, PRESENTATION_MAX_LABELS) : items);
   };
 
-  /* ---------- place labels (HTML markers, max 12, greedy de-overlap) ---------- */
+  /* ---------- place names (modern countries, borders on; HTML markers, max 8, greedy de-overlap) ---------- */
   interface Label {
     key: string;
     text: string;
-    sub?: string;
     at: LngLat;
     priority: number;
-    color?: string;
-    kind: 'entity' | 'place';
   }
   const labels = new Map<string, { marker: Marker; text: string; label: Label }>();
 
   const labelCandidates = (): Label[] => {
-    const frame = lastFrame;
-    if (!frame || presenting) return [];
-    const on = layersOn();
-    const hl = new Set(highlight());
-    const out: Label[] = [];
-    if (on.has('control') || on.has('participation')) {
-      for (const [holder, features] of entityGeometry(frame)) {
-        const en = model.entities.get(holder)?.entity;
-        // Highlighted entities carry a leader label instead.
-        if (!en || hl.has(holder)) continue;
-        const at = entityAnchor(features);
-        if (!at) continue;
-        out.push({ key: `entity:${holder}`, text: tx(en.name, locale), at, priority: 40, color: entityColor(holder, playhead.get()), kind: 'entity' });
-      }
-    }
-    if (on.has('borders') && countryLabels) {
-      const zoom = map.getZoom();
-      const limit = Math.round(6 * 2 ** Math.max(0, zoom - 1));
-      for (const c of countryLabels) {
-        if (c.rank > limit) continue;
-        out.push({ key: `place:${c.name}`, text: c.name, at: c.at, priority: 10 - c.rank / 1000, kind: 'place' });
-      }
-    }
-    return out;
+    if (!lastFrame || presenting || !countryLabels || !layersOn().has('borders')) return [];
+    const zoom = map.getZoom();
+    if (zoom < PLACE_MIN_ZOOM) return [];
+    const limit = Math.round(6 * 2 ** Math.max(0, zoom - 1));
+    return countryLabels.filter((c) => c.rank <= limit).map((c) => ({ key: `place:${c.name}`, text: c.name, at: c.at, priority: 10 - c.rank / 1000 }));
   };
 
   const updateLabels = () => {
@@ -992,11 +1028,14 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     const candidates = labelCandidates()
       .filter((l) => bounds.contains([nearLng(l.at), l.at[1]]))
       .sort((a, b) => b.priority - a.priority);
+    // A territory name already says it: skip modern names within 60 px of one.
+    const named = candidates.length ? territory.centres() : [];
     const chosen: Label[] = [];
     for (const l of candidates) {
       if (chosen.length >= MAX_PLACE_LABELS) break;
       const p = projectNearCentre(project, l.at, width / 2);
       if (p.x < 0 || p.y < 0 || p.x > width || p.y > height) continue;
+      if (named.some((c) => Math.hypot(c.x - p.x, c.y - p.y) < PLACE_CLEAR_PX)) continue;
       chosen.push(l);
     }
     const keep = new Set(chosen.map((l) => l.key));
@@ -1010,7 +1049,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
       let entry = labels.get(l.key);
       if (!entry) {
         const el = document.createElement('div');
-        el.className = `ts-label ts-label--${l.kind}`;
+        el.className = 'ts-label ts-label--place';
         el.appendChild(document.createElement('span'));
         const marker = new Marker({ element: el, anchor: 'center' });
         marker.setLngLat(l.at).addTo(map);
@@ -1024,22 +1063,21 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
         entry.text = l.text;
       }
       entry.marker.setLngLat(l.at);
-      if (l.color) el.style.setProperty('--ts-color', l.color);
-      else el.style.removeProperty('--ts-color');
     }
     resolveLabelCollisions();
   };
 
   /**
    * Greedy collision pass over the placed markers, on real screen rects:
-   * walk labels in priority order (entities > places) and hide any label
-   * that overlaps (4px padding) a HUD panel, a leader placard or one
-   * already kept.
+   * walk place names in priority order and hide any that overlaps (4px
+   * padding) a HUD panel, a leader placard, a territory name or one already
+   * kept.
    */
   const LABEL_PAD = 4;
   const resolveLabelCollisions = () => {
     const ordered = [...labels.values()].sort((a, b) => b.label.priority - a.label.priority);
-    const occupied: DOMRect[] = leaders.rects();
+    if (labels.size === 0) return;
+    const occupied: DOMRect[] = [...leaders.rects(), ...territory.rects()];
     for (const entry of ordered) {
       const el = entry.marker.getElement();
       const rect = (el.firstElementChild ?? el).getBoundingClientRect();
@@ -1140,9 +1178,13 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     reorientArrows();
     updateScale();
   });
-  map.on('render', () => leaders.update());
+  map.on('render', () => {
+    leaders.update();
+    territory.reproject();
+  });
   map.on('moveend', (e) => {
     reorientArrows();
+    updateTerritory(true);
     updateLabels();
     // The camera settled: re-measure so the beat's labels sit in the final band right away (no waiting for the slow interval).
     if (presenting) leaders.relayout();
@@ -1229,6 +1271,12 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     setGraticule(on) {
       graticuleOn = on;
       applyVisibility();
+    },
+    setTerritory(on) {
+      if (on === territoryOn) return;
+      territoryOn = on;
+      updateTerritory(true);
+      updateLabels();
     },
     refreshLabels() {
       leaders.relayout();

@@ -42,7 +42,7 @@
   text-transform: uppercase;
 }
 
-/* Chapter caption while playback holds at a node; REFERENCE banner. */
+/* REFERENCE banner. */
 .ts-stop {
   position: absolute;
   left: 50%;
@@ -69,11 +69,6 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ink-2);
-}
-.ts-stop__title {
-  font: 500 calc(13.5 * var(--u)) / 1.2 var(--font-hud);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 .ts-ref {
   border-color: var(--cold);
@@ -207,8 +202,45 @@
 }
 
 /* Two-level progress bar: a segment per chapter, the current one split into its beats. */
+/* Progress bar and the AUTO-PLAY checkbox on one row. */
+.ts-present__row {
+  display: flex;
+  align-items: flex-start;
+  gap: calc(16 * var(--u));
+}
 .ts-present__bar {
+  flex: 1 1 auto;
+  min-width: 0;
   pointer-events: auto;
+}
+.ts-present__auto {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: calc(6 * var(--u));
+  margin-top: calc(-4 * var(--u));
+  font: 500 calc(10 * var(--u)) / 1 var(--font-hud);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  cursor: pointer;
+  pointer-events: auto;
+}
+.ts-present__auto input {
+  width: calc(12 * var(--u));
+  height: calc(12 * var(--u));
+  margin: 0;
+  accent-color: var(--signal);
+  cursor: pointer;
+}
+.ts-present__auto[data-held] span {
+  color: var(--ink-3);
+}
+@media (pointer: coarse) {
+  .ts-present__auto {
+    min-height: var(--hit);
+    margin-top: calc((var(--hit) - 12px) / -2);
+  }
 }
 .ts-present__bar ol {
   display: flex;
@@ -334,7 +366,6 @@
 .ts-stage[data-presenting] .ts-co {
   --u: calc(var(--kt) * 1.2px);
 }
-.ts-stage[data-presenting] .ts-label--entity,
 .ts-stage[data-presenting] .ts-label--place {
   display: none;
 }
@@ -401,35 +432,74 @@
 /* Map markers: place names, arrowheads, pulses (HTML, no glyphs)      */
 /* ------------------------------------------------------------------ */
 
-.ts-label--entity,
 .ts-label--place {
   pointer-events: none;
   white-space: nowrap;
 }
-.ts-label--entity[data-collided="true"],
 .ts-label--place[data-collided="true"] {
   visibility: hidden;
 }
-.ts-label--entity span,
 .ts-label--place span {
   display: inline-block;
   font-family: var(--font-hud);
+  font-size: calc(9.6 * var(--u));
+  font-weight: 500;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
+  color: var(--ink-3);
   text-shadow:
     0 0 3px var(--bg),
     0 0 6px var(--bg);
 }
-.ts-label--entity span {
-  font-size: calc(11.5 * var(--u));
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  color: color-mix(in srgb, var(--ts-color, var(--ink)) 55%, var(--ink));
+
+/* Territory names (territory.ts): museum placard, EN small caps over Chinese, ink with a paper halo, no box. */
+.ts-terrs {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
 }
-.ts-label--place span {
-  font-size: calc(10.4 * var(--u));
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  color: var(--ink-3);
+.ts-terr {
+  --ts-terr-en: 10;
+  --ts-terr-zh: 10;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(1 * var(--u));
+  white-space: nowrap;
+  text-align: center;
+  color: var(--ink);
+  text-shadow:
+    0 0 calc(2 * var(--u)) var(--land),
+    0 0 calc(4 * var(--u)) var(--land),
+    0 0 calc(7 * var(--u)) color-mix(in srgb, var(--land) 70%, transparent);
+  transition: opacity 220ms var(--ease-out);
+  will-change: transform;
+}
+.ts-terr[data-tier="1"] {
+  --ts-terr-en: 14;
+  --ts-terr-zh: 13;
+}
+.ts-terr[data-tier="2"] {
+  --ts-terr-en: 11.5;
+  --ts-terr-zh: 11.5;
+}
+.ts-terr__en {
+  font: 600 calc(var(--ts-terr-en) * var(--u)) / 1.1 var(--font-hud);
+  letter-spacing: 0.2em;
+  /* Letter spacing trails the last glyph; pull it back so the line stays centred. */
+  margin-right: -0.2em;
+  text-transform: uppercase;
+}
+.ts-terr__zh {
+  font: 500 calc(var(--ts-terr-zh) * var(--u)) / 1.15 var(--font-hud);
+  letter-spacing: 0.18em;
+  margin-right: -0.18em;
+  color: var(--ink-2);
 }
 
 .ts-arrowhead {
@@ -747,17 +817,9 @@ button.ts-co:focus-visible {
   align-items: center;
   gap: 8px;
 }
-.ts-timeline__speed {
-  display: inline-flex;
-  gap: 3px;
-}
-.ts-timeline__speed .hud-btn {
-  font-family: var(--font-mono);
-  letter-spacing: 0.02em;
-  text-transform: none;
-}
-.ts-timeline__play {
-  min-width: calc(26 * var(--u));
+.ts-timeline__present[aria-pressed="true"] {
+  border-color: var(--signal);
+  color: var(--signal);
 }
 .ts-timeline__lanes i {
   width: 5px;
@@ -1212,6 +1274,7 @@ button.ts-co:focus-visible {
     animation: none;
   }
   .ts-co,
+  .ts-terr,
   .ts-leader,
   .ts-leader__dot {
     transition: none;

@@ -2,14 +2,15 @@
  * TimeScene view: GeoStage (MapLibre) + the bottom bar (timeline rule, state
  * cluster, swimlanes) + HUD content (participation card, perf) + the control
  * panel (layers, tools, key) + inspectors (event, entity), and the scene
- * controls (geographic presets, modes, pause, status, spec rows, beats). See
+ * controls (geographic presets, modes, status, spec rows, beats). See
  * docs/06 "TimeScene".
  *
  * Time flows through two layers:
  *  - the store's `t` (TimePoint, in the URL, set by chapters and deep links)
  *  - the playhead (continuous number the map renders at; lib/playhead.ts)
- * Chapter changes tween the playhead to the chapter's time; scrubbing and
- * playback move the playhead and write a rounded `t` back with `patch()`.
+ * Chapter changes tween the playhead to the chapter's time; scrubbing moves
+ * the playhead and writes a rounded `t` back with `patch()`. There is no
+ * free-running playback: the bar's PRESENT button starts the presentation.
  *
  * PRESENTATION (P) is a sequence of user-paced beats: every chapter's
  * `state.beats`, or one beat per chapter (its state, `summary` as caption).
@@ -17,7 +18,10 @@
  * its caption in; click / → / SPACE = next, ← = previous, a chapter segment or
  * beat tick of the progress bar = jump. The
  * HUD is hidden, the map takes no input. ESC or P ends it and restores the
- * scene as it was.
+ * scene as it was. AUTO-PLAY (a checkbox by the progress bar, remembered for
+ * the session) advances by itself once the camera has settled and the caption
+ * has faded in: after the narration ends, else after a dwell that grows with
+ * the caption's length; any input pauses it for that beat.
  */
 import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
 import type { Chapter, EngineViewProps, GeoCamera, SceneSnapshot } from '../core/types';
@@ -39,7 +43,6 @@ import { formatTime } from './lib/format';
 import { GeoStage } from './stages/geo/GeoStage';
 import type { GeoController } from './stages/geo/controller';
 import { Timeline, formatReadout } from './timeline/Timeline';
-import { usePlayback } from './timeline/usePlayback';
 import { EventInspector } from './EventInspector';
 import { EntityInspector } from './EntityInspector';
 import { BandCard, PerfReadout, useFps } from './hud/HudPanels';
@@ -48,6 +51,25 @@ import { blocsOf, changesBloc } from './lib/bloc';
 import './time-scene.css';
 
 const CHAPTER_TWEEN_MS = 1600;
+/** A beat's camera flight (controller FLY_MS) and caption fade-in end about here; auto-play counts from then. */
+const BEAT_SETTLE_MS = 2300;
+/** Auto-play dwell: 4 s + 60 ms per caption character, within 6–20 s. */
+const autoplayDwell = (chars: number) => Math.min(20_000, Math.max(6_000, 4_000 + 60 * chars));
+const AUTOPLAY_KEY = 'atlas:autoplay';
+const readAutoplay = () => {
+  try {
+    return sessionStorage.getItem(AUTOPLAY_KEY) === '1';
+  } catch {
+    return false;
+  }
+};
+const writeAutoplay = (on: boolean) => {
+  try {
+    sessionStorage.setItem(AUTOPLAY_KEY, on ? '1' : '0');
+  } catch {
+    // Storage unavailable (private mode): the switch still works for this page.
+  }
+};
 const SQUARE_KINDS = new Set<string>(['massacre', 'atrocity']);
 /** Up to this many entities, the legend names each one; above, it groups by bloc. */
 const LEGEND_ENTITY_LIMIT = 6;
@@ -140,9 +162,6 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     [playhead, model, store],
   );
 
-  const playback = usePlayback(playhead, model, commit);
-  const { setPlaying } = playback;
-
   /** α of the timeline mapping, fitted by the rule to its width; the band card reuses it. */
   const [alpha, setAlpha] = useState(1);
 
@@ -188,11 +207,10 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   useEffect(
     () =>
       store.subscribe((s, prev) => {
-        // Camera presets and snaps only move the camera / finish eases: keep playback and time.
+        // Camera presets and snaps only move the camera / finish eases: keep the selection and time.
         const transitioned =
           s.transition.id !== prev.transition.id && s.transition.reason !== 'preset' && s.transition.reason !== 'snap';
         if (transitioned) {
-          setPlaying(false);
           setSelected(null);
           setSelectedEntity(null);
         }
@@ -206,22 +224,16 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
         if (transitioned && !s.transition.instant) playhead.tweenTo(target, CHAPTER_TWEEN_MS);
         else playhead.set(target);
       }),
-    [store, playhead, model, setPlaying],
+    [store, playhead, model],
   );
 
   /* ---------- user time controls ---------- */
   const step = stepFor(model.span, model.scale);
   const nudge = useCallback(
-    (dir: 1 | -1, big = false) => {
-      setPlaying(false);
-      commit(playhead.get() + dir * step * (big ? 10 : 1));
-    },
-    [commit, playhead, step, setPlaying],
+    (dir: 1 | -1, big = false) => commit(playhead.get() + dir * step * (big ? 10 : 1)),
+    [commit, playhead, step],
   );
-  const scrubStart = useCallback(() => {
-    setPlaying(false);
-    playhead.cancelTween();
-  }, [playhead, setPlaying]);
+  const scrubStart = useCallback(() => playhead.cancelTween(), [playhead]);
   const stepChapter = useCallback((dir: 1 | -1) => store.getState().stepChapter(dir), [store]);
   const goToChapterFromRule = useCallback(
     (id: string) => {
@@ -249,26 +261,20 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   const [controller, setController] = useState<GeoController | null>(null);
   const [graticuleOn, setGraticuleOn] = useState(true);
   useEffect(() => controller?.setGraticule(graticuleOn), [controller, graticuleOn]);
+  const [territoryOn, setTerritoryOn] = useState(true);
+  useEffect(() => controller?.setTerritory(territoryOn), [controller, territoryOn]);
 
 
-  /* ---------- REFERENCE (R): adjacent keyframe as dashed outlines, playback paused ---------- */
+  /* ---------- REFERENCE (R): adjacent keyframe as dashed outlines ---------- */
   const [reference, setReference] = useState(false);
   const referenceRef = useRef(false);
   referenceRef.current = reference;
-  const resumeAfterReference = useRef(false);
   const setReferenceMode = useCallback(
     (on: boolean, instant: boolean) => {
-      if (on) {
-        resumeAfterReference.current = playback.playing;
-        setPlaying(false);
-      } else if (resumeAfterReference.current) {
-        resumeAfterReference.current = false;
-        setPlaying(true);
-      }
       setReference(on);
       controller?.setReference(on, instant);
     },
-    [controller, playback.playing, setPlaying],
+    [controller],
   );
   useEffect(() => {
     // The map may load after REFERENCE was switched on.
@@ -333,7 +339,6 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
       if (beats.length === 0) return;
       if (!presentingRef.current) {
         if (reference) setReferenceMode(false, true);
-        setPlaying(false);
         setSelected(null);
         setSelectedEntity(null);
         setCardExpanded(false);
@@ -351,7 +356,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
       const here = beats.findIndex((b) => b.chapter === store.getState().chapter);
       applyBeat(clamp(start ?? Math.max(0, here), 0, beats.length - 1), instant);
     },
-    [beats, reference, setReferenceMode, setPlaying, store, hud, applyBeat],
+    [beats, reference, setReferenceMode, store, hud, applyBeat],
   );
   const stepBeat = useCallback(
     (dir: 1 | -1) => {
@@ -362,6 +367,15 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     },
     [beats.length, applyBeat],
   );
+  /* AUTO-PLAY: off by default, remembered for the session. */
+  const [autoplay, setAutoplayState] = useState(false);
+  useEffect(() => setAutoplayState(readAutoplay()), []);
+  const autoplayRef = useRef(autoplay);
+  autoplayRef.current = autoplay;
+  const setAutoplay = useCallback((on: boolean) => {
+    writeAutoplay(on);
+    setAutoplayState(on);
+  }, []);
   // ESC / H / "show HUD" bring the HUD back: that ends the presentation.
   useEffect(
     () =>
@@ -433,6 +447,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   const panelLayers = useMemo<ControlRow[]>(
     () => [
       { kind: 'layer', id: 'control', label: t('time.layer.control') },
+      { kind: 'mode', id: 'territory', label: t('time.layer.territory') },
       { kind: 'mode', id: 'borders', label: t('time.layer.borders') },
       { kind: 'mode', id: 'graticule', label: t('time.layer.graticule') },
       { kind: 'mode', id: 'flow', label: t('time.layer.movements') },
@@ -507,6 +522,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
           { id: 'flow', key: 'f', label: t('time.mode.flow'), on: movementsOn, tone: 'hot', status: 'FLOW' },
           { id: 'borders', key: 'b', label: t('time.mode.borders'), on: bordersOn },
           { id: 'graticule', key: 'g', label: t('time.mode.graticule'), on: graticuleOn, phone: false },
+          { id: 'territory', key: 'n', label: t('time.mode.territory'), on: territoryOn },
           {
             id: 'reference',
             key: 'r',
@@ -530,6 +546,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
           if (id === 'flow') toggleLayer('movements', on);
           else if (id === 'borders') toggleLayer('borders', on);
           else if (id === 'graticule') setGraticuleOn(on);
+          else if (id === 'territory') setTerritoryOn(on);
           else if (id === 'reference') setReferenceMode(on, instant);
           else if (id === 'presentation') {
             if (on) startPresentation(null, instant);
@@ -538,13 +555,12 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
         },
       },
       labels: true,
-      pause: { paused: !playback.playing, set: (paused) => setPlaying(!paused) },
       stats: () => {
         const s = readStats();
         return s ?? {};
       },
       specRows,
-      status: [statusT, `×${playback.speed}`].filter(Boolean),
+      status: [statusT].filter(Boolean),
       card: bi('time.card.title'),
       cardToggle: { expanded: cardExpanded, set: setCardExpanded },
       beats: {
@@ -552,8 +568,9 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
         go: (i, { instant }) => startPresentation(i, instant),
         current: () => {
           const b = beatRef.current !== null ? beats[beatRef.current] : undefined;
-          return b ? { chapter: b.chapter, beat: b.index } : null;
+          return b ? { chapter: b.chapter, beat: b.index, autoplay: autoplayRef.current } : null;
         },
+        setAutoplay,
       },
       escape: () => {
         if (presentingRef.current) {
@@ -591,13 +608,12 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     movementsOn,
     bordersOn,
     graticuleOn,
+    territoryOn,
     reference,
     presenting,
     beat,
     beats,
-    playback.playing,
-    playback.speed,
-    setPlaying,
+    setAutoplay,
     setReferenceMode,
     startPresentation,
     stopPresentation,
@@ -615,7 +631,9 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
 
   const selectedEvent = selected ? geo.events.find((e) => e.id === selected) ?? null : null;
   const pickedEntity = selectedEntity ? geo.entities.find((e) => e.id === selectedEntity) ?? null : null;
-  const stopChapter = playback.stop ? chapters.find((c) => c.id === playback.stop?.id) : undefined;
+
+  const beatClip = beat ? beats[beat.index]?.audio : undefined;
+  const beatAudio = beatClip ? (audio.current.get(beatClip) ?? null) : null;
 
   return (
     <div className="ts-stage" ref={stageRef} data-reference={reference || undefined} data-presenting={presenting || undefined}>
@@ -629,20 +647,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
       />
 
       <div className="ts-stop" role="status" aria-live="polite">
-        {reference ? (
-          <ReferenceBanner model={model} playhead={playhead} locale={locale} />
-        ) : (
-          stopChapter &&
-          playback.stop &&
-          !presenting && (
-            <div className="ts-stop__card">
-              <span className="ts-stop__eyebrow">
-                {t('time.chapterShort', { n: chapters.indexOf(stopChapter) + 1 })} · {formatReadout(playback.stop.t, model, locale)}
-              </span>
-              <span className="ts-stop__title">{tx(stopChapter.title, locale)}</span>
-            </div>
-          )
-        )}
+        {reference && <ReferenceBanner model={model} playhead={playhead} locale={locale} />}
       </div>
 
       {beat && (
@@ -657,6 +662,9 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
           locale={locale}
           onStep={stepBeat}
           onGo={(i) => applyBeat(i, false)}
+          audio={beatAudio}
+          autoplay={autoplay}
+          onAutoplay={setAutoplay}
         />
       )}
 
@@ -699,10 +707,8 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
           chapters={chapters}
           currentChapter={currentChapter}
           highlight={highlight}
-          playing={playback.playing}
-          speed={playback.speed}
-          onTogglePlay={() => setPlaying(!playback.playing)}
-          onSpeed={playback.setSpeed}
+          presenting={presenting}
+          onPresent={() => (presentingRef.current ? stopPresentation(true) : startPresentation(null, false))}
           onScrub={commit}
           onScrubStart={scrubStart}
           onNudge={nudge}
@@ -753,7 +759,7 @@ function ReferenceBanner({ model, playhead, locale }: { model: TimeModel; playhe
  * beats; the filled part is the progress up to the current beat. Leader labels
  * for the beat's highlighted ids come from the map (controller
  * `setPresentation`). A transparent layer over the map takes clicks (= next
- * beat) and keeps the map still.
+ * beat) and keeps the map still. Beside the bar, the AUTO-PLAY checkbox.
  */
 function Presentation({
   title,
@@ -766,6 +772,9 @@ function Presentation({
   locale,
   onStep,
   onGo,
+  audio,
+  autoplay,
+  onAutoplay,
 }: {
   title: BilingualText;
   beats: readonly Beat[];
@@ -777,6 +786,10 @@ function Presentation({
   locale: EngineViewProps['locale'];
   onStep(dir: 1 | -1): void;
   onGo(index: number): void;
+  /** This beat's narration clip, if it has one. */
+  audio: HTMLAudioElement | null;
+  autoplay: boolean;
+  onAutoplay(on: boolean): void;
 }) {
   const tr = useT();
   const now = useSyncExternalStore(playhead.subscribe, playhead.get, playhead.get);
@@ -800,6 +813,45 @@ function Presentation({
     onGo(i);
     if (e.detail > 0) e.currentTarget.blur();
   };
+
+  /*
+   * AUTO-PLAY: once the camera has settled and the caption has faded in, wait
+   * for the narration to end (if the beat has one and it plays), else a dwell
+   * by caption length, then go on. Any input (click, key, wheel) holds it for
+   * this beat; the next beat (however it comes) runs it again. Stops at the end.
+   */
+  const [held, setHeld] = useState(false);
+  useEffect(() => setHeld(false), [index]);
+  const last = index >= beats.length - 1;
+  const captionText = tx(b.caption, locale);
+  useEffect(() => {
+    if (!autoplay || held || last) return;
+    let dwell = 0;
+    const advance = () => onStep(1);
+    const settle = window.setTimeout(
+      () => {
+        if (audio?.ended) advance();
+        else if (audio && !audio.paused) audio.addEventListener('ended', advance, { once: true });
+        else dwell = window.setTimeout(advance, autoplayDwell([...captionText].length));
+      },
+      instant ? 0 : BEAT_SETTLE_MS,
+    );
+    const hold = (e: Event) => {
+      if (e.target instanceof Element && e.target.closest('.ts-present__auto')) return;
+      setHeld(true);
+    };
+    window.addEventListener('pointerdown', hold, true);
+    window.addEventListener('keydown', hold, true);
+    window.addEventListener('wheel', hold, true);
+    return () => {
+      window.clearTimeout(settle);
+      window.clearTimeout(dwell);
+      audio?.removeEventListener('ended', advance);
+      window.removeEventListener('pointerdown', hold, true);
+      window.removeEventListener('keydown', hold, true);
+      window.removeEventListener('wheel', hold, true);
+    };
+  }, [autoplay, held, last, index, instant, audio, captionText, onStep]);
   return (
     <div className="ts-present" data-instant={instant || undefined}>
       <div className="ts-present__hit" onClick={() => onStep(1)} aria-hidden="true" />
@@ -822,52 +874,65 @@ function Presentation({
           )}
         </p>
         <p className="ts-present__caption" key={index} ref={caption} aria-live="polite" onClick={() => onStep(1)}>
-          {tx(b.caption, locale)}
+          {captionText}
         </p>
-        <nav className="ts-present__bar" aria-label={tr('time.beats')}>
-          <ol>
-            {chapters.map((c, ci) => {
-              const { first, count } = spans[ci]!;
-              const state = ci < b.chapterIndex ? 'done' : ci === b.chapterIndex ? 'current' : 'todo';
-              const label = <span className="ts-present__no">{pad2(ci + 1)}</span>;
-              return (
-                <li key={c.id} className="ts-present__seg" data-state={state}>
-                  {state === 'current' && count > 1 ? (
-                    <>
-                      <div className="ts-present__ticks">
-                        {Array.from({ length: count }, (_, k) => (
-                          <button
-                            key={k}
-                            type="button"
-                            className="ts-present__tick"
-                            data-state={k <= b.index ? 'done' : 'todo'}
-                            aria-current={k === b.index ? 'step' : undefined}
-                            aria-label={tr('time.beat', { n: ci + 1, k: k + 1, caption: tx(beats[first + k]!.caption, locale) })}
-                            title={`${pad2(ci + 1)}.${k + 1} · ${tx(c.title, locale)}`}
-                            onClick={go(first + k)}
-                          />
-                        ))}
-                      </div>
-                      {label}
-                    </>
-                  ) : (
-                    <button
-                      type="button"
-                      className="ts-present__chap"
-                      aria-current={state === 'current' ? 'step' : undefined}
-                      aria-label={tr('time.beatChapter', { n: ci + 1, title: tx(c.title, locale) })}
-                      title={`${pad2(ci + 1)} · ${tx(c.title, locale)}`}
-                      onClick={go(first)}
-                    >
-                      <i className="ts-present__line" />
-                      {label}
-                    </button>
-                  )}
-                </li>
-              );
-            })}
-          </ol>
-        </nav>
+        <div className="ts-present__row">
+          <nav className="ts-present__bar" aria-label={tr('time.beats')}>
+            <ol>
+              {chapters.map((c, ci) => {
+                const { first, count } = spans[ci]!;
+                const state = ci < b.chapterIndex ? 'done' : ci === b.chapterIndex ? 'current' : 'todo';
+                const label = <span className="ts-present__no">{pad2(ci + 1)}</span>;
+                return (
+                  <li key={c.id} className="ts-present__seg" data-state={state}>
+                    {state === 'current' && count > 1 ? (
+                      <>
+                        <div className="ts-present__ticks">
+                          {Array.from({ length: count }, (_, k) => (
+                            <button
+                              key={k}
+                              type="button"
+                              className="ts-present__tick"
+                              data-state={k <= b.index ? 'done' : 'todo'}
+                              aria-current={k === b.index ? 'step' : undefined}
+                              aria-label={tr('time.beat', { n: ci + 1, k: k + 1, caption: tx(beats[first + k]!.caption, locale) })}
+                              title={`${pad2(ci + 1)}.${k + 1} · ${tx(c.title, locale)}`}
+                              onClick={go(first + k)}
+                            />
+                          ))}
+                        </div>
+                        {label}
+                      </>
+                    ) : (
+                      <button
+                        type="button"
+                        className="ts-present__chap"
+                        aria-current={state === 'current' ? 'step' : undefined}
+                        aria-label={tr('time.beatChapter', { n: ci + 1, title: tx(c.title, locale) })}
+                        title={`${pad2(ci + 1)} · ${tx(c.title, locale)}`}
+                        onClick={go(first)}
+                      >
+                        <i className="ts-present__line" />
+                        {label}
+                      </button>
+                    )}
+                  </li>
+                );
+              })}
+            </ol>
+          </nav>
+          <label className="ts-present__auto" title={tr('time.autoplayHint')} data-held={(autoplay && held) || undefined}>
+            <input
+              type="checkbox"
+              checked={autoplay}
+              onChange={(e) => onAutoplay(e.currentTarget.checked)}
+              onClick={(e) => {
+                if (e.detail > 0) e.currentTarget.blur();
+              }}
+            />
+            <span>{tr('time.autoplay')}</span>
+          </label>
+        </div>
       </div>
     </div>
   );

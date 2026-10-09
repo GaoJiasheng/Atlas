@@ -1,7 +1,8 @@
 /**
  * GeoStage: the MapLibre stage. A thin React shell that lazy-loads the map
  * controller (and MapLibre with it) and hands it the store, the playhead and
- * the DOM it draws into (leader placards, scale bar, the host `leaders` svg).
+ * the DOM it draws into (territory names, leader placards, scale bar, the host
+ * `leaders` svg).
  */
 import { useEffect, useRef, useState } from 'react';
 import type { Locale } from '../../../core/types';
@@ -27,6 +28,7 @@ export function GeoStage({ store, playhead, model, locale, onSelectEvent, onCont
   const leadersSvg = useSceneContext().slots.leaders;
   const containerRef = useRef<HTMLDivElement>(null);
   const labelsRef = useRef<HTMLDivElement>(null);
+  const territoryRef = useRef<HTMLDivElement>(null);
   const scaleRef = useRef<HTMLDivElement>(null);
   const controllerRef = useRef<GeoController | null>(null);
   const selectRef = useRef(onSelectEvent);
@@ -43,7 +45,8 @@ export function GeoStage({ store, playhead, model, locale, onSelectEvent, onCont
     const container = containerRef.current;
     const labelRoot = labelsRef.current;
     const scaleRoot = scaleRef.current;
-    if (!container || !labelRoot || !scaleRoot) return;
+    const territoryRoot = territoryRef.current;
+    if (!container || !labelRoot || !scaleRoot || !territoryRoot) return;
     let cancelled = false;
     import('./controller')
       .then(({ createGeoController }) => {
@@ -52,6 +55,7 @@ export function GeoStage({ store, playhead, model, locale, onSelectEvent, onCont
           container,
           labelRoot,
           scaleRoot,
+          territoryRoot,
           store,
           playhead,
           model,
@@ -86,6 +90,7 @@ export function GeoStage({ store, playhead, model, locale, onSelectEvent, onCont
   return (
     <div className="ts-geo" data-keys="own" data-status={status}>
       <div ref={containerRef} className="ts-geo__map" />
+      <div ref={territoryRef} className="ts-terrs" aria-hidden="true" />
       <div ref={labelsRef} className="ts-callouts" />
       <div ref={scaleRef} className="ts-scale" role="img" aria-label={t('time.scale')}>
         <svg height="8" aria-hidden="true" />

@@ -141,8 +141,10 @@ export interface SceneControls {
   beats?: {
     list(): BeatInfo[];
     go(index: number, options: InstantOption): void;
-    /** The beat on show (`__atlas.state().presentation`); `null` when no presentation is running. */
-    current(): { chapter: string; beat: number } | null;
+    /** The beat on show (`__atlas.state().presentation`, with the auto-play switch when the engine has one); `null` when no presentation is running. */
+    current(): { chapter: string; beat: number; autoplay?: boolean } | null;
+    /** Auto-play switch of the presentation (`__atlas.setAutoplay`); omit when the engine has none. */
+    setAutoplay?(on: boolean): void;
   };
   /** ESC: leave a focus/selection. Return true when something was undone. */
   escape?(): boolean;
