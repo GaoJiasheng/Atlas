@@ -226,6 +226,35 @@
       "see": [
         "mandate"
       ]
+    },
+    {
+      "id": "u-boat",
+      "term": {
+        "en": "U-boat",
+        "zh": "U 艇"
+      },
+      "definition": {
+        "en": "A German submarine, from the German Unterseeboot, 'undersea boat'. In the First World War U-boats sank merchant ships and passenger liners to cut Britain's supplies by sea.",
+        "zh": "德国潜艇，来自德语 Unterseeboot（“海下之船”）。一战中，德国用 U 艇击沉商船和客轮，切断英国的海上补给。"
+      },
+      "see": [
+        "unrestricted-submarine-warfare",
+        "blockade"
+      ]
+    },
+    {
+      "id": "dreadnought",
+      "term": {
+        "en": "Dreadnought",
+        "zh": "无畏舰"
+      },
+      "definition": {
+        "en": "A type of battleship named after HMS Dreadnought, launched by Britain in 1906: fast, heavily armoured and armed only with big guns. Britain and Germany raced to build them before 1914.",
+        "zh": "一类战列舰，以英国 1906 年下水的“无畏号”命名：航速快、装甲厚、只装大口径主炮。1914 年以前，英德两国竞相建造。"
+      },
+      "see": [
+        "blockade"
+      ]
     }
   ]
 }
