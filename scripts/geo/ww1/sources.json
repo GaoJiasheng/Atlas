@@ -39,6 +39,176 @@
       "author": "Historicair (French original), Fluteflute (English derivative)",
       "license": "CC BY-SA 2.5",
       "role": "K9 cross-check image: the post-war states and territorial changes after the 1919-1920 treaties (dated 1923, not traced)"
+    },
+    "ne-admin1": {
+      "ref": "G6",
+      "title": "Natural Earth 1:10m Admin 1 states and provinces (v5)",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_admin_1_states_provinces.geojson",
+      "file": "ne_10m_admin_1_states_provinces.geojson",
+      "page": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/",
+      "author": "Natural Earth",
+      "license": "Public domain",
+      "role": "province units for occupations dated by event, not by a front map (Belgian provinces 1914, East Galicia and Bukovina 1914, Mesopotamia, Hejaz, German East Africa)"
+    },
+    "svg-wf-1914": {
+      "ref": "G7",
+      "title": "Western front 1914 (Spanish SVG)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/44/Western_front_1914-es.svg",
+      "file": "Western_front_1914-es.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:Western_front_1914-es.svg",
+      "author": "Rowanwindwhistler, after the US Military Academy (West Point) atlas",
+      "license": "CC BY-SA 4.0",
+      "role": "K2 German line at the Marne (9 September) and K3 front after the race to the sea (traced lines)"
+    },
+    "svg-wf-1915-16": {
+      "ref": "G8",
+      "title": "Western front 1915-16 (Spanish SVG)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/9e/Western_front_1915-16-es.svg",
+      "file": "Western_front_1915-16-es.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:Western_front_1915-16-es.svg",
+      "author": "US Military Academy (West Point) Department of History, Rowanwindwhistler",
+      "license": "CC BY-SA 4.0",
+      "role": "K4 and K5 western front (traced line)"
+    },
+    "svg-wf-1917": {
+      "ref": "G9",
+      "title": "Western Front 1917 (Spanish SVG)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/09/Western_Front_1917-es.svg",
+      "file": "Western_Front_1917-es.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:Western_Front_1917-es.svg",
+      "author": "Rowanwindwhistler, after the US Military Academy (West Point) atlas",
+      "license": "CC BY-SA 4.0",
+      "role": "K6 and K7 western front after the Hindenburg Line withdrawal (traced line)"
+    },
+    "svg-wf-1918": {
+      "ref": "G10",
+      "title": "Western front 1918, final Allied offensives (Spanish SVG)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/b8/Western_front_1918_allied-es.svg",
+      "file": "Western_front_1918_allied-es.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:Western_front_1918_allied-es.svg",
+      "author": "Rowanwindwhistler, after the US Military Academy (West Point) atlas",
+      "license": "CC BY-SA 4.0",
+      "role": "K8 front of 11 November 1918 (traced line)"
+    },
+    "svg-ef-1914": {
+      "ref": "G11",
+      "title": "Map of the WWI Eastern Front, autumn 1914 (SVG)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/f3/MapOfWWIEasternFrontAutumn1914.svg",
+      "file": "MapOfWWIEasternFrontAutumn1914.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:MapOfWWIEasternFrontAutumn1914.svg",
+      "author": "Goran tek-en, after the US Military Academy (West Point) atlas",
+      "license": "CC BY-SA 4.0",
+      "role": "K2 Russian front in East Prussia on 10 September 1914 (traced line)"
+    },
+    "svg-ef-1915": {
+      "ref": "G12",
+      "title": "Ostfront 7-18 February 1915 (Spanish SVG)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/26/Ostfront_18021915-es.svg",
+      "file": "Ostfront_18021915-es.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:Ostfront_18021915-es.svg",
+      "author": "US Military Academy (West Point) Department of Military Art and Engineering, Rowanwindwhistler",
+      "license": "CC BY-SA 4.0",
+      "role": "K3 eastern front of the winter 1914-15 (traced line)"
+    },
+    "svg-ef-1916": {
+      "ref": "G13",
+      "title": "Eastern Front 1916 before the Brusilov offensive (Spanish SVG)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/8f/EasternFront1916a-es.svg",
+      "file": "EasternFront1916a-es.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:EasternFront1916a-es.svg",
+      "author": "Rowanwindwhistler, after the US Military Academy (West Point) atlas",
+      "license": "CC BY-SA 4.0",
+      "role": "K4 eastern front south of the Pripet (March 1916 line, unchanged since autumn 1915; traced)"
+    },
+    "jpg-ef-1917": {
+      "ref": "G14",
+      "title": "Central Europe 1914: operations during 1917 (map 41b)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/db/EasternFront1917.jpg",
+      "file": "EasternFront1917.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:EasternFront1917.jpg",
+      "author": "US Military Academy (West Point) Department of Military Art and Engineering",
+      "license": "Public domain (US Government work)",
+      "role": "K4 northern sector and K5 front of 1 January 1917 from Riga to the Black Sea, incl. Romania (traced line)"
+    },
+    "jpg-brest": {
+      "ref": "G15",
+      "title": "Eastern Europe 1914: operations during 1918 (map, Treaty of Brest-Litovsk)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/df/Map_Treaty_of_Brest-Litovsk-en.jpg",
+      "file": "Map_Treaty_of_Brest-Litovsk-en.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Map_Treaty_of_Brest-Litovsk-en.jpg",
+      "author": "US Military Academy (West Point) Department of History",
+      "license": "Public domain (US Government work)",
+      "role": "K7 and K8 cross-check image: the area occupied by the Central Powers after the Treaty of Brest-Litovsk (not traced: its fit to 15 cities leaves 34 km RMS, over the 30 km budget)"
+    },
+    "svg-serbia-1916": {
+      "ref": "G16",
+      "title": "Front d'Orient et Serbie en juillet 1916 (SVG)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/fd/Front_d%27Orient_et_Serbie_en_juillet_1916.svg",
+      "file": "Front_d'Orient_et_Serbie_en_juillet_1916.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:Front_d'Orient_et_Serbie_en_juillet_1916.svg",
+      "author": "Jaspe, Rowanwindwhistler, SyntaxTerror",
+      "license": "CC BY-SA 3.0",
+      "role": "K4-K7 Austro-Hungarian and Bulgarian occupation zones in Serbia, Montenegro and Albania (traced by fill colour)"
+    },
+    "svg-caporetto": {
+      "ref": "G18",
+      "title": "Battle of Caporetto (Spanish SVG)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/ab/Battle_of_Caporetto-es.svg",
+      "file": "Battle_of_Caporetto-es.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:Battle_of_Caporetto-es.svg",
+      "author": "Szajci (Hungarian version), Rowanwindwhistler, after the US Military Academy (West Point) atlas",
+      "license": "CC BY-SA 4.0",
+      "role": "K6 and K7 Piave front after Caporetto (traced line)"
+    },
+    "jpg-palestine-1917": {
+      "ref": "G19",
+      "title": "Palestine 1917: operations fall of 1917 (map)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/da/Palestine-WW1-2.jpg",
+      "file": "Palestine-WW1-2.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Palestine-WW1-2.jpg",
+      "author": "US Military Academy (West Point) Department of Military Art and Engineering",
+      "license": "Public domain (US Government work)",
+      "role": "K6 Ottoman line north of Jerusalem, 30 December 1917 (traced line)"
+    },
+    "jpg-palestine-1918": {
+      "ref": "G20",
+      "title": "Palestine 1918: battle of Megiddo (map)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/b8/Palestine-WW1-3.jpg",
+      "file": "Palestine-WW1-3.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Palestine-WW1-3.jpg",
+      "author": "US Military Academy (West Point) Department of Military Art and Engineering",
+      "license": "Public domain (US Government work)",
+      "role": "K7 front of March-September 1918 from the coast to the Jordan (traced line)"
+    },
+    "png-russian-turkey": {
+      "ref": "G21",
+      "title": "Administrative-territorial division of the regions of Turkey occupied by Russian troops during WWI",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/2c/ATD_of_the_regions_of_Turkey_occupied_by_Russian_troops_during_WW1.png",
+      "file": "ATD_of_the_regions_of_Turkey_occupied_by_Russian_troops_during_WW1.png",
+      "page": "https://commons.wikimedia.org/wiki/File:ATD_of_the_regions_of_Turkey_occupied_by_Russian_troops_during_WW1.png",
+      "author": "Accipite7",
+      "license": "CC BY-SA 4.0",
+      "role": "K5-K6 cross-check image: the regions of eastern Anatolia under Russian administration (not traced; the occupation is drawn by Natural Earth provinces)"
+    },
+    "jpg-riga-1917": {
+      "ref": "G23",
+      "title": "Hutier's offensive at Riga, 1-5 September 1917 (map)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/87/Hutier%27s_Offensive_at_Riga.jpg",
+      "file": "Hutiers_Offensive_at_Riga.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Hutier%27s_Offensive_at_Riga.jpg",
+      "author": "US Military Academy (West Point), Campaign Atlas to the Great War",
+      "license": "Public domain (US Government work)",
+      "role": "K6 limit of the German advance at Riga, 5 September 1917 (traced line)"
+    },
+    "svg-oeta": {
+      "ref": "G17",
+      "title": "Area of the OETA (SVG)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Area_of_the_OETA.svg",
+      "file": "Area_of_the_OETA.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:Area_of_the_OETA.svg",
+      "author": "SPQR10",
+      "license": "CC BY-SA 4.0",
+      "role": "K8 cross-check image: the zones of the Occupied Enemy Territory Administration, 1918-1919 (dotted outlines only, not traced)"
     }
   },
   "ohm": {
@@ -59,6 +229,99 @@
         "2831184": "Gilbert and Ellice Islands Protectorate",
         "2846200": "Protectorate of Tonga",
         "2846264": "Cook Islands"
+      }
+    },
+    "k2": {
+      "date": "1914-09-09",
+      "relations": {
+        "2694162": "Togoland Protectorate"
+      }
+    },
+    "k3": {
+      "date": "1914-12-15",
+      "relations": {
+        "2694162": "Togoland Protectorate",
+        "2961775": "Japanese occupation of German colonial possessions",
+        "2961774": "Australian occupation of German New Guinea",
+        "2846178": "Australian occupation of Nauru"
+      }
+    },
+    "k4": {
+      "date": "1915-12-31",
+      "relations": {
+        "2694162": "Togoland Protectorate",
+        "2961775": "Japanese occupation of German colonial possessions",
+        "2961774": "Australian occupation of German New Guinea",
+        "2846178": "Australian occupation of Nauru",
+        "2828752": "German Cameroon",
+        "2695683": "General Government of Lublin"
+      }
+    },
+    "k5": {
+      "date": "1916-12-18",
+      "relations": {
+        "2694162": "Togoland Protectorate",
+        "2961775": "Japanese occupation of German colonial possessions",
+        "2961774": "Australian occupation of German New Guinea",
+        "2846178": "Australian occupation of Nauru",
+        "2828750": "British Cameroons",
+        "2828747": "French Cameroon",
+        "2863621": "Belgian occupation of Ruanda-Urundi",
+        "2863618": "German East Africa",
+        "2695684": "Regency Kingdom of Poland"
+      }
+    },
+    "k6": {
+      "date": "1917-12-15",
+      "relations": {
+        "2694159": "British Togoland",
+        "2694161": "French Togoland",
+        "2961775": "Japanese occupation of German colonial possessions",
+        "2961774": "Australian occupation of German New Guinea",
+        "2846178": "Australian occupation of Nauru",
+        "2828750": "British Cameroons",
+        "2828747": "French Cameroon",
+        "2863621": "Belgian occupation of Ruanda-Urundi",
+        "2863618": "German East Africa",
+        "2695684": "Regency Kingdom of Poland",
+        "2696817": "Finland"
+      }
+    },
+    "k7": {
+      "date": "1918-03-20",
+      "relations": {
+        "2694159": "British Togoland",
+        "2694161": "French Togoland",
+        "2961775": "Japanese occupation of German colonial possessions",
+        "2961774": "Australian occupation of German New Guinea",
+        "2846178": "Australian occupation of Nauru",
+        "2828750": "British Cameroons",
+        "2828747": "French Cameroon",
+        "2863621": "Belgian occupation of Ruanda-Urundi",
+        "2863618": "German East Africa",
+        "2695684": "Regency Kingdom of Poland",
+        "2696817": "Finland",
+        "2694815": "Ukraine",
+        "2801387": "Estonia"
+      }
+    },
+    "k8": {
+      "date": "1918-11-11",
+      "relations": {
+        "2694159": "British Togoland",
+        "2694161": "French Togoland",
+        "2961775": "Japanese occupation of German colonial possessions",
+        "2961774": "Australian occupation of German New Guinea",
+        "2846178": "Australian occupation of Nauru",
+        "2828750": "British Cameroons",
+        "2828747": "French Cameroon",
+        "2863621": "Belgian occupation of Ruanda-Urundi",
+        "2863618": "German East Africa",
+        "2959043": "Finland",
+        "2694815": "Ukraine",
+        "2801387": "Estonia",
+        "2747879": "State of Slovenes, Croats and Serbs",
+        "2854272": "Crimean Regional Government"
       }
     },
     "k9": {
@@ -85,7 +348,247 @@
       }
     }
   },
-  "svg": {},
+  "svg": {
+    "serbia-1916": {
+      "dataset": "svg-serbia-1916",
+      "projection": "auto",
+      "classes": {
+        "#fff7bc": "austro-hungarian-zone",
+        "#fe9929": "bulgarian-zone"
+      },
+      "land": [
+        "#fff7bc",
+        "#fe9929",
+        "#d95f0e",
+        "#fed98e",
+        "#c2e699",
+        "#e0e0e0"
+      ],
+      "sea": [
+        "#c6ecff"
+      ],
+      "exclude": [
+        [
+          0,
+          950,
+          800,
+          1150
+        ]
+      ],
+      "maxResidualKm": 30,
+      "controlPoints": [
+        {
+          "name": "Belgrade",
+          "lnglat": [
+            20.457,
+            44.817
+          ],
+          "svg": [
+            374.4,
+            111.1
+          ]
+        },
+        {
+          "name": "Sabac",
+          "lnglat": [
+            19.69,
+            44.756
+          ],
+          "svg": [
+            258.9,
+            120.0
+          ]
+        },
+        {
+          "name": "Kragujevac",
+          "lnglat": [
+            20.911,
+            44.012
+          ],
+          "svg": [
+            441.1,
+            268.9
+          ]
+        },
+        {
+          "name": "Sarajevo",
+          "lnglat": [
+            18.413,
+            43.856
+          ],
+          "svg": [
+            53.3,
+            300.0
+          ]
+        },
+        {
+          "name": "Krusevac",
+          "lnglat": [
+            21.333,
+            43.58
+          ],
+          "svg": [
+            506.7,
+            366.7
+          ]
+        },
+        {
+          "name": "Nis",
+          "lnglat": [
+            21.896,
+            43.32
+          ],
+          "svg": [
+            594.4,
+            388.9
+          ]
+        },
+        {
+          "name": "Pirot",
+          "lnglat": [
+            22.586,
+            43.153
+          ],
+          "svg": [
+            695.6,
+            444.4
+          ]
+        },
+        {
+          "name": "Vidin",
+          "lnglat": [
+            22.876,
+            43.998
+          ],
+          "svg": [
+            735.6,
+            273.3
+          ]
+        },
+        {
+          "name": "Novi Pazar",
+          "lnglat": [
+            20.512,
+            43.137
+          ],
+          "svg": [
+            375.6,
+            453.3
+          ]
+        },
+        {
+          "name": "Pec",
+          "lnglat": [
+            20.288,
+            42.66
+          ],
+          "svg": [
+            357.8,
+            541.1
+          ]
+        },
+        {
+          "name": "Vranje",
+          "lnglat": [
+            21.9,
+            42.551
+          ],
+          "svg": [
+            586.7,
+            551.1
+          ]
+        },
+        {
+          "name": "Prizren",
+          "lnglat": [
+            20.739,
+            42.215
+          ],
+          "svg": [
+            388.9,
+            600.0
+          ]
+        },
+        {
+          "name": "Cetinje",
+          "lnglat": [
+            18.923,
+            42.394
+          ],
+          "svg": [
+            155.6,
+            606.7
+          ]
+        },
+        {
+          "name": "Shkoder",
+          "lnglat": [
+            19.512,
+            42.068
+          ],
+          "svg": [
+            241.1,
+            675.6
+          ]
+        },
+        {
+          "name": "Skopje",
+          "lnglat": [
+            21.431,
+            41.998
+          ],
+          "svg": [
+            518.9,
+            686.7
+          ]
+        },
+        {
+          "name": "Veles",
+          "lnglat": [
+            21.776,
+            41.716
+          ],
+          "svg": [
+            585.6,
+            740.0
+          ]
+        },
+        {
+          "name": "Durres",
+          "lnglat": [
+            19.449,
+            41.323
+          ],
+          "svg": [
+            231.1,
+            826.7
+          ]
+        },
+        {
+          "name": "Ohrid",
+          "lnglat": [
+            20.802,
+            41.117
+          ],
+          "svg": [
+            441.1,
+            861.1
+          ]
+        },
+        {
+          "name": "Bitola",
+          "lnglat": [
+            21.335,
+            41.031
+          ],
+          "svg": [
+            525.6,
+            884.4
+          ]
+        }
+      ]
+    }
+  },
   "raster": {},
   "keyframes": [
     {
@@ -478,6 +981,6126 @@
             10
           ],
           "zoom": 2.2
+        }
+      ]
+    },
+    {
+      "id": "K2",
+      "t": "1914-09-09",
+      "ohm": "k2",
+      "method": "Western front: the line of the German armies on 9 September 1914 traced from a georeferenced West Point-based map (wf-1914): the German line on the Marne from Montmirail to Verdun and the Lorraine front, the Allied line on the Ourcq, and north of Noyon the front of mid-October (the race to the sea), with Antwerp, East and West Flanders (still Belgian on 9 September) removed by Natural Earth provinces. East Prussia: Russian 1st Army front of 10 September (ef-1914). Eastern Galicia and Bukovina by Natural Earth provinces (dated by the fall of Lemberg and Czernowitz). Togoland and Samoa from OpenHistoricalMap. Base: CShapes 2.0 on 1914-09-09.",
+      "base": {
+        "2": "usa",
+        "3": "usa",
+        "4": "usa",
+        "6": "usa",
+        "20": "canada",
+        "21": {
+          "holder": "uk",
+          "label": {
+            "en": "Newfoundland (British dominion)",
+            "zh": "纽芬兰（英国自治领）"
+          }
+        },
+        "31": "uk",
+        "51": "uk",
+        "52": "uk",
+        "53": "uk",
+        "80": "uk",
+        "110": "uk",
+        "65": "france",
+        "66": "france",
+        "120": "france",
+        "115": "netherlands",
+        "140": "brazil",
+        "200": "uk",
+        "210": "netherlands",
+        "211": "belgium",
+        "212": "luxembourg",
+        "220": "france",
+        "225": "switzerland",
+        "230": "spain",
+        "235": "portugal",
+        "338": "uk",
+        "339": "albania",
+        "350": "greece",
+        "355": "bulgaria",
+        "380": "sweden",
+        "385": "norway",
+        "390": "denmark",
+        "402": "portugal",
+        "404": "portugal",
+        "411": "spain",
+        "420": "uk",
+        "432": "france",
+        "433": "france",
+        "434": "france",
+        "435": "france",
+        "436": "france",
+        "437": "france",
+        "438": "france",
+        "451": "uk",
+        "452": "uk",
+        "475": "uk",
+        "481": "france",
+        "482": "france",
+        "483": "france",
+        "484": "france",
+        "490": "belgium",
+        "500": "uk",
+        "501": "uk",
+        "511": "uk",
+        "521": "uk",
+        "522": "france",
+        "531": "italy",
+        "540": "portugal",
+        "541": "portugal",
+        "551": "uk",
+        "552": "uk",
+        "553": "uk",
+        "560": "south-africa",
+        "570": "uk",
+        "571": "uk",
+        "572": "uk",
+        "580": "france",
+        "585": "france",
+        "590": "uk",
+        "600": "france",
+        "602": "spain",
+        "610": "spain",
+        "615": "france",
+        "616": "france",
+        "620": "italy",
+        "625": {
+          "holder": "uk",
+          "label": {
+            "en": "Anglo-Egyptian Sudan",
+            "zh": "英埃苏丹"
+          }
+        },
+        "630": "persia",
+        "640": "ottoman",
+        "696": "uk",
+        "710": "china",
+        "713": "japan",
+        "730": "japan",
+        "740": "japan",
+        "7351": "japan",
+        "750": "india",
+        "780": "uk",
+        "781": "uk",
+        "800": "siam",
+        "811": "france",
+        "812": "france",
+        "815": "france",
+        "821": "uk",
+        "822": "uk",
+        "823": "uk",
+        "824": "uk",
+        "835": "uk",
+        "827": {
+          "holder": "uk",
+          "label": {
+            "en": "Straits Settlements (incl. Singapore)",
+            "zh": "海峡殖民地（含新加坡）"
+          }
+        },
+        "840": "usa",
+        "850": "netherlands",
+        "860": "portugal",
+        "900": "australia",
+        "911": "australia",
+        "920": "new-zealand",
+        "930": "france",
+        "940": "uk",
+        "950": "uk",
+        "960": "france",
+        "5200": "italy",
+        "7020": {
+          "holder": "russia",
+          "label": {
+            "en": "Emirate of Bukhara (Russian protectorate)",
+            "zh": "布哈拉酋长国（俄国保护国）"
+          }
+        },
+        "7030": {
+          "holder": "russia",
+          "label": {
+            "en": "Khanate of Khiva (Russian protectorate)",
+            "zh": "希瓦汗国（俄国保护国）"
+          }
+        },
+        "255": "germany",
+        "300": "austria-hungary",
+        "325": "italy",
+        "340": "serbia",
+        "341": "montenegro",
+        "360": "romania",
+        "365": "russia",
+        "395": {
+          "holder": "denmark",
+          "label": {
+            "en": "Iceland (Danish dependency)",
+            "zh": "冰岛（丹麦属地）"
+          }
+        },
+        "460": "germany",
+        "470": "germany",
+        "510": "germany",
+        "565": "germany",
+        "912": "germany",
+        "651": {
+          "holder": "uk",
+          "label": {
+            "en": "Egypt (British-occupied, under Ottoman suzerainty)",
+            "zh": "埃及（英国占领，奥斯曼名义宗主）"
+          }
+        }
+      },
+      "steps": [
+        {
+          "note": "Luxembourg, occupied by Germany since 2 August 1914 (CShapes)",
+          "holder": "germany",
+          "label": {
+            "en": "Luxembourg (German-occupied since 2 August 1914)",
+            "zh": "卢森堡（1914 年 8 月 2 日起被德国占领）"
+          },
+          "src": [
+            "G1"
+          ],
+          "from": {
+            "cshapes": [
+              212
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "German-held Belgium and France east of the front (lines west-1914-09, inside CShapes Belgium and France)",
+          "holder": "germany",
+          "label": {
+            "en": "Belgium and northern France behind the German armies (9 September 1914)",
+            "zh": "德军身后的比利时与法国北部（1914 年 9 月 9 日）"
+          },
+          "src": [
+            "G1",
+            "G7"
+          ],
+          "from": {
+            "svg": "lines",
+            "class": "west-1914-09"
+          },
+          "clip": {
+            "union": [
+              {
+                "cshapes": [
+                  211
+                ],
+                "at": "1914-07-28"
+              },
+              {
+                "cshapes": [
+                  220
+                ],
+                "at": "1914-07-28"
+              }
+            ]
+          },
+          "minus": {
+            "admin1": "Belgium",
+            "names": [
+              "Antwerp",
+              "East Flanders",
+              "West Flanders"
+            ]
+          }
+        },
+        {
+          "note": "East Prussia east of the Russian 1st Army front of 10 September 1914 (lines east-prussia-1914-09, inside CShapes Germany)",
+          "holder": "russia",
+          "label": {
+            "en": "Eastern East Prussia (Russian-occupied, August–September 1914)",
+            "zh": "东普鲁士东部（1914 年 8–9 月被俄军占领）"
+          },
+          "src": [
+            "G1",
+            "G11"
+          ],
+          "from": {
+            "svg": "lines",
+            "class": "east-prussia-1914-09"
+          },
+          "clip": {
+            "cshapes": [
+              255
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Eastern Galicia and Bukovina, Russian-occupied after Lemberg fell on 3 September and Czernowitz on 2 September 1914 (Natural Earth provinces inside CShapes Austria-Hungary)",
+          "holder": "russia",
+          "label": {
+            "en": "Eastern Galicia and Bukovina (Russian-occupied; Lemberg 3 September 1914)",
+            "zh": "东加利西亚与布科维纳（俄军占领；1914 年 9 月 3 日占伦贝格）"
+          },
+          "src": [
+            "G1",
+            "G6"
+          ],
+          "from": {
+            "admin1": "Ukraine",
+            "names": [
+              "L'viv",
+              "Ternopil'",
+              "Ivano-Frankivs'k",
+              "Chernivtsi"
+            ]
+          },
+          "clip": {
+            "cshapes": [
+              300
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Togoland under Anglo-French occupation since 26 August 1914 (OHM r2694162)",
+          "holder": "uk",
+          "label": {
+            "en": "Togoland (Anglo-French occupation since 26 August 1914)",
+            "zh": "多哥（1914 年 8 月 26 日起英法共同占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2694162
+          }
+        },
+        {
+          "note": "German Samoa under New Zealand occupation since 29 August 1914 (OHM r2846171)",
+          "holder": "new-zealand",
+          "label": {
+            "en": "Samoa (New Zealand-occupied since 29 August 1914)",
+            "zh": "萨摩亚（1914 年 8 月 29 日起由新西兰占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846171,
+            "set": "k9"
+          }
+        },
+        {
+          "note": "German New Guinea incl. the Bismarck Archipelago, northern Solomons, Carolines, Marianas, Palau, Marshalls and Nauru (OHM r2889769)",
+          "holder": "germany",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2889769,
+            "set": "k1"
+          },
+          "label": {
+            "en": "German New Guinea and Micronesia",
+            "zh": "德属新几内亚与密克罗尼西亚"
+          }
+        },
+        {
+          "note": "Kiautschou Bay leased territory, Tsingtao (OHM r2889899)",
+          "holder": "germany",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2889899,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Kiautschou (German-leased, Tsingtao)",
+            "zh": "胶州湾（德国租借地，青岛）"
+          }
+        },
+        {
+          "note": "Cyprus (OHM r2848135)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2848135,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Cyprus (British-administered, Ottoman sovereignty)",
+            "zh": "塞浦路斯（英国管理，奥斯曼主权）"
+          }
+        },
+        {
+          "note": "Weihaiwei (OHM r2848211)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2848211,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Weihaiwei (British-leased)",
+            "zh": "威海卫（英国租借地）"
+          }
+        },
+        {
+          "note": "Hong Kong (OHM r2694575)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2694575,
+            "set": "k1"
+          }
+        },
+        {
+          "note": "Kwangchowan (OHM r2889933)",
+          "holder": "france",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2889933,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Kwangchowan (French-leased)",
+            "zh": "广州湾（法国租借地）"
+          }
+        },
+        {
+          "note": "Macau (OHM r2694462)",
+          "holder": "portugal",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2694462,
+            "set": "k1"
+          }
+        },
+        {
+          "note": "Kuwait (OHM r2848364)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2848364,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Kuwait (British-protected sheikhdom)",
+            "zh": "科威特（英国保护的酋长国）"
+          }
+        },
+        {
+          "note": "Bahrain (OHM r2848318)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2848318,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Bahrain (British protectorate)",
+            "zh": "巴林（英国保护国）"
+          }
+        },
+        {
+          "note": "New Hebrides (OHM r2846175)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846175,
+            "set": "k1"
+          },
+          "label": {
+            "en": "New Hebrides (Anglo-French condominium)",
+            "zh": "新赫布里底（英法共管）"
+          }
+        },
+        {
+          "note": "Gilbert and Ellice Islands (OHM r2831184)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2831184,
+            "set": "k1"
+          }
+        },
+        {
+          "note": "Tonga (OHM r2846200)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846200,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Tonga (British protectorate)",
+            "zh": "汤加（英国保护国）"
+          }
+        },
+        {
+          "note": "Cook Islands (OHM r2846264)",
+          "holder": "new-zealand",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846264,
+            "set": "k1"
+          }
+        }
+      ],
+      "checks": [
+        {
+          "name": "western-front",
+          "center": [
+            3.8,
+            49.6
+          ],
+          "zoom": 5.2,
+          "source": "svg-wf-1914"
+        },
+        {
+          "name": "eastern-front",
+          "center": [
+            22,
+            52
+          ],
+          "zoom": 4.3,
+          "source": "svg-ef-1914"
+        },
+        {
+          "name": "europe",
+          "center": [
+            17,
+            48
+          ],
+          "zoom": 2.9
+        },
+        {
+          "name": "africa",
+          "center": [
+            20,
+            0
+          ],
+          "zoom": 1.9
+        },
+        {
+          "name": "east-asia-pacific",
+          "center": [
+            140,
+            10
+          ],
+          "zoom": 2.2
+        }
+      ]
+    },
+    {
+      "id": "K3",
+      "t": "1914-12-15",
+      "ohm": "k3",
+      "method": "Western front of January 1915, unchanged since the end of the first battle of Ypres in November 1914, traced from a georeferenced West Point-based map (wf-1915-16). Eastern front of 7 February 1915, unchanged since mid-December 1914 in Poland and Galicia, and the East Prussian line held since November, traced from ef-1915. South-western Russian Poland given to Austria-Hungary by Natural Earth provinces. Serbia whole again (Belgrade retaken 15 December). Pacific occupations, Kiautschou, Togoland and Samoa from OpenHistoricalMap; Basra by its Natural Earth province. Base: CShapes 2.0 on 1914-12-15 (Cyprus annexed).",
+      "base": {
+        "2": "usa",
+        "3": "usa",
+        "4": "usa",
+        "6": "usa",
+        "20": "canada",
+        "21": {
+          "holder": "uk",
+          "label": {
+            "en": "Newfoundland (British dominion)",
+            "zh": "纽芬兰（英国自治领）"
+          }
+        },
+        "31": "uk",
+        "51": "uk",
+        "52": "uk",
+        "53": "uk",
+        "80": "uk",
+        "110": "uk",
+        "65": "france",
+        "66": "france",
+        "120": "france",
+        "115": "netherlands",
+        "140": "brazil",
+        "200": "uk",
+        "210": "netherlands",
+        "211": "belgium",
+        "212": "luxembourg",
+        "220": "france",
+        "225": "switzerland",
+        "230": "spain",
+        "235": "portugal",
+        "338": "uk",
+        "339": "albania",
+        "350": "greece",
+        "355": "bulgaria",
+        "380": "sweden",
+        "385": "norway",
+        "390": "denmark",
+        "402": "portugal",
+        "404": "portugal",
+        "411": "spain",
+        "420": "uk",
+        "432": "france",
+        "433": "france",
+        "434": "france",
+        "435": "france",
+        "436": "france",
+        "437": "france",
+        "438": "france",
+        "451": "uk",
+        "452": "uk",
+        "475": "uk",
+        "481": "france",
+        "482": "france",
+        "483": "france",
+        "484": "france",
+        "490": "belgium",
+        "500": "uk",
+        "501": "uk",
+        "511": "uk",
+        "521": "uk",
+        "522": "france",
+        "531": "italy",
+        "540": "portugal",
+        "541": "portugal",
+        "551": "uk",
+        "552": "uk",
+        "553": "uk",
+        "560": "south-africa",
+        "570": "uk",
+        "571": "uk",
+        "572": "uk",
+        "580": "france",
+        "585": "france",
+        "590": "uk",
+        "600": "france",
+        "602": "spain",
+        "610": "spain",
+        "615": "france",
+        "616": "france",
+        "620": "italy",
+        "625": {
+          "holder": "uk",
+          "label": {
+            "en": "Anglo-Egyptian Sudan",
+            "zh": "英埃苏丹"
+          }
+        },
+        "630": "persia",
+        "640": "ottoman",
+        "696": "uk",
+        "710": "china",
+        "713": "japan",
+        "730": "japan",
+        "740": "japan",
+        "7351": "japan",
+        "750": "india",
+        "780": "uk",
+        "781": "uk",
+        "800": "siam",
+        "811": "france",
+        "812": "france",
+        "815": "france",
+        "821": "uk",
+        "822": "uk",
+        "823": "uk",
+        "824": "uk",
+        "835": "uk",
+        "827": {
+          "holder": "uk",
+          "label": {
+            "en": "Straits Settlements (incl. Singapore)",
+            "zh": "海峡殖民地（含新加坡）"
+          }
+        },
+        "840": "usa",
+        "850": "netherlands",
+        "860": "portugal",
+        "900": "australia",
+        "911": "australia",
+        "920": "new-zealand",
+        "930": "france",
+        "940": "uk",
+        "950": "uk",
+        "960": "france",
+        "5200": "italy",
+        "7020": {
+          "holder": "russia",
+          "label": {
+            "en": "Emirate of Bukhara (Russian protectorate)",
+            "zh": "布哈拉酋长国（俄国保护国）"
+          }
+        },
+        "7030": {
+          "holder": "russia",
+          "label": {
+            "en": "Khanate of Khiva (Russian protectorate)",
+            "zh": "希瓦汗国（俄国保护国）"
+          }
+        },
+        "255": "germany",
+        "300": "austria-hungary",
+        "325": "italy",
+        "340": "serbia",
+        "341": "montenegro",
+        "360": "romania",
+        "365": "russia",
+        "395": {
+          "holder": "denmark",
+          "label": {
+            "en": "Iceland (Danish dependency)",
+            "zh": "冰岛（丹麦属地）"
+          }
+        },
+        "460": "germany",
+        "470": "germany",
+        "510": "germany",
+        "565": "germany",
+        "912": "germany",
+        "651": {
+          "holder": "uk",
+          "label": {
+            "en": "Egypt (British-occupied, under Ottoman suzerainty)",
+            "zh": "埃及（英国占领，奥斯曼名义宗主）"
+          }
+        },
+        "352": {
+          "holder": "uk",
+          "label": {
+            "en": "Cyprus (annexed by Britain on 5 November 1914)",
+            "zh": "塞浦路斯（1914 年 11 月 5 日被英国吞并）"
+          }
+        }
+      },
+      "steps": [
+        {
+          "note": "Luxembourg, occupied by Germany since 2 August 1914 (CShapes)",
+          "holder": "germany",
+          "label": {
+            "en": "Luxembourg (German-occupied since 2 August 1914)",
+            "zh": "卢森堡（1914 年 8 月 2 日起被德国占领）"
+          },
+          "src": [
+            "G1"
+          ],
+          "from": {
+            "cshapes": [
+              212
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "German-held Belgium and France east of the front (lines west-1915, inside CShapes Belgium and France)",
+          "holder": "germany",
+          "label": {
+            "en": "German-occupied Belgium and northern France",
+            "zh": "德军占领的比利时与法国北部"
+          },
+          "src": [
+            "G1",
+            "G8"
+          ],
+          "from": {
+            "svg": "lines",
+            "class": "west-1915"
+          },
+          "clip": {
+            "union": [
+              {
+                "cshapes": [
+                  211
+                ],
+                "at": "1914-07-28"
+              },
+              {
+                "cshapes": [
+                  220
+                ],
+                "at": "1914-07-28"
+              }
+            ]
+          }
+        },
+        {
+          "note": "Eastern edge of East Prussia, Russian-held since November 1914 (lines east-prussia-1915, inside CShapes Germany)",
+          "holder": "russia",
+          "label": {
+            "en": "Eastern edge of East Prussia (Russian-held since November 1914)",
+            "zh": "东普鲁士东缘（1914 年 11 月起被俄军占据）"
+          },
+          "src": [
+            "G1",
+            "G12"
+          ],
+          "from": {
+            "svg": "lines",
+            "class": "east-prussia-1915"
+          },
+          "clip": {
+            "cshapes": [
+              255
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Galicia and Bukovina east of the front (lines poland-1915-east, inside CShapes Austria-Hungary)",
+          "holder": "russia",
+          "label": {
+            "en": "Galicia and Bukovina (Russian-occupied; the fortress of Przemyśl besieged)",
+            "zh": "加利西亚与布科维纳（俄军占领；普热梅希尔要塞被围）"
+          },
+          "src": [
+            "G1",
+            "G12"
+          ],
+          "from": {
+            "svg": "lines",
+            "class": "poland-1915-east"
+          },
+          "clip": {
+            "cshapes": [
+              300
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Western Russian Poland west of the front, German-occupied (Łódź 6 December 1914) (lines poland-1915-west, inside CShapes Russia)",
+          "holder": "germany",
+          "label": {
+            "en": "Western Russian Poland (German-occupied; Łódź taken 6 December 1914)",
+            "zh": "俄属波兰西部（德军占领；1914 年 12 月 6 日占罗兹）"
+          },
+          "src": [
+            "G1",
+            "G12"
+          ],
+          "from": {
+            "svg": "lines",
+            "class": "poland-1915-west"
+          },
+          "clip": {
+            "cshapes": [
+              365
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "South-western Russian Poland, Austro-Hungarian-occupied (Natural Earth provinces Świętokrzyskie, Lesser Poland, Silesian inside the area above)",
+          "holder": "austria-hungary",
+          "label": {
+            "en": "South-western Russian Poland (Austro-Hungarian-occupied)",
+            "zh": "俄属波兰西南部（奥匈占领）"
+          },
+          "src": [
+            "G1",
+            "G6",
+            "G12"
+          ],
+          "from": {
+            "admin1": "Poland",
+            "names": [
+              "Świętokrzyskie",
+              "Lesser Poland",
+              "Silesian"
+            ]
+          },
+          "clip": {
+            "intersect": [
+              {
+                "svg": "lines",
+                "class": "poland-1915-west"
+              },
+              {
+                "cshapes": [
+                  365
+                ],
+                "at": "1914-07-28"
+              }
+            ]
+          }
+        },
+        {
+          "note": "Togoland under Anglo-French occupation since 26 August 1914 (OHM r2694162)",
+          "holder": "uk",
+          "label": {
+            "en": "Togoland (Anglo-French occupation since 26 August 1914)",
+            "zh": "多哥（1914 年 8 月 26 日起英法共同占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2694162
+          }
+        },
+        {
+          "note": "German Samoa under New Zealand occupation since 29 August 1914 (OHM r2846171)",
+          "holder": "new-zealand",
+          "label": {
+            "en": "Samoa (New Zealand-occupied since 29 August 1914)",
+            "zh": "萨摩亚（1914 年 8 月 29 日起由新西兰占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846171,
+            "set": "k9"
+          }
+        },
+        {
+          "note": "German New Guinea under Australian occupation (OHM r2961774)",
+          "holder": "australia",
+          "label": {
+            "en": "New Guinea (Australian-occupied since September 1914)",
+            "zh": "新几内亚（1914 年 9 月起由澳大利亚占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2961774,
+            "set": "k3"
+          }
+        },
+        {
+          "note": "Nauru under Australian occupation (OHM r2846178)",
+          "holder": "australia",
+          "label": {
+            "en": "Nauru (Australian-occupied since November 1914)",
+            "zh": "瑙鲁（1914 年 11 月起由澳大利亚占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846178,
+            "set": "k3"
+          }
+        },
+        {
+          "note": "German Micronesia under Japanese occupation (OHM r2961775)",
+          "holder": "japan",
+          "label": {
+            "en": "Micronesia (Japanese-occupied since October 1914)",
+            "zh": "密克罗尼西亚（1914 年 10 月起由日本占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2961775,
+            "set": "k3"
+          }
+        },
+        {
+          "note": "Kiautschou, Japanese-occupied since the fall of Tsingtao on 7 November 1914 (OHM r2889899)",
+          "holder": "japan",
+          "label": {
+            "en": "Kiautschou (Japanese-occupied since 7 November 1914)",
+            "zh": "胶州湾（1914 年 11 月 7 日起由日本占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2889899,
+            "set": "k1"
+          }
+        },
+        {
+          "note": "Basra and the Shatt al-Arab, occupied by British-Indian forces (Basra 22 November, Qurna 9 December 1914) (Natural Earth province inside the CShapes Ottoman Empire)",
+          "holder": "uk",
+          "label": {
+            "en": "Basra (British-Indian occupation since 22 November 1914)",
+            "zh": "巴士拉（1914 年 11 月 22 日起由英印军占领）"
+          },
+          "src": [
+            "G1",
+            "G6"
+          ],
+          "from": {
+            "admin1": "Iraq",
+            "names": [
+              "Al-Basrah"
+            ]
+          },
+          "clip": {
+            "cshapes": [
+              640
+            ],
+            "at": "1914-12-15"
+          }
+        },
+        {
+          "note": "Weihaiwei (OHM r2848211)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2848211,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Weihaiwei (British-leased)",
+            "zh": "威海卫（英国租借地）"
+          }
+        },
+        {
+          "note": "Hong Kong (OHM r2694575)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2694575,
+            "set": "k1"
+          }
+        },
+        {
+          "note": "Kwangchowan (OHM r2889933)",
+          "holder": "france",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2889933,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Kwangchowan (French-leased)",
+            "zh": "广州湾（法国租借地）"
+          }
+        },
+        {
+          "note": "Macau (OHM r2694462)",
+          "holder": "portugal",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2694462,
+            "set": "k1"
+          }
+        },
+        {
+          "note": "Kuwait (OHM r2848364)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2848364,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Kuwait (British-protected sheikhdom)",
+            "zh": "科威特（英国保护的酋长国）"
+          }
+        },
+        {
+          "note": "Bahrain (OHM r2848318)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2848318,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Bahrain (British protectorate)",
+            "zh": "巴林（英国保护国）"
+          }
+        },
+        {
+          "note": "New Hebrides (OHM r2846175)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846175,
+            "set": "k1"
+          },
+          "label": {
+            "en": "New Hebrides (Anglo-French condominium)",
+            "zh": "新赫布里底（英法共管）"
+          }
+        },
+        {
+          "note": "Gilbert and Ellice Islands (OHM r2831184)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2831184,
+            "set": "k1"
+          }
+        },
+        {
+          "note": "Tonga (OHM r2846200)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846200,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Tonga (British protectorate)",
+            "zh": "汤加（英国保护国）"
+          }
+        },
+        {
+          "note": "Cook Islands (OHM r2846264)",
+          "holder": "new-zealand",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846264,
+            "set": "k1"
+          }
+        }
+      ],
+      "checks": [
+        {
+          "name": "western-front",
+          "center": [
+            3.8,
+            49.6
+          ],
+          "zoom": 5.2,
+          "source": "svg-wf-1915-16"
+        },
+        {
+          "name": "eastern-front",
+          "center": [
+            22,
+            51.5
+          ],
+          "zoom": 4.2,
+          "source": "svg-ef-1915"
+        },
+        {
+          "name": "europe",
+          "center": [
+            17,
+            48
+          ],
+          "zoom": 2.9
+        },
+        {
+          "name": "middle-east",
+          "center": [
+            40,
+            30
+          ],
+          "zoom": 3.4
+        },
+        {
+          "name": "east-asia-pacific",
+          "center": [
+            140,
+            10
+          ],
+          "zoom": 2.2
+        }
+      ]
+    },
+    {
+      "id": "K4",
+      "t": "1915-12-31",
+      "ohm": "k4",
+      "method": "Western front of 1915 (wf-1915-16, outline unchanged until July 1916). Eastern front after the Great Retreat: Riga–Dvinsk–Pinsk from the West Point map of 1917 (wp-1917; the northern line did not move between autumn 1915 and September 1917) and Pinsk to the Romanian border from the March 1916 line (ef-1916); the General Government of Lublin from OpenHistoricalMap. Occupied Serbia: Austro-Hungarian and Bulgarian zones from a fill-coded Commons map (serbia-1916) inside CShapes Serbia; Montenegro not yet occupied (Mount Lovćen fell 11 January 1916). Italian front: the line of 24 October 1917 (caporetto), within 20 km of the 1915 line. Kamerun split by the 1916 occupation zones (OpenHistoricalMap). Lower Mesopotamia by Natural Earth provinces. Base: CShapes 2.0 on 1915-12-31 (South West Africa occupied by South Africa).",
+      "base": {
+        "2": "usa",
+        "3": "usa",
+        "4": "usa",
+        "6": "usa",
+        "20": "canada",
+        "21": {
+          "holder": "uk",
+          "label": {
+            "en": "Newfoundland (British dominion)",
+            "zh": "纽芬兰（英国自治领）"
+          }
+        },
+        "31": "uk",
+        "51": "uk",
+        "52": "uk",
+        "53": "uk",
+        "80": "uk",
+        "110": "uk",
+        "65": "france",
+        "66": "france",
+        "120": "france",
+        "115": "netherlands",
+        "140": "brazil",
+        "200": "uk",
+        "210": "netherlands",
+        "211": "belgium",
+        "212": "luxembourg",
+        "220": "france",
+        "225": "switzerland",
+        "230": "spain",
+        "235": "portugal",
+        "338": "uk",
+        "339": "albania",
+        "350": "greece",
+        "355": "bulgaria",
+        "380": "sweden",
+        "385": "norway",
+        "390": "denmark",
+        "402": "portugal",
+        "404": "portugal",
+        "411": "spain",
+        "420": "uk",
+        "432": "france",
+        "433": "france",
+        "434": "france",
+        "435": "france",
+        "436": "france",
+        "437": "france",
+        "438": "france",
+        "451": "uk",
+        "452": "uk",
+        "475": "uk",
+        "481": "france",
+        "482": "france",
+        "483": "france",
+        "484": "france",
+        "490": "belgium",
+        "500": "uk",
+        "501": "uk",
+        "511": "uk",
+        "521": "uk",
+        "522": "france",
+        "531": "italy",
+        "540": "portugal",
+        "541": "portugal",
+        "551": "uk",
+        "552": "uk",
+        "553": "uk",
+        "560": "south-africa",
+        "570": "uk",
+        "571": "uk",
+        "572": "uk",
+        "580": "france",
+        "585": "france",
+        "590": "uk",
+        "600": "france",
+        "602": "spain",
+        "610": "spain",
+        "615": "france",
+        "616": "france",
+        "620": "italy",
+        "625": {
+          "holder": "uk",
+          "label": {
+            "en": "Anglo-Egyptian Sudan",
+            "zh": "英埃苏丹"
+          }
+        },
+        "630": "persia",
+        "640": "ottoman",
+        "696": "uk",
+        "710": "china",
+        "713": "japan",
+        "730": "japan",
+        "740": "japan",
+        "7351": "japan",
+        "750": "india",
+        "780": "uk",
+        "781": "uk",
+        "800": "siam",
+        "811": "france",
+        "812": "france",
+        "815": "france",
+        "821": "uk",
+        "822": "uk",
+        "823": "uk",
+        "824": "uk",
+        "835": "uk",
+        "827": {
+          "holder": "uk",
+          "label": {
+            "en": "Straits Settlements (incl. Singapore)",
+            "zh": "海峡殖民地（含新加坡）"
+          }
+        },
+        "840": "usa",
+        "850": "netherlands",
+        "860": "portugal",
+        "900": "australia",
+        "911": "australia",
+        "920": "new-zealand",
+        "930": "france",
+        "940": "uk",
+        "950": "uk",
+        "960": "france",
+        "5200": "italy",
+        "7020": {
+          "holder": "russia",
+          "label": {
+            "en": "Emirate of Bukhara (Russian protectorate)",
+            "zh": "布哈拉酋长国（俄国保护国）"
+          }
+        },
+        "7030": {
+          "holder": "russia",
+          "label": {
+            "en": "Khanate of Khiva (Russian protectorate)",
+            "zh": "希瓦汗国（俄国保护国）"
+          }
+        },
+        "255": "germany",
+        "300": "austria-hungary",
+        "325": "italy",
+        "340": "serbia",
+        "341": "montenegro",
+        "360": "romania",
+        "365": "russia",
+        "395": {
+          "holder": "denmark",
+          "label": {
+            "en": "Iceland (Danish dependency)",
+            "zh": "冰岛（丹麦属地）"
+          }
+        },
+        "460": "germany",
+        "470": "germany",
+        "510": "germany",
+        "565": {
+          "holder": "south-africa",
+          "label": {
+            "en": "South West Africa (occupied by South Africa since July 1915)",
+            "zh": "西南非洲（1915 年 7 月起由南非占领）"
+          }
+        },
+        "912": "germany",
+        "651": {
+          "holder": "uk",
+          "label": {
+            "en": "Egypt (British protectorate since 18 December 1914)",
+            "zh": "埃及（1914 年 12 月 18 日起为英国保护国）"
+          }
+        },
+        "352": {
+          "holder": "uk",
+          "label": {
+            "en": "Cyprus (annexed by Britain on 5 November 1914)",
+            "zh": "塞浦路斯（1914 年 11 月 5 日被英国吞并）"
+          }
+        }
+      },
+      "steps": [
+        {
+          "note": "Luxembourg, occupied by Germany since 2 August 1914 (CShapes)",
+          "holder": "germany",
+          "label": {
+            "en": "Luxembourg (German-occupied since 2 August 1914)",
+            "zh": "卢森堡（1914 年 8 月 2 日起被德国占领）"
+          },
+          "src": [
+            "G1"
+          ],
+          "from": {
+            "cshapes": [
+              212
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "German-held Belgium and France east of the front (lines west-1915, inside CShapes Belgium and France)",
+          "holder": "germany",
+          "label": {
+            "en": "German-occupied Belgium and northern France",
+            "zh": "德军占领的比利时与法国北部"
+          },
+          "src": [
+            "G1",
+            "G8"
+          ],
+          "from": {
+            "svg": "lines",
+            "class": "west-1915"
+          },
+          "clip": {
+            "union": [
+              {
+                "cshapes": [
+                  211
+                ],
+                "at": "1914-07-28"
+              },
+              {
+                "cshapes": [
+                  220
+                ],
+                "at": "1914-07-28"
+              }
+            ]
+          }
+        },
+        {
+          "note": "Russian Poland, Lithuania, Courland and western Volhynia west of the front after the Great Retreat (lines east-1915-12-west, inside CShapes Russia)",
+          "holder": "germany",
+          "label": {
+            "en": "Russian Poland, Lithuania, Courland and western Volhynia (Central Powers occupation: Ober Ost and the General Government of Warsaw)",
+            "zh": "俄属波兰、立陶宛、库尔兰与沃里尼亚西部（同盟国占领：东线总司令部辖区与华沙总督府）"
+          },
+          "src": [
+            "G1",
+            "G13",
+            "G14"
+          ],
+          "from": {
+            "svg": "lines",
+            "class": "east-1915-12-west"
+          },
+          "clip": {
+            "cshapes": [
+              365
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "General Government of Lublin, the Austro-Hungarian occupation zone in Russian Poland (OHM r2695683)",
+          "holder": "austria-hungary",
+          "label": {
+            "en": "General Government of Lublin (Austro-Hungarian occupation)",
+            "zh": "卢布林总督府（奥匈占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2695683
+          },
+          "clip": {
+            "cshapes": [
+              365
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Eastern edge of Galicia still held by Russia (lines east-1915-12-east, inside CShapes Austria-Hungary)",
+          "holder": "russia",
+          "label": {
+            "en": "Eastern edge of Galicia (Russian-held)",
+            "zh": "加利西亚东缘（俄军据守）"
+          },
+          "src": [
+            "G1",
+            "G13"
+          ],
+          "from": {
+            "svg": "lines",
+            "class": "east-1915-12-east"
+          },
+          "clip": {
+            "cshapes": [
+              300
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Serbia, occupied by Austria-Hungary, Germany and Bulgaria by December 1915 (whole of CShapes Serbia; the Bulgarian zone is painted over it)",
+          "holder": "austria-hungary",
+          "label": {
+            "en": "Serbia: Austro-Hungarian occupation zone (Military General Government)",
+            "zh": "塞尔维亚：奥匈占领区（军事总督府）"
+          },
+          "src": [
+            "G1",
+            "G16"
+          ],
+          "from": {
+            "cshapes": [
+              340
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Serbia, Bulgarian occupation zone (svg serbia-1916 class bulgarian-zone inside CShapes Serbia)",
+          "holder": "bulgaria",
+          "label": {
+            "en": "Serbia: Bulgarian occupation zone",
+            "zh": "塞尔维亚：保加利亚占领区"
+          },
+          "src": [
+            "G1",
+            "G16"
+          ],
+          "from": {
+            "svg": "serbia-1916",
+            "class": "bulgarian-zone"
+          },
+          "clip": {
+            "cshapes": [
+              340
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Austro-Hungarian territory held by Italy on the Isonzo and in the Alps: south-west of the front of 24 October 1917 (lines italy-1917-10-south, inside CShapes Austria-Hungary)",
+          "holder": "italy",
+          "label": {
+            "en": "Austro-Hungarian territory held by Italy (Isonzo and Alpine front)",
+            "zh": "意大利占领的奥匈领土（伊松佐河与阿尔卑斯战线）"
+          },
+          "src": [
+            "G1",
+            "G18"
+          ],
+          "from": {
+            "svg": "lines",
+            "class": "italy-1917-10-south"
+          },
+          "clip": {
+            "cshapes": [
+              300
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Togoland under Anglo-French occupation since 26 August 1914 (OHM r2694162)",
+          "holder": "uk",
+          "label": {
+            "en": "Togoland (Anglo-French occupation since 26 August 1914)",
+            "zh": "多哥（1914 年 8 月 26 日起英法共同占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2694162
+          }
+        },
+        {
+          "note": "German Samoa under New Zealand occupation since 29 August 1914 (OHM r2846171)",
+          "holder": "new-zealand",
+          "label": {
+            "en": "Samoa (New Zealand-occupied since 29 August 1914)",
+            "zh": "萨摩亚（1914 年 8 月 29 日起由新西兰占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846171,
+            "set": "k9"
+          }
+        },
+        {
+          "note": "German New Guinea under Australian occupation (OHM r2961774)",
+          "holder": "australia",
+          "label": {
+            "en": "New Guinea (Australian-occupied since September 1914)",
+            "zh": "新几内亚（1914 年 9 月起由澳大利亚占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2961774,
+            "set": "k4"
+          }
+        },
+        {
+          "note": "Nauru under Australian occupation (OHM r2846178)",
+          "holder": "australia",
+          "label": {
+            "en": "Nauru (Australian-occupied since November 1914)",
+            "zh": "瑙鲁（1914 年 11 月起由澳大利亚占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846178,
+            "set": "k4"
+          }
+        },
+        {
+          "note": "German Micronesia under Japanese occupation (OHM r2961775)",
+          "holder": "japan",
+          "label": {
+            "en": "Micronesia (Japanese-occupied since October 1914)",
+            "zh": "密克罗尼西亚（1914 年 10 月起由日本占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2961775,
+            "set": "k4"
+          }
+        },
+        {
+          "note": "Kiautschou, Japanese-occupied since the fall of Tsingtao on 7 November 1914 (OHM r2889899)",
+          "holder": "japan",
+          "label": {
+            "en": "Kiautschou (Japanese-occupied since 7 November 1914)",
+            "zh": "胶州湾（1914 年 11 月 7 日起由日本占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2889899,
+            "set": "k1"
+          }
+        },
+        {
+          "note": "Kamerun incl. Neukamerun (CShapes on 1914-07-28), occupied by French, British and Belgian forces",
+          "holder": "france",
+          "label": {
+            "en": "Kamerun, French-occupied zone (German forces held the area round Yaoundé until 1 January 1916)",
+            "zh": "喀麦隆法占区（德军据守雅温得一带至 1916 年 1 月 1 日）"
+          },
+          "src": [
+            "G1"
+          ],
+          "from": {
+            "cshapes": [
+              470
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "British zone of Kamerun (OHM r2828750, the occupation zones of the provisional partition of March 1916)",
+          "holder": "uk",
+          "label": {
+            "en": "Kamerun, British-occupied zone (German forces held the area round Yaoundé until 1 January 1916)",
+            "zh": "喀麦隆英占区（德军据守雅温得一带至 1916 年 1 月 1 日）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2828750,
+            "set": "k5"
+          }
+        },
+        {
+          "note": "Mesopotamia under British-Indian occupation (Natural Earth provinces of Iraq inside the CShapes Ottoman Empire)",
+          "holder": "uk",
+          "label": {
+            "en": "Lower Mesopotamia (British-Indian occupation; Townshend's force besieged in Kut since 7 December 1915)",
+            "zh": "美索不达米亚南部（英印军占领；汤森部队自 1915 年 12 月 7 日被围于库特）"
+          },
+          "src": [
+            "G1",
+            "G6"
+          ],
+          "from": {
+            "admin1": "Iraq",
+            "names": [
+              "Al-Basrah",
+              "Maysan",
+              "Dhi-Qar",
+              "Wasit"
+            ]
+          },
+          "clip": {
+            "cshapes": [
+              640
+            ],
+            "at": "1915-12-31"
+          }
+        },
+        {
+          "note": "Weihaiwei (OHM r2848211)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2848211,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Weihaiwei (British-leased)",
+            "zh": "威海卫（英国租借地）"
+          }
+        },
+        {
+          "note": "Hong Kong (OHM r2694575)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2694575,
+            "set": "k1"
+          }
+        },
+        {
+          "note": "Kwangchowan (OHM r2889933)",
+          "holder": "france",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2889933,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Kwangchowan (French-leased)",
+            "zh": "广州湾（法国租借地）"
+          }
+        },
+        {
+          "note": "Macau (OHM r2694462)",
+          "holder": "portugal",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2694462,
+            "set": "k1"
+          }
+        },
+        {
+          "note": "Kuwait (OHM r2848364)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2848364,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Kuwait (British-protected sheikhdom)",
+            "zh": "科威特（英国保护的酋长国）"
+          }
+        },
+        {
+          "note": "Bahrain (OHM r2848318)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2848318,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Bahrain (British protectorate)",
+            "zh": "巴林（英国保护国）"
+          }
+        },
+        {
+          "note": "New Hebrides (OHM r2846175)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846175,
+            "set": "k1"
+          },
+          "label": {
+            "en": "New Hebrides (Anglo-French condominium)",
+            "zh": "新赫布里底（英法共管）"
+          }
+        },
+        {
+          "note": "Gilbert and Ellice Islands (OHM r2831184)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2831184,
+            "set": "k1"
+          }
+        },
+        {
+          "note": "Tonga (OHM r2846200)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846200,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Tonga (British protectorate)",
+            "zh": "汤加（英国保护国）"
+          }
+        },
+        {
+          "note": "Cook Islands (OHM r2846264)",
+          "holder": "new-zealand",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846264,
+            "set": "k1"
+          }
+        }
+      ],
+      "checks": [
+        {
+          "name": "western-front",
+          "center": [
+            3.8,
+            49.6
+          ],
+          "zoom": 5.2,
+          "source": "svg-wf-1915-16"
+        },
+        {
+          "name": "eastern-front",
+          "center": [
+            24,
+            52
+          ],
+          "zoom": 3.6,
+          "source": "jpg-ef-1917"
+        },
+        {
+          "name": "balkans",
+          "center": [
+            21,
+            43
+          ],
+          "zoom": 4.6,
+          "source": "svg-serbia-1916"
+        },
+        {
+          "name": "italy",
+          "center": [
+            12.5,
+            46.2
+          ],
+          "zoom": 5.6,
+          "source": "svg-caporetto"
+        },
+        {
+          "name": "middle-east",
+          "center": [
+            40,
+            30
+          ],
+          "zoom": 3.4
+        },
+        {
+          "name": "africa",
+          "center": [
+            20,
+            0
+          ],
+          "zoom": 1.9
+        }
+      ]
+    },
+    {
+      "id": "K5",
+      "t": "1916-12-18",
+      "ohm": "k5",
+      "method": "Western front: January 1915 line with the Somme front of 18 November 1916 (wf-1915-16, dotted 11/1916 line); Verdun back on its February line. Eastern front: the line of 1 January 1917 from the Gulf of Riga to the Danube delta (wp-1917, two weeks after the keyframe; on 18 December the Romanian retreat towards the Siret was still under way, Brăila fell on 5 January), giving occupied Wallachia and Dobruja and the Brusilov gains in Galicia and Bukovina. Kingdom of Poland from OpenHistoricalMap. Serbia, Montenegro and northern Albania from serbia-1916; eastern Greek Macedonia, Mesopotamia, Hejaz, Russian-occupied eastern Anatolia and German East Africa by Natural Earth provinces dated by events; Kamerun zones and Ruanda-Urundi from OpenHistoricalMap. Base: CShapes 2.0 on 1916-12-18.",
+      "base": {
+        "2": "usa",
+        "3": "usa",
+        "4": "usa",
+        "6": "usa",
+        "20": "canada",
+        "21": {
+          "holder": "uk",
+          "label": {
+            "en": "Newfoundland (British dominion)",
+            "zh": "纽芬兰（英国自治领）"
+          }
+        },
+        "31": "uk",
+        "51": "uk",
+        "52": "uk",
+        "53": "uk",
+        "80": "uk",
+        "110": "uk",
+        "65": "france",
+        "66": "france",
+        "120": "france",
+        "115": "netherlands",
+        "140": "brazil",
+        "200": "uk",
+        "210": "netherlands",
+        "211": "belgium",
+        "212": "luxembourg",
+        "220": "france",
+        "225": "switzerland",
+        "230": "spain",
+        "235": "portugal",
+        "338": "uk",
+        "339": "albania",
+        "350": "greece",
+        "355": "bulgaria",
+        "380": "sweden",
+        "385": "norway",
+        "390": "denmark",
+        "402": "portugal",
+        "404": "portugal",
+        "411": "spain",
+        "420": "uk",
+        "432": "france",
+        "433": "france",
+        "434": "france",
+        "435": "france",
+        "436": "france",
+        "437": "france",
+        "438": "france",
+        "451": "uk",
+        "452": "uk",
+        "475": "uk",
+        "481": "france",
+        "482": "france",
+        "483": "france",
+        "484": "france",
+        "490": "belgium",
+        "500": "uk",
+        "501": "uk",
+        "511": "uk",
+        "521": "uk",
+        "522": "france",
+        "531": "italy",
+        "540": "portugal",
+        "541": "portugal",
+        "551": "uk",
+        "552": "uk",
+        "553": "uk",
+        "560": "south-africa",
+        "570": "uk",
+        "571": "uk",
+        "572": "uk",
+        "580": "france",
+        "585": "france",
+        "590": "uk",
+        "600": "france",
+        "602": "spain",
+        "610": "spain",
+        "615": "france",
+        "616": "france",
+        "620": "italy",
+        "625": {
+          "holder": "uk",
+          "label": {
+            "en": "Anglo-Egyptian Sudan",
+            "zh": "英埃苏丹"
+          }
+        },
+        "630": "persia",
+        "640": "ottoman",
+        "696": "uk",
+        "710": "china",
+        "713": "japan",
+        "730": "japan",
+        "740": "japan",
+        "7351": "japan",
+        "750": "india",
+        "780": "uk",
+        "781": "uk",
+        "800": "siam",
+        "811": "france",
+        "812": "france",
+        "815": "france",
+        "821": "uk",
+        "822": "uk",
+        "823": "uk",
+        "824": "uk",
+        "835": "uk",
+        "827": {
+          "holder": "uk",
+          "label": {
+            "en": "Straits Settlements (incl. Singapore)",
+            "zh": "海峡殖民地（含新加坡）"
+          }
+        },
+        "840": "usa",
+        "850": "netherlands",
+        "860": "portugal",
+        "900": "australia",
+        "911": "australia",
+        "920": "new-zealand",
+        "930": "france",
+        "940": "uk",
+        "950": "uk",
+        "960": "france",
+        "5200": "italy",
+        "7020": {
+          "holder": "russia",
+          "label": {
+            "en": "Emirate of Bukhara (Russian protectorate)",
+            "zh": "布哈拉酋长国（俄国保护国）"
+          }
+        },
+        "7030": {
+          "holder": "russia",
+          "label": {
+            "en": "Khanate of Khiva (Russian protectorate)",
+            "zh": "希瓦汗国（俄国保护国）"
+          }
+        },
+        "255": "germany",
+        "300": "austria-hungary",
+        "325": "italy",
+        "340": "serbia",
+        "341": "montenegro",
+        "360": "romania",
+        "365": "russia",
+        "395": {
+          "holder": "denmark",
+          "label": {
+            "en": "Iceland (Danish dependency)",
+            "zh": "冰岛（丹麦属地）"
+          }
+        },
+        "460": "germany",
+        "470": "germany",
+        "510": "germany",
+        "565": {
+          "holder": "south-africa",
+          "label": {
+            "en": "South West Africa (occupied by South Africa since July 1915)",
+            "zh": "西南非洲（1915 年 7 月起由南非占领）"
+          }
+        },
+        "912": "germany",
+        "651": {
+          "holder": "uk",
+          "label": {
+            "en": "Egypt (British protectorate since 18 December 1914)",
+            "zh": "埃及（1914 年 12 月 18 日起为英国保护国）"
+          }
+        },
+        "352": {
+          "holder": "uk",
+          "label": {
+            "en": "Cyprus (annexed by Britain on 5 November 1914)",
+            "zh": "塞浦路斯（1914 年 11 月 5 日被英国吞并）"
+          }
+        },
+        "694": {
+          "holder": "uk",
+          "label": {
+            "en": "Qatar (British protectorate since November 1916)",
+            "zh": "卡塔尔（1916 年 11 月起为英国保护国）"
+          }
+        }
+      },
+      "steps": [
+        {
+          "note": "Luxembourg, occupied by Germany since 2 August 1914 (CShapes)",
+          "holder": "germany",
+          "label": {
+            "en": "Luxembourg (German-occupied since 2 August 1914)",
+            "zh": "卢森堡（1914 年 8 月 2 日起被德国占领）"
+          },
+          "src": [
+            "G1"
+          ],
+          "from": {
+            "cshapes": [
+              212
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "German-held Belgium and France east of the front (lines west-1916, inside CShapes Belgium and France)",
+          "holder": "germany",
+          "label": {
+            "en": "German-occupied Belgium and northern France (Somme front of 18 November 1916)",
+            "zh": "德军占领的比利时与法国北部（1916 年 11 月 18 日索姆河战线）"
+          },
+          "src": [
+            "G1",
+            "G8"
+          ],
+          "from": {
+            "svg": "lines",
+            "class": "west-1916"
+          },
+          "clip": {
+            "union": [
+              {
+                "cshapes": [
+                  211
+                ],
+                "at": "1914-07-28"
+              },
+              {
+                "cshapes": [
+                  220
+                ],
+                "at": "1914-07-28"
+              }
+            ]
+          }
+        },
+        {
+          "note": "Russian territory west of the front of 1 January 1917 (lines east-1917-01, inside CShapes Russia)",
+          "holder": "germany",
+          "label": {
+            "en": "Lithuania, Courland, Belarus west of the front and western Volhynia (Central Powers occupation: Ober Ost)",
+            "zh": "立陶宛、库尔兰、战线以西的白俄罗斯与沃里尼亚西部（同盟国占领：东线总司令部辖区）"
+          },
+          "src": [
+            "G1",
+            "G14"
+          ],
+          "from": {
+            "svg": "lines",
+            "class": "east-1917-01"
+          },
+          "clip": {
+            "cshapes": [
+              365
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Kingdom of Poland, client state proclaimed by Germany and Austria-Hungary on 5 November 1916 (OHM r2695684)",
+          "holder": "germany",
+          "label": {
+            "en": "Kingdom of Poland (proclaimed by Germany and Austria-Hungary on 5 November 1916; under their occupation)",
+            "zh": "波兰王国（德奥于 1916 年 11 月 5 日宣布成立；处于德奥占领下）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2695684,
+            "set": "k5"
+          }
+        },
+        {
+          "note": "Eastern Galicia and Bukovina retaken by the Brusilov offensive (lines east-1917-01-east, inside CShapes Austria-Hungary)",
+          "holder": "russia",
+          "label": {
+            "en": "Eastern Galicia and Bukovina (Russian-held since the Brusilov offensive, June–September 1916)",
+            "zh": "东加利西亚与布科维纳（1916 年 6–9 月布鲁西洛夫攻势后由俄军据守）"
+          },
+          "src": [
+            "G1",
+            "G14"
+          ],
+          "from": {
+            "svg": "lines",
+            "class": "east-1917-01-east"
+          },
+          "clip": {
+            "cshapes": [
+              300
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Occupied Wallachia and Dobruja: Romania west of the front (lines east-1917-01, inside CShapes Romania on 1914-07-28)",
+          "holder": "germany",
+          "label": {
+            "en": "Occupied Wallachia and Dobruja (Central Powers; Bucharest fell 6 December 1916)",
+            "zh": "被占领的瓦拉几亚与多布罗加（同盟国；布加勒斯特于 1916 年 12 月 6 日陷落）"
+          },
+          "src": [
+            "G1",
+            "G14"
+          ],
+          "from": {
+            "svg": "lines",
+            "class": "east-1917-01"
+          },
+          "clip": {
+            "cshapes": [
+              360
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Serbia, occupied by Austria-Hungary, Germany and Bulgaria by December 1915 (whole of CShapes Serbia; the Bulgarian zone is painted over it)",
+          "holder": "austria-hungary",
+          "label": {
+            "en": "Serbia: Austro-Hungarian occupation zone (Military General Government)",
+            "zh": "塞尔维亚：奥匈占领区（军事总督府）"
+          },
+          "src": [
+            "G1",
+            "G16"
+          ],
+          "from": {
+            "cshapes": [
+              340
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Serbia, Bulgarian occupation zone (svg serbia-1916 class bulgarian-zone inside CShapes Serbia)",
+          "holder": "bulgaria",
+          "label": {
+            "en": "Serbia: Bulgarian occupation zone",
+            "zh": "塞尔维亚：保加利亚占领区"
+          },
+          "src": [
+            "G1",
+            "G16"
+          ],
+          "from": {
+            "svg": "serbia-1916",
+            "class": "bulgarian-zone"
+          },
+          "clip": {
+            "cshapes": [
+              340
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Montenegro, wholly Austro-Hungarian-occupied since January 1916 (CShapes Montenegro)",
+          "holder": "austria-hungary",
+          "label": {
+            "en": "Montenegro (Austro-Hungarian-occupied since January 1916)",
+            "zh": "黑山（1916 年 1 月起被奥匈占领）"
+          },
+          "src": [
+            "G1"
+          ],
+          "from": {
+            "cshapes": [
+              341
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Northern and central Albania, Austro-Hungarian-occupied since early 1916 (svg serbia-1916 class austro-hungarian-zone inside CShapes Albania)",
+          "holder": "austria-hungary",
+          "label": {
+            "en": "Northern and central Albania (Austro-Hungarian-occupied)",
+            "zh": "阿尔巴尼亚北部与中部（奥匈占领）"
+          },
+          "src": [
+            "G1",
+            "G16"
+          ],
+          "from": {
+            "svg": "serbia-1916",
+            "class": "austro-hungarian-zone",
+            "coastFillKm": 10
+          },
+          "clip": {
+            "cshapes": [
+              339
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Eastern Greek Macedonia, Bulgarian-occupied from August 1916 (Natural Earth region inside CShapes Greece)",
+          "holder": "bulgaria",
+          "label": {
+            "en": "Eastern Greek Macedonia (Bulgarian-occupied since August 1916)",
+            "zh": "希腊东马其顿（1916 年 8 月起被保加利亚占领）"
+          },
+          "src": [
+            "G1",
+            "G6"
+          ],
+          "from": {
+            "admin1": "Greece",
+            "names": [
+              "Anatoliki Makedonia kai Thraki"
+            ]
+          },
+          "clip": {
+            "cshapes": [
+              350
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Austro-Hungarian territory held by Italy on the Isonzo and in the Alps: south-west of the front of 24 October 1917 (lines italy-1917-10-south, inside CShapes Austria-Hungary)",
+          "holder": "italy",
+          "label": {
+            "en": "Austro-Hungarian territory held by Italy (Isonzo and Alpine front)",
+            "zh": "意大利占领的奥匈领土（伊松佐河与阿尔卑斯战线）"
+          },
+          "src": [
+            "G1",
+            "G18"
+          ],
+          "from": {
+            "svg": "lines",
+            "class": "italy-1917-10-south"
+          },
+          "clip": {
+            "cshapes": [
+              300
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Togoland under Anglo-French occupation since 26 August 1914 (OHM r2694162)",
+          "holder": "uk",
+          "label": {
+            "en": "Togoland (Anglo-French occupation since 26 August 1914)",
+            "zh": "多哥（1914 年 8 月 26 日起英法共同占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2694162
+          }
+        },
+        {
+          "note": "German Samoa under New Zealand occupation since 29 August 1914 (OHM r2846171)",
+          "holder": "new-zealand",
+          "label": {
+            "en": "Samoa (New Zealand-occupied since 29 August 1914)",
+            "zh": "萨摩亚（1914 年 8 月 29 日起由新西兰占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846171,
+            "set": "k9"
+          }
+        },
+        {
+          "note": "German New Guinea under Australian occupation (OHM r2961774)",
+          "holder": "australia",
+          "label": {
+            "en": "New Guinea (Australian-occupied since September 1914)",
+            "zh": "新几内亚（1914 年 9 月起由澳大利亚占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2961774,
+            "set": "k5"
+          }
+        },
+        {
+          "note": "Nauru under Australian occupation (OHM r2846178)",
+          "holder": "australia",
+          "label": {
+            "en": "Nauru (Australian-occupied since November 1914)",
+            "zh": "瑙鲁（1914 年 11 月起由澳大利亚占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846178,
+            "set": "k5"
+          }
+        },
+        {
+          "note": "German Micronesia under Japanese occupation (OHM r2961775)",
+          "holder": "japan",
+          "label": {
+            "en": "Micronesia (Japanese-occupied since October 1914)",
+            "zh": "密克罗尼西亚（1914 年 10 月起由日本占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2961775,
+            "set": "k5"
+          }
+        },
+        {
+          "note": "Kiautschou, Japanese-occupied since the fall of Tsingtao on 7 November 1914 (OHM r2889899)",
+          "holder": "japan",
+          "label": {
+            "en": "Kiautschou (Japanese-occupied since 7 November 1914)",
+            "zh": "胶州湾（1914 年 11 月 7 日起由日本占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2889899,
+            "set": "k1"
+          }
+        },
+        {
+          "note": "Kamerun incl. Neukamerun (CShapes on 1914-07-28), occupied by French, British and Belgian forces",
+          "holder": "france",
+          "label": {
+            "en": "Kamerun, French-occupied zone",
+            "zh": "喀麦隆法占区"
+          },
+          "src": [
+            "G1"
+          ],
+          "from": {
+            "cshapes": [
+              470
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "British zone of Kamerun (OHM r2828750, the occupation zones of the provisional partition of March 1916)",
+          "holder": "uk",
+          "label": {
+            "en": "Kamerun, British-occupied zone",
+            "zh": "喀麦隆英占区"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2828750,
+            "set": "k5"
+          }
+        },
+        {
+          "note": "German East Africa north of the Rufiji and the central railway, occupied by British, South African and Indian forces by the end of 1916 (Natural Earth provinces inside CShapes GEA)",
+          "holder": "uk",
+          "label": {
+            "en": "German East Africa, northern and central parts (British-occupied; Dar es Salaam 4 September 1916)",
+            "zh": "德属东非北部与中部（英军占领；1916 年 9 月 4 日占达累斯萨拉姆）"
+          },
+          "src": [
+            "G1",
+            "G6"
+          ],
+          "from": {
+            "admin1": "United Republic of Tanzania",
+            "names": [
+              "Kagera",
+              "Mwanza",
+              "Mara",
+              "Geita",
+              "Simiyu",
+              "Shinyanga",
+              "Arusha",
+              "Kilimanjaro",
+              "Manyara",
+              "Tanga",
+              "Pwani",
+              "Dar-Es-Salaam",
+              "Morogoro",
+              "Dodoma",
+              "Singida",
+              "Iringa",
+              "Mbeya",
+              "Rukwa",
+              "Katavi",
+              "Njombe"
+            ]
+          },
+          "clip": {
+            "cshapes": [
+              510
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Tabora and Kigoma, taken by the Belgian Force Publique (Tabora 19 September 1916; Natural Earth provinces)",
+          "holder": "belgium",
+          "label": {
+            "en": "Tabora and Kigoma (Belgian-occupied since September 1916)",
+            "zh": "塔波拉与基戈马（1916 年 9 月起由比利时占领）"
+          },
+          "src": [
+            "G1",
+            "G6"
+          ],
+          "from": {
+            "admin1": "United Republic of Tanzania",
+            "names": [
+              "Tabora",
+              "Kigoma"
+            ]
+          },
+          "clip": {
+            "cshapes": [
+              510
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Ruanda-Urundi under Belgian occupation (OHM r2863621)",
+          "holder": "belgium",
+          "label": {
+            "en": "Ruanda-Urundi (Belgian-occupied since 1916)",
+            "zh": "卢旺达-乌隆迪（1916 年起由比利时占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2863621,
+            "set": "k5"
+          }
+        },
+        {
+          "note": "Mesopotamia under British-Indian occupation (Natural Earth provinces of Iraq inside the CShapes Ottoman Empire)",
+          "holder": "uk",
+          "label": {
+            "en": "Lower Mesopotamia (British-Indian occupation; Kut surrendered 29 April 1916)",
+            "zh": "美索不达米亚南部（英印军占领；库特于 1916 年 4 月 29 日投降）"
+          },
+          "src": [
+            "G1",
+            "G6"
+          ],
+          "from": {
+            "admin1": "Iraq",
+            "names": [
+              "Al-Basrah",
+              "Maysan",
+              "Dhi-Qar"
+            ]
+          },
+          "clip": {
+            "cshapes": [
+              640
+            ],
+            "at": "1916-12-18"
+          }
+        },
+        {
+          "note": "Hejaz: Mecca, Jeddah and Taif held by the Arab Revolt from June 1916 (Natural Earth province Makkah inside the CShapes Ottoman Empire)",
+          "holder": "hejaz",
+          "label": {
+            "en": "Kingdom of Hejaz (Arab Revolt from June 1916; the Ottoman garrison held Medina until January 1919)",
+            "zh": "汉志王国（1916 年 6 月起阿拉伯起义；奥斯曼守军据守麦地那至 1919 年 1 月）"
+          },
+          "src": [
+            "G1",
+            "G6"
+          ],
+          "from": {
+            "admin1": "Saudi Arabia",
+            "names": [
+              "Makkah"
+            ]
+          },
+          "clip": {
+            "cshapes": [
+              640
+            ],
+            "at": "1916-12-18"
+          }
+        },
+        {
+          "note": "Eastern Anatolia under Russian occupation: Erzurum (16 February), Trebizond (18 April), Erzincan (25 July 1916) (Natural Earth provinces inside the CShapes Ottoman Empire)",
+          "holder": "russia",
+          "label": {
+            "en": "Eastern Anatolia (Russian-occupied since 1916)",
+            "zh": "安纳托利亚东部（1916 年起被俄军占领）"
+          },
+          "src": [
+            "G1",
+            "G6"
+          ],
+          "from": {
+            "admin1": "Turkey",
+            "names": [
+              "Rize",
+              "Trabzon",
+              "Gümüshane",
+              "Bayburt",
+              "Erzurum",
+              "Erzincan",
+              "Agri",
+              "Van",
+              "Bitlis",
+              "Mus"
+            ]
+          },
+          "clip": {
+            "cshapes": [
+              640
+            ],
+            "at": "1916-12-18"
+          }
+        },
+        {
+          "note": "Weihaiwei (OHM r2848211)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2848211,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Weihaiwei (British-leased)",
+            "zh": "威海卫（英国租借地）"
+          }
+        },
+        {
+          "note": "Hong Kong (OHM r2694575)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2694575,
+            "set": "k1"
+          }
+        },
+        {
+          "note": "Kwangchowan (OHM r2889933)",
+          "holder": "france",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2889933,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Kwangchowan (French-leased)",
+            "zh": "广州湾（法国租借地）"
+          }
+        },
+        {
+          "note": "Macau (OHM r2694462)",
+          "holder": "portugal",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2694462,
+            "set": "k1"
+          }
+        },
+        {
+          "note": "Kuwait (OHM r2848364)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2848364,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Kuwait (British-protected sheikhdom)",
+            "zh": "科威特（英国保护的酋长国）"
+          }
+        },
+        {
+          "note": "Bahrain (OHM r2848318)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2848318,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Bahrain (British protectorate)",
+            "zh": "巴林（英国保护国）"
+          }
+        },
+        {
+          "note": "New Hebrides (OHM r2846175)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846175,
+            "set": "k1"
+          },
+          "label": {
+            "en": "New Hebrides (Anglo-French condominium)",
+            "zh": "新赫布里底（英法共管）"
+          }
+        },
+        {
+          "note": "Gilbert and Ellice Islands (OHM r2831184)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2831184,
+            "set": "k1"
+          }
+        },
+        {
+          "note": "Tonga (OHM r2846200)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846200,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Tonga (British protectorate)",
+            "zh": "汤加（英国保护国）"
+          }
+        },
+        {
+          "note": "Cook Islands (OHM r2846264)",
+          "holder": "new-zealand",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846264,
+            "set": "k1"
+          }
+        }
+      ],
+      "checks": [
+        {
+          "name": "western-front",
+          "center": [
+            3.8,
+            49.6
+          ],
+          "zoom": 5.2,
+          "source": "svg-wf-1915-16"
+        },
+        {
+          "name": "eastern-front",
+          "center": [
+            26,
+            49
+          ],
+          "zoom": 3.6,
+          "source": "jpg-ef-1917"
+        },
+        {
+          "name": "balkans",
+          "center": [
+            21,
+            43
+          ],
+          "zoom": 4.6,
+          "source": "svg-serbia-1916"
+        },
+        {
+          "name": "middle-east",
+          "center": [
+            40,
+            30
+          ],
+          "zoom": 3.4,
+          "source": "png-russian-turkey"
+        },
+        {
+          "name": "africa",
+          "center": [
+            20,
+            0
+          ],
+          "zoom": 1.9
+        }
+      ]
+    },
+    {
+      "id": "K6",
+      "t": "1917-12-15",
+      "ohm": "k6",
+      "method": "Western front after the withdrawal to the Hindenburg Line in April 1917 (wf-1917); the 1917 battles (Arras, Chemin des Dames, Passchendaele, Cambrai) moved it by less than 10 km. Eastern front at the armistice: German limit of advance at Riga on 5 September 1917 (riga-1917), the Dvina–Pinsk–Brody line (wp-1917), the line after the failed Kerensky offensive from Brody to the Romanian border and the Romanian front (wp-1917). Italian front after Caporetto on the Piave and the Grappa (caporetto, 12 November 1917). Southern Palestine behind the Ottoman line of 30 December 1917 (palestine-1917). Mesopotamia, Hejaz, Russian-occupied Anatolia and German East Africa by Natural Earth provinces dated by events; Togoland split into its British and French zones (OpenHistoricalMap). Base: CShapes 2.0 on 1917-12-15 (Finland independent).",
+      "base": {
+        "2": "usa",
+        "3": "usa",
+        "4": "usa",
+        "6": "usa",
+        "20": "canada",
+        "21": {
+          "holder": "uk",
+          "label": {
+            "en": "Newfoundland (British dominion)",
+            "zh": "纽芬兰（英国自治领）"
+          }
+        },
+        "31": "uk",
+        "51": "uk",
+        "52": "uk",
+        "53": "uk",
+        "80": "uk",
+        "110": "uk",
+        "65": "france",
+        "66": "france",
+        "120": "france",
+        "115": "netherlands",
+        "140": "brazil",
+        "200": "uk",
+        "210": "netherlands",
+        "211": "belgium",
+        "212": "luxembourg",
+        "220": "france",
+        "225": "switzerland",
+        "230": "spain",
+        "235": "portugal",
+        "338": "uk",
+        "339": "albania",
+        "350": "greece",
+        "355": "bulgaria",
+        "380": "sweden",
+        "385": "norway",
+        "390": "denmark",
+        "402": "portugal",
+        "404": "portugal",
+        "411": "spain",
+        "420": "uk",
+        "432": "france",
+        "433": "france",
+        "434": "france",
+        "435": "france",
+        "436": "france",
+        "437": "france",
+        "438": "france",
+        "451": "uk",
+        "452": "uk",
+        "475": "uk",
+        "481": "france",
+        "482": "france",
+        "483": "france",
+        "484": "france",
+        "490": "belgium",
+        "500": "uk",
+        "501": "uk",
+        "511": "uk",
+        "521": "uk",
+        "522": "france",
+        "531": "italy",
+        "540": "portugal",
+        "541": "portugal",
+        "551": "uk",
+        "552": "uk",
+        "553": "uk",
+        "560": "south-africa",
+        "570": "uk",
+        "571": "uk",
+        "572": "uk",
+        "580": "france",
+        "585": "france",
+        "590": "uk",
+        "600": "france",
+        "602": "spain",
+        "610": "spain",
+        "615": "france",
+        "616": "france",
+        "620": "italy",
+        "625": {
+          "holder": "uk",
+          "label": {
+            "en": "Anglo-Egyptian Sudan",
+            "zh": "英埃苏丹"
+          }
+        },
+        "630": "persia",
+        "640": "ottoman",
+        "696": "uk",
+        "710": "china",
+        "713": "japan",
+        "730": "japan",
+        "740": "japan",
+        "7351": "japan",
+        "750": "india",
+        "780": "uk",
+        "781": "uk",
+        "800": "siam",
+        "811": "france",
+        "812": "france",
+        "815": "france",
+        "821": "uk",
+        "822": "uk",
+        "823": "uk",
+        "824": "uk",
+        "835": "uk",
+        "827": {
+          "holder": "uk",
+          "label": {
+            "en": "Straits Settlements (incl. Singapore)",
+            "zh": "海峡殖民地（含新加坡）"
+          }
+        },
+        "840": "usa",
+        "850": "netherlands",
+        "860": "portugal",
+        "900": "australia",
+        "911": "australia",
+        "920": "new-zealand",
+        "930": "france",
+        "940": "uk",
+        "950": "uk",
+        "960": "france",
+        "5200": "italy",
+        "7020": {
+          "holder": "russia",
+          "label": {
+            "en": "Emirate of Bukhara (Russian protectorate)",
+            "zh": "布哈拉酋长国（俄国保护国）"
+          }
+        },
+        "7030": {
+          "holder": "russia",
+          "label": {
+            "en": "Khanate of Khiva (Russian protectorate)",
+            "zh": "希瓦汗国（俄国保护国）"
+          }
+        },
+        "255": "germany",
+        "300": "austria-hungary",
+        "325": "italy",
+        "340": "serbia",
+        "341": "montenegro",
+        "360": "romania",
+        "365": {
+          "holder": "russia",
+          "label": {
+            "en": "Russia (Soviet government since 7 November 1917; armistice with the Central Powers on 15 December)",
+            "zh": "俄国（1917 年 11 月 7 日起苏维埃政府；12 月 15 日与同盟国停战）"
+          }
+        },
+        "395": {
+          "holder": "denmark",
+          "label": {
+            "en": "Iceland (Danish dependency)",
+            "zh": "冰岛（丹麦属地）"
+          }
+        },
+        "460": "germany",
+        "470": "germany",
+        "510": "germany",
+        "565": {
+          "holder": "south-africa",
+          "label": {
+            "en": "South West Africa (occupied by South Africa since July 1915)",
+            "zh": "西南非洲（1915 年 7 月起由南非占领）"
+          }
+        },
+        "912": "germany",
+        "651": {
+          "holder": "uk",
+          "label": {
+            "en": "Egypt (British protectorate since 18 December 1914)",
+            "zh": "埃及（1914 年 12 月 18 日起为英国保护国）"
+          }
+        },
+        "352": {
+          "holder": "uk",
+          "label": {
+            "en": "Cyprus (annexed by Britain on 5 November 1914)",
+            "zh": "塞浦路斯（1914 年 11 月 5 日被英国吞并）"
+          }
+        },
+        "694": {
+          "holder": "uk",
+          "label": {
+            "en": "Qatar (British protectorate since November 1916)",
+            "zh": "卡塔尔（1916 年 11 月起为英国保护国）"
+          }
+        },
+        "375": {
+          "holder": "finland",
+          "label": {
+            "en": "Finland (independence declared 6 December 1917)",
+            "zh": "芬兰（1917 年 12 月 6 日宣布独立）"
+          }
+        }
+      },
+      "steps": [
+        {
+          "note": "Luxembourg, occupied by Germany since 2 August 1914 (CShapes)",
+          "holder": "germany",
+          "label": {
+            "en": "Luxembourg (German-occupied since 2 August 1914)",
+            "zh": "卢森堡（1914 年 8 月 2 日起被德国占领）"
+          },
+          "src": [
+            "G1"
+          ],
+          "from": {
+            "cshapes": [
+              212
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "German-held Belgium and France east of the front (lines west-1917, inside CShapes Belgium and France)",
+          "holder": "germany",
+          "label": {
+            "en": "German-occupied Belgium and northern France (Hindenburg Line since April 1917)",
+            "zh": "德军占领的比利时与法国北部（1917 年 4 月起的兴登堡防线）"
+          },
+          "src": [
+            "G1",
+            "G9"
+          ],
+          "from": {
+            "svg": "lines",
+            "class": "west-1917"
+          },
+          "clip": {
+            "union": [
+              {
+                "cshapes": [
+                  211
+                ],
+                "at": "1914-07-28"
+              },
+              {
+                "cshapes": [
+                  220
+                ],
+                "at": "1914-07-28"
+              }
+            ]
+          }
+        },
+        {
+          "note": "Russian territory west of the armistice front of 15 December 1917 (lines east-1917-12-west, inside CShapes Russia)",
+          "holder": "germany",
+          "label": {
+            "en": "Lithuania, Courland, Riga and Belarus west of the front (German occupation: Ober Ost)",
+            "zh": "立陶宛、库尔兰、里加与战线以西的白俄罗斯（德国占领：东线总司令部辖区）"
+          },
+          "src": [
+            "G1",
+            "G14",
+            "G23"
+          ],
+          "from": {
+            "svg": "lines",
+            "class": "east-1917-12-west"
+          },
+          "clip": {
+            "cshapes": [
+              365
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Kingdom of Poland, client state proclaimed by Germany and Austria-Hungary on 5 November 1916 (OHM r2695684)",
+          "holder": "germany",
+          "label": {
+            "en": "Kingdom of Poland (proclaimed by Germany and Austria-Hungary on 5 November 1916; under their occupation)",
+            "zh": "波兰王国（德奥于 1916 年 11 月 5 日宣布成立；处于德奥占领下）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2695684,
+            "set": "k6"
+          }
+        },
+        {
+          "note": "Eastern edge of Galicia and Bukovina still held by Russia (lines east-1917-12-east, inside CShapes Austria-Hungary)",
+          "holder": "russia",
+          "label": {
+            "en": "Eastern edge of Galicia and Bukovina (Russian-held)",
+            "zh": "加利西亚与布科维纳东缘（俄军据守）"
+          },
+          "src": [
+            "G1",
+            "G14"
+          ],
+          "from": {
+            "svg": "lines",
+            "class": "east-1917-12-east"
+          },
+          "clip": {
+            "cshapes": [
+              300
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Occupied Wallachia and Dobruja: Romania west of the front (lines east-1917-12-west, inside CShapes Romania on 1914-07-28)",
+          "holder": "germany",
+          "label": {
+            "en": "Occupied Wallachia and Dobruja (Central Powers; armistice of Focșani 9 December 1917)",
+            "zh": "被占领的瓦拉几亚与多布罗加（同盟国；1917 年 12 月 9 日福克沙尼停战）"
+          },
+          "src": [
+            "G1",
+            "G14"
+          ],
+          "from": {
+            "svg": "lines",
+            "class": "east-1917-12-west"
+          },
+          "clip": {
+            "cshapes": [
+              360
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Serbia, occupied by Austria-Hungary, Germany and Bulgaria by December 1915 (whole of CShapes Serbia; the Bulgarian zone is painted over it)",
+          "holder": "austria-hungary",
+          "label": {
+            "en": "Serbia: Austro-Hungarian occupation zone (Military General Government)",
+            "zh": "塞尔维亚：奥匈占领区（军事总督府）"
+          },
+          "src": [
+            "G1",
+            "G16"
+          ],
+          "from": {
+            "cshapes": [
+              340
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Serbia, Bulgarian occupation zone (svg serbia-1916 class bulgarian-zone inside CShapes Serbia)",
+          "holder": "bulgaria",
+          "label": {
+            "en": "Serbia: Bulgarian occupation zone",
+            "zh": "塞尔维亚：保加利亚占领区"
+          },
+          "src": [
+            "G1",
+            "G16"
+          ],
+          "from": {
+            "svg": "serbia-1916",
+            "class": "bulgarian-zone"
+          },
+          "clip": {
+            "cshapes": [
+              340
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Montenegro, wholly Austro-Hungarian-occupied since January 1916 (CShapes Montenegro)",
+          "holder": "austria-hungary",
+          "label": {
+            "en": "Montenegro (Austro-Hungarian-occupied since January 1916)",
+            "zh": "黑山（1916 年 1 月起被奥匈占领）"
+          },
+          "src": [
+            "G1"
+          ],
+          "from": {
+            "cshapes": [
+              341
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Northern and central Albania, Austro-Hungarian-occupied since early 1916 (svg serbia-1916 class austro-hungarian-zone inside CShapes Albania)",
+          "holder": "austria-hungary",
+          "label": {
+            "en": "Northern and central Albania (Austro-Hungarian-occupied)",
+            "zh": "阿尔巴尼亚北部与中部（奥匈占领）"
+          },
+          "src": [
+            "G1",
+            "G16"
+          ],
+          "from": {
+            "svg": "serbia-1916",
+            "class": "austro-hungarian-zone",
+            "coastFillKm": 10
+          },
+          "clip": {
+            "cshapes": [
+              339
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Eastern Greek Macedonia, Bulgarian-occupied from August 1916 (Natural Earth region inside CShapes Greece)",
+          "holder": "bulgaria",
+          "label": {
+            "en": "Eastern Greek Macedonia (Bulgarian-occupied since August 1916)",
+            "zh": "希腊东马其顿（1916 年 8 月起被保加利亚占领）"
+          },
+          "src": [
+            "G1",
+            "G6"
+          ],
+          "from": {
+            "admin1": "Greece",
+            "names": [
+              "Anatoliki Makedonia kai Thraki"
+            ]
+          },
+          "clip": {
+            "cshapes": [
+              350
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Venetia and Friuli east of the Piave and the Grappa, occupied after Caporetto (lines italy-1917-11-north, inside CShapes Italy)",
+          "holder": "austria-hungary",
+          "label": {
+            "en": "Friuli and eastern Venetia (Austro-Hungarian and German occupation after Caporetto)",
+            "zh": "弗留利与威尼托东部（卡波雷托之后被奥德占领）"
+          },
+          "src": [
+            "G1",
+            "G18"
+          ],
+          "from": {
+            "svg": "lines",
+            "class": "italy-1917-11-north"
+          },
+          "clip": {
+            "cshapes": [
+              325
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "British Togoland (OHM r2694159)",
+          "holder": "uk",
+          "label": {
+            "en": "Togoland, British zone (occupied since August 1914)",
+            "zh": "多哥英占区（1914 年 8 月起占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2694159
+          }
+        },
+        {
+          "note": "French Togoland (OHM r2694161)",
+          "holder": "france",
+          "label": {
+            "en": "Togoland, French zone (occupied since August 1914)",
+            "zh": "多哥法占区（1914 年 8 月起占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2694161
+          }
+        },
+        {
+          "note": "German Samoa under New Zealand occupation since 29 August 1914 (OHM r2846171)",
+          "holder": "new-zealand",
+          "label": {
+            "en": "Samoa (New Zealand-occupied since 29 August 1914)",
+            "zh": "萨摩亚（1914 年 8 月 29 日起由新西兰占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846171,
+            "set": "k9"
+          }
+        },
+        {
+          "note": "German New Guinea under Australian occupation (OHM r2961774)",
+          "holder": "australia",
+          "label": {
+            "en": "New Guinea (Australian-occupied since September 1914)",
+            "zh": "新几内亚（1914 年 9 月起由澳大利亚占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2961774,
+            "set": "k6"
+          }
+        },
+        {
+          "note": "Nauru under Australian occupation (OHM r2846178)",
+          "holder": "australia",
+          "label": {
+            "en": "Nauru (Australian-occupied since November 1914)",
+            "zh": "瑙鲁（1914 年 11 月起由澳大利亚占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846178,
+            "set": "k6"
+          }
+        },
+        {
+          "note": "German Micronesia under Japanese occupation (OHM r2961775)",
+          "holder": "japan",
+          "label": {
+            "en": "Micronesia (Japanese-occupied since October 1914)",
+            "zh": "密克罗尼西亚（1914 年 10 月起由日本占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2961775,
+            "set": "k6"
+          }
+        },
+        {
+          "note": "Kiautschou, Japanese-occupied since the fall of Tsingtao on 7 November 1914 (OHM r2889899)",
+          "holder": "japan",
+          "label": {
+            "en": "Kiautschou (Japanese-occupied since 7 November 1914)",
+            "zh": "胶州湾（1914 年 11 月 7 日起由日本占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2889899,
+            "set": "k1"
+          }
+        },
+        {
+          "note": "Kamerun incl. Neukamerun (CShapes on 1914-07-28), occupied by French, British and Belgian forces",
+          "holder": "france",
+          "label": {
+            "en": "Kamerun, French-occupied zone",
+            "zh": "喀麦隆法占区"
+          },
+          "src": [
+            "G1"
+          ],
+          "from": {
+            "cshapes": [
+              470
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "British zone of Kamerun (OHM r2828750, the occupation zones of the provisional partition of March 1916)",
+          "holder": "uk",
+          "label": {
+            "en": "Kamerun, British-occupied zone",
+            "zh": "喀麦隆英占区"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2828750,
+            "set": "k5"
+          }
+        },
+        {
+          "note": "German East Africa, occupied after the German force crossed into Portuguese East Africa on 25 November 1917 (CShapes GEA on 1914-07-28)",
+          "holder": "uk",
+          "label": {
+            "en": "German East Africa (British-occupied; the German force crossed into Portuguese East Africa on 25 November 1917)",
+            "zh": "德属东非（英军占领；德军于 1917 年 11 月 25 日进入葡属东非）"
+          },
+          "src": [
+            "G1"
+          ],
+          "from": {
+            "cshapes": [
+              510
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Kigoma, Belgian-occupied (Natural Earth province)",
+          "holder": "belgium",
+          "label": {
+            "en": "Kigoma (Belgian-occupied since 1916)",
+            "zh": "基戈马（1916 年起由比利时占领）"
+          },
+          "src": [
+            "G1",
+            "G6"
+          ],
+          "from": {
+            "admin1": "United Republic of Tanzania",
+            "names": [
+              "Kigoma"
+            ]
+          },
+          "clip": {
+            "cshapes": [
+              510
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Ruanda-Urundi under Belgian occupation (OHM r2863621)",
+          "holder": "belgium",
+          "label": {
+            "en": "Ruanda-Urundi (Belgian-occupied since 1916)",
+            "zh": "卢旺达-乌隆迪（1916 年起由比利时占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2863621,
+            "set": "k5"
+          }
+        },
+        {
+          "note": "Southern Palestine behind the British front (lines palestine-1917-12, inside the CShapes Ottoman Empire)",
+          "holder": "uk",
+          "label": {
+            "en": "Southern Palestine (British-occupied; Jerusalem 9 December 1917)",
+            "zh": "巴勒斯坦南部（英军占领；1917 年 12 月 9 日占耶路撒冷）"
+          },
+          "src": [
+            "G1",
+            "G19"
+          ],
+          "from": {
+            "svg": "lines",
+            "class": "palestine-1917-12"
+          },
+          "clip": {
+            "cshapes": [
+              640
+            ],
+            "at": "1917-12-15"
+          }
+        },
+        {
+          "note": "Mesopotamia under British-Indian occupation (Natural Earth provinces of Iraq inside the CShapes Ottoman Empire)",
+          "holder": "uk",
+          "label": {
+            "en": "Mesopotamia to Baghdad, Ramadi and the Diyala (British-Indian occupation; Baghdad 11 March 1917)",
+            "zh": "美索不达米亚至巴格达、拉马迪与迪亚拉（英印军占领；1917 年 3 月 11 日占巴格达）"
+          },
+          "src": [
+            "G1",
+            "G6"
+          ],
+          "from": {
+            "admin1": "Iraq",
+            "names": [
+              "Al-Basrah",
+              "Maysan",
+              "Dhi-Qar",
+              "Wasit",
+              "Babil",
+              "Karbala'",
+              "An-Najaf",
+              "Al-Qādisiyyah",
+              "Al-Muthannia",
+              "Baghdad",
+              "Diyala"
+            ]
+          },
+          "clip": {
+            "cshapes": [
+              640
+            ],
+            "at": "1917-12-15"
+          }
+        },
+        {
+          "note": "Hejaz: Mecca, Jeddah and Taif held by the Arab Revolt from June 1916 (Natural Earth province Makkah inside the CShapes Ottoman Empire)",
+          "holder": "hejaz",
+          "label": {
+            "en": "Kingdom of Hejaz (Arab Revolt from June 1916; the Ottoman garrison held Medina until January 1919)",
+            "zh": "汉志王国（1916 年 6 月起阿拉伯起义；奥斯曼守军据守麦地那至 1919 年 1 月）"
+          },
+          "src": [
+            "G1",
+            "G6"
+          ],
+          "from": {
+            "admin1": "Saudi Arabia",
+            "names": [
+              "Makkah"
+            ]
+          },
+          "clip": {
+            "cshapes": [
+              640
+            ],
+            "at": "1917-12-15"
+          }
+        },
+        {
+          "note": "Eastern Anatolia under Russian occupation: Erzurum (16 February), Trebizond (18 April), Erzincan (25 July 1916) (Natural Earth provinces inside the CShapes Ottoman Empire)",
+          "holder": "russia",
+          "label": {
+            "en": "Eastern Anatolia (Russian-occupied since 1916)",
+            "zh": "安纳托利亚东部（1916 年起被俄军占领）"
+          },
+          "src": [
+            "G1",
+            "G6"
+          ],
+          "from": {
+            "admin1": "Turkey",
+            "names": [
+              "Rize",
+              "Trabzon",
+              "Gümüshane",
+              "Bayburt",
+              "Erzurum",
+              "Erzincan",
+              "Agri",
+              "Van",
+              "Bitlis",
+              "Mus"
+            ]
+          },
+          "clip": {
+            "cshapes": [
+              640
+            ],
+            "at": "1917-12-15"
+          }
+        },
+        {
+          "note": "Weihaiwei (OHM r2848211)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2848211,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Weihaiwei (British-leased)",
+            "zh": "威海卫（英国租借地）"
+          }
+        },
+        {
+          "note": "Hong Kong (OHM r2694575)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2694575,
+            "set": "k1"
+          }
+        },
+        {
+          "note": "Kwangchowan (OHM r2889933)",
+          "holder": "france",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2889933,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Kwangchowan (French-leased)",
+            "zh": "广州湾（法国租借地）"
+          }
+        },
+        {
+          "note": "Macau (OHM r2694462)",
+          "holder": "portugal",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2694462,
+            "set": "k1"
+          }
+        },
+        {
+          "note": "Kuwait (OHM r2848364)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2848364,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Kuwait (British-protected sheikhdom)",
+            "zh": "科威特（英国保护的酋长国）"
+          }
+        },
+        {
+          "note": "Bahrain (OHM r2848318)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2848318,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Bahrain (British protectorate)",
+            "zh": "巴林（英国保护国）"
+          }
+        },
+        {
+          "note": "New Hebrides (OHM r2846175)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846175,
+            "set": "k1"
+          },
+          "label": {
+            "en": "New Hebrides (Anglo-French condominium)",
+            "zh": "新赫布里底（英法共管）"
+          }
+        },
+        {
+          "note": "Gilbert and Ellice Islands (OHM r2831184)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2831184,
+            "set": "k1"
+          }
+        },
+        {
+          "note": "Tonga (OHM r2846200)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846200,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Tonga (British protectorate)",
+            "zh": "汤加（英国保护国）"
+          }
+        },
+        {
+          "note": "Cook Islands (OHM r2846264)",
+          "holder": "new-zealand",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846264,
+            "set": "k1"
+          }
+        }
+      ],
+      "checks": [
+        {
+          "name": "western-front",
+          "center": [
+            3.8,
+            49.6
+          ],
+          "zoom": 5.2,
+          "source": "svg-wf-1917"
+        },
+        {
+          "name": "eastern-front",
+          "center": [
+            26,
+            52
+          ],
+          "zoom": 3.6,
+          "source": "jpg-ef-1917"
+        },
+        {
+          "name": "italy",
+          "center": [
+            12.5,
+            46.0
+          ],
+          "zoom": 5.6,
+          "source": "svg-caporetto"
+        },
+        {
+          "name": "palestine",
+          "center": [
+            35,
+            31.8
+          ],
+          "zoom": 6.4,
+          "source": "jpg-palestine-1917"
+        },
+        {
+          "name": "middle-east",
+          "center": [
+            40,
+            30
+          ],
+          "zoom": 3.4,
+          "source": "png-russian-turkey"
+        },
+        {
+          "name": "africa",
+          "center": [
+            20,
+            0
+          ],
+          "zoom": 1.9
+        }
+      ]
+    },
+    {
+      "id": "K7",
+      "t": "1918-03-20",
+      "ohm": "k7",
+      "method": "Western front on the eve of the spring offensive: the Hindenburg Line front of 1917 (wf-1917). Eastern Europe after Brest-Litovsk: the armistice front of December 1917 (lines east-1917-12-west) plus Estonia, Latvia and six Belarusian provinces by Natural Earth units (occupied in Operation Faustschlag; the occupied western parts of Vitebsk and Pskov provinces are left out because no source within the residual budget was found) and Ukraine from OpenHistoricalMap (its whole 1918 extent, although the German and Austro-Hungarian advance reached Kharkov and the Crimea only in April). Bessarabia from CShapes. Romania occupied as in December 1917. Italian front on the Piave. Palestine south of the front held from March to September 1918 (palestine-1918). Base: CShapes 2.0 on 1918-03-20 (Kars and Ardahan already Ottoman in CShapes by treaty of 3 March, occupied in April).",
+      "base": {
+        "2": "usa",
+        "3": "usa",
+        "4": "usa",
+        "6": "usa",
+        "20": "canada",
+        "21": {
+          "holder": "uk",
+          "label": {
+            "en": "Newfoundland (British dominion)",
+            "zh": "纽芬兰（英国自治领）"
+          }
+        },
+        "31": "uk",
+        "51": "uk",
+        "52": "uk",
+        "53": "uk",
+        "80": "uk",
+        "110": "uk",
+        "65": "france",
+        "66": "france",
+        "120": "france",
+        "115": "netherlands",
+        "140": "brazil",
+        "200": "uk",
+        "210": "netherlands",
+        "211": "belgium",
+        "212": "luxembourg",
+        "220": "france",
+        "225": "switzerland",
+        "230": "spain",
+        "235": "portugal",
+        "338": "uk",
+        "339": "albania",
+        "350": "greece",
+        "355": "bulgaria",
+        "380": "sweden",
+        "385": "norway",
+        "390": "denmark",
+        "402": "portugal",
+        "404": "portugal",
+        "411": "spain",
+        "420": "uk",
+        "432": "france",
+        "433": "france",
+        "434": "france",
+        "435": "france",
+        "436": "france",
+        "437": "france",
+        "438": "france",
+        "451": "uk",
+        "452": "uk",
+        "475": "uk",
+        "481": "france",
+        "482": "france",
+        "483": "france",
+        "484": "france",
+        "490": "belgium",
+        "500": "uk",
+        "501": "uk",
+        "511": "uk",
+        "521": "uk",
+        "522": "france",
+        "531": "italy",
+        "540": "portugal",
+        "541": "portugal",
+        "551": "uk",
+        "552": "uk",
+        "553": "uk",
+        "560": "south-africa",
+        "570": "uk",
+        "571": "uk",
+        "572": "uk",
+        "580": "france",
+        "585": "france",
+        "590": "uk",
+        "600": "france",
+        "602": "spain",
+        "610": "spain",
+        "615": "france",
+        "616": "france",
+        "620": "italy",
+        "625": {
+          "holder": "uk",
+          "label": {
+            "en": "Anglo-Egyptian Sudan",
+            "zh": "英埃苏丹"
+          }
+        },
+        "630": "persia",
+        "640": "ottoman",
+        "696": "uk",
+        "710": "china",
+        "713": "japan",
+        "730": "japan",
+        "740": "japan",
+        "7351": "japan",
+        "750": "india",
+        "780": "uk",
+        "781": "uk",
+        "800": "siam",
+        "811": "france",
+        "812": "france",
+        "815": "france",
+        "821": "uk",
+        "822": "uk",
+        "823": "uk",
+        "824": "uk",
+        "835": "uk",
+        "827": {
+          "holder": "uk",
+          "label": {
+            "en": "Straits Settlements (incl. Singapore)",
+            "zh": "海峡殖民地（含新加坡）"
+          }
+        },
+        "840": "usa",
+        "850": "netherlands",
+        "860": "portugal",
+        "900": "australia",
+        "911": "australia",
+        "920": "new-zealand",
+        "930": "france",
+        "940": "uk",
+        "950": "uk",
+        "960": "france",
+        "5200": "italy",
+        "7020": {
+          "holder": "russia",
+          "label": {
+            "en": "Emirate of Bukhara (Russian protectorate)",
+            "zh": "布哈拉酋长国（俄国保护国）"
+          }
+        },
+        "7030": {
+          "holder": "russia",
+          "label": {
+            "en": "Khanate of Khiva (Russian protectorate)",
+            "zh": "希瓦汗国（俄国保护国）"
+          }
+        },
+        "255": "germany",
+        "300": "austria-hungary",
+        "325": "italy",
+        "340": "serbia",
+        "341": "montenegro",
+        "360": "romania",
+        "365": {
+          "holder": "russia",
+          "label": {
+            "en": "Soviet Russia (peace of Brest-Litovsk, 3 March 1918)",
+            "zh": "苏维埃俄国（1918 年 3 月 3 日布列斯特-立陶夫斯克和约）"
+          }
+        },
+        "395": {
+          "holder": "denmark",
+          "label": {
+            "en": "Iceland (Danish dependency)",
+            "zh": "冰岛（丹麦属地）"
+          }
+        },
+        "460": "germany",
+        "470": "germany",
+        "510": "germany",
+        "565": {
+          "holder": "south-africa",
+          "label": {
+            "en": "South West Africa (occupied by South Africa since July 1915)",
+            "zh": "西南非洲（1915 年 7 月起由南非占领）"
+          }
+        },
+        "912": "germany",
+        "651": {
+          "holder": "uk",
+          "label": {
+            "en": "Egypt (British protectorate since 18 December 1914)",
+            "zh": "埃及（1914 年 12 月 18 日起为英国保护国）"
+          }
+        },
+        "352": {
+          "holder": "uk",
+          "label": {
+            "en": "Cyprus (annexed by Britain on 5 November 1914)",
+            "zh": "塞浦路斯（1914 年 11 月 5 日被英国吞并）"
+          }
+        },
+        "694": {
+          "holder": "uk",
+          "label": {
+            "en": "Qatar (British protectorate since November 1916)",
+            "zh": "卡塔尔（1916 年 11 月起为英国保护国）"
+          }
+        },
+        "375": {
+          "holder": "finland",
+          "label": {
+            "en": "Finland (independence declared 6 December 1917)",
+            "zh": "芬兰（1917 年 12 月 6 日宣布独立）"
+          }
+        },
+        "368": {
+          "holder": "germany",
+          "label": {
+            "en": "Lithuania (independence declared 16 February 1918; German-occupied)",
+            "zh": "立陶宛（1918 年 2 月 16 日宣布独立；德国占领）"
+          }
+        }
+      },
+      "steps": [
+        {
+          "note": "Luxembourg, occupied by Germany since 2 August 1914 (CShapes)",
+          "holder": "germany",
+          "label": {
+            "en": "Luxembourg (German-occupied since 2 August 1914)",
+            "zh": "卢森堡（1914 年 8 月 2 日起被德国占领）"
+          },
+          "src": [
+            "G1"
+          ],
+          "from": {
+            "cshapes": [
+              212
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "German-held Belgium and France east of the front (lines west-1917, inside CShapes Belgium and France)",
+          "holder": "germany",
+          "label": {
+            "en": "German-occupied Belgium and northern France (front on the eve of the spring offensive)",
+            "zh": "德军占领的比利时与法国北部（春季攻势前夜的战线）"
+          },
+          "src": [
+            "G1",
+            "G9"
+          ],
+          "from": {
+            "svg": "lines",
+            "class": "west-1917"
+          },
+          "clip": {
+            "union": [
+              {
+                "cshapes": [
+                  211
+                ],
+                "at": "1914-07-28"
+              },
+              {
+                "cshapes": [
+                  220
+                ],
+                "at": "1914-07-28"
+              }
+            ]
+          }
+        },
+        {
+          "note": "Russian territory west of the armistice front of December 1917 (lines east-1917-12-west, inside CShapes Russia)",
+          "holder": "germany",
+          "label": {
+            "en": "Courland, Riga and western Belarus (German occupation: Ober Ost)",
+            "zh": "库尔兰、里加与白俄罗斯西部（德国占领：东线总司令部辖区）"
+          },
+          "src": [
+            "G1",
+            "G14",
+            "G23"
+          ],
+          "from": {
+            "svg": "lines",
+            "class": "east-1917-12-west"
+          },
+          "clip": {
+            "cshapes": [
+              365
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Estonia, Livonia and eastern Belarus, occupied in Operation Faustschlag (18 February–3 March 1918) (Natural Earth units of Estonia, Latvia and six Belarusian provinces inside CShapes Russia)",
+          "holder": "germany",
+          "label": {
+            "en": "Estonia, Livonia and Belarus (German-occupied in February–March 1918)",
+            "zh": "爱沙尼亚、利沃尼亚与白俄罗斯（1918 年 2–3 月被德国占领）"
+          },
+          "src": [
+            "G1",
+            "G6"
+          ],
+          "from": {
+            "union": [
+              {
+                "admin1": "Estonia",
+                "names": [
+                  "Harju",
+                  "Hiiu",
+                  "Ida-Viru",
+                  "Järva",
+                  "Jõgeva",
+                  "Lääne",
+                  "Lääne-Viru",
+                  "Pärnu",
+                  "Põlva",
+                  "Rapla",
+                  "Saare",
+                  "Tartu",
+                  "Valga",
+                  "Viljandi",
+                  "Võru"
+                ]
+              },
+              {
+                "admin1": "Latvia",
+                "names": [
+                  "Aglonas",
+                  "Aizkraukles",
+                  "Aizputes",
+                  "Aknistes",
+                  "Alojas",
+                  "Alsungas",
+                  "Aluksne",
+                  "Amatas",
+                  "Apes",
+                  "Auces",
+                  "Babites",
+                  "Baldones",
+                  "Baltinavas",
+                  "Balvu",
+                  "Bauska",
+                  "Beverinas",
+                  "Brocenu",
+                  "Burtnieku",
+                  "Carnikavas",
+                  "Cesu",
+                  "Cesvaines",
+                  "Ciblas",
+                  "Dagdas",
+                  "Daugavpils",
+                  "Daugavpils",
+                  "Dobele",
+                  "Dundagas",
+                  "Durbes",
+                  "Engures",
+                  "Erglu",
+                  "Garkalnes",
+                  "Grobinas",
+                  "Gulbene",
+                  "Iecavas",
+                  "Ikskiles",
+                  "Ilukstes",
+                  "Incukalna",
+                  "Jaunjelgavas",
+                  "Jaunpiebalgas",
+                  "Jaunpils",
+                  "Jekabpils",
+                  "Jekabpils",
+                  "Jelgava",
+                  "Jelgava",
+                  "Jurmala",
+                  "Kandavas",
+                  "Karsavas",
+                  "Keguma",
+                  "Kekavas",
+                  "Kocenu",
+                  "Kokneses",
+                  "Kraslavas",
+                  "Krimuldas",
+                  "Krustpils",
+                  "Kuldigas",
+                  "Lielvardes",
+                  "Liepāja",
+                  "Ligatnes",
+                  "Limbaži",
+                  "Livanu",
+                  "Lubanas",
+                  "Ludzas",
+                  "Madona",
+                  "Malpils",
+                  "Marupes",
+                  "Mazsalacas",
+                  "Mersraga",
+                  "Nauksenu",
+                  "Neretas",
+                  "Nicas",
+                  "Ogre",
+                  "Olaines",
+                  "Ozolnieku",
+                  "Pargaujas",
+                  "Pavilostas",
+                  "Plavinu",
+                  "Preilu",
+                  "Priekules",
+                  "Priekulu",
+                  "Raunas",
+                  "Rezekne",
+                  "Rezeknes",
+                  "Riebinu",
+                  "Riga",
+                  "Rojas",
+                  "Ropazu",
+                  "Rucavas",
+                  "Rugaju",
+                  "Rujienas",
+                  "Rundales",
+                  "Salacgrivas",
+                  "Salas",
+                  "Salaspils",
+                  "Saldus",
+                  "Saulkrastu",
+                  "Sejas",
+                  "Siguldas",
+                  "Skriveru",
+                  "Skrundas",
+                  "Smiltenes",
+                  "Stopinu",
+                  "Strencu",
+                  "Talsi",
+                  "Tervetes",
+                  "Tukums",
+                  "Vainodes",
+                  "Valkas",
+                  "Valmiera",
+                  "Varaklanu",
+                  "Varkavas",
+                  "Vecpiebalgas",
+                  "Vecumnieku",
+                  "Ventspils",
+                  "Ventspils",
+                  "Viesites",
+                  "Vilakas",
+                  "Vilanu",
+                  "Zilupes",
+                  "Ādaži"
+                ]
+              },
+              {
+                "admin1": "Belarus",
+                "names": [
+                  "Brest",
+                  "Grodno",
+                  "Minsk",
+                  "City of Minsk",
+                  "Mogilev",
+                  "Gomel"
+                ]
+              }
+            ]
+          },
+          "clip": {
+            "cshapes": [
+              365
+            ],
+            "at": "1918-03-20"
+          }
+        },
+        {
+          "note": "Ukrainian People's Republic (OHM r2694815, inside CShapes Russia), entered by German and Austro-Hungarian troops after its separate peace of 9 February 1918",
+          "holder": "germany",
+          "label": {
+            "en": "Ukraine (Ukrainian People's Republic; German and Austro-Hungarian troops advancing since 18 February: Kiev 1 March, Odessa 13 March 1918)",
+            "zh": "乌克兰（乌克兰人民共和国；德奥军队自 2 月 18 日推进：3 月 1 日入基辅，3 月 13 日入敖德萨）"
+          },
+          "src": [
+            "G1",
+            "G2"
+          ],
+          "from": {
+            "ohm": 2694815
+          },
+          "clip": {
+            "cshapes": [
+              365
+            ],
+            "at": "1918-03-20"
+          }
+        },
+        {
+          "note": "Kingdom of Poland, client state proclaimed by Germany and Austria-Hungary on 5 November 1916 (OHM r2695684)",
+          "holder": "germany",
+          "label": {
+            "en": "Kingdom of Poland (proclaimed by Germany and Austria-Hungary on 5 November 1916; under their occupation)",
+            "zh": "波兰王国（德奥于 1916 年 11 月 5 日宣布成立；处于德奥占领下）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2695684,
+            "set": "k7"
+          }
+        },
+        {
+          "note": "Bessarabia, held by Romanian troops since January 1918 (CShapes Romania on 1920-10-28 minus Romania on 1914-07-28, inside CShapes Russia)",
+          "holder": "romania",
+          "label": {
+            "en": "Bessarabia (Romanian troops since January 1918; union voted 9 April 1918)",
+            "zh": "比萨拉比亚（1918 年 1 月起罗马尼亚驻军；4 月 9 日表决合并）"
+          },
+          "src": [
+            "G1"
+          ],
+          "from": {
+            "difference": [
+              {
+                "cshapes": [
+                  360
+                ],
+                "at": "1920-10-28"
+              },
+              {
+                "cshapes": [
+                  360
+                ],
+                "at": "1914-07-28"
+              }
+            ]
+          },
+          "clip": {
+            "cshapes": [
+              365
+            ],
+            "at": "1918-03-20"
+          }
+        },
+        {
+          "note": "Occupied Wallachia and Dobruja: Romania west of the front (lines east-1917-12-west, inside CShapes Romania on 1914-07-28)",
+          "holder": "germany",
+          "label": {
+            "en": "Occupied Wallachia and Dobruja (Central Powers; preliminary peace of Buftea, 5 March 1918)",
+            "zh": "被占领的瓦拉几亚与多布罗加（同盟国；1918 年 3 月 5 日布夫泰初步和约）"
+          },
+          "src": [
+            "G1",
+            "G14"
+          ],
+          "from": {
+            "svg": "lines",
+            "class": "east-1917-12-west"
+          },
+          "clip": {
+            "cshapes": [
+              360
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Serbia, occupied by Austria-Hungary, Germany and Bulgaria by December 1915 (whole of CShapes Serbia; the Bulgarian zone is painted over it)",
+          "holder": "austria-hungary",
+          "label": {
+            "en": "Serbia: Austro-Hungarian occupation zone (Military General Government)",
+            "zh": "塞尔维亚：奥匈占领区（军事总督府）"
+          },
+          "src": [
+            "G1",
+            "G16"
+          ],
+          "from": {
+            "cshapes": [
+              340
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Serbia, Bulgarian occupation zone (svg serbia-1916 class bulgarian-zone inside CShapes Serbia)",
+          "holder": "bulgaria",
+          "label": {
+            "en": "Serbia: Bulgarian occupation zone",
+            "zh": "塞尔维亚：保加利亚占领区"
+          },
+          "src": [
+            "G1",
+            "G16"
+          ],
+          "from": {
+            "svg": "serbia-1916",
+            "class": "bulgarian-zone"
+          },
+          "clip": {
+            "cshapes": [
+              340
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Montenegro, wholly Austro-Hungarian-occupied since January 1916 (CShapes Montenegro)",
+          "holder": "austria-hungary",
+          "label": {
+            "en": "Montenegro (Austro-Hungarian-occupied since January 1916)",
+            "zh": "黑山（1916 年 1 月起被奥匈占领）"
+          },
+          "src": [
+            "G1"
+          ],
+          "from": {
+            "cshapes": [
+              341
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Northern and central Albania, Austro-Hungarian-occupied since early 1916 (svg serbia-1916 class austro-hungarian-zone inside CShapes Albania)",
+          "holder": "austria-hungary",
+          "label": {
+            "en": "Northern and central Albania (Austro-Hungarian-occupied)",
+            "zh": "阿尔巴尼亚北部与中部（奥匈占领）"
+          },
+          "src": [
+            "G1",
+            "G16"
+          ],
+          "from": {
+            "svg": "serbia-1916",
+            "class": "austro-hungarian-zone",
+            "coastFillKm": 10
+          },
+          "clip": {
+            "cshapes": [
+              339
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Eastern Greek Macedonia, Bulgarian-occupied from August 1916 (Natural Earth region inside CShapes Greece)",
+          "holder": "bulgaria",
+          "label": {
+            "en": "Eastern Greek Macedonia (Bulgarian-occupied since August 1916)",
+            "zh": "希腊东马其顿（1916 年 8 月起被保加利亚占领）"
+          },
+          "src": [
+            "G1",
+            "G6"
+          ],
+          "from": {
+            "admin1": "Greece",
+            "names": [
+              "Anatoliki Makedonia kai Thraki"
+            ]
+          },
+          "clip": {
+            "cshapes": [
+              350
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Venetia and Friuli east of the Piave and the Grappa (lines italy-1917-11-north, inside CShapes Italy)",
+          "holder": "austria-hungary",
+          "label": {
+            "en": "Friuli and eastern Venetia (Austro-Hungarian occupation)",
+            "zh": "弗留利与威尼托东部（奥匈占领）"
+          },
+          "src": [
+            "G1",
+            "G18"
+          ],
+          "from": {
+            "svg": "lines",
+            "class": "italy-1917-11-north"
+          },
+          "clip": {
+            "cshapes": [
+              325
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "British Togoland (OHM r2694159)",
+          "holder": "uk",
+          "label": {
+            "en": "Togoland, British zone (occupied since August 1914)",
+            "zh": "多哥英占区（1914 年 8 月起占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2694159
+          }
+        },
+        {
+          "note": "French Togoland (OHM r2694161)",
+          "holder": "france",
+          "label": {
+            "en": "Togoland, French zone (occupied since August 1914)",
+            "zh": "多哥法占区（1914 年 8 月起占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2694161
+          }
+        },
+        {
+          "note": "German Samoa under New Zealand occupation since 29 August 1914 (OHM r2846171)",
+          "holder": "new-zealand",
+          "label": {
+            "en": "Samoa (New Zealand-occupied since 29 August 1914)",
+            "zh": "萨摩亚（1914 年 8 月 29 日起由新西兰占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846171,
+            "set": "k9"
+          }
+        },
+        {
+          "note": "German New Guinea under Australian occupation (OHM r2961774)",
+          "holder": "australia",
+          "label": {
+            "en": "New Guinea (Australian-occupied since September 1914)",
+            "zh": "新几内亚（1914 年 9 月起由澳大利亚占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2961774,
+            "set": "k7"
+          }
+        },
+        {
+          "note": "Nauru under Australian occupation (OHM r2846178)",
+          "holder": "australia",
+          "label": {
+            "en": "Nauru (Australian-occupied since November 1914)",
+            "zh": "瑙鲁（1914 年 11 月起由澳大利亚占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846178,
+            "set": "k7"
+          }
+        },
+        {
+          "note": "German Micronesia under Japanese occupation (OHM r2961775)",
+          "holder": "japan",
+          "label": {
+            "en": "Micronesia (Japanese-occupied since October 1914)",
+            "zh": "密克罗尼西亚（1914 年 10 月起由日本占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2961775,
+            "set": "k7"
+          }
+        },
+        {
+          "note": "Kiautschou, Japanese-occupied since the fall of Tsingtao on 7 November 1914 (OHM r2889899)",
+          "holder": "japan",
+          "label": {
+            "en": "Kiautschou (Japanese-occupied since 7 November 1914)",
+            "zh": "胶州湾（1914 年 11 月 7 日起由日本占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2889899,
+            "set": "k1"
+          }
+        },
+        {
+          "note": "Kamerun incl. Neukamerun (CShapes on 1914-07-28), occupied by French, British and Belgian forces",
+          "holder": "france",
+          "label": {
+            "en": "Kamerun, French-occupied zone",
+            "zh": "喀麦隆法占区"
+          },
+          "src": [
+            "G1"
+          ],
+          "from": {
+            "cshapes": [
+              470
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "British zone of Kamerun (OHM r2828750, the occupation zones of the provisional partition of March 1916)",
+          "holder": "uk",
+          "label": {
+            "en": "Kamerun, British-occupied zone",
+            "zh": "喀麦隆英占区"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2828750,
+            "set": "k5"
+          }
+        },
+        {
+          "note": "German East Africa, occupied after the German force crossed into Portuguese East Africa on 25 November 1917 (CShapes GEA on 1914-07-28)",
+          "holder": "uk",
+          "label": {
+            "en": "German East Africa (British-occupied; the German force fighting on in Portuguese East Africa)",
+            "zh": "德属东非（英军占领；德军在葡属东非继续作战）"
+          },
+          "src": [
+            "G1"
+          ],
+          "from": {
+            "cshapes": [
+              510
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Kigoma, Belgian-occupied (Natural Earth province)",
+          "holder": "belgium",
+          "label": {
+            "en": "Kigoma (Belgian-occupied since 1916)",
+            "zh": "基戈马（1916 年起由比利时占领）"
+          },
+          "src": [
+            "G1",
+            "G6"
+          ],
+          "from": {
+            "admin1": "United Republic of Tanzania",
+            "names": [
+              "Kigoma"
+            ]
+          },
+          "clip": {
+            "cshapes": [
+              510
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Ruanda-Urundi under Belgian occupation (OHM r2863621)",
+          "holder": "belgium",
+          "label": {
+            "en": "Ruanda-Urundi (Belgian-occupied since 1916)",
+            "zh": "卢旺达-乌隆迪（1916 年起由比利时占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2863621,
+            "set": "k5"
+          }
+        },
+        {
+          "note": "Southern Palestine behind the British front (lines palestine-1918, inside the CShapes Ottoman Empire)",
+          "holder": "uk",
+          "label": {
+            "en": "Palestine south of the line Jaffa–Jericho (British-occupied; Jericho 21 February 1918)",
+            "zh": "雅法—杰里科一线以南的巴勒斯坦（英军占领；1918 年 2 月 21 日占杰里科）"
+          },
+          "src": [
+            "G1",
+            "G20"
+          ],
+          "from": {
+            "svg": "lines",
+            "class": "palestine-1918"
+          },
+          "clip": {
+            "cshapes": [
+              640
+            ],
+            "at": "1918-03-20"
+          }
+        },
+        {
+          "note": "Mesopotamia under British-Indian occupation (Natural Earth provinces of Iraq inside the CShapes Ottoman Empire)",
+          "holder": "uk",
+          "label": {
+            "en": "Mesopotamia to Baghdad, Ramadi and the Diyala (British-Indian occupation)",
+            "zh": "美索不达米亚至巴格达、拉马迪与迪亚拉（英印军占领）"
+          },
+          "src": [
+            "G1",
+            "G6"
+          ],
+          "from": {
+            "admin1": "Iraq",
+            "names": [
+              "Al-Basrah",
+              "Maysan",
+              "Dhi-Qar",
+              "Wasit",
+              "Babil",
+              "Karbala'",
+              "An-Najaf",
+              "Al-Qādisiyyah",
+              "Al-Muthannia",
+              "Baghdad",
+              "Diyala"
+            ]
+          },
+          "clip": {
+            "cshapes": [
+              640
+            ],
+            "at": "1918-03-20"
+          }
+        },
+        {
+          "note": "Hejaz: Mecca, Jeddah and Taif held by the Arab Revolt from June 1916 (Natural Earth province Makkah inside the CShapes Ottoman Empire)",
+          "holder": "hejaz",
+          "label": {
+            "en": "Kingdom of Hejaz (Arab Revolt from June 1916; the Ottoman garrison held Medina until January 1919)",
+            "zh": "汉志王国（1916 年 6 月起阿拉伯起义；奥斯曼守军据守麦地那至 1919 年 1 月）"
+          },
+          "src": [
+            "G1",
+            "G6"
+          ],
+          "from": {
+            "admin1": "Saudi Arabia",
+            "names": [
+              "Makkah"
+            ]
+          },
+          "clip": {
+            "cshapes": [
+              640
+            ],
+            "at": "1918-03-20"
+          }
+        },
+        {
+          "note": "Weihaiwei (OHM r2848211)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2848211,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Weihaiwei (British-leased)",
+            "zh": "威海卫（英国租借地）"
+          }
+        },
+        {
+          "note": "Hong Kong (OHM r2694575)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2694575,
+            "set": "k1"
+          }
+        },
+        {
+          "note": "Kwangchowan (OHM r2889933)",
+          "holder": "france",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2889933,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Kwangchowan (French-leased)",
+            "zh": "广州湾（法国租借地）"
+          }
+        },
+        {
+          "note": "Macau (OHM r2694462)",
+          "holder": "portugal",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2694462,
+            "set": "k1"
+          }
+        },
+        {
+          "note": "Kuwait (OHM r2848364)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2848364,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Kuwait (British-protected sheikhdom)",
+            "zh": "科威特（英国保护的酋长国）"
+          }
+        },
+        {
+          "note": "Bahrain (OHM r2848318)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2848318,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Bahrain (British protectorate)",
+            "zh": "巴林（英国保护国）"
+          }
+        },
+        {
+          "note": "New Hebrides (OHM r2846175)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846175,
+            "set": "k1"
+          },
+          "label": {
+            "en": "New Hebrides (Anglo-French condominium)",
+            "zh": "新赫布里底（英法共管）"
+          }
+        },
+        {
+          "note": "Gilbert and Ellice Islands (OHM r2831184)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2831184,
+            "set": "k1"
+          }
+        },
+        {
+          "note": "Tonga (OHM r2846200)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846200,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Tonga (British protectorate)",
+            "zh": "汤加（英国保护国）"
+          }
+        },
+        {
+          "note": "Cook Islands (OHM r2846264)",
+          "holder": "new-zealand",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846264,
+            "set": "k1"
+          }
+        }
+      ],
+      "checks": [
+        {
+          "name": "western-front",
+          "center": [
+            3.8,
+            49.6
+          ],
+          "zoom": 5.2,
+          "source": "svg-wf-1917"
+        },
+        {
+          "name": "eastern-europe",
+          "center": [
+            30,
+            52
+          ],
+          "zoom": 3.2,
+          "source": "jpg-brest"
+        },
+        {
+          "name": "palestine",
+          "center": [
+            35,
+            32
+          ],
+          "zoom": 6.4,
+          "source": "jpg-palestine-1918"
+        },
+        {
+          "name": "europe",
+          "center": [
+            17,
+            48
+          ],
+          "zoom": 2.9
+        },
+        {
+          "name": "middle-east",
+          "center": [
+            40,
+            30
+          ],
+          "zoom": 3.4
+        }
+      ]
+    },
+    {
+      "id": "K8",
+      "t": "1918-11-11",
+      "ohm": "k8",
+      "method": "Western front on 11 November 1918: the armistice line traced from wf-1918 (dashed 11/11/1918 line; south of Étain the line held since the St Mihiel offensive). Central Europe from CShapes on 1918-11-11 (Poland, Czechoslovakia, Austria, Hungary) with the State of Slovenes, Croats and Serbs from OpenHistoricalMap and the Italian armistice occupation by the Saint-Germain line (CShapes 1919-09-10). East: Latvia and Belarus by Natural Earth units, Ukraine and the Crimea from OpenHistoricalMap, still under German occupation; Estonia and Lithuania as their new governments (CShapes); Bessarabia to Romania; Transcaucasia from OpenHistoricalMap with Batum Ottoman-held. Middle East under the Mudros armistice by Natural Earth units in the zones of the Occupied Enemy Territory Administration (cross-check: Area of the OETA map) and Mesopotamia to Mosul. Base: CShapes 2.0 on 1918-11-11.",
+      "base": {
+        "2": "usa",
+        "3": "usa",
+        "4": "usa",
+        "6": "usa",
+        "20": "canada",
+        "21": {
+          "holder": "uk",
+          "label": {
+            "en": "Newfoundland (British dominion)",
+            "zh": "纽芬兰（英国自治领）"
+          }
+        },
+        "31": "uk",
+        "51": "uk",
+        "52": "uk",
+        "53": "uk",
+        "80": "uk",
+        "110": "uk",
+        "65": "france",
+        "66": "france",
+        "120": "france",
+        "115": "netherlands",
+        "140": "brazil",
+        "200": "uk",
+        "210": "netherlands",
+        "211": "belgium",
+        "212": "luxembourg",
+        "220": "france",
+        "225": "switzerland",
+        "230": "spain",
+        "235": "portugal",
+        "338": "uk",
+        "339": "albania",
+        "350": "greece",
+        "355": "bulgaria",
+        "380": "sweden",
+        "385": "norway",
+        "390": "denmark",
+        "402": "portugal",
+        "404": "portugal",
+        "411": "spain",
+        "420": "uk",
+        "432": "france",
+        "433": "france",
+        "434": "france",
+        "435": "france",
+        "436": "france",
+        "437": "france",
+        "438": "france",
+        "451": "uk",
+        "452": "uk",
+        "475": "uk",
+        "481": "france",
+        "482": "france",
+        "483": "france",
+        "484": "france",
+        "490": "belgium",
+        "500": "uk",
+        "501": "uk",
+        "511": "uk",
+        "521": "uk",
+        "522": "france",
+        "531": "italy",
+        "540": "portugal",
+        "541": "portugal",
+        "551": "uk",
+        "552": "uk",
+        "553": "uk",
+        "560": "south-africa",
+        "570": "uk",
+        "571": "uk",
+        "572": "uk",
+        "580": "france",
+        "585": "france",
+        "590": "uk",
+        "600": "france",
+        "602": "spain",
+        "610": "spain",
+        "615": "france",
+        "616": "france",
+        "620": "italy",
+        "625": {
+          "holder": "uk",
+          "label": {
+            "en": "Anglo-Egyptian Sudan",
+            "zh": "英埃苏丹"
+          }
+        },
+        "630": "persia",
+        "640": {
+          "holder": "ottoman",
+          "label": {
+            "en": "Ottoman Empire (armistice of Mudros, 30 October 1918)",
+            "zh": "奥斯曼帝国（1918 年 10 月 30 日穆兹罗斯停战）"
+          }
+        },
+        "696": "uk",
+        "710": "china",
+        "713": "japan",
+        "730": "japan",
+        "740": "japan",
+        "7351": "japan",
+        "750": "india",
+        "780": "uk",
+        "781": "uk",
+        "800": "siam",
+        "811": "france",
+        "812": "france",
+        "815": "france",
+        "821": "uk",
+        "822": "uk",
+        "823": "uk",
+        "824": "uk",
+        "835": "uk",
+        "827": {
+          "holder": "uk",
+          "label": {
+            "en": "Straits Settlements (incl. Singapore)",
+            "zh": "海峡殖民地（含新加坡）"
+          }
+        },
+        "840": "usa",
+        "850": "netherlands",
+        "860": "portugal",
+        "900": "australia",
+        "911": "australia",
+        "920": "new-zealand",
+        "930": "france",
+        "940": "uk",
+        "950": "uk",
+        "960": "france",
+        "5200": "italy",
+        "7020": {
+          "holder": "russia",
+          "label": {
+            "en": "Emirate of Bukhara (Russian protectorate)",
+            "zh": "布哈拉酋长国（俄国保护国）"
+          }
+        },
+        "7030": {
+          "holder": "russia",
+          "label": {
+            "en": "Khanate of Khiva (Russian protectorate)",
+            "zh": "希瓦汗国（俄国保护国）"
+          }
+        },
+        "255": {
+          "holder": "germany",
+          "label": {
+            "en": "Germany (republic proclaimed 9 November 1918)",
+            "zh": "德国（1918 年 11 月 9 日宣布共和）"
+          }
+        },
+        "300": "austria-hungary",
+        "325": "italy",
+        "340": "serbia",
+        "341": "montenegro",
+        "360": {
+          "holder": "romania",
+          "label": {
+            "en": "Romania (re-entered the war on 10 November 1918)",
+            "zh": "罗马尼亚（1918 年 11 月 10 日重新参战）"
+          }
+        },
+        "365": {
+          "holder": "russia",
+          "label": {
+            "en": "Russia (civil war)",
+            "zh": "俄国（内战）"
+          }
+        },
+        "395": {
+          "holder": "denmark",
+          "label": {
+            "en": "Iceland (Danish dependency)",
+            "zh": "冰岛（丹麦属地）"
+          }
+        },
+        "460": "germany",
+        "470": "germany",
+        "510": "germany",
+        "565": {
+          "holder": "south-africa",
+          "label": {
+            "en": "South West Africa (occupied by South Africa since July 1915)",
+            "zh": "西南非洲（1915 年 7 月起由南非占领）"
+          }
+        },
+        "912": "germany",
+        "651": {
+          "holder": "uk",
+          "label": {
+            "en": "Egypt (British protectorate since 18 December 1914)",
+            "zh": "埃及（1914 年 12 月 18 日起为英国保护国）"
+          }
+        },
+        "352": {
+          "holder": "uk",
+          "label": {
+            "en": "Cyprus (annexed by Britain on 5 November 1914)",
+            "zh": "塞浦路斯（1914 年 11 月 5 日被英国吞并）"
+          }
+        },
+        "694": {
+          "holder": "uk",
+          "label": {
+            "en": "Qatar (British protectorate since November 1916)",
+            "zh": "卡塔尔（1916 年 11 月起为英国保护国）"
+          }
+        },
+        "375": {
+          "holder": "finland",
+          "label": {
+            "en": "Finland (independence declared 6 December 1917)",
+            "zh": "芬兰（1917 年 12 月 6 日宣布独立）"
+          }
+        },
+        "290": {
+          "holder": "poland",
+          "label": {
+            "en": "Poland (independence 11 November 1918)",
+            "zh": "波兰（1918 年 11 月 11 日独立）"
+          }
+        },
+        "305": {
+          "holder": "austria-hungary",
+          "label": {
+            "en": "Austria (armistice of Villa Giusti, 3 November 1918; Galicia, Bukovina and Slovenia breaking away)",
+            "zh": "奥地利（1918 年 11 月 3 日维拉朱斯蒂停战；加利西亚、布科维纳与斯洛文尼亚正在脱离）"
+          }
+        },
+        "310": {
+          "holder": "austria-hungary",
+          "label": {
+            "en": "Hungary (separate government since 31 October 1918)",
+            "zh": "匈牙利（1918 年 10 月 31 日起单独政府）"
+          }
+        },
+        "315": "czechoslovakia",
+        "366": {
+          "holder": "estonia",
+          "label": {
+            "en": "Estonia (provisional government took over from the German occupation on 11 November 1918)",
+            "zh": "爱沙尼亚（1918 年 11 月 11 日临时政府从德国占领当局接管）"
+          }
+        },
+        "368": {
+          "holder": "lithuania",
+          "label": {
+            "en": "Lithuania (first government formed 11 November 1918; German troops still present)",
+            "zh": "立陶宛（1918 年 11 月 11 日组成首届政府；德军仍驻）"
+          }
+        }
+      },
+      "steps": [
+        {
+          "note": "Luxembourg, occupied by Germany since 2 August 1914 (CShapes)",
+          "holder": "germany",
+          "label": {
+            "en": "Luxembourg (German-occupied since 2 August 1914)",
+            "zh": "卢森堡（1914 年 8 月 2 日起被德国占领）"
+          },
+          "src": [
+            "G1"
+          ],
+          "from": {
+            "cshapes": [
+              212
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "German-held Belgium and France east of the front (lines west-1918, inside CShapes Belgium and France)",
+          "holder": "germany",
+          "label": {
+            "en": "Belgium and France behind the armistice line (German-held on 11 November 1918)",
+            "zh": "停战线后的比利时与法国（1918 年 11 月 11 日仍由德军据守）"
+          },
+          "src": [
+            "G1",
+            "G10"
+          ],
+          "from": {
+            "svg": "lines",
+            "class": "west-1918"
+          },
+          "clip": {
+            "union": [
+              {
+                "cshapes": [
+                  211
+                ],
+                "at": "1914-07-28"
+              },
+              {
+                "cshapes": [
+                  220
+                ],
+                "at": "1914-07-28"
+              }
+            ]
+          }
+        },
+        {
+          "note": "Latvia and Belarus, still German-occupied (Natural Earth units inside CShapes Russia on 1918-03-20, Latvia being outside every CShapes unit on 1918-11-11)",
+          "holder": "germany",
+          "label": {
+            "en": "Latvia and Belarus (German-occupied; withdrawal under the armistice)",
+            "zh": "拉脱维亚与白俄罗斯（德国占领；按停战协定撤出）"
+          },
+          "src": [
+            "G1",
+            "G6"
+          ],
+          "from": {
+            "union": [
+              {
+                "admin1": "Latvia",
+                "names": [
+                  "Aglonas",
+                  "Aizkraukles",
+                  "Aizputes",
+                  "Aknistes",
+                  "Alojas",
+                  "Alsungas",
+                  "Aluksne",
+                  "Amatas",
+                  "Apes",
+                  "Auces",
+                  "Babites",
+                  "Baldones",
+                  "Baltinavas",
+                  "Balvu",
+                  "Bauska",
+                  "Beverinas",
+                  "Brocenu",
+                  "Burtnieku",
+                  "Carnikavas",
+                  "Cesu",
+                  "Cesvaines",
+                  "Ciblas",
+                  "Dagdas",
+                  "Daugavpils",
+                  "Daugavpils",
+                  "Dobele",
+                  "Dundagas",
+                  "Durbes",
+                  "Engures",
+                  "Erglu",
+                  "Garkalnes",
+                  "Grobinas",
+                  "Gulbene",
+                  "Iecavas",
+                  "Ikskiles",
+                  "Ilukstes",
+                  "Incukalna",
+                  "Jaunjelgavas",
+                  "Jaunpiebalgas",
+                  "Jaunpils",
+                  "Jekabpils",
+                  "Jekabpils",
+                  "Jelgava",
+                  "Jelgava",
+                  "Jurmala",
+                  "Kandavas",
+                  "Karsavas",
+                  "Keguma",
+                  "Kekavas",
+                  "Kocenu",
+                  "Kokneses",
+                  "Kraslavas",
+                  "Krimuldas",
+                  "Krustpils",
+                  "Kuldigas",
+                  "Lielvardes",
+                  "Liepāja",
+                  "Ligatnes",
+                  "Limbaži",
+                  "Livanu",
+                  "Lubanas",
+                  "Ludzas",
+                  "Madona",
+                  "Malpils",
+                  "Marupes",
+                  "Mazsalacas",
+                  "Mersraga",
+                  "Nauksenu",
+                  "Neretas",
+                  "Nicas",
+                  "Ogre",
+                  "Olaines",
+                  "Ozolnieku",
+                  "Pargaujas",
+                  "Pavilostas",
+                  "Plavinu",
+                  "Preilu",
+                  "Priekules",
+                  "Priekulu",
+                  "Raunas",
+                  "Rezekne",
+                  "Rezeknes",
+                  "Riebinu",
+                  "Riga",
+                  "Rojas",
+                  "Ropazu",
+                  "Rucavas",
+                  "Rugaju",
+                  "Rujienas",
+                  "Rundales",
+                  "Salacgrivas",
+                  "Salas",
+                  "Salaspils",
+                  "Saldus",
+                  "Saulkrastu",
+                  "Sejas",
+                  "Siguldas",
+                  "Skriveru",
+                  "Skrundas",
+                  "Smiltenes",
+                  "Stopinu",
+                  "Strencu",
+                  "Talsi",
+                  "Tervetes",
+                  "Tukums",
+                  "Vainodes",
+                  "Valkas",
+                  "Valmiera",
+                  "Varaklanu",
+                  "Varkavas",
+                  "Vecpiebalgas",
+                  "Vecumnieku",
+                  "Ventspils",
+                  "Ventspils",
+                  "Viesites",
+                  "Vilakas",
+                  "Vilanu",
+                  "Zilupes",
+                  "Ādaži"
+                ]
+              },
+              {
+                "admin1": "Belarus",
+                "names": [
+                  "Brest",
+                  "Grodno",
+                  "Minsk",
+                  "City of Minsk",
+                  "Mogilev",
+                  "Gomel"
+                ]
+              }
+            ]
+          },
+          "clip": {
+            "cshapes": [
+              365
+            ],
+            "at": "1918-03-20"
+          },
+          "minus": {
+            "cshapes": [
+              368
+            ],
+            "at": "1918-11-11"
+          }
+        },
+        {
+          "note": "Ukrainian State under German and Austro-Hungarian occupation (OHM r2694815)",
+          "holder": "germany",
+          "label": {
+            "en": "Ukraine (Hetmanate under German and Austro-Hungarian occupation)",
+            "zh": "乌克兰（德奥占领下的盖特曼国）"
+          },
+          "src": [
+            "G1",
+            "G2"
+          ],
+          "from": {
+            "ohm": 2694815
+          },
+          "clip": {
+            "cshapes": [
+              365
+            ],
+            "at": "1918-11-11"
+          }
+        },
+        {
+          "note": "Crimea, German-occupied since April 1918 (OHM r2854272)",
+          "holder": "germany",
+          "label": {
+            "en": "Crimea (German-occupied since April 1918)",
+            "zh": "克里米亚（1918 年 4 月起被德国占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2854272
+          },
+          "clip": {
+            "cshapes": [
+              365
+            ],
+            "at": "1918-11-11"
+          }
+        },
+        {
+          "note": "Bessarabia, united with Romania on 9 April 1918 (CShapes Romania on 1920-10-28 minus Romania on 1914-07-28, inside CShapes Russia)",
+          "holder": "romania",
+          "label": {
+            "en": "Bessarabia (united with Romania, 9 April 1918)",
+            "zh": "比萨拉比亚（1918 年 4 月 9 日与罗马尼亚合并）"
+          },
+          "src": [
+            "G1"
+          ],
+          "from": {
+            "difference": [
+              {
+                "cshapes": [
+                  360
+                ],
+                "at": "1920-10-28"
+              },
+              {
+                "cshapes": [
+                  360
+                ],
+                "at": "1914-07-28"
+              }
+            ]
+          },
+          "clip": {
+            "cshapes": [
+              365
+            ],
+            "at": "1918-11-11"
+          }
+        },
+        {
+          "note": "Wallachia still occupied (lines east-1917-12-west, inside CShapes Romania on 1918-11-11)",
+          "holder": "germany",
+          "label": {
+            "en": "Wallachia (Central Powers occupation ending; Mackensen withdrew in November–December 1918)",
+            "zh": "瓦拉几亚（同盟国占领即将结束；马肯森于 1918 年 11–12 月撤出）"
+          },
+          "src": [
+            "G1",
+            "G14"
+          ],
+          "from": {
+            "svg": "lines",
+            "class": "east-1917-12-west"
+          },
+          "clip": {
+            "cshapes": [
+              360
+            ],
+            "at": "1918-11-11"
+          }
+        },
+        {
+          "note": "Georgia (OHM r2698086)",
+          "holder": "georgia",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2698086,
+            "set": "k9"
+          },
+          "clip": {
+            "cshapes": [
+              365
+            ],
+            "at": "1918-11-11"
+          }
+        },
+        {
+          "note": "Armenia (OHM r2698116)",
+          "holder": "armenia",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2698116,
+            "set": "k9"
+          },
+          "clip": {
+            "cshapes": [
+              365
+            ],
+            "at": "1918-11-11"
+          }
+        },
+        {
+          "note": "Azerbaijan (OHM r2698117)",
+          "holder": "azerbaijan",
+          "label": {
+            "en": "Azerbaijan (Ottoman troops in Baku until mid-November 1918)",
+            "zh": "阿塞拜疆（奥斯曼军队驻巴库至 1918 年 11 月中旬）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2698117,
+            "set": "k9"
+          },
+          "clip": {
+            "cshapes": [
+              365
+            ],
+            "at": "1918-11-11"
+          }
+        },
+        {
+          "note": "Batum, taken by the Ottoman Empire in April 1918 (Natural Earth province Ajaria inside CShapes Russia)",
+          "holder": "ottoman",
+          "label": {
+            "en": "Batum (Ottoman-occupied since April 1918; evacuated under the Mudros armistice)",
+            "zh": "巴统（1918 年 4 月起被奥斯曼占领；按穆兹罗斯停战协定撤出）"
+          },
+          "src": [
+            "G1",
+            "G6"
+          ],
+          "from": {
+            "admin1": "Georgia",
+            "names": [
+              "Ajaria"
+            ]
+          },
+          "clip": {
+            "cshapes": [
+              365
+            ],
+            "at": "1918-11-11"
+          }
+        },
+        {
+          "note": "State of Slovenes, Croats and Serbs, proclaimed 29 October 1918 (OHM r2747879)",
+          "holder": "serbia",
+          "label": {
+            "en": "State of Slovenes, Croats and Serbs (proclaimed 29 October 1918; united with Serbia on 1 December)",
+            "zh": "斯洛文尼亚人、克罗地亚人和塞尔维亚人国（1918 年 10 月 29 日宣布；12 月 1 日与塞尔维亚合并）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2747879
+          }
+        },
+        {
+          "note": "Trentino, South Tyrol, Trieste and Istria, occupied by Italy under the armistice of Villa Giusti (CShapes Italy on 1919-09-10)",
+          "holder": "italy",
+          "label": {
+            "en": "Italy, incl. Trentino, South Tyrol, Trieste and Istria occupied under the armistice of Villa Giusti (3 November 1918)",
+            "zh": "意大利（含按 1918 年 11 月 3 日维拉朱斯蒂停战协定占领的特伦蒂诺、南蒂罗尔、的里雅斯特与伊斯特拉）"
+          },
+          "src": [
+            "G1"
+          ],
+          "from": {
+            "cshapes": [
+              325
+            ],
+            "at": "1919-09-10"
+          }
+        },
+        {
+          "note": "British Togoland (OHM r2694159)",
+          "holder": "uk",
+          "label": {
+            "en": "Togoland, British zone (occupied since August 1914)",
+            "zh": "多哥英占区（1914 年 8 月起占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2694159
+          }
+        },
+        {
+          "note": "French Togoland (OHM r2694161)",
+          "holder": "france",
+          "label": {
+            "en": "Togoland, French zone (occupied since August 1914)",
+            "zh": "多哥法占区（1914 年 8 月起占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2694161
+          }
+        },
+        {
+          "note": "German Samoa under New Zealand occupation since 29 August 1914 (OHM r2846171)",
+          "holder": "new-zealand",
+          "label": {
+            "en": "Samoa (New Zealand-occupied since 29 August 1914)",
+            "zh": "萨摩亚（1914 年 8 月 29 日起由新西兰占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846171,
+            "set": "k9"
+          }
+        },
+        {
+          "note": "German New Guinea under Australian occupation (OHM r2961774)",
+          "holder": "australia",
+          "label": {
+            "en": "New Guinea (Australian-occupied since September 1914)",
+            "zh": "新几内亚（1914 年 9 月起由澳大利亚占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2961774,
+            "set": "k8"
+          }
+        },
+        {
+          "note": "Nauru under Australian occupation (OHM r2846178)",
+          "holder": "australia",
+          "label": {
+            "en": "Nauru (Australian-occupied since November 1914)",
+            "zh": "瑙鲁（1914 年 11 月起由澳大利亚占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846178,
+            "set": "k8"
+          }
+        },
+        {
+          "note": "German Micronesia under Japanese occupation (OHM r2961775)",
+          "holder": "japan",
+          "label": {
+            "en": "Micronesia (Japanese-occupied since October 1914)",
+            "zh": "密克罗尼西亚（1914 年 10 月起由日本占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2961775,
+            "set": "k8"
+          }
+        },
+        {
+          "note": "Kiautschou, Japanese-occupied since the fall of Tsingtao on 7 November 1914 (OHM r2889899)",
+          "holder": "japan",
+          "label": {
+            "en": "Kiautschou (Japanese-occupied since 7 November 1914)",
+            "zh": "胶州湾（1914 年 11 月 7 日起由日本占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2889899,
+            "set": "k1"
+          }
+        },
+        {
+          "note": "Kamerun incl. Neukamerun (CShapes on 1914-07-28), occupied by French, British and Belgian forces",
+          "holder": "france",
+          "label": {
+            "en": "Kamerun, French-occupied zone",
+            "zh": "喀麦隆法占区"
+          },
+          "src": [
+            "G1"
+          ],
+          "from": {
+            "cshapes": [
+              470
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "British zone of Kamerun (OHM r2828750, the occupation zones of the provisional partition of March 1916)",
+          "holder": "uk",
+          "label": {
+            "en": "Kamerun, British-occupied zone",
+            "zh": "喀麦隆英占区"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2828750,
+            "set": "k5"
+          }
+        },
+        {
+          "note": "German East Africa, occupied after the German force crossed into Portuguese East Africa on 25 November 1917 (CShapes GEA on 1914-07-28)",
+          "holder": "uk",
+          "label": {
+            "en": "German East Africa (British-occupied; the German force in Northern Rhodesia surrendered on 25 November 1918)",
+            "zh": "德属东非（英军占领；德军在北罗得西亚于 1918 年 11 月 25 日投降）"
+          },
+          "src": [
+            "G1"
+          ],
+          "from": {
+            "cshapes": [
+              510
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Kigoma, Belgian-occupied (Natural Earth province)",
+          "holder": "belgium",
+          "label": {
+            "en": "Kigoma (Belgian-occupied since 1916)",
+            "zh": "基戈马（1916 年起由比利时占领）"
+          },
+          "src": [
+            "G1",
+            "G6"
+          ],
+          "from": {
+            "admin1": "United Republic of Tanzania",
+            "names": [
+              "Kigoma"
+            ]
+          },
+          "clip": {
+            "cshapes": [
+              510
+            ],
+            "at": "1914-07-28"
+          }
+        },
+        {
+          "note": "Ruanda-Urundi under Belgian occupation (OHM r2863621)",
+          "holder": "belgium",
+          "label": {
+            "en": "Ruanda-Urundi (Belgian-occupied since 1916)",
+            "zh": "卢旺达-乌隆迪（1916 年起由比利时占领）"
+          },
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2863621,
+            "set": "k5"
+          }
+        },
+        {
+          "note": "Palestine, OETA South (Natural Earth units inside the CShapes Ottoman Empire)",
+          "holder": "uk",
+          "label": {
+            "en": "Palestine (British military administration, OETA South)",
+            "zh": "巴勒斯坦（英国军事管理，被占敌国领土管理局南区）"
+          },
+          "src": [
+            "G1",
+            "G6"
+          ],
+          "from": {
+            "union": [
+              {
+                "admin1": "Israel",
+                "names": [
+                  "HaZafon",
+                  "HaDarom",
+                  "HaMerkaz",
+                  "Haifa",
+                  "Jerusalem",
+                  "Tel Aviv"
+                ]
+              },
+              {
+                "admin1": "West Bank",
+                "names": [
+                  "West Bank"
+                ]
+              },
+              {
+                "admin1": "Gaza Strip",
+                "names": [
+                  "Gaza Strip"
+                ]
+              }
+            ]
+          },
+          "clip": {
+            "cshapes": [
+              640
+            ],
+            "at": "1918-11-11"
+          }
+        },
+        {
+          "note": "Lebanon and the Syrian coast, OETA North/West (Natural Earth units inside the CShapes Ottoman Empire)",
+          "holder": "france",
+          "label": {
+            "en": "Lebanon and the Syrian coast (French military administration, OETA West)",
+            "zh": "黎巴嫩与叙利亚沿海（法国军事管理，被占敌国领土管理局西区）"
+          },
+          "src": [
+            "G1",
+            "G6"
+          ],
+          "from": {
+            "union": [
+              {
+                "admin1": "Lebanon",
+                "names": [
+                  "An Nabatiyah",
+                  "Beirut",
+                  "Beqaa",
+                  "Mount Lebanon",
+                  "North Lebanon",
+                  "South Lebanon"
+                ]
+              },
+              {
+                "admin1": "Syria",
+                "names": [
+                  "Lattakia",
+                  "Tartus"
+                ]
+              }
+            ]
+          },
+          "clip": {
+            "cshapes": [
+              640
+            ],
+            "at": "1918-11-11"
+          }
+        },
+        {
+          "note": "Inland Syria and Transjordan, OETA East (Natural Earth units inside the CShapes Ottoman Empire)",
+          "holder": "hejaz",
+          "label": {
+            "en": "Inland Syria and Transjordan (Arab administration under Emir Faisal, OETA East; Damascus 1 October, Aleppo 26 October 1918)",
+            "zh": "叙利亚内陆与外约旦（费萨尔埃米尔的阿拉伯政府，被占敌国领土管理局东区；10 月 1 日入大马士革，10 月 26 日入阿勒颇）"
+          },
+          "src": [
+            "G1",
+            "G6"
+          ],
+          "from": {
+            "union": [
+              {
+                "admin1": "Syria",
+                "names": [
+                  "Damascus",
+                  "Rif Dimashq",
+                  "Dar`a",
+                  "As Suwayda'",
+                  "Quneitra",
+                  "Homs (Hims)",
+                  "Hamah",
+                  "Aleppo",
+                  "Idlib"
+                ]
+              },
+              {
+                "admin1": "Jordan",
+                "names": [
+                  "Ajlun",
+                  "Amman",
+                  "Aqaba",
+                  "Balqa",
+                  "Irbid",
+                  "Jarash",
+                  "Karak",
+                  "Ma`an",
+                  "Madaba",
+                  "Mafraq",
+                  "Tafilah",
+                  "Zarqa"
+                ]
+              }
+            ]
+          },
+          "clip": {
+            "cshapes": [
+              640
+            ],
+            "at": "1918-11-11"
+          }
+        },
+        {
+          "note": "Mesopotamia under British-Indian occupation (Natural Earth provinces of Iraq inside the CShapes Ottoman Empire)",
+          "holder": "uk",
+          "label": {
+            "en": "Mesopotamia (British-Indian occupation; Mosul entered after the armistice, early November 1918)",
+            "zh": "美索不达米亚（英印军占领；停战后于 1918 年 11 月初进入摩苏尔）"
+          },
+          "src": [
+            "G1",
+            "G6"
+          ],
+          "from": {
+            "admin1": "Iraq",
+            "names": [
+              "Al-Basrah",
+              "Maysan",
+              "Dhi-Qar",
+              "Wasit",
+              "Babil",
+              "Karbala'",
+              "An-Najaf",
+              "Al-Qādisiyyah",
+              "Al-Muthannia",
+              "Baghdad",
+              "Diyala",
+              "Al-Anbar",
+              "Sala ad-Din",
+              "At-Ta'mim",
+              "Ninawa"
+            ]
+          },
+          "clip": {
+            "cshapes": [
+              640
+            ],
+            "at": "1918-11-11"
+          }
+        },
+        {
+          "note": "Hejaz: Mecca, Jeddah and Taif held by the Arab Revolt from June 1916 (Natural Earth province Makkah inside the CShapes Ottoman Empire)",
+          "holder": "hejaz",
+          "label": {
+            "en": "Kingdom of Hejaz (Arab Revolt from June 1916; the Ottoman garrison held Medina until January 1919)",
+            "zh": "汉志王国（1916 年 6 月起阿拉伯起义；奥斯曼守军据守麦地那至 1919 年 1 月）"
+          },
+          "src": [
+            "G1",
+            "G6"
+          ],
+          "from": {
+            "admin1": "Saudi Arabia",
+            "names": [
+              "Makkah"
+            ]
+          },
+          "clip": {
+            "cshapes": [
+              640
+            ],
+            "at": "1918-11-11"
+          }
+        },
+        {
+          "note": "Weihaiwei (OHM r2848211)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2848211,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Weihaiwei (British-leased)",
+            "zh": "威海卫（英国租借地）"
+          }
+        },
+        {
+          "note": "Hong Kong (OHM r2694575)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2694575,
+            "set": "k1"
+          }
+        },
+        {
+          "note": "Kwangchowan (OHM r2889933)",
+          "holder": "france",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2889933,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Kwangchowan (French-leased)",
+            "zh": "广州湾（法国租借地）"
+          }
+        },
+        {
+          "note": "Macau (OHM r2694462)",
+          "holder": "portugal",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2694462,
+            "set": "k1"
+          }
+        },
+        {
+          "note": "Kuwait (OHM r2848364)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2848364,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Kuwait (British-protected sheikhdom)",
+            "zh": "科威特（英国保护的酋长国）"
+          }
+        },
+        {
+          "note": "Bahrain (OHM r2848318)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2848318,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Bahrain (British protectorate)",
+            "zh": "巴林（英国保护国）"
+          }
+        },
+        {
+          "note": "New Hebrides (OHM r2846175)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846175,
+            "set": "k1"
+          },
+          "label": {
+            "en": "New Hebrides (Anglo-French condominium)",
+            "zh": "新赫布里底（英法共管）"
+          }
+        },
+        {
+          "note": "Gilbert and Ellice Islands (OHM r2831184)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2831184,
+            "set": "k1"
+          }
+        },
+        {
+          "note": "Tonga (OHM r2846200)",
+          "holder": "uk",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846200,
+            "set": "k1"
+          },
+          "label": {
+            "en": "Tonga (British protectorate)",
+            "zh": "汤加（英国保护国）"
+          }
+        },
+        {
+          "note": "Cook Islands (OHM r2846264)",
+          "holder": "new-zealand",
+          "src": [
+            "G2"
+          ],
+          "from": {
+            "ohm": 2846264,
+            "set": "k1"
+          }
+        }
+      ],
+      "checks": [
+        {
+          "name": "western-front",
+          "center": [
+            3.8,
+            49.6
+          ],
+          "zoom": 5.2,
+          "source": "svg-wf-1918"
+        },
+        {
+          "name": "central-europe",
+          "center": [
+            20,
+            48
+          ],
+          "zoom": 3.8
+        },
+        {
+          "name": "eastern-europe",
+          "center": [
+            30,
+            52
+          ],
+          "zoom": 3.2,
+          "source": "jpg-brest"
+        },
+        {
+          "name": "middle-east",
+          "center": [
+            40,
+            30
+          ],
+          "zoom": 3.4,
+          "source": "svg-oeta"
+        },
+        {
+          "name": "africa",
+          "center": [
+            20,
+            0
+          ],
+          "zoom": 1.9
         }
       ]
     },
