@@ -820,5 +820,1320 @@
       "S77",
       "S76"
     ]
+  },
+  {
+    "id": "japan-enters",
+    "t": "1914-08-23",
+    "at": [
+      139.75,
+      35.68
+    ],
+    "kind": "political",
+    "importance": 2,
+    "title": {
+      "en": "Japan declares war on Germany",
+      "zh": "日本对德宣战"
+    },
+    "summary": {
+      "en": "After Germany ignores its ultimatum to hand over the Jiaozhou Bay territory, Japan, Britain's ally, declares war on Germany.",
+      "zh": "德国没有理会日本要求交出胶州湾租借地的最后通牒，英国的盟国日本随即对德宣战。"
+    },
+    "sources": [
+      "S81"
+    ]
+  },
+  {
+    "id": "togoland-surrender",
+    "t": "1914-08-26",
+    "at": [
+      1.11,
+      7.06
+    ],
+    "kind": "surrender",
+    "importance": 1,
+    "title": {
+      "en": "Togoland surrenders",
+      "zh": "多哥投降"
+    },
+    "summary": {
+      "en": "British forces from the Gold Coast and French forces from Dahomey take the German colony of Togoland in the first month of the war.",
+      "zh": "来自黄金海岸的英军和来自达荷美的法军在战争第一个月攻占德属多哥。"
+    },
+    "sources": [
+      "S86"
+    ]
+  },
+  {
+    "id": "samoa-occupied",
+    "t": "1914-08-29",
+    "at": [
+      -171.76,
+      -13.83
+    ],
+    "kind": "surrender",
+    "importance": 1,
+    "title": {
+      "en": "New Zealand occupies Samoa",
+      "zh": "新西兰占领萨摩亚"
+    },
+    "summary": {
+      "en": "German Samoa falls without bloodshed to a New Zealand force supported by Australian, British and French warships.",
+      "zh": "德属萨摩亚兵不血刃地落入新西兰部队之手，澳大利亚、英国和法国军舰提供支援。"
+    },
+    "sources": [
+      "S86"
+    ]
+  },
+  {
+    "id": "lungkow-landing",
+    "t": "1914-09-02",
+    "at": [
+      120.471,
+      37.644
+    ],
+    "kind": "landing",
+    "sides": {
+      "attacker": "japan",
+      "defender": "germany"
+    },
+    "result": "attacker",
+    "importance": 2,
+    "title": {
+      "en": "Japanese landing at Longkou",
+      "zh": "日军在龙口登陆"
+    },
+    "summary": {
+      "en": "Japanese troops land at Longkou in neutral China, north of Tsingtao, and move inland along the Shandong railway.",
+      "zh": "日军在青岛以北、中立的中国境内的龙口登陆，沿山东铁路向内地推进。"
+    },
+    "detail": {
+      "en": "China protested that the landing and the seizure of the Qingdao–Jinan railway broke its neutrality; it declared the area around Longkou, Laizhou and Jiaozhou a war zone so as not to be held responsible. A second Japanese landing followed on 18 September, eighteen miles from Tsingtao.",
+      "zh": "中国抗议日军登陆和夺取胶济铁路违反中国的中立，并把龙口、莱州和胶州一带划为战区，以免承担责任。9 月 18 日，日军又在离青岛 18 英里处第二次登陆。"
+    },
+    "sources": [
+      "S84",
+      "S81"
+    ]
+  },
+  {
+    "id": "bita-paka",
+    "t": "1914-09-11",
+    "at": [
+      152.25,
+      -4.33
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "australia",
+      "defender": "germany"
+    },
+    "result": "attacker",
+    "importance": 1,
+    "title": {
+      "en": "Bita Paka",
+      "zh": "比塔帕卡"
+    },
+    "summary": {
+      "en": "Australian naval reservists land on New Britain and take the German radio station at Bita Paka; six Australians are killed or die of wounds.",
+      "zh": "澳大利亚海军预备役人员在新不列颠岛登陆，攻占比塔帕卡的德国无线电台；6 名澳大利亚人阵亡或伤重不治。"
+    },
+    "detail": {
+      "en": "The Australian Naval and Military Expeditionary Force, an infantry battalion of 1,000 and 500 naval reservists, raised the British flag at Rabaul on 13 September; within a few weeks the whole of German New Guinea surrendered.",
+      "zh": "澳大利亚海陆军远征部队由 1,000 人的步兵营和 500 名海军预备役人员组成，9 月 13 日在拉包尔升起英国国旗；数周之内，德属新几内亚全境投降。"
+    },
+    "sources": [
+      "S87",
+      "S86"
+    ]
+  },
+  {
+    "id": "tsingtao-siege",
+    "t": "1914-09-18",
+    "until": "1914-11-07",
+    "at": [
+      120.33,
+      36.07
+    ],
+    "kind": "siege",
+    "sides": {
+      "attacker": "japan",
+      "defender": "germany"
+    },
+    "result": "attacker",
+    "importance": 3,
+    "title": {
+      "en": "Siege of Tsingtao",
+      "zh": "青岛之围"
+    },
+    "summary": {
+      "en": "Japanese and British forces besiege the German naval base at Tsingtao (Qingdao); the garrison surrenders on 7 November.",
+      "zh": "日英联军围攻德国在青岛的海军基地；守军于 11 月 7 日投降。"
+    },
+    "detail": {
+      "en": "About 20,000 Japanese troops with more than 140 guns (nearly 50,000 ground troops in all, by another count) and 1,500 British soldiers faced a garrison of about 4,000 to 5,000. Japanese aircraft attacked from 4 September. The British lost 12 killed and 53 wounded. More than 4,600 German and Austro-Hungarian prisoners were held in camps in Japan until after the war.",
+      "zh": "约 2 万名日军携 140 多门火炮（另一说全部陆军近 5 万人）和 1,500 名英军，对阵约 4,000 到 5,000 名守军。日本飞机从 9 月 4 日起参加攻击。英军阵亡 12 人、负伤 53 人。4,600 多名德国和奥匈战俘被关押在日本的战俘营里，直到战后。"
+    },
+    "sources": [
+      "S82",
+      "S81",
+      "S84",
+      "S83"
+    ]
+  },
+  {
+    "id": "madras-bombardment",
+    "t": "1914-09-22",
+    "at": [
+      80.29,
+      13.09
+    ],
+    "kind": "bombing",
+    "sides": {
+      "attacker": "germany",
+      "defender": "india"
+    },
+    "importance": 1,
+    "title": {
+      "en": "Emden shells Madras",
+      "zh": "埃姆登号炮击马德拉斯"
+    },
+    "summary": {
+      "en": "The German cruiser Emden shells Madras at night and sets the Burmah Oil Company's tanks on fire.",
+      "zh": "德国巡洋舰埃姆登号夜袭马德拉斯，炮击缅甸石油公司的油罐，引起大火。"
+    },
+    "sources": [
+      "S91"
+    ]
+  },
+  {
+    "id": "micronesia-occupied",
+    "t": "1914-10-12",
+    "at": [
+      151.85,
+      7.45
+    ],
+    "kind": "surrender",
+    "importance": 1,
+    "title": {
+      "en": "Japan occupies German Micronesia",
+      "zh": "日本占领德属密克罗尼西亚"
+    },
+    "summary": {
+      "en": "Japanese naval squadrons occupy the Marshall Islands and the Caroline Islands, including Truk, Germany's possessions in the north Pacific.",
+      "zh": "日本海军舰队占领德国在北太平洋的属地马绍尔群岛和加罗林群岛，包括特鲁克。"
+    },
+    "sources": [
+      "S81",
+      "S86"
+    ]
+  },
+  {
+    "id": "penang-raid",
+    "t": "1914-10-28",
+    "at": [
+      100.36,
+      5.42
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "germany",
+      "defender": "russia"
+    },
+    "result": "attacker",
+    "importance": 2,
+    "title": {
+      "en": "Battle of Penang",
+      "zh": "槟城海战"
+    },
+    "summary": {
+      "en": "The Emden enters Penang harbour at dawn, sinks the Russian cruiser Zhemchug at anchor and then the French destroyer Mousquet.",
+      "zh": "埃姆登号黎明时驶入槟城港，击沉停泊中的俄国巡洋舰珍珠号，随后又击沉法国驱逐舰火枪号。"
+    },
+    "detail": {
+      "en": "Over half of the Mousquet's crew died. In all the Emden captured or sank 25 Allied merchant ships and two warships before she was destroyed at the Cocos Islands on 9 November.",
+      "zh": "火枪号半数以上船员遇难。在 11 月 9 日于科科斯群岛被击毁之前，埃姆登号共俘获或击沉协约国商船 25 艘、军舰 2 艘。"
+    },
+    "sources": [
+      "S92",
+      "S89"
+    ]
+  },
+  {
+    "id": "cocos-emden",
+    "t": "1914-11-09",
+    "at": [
+      96.83,
+      -11.83
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "australia",
+      "defender": "germany"
+    },
+    "casualties": {
+      "germany": 130,
+      "australia": 4
+    },
+    "result": "attacker",
+    "importance": 2,
+    "title": {
+      "en": "Sydney and Emden at the Cocos Islands",
+      "zh": "悉尼号与埃姆登号在科科斯群岛"
+    },
+    "summary": {
+      "en": "The Australian cruiser HMAS Sydney catches the Emden at North Keeling in the Cocos Islands and drives her ashore, a wreck.",
+      "zh": "澳大利亚巡洋舰悉尼号在科科斯群岛的北基林岛截住埃姆登号，将其重创搁浅。"
+    },
+    "detail": {
+      "en": "About 130 of the Emden's crew were killed and 69 wounded; the Sydney lost four killed and 16 wounded. The Royal Australian Navy gives 134 German dead.",
+      "zh": "埃姆登号约 130 人阵亡、69 人负伤；悉尼号 4 人阵亡、16 人负伤。澳大利亚皇家海军作德方死亡 134 人。"
+    },
+    "sources": [
+      "S90",
+      "S89"
+    ]
+  },
+  {
+    "id": "twenty-one-demands",
+    "t": "1915-01-18",
+    "at": [
+      116.39,
+      39.91
+    ],
+    "kind": "political",
+    "importance": 2,
+    "title": {
+      "en": "The Twenty-One Demands",
+      "zh": "“二十一条”"
+    },
+    "summary": {
+      "en": "Japan's minister in Beijing hands President Yuan Shikai twenty-one demands in five groups, starting with Germany's rights in Shandong.",
+      "zh": "日本驻华公使向袁世凯总统面交分为五号的二十一条要求，第一号就是继承德国在山东的权益。"
+    },
+    "detail": {
+      "en": "After a Japanese ultimatum on 7 May, Yuan accepted all but the fifth group, which would have put Japanese advisers into China's government and police; the treaties were signed on 25 May 1915.",
+      "zh": "5 月 7 日日本发出最后通牒后，袁世凯接受了除第五号以外的各条——第五号要求中国政府和警察聘用日本顾问；条约于 1915 年 5 月 25 日签订。"
+    },
+    "sources": [
+      "S84",
+      "S85"
+    ]
+  },
+  {
+    "id": "singapore-mutiny",
+    "t": "1915-02-15",
+    "at": [
+      103.803,
+      1.276
+    ],
+    "kind": "political",
+    "importance": 3,
+    "title": {
+      "en": "Singapore mutiny",
+      "zh": "新加坡兵变"
+    },
+    "summary": {
+      "en": "About half of the Indian 5th Light Infantry mutinies at Alexandra Barracks; British, Japanese, French and Russian sailors, volunteers and the Sultan of Johor's men put it down.",
+      "zh": "印度第 5 轻步兵团约一半士兵在亚历山德拉兵营哗变；英国、日本、法国和俄国水兵、志愿军以及柔佛苏丹的部队将其镇压。"
+    },
+    "detail": {
+      "en": "The mutineers killed 44 British officers, soldiers and civilians and five Chinese and Malay civilians; 56 of them were killed. Courts martial convicted 202 men; 41 to 47 were executed, most of them shot in public outside Outram Prison, and 63 to 64 were transported for life. About 124 people died in all.",
+      "zh": "哗变士兵杀死 44 名英国军官、士兵和平民，以及 5 名华人和马来平民；哗变士兵中 56 人被打死。军事法庭判处 202 人有罪，41 到 47 人被处决，大多在欧南监狱外公开枪决，63 到 64 人被终身流放。前后共约 124 人死亡。"
+    },
+    "sources": [
+      "S93",
+      "S94",
+      "S95"
+    ],
+    "sensitive": true
+  },
+  {
+    "id": "armenian-genocide",
+    "t": "1915-04-24",
+    "until": "1916-12-31",
+    "at": [
+      28.97,
+      41.01
+    ],
+    "kind": "atrocity",
+    "importance": 3,
+    "title": {
+      "en": "Arrests in Constantinople: the Armenian genocide begins",
+      "zh": "君士坦丁堡大逮捕：亚美尼亚种族灭绝开始"
+    },
+    "summary": {
+      "en": "The Ottoman government arrests hundreds of Armenian writers, doctors, lawyers and community leaders in Constantinople; most are later killed. Deportations and massacres across Anatolia follow.",
+      "zh": "奥斯曼政府在君士坦丁堡逮捕数百名亚美尼亚作家、医生、律师和社区领袖，其中大多数后来被杀害。随后，驱逐和屠杀遍及安纳托利亚。"
+    },
+    "detail": {
+      "en": "A deportation law followed on 27 May 1915. Men were usually killed near their towns; women, children and the old were marched south to the Syrian desert. Scholars estimate 664,000 to 1.5 million Armenian deaths. The Turkish state puts the losses at about 300,000, attributes them to wartime relocation, revenge attacks, famine and epidemics, and rejects the term genocide.",
+      "zh": "1915 年 5 月 27 日颁布驱逐法令。男子通常在家乡附近被杀害；妇女、儿童和老人被押往南方的叙利亚沙漠。学者估计亚美尼亚人死亡 66.4 万到 150 万。土耳其国家认为损失约 30 万，把死亡归因于战时迁移、报复性袭击、饥荒和疫病，不接受种族灭绝的定性。"
+    },
+    "sources": [
+      "S105",
+      "S107",
+      "S108",
+      "S109",
+      "S110",
+      "S111",
+      "S112"
+    ],
+    "sensitive": true
+  },
+  {
+    "id": "gallipoli-landings",
+    "t": "1915-04-25",
+    "until": "1916-01-09",
+    "at": [
+      26.2925,
+      40.2442
+    ],
+    "kind": "landing",
+    "sides": {
+      "attacker": "uk",
+      "defender": "ottoman"
+    },
+    "result": "defender",
+    "importance": 3,
+    "title": {
+      "en": "Gallipoli landings",
+      "zh": "加里波利登陆"
+    },
+    "summary": {
+      "en": "Australian and New Zealand troops land at Anzac Cove and British, French and Indian troops at Cape Helles to open the Dardanelles; the Ottoman Fifth Army holds the heights.",
+      "zh": "澳新军团在澳新湾、英法印军队在赫勒斯角登陆，想打通达达尼尔海峡；奥斯曼第 5 集团军守住了高地。"
+    },
+    "detail": {
+      "en": "The campaign lasted until January 1916. About 48,700 (Australian War Memorial) to 58,000 (Gallipoli Association) Entente soldiers and about 87,000 Ottoman soldiers died; casualties of all kinds may have reached half a million.",
+      "zh": "战役一直持续到 1916 年 1 月。协约国一方约 4.87 万（澳大利亚战争纪念馆）到 5.8 万人（加里波利协会）、奥斯曼一方约 8.7 万人死亡；各类伤亡合计可能多达 50 万。"
+    },
+    "sources": [
+      "S96",
+      "S97",
+      "S98"
+    ]
+  },
+  {
+    "id": "gorlice-tarnow",
+    "t": "1915-05-02",
+    "until": "1915-06-22",
+    "at": [
+      21.16,
+      49.65
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "germany",
+      "defender": "russia"
+    },
+    "result": "attacker",
+    "importance": 2,
+    "title": {
+      "en": "Gorlice–Tarnów",
+      "zh": "戈尔利采—塔尔努夫"
+    },
+    "summary": {
+      "en": "German and Austro-Hungarian armies break through the Russian front in Galicia; the Russian 'Great Retreat' follows.",
+      "zh": "德奥军队在加利西亚突破俄军防线，俄军随即开始“大撤退”。"
+    },
+    "detail": {
+      "en": "German troops entered Warsaw on 5 August. By the end of August all of Poland was occupied and 750,000 Russians had been taken prisoner in four months; Russia lost over 1.4 million soldiers in the retreat.",
+      "zh": "8 月 5 日德军进入华沙。到 8 月底，波兰全境被占领，四个月里 75 万俄军被俘；俄军在大撤退中共损失 140 多万人。"
+    },
+    "sources": [
+      "S102",
+      "S103"
+    ]
+  },
+  {
+    "id": "russian-deportations-1915",
+    "t": "1915-05",
+    "until": "1915-06",
+    "at": [
+      23.9,
+      54.9
+    ],
+    "kind": "atrocity",
+    "importance": 2,
+    "title": {
+      "en": "Russian army expels Jews from Kovno and Kurland",
+      "zh": "俄军驱逐科夫诺和库尔兰的犹太人"
+    },
+    "summary": {
+      "en": "Accusing them of disloyalty, the retreating Russian army expels about 200,000 Jews from the provinces of Kovno and Kurland, often with only hours to leave.",
+      "zh": "撤退中的俄军指控犹太人不忠，把约 20 万犹太人逐出科夫诺省和库尔兰省，常常只给几个小时收拾离开。"
+    },
+    "sources": [
+      "S104"
+    ],
+    "sensitive": true
+  },
+  {
+    "id": "italy-enters",
+    "t": "1915-05-23",
+    "at": [
+      12.48,
+      41.89
+    ],
+    "kind": "political",
+    "importance": 3,
+    "title": {
+      "en": "Italy enters the war",
+      "zh": "意大利参战"
+    },
+    "summary": {
+      "en": "Promised territory by the secret Treaty of London of 26 April, Italy declares war on Austria-Hungary.",
+      "zh": "根据 4 月 26 日的秘密《伦敦条约》获得领土许诺后，意大利对奥匈宣战。"
+    },
+    "sources": [
+      "S99"
+    ]
+  },
+  {
+    "id": "isonzo-1915",
+    "t": "1915-06-23",
+    "until": "1915-12-02",
+    "at": [
+      13.55,
+      45.9
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "italy",
+      "defender": "austria-hungary"
+    },
+    "result": "defender",
+    "importance": 2,
+    "title": {
+      "en": "First four battles of the Isonzo",
+      "zh": "前四次伊松佐河战役"
+    },
+    "summary": {
+      "en": "Italian offensives across the Isonzo river gain almost nothing; the four battles of 1915 cost Italy about 280,000 men.",
+      "zh": "意军四次强攻伊松佐河一线，几乎毫无进展；1915 年的四次战役使意大利损失约 28 万人。"
+    },
+    "sources": [
+      "S99"
+    ]
+  },
+  {
+    "id": "swa-surrender",
+    "t": "1915-07-09",
+    "at": [
+      17.5,
+      -19.6
+    ],
+    "kind": "surrender",
+    "importance": 1,
+    "title": {
+      "en": "German South West Africa surrenders",
+      "zh": "德属西南非洲投降"
+    },
+    "summary": {
+      "en": "After a campaign by about 60,000 South African troops, the German forces surrender at Khorab.",
+      "zh": "约 6 万名南非军队经过一场战役后，德军在霍拉布投降。"
+    },
+    "sources": [
+      "S88",
+      "S86"
+    ]
+  },
+  {
+    "id": "deir-ez-zor",
+    "t": "1915-08",
+    "until": "1916-12",
+    "at": [
+      40.14,
+      35.34
+    ],
+    "kind": "massacre",
+    "importance": 3,
+    "title": {
+      "en": "Deir ez-Zor",
+      "zh": "代尔祖尔"
+    },
+    "summary": {
+      "en": "Armenian deportees are driven to camps along the Euphrates and around Deir ez-Zor in the Syrian desert; in the second half of 1916 most of those still alive there are massacred.",
+      "zh": "被驱逐的亚美尼亚人被赶到幼发拉底河沿岸和叙利亚沙漠代尔祖尔一带的营地；1916 年下半年，那里幸存的人大多遭到屠杀。"
+    },
+    "detail": {
+      "en": "From July to December 1916, about 192,750 deportees concentrated at Deir ez-Zor were killed, by the Ottoman authorities' own count, mostly by bands of the Special Organization. Earlier, in March 1916, some 40,000 internees were killed at Ras ul-Ayn.",
+      "zh": "1916 年 7 月至 12 月，集中在代尔祖尔的约 192,750 名被驱逐者被杀害（据奥斯曼当局自己的统计），主要由“特别组织”的武装团伙执行。此前，1916 年 3 月，约 4 万名被拘押者在拉斯艾因被杀害。"
+    },
+    "sources": [
+      "S107",
+      "S106"
+    ],
+    "sensitive": true
+  },
+  {
+    "id": "serbia-1915",
+    "t": "1915-10-06",
+    "until": "1915-11-24",
+    "at": [
+      20.47,
+      44.83
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "germany",
+      "defender": "serbia"
+    },
+    "result": "attacker",
+    "importance": 2,
+    "title": {
+      "en": "Conquest of Serbia",
+      "zh": "塞尔维亚被攻占"
+    },
+    "summary": {
+      "en": "German and Austro-Hungarian armies cross the Danube; from 11 October Bulgaria attacks from the east. Serbia is overrun.",
+      "zh": "德奥军队渡过多瑙河；10 月 11 日起保加利亚从东面进攻。塞尔维亚被占领。"
+    },
+    "detail": {
+      "en": "On 25 November the Serbian High Command ordered the retreat through Montenegro and Albania. Thousands of soldiers died in the snow-covered mountains; the National Army Museum gives over 200,000 Serbian soldiers dead in the retreat. Some 169,828 soldiers and civilians were carried by Allied ships to Corfu, Bizerte, Italy and France.",
+      "zh": "11 月 25 日，塞尔维亚最高统帅部下令经黑山和阿尔巴尼亚撤退。数以千计的士兵死在积雪的山里；英国国家陆军博物馆给出的撤退中塞军死亡人数为 20 万以上。约 169,828 名士兵和平民被协约国船只运到科孚岛、比塞大、意大利和法国。"
+    },
+    "sources": [
+      "S99",
+      "S100",
+      "S101"
+    ],
+    "sensitive": true
+  },
+  {
+    "id": "bulgaria-enters",
+    "t": "1915-10-14",
+    "at": [
+      23.32,
+      42.7
+    ],
+    "kind": "political",
+    "importance": 2,
+    "title": {
+      "en": "Bulgaria enters the war",
+      "zh": "保加利亚参战"
+    },
+    "summary": {
+      "en": "Bulgaria, which signed a treaty with the Central Powers on 6 September, attacks Serbia, promised Serbian territory in return.",
+      "zh": "9 月 6 日与同盟国签约的保加利亚进攻塞尔维亚，换取塞尔维亚领土的许诺。"
+    },
+    "sources": [
+      "S99"
+    ]
+  },
+  {
+    "id": "kut",
+    "t": "1915-12-07",
+    "until": "1916-04-29",
+    "at": [
+      45.83,
+      32.5
+    ],
+    "kind": "siege",
+    "sides": {
+      "attacker": "ottoman",
+      "defender": "india"
+    },
+    "result": "attacker",
+    "importance": 2,
+    "title": {
+      "en": "Siege of Kut",
+      "zh": "库特之围"
+    },
+    "summary": {
+      "en": "Ottoman forces besiege about 10,000 British and Indian troops at Kut on the Tigris; after relief attempts fail, the garrison surrenders on 29 April 1916.",
+      "zh": "奥斯曼军队在底格里斯河畔的库特围困约 1 万名英印军队；解围失败后，守军于 1916 年 4 月 29 日投降。"
+    },
+    "detail": {
+      "en": "Relief attempts cost about 23,000 casualties. About 13,000 men went into captivity, and a third of them died from disease, malnutrition and ill-treatment.",
+      "zh": "几次解围共伤亡约 2.3 万人。约 1.3 万人被俘，其中三分之一死于疾病、营养不良和虐待。"
+    },
+    "sources": [
+      "S136"
+    ],
+    "sensitive": true
+  },
+  {
+    "id": "gallipoli-evacuation",
+    "t": "1915-12-19",
+    "until": "1916-01-09",
+    "at": [
+      26.19,
+      40.045
+    ],
+    "kind": "evacuation",
+    "importance": 2,
+    "title": {
+      "en": "Gallipoli evacuated",
+      "zh": "撤离加里波利"
+    },
+    "summary": {
+      "en": "Entente troops leave Anzac and Suvla on 19–20 December and Cape Helles on 9 January 1916.",
+      "zh": "协约国军队 12 月 19 日至 20 日撤离澳新湾和苏夫拉，1916 年 1 月 9 日撤离赫勒斯角。"
+    },
+    "sources": [
+      "S96"
+    ]
+  },
+  {
+    "id": "kamerun-mora",
+    "t": "1916-02-18",
+    "at": [
+      14.14,
+      11.05
+    ],
+    "kind": "surrender",
+    "importance": 1,
+    "title": {
+      "en": "Mora surrenders: Kamerun taken",
+      "zh": "莫拉投降：喀麦隆失守"
+    },
+    "summary": {
+      "en": "The last German stronghold in Kamerun, the mountain fort of Mora, surrenders, completing the Allied conquest of the colony.",
+      "zh": "喀麦隆最后的德军据点——山地要塞莫拉——投降，协约国完成对这块殖民地的占领。"
+    },
+    "sources": [
+      "S86"
+    ]
+  },
+  {
+    "id": "verdun",
+    "t": "1916-02-21",
+    "until": "1916-12-18",
+    "at": [
+      5.388,
+      49.16
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "germany",
+      "defender": "france"
+    },
+    "casualties": {
+      "france": 379000,
+      "germany": 333000
+    },
+    "result": "defender",
+    "importance": 3,
+    "title": {
+      "en": "Battle of Verdun",
+      "zh": "凡尔登战役"
+    },
+    "summary": {
+      "en": "Germany attacks the French fortress city of Verdun; after ten months the front is back almost where it began.",
+      "zh": "德军进攻法国要塞城市凡尔登；十个月后，战线几乎回到了起点。"
+    },
+    "detail": {
+      "en": "Fort Douaumont fell on 25 February and was retaken on 24 October; Fort Vaux was retaken on 3 November. About 163,000 French and 143,000 German soldiers were killed or went missing, and 216,000 French and 190,000 German soldiers were wounded. Two-thirds to three-quarters of the French army served at Verdun in turn.",
+      "zh": "杜奥蒙堡 2 月 25 日失守，10 月 24 日被夺回；沃堡 11 月 3 日被夺回。法军约 16.3 万、德军约 14.3 万人阵亡或失踪，法军 21.6 万、德军 19 万人负伤。法军的三分之二到四分之三先后轮换到过凡尔登。"
+    },
+    "sources": [
+      "S119",
+      "S121"
+    ]
+  },
+  {
+    "id": "easter-rising",
+    "t": "1916-04-24",
+    "until": "1916-04-29",
+    "at": [
+      -6.2611,
+      53.3493
+    ],
+    "kind": "political",
+    "importance": 2,
+    "title": {
+      "en": "Easter Rising",
+      "zh": "复活节起义"
+    },
+    "summary": {
+      "en": "Irish republicans seize the General Post Office and other buildings in Dublin and proclaim an Irish Republic; they surrender after six days of fighting.",
+      "zh": "爱尔兰共和派占领都柏林邮政总局等建筑，宣布成立爱尔兰共和国；六天战斗后投降。"
+    },
+    "detail": {
+      "en": "485 people died, 54 per cent of them civilians, including 40 children. Fourteen leaders were shot at Kilmainham Gaol between 3 and 12 May, Thomas Kent in Cork on 9 May, and Roger Casement was hanged in London on 3 August.",
+      "zh": "共有 485 人死亡，其中平民占 54%，包括 40 名儿童。5 月 3 日至 12 日，14 名领导人在基尔梅纳姆监狱被枪决；托马斯·肯特 5 月 9 日在科克被处决；罗杰·凯斯门特 8 月 3 日在伦敦被绞死。"
+    },
+    "sources": [
+      "S158",
+      "S159",
+      "S160"
+    ],
+    "sensitive": true
+  },
+  {
+    "id": "asiago",
+    "t": "1916-05-15",
+    "until": "1916-06-27",
+    "at": [
+      11.5,
+      45.91
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "austria-hungary",
+      "defender": "italy"
+    },
+    "result": "inconclusive",
+    "importance": 1,
+    "title": {
+      "en": "Asiago offensive",
+      "zh": "阿夏戈攻势"
+    },
+    "summary": {
+      "en": "An Austro-Hungarian offensive from the Trentino breaks into the Asiago plateau before it is halted; about 230,000 men are lost on both sides.",
+      "zh": "奥匈军队从特伦蒂诺发动攻势，攻入阿夏戈高原后被挡住；双方共损失约 23 万人。"
+    },
+    "sources": [
+      "S130",
+      "S99"
+    ]
+  },
+  {
+    "id": "sykes-picot",
+    "t": "1916-05",
+    "at": [
+      -0.1276,
+      51.5033
+    ],
+    "kind": "political",
+    "importance": 2,
+    "title": {
+      "en": "Sykes–Picot agreement",
+      "zh": "赛克斯—皮科协定"
+    },
+    "summary": {
+      "en": "Britain and France, with Russia's assent, secretly agree how to divide the Ottoman Empire's Arab provinces into zones of control and influence.",
+      "zh": "英法两国在俄国同意下，秘密商定把奥斯曼帝国的阿拉伯省份划分为控制区和势力范围。"
+    },
+    "sources": [
+      "S139",
+      "S138"
+    ]
+  },
+  {
+    "id": "brusilov",
+    "t": "1916-06-04",
+    "until": "1916-09-20",
+    "at": [
+      25.32,
+      50.745
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "russia",
+      "defender": "austria-hungary"
+    },
+    "result": "attacker",
+    "importance": 3,
+    "title": {
+      "en": "Brusilov offensive",
+      "zh": "布鲁西洛夫攻势"
+    },
+    "summary": {
+      "en": "Russian armies under Aleksei Brusilov attack along the whole south-western front, take Lutsk on 7 June and Czernowitz on 18 June, and break the Austro-Hungarian line.",
+      "zh": "布鲁西洛夫指挥的俄军在整个西南战线发起进攻，6 月 7 日攻占卢茨克，6 月 18 日攻占切尔诺夫策，突破奥匈防线。"
+    },
+    "detail": {
+      "en": "Austro-Hungarian losses are estimated at about 1 million (Deutsches Historisches Museum) to 1.5 million including about 400,000 prisoners; Russian losses at about 1 million to 1.5 million.",
+      "zh": "奥匈的损失估计约 100 万（德国历史博物馆）到 150 万，其中被俘约 40 万；俄军的损失约 100 万到 150 万。"
+    },
+    "sources": [
+      "S128",
+      "S129"
+    ]
+  },
+  {
+    "id": "arab-revolt",
+    "t": "1916-06-10",
+    "at": [
+      39.826,
+      21.423
+    ],
+    "kind": "political",
+    "importance": 2,
+    "title": {
+      "en": "Arab Revolt begins",
+      "zh": "阿拉伯起义爆发"
+    },
+    "summary": {
+      "en": "Sharif Hussein bin Ali of Mecca proclaims a revolt against Ottoman rule; his forces attack the Ottoman garrison of Mecca.",
+      "zh": "麦加的谢里夫侯赛因·本·阿里宣布起兵反抗奥斯曼统治，他的部队进攻麦加的奥斯曼守军。"
+    },
+    "sources": [
+      "S137",
+      "S139"
+    ]
+  },
+  {
+    "id": "somme",
+    "t": "1916-07-01",
+    "until": "1916-11-18",
+    "at": [
+      2.7,
+      50.03
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "uk",
+      "defender": "germany"
+    },
+    "casualties": {
+      "uk": 419654,
+      "france": 202559,
+      "germany": 437322
+    },
+    "result": "inconclusive",
+    "importance": 3,
+    "title": {
+      "en": "Battle of the Somme",
+      "zh": "索姆河战役"
+    },
+    "summary": {
+      "en": "British and French armies attack on the Somme; on the first day the British Army loses 57,470 men, 19,240 of them killed.",
+      "zh": "英法军队在索姆河发起进攻；第一天英军就损失 57,470 人，其中阵亡 19,240 人。"
+    },
+    "detail": {
+      "en": "A week-long bombardment of about 1.5 million shells failed to destroy the German wire and dugouts. By 18 November the British had advanced about 8 km and the French about 12 km. German losses are disputed: 437,322 (Denizot) or at least 450,000 (National Army Museum), with higher estimates.",
+      "zh": "持续一周、约 150 万发炮弹的炮击，没能摧毁德军的铁丝网和掩蔽部。到 11 月 18 日，英军推进约 8 公里，法军约 12 公里。德军损失有争议：437,322 人（德尼佐）或至少 45 万（英国国家陆军博物馆），也有更高的估计。"
+    },
+    "sources": [
+      "S119",
+      "S122",
+      "S123"
+    ]
+  },
+  {
+    "id": "central-asia-1916",
+    "t": "1916-07",
+    "until": "1917-02",
+    "at": [
+      78.4,
+      42.49
+    ],
+    "kind": "massacre",
+    "importance": 2,
+    "title": {
+      "en": "Central Asian revolt and its repression",
+      "zh": "中亚起义及其镇压"
+    },
+    "summary": {
+      "en": "A tsarist decree to conscript Central Asian men for labour behind the front sets off a revolt; Russian troops and settlers crush it, and at least 150,000 Kazakhs and Kyrgyz die.",
+      "zh": "沙皇下令征召中亚男子到前线后方服劳役，引发起义；俄军和移民将其镇压，至少 15 万哈萨克人和吉尔吉斯人死亡。"
+    },
+    "detail": {
+      "en": "The decree of 25 June 1916 (Old Style) was to take some 220,000 men aged 19 to 43. Estimates of the dead run from at least 150,000 to more than 250,000; hundreds of thousands of survivors fled across the mountains into Chinese Turkestan. Kyrgyz remember it as the Urkun, the exodus.",
+      "zh": "1916 年 6 月 25 日（俄历）的法令要征召约 22 万名 19 至 43 岁的男子。死亡人数估计从至少 15 万到 25 万以上；数十万幸存者翻山逃入中国新疆。吉尔吉斯人称之为“大逃亡”（Urkun）。"
+    },
+    "sources": [
+      "S140"
+    ],
+    "sensitive": true
+  },
+  {
+    "id": "gorizia",
+    "t": "1916-08-06",
+    "until": "1916-08-17",
+    "at": [
+      13.625,
+      45.944
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "italy",
+      "defender": "austria-hungary"
+    },
+    "casualties": {
+      "italy": 51232,
+      "austria-hungary": 49035
+    },
+    "result": "attacker",
+    "importance": 1,
+    "title": {
+      "en": "Sixth Battle of the Isonzo: Gorizia",
+      "zh": "第六次伊松佐河战役：戈里齐亚"
+    },
+    "summary": {
+      "en": "Italian troops cross the Isonzo and take Gorizia on 8–9 August.",
+      "zh": "意军渡过伊松佐河，8 月 8 日至 9 日攻占戈里齐亚。"
+    },
+    "sources": [
+      "S131",
+      "S99"
+    ]
+  },
+  {
+    "id": "romania-enters",
+    "t": "1916-08-27",
+    "at": [
+      26.1,
+      44.44
+    ],
+    "kind": "political",
+    "importance": 2,
+    "title": {
+      "en": "Romania enters the war",
+      "zh": "罗马尼亚参战"
+    },
+    "summary": {
+      "en": "Romania declares war on Austria-Hungary and invades Transylvania.",
+      "zh": "罗马尼亚对奥匈宣战，出兵特兰西瓦尼亚。"
+    },
+    "sources": [
+      "S132"
+    ]
+  },
+  {
+    "id": "tutrakan",
+    "t": "1916-09-01",
+    "until": "1916-09-06",
+    "at": [
+      26.616,
+      44.046
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "bulgaria",
+      "defender": "romania"
+    },
+    "result": "attacker",
+    "importance": 1,
+    "title": {
+      "en": "Tutrakan",
+      "zh": "图特拉坎"
+    },
+    "summary": {
+      "en": "Bulgarian and German troops take the Romanian Danube fortress of Tutrakan; some 28,000 Romanian soldiers are captured.",
+      "zh": "保加利亚和德国军队攻占罗马尼亚在多瑙河畔的图特拉坎要塞，约 2.8 万名罗马尼亚士兵被俘。"
+    },
+    "sources": [
+      "S132"
+    ]
+  },
+  {
+    "id": "flers-courcelette",
+    "t": "1916-09-15",
+    "until": "1916-09-22",
+    "at": [
+      2.8226,
+      50.0493
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "uk",
+      "defender": "germany"
+    },
+    "result": "attacker",
+    "importance": 1,
+    "title": {
+      "en": "Flers–Courcelette: the first tanks",
+      "zh": "弗莱尔—库尔瑟莱特：第一批坦克"
+    },
+    "summary": {
+      "en": "British tanks go into battle for the first time on the Somme; of 49 earmarked, 32 reach the start line and 18 go into action.",
+      "zh": "英国坦克第一次在索姆河投入战斗：原定 49 辆，32 辆到达出发线，18 辆投入战斗。"
+    },
+    "sources": [
+      "S125"
+    ]
+  },
+  {
+    "id": "belgian-deportations",
+    "t": "1916-10-03",
+    "until": "1917-02",
+    "at": [
+      4.35,
+      50.85
+    ],
+    "kind": "atrocity",
+    "importance": 2,
+    "title": {
+      "en": "Deportation of Belgian workers",
+      "zh": "比利时工人被强行押往德国"
+    },
+    "summary": {
+      "en": "The German army begins deporting Belgian men to Germany for forced labour; about 60,000 are taken in three months.",
+      "zh": "德军开始把比利时男子押往德国强迫劳动；三个月里约有 6 万人被押走。"
+    },
+    "detail": {
+      "en": "About 120,000 Belgians were deported between 1916 and 1918; 2,614 died in deportation.",
+      "zh": "1916–1918 年，约 12 万比利时人被强行押走，2,614 人死在押送途中或劳动地。"
+    },
+    "sources": [
+      "S141"
+    ],
+    "sensitive": true
+  },
+  {
+    "id": "bucharest-falls",
+    "t": "1916-12-06",
+    "at": [
+      26.12,
+      44.43
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "germany",
+      "defender": "romania"
+    },
+    "result": "attacker",
+    "importance": 3,
+    "title": {
+      "en": "Fall of Bucharest",
+      "zh": "布加勒斯特陷落"
+    },
+    "summary": {
+      "en": "German, Austro-Hungarian, Bulgarian and Ottoman forces under August von Mackensen enter Bucharest; most of Romania is occupied.",
+      "zh": "马肯森指挥的德国、奥匈、保加利亚和奥斯曼军队进入布加勒斯特，罗马尼亚大部被占领。"
+    },
+    "detail": {
+      "en": "Of 500,000 Romanian soldiers mobilised in 1916, about 160,000 were killed and 140,000 captured by the end of the campaign.",
+      "zh": "1916 年动员的 50 万罗马尼亚士兵中，到战役结束时约 16 万人阵亡、14 万人被俘。"
+    },
+    "sources": [
+      "S133",
+      "S135",
+      "S134"
+    ]
+  },
+  {
+    "id": "blockade",
+    "t": "1914-11-05",
+    "at": [
+      3.0,
+      56.0
+    ],
+    "kind": "political",
+    "importance": 2,
+    "title": {
+      "en": "North Sea declared a military area",
+      "zh": "北海被宣布为军事区域"
+    },
+    "summary": {
+      "en": "Britain declares the whole North Sea a military area; ships bound for Germany and neutral ports are stopped and searched, and food is treated as contraband.",
+      "zh": "英国宣布整个北海为军事区域；开往德国和中立港口的船只被拦截搜查，粮食被当作禁运品。"
+    },
+    "sources": [
+      "S144",
+      "S145"
+    ]
+  },
+  {
+    "id": "lusitania",
+    "t": "1915-05-07",
+    "at": [
+      -8.53,
+      51.42
+    ],
+    "kind": "disaster",
+    "importance": 3,
+    "title": {
+      "en": "Sinking of the Lusitania",
+      "zh": "卢西塔尼亚号被击沉"
+    },
+    "summary": {
+      "en": "The German submarine U-20 torpedoes the British liner Lusitania off the Old Head of Kinsale; she sinks in under 20 minutes and 1,198 of the 1,959 people aboard die.",
+      "zh": "德国潜艇 U-20 在老金塞尔角外用鱼雷击中英国邮轮卢西塔尼亚号；不到 20 分钟船就沉没，船上 1,959 人中有 1,198 人遇难。"
+    },
+    "detail": {
+      "en": "128 of the dead were citizens of the neutral United States. Germany said the ship carried military supplies; there was a quantity of ammunition on board.",
+      "zh": "遇难者中有 128 名中立国美国的公民。德国说这艘船运载军用物资；船上确实有一批弹药。"
+    },
+    "sources": [
+      "S147",
+      "S148"
+    ],
+    "sensitive": true
+  },
+  {
+    "id": "jutland",
+    "t": "1916-05-31",
+    "until": "1916-06-01",
+    "at": [
+      6.1,
+      56.7
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "germany",
+      "defender": "uk"
+    },
+    "casualties": {
+      "uk": 6094,
+      "germany": 2551
+    },
+    "result": "inconclusive",
+    "importance": 3,
+    "title": {
+      "en": "Battle of Jutland",
+      "zh": "日德兰海战"
+    },
+    "summary": {
+      "en": "The British Grand Fleet and the German High Seas Fleet, about 250 ships in all, fight the war's only full-scale fleet battle off Jutland.",
+      "zh": "英国大舰队与德国公海舰队共约 250 艘舰船在日德兰外海交战，这是一战中唯一一次全面的舰队决战。"
+    },
+    "detail": {
+      "en": "Britain lost 14 ships and Germany 11. The German fleet returned to port and the British blockade continued. The battleship HMS Malaya, funded by the governments of the Federated Malay States, fought in the battle.",
+      "zh": "英国损失 14 艘舰船，德国 11 艘。德国舰队返回港口，英国的封锁继续进行。马来联邦政府出资建造的战列舰马来亚号参加了这场海战。"
+    },
+    "sources": [
+      "S142",
+      "S143"
+    ]
+  },
+  {
+    "id": "turnip-winter",
+    "t": "1916-12",
+    "until": "1917-03",
+    "at": [
+      13.45,
+      52.5
+    ],
+    "kind": "disaster",
+    "importance": 2,
+    "title": {
+      "en": "The turnip winter",
+      "zh": "萝卜之冬"
+    },
+    "summary": {
+      "en": "After a poor potato harvest and under the Allied blockade, German cities live on swede turnips; daily rations fall below 1,000 calories.",
+      "zh": "土豆歉收，又遭协约国封锁，德国城市靠芜菁度日；每天的配给热量不足 1,000 卡。"
+    },
+    "detail": {
+      "en": "A German government study of December 1918 blamed the blockade for 762,796 civilian deaths; historians today estimate 478,500 to 800,000 deaths from hunger-related disease and also point to Germany's own food policy and hoarding.",
+      "zh": "德国政府 1918 年 12 月的研究把 762,796 名平民的死亡归咎于封锁；今天的历史学者估计，死于与饥饿有关的疾病的有 47.85 万到 80 万人，并指出德国自身的粮食政策和囤积也有责任。"
+    },
+    "sources": [
+      "S145",
+      "S146"
+    ],
+    "sensitive": true
+  },
+  {
+    "id": "unrestricted-submarine",
+    "t": "1917-02-01",
+    "at": [
+      -8.0,
+      50.0
+    ],
+    "kind": "political",
+    "importance": 3,
+    "title": {
+      "en": "Unrestricted submarine warfare",
+      "zh": "无限制潜艇战"
+    },
+    "summary": {
+      "en": "Germany declares that from 1 February its U-boats will sink ships in the waters around Britain without warning.",
+      "zh": "德国宣布，自 2 月 1 日起，其 U 艇将在英国周围海域不加警告地击沉船只。"
+    },
+    "sources": [
+      "S149"
+    ]
+  },
+  {
+    "id": "site-anzac-cove",
+    "t": "1915-04-25",
+    "at": [
+      26.2925,
+      40.2442
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Anzac Cove",
+      "zh": "澳新湾"
+    },
+    "summary": {
+      "en": "The beach where Australian and New Zealand troops landed on 25 April 1915; today part of the Gallipoli peninsula's war cemeteries and memorials.",
+      "zh": "1915 年 4 月 25 日澳新军团登陆的海滩；今天是加里波利半岛战争墓地和纪念地的一部分。"
+    },
+    "sources": [
+      "S96"
+    ]
+  },
+  {
+    "id": "site-tsitsernakaberd",
+    "t": "1915-04-24",
+    "at": [
+      44.4892,
+      40.1857
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Tsitsernakaberd memorial, Yerevan",
+      "zh": "埃里温齐采尔纳卡别尔德纪念碑"
+    },
+    "summary": {
+      "en": "The Armenian Genocide memorial in Yerevan, opened in 1967; every year on 24 April thousands of people come here.",
+      "zh": "位于埃里温的亚美尼亚种族灭绝纪念碑，1967 年落成；每年 4 月 24 日都有成千上万的人来到这里。"
+    },
+    "sources": [
+      "S116"
+    ]
+  },
+  {
+    "id": "site-douaumont-ossuary",
+    "t": "1916-02-21",
+    "at": [
+      5.4237,
+      49.2083
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Douaumont ossuary",
+      "zh": "杜奥蒙藏骨堂"
+    },
+    "summary": {
+      "en": "Inaugurated in 1932, the ossuary holds the remains of about 130,000 unidentified soldiers of both sides who fell at Verdun.",
+      "zh": "1932 年落成的藏骨堂，安放着在凡尔登阵亡、无法辨认身份的双方士兵约 13 万人的遗骨。"
+    },
+    "sources": [
+      "S120"
+    ]
+  },
+  {
+    "id": "site-thiepval",
+    "t": "1916-07-01",
+    "at": [
+      2.68569,
+      50.05081
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Thiepval memorial",
+      "zh": "蒂耶普瓦尔纪念碑"
+    },
+    "summary": {
+      "en": "The memorial to the missing of the Somme bears the names of more than 72,000 British and South African soldiers who have no known grave.",
+      "zh": "索姆河失踪者纪念碑，刻着 7.2 万多名没有坟墓的英国和南非士兵的名字。"
+    },
+    "sources": [
+      "S126"
+    ]
+  },
+  {
+    "id": "site-noyelles-chinese-cemetery",
+    "t": "1917-04-19",
+    "at": [
+      1.7225,
+      50.1865
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Chinese cemetery, Noyelles-sur-Mer",
+      "zh": "努瓦耶勒华工墓地"
+    },
+    "summary": {
+      "en": "The British Chinese Labour Corps had its base and hospital at Noyelles-sur-Mer; its cemetery at Nolette holds the graves of Chinese labourers who died in France.",
+      "zh": "英方华工团的大本营和医院设在努瓦耶勒；诺莱特的墓地里安葬着死在法国的华工。"
+    },
+    "sources": [
+      "S150",
+      "S151"
+    ]
   }
 ]
