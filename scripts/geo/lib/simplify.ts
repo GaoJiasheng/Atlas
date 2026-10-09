@@ -67,6 +67,7 @@ import { parseArgs } from 'node:util';
 import { feature as topoFeature } from 'topojson-client';
 import type { Feature, FeatureCollection, Position } from 'geojson';
 import { areaFeatures, log, mapshaper, mapshaperApi, pointInPolygon, readJson, toFc, warn } from './common';
+import { ringIssues } from './rings';
 import type { Box } from './manifest';
 import { openTopic, repoPath } from './topic';
 
@@ -585,6 +586,14 @@ async function main(): Promise<void> {
       `(budget ${(budget / 1024).toFixed(0)} KB = ${BUDGET_MB} MB × ${ids.length}/${PLANNED_KEYFRAMES}), ${result.topo.arcs.length} arcs`,
   );
   if (size > budget) warn('control.json is over budget');
+  const rings = ringIssues(
+    ids.flatMap((id) => {
+      const fc = topoFeature(result.topo as unknown as Topology, result.topo.objects[id] as unknown as TopoObject) as unknown as FeatureCollection;
+      return fc.features.flatMap((f) => (f.geometry?.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry?.type === 'MultiPolygon' ? f.geometry.coordinates : []));
+    }),
+  );
+  log(`rings: ${rings.rings}, zero-area ${rings.zeroArea}, self-crossing ${rings.selfCrossing}`);
+  if (rings.zeroArea || rings.selfCrossing) warn('control.json has zero-area or self-crossing rings (MapLibre draws wedges from them)');
   if (!values['no-measure']) {
     const d = measure(JSON.parse(readFileSync(file, 'utf8')).topology as Topo, ids, originals, true, coast);
     log(`deviation of original focus-box vertices from the written boundary (km): p50 ${d.p50.toFixed(2)}, p95 ${d.p95.toFixed(2)}, p99 ${d.p99.toFixed(2)}, max ${d.max.toFixed(2)} (${d.n} vertices)`);

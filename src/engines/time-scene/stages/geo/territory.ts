@@ -34,6 +34,7 @@ import {
   placeLabels,
   pxPerUnit,
   signedDistance,
+  textAtBlend,
   tierFor,
   TIER_MIN_AREA,
   type Box,
@@ -70,6 +71,8 @@ export interface TerritoryLabels {
 export const MAX_TERRITORY_LABELS = 24;
 /** Same holder + text in both keyframes and closer than this (px): one moving label. */
 const PAIR_PX = 40;
+/** Same holder with different text (Russia -> Soviet Russia) closer than this (px): one moving label that switches its text at half the crossfade. */
+const RETEXT_PX = 120;
 /** A label may be this much wider than the inscribed circle (labels are wide, circles round). */
 const FIT_W = 1.6;
 const FIT_H = 1.1;
@@ -86,6 +89,17 @@ interface Shown {
   off: { x: number; y: number };
   w: number;
   h: number;
+  /** What the label says: one text, or the outgoing then the incoming one of a pair (the switch is at half the crossfade). */
+  texts: TextBox[];
+  tier: Tier;
+}
+
+interface TextBox {
+  en: string;
+  zh: string;
+  text: string;
+  w: number;
+  h: number;
 }
 
 interface Candidate extends PlaceCandidate {
@@ -93,6 +107,7 @@ interface Candidate extends PlaceCandidate {
   en: string;
   zh: string;
   tier: Tier;
+  texts: TextBox[];
   role: Shown['role'];
   from: { x: number; y: number } | null;
   to: { x: number; y: number } | null;
@@ -237,7 +252,7 @@ export function createTerritoryLabels(options: { map: MlMap; container: HTMLElem
     const candidates: Candidate[] = [];
     // Also one gliding label when each anchor lies inside the other keyframe's area (the same territory, reshaped).
     const inside = (p: Raw, q: Raw) => signedDistance(p.g.mx, p.g.my, q.g.poly) > 0 && signedDistance(q.g.mx, q.g.my, p.g.poly) > 0;
-    for (const pair of pairCrossfade(prev, next, PAIR_PX, inside)) {
+    for (const pair of pairCrossfade(prev, next, PAIR_PX, inside, RETEXT_PX)) {
       const a = pair.prev;
       const z = pair.next;
       const one = (a ?? z)!;
@@ -248,11 +263,13 @@ export function createTerritoryLabels(options: { map: MlMap; container: HTMLElem
       const opacity = role === 'both' ? 1 : role === 'prev' ? 1 - blendNow : blendNow;
       const tier0 = tierFor(area);
       if (!tier0 || opacity < 0.02) continue;
-      let fit: { tier: Tier; w: number; h: number } | null = null;
+      // A pair whose text differs says the outgoing one, then the incoming one; both must fit.
+      const says = a && z && a.text !== z.text ? [a, z] : [one];
+      let fit: { tier: Tier; w: number; h: number; texts: TextBox[] } | null = null;
       for (let t = tier0; t <= 3; t++) {
-        const size = measure(one.en, one.zh, t as Tier);
-        if (size.w > 0 && size.w <= 2 * r * FIT_W && size.h <= 2 * r * FIT_H) {
-          fit = { tier: t as Tier, ...size };
+        const texts = says.map((q) => ({ en: q.en, zh: q.zh, text: q.text, ...measure(q.en, q.zh, t as Tier) }));
+        if (texts.every((q) => q.w > 0 && q.w <= 2 * r * FIT_W && q.h <= 2 * r * FIT_H)) {
+          fit = { tier: t as Tier, w: Math.max(...texts.map((q) => q.w)), h: Math.max(...texts.map((q) => q.h)), texts };
           break;
         }
       }
@@ -270,6 +287,7 @@ export function createTerritoryLabels(options: { map: MlMap; container: HTMLElem
         en: one.en,
         zh: one.zh,
         tier: fit.tier,
+        texts: fit.texts,
         x: x0,
         y: y0,
         w: fit.w,
@@ -318,15 +336,14 @@ export function createTerritoryLabels(options: { map: MlMap; container: HTMLElem
           off: { x: 0, y: 0 },
           w: 0,
           h: 0,
+          texts: c.texts,
+          tier: c.tier,
         };
         shown.set(c.key, s);
       }
-      if (s.el.dataset.text !== c.text || s.el.dataset.tier !== String(c.tier)) {
-        s.el.dataset.text = c.text;
-        s.el.dataset.tier = String(c.tier);
-        s.el.dataset.holder = c.holder;
-        fill(s.el, c.en, c.zh);
-      }
+      s.texts = c.texts;
+      s.tier = c.tier;
+      s.el.dataset.holder = c.holder;
       s.from = c.from;
       s.to = c.to;
       const o = c.alt >= 0 ? c.offsets[c.alt] : undefined;
@@ -338,14 +355,25 @@ export function createTerritoryLabels(options: { map: MlMap; container: HTMLElem
     reproject(blendNow);
   }
 
+  /** Put the right text in a label for the blend (a gliding pair switches at half the crossfade). */
+  function say(s: Shown, blend: number) {
+    const q = s.texts.length > 1 ? textAtBlend(s.texts[0]!, s.texts[1]!, blend) : s.texts[0]!;
+    if (s.el.dataset.text === q.text && s.el.dataset.tier === String(s.tier)) return q;
+    s.el.dataset.text = q.text;
+    s.el.dataset.tier = String(s.tier);
+    fill(s.el, q.en, q.zh);
+    return q;
+  }
+
   function reproject(blend?: number) {
     if (destroyed || shown.size === 0) return;
     if (blend !== undefined) blendNow = blend;
     const width = container.clientWidth;
     for (const s of shown.values()) {
       const { at, opacity } = stateOf(s, blendNow);
+      const q = say(s, blendNow);
       const p = screenOf(at, width);
-      s.el.style.transform = `translate(${(p.x - s.w / 2).toFixed(1)}px,${(p.y - s.h / 2).toFixed(1)}px)`;
+      s.el.style.transform = `translate(${(p.x - q.w / 2).toFixed(1)}px,${(p.y - q.h / 2).toFixed(1)}px)`;
       const o = opacity.toFixed(2);
       if (s.el.style.opacity !== o) s.el.style.opacity = o;
     }

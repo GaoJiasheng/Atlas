@@ -312,5 +312,32 @@ entente 协约国 · central-powers 同盟国 · ultimatum 最后通牒 · mobil
 
 | 步骤 | 提交 | 内容 |
 |---|---|---|
-| 1 | 未提交（2026-10-09） | `scripts/new-topic.ts ww1` 脚手架；`entities.json` 43 个实体；`presets.json` 10 个；`glossary.json` 16 个词；章节 00–09 frontmatter 存根（时间、镜头、图层、一句话 summary；背景章含阅读说明），正文只有 summary 一句 |
-| 2 | 未提交（2026-10-09） | K1 1914-07-28、K9 1919-06-28：CShapes + OHM 数据集查询，无配准；`control.json` 600 KB（`--fine 1.5`）；并排图 `docs/screenshots/ww1/geo-K1.png`、`geo-K9.png`；`scripts/geo/ww1/SOURCES-GEO.md`、`data/SOURCES.md` 地图段 |
+| 1–2 | `3ec6305` | spec 与脚手架：`scripts/new-topic.ts ww1`；43 个实体、10 个预设、名词表、章节 00–09 frontmatter 存根；K1 1914-07-28、K9 1919-06-28（CShapes + OHM 数据集查询，无配准；并排图 `docs/screenshots/ww1/geo-K1.png`、`geo-K9.png`） |
+| 1（引擎） | `e277b78` | `blocLabels`（§8-1）、`disaster` 事件种类（§8-2）、skill 修订 |
+| 3 | `bc99ac3` | 背景章与第 00–03 章：27 个事件、11 条行军、75 条来源、节拍 |
+| 4a | `bf6c975` | K2–K8：西点军校前线图配准（维基共享资源）+ OHM + CShapes；前线描摹工具 |
+| 4b | `70a2727` | 第 04–06 章：49 个事件、14 条行军、81 条来源 |
+| 6（几何） | `7fa2355` | 量化后清环（合并近点、去掉 < 1 km² 的环）、跨 180° 经线的环拆开；`lines` 描摹工具进 lib；ww1 `control.json` 重建 |
+| 4b | `0a9618b` | 第 07–09 章：46 个事件、9 条行军、85 条来源；十章全部写完 |
+| 5–7 | 本轮 | 引擎：控制区 source `tolerance: 0.05`（BC、巴西、意大利的楔形）；实体引线锚点取画面内最大面；`pnpm shoot --beats` 列出每章 `state.highlight` 里没有标注的 id；领土名称同一 holder 文字不同（Russia → Soviet Russia）时滑动并在 50 % 处换字。数据：第 06 章首次出现 armistice 处包 `<Term>`；第 07、08 章章节镜头放宽，使 `usa-enters`、`china-enters`、`influenza` 在画面内；名词 21 个，每个都用上（补了 dreadnought）。`simplify.ts` 末尾打印零面积 / 自相交环数（ww1 为 0 / 0，`tests/geo-rings.test.ts`）。skill 补了 9 条模板反馈；`status: published`；`docs/screenshots/ww1/` 重拍规范集 |
+
+## 12. 已知差距
+
+地图（细节见 `data/SOURCES.md` 与 `scripts/geo/ww1/SOURCES-GEO.md`）：
+
+- **K9 是"和约版图"**：中欧按签约日之后的条约边界（圣日耳曼、特里亚农）画，不是 1919-06-28 当天各地的实际控制；奥斯曼占领区、希腊在士麦那登陆没有画。
+- **内战期间的俄国只有一个 holder**（`russia`），白军、乌克兰、外高加索各政权没有分开；阿尔巴尼亚也是一个单元。
+- **奥斯曼的阿拉伯各省（后来的委任统治地）没有分区**。
+- **塞尔维亚人—克罗地亚人—斯洛文尼亚人王国在地图上标"塞尔维亚"**：实体不能随时间改名（§8-3）。
+- **西沃里尼亚画在 `germany` 名下**：它实际由奥匈占领，东线德奥占领区合成了一个 holder，标签写了 Ober Ost 与华沙总督区。
+- **维捷布斯克、普斯科夫一线没有画到。**
+- **加利波利的桥头堡在 50 m 底图上太小**，看不清。
+- **莫纳斯提尔（比托拉）一带的前线弯曲没有画**：1916 年 11 月 19 日协约国收复该城，K5 里未体现，留待后续。
+- **K5（1916-12-18）罗马尼亚一带最多偏 60 km**：画的是两周后（1917-01-01）的前线，布加勒斯特以东的占领区在布泽乌—布勒伊拉一带最多大 60 km。
+
+数字与来源：
+
+- **平民死亡总数是把 Prost 表 3 的各栏相加**得到的，Prost 本人没有给世界总数，并提醒这些数字不确定；`sources.json` 的 `note` 记了加法。
+- **S153、S159、S127 只看到搜索摘要**，没有读到原文；上线前请人工核对。
+
+ww2 的 `control.json` 早于清环步骤，有 137 个自相交环（画面上没有可见楔形）；下次重建 ww2 时一并清掉。

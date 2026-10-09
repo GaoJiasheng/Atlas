@@ -4,6 +4,8 @@
 - [ ] `pnpm check`、`pnpm validate`（0 error、0 warning）、`pnpm test`、`pnpm build`、`pnpm e2e` 全绿
 - [ ] `pnpm shoot <slug> --keys --layout`：键位 0 失败、六个尺寸 0 布局问题、console 干净、无外部请求
 - [ ] `pnpm shoot <slug> --beats`：0 节拍失败；"unlabelled highlights"清单为空或每条都有理由
+- [ ] **没有高亮 id 在章节镜头下落在屏外**：同一次 `--beats` 末尾的"chapter highlights"清单为空（每章自己的 `state.highlight`）；有就调章节镜头 zoom / 中心，不是删 id（id 与本章无关才删）
+- [ ] **没有自相交 / 零面积环**：`simplify.ts` 末尾打印 `rings: N, zero-area 0, self-crossing 0`（0 / 0）；新主题把 slug 加进 `tests/geo-rings.test.ts`
 
 ## 内容
 - [ ] 每个数字都有 `<Num s>`；事件的数字有 `sources`；冲突来源列了区间

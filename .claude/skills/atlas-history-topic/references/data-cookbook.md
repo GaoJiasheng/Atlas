@@ -10,7 +10,7 @@
 
 ## 时间 `t`
 
-- 三种精度：`1942`、`1942-02`、`1942-02-15`（公元前加 `-`）；地质时间 `{ "ma": 200 }`。
+- 三种精度：`1942`、`1942-02`、`1942-02-15`（公元前加 `-`）；地质时间 `{ "ma": 200 }`。来源只给到月份的事件（ww1：`turnip-winter` 的 `1916-12`、`influenza` 的 `1918-03`）**允许写月精度 `t`**，不要编造日期；`until` 同理。
 - 换算成数值时取**时段起点**（`1942-02` = 2 月 1 日）。store 和 URL 里的 `t` 是日精度。历史主题统一写到天。
 - 章节顺序必须等于时间顺序（ww2 有测试）；章节节点位置 = 本章累积目标的 `t`。
 
@@ -73,10 +73,10 @@
 | `bombing` | 空袭、轰炸城市（含原子弹） | `sides` | 圆点 |
 | `siege` | 围城（有 `until`） | — | 外加虚线环 |
 | `massacre` / `atrocity` | 屠杀 / 其他暴行（各方都用） | — | 空心方块（墨色） |
-| `disaster` | 流感、饥荒、击沉客轮等非作战灾难（不分阵营，不写 `sides`） | — | 空心三角（墨色），图例“Disaster / 灾难” |
+| `disaster` | 流感、饥荒、击沉客轮等非作战灾难（不分阵营，不写 `sides`） | — | 空心三角（墨色），图例“Disaster / 灾难”；ww1 例：`lusitania`（`t` 到天）、`turnip-winter`（`t: "1916-12"`、`until: "1917-03"`，德国饥荒，来源只到月）、`influenza`（`1918-03` 至 `1919-04`，`at` 取一个有记录的城市，各地另写 `influenza-singapore`） |
 | `surrender` / `political` | 投降、条约、宣战、政权变化 | — | 圆点 |
 | `evacuation` / `liberation` | 撤退、解放（冷色） | — | 冷色圆点 |
-| `site` | 静态地点（监狱、纪念碑） | — | `sites` 图层的菱形，不进时间轴 |
+| `site` | 静态地点（监狱、纪念碑） | — | `sites` 图层的菱形，不进时间轴；ww1 例：`site-noyelles-chinese-cemetery`、`site-hall-of-mirrors`、`site-singapore-cenotaph`（只写位置和名字，`t` 取事件 / 设立日期） |
 
 - `until` 给持续事件（围城、战役）；`importance` 1–3（3 最大）；`forces` / `casualties` 是 `{ 实体 id: 人数 }`，恰好两方时画成双方并排计数器；`result`：`attacker | defender | draw | inconclusive`。
 - `summary` 一句话；长内容放 `detail`（inspector 里默认收起）；数字来源写 `sources`。
@@ -84,6 +84,18 @@
 ## presets.json
 
 `{ "presets": [{ "id": "singapore-island", "label": { "en": "Singapore", "zh": "新加坡" }, "camera": { "center": [103.82, 1.35], "zoom": 9.2 } }] }` —— VIEW 按钮（数字键从 3 起）和正文 `<FlyTo preset>` 用。只放地理镜头。
+
+**镜头 zoom 经验值**（1920 px 宽的舞台；MapLibre 512 px 世界，每 +1 放大一倍）：
+
+| zoom | 大约框住 |
+|---|---|
+| 1.4 | 整个世界（lng ±180 ≈ 1500 px） |
+| 2.4 | 一个半球 |
+| 3.6 | 欧洲（西欧到乌拉尔） |
+| 5.5 | 一个国家（法国、土耳其） |
+| 10 | 一座岛 / 一个大城市（新加坡） |
+
+每 +1 zoom 视野宽度减半。屏幕每度经度 ≈ `512 × 2^zoom / 360` px（赤道），纬度方向随 1/cos(lat) 放大。高亮 id 多的章，先算最远两个 id 的经度差是否 < 舞台宽 ÷ 每度像素，再定 zoom；框不住就拉远或换中心，不要丢 id。
 
 ## sources.json
 

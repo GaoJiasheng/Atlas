@@ -12,6 +12,7 @@
  *   pnpm shoot ww2 --beats                           # every presentation beat -> shots/<topic>/<locale>-<theme>/beat-<chapter>-<n>.png
  *   pnpm shoot sample-space --perf --json out.json   # renderer numbers per shot
  *
+ * `--beats` also lists the highlight ids of each chapter's own state that have no label on screen at the chapter camera (listed, not failed).
  * `--locale` and `--theme` take a value, a comma list, or `all` (default: en, paper).
  * `--keys` / `--layout` / `--beats` replace the shot run unless shot names or `--shots` are given.
  *
@@ -89,6 +90,8 @@ interface RunReport {
   beatFailures: string[];
   /** Beats whose highlighted ids have no label on screen (content issues, not failures). */
   beatNotes: string[];
+  /** Chapters whose own `state.highlight` has ids with no label on screen at the chapter camera (content issues, not failures). */
+  chapterNotes: string[];
   /** JavaScript the page loaded (gzip -9 of the files in dist/). */
   js: { files: number; gzKB: number };
   logs: { type: string; text: string }[];
@@ -361,6 +364,25 @@ async function runBeats(s: Session, o: Options, out: string, report: RunReport):
   console.log(`  beats -> ${out} (${beats.length})`);
 }
 
+/** Highlight ids of each chapter's own state with no label on screen at the chapter camera: listed, never a failure. */
+async function runChapterHighlights(s: Session, report: RunReport): Promise<void> {
+  const chapters = await s.ev(() => window.__atlas!.chapters());
+  for (const c of chapters) {
+    await s.apply({ chapter: c, wait: 1200 });
+    const missing = await s.page.evaluate(() => {
+      const shown = new Set(
+        [...document.querySelectorAll<HTMLElement>('.ts-co')].filter((e) => e.dataset.hidden === 'false' && e.style.opacity === '1').map((e) => e.dataset.id),
+      );
+      const highlight = (window.__atlas!.state() as { highlight?: string[] }).highlight ?? [];
+      return highlight.filter((id) => !shown.has(id));
+    });
+    if (missing.length) report.chapterNotes.push(`${c}: no label for ${missing.join(', ')}`);
+  }
+  await s.apply({ wait: 300 });
+  console.log(report.chapterNotes.length ? `  chapter highlights with no label on screen (${report.chapterNotes.length}):` : '  chapter highlights: all on screen');
+  for (const n of report.chapterNotes) console.log(`    ${n}`);
+}
+
 /* ------------------------------------------------------------------ */
 /* Keys                                                                */
 /* ------------------------------------------------------------------ */
@@ -614,12 +636,14 @@ async function main(): Promise<number> {
         const out = join(ROOT, 'shots', o.topic, `${locale}-${theme}`);
         console.log(`\n== ${o.topic} · ${locale} · ${theme} · ${o.size.join('x')}`);
         const s = await Session.open(browser, origin, o.topic, locale, theme, o.size);
-        const report: RunReport = { topic: o.topic, locale, theme, size: o.size.join('x'), shots: {}, keys: [], layout: [], beatFailures: [], beatNotes: [], js: { files: 0, gzKB: 0 }, logs: [] };
+        const report: RunReport = { topic: o.topic, locale, theme, size: o.size.join('x'), shots: {}, keys: [], layout: [], beatFailures: [], beatNotes: [], chapterNotes: [], js: { files: 0, gzKB: 0 }, logs: [] };
         try {
           if (!checksOnly) await runShots(s, o, out, report);
           if (o.beats) {
             console.log('  -- beats');
             await runBeats(s, o, out, report);
+            console.log('  -- chapter highlights');
+            await runChapterHighlights(s, report);
           }
           if (o.keys) {
             console.log('  -- keys');

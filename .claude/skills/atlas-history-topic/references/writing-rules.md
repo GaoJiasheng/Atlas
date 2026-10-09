@@ -18,7 +18,10 @@
 ## 数字
 
 - 正文写取整值加"约 / about"，精确值放细看；每个数字包 `<Num s="S#">…</Num>`，多个来源 `s="S3,S7"`。
-- 来源冲突时并列区间（"20 万到 30 万"），在 `sources.json` 的 `note` 里写清各自出处，不偷偷选一个。
+- `<Num>` 只包**数量**（人数、艘数、公里、百分比、金额）：`<Num s="S8">20</Num> dreadnought battleships`。**不包日期、年份、单位名、序数和章节号**（`1916`、`4 August`、`the 2nd Army`、`Treaty of 1919` 都不包）；包的是数字本身，单位词留在外面。
+- 来源冲突时并列区间（"20 万到 30 万"），区间两端**各用自己的来源**：`<Num s="S216">17 million</Num> and at least <Num s="S217">50 million</Num>`（ww1 流感），不要用一个来源号包住整个区间；在 `sources.json` 的 `note` 里写清各自出处，不偷偷选一个。再例：伤亡 `from <Num s="S120">1.7 million</Num> to <Num s="S121">2.4 million</Num>`；多个来源给同一个数才写 `s="S3,S7"`。
+- 行军路线（`path`）按真实路线取点；短路线（几十到一两百公里、一次渡海）**7 个途经点**够用，长路线再加，不要为凑数加点。
+- **有些站点会挡爬虫 / 搜索摘要**（Britannica、1914-1918-online、IWM、CWGC、PubMed）：用浏览器工具把原文读一遍再引用，`sources.json` 只写你**读到并核对过**的内容；只看到搜索摘要的来源在 `note` 里写明"据搜索摘要"，并列入 spec 的已知差距，等人工核对。
 - `sources.json` 改完跑 `pnpm tsx scripts/sources-md.ts <slug>` 重写 `SOURCES.md` 的生成块。
 
 ## 细看 `<More>`

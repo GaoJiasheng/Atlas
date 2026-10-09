@@ -138,9 +138,15 @@ export function pointAlong(coords: readonly Pos[], fraction: number): LngLat | n
   return slice[slice.length - 1] ?? null;
 }
 
-/** Centroid of the largest outer ring (label anchor for an area). */
-export function areaLabelPoint(polygons: readonly (readonly (readonly Pos[])[])[]): LngLat | null {
+/**
+ * Centroid of the largest outer ring (label anchor for an area). With
+ * `onScreen`, the largest ring whose centroid passes it (an empire's home
+ * polygon when its largest colony is off the stage); if none passes, the
+ * largest overall. Same rule as the territory labels.
+ */
+export function areaLabelPoint(polygons: readonly (readonly (readonly Pos[])[])[], onScreen?: (at: LngLat) => boolean): LngLat | null {
   let best: { area: number; x: number; y: number } | null = null;
+  let bestOn: { area: number; x: number; y: number } | null = null;
   for (const poly of polygons) {
     const ring = poly[0];
     if (!ring || ring.length < 3) continue;
@@ -157,9 +163,12 @@ export function areaLabelPoint(polygons: readonly (readonly (readonly Pos[])[])[
     }
     if (a === 0) continue;
     const area = Math.abs(a / 2);
-    if (!best || area > best.area) best = { area, x: cx / (3 * a), y: cy / (3 * a) };
+    const c = { area, x: cx / (3 * a), y: cy / (3 * a) };
+    if (!best || area > best.area) best = c;
+    if (onScreen && onScreen([c.x, c.y]) && (!bestOn || area > bestOn.area)) bestOn = c;
   }
-  return best ? [best.x, best.y] : null;
+  const pick = bestOn ?? best;
+  return pick ? [pick.x, pick.y] : null;
 }
 
 /**
