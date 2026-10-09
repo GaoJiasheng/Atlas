@@ -99,6 +99,8 @@ export function createLeaders(options: {
   onSelect(id: string): void;
   /** Called after every re-measure (the controller places the scale bar). */
   onBand?(band: Band): void;
+  /** Which `[data-hud-panel]` blocks count as obstacles (default all). PRESENTATION ignores the HUD panels that are still fading out. */
+  panelFilter?(panel: Element): boolean;
 }): LeaderSystem {
   const { map, container, labelRoot } = options;
   const entries = new Map<string, Entry>();
@@ -149,6 +151,7 @@ export function createLeaders(options: {
   const fill = (e: Entry) => {
     const { item, el } = e;
     el.dataset.kind = item.kind;
+    el.dataset.id = item.id;
     el.dataset.pinned = String(item.pinned);
     el.setAttribute('aria-label', `${item.en}${item.zh ? ` · ${item.zh}` : ''}`);
     el.replaceChildren();
@@ -227,6 +230,7 @@ export function createLeaders(options: {
     const obstacles: DOMRect[] = [];
     const panels: DOMRect[] = [];
     for (const el of scene ? scene.querySelectorAll('[data-hud-panel]') : []) {
+      if (options.panelFilter && !options.panelFilter(el)) continue;
       if (!observed.has(el)) {
         observed.add(el);
         resizeObserver.observe(el);

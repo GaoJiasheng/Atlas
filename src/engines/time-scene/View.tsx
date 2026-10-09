@@ -387,6 +387,11 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   useEffect(() => () => stopAudio(), [stopAudio]);
   // Leader labels for the beat's highlighted ids only (the caption and the map agree).
   useEffect(() => controller?.setPresentation(presenting), [controller, presenting]);
+  // The caption card mounts / changes size with each beat: labels re-measure around it at once.
+  const beatIndex = beat?.index ?? -1;
+  useEffect(() => {
+    if (beatIndex >= 0) controller?.refreshLabels();
+  }, [controller, beatIndex]);
 
   /* ---------- legend ---------- */
   const legend = useMemo<LegendItem[]>(() => {
