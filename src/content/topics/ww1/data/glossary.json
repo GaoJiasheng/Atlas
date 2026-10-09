@@ -255,6 +255,49 @@
       "see": [
         "blockade"
       ]
+    },
+    {
+      "id": "soviet",
+      "term": {
+        "en": "Soviet",
+        "zh": "苏维埃"
+      },
+      "definition": {
+        "en": "Russian for 'council'. In 1917 workers and soldiers elected soviets in Petrograd and other cities; the Bolsheviks seized power in the name of the soviets, and the state they built was later called the Soviet Union.",
+        "zh": "俄语“会议、委员会”的意思。1917 年，彼得格勒等城市的工人和士兵选出苏维埃；布尔什维克以苏维埃的名义夺取政权，他们建立的国家后来称为苏联。"
+      },
+      "see": [
+        "bolsheviks"
+      ]
+    },
+    {
+      "id": "fourteen-points",
+      "term": {
+        "en": "Fourteen Points",
+        "zh": "十四点"
+      },
+      "definition": {
+        "en": "The peace programme that US President Woodrow Wilson set out on 8 January 1918: open diplomacy, free seas and trade, fewer arms, the restoration of occupied lands, new borders drawn along lines of nationality, and a League of Nations.",
+        "zh": "美国总统威尔逊在 1918 年 1 月 8 日提出的和平纲领：公开外交、航海与贸易自由、裁减军备、恢复被占领土、按民族界线划定新边界，以及成立国际联盟。"
+      },
+      "see": [
+        "self-determination",
+        "league-of-nations"
+      ]
+    },
+    {
+      "id": "stormtroopers",
+      "term": {
+        "en": "Storm troops",
+        "zh": "突击部队"
+      },
+      "definition": {
+        "en": "Small, specially trained assault groups used by the German army, especially in 1918. After a short, intense bombardment they slipped through weak points in the enemy line and pushed on into the rear, leaving strongpoints for the troops behind them.",
+        "zh": "德国军队使用的经过专门训练的小股突击队，1918 年用得最多。在短促猛烈的炮击之后，他们从对方防线的薄弱处渗透进去，向纵深推进，把坚固据点留给后续部队。"
+      },
+      "see": [
+        "trench-warfare"
+      ]
     }
   ]
 }
