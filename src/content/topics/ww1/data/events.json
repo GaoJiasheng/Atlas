@@ -2135,5 +2135,1225 @@
       "S150",
       "S151"
     ]
+  },
+  {
+    "id": "zimmermann",
+    "t": "1917-03-01",
+    "at": [
+      -99.133,
+      19.433
+    ],
+    "kind": "political",
+    "importance": 2,
+    "title": {
+      "en": "Zimmermann telegram made public",
+      "zh": "齐默尔曼电报曝光"
+    },
+    "summary": {
+      "en": "American newspapers publish a German telegram, intercepted by British codebreakers, offering Mexico an alliance and the return of Texas, New Mexico and Arizona.",
+      "zh": "美国报纸刊出一封被英国密码破译人员截获的德国电报：德国提议与墨西哥结盟，并许诺让墨西哥收回得克萨斯、新墨西哥和亚利桑那。"
+    },
+    "detail": {
+      "en": "German Foreign Secretary Arthur Zimmermann sent it on 16 January 1917 to his minister in Mexico City, to be used if the United States entered the war. Britain gave the decoded text to President Wilson on 24 February. Mexico did not take up the offer.",
+      "zh": "德国外交大臣阿图尔·齐默尔曼 1917 年 1 月 16 日把电报发给驻墨西哥城公使，准备在美国参战时使用。英国 2 月 24 日把破译的电文交给威尔逊总统。墨西哥没有接受这一提议。"
+    },
+    "sources": [
+      "S164",
+      "S165"
+    ]
+  },
+  {
+    "id": "february-revolution",
+    "t": "1917-03-08",
+    "until": "1917-03-16",
+    "at": [
+      30.376,
+      59.948
+    ],
+    "kind": "political",
+    "importance": 3,
+    "title": {
+      "en": "February Revolution in Petrograd",
+      "zh": "彼得格勒二月革命"
+    },
+    "summary": {
+      "en": "Bread protests and strikes in Petrograd turn into revolution when the garrison joins the crowds; a soviet of workers and soldiers forms, and on 15 March Tsar Nicholas II abdicates.",
+      "zh": "彼得格勒的面包抗议和罢工在卫戍部队倒向人群后演变成革命；工人和士兵组成苏维埃，3 月 15 日沙皇尼古拉二世退位。"
+    },
+    "detail": {
+      "en": "Russia still used the Julian calendar, 13 days behind: the revolution began on 23 February Old Style, hence its name. The Duma committee formed a Provisional Government, which met in the Tauride Palace alongside the Petrograd Soviet.",
+      "zh": "俄国当时仍用儒略历，比公历晚 13 天：革命始于俄历 2 月 23 日，因而称“二月革命”。杜马临时委员会组成临时政府，与彼得格勒苏维埃同在塔夫利宫办公。"
+    },
+    "sources": [
+      "S162",
+      "S163"
+    ]
+  },
+  {
+    "id": "usa-enters",
+    "t": "1917-04-06",
+    "at": [
+      -77.009,
+      38.89
+    ],
+    "kind": "political",
+    "importance": 3,
+    "title": {
+      "en": "The United States declares war on Germany",
+      "zh": "美国对德宣战"
+    },
+    "summary": {
+      "en": "After Germany's return to unrestricted submarine warfare and the Zimmermann telegram, Congress declares war; the House votes 373 to 50.",
+      "zh": "德国恢复无限制潜艇战、齐默尔曼电报曝光之后，美国国会宣战；众议院以 373 票对 50 票通过。"
+    },
+    "detail": {
+      "en": "President Wilson asked Congress for war on 2 April. The United States fought as an 'associated power' rather than a formal ally of the Entente. About 2,084,000 American soldiers reached France by the end of the war.",
+      "zh": "威尔逊总统 4 月 2 日请求国会宣战。美国以“合作国”身份参战，没有成为协约国的正式盟国。到战争结束，约 208.4 万名美军士兵抵达法国。"
+    },
+    "sources": [
+      "S166",
+      "S167",
+      "S192"
+    ]
+  },
+  {
+    "id": "arras-vimy",
+    "t": "1917-04-09",
+    "until": "1917-05-16",
+    "at": [
+      2.774,
+      50.38
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "uk",
+      "defender": "germany"
+    },
+    "result": "inconclusive",
+    "importance": 2,
+    "title": {
+      "en": "Arras and Vimy Ridge",
+      "zh": "阿拉斯与维米岭"
+    },
+    "summary": {
+      "en": "British and Dominion troops attack at Arras; the four divisions of the Canadian Corps take Vimy Ridge in four days.",
+      "zh": "英国及各自治领军队在阿拉斯发起进攻；加拿大军团的四个师在四天内攻下维米岭。"
+    },
+    "detail": {
+      "en": "The Battle of Arras lasted from 9 April to 16 May 1917 and was meant to draw German reserves away from the French offensive on the Aisne. At Vimy, 9 to 12 April, the Canadians had 10,602 casualties, 3,598 of them killed.",
+      "zh": "阿拉斯战役从 1917 年 4 月 9 日打到 5 月 16 日，目的是把德军预备队从埃纳河的法军攻势那里引开。4 月 9 日至 12 日的维米岭战斗中，加拿大军伤亡 10,602 人，其中阵亡 3,598 人。"
+    },
+    "sources": [
+      "S170",
+      "S171"
+    ]
+  },
+  {
+    "id": "chemin-des-dames",
+    "t": "1917-04-16",
+    "until": "1917-05-09",
+    "at": [
+      3.66,
+      49.44
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "france",
+      "defender": "germany"
+    },
+    "result": "defender",
+    "importance": 3,
+    "title": {
+      "en": "Nivelle offensive on the Chemin des Dames",
+      "zh": "贵妇小径上的尼韦勒攻势"
+    },
+    "summary": {
+      "en": "General Robert Nivelle's offensive on the Aisne fails to break through; in its first week nearly 140,000 French soldiers are put out of action, and mutinies follow.",
+      "zh": "罗贝尔·尼韦勒将军在埃纳河发动的攻势未能突破；第一周法军就有近 14 万人失去战斗力，随后爆发兵变。"
+    },
+    "detail": {
+      "en": "Nivelle had promised a breakthrough within two days. He was replaced by Philippe Pétain on 15 May. From May to June soldiers in 68 infantry divisions refused to attack or protested, between 59,000 and 88,000 men by the Aisne department's count; 3,427 judgments led to 554 death sentences.",
+      "zh": "尼韦勒曾许诺两天内突破，5 月 15 日被菲利普·贝当取代。5 月至 6 月，68 个步兵师的士兵拒绝进攻或抗议，据埃纳省的统计为 5.9 万到 8.8 万人；3,427 次审判作出 554 个死刑判决。"
+    },
+    "sources": [
+      "S168",
+      "S169"
+    ]
+  },
+  {
+    "id": "passchendaele",
+    "t": "1917-07-31",
+    "until": "1917-11-10",
+    "at": [
+      3.02,
+      50.9
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "uk",
+      "defender": "germany"
+    },
+    "result": "inconclusive",
+    "importance": 3,
+    "title": {
+      "en": "Third Ypres (Passchendaele)",
+      "zh": "第三次伊普尔战役（帕斯尚尔）"
+    },
+    "summary": {
+      "en": "The British offensive in Flanders advances a few kilometres through mud in more than three months; Canadian troops take the village of Passchendaele on 6 November.",
+      "zh": "英军在佛兰德的攻势三个多月里在泥沼中只推进了几公里；加拿大军 11 月 6 日攻占帕斯尚尔村。"
+    },
+    "detail": {
+      "en": "It followed the British attack on Messines Ridge on 7 June, which began with the explosion of 19 mines, nearly 1 million pounds of explosives. Casualty estimates differ: about 275,000 to 300,000 British and Dominion, about 220,000 to 260,000 German. The Canadians lost 15,654.",
+      "zh": "此前 6 月 7 日英军进攻梅森岭，以引爆 19 枚地雷开始，炸药近 100 万磅。伤亡估计不一：英国及各自治领约 27.5 万到 30 万人，德军约 22 万到 26 万人。加拿大军伤亡 15,654 人。"
+    },
+    "sources": [
+      "S172",
+      "S173",
+      "S174",
+      "S175",
+      "S176"
+    ]
+  },
+  {
+    "id": "kerensky-offensive",
+    "t": "1917-07-01",
+    "until": "1917-07-19",
+    "at": [
+      24.939,
+      49.445
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "russia",
+      "defender": "austria-hungary"
+    },
+    "result": "defender",
+    "importance": 2,
+    "title": {
+      "en": "Kerensky offensive",
+      "zh": "克伦斯基攻势"
+    },
+    "summary": {
+      "en": "The Provisional Government's last Russian offensive, in eastern Galicia, collapses within three weeks under German and Austro-Hungarian counter-attacks.",
+      "zh": "临时政府在东加利西亚发动的俄军最后一次攻势，在德奥军队反击下不到三周就崩溃。"
+    },
+    "sources": [
+      "S177"
+    ]
+  },
+  {
+    "id": "siam-enters",
+    "t": "1917-07-22",
+    "at": [
+      100.494,
+      13.752
+    ],
+    "kind": "political",
+    "importance": 2,
+    "title": {
+      "en": "Siam declares war",
+      "zh": "暹罗宣战"
+    },
+    "summary": {
+      "en": "Siam declares war on Germany and Austria-Hungary; in 1918 it sends about 1,300 volunteers, airmen and motor-transport drivers, to France.",
+      "zh": "暹罗对德国和奥匈宣战；1918 年派出约 1,300 名志愿兵（飞行人员和汽车运输兵）前往法国。"
+    },
+    "detail": {
+      "en": "The force of 1,284 men reached Marseilles in mid-1918. Nineteen of them died, none in combat. As one of the victors Siam later won the revision of its unequal treaties with the Western powers.",
+      "zh": "这支 1,284 人的部队于 1918 年年中抵达马赛，其中 19 人死亡，均非战死。作为战胜国之一，暹罗后来争取到修改与西方列强的不平等条约。"
+    },
+    "sources": [
+      "S184",
+      "S185",
+      "S186"
+    ]
+  },
+  {
+    "id": "china-enters",
+    "t": "1917-08-14",
+    "at": [
+      116.379,
+      39.914
+    ],
+    "kind": "political",
+    "importance": 3,
+    "title": {
+      "en": "China declares war",
+      "zh": "中国宣战"
+    },
+    "summary": {
+      "en": "The Beijing government of Duan Qirui declares war on Germany and Austria-Hungary, after months of conflict over whether to enter the war.",
+      "zh": "段祺瑞主导的北京政府在经历数月关于是否参战的争执后，对德国和奥匈宣战。"
+    },
+    "detail": {
+      "en": "China sent workers rather than troops: about 140,000 Chinese labourers served in France. The Guangzhou government around Sun Yat-sen, which opposed Duan, also declared war in September 1917, but China remained divided between rival governments.",
+      "zh": "中国派出的是劳工而不是军队：约 14 万名华工在法国服务。反对段祺瑞、以孙中山为中心的广州政府也在 1917 年 9 月宣战，但中国仍处在南北政府对立之中。"
+    },
+    "sources": [
+      "S188",
+      "S189",
+      "S190"
+    ]
+  },
+  {
+    "id": "caporetto",
+    "t": "1917-10-24",
+    "until": "1917-11-12",
+    "at": [
+      13.547,
+      46.243
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "austria-hungary",
+      "defender": "italy"
+    },
+    "casualties": {
+      "italy": 340000,
+      "austria-hungary": 50000
+    },
+    "result": "attacker",
+    "importance": 3,
+    "title": {
+      "en": "Caporetto (Twelfth Isonzo)",
+      "zh": "卡波雷托战役（第十二次伊松佐河战役）"
+    },
+    "summary": {
+      "en": "Austro-Hungarian and German troops break through the Italian front at Caporetto and drive the Italian army back to the Piave.",
+      "zh": "奥匈和德国军队在卡波雷托突破意大利防线，把意军一路逼退到皮亚韦河。"
+    },
+    "detail": {
+      "en": "The attack began at 2 a.m. on 24 October with a short bombardment and gas; small assault groups infiltrated behind the Italian lines. Italy lost 11,000 dead, 29,000 wounded and 300,000 prisoners, and about 300,000 more men were scattered. The Austro-German attackers lost about 50,000. The Italians held on the Piave, reinforced by six French and five British divisions; Armando Diaz replaced Luigi Cadorna as chief of staff.",
+      "zh": "进攻于 10 月 24 日凌晨 2 点以短促炮击和毒气开始；小股突击队渗透到意军防线后方。意军阵亡 1.1 万人、负伤 2.9 万人、被俘 30 万人，另有约 30 万人溃散。奥德方面伤亡约 5 万人。意军在皮亚韦河守住了阵地，法国派来六个师、英国五个师增援；阿曼多·迪亚兹接替路易吉·卡多尔纳任总参谋长。"
+    },
+    "sources": [
+      "S178"
+    ]
+  },
+  {
+    "id": "brazil-enters",
+    "t": "1917-10-26",
+    "at": [
+      -43.209,
+      -22.911
+    ],
+    "kind": "political",
+    "importance": 1,
+    "title": {
+      "en": "Brazil declares war",
+      "zh": "巴西宣战"
+    },
+    "summary": {
+      "en": "After German submarines sink Brazilian merchant ships, Brazil proclaims a state of war with Germany.",
+      "zh": "德国潜艇击沉巴西商船后，巴西宣布与德国处于战争状态。"
+    },
+    "sources": [
+      "S187"
+    ]
+  },
+  {
+    "id": "balfour-declaration",
+    "t": "1917-11-02",
+    "at": [
+      -0.1276,
+      51.5033
+    ],
+    "kind": "political",
+    "importance": 2,
+    "title": {
+      "en": "Balfour Declaration",
+      "zh": "贝尔福宣言"
+    },
+    "summary": {
+      "en": "The British government declares its support for 'a national home for the Jewish people' in Palestine, without prejudice to the rights of its non-Jewish communities.",
+      "zh": "英国政府宣布支持在巴勒斯坦建立“犹太人的民族家园”，但不得损害当地非犹太社群的权利。"
+    },
+    "detail": {
+      "en": "The promise sat uneasily with Britain's earlier assurances to Sharif Hussein of Mecca and with the Sykes–Picot agreement with France. Most of Palestine's people at the time were Arabs.",
+      "zh": "这一承诺与英国此前对麦加谢里夫侯赛因的保证、与英法赛克斯—皮科协定都难以相容。当时巴勒斯坦的居民大多数是阿拉伯人。"
+    },
+    "sources": [
+      "S181"
+    ]
+  },
+  {
+    "id": "october-revolution",
+    "t": "1917-11-07",
+    "at": [
+      30.395,
+      59.949
+    ],
+    "kind": "political",
+    "importance": 3,
+    "title": {
+      "en": "October Revolution",
+      "zh": "十月革命"
+    },
+    "summary": {
+      "en": "The Bolsheviks seize power in Petrograd; the next day Lenin's Decree on Peace calls on all the warring states to make peace without annexations.",
+      "zh": "布尔什维克在彼得格勒夺取政权；第二天，列宁的《和平法令》呼吁所有交战国缔结不割地的和平。"
+    },
+    "detail": {
+      "en": "The rising, organised from the Smolny Institute, took place on 25 October by the Russian calendar. Of the warring governments only Germany answered the call for talks.",
+      "zh": "起义由斯莫尔尼宫指挥，按俄历是 10 月 25 日。各交战国政府中，只有德国回应了和谈的呼吁。"
+    },
+    "sources": [
+      "S179",
+      "S180"
+    ]
+  },
+  {
+    "id": "jerusalem",
+    "t": "1917-12-09",
+    "at": [
+      35.227,
+      31.777
+    ],
+    "kind": "surrender",
+    "importance": 3,
+    "title": {
+      "en": "Jerusalem surrenders",
+      "zh": "耶路撒冷投降"
+    },
+    "summary": {
+      "en": "After Ottoman troops withdraw, the mayor of Jerusalem surrenders the city to British forces; General Allenby enters on foot through the Jaffa Gate on 11 December.",
+      "zh": "奥斯曼军队撤走后，耶路撒冷市长向英军献城投降；12 月 11 日艾伦比将军步行经雅法门入城。"
+    },
+    "sources": [
+      "S182"
+    ]
+  },
+  {
+    "id": "russian-armistice",
+    "t": "1917-12-15",
+    "at": [
+      23.685,
+      52.094
+    ],
+    "kind": "political",
+    "importance": 3,
+    "title": {
+      "en": "Armistice of Brest-Litovsk",
+      "zh": "布列斯特-立托夫斯克停战"
+    },
+    "summary": {
+      "en": "Soviet Russia and the Central Powers sign an armistice at Brest-Litovsk, taking effect on 17 December; fighting on the Eastern Front stops.",
+      "zh": "苏俄与同盟国在布列斯特-立托夫斯克签订停战协定，12 月 17 日生效；东线停火。"
+    },
+    "sources": [
+      "S183"
+    ]
+  },
+  {
+    "id": "brest-litovsk",
+    "t": "1918-03-03",
+    "at": [
+      23.69,
+      52.09
+    ],
+    "kind": "political",
+    "importance": 3,
+    "title": {
+      "en": "Treaty of Brest-Litovsk",
+      "zh": "布列斯特-立托夫斯克和约"
+    },
+    "summary": {
+      "en": "Soviet Russia makes peace with the Central Powers, giving up Poland, the Baltic lands and Finland and recognising an independent Ukraine, where German and Austro-Hungarian troops have already advanced.",
+      "zh": "苏俄与同盟国媾和，放弃波兰、波罗的海地区和芬兰，承认独立的乌克兰——德奥军队此时已开进那里。"
+    },
+    "detail": {
+      "en": "A Petrograd newspaper calculated that Russia lost 930,000 square kilometres with more than 56 million people, 32 per cent of its population, 89 per cent of its coal and about half of its factories. Lenin had to overcome strong opposition among the Bolshevik leaders to sign. The treaty was annulled by the armistice of 11 November and by the Treaty of Versailles.",
+      "zh": "彼得格勒的一家报纸计算，俄国失去 93 万平方公里土地和 5,600 多万人口，占人口的 32%，还失去了 89% 的煤炭和约一半的工厂。列宁顶住布尔什维克领导层的强烈反对才签了约。11 月 11 日的停战协定和《凡尔赛和约》宣布它作废。"
+    },
+    "sources": [
+      "S194",
+      "S195",
+      "S179"
+    ]
+  },
+  {
+    "id": "influenza",
+    "t": "1918-03",
+    "until": "1919-04",
+    "at": [
+      -96.77,
+      39.1
+    ],
+    "kind": "disaster",
+    "importance": 3,
+    "title": {
+      "en": "Influenza pandemic",
+      "zh": "流感大流行"
+    },
+    "summary": {
+      "en": "One of the first recorded outbreaks of the 1918 influenza: more than 100 soldiers fall ill at Camp Funston, Kansas. Within a year the disease reaches almost every country; estimates of the dead run from about 17 million to at least 50 million.",
+      "zh": "1918 年流感最早有记录的暴发之一：堪萨斯州芬斯顿营 100 多名士兵发病。一年之内疫情几乎传遍各国，死亡人数估计从约 1,700 万到至少 5,000 万不等。"
+    },
+    "detail": {
+      "en": "About 500 million people, a third of the world's population, were infected. The second wave, from late summer 1918, was the deadliest and killed many young adults. India lost at least 12 million people, more than any other country; the United States about 675,000. Neutral Spain's uncensored press reported the disease freely, so it became known as the 'Spanish flu', though it did not begin there.",
+      "zh": "约 5 亿人、即世界人口的三分之一被感染。1918 年夏末开始的第二波最致命，死者中有很多青壮年。印度至少有 1,200 万人死亡，多于任何其他国家；美国约 67.5 万人。中立的西班牙报纸不受审查，自由报道疫情，因此人们称它为“西班牙流感”，但它并不是从西班牙开始的。"
+    },
+    "sources": [
+      "S216",
+      "S217",
+      "S218",
+      "S220"
+    ],
+    "sensitive": true
+  },
+  {
+    "id": "influenza-singapore",
+    "t": "1918-06",
+    "until": "1918-11",
+    "at": [
+      103.85,
+      1.29
+    ],
+    "kind": "disaster",
+    "importance": 2,
+    "title": {
+      "en": "Influenza in Singapore",
+      "zh": "新加坡的流感"
+    },
+    "summary": {
+      "en": "Influenza reaches Singapore with wartime troops in June 1918; a second, deadlier wave follows in October and November.",
+      "zh": "1918 年 6 月，流感随战时军队传入新加坡；10 月至 11 月又来了更致命的第二波。"
+    },
+    "detail": {
+      "en": "A 2007 study estimated more than 2,870 deaths in a population of about 370,000, against 844 influenza deaths in the official annual report. The disease spread along the shipping and rail routes through the Straits Settlements and the Malay states.",
+      "zh": "2007 年的一项研究估计，约 37 万人口中有 2,870 多人死亡，而官方年报只记录了 844 例流感死亡。疫情沿航运和铁路线在海峡殖民地和马来各邦蔓延。"
+    },
+    "sources": [
+      "S219"
+    ],
+    "sensitive": true
+  },
+  {
+    "id": "michael",
+    "t": "1918-03-21",
+    "until": "1918-04-05",
+    "at": [
+      3.288,
+      49.847
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "germany",
+      "defender": "uk"
+    },
+    "casualties": {
+      "uk": 178000,
+      "germany": 240000
+    },
+    "result": "inconclusive",
+    "importance": 3,
+    "title": {
+      "en": "Spring offensive: Operation Michael",
+      "zh": "春季攻势：“米夏埃尔”行动"
+    },
+    "summary": {
+      "en": "After a five-hour bombardment by more than 6,600 guns, German storm troops break through the British front near Saint-Quentin and advance up to 64 km towards Amiens.",
+      "zh": "6,600 多门火炮炮击五小时后，德军突击部队在圣康坦附近突破英军防线，向亚眠方向推进最多 64 公里。"
+    },
+    "detail": {
+      "en": "On the first day the British lost 38,500 men, almost 21,000 of them taken prisoner. The Germans came within reach of Amiens but could not take it. British losses came to 178,000, French to 77,000 and German to about 240,000. From 23 March a long-range gun shelled Paris from about 120 km away, killing 256 people.",
+      "zh": "第一天英军损失 3.85 万人，其中近 2.1 万人被俘。德军逼近亚眠，但没能拿下。英军共损失 17.8 万人、法军 7.7 万人、德军约 24 万人。从 3 月 23 日起，一门远程火炮从约 120 公里外炮击巴黎，炸死 256 人。"
+    },
+    "sources": [
+      "S196",
+      "S197",
+      "S199"
+    ]
+  },
+  {
+    "id": "lys-1918",
+    "t": "1918-04-09",
+    "at": [
+      2.88,
+      50.69
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "germany",
+      "defender": "uk"
+    },
+    "result": "inconclusive",
+    "importance": 2,
+    "title": {
+      "en": "Spring offensive: the Lys (Georgette)",
+      "zh": "春季攻势：利斯河（“格奥尔格”行动）"
+    },
+    "summary": {
+      "en": "Germany's second spring offensive strikes the British front on the Lys in Flanders; it gains ground but does not reach the Channel ports.",
+      "zh": "德军第二次春季攻势在佛兰德的利斯河打击英军防线；攻占了一些地方，但没能打到英吉利海峡港口。"
+    },
+    "sources": [
+      "S196"
+    ]
+  },
+  {
+    "id": "aisne-1918",
+    "t": "1918-05-27",
+    "at": [
+      3.66,
+      49.43
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "germany",
+      "defender": "france"
+    },
+    "result": "attacker",
+    "importance": 2,
+    "title": {
+      "en": "Spring offensive: the Aisne (Blücher)",
+      "zh": "春季攻势：埃纳河（“布吕歇尔”行动）"
+    },
+    "summary": {
+      "en": "German troops break through on the Chemin des Dames and reach the Marne at Château-Thierry three days later.",
+      "zh": "德军在贵妇小径突破，三天后到达马恩河畔的蒂耶里堡。"
+    },
+    "sources": [
+      "S198"
+    ]
+  },
+  {
+    "id": "second-marne",
+    "t": "1918-07-15",
+    "until": "1918-08-06",
+    "at": [
+      3.64,
+      49.07
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "germany",
+      "defender": "france"
+    },
+    "result": "defender",
+    "importance": 3,
+    "title": {
+      "en": "Second Battle of the Marne",
+      "zh": "第二次马恩河战役"
+    },
+    "summary": {
+      "en": "Germany's last offensive crosses the Marne; on 18 July the Allies counter-attack and push the Germans back.",
+      "zh": "德军最后一次攻势渡过马恩河；7 月 18 日协约国军队反攻，把德军击退。"
+    },
+    "detail": {
+      "en": "The counter-offensive took 35,000 prisoners and 700 guns. From now on the German army was on the defensive. The French general Ferdinand Foch, who coordinated the Allied armies, was made a marshal on 6 August.",
+      "zh": "反攻中协约国俘虏 3.5 万人，缴获 700 门火炮。从此德军转入防御。协调协约国各军的法国将军费迪南·福煦于 8 月 6 日晋升元帅。"
+    },
+    "sources": [
+      "S198"
+    ]
+  },
+  {
+    "id": "amiens",
+    "t": "1918-08-08",
+    "until": "1918-08-11",
+    "at": [
+      2.6,
+      49.85
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "uk",
+      "defender": "germany"
+    },
+    "result": "attacker",
+    "importance": 3,
+    "title": {
+      "en": "Battle of Amiens",
+      "zh": "亚眠战役"
+    },
+    "summary": {
+      "en": "British Empire troops, led by the Australian and Canadian corps, break through east of Amiens with about 450 tanks; Ludendorff calls it 'the black day of the German army'. The Hundred Days begin.",
+      "zh": "以澳大利亚军和加拿大军为先锋的英帝国军队在约 450 辆坦克支援下于亚眠以东突破；鲁登道夫称之为“德国军队的黑暗之日”。百日攻势由此开始。"
+    },
+    "detail": {
+      "en": "The attack combined more than 2,000 guns, tanks and 1,900 aircraft. On the first day the Australians advanced 11 km and the Canadians nearly 13 km. By 11 August the Allies had taken 29,144 prisoners and 338 guns.",
+      "zh": "这次进攻把 2,000 多门火炮、坦克和 1,900 架飞机结合在一起。第一天澳大利亚军推进 11 公里，加拿大军近 13 公里。到 8 月 11 日，协约国俘虏 29,144 人，缴获 338 门火炮。"
+    },
+    "sources": [
+      "S197",
+      "S200",
+      "S201"
+    ]
+  },
+  {
+    "id": "meuse-argonne",
+    "t": "1918-09-26",
+    "until": "1918-11-11",
+    "at": [
+      5.135,
+      49.27
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "usa",
+      "defender": "germany"
+    },
+    "result": "attacker",
+    "importance": 3,
+    "title": {
+      "en": "Meuse-Argonne offensive",
+      "zh": "默兹—阿尔贡攻势"
+    },
+    "summary": {
+      "en": "The largest American operation of the war: about 1.2 million US soldiers attack between the Meuse and the Argonne forest and fight until the armistice.",
+      "zh": "美军在这场战争中规模最大的作战：约 120 万美军在默兹河与阿尔贡森林之间进攻，一直打到停战。"
+    },
+    "detail": {
+      "en": "It followed the American offensive at St Mihiel on 12 to 16 September. In the Meuse-Argonne more than 26,000 Americans were killed and 95,000 wounded.",
+      "zh": "在此之前，美军于 9 月 12 日至 16 日在圣米耶勒发起攻势。默兹—阿尔贡攻势中，美军阵亡 2.6 万多人，负伤 9.5 万人。"
+    },
+    "sources": [
+      "S203",
+      "S204",
+      "S192"
+    ]
+  },
+  {
+    "id": "megiddo",
+    "t": "1918-09-19",
+    "at": [
+      35.184,
+      32.585
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "uk",
+      "defender": "ottoman"
+    },
+    "result": "attacker",
+    "importance": 3,
+    "title": {
+      "en": "Battle of Megiddo",
+      "zh": "美吉多战役"
+    },
+    "summary": {
+      "en": "British-Indian infantry break the Ottoman line at its coastal end north of Jaffa; British, Indian and Australian cavalry ride through the gap into the Ottoman rear.",
+      "zh": "英印步兵在雅法以北突破奥斯曼防线的沿海一端；英国、印度和澳大利亚骑兵从缺口冲进奥斯曼军后方。"
+    },
+    "detail": {
+      "en": "Ottoman forces abandoned Damascus on 1 October as the Australian Mounted Division approached, and Aleppo on 26 October. Between 19 September and 30 October the British-led Egyptian Expeditionary Force took 75,000 prisoners and 360 guns.",
+      "zh": "澳大利亚骑兵师逼近时，奥斯曼军队于 10 月 1 日放弃大马士革，10 月 26 日放弃阿勒颇。9 月 19 日至 10 月 30 日，英国指挥的埃及远征军俘虏 7.5 万人，缴获 360 门火炮。"
+    },
+    "sources": [
+      "S206"
+    ]
+  },
+  {
+    "id": "dobro-pole",
+    "t": "1918-09-15",
+    "at": [
+      21.891,
+      41.034
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "serbia",
+      "defender": "bulgaria"
+    },
+    "result": "attacker",
+    "importance": 3,
+    "title": {
+      "en": "Breakthrough at Dobro Pole",
+      "zh": "多布罗波列突破"
+    },
+    "summary": {
+      "en": "Serbian and French divisions storm the Bulgarian mountain positions at Dobro Pole; the Macedonian front collapses within days.",
+      "zh": "塞尔维亚和法国的师攻下多布罗波列的保加利亚山地阵地；马其顿战线几天之内就崩溃了。"
+    },
+    "detail": {
+      "en": "The Allied Army of the Orient at Salonika numbered 650,000 men, among them French colonial troops from Vietnam, Senegal and Madagascar. Its commander Louis Franchet d'Espèrey chose to attack the ridges themselves rather than the valleys.",
+      "zh": "萨洛尼卡的协约国东方军团共 65 万人，其中有来自越南、塞内加尔和马达加斯加的法国殖民地部队。指挥官路易·弗朗谢·德斯佩雷选择直接攻打山脊，而不是走山谷。"
+    },
+    "sources": [
+      "S207"
+    ]
+  },
+  {
+    "id": "bulgaria-armistice",
+    "t": "1918-09-29",
+    "at": [
+      22.935,
+      40.64
+    ],
+    "kind": "surrender",
+    "importance": 3,
+    "title": {
+      "en": "Bulgaria signs an armistice",
+      "zh": "保加利亚签订停战协定"
+    },
+    "summary": {
+      "en": "Bulgaria, the first of the Central Powers to leave the war, signs an armistice at Salonika; it takes effect the next day.",
+      "zh": "保加利亚在萨洛尼卡签订停战协定，成为第一个退出战争的同盟国，协定次日生效。"
+    },
+    "sources": [
+      "S207",
+      "S208"
+    ]
+  },
+  {
+    "id": "vittorio-veneto",
+    "t": "1918-10-24",
+    "until": "1918-11-04",
+    "at": [
+      12.296,
+      45.998
+    ],
+    "kind": "battle",
+    "sides": {
+      "attacker": "italy",
+      "defender": "austria-hungary"
+    },
+    "result": "attacker",
+    "importance": 3,
+    "title": {
+      "en": "Battle of Vittorio Veneto",
+      "zh": "维托里奥韦内托战役"
+    },
+    "summary": {
+      "en": "Italian, British, French and Czechoslovak divisions attack across the Piave; by 29 October the Austro-Hungarian armies, whose nations are breaking away from the monarchy, are in retreat.",
+      "zh": "意大利、英国、法国和捷克斯洛伐克的师渡过皮亚韦河进攻；到 10 月 29 日，各民族正纷纷脱离君主国的奥匈军队全线后撤。"
+    },
+    "detail": {
+      "en": "The Italians reported 400,000 prisoners; the Austrian historian Manfried Rauchensteiner puts the true number at about 360,000. Historians disagree whether the battle was a decisive Italian victory or mainly the pursuit of an army already falling apart.",
+      "zh": "意方报告俘虏 40 万人；奥地利历史学者劳亨施泰纳认为实际约 36 万人。历史学者对这场战役是意大利的决定性胜利，还是主要在追击一支已经瓦解的军队，看法不一。"
+    },
+    "sources": [
+      "S210",
+      "S211"
+    ]
+  },
+  {
+    "id": "mudros",
+    "t": "1918-10-30",
+    "at": [
+      25.27,
+      39.86
+    ],
+    "kind": "surrender",
+    "importance": 3,
+    "title": {
+      "en": "Armistice of Mudros",
+      "zh": "穆兹罗斯停战协定"
+    },
+    "summary": {
+      "en": "Ottoman delegates sign an armistice aboard HMS Agamemnon in Mudros harbour; fighting stops at noon the next day.",
+      "zh": "奥斯曼代表在穆兹罗斯港英国军舰“阿伽门农号”上签订停战协定，次日中午停火。"
+    },
+    "sources": [
+      "S209"
+    ]
+  },
+  {
+    "id": "villa-giusti",
+    "t": "1918-11-03",
+    "at": [
+      11.842,
+      45.371
+    ],
+    "kind": "surrender",
+    "importance": 3,
+    "title": {
+      "en": "Armistice of Villa Giusti",
+      "zh": "朱斯蒂别墅停战协定"
+    },
+    "summary": {
+      "en": "Austria-Hungary signs an armistice with Italy near Padua; it takes effect at 3 p.m. on 4 November.",
+      "zh": "奥匈帝国在帕多瓦附近与意大利签订停战协定，11 月 4 日下午 3 点生效。"
+    },
+    "sources": [
+      "S211"
+    ]
+  },
+  {
+    "id": "kiel-mutiny",
+    "t": "1918-11-03",
+    "at": [
+      10.136,
+      54.323
+    ],
+    "kind": "political",
+    "importance": 3,
+    "title": {
+      "en": "Sailors' revolt in Kiel",
+      "zh": "基尔水兵起义"
+    },
+    "summary": {
+      "en": "Sailors of the High Seas Fleet refuse orders to put to sea; in Kiel a patrol fires on a demonstration and kills seven, and by the next evening sailors and workers control the city. Councils spread across Germany.",
+      "zh": "公海舰队水兵拒绝出海的命令；在基尔，一支巡逻队向示威者开枪，打死 7 人，第二天晚上水兵和工人控制了全城。工兵委员会随即遍及德国。"
+    },
+    "sources": [
+      "S212"
+    ]
+  },
+  {
+    "id": "kaiser-abdicates",
+    "t": "1918-11-09",
+    "at": [
+      13.376,
+      52.519
+    ],
+    "kind": "political",
+    "importance": 3,
+    "title": {
+      "en": "Germany becomes a republic",
+      "zh": "德国成为共和国"
+    },
+    "summary": {
+      "en": "In Berlin the chancellor announces the Kaiser's abdication and Philipp Scheidemann proclaims a republic from the Reichstag; Wilhelm II crosses into the Netherlands the next day.",
+      "zh": "在柏林，首相宣布德皇退位，菲利普·谢德曼在国会大厦宣布成立共和国；第二天威廉二世越境前往荷兰。"
+    },
+    "sources": [
+      "S213"
+    ]
+  },
+  {
+    "id": "armistice-compiegne",
+    "t": "1918-11-11",
+    "at": [
+      2.9067,
+      49.4272
+    ],
+    "kind": "surrender",
+    "importance": 3,
+    "title": {
+      "en": "Armistice of Compiègne",
+      "zh": "贡比涅停战协定"
+    },
+    "summary": {
+      "en": "German delegates sign the armistice in Marshal Foch's railway carriage in the forest of Compiègne at about 5 a.m.; the guns fall silent at 11 a.m.",
+      "zh": "德国代表于凌晨 5 点左右在贡比涅森林福煦元帅的车厢里签订停战协定；上午 11 点枪炮停息。"
+    },
+    "detail": {
+      "en": "Germany had to leave the occupied countries within 15 days and the left bank of the Rhine within 31 days, and hand over 5,000 guns, 25,000 machine guns, 1,700 aeroplanes, 5,000 locomotives, 150,000 wagons and all its submarines. The blockade continued until the peace treaty.",
+      "zh": "德国须在 15 天内撤出被占各国，31 天内撤出莱茵河左岸，交出 5,000 门火炮、2.5 万挺机枪、1,700 架飞机、5,000 台机车、15 万节车厢和全部潜艇。封锁一直持续到和约签订。"
+    },
+    "sources": [
+      "S214",
+      "S215"
+    ]
+  },
+  {
+    "id": "lettow-surrender",
+    "t": "1918-11-25",
+    "at": [
+      31.371,
+      -8.846
+    ],
+    "kind": "surrender",
+    "importance": 2,
+    "title": {
+      "en": "Surrender at Abercorn",
+      "zh": "阿伯康投降"
+    },
+    "summary": {
+      "en": "The last German force in Africa, under Paul von Lettow-Vorbeck, learns of the armistice in Northern Rhodesia and lays down its arms at Abercorn.",
+      "zh": "莱托-福尔贝克指挥的德军在非洲的最后一支部队，在北罗得西亚得知停战消息，在阿伯康交出武器。"
+    },
+    "detail": {
+      "en": "With him surrendered 30 officers, 125 European soldiers, 1,168 African askari, 1,522 African porters and 819 African women.",
+      "zh": "与他一同投降的有 30 名军官、125 名欧洲士兵、1,168 名非洲士兵（阿斯卡里）、1,522 名非洲挑夫和 819 名非洲妇女。"
+    },
+    "sources": [
+      "S223"
+    ]
+  },
+  {
+    "id": "site-compiegne-clearing",
+    "t": "1918-11-11",
+    "at": [
+      2.9058,
+      49.4278
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Glade of the Armistice, Rethondes",
+      "zh": "雷通德停战空地"
+    },
+    "summary": {
+      "en": "The clearing in the forest of Compiègne where the armistice was signed on 11 November 1918; a museum holds a copy of Foch's railway carriage.",
+      "zh": "1918 年 11 月 11 日签订停战协定的贡比涅森林空地；博物馆里陈列着福煦车厢的复制品。"
+    },
+    "sources": [
+      "S215"
+    ]
+  },
+  {
+    "id": "rhineland-occupation",
+    "t": "1918-12-01",
+    "at": [
+      7.594,
+      50.353
+    ],
+    "kind": "political",
+    "importance": 2,
+    "title": {
+      "en": "Allied occupation of the Rhineland",
+      "zh": "协约国占领莱茵兰"
+    },
+    "summary": {
+      "en": "Under the armistice, Allied troops enter Germany and occupy the left bank of the Rhine with bridgeheads at Cologne, Koblenz and Mainz.",
+      "zh": "按停战协定，协约国军队进入德国，占领莱茵河左岸及科隆、科布伦茨、美因茨三个桥头堡。"
+    },
+    "detail": {
+      "en": "The Treaty of Versailles kept the occupation for fifteen years, in zones to be cleared after five, ten and fifteen years, and demilitarised the Rhineland permanently. British headquarters were at Cologne, American at Koblenz.",
+      "zh": "《凡尔赛和约》规定占领十五年，各区分别在五年、十年和十五年后撤出，莱茵兰永久非军事化。英军司令部在科隆，美军在科布伦茨。"
+    },
+    "sources": [
+      "S251",
+      "S230"
+    ]
+  },
+  {
+    "id": "paris-conference",
+    "t": "1919-01-18",
+    "at": [
+      2.316,
+      48.862
+    ],
+    "kind": "political",
+    "importance": 3,
+    "title": {
+      "en": "Paris Peace Conference opens",
+      "zh": "巴黎和会开幕"
+    },
+    "summary": {
+      "en": "The peace conference opens at the French foreign ministry on the Quai d'Orsay; the leaders of the United States, Britain, France and Italy make the main decisions, and the defeated states are not invited to negotiate.",
+      "zh": "和会在法国外交部（奥赛码头）开幕；美、英、法、意四国领导人作出主要决定，战败国不被邀请参加谈判。"
+    },
+    "detail": {
+      "en": "Delegates of 32 countries attended, but the plenary conference met only nine times. From March the Council of Four, Woodrow Wilson, David Lloyd George, Georges Clemenceau and Vittorio Orlando, decided the main questions; Japan took part in the Council of Ten and the Council of Five.",
+      "zh": "共有 32 个国家的代表出席，但全体会议只开了九次。从 3 月起，主要问题由威尔逊、劳合·乔治、克列孟梭和奥兰多组成的四人会议决定；日本参加了十人会议和五人会议。"
+    },
+    "sources": [
+      "S230",
+      "S231"
+    ]
+  },
+  {
+    "id": "amritsar",
+    "t": "1919-04-13",
+    "at": [
+      74.88,
+      31.621
+    ],
+    "kind": "massacre",
+    "importance": 3,
+    "title": {
+      "en": "Amritsar massacre",
+      "zh": "阿姆利则惨案"
+    },
+    "summary": {
+      "en": "British-commanded troops fire without warning on an unarmed crowd in the Jallianwala Bagh, an enclosed garden in Amritsar; the official count is 379 dead, other estimates about 1,000.",
+      "zh": "英国指挥的部队在阿姆利则四面围墙的札连瓦拉园，不加警告向手无寸铁的人群开枪；官方统计 379 人死亡，其他估计约 1,000 人。"
+    },
+    "detail": {
+      "en": "Brigadier General Reginald Dyer had banned public meetings. At least 10,000 people were in the garden, some defying the ban and some in town for the Baisakhi spring festival; the soldiers fired about 1,650 rounds until they ran out of ammunition, and about 1,200 people were wounded. The massacre became a symbol of British repression and strengthened the movement led by Mohandas Gandhi.",
+      "zh": "雷金纳德·戴尔准将事先禁止集会。园里至少有 1 万人，有的是违禁集会，有的是进城过拜萨基春节的；士兵开了约 1,650 枪，直到子弹打光，约 1,200 人受伤。这场屠杀成为英国镇压的象征，壮大了甘地领导的反抗运动。"
+    },
+    "sources": [
+      "S240",
+      "S239",
+      "S241"
+    ],
+    "sensitive": true
+  },
+  {
+    "id": "shandong-decision",
+    "t": "1919-04-30",
+    "at": [
+      120.378,
+      36.066
+    ],
+    "kind": "political",
+    "importance": 3,
+    "title": {
+      "en": "Shandong given to Japan",
+      "zh": "山东权益交给日本"
+    },
+    "summary": {
+      "en": "In Paris the Council of Four approves the treaty articles that transfer Germany's rights in Shandong, the leased territory of Kiautschou with Tsingtao and the railways, to Japan rather than to China.",
+      "zh": "在巴黎，四人会议批准和约条款，把德国在山东的权益——胶州湾租借地、青岛和铁路——交给日本而不是中国。"
+    },
+    "detail": {
+      "en": "Japan said it would hand back the Shandong peninsula in full sovereignty to China while keeping Germany's economic rights. Britain and France were bound by secret wartime agreements to support Japan's claim, and Japan threatened not to join the League of Nations. The territory was returned to China under a treaty signed at the Washington Conference in 1922.",
+      "zh": "日本表示将把山东半岛的完全主权交还中国，但保留德国原有的经济权利。英法受战时秘密协定约束支持日本的要求，日本则以不加入国际联盟相威胁。根据 1922 年华盛顿会议上签订的条约，山东才交还中国。"
+    },
+    "sources": [
+      "S233",
+      "S234",
+      "S236"
+    ]
+  },
+  {
+    "id": "may-fourth",
+    "t": "1919-05-04",
+    "at": [
+      116.391,
+      39.903
+    ],
+    "kind": "political",
+    "importance": 3,
+    "title": {
+      "en": "May Fourth demonstration",
+      "zh": "五四游行"
+    },
+    "summary": {
+      "en": "More than 3,000 students from thirteen Beijing colleges march from Tiananmen against the Shandong decision; protests and strikes spread across China, and the Chinese delegation refuses to sign the treaty.",
+      "zh": "北京十三所高校的 3,000 多名学生从天安门出发游行，抗议山东决定；抗议和罢工遍及全国，中国代表团拒绝在和约上签字。"
+    },
+    "detail": {
+      "en": "The students burned Zhaojialou, the house of the minister Cao Rulin, who had negotiated Japanese loans; 31 students were arrested. Wellington Koo and the delegation had asked to sign with a reservation on Shandong; when the Allies refused, they did not sign on 28 June.",
+      "zh": "学生们烧了曾经手日本借款的曹汝霖的住宅赵家楼，31 名学生被捕。顾维钧和代表团曾要求在山东问题上保留签字；协约国拒绝后，他们在 6 月 28 日没有签字。"
+    },
+    "sources": [
+      "S235",
+      "S230",
+      "S236"
+    ]
+  },
+  {
+    "id": "smyrna-landing",
+    "t": "1919-05-15",
+    "at": [
+      27.128,
+      38.419
+    ],
+    "kind": "landing",
+    "sides": {
+      "attacker": "greece",
+      "defender": "ottoman"
+    },
+    "result": "attacker",
+    "importance": 2,
+    "title": {
+      "en": "Greek landing at Smyrna",
+      "zh": "希腊军队在士麦那登陆"
+    },
+    "summary": {
+      "en": "With the agreement of Clemenceau and Wilson, Greek troops land at Smyrna (İzmir) in western Anatolia, the start of a Greco-Turkish war that lasts until 1922.",
+      "zh": "经克列孟梭和威尔逊同意，希腊军队在安纳托利亚西部的士麦那（伊兹密尔）登陆，由此开始一场持续到 1922 年的希土战争。"
+    },
+    "sources": [
+      "S242"
+    ]
+  },
+  {
+    "id": "versailles-signed",
+    "t": "1919-06-28",
+    "at": [
+      2.12,
+      48.805
+    ],
+    "kind": "political",
+    "importance": 3,
+    "title": {
+      "en": "Treaty of Versailles signed",
+      "zh": "签订《凡尔赛和约》"
+    },
+    "summary": {
+      "en": "German delegates sign the peace treaty in the Hall of Mirrors at Versailles, five years to the day after the assassination in Sarajevo.",
+      "zh": "德国代表在凡尔赛宫镜厅签订和约，距萨拉热窝刺杀事件正好五年。"
+    },
+    "detail": {
+      "en": "Germany lost about 13 per cent of its territory and 10 per cent of its people, all its colonies, and its army was limited to 100,000 men. Article 231 made Germany and its allies responsible for the loss and damage of the war. The Covenant of the League of Nations formed Part I of the treaty, which came into force on 10 January 1920.",
+      "zh": "德国失去约 13% 的领土、10% 的人口和全部殖民地，陆军限 10 万人。第 231 条规定德国及其盟国对战争造成的损失和损害负责。国际联盟盟约是和约的第一部分；和约于 1920 年 1 月 10 日生效。"
+    },
+    "sources": [
+      "S231",
+      "S230",
+      "S232"
+    ]
+  },
+  {
+    "id": "saar-territory",
+    "t": "1919-06-28",
+    "at": [
+      6.996,
+      49.234
+    ],
+    "kind": "political",
+    "importance": 2,
+    "title": {
+      "en": "The Saar placed under the League",
+      "zh": "萨尔交国际联盟管理"
+    },
+    "summary": {
+      "en": "The treaty gives France the Saar coal mines and places the territory under the League of Nations for fifteen years, after which a plebiscite will decide its future.",
+      "zh": "和约把萨尔煤矿交给法国，萨尔地区由国际联盟管理十五年，期满后由公民投票决定归属。"
+    },
+    "sources": [
+      "S230"
+    ]
+  },
+  {
+    "id": "site-hall-of-mirrors",
+    "t": "1919-06-28",
+    "at": [
+      2.1205,
+      48.8049
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Hall of Mirrors, Versailles",
+      "zh": "凡尔赛宫镜厅"
+    },
+    "summary": {
+      "en": "Where the German Empire was proclaimed in 1871 and where Germany signed the peace treaty on 28 June 1919.",
+      "zh": "1871 年德意志帝国在这里宣告成立；1919 年 6 月 28 日德国在这里签订和约。"
+    },
+    "sources": [
+      "S231"
+    ]
+  },
+  {
+    "id": "site-tiananmen",
+    "t": "1919-05-04",
+    "at": [
+      116.3975,
+      39.9087
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Tiananmen, Beijing",
+      "zh": "北京天安门"
+    },
+    "summary": {
+      "en": "The gate where the students of the May Fourth demonstration gathered in 1919.",
+      "zh": "1919 年五四游行的学生在这里集结。"
+    },
+    "sources": [
+      "S235"
+    ]
+  },
+  {
+    "id": "site-singapore-cenotaph",
+    "t": "1922-03-31",
+    "at": [
+      103.854,
+      1.29
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "The Cenotaph, Singapore",
+      "zh": "新加坡和平纪念碑"
+    },
+    "summary": {
+      "en": "Singapore's war memorial on the Esplanade, begun in 1920 and unveiled in 1922, carries the names of 124 Straits Settlements residents who died in the First World War.",
+      "zh": "新加坡滨海大道旁的战争纪念碑，1920 年奠基，1922 年揭幕，刻有 124 名死于第一次世界大战的海峡殖民地居民的名字。"
+    },
+    "sources": [
+      "S246"
+    ]
   }
 ]

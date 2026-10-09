@@ -1552,5 +1552,420 @@
         ]
       ]
     }
+  },
+  {
+    "id": "caporetto-advance",
+    "from": "1917-10-24",
+    "to": "1917-11-10",
+    "holder": "germany",
+    "kind": "land",
+    "linger": "1918-03-20",
+    "label": {
+      "en": "Austro-German 14th Army from Caporetto to the Piave",
+      "zh": "奥德第 14 集团军从卡波雷托推进到皮亚韦河"
+    },
+    "path": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          13.547,
+          46.243
+        ],
+        [
+          13.439,
+          46.073
+        ],
+        [
+          13.236,
+          46.063
+        ],
+        [
+          12.996,
+          45.955
+        ],
+        [
+          12.66,
+          45.956
+        ],
+        [
+          12.503,
+          45.955
+        ],
+        [
+          12.265,
+          45.904
+        ],
+        [
+          12.195,
+          45.822
+        ]
+      ]
+    }
+  },
+  {
+    "id": "michael-offensive",
+    "from": "1918-03-21",
+    "to": "1918-04-05",
+    "holder": "germany",
+    "kind": "land",
+    "linger": "1918-08-08",
+    "label": {
+      "en": "German 2nd Army: Saint-Quentin towards Amiens (Michael)",
+      "zh": "德军第 2 集团军：从圣康坦向亚眠推进（“米夏埃尔”）"
+    },
+    "path": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          3.288,
+          49.847
+        ],
+        [
+          3.15,
+          49.884
+        ],
+        [
+          2.932,
+          49.929
+        ],
+        [
+          2.706,
+          49.887
+        ],
+        [
+          2.596,
+          49.871
+        ],
+        [
+          2.55,
+          49.869
+        ]
+      ]
+    }
+  },
+  {
+    "id": "blucher-advance",
+    "from": "1918-05-27",
+    "to": "1918-05-30",
+    "holder": "germany",
+    "kind": "land",
+    "linger": "1918-07-18",
+    "label": {
+      "en": "German 7th Army: Chemin des Dames to the Marne (Blücher)",
+      "zh": "德军第 7 集团军：贵妇小径至马恩河（“布吕歇尔”）"
+    },
+    "path": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          3.787,
+          49.439
+        ],
+        [
+          3.68,
+          49.307
+        ],
+        [
+          3.514,
+          49.201
+        ],
+        [
+          3.403,
+          49.046
+        ]
+      ]
+    }
+  },
+  {
+    "id": "hundred-days",
+    "from": "1918-08-08",
+    "to": "1918-11-11",
+    "holder": "uk",
+    "kind": "land",
+    "linger": "1919-01-31",
+    "label": {
+      "en": "British Empire armies in the Hundred Days: Amiens to Mons",
+      "zh": "百日攻势中的英帝国军队：亚眠至蒙斯"
+    },
+    "path": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          2.518,
+          49.868
+        ],
+        [
+          2.651,
+          50.002
+        ],
+        [
+          2.849,
+          50.104
+        ],
+        [
+          3.065,
+          50.164
+        ],
+        [
+          3.235,
+          50.176
+        ],
+        [
+          3.542,
+          50.106
+        ],
+        [
+          3.523,
+          50.358
+        ],
+        [
+          3.952,
+          50.455
+        ]
+      ]
+    }
+  },
+  {
+    "id": "meuse-argonne-advance",
+    "from": "1918-09-26",
+    "to": "1918-11-11",
+    "holder": "usa",
+    "kind": "land",
+    "strength": 1200000,
+    "linger": "1919-01-31",
+    "label": {
+      "en": "US First Army: from the Argonne towards Sedan",
+      "zh": "美国第 1 集团军：从阿尔贡向色当推进"
+    },
+    "path": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          5.036,
+          49.227
+        ],
+        [
+          5.135,
+          49.27
+        ],
+        [
+          5.083,
+          49.332
+        ],
+        [
+          4.955,
+          49.427
+        ],
+        [
+          4.943,
+          49.703
+        ]
+      ]
+    }
+  },
+  {
+    "id": "megiddo-advance",
+    "from": "1918-09-19",
+    "to": "1918-10-26",
+    "holder": "uk",
+    "kind": "land",
+    "linger": "1919-01-31",
+    "label": {
+      "en": "Egyptian Expeditionary Force: Jaffa to Damascus and Aleppo",
+      "zh": "埃及远征军：雅法至大马士革、阿勒颇"
+    },
+    "path": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          34.751,
+          32.044
+        ],
+        [
+          35.028,
+          32.311
+        ],
+        [
+          35.289,
+          32.608
+        ],
+        [
+          35.305,
+          32.707
+        ],
+        [
+          35.533,
+          32.794
+        ],
+        [
+          35.9,
+          33.162
+        ],
+        [
+          36.31,
+          33.513
+        ],
+        [
+          36.717,
+          34.733
+        ],
+        [
+          36.75,
+          35.134
+        ],
+        [
+          37.164,
+          36.199
+        ]
+      ]
+    }
+  },
+  {
+    "id": "salonika-breakthrough",
+    "from": "1918-09-15",
+    "to": "1918-11-01",
+    "holder": "serbia",
+    "kind": "land",
+    "linger": "1919-01-31",
+    "label": {
+      "en": "Serbian and French armies: Dobro Pole to Belgrade",
+      "zh": "塞尔维亚与法国军队：多布罗波列至贝尔格莱德"
+    },
+    "path": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          21.891,
+          41.034
+        ],
+        [
+          21.946,
+          41.577
+        ],
+        [
+          21.771,
+          41.719
+        ],
+        [
+          21.432,
+          41.996
+        ],
+        [
+          21.719,
+          42.136
+        ],
+        [
+          21.898,
+          42.554
+        ],
+        [
+          21.896,
+          43.321
+        ],
+        [
+          21.41,
+          43.864
+        ],
+        [
+          20.446,
+          44.815
+        ]
+      ]
+    }
+  },
+  {
+    "id": "vittorio-veneto-advance",
+    "from": "1918-10-24",
+    "to": "1918-11-04",
+    "holder": "italy",
+    "kind": "land",
+    "linger": "1919-01-31",
+    "label": {
+      "en": "Italian armies across the Piave to Vittorio Veneto and the Tagliamento",
+      "zh": "意大利军队渡皮亚韦河至维托里奥韦内托和塔利亚门托河"
+    },
+    "path": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          12.224,
+          45.853
+        ],
+        [
+          12.265,
+          45.904
+        ],
+        [
+          12.296,
+          45.998
+        ],
+        [
+          12.503,
+          45.955
+        ],
+        [
+          12.66,
+          45.956
+        ],
+        [
+          12.996,
+          45.955
+        ]
+      ]
+    }
+  },
+  {
+    "id": "aef-crossing",
+    "from": "1917-06",
+    "to": "1918-11-11",
+    "holder": "usa",
+    "kind": "sea",
+    "strength": 2084000,
+    "linger": "1918-12-31",
+    "label": {
+      "en": "American Expeditionary Forces: New York to Brest",
+      "zh": "美国远征军：纽约至布雷斯特"
+    },
+    "path": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          -74.01,
+          40.69
+        ],
+        [
+          -73.0,
+          40.4
+        ],
+        [
+          -69.5,
+          40.8
+        ],
+        [
+          -60.0,
+          42.5
+        ],
+        [
+          -45.0,
+          45.5
+        ],
+        [
+          -30.0,
+          47.5
+        ],
+        [
+          -15.0,
+          48.3
+        ],
+        [
+          -6.0,
+          48.3
+        ],
+        [
+          -4.486,
+          48.391
+        ]
+      ]
+    }
   }
 ]
