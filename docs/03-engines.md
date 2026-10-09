@@ -34,7 +34,7 @@ interface SceneState {         // 可序列化，和 URL 双向绑定
 | LayerToggles | 图层开关 |
 | QuizCard | 二选一/四选一，答错有解释，不记分 |
 | Counter | "一个图标 = N" 的数量可视化（兵力、伤亡、人口） |
-| LangToggle / ThemeToggle / ParentMode | 全局开关 |
+| LangToggle / ThemeToggle（Dropdown 菜单） | 全局开关 |
 
 ---
 
@@ -181,5 +181,5 @@ interface SceneState {         // 可序列化，和 URL 双向绑定
 2. widgets：ChapterRail、InfoPanel、Legend、LayerToggles、Counter
 3. TimeScene + GeoStage + Timeline，用二战数据跑通
 4. SpaceScene + Model3DStage（primitive 搭积木）+ Explorer，用空调跑通
-5. QuizCard、ParentMode、PWA
+5. QuizCard、PWA
 6. DiagramStage、Layer2DStage 等第二批主题进来再做

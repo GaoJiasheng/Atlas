@@ -189,11 +189,6 @@
     color: var(--ink-2);
     white-space: nowrap;
   }
-  .atlas-badge--warning {
-    border-color: var(--hot);
-    background: transparent;
-    color: var(--hot);
-  }
   .atlas-badge--accent {
     border-color: var(--signal);
     background: transparent;
@@ -208,9 +203,9 @@
     line-height: 1.65;
     color: var(--ink);
   }
-  /* Bodies are nested (article > Lang/Soft/Full wrappers), so space siblings at any depth. */
-  .atlas-prose :is(p, ul, ol, blockquote, pre, figure, table, h2, h3, .atlas-soft, .atlas-full)
-    + :is(p, ul, ol, blockquote, pre, figure, table, h2, h3, .atlas-soft, .atlas-full) {
+  /* Bodies are nested (article > Lang wrappers), so space siblings at any depth. */
+  .atlas-prose :is(p, ul, ol, blockquote, pre, figure, table, h2, h3)
+    + :is(p, ul, ol, blockquote, pre, figure, table, h2, h3) {
     margin-top: 0.9em;
   }
   .atlas-prose code {
@@ -248,15 +243,6 @@
     padding-left: 0.875em;
     color: var(--ink-muted);
   }
-}
-
-/*
- * Sensitive content (MDX <Soft> / <Full>): both versions ship in the HTML and
- * parent mode (data-parent on <html>, set before first paint) picks one.
- */
-:root:not([data-parent="1"]) .atlas-full,
-:root[data-parent="1"] .atlas-soft {
-  display: none;
 }
 
 /* Astro island wrappers must not affect layout. */

@@ -1,7 +1,7 @@
 ---
 /**
  * Document shell for every page: <html lang>, theme applied before first
- * paint (no flash), parent-mode flag, hreflang alternates, global CSS.
+ * paint (no flash), hreflang alternates, global CSS.
  */
 import '../styles/global.css';
 import { HTML_LANG, LOCALES, switchLocalePath, t, type Locale } from '../i18n';
@@ -44,7 +44,7 @@ const pwa = import.meta.env.PROD;
     <link rel="apple-touch-icon" href={`${root}/icons/apple-touch-icon.png`} />
     {pwa && <link rel="manifest" href={`${root}/manifest.webmanifest`} />}
     {LOCALES.map((l) => <link rel="alternate" hreflang={HTML_LANG[l]} href={switchLocalePath(pathname, l)} />)}
-    <!-- Theme + parent mode before first paint. Mirrors src/theme/theme.ts resolveTheme(). -->
+    <!-- Theme before first paint. Mirrors src/theme/theme.ts resolveTheme(). -->
     <script is:inline>
       (function () {
         var d = document.documentElement;
@@ -58,7 +58,6 @@ const pwa = import.meta.env.PROD;
           if (ok(q.get('theme'))) th = q.get('theme');
           var o = localStorage.getItem('atlas:theme');
           if (ok(o)) th = o;
-          d.setAttribute('data-parent', localStorage.getItem('atlas:parent') === '1' ? '1' : '0');
         } catch (e) {}
         d.setAttribute('data-theme', th);
       })();

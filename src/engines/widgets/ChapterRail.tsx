@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react';
 import type { Chapter, Locale } from '../core/types';
 import { t, tx } from '../../i18n';
-import { Icon } from './icons';
 
 export interface ChapterRailProps {
   chapters: readonly Chapter[];
@@ -12,8 +11,7 @@ export interface ChapterRailProps {
 
 /**
  * Chapter rail in the plate grammar: numbered hairline rows `01  Title`,
- * the current row marked with a signal-orange rule; a lock glyph on guarded
- * chapters. Vertical in the HUD's left column; on phones a strip of number
+ * the current row marked with a signal-orange rule. Vertical in the HUD's left column; on phones a strip of number
  * chips. ← / → navigation is bound by the host (window-level).
  */
 export function ChapterRail({ chapters, currentId, locale, onSelect }: ChapterRailProps) {
@@ -48,11 +46,6 @@ export function ChapterRail({ chapters, currentId, locale, onSelect }: ChapterRa
                 <span className="atlas-rail__text">
                   <span className="atlas-rail__title">
                     {tx(chapter.title, locale)}
-                    {chapter.sensitive && (
-                      <span className="atlas-rail__guard" title={t(locale, 'chapter.guarded')}>
-                        <Icon name="lock" size={11} label={t(locale, 'chapter.guarded')} />
-                      </span>
-                    )}
                   </span>
                 </span>
               </button>

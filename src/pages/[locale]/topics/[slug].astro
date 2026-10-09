@@ -10,8 +10,6 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import SceneHost from '../../../engines/core/SceneHost';
 import LangEn from '../../../components/mdx/LangEn.astro';
 import LangZh from '../../../components/mdx/LangZh.astro';
-import Soft from '../../../components/mdx/Soft.astro';
-import Full from '../../../components/mdx/Full.astro';
 import More from '../../../components/mdx/More.astro';
 import Num from '../../../components/mdx/Num.astro';
 import FlyTo from '../../../components/mdx/FlyTo.astro';
@@ -42,7 +40,7 @@ topicEngineData(topic);
 const dataUrl = withBase(`/topics/${topic.id}/data.json`) + (import.meta.env.DEV ? '/' : '');
 
 // MDX components chapter bodies use without imports.
-const components = { Lang: locale === 'zh' ? LangZh : LangEn, Soft, Full, More, Num, FlyTo };
+const components = { Lang: locale === 'zh' ? LangZh : LangEn, More, Num, FlyTo };
 ---
 <BaseLayout
   locale={locale}

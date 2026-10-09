@@ -244,10 +244,6 @@
   outline-offset: 1px;
   border-radius: var(--radius-hud);
 }
-.hud-btn[data-arming] {
-  border-color: var(--hot);
-  color: var(--hot);
-}
 .hud-select {
   appearance: none;
   padding-right: calc(16 * var(--u));
@@ -509,22 +505,67 @@
   color: var(--ink-2);
 }
 
-/* Global toggles in the top bar (hud variant): inline, behind a trigger on phones. */
+/* Look + language dropdowns: one hairline menu per control (Dropdown.tsx), inline at every width. */
 .atlas-toggles {
   position: relative;
   display: flex;
   align-items: center;
+  gap: calc(8 * var(--u));
 }
-.atlas-toggles__panel {
-  display: none;
+/* When a long VIEW / MODE row wraps the top bar, the menus still hang from the right edge. */
+.atlas-toggles--hud {
+  margin-left: auto;
 }
-.atlas-toggles--hud .atlas-toggles__panel {
+.atlas-dd {
+  position: relative;
+  display: inline-flex;
+}
+.atlas-dd__btn {
+  gap: calc(6 * var(--u));
+}
+.atlas-dd__list {
+  position: absolute;
+  top: calc(100% + 2px);
+  right: 0;
+  z-index: 40;
   display: flex;
-  align-items: center;
-  gap: calc(12 * var(--u));
+  flex-direction: column;
+  gap: calc(3 * var(--u));
+  min-width: calc(132 * var(--u));
+  margin: 0;
+  padding: calc(6 * var(--u));
+  list-style: none;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-hud);
+  background: var(--panel-solid);
 }
-.atlas-toggles--hud .atlas-toggles__trigger {
-  display: none;
+.atlas-dd__item {
+  justify-content: flex-start;
+  width: 100%;
+  min-height: calc(26 * var(--u));
+  padding: calc(4 * var(--u)) calc(10 * var(--u));
+  text-align: left;
+}
+/* Index page: the same plate grammar one step larger, with a 44 px hit area at every pointer type. */
+.atlas-dd--site {
+  --u: 1.25px;
+}
+.atlas-dd--site .atlas-dd__btn::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: max(100%, var(--hit));
+  transform: translateY(-50%);
+}
+.atlas-dd--site .atlas-dd__item {
+  min-height: var(--hit);
+}
+@media (pointer: coarse) {
+  .atlas-dd .atlas-dd__item {
+    min-height: var(--hit);
+  }
 }
 
 /* ------------------------------------------------------------------ */
@@ -805,12 +846,6 @@
   text-transform: uppercase;
   color: var(--ink-3);
 }
-.atlas-panel__guard {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  color: var(--hot);
-}
 .atlas-panel__title {
   grid-column: 1;
   margin: 0;
@@ -829,27 +864,6 @@
   flex-direction: column;
   gap: 16px;
   padding: 18px 20px 24px;
-}
-.atlas-panel__notice {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  margin: 0;
-  padding: 8px 10px;
-  border: 1px solid var(--hair);
-  border-radius: var(--radius-lg);
-  font-size: 0.875rem;
-  line-height: 1.45;
-  color: var(--ink-2);
-}
-.atlas-panel__notice svg {
-  flex: none;
-  margin-top: 2px;
-}
-.atlas-panel__notice--guarded {
-  border-color: var(--hot);
-  background: var(--warning-soft);
-  color: var(--hot);
 }
 .atlas-panel__footer {
   display: flex;
@@ -968,31 +982,6 @@
     min-height: 22px;
   }
 
-  .atlas-toggles--hud .atlas-toggles__trigger {
-    display: inline-flex;
-  }
-  .atlas-toggles--hud .atlas-toggles__panel {
-    display: none;
-  }
-  .atlas-toggles--hud[data-open="true"] .atlas-toggles__panel {
-    position: absolute;
-    top: calc(100% + 6px);
-    right: 0;
-    z-index: 30;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-    min-width: 230px;
-    padding: 12px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-hud);
-    background: var(--panel-solid);
-  }
-  .atlas-toggles--hud[data-open="true"] .hud-group {
-    justify-content: space-between;
-  }
-
   .atlas-hud {
     grid-template-columns: minmax(0, 1fr) auto;
     grid-template-areas:
@@ -1038,24 +1027,6 @@
   white-space: nowrap;
 }
 
-.atlas-segmented {
-  display: inline-flex;
-  flex-wrap: wrap;
-  gap: 2px;
-  padding: 2px;
-  border: 1px solid var(--hair);
-  border-radius: var(--radius-hud);
-  background: var(--panel);
-}
-.atlas-segmented .atlas-control {
-  border-color: transparent;
-  background: transparent;
-}
-.atlas-segmented .atlas-control[aria-checked="true"] {
-  background: var(--ink);
-  color: var(--ink-on);
-}
-
 .atlas-select {
   appearance: none;
   padding-right: 2rem;
@@ -1080,43 +1051,6 @@
   width: 160px;
   height: var(--hit);
   accent-color: var(--accent);
-}
-
-.atlas-toggles--site[data-open="true"] .atlas-toggles__panel {
-  position: absolute;
-  top: calc(100% + 0.5rem);
-  right: 0;
-  z-index: 30;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 0.5rem;
-  min-width: 240px;
-  padding: 0.75rem;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-hud);
-  background: var(--panel-solid);
-}
-@media (min-width: 900px) {
-  .atlas-toggles--site .atlas-toggles__trigger {
-    display: none;
-  }
-  .atlas-toggles--site .atlas-toggles__panel,
-  .atlas-toggles--site[data-open="true"] .atlas-toggles__panel {
-    position: static;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.5rem;
-    min-width: 0;
-    padding: 0;
-    border: 0;
-    background: none;
-  }
-}
-.atlas-control[data-arming] {
-  border-color: var(--warning);
-  color: var(--warning);
 }
 
 /* ------------------------------------------------------------------ */
@@ -1212,15 +1146,6 @@
   display: inline-flex;
   align-items: center;
   gap: calc(5 * var(--u));
-}
-.atlas-rail__guard {
-  display: inline-flex;
-  color: var(--hot);
-}
-.atlas-rail__guard svg,
-.atlas-rail__title svg {
-  width: calc(11 * var(--u));
-  height: calc(11 * var(--u));
 }
 
 @media (max-width: 759px) {

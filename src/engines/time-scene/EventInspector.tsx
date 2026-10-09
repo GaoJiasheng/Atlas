@@ -2,7 +2,7 @@
  * Details of a clicked event, shown in the InfoPanel's `inspector` slot.
  * Forces and casualties use Counter ("one icon = N", docs/02); a table with
  * exactly two sides is drawn as one two-sided Counter on a shared scale
- * (attacker left). Casualties of a `sensitive` event only show in parent mode.
+ * (attacker left).
  * `detail` sits in a collapsed "More" block; `sources` are superscript ids
  * that open the host's source popover (`data-source`, widgets/SourcePopover).
  */
@@ -10,7 +10,6 @@ import { useEffect, useRef, type CSSProperties } from 'react';
 import type { Locale } from '../core/types';
 import { tx } from '../../i18n';
 import { useT } from '../core/context';
-import { useParentMode } from '../../lib/prefs';
 import { Counter, CounterVersus } from '../widgets/Counter';
 import { SourceRefs } from '../widgets/SourcePopover';
 import { Icon } from '../widgets/icons';
@@ -73,7 +72,6 @@ function ForceTable({
 
 export function EventInspector({ event, model, locale, onClose }: EventInspectorProps) {
   const t = useT();
-  const [parentMode] = useParentMode();
   const ref = useRef<HTMLElement>(null);
   const nameOf = (id: string) => tx(model.entities.get(id)?.entity.name ?? id, locale);
   const at = toNumber(event.t);
@@ -144,16 +142,9 @@ export function EventInspector({ event, model, locale, onClose }: EventInspector
       {event.forces && Object.keys(event.forces).length > 0 && (
         <ForceTable table={event.forces} event={event} model={model} locale={locale} title={t('time.forces')} at={at} />
       )}
-      {event.casualties &&
-        Object.keys(event.casualties).length > 0 &&
-        (event.sensitive && !parentMode ? (
-          <p className="atlas-panel__notice atlas-panel__notice--guarded">
-            <Icon name="shield" size={16} />
-            <span>{t('time.casualtiesGuarded')}</span>
-          </p>
-        ) : (
-          <ForceTable table={event.casualties} event={event} model={model} locale={locale} title={t('time.casualties')} at={at} />
-        ))}
+      {event.casualties && Object.keys(event.casualties).length > 0 && (
+        <ForceTable table={event.casualties} event={event} model={model} locale={locale} title={t('time.casualties')} at={at} />
+      )}
 
       {event.detail && (
         <details className="atlas-more ts-event__more" key={event.id}>

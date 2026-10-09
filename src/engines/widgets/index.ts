@@ -6,6 +6,6 @@ export { QuizCard, type QuizCardProps } from './QuizCard';
 export { Counter, CounterVersus, COUNTER_UNIT_100K, type CounterProps, type CounterSide, type CounterVersusProps } from './Counter';
 export { LangToggle } from './LangToggle';
 export { ThemeToggle } from './ThemeToggle';
-export { ParentModeToggle } from './ParentModeToggle';
+export { Dropdown, type DropdownItem, type DropdownProps } from './Dropdown';
 export { GlobalToggles } from './GlobalToggles';
 export { Icon, type IconName } from './icons';

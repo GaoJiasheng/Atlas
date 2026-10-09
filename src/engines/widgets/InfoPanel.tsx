@@ -58,11 +58,6 @@ export function InfoPanel({
             <span>
               {pad2(index + 1)} / {pad2(total)}
             </span>
-            {chapter.sensitive && (
-              <span className="atlas-panel__guard">
-                <Icon name="lock" size={11} /> {t(locale, 'chapter.guarded')}
-              </span>
-            )}
           </p>
           <h2 id="atlas-panel-title" className="atlas-panel__title" aria-live="polite">
             {tx(chapter.title, locale)}
@@ -81,14 +76,6 @@ export function InfoPanel({
         </header>
       )}
       <div id="atlas-panel-scroll" className="atlas-panel__scroll">
-        {chapter && chapter.sensitive && (
-          <p className="atlas-panel__notice atlas-panel__notice--guarded">
-            <Icon name="shield" size={16} />
-            <span>
-              <strong>{t(locale, 'chapter.guarded')}.</strong> {t(locale, 'chapter.guardedHint')}
-            </span>
-          </p>
-        )}
         {chapter && body && <div className="atlas-prose">{body}</div>}
         {children}
       </div>

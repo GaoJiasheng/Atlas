@@ -99,3 +99,63 @@ for (const topic of TOPICS) {
     expect(stats.buffer[0]).toBeGreaterThan(0);
   });
 }
+
+test('LOOK and language are hairline dropdowns in the HUD: menu, Esc, outside click, theme, locale keeps the query', async ({ page }) => {
+  await openScene(page, '/en/topics/sample-time/?ch=second-look&t=2000-03-01');
+  const look = page.getByRole('button', { name: 'Look' });
+  const lang = page.getByRole('button', { name: 'Language' });
+  await expect(look).toHaveText(/Look/);
+  await expect(lang).toHaveText(/EN/);
+  await expect(look).toHaveAttribute('aria-expanded', 'false');
+
+  await look.click();
+  await expect(look).toHaveAttribute('aria-expanded', 'true');
+  await expect(page.getByRole('menuitemradio')).toHaveCount(3);
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('menuitemradio')).toHaveCount(0);
+
+  await look.click();
+  await page.mouse.click(5, 300);
+  await expect(page.getByRole('menuitemradio')).toHaveCount(0);
+
+  // Keyboard: Enter opens on the selected item, arrows move, Enter picks.
+  await look.focus();
+  await page.keyboard.press('Enter');
+  await expect(page.getByRole('menuitemradio', { name: 'Auto' })).toBeFocused();
+  await page.keyboard.press('ArrowDown');
+  await page.keyboard.press('ArrowDown');
+  await expect(page.getByRole('menuitemradio', { name: 'Cinema' })).toBeFocused();
+  await page.keyboard.press('Enter');
+  await expect.poll(() => page.evaluate(() => document.documentElement.dataset.theme)).toBe('cinema');
+  await expect(look).toBeFocused();
+  await look.click();
+  await page.getByRole('menuitemradio', { name: 'Paper' }).click();
+  await expect.poll(() => page.evaluate(() => document.documentElement.dataset.theme)).toBe('paper');
+
+  // Language: path and query string survive the switch.
+  await lang.click();
+  await expect(page.getByRole('menuitemradio')).toHaveText(['English', '中文']);
+  await page.getByRole('menuitemradio', { name: '中文' }).click();
+  await page.waitForURL(/\/zh\/topics\/sample-time\/\?.*ch=second-look/);
+  expect(page.url()).toContain('t=2000-03-01');
+  await expect(page.getByRole('button', { name: '语言' })).toHaveText(/中文/);
+});
+
+test('index: LOOK and language dropdowns work with 44 px hit areas', async ({ page }) => {
+  await page.goto('/en/?subject=history');
+  const look = page.getByRole('button', { name: 'Look' });
+  const box = await look.boundingBox();
+  expect(box).not.toBeNull();
+  const hit = await look.evaluate((el) => {
+    const r = getComputedStyle(el, '::after');
+    return parseFloat(r.height);
+  });
+  expect(Math.max(box!.height, hit)).toBeGreaterThanOrEqual(44);
+  await look.click();
+  await page.getByRole('menuitemradio', { name: 'Cinema' }).click();
+  await expect.poll(() => page.evaluate(() => document.documentElement.dataset.theme)).toBe('cinema');
+  await page.getByRole('button', { name: 'Language' }).click();
+  await page.getByRole('menuitemradio', { name: '中文' }).click();
+  await page.waitForURL(/\/zh\/\?subject=history/);
+  await expect(page.locator('h1')).toHaveText('这个世界值得探索');
+});

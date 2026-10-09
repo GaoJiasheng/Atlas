@@ -62,4 +62,4 @@ Pages 项目 → Custom domains → Set up a domain。域名在 Cloudflare DNS �
 - [ ] DevTools → Application：manifest 无报错，service worker 已激活；Network 勾 Offline 后刷新页面仍能打开已访问过的主题（地图底图需先看过一次才有缓存）
 - [ ] Network 里没有任何第三方域名请求
 
-关于草稿：目前索引页**有意**显示 `status: draft` 的主题（带「草稿」标记），因为还没有真实内容，两个示例主题就是草稿。真实内容上线时，把要公开的主题改成 `status: published`，并决定是否在索引页隐藏草稿。
+关于草稿：索引页**只列 `status: published` 的主题**，没有任何草稿或状态标签。`draft` / `ready` 主题（两个示例主题就是草稿）照常构建，直接输入 URL（`/en/topics/sample-time/` 等）可进入，开发和 e2e 用；它们不出现在索引页，也不计入类别数量（没有已发布主题的类别显示“即将推出”）。要公开一个主题，把它改成 `status: published`。

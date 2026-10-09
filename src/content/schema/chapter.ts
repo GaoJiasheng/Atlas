@@ -32,6 +32,7 @@ export const chapterSchema = z
     title: bilingual,
     /** Content-planning metadata (lowest school level the chapter targets); never rendered. */
     level: level.optional(),
+    /** Optional metadata only; nothing is hidden or gated on it. */
     sensitive: z.boolean().default(false),
     state: chapterState.default({}),
     quiz: z.array(quizItem).default([]),
