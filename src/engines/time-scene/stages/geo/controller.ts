@@ -385,7 +385,11 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     buildMapStyle({ sources: { land: landUrl }, tokens: tk, name: 'atlas-time-scene' }) as unknown as StyleSpecification;
 
   const style = baseStyle(tokens);
-  for (const id of Object.values(SRC)) style.sources[id] = { type: 'geojson', data: id === SRC.graticule ? graticuleData : EMPTY };
+  for (const id of Object.values(SRC)) {
+    style.sources[id] = { type: 'geojson', data: id === SRC.graticule ? graticuleData : EMPTY };
+  }
+  // The control fills: MapLibre's default tile simplification (0.375) leaves wedges at zoom 0-3 (BC, Brazil, Italy).
+  for (const id of [SRC.prev, SRC.next]) style.sources[id] = { type: 'geojson', data: EMPTY, tolerance: 0.05 };
   style.sources[HI.src] = { type: 'geojson', data: EMPTY };
   style.layers.splice(style.layers.findIndex((l) => l.id === BASE_LAYER_IDS.landEdge) + 1, 0, ...hiResLayers(tokens));
   style.layers.push(...dataLayers(tokens));
@@ -605,7 +609,13 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     const polys = features.flatMap((f) =>
       f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.type === 'MultiPolygon' ? f.geometry.coordinates : [],
     );
-    return areaLabelPoint(polys);
+    // The largest polygon on screen (Italy's mainland, not Libya), else the largest overall.
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+    return areaLabelPoint(polys, (at) => {
+      const p = projectNearCentre((q) => map.project(q), at, width / 2);
+      return p.x >= 0 && p.y >= 0 && p.x <= width && p.y <= height;
+    });
   };
 
   const render = () => {

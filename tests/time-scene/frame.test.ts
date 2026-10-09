@@ -62,6 +62,9 @@ describe('geo helpers', () => {
       ],
     ];
     expect(areaLabelPoint([small, big])).toEqual([12, 12]);
+    // The largest polygon whose centroid passes `onScreen`; none on screen: the largest overall.
+    expect(areaLabelPoint([small, big], ([x]) => x < 5)?.[0]).toBeCloseTo(0.5, 6);
+    expect(areaLabelPoint([small, big], () => false)).toEqual([12, 12]);
   });
 });
 

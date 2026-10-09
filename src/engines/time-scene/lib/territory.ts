@@ -421,18 +421,29 @@ export interface FadePair<C> {
  * one label that moves (lerp) instead of two that fade. Each label pairs at
  * most once, closest first. `samePlace` may pair farther ones too (the
  * controller passes "each anchor lies inside the other's area": the same
- * territory reshaped, so the label glides). Unpaired labels come back alone.
+ * territory reshaped, so the label glides). With `retextPx`, labels of the
+ * same holder with different text and anchors closer than that pair as well,
+ * after all same-text pairs (one label glides and switches its text halfway,
+ * see `textAtBlend`, instead of two overlapping). Unpaired labels come back alone.
  */
-export function pairCrossfade<C extends FadeCandidate>(prev: readonly C[], next: readonly C[], maxPx = 40, samePlace?: (a: C, b: C) => boolean): FadePair<C>[] {
-  const options: { i: number; j: number; d: number }[] = [];
+export function pairCrossfade<C extends FadeCandidate>(
+  prev: readonly C[],
+  next: readonly C[],
+  maxPx = 40,
+  samePlace?: (a: C, b: C) => boolean,
+  retextPx = 0,
+): FadePair<C>[] {
+  const options: { i: number; j: number; d: number; retext: boolean }[] = [];
   prev.forEach((a, i) =>
     next.forEach((b, j) => {
-      if (a.holder !== b.holder || a.text !== b.text) return;
+      if (a.holder !== b.holder) return;
       const d = Math.hypot(a.x - b.x, a.y - b.y);
-      if (d < maxPx || samePlace?.(a, b)) options.push({ i, j, d });
+      if (a.text === b.text) {
+        if (d < maxPx || samePlace?.(a, b)) options.push({ i, j, d, retext: false });
+      } else if (d < retextPx) options.push({ i, j, d, retext: true });
     }),
   );
-  options.sort((a, b) => a.d - b.d);
+  options.sort((a, b) => Number(a.retext) - Number(b.retext) || a.d - b.d);
   const usedP = new Set<number>();
   const usedN = new Set<number>();
   const out: FadePair<C>[] = [];
@@ -449,6 +460,11 @@ export function pairCrossfade<C extends FadeCandidate>(prev: readonly C[], next:
     if (!usedN.has(j)) out.push({ prev: null, next: b });
   });
   return out;
+}
+
+/** Which text a gliding pair shows: the outgoing keyframe's before half of the crossfade, the incoming one's after. */
+export function textAtBlend<T>(prev: T, next: T, blend: number): T {
+  return blend < 0.5 ? prev : next;
 }
 
 /* ------------------------------------------------------------------ */

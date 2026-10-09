@@ -11,6 +11,7 @@ import {
   pxPerUnit,
   shortName,
   signedDistance,
+  textAtBlend,
   tierFor,
   TIER_MIN_AREA,
 } from '../../src/engines/time-scene/lib/territory';
@@ -178,6 +179,39 @@ describe('pairCrossfade', () => {
     expect(both[0]!.prev!.key).toBe('b');
     expect(both[0]!.next!.key).toBe('x');
     expect(pairs).toHaveLength(4);
+  });
+});
+
+describe('pairCrossfade with different text (retext)', () => {
+  const c = (key: string, holder: string, text: string, x: number, y: number) => ({ key, holder, text, x, y });
+
+  it('pairs the same holder with different text within the retext distance, after same-text pairs', () => {
+    const prev = [c('0:1', 'russia', 'Russia', 100, 100)];
+    const next = [c('1:1', 'russia', 'Soviet Russia', 180, 100)];
+    // Without the option: two labels cross-fading (the old double text).
+    expect(pairCrossfade(prev, next).filter((p) => p.prev && p.next)).toHaveLength(0);
+    const glide = pairCrossfade(prev, next, 40, undefined, 120);
+    expect(glide).toHaveLength(1);
+    expect(glide[0]!.prev!.key).toBe('0:1');
+    expect(glide[0]!.next!.key).toBe('1:1');
+    // 130 px away is too far; another holder never pairs.
+    expect(pairCrossfade(prev, [c('x', 'russia', 'Soviet Russia', 230, 100)], 40, undefined, 120)).toHaveLength(2);
+    expect(pairCrossfade(prev, [c('y', 'ukraine', 'Soviet Russia', 110, 100)], 40, undefined, 120)).toHaveLength(2);
+  });
+
+  it('prefers the same-text partner and pairs each label once', () => {
+    const prev = [c('a', 'germany', 'Germany', 0, 0)];
+    const next = [c('b', 'germany', 'Occupied France', 10, 0), c('c', 'germany', 'Germany', 90, 0)];
+    const pairs = pairCrossfade(prev, next, 40, (a, b) => a.text === b.text, 120);
+    const both = pairs.filter((p) => p.prev && p.next);
+    expect(both).toHaveLength(1);
+    expect(both[0]!.next!.key).toBe('c');
+    expect(pairs).toHaveLength(2);
+  });
+
+  it('switches the text at half the crossfade', () => {
+    expect(textAtBlend('Russia', 'Soviet Russia', 0.49)).toBe('Russia');
+    expect(textAtBlend('Russia', 'Soviet Russia', 0.5)).toBe('Soviet Russia');
   });
 });
 
