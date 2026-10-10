@@ -25,10 +25,7 @@ Atlas code is MIT (see `LICENSE`); Atlas content is CC BY-NC-SA 4.0 (see
 
 ## Skills
 
-| Work | Licence |
-|---|---|
-| `.claude/skills/industrial-3d-showcase/` | provided by the project owner; origin and licence to be recorded |
-| `.claude/skills/atlas-plate/`, `.claude/skills/atlas-history-topic/` | MIT (part of this repository) |
+The skills under `.claude/skills/` are working notes for AI assistants, not licensed works; no licence is asserted over them.
 
 ## Text sources
 
