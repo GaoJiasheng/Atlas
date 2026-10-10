@@ -1,23 +1,29 @@
 /**
- * Two-column leader labels (master-spec J) in the host's `leaders` SVG slot.
+ * Leader labels (master-spec J) in the host's `leaders` SVG slot.
  *
  *  - label = number + EN name (bold) / 中文 / one-line note (the part's summary);
- *    left column right-aligned, right column left-aligned behind a small triangle
+ *    left-hand placards set right, right-hand ones set left behind a small triangle
  *  - thin leader: label edge → short horizontal → straight run → hollow circle
- *    on the projected anchor (the part's bounds centre)
+ *    on the projected anchor (the part's bounds centre; a pipe's path midpoint)
+ *  - placement (`lib/leader-layout.ts`, the rules of TimeScene's map leaders):
+ *    two aligned columns at the free band's edges (no further out than 22 % /
+ *    78 % of the stage, moving in towards their anchors), each placard on its
+ *    anchor's side and as level with it as stacking allows, clear of the HUD
+ *    blocks and of the labelled parts' screen boxes; placards may sit over the
+ *    model where no labelled part is (then a paper plate backs the text)
  *  - per rendered frame (stage bridge): only `transform` / `opacity` / `d` /
- *    `cx` / `cy` are written; sizes and the free band between the HUD's
- *    `[data-hud-panel]` blocks are measured on resize and when the label set
- *    changes
+ *    `cx` / `cy` are written; sizes and the `[data-hud-panel]` blocks are
+ *    measured on resize and when the label set changes
  *  - fades when the anchor is behind the camera, off-screen, cut away or
- *    occluded (throttled raycast in the stage); fewer labels in close-ups
+ *    occluded (throttled raycast in the stage, for the labelled parts only);
+ *    fewer labels in close-ups
  *  - set = the chapter's `labels`, else every visible part (largest first);
  *    the selected part is always labelled and highlighted. A `group:<id>`
  *    entry is one placard for the whole group (group name, anchored at the
  *    bounding centre of its visible parts)
  *  - PRESENTATION: the beat's `labels` (else the chapter's) only, at most 6,
  *    20 % larger, not capped by camera distance, and shown with the HUD
- *    hidden (they keep clear of the caption card and the title block)
+ *    hidden (they keep clear of the caption card and the title block only)
  *  - click / tap a label to select its part; hidden with the host's LABELS
  *    switch (L) and with the HUD (outside the presentation)
  *  - each placard carries `data-id`; the group carries `data-want` (the
@@ -30,11 +36,12 @@ import type { Chapter } from '../../core/types';
 import { tx } from '../../../i18n';
 import { resolveAllPartDisplays } from '../lib/visibility';
 import { partBounds } from '../lib/parts';
-import { labelBudget, stackColumn } from '../lib/schematic';
+import { labelBudget } from '../lib/schematic';
+import { layoutLeaders, type LeaderFrame, type LeaderItem, type ScreenRect, type Side } from '../lib/leader-layout';
 import { groupLabelId, labelGroup, listedLabels, PRESENT_LABEL_CAP } from '../lib/labels';
 import type { SpaceSceneExt } from '../index';
 import type { PartsFile } from '../schema';
-import type { StageBridge } from '../bridge';
+import type { ScreenAnchor, StageBridge } from '../bridge';
 import type { SpaceUiStore } from '../ui';
 import { clip, partNumber } from './common';
 
@@ -42,6 +49,7 @@ interface LabelDom {
   g: SVGGElement;
   text: SVGTextElement;
   hit: SVGRectElement;
+  plate: SVGRectElement;
   tri: SVGPathElement;
   leader: SVGPathElement;
   dot: SVGCircleElement;
@@ -53,32 +61,36 @@ interface LabelState {
   h: number;
   /** bbox.y of the text (top edge relative to the EN baseline). */
   top: number;
-  side: 'L' | 'R' | null;
+  side: Side | null;
+  /** Placard box left / top edge on show (glides towards its place). */
+  x: number;
   y: number;
   vis: number;
+  /** The paper plate is on (the placard lies over the model). */
+  plate: boolean;
 }
 
-interface Frame {
-  /** Stage width and the free band for the columns, in stage pixels. */
-  width: number;
-  top: number;
-  bottom: number;
-  left: number;
-  right: number;
-  /** HUD blocks over the stage: anchors under them get no label. */
-  rects: DOMRect[];
+interface Frame extends LeaderFrame {
+  /** HUD blocks over the stage (placards keep clear; anchors under them get no label). */
+  obstacles: ScreenRect[];
   ok: boolean;
 }
 
-const under = (rects: readonly DOMRect[], x: number, y: number) =>
-  rects.some((r) => x >= r.left && x <= r.right && y >= r.top && y <= r.bottom);
+/** Does the box overlap the on-screen box of any part on show (group anchors left out: their boxes have gaps)? */
+function overModel(anchors: ReadonlyMap<string, ScreenAnchor>, b: ScreenRect): boolean {
+  for (const [id, a] of anchors) {
+    if (a.shown && a.onScreen && labelGroup(id) === null && b.x0 < a.x1 && b.x1 > a.x0 && b.y0 < a.y1 && b.y1 > a.y0) return true;
+  }
+  return false;
+}
 
-const GAP = 8;
+const under = (rects: readonly ScreenRect[], x: number, y: number) => rects.some((r) => x >= r.x0 && x <= r.x1 && y >= r.y0 && y <= r.y1);
+
 const HIT = 44;
 const TRI = 8;
+/** Padding of the paper plate behind a placard's text, px. */
+const PLATE_PAD = 4;
 const FADE = 9;
-/** Share of a part's on-screen radius a label column must stay clear of. */
-const CLEARANCE = 0.6;
 /** Free stage band (stage px) below which leader labels are limited to the selected part. */
 const MIN_BAND = 480;
 /** Re-measure this long after the HUD shows or hides, in case its fade's `transitionend` never comes (`--dur-hud` is 350 ms). */
@@ -136,9 +148,8 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
 
   const root = useRef<SVGGElement>(null);
   const labels = useRef(new Map<string, LabelState>());
-  const frame = useRef<Frame>({ width: 0, top: 0, bottom: 0, left: 0, right: 0, rects: [], ok: false });
+  const frame = useRef<Frame>({ width: 0, height: 0, top: 0, bottom: 0, left: 0, right: 0, obstacles: [], ok: false });
   const clock = useRef(0);
-  const colX = useRef({ L: 0, R: 0, init: false });
   const selected = s.part;
 
   const register = useCallback((id: string, dom: LabelDom | null) => {
@@ -148,7 +159,7 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
       return;
     }
     const prev = map.get(id);
-    map.set(id, prev ? { ...prev, dom } : { dom, w: 0, h: 0, top: 0, side: null, y: -1, vis: 0 });
+    map.set(id, prev ? { ...prev, dom, plate: true } : { dom, w: 0, h: 0, top: 0, side: null, x: 0, y: -1, vis: 0, plate: true });
   }, []);
 
   /* ---------------- measure (resize, label set, fonts) ---------------- */
@@ -168,7 +179,13 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
       const hh = Math.max(HIT, b.height + 8);
       l.dom.hit.setAttribute('y', String(b.y + b.height / 2 - hh / 2));
       l.dom.hit.setAttribute('height', String(hh));
+      l.dom.hit.setAttribute('x', '-4');
       l.dom.hit.setAttribute('width', String(b.width + TRI + 8));
+      // Paper knock-out behind the text: placards may sit over the model.
+      l.dom.plate.setAttribute('x', String(TRI - PLATE_PAD));
+      l.dom.plate.setAttribute('y', String(b.y - PLATE_PAD / 2));
+      l.dom.plate.setAttribute('width', String(b.width + 2 * PLATE_PAD));
+      l.dom.plate.setAttribute('height', String(b.height + PLATE_PAD));
       l.side = null; // re-apply alignment
     }
     const W = box.width;
@@ -178,28 +195,29 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
     let left = 14;
     let right = W - 14;
     const scene = svg.closest('.atlas-scene') ?? document;
-    const rects: DOMRect[] = [];
+    const rects: ScreenRect[] = [];
     // The overlay column is wider than its right-aligned cards: use the cards.
-    const blocks = [...scene.querySelectorAll('[data-hud-panel]')].flatMap((el) =>
-      el.getAttribute('data-hud-panel') === 'overlay' ? [...el.children] : [el],
-    );
+    // Presenting: only the caption card and the title block count (the HUD blocks are fading out, still `visible`).
+    const blocks = [...scene.querySelectorAll('[data-hud-panel]')]
+      .filter((el) => !presenting || el.getAttribute('data-hud-panel')!.startsWith('present'))
+      .flatMap((el) => (el.getAttribute('data-hud-panel') === 'overlay' ? [...el.children] : [el]));
     for (const el of blocks) {
       const r = el.getBoundingClientRect();
       if (r.width < 1 || r.height < 1) continue;
       if (r.right <= box.left || r.left >= box.right || r.bottom <= box.top || r.top >= box.bottom) continue;
       if (getComputedStyle(el).visibility === 'hidden') continue;
-      rects.push(new DOMRect(r.left - box.left, r.top - box.top, r.width, r.height));
+      rects.push({ x0: r.left - box.left, y0: r.top - box.top, x1: r.right - box.left, y1: r.bottom - box.top });
     }
     // Blocks across the middle at the bottom (panels, bar, reader sheet) close the band from below.
-    for (const r of rects) if (r.top > H * 0.45 && r.left < W / 2 && r.right > W / 2) bottom = Math.min(bottom, r.top - 12);
+    for (const r of rects) if (r.y0 > H * 0.45 && r.x0 < W / 2 && r.x1 > W / 2) bottom = Math.min(bottom, r.y0 - 12);
     for (const r of rects) {
-      if (r.top >= bottom || r.bottom <= top) continue;
-      if (r.right < W / 2) left = Math.max(left, r.right + 18);
-      else if (r.left > W / 2) right = Math.min(right, r.left - 18);
+      if (r.y0 >= bottom || r.y1 <= top) continue;
+      if (r.x1 < W / 2) left = Math.max(left, r.x1 + 18);
+      else if (r.x0 > W / 2) right = Math.min(right, r.x0 - 18);
     }
-    Object.assign(f, { width: W, top, bottom, left, right, rects });
+    Object.assign(f, { width: W, height: H, top, bottom, left, right, obstacles: rects });
     bridge.invalidate();
-  }, [bridge]);
+  }, [bridge, presenting]);
 
   useLayoutEffect(() => {
     measure();
@@ -241,10 +259,19 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
     };
   }, [measure, labelsOn]);
 
+  // The stage checks occlusion for these parts only (none while the labels are off).
+  useEffect(() => {
+    bridge.labelled = new Set(labelsOn ? candidates : []);
+    bridge.invalidate();
+    return () => {
+      bridge.labelled = null;
+    };
+  }, [bridge, candidates, labelsOn]);
+
   /* ---------------- per-frame layout ---------------- */
   useEffect(() => {
     if (!labelsOn) return;
-    const cols = { L: [] as [string, LabelState][], R: [] as [string, LabelState][] };
+    const items: LeaderItem[] = [];
     const placed = new Set<string>();
     const layout = () => {
       const f = frame.current;
@@ -253,129 +280,79 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
       clock.current = now;
       if (!f.ok) return;
       const map = labels.current;
-      let wL = 0;
-      let wR = 0;
-      let sumH = 0;
-      for (const l of map.values()) {
-        wL = Math.max(wL, l.w);
-        wR = Math.max(wR, l.w + TRI);
-        sumH += l.h;
-      }
-      // Band between the HUD blocks too narrow to put columns beside the model (720p laptops): only the selected part is labelled.
+      // Band between the HUD blocks too narrow for placards beside the model (720p laptops): only the selected part is labelled.
       const roomy = f.right - f.left >= MIN_BAND;
-      const twoCols = roomy && f.right - wR - (f.left + wL) > 60;
-      const oneCol = roomy && !twoCols && f.right - f.left > wR + 140;
-      const avgH = map.size ? sumH / map.size : 30;
-      const perCol = Math.max(0, Math.floor((f.bottom - f.top + GAP) / (avgH + GAP)));
       // Presenting: the beat's list as it is (≤ 6); otherwise fewer labels in close-ups.
       const wanted = presenting ? PRESENT_LABEL_CAP : labelBudget(bridge.modelRadius > 0 ? bridge.cameraDistance / bridge.modelRadius : 3);
-      const budget = roomy
-        ? Math.min(wanted, twoCols ? perCol * 2 : oneCol ? perCol : 0)
-        : selected && perCol > 0
-          ? 1
-          : 0;
-      const mid = (f.left + f.right) / 2;
-      cols.L.length = 0;
-      cols.R.length = 0;
-      let count = 0;
+      const budget = roomy ? wanted : selected ? 1 : 0;
+      items.length = 0;
       for (const id of candidates) {
+        if (items.length >= budget) break;
         const l = map.get(id);
         const a = bridge.anchors.get(id);
-        if (!l || !a || !a.shown || count >= budget || under(f.rects, a.x, a.y)) continue;
-        let side: 'L' | 'R' = twoCols && a.x < mid ? 'L' : 'R';
-        if (cols[side].length >= perCol) side = side === 'L' ? 'R' : 'L';
-        if (cols[side].length >= perCol || (side === 'L' && !twoCols)) continue;
-        // A column that cannot sit beside the part (narrow stage, e.g. 720p) would print over the model: skip it.
-        const clear = side === 'L' ? f.left + wL <= a.x - a.r * CLEARANCE : f.right - wR >= a.x + a.r * CLEARANCE;
-        if (!clear && id !== selected) continue;
-        cols[side].push([id, l]);
-        count++;
-      }
-      // Stack each column first (screen order, min gap, inside the band) ...
-      const tops = { L: [] as number[], R: [] as number[] };
-      for (const side of ['L', 'R'] as const) {
-        const col = cols[side];
-        col.sort((a, b) => (bridge.anchors.get(a[0])?.y ?? 0) - (bridge.anchors.get(b[0])?.y ?? 0));
-        tops[side] = stackColumn(
-          col.map(([id, l]) => (bridge.anchors.get(id)?.y ?? 0) - l.h * 0.5),
-          col.map(([, l]) => l.h),
-          f.top,
-          f.bottom,
-          GAP,
-        );
-      }
-      // ... then place it just outside its anchors (leaders run inwards, never across
-      // a label), clear of the HUD blocks beside its own rows, gliding as the camera moves.
-      const bound = (side: 'L' | 'R') => {
-        const col = cols[side];
-        const t = tops[side];
-        if (col.length === 0) return side === 'L' ? f.left : f.right;
-        const y0 = t[0]!;
-        const y1 = t[t.length - 1]! + col[col.length - 1]![1].h;
-        let edge = side === 'L' ? 14 : f.width - 14;
-        for (const r of f.rects) {
-          if (r.bottom < y0 - 4 || r.top > y1 + 4 || r.top >= f.bottom) continue;
-          if (side === 'L' && r.right < mid) edge = Math.max(edge, r.right + 18);
-          if (side === 'R' && r.left > mid) edge = Math.min(edge, r.left - 18);
-        }
-        return edge;
-      };
-      let minL = Infinity;
-      let maxR = -Infinity;
-      // Columns clear the parts' silhouettes (anchor ∓ on-screen radius), not just their centres.
-      for (const [id] of cols.L) minL = Math.min(minL, bridge.anchors.get(id)!.x - bridge.anchors.get(id)!.r);
-      for (const [id] of cols.R) maxR = Math.max(maxR, bridge.anchors.get(id)!.x + bridge.anchors.get(id)!.r);
-      const leftEdge = bound('L') + wL;
-      const rightEdge = bound('R') - wR;
-      const wantL = Math.min(Math.max(minL - 34, leftEdge), Math.max(leftEdge, mid - 10));
-      const wantR = Math.max(Math.min(maxR + 34, rightEdge), Math.min(rightEdge, mid + 10));
-      const cx = colX.current;
-      const k = cx.init ? Math.min(1, dt * 6) : 1;
-      if (Number.isFinite(wantL)) cx.L += (wantL - cx.L) * k;
-      if (Number.isFinite(wantR)) cx.R += (wantR - cx.R) * k;
-      cx.init = true;
-      const xL = cx.L;
-      const xR = cx.R;
-      let moving = Math.abs(cx.L - wantL) > 0.5 || Math.abs(cx.R - wantR) > 0.5;
-      placed.clear();
-      for (const side of ['L', 'R'] as const) {
-        const col = cols[side];
-        col.forEach(([id, l], i) => {
-          placed.add(id);
-          const a = bridge.anchors.get(id)!;
-          if (l.side !== side) {
-            l.side = side;
-            const anchor = side === 'L' ? 'end' : 'start';
-            l.dom.text.setAttribute('text-anchor', anchor);
-            for (const ts of l.dom.text.children) ts.setAttribute('x', side === 'L' ? '0' : String(TRI));
-            l.dom.tri.style.display = side === 'L' ? 'none' : '';
-            l.dom.hit.setAttribute('x', String(side === 'L' ? -l.w - 4 : -4));
-            l.y = -1;
-          }
-          const target = tops[side][i]!;
-          l.y = l.y < 0 ? target : l.y + (target - l.y) * Math.min(1, dt * 10);
-          if (Math.abs(l.y - target) > 0.3) moving = true;
-          const want = a.onScreen && (id === selected || !a.occluded) ? 1 : 0;
-          l.vis += (want - l.vis) * Math.min(1, dt * FADE);
-          if (Math.abs(want - l.vis) < 0.01) l.vis = want;
-          else moving = true;
-          const x = side === 'L' ? xL : xR;
-          const baseline = l.y - l.top;
-          const ly = l.y + Math.min(l.h * 0.22, -l.top * 0.7);
-          // Leave from the label edge facing the anchor (never across the text).
-          const far = side === 'L' ? a.x < x - l.w * 0.6 : a.x > x + TRI + l.w * 0.6;
-          const out = side === 'L' ? (far ? -1 : 1) : far ? 1 : -1;
-          const sx = side === 'L' ? (far ? x - l.w - 6 : x + 6) : far ? x + TRI + l.w + 6 : x - 6;
-          const ex = sx + out * 16;
-          l.dom.g.setAttribute('transform', `translate(${x.toFixed(1)} ${baseline.toFixed(1)})`);
-          l.dom.g.style.opacity = l.vis.toFixed(3);
-          l.dom.g.style.pointerEvents = l.vis > 0.5 ? '' : 'none';
-          l.dom.leader.setAttribute('d', `M${sx.toFixed(1)} ${ly.toFixed(1)}H${ex.toFixed(1)}L${a.x.toFixed(1)} ${a.y.toFixed(1)}`);
-          l.dom.leader.style.opacity = (l.vis * 0.9).toFixed(3);
-          l.dom.dot.setAttribute('cx', a.x.toFixed(1));
-          l.dom.dot.setAttribute('cy', a.y.toFixed(1));
-          l.dom.dot.style.opacity = l.vis.toFixed(3);
+        if (!l || !a || !a.shown || !a.onScreen || l.w <= 0 || under(f.obstacles, a.x, a.y)) continue;
+        if (!roomy && id !== selected) continue;
+        items.push({
+          id,
+          ax: a.x,
+          ay: a.y,
+          w: l.w + TRI,
+          h: l.h,
+          lead: Math.min(l.h * 0.22, -l.top * 0.7),
+          bounds: { x0: a.x0, y0: a.y0, x1: a.x1, y1: a.y1 },
+          prev: l.side && l.y >= 0 ? { side: l.side, x0: l.x, y0: l.y } : null,
         });
+      }
+      const places = layoutLeaders(items, f);
+      let moving = false;
+      placed.clear();
+      const k = Math.min(1, dt * 10);
+      for (const p of places) {
+        const l = map.get(p.id)!;
+        const a = bridge.anchors.get(p.id)!;
+        placed.add(p.id);
+        if (l.side !== p.side) {
+          // Text set towards the anchor: right-aligned left of it, left-aligned (with the triangle) right of it.
+          l.dom.text.setAttribute('text-anchor', p.side === 'L' ? 'end' : 'start');
+          for (const ts of l.dom.text.children) ts.setAttribute('x', String(p.side === 'L' ? l.w + TRI : TRI));
+          l.dom.tri.style.display = p.side === 'L' ? 'none' : '';
+          l.dom.hit.setAttribute('x', '-4');
+          l.side = p.side;
+          l.y = -1;
+        }
+        // Glide to the new place (snap on the first frame and after a side change).
+        if (l.y < 0) {
+          l.x = p.x0;
+          l.y = p.y0;
+        } else {
+          l.x += (p.x0 - l.x) * k;
+          l.y += (p.y0 - l.y) * k;
+        }
+        if (Math.abs(l.x - p.x0) > 0.3 || Math.abs(l.y - p.y0) > 0.3) moving = true;
+        const want = a.onScreen && (p.id === selected || !a.occluded) ? 1 : 0;
+        l.vis += (want - l.vis) * Math.min(1, dt * FADE);
+        if (Math.abs(want - l.vis) < 0.01) l.vis = want;
+        else moving = true;
+        const dx = l.x - p.x0;
+        const dy = l.y - p.y0;
+        // The paper plate only where the placard lies over a part on show.
+        const over = overModel(bridge.anchors, p);
+        if (l.plate !== over) {
+          l.plate = over;
+          l.dom.plate.style.opacity = over ? '' : '0';
+        }
+        const baseline = l.y - l.top;
+        l.dom.g.setAttribute('transform', `translate(${l.x.toFixed(1)} ${baseline.toFixed(1)})`);
+        l.dom.g.style.opacity = l.vis.toFixed(3);
+        l.dom.g.style.pointerEvents = l.vis > 0.5 ? '' : 'none';
+        l.dom.leader.setAttribute(
+          'd',
+          `M${(p.sx + dx).toFixed(1)} ${(p.sy + dy).toFixed(1)}H${(p.ex + dx).toFixed(1)}L${a.x.toFixed(1)} ${a.y.toFixed(1)}`,
+        );
+        l.dom.leader.style.opacity = (l.vis * 0.9).toFixed(3);
+        l.dom.dot.setAttribute('cx', a.x.toFixed(1));
+        l.dom.dot.setAttribute('cy', a.y.toFixed(1));
+        l.dom.dot.style.opacity = l.vis.toFixed(3);
       }
       for (const [id, l] of map) {
         if (placed.has(id)) continue;
@@ -383,6 +360,7 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
           l.vis = Math.max(0, l.vis - dt * FADE * 0.6);
           moving = true;
         }
+        if (l.vis === 0) l.y = -1;
         l.dom.g.style.opacity = l.vis.toFixed(3);
         l.dom.g.style.pointerEvents = 'none';
         l.dom.leader.style.opacity = (l.vis * 0.9).toFixed(3);
@@ -452,12 +430,13 @@ function Label(props: {
   const g = useRef<SVGGElement>(null);
   const text = useRef<SVGTextElement>(null);
   const hit = useRef<SVGRectElement>(null);
+  const plate = useRef<SVGRectElement>(null);
   const tri = useRef<SVGPathElement>(null);
   const leader = useRef<SVGPathElement>(null);
   const dot = useRef<SVGCircleElement>(null);
   const { id, register } = props;
   useLayoutEffect(() => {
-    register(id, { g: g.current!, text: text.current!, hit: hit.current!, tri: tri.current!, leader: leader.current!, dot: dot.current! });
+    register(id, { g: g.current!, text: text.current!, hit: hit.current!, plate: plate.current!, tri: tri.current!, leader: leader.current!, dot: dot.current! });
     return () => register(id, null);
   }, [id, register]);
   return (
@@ -477,6 +456,7 @@ function Label(props: {
         }}
       >
         <rect ref={hit} className="space-co__hit" />
+        <rect ref={plate} className="space-co__plate" />
         <path ref={tri} className="space-co__tri" d="M0 -6.2L5 -3.1L0 0Z" />
         <text ref={text} className="space-co__text">
           <tspan className="space-co__en">

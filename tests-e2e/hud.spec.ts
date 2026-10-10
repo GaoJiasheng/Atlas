@@ -803,6 +803,42 @@ test('sample-space PRESENTATION: beats on the 3D stage (hide, the beat\'s labels
   expect(await page.locator('.atlas-leaders').getAttribute('data-present')).toBeNull();
 });
 
+test('sample-space camera: a preset then a mode in the same tick end on the preset; H frames the cover camera and the HUD coming back returns', async ({ page }) => {
+  await page.setViewportSize({ width: 1920, height: 1080 });
+  await openScene(page, '/en/topics/sample-space/');
+  type Cam = { position: number[]; target: number[]; fov: number };
+  const cam = () => page.evaluate(() => (window.__atlas!.stats() as { camera?: Cam }).camera ?? null);
+
+  // The shoot script's order: preset (instant) and a mode switch (snap) in one tick.
+  await page.evaluate(() => {
+    window.__atlas!.setPreset('sample-left', { instant: true });
+    window.__atlas!.setMode('xray', true);
+  });
+  await expect.poll(async () => (await cam())?.target).toEqual([-0.1, -0.3, 0]);
+  expect((await page.evaluate(() => window.__atlas!.state())).preset).toBe('sample-left');
+  await page.evaluate(() => window.__atlas!.setMode('xray', false));
+
+  // H: no `views.cover` here, so the model is re-fitted (centred on its bounding sphere); H again goes back.
+  const before = (await cam())!;
+  await page.keyboard.press('h');
+  await expect.poll(async () => (await page.evaluate(() => window.__atlas!.state())).hud).toBe(false);
+  await expect.poll(async () => (await cam())?.target, { timeout: 5000 }).not.toEqual(before.target);
+  await page.waitForTimeout(1200);
+  const cover = (await cam())!;
+  await page.keyboard.press('h');
+  await expect.poll(async () => (await cam())?.target, { timeout: 5000 }).toEqual(before.target);
+  await expect.poll(async () => (await cam())?.position, { timeout: 5000 }).toEqual(before.position);
+
+  // A chapter change while the HUD is hidden places the camera itself: showing the HUD does not fly back.
+  await page.keyboard.press('h');
+  await expect.poll(async () => (await cam())?.target, { timeout: 5000 }).toEqual(cover.target);
+  await page.evaluate(() => window.__atlas!.goToChapter('switch-on', { instant: true }));
+  const chapter = (await cam())!;
+  await page.keyboard.press('h');
+  await page.waitForTimeout(1200);
+  expect((await cam())!.target).toEqual(chapter.target);
+});
+
 test('sample-space PRESENTATION voice: a beat is spoken once its camera has settled; auto-play moves on after the utterance', async ({ page }) => {
   test.setTimeout(60_000);
   await page.addInitScript(FAKE_SPEECH(FAKE_VOICES, 1500));

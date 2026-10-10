@@ -37,10 +37,14 @@ export interface PartShape {
 /** What the label probe needs to know about a part (filled by PartNode). */
 export interface PartHandle {
   object: Object3D;
-  /** Label anchor relative to the part centre (bounds centre). */
+  /** Bounds centre relative to the part centre (group boxes, the on-screen box). */
   offset: Vec3;
+  /** Leader-label anchor relative to the part centre (the bounds centre; a pipe's path midpoint). */
+  point: Vec3;
   /** Rough radius of the part's bounds (scene units): labels stay clear of it. */
   radius: number;
+  /** Half extents of the part's bounds (scene units; zero: use `radius`): its on-screen box. */
+  half: Vec3;
   meshes: Object3D[];
   /** Current fade (0 hidden .. 1 solid). */
   fade: number;
@@ -57,7 +61,9 @@ export interface PartNodeProps {
   clipping: Plane[] | null;
   castShadow: boolean;
   anchorOffset: Vec3;
+  anchorPoint: Vec3;
   anchorRadius: number;
+  anchorHalf: Vec3;
   handles: Map<string, PartHandle>;
   /** Changes when the stage must jump without easing (instant transitions). */
   snapKey: number;
@@ -156,8 +162,17 @@ export function PartNode(props: PartNodeProps) {
 
   // Handle for leader labels / occlusion.
   const handle = useMemo<PartHandle>(
-    () => ({ object: null as unknown as Object3D, offset: props.anchorOffset, radius: props.anchorRadius, meshes: [], fade: 0, visible: false }),
-    [props.anchorOffset, props.anchorRadius],
+    () => ({
+      object: null as unknown as Object3D,
+      offset: props.anchorOffset,
+      point: props.anchorPoint,
+      radius: props.anchorRadius,
+      half: props.anchorHalf,
+      meshes: [],
+      fade: 0,
+      visible: false,
+    }),
+    [props.anchorOffset, props.anchorPoint, props.anchorRadius, props.anchorHalf],
   );
   const { handles } = props;
   useLayoutEffect(() => {

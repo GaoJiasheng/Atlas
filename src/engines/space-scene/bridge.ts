@@ -19,8 +19,13 @@ export interface ScreenAnchor {
   shown: boolean;
   /** Distance camera → anchor, scene units. */
   depth: number;
-  /** Rough on-screen radius of the part, stage pixels (labels keep clear of it). */
+  /** Rough on-screen radius of the part, stage pixels. */
   r: number;
+  /** On-screen box of the part's bounds (the projected corners), stage pixels: placards keep off labelled parts. */
+  x0: number;
+  y0: number;
+  x1: number;
+  y1: number;
 }
 
 export interface StageStats {
@@ -46,6 +51,8 @@ export interface StageBridge {
   cameraDistance: number;
   modelRadius: number;
   anchors: Map<string, ScreenAnchor>;
+  /** Ids the HUD may label now (`null`: any): the stage checks occlusion for these only. */
+  labelled: ReadonlySet<string> | null;
   stats: StageStats;
   /** Called after each rendered frame's projection (labels). */
   listeners: Set<() => void>;
@@ -84,6 +91,7 @@ export function createBridge(): StageBridge {
     cameraDistance: 0,
     modelRadius: 1,
     anchors: new Map(),
+    labelled: null,
     stats: { calls: 0, triangles: 0, geometries: 0, textures: 0, fps: undefined, gpu: undefined, buffer: [0, 0], lastFrame: 0 },
     listeners: new Set(),
     invalidate: () => {},

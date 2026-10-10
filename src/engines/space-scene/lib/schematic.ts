@@ -6,8 +6,8 @@
  *    lines a flow with `parts` runs along
  *  - elevation: the ARCHITECTURE panel — every primitive part's rest bounds
  *    projected on the section plane, with a scale bar step
- *  - labelBudget / stackColumn: leader-label count by camera distance and
- *    the one-column de-overlap used by the leader labels
+ *  - labelBudget: leader-label count by camera distance (placement:
+ *    leader-layout.ts)
  */
 import type { Part, PartGroup, SectionPlane } from '../schema';
 import { explodeOffset } from './explode';
@@ -249,19 +249,4 @@ export function scaleStep(span: number): number {
 export function labelBudget(ratio: number, max = 10, min = 3): number {
   const k = Math.min(1, Math.max(0, (ratio - 1.6) / (3.4 - 1.6)));
   return Math.round(min + (max - min) * k);
-}
-
-/**
- * De-overlap one label column: `want` are desired top edges (sorted by the
- * caller in screen order), `heights` the label heights; labels keep at least
- * `gap` between them and stay inside [top, bottom]. Returns the top edges.
- */
-export function stackColumn(want: readonly number[], heights: readonly number[], top: number, bottom: number, gap: number): number[] {
-  const out = want.map((y, i) => Math.min(Math.max(y, top), bottom - heights[i]!));
-  for (let i = 1; i < out.length; i++) out[i] = Math.max(out[i]!, out[i - 1]! + heights[i - 1]! + gap);
-  for (let i = out.length - 1; i >= 0; i--) {
-    const limit = i === out.length - 1 ? bottom - heights[i]! : out[i + 1]! - heights[i]! - gap;
-    out[i] = Math.min(out[i]!, limit);
-  }
-  return out;
 }

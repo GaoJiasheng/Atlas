@@ -16,6 +16,12 @@ export const REFERENCE_TWEEN_MS = 2000;
 export const REFERENCE_FOV = 16;
 /** ORBIT turntable: one turn per 40 s. */
 export const ORBIT_PERIOD_S = 40;
+/** Cover camera in and out (HUD hidden / shown). */
+export const COVER_TWEEN_MS = 800;
+/** Share of the stage width the model's bounding sphere fills in the default cover camera. */
+export const COVER_FILL = 0.75;
+/** …and at most this share of the stage height. */
+export const COVER_MAX_HEIGHT = 1.3;
 
 /**
  * Where the camera should go after a transition:
@@ -133,6 +139,24 @@ export function referenceCamera(bounds: Box3Like, plane: SectionPlane, aspect: n
   // A plan view looks down; nudge so the orbit controls keep a well-defined up.
   if (plane === 'xz') position[2] += dist * 1e-3;
   return { position, target: c, fov };
+}
+
+/**
+ * The default cover camera: `cam` re-fitted so a sphere (the model's bounds)
+ * fills `fill` of the stage width, seen from the same direction and centred
+ * on the sphere. On wide stages the sphere may overrun the height by up to
+ * 30 % (a bounding sphere is larger than the model inside it), no more.
+ */
+export function fitSphereCamera(cam: OrbitCamera, center: readonly number[], radius: number, aspect: number, fill = COVER_FILL): OrbitCamera {
+  const fov = cam.fov ?? DEFAULT_FOV;
+  const tv = Math.tan((fov * Math.PI) / 360);
+  const t = Math.min(fill * tv * Math.max(aspect, 0.1), COVER_MAX_HEIGHT * tv);
+  const d = Math.max(radius, 1e-3) / Math.sin(Math.atan(t));
+  let dir = [cam.position[0] - cam.target[0], cam.position[1] - cam.target[1], cam.position[2] - cam.target[2]];
+  const len = Math.hypot(dir[0]!, dir[1]!, dir[2]!);
+  dir = len > 1e-9 ? dir.map((v) => v / len) : [0, 0, 1];
+  const c: Vec3 = [center[0] ?? 0, center[1] ?? 0, center[2] ?? 0];
+  return { position: [c[0] + dir[0]! * d, c[1] + dir[1]! * d, c[2] + dir[2]! * d], target: c, fov };
 }
 
 const r3 = (n: number) => Math.round(n * 1000) / 1000;

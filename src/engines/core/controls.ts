@@ -111,7 +111,7 @@ export interface VoiceLogEntry {
 
 /** What an engine registers. Every field is optional. */
 export interface SceneControls {
-  /** Camera presets, in key order (digit `1` = first). */
+  /** Camera presets, in key order (digit `1` = first, …, `9`, then `0` = the tenth; later ones have buttons only). */
   presets?: {
     items: readonly ScenePreset[];
     set(id: string, options: InstantOption): void;
@@ -257,10 +257,32 @@ export interface KeyBinding {
   name: string;
 }
 
+/** Presets with a digit key: `1`–`9`, then `0` for the tenth. */
+export const PRESET_DIGITS = 10;
+
+/** The digit key of the preset at `index` (0-based), or `null` past the tenth. */
+export function presetDigit(index: number): string | null {
+  if (index < 0 || index >= PRESET_DIGITS) return null;
+  return index === 9 ? '0' : String(index + 1);
+}
+
+/** The preset index a digit key selects (`'0'` = the tenth), or `null` for any other key. */
+export function presetIndexOfKey(key: string): number | null {
+  if (!/^[0-9]$/.test(key)) return null;
+  return key === '0' ? 9 : Number(key) - 1;
+}
+
+/** Key hint for `count` presets: `1`, `1–6`, `1–9`, `1–9, 0`. */
+export function presetKeyHint(count: number): string {
+  if (count <= 1) return '1';
+  if (count <= 9) return `1–${count}`;
+  return '1–9, 0';
+}
+
 /** Every key the host handles for these controls (docs/08 §3). */
 export function buildKeymap(controls: SceneControls): KeyBinding[] {
   const out: KeyBinding[] = [];
-  (controls.presets?.items ?? []).slice(0, 9).forEach((p, i) => out.push({ key: String(i + 1), type: 'preset', name: p.id }));
+  (controls.presets?.items ?? []).slice(0, PRESET_DIGITS).forEach((p, i) => out.push({ key: presetDigit(i)!, type: 'preset', name: p.id }));
   for (const m of allModes(controls, true, '')) {
     const key = m.key?.toLowerCase();
     if (key && key.length === 1 && !RESERVED_KEYS.has(key) && !/\d/.test(key)) out.push({ key, type: 'mode', name: m.id });

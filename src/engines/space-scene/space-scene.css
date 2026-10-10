@@ -230,6 +230,12 @@ div.space-inspector__detail:not([hidden]) {
   fill: transparent;
   pointer-events: all;
 }
+.space-co__plate {
+  fill: var(--stage-bg);
+  opacity: 0.8;
+  pointer-events: none;
+  transition: opacity var(--dur-fast) linear;
+}
 .space-co__text {
   paint-order: stroke;
   stroke: var(--bg);

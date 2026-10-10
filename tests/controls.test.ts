@@ -6,6 +6,9 @@ import {
   createHudActions,
   createHudStore,
   docId,
+  presetDigit,
+  presetIndexOfKey,
+  presetKeyHint,
   registerSceneControls,
   trackCamera,
   type SceneControls,
@@ -64,6 +67,17 @@ describe('registration, modes and keymap', () => {
       ['labels', 'l', false],
     ]);
     expect(allModes({}, true, 'Labels')).toEqual([]);
+  });
+
+  it('gives presets 1–9, then 0 for the tenth, and no digit after that', () => {
+    const many: SceneControls = {
+      presets: { items: Array.from({ length: 13 }, (_, i) => ({ id: `p${i + 1}`, label: `P${i + 1}` })), set: () => {} },
+    };
+    const keys = buildKeymap(many).filter((k) => k.type === 'preset');
+    expect(keys.map((k) => `${k.key}:${k.name}`)).toEqual(['1:p1', '2:p2', '3:p3', '4:p4', '5:p5', '6:p6', '7:p7', '8:p8', '9:p9', '0:p10']);
+    expect([0, 8, 9, 10, 12, -1].map(presetDigit)).toEqual(['1', '9', '0', null, null, null]);
+    expect(['1', '9', '0', 'a', '10', ' '].map(presetIndexOfKey)).toEqual([0, 8, 9, null, null, null]);
+    expect([1, 6, 9, 10, 13].map(presetKeyHint)).toEqual(['1', '1–6', '1–9', '1–9, 0', '1–9, 0']);
   });
 
   it('maps digits to presets, letters to modes, reserved keys to the host', () => {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { chainKey, elevation, flowLinks, labelBudget, partChain, planeAxes, scaleStep, stackColumn } from '../../src/engines/space-scene/lib/schematic';
+import { chainKey, elevation, flowLinks, labelBudget, partChain, planeAxes, scaleStep } from '../../src/engines/space-scene/lib/schematic';
 import type { Part } from '../../src/engines/space-scene/schema';
 
 const p = (id: string, group: string, at: [number, number, number], connects: string[] = []) =>
@@ -55,19 +55,12 @@ describe('elevation', () => {
   });
 });
 
-describe('leader label layout', () => {
+describe('leader label budget', () => {
   it('shows fewer labels in close-ups', () => {
     expect(labelBudget(5)).toBe(10);
     expect(labelBudget(1)).toBe(3);
     expect(labelBudget(2.5)).toBeGreaterThan(3);
     expect(labelBudget(2.5)).toBeLessThan(10);
-  });
-  it('stacks a column without overlap inside the band', () => {
-    const tops = stackColumn([100, 105, 110, 400], [30, 30, 30, 30], 50, 300, 8);
-    for (let i = 1; i < tops.length; i++) expect(tops[i]!).toBeGreaterThanOrEqual(tops[i - 1]! + 38 - 1e-9);
-    expect(tops[0]).toBeGreaterThanOrEqual(50);
-    expect(tops[3]! + 30).toBeLessThanOrEqual(300);
-    expect(stackColumn([10], [30], 50, 300, 8)).toEqual([50]);
   });
 });
 

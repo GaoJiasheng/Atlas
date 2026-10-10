@@ -3,12 +3,24 @@
  * Catmull-Rom curve; if the last point equals the first the curve is closed
  * (a loop). The curve is baked into evenly spaced (arc-length) samples that
  * the particle shader interpolates, so particles move at constant speed.
+ * The sample count follows the path length (one per `FLOW_SAMPLE_SPACING`,
+ * 64–512), so particles keep to the curve through tight bends instead of
+ * cutting the corners.
  */
 import { CatmullRomCurve3, Vector3 } from 'three';
 import type { Vec3 } from './math';
 
-/** Number of baked samples per flow (uniform array size in the shader). */
-export const FLOW_SAMPLES = 64;
+/** Fewest and most baked samples per flow (the shader reads them from a 1-row float texture). */
+export const FLOW_SAMPLES_MIN = 64;
+export const FLOW_SAMPLES_MAX = 512;
+/** Arc length per baked sample, scene units (8 mm in a metre-scale model). */
+export const FLOW_SAMPLE_SPACING = 0.008;
+
+/** Baked samples for a path of `length` scene units. */
+export function flowSampleCount(length: number): number {
+  const n = Math.ceil(Math.max(0, length) / FLOW_SAMPLE_SPACING) + 1;
+  return Math.min(FLOW_SAMPLES_MAX, Math.max(FLOW_SAMPLES_MIN, n));
+}
 
 export function isClosedPath(path: readonly (readonly number[])[]): boolean {
   if (path.length < 3) return false;
@@ -40,12 +52,15 @@ export interface BakedFlow {
   closed: boolean;
 }
 
-export function bakeFlowPath(path: readonly (readonly number[])[], count = FLOW_SAMPLES): BakedFlow {
+/** Evenly spaced samples of the path's curve; `count` defaults to `flowSampleCount(length)`. */
+export function bakeFlowPath(path: readonly (readonly number[])[], count?: number): BakedFlow {
   const curve = buildFlowCurve(path);
+  const length = curve.getLength();
+  count = Math.max(2, Math.round(count ?? flowSampleCount(length)));
   const spaced = curve.getSpacedPoints(count - 1);
   const points = new Float32Array(count * 3);
   spaced.forEach((p, i) => points.set([p.x, p.y, p.z], i * 3));
-  return { points, count, length: curve.getLength(), closed: curve.closed };
+  return { points, count, length, closed: curve.closed };
 }
 
 /**

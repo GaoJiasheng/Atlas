@@ -2,14 +2,15 @@
  * Particle material for flows: a hand-written ShaderMaterial. Each particle
  * carries a start offset along the path; the vertex shader advances it by
  * `uTime * uSpeed / uLength`, interpolates the baked arc-length samples of the
- * Catmull-Rom curve (uniform array), takes its colour from the flow's colour
+ * Catmull-Rom curve (64–512 of them in a 1-row float texture, read with
+ * `texelFetch`), takes its colour from the flow's colour
  * stops at that fraction (linear RGB, up to MAX_STOPS) and attenuates point
  * size with distance. Open paths fade in / out at their ends unless the flow
  * is `ends: open` (segments laid end to end). Supports clipping planes
  * (cutaway) like the part materials.
  */
-import { AdditiveBlending, Color, NormalBlending, ShaderMaterial, Vector3 } from 'three';
-import { FLOW_SAMPLES, type BakedFlow } from '../../lib/flow-curve';
+import { AdditiveBlending, Color, DataTexture, FloatType, NearestFilter, NormalBlending, RGBAFormat, ShaderMaterial } from 'three';
+import type { BakedFlow } from '../../lib/flow-curve';
 
 /** Colour stops the shader interpolates (schema MAX_FLOW_STOPS). */
 export const MAX_STOPS = 6;
@@ -18,7 +19,8 @@ const vertexShader = /* glsl */ `
 #include <common>
 #include <clipping_planes_pars_vertex>
 
-uniform vec3 uPoints[SAMPLES];
+uniform sampler2D uPath;
+uniform float uCount;
 uniform float uTime;
 uniform float uSpeed;
 uniform float uLength;
@@ -50,11 +52,12 @@ vec3 stopColor(float u) {
 
 void main() {
   float u = fract(aOffset + uTime * uSpeed / max(uLength, 1e-4));
-  float x = u * float(SAMPLES - 1);
-  int i = int(min(floor(x), float(SAMPLES - 2)));
-  float f = x - float(i);
+  float x = u * (uCount - 1.0);
+  float fi = min(floor(x), uCount - 2.0);
+  int i = int(fi);
+  float f = x - fi;
   // \`position\` holds a small per-particle jitter around the centre line.
-  vec3 p = mix(uPoints[i], uPoints[i + 1], f) + position;
+  vec3 p = mix(texelFetch(uPath, ivec2(i, 0), 0).xyz, texelFetch(uPath, ivec2(i + 1, 0), 0).xyz, f) + position;
   vec4 mvPosition = modelViewMatrix * vec4(p, 1.0);
   gl_Position = projectionMatrix * mvPosition;
   gl_PointSize = uSize * (0.7 + 0.6 * aSeed) * uScale / max(-mvPosition.z, 0.05);
@@ -88,7 +91,8 @@ void main() {
 
 export type FlowMaterial = ShaderMaterial & {
   uniforms: {
-    uPoints: { value: Vector3[] };
+    uPath: { value: DataTexture };
+    uCount: { value: number };
     uTime: { value: number };
     uSpeed: { value: number };
     uLength: { value: number };
@@ -104,17 +108,28 @@ export type FlowMaterial = ShaderMaterial & {
   };
 };
 
+/** The baked samples as a `count` × 1 RGBA float texture (xyz, nearest: the shader interpolates). */
+function pathTexture(baked: BakedFlow): DataTexture {
+  const data = new Float32Array(baked.count * 4);
+  for (let i = 0; i < baked.count; i++) data.set(baked.points.subarray(i * 3, i * 3 + 3), i * 4);
+  const tex = new DataTexture(data, baked.count, 1, RGBAFormat, FloatType);
+  tex.minFilter = NearestFilter;
+  tex.magFilter = NearestFilter;
+  tex.generateMipmaps = false;
+  tex.needsUpdate = true;
+  return tex;
+}
+
+/** Disposing the material also disposes its path texture. */
 export function createFlowMaterial(baked: BakedFlow, speed: number, open: boolean): FlowMaterial {
-  const points = Array.from({ length: FLOW_SAMPLES }, (_, i) => {
-    const j = Math.min(i, baked.count - 1) * 3;
-    return new Vector3(baked.points[j], baked.points[j + 1], baked.points[j + 2]);
-  });
-  return new ShaderMaterial({
+  const path = pathTexture(baked);
+  const material = new ShaderMaterial({
     vertexShader,
     fragmentShader,
-    defines: { SAMPLES: FLOW_SAMPLES, MAX_STOPS },
+    defines: { MAX_STOPS },
     uniforms: {
-      uPoints: { value: points },
+      uPath: { value: path },
+      uCount: { value: baked.count },
       uTime: { value: 0 },
       uSpeed: { value: speed },
       uLength: { value: baked.length },
@@ -132,6 +147,8 @@ export function createFlowMaterial(baked: BakedFlow, speed: number, open: boolea
     depthWrite: false,
     clipping: true,
   }) as FlowMaterial;
+  material.addEventListener('dispose', () => path.dispose());
+  return material;
 }
 
 /** Colour stops as `[at, sRGB hex]` (one stop = a single colour). */

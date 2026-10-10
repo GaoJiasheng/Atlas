@@ -1,7 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import {
+  COVER_FILL,
+  COVER_MAX_HEIGHT,
   DEFAULT_CAMERA,
   fitCameraToAspect,
+  fitSphereCamera,
   referenceCamera,
   resolveTargetCamera,
   roundCamera,
@@ -101,5 +104,28 @@ describe('transitionCamera', () => {
   });
   it('snap does not pick a new target', () => {
     expect(transitionCamera({ reason: 'snap', stored: ch1, baseline: ch1, own: null, view: 'assembled', views })).toBeNull();
+  });
+});
+
+describe('fitSphereCamera (default cover camera)', () => {
+  const view = { position: [3, 2, 4] as [number, number, number], target: [0, 0, 0] as [number, number, number], fov: 30 };
+  it('centres the sphere, keeps the view direction and fills ~75 % of the stage width', () => {
+    const cam = fitSphereCamera(view, [0.5, 1, 0], 1.2, 1.6);
+    expect(cam.target).toEqual([0.5, 1, 0]);
+    expect(cam.fov).toBe(30);
+    const d = [cam.position[0] - 0.5, cam.position[1] - 1, cam.position[2]];
+    const len = Math.hypot(d[0]!, d[1]!, d[2]!);
+    const dir0 = [3, 2, 4].map((v) => v / Math.hypot(3, 2, 4));
+    d.forEach((v, i) => expect(v / len).toBeCloseTo(dir0[i]!, 6));
+    // The sphere's silhouette: tan(asin(r / d)) against the half width tan(hfov / 2).
+    const tv = Math.tan((30 * Math.PI) / 360);
+    const share = Math.tan(Math.asin(1.2 / len)) / (tv * 1.6);
+    expect(share).toBeCloseTo(COVER_FILL, 6);
+  });
+  it('overruns the height of very wide stages by at most 30 %', () => {
+    const cam = fitSphereCamera(view, [0, 0, 0], 1, 3);
+    const len = Math.hypot(...cam.position);
+    const tv = Math.tan((30 * Math.PI) / 360);
+    expect(Math.tan(Math.asin(1 / len)) / tv).toBeCloseTo(COVER_MAX_HEIGHT, 6);
   });
 });

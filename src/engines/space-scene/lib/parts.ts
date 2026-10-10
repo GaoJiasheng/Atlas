@@ -51,6 +51,26 @@ export function tubeBendRadius(p: Extract<Primitive, { kind: 'tube' }>): number 
   return p.bendRadius ?? p.radius * 3;
 }
 
+/** The point halfway along a tube's path (by length, in the primitive's own axes, relative to `at`). */
+export function tubeMidpoint(p: Extract<Primitive, { kind: 'tube' }>): Vec3 {
+  const pts = p.path;
+  let total = 0;
+  for (let i = 1; i < pts.length; i++) total += Math.hypot(pts[i]![0]! - pts[i - 1]![0]!, pts[i]![1]! - pts[i - 1]![1]!, pts[i]![2]! - pts[i - 1]![2]!);
+  let left = total / 2;
+  for (let i = 1; i < pts.length; i++) {
+    const a = pts[i - 1]!;
+    const b = pts[i]!;
+    const len = Math.hypot(b[0]! - a[0]!, b[1]! - a[1]!, b[2]! - a[2]!);
+    if (len >= left && len > 0) {
+      const k = left / len;
+      return [a[0]! + (b[0]! - a[0]!) * k, a[1]! + (b[1]! - a[1]!) * k, a[2]! + (b[2]! - a[2]!) * k];
+    }
+    left -= len;
+  }
+  const last = pts[pts.length - 1] ?? [0, 0, 0];
+  return [last[0] ?? 0, last[1] ?? 0, last[2] ?? 0];
+}
+
 export interface Transform {
   /** Rotation applied first (about the part centre). */
   rotation: Mat3;

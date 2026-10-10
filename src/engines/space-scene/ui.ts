@@ -1,7 +1,8 @@
 /**
  * Engine-local UI state shared by the View (HUD controls) and the WebGL
- * stage (separate React roots): ORBIT turntable, REFERENCE mode and the
- * presentation (on, and the leader labels of the beat on show). None of it
+ * stage (separate React roots): ORBIT turntable, REFERENCE mode, the
+ * presentation (on, and the leader labels of the beat on show) and the cover
+ * camera (HUD hidden). None of it
  * goes into the URL; a chapter change ends ORBIT and REFERENCE.
  */
 import { createStore, type StoreApi } from 'zustand/vanilla';
@@ -29,10 +30,12 @@ export interface SpaceUiState {
   presenting: boolean;
   /** Leader labels of the beat on show (`null`: the chapter's own). */
   beatLabels: string[] | null;
+  /** HUD hidden outside the presentation: the stage frames the cover camera (and goes back when the HUD returns). */
+  cover: boolean;
 }
 
 export type SpaceUiStore = StoreApi<SpaceUiState>;
 
 export function createSpaceUi(): SpaceUiStore {
-  return createStore<SpaceUiState>()(() => ({ orbit: false, reference: null, nextTweenMs: null, presenting: false, beatLabels: null }));
+  return createStore<SpaceUiState>()(() => ({ orbit: false, reference: null, nextTweenMs: null, presenting: false, beatLabels: null, cover: false }));
 }

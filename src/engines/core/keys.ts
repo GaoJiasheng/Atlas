@@ -1,13 +1,13 @@
 /**
  * Scene keyboard (docs/08 §3), one window listener per scene:
- *   ← →  chapter            1–9  camera presets       letters  registered modes (L = labels)
+ *   ← →  chapter            1–9, 0  camera presets (0 = the tenth)   letters  registered modes (L = labels)
  *   SPACE pause / run        H    hide / show HUD      ESC      show HUD, else engine escape
  * Ignored with Ctrl / Cmd / Alt, when an event was already handled, inside
  * text fields and selects, and inside `[data-keys="own"]` regions. Arrows also
  * yield to sliders, radio groups and tab lists; SPACE yields to focused buttons.
  */
 import { useEffect } from 'react';
-import { allModes, type HudActions, type HudStore } from './controls';
+import { allModes, presetIndexOfKey, type HudActions, type HudStore } from './controls';
 
 const TEXT_FIELDS = 'input, textarea, select, [contenteditable="true"], [data-keys="own"]';
 const OWN_ARROW_KEYS = '[role="slider"], [role="radiogroup"], [role="tablist"]';
@@ -40,8 +40,9 @@ export function useSceneKeys(hud: HudStore, actions: HudActions, step: (delta: 1
         actions.togglePaused();
         return;
       }
-      if (/^[1-9]$/.test(key)) {
-        const preset = controls.presets?.items[Number(key) - 1];
+      const index = presetIndexOfKey(key);
+      if (index !== null) {
+        const preset = controls.presets?.items[index];
         if (preset) actions.setPreset(preset.id);
         return;
       }
