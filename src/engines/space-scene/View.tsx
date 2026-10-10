@@ -10,7 +10,7 @@
  *
  * PRESENTATION (P) runs on the core presentation system (core/presentation).
  * SpaceScene's adapter: a beat is its chapter's target plus the beat's view /
- * part / explode / run / cutaway / layers / hide and its camera (an orbit
+ * part / explode / run / cutaway / layers / hide / pose / ghost and its camera (an orbit
  * camera, a named preset's camera, else the chapter's), applied with the
  * store's `applyState` (camera tween 1.4 s); the beat has settled when the
  * stage reports the camera move done (and the explode / put-aside motion has
@@ -31,6 +31,7 @@ import { usePresentation, type SpaceBeatSpec, type SpacePresentationAdapter, typ
 import { t as tl, tx, type BilingualText, type UiKey } from '../../i18n';
 import { DEFAULT_CAMERA, fitCameraToAspect, REFERENCE_TWEEN_MS, referenceCamera, roundCamera } from './lib/camera';
 import { modelBounds } from './lib/parts';
+import { POSE_DURATION } from './lib/pose';
 import { targetExplodeAmount } from './lib/explode';
 import type { SpaceSceneExt } from './index';
 import type { SpaceChapterState, SpaceSceneData, SpaceView, ViewPresets } from './schema';
@@ -45,6 +46,7 @@ import { DetailPanel } from './hud/DetailPanel';
 import { StatePanel } from './hud/StatePanel';
 import { PerfReadout } from './hud/PerfReadout';
 import { spaceSpecRows } from './hud/spec';
+import { partNumber } from './hud/common';
 import { LeaderLabels } from './hud/LeaderLabels';
 import './space-scene.css';
 
@@ -176,6 +178,8 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
         ...(spec?.cutaway !== undefined ? { cutaway: spec.cutaway } : {}),
         ...(spec?.layers ? { layers: [...spec.layers] } : {}),
         hidden: spec?.hide ? [...spec.hide] : target.hidden,
+        pose: spec?.pose !== undefined ? spec.pose : target.pose,
+        ghosted: spec?.ghost ? [...spec.ghost] : target.ghosted,
         camera,
       };
       ui.setState({ orbit: false, beatLabels: spec?.labels ? [...spec.labels] : null, nextTweenMs: instant ? null : BEAT_TWEEN_MS });
@@ -183,12 +187,15 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       if (instant) return;
       const id = store.getState().transition.id;
       const after = store.getState();
-      const motion =
+      const poseMs = before.pose === after.pose ? 0 : ((after.pose ? file.poses?.[after.pose]?.duration : undefined) ?? POSE_DURATION) * 1000;
+      const motion = Math.max(
+        poseMs,
         targetExplodeAmount(before.view, before.explode) !== targetExplodeAmount(after.view, after.explode)
           ? EXPLODE_MS
           : sameIds(before.hidden, after.hidden)
             ? 0
-            : HIDE_MS;
+            : HIDE_MS,
+      );
       return Promise.all([cameraSettled(bridge, id, SETTLE_TIMEOUT_MS), wait(motion)]).then(() => undefined);
     },
     onEnter: () => {
@@ -209,6 +216,8 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
         run: ref ? ref.run : snap.run,
         cutaway: snap.cutaway,
         hidden: [...snap.hidden],
+        pose: snap.pose,
+        ghosted: [...snap.ghosted],
         labels: u.beatLabels,
         orbit: u.orbit,
         presetId: ref ? ref.presetId : h.presetId,
@@ -221,8 +230,8 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
     saveState: () => entered.current!,
     restoreState: (saved) => {
       ui.setState({ presenting: false, beatLabels: saved.labels, orbit: saved.orbit });
-      const { chapter, layers, camera, view, part, explode, run, cutaway, hidden } = saved;
-      store.getState().applyState({ chapter, layers, camera, view, part, explode, run, cutaway, hidden }, { instant: false });
+      const { chapter, layers, camera, view, part, explode, run, cutaway, hidden, pose, ghosted } = saved;
+      store.getState().applyState({ chapter, layers, camera, view, part, explode, run, cutaway, hidden, pose, ghosted }, { instant: false });
       hud.setState({ presetId: saved.presetId, cameraFree: saved.cameraFree });
     },
   };
@@ -246,6 +255,9 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
     const inReference = reference !== null;
     const exploded = s.view === 'exploded';
     const pct = Math.round(s.explode * 100);
+    // A named cut says its name in the status line (`CUTAWAY SAGITTAL`); the default plane, its half.
+    const cutName = s.cutaway !== 'none' && s.cutaway !== 'half' ? s.cutaway : null;
+    const cutStatus = `${t('space.mode.cutaway')} ${cutName ? tx(file.views.cuts?.[cutName]?.label ?? { en: cutName, zh: cutName }, 'en') : '50'}`;
     const modes: SceneMode[] = [
       { id: 'xray', key: 'x', label: t('space.mode.xray'), on: s.view === 'xray', tone: 'xray' },
       {
@@ -256,15 +268,17 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
         disabled: inReference,
         status: `${t('space.state.explode')} ${pct}`,
       },
-      { id: 'cutaway', key: 'c', label: t('space.mode.cutaway'), on: s.cutaway === 'half', tone: 'cut', status: `${t('space.mode.cutaway')} 50` },
+      { id: 'cutaway', key: 'c', label: t('space.mode.cutaway'), on: s.cutaway !== 'none', tone: 'cut', status: cutStatus },
       // Flow paths do not follow the parts apart (docs/12 §7.5): no FLOW while exploded.
       { id: 'flow', key: 'f', label: t('space.mode.flow'), on: s.run, tone: 'hot', disabled: inReference || exploded },
       { id: 'reference', key: 'r', label: t('space.mode.reference'), on: inReference, tone: 'ink', disabled: presenting, phone: false },
       { id: 'presentation', key: 'p', label: t('present.mode'), on: presenting, tone: 'signal', status: presentationStatus, phone: false },
     ];
-    const partIndex = s.part ? file.parts.findIndex((p) => p.id === s.part) : -1;
+    const picked = s.part ? file.parts.find((p) => p.id === s.part && !p.context) : undefined;
+    // A paired part says its side: `#05 HIND FEMUR · L`.
+    const side = picked?.side ? ` · ${picked.side === 'left' ? 'L' : 'R'}` : '';
     const status = [
-      ...(partIndex >= 0 ? [`#${String(partIndex + 1).padStart(2, '0')} ${tx(file.parts[partIndex]!.name, 'en').toUpperCase()}`] : []),
+      ...(picked ? [`#${partNumber(file, picked.id)} ${tx(picked.name, 'en').toUpperCase()}${side}`] : []),
       ...(inReference ? [t('space.status.locked').toLocaleUpperCase()] : []),
       ...(exploded && !inReference && file.flows.length > 0 ? [t('space.status.flowLocked').toLocaleUpperCase()] : []),
     ];
@@ -343,6 +357,10 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
         }
         if (s.part !== null) {
           set({ part: null });
+          return true;
+        }
+        if (store.getState().solo !== null) {
+          set({ solo: null });
           return true;
         }
         if (ui.getState().reference) {

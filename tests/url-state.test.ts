@@ -45,7 +45,17 @@ describe('url-state encode/decode', () => {
 
   it('drops invalid hl ids and cut values', () => {
     expect(decodeSceneState('?hl=ok-id,Bad%20Id,also-ok')).toEqual({ highlight: ['ok-id', 'also-ok'] });
-    expect(decodeSceneState('?cut=full')).toEqual({});
+    expect(decodeSceneState('?cut=Full_Cut')).toEqual({});
+    // A named cut (kebab id) passes; the engine falls back to no cut when the data has none of that name.
+    expect(decodeSceneState('?cut=sagittal')).toEqual({ cutaway: 'sagittal' });
+  });
+
+  it('round-trips a pose (pose), and an explicit rest (empty)', () => {
+    expect(toSearch({ chapter: 'a', pose: 'wings-open' })).toBe('?ch=a&pose=wings-open');
+    expect(decodeSceneState('?pose=wings-open')).toEqual({ pose: 'wings-open' });
+    expect(decodeSceneState('?pose=')).toEqual({ pose: null });
+    expect(decodeSceneState('?pose=Bad%20Pose')).toEqual({});
+    expect(toSearch({ chapter: 'a', pose: null }, { chapter: 'a', pose: null })).toBe('?ch=a');
   });
 
   it('round-trips geological time, orbit cameras, theme and nulls', () => {

@@ -108,13 +108,14 @@ export function stylePartMaterial({ material, uniforms }: PartMaterial, s: PartS
   material.roughness = look.roughness;
   material.envMapIntensity = look.envIntensity;
   const rough = kit.roughness(look.finish);
-  const normal = kit.normal();
+  const normal = kit.normal(look.finish);
   const changed = material.roughnessMap !== rough || material.normalMap !== normal;
   material.roughnessMap = rough;
   material.normalMap = normal;
-  // Orange peel on powder coat only; the rest keep the (shared) map at zero strength.
-  const peel = look.finish === 'peel' ? 0.1 : 0;
-  material.normalScale.set(peel, peel);
+  // Orange peel on powder coat (and a trace on chitin), facets / fibres / rings on organisms; the rest keep the map at zero strength.
+  material.normalScale.set(look.normal, look.normal);
+  // Soft tissue: a little self-light in its own colour reads as light scattered under the surface.
+  material.emissive.set(look.color).multiplyScalar(look.glow);
   uniforms.uSelColor.value.set(s.signal);
   uniforms.uSelRim.value = s.rim;
   uniforms.uSelTint.value = s.tint;
@@ -124,7 +125,7 @@ export function stylePartMaterial({ material, uniforms }: PartMaterial, s: PartS
   if (changed) material.needsUpdate = true;
 }
 
-/** Clip by the cutaway plane; closed parts fill their cut face. */
+/** Clip by the cutaway plane; closed parts fill their cut face (double-sided membranes never: their back is a face, not a section). */
 export function setPartClipping({ material, uniforms }: PartMaterial, clipping: Plane[] | null, closed: boolean, twoSided: boolean): void {
   material.clippingPlanes = clipping;
   const side = clipping || twoSided ? DoubleSide : FrontSide;

@@ -53,29 +53,32 @@ export interface ChainLayout {
   links: ChainLink[];
 }
 
-export type ChainPart = Pick<Part, 'id' | 'group' | 'connects'> & { context?: boolean | undefined };
+export type ChainPart = Pick<Part, 'id' | 'group' | 'connects'> & { context?: boolean | undefined; twinOf?: string | undefined };
 
-/** Parts that are numbered and drawn in the chain: every part except `context` scenery. */
-export function numberedParts<P extends { context?: boolean | undefined }>(parts: readonly P[]): P[] {
-  return parts.filter((p) => !p.context);
+/** Parts that are numbered and counted: every part except `context` scenery and bilateral twins (they share their part's number). */
+export function numberedParts<P extends { context?: boolean | undefined; twinOf?: string | undefined }>(parts: readonly P[]): P[] {
+  return parts.filter((p) => !p.context && p.twinOf === undefined);
 }
 
 /**
  * Lay the part chain out in a `width`-wide box; height follows the longest
- * column. Groups without parts (flow-only groups) get no column; context
- * parts are left out. When a column has more than `compactAfter` rows the
- * row pitch drops to `compactRow`.
+ * column. Groups without parts (flow-only groups) and groups with
+ * `card: false` get no column; context parts and bilateral twins are left
+ * out (node numbers stay the part numbers). When a column has more than
+ * `compactAfter` rows the row pitch drops to `compactRow`.
  */
 export function partChain(
   parts: readonly ChainPart[],
-  groups: readonly Pick<PartGroup, 'id'>[],
+  groups: readonly (Pick<PartGroup, 'id'> & { card?: boolean | undefined })[],
   width = 330,
   opts: { header?: number; row?: number; compactRow?: number; compactAfter?: number; gap?: number; pad?: number } = {},
 ): ChainLayout {
   const header = opts.header ?? 16;
   const gap = opts.gap ?? 22;
   const pad = opts.pad ?? 6;
-  const list = numberedParts(parts);
+  const numbered = numberedParts(parts);
+  const off = new Set(groups.filter((g) => g.card === false).map((g) => g.id));
+  const list = numbered.filter((p) => p.group === undefined || !off.has(p.group));
   const used = new Set(list.map((p) => p.group));
   const cols = groups.length > 0 ? groups.map((g) => g.id).filter((id) => used.has(id)) : [...used].filter((g): g is string => g !== undefined);
   const counts = new Map<string, number>();
@@ -88,12 +91,13 @@ export function partChain(
   const columns = cols.map((id, i) => ({ id, x: pad + i * (colW + gap), w: colW }));
   const nodes: ChainNode[] = [];
   const rowsUsed = new Map<string, number>();
-  list.forEach((p, i) => {
+  const number = new Map(numbered.map((p, i) => [p.id, i + 1]));
+  list.forEach((p) => {
     const c = columns.find((col) => col.id === p.group);
     if (!c || p.group === undefined) return;
     const r = rowsUsed.get(p.group) ?? 0;
     rowsUsed.set(p.group, r + 1);
-    nodes.push({ id: p.id, group: p.group, n: i + 1, x: c.x, y: header + 6 + r * row, w: c.w, h: nodeH });
+    nodes.push({ id: p.id, group: p.group, n: number.get(p.id)!, x: c.x, y: header + 6 + r * row, w: c.w, h: nodeH });
   });
   const byId = new Map(nodes.map((n) => [n.id, n]));
   const seen = new Set<string>();

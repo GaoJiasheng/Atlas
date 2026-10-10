@@ -14,6 +14,19 @@ import { sourcesFile } from '../../content/schema/sources';
 import { glossaryFile } from '../../content/schema/glossary';
 import { detailSourceIds } from './lib/detail';
 import { GROUP_LABEL_PREFIX } from './lib/labels';
+import {
+  bilateralSpec,
+  mirrorAnimation,
+  mirrorPoint,
+  mirrorPrimitive,
+  mirrorRepeat,
+  mirrorTransform,
+  otherSide,
+  twinId,
+  type BilateralSpec,
+  type Side,
+} from './lib/bilateral';
+import { MAX_POSES, POSE_DURATION } from './lib/pose';
 
 /* ------------------------------------------------------------------ */
 /* Parts                                                               */
@@ -76,9 +89,28 @@ export const ENGINEERED_KINDS = ['bevelBox', 'tube', 'flange', 'fins', 'vessel',
  *                in the XZ plane (axis Y), wire radius `bar`;
  *                slats: `count` slats `bar` wide across a `size` [w, d, h] frame (XZ plane)
  * Every primitive also takes `mirror` (x | y | z): reflect the shape in its own
- * plane normal to that axis before `rotation` (a left-hand copy of a profile).
+ * plane normal to that axis before `rotation` (a left-hand copy of a profile),
+ * and `scale` [sx, sy, sz]: stretch it along its own axes first (a sphere
+ * becomes an ellipsoid, a lathe an oval shell). Order: scale, mirror, rotation.
  */
 export const SHAPED_KINDS = ['lathe', 'extrude', 'curvedPanel', 'blades', 'coilBank', 'grille'] as const;
+
+/**
+ * Organic parts (docs/06 §SpaceScene "organisms"; lib/sweep.ts, lib/wing.ts):
+ *   sweep  {path: [[x,y,z]...], radius: r | [r per path point], section?, up?, hollow?, rings?, closed?, caps?}
+ *          a lofted tube along a smooth (centripetal Catmull-Rom) curve through `path`
+ *          (relative to `at`): legs, antennae, gut, vessels, tracheae, nerves.
+ *          section: round (default) | flat (= {flat: 0.5}) | u | {flat: h/w} | {u: opening°, flat?};
+ *          `flat` squashes the section along `up` (default +Y), a U opens on the side away
+ *          from `up`; hollow: wall thickness (a cut shows the lumen); rings: {every, depth}
+ *          a groove every `every` units, depth × r deep (segments, annuli, taenidia);
+ *          caps: round (default) | flat | none; closed: a loop
+ *   wing   {outline: [[x,y]...], veins: [[[x,y]...]...], thickness, fold?: {hinge, segments, lead?, rest?, foldedWidth?}}
+ *          a thin membrane in the XY plane (thickness along Z) with vein hairlines on both
+ *          faces; `fold` makes it a fan hinged at `hinge` that a pose or a sequence opens
+ *          (`fan` 1, as drawn) or folds (0) into `segments` pleats; `rest`: fan at rest (default 0)
+ */
+export const ORGANIC_KINDS = ['sweep', 'wing'] as const;
 
 const PRIMITIVE_ARITY: Record<(typeof PRIMITIVE_KINDS)[number], number> = {
   box: 3,
@@ -95,7 +127,11 @@ const PRIMITIVE_ARITY: Record<(typeof PRIMITIVE_KINDS)[number], number> = {
  * per theme (colour, metalness, roughness, procedural brushed / orange-peel
  * maps). `metal` and `matte` are older names kept as aliases of `steel` and
  * `plastic`. `enamel` is warm-white baked enamel (appliance casings), `brass`
- * the yellow alloy of valves and flare nuts.
+ * the yellow alloy of valves and flare nuts. Organism families: `chitin`
+ * (semi-gloss cuticle, tint it the species' colour), `membrane` (translucent,
+ * double-sided: wings, tympana, air sacs), `tissue` (matte soft tissue with a
+ * soft-lit look), `muscle` (fibre normal map), `trachea` (white, ringed),
+ * `nerve` (pale yellow), `eye` (dark gloss with hexagonal facets).
  */
 export const MATERIAL_PRESETS = [
   'casing',
@@ -108,6 +144,13 @@ export const MATERIAL_PRESETS = [
   'glass',
   'enamel',
   'brass',
+  'chitin',
+  'membrane',
+  'tissue',
+  'muscle',
+  'trachea',
+  'nerve',
+  'eye',
   'metal',
   'matte',
 ] as const;
@@ -130,6 +173,8 @@ const placement = {
   tint: colorRef.optional(),
   /** Reflect the shape in its own plane normal to this axis (before `rotation`). */
   mirror: z.enum(['x', 'y', 'z']).optional(),
+  /** Stretch along the shape's own axes before `mirror` and `rotation` (sphere → ellipsoid). */
+  scale: positiveVec3.optional(),
 };
 
 const point2 = z.tuple([z.number(), z.number()]);
@@ -261,6 +306,47 @@ export const primitiveSchema = z
         ...placement,
       })
       .strict(),
+    z
+      .object({
+        kind: z.literal('sweep'),
+        path: z.array(vec3).min(2).max(128),
+        radius: z.union([positive, z.array(positive).min(2).max(128)]),
+        section: z
+          .union([
+            z.enum(['round', 'flat', 'u']),
+            z.object({ flat: z.number().min(0.05).max(1) }).strict(),
+            z.object({ u: z.number().min(10).max(300), flat: z.number().min(0.05).max(1).optional() }).strict(),
+          ])
+          .default('round'),
+        up: vec3.optional(),
+        hollow: positive.optional(),
+        rings: z.object({ every: positive, depth: z.number().min(0).max(0.6) }).strict().optional(),
+        closed: z.boolean().default(false),
+        caps: z.enum(['round', 'flat', 'none']).default('round'),
+        radial: z.number().int().min(6).max(48).optional(),
+        segments: z.number().int().min(4).max(512).optional(),
+        ...placement,
+      })
+      .strict(),
+    z
+      .object({
+        kind: z.literal('wing'),
+        outline,
+        veins: z.array(z.array(point2).min(2).max(64)).max(64).default([]),
+        thickness: positive,
+        fold: z
+          .object({
+            hinge: point2,
+            segments: z.number().int().min(2).max(24),
+            lead: point2.optional(),
+            rest: z.number().min(0).max(1).optional(),
+            foldedWidth: z.number().min(0.02).max(0.9).optional(),
+          })
+          .strict()
+          .optional(),
+        ...placement,
+      })
+      .strict(),
   ])
   .superRefine((p, ctx) => {
     const issue = (path: (string | number)[], message: string) =>
@@ -308,6 +394,23 @@ export const primitiveSchema = z
         break;
       case 'vessel':
         if (p.length === 0 && p.headRatio === 0) issue(['length'], 'a vessel needs a length or domed heads');
+        break;
+      case 'sweep': {
+        p.path.forEach((pt, i) => {
+          const prev = p.path[i - 1];
+          if (prev && Math.hypot(pt[0] - prev[0], pt[1] - prev[1], pt[2] - prev[2]) < 1e-6) issue(['path', i], 'repeats the previous point');
+        });
+        if (Array.isArray(p.radius) && p.radius.length !== p.path.length)
+          issue(['radius'], `a radius profile needs one value per path point (${p.path.length}), got ${p.radius.length}`);
+        const rmin = Array.isArray(p.radius) ? Math.min(...p.radius) : p.radius;
+        if (p.hollow !== undefined && p.hollow >= rmin) issue(['hollow'], `wall ${p.hollow} must be thinner than the smallest radius ${rmin}`);
+        if (p.closed && p.path.length < 3) issue(['closed'], 'a closed sweep needs at least 3 points');
+        if (p.up && Math.hypot(...p.up) < 1e-9) issue(['up'], '`up` must not be zero');
+        break;
+      }
+      case 'wing':
+        if (p.fold && p.outline.every(([x, y]) => Math.hypot(x - p.fold!.hinge[0], y - p.fold!.hinge[1]) < 1e-9))
+          issue(['fold', 'hinge'], 'the hinge must not be the whole outline');
         break;
       case 'panelHole': {
         const [w, h] = p.size;
@@ -380,6 +483,25 @@ export const partSchema = z
     context: z.boolean().optional(),
     /** Override the automatic shadow choice (only parts ≥ 28 % of the model radius cast). */
     castShadow: z.boolean().optional(),
+    /**
+     * One side of a symmetric pair (lib/bilateral.ts): the engine adds the mirror
+     * twin `<id>-r` (`<id>-l` when `side: right`), reflected in the plane through
+     * the origin normal to `axis` (default z), with mirrored explode, animations,
+     * pose entries and `connects`. `true` = `{ axis: z, side: left }`;
+     * `labelBoth`: leader labels name both sides (default: this side only).
+     */
+    bilateral: z
+      .union([
+        z.literal(true),
+        z
+          .object({
+            axis: z.enum(['x', 'y', 'z']).optional(),
+            side: z.enum(['left', 'right']).optional(),
+            labelBoth: z.boolean().optional(),
+          })
+          .strict(),
+      ])
+      .optional(),
     /** Planning metadata only; never rendered. */
     level: level.optional(),
   })
@@ -400,7 +522,17 @@ export const partSchema = z
     message: 'repeat axis must not be zero',
     path: ['repeat', 'axis'],
   });
-export type Part = z.output<typeof partSchema>;
+/**
+ * Set by the bilateral expansion (never written in parts.json): `side` of a
+ * paired part, the other side's id (`pair`), and on the twin, `twinOf` (the
+ * part it mirrors: numbered, carded and labelled through it).
+ */
+export interface PairInfo {
+  side?: Side;
+  pair?: string;
+  twinOf?: string;
+}
+export type Part = z.output<typeof partSchema> & PairInfo;
 
 /* ------------------------------------------------------------------ */
 /* Groups, flows, animations, views                                    */
@@ -411,6 +543,8 @@ export const groupSchema = z
     id: kebabId,
     name: bilingual,
     color: colorRef,
+    /** `false`: the group's parts stay out of the part-chain card (still numbered, labelled, selectable). */
+    card: z.boolean().optional(),
   })
   .strict();
 export type PartGroup = z.output<typeof groupSchema>;
@@ -460,6 +594,13 @@ export const flowSchema = z
      */
     parts: z.array(kebabId).min(2).optional(),
     whenRun: z.boolean().default(true),
+    /**
+     * Also run the mirror image (id `<id>-r`, or `-l` with `side: right`):
+     * path reflected like a bilateral part's, `parts` mapped to their twins.
+     */
+    bilateral: z
+      .union([z.literal(true), z.object({ axis: z.enum(['x', 'y', 'z']).optional(), side: z.enum(['left', 'right']).optional() }).strict()])
+      .optional(),
   })
   .strict()
   .superRefine((f, ctx) => {
@@ -475,7 +616,22 @@ const animationBase = {
   /** Part id to animate. */
   target: kebabId,
   whenRun: z.boolean().default(true),
+  /** Point the motion turns / scales about, scene coordinates (a joint); default the part centre. */
+  pivot: vec3.optional(),
 };
+
+const scaleValue = z.union([positive, positiveVec3]);
+
+/** One transform: about `pivot` scale, then rotate (XYZ Euler, degrees), then `offset`; `fan` opens (1) / folds (0) a wing. */
+const transformFields = {
+  rotation: vec3.optional(),
+  offset: vec3.optional(),
+  scale: scaleValue.optional(),
+  fan: z.number().min(0).max(1).optional(),
+};
+
+export const sequenceKeySchema = z.object({ t: z.number().nonnegative(), ...transformFields }).strict();
+export type SequenceKeyData = z.output<typeof sequenceKeySchema>;
 
 export const animationSchema = z.discriminatedUnion('kind', [
   z.object({ ...animationBase, kind: z.literal('rotate'), axis: vec3, rpm: z.number() }).strict(),
@@ -491,8 +647,20 @@ export const animationSchema = z.discriminatedUnion('kind', [
     })
     .strict(),
   z
-    /** `scale` is the peak scale factor (e.g. 1.15), `hz` breaths per second. */
-    .object({ ...animationBase, kind: z.literal('pulse'), scale: z.number().positive(), hz: z.number().positive() })
+    /** `scale` is the peak scale factor (e.g. 1.15, or [sx, sy, sz] per axis), `hz` breaths per second. */
+    .object({ ...animationBase, kind: z.literal('pulse'), scale: scaleValue, hz: z.number().positive() })
+    .strict(),
+  z
+    /**
+     * Keyframe clip: `keys` (t in seconds, ascending, ≤ 32) eased key to key;
+     * `loop` (default) repeats it, else it plays once per run and holds the last key.
+     */
+    .object({
+      ...animationBase,
+      kind: z.literal('sequence'),
+      keys: z.array(sequenceKeySchema).min(2).max(32),
+      loop: z.boolean().default(true),
+    })
     .strict(),
 ]);
 export type PartAnimation = z.output<typeof animationSchema>;
@@ -524,6 +692,9 @@ export type CutawayPlane = z.output<typeof cutawayPlaneSchema>;
 export const SECTION_PLANES = ['xy', 'zy', 'xz'] as const;
 export type SectionPlane = (typeof SECTION_PLANES)[number];
 
+/** Named cut planes a topic may declare. */
+export const MAX_CUTS = 4;
+
 export const viewsSchema = z
   .object({
     assembled: viewPreset.optional(),
@@ -532,6 +703,16 @@ export const viewsSchema = z
     isolate: viewPreset.optional(),
     /** Optional cutaway plane (see cutawayPlaneSchema). */
     cutaway: cutawayPlaneSchema.optional(),
+    /**
+     * Named cut planes (≤ 4; same semantics as `cutaway`): a chapter or beat
+     * `cutaway: "<name>"` cuts with one (a sagittal or a transverse section);
+     * `label` names it in the status line (default: the name).
+     */
+    cuts: z
+      .record(kebabId, z.object({ normal: vec3, offset: z.number().default(0), label: bilingual.optional() }).strict())
+      .refine((r) => Object.keys(r).length <= MAX_CUTS, { message: `at most ${MAX_CUTS} named cuts` })
+      .refine((r) => !Object.keys(r).some((k) => k === 'none' || k === 'half'), { message: '`none` and `half` are the engine\'s own cutaway values' })
+      .optional(),
     /** Optional elevation plane for the ARCHITECTURE panel and REFERENCE view. */
     section: z.object({ plane: z.enum(SECTION_PLANES) }).strict().optional(),
     /** Optional REFERENCE camera; default: a long-lens straight view on the section plane. */
@@ -610,7 +791,37 @@ export const telemetrySchema = z
 export type TelemetryRow = z.output<typeof telemetrySchema>;
 export const MAX_TELEMETRY_ROWS = 6;
 
-export const partsFile = z
+/** One part's entry in a pose (see lib/pose.ts): `pivot` in scene coordinates. */
+export const poseEntrySchema = z.object({ pivot: vec3.optional(), ...transformFields }).strict();
+export type PoseEntry = z.output<typeof poseEntrySchema>;
+
+/**
+ * A pose: `{ "<part id>": entry, …, "duration"?: seconds }` (`duration` is
+ * reserved: the transition into the pose, default 0.8 s). Parsed into
+ * `{ duration, parts }`.
+ */
+export const poseSchema = z
+  .record(z.string(), z.union([z.number(), poseEntrySchema]))
+  .superRefine((r, ctx) => {
+    for (const [key, value] of Object.entries(r)) {
+      if (key === 'duration') {
+        if (typeof value !== 'number' || value < 0 || value > 10)
+          ctx.addIssue({ code: z.ZodIssueCode.custom, path: [key], message: '`duration` is the transition in seconds (0–10)' });
+      } else if (!KEBAB_ID.test(key)) ctx.addIssue({ code: z.ZodIssueCode.custom, path: [key], message: 'a part id (kebab-case)' });
+      else if (typeof value === 'number') ctx.addIssue({ code: z.ZodIssueCode.custom, path: [key], message: 'a pose entry `{ pivot?, rotation?, offset?, scale?, fan? }`' });
+    }
+  })
+  .transform((r) => {
+    const parts: Record<string, PoseEntry> = {};
+    for (const [key, value] of Object.entries(r)) if (key !== 'duration' && typeof value !== 'number') parts[key] = value;
+    return { duration: typeof r.duration === 'number' ? r.duration : POSE_DURATION, parts };
+  });
+export type Pose = z.output<typeof poseSchema>;
+
+/** Real-world units: one scene unit is `scale` `modelUnit` (lib/units.ts). */
+export const unitsSchema = z.object({ modelUnit: z.enum(['mm', 'cm', 'm']), scale: positive }).strict();
+
+export const partsFileBase = z
   .object({
     /**
      * glb model for parts that use `mesh`, as a site path under `public/`
@@ -632,6 +843,13 @@ export const partsFile = z
     telemetry: z.array(telemetrySchema).min(1).max(MAX_TELEMETRY_ROWS).optional(),
     /** Named camera presets (≤ 6; see cameraPresetSchema). */
     presets: z.array(cameraPresetSchema).min(1).max(MAX_NAMED_PRESETS).optional(),
+    /** Named poses (≤ 8; see poseSchema): a chapter or beat `pose: "<name>"` eases the parts into one. */
+    poses: z
+      .record(kebabId, poseSchema)
+      .refine((r) => Object.keys(r).length <= MAX_POSES, { message: `at most ${MAX_POSES} poses` })
+      .optional(),
+    /** Real-world units of the model (see unitsSchema); default: scene units. */
+    units: unitsSchema.optional(),
   })
   .strict()
   .superRefine((file, ctx) => {
@@ -639,9 +857,48 @@ export const partsFile = z
       if ((RESERVED_PRESET_IDS as readonly string[]).includes(p.id))
         ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['presets', i, 'id'], message: `"${p.id}" is the engine's own preset id` });
     });
-    const parts = new Set(file.parts.map((p) => p.id));
+    const declared = new Set(file.parts.map((p) => p.id));
+    // Mirror twins are parts too: flows, poses and chapters may name them.
+    const twins = new Map<string, string>();
+    file.parts.forEach((p, i) => {
+      const spec = bilateralSpec(p.bilateral);
+      if (!spec) return;
+      const id = twinId(p.id, spec);
+      if (declared.has(id)) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['parts', i, 'bilateral'], message: `the mirror twin "${id}" clashes with a part of that id` });
+      twins.set(id, p.id);
+    });
+    const parts = new Set([...declared, ...twins.keys()]);
+    const byId = new Map(file.parts.map((p) => [p.id, p]));
+    const partOf = (id: string) => byId.get(twins.get(id) ?? id);
+    const folds = (id: string) => {
+      const p = partOf(id);
+      return [p?.primitive, ...(p?.extra ?? [])].some((q) => q?.kind === 'wing' && q.fold !== undefined);
+    };
+    file.groups.forEach((g, i) => {
+      if (file.groups.findIndex((x) => x.id === g.id) !== i)
+        ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['groups', i, 'id'], message: `duplicate group "${g.id}"` });
+    });
+    Object.entries(file.poses ?? {}).forEach(([name, pose]) => {
+      for (const [id, entry] of Object.entries(pose.parts)) {
+        if (!parts.has(id)) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['poses', name, id], message: `unknown part "${id}"` });
+        else if (entry.fan !== undefined && !folds(id))
+          ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['poses', name, id, 'fan'], message: `"${id}" has no folding wing (\`wing\` with \`fold\`)` });
+      }
+    });
+    file.animations.forEach((a, i) => {
+      if (a.kind !== 'sequence') return;
+      a.keys.forEach((k, j) => {
+        const prev = a.keys[j - 1];
+        if (prev && k.t <= prev.t) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['animations', i, 'keys', j, 't'], message: 'key times must increase' });
+      });
+      const fans = a.keys.filter((k) => k.fan !== undefined).length;
+      if (fans > 0 && fans < a.keys.length) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['animations', i, 'keys'], message: 'give `fan` in every key or in none' });
+      else if (fans > 0 && parts.has(a.target) && !folds(a.target))
+        ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['animations', i, 'keys'], message: `"${a.target}" has no folding wing for \`fan\`` });
+    });
     const groups = new Set(file.groups.map((g) => g.id));
     const contextIds = new Set(file.parts.filter((p) => p.context).map((p) => p.id));
+    for (const [twin, of] of twins) if (contextIds.has(of)) contextIds.add(twin);
     file.parts.forEach((p, i) => {
       if (p.group !== undefined && !groups.has(p.group)) {
         ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['parts', i, 'group'], message: `unknown group "${p.group}"` });
@@ -649,7 +906,7 @@ export const partsFile = z
       p.connects.forEach((c, j) => {
         if (!parts.has(c)) {
           ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['parts', i, 'connects', j], message: `unknown part "${c}"` });
-        } else if (contextIds.has(c) || p.context) {
+        } else if (contextIds.has(twins.get(c) ?? c) || p.context) {
           ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['parts', i, 'connects', j], message: 'context parts take no part in `connects`' });
         }
       });
@@ -684,6 +941,78 @@ export const partsFile = z
       }
     });
   });
+type PartsFileInput = z.output<typeof partsFileBase>;
+type FlowData = z.output<typeof flowSchema>;
+
+/**
+ * Expand bilateral parts and flows (lib/bilateral.ts): each twin follows its
+ * part; animations aimed at a bilateral part get a mirrored copy aimed at the
+ * twin (`<animation id>-r`), poses a mirrored entry for the twin (unless the
+ * pose names the twin itself), `connects` to other bilateral parts point at
+ * the same side. Runs at build time, so data.json carries the twins.
+ */
+export function expandBilateral(file: PartsFileInput): Omit<PartsFileInput, 'parts'> & { parts: Part[] } {
+  const specs = new Map<string, BilateralSpec>();
+  for (const p of file.parts) {
+    const spec = bilateralSpec(p.bilateral);
+    if (spec) specs.set(p.id, spec);
+  }
+  if (specs.size === 0 && !file.flows.some((f) => f.bilateral)) return file;
+  const twinOf = (id: string) => {
+    const spec = specs.get(id);
+    return spec ? twinId(id, spec) : id;
+  };
+  const parts: Part[] = [];
+  for (const p of file.parts) {
+    const spec = specs.get(p.id);
+    if (!spec) {
+      parts.push(p);
+      continue;
+    }
+    const id = twinOf(p.id);
+    const { axis } = spec;
+    parts.push({ ...p, side: spec.side, pair: id });
+    parts.push({
+      ...p,
+      id,
+      side: otherSide(spec.side),
+      pair: p.id,
+      twinOf: p.id,
+      ...(p.primitive ? { primitive: mirrorPrimitive(p.primitive, axis) } : {}),
+      ...(p.extra ? { extra: p.extra.map((e) => mirrorPrimitive(e, axis)) } : {}),
+      ...(p.repeat ? { repeat: mirrorRepeat(p.repeat, axis) } : {}),
+      explode: { ...p.explode, dir: mirrorPoint(p.explode.dir, axis) },
+      connects: p.connects.map(twinOf),
+    });
+  }
+  const animations = file.animations.flatMap((a) => {
+    const spec = specs.get(a.target);
+    if (!spec) return [a];
+    return [a, mirrorAnimation(a, spec.axis, twinId(a.id, spec), twinOf(a.target))];
+  });
+  const flows = file.flows.flatMap((f): FlowData[] => {
+    const spec = bilateralSpec(f.bilateral);
+    if (!spec) return [f];
+    const twin: FlowData = { ...f, id: twinId(f.id, spec), path: f.path.map((q) => mirrorPoint(q, spec.axis)) };
+    if (f.parts) twin.parts = f.parts.map(twinOf);
+    return [f, twin];
+  });
+  const poses = file.poses
+    ? Object.fromEntries(
+        Object.entries(file.poses).map(([name, pose]) => {
+          const out: Record<string, PoseEntry> = { ...pose.parts };
+          for (const [id, entry] of Object.entries(pose.parts)) {
+            const spec = specs.get(id);
+            if (spec && out[twinOf(id)] === undefined) out[twinOf(id)] = mirrorTransform(entry, spec.axis);
+          }
+          return [name, { ...pose, parts: out }];
+        }),
+      )
+    : undefined;
+  return { ...file, parts, animations, flows, ...(poses ? { poses } : {}) };
+}
+
+export const partsFile = partsFileBase.transform(expandBilateral);
 export type PartsFile = z.output<typeof partsFile>;
 
 /** Parsed `data/*.json` of a SpaceScene topic, keyed by file name. */
@@ -731,17 +1060,24 @@ export const MAX_BEAT_LABELS = 6;
  * camera only, not the preset's view). The caption shows once the camera has
  * settled; `audio` is a site path (under `public/`) played on entering the beat.
  */
+/** `none`, `half` (the default plane, `views.cutaway`) or the name of a cut in `views.cuts`. */
+export const cutawayRef = kebabId;
+
 export const spaceBeat = z
   .object({
     view: z.enum(SPACE_VIEWS).optional(),
     part: kebabId.nullable().optional(),
     explode: z.number().min(0).max(1).optional(),
     run: z.boolean().optional(),
-    cutaway: z.enum(['none', 'half']).optional(),
+    cutaway: cutawayRef.optional(),
     camera: z.union([orbitCamera, kebabId]).optional(),
     layers: z.array(kebabId).optional(),
     labels: z.array(labelRef).max(MAX_BEAT_LABELS).optional(),
     hide: z.array(kebabId).optional(),
+    /** A pose of `parts.json` `poses` for this beat (`null`: rest); default the chapter's. */
+    pose: kebabId.nullable().optional(),
+    /** Groups (or parts) drawn faint for this beat (not cumulative); default the chapter's. */
+    ghost: z.array(kebabId).optional(),
     caption: bilingual,
     audio: z
       .string()
@@ -761,8 +1097,20 @@ export const spaceChapterState = z
     /** Visible groups (e.g. refrigerant, air, electrical). */
     layers: z.array(kebabId).optional(),
     camera: orbitCamera.optional(),
-    cutaway: z.enum(['none', 'half']).optional(),
+    /** `none`, `half` or a named cut of `views.cuts`. */
+    cutaway: cutawayRef.optional(),
     theme: theme.optional(),
+    /**
+     * A pose of `parts.json` `poses` (not cumulative: a chapter without `pose`
+     * is at rest); the parts ease into it (the pose's `duration`, default 0.8 s).
+     */
+    pose: kebabId.nullable().optional(),
+    /**
+     * Groups (or single parts) drawn faint (0.12 opacity, not pickable, not
+     * labelled) in this chapter: the body outline around the system on show.
+     * Not cumulative.
+     */
+    ghost: z.array(kebabId).optional(),
     /**
      * Parts (or `group:<id>` groups) that get leader labels in this chapter
      * (default: every visible part, capped by camera distance).
@@ -807,7 +1155,8 @@ export function spacePresetIds(data: SpaceSceneData): string[] {
 /**
  * What a chapter state (and each of its beats) names that the data does not
  * have: `part` / `hide` must be parts (not context ones), `labels` parts or
- * `group:<id>` groups, `layers` groups, a beat's string `camera` a named preset.
+ * `group:<id>` groups, `layers` groups, `ghost` groups or parts, `pose` a pose,
+ * `cutaway` none / half / a named cut, a beat's string `camera` a named preset.
  */
 export function spaceChapterIssues(state: SpaceChapterState, data: SpaceSceneData): string[] {
   const f = data.parts;
@@ -815,7 +1164,9 @@ export function spaceChapterIssues(state: SpaceChapterState, data: SpaceSceneDat
   const groups = new Set(f.groups.map((g) => g.id));
   const presets = new Set(spacePresetIds(data));
   const out: string[] = [];
-  const check = (where: string, s: Pick<SpaceBeat, 'part' | 'hide' | 'labels' | 'layers'> & { camera?: unknown }) => {
+  const poses = new Set(Object.keys(f.poses ?? {}));
+  const cuts = new Set(['none', 'half', ...Object.keys(f.views.cuts ?? {})]);
+  const check = (where: string, s: Pick<SpaceBeat, 'part' | 'hide' | 'labels' | 'layers' | 'pose' | 'ghost' | 'cutaway'> & { camera?: unknown }) => {
     const part = (field: string, id: string, selectable: boolean) => {
       const p = parts.get(id);
       if (!p) out.push(`${where}${field}: unknown part "${id}"`);
@@ -828,6 +1179,9 @@ export function spaceChapterIssues(state: SpaceChapterState, data: SpaceSceneDat
       else if (!groups.has(id.slice(GROUP_LABEL_PREFIX.length))) out.push(`${where}labels: unknown group "${id.slice(GROUP_LABEL_PREFIX.length)}"`);
     }
     for (const id of s.layers ?? []) if (!groups.has(id)) out.push(`${where}layers: unknown group "${id}"`);
+    for (const id of s.ghost ?? []) if (!groups.has(id) && !parts.has(id)) out.push(`${where}ghost: unknown group or part "${id}"`);
+    if (typeof s.pose === 'string' && !poses.has(s.pose)) out.push(`${where}pose: unknown pose "${s.pose}" (not in parts.json poses)`);
+    if (s.cutaway !== undefined && !cuts.has(s.cutaway)) out.push(`${where}cutaway: unknown cut "${s.cutaway}" (none, half or a views.cuts name)`);
     if (typeof s.camera === 'string' && !presets.has(s.camera))
       out.push(`${where}camera: unknown preset "${s.camera}" (not in parts.json presets)`);
   };

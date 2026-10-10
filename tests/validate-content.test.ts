@@ -198,7 +198,7 @@ describe('validate-content: SpaceScene beats and presets', () => {
   });
 
   it('keeps the engine\'s own preset ids (ORBIT, REF.) for the engine', () => {
-    expect(linesFor('space-orbit-preset').join('\n')).toContain('data.parts.presets.1.id: "orbit" is the engine\'s own preset id');
+    expect(linesFor('space-orbit-preset').join('\n')).toContain('data.parts.presets.2.id: "orbit" is the engine\'s own preset id');
   });
 });
 

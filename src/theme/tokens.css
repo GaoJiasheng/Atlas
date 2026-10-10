@@ -10,6 +10,7 @@
  *   --loop    secondary loop                      --neutral  neutral side
  *   --signal  emphasis: selection, current chapter
  *   --xray    X-RAY state                         --cut   cutaway face (ochre)
+ *   --food    food in a gut (ochre-green)         --haemolymph  insect blood (teal-grey)
  * Older names (`--accent-*`, `--bg`, `--surface`, `--border` ...) are mapped
  * onto these so engines and data refs (`token:accent-1`) keep working.
  *
@@ -94,6 +95,8 @@
   --signal: #cc6328;
   --xray: #3a9aa0;
   --cut: #b8973c;
+  --food: #8a8a3c;
+  --haemolymph: #7d948f;
 
   /* Legacy names mapped onto the plate palette. */
   --bg: var(--paper);
@@ -168,6 +171,8 @@
   --signal: #dd8554;
   --xray: #56bbc2;
   --cut: #cdb165;
+  --food: #aead5c;
+  --haemolymph: #9cb4ae;
 
   --bg: var(--paper);
   --surface: var(--panel-solid);

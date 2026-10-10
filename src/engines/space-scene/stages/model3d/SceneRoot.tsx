@@ -20,6 +20,7 @@ import { targetExplodeAmount } from '../../lib/explode';
 import { animationsByPart } from '../../lib/animation';
 import { resolveDataColor, resolveMaterialLook } from '../../lib/color';
 import { damp, easeInOutCubic, normalize3, type Vec3 } from '../../lib/math';
+import { POSE_DURATION, restTransform, toTransform, type PartTransform } from '../../lib/pose';
 import { createRuntime, keepAnimating, MAX_DT, RuntimeContext, useRuntime, type StageRuntime } from './runtime';
 import { PartNode, type PartHandle, type PartShape } from './PartNode';
 import { Flows } from './Flows';
@@ -53,6 +54,8 @@ const EXPLODE_DRAG_MS = 220;
 const NO_LAYERS: readonly string[] = [];
 /** Zero offset / extent (stable identity for the part props). */
 const NO_HALF: Vec3 = [0, 0, 0];
+/** Ink of section hatching and wing veins on the dark plate (darker than the lit surfaces it marks). */
+const CINEMA_INK = '#1f2124';
 /** Parts at least this fraction of the model radius cast the key light's shadow. */
 const SHADOW_CASTER_RATIO = 0.28;
 
@@ -127,6 +130,9 @@ export function SceneRoot({ store, ui, bridge, data, chapters, look }: SceneRoot
       cutaway: st.cutaway,
       layers: st.layers,
       hidden: st.hidden,
+      ghosted: st.ghosted,
+      solo: st.solo,
+      pose: st.pose,
       transitionId: st.transition.id,
       instant: st.transition.instant,
     })),
@@ -213,7 +219,7 @@ export function SceneRoot({ store, ui, bridge, data, chapters, look }: SceneRoot
           kit,
           signal,
           cut,
-          ink: cinema ? '#1f2124' : ink,
+          ink: cinema ? CINEMA_INK : ink,
           rim: cinema ? 0.35 : 0.75,
           tint: cinema ? 0.03 : 0.02,
           hatchPx: Math.round(7 * dpr),
@@ -222,12 +228,34 @@ export function SceneRoot({ store, ui, bridge, data, chapters, look }: SceneRoot
     }
     return out;
   }, [data.parts, groupColors, look, kit, dpr]);
+  // Wing veins: ink hairlines; on the dark plate a dark ink too (veins read darker than the lit membrane).
+  const lineColor = useMemo(
+    () => (look.theme === 'cinema' ? CINEMA_INK : resolveDataColor('token:ink-2', look.tokens, look.theme, '#5a544b')),
+    [look],
+  );
 
   /* ---------------- explorer state -> display ---------------- */
   const displays = useMemo(
-    () => resolveAllPartDisplays(data.parts, { view: s.view, part: s.part, layers: s.layers, hidden: s.hidden }),
-    [data.parts, s.view, s.part, s.layers, s.hidden],
+    () =>
+      resolveAllPartDisplays(data.parts, { view: s.view, part: s.part, layers: s.layers, hidden: s.hidden, ghosted: s.ghosted, solo: s.solo }),
+    [data.parts, s.view, s.part, s.layers, s.hidden, s.ghosted, s.solo],
   );
+
+  /* ---------------- poses ---------------- */
+  // One stable transform per (pose, part): PartNode eases whenever its target object changes.
+  const rest = useMemo<PartTransform>(() => restTransform(), []);
+  const poseTargets = useMemo(
+    () =>
+      new Map(
+        Object.entries(data.poses ?? {}).map(([name, pose]) => [
+          name,
+          new Map(Object.entries(pose.parts).map(([id, entry]) => [id, toTransform(entry)] as [string, PartTransform])),
+        ]),
+      ),
+    [data.poses],
+  );
+  const poseParts = s.pose ? poseTargets.get(s.pose) : undefined;
+  const poseSeconds = s.pose ? (data.poses?.[s.pose]?.duration ?? POSE_DURATION) : POSE_DURATION;
   const explodeTarget = targetExplodeAmount(s.view, s.explode);
   const anims = useMemo(() => animationsByPart(data.animations), [data.animations]);
   const alwaysOn = useMemo(
@@ -235,12 +263,13 @@ export function SceneRoot({ store, ui, bridge, data, chapters, look }: SceneRoot
     [data.animations, data.flows],
   );
 
-  const plane = data.views.cutaway;
+  // `half`: the default plane; a name: one of `views.cuts`; anything else: no cut.
   const clipping = useMemo(() => {
-    if (s.cutaway !== 'half') return null;
-    const n = normalize3(plane?.normal ?? [-1, 0, 0]);
-    return [new Plane(new Vector3(n[0], n[1], n[2]), plane?.offset ?? 0)];
-  }, [s.cutaway, plane]);
+    const plane = s.cutaway === 'half' ? (data.views.cutaway ?? { normal: [-1, 0, 0], offset: 0 }) : data.views.cuts?.[s.cutaway];
+    if (!plane) return null;
+    const n = normalize3(plane.normal);
+    return [new Plane(new Vector3(n[0], n[1], n[2]), plane.offset)];
+  }, [s.cutaway, data.views]);
 
   // Instant transitions (deep links, first load, snap) jump instead of easing.
   const snap = useRef({ id: -1, key: 0 });
@@ -281,6 +310,9 @@ export function SceneRoot({ store, ui, bridge, data, chapters, look }: SceneRoot
             styles={partStyles}
             display={display}
             animations={anims.get(part.id) ?? []}
+            pose={poseParts?.get(part.id) ?? rest}
+            poseSeconds={poseSeconds}
+            lineColor={lineColor}
             hovered={hovered === part.id}
             clipping={clipping}
             castShadow={

@@ -4,9 +4,10 @@ import type { StopSpan } from '../lib/flow-stops';
 import { numberedParts } from '../lib/schematic';
 import type { Flow, PartsFile } from '../schema';
 
-/** Two-digit part number (data order, context parts skipped), as in the card, panels and status line. */
+/** Two-digit part number (data order, context parts skipped; a bilateral twin shares its part's), as in the card, panels and status line. */
 export function partNumber(file: PartsFile, id: string): string {
-  const i = numberedParts(file.parts).findIndex((p) => p.id === id);
+  const own = file.parts.find((p) => p.id === id)?.twinOf ?? id;
+  const i = numberedParts(file.parts).findIndex((p) => p.id === own);
   return i < 0 ? '--' : String(i + 1).padStart(2, '0');
 }
 

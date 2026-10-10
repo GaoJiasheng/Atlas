@@ -591,7 +591,7 @@ MapLibre 只在 `controller` chunk 里，View 挂载后才加载（时间轴先�
 `engine: space-scene`、`stage: model3d`。代码在 `src/engines/space-scene/`：
 
 ```
-index.ts                 descriptor（part/view/explode/run/cutaway）
+index.ts                 descriptor（part/view/explode/run/cutaway/pose；不进 URL 的 hidden/ghosted/solo）
 schema.ts                parts.json 的 zod（构建期）
 View.tsx                 HUD 控件注册（预设 / 模式 / 规格行 / 卡片与面板标题）+ 各插槽内容 + 懒加载 Model3DStage
 ui.ts                    引擎内 UI store（ORBIT、REFERENCE、演示中 + 这一拍的标注、封面镜头；不进 URL，View 与舞台共用）
@@ -600,8 +600,9 @@ lib/                     纯函数，有单测：explode / visibility（图层�
                          color（材质族、tint）/ presets（材质名，无 zod）/ animation / telemetry（一阶滞后读数）/ detail（段落 + [S#]）/
                          camera（球坐标插值、REFERENCE 镜头、过渡目标）/ parts（零件包围盒、repeat 变换）/
                          schematic（零件链路、流经连线、立面、标注预算）/ labels（组标注 id、演示时用哪张标注表、组包围盒）/
-                         leader-layout（引线标注摆放：两列、避让 HUD 与被标零件、代价搜索）/ shaped（成形零件的版式数学：盘管管位、回弯、叶片）/ xform / math
-stages/model3d/          R3F 舞台：Model3DStage（createRoot 宿主）、SceneRoot、PartNode、geometry（程序化零件）、shaped（成形零件构建）、
+                         leader-layout（引线标注摆放：两列、避让 HUD 与被标零件、代价搜索）/ shaped（成形零件的版式数学：盘管管位、回弯、叶片）/ xform / math /
+                         sweep（扫掠站点、标架、半径轮廓、环节沟）/ wing（扇形折叠）/ bilateral（双侧镜像）/ pose（姿态、关键帧）/ units（实长）
+stages/model3d/          R3F 舞台：Model3DStage（createRoot 宿主）、SceneRoot、PartNode、geometry（程序化零件）、shaped（成形零件构建）、organic（sweep / wing 构建、FanDeform）、
                          materials（材质 + 选中边缘 / 剖面 shader 补丁）、textures（程序化贴图）、Lighting、
                          GroundShadow、CameraRig、Flows + flowMaterial、probes（标注投影 / 计数 / 阴影更新）、GltfSource
 hud/                     LeaderLabels（leaders）、PartChainCard（card）、ArchitecturePanel / DetailPanel / StatePanel
@@ -663,7 +664,9 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
   "presets": [                             // 可选，≤ 6 个命名镜头预设（docs/12 §7.4 G7）：VIEW 按钮排在 ORBIT、REF. 之后（数字键接着排：1–9，第 10 个是 0，再往后只有按钮）
     { "id": "outdoor", "label": {en, zh}, "camera": { "position": [1.5, 0.75, 1.5], "target": [0.62, 0.3, 0], "fov": 30 },
       "view": "xray" }                     // view 可选：按预设时同时切视图（exploded 时拆开到 0.7 或当前值）；id 全主题唯一，不能叫 orbit / reference
-  ]
+  ],
+  "poses": { "wings-open": { "hindwings": { "pivot": [-0.38, 0.84, 0.1], "rotation": [-15, 0, 0], "fan": 1 }, "duration": 0.8 } },  // 可选，见「生物与有机形体」
+  "units": { "modelUnit": "mm", "scale": 25 }   // 可选：1 场景单位 = 25 mm（比例尺与 ARCHITECTURE 读数用实长）
 }
 ```
 
@@ -690,8 +693,72 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
 - **repeat**：`{count, axis, spacing}`（沿轴、以 `at` 为中心等距）或 `{count, axis, radius}`（绕过 `at` 的轴一圈，每个实例朝外转）。轴是场景坐标。重复的是整个零件（含 `extra`）；同材质的副本烘焙合并成一个几何体（一次绘制），顶点很多时才用 InstancedMesh。
 - **材质族**（`color`）：`casing`（拉丝铝，各向异性）、`steel`（机加工钢）、`powder`（缎面黑粉末涂层，轻微橘皮）、`stainless`（轴向拉丝不锈钢）、`copper`、`brass`（黄铜：阀门、喇叭口螺母）、`rubber`（近黑，roughness .78）、`plastic`（哑光暖砂色，不是默认灰）、`enamel`（暖白烤漆，比纸色深一档，低粗糙度 + 细颗粒粗糙度贴图 = 缎面光泽，家电外壳）、`glass`（半透明）；旧名 `metal` = steel、`matte` = plastic。或者 `token:<name>` / `#hex`：缎面漆。`primitive.tint`（token 或 #hex）给材质族换颜色、保留它的金属度 / 粗糙度 / 贴图，例如浅灰 `powder` 外壳：`"color": "powder", "tint": "#c4c6c2"`。程序化 canvas 贴图给拉丝方向、粗糙度变化、橘皮法线（`stages/model3d/textures.ts`，种子固定，截图可复现）。
 - **流场**：`path` 首尾点相同 = 闭环。centripetal Catmull-Rom，按弧长烘焙进 shader：每 8 mm（0.008 场景单位）一个点，64–512 个，存成一行浮点纹理（`texelFetch` 取样，不占 uniform 数组），粒子在弯头处贴着曲线走、不抄近路（4 m 的冷媒段约 500 个点，弯头偏差从 64 点时的 15–20 mm 降到 3 mm 以内；盘管仍只能画 2–3 程，不能逐根追 U 形弯头），默认每条 360 个细粒子（贴着中心线，像 CFD 流线而不是魔法粒子），`speed` 是场景单位/秒。`stops` 在顶点着色器里按粒子位置插值（线性 RGB）；分段流（冷媒四段）用 `ends: "open"`，并让各段 `count / 长度 × speed` 大致相等（粒子通量连续）。`whenRun: false` 的流/动画一直播放（只受图层开关）。每条流一次绘制。
-- **已知限制**：只有一个剖切面（`views.cutaway` 一个平面同时切所有零件；两个平面暂不做）；`coilBank` 只做平直和 L 形（弧形蒸发器用两三段倾斜的平直盘管拼）；流不随拆开移动；`extrude` / 贯流叶片用 three 的 `ExtrudeGeometry`（`panelHole` 仍是手工三角化）。
+- **已知限制**：同一时刻只有一个剖切面（`views.cutaway` 或一个命名 `views.cuts`，同时切所有零件；两个平面一起切暂不做）；`coilBank` 只做平直和 L 形（弧形蒸发器用两三段倾斜的平直盘管拼）；流不随拆开移动；`extrude` / 贯流叶片用 three 的 `ExtrudeGeometry`（`panelHole` 仍是手工三角化）。
 - **glb**：不要用 Draco/meshopt 压缩（drei 默认去 CDN 拉 Draco 解码器，Atlas 不允许运行时外部请求，所以我们关掉了）。mesh 名找不到会 console.warn，该零件不显示；glb 整体加载失败时积木零件照常显示。
+
+### 生物与有机形体（docs/14 §8 B1–B12）
+
+生物主题（蚱蜢等）用到的数据，全部可选、向后兼容（不写 = 原来的行为）。形状对照 `sample-space` 第 04 章（一只占位"小虫"：躯干 sweep、双侧的眼 / 腿 / 翅、姿态、命名剖切、淡显）。
+
+```jsonc
+// primitive 的新字段与新 kind（lib/sweep.ts、lib/wing.ts、stages/model3d/organic.ts）
+{ "kind": "sphere", "size": [0.07], "scale": [1, 1.35, 0.95], "at": [...], "color": "eye" }   // scale：沿自身轴先缩放，再 mirror、再 rotation（球 → 椭球）
+{ "kind": "sweep",
+  "path": [[0,0,0], [0.4,0.3,0.1], [0.8,0,0.2]],   // 相对 at；centripetal Catmull-Rom 平滑通过各点（≤ 128 点）
+  "radius": [0.06, 0.05, 0.02],                    // 一个数，或每个路径点一个（平滑插值）
+  "section": { "flat": 0.42 },                     // round（默认）| flat（= 0.5）| u | {flat: 高/宽} | {u: 开口°, flat?}
+  "up": [0, 0, 1],                                 // 截面的"上"（默认 +Y）：flat 沿它压扁，U 的开口背向它
+  "hollow": 0.008,                                 // 可选：壁厚 → 空心管（剖切看到腔）；U 截面默认壁厚 0.14 r
+  "rings": { "every": 0.06, "depth": 0.12 },        // 可选：每 every 一道环节沟，深 depth × r（触角分节、腹节、气管螺旋丝）
+  "caps": "round",                                 // round（默认，半球帽）| flat | none（开口，不填剖面）
+  "closed": false, "radial": 16, "segments": 64 }  // closed = 闭环；radial / segments 默认按半径、长度、环节自动
+{ "kind": "wing",
+  "outline": [[0,0], [1,0], [0.9,0.4], [0.5,0.6], [0.1,0.3]],   // XY 平面里的外形（相对 at），厚度沿 Z
+  "veins": [[[0,0], [0.9,0.2]], [[0,0], [0.5,0.5]]],            // 翅脉：折线，画成墨色细线（透明膜一层，在中面；不透明翅两面各一层）
+  "thickness": 0.004,
+  "fold": { "hinge": [0,0], "segments": 6, "lead": [1,0], "rest": 0, "foldedWidth": 0.12 } }
+  // fold：以 hinge 为轴的扇面。fan 1 = 按 outline 画的展开样，0 = 收拢：所有点绕 hinge 转向前缘（到 lead 的射线，默认第一个外形点），
+  // 整扇收成展开角的 foldedWidth，并折成 segments 道手风琴褶。rest = 静止时的 fan（默认 0，收拢）。姿态 / sequence 的 `fan` 驱动它。
+
+// part
+"bilateral": true                          // 或 { "axis": "z", "side": "left", "labelBoth": false }
+// 只写一侧；引擎在构建期（parts.json → data.json）镜像出 `<id>-r`（side: right 时 `<id>-l`），关于过原点、法线 axis（默认 z）的平面：
+// 几何、材质、explode.dir、指向它的动画、姿态条目、connects 里的其它双侧零件都镜像。双胞胎是完整零件（可选、可标注、可 hide / ghost、
+// 流和章节都能写 `<id>-r`），但不另编号、不进零件链路卡、PARTS 不重复计数；选中时状态行写 `#05 HIND FEMUR · L`，详情卡有"左 / 右"芯片。
+// 引线标注默认只标数据这一侧；labelBoth 时列出 `<id>` = 两侧各一个标签。`hide` / `ghost` 写 `<id>` 同时作用于两侧，写 `<id>-r` 只作用于镜像那侧。
+// 代价：镜像件单独绘制（每个材质槽 +1 draw call）。
+
+// group
+{ "id": "growth", "name": {en, zh}, "color": "token:food", "card": false }   // card:false：这一组不进右上零件链路卡（照常编号、可选、可标注）
+// context 零件可以写 group：受图层开关、ghost、solo 控制（仍不标注、不可选）
+
+// flow
+"bilateral": true                          // 另跑一条镜像流 `<id>-r`：path 镜像，parts 换成各自的双胞胎（一次绘制 +1）
+
+// animations：rotate / oscillate / pulse 都可加 pivot（场景坐标，关节点）；pulse.scale 可以是 [sx, sy, sz]
+{ "id": "chew", "target": "mandibles", "kind": "oscillate", "axis": [0, 1, 0.2], "amplitude": 14, "hz": 1.5, "pivot": [-1.18, 0.44, 0.07] }
+{ "id": "pump", "target": "abdomen-sternites", "kind": "pulse", "scale": [1, 1.1, 1.04], "hz": 0.33, "pivot": [0.5, 0.5, 0], "whenRun": false }
+{ "id": "kick", "target": "hind-tibiae", "kind": "sequence", "pivot": [1.02, 0.86, 0.32], "loop": true,
+  "keys": [ { "t": 0, "rotation": [0, 0, 0] }, { "t": 1.4, "rotation": [0, 0, 25] }, { "t": 1.9, "rotation": [0, 0, 25] }, { "t": 2.0, "rotation": [0, 0, -120] }, { "t": 2.4, "rotation": [0, 0, 0] } ] }
+// sequence：keys 的 t（秒）递增，rotation（XYZ 欧拉，度，绕 pivot）/ offset / scale / fan，键与键之间 smoothstep；loop:false = 每次运转从头播一次、停在最后一键
+
+// poses（≤ 8）：{ "<姿态名>": { "<零件 id>": { pivot?, rotation?, offset?, scale?, fan? }, …, "duration"?: 秒 } }
+// 变换顺序：绕 pivot（场景坐标，默认零件中心）先 scale 再 rotation，然后 offset。duration 默认 0.8 s（"duration" 是保留键）。
+// 双侧零件的条目自动镜像给双胞胎（除非该姿态也写了 `<id>-r`）。fan 只给带 fold 的 wing。
+
+// views.cuts（≤ 4）：命名剖切面，语义同 views.cutaway；章 / 拍 `cutaway: "<名字>"`
+"cuts": { "sagittal": { "normal": [0, 0, -1], "offset": 0, "label": { "en": "Sagittal", "zh": "矢状" } } }
+
+// units：1 场景单位 = scale 个 modelUnit（mm | cm | m）
+"units": { "modelUnit": "mm", "scale": 25 }
+```
+
+- **材质族（生物）**：`chitin`（半光泽角质，用 `tint` 给物种本色，带极淡橘皮法线）、`membrane`（半透明 .55、双面、不写深度、不填剖面；后翅、鼓膜、气囊）、`tissue`（哑光软组织，自身颜色的微弱自发光模拟透光）、`muscle`（纵向纤维法线）、`trachea`（白、螺旋环纹法线）、`nerve`（淡黄）、`eye`（深色高光 + 六边形小眼法线）。法线贴图按需生成（机器主题不生成）。sweep 的 UV：u = 弧长 / 平均周长，v = 绕截面一圈，所以纤维 / 环纹密度跟管径走。
+- **token**：`token:food`（赭绿，食物）、`token:haemolymph`（灰青，血淋巴），两套主题都有。
+- **姿态与动画的叠加**：零件变换 = 位置（静止中心 + 拆开 / 移开）→ 姿态（缓动矩阵）→ 动画（绕各自 pivot）→ 形状。姿态跟拆开、X-RAY、剖切都兼容；引线锚点跟着姿态走（不跟动画走）。REFERENCE 不重置姿态。
+- **淡显**：章 / 拍 `ghost: [组或零件]`（不累积）与控制面板 LAYERS 每行末尾的 `⊙`（单显这一组、其余淡显；再点或 ESC 取消；存 store 的 `solo`，换章清掉，不进 URL）。淡显 = .12 透明、不写深度、不可点、不标注、不遮挡标注；选中的零件不淡显；被单显的组即使图层关着也显示。
+- **剖切面名**：状态行写 `CUTAWAY <label>`（默认面仍是 `CUTAWAY 50`）；C 键仍切默认面（开着命名剖切时 C = 关）。
+- **ARCHITECTURE 实长**：有 `units` 时比例尺写 `10 MM` / `5 CM`（1 / 2 / 5 × 10ⁿ 的实长），标签行加模型在立面上的跨度（`XY · 47 PARTS · 64 MM`）；没有时照旧 `U`。分区括号最多三行（放得下就并排），组多于 5 个时图例行距收紧。
 
 ### 章节怎么写（`state`）
 
@@ -701,7 +768,9 @@ state:
   explode: 0.8          # 0..1，只在 exploded 视图生效
   part: compressor      # 选中零件；null 取消
   run: true             # 通电：播放 animations + flows（渐入渐出）
-  cutaway: half         # none | half
+  cutaway: half         # none | half | views.cuts 里的名字
+  pose: wings-open      # 可选：parts.json poses 里的姿态（不累积：不写 = 静止）；null = 静止
+  ghost: [exoskeleton]  # 可选：淡显的组或零件（不累积）
   layers: [refrigerant, air]   # 可见的组
   labels: [compressor, "group:outdoor"]   # 可选：本章引线标注哪些零件（默认：所有可见零件，大件优先，按镜头距离限量）；`group:<组 id>` = 整组一个标注（组锚点）
   hide: [front-panel]          # 可选：本章移开的零件（沿自己的 explode 方向移出 0.25 × dist，后半段淡出，共 .6 s；回来反向）。不累积、不进 URL（store 字段 `hidden`）；被移开的零件不投影、不可点、不标注，ARCHITECTURE 画虚线框
@@ -712,13 +781,15 @@ state:
     - camera: outdoor             # 命名预设 id（只取它的镜头），或 { position, target, fov }
       part: compressor
       cutaway: half
+      pose: jump-flex                     # 这一拍的姿态（不写 = 本章的；null = 静止）
+      ghost: [legs-wings]                 # 这一拍淡显的组（不写 = 本章的）
       labels: [compressor, accumulator]   # 这一拍的引线标注（≤ 6，不累积；不写 = 本章的 labels）
       hide: [outdoor-front]               # 这一拍移开的零件（不累积；不写 = 本章的 hide）
       caption: { en: "…", zh: "…" }
       audio: /audio/aircon/ch03-1.mp3     # 可选：进拍时播放的旁白文件（站内路径）
 ```
 
-章节目标照常累积（`labels`、`hide` 不累积，只看本章）。**镜头规则**（`lib/camera.ts transitionCamera`，有单测；CameraRig 订阅 store，transition 一发出就按顺序处理，所以同一 tick 里先 `setPreset` 再 `setMode`（snap）也落在预设镜头上，截图脚本不需要延时）：切章 / 首次加载 / URL：本章自己写了 `camera`（或 URL `cam=` 与本章基线不同）就用它；否则 `views[当前 view].camera`；都没有就沿用。**预设（VIEW 按钮 / 数字键）永远落在该预设的镜头上**（P1 遗留问题：本章没有自己镜头时，基线是继承来的，曾被误判成"非显式"而飞去视图预设；已修）。模式切换（X / E / C / F）不动镜头。较窄的舞台（宽高比 < 1.6：HUD 占去两侧的桌面、平板、竖屏手机）自动把镜头往后拉（手机竖屏、宽高比 < 0.8 时 HUD 叠在上面，模型独占整宽，拉回量渐减到一半），回写 URL 时换算回来，链接与设备无关。**封面镜头**：演示以外隐藏 HUD（H、`pnpm shoot` 的 `hero-clean`）时 0.8 s 飞到 `views.cover`；没写就沿当前视线方向重新取景，让模型包围球占舞台宽 75 %（宽屏上最多超出高度 30 %，`fitSphereCamera`），舞台尺寸变了再重算；显示 HUD 时 0.8 s 飞回离开时的镜头——中间换过章、按过预设或拖过镜头就不飞回。章节镜头按带 HUD 的舞台取景：模型放在 HUD 块之间的空带里（1600×900 约 590 × 680 px），给引线标注留位置；封面镜头按满屏取景（模型约占宽 70 %）。
+章节目标照常累积（`labels`、`hide`、`pose`、`ghost` 不累积，只看本章）。**镜头规则**（`lib/camera.ts transitionCamera`，有单测；CameraRig 订阅 store，transition 一发出就按顺序处理，所以同一 tick 里先 `setPreset` 再 `setMode`（snap）也落在预设镜头上，截图脚本不需要延时）：切章 / 首次加载 / URL：本章自己写了 `camera`（或 URL `cam=` 与本章基线不同）就用它；否则 `views[当前 view].camera`；都没有就沿用。**预设（VIEW 按钮 / 数字键）永远落在该预设的镜头上**（P1 遗留问题：本章没有自己镜头时，基线是继承来的，曾被误判成"非显式"而飞去视图预设；已修）。模式切换（X / E / C / F）不动镜头。较窄的舞台（宽高比 < 1.6：HUD 占去两侧的桌面、平板、竖屏手机）自动把镜头往后拉（手机竖屏、宽高比 < 0.8 时 HUD 叠在上面，模型独占整宽，拉回量渐减到一半），回写 URL 时换算回来，链接与设备无关。**封面镜头**：演示以外隐藏 HUD（H、`pnpm shoot` 的 `hero-clean`）时 0.8 s 飞到 `views.cover`；没写就沿当前视线方向重新取景，让模型包围球占舞台宽 75 %（宽屏上最多超出高度 30 %，`fitSphereCamera`），舞台尺寸变了再重算；显示 HUD 时 0.8 s 飞回离开时的镜头——中间换过章、按过预设或拖过镜头就不飞回。章节镜头按带 HUD 的舞台取景：模型放在 HUD 块之间的空带里（1600×900 约 590 × 680 px），给引线标注留位置；封面镜头按满屏取景（模型约占宽 70 %）。
 
 ### HUD 控件与内容（docs/08 §2、§3）
 
@@ -730,11 +801,11 @@ state:
 | VIEW `REF.` = MODE `REFERENCE`（R） | 长焦（fov 16）正视（`views.section`，默认正面），2 s；暂停运转、收起爆炸、隐藏流场；EXPLODED 与 FLOW / SPACE 显式禁用，状态行写 `EXPLODE AND FLOW LOCKED`；再按 R（或 ESC）2 s 回到进入前的镜头与状态；选别的预设 = 退出但不回镜头 |
 | MODE `X-RAY`（X） | 有 `shell` 零件的主题：只有 shell 变 .15 透明，其余保持实心（管里的粒子、机内的零件可见）；没有 shell 的主题：未选中零件全部 .15 透明（.3 s）。选中零件永远实心；只有这时材质变透明（forceSinglePass） |
 | MODE `EXPLODED`（E） | 2 s easeInOut 拆开到 0.7（或章节值）；拖滑块时快速跟随 |
-| MODE `CUTAWAY`（C） | 单剖切面；封闭零件的背面画成 `--cut` 赭色 + 屏幕空间 45° 墨色剖面线（像博物馆剖面模型，不是删掉一半）；管、平面不填 |
+| MODE `CUTAWAY`（C） | 单剖切面（默认面；章 / 拍可换成命名剖切面 `views.cuts`）；封闭零件的背面画成 `--cut` 赭色 + 屏幕空间 45° 墨色剖面线（像博物馆剖面模型，不是删掉一半）；管、平面、膜不填 |
 | MODE `FLOW`（F）= SPACE | run：动画与流场 .6 s 渐入。EXPLODED 时 F 禁用、舞台不画粒子（流路径不随零件拆开，docs/12 §7.5 G16），状态行写 `FLOW OFF WHILE EXPLODED` |
 | MODE `PRESENTATION`（P） | core 演示系统，见「SpaceScene · 演示」 |
 | `L` | 标注开关（宿主） |
-| ESC | 退出演示 → 取消选中 → 退出 REFERENCE → 停 ORBIT |
+| ESC | 退出演示 → 取消选中 → 取消单显（solo）→ 退出 REFERENCE → 停 ORBIT |
 
 - 状态行追加：选中零件 `#06 SAMPLE DRUM`、`EXPLODE 80`、`CUTAWAY 50`、REFERENCE 时的锁定说明。规格行追加 PARTS / GROUPS / FLOWS（`hud/spec.ts`）；有 `spec` 时是 PARTS + 主题行。标题块声明行 = `topic.yaml` 的 `note`（没有时用全站文案）。
 - `card`：零件链路示意（有零件的组 = 列，列号 = 组的分区号；零件 = 带编号节点，context 零件不进；`connects` = 细线）；最长一列 > 10 行时行距从 23 降到 16（字号 10）；选中零件填 signal 色；运转时：有 `parts` 的流把它流经的相邻零件之间的连线染成 `stops` 在该处的颜色（`color-mix`）并步进，没有 `parts` 的流照旧染本组内的连线。
@@ -743,7 +814,7 @@ state:
 - `panel03` STATE：RUN / FLOW / ANIMATIONS / VIEW / EXPLODE 实时值（mono），运行时数值带 `SIM` 芯片。有 `telemetry` 时 = RUN + 主题读数：x(t) = target + (x₀ − target)·e^(−t/lag)，target = run ? `run` : `idle`，4 Hz 刷新、不加抖动；瞬时过渡（深链接、测试 / 截图的 snap）直接跳到终值。
 - `perf`：`60 FPS · 16 CALLS · 0.02M TRIS · 1520×1026`（滚动平均；按需渲染空闲时显示 `IDLE`）。
 - `bottomBar`：只有 EXPLODED 时出现拆开滑块（44 px 拇指）；模式开关都在控制面板，不重复。
-- `stageOverlay`：控制面板（`explorer/ExplorerOverlay.tsx`）：LAYERS = 零件组，TOOLS = X-RAY / EXPLODED / CUTAWAY / FLOW / REFERENCE / PRESENTATION / LABELS /（有 `glossary.json` 时）名词表 / 隐藏界面，KEY = 组与流的图例。章节正文里的 `<Term>` 与 TimeScene 相同。
+- `stageOverlay`：控制面板（`explorer/ExplorerOverlay.tsx`）：LAYERS = 零件组（有零件的组行末带 `⊙` 单显开关，`data-solo`），TOOLS = X-RAY / EXPLODED / CUTAWAY / FLOW / REFERENCE / PRESENTATION / LABELS /（有 `glossary.json` 时）名词表 / 隐藏界面，KEY = 组与流的图例。章节正文里的 `<Term>` 与 TimeScene 相同。
 - `inspector`：选中零件详情（编号 + 名称 + 中文、级别、说明、了解更多、所属组、相连芯片），hairline 皮肤。`detail` 里空行分段；`[S3]`、`[S3, S7]` 渲染成与 `<Num s>` 相同的来源上标（点开宿主的来源浮层；schema 校验编号在 `data/sources.json` 里）。
 - `__atlas.stats()` 合并 `{calls, triangles, geometries, textures, fps, gpu}`（renderer.info + 滚动 FPS + WEBGL_debug_renderer_info）。
 
@@ -764,7 +835,7 @@ state:
 
 core 演示系统（字幕卡、两级进度条、自动播放、语音、拍键、保存 / 恢复都在 core，见「演示系统（core）」）+ `View.tsx` 里的适配器：
 
-- **节拍**：章节 `state.beats`（schema `spaceBeat`）；没写的章 = 一拍（本章 state，字幕 `summary` > `question` > 章名）。一拍 = 本章目标（`chapterTarget`）叠上拍里写的字段：`view` / `part` / `explode` / `run` / `cutaway` / `layers` 覆盖；`hide`、`labels` 只看这一拍（不写 = 本章的）；`camera` = 拍的镜头，或命名预设的镜头（只取镜头，不取它的 `view`），都没有就是本章进入时的镜头（本章镜头 > 视图预设 > 继承）。
+- **节拍**：章节 `state.beats`（schema `spaceBeat`）；没写的章 = 一拍（本章 state，字幕 `summary` > `question` > 章名）。一拍 = 本章目标（`chapterTarget`）叠上拍里写的字段：`view` / `part` / `explode` / `run` / `cutaway` / `layers` / `pose` 覆盖；`hide`、`ghost`、`labels` 只看这一拍（不写 = 本章的）；拍的落定还要等姿态的 `duration`；`camera` = 拍的镜头，或命名预设的镜头（只取镜头，不取它的 `view`），都没有就是本章进入时的镜头（本章镜头 > 视图预设 > 继承）。
 - **applyBeat**：`applyState`（reason `state`）一次写入，镜头 1.4 s（`ui.nextTweenMs`），拆开 2 s、移开 .6 s 照舞台原样过渡；返回的 promise 在舞台报告镜头落定（`bridge.settledTransition`，CameraRig 在缓动结束 / 被拖断 / 无需移动时写）且拆开或移开的过渡做完后 resolve，4 s 兜底（舞台还没加载完）。自动播放和语音从这时开始计（core）。`instant`（`goToBeat(i, { instant: true })`、截图）直接跳到终态。
 - **进入**（`onEnter`）：先记下进入前的场景（`SpaceSavedState`：章、视图、选中、拆开、运转、剖切、`hidden`、图层、标注、镜头（活镜头，换算回与舞台宽高比无关的值）、ORBIT、亮着的预设与 FREE CAMERA；在 REFERENCE 里进入则记 REFERENCE 进入前的那份），再退出 REFERENCE（不飞回）、停 ORBIT、取消选中。**退出**（ESC / P / H / 显示界面）：`applyState` 放回这些，ORBIT 与 VIEW 预设高亮也放回。
 - 演示中 REFERENCE（R）禁用；舞台盖 core 的透明点击层（拖动不转模型，点 = 下一拍）；引线标注见上一节。
@@ -783,8 +854,8 @@ core 演示系统（字幕卡、两级进度条、自动播放、语音、拍键
 - 渲染：ACES Filmic + sRGB；pixelRatio = `min(dpr, 3840 / innerWidth, 2)`；灯光 = 一盏大柔 key（唯一投影光源，阴影相机按模型包围盒收紧，PCF 软边）+ 弱 fill + 中性 rim + 半球 + RoomEnvironment（无网络、无 HDR 文件）；paper 暖 key，dark plate 冷 key + 稍强 rim；雾色 = 纸色。只有大件（≥ 模型半径 28%）投影；地面 = 径向接触阴影 + ShadowMaterial 接影面，随拆开下移。`shadowMap.autoUpdate = false`，拆开 / 淡入淡出 / 剖切 / 可见性 / 运转中的投影件变化时才 `needsUpdate`。
 - 材质：每个零件一个 MeshPhysicalMaterial（同一 shader 补丁、同一 program cache key）：选中边缘（菲涅尔，`uSel`）和剖面填充（背面 + `gl_FrontFacing`，`uCut`）都在片元里，零额外 draw call。
 - `frameloop: 'demand'`：只有在缓动（拆开、淡入淡出、运镜、转台、标注滑动 / 遮挡复查）、运转时才请求下一帧；标签页隐藏时不请求。每帧路径不 new 对象（模块级临时向量、预先算好的拆开向量与动画轴）。几何体、材质、贴图都由我们创建并在卸载时 dispose。
-- 示例（sample-space）：第 03 章两拍（一拍 `hide` + 三个零件标注，一拍命名预设 `sample-left` 的镜头 + 两个组标注），一个命名预设，正文一个 `<FlyTo>`。
-- 计数（sample-space，1920×1080；14 个零件 + 1 个 context 墙）：静止 18 draw calls、~19 k 三角形；FLOW +2 calls。
+- 示例（sample-space）：第 03 章两拍（一拍 `hide` + 三个零件标注，一拍命名预设 `sample-left` 的镜头 + 两个组标注），两个命名预设，正文一个 `<FlyTo>`；第 04 章 = 生物特性（sweep 躯干带 U 领片与空心管、双侧的眼 / 腿 / 翅、腿绕髋关节摆动、姿态 `sample-open`、命名剖切 `sample-cross`、淡显机器，三拍），`units` 25 cm / 单位。
+- 计数（sample-space，1920×1080；18 个零件（3 对双侧）+ 1 个 context 墙）：静止 25–27 draw calls、~45 k 三角形；FLOW +2 calls。
 - 包体：舞台 chunk ~225 KB gz（three + R3F 为主；圆角盒用 `RoundedBoxGeometry`；写实轮次的 `extrude` / 贯流叶片引入 `ExtrudeGeometry` / `Shape` 一族，+10 KB，`panelHole` 仍手工三角化）。GLTF 加载器单独成 chunk（21 KB gz），只有写了 `mesh` 的主题才加载。
 
 ## PWA、部署与 e2e（Phase 3）
@@ -810,7 +881,8 @@ core 演示系统（字幕卡、两级进度条、自动播放、语音、拍键
 | `view` | 视图 | `assembled` \| `xray` \| `exploded` \| `isolate` | SpaceScene | `view=xray` |
 | `explode` | 拆开程度 | 0 到 1 | SpaceScene | `explode=0.35` |
 | `run` | 通电运转 | `1` \| `0` | SpaceScene | `run=1` |
-| `cut` | 剖切 | `none` \| `half` | SpaceScene | `cut=half` |
+| `cut` | 剖切 | `none` \| `half` \| 命名剖切面（`views.cuts`，数据里没有就不切） | SpaceScene | `cut=sagittal` |
+| `pose` | 姿态 | `parts.json` `poses` 里的名字；空值 = 静止 | SpaceScene | `pose=wings-open` |
 
 新增可链接字段：改 `core/types.ts` 的 `UrlEngineFields`、`core/url-state.ts`（`URL_KEY_ORDER`、编解码）、`SceneHost.tsx` 里解构的字段、descriptor 的 `fromUrl`，并补 `tests/url-state.test.ts`。
 

@@ -7,6 +7,8 @@ import type { Part, PartRepeat, Primitive } from '../schema';
 import { normalize3, type Vec3 } from './math';
 import { apply3, axisAngle, eulerDeg, IDENTITY3, mul3, perpendicular, type Mat3 } from './xform';
 import { axialHalfHeight, barrelDiscs, coilBox, curvedPanelBox, extrudeBox, grilleBox, latheBox } from './shaped';
+import { sweepBox } from './sweep';
+import { wingBox } from './wing';
 
 /** Flange bolt heads: across-flats size and height as fractions. */
 export const BOLT_HEAD = {
@@ -102,16 +104,24 @@ export interface Box3Like {
   max: Vec3;
 }
 
-/** Bounds of a primitive in its own frame (centred on `at`, before `rotation`; `mirror` applied). */
+/** Bounds of a primitive in its own frame (centred on `at`, before `rotation`; `scale` and `mirror` applied). */
 export function primitiveLocalBox(p: Primitive): Box3Like {
   const box = unmirroredBox(p);
-  if (!p.mirror) return box;
+  // Scale per axis (a negative component, a bilateral twin's flip, swaps the ends), then mirror.
+  const s = primitiveScale(p);
+  const min = [0, 1, 2].map((i) => Math.min(box.min[i]! * s[i]!, box.max[i]! * s[i]!)) as Vec3;
+  const max = [0, 1, 2].map((i) => Math.max(box.min[i]! * s[i]!, box.max[i]! * s[i]!)) as Vec3;
+  if (!p.mirror) return { min, max };
   const i = p.mirror === 'x' ? 0 : p.mirror === 'y' ? 1 : 2;
-  const min = [...box.min] as Vec3;
-  const max = [...box.max] as Vec3;
-  min[i] = -box.max[i]!;
-  max[i] = -box.min[i]!;
+  const lo = min[i]!;
+  min[i] = -max[i]!;
+  max[i] = -lo;
   return { min, max };
+}
+
+/** A primitive's own-axis scale ([1, 1, 1] without `scale`). */
+export function primitiveScale(p: Pick<Primitive, 'scale'>): Vec3 {
+  return [p.scale?.[0] ?? 1, p.scale?.[1] ?? 1, p.scale?.[2] ?? 1];
 }
 
 function unmirroredBox(p: Primitive): Box3Like {
@@ -179,6 +189,10 @@ function unmirroredBox(p: Primitive): Box3Like {
       return coilBox(p);
     case 'grille':
       return grilleBox(p);
+    case 'sweep':
+      return sweepBox(p);
+    case 'wing':
+      return wingBox(p);
   }
 }
 

@@ -89,6 +89,8 @@
 - 每个零件有功能理由（数据里的 `summary` 必须说它干什么）；禁止"为了复杂"的零件。
 - 引擎提供的程序化零件（在 `primitive.kind` 基础上扩展）：`bevelBox`（真实截面 + 倒角）、`tube`（沿路径、统一弯曲半径）、`flange`（带螺栓圆）、`fins`（散热鳍片阵列）、`vessel`（圆柱 + 封头）；`repeat: {count, axis, spacing | radius}` 生成 `InstancedMesh`。
 - 材质族：`casing`（拉丝铝）、`steel`（机加工钢）、`powder`（粉末涂层黑框架）、`stainless`（管路，轴向拉丝）、`copper`、`rubber`、`plastic`（哑光，非默认灰）、`glass`。程序化 canvas 纹理给 roughness 变化与拉丝方向。
+- 生物 / 有机形体（docs/06「生物与有机形体」，docs/14 §8）：`sweep`（沿平滑路径放样的变径管：圆 / 扁 / U 截面、壁厚、环节沟、圆帽）、`wing`（薄膜 + 两面墨色翅脉细线，可扇形折叠）、任意 primitive 的 `scale`（椭球、扁壳）、`bilateral` 零件（只建一侧，引擎镜像另一侧；镜像件可选、可标注，不另编号）、动画 `pivot`（绕关节转）与 `sequence` 关键帧、`poses`（章 / 拍缓动到姿态，默认 0.8 s）。生物材质族：`chitin`（半光泽、按物种 tint）、`membrane`（半透明双面、不写深度、不填剖面）、`tissue`（哑光、微弱自发光仿透光）、`muscle`（纤维法线）、`trachea`（白、环纹法线）、`nerve`（淡黄）、`eye`（深色高光 + 六边形小眼法线）。软组织用低饱和的粉、赭、乳黄，不用"血腥红"；两套主题都要读得出。
+- 系统分层的读法：章 / 拍 `ghost`（组以 .12 淡显、不可点、不标注）与 LAYERS 行末 `⊙` 单显，让一个系统在身体轮廓里被看见；命名剖切面 `views.cuts`（矢状 / 横切）在状态行写名字。比例尺与 ARCHITECTURE 读数按 `units` 用实长（放大 40 倍的昆虫写 `10 MM`，不写 `U`）。
 - 灯光：1 大柔 key（暖中性）+ 弱 fill + 半球/RoomEnvironment + 1 中性 rim，ACES Filmic。只有大件投影，地面接触阴影。
 - CUTAWAY：保留 40–55% 外壳，切口 ochre + 剖面线（背面着色法，见 `perf-lessons.md` §9）。
 - 性能：draw calls < 100（上限 150），三角形 ≤ 1.5 M，pixelRatio `min(dpr, 3840/W, 2)`，渲染循环零分配，`frameloop="demand"` 非运转时不渲。

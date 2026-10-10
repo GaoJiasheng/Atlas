@@ -5,7 +5,7 @@
  *   /en/topics/aircon/?ch=power-on&part=compressor&view=xray&run=1
  *
  * Keys: `ch`, `layers`, `cam`, `theme` (core) and `t`, `hl`, `part`, `view`,
- * `explode`, `run`, `cut` (engine passthrough). Values equal to the current chapter's
+ * `explode`, `run`, `cut`, `pose` (engine passthrough). Values equal to the current chapter's
  * target are omitted, so a plain chapter link is just `?ch=<id>`.
  * Unknown query parameters (utm_*, etc.) are preserved.
  *
@@ -20,7 +20,7 @@ import { isTheme } from '../../theme/theme';
 export type UrlState = Partial<SceneState & UrlEngineFields>;
 
 /** Order in which keys are written (most meaningful first). */
-export const URL_KEY_ORDER = ['ch', 't', 'hl', 'part', 'view', 'explode', 'run', 'cut', 'layers', 'cam', 'theme'] as const;
+export const URL_KEY_ORDER = ['ch', 't', 'hl', 'part', 'view', 'explode', 'run', 'cut', 'pose', 'layers', 'cam', 'theme'] as const;
 export type UrlKey = (typeof URL_KEY_ORDER)[number];
 
 const ID_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -60,6 +60,8 @@ function encodeField(key: UrlKey, state: UrlState): string | null {
       return state.run === undefined ? null : state.run ? '1' : '0';
     case 'cut':
       return state.cutaway ?? null;
+    case 'pose':
+      return state.pose === undefined ? null : (state.pose ?? '');
   }
 }
 
@@ -136,7 +138,13 @@ export function decodeSceneState(input: string | URLSearchParams): UrlState {
   else if (run === '0' || run === 'false') out.run = false;
 
   const cut = params.get('cut');
-  if (cut === 'none' || cut === 'half') out.cutaway = cut;
+  if (cut !== null && ID_RE.test(cut)) out.cutaway = cut;
+
+  const pose = params.get('pose');
+  if (pose !== null) {
+    if (pose === '') out.pose = null;
+    else if (ID_RE.test(pose)) out.pose = pose;
+  }
 
   return out;
 }

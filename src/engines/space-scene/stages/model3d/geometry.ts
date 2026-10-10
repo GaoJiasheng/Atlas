@@ -43,7 +43,10 @@ import {
   tubeBendRadius,
 } from '../../lib/parts';
 import { DEG2RAD } from '../../lib/math';
+import { primitiveScale } from '../../lib/parts';
+import type { Wing } from '../../lib/wing';
 import { shapedPieces } from './shaped';
+import { FanDeform, sweepClosed, sweepGeometry, wingMembrane, wingVeins } from './organic';
 
 export interface ShapePiece {
   geometry: BufferGeometry;
@@ -51,6 +54,10 @@ export interface ShapePiece {
   matrices: Matrix4[] | null;
   /** Index into the part's material slots (`partMaterialSlots`): 0 = the main primitive's material. */
   slot?: number;
+  /** Hairlines (wing veins): drawn as line segments in the part's line material, never picked. */
+  lines?: boolean;
+  /** A folding wing's piece: redrawn for the part's fan (`geometry` is `fan.output`). */
+  fan?: FanDeform;
 }
 
 /** A piece of one primitive before placement: geometry, instances, and a material other than the primitive's own. */
@@ -59,6 +66,10 @@ export interface BasePiece {
   instances: Matrix4[];
   /** Material ref of this piece when it differs from the primitive's `color` (a coil's copper tubes). */
   color?: string;
+  /** Line segments (wing veins), kept out of the merged meshes. */
+  lines?: boolean;
+  /** The folding wing this piece belongs to (kept out of the merged meshes, redrawn for its fan). */
+  wing?: Wing;
 }
 
 /** Kinds whose surface is closed, so back faces only show through a cut (cut face fill). */
@@ -69,6 +80,7 @@ export function isClosedKind(kind: Primitive['kind']): boolean {
 /** Closed surface of a whole primitive (a lathe is closed only when its profile starts and ends on the axis). */
 export function isClosedPrimitive(p: Primitive): boolean {
   if (p.kind === 'lathe') return p.profile[0]![0] < 1e-9 && p.profile[p.profile.length - 1]![0] < 1e-9;
+  if (p.kind === 'sweep') return sweepClosed(p);
   return isClosedKind(p.kind);
 }
 
@@ -301,9 +313,18 @@ export function panelHoleGeometry(p: Extract<Primitive, { kind: 'panelHole' }>):
 /* ------------------------------------------------------------------ */
 
 function basePieces(p: Primitive): BasePiece[] {
-  const pieces = kindPieces(p);
-  if (!p.mirror) return pieces;
-  return pieces.map((piece) => ({ ...piece, geometry: mirrorGeometry(piece.geometry, p.mirror!) }));
+  let pieces = kindPieces(p);
+  if (p.mirror) pieces = pieces.map((piece) => ({ ...piece, geometry: piece.lines ? mirrorLines(piece.geometry, p.mirror!) : mirrorGeometry(piece.geometry, p.mirror!) }));
+  // Own-axis scale (a bilateral twin's flip is a negative component): on the instances, so mirrored bakes fix their winding.
+  const [sx, sy, sz] = primitiveScale(p);
+  if (sx === 1 && sy === 1 && sz === 1) return pieces;
+  const S = new Matrix4().makeScale(sx, sy, sz);
+  return pieces.map((piece) => ({ ...piece, instances: piece.instances.map((m) => S.clone().multiply(m)) }));
+}
+
+/** Reflect line segments (no winding to fix). */
+function mirrorLines(g: BufferGeometry, axis: 'x' | 'y' | 'z'): BufferGeometry {
+  return g.applyMatrix4(new Matrix4().makeScale(axis === 'x' ? -1 : 1, axis === 'y' ? -1 : 1, axis === 'z' ? -1 : 1));
 }
 
 /** Reflect a geometry in the plane normal to `axis` (winding fixed so faces still face out). */
@@ -376,6 +397,16 @@ function kindPieces(p: Primitive): BasePiece[] {
     case 'coilBank':
     case 'grille':
       return shapedPieces(p);
+    case 'sweep':
+      return one(sweepGeometry(p));
+    case 'wing': {
+      const fold = p.fold ? { wing: p } : {};
+      const veins = wingVeins(p);
+      return [
+        { geometry: wingMembrane(p), instances: [new Matrix4()], ...fold },
+        ...(veins ? [{ geometry: veins, instances: [new Matrix4()], lines: true, ...fold }] : []),
+      ];
+    }
   }
 }
 
@@ -407,6 +438,7 @@ export function partPieces(part: Pick<Part, 'primitive' | 'repeat'> & { extra?: 
   const keys = slots.map((s) => materialSlotKey(s.color, s.tint));
   const reps = repeatMatrices(part);
   const bySlot = new Map<number, { geometry: BufferGeometry; matrices: Matrix4[] }[]>();
+  const out: ShapePiece[] = [];
   for (const p of partPrimitives(part)) {
     const place = new Matrix4()
       .makeTranslation(p.at[0] - main.at[0], p.at[1] - main.at[1], p.at[2] - main.at[2])
@@ -414,23 +446,52 @@ export function partPieces(part: Pick<Part, 'primitive' | 'repeat'> & { extra?: 
     for (const piece of basePieces(p)) {
       const slot = keys.indexOf(materialSlotKey(piece.color ?? p.color, piece.color ? undefined : p.tint));
       const matrices = reps.flatMap((r) => piece.instances.map((m) => r.clone().multiply(place).multiply(m)));
+      // Folding wings and vein lines stay their own pieces.
+      if (piece.wing) {
+        const fan = new FanDeform(piece.wing, piece.geometry, matrices, piece.lines === true);
+        out.push({ geometry: fan.output, matrices: null, slot, fan, ...(piece.lines ? { lines: true } : {}) });
+        continue;
+      }
+      if (piece.lines) {
+        out.push({ geometry: bakeLines(piece.geometry, matrices), matrices: null, slot, lines: true });
+        continue;
+      }
       bySlot.set(slot, [...(bySlot.get(slot) ?? []), { geometry: piece.geometry, matrices }]);
     }
   }
-  const out: ShapePiece[] = [];
+  const merged: ShapePiece[] = [];
   for (const [slot, list] of [...bySlot.entries()].sort((a, b) => a[0] - b[0])) {
     const verts = list.reduce((n, l) => n + l.geometry.getAttribute('position').count * l.matrices.length, 0);
     if (verts <= MERGE_BUDGET || list.some((l) => l.matrices.some((m) => m.determinant() < 0))) {
-      out.push({ geometry: mergeBaked(list), matrices: null, slot });
+      merged.push({ geometry: mergeBaked(list), matrices: null, slot });
       continue;
     }
     for (const l of list) {
       if (l.matrices.length === 1) {
         l.geometry.applyMatrix4(l.matrices[0]!);
-        out.push({ geometry: l.geometry, matrices: null, slot });
-      } else out.push({ geometry: l.geometry, matrices: l.matrices, slot });
+        merged.push({ geometry: l.geometry, matrices: null, slot });
+      } else merged.push({ geometry: l.geometry, matrices: l.matrices, slot });
     }
   }
+  // Meshes first (slot order), then wing membranes, then lines.
+  return [...merged, ...out.filter((p) => !p.lines), ...out.filter((p) => p.lines)];
+}
+
+/** Line segments copied once per placement into one geometry. Disposes the input. */
+function bakeLines(g: BufferGeometry, matrices: Matrix4[]): BufferGeometry {
+  const src = g.getAttribute('position');
+  const pos = new Float32Array(src.count * 3 * matrices.length);
+  const v = new Vector3();
+  matrices.forEach((m, i) => {
+    for (let j = 0; j < src.count; j++) {
+      v.fromBufferAttribute(src, j).applyMatrix4(m);
+      pos.set([v.x, v.y, v.z], (i * src.count + j) * 3);
+    }
+  });
+  g.dispose();
+  const out = new BufferGeometry();
+  out.setAttribute('position', new BufferAttribute(pos, 3));
+  out.computeBoundingSphere();
   return out;
 }
 

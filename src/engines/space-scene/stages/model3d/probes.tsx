@@ -98,7 +98,7 @@ export function LabelProbe({
   runtime: StageRuntime;
 }) {
   const st = useMemo(
-    () => ({ raycaster: new Raycaster(), lastCam: new Matrix4(), lastExplode: -1, lastOccluders: -1, stale: new Set<string>(), occluders: [] as Object3D[] }),
+    () => ({ raycaster: new Raycaster(), lastCam: new Matrix4(), lastExplode: -1, lastMoved: -1, lastOccluders: -1, stale: new Set<string>(), occluders: [] as Object3D[] }),
     [],
   );
   // Per group: its anchor id, one reusable box per part and the visible ones this frame (no per-frame allocation).
@@ -131,9 +131,10 @@ export function LabelProbe({
     // Which parts can hide others (shown and mostly opaque): a part put aside or faded in changes what hides what.
     let occluderKey = 0;
     for (const h of handles.values()) occluderKey = (occluderKey * 31 + (h.visible && h.fade > 0.6 ? 1 : 0)) % 2147483647;
-    if (!st.lastCam.equals(camera.matrixWorld) || st.lastExplode !== runtime.explode || st.lastOccluders !== occluderKey) {
+    if (!st.lastCam.equals(camera.matrixWorld) || st.lastExplode !== runtime.explode || st.lastMoved !== runtime.moved || st.lastOccluders !== occluderKey) {
       st.lastCam.copy(camera.matrixWorld);
       st.lastExplode = runtime.explode;
+      st.lastMoved = runtime.moved;
       st.lastOccluders = occluderKey;
       for (const id of handles.keys()) st.stale.add(id);
     }

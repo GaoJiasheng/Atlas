@@ -733,7 +733,36 @@ type SpaceState = ReturnType<NonNullable<typeof window.__atlas>['state']> & {
   part: string | null;
   run: boolean;
   camera: { position: number[] } | null;
+  cutaway: string;
+  pose: string | null;
+  ghosted: string[];
+  solo: string | null;
 };
+
+test('sample-space organisms: pose, named cut and ghost from the chapter and the URL; a layer\'s ⊙ solos its group; a pair\'s side chips', async ({ page }) => {
+  test.setTimeout(60_000);
+  await page.setViewportSize({ width: 1920, height: 1080 });
+  await openScene(page, '/en/topics/sample-space/?ch=inside-look');
+  const api = () => page.evaluate(() => window.__atlas!.state() as SpaceState);
+  expect(await api()).toMatchObject({ pose: 'sample-open', cutaway: 'none', ghosted: ['sample-core', 'sample-drive', 'sample-loop'], solo: null });
+  // ⊙ on the organism layer: that group alone; again (or ESC) back.
+  const solo = page.locator('[data-solo="sample-organic"]');
+  await solo.click();
+  await expect.poll(async () => (await api()).solo).toBe('sample-organic');
+  await expect(solo).toHaveAttribute('aria-pressed', 'true');
+  await page.keyboard.press('Escape');
+  await expect.poll(async () => (await api()).solo).toBeNull();
+  // The status line names a named cut; the inspector offers the other side of a pair.
+  await page.evaluate(() => window.__atlas!.setMode('cutaway', true));
+  await expect(page.locator('.atlas-status')).toContainText(/cutaway 50/i);
+  await openScene(page, '/en/topics/sample-space/?ch=whole-thing&pose=sample-open&cut=sample-cross&part=sample-leg');
+  expect(await api()).toMatchObject({ chapter: 'whole-thing', pose: 'sample-open', cutaway: 'sample-cross', part: 'sample-leg' });
+  await expect(page.locator('.atlas-status')).toContainText(/cutaway cross/i);
+  await expect(page.locator('.atlas-status')).toContainText(/SAMPLE LEG · L/);
+  await page.locator('.space-inspector [data-side="right"]').click();
+  await expect.poll(async () => (await api()).part).toBe('sample-leg-r');
+  await expect(page.locator('.space-inspector [data-side="right"]')).toHaveAttribute('aria-pressed', 'true');
+});
 
 test('sample-space PRESENTATION: beats on the 3D stage (hide, the beat\'s labels, group placards, a named preset camera), ESC restores the scene', async ({ page }) => {
   test.setTimeout(90_000);
@@ -742,7 +771,7 @@ test('sample-space PRESENTATION: beats on the 3D stage (hide, the beat\'s labels
   const api = () => page.evaluate(() => window.__atlas!.state() as SpaceState);
 
   // Named presets come after the chapter presets, ORBIT and REF.; <FlyTo> in the chapter body flies to one.
-  expect((await page.evaluate(() => window.__atlas!.presets())).slice(-3)).toEqual(['orbit', 'reference', 'sample-left']);
+  expect((await page.evaluate(() => window.__atlas!.presets())).slice(-4)).toEqual(['orbit', 'reference', 'sample-left', 'sample-above']);
   await page.locator('[data-flyto="sample-left"]:visible').click();
   await expect.poll(async () => (await api()).preset).toBe('sample-left');
   await expect.poll(async () => (await api()).camera?.position).toEqual([-2.4, 1, 2.6]);
@@ -753,7 +782,15 @@ test('sample-space PRESENTATION: beats on the 3D stage (hide, the beat\'s labels
   expect(before).toMatchObject({ preset: 'orbit', view: 'xray', hidden: ['sample-panel'], part: 'sample-drum' });
 
   const beats = await page.evaluate(() => window.__atlas!.beats());
-  expect(beats.map((b) => `${b.chapter}.${b.index}`)).toEqual(['whole-thing.0', 'pull-apart.0', 'switch-on.0', 'switch-on.1']);
+  expect(beats.map((b) => `${b.chapter}.${b.index}`)).toEqual([
+    'whole-thing.0',
+    'pull-apart.0',
+    'switch-on.0',
+    'switch-on.1',
+    'inside-look.0',
+    'inside-look.1',
+    'inside-look.2',
+  ]);
 
   // P starts at the current chapter's first beat: the beat's view, hide and labels on top of the chapter.
   await page.keyboard.press('p');
@@ -784,9 +821,13 @@ test('sample-space PRESENTATION: beats on the 3D stage (hide, the beat\'s labels
   await expect.poll(async () => (await api()).presentation?.beat).toBe(0);
   await page.mouse.click(960, 400);
   await expect.poll(async () => (await api()).presentation?.beat).toBe(1);
+  await page.evaluate((last) => window.__atlas!.goToBeat(last, { instant: true }), beats.length - 1);
+  await expect.poll(async () => (await api()).presentation).toMatchObject({ chapter: 'inside-look', beat: 2 });
+  // The organism beat: a named cut, the pose and the faint machine.
+  expect(await api()).toMatchObject({ cutaway: 'sample-cross', pose: 'sample-open', ghosted: ['sample-core', 'sample-drive', 'sample-loop'] });
   await page.keyboard.press('ArrowRight');
   await page.waitForTimeout(400);
-  expect((await api()).presentation?.beat).toBe(1);
+  expect((await api()).presentation).toMatchObject({ chapter: 'inside-look', beat: 2 });
 
   // ESC: the HUD and the scene as they were (chapter, view, hide, selection, ORBIT).
   await page.keyboard.press('Escape');
@@ -865,9 +906,8 @@ test('sample-space PRESENTATION voice: a beat is spoken once its camera has sett
   const gap = second!.started! - first!.ended!;
   expect(gap).toBeGreaterThanOrEqual(1900);
   expect(gap).toBeLessThan(2800);
-  // The last beat: auto-play stops there.
-  await page.waitForTimeout(3000);
-  expect((await api()).presentation).toMatchObject({ chapter: 'switch-on', beat: 1 });
+  // Auto-play goes on into the next chapter's first beat.
+  await expect.poll(async () => (await api()).presentation, { timeout: 15_000 }).toMatchObject({ chapter: 'inside-look', beat: 0 });
 });
 
 for (const topic of TOPICS) {

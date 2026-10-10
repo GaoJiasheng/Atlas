@@ -44,6 +44,8 @@ export const TOKEN_NAMES = [
   'signal',
   'xray',
   'cut',
+  'food',
+  'haemolymph',
   'bg',
   'surface',
   'surface-2',

@@ -5,10 +5,12 @@
 import { Quaternion, Vector3 } from 'three';
 import type { Part } from '../../schema';
 import { explodedPosition } from '../../lib/explode';
-import { mainBounds, partBounds, tubeMidpoint } from '../../lib/parts';
+import { mainBounds, partBounds, primitiveScale, tubeMidpoint } from '../../lib/parts';
 import { apply3, eulerDeg } from '../../lib/xform';
 import type { Vec3 } from '../../lib/math';
 import { isClosedPrimitive, partPieces } from './geometry';
+import { partPrimitives } from '../../lib/parts';
+import { restFan } from '../../lib/wing';
 import type { PartShape } from './PartNode';
 
 export function primitiveShape(part: Part): PartShape | null {
@@ -25,7 +27,14 @@ export function primitiveShape(part: Part): PartShape | null {
     radius,
     closed: isClosedPrimitive(p),
     twoSided: p.kind === 'plane',
+    restFan: partRestFan(part),
   };
+}
+
+/** Rest fan of a part's (first) folding wing; 1 without one. */
+export function partRestFan(part: Part): number {
+  const wing = partPrimitives(part).find((q) => q.kind === 'wing' && q.fold);
+  return wing && wing.kind === 'wing' ? restFan(wing) : 1;
 }
 
 /** Label anchor of a part relative to its centre: the centre of its bounds. */
@@ -44,7 +53,11 @@ export function anchorOffset(part: Part): Vec3 {
  */
 export function anchorPoint(part: Part): Vec3 {
   const p = part.primitive;
-  if (p?.kind === 'tube' && !part.repeat) return apply3(eulerDeg(p.rotation), tubeMidpoint(p));
+  if (p?.kind === 'tube' && !part.repeat) {
+    const m = tubeMidpoint(p);
+    const k = primitiveScale(p);
+    return apply3(eulerDeg(p.rotation), [m[0] * k[0], m[1] * k[1], m[2] * k[2]]);
+  }
   if (!p || !part.extra) return anchorOffset(part);
   const b = mainBounds(part)!;
   return [(b.min[0] + b.max[0]) / 2 - p.at[0], (b.min[1] + b.max[1]) / 2 - p.at[1], (b.min[2] + b.max[2]) / 2 - p.at[2]];
