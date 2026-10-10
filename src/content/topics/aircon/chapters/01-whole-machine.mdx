@@ -12,17 +12,77 @@ state:
   hide: []
   labels: ["group:indoor", "group:line-set", "group:outdoor"]
   camera: { position: [1.38, 1.7, 3.42], target: [-0.03, 0.64, 0], fov: 30 }
-  summary: { en: "Draft: a split air conditioner is two machines joined by pipes, one inside the room and one outside.", zh: "草稿：分体式空调是用管子连起来的两台机器，一台在房间里，一台在室外。" }
+  summary: { en: "A split air conditioner is two machines joined by pipes: the indoor unit takes heat out of the room and the outdoor unit gives it away outside.", zh: "分体式空调是用管子连起来的两台机器：室内机把房间里的热取走，室外机把热散到外面。" }
 ---
 
 <Lang en>
 
-Draft placeholder: the text of this chapter is written in step T2, after the spec is signed off.
+The wall-mounted air conditioner found in many Singapore bedrooms is really two machines. The indoor unit hangs high on the bedroom wall; the outdoor unit stands outside, usually on a ledge. Two copper pipes, a drain hose and a cable join them through a hole in the wall. This arrangement is called a <Term id="split-system">split system</Term>. <FlyTo preset="hero">See the whole machine</FlyTo>
+
+The indoor unit draws in room air, cools it and blows it back out. The outdoor unit gives heat away to the outside air. The pipes carry a <Term id="refrigerant">refrigerant</Term>, a substance that travels round and round between the two units, boiling indoors and condensing outdoors.
+
+An air conditioner does not make cold. It moves heat out of the room and releases it outside, much as a pump lifts water uphill. Heat does not flow from a cooler place to a warmer one by itself, so moving it that way takes work. Here the work is done by the <Term id="compressor">compressor</Term> in the outdoor unit, which runs on electricity.
+
+The numbers in the spec table describe that job. "Cooling <Num s="S29">2.6 kW</Num>" is the rate at which this design takes heat out of the room, measured in <Term id="kilowatt">kilowatts</Term>; shops would call it a unit of about <Num s="S28">8,900 Btu/h</Num>. "Power in <Num s="S29">0.65 kW</Num>" is the electricity it uses to do so. Divide the first by the second and you get the <Term id="cop">coefficient of performance</Term>, or COP: <Num s="S29">4</Num>. For every unit of electricity, four units of heat leave the room. Units on sale in Singapore today do a little better, about <Num s="S22,S23">5</Num> at full power.
+
+<More title={{ en: "Why two boxes?", zh: "为什么分成两个箱子？" }}>
+
+A window unit puts every part into one box that sits in a hole in the wall, half in and half out of the room. A split system takes the noisy, hot parts, the compressor, the outdoor fan and the coil that gives off heat, out of the room altogether. On one typical model the indoor unit is rated at <Num s="S23">19 dB(A)</Num> on its quietest setting and the outdoor unit at <Num s="S23">46 dB(A)</Num>. Only the quiet part stays indoors, and the wall needs just a hand-sized hole for the pipes.
+
+</More>
+
+<More title={{ en: "Kilowatts and Btu/h", zh: "千瓦和 Btu/h" }}>
+
+A kilowatt measures how fast energy flows, much as litres per second measure how fast water flows. Air conditioners are also sold by British thermal units per hour, an older unit still used in shops. One Btu per hour is <Num s="S28">0.293</Num> watts, so <Num s="S28">1 kW</Num> is about <Num s="S28">3,412 Btu/h</Num>, and this design's <Num s="S29">2.6 kW</Num> is about <Num s="S28">8,870 Btu/h</Num>. Bedroom units of this size are rated at about <Num s="S23">2.5</Num> to <Num s="S22">2.7 kW</Num> of cooling.
+
+</More>
+
+<More title={{ en: "What “inverter” means", zh: "“变频”是什么意思" }}>
+
+Older air conditioners have a fixed-speed compressor: it runs flat out until the room is cold enough, stops, and starts again when the room warms up. An <Term id="inverter">inverter</Term> unit feeds its compressor motor through an electronic drive that changes the frequency of the current, so the compressor can turn slowly or quickly. Compressors of this kind are built to run at about <Num s="S26">10</Num> to <Num s="S26">130</Num> revolutions a second. One typical unit can vary its cooling from about <Num s="S22">1.0</Num> to <Num s="S22">3.6 kW</Num>, so once the room is cool it keeps running gently instead of stopping and starting.
+
+</More>
+
+<More title={{ en: "About this model", zh: "关于这个模型" }}>
+
+The machine shown is a generic design study, not a particular brand or model; its sizes and ratings are chosen within the range of real units. The layout is schematic. Both units face you and the wall between them is cut away; in a real home the outdoor unit is behind the wall, and the pipes may run up to <Num s="S22,S23">20 m</Num>, not the <Num s="S29">2 m</Num> shown. The coil fins are drawn wider apart than the real <Num s="S24">1.4 mm</Num> so they can be seen, and the fans and compressor turn many times slower than they really do. The readings in the STATE panel are simulated, worked out from published property data and an energy balance (chapters 03 and 04).
+
+</More>
 
 </Lang>
 
 <Lang zh>
 
-草稿占位：本章正文在 spec 定稿后的 T2 步骤写。
+很多新加坡家庭卧室里的壁挂式空调，其实是两台机器。室内机挂在卧室墙的高处，室外机放在屋外，通常立在空调平台上。两根铜管、一根排水管和一根电线穿过墙洞，把两台机连在一起。这种结构叫<Term id="split-system">分体式</Term>。<FlyTo preset="hero">看整台机器</FlyTo>
+
+室内机把房间空气吸进去，降温后再吹出来；室外机把热散到外面的空气里。管子里流动的是<Term id="refrigerant">冷媒</Term>：它在两台机之间一圈圈循环，在室内沸腾、吸热，在室外凝结、放热。
+
+空调并不“制造”冷。它把热从房间里搬出去，在室外放掉，有点像水泵把水抽到高处。热不会自己从较冷的地方流到较热的地方，要让它这样走，就得做功。做功的是室外机里的<Term id="compressor">压缩机</Term>，它靠电运转。从房间搬出来的热，最后都从室外机散出去，所以站在室外机前面会觉得一股热风。
+
+规格表上的数字说的就是这件事。“制冷量 <Num s="S29">2.6 kW</Num>”是这台设计每秒从房间搬走热的快慢，单位是<Term id="kilowatt">千瓦</Term>；商店里会说它约 <Num s="S28">8,900 Btu/h</Num>。“输入功率 <Num s="S29">0.65 kW</Num>”是它为此用掉的电。前者除以后者，就是<Term id="cop">性能系数</Term>（COP）：<Num s="S29">4</Num>。每用 1 份电，就有 4 份热离开房间。新加坡现在出售的机型还要好一点，满负荷时约为 <Num s="S22,S23">5</Num>。
+
+<More title={{ en: "Why two boxes?", zh: "为什么分成两个箱子？" }}>
+
+窗式空调把所有零件装进一个箱子，嵌在墙洞里，一半在室内、一半在室外。分体式则把又吵又热的部分——压缩机、室外风扇和放热的盘管——整个搬到房间外面。以一款典型机型为例，室内机最安静一档的额定噪音是 <Num s="S23">19 dB(A)</Num>，室外机是 <Num s="S23">46 dB(A)</Num>。留在室内的只有安静的那部分，墙上也只需要一个手掌大的洞让管子穿过。
+
+</More>
+
+<More title={{ en: "Kilowatts and Btu/h", zh: "千瓦和 Btu/h" }}>
+
+千瓦衡量能量流动的快慢，就像“升每秒”衡量水流的快慢。空调也按“英热单位每小时”（Btu/h）出售，这是一种老单位，商店里仍然常用。1 Btu/h 等于 <Num s="S28">0.293</Num> 瓦，所以 <Num s="S28">1 kW</Num> 约等于 <Num s="S28">3,412 Btu/h</Num>，这台设计的 <Num s="S29">2.6 kW</Num> 约合 <Num s="S28">8,870 Btu/h</Num>。这一级别的卧室空调，额定制冷量约为 <Num s="S23">2.5</Num> 到 <Num s="S22">2.7 kW</Num>。
+
+</More>
+
+<More title={{ en: "What “inverter” means", zh: "“变频”是什么意思" }}>
+
+老式空调的压缩机是定速的：全速运转，等房间够凉就停下，房间热了再重新启动。<Term id="inverter">变频</Term>空调的压缩机电机由一个电子驱动器供电，它能改变电流的频率，让压缩机转得慢或转得快。这类压缩机设计的转速范围约为每秒 <Num s="S26">10</Num> 到 <Num s="S26">130</Num> 转。一款典型机型的制冷量可以在约 <Num s="S22">1.0</Num> 到 <Num s="S22">3.6 kW</Num> 之间变化，房间凉下来以后，它就慢慢地一直运转，而不是停了又开、开了又停。
+
+</More>
+
+<More title={{ en: "About this model", zh: "关于这个模型" }}>
+
+这里展示的是一台通用的设计研究机型，不代表任何品牌或型号；尺寸和额定值都取在真实机型的范围之内。布局是示意性的：两台机都朝着你，中间的墙被剖开；真实的家里，室外机在墙的另一面，连接管可长达 <Num s="S22,S23">20 m</Num>，而不是图中的 <Num s="S29">2 m</Num>。盘管鳍片画得比真实的 <Num s="S24">1.4 mm</Num> 片距更稀，好让人看清；风扇和压缩机的转动也比真实的慢很多倍。STATE 面板上的读数是模拟值，由公开的物性数据和能量平衡算出（见第 03、04 章）。
+
+</More>
 
 </Lang>
