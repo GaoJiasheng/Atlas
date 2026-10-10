@@ -13,6 +13,28 @@ state:
   labels: [front-panel, top-grille, insulation, "group:outdoor"]
   camera: { position: [1.8, 1.76, 4.41], target: [0.01, 0.41, 0.06], fov: 30 }
   summary: { en: "How much electricity an air conditioner uses depends on its design, shown by its tick label, and on how it is used: the set temperature, clean filters and closed doors.", zh: "空调用多少电，取决于它的设计（看能效 tick 标签），也取决于怎么用：设定温度、滤网干不干净、门窗关没关。" }
+  beats:
+    - view: xray
+      part: compressor
+      layers: [indoor, line-set, outdoor, refrigerant]
+      camera: outdoor-unit
+      labels: [compressor, inverter-board, outdoor-fan]
+      caption: { en: "An inverter unit can change the speed of its compressor. Near the set temperature it slows down and keeps running gently instead of switching on and off.", zh: "变频空调可以改变压缩机的转速。接近设定温度时，它慢下来继续轻轻运转，而不是反复开机、停机。" }
+    - part: air-filter
+      camera: indoor-unit
+      labels: [air-filter, top-grille, louvre]
+      hide: [front-panel]
+      caption: { en: "The filters catch dust before it reaches the coil. A blocked filter lets less air through and wastes electricity, so wash it about every two weeks.", zh: "滤网在灰尘到达盘管之前把它拦住。滤网堵了，风量变小，还更费电，所以大约每两周洗一次。" }
+    - camera: { position: [1.65, 1.8, 4.0], target: [0.05, 0.5, 0.0], fov: 30 }
+      labels: [louvre, top-grille, front-panel]
+      caption: { en: "Set the temperature to 25 °C or higher; each degree higher cuts the energy needed by about 10 per cent. Keep doors and windows shut while it runs.", zh: "把设定温度调到 25℃或更高，每高一度，所需的电能约少 10%。空调运转时要关好门窗。" }
+    - camera: { position: [1.65, 1.8, 4.0], target: [0.05, 0.5, 0.0], fov: 30 }
+      labels: ["group:indoor", "group:outdoor"]
+      caption: { en: "Every air conditioner sold in Singapore carries an energy label with up to five ticks. More ticks mean less electricity for the same cooling. This model has no label, so look for the ticks when you choose.", zh: "在新加坡出售的每台空调都贴有能效标签，最多五个 tick。tick 越多，制冷量相同时越省电。这个模型上没有标签，选购时要自己去看 tick。" }
+    - view: xray
+      camera: { position: [2.3, 1.7, -3.2], target: [0.1, 0.45, -0.2], fov: 32 }
+      labels: [liquid-line, gas-line, insulation]
+      caption: { en: "The refrigerant stays sealed in these pipes. It is a greenhouse gas, so it must be recovered when a unit is installed, serviced or scrapped, never released.", zh: "冷媒一直封在这些管子里。它是温室气体，安装、维修或报废空调时必须回收，不能放进大气。" }
 ---
 
 <Lang en>

@@ -173,11 +173,15 @@ export function roundCamera(cam: OrbitCamera): OrbitCamera {
  * Authored cameras are framed for a wide stage (aspect ≥ 1.6). On narrower
  * stages (tablets in portrait, phones) the horizontal field of view shrinks, so we pull the
  * camera back along its view direction by `minAspect / aspect` (never closer).
+ * Phones (aspect below 0.8, the HUD stacks and the model gets the full stage
+ * width instead of a band between the side panels) ease the pull-back down to
+ * half of that, so a wide model still fills most of the screen.
  * `inverse` undoes it (used before writing a user camera back to the store,
  * so URLs stay device-independent).
  */
 export function fitCameraToAspect(cam: OrbitCamera, aspect: number, inverse = false, minAspect = 1.6): OrbitCamera {
-  const k = aspect > 0 ? Math.max(1, minAspect / aspect) : 1;
+  const stacked = aspect >= 0.8 ? 1 : aspect <= 0.5 ? 0.5 : 0.5 + (0.5 * (aspect - 0.5)) / 0.3;
+  const k = aspect > 0 ? Math.max(1, (minAspect * stacked) / aspect) : 1;
   const s = inverse ? 1 / k : k;
   if (s === 1) return cam;
   const [px, py, pz] = cam.position;

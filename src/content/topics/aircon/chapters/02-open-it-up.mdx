@@ -13,6 +13,28 @@ state:
   labels: [compressor, condenser-coil, expansion-valve, evaporator-front]
   camera: { position: [1.8, 1.76, 4.41], target: [0.01, 0.41, 0.06], fov: 30 }
   summary: { en: "With the covers off, four parts do the real work: the compressor, the condenser and the expansion valve outdoors, and the evaporator indoors.", zh: "拿掉外壳，真正干活的是四大件：室外机里的压缩机、冷凝器和膨胀阀，室内机里的蒸发器。" }
+  beats:
+    - camera: { position: [1.65, 1.8, 4.0], target: [0.05, 0.5, 0.0], fov: 30 }
+      caption: { en: "Take the covers off and four parts do the real work: the compressor, the condenser and the expansion valve outdoors, and the evaporator indoors.", zh: "拿掉外壳，真正干活的是四大件：室外机里的压缩机、冷凝器和膨胀阀，室内机里的蒸发器。" }
+    - part: compressor
+      camera: outdoor-unit
+      labels: [compressor, accumulator]
+      caption: { en: "The compressor is the black can at the right of the outdoor unit. It is the pump of the loop and pushes the refrigerant round.", zh: "压缩机是室外机右边那只黑色的罐子。它是整个回路的泵，推动冷媒一圈圈流动。" }
+    - part: condenser-coil
+      camera: { position: [2.4, 1.4, 1.5], target: [0.6, 0.12, -0.12], fov: 30 }
+      labels: [condenser-coil, condenser-hairpins, expansion-valve, service-valves]
+      caption: { en: "The condenser is the large finned coil across the back, where the refrigerant gives off heat. The expansion valve, a small adjustable opening, sits on the thin pipe near the valves.", zh: "冷凝器是横贯背面的大块鳍片盘管，冷媒在这里放热。膨胀阀是一个可以调节的小口，装在阀门旁边的细管上。" }
+    - view: xray
+      part: evaporator-front
+      camera: indoor-unit
+      labels: [evaporator-front, evaporator-rear, crossflow-fan]
+      caption: { en: "The evaporator is the finned coil inside the indoor unit, wrapped around the long fan. Here the refrigerant takes in heat from the room.", zh: "蒸发器是室内机里的鳍片盘管，围在长长的风扇外面。冷媒在这里从房间里吸热。" }
+    - view: exploded
+      explode: 0.8
+      camera: { position: [1.9, 1.9, 4.9], target: [-0.05, 0.45, 0.1], fov: 30 }
+      labels: ["group:indoor", "group:line-set", "group:outdoor"]
+      hide: []
+      caption: { en: "Pulled apart, every part moves in the direction it comes off during assembly. The covers go outward, the filters up and the fan down and forward.", zh: "拆开以后，每个零件都沿着装配时取下的方向移开：外壳向外，滤网向上，风扇向下、向前。" }
 ---
 
 <Lang en>

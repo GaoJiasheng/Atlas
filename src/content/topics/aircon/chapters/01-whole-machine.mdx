@@ -13,6 +13,18 @@ state:
   labels: ["group:indoor", "group:line-set", "group:outdoor"]
   camera: { position: [1.8, 1.76, 4.41], target: [0.01, 0.41, 0.06], fov: 30 }
   summary: { en: "A split air conditioner is two machines joined by pipes: the indoor unit takes heat out of the room and the outdoor unit gives it away outside.", zh: "分体式空调是用管子连起来的两台机器：室内机把房间里的热取走，室外机把热散到外面。" }
+  beats:
+    - camera: { position: [1.65, 1.8, 4.0], target: [0.05, 0.5, 0.0], fov: 30 }
+      caption: { en: "A split air conditioner is two machines joined by pipes: one inside the room, one outside. Here both face you, with the wall between them cut away.", zh: "分体式空调是用管子连起来的两台机器：一台在房间里，一台在室外。这里两台都朝着你，中间的墙被剖开。" }
+    - camera: indoor-unit
+      labels: [top-grille, front-panel, louvre]
+      caption: { en: "The indoor unit hangs high on the wall. It draws room air in through the grille on top and blows it out under the louvre, the flap at the bottom.", zh: "室内机挂在墙的高处。它从顶部的格栅吸进房间空气，再从底部的导风板下面吹出来。" }
+    - camera: outdoor-unit
+      labels: [outdoor-front, fan-grille]
+      caption: { en: "The outdoor unit holds the compressor and a large fan. The fan pulls outside air through a finned coil at the back and blows it out of the front.", zh: "室外机里装着压缩机和一台大风扇。风扇从背后的鳍片盘管抽进室外空气，再从前面吹出去。" }
+    - camera: { position: [2.3, 1.7, -3.2], target: [0.1, 0.45, -0.2], fov: 32 }
+      labels: [insulation, drain-hose, flare-nuts]
+      caption: { en: "Two copper pipes carry the refrigerant between the units, each wrapped in foam insulation. The drain hose beside them leads the water away.", zh: "两根铜管在两台机之间输送冷媒，外面各包着一层发泡保温材料。旁边的排水管把凝结水引走。" }
 ---
 
 <Lang en>

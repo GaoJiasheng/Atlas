@@ -13,6 +13,27 @@ state:
   labels: [compressor, condenser-coil, expansion-valve, evaporator-front, liquid-line, gas-line]
   camera: { position: [1.8, 1.76, 4.41], target: [0.01, 0.41, 0.06], fov: 30 }
   summary: { en: "Switched on, the same refrigerant goes round and round: squeezed hot, cooled into a liquid outdoors, dropped in pressure, and boiled indoors by the heat of the room.", zh: "通电后，同一份冷媒一圈圈循环：被压缩得很热，在室外冷却成液体，降压后在室内吸收房间的热而沸腾。" }
+  beats:
+    - part: null
+      camera: { position: [1.65, 1.8, 4.0], target: [0.05, 0.5, 0.0], fov: 30 }
+      caption: { en: "Switched on, the same refrigerant goes round a sealed loop. Orange is hot, grey is near room temperature and blue-grey is cold. Close dots are liquid, spread-out dots are gas.", zh: "通电后，同一份冷媒在封闭的回路里一圈圈流动。橙色是热，灰色接近室温，青灰色是冷。点密是液体，点疏是气体。" }
+    - part: compressor
+      camera: { position: [1.9, 1.1, 2.1], target: [0.66, 0.15, 0], fov: 30 }
+      labels: [compressor, accumulator, service-valves]
+      caption: { en: "In this simulation the compressor squeezes the gas from about 1.0 to 3.0 megapascals, and it leaves at about 85 to 90 °C. A compressor like this turns about 3,600 times a minute; here it is slowed down.", zh: "在这个模拟里，压缩机把气体从约 1.0 兆帕压到约 3.0 兆帕，气体出来时约 85 到 90℃。这类压缩机的转速约每分钟 3600 转，画面里放慢了。" }
+    - part: condenser-coil
+      camera: { position: [2.4, 1.4, 1.5], target: [0.6, 0.12, -0.12], fov: 30 }
+      labels: [condenser-coil, condenser-hairpins, outdoor-fan]
+      caption: { en: "In the simulated condenser the hot gas gives its heat to the 33 °C outdoor air. At 3.0 megapascals it condenses at about 48 °C, so it turns into liquid.", zh: "在模拟的冷凝器里，热气体把热量放给 33℃的室外空气。压力 3.0 兆帕时，它约在 48℃凝结，变成液体。" }
+    - part: expansion-valve
+      camera: { position: [2.0, 0.75, 1.2], target: [0.92, 0.08, -0.05], fov: 26 }
+      labels: [expansion-valve, liquid-pipe, service-valves]
+      caption: { en: "Squeezed through the expansion valve, the pressure drops to about 1.0 megapascals. Some liquid boils at once and the rest cools to about 7 °C.", zh: "液体挤过膨胀阀，压力降到约 1.0 兆帕。一部分立刻沸腾，剩下的降温到约 7℃。" }
+    - view: xray
+      part: evaporator-front
+      camera: indoor-unit
+      labels: [evaporator-front, evaporator-rear, crossflow-fan]
+      caption: { en: "In the evaporator the cold mix boils away completely, taking heat from the room air. The gas returns to the compressor, and one trip round takes about a minute.", zh: "在蒸发器里，冷的气液混合物全部沸腾，从房间空气里吸走热量。气体回到压缩机，走完一圈大约要一分钟。" }
 ---
 
 <Lang en>
@@ -23,7 +44,7 @@ The hot gas flows into the condenser. The outside air, at <Num s="S29">33 °C</N
 
 The warm liquid squeezes through the expansion valve, and its pressure falls to about <Num s="S1">1.0 MPa</Num>. At that pressure the <Term id="boiling-point">boiling point</Term> of R32 is only about <Num s="S1">7 °C</Num>, so about <Num s="S1">a quarter</Num> of the liquid boils at once. The heat for that boiling comes from the rest of the refrigerant, which cools to <Num s="S1">7 °C</Num>. This cold mix runs along the thin pipe to the indoor unit.
 
-In the evaporator the room air is far warmer than the refrigerant. The refrigerant boils away completely, each kilogram taking in about <Num s="S1">300 kJ</Num>, and the air passing over the fins grows cooler. The gas returns along the thick pipe to the compressor, and the loop begins again. About <Num s="S1">11 grams</Num> of refrigerant pass every second, so the <Num s="S29">0.80 kg</Num> inside goes round about <Num s="S29">once a minute</Num>.
+In the evaporator the room air is far warmer than the refrigerant. The refrigerant boils away completely, each kilogram taking in about <Num s="S1">230 kJ</Num>, and the air passing over the fins grows cooler. The gas returns along the thick pipe to the compressor, and the loop begins again. About <Num s="S1">11 grams</Num> of refrigerant pass every second, so the <Num s="S29">0.80 kg</Num> inside goes round about <Num s="S29">once a minute</Num>.
 
 The trick is the pressure difference. High pressure lets the refrigerant condense at a temperature above the outdoor air; low pressure lets it boil below the temperature of the room.
 
@@ -72,7 +93,7 @@ Inside the compressor's sealed shell a DC electric motor turns a crankshaft. A r
 
 温热的液体挤过膨胀阀，压力降到约 <Num s="S1">1.0 MPa</Num>。在这个压力下，R32 的<Term id="boiling-point">沸点</Term>只有约 <Num s="S1">7℃</Num>，于是约<Num s="S1">四分之一</Num>的液体立刻沸腾。沸腾所需的热取自其余的冷媒，整股冷媒就降到 <Num s="S1">7℃</Num>。这股冷的气液混合物沿细管流进室内机。
 
-在蒸发器里，房间空气比冷媒暖得多。冷媒全部沸腾成气体，每千克吸收约 <Num s="S1">300 kJ</Num> 的热，流过鳍片的空气就变凉了。气体沿粗管回到压缩机，又开始新的一圈。每秒约有 <Num s="S1">11 克</Num>冷媒流过，所以机内的 <Num s="S29">0.80 kg</Num> 冷媒约<Num s="S29">一分钟</Num>走完一圈。
+在蒸发器里，房间空气比冷媒暖得多。冷媒全部沸腾成气体，每千克吸收约 <Num s="S1">230 kJ</Num> 的热，流过鳍片的空气就变凉了。气体沿粗管回到压缩机，又开始新的一圈。每秒约有 <Num s="S1">11 克</Num>冷媒流过，所以机内的 <Num s="S29">0.80 kg</Num> 冷媒约<Num s="S29">一分钟</Num>走完一圈。
 
 关键在于压力差。压力高，冷媒在比室外空气还高的温度下就能凝结；压力低，它在比房间温度还低的温度下就能沸腾。
 
