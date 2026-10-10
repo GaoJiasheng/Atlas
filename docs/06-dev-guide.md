@@ -2,7 +2,7 @@
 
 Phase 1 地基（站点框架、i18n、主题、内容集合、Scene 契约、共享部件）、Phase 2 两个引擎（TimeScene / SpaceScene）、Phase 3 上线准备（PWA、Cloudflare Pages、e2e）和技术图版打磨（P1–P4，docs/08）都已就位，带两个占位主题。
 
-**术语**（全文统一）：**预设**（preset）= 相机预设，顶栏按钮组 `VIEW`，数字键 `1–9`（TimeScene 只放地理预设）；**模式**（mode）= 可开关的显示 / 行为，字母键，按钮在右列的**控制面板**（`widgets/ControlPanel.tsx`，LAYERS / TOOLS 两节）里，顶栏不再有 `MODE` 组；**状态行** = 顶栏第二行；**插槽**（slot）= 引擎往宿主 HUD 里画内容的位置；**面板**（panel）= 底部 `panel01–03`（目前只有 SpaceScene 用）；**卡片**（card）= 右上示意卡；**阅读面板**（reader）= 右侧停靠的 InfoPanel。SpaceScene 里的 `state.view`（assembled / xray / exploded / isolate）是"显示视图"，与 `VIEW` 按钮组（相机预设）无关。
+**术语**（全文统一）：**预设**（preset）= 相机预设，顶栏按钮组 `VIEW`，数字键 `1–9`、`0`（第 10 个；TimeScene 只放地理预设）；**模式**（mode）= 可开关的显示 / 行为，字母键，按钮在右列的**控制面板**（`widgets/ControlPanel.tsx`，LAYERS / TOOLS 两节）里，顶栏不再有 `MODE` 组；**状态行** = 顶栏第二行；**插槽**（slot）= 引擎往宿主 HUD 里画内容的位置；**面板**（panel）= 底部 `panel01–03`（目前只有 SpaceScene 用）；**卡片**（card）= 右上示意卡；**阅读面板**（reader）= 右侧停靠的 InfoPanel。SpaceScene 里的 `state.view`（assembled / xray / exploded / isolate）是"显示视图"，与 `VIEW` 按钮组（相机预设）无关。
 
 ## 跑起来
 
@@ -63,7 +63,15 @@ tests-e2e/                    # Playwright：smoke.spec.ts, hud.spec.ts, hud-lay
 pnpm tsx scripts/new-topic.ts <slug> --engine time-scene --subject history --title-en "…" --title-zh "…" [--subtitle-en … --subtitle-zh …] [--start YYYY-MM-DD --end YYYY-MM-DD]
 ```
 
-它建 `topic.yaml`（`status: draft`）、`chapters/00-background.mdx`（`kind: background` + 阅读说明）、`chapters/01-chapter-one.mdx`（完整 TimeScene frontmatter：state、summary、beats 示例）、`data/{entities,control,movements,events,presets,sources,glossary}.json`（最小合法：无实体、一个空的控制区关键帧）、`data/SOURCES.md`（带生成块标记），以及 `scripts/geo/<slug>/sources.json` + `SOURCES-GEO.md`；已存在就拒绝，最后打印下一步。只支持 `--engine time-scene`（stage geo）。`--start / --end` 缺省是 1900 年的占位日期，记得改。手工建主题按下面的步骤：
+它建 `topic.yaml`（`status: draft`）、`chapters/00-background.mdx`（`kind: background` + 阅读说明）、`chapters/01-chapter-one.mdx`（完整 TimeScene frontmatter：state、summary、beats 示例）、`data/{entities,control,movements,events,presets,sources,glossary}.json`（最小合法：无实体、一个空的控制区关键帧）、`data/SOURCES.md`（带生成块标记），以及 `scripts/geo/<slug>/sources.json` + `SOURCES-GEO.md`；已存在就拒绝，最后打印下一步。`--start / --end` 缺省是 1900 年的占位日期，记得改。
+
+空间主题（SpaceScene，stage model3d）用同一个脚手架：
+
+```bash
+pnpm tsx scripts/new-topic.ts <slug> --engine space-scene --subject science --title-en "…" --title-zh "…" [--subtitle-en … --subtitle-zh …]
+```
+
+它建 `topic.yaml`（`mode: space`、`engine: space-scene`、`stage: model3d`、`status: draft`，`note` 写在注释里）、`chapters/01-chapter-one.mdx`（完整 SpaceScene `state`：view / explode / part / run / cutaway / layers / hide / labels / camera / summary，beats 示例在注释里）、`data/parts.json`（一个积木零件 `<slug>-body`，在组 `<slug>-main` 里；`flows` / `animations` 为空；`views` 有 assembled 镜头、`cover`、`section`；id 带 slug 前缀，因为 id 全主题唯一）和空的 `data/{sources,glossary}.json`。生成后 `pnpm validate` 直接通过。手工建主题按下面的步骤：
 
 1. 建目录 `src/content/topics/<slug>/`，`<slug>` 就是 URL 和 `topic.yaml` 里的 `id`（kebab-case，必须一致）。
 2. 写 `topic.yaml`（字段见 docs/02）。`engine` + `stage` 必须是引擎支持的组合：`time-scene: geo | diagram`，`space-scene: model3d | layer2d`。
@@ -252,7 +260,7 @@ import { useSceneControls, useHud } from '../core/context';
 import type { SceneControls } from '../core/controls';
 
 const controls = useMemo<SceneControls>(() => ({
-  presets: { items: [{ id, label: '01', title?, chapter? }], set(id, { instant }) {} },   // 数字键 1–9
+  presets: { items: [{ id, label: '01', title?, chapter? }], set(id, { instant }) {} },   // 数字键 1–9，第 10 个是 0，再往后只有按钮（不显示数字）
   modes:   { items: [{ id: 'xray', key: 'x', label, on, disabled?, status?: 'EXPLODED 70', tone?: 'xray' | 'hot' | 'cold' | 'cut' | 'signal',
                       phone?: false }],   // phone:false = < 760 px 宽（手机）控制面板不画这一行（键仍可用）
              set(id, on, { instant }) {} },                                                 // 字母键
@@ -287,7 +295,7 @@ const labelsOn = useHud((s) => s.labels);   // 或 CSS：.atlas-scene[data-label
 | 键 | 作用 |
 |---|---|
 | ← → | 上一章 / 下一章（跳过折叠章节） |
-| 1–9 | 镜头预设（TimeScene：地理预设，按 VIEW 组顺序） |
+| 1–9, 0 | 镜头预设（TimeScene：地理预设，按 VIEW 组顺序）；0 = 第 10 个，再往后只有按钮，按钮上也不写数字 |
 | 注册的字母 | 模式开关（L = 标注；`h`、空格、数字保留给宿主） |
 | SPACE | 暂停 / 运行（没注册 `pause` 时不拦截） |
 | H | 隐藏 / 显示 HUD（只进 HUD store，不进 URL；0.35 s 淡出，左下留「H 显示界面」可点） |
@@ -311,7 +319,7 @@ __atlas.setVoice(on)                            // 演示语音朗读开关（�
 __atlas.voiceLog()                              // 最近 10 段朗读 { text, lang, voice, part, started, ended, reason }
 __atlas.setPaused(on); __atlas.setHud(on); __atlas.setTheme('paper' | 'cinema')   // setPaused 在场景没注册 `pause` 时（TimeScene）什么都不做、返回 false；setTheme 写用户覆盖
 __atlas.state()     // 场景快照 + { hud, paused, labels, reader, running, playhead, preset, modes: {id: on}, appliedTheme }；running = 章节自动跑进行中（只有 TimeScene 会 true），playhead = 引擎正在显示的连续时间（数字；没有就 null）。截图脚本在每张章节图前等 running === false
-__atlas.stats()     // { buffer, pixelRatio } 取自舞台 canvas，再合并引擎 stats()
+__atlas.stats()     // { buffer, pixelRatio } 取自舞台 canvas，再合并引擎 stats()；SpaceScene 另有 camera = 舞台此刻的真实镜头 { position, target, fov }（不是 store 里的目标）
 ```
 
 按钮带 `data-preset` / `data-mode`、`aria-pressed`；HUD 块带 `data-hud-panel`。
@@ -361,7 +369,7 @@ pnpm shoot sample-time --shots mine.json hero    # 自定义截图表（{name: {
 ```
 
 - `--locale en|zh|all`、`--theme paper|cinema|all`（也接受逗号列表），默认 `en` + `paper`；`shots/` 已 gitignore。主题用 `__atlas.setTheme()` 切换。`--gpu` 改用真 GPU（macOS 走 Metal），默认软件 GL（SwiftShader，与 e2e 相同），fps 数字只在 `--gpu` 下有意义。
-- 默认截图：每章一张；首章上每个注册模式各一张（`presentation` 除外；默认开着的模式截"关"，文件名 `mode-<id>-off`）；非章节预设（`orbit` / `reference` / `world` / `theatre` / `presets.json` 里的）各一张；`hero-clean`（HUD 关）。每次截图前把模式、HUD、暂停恢复到加载时的状态（阅读面板、卡片、泳道这些宿主 / 引擎 UI 状态不复位，自定截图表里的 `js` 要自己摆好）。
+- 默认截图：每章一张；首章上每个注册模式各一张（`presentation` 除外；默认开着的模式截"关"，文件名 `mode-<id>-off`）；非章节预设（`orbit` / `reference` / `world` / `theatre` / `presets.json` 里的）各一张；`hero-clean`（HUD 关；SpaceScene 这时是封面镜头，等 0.8 s 的飞行做完）。截图表里 `preset` 和 `modes` 同时写也落在预设镜头上（不用 `js` 延时）。每次截图前把模式、HUD、暂停恢复到加载时的状态（阅读面板、卡片、泳道这些宿主 / 引擎 UI 状态不复位，自定截图表里的 `js` 要自己摆好）。
 - `--keys`：对 `keymap()` 逐项按键：预设（`state().preset` + `[data-preset]` 的 `aria-pressed`）、模式（状态翻转 + `[data-mode]` 的 `aria-pressed`，再按一次恢复；按钮在控制面板里，面板收起也照样在 DOM 里；按钮被禁用则跳过）、SPACE、H（HUD 隐藏且"H 显示界面"可见）、ESC（HUD 隐藏后恢复）、← →；最后拖动舞台应变 FREE CAMERA（没有预设亮着），再按预设应收回。
 - `--layout`：3840×2160 / 2560×1440 / 1920×1080 / 1280×720 / 900×1200 / 390×844 × 每章 × 额外预设，用 `tests-e2e/hud-layout.ts` 的 `hudLayoutIssues()`（与 `pnpm e2e` 共用同一份逻辑）查 `[data-hud-panel]` 出屏 / 重叠（1 px 容差）/ 横向溢出，并存 `layout-WxH.png`。
 - 一直收集 console error / warning、pageerror、同源 4xx/5xx 和任何指向外部主机的请求（违反"无运行时外部请求"）；GPU / SwiftShader 噪音与 smoke.spec.ts 同一过滤。退出码 1 = 有 error / pageerror / 外部请求 / 键位失败 / 布局问题（warning 只打印）。
@@ -429,7 +437,7 @@ colors.ts  time-scene.css
 | `control.json` | `keyframes[]`，按时间严格升序，`properties.holder` = 实体 id，同一实体可有多个面（或 MultiPolygon）。**两种写法任选**：① GeoJSON：`{ "keyframes": [{ "t", "features": FeatureCollection }] }`（小主题、手写，如 sample-time）；② TopoJSON：`{ "topology": Topology, "keyframes": [{ "t", "object": "<topology.objects 里的名字>" }] }`——所有关键帧共用一份拓扑（不变的海岸、边界只存一次，量化 + 差分编码），大主题（ww2 的 12 帧）用它。拓扑只做宽松校验（`type: "Topology"`、`arcs` 数组、`objects` 记录、`transform` 可选），解码后每个要素按普通控制区要素再校验（`holder` 存在于 entities、环闭合、经纬度范围）。引擎在建 `TimeModel` 时用 `topojson-client` 的 `feature()` 把每帧解成 FeatureCollection（`lib/control.ts` 的 `decodeControl`，顺手把环改回 RFC 7946 绕向，MapLibre 靠绕向分外环和洞），之后的帧、面积、渲染全都不知道有两种写法。ww2 的 `control.json` 由管线生成（见「Geo pipeline」），不手写。面积（右上卡）在客户端按球面公式算，不用写。 |
 | `movements.json` | `from/to` 时间区间 + LineString `path`（从起点画到终点）。`strength`（可选，0 或缺省 = 未知，不显示“N 人”）决定线宽（1–3 px，相对全主题最大值）。**过日界线**：schema 把经度限在 -180..180，作者照实写跳变即可（`… [179.5, 38], [-175, 33] …`）；建 `TimeModel` 时 `unwrapPathCentred`（`lib/geo.ts`，思路同 `unwrapRing`）把相邻点经度差超过 180° 的后续点整体 ±360°，让线走近路（MapLibre 会把 >180 的经度画进邻近世界副本），再把整条路径平移 ∓360° 使其中心落在 -180..180。之后切线（`sliceLine`）、箭头头部、引线锚点、剧场镜头的包围盒（`model.bounds`）全部用 `MovementN.path`（展开后的坐标），不要再读 `movement.path.coordinates`。珍珠港航线（147.7°E 44.9°N → 158°W 23°N）展开后经度 147.7 → 202，长约 5,800 km，不是绕地球一圈的 30,000 km。可选 `linger`（`timePoint`，须晚于 `to`、同一时间标尺）：默认 `to` 之后整条线立刻消失；写了 `linger`，`to` 到 `linger` 之间画完成的整条线（40% 不透明，箭头停在终点），过了 `linger` 在约 2% 时间跨度内淡出。lingering 的线不计入状态串的 MOVEMENTS。 |
 | `events.json` | `t`、可选 `until`、`at`、`kind`、`importance`（**3 最重要 = 点最大**，1 最小）、`sides/forces/casualties/result`。`kind`：`battle`、`landing`（这两种必须有 `sides` + `result`）、`bombing`（必须有 `sides`）、`surrender`、`political`、`massacre`、`siege`、`evacuation`、`liberation`、`atrocity`、`disaster`（流感、饥荒、击沉客轮；不分阵营）、`site`（`bombing` 以外新增的各种 `sides`/`result` 都可选）。可选 `detail: { en, zh }`（inspector 里默认收起的"细看 / More"）与 `sources: ["S1", "S7"]`（`sources.json` 的编号，inspector 摘要后显示 mono 上标，点开来源弹层）。`sensitive` 只是可选元数据，不影响显示。 |
-| `presets.json`（可选） | `{ "presets": [{ "id": "singapore-island", "label": { "en": "Singapore", "zh": "新加坡" }, "camera": { "center": [103.82, 1.35], "zoom": 9.2 } }] }`。注册成镜头预设，排在 `world` / `theatre` 之后（`world` = 1、`theatre` = 2，这些从 3 起编号，1–9 之外只有按钮）；`label` 是按钮文字（一两个词）；正文 `<FlyTo preset>` 用这些 id。VIEW 组只放地理预设，章节不是预设。 |
+| `presets.json`（可选） | `{ "presets": [{ "id": "singapore-island", "label": { "en": "Singapore", "zh": "新加坡" }, "camera": { "center": [103.82, 1.35], "zoom": 9.2 } }] }`。注册成镜头预设，排在 `world` / `theatre` 之后（`world` = 1、`theatre` = 2，这些从 3 起编号，第 10 个是 0，再往后只有按钮）；`label` 是按钮文字（一两个词）；正文 `<FlyTo preset>` 用这些 id。VIEW 组只放地理预设，章节不是预设。 |
 | `sources.json`（可选） | 见上文"加一个主题"第 4 步。 |
 | `glossary.json`（可选） | 名词表，见「名词表」。 |
 
@@ -532,7 +540,7 @@ chap(t) = 过结点 {min, 各章时间…, max}（去重、排序）的分段线
 
 | 项 | 内容 |
 |---|---|
-| 预设 | `world`（center [20, 10]，zoom 1.4）+ `theatre`（整片区域：地图 `cameraForBounds` 套住全部数据；地图未就绪时按包围盒估算）+ `presets.json` 里的预设（按钮文字 = `label`，旁边小字写数字键）。数字键 1–9。没有章节预设 |
+| 预设 | `world`（center [20, 10]，zoom 1.4）+ `theatre`（整片区域：地图 `cameraForBounds` 套住全部数据；地图未就绪时按包围盒估算）+ `presets.json` 里的预设（按钮文字 = `label`，旁边小字写数字键）。数字键 1–9，第 10 个是 0，再往后只有按钮、不写数字。没有章节预设 |
 | 模式 | `flow`（F，= movements 图层，状态 `FLOW`）· `borders`（B，= borders 图层）· `graticule`（G，引擎本地状态）· `territory`（N，领土名称，引擎本地状态，默认开）· `reference`（R）· `presentation`（P，状态 `PRESENTATION 08/17`；底部条也有 PRESENT 按钮）· 宿主 `labels`（L） |
 | 控制面板 | `stageOverlay` 里的「图层和图例」卡（舞台 ≥ 720 px 宽时默认展开）：**LAYERS** 控制区 / 领土名称（N）/ 国界（B）/ 经纬网（G）/ 行动路线（F）/ 事件 / 何时加入 / 地点（有 `site` 事件才出）/ 标注（L）；**TOOLS** 与上一关键帧对照（R）/ 演示（P）/ 名词（有 `glossary.json` 才出）/ 隐藏界面（H）；**KEY** 图例 |
 | `time` | 章节自动跑：`running()` / `now()`，供 `__atlas.state().running / playhead`；状态行在跑时写 `RUNNING` |
@@ -582,12 +590,13 @@ MapLibre 只在 `controller` chunk 里，View 挂载后才加载（时间轴先�
 index.ts                 descriptor（part/view/explode/run/cutaway）
 schema.ts                parts.json 的 zod（构建期）
 View.tsx                 HUD 控件注册（预设 / 模式 / 规格行 / 卡片与面板标题）+ 各插槽内容 + 懒加载 Model3DStage
-ui.ts                    引擎内 UI store（ORBIT、REFERENCE、演示中 + 这一拍的标注；不进 URL，View 与舞台共用）
-bridge.ts                舞台 → HUD 的桥：每帧投影好的标注锚点（零件 + `group:<id>` 组锚点）、渲染计数、帧回调、镜头落定（`settledTransition` / `cameraSettled`）（View 侧不 import three）
+ui.ts                    引擎内 UI store（ORBIT、REFERENCE、演示中 + 这一拍的标注、封面镜头；不进 URL，View 与舞台共用）
+bridge.ts                舞台 → HUD 的桥：每帧投影好的标注锚点与屏幕框（零件 + `group:<id>` 组锚点）、HUD 可能标注的 id（遮挡只查这些）、渲染计数、帧回调、镜头落定（`settledTransition` / `cameraSettled`）（View 侧不 import three）
 lib/                     纯函数，有单测：explode / visibility（图层、isolate、hide、shell、context）/ flow-curve / flow-stops（沿路径变色）/
                          color（材质族、tint）/ presets（材质名，无 zod）/ animation / telemetry（一阶滞后读数）/ detail（段落 + [S#]）/
                          camera（球坐标插值、REFERENCE 镜头、过渡目标）/ parts（零件包围盒、repeat 变换）/
-                         schematic（零件链路、流经连线、立面、标注预算与列避让）/ labels（组标注 id、演示时用哪张标注表、组包围盒）/ xform / math
+                         schematic（零件链路、流经连线、立面、标注预算）/ labels（组标注 id、演示时用哪张标注表、组包围盒）/
+                         leader-layout（引线标注摆放：两列、避让 HUD 与被标零件、代价搜索）/ xform / math
 stages/model3d/          R3F 舞台：Model3DStage（createRoot 宿主）、SceneRoot、PartNode、geometry（程序化零件）、
                          materials（材质 + 选中边缘 / 剖面 shader 补丁）、textures（程序化贴图）、Lighting、
                          GroundShadow、CameraRig、Flows + flowMaterial、probes（标注投影 / 计数 / 阴影更新）、GltfSource
@@ -637,6 +646,7 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
     "assembled": { "camera": { "position": [3,2,4], "target": [0,0,0], "fov": 34 } },
     "exploded":  { "camera": { ... } },     // 每个视图可选一个预设镜头
     "cutaway":   { "normal": [-1,0,0], "offset": 0 },   // 可选剖切面；默认切掉 x>0 一半
+    "cover":     { "position": [2.6,1.6,3.4], "target": [0,0.3,0], "fov": 30 },   // 可选封面镜头（直接是镜头，不套 camera）：演示以外隐藏 HUD（H、hero-clean 截图）时用
     "section":   { "plane": "xy" },         // 可选：ARCHITECTURE 立面与 REFERENCE 正视方向（xy 正面 / zy 侧面 / xz 俯视）
     "reference": { "camera": { ... } }      // 可选：自定 REFERENCE 镜头（默认按包围盒自动取长焦正视）
   },
@@ -646,7 +656,7 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
   "telemetry": [                           // 可选，≤ 6 行：STATE 面板 = RUN + 这些模拟读数（带 SIM 芯片），替代默认的 FLOW / ANIMATIONS / VIEW / EXPLODE
     { "key": {en, zh}, "unit": "MPa abs", "idle": 1.93, "run": 3.0, "lag": 10, "decimals": 2 }   // 一阶滞后 τ = lag 秒；decimals 默认取 idle / run 写出的位数
   ],
-  "presets": [                             // 可选，≤ 6 个命名镜头预设（docs/12 §7.4 G7）：VIEW 按钮排在各章镜头、ORBIT、REF. 之后（数字键接着排，最多到 9）
+  "presets": [                             // 可选，≤ 6 个命名镜头预设（docs/12 §7.4 G7）：VIEW 按钮排在各章镜头、ORBIT、REF. 之后（数字键接着排：1–9，第 10 个是 0，再往后只有按钮）
     { "id": "outdoor", "label": {en, zh}, "camera": { "position": [1.5, 0.75, 1.5], "target": [0.62, 0.3, 0], "fov": 30 },
       "view": "xray" }                     // view 可选：按预设时同时切视图（exploded 时拆开到 0.7 或当前值）；id 全主题唯一，不能叫 orbit / reference
   ]
@@ -666,7 +676,7 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
   - `fins` 上限 512 片（一个 InstancedMesh，一次绘制）
 - **repeat**：`{count, axis, spacing}`（沿轴、以 `at` 为中心等距）或 `{count, axis, radius}`（绕过 `at` 的轴一圈，每个实例朝外转）。轴是场景坐标。整件变成一个 InstancedMesh。
 - **材质族**（`color`）：`casing`（拉丝铝，各向异性）、`steel`（机加工钢）、`powder`（缎面黑粉末涂层，轻微橘皮）、`stainless`（轴向拉丝不锈钢）、`copper`、`brass`（黄铜：阀门、喇叭口螺母）、`rubber`（近黑，roughness .78）、`plastic`（哑光暖砂色，不是默认灰）、`enamel`（暖白烤漆，比纸色深一档，低粗糙度 + 细颗粒粗糙度贴图 = 缎面光泽，家电外壳）、`glass`（半透明）；旧名 `metal` = steel、`matte` = plastic。或者 `token:<name>` / `#hex`：缎面漆。`primitive.tint`（token 或 #hex）给材质族换颜色、保留它的金属度 / 粗糙度 / 贴图，例如浅灰 `powder` 外壳：`"color": "powder", "tint": "#c4c6c2"`。程序化 canvas 贴图给拉丝方向、粗糙度变化、橘皮法线（`stages/model3d/textures.ts`，种子固定，截图可复现）。
-- **流场**：`path` 首尾点相同 = 闭环。centripetal Catmull-Rom，按弧长烘焙 64 个点进 shader（盘管只能画 2–3 程，不能逐根追 U 形弯头），默认每条 360 个细粒子（贴着中心线，像 CFD 流线而不是魔法粒子），`speed` 是场景单位/秒。`stops` 在顶点着色器里按粒子位置插值（线性 RGB）；分段流（冷媒四段）用 `ends: "open"`，并让各段 `count / 长度 × speed` 大致相等（粒子通量连续）。`whenRun: false` 的流/动画一直播放（只受图层开关）。每条流一次绘制。
+- **流场**：`path` 首尾点相同 = 闭环。centripetal Catmull-Rom，按弧长烘焙进 shader：每 8 mm（0.008 场景单位）一个点，64–512 个，存成一行浮点纹理（`texelFetch` 取样，不占 uniform 数组），粒子在弯头处贴着曲线走、不抄近路（4 m 的冷媒段约 500 个点，弯头偏差从 64 点时的 15–20 mm 降到 3 mm 以内；盘管仍只能画 2–3 程，不能逐根追 U 形弯头），默认每条 360 个细粒子（贴着中心线，像 CFD 流线而不是魔法粒子），`speed` 是场景单位/秒。`stops` 在顶点着色器里按粒子位置插值（线性 RGB）；分段流（冷媒四段）用 `ends: "open"`，并让各段 `count / 长度 × speed` 大致相等（粒子通量连续）。`whenRun: false` 的流/动画一直播放（只受图层开关）。每条流一次绘制。
 - **已知限制**：只有一个剖切面（`views.cutaway` 一个平面同时切所有零件；两个平面暂不做）；没有弯曲的盘管（弧形蒸发器用两三片倾斜的 `fins` 近似，L 形冷凝器用两片）；流不随拆开移动。
 - **glb**：不要用 Draco/meshopt 压缩（drei 默认去 CDN 拉 Draco 解码器，Atlas 不允许运行时外部请求，所以我们关掉了）。mesh 名找不到会 console.warn，该零件不显示；glb 整体加载失败时积木零件照常显示。
 
@@ -695,7 +705,7 @@ state:
       audio: /audio/aircon/ch03-1.mp3     # 可选：进拍时播放的旁白文件（站内路径）
 ```
 
-章节目标照常累积（`labels`、`hide` 不累积，只看本章）。**镜头规则**（`lib/camera.ts transitionCamera`，有单测）：切章 / 首次加载 / URL：本章自己写了 `camera`（或 URL `cam=` 与本章基线不同）就用它；否则 `views[当前 view].camera`；都没有就沿用。**预设（VIEW 按钮 / 数字键）永远落在该预设的镜头上**（P1 遗留问题：本章没有自己镜头时，基线是继承来的，曾被误判成"非显式"而飞去视图预设；已修）。模式切换（X / E / C / F）不动镜头。较窄的舞台（宽高比 < 1.6：HUD 占去两侧的桌面、平板、竖屏手机）自动把镜头往后拉，回写 URL 时换算回来，链接与设备无关。
+章节目标照常累积（`labels`、`hide` 不累积，只看本章）。**镜头规则**（`lib/camera.ts transitionCamera`，有单测；CameraRig 订阅 store，transition 一发出就按顺序处理，所以同一 tick 里先 `setPreset` 再 `setMode`（snap）也落在预设镜头上，截图脚本不需要延时）：切章 / 首次加载 / URL：本章自己写了 `camera`（或 URL `cam=` 与本章基线不同）就用它；否则 `views[当前 view].camera`；都没有就沿用。**预设（VIEW 按钮 / 数字键）永远落在该预设的镜头上**（P1 遗留问题：本章没有自己镜头时，基线是继承来的，曾被误判成"非显式"而飞去视图预设；已修）。模式切换（X / E / C / F）不动镜头。较窄的舞台（宽高比 < 1.6：HUD 占去两侧的桌面、平板、竖屏手机）自动把镜头往后拉，回写 URL 时换算回来，链接与设备无关。**封面镜头**：演示以外隐藏 HUD（H、`pnpm shoot` 的 `hero-clean`）时 0.8 s 飞到 `views.cover`；没写就沿当前视线方向重新取景，让模型包围球占舞台宽 75 %（宽屏上最多超出高度 30 %，`fitSphereCamera`），舞台尺寸变了再重算；显示 HUD 时 0.8 s 飞回离开时的镜头——中间换过章、按过预设或拖过镜头就不飞回。章节镜头按带 HUD 的舞台取景：模型放在 HUD 块之间的空带里（1600×900 约 590 × 680 px），给引线标注留位置；封面镜头按满屏取景（模型约占宽 70 %）。
 
 ### HUD 控件与内容（docs/08 §2、§3）
 
@@ -724,17 +734,17 @@ state:
 - `inspector`：选中零件详情（编号 + 名称 + 中文、级别、说明、了解更多、所属组、相连芯片），hairline 皮肤。`detail` 里空行分段；`[S3]`、`[S3, S7]` 渲染成与 `<Num s>` 相同的来源上标（点开宿主的来源浮层；schema 校验编号在 `data/sources.json` 里）。
 - `__atlas.stats()` 合并 `{calls, triangles, geometries, textures, fps, gpu}`（renderer.info + 滚动 FPS + WEBGL_debug_renderer_info）。
 
-### 引线标注（`hud/LeaderLabels.tsx`，master-spec J）
+### 引线标注（`hud/LeaderLabels.tsx` + `lib/leader-layout.ts`，master-spec J）
 
-- 每条：编号 + EN 名（粗、大写）/ 中文 / 一行说明（`summary` 截断）。左列右对齐、右列左对齐并带小三角；细引线 = 标签边 → 16 px 水平短线 → 直线到投影锚点（零件包围盒中心）上的空心圆。
-- 舞台每帧（`probes.tsx LabelProbe`）把锚点投影到舞台像素写进 bridge，HUD 侧只写 `transform` / `opacity` / `d` / `cx` / `cy`；字号、文字宽度与 `[data-hud-panel]` 矩形只在 resize、字体加载、标签集合变化时测量。
-- 先按投影 y 排序、最小间距堆叠（`stackColumn`），再把列放在锚点外侧（引线向内，不穿过文字），列宽避开本列高度范围内的 HUD 块；镜头动时列平滑滑动。
-- 锚点在背后 / 出屏 / 被剖掉 / 被遮挡（节流 raycast，每帧最多 2 个、只在镜头或零件动过之后）/ 落在 HUD 块下 → 淡出；X-RAY 时不判遮挡；选中零件永远标注、signal 色高亮、不因遮挡隐藏。
-- 数量：`labelBudget(镜头距离 / 模型半径)` 3–10 条（近景少），再受可用高度限制；放不下两列时退成一列，再放不下就不标。手机（< 760）宿主隐藏 `leaders`。
-- 避让模型：每个锚点带投影半径 `r`（零件包围盒的约 3/8 对角线 × 焦距 / 深度，`bridge.anchors[id].r`）；列放在锚点 ∓ `r` 之外，放不下的标签（列在空带里到不了离自己零件 0.6 `r` 以外）不画，选中的零件例外。HUD 之间的空带 < 480 px（720p 笔记本）时只标选中的零件，其余靠右上零件链路卡和点选。
+- 每条：编号 + EN 名（粗、大写）/ 中文 / 一行说明（`summary` 截断）。锚点左边的标签右对齐，右边的左对齐并带小三角；细引线 = 标签边 → 16 px 水平短线 → 直线到投影锚点上的空心圆。锚点 = 零件包围盒中心；单根 `tube`（管路）的包围盒中心常在半空，改用路径一半长度处的点（`shapes.ts anchorPoint`）。
+- 舞台每帧（`probes.tsx LabelProbe`）把锚点和零件包围盒的屏幕框（8 个角的投影，`x0 y0 x1 y1`）写进 bridge，HUD 侧只写 `transform` / `opacity` / `d` / `cx` / `cy`；字号、文字宽度与 `[data-hud-panel]` 矩形只在 resize、字体加载、标签集合变化时测量。
+- **摆放**（`layoutLeaders`，纯函数，有单测；规则同 TimeScene 的地图引线）：两列对齐。列在 HUD 空带的边上，没有 HUD 块挡着时不超出舞台 22 % / 78 %，并朝本侧锚点（零件屏幕框）收拢。每个标签放在锚点那一侧（空带左右三分之一各归一侧，中间三分之一归近的一列，40 px 迟滞），尽量与锚点齐平。硬约束：在空带内、离 HUD 块 ≥ 8 px、不压别的标签、不压任何被标零件的锚点、锚点在标签的引线一侧、引线 ≤ 舞台宽 35 %。软约束（代价）：与锚点的竖直距离、不压被标零件的屏幕框（别的零件重罚、自己的轻罚）、引线不交叉、不穿过别的标签、上一帧的位置（迟滞，镜头动时不跳）。列里放不下时可以离开列、贴在自己零件旁边（代价更高）。先按优先级贪心放一遍（选中的零件、组、大件），再在其余都放好后把每个标签重放，最多两遍。**允许压在模型上**：没有被标零件的地方可以放；这时文字底下垫一块纸色底板（`.space-co__plate`，0.8 不透明，只在标签框压到某个显示中的零件时出现）。
+- 锚点在背后 / 出屏 / 被剖掉 / 被遮挡 / 落在 HUD 块下 → 淡出。遮挡：节流 raycast，每帧最多 2 个，**只查 HUD 可能标注的零件**（`bridge.labelled`），镜头、零件位置、拆开、移开 / 淡入淡出变了才重查；每个零件最多 5 条射线（锚点，再是包围盒中心到四个角的一半、朝镜头那面），有一条到达就算看得见。X-RAY 时不判遮挡；选中零件永远标注、signal 色高亮、不因遮挡隐藏。
+- 数量：`labelBudget(镜头距离 / 模型半径)` 3–10 条（近景少），放不下的不画。HUD 之间的空带 < 480 px（720p 笔记本）时只标选中的零件，其余靠右上零件链路卡和点选。手机（< 760）宿主隐藏 `leaders`。
 - 点标签（触屏点一下）= 选中零件；标签热区高 ≥ 44 px。
-- **组标注**（docs/12 §8 G12）：`labels` 里写 `group:<组 id>` = 整组一个标签：EN 组名（大写）/ 中文组名，不带编号和说明，不可点。锚点 = 组内**可见**零件（含拆开、移开后的实际位置）包围盒的中心（`LabelProbe` 每帧算，不判遮挡），投影半径 = 包围盒半对角线，所以标签列放在整组之外。排在零件标签前面。
-- **演示中**：只标这一拍的 `labels`（没写就是本章的，再没写就是默认的全部可见零件），至多 6 个、不按镜头距离限量，字号 +20 %，不可点（点 = 下一拍）；HUD 隐藏时 `leaders` 照常显示（`.atlas-leaders[data-present]`），只避让字幕卡和标题块（HUD 淡出结束时重新测量）。
+- **组标注**（docs/12 §8 G12）：`labels` 里写 `group:<组 id>` = 整组一个标签：EN 组名（大写）/ 中文组名，不带编号和说明，不可点。锚点 = 组内**可见**零件（含拆开、移开后的实际位置）包围盒的中心（`LabelProbe` 每帧算，不判遮挡），屏幕框 = 这个包围盒的投影，别的标签不压整组。排在零件标签前面。
+- **演示中**：只标这一拍的 `labels`（没写就是本章的，再没写就是默认的全部可见零件），至多 6 个、不按镜头距离限量，字号 +20 %，不可点（点 = 下一拍）；HUD 隐藏时 `leaders` 照常显示（`.atlas-leaders[data-present]`），**只**把字幕卡和标题块（`data-hud-panel="present*"`）当障碍（HUD 面板淡出时 `visibility` 还留着，不能算），进入演示时立刻重新测量。
+- 章节的 `labels` 写 3–6 个在本章镜头下**看得见**的零件（被外壳挡住的会因遮挡淡出；要标里面的零件，本章 `hide` 掉外壳、用 X-RAY，或者用组标注）。`pnpm shoot <topic> --beats` 的 `chapter highlights` 在 1600×900 和 1920×1080 都应是 `all on screen`。
 - 测试钩子：每个标签 `data-id`（零件 id 或 `group:<id>`）；有明确列表时 `.space-leaders` 带 `data-want`（`pnpm shoot --beats` 的漏标核对）。
 
 ### 演示（PRESENTATION，P；docs/12 §8 G1）

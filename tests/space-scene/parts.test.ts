@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { Box3, BufferGeometry, Matrix4, Vector3 } from 'three';
 import { partSchema, primitiveSchema } from '../../src/engines/space-scene/schema';
-import { finOffsets, modelBounds, partBounds, repeatTransforms } from '../../src/engines/space-scene/lib/parts';
+import { finOffsets, modelBounds, partBounds, repeatTransforms, tubeMidpoint } from '../../src/engines/space-scene/lib/parts';
 import { filletPath, isClosedKind, primitivePieces } from '../../src/engines/space-scene/stages/model3d/geometry';
 
 const base = {
@@ -212,3 +212,12 @@ describe('part flags', () => {
   });
 });
 
+
+describe('tubeMidpoint (a pipe label points at the pipe, not into its bounds)', () => {
+  it('is halfway along the path by length', () => {
+    const tube = { kind: 'tube', path: [[0, 0, 0], [0, 1, 0], [3, 1, 0]], radius: 0.01, at: [0, 0, 0], color: 'copper' } as unknown as Parameters<typeof tubeMidpoint>[0];
+    expect(tubeMidpoint(tube)).toEqual([1, 1, 0]);
+    const straight = { ...tube, path: [[0, 0, 0], [2, 0, 0]] } as typeof tube;
+    expect(tubeMidpoint(straight)).toEqual([1, 0, 0]);
+  });
+});

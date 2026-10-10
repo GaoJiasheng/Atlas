@@ -2,10 +2,13 @@
  * Per-frame helpers of the stage that feed the HUD through the bridge
  * (no allocation per frame; module-level temporaries):
  *
- *  - LabelProbe: projects every part's label anchor to stage pixels, and the
+ *  - LabelProbe: projects every part's label anchor (and the box of its
+ *    bounds) to stage pixels, and the
  *    bounding centre of each group's visible parts (`group:<id>` anchors,
  *    group labels: never occluded), checks occlusion with a throttled raycast
- *    (two parts per frame, only after the camera or the parts moved) and
+ *    (two parts per frame, only parts the HUD may label, only after the
+ *    camera or the parts moved or were put aside / faded; up to
+ *    five rays a part: hidden only when none reaches it) and
  *    notifies the HUD listeners
  *  - StatsProbe: renderer counters and a rolling FPS (`__atlas.stats()`, perf readout)
  *  - ShadowUpdater: one shadow-map update when something that casts moved
@@ -13,7 +16,7 @@
  */
 import { useEffect, useMemo } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
-import { Matrix4, Raycaster, Vector3, type Intersection, type Object3D, type PerspectiveCamera, type Plane, type WebGLRenderer } from 'three';
+import { Matrix4, Raycaster, Vector3, type Camera, type Intersection, type Object3D, type PerspectiveCamera, type Plane, type WebGLRenderer } from 'three';
 import type { ScreenAnchor, StageBridge } from '../../bridge';
 import type { PartHandle } from './PartNode';
 import { keepAnimating, type StageRuntime } from './runtime';
@@ -24,12 +27,60 @@ import type { Vec3 } from '../../lib/math';
 export type GroupMembers = ReadonlyMap<string, readonly { id: string; half: Vec3 }[]>;
 
 const _p = new Vector3();
+const _q = new Vector3();
 const _dir = new Vector3();
 const _hits: Intersection[] = [];
 /** Occlusion checks per frame. */
 const CHECKS_PER_FRAME = 2;
+/** Occlusion rays per part: the label anchor, then halfway from the bounds centre to four corners (x, y signs) on the camera's side. */
+const OCCLUSION_SAMPLES: readonly (readonly [number, number])[] = [
+  [0, 0],
+  [-1, -1],
+  [1, -1],
+  [-1, 1],
+  [1, 1],
+];
 /** On-screen radius of a group anchor = its projected half-diagonal × this (label columns keep clear of the whole group). */
 const GROUP_CLEARANCE = 1;
+
+const newAnchor = (): ScreenAnchor => ({ x: 0, y: 0, onScreen: false, occluded: false, shown: false, depth: 0, r: 0, x0: 0, y0: 0, x1: 0, y1: 0 });
+
+/**
+ * The anchor's on-screen box: the projected corners of the box centred on
+ * (cx, cy, cz) with half extents `half` (scene axes); a box with no extent,
+ * or one reaching behind the camera, falls back to the anchor ± its radius.
+ */
+function screenBox(a: ScreenAnchor, cx: number, cy: number, cz: number, half: readonly number[], camera: Camera, W: number, H: number): void {
+  const [hx = 0, hy = 0, hz = 0] = half;
+  if (hx + hy + hz > 0) {
+    let x0 = Infinity;
+    let y0 = Infinity;
+    let x1 = -Infinity;
+    let y1 = -Infinity;
+    let ok = true;
+    for (let i = 0; i < 8 && ok; i++) {
+      _q.set(cx + (i & 1 ? hx : -hx), cy + (i & 2 ? hy : -hy), cz + (i & 4 ? hz : -hz)).project(camera);
+      if (_q.z <= -1 || _q.z >= 1) ok = false;
+      const sx = (_q.x * 0.5 + 0.5) * W;
+      const sy = (-_q.y * 0.5 + 0.5) * H;
+      x0 = Math.min(x0, sx);
+      x1 = Math.max(x1, sx);
+      y0 = Math.min(y0, sy);
+      y1 = Math.max(y1, sy);
+    }
+    if (ok) {
+      a.x0 = x0;
+      a.y0 = y0;
+      a.x1 = x1;
+      a.y1 = y1;
+      return;
+    }
+  }
+  a.x0 = a.x - a.r;
+  a.x1 = a.x + a.r;
+  a.y0 = a.y - a.r;
+  a.y1 = a.y + a.r;
+}
 
 export function LabelProbe({
   bridge,
@@ -47,7 +98,7 @@ export function LabelProbe({
   runtime: StageRuntime;
 }) {
   const st = useMemo(
-    () => ({ raycaster: new Raycaster(), lastCam: new Matrix4(), lastExplode: -1, stale: new Set<string>(), occluders: [] as Object3D[] }),
+    () => ({ raycaster: new Raycaster(), lastCam: new Matrix4(), lastExplode: -1, lastOccluders: -1, stale: new Set<string>(), occluders: [] as Object3D[] }),
     [],
   );
   // Per group: its anchor id, one reusable box per part and the visible ones this frame (no per-frame allocation).
@@ -77,9 +128,13 @@ export function LabelProbe({
     const H = state.size.height;
     bridge.width = W;
     bridge.height = H;
-    if (!st.lastCam.equals(camera.matrixWorld) || st.lastExplode !== runtime.explode) {
+    // Which parts can hide others (shown and mostly opaque): a part put aside or faded in changes what hides what.
+    let occluderKey = 0;
+    for (const h of handles.values()) occluderKey = (occluderKey * 31 + (h.visible && h.fade > 0.6 ? 1 : 0)) % 2147483647;
+    if (!st.lastCam.equals(camera.matrixWorld) || st.lastExplode !== runtime.explode || st.lastOccluders !== occluderKey) {
       st.lastCam.copy(camera.matrixWorld);
       st.lastExplode = runtime.explode;
+      st.lastOccluders = occluderKey;
       for (const id of handles.keys()) st.stale.add(id);
     }
 
@@ -88,10 +143,11 @@ export function LabelProbe({
     for (const [id, h] of handles) {
       let a: ScreenAnchor | undefined = bridge.anchors.get(id);
       if (!a) {
-        a = { x: 0, y: 0, onScreen: false, occluded: false, shown: false, depth: 0, r: 0 };
+        a = newAnchor();
         bridge.anchors.set(id, a);
       }
-      _p.set(h.object.position.x + h.offset[0], h.object.position.y + h.offset[1], h.object.position.z + h.offset[2]);
+      const o = h.object.position;
+      _p.set(o.x + h.point[0], o.y + h.point[1], o.z + h.point[2]);
       a.shown = h.visible && !clipped(_p);
       a.depth = _p.distanceTo(camera.position);
       a.r = a.depth > 0 ? (h.radius / a.depth) * focal : 0;
@@ -99,11 +155,12 @@ export function LabelProbe({
       a.x = (_p.x * 0.5 + 0.5) * W;
       a.y = (-_p.y * 0.5 + 0.5) * H;
       a.onScreen = _p.z > -1 && _p.z < 1 && Math.abs(_p.x) < 1.02 && Math.abs(_p.y) < 1.02;
+      screenBox(a, o.x + h.offset[0], o.y + h.offset[1], o.z + h.offset[2], h.half, camera, W, H);
     }
     for (const g of boxes) {
       let a = bridge.anchors.get(g.key);
       if (!a) {
-        a = { x: 0, y: 0, onScreen: false, occluded: false, shown: false, depth: 0, r: 0 };
+        a = newAnchor();
         bridge.anchors.set(g.key, a);
       }
       g.shown.length = 0;
@@ -125,13 +182,19 @@ export function LabelProbe({
       a.x = (_p.x * 0.5 + 0.5) * W;
       a.y = (-_p.y * 0.5 + 0.5) * H;
       a.onScreen = _p.z > -1 && _p.z < 1 && Math.abs(_p.x) < 1.02 && Math.abs(_p.y) < 1.02;
+      screenBox(a, g.out.center[0], g.out.center[1], g.out.center[2], g.out.half, camera, W, H);
     }
     for (const id of bridge.anchors.keys()) if (!handles.has(id) && !groupKeys.has(id)) bridge.anchors.delete(id);
 
-    // Throttled occlusion: a couple of stale labels per frame.
+    // Throttled occlusion: a couple of stale labels per frame, only for the parts the HUD may label.
     let budget = CHECKS_PER_FRAME;
+    let pending = false;
     for (const id of st.stale) {
-      if (budget-- <= 0) break;
+      if (bridge.labelled && !bridge.labelled.has(id)) continue;
+      if (budget-- <= 0) {
+        pending = true;
+        break;
+      }
       st.stale.delete(id);
       const h = handles.get(id);
       const a = bridge.anchors.get(id);
@@ -142,18 +205,32 @@ export function LabelProbe({
       }
       st.occluders.length = 0;
       for (const [other, oh] of handles) if (other !== id && oh.visible && oh.fade > 0.6) st.occluders.push(...oh.meshes);
-      _p.set(h.object.position.x + h.offset[0], h.object.position.y + h.offset[1], h.object.position.z + h.offset[2]);
-      _dir.subVectors(_p, camera.position);
-      const dist = _dir.length();
-      st.raycaster.set(camera.position, _dir.normalize());
-      st.raycaster.far = Math.max(0, dist - 0.02);
-      _hits.length = 0;
-      st.raycaster.intersectObjects(st.occluders, false, _hits);
-      a.occluded = _hits.some((hit) => !clipped(hit.point));
+      // Visible when a ray reaches the anchor, or one of four points halfway to the bounds corners on the camera's side.
+      const o = h.object.position;
+      const cx = o.x + h.offset[0];
+      const cy = o.y + h.offset[1];
+      const cz = o.z + h.offset[2];
+      const [hx, hy, hz] = h.half;
+      const fz = cz + Math.sign(camera.position.z - cz) * hz * 0.5;
+      let seen = false;
+      for (let k = 0; k < OCCLUSION_SAMPLES.length && !seen; k++) {
+        const [sx, sy] = OCCLUSION_SAMPLES[k]!;
+        if (k > 0 && hx + hy + hz <= 0) break;
+        if (k === 0) _p.set(o.x + h.point[0], o.y + h.point[1], o.z + h.point[2]);
+        else _p.set(cx + sx * hx * 0.5, cy + sy * hy * 0.5, fz);
+        _dir.subVectors(_p, camera.position);
+        const dist = _dir.length();
+        st.raycaster.set(camera.position, _dir.normalize());
+        st.raycaster.far = Math.max(0, dist - 0.02);
+        _hits.length = 0;
+        st.raycaster.intersectObjects(st.occluders, false, _hits);
+        seen = !_hits.some((hit) => !clipped(hit.point));
+      }
+      a.occluded = !seen;
     }
 
     for (const listener of bridge.listeners) listener();
-    if (st.stale.size > 0) keepAnimating(state.invalidate);
+    if (pending) keepAnimating(state.invalidate);
   });
   return null;
 }

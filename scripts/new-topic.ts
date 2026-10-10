@@ -1,11 +1,24 @@
 /**
- * Scaffold a "timeline + map" topic (docs/10, skill .claude/skills/atlas-history-topic):
+ * Scaffold a topic.
+ *
+ * "Timeline + map" (docs/10, skill .claude/skills/atlas-history-topic):
  *
  *   pnpm tsx scripts/new-topic.ts <slug> --engine time-scene --subject history \
  *     --title-en "The Cold War" --title-zh "冷战" [--subtitle-en "1947–1991" --subtitle-zh "1947–1991"] \
  *     [--start 1947-03-12 --end 1991-12-26]
  *
- * Creates, and refuses to overwrite:
+ * "Space" (SpaceScene, docs/06 "SpaceScene"):
+ *
+ *   pnpm tsx scripts/new-topic.ts <slug> --engine space-scene --subject science \
+ *     --title-en "How a bicycle works" --title-zh "自行车是怎么工作的" [--subtitle-en "…" --subtitle-zh "…"]
+ *
+ * space-scene creates, and refuses to overwrite:
+ *   src/content/topics/<slug>/topic.yaml                 status: draft, mode: space, stage: model3d
+ *   src/content/topics/<slug>/chapters/01-chapter-one.mdx full SpaceScene frontmatter (state with camera and labels, summary)
+ *   src/content/topics/<slug>/data/parts.json            one primitive part in one group, no flows or animations, views (assembled camera, cover, section)
+ *   src/content/topics/<slug>/data/{sources,glossary}.json
+ *
+ * time-scene creates, and refuses to overwrite:
  *   src/content/topics/<slug>/topic.yaml                 status: draft
  *   src/content/topics/<slug>/chapters/00-background.mdx  kind: background, reading note
  *   src/content/topics/<slug>/chapters/01-chapter-one.mdx full TimeScene frontmatter (state, summary, beats)
@@ -16,7 +29,7 @@
  * The data files are minimal and valid (no entities, one empty control
  * keyframe at --start): `pnpm validate` passes right away. Nothing geographic
  * is invented: control areas come from the geo pipeline (scripts/geo/lib).
- * Prints the next steps. Only `--engine time-scene` (stage geo) is scaffolded.
+ * Prints the next steps. Both are valid as written: `pnpm validate` passes right away.
  */
 import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative, resolve } from 'node:path';
@@ -32,7 +45,7 @@ const { values, positionals } = parseArgs({
   allowPositionals: true,
   options: {
     engine: { type: 'string', default: 'time-scene' },
-    subject: { type: 'string', default: 'history' },
+    subject: { type: 'string' },
     'title-en': { type: 'string' },
     'title-zh': { type: 'string' },
     'subtitle-en': { type: 'string' },
@@ -45,18 +58,21 @@ const { values, positionals } = parseArgs({
 function fail(message: string): never {
   console.error(`new-topic: ${message}`);
   console.error('usage: pnpm tsx scripts/new-topic.ts <slug> --engine time-scene --subject history --title-en "…" --title-zh "…" [--start YYYY-MM-DD --end YYYY-MM-DD]');
+  console.error('       pnpm tsx scripts/new-topic.ts <slug> --engine space-scene --subject science --title-en "…" --title-zh "…" [--subtitle-en "…" --subtitle-zh "…"]');
   process.exit(1);
 }
 
 const slug = positionals[0] ?? fail('missing <slug>');
 if (!KEBAB_ID.test(slug)) fail(`slug "${slug}" must be kebab-case`);
-if (values.engine !== 'time-scene') fail(`only --engine time-scene is scaffolded (got "${values.engine}")`);
-const subject = values.subject ?? 'history';
+const engine = values.engine;
+if (engine !== 'time-scene' && engine !== 'space-scene') fail(`--engine must be time-scene or space-scene (got "${engine}")`);
+const subject = values.subject ?? (engine === 'space-scene' ? 'science' : 'history');
 if (!(SUBJECTS as readonly string[]).includes(subject)) fail(`--subject must be one of ${SUBJECTS.join(', ')}`);
 const titleEn = values['title-en']?.trim() || fail('missing --title-en');
 const titleZh = values['title-zh']?.trim() || fail('missing --title-zh');
-const subtitleEn = values['subtitle-en']?.trim() || `${values.start!.slice(0, 4)}–${values.end!.slice(0, 4)}`;
-const subtitleZh = values['subtitle-zh']?.trim() || subtitleEn;
+const subtitleEn =
+  values['subtitle-en']?.trim() || (engine === 'space-scene' ? 'What is inside and how it works' : `${values.start!.slice(0, 4)}–${values.end!.slice(0, 4)}`);
+const subtitleZh = values['subtitle-zh']?.trim() || (engine === 'space-scene' && !values['subtitle-en'] ? '里面有什么、怎样工作' : subtitleEn);
 const start = values.start!;
 const end = values.end!;
 for (const [flag, date] of [['--start', start], ['--end', end]] as const) {
@@ -66,7 +82,7 @@ if (end <= start) fail('--end must be after --start');
 
 const topicDir = join(ROOT, 'src/content/topics', slug);
 const geoDir = join(ROOT, 'scripts/geo', slug);
-for (const dir of [topicDir, geoDir]) if (existsSync(dir)) fail(`${relative(ROOT, dir)} already exists`);
+for (const dir of engine === 'space-scene' ? [topicDir] : [topicDir, geoDir]) if (existsSync(dir)) fail(`${relative(ROOT, dir)} already exists`);
 
 /** YAML / JSON string literal. */
 const q = (s: string) => JSON.stringify(s);
@@ -79,12 +95,119 @@ function write(file: string, text: string): void {
 }
 
 /* ------------------------------------------------------------------ */
-/* Topic                                                               */
+/* SpaceScene                                                          */
 /* ------------------------------------------------------------------ */
 
-write(
-  join(topicDir, 'topic.yaml'),
-  `# ${titleEn}. Content spec: write it first (skill atlas-history-topic, references/spec-template.md).
+function scaffoldSpace(): void {
+  const part = `${slug}-body`;
+  const group = `${slug}-main`;
+  write(
+    join(topicDir, 'topic.yaml'),
+    `# ${titleEn}. Content spec first (docs/05 briefing playbook; docs/12 is the aircon example).
+id: ${slug}
+title: { en: ${q(titleEn)}, zh: ${q(titleZh)} }
+subtitle: { en: ${q(subtitleEn)}, zh: ${q(subtitleZh)} }
+subject: ${subject}
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: draft
+# The title block's statement line, e.g. for a generic design study:
+# note: { en: "Generic design study · not a specific brand or model", zh: "通用设计研究 · 不代表任何品牌或型号" }
+`,
+  );
+
+  write(
+    join(topicDir, 'chapters/01-chapter-one.mdx'),
+    `---
+id: chapter-one
+order: 1
+title: { en: "Chapter one", zh: "第一章" }
+state:
+  view: assembled          # assembled | xray | exploded | isolate
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  layers: [${group}]
+  hide: []
+  labels: [${part}]        # 3–6 part ids (or "group:<id>") with a leader label at this camera
+  camera: { position: [2.4, 1.6, 3.2], target: [0, 0.3, 0], fov: 30 }
+  summary:
+    en: "One sentence: what this chapter shows and why it matters."
+    zh: "一句话：这一章展示什么、为什么重要。"
+  # PRESENTATION beats (optional; without them the chapter is one beat captioned with the summary):
+  # beats:
+  #   - part: ${part}
+  #     labels: [${part}]
+  #     caption: { en: "What the stage shows at this step.", zh: "这一步舞台上显示的是什么。" }
+---
+
+<Lang en>
+
+The chapter text: what the reader sees on the stage and how it works, in 150–250 words.
+
+</Lang>
+
+<Lang zh>
+
+本章正文：舞台上看到的是什么、怎样工作，300–450 字。
+
+</Lang>
+`,
+  );
+
+  const data = join(topicDir, 'data');
+  write(
+    join(data, 'parts.json'),
+    json({
+      parts: [
+        {
+          id: part,
+          name: { en: 'Body', zh: '机身' },
+          group,
+          summary: { en: 'One line: what this part does.', zh: '一句话：这个零件做什么。' },
+          detail: { en: 'A few sentences about the part.', zh: '关于这个零件的几句话。' },
+          primitive: { kind: 'bevelBox', size: [1.2, 0.6, 0.6], bevel: 0.03, at: [0, 0.3, 0], color: 'enamel' },
+          explode: { dir: [0, 1, 0], dist: 0.4 },
+        },
+      ],
+      groups: [{ id: group, name: { en: 'Main unit', zh: '主机' }, color: 'token:neutral' }],
+      flows: [],
+      animations: [],
+      views: {
+        assembled: { camera: { position: [2.4, 1.6, 3.2], target: [0, 0.3, 0], fov: 30 } },
+        cover: { position: [2.0, 1.3, 2.7], target: [0, 0.3, 0], fov: 30 },
+        section: { plane: 'xy' },
+      },
+    }),
+  );
+  write(join(data, 'sources.json'), json({ sources: [] }));
+  write(join(data, 'glossary.json'), json({ terms: [] }));
+
+  console.log(`new-topic: created ${slug}\n  ${written.join('\n  ')}\n`);
+  console.log(`Next steps (docs/06 "SpaceScene", docs/08 technical plate):
+  1. Write the content spec (parts, groups, flows, chapters, sources) and get it signed off.
+  2. Model the parts in data/parts.json (primitives or a glb), then groups, flows, animations, views and presets.
+  3. Chapters: state (view, labels, camera) per chapter, then the text, then beats.
+  4. The topic is a draft: reachable at /en/topics/${slug}/ but not listed on the index until status: published.
+  5. pnpm validate && pnpm build && pnpm shoot ${slug} --keys --layout --beats (chapter highlights: none).`);
+}
+
+/* ------------------------------------------------------------------ */
+/* TimeScene                                                           */
+/* ------------------------------------------------------------------ */
+
+function scaffoldTime(): void {
+  /* ------------------------------------------------------------------ */
+  /* Topic                                                               */
+  /* ------------------------------------------------------------------ */
+
+  write(
+    join(topicDir, 'topic.yaml'),
+    `# ${titleEn}. Content spec: write it first (skill atlas-history-topic, references/spec-template.md).
 id: ${slug}
 title: { en: ${q(titleEn)}, zh: ${q(titleZh)} }
 subtitle: { en: ${q(subtitleEn)}, zh: ${q(subtitleZh)} }
@@ -100,11 +223,11 @@ status: draft
 #   axis: { en: "Central Powers", zh: "同盟国" }
 #   allied: { en: "Allies (Entente)", zh: "协约国" }
 `,
-);
+  );
 
-write(
-  join(topicDir, 'chapters/00-background.mdx'),
-  `---
+  write(
+    join(topicDir, 'chapters/00-background.mdx'),
+    `---
 # Background chapter (prologue): no timeline node, no number (doc id 00, the rail says "Background").
 # Keep order: 0 and kind: background. The map shows the first control keyframe unless state.time is set;
 # the reading panel opens on first entry; PRESENTATION plays its beats (default: one, the summary) first.
@@ -137,11 +260,11 @@ The background: the situation before chapter 01, the sides and the places, in 15
 
 </Lang>
 `,
-);
+  );
 
-write(
-  join(topicDir, 'chapters/01-chapter-one.mdx'),
-  `---
+  write(
+    join(topicDir, 'chapters/01-chapter-one.mdx'),
+    `---
 id: chapter-one
 order: 1
 title: { en: "Chapter one", zh: "第一章" }
@@ -193,23 +316,23 @@ People, numbers, disputes, links to other theatres.
 
 </Lang>
 `,
-);
+  );
 
-/* ------------------------------------------------------------------ */
-/* Data                                                                */
-/* ------------------------------------------------------------------ */
+  /* ------------------------------------------------------------------ */
+  /* Data                                                                */
+  /* ------------------------------------------------------------------ */
 
-const data = join(topicDir, 'data');
-write(join(data, 'entities.json'), json([]));
-write(join(data, 'control.json'), json({ keyframes: [{ t: start, features: { type: 'FeatureCollection', features: [] } }] }));
-write(join(data, 'movements.json'), json([]));
-write(join(data, 'events.json'), json([]));
-write(join(data, 'presets.json'), json({ presets: [] }));
-write(join(data, 'sources.json'), json({ sources: [] }));
-write(join(data, 'glossary.json'), json({ terms: [] }));
-write(
-  join(data, 'SOURCES.md'),
-  `# ${titleEn} — sources
+  const data = join(topicDir, 'data');
+  write(join(data, 'entities.json'), json([]));
+  write(join(data, 'control.json'), json({ keyframes: [{ t: start, features: { type: 'FeatureCollection', features: [] } }] }));
+  write(join(data, 'movements.json'), json([]));
+  write(join(data, 'events.json'), json([]));
+  write(join(data, 'presets.json'), json({ presets: [] }));
+  write(join(data, 'sources.json'), json({ sources: [] }));
+  write(join(data, 'glossary.json'), json({ terms: [] }));
+  write(
+    join(data, 'SOURCES.md'),
+    `# ${titleEn} — sources
 
 Rules: skill atlas-history-topic (references/writing-rules.md for numbers, references/geo-runbook.md for maps). Numbered facts are \`[S#]\`, generated below from \`sources.json\` by \`pnpm tsx scripts/sources-md.ts ${slug}\`; map geometry is \`[G#]\`. Survey, georeferencing residuals and rebuild commands: \`scripts/geo/${slug}/SOURCES-GEO.md\`.
 
@@ -232,43 +355,43 @@ One line per dataset or map: **[G#]** title, author, URL, **licence**, what it i
 ${BEGIN}
 ${END}
 `,
-);
+  );
 
-/* ------------------------------------------------------------------ */
-/* Geo pipeline manifest                                               */
-/* ------------------------------------------------------------------ */
+  /* ------------------------------------------------------------------ */
+  /* Geo pipeline manifest                                               */
+  /* ------------------------------------------------------------------ */
 
-write(
-  join(geoDir, 'sources.json'),
-  json({
-    _comment:
-      'Placeholders to edit: pipeline.plannedKeyframes (how many control keyframes the spec lists) and pipeline.focus (boxes [w,s,e,n] the chapters zoom into; the default is Europe). Datasets, ohm sets, svg/raster maps and keyframes are filled in step by step (skill atlas-history-topic, references/geo-runbook.md).',
-    datasets: {
-      cshapes: {
-        ref: 'G1',
-        title: 'CShapes 2.0 (GW version), borders of independent states and dependent territories 1886-2019',
-        url: 'https://icr.ethz.ch/data/cshapes/CShapes-2.0.geojson',
-        file: 'cshapes-2.0.geojson',
-        page: 'https://icr.ethz.ch/data/cshapes/',
-        author: 'Schvitz, Rüegger, Girardin, Cederman, Weidmann, Gleditsch (ETH Zürich ICR), 2022',
-        license: 'CC BY-NC-SA 4.0',
-        role: 'sovereign and colonial base borders on each keyframe date',
+  write(
+    join(geoDir, 'sources.json'),
+    json({
+      _comment:
+        'Placeholders to edit: pipeline.plannedKeyframes (how many control keyframes the spec lists) and pipeline.focus (boxes [w,s,e,n] the chapters zoom into; the default is Europe). Datasets, ohm sets, svg/raster maps and keyframes are filled in step by step (skill atlas-history-topic, references/geo-runbook.md).',
+      datasets: {
+        cshapes: {
+          ref: 'G1',
+          title: 'CShapes 2.0 (GW version), borders of independent states and dependent territories 1886-2019',
+          url: 'https://icr.ethz.ch/data/cshapes/CShapes-2.0.geojson',
+          file: 'cshapes-2.0.geojson',
+          page: 'https://icr.ethz.ch/data/cshapes/',
+          author: 'Schvitz, Rüegger, Girardin, Cederman, Weidmann, Gleditsch (ETH Zürich ICR), 2022',
+          license: 'CC BY-NC-SA 4.0',
+          role: 'sovereign and colonial base borders on each keyframe date',
+        },
       },
-    },
-    ohm: {},
-    svg: {},
-    raster: {},
-    keyframes: [],
-    pipeline: {
-      plannedKeyframes: 8, // EDIT: number of keyframes in the spec
-      focus: [[-12, 28, 62, 72]], // EDIT: fine-simplification boxes [w, s, e, n]
-      coast: { detailBox: null, detailLand: null },
-    },
-  }),
-);
-write(
-  join(geoDir, 'SOURCES-GEO.md'),
-  `# ${titleEn} map data — source survey and per-keyframe provenance
+      ohm: {},
+      svg: {},
+      raster: {},
+      keyframes: [],
+      pipeline: {
+        plannedKeyframes: 8, // EDIT: number of keyframes in the spec
+        focus: [[-12, 28, 62, 72]], // EDIT: fine-simplification boxes [w, s, e, n]
+        coast: { detailBox: null, detailLand: null },
+      },
+    }),
+  );
+  write(
+    join(geoDir, 'SOURCES-GEO.md'),
+    `# ${titleEn} map data — source survey and per-keyframe provenance
 
 Every edge in \`src/content/topics/${slug}/data/control.json\` comes from a dataset below; nothing is drawn by hand. Reference ids \`[G#]\` are the same as in the topic's \`data/SOURCES.md\`. Commands: \`pnpm tsx scripts/geo/lib/<step>.ts --topic ${slug}\` (skill atlas-history-topic, references/geo-runbook.md).
 
@@ -284,10 +407,10 @@ Per keyframe: date, recipe (base + steps), sources, georeferencing model and con
 
 Attribution and share-alike obligations of each source used in the published data.
 `,
-);
+  );
 
-console.log(`new-topic: created ${slug}\n  ${written.join('\n  ')}\n`);
-console.log(`Next steps (skill .claude/skills/atlas-history-topic, references/build-order.md):
+  console.log(`new-topic: created ${slug}\n  ${written.join('\n  ')}\n`);
+  console.log(`Next steps (skill .claude/skills/atlas-history-topic, references/build-order.md):
   1. Write the content spec (references/spec-template.md) and get it signed off before writing chapters.
   2. Set --start / --end dates in the chapter files, the control keyframe and topic.yaml subtitle if they were not given.
   3. Geo: edit pipeline.plannedKeyframes and pipeline.focus in scripts/geo/${slug}/sources.json, add datasets and keyframes, then
@@ -305,3 +428,7 @@ console.log(`Next steps (skill .claude/skills/atlas-history-topic, references/bu
   6. Blocs: if the war is not WW2, set blocLabels in topic.yaml (axis / allied are only engine slots).
   7. The topic is a draft: reachable at /en/topics/${slug}/ but not listed on the index until status: published.
   8. pnpm validate && pnpm build && pnpm shoot ${slug} --keys --layout --beats; acceptance: references/acceptance.md.`);
+}
+
+if (engine === 'space-scene') scaffoldSpace();
+else scaffoldTime();

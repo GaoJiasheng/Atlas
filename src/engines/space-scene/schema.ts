@@ -388,6 +388,12 @@ export const viewsSchema = z
     section: z.object({ plane: z.enum(SECTION_PLANES) }).strict().optional(),
     /** Optional REFERENCE camera; default: a long-lens straight view on the section plane. */
     reference: viewPreset.optional(),
+    /**
+     * Optional cover camera `{ position, target, fov? }`: where the camera goes
+     * while the HUD is hidden (H, `hero-clean` shots); default: the current
+     * camera re-fitted so the model's bounding sphere fills ~75 % of the stage width.
+     */
+    cover: orbitCamera.optional(),
   })
   .strict();
 export type ViewPresets = z.output<typeof viewsSchema>;

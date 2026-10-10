@@ -16,12 +16,14 @@
  * had its time). Entering leaves ORBIT and REFERENCE and drops the selection;
  * the leader labels show the beat's `labels` only (≤ 6) with the HUD hidden.
  * EXPLODED and FLOW do not combine (docs/12 §7.5): F is disabled while
- * exploded and the stage draws no particles.
+ * exploded and the stage draws no particles. With the HUD hidden outside the
+ * presentation the stage frames the cover camera (`views.cover`, else the
+ * model re-fitted to the stage) and goes back when the HUD returns.
  */
-import { lazy, Suspense, useCallback, useMemo, useRef, useState } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useStore } from 'zustand';
 import type { Chapter, EngineViewProps, OrbitCamera } from '../core/types';
-import { SceneSlot, useScene, useSceneContext, useSceneControls, useSceneStore, useT } from '../core/context';
+import { SceneSlot, useHud, useScene, useSceneContext, useSceneControls, useSceneStore, useT } from '../core/context';
 import type { SceneControls, SceneMode, ScenePreset, SceneStats } from '../core/controls';
 import { isOrbitCamera, normalizeCamera } from '../core/camera';
 import { usePresentation, type SpaceBeatSpec, type SpacePresentationAdapter, type SpaceSavedState } from '../core/presentation';
@@ -226,6 +228,12 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
   const presentation = usePresentation(presentationAdapter);
   const { presenting, isPresenting, status: presentationStatus, controls: beatControls, start: startPresentation, stop: stopPresentation } = presentation;
 
+  // HUD hidden (H, hero shots) outside the presentation: the stage frames the cover camera.
+  const hudOn = useHud((h) => h.hud);
+  useEffect(() => {
+    ui.setState({ cover: !hudOn && !presenting });
+  }, [ui, hudOn, presenting]);
+
   const controls = useMemo<SceneControls>(() => {
     const chapterPresets = chapters.map((c, i) => {
       const target = store.getState().chapterTarget(c.id);
@@ -309,13 +317,16 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       },
       stats: () => {
         const st = bridge.stats;
-        const out: Partial<SceneStats> & { geometries: number; textures: number } = {
+        const live = bridge.liveCamera();
+        const out: Partial<SceneStats> & { geometries: number; textures: number; camera?: OrbitCamera } = {
           calls: st.calls,
           triangles: st.triangles,
           geometries: st.geometries,
           textures: st.textures,
           fps: st.fps === undefined ? undefined : Math.round(st.fps * 10) / 10,
           gpu: st.gpu,
+          // The live camera (tests: where the stage really is, not the stored target).
+          ...(live ? { camera: { ...roundCamera(live), fov: Math.round((live.fov ?? 0) * 100) / 100 } } : {}),
         };
         return out;
       },

@@ -15,6 +15,8 @@ import {
   allModes,
   docId,
   PANEL_SLOTS,
+  presetDigit,
+  presetKeyHint,
   type HudActions,
   type HudStore,
   type HudText,
@@ -124,8 +126,8 @@ export function TopBar({ topic, chapters, chapter, chapterNumber, locale, path, 
   const modeKeys = modes.map((m) => m.key).filter((k): k is string => !!k);
   const presetTitle = (i: number, title?: HudText) =>
     title ? tx(title, locale) : tr('hud.presetTitle', { n: i + 1, title: tx(chapters[i]?.title, locale) });
-  // A digit beside the label, unless the label already is the number (`01`).
-  const digit = (i: number, label: HudText) => (i < 9 && !/^\d+$/.test(tx(label, 'en')) ? String(i + 1) : null);
+  // A digit beside the label (1–9, then 0 for the tenth; none after), unless the label already is the number (`01`).
+  const digit = (i: number, label: HudText) => (/^\d+$/.test(tx(label, 'en')) ? null : presetDigit(i));
 
   return (
     <header className="atlas-topbar" data-hud-panel="topbar">
@@ -167,7 +169,7 @@ export function TopBar({ topic, chapters, chapter, chapterNumber, locale, path, 
         <p className="atlas-hint" aria-hidden="true">
           {presets.length > 0 && (
             <span>
-              <kbd>{presets.length > 1 ? `1–${Math.min(9, presets.length)}` : '1'}</kbd> {tr('hud.keys.views')}
+              <kbd>{presetKeyHint(presets.length)}</kbd> {tr('hud.keys.views')}
             </span>
           )}
           {modeKeys.length > 0 && (

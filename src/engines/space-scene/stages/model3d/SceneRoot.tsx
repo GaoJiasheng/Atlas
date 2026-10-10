@@ -28,7 +28,7 @@ import { Lighting } from './Lighting';
 import { GroundShadow } from './GroundShadow';
 import { LabelProbe, ResolutionGovernor, ShadowUpdater, StatsProbe, type GroupMembers } from './probes';
 import { partBounds } from '../../lib/parts';
-import { anchorOffset, anchorRadius, primitiveShape, stageBounds } from './shapes';
+import { anchorHalf, anchorOffset, anchorPoint, anchorRadius, primitiveShape, stageBounds } from './shapes';
 import { createTextureKit } from './textures';
 import type { PartStyle } from './materials';
 import type { StageLook } from './look';
@@ -51,6 +51,8 @@ const RUN_RATE = 5;
 const EXPLODE_MS = 2000;
 const EXPLODE_DRAG_MS = 220;
 const NO_LAYERS: readonly string[] = [];
+/** Zero offset / extent (stable identity for the part props). */
+const NO_HALF: Vec3 = [0, 0, 0];
 /** Parts at least this fraction of the model radius cast the key light's shadow. */
 const SHADOW_CASTER_RATIO = 0.28;
 
@@ -171,7 +173,9 @@ export function SceneRoot({ store, ui, bridge, data, chapters, look }: SceneRoot
   }, [primitiveShapes, meshShapes]);
   const bounds = useMemo(() => stageBounds(data.parts, shapes), [data.parts, shapes]);
   const anchors = useMemo(() => new Map(data.parts.map((p) => [p.id, anchorOffset(p)] as [string, Vec3])), [data.parts]);
+  const points = useMemo(() => new Map(data.parts.map((p) => [p.id, anchorPoint(p)] as [string, Vec3])), [data.parts]);
   const radii = useMemo(() => new Map(data.parts.map((p) => [p.id, anchorRadius(p)] as [string, number])), [data.parts]);
+  const halves = useMemo(() => new Map(data.parts.map((p) => [p.id, anchorHalf(p)] as [string, Vec3])), [data.parts]);
   // Group labels: each group's non-context parts with the half extents of their bounds.
   const groupMembers = useMemo<GroupMembers>(() => {
     const out = new Map<string, { id: string; half: Vec3 }[]>();
@@ -187,6 +191,7 @@ export function SceneRoot({ store, ui, bridge, data, chapters, look }: SceneRoot
   useEffect(() => {
     bridge.modelRadius = bounds.modelRadius;
   }, [bridge, bounds]);
+  const sphere = useMemo(() => ({ center: bounds.center, radius: bounds.modelRadius }), [bounds]);
 
   /* ---------------- materials ---------------- */
   const kit = useMemo(() => createTextureKit(), []);
@@ -277,8 +282,10 @@ export function SceneRoot({ store, ui, bridge, data, chapters, look }: SceneRoot
             castShadow={
               part.castShadow ?? (!part.context && style.look.opacity === 1 && shape.radius >= bounds.modelRadius * SHADOW_CASTER_RATIO)
             }
-            anchorOffset={anchors.get(part.id) ?? [0, 0, 0]}
+            anchorOffset={anchors.get(part.id) ?? NO_HALF}
+            anchorPoint={points.get(part.id) ?? NO_HALF}
             anchorRadius={radii.get(part.id) ?? 0}
+            anchorHalf={halves.get(part.id) ?? NO_HALF}
             handles={handles}
             snapKey={snap.current.key}
             onSelect={onSelect}
@@ -288,7 +295,7 @@ export function SceneRoot({ store, ui, bridge, data, chapters, look }: SceneRoot
       })}
       {/* Flow paths do not follow the parts apart: no particles while exploded (docs/12 §7.5, G16). */}
       <Flows flows={data.flows} layers={s.view === 'exploded' ? NO_LAYERS : s.layers} look={look} clipping={clipping} />
-      <CameraRig store={store} ui={ui} bridge={bridge} chapters={chapters} views={data.views} minDistance={bounds.modelRadius * 0.9} />
+      <CameraRig store={store} ui={ui} bridge={bridge} chapters={chapters} views={data.views} sphere={sphere} minDistance={bounds.modelRadius * 0.9} />
       {data.model && meshNames.size > 0 && (
         <GltfBoundary>
           <Suspense fallback={null}>
