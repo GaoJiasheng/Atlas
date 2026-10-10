@@ -1,0 +1,47 @@
+---
+id: eating-and-digesting
+order: 4
+title: { en: "Eating and digesting", zh: "吃和消化" }
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: crop
+  run: true
+  cutaway: sagittal
+  pose: null
+  ghost: [exoskeleton]
+  layers: [exoskeleton, digestive]
+  hide: []
+  labels: [mandibles, crop, gastric-caeca, midgut, malpighian-tubules, rectum]
+  camera: { position: [0.0, 0.75, 6.4], target: [0.0, 0.72, 0], fov: 30 }
+  summary: { en: "Chewed leaf passes through a tube that runs the length of the body — stored in the crop, digested in the midgut, dried out in the hindgut.", zh: "嚼碎的叶片穿过一条贯穿全身的管子：先存在嗉囊，在中肠消化吸收，在后肠回收水分。" }
+  question: { en: "Where does a leaf go after a grasshopper eats it?", zh: "叶子被吃下去以后去了哪里？" }
+  beats:
+    - camera: head
+      labels: [mandibles, salivary-glands, pharynx-oesophagus]
+      caption: { en: "Chewed, wetted with saliva and swallowed.", zh: "嚼碎、加唾液、咽下。" }
+    - camera: { position: [-0.75, 0.8, 3.3], target: [-0.6, 0.78, 0], fov: 30 }
+      labels: [crop, proventriculus]
+      caption: { en: "The crop stores food; the proventriculus grinds it.", zh: "嗉囊暂存，前胃磨碎。" }
+    - camera: { position: [0.0, 0.8, 3.3], target: [0.0, 0.78, 0], fov: 30 }
+      labels: [gastric-caeca, midgut]
+      caption: { en: "The midgut and six gastric caeca digest and take in food.", zh: "中肠和六个胃盲囊：消化、吸收。" }
+    - camera: { position: [0.75, 0.8, 3.3], target: [0.75, 0.76, 0], fov: 30 }
+      labels: [malpighian-tubules, hindgut, rectum]
+      caption: { en: "Malpighian tubules collect waste; the hindgut takes back water.", zh: "马氏管收集废物，后肠吸回水分。" }
+    - labels: [pharynx-oesophagus, crop, midgut, rectum]
+      caption: { en: "One tube from mouth to tail; the food turns from green to brown.", zh: "一条管子从口通到尾，食物从绿变褐。" }
+---
+
+<Lang en>
+
+Draft chapter: the text is written after the content spec is signed off (docs/14 §6).
+
+</Lang>
+
+<Lang zh>
+
+章节草稿：正文在内容 spec 定稿后再写（docs/14 §6）。
+
+</Lang>

@@ -1,0 +1,57 @@
+---
+id: nerves-and-growing-up
+order: 6
+title: { en: "Nerves, senses and growing up", zh: "神经、感觉与成长" }
+sensitive: false
+state:
+  view: xray
+  explode: 0
+  part: brain
+  run: false
+  cutaway: none
+  pose: null
+  ghost: [exoskeleton]
+  layers: [exoskeleton, nervous, muscles-reproduction]
+  hide: []
+  labels: [brain, suboesophageal-ganglion, thoracic-ganglia, nerve-cord, tympanal-organ]
+  camera: { position: [-1.75, 2.25, 4.0], target: [0.02, 0.74, 0], fov: 30 }
+  summary: { en: "A chain of nerve knots along the belly links the brain to every leg; a grasshopper hatches as a small wingless nymph and moults several times before it becomes an adult with wings.", zh: "一串沿腹面排列的神经节把脑与每条足连起来；蚱蜢孵出时是没有翅的小若虫，蜕几次皮才变成有翅的成虫。" }
+  question: { en: "How does a grasshopper sense the world, and how does it grow up?", zh: "蚱蜢怎么感知世界？它怎么长大？" }
+  beats:
+    - labels: [brain, suboesophageal-ganglion, thoracic-ganglia, nerve-cord]
+      caption: { en: "The brain sits in the head; the nerve cord runs along the belly.", zh: "脑在头里，神经索沿着腹面。" }
+    - part: tympanal-organ
+      camera: { position: [-0.2, 0.95, 2.6], target: [0.05, 0.78, 0.12], fov: 30 }
+      labels: [tympanum, tympanal-organ]
+      caption: { en: "The ears are on the first belly segment.", zh: "耳朵在腹部第一节。" }
+    - part: ovaries
+      camera: { position: [0.9, 1.1, 3.2], target: [0.6, 0.75, 0.05], fov: 30 }
+      labels: [ovaries, ovipositor]
+      caption: { en: "Ovaries make eggs; the ovipositor digs the hole.", zh: "卵巢产卵，产卵瓣在土里挖洞。" }
+    - view: assembled
+      part: egg-pod
+      ghost: []
+      layers: [exoskeleton, legs-wings, growth]
+      camera: { position: [-1.9, 1.6, 5.6], target: [-0.6, 0.5, 2.6], fov: 30 }
+      labels: [egg-pod, nymph-1, nymph-2]
+      caption: { en: "The eggs are laid in a pod in the soil.", zh: "卵产在土里的卵荚中。" }
+    - view: assembled
+      part: nymph-6
+      ghost: []
+      layers: [exoskeleton, legs-wings, growth]
+      camera: { position: [0.0, 4.6, 6.2], target: [0.05, 0.3, 2.0], fov: 30 }
+      labels: [nymph-1, nymph-3, nymph-5, nymph-6]
+      caption: { en: "Nymphs have no wings; they moult six or seven times to become adults.", zh: "若虫没有翅，蜕皮 6 到 7 次才长成成虫。" }
+---
+
+<Lang en>
+
+Draft chapter: the text is written after the content spec is signed off (docs/14 §6).
+
+</Lang>
+
+<Lang zh>
+
+章节草稿：正文在内容 spec 定稿后再写（docs/14 §6）。
+
+</Lang>

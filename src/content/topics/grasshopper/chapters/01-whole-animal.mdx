@@ -1,0 +1,49 @@
+---
+id: whole-animal
+order: 1
+title: { en: "The whole animal", zh: "一整只蚱蜢" }
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  pose: null
+  ghost: []
+  layers: [exoskeleton, legs-wings]
+  hide: []
+  labels: [head-capsule, pronotum, abdomen-tergites, hind-femora, tegmina]
+  camera: { position: [-3.3, 2.0, 5.3], target: [0.05, 0.62, 0], fov: 30 }
+  summary: { en: "A grasshopper's body has three parts — head, thorax and abdomen — with six legs and four wings on the thorax, all covered by a hard outer skeleton.", zh: "蚱蜢的身体分头、胸、腹三部分；六条足和四片翅都长在胸部，全身包着坚硬的外骨骼。" }
+  question: { en: "What makes a grasshopper an insect?", zh: "怎么看出蚱蜢是昆虫？" }
+  beats:
+    - caption: { en: "A female Javanese grasshopper, enlarged 40 times.", zh: "一只雌性黑角瓦兰蝗，放大了 40 倍。" }
+    - camera: side
+      labels: [head-capsule, pterothorax, abdomen-tergites]
+      caption: { en: "Three parts: head, thorax and abdomen.", zh: "三部分：头、胸、腹。" }
+    - camera: dorsal
+      labels: [fore-legs, mid-legs, hind-femora, tegmina]
+      caption: { en: "Six legs and four wings, all on the thorax.", zh: "六条足、四片翅，都长在胸部。" }
+    - camera: { position: [-2.2, 2.4, 4.2], target: [0.1, 0.3, 0.5], fov: 30 }
+      labels: []
+      caption: { en: "Its real length is about 64 millimetres.", zh: "真实体长约 64 毫米。" }
+    - view: xray
+      ghost: [exoskeleton]
+      layers: [exoskeleton, legs-wings, digestive, nervous, breathing-circulation, muscles-reproduction]
+      camera: systems
+      labels: ["group:digestive", "group:nervous", "group:breathing-circulation", "group:muscles-reproduction"]
+      caption: { en: "Inside the hard shell are six body systems.", zh: "硬壳里面有六个系统。" }
+---
+
+<Lang en>
+
+Draft chapter: the text is written after the content spec is signed off (docs/14 §6).
+
+</Lang>
+
+<Lang zh>
+
+章节草稿：正文在内容 spec 定稿后再写（docs/14 §6）。
+
+</Lang>

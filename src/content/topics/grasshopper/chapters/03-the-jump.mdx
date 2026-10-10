@@ -1,0 +1,50 @@
+---
+id: the-jump
+order: 3
+title: { en: "The jump", zh: "跳" }
+sensitive: false
+state:
+  view: xray
+  explode: 0
+  part: extensor-tibiae
+  run: false
+  cutaway: none
+  pose: null
+  ghost: [exoskeleton, flight-muscles, ovaries]
+  layers: [exoskeleton, legs-wings, nervous, muscles-reproduction]
+  hide: []
+  labels: [hind-femora, extensor-tibiae, flexor-tibiae, semilunar-processes, hind-tibiae]
+  camera: { position: [0.95, 1.55, 4.75], target: [0.42, 0.66, 0.3], fov: 28 }
+  summary: { en: "A grasshopper jumps like a catapult: it slowly loads springs in its hind knees, locks them, then lets go in a few hundredths of a second.", zh: "蚱蜢起跳像弹弓：先慢慢给后膝的弹簧上弦、锁住，再在几百分之一秒里松开。" }
+  question: { en: "How can a grasshopper jump so far?", zh: "蚱蜢为什么能跳那么远？" }
+  beats:
+    - labels: [hind-femora, extensor-tibiae, flexor-tibiae]
+      caption: { en: "Inside the thigh: one big extensor muscle and one small flexor.", zh: "大腿里：一块大伸肌、一块小屈肌。" }
+    - pose: jump-fold
+      labels: [hind-tibiae, flexor-tibiae]
+      caption: { en: "Fold: the shin pulls in tight against the thigh.", zh: "屈：小腿收到紧贴大腿。" }
+    - part: semilunar-processes
+      pose: jump-load
+      labels: [semilunar-processes, extensor-tibiae]
+      caption: { en: "Load: both muscles pull and bend the springs at the knee.", zh: "上弦：两块肌肉一起用力，压弯膝部的弹簧。" }
+    - part: flexor-tibiae
+      pose: jump-lock
+      labels: [flexor-tibiae, semilunar-processes]
+      caption: { en: "Lock: the flexor holds the knee shut.", zh: "锁：屈肌把膝锁住。" }
+    - pose: jump-release
+      camera: { position: [-2.2, 1.0, 5.2], target: [0.4, 0.62, 0.2], fov: 30 }
+      labels: [hind-tibiae, hind-femora]
+      caption: { en: "Release: the flexor lets go and the shin straightens in a few hundredths of a second (slowed down here).", zh: "放：屈肌一松，小腿在几百分之一秒里伸直（画面放慢了）。" }
+---
+
+<Lang en>
+
+Draft chapter: the text is written after the content spec is signed off (docs/14 §6).
+
+</Lang>
+
+<Lang zh>
+
+章节草稿：正文在内容 spec 定稿后再写（docs/14 §6）。
+
+</Lang>
