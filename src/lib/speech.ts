@@ -1,10 +1,11 @@
 /**
  * Caption narration with the browser's Web Speech API (`speechSynthesis`): no
  * audio files, no network. Pure helpers (voice choice, text clean-up) plus the
- * thin `speak` wrapper the presentation uses.
+ * thin `speak` / `speakSequence` wrappers the presentation
+ * (`engines/core/presentation`) uses for every engine.
  */
 
-import type { VoiceLogEntry } from '../../core/controls';
+import type { VoiceLogEntry } from '../engines/core/controls';
 
 /** The parts of a `SpeechSynthesisVoice` the choice looks at. */
 export interface VoiceLike {

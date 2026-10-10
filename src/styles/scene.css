@@ -2115,3 +2115,297 @@
     fill-opacity: 0.7;
   }
 }
+
+/* ------------------------------------------------------------------ */
+/* PRESENTATION (core/presentation, every engine): title block, caption */
+/* card with its two-level progress bar and switches; the stage takes   */
+/* no input. Sizes in design px × --u.                                  */
+/* ------------------------------------------------------------------ */
+
+.atlas-present {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  color: var(--ink);
+  text-shadow:
+    0 0 calc(3 * var(--u)) var(--bg),
+    0 0 calc(6 * var(--u)) var(--bg);
+}
+.atlas-present__hit {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  touch-action: none;
+}
+.atlas-present__title {
+  position: absolute;
+  left: calc(28 * var(--u));
+  top: calc(24 * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(6 * var(--u));
+  margin: 0;
+  max-width: 60%;
+  pointer-events: none;
+}
+.atlas-present__title small {
+  font: 500 calc(10.7 * var(--u)) / 1 var(--font-mono);
+  letter-spacing: 0.14em;
+  color: var(--signal);
+}
+.atlas-present__title span:first-of-type {
+  font: 500 calc(30 * var(--u)) / 1.02 var(--font-hud);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.atlas-present__title span + span {
+  font: 400 calc(12 * var(--u)) / 1.2 var(--font-hud);
+  letter-spacing: 0.18em;
+  color: var(--ink-2);
+}
+.atlas-present__foot {
+  position: absolute;
+  left: 50%;
+  bottom: calc(24 * var(--u));
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: calc(12 * var(--u));
+  width: min(calc(100% - 48px), calc(1080 * var(--u)));
+  padding: calc(14 * var(--u)) calc(28 * var(--u)) calc(10 * var(--u));
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--paper) 93%, transparent);
+  text-shadow: none;
+  pointer-events: none;
+}
+/* 04 / 11 · chapter · date · 2 / 3 */
+.atlas-present__chapter {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: calc(4 * var(--u)) calc(10 * var(--u));
+  margin: 0;
+  padding-bottom: calc(8 * var(--u));
+  border-bottom: 1px solid var(--line);
+}
+.atlas-present__chapter > * + *::before {
+  content: "·";
+  margin-right: calc(10 * var(--u));
+  font-weight: 400;
+  color: var(--ink-3);
+}
+.atlas-present__chapter i,
+.atlas-present__chapter em {
+  font: 500 calc(11.5 * var(--u)) / 1 var(--font-mono);
+  font-style: normal;
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+}
+.atlas-present__chapter span {
+  font: 500 calc(14 * var(--u)) / 1.1 var(--font-hud);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.atlas-present__chapter b {
+  font: 500 calc(11.5 * var(--u)) / 1 var(--font-mono);
+  letter-spacing: 0.06em;
+  color: var(--signal);
+}
+/* The caption fades in once the flight (2.2 s) is mostly done; at most four lines at 1920, then it scrolls inside the card. */
+.atlas-present__caption {
+  --caption-size: max(18px, calc(28 * var(--u)));
+  max-height: calc(4 * 1.4 * var(--caption-size));
+  margin: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  font: 400 var(--caption-size) / 1.4 var(--font-serif);
+  text-align: center;
+  text-wrap: pretty;
+  cursor: pointer;
+  pointer-events: auto;
+  touch-action: pan-y;
+  animation: atlas-caption-in 600ms var(--ease-out) 1600ms both;
+}
+.atlas-present[data-instant] .atlas-present__caption {
+  animation: none;
+}
+@keyframes atlas-caption-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+/* Two-level progress bar: a segment per chapter, the current one split into its beats. */
+/* Progress bar and the AUTO-PLAY checkbox on one row. */
+.atlas-present__row {
+  display: flex;
+  align-items: flex-start;
+  gap: calc(16 * var(--u));
+}
+.atlas-present__bar {
+  flex: 1 1 auto;
+  min-width: 0;
+  pointer-events: auto;
+}
+.atlas-present__opts {
+  display: flex;
+  flex: none;
+  gap: calc(16 * var(--u));
+}
+.atlas-present__auto {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: calc(6 * var(--u));
+  margin-top: calc(-4 * var(--u));
+  font: 500 calc(10 * var(--u)) / 1 var(--font-hud);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  cursor: pointer;
+  pointer-events: auto;
+}
+.atlas-present__auto input {
+  width: calc(12 * var(--u));
+  height: calc(12 * var(--u));
+  margin: 0;
+  accent-color: var(--signal);
+  cursor: pointer;
+}
+.atlas-present__voice[data-disabled] {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+.atlas-present__voice[data-disabled] input {
+  cursor: not-allowed;
+}
+.atlas-present__auto[data-held] span {
+  color: var(--ink-3);
+}
+@media (pointer: coarse) {
+  .atlas-present__auto {
+    min-height: var(--hit);
+    margin-top: calc((var(--hit) - 12px) / -2);
+  }
+}
+.atlas-present__bar ol {
+  display: flex;
+  gap: calc(3 * var(--u));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.atlas-present__seg {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  min-width: 0;
+}
+.atlas-present__chap,
+.atlas-present__tick {
+  position: relative;
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.atlas-present__chap {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+/* The hairline: a 2 px track with the filled part drawn over it. */
+.atlas-present__line,
+.atlas-present__tick::before {
+  --fill: transparent;
+  content: "";
+  display: block;
+  height: 2px;
+  margin-top: calc(8 * var(--u));
+  background:
+    linear-gradient(var(--fill), var(--fill)) left / 0% 100% no-repeat,
+    color-mix(in srgb, var(--ink) 20%, transparent);
+  transition:
+    background-size 400ms var(--ease-out),
+    height 150ms var(--ease-out);
+}
+.atlas-present__seg[data-state="done"] .atlas-present__line {
+  --fill: var(--ink-2);
+  background-size: 100% 100%, auto;
+}
+.atlas-present__seg[data-state="current"] .atlas-present__line {
+  --fill: var(--signal);
+  background-size: 100% 100%, auto;
+}
+.atlas-present__ticks {
+  display: flex;
+  gap: calc(2 * var(--u));
+}
+.atlas-present__tick {
+  flex: 1 1 0;
+  height: calc(10 * var(--u) + 2px);
+}
+.atlas-present__tick::before {
+  position: absolute;
+  inset: 0 0 auto;
+  margin-top: calc(8 * var(--u));
+}
+.atlas-present__tick[data-state="done"]::before {
+  --fill: var(--signal);
+  background-size: 100% 100%, auto;
+}
+.atlas-present__tick[aria-current="step"]::before {
+  height: 3px;
+  margin-top: calc(7.5 * var(--u));
+}
+/* A tap target taller than the hairline. */
+.atlas-present__chap::after,
+.atlas-present__tick::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 calc(-6 * var(--u));
+}
+.atlas-present__no {
+  margin-top: calc(4 * var(--u));
+  font: 500 calc(10.2 * var(--u)) / 1 var(--font-mono);
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+  text-align: center;
+}
+.atlas-present__seg[data-state="current"] .atlas-present__no {
+  color: var(--signal);
+}
+@media (hover: hover) {
+  .atlas-present__chap:hover .atlas-present__line,
+  .atlas-present__tick:hover::before {
+    height: 3px;
+    margin-top: calc(7.5 * var(--u));
+  }
+  .atlas-present__chap:hover .atlas-present__no {
+    color: var(--ink);
+  }
+}
+.atlas-present__chap:focus-visible,
+.atlas-present__tick:focus-visible {
+  outline: 1px solid var(--signal);
+  outline-offset: 1px;
+}
+@media (max-width: 759px) {
+  .atlas-present__no {
+    display: none;
+  }
+  .atlas-present__foot {
+    padding-inline: calc(16 * var(--u));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .atlas-present__caption {
+    animation: none;
+  }
+}
