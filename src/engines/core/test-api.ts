@@ -25,6 +25,8 @@ export type AtlasState = SceneSnapshot & {
   reader: boolean;
   /** Bottom panel strip expanded (one group; SpaceScene). */
   panels: boolean;
+  /** Top-right card expanded (folded = a vertical tab at the stage's right edge). */
+  card: boolean;
   /** A chapter auto-run is animating the engine's time (TimeScene); always false elsewhere. */
   running: boolean;
   /** The continuous time on show (TimeScene: the playhead as a number); `null` when the engine has none. */
@@ -65,6 +67,8 @@ export interface AtlasTestApi {
   setHud(on: boolean): void;
   /** Expand / collapse the bottom panel strip. */
   setPanels(on: boolean): void;
+  /** Expand / fold the top-right card. */
+  setCard(on: boolean): void;
   setTheme(theme: Theme): void;
   state(): AtlasState;
   stats(): SceneStats;
@@ -153,6 +157,7 @@ export function installTestApi(deps: TestApiDeps): () => void {
     voiceLog: () => hud.getState().controls.beats?.voiceLog?.() ?? [],
     setHud: (on) => actions.setHud(on),
     setPanels: (on) => actions.setPanels(on),
+    setCard: (on) => actions.setCard(on),
     setTheme: (theme) => deps.setTheme(theme),
     state: () => {
       const h = hud.getState();
@@ -164,6 +169,7 @@ export function installTestApi(deps: TestApiDeps): () => void {
         labels: h.labels,
         reader: h.reader,
         panels: h.panelsOpen,
+        card: h.cardOpen,
         running: h.controls.time?.running() ?? false,
         playhead: h.controls.time?.now() ?? null,
         preset: activePreset(h, snapshot.chapter),

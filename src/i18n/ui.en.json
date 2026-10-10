@@ -152,6 +152,8 @@
   "hud.chapterNav": "Jump to chapter",
   "hud.card.expand": "Show every row",
   "hud.card.collapse": "Fold the list",
+  "hud.card.fold": "Fold the card to the edge",
+  "hud.card.unfold": "Show the card",
   "spec.subject": "Subject",
   "spec.chapters": "Chapters",
   "spec.syllabus": "Syllabus links",

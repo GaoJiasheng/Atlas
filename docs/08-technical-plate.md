@@ -44,18 +44,20 @@
 │       状态行：ATL-WW2-07 · {VIEW} · {RUNNING|PAUSED} · {MODE 50}              快捷键提示         │
 ├ 左：章节轨（编号 01–NN）                                           │
 │ 左上贴画布：标题 / 副标题 EN+中文 / 规格 dl（4–8 行，mono 数字，来源芯片）            │
-│ 右上：一张示意 SVG 卡（引擎决定：过程链 / 时间条 / 剖面）随状态高亮，可原地展开       │
+│ 右上：一张示意 SVG 卡（引擎决定：过程链 / 时间条 / 剖面）随状态高亮，可原地展开；标题右端 › 收成舞台右缘 28 px 竖页签 │
 │ 右上卡下：控制面板 LAYERS / TOOLS / KEY（模式开关都在这里；顶栏只多一个 PRESENT）     │
 │ 舞台中央：地图或 3D；两列引线标注                                                     │
 │ 右：阅读面板（编号 + 章名 + summary 一句、章节正文、选中对象、测验；可收成 28 px 竖条，宿主级）│
-├ 底（SpaceScene）：三块等高面板 01 ARCHITECTURE / 02 DETAIL / 03 STATE；左缘小把手整组收成 28 px 横条，舞台随之变高 ─ │
+├ 底（SpaceScene）：三块等高面板 01 ARCHITECTURE / 02 DETAIL / 03 STATE；上缘左侧的小页签整组收成 28 px 横条，舞台随之变高 ─ │
 ├ 底（TimeScene）：一条底部条 [▾] · 时间标尺 · 状态串；泳道可展开（PRESENT 在顶栏，这里没有）  │
 └ 右下安静小字：FPS · DRAW CALLS · TRIS · RES（仅 3D；地图显示 FEATURES · ZOOM）        ┘
 ```
 
 - DOC-ID 规则：`ATL-{TOPIC 大写去连字符前 6}-{章节序号 2 位}`，如 `ATL-SAMPLE-02`；它在**状态行最前面**（顶栏里不再有），手机上隐藏。
 - **顶栏三段**（`core/Hud.tsx TopBar`）：左 = 品牌 `◇ ATLAS · {学科}` + **章节号码芯片** `01 … NN`（背景章 `BG`；带 `data-chapter="<id>"`，当前章 `.on` 实心、`aria-current="step"`；点击 = 章节轨的同一动作 `goToChapter`，← → 不变）；中 = **VIEW 组**（地理 / 模型视角预设、ORBIT、REF.，数字键）加它右端的 **`▶ PRESENT 演示`**（signal 橙实心，整个 HUD 唯一的实心橙按钮，`data-mode="presentation"`、`aria-pressed`，开关 `presentation` 模式 = 键 P；控制面板 TOOLS 里仍保留同一行）；右 = 只有 LOOK ▾ 和语言 ▾。三段用 grid：外侧两列 `minmax(max-content, 1fr)`，放得下时左右等宽，VIEW 组落在顶栏正中；放不下时各按内容宽度，中段略偏。< 1180 px 宽或触屏中段独占第二行居中；< 760（手机）芯片和 VIEW / PRESENT 都隐藏，章节走已有的章节轨小方块行（桌面顶栏芯片是它的桌面版）。VIEW 组**只放视角**：SpaceScene 不再有章节预设（章节就是顶栏芯片），数字键 1 = ORBIT。
-- **底部面板整组收起**（SpaceScene 的 panel01–03）：条左缘一个 hairline 小把手（`.atlas-panels__fold`，`aria-expanded`）把三块一起收成一条 28 px 横条（`.atlas-panels__bar`，只显示 `01 ARCHITECTURE 结构 · 02 DETAIL 细节 · 03 STATE 状态`，点它展开）；状态在 HUD store 的 `panelsOpen`，按标签页存 `sessionStorage['atlas:panels']`（默认展开，**不进 URL**，粘住：换章不会展开；`__atlas.state().panels` / `setPanels`）。**舞台随之重排**：舞台（和引线 svg）的底边 = 面板条的顶边（`BottomPanels` 量出来写到 `.atlas-scene` 的 `--stage-inset`），收起后 3D 画布变高；HUD 隐藏（H / 演示）时舞台仍占满整张。阅读面板的 28 px 把手是宿主级的，两个引擎一样。LAYERS / TOOLS 控制面板自带关闭按钮，不跟这个走。
+- **底部面板整组收起**（SpaceScene 的 panel01–03）：条**上缘左对齐**一个 hairline 小页签（`.atlas-panels__fold`，24 px 高、≥ 44 px 宽，坐在上边框上，`aria-expanded`；展开时 chevron 朝**下**，点它收起；收起后页签留在横条上缘、chevron 朝**上**）把三块一起收成一条 28 px 横条（`.atlas-panels__bar`，只显示 `01 ARCHITECTURE 结构 · 02 DETAIL 细节 · 03 STATE 状态`，点它或页签展开）；状态在 HUD store 的 `panelsOpen`，按标签页存 `sessionStorage['atlas:panels']`（默认展开，**不进 URL**，粘住：换章不会展开；`__atlas.state().panels` / `setPanels`）。**舞台随之重排**：舞台（和引线 svg）的底边 = 面板条的顶边（`BottomPanels` 量出来写到 `.atlas-scene` 的 `--stage-inset`），收起后 3D 画布变高；HUD 隐藏（H / 演示）时舞台仍占满整张。阅读面板的 28 px 把手是宿主级的，两个引擎一样。LAYERS / TOOLS 控制面板自带关闭按钮，不跟这个走。
+- **右上卡可收成竖页签**（两个引擎的 `card` 槽：SpaceScene 零件链 / TimeScene 参与卡）：卡片标题行**右端**一个 chevron 朝**右**的折叠钮（`.atlas-card__fold`，`aria-expanded`，≥ 44 px 命中区；TimeScene 参与卡自己的「展开全部行」切换是另一个控件，保留）。收起后卡片 `display: none`（引擎仍挂载在里面），舞台右缘出现一条 28 px 竖页签（`.atlas-card__tab`，`data-hud-panel="card-tab"`，章名竖排、chevron 朝**左**，点它恢复）；下面的 LAYERS / TOOLS 控制面板自然上移补位；引线标注与地图标牌把页签当障碍、把收起的卡片丢掉。状态在 HUD store 的 `cardOpen`，按标签页存 `sessionStorage['atlas:card']`（默认展开，不进 URL，粘住；`__atlas.state().card` / `setCard`）；`.atlas-scene[data-card="open|collapsed"]`。< 1024 px 卡片本来就隐藏。
+- 阅读面板收起后的竖条：章号在中线上方、竖排章名**垂直居中**、chevron 在章名下方，三者水平居中。
 - 所有 HUD 块带 `data-hud-panel`，缩放系数 `--k = clamp(min(W/1920, H/1080), .6, 1.6)`，各角以所在角为 transform-origin。
 - 响应式：≥1440 完整；1080 完整略小；720 底部三面板压缩成一行标签页；VIEW 组放不下就折行（< 1180 px 宽独占第二行）；< 1024 阅读面板是底部抽屉；< 760 宽（手机）保留舞台 + 章节轨折叠 + 底部控制，隐藏右上卡与三面板。任何尺寸不重叠、不横向溢出。
 - 现有 ChapterRail / InfoPanel / QuizCard / Counter 保留职责，按上面的排版重做皮肤（hairline、编号、芯片）。

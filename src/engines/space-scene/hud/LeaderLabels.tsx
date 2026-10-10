@@ -111,6 +111,7 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
   const presenting = useStore(ui, (u) => u.presenting);
   const beatLabels = useStore(ui, (u) => u.beatLabels);
   const hudOn = useHud((h) => h.hud);
+  const cardOpen = useHud((h) => h.cardOpen);
   const labelsOn = useHud((h) => h.labels && (h.hud || presenting));
   const s = useScene<
     SpaceSceneExt,
@@ -221,7 +222,7 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
 
   useLayoutEffect(() => {
     measure();
-  }, [measure, candidates, locale, labelsOn, presenting]);
+  }, [measure, candidates, locale, labelsOn, presenting, cardOpen]);
 
   // The HUD fades out (presentation) or in: its blocks count as obstacles only once they are there
   // (the fade's `visibility` step ends it; the timer covers reduced motion and slow frames).
