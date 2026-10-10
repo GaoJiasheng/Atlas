@@ -9,7 +9,7 @@ ww2 实际走过并验证的顺序（docs/09 §9、§11）。主会话负责 bri
 | 2 | 地图：**第一帧和最后一帧**（fetch → ohm → georef → compose → simplify → check） | Opus | 并排图一致，残差在预算内，SOURCES-GEO.md 记全 | 是 |
 | 3 | **模板章**：背景章 + 两个代表性章节完整（正文双语、细看、事件、行军、来源、名词、节拍） | Opus 写数据与英文，中文 Opus 初稿 | `pnpm shoot <slug>`；Gavin 看过再铺开 | 是 |
 | 4a ‖ 4b | 其余关键帧 ‖ 其余章节（按时代分 2–3 批） | Opus × 2 并行 | 每批：门槛绿、每个数字有来源 | 每批 |
-| 5 | 全部章节的演示节拍（3–5 拍 / 章）、预设镜头、名词表收齐 | Opus 或 Sonnet | `pnpm shoot <slug> --beats` 无失败、无未标注高亮 | 是 |
+| 5 | 全部章节的演示节拍（3–5 拍 / 章，同时是时间轴刻度）、预设镜头、名词表收齐 | Opus 或 Sonnet | `pnpm shoot <slug> --beats` 无失败、无未标注高亮、"chapter highlights"清单为空 | 是 |
 | 6 | 打磨：几何 / 路线准确（skill industrial-3d-showcase `rounds.md` R2）→ 动画节奏（R4）→ 事实审计、死代码（R9） | Sonnet | `acceptance.md` 全勾 | 是 |
 | 7 | 发布：`status: published`，docs 的实现记录表补齐 | 主会话 | 门槛全绿 | 是；push 等 Gavin |
 
@@ -38,4 +38,4 @@ ww2 实际走过并验证的顺序（docs/09 §9、§11）。主会话负责 bri
 
 ## 每步收尾
 
-`pnpm check && pnpm validate && pnpm test && pnpm build && pnpm e2e`，视觉改动加 `pnpm shoot <slug> --keys --layout`（节拍改动加 `--beats`）并**看截图**，再提交。
+`pnpm check && pnpm validate && pnpm test && pnpm build && pnpm e2e`，视觉改动加 `pnpm shoot <slug> --keys --layout`（节拍、章节镜头、高亮改动加 `--beats`，读末尾两份清单）并**看截图**，再提交。

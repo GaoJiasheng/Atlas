@@ -13,27 +13,28 @@ state:
   ghost: []
   layers: [exoskeleton, legs-wings]
   hide: []
-  labels: [head-capsule, pronotum, abdomen-tergites, hind-femora, tegmina]
+  labels: [head-capsule, pronotum, fore-legs, hind-femora, tegmina]
   camera: { position: [-3.3, 2.0, 5.3], target: [0.05, 0.62, 0], fov: 30 }
   summary: { en: "A grasshopper's body has three parts — head, thorax and abdomen — with six legs and four wings on the thorax, all covered by a hard outer skeleton.", zh: "蚱蜢的身体分头、胸、腹三部分；六条足和四片翅都长在胸部，全身包着坚硬的外骨骼。" }
   question: { en: "What makes a grasshopper an insect?", zh: "怎么看出蚱蜢是昆虫？" }
   beats:
-    - caption: { en: "A female Javanese grasshopper, enlarged 40 times.", zh: "一只雌性黑角瓦兰蝗，放大了 40 倍。" }
-    - camera: side
+    - caption: { en: "A female Javanese grasshopper, about 64 millimetres long, drawn 40 times life size.", zh: "一只雌性黑角瓦兰蝗，真实体长约 64 毫米，这里放大了 40 倍。" }
+    - camera: { position: [-3.9, 1.7, 3.4], target: [-0.95, 0.95, 0.05], fov: 28 }
+      labels: [head-capsule, compound-eyes, antennae, mandibles]
+      caption: { en: "The head carries the eyes, the feelers and the mouth.", zh: "头上长着眼睛、触角和口。" }
+    - camera: { position: [-0.5, 5.2, 2.8], target: [0.0, 0.6, 0.1], fov: 32 }
+      hide: [tegmina, hindwings]
       labels: [head-capsule, pterothorax, abdomen-tergites]
-      caption: { en: "Three parts: head, thorax and abdomen.", zh: "三部分：头、胸、腹。" }
+      caption: { en: "Three parts: head, thorax and abdomen (the wings are hidden here).", zh: "三部分：头、胸、腹（这里把翅藏起来了）。" }
     - camera: dorsal
       labels: [fore-legs, mid-legs, hind-femora, tegmina]
       caption: { en: "Six legs and four wings, all on the thorax.", zh: "六条足、四片翅，都长在胸部。" }
-    - camera: { position: [-2.2, 2.4, 4.2], target: [0.1, 0.3, 0.5], fov: 30 }
-      labels: []
-      caption: { en: "Its real length is about 64 millimetres.", zh: "真实体长约 64 毫米。" }
     - view: xray
       ghost: [exoskeleton]
       layers: [exoskeleton, legs-wings, digestive, nervous, breathing-circulation, muscles-reproduction]
       camera: systems
       labels: ["group:digestive", "group:nervous", "group:breathing-circulation", "group:muscles-reproduction"]
-      caption: { en: "Inside the hard shell are six body systems.", zh: "硬壳里面有六个系统。" }
+      caption: { en: "Inside the hard shell are six body systems, one colour each.", zh: "硬壳里面有六个系统，每个系统一种颜色。" }
 ---
 
 <Lang en>

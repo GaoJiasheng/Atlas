@@ -22,21 +22,25 @@ state:
       ghost: []
       camera: side
       labels: [spiracles]
-      caption: { en: "A row of small holes along the side: ten pairs of spiracles.", zh: "体侧一排小孔：10 对气门。" }
+      caption: { en: "A row of small holes along each side: ten pairs of spiracles.", zh: "体侧各有一排小孔：10 对气门。" }
     - labels: [tracheal-trunks, air-sacs]
-      caption: { en: "Air runs through the tubes to the whole body; the belly pumps.", zh: "空气顺着气管到达全身，腹部一起一伏地泵气。" }
+      caption: { en: "Air runs through branching tubes to the whole body, and the belly pumps it like a bellows.", zh: "空气顺着分支的气管到达全身，腹部像风箱一样把它泵动。" }
     - camera: { position: [-0.3, 0.9, 3.2], target: [-0.1, 0.75, 0.1], fov: 30 }
       labels: [spiracles, tracheal-trunks]
-      caption: { en: "Front spiracles take air in; rear ones let it out.", zh: "前面的气门吸气，后面的呼气。" }
-    - view: assembled
+      caption: { en: "Air usually goes in at the front spiracles and out at the rear ones.", zh: "空气通常从前面的气门进，从后面的气门出。" }
+    - hide: [spiracles, tracheal-trunks, air-sacs]
+      part: dorsal-vessel
+      camera: { position: [-0.3, 1.5, 4.2], target: [0.0, 0.85, 0.0], fov: 30 }
+      labels: [dorsal-vessel]
+      caption: { en: "The tube-shaped heart along the back pumps blood forward; the blood seeps back through the body.", zh: "背上的管状心脏把血液向前泵，血液再从体腔里慢慢流回。" }
+    - view: xray
       cutaway: thorax-transverse
       ghost: []
+      hide: [antennae, hind-tibiae]
       layers: [exoskeleton, legs-wings, digestive, nervous, breathing-circulation, muscles-reproduction]
       camera: { position: [-1.7, 0.95, 0.32], target: [-0.3, 0.8, 0], fov: 30 }
-      labels: [dorsal-vessel, flight-muscles, crop, nerve-cord]
-      caption: { en: "Cut across: the heart lies along the back and the nerve cord along the belly.", zh: "横切面：心在背上，神经索在腹面。" }
-    - labels: [dorsal-vessel]
-      caption: { en: "The tube heart pumps forward; the blood seeps back through the body.", zh: "管状心脏向前泵，血淋巴在体腔里慢慢流回。" }
+      labels: [dorsal-vessel, flight-muscles, midgut, nerve-cord]
+      caption: { en: "Cut across the thorax: the heart lies along the back, the gut in the middle and the nerve cord along the belly.", zh: "横切胸部：心脏在背上，消化道在中间，神经索在腹面。" }
 ---
 
 <Lang en>

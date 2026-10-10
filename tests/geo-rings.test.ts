@@ -19,8 +19,7 @@ describe('ringIssues', () => {
 });
 
 describe('control keyframes have no wedge-makers', () => {
-  // ww2's control.json predates the ring clean-up in simplify.ts (it has 137 crossing rings, drawn without visible wedges); new topics must be at 0.
-  for (const slug of ['ww1']) {
+  for (const slug of ['ww1', 'ww2']) {
     it(`${slug}: 0 zero-area and 0 self-crossing rings`, () => {
       type Topology = Parameters<typeof feature>[0];
       const data = JSON.parse(readFileSync(`src/content/topics/${slug}/data/control.json`, 'utf8')) as {

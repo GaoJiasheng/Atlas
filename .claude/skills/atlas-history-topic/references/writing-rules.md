@@ -21,7 +21,7 @@
 - `<Num>` 只包**数量**（人数、艘数、公里、百分比、金额）：`<Num s="S8">20</Num> dreadnought battleships`。**不包日期、年份、单位名、序数和章节号**（`1916`、`4 August`、`the 2nd Army`、`Treaty of 1919` 都不包）；包的是数字本身，单位词留在外面。
 - 来源冲突时并列区间（"20 万到 30 万"），区间两端**各用自己的来源**：`<Num s="S216">17 million</Num> and at least <Num s="S217">50 million</Num>`（ww1 流感），不要用一个来源号包住整个区间；在 `sources.json` 的 `note` 里写清各自出处，不偷偷选一个。再例：伤亡 `from <Num s="S120">1.7 million</Num> to <Num s="S121">2.4 million</Num>`；多个来源给同一个数才写 `s="S3,S7"`。
 - 行军路线（`path`）按真实路线取点；短路线（几十到一两百公里、一次渡海）**7 个途经点**够用，长路线再加，不要为凑数加点。
-- **有些站点会挡爬虫 / 搜索摘要**（Britannica、1914-1918-online、IWM、CWGC、PubMed）：用浏览器工具把原文读一遍再引用，`sources.json` 只写你**读到并核对过**的内容；只看到搜索摘要的来源在 `note` 里写明"据搜索摘要"，并列入 spec 的已知差距，等人工核对。
+- **有些站点会挡爬虫 / 搜索摘要**（Britannica、1914-1918-online、IWM、CWGC、PubMed）：先找**能直接读到全文的镜像**——archive.org 的全文（`/stream/<id>/..._djvu.txt`）、Europe PMC（`europepmc.org` 的 REST / 全文）、公版书的 Gutenberg——把原文读一遍再引用；`sources.json` 只写你**读到并核对过**的内容。只看到搜索摘要的来源在 `note` 里写明"据搜索摘要"，并列入 spec 的已知差距，等人工核对。
 - `sources.json` 改完跑 `pnpm tsx scripts/sources-md.ts <slug>` 重写 `SOURCES.md` 的生成块。
 - **SpaceScene 主题的数字**（aircon）：设计值（规格行）与模拟值（STATE 读数、算出来的温度 / 流量）不是观测，也要有来源：写一条自描述来源（它的 `note` 讲清"设计取值 / 由哪些数据按什么算式算出"），`<Num>` 引它；演示字幕与零件说明里没有 `<Num>` 的模拟数字，句里写明"在这个模拟里 / at this simulated operating point"。
 
@@ -39,21 +39,24 @@
 
 ## 演示节拍与字幕（`state.beats`）
 
-- 一拍 = 地图上一个**可见的变化**：镜头移到一个地方、时间走到一个日期、一组高亮。不是正文段落的缩写。
+- **拍是叙事结构**，不是正文的缩写：一拍 = 地图上一个**可见的变化**（镜头移到一个地方、时间走到一个日期、一组高亮、图层开关）。每拍写 `t`、`camera`，需要时写 `layers` / `highlight`；演示把镜头交给系统，落定后读者可以自己拖动、缩放，所以一拍只讲一件事、字幕不依赖读者停在哪个镜头。
 - 每章 3–5 拍；第一拍通常是本章起点，最后一拍 = 章节时间。**拍同时是底部时间轴的结构**：每拍一个刻度（按 `t` 排），读者点这一章就落在第一拍、点刻度就到那一拍，演示之外也一样——所以第一拍要能单独当本章的封面（镜头框住、时间对、高亮有标注），每拍都写 `t`，同一天的几拍也会各占一个刻度。
-- 字幕以日期开头，描述**这一拍地图上显示的东西**：`8 December 1941, shortly after midnight: Japanese troops land at Kota Bharu …`。一到两句，EN ≤ 45 词；会被语音朗读，避免括号和缩写。
-- 这拍 `highlight` 里的每个 id 都要在画面里有引线标注（`pnpm shoot <slug> --beats` 会列出没标上的，原因多半是镜头没框住或图层没开）。
+- 字幕以日期开头，描述**这一拍地图上显示的东西**（读者眼前的地图，不是章节正文的续写）：`8 December 1941, shortly after midnight: Japanese troops land at Kota Bharu …`。一到两句，EN ≤ 45 词；会被语音朗读，避免括号和缩写。
+- 这拍 `highlight` 里的每个 id 都要在画面里有引线标注（演示中只标这些，最多 6 个，每拍 1–3 个最清楚；标注贴近锚点、让开字幕卡）。`pnpm shoot <slug> --beats` 逐拍列出没标上的，末尾还有"chapter highlights"：每章自己 `state.highlight` 在**章节镜头**下没标上的 id——原因多半是镜头没框住或图层没开，先调章节 `camera`（zoom / 中心），不是删 id。
+- 路线（`movements`）：拍的 `t` 落在 `from`–`to` 之间箭头才在走；`linger` 让走完的线以 40 % 留到那天，下一拍还看得见。
+- 语音读的是字幕（页面语言，先读章号、章名）：避免括号、缩写和符号堆砌。自动播放按字数停留 6–20 s，字幕越短越好。
 - 没写 `beats` 的章 = 一拍，字幕用 `summary`。
 
 ## 背景章与阅读说明
 
 - 背景章（`kind: background`，`order: 0`）讲"开始之前"：局势、各方是谁、地图怎么读。不编号、底部时间轴上没有段；地图显示第一帧（或它的 `state.time`）。不是每个主题都需要（ww2 没有），spec 里决定。
+- 背景章的 `state.time` 要显示"已在交战"就设成开战日期，否则阵营未成立、地图全中立。
 - `state.note` 只放在背景章：本主题的写法——从哪些视角讲、数字怎样标来源和取整、地图来自哪里、沉重内容怎么处理。三四句，阅读面板正文顶部以细框显示，标题"How this topic is written / 阅读说明"。
 
 ## 名词 `<Term>`
 
 - `data/glossary.json` 放 8–15 个**正文里真正用到**的词（概念、制度、军事术语），定义一两句，客观，不带立场；`see` 连相关词。
-- 每个词只包它在全主题里**第一次出现**的地方，EN 和 ZH 各一处：`<Term id="blitzkrieg">闪电战</Term>`；只包原词，不改句子。控制面板 TOOLS 的"名词 / Glossary"列出全部。
+- 每个词只包它在全主题里**第一次出现**的地方，EN 和 ZH 各一处：`<Term id="blitzkrieg">闪电战</Term>`；只包原词，不改句子。点开在阅读面板里出定义和相关词；正文里要让读者看地图某处用 `<FlyTo preset="id">…</FlyTo>`（预设在 `presets.json`）。控制面板 TOOLS 的"名词 / Glossary"列出全部。
 
 ## 客观性检查（每章写完自查）
 

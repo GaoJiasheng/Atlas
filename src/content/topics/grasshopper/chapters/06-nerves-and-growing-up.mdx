@@ -11,37 +11,50 @@ state:
   cutaway: none
   pose: null
   ghost: [exoskeleton]
-  layers: [exoskeleton, nervous, muscles-reproduction]
+  layers: [exoskeleton, nervous]
   hide: []
-  labels: [brain, suboesophageal-ganglion, thoracic-ganglia, nerve-cord, tympanal-organ]
+  labels: [brain, suboesophageal-ganglion, thoracic-ganglia, nerve-cord]
   camera: { position: [-1.75, 2.25, 4.0], target: [0.02, 0.74, 0], fov: 30 }
   summary: { en: "A chain of nerve knots along the belly links the brain to every leg; a grasshopper hatches as a small wingless nymph and moults several times before it becomes an adult with wings.", zh: "一串沿腹面排列的神经节把脑与每条足连起来；蚱蜢孵出时是没有翅的小若虫，蜕几次皮才变成有翅的成虫。" }
   question: { en: "How does a grasshopper sense the world, and how does it grow up?", zh: "蚱蜢怎么感知世界？它怎么长大？" }
   beats:
     - labels: [brain, suboesophageal-ganglion, thoracic-ganglia, nerve-cord]
-      caption: { en: "The brain sits in the head; the nerve cord runs along the belly.", zh: "脑在头里，神经索沿着腹面。" }
+      caption: { en: "The brain sits in the head; a cord with knots of nerve cells runs back along the belly.", zh: "脑在头里；一条带着神经节的神经索沿着腹面向后延伸。" }
     - part: tympanal-organ
-      camera: { position: [-0.2, 0.95, 2.6], target: [0.05, 0.78, 0.12], fov: 30 }
+      ghost: [head-capsule, compound-eyes, ocelli, antennae, labrum, mandibles, maxillae, labium, pronotum, prosternal-spine, pterothorax, abdomen-tergites, abdomen-sternites, cerci, ovipositor]
+      camera: { position: [-0.3, 1.0, 2.7], target: [0.05, 0.78, 0.12], fov: 30 }
       labels: [tympanum, tympanal-organ]
-      caption: { en: "The ears are on the first belly segment.", zh: "耳朵在腹部第一节。" }
+      caption: { en: "The ears are eardrums on the first segment of the abdomen.", zh: "耳朵是腹部第一节两侧的鼓膜。" }
     - part: ovaries
-      camera: { position: [0.9, 1.1, 3.2], target: [0.6, 0.75, 0.05], fov: 30 }
+      layers: [exoskeleton, nervous, muscles-reproduction]
+      hide: [flight-muscles, extensor-tibiae, flexor-tibiae]
+      ghost: [head-capsule, compound-eyes, ocelli, antennae, labrum, mandibles, maxillae, labium, pronotum, prosternal-spine, pterothorax, abdomen-tergites, abdomen-sternites, tympanum, cerci]
+      camera: { position: [1.9, 1.1, 3.4], target: [0.8, 0.75, 0.05], fov: 30 }
       labels: [ovaries, ovipositor]
-      caption: { en: "Ovaries make eggs; the ovipositor digs the hole.", zh: "卵巢产卵，产卵瓣在土里挖洞。" }
+      caption: { en: "The ovaries make the eggs; the ovipositor digs the hole they are laid in.", zh: "卵巢产卵；产卵瓣挖出产卵的洞。" }
     - view: assembled
       part: egg-pod
       ghost: []
       layers: [exoskeleton, legs-wings, growth]
-      camera: { position: [-1.9, 1.6, 5.6], target: [-0.6, 0.5, 2.6], fov: 30 }
-      labels: [egg-pod, nymph-1, nymph-2]
-      caption: { en: "The eggs are laid in a pod in the soil.", zh: "卵产在土里的卵荚中。" }
+      camera: { position: [-1.5, 2.3, 5.8], target: [-1.2, 0.4, 2.6], fov: 30 }
+      labels: [egg-pod]
+      caption: { en: "The eggs are laid in a pod in the soil, shown here cut open.", zh: "卵产在土里的卵荚中，这里把卵荚剖开了。" }
+    - view: assembled
+      part: nymph-1
+      ghost: []
+      hide: [soil-section, egg-pod]
+      layers: [exoskeleton, legs-wings, growth]
+      camera: { position: [0.0, 4.6, 6.8], target: [0.0, 0.2, 2.4], fov: 30 }
+      labels: [nymph-1, nymph-2, nymph-3]
+      caption: { en: "A nymph hatches looking like a small adult without wings, and grows by moulting.", zh: "若虫孵出来像没有翅的小成虫，靠蜕皮长大。" }
     - view: assembled
       part: nymph-6
       ghost: []
+      hide: [soil-section, egg-pod]
       layers: [exoskeleton, legs-wings, growth]
-      camera: { position: [0.0, 4.6, 6.2], target: [0.05, 0.3, 2.0], fov: 30 }
-      labels: [nymph-1, nymph-3, nymph-5, nymph-6]
-      caption: { en: "Nymphs have no wings; they moult six or seven times to become adults.", zh: "若虫没有翅，蜕皮 6 到 7 次才长成成虫。" }
+      camera: { position: [-0.7, 6.2, 5.2], target: [-0.6, 0.3, 1.5], fov: 30 }
+      labels: [nymph-4, nymph-5, nymph-6, tegmina]
+      caption: { en: "Six or seven stages, each ended by a moult, bring small wing pads and then, at the last moult, the winged adult.", zh: "经过六或七个龄期，每期以一次蜕皮结束；长出小小的翅芽，最后一次蜕皮才成为有翅的成虫。" }
 ---
 
 <Lang en>

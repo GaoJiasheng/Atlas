@@ -13,24 +13,26 @@ state:
   ghost: [exoskeleton]
   layers: [exoskeleton, digestive]
   hide: []
-  labels: [mandibles, crop, gastric-caeca, midgut, malpighian-tubules, rectum]
-  camera: { position: [0.0, 0.75, 6.4], target: [0.0, 0.72, 0], fov: 30 }
+  labels: [crop, gastric-caeca, midgut, malpighian-tubules, rectum]
+  camera: { position: [0.0, 0.8, 6.4], target: [0.0, 0.75, 0], fov: 30 }
   summary: { en: "Chewed leaf passes through a tube that runs the length of the body — stored in the crop, digested in the midgut, dried out in the hindgut.", zh: "嚼碎的叶片穿过一条贯穿全身的管子：先存在嗉囊，在中肠消化吸收，在后肠回收水分。" }
   question: { en: "Where does a leaf go after a grasshopper eats it?", zh: "叶子被吃下去以后去了哪里？" }
   beats:
-    - camera: head
-      labels: [mandibles, salivary-glands, pharynx-oesophagus]
-      caption: { en: "Chewed, wetted with saliva and swallowed.", zh: "嚼碎、加唾液、咽下。" }
+    - camera: { position: [-2.9, 1.0, 2.6], target: [-1.15, 0.7, 0.0], fov: 28 }
+      ghost: [head-capsule, compound-eyes, ocelli, antennae, pronotum, prosternal-spine, pterothorax, abdomen-tergites, abdomen-sternites, tympanum, cerci, ovipositor]
+      labels: [mandibles-r, salivary-glands-r, pharynx-oesophagus]
+      caption: { en: "The mandibles cut the leaf up, saliva wets it and it is swallowed.", zh: "上颚把叶片切碎，唾液把它浸湿，然后咽下。" }
     - camera: { position: [-0.75, 0.8, 3.3], target: [-0.6, 0.78, 0], fov: 30 }
       labels: [crop, proventriculus]
-      caption: { en: "The crop stores food; the proventriculus grinds it.", zh: "嗉囊暂存，前胃磨碎。" }
+      caption: { en: "The crop stores the food; the proventriculus lets it on a little at a time.", zh: "嗉囊暂存食物；前胃让食物一点一点地通过。" }
     - camera: { position: [0.0, 0.8, 3.3], target: [0.0, 0.78, 0], fov: 30 }
       labels: [gastric-caeca, midgut]
-      caption: { en: "The midgut and its gastric caeca digest the food and take it in.", zh: "中肠和胃盲囊：消化食物、吸收养分。" }
-    - camera: { position: [0.75, 0.8, 3.3], target: [0.75, 0.76, 0], fov: 30 }
+      caption: { en: "The midgut and its gastric caeca digest the food and take it in.", zh: "中肠和胃盲囊消化食物、吸收养分。" }
+    - camera: { position: [0.75, 1.5, 3.2], target: [0.75, 0.76, 0], fov: 30 }
       labels: [malpighian-tubules, hindgut, rectum]
-      caption: { en: "Malpighian tubules collect waste; the hindgut takes back water.", zh: "马氏管收集废物，后肠吸回水分。" }
-    - labels: [pharynx-oesophagus, crop, midgut, rectum]
+      caption: { en: "Malpighian tubules collect waste; the hindgut and rectum take back water.", zh: "马氏管收集废物；后肠和直肠把水分吸回。" }
+    - camera: { position: [0.05, 0.9, 4.3], target: [0.0, 0.78, 0], fov: 30 }
+      labels: [pharynx-oesophagus, crop, midgut, rectum]
       caption: { en: "One tube from mouth to tail; the food turns from green to brown.", zh: "一条管子从口通到尾，食物从绿变褐。" }
 ---
 

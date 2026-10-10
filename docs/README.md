@@ -15,4 +15,4 @@
 | [11-ww1-content-spec.md](11-ww1-content-spec.md) | 一战主题内容 spec 与实现记录（按历史主题模板做的第二个主题） |
 | [12-aircon-content-spec.md](12-aircon-content-spec.md) | 空调主题（SpaceScene）内容 spec、引擎缺口、施工记录、已知差距与写实轮次（参考图、新原语、并排对照） |
 | [13-space-topic-template.md](13-space-topic-template.md) | 拆解主题模板（SpaceScene · 对象解剖，机器与生物）：skill `atlas-space-topic`、脚手架 `scripts/new-topic.ts --engine space-scene` |
-| [14-grasshopper-content-spec.md](14-grasshopper-content-spec.md) | 蝗虫解剖主题 spec：生物解剖模板样板（系统分层、剖切、跳跃姿态、流、生活史托盘）、引擎缺口 B1–B16 |
+| [14-grasshopper-content-spec.md](14-grasshopper-content-spec.md) | 蝗虫解剖主题（已发布）spec 与实现记录：生物解剖模板样板（系统分层、剖切、跳跃姿态、流、生活史托盘）、引擎缺口 B1–B16、施工记录、已知差距 |

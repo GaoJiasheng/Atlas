@@ -13,7 +13,7 @@ state:
   ghost: [exoskeleton, flight-muscles, ovaries]
   layers: [exoskeleton, legs-wings, nervous, muscles-reproduction]
   hide: []
-  labels: [hind-femora, extensor-tibiae, flexor-tibiae, semilunar-processes, hind-tibiae]
+  labels: [hind-femora, extensor-tibiae, hind-tibiae]
   camera: { position: [0.95, 1.55, 4.75], target: [0.42, 0.66, 0.3], fov: 28 }
   summary: { en: "A grasshopper jumps like a catapult: it slowly loads springs in its hind knees, locks them, then lets go in a few hundredths of a second.", zh: "蚱蜢起跳像弹弓：先慢慢给后膝的弹簧上弦、锁住，再在几百分之一秒里松开。" }
   question: { en: "How can a grasshopper jump so far?", zh: "蚱蜢为什么能跳那么远？" }
@@ -22,19 +22,28 @@ state:
       caption: { en: "Inside the thigh: one big extensor muscle and one small flexor.", zh: "大腿里：一块大伸肌、一块小屈肌。" }
     - pose: jump-fold
       labels: [hind-tibiae, flexor-tibiae]
-      caption: { en: "Fold: the shin pulls in tight against the thigh.", zh: "屈：小腿收到紧贴大腿。" }
+      caption: { en: "Fold: the flexor pulls the shin in tight against the thigh.", zh: "屈：屈肌把小腿收到紧贴大腿。" }
     - part: semilunar-processes
       pose: jump-load
-      labels: [semilunar-processes, extensor-tibiae]
-      caption: { en: "Load: both muscles pull and bend the springs at the knee.", zh: "上弦：两块肌肉一起用力，压弯膝部的弹簧。" }
+      camera: { position: [1.9, 1.5, 2.9], target: [0.85, 1.0, 0.3], fov: 26 }
+      labels: [semilunar-processes, extensor-tibiae, flexor-tibiae]
+      caption: { en: "Load: both muscles pull together and bend the springs at the knee.", zh: "上弦：两块肌肉一起用力，压弯膝部的弹簧。" }
     - part: flexor-tibiae
       pose: jump-lock
+      camera: { position: [1.9, 1.5, 2.9], target: [0.85, 1.0, 0.3], fov: 26 }
       labels: [flexor-tibiae, semilunar-processes]
-      caption: { en: "Lock: the flexor holds the knee shut.", zh: "锁：屈肌把膝锁住。" }
+      caption: { en: "Lock: a catch inside the knee lets the small flexor hold the shin folded.", zh: "锁：膝内的卡点让小屈肌能把小腿锁在折叠位置。" }
     - pose: jump-release
       camera: { position: [-2.2, 1.0, 5.2], target: [0.4, 0.62, 0.2], fov: 30 }
       labels: [hind-tibiae, hind-femora]
-      caption: { en: "Release: the flexor lets go and the shin straightens in a few hundredths of a second (slowed down here).", zh: "放：屈肌一松，小腿在几百分之一秒里伸直（画面放慢了）。" }
+      caption: { en: "Release: the flexor lets go and the shin straightens in 25 to 30 thousandths of a second (slowed down here).", zh: "放：屈肌一松，小腿在 25 到 30 毫秒内伸直（画面放慢了）。" }
+    - view: assembled
+      pose: null
+      ghost: []
+      layers: [exoskeleton, legs-wings]
+      camera: hero
+      labels: []
+      caption: { en: "In the desert locust, the jump takes the body off the ground at about 3.2 metres per second.", zh: "在沙漠蝗身上测得，这一跳让身体以约每秒 3.2 米的速度离地。" }
 ---
 
 <Lang en>
