@@ -1,8 +1,8 @@
 /**
  * TimeScene's single bottom bar (docs/06 "时间轴标尺", docs/08 §5), rendered
  * into `bottomBar`. Left to right:
- *  - a chevron that opens the swimlanes and the PRESENT button (P: the
- *    user-paced presentation beats; the bar has no free-running playback)
+ *  - a chevron that opens the swimlanes (the bar has no free-running
+ *    playback; the PRESENT button is in the top bar, key P)
  *  - the rule: year / month ticks at real dates, chapter nodes (numbered
  *    hairline circles; click = go and auto-run the chapter), keyframe diamonds,
  *    the playhead (a 12 px dot on a hairline stem) with its date above; drag
@@ -45,9 +45,6 @@ export interface TimelineProps {
   chapters: readonly Chapter[];
   currentChapter: string | null;
   highlight: readonly string[];
-  /** The presentation is on (PRESENT button pressed). */
-  presenting: boolean;
-  onPresent(): void;
   /** User moved the playhead to `t` (continuous). */
   onScrub(t: number): void;
   onScrubStart(): void;
@@ -105,7 +102,7 @@ const blurAfterPointer = (e: { detail: number; currentTarget: HTMLElement }) => 
 };
 
 export function Timeline(props: TimelineProps) {
-  const { model, playhead, locale, chapters, currentChapter, presenting, onAlpha } = props;
+  const { model, playhead, locale, chapters, currentChapter, onAlpha } = props;
   const tr = useT();
   const t = useSyncExternalStore(playhead.subscribe, playhead.get, playhead.get);
   const [railRef, width] = useWidth<HTMLDivElement>();
@@ -201,18 +198,6 @@ export function Timeline(props: TimelineProps) {
             }}
           >
             <i aria-hidden="true" />
-          </button>
-          <button
-            type="button"
-            className="hud-btn ts-timeline__present"
-            aria-pressed={presenting}
-            title={`${tr('present.hint')} (P)`}
-            onClick={(e) => {
-              props.onPresent();
-              blurAfterPointer(e);
-            }}
-          >
-            {tr('present.button')}
           </button>
         </div>
 

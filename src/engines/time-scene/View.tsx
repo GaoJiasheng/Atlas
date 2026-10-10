@@ -13,8 +13,8 @@
  * events pulse in order; the store's `t` is already the chapter time). The
  * playhead is draggable at any time: touching it, or any key that changes `t`,
  * cancels the run and leaves `t` where it is. Scrubbing writes a rounded `t`
- * back with `patch()`. There is no other free-running playback: the bar's
- * PRESENT button starts the presentation.
+ * back with `patch()`. There is no other free-running playback: the top
+ * bar's PRESENT button (key P) starts the presentation.
  *
  * A background chapter (`kind: background`, core/chapters.ts) has no time of
  * its own: no timeline node, no auto-run, ignored by the rule's hybrid scale;
@@ -606,8 +606,6 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
           chapters={story}
           currentChapter={currentChapter}
           highlight={highlight}
-          presenting={presenting}
-          onPresent={() => (isPresenting() ? stopPresentation(true) : startPresentation(null, false))}
           onScrub={commit}
           onScrubStart={scrubStart}
           onNudge={nudge}

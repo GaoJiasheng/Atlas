@@ -39,27 +39,30 @@
 ## 2. HUD 布局契约（SceneHost）
 
 ```text
-┌ 顶栏：◇ ATLAS · {学科}        {DOC-ID}          VIEW [WORLD 1][EUROPE 5]…（折行）  ┐
-│       状态行：{VIEW} · {RUNNING|PAUSED} · {MODE 50}        快捷键提示                 │
+┌ 顶栏：◇ ATLAS · {学科} [01][02]…[NN]   VIEW [WORLD 1][EUROPE 5]… [▶ PRESENT 演示]   LOOK ▾ EN ▾ ┐
+│       左：品牌 + 章节号码芯片（BG = 背景章）　中：VIEW 组 + 橙色 PRESENT　右：只有 LOOK / 语言    │
+│       状态行：ATL-WW2-07 · {VIEW} · {RUNNING|PAUSED} · {MODE 50}              快捷键提示         │
 ├ 左：章节轨（编号 01–NN）                                           │
 │ 左上贴画布：标题 / 副标题 EN+中文 / 规格 dl（4–8 行，mono 数字，来源芯片）            │
 │ 右上：一张示意 SVG 卡（引擎决定：过程链 / 时间条 / 剖面）随状态高亮，可原地展开       │
-│ 右上卡下：控制面板 LAYERS / TOOLS / KEY（所有模式开关都在这里，顶栏没有 MODE 组）     │
+│ 右上卡下：控制面板 LAYERS / TOOLS / KEY（模式开关都在这里；顶栏只多一个 PRESENT）     │
 │ 舞台中央：地图或 3D；两列引线标注                                                     │
-│ 右：阅读面板（编号 + 章名 + summary 一句、章节正文、选中对象、测验；可收成 28 px 竖条）│
-├ 底（SpaceScene）：三块等高面板 01 ARCHITECTURE / 02 DETAIL / 03 STATE ─────────────  │
-├ 底（TimeScene）：一条底部条 [▾][▶][×1 ×2 ×4] · 时间标尺 · 状态串；泳道可展开           │
+│ 右：阅读面板（编号 + 章名 + summary 一句、章节正文、选中对象、测验；可收成 28 px 竖条，宿主级）│
+├ 底（SpaceScene）：三块等高面板 01 ARCHITECTURE / 02 DETAIL / 03 STATE；左缘小把手整组收成 28 px 横条，舞台随之变高 ─ │
+├ 底（TimeScene）：一条底部条 [▾] · 时间标尺 · 状态串；泳道可展开（PRESENT 在顶栏，这里没有）  │
 └ 右下安静小字：FPS · DRAW CALLS · TRIS · RES（仅 3D；地图显示 FEATURES · ZOOM）        ┘
 ```
 
-- DOC-ID 规则：`ATL-{TOPIC 大写去连字符前 6}-{章节序号 2 位}`，如 `ATL-SAMPLE-02`。
+- DOC-ID 规则：`ATL-{TOPIC 大写去连字符前 6}-{章节序号 2 位}`，如 `ATL-SAMPLE-02`；它在**状态行最前面**（顶栏里不再有），手机上隐藏。
+- **顶栏三段**（`core/Hud.tsx TopBar`）：左 = 品牌 `◇ ATLAS · {学科}` + **章节号码芯片** `01 … NN`（背景章 `BG`；带 `data-chapter="<id>"`，当前章 `.on` 实心、`aria-current="step"`；点击 = 章节轨的同一动作 `goToChapter`，← → 不变）；中 = **VIEW 组**（地理 / 模型视角预设、ORBIT、REF.，数字键）加它右端的 **`▶ PRESENT 演示`**（signal 橙实心，整个 HUD 唯一的实心橙按钮，`data-mode="presentation"`、`aria-pressed`，开关 `presentation` 模式 = 键 P；控制面板 TOOLS 里仍保留同一行）；右 = 只有 LOOK ▾ 和语言 ▾。三段用 grid：外侧两列 `minmax(max-content, 1fr)`，放得下时左右等宽，VIEW 组落在顶栏正中；放不下时各按内容宽度，中段略偏。< 1180 px 宽或触屏中段独占第二行居中；< 760（手机）芯片和 VIEW / PRESENT 都隐藏，章节走已有的章节轨小方块行（桌面顶栏芯片是它的桌面版）。VIEW 组**只放视角**：SpaceScene 不再有章节预设（章节就是顶栏芯片），数字键 1 = ORBIT。
+- **底部面板整组收起**（SpaceScene 的 panel01–03）：条左缘一个 hairline 小把手（`.atlas-panels__fold`，`aria-expanded`）把三块一起收成一条 28 px 横条（`.atlas-panels__bar`，只显示 `01 ARCHITECTURE 结构 · 02 DETAIL 细节 · 03 STATE 状态`，点它展开）；状态在 HUD store 的 `panelsOpen`，按标签页存 `sessionStorage['atlas:panels']`（默认展开，**不进 URL**，粘住：换章不会展开；`__atlas.state().panels` / `setPanels`）。**舞台随之重排**：舞台（和引线 svg）的底边 = 面板条的顶边（`BottomPanels` 量出来写到 `.atlas-scene` 的 `--stage-inset`），收起后 3D 画布变高；HUD 隐藏（H / 演示）时舞台仍占满整张。阅读面板的 28 px 把手是宿主级的，两个引擎一样。LAYERS / TOOLS 控制面板自带关闭按钮，不跟这个走。
 - 所有 HUD 块带 `data-hud-panel`，缩放系数 `--k = clamp(min(W/1920, H/1080), .6, 1.6)`，各角以所在角为 transform-origin。
-- 响应式：≥1440 完整；1080 完整略小；720 底部三面板压缩成一行标签页；VIEW 组放不下就折行；< 1024 阅读面板是底部抽屉；< 760 宽（手机）保留舞台 + 章节轨折叠 + 底部控制，隐藏右上卡与三面板。任何尺寸不重叠、不横向溢出。
+- 响应式：≥1440 完整；1080 完整略小；720 底部三面板压缩成一行标签页；VIEW 组放不下就折行（< 1180 px 宽独占第二行）；< 1024 阅读面板是底部抽屉；< 760 宽（手机）保留舞台 + 章节轨折叠 + 底部控制，隐藏右上卡与三面板。任何尺寸不重叠、不横向溢出。
 - 现有 ChapterRail / InfoPanel / QuizCard / Counter 保留职责，按上面的排版重做皮肤（hairline、编号、芯片）。
 
 ## 3. 交互契约
 
-- 镜头预设：SpaceScene 每章一个，加 `ORBIT`（慢速转台）；TimeScene 只放地理预设（`WORLD`、`WHOLE AREA` 和主题的 `presets.json`），换章走章节轨、时间轴节点和 ← →；数字键 `1–N` 切预设，1.4–1.8 s easeInOut，球坐标插值不穿模；拖拽即 `FREE CAMERA`，点预设平滑收回。
+- 镜头预设：SpaceScene 放 `ORBIT`（慢速转台）、`REF.` 和 parts.json 的命名视角（换章走顶栏章节芯片、章节轨和 ← →，章节镜头不占预设）；TimeScene 只放地理预设（`WORLD`、`WHOLE AREA` 和主题的 `presets.json`），换章走章节轨、时间轴节点和 ← →；数字键 `1–N` 切预设，1.4–1.8 s easeInOut，球坐标插值不穿模；拖拽即 `FREE CAMERA`，点预设平滑收回。
 - 模式键（按引擎）：
 
 | 键 | SpaceScene | TimeScene |
@@ -71,7 +74,7 @@
 | R | REFERENCE（正侧 / 正前，拉直，2 s，再按恢复） | 版图对照（当前 vs 上一关键帧并排） |
 | L | 标注开关 | 标签开关 |
 | SPACE | 运转暂停 | 演示中：下一拍 |
-| P | — | PRESENTATION：用户翻页的节拍（点击 / → / SPACE 下一拍，← 上一拍，点节拍点跳转，不自动前进） |
+| P | PRESENTATION（同右列的节拍规则） | PRESENTATION：用户翻页的节拍（点击 / → / SPACE 下一拍，← 上一拍，点节拍点跳转，不自动前进） |
 | H | 隐藏 HUD | 同左 |
 | ← → | 章节 | 章节 |
 | ESC | 退出 focus / REFERENCE | 退出演示 / REFERENCE / 展开的参与卡 / 选中 |

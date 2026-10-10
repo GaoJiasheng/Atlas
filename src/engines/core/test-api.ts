@@ -23,6 +23,8 @@ export type AtlasState = SceneSnapshot & {
   labels: boolean;
   /** Reading panel expanded (docked column; the phone sheet ignores it). */
   reader: boolean;
+  /** Bottom panel strip expanded (one group; SpaceScene). */
+  panels: boolean;
   /** A chapter auto-run is animating the engine's time (TimeScene); always false elsewhere. */
   running: boolean;
   /** The continuous time on show (TimeScene: the playhead as a number); `null` when the engine has none. */
@@ -61,6 +63,8 @@ export interface AtlasTestApi {
   /** Debug: the last 10 narrated utterances `{ text, lang, voice, started, ended, reason }`. */
   voiceLog(): VoiceLogEntry[];
   setHud(on: boolean): void;
+  /** Expand / collapse the bottom panel strip. */
+  setPanels(on: boolean): void;
   setTheme(theme: Theme): void;
   state(): AtlasState;
   stats(): SceneStats;
@@ -148,6 +152,7 @@ export function installTestApi(deps: TestApiDeps): () => void {
     setVoice: (on) => hud.getState().controls.beats?.setVoice?.(on) ?? false,
     voiceLog: () => hud.getState().controls.beats?.voiceLog?.() ?? [],
     setHud: (on) => actions.setHud(on),
+    setPanels: (on) => actions.setPanels(on),
     setTheme: (theme) => deps.setTheme(theme),
     state: () => {
       const h = hud.getState();
@@ -158,6 +163,7 @@ export function installTestApi(deps: TestApiDeps): () => void {
         paused: h.controls.pause ? h.controls.pause.paused : null,
         labels: h.labels,
         reader: h.reader,
+        panels: h.panelsOpen,
         running: h.controls.time?.running() ?? false,
         playhead: h.controls.time?.now() ?? null,
         preset: activePreset(h, snapshot.chapter),

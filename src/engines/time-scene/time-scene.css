@@ -565,10 +565,6 @@ button.ts-co:focus-visible {
   align-items: center;
   gap: 8px;
 }
-.ts-timeline__present[aria-pressed="true"] {
-  border-color: var(--signal);
-  color: var(--signal);
-}
 .ts-timeline__lanes i {
   width: 5px;
   height: 5px;

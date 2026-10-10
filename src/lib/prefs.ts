@@ -107,3 +107,22 @@ export function setReaderExpanded(expanded: boolean): void {
     /* storage unavailable: the state lasts for this page view */
   }
 }
+
+/** Bottom panel strip (SpaceScene's three panels) collapsed / expanded: per tab, never in the URL. */
+export const PANELS_KEY = 'atlas:panels';
+
+/** `true` = expanded (the default, also when storage is unavailable). */
+export function getPanelsExpanded(): boolean {
+  try {
+    return window.sessionStorage.getItem(PANELS_KEY) !== 'collapsed';
+  } catch {
+    return true;
+  }
+}
+export function setPanelsExpanded(expanded: boolean): void {
+  try {
+    window.sessionStorage.setItem(PANELS_KEY, expanded ? 'open' : 'collapsed');
+  } catch {
+    /* storage unavailable: the state lasts for this page view */
+  }
+}

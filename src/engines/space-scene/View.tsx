@@ -1,8 +1,9 @@
 /**
  * SpaceScene view: Model3DStage (react-three-fiber, lazy-loaded so the HUD
  * appears before three.js arrives) + the technical-plate HUD content in the
- * host's slots (docs/08 §2–§3): VIEW presets (chapter cameras, ORBIT,
- * REFERENCE, then the named presets of parts.json), mode switches
+ * host's slots (docs/08 §2–§3): VIEW presets (ORBIT, REFERENCE, then the
+ * named presets of parts.json; chapters are the top bar's number chips),
+ * mode switches
  * (X / E / C / F / R / P, buttons in the overlay's control panel), part-chain
  * card, the three bottom panels, perf readout, two-column leader labels,
  * explode slider and the part inspector.
@@ -235,12 +236,8 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
   }, [ui, hudOn, presenting]);
 
   const controls = useMemo<SceneControls>(() => {
-    const chapterPresets = chapters.map((c, i) => {
-      const target = store.getState().chapterTarget(c.id);
-      return { id: c.id, label: String(i + 1).padStart(2, '0'), chapter: c.id, camera: chapterCamera(c, target.camera, target.view, file.views) };
-    });
+    // Chapters are reached through the top bar's number chips, the rail and ← →; the VIEW group holds model views only.
     const presets: ScenePreset[] = [
-      ...chapterPresets,
       { id: ORBIT_PRESET, label: t('space.preset.orbit'), title: t('space.preset.orbitTitle') },
       { id: REFERENCE_PRESET, label: t('space.preset.reference'), title: t('space.preset.referenceTitle') },
       ...named.map((p) => ({ id: p.id, label: p.label, title: p.label })),
@@ -287,7 +284,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
           ui.setState({ orbit: false });
           const own = named.find((p) => p.id === id);
           if (own?.view) set(own.view === 'exploded' ? { view: 'exploded', explode: s.explode < 0.05 ? DEFAULT_EXPLODE : s.explode } : { view: own.view });
-          const camera = own?.camera ?? chapterPresets.find((p) => p.id === id)?.camera;
+          const camera = own?.camera;
           if (camera) store.getState().applyCameraPreset(camera, { instant });
         },
       },
@@ -361,7 +358,6 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       },
     };
   }, [
-    chapters,
     store,
     file,
     named,

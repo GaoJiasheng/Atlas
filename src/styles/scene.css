@@ -58,10 +58,15 @@
   grid-row: 1 / -1;
   grid-column: 1 / -1;
 }
+.atlas-scene[data-hud="off"] .atlas-stage,
+.atlas-scene[data-hud="off"] .atlas-leaders {
+  bottom: 0;
+}
 
 .atlas-stage {
   position: absolute;
-  inset: 0;
+  /* The stage ends where the bottom panel strip starts (`--stage-inset`, set by BottomPanels); folding the strip gives the stage the room. */
+  inset: 0 0 var(--stage-inset, 0px);
   overflow: hidden;
   background: var(--stage-bg);
   /* Engines set touch-action on their own canvas (map / WebGL) as needed. */
@@ -95,7 +100,7 @@
 /* Leader-line overlay engines portal SVG into (slot `leaders`). */
 .atlas-leaders {
   position: absolute;
-  inset: 0;
+  inset: 0 0 var(--stage-inset, 0px);
   z-index: 2;
   width: 100%;
   height: 100%;
@@ -289,7 +294,7 @@
 /* VIEW: camera presets only; the row wraps onto more lines when the bar is narrow. */
 .hud-group--view {
   flex-wrap: wrap;
-  justify-content: flex-end;
+  justify-content: center;
   row-gap: calc(4 * var(--u));
   min-width: 0;
 }
@@ -351,14 +356,37 @@
   color: var(--ink);
 }
 .atlas-topbar__row {
-  display: flex;
-  flex-wrap: wrap;
+  /* Left: brand + chapter chips. Centre: VIEW + PRESENT. Right: LOOK + language.
+     Each outer track is at least as wide as its content; with room to spare they are equal, so the centre is the bar's centre. */
+  display: grid;
+  grid-template-columns: minmax(max-content, 1fr) auto minmax(max-content, 1fr);
+  grid-template-areas: "left ctl right";
   align-items: center;
   column-gap: calc(18 * var(--u));
   row-gap: calc(6 * var(--u));
   min-height: calc(32 * var(--u));
   padding: calc(6 * var(--u)) 0;
   border-bottom: 1px solid var(--hair);
+}
+.atlas-topbar__left {
+  grid-area: left;
+  display: flex;
+  align-items: center;
+  column-gap: calc(18 * var(--u));
+  min-width: 0;
+}
+.atlas-chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(3 * var(--u));
+}
+/* Chapter number chips: the current one is filled (`.on`). */
+.hud-btn.atlas-chip-btn {
+  min-width: calc(24 * var(--u));
+  padding: 0 calc(5 * var(--u));
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
 }
 .atlas-brand {
   display: inline-flex;
@@ -383,36 +411,49 @@
     min-height: var(--hit);
   }
 }
-.atlas-docid {
-  /* Never squeezed: a VIEW row that does not fit wraps onto its own line instead. */
-  flex: 1 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: calc(9 * var(--u));
-  min-width: 0;
-  overflow: hidden;
-  font: 500 calc(10.8 * var(--u)) / 1 var(--font-mono);
-  letter-spacing: 0.08em;
-  white-space: nowrap;
-}
-.atlas-docid::before,
-.atlas-docid::after {
-  content: "";
-  flex: none;
-  width: calc(5 * var(--u));
-  height: calc(5 * var(--u));
-  background: var(--ink);
-  transform: rotate(45deg);
-}
 .atlas-topbar__ctl {
-  flex: 0 1 auto;
+  grid-area: ctl;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: flex-end;
-  gap: calc(6 * var(--u)) calc(16 * var(--u));
+  justify-content: center;
+  gap: calc(6 * var(--u)) calc(14 * var(--u));
   min-width: 0;
+}
+/* PRESENT: the one solid signal-orange button of the HUD, at the right end of the VIEW group. */
+.hud-btn.hud-btn--present {
+  height: calc(22 * var(--u));
+  padding: 0 calc(13 * var(--u));
+  gap: calc(6 * var(--u));
+  border-color: var(--signal);
+  background: var(--signal);
+  color: var(--ink-on);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+}
+.hud-btn--present i {
+  font-size: calc(8.5 * var(--u));
+  color: inherit;
+}
+.hud-btn--present small {
+  font: 500 calc(10.5 * var(--u)) / 1 var(--font-hud);
+  letter-spacing: 0.08em;
+  color: inherit;
+  opacity: 0.88;
+}
+@media (hover: hover) {
+  .hud-btn.hud-btn--present:hover {
+    background: var(--signal);
+    filter: brightness(1.1);
+  }
+}
+.hud-btn.hud-btn--present[aria-pressed="true"] {
+  border-color: var(--ink);
+  background: var(--ink);
+}
+.hud-btn.hud-btn--present:focus-visible {
+  outline-color: var(--ink);
+  outline-offset: 2px;
 }
 .atlas-topbar__sub {
   display: flex;
@@ -431,6 +472,12 @@
   text-transform: uppercase;
   white-space: nowrap;
 }
+.atlas-docid {
+  margin-right: calc(2 * var(--u));
+  font-family: var(--font-mono);
+  letter-spacing: 0.08em;
+  color: var(--ink-2);
+}
 .atlas-hint {
   display: flex;
   gap: calc(14 * var(--u));
@@ -447,6 +494,20 @@
   color: var(--ink-2);
 }
 
+/* Narrower than ~1180 px (or on touch, where every chip is a 44 px target) the centre does not fit between the chips and LOOK: it takes its own row, centred. */
+@media (max-width: 1179px), (pointer: coarse) {
+  .atlas-topbar__row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "left right"
+      "ctl ctl";
+  }
+  .atlas-topbar__left {
+    flex-wrap: wrap;
+    row-gap: calc(6 * var(--u));
+  }
+}
+
 /* Look + language dropdowns: one hairline menu per control (Dropdown.tsx), inline at every width. */
 .atlas-toggles {
   position: relative;
@@ -454,9 +515,10 @@
   align-items: center;
   gap: calc(8 * var(--u));
 }
-/* When a long VIEW row wraps the top bar, the menus still hang from the right edge. */
+/* The menus hang from the right edge of the bar. */
 .atlas-toggles--hud {
-  margin-left: auto;
+  grid-area: right;
+  justify-self: end;
 }
 .atlas-dd {
   position: relative;
@@ -723,6 +785,161 @@
 }
 /* Engine controls keep their 44px touch size and only grow on large screens. */
 .atlas-stage__overlay,
+.atlas-bottombar {
+  zoom: var(--kb);
+}
+
+/* Bottom dock: perf readout, three panels, engine bar */
+.atlas-perf {
+  align-self: flex-end;
+  font: 500 calc(10.6 * var(--u)) / 1 var(--font-mono);
+  letter-spacing: 0.08em;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+.atlas-perf:empty {
+  display: none;
+}
+.atlas-panels {
+  position: relative;
+}
+/* The strip folds as one group (state `panelsOpen`, sessionStorage `atlas:panels`): a hairline handle on its left edge when open, a 28 px bar with the three titles when folded. */
+.atlas-panels__fold,
+.atlas-panels__bar {
+  display: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--line);
+  background: var(--panel-solid);
+  color: var(--ink-2);
+  font: inherit;
+  cursor: pointer;
+  pointer-events: auto;
+}
+.atlas-panels__fold {
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: calc(14 * var(--u));
+  height: calc(64 * var(--u));
+  border-right: 0;
+  border-radius: var(--radius-hud) 0 0 var(--radius-hud);
+  transform: translateY(-50%);
+}
+.atlas-panels__fold::after {
+  content: "";
+  position: absolute;
+  inset: -10px -8px -10px -12px;
+}
+.atlas-panels__fold i,
+.atlas-panels__bar i {
+  flex: none;
+  width: 5px;
+  height: 5px;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: translateY(-1px) rotate(45deg);
+}
+.atlas-panels__bar i {
+  transform: translateY(1px) rotate(-135deg);
+}
+@media (hover: hover) {
+  .atlas-panels__fold:hover,
+  .atlas-panels__bar:hover {
+    color: var(--signal);
+  }
+}
+.atlas-panels__fold:focus-visible,
+.atlas-panels__bar:focus-visible {
+  outline: 1px solid var(--signal);
+  outline-offset: -2px;
+}
+.atlas-panels__bar {
+  position: relative;
+  align-items: center;
+  gap: calc(22 * var(--u));
+  width: 100%;
+  height: max(28px, calc(28 * var(--u)));
+  padding: 0 calc(12 * var(--u));
+  border-color: var(--hair);
+  border-radius: var(--radius-hud);
+  background: var(--panel);
+  color: var(--ink);
+  text-align: left;
+  white-space: nowrap;
+}
+@media (pointer: coarse) {
+  .atlas-panels__bar::after {
+    content: "";
+    position: absolute;
+    inset: calc(28px - var(--hit)) 0 0;
+  }
+}
+.atlas-panels__name {
+  display: inline-flex;
+  align-items: baseline;
+  gap: calc(8 * var(--u));
+  font: 600 calc(var(--hud-font-body) * var(--u)) / 1 var(--font-hud);
+  letter-spacing: var(--hud-track);
+}
+.atlas-panels__name b {
+  font: 500 calc(var(--hud-font-body) * var(--u)) / 1 var(--font-mono);
+  letter-spacing: 0.04em;
+  color: var(--ink-3);
+}
+.atlas-panels__name em {
+  font-style: normal;
+  font-weight: 400;
+  font-size: calc(11.2 * var(--u));
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+}
+.atlas-panels[data-collapsed] > .atlas-panels__fold,
+.atlas-panels[data-collapsed] > .atlas-panels__body {
+  display: none;
+}
+.atlas-panels[data-collapsed] > .atlas-panels__bar {
+  display: flex;
+}
+.atlas-panels__tabs {
+  display: none;
+  gap: calc(4 * var(--u));
+  pointer-events: auto;
+}
+.atlas-panels__grid {
+  display: grid;
+  grid-template-columns: 1.55fr 1fr 1fr;
+  gap: calc(12 * var(--u));
+  height: calc(168 * var(--u));
+}
+.atlas-panels__grid:has(> :nth-child(2):last-child) {
+  grid-template-columns: 1.55fr 1fr;
+}
+.atlas-panels__grid:has(> :only-child) {
+  grid-template-columns: 1fr;
+}
+/* Short screens (720p): the three panels collapse into one row of tabs. */
+@media (max-height: 820px) {
+  .atlas-panels__tabs {
+    display: flex;
+  }
+  .atlas-panels__grid {
+    display: block;
+    height: auto;
+  }
+  .atlas-panels__panel {
+    display: none;
+  }
+  .atlas-panels__panel[data-active] {
+    display: flex;
+    height: calc(150 * var(--u));
+    margin-top: calc(6 * var(--u));
+  }
+}
+
 .atlas-bottombar {
   zoom: var(--kb);
 }
@@ -1039,26 +1256,20 @@
     padding-right: max(12px, env(safe-area-inset-right));
   }
   .atlas-topbar__row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     column-gap: 8px;
     row-gap: 8px;
     padding: 4px 0 8px;
   }
   .atlas-brand {
-    order: 1;
     font-size: 11px;
   }
-  .atlas-docid {
-    display: none;
-  }
-  .atlas-toggles--hud {
-    order: 2;
-    margin-left: auto;
-  }
+  /* Phones: the chapter chips are the rail's chip row below the title; VIEW and PRESENT need keys or a mouse. */
+  .atlas-chips,
   .atlas-topbar__ctl {
-    order: 3;
-    flex-basis: 100%;
-    justify-content: flex-start;
-    gap: 8px 12px;
+    display: none;
   }
   .hud-btn {
     height: 36px;
@@ -1088,7 +1299,8 @@
   .hud-group__label {
     font-size: 10px;
   }
-  .atlas-hint {
+  .atlas-hint,
+  .atlas-docid {
     display: none;
   }
   .atlas-status {
