@@ -506,6 +506,12 @@ async function runKeys(s: Session, o: Options, report: RunReport): Promise<void>
     console.log(`  key ${JSON.stringify(r.key).padEnd(13)} ${r.type.padEnd(8)} ${r.name.padEnd(14)} ${r.ok ? 'OK' : 'FAIL'}${r.note ? '  ' + r.note : ''}`);
   };
 
+  // A lesson keeps the child's work in memory (--tasks finished every sub-step): start the key checks from a fresh page.
+  if (await s.ev(() => typeof (window.__atlas!.engine as { tasks?: unknown }).tasks === 'function')) {
+    await page.reload();
+    await page.waitForFunction(() => window.__atlas !== undefined, null, { timeout: 60_000 });
+    await page.evaluate(() => window.__atlas!.ready);
+  }
   const firstChapter = (await s.ev(() => window.__atlas!.chapters()))[0];
   await s.apply({ chapter: firstChapter, wait: 800 });
 

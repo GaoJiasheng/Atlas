@@ -3,19 +3,45 @@ id: unit-fractions
 order: 2
 title: { en: "One of the equal parts", zh: "单位分数" }
 state:
-  summary: { en: "You can cut a whole into equal parts. Now name one of them.", zh: "你会把整体平均分了。现在给其中一份起名字。" }
+  summary: { en: "You can cut a whole into equal parts; now name one of them.", zh: "你会把整体平均分了，现在给其中一份起名字。" }
 ---
-
-{/* Draft explanation: the text step (docs/15 §6.3, T) writes the final 120–200 words / 200–320 字. */}
 
 <Lang en>
 
-One of 4 equal parts is one quarter, written <Frac n={1} d={4} />. This is a <Term id="unit-fraction">unit fraction</Term>. The bottom number, the <Term id="denominator">denominator</Term>, counts the equal parts in the whole. The top number, the <Term id="numerator">numerator</Term>, counts the parts we take.
+Cut a whole into equal parts and take one of them. One of 2 equal parts is one half, written <Frac n={1} d={2} />. One of 5 equal parts is one fifth, <Frac n={1} d={5} />. A fraction with 1 on top is a <Term id="unit-fraction">unit fraction</Term>: it names one part.
+
+A fraction has two numbers. The bottom number, the <Term id="denominator">denominator</Term>, counts all the equal parts in the whole. The top number, the <Term id="numerator">numerator</Term>, counts the parts we take.
+
+Find the bottom number first, and count every part of the whole, shaded and not shaded. A common mistake is to count only the parts that are not shaded. A strip with 1 part shaded and 4 parts not shaded has 5 parts in all, so it shows <Frac n={1} d={5} />, not <Frac n={1} d={4} />. Another mistake is to swap the two numbers. The whole always goes at the bottom.
+
+The parts must still be equal. Three parts of different sizes do not make thirds.
+
+Now try: <Task id="prata-one-quarter">shade one part of the prata</Task>, then write and choose unit fractions.
+
+<More title={{ en: "Saying fractions", zh: "分数怎么读" }}>
+
+In English we say the top number first: one half, one third, one quarter, one fifth. In Chinese the bottom number comes first: 二分之一 means "of 2 parts, 1". The Chinese order follows the counting order of this step: first the parts in the whole, then the parts we take.
+
+</More>
 
 </Lang>
 
 <Lang zh>
 
-4 个相等部分中的一份是四分之一，写作 <Frac n={1} d={4} />。这是一个<Term id="unit-fraction">单位分数</Term>。下面的数叫<Term id="denominator">分母</Term>，数整体平均分成几份；上面的数叫<Term id="numerator">分子</Term>，数取了几份。
+把一个整体平均分，取其中一份。平均分成 2 份，其中一份是二分之一，写作 <Frac n={1} d={2} />；平均分成 5 份，其中一份是五分之一，写作 <Frac n={1} d={5} />。分子是 1 的分数叫<Term id="unit-fraction">单位分数</Term>，它表示其中一份。
+
+一个分数有两个数。下面的数叫<Term id="denominator">分母</Term>，数整体一共平均分成几份；上面的数叫<Term id="numerator">分子</Term>，数取了几份。中间的横线叫分数线。
+
+先找分母，要数整体的每一份，涂了的和没涂的都算。常见的错误是只数没涂的份。一条纸条涂了 1 份、没涂 4 份，一共是 5 份，所以表示 <Frac n={1} d={5} />，不是 <Frac n={1} d={4} />。另一个错误是把两个数写反了：整体的份数总是写在下面。
+
+各份还必须一样大。大小不同的 3 份，不是三分之一。
+
+现在试试：先<Task id="prata-one-quarter">在 prata 上涂一份</Task>，再写一写、选一选单位分数。
+
+<More title={{ en: "Saying fractions", zh: "分数怎么读" }}>
+
+英语先读分子：one half、one third、one quarter。中文先读分母：「二分之一」就是「分成 2 份，取 1 份」。中文的读法正好是这一步的数法：先数整体有几份，再数取了几份。
+
+</More>
 
 </Lang>

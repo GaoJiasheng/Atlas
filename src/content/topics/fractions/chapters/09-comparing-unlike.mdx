@@ -6,16 +6,46 @@ state:
   summary: { en: "To compare different-size parts, make them the same size first.", zh: "份的大小不同，先化成同样大的份再比。" }
 ---
 
-{/* Draft explanation: the text step (docs/15 §6.3, T) writes the final 120–200 words / 200–320 字. */}
-
 <Lang en>
 
-Thirds and quarters are different sizes, so first rename both in twelfths: <Frac n={2} d={3} /> = <Frac n={8} d={12} /> and <Frac n={3} d={4} /> = <Frac n={9} d={12} />. Then compare the twelfths. Both bars stay the same length: the same whole.
+Fractions with different denominators are unlike fractions. Their parts are different sizes, so counting parts does not tell you which is greater. First make the parts the same size.
+
+Compare <Frac n={1} d={2} /> and <Frac n={3} d={5} />. 2 and 5 both go into 10, so cut both bars into tenths: <Frac n={1} d={2} /> = <Frac n={5} d={10} /> and <Frac n={3} d={5} /> = <Frac n={6} d={10} />. Now the parts are the same size, and 5 tenths are fewer than 6 tenths, so <Frac n={1} d={2} /> &lt; <Frac n={3} d={5} />.
+
+When one denominator goes into the other, rename only one fraction. To compare <Frac n={2} d={5} /> and <Frac n={7} d={10} />, write <Frac n={2} d={5} /> = <Frac n={4} d={10} />, which is less than <Frac n={7} d={10} />.
+
+Two shortcuts give wrong answers. Comparing only the top numbers fails: <Frac n={4} d={10} /> has the bigger top number, yet it is smaller than <Frac n={1} d={2} />. Looking only at the gap to a whole fails too: <Frac n={1} d={2} /> is one part short of a whole and <Frac n={3} d={5} /> is two parts short, but a missing half is bigger than two missing fifths.
+
+To order three fractions, rename them all in the same parts, then order the tops.
+
+Now try: <Task id="thirds-and-quarters">compare thirds and quarters</Task>, then compare and order.
+
+<More title={{ en: "Same whole, same length", zh: "同一个整体，一样长" }}>
+
+Every pair of bars on the stage is the same length, because both fractions are parts of the same whole. Lining them up, one under the other, is a quick first check: the shaded part that reaches further to the right is greater.
+
+</More>
 
 </Lang>
 
 <Lang zh>
 
-三分之一和四分之一大小不同，先都换成十二分之几：<Frac n={2} d={3} /> = <Frac n={8} d={12} />，<Frac n={3} d={4} /> = <Frac n={9} d={12} />。再比十二分之几。两条一样长：是同一个整体。
+分母不同的分数叫异分母分数。它们的每份大小不同，只数份数看不出哪个大。要先化成同样大的份。
+
+比较 <Frac n={1} d={2} /> 和 <Frac n={3} d={5} />。2 和 5 都能变成 10，所以把两条都分成十分之几：<Frac n={1} d={2} /> = <Frac n={5} d={10} />，<Frac n={3} d={5} /> = <Frac n={6} d={10} />。现在每份一样大，5 个十分之一比 6 个十分之一少，所以 <Frac n={1} d={2} /> &lt; <Frac n={3} d={5} />。
+
+如果一个分母是另一个的倍数，只要换一个分数。比较 <Frac n={2} d={5} /> 和 <Frac n={7} d={10} />：<Frac n={2} d={5} /> = <Frac n={4} d={10} />，比 <Frac n={7} d={10} /> 小。
+
+有两种捷径会出错。只比分子不行：<Frac n={4} d={10} /> 的分子大，却比 <Frac n={1} d={2} /> 小。只看差几份到一个整体也不行：<Frac n={1} d={2} /> 差一份，<Frac n={3} d={5} /> 差两份，但缺的一个二分之一比缺的两个五分之一还多。
+
+给三个分数排序，先把它们都换成同样大的份，再按分子排。
+
+现在试试：先<Task id="thirds-and-quarters">比较三分之几和四分之几</Task>，再比一比、排一排。
+
+<More title={{ en: "Same whole, same length", zh: "同一个整体，一样长" }}>
+
+舞台上每一对条都一样长，因为两个分数是同一个整体的部分。把两条上下对齐，可以先粗看一眼：涂色部分伸得更靠右的那个大。
+
+</More>
 
 </Lang>

@@ -6,16 +6,42 @@ state:
   summary: { en: "In the same whole, compare the size of the parts.", zh: "在同一个整体里，比一比每份有多大。" }
 ---
 
-{/* Draft explanation: the text step (docs/15 §6.3, T) writes the final 120–200 words / 200–320 字. */}
-
 <Lang en>
 
-We can only compare fractions of the same whole. Cut the same whole into more parts and each part gets smaller, so <Frac n={1} d={3} /> is greater than <Frac n={1} d={5} />. When the parts are the same size, as in <Term id="like-fractions">like fractions</Term>, more parts means more.
+To compare two fractions, look at them in the same whole. A fraction wall helps: its rows are all the same length, so every row is the same whole, cut a different way.
+
+For unit fractions, compare the size of one part. Cut a whole into 2 and each part is <Frac n={1} d={2} />. Cut the same whole into 4 and each part is <Frac n={1} d={4} />, only half as wide. More parts in the same whole means smaller parts, so <Frac n={1} d={2} /> is greater than <Frac n={1} d={4} />.
+
+A bigger bottom number does not make a bigger fraction. 4 is more than 2, but a quarter is smaller than a half. This is the most common mistake in comparing fractions.
+
+When the bottom numbers are the same, as in <Term id="like-fractions">like fractions</Term>, the parts are the same size. Then count the parts. <Frac n={2} d={5} /> is smaller than <Frac n={4} d={5} />, because 2 fifths are fewer than 4 fifths. We write <Frac n={2} d={5} /> &lt; <Frac n={4} d={5} />; the wide side of the sign faces the greater number.
+
+Now try: <Task id="greater-third-or-fifth">tap the greater fraction</Task>, then order and compare.
+
+<More title={{ en: "Why the same whole matters", zh: "为什么要同一个整体" }}>
+
+Half of a small prata can be less than a quarter of a very large one. That does not make <Frac n={1} d={4} /> greater than <Frac n={1} d={2} />: the two wholes are different. Fractions can only be compared when they are parts of the same whole, which is why every comparison in this lesson uses bars of the same length.
+
+</More>
 
 </Lang>
 
 <Lang zh>
 
-只能在同一个整体下比较分数。同一个整体分得越多，每份越小，所以 <Frac n={1} d={3} /> 比 <Frac n={1} d={5} /> 大。每份一样大时（<Term id="like-fractions">同分母分数</Term>），份数多的就大。
+比较两个分数，要放在同一个整体下看。分数墙能帮忙：它的每一行一样长，所以每一行都是同一个整体，只是分法不同。
+
+比较单位分数，就比一份有多大。把一个整体平均分成 2 份，每份是 <Frac n={1} d={2} />；把同一个整体平均分成 4 份，每份是 <Frac n={1} d={4} />，只有前者一半宽。同一个整体分得越多，每份越小，所以 <Frac n={1} d={2} /> 比 <Frac n={1} d={4} /> 大。
+
+分母大，分数不一定大。4 比 2 大，可是四分之一比二分之一小。这是比较分数时最常见的错误。
+
+分母相同时，也就是<Term id="like-fractions">同分母分数</Term>，每份一样大，这时就数份数。<Frac n={2} d={5} /> 比 <Frac n={4} d={5} /> 小，因为 2 个五分之一比 4 个五分之一少。写作 <Frac n={2} d={5} /> &lt; <Frac n={4} d={5} />，符号开口的一边朝着大的数。
+
+现在试试：先<Task id="greater-third-or-fifth">点出大的那个分数</Task>，再排一排、比一比。
+
+<More title={{ en: "Why the same whole matters", zh: "为什么要同一个整体" }}>
+
+一张小 prata 的一半，可能比一张很大的 prata 的四分之一还少。但这并不说明 <Frac n={1} d={4} /> 比 <Frac n={1} d={2} /> 大：两个整体不一样。只有同一个整体的部分才能比较分数，所以本课所有的比较，用的都是一样长的条。
+
+</More>
 
 </Lang>

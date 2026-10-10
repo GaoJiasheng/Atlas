@@ -6,16 +6,46 @@ state:
   summary: { en: "Join the parts until they cannot be joined evenly again.", zh: "把小份合起来，合到不能再平均合并为止。" }
 ---
 
-{/* Draft explanation: the text step (docs/15 §6.3, T) writes the final 120–200 words / 200–320 字. */}
-
 <Lang en>
 
-Joining equal groups of parts divides the top and the bottom by the same number: <Frac n={6} d={8} /> = <Frac n={3} d={4} />. When no number except 1 divides both, the fraction is in its <Term id="simplest-form">simplest form</Term>.
+Folding and cutting make more, smaller parts. Joining goes the other way: it makes fewer, bigger parts, and the amount stays the same.
+
+Take a strip with <Frac n={2} d={4} /> shaded. Join the parts in twos. The 4 parts become 2, and the 2 shaded parts become 1, so <Frac n={2} d={4} /> = <Frac n={1} d={2} />. Joining in twos divides the top and the bottom by 2.
+
+You can only join in groups that come out evenly, for all the parts and for the shaded parts. 9 parts can be joined in threes, but not in twos.
+
+Keep joining until no group works any more. Then the fraction is in its <Term id="simplest-form">simplest form</Term>: no number except 1 divides both the top and the bottom.
+
+A common slip is to stop too early. <Frac n={6} d={12} /> = <Frac n={3} d={6} /> is true, but 3 and 6 can both still be divided by 3, so the simplest form is <Frac n={1} d={2} />. Dividing by the biggest number that works, here 6, does it in one go.
+
+Now try: <Task id="join-six-eighths">join the parts of a strip</Task>, then simplify and choose.
+
+<More title={{ en: "Why simplest form?", zh: "为什么要化成最简分数？" }}>
+
+The simplest form is the shortest name for an amount, so it is the easiest to picture and to compare. Singapore test papers often say "Give your answer in the simplest form". When a question says that, an equal fraction that can still be simplified is not the full answer. When it does not, any equal fraction is right.
+
+</More>
 
 </Lang>
 
 <Lang zh>
 
-把相等的几份合成一份，分子和分母就同时除以同一个数：<Frac n={6} d={8} /> = <Frac n={3} d={4} />。除了 1 以外没有数能同时整除分子和分母时，这个分数就是<Term id="simplest-form">最简分数</Term>。
+对折、切分，会得到更多、更小的份。合并正好相反：得到更少、更大的份，而多少不变。
+
+一条纸条涂了 <Frac n={2} d={4} />。把每两份合成一份：4 份变成 2 份，涂色的 2 份变成 1 份，所以 <Frac n={2} d={4} /> = <Frac n={1} d={2} />。两份合成一份，就是分子和分母同时除以 2。
+
+只有能刚好分完的组才能合：全部的份要能分完，涂色的份也要能分完。9 份可以三份三份地合，但不能两份两份地合。
+
+一直合，合到哪种分法都不行为止。这时的分数就是<Term id="simplest-form">最简分数</Term>：除了 1 以外，没有数能同时整除分子和分母。
+
+常见的失误是停得太早。<Frac n={6} d={12} /> = <Frac n={3} d={6} /> 没错，但 3 和 6 还能同时被 3 整除，所以最简分数是 <Frac n={1} d={2} />。用能同时整除的最大的数去除，这里是 6，一步就到。
+
+现在试试：先<Task id="join-six-eighths">把纸条的份合起来</Task>，再化简、再选一选。
+
+<More title={{ en: "Why simplest form?", zh: "为什么要化成最简分数？" }}>
+
+最简分数是一个量最短的名字，最容易想象，也最容易比较。新加坡的考卷常写「答案化成最简分数」（Give your answer in the simplest form）。题目这样要求时，还能化简的等值分数不算完整的答案；没有这样要求时，写哪个等值分数都对。
+
+</More>
 
 </Lang>

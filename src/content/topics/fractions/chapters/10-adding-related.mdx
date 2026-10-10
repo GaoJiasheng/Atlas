@@ -6,16 +6,50 @@ state:
   summary: { en: "Turn the bigger parts into smaller ones, then add.", zh: "先把大的份化成小的份，再相加。" }
 ---
 
-{/* Draft explanation: the text step (docs/15 §6.3, T) writes the final 120–200 words / 200–320 字. */}
-
 <Lang en>
 
-Halves and quarters are <Term id="related-fractions">related fractions</Term>: each half is 2 quarters. Rename the half first, then add quarters to quarters: <Frac n={1} d={2} /> + <Frac n={1} d={4} /> = <Frac n={2} d={4} /> + <Frac n={1} d={4} /> = <Frac n={3} d={4} />. A model drawing of the whole helps with word problems.
+Halves and eighths are <Term id="related-fractions">related fractions</Term>: 8 is a multiple of 2, so every half can be cut into 4 eighths. Parts of different sizes cannot be counted together, so first rename the bigger parts in the smaller ones.
+
+To work out <Frac n={1} d={2} /> + <Frac n={3} d={8} />, cut the half into eighths. <Frac n={1} d={2} /> = <Frac n={4} d={8} />. Now add eighths to eighths:
+
+<Frac n={1} d={2} /> + <Frac n={3} d={8} /> = <Frac n={4} d={8} /> + <Frac n={3} d={8} /> = <Frac n={7} d={8} />
+
+Two mistakes are common. Adding the tops and the bottoms gives <Frac n={4} d={10} />, which is less than the half we started with. Adding without renaming counts the half as 1 eighth and gives <Frac n={4} d={8} />; but a half is 4 eighths, not 1.
+
+When a question asks for the simplest form, finish by joining parts: <Frac n={1} d={6} /> + <Frac n={1} d={2} /> = <Frac n={1} d={6} /> + <Frac n={3} d={6} /> = <Frac n={4} d={6} /> = <Frac n={2} d={3} />.
+
+For a word problem, draw a model: one bar for the whole, a piece for each amount, and a bracket with a question mark over the total.
+
+Now try: <Task id="add-half-and-quarter">add a half and a quarter</Task>, then the other two tasks.
+
+<More title={{ en: "Drawing the model", zh: "画模型图" }}>
+
+Model drawing is the Singapore way of picturing a word problem. "Siti used <Frac n={1} d={4} /> of a bag of flour for kueh and <Frac n={3} d={8} /> for bread." Draw one bar for the bag, cut it into eighths, mark 2 eighths for the kueh and 3 for the bread. The bracket covers <Frac n={5} d={8} /> of the bag.
+
+</More>
 
 </Lang>
 
 <Lang zh>
 
-二分之一和四分之一是<Term id="related-fractions">相关分数（分母成倍数）</Term>：每个二分之一是 2 个四分之一。先把二分之一换掉，再把四分之几加起来：<Frac n={1} d={2} /> + <Frac n={1} d={4} /> = <Frac n={2} d={4} /> + <Frac n={1} d={4} /> = <Frac n={3} d={4} />。做文字题时，画一张整体的模型图会有帮助。
+二分之几和八分之几是<Term id="related-fractions">相关分数（分母成倍数）</Term>：8 是 2 的倍数，每个二分之一都能分成 4 个八分之一。大小不同的份不能直接合起来数，所以先把大的份换成小的份。
+
+计算 <Frac n={1} d={2} /> + <Frac n={3} d={8} />，先把一半分成八分之几：<Frac n={1} d={2} /> = <Frac n={4} d={8} />。再把八分之几加起来：
+
+<Frac n={1} d={2} /> + <Frac n={3} d={8} /> = <Frac n={4} d={8} /> + <Frac n={3} d={8} /> = <Frac n={7} d={8} />
+
+有两个常见的错误。把分子、分母分别相加，得到 <Frac n={4} d={10} />，比原来的一半还少。不换就直接加，把一半当成 1 个八分之一，得到 <Frac n={4} d={8} />；可是一半是 4 个八分之一，不是 1 个。
+
+题目要求最简分数时，最后还要合并：<Frac n={1} d={6} /> + <Frac n={1} d={2} /> = <Frac n={1} d={6} /> + <Frac n={3} d={6} /> = <Frac n={4} d={6} /> = <Frac n={2} d={3} />。
+
+做文字题时，画一张模型图：一条代表整体，每个量画一段，总数上面画一个括号，写上问号。
+
+现在试试：先<Task id="add-half-and-quarter">把一半和四分之一相加</Task>，再做另外两题。
+
+<More title={{ en: "Drawing the model", zh: "画模型图" }}>
+
+模型图是新加坡解文字题的常用画法。「Siti 用一袋面粉的 <Frac n={1} d={4} /> 做糕，<Frac n={3} d={8} /> 做面包。」画一条代表这袋面粉，分成八分之几，糕占 2 个八分之一，面包占 3 个。括号盖住的是这袋面粉的 <Frac n={5} d={8} />。
+
+</More>
 
 </Lang>

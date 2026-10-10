@@ -394,12 +394,12 @@
           },
           "hints": [
             {
-              "en": "Tap any one part.",
-              "zh": "点任意一份。"
+              "en": "The prata has 4 equal parts. You need one of them.",
+              "zh": "这张 prata 平均分成 4 份，要涂其中一份。"
             },
             {
-              "en": "Only one part should be shaded.",
-              "zh": "只涂一份。"
+              "en": "Tap any one part, and only one.",
+              "zh": "点任意一份，只点一份。"
             }
           ],
           "feedback": {
@@ -1592,8 +1592,8 @@
               {
                 "when": "additive-equivalence",
                 "say": {
-                  "en": "The parts were cut into 4 times as many, not 9 more. Multiply the top and the bottom by the same number; do not add.",
-                  "zh": "每份被分成了原来的 4 倍那么多，不是多了 9 份。分子和分母要乘同一个数，不是加。"
+                  "en": "Renaming multiplies; it does not add. 3 × 4 = 12, so the top is 2 × 4. Adding the same number to the top and the bottom changes the amount.",
+                  "zh": "换名字要用乘法，不是加法。3 × 4 = 12，所以分子是 2 × 4。分子分母加上同一个数，分数的大小就变了。"
                 },
                 "sample": "11/12,8/9"
               }
@@ -2327,8 +2327,8 @@
             }
           },
           "prompt": {
-            "en": "Aisha used {3/10} of a ribbon for a bow and {2/5} for a bookmark. How much did she use?",
-            "zh": "Aisha 用一条丝带的 {3/10} 打蝴蝶结，又用 {2/5} 做书签。她一共用了几分之几？"
+            "en": "Aisha used {3/10} of a ribbon for a bow and {2/5} for a bookmark. How much altogether?",
+            "zh": "Aisha 用丝带的 {3/10} 打蝴蝶结，{2/5} 做书签。她一共用了几分之几？"
           },
           "guide": {
             "en": "The whole bar is the ribbon. {2/5} is the same as {4/10}, so both pieces can be counted in tenths. Add the tenths.",
@@ -2536,7 +2536,7 @@
             ]
           },
           "prompt": {
-            "en": "A pandan cake is cut into 12 equal slices. {5/12} is eaten. What fraction is left?",
+            "en": "A pandan cake has 12 equal slices. {5/12} is eaten. What fraction is left?",
             "zh": "一个斑兰蛋糕平均切成 12 块，吃掉了 {5/12}，还剩几分之几？"
           },
           "guide": {
@@ -2634,7 +2634,7 @@
             }
           },
           "prompt": {
-            "en": "Ravi drank {3/4} of a bottle of water and Wei Jie drank {5/8}. How much more did Ravi drink?",
+            "en": "From same-size bottles, Ravi drank {3/4} and Wei Jie {5/8}. How much more did Ravi drink?",
             "zh": "Ravi 喝了 {3/4} 瓶，Wei Jie 喝了 {5/8} 瓶。Ravi 多喝几分之几瓶？"
           },
           "guide": {
@@ -3352,8 +3352,8 @@
           }
         },
         "prompt": {
-          "en": "Aisha ate {1/6} of a pandan cake and her brother ate {5/12}. How much did they eat?",
-          "zh": "Aisha 吃了一个斑兰蛋糕的 {1/6}，弟弟吃了 {5/12}。他们一共吃了几分之几？"
+          "en": "Aisha ate {1/6} of a pandan cake and her brother {5/12}. How much in all?",
+          "zh": "Aisha 吃了斑兰蛋糕的 {1/6}，弟弟吃了 {5/12}。两人一共吃了几分之几？"
         },
         "guide": {
           "en": "Each sixth is 2 twelfths, so {1/6} = {2/12}. Add the twelfths.",
@@ -3486,8 +3486,8 @@
           }
         ],
         "prompt": {
-          "en": "Wei Jie says {1/5} is greater than {1/3} because 5 is more than 3. Choose a picture and a reason.",
-          "zh": "Wei Jie 说 {1/5} 比 {1/3} 大，因为 5 比 3 大。选一幅图和一句理由。"
+          "en": "Wei Jie says {1/5} > {1/3} because 5 > 3. Choose a picture and a reason.",
+          "zh": "Wei Jie 说 {1/5} > {1/3}，因为 5 > 3。选一幅图和一句理由。"
         },
         "guide": {
           "en": "Compare fractions of the same whole only. Under one whole, a fifth is narrower than a third.",
