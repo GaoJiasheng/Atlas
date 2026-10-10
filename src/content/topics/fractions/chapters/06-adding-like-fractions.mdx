@@ -6,16 +6,50 @@ state:
   summary: { en: "Parts of the same size can be added and taken away.", zh: "一样大的份可以直接相加、相减。" }
 ---
 
-{/* Draft explanation: the text step (docs/15 §6.3, T) writes the final 120–200 words / 200–320 字. */}
-
 <Lang en>
 
-Sevenths plus sevenths are still sevenths: <Frac n={2} d={7} /> + <Frac n={3} d={7} /> = <Frac n={5} d={7} />. Only the number of parts changes; the size of each part, the denominator, stays the same. Taking away works the same way.
+Like fractions have parts of the same size, so we can add them by counting parts. Take a strip cut into 5 equal parts with 1 part shaded: that is <Frac n={1} d={5} />. Shade 2 more parts. Now 3 parts are shaded, each one a fifth:
+
+<Frac n={1} d={5} /> + <Frac n={2} d={5} /> = <Frac n={3} d={5} />
+
+Fifths plus fifths are still fifths. Only the number of parts changes. The size of each part does not change, so the bottom number stays 5.
+
+A common mistake is to add the bottom numbers too and write <Frac n={3} d={10} />. Look at the strip: nobody cut it into 10 parts. It still has 5 parts, and 3 of them are shaded.
+
+Taking away works the same way. From <Frac n={4} d={5} />, cross out 1 fifth and 3 fifths are left: <Frac n={4} d={5} /> − <Frac n={1} d={5} /> = <Frac n={3} d={5} />. The parts left are still fifths.
+
+In Primary 2 the answer always stays within one whole.
+
+Now try: <Task id="add-sevenths">add parts of a strip</Task>, then take some away.
+
+<More title={{ en: "Saying it in words", zh: "用话来说" }}>
+
+Saying the sum in words makes the mistake easy to see: "1 fifth and 2 fifths make 3 fifths", just as 1 apple and 2 apples make 3 apples. "Fifths" is the name of the parts, like "apples". The name stays the same; only the number in front of it changes.
+
+</More>
 
 </Lang>
 
 <Lang zh>
 
-七分之几加七分之几，还是七分之几：<Frac n={2} d={7} /> + <Frac n={3} d={7} /> = <Frac n={5} d={7} />。变的只是份数，每份的大小（分母）不变。减法也是一样。
+同分母分数的每份一样大，所以相加时只要数份数。一条纸条平均分成 5 份，涂了 1 份，就是 <Frac n={1} d={5} />。再涂 2 份，现在一共涂了 3 份，每份是五分之一：
+
+<Frac n={1} d={5} /> + <Frac n={2} d={5} /> = <Frac n={3} d={5} />
+
+五分之几加五分之几，还是五分之几。变的只是份数，每份的大小没有变，所以分母还是 5。
+
+常见的错误是把分母也相加，写成 <Frac n={3} d={10} />。看看纸条：没有人把它分成 10 份。它还是 5 份，其中 3 份涂了色。
+
+减法也一样。从 <Frac n={4} d={5} /> 里划掉 1 个五分之一，还剩 3 个五分之一：<Frac n={4} d={5} /> − <Frac n={1} d={5} /> = <Frac n={3} d={5} />。剩下的份还是五分之一。
+
+小二的加减，结果都在一个整体之内。
+
+现在试试：先<Task id="add-sevenths">在纸条上再涂几份</Task>，再试试拿走几份。
+
+<More title={{ en: "Saying it in words", zh: "用话来说" }}>
+
+把算式说出来，错误就容易看出来：「1 个五分之一加 2 个五分之一，是 3 个五分之一」，就像 1 个苹果加 2 个苹果是 3 个苹果。「五分之一」是每份的名字，就像「苹果」；名字不变，变的只是前面的个数。
+
+</More>
 
 </Lang>

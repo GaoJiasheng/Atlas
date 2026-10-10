@@ -6,16 +6,50 @@ state:
   summary: { en: "Turn the bigger parts into smaller ones, then take away.", zh: "先把大的份化成小的份，再相减。" }
 ---
 
-{/* Draft explanation: the text step (docs/15 §6.3, T) writes the final 120–200 words / 200–320 字. */}
-
 <Lang en>
 
-A half is 4 eighths, so <Frac n={7} d={8} /> − <Frac n={1} d={2} /> = <Frac n={7} d={8} /> − <Frac n={4} d={8} /> = <Frac n={3} d={8} />. To find how much is left of a whole, write the whole in the same parts: 1 = <Frac n={12} d={12} />.
+Subtracting related fractions works like adding them: make the parts the same size, then take away.
+
+To work out <Frac n={3} d={4} /> − <Frac n={1} d={8} />, cut the quarters into eighths. <Frac n={3} d={4} /> = <Frac n={6} d={8} />. Cross out 1 eighth, and 5 eighths are left:
+
+<Frac n={3} d={4} /> − <Frac n={1} d={8} /> = <Frac n={6} d={8} /> − <Frac n={1} d={8} /> = <Frac n={5} d={8} />
+
+The mistakes are the same as in adding. Taking away the tops and the bottoms separately, or treating one big part as if it were one small part, gives a wrong answer. Rename first, then count.
+
+To find how much of a whole is left, write the whole in the same parts. A whole is <Frac n={8} d={8} />, so if <Frac n={3} d={8} /> of a carton of milk is drunk, <Frac n={8} d={8} /> − <Frac n={3} d={8} /> = <Frac n={5} d={8} /> is left.
+
+To find how much more one amount is than another, use a comparison model: two bars of the same length, one under the other. Hui Min drank <Frac n={1} d={2} /> of a carton and Arjun drank <Frac n={3} d={10} /> of a carton the same size. <Frac n={1} d={2} /> = <Frac n={5} d={10} />, and <Frac n={5} d={10} /> − <Frac n={3} d={10} /> = <Frac n={2} d={10} />, so Hui Min drank <Frac n={2} d={10} /> of a carton more.
+
+Now try: <Task id="seven-eighths-take-half">take a half away</Task>, then the cake and the bottles.
+
+<More title={{ en: "Two kinds of model", zh: "两种模型图" }}>
+
+A part–whole model has one bar: the parts sit side by side inside the whole, and the question mark is on a part or on the total. A comparison model has two bars of the same whole, lined up on the left; the question mark is on the extra piece of the longer one. The difference is the piece that sticks out.
+
+</More>
 
 </Lang>
 
 <Lang zh>
 
-一半是 4 个八分之一，所以 <Frac n={7} d={8} /> − <Frac n={1} d={2} /> = <Frac n={7} d={8} /> − <Frac n={4} d={8} /> = <Frac n={3} d={8} />。求一个整体还剩多少，先把整体写成同样的份：1 = <Frac n={12} d={12} />。
+分母成倍数的分数相减，和相加一样：先化成同样大的份，再减。
+
+计算 <Frac n={3} d={4} /> − <Frac n={1} d={8} />，先把四分之几分成八分之几：<Frac n={3} d={4} /> = <Frac n={6} d={8} />。划掉 1 个八分之一，还剩 5 个八分之一：
+
+<Frac n={3} d={4} /> − <Frac n={1} d={8} /> = <Frac n={6} d={8} /> − <Frac n={1} d={8} /> = <Frac n={5} d={8} />
+
+错误也和加法一样。把分子、分母分别相减，或者把一大份当成一小份来划，结果都不对。先换成同样大的份，再数。
+
+求一个整体还剩多少，先把整体写成同样的份。一个整体是 <Frac n={8} d={8} />，一盒牛奶喝掉了 <Frac n={3} d={8} />，还剩 <Frac n={8} d={8} /> − <Frac n={3} d={8} /> = <Frac n={5} d={8} />。
+
+求一个量比另一个多多少，用比较模型图：两条一样长的条，上下对齐。Hui Min 喝了一盒牛奶的 <Frac n={1} d={2} />，Arjun 喝了同样大的一盒的 <Frac n={3} d={10} />。<Frac n={1} d={2} /> = <Frac n={5} d={10} />，<Frac n={5} d={10} /> − <Frac n={3} d={10} /> = <Frac n={2} d={10} />，所以 Hui Min 多喝了 <Frac n={2} d={10} /> 盒。
+
+现在试试：先<Task id="seven-eighths-take-half">拿走一半</Task>，再做蛋糕和水瓶两题。
+
+<More title={{ en: "Two kinds of model", zh: "两种模型图" }}>
+
+部分—整体模型图只有一条：几个部分并排放在整体里，问号写在某一部分或总数上。比较模型图有两条，表示同样大的整体，左端对齐；问号写在长的那条多出来的一段上。相差的就是伸出来的那一段。
+
+</More>
 
 </Lang>

@@ -3,19 +3,49 @@ id: non-unit-fractions
 order: 3
 title: { en: "More than one part", zh: "几个这样的部分" }
 state:
-  summary: { en: "You can name one equal part. Now name several.", zh: "你会说出一份了，现在说出几份。" }
+  summary: { en: "You can name one equal part; now name several of them, and the whole.", zh: "你会说出一份了，现在说出几份，以及整个整体。" }
 ---
-
-{/* Draft explanation: the text step (docs/15 §6.3, T) writes the final 120–200 words / 200–320 字. */}
 
 <Lang en>
 
-Three eighths is three parts of one eighth each: <Frac n={3} d={8} /> = <Frac n={1} d={8} /> + <Frac n={1} d={8} /> + <Frac n={1} d={8} />. When every part is taken, the <Term id="fraction">fraction</Term> is the whole: <Frac n={4} d={4} /> = 1.
+A unit fraction names one part. Most fractions take several parts. Cut a strip into 5 equal parts, and each part is <Frac n={1} d={5} />. Shade 2 of them and you have two fifths:
+
+<Frac n={1} d={5} /> + <Frac n={1} d={5} /> = <Frac n={2} d={5} />
+
+The bottom number still counts the equal parts in the whole, 5. The top number now counts the parts you take, 2. So a fraction such as <Frac n={2} d={5} /> means 2 parts, each of them one fifth.
+
+The same two mistakes from step 02 come back here. Comparing shaded parts with unshaded parts gives <Frac n={2} d={3} />, because 3 parts are not shaded; but the whole has 5 parts. Writing <Frac n={5} d={2} /> swaps the numbers.
+
+When every part is taken, you have the whole thing. <Frac n={5} d={5} /> is all 5 fifths, the whole strip, so <Frac n={5} d={5} /> = 1. Whenever the top and the bottom numbers are the same, the fraction is 1 whole.
+
+Now try: <Task id="chocolate-three-eighths">shade part of the chocolate bar</Task>, then name the shaded part of a prata.
+
+<More title={{ en: "The layers of a kueh lapis", zh: "千层糕的层" }}>
+
+A rainbow kueh lapis is often made of 9 thin layers of the same thickness, so each layer is <Frac n={1} d={9} /> of its height. If 3 of the layers are red, the red part is <Frac n={3} d={9} /> of the height: 3 layers, each one ninth.
+
+</More>
 
 </Lang>
 
 <Lang zh>
 
-八分之三是 3 个八分之一：<Frac n={3} d={8} /> = <Frac n={1} d={8} /> + <Frac n={1} d={8} /> + <Frac n={1} d={8} />。所有的份都取了，这个<Term id="fraction">分数</Term>就是整个整体：<Frac n={4} d={4} /> = 1。
+单位分数表示一份。大多数分数表示好几份。把一条纸条平均分成 5 份，每份是 <Frac n={1} d={5} />。涂其中 2 份，就是五分之二：
+
+<Frac n={1} d={5} /> + <Frac n={1} d={5} /> = <Frac n={2} d={5} />
+
+分母还是数整体平均分成几份，是 5；分子数取了几份，是 2。所以 <Frac n={2} d={5} /> 表示 2 份，每份是五分之一。
+
+第 02 步的两个错误，在这里还会出现。拿涂了的份和没涂的份比，会写成 <Frac n={2} d={3} />，因为没涂的有 3 份；可是整体一共有 5 份。写成 <Frac n={5} d={2} /> 则是把两个数写反了。
+
+所有的份都取了，就是整个整体。<Frac n={5} d={5} /> 是全部 5 个五分之一，也就是整条纸条，所以 <Frac n={5} d={5} /> = 1。分子和分母相同的分数，都等于 1 个整体。
+
+现在试试：先<Task id="chocolate-three-eighths">在巧克力条上涂色</Task>，再说出 prata 涂色部分是几分之几。
+
+<More title={{ en: "The layers of a kueh lapis", zh: "千层糕的层" }}>
+
+彩虹千层糕常常有 9 层，每层一样厚，所以每层是它高度的 <Frac n={1} d={9} />。如果其中 3 层是红色，红色部分就是高度的 <Frac n={3} d={9} />：3 层，每层九分之一。
+
+</More>
 
 </Lang>

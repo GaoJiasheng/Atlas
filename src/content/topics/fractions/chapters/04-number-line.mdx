@@ -6,16 +6,42 @@ state:
   summary: { en: "A fraction is a number with its own place between 0 and 1.", zh: "分数是一个数，在 0 和 1 之间有自己的位置。" }
 ---
 
-{/* Draft explanation: the text step (docs/15 §6.3, T) writes the final 120–200 words / 200–320 字. */}
-
 <Lang en>
 
-On a <Term id="number-line">number line</Term>, the stretch from 0 to 1 is one whole. Cut it into equal jumps and count the jumps, not the marks: <Frac n={3} d={5} /> is three jumps of one fifth from 0. Think of a train ride between two MRT stations split into equal stretches.
+A fraction is a number, so it has a place on a <Term id="number-line">number line</Term>. The stretch from 0 to 1 is one whole. Cut it into equal jumps, and each jump is one of those parts.
+
+Take a line from 0 to 1 cut into 3 equal jumps. Each jump is <Frac n={1} d={3} />. Start at 0: one jump lands on <Frac n={1} d={3} />, two jumps land on <Frac n={2} d={3} />, and three jumps land on 1, which is <Frac n={3} d={3} />. The bottom number counts the jumps in the whole; the top number counts the jumps from 0.
+
+Count the jumps, not the marks. A line always has one more mark than jumps, because 0 has a mark too. This line has 3 jumps but 4 marks, so counting marks would give quarters instead of thirds. 0 is where you start, before any jump.
+
+The strip above the line shows the same whole: each jump is as long as one part of the strip.
+
+Now try: <Task id="place-one-quarter">put the marker on the line</Task>, then place and read other fractions.
+
+<More title={{ en: "Levels and flights of stairs", zh: "楼层和楼梯" }}>
+
+In an HDB block, walking from level 1 up to level 4 takes 3 flights of stairs, not 4. The levels are like the marks; the flights between them are like the jumps. On a number line we count the jumps, just as we count the flights we climb.
+
+</More>
 
 </Lang>
 
 <Lang zh>
 
-在<Term id="number-line">数轴</Term>上，0 到 1 这一段是一个整体。把它平均分成几段，数的是段，不是刻度线：<Frac n={3} d={5} /> 是从 0 跳 3 段五分之一。可以想象两个地铁站之间平均分成几段的路。
+分数是一个数，所以在<Term id="number-line">数轴</Term>上有自己的位置。0 到 1 这一段是一个整体。把它平均分成几段，每一段就是其中一份。
+
+看一条从 0 到 1、平均分成 3 段的数轴。每段是 <Frac n={1} d={3} />。从 0 出发：跳一段落在 <Frac n={1} d={3} />，跳两段落在 <Frac n={2} d={3} />，跳三段落在 1，也就是 <Frac n={3} d={3} />。分母数整体有几段，分子数从 0 跳了几段。
+
+要数段，不要数刻度线。刻度线总比段多一条，因为 0 那里也有一条。这条数轴有 3 段，却有 4 条刻度线；如果数刻度线，就会把三分之几当成四分之几。0 是起点，那时还没有跳。
+
+数轴上面的纸条是同一个整体：每一段和纸条的一份一样长。
+
+现在试试：先<Task id="place-one-quarter">在数轴上放标记</Task>，再放一放、读一读别的分数。
+
+<More title={{ en: "Levels and flights of stairs", zh: "楼层和楼梯" }}>
+
+在组屋里，从 1 楼走到 4 楼，要走 3 段楼梯，不是 4 段。楼层像刻度线，两层之间的楼梯像数轴上的段。数轴上数的是段，就像爬楼时数走了几段楼梯。
+
+</More>
 
 </Lang>
