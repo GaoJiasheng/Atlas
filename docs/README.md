@@ -12,3 +12,6 @@
 | [08-technical-plate.md](08-technical-plate.md) | 技术图版视觉与交互语言（skill 适配层）、HUD 契约、打磨轮次与实现状态 |
 | [09-ww2-content-spec.md](09-ww2-content-spec.md) | 二战主题内容实现记录：11 章、78 个事件、31 条行军、34 个参与者、地图数据与来源、已知差距 |
 | [10-history-topic-template.md](10-history-topic-template.md) | 历史主题模板（时间线 + 地图）：skill `atlas-history-topic`、脚手架 `scripts/new-topic.ts`、背景章与名词表约定 |
+| [11-ww1-content-spec.md](11-ww1-content-spec.md) | 一战主题内容 spec 与实现记录（按历史主题模板做的第二个主题） |
+| [12-aircon-content-spec.md](12-aircon-content-spec.md) | 空调主题（SpaceScene）内容 spec、引擎缺口、施工记录、已知差距与写实轮次（参考图、新原语、并排对照） |
+| [13-space-topic-template.md](13-space-topic-template.md) | 拆解主题模板（SpaceScene · 对象解剖，机器与生物）：skill `atlas-space-topic`、脚手架 `scripts/new-topic.ts --engine space-scene` |

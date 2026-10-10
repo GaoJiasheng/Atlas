@@ -65,16 +65,16 @@ pnpm tsx scripts/new-topic.ts <slug> --engine time-scene --subject history --tit
 
 它建 `topic.yaml`（`status: draft`）、`chapters/00-background.mdx`（`kind: background` + 阅读说明）、`chapters/01-chapter-one.mdx`（完整 TimeScene frontmatter：state、summary、beats 示例）、`data/{entities,control,movements,events,presets,sources,glossary}.json`（最小合法：无实体、一个空的控制区关键帧）、`data/SOURCES.md`（带生成块标记），以及 `scripts/geo/<slug>/sources.json` + `SOURCES-GEO.md`；已存在就拒绝，最后打印下一步。`--start / --end` 缺省是 1900 年的占位日期，记得改。
 
-空间主题（SpaceScene，stage model3d）用同一个脚手架：
+拆解主题（SpaceScene，stage model3d）走项目级 skill `.claude/skills/atlas-space-topic/`（docs/13），用同一个脚手架：
 
 ```bash
-pnpm tsx scripts/new-topic.ts <slug> --engine space-scene --subject science --title-en "…" --title-zh "…" [--subtitle-en … --subtitle-zh …]
+pnpm tsx scripts/new-topic.ts <slug> --engine space-scene --subject science|biology --title-en "…" --title-zh "…" [--subtitle-en … --subtitle-zh …]
 ```
 
-它建 `topic.yaml`（`mode: space`、`engine: space-scene`、`stage: model3d`、`status: draft`，`note` 写在注释里）、`chapters/01-chapter-one.mdx`（完整 SpaceScene `state`：view / explode / part / run / cutaway / layers / hide / labels / camera / summary，beats 示例在注释里）、`data/parts.json`（一个积木零件 `<slug>-body`，在组 `<slug>-main` 里；`flows` / `animations` 为空；`views` 有 assembled 镜头、`cover`、`section`；id 带 slug 前缀，因为 id 全主题唯一）和空的 `data/{sources,glossary}.json`。生成后 `pnpm validate` 直接通过。手工建主题按下面的步骤：
+它建 `topic.yaml`（`mode: space`、`engine: space-scene`、`stage: model3d`、`status: draft`，机器与生物两种 `note` 写在注释里）、`chapters/01-chapter-one.mdx`（完整 SpaceScene `state`：view / explode / part / run / cutaway / layers / hide / labels（含一个组标注）/ camera / summary，两拍 beats（一拍用命名预设的镜头），正文示范 `<Num>` / `<FlyTo>` / `<More>`）、`data/parts.json`（每组一个零件：`shell` 外壳带 `extra` 垫脚、`lathe` 核心，再加一个 context 展台；只有流的组和一条流（`stops` / `spread` / `clip` / `parts`）、一个转动动画、`views`（assembled / exploded 镜头、`cutaway`、`section`、`cover`）、三个命名预设、两行 `spec`、两行 `telemetry`）、`data/sources.json`（S1 = 自描述的设计研究来源）、空的 `glossary.json`、`data/SOURCES.md`（带生成块）和 `scripts/geo/<slug>/refs/.gitignore`（参考图只在本地）。示例 id（`casing`、`core`、`hero`…）不带 slug 前缀；slug 与它们重名时脚手架拒绝。生成后 `pnpm validate` 直接通过，最后按 skill 的施工顺序打印下一步。手工建主题按下面的步骤：
 
 1. 建目录 `src/content/topics/<slug>/`，`<slug>` 就是 URL 和 `topic.yaml` 里的 `id`（kebab-case，必须一致）。
-2. 写 `topic.yaml`（字段见 docs/02）。`engine` + `stage` 必须是引擎支持的组合：`time-scene: geo | diagram`，`space-scene: model3d | layer2d`。
+2. 写 `topic.yaml`（字段见 docs/02）。`engine` + `stage` 必须是引擎支持的组合：`time-scene: geo | diagram`，`space-scene: model3d | layer2d`（schema 接受；SpaceScene 目前只实现了 `model3d`，`layer2d` 写了也会画成 3D 舞台，不要用）。
 3. 写章节 `chapters/<nn>-<id>.mdx`，frontmatter：`id, order, title, sensitive, state, quiz`（`level` 可选，仅作内容规划，不渲染；`kind` 可选：`chapter` 默认 / `background` 背景章，见「背景章」）。
    - `state` 由引擎解释，见下文「章节状态」。
    - 正文双语写在同一个文件里，**标签前后要空行**，否则里面的 Markdown 不会被解析：
@@ -406,7 +406,7 @@ pnpm shoot sample-time --shots mine.json hero    # 自定义截图表（{name: {
 
 - 纯静态：无 SSR、无 API 路由、客户端无 Node API
 - 无运行时外部请求：无 CDN、无外部 webfont（字体自托管）、无瓦片
-- 客户端不引 zod（构建期解析）；JS 预算 300 KB gz（docs/02）。实测（`pnpm shoot` 打印的 page JS，gzip -9）：宿主 + HUD + 引擎 View 首屏约 105 KB；SpaceScene 页整页约 310 KB（three + R3F 舞台 chunk 207 KB 懒加载）；TimeScene 页整页约 391 KB（MapLibre 在 controller chunk 285 KB 懒加载）。**地图主题超预算，是已知遗留，待产品层决定**
+- 客户端不引 zod（构建期解析）；JS 预算 300 KB gz（docs/02）。实测（`pnpm shoot` 打印的 page JS，gzip -9）：宿主 + HUD + 引擎 View 首屏约 105 KB；SpaceScene 页整页约 340 KB（three + R3F 舞台 chunk 225 KB 懒加载）；TimeScene 页整页约 391 KB（MapLibre 在 controller chunk 285 KB 懒加载）。**地图主题超预算，是已知遗留，待产品层决定**
 - 所有文案双语；界面文案进 `ui.*.json`，内容文案用 `{ en, zh }`
 - `pnpm check && pnpm validate && pnpm test && pnpm build && pnpm e2e` 全绿
 
@@ -600,8 +600,8 @@ lib/                     纯函数，有单测：explode / visibility（图层�
                          color（材质族、tint）/ presets（材质名，无 zod）/ animation / telemetry（一阶滞后读数）/ detail（段落 + [S#]）/
                          camera（球坐标插值、REFERENCE 镜头、过渡目标）/ parts（零件包围盒、repeat 变换）/
                          schematic（零件链路、流经连线、立面、标注预算）/ labels（组标注 id、演示时用哪张标注表、组包围盒）/
-                         leader-layout（引线标注摆放：两列、避让 HUD 与被标零件、代价搜索）/ xform / math
-stages/model3d/          R3F 舞台：Model3DStage（createRoot 宿主）、SceneRoot、PartNode、geometry（程序化零件）、
+                         leader-layout（引线标注摆放：两列、避让 HUD 与被标零件、代价搜索）/ shaped（成形零件的版式数学：盘管管位、回弯、叶片）/ xform / math
+stages/model3d/          R3F 舞台：Model3DStage（createRoot 宿主）、SceneRoot、PartNode、geometry（程序化零件）、shaped（成形零件构建）、
                          materials（材质 + 选中边缘 / 剖面 shader 补丁）、textures（程序化贴图）、Lighting、
                          GroundShadow、CameraRig、Flows + flowMaterial、probes（标注投影 / 计数 / 阴影更新）、GltfSource
 hud/                     LeaderLabels（leaders）、PartChainCard（card）、ArchitecturePanel / DetailPanel / StatePanel
@@ -785,7 +785,7 @@ core 演示系统（字幕卡、两级进度条、自动播放、语音、拍键
 - `frameloop: 'demand'`：只有在缓动（拆开、淡入淡出、运镜、转台、标注滑动 / 遮挡复查）、运转时才请求下一帧；标签页隐藏时不请求。每帧路径不 new 对象（模块级临时向量、预先算好的拆开向量与动画轴）。几何体、材质、贴图都由我们创建并在卸载时 dispose。
 - 示例（sample-space）：第 03 章两拍（一拍 `hide` + 三个零件标注，一拍命名预设 `sample-left` 的镜头 + 两个组标注），一个命名预设，正文一个 `<FlyTo>`。
 - 计数（sample-space，1920×1080；14 个零件 + 1 个 context 墙）：静止 18 draw calls、~19 k 三角形；FLOW +2 calls。
-- 包体：舞台 chunk ~207 KB gz（three + R3F 为主；圆角盒用 `RoundedBoxGeometry`，不引 ExtrudeGeometry/Shape）。GLTF 加载器单独成 chunk（21 KB gz），只有写了 `mesh` 的主题才加载。
+- 包体：舞台 chunk ~225 KB gz（three + R3F 为主；圆角盒用 `RoundedBoxGeometry`；写实轮次的 `extrude` / 贯流叶片引入 `ExtrudeGeometry` / `Shape` 一族，+10 KB，`panelHole` 仍手工三角化）。GLTF 加载器单独成 chunk（21 KB gz），只有写了 `mesh` 的主题才加载。
 
 ## PWA、部署与 e2e（Phase 3）
 

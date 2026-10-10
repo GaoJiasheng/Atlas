@@ -1,6 +1,10 @@
 # 05 · 施工 brief 模板
 
-> **历史主题（时间线 + 地图）**：不要从下面的通用 brief 起步，直接用项目级 skill `.claude/skills/atlas-history-topic/`（docs/10）：spec 模板、写作规则、数据速查、地图管线、施工顺序与验收都在里面，脚手架 `pnpm tsx scripts/new-topic.ts`。本文保留作通用 brief 结构与一期历史记录。
+> **历史主题（时间线 + 地图）**：不要从下面的通用 brief 起步，直接用项目级 skill `.claude/skills/atlas-history-topic/`（docs/10）：spec 模板、写作规则、数据速查、地图管线、施工顺序与验收都在里面，脚手架 `pnpm tsx scripts/new-topic.ts`。
+>
+> **拆解主题（SpaceScene：3D 拆解 + 工作原理，机器或生物）**：同样不从通用 brief 起步，用项目级 skill `.claude/skills/atlas-space-topic/`（docs/13）：spec 模板与原型选择、参考图与建模手册、数据速查、写作规则、施工顺序与验收，脚手架 `pnpm tsx scripts/new-topic.ts <slug> --engine space-scene`。下文 Brief B 是一期的历史记录，现行做法以 docs/12 与该 skill 为准。
+>
+> 本文保留作通用 brief 结构与一期历史记录。
 
 网上没有现成的"做交互式历史地图"的 prompt 可以直接抄。Claude Academy 的交互图解用例总结的结构最有用，照它来：
 
@@ -87,4 +91,4 @@ Atlas 是给新加坡小学生（P3–P6）用的双语可视化课本。仓库�
 3. 数据来源清单
 4. 沉重内容清单（照实呈现，只作元数据 `sensitive`）
 
-其余由引擎和 brief 模板补齐。历史主题按 skill `atlas-history-topic` 的 `spec-template.md` 写完整 spec。
+其余由引擎和 brief 模板补齐。历史主题按 skill `atlas-history-topic` 的 `spec-template.md`、拆解主题按 skill `atlas-space-topic` 的 `spec-template.md` 写完整 spec。
