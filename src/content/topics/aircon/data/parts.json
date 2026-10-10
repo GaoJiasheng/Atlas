@@ -1,0 +1,5520 @@
+{
+  "parts": [
+    {
+      "id": "indoor-chassis",
+      "name": {
+        "en": "Chassis",
+        "zh": "后壳"
+      },
+      "group": "indoor",
+      "summary": {
+        "en": "T1 draft: the back of the unit; hangs on the wall plate.",
+        "zh": "T1 草稿：机身后壳，挂在墙上的挂板上。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.776,
+          0.29,
+          0.05
+        ],
+        "bevel": 0.01,
+        "at": [
+          -0.8,
+          1.22,
+          -0.085
+        ],
+        "color": "enamel"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          -1
+        ],
+        "dist": 0
+      },
+      "connects": [
+        "end-caps",
+        "control-box"
+      ],
+      "shell": true,
+      "castShadow": false
+    },
+    {
+      "id": "end-caps",
+      "name": {
+        "en": "End caps",
+        "zh": "端盖"
+      },
+      "group": "indoor",
+      "summary": {
+        "en": "T1 draft: close the two ends of the air duct.",
+        "zh": "T1 草稿：两端封住风道。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.012,
+          0.29,
+          0.22
+        ],
+        "bevel": 0.004,
+        "at": [
+          -0.8,
+          1.22,
+          0
+        ],
+        "color": "enamel"
+      },
+      "repeat": {
+        "count": 2,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "spacing": 0.788
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.1
+      },
+      "connects": [
+        "indoor-chassis"
+      ],
+      "shell": true,
+      "castShadow": false
+    },
+    {
+      "id": "front-panel",
+      "name": {
+        "en": "Front panel",
+        "zh": "前面板"
+      },
+      "group": "indoor",
+      "summary": {
+        "en": "T1 draft: lifts up so the filters can come out.",
+        "zh": "T1 草稿：可掀起的前盖，打开能取出滤网。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.776,
+          0.23,
+          0.02
+        ],
+        "bevel": 0.008,
+        "at": [
+          -0.8,
+          1.24,
+          0.1
+        ],
+        "rotation": [
+          -4,
+          0,
+          0
+        ],
+        "color": "enamel"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0.3,
+          1
+        ],
+        "dist": 0.3
+      },
+      "connects": [
+        "air-filter"
+      ],
+      "shell": true,
+      "castShadow": false
+    },
+    {
+      "id": "top-grille",
+      "name": {
+        "en": "Intake grille",
+        "zh": "进风格栅"
+      },
+      "group": "indoor",
+      "summary": {
+        "en": "T1 draft: room air is drawn in here.",
+        "zh": "T1 草稿：房间空气从这里被吸进来。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.008,
+          0.006,
+          0.15
+        ],
+        "at": [
+          -0.8,
+          1.3595,
+          0.015
+        ],
+        "color": "enamel"
+      },
+      "repeat": {
+        "count": 30,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "spacing": 0.025
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.4
+      },
+      "connects": [
+        "air-filter"
+      ],
+      "shell": true,
+      "castShadow": false
+    },
+    {
+      "id": "air-filter",
+      "name": {
+        "en": "Air filters",
+        "zh": "滤网"
+      },
+      "group": "indoor",
+      "summary": {
+        "en": "T1 draft: catch dust before it reaches the coil.",
+        "zh": "T1 草稿：挡住灰尘，保护蒸发器。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.37,
+          0.004,
+          0.13
+        ],
+        "at": [
+          -0.8,
+          1.335,
+          0.01
+        ],
+        "rotation": [
+          8,
+          0,
+          0
+        ],
+        "color": "plastic"
+      },
+      "repeat": {
+        "count": 2,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "spacing": 0.39
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0.3
+        ],
+        "dist": 0.27
+      },
+      "connects": [
+        "evaporator-rear"
+      ],
+      "shell": true,
+      "castShadow": false
+    },
+    {
+      "id": "evaporator-front",
+      "name": {
+        "en": "Evaporator",
+        "zh": "蒸发器"
+      },
+      "group": "indoor",
+      "summary": {
+        "en": "T1 draft: refrigerant boils in its tubes and takes heat from the air.",
+        "zh": "T1 草稿：冷媒在铜管里蒸发，从流过的空气中吸热。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "primitive": {
+        "kind": "fins",
+        "size": [
+          0.022,
+          0.16,
+          0.0006
+        ],
+        "count": 140,
+        "gap": 0.0042,
+        "axis": "x",
+        "at": [
+          -0.8375,
+          1.21,
+          0.058
+        ],
+        "rotation": [
+          -12,
+          0,
+          0
+        ],
+        "color": "casing"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.16
+      },
+      "connects": [
+        "evaporator-rear",
+        "liquid-line",
+        "drain-pan"
+      ],
+      "shell": true,
+      "castShadow": false
+    },
+    {
+      "id": "evaporator-rear",
+      "name": {
+        "en": "Evap. (rear)",
+        "zh": "蒸发器后片"
+      },
+      "group": "indoor",
+      "summary": {
+        "en": "T1 draft: second slab of the same coil, above the fan.",
+        "zh": "T1 草稿：同一盘管的第二片，在风扇上方。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "primitive": {
+        "kind": "fins",
+        "size": [
+          0.022,
+          0.106,
+          0.0006
+        ],
+        "count": 140,
+        "gap": 0.0042,
+        "axis": "x",
+        "at": [
+          -0.8375,
+          1.265,
+          -0.009
+        ],
+        "rotation": [
+          49,
+          0,
+          0
+        ],
+        "color": "casing"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0.2
+        ],
+        "dist": 0.15
+      },
+      "connects": [
+        "gas-line",
+        "crossflow-fan"
+      ],
+      "shell": true,
+      "castShadow": false
+    },
+    {
+      "id": "crossflow-fan",
+      "name": {
+        "en": "Crossflow fan",
+        "zh": "贯流风扇"
+      },
+      "group": "indoor",
+      "summary": {
+        "en": "T1 draft: pulls air through the coil and blows it out.",
+        "zh": "T1 草稿：把空气横向吸过蒸发器再吹出去。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.63,
+          0.016,
+          0.0016
+        ],
+        "at": [
+          -0.83,
+          1.155,
+          -0.004
+        ],
+        "rotation": [
+          60,
+          0,
+          0
+        ],
+        "color": "plastic"
+      },
+      "repeat": {
+        "count": 24,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "radius": 0.042
+      },
+      "explode": {
+        "dir": [
+          0,
+          -0.6,
+          1
+        ],
+        "dist": 0.3
+      },
+      "connects": [
+        "louvre"
+      ],
+      "castShadow": false
+    },
+    {
+      "id": "louvre",
+      "name": {
+        "en": "Louvre",
+        "zh": "导风板"
+      },
+      "group": "indoor",
+      "summary": {
+        "en": "T1 draft: swings up and down to aim the air.",
+        "zh": "T1 草稿：上下摆动，改变出风方向。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.63,
+          0.006,
+          0.065
+        ],
+        "bevel": 0.0025,
+        "at": [
+          -0.83,
+          1.082,
+          0.078
+        ],
+        "rotation": [
+          25,
+          0,
+          0
+        ],
+        "color": "enamel"
+      },
+      "explode": {
+        "dir": [
+          0,
+          -1,
+          1.2
+        ],
+        "dist": 0.25
+      },
+      "connects": [],
+      "castShadow": false
+    },
+    {
+      "id": "drain-pan",
+      "name": {
+        "en": "Drain pan",
+        "zh": "接水盘"
+      },
+      "group": "indoor",
+      "summary": {
+        "en": "T1 draft: catches water dripping off the coil.",
+        "zh": "T1 草稿：接住蒸发器滴下的冷凝水。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.68,
+          0.02,
+          0.045
+        ],
+        "bevel": 0.004,
+        "at": [
+          -0.82,
+          1.115,
+          0.073
+        ],
+        "color": "plastic"
+      },
+      "explode": {
+        "dir": [
+          0,
+          -1,
+          0
+        ],
+        "dist": 0.2
+      },
+      "connects": [
+        "drain-hose"
+      ],
+      "shell": true,
+      "castShadow": false
+    },
+    {
+      "id": "control-box",
+      "name": {
+        "en": "Control box",
+        "zh": "室内电控盒"
+      },
+      "group": "indoor",
+      "summary": {
+        "en": "T1 draft: reads the remote and runs the fan and louvre.",
+        "zh": "T1 草稿：接收遥控器信号，控制风扇和导风板。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.07,
+          0.2,
+          0.09
+        ],
+        "bevel": 0.004,
+        "at": [
+          -0.45,
+          1.22,
+          0
+        ],
+        "color": "steel"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.22
+      },
+      "connects": [
+        "crossflow-fan",
+        "louvre",
+        "inverter-board"
+      ],
+      "castShadow": false
+    },
+    {
+      "id": "liquid-line",
+      "name": {
+        "en": "Liquid line",
+        "zh": "液管"
+      },
+      "group": "line-set",
+      "summary": {
+        "en": "T1 draft: thin pipe: carries cold refrigerant indoors.",
+        "zh": "T1 草稿：细管：把降压后的低温冷媒送进室内。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "primitive": {
+        "kind": "tube",
+        "path": [
+          [
+            -0.816,
+            0.56,
+            0.123
+          ],
+          [
+            -0.816,
+            0.56,
+            -0.123
+          ],
+          [
+            -0.214,
+            0.56,
+            -0.123
+          ],
+          [
+            -0.214,
+            -0.56,
+            -0.123
+          ],
+          [
+            0.816,
+            -0.56,
+            -0.123
+          ],
+          [
+            0.816,
+            -0.46,
+            -0.123
+          ],
+          [
+            0.816,
+            -0.46,
+            0.008
+          ],
+          [
+            0.735,
+            -0.46,
+            0.008
+          ]
+        ],
+        "radius": 0.0032,
+        "bendRadius": 0.04,
+        "at": [
+          0.324,
+          0.61,
+          -0.068
+        ],
+        "color": "copper"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "connects": [
+        "flare-nuts",
+        "evaporator-front"
+      ],
+      "shell": true,
+      "castShadow": false
+    },
+    {
+      "id": "gas-line",
+      "name": {
+        "en": "Gas line",
+        "zh": "气管"
+      },
+      "group": "line-set",
+      "summary": {
+        "en": "T1 draft: thick pipe: brings the gas back outside.",
+        "zh": "T1 草稿：粗管：把吸了热的冷媒气体带回室外。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "primitive": {
+        "kind": "tube",
+        "path": [
+          [
+            -0.827,
+            0.6025,
+            0.0845
+          ],
+          [
+            -0.827,
+            0.6025,
+            -0.0845
+          ],
+          [
+            -0.827,
+            0.5175,
+            -0.0845
+          ],
+          [
+            -0.223,
+            0.5175,
+            -0.0845
+          ],
+          [
+            -0.223,
+            -0.6025,
+            -0.0845
+          ],
+          [
+            0.827,
+            -0.6025,
+            -0.0845
+          ],
+          [
+            0.827,
+            -0.4325,
+            -0.0845
+          ],
+          [
+            0.827,
+            -0.4325,
+            0.0645
+          ],
+          [
+            0.726,
+            -0.4325,
+            0.0645
+          ]
+        ],
+        "radius": 0.0048,
+        "bendRadius": 0.04,
+        "at": [
+          0.333,
+          0.6525,
+          -0.1245
+        ],
+        "color": "copper"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "connects": [
+        "flare-nuts",
+        "evaporator-rear"
+      ],
+      "shell": true,
+      "castShadow": false
+    },
+    {
+      "id": "insulation",
+      "name": {
+        "en": "Insulation",
+        "zh": "保温层"
+      },
+      "group": "line-set",
+      "summary": {
+        "en": "T1 draft: wraps both pipes against heat and dripping.",
+        "zh": "T1 草稿：包住两根铜管，防止吸热和结露。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "primitive": {
+        "kind": "tube",
+        "path": [
+          [
+            -0.792,
+            0.605,
+            0
+          ],
+          [
+            -0.792,
+            0.515,
+            0
+          ],
+          [
+            -0.188,
+            0.515,
+            0
+          ],
+          [
+            -0.188,
+            -0.605,
+            0
+          ],
+          [
+            0.792,
+            -0.605,
+            0
+          ]
+        ],
+        "radius": 0.024,
+        "bendRadius": 0.04,
+        "at": [
+          0.298,
+          0.655,
+          -0.2
+        ],
+        "color": "rubber"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "connects": [
+        "liquid-line",
+        "gas-line"
+      ],
+      "shell": true,
+      "castShadow": false
+    },
+    {
+      "id": "flare-nuts",
+      "name": {
+        "en": "Flare nuts",
+        "zh": "喇叭口螺母"
+      },
+      "group": "line-set",
+      "summary": {
+        "en": "T1 draft: clamp the pipe ends onto the valves.",
+        "zh": "T1 草稿：把铜管喇叭口压紧在阀门上，不漏冷媒。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.011,
+          0.011,
+          0.018
+        ],
+        "at": [
+          1.05,
+          0.185,
+          -0.06
+        ],
+        "rotation": [
+          0,
+          0,
+          90
+        ],
+        "color": "brass"
+      },
+      "repeat": {
+        "count": 2,
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "spacing": 0.07
+      },
+      "explode": {
+        "dir": [
+          1,
+          0,
+          0
+        ],
+        "dist": 0.06
+      },
+      "connects": [
+        "service-valves"
+      ]
+    },
+    {
+      "id": "drain-hose",
+      "name": {
+        "en": "Drain hose",
+        "zh": "排水管"
+      },
+      "group": "line-set",
+      "summary": {
+        "en": "T1 draft: runs the water down and outside.",
+        "zh": "T1 草稿：把冷凝水排到室外。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "primitive": {
+        "kind": "tube",
+        "path": [
+          [
+            -0.3,
+            0.5385,
+            0.1115
+          ],
+          [
+            -0.3,
+            0.4715,
+            0.1115
+          ],
+          [
+            -0.3,
+            0.4715,
+            -0.1115
+          ],
+          [
+            0.3,
+            0.4515,
+            -0.1115
+          ],
+          [
+            0.3,
+            -0.5385,
+            -0.1115
+          ]
+        ],
+        "radius": 0.008,
+        "bendRadius": 0.03,
+        "at": [
+          -0.19,
+          0.5585,
+          -0.0385
+        ],
+        "color": "plastic"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0
+      },
+      "connects": [
+        "drain-pan"
+      ],
+      "shell": true,
+      "castShadow": false
+    },
+    {
+      "id": "outdoor-front",
+      "name": {
+        "en": "Front panel",
+        "zh": "室外机前面板"
+      },
+      "group": "outdoor",
+      "summary": {
+        "en": "T1 draft: the round opening is the fan outlet.",
+        "zh": "T1 草稿：室外机前面板，中间圆孔是风扇出风口。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "primitive": {
+        "kind": "panelHole",
+        "size": [
+          0.78,
+          0.508,
+          0.012
+        ],
+        "hole": {
+          "r": 0.205,
+          "at": [
+            -0.12,
+            -0.004
+          ]
+        },
+        "at": [
+          0.62,
+          0.284,
+          0.139
+        ],
+        "color": "powder",
+        "tint": "#b3b6b1"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "connects": [
+        "fan-grille"
+      ],
+      "shell": true
+    },
+    {
+      "id": "outdoor-top",
+      "name": {
+        "en": "Top cover",
+        "zh": "顶盖"
+      },
+      "group": "outdoor",
+      "summary": {
+        "en": "T1 draft: the lid of the casing.",
+        "zh": "T1 草稿：外壳的顶盖。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.78,
+          0.012,
+          0.29
+        ],
+        "bevel": 0.004,
+        "at": [
+          0.62,
+          0.544,
+          0
+        ],
+        "color": "powder",
+        "tint": "#b3b6b1"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.3
+      },
+      "connects": [],
+      "shell": true
+    },
+    {
+      "id": "outdoor-side",
+      "name": {
+        "en": "Side panel",
+        "zh": "右侧板"
+      },
+      "group": "outdoor",
+      "summary": {
+        "en": "T1 draft: the right side; the valves sit beside it.",
+        "zh": "T1 草稿：外壳的右侧，阀门在它旁边。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.012,
+          0.508,
+          0.278
+        ],
+        "bevel": 0.004,
+        "at": [
+          1.004,
+          0.284,
+          -0.006
+        ],
+        "color": "powder",
+        "tint": "#b3b6b1"
+      },
+      "explode": {
+        "dir": [
+          1,
+          0,
+          0
+        ],
+        "dist": 0.3
+      },
+      "connects": [],
+      "shell": true
+    },
+    {
+      "id": "base-pan",
+      "name": {
+        "en": "Base pan",
+        "zh": "底盘"
+      },
+      "group": "outdoor",
+      "summary": {
+        "en": "T1 draft: the floor of the unit; everything stands on it.",
+        "zh": "T1 草稿：机组的底板，所有零件都装在上面。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.78,
+          0.03,
+          0.29
+        ],
+        "bevel": 0.004,
+        "at": [
+          0.62,
+          0.015,
+          0
+        ],
+        "color": "powder",
+        "tint": "#b3b6b1"
+      },
+      "explode": {
+        "dir": [
+          0,
+          -1,
+          0
+        ],
+        "dist": 0.1
+      },
+      "connects": [
+        "compressor",
+        "condenser-coil"
+      ],
+      "shell": true
+    },
+    {
+      "id": "partition",
+      "name": {
+        "en": "Partition",
+        "zh": "隔板"
+      },
+      "group": "outdoor",
+      "summary": {
+        "en": "T1 draft: walls the compressor off from the fan; carries the control box.",
+        "zh": "T1 草稿：把压缩机仓和风扇仓隔开，上面装电控盒。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.01,
+          0.507,
+          0.236
+        ],
+        "bevel": 0.003,
+        "at": [
+          0.76,
+          0.2835,
+          0.013
+        ],
+        "color": "steel"
+      },
+      "explode": {
+        "dir": [
+          -0.2,
+          0,
+          1
+        ],
+        "dist": 0.2
+      },
+      "connects": [
+        "base-pan",
+        "inverter-board"
+      ],
+      "shell": true
+    },
+    {
+      "id": "fan-grille",
+      "name": {
+        "en": "Fan guard",
+        "zh": "出风格栅"
+      },
+      "group": "outdoor",
+      "summary": {
+        "en": "T1 draft: keeps fingers out of the fan.",
+        "zh": "T1 草稿：防止手和杂物碰到风扇。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.42,
+          0.005,
+          0.005
+        ],
+        "at": [
+          0.5,
+          0.28,
+          0.1525
+        ],
+        "color": "powder",
+        "tint": "#b3b6b1"
+      },
+      "repeat": {
+        "count": 13,
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "spacing": 0.032
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.45
+      },
+      "connects": [
+        "outdoor-fan"
+      ],
+      "shell": true
+    },
+    {
+      "id": "condenser-coil",
+      "name": {
+        "en": "Condenser",
+        "zh": "冷凝器"
+      },
+      "group": "outdoor",
+      "summary": {
+        "en": "T1 draft: refrigerant gives its heat to the outdoor air here.",
+        "zh": "T1 草稿：冷媒在这里把热交给室外空气。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "primitive": {
+        "kind": "fins",
+        "size": [
+          0.036,
+          0.49,
+          0.0006
+        ],
+        "count": 160,
+        "gap": 0.0039,
+        "axis": "x",
+        "at": [
+          0.605,
+          0.285,
+          -0.125
+        ],
+        "color": "casing"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          -1
+        ],
+        "dist": 0.3
+      },
+      "connects": [
+        "condenser-hairpins",
+        "discharge-pipe",
+        "liquid-pipe",
+        "outdoor-fan"
+      ],
+      "shell": true
+    },
+    {
+      "id": "condenser-hairpins",
+      "name": {
+        "en": "Return bends",
+        "zh": "U 形弯头"
+      },
+      "group": "outdoor",
+      "summary": {
+        "en": "T1 draft: U-bends join the tubes at the coil end.",
+        "zh": "T1 草稿：铜管在鳍片端部用 U 形弯头来回连通。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "primitive": {
+        "kind": "tube",
+        "path": [
+          [
+            -0.006,
+            -0.0105,
+            0
+          ],
+          [
+            0.006,
+            -0.0105,
+            0
+          ],
+          [
+            0.006,
+            0.0105,
+            0
+          ],
+          [
+            -0.006,
+            0.0105,
+            0
+          ]
+        ],
+        "radius": 0.0035,
+        "bendRadius": 0.008,
+        "at": [
+          0.969,
+          0.285,
+          -0.125
+        ],
+        "color": "copper"
+      },
+      "repeat": {
+        "count": 11,
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "spacing": 0.042
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          -1
+        ],
+        "dist": 0.3
+      },
+      "connects": [
+        "condenser-coil"
+      ],
+      "shell": true
+    },
+    {
+      "id": "outdoor-fan",
+      "name": {
+        "en": "Axial fan",
+        "zh": "轴流风扇"
+      },
+      "group": "outdoor",
+      "summary": {
+        "en": "T1 draft: pulls air in through the coil, out the front.",
+        "zh": "T1 草稿：从背后抽风穿过冷凝器，从前面吹出。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.13,
+          0.085,
+          0.004
+        ],
+        "bevel": 0.0015,
+        "at": [
+          0.5,
+          0.28,
+          0.1
+        ],
+        "rotation": [
+          28,
+          0,
+          0
+        ],
+        "color": "powder"
+      },
+      "repeat": {
+        "count": 3,
+        "axis": [
+          0,
+          0,
+          1
+        ],
+        "radius": 0.112
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.25
+      },
+      "connects": [
+        "fan-motor",
+        "fan-grille"
+      ]
+    },
+    {
+      "id": "fan-motor",
+      "name": {
+        "en": "Fan motor",
+        "zh": "风扇电机"
+      },
+      "group": "outdoor",
+      "summary": {
+        "en": "T1 draft: turns the fan; the hub sits on its shaft.",
+        "zh": "T1 草稿：驱动风扇，叶轮装在它的轴上。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.045,
+          0.045,
+          0.11
+        ],
+        "at": [
+          0.5,
+          0.28,
+          0.055
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "color": "powder"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.15
+      },
+      "connects": [
+        "inverter-board"
+      ]
+    },
+    {
+      "id": "fan-bracket",
+      "name": {
+        "en": "Motor bracket",
+        "zh": "电机支架"
+      },
+      "group": "outdoor",
+      "summary": {
+        "en": "T1 draft: holds the fan motor between base and top.",
+        "zh": "T1 草稿：把风扇电机固定在底盘和顶部之间。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.035,
+          0.505,
+          0.008
+        ],
+        "bevel": 0.0025,
+        "at": [
+          0.5,
+          0.2825,
+          -0.0045
+        ],
+        "color": "steel"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.08
+      },
+      "connects": [
+        "fan-motor",
+        "base-pan"
+      ],
+      "shell": true
+    },
+    {
+      "id": "compressor",
+      "name": {
+        "en": "Compressor",
+        "zh": "压缩机"
+      },
+      "group": "outdoor",
+      "summary": {
+        "en": "T1 draft: squeezes the gas so it gets hot; drives the loop.",
+        "zh": "T1 草稿：把低压冷媒气体压成高温高压气体，推动回路。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "primitive": {
+        "kind": "vessel",
+        "radius": 0.058,
+        "length": 0.17,
+        "headRatio": 0.5,
+        "at": [
+          0.88,
+          0.145,
+          -0.015
+        ],
+        "color": "powder"
+      },
+      "explode": {
+        "dir": [
+          0.3,
+          0,
+          1
+        ],
+        "dist": 0.25
+      },
+      "connects": [
+        "accumulator",
+        "discharge-pipe",
+        "compressor-rotor"
+      ]
+    },
+    {
+      "id": "compressor-rotor",
+      "name": {
+        "en": "Motor rotor",
+        "zh": "电机转子"
+      },
+      "group": "outdoor",
+      "summary": {
+        "en": "T1 draft: magnets that spin the pump inside the shell.",
+        "zh": "T1 草稿：压缩机里电机的转子，带着滚动活塞转。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.008,
+          0.055,
+          0.016
+        ],
+        "at": [
+          0.88,
+          0.19,
+          -0.015
+        ],
+        "color": "steel"
+      },
+      "repeat": {
+        "count": 6,
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "radius": 0.026
+      },
+      "explode": {
+        "dir": [
+          0.3,
+          0,
+          1
+        ],
+        "dist": 0.25
+      },
+      "connects": [
+        "compressor"
+      ]
+    },
+    {
+      "id": "accumulator",
+      "name": {
+        "en": "Accumulator",
+        "zh": "气液分离器"
+      },
+      "group": "outdoor",
+      "summary": {
+        "en": "T1 draft: lets only gas into the compressor.",
+        "zh": "T1 草稿：只让气体进压缩机，挡住液滴。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "primitive": {
+        "kind": "vessel",
+        "radius": 0.034,
+        "length": 0.11,
+        "headRatio": 0.5,
+        "at": [
+          0.82,
+          0.21,
+          0.06
+        ],
+        "color": "powder"
+      },
+      "explode": {
+        "dir": [
+          -0.3,
+          0,
+          1
+        ],
+        "dist": 0.25
+      },
+      "connects": [
+        "compressor",
+        "suction-pipe"
+      ]
+    },
+    {
+      "id": "discharge-pipe",
+      "name": {
+        "en": "Discharge pipe",
+        "zh": "排气管"
+      },
+      "group": "outdoor",
+      "summary": {
+        "en": "T1 draft: hot pipe from the compressor to the coil.",
+        "zh": "T1 草稿：压缩机出口到冷凝器的热管。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "primitive": {
+        "kind": "tube",
+        "path": [
+          [
+            -0.0475,
+            -0.132,
+            0.055
+          ],
+          [
+            -0.0475,
+            0.03,
+            0.055
+          ],
+          [
+            0.0475,
+            0.03,
+            0.055
+          ],
+          [
+            0.0475,
+            0.132,
+            0.055
+          ],
+          [
+            0.0475,
+            0.132,
+            -0.055
+          ]
+        ],
+        "radius": 0.0048,
+        "bendRadius": 0.02,
+        "at": [
+          0.9275,
+          0.39,
+          -0.07
+        ],
+        "color": "copper"
+      },
+      "explode": {
+        "dir": [
+          0.3,
+          0,
+          1
+        ],
+        "dist": 0.25
+      },
+      "connects": [
+        "condenser-coil"
+      ],
+      "shell": true
+    },
+    {
+      "id": "suction-pipe",
+      "name": {
+        "en": "Suction pipe",
+        "zh": "吸气管"
+      },
+      "group": "outdoor",
+      "summary": {
+        "en": "T1 draft: cool pipe from the gas valve to the accumulator.",
+        "zh": "T1 草稿：从气阀回到分离器的冷管。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "primitive": {
+        "kind": "tube",
+        "path": [
+          [
+            0.0955,
+            -0.065,
+            -0.06
+          ],
+          [
+            0.0345,
+            -0.065,
+            -0.06
+          ],
+          [
+            0.0345,
+            0.065,
+            0.06
+          ],
+          [
+            -0.0955,
+            0.065,
+            0.06
+          ],
+          [
+            -0.0955,
+            -0.004,
+            0.06
+          ]
+        ],
+        "radius": 0.0048,
+        "bendRadius": 0.02,
+        "at": [
+          0.9155,
+          0.285,
+          0
+        ],
+        "color": "copper"
+      },
+      "explode": {
+        "dir": [
+          0.3,
+          0,
+          1
+        ],
+        "dist": 0.2
+      },
+      "connects": [
+        "accumulator",
+        "service-valves"
+      ],
+      "shell": true
+    },
+    {
+      "id": "liquid-pipe",
+      "name": {
+        "en": "Liquid pipe",
+        "zh": "室外液管"
+      },
+      "group": "outdoor",
+      "summary": {
+        "en": "T1 draft: carries liquid from the coil through the valve.",
+        "zh": "T1 草稿：把冷凝后的液体从盘管经膨胀阀送到液阀。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "primitive": {
+        "kind": "tube",
+        "path": [
+          [
+            -0.048,
+            -0.049,
+            -0.0325
+          ],
+          [
+            0,
+            -0.049,
+            -0.0325
+          ],
+          [
+            0,
+            -0.049,
+            0.0325
+          ],
+          [
+            0,
+            0.049,
+            0.0325
+          ],
+          [
+            0.048,
+            0.049,
+            0.0325
+          ]
+        ],
+        "radius": 0.0032,
+        "bendRadius": 0.02,
+        "at": [
+          0.978,
+          0.101,
+          -0.0925
+        ],
+        "color": "copper"
+      },
+      "explode": {
+        "dir": [
+          1,
+          0,
+          0.6
+        ],
+        "dist": 0.15
+      },
+      "connects": [
+        "condenser-coil",
+        "expansion-valve"
+      ],
+      "shell": true
+    },
+    {
+      "id": "expansion-valve",
+      "name": {
+        "en": "Expansion valve",
+        "zh": "电子膨胀阀"
+      },
+      "group": "outdoor",
+      "summary": {
+        "en": "T1 draft: a small adjustable gap: pressure and temperature drop.",
+        "zh": "T1 草稿：让高压液体经过可调的小口，压力和温度骤降。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.015,
+          0.015,
+          0.035
+        ],
+        "at": [
+          0.978,
+          0.105,
+          -0.06
+        ],
+        "color": "powder"
+      },
+      "explode": {
+        "dir": [
+          1,
+          0,
+          1
+        ],
+        "dist": 0.25
+      },
+      "connects": [
+        "service-valves",
+        "liquid-pipe"
+      ]
+    },
+    {
+      "id": "service-valves",
+      "name": {
+        "en": "Service valves",
+        "zh": "截止阀"
+      },
+      "group": "outdoor",
+      "summary": {
+        "en": "T1 draft: the line set connects here; opened after install.",
+        "zh": "T1 草稿：连接管接在这里；安装、维修时开关。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.03,
+          0.035,
+          0.04
+        ],
+        "bevel": 0.003,
+        "at": [
+          1.026,
+          0.185,
+          -0.06
+        ],
+        "color": "brass"
+      },
+      "repeat": {
+        "count": 2,
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "spacing": 0.07
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.15
+      },
+      "connects": [
+        "flare-nuts"
+      ]
+    },
+    {
+      "id": "inverter-board",
+      "name": {
+        "en": "Inverter board",
+        "zh": "变频控制板"
+      },
+      "group": "outdoor",
+      "summary": {
+        "en": "T1 draft: makes variable-frequency power to set compressor speed.",
+        "zh": "T1 草稿：把市电变成频率可变的电，调压缩机转速。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.22,
+          0.07,
+          0.12
+        ],
+        "bevel": 0.004,
+        "at": [
+          0.88,
+          0.495,
+          0.065
+        ],
+        "color": "steel"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0.3
+        ],
+        "dist": 0.25
+      },
+      "connects": [
+        "compressor",
+        "outdoor-fan",
+        "expansion-valve"
+      ]
+    },
+    {
+      "id": "wall-section",
+      "name": {
+        "en": "Wall",
+        "zh": "墙"
+      },
+      "summary": {
+        "en": "A slice of the bedroom wall the pipes pass through.",
+        "zh": "管线穿过的一段卧室墙。"
+      },
+      "detail": {
+        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
+        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+      },
+      "context": true,
+      "shell": true,
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.15,
+          1.45,
+          0.42
+        ],
+        "at": [
+          0,
+          0.725,
+          -0.06
+        ],
+        "color": "plastic"
+      },
+      "castShadow": true
+    }
+  ],
+  "groups": [
+    {
+      "id": "indoor",
+      "name": {
+        "en": "Indoor unit",
+        "zh": "室内机"
+      },
+      "color": "token:ink-2"
+    },
+    {
+      "id": "line-set",
+      "name": {
+        "en": "Line set",
+        "zh": "连接管"
+      },
+      "color": "token:ink-3"
+    },
+    {
+      "id": "outdoor",
+      "name": {
+        "en": "Outdoor unit",
+        "zh": "室外机"
+      },
+      "color": "token:neutral"
+    },
+    {
+      "id": "refrigerant",
+      "name": {
+        "en": "Refrigerant loop",
+        "zh": "冷媒回路"
+      },
+      "color": "token:hot"
+    },
+    {
+      "id": "air",
+      "name": {
+        "en": "Air paths",
+        "zh": "空气路径"
+      },
+      "color": "token:cold"
+    }
+  ],
+  "flows": [
+    {
+      "id": "ref-hot-gas",
+      "group": "refrigerant",
+      "path": [
+        [
+          0.88,
+          0.1,
+          -0.015
+        ],
+        [
+          0.88,
+          0.258,
+          -0.015
+        ],
+        [
+          0.88,
+          0.2758,
+          -0.015
+        ],
+        [
+          0.88,
+          0.2935,
+          -0.015
+        ],
+        [
+          0.88,
+          0.3112,
+          -0.015
+        ],
+        [
+          0.88,
+          0.329,
+          -0.015
+        ],
+        [
+          0.88,
+          0.3468,
+          -0.015
+        ],
+        [
+          0.88,
+          0.3645,
+          -0.015
+        ],
+        [
+          0.88,
+          0.3823,
+          -0.015
+        ],
+        [
+          0.88,
+          0.4,
+          -0.015
+        ],
+        [
+          0.8859,
+          0.4141,
+          -0.015
+        ],
+        [
+          0.9,
+          0.42,
+          -0.015
+        ],
+        [
+          0.9183,
+          0.42,
+          -0.015
+        ],
+        [
+          0.9367,
+          0.42,
+          -0.015
+        ],
+        [
+          0.955,
+          0.42,
+          -0.015
+        ],
+        [
+          0.9691,
+          0.4259,
+          -0.015
+        ],
+        [
+          0.975,
+          0.44,
+          -0.015
+        ],
+        [
+          0.975,
+          0.4555,
+          -0.015
+        ],
+        [
+          0.975,
+          0.471,
+          -0.015
+        ],
+        [
+          0.975,
+          0.4865,
+          -0.015
+        ],
+        [
+          0.975,
+          0.502,
+          -0.015
+        ],
+        [
+          0.975,
+          0.5161,
+          -0.0209
+        ],
+        [
+          0.975,
+          0.522,
+          -0.035
+        ],
+        [
+          0.975,
+          0.522,
+          -0.053
+        ],
+        [
+          0.975,
+          0.522,
+          -0.071
+        ],
+        [
+          0.975,
+          0.522,
+          -0.089
+        ],
+        [
+          0.975,
+          0.522,
+          -0.107
+        ],
+        [
+          0.975,
+          0.522,
+          -0.125
+        ],
+        [
+          0.955,
+          0.522,
+          -0.125
+        ],
+        [
+          0.9352,
+          0.522,
+          -0.125
+        ],
+        [
+          0.9154,
+          0.522,
+          -0.125
+        ],
+        [
+          0.8956,
+          0.522,
+          -0.125
+        ],
+        [
+          0.8758,
+          0.522,
+          -0.125
+        ],
+        [
+          0.856,
+          0.522,
+          -0.125
+        ],
+        [
+          0.8362,
+          0.522,
+          -0.125
+        ],
+        [
+          0.8164,
+          0.522,
+          -0.125
+        ],
+        [
+          0.7966,
+          0.522,
+          -0.125
+        ],
+        [
+          0.7769,
+          0.522,
+          -0.125
+        ],
+        [
+          0.7571,
+          0.522,
+          -0.125
+        ],
+        [
+          0.7373,
+          0.522,
+          -0.125
+        ],
+        [
+          0.7175,
+          0.522,
+          -0.125
+        ],
+        [
+          0.6977,
+          0.522,
+          -0.125
+        ],
+        [
+          0.6779,
+          0.522,
+          -0.125
+        ],
+        [
+          0.6581,
+          0.522,
+          -0.125
+        ],
+        [
+          0.6383,
+          0.522,
+          -0.125
+        ],
+        [
+          0.6185,
+          0.522,
+          -0.125
+        ],
+        [
+          0.5987,
+          0.522,
+          -0.125
+        ],
+        [
+          0.5789,
+          0.522,
+          -0.125
+        ],
+        [
+          0.5591,
+          0.522,
+          -0.125
+        ],
+        [
+          0.5393,
+          0.522,
+          -0.125
+        ],
+        [
+          0.5195,
+          0.522,
+          -0.125
+        ],
+        [
+          0.4997,
+          0.522,
+          -0.125
+        ],
+        [
+          0.4799,
+          0.522,
+          -0.125
+        ],
+        [
+          0.4601,
+          0.522,
+          -0.125
+        ],
+        [
+          0.4404,
+          0.522,
+          -0.125
+        ],
+        [
+          0.4206,
+          0.522,
+          -0.125
+        ],
+        [
+          0.4008,
+          0.522,
+          -0.125
+        ],
+        [
+          0.381,
+          0.522,
+          -0.125
+        ],
+        [
+          0.3612,
+          0.522,
+          -0.125
+        ],
+        [
+          0.3414,
+          0.522,
+          -0.125
+        ],
+        [
+          0.3216,
+          0.522,
+          -0.125
+        ],
+        [
+          0.3018,
+          0.522,
+          -0.125
+        ],
+        [
+          0.282,
+          0.522,
+          -0.125
+        ],
+        [
+          0.2679,
+          0.5161,
+          -0.125
+        ],
+        [
+          0.262,
+          0.502,
+          -0.125
+        ],
+        [
+          0.262,
+          0.4825,
+          -0.125
+        ],
+        [
+          0.262,
+          0.463,
+          -0.125
+        ],
+        [
+          0.262,
+          0.4435,
+          -0.125
+        ],
+        [
+          0.262,
+          0.424,
+          -0.125
+        ],
+        [
+          0.262,
+          0.4045,
+          -0.125
+        ],
+        [
+          0.262,
+          0.385,
+          -0.125
+        ],
+        [
+          0.2679,
+          0.3709,
+          -0.125
+        ],
+        [
+          0.282,
+          0.365,
+          -0.125
+        ],
+        [
+          0.3018,
+          0.365,
+          -0.125
+        ],
+        [
+          0.3216,
+          0.365,
+          -0.125
+        ],
+        [
+          0.3414,
+          0.365,
+          -0.125
+        ],
+        [
+          0.3612,
+          0.365,
+          -0.125
+        ],
+        [
+          0.3809,
+          0.365,
+          -0.125
+        ],
+        [
+          0.4007,
+          0.365,
+          -0.125
+        ],
+        [
+          0.4205,
+          0.365,
+          -0.125
+        ],
+        [
+          0.4403,
+          0.365,
+          -0.125
+        ],
+        [
+          0.4601,
+          0.365,
+          -0.125
+        ],
+        [
+          0.4799,
+          0.365,
+          -0.125
+        ],
+        [
+          0.4997,
+          0.365,
+          -0.125
+        ],
+        [
+          0.5195,
+          0.365,
+          -0.125
+        ],
+        [
+          0.5392,
+          0.365,
+          -0.125
+        ],
+        [
+          0.559,
+          0.365,
+          -0.125
+        ],
+        [
+          0.5788,
+          0.365,
+          -0.125
+        ],
+        [
+          0.5986,
+          0.365,
+          -0.125
+        ],
+        [
+          0.6184,
+          0.365,
+          -0.125
+        ],
+        [
+          0.6382,
+          0.365,
+          -0.125
+        ],
+        [
+          0.658,
+          0.365,
+          -0.125
+        ],
+        [
+          0.6778,
+          0.365,
+          -0.125
+        ],
+        [
+          0.6975,
+          0.365,
+          -0.125
+        ],
+        [
+          0.7173,
+          0.365,
+          -0.125
+        ],
+        [
+          0.7371,
+          0.365,
+          -0.125
+        ],
+        [
+          0.7569,
+          0.365,
+          -0.125
+        ],
+        [
+          0.7767,
+          0.365,
+          -0.125
+        ],
+        [
+          0.7965,
+          0.365,
+          -0.125
+        ],
+        [
+          0.8163,
+          0.365,
+          -0.125
+        ],
+        [
+          0.8361,
+          0.365,
+          -0.125
+        ],
+        [
+          0.8558,
+          0.365,
+          -0.125
+        ],
+        [
+          0.8756,
+          0.365,
+          -0.125
+        ],
+        [
+          0.8954,
+          0.365,
+          -0.125
+        ],
+        [
+          0.9152,
+          0.365,
+          -0.125
+        ],
+        [
+          0.935,
+          0.365,
+          -0.125
+        ],
+        [
+          0.9491,
+          0.3591,
+          -0.125
+        ],
+        [
+          0.955,
+          0.345,
+          -0.125
+        ],
+        [
+          0.955,
+          0.3255,
+          -0.125
+        ],
+        [
+          0.955,
+          0.306,
+          -0.125
+        ],
+        [
+          0.955,
+          0.2865,
+          -0.125
+        ],
+        [
+          0.955,
+          0.267,
+          -0.125
+        ],
+        [
+          0.955,
+          0.2475,
+          -0.125
+        ],
+        [
+          0.955,
+          0.228,
+          -0.125
+        ],
+        [
+          0.9491,
+          0.2139,
+          -0.125
+        ],
+        [
+          0.935,
+          0.208,
+          -0.125
+        ],
+        [
+          0.9152,
+          0.208,
+          -0.125
+        ],
+        [
+          0.8954,
+          0.208,
+          -0.125
+        ],
+        [
+          0.8756,
+          0.208,
+          -0.125
+        ],
+        [
+          0.8558,
+          0.208,
+          -0.125
+        ],
+        [
+          0.8361,
+          0.208,
+          -0.125
+        ],
+        [
+          0.8163,
+          0.208,
+          -0.125
+        ],
+        [
+          0.7965,
+          0.208,
+          -0.125
+        ],
+        [
+          0.7767,
+          0.208,
+          -0.125
+        ],
+        [
+          0.7569,
+          0.208,
+          -0.125
+        ],
+        [
+          0.7371,
+          0.208,
+          -0.125
+        ],
+        [
+          0.7173,
+          0.208,
+          -0.125
+        ],
+        [
+          0.6975,
+          0.208,
+          -0.125
+        ],
+        [
+          0.6778,
+          0.208,
+          -0.125
+        ],
+        [
+          0.658,
+          0.208,
+          -0.125
+        ],
+        [
+          0.6382,
+          0.208,
+          -0.125
+        ],
+        [
+          0.6184,
+          0.208,
+          -0.125
+        ],
+        [
+          0.5986,
+          0.208,
+          -0.125
+        ],
+        [
+          0.5788,
+          0.208,
+          -0.125
+        ],
+        [
+          0.559,
+          0.208,
+          -0.125
+        ],
+        [
+          0.5392,
+          0.208,
+          -0.125
+        ],
+        [
+          0.5195,
+          0.208,
+          -0.125
+        ],
+        [
+          0.4997,
+          0.208,
+          -0.125
+        ],
+        [
+          0.4799,
+          0.208,
+          -0.125
+        ],
+        [
+          0.4601,
+          0.208,
+          -0.125
+        ],
+        [
+          0.4403,
+          0.208,
+          -0.125
+        ],
+        [
+          0.4205,
+          0.208,
+          -0.125
+        ],
+        [
+          0.4007,
+          0.208,
+          -0.125
+        ],
+        [
+          0.3809,
+          0.208,
+          -0.125
+        ],
+        [
+          0.3612,
+          0.208,
+          -0.125
+        ],
+        [
+          0.3414,
+          0.208,
+          -0.125
+        ],
+        [
+          0.3216,
+          0.208,
+          -0.125
+        ],
+        [
+          0.3018,
+          0.208,
+          -0.125
+        ],
+        [
+          0.282,
+          0.208,
+          -0.125
+        ],
+        [
+          0.2679,
+          0.2021,
+          -0.125
+        ],
+        [
+          0.262,
+          0.188,
+          -0.125
+        ],
+        [
+          0.262,
+          0.1687,
+          -0.125
+        ],
+        [
+          0.262,
+          0.1493,
+          -0.125
+        ],
+        [
+          0.262,
+          0.13,
+          -0.125
+        ],
+        [
+          0.262,
+          0.1107,
+          -0.125
+        ],
+        [
+          0.262,
+          0.0913,
+          -0.125
+        ],
+        [
+          0.262,
+          0.072,
+          -0.125
+        ],
+        [
+          0.2679,
+          0.0579,
+          -0.125
+        ],
+        [
+          0.282,
+          0.052,
+          -0.125
+        ],
+        [
+          0.3016,
+          0.052,
+          -0.125
+        ],
+        [
+          0.3213,
+          0.052,
+          -0.125
+        ],
+        [
+          0.3409,
+          0.052,
+          -0.125
+        ],
+        [
+          0.3605,
+          0.052,
+          -0.125
+        ],
+        [
+          0.3802,
+          0.052,
+          -0.125
+        ],
+        [
+          0.3998,
+          0.052,
+          -0.125
+        ],
+        [
+          0.4195,
+          0.052,
+          -0.125
+        ],
+        [
+          0.4391,
+          0.052,
+          -0.125
+        ],
+        [
+          0.4587,
+          0.052,
+          -0.125
+        ],
+        [
+          0.4784,
+          0.052,
+          -0.125
+        ],
+        [
+          0.498,
+          0.052,
+          -0.125
+        ],
+        [
+          0.5176,
+          0.052,
+          -0.125
+        ],
+        [
+          0.5373,
+          0.052,
+          -0.125
+        ],
+        [
+          0.5569,
+          0.052,
+          -0.125
+        ],
+        [
+          0.5765,
+          0.052,
+          -0.125
+        ],
+        [
+          0.5962,
+          0.052,
+          -0.125
+        ],
+        [
+          0.6158,
+          0.052,
+          -0.125
+        ],
+        [
+          0.6355,
+          0.052,
+          -0.125
+        ],
+        [
+          0.6551,
+          0.052,
+          -0.125
+        ],
+        [
+          0.6747,
+          0.052,
+          -0.125
+        ],
+        [
+          0.6944,
+          0.052,
+          -0.125
+        ],
+        [
+          0.714,
+          0.052,
+          -0.125
+        ],
+        [
+          0.7336,
+          0.052,
+          -0.125
+        ],
+        [
+          0.7533,
+          0.052,
+          -0.125
+        ],
+        [
+          0.7729,
+          0.052,
+          -0.125
+        ],
+        [
+          0.7925,
+          0.052,
+          -0.125
+        ],
+        [
+          0.8122,
+          0.052,
+          -0.125
+        ],
+        [
+          0.8318,
+          0.052,
+          -0.125
+        ],
+        [
+          0.8515,
+          0.052,
+          -0.125
+        ],
+        [
+          0.8711,
+          0.052,
+          -0.125
+        ],
+        [
+          0.8907,
+          0.052,
+          -0.125
+        ],
+        [
+          0.9104,
+          0.052,
+          -0.125
+        ],
+        [
+          0.93,
+          0.052,
+          -0.125
+        ]
+      ],
+      "speed": 0.55,
+      "color": "token:hot",
+      "stops": [
+        {
+          "at": 0,
+          "color": "token:hot"
+        },
+        {
+          "at": 0.164,
+          "color": "token:hot"
+        },
+        {
+          "at": 1,
+          "color": "token:neutral"
+        }
+      ],
+      "ends": "open",
+      "count": 413,
+      "size": 0.8,
+      "spread": 0.003,
+      "parts": [
+        "compressor",
+        "discharge-pipe",
+        "condenser-coil"
+      ]
+    },
+    {
+      "id": "ref-warm-liquid",
+      "group": "refrigerant",
+      "path": [
+        [
+          0.93,
+          0.052,
+          -0.125
+        ],
+        [
+          0.944,
+          0.052,
+          -0.125
+        ],
+        [
+          0.958,
+          0.052,
+          -0.125
+        ],
+        [
+          0.9657,
+          0.052,
+          -0.1235
+        ],
+        [
+          0.9721,
+          0.052,
+          -0.1191
+        ],
+        [
+          0.9765,
+          0.052,
+          -0.1127
+        ],
+        [
+          0.978,
+          0.052,
+          -0.105
+        ],
+        [
+          0.978,
+          0.052,
+          -0.0925
+        ],
+        [
+          0.978,
+          0.052,
+          -0.08
+        ],
+        [
+          0.978,
+          0.0532,
+          -0.0732
+        ],
+        [
+          0.978,
+          0.0567,
+          -0.0671
+        ],
+        [
+          0.978,
+          0.062,
+          -0.0627
+        ],
+        [
+          0.978,
+          0.0685,
+          -0.0603
+        ],
+        [
+          0.978,
+          0.0913,
+          -0.06
+        ],
+        [
+          0.978,
+          0.1107,
+          -0.06
+        ],
+        [
+          0.978,
+          0.13,
+          -0.06
+        ],
+        [
+          0.9795,
+          0.1377,
+          -0.06
+        ],
+        [
+          0.9839,
+          0.1441,
+          -0.06
+        ],
+        [
+          0.9903,
+          0.1485,
+          -0.06
+        ],
+        [
+          0.998,
+          0.15,
+          -0.06
+        ],
+        [
+          1.012,
+          0.15,
+          -0.06
+        ],
+        [
+          1.026,
+          0.15,
+          -0.06
+        ]
+      ],
+      "speed": 0.2,
+      "color": "token:neutral",
+      "stops": [
+        {
+          "at": 0,
+          "color": "token:neutral"
+        },
+        {
+          "at": 0.6626,
+          "color": "token:neutral"
+        },
+        {
+          "at": 0.7226,
+          "color": "token:cold"
+        },
+        {
+          "at": 1,
+          "color": "token:cold"
+        }
+      ],
+      "ends": "open",
+      "count": 70,
+      "size": 0.8,
+      "spread": 0.002,
+      "parts": [
+        "condenser-coil",
+        "liquid-pipe",
+        "expansion-valve",
+        "service-valves"
+      ]
+    },
+    {
+      "id": "ref-cold-mix",
+      "group": "refrigerant",
+      "path": [
+        [
+          1.026,
+          0.15,
+          -0.06
+        ],
+        [
+          1.059,
+          0.15,
+          -0.06
+        ],
+        [
+          1.0795,
+          0.15,
+          -0.06
+        ],
+        [
+          1.1,
+          0.15,
+          -0.06
+        ],
+        [
+          1.1153,
+          0.15,
+          -0.063
+        ],
+        [
+          1.1283,
+          0.15,
+          -0.0717
+        ],
+        [
+          1.137,
+          0.15,
+          -0.0847
+        ],
+        [
+          1.14,
+          0.15,
+          -0.1
+        ],
+        [
+          1.14,
+          0.15,
+          -0.1255
+        ],
+        [
+          1.14,
+          0.15,
+          -0.151
+        ],
+        [
+          1.14,
+          0.147,
+          -0.1663
+        ],
+        [
+          1.14,
+          0.1383,
+          -0.1793
+        ],
+        [
+          1.14,
+          0.1253,
+          -0.188
+        ],
+        [
+          1.14,
+          0.11,
+          -0.191
+        ],
+        [
+          1.14,
+          0.09,
+          -0.191
+        ],
+        [
+          1.137,
+          0.0747,
+          -0.191
+        ],
+        [
+          1.1283,
+          0.0617,
+          -0.191
+        ],
+        [
+          1.1153,
+          0.053,
+          -0.191
+        ],
+        [
+          1.1,
+          0.05,
+          -0.191
+        ],
+        [
+          1.0703,
+          0.05,
+          -0.191
+        ],
+        [
+          1.0406,
+          0.05,
+          -0.191
+        ],
+        [
+          1.0109,
+          0.05,
+          -0.191
+        ],
+        [
+          0.9812,
+          0.05,
+          -0.191
+        ],
+        [
+          0.9516,
+          0.05,
+          -0.191
+        ],
+        [
+          0.9219,
+          0.05,
+          -0.191
+        ],
+        [
+          0.8922,
+          0.05,
+          -0.191
+        ],
+        [
+          0.8625,
+          0.05,
+          -0.191
+        ],
+        [
+          0.8328,
+          0.05,
+          -0.191
+        ],
+        [
+          0.8031,
+          0.05,
+          -0.191
+        ],
+        [
+          0.7734,
+          0.05,
+          -0.191
+        ],
+        [
+          0.7437,
+          0.05,
+          -0.191
+        ],
+        [
+          0.7141,
+          0.05,
+          -0.191
+        ],
+        [
+          0.6844,
+          0.05,
+          -0.191
+        ],
+        [
+          0.6547,
+          0.05,
+          -0.191
+        ],
+        [
+          0.625,
+          0.05,
+          -0.191
+        ],
+        [
+          0.5953,
+          0.05,
+          -0.191
+        ],
+        [
+          0.5656,
+          0.05,
+          -0.191
+        ],
+        [
+          0.5359,
+          0.05,
+          -0.191
+        ],
+        [
+          0.5063,
+          0.05,
+          -0.191
+        ],
+        [
+          0.4766,
+          0.05,
+          -0.191
+        ],
+        [
+          0.4469,
+          0.05,
+          -0.191
+        ],
+        [
+          0.4172,
+          0.05,
+          -0.191
+        ],
+        [
+          0.3875,
+          0.05,
+          -0.191
+        ],
+        [
+          0.3578,
+          0.05,
+          -0.191
+        ],
+        [
+          0.3281,
+          0.05,
+          -0.191
+        ],
+        [
+          0.2984,
+          0.05,
+          -0.191
+        ],
+        [
+          0.2688,
+          0.05,
+          -0.191
+        ],
+        [
+          0.2391,
+          0.05,
+          -0.191
+        ],
+        [
+          0.2094,
+          0.05,
+          -0.191
+        ],
+        [
+          0.1797,
+          0.05,
+          -0.191
+        ],
+        [
+          0.15,
+          0.05,
+          -0.191
+        ],
+        [
+          0.1363,
+          0.0524,
+          -0.191
+        ],
+        [
+          0.1243,
+          0.0594,
+          -0.191
+        ],
+        [
+          0.1154,
+          0.07,
+          -0.191
+        ],
+        [
+          0.1106,
+          0.0831,
+          -0.191
+        ],
+        [
+          0.11,
+          0.1197,
+          -0.191
+        ],
+        [
+          0.11,
+          0.1494,
+          -0.191
+        ],
+        [
+          0.11,
+          0.1791,
+          -0.191
+        ],
+        [
+          0.11,
+          0.2089,
+          -0.191
+        ],
+        [
+          0.11,
+          0.2386,
+          -0.191
+        ],
+        [
+          0.11,
+          0.2683,
+          -0.191
+        ],
+        [
+          0.11,
+          0.298,
+          -0.191
+        ],
+        [
+          0.11,
+          0.3277,
+          -0.191
+        ],
+        [
+          0.11,
+          0.3574,
+          -0.191
+        ],
+        [
+          0.11,
+          0.3871,
+          -0.191
+        ],
+        [
+          0.11,
+          0.4169,
+          -0.191
+        ],
+        [
+          0.11,
+          0.4466,
+          -0.191
+        ],
+        [
+          0.11,
+          0.4763,
+          -0.191
+        ],
+        [
+          0.11,
+          0.506,
+          -0.191
+        ],
+        [
+          0.11,
+          0.5357,
+          -0.191
+        ],
+        [
+          0.11,
+          0.5654,
+          -0.191
+        ],
+        [
+          0.11,
+          0.5951,
+          -0.191
+        ],
+        [
+          0.11,
+          0.6249,
+          -0.191
+        ],
+        [
+          0.11,
+          0.6546,
+          -0.191
+        ],
+        [
+          0.11,
+          0.6843,
+          -0.191
+        ],
+        [
+          0.11,
+          0.714,
+          -0.191
+        ],
+        [
+          0.11,
+          0.7437,
+          -0.191
+        ],
+        [
+          0.11,
+          0.7734,
+          -0.191
+        ],
+        [
+          0.11,
+          0.8031,
+          -0.191
+        ],
+        [
+          0.11,
+          0.8329,
+          -0.191
+        ],
+        [
+          0.11,
+          0.8626,
+          -0.191
+        ],
+        [
+          0.11,
+          0.8923,
+          -0.191
+        ],
+        [
+          0.11,
+          0.922,
+          -0.191
+        ],
+        [
+          0.11,
+          0.9517,
+          -0.191
+        ],
+        [
+          0.11,
+          0.9814,
+          -0.191
+        ],
+        [
+          0.11,
+          1.0111,
+          -0.191
+        ],
+        [
+          0.11,
+          1.0409,
+          -0.191
+        ],
+        [
+          0.11,
+          1.0706,
+          -0.191
+        ],
+        [
+          0.11,
+          1.1003,
+          -0.191
+        ],
+        [
+          0.11,
+          1.13,
+          -0.191
+        ],
+        [
+          0.1076,
+          1.1437,
+          -0.191
+        ],
+        [
+          0.1006,
+          1.1557,
+          -0.191
+        ],
+        [
+          0.09,
+          1.1646,
+          -0.191
+        ],
+        [
+          0.0769,
+          1.1694,
+          -0.191
+        ],
+        [
+          0.041,
+          1.17,
+          -0.191
+        ],
+        [
+          0.012,
+          1.17,
+          -0.191
+        ],
+        [
+          -0.017,
+          1.17,
+          -0.191
+        ],
+        [
+          -0.046,
+          1.17,
+          -0.191
+        ],
+        [
+          -0.075,
+          1.17,
+          -0.191
+        ],
+        [
+          -0.104,
+          1.17,
+          -0.191
+        ],
+        [
+          -0.133,
+          1.17,
+          -0.191
+        ],
+        [
+          -0.162,
+          1.17,
+          -0.191
+        ],
+        [
+          -0.191,
+          1.17,
+          -0.191
+        ],
+        [
+          -0.22,
+          1.17,
+          -0.191
+        ],
+        [
+          -0.249,
+          1.17,
+          -0.191
+        ],
+        [
+          -0.278,
+          1.17,
+          -0.191
+        ],
+        [
+          -0.307,
+          1.17,
+          -0.191
+        ],
+        [
+          -0.336,
+          1.17,
+          -0.191
+        ],
+        [
+          -0.365,
+          1.17,
+          -0.191
+        ],
+        [
+          -0.394,
+          1.17,
+          -0.191
+        ],
+        [
+          -0.423,
+          1.17,
+          -0.191
+        ],
+        [
+          -0.452,
+          1.17,
+          -0.191
+        ],
+        [
+          -0.4657,
+          1.17,
+          -0.1886
+        ],
+        [
+          -0.4777,
+          1.17,
+          -0.1816
+        ],
+        [
+          -0.4866,
+          1.17,
+          -0.171
+        ],
+        [
+          -0.4914,
+          1.17,
+          -0.1579
+        ],
+        [
+          -0.492,
+          1.17,
+          -0.1216
+        ],
+        [
+          -0.492,
+          1.17,
+          -0.0921
+        ],
+        [
+          -0.492,
+          1.17,
+          -0.0627
+        ],
+        [
+          -0.492,
+          1.17,
+          -0.0333
+        ],
+        [
+          -0.492,
+          1.17,
+          -0.0039
+        ],
+        [
+          -0.492,
+          1.17,
+          0.0256
+        ],
+        [
+          -0.492,
+          1.17,
+          0.055
+        ],
+        [
+          -0.5108,
+          1.17,
+          0.0644
+        ],
+        [
+          -0.5396,
+          1.17,
+          0.0665
+        ],
+        [
+          -0.5596,
+          1.17,
+          0.0665
+        ],
+        [
+          -0.5795,
+          1.17,
+          0.0665
+        ],
+        [
+          -0.5994,
+          1.17,
+          0.0665
+        ],
+        [
+          -0.6193,
+          1.17,
+          0.0665
+        ],
+        [
+          -0.6392,
+          1.17,
+          0.0665
+        ],
+        [
+          -0.6591,
+          1.17,
+          0.0665
+        ],
+        [
+          -0.679,
+          1.17,
+          0.0665
+        ],
+        [
+          -0.699,
+          1.17,
+          0.0665
+        ],
+        [
+          -0.7189,
+          1.17,
+          0.0665
+        ],
+        [
+          -0.7388,
+          1.17,
+          0.0665
+        ],
+        [
+          -0.7587,
+          1.17,
+          0.0665
+        ],
+        [
+          -0.7786,
+          1.17,
+          0.0665
+        ],
+        [
+          -0.7985,
+          1.17,
+          0.0665
+        ],
+        [
+          -0.8184,
+          1.17,
+          0.0665
+        ],
+        [
+          -0.8384,
+          1.17,
+          0.0665
+        ],
+        [
+          -0.8583,
+          1.17,
+          0.0665
+        ],
+        [
+          -0.8782,
+          1.17,
+          0.0665
+        ],
+        [
+          -0.8981,
+          1.17,
+          0.0665
+        ],
+        [
+          -0.918,
+          1.17,
+          0.0665
+        ],
+        [
+          -0.9379,
+          1.17,
+          0.0665
+        ],
+        [
+          -0.9579,
+          1.17,
+          0.0665
+        ],
+        [
+          -0.9778,
+          1.17,
+          0.0665
+        ],
+        [
+          -0.9977,
+          1.17,
+          0.0665
+        ],
+        [
+          -1.0176,
+          1.17,
+          0.0665
+        ],
+        [
+          -1.0375,
+          1.17,
+          0.0665
+        ],
+        [
+          -1.0574,
+          1.17,
+          0.0665
+        ],
+        [
+          -1.0773,
+          1.17,
+          0.0665
+        ],
+        [
+          -1.0973,
+          1.17,
+          0.0665
+        ],
+        [
+          -1.1172,
+          1.17,
+          0.0665
+        ],
+        [
+          -1.1371,
+          1.17,
+          0.0665
+        ],
+        [
+          -1.157,
+          1.17,
+          0.0665
+        ],
+        [
+          -1.1711,
+          1.1735,
+          0.0618
+        ],
+        [
+          -1.177,
+          1.1821,
+          0.0506
+        ],
+        [
+          -1.177,
+          1.1923,
+          0.0373
+        ],
+        [
+          -1.177,
+          1.2024,
+          0.0239
+        ],
+        [
+          -1.177,
+          1.2126,
+          0.0106
+        ],
+        [
+          -1.177,
+          1.2227,
+          -0.0028
+        ],
+        [
+          -1.177,
+          1.2329,
+          -0.0161
+        ],
+        [
+          -1.1723,
+          1.2407,
+          -0.0263
+        ],
+        [
+          -1.1605,
+          1.2448,
+          -0.0318
+        ],
+        [
+          -1.1375,
+          1.245,
+          -0.032
+        ],
+        [
+          -1.1181,
+          1.245,
+          -0.032
+        ],
+        [
+          -1.0986,
+          1.245,
+          -0.032
+        ],
+        [
+          -1.0792,
+          1.245,
+          -0.032
+        ],
+        [
+          -1.0597,
+          1.245,
+          -0.032
+        ],
+        [
+          -1.0403,
+          1.245,
+          -0.032
+        ],
+        [
+          -1.0208,
+          1.245,
+          -0.032
+        ],
+        [
+          -1.0014,
+          1.245,
+          -0.032
+        ],
+        [
+          -0.9819,
+          1.245,
+          -0.032
+        ],
+        [
+          -0.9625,
+          1.245,
+          -0.032
+        ],
+        [
+          -0.943,
+          1.245,
+          -0.032
+        ],
+        [
+          -0.9235,
+          1.245,
+          -0.032
+        ],
+        [
+          -0.9041,
+          1.245,
+          -0.032
+        ],
+        [
+          -0.8846,
+          1.245,
+          -0.032
+        ],
+        [
+          -0.8652,
+          1.245,
+          -0.032
+        ],
+        [
+          -0.8457,
+          1.245,
+          -0.032
+        ],
+        [
+          -0.8263,
+          1.245,
+          -0.032
+        ],
+        [
+          -0.8068,
+          1.245,
+          -0.032
+        ],
+        [
+          -0.7874,
+          1.245,
+          -0.032
+        ],
+        [
+          -0.7679,
+          1.245,
+          -0.032
+        ],
+        [
+          -0.7485,
+          1.245,
+          -0.032
+        ],
+        [
+          -0.729,
+          1.245,
+          -0.032
+        ],
+        [
+          -0.7095,
+          1.245,
+          -0.032
+        ],
+        [
+          -0.6901,
+          1.245,
+          -0.032
+        ],
+        [
+          -0.6706,
+          1.245,
+          -0.032
+        ],
+        [
+          -0.6512,
+          1.245,
+          -0.032
+        ],
+        [
+          -0.6317,
+          1.245,
+          -0.032
+        ],
+        [
+          -0.6123,
+          1.245,
+          -0.032
+        ],
+        [
+          -0.5928,
+          1.245,
+          -0.032
+        ],
+        [
+          -0.5734,
+          1.245,
+          -0.032
+        ],
+        [
+          -0.5539,
+          1.245,
+          -0.032
+        ],
+        [
+          -0.5345,
+          1.245,
+          -0.032
+        ],
+        [
+          -0.515,
+          1.245,
+          -0.032
+        ]
+      ],
+      "speed": 0.3,
+      "color": "token:cold",
+      "ends": "open",
+      "count": 939,
+      "size": 0.8,
+      "spread": 0.003,
+      "parts": [
+        "service-valves",
+        "flare-nuts",
+        "liquid-line",
+        "evaporator-front",
+        "evaporator-rear"
+      ]
+    },
+    {
+      "id": "ref-cool-gas",
+      "group": "refrigerant",
+      "path": [
+        [
+          -0.515,
+          1.245,
+          -0.032
+        ],
+        [
+          -0.5045,
+          1.25,
+          -0.036
+        ],
+        [
+          -0.4961,
+          1.254,
+          -0.0436
+        ],
+        [
+          -0.494,
+          1.255,
+          -0.0815
+        ],
+        [
+          -0.494,
+          1.255,
+          -0.1106
+        ],
+        [
+          -0.494,
+          1.255,
+          -0.1398
+        ],
+        [
+          -0.494,
+          1.255,
+          -0.169
+        ],
+        [
+          -0.494,
+          1.252,
+          -0.1843
+        ],
+        [
+          -0.494,
+          1.2433,
+          -0.1973
+        ],
+        [
+          -0.494,
+          1.2303,
+          -0.206
+        ],
+        [
+          -0.494,
+          1.215,
+          -0.209
+        ],
+        [
+          -0.4916,
+          1.1963,
+          -0.209
+        ],
+        [
+          -0.4846,
+          1.1843,
+          -0.209
+        ],
+        [
+          -0.474,
+          1.1754,
+          -0.209
+        ],
+        [
+          -0.4609,
+          1.1706,
+          -0.209
+        ],
+        [
+          -0.4249,
+          1.17,
+          -0.209
+        ],
+        [
+          -0.3958,
+          1.17,
+          -0.209
+        ],
+        [
+          -0.3667,
+          1.17,
+          -0.209
+        ],
+        [
+          -0.3376,
+          1.17,
+          -0.209
+        ],
+        [
+          -0.3084,
+          1.17,
+          -0.209
+        ],
+        [
+          -0.2793,
+          1.17,
+          -0.209
+        ],
+        [
+          -0.2502,
+          1.17,
+          -0.209
+        ],
+        [
+          -0.2211,
+          1.17,
+          -0.209
+        ],
+        [
+          -0.192,
+          1.17,
+          -0.209
+        ],
+        [
+          -0.1629,
+          1.17,
+          -0.209
+        ],
+        [
+          -0.1338,
+          1.17,
+          -0.209
+        ],
+        [
+          -0.1047,
+          1.17,
+          -0.209
+        ],
+        [
+          -0.0756,
+          1.17,
+          -0.209
+        ],
+        [
+          -0.0464,
+          1.17,
+          -0.209
+        ],
+        [
+          -0.0173,
+          1.17,
+          -0.209
+        ],
+        [
+          0.0118,
+          1.17,
+          -0.209
+        ],
+        [
+          0.0409,
+          1.17,
+          -0.209
+        ],
+        [
+          0.07,
+          1.17,
+          -0.209
+        ],
+        [
+          0.0837,
+          1.1676,
+          -0.209
+        ],
+        [
+          0.0957,
+          1.1606,
+          -0.209
+        ],
+        [
+          0.1046,
+          1.15,
+          -0.209
+        ],
+        [
+          0.1094,
+          1.1369,
+          -0.209
+        ],
+        [
+          0.11,
+          1.1003,
+          -0.209
+        ],
+        [
+          0.11,
+          1.0706,
+          -0.209
+        ],
+        [
+          0.11,
+          1.0409,
+          -0.209
+        ],
+        [
+          0.11,
+          1.0111,
+          -0.209
+        ],
+        [
+          0.11,
+          0.9814,
+          -0.209
+        ],
+        [
+          0.11,
+          0.9517,
+          -0.209
+        ],
+        [
+          0.11,
+          0.922,
+          -0.209
+        ],
+        [
+          0.11,
+          0.8923,
+          -0.209
+        ],
+        [
+          0.11,
+          0.8626,
+          -0.209
+        ],
+        [
+          0.11,
+          0.8329,
+          -0.209
+        ],
+        [
+          0.11,
+          0.8031,
+          -0.209
+        ],
+        [
+          0.11,
+          0.7734,
+          -0.209
+        ],
+        [
+          0.11,
+          0.7437,
+          -0.209
+        ],
+        [
+          0.11,
+          0.714,
+          -0.209
+        ],
+        [
+          0.11,
+          0.6843,
+          -0.209
+        ],
+        [
+          0.11,
+          0.6546,
+          -0.209
+        ],
+        [
+          0.11,
+          0.6249,
+          -0.209
+        ],
+        [
+          0.11,
+          0.5951,
+          -0.209
+        ],
+        [
+          0.11,
+          0.5654,
+          -0.209
+        ],
+        [
+          0.11,
+          0.5357,
+          -0.209
+        ],
+        [
+          0.11,
+          0.506,
+          -0.209
+        ],
+        [
+          0.11,
+          0.4763,
+          -0.209
+        ],
+        [
+          0.11,
+          0.4466,
+          -0.209
+        ],
+        [
+          0.11,
+          0.4169,
+          -0.209
+        ],
+        [
+          0.11,
+          0.3871,
+          -0.209
+        ],
+        [
+          0.11,
+          0.3574,
+          -0.209
+        ],
+        [
+          0.11,
+          0.3277,
+          -0.209
+        ],
+        [
+          0.11,
+          0.298,
+          -0.209
+        ],
+        [
+          0.11,
+          0.2683,
+          -0.209
+        ],
+        [
+          0.11,
+          0.2386,
+          -0.209
+        ],
+        [
+          0.11,
+          0.2089,
+          -0.209
+        ],
+        [
+          0.11,
+          0.1791,
+          -0.209
+        ],
+        [
+          0.11,
+          0.1494,
+          -0.209
+        ],
+        [
+          0.11,
+          0.1197,
+          -0.209
+        ],
+        [
+          0.11,
+          0.09,
+          -0.209
+        ],
+        [
+          0.1124,
+          0.0763,
+          -0.209
+        ],
+        [
+          0.1194,
+          0.0643,
+          -0.209
+        ],
+        [
+          0.13,
+          0.0554,
+          -0.209
+        ],
+        [
+          0.1431,
+          0.0506,
+          -0.209
+        ],
+        [
+          0.1794,
+          0.05,
+          -0.209
+        ],
+        [
+          0.2088,
+          0.05,
+          -0.209
+        ],
+        [
+          0.2382,
+          0.05,
+          -0.209
+        ],
+        [
+          0.2676,
+          0.05,
+          -0.209
+        ],
+        [
+          0.297,
+          0.05,
+          -0.209
+        ],
+        [
+          0.3264,
+          0.05,
+          -0.209
+        ],
+        [
+          0.3558,
+          0.05,
+          -0.209
+        ],
+        [
+          0.3852,
+          0.05,
+          -0.209
+        ],
+        [
+          0.4145,
+          0.05,
+          -0.209
+        ],
+        [
+          0.4439,
+          0.05,
+          -0.209
+        ],
+        [
+          0.4733,
+          0.05,
+          -0.209
+        ],
+        [
+          0.5027,
+          0.05,
+          -0.209
+        ],
+        [
+          0.5321,
+          0.05,
+          -0.209
+        ],
+        [
+          0.5615,
+          0.05,
+          -0.209
+        ],
+        [
+          0.5909,
+          0.05,
+          -0.209
+        ],
+        [
+          0.6203,
+          0.05,
+          -0.209
+        ],
+        [
+          0.6497,
+          0.05,
+          -0.209
+        ],
+        [
+          0.6791,
+          0.05,
+          -0.209
+        ],
+        [
+          0.7085,
+          0.05,
+          -0.209
+        ],
+        [
+          0.7379,
+          0.05,
+          -0.209
+        ],
+        [
+          0.7673,
+          0.05,
+          -0.209
+        ],
+        [
+          0.7967,
+          0.05,
+          -0.209
+        ],
+        [
+          0.8261,
+          0.05,
+          -0.209
+        ],
+        [
+          0.8555,
+          0.05,
+          -0.209
+        ],
+        [
+          0.8848,
+          0.05,
+          -0.209
+        ],
+        [
+          0.9142,
+          0.05,
+          -0.209
+        ],
+        [
+          0.9436,
+          0.05,
+          -0.209
+        ],
+        [
+          0.973,
+          0.05,
+          -0.209
+        ],
+        [
+          1.0024,
+          0.05,
+          -0.209
+        ],
+        [
+          1.0318,
+          0.05,
+          -0.209
+        ],
+        [
+          1.0612,
+          0.05,
+          -0.209
+        ],
+        [
+          1.0906,
+          0.05,
+          -0.209
+        ],
+        [
+          1.12,
+          0.05,
+          -0.209
+        ],
+        [
+          1.1337,
+          0.0524,
+          -0.209
+        ],
+        [
+          1.1457,
+          0.0594,
+          -0.209
+        ],
+        [
+          1.1546,
+          0.07,
+          -0.209
+        ],
+        [
+          1.1594,
+          0.0831,
+          -0.209
+        ],
+        [
+          1.16,
+          0.12,
+          -0.209
+        ],
+        [
+          1.16,
+          0.15,
+          -0.209
+        ],
+        [
+          1.16,
+          0.18,
+          -0.209
+        ],
+        [
+          1.16,
+          0.1953,
+          -0.206
+        ],
+        [
+          1.16,
+          0.2083,
+          -0.1973
+        ],
+        [
+          1.16,
+          0.217,
+          -0.1843
+        ],
+        [
+          1.16,
+          0.22,
+          -0.169
+        ],
+        [
+          1.16,
+          0.22,
+          -0.146
+        ],
+        [
+          1.16,
+          0.22,
+          -0.123
+        ],
+        [
+          1.16,
+          0.22,
+          -0.1
+        ],
+        [
+          1.157,
+          0.22,
+          -0.0847
+        ],
+        [
+          1.1483,
+          0.22,
+          -0.0717
+        ],
+        [
+          1.1353,
+          0.22,
+          -0.063
+        ],
+        [
+          1.12,
+          0.22,
+          -0.06
+        ],
+        [
+          1.0997,
+          0.22,
+          -0.06
+        ],
+        [
+          1.0793,
+          0.22,
+          -0.06
+        ],
+        [
+          1.059,
+          0.22,
+          -0.06
+        ],
+        [
+          1.011,
+          0.22,
+          -0.06
+        ],
+        [
+          0.9973,
+          0.22,
+          -0.06
+        ],
+        [
+          0.9837,
+          0.22,
+          -0.06
+        ],
+        [
+          0.97,
+          0.22,
+          -0.06
+        ],
+        [
+          0.9559,
+          0.2243,
+          -0.056
+        ],
+        [
+          0.95,
+          0.2347,
+          -0.0464
+        ],
+        [
+          0.95,
+          0.2491,
+          -0.0332
+        ],
+        [
+          0.95,
+          0.2634,
+          -0.0199
+        ],
+        [
+          0.95,
+          0.2778,
+          -0.0066
+        ],
+        [
+          0.95,
+          0.2922,
+          0.0066
+        ],
+        [
+          0.95,
+          0.3066,
+          0.0199
+        ],
+        [
+          0.95,
+          0.3209,
+          0.0332
+        ],
+        [
+          0.95,
+          0.3353,
+          0.0464
+        ],
+        [
+          0.9441,
+          0.3457,
+          0.056
+        ],
+        [
+          0.93,
+          0.35,
+          0.06
+        ],
+        [
+          0.912,
+          0.35,
+          0.06
+        ],
+        [
+          0.894,
+          0.35,
+          0.06
+        ],
+        [
+          0.876,
+          0.35,
+          0.06
+        ],
+        [
+          0.858,
+          0.35,
+          0.06
+        ],
+        [
+          0.84,
+          0.35,
+          0.06
+        ],
+        [
+          0.8259,
+          0.3441,
+          0.06
+        ],
+        [
+          0.82,
+          0.33,
+          0.06
+        ],
+        [
+          0.82,
+          0.3137,
+          0.06
+        ],
+        [
+          0.82,
+          0.2973,
+          0.06
+        ],
+        [
+          0.82,
+          0.281,
+          0.06
+        ],
+        [
+          0.82,
+          0.16,
+          0.06
+        ],
+        [
+          0.841,
+          0.12,
+          0.0334
+        ],
+        [
+          0.88,
+          0.1,
+          -0.015
+        ]
+      ],
+      "speed": 0.8,
+      "color": "token:cold",
+      "ends": "open",
+      "count": 303,
+      "size": 0.8,
+      "spread": 0.003,
+      "parts": [
+        "evaporator-rear",
+        "gas-line",
+        "flare-nuts",
+        "service-valves",
+        "suction-pipe",
+        "accumulator",
+        "compressor"
+      ]
+    },
+    {
+      "id": "air-indoor",
+      "group": "air",
+      "path": [
+        [
+          -0.83,
+          1.57,
+          0.02
+        ],
+        [
+          -0.83,
+          1.37,
+          0.02
+        ],
+        [
+          -0.83,
+          1.27,
+          0.015
+        ],
+        [
+          -0.83,
+          1.19,
+          0.005
+        ],
+        [
+          -0.83,
+          1.084,
+          0.028
+        ],
+        [
+          -0.83,
+          1.028,
+          0.075
+        ],
+        [
+          -0.83,
+          1.01,
+          0.16
+        ],
+        [
+          -0.83,
+          0.97,
+          0.33
+        ],
+        [
+          -0.83,
+          0.87,
+          0.55
+        ]
+      ],
+      "speed": 0.35,
+      "color": "token:cold",
+      "stops": [
+        {
+          "at": 0,
+          "color": "token:neutral"
+        },
+        {
+          "at": 0.23,
+          "color": "token:neutral"
+        },
+        {
+          "at": 0.33,
+          "color": "token:cold"
+        },
+        {
+          "at": 1,
+          "color": "token:cold"
+        }
+      ],
+      "count": 720,
+      "size": 0.4,
+      "spread": [
+        0.3,
+        0.012,
+        0.012
+      ],
+      "clip": false,
+      "parts": [
+        "top-grille",
+        "air-filter",
+        "evaporator-rear",
+        "crossflow-fan",
+        "louvre"
+      ]
+    },
+    {
+      "id": "air-outdoor-upper",
+      "group": "air",
+      "path": [
+        [
+          0.42,
+          0.43,
+          -0.45
+        ],
+        [
+          0.42,
+          0.41500000000000004,
+          -0.2
+        ],
+        [
+          0.42,
+          0.4,
+          -0.125
+        ],
+        [
+          0.42,
+          0.4,
+          0
+        ],
+        [
+          0.42,
+          0.4,
+          0.1
+        ],
+        [
+          0.42,
+          0.4,
+          0.16
+        ],
+        [
+          0.42,
+          0.41800000000000004,
+          0.4
+        ],
+        [
+          0.42,
+          0.44,
+          0.65
+        ]
+      ],
+      "speed": 0.5,
+      "color": "token:hot",
+      "stops": [
+        {
+          "at": 0,
+          "color": "token:neutral"
+        },
+        {
+          "at": 0.26,
+          "color": "token:neutral"
+        },
+        {
+          "at": 0.37,
+          "color": "token:hot"
+        },
+        {
+          "at": 1,
+          "color": "token:hot"
+        }
+      ],
+      "count": 480,
+      "size": 0.4,
+      "spread": [
+        0.045,
+        0.025,
+        0.02
+      ],
+      "clip": false,
+      "parts": [
+        "condenser-coil",
+        "outdoor-fan",
+        "fan-grille"
+      ]
+    },
+    {
+      "id": "air-outdoor-lower",
+      "group": "air",
+      "path": [
+        [
+          0.58,
+          0.13,
+          -0.45
+        ],
+        [
+          0.58,
+          0.14500000000000002,
+          -0.2
+        ],
+        [
+          0.58,
+          0.16,
+          -0.125
+        ],
+        [
+          0.58,
+          0.16,
+          0
+        ],
+        [
+          0.58,
+          0.16,
+          0.1
+        ],
+        [
+          0.58,
+          0.16,
+          0.16
+        ],
+        [
+          0.58,
+          0.142,
+          0.4
+        ],
+        [
+          0.58,
+          0.12,
+          0.65
+        ]
+      ],
+      "speed": 0.5,
+      "color": "token:hot",
+      "stops": [
+        {
+          "at": 0,
+          "color": "token:neutral"
+        },
+        {
+          "at": 0.26,
+          "color": "token:neutral"
+        },
+        {
+          "at": 0.37,
+          "color": "token:hot"
+        },
+        {
+          "at": 1,
+          "color": "token:hot"
+        }
+      ],
+      "count": 480,
+      "size": 0.4,
+      "spread": [
+        0.045,
+        0.025,
+        0.02
+      ],
+      "clip": false,
+      "parts": [
+        "condenser-coil",
+        "outdoor-fan",
+        "fan-grille"
+      ]
+    }
+  ],
+  "animations": [
+    {
+      "id": "compressor-spin",
+      "target": "compressor-rotor",
+      "kind": "rotate",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "rpm": 60
+    },
+    {
+      "id": "crossflow-spin",
+      "target": "crossflow-fan",
+      "kind": "rotate",
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "rpm": 30
+    },
+    {
+      "id": "outdoor-fan-spin",
+      "target": "outdoor-fan",
+      "kind": "rotate",
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "rpm": 45
+    },
+    {
+      "id": "louvre-swing",
+      "target": "louvre",
+      "kind": "oscillate",
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "amplitude": 15,
+      "hz": 0.12
+    }
+  ],
+  "views": {
+    "assembled": {
+      "camera": {
+        "position": [
+          1.38,
+          1.7,
+          3.42
+        ],
+        "target": [
+          -0.03,
+          0.64,
+          0
+        ],
+        "fov": 30
+      }
+    },
+    "exploded": {
+      "camera": {
+        "position": [
+          2,
+          2.2,
+          5.3
+        ],
+        "target": [
+          -0.05,
+          0.55,
+          0.1
+        ],
+        "fov": 30
+      }
+    },
+    "cutaway": {
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "offset": 0
+    },
+    "section": {
+      "plane": "xy"
+    }
+  },
+  "spec": [
+    {
+      "key": {
+        "en": "Type",
+        "zh": "类型"
+      },
+      "value": {
+        "en": "Wall split · inverter",
+        "zh": "壁挂分体 · 变频"
+      },
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Refrigerant",
+        "zh": "冷媒"
+      },
+      "value": "R32 · 0.60 kg",
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Cooling",
+        "zh": "制冷量"
+      },
+      "value": "2.6 kW · 9,000 BTU/h",
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Power in",
+        "zh": "输入功率"
+      },
+      "value": "0.65 kW · COP 4.0",
+      "tag": "design"
+    }
+  ],
+  "telemetry": [
+    {
+      "key": {
+        "en": "Compressor",
+        "zh": "压缩机"
+      },
+      "unit": "rpm",
+      "idle": 0,
+      "run": 3600,
+      "lag": 6,
+      "decimals": 0
+    },
+    {
+      "key": {
+        "en": "High side",
+        "zh": "高压侧"
+      },
+      "unit": "MPa abs",
+      "idle": 1.93,
+      "run": 3,
+      "lag": 10,
+      "decimals": 2
+    },
+    {
+      "key": {
+        "en": "Low side",
+        "zh": "低压侧"
+      },
+      "unit": "MPa abs",
+      "idle": 1.93,
+      "run": 1.01,
+      "lag": 10,
+      "decimals": 2
+    },
+    {
+      "key": {
+        "en": "Indoor air out",
+        "zh": "室内出风"
+      },
+      "unit": "°C",
+      "idle": 27,
+      "run": 17,
+      "lag": 25,
+      "decimals": 1
+    },
+    {
+      "key": {
+        "en": "Outdoor air out",
+        "zh": "室外出风"
+      },
+      "unit": "°C",
+      "idle": 33,
+      "run": 38,
+      "lag": 20,
+      "decimals": 1
+    },
+    {
+      "key": {
+        "en": "Power",
+        "zh": "功率"
+      },
+      "unit": "kW",
+      "idle": 0,
+      "run": 0.65,
+      "lag": 6,
+      "decimals": 2
+    }
+  ],
+  "presets": [
+    {
+      "id": "hero",
+      "label": {
+        "en": "Hero",
+        "zh": "全景"
+      },
+      "camera": {
+        "position": [
+          1.38,
+          1.7,
+          3.42
+        ],
+        "target": [
+          -0.03,
+          0.64,
+          0
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "indoor-unit",
+      "label": {
+        "en": "Indoor",
+        "zh": "室内机"
+      },
+      "camera": {
+        "position": [
+          -0.1,
+          1.72,
+          1.9
+        ],
+        "target": [
+          -0.82,
+          1.2,
+          0
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "outdoor-unit",
+      "label": {
+        "en": "Outdoor",
+        "zh": "室外机"
+      },
+      "camera": {
+        "position": [
+          1.82,
+          1,
+          1.86
+        ],
+        "target": [
+          0.66,
+          0.28,
+          0
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "line-set-rear",
+      "label": {
+        "en": "Line set",
+        "zh": "连接管"
+      },
+      "camera": {
+        "position": [
+          2.3,
+          1.7,
+          -3
+        ],
+        "target": [
+          0.1,
+          0.65,
+          -0.2
+        ],
+        "fov": 32
+      }
+    },
+    {
+      "id": "cutaway-side",
+      "label": {
+        "en": "Cutaway",
+        "zh": "剖面"
+      },
+      "camera": {
+        "position": [
+          -0.12,
+          0.84,
+          4.2
+        ],
+        "target": [
+          -0.12,
+          0.66,
+          0
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "exploded-view",
+      "label": {
+        "en": "Exploded",
+        "zh": "爆炸图"
+      },
+      "camera": {
+        "position": [
+          2,
+          2.2,
+          5.3
+        ],
+        "target": [
+          -0.05,
+          0.55,
+          0.1
+        ],
+        "fov": 30
+      },
+      "view": "exploded"
+    }
+  ]
+}
