@@ -287,6 +287,35 @@ div.space-inspector__detail:not([hidden]) {
   text-decoration: underline;
   text-decoration-thickness: 1px;
 }
+/* A whole group (`group:<id>`): a name, nothing to select. */
+.space-co[data-group] {
+  cursor: default;
+}
+.space-co[data-group]:hover .space-co__en {
+  text-decoration: none;
+}
+
+/* PRESENTATION: the leaders stay on with the HUD hidden; placards 20 % larger, never clicked (a click is the next beat). */
+.atlas-scene[data-hud="off"] .atlas-leaders[data-present] {
+  opacity: 1;
+  visibility: visible;
+}
+.space-leaders[data-presenting] .space-co,
+.space-leaders[data-presenting] .space-co__hit {
+  pointer-events: none;
+}
+.space-leaders[data-presenting] .space-co__en {
+  font-size: calc(1.2 * 11.3 * var(--u));
+}
+.space-leaders[data-presenting] .space-co__n {
+  font-size: calc(1.2 * 10.8 * var(--u));
+}
+.space-leaders[data-presenting] .space-co__zh {
+  font-size: calc(1.2 * 10.9 * var(--u));
+}
+.space-leaders[data-presenting] .space-co__note {
+  font-size: calc(1.2 * 10.6 * var(--u));
+}
 
 /* ------------------------------------------------------------------ */
 /* Card: part chain                                                    */

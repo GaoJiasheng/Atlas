@@ -384,7 +384,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   const panelTools = useMemo<ControlRow[]>(
     () => [
       { kind: 'mode', id: 'reference', label: t('time.tool.reference') },
-      { kind: 'mode', id: 'presentation', label: t('time.tool.presentation') },
+      { kind: 'mode', id: 'presentation', label: t('present.tool') },
       ...(hasGlossary ? [{ kind: 'glossary' as const }] : []),
       { kind: 'hud' },
     ],
@@ -458,7 +458,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
           {
             id: 'presentation',
             key: 'p',
-            label: t('time.mode.presentation'),
+            label: t('present.mode'),
             on: presenting,
             tone: 'signal',
             status: presentationStatus,

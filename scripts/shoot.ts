@@ -12,7 +12,7 @@
  *   pnpm shoot ww2 --beats                           # every presentation beat -> shots/<topic>/<locale>-<theme>/beat-<chapter>-<n>.png
  *   pnpm shoot sample-space --perf --json out.json   # renderer numbers per shot
  *
- * `--beats` also lists the highlight ids of each chapter's own state that have no label on screen at the chapter camera (listed, not failed).
+ * `--beats` also lists the ids each chapter's own state asks to label (TimeScene `highlight`, SpaceScene `labels`) that have no label on screen at the chapter camera (listed, not failed).
  * `--locale` and `--theme` take a value, a comma list, or `all` (default: en, paper).
  * `--keys` / `--layout` / `--beats` replace the shot run unless shot names or `--shots` are given.
  *
@@ -88,9 +88,9 @@ interface RunReport {
   layout: LayoutResult[];
   /** Presentation beats that did not land (empty = every beat shot). */
   beatFailures: string[];
-  /** Beats whose highlighted ids have no label on screen (content issues, not failures). */
+  /** Beats whose labelled ids (TimeScene `highlight`, SpaceScene `labels`) have no label on screen (content issues, not failures). */
   beatNotes: string[];
-  /** Chapters whose own `state.highlight` has ids with no label on screen at the chapter camera (content issues, not failures). */
+  /** Chapters whose own `state.highlight` / `state.labels` has ids with no label on screen at the chapter camera (content issues, not failures). */
   chapterNotes: string[];
   /** JavaScript the page loaded (gzip -9 of the files in dist/). */
   js: { files: number; gzKB: number };
@@ -334,6 +334,30 @@ async function runShots(s: Session, o: Options, out: string, report: RunReport):
 /* Beats                                                               */
 /* ------------------------------------------------------------------ */
 
+/**
+ * Ids the scene asks to label that have no label on screen. TimeScene: the
+ * store's `highlight` against the map placards (`.ts-co`); SpaceScene: the
+ * leader labels' list (`data-want` on `.space-leaders`: the beat's `labels`
+ * in the presentation, else the chapter's; nothing listed = nothing to check)
+ * against the placards (`.space-co[data-id]`, `group:<id>` for a group).
+ */
+function unlabelled(s: Session): Promise<string[]> {
+  return s.page.evaluate(() => {
+    if (document.querySelector('.atlas-scene[data-engine="space-scene"]')) {
+      const want = (document.querySelector<SVGElement>('.space-leaders')?.dataset.want ?? '').split(',').filter(Boolean);
+      const shown = new Set(
+        [...document.querySelectorAll<SVGElement>('.space-co[data-id]')].filter((e) => Number(e.style.opacity || 0) > 0.95).map((e) => e.dataset.id),
+      );
+      return want.filter((id) => !shown.has(id));
+    }
+    const shown = new Set(
+      [...document.querySelectorAll<HTMLElement>('.ts-co')].filter((e) => e.dataset.hidden === 'false' && e.style.opacity === '1').map((e) => e.dataset.id),
+    );
+    const highlight = (window.__atlas!.state() as { highlight?: string[] }).highlight ?? [];
+    return highlight.filter((id) => !shown.has(id));
+  });
+}
+
 /** One screenshot per presentation beat: `beat-<chapter id>-<n>.png` (n = 1-based position inside the chapter). */
 async function runBeats(s: Session, o: Options, out: string, report: RunReport): Promise<void> {
   const beats = await s.ev(() => window.__atlas!.beats());
@@ -348,14 +372,8 @@ async function runBeats(s: Session, o: Options, out: string, report: RunReport):
     const st = await s.state();
     const landed = st.presentation?.chapter === b.chapter && st.presentation.beat === b.index && st.hud === false;
     if (!landed) report.beatFailures.push(`${name}: state.presentation=${JSON.stringify(st.presentation)} hud=${st.hud}`);
-    // Labels for the beat's highlighted ids: a missing one means no anchor on screen (or its layer is off), usually a content issue.
-    const missing = await s.page.evaluate(() => {
-      const shown = new Set(
-        [...document.querySelectorAll<HTMLElement>('.ts-co')].filter((e) => e.dataset.hidden === 'false' && e.style.opacity === '1').map((e) => e.dataset.id),
-      );
-      const highlight = (window.__atlas!.state() as { highlight?: string[] }).highlight ?? [];
-      return highlight.filter((id) => !shown.has(id));
-    });
+    // Labels the beat asks for: a missing one means no anchor on screen (or its layer is off), usually a content issue.
+    const missing = await unlabelled(s);
     if (missing.length) report.beatNotes.push(`${name}: no label for ${missing.join(', ')}`);
     await s.page.screenshot({ path: join(out, `${name}${o.suffix}.png`) });
     console.log(`  ${name.padEnd(36)} ${landed ? 'OK' : 'FAIL'}${missing.length ? `  (no label: ${missing.join(', ')})` : ''}`);
@@ -364,18 +382,12 @@ async function runBeats(s: Session, o: Options, out: string, report: RunReport):
   console.log(`  beats -> ${out} (${beats.length})`);
 }
 
-/** Highlight ids of each chapter's own state with no label on screen at the chapter camera: listed, never a failure. */
+/** Ids each chapter's own state asks to label (TimeScene `highlight`, SpaceScene `labels`) with no label on screen at the chapter camera: listed, never a failure. */
 async function runChapterHighlights(s: Session, report: RunReport): Promise<void> {
   const chapters = await s.ev(() => window.__atlas!.chapters());
   for (const c of chapters) {
     await s.apply({ chapter: c, wait: 1200 });
-    const missing = await s.page.evaluate(() => {
-      const shown = new Set(
-        [...document.querySelectorAll<HTMLElement>('.ts-co')].filter((e) => e.dataset.hidden === 'false' && e.style.opacity === '1').map((e) => e.dataset.id),
-      );
-      const highlight = (window.__atlas!.state() as { highlight?: string[] }).highlight ?? [];
-      return highlight.filter((id) => !shown.has(id));
-    });
+    const missing = await unlabelled(s);
     if (missing.length) report.chapterNotes.push(`${c}: no label for ${missing.join(', ')}`);
   }
   await s.apply({ wait: 300 });

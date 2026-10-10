@@ -5,14 +5,17 @@
  *   - topic.yaml parses against the topic schema; `id` equals the folder name
  *   - every chapter's frontmatter parses; `order` unique; file named <nn>-<id>.mdx
  *   - chapter `state` parses against the engine's chapter-state schema and
- *     only references ids that exist in the data
+ *     only references ids that exist in the data (SpaceScene, beats included:
+ *     `part` / `hide` / `labels` name parts or `group:<id>` groups, `layers`
+ *     groups, a beat's string `camera` a named preset)
  *   - data/*.json parse against the engine's data schema; required files exist
  *   - all ids kebab-case and unique within the topic (topic, chapters, data)
  *   - bilingual fields: missing/empty `en` is an error, missing `zh` a warning
  *   - MDX bodies carry both <Lang en> and <Lang zh> blocks (warning otherwise)
  *   - data/sources.json: ids unique (S1, S2 …); every event `sources` ref and
  *     every `<Num s="…">` in a chapter body names a listed source
- *   - `<FlyTo preset="…">` names a preset from data/presets.json; `<More>` has a title
+ *   - `<FlyTo preset="…">` names a preset (TimeScene data/presets.json, SpaceScene
+ *     parts.json `presets`); `<More>` has a title
  *   - data/glossary.json: term ids unique, `see` refs exist; every `<Term id="…">`
  *     in a chapter body names a listed term
  *   - at most one `kind: background` chapter, with `order: 0`; `state.note`
@@ -151,7 +154,7 @@ function checkBodyComponents(file: string, body: string, sources: Set<string> | 
   for (const { raw, attrs } of tagAttrs(body, 'FlyTo')) {
     const id = attrs.preset;
     if (!id) error(file, `<FlyTo> needs a preset, e.g. <FlyTo preset="singapore-island">: ${raw}`);
-    else if (!presets.has(id)) error(file, `<FlyTo preset="${id}">: unknown preset (not in data/presets.json)`);
+    else if (!presets.has(id)) error(file, `<FlyTo preset="${id}">: unknown preset (not a named camera preset of this topic)`);
   }
   for (const { raw, attrs } of tagAttrs(body, 'More')) {
     if (!attrs.title) error(file, `<More> needs a title={{ en: "…", zh: "…" }}: ${raw}`);
@@ -300,6 +303,7 @@ function validateTopic(dir: string): void {
       for (const ref of schemas.chapterRefs(state.data)) {
         if (!ids.has(ref)) error(file, `state references unknown id "${ref}"`);
       }
+      for (const issue of schemas.chapterIssues?.(state.data, data) ?? []) error(file, issue);
     }
   }
 }

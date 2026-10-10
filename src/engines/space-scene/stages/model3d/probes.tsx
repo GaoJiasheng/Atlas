@@ -2,9 +2,11 @@
  * Per-frame helpers of the stage that feed the HUD through the bridge
  * (no allocation per frame; module-level temporaries):
  *
- *  - LabelProbe: projects every part's label anchor to stage pixels, checks
- *    occlusion with a throttled raycast (two parts per frame, only after the
- *    camera or the parts moved) and notifies the HUD listeners
+ *  - LabelProbe: projects every part's label anchor to stage pixels, and the
+ *    bounding centre of each group's visible parts (`group:<id>` anchors,
+ *    group labels: never occluded), checks occlusion with a throttled raycast
+ *    (two parts per frame, only after the camera or the parts moved) and
+ *    notifies the HUD listeners
  *  - StatsProbe: renderer counters and a rolling FPS (`__atlas.stats()`, perf readout)
  *  - ShadowUpdater: one shadow-map update when something that casts moved
  *  - ResolutionGovernor: drops the pixel ratio while frames are slow (perf-lessons §3)
@@ -15,22 +17,31 @@ import { Matrix4, Raycaster, Vector3, type Intersection, type Object3D, type Per
 import type { ScreenAnchor, StageBridge } from '../../bridge';
 import type { PartHandle } from './PartNode';
 import { keepAnimating, type StageRuntime } from './runtime';
+import { groupLabelId, unionBox, type BoxMember } from '../../lib/labels';
+import type { Vec3 } from '../../lib/math';
+
+/** A group's parts for its label anchor: part id and the half extents of its bounds. */
+export type GroupMembers = ReadonlyMap<string, readonly { id: string; half: Vec3 }[]>;
 
 const _p = new Vector3();
 const _dir = new Vector3();
 const _hits: Intersection[] = [];
 /** Occlusion checks per frame. */
 const CHECKS_PER_FRAME = 2;
+/** On-screen radius of a group anchor = its projected half-diagonal × this (label columns keep clear of the whole group). */
+const GROUP_CLEARANCE = 1;
 
 export function LabelProbe({
   bridge,
   handles,
+  groups,
   clipping,
   xray,
   runtime,
 }: {
   bridge: StageBridge;
   handles: Map<string, PartHandle>;
+  groups: GroupMembers;
   clipping: Plane[] | null;
   xray: boolean;
   runtime: StageRuntime;
@@ -39,6 +50,18 @@ export function LabelProbe({
     () => ({ raycaster: new Raycaster(), lastCam: new Matrix4(), lastExplode: -1, stale: new Set<string>(), occluders: [] as Object3D[] }),
     [],
   );
+  // Per group: its anchor id, one reusable box per part and the visible ones this frame (no per-frame allocation).
+  const boxes = useMemo(
+    () =>
+      [...groups].map(([group, members]) => ({
+        key: groupLabelId(group),
+        members: members.map((m) => ({ id: m.id, box: { center: [0, 0, 0] as Vec3, half: m.half } satisfies BoxMember })),
+        shown: [] as BoxMember[],
+        out: { center: [0, 0, 0] as Vec3, half: [0, 0, 0] as Vec3 },
+      })),
+    [groups],
+  );
+  const groupKeys = useMemo(() => new Set(boxes.map((g) => g.key)), [boxes]);
   // Anything that changes what hides what re-checks every label.
   useEffect(() => {
     for (const id of handles.keys()) st.stale.add(id);
@@ -77,7 +100,33 @@ export function LabelProbe({
       a.y = (-_p.y * 0.5 + 0.5) * H;
       a.onScreen = _p.z > -1 && _p.z < 1 && Math.abs(_p.x) < 1.02 && Math.abs(_p.y) < 1.02;
     }
-    for (const id of bridge.anchors.keys()) if (!handles.has(id)) bridge.anchors.delete(id);
+    for (const g of boxes) {
+      let a = bridge.anchors.get(g.key);
+      if (!a) {
+        a = { x: 0, y: 0, onScreen: false, occluded: false, shown: false, depth: 0, r: 0 };
+        bridge.anchors.set(g.key, a);
+      }
+      g.shown.length = 0;
+      for (const m of g.members) {
+        const h = handles.get(m.id);
+        if (!h || !h.visible) continue;
+        m.box.center[0] = h.object.position.x + h.offset[0];
+        m.box.center[1] = h.object.position.y + h.offset[1];
+        m.box.center[2] = h.object.position.z + h.offset[2];
+        g.shown.push(m.box);
+      }
+      a.shown = unionBox(g.shown, g.out);
+      if (!a.shown) continue;
+      _p.set(g.out.center[0], g.out.center[1], g.out.center[2]);
+      a.depth = _p.distanceTo(camera.position);
+      a.r = a.depth > 0 ? (Math.hypot(g.out.half[0], g.out.half[1], g.out.half[2]) * GROUP_CLEARANCE * focal) / a.depth : 0;
+      a.occluded = false;
+      _p.project(camera);
+      a.x = (_p.x * 0.5 + 0.5) * W;
+      a.y = (-_p.y * 0.5 + 0.5) * H;
+      a.onScreen = _p.z > -1 && _p.z < 1 && Math.abs(_p.x) < 1.02 && Math.abs(_p.y) < 1.02;
+    }
+    for (const id of bridge.anchors.keys()) if (!handles.has(id) && !groupKeys.has(id)) bridge.anchors.delete(id);
 
     // Throttled occlusion: a couple of stale labels per frame.
     let budget = CHECKS_PER_FRAME;

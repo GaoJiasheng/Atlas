@@ -90,7 +90,7 @@ pnpm tsx scripts/new-topic.ts <slug> --engine time-scene --subject history --tit
      |---|---|---|
      | `<More>` | `<More title={{ en: "The numbers", zh: "数字" }}>`（里面空行再写 Markdown）`</More>` | 细看折叠块：hairline 标题行 + 小三角，默认收起；原生 `<details>`，无 JS 也能用 |
      | `<Num>` | `<Num s="S3">about 70,000</Num>`；多个来源 `s="S3,S7"` | 数字后跟 mono 上标来源号，点开来源弹层（文本、说明、链接，不联网） |
-     | `<FlyTo>` | `<FlyTo preset="singapore-island">Singapore island</FlyTo>` | 正文里的 hairline 按钮，镜头飞到 `presets.json` 里的预设（与 VIEW 按钮同一动作；手机上顺便收起阅读面板） |
+     | `<FlyTo>` | `<FlyTo preset="singapore-island">Singapore island</FlyTo>` | 正文里的 hairline 按钮，镜头飞到命名预设（TimeScene `presets.json`，SpaceScene `parts.json` 的 `presets`；与 VIEW 按钮同一动作；手机上顺便收起阅读面板） |
      | `<Term>` | `<Term id="blitzkrieg">闪电战</Term>` | 名词：点状下划线的 `span`（`role="button"`，Enter / 空格也能开），点开在阅读面板 inspector 区显示 `glossary.json` 里的定义和相关词（见「名词表」）；只包全主题第一次出现处 |
 4. 引擎数据放 `data/*.json`，文件名（去掉 `.json`）就是数据对象的 key：
    - TimeScene/geo：`entities.json`、`control.json`、`movements.json`、`events.json`；可选 `presets.json`（额外镜头）
@@ -114,11 +114,11 @@ pnpm tsx scripts/new-topic.ts <slug> --engine time-scene --subject history --tit
 - 双语字段：`en` 必填非空（error），`zh` 缺失或为空（warning，运行时回退英文）
 - 主题内所有 id（主题、章节、实体、事件、行军、零件、组、流、动画）kebab-case 且全主题唯一
 - 章节 `order` 唯一；文件名建议 `<nn>-<id>.mdx`
-- 章节 `state` 按引擎的 chapter-state schema 校验；`highlight` / `part` / `layers`（space 的组）引用的 id 必须存在
+- 章节 `state` 按引擎的 chapter-state schema 校验；`highlight` 引用的 id 必须存在。SpaceScene（含每个 `beats` 拍）：`part` / `hide` 必须是零件（`part` 不能是 context 零件），`labels` 是零件（非 context）或 `group:<组 id>`，`layers` 是组，拍的字符串 `camera` 是 `parts.json` 的命名预设
 - 引擎要求的数据文件必须存在；`cover` 指向的文件必须存在
 - MDX 正文要有 `<Lang en>` 和 `<Lang zh>`
 - `sources.json`：id 形如 `S1`、不重复；事件的 `sources` 和正文 `<Num s="…">` 引用的编号必须在 `sources.json` 里（没有这个文件却引用了也报错）
-- 正文 `<FlyTo preset="…">` 必须是 `presets.json` 里的预设；`<More>` 必须带 `title`；预设 id 与章节等 id 一样全主题唯一，且不能叫 `world` / `theatre`
+- 正文 `<FlyTo preset="…">` 必须是本主题的命名预设（TimeScene `presets.json`，SpaceScene `parts.json` 的 `presets`）；`<More>` 必须带 `title`；预设 id 与章节等 id 一样全主题唯一，且不能叫 `world` / `theatre`（TimeScene）、`orbit` / `reference`（SpaceScene）
 - `glossary.json`：名词 id 唯一，`see` 必须指向已有名词且不能指向自己；正文 `<Term id="…">` 必须在名词表里（没有这个文件却用了也报错）
 - `topic.yaml` 的 `blocLabels` 只允许 `axis / allied / neutral / out` 四个键，每项都是 `{ en, zh }`
 - 背景章（`kind: background`）至多一个且 `order: 0`；`state.note`（阅读说明）只能写在背景章
@@ -279,8 +279,8 @@ const labelsOn = useHud((s) => s.labels);   // 或 CSS：.atlas-scene[data-label
 - 规格表：宿主先放默认行（学科 / 章节数 / 课纲锚点数），引擎行追加在后，最多 8 行。
 - 接线现状：
   - **TimeScene**：预设 = `world` + `theatre`（整片区域）+ `presets.json` 的地理预设（**不再有章节预设**：换章走章节轨、时间轴节点和 ← →）；模式 `flow`（F）/ `borders`（B）/ `graticule`（G）/ `territory`（N）/ `reference`（R）/ `presentation`（P）+ 宿主 `labels`（L），全在控制面板里（`presentation` 另有底部条左端的 PRESENT 按钮）；**没有 `pause`**（没有自由播放，SPACE 只在演示里 = 下一拍）；ESC 依次退出演示、REFERENCE、收起展开的参与卡（连同选中的实体）、取消选中实体、关闭事件详情、清空高亮。G / P 手机上不画行（`phone: false`）。
-  - **SpaceScene**：预设 = 各章镜头（本章镜头 > 视图预设 > 继承）+ `ORBIT`（转台）+ `REF.`（= REFERENCE 模式的预设入口），模型视角，不是地理预设，保留；模式 `xray`（X）/ `exploded`（E）/ `cutaway`（C）/ `flow`（F，= run）/ `reference`（R）+ 宿主 `labels`（L），在 ExplorerOverlay 的控制面板 TOOLS 节里（LAYERS 节是零件组）；SPACE = run；ESC 依次取消选中、退出 REFERENCE、停 ORBIT。R 手机上不画行（`phone: false`）。
-  - SpaceScene 还没有 PRESENTATION（P，docs/12 §8 G1，接 core 演示系统）；TimeScene 的 PRESENTATION 是 core 演示系统加它的适配器（见「演示系统（core）」与「TimeScene」）。
+  - **SpaceScene**：预设 = 各章镜头（本章镜头 > 视图预设 > 继承）+ `ORBIT`（转台）+ `REF.`（= REFERENCE 模式的预设入口）+ `parts.json` 的命名预设（数字键接着排），模型视角，不是地理预设；模式 `xray`（X）/ `exploded`（E）/ `cutaway`（C）/ `flow`（F，= run；EXPLODED 时禁用）/ `reference`（R）/ `presentation`（P）+ 宿主 `labels`（L），在 ExplorerOverlay 的控制面板 TOOLS 节里（LAYERS 节是零件组）；SPACE = run；ESC 依次退出演示、取消选中、退出 REFERENCE、停 ORBIT。R / P 手机上不画行（`phone: false`）。
+  - 两个引擎的 PRESENTATION 都是 core 演示系统加各自的适配器（见「演示系统（core）」「TimeScene」「SpaceScene · 演示」）。
 
 ### 键盘（`core/keys.ts`，宿主统一处理）
 
@@ -344,8 +344,8 @@ const presentation = usePresentation(adapter);   // { beats, beat, presenting, i
 - **字幕卡**：舞台上只剩标题块（`data-hud-panel="present-title"`）和一张纸质字幕卡（`data-hud-panel="present"`，底部居中，宽 ≤ 1080 设计 px，细边框）。自上而下：**表头** `04 / 11 · 闪电战：法国沦陷 · 1940年6月 · 2 / 3`（章序 · 章名 · 适配器的 `readout` · 本章第几拍；背景章写"Background / 背景"，本章只有一拍就不写最后一段）；**字幕**（大号衬线，28 设计 px，拍开始后约 1.6 s 淡入，`instant` 时直接出现；最多约四行，更长的在卡内滚动）；**两级进度条**：每章一段（等宽，段下写 `BG 01…11`，当前章 signal 橙），当前章再按拍切小段；已读过的章填墨色，当前章填到当前这一拍。点章段 = 那一章第一拍，点小段 = 那一拍（都是带 `aria-label` 的 `<button>`）；手机宽度不画编号。舞台盖一层透明点击层（拖动 / 缩放不再作用于舞台）；点舞台 / 字幕 / → / 空格 = 下一拍，← = 上一拍（捕获阶段，先于宿主的换章键），到最后一拍停住。
 - **自动播放**：进度条右边的"Auto-play / 自动播放"勾选框（默认不勾，sessionStorage `atlas:autoplay`）。拍**落定**后（适配器的 `afterCameraSettle`，或 `applyBeat` 返回的 promise，都没有就拍开始后 2.3 s；`instant` 立即）开始计时：这拍有 `audio` 且在播就等播完；Voice 在读就等最后一段真正 `end` 再停 0.6 s，`end` 丢了才用兜底 3 × 预计朗读时间（字数 ÷ 12 字/秒，至少 6 s，每多一段加 3 s）；否则停留 clamp(4 s + 60 ms × 字幕字数, 6 s, 20 s)。期间任何用户输入（点击、按键、滚轮、点进度条）让这一拍停住（勾选框文字变弱），下一拍重新计时。
 - **语音**（`lib/speech.ts`，Web Speech API，不用音频文件、不联网）：自动播放旁边的"Voice / 语音"勾选框（默认不勾，sessionStorage `atlas:voice`）。拍落定后读 `captionOf` 给的字幕（`speakableText` 去掉标记和来源上标，数字照写；只读页面语言，不读表头）；这拍有 `audio` 文件则以文件为准、不朗读。**章节开场**：进入一章第一拍（或跳到与上次读过字幕的不是同一章）时，先读章号（`chapterNumberText`：en "Chapter seven"，zh「第七章」；背景章读"Background / 背景"），再读章名，再读字幕——一个队列（`speakSequence`），段间 ~350 ms（`PART_GAP_MS`，定时器，不用 SSML）；字幕开始读时才算已播报。换拍、关 Voice、退出演示一次取消整个队列。**防提前结束**（`speak`）：先 `cancel()`，下一帧（兜底 120 ms）再 `speak()`；每段带令牌，被取代 / 取消的那段的事件一律忽略；`canceled` / `interrupted` 错误不推进；快于每秒 60 字的 `end` 记为 `spurious-end`、不推进；Chrome 系每 10 s `pause()` + `resume()` 保活（Safari / iOS 不做）；回到前台 `resume()`；勾选时静音预热一次（iOS / Safari 要用户手势）。选声 `pickVoice`：en 先 en-GB 再 en-*；zh 先 zh-CN / zh-SG 再其他 zh-*，繁体和粤语最后；本地声音优先；再按偏好名字（zh：Tingting、Meijia、Lili、Xiaoxiao；en：Daniel、Samantha、Aria、Libby）；`utterance.lang` = `zh-CN` / `en-GB`，语速 0.95，音高 1。Chrome 的声音列表异步加载（`voiceschanged`）；没有可用声音时勾选框禁用，title「No voice available / 此设备没有可用的语音」，`setVoice(true)` 返回 false。调试 `__atlas.voiceLog()`（最近 10 段，`part`：`chapter` / `title` / `caption`，`reason`：`end` / `cancelled` / `spurious-end` / `error:<码>`，朗读中为 `null`）；`tests/core/speech.test.ts` 用假的 `speechSynthesis` 测队列与取消语义。
-- 界面文字沿用 `time.presentation / time.beats / time.beat* / time.autoplay* / time.voice*` 这些 UI 键（键名是历史原因，与引擎无关）。
-- **SpaceScene（E2b）**：`adapter.ts` 里的 `SpacePresentationAdapter = PresentationAdapter<SpaceBeatSpec, SpaceSavedState>` 是给它的类型桩（拍 = `{ view?, part?, explode?, run?, cutaway?, camera?, layers?, labels?, hide?, caption, audio? }`），还没有实现。
+- 界面文字是 `present.*` UI 键，两个引擎共用：`present.title`（标题块小字）、`present.beats` / `present.beat` / `present.beatChapter` / `present.beatBackground`（进度条的无障碍名）、`present.autoplay(Hint)`、`present.voice(Hint|None)`、`present.mode`（模式名 / 控制面板行）、`present.tool`、`present.button` / `present.hint`（TimeScene 底部条的 PRESENT 按钮）。
+- **SpaceScene**：`adapter.ts` 的 `SpacePresentationAdapter = PresentationAdapter<SpaceBeatSpec, SpaceSavedState>`，实现在 `space-scene/View.tsx`（见「SpaceScene · 演示」）。
 
 ### QA：`pnpm shoot`（`scripts/shoot.ts`）
 
@@ -355,7 +355,7 @@ skill 里 `shoot.py` 的 Playwright / TypeScript 版，驱动 `window.__atlas`�
 pnpm shoot sample-space                      # 每章 + 每个模式 + 额外预设 + hero-clean -> shots/sample-space/en-paper/*.png
 pnpm shoot sample-time --locale zh --theme cinema --size 3840x2160 --suffix _4k
 pnpm shoot sample-time --keys --layout       # 键位同步 + 六尺寸 HUD 布局（有 `--keys` / `--layout` / `--beats` 且没给截图名时不截默认图）
-pnpm shoot ww2 --beats                       # 每一拍一张 -> shots/ww2/en-paper/beat-<章 id>-<n>.png（n = 本章内第几拍，从 1 起）；脚本核对 state().presentation 与 HUD 隐藏，没落到就失败；这拍 `highlight` 里没有标注的 id（锚点在画面外或对应图层没开，多半是内容 / 镜头问题）逐条打印，不算失败；`--beats` 末尾还按同一办法列出每章自己 `state.highlight` 里在章节镜头下没有标注的 id（`chapter highlights`），同样不算失败
+pnpm shoot ww2 --beats                       # 每一拍一张 -> shots/ww2/en-paper/beat-<章 id>-<n>.png（n = 本章内第几拍，从 1 起）；脚本核对 state().presentation 与 HUD 隐藏，没落到就失败；这拍要标的 id 里没有标注的（锚点在画面外或对应图层没开，多半是内容 / 镜头问题）逐条打印，不算失败——TimeScene 看 `highlight` 与地图标签 `.ts-co`，SpaceScene 看拍的 `labels`（`.space-leaders` 的 `data-want`）与引线标签 `.space-co[data-id]`（组标注是 `group:<id>`）；`--beats` 末尾还按同一办法列出每章自己 `state.highlight` / `state.labels` 里在章节镜头下没有标注的 id（`chapter highlights`），同样不算失败
 pnpm shoot sample-space --perf --json out.json   # 每张图后多等 2 s，打印 calls / triangles / fps / gpu；--json 写全部结果
 pnpm shoot sample-time --shots mine.json hero    # 自定义截图表（{name: {chapter?, preset?, modes?, hud?, wait?, js?}}）
 ```
@@ -582,12 +582,12 @@ MapLibre 只在 `controller` chunk 里，View 挂载后才加载（时间轴先�
 index.ts                 descriptor（part/view/explode/run/cutaway）
 schema.ts                parts.json 的 zod（构建期）
 View.tsx                 HUD 控件注册（预设 / 模式 / 规格行 / 卡片与面板标题）+ 各插槽内容 + 懒加载 Model3DStage
-ui.ts                    引擎内 UI store（ORBIT、REFERENCE；不进 URL，View 与舞台共用）
-bridge.ts                舞台 → HUD 的桥：每帧投影好的标注锚点、渲染计数、帧回调（View 侧不 import three）
+ui.ts                    引擎内 UI store（ORBIT、REFERENCE、演示中 + 这一拍的标注；不进 URL，View 与舞台共用）
+bridge.ts                舞台 → HUD 的桥：每帧投影好的标注锚点（零件 + `group:<id>` 组锚点）、渲染计数、帧回调、镜头落定（`settledTransition` / `cameraSettled`）（View 侧不 import three）
 lib/                     纯函数，有单测：explode / visibility（图层、isolate、hide、shell、context）/ flow-curve / flow-stops（沿路径变色）/
                          color（材质族、tint）/ presets（材质名，无 zod）/ animation / telemetry（一阶滞后读数）/ detail（段落 + [S#]）/
                          camera（球坐标插值、REFERENCE 镜头、过渡目标）/ parts（零件包围盒、repeat 变换）/
-                         schematic（零件链路、流经连线、立面、标注预算与列避让）/ xform / math
+                         schematic（零件链路、流经连线、立面、标注预算与列避让）/ labels（组标注 id、演示时用哪张标注表、组包围盒）/ xform / math
 stages/model3d/          R3F 舞台：Model3DStage（createRoot 宿主）、SceneRoot、PartNode、geometry（程序化零件）、
                          materials（材质 + 选中边缘 / 剖面 shader 补丁）、textures（程序化贴图）、Lighting、
                          GroundShadow、CameraRig、Flows + flowMaterial、probes（标注投影 / 计数 / 阴影更新）、GltfSource
@@ -645,6 +645,10 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
   ],
   "telemetry": [                           // 可选，≤ 6 行：STATE 面板 = RUN + 这些模拟读数（带 SIM 芯片），替代默认的 FLOW / ANIMATIONS / VIEW / EXPLODE
     { "key": {en, zh}, "unit": "MPa abs", "idle": 1.93, "run": 3.0, "lag": 10, "decimals": 2 }   // 一阶滞后 τ = lag 秒；decimals 默认取 idle / run 写出的位数
+  ],
+  "presets": [                             // 可选，≤ 6 个命名镜头预设（docs/12 §7.4 G7）：VIEW 按钮排在各章镜头、ORBIT、REF. 之后（数字键接着排，最多到 9）
+    { "id": "outdoor", "label": {en, zh}, "camera": { "position": [1.5, 0.75, 1.5], "target": [0.62, 0.3, 0], "fov": 30 },
+      "view": "xray" }                     // view 可选：按预设时同时切视图（exploded 时拆开到 0.7 或当前值）；id 全主题唯一，不能叫 orbit / reference
   ]
 }
 ```
@@ -676,9 +680,19 @@ state:
   run: true             # 通电：播放 animations + flows（渐入渐出）
   cutaway: half         # none | half
   layers: [refrigerant, air]   # 可见的组
-  labels: [compressor, fan]    # 可选：本章引线标注哪些零件（默认：所有可见零件，大件优先，按镜头距离限量）
+  labels: [compressor, "group:outdoor"]   # 可选：本章引线标注哪些零件（默认：所有可见零件，大件优先，按镜头距离限量）；`group:<组 id>` = 整组一个标注（组锚点）
   hide: [front-panel]          # 可选：本章移开的零件（沿自己的 explode 方向移出 0.25 × dist，后半段淡出，共 .6 s；回来反向）。不累积、不进 URL（store 字段 `hidden`）；被移开的零件不投影、不可点、不标注，ARCHITECTURE 画虚线框
   camera: { position: [4, 3, 5], target: [0, 0.3, 0], fov: 34 }
+  summary: { en: "…", zh: "…" }   # 可选：阅读面板章名下的一句概述，也是没写 beats 时的默认字幕
+  question: { en: "…", zh: "…" }  # 可选：孩子会问的问题（没有 summary 时作阅读面板头句 / 默认字幕）
+  beats:                          # 可选：演示节拍（P），见「SpaceScene · 演示」；不写 = 一拍（本章 state，字幕 = summary）
+    - camera: outdoor             # 命名预设 id（只取它的镜头），或 { position, target, fov }
+      part: compressor
+      cutaway: half
+      labels: [compressor, accumulator]   # 这一拍的引线标注（≤ 6，不累积；不写 = 本章的 labels）
+      hide: [outdoor-front]               # 这一拍移开的零件（不累积；不写 = 本章的 hide）
+      caption: { en: "…", zh: "…" }
+      audio: /audio/aircon/ch03-1.mp3     # 可选：进拍时播放的旁白文件（站内路径）
 ```
 
 章节目标照常累积（`labels`、`hide` 不累积，只看本章）。**镜头规则**（`lib/camera.ts transitionCamera`，有单测）：切章 / 首次加载 / URL：本章自己写了 `camera`（或 URL `cam=` 与本章基线不同）就用它；否则 `views[当前 view].camera`；都没有就沿用。**预设（VIEW 按钮 / 数字键）永远落在该预设的镜头上**（P1 遗留问题：本章没有自己镜头时，基线是继承来的，曾被误判成"非显式"而飞去视图预设；已修）。模式切换（X / E / C / F）不动镜头。较窄的舞台（宽高比 < 1.6：HUD 占去两侧的桌面、平板、竖屏手机）自动把镜头往后拉，回写 URL 时换算回来，链接与设备无关。
@@ -689,13 +703,15 @@ state:
 |---|---|
 | VIEW `01..NN` | 各章镜头（1.6 s easeInOut，target 直线 + 相机相对 target 的球坐标插值，绕着模型转，不穿模） |
 | VIEW `ORBIT` | 慢速转台：绕 target 的竖轴 1 圈 / 40 s，1 s 渐入；一拖动即停（→ FREE CAMERA） |
+| VIEW 命名预设 | `parts.json` 的 `presets`，排在 `REF.` 之后：飞到预设镜头（1.6 s），有 `view` 时同时切视图；正文 `<FlyTo preset>` 同一动作 |
 | VIEW `REF.` = MODE `REFERENCE`（R） | 长焦（fov 16）正视（`views.section`，默认正面），2 s；暂停运转、收起爆炸、隐藏流场；EXPLODED 与 FLOW / SPACE 显式禁用，状态行写 `EXPLODE AND FLOW LOCKED`；再按 R（或 ESC）2 s 回到进入前的镜头与状态；选别的预设 = 退出但不回镜头 |
 | MODE `X-RAY`（X） | 有 `shell` 零件的主题：只有 shell 变 .15 透明，其余保持实心（管里的粒子、机内的零件可见）；没有 shell 的主题：未选中零件全部 .15 透明（.3 s）。选中零件永远实心；只有这时材质变透明（forceSinglePass） |
 | MODE `EXPLODED`（E） | 2 s easeInOut 拆开到 0.7（或章节值）；拖滑块时快速跟随 |
 | MODE `CUTAWAY`（C） | 单剖切面；封闭零件的背面画成 `--cut` 赭色 + 屏幕空间 45° 墨色剖面线（像博物馆剖面模型，不是删掉一半）；管、平面不填 |
-| MODE `FLOW`（F）= SPACE | run：动画与流场 .6 s 渐入 |
+| MODE `FLOW`（F）= SPACE | run：动画与流场 .6 s 渐入。EXPLODED 时 F 禁用、舞台不画粒子（流路径不随零件拆开，docs/12 §7.5 G16），状态行写 `FLOW OFF WHILE EXPLODED` |
+| MODE `PRESENTATION`（P） | core 演示系统，见「SpaceScene · 演示」 |
 | `L` | 标注开关（宿主） |
-| ESC | 取消选中 → 退出 REFERENCE → 停 ORBIT |
+| ESC | 退出演示 → 取消选中 → 退出 REFERENCE → 停 ORBIT |
 
 - 状态行追加：选中零件 `#06 SAMPLE DRUM`、`EXPLODE 80`、`CUTAWAY 50`、REFERENCE 时的锁定说明。规格行追加 PARTS / GROUPS / FLOWS（`hud/spec.ts`）；有 `spec` 时是 PARTS + 主题行。标题块声明行 = `topic.yaml` 的 `note`（没有时用全站文案）。
 - `card`：零件链路示意（有零件的组 = 列，列号 = 组的分区号；零件 = 带编号节点，context 零件不进；`connects` = 细线）；最长一列 > 10 行时行距从 23 降到 16（字号 10）；选中零件填 signal 色；运转时：有 `parts` 的流把它流经的相邻零件之间的连线染成 `stops` 在该处的颜色（`color-mix`）并步进，没有 `parts` 的流照旧染本组内的连线。
@@ -704,7 +720,7 @@ state:
 - `panel03` STATE：RUN / FLOW / ANIMATIONS / VIEW / EXPLODE 实时值（mono），运行时数值带 `SIM` 芯片。有 `telemetry` 时 = RUN + 主题读数：x(t) = target + (x₀ − target)·e^(−t/lag)，target = run ? `run` : `idle`，4 Hz 刷新、不加抖动；瞬时过渡（深链接、测试 / 截图的 snap）直接跳到终值。
 - `perf`：`60 FPS · 16 CALLS · 0.02M TRIS · 1520×1026`（滚动平均；按需渲染空闲时显示 `IDLE`）。
 - `bottomBar`：只有 EXPLODED 时出现拆开滑块（44 px 拇指）；模式开关都在控制面板，不重复。
-- `stageOverlay`：控制面板（`explorer/ExplorerOverlay.tsx`）：LAYERS = 零件组，TOOLS = X-RAY / EXPLODED / CUTAWAY / FLOW / REFERENCE / LABELS /（有 `glossary.json` 时）名词表 / 隐藏界面，KEY = 组与流的图例。章节正文里的 `<Term>` 与 TimeScene 相同。
+- `stageOverlay`：控制面板（`explorer/ExplorerOverlay.tsx`）：LAYERS = 零件组，TOOLS = X-RAY / EXPLODED / CUTAWAY / FLOW / REFERENCE / PRESENTATION / LABELS /（有 `glossary.json` 时）名词表 / 隐藏界面，KEY = 组与流的图例。章节正文里的 `<Term>` 与 TimeScene 相同。
 - `inspector`：选中零件详情（编号 + 名称 + 中文、级别、说明、了解更多、所属组、相连芯片），hairline 皮肤。`detail` 里空行分段；`[S3]`、`[S3, S7]` 渲染成与 `<Num s>` 相同的来源上标（点开宿主的来源浮层；schema 校验编号在 `data/sources.json` 里）。
 - `__atlas.stats()` 合并 `{calls, triangles, geometries, textures, fps, gpu}`（renderer.info + 滚动 FPS + WEBGL_debug_renderer_info）。
 
@@ -717,6 +733,19 @@ state:
 - 数量：`labelBudget(镜头距离 / 模型半径)` 3–10 条（近景少），再受可用高度限制；放不下两列时退成一列，再放不下就不标。手机（< 760）宿主隐藏 `leaders`。
 - 避让模型：每个锚点带投影半径 `r`（零件包围盒的约 3/8 对角线 × 焦距 / 深度，`bridge.anchors[id].r`）；列放在锚点 ∓ `r` 之外，放不下的标签（列在空带里到不了离自己零件 0.6 `r` 以外）不画，选中的零件例外。HUD 之间的空带 < 480 px（720p 笔记本）时只标选中的零件，其余靠右上零件链路卡和点选。
 - 点标签（触屏点一下）= 选中零件；标签热区高 ≥ 44 px。
+- **组标注**（docs/12 §8 G12）：`labels` 里写 `group:<组 id>` = 整组一个标签：EN 组名（大写）/ 中文组名，不带编号和说明，不可点。锚点 = 组内**可见**零件（含拆开、移开后的实际位置）包围盒的中心（`LabelProbe` 每帧算，不判遮挡），投影半径 = 包围盒半对角线，所以标签列放在整组之外。排在零件标签前面。
+- **演示中**：只标这一拍的 `labels`（没写就是本章的，再没写就是默认的全部可见零件），至多 6 个、不按镜头距离限量，字号 +20 %，不可点（点 = 下一拍）；HUD 隐藏时 `leaders` 照常显示（`.atlas-leaders[data-present]`），只避让字幕卡和标题块（HUD 淡出结束时重新测量）。
+- 测试钩子：每个标签 `data-id`（零件 id 或 `group:<id>`）；有明确列表时 `.space-leaders` 带 `data-want`（`pnpm shoot --beats` 的漏标核对）。
+
+### 演示（PRESENTATION，P；docs/12 §8 G1）
+
+core 演示系统（字幕卡、两级进度条、自动播放、语音、拍键、保存 / 恢复都在 core，见「演示系统（core）」）+ `View.tsx` 里的适配器：
+
+- **节拍**：章节 `state.beats`（schema `spaceBeat`）；没写的章 = 一拍（本章 state，字幕 `summary` > `question` > 章名）。一拍 = 本章目标（`chapterTarget`）叠上拍里写的字段：`view` / `part` / `explode` / `run` / `cutaway` / `layers` 覆盖；`hide`、`labels` 只看这一拍（不写 = 本章的）；`camera` = 拍的镜头，或命名预设的镜头（只取镜头，不取它的 `view`），都没有就是本章进入时的镜头（本章镜头 > 视图预设 > 继承）。
+- **applyBeat**：`applyState`（reason `state`）一次写入，镜头 1.4 s（`ui.nextTweenMs`），拆开 2 s、移开 .6 s 照舞台原样过渡；返回的 promise 在舞台报告镜头落定（`bridge.settledTransition`，CameraRig 在缓动结束 / 被拖断 / 无需移动时写）且拆开或移开的过渡做完后 resolve，4 s 兜底（舞台还没加载完）。自动播放和语音从这时开始计（core）。`instant`（`goToBeat(i, { instant: true })`、截图）直接跳到终态。
+- **进入**（`onEnter`）：先记下进入前的场景（`SpaceSavedState`：章、视图、选中、拆开、运转、剖切、`hidden`、图层、标注、镜头（活镜头，换算回与舞台宽高比无关的值）、ORBIT、亮着的预设与 FREE CAMERA；在 REFERENCE 里进入则记 REFERENCE 进入前的那份），再退出 REFERENCE（不飞回）、停 ORBIT、取消选中。**退出**（ESC / P / H / 显示界面）：`applyState` 放回这些，ORBIT 与 VIEW 预设高亮也放回。
+- 演示中 REFERENCE（R）禁用；舞台盖 core 的透明点击层（拖动不转模型，点 = 下一拍）；引线标注见上一节。
+- 语音、自动播放、音频文件、`__atlas.beats / goToBeat / setAutoplay / setVoice / voiceLog / state().presentation` 都来自 core，不需要引擎代码（e2e：`sample-space PRESENTATION …` 两条，含假 `speechSynthesis`：拍落定后才读、读完才进下一拍）。
 
 ### 交互（舞台）
 
@@ -731,6 +760,7 @@ state:
 - 渲染：ACES Filmic + sRGB；pixelRatio = `min(dpr, 3840 / innerWidth, 2)`；灯光 = 一盏大柔 key（唯一投影光源，阴影相机按模型包围盒收紧，PCF 软边）+ 弱 fill + 中性 rim + 半球 + RoomEnvironment（无网络、无 HDR 文件）；paper 暖 key，dark plate 冷 key + 稍强 rim；雾色 = 纸色。只有大件（≥ 模型半径 28%）投影；地面 = 径向接触阴影 + ShadowMaterial 接影面，随拆开下移。`shadowMap.autoUpdate = false`，拆开 / 淡入淡出 / 剖切 / 可见性 / 运转中的投影件变化时才 `needsUpdate`。
 - 材质：每个零件一个 MeshPhysicalMaterial（同一 shader 补丁、同一 program cache key）：选中边缘（菲涅尔，`uSel`）和剖面填充（背面 + `gl_FrontFacing`，`uCut`）都在片元里，零额外 draw call。
 - `frameloop: 'demand'`：只有在缓动（拆开、淡入淡出、运镜、转台、标注滑动 / 遮挡复查）、运转时才请求下一帧；标签页隐藏时不请求。每帧路径不 new 对象（模块级临时向量、预先算好的拆开向量与动画轴）。几何体、材质、贴图都由我们创建并在卸载时 dispose。
+- 示例（sample-space）：第 03 章两拍（一拍 `hide` + 三个零件标注，一拍命名预设 `sample-left` 的镜头 + 两个组标注），一个命名预设，正文一个 `<FlyTo>`。
 - 计数（sample-space，1920×1080；14 个零件 + 1 个 context 墙）：静止 18 draw calls、~19 k 三角形；FLOW +2 calls。
 - 包体：舞台 chunk ~207 KB gz（three + R3F 为主；圆角盒用 `RoundedBoxGeometry`，不引 ExtrudeGeometry/Shape）。GLTF 加载器单独成 chunk（21 KB gz），只有写了 `mesh` 的主题才加载。
 
