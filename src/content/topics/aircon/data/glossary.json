@@ -1,3 +1,236 @@
 {
-  "terms": []
+  "terms": [
+    {
+      "id": "split-system",
+      "term": {
+        "en": "Split system",
+        "zh": "分体式"
+      },
+      "definition": {
+        "en": "An air conditioner in two parts: an indoor unit that cools the room and an outdoor unit that gives the heat away, joined by two refrigerant pipes, a drain hose and cables through the wall.",
+        "zh": "分成两部分的空调：室内机给房间降温，室外机把热散到外面，两者之间用两根冷媒管、一根排水管和电线穿墙相连。"
+      },
+      "see": [
+        "refrigerant"
+      ]
+    },
+    {
+      "id": "refrigerant",
+      "term": {
+        "en": "Refrigerant",
+        "zh": "冷媒（制冷剂）"
+      },
+      "definition": {
+        "en": "The substance sealed inside the pipes of an air conditioner. It boils in the indoor coil, taking in heat, and condenses in the outdoor coil, giving the heat out, over and over again.",
+        "zh": "封在空调管路里的物质。它在室内盘管里沸腾、吸热，在室外盘管里凝结、放热，一遍又一遍循环。"
+      },
+      "see": [
+        "latent-heat",
+        "gwp"
+      ]
+    },
+    {
+      "id": "compressor",
+      "term": {
+        "en": "Compressor",
+        "zh": "压缩机"
+      },
+      "definition": {
+        "en": "The pump of the refrigerant loop. It squeezes cool, low-pressure refrigerant gas into hot, high-pressure gas and keeps the refrigerant moving round the loop.",
+        "zh": "冷媒回路的泵。它把低压、较冷的冷媒气体压成高压、很热的气体，推动冷媒在回路里流动。"
+      },
+      "see": [
+        "inverter",
+        "pressure"
+      ]
+    },
+    {
+      "id": "condenser",
+      "term": {
+        "en": "Condenser",
+        "zh": "冷凝器"
+      },
+      "definition": {
+        "en": "The coil in the outdoor unit. Hot refrigerant gas flows through its tubes, gives heat to the outside air and condenses into a liquid.",
+        "zh": "室外机里的盘管。很热的冷媒气体流过管子，把热交给室外空气，凝结成液体。"
+      },
+      "see": [
+        "evaporator"
+      ]
+    },
+    {
+      "id": "evaporator",
+      "term": {
+        "en": "Evaporator",
+        "zh": "蒸发器"
+      },
+      "definition": {
+        "en": "The coil in the indoor unit. Cold refrigerant boils inside its tubes and takes heat from the room air blown across its fins.",
+        "zh": "室内机里的盘管。很冷的冷媒在管子里沸腾，从吹过鳍片的房间空气中吸热。"
+      },
+      "see": [
+        "condenser",
+        "latent-heat"
+      ]
+    },
+    {
+      "id": "expansion-valve",
+      "term": {
+        "en": "Expansion valve",
+        "zh": "膨胀阀"
+      },
+      "definition": {
+        "en": "A valve with a very small, adjustable opening. High-pressure liquid refrigerant squeezes through it, its pressure falls sharply, part of it boils at once and the whole stream turns cold.",
+        "zh": "开口很小而且可以调节的阀。高压液态冷媒挤过这个小口，压力骤降，一部分立刻沸腾，整股冷媒变得很冷。"
+      },
+      "see": [
+        "pressure"
+      ]
+    },
+    {
+      "id": "pressure",
+      "term": {
+        "en": "Pressure",
+        "zh": "压力"
+      },
+      "definition": {
+        "en": "How hard a gas or liquid pushes on the walls around it, measured in pascals (1 MPa is a million pascals). In this topic pressures are absolute, counted from a perfect vacuum; ordinary air pressure is about 0.1 MPa.",
+        "zh": "气体或液体对四周器壁的推力，单位是帕斯卡（1 MPa 等于一百万帕）。本主题的压力都是绝对压力，从真空算起；平常的大气压约 0.1 MPa。"
+      },
+      "see": [
+        "boiling-point"
+      ]
+    },
+    {
+      "id": "boiling-point",
+      "term": {
+        "en": "Boiling point",
+        "zh": "沸点"
+      },
+      "definition": {
+        "en": "The temperature at which a liquid boils. It depends on pressure: the lower the pressure, the lower the boiling point. Water boils below 100 °C high in the mountains for this reason.",
+        "zh": "液体沸腾的温度。沸点随压力变化：压力越低，沸点越低。所以在高山上，水不到 100 °C 就沸腾了。"
+      },
+      "see": [
+        "pressure",
+        "latent-heat"
+      ]
+    },
+    {
+      "id": "latent-heat",
+      "term": {
+        "en": "Latent heat",
+        "zh": "潜热"
+      },
+      "definition": {
+        "en": "The heat a substance takes in when it changes from liquid to gas, or gives out when it changes back, without its temperature changing. Boiling and condensing move a lot of heat this way.",
+        "zh": "物质由液体变成气体时吸收、由气体变回液体时放出的热；在这个过程中，它的温度不变。沸腾和凝结就是用这种方式搬运大量的热。"
+      },
+      "see": [
+        "boiling-point",
+        "refrigerant"
+      ]
+    },
+    {
+      "id": "humidity",
+      "term": {
+        "en": "Humidity",
+        "zh": "湿度"
+      },
+      "definition": {
+        "en": "The amount of water vapour in the air. When air is cooled below its dew point, some of the vapour condenses into water droplets.",
+        "zh": "空气中水蒸气的多少。空气被冷却到露点以下时，一部分水蒸气会凝结成水滴。"
+      },
+      "see": [
+        "condensate"
+      ]
+    },
+    {
+      "id": "condensate",
+      "term": {
+        "en": "Condensate",
+        "zh": "冷凝水"
+      },
+      "definition": {
+        "en": "Water that condenses out of the room air on the cold evaporator coil. It drips into the drain pan and runs outside through the drain hose.",
+        "zh": "房间空气中的水蒸气在冰冷的蒸发器盘管上凝结成的水。它滴进接水盘，经排水管流到室外。"
+      },
+      "see": [
+        "humidity",
+        "evaporator"
+      ]
+    },
+    {
+      "id": "inverter",
+      "term": {
+        "en": "Inverter",
+        "zh": "变频"
+      },
+      "definition": {
+        "en": "An electronic drive that changes the frequency of the electricity fed to the compressor motor, so the compressor can run faster or slower instead of only switching fully on and off.",
+        "zh": "改变供给压缩机电机的电流频率的电子驱动装置。有了它，压缩机可以转快或转慢，而不只是全速开、完全关两种状态。"
+      },
+      "see": [
+        "compressor",
+        "cop"
+      ]
+    },
+    {
+      "id": "cop",
+      "term": {
+        "en": "Coefficient of performance (COP)",
+        "zh": "性能系数（COP）"
+      },
+      "definition": {
+        "en": "Heat moved divided by electricity used. An air conditioner with a COP of 4 moves 4 kilowatts of heat for every kilowatt of electricity; a higher COP means less electricity for the same cooling.",
+        "zh": "搬走的热除以用掉的电。COP 为 4 的空调，每用 1 千瓦电就搬走 4 千瓦热；COP 越高，同样的制冷用电越少。"
+      },
+      "see": [
+        "tick-rating",
+        "kilowatt"
+      ]
+    },
+    {
+      "id": "kilowatt",
+      "term": {
+        "en": "Kilowatt and Btu/h",
+        "zh": "千瓦与 Btu/h"
+      },
+      "definition": {
+        "en": "Units of power, the rate at which energy flows. Cooling capacity is given in kilowatts (kW), or in British thermal units per hour, still common in shops: 1 kW is about 3,412 Btu/h. Electricity used over time is counted in kilowatt-hours (kWh).",
+        "zh": "功率的单位，也就是能量流动的快慢。制冷量用千瓦（kW）表示，商店里也常用英热单位每小时（Btu/h）：1 kW 约等于 3,412 Btu/h。一段时间里用掉的电按千瓦时（kWh，俗称“度”）计算。"
+      },
+      "see": [
+        "cop"
+      ]
+    },
+    {
+      "id": "tick-rating",
+      "term": {
+        "en": "Tick rating",
+        "zh": "能效 tick 标签"
+      },
+      "definition": {
+        "en": "Singapore's compulsory energy label for appliances, run by the National Environment Agency. More ticks means a more efficient model; air-conditioners are rated by their COP measured at full and half load.",
+        "zh": "新加坡国家环境局实行的强制性电器能效标签。tick 越多，机型越省电；空调按满负荷和半负荷时测得的 COP 评级。"
+      },
+      "see": [
+        "cop"
+      ]
+    },
+    {
+      "id": "gwp",
+      "term": {
+        "en": "Global warming potential (GWP)",
+        "zh": "全球变暖潜能值（GWP）"
+      },
+      "definition": {
+        "en": "How much a gas warms the climate over 100 years compared with the same mass of carbon dioxide, which counts as 1. Refrigerants that leak into the air add to global warming.",
+        "zh": "一种气体在 100 年里造成的增温效果，与同样质量的二氧化碳相比（二氧化碳记为 1）。漏到空气中的冷媒会加剧全球变暖。"
+      },
+      "see": [
+        "refrigerant"
+      ]
+    }
+  ]
 }

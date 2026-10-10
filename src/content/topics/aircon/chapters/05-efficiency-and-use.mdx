@@ -12,17 +12,77 @@ state:
   hide: []
   labels: [compressor, inverter-board, air-filter]
   camera: { position: [1.38, 1.7, 3.42], target: [-0.03, 0.64, 0], fov: 30 }
-  summary: { en: "Draft: how much electricity an air conditioner uses depends on its design and on how it is used.", zh: "草稿：空调用多少电，取决于它的设计，也取决于怎么用。" }
+  summary: { en: "How much electricity an air conditioner uses depends on its design, shown by its tick label, and on how it is used: the set temperature, clean filters and closed doors.", zh: "空调用多少电，取决于它的设计（看能效 tick 标签），也取决于怎么用：设定温度、滤网干不干净、门窗关没关。" }
 ---
 
 <Lang en>
 
-Draft placeholder: the text of this chapter is written in step T2, after the spec is signed off.
+How much electricity an air conditioner uses depends first on its design: a higher COP means less electricity for the same cooling. In Singapore every air conditioner on sale carries a compulsory <Term id="tick-rating">energy label</Term> with up to <Num s="S11">five</Num> ticks. Since 1 April 2025 a single-split unit must have at least <Num s="S10">4</Num> ticks to be sold, which for an inverter unit means a weighted COP of at least <Num s="S11">4.86</Num>. Units at full power today rate about <Num s="S22,S23">5</Num>; this design study, at <Num s="S29">4.0</Num>, is at the low end. <FlyTo preset="outdoor-unit">See the compressor and inverter board</FlyTo>
+
+An inverter also saves by slowing down. A fixed-speed compressor can only run flat out or stop, so the room warms and cools as it cycles. An inverter compressor slows as the room nears the set temperature and keeps running gently. Running slowly can be more efficient: one model with <Num s="S22">5</Num> ticks has a COP of <Num s="S22">5.2</Num> at full power and about <Num s="S11,S22">6.2</Num> at half power, and the label gives half-power performance <Num s="S11">60 per cent</Num> of the weight.
+
+How it is used matters as much. Government advice is to set the temperature at <Num s="S13,S15">25 °C</Num> or higher; each degree raised cuts the energy needed by about <Num s="S15">10 per cent</Num>. Clean the filters every <Num s="S27">two weeks</Num>, keep doors and windows shut while cooling, and switch to a fan once the room is cool. <FlyTo preset="indoor-unit">See the filters</FlyTo>
+
+Air conditioning is a large share of a Singapore home's electricity: <Num s="S13">24 per cent</Num> in NEA's 2017 study, and about <Num s="S14">37 per cent</Num> in a 2015 NEA consultation. Worldwide, air conditioners and fans use about <Num s="S19">10 per cent</Num> of all electricity. The refrigerant counts too: over 100 years, R32 that leaks warms the climate <Num s="S4">675</Num> times as much as the same mass of carbon dioxide, so it must be recovered when a unit is serviced or scrapped.
+
+<More title={{ en: "How the tick label is worked out", zh: "tick 标签怎么评" }}>
+
+NEA has required energy labels on air conditioners since 1 January 2008 and set minimum efficiency standards from 1 September 2011, raising them several times since. Inverter units are rated by a weighted COP: <Num s="S11">0.4</Num> × the COP at full load + <Num s="S11">0.6</Num> × the COP at half load. A single-split inverter unit gets <Num s="S11">4</Num> ticks at a weighted COP of <Num s="S11">4.86</Num> or more and <Num s="S11">5</Num> ticks at <Num s="S11">5.50</Num> or more; lower ratings no longer exist for this type. The minimum was a weighted COP of <Num s="S12">3.78</Num> until 2022, then <Num s="S12">4.04</Num>, and since 1 April 2025 it is <Num s="S10">4</Num> ticks. For this design study, with a full-load COP of <Num s="S29">4.0</Num>, to reach that level its half-load COP would need to be at least <Num s="S11,S29">5.43</Num>.
+
+</More>
+
+<More title={{ en: "What an hour of cooling costs", zh: "开一小时空调要多少钱" }}>
+
+The household tariff for October to December 2026 is <Num s="S18">31.16 cents</Num> per kilowatt-hour, including GST. Running at its full design power of <Num s="S29">0.65 kW</Num>, this unit uses <Num s="S29">0.65 kWh</Num> an hour, about <Num s="S18,S29">20 cents</Num>; an <Num s="S29">8-hour</Num> night uses <Num s="S29">5.2 kWh</Num>, about <Num s="S18,S29">S$1.62</Num>. In that hour it moves <Num s="S29">2.6 kWh</Num> of heat, about <Num s="S28">8,900 Btu</Num>. Moving <Num s="S28">1,000 Btu</Num> of heat, <Num s="S28">0.293 kWh</Num>, at a COP of <Num s="S29">4</Num> takes <Num s="S29">0.073 kWh</Num> of electricity, about <Num s="S18">2.3 cents</Num>. An inverter unit spends much of the night below full power, so a real bill is usually lower.
+
+</More>
+
+<More title={{ en: "Heat pumps: the same machine in reverse", zh: "热泵：同一台机器反过来用" }}>
+
+A heat pump uses exactly the same cycle as an air conditioner. Fit a four-way valve that swaps the roles of the two coils, and the outdoor coil takes heat in from outside air while the indoor coil gives it out, warming the room. The outdoor unit whose data book this topic cites is such a two-way unit, and its piping diagram shows the valve. Run between the same temperatures, a heat pump's heating COP is one more than its cooling COP, because the electricity also ends up as heat: <Num s="S20,S29">5</Num> for this design. The unit shown here is cooling-only, as Singapore needs no heating, so it has no four-way valve.
+
+</More>
+
+<More title={{ en: "Cooling and the climate", zh: "制冷与气候" }}>
+
+The International Energy Agency estimates that air conditioners and electric fans use nearly <Num s="S19">20 per cent</Num> of the electricity used in buildings around the world. Refrigerants add a second effect when they escape. Under the Kigali Amendment to the Montreal Protocol, which Singapore ratified in 2022, the country will cut its consumption of HFC refrigerants by <Num s="S9">80 per cent</Num> over two decades. Since October 2022 new household split units must use a refrigerant with a GWP of <Num s="S8">750</Num> or less, which ruled out R410A at <Num s="S5">2,088</Num>. Spent refrigerant from scrapped units must be collected and treated at licensed facilities.
+
+</More>
 
 </Lang>
 
 <Lang zh>
 
-草稿占位：本章正文在 spec 定稿后的 T2 步骤写。
+空调用多少电，首先取决于设计：COP 越高，同样的制冷用电越少。在新加坡，每台出售的空调都必须贴<Term id="tick-rating">能效标签</Term>，最多 <Num s="S11">5</Num> 个 tick。自 2025 年 4 月 1 日起，单拖分体机必须达到 <Num s="S10">4</Num> 个 tick 的水平才能出售，对变频机来说，就是加权 COP 至少 <Num s="S11">4.86</Num>。现在的机型满负荷时 COP 约为 <Num s="S22,S23">5</Num>；这台设计研究机型只有 <Num s="S29">4.0</Num>，处在低端。<FlyTo preset="outdoor-unit">看压缩机和变频板</FlyTo>
+
+变频还能靠降速省电。定速压缩机只能全速运转或停机，房间就跟着它一开一停忽冷忽热。变频压缩机在室温接近设定值时转慢，平稳地一直运转。转得慢可以更省电：一款 <Num s="S22">5</Num> 个 tick 的机型满负荷时 COP 为 <Num s="S22">5.2</Num>，半负荷时约 <Num s="S11,S22">6.2</Num>，而能效标签给半负荷表现的权重是 <Num s="S11">60 %</Num>。
+
+怎么用同样重要。政府建议把温度设在 <Num s="S13,S15">25℃</Num> 或以上；每调高 1 度，能耗约减少 <Num s="S15">10 %</Num>。每 <Num s="S27">两周</Num>清洗一次滤网，制冷时关好门窗，房间凉了就改开风扇。<FlyTo preset="indoor-unit">看滤网</FlyTo>
+
+空调在新加坡家庭用电中占很大一块：NEA 2017 年的调查是 <Num s="S13">24 %</Num>，2015 年 NEA 的一份公众咨询则说约 <Num s="S14">37 %</Num>。在全世界，空调和电风扇约占全部用电的 <Num s="S19">10 %</Num>。冷媒也有影响：漏出去的 R32，在 100 年里造成的增温是同样质量二氧化碳的 <Num s="S4">675</Num> 倍，所以维修和报废空调时必须把它回收。
+
+<More title={{ en: "How the tick label is worked out", zh: "tick 标签怎么评" }}>
+
+NEA 自 2008 年 1 月 1 日起要求空调贴能效标签，2011 年 9 月 1 日起实行最低能效标准，此后多次提高。变频机按加权 COP 评级：<Num s="S11">0.4</Num> × 满负荷 COP + <Num s="S11">0.6</Num> × 半负荷 COP。单拖变频分体机加权 COP 达到 <Num s="S11">4.86</Num> 为 <Num s="S11">4</Num> 个 tick，达到 <Num s="S11">5.50</Num> 为 <Num s="S11">5</Num> 个 tick；这类机型已经没有更低的等级。最低标准在 2022 年以前是加权 COP <Num s="S12">3.78</Num>，之后是 <Num s="S12">4.04</Num>，2025 年 4 月 1 日起是 <Num s="S10">4</Num> 个 tick 的水平。这台设计研究机型满负荷 COP 为 <Num s="S29">4.0</Num>，要达到这个水平，半负荷 COP 至少要达到 <Num s="S11,S29">5.43</Num>。
+
+</More>
+
+<More title={{ en: "What an hour of cooling costs", zh: "开一小时空调要多少钱" }}>
+
+2026 年 10 月至 12 月的住宅电价是每千瓦时 <Num s="S18">31.16 分</Num>（含消费税）。这台机以 <Num s="S29">0.65 kW</Num> 的设计满功率运转，每小时用电 <Num s="S29">0.65 kWh</Num>，约 <Num s="S18,S29">20 分</Num>；开一个 <Num s="S29">8 小时</Num>的晚上用电 <Num s="S29">5.2 kWh</Num>，约 <Num s="S18,S29">1.62 新元</Num>。这一小时里它搬走 <Num s="S29">2.6 kWh</Num> 的热，约 <Num s="S28">8,900 Btu</Num>。搬走 <Num s="S28">1,000 Btu</Num>（<Num s="S28">0.293 kWh</Num>）的热，按 COP <Num s="S29">4</Num> 计算要用电 <Num s="S29">0.073 kWh</Num>，约 <Num s="S18">2.3 分</Num>。变频空调整晚大部分时间低于满功率运转，所以实际电费通常更低。
+
+</More>
+
+<More title={{ en: "Heat pumps: the same machine in reverse", zh: "热泵：同一台机器反过来用" }}>
+
+热泵和空调用的是完全相同的循环。加一个四通阀，把两个盘管的角色对调，室外盘管就从室外空气中吸热，室内盘管放热，房间就暖起来。本主题引用技术资料的那款室外机就是冷暖两用的，配管图上画着这个阀。在相同的温度之间运行时，热泵的制热 COP 比制冷 COP 大 1，因为用掉的电最后也变成了热：这台设计就是 <Num s="S20,S29">5</Num>。图中这台是单冷机，新加坡不需要供暖，所以它没有四通阀。
+
+</More>
+
+<More title={{ en: "Cooling and the climate", zh: "制冷与气候" }}>
+
+国际能源署估计，空调和电风扇用电约占全球建筑用电的 <Num s="S19">20 %</Num>。冷媒一旦漏出，还会带来另一种影响。新加坡 2022 年批准了《蒙特利尔议定书》基加利修正案，将在二十年内把氢氟碳化物冷媒的消费量削减 <Num s="S9">80 %</Num>。自 2022 年 10 月起，新出售的家用分体空调所用冷媒的 GWP 不得超过 <Num s="S8">750</Num>，这就淘汰了 GWP 为 <Num s="S5">2,088</Num> 的 R410A。报废空调里的废冷媒，必须交由持牌设施收集处理。
+
+</More>
 
 </Lang>

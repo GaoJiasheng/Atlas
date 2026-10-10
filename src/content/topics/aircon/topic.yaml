@@ -1,5 +1,4 @@
 # Air conditioner (SpaceScene validation topic). Spec: docs/12-aircon-content-spec.md.
-# Draft: geometry and data (D1, D2); text, sources and beats come in T1, T2 and B.
 id: aircon
 title: { en: "How an Air Conditioner Works", zh: "空调是怎么把房间变冷的" }
 subtitle: { en: "A split-type inverter unit, generic design study", zh: "分体式变频空调 · 通用设计研究" }

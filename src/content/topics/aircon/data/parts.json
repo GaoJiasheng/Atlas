@@ -8,12 +8,12 @@
       },
       "group": "indoor",
       "summary": {
-        "en": "T1 draft: the back of the unit; hangs on the wall plate.",
-        "zh": "T1 草稿：机身后壳，挂在墙上的挂板上。"
+        "en": "The back shell; it hooks onto a plate on the wall.",
+        "zh": "机身后壳，挂在墙上的挂板上。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "The moulded plastic back holds everything else in the indoor unit and forms the rear wall of the air channel that runs from the intake on top to the outlet underneath. A steel mounting plate is screwed to the wall first and the unit hooks onto it.\n\nThe two refrigerant pipes, the drain hose and the cable leave from the back at the right-hand end and pass through a hole in the wall. This design is 800 mm wide, 290 mm high and 220 mm deep, the size of real units of the same capacity [S22, S23].\n\nThe plate has to be level: if the unit tilts the wrong way, water in the drain pan runs to the far end and drips out instead of leaving through the hose.",
+        "zh": "塑料后壳承托室内机的全部零件，也是风道的后壁：风道从顶部进风口一直通到底部出风口。安装时先把钢制挂板钉在墙上，再把机身挂上去。\n\n两根冷媒管、排水管和电线从右端背后引出，穿过墙洞。本设计宽 800 mm、高 290 mm、深 220 mm，与同等制冷量的真实机型差不多大 [S22, S23]。\n\n挂板必须装平：机身如果往反方向歪，接水盘里的水会流到另一头溢出来，而不是从排水管流走。"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -53,12 +53,12 @@
       },
       "group": "indoor",
       "summary": {
-        "en": "T1 draft: close the two ends of the air duct.",
-        "zh": "T1 草稿：两端封住风道。"
+        "en": "Close the two ends of the indoor unit.",
+        "zh": "封住室内机的两端。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "The end caps close the air channel at both ends, so all the air drawn in at the top has to pass through the coil and the fan before it comes out.\n\nThe right-hand cap hides the fan motor and the control box; the left-hand one hides the end of the coil, where the refrigerant tubes turn back.",
+        "zh": "两端的端盖把风道封住，从顶部吸进来的空气只能穿过盘管和风扇，再从出风口吹出。\n\n右端盖后面是风扇电机和电控盒；左端盖后面是盘管的端部，冷媒管在那里折返。"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -106,12 +106,12 @@
       },
       "group": "indoor",
       "summary": {
-        "en": "T1 draft: lifts up so the filters can come out.",
-        "zh": "T1 草稿：可掀起的前盖，打开能取出滤网。"
+        "en": "Lifts up so the filters can be taken out.",
+        "zh": "可以掀起的前盖，打开就能取出滤网。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "The front panel covers the coil and keeps fingers away from the fan. It hinges upward; behind it sit the two air filters, which slide out for washing. On many current models the panel is solid and room air enters only through the grille on top.\n\nManufacturers ask owners to clean the filters about every two weeks [S27], so the panel is made to open by hand, without tools.",
+        "zh": "前面板盖住盘管，也让手指碰不到风扇。它向上掀开，后面是两片滤网，可以抽出来清洗。现在很多机型的前面板是整块的，房间空气只从顶部格栅进入。\n\n厂商建议大约每两周清洗一次滤网 [S27]，所以前面板设计成不用工具、用手就能打开。"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -155,12 +155,12 @@
       },
       "group": "indoor",
       "summary": {
-        "en": "T1 draft: room air is drawn in here.",
-        "zh": "T1 草稿：房间空气从这里被吸进来。"
+        "en": "Room air is drawn in here.",
+        "zh": "房间空气从这里被吸进去。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "Air enters at the top of the indoor unit and leaves at the bottom. Cool air is heavier than warm air and sinks, so taking warm air in high and blowing cool air out low helps the whole room mix.\n\nAt the simulated operating point about 600 cubic metres of air an hour pass through the grille. Real units of this size move roughly 550 to 820 m³ an hour on their top fan speeds [S22, S23].\n\nAnything placed on top of the unit, or a curtain hanging over it, starves the coil of air: the room cools more slowly and the unit uses more electricity for the same result.",
+        "zh": "空气从室内机顶部进入，从底部吹出。冷空气比暖空气重，会往下沉；从高处吸进暖空气、从低处吹出冷空气，房间里的空气混合得更均匀。\n\n在模拟运行点，每小时约有 600 立方米空气流过格栅。同样大小的真实机型在最高几档风速下每小时送风约 550–820 m³ [S22, S23]。\n\n机顶上放了东西，或者窗帘挡在前面，盘管就吸不够空气：房间凉得慢，同样的效果要用更多的电。"
       },
       "primitive": {
         "kind": "box",
@@ -207,12 +207,12 @@
       },
       "group": "indoor",
       "summary": {
-        "en": "T1 draft: catch dust before it reaches the coil.",
-        "zh": "T1 草稿：挡住灰尘，保护蒸发器。"
+        "en": "Catch dust before it reaches the coil.",
+        "zh": "挡住灰尘，不让它落到盘管上。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "Two fine plastic meshes sit between the intake grille and the evaporator. They stop dust, lint and hair from coating the fins, where it would block the air and hold moisture.\n\nManufacturers advise washing them about every two weeks, more often in dusty places; replacing a blocked filter with a clean one can cut the energy used by 5 to 15 % [S27].\n\nWith clogged filters less air reaches the coil, the room cools more slowly, and dirt that slips past ends up on the fins, which are much harder to clean.",
+        "zh": "两片细密的塑料网装在进风格栅和蒸发器之间，挡住灰尘、纤维和毛发，不让它们糊在鳍片上；糊住的鳍片既挡风，又会积存水汽。\n\n厂商建议大约每两周清洗一次，灰尘多的地方要更勤；把堵塞的滤网换成干净的，能耗可降低 5 % 到 15 % [S27]。\n\n滤网堵了，流到盘管的空气变少，房间凉得慢；漏过去的灰尘落在鳍片上，清理起来难得多。"
       },
       "primitive": {
         "kind": "box",
@@ -264,12 +264,12 @@
       },
       "group": "indoor",
       "summary": {
-        "en": "T1 draft: refrigerant boils in its tubes and takes heat from the air.",
-        "zh": "T1 草稿：冷媒在铜管里蒸发，从流过的空气中吸热。"
+        "en": "Refrigerant boils in its tubes and takes heat from the air.",
+        "zh": "冷媒在管里沸腾，从流过的空气中吸热。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "The evaporator is a block of thin aluminium fins threaded by copper tubes. Cold refrigerant, part liquid and part gas, flows through the tubes and boils as room air passes over the fins; the heat it needs to boil comes out of the air. In real coils the fins are about 1.4 mm apart [S24, S25]; the model draws them wider so that they stay readable.\n\nAt the simulated operating point the refrigerant boils at about 7 °C, at an absolute pressure of about 1.0 MPa [S1]. The fins are colder than the dew point of the room air, about 15 °C for air at 27 °C with a wet-bulb temperature of 19 °C [S3], so water vapour condenses on them and drips into the pan below.\n\nIf the fins are clogged with dust or bent flat, less air gets through, and the unit cools less for the same electricity.",
+        "zh": "蒸发器是一块由很薄的铝鳍片和穿过鳍片的铜管组成的换热器。很冷的冷媒（一部分是液体，一部分是气体）在管里流动，房间空气吹过鳍片时，冷媒沸腾，沸腾所需的热就取自空气。真实盘管的片距约 1.4 mm [S24, S25]；模型把间距画宽了，好让鳍片看得清。\n\n在模拟运行点，冷媒在约 7℃、绝对压力约 1.0 MPa 时沸腾 [S1]。鳍片比房间空气的露点还冷——干球 27℃、湿球 19℃ 的空气露点约 15℃ [S3]——所以水蒸气在鳍片上凝结，滴进下面的接水盘。\n\n鳍片被灰尘堵住或者被压倒，过风就少，同样的电换来的制冷量也少。"
       },
       "primitive": {
         "kind": "fins",
@@ -317,12 +317,12 @@
       },
       "group": "indoor",
       "summary": {
-        "en": "T1 draft: second slab of the same coil, above the fan.",
-        "zh": "T1 草稿：同一盘管的第二片，在风扇上方。"
+        "en": "The upper slab of the same coil, over the fan.",
+        "zh": "同一盘管的上片，罩在风扇上方。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "Real indoor coils are bent in two or three sections around the fan, so a large surface fits into a slim box. The model shows the coil as two straight slabs: this one at the back and top, and the evaporator at the front.\n\nThe refrigerant leaves the coil from here as cool gas. At the simulated operating point it has finished boiling and has warmed about 5 °C above its boiling temperature before it enters the thick gas line back to the outdoor unit.",
+        "zh": "真实的室内盘管折成两三段，包在风扇周围，这样很大的换热面积可以装进一个扁平的机壳。模型把盘管画成两片直板：这一片在后上方，另一片（蒸发器）在前面。\n\n冷媒以较冷的气体从这里离开盘管。在模拟运行点，它已经全部沸腾，温度比沸点高出约 5℃，然后进入粗气管，回到室外机。"
       },
       "primitive": {
         "kind": "fins",
@@ -369,12 +369,12 @@
       },
       "group": "indoor",
       "summary": {
-        "en": "T1 draft: pulls air through the coil and blows it out.",
-        "zh": "T1 草稿：把空气横向吸过蒸发器再吹出去。"
+        "en": "Draws air through the coil and blows it out.",
+        "zh": "把空气吸过盘管，再吹出去。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "A cross-flow fan is a long drum of curved blades as wide as the unit. Air enters along its whole length, passes through the drum and leaves in a flat, wide stream, which suits a slim wall unit. A small motor at the right-hand end turns it.\n\nOn high speed such fans turn at about 1,000 to 1,200 rpm [S25]; the simulated value here is 1,100 rpm. On screen the rotation is slowed down so the blades can be seen.\n\nDust caked on the blades reduces the airflow and can make the fan noisy.",
+        "zh": "贯流风扇是一根和机身一样长、装满弧形叶片的圆筒。空气沿整个长度进入，穿过圆筒，再以又扁又宽的气流吹出，正适合扁平的壁挂机。右端的小电机带动它转。\n\n这类风扇高速档每分钟约 1,000–1,200 转 [S25]；这里的模拟值是 1,100 转。画面上的转动放慢了，好让叶片看得清。\n\n叶片上结了灰，风量会变小，风扇也可能变吵。"
       },
       "primitive": {
         "kind": "box",
@@ -425,12 +425,12 @@
       },
       "group": "indoor",
       "summary": {
-        "en": "T1 draft: swings up and down to aim the air.",
-        "zh": "T1 草稿：上下摆动，改变出风方向。"
+        "en": "Swings up and down to aim the air.",
+        "zh": "上下摆动，改变出风方向。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "The louvre is a flap at the outlet, turned by a small stepper motor on the control board's command. It aims the cold stream along the ceiling or down into the room, or swings slowly to spread it.\n\nSome units move the flap by themselves after long cooling with it pointing steeply down, to stop water condensing on the outlet [S23].",
+        "zh": "导风板是出风口的一块翻板，由电控板指挥的小步进电机转动。它可以让冷风沿天花板吹出，或者往下吹向房间，也可以慢慢来回摆动，把冷风散开。\n\n有些机型在导风板长时间朝下大角度吹冷风后，会自动把它调平一些，以免出风口结露 [S23]。"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -471,12 +471,12 @@
       },
       "group": "indoor",
       "summary": {
-        "en": "T1 draft: catches water dripping off the coil.",
-        "zh": "T1 草稿：接住蒸发器滴下的冷凝水。"
+        "en": "Catches water dripping off the coil.",
+        "zh": "接住盘管滴下的冷凝水。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "The tray under the evaporator collects the water that condenses on the cold fins and leads it to the drain hose at one end.\n\nAt the simulated operating point about 1 litre of water an hour condenses: 0.65 kW of the cooling goes into turning water vapour into water, and each kilogram of water gives out about 2,440 kJ as it condenses [S3]. Real units of this size are rated to remove 1.6 litres an hour at their test condition [S22].\n\nIf the pan or hose is blocked by slime or dust, the pan overflows and water drips from the indoor unit down the wall.",
+        "zh": "蒸发器下面的托盘接住冰冷鳍片上凝结的水，把它引到一端的排水管。\n\n在模拟运行点，每小时约凝结 1 升水：制冷量中有 0.65 kW 用来把水蒸气变成水，每千克水凝结时约放出 2,440 kJ 的热 [S3]。同样大小的真实机型，在测试工况下的额定除湿量是每小时 1.6 升 [S22]。\n\n接水盘或排水管被黏液、灰尘堵住，水就会溢出，从室内机顺着墙往下滴。"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -515,12 +515,12 @@
       },
       "group": "indoor",
       "summary": {
-        "en": "T1 draft: reads the remote and runs the fan and louvre.",
-        "zh": "T1 草稿：接收遥控器信号，控制风扇和导风板。"
+        "en": "Reads the remote and runs the fan and louvre.",
+        "zh": "接收遥控器信号，控制风扇和导风板。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "The indoor control board receives the infrared signal from the remote control and reads the room temperature from a sensor near the air intake. It drives the fan motor and the louvre motor and exchanges signals with the outdoor unit over the connecting cable.\n\nWhen the room is close to the set temperature it asks the outdoor unit to slow the compressor down; when the room is warm it asks for more speed.",
+        "zh": "室内电控板接收遥控器的红外信号，从进风口附近的传感器读取室温。它驱动风扇电机和导风板电机，并通过连接线与室外机互相传送信号。\n\n房间温度接近设定值时，它让室外机把压缩机转慢；房间还热时，就要求压缩机转快。"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -560,12 +560,12 @@
       },
       "group": "line-set",
       "summary": {
-        "en": "T1 draft: thin pipe: carries cold refrigerant indoors.",
-        "zh": "T1 草稿：细管：把降压后的低温冷媒送进室内。"
+        "en": "Thin pipe: carries cold refrigerant indoors.",
+        "zh": "细管：把降压后的冷媒送进室内。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "The liquid line is a copper pipe 6.35 mm (1/4 inch) across [S22, S23]. In this kind of unit the expansion valve is in the outdoor unit [S24], so the refrigerant in this pipe has already lost its pressure: it is a cold mix of liquid and gas at about 7 °C at the simulated operating point, not a warm liquid.\n\nThat is why both pipes are insulated [S24]. Real pipe runs can be up to 20 m long [S22, S23]; the model shortens this one to about 2 m.\n\nA leak at either end lets refrigerant escape. The unit then cools less and less, and a qualified technician has to find and repair the leak before refilling.",
+        "zh": "液管是直径 6.35 mm（1/4 英寸）的铜管 [S22, S23]。这类空调的膨胀阀装在室外机里 [S24]，所以这根管里的冷媒已经降了压：在模拟运行点，它是约 7℃ 的冷的气液混合物，而不是温热的液体。\n\n所以两根管都要包保温层 [S24]。真实的连接管最长可达 20 m [S22, S23]；模型把它缩短到约 2 m。\n\n两端接口一旦漏气，冷媒就会跑掉，空调越来越不凉；要由合格技工找到并修好漏点，再重新充注冷媒。"
       },
       "primitive": {
         "kind": "tube",
@@ -643,12 +643,12 @@
       },
       "group": "line-set",
       "summary": {
-        "en": "T1 draft: thick pipe: brings the gas back outside.",
-        "zh": "T1 草稿：粗管：把吸了热的冷媒气体带回室外。"
+        "en": "Thick pipe: brings the gas back outside.",
+        "zh": "粗管：把冷媒气体带回室外。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "The gas line is 9.52 mm (3/8 inch) across [S22, S23], wider than the liquid line because the same mass of refrigerant takes up much more room as a gas. It carries the cool, low-pressure gas from the evaporator back to the compressor.\n\nAt the simulated operating point the gas is at about 12 °C, colder than the air around it, so this pipe is insulated as well: bare, it would pick up heat on the way and drip with condensation.",
+        "zh": "气管直径 9.52 mm（3/8 英寸）[S22, S23]，比液管粗，因为同样质量的冷媒变成气体后体积大得多。它把蒸发器出来的低压、较冷的气体送回压缩机。\n\n在模拟运行点，管里的气体约 12℃，比周围空气冷，所以这根管也要保温：裸露的话，它一路吸热，表面还会结露滴水。"
       },
       "primitive": {
         "kind": "tube",
@@ -731,12 +731,12 @@
       },
       "group": "line-set",
       "summary": {
-        "en": "T1 draft: wraps both pipes against heat and dripping.",
-        "zh": "T1 草稿：包住两根铜管，防止吸热和结露。"
+        "en": "Wraps both pipes against heat gain and dripping.",
+        "zh": "包住两根铜管，防止吸热和结露。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "Each copper pipe has its own sleeve of foam insulation, and the bundle is taped together with the drain hose and the cable. Manufacturers require insulation on both the liquid and the gas pipe [S24].\n\nWithout it, humid air touching the cold copper would condense into water that runs down the wall, and the refrigerant would pick up heat before it reached the room. Insulation that has cracked or come loose outdoors causes both problems.",
+        "zh": "每根铜管各套一层泡沫保温管，再和排水管、电线缠在一起。厂商要求液管和气管都要保温 [S24]。\n\n没有保温层，潮湿的空气碰到冰冷的铜管就会凝成水，顺着墙流下来；冷媒在到达房间之前也会先吸进外面的热。室外的保温层开裂或松脱，这两个问题都会出现。"
       },
       "primitive": {
         "kind": "tube",
@@ -799,12 +799,12 @@
       },
       "group": "line-set",
       "summary": {
-        "en": "T1 draft: clamp the pipe ends onto the valves.",
-        "zh": "T1 草稿：把铜管喇叭口压紧在阀门上，不漏冷媒。"
+        "en": "Clamp the pipe ends tight onto the valves.",
+        "zh": "把铜管喇叭口压紧在阀门上。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "The end of each copper pipe is widened into a cone, a flare, and a brass nut presses it against a matching cone on the valve [S23]. The seal is metal on metal.\n\nThe nuts are tightened to the torque given in the installation manual. Too loose, and refrigerant leaks out; too tight, and the flare can crack.",
+        "zh": "每根铜管的端口扩成喇叭形，用黄铜螺母把它压在阀门上对应的锥面上 [S23]，靠金属与金属贴紧来密封。\n\n螺母要按安装说明书规定的力矩拧紧。拧得太松会漏冷媒；拧得太紧，喇叭口可能开裂。"
       },
       "primitive": {
         "kind": "cylinder",
@@ -854,12 +854,12 @@
       },
       "group": "line-set",
       "summary": {
-        "en": "T1 draft: runs the water down and outside.",
-        "zh": "T1 草稿：把冷凝水排到室外。"
+        "en": "Carries the condensed water outside.",
+        "zh": "把冷凝水排到室外。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "A flexible plastic hose runs from the drain pan, through the wall with the pipes, and down to a drain outside. There is no pump: the water flows by gravity, so the hose must slope downward all the way.\n\nA kink, a section that rises, or a blockage makes the water back up into the pan and drip indoors.",
+        "zh": "一根塑料软管从接水盘出发，和铜管一起穿过墙，再往下通到室外的排水处。这里没有水泵，水靠重力流走，所以排水管必须一路向下。\n\n管子打折、某一段往上翘或者堵住，水就会倒回接水盘，在室内滴下来。"
       },
       "primitive": {
         "kind": "tube",
@@ -921,12 +921,12 @@
       },
       "group": "outdoor",
       "summary": {
-        "en": "T1 draft: the round opening is the fan outlet.",
-        "zh": "T1 草稿：室外机前面板，中间圆孔是风扇出风口。"
+        "en": "The round opening is the fan outlet.",
+        "zh": "前面板中间的圆孔是风扇出风口。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "The front of the outdoor unit is painted steel sheet with a large round opening in front of the fan. Air drawn in through the coil at the back leaves through it, warmer than it came in.\n\nThis design is 780 mm wide, 550 mm high and 290 mm deep, the size of real outdoor units of this capacity [S22, S23].",
+        "zh": "室外机前面板是喷涂过的钢板，风扇前方开了一个大圆孔。空气从背后穿过盘管被吸进来，再从这个孔吹出去，出来时比进去时热。\n\n本设计宽 780 mm、高 550 mm、深 290 mm，与同等制冷量的真实室外机差不多大 [S22, S23]。"
       },
       "primitive": {
         "kind": "panelHole",
@@ -971,12 +971,12 @@
       },
       "group": "outdoor",
       "summary": {
-        "en": "T1 draft: the lid of the casing.",
-        "zh": "T1 草稿：外壳的顶盖。"
+        "en": "The lid of the outdoor unit.",
+        "zh": "室外机的顶盖。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "The top cover keeps rain off the compressor and the electronics, and comes off so a technician can reach the compressor compartment from above.\n\nNothing should be stacked on the unit or against the coil at the back: it needs a free flow of outside air to get rid of its heat.",
+        "zh": "顶盖为压缩机和电控挡雨；拆下顶盖，技工就能从上面伸手进压缩机仓。\n\n机顶上和背后的盘管前面都不要堆东西：室外机要有通畅的空气流过，才能把热散出去。"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -1013,12 +1013,12 @@
       },
       "group": "outdoor",
       "summary": {
-        "en": "T1 draft: the right side; the valves sit beside it.",
-        "zh": "T1 草稿：外壳的右侧，阀门在它旁边。"
+        "en": "Closes the compressor end of the case.",
+        "zh": "封住机壳压缩机这一端。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "The right-hand side panel closes the compressor compartment. The two service valves and the pipe connections are on this side, where an installer can reach them; on real units a small cover protects them from rain and knocks.",
+        "zh": "右侧板封住压缩机仓。两个截止阀和配管接口都在这一侧，方便安装工操作；真实机型还会加一块小盖板，挡雨、防碰撞。"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -1055,12 +1055,12 @@
       },
       "group": "outdoor",
       "summary": {
-        "en": "T1 draft: the floor of the unit; everything stands on it.",
-        "zh": "T1 草稿：机组的底板，所有零件都装在上面。"
+        "en": "The floor of the unit; everything stands on it.",
+        "zh": "机组的底板，零件都装在上面。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "The compressor stands on rubber mounts on the base pan, which also carries the coil and the fan bracket. Small holes let rain water drain away.\n\nThe mounts keep the compressor's vibration from spreading through the case and into the building.",
+        "zh": "压缩机通过橡胶减振垫装在底盘上；冷凝器和风扇支架也装在底盘上。底盘上的小孔让雨水流走。\n\n减振垫让压缩机的振动不至于传到机壳，再传进建筑物。"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -1100,12 +1100,12 @@
       },
       "group": "outdoor",
       "summary": {
-        "en": "T1 draft: walls the compressor off from the fan; carries the control box.",
-        "zh": "T1 草稿：把压缩机仓和风扇仓隔开，上面装电控盒。"
+        "en": "Separates the fan space from the compressor space.",
+        "zh": "把风扇仓和压缩机仓隔开。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "A steel wall divides the outdoor unit in two: the fan and the coil on the left, where outside air rushes through, and the compressor, valves and electronics on the right, out of the airstream. The inverter board is mounted on top of it.\n\nThe division keeps rain and dust blown in by the fan away from the electrical parts.",
+        "zh": "一块钢板把室外机分成两半：左边是风扇和冷凝器，室外空气从这里穿过；右边是压缩机、阀门和电控，避开气流。变频控制板装在隔板顶上。\n\n这样隔开，风扇吹进来的雨水和灰尘就碰不到电气零件。"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -1144,12 +1144,12 @@
       },
       "group": "outdoor",
       "summary": {
-        "en": "T1 draft: keeps fingers out of the fan.",
-        "zh": "T1 草稿：防止手和杂物碰到风扇。"
+        "en": "Keeps fingers and leaves out of the fan.",
+        "zh": "防止手指和树叶碰到风扇。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "Bars across the fan opening stop hands and objects reaching the blades without blocking much of the airflow.\n\nLeaves or plastic caught on the grille reduce the air through the coil, and the unit then works harder to give out its heat.",
+        "zh": "出风口前的格栅让手和杂物碰不到叶片，又不会挡住太多风。\n\n格栅上挂了树叶或塑料袋，流过盘管的风就少了，室外机要更费力才能把热散出去。"
       },
       "primitive": {
         "kind": "box",
@@ -1196,12 +1196,12 @@
       },
       "group": "outdoor",
       "summary": {
-        "en": "T1 draft: refrigerant gives its heat to the outdoor air here.",
-        "zh": "T1 草稿：冷媒在这里把热交给室外空气。"
+        "en": "Refrigerant gives its heat to the outdoor air here.",
+        "zh": "冷媒在这里把热交给室外空气。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "The condenser looks like the evaporator, aluminium fins on copper tubes, but does the opposite job. Hot, high-pressure gas from the compressor enters at the top, gives heat to the outside air drawn through the fins by the fan, cools to about 48 °C and condenses into liquid [S1].\n\nAt the simulated operating point the condenser gives out about 3.25 kW: the 2.6 kW taken from the room plus the 0.65 kW of electricity the unit uses [S20]. Many real units bend this coil around the back and the left side of the case; the model shows one flat slab at the back.\n\nDirt, leaves or a wall too close behind the unit block the air. The refrigerant then condenses at a higher temperature and pressure, and the compressor uses more electricity.",
+        "zh": "冷凝器和蒸发器长得很像，也是铝鳍片加铜管，干的却是相反的活。压缩机送来的高温高压气体从顶部进入，把热交给风扇吸过鳍片的室外空气，冷却到约 48℃ 时凝结成液体 [S1]。\n\n在模拟运行点，冷凝器放出约 3.25 kW 的热：从房间吸来的 2.6 kW，加上空调用掉的 0.65 kW 电 [S20]。很多真实机型把这块盘管绕着机壳的背面和左侧弯成一圈；模型只在背面画了一块平板。\n\n灰尘、树叶，或者背后离墙太近，都会挡住空气。冷媒于是要在更高的温度和压力下才能凝结，压缩机也就更费电。"
       },
       "primitive": {
         "kind": "fins",
@@ -1244,12 +1244,12 @@
       },
       "group": "outdoor",
       "summary": {
-        "en": "T1 draft: U-bends join the tubes at the coil end.",
-        "zh": "T1 草稿：铜管在鳍片端部用 U 形弯头来回连通。"
+        "en": "U-bends join the tubes at the end of the coil.",
+        "zh": "U 形弯头在盘管端部把铜管连起来。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "Each copper tube runs straight through the stack of fins; at the end, short U-shaped bends join one tube to the next, so the refrigerant zig-zags back and forth through the coil several times.\n\nThe bends are brazed joints; a leak in one of them lets refrigerant escape.",
+        "zh": "每根铜管笔直地穿过整叠鳍片；在端部，一个个短 U 形弯头把相邻的两根管连起来，冷媒就在盘管里来回折返好几趟。\n\n弯头是钎焊的接头；任何一个漏了，冷媒都会跑掉。"
       },
       "primitive": {
         "kind": "tube",
@@ -1314,12 +1314,12 @@
       },
       "group": "outdoor",
       "summary": {
-        "en": "T1 draft: pulls air in through the coil, out the front.",
-        "zh": "T1 草稿：从背后抽风穿过冷凝器，从前面吹出。"
+        "en": "Pulls air through the coil and out the front.",
+        "zh": "从背后抽风穿过盘管，从前面吹出。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "The propeller fan draws outside air in through the coil at the back and pushes it out through the round opening in front. Units of this size move about 1,700 to 1,900 cubic metres of air an hour, 28 to 32 m³ a minute [S22, S24]; this design uses 1,900.\n\nSuch fans turn at about 800 to 860 rpm when cooling [S24]; the simulated value is 800 rpm, slowed down on screen.\n\nAt the simulated operating point the air leaves about 5 °C warmer than it came in: about 38 °C on a 33 °C afternoon [S21].",
+        "zh": "轴流风扇从背后把室外空气吸过盘管，再从前面的圆孔推出去。同样大小的机型每小时送风约 1,700–1,900 立方米，也就是每分钟 28–32 m³ [S22, S24]；本设计取 1,900。\n\n这类风扇制冷时每分钟约转 800–860 转 [S24]；模拟值是 800 转，画面上放慢了。\n\n在模拟运行点，吹出的空气比吸进的热约 5℃：下午 33℃ 时，出风约 38℃ [S21]。"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -1371,12 +1371,12 @@
       },
       "group": "outdoor",
       "summary": {
-        "en": "T1 draft: turns the fan; the hub sits on its shaft.",
-        "zh": "T1 草稿：驱动风扇，叶轮装在它的轴上。"
+        "en": "Turns the fan; the hub sits on its shaft.",
+        "zh": "驱动风扇，叶轮装在它的轴上。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "A small electric motor, about 50 W on units of this size [S24], drives the fan. The control board sets its speed to suit the load and the outdoor temperature.",
+        "zh": "一台小电机带动风扇，这个级别的机型约 50 W [S24]。电控板按负荷和室外温度调节它的转速。"
       },
       "primitive": {
         "kind": "cylinder",
@@ -1417,12 +1417,12 @@
       },
       "group": "outdoor",
       "summary": {
-        "en": "T1 draft: holds the fan motor between base and top.",
-        "zh": "T1 草稿：把风扇电机固定在底盘和顶部之间。"
+        "en": "Holds the fan motor between base and top.",
+        "zh": "把风扇电机固定在底盘和顶部之间。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "A steel bracket stands on the base pan and holds the motor in the middle of the fan opening, so the blades turn clear of the coil and the front panel.",
+        "zh": "钢制支架立在底盘上，把电机固定在出风口正中，让叶片转动时碰不到盘管和前面板。"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -1461,12 +1461,12 @@
       },
       "group": "outdoor",
       "summary": {
-        "en": "T1 draft: squeezes the gas so it gets hot; drives the loop.",
-        "zh": "T1 草稿：把低压冷媒气体压成高温高压气体，推动回路。"
+        "en": "Squeezes the gas so it gets hot; drives the loop.",
+        "zh": "把气体压缩得很热，推动整个回路。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "The compressor is a sealed steel can holding an electric motor and a rotary pump. Cool refrigerant gas at about 1.0 MPa enters at the side and leaves at the top at about 3.0 MPa [S1]. Squeezing the gas does work on it, so it comes out hot: about 85 to 90 °C at the simulated operating point [S1], below the 115 °C limit compressor makers set for R32 [S26].\n\nIt is the only part of the loop that needs much power. In this inverter unit its speed can change; compressors of this kind are built to run at about 10 to 130 revolutions a second [S26]. The simulated value is 60 a second, 3,600 rpm.\n\nIf liquid or dirt gets in, or the refrigerant runs low, the compressor overheats and can be damaged.",
+        "zh": "压缩机是一个密封的钢罐，里面装着电机和转子泵。约 1.0 MPa 的较冷冷媒气体从侧面进入，以约 3.0 MPa 从顶部出来 [S1]。压缩气体就是对它做功，所以出来的气体很热：在模拟运行点约 85–90℃ [S1]，低于压缩机厂商给 R32 定的 115℃ 上限 [S26]。\n\n整个回路里只有它需要大量用电。这台变频空调的压缩机转速可以变化；这类压缩机设计的转速范围约为每秒 10 到 130 转 [S26]。模拟值是每秒 60 转，即每分钟 3,600 转。\n\n如果有液体或杂质进去，或者冷媒不足，压缩机就会过热，甚至损坏。"
       },
       "primitive": {
         "kind": "vessel",
@@ -1502,12 +1502,12 @@
       },
       "group": "outdoor",
       "summary": {
-        "en": "T1 draft: magnets that spin the pump inside the shell.",
-        "zh": "T1 草稿：压缩机里电机的转子，带着滚动活塞转。"
+        "en": "Magnets that spin the pump inside the shell.",
+        "zh": "压缩机里电机的转子，带动泵转动。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "Inside the shell a DC motor turns a crankshaft. A roller on the shaft rolls around the inside of a cylinder, trapping gas and squeezing it into a smaller space; this is the rolling-piston rotary type [S26]. The motor's rotor carries permanent magnets.\n\nThe inverter sets how fast it turns by changing the frequency of the current fed to the motor. On screen the rotation is slowed down many times.",
+        "zh": "压缩机壳里，一台直流电机带动曲轴。轴上的滚子沿着气缸内壁滚动，把气体关进越来越小的空间里压缩，这就是滚动活塞式转子压缩机 [S26]。电机的转子上装着永磁体。\n\n变频器通过改变送给电机的电流频率，决定它转多快。画面上的转动放慢了很多倍。"
       },
       "primitive": {
         "kind": "box",
@@ -1552,12 +1552,12 @@
       },
       "group": "outdoor",
       "summary": {
-        "en": "T1 draft: lets only gas into the compressor.",
-        "zh": "T1 草稿：只让气体进压缩机，挡住液滴。"
+        "en": "Lets only gas into the compressor.",
+        "zh": "只让气体进压缩机，挡住液滴。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "The accumulator is a small tank on the compressor's inlet. Any drops of liquid refrigerant settle at its bottom and only gas is drawn off the top.\n\nLiquid cannot be squeezed like a gas. Compressor makers require the gas entering the compressor to carry no liquid [S26], because liquid reaching the pump can break it.",
+        "zh": "气液分离器是压缩机进口上的一个小罐。冷媒里的液滴沉到罐底，只有气体从上面被吸走。\n\n液体不能像气体那样被压缩。压缩机厂商要求吸进压缩机的气体不能带液 [S26]，因为液体进了泵会把它损坏。"
       },
       "primitive": {
         "kind": "vessel",
@@ -1592,12 +1592,12 @@
       },
       "group": "outdoor",
       "summary": {
-        "en": "T1 draft: hot pipe from the compressor to the coil.",
-        "zh": "T1 草稿：压缩机出口到冷凝器的热管。"
+        "en": "Hot pipe from the compressor to the coil.",
+        "zh": "从压缩机通往冷凝器的热管。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "This short copper pipe carries the hot, high-pressure gas from the top of the compressor to the inlet of the condenser. At the simulated operating point it is the hottest part of the system, about 85 to 90 °C [S1].\n\nA temperature sensor on this pipe lets the control board protect the compressor from overheating [S24].",
+        "zh": "这段短铜管把高温高压的气体从压缩机顶部送到冷凝器进口。在模拟运行点，它是整个系统最热的地方，约 85–90℃ [S1]。\n\n管上装有温度传感器，电控板据此保护压缩机不过热 [S24]。"
       },
       "primitive": {
         "kind": "tube",
@@ -1658,12 +1658,12 @@
       },
       "group": "outdoor",
       "summary": {
-        "en": "T1 draft: cool pipe from the gas valve to the accumulator.",
-        "zh": "T1 草稿：从气阀回到分离器的冷管。"
+        "en": "Cool pipe from the gas valve to the accumulator.",
+        "zh": "从气阀回到气液分离器的冷管。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "The suction pipe brings the returning gas from the gas service valve to the accumulator. At the simulated operating point it is at about 1.0 MPa and about 12 °C, cool enough to feel cold and, in humid air, to sweat with condensation.",
+        "zh": "吸气管把回来的气体从气管截止阀送到气液分离器。在模拟运行点，管内约 1.0 MPa、约 12℃，摸上去是凉的，空气潮湿时表面还会结露。"
       },
       "primitive": {
         "kind": "tube",
@@ -1725,12 +1725,12 @@
       },
       "group": "outdoor",
       "summary": {
-        "en": "T1 draft: carries liquid from the coil through the valve.",
-        "zh": "T1 草稿：把冷凝后的液体从盘管经膨胀阀送到液阀。"
+        "en": "Carries liquid from the coil through the valve.",
+        "zh": "把冷凝后的液体经膨胀阀送到液阀。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "Inside the outdoor unit this thin pipe takes the liquid refrigerant from the bottom of the condenser to the expansion valve, and the cold mixture leaving the valve on to the liquid service valve.\n\nBefore the valve the liquid is warm, close to 48 °C, and at high pressure; after it, cold. Small strainers on this pipe catch dirt before it reaches the valve [S24].",
+        "zh": "在室外机里，这根细管把液态冷媒从冷凝器底部送到膨胀阀，再把从阀里出来的冷混合物送到液管截止阀。\n\n阀前的液体是温热的，接近 48℃，压力很高；阀后就变冷了。管上的小过滤器在杂质到达阀门之前把它们挡住 [S24]。"
       },
       "primitive": {
         "kind": "tube",
@@ -1792,12 +1792,12 @@
       },
       "group": "outdoor",
       "summary": {
-        "en": "T1 draft: a small adjustable gap: pressure and temperature drop.",
-        "zh": "T1 草稿：让高压液体经过可调的小口，压力和温度骤降。"
+        "en": "A small adjustable gap: pressure and temperature drop.",
+        "zh": "可调的小口：压力和温度骤降。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "The electronic expansion valve is a needle in a tiny opening, moved in small steps by a motor whose coil sits on top. High-pressure liquid squeezes through the gap; its pressure falls from about 3.0 to about 1.0 MPa, and about a quarter of it boils at once [S1]. Boiling takes heat from the rest, so the stream leaves at about 7 °C.\n\nIn this kind of unit the valve is in the outdoor unit [S24]. The control board opens and closes it to give the evaporator as much refrigerant as it can boil.\n\nIf it sticks nearly shut, the evaporator is starved and the room barely cools; if it sticks open, liquid can flood back towards the compressor.",
+        "zh": "电子膨胀阀是一根针堵在一个极小的孔口里，由顶上带线圈的电机一小步一小步地推动。高压液体挤过这个缝隙，压力从约 3.0 MPa 降到约 1.0 MPa，约四分之一立刻沸腾 [S1]。沸腾要吸热，热取自其余的冷媒，所以出来的冷媒约 7℃。\n\n这类空调的膨胀阀装在室外机里 [S24]。电控板把它开大、关小，让送进蒸发器的冷媒刚好能在里面全部沸腾。\n\n如果它卡在几乎关闭的位置，蒸发器得不到冷媒，房间几乎不凉；如果卡在全开，液体可能一路涌回压缩机。"
       },
       "primitive": {
         "kind": "cylinder",
@@ -1834,12 +1834,12 @@
       },
       "group": "outdoor",
       "summary": {
-        "en": "T1 draft: the line set connects here; opened after install.",
-        "zh": "T1 草稿：连接管接在这里；安装、维修时开关。"
+        "en": "The line set connects here; opened after installation.",
+        "zh": "连接管接在这里；安装完成后才打开。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "The two brass valves, one for the liquid line and one for the gas line, are where the pipes from the indoor unit join the outdoor unit. A new outdoor unit arrives with its refrigerant sealed inside behind them, enough for a pipe run of about 7.5 to 10 m without topping up [S22, S24].\n\nThe installer connects the pipes, pumps the air out of them and the indoor coil, then opens the valves. In Singapore, technicians who work on R32 household units must hold a certificate of competency in refrigerant handling [S8].",
+        "zh": "两个黄铜阀，一个接液管、一个接气管，是室内机管路与室外机相接的地方。新的室外机出厂时，冷媒就封在这两个阀后面，够用约 7.5–10 m 的连接管，不必另加 [S22, S24]。\n\n安装工接好管子，把管路和室内盘管里的空气抽掉，再打开阀门。在新加坡，维修 R32 家用空调的技工必须持有冷媒处理的能力证书 [S8]。"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -1885,12 +1885,12 @@
       },
       "group": "outdoor",
       "summary": {
-        "en": "T1 draft: makes variable-frequency power to set compressor speed.",
-        "zh": "T1 草稿：把市电变成频率可变的电，调压缩机转速。"
+        "en": "Makes variable-frequency power for the compressor.",
+        "zh": "产生频率可变的电，调节压缩机转速。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "The inverter board turns the mains supply into direct current and then back into alternating current of whatever frequency the compressor motor needs, from slow to fast. It also drives the fan motor and the expansion valve and talks to the indoor unit.\n\nIts power transistors get hot; their heat sink reaches into the airstream behind the fan, so outdoor air cools them.\n\nA fault here usually stops the outdoor unit altogether, and the indoor unit shows an error code.",
+        "zh": "变频控制板先把市电变成直流电，再把直流电变回交流电，频率按压缩机电机的需要从低到高调节。它还驱动风扇电机和膨胀阀，并与室内机通信。\n\n板上的功率晶体管会发热；它们的散热片伸进风扇后面的气流里，由室外空气冷却。\n\n这块板出故障，室外机通常就整个停下来，室内机会显示故障代码。"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -1932,8 +1932,8 @@
         "zh": "管线穿过的一段卧室墙。"
       },
       "detail": {
-        "en": "T1 draft: detail and sources are written in step T1 (docs/12 §3.3).",
-        "zh": "T1 草稿：说明与来源在 T1 步骤按 docs/12 §3.3 写。"
+        "en": "A section of the bedroom wall, drawn to show where the pipes, the drain hose and the cable pass from inside to outside. In a real home the indoor unit hangs on the inside face of the wall and the outdoor unit stands outside, often several metres away; this layout is schematic.",
+        "zh": "卧室墙的一段剖面，用来表示铜管、排水管和电线从哪里由室内穿到室外。真实的家里，室内机挂在墙的内侧，室外机放在外面，常常相距好几米；这里的布局是示意。"
       },
       "context": true,
       "shell": true,
@@ -5306,7 +5306,7 @@
         "en": "Refrigerant",
         "zh": "冷媒"
       },
-      "value": "R32 · 0.60 kg",
+      "value": "R32 · 0.80 kg",
       "tag": "design"
     },
     {
@@ -5314,7 +5314,7 @@
         "en": "Cooling",
         "zh": "制冷量"
       },
-      "value": "2.6 kW · 9,000 BTU/h",
+      "value": "2.6 kW · 8,900 BTU/h",
       "tag": "design"
     },
     {

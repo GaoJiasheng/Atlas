@@ -12,17 +12,77 @@ state:
   hide: []
   labels: [top-grille, louvre, condenser-coil, fan-grille]
   camera: { position: [1.38, 1.7, 3.42], target: [-0.03, 0.64, 0], fov: 30 }
-  summary: { en: "Draft: room air is cooled and dried as it passes the cold coil; outside, the heat it lost comes out as warm air.", zh: "草稿：房间空气流过冷盘管时被降温、除湿；它失去的热在室外变成一股热风吹出来。" }
+  summary: { en: "Room air is cooled and dried as it crosses the cold coil; outside, the heat it lost, plus the electricity the unit used, leaves as a stream of warm air.", zh: "房间空气流过冰冷的盘管时被降温、除湿；它失去的热，加上空调用掉的电，在室外变成一股热风吹出去。" }
 ---
 
 <Lang en>
 
-Draft placeholder: the text of this chapter is written in step T2, after the spec is signed off.
+Indoors, the cross-flow fan pulls room air in through the grille on top, through the filters and across the cold evaporator, and blows it out under the louvre. At this simulated operating point about <Num s="S29">600 cubic metres</Num> of air pass every hour, and air that enters at <Num s="S29">27 °C</Num> leaves at about <Num s="S29">17 °C</Num>. <FlyTo preset="indoor-unit">Watch the indoor air</FlyTo>
+
+The room also gets drier. Air holds water vapour, and the amount is its <Term id="humidity">humidity</Term>; in Singapore the relative humidity averages about <Num s="S17">82 per cent</Num>. The evaporator fins are colder than the air's dew point, so some of the vapour condenses on them, like drops on a cold glass. This <Term id="condensate">condensate</Term> runs into the drain pan and out through the hose: about <Num s="S29">1 litre</Num> an hour here.
+
+Outdoors, the propeller fan pulls about <Num s="S29">1,900 cubic metres</Num> of air an hour through the condenser. On a <Num s="S29">33 °C</Num> afternoon it comes out at about <Num s="S29">38 °C</Num>, which is why the outdoor unit blows hot. <FlyTo preset="outdoor-unit">Watch the outdoor air</FlyTo>
+
+The heat is moved, not destroyed. The outdoor unit gives out more heat than the indoor unit takes in: the <Num s="S29">2.6 kW</Num> taken from the room plus the <Num s="S29">0.65 kW</Num> of electricity that the compressor and fans turn into heat, <Num s="S20,S29">3.25 kW</Num> in all. Heat flows by itself from a hotter place to a colder one; pushing it the other way, from a cool room into hot outdoor air, needs that extra energy.
+
+A split unit like this one moves the room's own air round and round and brings in no fresh air from outside. People in a closed room breathe out carbon dioxide and moisture, so the room still needs a window or door opened from time to time.
+
+<More title={{ en: "Two kinds of fan", zh: "两种风扇" }}>
+
+The indoor unit uses a cross-flow fan: a drum of curved blades as long as the unit. Air enters along its whole length and leaves in a flat, wide sheet, which suits a slim box on a wall. On high speed such fans turn at about <Num s="S25">1,000</Num> to <Num s="S25">1,200</Num> rpm. The outdoor unit uses a propeller fan, like a desk fan, which moves a large volume of air through the coil without needing much pressure: about <Num s="S24">28</Num> to <Num s="S22">32</Num> cubic metres a minute, at about <Num s="S24">800</Num> to <Num s="S24">860</Num> rpm. Both are drawn much slower on screen.
+
+</More>
+
+<More title={{ en: "What the filters catch", zh: "滤网挡住了什么" }}>
+
+The filters are fine plastic meshes that stop dust, fluff and hair before they reach the evaporator. A dusty coil holds moisture and passes less air, and is much harder to clean than a filter. Manufacturers advise washing the filters about every <Num s="S27">two weeks</Num>, more often in dusty places; replacing a blocked filter with a clean one can cut the energy an air conditioner uses by <Num s="S27">5</Num> to <Num s="S27">15 per cent</Num>.
+
+</More>
+
+<More title={{ en: "The energy balance, worked out", zh: "能量平衡怎么算" }}>
+
+These are the simulated operating point's numbers, not measurements. Heat out equals heat in plus work in, so the condenser gives out <Num s="S29">2.6</Num> + <Num s="S29">0.65</Num> = <Num s="S20,S29">3.25 kW</Num>.
+
+Indoors, <Num s="S29">600 m³</Num> of air an hour weighs about <Num s="S21">0.20 kg</Num> a second. Of the <Num s="S29">2.6 kW</Num>, <Num s="S29">1.95 kW</Num> cools the air; with air needing about <Num s="S21">1.0 kJ</Num> per kilogram per degree, that is a drop of about <Num s="S21">10 °C</Num>. The other <Num s="S29">0.65 kW</Num> condenses water, which gives out about <Num s="S3">2,440 kJ</Num> per kilogram: <Num s="S3">0.27 grams</Num> a second, about <Num s="S3">1 litre</Num> an hour. Real units of this size are rated at <Num s="S22">1.6 litres</Num> an hour.
+
+Outdoors, <Num s="S29">1,900 m³</Num> an hour is about <Num s="S21">0.61 kg</Num> a second; carrying <Num s="S29">3.25 kW</Num> warms it by about <Num s="S21">5.3 °C</Num>.
+
+</More>
 
 </Lang>
 
 <Lang zh>
 
-草稿占位：本章正文在 spec 定稿后的 T2 步骤写。
+在室内，贯流风扇把房间空气从顶部格栅吸进来，穿过滤网和冰冷的蒸发器，再从导风板下面吹出去。在这个模拟运行点，每小时约有 <Num s="S29">600 立方米</Num>空气流过；进去时 <Num s="S29">27℃</Num>，出来时约 <Num s="S29">17℃</Num>。<FlyTo preset="indoor-unit">看室内的气流</FlyTo>
+
+房间也变得更干燥。空气里含有水蒸气，含量的多少就是<Term id="humidity">湿度</Term>；新加坡的年平均相对湿度约 <Num s="S17">82 %</Num>。蒸发器鳍片比空气的露点还冷，一部分水蒸气就在上面凝结，就像冰水杯外面的水珠。这些<Term id="condensate">冷凝水</Term>流进接水盘，再经排水管排出去：这里每小时约 <Num s="S29">1 升</Num>。
+
+在室外，轴流风扇每小时把约 <Num s="S29">1,900 立方米</Num>空气抽过冷凝器。下午气温 <Num s="S29">33℃</Num> 时，吹出来的风约 <Num s="S29">38℃</Num>，所以室外机吹的是热风。<FlyTo preset="outdoor-unit">看室外的气流</FlyTo>
+
+热是被搬走的，不是被消灭的。室外机放出的热比室内机吸进的多：从房间搬走的 <Num s="S29">2.6 kW</Num>，加上压缩机和风扇用掉、最后都变成热的 <Num s="S29">0.65 kW</Num> 电，一共 <Num s="S20,S29">3.25 kW</Num>。热会自己从较热的地方流向较冷的地方；要反过来，把热从凉快的房间送进炎热的室外，就得靠这份额外的能量。
+
+像这样的分体空调，只是让房间里原有的空气一遍遍循环，并不从外面引进新鲜空气。关着门窗的房间里，人呼出二氧化碳和水汽，所以还是要不时开一开窗或门。
+
+<More title={{ en: "Two kinds of fan", zh: "两种风扇" }}>
+
+室内机用的是贯流风扇：一根和机身一样长、装满弧形叶片的圆筒。空气沿整个长度进入，以又扁又宽的一片气流吹出，正适合挂在墙上的扁平机身。这类风扇高速档每分钟约 <Num s="S25">1,000</Num> 到 <Num s="S25">1,200</Num> 转。室外机用的是轴流风扇，和台扇差不多，不需要很大的压力就能推动大量空气穿过盘管：每分钟约 <Num s="S24">28</Num> 到 <Num s="S22">32</Num> 立方米，转速约每分钟 <Num s="S24">800</Num> 到 <Num s="S24">860</Num> 转。画面上两台风扇都转得慢得多。
+
+</More>
+
+<More title={{ en: "What the filters catch", zh: "滤网挡住了什么" }}>
+
+滤网是细密的塑料网，在灰尘、绒毛和毛发到达蒸发器之前把它们挡住。积了灰的盘管会存水汽、过风少，清理起来也比滤网难得多。厂商建议大约每 <Num s="S27">两周</Num>清洗一次滤网，灰尘多的地方要更勤；把堵塞的滤网换成干净的，空调的能耗可以降低 <Num s="S27">5 %</Num> 到 <Num s="S27">15 %</Num>。
+
+</More>
+
+<More title={{ en: "The energy balance, worked out", zh: "能量平衡怎么算" }}>
+
+下面是模拟运行点的数字，不是实测值。放出的热等于吸收的热加上输入的功，所以冷凝器放热 <Num s="S29">2.6</Num> + <Num s="S29">0.65</Num> = <Num s="S20,S29">3.25 kW</Num>。
+
+在室内，每小时 <Num s="S29">600 m³</Num> 空气约合每秒 <Num s="S21">0.20 kg</Num>。<Num s="S29">2.6 kW</Num> 中有 <Num s="S29">1.95 kW</Num> 用来给空气降温；每千克空气每降 1 度约放出 <Num s="S21">1.0 kJ</Num>，所以降温约 <Num s="S21">10℃</Num>。其余 <Num s="S29">0.65 kW</Num> 用来凝结水分，每千克水凝结放出约 <Num s="S3">2,440 kJ</Num>：每秒 <Num s="S3">0.27 克</Num>，约每小时 <Num s="S3">1 升</Num>。同级别的真实机型额定除湿量为每小时 <Num s="S22">1.6 升</Num>。
+
+在室外，每小时 <Num s="S29">1,900 m³</Num> 空气约合每秒 <Num s="S21">0.61 kg</Num>；带走 <Num s="S29">3.25 kW</Num> 的热，温度升高约 <Num s="S21">5.3℃</Num>。
+
+</More>
 
 </Lang>

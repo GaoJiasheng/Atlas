@@ -12,17 +12,103 @@ state:
   hide: [front-panel, outdoor-front, fan-grille, outdoor-top, outdoor-side, insulation]
   labels: [compressor, condenser-coil, expansion-valve, evaporator-front, liquid-line, gas-line]
   camera: { position: [1.38, 1.7, 3.42], target: [-0.03, 0.64, 0], fov: 30 }
-  summary: { en: "Draft: switched on, the same refrigerant goes round and round, changing between gas and liquid as its pressure rises and falls.", zh: "草稿：通电后，同一份冷媒一圈圈流动，压力一升一降，它就在气体和液体之间来回变化。" }
+  summary: { en: "Switched on, the same refrigerant goes round and round: squeezed hot, cooled into a liquid outdoors, dropped in pressure, and boiled indoors by the heat of the room.", zh: "通电后，同一份冷媒一圈圈循环：被压缩得很热，在室外冷却成液体，降压后在室内吸收房间的热而沸腾。" }
 ---
 
 <Lang en>
 
-Draft placeholder: the text of this chapter is written in step T2, after the spec is signed off.
+Switch on, and the compressor starts to turn. It draws in cool refrigerant gas at a pressure of about <Num s="S1">1.0 MPa</Num>, roughly <Num s="S1">ten times</Num> the pressure of the air around us, and squeezes it to about <Num s="S1">3.0 MPa</Num>. Squeezing a gas does work on it and heats it: at this simulated operating point the gas leaves the compressor at about <Num s="S1">85 to 90 °C</Num>. <FlyTo preset="outdoor-unit">Start at the compressor</FlyTo>
+
+The hot gas flows into the condenser. The outside air, at <Num s="S29">33 °C</Num>, is cooler than the gas, so heat flows into it. At <Num s="S1">3.0 MPa</Num> R32 condenses at about <Num s="S1">48 °C</Num>, so as it goes on losing heat it turns into liquid instead of getting colder. Heat given out as a gas turns to liquid, or taken in as a liquid boils, is called <Term id="latent-heat">latent heat</Term>.
+
+The warm liquid squeezes through the expansion valve, and its pressure falls to about <Num s="S1">1.0 MPa</Num>. At that pressure the <Term id="boiling-point">boiling point</Term> of R32 is only about <Num s="S1">7 °C</Num>, so about <Num s="S1">a quarter</Num> of the liquid boils at once. The heat for that boiling comes from the rest of the refrigerant, which cools to <Num s="S1">7 °C</Num>. This cold mix runs along the thin pipe to the indoor unit.
+
+In the evaporator the room air is far warmer than the refrigerant. The refrigerant boils away completely, each kilogram taking in about <Num s="S1">300 kJ</Num>, and the air passing over the fins grows cooler. The gas returns along the thick pipe to the compressor, and the loop begins again. About <Num s="S1">11 grams</Num> of refrigerant pass every second, so the <Num s="S29">0.80 kg</Num> inside goes round about <Num s="S29">once a minute</Num>.
+
+The trick is the pressure difference. High pressure lets the refrigerant condense at a temperature above the outdoor air; low pressure lets it boil below the temperature of the room.
+
+<More title={{ en: "Pressure and boiling point", zh: "压力和沸点" }}>
+
+Every liquid has a boiling point that rises with pressure. Water boils at a lower temperature high in the mountains; R32 behaves the same way over a different range. At the pressure of the air around us, about <Num s="S1">0.1 MPa</Num>, it boils at about <Num s="S7">−51.7 °C</Num>, which is why it has to be kept sealed in pipes. Some points from the property tables (absolute pressures):
+
+- boils or condenses at <Num s="S1">7 °C</Num> at <Num s="S1">1.01 MPa</Num>
+- at <Num s="S1">27 °C</Num> at <Num s="S1">1.78 MPa</Num>
+- at <Num s="S1">30 °C</Num> at <Num s="S1">1.93 MPa</Num>
+- at <Num s="S1">48 °C</Num> at <Num s="S1">3.00 MPa</Num>
+
+When the unit is switched off, the pressure evens out round the whole loop at roughly the value for the surrounding temperature, about <Num s="S1">1.93 MPa</Num> on a <Num s="S1">30 °C</Num> day; that is the idle reading in the STATE panel. Above about <Num s="S2">78 °C</Num>, its critical temperature, R32 cannot be turned into a liquid at any pressure, so the condenser always works well below that.
+
+</More>
+
+<More title={{ en: "Numbers at this simulated operating point", zh: "这个模拟运行点的数字" }}>
+
+The readings in the STATE panel are worked out for this design study from published property data; they are not measurements. The room is at <Num s="S29">27 °C</Num> and the outdoor air at <Num s="S29">33 °C</Num>. The refrigerant boils at <Num s="S1">7 °C</Num> (<Num s="S1">1.01 MPa</Num>) and condenses at <Num s="S1">48 °C</Num> (<Num s="S1">3.00 MPa</Num>). It leaves the evaporator about <Num s="S1">5 °C</Num> warmer than its boiling point, a margin called superheat that makes sure no liquid reaches the compressor. Each kilogram picks up about <Num s="S1">230 kJ</Num> in the evaporator, so carrying <Num s="S29">2.6 kW</Num> needs about <Num s="S1">0.011 kg</Num> of refrigerant a second.
+
+For comparison, compressor makers test air-conditioning compressors at an evaporating temperature of <Num s="S26">7.2 °C</Num> and a condensing temperature of <Num s="S26">54.4 °C</Num>, with <Num s="S26">35 °C</Num> outside. This study uses a cooler afternoon, so its condensing temperature is lower.
+
+</More>
+
+<More title={{ en: "About R32", zh: "关于 R32" }}>
+
+The split units whose data this topic uses run on R32, a single compound, difluoromethane. Since 1 October 2022 household split units supplied in Singapore must use a refrigerant with a <Term id="gwp">global warming potential</Term> of no more than <Num s="S8">750</Num>. That ruled out R410A, the earlier standard, a mixture of R32 and R125 with a GWP of <Num s="S5">2,088</Num>; R32's is <Num s="S4">675</Num>. (Both figures are from the IPCC's 2007 report; its 2013 report gives <Num s="S5">1,924</Num> and <Num s="S4">677</Num>.) R32 is also less dense, so a unit can work with a smaller charge.
+
+R32 has drawbacks. It is still a greenhouse gas, and it is mildly flammable, safety class A2L: it can burn when it makes up between about <Num s="S7">14</Num> and <Num s="S7">30 per cent</Num> of the air and meets a flame. Equipment has to be designed for it, so it cannot simply be poured into an old R410A unit, and in Singapore the technicians who install and service R32 units must be trained and certified.
+
+</More>
+
+<More title={{ en: "The compressor's drive", zh: "压缩机的驱动" }}>
+
+Inside the compressor's sealed shell a DC electric motor turns a crankshaft. A roller on the shaft rolls round the inside of a cylinder, trapping gas in a shrinking pocket and pushing it out at high pressure; this is called a rolling-piston rotary compressor. The inverter sets the motor's speed by changing the frequency of the current it supplies. At this simulated operating point it turns <Num s="S26">60</Num> times a second, <Num s="S26">3,600</Num> times a minute. On screen the magnets turn once a second, <Num s="S29">60</Num> times slower, so that the motion can be followed.
+
+</More>
 
 </Lang>
 
 <Lang zh>
 
-草稿占位：本章正文在 spec 定稿后的 T2 步骤写。
+一通电，压缩机就转起来。它吸进压力约 <Num s="S1">1.0 MPa</Num> 的较冷冷媒气体，这大约是我们周围空气压力的 <Num s="S1">10 倍</Num>，再把它压到约 <Num s="S1">3.0 MPa</Num>。压缩气体就是对它做功，气体因此变热：在这个模拟运行点，离开压缩机的气体约 <Num s="S1">85–90℃</Num>。<FlyTo preset="outdoor-unit">从压缩机看起</FlyTo>
+
+热气体流进冷凝器。室外空气只有 <Num s="S29">33℃</Num>，比气体凉，热就流进空气里。在 <Num s="S1">3.0 MPa</Num> 下，R32 约 <Num s="S1">48℃</Num> 就会凝结，所以它继续放热时，温度不再下降，而是变成液体。气体变成液体时放出的热、液体沸腾时吸收的热，叫作<Term id="latent-heat">潜热</Term>。
+
+温热的液体挤过膨胀阀，压力降到约 <Num s="S1">1.0 MPa</Num>。在这个压力下，R32 的<Term id="boiling-point">沸点</Term>只有约 <Num s="S1">7℃</Num>，于是约<Num s="S1">四分之一</Num>的液体立刻沸腾。沸腾所需的热取自其余的冷媒，整股冷媒就降到 <Num s="S1">7℃</Num>。这股冷的气液混合物沿细管流进室内机。
+
+在蒸发器里，房间空气比冷媒暖得多。冷媒全部沸腾成气体，每千克吸收约 <Num s="S1">300 kJ</Num> 的热，流过鳍片的空气就变凉了。气体沿粗管回到压缩机，又开始新的一圈。每秒约有 <Num s="S1">11 克</Num>冷媒流过，所以机内的 <Num s="S29">0.80 kg</Num> 冷媒约<Num s="S29">一分钟</Num>走完一圈。
+
+关键在于压力差。压力高，冷媒在比室外空气还高的温度下就能凝结；压力低，它在比房间温度还低的温度下就能沸腾。
+
+<More title={{ en: "Pressure and boiling point", zh: "压力和沸点" }}>
+
+每种液体的沸点都随压力升高而升高。在高山上，水不到 100 度就沸腾；R32 也一样，只是温度范围不同。在我们周围空气的压力下，约 <Num s="S1">0.1 MPa</Num>，它约 <Num s="S7">−51.7℃</Num> 就沸腾，所以必须封在管子里。物性表里的几个点（绝对压力）：
+
+- <Num s="S1">7℃</Num> 时在 <Num s="S1">1.01 MPa</Num> 沸腾或凝结
+- <Num s="S1">27℃</Num> 时在 <Num s="S1">1.78 MPa</Num>
+- <Num s="S1">30℃</Num> 时在 <Num s="S1">1.93 MPa</Num>
+- <Num s="S1">48℃</Num> 时在 <Num s="S1">3.00 MPa</Num>
+
+关机以后，整个回路的压力会趋于一致，大致等于周围温度对应的值：<Num s="S1">30℃</Num> 的天气约 <Num s="S1">1.93 MPa</Num>，这就是 STATE 面板上的待机读数。R32 的临界温度约 <Num s="S2">78℃</Num>，高于这个温度，无论压力多大它都不能变成液体，所以冷凝器的工作温度总是远低于此。
+
+</More>
+
+<More title={{ en: "Numbers at this simulated operating point", zh: "这个模拟运行点的数字" }}>
+
+STATE 面板上的读数是按这台设计研究、用公开的物性数据算出来的，不是实测值。房间 <Num s="S29">27℃</Num>，室外 <Num s="S29">33℃</Num>。冷媒在 <Num s="S1">7℃</Num>（<Num s="S1">1.01 MPa</Num>）沸腾，在 <Num s="S1">48℃</Num>（<Num s="S1">3.00 MPa</Num>）凝结。它离开蒸发器时比沸点高约 <Num s="S1">5℃</Num>，这段余量叫“过热度”，保证没有液体进入压缩机。每千克冷媒在蒸发器里吸收约 <Num s="S1">230 kJ</Num>，所以要搬走 <Num s="S29">2.6 kW</Num> 的热，每秒需要约 <Num s="S1">0.011 kg</Num> 冷媒。
+
+作为对照，压缩机厂商测试空调压缩机的工况是蒸发 <Num s="S26">7.2℃</Num>、冷凝 <Num s="S26">54.4℃</Num>、室外 <Num s="S26">35℃</Num>。本研究取的是稍凉一些的下午，冷凝温度也就低一些。
+
+</More>
+
+<More title={{ en: "About R32", zh: "关于 R32" }}>
+
+本主题引用数据的两款分体空调都用 R32，也就是二氟甲烷，一种单一的化合物。自 2022 年 10 月 1 日起，在新加坡供应的家用分体空调，所用冷媒的<Term id="gwp">全球变暖潜能值</Term>不得超过 <Num s="S8">750</Num>。这就淘汰了以前的主流冷媒 R410A：它是 R32 和 R125 的混合物，GWP 为 <Num s="S5">2,088</Num>；R32 为 <Num s="S4">675</Num>。（两个数字都出自 IPCC 2007 年的报告；2013 年的报告分别为 <Num s="S5">1,924</Num> 和 <Num s="S4">677</Num>。）R32 的密度也较低，一台空调可以少充一些。
+
+R32 也有缺点。它仍然是温室气体，而且微燃，安全分类为 A2L：它在空气中占约 <Num s="S7">14 %</Num> 到 <Num s="S7">30 %</Num>、又遇到明火时会燃烧。设备必须专门为它设计，不能把它直接灌进旧的 R410A 空调；在新加坡，安装和维修 R32 空调的技工必须受过培训并取得证书。
+
+</More>
+
+<More title={{ en: "The compressor's drive", zh: "压缩机的驱动" }}>
+
+压缩机密封的外壳里，一台直流电机带动曲轴。轴上的滚子沿着气缸内壁滚动，把气体关进一个越来越小的空间，再以高压推出去，这叫滚动活塞式转子压缩机。变频器通过改变供电的频率来设定电机的转速。在这个模拟运行点，它每秒转 <Num s="S26">60</Num> 圈，每分钟 <Num s="S26">3,600</Num> 圈。画面上的磁钢每秒只转一圈，慢了 <Num s="S29">60</Num> 倍，好让人看清。
+
+</More>
 
 </Lang>

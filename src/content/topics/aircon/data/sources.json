@@ -1,3 +1,307 @@
 {
-  "sources": []
+  "sources": [
+    {
+      "id": "S1",
+      "text": {
+        "en": "NIST Chemistry WebBook, SRD 69, thermophysical properties of difluoromethane (R32), saturation table by temperature: saturation pressure 1.0115 MPa at 7 °C, 1.7819 MPa at 27 °C, 1.9275 MPa at 30 °C, 2.0819 MPa at 33 °C and 2.9989 MPa at 48 °C (absolute); latent heat (vapour minus liquid enthalpy) 304 kJ/kg at 7 °C; saturated-liquid enthalpy 292.95 kJ/kg at 48 °C and 212.36 kJ/kg at 7 °C, saturated-vapour enthalpy 516.36 kJ/kg at 7 °C; normal boiling point about −51.7 °C (0.1013 MPa).",
+        "zh": "美国国家标准与技术研究院（NIST）化学数据手册 SRD 69，二氟甲烷（R32）热物性，按温度的饱和表：饱和压力（绝对）7 °C 时 1.0115 MPa，27 °C 时 1.7819 MPa，30 °C 时 1.9275 MPa，33 °C 时 2.0819 MPa，48 °C 时 2.9989 MPa；7 °C 时汽化潜热（饱和气与饱和液的焓差）304 kJ/kg；饱和液焓 48 °C 时 292.95 kJ/kg、7 °C 时 212.36 kJ/kg，7 °C 饱和气焓 516.36 kJ/kg；标准沸点约 −51.7 °C（0.1013 MPa）。"
+      },
+      "url": "https://webbook.nist.gov/cgi/fluid.cgi?Action=Load&ID=C75105&Type=SatP&Digits=5&THigh=50&TLow=0&TInc=1&RefState=DEF&TUnit=C&PUnit=MPa&DUnit=kg%2Fm3&HUnit=kJ%2Fkg&WUnit=m%2Fs&VisUnit=uPa*s&STUnit=N%2Fm",
+      "note": {
+        "en": "Read 2026-10-10. The simulated operating point (docs/12 §1.2) is computed from these values: evaporating 7 °C, condensing 48 °C, 5 K suction superheat (enthalpy 522.79 kJ/kg at 12 °C and 1.0115 MPa, NIST isobaric table). Refrigerant flow = 2.6 kW ÷ (522.79 − 292.95) kJ/kg ≈ 0.011 kg/s; after the expansion valve about 26 % of the refrigerant by mass is vapour ((292.95 − 212.36) ÷ 304). If all 0.65 kW of electrical input went into the gas, it would leave the compressor at about 580 kJ/kg, roughly 90 °C at 3.0 MPa (NIST isobaric table); the shell loses some heat, so the text gives about 85 to 90 °C. In the evaporator each kilogram picks up 522.79 − 292.95 ≈ 230 kJ (text rounds the 304 kJ/kg latent heat to about 300).",
+        "zh": "2026-10-10 读取。模拟运行点（docs/12 §1.2）由这些数值算出：蒸发 7 °C、冷凝 48 °C、吸气过热 5 K（12 °C、1.0115 MPa 时焓 522.79 kJ/kg，NIST 等压表）。冷媒流量 = 2.6 kW ÷（522.79 − 292.95）kJ/kg ≈ 0.011 kg/s；经过膨胀阀后，按质量约 26 % 的冷媒已经变成气体（（292.95 − 212.36）÷ 304）。如果 0.65 kW 电功全部变成气体的热，压缩机出口焓约 580 kJ/kg，在 3.0 MPa 下约 90 °C（NIST 等压表）；压缩机外壳会散掉一部分热，所以正文写约 85–90 °C。每千克冷媒在蒸发器里吸收 522.79 − 292.95 ≈ 230 kJ（正文把 304 kJ/kg 的潜热取整为约 300）。"
+      }
+    },
+    {
+      "id": "S2",
+      "text": {
+        "en": "NIST Chemistry WebBook, difluoromethane (CAS 75-10-5): molecular weight 52.0234; critical temperature 351.3 K (about 78.2 °C); critical pressure 57.85 bar (about 5.8 MPa); boiling point 221.6 K (about −51.6 °C).",
+        "zh": "NIST 化学数据手册，二氟甲烷（CAS 75-10-5）：分子量 52.0234；临界温度 351.3 K（约 78.2 °C）；临界压力 57.85 bar（约 5.8 MPa）；沸点 221.6 K（约 −51.6 °C）。"
+      },
+      "url": "https://webbook.nist.gov/cgi/cbook.cgi?ID=C75105&Mask=4"
+    },
+    {
+      "id": "S3",
+      "text": {
+        "en": "NIST Chemistry WebBook, SRD 69, water, saturation table: latent heat of vaporisation 2,441.7 kJ/kg at 25 °C and 2,256.4 kJ/kg at 100 °C; saturation vapour pressure 2.198 kPa at 19 °C and 3.568 kPa at 27 °C.",
+        "zh": "NIST 化学数据手册 SRD 69，水的饱和表：汽化潜热 25 °C 时 2,441.7 kJ/kg，100 °C 时 2,256.4 kJ/kg；饱和蒸汽压 19 °C 时 2.198 kPa，27 °C 时 3.568 kPa。"
+      },
+      "url": "https://webbook.nist.gov/cgi/fluid.cgi?Action=Load&ID=C7732185&Type=SatP&Digits=5&THigh=100&TLow=5&TInc=5&RefState=DEF&TUnit=C&PUnit=kPa&DUnit=kg%2Fm3&HUnit=kJ%2Fkg&WUnit=m%2Fs&VisUnit=uPa*s&STUnit=N%2Fm",
+      "note": {
+        "en": "Used for the condensate estimate: 0.65 kW of latent cooling ÷ 2,441.7 kJ/kg ≈ 0.27 g/s ≈ 1 litre an hour (simulated operating point). The dew point of air at 27 °C dry bulb / 19 °C wet bulb, about 15 °C, is computed from these vapour pressures with the standard psychrometric relations.",
+        "zh": "用于估算冷凝水：0.65 kW 潜热 ÷ 2,441.7 kJ/kg ≈ 0.27 g/s ≈ 每小时 1 升（模拟运行点）。干球 27 °C、湿球 19 °C 空气的露点约 15 °C，由这些蒸汽压按标准湿空气关系式算出。"
+      }
+    },
+    {
+      "id": "S4",
+      "text": {
+        "en": "GHG Protocol, Global Warming Potential Values (August 2024), adapted from the IPCC reports: 100-year GWP of HFC-32 (R32) is 675 in the Fourth Assessment Report (AR4, 2007), 677 in AR5 (2013) and 771 in AR6 (2021); HCFC-22 (R22) is 1,810 (AR4).",
+        "zh": "温室气体核算体系（GHG Protocol）《全球变暖潜能值》（2024 年 8 月），取自 IPCC 评估报告：HFC-32（R32）的 100 年 GWP 在第四次评估报告（AR4，2007）中为 675，AR5（2013）为 677，AR6（2021）为 771；HCFC-22（R22）为 1,810（AR4）。"
+      },
+      "url": "https://ghgprotocol.org/sites/default/files/2024-08/Global-Warming-Potential-Values%20%28August%202024%29.pdf",
+      "note": {
+        "en": "The three IPCC reports give different values; the text quotes 675 (AR4), the value used on safety data sheets and in the EU F-gas lists, and names the report.",
+        "zh": "三份 IPCC 报告的数值不同；正文用 675（AR4），也就是安全数据表和欧盟含氟气体清单所用的值，并注明出处。"
+      }
+    },
+    {
+      "id": "S5",
+      "text": {
+        "en": "German Environment Agency (Umweltbundesamt), Global Warming Potentials of selected compounds and their mixtures (March 2026): R-410A is 50 % HFC-32 and 50 % HFC-125 by mass, GWP100 2,088 (AR4) and 1,924 (AR5); HFC-32 675 (AR4), 677 (AR5).",
+        "zh": "德国联邦环境署《部分化合物及其混合物的全球变暖潜能值》（2026 年 3 月）：R-410A 按质量由 50 % HFC-32 和 50 % HFC-125 组成，GWP100 为 2,088（AR4）、1,924（AR5）；HFC-32 为 675（AR4）、677（AR5）。"
+      },
+      "url": "https://www.umweltbundesamt.de/system/files/document/2026-03_Global%20Warming%20Potential_GWP_AR4_AR5_Regulation2024-573_Homepage_english_D2P.pdf"
+    },
+    {
+      "id": "S6",
+      "text": {
+        "en": "Arkema (refrigerant producer), 'Why are we replacing R-410A': R-32 has a lower GWP (AR4 675) and is slightly flammable, class A2L under ASHRAE Standard 34; R-410A is a near-azeotropic mixture of R-32 and R-125; there is no drop-in replacement, R-32 goes into new equipment designed for mildly flammable refrigerants; R-32 allows a smaller refrigerant charge.",
+        "zh": "阿科玛（冷媒生产商）《为什么要替换 R-410A》：R-32 的 GWP 较低（AR4 为 675），属微燃，按 ASHRAE 34 标准为 A2L 类；R-410A 是 R-32 与 R-125 组成的近共沸混合物；R-32 不能直接灌进旧机器，只用于为微燃冷媒设计的新设备；R-32 可以减少充注量。"
+      },
+      "url": "https://forane.arkema.com/en/forane-products/forane-refrigerants/r-32-a-replacement-for-r-410a/why-are-we-replacing-r-410a/"
+    },
+    {
+      "id": "S7",
+      "text": {
+        "en": "Daikin Industries, Chemicals Division, safety data sheet HFC-32 (version 1, 19 November 2019): flammable gas; boiling point −51.7 °C; lower and upper explosion limits 13.8 % and 29.9 % by volume in air; vapour pressure 1.69 MPa at 25 °C; ISO 817 classification A2L (lower flammability); GWP 675 (IPCC AR4); high concentrations cause asphyxiation.",
+        "zh": "大金工业化学事业部，HFC-32 安全数据表（第 1 版，2019 年 11 月 19 日）：易燃气体；沸点 −51.7 °C；在空气中的爆炸下限、上限分别为 13.8 %、29.9 %（体积）；25 °C 时蒸气压 1.69 MPa；ISO 817 分类 A2L（低可燃性）；GWP 675（IPCC AR4）；高浓度可致窒息。"
+      },
+      "url": "https://www.hudsontech.com/pdfs/SDS/R-32/Daikin-R-32.pdf",
+      "note": {
+        "en": "Copy of the producer's SDS hosted by a refrigerant distributor.",
+        "zh": "生产商安全数据表的副本，由冷媒经销商网站提供。"
+      }
+    },
+    {
+      "id": "S8",
+      "text": {
+        "en": "National Environment Agency (NEA), 'Reducing GHG emissions from the use of refrigerants in the RAC sector': from 1 October 2022 split-type household air-conditioners (single-phase, non-ducted, up to 17.6 kW) supplied in Singapore must use refrigerants with a GWP of 750 or less; technicians who handle R32 household systems complete ITE's Certificate of Competency in Residential Air-Conditioning System (Refrigerant); spent refrigerant from decommissioned equipment is collected and treated at NEA-authorised facilities.",
+        "zh": "新加坡国家环境局（NEA）《减少制冷空调行业冷媒的温室气体排放》：自 2022 年 10 月 1 日起，在新加坡供应的分体式家用空调（单相、无风管、制冷量 17.6 kW 以下）所用冷媒的 GWP 不得超过 750；维修 R32 家用空调的技工须完成工艺教育学院（ITE）的住宅空调系统（冷媒）能力证书课程；报废设备中的废冷媒须交由 NEA 授权的设施收集处理。"
+      },
+      "url": "https://www.nea.gov.sg/our-services/climate-change-energy-efficiency/climate-change/reducing-ghg-emissions-from-the-use-of-refrigerants-in-rac-sector"
+    },
+    {
+      "id": "S9",
+      "text": {
+        "en": "Ministry of Sustainability and the Environment (MSE) and NEA, press release 9 June 2022: Singapore has ratified the Kigali Amendment to the Montreal Protocol and will phase down the consumption of HFCs by 80 per cent over the next two decades.",
+        "zh": "新加坡永续发展与环境部（MSE）、NEA 2022 年 6 月 9 日新闻稿：新加坡已批准《蒙特利尔议定书》基加利修正案，将在未来二十年内把氢氟碳化物（HFC）的消费量削减 80 %。"
+      },
+      "url": "https://www.mse.gov.sg/latest-news/press-release-singapore-ratifies-kigali-amendment/"
+    },
+    {
+      "id": "S10",
+      "text": {
+        "en": "NEA, 'About Mandatory Energy Labelling and Minimum Energy Performance Standards': energy labelling (MELS) for air-conditioners from 1 January 2008; minimum standards (MEPS) from 1 September 2011, raised several times; MEPS for single-split air-conditioners raised to the 4-tick level on 1 April 2025 (multi-split to 5-tick).",
+        "zh": "NEA《关于强制性能效标签与最低能效标准》：空调自 2008 年 1 月 1 日起实行强制能效标签（MELS），2011 年 9 月 1 日起实行最低能效标准（MEPS），之后多次提高；2025 年 4 月 1 日起，单拖分体机的最低能效标准提高到 4 个 tick 的水平（一拖多为 5 个 tick）。"
+      },
+      "url": "https://www.nea.gov.sg/our-services/climate-change-energy-efficiency/energy-efficiency/household-sector/about-mandatory-energy-labelling-and-minimum-energy-performance-standards"
+    },
+    {
+      "id": "S11",
+      "text": {
+        "en": "NEA, tick rating for air-conditioners: a single-split inverter unit gets 4 ticks at a weighted COP of 4.86 or more and 5 ticks at 5.50 or more (with standby-power limits of 18 W and 4 W); 1 to 3 ticks are not applicable to single-split units; weighted COP = 0.4 × COP at full load + 0.6 × COP at half load.",
+        "zh": "NEA 空调能效 tick 评级：单拖变频分体机加权 COP ≥ 4.86 为 4 个 tick，≥ 5.50 为 5 个 tick（待机功率分别不超过 18 W、4 W）；单拖分体机已没有 1 到 3 个 tick 的等级；加权 COP = 0.4 × 满负荷 COP + 0.6 × 半负荷 COP。"
+      },
+      "url": "https://www.nea.gov.sg/energy-waste/energy-efficiency/household-sector/tick-rating",
+      "note": {
+        "en": "Worked figures in chapter 05: a unit with COP 5.19 at full load and weighted COP 5.8 (S22) has a half-load COP of (5.8 − 0.4 × 5.19) ÷ 0.6 ≈ 6.2; a unit with full-load COP 4.0 reaches 4.86 only if its half-load COP is at least (4.86 − 1.6) ÷ 0.6 ≈ 5.43.",
+        "zh": "第 05 章的算例：满负荷 COP 5.19、加权 COP 5.8 的机型（S22），半负荷 COP 为（5.8 − 0.4 × 5.19）÷ 0.6 ≈ 6.2；满负荷 COP 4.0 的机型，半负荷 COP 至少要（4.86 − 1.6）÷ 0.6 ≈ 5.43，加权 COP 才能达到 4.86。"
+      }
+    },
+    {
+      "id": "S12",
+      "text": {
+        "en": "NEA, news release 8 June 2021, 'NEA to enhance MEPS for refrigerators, clothes dryers and air-conditioners': from 1 January 2022 the minimum weighted COP of inverter split units rose from 3.78 to 4.04, with COP weighted as 0.4 × COP100% + 0.6 × COP50%.",
+        "zh": "NEA 2021 年 6 月 8 日新闻稿《提高冰箱、干衣机和空调的最低能效标准》：自 2022 年 1 月 1 日起，变频分体机的最低加权 COP 由 3.78 提高到 4.04，加权方式为 0.4 × 满负荷 COP + 0.6 × 半负荷 COP。"
+      },
+      "url": "https://www.nea.gov.sg/media/news/news/index/nea-to-enhance-minimum-energy-performance-standards-(meps)-for-refrigerators-clothes-dryers-and-air-conditioners"
+    },
+    {
+      "id": "S13",
+      "text": {
+        "en": "NEA, news release 5 May 2018, 'Four in five households motivated to save energy if they can save money': in the 2017 household energy consumption study, air-conditioners (24 per cent), refrigerators (17 per cent) and water heaters (11 per cent) accounted for most of the electricity used in a typical home; NEA advises setting air-conditioners at 25 °C or higher.",
+        "zh": "NEA 2018 年 5 月 5 日新闻稿《五分之四的家庭愿意为省钱而节能》：2017 年家庭能耗调查显示，一般家庭的用电主要来自空调（24 %）、冰箱（17 %）和热水器（11 %）；NEA 建议把空调设在 25 °C 或以上。"
+      },
+      "url": "https://www.nea.gov.sg/media/news/news/index/four-in-five-households-motivated-to-save-energy-if-they-can-save-money-nea-study"
+    },
+    {
+      "id": "S14",
+      "text": {
+        "en": "REACH (Singapore Government feedback unit), NEA public consultation 'Raising Minimum Energy Performance Standards for Air-Conditioners' (13 August – 2 September 2015): air-conditioners consume the most energy in a typical Singapore home, on average about 37 per cent of household electricity.",
+        "zh": "REACH（新加坡政府民意处理机构）上的 NEA 公众咨询《提高空调最低能效标准》（2015 年 8 月 13 日至 9 月 2 日）：空调是一般新加坡家庭中耗电最多的电器，平均约占家庭用电的 37 %。"
+      },
+      "url": "https://reach.gov.sg/latest-happenings/public-consultation-pages/2015/raising-minimum-energy-performance-standards-for-air-conditioners",
+      "note": {
+        "en": "NEA's 2018 release (S13) gives 24 % from a 2017 study; this 2015 figure is higher. The two documents do not explain the difference (different years and possibly different samples); the text gives both.",
+        "zh": "NEA 2018 年新闻稿（S13）引用 2017 年调查为 24 %，这份 2015 年的数字更高。两份文件没有说明差别的原因（年份不同，样本也可能不同）；正文两个数字并列。"
+      }
+    },
+    {
+      "id": "S15",
+      "text": {
+        "en": "MSE, 'Let's Save Energy Together' (updated August 2026): set air-conditioning to 25 °C or higher; each degree raised reduces energy needs by around 10 %; switch to a fan after using air-conditioning for a while.",
+        "zh": "MSE《一起节能》（2026 年 8 月更新）：空调设定在 25 °C 或以上；每调高 1 度，能耗减少约 10 %；开一阵空调后可以改用风扇。"
+      },
+      "url": "https://www.mse.gov.sg/save-energy/"
+    },
+    {
+      "id": "S16",
+      "text": {
+        "en": "MSE, 'Launch of Go25 National Movement' (16 May 2025): a study with Ngee Ann Polytechnic's Centre for Environmental Sustainability found energy savings of up to 12 per cent for each degree raised from 23 °C to 25 °C in offices; Go 25 advises setting indoor air-conditioning at or above 25 °C.",
+        "zh": "MSE《Go25 全国运动启动》（2025 年 5 月 16 日）：与义安理工学院环境可持续发展中心合作的研究发现，办公室空调从 23 °C 调到 25 °C，每调高 1 度可节能最多 12 %；Go 25 建议室内空调设在 25 °C 或以上。"
+      },
+      "url": "https://www.mse.gov.sg/latest-news/launch-of-go25-national-movement/",
+      "note": {
+        "en": "Office study, 23–25 °C only; MSE's general figure is about 10 % per degree (S15).",
+        "zh": "仅为办公室、23–25 °C 区间的研究；MSE 的一般说法是每度约 10 %（S15）。"
+      }
+    },
+    {
+      "id": "S17",
+      "text": {
+        "en": "Meteorological Service Singapore, 'Climate of Singapore' (reference period 1991–2020): mean annual relative humidity around 82 %, above 90 % before sunrise and around 60 % on dry afternoons; daily maximum temperatures usually 31–33 °C, night minimums 23–25 °C.",
+        "zh": "新加坡气象局《新加坡的气候》（参考期 1991–2020）：年平均相对湿度约 82 %，日出前超过 90 %，无雨的下午约 60 %；日最高气温通常 31–33 °C，夜间最低 23–25 °C。"
+      },
+      "url": "https://www.weather.gov.sg/climate-climate-of-singapore/"
+    },
+    {
+      "id": "S18",
+      "text": {
+        "en": "SP Group, tariff information: household electricity tariff 31.16 cents/kWh including GST (28.59 cents/kWh without GST), for 1 October – 31 December 2026.",
+        "zh": "新加坡能源集团（SP Group）电价信息：2026 年 10 月 1 日至 12 月 31 日住宅电价每千瓦时 31.16 分（含消费税；不含为 28.59 分）。"
+      },
+      "url": "https://www.spgroup.com.sg/our-services/utilities/tariff-information",
+      "note": {
+        "en": "The tariff changes every quarter; the cost example in chapter 05 uses this quarter's figure. Worked figures in chapter 05: 0.65 kWh × 31.16 cents ≈ 20 cents an hour; 8 hours = 5.2 kWh ≈ S$1.62; 1,000 Btu = 0.293 kWh of heat (S28), which at COP 4 takes 0.073 kWh of electricity ≈ 2.3 cents.",
+        "zh": "电价每季度调整；第 05 章的电费例子用本季度的数字。第 05 章的算例：0.65 kWh × 31.16 分 ≈ 每小时 20 分；8 小时 = 5.2 kWh ≈ 1.62 新元；1,000 Btu = 0.293 kWh 的热（S28），按 COP 4 需用电 0.073 kWh ≈ 2.3 分。"
+      }
+    },
+    {
+      "id": "S19",
+      "text": {
+        "en": "International Energy Agency, The Future of Cooling (14 May 2018): air conditioners and electric fans use nearly 20 % of the electricity used in buildings around the world, about 10 % of all global electricity consumption.",
+        "zh": "国际能源署（IEA）《制冷的未来》（2018 年 5 月 14 日）：空调和电风扇用电占全球建筑用电的近 20 %，约占全球总用电量的 10 %。"
+      },
+      "url": "https://www.iea.org/reports/the-future-of-cooling"
+    },
+    {
+      "id": "S20",
+      "text": {
+        "en": "Claire Yu Yan, Introduction to Engineering Thermodynamics (UBC / BCcampus Pressbooks, 2022, CC BY-NC-SA 4.0), §6.2 'Refrigerator and heat pump': a vapour-compression system has an evaporator, a compressor, a condenser and an expansion valve; heat cannot flow from a colder body to a hotter one on its own, so the cycle needs work; heat rejected = heat absorbed + work in; coefficient of performance COP = heat removed ÷ work in; a heat pump is the same cycle.",
+        "zh": "颜宇（Claire Yu Yan）《工程热力学导论》（不列颠哥伦比亚大学 / BCcampus 开放教材，2022，CC BY-NC-SA 4.0）第 6.2 节《制冷机与热泵》：蒸气压缩式系统由蒸发器、压缩机、冷凝器和膨胀阀组成；热不能自发地从较冷的物体传到较热的物体，所以循环需要做功；放出的热 = 吸收的热 + 输入的功；性能系数 COP = 移走的热 ÷ 输入的功；热泵用的是同一个循环。"
+      },
+      "url": "https://pressbooks.bccampus.ca/thermo1/chapter/6-2-refrigerator-and-heat-pump/"
+    },
+    {
+      "id": "S21",
+      "text": {
+        "en": "Claire Yu Yan, Introduction to Engineering Thermodynamics, Appendix G, table G1: air as an ideal gas at 300 K has R = 0.287 kJ/(kg·K) and cp = 1.005 kJ/(kg·K).",
+        "zh": "颜宇《工程热力学导论》附录 G 表 G1：300 K 时把空气视为理想气体，R = 0.287 kJ/(kg·K)，cp = 1.005 kJ/(kg·K)。"
+      },
+      "url": "https://pressbooks.bccampus.ca/thermo1/back-matter/properties-of-various-substances/",
+      "note": {
+        "en": "Used for the simulated air temperatures: indoor 600 m³/h at 27 °C (density about 1.18 kg/m³) loses 1.95 kW of sensible heat, a drop of about 10 K; outdoor 1,900 m³/h at 33 °C (about 1.15 kg/m³) takes 3.25 kW, a rise of about 5.3 K. Mass flows: 600 m³/h × 1.18 kg/m³ ÷ 3,600 ≈ 0.20 kg/s; 1,900 m³/h × 1.15 kg/m³ ÷ 3,600 ≈ 0.61 kg/s.",
+        "zh": "用于模拟的空气温度：室内 600 m³/h、27 °C（密度约 1.18 kg/m³）失去 1.95 kW 显热，降温约 10 K；室外 1,900 m³/h、33 °C（约 1.15 kg/m³）带走 3.25 kW，升温约 5.3 K。质量流量：600 m³/h × 1.18 kg/m³ ÷ 3,600 ≈ 0.20 kg/s；1,900 m³/h × 1.15 kg/m³ ÷ 3,600 ≈ 0.61 kg/s。"
+      }
+    },
+    {
+      "id": "S22",
+      "text": {
+        "en": "Panasonic Singapore, specifications of a 9,000 Btu/h-class wall-mounted inverter split unit with R32 (indoor CS-XU9XKZW, outdoor CU-XU9XKZ, 5 ticks): cooling 2.70 kW (0.98–3.60), 9,210 Btu/h; power input 520 W (185–900); COP 5.19; weighted COP 5.8; moisture removal 1.6 L/h; air circulation indoor 11.8 m³/min, outdoor 32.0 m³/min; indoor 295 × 870 × 229 mm, outdoor 542 × 780 × 289 mm (H × W × D); pipes 6.35 mm (1/4 in) liquid and 9.52 mm (3/8 in) gas; chargeless pipe length 7.5 m, maximum 20 m.",
+        "zh": "松下新加坡官网，一款 9,000 Btu/h 级 R32 壁挂变频分体机的规格（室内机 CS-XU9XKZW、室外机 CU-XU9XKZ，5 个 tick）：制冷量 2.70 kW（0.98–3.60），9,210 Btu/h；输入功率 520 W（185–900）；COP 5.19；加权 COP 5.8；除湿量 1.6 L/h；风量室内 11.8 m³/min、室外 32.0 m³/min；室内机 295 × 870 × 229 mm，室外机 542 × 780 × 289 mm（高 × 宽 × 深）；液管 6.35 mm（1/4 英寸）、气管 9.52 mm（3/8 英寸）；免加冷媒管长 7.5 m，最长 20 m。"
+      },
+      "url": "https://www.panasonic.com/sg/consumer/air-solution/residential-use/multi-split/cs-xu9xkzw.html",
+      "note": {
+        "en": "Manufacturer data cited as typical of the class; the topic does not name brands in its text. Refrigerant charge is not stated on this page.",
+        "zh": "厂商数据只作为同级机型的典型值引用；正文不出现品牌。此页未列冷媒充注量。"
+      }
+    },
+    {
+      "id": "S23",
+      "text": {
+        "en": "Mitsubishi Electric Asia (Singapore), Starmex R32 catalogue (July 2025), inverter single-split 2.5 kW class (MSY-GP10VF / MUY-GP10VF): cooling 2.5 kW (1.1–3.5); power input 0.51 kW; indoor airflow 4.3–13.6 m³/min over its fan speeds; indoor 799 × 232 × 290 mm, outdoor 800 × 285 × 550 mm (W × D × H); pipes 9.52 mm gas and 6.35 mm liquid, flared; maximum length 20 m; pre-charged R32 0.97 kg; indoor sound level 19–47 dB(A) from silent to high, outdoor 46 dB(A). The 3.5–4.8 kW models in the same table draw 0.81–1.11 kW. Rating conditions: indoor 27 °C dry bulb / 19 °C wet bulb, outdoor 35 °C dry bulb. Btu/h = kW × 3,412.",
+        "zh": "三菱电机亚洲（新加坡）Starmex R32 产品目录（2025 年 7 月），2.5 kW 级单拖变频分体机（MSY-GP10VF / MUY-GP10VF）：制冷量 2.5 kW（1.1–3.5）；输入功率 0.51 kW；室内风量按风速档 4.3–13.6 m³/min；室内机 799 × 232 × 290 mm，室外机 800 × 285 × 550 mm（宽 × 深 × 高）；气管 9.52 mm、液管 6.35 mm，喇叭口连接；最长 20 m；出厂预充 R32 0.97 kg；室内机噪音从静音档到高档 19–47 dB(A)，室外机 46 dB(A)。同表 3.5–4.8 kW 机型输入功率 0.81–1.11 kW。额定工况：室内干球 27 °C / 湿球 19 °C，室外干球 35 °C。Btu/h = kW × 3,412。"
+      },
+      "url": "https://www.mitsubishielectric.com.sg/getattachment/769b35dd-9fc5-409d-850c-6bd0fbbfde6c/Mitsubishi-Electric-Starmex-R32-Catalogue-July-2025.pdf",
+      "note": {
+        "en": "Manufacturer data cited as typical of the class.",
+        "zh": "厂商数据只作为同级机型的典型值引用。"
+      }
+    },
+    {
+      "id": "S24",
+      "text": {
+        "en": "Daikin Europe, technical data book RXM-R (EEDEN20), 2.5 kW outdoor unit RXM25R: hermetically sealed swing (rotary) compressor, inverter capacity control; refrigerant R-32, charge 0.76 kg, controlled by an expansion valve; the piping diagram shows the motor-operated expansion valve, compressor, accumulator and liquid and gas stop valves inside the outdoor unit; heat insulation on both liquid and gas pipes; propeller fan 800 rpm nominal, 860 rpm high in cooling; outdoor airflow 28.3 m³/min; coil fin pitch 1.4 mm; rating conditions indoor 27 °C dry bulb / 19 °C wet bulb, outdoor 35 °C.",
+        "zh": "大金欧洲 RXM-R 技术资料手册（EEDEN20），2.5 kW 室外机 RXM25R：全封闭摆动式（转子式）压缩机，变频调节能力；冷媒 R-32，充注量 0.76 kg，由膨胀阀控制；配管图显示电动膨胀阀、压缩机、气液分离器以及液管、气管截止阀都在室外机内；液管和气管都要保温；轴流风扇制冷时额定 800 rpm、高速 860 rpm；室外风量 28.3 m³/min；盘管片距 1.4 mm；额定工况室内干球 27 °C / 湿球 19 °C，室外 35 °C。"
+      },
+      "url": "https://daichi.ru/upload/iblock/3c5/zzgxi8dx3mhawwwzlzisk5ek6rukjysw/RXM-R_EEDEN20_Data%20books_English.pdf",
+      "note": {
+        "en": "Manufacturer data book (a heat-pump model; the cooling data and the piping layout apply to a cooling-only unit, which simply lacks the 4-way valve), copy hosted by a distributor; cited as typical.",
+        "zh": "厂商技术资料手册（冷暖机型；制冷数据和配管布局同样适用于单冷机，单冷机只是没有四通阀），副本由经销商网站提供；作为典型值引用。"
+      }
+    },
+    {
+      "id": "S25",
+      "text": {
+        "en": "Daikin Europe, technical data FTXM-R wall-mounted indoor units (EEDDE22, German): cross-flow fan; fan speed in cooling about 1,060–1,190 rpm on high, 800–950 rpm medium, 640–820 rpm low; coil fin pitch 1.4 mm.",
+        "zh": "大金欧洲 FTXM-R 壁挂室内机技术数据（EEDDE22，德文）：贯流风扇；制冷时风扇转速高档约 1,060–1,190 rpm，中档 800–950 rpm，低档 640–820 rpm；盘管片距 1.4 mm。"
+      },
+      "url": "https://www.klimaanlagen-heizungen.de/media/pdf/91/75/08/Daikin-Perfera-Wandgeraet-FTXM-Datenblatt.pdf",
+      "note": {
+        "en": "Manufacturer data sheet hosted by a dealer; cited as typical. The text rounds the high-speed range (1,060–1,190 rpm) to about 1,000–1,200 rpm.",
+        "zh": "厂商数据表，由经销商网站提供；作为典型值引用。正文把高速档范围（1,060–1,190 rpm）取整为约 1,000–1,200 rpm。"
+      }
+    },
+    {
+      "id": "S26",
+      "text": {
+        "en": "Siam Compressor Industry (Mitsubishi Electric group), rotary compressor catalogue: rotary compressors are of the rolling-piston type; R-32 DC inverter models run between 10 and 130 revolutions per second, with performance listed at 60 rps; air-conditioning rating condition evaporating 7.2 °C, condensing 54.4 °C, ambient 35 °C; for R-32 the discharge gas must stay below 115 °C; suction gas must not carry liquid.",
+        "zh": "暹罗压缩机工业（三菱电机集团）转子式压缩机目录：转子式压缩机为滚动活塞式；R-32 直流变频机型的转速范围为每秒 10 到 130 转，性能按每秒 60 转列出；空调额定工况为蒸发 7.2 °C、冷凝 54.4 °C、环境 35 °C；R-32 机型排气温度须低于 115 °C；吸气不得带液。"
+      },
+      "url": "https://mitsubishicompressors.com/products/reference/Mitsubishi-Rotary-Catalogue.pdf",
+      "note": {
+        "en": "Compressor maker's catalogue, cited as typical. The simulated 3,600 rpm (60 rps) is this catalogue's listing speed.",
+        "zh": "压缩机厂商目录，作为典型值引用。模拟值 3,600 rpm（60 rps）就是此目录列性能时用的转速。"
+      }
+    },
+    {
+      "id": "S27",
+      "text": {
+        "en": "Daikin Australia, FAQ 'How often should I clean my air conditioner filter?': clean the indoor-unit filters every two weeks, more often in dusty places; replacing a blocked filter can lower energy consumption by 5 % to 15 %.",
+        "zh": "大金澳大利亚常见问题《空调滤网多久清洗一次》：室内机滤网每两周清洗一次，灰尘多的地方要更勤；把堵塞的滤网换成干净的，可降低能耗 5 % 到 15 %。"
+      },
+      "url": "https://www.daikin.com.au/faq/maintenance/how-often-clean-air-conditioner-filter"
+    },
+    {
+      "id": "S28",
+      "text": {
+        "en": "NIST Special Publication 811, Guide to the SI, Appendix B.9: 1 British thermal unit (IT) per hour = 0.293 071 1 W, so 1 kW ≈ 3,412 Btu/h.",
+        "zh": "NIST 特别出版物 811《国际单位制指南》附录 B.9：1 英热单位（国际蒸汽表）每小时 = 0.293 071 1 W，所以 1 kW ≈ 3,412 Btu/h。"
+      },
+      "url": "https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b9",
+      "note": {
+        "en": "2.6 kW × 3,412 ≈ 8,870 Btu/h, rounded to 8,900 in the spec table and in chapter 05.",
+        "zh": "2.6 kW × 3,412 ≈ 8,870 Btu/h，规格表和第 05 章取整为 8,900。"
+      }
+    },
+    {
+      "id": "S29",
+      "text": {
+        "en": "Atlas design study for this topic (a generic unit, no brand or model; docs/12 §1.2). Design values: cooling 2.6 kW, power input 0.65 kW (COP 4.0), R32 charge 0.80 kg, airflow 600 m³/h indoors and 1,900 m³/h outdoors, indoor unit 800 × 290 × 220 mm, outdoor unit 780 × 550 × 290 mm. Simulated operating point: room 27 °C (wet bulb 19 °C), outdoors 33 °C; evaporating 7 °C, condensing 48 °C, compressor 60 revolutions a second; 1.95 kW of the cooling lowers the air temperature and 0.65 kW condenses water. Results: indoor air out about 17 °C, outdoor air out about 38 °C, condensate about 1 litre an hour, condenser heat 3.25 kW, refrigerant flow about 0.011 kg/s, one trip round the loop about a minute.",
+        "zh": "本主题的 Atlas 设计研究（通用机型，不对应任何品牌或型号；docs/12 §1.2）。设计值：制冷量 2.6 kW，输入功率 0.65 kW（COP 4.0），R32 充注量 0.80 kg，风量室内 600 m³/h、室外 1,900 m³/h，室内机 800 × 290 × 220 mm，室外机 780 × 550 × 290 mm。模拟运行点：室内 27 °C（湿球 19 °C），室外 33 °C；蒸发 7 °C，冷凝 48 °C，压缩机每秒 60 转；制冷量中 1.95 kW 用于降低空气温度，0.65 kW 用于凝结水分。结果：室内出风约 17 °C，室外出风约 38 °C，冷凝水约每小时 1 升，冷凝器放热 3.25 kW，冷媒流量约 0.011 kg/s，走完一圈约一分钟。"
+      },
+      "note": {
+        "en": "Not a measurement. The design values sit within the ranges of the units cited in S22–S26, except that the power input is higher and the COP lower than the two current 4- and 5-tick units cited (0.51–0.52 kW, COP 4.9–5.2): the study uses round numbers. Inputs and arithmetic: S1, S3, S20, S21.",
+        "zh": "不是实测值。设计值落在 S22–S26 所列机型的范围内；只有输入功率比所引的两款现售 4–5 tick 机型高、COP 比它们低（0.51–0.52 kW，COP 4.9–5.2）：本研究取的是整数。输入数据与算法见 S1、S3、S20、S21。"
+      }
+    },
+    {
+      "id": "S30",
+      "text": {
+        "en": "University of Massachusetts Amherst, Environmental Health & Safety, 'Air Conditioning': window units house all components in one box; split systems have an outdoor part (compressor, fan, condenser coil) and an indoor part (evaporator coil and fan) joined by refrigerant tubes; a common misconception is that air conditioners bring in fresh outdoor air, but most work by re-circulating the air already in the space.",
+        "zh": "美国麻省大学阿默斯特分校环境健康与安全处《空调》：窗式空调把所有部件装在一个箱子里；分体式空调分成室外部分（压缩机、风扇、冷凝盘管）和室内部分（蒸发盘管和风扇），由冷媒管相连；常见的误解是空调会引进室外新鲜空气，其实大多数空调只是让室内原有的空气循环。"
+      },
+      "url": "https://www.umass.edu/ehs/air-conditioning"
+    }
+  ]
 }

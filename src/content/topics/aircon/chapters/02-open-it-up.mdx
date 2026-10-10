@@ -12,17 +12,77 @@ state:
   hide: [front-panel, outdoor-front, fan-grille, outdoor-top, outdoor-side]
   labels: [compressor, condenser-coil, expansion-valve, evaporator-front]
   camera: { position: [1.38, 1.7, 3.42], target: [-0.03, 0.64, 0], fov: 30 }
-  summary: { en: "Draft: with the covers off, four parts do the real work: compressor, condenser, expansion valve and evaporator.", zh: "草稿：拿掉外壳，真正干活的是四大件：压缩机、冷凝器、膨胀阀、蒸发器。" }
+  summary: { en: "With the covers off, four parts do the real work: the compressor, the condenser and the expansion valve outdoors, and the evaporator indoors.", zh: "拿掉外壳，真正干活的是四大件：室外机里的压缩机、冷凝器和膨胀阀，室内机里的蒸发器。" }
 ---
 
 <Lang en>
 
-Draft placeholder: the text of this chapter is written in step T2, after the spec is signed off.
+Take the covers off and four parts do the real work. Three are in the outdoor unit: the compressor, the <Term id="condenser">condenser</Term> and the <Term id="expansion-valve">expansion valve</Term>. The fourth, the <Term id="evaporator">evaporator</Term>, is in the indoor unit. The refrigerant passes through them in that order and then back to the compressor, round a sealed loop it never leaves. <FlyTo preset="outdoor-unit">Look into the outdoor unit</FlyTo>
+
+The compressor is the black can in the right-hand compartment of the outdoor unit; it pushes the refrigerant round the loop. The condenser is the large finned coil across the back, where the refrigerant gives off heat. The expansion valve sits on the thin pipe near the valves, where the <Term id="pressure">pressure</Term> drops. The evaporator is the finned coil inside the indoor unit, where the refrigerant takes in heat from the room.
+
+The condenser and the evaporator look almost the same: thin aluminium fins threaded by copper tubes. In real coils the fins are only about <Num s="S24">1.4 mm</Num> apart, so a coil no thicker than a book has a very large surface touching the air. One coil gives heat away, the other takes it in.
+
+Everything else serves these four. Indoors, air comes in through the grille on top and the filters, crosses the evaporator, passes through a long cross-flow fan and leaves past the louvre; a pan underneath catches dripping water. Outdoors, a propeller fan pulls air through the condenser. The only parts that move are the two fans, the louvre, the motor inside the compressor and the needle of the expansion valve. The casing panels keep out rain, dust and fingers and guide the air. <FlyTo preset="indoor-unit">Look into the indoor unit</FlyTo>
+
+<More title={{ en: "Why the evaporator drips", zh: "蒸发器为什么会滴水" }}>
+
+Room air always carries some water vapour. Cool it enough and the vapour turns back into water, like the drops that form on a glass of iced water. The temperature at which that starts is the dew point: about <Num s="S3">15 °C</Num> for room air at <Num s="S29">27 °C</Num> with a wet-bulb temperature of <Num s="S29">19 °C</Num>. The evaporator's fins are far colder, about <Num s="S1">7 °C</Num> at this simulated operating point, so water collects on them, runs down into the drain pan and leaves through the drain hose. Units of this size are rated to remove about <Num s="S22">1.6 litres</Num> of water an hour.
+
+</More>
+
+<More title={{ en: "Copper and aluminium", zh: "铜和铝" }}>
+
+Both metals are good conductors of heat, and each does the job it suits. Copper is strong, easy to bend and to join, and can be widened into the flared ends that seal the pipes onto the valves. That is why the tubes that hold the refrigerant at high pressure are copper. Aluminium is light and easy to press into thin sheets, so it makes the fins, which carry heat between the tubes and the air across a large area. The fins are thin and soft: a brush or a knock can bend them flat, and flattened fins block the air.
+
+</More>
+
+<More title={{ en: "Why the thick pipe is insulated too", zh: "为什么粗管也要包保温层" }}>
+
+In this kind of unit the expansion valve sits in the outdoor unit, so the refrigerant has already lost its pressure before it enters the thin pipe. That pipe carries a cold mix of liquid and gas, about <Num s="S1">7 °C</Num> at the simulated operating point, through the wall to the indoor unit. The thick pipe brings the gas back at about <Num s="S1">12 °C</Num>. Both are colder than the outdoor air and below its dew point, so manufacturers require insulation on both. Bare copper would sweat with condensation and drip down the wall, and the refrigerant would pick up heat before it reached the room.
+
+</More>
+
+<More title={{ en: "Pull it apart", zh: "拆开来看" }}>
+
+Press E, or EXPLODED in the control panel, to move every part away from the others along the direction in which it would come off during assembly: the covers outward, the filters up, the fan down and forward. The refrigerant and air flows stop while the unit is pulled apart, because the paths they follow do not move with the parts.
+
+</More>
 
 </Lang>
 
 <Lang zh>
 
-草稿占位：本章正文在 spec 定稿后的 T2 步骤写。
+拿掉外壳，真正干活的是四大件。三件在室外机里：压缩机、<Term id="condenser">冷凝器</Term>和<Term id="expansion-valve">膨胀阀</Term>；第四件<Term id="evaporator">蒸发器</Term>在室内机里。冷媒按这个顺序流过它们，再回到压缩机，在一个密封的回路里打转，从不离开。<FlyTo preset="outdoor-unit">看室外机内部</FlyTo>
+
+压缩机是室外机右边隔间里那个黑色的罐子，推动冷媒在回路里流动。冷凝器是横在机身背面的大块带鳍片盘管，冷媒在这里放热。膨胀阀装在截止阀附近的细管上，冷媒的<Term id="pressure">压力</Term>在这里骤降。蒸发器是室内机里的带鳍片盘管，冷媒在这里吸收房间的热。
+
+冷凝器和蒸发器长得几乎一样：很薄的铝鳍片，中间穿着铜管。真实盘管的鳍片间距只有约 <Num s="S24">1.4 mm</Num>，所以一块不比一本书厚的盘管，和空气接触的面积却非常大。一个盘管把热散出去，另一个把热吸进来。
+
+其余的零件都为这四大件服务。在室内，空气从顶部格栅和滤网进来，穿过蒸发器，经过一根长长的贯流风扇，从导风板下面吹出去；底下的接水盘接住滴下来的水。在室外，轴流风扇把空气抽过冷凝器。会动的只有两台风扇、导风板、压缩机里的电机和膨胀阀里的阀针。外壳挡住雨水、灰尘和手指，也给空气引路。<FlyTo preset="indoor-unit">看室内机内部</FlyTo>
+
+<More title={{ en: "Why the evaporator drips", zh: "蒸发器为什么会滴水" }}>
+
+房间空气里总含有一些水蒸气。空气冷到一定程度，水蒸气就会变回水，就像冰水杯外面凝出的水珠。开始凝结的温度叫露点：干球 <Num s="S29">27℃</Num>、湿球 <Num s="S29">19℃</Num> 的房间空气，露点约 <Num s="S3">15℃</Num>。在这个模拟运行点，蒸发器鳍片只有约 <Num s="S1">7℃</Num>，冷得多，所以水会聚在鳍片上，流进接水盘，再从排水管排走。这一级别的机型，额定除湿量约为每小时 <Num s="S22">1.6 升</Num>。
+
+</More>
+
+<More title={{ en: "Copper and aluminium", zh: "铜和铝" }}>
+
+铜和铝都是热的良导体，各自用在合适的地方。铜结实，容易弯曲、容易连接，还能把管口扩成喇叭口，压紧在阀门上密封，所以装着高压冷媒的管子用铜。铝很轻，容易压成薄片，于是用来做鳍片，在很大的面积上把热在铜管和空气之间传递。鳍片又薄又软，刷子一刷、东西一碰就可能被压倒，倒下的鳍片会挡住空气。
+
+</More>
+
+<More title={{ en: "Why the thick pipe is insulated too", zh: "为什么粗管也要包保温层" }}>
+
+这类空调的膨胀阀装在室外机里，所以冷媒在进入细管之前就已经降了压。细管里是冷的气液混合物，在模拟运行点约 <Num s="S1">7℃</Num>，穿过墙送到室内机。粗管把气体送回来，约 <Num s="S1">12℃</Num>。两根管都比室外空气冷，也低于它的露点，所以厂商要求两根管都包保温层。裸露的铜管会结露，水顺着墙往下流；冷媒在到达房间之前也会先吸进外面的热。
+
+</More>
+
+<More title={{ en: "Pull it apart", zh: "拆开来看" }}>
+
+按 E 键，或在控制面板里点 EXPLODED，每个零件都会沿着装配时拆下它的方向移开：外壳向外，滤网向上，风扇向下、向前。拆开时冷媒和空气的流动会停下，因为它们的路径不会跟着零件移动。
+
+</More>
 
 </Lang>
