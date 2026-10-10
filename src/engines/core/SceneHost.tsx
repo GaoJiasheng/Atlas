@@ -10,6 +10,9 @@
  *   overlay column, bottom dock with panels and the engine bar), the reading
  *   InfoPanel is a docked column >= 1024px (collapsible to a 28 px strip,
  *   kept per tab in sessionStorage) and a bottom sheet below
+ * - the bottom panel strip (panel01-03) folds as one group into a 28 px bar,
+ *   per tab in sessionStorage (`atlas:panels`); BottomPanels tells the stage
+ *   where the strip starts (`--stage-inset`) so the canvas reflows
  * - the reading panel's collapse is the user's choice and sticky: a chapter
  *   change never re-expands it, it only flashes the handle / strip (`data-flash`);
  *   the one exception is the background chapter (`kind: background`), whose
@@ -52,7 +55,7 @@ import { BottomPanels, CardFrame, TitleBlock, TopBar } from './Hud';
 import { getEngine, getEngineView } from '../registry';
 import { t, tx, type BilingualText } from '../../i18n';
 import { applyTheme, resolveTheme } from '../../theme/theme';
-import { getReaderExpanded, setReaderExpanded, setThemeOverride, useThemeOverride } from '../../lib/prefs';
+import { getPanelsExpanded, getReaderExpanded, setPanelsExpanded, setReaderExpanded, setThemeOverride, useThemeOverride } from '../../lib/prefs';
 import { ChapterRail } from '../widgets/ChapterRail';
 import { InfoPanel } from '../widgets/InfoPanel';
 import { ChapterBodies } from '../widgets/ChapterBodies';
@@ -264,6 +267,7 @@ export default function SceneHost(props: SceneHostProps) {
   const hudOn = useStore(hud, (s) => s.hud);
   const labelsOn = useStore(hud, (s) => s.labels);
   const readerOpen = useStore(hud, (s) => s.reader);
+  const panelsOpen = useStore(hud, (s) => s.panelsOpen);
   // Docked reading panel: expanded unless this tab collapsed it (sessionStorage, not the URL).
   // The background chapter overrides that once, on its first entry: its reader opens.
   const backgroundShown = useRef(false);
@@ -283,6 +287,13 @@ export default function SceneHost(props: SceneHostProps) {
       if (s.reader !== prev.reader) setReaderExpanded(s.reader);
     });
   }, [hud, store, openBackground]);
+  // The bottom panel strip folds as one group; the choice is per tab (sessionStorage), never in the URL.
+  useEffect(() => {
+    hud.setState({ panelsOpen: getPanelsExpanded() });
+    return hud.subscribe((s, prev) => {
+      if (s.panelsOpen !== prev.panelsOpen) setPanelsExpanded(s.panelsOpen);
+    });
+  }, [hud]);
   // A collapsed reader stays collapsed when the chapter changes; its handle flashes to say new text is there.
   const readerRef = useRef<HTMLElement>(null);
   useEffect(() => {
@@ -426,6 +437,7 @@ export default function SceneHost(props: SceneHostProps) {
         data-labels={labelsOn ? 'on' : 'off'}
         data-sheet={sheetOpen ? 'open' : 'closed'}
         data-reader={readerOpen ? 'open' : 'collapsed'}
+        data-panels={panelsOpen ? 'open' : 'collapsed'}
         style={scaleStyle}
       >
         <main id="atlas-main" className="atlas-stage-area">
@@ -457,6 +469,7 @@ export default function SceneHost(props: SceneHostProps) {
           indexHref={indexHref}
           hud={hud}
           actions={actions}
+          onChapter={(id) => store.getState().goToChapter(id)}
         />
 
         <div className="atlas-hud hud-fade">
@@ -482,7 +495,7 @@ export default function SceneHost(props: SceneHostProps) {
           </div>
           <div className="atlas-hud__dock">
             <div ref={slotRef('perf')} className="atlas-perf" data-hud-panel="perf" />
-            <BottomPanels hud={hud} slotRef={slotRef} locale={locale} />
+            <BottomPanels hud={hud} slotRef={slotRef} locale={locale} actions={actions} />
             <div
               ref={slotRef('bottomBar')}
               className="atlas-bottombar"

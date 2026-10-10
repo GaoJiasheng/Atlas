@@ -193,6 +193,11 @@ export interface HudState {
    */
   reader: boolean;
   /**
+   * Bottom panel strip (panel01–03) expanded; collapsed = one 28 px bar with
+   * the three titles. Kept in sessionStorage by the host, never in the URL.
+   */
+  panelsOpen: boolean;
+  /**
    * Glossary in the reader's inspector: a term id (`<Term>` click, a related
    * term), `GLOSSARY_ALL` (the list, TOOLS "Glossary"), or `null` (closed).
    */
@@ -212,6 +217,7 @@ export function createHudStore(): HudStore {
     presetId: null,
     cameraFree: false,
     reader: true,
+    panelsOpen: true,
     glossary: null,
   }));
 }
@@ -314,6 +320,8 @@ export interface HudActions {
   setLabels(on: boolean): void;
   /** Expand / collapse the docked reading panel. */
   setReader(expanded: boolean): void;
+  /** Expand / collapse the bottom panel strip (one group). */
+  setPanels(expanded: boolean): void;
   /** Open a glossary term (`GLOSSARY_ALL` = the list) in the reader's inspector; `null` closes it. */
   setGlossary(id: string | null): void;
   escape(): void;
@@ -355,6 +363,9 @@ export function createHudActions(hud: HudStore, camera: { suppress(fn: () => voi
     },
     setReader(expanded) {
       hud.setState({ reader: expanded });
+    },
+    setPanels(expanded) {
+      hud.setState({ panelsOpen: expanded });
     },
     setGlossary(id) {
       hud.setState({ glossary: id });

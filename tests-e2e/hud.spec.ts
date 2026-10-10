@@ -28,22 +28,22 @@ for (const topic of TOPICS) {
     });
   }
 
-  test(`${topic}: the VIEW row wraps (no menu, no MODE group); every mode button is in the control panel`, async ({ page }) => {
+  test(`${topic}: the VIEW row wraps (no menu, no MODE group); every mode button is in the control panel; PRESENT is the only mode in the top bar`, async ({ page }) => {
     await page.setViewportSize({ width: 900, height: 1200 });
     await openScene(page, `/en/topics/${topic}/`);
     const ids = await page.evaluate(() => window.__atlas!.presets());
     expect(ids.length).toBeGreaterThan(1);
     for (const id of ids) await expect(page.locator(`[data-preset="${id}"]`)).toBeVisible();
     await expect(page.locator('.hud-viewmenu')).toHaveCount(0);
-    await expect(page.locator('.atlas-topbar [data-mode]')).toHaveCount(0);
+    await expect(page.locator('.atlas-topbar [data-mode]')).toHaveCount(1);
+    await expect(page.locator('.atlas-topbar [data-mode="presentation"]')).toBeVisible();
     for (const mode of await page.evaluate(() => window.__atlas!.modes()))
       await expect(page.locator(`[data-hud-panel="overlay"] [data-mode="${mode}"]`)).toHaveCount(1);
-    if (topic === 'sample-time') {
-      // Geographic presets only: chapters are reached through the rail, the rule and ← →.
-      const chapters = await page.evaluate(() => window.__atlas!.chapters());
-      expect(ids.slice(0, 2)).toEqual(['world', 'theatre']);
-      expect(ids.filter((id) => chapters.includes(id))).toEqual([]);
-    }
+    // The VIEW group holds views only: chapters are reached through the top bar's number chips, the rail, the rule and ← →.
+    const chapters = await page.evaluate(() => window.__atlas!.chapters());
+    expect(ids.filter((id) => chapters.includes(id))).toEqual([]);
+    if (topic === 'sample-time') expect(ids.slice(0, 2)).toEqual(['world', 'theatre']);
+    else expect(ids.slice(0, 2)).toEqual(['orbit', 'reference']);
     await page.locator(`[data-preset="${ids[1]}"]`).click();
     await expect.poll(async () => (await page.evaluate(() => window.__atlas!.state())).preset).toBe(ids[1]);
   });
@@ -56,11 +56,12 @@ for (const topic of TOPICS) {
 
     // Modes: each key flips the mode and its button's pressed state, twice.
     for (const binding of keymap.filter((k) => k.type === 'mode')) {
-      const button = page.locator(`[data-mode="${binding.name}"]`);
+      // Every button of the mode (PRESENT also has one in the top bar) shows the same state.
+      const buttons = page.locator(`[data-mode="${binding.name}"]`);
       const before = (await api()).modes[binding.name];
       await page.keyboard.press(binding.key);
       await expect.poll(async () => (await api()).modes[binding.name]).toBe(!before);
-      await expect(button).toHaveAttribute('aria-pressed', String(!before));
+      for (const button of await buttons.all()) await expect(button).toHaveAttribute('aria-pressed', String(!before));
       await page.keyboard.press(binding.key);
       await expect.poll(async () => (await api()).modes[binding.name]).toBe(before);
     }
@@ -284,16 +285,9 @@ test('timeline: chapter nodes at least 56 px apart, one bottom bar with the stat
   const sorted = [...xs].sort((a, b) => a - b);
   for (let i = 1; i < sorted.length; i++) expect(sorted[i]! - sorted[i - 1]!).toBeGreaterThanOrEqual(55.5);
   await expect(page.locator('.ts-state [data-stat]')).toHaveCount(4);
-  // No free-running playback: the bar's only button besides the lanes chevron is PRESENT (= the presentation mode).
-  await expect(page.locator('.ts-timeline__play, .ts-timeline__speed')).toHaveCount(0);
-  const present = page.locator('.ts-timeline__present');
-  await expect(present).toHaveText(/present/i);
-  await expect(present).toHaveAttribute('aria-pressed', 'false');
-  await present.click();
-  await expect.poll(async () => (await page.evaluate(() => window.__atlas!.state())).modes.presentation).toBe(true);
-  await page.keyboard.press('Escape');
-  await expect.poll(async () => (await page.evaluate(() => window.__atlas!.state())).modes.presentation).toBe(false);
-  await expect(present).toHaveAttribute('aria-pressed', 'false');
+  // No free-running playback and no PRESENT here (it is in the top bar): the bar's only button is the lanes chevron.
+  await expect(page.locator('.ts-timeline__play, .ts-timeline__speed, .ts-timeline__present')).toHaveCount(0);
+  await expect(page.locator('.ts-timeline__controls button')).toHaveCount(1);
   await expect(page.locator('.ts-lanes')).toHaveCount(0);
   await page.locator('.ts-timeline__lanes').click();
   await expect(page.locator('.ts-lanes svg')).toBeVisible();
@@ -874,4 +868,189 @@ test('sample-space PRESENTATION voice: a beat is spoken once its camera has sett
   // The last beat: auto-play stops there.
   await page.waitForTimeout(3000);
   expect((await api()).presentation).toMatchObject({ chapter: 'switch-on', beat: 1 });
+});
+
+for (const topic of TOPICS) {
+  for (const [width, height] of [
+    [1920, 1080],
+    [1280, 720],
+  ] as const) {
+    test(`${topic} top bar at ${width}x${height}: brand and chapter chips left, VIEW centred with the orange PRESENT at its right end, LOOK and language right`, async ({ page }) => {
+      await page.setViewportSize({ width, height });
+      await openScene(page, `/en/topics/${topic}/`);
+      const box = async (selector: string) => (await page.locator(selector).first().boundingBox())!;
+      const chapters = await page.evaluate(() => window.__atlas!.chapters());
+      await expect(page.locator('.atlas-topbar [data-chapter]')).toHaveCount(chapters.length);
+      const brand = await box('.atlas-brand');
+      const firstChip = await box('.atlas-topbar [data-chapter]');
+      const lastChip = (await page.locator('.atlas-topbar [data-chapter]').last().boundingBox())!;
+      const view = await box('.hud-group--view');
+      const present = await box('.hud-btn--present');
+      const toggles = await box('.atlas-toggles');
+      // Left to right, one row: brand, chips, VIEW, PRESENT, LOOK / language.
+      expect(brand.x + brand.width).toBeLessThanOrEqual(firstChip.x);
+      expect(lastChip.x + lastChip.width).toBeLessThan(view.x);
+      expect(view.x + view.width).toBeLessThanOrEqual(present.x + 1);
+      expect(present.x + present.width).toBeLessThan(toggles.x);
+      expect(Math.abs(brand.y - toggles.y)).toBeLessThan(20);
+      expect(Math.abs(brand.y - present.y)).toBeLessThan(20);
+      // The VIEW + PRESENT group sits in the middle of the bar.
+      const middle = view.x + (present.x + present.width - view.x) / 2;
+      expect(Math.abs(middle - width / 2)).toBeLessThan(width * 0.1);
+      // PRESENT is the one solid signal-orange button.
+      const colours = await page.evaluate(() => {
+        const pick = (sel: string) => getComputedStyle(document.querySelector(sel)!).backgroundColor;
+        const signal = getComputedStyle(document.documentElement).getPropertyValue('--signal').trim();
+        const probe = document.createElement('i');
+        probe.style.color = signal;
+        document.body.append(probe);
+        const expected = getComputedStyle(probe).color;
+        probe.remove();
+        return { present: pick('.hud-btn--present'), expected, preset: pick('.hud-group--view .hud-btn:not(.on)') };
+      });
+      expect(colours.present).toBe(colours.expected);
+      expect(colours.preset).not.toBe(colours.expected);
+      // The doc id leads the status line; the key hint stays under the bar's right half.
+      await expect(page.locator('.atlas-status')).toHaveText(/^ATL-[A-Z0-9]+-\d\d · /);
+      await expect(page.locator('.atlas-topbar__row .atlas-docid')).toHaveCount(0);
+      await expect(page.locator('.atlas-hint')).toBeVisible();
+    });
+  }
+
+  test(`${topic}: chapter chips mark the current chapter, jump on click, and ← → keep working; phones show the rail's chip row instead`, async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await openScene(page, `/en/topics/${topic}/`);
+    const api = () => page.evaluate(() => window.__atlas!.state());
+    const chapters = await page.evaluate(() => window.__atlas!.chapters());
+    const chip = (id: string) => page.locator(`.atlas-topbar [data-chapter="${id}"]`);
+    await expect(chip(chapters[0]!)).toHaveAttribute('aria-current', 'step');
+    await expect(chip(chapters[0]!)).toHaveText('01');
+    await expect(chip(chapters[1]!)).not.toHaveAttribute('aria-current', 'step');
+    await chip(chapters[2]!).click();
+    await expect.poll(async () => (await api()).chapter).toBe(chapters[2]);
+    await expect(chip(chapters[2]!)).toHaveAttribute('aria-current', 'step');
+    await expect(chip(chapters[2]!)).toHaveClass(/\bon\b/);
+    await expect(chip(chapters[2]!)).not.toBeFocused(); // keys go to the scene, not the chip
+    await page.keyboard.press('ArrowLeft');
+    await expect.poll(async () => (await api()).chapter).toBe(chapters[1]);
+    await expect(chip(chapters[1]!)).toHaveAttribute('aria-current', 'step');
+    await page.keyboard.press('ArrowRight');
+    await page.keyboard.press('ArrowRight');
+    await expect.poll(async () => (await api()).chapter).toBe(chapters[Math.min(3, chapters.length - 1)]);
+
+    await page.setViewportSize({ width: 390, height: 844 });
+    await expect(page.locator('.atlas-topbar [data-chapter]').first()).toBeHidden();
+    await expect(page.locator('.atlas-topbar [data-mode="presentation"]')).toBeHidden();
+    await expect(page.locator('.atlas-rail__item').first()).toBeVisible();
+    expect((await page.locator('.atlas-rail__item').first().boundingBox())!.height).toBeGreaterThanOrEqual(44);
+  });
+
+  test(`${topic}: the PRESENT button toggles the presentation (aria-pressed, shared with key P and the TOOLS row)`, async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await openScene(page, `/en/topics/${topic}/`);
+    const api = () => page.evaluate(() => window.__atlas!.state());
+    const present = page.locator('.atlas-topbar [data-mode="presentation"]');
+    await expect(present).toHaveText(/present/i);
+    await expect(present).toHaveAttribute('aria-pressed', 'false');
+    expect((await present.boundingBox())!.height).toBeGreaterThanOrEqual(17);
+    await present.click();
+    await expect.poll(async () => (await api()).modes.presentation).toBe(true);
+    await expect(present).toHaveAttribute('aria-pressed', 'true');
+    await expect(page.locator('[data-hud-panel="overlay"] [data-mode="presentation"]')).toHaveAttribute('aria-pressed', 'true');
+    await page.keyboard.press('p');
+    await expect.poll(async () => (await api()).modes.presentation).toBe(false);
+    await expect(present).toHaveAttribute('aria-pressed', 'false');
+    await page.keyboard.press('p');
+    await expect.poll(async () => (await api()).modes.presentation).toBe(true);
+    await page.keyboard.press('Escape');
+    await expect.poll(async () => (await api()).modes.presentation).toBe(false);
+    await expect(present).toBeVisible();
+  });
+}
+
+test('bottom panels (SpaceScene): a chevron folds the three into one 28 px bar with their titles, the stage reflows, the choice is per tab; the reader handle works here too', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await openScene(page, '/en/topics/sample-space/');
+  const api = () => page.evaluate(() => window.__atlas!.state());
+  const strip = page.locator('.atlas-panels');
+  const stage = page.locator('.atlas-stage');
+  const height = async (l: typeof strip) => (await l.boundingBox())?.height ?? 0;
+  const fold = page.locator('.atlas-panels__fold');
+  const bar = page.locator('.atlas-panels__bar');
+  await expect(fold).toBeVisible();
+  await expect(fold).toHaveAttribute('aria-expanded', 'true');
+  await expect(bar).toBeHidden();
+  await expect(page.locator('[data-hud-panel^="panel0"]')).toHaveCount(3);
+  // The fold sits on the strip's left edge.
+  const foldBox = (await fold.boundingBox())!;
+  const stripBox = (await strip.boundingBox())!;
+  expect(foldBox.x + foldBox.width).toBeLessThanOrEqual(stripBox.x + 1);
+  expect(foldBox.x + foldBox.width).toBeGreaterThan(stripBox.x - 4);
+  // The stage ends where the strip starts.
+  const stageBox = (await stage.boundingBox())!;
+  expect(Math.abs(stageBox.y + stageBox.height - stripBox.y)).toBeLessThanOrEqual(2);
+  const openHeight = stageBox.height;
+  const canvasOpen = (await api().then(() => page.evaluate(() => window.__atlas!.stats()))).buffer[1];
+  expect((await api()).panels).toBe(true);
+
+  await fold.click();
+  await expect(strip).toHaveAttribute('data-collapsed', '');
+  await expect(bar).toBeVisible();
+  await expect(bar).toHaveAttribute('aria-expanded', 'false');
+  for (const id of ['panel01', 'panel02', 'panel03']) await expect(page.locator(`[data-hud-panel="${id}"]`)).toBeHidden();
+  expect(Math.round(await height(bar))).toBe(28);
+  await expect(bar).toContainText('01');
+  await expect(bar).toContainText('ARCHITECTURE');
+  await expect(bar).toContainText('DETAIL');
+  await expect(bar).toContainText('STATE');
+  await expect.poll(() => height(stage)).toBeGreaterThan(openHeight + 100);
+  await expect.poll(async () => (await page.evaluate(() => window.__atlas!.stats())).buffer[1]).toBeGreaterThan(canvasOpen!);
+  expect((await api()).panels).toBe(false);
+  expect(await page.evaluate(() => sessionStorage.getItem('atlas:panels'))).toBe('collapsed');
+  await page.waitForTimeout(400);
+  expect(page.url()).not.toContain('panels');
+  expect(await hudLayoutIssues(page)).toEqual([]);
+
+  // Sticky: a reload and a chapter change keep it folded.
+  await page.reload();
+  await page.waitForFunction(() => window.__atlas !== undefined);
+  expect(await page.evaluate(() => window.__atlas!.ready)).toBe(true);
+  await expect(strip).toHaveAttribute('data-collapsed', '');
+  const chapters = await page.evaluate(() => window.__atlas!.chapters());
+  await page.locator(`.atlas-topbar [data-chapter="${chapters[1]}"]`).click();
+  await expect.poll(async () => (await api()).chapter).toBe(chapters[1]);
+  await expect(strip).toHaveAttribute('data-collapsed', '');
+
+  // The reading panel folds independently of the strip (its handle is host-level, not TimeScene's).
+  const reader = page.locator('[data-hud-panel="reader"]');
+  await page.locator('.atlas-reader__handle').click();
+  await expect.poll(async () => (await reader.boundingBox())?.width ?? 0).toBeLessThanOrEqual(29);
+  await expect.poll(async () => (await api()).reader).toBe(false);
+  await expect(strip).toHaveAttribute('data-collapsed', '');
+  await page.locator('.atlas-reader__strip').click();
+  await expect.poll(async () => (await reader.boundingBox())?.width ?? 0).toBeGreaterThan(300);
+
+  await bar.click();
+  await expect(strip).not.toHaveAttribute('data-collapsed', '');
+  for (const id of ['panel01', 'panel02', 'panel03']) await expect(page.locator(`[data-hud-panel="${id}"]`)).toBeVisible();
+  await expect.poll(() => height(stage)).toBeLessThan(openHeight + 2);
+  expect((await api()).panels).toBe(true);
+  expect(await page.evaluate(() => sessionStorage.getItem('atlas:panels'))).toBe('open');
+  expect(await hudLayoutIssues(page)).toEqual([]);
+});
+
+test('bottom panels: H hides them with the HUD and gives the stage the whole sheet; the TimeScene has no strip and no inset', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await openScene(page, '/en/topics/sample-space/');
+  const stage = page.locator('.atlas-stage');
+  await page.keyboard.press('h');
+  await expect.poll(async () => Math.round((await stage.boundingBox())!.height)).toBe(900);
+  await page.keyboard.press('Escape');
+  await expect.poll(async () => (await stage.boundingBox())!.height).toBeLessThan(800);
+
+  await openScene(page, '/en/topics/sample-time/');
+  await expect(page.locator('.atlas-panels')).toHaveCount(0);
+  const area = (await page.locator('.atlas-stage-area').boundingBox())!;
+  const box = (await page.locator('.atlas-stage').boundingBox())!;
+  expect(Math.round(box.height)).toBe(Math.round(area.height));
 });
