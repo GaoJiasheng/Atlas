@@ -12,6 +12,7 @@ import { bilingual, colorRef, kebabId, level, theme, vec3 } from '../../content/
 import { orbitCamera } from '../../content/schema/camera';
 import { sourcesFile } from '../../content/schema/sources';
 import { glossaryFile } from '../../content/schema/glossary';
+import { detailSourceIds } from './lib/detail';
 
 /* ------------------------------------------------------------------ */
 /* Parts                                                               */
@@ -41,8 +42,11 @@ export const PRIMITIVE_KINDS = ['box', 'cylinder', 'cone', 'sphere', 'torus', 'c
  *             along `axis` (x | y | z) with a clear `gap` between plates
  *   vessel    {radius, length, headRatio}          cylinder along Y (`length` = straight shell)
  *             with domed heads of depth radius × headRatio (0.5 = 2:1 ellipsoidal head)
+ *   panelHole {size: [w, h, t], hole: {r, at: [x, y]}}  flat panel w × h in its XY plane,
+ *             thickness t along Z, with one round through-hole of radius r centred at
+ *             (x, y) from the panel centre (e.g. a fan opening); the hole has a wall
  */
-export const ENGINEERED_KINDS = ['bevelBox', 'tube', 'flange', 'fins', 'vessel'] as const;
+export const ENGINEERED_KINDS = ['bevelBox', 'tube', 'flange', 'fins', 'vessel', 'panelHole'] as const;
 
 const PRIMITIVE_ARITY: Record<(typeof PRIMITIVE_KINDS)[number], number> = {
   box: 3,
@@ -58,7 +62,8 @@ const PRIMITIVE_ARITY: Record<(typeof PRIMITIVE_KINDS)[number], number> = {
  * Material families (docs/08 §4, master-spec E). The engine builds each one
  * per theme (colour, metalness, roughness, procedural brushed / orange-peel
  * maps). `metal` and `matte` are older names kept as aliases of `steel` and
- * `plastic`.
+ * `plastic`. `enamel` is warm-white baked enamel (appliance casings), `brass`
+ * the yellow alloy of valves and flare nuts.
  */
 export const MATERIAL_PRESETS = [
   'casing',
@@ -69,6 +74,8 @@ export const MATERIAL_PRESETS = [
   'rubber',
   'plastic',
   'glass',
+  'enamel',
+  'brass',
   'metal',
   'matte',
 ] as const;
@@ -83,6 +90,12 @@ const placement = {
   /** Euler rotation in degrees (XYZ). */
   rotation: vec3.optional(),
   color: z.union([z.enum(MATERIAL_PRESETS), colorRef]),
+  /**
+   * Base colour override for a material family (`token:<name>` or `#hex`):
+   * keeps the family's metalness, roughness and surface map, e.g. a
+   * light-grey `powder` casing. Ignored when `color` is already a colour.
+   */
+  tint: colorRef.optional(),
 };
 
 export const primitiveSchema = z
@@ -112,7 +125,7 @@ export const primitiveSchema = z
       .object({
         kind: z.literal('fins'),
         size: positiveVec3,
-        count: z.number().int().min(2).max(256),
+        count: z.number().int().min(2).max(512),
         gap: positive,
         axis: z.enum(['x', 'y', 'z']).default('x'),
         ...placement,
@@ -124,6 +137,14 @@ export const primitiveSchema = z
         radius: positive,
         length: z.number().nonnegative(),
         headRatio: z.number().min(0).max(1).default(0.5),
+        ...placement,
+      })
+      .strict(),
+    z
+      .object({
+        kind: z.literal('panelHole'),
+        size: positiveVec3,
+        hole: z.object({ r: positive, at: z.tuple([z.number(), z.number()]).default([0, 0]) }).strict(),
         ...placement,
       })
       .strict(),
@@ -153,6 +174,13 @@ export const primitiveSchema = z
       case 'vessel':
         if (p.length === 0 && p.headRatio === 0) issue(['length'], 'a vessel needs a length or domed heads');
         break;
+      case 'panelHole': {
+        const [w, h] = p.size;
+        const { r, at } = p.hole;
+        if (Math.abs(at[0]) + r >= w / 2 || Math.abs(at[1]) + r >= h / 2)
+          issue(['hole'], `hole (r ${r} at ${at.join(', ')}) must lie inside the ${w} × ${h} panel`);
+        break;
+      }
       default: {
         const want = PRIMITIVE_ARITY[p.kind];
         if (p.size.length !== want) issue(['size'], `${p.kind} needs ${want} size value(s), got ${p.size.length}`);
@@ -177,16 +205,36 @@ export const partSchema = z
   .object({
     id: kebabId,
     name: bilingual,
-    group: kebabId,
+    /** Required, except for `context` parts (which may stand outside every group). */
+    group: kebabId.optional(),
     summary: bilingual,
+    /**
+     * "Tell me more" text. Blank lines (`\n\n`) split paragraphs; `[S3]` or
+     * `[S3, S7]` cite data/sources.json and render as source superscripts.
+     */
     detail: bilingual,
     /** Mesh name inside a glb model; the name is the part id's counterpart. */
     mesh: z.string().min(1).optional(),
     primitive: primitiveSchema.optional(),
     /** Instanced copies of the primitive (see repeatSchema). */
     repeat: repeatSchema.optional(),
-    explode: z.object({ dir: vec3, dist: z.number().nonnegative() }).strict(),
+    /** Exploded-view move (dir is normalised). Default: none (context parts never move). */
+    explode: z.object({ dir: vec3, dist: z.number().nonnegative() }).strict().default({ dir: [0, 1, 0], dist: 0 }),
     connects: z.array(kebabId).default([]),
+    /**
+     * Outer skin (casing, cover, insulation): in X-RAY only parts flagged
+     * `shell` turn see-through and the rest stay solid. When no part of the
+     * topic is a shell, X-RAY ghosts every part but the selected one.
+     */
+    shell: z.boolean().optional(),
+    /**
+     * Scenery, not a part of the machine (e.g. a slice of wall): drawn, but
+     * never labelled, selected, numbered, counted, put in the part-chain card
+     * or exploded, and casts no shadow unless `castShadow` says so.
+     */
+    context: z.boolean().optional(),
+    /** Override the automatic shadow choice (only parts ≥ 28 % of the model radius cast). */
+    castShadow: z.boolean().optional(),
     /** Planning metadata only; never rendered. */
     level: level.optional(),
   })
@@ -194,6 +242,10 @@ export const partSchema = z
   .refine((p) => p.mesh !== undefined || p.primitive !== undefined, {
     message: 'a part needs either `mesh` or `primitive`',
     path: ['primitive'],
+  })
+  .refine((p) => p.group !== undefined || p.context === true, {
+    message: 'a part needs a `group` (only `context: true` parts may omit it)',
+    path: ['group'],
   })
   .refine((p) => p.repeat === undefined || Math.hypot(...p.repeat.axis) > 1e-9, {
     message: 'repeat axis must not be zero',
@@ -214,6 +266,14 @@ export const groupSchema = z
   .strict();
 export type PartGroup = z.output<typeof groupSchema>;
 
+/** Defaults of the optional flow parameters (today's look). */
+export const FLOW_DEFAULTS = { count: 360, size: 1, spread: 0.012 } as const;
+export const MAX_FLOW_PARTICLES = 1024;
+export const MAX_FLOW_STOPS = 6;
+
+export const flowStopSchema = z.object({ at: z.number().min(0).max(1), color: colorRef }).strict();
+export type FlowStop = z.output<typeof flowStopSchema>;
+
 export const flowSchema = z
   .object({
     id: kebabId,
@@ -222,10 +282,43 @@ export const flowSchema = z
     path: z.array(vec3).min(2),
     /** Scene units per second. */
     speed: z.number().positive(),
+    /** Particle colour without `stops`; with `stops`, the colour of the legend swatch. */
     color: colorRef,
+    /**
+     * Colour along the path (`at` = arc-length fraction 0..1, ascending, ≤ 6):
+     * each particle takes the colour interpolated (linear RGB) at its position.
+     */
+    stops: z.array(flowStopSchema).min(2).max(MAX_FLOW_STOPS).optional(),
+    /**
+     * `fade` (default): particles fade in / out over the first 5 % / last 8 %
+     * of an open path. `open`: no fade, so flows laid end to end (one segment's
+     * last point = the next one's first) read as one stream without gaps.
+     * Closed loops (last point = first) never fade.
+     */
+    ends: z.enum(['fade', 'open']).default('fade'),
+    /** Particles (default 360, ≤ 1024). Keep particles per metre × speed similar across joined segments. */
+    count: z.number().int().min(8).max(MAX_FLOW_PARTICLES).default(FLOW_DEFAULTS.count),
+    /** Particle size as a multiple of the theme's default size. */
+    size: z.number().positive().max(4).default(FLOW_DEFAULTS.size),
+    /** Jitter around the centre line, scene units: a number = ball radius; [x, y, z] = half-extents of a box on the scene axes. */
+    spread: z.union([z.number().nonnegative(), z.tuple([z.number().nonnegative(), z.number().nonnegative(), z.number().nonnegative()])]).default(FLOW_DEFAULTS.spread),
+    /** `false`: the cutaway plane does not cut this flow (air outside the machine). */
+    clip: z.boolean().default(true),
+    /**
+     * Parts the stream passes, in order. While it runs, the part-chain card
+     * colours the line between each consecutive pair (with the stop colour at
+     * that point of the chain) and marches it.
+     */
+    parts: z.array(kebabId).min(2).optional(),
     whenRun: z.boolean().default(true),
   })
-  .strict();
+  .strict()
+  .superRefine((f, ctx) => {
+    f.stops?.forEach((s, i) => {
+      const prev = f.stops![i - 1];
+      if (prev && s.at < prev.at) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['stops', i, 'at'], message: 'stops must be in ascending `at` order' });
+    });
+  });
 export type Flow = z.output<typeof flowSchema>;
 
 const animationBase = {
@@ -302,6 +395,46 @@ export type ViewPresets = z.output<typeof viewsSchema>;
 /* parts.json                                                          */
 /* ------------------------------------------------------------------ */
 
+/** docs/12 §1.2 fact discipline: a source-backed typical range, this design's own value, or a simulated reading. */
+export const SPEC_TAGS = ['typical', 'design', 'sim'] as const;
+
+/**
+ * Title-block spec row from data (after the host's rows and the engine's
+ * PARTS row; the title block shows 8 rows at most). `tag: sim` draws the SIM
+ * chip; `typical` / `design` are fact-discipline metadata (no chip).
+ */
+export const specRowSchema = z
+  .object({
+    key: bilingual,
+    /** A plain string (numbers, units, codes: mono face) or bilingual words. */
+    value: z.union([z.string().trim().min(1), bilingual]),
+    tag: z.enum(SPEC_TAGS).optional(),
+  })
+  .strict();
+export type SpecRowData = z.output<typeof specRowSchema>;
+export const MAX_SPEC_ROWS = 4;
+
+/**
+ * Simulated STATE reading: eases toward `run` while the scene runs and back
+ * toward `idle` when it stops, as a first-order lag with time constant `lag`
+ * seconds: x(t) = target + (x0 − target) · e^(−t / lag).
+ */
+export const telemetrySchema = z
+  .object({
+    key: bilingual,
+    /** Shown after the value, e.g. `rpm`, `MPa abs`, `°C`. */
+    unit: z.string().trim().max(12),
+    idle: z.number(),
+    run: z.number(),
+    /** Time constant, seconds. */
+    lag: z.number().positive().max(120),
+    /** Decimal places (default: as many as `idle` / `run` are written with, at most 3). */
+    decimals: z.number().int().min(0).max(3).optional(),
+  })
+  .strict();
+export type TelemetryRow = z.output<typeof telemetrySchema>;
+export const MAX_TELEMETRY_ROWS = 6;
+
 export const partsFile = z
   .object({
     /**
@@ -318,18 +451,25 @@ export const partsFile = z
     flows: z.array(flowSchema).default([]),
     animations: z.array(animationSchema).default([]),
     views: viewsSchema.default({}),
+    /** Title-block spec rows (≤ 4; see specRowSchema). */
+    spec: z.array(specRowSchema).max(MAX_SPEC_ROWS).optional(),
+    /** Simulated STATE-panel readings (≤ 6; see telemetrySchema); replace the default rows after RUN. */
+    telemetry: z.array(telemetrySchema).min(1).max(MAX_TELEMETRY_ROWS).optional(),
   })
   .strict()
   .superRefine((file, ctx) => {
     const parts = new Set(file.parts.map((p) => p.id));
     const groups = new Set(file.groups.map((g) => g.id));
+    const contextIds = new Set(file.parts.filter((p) => p.context).map((p) => p.id));
     file.parts.forEach((p, i) => {
-      if (!groups.has(p.group)) {
+      if (p.group !== undefined && !groups.has(p.group)) {
         ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['parts', i, 'group'], message: `unknown group "${p.group}"` });
       }
       p.connects.forEach((c, j) => {
         if (!parts.has(c)) {
           ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['parts', i, 'connects', j], message: `unknown part "${c}"` });
+        } else if (contextIds.has(c) || p.context) {
+          ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['parts', i, 'connects', j], message: 'context parts take no part in `connects`' });
         }
       });
     });
@@ -337,6 +477,10 @@ export const partsFile = z
       if (!groups.has(f.group)) {
         ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['flows', i, 'group'], message: `unknown group "${f.group}"` });
       }
+      f.parts?.forEach((id, j) => {
+        if (!parts.has(id)) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['flows', i, 'parts', j], message: `unknown part "${id}"` });
+        else if (contextIds.has(id)) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['flows', i, 'parts', j], message: `"${id}" is a context part` });
+      });
     });
     if (file.model === undefined) {
       file.parts.forEach((p, i) => {
@@ -363,7 +507,25 @@ export type PartsFile = z.output<typeof partsFile>;
 
 /** Parsed `data/*.json` of a SpaceScene topic, keyed by file name. */
 /** `parts.json`, plus the optional shared `sources.json` (content/schema/sources.ts). */
-export const spaceSceneData = z.object({ parts: partsFile, sources: sourcesFile.optional(), glossary: glossaryFile.optional() }).strict();
+export const spaceSceneData = z
+  .object({ parts: partsFile, sources: sourcesFile.optional(), glossary: glossaryFile.optional() })
+  .strict()
+  .superRefine((data, ctx) => {
+    // `[S#]` markers in part details must cite data/sources.json.
+    const known = new Set((data.sources?.sources ?? []).map((s) => s.id));
+    data.parts.parts.forEach((p, i) => {
+      for (const lang of ['en', 'zh'] as const) {
+        for (const id of detailSourceIds(p.detail[lang])) {
+          if (known.has(id)) continue;
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            path: ['parts', 'parts', i, 'detail', lang],
+            message: data.sources ? `[${id}]: unknown source (not in data/sources.json)` : `[${id}]: the topic has no data/sources.json`,
+          });
+        }
+      }
+    });
+  });
 export type SpaceSceneData = z.output<typeof spaceSceneData>;
 
 /* ------------------------------------------------------------------ */
@@ -384,6 +546,12 @@ export const spaceChapterState = z
     theme: theme.optional(),
     /** Parts that get leader labels in this chapter (default: every visible part, capped by camera distance). */
     labels: z.array(kebabId).optional(),
+    /**
+     * Parts put aside in this chapter (not cumulative: a chapter without
+     * `hide` shows every part). They slide out along their explode direction
+     * and fade (~0.6 s), and come back the same way.
+     */
+    hide: z.array(kebabId).optional(),
   })
   .strict();
 export type SpaceChapterState = z.output<typeof spaceChapterState>;
@@ -403,5 +571,5 @@ export function spaceSceneIds(data: SpaceSceneData): { kind: string; id: string 
 }
 
 export function spaceChapterRefs(state: SpaceChapterState): string[] {
-  return [...(state.part ? [state.part] : []), ...(state.layers ?? []), ...(state.labels ?? [])];
+  return [...(state.part ? [state.part] : []), ...(state.layers ?? []), ...(state.labels ?? []), ...(state.hide ?? [])];
 }

@@ -62,6 +62,12 @@ export const topicSchema = z
      * overriding the site-wide `time.bloc.*` strings. `out` = "no longer at war".
      */
     blocLabels: blocLabels.optional(),
+    /**
+     * Title-block disclaimer line (any engine), replacing the site-wide
+     * "Educational visualization", e.g. "Generic design study · not a specific
+     * brand or model".
+     */
+    note: bilingual.optional(),
   })
   .strict()
   .superRefine((topic, ctx) => {

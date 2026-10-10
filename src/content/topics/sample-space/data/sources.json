@@ -1,0 +1,23 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": {
+        "en": "Placeholder source one: a sample record used to test part-detail source markers.",
+        "zh": "占位来源一：用来测试零件说明来源标记的示例记录。"
+      },
+      "url": "https://example.org/atlas/sample-space-source-1"
+    },
+    {
+      "id": "S2",
+      "text": {
+        "en": "Placeholder source two: a second sample record with a note.",
+        "zh": "占位来源二：带说明的第二条示例记录。"
+      },
+      "note": {
+        "en": "Sample note: placeholder data, not a real reference.",
+        "zh": "示例说明：占位数据，不是真实的参考资料。"
+      }
+    }
+  ]
+}

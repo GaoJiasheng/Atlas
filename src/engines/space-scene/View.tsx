@@ -27,6 +27,7 @@ import { ArchitecturePanel } from './hud/ArchitecturePanel';
 import { DetailPanel } from './hud/DetailPanel';
 import { StatePanel } from './hud/StatePanel';
 import { PerfReadout } from './hud/PerfReadout';
+import { spaceSpecRows } from './hud/spec';
 import { LeaderLabels } from './hud/LeaderLabels';
 import './space-scene.css';
 
@@ -202,11 +203,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
         };
         return out;
       },
-      specRows: [
-        { id: 'parts', label: both('space.spec.parts'), value: String(file.parts.length).padStart(2, '0'), mono: true },
-        { id: 'groups', label: both('space.spec.groups'), value: String(file.groups.length).padStart(2, '0'), mono: true },
-        { id: 'flows', label: both('space.spec.flows'), value: String(file.flows.length).padStart(2, '0'), mono: true },
-      ],
+      specRows: spaceSpecRows(file),
       status,
       card: both('space.card.title'),
       panels: {
@@ -259,7 +256,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
         <PerfReadout bridge={bridge} />
       </SceneSlot>
       <SceneSlot name="stageOverlay">
-        <ExplorerOverlay file={file} />
+        <ExplorerOverlay file={file} glossary={((data as SpaceSceneData).glossary?.terms.length ?? 0) > 0} />
       </SceneSlot>
       <SceneSlot name="bottomBar">
         <ExplorerBar />

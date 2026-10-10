@@ -5,7 +5,10 @@
       "name": { "en": "Sample base", "zh": "示例底座" },
       "group": "sample-core",
       "summary": { "en": "A placeholder plate the other parts sit on.", "zh": "一块占位底板，其他零件都放在它上面。" },
-      "detail": { "en": "Sample detail text. Tests the box primitive and the powder-coat material.", "zh": "示例详细说明。测试盒子基本体和粉末涂层材质。" },
+      "detail": {
+        "en": "Sample detail text. Tests the box primitive and the powder-coat material.",
+        "zh": "示例详细说明。测试盒子基本体和粉末涂层材质。"
+      },
       "primitive": { "kind": "box", "size": [2.6, 0.12, 1.3], "at": [0, -0.6, 0], "color": "powder" },
       "explode": { "dir": [0, -1, 0], "dist": 0.45 },
       "connects": ["sample-feet", "sample-block", "sample-tank", "sample-panel"],
@@ -46,20 +49,30 @@
       "group": "sample-drive",
       "summary": { "en": "A placeholder housing with rounded edges.", "zh": "一个圆角的占位机壳。" },
       "detail": {
-        "en": "Sample detail text. Tests the bevelled box and the brushed-aluminium casing material.",
-        "zh": "示例详细说明。测试倒角盒子和拉丝铝外壳材质。"
+        "en": "Sample detail text. Tests the bevelled box and the brushed-aluminium casing material [S1].\n\nA second sample paragraph: this part is a shell, so it turns see-through in X-ray while the parts inside stay solid [S1, S2].",
+        "zh": "示例详细说明。测试倒角盒子和拉丝铝外壳材质 [S1]。\n\n第二段示例：这个零件是外壳，透视时它变透明，里面的零件保持实心 [S1, S2]。"
       },
-      "primitive": { "kind": "bevelBox", "size": [0.72, 0.46, 0.6], "bevel": 0.04, "at": [-0.74, -0.31, 0.05], "color": "casing" },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [0.72, 0.46, 0.6],
+        "bevel": 0.04,
+        "at": [-0.74, -0.31, 0.05],
+        "color": "casing"
+      },
       "explode": { "dir": [-1, 0, 0], "dist": 0.4 },
       "connects": ["sample-base", "sample-fins", "sample-drum", "sample-pipe"],
-      "level": "P3"
+      "level": "P3",
+      "shell": true
     },
     {
       "id": "sample-fins",
       "name": { "en": "Sample fins", "zh": "示例散热片" },
       "group": "sample-drive",
       "summary": { "en": "A placeholder stack of thin plates on top of the block.", "zh": "机体顶上一排占位薄片。" },
-      "detail": { "en": "Sample detail text. Tests the fins part (instanced plates with an even gap).", "zh": "示例详细说明。测试散热片零件（等间距的实例化薄片）。" },
+      "detail": {
+        "en": "Sample detail text. Tests the fins part (instanced plates with an even gap).",
+        "zh": "示例详细说明。测试散热片零件（等间距的实例化薄片）。"
+      },
       "primitive": {
         "kind": "fins",
         "size": [0.5, 0.13, 0.014],
@@ -82,9 +95,15 @@
         "en": "Sample detail text. Tests the cylinder primitive, rotation and the rotate animation.",
         "zh": "示例详细说明。测试圆柱基本体、旋转角度和转动动画。"
       },
-      "primitive": { "kind": "cylinder", "size": [0.19, 0.19, 0.36], "at": [-0.19, -0.33, 0.05], "rotation": [0, 0, 90], "color": "steel" },
+      "primitive": {
+        "kind": "cylinder",
+        "size": [0.19, 0.19, 0.36],
+        "at": [-0.19, -0.33, 0.05],
+        "rotation": [0, 0, 90],
+        "color": "steel"
+      },
       "explode": { "dir": [1, 0, 0], "dist": 0.3 },
-      "connects": ["sample-block", "sample-cap"],
+      "connects": ["sample-block", "sample-cap", "sample-shroud"],
       "level": "P3"
     },
     {
@@ -92,19 +111,60 @@
       "name": { "en": "Sample cap", "zh": "示例尖帽" },
       "group": "sample-drive",
       "summary": { "en": "A placeholder cone at the end of the drum.", "zh": "滚筒末端的一个占位圆锥。" },
-      "detail": { "en": "Sample detail text. Tests the cone primitive and the copper material.", "zh": "示例详细说明。测试圆锥基本体和铜材质。" },
-      "primitive": { "kind": "cone", "size": [0.15, 0.24], "at": [0.125, -0.33, 0.05], "rotation": [0, 0, -90], "color": "copper" },
+      "detail": {
+        "en": "Sample detail text. Tests the cone primitive and the copper material.",
+        "zh": "示例详细说明。测试圆锥基本体和铜材质。"
+      },
+      "primitive": {
+        "kind": "cone",
+        "size": [0.15, 0.24],
+        "at": [0.125, -0.33, 0.05],
+        "rotation": [0, 0, -90],
+        "color": "copper"
+      },
       "explode": { "dir": [1, 0, 0], "dist": 0.62 },
       "connects": ["sample-drum"],
       "level": "P3"
+    },
+    {
+      "id": "sample-shroud",
+      "name": { "en": "Sample shroud", "zh": "示例护罩" },
+      "group": "sample-drive",
+      "summary": { "en": "A placeholder cover with a round opening for the cap.", "zh": "一块带圆孔的占位护罩，尖帽从孔里穿出。" },
+      "detail": {
+        "en": "Sample detail text. Tests the panel-with-a-hole part, the enamel material and the shell flag.",
+        "zh": "示例详细说明。测试带孔面板零件、烤漆材质和外壳标记。"
+      },
+      "primitive": {
+        "kind": "panelHole",
+        "size": [0.56, 0.44, 0.02],
+        "hole": { "r": 0.16, "at": [0, -0.01] },
+        "at": [0.03, -0.32, 0.05],
+        "rotation": [0, 90, 0],
+        "color": "enamel"
+      },
+      "explode": { "dir": [1, 0, 0], "dist": 0.45 },
+      "connects": ["sample-drum"],
+      "shell": true,
+      "level": "P5"
     },
     {
       "id": "sample-tank",
       "name": { "en": "Sample tank", "zh": "示例罐体" },
       "group": "sample-loop",
       "summary": { "en": "A placeholder vessel with domed ends.", "zh": "一个两端是圆顶的占位罐。" },
-      "detail": { "en": "Sample detail text. Tests the vessel part and the brushed stainless material.", "zh": "示例详细说明。测试罐体零件和拉丝不锈钢材质。" },
-      "primitive": { "kind": "vessel", "radius": 0.24, "length": 0.42, "headRatio": 0.5, "at": [0.82, -0.21, -0.25], "color": "stainless" },
+      "detail": {
+        "en": "Sample detail text. Tests the vessel part and the brushed stainless material.",
+        "zh": "示例详细说明。测试罐体零件和拉丝不锈钢材质。"
+      },
+      "primitive": {
+        "kind": "vessel",
+        "radius": 0.24,
+        "length": 0.42,
+        "headRatio": 0.5,
+        "at": [0.82, -0.21, -0.25],
+        "color": "stainless"
+      },
       "explode": { "dir": [1, 0, -0.2], "dist": 0.5 },
       "connects": ["sample-base", "sample-flange", "sample-pod"],
       "level": "P3"
@@ -114,7 +174,10 @@
       "name": { "en": "Sample pipe", "zh": "示例管道" },
       "group": "sample-loop",
       "summary": { "en": "A placeholder pipe from the block to the tank.", "zh": "从机体通到罐体的一根占位管子。" },
-      "detail": { "en": "Sample detail text. Tests the tube part: one bend radius at every corner.", "zh": "示例详细说明。测试管道零件：每个拐角的弯曲半径都一样。" },
+      "detail": {
+        "en": "Sample detail text. Tests the tube part: one bend radius at every corner.",
+        "zh": "示例详细说明。测试管道零件：每个拐角的弯曲半径都一样。"
+      },
       "primitive": {
         "kind": "tube",
         "path": [[-0.56, -0.08, 0.27], [-0.56, 0.3, 0.27], [0.82, 0.3, 0.27], [0.82, 0.3, -0.25], [0.82, 0.12, -0.25]],
@@ -132,7 +195,10 @@
       "name": { "en": "Sample flange", "zh": "示例法兰" },
       "group": "sample-loop",
       "summary": { "en": "A placeholder bolted ring where the pipe meets the tank.", "zh": "管子和罐体连接处的一圈带螺栓的占位法兰。" },
-      "detail": { "en": "Sample detail text. Tests the flange part (ring plus instanced bolt heads).", "zh": "示例详细说明。测试法兰零件（圆环加实例化的螺栓头）。" },
+      "detail": {
+        "en": "Sample detail text. Tests the flange part (ring plus instanced bolt heads) and the brass material.",
+        "zh": "示例详细说明。测试法兰零件（圆环加实例化的螺栓头）和黄铜材质。"
+      },
       "primitive": {
         "kind": "flange",
         "radius": 0.085,
@@ -140,7 +206,7 @@
         "boltCount": 6,
         "boltRadius": 0.062,
         "at": [0.82, 0.13, -0.25],
-        "color": "steel"
+        "color": "brass"
       },
       "explode": { "dir": [0, 1, 0], "dist": 0.32 },
       "connects": ["sample-pipe", "sample-tank"],
@@ -151,8 +217,17 @@
       "name": { "en": "Sample pod", "zh": "示例胶囊" },
       "group": "sample-loop",
       "summary": { "en": "A placeholder see-through capsule.", "zh": "一个透明的占位胶囊。" },
-      "detail": { "en": "Sample detail text. Tests the capsule primitive and the glass material.", "zh": "示例详细说明。测试胶囊基本体和玻璃材质。" },
-      "primitive": { "kind": "capsule", "size": [0.075, 0.3], "at": [0.42, -0.42, -0.3], "rotation": [0, 0, 90], "color": "glass" },
+      "detail": {
+        "en": "Sample detail text. Tests the capsule primitive and the glass material.",
+        "zh": "示例详细说明。测试胶囊基本体和玻璃材质。"
+      },
+      "primitive": {
+        "kind": "capsule",
+        "size": [0.075, 0.3],
+        "at": [0.42, -0.42, -0.3],
+        "rotation": [0, 0, 90],
+        "color": "glass"
+      },
       "explode": { "dir": [0, 0, -1], "dist": 0.45 },
       "connects": ["sample-tank", "sample-ball"],
       "level": "P5"
@@ -176,10 +251,31 @@
       "name": { "en": "Sample ring", "zh": "示例圆环" },
       "group": "sample-loop",
       "summary": { "en": "A placeholder ring around the ball that rocks back and forth.", "zh": "套在球外面、来回摆动的占位圆环。" },
-      "detail": { "en": "Sample detail text. Tests the torus primitive and the oscillate animation.", "zh": "示例详细说明。测试圆环基本体和摆动动画。" },
-      "primitive": { "kind": "torus", "size": [0.18, 0.018], "at": [0.5, -0.42, 0.3], "rotation": [90, 0, 0], "color": "copper" },
+      "detail": {
+        "en": "Sample detail text. Tests the torus primitive and the oscillate animation.",
+        "zh": "示例详细说明。测试圆环基本体和摆动动画。"
+      },
+      "primitive": {
+        "kind": "torus",
+        "size": [0.18, 0.018],
+        "at": [0.5, -0.42, 0.3],
+        "rotation": [90, 0, 0],
+        "color": "copper"
+      },
       "explode": { "dir": [0, 0.55, 1], "dist": 0.72 },
       "connects": ["sample-ball"],
+      "level": "P3"
+    },
+    {
+      "id": "sample-wall",
+      "name": { "en": "Sample wall", "zh": "示例墙" },
+      "summary": { "en": "A placeholder slice of wall behind the object.", "zh": "物体后面的一段占位墙。" },
+      "detail": {
+        "en": "Sample detail text. Tests a context part: drawn, never labelled, selected, counted or exploded.",
+        "zh": "示例详细说明。测试场景零件：会画出来，但不标注、不可选、不计数、不拆开。"
+      },
+      "primitive": { "kind": "box", "size": [1.8, 0.8, 0.04], "at": [-0.1, -0.34, -1.25], "color": "plastic", "tint": "token:neutral" },
+      "context": true,
       "level": "P3"
     }
   ],
@@ -195,6 +291,12 @@
       "path": [[-1.08, -0.2, 0.05], [-0.9, 0.06, 0.05], [-0.74, 0.2, 0.05], [-0.62, 0.48, 0.03], [-0.56, 0.82, 0]],
       "speed": 0.5,
       "color": "token:accent-1",
+      "stops": [{ "at": 0, "color": "token:cold" }, { "at": 0.6, "color": "token:hot" }],
+      "ends": "open",
+      "count": 220,
+      "size": 1.3,
+      "spread": [0.03, 0.006, 0.03],
+      "clip": false,
       "whenRun": true
     },
     {
@@ -216,11 +318,24 @@
       ],
       "speed": 0.55,
       "color": "token:accent-2",
+      "stops": [
+        { "at": 0, "color": "token:hot" },
+        { "at": 0.5, "color": "token:neutral" },
+        { "at": 1, "color": "token:cold" }
+      ],
+      "parts": ["sample-pipe", "sample-flange", "sample-tank", "sample-pod", "sample-ball"],
       "whenRun": true
     }
   ],
   "animations": [
-    { "id": "sample-drum-spin", "target": "sample-drum", "kind": "rotate", "axis": [1, 0, 0], "rpm": 60, "whenRun": true },
+    {
+      "id": "sample-drum-spin",
+      "target": "sample-drum",
+      "kind": "rotate",
+      "axis": [1, 0, 0],
+      "rpm": 60,
+      "whenRun": true
+    },
     {
       "id": "sample-ring-rock",
       "target": "sample-ring",
@@ -237,5 +352,15 @@
     "exploded": { "camera": { "position": [3.5, 2.3, 4.6], "target": [0.05, -0.5, 0], "fov": 34 } },
     "cutaway": { "normal": [0, 0, -1], "offset": 0.05 },
     "section": { "plane": "xy" }
-  }
+  },
+  "spec": [
+    { "key": { "en": "Type", "zh": "类型" }, "value": "SAMPLE · PLACEHOLDER" },
+    { "key": { "en": "Mass", "zh": "质量" }, "value": "12 kg", "tag": "design" },
+    { "key": { "en": "Drum speed", "zh": "滚筒转速" }, "value": "60 rpm", "tag": "sim" }
+  ],
+  "telemetry": [
+    { "key": { "en": "Drum", "zh": "滚筒" }, "unit": "rpm", "idle": 0, "run": 60, "lag": 2 },
+    { "key": { "en": "Loop temp.", "zh": "回路温度" }, "unit": "°C", "idle": 20, "run": 45.5, "lag": 6 },
+    { "key": { "en": "Power", "zh": "功率" }, "unit": "kW", "idle": 0, "run": 0.65, "lag": 2 }
+  ]
 }

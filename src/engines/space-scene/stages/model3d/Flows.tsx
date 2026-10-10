@@ -1,20 +1,20 @@
 /**
- * Flow particles ("air", "refrigerant", "current"): ~200 points per flow that
- * travel along the flow's Catmull-Rom path while the scene runs and the flow's
- * group layer is on. All motion happens in the vertex shader (flowMaterial.ts).
+ * Flow particles ("air", "refrigerant", "current"): `count` points per flow
+ * (default 360) that travel along the flow's Catmull-Rom path while the scene
+ * runs and the flow's group layer is on, coloured by the flow's `stops`. All
+ * motion and colour happen in the vertex shader (flowMaterial.ts). A flow with
+ * `clip: false` ignores the cutaway plane.
  */
 import { useEffect, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { BufferAttribute, BufferGeometry, Color, type PerspectiveCamera, type Plane, type Points } from 'three';
+import { BufferAttribute, BufferGeometry, type PerspectiveCamera, type Plane, type Points } from 'three';
 import type { Flow } from '../../schema';
 import { bakeFlowPath } from '../../lib/flow-curve';
 import { resolveDataColor } from '../../lib/color';
 import { damp } from '../../lib/math';
-import { createFlowMaterial, styleFlowMaterial } from './flowMaterial';
+import { createFlowMaterial, setFlowStops, styleFlowMaterial } from './flowMaterial';
 import { keepAnimating, MAX_DT, useRuntime } from './runtime';
 import type { StageLook } from './look';
-
-export const PARTICLES_PER_FLOW = 360;
 
 /** Deterministic PRNG so every load looks the same (screenshots, tests). */
 function mulberry32(seed: number): () => number {
@@ -28,18 +28,23 @@ function mulberry32(seed: number): () => number {
   };
 }
 
-function particleGeometry(count: number, seed: number, spread: number): BufferGeometry {
+/** `spread`: a ball radius, or box half-extents on the scene axes. */
+function particleGeometry(count: number, seed: number, spread: Flow['spread']): BufferGeometry {
   const rand = mulberry32(seed);
   const jitter = new Float32Array(count * 3);
   const offset = new Float32Array(count);
   const seeds = new Float32Array(count);
   for (let i = 0; i < count; i++) {
-    // Uniform-ish point in a small ball around the centre line.
-    const u = rand() * 2 - 1;
-    const phi = rand() * Math.PI * 2;
-    const r = spread * Math.cbrt(rand());
-    const s = Math.sqrt(1 - u * u);
-    jitter.set([r * s * Math.cos(phi), r * s * Math.sin(phi), r * u], i * 3);
+    if (typeof spread === 'number') {
+      // Uniform-ish point in a small ball around the centre line.
+      const u = rand() * 2 - 1;
+      const phi = rand() * Math.PI * 2;
+      const r = spread * Math.cbrt(rand());
+      const s = Math.sqrt(1 - u * u);
+      jitter.set([r * s * Math.cos(phi), r * s * Math.sin(phi), r * u], i * 3);
+    } else {
+      jitter.set([(rand() * 2 - 1) * spread[0], (rand() * 2 - 1) * spread[1], (rand() * 2 - 1) * spread[2]], i * 3);
+    }
     offset[i] = (i + rand() * 0.8) / count;
     seeds[i] = rand();
   }
@@ -67,19 +72,20 @@ function FlowParticles({
   const ref = useRef<Points>(null);
   const fade = useRef(0);
   const baked = useMemo(() => bakeFlowPath(flow.path), [flow.path]);
-  const material = useMemo(() => createFlowMaterial(baked, flow.speed), [baked, flow.speed]);
-  const geometry = useMemo(() => particleGeometry(PARTICLES_PER_FLOW, 1013 + index * 7919, 0.012), [index]);
+  const material = useMemo(() => createFlowMaterial(baked, flow.speed, flow.ends === 'open'), [baked, flow.speed, flow.ends]);
+  const geometry = useMemo(() => particleGeometry(flow.count, 1013 + index * 7919, flow.spread), [index, flow.count, flow.spread]);
   useEffect(() => () => material.dispose(), [material]);
   useEffect(() => () => geometry.dispose(), [geometry]);
 
   useEffect(() => {
-    material.uniforms.uColor.value = new Color(resolveDataColor(flow.color, look.tokens, look.theme));
-    styleFlowMaterial(material, look.theme === 'cinema');
-  }, [material, flow.color, look]);
+    const hex = (ref: string) => resolveDataColor(ref, look.tokens, look.theme);
+    setFlowStops(material, flow.stops ? flow.stops.map((s) => [s.at, hex(s.color)] as const) : [[0, hex(flow.color)]]);
+    styleFlowMaterial(material, look.theme === 'cinema', flow.size);
+  }, [material, flow.color, flow.stops, flow.size, look]);
 
   useEffect(() => {
-    material.clippingPlanes = clipping;
-  }, [material, clipping]);
+    material.clippingPlanes = flow.clip ? clipping : null;
+  }, [material, clipping, flow.clip]);
 
   useFrame((state, delta) => {
     const dt = Math.min(delta, MAX_DT);

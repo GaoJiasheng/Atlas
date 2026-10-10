@@ -10,6 +10,8 @@
  */
 import {
   BoxGeometry,
+  BufferAttribute,
+  BufferGeometry,
   CapsuleGeometry,
   CatmullRomCurve3,
   ConeGeometry,
@@ -24,7 +26,6 @@ import {
   TubeGeometry,
   Vector2,
   Vector3,
-  type BufferGeometry,
 } from 'three';
 import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
 import type { Part, Primitive } from '../../schema';
@@ -172,6 +173,100 @@ export function vesselGeometry(p: Extract<Primitive, { kind: 'vessel' }>): Buffe
   return new LatheGeometry(pts, 64);
 }
 
+/** Segments around the hole of a `panelHole` (the four corners are added on top). */
+export const PANEL_HOLE_SEGMENTS = 64;
+
+/**
+ * Flat panel w × h (XY), thickness t (Z), with a round through-hole: front
+ * and back faces as a ring of quads between the hole and the rectangle (rays
+ * from the hole centre, the four corners inserted so the outline stays
+ * exact), four outer edge walls and the inner wall of the hole. Built by hand
+ * (no Shape / ExtrudeGeometry in the bundle); closed, so a cut fills.
+ */
+export function panelHoleGeometry(p: Extract<Primitive, { kind: 'panelHole' }>): BufferGeometry {
+  const [w, h, t] = p.size;
+  const { r } = p.hole;
+  const [cx, cy] = p.hole.at;
+  const hx = w / 2;
+  const hy = h / 2;
+  const z = t / 2;
+
+  // Ray angles: even steps plus the four corners, sorted.
+  const corners: [number, number][] = [[hx, hy], [-hx, hy], [-hx, -hy], [hx, -hy]];
+  const angles = Array.from({ length: PANEL_HOLE_SEGMENTS }, (_, k) => (k / PANEL_HOLE_SEGMENTS) * Math.PI * 2);
+  for (const [x, y] of corners) angles.push((Math.atan2(y - cy, x - cx) + Math.PI * 2) % (Math.PI * 2));
+  angles.sort((a, b) => a - b);
+  const ring = angles.filter((a, i) => i === 0 || a - angles[i - 1]! > 1e-7);
+
+  // Where a ray from the hole centre leaves the rectangle.
+  const outer = (a: number): [number, number] => {
+    const dx = Math.cos(a);
+    const dy = Math.sin(a);
+    const tx = dx > 1e-12 ? (hx - cx) / dx : dx < -1e-12 ? (-hx - cx) / dx : Infinity;
+    const ty = dy > 1e-12 ? (hy - cy) / dy : dy < -1e-12 ? (-hy - cy) / dy : Infinity;
+    const k = Math.min(tx, ty);
+    return [cx + dx * k, cy + dy * k];
+  };
+  const inner = (a: number): [number, number] => [cx + Math.cos(a) * r, cy + Math.sin(a) * r];
+
+  const pos: number[] = [];
+  const nor: number[] = [];
+  const uv: number[] = [];
+  const vtx = (x: number, y: number, zz: number, n: [number, number, number], u: number, v: number) => {
+    pos.push(x, y, zz);
+    nor.push(...n);
+    uv.push(u, v);
+  };
+  const faceUv = (x: number, y: number): [number, number] => [(x + hx) / w, (y + hy) / h];
+  const n = ring.length;
+  for (let k = 0; k < n; k++) {
+    const a0 = ring[k]!;
+    const a1 = ring[(k + 1) % n]!;
+    const i0 = inner(a0);
+    const i1 = inner(a1);
+    const o0 = outer(a0);
+    const o1 = outer(a1);
+    // Front (+Z, counter-clockwise seen from +Z) and back (-Z, reversed).
+    for (const [side, sign] of [[z, 1], [-z, -1]] as const) {
+      const quad = sign > 0 ? [i0, o0, o1, i0, o1, i1] : [i0, o1, o0, i0, i1, o1];
+      for (const [x, y] of quad) vtx(x, y, side, [0, 0, sign], ...faceUv(x, y));
+    }
+    // Hole wall, facing the hole axis.
+    const n0: [number, number, number] = [-Math.cos(a0), -Math.sin(a0), 0];
+    const n1: [number, number, number] = [-Math.cos(a1), -Math.sin(a1), 0];
+    const u0 = k / n;
+    const u1 = (k + 1) / n;
+    vtx(i0[0], i0[1], z, n0, u0, 1);
+    vtx(i1[0], i1[1], z, n1, u1, 1);
+    vtx(i1[0], i1[1], -z, n1, u1, 0);
+    vtx(i0[0], i0[1], z, n0, u0, 1);
+    vtx(i1[0], i1[1], -z, n1, u1, 0);
+    vtx(i0[0], i0[1], -z, n0, u0, 0);
+  }
+  // Outer edge walls (one quad per side, normals outward).
+  const edges: [[number, number], [number, number], [number, number, number]][] = [
+    [[hx, -hy], [hx, hy], [1, 0, 0]],
+    [[hx, hy], [-hx, hy], [0, 1, 0]],
+    [[-hx, hy], [-hx, -hy], [-1, 0, 0]],
+    [[-hx, -hy], [hx, -hy], [0, -1, 0]],
+  ];
+  for (const [a, b, nn] of edges) {
+    const len = Math.hypot(b[0] - a[0], b[1] - a[1]);
+    vtx(a[0], a[1], -z, nn, 0, 0);
+    vtx(b[0], b[1], -z, nn, len, 0);
+    vtx(b[0], b[1], z, nn, len, t);
+    vtx(a[0], a[1], -z, nn, 0, 0);
+    vtx(b[0], b[1], z, nn, len, t);
+    vtx(a[0], a[1], z, nn, 0, t);
+  }
+  const g = new BufferGeometry();
+  g.setAttribute('position', new BufferAttribute(new Float32Array(pos), 3));
+  g.setAttribute('normal', new BufferAttribute(new Float32Array(nor), 3));
+  g.setAttribute('uv', new BufferAttribute(new Float32Array(uv), 2));
+  g.computeBoundingSphere();
+  return g;
+}
+
 /* ------------------------------------------------------------------ */
 /* Part -> pieces                                                      */
 /* ------------------------------------------------------------------ */
@@ -210,6 +305,8 @@ function basePieces(p: Primitive): { geometry: BufferGeometry; instances: Matrix
     }
     case 'vessel':
       return one(vesselGeometry(p));
+    case 'panelHole':
+      return one(panelHoleGeometry(p));
   }
 }
 

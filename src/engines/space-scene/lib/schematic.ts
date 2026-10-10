@@ -2,7 +2,8 @@
  * Layout maths for the SpaceScene HUD drawings (pure, unit-tested):
  *
  *  - partChain: the top-right card — groups as columns, parts as numbered
- *    nodes, `connects` as orthogonal hairlines
+ *    nodes, `connects` as orthogonal hairlines; flowLinks: which of those
+ *    lines a flow with `parts` runs along
  *  - elevation: the ARCHITECTURE panel — every primitive part's rest bounds
  *    projected on the section plane, with a scale bar step
  *  - labelBudget / stackColumn: leader-label count by camera distance and
@@ -45,41 +46,62 @@ export interface ChainLayout {
   width: number;
   height: number;
   header: number;
+  /** Rows: the compact pitch was used (a column longer than `compactAfter`). */
+  compact: boolean;
   columns: ChainColumn[];
   nodes: ChainNode[];
   links: ChainLink[];
 }
 
-/** Lay the part chain out in a `width`-wide box; height follows the longest column. */
+export type ChainPart = Pick<Part, 'id' | 'group' | 'connects'> & { context?: boolean | undefined };
+
+/** Parts that are numbered and drawn in the chain: every part except `context` scenery. */
+export function numberedParts<P extends { context?: boolean | undefined }>(parts: readonly P[]): P[] {
+  return parts.filter((p) => !p.context);
+}
+
+/**
+ * Lay the part chain out in a `width`-wide box; height follows the longest
+ * column. Groups without parts (flow-only groups) get no column; context
+ * parts are left out. When a column has more than `compactAfter` rows the
+ * row pitch drops to `compactRow`.
+ */
 export function partChain(
-  parts: readonly Pick<Part, 'id' | 'group' | 'connects'>[],
+  parts: readonly ChainPart[],
   groups: readonly Pick<PartGroup, 'id'>[],
   width = 330,
-  opts: { header?: number; row?: number; gap?: number; pad?: number } = {},
+  opts: { header?: number; row?: number; compactRow?: number; compactAfter?: number; gap?: number; pad?: number } = {},
 ): ChainLayout {
   const header = opts.header ?? 16;
-  const row = opts.row ?? 19;
   const gap = opts.gap ?? 22;
   const pad = opts.pad ?? 6;
-  const cols = groups.length > 0 ? groups.map((g) => g.id) : [...new Set(parts.map((p) => p.group))];
+  const list = numberedParts(parts);
+  const used = new Set(list.map((p) => p.group));
+  const cols = groups.length > 0 ? groups.map((g) => g.id).filter((id) => used.has(id)) : [...used].filter((g): g is string => g !== undefined);
+  const counts = new Map<string, number>();
+  for (const p of list) if (p.group !== undefined) counts.set(p.group, (counts.get(p.group) ?? 0) + 1);
+  const longest = Math.max(1, ...counts.values());
+  const compact = longest > (opts.compactAfter ?? 10);
+  const row = compact ? (opts.compactRow ?? 16) : (opts.row ?? 19);
+  const nodeH = compact ? row - 3 : row - 6;
   const colW = (width - pad * 2 - gap * (cols.length - 1)) / Math.max(1, cols.length);
   const columns = cols.map((id, i) => ({ id, x: pad + i * (colW + gap), w: colW }));
   const nodes: ChainNode[] = [];
   const rowsUsed = new Map<string, number>();
-  parts.forEach((p, i) => {
+  list.forEach((p, i) => {
     const c = columns.find((col) => col.id === p.group);
-    if (!c) return;
+    if (!c || p.group === undefined) return;
     const r = rowsUsed.get(p.group) ?? 0;
     rowsUsed.set(p.group, r + 1);
-    nodes.push({ id: p.id, group: p.group, n: i + 1, x: c.x, y: header + 6 + r * row, w: c.w, h: row - 6 });
+    nodes.push({ id: p.id, group: p.group, n: i + 1, x: c.x, y: header + 6 + r * row, w: c.w, h: nodeH });
   });
   const byId = new Map(nodes.map((n) => [n.id, n]));
   const seen = new Set<string>();
   const links: ChainLink[] = [];
   let lane = 0;
-  for (const p of parts) {
+  for (const p of list) {
     for (const q of p.connects) {
-      const key = [p.id, q].sort().join('|');
+      const key = chainKey(p.id, q);
       if (seen.has(key)) continue;
       seen.add(key);
       const a = byId.get(p.id);
@@ -106,7 +128,35 @@ export function partChain(
     }
   }
   const rows = Math.max(1, ...[...rowsUsed.values()]);
-  return { width, height: header + 6 + rows * row, header, columns, nodes, links };
+  return { width, height: header + 6 + rows * row, header, compact, columns, nodes, links };
+}
+
+/** Order-free key of a link between two parts. */
+export function chainKey(a: string, b: string): string {
+  return a < b ? `${a}|${b}` : `${b}|${a}`;
+}
+
+/** Where a flow with `parts` passes a chain link: the flow and the fraction (0..1) along its part list. */
+export interface FlowLinkHit {
+  flow: string;
+  u: number;
+}
+
+/**
+ * Chain links each flow runs along (consecutive pairs of its `parts`), keyed
+ * by `chainKey`; `u` is the pair's midpoint as a fraction of the part list.
+ * The first flow listed wins a link two flows share.
+ */
+export function flowLinks(flows: readonly { id: string; parts?: readonly string[] | undefined }[]): Map<string, FlowLinkHit> {
+  const out = new Map<string, FlowLinkHit>();
+  for (const f of flows) {
+    const ids = f.parts ?? [];
+    for (let i = 0; i + 1 < ids.length; i++) {
+      const key = chainKey(ids[i]!, ids[i + 1]!);
+      if (!out.has(key)) out.set(key, { flow: f.id, u: (i + 0.5) / (ids.length - 1) });
+    }
+  }
+  return out;
 }
 
 /* ------------------------------------------------------------------ */
@@ -115,7 +165,10 @@ export function partChain(
 
 export interface ElevationRect {
   id: string;
+  /** `''` for a context part without a group. */
   group: string;
+  /** Scenery (context part): drawn hatched, outside the zones. */
+  context: boolean;
   /** Plane coordinates, model units; v points up for elevations, towards the viewer for a plan. */
   u0: number;
   u1: number;
@@ -146,7 +199,7 @@ export function planeAxes(plane: SectionPlane): [number, number, number] {
  * sorted back to front.
  */
 export function elevation(
-  parts: readonly Pick<Part, 'id' | 'group' | 'primitive' | 'repeat' | 'explode'>[],
+  parts: readonly (Pick<Part, 'id' | 'group' | 'primitive' | 'repeat' | 'explode'> & { context?: boolean | undefined })[],
   plane: SectionPlane,
   explode = 0,
 ): Elevation {
@@ -154,9 +207,19 @@ export function elevation(
   const rects: ElevationRect[] = [];
   let u0 = Infinity, u1 = -Infinity, v0 = Infinity, v1 = -Infinity;
   for (const p of parts) {
-    const b = partBounds(p, explodeOffset(p.explode, explode));
+    // Context parts never explode.
+    const b = partBounds(p, p.context ? [0, 0, 0] : explodeOffset(p.explode, explode));
     if (!b) continue;
-    const r: ElevationRect = { id: p.id, group: p.group, u0: b.min[u]!, u1: b.max[u]!, v0: b.min[v]!, v1: b.max[v]!, depth: b.max[w]! };
+    const r: ElevationRect = {
+      id: p.id,
+      group: p.group ?? '',
+      context: p.context === true,
+      u0: b.min[u]!,
+      u1: b.max[u]!,
+      v0: b.min[v]!,
+      v1: b.max[v]!,
+      depth: b.max[w]!,
+    };
     rects.push(r);
     u0 = Math.min(u0, r.u0);
     u1 = Math.max(u1, r.u1);

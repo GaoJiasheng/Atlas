@@ -165,6 +165,14 @@
 .space-inspector__detail {
   color: var(--ink-muted);
 }
+div.space-inspector__detail:not([hidden]) {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55em;
+}
+.space-inspector__detail p {
+  margin: 0;
+}
 .space-inspector__more {
   align-self: flex-start;
   margin-left: -0.875rem;
@@ -334,6 +342,10 @@
   letter-spacing: 0.02em;
   fill: var(--ink);
 }
+.space-chain[data-compact] .space-chain__n,
+.space-chain[data-compact] .space-chain__name {
+  font-size: 10px;
+}
 .space-chain__node[data-on] rect {
   fill: var(--signal);
   stroke: var(--signal);
@@ -370,6 +382,20 @@
   stroke: var(--ink);
   stroke-width: 0.6;
   vector-effect: non-scaling-stroke;
+}
+.space-elev__part[data-hidden] {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-dasharray: 2 2;
+}
+.space-elev__context {
+  stroke: var(--ink-3);
+  stroke-width: 0.6;
+  vector-effect: non-scaling-stroke;
+}
+.space-elev__hatch {
+  stroke: var(--ink-3);
+  stroke-width: 0.6;
 }
 .space-elev__part[data-on] {
   fill: var(--signal);
@@ -527,6 +553,20 @@
   align-items: baseline;
   padding: calc(2 * var(--u)) 0;
   border-bottom: 1px solid var(--hair);
+}
+.space-state[data-telemetry] .space-state__row {
+  grid-template-columns: calc(168 * var(--u)) minmax(0, 1fr);
+}
+.space-state[data-telemetry] dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.space-state[data-dense] .space-state__row {
+  padding: calc(1 * var(--u)) 0;
+}
+.space-state__unit {
+  color: var(--ink-3);
 }
 .space-state__row:last-child {
   border-bottom: 0;
