@@ -8,7 +8,7 @@
  *   pnpm shoot sample-time --locale zh --theme cinema --size 3840x2160 --suffix _4k
  *   pnpm shoot sample-time --shots my-shots.json     # custom shot list (format below)
  *   pnpm shoot sample-time --keys                    # every key changes state + its button
- *   pnpm shoot sample-time --layout                  # HUD overlap / overflow at six sizes
+ *   pnpm shoot sample-time --layout                  # HUD overlap / overflow at seven sizes (incl. 1600x900)
  *   pnpm shoot ww2 --beats                           # every presentation beat -> shots/<topic>/<locale>-<theme>/beat-<chapter>-<n>.png
  *   pnpm shoot sample-space --perf --json out.json   # renderer numbers per shot
  *   pnpm shoot fractions --tasks                     # MathScene: every sub-step (start, a planned wrong answer, solved) and every practice question + the summary

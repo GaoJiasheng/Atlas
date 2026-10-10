@@ -173,9 +173,9 @@ interface SceneState {         // 可序列化，和 URL 双向绑定
 
 `{ params: Slider[], model: (params) => state, view: Chart | Diagram }`。光与影（光源高度 vs 影长）、热胀冷缩、电路电流、杠杆平衡。先留目录和 schema 占位，不实现。数学课（分数、比例）不走这里，走 §D MathScene（docs/15 D9）；Simulation 保留给科学类参数模拟。
 
-## D. MathScene（交互式分步课 + 练习）
+## D. MathScene（交互式分步课 + 练习，已实现）
 
-`engine: math-scene`、`stage: svg`、`mode: lesson`。第一个实例：分数（docs/15）。一章 = 一个课步，课步由 2–4 个小步（task）组成，最后一章是练习，开头可有背景章。
+`engine: math-scene`、`stage: svg`、`mode: lesson`。已实现，第一个实例是分数主题（docs/15，12 步 + 练习，已发布），第三个引擎；与 TimeScene、SpaceScene 共用同一套 HUD、演示、URL 状态与主题。一章 = 一个课步，课步由 2–4 个小步（task）组成，最后一章是练习，开头可有背景章。
 
 - **舞台**：SVG（无 WebGL），技术图版的正投影线稿：条（纸条、吐司、千层糕、巧克力…）、圆（prata、蛋糕）、数轴（标尺语法）、分数墙、模型图（部分–整体 / 比较）。孩子的标记 = signal，题目给的 = cold，第二个量 = hot，拿走的 = 墨色斜线，看答案 = 墨色虚线。每个交互都能只用点按、只用键盘完成，拖动只是快捷方式；可点目标 ≥ 44 px。
 - **小步种类**（`task.kind`）：`shade` `cut` `fold` `split` `merge` `place` `compare` `order` `choose` `input` `build-sum`；多段小步（涂了再写、先化成同样大的份再涂再写）逐段检查。

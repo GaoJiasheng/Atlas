@@ -142,13 +142,17 @@ export function useParts({ count, marked, toggle, locked, enabled }: PartsInput)
     },
   };
 
+  // The one part in the tab order (roving tabindex): the remembered one, or the next free part when it is locked (given parts come first in an addition).
+  const start = Math.max(0, Math.min(focus, count - 1));
+  let stop = -1;
+  for (let n = 0; n < count && stop < 0; n++) if (!locked?.((start + n) % count)) stop = (start + n) % count;
   const part = (i: number) => ({
     ref: (el: SVGGElement | null) => {
       refs.current[i] = el;
     },
     'data-part': i,
     role: 'button',
-    tabIndex: enabled && !locked?.(i) ? (i === Math.min(focus, count - 1) ? 0 : -1) : undefined,
+    tabIndex: enabled && !locked?.(i) ? (i === stop ? 0 : -1) : undefined,
     'aria-pressed': marked(i),
     'aria-disabled': !enabled || locked?.(i) ? true : undefined,
     onPointerDown(e: PointerEvent<SVGGElement>) {
@@ -164,16 +168,19 @@ export function useParts({ count, marked, toggle, locked, enabled }: PartsInput)
     },
     onKeyDown(e: KeyboardEvent<SVGGElement>) {
       if (!enabled) return;
-      const move = (to: number) => {
+      // Arrows skip parts that cannot be marked (they are not focusable).
+      const move = (to: number, dir: 1 | -1) => {
         e.preventDefault();
-        const next = Math.min(count - 1, Math.max(0, to));
+        let next = Math.min(count - 1, Math.max(0, to));
+        while (next >= 0 && next < count && locked?.(next)) next += dir;
+        if (next < 0 || next >= count) return;
         setFocus(next);
         refs.current[next]?.focus();
       };
-      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') move(i + 1);
-      else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') move(i - 1);
-      else if (e.key === 'Home') move(0);
-      else if (e.key === 'End') move(count - 1);
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') move(i + 1, 1);
+      else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') move(i - 1, -1);
+      else if (e.key === 'Home') move(0, 1);
+      else if (e.key === 'End') move(count - 1, -1);
       else if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
         if (!locked?.(i)) toggle(i);

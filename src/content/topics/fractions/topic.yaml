@@ -11,4 +11,4 @@ stage: svg
 theme: paper
 sensitivity: open
 note: { en: "Interactive lesson · aligned to the MOE 2021 syllabus", zh: "交互课 · 对照 MOE 2021 课纲" }
-status: draft
+status: published

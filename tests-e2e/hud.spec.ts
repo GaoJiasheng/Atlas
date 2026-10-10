@@ -11,8 +11,8 @@ async function openScene(page: Page, url: string) {
 
 for (const topic of TOPICS) {
   for (const locale of ['en', 'zh'] as const) {
-    test(`${topic} (${locale}): HUD layout has no overlap or overflow at 6 sizes`, async ({ page }) => {
-      test.setTimeout(120_000);
+    test(`${topic} (${locale}): HUD layout has no overlap or overflow at 7 sizes`, async ({ page }) => {
+      test.setTimeout(180_000);
       await openScene(page, `/${locale}/topics/${topic}/`);
       const problems: string[] = [];
       for (const [width, height] of LAYOUT_SIZES) {

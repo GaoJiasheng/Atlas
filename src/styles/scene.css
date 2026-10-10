@@ -896,7 +896,23 @@
   gap: calc(10 * var(--u));
   min-height: 0;
   overflow-y: auto;
-  scrollbar-width: thin;
+}
+/* The column scrolls inside the stage height; its hairline scrollbar is always drawn (overlay scrollbars hide until you scroll, which left the key's last rows looking cut off). */
+.atlas-stage__overlay::-webkit-scrollbar {
+  width: 6px;
+}
+.atlas-stage__overlay::-webkit-scrollbar-track {
+  background: transparent;
+}
+.atlas-stage__overlay::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background: var(--line);
+}
+@supports (-moz-appearance: none) {
+  .atlas-stage__overlay {
+    scrollbar-width: thin;
+    scrollbar-color: var(--line) transparent;
+  }
 }
 .atlas-stage__overlay:empty {
   display: none;
@@ -1828,6 +1844,18 @@
   height: 9px;
   border: 1px solid var(--line);
   border-radius: 0;
+}
+/* Short stages (1600x900 and below) and mouse input: the control rows and the key compact before the column has to scroll. */
+@media (max-height: 940px) and (pointer: fine) {
+  .atlas-ctl {
+    gap: 0.5rem;
+  }
+  .atlas-ctl__row {
+    min-height: 26px;
+  }
+  .atlas-legend ul {
+    gap: 0.25rem;
+  }
 }
 
 /* ------------------------------------------------------------------ */
@@ -2835,6 +2863,10 @@
   vertical-align: middle;
   font-variant-numeric: tabular-nums;
   line-height: 1;
+  white-space: nowrap;
+}
+.atlas-nowrap {
+  white-space: nowrap;
 }
 .atlas-frac__w {
   font-size: 1.05em;
@@ -2843,8 +2875,13 @@
   display: inline-flex;
   flex-direction: column;
   align-items: stretch;
-  font-size: 0.72em;
+  font-size: 0.8em;
   text-align: center;
+}
+/* In the reader the numerals match the running text (a little larger), so a fraction in a sentence reads at the size of the words around it. */
+[data-chapter-body] .atlas-frac__f,
+[data-chapter-body] .atlas-frac__w {
+  font-size: 1.05em;
 }
 .atlas-frac__n {
   padding: 0 0.15em 0.08em;

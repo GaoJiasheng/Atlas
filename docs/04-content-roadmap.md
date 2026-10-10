@@ -24,10 +24,10 @@
 | 力（摩擦、重力、弹力） | science | sim | Simulation | Sci P6 | 2030 |
 | 气候带与季风 | geography | time | TimeScene/Geo | 课外拓展 | 随时 |
 | 丝绸之路 / 郑和下西洋 | history | time | TimeScene/Geo | 课外拓展（历史） | 随时 |
-| 分数与比例 | math | 待定 | 待定 | 待定 | 待定 |
+| 分数（P2–P4：平均分、等值分数、同分母与相关分母加减、带分数；比例留待后续） | math | lesson | MathScene/SVG | MOE 2021 数学课纲 Fractions（P2、P3，P4 桥）；详见 docs/15 | 2026 P2 起用，P3 接着做 | 已完成 12 步 + 练习（待审） |
 | 二进制与像素 | computer | 待定 | 待定 | 待定 | 待定 |
 
-数学类（分数、比例、面积、速度）归 Simulation，二期引擎做好后再排；computer 类同样待定。
+数学类走 MathScene（分步课 + 练习，第三个引擎，分数已做，docs/15），比例、面积、速度随年级补；Simulation 留给科学类参数模拟；computer 类待定。
 
 ## 二战主题大纲（一期 10 章）
 

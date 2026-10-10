@@ -52,6 +52,11 @@
 .ms-part__shape[data-mark="mine"] {
   fill: color-mix(in srgb, var(--signal) 58%, var(--panel-solid));
 }
+/* Dark plate: the child's marks read brighter than the given quantity, so the two stay apart at a glance. */
+:root[data-theme="cinema"] .ms-part[data-mark="mine"] .ms-part__shape,
+:root[data-theme="cinema"] .ms-part__shape[data-mark="mine"] {
+  fill: color-mix(in srgb, var(--signal) 74%, var(--panel-solid));
+}
 .ms-part[data-mark="cold"] .ms-part__shape,
 .ms-part__shape[data-mark="cold"] {
   fill: color-mix(in srgb, var(--cold) 50%, var(--panel-solid));
@@ -1412,10 +1417,15 @@
 .atlas-scene[data-engine="math-scene"] .atlas-hud__left {
   overflow: clip;
 }
+.atlas-scene[data-engine="math-scene"] .atlas-hud__left .atlas-title {
+  flex: 0 1 auto;
+  min-height: 0;
+  overflow: clip;
+}
 
 /* Short screens (720p laptops): the tray stays one line where it can — fraction boxes side by side with a slash —
    and the title block keeps its title (the spec table and the note give way to the tray's band). */
-@media (max-height: 820px) {
+@media (max-height: 820px), (max-width: 759px) {
   .atlas-scene[data-engine="math-scene"] .atlas-spec,
   .atlas-scene[data-engine="math-scene"] .atlas-title__note {
     display: none;
@@ -1446,4 +1456,30 @@
   .ms-choices {
     gap: 4px;
   }
+}
+/* Phones keep the 44 px finger target on the sentence choices. */
+@media (max-width: 759px) {
+  .ms-choice {
+    min-height: var(--hit);
+  }
+}
+
+/* Phones: the control panel hides behind one button (it would otherwise take the stage from the model). */
+.ms-overlay__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: var(--hit);
+  padding: 0 12px;
+  border: 1px solid var(--hair);
+  background: var(--panel);
+  color: var(--ink-2);
+  font: 500 11px / 1 var(--font-hud);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.ms-overlay__toggle:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 2px;
 }

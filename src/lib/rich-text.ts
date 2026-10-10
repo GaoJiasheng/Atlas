@@ -8,6 +8,7 @@
  */
 import { createElement, Fragment, type ReactNode } from 'react';
 import { fractionWords, type FracSlots } from '../engines/math-scene/lib/words';
+import { groupRuns, splitGlue } from './frac-glue';
 
 export type RichPart = { text: string } | { frac: FracSlots };
 
@@ -54,13 +55,21 @@ export function fracNode(f: FracSlots, locale: 'en' | 'zh', key?: string | numbe
   );
 }
 
-/** Text with its fraction tokens typeset. */
+/** Text with its fraction tokens typeset; a fraction and the operator beside it stay on one line. */
 export function renderRich(text: string, locale: 'en' | 'zh'): ReactNode {
   const parts = parseRich(text);
   if (parts.length === 1 && 'text' in parts[0]!) return text;
+  const items: { node: ReactNode; glued: boolean }[] = [];
+  parts.forEach((p, i) => {
+    if ('frac' in p) items.push({ node: fracNode(p.frac, locale, `f${i}`), glued: true });
+    else
+      splitGlue(p.text, parts[i - 1] !== undefined && 'frac' in parts[i - 1]!, parts[i + 1] !== undefined && 'frac' in parts[i + 1]!).forEach((piece, k) =>
+        items.push({ node: createElement(Fragment, { key: `t${i}.${k}` }, piece.text), glued: piece.glue }),
+      );
+  });
   return createElement(
     Fragment,
     null,
-    parts.map((p, i) => ('text' in p ? createElement(Fragment, { key: i }, p.text) : fracNode(p.frac, locale, i))),
+    groupRuns(items).map((g, i) => (Array.isArray(g) ? createElement('span', { key: `g${i}`, className: 'atlas-nowrap' }, g) : g)),
   );
 }

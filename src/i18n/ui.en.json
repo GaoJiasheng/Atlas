@@ -409,6 +409,7 @@
   "math.start.line": "One fraction, four pictures: {3/4} as a bar, a circle, a number line and a fraction wall. Press 1–4 or VIEW to switch.",
   "math.start.go": "Start step 01",
   "math.task.link": "Open this task on the stage",
+  "math.toolsAndKey": "Tools and key",
   "math.key.mine": "Your marks",
   "math.key.given": "Given",
   "math.key.second": "Second amount",
