@@ -199,7 +199,7 @@ export function planeAxes(plane: SectionPlane): [number, number, number] {
  * sorted back to front.
  */
 export function elevation(
-  parts: readonly (Pick<Part, 'id' | 'group' | 'primitive' | 'repeat' | 'explode'> & { context?: boolean | undefined })[],
+  parts: readonly (Pick<Part, 'id' | 'group' | 'primitive' | 'extra' | 'repeat' | 'explode'> & { context?: boolean | undefined })[],
   plane: SectionPlane,
   explode = 0,
 ): Elevation {

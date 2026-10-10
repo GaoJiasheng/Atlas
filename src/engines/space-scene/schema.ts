@@ -49,6 +49,37 @@ export const PRIMITIVE_KINDS = ['box', 'cylinder', 'cone', 'sphere', 'torus', 'c
  */
 export const ENGINEERED_KINDS = ['bevelBox', 'tube', 'flange', 'fins', 'vessel', 'panelHole'] as const;
 
+/**
+ * Shaped parts (docs/06 §SpaceScene, realism round): profiles and fan /
+ * heat-exchanger builders. Round kinds turn about their local Y axis like
+ * `vessel` and `flange`; turn them with `rotation`.
+ *   lathe        {profile: [[r, y]...], segments}  profile revolved about Y (r ≥ 0);
+ *                points on the axis (r = 0) close the solid
+ *   extrude      {shape: [[x, y]...], holes?, depth, bevel?}  outline in XY extruded along Z,
+ *                centred (depth = overall thickness, a bevel rounds the edges inside it)
+ *   curvedPanel  {radius, angle, height, thickness, segments}  slice of a cylinder (axis ‖ Y)
+ *                spanning `angle`° about +Z; `at` = middle of its outer face
+ *   blades       {layout, count, radius, hub, chord, twist, sweep, pitch, thickness, length, discs}
+ *                axial: `count` cambered blades from `hub` to `radius` in the XZ plane, blade
+ *                angle `pitch`° at the root minus `twist`° at the tip, tip swept `sweep`°
+ *                forward, chord growing to `chord` at the tip, plus a domed hub;
+ *                barrel: a cross-flow rotor, `count` forward-curved blades of chord `chord`
+ *                between `hub` and `radius`, `length` long along Y, held by `discs` discs
+ *   coilBank     {rows, cols, pitch, tubeRadius, length, finPitch, finDepth, bends, shape, legs}
+ *                finned-tube heat exchanger: `rows` × `cols` tubes along X (`cols` stacked
+ *                in Y at `pitch`, `rows` deep in Z, staggered), aluminium fins every
+ *                `finPitch`, return bends (`tubeColor`, default copper) at both ends
+ *                (`both`), none, or the bends alone (`only`, a separate hairpin part);
+ *                `shape: L` bends the bank 90° about Y: leg 0 (`legs[0]`) along X, then
+ *                round the corner (radius `corner`) and leg 1 (`legs[1]`) along +Z at −X
+ *   grille       rings: concentric wire rings out to `radius` plus `spokes` radial wires,
+ *                in the XZ plane (axis Y), wire radius `bar`;
+ *                slats: `count` slats `bar` wide across a `size` [w, d, h] frame (XZ plane)
+ * Every primitive also takes `mirror` (x | y | z): reflect the shape in its own
+ * plane normal to that axis before `rotation` (a left-hand copy of a profile).
+ */
+export const SHAPED_KINDS = ['lathe', 'extrude', 'curvedPanel', 'blades', 'coilBank', 'grille'] as const;
+
 const PRIMITIVE_ARITY: Record<(typeof PRIMITIVE_KINDS)[number], number> = {
   box: 3,
   cylinder: 3,
@@ -97,7 +128,12 @@ const placement = {
    * light-grey `powder` casing. Ignored when `color` is already a colour.
    */
   tint: colorRef.optional(),
+  /** Reflect the shape in its own plane normal to this axis (before `rotation`). */
+  mirror: z.enum(['x', 'y', 'z']).optional(),
 };
+
+const point2 = z.tuple([z.number(), z.number()]);
+const outline = z.array(point2).min(3).max(160);
 
 export const primitiveSchema = z
   .discriminatedUnion('kind', [
@@ -149,6 +185,82 @@ export const primitiveSchema = z
         ...placement,
       })
       .strict(),
+    z
+      .object({
+        kind: z.literal('lathe'),
+        profile: z.array(z.tuple([z.number().nonnegative(), z.number()])).min(2).max(96),
+        segments: z.number().int().min(6).max(128).default(48),
+        ...placement,
+      })
+      .strict(),
+    z
+      .object({
+        kind: z.literal('extrude'),
+        shape: outline,
+        holes: z.array(outline).max(16).optional(),
+        depth: positive,
+        bevel: positive.optional(),
+        ...placement,
+      })
+      .strict(),
+    z
+      .object({
+        kind: z.literal('curvedPanel'),
+        radius: positive,
+        angle: z.number().positive().max(360),
+        height: positive,
+        thickness: positive,
+        segments: z.number().int().min(2).max(128).default(32),
+        ...placement,
+      })
+      .strict(),
+    z
+      .object({
+        kind: z.literal('blades'),
+        layout: z.enum(['axial', 'barrel']).default('axial'),
+        count: z.number().int().min(2).max(64),
+        radius: positive,
+        hub: positive,
+        chord: positive,
+        twist: z.number().min(-80).max(80).default(0),
+        sweep: z.number().min(-80).max(80).default(0),
+        pitch: z.number().min(0).max(85).default(30),
+        thickness: positive,
+        length: positive.optional(),
+        discs: z.number().int().min(2).max(24).default(2),
+        ...placement,
+      })
+      .strict(),
+    z
+      .object({
+        kind: z.literal('coilBank'),
+        rows: z.number().int().min(1).max(4),
+        cols: z.number().int().min(1).max(48),
+        pitch: positive,
+        tubeRadius: positive,
+        length: positive,
+        finPitch: positive,
+        finDepth: positive,
+        bends: z.enum(['both', 'none', 'only']).default('both'),
+        shape: z.enum(['flat', 'L']).default('flat'),
+        legs: z.tuple([positive, positive]).optional(),
+        corner: positive.optional(),
+        tubeColor: z.union([z.enum(MATERIAL_PRESETS), colorRef]).default('copper'),
+        ...placement,
+      })
+      .strict(),
+    z
+      .object({
+        kind: z.literal('grille'),
+        style: z.enum(['rings', 'slats']),
+        radius: positive.optional(),
+        size: positiveVec3.optional(),
+        count: z.number().int().min(1).max(96),
+        spokes: z.number().int().min(0).max(24).default(8),
+        bar: positive,
+        ...placement,
+      })
+      .strict(),
   ])
   .superRefine((p, ctx) => {
     const issue = (path: (string | number)[], message: string) =>
@@ -172,6 +284,28 @@ export const primitiveSchema = z
         break;
       case 'fins':
         break;
+      case 'lathe':
+        if (p.profile.every(([r]) => r < 1e-9)) issue(['profile'], 'a lathe profile needs a point off the axis');
+        break;
+      case 'extrude':
+        if (p.bevel !== undefined && p.bevel * 2 >= p.depth) issue(['bevel'], `bevel ${p.bevel} must be less than half the depth ${p.depth}`);
+        break;
+      case 'curvedPanel':
+        if (p.thickness >= p.radius) issue(['thickness'], `thickness ${p.thickness} must be less than the radius ${p.radius}`);
+        break;
+      case 'blades':
+        if (p.hub >= p.radius) issue(['hub'], `hub ${p.hub} must be inside the radius ${p.radius}`);
+        if (p.layout === 'barrel' && p.length === undefined) issue(['length'], 'a barrel rotor needs a `length`');
+        break;
+      case 'coilBank':
+        if (p.shape === 'L' && p.legs === undefined) issue(['legs'], 'an L-shaped bank needs `legs` [along X, along Z]');
+        if (p.tubeRadius * 2 >= p.pitch) issue(['tubeRadius'], `tubes of radius ${p.tubeRadius} overlap at pitch ${p.pitch}`);
+        if (p.finPitch * 2 > p.length) issue(['finPitch'], 'fin pitch is longer than half the bank');
+        break;
+      case 'grille':
+        if (p.style === 'rings' && p.radius === undefined) issue(['radius'], 'a ring grille needs a `radius`');
+        if (p.style === 'slats' && p.size === undefined) issue(['size'], 'a slat grille needs a `size` [w, d, h]');
+        break;
       case 'vessel':
         if (p.length === 0 && p.headRatio === 0) issue(['length'], 'a vessel needs a length or domed heads');
         break;
@@ -189,6 +323,9 @@ export const primitiveSchema = z
     }
   });
 export type Primitive = z.output<typeof primitiveSchema>;
+
+/** Extra primitives a part may carry (each its own material; repeated with the part). */
+export const MAX_EXTRA_PRIMITIVES = 16;
 
 /**
  * Repeat a part as instances (one draw call): `count` copies along `axis`
@@ -217,6 +354,13 @@ export const partSchema = z
     /** Mesh name inside a glb model; the name is the part id's counterpart. */
     mesh: z.string().min(1).optional(),
     primitive: primitiveSchema.optional(),
+    /**
+     * More primitives belonging to the same part (`at` in scene coordinates,
+     * like `primitive`): e.g. a compressor's terminal cover and feet. They
+     * move, fade, explode, repeat and animate with the part; the label points
+     * at `primitive`. Pieces sharing a material are merged into one draw call.
+     */
+    extra: z.array(primitiveSchema).min(1).max(MAX_EXTRA_PRIMITIVES).optional(),
     /** Instanced copies of the primitive (see repeatSchema). */
     repeat: repeatSchema.optional(),
     /** Exploded-view move (dir is normalised). Default: none (context parts never move). */
@@ -243,6 +387,10 @@ export const partSchema = z
   .refine((p) => p.mesh !== undefined || p.primitive !== undefined, {
     message: 'a part needs either `mesh` or `primitive`',
     path: ['primitive'],
+  })
+  .refine((p) => p.extra === undefined || p.primitive !== undefined, {
+    message: '`extra` needs a main `primitive`',
+    path: ['extra'],
   })
   .refine((p) => p.group !== undefined || p.context === true, {
     message: 'a part needs a `group` (only `context: true` parts may omit it)',

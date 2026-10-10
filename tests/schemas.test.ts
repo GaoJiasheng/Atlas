@@ -265,6 +265,30 @@ describe('sample-space topic', () => {
   });
 });
 
+describe('aircon topic', () => {
+  it('engine data parses: 36 machine parts + the wall, shaped primitives, flows through named parts', () => {
+    const data = spaceSceneData.parse(loadData('aircon'));
+    const { parts, groups, flows, animations } = data.parts;
+    expect(parts).toHaveLength(37);
+    expect(parts.filter((p) => p.context)).toHaveLength(1);
+    expect(groups).toHaveLength(5);
+    expect(flows).toHaveLength(7);
+    expect(animations).toHaveLength(4);
+    const kinds = new Set(parts.flatMap((p) => [p.primitive?.kind, ...(p.extra ?? []).map((e) => e.kind)]));
+    for (const k of ['lathe', 'extrude', 'curvedPanel', 'blades', 'coilBank', 'grille']) expect(kinds.has(k as never)).toBe(true);
+    // Refrigerant segments join end to start (one closed loop).
+    const ref = ['ref-hot-gas', 'ref-warm-liquid', 'ref-cold-mix', 'ref-cool-gas'].map((id) => flows.find((f) => f.id === id)!);
+    ref.forEach((f, i) => expect(ref[(i + 1) % ref.length]!.path[0]).toEqual(f.path[f.path.length - 1]));
+  });
+
+  it('chapters and their states parse', () => {
+    for (const raw of loadChapters('aircon')) {
+      const chapter = chapterSchema.parse(raw);
+      expect(spaceChapterState.safeParse(chapter.state).success).toBe(true);
+    }
+  });
+});
+
 describe('topic schema', () => {
   it('rejects a stage the engine does not have', () => {
     const raw = parseYaml(readFileSync(join(TOPICS, 'sample-time/topic.yaml'), 'utf8')) as Record<string, unknown>;

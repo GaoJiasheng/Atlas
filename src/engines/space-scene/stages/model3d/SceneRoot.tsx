@@ -27,7 +27,7 @@ import { CameraRig } from './CameraRig';
 import { Lighting } from './Lighting';
 import { GroundShadow } from './GroundShadow';
 import { LabelProbe, ResolutionGovernor, ShadowUpdater, StatsProbe, type GroupMembers } from './probes';
-import { partBounds } from '../../lib/parts';
+import { partBounds, partMaterialSlots } from '../../lib/parts';
 import { anchorHalf, anchorOffset, anchorPoint, anchorRadius, primitiveShape, stageBounds } from './shapes';
 import { createTextureKit } from './textures';
 import type { PartStyle } from './materials';
@@ -202,19 +202,23 @@ export function SceneRoot({ store, ui, bridge, data, chapters, look }: SceneRoot
     const signal = resolveDataColor('token:signal', look.tokens, look.theme, '#cc6328');
     const cut = resolveDataColor('token:cut', look.tokens, look.theme, '#b8973c');
     const ink = resolveDataColor('token:ink', look.tokens, look.theme, '#2a2824');
-    const out = new Map<string, PartStyle>();
+    const out = new Map<string, PartStyle[]>();
     for (const part of data.parts) {
-      const ref = part.primitive?.color ?? (part.group !== undefined ? groupColors.get(part.group) : undefined) ?? 'steel';
-      out.set(part.id, {
-        look: resolveMaterialLook(ref, look.tokens, look.theme, part.primitive?.tint),
-        kit,
-        signal,
-        cut,
-        ink: cinema ? '#1f2124' : ink,
-        rim: cinema ? 0.35 : 0.75,
-        tint: cinema ? 0.03 : 0.02,
-        hatchPx: Math.round(7 * dpr),
-      });
+      const fallback = (part.group !== undefined ? groupColors.get(part.group) : undefined) ?? 'steel';
+      const slots = part.primitive ? partMaterialSlots(part) : [{ color: fallback }];
+      out.set(
+        part.id,
+        slots.map((slot) => ({
+          look: resolveMaterialLook(slot.color, look.tokens, look.theme, slot.tint),
+          kit,
+          signal,
+          cut,
+          ink: cinema ? '#1f2124' : ink,
+          rim: cinema ? 0.35 : 0.75,
+          tint: cinema ? 0.03 : 0.02,
+          hatchPx: Math.round(7 * dpr),
+        })),
+      );
     }
     return out;
   }, [data.parts, groupColors, look, kit, dpr]);
@@ -267,20 +271,20 @@ export function SceneRoot({ store, ui, bridge, data, chapters, look }: SceneRoot
       {data.parts.map((part) => {
         const shape = shapes.get(part.id);
         const display = displays.get(part.id);
-        const style = styles.get(part.id);
-        if (!shape || !display || !style) return null;
+        const partStyles = styles.get(part.id);
+        if (!shape || !display || !partStyles) return null;
         return (
           <PartNode
             key={part.id}
             part={part}
             shape={shape}
-            style={style}
+            styles={partStyles}
             display={display}
             animations={anims.get(part.id) ?? []}
             hovered={hovered === part.id}
             clipping={clipping}
             castShadow={
-              part.castShadow ?? (!part.context && style.look.opacity === 1 && shape.radius >= bounds.modelRadius * SHADOW_CASTER_RATIO)
+              part.castShadow ?? (!part.context && partStyles[0]!.look.opacity === 1 && shape.radius >= bounds.modelRadius * SHADOW_CASTER_RATIO)
             }
             anchorOffset={anchors.get(part.id) ?? NO_HALF}
             anchorPoint={points.get(part.id) ?? NO_HALF}

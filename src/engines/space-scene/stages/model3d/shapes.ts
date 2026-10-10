@@ -5,16 +5,16 @@
 import { Quaternion, Vector3 } from 'three';
 import type { Part } from '../../schema';
 import { explodedPosition } from '../../lib/explode';
-import { partBounds, tubeMidpoint } from '../../lib/parts';
+import { mainBounds, partBounds, tubeMidpoint } from '../../lib/parts';
 import { apply3, eulerDeg } from '../../lib/xform';
 import type { Vec3 } from '../../lib/math';
-import { isClosedKind, primitivePieces } from './geometry';
+import { isClosedPrimitive, partPieces } from './geometry';
 import type { PartShape } from './PartNode';
 
 export function primitiveShape(part: Part): PartShape | null {
   const p = part.primitive;
   if (!p) return null;
-  const pieces = primitivePieces(part);
+  const pieces = partPieces(part);
   const b = partBounds(part)!;
   const radius = Math.hypot(b.max[0] - b.min[0], b.max[1] - b.min[1], b.max[2] - b.min[2]) / 2;
   return {
@@ -23,7 +23,7 @@ export function primitiveShape(part: Part): PartShape | null {
     quaternion: new Quaternion(),
     scale: new Vector3(1, 1, 1),
     radius,
-    closed: isClosedKind(p.kind),
+    closed: isClosedPrimitive(p),
     twoSided: p.kind === 'plane',
   };
 }
@@ -39,12 +39,15 @@ export function anchorOffset(part: Part): Vec3 {
 /**
  * Where a part's leader label points, relative to its centre: the bounds
  * centre, except a single tube (a pipe run), whose bounds centre is often in
- * mid air: the point halfway along its path.
+ * mid air: the point halfway along its path. A part with `extra` points at
+ * its main primitive.
  */
 export function anchorPoint(part: Part): Vec3 {
   const p = part.primitive;
   if (p?.kind === 'tube' && !part.repeat) return apply3(eulerDeg(p.rotation), tubeMidpoint(p));
-  return anchorOffset(part);
+  if (!p || !part.extra) return anchorOffset(part);
+  const b = mainBounds(part)!;
+  return [(b.min[0] + b.max[0]) / 2 - p.at[0], (b.min[1] + b.max[1]) / 2 - p.at[1], (b.min[2] + b.max[2]) / 2 - p.at[2]];
 }
 
 /** Half extents of a part's bounds (scene units; zero without a primitive): its on-screen box for the leader labels. */
