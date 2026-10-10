@@ -610,3 +610,64 @@ VIEW 组 = 命名预设 + ORBIT + REF.（章节镜头不再进 VIEW 组，与 Ti
 - EXPLODED 时 FLOW 不能开：流路径不随零件拆开移动（§7.5）。
 - 冷媒 64 点烘焙在弯头处最多偏出管心 15–20 mm（引擎限制）。
 - 手机上叠层面板盖住舞台右半，两台机不能同时看全。
+
+## 16. 写实轮次：几何匹配记录（2026-10-10，R2 两轮）
+
+Gavin 的反馈：模型太抽象；保留技术图版的画法，但结构要写实到观众一眼能对上真机。方法：skill `master-spec` B + D、`rounds` R2、`archetypes` §2；先找参考、逐张看，再加引擎原语、按参考重建、并排对照两轮。
+
+### 16.1 参考图（`scripts/geo/aircon/refs/`，已 gitignore，不随站点发布）
+
+| 文件 | 来源 | 许可 | 看什么 |
+|---|---|---|---|
+| `01-indoor-front-panasonic.jpg` | Commons: Panasonic AIR CONDITIONER INDOOR UNIT CS-C10KJ2 (2), Dinkun Chen | CC BY-SA 4.0 | 室内机 3/4 前视：前面板凸面、上缘圆角、显示窗在右、下部导风板 |
+| `02-indoor-front-daikin.jpg` | Commons: Daikin 2014 (cropped) | CC BY-SA 4.0 | 正面比例、出风口位置、右侧显示 |
+| `03-indoor-top-slats.jpg` | Commons: Klimasplit-Innengerät, Dr.cueppers | CC BY 3.0 | 顶部进风格栅（前后走向的格条） |
+| `04-indoor-side-profile.jpg` | Commons: Galanz Air Conditioner 3, Milad Mosapoor | Attribution | 端盖侧轮廓：平背、平顶、前上大圆角、前下斜收 |
+| `05-indoor-section-US11073302-fig2.png` | US 11,073,302 B2 图 2A/2B（Google Patents） | 美国专利图，公有领域 | 室内机剖面：贯流风扇、三段倒 V 蒸发器、接水盘、蜗壳（rear guider）、导风板、出风口 |
+| `06-indoor-perspective-US11073302-fig1.png` | 同上 图 1A/1B | 公有领域 | 外形、出风口与导风板 |
+| `07-crossflow-fan-diagram.png` | Commons: Tangential-flow-coloured-labels, Moggyland | GFDL | 贯流风扇：长筒叶轮 + 蜗壳 + 电机在一端 |
+| `08-crossflow-fan-barrel.jpg` | Commons: Cross flow fan attached, Sali6089 | CC BY-SA 3.0 | 叶轮分段隔盘 |
+| `09-outdoor-front-grille-valves.jpg` | Commons: Splitklimaanlage IMGP9925 unbranded, Smial | CC BY-SA 2.0 de | 室外机正面：同心圈 + 辐条护网、三叶风扇、右侧截止阀与保温管束 |
+| `10-outdoor-side-slats.jpg` | Commons: Outunit of heat pump | 公有领域 | 左侧开槽侧板（盖着冷凝器侧段）、底脚、顶盖 |
+| `11-outdoor-open-US10145601-fig5.png` | US 10,145,601 B2 图 5 | 公有领域 | 拆壳：隔板、导风圈（bell mouth）、三叶风扇、背面盘管 |
+| `12-outdoor-open-US10145601-fig3-4.png` | 同上 图 3、4 | 公有领域 | 拆壳：L 形冷凝器（后 + 左）、压缩机 16 与储液器 15 在右侧机舱、电控盒在机舱顶 |
+| `13-outdoor-plan-US10145601-fig1-2.png` | 同上 图 1、2 | 公有领域 | 平面图：L 盘管、风扇电机支架、机舱 |
+| `14-compressor-accumulator-panasonic.jpg` | Commons: Panasonic AIR CONDITIONER COMPRESSOR 2P17S225ANQ, Dinkun Chen | CC BY-SA 4.0 | 转子压缩机：细高壳体、上封头、接线盒、旁挂储液器 |
+| `15-compressor-panasonic.jpg` | Commons: Panasonic air conditioner compressor 5KS225EAA21, Dinkun Chen | CC BY-SA 4.0 | 壳体比例、底座 |
+
+Commons 上找不到"拆了外壳的分体室外机"实拍，内部结构用美国专利图（公有领域）补；专利图只用来定零件位置和拓扑，尺寸按本设计（§3.1）。
+
+### 16.2 新原语（引擎，`schema.ts` + `lib/shaped.ts` + `stages/model3d/shaped.ts`，docs/06）
+
+`lathe`、`extrude`（带孔、倒角）、`curvedPanel`、`blades`（`axial` / `barrel`）、`coilBank`（平直 / L 形，铜管 + 回弯 + 铝翅片，`bends: both | none | only`）、`grille`（`rings` / `slats`）；所有 primitive 加 `mirror`；零件加 `extra`（一个零件多个 primitive，同材质烘焙合并成一次绘制，每个材质一个槽）。旧的 kinds 不变。
+
+### 16.3 零件怎么变（36 个机器零件 + 墙，id 与文字不变）
+
+- 室内机：`end-caps` = 端盖侧轮廓 extrude（平背平顶、前上 r 45 mm 圆角、前下斜收进出风口）；`indoor-chassis` = 背板 + 底板 + 包住风扇的蜗壳（extrude）+ 右端机舱 + 钢挂板；`front-panel` = 凸面 `curvedPanel` + 上缘圆角 + 顶部窄条 + 显示窗；`top-grille` / `air-filter` = 格栅 `slats`；`evaporator-front`（前下 + 前上两段）/ `evaporator-rear` = 三段 `coilBank` 倒 V 包住风扇（2 排 × 5 根 φ6.6，管距 21 mm）；`crossflow-fan` = 35 片前弯叶片 8 段 9 盘（φ96 × 600）；`louvre` = 弯弧截面导风板；`drain-pan` = 接水槽 + 出风口上舌 + 18 片竖向导风叶；`control-box` = 电控盒 + 风扇电机。
+- 室外机：`outdoor-front` = 开孔前板 + 导风圈 + 左侧开槽侧板 + 前左圆角；`outdoor-side` = 右侧板 + 机舱背板 + 前右圆角 + 提手；`base-pan` + 两条底脚；`partition` = 折弯隔板（平面 extrude）；`fan-grille` = 10 圈 8 辐护网；`outdoor-fan` = 三叶后掠扭转轴流叶片（φ376）；`fan-motor` = 电机 lathe；`fan-bracket` = 竖支架 + 横臂；`condenser-coil` / `condenser-hairpins` = 同一个 L 形 `coilBank`（2 排 × 23 根 φ7.2，后段 0.42 m + 侧段 0.175 m，翅片 / 只有回弯）；`compressor` = lathe 壳体（上下封头、焊缝）+ 接线盒 + 三脚底板；`accumulator` = lathe + 进压缩机的 U 形管；`expansion-valve` = 黄铜阀体 + 黑色线圈 + 去液阀的出口管；`service-valves` = 阀体 + 六角阀帽 + 喇叭口接头（两只）；`flare-nuts` = 六角 lathe；`inverter-board` = 电控盒 + 伸进风道的散热片。
+- 连接管：液管、气管从室内机右端盘管的空管口出发，穿背板到机后，和保温层一起穿墙、下墙、沿室外机背后走到右侧阀门；室外机内的排气管、吸气管、液管都接在盘管、储液器、膨胀阀、阀门的实际接口上。
+- 流：四段冷媒按实际管路和盘管管程取点（`filletPath` 加密），首尾相接；室内空气：顶部格栅 → 滤网 → 盘管 → 风扇 → 导风板下；室外两股：背面盘管 → 风扇 → 护网。动画：贯流风扇、轴流风扇（轴 −Z）、导风板摆动、转子转动（目标零件不变）。
+- `explode`、`views`、`presets`、章节 `state` 都没改。
+
+### 16.4 并排对照（`docs/screenshots/aircon/geo-*.png`）
+
+| 图 | 参考 | 第一轮差异 → 修正 |
+|---|---|---|
+| `geo-hero.png` | 01、09 | 前面板顶边与顶盖之间漏缝能看到铜管 → 前板拉满到顶；风扇叶片太白 → 深灰；机舱背面敞开 → 侧板做成 L（加背板）；管束在阀门外绕成大圈 → 改成贴着侧板上来、直进喇叭口 |
+| `geo-indoor-open.png` | 05 | 剖面比例、倒 V 盘管、风扇、蜗壳、接水盘位置对上；右端机舱底部敞开露出铜管 → 加底板和前下蒙皮；接水盘前沿露在前板下 → 前板下沿下移到 −95 mm |
+| `geo-outdoor-open.png` | 11、12 | L 形盘管、隔板、风扇、右侧机舱（压缩机 + 储液器 + 电控盒在顶）拓扑一致 |
+| `geo-compressor.png` | 14 | 压缩机偏矮胖、储液器太短 → 壳体 φ110 × 270、储液器 φ62 × 228，接线盒让开排气管 |
+
+### 16.5 数据
+
+1920×1080（`--perf --gpu`，Apple M5 Max）：hero 静止 50 calls / 0.136 M 三角形；FLOW 开 57 calls。舞台 chunk gzip 215 → 225 KB（+10 KB：`ExtrudeGeometry` / `Shape` 一族与新构建器；懒加载，不进首屏）。`pnpm shoot aircon --keys --layout --beats`：0 失败，chapter highlights 全部在屏。
+
+### 16.6 仍和真机不一样的地方
+
+- 示意布局不变：两台机朝向观者，管线短、穿一段墙剖面。
+- 蒸发器是三段平直盘管拼的倒 V，不是一整块折弯的弧形盘管；盘管回路是简化的蛇形（流只走 3–4 程）。
+- 鳍片片距 4.5 mm（真实约 1.4 mm）、贯流叶片 35 片、风扇转速都按可读性取；鳍片没有百叶窗开口。
+- 室外机背面没有防护网，左侧开槽是简化的长条孔；没有接线端子、电线、温度传感器、四通阀（本设计单冷）。
+- 压缩机内部只画了转子磁钢，没有滚动活塞、气缸；底座橡胶垫是三只螺栓头表示。
+- 没有贴花：品牌、能效标签、铭牌都不在模型上。
+- 截止阀两只一样大（真机气阀更粗）。

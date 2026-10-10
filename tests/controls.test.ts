@@ -125,6 +125,13 @@ describe('registration, modes and keymap', () => {
     expect(hud.getState().reader).toBe(true);
     actions.setReader(false);
     expect(hud.getState().reader).toBe(false);
+    // The bottom panel strip: expanded by default, folds as one group, independent of the reader.
+    expect(hud.getState().panelsOpen).toBe(true);
+    actions.setPanels(false);
+    expect(hud.getState().panelsOpen).toBe(false);
+    expect(hud.getState().reader).toBe(false);
+    actions.setPanels(true);
+    expect(hud.getState().panelsOpen).toBe(true);
   });
 });
 

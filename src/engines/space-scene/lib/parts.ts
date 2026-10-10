@@ -6,6 +6,7 @@
 import type { Part, PartRepeat, Primitive } from '../schema';
 import { normalize3, type Vec3 } from './math';
 import { apply3, axisAngle, eulerDeg, IDENTITY3, mul3, perpendicular, type Mat3 } from './xform';
+import { axialHalfHeight, barrelDiscs, coilBox, curvedPanelBox, extrudeBox, grilleBox, latheBox } from './shaped';
 
 /** Flange bolt heads: across-flats size and height as fractions. */
 export const BOLT_HEAD = {
@@ -101,8 +102,19 @@ export interface Box3Like {
   max: Vec3;
 }
 
-/** Bounds of a primitive in its own frame (centred on `at`, before `rotation`). */
+/** Bounds of a primitive in its own frame (centred on `at`, before `rotation`; `mirror` applied). */
 export function primitiveLocalBox(p: Primitive): Box3Like {
+  const box = unmirroredBox(p);
+  if (!p.mirror) return box;
+  const i = p.mirror === 'x' ? 0 : p.mirror === 'y' ? 1 : 2;
+  const min = [...box.min] as Vec3;
+  const max = [...box.max] as Vec3;
+  min[i] = -box.max[i]!;
+  max[i] = -box.min[i]!;
+  return { min, max };
+}
+
+function unmirroredBox(p: Primitive): Box3Like {
   const sym = (x: number, y: number, z: number): Box3Like => ({ min: [-x, -y, -z], max: [x, y, z] });
   switch (p.kind) {
     case 'box':
@@ -150,7 +162,29 @@ export function primitiveLocalBox(p: Primitive): Box3Like {
       return sym(p.radius, p.length / 2 + p.radius * p.headRatio, p.radius);
     case 'panelHole':
       return sym(p.size[0] / 2, p.size[1] / 2, p.size[2] / 2);
+    case 'lathe':
+      return latheBox(p);
+    case 'extrude':
+      return extrudeBox(p);
+    case 'curvedPanel':
+      return curvedPanelBox(p);
+    case 'blades': {
+      if (p.layout === 'barrel') {
+        const ends = barrelDiscs(p);
+        return sym(p.radius * 1.04, Math.max(...ends.map(Math.abs)) + p.thickness * 2, p.radius * 1.04);
+      }
+      return sym(p.radius, axialHalfHeight(p), p.radius);
+    }
+    case 'coilBank':
+      return coilBox(p);
+    case 'grille':
+      return grilleBox(p);
   }
+}
+
+/** Every primitive of a part: the main one, then `extra` (empty for glb-only parts). */
+export function partPrimitives(part: Pick<Part, 'primitive' | 'extra'>): Primitive[] {
+  return part.primitive ? [part.primitive, ...(part.extra ?? [])] : [];
 }
 
 function corners(b: Box3Like): Vec3[] {
@@ -178,24 +212,38 @@ export function isEmptyBox(box: Box3Like): boolean {
  * Scene-space bounds of a primitive part at rest (rotation and repeat
  * applied, before explode), or `null` for glb-only parts.
  */
-export function partBounds(part: Pick<Part, 'primitive' | 'repeat'>, offset: readonly number[] = [0, 0, 0]): Box3Like | null {
-  const p = part.primitive;
-  if (!p) return null;
-  const local = corners(primitiveLocalBox(p));
-  const rot = eulerDeg(p.rotation);
+export function partBounds(part: Pick<Part, 'primitive' | 'repeat'> & { extra?: Part['extra'] }, offset: readonly number[] = [0, 0, 0]): Box3Like | null {
+  const main = part.primitive;
+  if (!main) return null;
   const out = emptyBox();
-  for (const t of repeatTransforms(part.repeat)) {
-    const m = mul3(t.rotation, rot);
-    for (const c of local) {
-      const q = apply3(m, c);
-      expandBox(out, [q[0] + t.offset[0] + p.at[0] + offset[0]!, q[1] + t.offset[1] + p.at[1] + offset[1]!, q[2] + t.offset[2] + p.at[2] + offset[2]!]);
+  for (const p of partPrimitives(part)) {
+    const local = corners(primitiveLocalBox(p));
+    const rot = eulerDeg(p.rotation);
+    // Extras sit at their own `at`; a repeat turns them about the part centre (the main `at`).
+    const rel = [p.at[0] - main.at[0], p.at[1] - main.at[1], p.at[2] - main.at[2]];
+    for (const t of repeatTransforms(part.repeat)) {
+      const m = mul3(t.rotation, rot);
+      const c0 = apply3(t.rotation, rel);
+      for (const c of local) {
+        const q = apply3(m, c);
+        expandBox(out, [
+          q[0] + c0[0] + t.offset[0] + main.at[0] + offset[0]!,
+          q[1] + c0[1] + t.offset[1] + main.at[1] + offset[1]!,
+          q[2] + c0[2] + t.offset[2] + main.at[2] + offset[2]!,
+        ]);
+      }
     }
   }
   return out;
 }
 
+/** Rest bounds of the main primitive alone (the leader-label target of a part with `extra`). */
+export function mainBounds(part: Pick<Part, 'primitive' | 'repeat'>): Box3Like | null {
+  return part.primitive ? partBounds({ primitive: part.primitive, repeat: part.repeat }) : null;
+}
+
 /** Union of the rest bounds of all primitive parts (null if none). */
-export function modelBounds(parts: readonly Pick<Part, 'primitive' | 'repeat'>[]): Box3Like | null {
+export function modelBounds(parts: readonly (Pick<Part, 'primitive' | 'repeat'> & { extra?: Part['extra'] })[]): Box3Like | null {
   const out = emptyBox();
   for (const part of parts) {
     const b = partBounds(part);
@@ -204,4 +252,35 @@ export function modelBounds(parts: readonly Pick<Part, 'primitive' | 'repeat'>[]
     expandBox(out, b.max);
   }
   return isEmptyBox(out) ? null : out;
+}
+
+/** A material a part draws with: a family / token / hex ref and an optional family tint. */
+export interface MaterialSlot {
+  color: string;
+  tint?: string;
+}
+
+export function materialSlotKey(color: string, tint: string | undefined): string {
+  return tint ? `${color}|${tint}` : color;
+}
+
+/**
+ * The distinct materials of a part, in order of first use: slot 0 is the
+ * main primitive's `color` (+ `tint`), then the extras' and a coil bank's
+ * `tubeColor`. Pieces index into this list.
+ */
+export function partMaterialSlots(part: Pick<Part, 'primitive'> & { extra?: Part['extra'] }): MaterialSlot[] {
+  const out: MaterialSlot[] = [];
+  const seen = new Set<string>();
+  const add = (color: string, tint?: string) => {
+    const key = materialSlotKey(color, tint);
+    if (seen.has(key)) return;
+    seen.add(key);
+    out.push(tint ? { color, tint } : { color });
+  };
+  for (const p of partPrimitives(part)) {
+    if (!(p.kind === 'coilBank' && p.bends === 'only')) add(p.color, p.tint);
+    if (p.kind === 'coilBank') add(p.tubeColor);
+  }
+  return out;
 }

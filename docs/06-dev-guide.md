@@ -677,10 +677,19 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
   - `vessel {radius, length, headRatio}`：沿 Y 的筒体 + 两端椭圆封头（封头深 = radius × headRatio，0.5 = 2:1 封头）
   - `panelHole {size:[w,h,t], hole:{r, at:[x,y]}}`：XY 平面里 w×h 的板（厚 t 沿 Z），一个圆形通孔（半径 r，圆心相对板中心 (x,y)，必须整个在板内），孔壁、外边都有；手工三角化（不引 Shape / ExtrudeGeometry），封闭体，剖切时填剖面。用 `rotation` 转到需要的朝向（室外机前面板的风扇口、室内机出风口）
   - `fins` 上限 512 片（一个 InstancedMesh，一次绘制）
-- **repeat**：`{count, axis, spacing}`（沿轴、以 `at` 为中心等距）或 `{count, axis, radius}`（绕过 `at` 的轴一圈，每个实例朝外转）。轴是场景坐标。整件变成一个 InstancedMesh。
+- **成形零件**（写实轮次，`lib/shaped.ts` 版式数学 + `stages/model3d/shaped.ts` 构建；圆形件都绕自身 Y 轴，用 `rotation` 转向）：
+  - `lathe {profile:[[r,y]...], segments}`：轮廓绕 Y 旋转（r ≥ 0）；首尾点在轴上（r = 0）才是封闭体（剖切填剖面）；同一点写两次 = 硬边。压缩机外壳（上下封头、焊缝）、储液器、电机、轮毂、六角螺母（`segments: 6`）都用它
+  - `extrude {shape:[[x,y]...], holes?, depth, bevel?}`：XY 平面里的轮廓（可带孔）沿 Z 拉伸、居中；`depth` 是总厚度，`bevel` 在厚度之内倒圆。沿 X 拉伸写 `rotation: [0, -90, 0]`（轮廓 x = 场景 z）；平面图沿 Y 拉伸写 `[90, 0, 0]`（轮廓 y = 场景 z）。室内机端盖侧轮廓、底壳风道、接水盘、导风板截面、隔板、开槽侧板
+  - `curvedPanel {radius, angle, height, thickness, segments}`：圆柱面的一段（轴 ‖ Y），绕 +Z 对称张开 `angle`°；`at` 是外表面正中点，法线朝 +Z。横放（轴 ‖ X）写 `rotation: [倾角, 0, 90]`。室内机前面板、圆角
+  - `blades {layout, count, radius, hub, chord, twist, sweep, pitch, thickness, length?, discs}`：`axial`（默认）= XZ 平面里 `count` 片带弧度的宽叶片，叶根角 `pitch`°、到叶尖减 `twist`°、叶尖前掠 `sweep`°、弦长从根部 55 % 长到叶尖 `chord`，加穹顶轮毂；`barrel` = 贯流风扇转子，`count` 片前弯叶片（`hub` 到 `radius`，弦 `chord`，前倾 `sweep`°，默认 25°）沿 Y 长 `length`，`discs` 片隔盘（两端实心）。全部合成一个几何体
+  - `coilBank {rows, cols, pitch, tubeRadius, length, finPitch, finDepth, bends, shape, legs?, corner?, tubeColor}`：翅片管换热器。管沿 X，`cols` 根沿 Y 间距 `pitch`，`rows` 排沿 Z（行距 0.866 pitch，错排）；铝翅片每 `finPitch` 一片、深 `finDepth`；U 形回弯在两端（`both`）、不要（`none`）或只要回弯（`only`：给单独的"回弯"零件）。回弯规律：+X 端偶数排空出最下一根、奇数排空出最上一根（`coilBendStart`），接管从这里进出。`shape: "L"`：第 0 段沿 X 长 `legs[0]`，在 −X 端绕 Y 转 90°（转角半径 `corner`），第 1 段沿 +Z 长 `legs[1]`（室外机后面 + 左侧的 L 形冷凝器）。铜管、回弯用 `tubeColor`（默认 copper），翅片用 `color`：一个零件两种材质、两次绘制
+  - `grille {style, radius | size, count, spokes, bar}`：`rings` = XZ 平面里 `count` 圈钢丝圈（从 0.2 radius 到 radius）+ `spokes` 根辐条 + 中心圆片（室外机风扇护网）；`slats` = `size:[w,d,h]` 框里 `count` 根宽 `bar` 的格条，沿 d 方向（室内机顶部进风格栅、滤网）
+  - 所有 primitive 可选 `mirror: "x" | "y" | "z"`：在自身坐标里沿该轴镜像（先镜像、再 `rotation`），绕序自动翻转
+- **一个零件多个 primitive**（`extra: [primitive…]`，≤ 16）：`at` 同样是场景坐标；随零件一起移动、淡出、拆开、repeat（绕主 `at` 重复）和转动；引线指向主 `primitive`。每个 primitive 可以有自己的 `color` / `tint`：零件按材质分槽（`partMaterialSlots`：主材质在前，再按出现顺序），**同材质的所有块烘焙合并成一个几何体，一个材质一次绘制**（顶点超过 40 万才保留实例化）。压缩机 = 外壳 + 接线盒 + 底板，阀门 = 阀体 + 阀帽 + 接口，等等
+- **repeat**：`{count, axis, spacing}`（沿轴、以 `at` 为中心等距）或 `{count, axis, radius}`（绕过 `at` 的轴一圈，每个实例朝外转）。轴是场景坐标。重复的是整个零件（含 `extra`）；同材质的副本烘焙合并成一个几何体（一次绘制），顶点很多时才用 InstancedMesh。
 - **材质族**（`color`）：`casing`（拉丝铝，各向异性）、`steel`（机加工钢）、`powder`（缎面黑粉末涂层，轻微橘皮）、`stainless`（轴向拉丝不锈钢）、`copper`、`brass`（黄铜：阀门、喇叭口螺母）、`rubber`（近黑，roughness .78）、`plastic`（哑光暖砂色，不是默认灰）、`enamel`（暖白烤漆，比纸色深一档，低粗糙度 + 细颗粒粗糙度贴图 = 缎面光泽，家电外壳）、`glass`（半透明）；旧名 `metal` = steel、`matte` = plastic。或者 `token:<name>` / `#hex`：缎面漆。`primitive.tint`（token 或 #hex）给材质族换颜色、保留它的金属度 / 粗糙度 / 贴图，例如浅灰 `powder` 外壳：`"color": "powder", "tint": "#c4c6c2"`。程序化 canvas 贴图给拉丝方向、粗糙度变化、橘皮法线（`stages/model3d/textures.ts`，种子固定，截图可复现）。
 - **流场**：`path` 首尾点相同 = 闭环。centripetal Catmull-Rom，按弧长烘焙进 shader：每 8 mm（0.008 场景单位）一个点，64–512 个，存成一行浮点纹理（`texelFetch` 取样，不占 uniform 数组），粒子在弯头处贴着曲线走、不抄近路（4 m 的冷媒段约 500 个点，弯头偏差从 64 点时的 15–20 mm 降到 3 mm 以内；盘管仍只能画 2–3 程，不能逐根追 U 形弯头），默认每条 360 个细粒子（贴着中心线，像 CFD 流线而不是魔法粒子），`speed` 是场景单位/秒。`stops` 在顶点着色器里按粒子位置插值（线性 RGB）；分段流（冷媒四段）用 `ends: "open"`，并让各段 `count / 长度 × speed` 大致相等（粒子通量连续）。`whenRun: false` 的流/动画一直播放（只受图层开关）。每条流一次绘制。
-- **已知限制**：只有一个剖切面（`views.cutaway` 一个平面同时切所有零件；两个平面暂不做）；没有弯曲的盘管（弧形蒸发器用两三片倾斜的 `fins` 近似，L 形冷凝器用两片）；流不随拆开移动。
+- **已知限制**：只有一个剖切面（`views.cutaway` 一个平面同时切所有零件；两个平面暂不做）；`coilBank` 只做平直和 L 形（弧形蒸发器用两三段倾斜的平直盘管拼）；流不随拆开移动；`extrude` / 贯流叶片用 three 的 `ExtrudeGeometry`（`panelHole` 仍是手工三角化）。
 - **glb**：不要用 Draco/meshopt 压缩（drei 默认去 CDN 拉 Draco 解码器，Atlas 不允许运行时外部请求，所以我们关掉了）。mesh 名找不到会 console.warn，该零件不显示；glb 整体加载失败时积木零件照常显示。
 
 ### 章节怎么写（`state`）

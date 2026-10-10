@@ -18,6 +18,7 @@ import {
   CylinderGeometry,
   Euler,
   LatheGeometry,
+  Matrix3,
   Matrix4,
   PlaneGeometry,
   Quaternion,
@@ -29,18 +30,46 @@ import {
 } from 'three';
 import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
 import type { Part, Primitive } from '../../schema';
-import { BOLT_HEAD, boltHeadRadius, finOffsets, finPlateSize, flangeBore, repeatTransforms, tubeBendRadius } from '../../lib/parts';
+import {
+  BOLT_HEAD,
+  boltHeadRadius,
+  finOffsets,
+  finPlateSize,
+  flangeBore,
+  materialSlotKey,
+  partMaterialSlots,
+  partPrimitives,
+  repeatTransforms,
+  tubeBendRadius,
+} from '../../lib/parts';
 import { DEG2RAD } from '../../lib/math';
+import { shapedPieces } from './shaped';
 
 export interface ShapePiece {
   geometry: BufferGeometry;
   /** Instance transforms in the part frame; `null` = drawn once, transform baked in. */
   matrices: Matrix4[] | null;
+  /** Index into the part's material slots (`partMaterialSlots`): 0 = the main primitive's material. */
+  slot?: number;
+}
+
+/** A piece of one primitive before placement: geometry, instances, and a material other than the primitive's own. */
+export interface BasePiece {
+  geometry: BufferGeometry;
+  instances: Matrix4[];
+  /** Material ref of this piece when it differs from the primitive's `color` (a coil's copper tubes). */
+  color?: string;
 }
 
 /** Kinds whose surface is closed, so back faces only show through a cut (cut face fill). */
 export function isClosedKind(kind: Primitive['kind']): boolean {
-  return kind !== 'plane' && kind !== 'tube';
+  return !['plane', 'tube', 'blades', 'coilBank', 'grille'].includes(kind);
+}
+
+/** Closed surface of a whole primitive (a lathe is closed only when its profile starts and ends on the axis). */
+export function isClosedPrimitive(p: Primitive): boolean {
+  if (p.kind === 'lathe') return p.profile[0]![0] < 1e-9 && p.profile[p.profile.length - 1]![0] < 1e-9;
+  return isClosedKind(p.kind);
 }
 
 /* ------------------------------------------------------------------ */
@@ -271,7 +300,40 @@ export function panelHoleGeometry(p: Extract<Primitive, { kind: 'panelHole' }>):
 /* Part -> pieces                                                      */
 /* ------------------------------------------------------------------ */
 
-function basePieces(p: Primitive): { geometry: BufferGeometry; instances: Matrix4[] }[] {
+function basePieces(p: Primitive): BasePiece[] {
+  const pieces = kindPieces(p);
+  if (!p.mirror) return pieces;
+  return pieces.map((piece) => ({ ...piece, geometry: mirrorGeometry(piece.geometry, p.mirror!) }));
+}
+
+/** Reflect a geometry in the plane normal to `axis` (winding fixed so faces still face out). */
+export function mirrorGeometry(g: BufferGeometry, axis: 'x' | 'y' | 'z'): BufferGeometry {
+  const s = new Vector3(axis === 'x' ? -1 : 1, axis === 'y' ? -1 : 1, axis === 'z' ? -1 : 1);
+  const out = g.index ? g.toNonIndexed() : g;
+  if (out !== g) g.dispose();
+  out.applyMatrix4(new Matrix4().makeScale(s.x, s.y, s.z));
+  flipWinding(out);
+  return out;
+}
+
+/** Swap the 2nd and 3rd vertex of every triangle of a non-indexed geometry. */
+function flipWinding(g: BufferGeometry): void {
+  for (const name of Object.keys(g.attributes)) {
+    const a = g.getAttribute(name) as BufferAttribute;
+    const n = a.itemSize;
+    const arr = a.array as Float32Array;
+    for (let i = 0; i + 2 < a.count; i += 3) {
+      for (let k = 0; k < n; k++) {
+        const t = arr[(i + 1) * n + k]!;
+        arr[(i + 1) * n + k] = arr[(i + 2) * n + k]!;
+        arr[(i + 2) * n + k] = t;
+      }
+    }
+    a.needsUpdate = true;
+  }
+}
+
+function kindPieces(p: Primitive): BasePiece[] {
   const one = (geometry: BufferGeometry) => [{ geometry, instances: [new Matrix4()] }];
   switch (p.kind) {
     case 'box':
@@ -307,7 +369,117 @@ function basePieces(p: Primitive): { geometry: BufferGeometry; instances: Matrix
       return one(vesselGeometry(p));
     case 'panelHole':
       return one(panelHoleGeometry(p));
+    case 'lathe':
+    case 'extrude':
+    case 'curvedPanel':
+    case 'blades':
+    case 'coilBank':
+    case 'grille':
+      return shapedPieces(p);
   }
+}
+
+function eulerMatrix(rotation: readonly number[] | undefined): Matrix4 {
+  const [rx = 0, ry = 0, rz = 0] = rotation ?? [0, 0, 0];
+  return new Matrix4().makeRotationFromEuler(new Euler(rx * DEG2RAD, ry * DEG2RAD, rz * DEG2RAD, 'XYZ'));
+}
+
+function repeatMatrices(part: Pick<Part, 'repeat'>): Matrix4[] {
+  return repeatTransforms(part.repeat).map((t) => {
+    const m = t.rotation;
+    return new Matrix4().set(m[0], m[1], m[2], t.offset[0], m[3], m[4], m[5], t.offset[1], m[6], m[7], m[8], t.offset[2], 0, 0, 0, 1);
+  });
+}
+
+/** Vertices a part may bake into one merged mesh per material before it stays instanced. */
+const MERGE_BUDGET = 400_000;
+
+/**
+ * Pieces of a whole part: the main primitive and every `extra` (placed
+ * relative to the main `at`), repeated with the part. All pieces that share a
+ * material slot are baked into one merged geometry (one draw call per
+ * material); a slot that would exceed the vertex budget stays instanced.
+ */
+export function partPieces(part: Pick<Part, 'primitive' | 'repeat'> & { extra?: Part['extra'] }): ShapePiece[] {
+  const main = part.primitive;
+  if (!main) return [];
+  const slots = partMaterialSlots(part);
+  const keys = slots.map((s) => materialSlotKey(s.color, s.tint));
+  const reps = repeatMatrices(part);
+  const bySlot = new Map<number, { geometry: BufferGeometry; matrices: Matrix4[] }[]>();
+  for (const p of partPrimitives(part)) {
+    const place = new Matrix4()
+      .makeTranslation(p.at[0] - main.at[0], p.at[1] - main.at[1], p.at[2] - main.at[2])
+      .multiply(eulerMatrix(p.rotation));
+    for (const piece of basePieces(p)) {
+      const slot = keys.indexOf(materialSlotKey(piece.color ?? p.color, piece.color ? undefined : p.tint));
+      const matrices = reps.flatMap((r) => piece.instances.map((m) => r.clone().multiply(place).multiply(m)));
+      bySlot.set(slot, [...(bySlot.get(slot) ?? []), { geometry: piece.geometry, matrices }]);
+    }
+  }
+  const out: ShapePiece[] = [];
+  for (const [slot, list] of [...bySlot.entries()].sort((a, b) => a[0] - b[0])) {
+    const verts = list.reduce((n, l) => n + l.geometry.getAttribute('position').count * l.matrices.length, 0);
+    if (verts <= MERGE_BUDGET || list.some((l) => l.matrices.some((m) => m.determinant() < 0))) {
+      out.push({ geometry: mergeBaked(list), matrices: null, slot });
+      continue;
+    }
+    for (const l of list) {
+      if (l.matrices.length === 1) {
+        l.geometry.applyMatrix4(l.matrices[0]!);
+        out.push({ geometry: l.geometry, matrices: null, slot });
+      } else out.push({ geometry: l.geometry, matrices: l.matrices, slot });
+    }
+  }
+  return out;
+}
+
+/**
+ * Bake every instance of every geometry into one non-indexed geometry with
+ * position, normal and uv (missing uvs are zero; mirrored transforms get
+ * their winding fixed). Disposes the inputs.
+ */
+export function mergeBaked(list: { geometry: BufferGeometry; matrices: Matrix4[] }[]): BufferGeometry {
+  const flat = list.map((l) => {
+    const g = l.geometry.index ? l.geometry.toNonIndexed() : l.geometry;
+    if (!g.getAttribute('normal')) g.computeVertexNormals();
+    return { g, src: l.geometry, matrices: l.matrices };
+  });
+  const total = flat.reduce((n, f) => n + f.g.getAttribute('position').count * f.matrices.length, 0);
+  const pos = new Float32Array(total * 3);
+  const nor = new Float32Array(total * 3);
+  const uv = new Float32Array(total * 2);
+  const v = new Vector3();
+  const nm = new Matrix3();
+  let o = 0;
+  for (const { g, src, matrices } of flat) {
+    const P = g.getAttribute('position');
+    const N = g.getAttribute('normal');
+    const U = g.getAttribute('uv');
+    for (const m of matrices) {
+      nm.getNormalMatrix(m);
+      const flip = m.determinant() < 0;
+      for (let i = 0; i < P.count; i++) {
+        // Mirrored: write each triangle as (0, 2, 1).
+        const j = flip ? i - (i % 3) + [0, 2, 1][i % 3]! : i;
+        v.fromBufferAttribute(P, j).applyMatrix4(m);
+        pos.set([v.x, v.y, v.z], (o + i) * 3);
+        v.fromBufferAttribute(N, j).applyMatrix3(nm).normalize();
+        nor.set([v.x, v.y, v.z], (o + i) * 3);
+        if (U) uv.set([U.getX(j), U.getY(j)], (o + i) * 2);
+      }
+      o += P.count;
+    }
+    if (g !== src) g.dispose();
+    src.dispose();
+  }
+  const out = new BufferGeometry();
+  out.setAttribute('position', new BufferAttribute(pos, 3));
+  out.setAttribute('normal', new BufferAttribute(nor, 3));
+  out.setAttribute('uv', new BufferAttribute(uv, 2));
+  out.computeBoundingSphere();
+  out.computeBoundingBox();
+  return out;
 }
 
 /** Pieces of a primitive part (rotation and repeat applied; see module doc). */

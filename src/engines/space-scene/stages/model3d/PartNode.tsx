@@ -4,7 +4,8 @@
  * then fade; back the same way), animation pose, family material with
  * selection edge and cut face, and pointer picking (never for context
  * parts). A part is one or more pieces (meshes or instanced meshes) sharing
- * the part's material.
+ * one material per material slot (a coil's fins and copper tubes, a
+ * compressor's shell and terminal cover).
  */
 import { useEffect, useLayoutEffect, useMemo, useRef, type Ref } from 'react';
 import { useFrame, type ThreeEvent } from '@react-three/fiber';
@@ -54,7 +55,8 @@ export interface PartHandle {
 export interface PartNodeProps {
   part: Part;
   shape: PartShape;
-  style: PartStyle;
+  /** One style per material slot (`partMaterialSlots`); slot 0 is the part's own material. */
+  styles: readonly PartStyle[];
   display: PartDisplay;
   animations: readonly PartAnimation[];
   hovered: boolean;
@@ -124,14 +126,15 @@ function Piece({
 }
 
 export function PartNode(props: PartNodeProps) {
-  const { part, shape, display, clipping, style } = props;
+  const { part, shape, display, clipping, styles } = props;
+  const style = styles[0]!;
   const runtime = useRuntime();
   const posRef = useRef<Group>(null);
   const animRef = useRef<Group>(null);
   const pieces = useRef(new Map<ShapePiece, Object3D>());
   const motion = useRef({
-    base: display.visible ? display.opacity * style.look.opacity : 0,
-    fade: display.visible ? display.opacity * style.look.opacity : 0,
+    base: display.visible ? display.opacity : 0,
+    fade: display.visible ? display.opacity : 0,
     aside: display.hidden ? 1 : 0,
     sel: 0,
     snap: true,
@@ -139,22 +142,23 @@ export function PartNode(props: PartNodeProps) {
   });
   const press = useRef<{ timer: ReturnType<typeof setTimeout> | null; x: number; y: number }>({ timer: null, x: 0, y: 0 });
 
-  const pm = useMemo(() => createPartMaterial(), []);
+  const slotCount = styles.length;
+  const pms = useMemo(() => Array.from({ length: slotCount }, () => createPartMaterial()), [slotCount]);
   // Per-frame maths without allocation: explode vector and unit animation axes, once. Context parts stay put.
   const push = useMemo(() => (part.context ? ([0, 0, 0] as Vec3) : explodeOffset(part.explode, 1)), [part.explode, part.context]);
   const axes = useMemo(
     () => props.animations.map((a) => (a.kind === 'pulse' ? new Vector3(0, 1, 0) : new Vector3(...normalize3(a.axis)))),
     [props.animations],
   );
-  useEffect(() => () => pm.material.dispose(), [pm]);
+  useEffect(() => () => pms.forEach((pm) => pm.material.dispose()), [pms]);
 
   useEffect(() => {
-    stylePartMaterial(pm, style);
-  }, [pm, style]);
+    pms.forEach((pm, i) => stylePartMaterial(pm, styles[i] ?? style));
+  }, [pms, styles, style]);
 
   useEffect(() => {
-    setPartClipping(pm, clipping, shape.closed, shape.twoSided);
-  }, [pm, clipping, shape.closed, shape.twoSided]);
+    pms.forEach((pm) => setPartClipping(pm, clipping, shape.closed, shape.twoSided));
+  }, [pms, clipping, shape.closed, shape.twoSided]);
 
   useEffect(() => {
     motion.current.snap = true;
@@ -235,21 +239,23 @@ export function PartNode(props: PartNodeProps) {
     }
 
     // Fade (a part being put aside keeps its look until the aside fade takes it).
-    const targetBase = display.visible || display.hidden ? display.opacity * style.look.opacity : 0;
+    const targetBase = display.visible || display.hidden ? display.opacity : 0;
     m.base = snap ? targetBase : damp(m.base, targetBase, FADE_RATE, dt);
     if (Math.abs(m.base - targetBase) < 0.002) m.base = targetBase;
     const prevFade = m.fade;
     m.fade = m.base * (1 - smooth(0.45, 1, m.aside));
     const targetFade = display.hidden ? 0 : targetBase;
     const shown = m.fade > 0.004;
-    const mat = pm.material;
-    mat.opacity = m.fade;
-    const transparent = m.fade < 0.999;
-    if (mat.transparent !== transparent) {
-      mat.transparent = transparent;
-      mat.needsUpdate = true;
-    }
-    mat.depthWrite = !display.ghost && m.fade > 0.6;
+    pms.forEach((pm, i) => {
+      const mat = pm.material;
+      mat.opacity = m.fade * (styles[i] ?? style).look.opacity;
+      const transparent = mat.opacity < 0.999;
+      if (mat.transparent !== transparent) {
+        mat.transparent = transparent;
+        mat.needsUpdate = true;
+      }
+      mat.depthWrite = !display.ghost && mat.opacity > 0.6;
+    });
     const cast = props.castShadow && m.fade > 0.6;
     for (const o of pieces.current.values()) {
       o.visible = shown;
@@ -264,7 +270,7 @@ export function PartNode(props: PartNodeProps) {
     const selTarget = display.selected ? 1 : props.hovered && display.visible ? 0.45 : 0;
     m.sel = snap ? selTarget : damp(m.sel, selTarget, 12, dt);
     if (Math.abs(m.sel - selTarget) < 0.003) m.sel = selTarget;
-    pm.uniforms.uSel.value = m.sel;
+    for (const pm of pms) pm.uniforms.uSel.value = m.sel;
 
     // Animation pose.
     const anim = animRef.current;
@@ -342,7 +348,7 @@ export function PartNode(props: PartNodeProps) {
             <Piece
               key={i}
               piece={piece}
-              material={pm.material}
+              material={(pms[piece.slot ?? 0] ?? pms[0]!).material}
               castShadow={props.castShadow}
               register={register}
               handlers={handlers}
