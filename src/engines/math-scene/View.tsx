@@ -400,7 +400,7 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
         />
       </SceneSlot>
       <SceneSlot name="stageOverlay">
-        <MathOverlay glossary={(file.glossary?.terms.length ?? 0) > 0} />
+        <MathOverlay glossary={(file.glossary?.terms.length ?? 0) > 0} compact={phone} />
       </SceneSlot>
       <SceneSlot name="bottomBar">
         <StepBar

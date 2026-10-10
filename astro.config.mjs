@@ -4,6 +4,7 @@ import react from '@astrojs/react';
 import mdx from '@astrojs/mdx';
 import tailwindcss from '@tailwindcss/vite';
 import AstroPWA from '@vite-pwa/astro';
+import { rehypeFracGlue } from './src/lib/frac-glue.ts';
 
 /**
  * `ATLAS_BASE` lets the same build be served from a sub-path (e.g. GitHub Pages)
@@ -33,7 +34,7 @@ export default defineConfig({
   },
   integrations: [
     react(),
-    mdx(),
+    mdx({ rehypePlugins: [rehypeFracGlue] }),
     // Dev server: no service worker (devOptions.enabled is false by default).
     AstroPWA({
       base: pwaBase,

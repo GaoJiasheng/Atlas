@@ -449,7 +449,7 @@ function OrderSlots({ task, state, ctl, locale, locked, ghost }: { task: Task; s
           return (
             <li key={k} data-ghost={right ? formatFrac(task.items[right[k]!]!) : undefined}>
               {i !== undefined ? (
-                <button type="button" className="ms-card ms-card--placed" disabled={locked} aria-label={T('math.order.back', { name: formatFrac(task.items[i]!) })} onClick={() => ctl.act({ do: 'unorder', item: i })}>
+                <button type="button" className="ms-card ms-card--placed" data-item={i} disabled={locked} aria-label={T('math.order.back', { name: formatFrac(task.items[i]!) })} onClick={() => ctl.act({ do: 'unorder', item: i })}>
                   {renderRich(`{${formatFrac(task.items[i]!)}}`, locale)}
                 </button>
               ) : (

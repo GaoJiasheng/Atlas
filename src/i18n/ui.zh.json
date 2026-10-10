@@ -409,6 +409,7 @@
   "math.start.line": "同一个分数，四种画法：{3/4} 画成条、圆、数轴和分数墙。按 1–4 或 VIEW 切换。",
   "math.start.go": "开始第 01 步",
   "math.task.link": "在舞台上打开这道题",
+  "math.toolsAndKey": "工具和图例",
   "math.key.mine": "你涂的",
   "math.key.given": "题目给的",
   "math.key.second": "第二个量",

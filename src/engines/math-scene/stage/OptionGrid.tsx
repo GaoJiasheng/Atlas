@@ -10,6 +10,8 @@ import { t } from '../../../i18n';
 export interface OptionCell {
   id: string;
   letter: string;
+  /** What the picture shows, in words (the card's accessible name). */
+  alt: string;
   draw(box: { x: number; y: number; w: number; h: number }): ReactNode;
 }
 
@@ -65,7 +67,7 @@ export function OptionGrid(p: OptionGridProps) {
             className="ms-option"
             role={p.multi ? 'checkbox' : 'radio'}
             aria-checked={on}
-            aria-label={t(p.locale, 'math.option.picture', { letter: c.letter })}
+            aria-label={t(p.locale, 'math.option.picture', { letter: c.letter }) + `: ${c.alt}`}
             tabIndex={p.onChoose ? 0 : -1}
             data-option={c.id}
             data-on={on || undefined}

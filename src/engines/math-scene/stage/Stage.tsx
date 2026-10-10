@@ -17,7 +17,7 @@ import { commonParts, modelValue, phasesOf, type Action, type TaskState } from '
 import { sortedOrder } from '../lib/check';
 import { solvedState } from '../lib/solve';
 import { toImproper, toMixed, valueOnLine, type Frac } from '../lib/fraction';
-import { fractionWords } from '../lib/words';
+import { describePicture, fractionWords } from '../lib/words';
 import type { Rect } from './layout';
 import { BarModel, EQUIV_ROW, LINE_ROW, WHOLE_GAP } from './BarModel';
 import { CircleModel } from './CircleModel';
@@ -139,6 +139,7 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
       .map(({ o, letter }) => ({
         id: o.id,
         letter,
+        alt: o.value ? fractionWords(o.value, locale) : o.model?.kind === 'bar' ? describePicture(o.model.rows ?? [o.model], locale) : '',
         draw: (b) => (o.model ? <MiniModel defs={defs} model={o.model} box={b} locale={locale} /> : <SvgFrac cx={b.x + b.w / 2} cy={b.y + b.h / 2 - 8} n={o.value!.n} d={o.value!.d} w={o.value!.w} size={clamp(b.h / 4, 18, 40)} className="ms-option__frac" />),
       }));
     if (cells.length === 0) return null;
@@ -197,7 +198,7 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
     const w = clamp(area.w - 20, 260, 920);
     const barH = clamp(area.h / (m.bars.length * 2.4), 34, 56);
     const total = 30 + m.bars.length * (barH + 44);
-    return <BarModelDiagram defs={defs} spec={m} x={cx - w / 2} y={cy - total / 2} w={w} barH={barH} units={state.aligned} label={label} locale={locale} />;
+    return <BarModelDiagram defs={defs} spec={m} x={cx - w / 2} y={Math.max(area.y + 20, cy - total / 2)} w={w} barH={barH} units={state.aligned} label={label} locale={locale} />;
   }
 
   /* compare: two rows, as bars or on the fraction wall */

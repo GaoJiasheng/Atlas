@@ -3,7 +3,7 @@
  * and by keyboard, a compare task, a lesson task wrong → diagnosis → right, a
  * practice question wrong → diagnosis (one check) and the summary, the URL
  * (task / model, never an answer), the presentation's "your turn" beat
- * answered from the caption card, and the HUD layout at six sizes.
+ * answered from the caption card, and the HUD layout at seven sizes.
  */
 import { expect, test, type Page } from '@playwright/test';
 import { hudLayoutIssues, LAYOUT_SIZES } from './hud-layout';
@@ -52,6 +52,63 @@ test.describe('fractions (MathScene)', () => {
     await page.locator('body').click({ position: { x: 5, y: 5 } });
     await page.keyboard.press('Shift+ArrowRight');
     await expect.poll(async () => (await info(page)).id).toBe('write-one-sixth');
+  });
+
+  test('keyboard only: the cut cursor (arrows, Enter) and the number-line marker (Home, arrows)', async ({ page }) => {
+    await open(page, '/en/topics/fractions/?ch=equal-parts&task=3');
+    expect((await info(page)).id).toBe('cut-toast-thirds');
+    const cursor = page.locator('.ms-svg .ms-cut [role="slider"]');
+    await cursor.focus();
+    for (const at of [4, 8]) {
+      while (Number(await cursor.getAttribute('aria-valuenow')) !== at) await page.keyboard.press(Number(await cursor.getAttribute('aria-valuenow')) < at ? 'ArrowRight' : 'ArrowLeft');
+      await page.keyboard.press('Enter');
+    }
+    await page.keyboard.press('c');
+    await expect.poll(async () => (await info(page)).done).toBe(true);
+    await open(page, '/en/topics/fractions/?ch=number-line&task=1');
+    expect((await info(page)).id).toBe('place-one-quarter');
+    const marker = page.locator('.ms-svg .ms-line [role="slider"]');
+    await marker.focus();
+    await page.keyboard.press('Home');
+    await page.keyboard.press('ArrowRight');
+    await expect(marker).toHaveAttribute('aria-valuetext', 'one quarter');
+    await page.keyboard.press('c');
+    await expect.poll(async () => (await info(page)).done).toBe(true);
+  });
+
+  test('a picture option has a spoken description; parts that are given do not block the tab order', async ({ page }) => {
+    await open(page, '/en/topics/fractions/?ch=equal-parts&task=1');
+    const names = await page.locator('.ms-svg .ms-option').evaluateAll((els) => els.map((e) => e.getAttribute('aria-label')));
+    expect(names[0]).toBe('Picture A: a kueh cut into 4 equal parts');
+    expect(names[1]).toContain('corner to corner');
+    expect(names[2]).toContain('parts of different sizes');
+    await open(page, '/en/topics/fractions/?ch=adding-like-fractions&task=1');
+    // Parts 0 and 1 are given (2/7, locked): the one tab stop is the next free part, and Enter shades it.
+    await expect(page.locator('.ms-svg [data-part="1"]')).toHaveAttribute('aria-disabled', 'true');
+    await expect(page.locator('.ms-svg [data-part][tabindex="0"]')).toHaveCount(1);
+    await page.locator('.ms-svg [data-part][tabindex="0"]').focus();
+    await page.keyboard.press('Enter');
+    await expect(page.locator('.ms-svg [data-part="2"]')).toHaveAttribute('aria-pressed', 'true');
+  });
+
+  test('phone 390x844: the model keeps room above the tray, the panel is behind one button, keys are finger-sized', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await open(page, '/en/topics/fractions/?ch=adding-related&task=3');
+    await expect(page.locator('.ms-overlay__toggle')).toBeVisible();
+    await expect(page.locator('.ms-overlay')).toHaveCount(0);
+    await page.locator('.ms-overlay__toggle').click();
+    await expect(page.locator('.ms-overlay')).toBeVisible();
+    await page.locator('.ms-overlay__toggle').click();
+    const box = async (sel: string) => (await page.locator(sel).first().boundingBox())!;
+    const diagram = await box('.ms-svg .ms-diagram');
+    const trayBox = await box('[data-hud-panel="task"]');
+    expect(diagram.height).toBeGreaterThan(60);
+    expect(diagram.y + diagram.height).toBeLessThanOrEqual(trayBox.y + 1);
+    for (const key of await page.locator('.ms-keypad .ms-key').all()) {
+      const b = (await key.boundingBox())!;
+      expect(Math.min(b.width, b.height)).toBeGreaterThanOrEqual(43.5);
+    }
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
   });
 
   test('compare: make same-size parts, choose a sign', async ({ page }) => {
@@ -154,8 +211,36 @@ test.describe('fractions (MathScene)', () => {
     await expect.poll(async () => (await page.evaluate(() => window.__atlas!.state())).hud).toBe(true);
   });
 
+  test('presentation auto-play never passes a "your turn" beat until Check passes or Show me is used', async ({ page }) => {
+    test.setTimeout(120_000);
+    await open(page, '/en/topics/fractions/?ch=non-unit-fractions');
+    const beat = async () => (await page.evaluate(() => window.__atlas!.state())).presentation?.beat;
+    const first = (await page.evaluate(() => window.__atlas!.beats())).findIndex((b) => b.chapter === 'non-unit-fractions');
+    // The last example line, then auto-play: it moves on to the first "your turn" beat (index 2 in the chapter) and waits there.
+    await page.evaluate((i) => window.__atlas!.goToBeat(i, { instant: true }), first + 1);
+    await expect.poll(beat).toBe(1);
+    await page.evaluate(() => window.__atlas!.setAutoplay(true));
+    await expect.poll(beat, { timeout: 30_000 }).toBe(2);
+    await page.waitForTimeout(9_000);
+    expect(await beat()).toBe(2);
+    expect((await info(page)).done).toBe(false);
+    // Answering and checking opens the gate; auto-play then moves on to the next sub-step.
+    await page.evaluate(() => (window.__atlas!.engine as unknown as { solve(): boolean }).solve());
+    await page.locator('.atlas-present__actions [data-command="check"]').click();
+    await expect.poll(async () => (await info(page)).done).toBe(true);
+    await expect.poll(beat, { timeout: 40_000 }).toBe(3);
+    // A second "your turn": two wrong checks, then Show me, also opens the gate.
+    await page.evaluate(() => (window.__atlas!.engine as unknown as { answer(c: string): boolean }).answer('part-part'));
+    await page.locator('.atlas-present__actions [data-command="check"]').click();
+    await page.locator('.atlas-present__actions [data-command="check"]').click();
+    await page.waitForTimeout(9_000);
+    expect(await beat()).toBe(3);
+    await page.locator('.atlas-present__actions [data-show-me]').click();
+    await expect.poll(beat, { timeout: 40_000 }).toBe(4);
+  });
+
   for (const locale of ['en', 'zh'] as const) {
-    test(`HUD layout (${locale}): no overlap or overflow at 6 sizes`, async ({ page }) => {
+    test(`HUD layout (${locale}): no overlap or overflow at 7 sizes`, async ({ page }) => {
       test.setTimeout(180_000);
       await open(page, `/${locale}/topics/fractions/`);
       const problems: string[] = [];

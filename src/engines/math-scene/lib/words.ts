@@ -86,3 +86,38 @@ export function fractionWords(f: Frac | FracSlots, locale: 'en' | 'zh'): string 
   if (w) return part.n === 0 ? numberEn(w) : `${numberEn(w)} and ${fracEn(part)}`;
   return fracEn(part);
 }
+
+/** The part of a picture option a screen reader needs: a bar's cut and shading, the length of a shorter whole. */
+export interface BarPicture {
+  parts: number | null;
+  cuts?: number[];
+  diagonal?: boolean;
+  shaded?: number | number[];
+  given?: number | number[];
+  length?: number;
+  object?: string;
+  wholes?: number;
+}
+
+const count = (v: number | number[] | undefined): number => (v === undefined ? 0 : Array.isArray(v) ? v.length : 1);
+
+/** One picture option in words (docs/15 §4.7): "a kueh cut into 4 equal parts", "a bar cut into 3 parts of different sizes, 1 shaded". */
+export function describePicture(rows: BarPicture[], locale: 'en' | 'zh'): string {
+  const one = (r: BarPicture): string => {
+    const unequal = r.cuts && r.cuts.length > 0;
+    const n = unequal ? r.cuts!.length + 1 : (r.parts ?? 1);
+    const shaded = count(r.shaded) + count(r.given);
+    const kueh = r.object === 'kueh';
+    const short = r.length !== undefined && r.length < 1;
+    if (locale === 'zh') {
+      const what = r.diagonal ? '沿对角线切开的方形千层糕' : kueh ? '千层糕' : short ? '较短的一条' : '一条';
+      const cut = r.diagonal ? '，分成相等的 2 份' : unequal ? `，切成 ${n} 份，大小不同` : `，平均分成 ${n} 份`;
+      return `${what}${cut}${shaded ? `，涂了 ${shaded} 份` : ''}`;
+    }
+    const what = r.diagonal ? 'a square kueh cut corner to corner' : kueh ? 'a kueh' : short ? 'a shorter bar' : 'a bar';
+    const cut = r.diagonal ? ' into 2 equal parts' : unequal ? ` into ${n} parts of different sizes` : ` into ${n} equal parts`;
+    return `${what}${r.diagonal ? '' : ' cut'}${cut}${shaded ? `, ${shaded} shaded` : ''}`;
+  };
+  if (rows.length === 1) return one(rows[0]!);
+  return rows.map((r, i) => (locale === 'zh' ? `第 ${i + 1} 行：${one(r)}` : `Row ${i + 1}: ${one(r)}`)).join('; ');
+}

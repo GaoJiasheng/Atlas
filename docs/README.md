@@ -4,7 +4,7 @@
 |---|---|
 | [01-vision.md](01-vision.md) | 定位、两种形态、设计原则 |
 | [02-architecture.md](02-architecture.md) | 技术栈、目录、内容模型、i18n、主题、URL 状态、iPad 准备 |
-| [03-engines.md](03-engines.md) | TimeScene / SpaceScene / Simulation 规格与数据 schema |
+| [03-engines.md](03-engines.md) | TimeScene / SpaceScene / MathScene / Simulation 规格与数据 schema |
 | [04-content-roadmap.md](04-content-roadmap.md) | 主题池按年级排期、二战 10 章大纲、空调 5 章大纲 |
 | [05-briefing-playbook.md](05-briefing-playbook.md) | 交给施工方的 brief 模板 |
 | [06-dev-guide.md](06-dev-guide.md) | 开发指南：运行、目录、加主题、Scene 契约（给引擎实现者） |
@@ -16,3 +16,4 @@
 | [12-aircon-content-spec.md](12-aircon-content-spec.md) | 空调主题（SpaceScene）内容 spec、引擎缺口、施工记录、已知差距与写实轮次（参考图、新原语、并排对照） |
 | [13-space-topic-template.md](13-space-topic-template.md) | 拆解主题模板（SpaceScene · 对象解剖，机器与生物）：skill `atlas-space-topic`、脚手架 `scripts/new-topic.ts --engine space-scene` |
 | [14-grasshopper-content-spec.md](14-grasshopper-content-spec.md) | 蝗虫解剖主题（已发布）spec 与实现记录：生物解剖模板样板（系统分层、剖切、跳跃姿态、流、生活史托盘）、引擎缺口 B1–B16、施工记录、已知差距 |
+| [15-fractions-content-spec.md](15-fractions-content-spec.md) | 分数主题（已发布）与第三个引擎 MathScene：课纲对照、12 步 + 练习的逐步设计、引擎设计、写作规则、决定记录、实现记录与已知差距 |
