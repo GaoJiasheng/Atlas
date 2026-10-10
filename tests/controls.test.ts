@@ -191,3 +191,40 @@ describe('active preset tracking', () => {
     expect(active()).toBe('one');
   });
 });
+
+describe('engine-lit presets and commands (MathScene, core C2 / C3)', () => {
+  const base: SceneControls = {
+    presets: { items: [{ id: 'bar', label: 'BAR' }, { id: 'circle', label: 'CIRCLE' }], set: () => {}, current: 'circle', status: 'MODEL CIRCLE' },
+  };
+
+  it('the engine decides the lit preset, even after a camera move', () => {
+    expect(activePreset({ controls: base, presetId: 'bar', cameraFree: true }, null)).toBe('circle');
+    expect(activePreset({ controls: { ...base, presets: { ...base.presets!, current: null } }, presetId: 'bar', cameraFree: false }, null)).toBeNull();
+  });
+
+  it('lists commands in the keymap after the modes, skipping reserved and taken keys', () => {
+    const run = vi.fn();
+    const controls: SceneControls = {
+      ...base,
+      modes: { items: [{ id: 'symbol', key: 's', label: 'S', on: false }], set: () => {} },
+      commands: [
+        { id: 'check', key: 'c', label: 'Check', run },
+        { id: 'clash', key: 's', label: 'Clash', run },
+        { id: 'space', key: ' ', label: 'Space', run },
+      ],
+    };
+    const keys = buildKeymap(controls);
+    expect(keys.filter((k) => k.type === 'command')).toEqual([{ key: 'c', type: 'command', name: 'check' }]);
+  });
+
+  it('runCommand runs an enabled command and refuses a disabled or unknown one', () => {
+    const hud = createHudStore();
+    const run = vi.fn();
+    registerSceneControls(hud, { commands: [{ id: 'check', key: 'c', label: 'Check', run }, { id: 'hint', key: 'i', label: 'Hint', disabled: true, run }] });
+    const actions = createHudActions(hud, noSuppress);
+    expect(actions.runCommand('check')).toBe(true);
+    expect(actions.runCommand('hint')).toBe(false);
+    expect(actions.runCommand('nope')).toBe(false);
+    expect(run).toHaveBeenCalledTimes(1);
+  });
+});

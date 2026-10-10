@@ -171,7 +171,20 @@ interface SceneState {         // 可序列化，和 URL 双向绑定
 
 ## C. Simulation（参数模拟，二期）
 
-`{ params: Slider[], model: (params) => state, view: Chart | Diagram }`。光与影（光源高度 vs 影长）、热胀冷缩、电路电流、杠杆平衡、数学里的分数/比例可视化。先留目录和 schema 占位，不实现。
+`{ params: Slider[], model: (params) => state, view: Chart | Diagram }`。光与影（光源高度 vs 影长）、热胀冷缩、电路电流、杠杆平衡。先留目录和 schema 占位，不实现。数学课（分数、比例）不走这里，走 §D MathScene（docs/15 D9）；Simulation 保留给科学类参数模拟。
+
+## D. MathScene（交互式分步课 + 练习）
+
+`engine: math-scene`、`stage: svg`、`mode: lesson`。第一个实例：分数（docs/15）。一章 = 一个课步，课步由 2–4 个小步（task）组成，最后一章是练习，开头可有背景章。
+
+- **舞台**：SVG（无 WebGL），技术图版的正投影线稿：条（纸条、吐司、千层糕、巧克力…）、圆（prata、蛋糕）、数轴（标尺语法）、分数墙、模型图（部分–整体 / 比较）。孩子的标记 = signal，题目给的 = cold，第二个量 = hot，拿走的 = 墨色斜线，看答案 = 墨色虚线。每个交互都能只用点按、只用键盘完成，拖动只是快捷方式；可点目标 ≥ 44 px。
+- **小步种类**（`task.kind`）：`shade` `cut` `fold` `split` `merge` `place` `compare` `order` `choose` `input` `build-sum`；多段小步（涂了再写、先化成同样大的份再涂再写）逐段检查。
+- **作答托盘**（舞台底部，HUD 网格给它留一条带）：题目一句、作答控件（分数框 + 屏上数字键、< = >、选项、排序槽、×k / ÷k 芯片、对折）、反馈一句、看答案、下一题。
+- **检查**是纯函数（`lib/check.ts`）：对错 + 误解代码（docs/15 §2.2 的 15 个）；只诊断小步声明过的误解，其余给通用反馈。`lib/solve.ts` 给出正确解法的动作序列（看答案、演示的例子、测试共用）。
+- **VIEW 组** = 模型切换（条 / 圆 / 数轴 / 墙），由引擎决定亮哪个（core `presets.current`）；**模式** S 符号、E 等值、N 数轴、L 标注、P 演示；**命令** C 检查、I 提示、U 撤销、W 看例子（core `commands`）。
+- **演示**：拍由数据推出（例子每句一拍 + 每个小步一个"你来做"拍）；你来做拍的作答控件和 Check / Hint / 看答案在字幕卡里，自动播放等孩子做对（或看了答案）才计时（core `cardActions` / `gate`）。
+- **状态**：URL 只有 `ch`、`task`、`model`；作答、进度、练习结果只在内存，刷新即清，不进 URL、不进 storage。
+- 数据 schema、HUD、`__atlas.engine`、校验规则见 docs/06「MathScene」与 docs/15 §4。
 
 ---
 

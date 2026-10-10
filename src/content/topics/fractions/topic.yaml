@@ -1,0 +1,14 @@
+# Fractions (MathScene lesson). Spec: docs/15-fractions-content-spec.md.
+id: fractions
+title: { en: Fractions, zh: 分数 }
+subtitle: { en: "Equal parts, equivalent fractions and adding related fractions", zh: "平均分、等值分数与相关分数的加减" }
+subject: math
+levels: [P2, P3, P4]
+moe: ["MOE 2021 P2 Fractions 1–2", "MOE 2021 P3 Fractions 1–2", "MOE 2021 P4 Fractions 1 (bridge)"]
+mode: lesson
+engine: math-scene
+stage: svg
+theme: paper
+sensitivity: open
+note: { en: "Interactive lesson · aligned to the MOE 2021 syllabus", zh: "交互课 · 对照 MOE 2021 课纲" }
+status: draft

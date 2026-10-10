@@ -8,6 +8,7 @@ import { bilingual, isoDate, timePoint } from '../src/content/schema/common';
 import { EVENT_KINDS, controlFile, entitySchema, presetsFile, timeChapterRefs, timeChapterState, timeSceneGeoData } from '../src/engines/time-scene/schema';
 import { sourcesFile } from '../src/content/schema/sources';
 import { spaceChapterState, spaceSceneData } from '../src/engines/space-scene/schema';
+import { mathChapterState, mathSceneData, frac } from '../src/engines/math-scene/schema';
 
 const TOPICS = join(import.meta.dirname, '../src/content/topics');
 
@@ -333,5 +334,35 @@ describe('subject taxonomy', () => {
     expect(topicSchema.safeParse({ ...base, blocLabels: { axis: 'Central Powers' } }).success).toBe(false);
     expect(topicSchema.safeParse({ ...base, blocLabels: { rebels: { en: 'Rebels', zh: '叛军' } } }).success).toBe(false);
     expect(topicSchema.safeParse({ ...base, blocLabels: { axis: { zh: '同盟国' } } }).success).toBe(false);
+  });
+});
+
+describe('fractions topic (MathScene)', () => {
+  it('topic.yaml parses as a lesson on the svg stage', () => {
+    const topic = topicSchema.parse(parseYaml(readFileSync(join(TOPICS, 'fractions/topic.yaml'), 'utf8')));
+    expect(topic.engine).toBe('math-scene');
+    expect(topic.stage).toBe('svg');
+    expect(topic.mode).toBe('lesson');
+  });
+
+  it('engine data and chapter states parse', () => {
+    const data = mathSceneData.parse(loadData('fractions'));
+    expect(data.lesson.steps).toHaveLength(12);
+    expect(data.glossary?.terms).toHaveLength(12);
+    for (const c of loadChapters('fractions')) expect(mathChapterState.safeParse((c as { state?: unknown }).state ?? {}).success).toBe(true);
+  });
+
+  it('parses fraction strings and rejects malformed ones', () => {
+    expect(frac.parse('3/4')).toEqual({ n: 3, d: 4 });
+    expect(frac.parse('1 3/4')).toEqual({ w: 1, n: 3, d: 4 });
+    expect(frac.parse('2')).toEqual({ n: 2, d: 1 });
+    for (const bad of ['3/0', 'three', '1 2', '']) expect(frac.safeParse(bad).success).toBe(false);
+  });
+
+  it('rejects an engine / stage mismatch and an unknown mode', () => {
+    const base = { id: 'x', title: { en: 'X' }, subtitle: { en: 'X' }, subject: 'math', engine: 'math-scene' };
+    expect(topicSchema.safeParse({ ...base, mode: 'lesson', stage: 'geo' }).success).toBe(false);
+    expect(topicSchema.safeParse({ ...base, mode: 'quiz', stage: 'svg' }).success).toBe(false);
+    expect(topicSchema.safeParse({ ...base, mode: 'lesson', stage: 'svg' }).success).toBe(true);
   });
 });

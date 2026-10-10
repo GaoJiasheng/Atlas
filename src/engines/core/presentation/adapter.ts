@@ -34,6 +34,20 @@ export interface PresentationAdapter<B extends BeatBase = BeatBase, S = unknown>
   onEnter?(): void;
   /** The caption card's header segment after the chapter title (TimeScene: the playhead's date); omitted = none. */
   readout?: ReactNode;
+  /**
+   * Controls in the caption card under the caption, for the beat on show
+   * (MathScene: the answer controls with Check / Hint / Show me, since the HUD
+   * is hidden). Clicks inside never turn the page; omitted = none.
+   */
+  cardActions?: ReactNode;
+  /** The caption as displayed (e.g. typeset fractions); `captionOf` stays the plain text that is spoken. Omitted = `captionOf`. */
+  renderCaption?(beat: Beat<B>, locale: Locale): ReactNode;
+  /**
+   * A beat the reader has to act on (MathScene's "your turn"): auto-play
+   * starts counting only once this resolves, and input before then does not
+   * hold it. `null` / omitted = no wait.
+   */
+  gate?(beat: Beat<B>): Promise<void> | null;
 }
 
 /**

@@ -25,6 +25,8 @@ import {
   type SpaceSceneData,
 } from './space-scene/schema';
 import { simulationChapterState, simulationData } from './simulation/schema';
+import { mathChapterState, mathSceneData, mathSceneIds, type MathSceneData } from './math-scene/schema';
+import { lessonIssues, lessonTaskIds, type ChapterInfo, type LessonIssue } from './math-scene/validate';
 
 export interface EngineSchemaSet {
   /** Schema for the object `{ [fileBaseName]: json }` built from `data/*.json`. */
@@ -41,6 +43,10 @@ export interface EngineSchemaSet {
   chapterIssues?(state: unknown, data: unknown): string[];
   /** Camera preset ids a chapter body may name in `<FlyTo preset>` (engines without presets: none). */
   presetIds(data: unknown): string[];
+  /** Sub-step ids a chapter body may name in `<Task id>` (MathScene); omitted = the engine has none. */
+  taskIds?(data: unknown): string[];
+  /** Rules over the whole topic: data against every chapter (MathScene: chapters ↔ steps, docs/15 §4.10); optional. */
+  topicIssues?(chapters: readonly ChapterInfo[], data: unknown): LessonIssue[];
 }
 
 export function engineSchemas(engine: EngineId, stage: string): EngineSchemaSet {
@@ -73,6 +79,17 @@ export function engineSchemas(engine: EngineId, stage: string): EngineSchemaSet 
         chapterRefs: () => [],
         chapterIssues: (s, d) => spaceChapterIssues(s as SpaceChapterState, d as SpaceSceneData),
         presetIds: (d) => spacePresetIds(d as SpaceSceneData),
+      };
+    case 'math-scene':
+      return {
+        data: mathSceneData,
+        chapterState: mathChapterState,
+        requiredFiles: ['lesson'],
+        ids: (d) => mathSceneIds(d as MathSceneData),
+        chapterRefs: () => [],
+        presetIds: () => [],
+        taskIds: (d) => lessonTaskIds(d as MathSceneData),
+        topicIssues: (chapters, d) => lessonIssues(d as MathSceneData, chapters),
       };
     case 'simulation':
       return {

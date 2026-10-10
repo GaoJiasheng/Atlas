@@ -2822,3 +2822,52 @@
     animation: none;
   }
 }
+
+/* ------------------------------------------------------------------ */
+/* Stacked fractions in text (`{3/4}` tokens, <Frac>; src/lib/rich-text.ts) */
+/* ------------------------------------------------------------------ */
+
+.atlas-frac {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.12em;
+  margin: 0 0.06em;
+  vertical-align: middle;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.atlas-frac__w {
+  font-size: 1.05em;
+}
+.atlas-frac__f {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+  font-size: 0.72em;
+  text-align: center;
+}
+.atlas-frac__n {
+  padding: 0 0.15em 0.08em;
+  border-bottom: 1px solid currentColor;
+}
+.atlas-frac__d {
+  padding: 0.08em 0.15em 0;
+}
+.atlas-frac__blank {
+  min-width: 1em;
+  color: var(--signal);
+}
+
+/* Presentation caption card: the engine's controls for the beat (MathScene: the answer tray). */
+.atlas-present__actions {
+  margin-top: calc(10 * var(--u));
+  padding-top: calc(10 * var(--u));
+  border-top: 1px solid var(--hair);
+  font-family: var(--font-hud);
+  text-align: left;
+}
+
+/* <Task id>: opens a lesson sub-step on the stage (same skin as <FlyTo>). */
+.atlas-task-link .atlas-flyto__icon {
+  stroke: var(--signal);
+}

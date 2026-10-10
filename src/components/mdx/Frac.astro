@@ -1,0 +1,23 @@
+---
+/**
+ * `<Frac n={3} d={4} />`, `<Frac w={1} n={3} d={4} />`: a stacked fraction in a
+ * chapter body, static HTML with the same markup as `{3/4}` in data text
+ * (src/lib/rich-text.ts); screen readers hear the words ("three quarters" /
+ * 「四分之三」). `pnpm validate` checks n and d are whole numbers, d ≥ 1.
+ */
+import { fractionWords } from '../../engines/math-scene/lib/words';
+import { pageLocale } from './locale';
+
+interface Props {
+  n: number | string;
+  d: number | string;
+  w?: number | string;
+}
+const { n, d, w } = Astro.props;
+const locale = pageLocale(Astro.url, Astro.currentLocale);
+const num = Number(n);
+const den = Number(d);
+const whole = w === undefined ? undefined : Number(w);
+const label = fractionWords(whole ? { w: whole, n: num, d: den } : { n: num, d: den }, locale);
+---
+<span class="atlas-frac" role="img" aria-label={label}>{whole ? <span class="atlas-frac__w" aria-hidden="true">{whole}</span> : null}<span class="atlas-frac__f" aria-hidden="true"><span class="atlas-frac__n">{num}</span><span class="atlas-frac__d">{den}</span></span></span>

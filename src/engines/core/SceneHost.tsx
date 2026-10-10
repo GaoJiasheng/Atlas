@@ -227,8 +227,8 @@ export default function SceneHost(props: SceneHostProps) {
   useEffect(() => {
     if (!dataReady) return;
     const decoded = decodeSceneState(window.location.search);
-    const { t: time, highlight, part, view, explode, run, cutaway, pose, ...common } = decoded;
-    const engineFields: UrlEngineFields = { t: time, highlight, part, view, explode, run, cutaway, pose };
+    const { t: time, highlight, part, view, explode, run, cutaway, pose, task, model, ...common } = decoded;
+    const engineFields: UrlEngineFields = { t: time, highlight, part, view, explode, run, cutaway, pose, task, model };
     const patch = { ...common, ...engine.fromUrl(engineFields) };
     if (Object.keys(patch).length > 0) store.getState().hydrate(patch);
     return startUrlSync({
@@ -360,6 +360,13 @@ export default function SceneHost(props: SceneHostProps) {
         actions.setGlossary(term.dataset.term ?? null);
         return;
       }
+      // `<Task id>` (lesson bodies): open that sub-step; on phones fold the sheet so the stage shows.
+      const task = e.target instanceof Element ? e.target.closest<HTMLElement>('[data-task]') : null;
+      if (task && el.contains(task)) {
+        e.preventDefault();
+        if (hud.getState().controls.goToTask?.(task.dataset.task ?? '')) setSheetOpen(false);
+        return;
+      }
       const button = e.target instanceof Element ? e.target.closest<HTMLElement>('[data-flyto]') : null;
       if (!button || !el.contains(button)) return;
       e.preventDefault();
@@ -380,7 +387,7 @@ export default function SceneHost(props: SceneHostProps) {
       el.removeEventListener('click', onClick);
       el.removeEventListener('keydown', onKeyDown);
     };
-  }, [actions]);
+  }, [actions, hud]);
   // Opening a term shows the reader (docked column, or the phone sheet) so the card is visible.
   useEffect(
     () =>

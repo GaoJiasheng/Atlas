@@ -1,0 +1,104 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": { "en": "Ministry of Education Singapore, Curriculum Planning and Development Division. Mathematics Syllabus Primary One to Six (implementation starting with the 2021 Primary One cohort; updated October 2025). Fractions: P2 p. 33, P3 p. 35, P4 p. 37, P5 p. 41.", "zh": "新加坡教育部课程规划与发展司：《小学一至六年级数学课程纲要》（自 2021 年小一新生起实施；2025 年 10 月更新版）。分数：小二第 33 页、小三第 35 页、小四第 37 页、小五第 41 页。" },
+      "url": "https://www.moe.gov.sg/api/media/92bff26d-b2b4-4535-b868-b8415c744b91/2021-Primary-Mathematics-Syllabus-P1-to-P6-Updated-October-2025.pdf",
+      "note": { "en": "The only source for what each step covers. The syllabus lines in the lesson are quoted from it. Link checked 2026-10-10.", "zh": "每一步学什么，只以这份课纲为准；课里的课纲条目照原文引用。链接于 2026-10-10 核对。" }
+    },
+    {
+      "id": "S2",
+      "text": { "en": "Ministry of Education Singapore: primary syllabuses page, and the approved textbook list.", "zh": "新加坡教育部：小学课程纲要页面，以及批准教材目录。" },
+      "url": "https://www.moe.gov.sg/primary/curriculum/syllabus",
+      "note": { "en": "Version check of S1 and the textbook series in use (https://www.moe.gov.sg/education-in-sg/approved-textbook-list). Links checked 2026-10-10.", "zh": "用于核对 S1 的版本和在用的教材系列（批准教材目录：https://www.moe.gov.sg/education-in-sg/approved-textbook-list）。链接于 2026-10-10 核对。" }
+    },
+    {
+      "id": "S3",
+      "text": { "en": "TIMSS 2015 Encyclopedia. Singapore: The Mathematics Curriculum in Primary and Lower Secondary Grades. TIMSS & PIRLS International Study Center, Boston College.", "zh": "《TIMSS 2015 百科》新加坡条目：小学与初中的数学课程。波士顿学院 TIMSS & PIRLS 国际研究中心。" },
+      "url": "https://timssandpirls.bc.edu/timss2015/encyclopedia/countries/singapore/the-mathematics-curriculum-in-primary-and-lower-secondary-grades/",
+      "note": { "en": "Describes the concrete–pictorial–abstract approach as central to Singapore primary mathematics. The page refuses automated requests; check it in a browser.", "zh": "说明「具体—图像—抽象」是新加坡小学数学的中心教学法。该页面拒绝自动访问，需在浏览器里核对。" }
+    },
+    {
+      "id": "S4",
+      "text": { "en": "Ng, S. F. & Lee, K. (2009). The model method: Singapore children's tool for representing and solving algebraic word problems. Journal for Research in Mathematics Education 40(3), 282–313.", "zh": "Ng, S. F. 与 Lee, K.（2009）：模型法——新加坡儿童表示和解决代数文字题的工具。《数学教育研究杂志》第 40 卷第 3 期，282–313 页。" },
+      "url": "https://doi.org/10.5951/jresematheduc.40.3.0282",
+      "note": { "en": "The bar model: part–whole and comparison models (steps 10 and 11). MOE (2009) The Singapore Model Method for Learning Mathematics is the companion book; not yet checked against a library copy.", "zh": "模型图：部分—整体模型和比较模型（第 10、11 步）。配套读物是教育部 2009 年出版的《新加坡数学模型法》，尚未借阅原书核对。" }
+    },
+    {
+      "id": "S5",
+      "text": { "en": "Siegler, R. et al. (2010). Developing Effective Fractions Instruction for Kindergarten Through 8th Grade (NCEE 2010-4039). Institute of Education Sciences, What Works Clearinghouse.", "zh": "Siegler, R. 等（2010）：《幼儿园至八年级的有效分数教学》（NCEE 2010-4039）。美国教育科学研究院「有效教学资料库」。" },
+      "url": "https://ies.ed.gov/ncee/wwc/PracticeGuide/15",
+      "note": { "en": "The number line as a central picture of fractions; fractions are numbers; explain why the procedures work. Basis for using the number line throughout (it is a representation, not a separate syllabus line).", "zh": "把数轴当作分数的中心表示；分数是数；要讲清算法为什么成立。全课贯穿使用数轴的依据（数轴是表示法，不是单独的课纲条目）。" }
+    },
+    {
+      "id": "S6",
+      "text": { "en": "Ni, Y. & Zhou, Y.-D. (2005). Teaching and learning fraction and rational numbers: the origins and implications of whole number bias. Educational Psychologist 40(1), 27–52.", "zh": "Ni, Y. 与 Zhou, Y.-D.（2005）：分数与有理数的教与学——整数偏差的来源与启示。《教育心理学家》第 40 卷第 1 期，27–52 页。" },
+      "url": "https://doi.org/10.1207/s15326985ep4001_3",
+      "note": { "en": "Whole-number bias: a bigger denominator read as a bigger fraction; adding tops and bottoms. The distractors in steps 05, 06, 09, 10 and practice Q3, Q6, Q7 follow it.", "zh": "整数偏差：以为分母大分数就大；把分子、分母分别相加。第 05、06、09、10 步和练习第 3、6、7 题的干扰项依据它设计。" }
+    },
+    {
+      "id": "S7",
+      "text": { "en": "Centre for Neuroscience in Education, University of Cambridge: What makes learning fractions so hard? (Part 2).", "zh": "剑桥大学教育神经科学中心：分数为什么难学？（第二部分）" },
+      "url": "https://www.cne.psychol.cam.ac.uk/what-makes-learning-fractions-so-hard-part-2",
+      "note": { "en": "Unit-fraction comparison errors and comparing parts of different wholes (step 05, practice Q8). Link checked 2026-10-10.", "zh": "单位分数比较的错误，以及拿不同整体的部分来比（第 05 步、练习第 8 题）。链接于 2026-10-10 核对。" }
+    },
+    {
+      "id": "S8",
+      "text": { "en": "OISE Robertson Program, University of Toronto (2022): Whole number bias and 3 misconceptions about fractions in junior math.", "zh": "多伦多大学安大略教育研究院 Robertson 项目（2022）：整数偏差与小学分数的三个误解。" },
+      "url": "https://www.oise.utoronto.ca/robertson/blog/whole-number-bias-and-3-misconceptions-about-fractions-junior-math-2022-05-26",
+      "note": { "en": "Teacher-facing descriptions of the misconceptions. Link checked 2026-10-10.", "zh": "面向教师的误解说明。链接于 2026-10-10 核对。" }
+    },
+    {
+      "id": "S9",
+      "text": { "en": "Australian Association of Mathematics Teachers, Top Drawer Teachers: Fractions, Misunderstandings, Number of parts only: teaching equal parts.", "zh": "澳大利亚数学教师协会 Top Drawer：分数·误解·只数份数——教「平均分」。" },
+      "url": "https://makeitcount.aamt.edu.au/Topdrawer/Fractions/Misunderstandings/Number-of-parts-only/Teaching-equal-parts",
+      "note": { "en": "Unequal parts called thirds; children should do the cutting themselves (step 01). Link checked 2026-10-10.", "zh": "把不相等的三份叫作三分之一；要让孩子自己动手切（第 01 步）。链接于 2026-10-10 核对。" }
+    },
+    {
+      "id": "S10",
+      "text": { "en": "NCETM: Curriculum prioritisation, Year 3 Unit 9, non-unit fractions; and Primary Assessment PSKA question 6 (fractions).", "zh": "英国国家数学教学卓越中心（NCETM）：课程重点三年级第 9 单元「非单位分数」，以及 PSKA 评估第 6 题（分数）。" },
+      "url": "https://ncetm.org.uk/classroom-resources/cp-year-3-unit-9-non-unit-fractions/",
+      "note": { "en": "Equal parts need not be the same shape; non-unit fractions as several unit fractions (steps 01 and 03). PSKA question: https://www.ncetm.org.uk/media/wzomk3ni/pska-frac-q6.pdf. Links checked 2026-10-10.", "zh": "平均分的各份不一定形状相同；非单位分数是几个单位分数（第 01、03 步）。PSKA 题目：https://www.ncetm.org.uk/media/wzomk3ni/pska-frac-q6.pdf。链接于 2026-10-10 核对。" }
+    },
+    {
+      "id": "S11",
+      "text": { "en": "Oak National Academy: Identify non-unit fractions (Key Stage 2 lesson).", "zh": "英国 Oak 国家学院：认识非单位分数（第二学段课）。" },
+      "url": "https://thenational.academy/teachers/programmes/maths-primary-ks2/units/non-unit-fractions/lessons/identify-non-unit-fractions",
+      "note": { "en": "The part–part error and counting the denominator first (steps 02 and 03). The page answered on 2026-10-10; it may move, so keep an archived copy.", "zh": "部分比部分的错误，以及先数分母（第 02、03 步）。该页面 2026-10-10 仍可访问，可能下线，需留存档。" }
+    },
+    {
+      "id": "S12",
+      "text": { "en": "ExploreLearning Frax: Fractions number line challenges.", "zh": "ExploreLearning Frax：分数数轴的难点。" },
+      "url": "https://frax.explorelearning.com/resources/insights/fractions-number-line-challenges",
+      "note": { "en": "Counting marks instead of jumps on a number line (step 04, practice Q5). A commercial page, given low weight; replace it with a peer-reviewed source when one is found. The page refuses automated requests.", "zh": "在数轴上数刻度线而不是数段（第 04 步、练习第 5 题）。商业网页，权重低，找到同行评议的来源后替换。该页面拒绝自动访问。" }
+    },
+    {
+      "id": "S13",
+      "text": { "en": "Pearn, C. & Stephens, M. (2004). Why you have to probe to discover what Year 8 students really think about fractions. Proceedings of the 27th annual conference of MERGA.", "zh": "Pearn, C. 与 Stephens, M.（2004）：为什么要追问才能知道八年级学生对分数的真实想法。澳大拉西亚数学教育研究学会（MERGA）第 27 届年会论文集。" },
+      "url": "https://merga.net.au/merga-publications/why-you-have-to-probe-to-discover-what-year-8-students-really-think-about-fractions/",
+      "note": { "en": "To check: gap thinking (2/3 and 3/4 seen as equal because each is one part short), step 09 and practice Q8. The title is listed by MERGA, but the paper itself has not yet been read; its wording is not quoted.", "zh": "待核：差距思维（因为都差一份，就认为 2/3 和 3/4 一样大），用于第 09 步和练习第 8 题。MERGA 网站列有此题名，但论文原文尚未读过，文中措辞不作引用。" }
+    },
+    {
+      "id": "S14",
+      "text": { "en": "Skemp, R. R. (1976). Relational understanding and instrumental understanding. Mathematics Teaching 77, 20–26.", "zh": "Skemp, R. R.（1976）：关系性理解与工具性理解。《数学教学》第 77 期，20–26 页。" },
+      "note": { "en": "Cited by S1: knowing why, not just what and how. Every feedback line in the lesson says why.", "zh": "S1 引用的观点：「知其所以然」，不只是知道做什么、怎么做。课里每一句反馈都讲为什么。" }
+    },
+    {
+      "id": "S15",
+      "text": { "en": "Reinhold, F., Obersteiner, A., Hoch, S., Hofer, S. I. & Reiss, K. (2020). The interplay between the natural number bias and fraction magnitude processing in low-achieving students. Frontiers in Education 5, 29.", "zh": "Reinhold, F.、Obersteiner, A.、Hoch, S.、Hofer, S. I. 与 Reiss, K.（2020）：低成就学生的自然数偏差与分数大小加工的相互作用。《教育前沿》第 5 卷，第 29 篇。" },
+      "url": "https://doi.org/10.3389/feduc.2020.00029",
+      "note": { "en": "Checked 2026-10-10: title and authors confirmed from the publisher's page (the spec had flagged them). Natural number bias in comparing fraction sizes.", "zh": "2026-10-10 已核对：题名与作者据出版方页面确认（spec 曾标「待核」）。比较分数大小时的自然数偏差。" }
+    },
+    {
+      "id": "S16",
+      "text": { "en": "Textbook series on the MOE approved list (for the usual order of topics only, not copied): Marshall Cavendish My Pals Are Here! Maths; Shaping Maths.", "zh": "教育部批准目录上的教材系列（只参考通常的教学顺序，不照抄）：Marshall Cavendish《My Pals Are Here! Maths》、《Shaping Maths》。" },
+      "note": { "en": "Questions, pictures and wording in this lesson are our own.", "zh": "本课的题目、插图和措辞都是自己写的。" }
+    },
+    {
+      "id": "S17",
+      "text": { "en": "MOE iwant2study (Singapore Student Learning Space interactives), e.g. Compare fractions.", "zh": "教育部 iwant2study（新加坡学生学习平台的互动资源），如「比较分数」。" },
+      "url": "https://iwant2study.moe.edu.sg/",
+      "note": { "en": "Typical forms of fraction interactives, for reference. Link checked 2026-10-10.", "zh": "分数互动的常见形式，仅作参考。链接于 2026-10-10 核对。" }
+    }
+  ]
+}

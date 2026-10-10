@@ -24,6 +24,15 @@ describe('url-state encode/decode', () => {
     expect(decodeSceneState(search)).toEqual(state);
   });
 
+  it('round-trips a lesson sub-step and model view (MathScene task / model), never more', () => {
+    const state: UrlState = { chapter: 'equivalent-fractions', task: 2, model: 'circle' };
+    expect(toSearch(state)).toBe('?ch=equivalent-fractions&task=2&model=circle');
+    expect(decodeSceneState(toSearch(state))).toEqual(state);
+    expect(toSearch({ chapter: 'practice', task: 1, model: null }, { chapter: 'practice', task: 1, model: null })).toBe('?ch=practice');
+    expect(decodeSceneState('?task=0&model=Bad')).toEqual({});
+    expect(decodeSceneState('?task=4&model=')).toEqual({ task: 4, model: null });
+  });
+
   it('round-trips highlight (hl) and cutaway (cut)', () => {
     const time: UrlState = { chapter: 'a', t: '1942-02', highlight: ['battle-of-singapore', 'japan'] };
     expect(toSearch(time)).toBe('?ch=a&t=1942-02&hl=battle-of-singapore,japan');

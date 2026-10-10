@@ -1,0 +1,3546 @@
+{
+  "syllabus": [
+    {
+      "id": "p2-part-of-whole",
+      "level": "P2",
+      "ref": "P2 1.1",
+      "page": 33,
+      "source": "S1",
+      "text": {
+        "en": "fraction as part of a whole",
+        "zh": "分数表示一个整体的一部分"
+      }
+    },
+    {
+      "id": "p2-notation",
+      "level": "P2",
+      "ref": "P2 1.2",
+      "page": 33,
+      "source": "S1",
+      "text": {
+        "en": "notation and representations of fractions",
+        "zh": "分数的写法与表示"
+      }
+    },
+    {
+      "id": "p2-compare",
+      "level": "P2",
+      "ref": "P2 1.3",
+      "page": 33,
+      "source": "S1",
+      "text": {
+        "en": "comparing and ordering fractions with denominators of given fractions not exceeding 12: unit fractions, like fractions",
+        "zh": "比较和排列分母不超过 12 的分数：单位分数、同分母分数"
+      }
+    },
+    {
+      "id": "p2-add-subtract",
+      "level": "P2",
+      "ref": "P2 2.1",
+      "page": 33,
+      "source": "S1",
+      "text": {
+        "en": "adding and subtracting like fractions within one whole with denominators of given fractions not exceeding 12",
+        "zh": "在一个整体之内加减分母不超过 12 的同分母分数"
+      }
+    },
+    {
+      "id": "p3-equivalent",
+      "level": "P3",
+      "ref": "P3 1.1",
+      "page": 35,
+      "source": "S1",
+      "text": {
+        "en": "equivalent fractions",
+        "zh": "等值分数"
+      }
+    },
+    {
+      "id": "p3-simplest-form",
+      "level": "P3",
+      "ref": "P3 1.2",
+      "page": 35,
+      "source": "S1",
+      "text": {
+        "en": "expressing a fraction in its simplest form",
+        "zh": "把分数化成最简分数"
+      }
+    },
+    {
+      "id": "p3-compare-unlike",
+      "level": "P3",
+      "ref": "P3 1.3",
+      "page": 35,
+      "source": "S1",
+      "text": {
+        "en": "comparing and ordering unlike fractions with denominators of given fractions not exceeding 12",
+        "zh": "比较和排列分母不超过 12 的异分母分数"
+      }
+    },
+    {
+      "id": "p3-missing-term",
+      "level": "P3",
+      "ref": "P3 1.4",
+      "page": 35,
+      "source": "S1",
+      "text": {
+        "en": "writing the equivalent fraction of a fraction given the denominator or the numerator",
+        "zh": "已知分母或分子，写出一个分数的等值分数"
+      }
+    },
+    {
+      "id": "p3-add-subtract",
+      "level": "P3",
+      "ref": "P3 2.1",
+      "page": 35,
+      "source": "S1",
+      "text": {
+        "en": "adding and subtracting two related fractions within one whole with denominators of given fractions not exceeding 12",
+        "zh": "在一个整体之内加减两个分母不超过 12 的相关分数（分母成倍数）"
+      }
+    },
+    {
+      "id": "p4-mixed-numbers",
+      "level": "P4",
+      "ref": "P4 1.1",
+      "page": 37,
+      "source": "S1",
+      "text": {
+        "en": "mixed numbers, improper fractions and their relationship",
+        "zh": "带分数、假分数及两者的关系"
+      }
+    }
+  ],
+  "steps": [
+    {
+      "id": "equal-parts",
+      "lo": [
+        "p2-part-of-whole"
+      ],
+      "views": [
+        "bar",
+        "circle"
+      ],
+      "tasks": [
+        {
+          "id": "kueh-equal-parts",
+          "kind": "choose",
+          "multi": true,
+          "minutes": 0.6,
+          "model": {
+            "kind": "bar",
+            "parts": null,
+            "object": "kueh"
+          },
+          "options": [
+            {
+              "id": "a",
+              "model": {
+                "kind": "bar",
+                "parts": 4,
+                "object": "kueh"
+              },
+              "correct": true
+            },
+            {
+              "id": "b",
+              "model": {
+                "kind": "bar",
+                "parts": 2,
+                "diagonal": true,
+                "object": "kueh"
+              },
+              "correct": true,
+              "misconception": "equal-area-not-same-shape"
+            },
+            {
+              "id": "c",
+              "model": {
+                "kind": "bar",
+                "parts": null,
+                "cuts": [
+                  0.22,
+                  0.6
+                ],
+                "object": "kueh"
+              },
+              "correct": false,
+              "misconception": "unequal-parts"
+            },
+            {
+              "id": "d",
+              "model": {
+                "kind": "bar",
+                "parts": null,
+                "cuts": [
+                  0.36
+                ],
+                "object": "kueh"
+              },
+              "correct": false,
+              "misconception": "unequal-parts"
+            }
+          ],
+          "prompt": {
+            "en": "Tap every kueh that is cut into equal parts.",
+            "zh": "点出所有被平均分的千层糕。"
+          },
+          "guide": {
+            "en": "Equal parts means every part is the same amount. Look at the size of each piece, not at how many pieces there are. Two pieces can be equal even when they are not the same shape.",
+            "zh": "平均分，就是每一份一样多。看每一块有多大，不是数有几块。两块形状不同，也可以一样多。"
+          },
+          "hints": [
+            {
+              "en": "Look at one kueh at a time. Are all of its pieces the same size?",
+              "zh": "一块一块地看：它的每一份都一样大吗？"
+            },
+            {
+              "en": "A square cut corner to corner gives two triangles. Turn one over: does it cover the other exactly?",
+              "zh": "正方形沿对角线切开，得到两个三角形。把一个翻过来，能和另一个完全重合吗？"
+            },
+            {
+              "en": "Two of the four kueh are cut into equal parts.",
+              "zh": "四块千层糕里，有两块是平均分的。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. In both of them every piece is the same amount, the two triangles too.",
+              "zh": "对。这两块千层糕的每一份都一样多，两个三角形也一样多。"
+            },
+            "wrong": [
+              {
+                "when": "unequal-parts",
+                "say": {
+                  "en": "One kueh you chose has pieces of different sizes, so its parts are not equal. Compare the pieces of each kueh again.",
+                  "zh": "你选的千层糕里，有一块的几份大小不一样，所以不是平均分。再比一比每块千层糕的几份。"
+                },
+                "sample": "a,b,c"
+              },
+              {
+                "when": "equal-area-not-same-shape",
+                "say": {
+                  "en": "Look again at the kueh cut corner to corner. Same amount of kueh, different shape: the two pieces are still halves.",
+                  "zh": "再看沿对角线切开的那块：两块一样多，只是形状不同，它们仍然是一半。"
+                },
+                "sample": "a"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Check each kueh: are all of its pieces the same size?",
+              "zh": "还没对。一块一块检查：每一份都一样大吗？"
+            },
+            "reveal": {
+              "en": "The kueh cut into four equal strips and the kueh cut corner to corner both have equal parts. The other two have pieces of different sizes.",
+              "zh": "切成四条一样宽的、沿对角线切成两半的，这两块是平均分。另外两块的各份大小不同。"
+            }
+          }
+        },
+        {
+          "id": "fold-strip-quarters",
+          "kind": "fold",
+          "parts": 4,
+          "minutes": 0.4,
+          "model": {
+            "kind": "bar",
+            "parts": 1,
+            "object": "strip"
+          },
+          "prompt": {
+            "en": "Fold the paper strip to make 4 equal parts.",
+            "zh": "把纸条对折，折出 4 个相等的部分。"
+          },
+          "guide": {
+            "en": "Folding in half makes 2 equal parts, because the two halves lie exactly on top of each other. Fold again and every part is halved again.",
+            "zh": "对折一次得到 2 个相等的部分，因为两半正好叠在一起。再折一次，每一份又被平分。"
+          },
+          "hints": [
+            {
+              "en": "Press Fold once. How many parts are there now?",
+              "zh": "按一次「对折」。现在有几份？"
+            },
+            {
+              "en": "Each fold doubles the number of parts: 1, 2, 4.",
+              "zh": "每折一次，份数变成原来的 2 倍：1、2、4。"
+            },
+            {
+              "en": "Fold twice.",
+              "zh": "对折两次。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Two folds make 4 equal parts. Each part is one quarter of the strip.",
+              "zh": "对。对折两次得到 4 个相等的部分，每一份是纸条的四分之一。"
+            },
+            "wrong": [],
+            "fallback": {
+              "en": "Not yet. Count the parts between the creases. You need 4.",
+              "zh": "还没对。数一数折痕之间有几份，要 4 份。"
+            },
+            "reveal": {
+              "en": "Fold once for halves, then once more for quarters: 4 equal parts.",
+              "zh": "对折一次得到两半，再折一次得到四份。"
+            }
+          }
+        },
+        {
+          "id": "cut-toast-thirds",
+          "kind": "cut",
+          "parts": 3,
+          "snap": 12,
+          "minutes": 0.6,
+          "model": {
+            "kind": "bar",
+            "parts": null,
+            "object": "toast"
+          },
+          "prompt": {
+            "en": "Cut the kaya toast into 3 equal parts.",
+            "zh": "把这片咖椰吐司切成 3 个相等的部分。"
+          },
+          "guide": {
+            "en": "Three equal parts need two cuts. The marks under the toast help you measure: every part should cover the same number of marks.",
+            "zh": "切成 3 份要切两刀。吐司下面的刻度可以帮你量：每一份占的格数要一样。"
+          },
+          "hints": [
+            {
+              "en": "Tap the toast to place a cut. Tap a cut again to remove it.",
+              "zh": "点吐司放一刀；再点这一刀可以去掉。"
+            },
+            {
+              "en": "The toast is 12 marks long. How many marks should each part cover?",
+              "zh": "吐司长 12 格。每份应该占几格？"
+            },
+            {
+              "en": "Cut at mark 4 and at mark 8.",
+              "zh": "在第 4 格和第 8 格各切一刀。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Each part is 4 marks long, so the 3 parts are equal: each one is a third.",
+              "zh": "对。每份都是 4 格长，3 份一样大，每份是三分之一。"
+            },
+            "wrong": [
+              {
+                "when": "unequal-parts",
+                "say": {
+                  "en": "These parts are not the same size, so they are not thirds. Count the marks in each part and move a cut.",
+                  "zh": "这几份大小不一样，所以不是三分之一。数一数每份占几格，再挪一刀。"
+                },
+                "sample": "3,8"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. You need exactly 3 parts, so 2 cuts.",
+              "zh": "还没对。要正好 3 份，也就是切两刀。"
+            },
+            "reveal": {
+              "en": "Cuts at marks 4 and 8 give three parts of 4 marks each.",
+              "zh": "在第 4 格和第 8 格切，得到三份，每份 4 格。"
+            }
+          },
+          "example": {
+            "model": {
+              "kind": "bar",
+              "parts": null,
+              "object": "toast"
+            },
+            "parts": 2,
+            "say": [
+              {
+                "en": "Here is another slice of toast: one whole.",
+                "zh": "这是另一片吐司：一个整体。"
+              },
+              {
+                "en": "One cut in the middle makes 2 equal parts. Each part is a half.",
+                "zh": "从正中间切一刀，得到 2 个相等的部分，每份是一半。"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "unit-fractions",
+      "lo": [
+        "p2-part-of-whole",
+        "p2-notation"
+      ],
+      "views": [
+        "circle",
+        "bar"
+      ],
+      "tasks": [
+        {
+          "id": "prata-one-quarter",
+          "kind": "shade",
+          "target": "1/4",
+          "accept": "exact",
+          "minutes": 0.4,
+          "model": {
+            "kind": "circle",
+            "parts": 4,
+            "object": "prata"
+          },
+          "prompt": {
+            "en": "Shade one of the 4 equal parts of the prata.",
+            "zh": "把 prata 的 4 个相等部分涂上一份。"
+          },
+          "guide": {
+            "en": "The prata is one whole cut into 4 equal parts. One of those parts is one quarter, written {1/4}. The bottom number counts the equal parts; the top number counts the parts you take.",
+            "zh": "这张 prata 是一个整体，平均分成 4 份。其中一份是四分之一，写作 {1/4}。下面的数是整体平均分的份数，上面的数是取了几份。"
+          },
+          "hints": [
+            {
+              "en": "Tap any one part.",
+              "zh": "点任意一份。"
+            },
+            {
+              "en": "Only one part should be shaded.",
+              "zh": "只涂一份。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. One of 4 equal parts is {1/4}, one quarter.",
+              "zh": "对。4 个相等部分中的一份是 {1/4}，四分之一。"
+            },
+            "wrong": [],
+            "fallback": {
+              "en": "Not yet. Shade just one part.",
+              "zh": "还没对。只涂一份。"
+            },
+            "reveal": {
+              "en": "One part out of the 4 is shaded: {1/4}.",
+              "zh": "4 份中涂 1 份：{1/4}。"
+            }
+          }
+        },
+        {
+          "id": "write-one-sixth",
+          "kind": "input",
+          "answer": "1/6",
+          "form": "equal",
+          "minutes": 0.5,
+          "model": {
+            "kind": "bar",
+            "parts": 6,
+            "given": 1,
+            "object": "chocolate"
+          },
+          "prompt": {
+            "en": "What fraction of the bar is shaded?",
+            "zh": "涂色部分是整条的几分之几？"
+          },
+          "guide": {
+            "en": "First count all the equal parts in the whole: that is the bottom number, the denominator. Then count the shaded parts: that is the top number, the numerator.",
+            "zh": "先数整体一共平均分成几份，这是下面的数，叫分母；再数涂色的有几份，这是上面的数，叫分子。"
+          },
+          "hints": [
+            {
+              "en": "How many equal parts are in the whole bar?",
+              "zh": "整条一共有几个相等的部分？"
+            },
+            {
+              "en": "The bottom number counts all the parts, shaded and not shaded.",
+              "zh": "分母要数所有的份，涂了的和没涂的都算。"
+            },
+            {
+              "en": "6 equal parts, 1 shaded.",
+              "zh": "一共 6 份，涂了 1 份。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 1 of 6 equal parts is shaded, so it is {1/6}, one sixth.",
+              "zh": "对。6 个相等部分中涂了 1 份，是 {1/6}，六分之一。"
+            },
+            "wrong": [
+              {
+                "when": "part-part",
+                "say": {
+                  "en": "The bottom number counts all the equal parts in the whole, shaded and not shaded. Count them all again.",
+                  "zh": "分母要数整体里所有相等的部分，涂了的和没涂的都算。再数一遍。"
+                },
+                "sample": "1/5"
+              },
+              {
+                "when": "swapped",
+                "say": {
+                  "en": "The top number counts the parts you have; the bottom number counts the parts in the whole. Swap them round.",
+                  "zh": "分子数的是取了几份，分母数的是整体一共几份。把两个数换一换位置。"
+                },
+                "sample": "6/1"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Count all the parts first, then the shaded ones.",
+              "zh": "还没对。先数总份数，再数涂色的份数。"
+            },
+            "reveal": {
+              "en": "The whole has 6 equal parts and 1 is shaded: {1/6}.",
+              "zh": "整体平均分成 6 份，涂了 1 份：{1/6}。"
+            }
+          },
+          "example": {
+            "model": {
+              "kind": "bar",
+              "parts": 2,
+              "given": 1,
+              "object": "strip"
+            },
+            "answer": "1/2",
+            "say": [
+              {
+                "en": "This strip is cut into 2 equal parts, and 1 is shaded.",
+                "zh": "这条纸条平均分成 2 份，涂了 1 份。"
+              },
+              {
+                "en": "2 equal parts: the bottom number is 2. 1 part shaded: the top number is 1. It is {1/2}.",
+                "zh": "平均分成 2 份，分母是 2；涂了 1 份，分子是 1。这是 {1/2}。"
+              }
+            ]
+          }
+        },
+        {
+          "id": "which-is-one-third",
+          "kind": "choose",
+          "minutes": 0.5,
+          "model": {
+            "kind": "bar",
+            "parts": 3,
+            "given": 1
+          },
+          "options": [
+            {
+              "id": "a",
+              "model": {
+                "kind": "bar",
+                "parts": 3,
+                "given": 1
+              },
+              "correct": true
+            },
+            {
+              "id": "b",
+              "model": {
+                "kind": "bar",
+                "parts": null,
+                "cuts": [
+                  0.2,
+                  0.55
+                ],
+                "given": [
+                  0
+                ]
+              },
+              "correct": false,
+              "misconception": "unequal-parts"
+            },
+            {
+              "id": "c",
+              "model": {
+                "kind": "bar",
+                "parts": 4,
+                "given": 1
+              },
+              "correct": false,
+              "misconception": "part-part"
+            }
+          ],
+          "prompt": {
+            "en": "Which picture shows {1/3}?",
+            "zh": "哪幅图表示 {1/3}？"
+          },
+          "guide": {
+            "en": "{1/3} means one of 3 equal parts. Check two things in each picture: are there 3 parts in the whole, and are they the same size?",
+            "zh": "{1/3} 表示平均分成 3 份中的 1 份。每幅图都检查两件事：整体是不是分成 3 份？这 3 份是不是一样大？"
+          },
+          "hints": [
+            {
+              "en": "Count all the parts in each picture, shaded and not shaded.",
+              "zh": "数一数每幅图一共有几份，涂了的和没涂的都算。"
+            },
+            {
+              "en": "Then check that the parts are the same size.",
+              "zh": "再看这几份是不是一样大。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. That whole has 3 equal parts and 1 is shaded: {1/3}.",
+              "zh": "对。这个整体平均分成 3 份，涂了 1 份：{1/3}。"
+            },
+            "wrong": [
+              {
+                "when": "unequal-parts",
+                "say": {
+                  "en": "That picture has 3 parts, but they are not the same size, so they are not thirds.",
+                  "zh": "那幅图有 3 份，但大小不一样，所以不是三分之一。"
+                },
+                "sample": "b"
+              },
+              {
+                "when": "part-part",
+                "say": {
+                  "en": "That picture has 1 part shaded and 3 not shaded: 4 parts in all. That is {1/4}, not {1/3}.",
+                  "zh": "那幅图涂了 1 份，没涂 3 份，一共 4 份。这是 {1/4}，不是 {1/3}。"
+                },
+                "sample": "c"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Look for 3 equal parts with 1 shaded.",
+              "zh": "还没对。找平均分成 3 份、涂了 1 份的那幅图。"
+            },
+            "reveal": {
+              "en": "Picture A has 3 equal parts with 1 shaded: {1/3}.",
+              "zh": "图 A 平均分成 3 份，涂了 1 份：{1/3}。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "non-unit-fractions",
+      "lo": [
+        "p2-notation"
+      ],
+      "views": [
+        "bar",
+        "circle"
+      ],
+      "tasks": [
+        {
+          "id": "chocolate-three-eighths",
+          "kind": "shade",
+          "target": "3/8",
+          "accept": "exact",
+          "minutes": 0.4,
+          "model": {
+            "kind": "bar",
+            "parts": 8,
+            "object": "chocolate"
+          },
+          "prompt": {
+            "en": "Shade {3/8} of the chocolate bar.",
+            "zh": "把巧克力条涂出 {3/8}。"
+          },
+          "guide": {
+            "en": "{3/8} is 3 parts out of 8 equal parts. Each part is {1/8}, so {3/8} is three of them: {1/8} + {1/8} + {1/8}.",
+            "zh": "{3/8} 是 8 个相等部分中的 3 份。每一份是 {1/8}，{3/8} 就是 3 个 {1/8}。"
+          },
+          "hints": [
+            {
+              "en": "The bar already has 8 equal parts.",
+              "zh": "巧克力条已经平均分成 8 份了。"
+            },
+            {
+              "en": "The top number tells you how many parts to shade.",
+              "zh": "分子告诉你要涂几份。"
+            },
+            {
+              "en": "Shade 3 parts.",
+              "zh": "涂 3 份。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 3 of the 8 equal parts are shaded: {3/8}.",
+              "zh": "对。8 份中涂了 3 份：{3/8}。"
+            },
+            "wrong": [],
+            "fallback": {
+              "en": "Not yet. Count the shaded parts. You need 3 of the 8.",
+              "zh": "还没对。数一数涂了几份，要 8 份中的 3 份。"
+            },
+            "reveal": {
+              "en": "Three eighths: 3 of the 8 parts shaded.",
+              "zh": "八分之三：8 份中涂 3 份。"
+            }
+          },
+          "example": {
+            "model": {
+              "kind": "bar",
+              "parts": 5,
+              "object": "strip"
+            },
+            "target": "2/5",
+            "say": [
+              {
+                "en": "This strip has 5 equal parts. Each part is {1/5}.",
+                "zh": "这条纸条平均分成 5 份，每份是 {1/5}。"
+              },
+              {
+                "en": "Shade 2 of them: {1/5} and {1/5} make {2/5}.",
+                "zh": "涂 2 份：{1/5} 和 {1/5} 合起来是 {2/5}。"
+              }
+            ]
+          }
+        },
+        {
+          "id": "prata-five-sixths",
+          "kind": "input",
+          "answer": "5/6",
+          "form": "equal",
+          "minutes": 0.5,
+          "model": {
+            "kind": "circle",
+            "parts": 6,
+            "given": 5,
+            "object": "prata"
+          },
+          "prompt": {
+            "en": "What fraction of the prata is shaded?",
+            "zh": "涂色部分是这张 prata 的几分之几？"
+          },
+          "guide": {
+            "en": "Count the equal parts of the whole prata first, then the shaded parts. The parts in the whole go at the bottom.",
+            "zh": "先数整张 prata 平均分成几份，再数涂色的有几份。整体的份数写在下面。"
+          },
+          "hints": [
+            {
+              "en": "How many equal parts does the whole prata have?",
+              "zh": "整张 prata 平均分成了几份？"
+            },
+            {
+              "en": "6 equal parts. How many are shaded?",
+              "zh": "一共 6 份。涂了几份？"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 5 of the 6 equal parts are shaded: {5/6}.",
+              "zh": "对。6 份中涂了 5 份：{5/6}。"
+            },
+            "wrong": [
+              {
+                "when": "part-part",
+                "say": {
+                  "en": "5 parts are shaded and 1 is not. The bottom number counts all 6 parts in the whole.",
+                  "zh": "涂了 5 份，没涂 1 份。分母要数整体的全部 6 份。"
+                },
+                "sample": "5/1"
+              },
+              {
+                "when": "swapped",
+                "say": {
+                  "en": "The top number counts the shaded parts; the bottom number counts all the parts in the whole.",
+                  "zh": "分子数涂了几份，分母数整体一共几份。"
+                },
+                "sample": "6/5"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Count all 6 parts for the bottom number, then the shaded parts for the top.",
+              "zh": "还没对。分母数全部的份数，分子数涂了的份数。"
+            },
+            "reveal": {
+              "en": "6 equal parts, 5 shaded: {5/6}.",
+              "zh": "平均分成 6 份，涂了 5 份：{5/6}。"
+            }
+          }
+        },
+        {
+          "id": "four-quarters-one-whole",
+          "kind": "shade",
+          "target": "4/4",
+          "accept": "exact",
+          "minutes": 0.5,
+          "then": {
+            "answer": "1",
+            "form": "whole"
+          },
+          "model": {
+            "kind": "bar",
+            "parts": 4,
+            "object": "strip"
+          },
+          "prompt": {
+            "en": "Shade all 4 parts. Then write how many wholes {4/4} is.",
+            "zh": "把 4 份都涂上，再写出 {4/4} 是几个整体。"
+          },
+          "guide": {
+            "en": "When every equal part is shaded, you have the whole thing. The top and bottom numbers are the same, so the fraction is 1 whole.",
+            "zh": "所有相等的部分都涂上，就是整个整体。分子和分母一样，这个分数就等于 1 个整体。"
+          },
+          "hints": [
+            {
+              "en": "Shade every part of the strip.",
+              "zh": "把纸条的每一份都涂上。"
+            },
+            {
+              "en": "4 quarters make the whole strip.",
+              "zh": "4 个四分之一合起来就是整条纸条。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. {4/4} is all 4 quarters, the whole strip: 1 whole.",
+              "zh": "对。{4/4} 是全部 4 个四分之一，也就是整条纸条：1 个整体。"
+            },
+            "wrong": [],
+            "fallback": {
+              "en": "Not yet. Shade every part, then count the whole strips.",
+              "zh": "还没对。把每一份都涂上，再数有几个整条。"
+            },
+            "reveal": {
+              "en": "All 4 quarters shaded: {4/4} = 1.",
+              "zh": "4 个四分之一都涂上：{4/4} = 1。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "number-line",
+      "lo": [
+        "p2-notation"
+      ],
+      "views": [
+        "numberline",
+        "bar"
+      ],
+      "tasks": [
+        {
+          "id": "place-one-quarter",
+          "kind": "place",
+          "target": "1/4",
+          "snap": "ticks",
+          "minutes": 0.4,
+          "model": {
+            "kind": "numberline",
+            "from": 0,
+            "to": 1,
+            "intervals": 4,
+            "labels": "ends",
+            "withBar": true
+          },
+          "prompt": {
+            "en": "Put the marker at {1/4} on the number line.",
+            "zh": "把标记放在数轴上 {1/4} 的位置。"
+          },
+          "guide": {
+            "en": "The line from 0 to 1 is one whole, cut into 4 equal jumps. {1/4} is the end of the first jump. Count the jumps, not the marks.",
+            "zh": "从 0 到 1 的这段是一个整体，平均分成 4 段。{1/4} 在第一段的终点。数的是段，不是刻度线。"
+          },
+          "hints": [
+            {
+              "en": "Start at 0. Each jump is {1/4} of the whole.",
+              "zh": "从 0 出发，每一段是整体的 {1/4}。"
+            },
+            {
+              "en": "Make one jump from 0.",
+              "zh": "从 0 跳一段。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. One jump of {1/4} from 0 lands on {1/4}.",
+              "zh": "对。从 0 跳一段 {1/4}，就落在 {1/4}。"
+            },
+            "wrong": [
+              {
+                "when": "tick-counting",
+                "say": {
+                  "en": "Count the jumps between the marks, not the marks. 0 is where you start, before any jump.",
+                  "zh": "数的是两条刻度线之间的段，不是刻度线。0 是起点，还没有跳。"
+                },
+                "sample": "2"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. The marker should be one jump from 0.",
+              "zh": "还没对。标记应该在离 0 一段的地方。"
+            },
+            "reveal": {
+              "en": "{1/4} is one jump from 0, the first mark after 0.",
+              "zh": "{1/4} 在离 0 一段的地方，也就是 0 后面的第一条刻度线。"
+            }
+          },
+          "example": {
+            "model": {
+              "kind": "numberline",
+              "from": 0,
+              "to": 1,
+              "intervals": 3,
+              "labels": "ends",
+              "withBar": true
+            },
+            "target": "2/3",
+            "say": [
+              {
+                "en": "This line from 0 to 1 is cut into 3 equal jumps.",
+                "zh": "这条数轴从 0 到 1 平均分成 3 段。"
+              },
+              {
+                "en": "Two jumps from 0 land on {2/3}.",
+                "zh": "从 0 跳两段，落在 {2/3}。"
+              }
+            ]
+          }
+        },
+        {
+          "id": "place-three-fifths",
+          "kind": "place",
+          "target": "3/5",
+          "snap": "ticks",
+          "minutes": 0.4,
+          "model": {
+            "kind": "numberline",
+            "from": 0,
+            "to": 1,
+            "intervals": 5,
+            "labels": "ends"
+          },
+          "prompt": {
+            "en": "Put the marker at {3/5}.",
+            "zh": "把标记放在 {3/5}。"
+          },
+          "guide": {
+            "en": "The whole from 0 to 1 has 5 equal jumps, so each jump is {1/5}. {3/5} is three jumps from 0.",
+            "zh": "0 到 1 平均分成 5 段，每段是 {1/5}。{3/5} 是从 0 跳 3 段。"
+          },
+          "hints": [
+            {
+              "en": "How many jumps make the whole?",
+              "zh": "几段合起来是一个整体？"
+            },
+            {
+              "en": "Count 3 jumps from 0.",
+              "zh": "从 0 数 3 段。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 3 jumps of {1/5} make {3/5}.",
+              "zh": "对。3 段 {1/5} 合起来是 {3/5}。"
+            },
+            "wrong": [
+              {
+                "when": "tick-counting",
+                "say": {
+                  "en": "That is one jump off. Count the jumps between the marks, starting at 0.",
+                  "zh": "差了一段。从 0 开始，数刻度线之间的段。"
+                },
+                "sample": "4"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Start at 0 and count 3 jumps.",
+              "zh": "还没对。从 0 开始，数 3 段。"
+            },
+            "reveal": {
+              "en": "{3/5} is 3 jumps from 0.",
+              "zh": "{3/5} 在离 0 三段的地方。"
+            }
+          }
+        },
+        {
+          "id": "read-five-eighths",
+          "kind": "input",
+          "answer": "5/8",
+          "form": "equal",
+          "minutes": 0.5,
+          "model": {
+            "kind": "numberline",
+            "from": 0,
+            "to": 1,
+            "intervals": 8,
+            "labels": "ends",
+            "arrow": "5/8"
+          },
+          "prompt": {
+            "en": "What fraction is the arrow pointing to?",
+            "zh": "箭头指着哪个分数？"
+          },
+          "guide": {
+            "en": "Count the equal jumps from 0 to 1: that is the bottom number. Count the jumps from 0 to the arrow: that is the top number.",
+            "zh": "数一数 0 到 1 平均分成几段，这是分母；再数从 0 到箭头有几段，这是分子。"
+          },
+          "hints": [
+            {
+              "en": "How many equal jumps are there from 0 to 1?",
+              "zh": "0 到 1 一共有几段？"
+            },
+            {
+              "en": "8 jumps make the whole. How many jumps to the arrow?",
+              "zh": "8 段是一个整体。到箭头有几段？"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. The whole has 8 jumps and the arrow is 5 jumps from 0: {5/8}.",
+              "zh": "对。整体是 8 段，箭头离 0 有 5 段：{5/8}。"
+            },
+            "wrong": [
+              {
+                "when": "tick-counting",
+                "say": {
+                  "en": "You counted the marks. There are 9 marks but only 8 jumps from 0 to 1, and the arrow is 5 jumps along.",
+                  "zh": "你数的是刻度线。0 到 1 有 9 条刻度线，但只有 8 段；箭头在第 5 段的终点。"
+                },
+                "sample": "6/9"
+              },
+              {
+                "when": "swapped",
+                "say": {
+                  "en": "The bottom number counts the jumps in the whole; the top number counts the jumps to the arrow.",
+                  "zh": "分母数整体有几段，分子数到箭头有几段。"
+                },
+                "sample": "8/5"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Count jumps, not marks: from 0 to 1, then from 0 to the arrow.",
+              "zh": "还没对。数段，不数刻度线：先数 0 到 1，再数 0 到箭头。"
+            },
+            "reveal": {
+              "en": "8 jumps from 0 to 1, and the arrow is at the end of the 5th: {5/8}.",
+              "zh": "0 到 1 有 8 段，箭头在第 5 段的终点：{5/8}。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "comparing-fractions",
+      "lo": [
+        "p2-compare"
+      ],
+      "views": [
+        "wall",
+        "bar"
+      ],
+      "tasks": [
+        {
+          "id": "greater-third-or-fifth",
+          "kind": "compare",
+          "a": "1/3",
+          "b": "1/5",
+          "ask": "greater",
+          "minutes": 0.4,
+          "model": {
+            "kind": "wall",
+            "rows": [
+              1,
+              3,
+              5
+            ]
+          },
+          "prompt": {
+            "en": "Which is greater, {1/3} or {1/5}? Tap it.",
+            "zh": "{1/3} 和 {1/5}，哪个大？点一点它。"
+          },
+          "guide": {
+            "en": "Both rows are the same whole. Cutting the whole into more parts makes each part smaller, so the more parts, the smaller each one.",
+            "zh": "这几行是同一个整体。整体分得越多，每一份就越小。"
+          },
+          "hints": [
+            {
+              "en": "Compare the width of one {1/3} piece with one {1/5} piece.",
+              "zh": "比一比一块 {1/3} 和一块 {1/5} 有多宽。"
+            },
+            {
+              "en": "The same whole cut into 5 gives smaller parts than cut into 3.",
+              "zh": "同一个整体分成 5 份，每份比分成 3 份时小。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. {1/3} is greater: the same whole cut into 3 gives bigger parts than cut into 5.",
+              "zh": "对。{1/3} 大：同一个整体分成 3 份，每份比分成 5 份时大。"
+            },
+            "wrong": [
+              {
+                "when": "bigger-denominator-bigger",
+                "say": {
+                  "en": "More parts in the same whole means each part is smaller. 5 is more than 3, but a fifth is smaller than a third.",
+                  "zh": "同一个整体分的份数越多，每份越小。5 比 3 大，但五分之一比三分之一小。"
+                },
+                "sample": "b"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Look at the two pieces side by side under the same whole.",
+              "zh": "还没对。在同一个整体下面，把两块并排比一比。"
+            },
+            "reveal": {
+              "en": "{1/3} > {1/5}: a third is wider than a fifth of the same whole.",
+              "zh": "{1/3} > {1/5}：同一个整体的三分之一比五分之一宽。"
+            }
+          },
+          "example": {
+            "model": {
+              "kind": "wall",
+              "rows": [
+                1,
+                2,
+                4
+              ]
+            },
+            "a": "1/2",
+            "b": "1/4",
+            "say": [
+              {
+                "en": "Line up {1/2} and {1/4} under the same whole.",
+                "zh": "把 {1/2} 和 {1/4} 放在同一个整体下面对齐。"
+              },
+              {
+                "en": "The half is wider: {1/2} is greater than {1/4}.",
+                "zh": "一半更宽：{1/2} 大于 {1/4}。"
+              }
+            ]
+          }
+        },
+        {
+          "id": "order-unit-fractions",
+          "kind": "order",
+          "items": [
+            "1/2",
+            "1/8",
+            "1/4"
+          ],
+          "direction": "desc",
+          "minutes": 0.5,
+          "model": {
+            "kind": "wall",
+            "rows": [
+              1,
+              2,
+              4,
+              8
+            ]
+          },
+          "prompt": {
+            "en": "Order from greatest to smallest: {1/2}, {1/8}, {1/4}.",
+            "zh": "从大到小排列：{1/2}、{1/8}、{1/4}。"
+          },
+          "guide": {
+            "en": "All three are one part of the same whole. The fewer parts the whole is cut into, the bigger each part.",
+            "zh": "三个都是同一个整体里的一份。整体分的份数越少，每份越大。"
+          },
+          "hints": [
+            {
+              "en": "Find each fraction's row on the wall.",
+              "zh": "在分数墙上找到每个分数的那一行。"
+            },
+            {
+              "en": "{1/2} is the widest piece.",
+              "zh": "{1/2} 是最宽的一块。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. {1/2} > {1/4} > {1/8}: the fewer parts in the whole, the bigger each part.",
+              "zh": "对。{1/2} > {1/4} > {1/8}：整体分的份数越少，每份越大。"
+            },
+            "wrong": [
+              {
+                "when": "bigger-denominator-bigger",
+                "say": {
+                  "en": "That puts the biggest bottom number first. But eighths are the smallest pieces: more parts in the same whole means smaller parts.",
+                  "zh": "这样排是把分母大的放在前面。但八分之一是最小的一块：同一个整体分得越多，每份越小。"
+                },
+                "sample": "1/8,1/4,1/2"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Start with the widest piece on the wall.",
+              "zh": "还没对。从分数墙上最宽的那块开始排。"
+            },
+            "reveal": {
+              "en": "{1/2}, then {1/4}, then {1/8}.",
+              "zh": "{1/2}，然后 {1/4}，然后 {1/8}。"
+            }
+          }
+        },
+        {
+          "id": "compare-sevenths",
+          "kind": "compare",
+          "a": "3/7",
+          "b": "5/7",
+          "ask": "symbol",
+          "minutes": 0.4,
+          "model": {
+            "kind": "bar",
+            "rows": [
+              {
+                "parts": 7,
+                "given": 3
+              },
+              {
+                "parts": 7,
+                "given": 5
+              }
+            ]
+          },
+          "prompt": {
+            "en": "Choose <, = or >: {3/7} ○ {5/7}.",
+            "zh": "选 <、= 或 >：{3/7} ○ {5/7}。"
+          },
+          "guide": {
+            "en": "Both are sevenths, so the parts are the same size. Then the fraction with more parts is greater.",
+            "zh": "两个都是七分之几，每份一样大。份数多的那个分数就大。"
+          },
+          "hints": [
+            {
+              "en": "Are the parts the same size in both bars?",
+              "zh": "两条里的每一份一样大吗？"
+            },
+            {
+              "en": "3 sevenths or 5 sevenths: which is more?",
+              "zh": "3 个七分之一和 5 个七分之一，哪个多？"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. {3/7} < {5/7}: same-size parts, and 3 parts are fewer than 5.",
+              "zh": "对。{3/7} < {5/7}：每份一样大，3 份比 5 份少。"
+            },
+            "wrong": [],
+            "fallback": {
+              "en": "Not quite. The parts are the same size, so compare how many parts are shaded.",
+              "zh": "差一点。每份一样大，所以比一比涂了几份。"
+            },
+            "reveal": {
+              "en": "{3/7} < {5/7}.",
+              "zh": "{3/7} < {5/7}。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "adding-like-fractions",
+      "lo": [
+        "p2-add-subtract"
+      ],
+      "views": [
+        "bar",
+        "circle"
+      ],
+      "tasks": [
+        {
+          "id": "add-sevenths",
+          "kind": "build-sum",
+          "op": "+",
+          "a": "2/7",
+          "b": "3/7",
+          "minutes": 0.7,
+          "answer": {
+            "answer": "5/7",
+            "form": "equivalent"
+          },
+          "model": {
+            "kind": "bar",
+            "parts": 7,
+            "given": 2,
+            "object": "strip"
+          },
+          "prompt": {
+            "en": "Shade {3/7} more, then write {2/7} + {3/7}.",
+            "zh": "再涂 {3/7}，然后写出 {2/7} + {3/7} 的结果。"
+          },
+          "guide": {
+            "en": "The parts are all sevenths, the same size. Adding puts more sevenths together. The size of each part does not change, so the bottom number stays 7.",
+            "zh": "每一份都是七分之一，大小一样。相加就是把七分之几合在一起。每份的大小不变，所以分母还是 7。"
+          },
+          "hints": [
+            {
+              "en": "Shade 3 more parts next to the given ones.",
+              "zh": "在已经给出的部分旁边，再涂 3 份。"
+            },
+            {
+              "en": "Count all the shaded parts. How big is each part?",
+              "zh": "数一数一共涂了几份。每份有多大？"
+            },
+            {
+              "en": "5 parts, each one seventh.",
+              "zh": "5 份，每份是七分之一。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. {2/7} + {3/7} = {5/7}. Sevenths plus sevenths are still sevenths.",
+              "zh": "对。{2/7} + {3/7} = {5/7}。七分之几加七分之几，还是七分之几。"
+            },
+            "wrong": [
+              {
+                "when": "added-denominators",
+                "say": {
+                  "en": "Sevenths plus sevenths are still sevenths. Only the number of parts changes: the bottom number stays 7.",
+                  "zh": "七分之几加七分之几，还是七分之几。变的只是份数，分母仍是 7。"
+                },
+                "sample": "=5/14"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Count the parts that are shaded now. Each one is a seventh.",
+              "zh": "还没对。数一数现在涂了几份，每份是七分之一。"
+            },
+            "reveal": {
+              "en": "2 sevenths and 3 more sevenths are 5 sevenths: {5/7}.",
+              "zh": "2 个七分之一再加 3 个七分之一，是 5 个七分之一：{5/7}。"
+            }
+          },
+          "example": {
+            "model": {
+              "kind": "bar",
+              "parts": 5,
+              "given": 1,
+              "object": "strip"
+            },
+            "a": "1/5",
+            "b": "2/5",
+            "answer": {
+              "answer": "3/5",
+              "form": "equivalent"
+            },
+            "say": [
+              {
+                "en": "{1/5} is given. Shade {2/5} more.",
+                "zh": "已经有 {1/5}，再涂 {2/5}。"
+              },
+              {
+                "en": "3 fifths in all: {1/5} + {2/5} = {3/5}.",
+                "zh": "一共 3 个五分之一：{1/5} + {2/5} = {3/5}。"
+              }
+            ]
+          }
+        },
+        {
+          "id": "take-away-ninths",
+          "kind": "build-sum",
+          "op": "-",
+          "a": "7/9",
+          "b": "4/9",
+          "minutes": 0.7,
+          "answer": {
+            "answer": "3/9",
+            "form": "equivalent"
+          },
+          "model": {
+            "kind": "bar",
+            "parts": 9,
+            "given": 7,
+            "object": "strip"
+          },
+          "prompt": {
+            "en": "Take away {4/9}: tap 4 shaded parts. Then write {7/9} − {4/9}.",
+            "zh": "拿走 {4/9}：点掉 4 份涂色部分，再写出 {7/9} − {4/9}。"
+          },
+          "guide": {
+            "en": "Taking away ninths leaves ninths. Cross out the parts you take away, then count the shaded parts that are left.",
+            "zh": "从九分之几里拿走九分之几，剩下的还是九分之几。先划掉拿走的份，再数剩下的涂色部分。"
+          },
+          "hints": [
+            {
+              "en": "Tap 4 of the shaded parts to cross them out.",
+              "zh": "点 4 份涂色部分，把它们划掉。"
+            },
+            {
+              "en": "How many shaded parts are left? Each one is a ninth.",
+              "zh": "还剩几份涂色部分？每份是九分之一。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. {7/9} − {4/9} = {3/9}. The parts are still ninths.",
+              "zh": "对。{7/9} − {4/9} = {3/9}。每份还是九分之一。"
+            },
+            "wrong": [
+              {
+                "when": "added-denominators",
+                "say": {
+                  "en": "Taking away ninths leaves ninths: the bottom number stays 9. Only the number of parts changes.",
+                  "zh": "拿走九分之几，剩下的还是九分之几，分母仍是 9。变的只是份数。"
+                },
+                "sample": "=3/0"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Count the shaded parts that are not crossed out.",
+              "zh": "还没对。数一数没有被划掉的涂色部分。"
+            },
+            "reveal": {
+              "en": "7 ninths take away 4 ninths leaves 3 ninths: {3/9}.",
+              "zh": "7 个九分之一拿走 4 个，剩下 3 个九分之一：{3/9}。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "equivalent-fractions",
+      "lo": [
+        "p3-equivalent",
+        "p3-missing-term"
+      ],
+      "views": [
+        "bar",
+        "circle"
+      ],
+      "tasks": [
+        {
+          "id": "fold-half-into-eighths",
+          "kind": "fold",
+          "parts": 8,
+          "minutes": 0.7,
+          "then": {
+            "answer": "4/8",
+            "form": "equal"
+          },
+          "model": {
+            "kind": "bar",
+            "parts": 2,
+            "given": 1,
+            "object": "strip"
+          },
+          "prompt": {
+            "en": "Fold the strip twice more. Then write the shaded part in eighths.",
+            "zh": "把纸条再对折两次，然后用八分之几写出涂色部分。"
+          },
+          "guide": {
+            "en": "Folding cuts every part in two, the shaded parts too. The number of parts and the number of shaded parts both double, but the shaded amount stays the same.",
+            "zh": "每折一次，每一份都被分成两份，涂色的部分也一样。总份数和涂色的份数都变成 2 倍，涂色的多少不变。"
+          },
+          "hints": [
+            {
+              "en": "Press Fold two times.",
+              "zh": "按两次「对折」。"
+            },
+            {
+              "en": "Count all the parts, then the shaded ones.",
+              "zh": "先数全部的份数，再数涂色的份数。"
+            },
+            {
+              "en": "8 parts, 4 of them shaded.",
+              "zh": "一共 8 份，涂了 4 份。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. {1/2} = {2/4} = {4/8}: the same amount of strip, with more and smaller parts.",
+              "zh": "对。{1/2} = {2/4} = {4/8}：涂色的纸条一样多，只是份更多、更小。"
+            },
+            "wrong": [
+              {
+                "when": "scaled-one-part",
+                "say": {
+                  "en": "The shaded half was folded too, so it is now 4 parts, not 1. Count the shaded parts again.",
+                  "zh": "涂色的一半也被折了，现在是 4 份，不是 1 份。再数一数涂色的份数。"
+                },
+                "sample": "=1/8"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Count all the parts now, then the shaded parts.",
+              "zh": "还没对。数一数现在一共几份，再数涂色的有几份。"
+            },
+            "reveal": {
+              "en": "After two more folds the strip has 8 parts and the shaded half is 4 of them: {4/8}.",
+              "zh": "再折两次，纸条有 8 份，涂色的一半占其中 4 份：{4/8}。"
+            }
+          },
+          "example": {
+            "model": {
+              "kind": "bar",
+              "parts": 3,
+              "given": 1,
+              "object": "strip"
+            },
+            "parts": 6,
+            "then": {
+              "answer": "2/6",
+              "form": "equal"
+            },
+            "say": [
+              {
+                "en": "{1/3} of this strip is shaded.",
+                "zh": "这条纸条涂了 {1/3}。"
+              },
+              {
+                "en": "Fold it once: every third becomes two sixths.",
+                "zh": "对折一次：每个三分之一变成两个六分之一。"
+              },
+              {
+                "en": "The same amount, a new name: {1/3} = {2/6}.",
+                "zh": "多少没变，换了个名字：{1/3} = {2/6}。"
+              }
+            ]
+          }
+        },
+        {
+          "id": "split-thirds-into-twelfths",
+          "kind": "split",
+          "factors": [
+            2,
+            3,
+            4
+          ],
+          "target": "8/12",
+          "minutes": 0.7,
+          "then": {
+            "answer": "8/12",
+            "form": "equal",
+            "from": "2/3"
+          },
+          "model": {
+            "kind": "bar",
+            "parts": 3,
+            "given": 2,
+            "object": "strip"
+          },
+          "prompt": {
+            "en": "Cut every part to make twelfths, then write the shaded part.",
+            "zh": "把每份再平均分，变成十二分之几，再写出涂色部分。"
+          },
+          "guide": {
+            "en": "3 parts × 4 = 12 parts. When every part is cut into 4, each shaded part is cut into 4 as well, so the 2 shaded parts become 8.",
+            "zh": "3 份 × 4 = 12 份。每份都分成 4 小份，涂色的每一份也分成 4 小份，所以 2 份变成 8 份。"
+          },
+          "hints": [
+            {
+              "en": "3 times what makes 12?",
+              "zh": "3 乘几等于 12？"
+            },
+            {
+              "en": "Choose ×4.",
+              "zh": "选「×4」。"
+            },
+            {
+              "en": "The shaded part is now 8 small parts out of 12.",
+              "zh": "现在涂色部分是 12 小份中的 8 份。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. {2/3} = {8/12}. The top and the bottom were both multiplied by 4, because every part was cut into 4.",
+              "zh": "对。{2/3} = {8/12}。分子和分母都乘 4，因为每一份都被分成了 4 份。"
+            },
+            "wrong": [
+              {
+                "when": "scaled-one-part",
+                "say": {
+                  "en": "You cut every part, so the shaded parts were cut too: the top and the bottom both change.",
+                  "zh": "每一份都分了，涂色的部分也分了：分子和分母都要变。"
+                },
+                "sample": "=2/12"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Which choice turns 3 parts into 12?",
+              "zh": "还没对。选哪一个能把 3 份变成 12 份？"
+            },
+            "reveal": {
+              "en": "×4 cuts each third into 4 twelfths: {2/3} = {8/12}.",
+              "zh": "选 ×4，每个三分之一变成 4 个十二分之一：{2/3} = {8/12}。"
+            }
+          }
+        },
+        {
+          "id": "missing-numbers",
+          "kind": "input",
+          "answer": [
+            "8/12",
+            "8/12"
+          ],
+          "blanks": [
+            "n",
+            "d"
+          ],
+          "from": "2/3",
+          "form": "equal",
+          "minutes": 0.7,
+          "model": {
+            "kind": "bar",
+            "parts": 3,
+            "given": 2,
+            "object": "strip"
+          },
+          "prompt": {
+            "en": "Fill in the boxes: {2/3} = {?/12} = {8/?}.",
+            "zh": "填空：{2/3} = {?/12} = {8/?}。"
+          },
+          "guide": {
+            "en": "To rename a fraction, multiply the top and the bottom by the same number. 3 × 4 = 12, so 2 × 4 = 8. And if the top is 2 × 4 = 8, the bottom is 3 × 4 = 12.",
+            "zh": "给分数换名字，分子和分母要乘同一个数。3 × 4 = 12，所以 2 × 4 = 8；分子是 2 × 4 = 8，分母就是 3 × 4 = 12。"
+          },
+          "hints": [
+            {
+              "en": "What do you multiply 3 by to get 12?",
+              "zh": "3 乘几得 12？"
+            },
+            {
+              "en": "Multiply the top by the same number.",
+              "zh": "分子也乘同一个数。"
+            },
+            {
+              "en": "Times 4 each time.",
+              "zh": "每次都是乘 4。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. {2/3} = {8/12}: the top and the bottom are both multiplied by 4.",
+              "zh": "对。{2/3} = {8/12}：分子和分母都乘 4。"
+            },
+            "wrong": [
+              {
+                "when": "additive-equivalence",
+                "say": {
+                  "en": "The parts were cut into 4 times as many, not 9 more. Multiply the top and the bottom by the same number; do not add.",
+                  "zh": "每份被分成了原来的 4 倍那么多，不是多了 9 份。分子和分母要乘同一个数，不是加。"
+                },
+                "sample": "11/12,8/9"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Find the number 3 was multiplied by, and multiply 2 by it too.",
+              "zh": "还没对。看 3 乘了几，2 也乘同一个数。"
+            },
+            "reveal": {
+              "en": "× 4 on the top and the bottom: {2/3} = {8/12}.",
+              "zh": "分子分母都乘 4：{2/3} = {8/12}。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "simplest-form",
+      "lo": [
+        "p3-simplest-form"
+      ],
+      "views": [
+        "bar",
+        "circle"
+      ],
+      "tasks": [
+        {
+          "id": "join-six-eighths",
+          "kind": "merge",
+          "factors": [
+            2,
+            3,
+            4
+          ],
+          "target": "3/4",
+          "minutes": 0.6,
+          "model": {
+            "kind": "bar",
+            "parts": 8,
+            "given": 6,
+            "object": "strip"
+          },
+          "prompt": {
+            "en": "Join the parts to write {6/8} with fewer, bigger parts.",
+            "zh": "把小份合起来，用更少、更大的份写出 {6/8}。"
+          },
+          "guide": {
+            "en": "Joining equal groups of parts is the opposite of cutting: the top and the bottom are both divided by the same number. You can only join in groups that come out evenly.",
+            "zh": "把相等的几份合成一份，和切开正好相反：分子和分母都除以同一个数。只有能刚好分成组的时候才能合。"
+          },
+          "hints": [
+            {
+              "en": "In which groups can you join both the 8 parts and the 6 shaded parts?",
+              "zh": "8 份和涂色的 6 份，都能几份几份地合起来？"
+            },
+            {
+              "en": "Try joining in twos.",
+              "zh": "试试两份合成一份。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. {6/8} = {3/4}. Joining in twos divides both numbers by 2, and quarters cannot be joined evenly again.",
+              "zh": "对。{6/8} = {3/4}。两份合成一份，分子和分母都除以 2；四分之几不能再平均合并了。"
+            },
+            "wrong": [],
+            "fallback": {
+              "en": "Not yet. Join in groups that both 8 and 6 can be split into.",
+              "zh": "还没对。要按 8 和 6 都能平均分成的组来合。"
+            },
+            "reveal": {
+              "en": "Join in twos: 8 parts become 4 and the 6 shaded parts become 3: {3/4}.",
+              "zh": "两份合成一份：8 份变成 4 份，涂色的 6 份变成 3 份：{3/4}。"
+            }
+          },
+          "example": {
+            "model": {
+              "kind": "bar",
+              "parts": 4,
+              "given": 2,
+              "object": "strip"
+            },
+            "factors": [
+              2
+            ],
+            "target": "1/2",
+            "say": [
+              {
+                "en": "{2/4} of this strip is shaded.",
+                "zh": "这条纸条涂了 {2/4}。"
+              },
+              {
+                "en": "Join the parts in twos: {2/4} = {1/2}.",
+                "zh": "两份合成一份：{2/4} = {1/2}。"
+              }
+            ]
+          }
+        },
+        {
+          "id": "simplest-four-twelfths",
+          "kind": "input",
+          "answer": "1/3",
+          "form": "simplest",
+          "from": "4/12",
+          "minutes": 0.6,
+          "model": {
+            "kind": "bar",
+            "parts": 12,
+            "given": 4,
+            "object": "strip"
+          },
+          "prompt": {
+            "en": "Write {4/12} in its simplest form.",
+            "zh": "把 {4/12} 化成最简分数。"
+          },
+          "guide": {
+            "en": "Divide the top and the bottom by the same number. Keep going until no number except 1 divides both of them.",
+            "zh": "分子和分母同时除以同一个数，一直除到除了 1 以外，没有数能同时整除它们。"
+          },
+          "hints": [
+            {
+              "en": "Which number divides both 4 and 12?",
+              "zh": "哪个数能同时整除 4 和 12？"
+            },
+            {
+              "en": "Try 4.",
+              "zh": "试试 4。"
+            },
+            {
+              "en": "4 ÷ 4 = 1 and 12 ÷ 4 = 3.",
+              "zh": "4 ÷ 4 = 1，12 ÷ 4 = 3。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. {4/12} = {1/3}. Only 1 divides both 1 and 3, so it is in simplest form.",
+              "zh": "对。{4/12} = {1/3}。1 和 3 只能同时被 1 整除，所以这是最简分数。"
+            },
+            "wrong": [
+              {
+                "when": "not-simplest",
+                "say": {
+                  "en": "Equal, yes. Can the parts be joined again? 2 and 6 can both be divided by 2.",
+                  "zh": "是相等的。还能再合吗？2 和 6 都能被 2 整除。"
+                },
+                "sample": "2/6"
+              },
+              {
+                "when": "scaled-one-part",
+                "say": {
+                  "en": "Divide the top and the bottom by the same number, not just one of them.",
+                  "zh": "分子和分母要除以同一个数，不能只除其中一个。"
+                },
+                "sample": "1/12"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Divide the top and the bottom by the same number.",
+              "zh": "还没对。分子和分母要除以同一个数。"
+            },
+            "reveal": {
+              "en": "Divide both by 4: {4/12} = {1/3}.",
+              "zh": "分子分母都除以 4：{4/12} = {1/3}。"
+            }
+          }
+        },
+        {
+          "id": "which-is-simplest",
+          "kind": "choose",
+          "minutes": 0.5,
+          "model": {
+            "kind": "bar",
+            "parts": 8,
+            "given": 5
+          },
+          "options": [
+            {
+              "id": "a",
+              "value": "3/9",
+              "correct": false,
+              "misconception": "not-simplest"
+            },
+            {
+              "id": "b",
+              "value": "5/8",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "value": "6/10",
+              "correct": false,
+              "misconception": "not-simplest"
+            },
+            {
+              "id": "d",
+              "value": "4/6",
+              "correct": false,
+              "misconception": "not-simplest"
+            }
+          ],
+          "prompt": {
+            "en": "Which fraction is already in its simplest form?",
+            "zh": "哪个分数已经是最简分数？"
+          },
+          "guide": {
+            "en": "A fraction is in simplest form when no number except 1 divides both its top and its bottom.",
+            "zh": "如果除了 1 以外，没有数能同时整除分子和分母，这个分数就是最简分数。"
+          },
+          "hints": [
+            {
+              "en": "For each fraction, look for a number that divides both of its numbers.",
+              "zh": "每个分数都找一找：有没有一个数能同时整除分子和分母？"
+            },
+            {
+              "en": "3 and 9, 6 and 10, 4 and 6 can each be divided by the same number.",
+              "zh": "3 和 9、6 和 10、4 和 6，都能被同一个数整除。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Only 1 divides both 5 and 8, so {5/8} cannot be made simpler.",
+              "zh": "对。5 和 8 只能同时被 1 整除，{5/8} 不能再化简了。"
+            },
+            "wrong": [
+              {
+                "when": "not-simplest",
+                "say": {
+                  "en": "That one can still be made simpler: its top and bottom can both be divided by the same number.",
+                  "zh": "那个还能化简：它的分子和分母还能被同一个数整除。"
+                },
+                "sample": "a"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Look for the fraction where only 1 divides both numbers.",
+              "zh": "还没对。找一个只有 1 能同时整除分子和分母的分数。"
+            },
+            "reveal": {
+              "en": "{5/8} is in simplest form. {3/9} = {1/3}, {6/10} = {3/5} and {4/6} = {2/3}.",
+              "zh": "{5/8} 是最简分数。{3/9} = {1/3}，{6/10} = {3/5}，{4/6} = {2/3}。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "comparing-unlike",
+      "lo": [
+        "p3-compare-unlike"
+      ],
+      "views": [
+        "bar",
+        "wall"
+      ],
+      "tasks": [
+        {
+          "id": "thirds-and-quarters",
+          "kind": "compare",
+          "a": "2/3",
+          "b": "3/4",
+          "ask": "symbol",
+          "align": "split",
+          "minutes": 0.8,
+          "model": {
+            "kind": "bar",
+            "rows": [
+              {
+                "parts": 3,
+                "given": 2
+              },
+              {
+                "parts": 4,
+                "given": 3
+              }
+            ]
+          },
+          "prompt": {
+            "en": "Make same-size parts, then choose: {2/3} ○ {3/4}.",
+            "zh": "先化成同样大的份，再选：{2/3} ○ {3/4}。"
+          },
+          "guide": {
+            "en": "Thirds and quarters are different sizes, so count both in a size they can share. 3 and 4 both go into 12: {2/3} = {8/12} and {3/4} = {9/12}.",
+            "zh": "三分之一和四分之一大小不同，要先换成两个都能用的同样大的份。3 和 4 都能变成 12：{2/3} = {8/12}，{3/4} = {9/12}。"
+          },
+          "hints": [
+            {
+              "en": "Press Make same-size parts.",
+              "zh": "按「化成同样大的份」。"
+            },
+            {
+              "en": "Both bars are now in twelfths. Count the shaded twelfths.",
+              "zh": "两条现在都是十二分之几。数一数涂了几个十二分之一。"
+            },
+            {
+              "en": "8 twelfths and 9 twelfths.",
+              "zh": "8 个十二分之一和 9 个十二分之一。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. {2/3} = {8/12} and {3/4} = {9/12}, so {2/3} < {3/4}.",
+              "zh": "对。{2/3} = {8/12}，{3/4} = {9/12}，所以 {2/3} < {3/4}。"
+            },
+            "wrong": [
+              {
+                "when": "gap-thinking",
+                "say": {
+                  "en": "Each one is one part short of a whole, but a missing third is bigger than a missing quarter. Compare the same-size parts.",
+                  "zh": "两个都差一份到一个整体，但缺的三分之一比缺的四分之一大。用同样大的份来比。"
+                },
+                "sample": "="
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Compare the shaded twelfths in the two bars.",
+              "zh": "还没对。比一比两条里涂了几个十二分之一。"
+            },
+            "reveal": {
+              "en": "{8/12} < {9/12}, so {2/3} < {3/4}.",
+              "zh": "{8/12} < {9/12}，所以 {2/3} < {3/4}。"
+            }
+          },
+          "example": {
+            "model": {
+              "kind": "bar",
+              "rows": [
+                {
+                  "parts": 2,
+                  "given": 1
+                },
+                {
+                  "parts": 5,
+                  "given": 3
+                }
+              ]
+            },
+            "a": "1/2",
+            "b": "3/5",
+            "align": "split",
+            "say": [
+              {
+                "en": "Halves and fifths are different sizes.",
+                "zh": "二分之一和五分之一大小不同。"
+              },
+              {
+                "en": "Cut both into tenths: {1/2} = {5/10} and {3/5} = {6/10}.",
+                "zh": "都化成十分之几：{1/2} = {5/10}，{3/5} = {6/10}。"
+              },
+              {
+                "en": "So {1/2} < {3/5}.",
+                "zh": "所以 {1/2} < {3/5}。"
+              }
+            ]
+          }
+        },
+        {
+          "id": "sixths-and-twelfths",
+          "kind": "compare",
+          "a": "5/6",
+          "b": "7/12",
+          "ask": "symbol",
+          "align": "split",
+          "minutes": 0.6,
+          "model": {
+            "kind": "bar",
+            "rows": [
+              {
+                "parts": 6,
+                "given": 5
+              },
+              {
+                "parts": 12,
+                "given": 7
+              }
+            ]
+          },
+          "prompt": {
+            "en": "Choose <, = or >: {5/6} ○ {7/12}.",
+            "zh": "选 <、= 或 >：{5/6} ○ {7/12}。"
+          },
+          "guide": {
+            "en": "6 and 12 are related: each sixth is 2 twelfths. Rename only the sixths: {5/6} = {10/12}.",
+            "zh": "6 和 12 成倍数：每个六分之一是 2 个十二分之一。只要把六分之几换成十二分之几：{5/6} = {10/12}。"
+          },
+          "hints": [
+            {
+              "en": "How many twelfths make one sixth?",
+              "zh": "几个十二分之一是一个六分之一？"
+            },
+            {
+              "en": "{5/6} = {10/12}.",
+              "zh": "{5/6} = {10/12}。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. {5/6} = {10/12}, and {10/12} > {7/12}.",
+              "zh": "对。{5/6} = {10/12}，{10/12} > {7/12}。"
+            },
+            "wrong": [
+              {
+                "when": "compare-numerators-only",
+                "say": {
+                  "en": "7 is more than 5, but twelfths are smaller than sixths. Make the parts the same size first.",
+                  "zh": "7 比 5 大，但十二分之一比六分之一小。先化成同样大的份再比。"
+                },
+                "sample": "<"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Rename the sixths as twelfths, then compare.",
+              "zh": "还没对。先把六分之几换成十二分之几，再比。"
+            },
+            "reveal": {
+              "en": "{10/12} > {7/12}, so {5/6} > {7/12}.",
+              "zh": "{10/12} > {7/12}，所以 {5/6} > {7/12}。"
+            }
+          }
+        },
+        {
+          "id": "order-on-a-line",
+          "kind": "order",
+          "items": [
+            "1/2",
+            "3/8",
+            "3/4"
+          ],
+          "direction": "asc",
+          "line": 8,
+          "minutes": 0.8,
+          "model": {
+            "kind": "numberline",
+            "from": 0,
+            "to": 1,
+            "intervals": 8,
+            "labels": "ends"
+          },
+          "prompt": {
+            "en": "Order from smallest to greatest: {1/2}, {3/8}, {3/4}.",
+            "zh": "从小到大排列：{1/2}、{3/8}、{3/4}。"
+          },
+          "guide": {
+            "en": "Write them all in eighths: {1/2} = {4/8} and {3/4} = {6/8}. Then compare the numbers of eighths.",
+            "zh": "都化成八分之几：{1/2} = {4/8}，{3/4} = {6/8}。再比一比各有几个八分之一。"
+          },
+          "hints": [
+            {
+              "en": "How many eighths make {1/2}? How many make {3/4}?",
+              "zh": "{1/2} 是几个八分之一？{3/4} 呢？"
+            },
+            {
+              "en": "3, 4 and 6 eighths.",
+              "zh": "3 个、4 个和 6 个八分之一。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. {3/8} < {1/2} < {3/4}: 3, 4 and 6 eighths. The points on the line show it.",
+              "zh": "对。{3/8} < {1/2} < {3/4}：3 个、4 个、6 个八分之一。数轴上的点也是这样排的。"
+            },
+            "wrong": [
+              {
+                "when": "compare-numerators-only",
+                "say": {
+                  "en": "That orders the top numbers only. The parts are different sizes: write them all in eighths first.",
+                  "zh": "这是只比了分子。几个分数的份大小不同，先都化成八分之几。"
+                },
+                "sample": "1/2,3/4,3/8"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Write each fraction in eighths, then order them.",
+              "zh": "还没对。先把每个分数写成八分之几，再排。"
+            },
+            "reveal": {
+              "en": "{3/8}, then {1/2} = {4/8}, then {3/4} = {6/8}.",
+              "zh": "{3/8}，然后 {1/2} = {4/8}，然后 {3/4} = {6/8}。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "adding-related",
+      "lo": [
+        "p3-add-subtract"
+      ],
+      "views": [
+        "bar",
+        "circle"
+      ],
+      "tasks": [
+        {
+          "id": "add-half-and-quarter",
+          "kind": "build-sum",
+          "op": "+",
+          "a": "1/2",
+          "b": "1/4",
+          "convert": 2,
+          "minutes": 0.8,
+          "answer": {
+            "answer": "3/4",
+            "form": "equivalent"
+          },
+          "model": {
+            "kind": "bar",
+            "parts": 2,
+            "given": 1,
+            "object": "strip"
+          },
+          "prompt": {
+            "en": "Turn the half into quarters, add {1/4}, then write {1/2} + {1/4}.",
+            "zh": "把一半化成四分之几，加上 {1/4}，再写出 {1/2} + {1/4}。"
+          },
+          "guide": {
+            "en": "Halves and quarters are different sizes, so you cannot count them together yet. Cut the half into 2 quarters: {1/2} = {2/4}. Now add quarters to quarters.",
+            "zh": "二分之一和四分之一大小不同，还不能直接合起来数。把一半切成 2 个四分之一：{1/2} = {2/4}。再把四分之几加起来。"
+          },
+          "hints": [
+            {
+              "en": "Cut each half into 2 parts.",
+              "zh": "把每个一半切成 2 份。"
+            },
+            {
+              "en": "Shade 1 more quarter.",
+              "zh": "再涂 1 个四分之一。"
+            },
+            {
+              "en": "{2/4} + {1/4}.",
+              "zh": "{2/4} + {1/4}。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. {1/2} + {1/4} = {2/4} + {1/4} = {3/4}.",
+              "zh": "对。{1/2} + {1/4} = {2/4} + {1/4} = {3/4}。"
+            },
+            "wrong": [
+              {
+                "when": "added-denominators",
+                "say": {
+                  "en": "Halves and quarters cannot be added top and bottom. Turn the half into quarters first: {1/2} = {2/4}.",
+                  "zh": "二分之一和四分之一不能把分子、分母分别相加。先把一半化成四分之几：{1/2} = {2/4}。"
+                },
+                "sample": "=2/6"
+              },
+              {
+                "when": "not-converted",
+                "say": {
+                  "en": "Halves and quarters are different sizes. Turn the half into quarters first, then count the quarters.",
+                  "zh": "二分之一和四分之一大小不同。先把一半化成四分之几，再数四分之几。"
+                },
+                "sample": "=2/4"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Make the parts the same size first, then count the quarters.",
+              "zh": "还没对。先化成同样大的份，再数四分之几。"
+            },
+            "reveal": {
+              "en": "{1/2} is {2/4}; one more quarter makes {3/4}.",
+              "zh": "{1/2} 是 {2/4}，再加一个四分之一是 {3/4}。"
+            }
+          },
+          "example": {
+            "model": {
+              "kind": "bar",
+              "parts": 2,
+              "given": 1,
+              "object": "strip"
+            },
+            "a": "1/2",
+            "b": "3/8",
+            "convert": 4,
+            "answer": {
+              "answer": "7/8",
+              "form": "equivalent"
+            },
+            "say": [
+              {
+                "en": "Cut the half into eighths: {1/2} = {4/8}.",
+                "zh": "把一半切成八分之几：{1/2} = {4/8}。"
+              },
+              {
+                "en": "Add {3/8}: {4/8} + {3/8} = {7/8}.",
+                "zh": "加上 {3/8}：{4/8} + {3/8} = {7/8}。"
+              }
+            ]
+          }
+        },
+        {
+          "id": "add-third-and-twelfths",
+          "kind": "build-sum",
+          "op": "+",
+          "a": "1/3",
+          "b": "5/12",
+          "convert": 4,
+          "minutes": 0.9,
+          "answer": {
+            "answer": "3/4",
+            "form": "simplest"
+          },
+          "model": {
+            "kind": "bar",
+            "parts": 3,
+            "given": 1,
+            "object": "strip"
+          },
+          "prompt": {
+            "en": "Add {1/3} + {5/12}. Give the answer in its simplest form.",
+            "zh": "计算 {1/3} + {5/12}，答案化成最简分数。"
+          },
+          "guide": {
+            "en": "Each third is 4 twelfths, so {1/3} = {4/12}. Add the twelfths, then join parts if you can.",
+            "zh": "每个三分之一是 4 个十二分之一，所以 {1/3} = {4/12}。把十二分之几加起来，能合就再合。"
+          },
+          "hints": [
+            {
+              "en": "Cut each third into 4.",
+              "zh": "把每个三分之一切成 4 份。"
+            },
+            {
+              "en": "{4/12} + {5/12} = {9/12}.",
+              "zh": "{4/12} + {5/12} = {9/12}。"
+            },
+            {
+              "en": "9 and 12 can both be divided by 3.",
+              "zh": "9 和 12 都能被 3 整除。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. {1/3} + {5/12} = {4/12} + {5/12} = {9/12} = {3/4}.",
+              "zh": "对。{1/3} + {5/12} = {4/12} + {5/12} = {9/12} = {3/4}。"
+            },
+            "wrong": [
+              {
+                "when": "not-simplest",
+                "say": {
+                  "en": "Equal, yes: {9/12} is right. Can you join the parts again? 9 and 12 can both be divided by 3.",
+                  "zh": "是相等的：{9/12} 没错。还能再合吗？9 和 12 都能被 3 整除。"
+                },
+                "sample": "=9/12"
+              },
+              {
+                "when": "added-denominators",
+                "say": {
+                  "en": "Thirds and twelfths cannot be added top and bottom. Turn the third into twelfths first.",
+                  "zh": "三分之一和十二分之一不能把分子、分母分别相加。先把三分之一化成十二分之几。"
+                },
+                "sample": "=6/15"
+              },
+              {
+                "when": "not-converted",
+                "say": {
+                  "en": "Thirds and twelfths are different sizes. Each third is 4 twelfths, so {1/3} = {4/12} first.",
+                  "zh": "三分之一和十二分之一大小不同。每个三分之一是 4 个十二分之一，先写成 {1/3} = {4/12}。"
+                },
+                "sample": "=6/12"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Rename the third as twelfths, add, then simplify.",
+              "zh": "还没对。先把三分之一化成十二分之几，相加，再化简。"
+            },
+            "reveal": {
+              "en": "{4/12} + {5/12} = {9/12}, and {9/12} = {3/4}.",
+              "zh": "{4/12} + {5/12} = {9/12}，{9/12} = {3/4}。"
+            }
+          }
+        },
+        {
+          "id": "ribbon-bow-and-bookmark",
+          "kind": "input",
+          "answer": "7/10",
+          "form": "equivalent",
+          "minutes": 1.0,
+          "sum": {
+            "op": "+",
+            "a": "3/10",
+            "b": "2/5"
+          },
+          "model": {
+            "kind": "barmodel",
+            "type": "part-whole",
+            "units": 10,
+            "bars": [
+              {
+                "id": "ribbon",
+                "label": {
+                  "en": "Ribbon",
+                  "zh": "丝带"
+                },
+                "length": "1",
+                "segments": [
+                  {
+                    "value": "3/10",
+                    "tone": "cold",
+                    "label": {
+                      "en": "bow",
+                      "zh": "蝴蝶结"
+                    }
+                  },
+                  {
+                    "value": "2/5",
+                    "tone": "signal",
+                    "label": {
+                      "en": "bookmark",
+                      "zh": "书签"
+                    }
+                  },
+                  {
+                    "value": "3/10",
+                    "tone": "ink",
+                    "label": {
+                      "en": "left",
+                      "zh": "剩下"
+                    }
+                  }
+                ]
+              }
+            ],
+            "brace": {
+              "bar": "ribbon",
+              "from": "0",
+              "to": "7/10",
+              "label": {
+                "en": "?",
+                "zh": "?"
+              }
+            }
+          },
+          "prompt": {
+            "en": "Aisha used {3/10} of a ribbon for a bow and {2/5} for a bookmark. How much did she use?",
+            "zh": "Aisha 用一条丝带的 {3/10} 打蝴蝶结，又用 {2/5} 做书签。她一共用了几分之几？"
+          },
+          "guide": {
+            "en": "The whole bar is the ribbon. {2/5} is the same as {4/10}, so both pieces can be counted in tenths. Add the tenths.",
+            "zh": "整条是这条丝带。{2/5} 等于 {4/10}，两段就都能用十分之几来数，再把十分之几加起来。"
+          },
+          "hints": [
+            {
+              "en": "Press Split into tenths.",
+              "zh": "按「分成十分之几」。"
+            },
+            {
+              "en": "{2/5} = {4/10}.",
+              "zh": "{2/5} = {4/10}。"
+            },
+            {
+              "en": "{3/10} + {4/10}.",
+              "zh": "{3/10} + {4/10}。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. {3/10} + {2/5} = {3/10} + {4/10} = {7/10} of the ribbon.",
+              "zh": "对。{3/10} + {2/5} = {3/10} + {4/10} = {7/10}，用了丝带的 {7/10}。"
+            },
+            "wrong": [
+              {
+                "when": "added-denominators",
+                "say": {
+                  "en": "Tenths and fifths cannot be added top and bottom. Turn {2/5} into tenths first.",
+                  "zh": "十分之几和五分之几不能把分子、分母分别相加。先把 {2/5} 化成十分之几。"
+                },
+                "sample": "5/15"
+              },
+              {
+                "when": "not-converted",
+                "say": {
+                  "en": "Fifths are bigger than tenths. {2/5} is 4 tenths, not 2.",
+                  "zh": "五分之一比十分之一大。{2/5} 是 4 个十分之一，不是 2 个。"
+                },
+                "sample": "5/10"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Write both pieces in tenths, then add.",
+              "zh": "还没对。先把两段都写成十分之几，再相加。"
+            },
+            "reveal": {
+              "en": "The bookmark piece is {4/10}, so the two pieces are {7/10} of the ribbon.",
+              "zh": "书签那段是 {4/10}，两段合起来是丝带的 {7/10}。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "subtracting-related",
+      "lo": [
+        "p3-add-subtract"
+      ],
+      "views": [
+        "bar",
+        "circle"
+      ],
+      "tasks": [
+        {
+          "id": "seven-eighths-take-half",
+          "kind": "build-sum",
+          "op": "-",
+          "a": "7/8",
+          "b": "1/2",
+          "minutes": 0.8,
+          "answer": {
+            "answer": "3/8",
+            "form": "equivalent"
+          },
+          "model": {
+            "kind": "bar",
+            "parts": 8,
+            "given": 7,
+            "object": "strip"
+          },
+          "prompt": {
+            "en": "Take {1/2} away from {7/8}: cross out the right number of eighths.",
+            "zh": "从 {7/8} 里拿走 {1/2}：划掉相应的八分之几。"
+          },
+          "guide": {
+            "en": "A half is 4 eighths, so taking away {1/2} means crossing out 4 eighths. Then count the eighths that are left.",
+            "zh": "一半是 4 个八分之一，拿走 {1/2} 就是划掉 4 个八分之一。再数一数剩下几个八分之一。"
+          },
+          "hints": [
+            {
+              "en": "How many eighths make one half?",
+              "zh": "几个八分之一是一半？"
+            },
+            {
+              "en": "Cross out 4 parts.",
+              "zh": "划掉 4 份。"
+            },
+            {
+              "en": "{7/8} − {4/8}.",
+              "zh": "{7/8} − {4/8}。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. {7/8} − {1/2} = {7/8} − {4/8} = {3/8}.",
+              "zh": "对。{7/8} − {1/2} = {7/8} − {4/8} = {3/8}。"
+            },
+            "wrong": [
+              {
+                "when": "not-converted",
+                "say": {
+                  "en": "A half is bigger than one eighth. Rename {1/2} as eighths first: it is 4 of them.",
+                  "zh": "一半比一个八分之一大。先把 {1/2} 换成八分之几：是 4 个八分之一。"
+                },
+                "sample": "=6/8"
+              },
+              {
+                "when": "added-denominators",
+                "say": {
+                  "en": "Eighths and halves cannot be taken away top and bottom. Rename the half as {4/8} first.",
+                  "zh": "八分之几和二分之一不能把分子、分母分别相减。先把一半换成 {4/8}。"
+                },
+                "sample": "=6/6"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. A half of the strip is 4 eighths. Cross out 4, then count what is left.",
+              "zh": "还没对。纸条的一半是 4 个八分之一。划掉 4 份，再数剩下的。"
+            },
+            "reveal": {
+              "en": "Cross out 4 eighths: 3 eighths are left, {3/8}.",
+              "zh": "划掉 4 个八分之一，剩下 3 个八分之一：{3/8}。"
+            }
+          },
+          "example": {
+            "model": {
+              "kind": "bar",
+              "parts": 4,
+              "given": 3,
+              "object": "strip"
+            },
+            "a": "3/4",
+            "b": "1/8",
+            "convert": 2,
+            "answer": {
+              "answer": "5/8",
+              "form": "equivalent"
+            },
+            "say": [
+              {
+                "en": "Cut the quarters into eighths: {3/4} = {6/8}.",
+                "zh": "把四分之几切成八分之几：{3/4} = {6/8}。"
+              },
+              {
+                "en": "Take away {1/8}: {6/8} − {1/8} = {5/8}.",
+                "zh": "拿走 {1/8}：{6/8} − {1/8} = {5/8}。"
+              }
+            ]
+          }
+        },
+        {
+          "id": "pandan-cake-left",
+          "kind": "input",
+          "answer": "7/12",
+          "form": "equivalent",
+          "minutes": 0.8,
+          "sum": {
+            "op": "-",
+            "a": "1",
+            "b": "5/12"
+          },
+          "model": {
+            "kind": "barmodel",
+            "type": "part-whole",
+            "units": 12,
+            "bars": [
+              {
+                "id": "cake",
+                "label": {
+                  "en": "Cake",
+                  "zh": "蛋糕"
+                },
+                "length": "1",
+                "segments": [
+                  {
+                    "value": "5/12",
+                    "tone": "ink",
+                    "label": {
+                      "en": "eaten",
+                      "zh": "吃掉"
+                    }
+                  },
+                  {
+                    "value": "7/12",
+                    "tone": "cold",
+                    "label": {
+                      "en": "left",
+                      "zh": "剩下"
+                    },
+                    "unknown": true
+                  }
+                ]
+              }
+            ]
+          },
+          "prompt": {
+            "en": "A pandan cake is cut into 12 equal slices. {5/12} is eaten. What fraction is left?",
+            "zh": "一个斑兰蛋糕平均切成 12 块，吃掉了 {5/12}，还剩几分之几？"
+          },
+          "guide": {
+            "en": "The whole cake is 1, and 1 is the same as {12/12}. Take away the {5/12} that was eaten.",
+            "zh": "整个蛋糕是 1，1 等于 {12/12}。从中拿走吃掉的 {5/12}。"
+          },
+          "hints": [
+            {
+              "en": "1 whole cake = {12/12}.",
+              "zh": "1 个整蛋糕 = {12/12}。"
+            },
+            {
+              "en": "{12/12} − {5/12}.",
+              "zh": "{12/12} − {5/12}。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 1 − {5/12} = {12/12} − {5/12} = {7/12}.",
+              "zh": "对。1 − {5/12} = {12/12} − {5/12} = {7/12}。"
+            },
+            "wrong": [
+              {
+                "when": "part-part",
+                "say": {
+                  "en": "{7/5} compares the slices left with the slices eaten. The bottom number counts all 12 slices of the whole cake.",
+                  "zh": "{7/5} 是拿剩下的块数和吃掉的块数比。分母要数整个蛋糕的全部 12 块。"
+                },
+                "sample": "7/5"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Write the whole cake as twelfths, then take away the slices eaten.",
+              "zh": "还没对。先把整个蛋糕写成十二分之几，再减去吃掉的块数。"
+            },
+            "reveal": {
+              "en": "12 slices take away 5 leaves 7 of the 12: {7/12}.",
+              "zh": "12 块拿走 5 块，剩下 12 块中的 7 块：{7/12}。"
+            }
+          }
+        },
+        {
+          "id": "water-bottles",
+          "kind": "input",
+          "answer": "1/8",
+          "form": "equivalent",
+          "minutes": 1.0,
+          "sum": {
+            "op": "-",
+            "a": "3/4",
+            "b": "5/8"
+          },
+          "model": {
+            "kind": "barmodel",
+            "type": "comparison",
+            "units": 8,
+            "bars": [
+              {
+                "id": "ravi",
+                "label": {
+                  "en": "Ravi",
+                  "zh": "Ravi"
+                },
+                "length": "1",
+                "segments": [
+                  {
+                    "value": "3/4",
+                    "tone": "cold"
+                  }
+                ]
+              },
+              {
+                "id": "wei-jie",
+                "label": {
+                  "en": "Wei Jie",
+                  "zh": "Wei Jie"
+                },
+                "length": "1",
+                "segments": [
+                  {
+                    "value": "5/8",
+                    "tone": "hot"
+                  }
+                ]
+              }
+            ],
+            "brace": {
+              "bar": "ravi",
+              "from": "5/8",
+              "to": "3/4",
+              "label": {
+                "en": "?",
+                "zh": "?"
+              }
+            }
+          },
+          "prompt": {
+            "en": "Ravi drank {3/4} of a bottle of water and Wei Jie drank {5/8}. How much more did Ravi drink?",
+            "zh": "Ravi 喝了 {3/4} 瓶，Wei Jie 喝了 {5/8} 瓶。Ravi 多喝几分之几瓶？"
+          },
+          "guide": {
+            "en": "The bottles are the same size, so the two bars are the same length. The extra piece of Ravi's bar is the difference. {3/4} = {6/8}.",
+            "zh": "两瓶水一样大，所以两条一样长。Ravi 那条多出来的一段就是相差的部分。{3/4} = {6/8}。"
+          },
+          "hints": [
+            {
+              "en": "Press Split into eighths and line the bars up.",
+              "zh": "按「分成八分之几」，把两条对齐。"
+            },
+            {
+              "en": "{3/4} = {6/8}. How many eighths more?",
+              "zh": "{3/4} = {6/8}。多几个八分之一？"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. {3/4} − {5/8} = {6/8} − {5/8} = {1/8} of a bottle.",
+              "zh": "对。{3/4} − {5/8} = {6/8} − {5/8} = {1/8} 瓶。"
+            },
+            "wrong": [],
+            "fallback": {
+              "en": "Not yet. Rename {3/4} in eighths, then find the difference.",
+              "zh": "还没对。先把 {3/4} 换成八分之几，再求相差多少。"
+            },
+            "reveal": {
+              "en": "Ravi's bar is {6/8} and Wei Jie's is {5/8}: the extra piece is {1/8}.",
+              "zh": "Ravi 那条是 {6/8}，Wei Jie 那条是 {5/8}：多出来的一段是 {1/8}。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mixed-numbers",
+      "lo": [
+        "p4-mixed-numbers"
+      ],
+      "bridge": true,
+      "views": [
+        "bar",
+        "numberline"
+      ],
+      "tasks": [
+        {
+          "id": "seven-quarters",
+          "kind": "shade",
+          "target": "7/4",
+          "accept": "exact",
+          "minutes": 1.0,
+          "then": {
+            "answer": "1 3/4",
+            "form": "mixed"
+          },
+          "model": {
+            "kind": "bar",
+            "parts": 4,
+            "wholes": 2,
+            "object": "strip"
+          },
+          "prompt": {
+            "en": "Shade 7 quarters. Then write it as a mixed number.",
+            "zh": "涂出 7 个四分之一，再写成带分数。"
+          },
+          "guide": {
+            "en": "Each strip is one whole cut into 4 quarters. 4 quarters fill the first strip and 3 more go on the second: 1 whole and 3 quarters.",
+            "zh": "每一条是一个整体，平均分成 4 份。4 个四分之一涂满第一条，另外 3 个涂在第二条上：1 个整体和 3 个四分之一。"
+          },
+          "hints": [
+            {
+              "en": "Fill the first strip, then go on to the second.",
+              "zh": "先涂满第一条，再接着涂第二条。"
+            },
+            {
+              "en": "4 quarters make 1 whole.",
+              "zh": "4 个四分之一是 1 个整体。"
+            },
+            {
+              "en": "1 whole and {3/4}.",
+              "zh": "1 个整体和 {3/4}。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 7 quarters = 1 whole and 3 quarters = {1 3/4}. As an improper fraction it is {7/4}.",
+              "zh": "对。7 个四分之一 = 1 个整体和 3 个四分之一 = {1 3/4}。写成假分数是 {7/4}。"
+            },
+            "wrong": [
+              {
+                "when": "whole-changed",
+                "say": {
+                  "en": "Each strip is one whole cut into 4. The bottom number stays 4, even with two strips.",
+                  "zh": "每一条都是一个整体，平均分成 4 份。就算有两条，分母还是 4。"
+                },
+                "sample": "=7/8"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Write how many whole strips are shaded, then the quarters on the next strip.",
+              "zh": "还没对。先写涂满了几整条，再写下一条涂了几个四分之一。"
+            },
+            "reveal": {
+              "en": "One strip full and 3 quarters of the next: {1 3/4}.",
+              "zh": "一整条加下一条的 3 个四分之一：{1 3/4}。"
+            }
+          },
+          "example": {
+            "model": {
+              "kind": "bar",
+              "parts": 3,
+              "wholes": 2,
+              "object": "strip"
+            },
+            "target": "5/3",
+            "then": {
+              "answer": "1 2/3",
+              "form": "mixed"
+            },
+            "say": [
+              {
+                "en": "Each strip is one whole cut into thirds.",
+                "zh": "每一条是一个整体，平均分成三份。"
+              },
+              {
+                "en": "5 thirds: 3 fill one strip and 2 more go on the next.",
+                "zh": "5 个三分之一：3 个涂满一条，另外 2 个涂在下一条。"
+              },
+              {
+                "en": "That is 1 whole and {2/3}: {1 2/3}.",
+                "zh": "这是 1 个整体和 {2/3}：{1 2/3}。"
+              }
+            ]
+          }
+        },
+        {
+          "id": "place-two-and-a-third",
+          "kind": "place",
+          "target": "2 1/3",
+          "snap": "ticks",
+          "minutes": 0.8,
+          "model": {
+            "kind": "numberline",
+            "from": 0,
+            "to": 3,
+            "intervals": 3,
+            "labels": "wholes"
+          },
+          "prompt": {
+            "en": "Put the marker at {2 1/3}.",
+            "zh": "把标记放在 {2 1/3}。"
+          },
+          "guide": {
+            "en": "Each whole from 0 to 1, 1 to 2 and 2 to 3 is cut into thirds. {2 1/3} is 2 wholes and one more third: one jump past 2.",
+            "zh": "0 到 1、1 到 2、2 到 3，每个整体都平均分成三段。{2 1/3} 是 2 个整体再加一个三分之一：过了 2 再跳一段。"
+          },
+          "hints": [
+            {
+              "en": "Find 2 on the line first.",
+              "zh": "先在数轴上找到 2。"
+            },
+            {
+              "en": "Make one jump of {1/3} after 2.",
+              "zh": "从 2 再跳一段 {1/3}。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. {2 1/3} is one third past 2. As an improper fraction it is {7/3}.",
+              "zh": "对。{2 1/3} 在 2 后面一个三分之一的地方。写成假分数是 {7/3}。"
+            },
+            "wrong": [
+              {
+                "when": "tick-counting",
+                "say": {
+                  "en": "Count the jumps after 2, not the marks. {1/3} past 2 is one jump.",
+                  "zh": "从 2 往后数段，不是数刻度线。比 2 多 {1/3} 就是再跳一段。"
+                },
+                "sample": "6"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Go to 2, then one jump more.",
+              "zh": "还没对。先到 2，再跳一段。"
+            },
+            "reveal": {
+              "en": "{2 1/3} is one jump past 2.",
+              "zh": "{2 1/3} 在 2 后面一段。"
+            }
+          }
+        },
+        {
+          "id": "eleven-quarters",
+          "kind": "input",
+          "answer": "2 3/4",
+          "form": "mixed",
+          "minutes": 0.8,
+          "model": {
+            "kind": "bar",
+            "parts": 4,
+            "wholes": 3,
+            "given": 11,
+            "object": "strip"
+          },
+          "prompt": {
+            "en": "Write {11/4} as a mixed number.",
+            "zh": "把 {11/4} 写成带分数。"
+          },
+          "guide": {
+            "en": "4 quarters make a whole. 11 quarters are 2 groups of 4, which is 8 quarters, and 3 more: 2 wholes and {3/4}.",
+            "zh": "4 个四分之一是一个整体。11 个四分之一是 2 组 4 个（8 个），再多 3 个：2 个整体和 {3/4}。"
+          },
+          "hints": [
+            {
+              "en": "How many groups of 4 quarters are in 11 quarters?",
+              "zh": "11 个四分之一里有几组 4 个？"
+            },
+            {
+              "en": "2 groups of 4 is 8. How many quarters are left?",
+              "zh": "2 组 4 个是 8 个。还剩几个四分之一？"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. {11/4} = {2 3/4}: two whole strips and three quarters of the third.",
+              "zh": "对。{11/4} = {2 3/4}：两整条，加第三条的四分之三。"
+            },
+            "wrong": [
+              {
+                "when": "whole-changed",
+                "say": {
+                  "en": "The parts are still quarters, so the bottom number stays 4. After 2 wholes, 3 quarters are left over.",
+                  "zh": "每份还是四分之一，所以分母还是 4。凑满 2 个整体后，剩下 3 个四分之一。"
+                },
+                "sample": "2 3/11"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Count the whole strips first, then the quarters left over.",
+              "zh": "还没对。先数有几个整条，再数剩下几个四分之一。"
+            },
+            "reveal": {
+              "en": "8 quarters fill 2 strips and 3 quarters are left: {2 3/4}.",
+              "zh": "8 个四分之一涂满 2 条，剩下 3 个四分之一：{2 3/4}。"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "practice": [
+    {
+      "id": "q1-kaya-toast",
+      "revisit": [
+        "equivalent-fractions"
+      ],
+      "task": {
+        "kind": "shade",
+        "target": "3/4",
+        "accept": "equivalent",
+        "model": {
+          "kind": "bar",
+          "parts": 8,
+          "object": "toast"
+        },
+        "prompt": {
+          "en": "A plate of kaya toast is cut into 8 pieces. Shade {3/4} of it.",
+          "zh": "一盘咖椰吐司切成 8 块。涂出它的 {3/4}。"
+        },
+        "guide": {
+          "en": "The plate is one whole in 8 equal pieces. Each quarter of the plate is 2 of those pieces.",
+          "zh": "这盘吐司是一个整体，平均分成 8 块。它的每个四分之一是其中 2 块。"
+        },
+        "hints": [
+          {
+            "en": "Each quarter of the plate is 2 of the 8 pieces.",
+            "zh": "每个四分之一是 8 块中的 2 块。"
+          }
+        ],
+        "feedback": {
+          "correct": {
+            "en": "Yes. {3/4} = {6/8}: each quarter is 2 eighths, so 6 pieces.",
+            "zh": "对。{3/4} = {6/8}：每个四分之一是 2 个八分之一，所以涂 6 块。"
+          },
+          "wrong": [
+            {
+              "when": "scaled-one-part",
+              "say": {
+                "en": "You shaded {3/8}. Each quarter is 2 eighths, so {3/4} is 6 pieces.",
+                "zh": "你涂的是 {3/8}。每个四分之一是 2 个八分之一，{3/4} 是 6 块。"
+              },
+              "sample": "3"
+            }
+          ],
+          "fallback": {
+            "en": "Not quite. Each quarter of the plate is 2 of the 8 pieces.",
+            "zh": "差一点。每个四分之一是 8 块中的 2 块。"
+          },
+          "reveal": {
+            "en": "6 of the 8 pieces: {6/8} = {3/4}.",
+            "zh": "8 块中涂 6 块：{6/8} = {3/4}。"
+          }
+        },
+        "id": "q1-kaya-toast"
+      }
+    },
+    {
+      "id": "q2-equal-to-two-thirds",
+      "revisit": [
+        "equivalent-fractions"
+      ],
+      "task": {
+        "kind": "choose",
+        "model": {
+          "kind": "bar",
+          "parts": 3,
+          "given": 2
+        },
+        "options": [
+          {
+            "id": "a",
+            "value": "4/6",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "value": "3/4",
+            "correct": false,
+            "misconception": "additive-equivalence"
+          },
+          {
+            "id": "c",
+            "value": "2/6",
+            "correct": false,
+            "misconception": "scaled-one-part"
+          }
+        ],
+        "prompt": {
+          "en": "Which fraction is equal to {2/3}?",
+          "zh": "哪个分数等于 {2/3}？"
+        },
+        "guide": {
+          "en": "Equal fractions multiply (or divide) the top and the bottom by the same number.",
+          "zh": "等值分数是把分子和分母乘（或除以）同一个数。"
+        },
+        "hints": [
+          {
+            "en": "Multiply the top and the bottom of {2/3} by the same number.",
+            "zh": "把 {2/3} 的分子和分母乘同一个数。"
+          }
+        ],
+        "feedback": {
+          "correct": {
+            "en": "Yes. {2/3} = {4/6}: the top and the bottom are both multiplied by 2.",
+            "zh": "对。{2/3} = {4/6}：分子和分母都乘 2。"
+          },
+          "wrong": [
+            {
+              "when": "additive-equivalence",
+              "say": {
+                "en": "{3/4} adds 1 to the top and the bottom. Equal fractions multiply both by the same number.",
+                "zh": "{3/4} 是分子分母各加 1。等值分数要把分子和分母乘同一个数。"
+              },
+              "sample": "b"
+            },
+            {
+              "when": "scaled-one-part",
+              "say": {
+                "en": "{2/6} changes only the bottom number. Cut every part the same way: the top and the bottom both change.",
+                "zh": "{2/6} 只改了分母。每一份都要同样地分：分子和分母都要变。"
+              },
+              "sample": "c"
+            }
+          ],
+          "fallback": {
+            "en": "Not quite. Look for the fraction whose top and bottom are both 2 times bigger.",
+            "zh": "差一点。找分子和分母都变成 2 倍的那个分数。"
+          },
+          "reveal": {
+            "en": "{4/6}: 2 × 2 = 4 and 3 × 2 = 6.",
+            "zh": "{4/6}：2 × 2 = 4，3 × 2 = 6。"
+          }
+        },
+        "id": "q2-equal-to-two-thirds"
+      }
+    },
+    {
+      "id": "q3-quarters-or-eighths",
+      "revisit": [
+        "comparing-unlike"
+      ],
+      "task": {
+        "kind": "compare",
+        "a": "3/4",
+        "b": "5/8",
+        "ask": "symbol",
+        "model": {
+          "kind": "bar",
+          "rows": [
+            {
+              "parts": 4,
+              "given": 3
+            },
+            {
+              "parts": 8,
+              "given": 5
+            }
+          ]
+        },
+        "prompt": {
+          "en": "Choose <, = or >: {3/4} ○ {5/8}.",
+          "zh": "选 <、= 或 >：{3/4} ○ {5/8}。"
+        },
+        "guide": {
+          "en": "Quarters and eighths are different sizes. Each quarter is 2 eighths, so {3/4} = {6/8}.",
+          "zh": "四分之一和八分之一大小不同。每个四分之一是 2 个八分之一，所以 {3/4} = {6/8}。"
+        },
+        "hints": [
+          {
+            "en": "How many eighths make {3/4}?",
+            "zh": "{3/4} 是几个八分之一？"
+          }
+        ],
+        "feedback": {
+          "correct": {
+            "en": "Yes. {3/4} = {6/8}, and {6/8} > {5/8}.",
+            "zh": "对。{3/4} = {6/8}，{6/8} > {5/8}。"
+          },
+          "wrong": [
+            {
+              "when": "compare-numerators-only",
+              "say": {
+                "en": "5 is more than 3, but eighths are smaller than quarters. Rename {3/4} as {6/8} first.",
+                "zh": "5 比 3 大，但八分之一比四分之一小。先把 {3/4} 换成 {6/8}。"
+              },
+              "sample": "<"
+            }
+          ],
+          "fallback": {
+            "en": "Not quite. Rename {3/4} in eighths, then compare.",
+            "zh": "差一点。先把 {3/4} 换成八分之几，再比。"
+          },
+          "reveal": {
+            "en": "{3/4} = {6/8} > {5/8}.",
+            "zh": "{3/4} = {6/8} > {5/8}。"
+          }
+        },
+        "id": "q3-quarters-or-eighths"
+      }
+    },
+    {
+      "id": "q4-simplest-eight-twelfths",
+      "revisit": [
+        "simplest-form"
+      ],
+      "task": {
+        "kind": "input",
+        "answer": "2/3",
+        "form": "simplest",
+        "from": "8/12",
+        "model": {
+          "kind": "bar",
+          "parts": 12,
+          "given": 8
+        },
+        "prompt": {
+          "en": "Write {8/12} in its simplest form.",
+          "zh": "把 {8/12} 化成最简分数。"
+        },
+        "guide": {
+          "en": "Divide the top and the bottom by the same number until only 1 divides both.",
+          "zh": "分子和分母同时除以同一个数，直到只有 1 能同时整除它们。"
+        },
+        "hints": [
+          {
+            "en": "Which is the biggest number that divides both 8 and 12?",
+            "zh": "能同时整除 8 和 12 的最大的数是几？"
+          }
+        ],
+        "feedback": {
+          "correct": {
+            "en": "Yes. {8/12} = {2/3}: both numbers divided by 4.",
+            "zh": "对。{8/12} = {2/3}：分子和分母都除以 4。"
+          },
+          "wrong": [
+            {
+              "when": "not-simplest",
+              "say": {
+                "en": "Equal, but not yet simplest: 4 and 6 can both be divided by 2.",
+                "zh": "是相等的，但还不是最简：4 和 6 都能被 2 整除。"
+              },
+              "sample": "4/6"
+            },
+            {
+              "when": "scaled-one-part",
+              "say": {
+                "en": "Only one number was divided. Divide the top and the bottom by the same number.",
+                "zh": "只除了一个数。分子和分母要除以同一个数。"
+              },
+              "sample": "4/12"
+            }
+          ],
+          "fallback": {
+            "en": "Not quite. Divide the top and the bottom by the same number.",
+            "zh": "差一点。分子和分母要除以同一个数。"
+          },
+          "reveal": {
+            "en": "Divide both by 4: {8/12} = {2/3}.",
+            "zh": "分子分母都除以 4：{8/12} = {2/3}。"
+          }
+        },
+        "id": "q4-simplest-eight-twelfths"
+      }
+    },
+    {
+      "id": "q5-three-quarters-on-a-line",
+      "revisit": [
+        "number-line",
+        "equivalent-fractions"
+      ],
+      "task": {
+        "kind": "place",
+        "target": "3/4",
+        "snap": "ticks",
+        "model": {
+          "kind": "numberline",
+          "from": 0,
+          "to": 1,
+          "intervals": 8,
+          "labels": "ends"
+        },
+        "prompt": {
+          "en": "The line from 0 to 1 has 8 equal jumps. Put the marker at {3/4}.",
+          "zh": "0 到 1 平均分成 8 段。把标记放在 {3/4}。"
+        },
+        "guide": {
+          "en": "The jumps are eighths. Each quarter is 2 eighths, so {3/4} is 6 jumps from 0.",
+          "zh": "每段是八分之一。每个四分之一是 2 个八分之一，所以 {3/4} 在离 0 六段的地方。"
+        },
+        "hints": [
+          {
+            "en": "How many eighths make {3/4}?",
+            "zh": "{3/4} 是几个八分之一？"
+          }
+        ],
+        "feedback": {
+          "correct": {
+            "en": "Yes. {3/4} = {6/8}: 6 jumps from 0.",
+            "zh": "对。{3/4} = {6/8}：离 0 六段。"
+          },
+          "wrong": [
+            {
+              "when": "scaled-one-part",
+              "say": {
+                "en": "That is {3/8}. The jumps are eighths, and {3/4} is 6 of them.",
+                "zh": "那是 {3/8}。每段是八分之一，{3/4} 是 6 段。"
+              },
+              "sample": "3"
+            },
+            {
+              "when": "tick-counting",
+              "say": {
+                "en": "One jump off. Count the jumps from 0, not the marks: {3/4} is 6 jumps.",
+                "zh": "差了一段。从 0 数段，不数刻度线：{3/4} 是 6 段。"
+              },
+              "sample": "5"
+            }
+          ],
+          "fallback": {
+            "en": "Not quite. Each quarter is 2 of the jumps.",
+            "zh": "差一点。每个四分之一是 2 段。"
+          },
+          "reveal": {
+            "en": "{3/4} = {6/8}, the end of the 6th jump.",
+            "zh": "{3/4} = {6/8}，在第 6 段的终点。"
+          }
+        },
+        "id": "q5-three-quarters-on-a-line"
+      }
+    },
+    {
+      "id": "q6-five-sixths-take-a-third",
+      "revisit": [
+        "subtracting-related"
+      ],
+      "task": {
+        "kind": "input",
+        "answer": "1/2",
+        "form": "simplest",
+        "sum": {
+          "op": "-",
+          "a": "5/6",
+          "b": "1/3"
+        },
+        "model": {
+          "kind": "bar",
+          "parts": 6,
+          "given": 5
+        },
+        "prompt": {
+          "en": "Work out {5/6} − {1/3}. Give the answer in its simplest form.",
+          "zh": "计算 {5/6} − {1/3}，答案化成最简分数。"
+        },
+        "guide": {
+          "en": "Each third is 2 sixths, so {1/3} = {2/6}. Take away the sixths, then simplify.",
+          "zh": "每个三分之一是 2 个六分之一，所以 {1/3} = {2/6}。先减六分之几，再化简。"
+        },
+        "hints": [
+          {
+            "en": "{1/3} = {2/6}.",
+            "zh": "{1/3} = {2/6}。"
+          }
+        ],
+        "feedback": {
+          "correct": {
+            "en": "Yes. {5/6} − {2/6} = {3/6} = {1/2}.",
+            "zh": "对。{5/6} − {2/6} = {3/6} = {1/2}。"
+          },
+          "wrong": [
+            {
+              "when": "added-denominators",
+              "say": {
+                "en": "The tops and the bottoms were taken away separately. Rename {1/3} as {2/6} first.",
+                "zh": "这是把分子、分母分别相减了。先把 {1/3} 换成 {2/6}。"
+              },
+              "sample": "4/3"
+            },
+            {
+              "when": "not-converted",
+              "say": {
+                "en": "Thirds are bigger than sixths: {1/3} is 2 sixths, not 1.",
+                "zh": "三分之一比六分之一大：{1/3} 是 2 个六分之一，不是 1 个。"
+              },
+              "sample": "4/6"
+            },
+            {
+              "when": "not-simplest",
+              "say": {
+                "en": "{3/6} is right but not yet simplest: 3 and 6 can both be divided by 3.",
+                "zh": "{3/6} 是对的，但还不是最简：3 和 6 都能被 3 整除。"
+              },
+              "sample": "3/6"
+            }
+          ],
+          "fallback": {
+            "en": "Not quite. Rename {1/3} as sixths, take away, then simplify.",
+            "zh": "差一点。先把 {1/3} 换成六分之几，相减，再化简。"
+          },
+          "reveal": {
+            "en": "{5/6} − {2/6} = {3/6} = {1/2}.",
+            "zh": "{5/6} − {2/6} = {3/6} = {1/2}。"
+          }
+        },
+        "id": "q6-five-sixths-take-a-third"
+      }
+    },
+    {
+      "id": "q7-pandan-cake",
+      "revisit": [
+        "adding-related"
+      ],
+      "task": {
+        "kind": "input",
+        "answer": "7/12",
+        "form": "equivalent",
+        "sum": {
+          "op": "+",
+          "a": "1/6",
+          "b": "5/12"
+        },
+        "model": {
+          "kind": "barmodel",
+          "type": "part-whole",
+          "units": 12,
+          "bars": [
+            {
+              "id": "cake",
+              "label": {
+                "en": "Cake",
+                "zh": "蛋糕"
+              },
+              "length": "1",
+              "segments": [
+                {
+                  "value": "1/6",
+                  "tone": "cold",
+                  "label": {
+                    "en": "Aisha",
+                    "zh": "Aisha"
+                  }
+                },
+                {
+                  "value": "5/12",
+                  "tone": "hot",
+                  "label": {
+                    "en": "her brother",
+                    "zh": "弟弟"
+                  }
+                },
+                {
+                  "value": "5/12",
+                  "tone": "ink"
+                }
+              ]
+            }
+          ],
+          "brace": {
+            "bar": "cake",
+            "from": "0",
+            "to": "7/12",
+            "label": {
+              "en": "?",
+              "zh": "?"
+            }
+          }
+        },
+        "prompt": {
+          "en": "Aisha ate {1/6} of a pandan cake and her brother ate {5/12}. How much did they eat?",
+          "zh": "Aisha 吃了一个斑兰蛋糕的 {1/6}，弟弟吃了 {5/12}。他们一共吃了几分之几？"
+        },
+        "guide": {
+          "en": "Each sixth is 2 twelfths, so {1/6} = {2/12}. Add the twelfths.",
+          "zh": "每个六分之一是 2 个十二分之一，所以 {1/6} = {2/12}。再把十二分之几加起来。"
+        },
+        "hints": [
+          {
+            "en": "{1/6} = {2/12}.",
+            "zh": "{1/6} = {2/12}。"
+          }
+        ],
+        "feedback": {
+          "correct": {
+            "en": "Yes. {1/6} + {5/12} = {2/12} + {5/12} = {7/12} of the cake.",
+            "zh": "对。{1/6} + {5/12} = {2/12} + {5/12} = {7/12}。"
+          },
+          "wrong": [
+            {
+              "when": "added-denominators",
+              "say": {
+                "en": "Sixths and twelfths cannot be added top and bottom. Rename {1/6} as {2/12} first.",
+                "zh": "六分之几和十二分之几不能把分子、分母分别相加。先把 {1/6} 换成 {2/12}。"
+              },
+              "sample": "6/18"
+            },
+            {
+              "when": "not-converted",
+              "say": {
+                "en": "Sixths are bigger than twelfths: {1/6} is 2 twelfths, not 1.",
+                "zh": "六分之一比十二分之一大：{1/6} 是 2 个十二分之一，不是 1 个。"
+              },
+              "sample": "6/12"
+            }
+          ],
+          "fallback": {
+            "en": "Not quite. Rename {1/6} in twelfths, then add.",
+            "zh": "差一点。先把 {1/6} 换成十二分之几，再相加。"
+          },
+          "reveal": {
+            "en": "{2/12} + {5/12} = {7/12}.",
+            "zh": "{2/12} + {5/12} = {7/12}。"
+          }
+        },
+        "id": "q7-pandan-cake"
+      }
+    },
+    {
+      "id": "q8-is-a-fifth-greater",
+      "revisit": [
+        "comparing-fractions"
+      ],
+      "task": {
+        "kind": "choose",
+        "multi": true,
+        "model": {
+          "kind": "bar",
+          "rows": [
+            {
+              "parts": 3,
+              "given": 1
+            },
+            {
+              "parts": 5,
+              "given": 1
+            }
+          ]
+        },
+        "options": [
+          {
+            "id": "a",
+            "model": {
+              "kind": "bar",
+              "rows": [
+                {
+                  "parts": 3,
+                  "given": 1
+                },
+                {
+                  "parts": 5,
+                  "given": 1
+                }
+              ]
+            },
+            "correct": true
+          },
+          {
+            "id": "b",
+            "model": {
+              "kind": "bar",
+              "rows": [
+                {
+                  "parts": 3,
+                  "given": 1,
+                  "length": 0.5
+                },
+                {
+                  "parts": 5,
+                  "given": 1
+                }
+              ]
+            },
+            "correct": false,
+            "misconception": "different-wholes"
+          },
+          {
+            "id": "c",
+            "text": {
+              "en": "No. The same whole cut into more parts gives smaller parts.",
+              "zh": "不对。同一个整体分得越多，每份越小。"
+            },
+            "correct": true
+          },
+          {
+            "id": "d",
+            "text": {
+              "en": "Yes. 5 is more than 3, so {1/5} is greater.",
+              "zh": "对。5 比 3 大，所以 {1/5} 大。"
+            },
+            "correct": false,
+            "misconception": "bigger-denominator-bigger"
+          },
+          {
+            "id": "e",
+            "text": {
+              "en": "They are equal: both are one part.",
+              "zh": "一样大：都是一份。"
+            },
+            "correct": false,
+            "misconception": "gap-thinking"
+          }
+        ],
+        "prompt": {
+          "en": "Wei Jie says {1/5} is greater than {1/3} because 5 is more than 3. Choose a picture and a reason.",
+          "zh": "Wei Jie 说 {1/5} 比 {1/3} 大，因为 5 比 3 大。选一幅图和一句理由。"
+        },
+        "guide": {
+          "en": "Compare fractions of the same whole only. Under one whole, a fifth is narrower than a third.",
+          "zh": "只能在同一个整体下比较分数。在同一个整体下，五分之一比三分之一窄。"
+        },
+        "hints": [
+          {
+            "en": "Which picture shows two wholes of the same length?",
+            "zh": "哪幅图里的两个整体一样长？"
+          }
+        ],
+        "feedback": {
+          "correct": {
+            "en": "Yes. With the same whole, {1/3} is wider than {1/5}. Wei Jie is not right.",
+            "zh": "对。在同一个整体下，{1/3} 比 {1/5} 宽。Wei Jie 说得不对。"
+          },
+          "wrong": [
+            {
+              "when": "different-wholes",
+              "say": {
+                "en": "In picture B the two wholes are different lengths. We can only compare fractions of the same whole.",
+                "zh": "图 B 里两个整体长短不同。只能在同一个整体下比较分数。"
+              },
+              "sample": "b,c"
+            },
+            {
+              "when": "bigger-denominator-bigger",
+              "say": {
+                "en": "More parts in the same whole means each part is smaller, so {1/5} is smaller than {1/3}.",
+                "zh": "同一个整体分的份数越多，每份越小，所以 {1/5} 比 {1/3} 小。"
+              },
+              "sample": "a,d"
+            },
+            {
+              "when": "gap-thinking",
+              "say": {
+                "en": "Both are one part, but the parts are different sizes: a third is bigger than a fifth.",
+                "zh": "都是一份，但每份大小不同：三分之一比五分之一大。"
+              },
+              "sample": "a,e"
+            }
+          ],
+          "fallback": {
+            "en": "Not quite. Choose the picture with two wholes of the same length, and the reason that matches it.",
+            "zh": "差一点。选两个整体一样长的那幅图，再选和它相符的理由。"
+          },
+          "reveal": {
+            "en": "Picture A, and: the same whole cut into more parts gives smaller parts.",
+            "zh": "图 A，以及：同一个整体分得越多，每份越小。"
+          }
+        },
+        "id": "q8-is-a-fifth-greater"
+      }
+    }
+  ]
+}

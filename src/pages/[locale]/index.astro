@@ -21,8 +21,8 @@ const counts = await getChapterCounts();
 const subjectCount = (s: string) => topics.filter((topic) => topic.data.subject === s).length;
 const countLabel = (n: number) => t(locale, n === 1 ? 'index.count.one' : 'index.count', { n });
 const subjectKey = (s: string) => `subject.${s}` as UiKey;
-const typeKeys = (mode: 'time' | 'space' | 'both'): UiKey[] =>
-  mode === 'both' ? ['type.time', 'type.space'] : [mode === 'time' ? 'type.time' : 'type.space'];
+const typeKeys = (mode: 'time' | 'space' | 'both' | 'lesson'): UiKey[] =>
+  mode === 'both' ? ['type.time', 'type.space'] : mode === 'lesson' ? ['type.lesson'] : [mode === 'time' ? 'type.time' : 'type.space'];
 ---
 <BaseLayout locale={locale} title={t(locale, 'site.name')}>
   <header

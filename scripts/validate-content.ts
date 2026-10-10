@@ -20,6 +20,10 @@
  *     in a chapter body names a listed term
  *   - at most one `kind: background` chapter, with `order: 0`; `state.note`
  *     only on the background chapter
+ *   - MathScene (docs/15 §4.10): chapters and steps one-to-one, the practice
+ *     chapter, syllabus / source refs, denominators and sums, targets, planned
+ *     feedback, prompt length, `{a/b}` tokens; `<Task id>` names a sub-step and
+ *     `<Frac n d>` has whole numbers (d ≥ 1)
  *   - referenced files (cover) exist
  * Plus: UI dictionaries (src/i18n/ui.*.json) have identical keys.
  *
@@ -138,8 +142,25 @@ function tagAttrs(body: string, tag: string): { raw: string; attrs: Record<strin
   return out;
 }
 
-/** `<Num s>`, `<FlyTo preset>`, `<More title>` and `<Term id>` in a chapter body. */
-function checkBodyComponents(file: string, body: string, sources: Set<string> | null, presets: Set<string>, terms: Set<string> | null): void {
+/** `<Frac n={3} d={4} />` attributes (string or `{number}`). */
+function fracAttrs(raw: string): Record<string, number | null> {
+  const out: Record<string, number | null> = {};
+  for (const m of raw.matchAll(/\b([ndw])\s*=\s*(?:"([^"]*)"|'([^']*)'|\{\s*([^}]*?)\s*\})/g)) {
+    const v = m[2] ?? m[3] ?? m[4] ?? '';
+    out[m[1]!] = /^\d+$/.test(v) ? Number(v) : null;
+  }
+  return out;
+}
+
+/** `<Num s>`, `<FlyTo preset>`, `<More title>`, `<Term id>`, `<Task id>` and `<Frac>` in a chapter body. */
+function checkBodyComponents(
+  file: string,
+  body: string,
+  sources: Set<string> | null,
+  presets: Set<string>,
+  terms: Set<string> | null,
+  tasks: Set<string> | null,
+): void {
   for (const { raw, attrs } of tagAttrs(body, 'Num')) {
     const ids = (attrs.s ?? '').split(/[\s,]+/).filter(Boolean);
     if (ids.length === 0) {
@@ -164,6 +185,16 @@ function checkBodyComponents(file: string, body: string, sources: Set<string> | 
     if (!id) error(file, `<Term> needs an id, e.g. <Term id="blitzkrieg">: ${raw}`);
     else if (!terms) error(file, `<Term id="${id}">: the topic has no data/glossary.json`);
     else if (!terms.has(id)) error(file, `<Term id="${id}">: unknown term (not in data/glossary.json)`);
+  }
+  for (const { raw, attrs } of tagAttrs(body, 'Task')) {
+    const id = attrs.id;
+    if (!id) error(file, `<Task> needs an id, e.g. <Task id="fold-strip-quarters">: ${raw}`);
+    else if (!tasks) error(file, `<Task id="${id}">: this engine has no lesson sub-steps`);
+    else if (!tasks.has(id)) error(file, `<Task id="${id}">: unknown sub-step (not in data/lesson.json)`);
+  }
+  for (const m of body.matchAll(/<Frac(?![A-Za-z])([^>]*)>/g)) {
+    const a = fracAttrs(m[1] ?? '');
+    if (a.n == null || a.d == null || a.d < 1 || (('w' in a) && a.w == null)) error(file, `<Frac> needs whole numbers n and d (d ≥ 1), e.g. <Frac n={3} d={4} />: ${m[0]}`);
   }
 }
 
@@ -243,6 +274,8 @@ function validateTopic(dir: string): void {
   const presets = new Set(data !== undefined ? schemas.presetIds(data) : []);
   const glossaryFile = data !== undefined ? (data as { glossary?: GlossaryFile }).glossary : undefined;
   const terms = glossaryFile ? glossaryIds(glossaryFile) : 'glossary' in raw ? new Set<string>() : null;
+  const tasks = data !== undefined && schemas.taskIds ? new Set(schemas.taskIds(data)) : null;
+  const chapterInfos: { id: string; order: number; kind?: 'chapter' | 'background'; state: unknown }[] = [];
 
   /* ---- chapters ---- */
   const chaptersDir = join(dir, 'chapters');
@@ -271,7 +304,7 @@ function validateTopic(dir: string): void {
     checkBilingual(file, front);
     checkLangBlocks(file, match[2] ?? '');
     // Only when the data parsed: otherwise the data errors already explain missing ids.
-    if (data !== undefined) checkBodyComponents(file, match[2] ?? '', sources, presets, terms);
+    if (data !== undefined) checkBodyComponents(file, match[2] ?? '', sources, presets, terms, tasks);
 
     const parsed = chapterSchema.safeParse(front);
     if (!parsed.success) {
@@ -279,6 +312,7 @@ function validateTopic(dir: string): void {
       continue;
     }
     const chapter = parsed.data;
+    chapterInfos.push({ id: chapter.id, order: chapter.order, kind: chapter.kind, state: chapter.state });
     ids.add(chapter.id, 'chapter', file);
 
     const prev = orders.get(chapter.order);
@@ -305,6 +339,9 @@ function validateTopic(dir: string): void {
       }
       for (const issue of schemas.chapterIssues?.(state.data, data) ?? []) error(file, issue);
     }
+  }
+  if (data !== undefined) {
+    for (const issue of schemas.topicIssues?.(chapterInfos, data) ?? []) (issue.level === 'error' ? error : warn)(dataDir, issue.message);
   }
 }
 

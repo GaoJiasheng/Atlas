@@ -39,7 +39,7 @@ export type AtlasState = SceneSnapshot & {
 };
 
 export interface AtlasTestApi {
-  /** Resolves `true` once the engine view has mounted and its stage canvas has a size; `false` after 20 s. */
+  /** Resolves `true` once the engine view has mounted and its stage canvas (or SVG surface) has a size; `false` after 20 s. */
   ready: Promise<boolean>;
   chapters(): string[];
   goToChapter(id: string, options?: { instant?: boolean }): void;
@@ -48,6 +48,12 @@ export interface AtlasTestApi {
   modes(): string[];
   setMode(id: string, on: boolean, options?: { instant?: boolean }): void;
   keymap(): KeyBinding[];
+  /** Registered one-off commands (check, hint …) and whether each can run now. */
+  commands(): { id: string; key?: string; disabled: boolean }[];
+  /** Run a command, as its key or button would; false when unknown or disabled. */
+  runCommand(id: string): boolean;
+  /** Engine-specific test hooks (`SceneControls.test`), e.g. MathScene's `task()`, `solve()`, `practice()`; `{}` when none. */
+  readonly engine: Record<string, (...args: never[]) => unknown>;
   /** Presentation beats in order (empty when the engine has none). */
   beats(): BeatInfo[];
   /** Enter the presentation if needed and go to beat `i` (`instant` default false). */
@@ -97,9 +103,28 @@ function stageCanvas(stage: Element | null): HTMLCanvasElement | null {
   return best;
 }
 
+/** A stage drawn without a canvas (MathScene's SVG) marks its surface `data-stage-surface`. */
+function stageSurface(stage: Element | null): Element | null {
+  return stage?.querySelector('[data-stage-surface]') ?? null;
+}
+
+/** Device-pixel size of what the stage draws on: its canvas, else its SVG surface. */
+function drawnSize(stage: Element | null): [number, number] | null {
+  const c = stageCanvas(stage);
+  if (c) return [c.width, c.height];
+  const s = stageSurface(stage);
+  if (!s) return null;
+  const r = s.getBoundingClientRect();
+  const dpr = window.devicePixelRatio || 1;
+  return [Math.round(r.width * dpr), Math.round(r.height * dpr)];
+}
+
 function canvasStats(stage: Element | null): SceneStats {
   const c = stageCanvas(stage);
-  if (!c) return { buffer: [0, 0], pixelRatio: window.devicePixelRatio || 1 };
+  if (!c) {
+    const size = drawnSize(stage);
+    return { buffer: size ?? [0, 0], pixelRatio: window.devicePixelRatio || 1 };
+  }
   const css = c.clientWidth || 1;
   return { buffer: [c.width, c.height], pixelRatio: Math.round((c.width / css) * 100) / 100 };
 }
@@ -112,8 +137,8 @@ export function installTestApi(deps: TestApiDeps): () => void {
       new Promise<boolean>((resolve) => {
         const start = performance.now();
         const poll = () => {
-          const c = stageCanvas(deps.stage());
-          if (c && c.width > 0 && c.height > 0) resolve(true);
+          const size = drawnSize(deps.stage());
+          if (size && size[0] > 0 && size[1] > 0) resolve(true);
           else if (performance.now() - start > READY_TIMEOUT_MS) resolve(false);
           else window.setTimeout(poll, 100);
         };
@@ -135,6 +160,11 @@ export function installTestApi(deps: TestApiDeps): () => void {
       if (actions.setMode(id, on, { instant }) && instant) store.getState().snap();
     },
     keymap: () => buildKeymap(hud.getState().controls),
+    commands: () => (hud.getState().controls.commands ?? []).map((c) => ({ id: c.id, ...(c.key ? { key: c.key } : {}), disabled: !!c.disabled })),
+    runCommand: (id) => actions.runCommand(id),
+    get engine() {
+      return hud.getState().controls.test ?? {};
+    },
     beats: () => hud.getState().controls.beats?.list() ?? [],
     goToBeat: (index, options) => hud.getState().controls.beats?.go(index, { instant: options?.instant ?? false }),
     setPaused: (on) => {

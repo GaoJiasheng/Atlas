@@ -4,7 +4,7 @@
  *   /en/topics/ww2/?ch=fall-of-singapore&t=1942-02-10&layers=control,battles&cam=103.8,1.35,7.5
  *   /en/topics/aircon/?ch=power-on&part=compressor&view=xray&run=1
  *
- * Keys: `ch`, `layers`, `cam`, `theme` (core) and `t`, `hl`, `part`, `view`,
+ * Keys: `ch`, `layers`, `cam`, `theme` (core) and `task`, `model`, `t`, `hl`, `part`, `view`,
  * `explode`, `run`, `cut`, `pose` (engine passthrough). Values equal to the current chapter's
  * target are omitted, so a plain chapter link is just `?ch=<id>`.
  * Unknown query parameters (utm_*, etc.) are preserved.
@@ -20,7 +20,7 @@ import { isTheme } from '../../theme/theme';
 export type UrlState = Partial<SceneState & UrlEngineFields>;
 
 /** Order in which keys are written (most meaningful first). */
-export const URL_KEY_ORDER = ['ch', 't', 'hl', 'part', 'view', 'explode', 'run', 'cut', 'pose', 'layers', 'cam', 'theme'] as const;
+export const URL_KEY_ORDER = ['ch', 'task', 'model', 't', 'hl', 'part', 'view', 'explode', 'run', 'cut', 'pose', 'layers', 'cam', 'theme'] as const;
 export type UrlKey = (typeof URL_KEY_ORDER)[number];
 
 const ID_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -62,6 +62,10 @@ function encodeField(key: UrlKey, state: UrlState): string | null {
       return state.cutaway ?? null;
     case 'pose':
       return state.pose === undefined ? null : (state.pose ?? '');
+    case 'task':
+      return state.task === undefined ? null : String(state.task);
+    case 'model':
+      return state.model === undefined ? null : (state.model ?? '');
   }
 }
 
@@ -144,6 +148,15 @@ export function decodeSceneState(input: string | URLSearchParams): UrlState {
   if (pose !== null) {
     if (pose === '') out.pose = null;
     else if (ID_RE.test(pose)) out.pose = pose;
+  }
+
+  const task = params.get('task');
+  if (task !== null && /^[1-9]\d{0,2}$/.test(task)) out.task = Number(task);
+
+  const model = params.get('model');
+  if (model !== null) {
+    if (model === '') out.model = null;
+    else if (VIEW_RE.test(model)) out.model = model;
   }
 
   return out;

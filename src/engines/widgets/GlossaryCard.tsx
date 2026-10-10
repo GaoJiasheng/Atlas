@@ -12,6 +12,7 @@ import { GLOSSARY_ALL } from '../core/controls';
 import type { GlossaryTerm } from '../../content/schema/glossary';
 import { t, tx } from '../../i18n';
 import { Icon } from './icons';
+import { renderRich } from '../../lib/rich-text';
 
 /** The topic's glossary terms from the loaded engine data (`[]` when it has none). */
 export function topicGlossary(data: unknown): readonly GlossaryTerm[] {
@@ -72,7 +73,7 @@ export function GlossaryCard({ terms, open, locale, onOpen }: GlossaryCardProps)
             {tx(term.term, locale)}
             {other(term.term) && <small lang={otherLang(locale)}>{other(term.term)}</small>}
           </h3>
-          <p className="atlas-gloss__def">{tx(term.definition, locale)}</p>
+          <p className="atlas-gloss__def">{renderRich(tx(term.definition, locale), locale)}</p>
           {(term.see ?? []).some((id) => byId.has(id)) && (
             <p className="atlas-gloss__see">
               <span>{t(locale, 'glossary.see')}</span>
