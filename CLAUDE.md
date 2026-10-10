@@ -8,6 +8,7 @@
 - **视觉与交互语言：`docs/08-technical-plate.md`**，它适配了项目级 skill `.claude/skills/industrial-3d-showcase/`。任何视觉、HUD、材质、镜头、动画、标注、性能工作都按这两份做；skill 的 `references/master-spec.md`、`rounds.md`、`perf-lessons.md`、`fact-discipline.md` 是细则。
 - 内容路线：`docs/04-content-roadmap.md`；加主题看 `docs/05-briefing-playbook.md`
 - **历史主题（时间线 + 地图，像二战那样）**：用项目级 skill `.claude/skills/atlas-history-topic/`（总览 `docs/10-history-topic-template.md`），脚手架 `pnpm tsx scripts/new-topic.ts`，地图管线 `scripts/geo/lib/<step>.ts --topic <slug>`
+- **拆解主题（3D 拆解 + 工作原理，像空调那样；机器或生物解剖）**：用项目级 skill `.claude/skills/atlas-space-topic/`（总览 `docs/13-space-topic-template.md`），脚手架 `pnpm tsx scripts/new-topic.ts <slug> --engine space-scene`，参考图放 `scripts/geo/<slug>/refs/`（不进 git）
 
 ## 硬规则
 - 纯静态：无 SSR、无 API、无运行时外部请求（无 CDN、无 Google Fonts、无瓦片服务）

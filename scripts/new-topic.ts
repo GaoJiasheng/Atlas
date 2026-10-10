@@ -7,16 +7,22 @@
  *     --title-en "The Cold War" --title-zh "冷战" [--subtitle-en "1947–1991" --subtitle-zh "1947–1991"] \
  *     [--start 1947-03-12 --end 1991-12-26]
  *
- * "Space" (SpaceScene, docs/06 "SpaceScene"):
+ * "Object anatomy" (SpaceScene; docs/13, skill .claude/skills/atlas-space-topic):
  *
- *   pnpm tsx scripts/new-topic.ts <slug> --engine space-scene --subject science \
+ *   pnpm tsx scripts/new-topic.ts <slug> --engine space-scene --subject science|biology \
  *     --title-en "How a bicycle works" --title-zh "自行车是怎么工作的" [--subtitle-en "…" --subtitle-zh "…"]
  *
  * space-scene creates, and refuses to overwrite:
- *   src/content/topics/<slug>/topic.yaml                 status: draft, mode: space, stage: model3d
- *   src/content/topics/<slug>/chapters/01-chapter-one.mdx full SpaceScene frontmatter (state with camera and labels, summary)
- *   src/content/topics/<slug>/data/parts.json            one primitive part in one group, no flows or animations, views (assembled camera, cover, section)
- *   src/content/topics/<slug>/data/{sources,glossary}.json
+ *   src/content/topics/<slug>/topic.yaml                 status: draft, mode: space, stage: model3d, note examples
+ *   src/content/topics/<slug>/chapters/01-chapter-one.mdx full SpaceScene state (view … camera, hide, labels with a group label),
+ *                                                        summary, two beats (one on a named preset), Num / FlyTo / More in the text
+ *   src/content/topics/<slug>/data/parts.json            one part per group (shell casing with `extra` feet; lathe core) plus a
+ *                                                        context part, a flow-only group with one flow (stops, spread, clip, parts),
+ *                                                        one animation, views (assembled, exploded, cutaway, section, cover),
+ *                                                        three presets, spec rows and telemetry
+ *   src/content/topics/<slug>/data/sources.json          S1 = the self-describing design-study source
+ *   src/content/topics/<slug>/data/{glossary.json,SOURCES.md}
+ *   scripts/geo/<slug>/refs/.gitignore                   reference images stay local
  *
  * time-scene creates, and refuses to overwrite:
  *   src/content/topics/<slug>/topic.yaml                 status: draft
@@ -26,10 +32,10 @@
  *   src/content/topics/<slug>/data/SOURCES.md            with the generated-sources block
  *   scripts/geo/<slug>/sources.json, SOURCES-GEO.md       geo pipeline manifest and provenance log
  *
- * The data files are minimal and valid (no entities, one empty control
- * keyframe at --start): `pnpm validate` passes right away. Nothing geographic
- * is invented: control areas come from the geo pipeline (scripts/geo/lib).
- * Prints the next steps. Both are valid as written: `pnpm validate` passes right away.
+ * The time-scene data files are minimal (no entities, one empty control
+ * keyframe at --start). Nothing geographic is invented: control areas come
+ * from the geo pipeline (scripts/geo/lib). Both skeletons are valid as
+ * written (`pnpm validate` passes right away); both print the next steps.
  */
 import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative, resolve } from 'node:path';
@@ -37,7 +43,7 @@ import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
 import { KEBAB_ID, ISO_DATE } from '../src/content/schema/common';
 import { SUBJECTS } from '../src/content/schema/topic';
-import { BEGIN, END } from './sources-md';
+import { BEGIN, END, sourcesBlock } from './sources-md';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -58,7 +64,7 @@ const { values, positionals } = parseArgs({
 function fail(message: string): never {
   console.error(`new-topic: ${message}`);
   console.error('usage: pnpm tsx scripts/new-topic.ts <slug> --engine time-scene --subject history --title-en "…" --title-zh "…" [--start YYYY-MM-DD --end YYYY-MM-DD]');
-  console.error('       pnpm tsx scripts/new-topic.ts <slug> --engine space-scene --subject science --title-en "…" --title-zh "…" [--subtitle-en "…" --subtitle-zh "…"]');
+  console.error('       pnpm tsx scripts/new-topic.ts <slug> --engine space-scene --subject science|biology --title-en "…" --title-zh "…" [--subtitle-en "…" --subtitle-zh "…"]');
   process.exit(1);
 }
 
@@ -82,7 +88,9 @@ if (end <= start) fail('--end must be after --start');
 
 const topicDir = join(ROOT, 'src/content/topics', slug);
 const geoDir = join(ROOT, 'scripts/geo', slug);
-for (const dir of engine === 'space-scene' ? [topicDir] : [topicDir, geoDir]) if (existsSync(dir)) fail(`${relative(ROOT, dir)} already exists`);
+/** Reference images for modelling a space topic (photos, patent drawings): local only, gitignored. */
+const refsDir = join(geoDir, 'refs');
+for (const dir of engine === 'space-scene' ? [topicDir, refsDir] : [topicDir, geoDir]) if (existsSync(dir)) fail(`${relative(ROOT, dir)} already exists`);
 
 /** YAML / JSON string literal. */
 const q = (s: string) => JSON.stringify(s);
@@ -98,26 +106,36 @@ function write(file: string, text: string): void {
 /* SpaceScene                                                          */
 /* ------------------------------------------------------------------ */
 
+/** Ids the space skeleton uses; ids are unique across a topic (the topic id included). */
+const SPACE_IDS = ['chapter-one', 'housing', 'mechanism', 'stream', 'casing', 'core', 'plinth', 'stream-main', 'core-spin', 'hero', 'close-up', 'front-section'];
+
 function scaffoldSpace(): void {
-  const part = `${slug}-body`;
-  const group = `${slug}-main`;
+  if (SPACE_IDS.includes(slug)) fail(`slug "${slug}" clashes with an id of the space skeleton (${SPACE_IDS.join(', ')})`);
   write(
     join(topicDir, 'topic.yaml'),
-    `# ${titleEn}. Content spec first (docs/05 briefing playbook; docs/12 is the aircon example).
+    `# ${titleEn}. Content spec first: skill atlas-space-topic, references/spec-template.md (docs/12 is the aircon example).
 id: ${slug}
 title: { en: ${q(titleEn)}, zh: ${q(titleZh)} }
 subtitle: { en: ${q(subtitleEn)}, zh: ${q(subtitleZh)} }
 subject: ${subject}
+moe: []
 mode: space
 engine: space-scene
 stage: model3d
 theme: paper
 sensitivity: open
 status: draft
-# The title block's statement line, e.g. for a generic design study:
+# The title block's statement line (replaces "Educational visualization"). A generic machine:
 # note: { en: "Generic design study · not a specific brand or model", zh: "通用设计研究 · 不代表任何品牌或型号" }
+# An organism:
+# note: { en: "Model study · schematic proportions · not a specific specimen", zh: "模型研究 · 示意比例 · 不对应具体标本" }
 `,
   );
+
+  /* The hero camera is shared by the chapter, the assembled view and the `hero` preset. */
+  const hero = { position: [2.4, 1.5, 3.2], target: [0, 0.33, 0], fov: 30 };
+  const cam = (c: { position: number[]; target: number[]; fov: number }) =>
+    `{ position: [${c.position.join(', ')}], target: [${c.target.join(', ')}], fov: ${c.fov} }`;
 
   write(
     join(topicDir, 'chapters/01-chapter-one.mdx'),
@@ -125,35 +143,59 @@ status: draft
 id: chapter-one
 order: 1
 title: { en: "Chapter one", zh: "第一章" }
+sensitive: false
+# Chapter targets accumulate (write only what changes from the previous chapter); hide and labels do not.
 state:
   view: assembled          # assembled | xray | exploded | isolate
-  explode: 0
-  part: null
-  run: false
-  cutaway: none
-  layers: [${group}]
-  hide: []
-  labels: [${part}]        # 3–6 part ids (or "group:<id>") with a leader label at this camera
-  camera: { position: [2.4, 1.6, 3.2], target: [0, 0.3, 0], fov: 30 }
+  explode: 0               # 0..1, used by the exploded view
+  part: null               # selected part id, or null
+  run: false               # true = animations and flows play
+  cutaway: none            # none | half (plane: views.cutaway in parts.json)
+  layers: [housing, mechanism, stream]   # visible groups
+  hide: []                 # parts slid aside in this chapter (casing panels, to show the inside)
+  labels: [casing, "group:mechanism"]    # 3–6 part ids or group:<id>, visible at this camera
+  camera: ${cam(hero)}
   summary:
     en: "One sentence: what this chapter shows and why it matters."
     zh: "一句话：这一章展示什么、为什么重要。"
-  # PRESENTATION beats (optional; without them the chapter is one beat captioned with the summary):
-  # beats:
-  #   - part: ${part}
-  #     labels: [${part}]
-  #     caption: { en: "What the stage shows at this step.", zh: "这一步舞台上显示的是什么。" }
+  # PRESENTATION beats, 3–5 per chapter: each = this chapter's state + the fields it sets
+  # (view, part, explode, run, cutaway, layers, camera, labels ≤ 6, hide, caption, audio).
+  # camera may name a preset from parts.json. The caption says what the model shows now.
+  beats:
+    - caption:
+        en: "What the whole object looks like, and its main parts."
+        zh: "整体是什么样子，主要有哪几部分。"
+    - camera: close-up
+      view: xray
+      run: true
+      part: core
+      labels: [core, casing]
+      caption:
+        en: "What the stage shows at this step: the core turns inside the see-through casing."
+        zh: "这一步舞台上显示的是什么：透明外壳里，核心在转动。"
 ---
 
 <Lang en>
 
-The chapter text: what the reader sees on the stage and how it works, in 150–250 words.
+The chapter text: 200–300 words in 3–5 paragraphs, what the reader sees on the stage first, then how it works. Every quantity carries its source, like the design value <Num s="S1">1.2 m</Num>; glossary words are wrapped in Term the first time they appear. <FlyTo preset="close-up">Look closer</FlyTo>
+
+<More title={{ en: "A closer look", zh: "细看" }}>
+
+Numbers at the simulated operating point, how the model differs from the real thing, a common misconception.
+
+</More>
 
 </Lang>
 
 <Lang zh>
 
-本章正文：舞台上看到的是什么、怎样工作，300–450 字。
+本章正文：350–500 字、3–5 段，先讲舞台上看到什么，再讲它怎样工作。每个数量都标来源，例如设计值 <Num s="S1">1.2 米</Num>；名词第一次出现时用 Term 标出。<FlyTo preset="close-up">靠近看</FlyTo>
+
+<More title={{ en: "A closer look", zh: "细看" }}>
+
+模拟运行点的数字、模型与真实对象的差别、一个常见误解。
+
+</More>
 
 </Lang>
 `,
@@ -165,35 +207,144 @@ The chapter text: what the reader sees on the stage and how it works, in 150–2
     json({
       parts: [
         {
-          id: part,
-          name: { en: 'Body', zh: '机身' },
-          group,
+          id: 'casing',
+          name: { en: 'Casing', zh: '外壳' },
+          group: 'housing',
           summary: { en: 'One line: what this part does.', zh: '一句话：这个零件做什么。' },
-          detail: { en: 'A few sentences about the part.', zh: '关于这个零件的几句话。' },
-          primitive: { kind: 'bevelBox', size: [1.2, 0.6, 0.6], bevel: 0.03, at: [0, 0.3, 0], color: 'enamel' },
-          explode: { dir: [0, 1, 0], dist: 0.4 },
+          detail: {
+            en: 'What it does; how it does it; a typical figure with its source [S1].\n\nWhat happens if it fails or gets dirty.',
+            zh: '它做什么；怎样做到；一个带来源的典型数字 [S1]。\n\n坏了或脏了会怎样。',
+          },
+          primitive: { kind: 'bevelBox', size: [1.2, 0.6, 0.6], bevel: 0.02, at: [0, 0.33, 0], color: 'enamel' },
+          extra: [
+            { kind: 'bevelBox', size: [0.1, 0.03, 0.5], bevel: 0.008, at: [-0.45, 0.015, 0], color: 'rubber' },
+            { kind: 'bevelBox', size: [0.1, 0.03, 0.5], bevel: 0.008, at: [0.45, 0.015, 0], color: 'rubber' },
+          ],
+          explode: { dir: [0, 1, 0], dist: 0.5 },
+          connects: ['core'],
+          shell: true,
+        },
+        {
+          id: 'core',
+          name: { en: 'Core', zh: '核心' },
+          group: 'mechanism',
+          summary: { en: 'One line: what this part does.', zh: '一句话：这个零件做什么。' },
+          detail: {
+            en: 'What it does; how it does it; a typical figure with its source [S1].\n\nWhat happens if it fails or gets dirty.',
+            zh: '它做什么；怎样做到；一个带来源的典型数字 [S1]。\n\n坏了或脏了会怎样。',
+          },
+          primitive: {
+            kind: 'lathe',
+            profile: [[0, -0.4], [0.16, -0.4], [0.18, -0.38], [0.18, 0.38], [0.16, 0.4], [0.03, 0.4], [0.03, 0.75], [0, 0.75]],
+            segments: 48,
+            at: [0, 0.33, 0],
+            rotation: [0, 0, 90],
+            color: 'steel',
+          },
+          explode: { dir: [0, 0, 1], dist: 0.4 },
+          connects: ['casing'],
+        },
+        {
+          id: 'plinth',
+          name: { en: 'Plinth', zh: '展台' },
+          summary: { en: 'Scenery: what the object stands on.', zh: '场景：对象所在的位置。' },
+          detail: { en: 'Context only: drawn, never labelled, selected or exploded.', zh: '只是场景：画出来，但不标注、不可选、不拆开。' },
+          context: true,
+          primitive: { kind: 'box', size: [1.6, 0.04, 0.9], at: [0, -0.02, 0], color: 'plastic' },
         },
       ],
-      groups: [{ id: group, name: { en: 'Main unit', zh: '主机' }, color: 'token:neutral' }],
-      flows: [],
-      animations: [],
+      groups: [
+        { id: 'housing', name: { en: 'Housing', zh: '外壳' }, color: 'token:ink-3' },
+        { id: 'mechanism', name: { en: 'Mechanism', zh: '机构' }, color: 'token:neutral' },
+        { id: 'stream', name: { en: 'Air stream', zh: '气流' }, color: 'token:cold' },
+      ],
+      flows: [
+        {
+          id: 'stream-main',
+          group: 'stream',
+          path: [
+            [-0.95, 0.45, 0],
+            [-0.6, 0.56, 0],
+            [0.6, 0.56, 0],
+            [0.95, 0.45, 0],
+          ],
+          speed: 0.4,
+          color: 'token:cold',
+          stops: [
+            { at: 0, color: 'token:neutral' },
+            { at: 1, color: 'token:cold' },
+          ],
+          ends: 'fade',
+          count: 360,
+          size: 1,
+          spread: [0.02, 0.02, 0.15],
+          clip: false,
+          parts: ['casing', 'core'],
+        },
+      ],
+      animations: [{ id: 'core-spin', target: 'core', kind: 'rotate', axis: [1, 0, 0], rpm: 30 }],
       views: {
-        assembled: { camera: { position: [2.4, 1.6, 3.2], target: [0, 0.3, 0], fov: 30 } },
-        cover: { position: [2.0, 1.3, 2.7], target: [0, 0.3, 0], fov: 30 },
+        assembled: { camera: hero },
+        exploded: { camera: { position: [2.8, 1.9, 3.8], target: [0, 0.45, 0], fov: 30 } },
+        cutaway: { normal: [0, 0, -1], offset: 0 },
         section: { plane: 'xy' },
+        cover: { position: [2.0, 1.25, 2.7], target: [0, 0.33, 0], fov: 30 },
       },
+      spec: [
+        { key: { en: 'Size', zh: '外形尺寸' }, value: '1.2 × 0.6 × 0.6 m', tag: 'design' },
+        { key: { en: 'Speed', zh: '转速' }, value: '1,200 rpm', tag: 'design' },
+      ],
+      telemetry: [
+        { key: { en: 'Speed', zh: '转速' }, unit: 'rpm', idle: 0, run: 1200, lag: 4, decimals: 0 },
+        { key: { en: 'Power', zh: '功率' }, unit: 'kW', idle: 0, run: 0.5, lag: 4, decimals: 2 },
+      ],
+      presets: [
+        { id: 'hero', label: { en: 'Hero', zh: '全景' }, camera: hero },
+        { id: 'close-up', label: { en: 'Close-up', zh: '近景' }, camera: { position: [1.3, 0.95, 1.9], target: [-0.05, 0.33, 0], fov: 30 }, view: 'xray' },
+        { id: 'front-section', label: { en: 'Section', zh: '剖面' }, camera: { position: [0, 0.35, 3.4], target: [0, 0.33, 0], fov: 28 } },
+      ],
     }),
   );
-  write(join(data, 'sources.json'), json({ sources: [] }));
+  const designStudy = {
+    id: 'S1',
+    text: {
+      en: `Atlas design study for this topic (generic, no brand, model or specimen; docs/NN §1.2). Design values: overall size 1.2 × 0.6 × 0.6 m, speed 1,200 rpm. Simulated operating point: inputs and results.`,
+      zh: `本主题的 Atlas 设计研究（通用对象，不对应任何品牌、型号或标本；docs/NN §1.2）。设计值：外形 1.2 × 0.6 × 0.6 m，转速 1,200 rpm。模拟运行点：输入与结果。`,
+    },
+    note: {
+      en: 'Not a measurement. Each design value sits inside the typical range of the sources listed here; inputs and arithmetic are in the notes of those sources.',
+      zh: '不是实测值。每个设计值都落在这里所列来源的典型范围内；输入数据与算法写在那些来源的说明里。',
+    },
+  };
+  write(join(data, 'sources.json'), json({ sources: [designStudy] }));
   write(join(data, 'glossary.json'), json({ terms: [] }));
+  write(
+    join(data, 'SOURCES.md'),
+    `# ${titleEn} — sources
+
+Rules: skill atlas-space-topic (references/writing-rules.md) and skill industrial-3d-showcase references/fact-discipline.md. Numbers in chapter bodies are \`<Num s="S#">\`; part details cite \`[S#]\`. Design values and the simulated operating point are their own entry (the design study), with the arithmetic in the notes; they are not measurements. Reference images used for modelling are listed in the content spec, not here (they are not published).
+
+## Numbered sources
+
+${sourcesBlock([designStudy])}
+`,
+  );
+  write(join(refsDir, '.gitignore'), '*\n!.gitignore\n');
 
   console.log(`new-topic: created ${slug}\n  ${written.join('\n  ')}\n`);
-  console.log(`Next steps (docs/06 "SpaceScene", docs/08 technical plate):
-  1. Write the content spec (parts, groups, flows, chapters, sources) and get it signed off.
-  2. Model the parts in data/parts.json (primitives or a glb), then groups, flows, animations, views and presets.
-  3. Chapters: state (view, labels, camera) per chapter, then the text, then beats.
-  4. The topic is a draft: reachable at /en/topics/${slug}/ but not listed on the index until status: published.
-  5. pnpm validate && pnpm build && pnpm shoot ${slug} --keys --layout --beats (chapter highlights: none).`);
+  console.log(`Next steps (skill .claude/skills/atlas-space-topic, references/build-order.md):
+  0. Spec: copy references/spec-template.md to docs/NN-${slug}-content-spec.md, fill it in, get it signed off before writing text.
+  1. References first: photos, patent drawings, diagrams (CC / public domain) into scripts/geo/${slug}/refs/ (gitignored); list each in the spec.
+  2. E  engine gaps from the spec (Opus): schema + stage + unit tests + docs/06, before the data needs them.
+  3. D  geometry (Opus): replace the skeleton parts in data/parts.json (references/modelling-runbook.md), then
+       R2 geometry side by side with the references (two rounds, clash check) -> R3 materials and light -> R4 flows and animations;
+       pnpm build && pnpm shoot ${slug} --perf after each round, and look at the shots.
+  4. T  facts and texts (Opus): sources.json (keep S1 as the self-describing design study, fill docs/NN in its text), glossary.json,
+       part summary / detail, chapter text (references/writing-rules.md); pnpm tsx scripts/sources-md.ts ${slug}.
+  5. B  beats (Sonnet): 3–5 per chapter, captions say what the model shows now; pnpm shoot ${slug} --beats.
+  6. P  polish and audit (Sonnet): references/acceptance.md.
+  7. The topic is a draft: reachable at /en/topics/${slug}/ but not listed on the index until status: published.
+  Gates every step: pnpm check && pnpm validate && pnpm test && pnpm build && pnpm e2e; pnpm shoot ${slug} --keys --layout --beats.`);
 }
 
 /* ------------------------------------------------------------------ */
