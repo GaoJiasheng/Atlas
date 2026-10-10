@@ -359,31 +359,77 @@ function PanelHeader({ n, title }: { n: string; title: BilingualText }) {
 
 type SlotRef = (name: SlotName) => (el: Element | null) => void;
 
-export function CardFrame({ hud, slotRef, locale }: { hud: HudStore; slotRef: SlotRef; locale: Locale }) {
+export function CardFrame({ hud, slotRef, locale, actions }: { hud: HudStore; slotRef: SlotRef; locale: Locale; actions: HudActions }) {
   const title = useStore(hud, (s) => s.controls.card);
   const toggle = useStore(hud, (s) => s.controls.cardToggle);
+  const open = useStore(hud, (s) => s.cardOpen);
   if (!title) return null;
+  const fold = (expanded: boolean) => (e: MouseEvent<HTMLElement>) => {
+    actions.setCard(expanded);
+    blurAfterPointer(e);
+  };
+  // Folded: the section stays mounted (engines portal into its body) but is hidden; a vertical tab takes its place.
   return (
-    <section className="hud-panel atlas-card" data-hud-panel="card" data-expanded={toggle ? toggle.expanded : undefined}>
-      {toggle ? (
+    <>
+      <section
+        id="atlas-card"
+        className="hud-panel atlas-card"
+        data-hud-panel="card"
+        data-expanded={toggle ? toggle.expanded : undefined}
+        data-folded={open ? undefined : ''}
+      >
+        <div className="atlas-card__head">
+          {toggle ? (
+            <button
+              type="button"
+              className="atlas-card__toggle"
+              aria-expanded={toggle.expanded}
+              title={t(locale, toggle.expanded ? 'hud.card.collapse' : 'hud.card.expand')}
+              onClick={(e) => {
+                toggle.set(!toggle.expanded);
+                blurAfterPointer(e);
+              }}
+            >
+              <PanelHeader n="A" title={title} />
+              <i className="atlas-card__chev" aria-hidden="true" />
+            </button>
+          ) : (
+            <PanelHeader n="A" title={title} />
+          )}
+          <button
+            type="button"
+            className="atlas-card__fold"
+            aria-expanded={true}
+            aria-controls="atlas-card"
+            aria-label={t(locale, 'hud.card.fold')}
+            title={t(locale, 'hud.card.fold')}
+            onClick={fold(false)}
+          >
+            <i aria-hidden="true" />
+          </button>
+        </div>
+        <div ref={slotRef('card')} className="hud-panel__body" />
+      </section>
+      {!open && (
         <button
           type="button"
-          className="atlas-card__toggle"
-          aria-expanded={toggle.expanded}
-          title={t(locale, toggle.expanded ? 'hud.card.collapse' : 'hud.card.expand')}
-          onClick={(e) => {
-            toggle.set(!toggle.expanded);
-            blurAfterPointer(e);
-          }}
+          className="atlas-card__tab"
+          data-hud-panel="card-tab"
+          aria-expanded={false}
+          aria-controls="atlas-card"
+          aria-label={t(locale, 'hud.card.unfold')}
+          title={t(locale, 'hud.card.unfold')}
+          onClick={fold(true)}
         >
-          <PanelHeader n="A" title={title} />
-          <i className="atlas-card__chev" aria-hidden="true" />
+          <i aria-hidden="true" />
+          <span>
+            <b>A</b>
+            {upper(title.en)}
+            {title.zh && <em lang="zh-Hans">{title.zh}</em>}
+          </span>
         </button>
-      ) : (
-        <PanelHeader n="A" title={title} />
       )}
-      <div ref={slotRef('card')} className="hud-panel__body" />
-    </section>
+    </>
   );
 }
 
@@ -441,11 +487,11 @@ export function BottomPanels({
       <button
         type="button"
         className="atlas-panels__fold"
-        aria-expanded={true}
+        aria-expanded={expanded}
         aria-controls="atlas-panels-body"
-        aria-label={t(locale, 'hud.panels.collapse')}
-        title={t(locale, 'hud.panels.collapse')}
-        onClick={fold(false)}
+        aria-label={t(locale, expanded ? 'hud.panels.collapse' : 'hud.panels.expand')}
+        title={t(locale, expanded ? 'hud.panels.collapse' : 'hud.panels.expand')}
+        onClick={fold(!expanded)}
       >
         <i aria-hidden="true" />
       </button>
@@ -453,13 +499,13 @@ export function BottomPanels({
         type="button"
         className="atlas-panels__bar"
         data-hud-panel="panels-bar"
+        tabIndex={-1}
         aria-expanded={false}
         aria-controls="atlas-panels-body"
         aria-label={t(locale, 'hud.panels.expand')}
         title={t(locale, 'hud.panels.expand')}
         onClick={fold(true)}
       >
-        <i aria-hidden="true" />
         {filled.map((id) => (
           <span key={id} className="atlas-panels__name">
             <b>{id.slice(-2)}</b>

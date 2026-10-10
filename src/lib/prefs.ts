@@ -126,3 +126,22 @@ export function setPanelsExpanded(expanded: boolean): void {
     /* storage unavailable: the state lasts for this page view */
   }
 }
+
+/** Top-right card (part chain / participation card) folded into a side tab / expanded: per tab, never in the URL. */
+export const CARD_KEY = 'atlas:card';
+
+/** `true` = expanded (the default, also when storage is unavailable). */
+export function getCardExpanded(): boolean {
+  try {
+    return window.sessionStorage.getItem(CARD_KEY) !== 'collapsed';
+  } catch {
+    return true;
+  }
+}
+export function setCardExpanded(expanded: boolean): void {
+  try {
+    window.sessionStorage.setItem(CARD_KEY, expanded ? 'open' : 'collapsed');
+  } catch {
+    /* storage unavailable: the state lasts for this page view */
+  }
+}

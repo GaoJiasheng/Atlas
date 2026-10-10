@@ -152,6 +152,8 @@
   "hud.chapterNav": "跳到章节",
   "hud.card.expand": "展开全部",
   "hud.card.collapse": "收起列表",
+  "hud.card.fold": "把卡片收到边上",
+  "hud.card.unfold": "展开卡片",
   "spec.subject": "学科",
   "spec.chapters": "章节",
   "spec.syllabus": "课纲锚点",

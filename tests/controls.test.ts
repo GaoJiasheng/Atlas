@@ -132,6 +132,14 @@ describe('registration, modes and keymap', () => {
     expect(hud.getState().reader).toBe(false);
     actions.setPanels(true);
     expect(hud.getState().panelsOpen).toBe(true);
+    // The top-right card: expanded by default, folds to a side tab, independent of the reader and the strip.
+    expect(hud.getState().cardOpen).toBe(true);
+    actions.setCard(false);
+    expect(hud.getState().cardOpen).toBe(false);
+    expect(hud.getState().reader).toBe(false);
+    expect(hud.getState().panelsOpen).toBe(true);
+    actions.setCard(true);
+    expect(hud.getState().cardOpen).toBe(true);
   });
 });
 

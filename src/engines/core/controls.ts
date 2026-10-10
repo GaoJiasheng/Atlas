@@ -198,6 +198,11 @@ export interface HudState {
    */
   panelsOpen: boolean;
   /**
+   * Top-right card expanded; collapsed = a 28 px vertical tab at the stage's
+   * right edge. Kept in sessionStorage by the host, never in the URL.
+   */
+  cardOpen: boolean;
+  /**
    * Glossary in the reader's inspector: a term id (`<Term>` click, a related
    * term), `GLOSSARY_ALL` (the list, TOOLS "Glossary"), or `null` (closed).
    */
@@ -218,6 +223,7 @@ export function createHudStore(): HudStore {
     cameraFree: false,
     reader: true,
     panelsOpen: true,
+    cardOpen: true,
     glossary: null,
   }));
 }
@@ -322,6 +328,8 @@ export interface HudActions {
   setReader(expanded: boolean): void;
   /** Expand / collapse the bottom panel strip (one group). */
   setPanels(expanded: boolean): void;
+  /** Expand / fold the top-right card (a vertical tab at the stage edge when folded). */
+  setCard(expanded: boolean): void;
   /** Open a glossary term (`GLOSSARY_ALL` = the list) in the reader's inspector; `null` closes it. */
   setGlossary(id: string | null): void;
   escape(): void;
@@ -366,6 +374,9 @@ export function createHudActions(hud: HudStore, camera: { suppress(fn: () => voi
     },
     setPanels(expanded) {
       hud.setState({ panelsOpen: expanded });
+    },
+    setCard(expanded) {
+      hud.setState({ cardOpen: expanded });
     },
     setGlossary(id) {
       hud.setState({ glossary: id });

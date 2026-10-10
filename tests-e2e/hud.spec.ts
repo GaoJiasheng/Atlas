@@ -1,4 +1,4 @@
-import { expect, test, type Page } from '@playwright/test';
+import { expect, test, type Locator, type Page } from '@playwright/test';
 import { hudLayoutIssues, LAYOUT_SIZES } from './hud-layout';
 
 const TOPICS = ['sample-time', 'sample-space'] as const;
@@ -981,11 +981,15 @@ test('bottom panels (SpaceScene): a chevron folds the three into one 28 px bar w
   await expect(fold).toHaveAttribute('aria-expanded', 'true');
   await expect(bar).toBeHidden();
   await expect(page.locator('[data-hud-panel^="panel0"]')).toHaveCount(3);
-  // The fold sits on the strip's left edge.
+  // The fold is a 24 px tab on the strip's top edge, left-aligned, chevron down.
   const foldBox = (await fold.boundingBox())!;
   const stripBox = (await strip.boundingBox())!;
-  expect(foldBox.x + foldBox.width).toBeLessThanOrEqual(stripBox.x + 1);
-  expect(foldBox.x + foldBox.width).toBeGreaterThan(stripBox.x - 4);
+  expect(Math.round(foldBox.height)).toBe(24);
+  expect(foldBox.width).toBeGreaterThanOrEqual(44);
+  expect(Math.abs(foldBox.x - stripBox.x)).toBeLessThanOrEqual(1);
+  expect(Math.abs(foldBox.y + foldBox.height - stripBox.y)).toBeLessThanOrEqual(1);
+  const chevron = () => fold.locator('i').evaluate((el) => getComputedStyle(el).transform);
+  const down = await chevron();
   // The stage ends where the strip starts.
   const stageBox = (await stage.boundingBox())!;
   expect(Math.abs(stageBox.y + stageBox.height - stripBox.y)).toBeLessThanOrEqual(2);
@@ -997,6 +1001,13 @@ test('bottom panels (SpaceScene): a chevron folds the three into one 28 px bar w
   await expect(strip).toHaveAttribute('data-collapsed', '');
   await expect(bar).toBeVisible();
   await expect(bar).toHaveAttribute('aria-expanded', 'false');
+  // The tab stays on the folded bar's top edge, left-aligned, chevron up.
+  await expect(fold).toHaveAttribute('aria-expanded', 'false');
+  const foldBox2 = (await fold.boundingBox())!;
+  const barBox = (await bar.boundingBox())!;
+  expect(Math.abs(foldBox2.x - barBox.x)).toBeLessThanOrEqual(1);
+  expect(Math.abs(foldBox2.y + foldBox2.height - barBox.y)).toBeLessThanOrEqual(1);
+  expect(await chevron()).not.toBe(down);
   for (const id of ['panel01', 'panel02', 'panel03']) await expect(page.locator(`[data-hud-panel="${id}"]`)).toBeHidden();
   expect(Math.round(await height(bar))).toBe(28);
   await expect(bar).toContainText('01');
@@ -1030,13 +1041,120 @@ test('bottom panels (SpaceScene): a chevron folds the three into one 28 px bar w
   await page.locator('.atlas-reader__strip').click();
   await expect.poll(async () => (await reader.boundingBox())?.width ?? 0).toBeGreaterThan(300);
 
-  await bar.click();
+  await fold.click();
   await expect(strip).not.toHaveAttribute('data-collapsed', '');
+  await expect(fold).toHaveAttribute('aria-expanded', 'true');
+  expect(await chevron()).toBe(down);
   for (const id of ['panel01', 'panel02', 'panel03']) await expect(page.locator(`[data-hud-panel="${id}"]`)).toBeVisible();
   await expect.poll(() => height(stage)).toBeLessThan(openHeight + 2);
   expect((await api()).panels).toBe(true);
   expect(await page.evaluate(() => sessionStorage.getItem('atlas:panels'))).toBe('open');
   expect(await hudLayoutIssues(page)).toEqual([]);
+});
+
+/** The folded tab slides in; let it land before measuring. */
+const settled = (tab: Locator) => tab.evaluate((el) => Promise.all(el.getAnimations().map((a) => a.finished)).then(() => undefined));
+
+test('card fold (SpaceScene): a right chevron folds the part chain into a 28 px tab on the stage edge, the Layers panel moves up, per tab', async ({ page }) => {
+  await page.setViewportSize({ width: 1600, height: 900 });
+  await openScene(page, '/en/topics/sample-space/');
+  const api = () => page.evaluate(() => window.__atlas!.state());
+  const card = page.locator('[data-hud-panel="card"]');
+  const tab = page.locator('.atlas-card__tab');
+  const fold = page.locator('.atlas-card__fold');
+  const overlay = page.locator('[data-hud-panel="overlay"] > *').first();
+  await expect(fold).toBeVisible();
+  await expect(fold).toHaveAttribute('aria-expanded', 'true');
+  await expect(tab).toHaveCount(0);
+  // The fold is at the header's right end.
+  const cardBox = (await card.boundingBox())!;
+  const foldBox = (await fold.boundingBox())!;
+  expect(foldBox.x + foldBox.width).toBeGreaterThan(cardBox.x + cardBox.width - 14);
+  expect(foldBox.y).toBeLessThan(cardBox.y + 40);
+  const overlayY = (await overlay.boundingBox())!.y;
+  expect((await api()).card).toBe(true);
+
+  await fold.click();
+  await expect(card).toBeHidden();
+  await expect(tab).toBeVisible();
+  await expect(tab).toHaveAttribute('aria-expanded', 'false');
+  await expect.poll(async () => Math.round((await tab.boundingBox())!.width)).toBe(28);
+  // On the stage's right edge: the HUD layer ends where the docked reader begins.
+  const hudBox = (await page.locator('.atlas-hud').boundingBox())!;
+  await expect
+    .poll(async () => {
+      const box = (await tab.boundingBox())!;
+      return Math.abs(box.x + box.width - (hudBox.x + hudBox.width));
+    })
+    .toBeLessThanOrEqual(1);
+  await expect(tab).toContainText('PART CHAIN');
+  expect(await tab.locator('span').evaluate((el) => getComputedStyle(el).writingMode)).toBe('vertical-rl');
+  // The Layers panel took the card's place.
+  await expect.poll(async () => (await overlay.boundingBox())!.y).toBeLessThan(overlayY - 100);
+  expect((await api()).card).toBe(false);
+  expect(await page.evaluate(() => sessionStorage.getItem('atlas:card'))).toBe('collapsed');
+  await settled(tab);
+  expect(await hudLayoutIssues(page)).toEqual([]);
+
+  // Sticky across a reload; the leader-label obstacles follow (the tab counts, the folded card does not).
+  await page.reload();
+  await page.waitForFunction(() => window.__atlas !== undefined);
+  expect(await page.evaluate(() => window.__atlas!.ready)).toBe(true);
+  await expect(tab).toBeVisible();
+  await expect(card).toBeHidden();
+
+  await tab.click();
+  await expect(card).toBeVisible();
+  await expect(tab).toHaveCount(0);
+  await expect.poll(async () => (await overlay.boundingBox())!.y).toBeGreaterThan(overlayY - 2);
+  expect((await api()).card).toBe(true);
+  expect(await page.evaluate(() => sessionStorage.getItem('atlas:card'))).toBe('open');
+  expect(await hudLayoutIssues(page)).toEqual([]);
+});
+
+test('card fold (TimeScene): the fold is separate from the expand-to-list toggle; folded state keeps the participation card mounted', async ({ page }) => {
+  await page.setViewportSize({ width: 1600, height: 900 });
+  await openScene(page, '/en/topics/sample-time/');
+  const card = page.locator('[data-hud-panel="card"]');
+  const toggle = page.locator('.atlas-card__toggle');
+  const fold = page.locator('.atlas-card__fold');
+  const tab = page.locator('.atlas-card__tab');
+  await expect(toggle).toBeVisible();
+  await expect(fold).toBeVisible();
+  const toggleBox = (await toggle.boundingBox())!;
+  const foldBox = (await fold.boundingBox())!;
+  expect(foldBox.x).toBeGreaterThanOrEqual(toggleBox.x + toggleBox.width - 1);
+  await toggle.click();
+  await expect(card).toHaveAttribute('data-expanded', 'true');
+  await fold.click();
+  await expect(card).toBeHidden();
+  await expect(tab).toBeVisible();
+  await expect(tab).toContainText('PARTICIPATION');
+  await settled(tab);
+  expect(await hudLayoutIssues(page)).toEqual([]);
+  await tab.click();
+  await expect(card).toBeVisible();
+  await expect(card).toHaveAttribute('data-expanded', 'true');
+  await page.keyboard.press('Escape');
+  await expect(card).toHaveAttribute('data-expanded', 'false');
+});
+
+test('collapsed reader strip: the chapter title is centred in the strip, the number above it, the chevron below', async ({ page }) => {
+  await page.setViewportSize({ width: 1600, height: 900 });
+  await openScene(page, '/en/topics/sample-space/');
+  await page.locator('.atlas-reader__handle').click();
+  const strip = page.locator('.atlas-reader__strip');
+  await expect(strip).toBeVisible();
+  const s = (await strip.boundingBox())!;
+  const mid = s.y + s.height / 2;
+  const span = (await strip.locator('span').boundingBox())!;
+  const num = (await strip.locator('b').boundingBox())!;
+  const chev = (await strip.locator('i').boundingBox())!;
+  expect(Math.abs(span.y + span.height / 2 - mid)).toBeLessThanOrEqual(2);
+  expect(num.y + num.height).toBeLessThanOrEqual(span.y);
+  expect(chev.y).toBeGreaterThanOrEqual(span.y + span.height);
+  expect(Math.abs(chev.x + chev.width / 2 - (s.x + s.width / 2))).toBeLessThanOrEqual(2);
+  expect(Math.abs(span.x + span.width / 2 - (s.x + s.width / 2))).toBeLessThanOrEqual(2);
 });
 
 test('bottom panels: H hides them with the HUD and gives the stage the whole sheet; the TimeScene has no strip and no inset', async ({ page }) => {

@@ -13,6 +13,8 @@
  * - the bottom panel strip (panel01-03) folds as one group into a 28 px bar,
  *   per tab in sessionStorage (`atlas:panels`); BottomPanels tells the stage
  *   where the strip starts (`--stage-inset`) so the canvas reflows
+ * - the top-right card folds into a 28 px vertical tab at the stage's right
+ *   edge (`atlas:card`, same rule); the overlay column below moves up
  * - the reading panel's collapse is the user's choice and sticky: a chapter
  *   change never re-expands it, it only flashes the handle / strip (`data-flash`);
  *   the one exception is the background chapter (`kind: background`), whose
@@ -55,7 +57,7 @@ import { BottomPanels, CardFrame, TitleBlock, TopBar } from './Hud';
 import { getEngine, getEngineView } from '../registry';
 import { t, tx, type BilingualText } from '../../i18n';
 import { applyTheme, resolveTheme } from '../../theme/theme';
-import { getPanelsExpanded, getReaderExpanded, setPanelsExpanded, setReaderExpanded, setThemeOverride, useThemeOverride } from '../../lib/prefs';
+import { getCardExpanded, getPanelsExpanded, getReaderExpanded, setCardExpanded, setPanelsExpanded, setReaderExpanded, setThemeOverride, useThemeOverride } from '../../lib/prefs';
 import { ChapterRail } from '../widgets/ChapterRail';
 import { InfoPanel } from '../widgets/InfoPanel';
 import { ChapterBodies } from '../widgets/ChapterBodies';
@@ -268,6 +270,7 @@ export default function SceneHost(props: SceneHostProps) {
   const labelsOn = useStore(hud, (s) => s.labels);
   const readerOpen = useStore(hud, (s) => s.reader);
   const panelsOpen = useStore(hud, (s) => s.panelsOpen);
+  const cardOpen = useStore(hud, (s) => s.cardOpen);
   // Docked reading panel: expanded unless this tab collapsed it (sessionStorage, not the URL).
   // The background chapter overrides that once, on its first entry: its reader opens.
   const backgroundShown = useRef(false);
@@ -292,6 +295,13 @@ export default function SceneHost(props: SceneHostProps) {
     hud.setState({ panelsOpen: getPanelsExpanded() });
     return hud.subscribe((s, prev) => {
       if (s.panelsOpen !== prev.panelsOpen) setPanelsExpanded(s.panelsOpen);
+    });
+  }, [hud]);
+  // The top-right card folds into a side tab; same rule: per tab, never in the URL.
+  useEffect(() => {
+    hud.setState({ cardOpen: getCardExpanded() });
+    return hud.subscribe((s, prev) => {
+      if (s.cardOpen !== prev.cardOpen) setCardExpanded(s.cardOpen);
     });
   }, [hud]);
   // A collapsed reader stays collapsed when the chapter changes; its handle flashes to say new text is there.
@@ -438,6 +448,7 @@ export default function SceneHost(props: SceneHostProps) {
         data-sheet={sheetOpen ? 'open' : 'closed'}
         data-reader={readerOpen ? 'open' : 'collapsed'}
         data-panels={panelsOpen ? 'open' : 'collapsed'}
+        data-card={cardOpen ? 'open' : 'collapsed'}
         style={scaleStyle}
       >
         <main id="atlas-main" className="atlas-stage-area">
@@ -490,7 +501,7 @@ export default function SceneHost(props: SceneHostProps) {
             />
           </div>
           <div className="atlas-hud__right">
-            <CardFrame hud={hud} slotRef={slotRef} locale={locale} />
+            <CardFrame hud={hud} slotRef={slotRef} locale={locale} actions={actions} />
             <div ref={slotRef('stageOverlay')} className="atlas-stage__overlay" data-hud-panel="overlay" />
           </div>
           <div className="atlas-hud__dock">
