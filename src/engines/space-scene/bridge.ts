@@ -53,6 +53,27 @@ export interface StageBridge {
   invalidate(): void;
   /** Live camera pose (REFERENCE saves it). */
   liveCamera(): OrbitCamera | null;
+  /** Scene transition id whose camera move has finished (or that needed none); the presentation waits on it. */
+  settledTransition: number;
+  /** Called when `settledTransition` changes. */
+  settleListeners: Set<() => void>;
+}
+
+/** Resolves once the stage has finished the camera move of transition `id` (or after `timeoutMs`, e.g. before the stage has loaded). */
+export function cameraSettled(bridge: StageBridge, id: number, timeoutMs: number): Promise<void> {
+  return new Promise((resolve) => {
+    const done = () => {
+      bridge.settleListeners.delete(check);
+      window.clearTimeout(timer);
+      resolve();
+    };
+    const check = () => {
+      if (bridge.settledTransition >= id) done();
+    };
+    const timer = window.setTimeout(done, timeoutMs);
+    bridge.settleListeners.add(check);
+    check();
+  });
 }
 
 export function createBridge(): StageBridge {
@@ -67,5 +88,7 @@ export function createBridge(): StageBridge {
     listeners: new Set(),
     invalidate: () => {},
     liveCamera: () => null,
+    settledTransition: -1,
+    settleListeners: new Set(),
   };
 }

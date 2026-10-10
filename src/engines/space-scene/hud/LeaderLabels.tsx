@@ -12,20 +12,30 @@
  *  - fades when the anchor is behind the camera, off-screen, cut away or
  *    occluded (throttled raycast in the stage); fewer labels in close-ups
  *  - set = the chapter's `labels`, else every visible part (largest first);
- *    the selected part is always labelled and highlighted
+ *    the selected part is always labelled and highlighted. A `group:<id>`
+ *    entry is one placard for the whole group (group name, anchored at the
+ *    bounding centre of its visible parts)
+ *  - PRESENTATION: the beat's `labels` (else the chapter's) only, at most 6,
+ *    20 % larger, not capped by camera distance, and shown with the HUD
+ *    hidden (they keep clear of the caption card and the title block)
  *  - click / tap a label to select its part; hidden with the host's LABELS
- *    switch (L) and with the HUD
+ *    switch (L) and with the HUD (outside the presentation)
+ *  - each placard carries `data-id`; the group carries `data-want` (the
+ *    listed labels, when there is a list) for `pnpm shoot`'s label check
  */
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
+import { useStore } from 'zustand';
 import { useHud, useScene, useSceneContext, useSceneStore } from '../../core/context';
 import type { Chapter } from '../../core/types';
 import { tx } from '../../../i18n';
 import { resolveAllPartDisplays } from '../lib/visibility';
 import { partBounds } from '../lib/parts';
 import { labelBudget, stackColumn } from '../lib/schematic';
+import { groupLabelId, labelGroup, listedLabels, PRESENT_LABEL_CAP } from '../lib/labels';
 import type { SpaceSceneExt } from '../index';
 import type { PartsFile } from '../schema';
 import type { StageBridge } from '../bridge';
+import type { SpaceUiStore } from '../ui';
 import { clip, partNumber } from './common';
 
 interface LabelDom {
@@ -71,6 +81,8 @@ const FADE = 9;
 const CLEARANCE = 0.6;
 /** Free stage band (stage px) below which leader labels are limited to the selected part. */
 const MIN_BAND = 480;
+/** Re-measure this long after the HUD shows or hides, in case its fade's `transitionend` never comes (`--dur-hud` is 350 ms). */
+const HUD_FADE_MS = 1000;
 
 function priority(file: PartsFile): Map<string, number> {
   return new Map(
@@ -81,10 +93,13 @@ function priority(file: PartsFile): Map<string, number> {
   );
 }
 
-export function LeaderLabels({ file, chapters, bridge }: { file: PartsFile; chapters: readonly Chapter[]; bridge: StageBridge }) {
+export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; chapters: readonly Chapter[]; bridge: StageBridge; ui: SpaceUiStore }) {
   const { locale } = useSceneContext();
   const store = useSceneStore<SpaceSceneExt>();
-  const labelsOn = useHud((h) => h.labels && h.hud);
+  const presenting = useStore(ui, (u) => u.presenting);
+  const beatLabels = useStore(ui, (u) => u.beatLabels);
+  const hudOn = useHud((h) => h.hud);
+  const labelsOn = useHud((h) => h.labels && (h.hud || presenting));
   const s = useScene<
     SpaceSceneExt,
     { part: string | null; view: SpaceSceneExt['view']; layers: string[]; hidden: string[]; chapter: string | null }
@@ -96,15 +111,28 @@ export function LeaderLabels({ file, chapters, bridge }: { file: PartsFile; chap
     chapter: st.chapter,
   }));
   const sizes = useMemo(() => priority(file), [file]);
+  const groups = useMemo(() => new Map(file.groups.map((g) => [g.id, g])), [file.groups]);
+  const listed = useMemo(
+    () => listedLabels({ presenting, beat: beatLabels, chapter: chapters.find((c) => c.id === s.chapter)?.state.labels }),
+    [presenting, beatLabels, chapters, s.chapter],
+  );
   const candidates = useMemo(() => {
     const displays = resolveAllPartDisplays(file.parts, { view: s.view, part: s.part, layers: s.layers, hidden: s.hidden });
-    const listed = chapters.find((c) => c.id === s.chapter)?.state.labels;
-    const pool = Array.isArray(listed) ? listed.filter((x): x is string => typeof x === 'string') : file.parts.map((p) => p.id);
+    const pool = listed ?? file.parts.map((p) => p.id);
     const labelled = (id: string) => displays.get(id)?.visible === true && displays.get(id)?.selectable === true;
-    const ids = pool.filter(labelled).sort((a, b) => (sizes.get(b) ?? 0) - (sizes.get(a) ?? 0));
-    if (s.part && labelled(s.part)) return [s.part, ...ids.filter((id) => id !== s.part)];
+    // A group placard while any of its parts is on show.
+    const groupShown = (g: string) => groups.has(g) && file.parts.some((p) => p.group === g && labelled(p.id));
+    const size = (id: string) => (labelGroup(id) !== null ? Infinity : (sizes.get(id) ?? 0));
+    const ids = pool
+      .filter((id) => {
+        const g = labelGroup(id);
+        return g !== null ? groupShown(g) : labelled(id);
+      })
+      .sort((a, b) => size(b) - size(a));
+    // The selected part comes first; outside an explicit presentation list it is always labelled.
+    if (s.part && labelled(s.part) && (!presenting || listed === null || ids.includes(s.part))) return [s.part, ...ids.filter((id) => id !== s.part)];
     return ids;
-  }, [file.parts, chapters, s, sizes]);
+  }, [file.parts, groups, listed, presenting, s, sizes]);
 
   const root = useRef<SVGGElement>(null);
   const labels = useRef(new Map<string, LabelState>());
@@ -175,7 +203,30 @@ export function LeaderLabels({ file, chapters, bridge }: { file: PartsFile; chap
 
   useLayoutEffect(() => {
     measure();
-  }, [measure, candidates, locale, labelsOn]);
+  }, [measure, candidates, locale, labelsOn, presenting]);
+
+  // The HUD fades out (presentation) or in: its blocks count as obstacles only once they are there
+  // (the fade's `visibility` step ends it; the timer covers reduced motion and slow frames).
+  useEffect(() => {
+    const scene = root.current?.ownerSVGElement?.closest('.atlas-scene');
+    const onEnd = (e: Event) => {
+      if ((e as TransitionEvent).propertyName === 'visibility') measure();
+    };
+    scene?.addEventListener('transitionend', onEnd);
+    const timer = window.setTimeout(measure, HUD_FADE_MS);
+    return () => {
+      scene?.removeEventListener('transitionend', onEnd);
+      window.clearTimeout(timer);
+    };
+  }, [measure, hudOn, presenting, labelsOn]);
+
+  // With the HUD hidden the leaders slot fades with it; the presentation keeps it on (space-scene.css).
+  useLayoutEffect(() => {
+    const svg = root.current?.ownerSVGElement;
+    if (!svg || !presenting) return;
+    svg.setAttribute('data-present', '');
+    return () => svg.removeAttribute('data-present');
+  }, [presenting, labelsOn]);
 
   useEffect(() => {
     const svg = root.current?.ownerSVGElement;
@@ -216,8 +267,10 @@ export function LeaderLabels({ file, chapters, bridge }: { file: PartsFile; chap
       const oneCol = roomy && !twoCols && f.right - f.left > wR + 140;
       const avgH = map.size ? sumH / map.size : 30;
       const perCol = Math.max(0, Math.floor((f.bottom - f.top + GAP) / (avgH + GAP)));
+      // Presenting: the beat's list as it is (≤ 6); otherwise fewer labels in close-ups.
+      const wanted = presenting ? PRESENT_LABEL_CAP : labelBudget(bridge.modelRadius > 0 ? bridge.cameraDistance / bridge.modelRadius : 3);
       const budget = roomy
-        ? Math.min(labelBudget(bridge.modelRadius > 0 ? bridge.cameraDistance / bridge.modelRadius : 3), twoCols ? perCol * 2 : oneCol ? perCol : 0)
+        ? Math.min(wanted, twoCols ? perCol * 2 : oneCol ? perCol : 0)
         : selected && perCol > 0
           ? 1
           : 0;
@@ -342,12 +395,29 @@ export function LeaderLabels({ file, chapters, bridge }: { file: PartsFile; chap
     return () => {
       bridge.listeners.delete(layout);
     };
-  }, [bridge, candidates, selected, labelsOn]);
+  }, [bridge, candidates, selected, labelsOn, presenting]);
 
   if (!labelsOn) return null;
   return (
-    <g ref={root} className="space-leaders">
+    <g ref={root} className="space-leaders" data-presenting={presenting || undefined} data-want={listed?.join(',')}>
       {candidates.map((id) => {
+        const group = labelGroup(id);
+        const g = group !== null ? groups.get(group) : undefined;
+        if (g) {
+          return (
+            <Label
+              key={id}
+              id={groupLabelId(g.id)}
+              n=""
+              en={tx(g.name, 'en')}
+              zh={tx(g.name, 'zh')}
+              note=""
+              group
+              on={false}
+              register={register}
+            />
+          );
+        }
         const part = file.parts.find((p) => p.id === id)!;
         return (
           <Label
@@ -373,9 +443,11 @@ function Label(props: {
   en: string;
   zh: string;
   note: string;
+  /** A whole group (`group:<id>`): name only, nothing to select. */
+  group?: boolean;
   on: boolean;
   register(id: string, dom: LabelDom | null): void;
-  onSelect(): void;
+  onSelect?(): void;
 }) {
   const g = useRef<SVGGElement>(null);
   const text = useRef<SVGTextElement>(null);
@@ -395,26 +467,30 @@ function Label(props: {
       <g
         ref={g}
         className="space-co"
+        data-id={id}
+        data-group={props.group || undefined}
         data-on={props.on || undefined}
         style={{ opacity: 0 }}
         onClick={(e) => {
           e.stopPropagation();
-          props.onSelect();
+          props.onSelect?.();
         }}
       >
         <rect ref={hit} className="space-co__hit" />
         <path ref={tri} className="space-co__tri" d="M0 -6.2L5 -3.1L0 0Z" />
         <text ref={text} className="space-co__text">
           <tspan className="space-co__en">
-            <tspan className="space-co__n">{props.n} </tspan>
+            {props.n && <tspan className="space-co__n">{props.n} </tspan>}
             {props.en.toUpperCase()}
           </tspan>
           <tspan className="space-co__zh" x={0} dy="1.5em" lang="zh-Hans">
             {props.zh}
           </tspan>
-          <tspan className="space-co__note" x={0} dy="1.45em">
-            {props.note}
-          </tspan>
+          {props.note && (
+            <tspan className="space-co__note" x={0} dy="1.45em">
+              {props.note}
+            </tspan>
+          )}
         </text>
       </g>
     </>

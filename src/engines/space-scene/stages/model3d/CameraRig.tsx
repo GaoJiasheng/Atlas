@@ -13,6 +13,8 @@
  *  - ORBIT: slow turntable (one turn / 40 s) around the target until the user drags
  *  - dragging cancels any move and writes the camera back (`setCamera`, debounced),
  *    which the host shows as FREE CAMERA
+ *  - every transition reports when its move is over (`bridge.settledTransition`:
+ *    the move ended, was cut short, or there was none); presentation beats wait on it
  */
 import { useEffect, useRef, type ComponentRef } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
@@ -68,7 +70,7 @@ export function CameraRig({
   const transitionId = useStore(store, (s) => s.transition.id);
   const orbit = useStore(ui, (s) => s.orbit);
 
-  const tween = useRef<{ from: OrbitCamera; to: OrbitCamera; start: number; ms: number } | null>(null);
+  const tween = useRef<{ from: OrbitCamera; to: OrbitCamera; start: number; ms: number; id: number } | null>(null);
   const last = useRef<number | null>(null);
   const user = useRef({ active: false, dragging: false, timer: null as ReturnType<typeof setTimeout> | null });
   const spin = useRef(0);
@@ -102,14 +104,22 @@ export function CameraRig({
     }
   };
 
-  const moveTo = (target: OrbitCamera, instant: boolean) => {
+  /** Transition `id`'s camera move is over (or it had none). */
+  const settle = (id: number) => {
+    if (id <= bridge.settledTransition) return;
+    bridge.settledTransition = id;
+    for (const listener of [...bridge.settleListeners]) listener();
+  };
+
+  const moveTo = (target: OrbitCamera, instant: boolean, id: number) => {
     const hint = ui.getState().nextTweenMs;
     if (hint !== null) ui.setState({ nextTweenMs: null });
     if (instant || prefersReducedMotion()) {
       tween.current = null;
       apply(target);
+      settle(id);
     } else {
-      tween.current = { from: current(), to: target, start: performance.now(), ms: hint ?? CAMERA_TWEEN_MS };
+      tween.current = { from: current(), to: target, start: performance.now(), ms: hint ?? CAMERA_TWEEN_MS, id };
     }
     invalidate();
   };
@@ -127,6 +137,7 @@ export function CameraRig({
         tween.current = null;
         invalidate();
       }
+      settle(transitionId);
       return;
     }
     if (reason === 'chapter' || reason === 'url') ui.setState({ orbit: false, reference: null });
@@ -139,7 +150,8 @@ export function CameraRig({
       view: state.view,
       views,
     });
-    if (target) moveTo(fitCameraToAspect(withFov(target), camera.aspect), first || instant);
+    if (target) moveTo(fitCameraToAspect(withFov(target), camera.aspect), first || instant, transitionId);
+    else settle(transitionId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [transitionId]);
 
@@ -155,7 +167,10 @@ export function CameraRig({
     if (tw) {
       const k = Math.min(1, (performance.now() - tw.start) / tw.ms);
       apply(tweenCamera(tw.from, tw.to, k));
-      if (k >= 1) tween.current = null;
+      if (k >= 1) {
+        tween.current = null;
+        settle(tw.id);
+      }
       keepAnimating(state.invalidate);
     } else if (orbit && !user.current.dragging) {
       // Ease the turntable in over ~1 s; rotate about the vertical through the target.
@@ -201,6 +216,7 @@ export function CameraRig({
       zoomSpeed={0.8}
       maxPolarAngle={Math.PI * 0.82}
       onStart={() => {
+        if (tween.current) settle(tween.current.id);
         tween.current = null;
         if (ui.getState().orbit) ui.setState({ orbit: false });
         user.current.active = true;

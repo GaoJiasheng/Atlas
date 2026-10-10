@@ -16,8 +16,9 @@ import {
   type TimeSceneGeoData,
 } from './time-scene/schema';
 import {
-  spaceChapterRefs,
+  spaceChapterIssues,
   spaceChapterState,
+  spacePresetIds,
   spaceSceneData,
   spaceSceneIds,
   type SpaceChapterState,
@@ -36,6 +37,8 @@ export interface EngineSchemaSet {
   ids(data: unknown): { kind: string; id: string }[];
   /** Ids a chapter state refers to (must exist in the data). */
   chapterRefs(state: unknown): string[];
+  /** Engine-specific reference problems of a chapter state against the parsed data (one message each; optional). */
+  chapterIssues?(state: unknown, data: unknown): string[];
   /** Camera preset ids a chapter body may name in `<FlyTo preset>` (engines without presets: none). */
   presetIds(data: unknown): string[];
 }
@@ -67,8 +70,9 @@ export function engineSchemas(engine: EngineId, stage: string): EngineSchemaSet 
         chapterState: spaceChapterState,
         requiredFiles: ['parts'],
         ids: (d) => spaceSceneIds(d as SpaceSceneData),
-        chapterRefs: (s) => spaceChapterRefs(s as SpaceChapterState),
-        presetIds: () => [],
+        chapterRefs: () => [],
+        chapterIssues: (s, d) => spaceChapterIssues(s as SpaceChapterState, d as SpaceSceneData),
+        presetIds: (d) => spacePresetIds(d as SpaceSceneData),
       };
     case 'simulation':
       return {

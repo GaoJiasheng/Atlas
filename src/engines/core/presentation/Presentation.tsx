@@ -81,7 +81,7 @@ export function Presentation({
   const chapterLabel = (ci: number) => {
     const c = chapters[ci];
     const name = c ? tx(c.title, locale) : '';
-    return isBackground(c) ? tr('time.beatBackground', { title: name }) : tr('time.beatChapter', { n: numberOf(ci), title: name });
+    return isBackground(c) ? tr('present.beatBackground', { title: name }) : tr('present.beatChapter', { n: numberOf(ci), title: name });
   };
   /** First beat and beat count of every chapter. */
   const spans = useMemo(() => chapterSpans(chapters.length, beats), [chapters, beats]);
@@ -214,7 +214,7 @@ export function Presentation({
     <div className="atlas-present" data-instant={instant || undefined}>
       <div className="atlas-present__hit" onClick={() => onStep(1)} aria-hidden="true" />
       <p className="atlas-present__title" data-hud-panel="present-title">
-        <small>{tr('time.presentation').toLocaleUpperCase('en')}</small>
+        <small>{tr('present.title').toLocaleUpperCase('en')}</small>
         <span lang="en">{title.en}</span>
         {title.zh && <span lang="zh-Hans">{title.zh}</span>}
       </p>
@@ -233,7 +233,7 @@ export function Presentation({
           {captionText}
         </p>
         <div className="atlas-present__row">
-          <nav className="atlas-present__bar" aria-label={tr('time.beats')}>
+          <nav className="atlas-present__bar" aria-label={tr('present.beats')}>
             <ol>
               {chapters.map((c, ci) => {
                 const { first, count } = spans[ci]!;
@@ -254,7 +254,7 @@ export function Presentation({
                               aria-label={
                                 isBackground(c)
                                   ? `${chapterLabel(ci)} · ${k + 1}: ${captionAt(first + k)}`
-                                  : tr('time.beat', { n: numberOf(ci), k: k + 1, caption: captionAt(first + k) })
+                                  : tr('present.beat', { n: numberOf(ci), k: k + 1, caption: captionAt(first + k) })
                               }
                               title={`${markOf(ci)}.${k + 1} · ${tx(c.title, locale)}`}
                               onClick={go(first + k)}
@@ -282,7 +282,7 @@ export function Presentation({
             </ol>
           </nav>
           <div className="atlas-present__opts">
-            <label className="atlas-present__auto" title={tr('time.autoplayHint')} data-held={(autoplay && held) || undefined}>
+            <label className="atlas-present__auto" title={tr('present.autoplayHint')} data-held={(autoplay && held) || undefined}>
               <input
                 type="checkbox"
                 checked={autoplay}
@@ -291,11 +291,11 @@ export function Presentation({
                   if (e.detail > 0) e.currentTarget.blur();
                 }}
               />
-              <span>{tr('time.autoplay')}</span>
+              <span>{tr('present.autoplay')}</span>
             </label>
             <label
               className="atlas-present__auto atlas-present__voice"
-              title={voiceAvailable ? tr('time.voiceHint') : tr('time.voiceNone')}
+              title={voiceAvailable ? tr('present.voiceHint') : tr('present.voiceNone')}
               data-disabled={!voiceAvailable || undefined}
             >
               <input
@@ -307,7 +307,7 @@ export function Presentation({
                   if (e.detail > 0) e.currentTarget.blur();
                 }}
               />
-              <span>{tr('time.voice')}</span>
+              <span>{tr('present.voice')}</span>
             </label>
           </div>
         </div>

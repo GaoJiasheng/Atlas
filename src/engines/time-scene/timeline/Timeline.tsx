@@ -206,13 +206,13 @@ export function Timeline(props: TimelineProps) {
             type="button"
             className="hud-btn ts-timeline__present"
             aria-pressed={presenting}
-            title={`${tr('time.presentHint')} (P)`}
+            title={`${tr('present.hint')} (P)`}
             onClick={(e) => {
               props.onPresent();
               blurAfterPointer(e);
             }}
           >
-            {tr('time.present')}
+            {tr('present.button')}
           </button>
         </div>
 

@@ -11,16 +11,25 @@ state:
   camera: { position: [1.95, 1.0, 2.5], target: [-0.25, -0.25, 0.05], fov: 34 }
   labels: [sample-drum, sample-block, sample-fins, sample-pipe, sample-tank]
   hide: [sample-panel]
+  beats:
+    - view: assembled
+      hide: [sample-panel, sample-shroud]
+      labels: [sample-drum, sample-fins, sample-cap]
+      caption: { en: "Sample beat one: two covers are put aside, so the sample drum shows.", zh: "示例节拍一：移开两块盖板，露出示例滚筒。" }
+    - part: null
+      camera: sample-left
+      labels: ["group:sample-drive", "group:sample-loop"]
+      caption: { en: "Sample beat two: the drive and the loop from the left, each labelled as a whole.", zh: "示例节拍二：从左前方看驱动和回路，各标成一个整体。" }
 ---
 
 <Lang en>
 
-Sample step three: an X-ray look with the sample drum selected and everything switched on. Only the shells turn see-through, and the back panel is put aside.
+Sample step three: an X-ray look with the sample drum selected and everything switched on. Only the shells turn see-through, and the back panel is put aside. <FlyTo preset="sample-left">See it from the left</FlyTo>
 
 </Lang>
 
 <Lang zh>
 
-示例第三步：用透视的方式看，选中示例滚筒，并且通上电。只有外壳变透明，背板被移开。
+示例第三步：用透视的方式看，选中示例滚筒，并且通上电。只有外壳变透明，背板被移开。<FlyTo preset="sample-left">从左前方看</FlyTo>
 
 </Lang>

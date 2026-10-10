@@ -8,11 +8,12 @@
  * This module is build-time only (zod); client code imports its *types* only.
  */
 import { z } from 'zod';
-import { bilingual, colorRef, kebabId, level, theme, vec3 } from '../../content/schema/common';
+import { bilingual, colorRef, KEBAB_ID, kebabId, level, theme, vec3 } from '../../content/schema/common';
 import { orbitCamera } from '../../content/schema/camera';
 import { sourcesFile } from '../../content/schema/sources';
 import { glossaryFile } from '../../content/schema/glossary';
 import { detailSourceIds } from './lib/detail';
+import { GROUP_LABEL_PREFIX } from './lib/labels';
 
 /* ------------------------------------------------------------------ */
 /* Parts                                                               */
@@ -391,6 +392,26 @@ export const viewsSchema = z
   .strict();
 export type ViewPresets = z.output<typeof viewsSchema>;
 
+/** VIEW preset ids the engine registers itself (named presets may not use them). */
+export const RESERVED_PRESET_IDS = ['orbit', 'reference'] as const;
+/** Named camera presets in parts.json (after the chapter presets, ORBIT and REF. the digit keys reach up to 9). */
+export const MAX_NAMED_PRESETS = 6;
+
+/**
+ * Named camera preset (docs/12 §7.4, G7): a VIEW button after the chapter
+ * presets, ORBIT and REF.; `<FlyTo preset>` and a beat's `camera: "<id>"`
+ * name it. `view` (optional) switches the view with the camera.
+ */
+export const cameraPresetSchema = z
+  .object({
+    id: kebabId,
+    label: bilingual,
+    camera: orbitCamera,
+    view: z.enum(SPACE_VIEWS).optional(),
+  })
+  .strict();
+export type CameraPreset = z.output<typeof cameraPresetSchema>;
+
 /* ------------------------------------------------------------------ */
 /* parts.json                                                          */
 /* ------------------------------------------------------------------ */
@@ -455,9 +476,15 @@ export const partsFile = z
     spec: z.array(specRowSchema).max(MAX_SPEC_ROWS).optional(),
     /** Simulated STATE-panel readings (≤ 6; see telemetrySchema); replace the default rows after RUN. */
     telemetry: z.array(telemetrySchema).min(1).max(MAX_TELEMETRY_ROWS).optional(),
+    /** Named camera presets (≤ 6; see cameraPresetSchema). */
+    presets: z.array(cameraPresetSchema).min(1).max(MAX_NAMED_PRESETS).optional(),
   })
   .strict()
   .superRefine((file, ctx) => {
+    file.presets?.forEach((p, i) => {
+      if ((RESERVED_PRESET_IDS as readonly string[]).includes(p.id))
+        ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['presets', i, 'id'], message: `"${p.id}" is the engine's own preset id` });
+    });
     const parts = new Set(file.parts.map((p) => p.id));
     const groups = new Set(file.groups.map((g) => g.id));
     const contextIds = new Set(file.parts.filter((p) => p.context).map((p) => p.id));
@@ -532,6 +559,44 @@ export type SpaceSceneData = z.output<typeof spaceSceneData>;
 /* Chapter state                                                       */
 /* ------------------------------------------------------------------ */
 
+/** A leader-label target: a part id, or `group:<group id>` (one placard at the group's bounding centre). */
+export const labelRef = z
+  .string()
+  .refine((v) => KEBAB_ID.test(v.startsWith(GROUP_LABEL_PREFIX) ? v.slice(GROUP_LABEL_PREFIX.length) : v), {
+    message: 'a part id or group:<group id> (kebab-case)',
+  });
+
+/** Leader labels in one presentation beat at most (docs/12 §8 G1). */
+export const MAX_BEAT_LABELS = 6;
+
+/**
+ * One presentation beat (PRESENTATION, `P`), on top of its chapter's state:
+ * every field is optional and only changes what it names; `hide` and
+ * `labels` replace the chapter's for this beat (not cumulative). `camera` is
+ * an orbit camera or the id of a named preset (`presets` in parts.json; the
+ * camera only, not the preset's view). The caption shows once the camera has
+ * settled; `audio` is a site path (under `public/`) played on entering the beat.
+ */
+export const spaceBeat = z
+  .object({
+    view: z.enum(SPACE_VIEWS).optional(),
+    part: kebabId.nullable().optional(),
+    explode: z.number().min(0).max(1).optional(),
+    run: z.boolean().optional(),
+    cutaway: z.enum(['none', 'half']).optional(),
+    camera: z.union([orbitCamera, kebabId]).optional(),
+    layers: z.array(kebabId).optional(),
+    labels: z.array(labelRef).max(MAX_BEAT_LABELS).optional(),
+    hide: z.array(kebabId).optional(),
+    caption: bilingual,
+    audio: z
+      .string()
+      .regex(/^\/[^\s?#]+\.(mp3|m4a|aac|ogg|opus|wav)$/i, 'audio: a site path such as /audio/aircon/ch03-1.mp3')
+      .optional(),
+  })
+  .strict();
+export type SpaceBeat = z.output<typeof spaceBeat>;
+
 /** `state:` in a SpaceScene chapter's frontmatter (a "step"). */
 export const spaceChapterState = z
   .object({
@@ -544,14 +609,23 @@ export const spaceChapterState = z
     camera: orbitCamera.optional(),
     cutaway: z.enum(['none', 'half']).optional(),
     theme: theme.optional(),
-    /** Parts that get leader labels in this chapter (default: every visible part, capped by camera distance). */
-    labels: z.array(kebabId).optional(),
+    /**
+     * Parts (or `group:<id>` groups) that get leader labels in this chapter
+     * (default: every visible part, capped by camera distance).
+     */
+    labels: z.array(labelRef).optional(),
     /**
      * Parts put aside in this chapter (not cumulative: a chapter without
      * `hide` shows every part). They slide out along their explode direction
      * and fade (~0.6 s), and come back the same way.
      */
     hide: z.array(kebabId).optional(),
+    /** One-sentence overview under the chapter title in the reading panel (and the default presentation caption). */
+    summary: bilingual.optional(),
+    /** The child's question for this chapter (reading panel header when there is no `summary`). */
+    question: bilingual.optional(),
+    /** PRESENTATION beats for this chapter; default = one beat (the chapter's state, `summary` as caption). */
+    beats: z.array(spaceBeat).min(1).optional(),
   })
   .strict();
 export type SpaceChapterState = z.output<typeof spaceChapterState>;
@@ -567,9 +641,43 @@ export function spaceSceneIds(data: SpaceSceneData): { kind: string; id: string 
     ...f.groups.map((g) => ({ kind: 'group', id: g.id })),
     ...f.flows.map((x) => ({ kind: 'flow', id: x.id })),
     ...f.animations.map((a) => ({ kind: 'animation', id: a.id })),
+    ...(f.presets ?? []).map((p) => ({ kind: 'preset', id: p.id })),
   ];
 }
 
-export function spaceChapterRefs(state: SpaceChapterState): string[] {
-  return [...(state.part ? [state.part] : []), ...(state.layers ?? []), ...(state.labels ?? []), ...(state.hide ?? [])];
+/** Camera preset ids a chapter body may fly to (`<FlyTo preset>`): the named presets of parts.json. */
+export function spacePresetIds(data: SpaceSceneData): string[] {
+  return (data.parts.presets ?? []).map((p) => p.id);
+}
+
+/**
+ * What a chapter state (and each of its beats) names that the data does not
+ * have: `part` / `hide` must be parts (not context ones), `labels` parts or
+ * `group:<id>` groups, `layers` groups, a beat's string `camera` a named preset.
+ */
+export function spaceChapterIssues(state: SpaceChapterState, data: SpaceSceneData): string[] {
+  const f = data.parts;
+  const parts = new Map(f.parts.map((p) => [p.id, p]));
+  const groups = new Set(f.groups.map((g) => g.id));
+  const presets = new Set(spacePresetIds(data));
+  const out: string[] = [];
+  const check = (where: string, s: Pick<SpaceBeat, 'part' | 'hide' | 'labels' | 'layers'> & { camera?: unknown }) => {
+    const part = (field: string, id: string, selectable: boolean) => {
+      const p = parts.get(id);
+      if (!p) out.push(`${where}${field}: unknown part "${id}"`);
+      else if (selectable && p.context) out.push(`${where}${field}: "${id}" is a context part (never selected or labelled)`);
+    };
+    if (s.part) part('part', s.part, true);
+    for (const id of s.hide ?? []) part('hide', id, false);
+    for (const id of s.labels ?? []) {
+      if (!id.startsWith(GROUP_LABEL_PREFIX)) part('labels', id, true);
+      else if (!groups.has(id.slice(GROUP_LABEL_PREFIX.length))) out.push(`${where}labels: unknown group "${id.slice(GROUP_LABEL_PREFIX.length)}"`);
+    }
+    for (const id of s.layers ?? []) if (!groups.has(id)) out.push(`${where}layers: unknown group "${id}"`);
+    if (typeof s.camera === 'string' && !presets.has(s.camera))
+      out.push(`${where}camera: unknown preset "${s.camera}" (not in parts.json presets)`);
+  };
+  check('state.', state);
+  state.beats?.forEach((b, i) => check(`state.beats.${i}.`, b));
+  return out;
 }

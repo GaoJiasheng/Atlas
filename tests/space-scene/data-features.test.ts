@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { flowSchema, partsFile, spaceChapterRefs, spaceChapterState, spaceSceneData } from '../../src/engines/space-scene/schema';
+import { flowSchema, partsFile, spaceChapterIssues, spaceChapterState, spaceSceneData } from '../../src/engines/space-scene/schema';
 import { flowColorAt, stopSpan } from '../../src/engines/space-scene/lib/flow-stops';
 import { formatReading, lagValue, readingDecimals } from '../../src/engines/space-scene/lib/telemetry';
 import { detailParagraphs, detailSourceIds } from '../../src/engines/space-scene/lib/detail';
@@ -124,9 +124,10 @@ describe('part detail (G11)', () => {
 });
 
 describe('chapter hide (G2)', () => {
-  it('is part of the chapter state and its refs', () => {
+  it('is part of the chapter state and must name parts', () => {
     const state = spaceChapterState.parse({ hide: ['front-panel'] });
-    expect(spaceChapterRefs(state)).toContain('front-panel');
+    const data = spaceSceneData.parse({ parts: { parts: [part('a')], groups: [{ id: 'g', name: { en: 'G' }, color: 'token:ink' }] } });
+    expect(spaceChapterIssues(state, data)).toEqual(['state.hide: unknown part "front-panel"']);
   });
   it('maps to the store, not cumulative', () => {
     const hidden = (state: Record<string, unknown>) => (spaceSceneEngine.fromChapterState(state) as Partial<SpaceSceneExt>).hidden;

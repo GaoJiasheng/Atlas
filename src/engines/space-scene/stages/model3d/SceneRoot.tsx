@@ -26,7 +26,8 @@ import { Flows } from './Flows';
 import { CameraRig } from './CameraRig';
 import { Lighting } from './Lighting';
 import { GroundShadow } from './GroundShadow';
-import { LabelProbe, ResolutionGovernor, ShadowUpdater, StatsProbe } from './probes';
+import { LabelProbe, ResolutionGovernor, ShadowUpdater, StatsProbe, type GroupMembers } from './probes';
+import { partBounds } from '../../lib/parts';
 import { anchorOffset, anchorRadius, primitiveShape, stageBounds } from './shapes';
 import { createTextureKit } from './textures';
 import type { PartStyle } from './materials';
@@ -49,6 +50,7 @@ const RUN_RATE = 5;
 /** EXPLODED toggle (master-spec H: ~2 s easeInOut); slider drags follow quickly. */
 const EXPLODE_MS = 2000;
 const EXPLODE_DRAG_MS = 220;
+const NO_LAYERS: readonly string[] = [];
 /** Parts at least this fraction of the model radius cast the key light's shadow. */
 const SHADOW_CASTER_RATIO = 0.28;
 
@@ -170,6 +172,18 @@ export function SceneRoot({ store, ui, bridge, data, chapters, look }: SceneRoot
   const bounds = useMemo(() => stageBounds(data.parts, shapes), [data.parts, shapes]);
   const anchors = useMemo(() => new Map(data.parts.map((p) => [p.id, anchorOffset(p)] as [string, Vec3])), [data.parts]);
   const radii = useMemo(() => new Map(data.parts.map((p) => [p.id, anchorRadius(p)] as [string, number])), [data.parts]);
+  // Group labels: each group's non-context parts with the half extents of their bounds.
+  const groupMembers = useMemo<GroupMembers>(() => {
+    const out = new Map<string, { id: string; half: Vec3 }[]>();
+    for (const p of data.parts) {
+      if (p.context || p.group === undefined) continue;
+      const b = partBounds(p);
+      const r = (shapes.get(p.id)?.radius ?? 0) / Math.sqrt(3);
+      const half: Vec3 = b ? [(b.max[0] - b.min[0]) / 2, (b.max[1] - b.min[1]) / 2, (b.max[2] - b.min[2]) / 2] : [r, r, r];
+      out.set(p.group, [...(out.get(p.group) ?? []), { id: p.id, half }]);
+    }
+    return out;
+  }, [data.parts, shapes]);
   useEffect(() => {
     bridge.modelRadius = bounds.modelRadius;
   }, [bridge, bounds]);
@@ -272,7 +286,8 @@ export function SceneRoot({ store, ui, bridge, data, chapters, look }: SceneRoot
           />
         );
       })}
-      <Flows flows={data.flows} layers={s.layers} look={look} clipping={clipping} />
+      {/* Flow paths do not follow the parts apart: no particles while exploded (docs/12 §7.5, G16). */}
+      <Flows flows={data.flows} layers={s.view === 'exploded' ? NO_LAYERS : s.layers} look={look} clipping={clipping} />
       <CameraRig store={store} ui={ui} bridge={bridge} chapters={chapters} views={data.views} minDistance={bounds.modelRadius * 0.9} />
       {data.model && meshNames.size > 0 && (
         <GltfBoundary>
@@ -281,7 +296,7 @@ export function SceneRoot({ store, ui, bridge, data, chapters, look }: SceneRoot
           </Suspense>
         </GltfBoundary>
       )}
-      <LabelProbe bridge={bridge} handles={handles} clipping={clipping} xray={s.view === 'xray'} runtime={runtime} />
+      <LabelProbe bridge={bridge} handles={handles} groups={groupMembers} clipping={clipping} xray={s.view === 'xray'} runtime={runtime} />
       <StatsProbe bridge={bridge} />
       <ShadowUpdater runtime={runtime} />
       <ResolutionGovernor bridge={bridge} base={stageDpr} />

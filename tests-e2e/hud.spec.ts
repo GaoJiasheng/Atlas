@@ -731,3 +731,111 @@ test('PRESENTATION voice: without a matching voice (or speechSynthesis) the chec
   expect(await page.evaluate(() => window.__atlas!.setVoice(true))).toBe(false);
   expect((await page.evaluate(() => window.__atlas!.state())).presentation?.voice).toBe(false);
 });
+
+/** `__atlas.state()` of a SpaceScene page (scene snapshot fields included). */
+type SpaceState = ReturnType<NonNullable<typeof window.__atlas>['state']> & {
+  view: string;
+  hidden: string[];
+  part: string | null;
+  run: boolean;
+  camera: { position: number[] } | null;
+};
+
+test('sample-space PRESENTATION: beats on the 3D stage (hide, the beat\'s labels, group placards, a named preset camera), ESC restores the scene', async ({ page }) => {
+  test.setTimeout(90_000);
+  await page.setViewportSize({ width: 1920, height: 1080 });
+  await openScene(page, '/en/topics/sample-space/?ch=switch-on');
+  const api = () => page.evaluate(() => window.__atlas!.state() as SpaceState);
+
+  // Named presets come after the chapter presets, ORBIT and REF.; <FlyTo> in the chapter body flies to one.
+  expect((await page.evaluate(() => window.__atlas!.presets())).slice(-3)).toEqual(['orbit', 'reference', 'sample-left']);
+  await page.locator('[data-flyto="sample-left"]:visible').click();
+  await expect.poll(async () => (await api()).preset).toBe('sample-left');
+  await expect.poll(async () => (await api()).camera?.position).toEqual([-2.4, 1, 2.6]);
+
+  // The scene before: ORBIT on, the chapter's X-ray view, hidden back panel and selected drum.
+  await page.evaluate(() => window.__atlas!.setPreset('orbit', { instant: true }));
+  const before = await api();
+  expect(before).toMatchObject({ preset: 'orbit', view: 'xray', hidden: ['sample-panel'], part: 'sample-drum' });
+
+  const beats = await page.evaluate(() => window.__atlas!.beats());
+  expect(beats.map((b) => `${b.chapter}.${b.index}`)).toEqual(['whole-thing.0', 'pull-apart.0', 'switch-on.0', 'switch-on.1']);
+
+  // P starts at the current chapter's first beat: the beat's view, hide and labels on top of the chapter.
+  await page.keyboard.press('p');
+  await expect.poll(async () => (await api()).presentation).toEqual({ chapter: 'switch-on', beat: 0, autoplay: false, voice: false });
+  expect((await api()).hud).toBe(false);
+  expect(await api()).toMatchObject({ view: 'assembled', hidden: ['sample-panel', 'sample-shroud'], part: 'sample-drum' });
+  await expect(page.locator('.atlas-present__caption')).toHaveText(/Sample beat one/);
+  await expect(page.locator('.atlas-present__chapter em')).toHaveText('1 / 2');
+  // Leader labels stay on with the HUD hidden: exactly the beat's list.
+  await expect(page.locator('.atlas-leaders')).toBeVisible();
+  await expect(page.locator('.space-leaders')).toHaveAttribute('data-want', 'sample-drum,sample-fins,sample-cap');
+  const ids = () => page.locator('.space-co[data-id]').evaluateAll((els) => els.map((e) => (e as SVGElement).dataset.id).sort());
+  await expect.poll(ids).toEqual(['sample-cap', 'sample-drum', 'sample-fins']);
+
+  // Next beat (→): the named preset's camera, the chapter's own hide again, two group placards.
+  await page.keyboard.press('ArrowRight');
+  await expect.poll(async () => (await api()).presentation?.beat).toBe(1);
+  expect(await api()).toMatchObject({ view: 'xray', hidden: ['sample-panel'], part: null, camera: { position: [-2.4, 1, 2.6] } });
+  await expect(page.locator('.atlas-present__caption')).toHaveText(/Sample beat two/);
+  await expect.poll(ids).toEqual(['group:sample-drive', 'group:sample-loop']);
+  const loop = page.locator('.space-co[data-id="group:sample-loop"]');
+  await expect(loop).toContainText('SAMPLE LOOP');
+  await expect(loop).toContainText('示例回路');
+  await expect.poll(() => loop.evaluate((e) => Number((e as SVGElement).style.opacity)), { timeout: 10_000 }).toBeGreaterThan(0.9);
+
+  // ← back, a click on the stage forward; the last beat stays.
+  await page.keyboard.press('ArrowLeft');
+  await expect.poll(async () => (await api()).presentation?.beat).toBe(0);
+  await page.mouse.click(960, 400);
+  await expect.poll(async () => (await api()).presentation?.beat).toBe(1);
+  await page.keyboard.press('ArrowRight');
+  await page.waitForTimeout(400);
+  expect((await api()).presentation?.beat).toBe(1);
+
+  // ESC: the HUD and the scene as they were (chapter, view, hide, selection, ORBIT).
+  await page.keyboard.press('Escape');
+  await expect.poll(async () => (await api()).modes.presentation).toBe(false);
+  const after = await api();
+  expect(after).toMatchObject({ hud: true, presentation: null, chapter: 'switch-on', view: 'xray', hidden: ['sample-panel'], part: 'sample-drum', run: before.run });
+  await expect.poll(async () => (await api()).preset).toBe('orbit');
+  expect(await page.locator('.atlas-leaders').getAttribute('data-present')).toBeNull();
+});
+
+test('sample-space PRESENTATION voice: a beat is spoken once its camera has settled; auto-play moves on after the utterance', async ({ page }) => {
+  test.setTimeout(60_000);
+  await page.addInitScript(FAKE_SPEECH(FAKE_VOICES, 1500));
+  await page.setViewportSize({ width: 1920, height: 1080 });
+  await openScene(page, '/en/topics/sample-space/?ch=switch-on');
+  const api = () => page.evaluate(() => window.__atlas!.state());
+  const log = () => page.evaluate(() => window.__atlas!.voiceLog());
+  const captions = async () => (await log()).filter((e) => e.part === 'caption');
+
+  await page.keyboard.press('p');
+  await expect.poll(async () => (await api()).presentation).toEqual({ chapter: 'switch-on', beat: 0, autoplay: false, voice: false });
+  expect(await page.evaluate(() => window.__atlas!.setAutoplay(true))).toBe(true);
+  await page.locator('.atlas-present__voice input').click();
+  await expect.poll(async () => (await api()).presentation?.voice).toBe(true);
+
+  // The chapter's first beat: number, title, caption (en voice).
+  await expect.poll(async () => (await captions()).length, { timeout: 15_000 }).toBe(1);
+  expect((await log()).map((e) => e.part)).toEqual(['chapter', 'title', 'caption']);
+  expect((await log())[0]!.text).toBe('Chapter three');
+  expect((await captions())[0]).toMatchObject({ text: (await page.locator('.atlas-present__caption').textContent())!.trim(), lang: 'en-GB', voice: 'Daniel' });
+
+  // It ends; auto-play goes on to beat 2 (the camera flies 1.4 s to the named preset), whose caption is spoken only after the flight.
+  await expect.poll(async () => (await captions())[0]!.reason, { timeout: 10_000 }).toBe('end');
+  await expect.poll(async () => (await api()).presentation?.beat, { timeout: 5000 }).toBe(1);
+  await expect.poll(async () => (await captions()).length, { timeout: 15_000 }).toBe(2);
+  await expect.poll(async () => (await captions())[1]!.started).not.toBeNull();
+  const [first, second] = await captions();
+  expect(second!.text).toMatch(/Sample beat two/);
+  // 0.6 s breath + the camera move; the 2.3 s fixed wait or the 4 s fallback would be later.
+  const gap = second!.started! - first!.ended!;
+  expect(gap).toBeGreaterThanOrEqual(1900);
+  expect(gap).toBeLessThan(2800);
+  // The last beat: auto-play stops there.
+  await page.waitForTimeout(3000);
+  expect((await api()).presentation).toMatchObject({ chapter: 'switch-on', beat: 1 });
+});

@@ -1,6 +1,6 @@
 /**
  * Stage overlay: the control panel (docs/06) — group (layer) toggles, the
- * mode switches (X-RAY, EXPLODED, CUTAWAY, FLOW, REFERENCE, LABELS), the
+ * mode switches (X-RAY, EXPLODED, CUTAWAY, FLOW, REFERENCE, PRESENTATION, LABELS), the
  * glossary list (topics with data/glossary.json) and Hide HUD as tools, and a
  * colour key of the groups and flows.
  */
@@ -14,6 +14,7 @@ const MODES: ControlRow[] = [
   { kind: 'mode', id: 'cutaway' },
   { kind: 'mode', id: 'flow' },
   { kind: 'mode', id: 'reference' },
+  { kind: 'mode', id: 'presentation' },
   { kind: 'mode', id: 'labels' },
 ];
 const TOOLS: ControlRow[] = [...MODES, { kind: 'hud' }];

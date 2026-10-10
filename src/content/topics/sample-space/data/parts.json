@@ -362,5 +362,8 @@
     { "key": { "en": "Drum", "zh": "滚筒" }, "unit": "rpm", "idle": 0, "run": 60, "lag": 2 },
     { "key": { "en": "Loop temp.", "zh": "回路温度" }, "unit": "°C", "idle": 20, "run": 45.5, "lag": 6 },
     { "key": { "en": "Power", "zh": "功率" }, "unit": "kW", "idle": 0, "run": 0.65, "lag": 2 }
+  ],
+  "presets": [
+    { "id": "sample-left", "label": { "en": "Left", "zh": "左前" }, "camera": { "position": [-2.4, 1.0, 2.6], "target": [-0.1, -0.3, 0], "fov": 34 } }
   ]
 }

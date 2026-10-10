@@ -1,6 +1,6 @@
 /**
  * The content validator against a temporary topics tree (ATLAS_TOPICS_DIR):
- * copies of sample-time, each broken in one way.
+ * copies of sample-time and sample-space, each broken in one way.
  */
 import { execFileSync } from 'node:child_process';
 import { cpSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
@@ -11,17 +11,18 @@ import { mergeSourcesMd, sourceLine, sourcesBlock, BEGIN, END } from '../scripts
 
 const ROOT = join(import.meta.dirname, '..');
 const SAMPLE = join(ROOT, 'src/content/topics/sample-time');
+const SAMPLE_SPACE = join(ROOT, 'src/content/topics/sample-space');
 
 let dir = '';
 let output = '';
 let status = 0;
 
-/** Copy sample-time to `<dir>/<slug>` and apply `edit` to it. */
-function topic(slug: string, edit: (root: string) => void = () => {}) {
+/** Copy sample-time (or `from`) to `<dir>/<slug>` and apply `edit` to it. */
+function topic(slug: string, edit: (root: string) => void = () => {}, from = SAMPLE) {
   const root = join(dir, slug);
-  cpSync(SAMPLE, root, { recursive: true });
+  cpSync(from, root, { recursive: true });
   const yaml = join(root, 'topic.yaml');
-  writeFileSync(yaml, readFileSync(yaml, 'utf8').replace(/^id: sample-time$/m, `id: ${slug}`));
+  writeFileSync(yaml, readFileSync(yaml, 'utf8').replace(/^id: sample-(time|space)$/m, `id: ${slug}`));
   edit(root);
 }
 
@@ -95,6 +96,33 @@ beforeAll(() => {
     writeFileSync(join(root, 'data/glossary.json'), JSON.stringify(GLOSSARY));
     writeFileSync(join(root, 'chapters/09-term.mdx'), chapterFile(['id: term', 'order: 9', 'title: { en: "Term", zh: "词" }'], 'A <Term id="trench">trench</Term>.'));
   });
+  topic('space-clean', () => {}, SAMPLE_SPACE);
+  topic(
+    'space-bad-beats',
+    (root) => {
+      const file = join(root, 'chapters/03-switch-on.mdx');
+      const text = readFileSync(file, 'utf8')
+        .replace('hide: [sample-panel, sample-shroud]', 'hide: [sample-panel, sample-lid]')
+        .replace('labels: [sample-drum, sample-fins, sample-cap]', 'labels: [sample-drum, sample-wall, sample-cog]')
+        .replace('camera: sample-left', 'camera: sample-right')
+        .replace('"group:sample-loop"', '"group:sample-air"')
+        .replace('<FlyTo preset="sample-left">See', '<FlyTo preset="sample-top">See');
+      writeFileSync(file, text);
+      // A named preset may not reuse an id of the topic.
+      editJson(join(root, 'data/parts.json'), (parts: { presets: { id: string }[] }) => {
+        parts.presets.push({ ...parts.presets[0]!, id: 'whole-thing' });
+      });
+    },
+    SAMPLE_SPACE,
+  );
+  topic(
+    'space-orbit-preset',
+    (root) =>
+      editJson(join(root, 'data/parts.json'), (parts: { presets: { id: string }[] }) => {
+        parts.presets.push({ ...parts.presets[0]!, id: 'orbit' });
+      }),
+    SAMPLE_SPACE,
+  );
   try {
     output = execFileSync(join(ROOT, 'node_modules/.bin/tsx'), ['scripts/validate-content.ts'], {
       cwd: ROOT,
@@ -115,7 +143,7 @@ afterAll(() => {
 describe('validate-content', () => {
   it('fails the run when any topic has errors', () => {
     expect(status).toBe(1);
-    expect(output).toMatch(/9 topic\(s\)/);
+    expect(output).toMatch(/12 topic\(s\)/);
   });
 
   it('passes an unmodified copy', () => {
@@ -150,6 +178,27 @@ describe('validate-content', () => {
     expect(linesFor('term-without-glossary').join('\n')).toContain('<Term id="front">: the topic has no data/glossary.json');
     expect(linesFor('bad-glossary').join('\n')).toContain('data.glossary.terms.0.see.0: unknown term "nowhere"');
     expect(linesFor('unknown-term').join('\n')).toContain('<Term id="trench">: unknown term (not in data/glossary.json)');
+  });
+});
+
+describe('validate-content: SpaceScene beats and presets', () => {
+  it('passes an unmodified copy of sample-space (beats, a named preset, <FlyTo>)', () => {
+    expect(linesFor('space-clean').filter((l) => l.startsWith('error'))).toEqual([]);
+  });
+
+  it('checks the ids a beat names and the named presets', () => {
+    const lines = linesFor('space-bad-beats').join('\n');
+    expect(lines).toContain('state.beats.0.hide: unknown part "sample-lid"');
+    expect(lines).toContain('state.beats.0.labels: "sample-wall" is a context part');
+    expect(lines).toContain('state.beats.0.labels: unknown part "sample-cog"');
+    expect(lines).toContain('state.beats.1.camera: unknown preset "sample-right"');
+    expect(lines).toContain('state.beats.1.labels: unknown group "sample-air"');
+    expect(lines).toContain('<FlyTo preset="sample-top">: unknown preset');
+    expect(lines).toMatch(/chapter id "whole-thing" duplicates/);
+  });
+
+  it('keeps the engine\'s own preset ids (ORBIT, REF.) for the engine', () => {
+    expect(linesFor('space-orbit-preset').join('\n')).toContain('data.parts.presets.1.id: "orbit" is the engine\'s own preset id');
   });
 });
 
