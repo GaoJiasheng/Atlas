@@ -760,3 +760,83 @@ SpaceScene / Model3DStage，paper 默认、cinema 可切。第一个生物主题
 7. 用该种的真实体色。
 8. 不做测验。
 9. 跳跃数据借用沙漠蝗（同亚科）可以，正文点名物种并注明。
+
+## 14. 施工记录（D1 数据骨架 + D2 几何轮次，2026-10-10）
+
+### 14.1 参考图（`scripts/geo/grasshopper/refs/`，gitignore，不发布；逐张看过）
+
+| 文件 | 来源 | 许可 | 用来看什么 |
+|---|---|---|---|
+| `01-valanga-female-lateral-left-commons.png` | Commons “Female Javanese Grasshopper.png”（Lucius Winslow） | CC BY-SA 4.0 | 雌虫左侧剪影（头朝左）：头高、前胸背板侧叶、覆翅超出腹末、股节长度；geo-hero 的对照 |
+| `02-valanga-lateral-right-commons-23220865943.jpg` | Commons “Malaysian Locust (Valanga nigricornis) (23220865943)”（Flickr） | CC BY-SA 2.0 | 侧视比例、后足静息折叠（胫节向前下、跗节向后贴地）、触角角度 |
+| `03-valanga-female-brown-hindleg-inat344584213.jpg` | Commons “Valanga nigricornis 344584213”（iNaturalist） | CC BY 4.0 | 褐色雌虫本色（tint 取色）、后胫节两排刺（黄色、端黑）、膝部黑色 |
+| `04-valanga-head-oblique-inat262269849.jpg` | Commons “Valanga nigricornis 262269849”（iNaturalist） | CC BY 4.0 | 头部斜前视：复眼形状与位置、触角基、口器 |
+| `05-valanga-pair-colour-commons.jpg` | Commons “Javanese Grasshopper.jpg”（CharMel Creations） | CC BY 4.0 | 褐色雌虫 + 黄色雄虫：体色、前胸背板暗色、股节 |
+| `06-valanga-nymph-late-commons.jpg` | Commons “Javanese grasshopper (Valanga nigricornis) nymph”（Sabah） | CC BY-SA 4.0 | 末龄若虫：浅绿、翅芽翻到背上、头相对大 |
+| `07-valanga-nymph-early-inat346346000.jpg` | Commons “Valanga nigricornis 346346000” | CC BY-SA 4.0 | 低龄若虫：无翅芽、触角短、体斑 |
+| `08-schistocerca-pallens-wings-spread-mhnt.jpg` | Commons “Schistocerca pallens MHNT vol”（Archaeodontosaurus） | CC BY-SA 4.0 | 同亚科展翅标本背视：覆翅 / 后翅外形与相对大小、后翅扇面翅脉（*Valanga* 无展翅 CC 图，借同亚科定形） |
+| `09-snodgrass1930-fig67-lengthwise-section.png` | Snodgrass 1930 *Insects, their ways and means of living* fig. 67（Commons “ITWAMOL - Fig 67”） | 公有领域 | **矢状剖切验收基准**：脑、咽下神经节、食道、嗉囊、胃盲囊、中肠、马氏管、后肠、心、腹神经索的相对位置 |
+| `10-snodgrass1930-fig68-alimentary-canal.png` | 同上 fig. 68 | 公有领域 | 消化道各段比例、胃盲囊前后两臂、直肠垫、唾液腺葡萄状 |
+| `11-snodgrass1930-fig66-head-mouthparts.png` | 同上 fig. 66 | 公有领域 | 正面头部（额、唇基、上唇、复眼、单眼位置）与拆开的口器四件；geo-head 对照 |
+| `12-snodgrass1930-fig63-external-dissected.png` | 同上 fig. 63 | 公有领域 | 体段拆解（头、前胸、中后胸、腹）、展开的前后翅外形、后足五节、鼓膜位置 |
+| `13-snodgrass1929-fig44-hind-leg-mechanism.jpg` | Snodgrass 1929 *Smithsonian Misc. Coll.* 82(2) fig. 44（Commons，Smithsonian 标 CC0） | CC0 / 公有领域 | 股节内伸肌（背侧大羽状肌）与屈肌（腹侧细长）、肌腱到膝、胫节刺 |
+| `14-packard-caloptenus-internal-anatomy.jpg` | Packard（*Caloptenus femur-rubrum* 内部解剖，Commons “Packard hopper3”） | 公有领域 | 第二张矢状图：卵巢管在消化道背侧斜排、胃盲囊、嗉囊、神经节串 |
+| `15-kellogg1911-lateral-external.jpg` | Kellogg & Doane 1911 *The animals and man*（Commons，Flickr IA） | 无已知版权限制 | 带标注的侧视外形：气门列、听器、产卵瓣、股节人字纹 |
+| `16-hedenstrom-flight-muscles-section.png` | Commons “Insect wing muscles.png”（Hedenström） | CC BY 4.0 | 胸部横切里背纵肌（背侧、近中线成对）与背腹肌（两侧竖直）的位置；geo-thorax-cut 对照（图为蝇，原理通用） |
+| `17-snodgrass-dissosteira-plate.jpg` | Snodgrass《Dissosteira carolina》彩图（Commons） | 公有领域 | 3/4 视角体态与前胸背板鞍形、覆翅网状脉 |
+
+计划里的 Albrecht 1953 与 Chapman 横切图有版权，没有下载；矢状验收改用 Snodgrass 1930 fig. 67 + Packard，横切改用 Hedenström 的原理图。*Valanga* 的展翅、正面头部没有找到可用的 CC 图，分别借同亚科标本（08）和 Snodgrass 线图（11）。
+
+### 14.2 D1 数据骨架
+
+- 脚手架 `scripts/new-topic.ts grasshopper --engine space-scene --subject biology`；`topic.yaml`（draft、tags [singapore]、`note` 按 §7.1）；标题按 brief 用“一只蝗虫的身体”（§7.1 写的是“蚱蜢的身体”，待 Gavin 定）。
+- `parts.json`：57 件 = 47 动物 + 7 成长（卵荚 + 6 龄若虫）+ 3 context（`ruler`、`hand-outline`、`soil-section`）；组 01–07（07 `card: false`）；`units {mm, 25}`；双侧：复眼、触角、上颚、下颚、鼓膜、前足、中足、后股节、半月形突、后胫节、覆翅、后翅、唾液腺、足神经、听器、气门、气管主干、气囊、伸肌、屈肌、飞行肌、卵巢（22 件）。尾须、产卵瓣、单眼、下唇须用 `extra` 画两侧（一次绘制）。
+- 流 5 条（食物带 food → cut → neutral → ink-3 色标；吸气从中胸气门进、呼气从 A8 出，两条都 `bilateral`；血淋巴前行 / 回流首尾相接 `ends: open`）；动画 7 条（腹板泵气 pulse+pivot、心跳 pulse、上颚绕前后轴 oscillate、下颚须、触角、覆翅 / 后翅 `sequence` 8 s 循环展开）；姿态 5 个（`wings-open`、`jump-fold`、`jump-load`、`jump-lock`、`jump-release` 0.15 s）；`views`（assembled / exploded / cover / section xy / cutaway + cuts `sagittal`、`thorax-transverse`）；预设 6 个（hero、head、hind-leg、dorsal、side、systems）；规格 4 行、STATE 4 行。
+- 6 章 state 齐全（view / part / explode / run / cutaway / pose / ghost / layers / hide / labels / camera），summary 与 question 用 §6 的草稿句，每章 5 拍草稿字幕（B 步改写）；正文只有一行“草稿”说明。零件 summary 按 §3.3 写成 EN / ZH 草稿，detail 统一标“草稿：事实与来源待 T1”。`sources.json`、`glossary.json` 为空。
+- 几何由一个生成脚本按 §3.1 坐标与身体剖面函数算出（scratchpad，不进仓库）；之后 T1 直接在 `parts.json` 里改文字字段即可。
+
+### 14.3 D2 轮次
+
+**R2 几何（三轮并排）**
+
+| 轮 | 对照 | 差异 → 修正 |
+|---|---|---|
+| 1 | 侧视 vs 01 / 02 | 前胸背板读作“风箱圆筒” → 改成 U 形背盖（开口 200°）+ 两片侧叶 extrude（前缘直、下缘后翘、后角圆）；触角太粗太竖 → 半径减半、前倾约 50°；体色过浅（材质族提亮约 1.45×）→ 全部 tint 压暗 |
+| 1 | 背视 vs 08 | 中后胸顶穿出覆翅、腹部第 1–3 节在覆翅上“冒泡” → 胸部压低变窄（flat .62），腹部前段 w .181，覆翅屋脊 35°、顶点 1.165、斜率 .07（解析支撑余量 ≥ 0.1 mm）；后翅缩到 1.85 不露出翅端 |
+| 2 | 矢状 vs 09 / 10 / 14 | 器官前后顺序与 fig. 67 一致（脑在食道上、咽下神经节在下、嗉囊占前中胸、胃盲囊在中后胸交界、中肠到约 A5、后肠 + 直肠到肛门、心在背、神经索在腹、卵巢管在消化道背侧）。修：咽、嗉囊、主动脉、气囊、背腹肌进体壁内 |
+| 2 | 横切 vs 16 | 中后胸原为实心 → 剖面整片填充看不到内部；改 `hollow`，头壳改成开口薄壳 lathe。横切读得出：背纵肌在背、背腹肌在两侧、嗉囊居中、神经索在腹、心在背中线 |
+| 3 | 正面 vs 11、头部近景 vs 04 | 唇基 / 上唇原为平板，侧面翘起 → 改 `curvedPanel` 贴合脸的弧面；上颚内收；复眼前移（正面能看到） |
+
+干涉检查（scratch 脚本：器官采样球 vs 体壁椭圆剖面、器官两两最小间距、姿态下胫节 vs 股节、全拆开外骨骼包围盒）：体壁外露最大 1.4 mm（飞行肌顶，软组织贴壁），神经索 5.2 mm 是颈部（头—前胸之间的颈膜不建模，假阳性）；器官两两最大相嵌 1.2 mm（气囊 / 飞行肌）；覆翅支撑余量 0.1–2.6 mm；`jump-fold/load/lock` 胫节贴股节 −0.4 mm（接触），`jump-release` 胫节端距地 0.1；全拆开外骨骼 / 足翅组 0 处 > 2 mm 重叠。
+
+**R3 材质**：体 `#5c4930`、前胸背板 `#463723`（更暗）、腹板 `#7a6443`、覆翅 `#4f3f29`、后股节 `#665036`、膝与半月形突 `#2f2720`、胫节刺 `#c9b06a`、触角基段褐 / 端段 `#1a1714`（黑角）、后翅烟褐 + 基部红 `#a8443e`（同铰链第二片翅膜，见 14.4）；若虫 `#7f9c40`。paper 与 cinema 都看过（hero-dark）。
+
+**R4 流、动画、姿态**：食物流沿消化道中线（矢状剖切在肠腔里可见）；空气沿侧纵干；背血管脉动 + 腹板泵气（whenRun false 常动）；上颚绕前后向轴开合（双侧自动镜像）；覆翅 + 后翅 `sequence` 8 s 循环（0–2 s 静止、2–3.6 s 展开、6–7.6 s 收拢）；跳跃四姿态绕膝转（−15° / −15° + 半月形突压缩 / + 屈肌收缩 / +70° 伸直、前中足抬起）。
+
+### 14.4 与 spec 的偏差、引擎限制
+
+- **手的剪影 → 指尖剪影**：引擎镜头最小距离 = 0.9 × 全模型半径（所有零件，含关掉的图层）。真实大小的成人手（约 185 mm = 7.4 单位）会把所有近景推到约 6 单位外。改为食指最后两节（约 40 mm）放在标本盘第一排；标本盘排成三排（不是一条长线），模型半径约 2.6、近景最小距离约 2.4。
+- **ARCHITECTURE 跨度**含标本盘（显示约 94 mm，不是 64 mm）：立面按全部零件取包围盒。
+- **规格行 4 行上限**：brief 的 5 行（分类、体长、质量、足翅、寿命）改按 §7.1：分类、体长、体制、生活史；质量与寿命没有本种可靠数据（F-3、F-27）。
+- **STATE“伸肌力 0 → 14 N”**按 brief 加了，但 telemetry 只跟 RUN，不能跟某个姿态或节拍：咀嚼章运转时也显示 14 N。建议 T1 / P 决定删掉，或等引擎支持 `follow`（B13）。
+- **后翅基部红**：没有 `tintStops`，用同铰链、同 `fold` 的第二片翅膜（半径 0.62 的扇形）画基部红区，折叠一致。
+- **覆翅**是一片平面翅，静息时斜放成 35° 屋脊；真实覆翅有侧区 / 背区的弯折，平面翅做不出（`wing` 是刚体，姿态无法给两片分别转）。
+- **小球体**：引擎的 sphere 是 48×32、torus 是 72×24，单个约 3k 三角形。神经节、腺泡、气囊、卵、若虫等改用短 sweep“椭球”，气门改用闭合 sweep 环，三角形从 0.62 M（全开）降到 0.31 M。复眼仍用 sphere。
+- **刺**：`repeat` 作用于整个零件，不能只重复刺。后胫节的内 10 / 外 8 刺改成两条梳齿 `extrude`（一条一个图元）。
+- 股节暗带、人字纹、覆翅暗斑、体斑画不了（没有贴花），近看比照片素。
+- 颈部（颈膜）没有建模，神经索从头穿到前胸时有一段露在体外（约 5 mm，透视下才看得到）。
+- 标本盘各龄体长是工作值（8 / 12 / 17 / 24 / 33 / 45 mm）、卵荚长度和每荚卵数是示意值，待 P4 核对。
+
+### 14.5 统计（1920×1080，SwiftShader）
+
+| 状态 | draw calls | 三角形 |
+|---|---|---|
+| 第 01 章 hero（外骨骼 + 足翅，静止） | 57 | 0.148 M |
+| 第 02 章运转（咀嚼 + 翅循环） | 57 | 0.148 M |
+| 第 05 章运转（X 光 + 气流 + 血淋巴） | 40 | 0.12 M |
+| 第 03 章（X 光 + 4 层 + 淡显） | 78 | 0.19 M |
+| 六个系统全开 / 全拆开 | 96 | 0.31 M |
+| 横切拍（全开 + 剖切） | 97 | 0.30 M |
+| 第 06 章标本盘 | 68 | 0.25 M |
+
+截图在 `docs/screenshots/grasshopper/`：hero-paper、hero-clean、hero-dark、head、hind-leg、wings-open、sagittal、thorax-cut、systems-digestive（单显）、systems-nervous（单显）、exploded、jump-release、life-cycle-tray，以及 geo-hero、geo-sagittal、geo-thorax-cut、geo-head。

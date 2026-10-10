@@ -1,0 +1,52 @@
+---
+id: breathing-and-blood
+order: 5
+title: { en: "Breathing and blood", zh: "呼吸与血液" }
+sensitive: false
+state:
+  view: xray
+  explode: 0
+  part: tracheal-trunks
+  run: true
+  cutaway: none
+  pose: null
+  ghost: [exoskeleton]
+  layers: [exoskeleton, breathing-circulation]
+  hide: []
+  labels: [spiracles, tracheal-trunks, air-sacs, dorsal-vessel]
+  camera: { position: [-1.75, 2.25, 4.0], target: [0.02, 0.74, 0], fov: 30 }
+  summary: { en: "A grasshopper has no lungs: air enters holes along its sides and travels through branching tubes straight to its tissues, while a tube-shaped heart along its back keeps the blood moving.", zh: "蚱蜢没有肺：空气从体侧的小孔进去，顺着分支的气管直达组织；背上一条管状的心脏让血淋巴流动。" }
+  question: { en: "Does a grasshopper have lungs and blood?", zh: "蚱蜢有肺和血吗？" }
+  beats:
+    - view: assembled
+      ghost: []
+      camera: side
+      labels: [spiracles]
+      caption: { en: "A row of small holes along the side: ten pairs of spiracles.", zh: "体侧一排小孔：10 对气门。" }
+    - labels: [tracheal-trunks, air-sacs]
+      caption: { en: "Air runs through the tubes to the whole body; the belly pumps.", zh: "空气顺着气管到达全身，腹部一起一伏地泵气。" }
+    - camera: { position: [-0.3, 0.9, 3.2], target: [-0.1, 0.75, 0.1], fov: 30 }
+      labels: [spiracles, tracheal-trunks]
+      caption: { en: "Front spiracles take air in; rear ones let it out.", zh: "前面的气门吸气，后面的呼气。" }
+    - view: assembled
+      cutaway: thorax-transverse
+      ghost: []
+      layers: [exoskeleton, legs-wings, digestive, nervous, breathing-circulation, muscles-reproduction]
+      camera: { position: [-1.7, 0.95, 0.32], target: [-0.3, 0.8, 0], fov: 30 }
+      labels: [dorsal-vessel, flight-muscles, crop, nerve-cord]
+      caption: { en: "Cut across: the heart lies along the back and the nerve cord along the belly.", zh: "横切面：心在背上，神经索在腹面。" }
+    - labels: [dorsal-vessel]
+      caption: { en: "The tube heart pumps forward; the blood seeps back through the body.", zh: "管状心脏向前泵，血淋巴在体腔里慢慢流回。" }
+---
+
+<Lang en>
+
+Draft chapter: the text is written after the content spec is signed off (docs/14 §6).
+
+</Lang>
+
+<Lang zh>
+
+章节草稿：正文在内容 spec 定稿后再写（docs/14 §6）。
+
+</Lang>

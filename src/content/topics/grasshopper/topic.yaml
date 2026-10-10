@@ -1,0 +1,13 @@
+id: grasshopper
+title: { en: "Inside a Grasshopper", zh: "一只蝗虫的身体" }
+subtitle: { en: "A female Javanese grasshopper, Valanga nigricornis", zh: "一只雌性黑角瓦兰蝗（爪哇蚱蜢）" }
+subject: biology
+tags: [singapore]
+moe: []
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: draft
+note: { en: "Reconstruction from published anatomy · enlarged 40× · internal counts schematic", zh: "根据已发表的解剖资料重建 · 放大 40 倍 · 内部数目为示意" }
