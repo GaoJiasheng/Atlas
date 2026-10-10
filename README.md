@@ -40,3 +40,7 @@ pnpm run deploy # build + `pnpm dlx wrangler pages deploy dist --project-name at
 ## Docs
 
 Design and engineering docs are in [docs/](docs/README.md). Start with [02-architecture](docs/02-architecture.md) and [06-dev-guide](docs/06-dev-guide.md) (adding a topic, the scene contract, URL parameters); deploying is in [07-deploy](docs/07-deploy.md).
+
+## Licence
+
+Code: MIT (`LICENSE`). Content and derived map data: CC BY-NC-SA 4.0 (`LICENSE-CONTENT`). Third-party data, maps, fonts and libraries: `THIRD-PARTY-NOTICES.md`.

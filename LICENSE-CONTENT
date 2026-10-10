@@ -1,0 +1,22 @@
+Atlas topic content — Creative Commons Attribution-NonCommercial-ShareAlike 4.0
+International (CC BY-NC-SA 4.0)
+
+Copyright (c) 2026 Gao Jiasheng
+
+This licence covers the educational content of Atlas: the chapter texts,
+summaries, presentation captions, glossaries, source notes and screenshots under
+`src/content/topics/**` and `docs/screenshots/**`, and the derived map data
+(`src/content/topics/*/data/control.json`, `movements.json`, `events.json`,
+`entities.json`).
+
+You are free to share and adapt this material for non-commercial purposes,
+provided you give appropriate credit ("Atlas, atlas.gavin.pub"), indicate
+changes, and distribute your contributions under the same licence.
+
+Full licence text: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
+
+Why NonCommercial-ShareAlike: the historical control areas are derived from
+CShapes 2.0 (CC BY-NC-SA 4.0) and from Wikimedia Commons maps (CC BY-SA); the
+derived data must carry compatible terms. Third-party sources and their own
+licences are listed per topic in `src/content/topics/*/data/SOURCES.md`,
+`scripts/geo/*/SOURCES-GEO.md`, and summarised in `THIRD-PARTY-NOTICES.md`.
