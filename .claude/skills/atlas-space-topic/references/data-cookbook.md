@@ -132,7 +132,7 @@ note: { en: "Generic design study · schematic layout · not a specific brand or
 ```
 
 - `spec`：`value` 是字符串（mono，数字和单位）或 `{ en, zh }`（文字）；`tag`：`typical | design | sim`，只有 `sim` 画 SIM 芯片。有 `spec` 时引擎只留 PARTS 行，标题块总共 ≤ 8 行。
-- `telemetry`：STATE 面板 = RUN + 这些行（都带 SIM 芯片）。**滞后语义**：一阶滞后 `x(t) = target + (x₀ − target) · e^(−t / lag)`，target = 运转 ? `run` : `idle`；`lag` 秒后走完约 63 %、3 × `lag` 后约 95 %；开机关机同一个 `lag`；暂停时冻结；4 Hz 刷新，不加抖动；深链接和截图（snap）直接跳到终值。`lag` 按物理惯性取：转子 4–6 s、压力 10 s、空气温度 20–25 s。`idle` / `run` 必须等于设计研究来源 S1 里的数（停机值 = 环境 / 平衡值）。`decimals` 默认取 `idle` / `run` 写出的小数位。
+- `telemetry`：STATE 面板 = RUN + 这些行（都带 SIM 芯片）。**范围限制：读数只跟 RUN（静息 → 活动）走，不能跟某个姿态、拍或动画走。** 只在某个姿态下才有意义的量（跳跃时的伸肌力）不要放进 telemetry：运转咀嚼时它也会显示成峰值。把它写进细看（带来源），等引擎支持 `follow`（spec B13）再做。**滞后语义**：一阶滞后 `x(t) = target + (x₀ − target) · e^(−t / lag)`，target = 运转 ? `run` : `idle`；`lag` 秒后走完约 63 %、3 × `lag` 后约 95 %；开机关机同一个 `lag`；暂停时冻结；4 Hz 刷新，不加抖动；深链接和截图（snap）直接跳到终值。`lag` 按物理惯性取：转子 4–6 s、压力 10 s、空气温度 20–25 s。`idle` / `run` 必须等于设计研究来源 S1 里的数（停机值 = 环境 / 平衡值）。`decimals` 默认取 `idle` / `run` 写出的小数位。
 
 ## 章节 frontmatter
 

@@ -25,7 +25,7 @@
 
 `steps` 按顺序叠加，后者覆盖前者。选择器（`from / clip / minus`）：`cshapes`（`partsAt` 只取含某点的岛，`at` 取别的日期）、`ohm`（`set` 借别帧）、`admin1`、`svg` / `raster`（类别；`coastFillKm` 让占领区沿底图海岸补齐）、`svgFrame` / `rasterFrame`、`parts`（保留或 `drop` 含某点的单块）、`bbox`（**只用来选取已有几何的一部分**）、`union` / `intersect` / `difference`。
 
-`pipeline` 字段：`plannedKeyframes`（12）、`budgetMB`（2.0，按帧数等比）、`focus`（细简化的焦点框 `[w,s,e,n]` 列表，= 章节会放大的战区）、`fineStartKm` 1.5 / `fineStepKm` 0.25（自动找能放进预算的最细间隔）、`coarseKm` 50（框外）、`method` `dp`、`quantization` 400000、`islandsKm2 { focus: 20, coarse: 300 }`、`coast { enabled, land, detailLand, detailBox, worldBox, gapKm 6, islandKm2 2, outsideKm 2, skipKm 15 }`、`checkColors`、`shots`。东南亚 10m 细海岸框 `detailBox [95,-9,125,22]` + `detailLand public/geo/land-10m-sea.json` 是 ww2 的；别的区域设 `null`（两个一起），或先在 `scripts/build-geo.ts` 加该区域的 10m 陆地。
+`pipeline` 字段：`plannedKeyframes`（12）、`budgetMB`（缺省 2.0，按帧数等比；ww1 / ww2 清单都写 2.5，新主题照写 2.5）、`focus`（细简化的焦点框 `[w,s,e,n]` 列表，= 章节会放大的战区）、`fineStartKm` 1.5 / `fineStepKm` 0.25（自动找能放进预算的最细间隔）、`coarseKm` 50（框外）、`method` `dp`、`quantization` 400000、`islandsKm2 { focus: 20, coarse: 300 }`、`coast { enabled, land, detailLand, detailBox, worldBox, gapKm 6, islandKm2 2, outsideKm 2, skipKm 15 }`、`checkColors`、`shots`。东南亚 10m 细海岸框 `detailBox [95,-9,125,22]` + `detailLand public/geo/land-10m-sea.json` 是 ww2 的；别的区域设 `null`（两个一起），或先在 `scripts/build-geo.ts` 加该区域的 10m 陆地。
 
 ## 步骤
 
@@ -74,10 +74,14 @@ pnpm tsx scripts/geo/lib/check.ts --topic <slug> [K1]        # 成品并排图 -
 
 - `simplify.ts` 把所有帧放进**一个** mapshaper 数据集：相邻实体、相邻关键帧之间共用的边界只存一次。焦点框内细（`fineStartKm` 起逐步加粗直到放进 `budgetMB × 帧数 / plannedKeyframes`），框外 `coarseKm`。
 - **预算按主题，但世界海岸是固定成本**（全球海岸裁剪约 600 KB，不随帧数增加）。只有头几帧时，按比例的预算（如 9 帧里的 2 帧 = 0.55 MB）可能小于海岸本身，自动搜索会把焦点区一路加粗到失效。所以**帧没做全时用 `simplify --fine <km>`（如 `--fine 1.5`）固定间隔；帧齐了才用自动搜索**。固定间隔超出按比例预算时，在 `SOURCES-GEO.md` 写明实际 KB、预算和原因。
-- **沿底图海岸裁剪**（`coast.enabled`）：每帧擦掉水域，再把简化漏掉的陆地给 `gapKm` 内最近的 holder，让控制区停在底图那一条海岸线上；引擎只画两个不同 holder 之间的内陆分界，不画海岸。
-- **跨反经线与低缩放渲染**：`compose.ts` 把经度跨度 > 180° 的环（OHM 太平洋关系、斐济）展开后在 ±180 切成两块；`simplify.ts` 量化后再 `-clean`：0.005°（≈ 0.5 km）内的顶点合并、< 1 km² 的环删掉。原因：退化的洞、自交或两段几乎相贴的边（50 km 粗简化的国界弦离湖岸 / 峡湾只有几百米）在 MapLibre 低缩放切瓦片时会交叉，earcut 三角化失败，在地图上拖出一条斜带（ww1：从波特兰运河到加拿大中部）。框外 `coarseKm` 越粗越容易出，ww1 取 15 km。验收：解码 control.json 后无环跨度 > 180°、无自交、无退化环、海上无填色；用 `@maplibre/geojson-vt` + earcut 按引擎参数（容差 0.375 px = 6 瓦片单位）切 z0–5 检查三角化面积。MapLibre 默认容差下仍可能有小楔形，需要引擎给控制区数据源设更小的 `tolerance`。
+- **沿底图海岸裁剪**（`coast.enabled`）：每帧擦掉水域，再把简化漏掉的陆地给 `gapKm` 内最近的 holder，让控制区停在底图那一条海岸线上；引擎只画两个不同 holder 之间的内陆分界（`frontierOf`），不画海岸，所以海岸只有底图那一条线。`borders` 图层是另一份数据（今天的内陆国界 mesh），默认关，章节 `layers` 不列它。
+- **跨反经线与低缩放渲染**：`compose.ts` 把经度跨度 > 180° 的环（OHM 太平洋关系、斐济）展开后在 ±180 切成两块；`simplify.ts` 量化后再 `-clean`：0.005°（≈ 0.5 km）内的顶点合并、< 1 km² 的环删掉。原因：退化的洞、自交或两段几乎相贴的边（50 km 粗简化的国界弦离湖岸 / 峡湾只有几百米）在 MapLibre 低缩放切瓦片时会交叉，earcut 三角化失败，在地图上拖出一条斜带（ww1：从波特兰运河到加拿大中部）。框外 `coarseKm` 越粗越容易出，ww1 取 15 km。验收：`simplify.ts` 末尾必须打印 `rings: N, zero-area 0, self-crossing 0`（不是 0 就别提交：重跑，或检查来源几何），新主题把 slug 加进 `tests/geo-rings.test.ts`；解码 control.json 后无环跨度 > 180°、无自交、无退化环、海上无填色；用 `@maplibre/geojson-vt` + earcut 按引擎参数（容差 0.375 px = 6 瓦片单位）切 z0–5 检查三角化面积。MapLibre 默认容差下仍可能有小楔形，需要引擎给控制区数据源设更小的 `tolerance`。
 - 旋钮：`--budget <MB>`、`--fine / --coarse <km>`（固定间隔）、`--quant`、`--method dp|weighted`（Visvalingam 会删掉细长峡湾）、`--islands focus,coarse`、`--no-coast`、`--out <file>`、`--no-measure`。脚本最后打印焦点框内原始顶点到成品边界的偏差 p50 / p95 / p99 / max（km），写进 SOURCES-GEO.md。
-- 已知：ww2 提交的 `control.json` 是 `--fine 1.5` 的结果（2120 KB，超 2 MB 预算一点）；默认自动搜索得 2.5 km、2120 KB。重新生成前先决定用哪个。
+- 已知：ww2 的 `control.json` 已做过环清理重建（f8cbbb6，0 个自交环，1.6 MB，预算 2.5 MB 之内）；ww1 约 0.96 MB。重新生成前先 `git stash` 对比大小，别回到有自交环的旧版。
+
+## 路线
+
+行军 / 航线不进管线，直接写在 `movements.json`（见 data-cookbook）：沿真实道路 / 铁路 / 海路取点，过日界线照实写经度跳变（引擎展开走近路），途经点和来源记在 SOURCES.md「Movement routes」。
 
 ## 并排核对（`check.ts`）
 

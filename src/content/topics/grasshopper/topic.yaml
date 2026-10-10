@@ -9,5 +9,5 @@ engine: space-scene
 stage: model3d
 theme: paper
 sensitivity: open
-status: draft
+status: published
 note: { en: "Reconstruction from published anatomy · enlarged 40× · internal counts schematic", zh: "根据已发表的解剖资料重建 · 放大 40 倍 · 内部数目为示意" }

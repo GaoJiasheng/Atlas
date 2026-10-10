@@ -234,6 +234,7 @@ check.ts            # 对每帧渲染截图，与来源地图并排输出 docs/s
 | 8 | 06ebe50 | 运行时数据加载（dist/topics/ww2/data.json）|
 | 9 | fc2434a | 第 8–11 章（昭南、转折、反攻、结束） + 78 个事件 + 31 条路线 |
 | 10 | 2026-10-09 | 模板固化（docs/10、skill `atlas-history-topic`）：地图管线迁到 `scripts/geo/lib/`（`--topic ww2`，产物逐字节不变）；名词表 `data/glossary.json` 12 个词，正文首次出现处包 `<Term>`；不加背景章 |
+| 11 | 6c13981、f8cbbb6 | 底部时间轴改为分段（每章一段、`YYYY-MM` 标签、每拍一个刻度、不再自动跑章）；`control.json` 用环清理重建（自交环 0，1.6 MB，`rings: … zero-area 0, self-crossing 0`） |
 
 ## 已知差距（v1 计划外或源验证待补）
 

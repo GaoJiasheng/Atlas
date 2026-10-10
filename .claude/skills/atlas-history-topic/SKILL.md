@@ -10,7 +10,7 @@ description: Atlas 项目"时间线 + 地图"历史主题的端到端模板（�
 ## 先读
 
 1. `CLAUDE.md`（硬规则：真实地图数据、客观全球视角、双语、无占位）。
-2. `docs/10-history-topic-template.md`（一页总览）；引擎细节查 `docs/06-dev-guide.md`「TimeScene」「Geo pipeline」，不在这里重复。
+2. `docs/10-history-topic-template.md`（一页总览，含引擎已有的体验）；引擎细节查 `docs/06-dev-guide.md`「TimeScene」（底部条、领土名称、引线标注）「演示系统」「Geo pipeline」，不在这里重复。
 3. 按当前阶段读 `references/`：
 
 | 阶段 | 读 |
@@ -28,13 +28,14 @@ description: Atlas 项目"时间线 + 地图"历史主题的端到端模板（�
 2. **脚手架**：`pnpm tsx scripts/new-topic.ts <slug> --engine time-scene --subject history --title-en "…" --title-zh "…" --start YYYY-MM-DD --end YYYY-MM-DD`。生成主题目录、背景章、第 01 章、最小合法数据文件、`SOURCES.md` 和 `scripts/geo/<slug>/` 清单。`pnpm validate` 立即为绿。
 3. **地图先行**：第一帧和最后一帧先跑通 `scripts/geo/lib/*.ts --topic <slug>`，并排图核对过再铺其余关键帧。
 4. **模板章**：背景章 + 两个代表性章节完整做完（正文、细看、事件、行军、来源、名词、节拍），给 Gavin 看。
-5. **铺开**：其余关键帧 ‖ 其余章节分批并行；最后统一写节拍、打磨。
-6. **验收**：`references/acceptance.md` 全部打勾，门槛全绿，再改 `status: published`。
+5. **铺开**：其余关键帧 ‖ 其余章节分批并行；最后统一写节拍（拍 = 叙事结构，也是底部时间轴的刻度）、打磨。
+6. **验收**：`pnpm shoot <slug> --keys --layout --beats`（看截图和"chapter highlights"清单）；`references/acceptance.md` 全部打勾，门槛全绿，再改 `status: published`。
 
 ## 不可违反
 
+- 节拍每章 3–5 个，字幕描述**此刻地图上的东西**；`state.layers` 不写 `borders`（今天的内陆国界默认关，写了才开，会盖住历史边界）。
 - 地图只用真实数据或真实地图配准描摹，每帧在 `SOURCES-GEO.md` 和 `data/SOURCES.md` 记来源、许可、方法、残差；不许手画多边形、不许 `bbox` 当版图。
 - 立场客观、全球视角；各方罪行与牺牲同一套写法；不用"我们 / 敌人"。
-- 每个数字 `<Num s="S#">`，来源冲突列区间；屠杀段落的中文稿由 Gavin 亲审。
+- 每个数字 `<Num s="S#">`（只包数量，不包日期），来源冲突列区间、两端各用自己的来源；挡爬虫的站点只引读到的原文；屠杀段落的中文稿由 Gavin 亲审。
 - 所有展示文本 `{ en, zh }`，中文独立成文；id kebab-case；颜色只用 token。
 - 不改 `package.json`，不加依赖；有新需求先改引擎并更新 docs/06。

@@ -18,6 +18,7 @@
 - [ ] `hero-clean`（HUD 关，`views.cover`）能当作品集封面：主体完整、阴影完整、无穿模，主体占宽 65–80 %
 - [ ] 两套主题（paper / cinema）各看一遍每章截图：材质族分得开，深色件在 dark plate 下不糊
 - [ ] 引线标注两列对齐、不压面板、近景减量；每章 `labels` 在章节镜头下都标得出
+- [ ] 右上卡（零件链路）的列宽 = (330 − 间距) ÷ 列数，名称按 `(列宽 − 22) ÷ 5.8` 个字符截断：**列数 ≤ 4** 才读得出（72 px ≈ 8 个字符）。组多时给不需要进链路的组（外壳、成长、场景）设 `card: false`，只留有 `connects` 链和流经过的系统；仍有被截断的名称要写进已知差距（引擎限制：没有短名字段）
 - [ ] 模式组合逐一过：X-RAY + FLOW（shell 透明、内件实心、粒子可见）、CUTAWAY + FLOW（`clip: false` 的流不被切）、EXPLODED + FLOW（FLOW 禁用、状态行说明）、hide + EXPLODED（隐藏的仍隐藏）、REFERENCE + run（运转暂停、读数回停机值）、X-RAY + CUTAWAY
 - [ ] 手机（390 × 844）：舞台 + 章节芯片 + 底部章节条可用；触控目标 ≥ 44 px；`phone-390.png` 存档
 - [ ] 规范截图存进 `docs/screenshots/<slug>/`：`hero-paper`、`hero-clean`、`hero-dark`、`hero-zh`、`mode-xray`、`mode-exploded`、`phone-390`

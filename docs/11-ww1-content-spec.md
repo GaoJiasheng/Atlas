@@ -320,6 +320,7 @@ entente 协约国 · central-powers 同盟国 · ultimatum 最后通牒 · mobil
 | 6（几何） | `7fa2355` | 量化后清环（合并近点、去掉 < 1 km² 的环）、跨 180° 经线的环拆开；`lines` 描摹工具进 lib；ww1 `control.json` 重建 |
 | 4b | `0a9618b` | 第 07–09 章：46 个事件、9 条行军、85 条来源；十章全部写完 |
 | 5–7 | 本轮 | 引擎：控制区 source `tolerance: 0.05`（BC、巴西、意大利的楔形）；实体引线锚点取画面内最大面；`pnpm shoot --beats` 列出每章 `state.highlight` 里没有标注的 id；领土名称同一 holder 文字不同（Russia → Soviet Russia）时滑动并在 50 % 处换字。数据：第 06 章首次出现 armistice 处包 `<Term>`；第 07、08 章章节镜头放宽，使 `usa-enters`、`china-enters`、`influenza` 在画面内；名词 21 个，每个都用上（补了 dreadnought）。`simplify.ts` 末尾打印零面积 / 自相交环数（ww1 为 0 / 0，`tests/geo-rings.test.ts`）。skill 补了 9 条模板反馈；`status: published`；`docs/screenshots/ww1/` 重拍规范集 |
+| 8 | `6c13981`、`f8cbbb6` | 底部时间轴改为分段（每章一段、`YYYY-MM` 标签、每拍一个刻度、点段落第一拍、不再自动跑章）；ww2 `control.json` 用 ww1 同一套环清理重建（自交环 0，1.6 MB） |
 
 ## 12. 已知差距
 

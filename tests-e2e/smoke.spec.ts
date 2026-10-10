@@ -26,21 +26,25 @@ for (const locale of LOCALES) {
     const errors = collectConsoleErrors(page);
     await page.goto(`/${locale}/`);
     // Draft sample topics are reachable by URL but not listed.
-    await expect(page.locator('[data-topic]')).toHaveCount(3);
+    await expect(page.locator('[data-topic]')).toHaveCount(4);
     await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/ww1/"]`)).toHaveCount(1);
     await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/ww2/"]`)).toHaveCount(1);
     await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/aircon/"]`)).toHaveCount(1);
+    await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/grasshopper/"]`)).toHaveCount(1);
     await expect(page.locator('[data-filter="subject"]:not([data-value=""])')).toHaveCount(6);
     await expect(page.locator('[data-filter="subject"][data-value="science"]')).toBeEnabled();
+    await expect(page.locator('[data-filter="subject"][data-value="biology"]')).toBeEnabled();
     await expect(page.locator('[data-filter="subject"][data-value="math"]')).toBeDisabled();
-    // Card tags: subject, then the stage type (ww1 and ww2 are Time, aircon is Space). No status or sensitivity tags.
-    await expect(page.locator('[data-topic] .atlas-badge')).toHaveCount(6);
+    // Card tags: subject, then the stage type (ww1 and ww2 are Time, aircon and grasshopper are Space). No status or sensitivity tags.
+    await expect(page.locator('[data-topic] .atlas-badge')).toHaveCount(8);
     await page.locator('[data-filter="subject"][data-value="history"]').click();
     await expect(page.locator('[data-topic]:visible')).toHaveCount(2);
     await page.locator('[data-filter="subject"][data-value="science"]').click();
     await expect(page.locator('[data-topic]:visible')).toHaveCount(1);
+    await page.locator('[data-filter="subject"][data-value="biology"]').click();
+    await expect(page.locator('[data-topic]:visible')).toHaveCount(1);
     await page.locator('[data-filter="subject"][data-value=""]').click();
-    await expect(page.locator('[data-topic]:visible')).toHaveCount(3);
+    await expect(page.locator('[data-topic]:visible')).toHaveCount(4);
     await page.screenshot({ path: `tests-e2e/__screenshots__/index-${locale}.png` });
     expect(errors).toEqual([]);
   });

@@ -9,6 +9,7 @@
 | 第二次世界大战 | history | time | TimeScene/Geo | SS P4 二战结束；SS P5 新加坡沦陷、日据 | **2026 首发** | 已完成 11 章（待审） |
 | 第一次世界大战 | history | time | TimeScene/Geo | 课外（未找到对应 MOE 条目）；见 docs/11 | 2026 第二个历史主题 | 已完成 10 章（待审） |
 | 空调是怎么把房间变冷的 | science | space | SpaceScene/Model3D | Sci P5 热；课外 | 2026 第二个（验证 SpaceScene） | 已完成 5 章（待审） |
+| 一只蝗虫的身体（黑角瓦兰蝗解剖） | biology | space | SpaceScene/Model3D | Sci P3 Diversity、Cycles；与人体系统对照；详见 docs/14 | 2026 第三个（验证生物解剖模板） | 已完成 6 章（待审） |
 | 新加坡 1819–1965 | history | time | TimeScene/Geo | SS P4 新加坡故事 | 2027 |
 | 植物的身体（根茎叶花） | biology | space | SpaceScene/Layer2D | Sci P3/P4 植物系统 | 2027 |
 | 生物分类与多样性 | biology | space（树状） | Layer2D | Sci P3 Diversity | 2027 |

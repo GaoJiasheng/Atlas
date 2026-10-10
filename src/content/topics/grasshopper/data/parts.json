@@ -16512,7 +16512,8 @@
     "en": "Exoskeleton",
     "zh": "外骨骼"
    },
-   "color": "token:ink-2"
+   "color": "token:ink-2",
+   "card": false
   },
   {
    "id": "legs-wings",
@@ -16520,7 +16521,8 @@
     "en": "Legs & wings",
     "zh": "足与翅"
    },
-   "color": "token:ink-3"
+   "color": "token:ink-3",
+   "card": false
   },
   {
    "id": "digestive",
@@ -18266,7 +18268,7 @@
     0,
     -1
    ],
-   "offset": 0
+   "offset": 0.02
   },
   "cuts": {
    "sagittal": {
@@ -18275,7 +18277,7 @@
      0,
      -1
     ],
-    "offset": 0,
+    "offset": 0.02,
     "label": {
      "en": "Sagittal",
      "zh": "矢状"

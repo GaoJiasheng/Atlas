@@ -12,7 +12,7 @@
 
 - 三种精度：`1942`、`1942-02`、`1942-02-15`（公元前加 `-`）；地质时间 `{ "ma": 200 }`。来源只给到月份的事件（ww1：`turnip-winter` 的 `1916-12`、`influenza` 的 `1918-03`）**允许写月精度 `t`**，不要编造日期；`until` 同理。
 - 换算成数值时取**时段起点**（`1942-02` = 2 月 1 日）。store 和 URL 里的 `t` 是日精度。历史主题统一写到天。
-- 章节顺序必须等于时间顺序（ww2 有测试）；章节节点位置 = 本章累积目标的 `t`。
+- 章节顺序必须等于时间顺序（ww2 有测试）；时间轴上章节段的起点 = 本章 `time` 与第一拍 `t` 中较早的那个，标签写 `YYYY-MM`（段宽 < 44 px 只写章号）。
 
 ## entities.json
 
@@ -38,7 +38,9 @@
 - **GeoJSON**（小主题、示例）：`{ "keyframes": [{ "t": "…", "features": { "type": "FeatureCollection", "features": [...] } }] }`
 - **TopoJSON**（真实主题，由 `scripts/geo/lib/simplify.ts` 生成，**不手写**）：`{ "topology": {...}, "keyframes": [{ "t": "1937-07-07", "object": "K1" }] }`，所有帧共用一份拓扑。
 
-要素 `properties`：`holder`（实体 id，必填）、`label`（`{ en, zh }`，领土名称用，如 `Denmark (German-occupied)` / `丹麦（德国占领）`，括号内说明不显示）、`src`（`["G1","G2"]`）。
+要素 `properties`：`holder`（实体 id，必填）、`label`（`{ en, zh }`，**领土名称（键 N）用**，如 `Denmark (German-occupied)` / `丹麦（德国占领）`，括号内说明不显示；没有 `label` 就显示 holder 实体名，所以换名、占领状态都写在这里）、`src`（`["G1","G2"]`）。同一 holder 在相邻两帧文字不同（`Russia` → `Soviet Russia`）时，引擎把两个名字配成一个，位置滑过去、文字在交叉淡化 50 % 处换字；文字相同且位置接近的也配对，所以别为同一块地在两帧写不同 holder 又写同名。
+
+**边界怎么画**：引擎沿底图海岸裁剪（管线做），运行时只画不同 holder 之间的内陆分界，海岸和同 holder 接缝不描边。图层 `borders` = 今天的内陆国界，**默认关，章节 `layers` 不要列它**（写了就盖在历史边界上）。TopoJSON 由管线生成，`simplify.ts` 必须打印 `rings: N, zero-area 0, self-crossing 0`；`pipeline.budgetMB` 写 2.5（ww1 / ww2 都是），帧没做全时 `simplify --fine <km>`。
 
 **交叉淡化与关键帧日期**：两帧之间，区间的**最后 30%** 里前帧淡出、后帧淡入，此前一直显示前帧。所以：关键帧日期 = 这张图**准确成立**的日期（来源地图的日期）；想让某章完整显示某帧，章节时间要落在该帧日期上或之后；两帧太近（几天）会让淡化一闪而过，太远会让前一帧在过时后仍显示很久——帧的密度跟着章节走。
 
@@ -54,7 +56,7 @@
 - `path` 按真实路线数字化（城镇、铁路、河流、海路中间点），不走直线；在 SOURCES.md「Movement routes」表记途经点和来源。
 - `strength` 人数，决定线宽（相对全主题最大值）；未知就不写（0 = 不显示人数）。
 - `linger`：`to` 之后整条线以 40% 保留到这天再淡出（看得出"走过哪里"）。
-- `kind`：`land | sea | air`。过日界线照实写跳变（`[179.5, 38], [-175, 33]`），引擎会展开走近路。
+- `kind`：`land | sea | air`。过日界线照实写跳变（`[179.5, 38], [-175, 33]`，经度始终在 ±180 内），引擎（`unwrapPathCentred`）展开走近路，别自己加 360。
 - 头部位置在 `from`–`to` 之间线性插值，只是近似。
 
 ## events.json
@@ -76,14 +78,14 @@
 | `disaster` | 流感、饥荒、击沉客轮等非作战灾难（不分阵营，不写 `sides`） | — | 空心三角（墨色），图例“Disaster / 灾难”；ww1 例：`lusitania`（`t` 到天）、`turnip-winter`（`t: "1916-12"`、`until: "1917-03"`，德国饥荒，来源只到月）、`influenza`（`1918-03` 至 `1919-04`，`at` 取一个有记录的城市，各地另写 `influenza-singapore`） |
 | `surrender` / `political` | 投降、条约、宣战、政权变化 | — | 圆点 |
 | `evacuation` / `liberation` | 撤退、解放（冷色） | — | 冷色圆点 |
-| `site` | 静态地点（监狱、纪念碑） | — | `sites` 图层的菱形，不进时间轴；ww1 例：`site-noyelles-chinese-cemetery`、`site-hall-of-mirrors`、`site-singapore-cenotaph`（只写位置和名字，`t` 取事件 / 设立日期） |
+| `site` | 静态地点（监狱、纪念碑） | — | `sites` 图层的菱形，不进时间轴，章节 `layers` 要列 `sites` 才显示；ww1 例：`site-noyelles-chinese-cemetery`、`site-hall-of-mirrors`、`site-singapore-cenotaph`（只写位置和名字，`t` 取事件 / 设立日期） |
 
 - `until` 给持续事件（围城、战役）；`importance` 1–3（3 最大）；`forces` / `casualties` 是 `{ 实体 id: 人数 }`，恰好两方时画成双方并排计数器；`result`：`attacker | defender | draw | inconclusive`。
 - `summary` 一句话；长内容放 `detail`（inspector 里默认收起）；数字来源写 `sources`。
 
 ## presets.json
 
-`{ "presets": [{ "id": "singapore-island", "label": { "en": "Singapore", "zh": "新加坡" }, "camera": { "center": [103.82, 1.35], "zoom": 9.2 } }] }` —— VIEW 按钮（数字键从 3 起）和正文 `<FlyTo preset>` 用。只放地理镜头。
+`{ "presets": [{ "id": "singapore-island", "label": { "en": "Singapore", "zh": "新加坡" }, "camera": { "center": [103.82, 1.35], "zoom": 9.2 } }] }` —— 顶栏居中 VIEW 组的按钮（数字键从 3 起，`world` = 1、`theatre` = 2 内置）和正文 `<FlyTo preset="id">…</FlyTo>`（点了镜头飞过去）用。只放地理镜头，`label` 一两个词。
 
 **镜头 zoom 经验值**（1920 px 宽的舞台；MapLibre 512 px 世界，每 +1 放大一倍）：
 
@@ -117,7 +119,7 @@ sensitive: false               # 只是元数据
 state:
   time: "1942-02-15"           # 背景章可省（= 第一帧）
   camera: { center: [103.0, 3.0], zoom: 5.6 }
-  layers: [base, control, movements, battles]   # 另有 borders participation sites
+  layers: [base, control, movements, battles]   # 另有 participation sites；不要列 borders
   highlight: [kota-bharu, surrender-ford]        # 引线标注
   summary: { en: "…", zh: "…" }                  # 阅读面板标题下一句；无 beats 时的演示字幕
   # note: { en: "…", zh: "…" }                   # 只在背景章：阅读说明
@@ -131,5 +133,6 @@ state:
 
 - 章节目标**累积**：只写和上一章不同的字段。
 - 每拍 = 本章累积目标 ⊕ 拍里写的 `t / camera / layers / highlight`；`audio` 预留。
-- **拍就是时间轴的结构**：底部条每章一段（段从 `time` 和第一拍 `t` 里较早的那个开始，标签写章号和年月），段里每拍一个刻度，位置按拍的 `t`；读者点段 = 落在第一拍，点刻度 = 那一拍。所以每拍都要写 `t`（不写就落在章节时间上），第一拍就是读者点进这章时看到的画面（镜头、时间、高亮都要成立）。拍的 `t` 可以晚于下一章的开始（章节在时间上重叠），轴照样能画。
+- **拍就是时间轴的结构**：底部条每章一段（段从 `time` 和第一拍 `t` 里较早的那个开始，标签写章号和 `YYYY-MM`），段里每拍一个空心刻度（`beats[i].t` 排位、彼此 ≥ 10 px），读者点段 = 换到该章并落在**第一拍**（不会自动往下跑），点刻度 = 那一拍，拖播放头只改时间不换章。所以每拍都要写 `t`（不写就落在章节时间上），第一拍就是读者点进这章时看到的画面（镜头、时间、高亮都要成立）。拍的 `t` 可以晚于下一章的开始（章节在时间上重叠，ww2 第 08 章的拍到 1943-10、第 09 章从 1942-06 起），轴按"锚"画在读者选的那一段里，不用回避。
+- 每拍字段：`t`（缓动 1.6 s）、`camera`（飞 2.2 s）、`layers`、`highlight`、`caption`（必填，`{ en, zh }`）、`audio` 预留。行军类拍把 `t` 放在 `to` 之前让箭头走到一半，后面一拍落在 `linger` 之前，读者看得到"走过哪里"。
 - 背景章：底部条上没有段；编号 00（doc id `ATL-…-00`），章节轨写"Background / 背景"；第一次进入时阅读面板展开；演示从它的拍开始。
