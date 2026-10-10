@@ -55,11 +55,3 @@ export function HatchDefs({ model, prefix }: { model: TimeModel; prefix: string 
     </defs>
   );
 }
-
-/** Time window [node i, node i+1) of the chapter `chapter` (null when it has no node). */
-export function chapterWindow(model: TimeModel, chapter: string | null): [number, number] | null {
-  const nodes = [...model.chapterNodes].sort((a, b) => a.t - b.t);
-  const i = nodes.findIndex((n) => n.id === chapter);
-  if (i < 0) return null;
-  return [nodes[i]!.t, nodes[i + 1]?.t ?? model.max];
-}

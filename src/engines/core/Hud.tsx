@@ -101,7 +101,7 @@ export interface TopBarProps {
   indexHref: string;
   hud: HudStore;
   actions: HudActions;
-  /** A chapter chip was pressed (same path as the rail: fly there, and in TimeScene run the time). */
+  /** A chapter chip was pressed (same path as the rail: fly there; TimeScene then applies the chapter's first beat). */
   onChapter(id: string): void;
 }
 

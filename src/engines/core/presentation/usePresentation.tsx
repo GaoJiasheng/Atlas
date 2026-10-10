@@ -25,8 +25,8 @@ import { Presentation } from './Presentation';
 
 export interface PresentationApi<B extends BeatBase> {
   beats: readonly Beat<B>[];
-  /** The beat on show (`index` into `beats`; `settled` as `PresentationAdapter.afterCameraSettle` gave it); `null` outside the presentation. */
-  beat: { index: number; instant: boolean; settled: Promise<void> | null } | null;
+  /** The beat on show (`index` into `beats`; `serial` counts beats shown; `settled` as `PresentationAdapter.afterCameraSettle` gave it); `null` outside the presentation. */
+  beat: { index: number; serial: number; instant: boolean; settled: Promise<void> | null } | null;
   presenting: boolean;
   /** Synchronous check for store subscriptions and the ESC chain. */
   isPresenting(): boolean;
@@ -48,7 +48,8 @@ export function usePresentation<B extends BeatBase, S>(adapter: PresentationAdap
   adapterRef.current = adapter;
 
   const beats = useMemo(() => buildBeats(chapters, (c) => adapterRef.current.beatsOf(c)), [chapters]);
-  const [beat, setBeat] = useState<{ index: number; instant: boolean; settled: Promise<void> | null } | null>(null);
+  const [beat, setBeat] = useState<{ index: number; serial: number; instant: boolean; settled: Promise<void> | null } | null>(null);
+  const serial = useRef(0);
   const presenting = beat !== null;
   const presentingRef = useRef(false);
   const beatRef = useRef<number | null>(null);
@@ -70,7 +71,7 @@ export function usePresentation<B extends BeatBase, S>(adapter: PresentationAdap
       const a = adapterRef.current;
       const applied = a.applyBeat(b, { instant });
       const settled = a.afterCameraSettle ? a.afterCameraSettle() : applied instanceof Promise ? applied : null;
-      setBeat({ index: i, instant, settled });
+      setBeat({ index: i, serial: ++serial.current, instant, settled });
       stopAudio();
       const clip = b.audio ? audio.current.get(b.audio) : undefined;
       // Autoplay may be refused until the reader has interacted; the beat works without sound.
@@ -197,6 +198,7 @@ export function usePresentation<B extends BeatBase, S>(adapter: PresentationAdap
       title={topic.title}
       beats={beats}
       index={beat.index}
+      serial={beat.serial}
       instant={beat.instant}
       settled={beat.settled}
       chapters={chapters}

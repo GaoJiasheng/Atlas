@@ -16,6 +16,9 @@
  * stage reports the camera move done (and the explode / put-aside motion has
  * had its time). Entering leaves ORBIT and REFERENCE and drops the selection;
  * the leader labels show the beat's `labels` only (≤ 6) with the HUD hidden.
+ * Once a beat has settled the reader may orbit and zoom (core lifts its
+ * input layer); clicks on the model select nothing while presenting (the
+ * beat's part stays), and the next beat flies from where the camera was left.
  * EXPLODED and FLOW do not combine (docs/12 §7.5): F is disabled while
  * exploded and the stage draws no particles. With the HUD hidden outside the
  * presentation the stage frames the cover camera (`views.cover`, else the
@@ -237,6 +240,17 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
   };
   const presentation = usePresentation(presentationAdapter);
   const { presenting, isPresenting, status: presentationStatus, controls: beatControls, start: startPresentation, stop: stopPresentation } = presentation;
+
+  // Free look in the presentation: a click on a part or on empty space must not change the beat's selection.
+  useEffect(() => {
+    let reverting = false;
+    return store.subscribe((s, prev) => {
+      if (reverting || !isPresenting() || s.part === prev.part || s.transition.id !== prev.transition.id) return;
+      reverting = true;
+      store.getState().patch({ part: prev.part });
+      reverting = false;
+    });
+  }, [store, isPresenting]);
 
   // HUD hidden (H, hero shots) outside the presentation: the stage frames the cover camera.
   const hudOn = useHud((h) => h.hud);

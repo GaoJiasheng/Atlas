@@ -4,27 +4,39 @@
  * header line (`04 / 11 · chapter · readout · 2 / 3`), the caption (large
  * serif, scrolls inside the card when it is long) and a two-level progress
  * bar — one hairline segment per chapter, the current chapter's segment split
- * into its beats; the filled part is the progress up to the current beat. A
- * transparent layer over the stage takes clicks (= next beat) and keeps the
- * stage still. Beside the bar, the AUTO-PLAY and VOICE checkboxes. Rendered by
- * `usePresentation` (the engine places its `element` on its stage); styles
- * `.atlas-present*` in styles/scene.css.
+ * into its beats; the filled part is the progress up to the current beat.
+ * Beside the bar, the AUTO-PLAY and VOICE checkboxes. A ⌄ button tucks the
+ * card into a 24 px strip until the next beat.
+ *
+ * The stage: while a beat flies in, a transparent layer keeps it still (the
+ * system has the camera). Once the beat has settled (the engine's camera, and
+ * the caption faded in) the layer lifts (`data-free`) and the reader may pan,
+ * zoom or orbit; the next beat (or a jump) takes the camera again and flies
+ * from wherever it was left. Only a plain click on the card (moved ≤ 6 px,
+ * not on its controls), → / SPACE, ← and the progress bar change the beat;
+ * clicking the stage never does. The card takes pointer input on its own area
+ * only. Rendered by `usePresentation` (the engine places its `element` on
+ * its stage); styles `.atlas-present*` in styles/scene.css.
  */
-import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useMemo, useRef, useState, type MouseEvent, type ReactNode } from 'react';
 import { useT } from '../context';
 import { chapterNumbers, isBackground, storyChapters } from '../chapters';
 import type { Chapter, Locale } from '../types';
 import { tx, type BilingualText } from '../../../i18n';
 import { chapterNumberText, speakSequence, speakableText, SPEECH_LANG, stopSpeech, voiceFor, type Narration, type SpeechPart } from '../../../lib/speech';
-import { AFTER_SPEECH_MS, afterSettle, autoplayDwell, lostEndFallback } from './autoplay';
+import { AFTER_SPEECH_MS, afterSettle, autoplayDwell, CAPTION_IN_MS, lostEndFallback } from './autoplay';
 import { chapterSpans, type Beat } from './beats';
 
 const pad2 = (n: number) => String(n).padStart(2, '0');
+/** A press on the card that moves more than this (px) is a drag or a scroll, not a click to the next beat. */
+const ADVANCE_SLOP = 6;
 
 export interface PresentationProps {
   title: BilingualText;
   beats: readonly Beat[];
   index: number;
+  /** Bumped on every beat shown, also when the same beat is shown again. */
+  serial: number;
   instant: boolean;
   /** Resolves when this beat has settled (engine camera); `null` = `BEAT_SETTLE_MS` after the beat starts. */
   settled: Promise<void> | null;
@@ -52,6 +64,7 @@ export function Presentation({
   title,
   beats,
   index,
+  serial,
   instant,
   settled,
   chapters,
@@ -93,6 +106,34 @@ export function Presentation({
   const go = (i: number) => (e: { detail: number; currentTarget: HTMLElement }) => {
     onGo(i);
     if (e.detail > 0) e.currentTarget.blur();
+  };
+
+  /* FREE LOOK: once the beat has settled and its caption is in, the stage is the reader's until the next beat. */
+  const [freeAt, setFreeAt] = useState(-1);
+  useEffect(() => {
+    const begun = performance.now();
+    let timer = 0;
+    const cancel = afterSettle(instant, settled, () => {
+      const wait = instant ? 0 : Math.max(0, CAPTION_IN_MS - (performance.now() - begun));
+      timer = window.setTimeout(() => setFreeAt(serial), wait);
+    });
+    return () => {
+      cancel();
+      window.clearTimeout(timer);
+    };
+  }, [serial, instant, settled]);
+  const free = freeAt === serial;
+  /* TUCK: the card folds to a strip for this beat; the next beat brings it back. */
+  const [tuckedAt, setTuckedAt] = useState(-1);
+  const tucked = tuckedAt === serial;
+  /* A plain click on the card (not a drag, a scroll or one of its controls) is the next beat. */
+  const press = useRef<{ x: number; y: number } | null>(null);
+  const onCardClick = (e: MouseEvent<HTMLDivElement>) => {
+    const p = press.current;
+    press.current = null;
+    if (e.target instanceof Element && e.target.closest('button, label, input, a, nav')) return;
+    if (!p || Math.hypot(e.clientX - p.x, e.clientY - p.y) > ADVANCE_SLOP) return;
+    onStep(1);
   };
 
   /*
@@ -211,14 +252,35 @@ export function Presentation({
     };
   }, [autoplay, held, last, index, instant, settled, audio, captionText, spoken, onStep, voiceOn]);
   return (
-    <div className="atlas-present" data-instant={instant || undefined}>
-      <div className="atlas-present__hit" onClick={() => onStep(1)} aria-hidden="true" />
+    <div className="atlas-present" data-instant={instant || undefined} data-free={free || undefined}>
+      <div className="atlas-present__hit" aria-hidden="true" />
       <p className="atlas-present__title" data-hud-panel="present-title">
         <small>{tr('present.title').toLocaleUpperCase('en')}</small>
         <span lang="en">{title.en}</span>
         {title.zh && <span lang="zh-Hans">{title.zh}</span>}
       </p>
-      <div className="atlas-present__foot" data-hud-panel="present">
+      <div
+        className="atlas-present__foot"
+        data-hud-panel="present"
+        data-tucked={tucked || undefined}
+        onPointerDown={(e) => {
+          press.current = e.button === 0 ? { x: e.clientX, y: e.clientY } : null;
+        }}
+        onClick={onCardClick}
+      >
+        <button
+          type="button"
+          className="atlas-present__tuck"
+          aria-expanded={!tucked}
+          aria-label={tr(tucked ? 'present.untuck' : 'present.tuck')}
+          title={tr(tucked ? 'present.untuck' : 'present.tuck')}
+          onClick={(e) => {
+            setTuckedAt(tucked ? -1 : serial);
+            if (e.detail > 0) e.currentTarget.blur();
+          }}
+        >
+          <i aria-hidden="true" />
+        </button>
         <p className="atlas-present__chapter">
           <i>{isBackground(chapter) ? tr('chapter.background') : `${pad2(numberOf(b.chapterIndex))} / ${pad2(storyTotal)}`}</i>
           {chapter && <span>{tx(chapter.title, locale)}</span>}
@@ -229,7 +291,7 @@ export function Presentation({
             </em>
           )}
         </p>
-        <p className="atlas-present__caption" key={index} ref={caption} aria-live="polite" onClick={() => onStep(1)}>
+        <p className="atlas-present__caption" key={index} ref={caption} aria-live="polite">
           {captionText}
         </p>
         <div className="atlas-present__row">

@@ -257,13 +257,7 @@ class Session {
       [spec.chapter ?? null, spec.preset ?? null, spec.modes ?? null, spec.js ?? null] as const,
     );
     if (spec.hud === false) await page.evaluate(() => window.__atlas!.setHud(false));
-    await this.settleRun();
     await page.waitForTimeout(spec.wait ?? 900);
-  }
-
-  /** A chapter auto-run (the playhead easing to the chapter time) must be over before any shot. */
-  async settleRun(): Promise<void> {
-    await this.page.waitForFunction(() => !window.__atlas!.state().running, null, { timeout: 30_000 });
   }
 
   jsSize(): { files: number; gzKB: number } {
@@ -497,10 +491,8 @@ async function runKeys(s: Session, o: Options, report: RunReport): Promise<void>
       const now = (await s.state()).chapter;
       ok = now === target;
       if (!ok) note = `chapter=${now}, expected ${target}`;
-      await s.settleRun();
       await press(forward ? 'ArrowLeft' : 'ArrowRight');
       await page.waitForTimeout(600);
-      await s.settleRun();
       if ((await s.state()).chapter !== chapters[here]) {
         ok = false;
         note += ' not restored';

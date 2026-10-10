@@ -163,14 +163,8 @@ export interface SceneControls {
     /** The last 10 utterances of the caption narration (`__atlas.voiceLog()`). */
     voiceLog?(): VoiceLogEntry[];
   };
-  /**
-   * Chapter auto-run (TimeScene): picking a chapter animates the engine's time
-   * from the chapter's span start to its own time. `running` is true while it
-   * plays (`__atlas.state().running`); `now` is the continuous time on show
-   * (`__atlas.state().playhead`), `null` when the engine has none.
-   */
+  /** The continuous time on show (TimeScene's playhead; `__atlas.state().playhead`), `null` when the engine has none. */
   time?: {
-    running(): boolean;
     now(): number | null;
   };
   /** ESC: leave a focus/selection. Return true when something was undone. */

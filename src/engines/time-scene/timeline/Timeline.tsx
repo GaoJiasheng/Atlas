@@ -1,27 +1,28 @@
 /**
- * TimeScene's single bottom bar (docs/06 "时间轴标尺", docs/08 §5), rendered
- * into `bottomBar`. Left to right:
+ * TimeScene's single bottom bar (docs/06 "底部条", docs/08 §5), rendered into
+ * `bottomBar`. Left to right:
  *  - a chevron that opens the swimlanes (the bar has no free-running
  *    playback; the PRESENT button is in the top bar, key P)
- *  - the rule: year / month ticks at real dates, chapter nodes (numbered
- *    hairline circles; click = go and auto-run the chapter), keyframe diamonds,
- *    the playhead (a 12 px dot on a hairline stem) with its date above; drag
- *    the playhead or anywhere on the rule = continuous `t`, no chapter change.
- *    A chapter's auto-run moves the playhead; touching it cancels the run
+ *  - the segmented rule, like the presentation's progress bar: one
+ *    equal-width segment per story chapter, labelled with its number and its
+ *    start as `YYYY-MM`; inside it a tick per presentation beat at the beat's
+ *    time (lib/segmentScale.ts). The current chapter's segment is lit and its
+ *    current beat's tick filled. Click a segment = that chapter (the view
+ *    applies its first beat, no auto-run); click a tick = that beat's state
+ *    (camera, time, layers, highlight; the chapter changes with it). Hover or
+ *    focus on a tick shows its date and the start of its caption. The
+ *    playhead (a 12 px dot on a hairline stem, date above) drags anywhere on
+ *    the rule: a press that moves more than 3 px scrubs continuous `t`
+ *    without changing the chapter; keyframe diamonds sit on the same mapping
  *  - a mono state cluster: participants · active battles · active movements ·
  *    control keyframe blend (bilingual labels in the titles)
  * Below the rule, collapsed by default, three swimlanes (keyframes /
- * movements / events) on the same x mapping.
+ * movements / events) on the same x mapping. Phones: segments only, no ticks.
  *
- * The x mapping is the minimum-gap hybrid of lib/timeScale.ts: chapters stay
- * ≥ 56 px apart, time stays as linear as that allows. Scrubbing inverts it.
- * The fitted α is reported upwards (`onAlpha`) so the band card draws on the
- * same mapping.
- *
- * Keyboard: the playhead is the one tab stop (a slider): ←/→ and ↑/↓ nudge `t`
- * by one tick, PageUp/PageDown by ten, Home/End jump to the ends of the current
- * chapter's span (its auto-run start and its time). Chapters have ← → on the
- * page, the rail and the nodes.
+ * Keyboard: the playhead is a slider (←/→ and ↑/↓ nudge `t` by one step,
+ * PageUp/PageDown by ten, Home/End jump to the ends of the playhead's
+ * segment); segments are buttons; the current segment's ticks are tab stops
+ * too (the others are reached by pointer, or after picking their segment).
  */
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type KeyboardEvent, type PointerEvent, type RefObject } from 'react';
 import type { Chapter, Locale } from '../../core/types';
@@ -31,43 +32,42 @@ import type { TimeModel } from '../lib/model';
 import type { Playhead } from '../lib/playhead';
 import { fromNumber, precisionFor } from '../lib/time';
 import { formatTime } from '../lib/format';
-import { ruleTicks } from '../lib/ticks';
-import { createTimeScale, thinTicks, type TimeScale } from '../lib/timeScale';
+import { createSegmentScale, type Anchor, type ScaleSegment, type SegmentScale, type SegmentSpec } from '../lib/segmentScale';
 import { frameAt } from '../lib/frame';
 import { frameStats } from '../lib/stats';
 import { sideCssColor, sideColorKey } from '../colors';
-import { chapterWindow, HatchDefs } from '../hud/shared';
+import { HatchDefs } from '../hud/shared';
 
 export interface TimelineProps {
   model: TimeModel;
   playhead: Playhead;
   locale: Locale;
+  /** Story chapters, in the order of `segments`. */
   chapters: readonly Chapter[];
+  segments: readonly SegmentSpec[];
+  /** Caption (plain text) and date of beat `index` of chapter `id` in `locale`. */
+  beatLabel(id: string, index: number): { caption: string; date: string };
   currentChapter: string | null;
   highlight: readonly string[];
-  /** User moved the playhead to `t` (continuous). */
-  onScrub(t: number): void;
+  /** Where the playhead belongs (segment, and the beat when it rests on one). */
+  anchor: Anchor | null;
+  /** User moved the playhead to `t` (continuous) inside `segment`. */
+  onScrub(t: number, segment: number): void;
   onScrubStart(): void;
   onNudge(direction: 1 | -1, big?: boolean): void;
   onChapter(id: string): void;
-  /** The current chapter's span `[auto-run start, chapter time]` (Home / End on the playhead); `null` = the data span. */
-  span: readonly [number, number] | null;
-  /** A chapter auto-run is moving the playhead. */
-  running: boolean;
-  /** The α the rule fitted to its width (band card reuses it). */
-  onAlpha(alpha: number): void;
+  onBeat(id: string, index: number): void;
 }
 
-/** Rule geometry (px inside the bottom bar). */
-const RULE_Y = 27;
-const RULE_H = 50;
-const MAJOR_PX = 72;
+/** Rule geometry (px inside the rail). */
+const RULE_Y = 24;
+const RULE_H = 52;
 /** A press that moves less than this (px) is a click, not a drag. */
 const CLICK_SLOP = 3;
-/** A click on the playhead within this distance (px) of a chapter node counts as a click on that node. */
-const NODE_HIT = 22;
-/** Smallest distance between two year / month labels on the rule. */
-const LABEL_GAP = 34;
+/** A click on the playhead within this distance (px) of a tick counts as a click on that tick. */
+const TICK_HIT = 22;
+/** Below this segment width (px) the label is the chapter number alone. */
+const DATE_LABEL_MIN = 44;
 /** Swimlanes: keyframes, movements, events (px). */
 const LANES = { k: [0, 12], m: [14, 34], e: [36, 48] } as const;
 const LANES_H = 48;
@@ -80,6 +80,23 @@ export function formatNumber(t: number, model: TimeModel, locale: Locale): strin
 export function formatReadout(t: number, model: TimeModel, locale: Locale): string {
   const s = formatNumber(t, model, locale);
   return locale === 'en' ? s.toLocaleUpperCase('en') : s;
+}
+
+/** A segment's label date: `YYYY-MM` (geological time: the readout). */
+export function segmentDate(t: number, model: TimeModel, locale: Locale): string {
+  if (model.scale === 'ma') return formatReadout(t, model, locale);
+  const p = fromNumber(t, 'date', { precision: 'month' });
+  return typeof p === 'string' ? p : formatReadout(t, model, locale);
+}
+
+/** The first words of a caption for the tick tooltip. */
+export function captionExcerpt(text: string, locale: Locale): string {
+  const clean = text.replace(/\s+/g, ' ').trim();
+  if (locale === 'zh') return [...clean].length > 22 ? `${[...clean].slice(0, 22).join('')}…` : clean;
+  if (clean.length <= 56) return clean;
+  const cut = clean.slice(0, 56);
+  const space = cut.lastIndexOf(' ');
+  return `${(space > 24 ? cut.slice(0, space) : cut).replace(/[,;:.]$/, '')}…`;
 }
 
 /** Width of an element, tracked with a ResizeObserver. */
@@ -101,85 +118,96 @@ const blurAfterPointer = (e: { detail: number; currentTarget: HTMLElement }) => 
   if (e.detail > 0) e.currentTarget.blur();
 };
 
+/** The filled tick of the current segment: the anchored beat, else the last beat at or before `t` while the playhead is in it. */
+function filledTick(seg: ScaleSegment | undefined, anchor: Anchor | null, t: number, headSegment: number): number | null {
+  if (!seg) return null;
+  if (anchor && anchor.segment === seg.index && anchor.tick !== null && anchor.tick !== undefined) return anchor.tick;
+  if (headSegment !== seg.index) return null;
+  let best: number | null = null;
+  for (const k of seg.ticks) if (k.t <= t + 1e-9) best = k.index;
+  return best;
+}
+
 export function Timeline(props: TimelineProps) {
-  const { model, playhead, locale, chapters, currentChapter, onAlpha } = props;
+  const { model, playhead, locale, chapters, segments, currentChapter, anchor } = props;
   const tr = useT();
   const t = useSyncExternalStore(playhead.subscribe, playhead.get, playhead.get);
   const [railRef, width] = useWidth<HTMLDivElement>();
   const [lanesOpen, setLanesOpen] = useState(false);
+  const [tip, setTip] = useState<{ segment: number; tick: number } | null>(null);
 
-  const scale = useMemo(
-    () => createTimeScale({ min: model.min, max: model.max, nodes: model.chapterNodes.map((n) => n.t), width }),
-    [model, width],
-  );
-  useEffect(() => {
-    if (width > 0) onAlpha(scale.alpha);
-  }, [scale, width, onAlpha]);
-  const x = (n: number) => scale.x(n);
+  const scale = useMemo(() => createSegmentScale({ segments, max: model.max, width }), [segments, model, width]);
+  const current = chapters.findIndex((c) => c.id === currentChapter);
+  const headSegment = scale.locate(t, anchor?.segment ?? (current >= 0 ? current : null));
+  const headAnchor: Anchor | null = anchor ?? (current >= 0 ? { segment: current } : null);
+  const headX = width > 0 ? scale.x(t, headAnchor) : 0;
+  const filled = filledTick(scale.segments[current], anchor, t, headSegment);
   const readout = formatReadout(t, model, locale);
 
-  const ticks = useMemo(() => {
-    const raw = ruleTicks(model.min, model.max, model.scale, Math.max(2, width / MAJOR_PX), locale);
-    return { ...thinTicks(raw.major, raw.minor, scale.x, LABEL_GAP), unit: raw.unit };
-  }, [model, width, locale, scale]);
-
-  const timeAt = (clientX: number) => {
-    const rect = railRef.current?.getBoundingClientRect();
-    if (!rect || rect.width === 0) return t;
-    return scale.invert(clientX - rect.left);
-  };
-
-  /** Drag in progress: where inside the playhead it was grabbed, and whether it moved. */
+  /* ---------- pointer: a press that moves scrubs; one that does not is a click ---------- */
   const drag = useRef<{ grab: number; startX: number; head: boolean; moved: boolean } | null>(null);
+  /** A drag just ended: swallow the click it would otherwise produce on a segment or tick. */
+  const swallowClick = useRef(false);
+  const railX = (clientX: number) => clientX - (railRef.current?.getBoundingClientRect().left ?? 0);
   const onPointerDown = (e: PointerEvent<HTMLDivElement>) => {
     if (e.button !== 0) return;
-    const rect = railRef.current?.getBoundingClientRect();
     const head = e.target instanceof Element && e.target.closest('.ts-rule__grab') !== null;
-    // Grabbing the playhead keeps the pointer's offset inside it (no jump); the rule itself jumps to the pointer.
-    const grab = head && rect ? e.clientX - (rect.left + x(t)) : 0;
-    drag.current = { grab, startX: e.clientX, head, moved: false };
-    e.currentTarget.setPointerCapture(e.pointerId);
-    props.onScrubStart();
-    if (!head) props.onScrub(timeAt(e.clientX));
+    // Grabbing the playhead keeps the pointer's offset inside it (no jump); elsewhere the playhead jumps to the pointer.
+    drag.current = { grab: head ? railX(e.clientX) - headX : 0, startX: e.clientX, head, moved: false };
   };
   const onPointerMove = (e: PointerEvent<HTMLDivElement>) => {
     const d = drag.current;
     if (!d) return;
-    if (Math.abs(e.clientX - d.startX) > CLICK_SLOP) d.moved = true;
-    if (d.head && !d.moved) return;
-    props.onScrub(timeAt(e.clientX - d.grab));
+    if (!d.moved) {
+      if (Math.abs(e.clientX - d.startX) <= CLICK_SLOP) return;
+      d.moved = true;
+      e.currentTarget.setPointerCapture(e.pointerId);
+      setTip(null);
+      props.onScrubStart();
+    }
+    const at = scale.invert(railX(e.clientX) - d.grab);
+    props.onScrub(at.t, at.segment);
   };
   const onPointerEnd = (e: PointerEvent<HTMLDivElement>) => {
     const d = drag.current;
     drag.current = null;
     if (e.currentTarget.hasPointerCapture(e.pointerId)) e.currentTarget.releasePointerCapture(e.pointerId);
-    // The playhead rests on top of its chapter's node: a click (no drag) there is a click on the node.
-    const rect = railRef.current?.getBoundingClientRect();
-    if (d?.head && !d.moved && e.type === 'pointerup' && rect) {
-      const px = e.clientX - rect.left;
-      let best: { id: string; dist: number } | null = null;
-      for (const n of model.chapterNodes) {
-        const dist = Math.abs(x(n.t) - px);
-        if (dist <= NODE_HIT && (!best || dist < best.dist)) best = { id: n.id, dist };
+    if (!d) return;
+    if (d.moved) {
+      swallowClick.current = true;
+      window.setTimeout(() => (swallowClick.current = false), 0);
+      return;
+    }
+    // A click on the playhead (it rests on a tick): the nearest tick within reach, else its segment.
+    if (d.head && e.type === 'pointerup') {
+      const px = railX(e.clientX);
+      const seg = scale.segments[scale.segmentAt(px)];
+      if (!seg) return;
+      let best: { index: number; dist: number } | null = null;
+      for (const k of seg.ticks) {
+        const dist = Math.abs(k.x - px);
+        if (dist <= TICK_HIT && (!best || dist < best.dist)) best = { index: k.index, dist };
       }
-      if (best) props.onChapter(best.id);
+      if (best) props.onBeat(seg.id, best.index);
+      else props.onChapter(seg.id);
     }
   };
 
   const onHeadKey = (e: KeyboardEvent<HTMLElement>) => {
     if (e.altKey || e.ctrlKey || e.metaKey) return;
+    const seg = scale.segments[headSegment];
     const dir = e.key === 'ArrowRight' || e.key === 'ArrowUp' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowDown' ? -1 : 0;
     if (dir) props.onNudge(dir);
     else if (e.key === 'PageUp' || e.key === 'PageDown') props.onNudge(e.key === 'PageUp' ? 1 : -1, true);
-    else if (e.key === 'Home') props.onScrub(props.span?.[0] ?? model.min);
-    else if (e.key === 'End') props.onScrub(props.span?.[1] ?? model.max);
+    else if (e.key === 'Home' && seg) props.onScrub(seg.start, seg.index);
+    else if (e.key === 'End' && seg) props.onScrub(seg.end, seg.index);
     else return;
     e.preventDefault();
     e.stopPropagation();
   };
 
-  const position = new Map(chapters.map((c, i) => [c.id, i]));
-  const headX = width > 0 ? x(t) : 0;
+  const tipSeg = tip ? scale.segments[tip.segment] : undefined;
+  const tipTick = tip && tipSeg ? tipSeg.ticks[tip.tick] : undefined;
 
   return (
     <div className="ts-timeline" role="group" aria-label={tr('time.timeline')} data-lanes={lanesOpen ? 'open' : 'closed'}>
@@ -205,8 +233,6 @@ export function Timeline(props: TimelineProps) {
           <div
             ref={railRef}
             className="ts-rule__rail"
-            data-alpha={scale.alpha.toFixed(3)}
-            data-running={props.running || undefined}
             onPointerDown={onPointerDown}
             onPointerMove={onPointerMove}
             onPointerUp={onPointerEnd}
@@ -214,41 +240,90 @@ export function Timeline(props: TimelineProps) {
           >
             {width > 0 && (
               <svg className="ts-rule__svg" width={width} height={RULE_H} aria-hidden="true">
-                <line className="ts-rule__base" x1={0} x2={width} y1={RULE_Y} y2={RULE_Y} />
-                <line className="ts-rule__done" x1={0} x2={headX} y1={RULE_Y} y2={RULE_Y} />
-                {ticks.minor.map((px) => (
-                  <line key={px} className="ts-rule__minor" x1={px} x2={px} y1={RULE_Y} y2={RULE_Y + 4} />
-                ))}
-                {ticks.major.map((m) => (
-                  <g key={m.t}>
-                    <line className="ts-rule__major" x1={m.x} x2={m.x} y1={RULE_Y - 3} y2={RULE_Y + 8} />
-                    {m.showLabel && (
-                      <text
-                        className="ts-rule__label"
-                        x={m.x}
-                        y={RULE_Y + 19}
-                        textAnchor={m.x > width - 16 ? 'end' : m.x < 16 ? 'start' : 'middle'}
-                      >
-                        {m.label}
-                      </text>
-                    )}
-                  </g>
-                ))}
-                {ticks.unit && (
-                  <text className="ts-rule__unit" x={width} y={RULE_Y - 7} textAnchor="end">
-                    {ticks.unit}
-                  </text>
-                )}
+                {scale.segments.map((seg) => {
+                  const state = seg.index < current ? 'done' : seg.index === current ? 'current' : 'todo';
+                  const fillTo = state === 'done' ? seg.x1 : state === 'current' ? Math.min(Math.max(headX, seg.x0), seg.x1) : seg.x0;
+                  return (
+                    <g key={seg.id} data-state={state}>
+                      <line className="ts-seg__track" x1={seg.x0} x2={seg.x1} y1={RULE_Y} y2={RULE_Y} />
+                      {fillTo > seg.x0 && <line className="ts-seg__done" x1={seg.x0} x2={fillTo} y1={RULE_Y} y2={RULE_Y} />}
+                      <line className="ts-seg__edge" x1={seg.x0} x2={seg.x0} y1={RULE_Y - 4} y2={RULE_Y + 9} />
+                    </g>
+                  );
+                })}
                 {model.keyframes.map((k) => (
-                  <path key={k.t} className="ts-rule__key" d={`M${x(k.t)} ${RULE_Y - 3.5}l3.5 3.5l-3.5 3.5l-3.5 -3.5z`} />
+                  <path key={k.t} className="ts-rule__key" d={`M${scale.x(k.t)} ${RULE_Y - 3}l3 3l-3 3l-3 -3z`} />
                 ))}
               </svg>
             )}
             <span className="ts-rule__head" style={{ left: `${headX}px` }} aria-hidden="true" />
+            {width > 0 && (
+              <ol className="ts-segs">
+                {scale.segments.map((seg) => {
+                  const chapter = chapters[seg.index];
+                  if (!chapter) return null;
+                  const n = String(seg.index + 1).padStart(2, '0');
+                  const date = segmentDate(seg.start, model, locale);
+                  const state = seg.index < current ? 'done' : seg.index === current ? 'current' : 'todo';
+                  const label = tr('time.segment', { n: seg.index + 1, title: tx(chapter.title, locale), time: date });
+                  const wide = seg.x1 - seg.x0 >= DATE_LABEL_MIN;
+                  return (
+                    <li key={seg.id} className="ts-seg" data-state={state} style={{ left: `${seg.x0}px`, width: `${seg.x1 - seg.x0}px` }}>
+                      <button
+                        type="button"
+                        className="ts-seg__btn"
+                        data-segment={seg.id}
+                        aria-current={state === 'current' ? 'step' : undefined}
+                        aria-label={label}
+                        title={label}
+                        onClick={(e) => {
+                          if (swallowClick.current) return;
+                          props.onChapter(seg.id);
+                          blurAfterPointer(e);
+                        }}
+                      >
+                        <span className="ts-seg__no">{n}</span>
+                        {wide && <span className="ts-seg__date">{date}</span>}
+                      </button>
+                      {seg.ticks.map((k, j) => {
+                        const { caption, date: time } = props.beatLabel(seg.id, k.index);
+                        // The hit area reaches halfway to the neighbouring ticks (10–28 px).
+                        const sorted = [...seg.ticks].sort((a, b) => a.x - b.x);
+                        const at = sorted.indexOf(k);
+                        const left = at > 0 ? (k.x - sorted[at - 1]!.x) / 2 : 14;
+                        const right = at < sorted.length - 1 ? (sorted[at + 1]!.x - k.x) / 2 : 14;
+                        const hit = Math.max(10, Math.min(28, 2 * Math.min(left, right)));
+                        return (
+                          <button
+                            key={j}
+                            type="button"
+                            className="ts-seg__tick"
+                            data-beat={`${seg.id}.${k.index}`}
+                            data-filled={(state === 'current' && filled === k.index) || undefined}
+                            tabIndex={state === 'current' ? 0 : -1}
+                            aria-label={tr('time.beatTick', { n: seg.index + 1, k: k.index + 1, time, caption })}
+                            style={{ left: `${k.x - seg.x0}px`, width: `${hit}px` }}
+                            onClick={(e) => {
+                              if (swallowClick.current) return;
+                              props.onBeat(seg.id, k.index);
+                              blurAfterPointer(e);
+                            }}
+                            onPointerEnter={() => setTip({ segment: seg.index, tick: k.index })}
+                            onPointerLeave={() => setTip(null)}
+                            onFocus={() => setTip({ segment: seg.index, tick: k.index })}
+                            onBlur={() => setTip(null)}
+                          />
+                        );
+                      })}
+                    </li>
+                  );
+                })}
+              </ol>
+            )}
             <output className="ts-rule__date" style={{ left: `clamp(3.4em, ${headX}px, calc(100% - 3.4em))` }} aria-hidden="true">
               {readout}
             </output>
-            {/* The playhead's 44 px hit area: the one tab stop of the rule, above the chapter nodes so it can be grabbed where it rests on one. */}
+            {/* The playhead's 44 px hit area: above the ticks so it can be grabbed where it rests on one. */}
             {width > 0 && (
               <span
                 className="ts-rule__grab"
@@ -256,45 +331,21 @@ export function Timeline(props: TimelineProps) {
                 tabIndex={0}
                 aria-label={tr('time.time')}
                 aria-orientation="horizontal"
-                aria-valuemin={model.min}
-                aria-valuemax={model.max}
+                aria-valuemin={scale.segments[0]?.start ?? model.min}
+                aria-valuemax={scale.segments.at(-1)?.end ?? model.max}
                 aria-valuenow={t}
                 aria-valuetext={formatNumber(t, model, locale)}
                 style={{ left: `${headX}px` }}
                 onKeyDown={onHeadKey}
               />
             )}
+            {tipSeg && tipTick && (
+              <p className="ts-tip" role="tooltip" style={{ left: `clamp(8em, ${tipTick.x}px, calc(100% - 8em))` }}>
+                <b>{props.beatLabel(tipSeg.id, tipTick.index).date}</b>
+                <span>{captionExcerpt(props.beatLabel(tipSeg.id, tipTick.index).caption, locale)}</span>
+              </p>
+            )}
           </div>
-          <ol className="ts-rule__nodes">
-            {width > 0 &&
-              model.chapterNodes.map((node) => {
-                const chapter = chapters.find((c) => c.id === node.id);
-                if (!chapter) return null;
-                const n = (position.get(node.id) ?? 0) + 1;
-                const label = tr('time.chapterNode', {
-                  n,
-                  title: tx(chapter.title, locale),
-                  time: formatNumber(node.t, model, locale),
-                });
-                return (
-                  <li key={node.id} style={{ left: `${x(node.t)}px` }}>
-                    <button
-                      type="button"
-                      className="ts-rule__node"
-                      aria-current={node.id === currentChapter ? 'step' : undefined}
-                      aria-label={label}
-                      title={label}
-                      onClick={(e) => {
-                        props.onChapter(node.id);
-                        blurAfterPointer(e);
-                      }}
-                    >
-                      <span aria-hidden="true">{String(n).padStart(2, '0')}</span>
-                    </button>
-                  </li>
-                );
-              })}
-          </ol>
         </div>
 
         <StateCluster model={model} t={t} highlight={props.highlight} locale={locale} />
@@ -307,7 +358,7 @@ export function Timeline(props: TimelineProps) {
               <li style={{ top: LANES.e[0], height: LANES.e[1] - LANES.e[0] }}>{tr('time.spec.events')}</li>
             </ul>
             <div id="ts-lanes" className="ts-lanes">
-              {width > 0 && <Swimlanes model={model} scale={scale} width={width} t={t} chapter={currentChapter} />}
+              {width > 0 && <Swimlanes model={model} scale={scale} width={width} headX={headX} current={current} />}
             </div>
           </>
         )}
@@ -353,9 +404,9 @@ function StateCluster({ model, t, highlight, locale }: { model: TimeModel; t: nu
 /* Swimlanes (keyframes / movements / events), same mapping as the rule */
 /* ------------------------------------------------------------------ */
 
-function Swimlanes({ model, scale, width, t, chapter }: { model: TimeModel; scale: TimeScale; width: number; t: number; chapter: string | null }) {
-  const x = scale.x;
-  const win = chapterWindow(model, chapter);
+function Swimlanes({ model, scale, width, headX, current }: { model: TimeModel; scale: SegmentScale; width: number; headX: number; current: number }) {
+  const x = (t: number) => scale.x(t);
+  const win = scale.segments[current];
   // Movement bars stack into as few rows as overlap needs.
   const moveRows = useMemo(() => {
     const ends: number[] = [];
@@ -375,7 +426,7 @@ function Swimlanes({ model, scale, width, t, chapter }: { model: TimeModel; scal
   return (
     <svg className="ts-svg ts-lanes__svg" width={width} height={LANES_H} aria-hidden="true">
       <HatchDefs model={model} prefix="ts-lane-hatch" />
-      {win && <rect className="ts-svg__window" x={x(win[0])} y={0} width={Math.max(1, x(win[1]) - x(win[0]))} height={LANES_H} />}
+      {win && <rect className="ts-svg__window" x={win.x0} y={0} width={Math.max(1, win.x1 - win.x0)} height={LANES_H} />}
       {[LANES.k[1] + 1, LANES.m[1] + 1].map((y) => (
         <line key={y} className="ts-svg__lane" x1={0} x2={width} y1={y} y2={y} />
       ))}
@@ -407,8 +458,7 @@ function Swimlanes({ model, scale, width, t, chapter }: { model: TimeModel; scal
           </g>
         );
       })}
-      <line className="ts-svg__cursor" x1={x(t)} x2={x(t)} y1={0} y2={LANES_H} />
+      <line className="ts-svg__cursor" x1={headX} x2={headX} y1={0} y2={LANES_H} />
     </svg>
   );
 }
-

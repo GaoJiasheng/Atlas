@@ -1228,7 +1228,11 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   let userGesture = false;
   let camTimer: ReturnType<typeof setTimeout> | null = null;
   map.on('movestart', (e) => {
-    userGesture = Boolean((e as { originalEvent?: Event }).originalEvent);
+    userGesture = userGesture || Boolean((e as { originalEvent?: Event }).originalEvent);
+  });
+  // A wheel zoom's movestart carries no originalEvent: mark it here so the camera is written back too.
+  map.on('wheel', () => {
+    userGesture = true;
   });
   map.on('move', () => {
     reorientArrows();
@@ -1266,7 +1270,13 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   /* ---------- store + playhead subscriptions ---------- */
   disposers.push(
     store.subscribe((s, prev) => {
-      if (s.transition.id !== prev.transition.id && isGeoCamera(s.camera)) applyCamera(s.camera, s.transition.instant);
+      if (s.transition.id !== prev.transition.id && isGeoCamera(s.camera)) {
+        // The transition takes the camera: a pan / zoom still waiting to be written back is dropped.
+        if (camTimer) clearTimeout(camTimer);
+        camTimer = null;
+        userGesture = false;
+        applyCamera(s.camera, s.transition.instant);
+      }
       if (s.layers !== prev.layers) {
         applyVisibility();
         requestRender();

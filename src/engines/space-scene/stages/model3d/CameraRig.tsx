@@ -12,7 +12,8 @@
  *    the offset from the target interpolated spherically (never through the model)
  *  - ORBIT: slow turntable (one turn / 40 s) around the target until the user drags
  *  - dragging cancels any move and writes the camera back (`setCamera`, debounced),
- *    which the host shows as FREE CAMERA
+ *    which the host shows as FREE CAMERA; a transition (e.g. the next
+ *    presentation beat after free look) drops a write-back still pending
  *  - every transition reports when its move is over (`bridge.settledTransition`:
  *    the move ended, was cut short, or there was none); presentation beats wait on it
  *  - transitions are handled as the store emits them (a store subscription,
@@ -161,8 +162,14 @@ export function CameraRig({
       settle(transitionId);
       return;
     }
-    // Any other transition places the camera itself: nothing to go back to after the cover.
+    // Any other transition places the camera itself: nothing to go back to after the cover, no drag to write back.
     coverSave.current = null;
+    const u = user.current;
+    if (u.timer && !u.dragging) {
+      clearTimeout(u.timer);
+      u.timer = null;
+      u.active = false;
+    }
     if (reason === 'chapter' || reason === 'url') ui.setState({ orbit: false, reference: null });
     const { chapters: list, views: presets } = props.current;
     const chapter = list.find((c) => c.id === state.chapter) ?? null;

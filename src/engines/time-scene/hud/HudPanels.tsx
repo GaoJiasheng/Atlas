@@ -2,8 +2,8 @@
  * TimeScene HUD content (docs/08 §2, §5), portaled into the host slots:
  *  - `card`  BandCard: participation (joined → left) and approximate
  *            controlled area per entity over time; hairline at `t`, current
- *            chapter window shaded. The x axis uses the timeline's mapping
- *            (lib/timeScale.ts, same α). Collapsed it shows the rows that fit
+ *            chapter's segment shaded. The x axis is the timeline's segmented
+ *            mapping (lib/segmentScale.ts) on the card's own width. Collapsed it shows the rows that fit
  *            plus "+N others"; expanded (header or that row) it lists every
  *            entity and scrolls. Clicking a row selects the entity (map
  *            highlight + inspector).
@@ -17,13 +17,13 @@ import type { Locale } from '../../core/types';
 import { useT } from '../../core/context';
 import type { Playhead } from '../lib/playhead';
 import type { EntityN, TimeModel } from '../lib/model';
-import { ruleTicks } from '../lib/ticks';
+import { ruleTicks, thinTicks } from '../lib/ticks';
 import { areaAt, controlAreas } from '../lib/stats';
 import { planBandRows, rankBandEntities, type BandRowPlan } from '../lib/bandRows';
-import { createTimeScale, thinTicks } from '../lib/timeScale';
+import { createSegmentScale, type Anchor, type SegmentSpec } from '../lib/segmentScale';
 import { BLOC_CSS, colorKey, entityCssColor } from '../colors';
 import { blocSpansN } from '../lib/bloc';
-import { chapterWindow, HatchDefs, upper, usePlayheadT, useSize, useUnit } from './shared';
+import { HatchDefs, upper, usePlayheadT, useSize, useUnit } from './shared';
 
 /* ------------------------------------------------------------------ */
 /* Card: participation + area band chart                               */
@@ -43,10 +43,12 @@ export interface BandCardProps {
   model: TimeModel;
   playhead: Playhead;
   locale: Locale;
-  chapter: string | null;
   highlight: readonly string[];
-  /** α of the timeline mapping (the rule fits it to its width; the card reuses it). */
-  alpha: number;
+  /** The timeline's segments (one per story chapter) and where the playhead belongs. */
+  segments: readonly SegmentSpec[];
+  anchor: Anchor | null;
+  /** Segment of the current chapter (-1: none, e.g. the background chapter). */
+  current: number;
   expanded: boolean;
   /** Selected entity (inspector), if any. */
   selected: string | null;
@@ -61,7 +63,7 @@ function fullOrder(all: readonly EntityN[], t: number, areaNow: ReadonlyMap<stri
   return [...ranked, ...all.filter((e) => !shown.has(e)).sort((a, b) => a.joined - b.joined)];
 }
 
-export function BandCard({ model, playhead, locale, chapter, highlight, alpha, expanded, selected, onSelect, onExpand }: BandCardProps) {
+export function BandCard({ model, playhead, locale, highlight, segments, anchor, current, expanded, selected, onSelect, onExpand }: BandCardProps) {
   const tr = useT();
   const t = usePlayheadT(playhead);
   const [ref, { w, h }] = useSize<HTMLDivElement>();
@@ -95,15 +97,16 @@ export function BandCard({ model, playhead, locale, chapter, highlight, alpha, e
   const rowsBottom = top + entities.length * rowH + restH;
 
   const scale = useMemo(
-    () => createTimeScale({ min: model.min, max: model.max, nodes: model.chapterNodes.map((n) => n.t), width: x1 - x0, alpha }),
-    [model, x0, x1, alpha],
+    () => createSegmentScale({ segments, max: model.max, width: x1 - x0 }),
+    [segments, model, x0, x1],
   );
   const x = (n: number) => x0 + scale.x(n);
   const ticks = useMemo(() => {
     const raw = ruleTicks(model.min, model.max, model.scale, Math.max(2, (x1 - x0) / (64 * u)), locale);
     return thinTicks(raw.major, raw.minor, (n) => x0 + scale.x(n), 34 * u);
   }, [model, x0, x1, u, locale, scale]);
-  const win = chapterWindow(model, chapter);
+  const win = scale.segments[current];
+  const headX = x0 + scale.x(t, anchor);
   const hl = new Set(highlight);
 
   const bands = useMemo(
@@ -141,7 +144,7 @@ export function BandCard({ model, playhead, locale, chapter, highlight, alpha, e
     <div ref={ref as RefObject<HTMLDivElement>} className="ts-card" data-expanded={expanded || undefined}>
       <svg width={w} height={rowsH} className="ts-svg ts-card__rows">
         <HatchDefs model={model} prefix="ts-card-hatch" />
-        {win && <rect className="ts-svg__window" x={x(win[0])} y={top} width={Math.max(1, x(win[1]) - x(win[0]))} height={rowsH - top} />}
+        {win && <rect className="ts-svg__window" x={x0 + win.x0} y={top} width={Math.max(1, win.x1 - win.x0)} height={rowsH - top} />}
         {bands.map(({ entity, base, d }) => {
           const en = model.entities.get(entity.id)!;
           // Area band in the colour of the bloc at `t`; the participation line is split where the entity changes sides.
@@ -214,7 +217,7 @@ export function BandCard({ model, playhead, locale, chapter, highlight, alpha, e
             </text>
           </g>
         )}
-        <line className="ts-svg__cursor" x1={x(t)} x2={x(t)} y1={top} y2={rowsH} />
+        <line className="ts-svg__cursor" x1={headX} x2={headX} y1={top} y2={rowsH} />
       </svg>
       <svg width={w} height={axisH} className="ts-svg ts-card__axis" aria-hidden="true">
         <line className="ts-svg__axis" x1={x0} x2={x1} y1={0.5} y2={0.5} />
@@ -231,7 +234,7 @@ export function BandCard({ model, playhead, locale, chapter, highlight, alpha, e
             )}
           </g>
         ))}
-        <line className="ts-svg__cursor" x1={x(t)} x2={x(t)} y1={0} y2={5.5 * u} />
+        <line className="ts-svg__cursor" x1={headX} x2={headX} y1={0} y2={5.5 * u} />
       </svg>
     </div>
   );
