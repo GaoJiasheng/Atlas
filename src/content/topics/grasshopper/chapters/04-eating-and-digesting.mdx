@@ -26,7 +26,7 @@ state:
       caption: { en: "The crop stores food; the proventriculus grinds it.", zh: "嗉囊暂存，前胃磨碎。" }
     - camera: { position: [0.0, 0.8, 3.3], target: [0.0, 0.78, 0], fov: 30 }
       labels: [gastric-caeca, midgut]
-      caption: { en: "The midgut and six gastric caeca digest and take in food.", zh: "中肠和六个胃盲囊：消化、吸收。" }
+      caption: { en: "The midgut and its gastric caeca digest the food and take it in.", zh: "中肠和胃盲囊：消化食物、吸收养分。" }
     - camera: { position: [0.75, 0.8, 3.3], target: [0.75, 0.76, 0], fov: 30 }
       labels: [malpighian-tubules, hindgut, rectum]
       caption: { en: "Malpighian tubules collect waste; the hindgut takes back water.", zh: "马氏管收集废物，后肠吸回水分。" }
@@ -36,12 +36,102 @@ state:
 
 <Lang en>
 
-Draft chapter: the text is written after the content spec is signed off (docs/14 §6).
+The model has been cut open along its middle, and the outer skeleton is drawn faintly so that the gut shows. It is one tube from the mouth to the tail, in three parts: foregut, midgut and hindgut. The green dots are food, turning brown as it is digested. <FlyTo preset="side">Follow the gut from the side</FlyTo>
+
+The mandibles cut a leaf into small pieces and saliva wets them as they are swallowed. They collect in the <Term id="crop">crop</Term>, a wide, thin-walled bag that fills much of the thorax. Digestion has already begun here, because saliva and juices flowing forward from the midgut mix with the food. At the back of the foregut, the proventriculus, a short muscular section with <Num s="S10">six</Num> toothed folds inside, works as a valve and lets food on a little at a time.
+
+In the midgut, cells in the wall release enzymes and take in the digested food, which passes straight into the blood around the gut. At its front end is a ring of finger-like <Term id="gastric-caeca">gastric caeca</Term> that add more surface for this work.
+
+Where the midgut meets the hindgut, many fine <Term id="malpighian-tubules">Malpighian tubules</Term> empty into the gut. They take wastes out of the blood, doing the job of our kidneys; the desert locust has about <Num s="S12">250</Num>. The hindgut then carries the remains to the rectum, where pads in the wall take most of the water back. What leaves are small, dry droppings.
+
+A desert locust adult can eat about its own weight of fresh plants a day, about <Num s="S32">2 g</Num>. *Valanga* eats the leaves of many plants, including coconut, rubber, oil palm and teak.
+
+<More title={{ en: "Compared with our gut", zh: "和我们的消化道比较" }}>
+
+| Grasshopper | Human | Notes |
+|---|---|---|
+| Mandibles | Teeth | grasshopper jaws close sideways |
+| Salivary glands in the thorax | Salivary glands in the head | both start digestion |
+| Crop and proventriculus | Stomach | the crop mostly stores; our stomach also digests strongly |
+| Midgut and gastric caeca | Small intestine | where most food is digested and absorbed |
+| Malpighian tubules | Kidneys | the tubules empty into the gut, not into a bladder |
+| Hindgut and rectum | Large intestine | water is taken back |
+
+Singapore pupils study the human digestive system in Primary 4.
+
+</More>
+
+<More title={{ en: "Enzymes and what is not used", zh: "酶和用不上的部分" }}>
+
+Digestive enzymes break large food molecules into small ones that can pass through the gut wall. In the desert locust much of one sugar-splitting enzyme is found in the foregut, carried there from the midgut, so sugars are already being split in the crop. Sugars and some amino acids are then absorbed mainly in the gastric caeca and midgut.
+
+A thin sleeve, the peritrophic membrane, wraps the food in the midgut and keeps rough leaf fragments off the gut wall. Not everything is used: young desert-locust nymphs take in about <Num s="S10">78 %</Num> of the dry weight of their food, but fifth-stage nymphs only about <Num s="S10">35 %</Num>. The rest leaves again in the droppings.
+
+</More>
+
+<More title={{ en: "Pests and swarms", zh: "害虫和蝗群" }}>
+
+In Singapore *Valanga* is often treated as a garden pest, and in oil-palm and rubber plantations of the region it can strip trees of their leaves in some seasons.
+
+Locusts are a different matter. A swarm of desert locusts covering <Num s="S32">1 km²</Num> holds about <Num s="S32">40 million</Num> insects, which eat as much food in a day as about <Num s="S32">35,000</Num> people. Swarms range from less than <Num s="S32">1 km²</Num> to several hundred square kilometres, and they can destroy crops across whole regions. The Food and Agriculture Organization of the United Nations keeps watch on desert-locust swarms and publishes forecasts for the countries at risk.
+
+</More>
+
+<More title={{ en: "Dry droppings", zh: "干燥的粪粒" }}>
+
+For a small animal living on land, water is precious. The rectum has thick pads in its wall, usually <Num s="S10">six</Num> in insects, made of tall cells that pump water, salts and amino acids back into the blood. Muscles around the rectum squeeze its contents as well, pressing the water out. The waste from the Malpighian tubules leaves with the food remains in the same dry pellets, called frass.
+
+</More>
 
 </Lang>
 
 <Lang zh>
 
-章节草稿：正文在内容 spec 定稿后再写（docs/14 §6）。
+模型沿正中线剖开了，外骨骼画得很淡，好让消化道露出来。它从口到尾是一条管子，分成三段：前肠、中肠和后肠。绿色的点是食物，消化过程中逐渐变成褐色。<FlyTo preset="side">从侧面沿消化道看</FlyTo>
+
+上颚把叶片切成碎块，咽下去时唾液把它们润湿。碎叶先聚在<Term id="crop">嗉囊</Term>里：这是一只宽大、壁薄的囊，占了胸部的一大部分。消化在这里就已经开始，因为唾液和从中肠向前流来的消化液都混进了食物。前肠的最后一段叫前胃，很短，肌肉发达，内壁有 <Num s="S10">六</Num>条带齿的褶；它像阀门一样，让食物一点一点地往后走。
+
+在中肠里，肠壁细胞分泌消化酶，并吸收消化好的养分，养分直接进入消化道周围的血液。中肠前端有一圈指状的<Term id="gastric-caeca">胃盲囊</Term>，增加了消化和吸收的面积。
+
+在中肠与后肠交界的地方，许多细细的<Term id="malpighian-tubules">马氏管</Term>通进肠道。它们从血液里取出废物，做的是我们的肾的工作；沙漠蝗约有 <Num s="S12">250</Num> 根。后肠再把残渣送到直肠，直肠壁上的垫把大部分水吸回去，排出的是小小的干粪粒。
+
+沙漠蝗成虫一天能吃下约与自己体重相当的新鲜植物，约 <Num s="S32">2 克</Num>。黑角瓦兰蝗吃多种植物的叶子，包括椰子、橡胶、油棕和柚木。
+
+<More title={{ en: "Compared with our gut", zh: "和我们的消化道比较" }}>
+
+| 蚱蜢 | 人 | 说明 |
+|---|---|---|
+| 上颚 | 牙齿 | 蚱蜢的颚左右合拢 |
+| 胸部的唾液腺 | 头部的唾液腺 | 都开始消化 |
+| 嗉囊和前胃 | 胃 | 嗉囊主要储存；我们的胃消化能力强得多 |
+| 中肠和胃盲囊 | 小肠 | 大部分食物在这里消化、吸收 |
+| 马氏管 | 肾 | 马氏管通进肠道，而不是膀胱 |
+| 后肠和直肠 | 大肠 | 吸回水分 |
+
+新加坡小学四年级的科学课学习人体消化系统。
+
+</More>
+
+<More title={{ en: "Enzymes and what is not used", zh: "酶和用不上的部分" }}>
+
+消化酶把大的食物分子分解成能穿过肠壁的小分子。沙漠蝗的一种分解糖类的酶，大部分在前肠里，是从中肠倒流过来的，所以糖类在嗉囊里就开始分解了。糖和部分氨基酸主要在胃盲囊和中肠被吸收。
+
+中肠里有一层叫“围食膜”的薄套子包住食物，让粗糙的叶片碎块碰不到肠壁。食物并不能全部利用：沙漠蝗刚孵出的若虫能吸收食物干重的约 <Num s="S10">78 %</Num>，快长成的第五期若虫只有约 <Num s="S10">35 %</Num>。其余的又随粪便排了出去。
+
+</More>
+
+<More title={{ en: "Pests and swarms", zh: "害虫和蝗群" }}>
+
+在新加坡，黑角瓦兰蝗常被当作花园害虫；在本地区的油棕和橡胶种植园里，某些季节它会把树叶吃光。
+
+迁飞蝗虫就不同了。一个面积 <Num s="S32">1 km²</Num> 的沙漠蝗群约有 <Num s="S32">4,000 万</Num>只，一天吃掉的食物相当于约 <Num s="S32">35,000</Num> 人的量。蝗群小的不到 <Num s="S32">1 km²</Num>，大的有几百平方公里，能毁掉整个地区的庄稼。联合国粮食及农业组织持续监测沙漠蝗群，为受威胁的国家发布预报。
+
+</More>
+
+<More title={{ en: "Dry droppings", zh: "干燥的粪粒" }}>
+
+对生活在陆地上的小动物来说，水很宝贵。直肠壁上有厚厚的垫，昆虫一般有 <Num s="S10">六</Num>个，由高高的细胞组成，把水、盐和氨基酸送回血液。直肠周围的肌肉也挤压里面的东西，把水挤出来。马氏管送来的废物和食物残渣一起，以干燥的颗粒排出，这种粪粒叫“虫粪”。
+
+</More>
 
 </Lang>

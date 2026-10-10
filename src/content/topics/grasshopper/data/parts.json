@@ -12,12 +12,12 @@
    },
    "group": "exoskeleton",
    "summary": {
-    "en": "Holds the brain; carries eyes, feelers and mouthparts",
-    "zh": "包住脑，眼、触角和口器都长在上面"
+    "en": "Holds the brain; carries the eyes, feelers and mouthparts",
+    "zh": "包住脑；眼、触角和口器都长在上面"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "A hard, box-like case made of several body segments that fused together long ago. The brain sits inside, and the compound eyes, the three simple eyes, the antennae and the mouthparts are all attached to it. In grasshoppers the face points forward and the mouthparts point down, the arrangement found in the simplest insects [S8].\n\nIn this model the head is about 9 mm long, from the front of the face to the back of the head, out of a body length of 64 mm [S35].\n\nOur skull is bone inside the skin; a grasshopper's head case is the skin itself, hardened. A thin, soft neck membrane joins it to the thorax; the model leaves the neck out.",
+    "zh": "由几个体节在很久以前愈合而成的坚硬头壳，像一只盒子。脑在里面，复眼、三只单眼、触角和口器都长在它上面。蚱蜢的脸朝前、口器朝下，这是昆虫里最原始的头部朝向 [S8]。\n\n这个模型里，头从脸前缘到后头约 9 mm，体长 64 mm [S35]。\n\n我们的头骨是皮肤里面的骨头；蚱蜢的头壳就是变硬的体壁本身。它通过一段柔软的颈膜与胸部相连，模型里省略了颈部。"
    },
    "primitive": {
     "kind": "lathe",
@@ -216,12 +216,12 @@
    },
    "group": "exoskeleton",
    "summary": {
-    "en": "Many small eyes in one; quickest to see movement",
-    "zh": "由许多小眼组成，对运动最敏感"
+    "en": "Thousands of small eyes in one; quick to see movement",
+    "zh": "由几千个小眼组成，对运动很敏感"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "Each compound eye is made of thousands of units called ommatidia. Every unit has its own lens on the surface, the small hexagonal facets in the model, and looks in a slightly different direction, so together they build up a mosaic picture of the surroundings [S10].\n\nIn the desert locust, a close relative, an adult eye has about 9,000–9,500 facets; a newly hatched nymph has about 2,500, and new ones are added at every moult [S11]. No count has been published for Valanga.\n\nA compound eye cannot focus like ours and gives a less sharp picture, but because each unit reacts on its own, it picks up quick movement well.",
+    "zh": "每只复眼由几千个叫“小眼”的单元组成。每个小眼表面都有自己的晶体，就是模型上一个个小六边形；它们朝向略有不同，合起来拼成一幅周围景物的镶嵌图像 [S10]。\n\n在近亲沙漠蝗身上，成虫每只复眼约有 9,000–9,500 个小眼；刚孵出的若虫约 2,500 个，每蜕一次皮都会增加 [S11]。黑角瓦兰蝗没有公开的计数。\n\n复眼不能像我们的眼睛那样调焦，图像也没那么清楚；但每个小眼各自反应，所以很容易察觉快速的运动。"
    },
    "primitive": {
     "kind": "sphere",
@@ -266,8 +266,8 @@
     "zh": "三只简单的眼，感受明暗"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "Three small simple eyes on the face, arranged in a triangle between the compound eyes. Each has a single lens [S7, S10].\n\nThey do not form a picture. They react to changes in brightness, such as a shadow passing over [S10].\n\nIn the model they are drawn as small glassy beads; on a real grasshopper they are hard to see without a hand lens.",
+    "zh": "脸上有三只简单的小眼，在两只复眼之间排成三角形。每只只有一个晶体 [S7, S10]。\n\n它们不能成像，只对明暗的变化有反应，比如一片阴影掠过 [S10]。\n\n模型把它们画成小玻璃珠；真实蚱蜢的单眼很小，不用放大镜很难看清。"
    },
    "primitive": {
     "kind": "sweep",
@@ -445,8 +445,8 @@
     "zh": "感受触碰和气味"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "A pair of thin feelers made of many short rings. They carry thousands of tiny hairs and pegs: some sense touch, others pick up smells and tastes in the air, humidity and temperature [S10].\n\nIn grasshoppers the number of rings grows at each moult. In one European grasshopper a first-stage nymph has 13 and the adult 25 [S10]; the model draws 25. The species name nigricornis means black-horned.\n\nWe smell with the nose; a grasshopper smells mostly with its antennae.",
+    "zh": "一对由许多短环节组成的细长触角。上面有成千上万根细毛和小钉：有的感受触碰，有的感受空气里的气味、湿度和温度 [S10]。\n\n蝗虫的触角每蜕一次皮环节就增加。欧洲一种蝗虫的一龄若虫有 13 节，成虫有 25 节 [S10]；模型画了 25 节。种名 nigricornis 的意思是“黑角”。\n\n我们用鼻子闻气味；蚱蜢主要用触角。"
    },
    "primitive": {
     "kind": "sweep",
@@ -666,12 +666,12 @@
    },
    "group": "exoskeleton",
    "summary": {
-    "en": "Upper lip covering the mouth from the front",
+    "en": "Upper lip that covers the mouth from the front",
     "zh": "上唇，从前面盖住口"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "A broad flap hanging down in front of the mouth, joined to the face by a plate called the clypeus. It closes the front of the mouth and holds the food against the jaws behind it [S7].\n\nIts soft inner surface carries a few sense organs [S10].\n\nIt is one of the four parts that make up chewing mouthparts, together with the mandibles, maxillae and labium [S7].",
+    "zh": "挂在口前面的一片宽瓣，通过一块叫“唇基”的骨片连在脸上。它从前面封住口，把食物抵在后面的上颚上 [S7]。\n\n它柔软的内表面上有一些感觉器 [S10]。\n\n它与上颚、下颚、下唇一起组成咀嚼式口器 [S7]。"
    },
    "primitive": {
     "kind": "curvedPanel",
@@ -750,8 +750,8 @@
     "zh": "一对硬颚，切断并磨碎叶片"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "Two strong jaws, one on each side of the mouth. They swing sideways towards each other, not up and down like ours. The toothed tips cut pieces off a leaf; the flatter area nearer the base grinds them [S7].\n\nThe model shows the chewing slowly; no published chewing rate for grasshoppers was found, so the speed in the STATE panel is part of the simulation [S35].\n\nOur jaws move up and down and we chew with teeth set in bone; a grasshopper's jaws are hardened cuticle and close sideways.",
+    "zh": "口两侧各一只的强壮的颚。它们左右相向开合，而不是像我们那样上下咬合。前端的齿切下叶片，靠近基部较平的部分把它磨碎 [S7]。\n\n模型里咀嚼放慢了；没有找到蚱蜢咀嚼频率的公开数据，所以 STATE 面板里的咀嚼速度属于模拟 [S35]。\n\n我们的颚上下运动，靠长在骨头上的牙齿咀嚼；蚱蜢的颚是变硬的表皮，左右合拢。"
    },
    "primitive": {
     "kind": "extrude",
@@ -838,12 +838,12 @@
    },
    "group": "exoskeleton",
    "summary": {
-    "en": "Hold and push food in; palps taste it",
+    "en": "Hold food and push it in; their palps taste it",
     "zh": "抓住食物往里送，须用来尝味"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "A second pair of jaws behind the mandibles. Each has hooked lobes that hold the food and help push it into the mouth, and a jointed feeler, the maxillary palp [S7, S8].\n\nWhen a locust touches possible food it rapidly taps the surface with its palps, which test its quality by taste; biting follows [S10].\n\nIn the model the palps move slowly up and down while the jaws work.",
+    "zh": "上颚后面的第二对颚。每只有带钩的叶片，用来抓住食物、帮助把它送进口里，还有一根分节的“下颚须” [S7, S8]。\n\n蝗虫碰到可能的食物时，会用须快速点触表面、尝出它的好坏，然后才咬 [S10]。\n\n模型里，上颚咀嚼时下颚须会慢慢上下摆动。"
    },
    "primitive": {
     "kind": "extrude",
@@ -991,8 +991,8 @@
     "zh": "下唇，从后面托住食物"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "The lower lip closes the mouth from behind. It formed from a pair of jaws that joined in the middle, and it carries a pair of short, jointed labial palps [S7, S8].\n\nInside the mouth, between the mouthparts, is a tongue-like lobe, the hypopharynx; the salivary glands open at its base [S7]. The model does not show it separately.\n\nTogether, labrum and labium close the mouth in front and behind while the mandibles and maxillae work at the sides.",
+    "zh": "下唇从后面封住口。它由一对颚在中间愈合而成，上面有一对短而分节的下唇须 [S7, S8]。\n\n口里、各口器之间有一片像舌头的叶，叫“舌”；唾液腺开口在它的基部 [S7]。模型没有单独画出舌。\n\n上唇和下唇一前一后封住口，上颚和下颚在两侧工作。"
    },
    "primitive": {
     "kind": "extrude",
@@ -1195,8 +1195,8 @@
     "zh": "盖在前胸上的鞍形护甲"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "The back plate of the first thorax segment, bent down at the sides like a saddle. It covers the front legs' segment and the neck. In this species a distinct ridge runs along its middle and three deep grooves cut across it [S1].\n\nIn the model it is about 14.5 mm long [S35].\n\nThe front legs attach under it; the wings do not. Wings grow only from the second and third thorax segments.",
+    "zh": "前胸的背板，两侧向下弯，像一只马鞍，盖住前胸和颈部。这个种的前胸背板中间有一条明显的纵脊，被三条深深的横沟切断 [S1]。\n\n模型里它长约 14.5 mm [S35]。\n\n前足长在它下面，翅却不长在这里：翅只长在胸部的第二、第三节。"
    },
    "primitive": {
     "kind": "sweep",
@@ -1503,12 +1503,12 @@
    },
    "group": "exoskeleton",
    "summary": {
-    "en": "Small backward spine between the front legs",
+    "en": "Small backward-curving spine between the front legs",
     "zh": "前足之间向后弯的小刺"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "A short cone on the underside of the first thorax segment, between the front legs. In this species it is conical with a slightly pointed tip and curves backwards when seen from the side [S1].\n\nValanga and the desert locust both belong to the subfamily Cyrtacanthacridinae [S1], whose name comes from Greek words for a curved spine. The spine is one of the features used to tell these grasshoppers apart [S1].\n\nIt has no known role in feeding or walking that this topic could source; it is shown because it identifies the group.",
+    "zh": "前胸腹面、两只前足之间的一个短锥。这个种的前胸腹板突呈圆锥形，端部略尖，侧看向后弯 [S1]。\n\n瓦兰蝗属和沙漠蝗都属于刺胸蝗亚科 [S1]，这个学名来自希腊语的“弯刺”。这根刺是区分这类蝗虫的特征之一 [S1]。\n\n本主题没有找到它在取食或行走上作用的来源；画出它是因为它能帮助认出这一类蝗虫。"
    },
    "primitive": {
     "kind": "sweep",
@@ -1570,12 +1570,12 @@
    },
    "group": "exoskeleton",
    "summary": {
-    "en": "Middle and rear thorax: wings and back legs attach",
+    "en": "Middle and rear thorax: the wings and back legs attach here",
     "zh": "中胸和后胸：翅和后两对足长在这里"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "The second and third thorax segments are joined into one stiff box. The forewings and hind wings hinge on its upper edges and the middle and hind legs on its lower sides [S7, S8].\n\nInside are the flight muscles, which fill most of the box, and the largest nerve centre of the thorax [S7]. The two thoracic pairs of breathing holes, the spiracles, sit on its sides [S8].\n\nIn the jumping grasshoppers the thorax is clearly split into a separate front segment and this two-segment wing box [S8].",
+    "zh": "胸部的第二、第三节愈合成一只坚固的盒子。前翅和后翅铰接在它的上缘，中足和后足长在它的下侧 [S7, S8]。\n\n里面大部分是飞行肌，还有胸部最大的神经节 [S7]。胸部的两对气门就在它的侧面 [S8]。\n\n善跳的蝗虫，胸部明显分成独立的前胸和这只两节的“翅盒” [S8]。"
    },
    "primitive": {
     "kind": "sweep",
@@ -1706,12 +1706,12 @@
    },
    "group": "exoskeleton",
    "summary": {
-    "en": "Upper plates of the ten belly segments",
+    "en": "Upper plates of the belly segments",
     "zh": "腹部各节的背板"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "The abdomen is a row of rings. Each has a hard upper plate, the tergite, and a lower plate, the sternite, joined by soft folding membrane, so the abdomen can bend, stretch and pump [S9].\n\nThe first segment carries the ears, the tympanal organs, on its sides [S9]. Ten segments are visible; an eleventh forms the small plates around the anus at the tip [S9].\n\nThe model draws each tergite as a ring overlapping the next one, as they do in life.",
+    "zh": "腹部由一节节环组成。每节有一块硬的背板和一块腹板，中间用柔软、能折叠的膜相连，所以腹部能弯曲、伸长和泵气 [S9]。\n\n第一节的两侧是“耳朵”，即鼓膜听器 [S9]。腹部看得见 10 节；第 11 节形成腹末肛门周围的几块小板 [S9]。\n\n模型把每块背板画成一圈，前一节套在后一节上，与真实一致。"
    },
    "primitive": {
     "kind": "sweep",
@@ -1903,8 +1903,8 @@
     "zh": "腹部各节的腹板，一起一伏地泵气"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "The lower plates of the abdomen. Muscles pull them up towards the upper plates, squeezing the air sacs inside; when the muscles relax the abdomen springs back and air is drawn in [S7, S10].\n\nAt about 22–25 °C, adult American desert locusts held still pump about 43–52 times a minute [S25, S26]. In this simulation the resting rate is 45 a minute and rises to 80 after activity; the second figure is not a measurement [S35].\n\nThe plates are joined by soft membrane; without it the abdomen could not move.",
+    "zh": "腹部的腹板。肌肉把它们向上拉向背板，挤压里面的气囊；肌肉一放松，腹部弹回原状，空气就被吸进来 [S7, S10]。\n\n在约 22–25℃时，静止的美洲沙漠蝗成虫每分钟泵气约 43–52 次 [S25, S26]。在这个模拟里，静息时每分钟 45 次，活动后升到 80 次；后一个数不是实测值 [S35]。\n\n腹板之间靠柔软的膜相连；没有这层膜，腹部就动不了。"
    },
    "primitive": {
     "kind": "sweep",
@@ -2043,8 +2043,8 @@
     "zh": "腹部第一节两侧的耳膜"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "A thin oval membrane stretched over a hollow on each side of the first abdominal segment, like the skin of a drum. Air sacs lie behind it, so it can vibrate freely when sound reaches it [S7, S9].\n\nA hearing organ attached to its inner face turns the vibration into nerve signals [S7]. In locusts it contains about 80 sensory cells [S30].\n\nOur eardrums are inside the head; a grasshopper's are on its abdomen, just behind the hind legs.",
+    "zh": "腹部第一节两侧各有一个凹陷，上面绷着一片椭圆形的薄膜，像鼓面。膜后面是气囊，所以声音传来时它能自由振动 [S7, S9]。\n\n贴在它内侧的听器把振动变成神经信号 [S7]。蝗虫的听器约有 80 个感觉细胞 [S30]。\n\n我们的鼓膜在头里面；蚱蜢的鼓膜在腹部，就在后足后面。"
    },
    "primitive": {
     "kind": "sweep",
@@ -2127,11 +2127,11 @@
    "group": "exoskeleton",
    "summary": {
     "en": "Short feelers at the tail tip",
-    "zh": "腹末一对短须，感受气流和触碰"
+    "zh": "腹末一对短须，感受触碰和气流"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "A pair of short, pointed feelers at the tip of the abdomen. They belong to the eleventh segment and grow from soft membrane beside the anus [S9].\n\nThey carry sensory hairs that respond to touch and air movement [S10].\n\nIn grasshoppers they are short; in crickets and cockroaches they are much longer.",
+    "zh": "腹部末端一对短而尖的须。它们属于第 11 节，从肛门旁边的软膜上长出来 [S9]。\n\n上面有感觉毛，对触碰和气流有反应 [S10]。\n\n蝗虫的尾须很短；蟋蟀和蟑螂的长得多。"
    },
    "primitive": {
     "kind": "sweep",
@@ -2222,12 +2222,12 @@
    },
    "group": "exoskeleton",
    "summary": {
-    "en": "Two pairs of valves that dig a hole to lay eggs",
-    "zh": "两对瓣，挖土产卵"
+    "en": "Four short prongs that dig a hole in the soil for eggs",
+    "zh": "四片短瓣，在土里挖洞产卵"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "The egg-laying organ of the female: four short, hard, hooked prongs at the tip of the abdomen [S9]. They work in an unusual way. Instead of sliding along each other like a saw, as in many insects, they are forced apart, pressing the soil outwards to dig a hole [S9].\n\nAs the hole deepens the abdomen stretches down into the ground, and the eggs are laid at the bottom [S7].\n\nMales have no ovipositor; the tip of their abdomen is a rounded plate.",
+    "zh": "雌虫的产卵器官：腹末四片短而硬、带钩的瓣 [S9]。它的工作方式很特别：许多昆虫的产卵器像锯一样前后滑动，蚱蜢的则是把几片瓣用力撑开，把泥土往四周挤，挖出一个洞 [S9]。\n\n洞越挖越深，腹部也伸长、钻进土里，卵就产在洞底 [S7]。\n\n雄虫没有产卵器，腹末是一块圆钝的板。"
    },
    "primitive": {
     "kind": "extrude",
@@ -2456,8 +2456,8 @@
     "zh": "行走、抓握"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "Each leg has five main parts: coxa, trochanter, femur, tibia and tarsus, ending in a pair of claws with a pad between them [S8]. In grasshoppers the tarsus shows three pieces, because three of its five original segments are fused [S8].\n\nSmall pads lie under the tarsal segments [S8].\n\nThe front legs attach to the first thorax segment, under the pronotum.",
+    "zh": "每条足分五大节：基节、转节、股节、胫节和跗节，末端是一对爪，爪间有一块垫 [S8]。蝗虫的跗节看起来只有三节，因为原来五节中的三节愈合在一起 [S8]。\n\n跗节各节下面有小垫 [S8]。\n\n前足长在前胸，在前胸背板下面。"
    },
    "primitive": {
     "kind": "sweep",
@@ -2732,8 +2732,8 @@
     "zh": "行走、抓握"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "Built like the front legs, with the same five parts, and attached to the second thorax segment [S8].\n\nThe middle legs and the front legs carry the claws and pads that grip leaves and stems as the grasshopper climbs [S8].\n\nIn the jump pose the model lifts the front and middle legs off the ground.",
+    "zh": "构造和前足一样，也是五节，长在中胸 [S8]。\n\n中足和前足的末端有爪和垫，蚱蜢在叶和茎上攀爬时靠它们抓牢 [S8]。\n\n模型的起跳姿态里，前足和中足都抬离地面。"
    },
    "primitive": {
     "kind": "sweep",
@@ -3007,8 +3007,8 @@
     "zh": "粗大的大腿，装着跳跃肌"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "The hind femur is the largest part of the leg. Most of it is filled by the extensor muscle that straightens the shin, attached to the inner walls between the herringbone ridges that show on the outside [S8].\n\nIn the model the femur is about 30 mm long, almost half the body length; that value was measured on reference photographs, not taken from a publication [S35]. In this species it is yellowish brown with two or three dark bands [S1].\n\nHuman thigh muscles move the leg through bones inside; here the muscle is inside the skeleton.",
+    "zh": "后足股节是足里最大的一节。里面大部分是伸直小腿的伸肌，它附着在内壁上，外面看得到的人字形（鱼骨形）纹就是附着处的脊 [S8]。\n\n模型里股节长约 30 mm，差不多是体长的一半；这个数是从参考照片量的，不是出自文献 [S35]。这个种的后足股节黄褐色，有两三条暗带 [S1]。\n\n人的大腿肌肉包在骨头外面；蚱蜢的肌肉装在骨骼里面。"
    },
    "primitive": {
     "kind": "sweep",
@@ -3174,8 +3174,8 @@
     "zh": "膝部的半月形弹簧，储存跳跃的能量"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "Two dark, half-moon-shaped plates on each side of the knee, at the end of the femur. They are made of hard cuticle combined with resilin, a rubber-like protein. When the leg is loaded before a jump, they are bent and store energy like a bow [S16, S17].\n\nIn the desert locust each knee's pair stores about 4 mJ and the extensor tendon about 3 mJ more [S13]; a later study puts the share at about half each [S19]. The resilin layer is shed at each moult and laid down again, and it keeps thickening for weeks after the final moult [S16].\n\nThe model shows them compressed in the loaded pose; the real bending is too small to see.",
+    "zh": "股节末端、膝两侧各有两片暗色的半月形板。它们由硬的表皮和一种像橡胶的蛋白质“节肢弹性蛋白”组成。起跳前给后足“上弦”时，它们被压弯，像弓一样储存能量 [S16, S17]。\n\n在沙漠蝗身上，每个膝的这对板约储存 4 mJ，伸肌腱再储存约 3 mJ [S13]；后来的研究认为两处大约各占一半 [S19]。弹性蛋白层每次蜕皮都随旧表皮脱掉、再重新沉积，最后一次蜕皮后的几周里还在继续加厚 [S16]。\n\n模型在“上弦”姿态里把它们画得被压扁了；真实的弯曲小得看不出来。"
    },
    "primitive": {
     "kind": "extrude",
@@ -3455,8 +3455,8 @@
     "zh": "细长的小腿，蹬地；带两排刺"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "The long, thin shin of the hind leg, with the tarsus and claws at its end. When the knee is released it swings back and pushes against the ground [S13].\n\nIn this species it carries two rows of spines along its back edge, 10 on the inner side and 8 on the outer [S1].\n\nIn the model the shin is about 27.5 mm long [S35]. During a real jump it straightens in about 25–30 thousandths of a second [S13]; the model slows this down.",
+    "zh": "后足细长的胫节，末端是跗节和爪。膝部一松开，它就向后甩，蹬住地面 [S13]。\n\n这个种的后足胫节后缘有两排刺，内侧 10 根，外侧 8 根 [S1]。\n\n模型里胫节长约 27.5 mm [S35]。真实起跳时，它在约千分之 25–30 秒里伸直 [S13]；模型放慢了。"
    },
    "primitive": {
     "kind": "sweep",
@@ -3985,8 +3985,8 @@
     "zh": "革质前翅，静息时盖住后翅"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "The forewings, called tegmina, are narrow and leathery. At rest they fold back over the abdomen like a roof and protect the thin hind wings underneath [S10].\n\nIn this species they are yellowish brown with a few faint dark spots [S1].\n\nIn flight they are spread and beat together with the hind wings.",
+    "zh": "前翅叫“覆翅”，狭长、革质。静息时它们像屋顶一样向后折在腹部上，护住下面薄薄的后翅 [S10]。\n\n这个种的覆翅黄褐色，有少数不明显的暗斑 [S1]。\n\n飞行时覆翅向外展开，和后翅一起拍动。"
    },
    "primitive": {
     "kind": "wing",
@@ -4273,12 +4273,12 @@
    },
    "group": "legs-wings",
    "summary": {
-    "en": "Thin fan-folding wings that do most of the flying",
-    "zh": "膜质后翅，像扇子一样折叠，主要靠它飞"
+    "en": "Thin wings that fold like a fan under the forewings",
+    "zh": "膜质后翅，像扇子一样折起，收在覆翅下"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "The hind wings are thin membranes stiffened by veins. At rest they fold lengthwise into pleats, like a paper fan, and lie under the forewings; a muscle at the wing base pulls them back and folds them [S10].\n\nIn this species the base of the hind wing is red and the rest is dark brown [S1].\n\nThe model folds and unfolds them on a slow loop; the red base is drawn as a second, smaller fan on the same hinge.",
+    "zh": "后翅是靠翅脉撑开的薄膜。静息时它们像纸扇一样纵向折成褶，收在覆翅下面；翅基的一块肌肉把它们向后拉并折起 [S10]。\n\n这个种的后翅基部红色，其余部分暗褐色 [S1]。\n\n模型让后翅缓慢地循环展开、收起；红色的基部是画在同一铰链上的第二把小扇子。"
    },
    "primitive": {
     "kind": "wing",
@@ -4575,12 +4575,12 @@
    },
    "group": "digestive",
    "summary": {
-    "en": "Make saliva that wets the food",
-    "zh": "分泌唾液，润湿食物"
+    "en": "Make saliva that wets the chewed food",
+    "zh": "分泌唾液，润湿嚼碎的食物"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "Two clusters of small grape-like sacs in the front of the thorax, each draining into a duct. The ducts join and open at the base of the tongue-like hypopharynx inside the mouth [S7].\n\nSaliva wets the food as it is chewed and starts digestion: some of the food stored in the crop is digested by saliva before it reaches the midgut [S8].\n\nOur salivary glands are in the head; a grasshopper's lie in its thorax.",
+    "zh": "胸部前段两串像葡萄一样的小泡，各连一根导管。两根导管汇合后开口在口里像舌头的“舌”的基部 [S7]。\n\n唾液在咀嚼时润湿食物，并开始消化：存在嗉囊里的食物，有一部分在到达中肠之前就被唾液消化了 [S8]。\n\n我们的唾液腺在头里；蚱蜢的在胸部。"
    },
    "primitive": {
     "kind": "sweep",
@@ -5027,8 +5027,8 @@
     "zh": "把嚼碎的食物送进身体"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "The pharynx behind the mouth and the narrow oesophagus after it form the first part of the foregut. Rings of muscle in the wall squeeze the food backwards [S7].\n\nThe foregut is lined with cuticle, the same material as the outer skeleton, so its lining is shed and replaced at every moult [S10].\n\nIt passes between the brain above and the suboesophageal ganglion below, through the ring of nerves that joins them [S7].",
+    "zh": "口后面的咽和其后细窄的食道，组成前肠的第一段。管壁上一圈圈的肌肉把食物往后挤 [S7]。\n\n前肠内壁衬着一层表皮，和外骨骼是同一种材料，所以每次蜕皮时这层衬里也随着脱掉、换新 [S10]。\n\n它从上面的脑和下面的咽下神经节之间穿过，穿过连接两者的神经环 [S7]。"
    },
    "primitive": {
     "kind": "sweep",
@@ -5117,8 +5117,8 @@
     "zh": "暂存食物的薄壁囊"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "A wide, thin-walled bag filling much of the thorax. Chewed leaf collects here and is stored for a while before moving on [S7].\n\nDigestion already begins in the crop: saliva swallowed with the food, and digestive juices that flow forward from the midgut, act on it there [S8]. In the desert locust much of one sugar-splitting enzyme is found in the foregut [S10].\n\nIn the model the food particles slow down as they pass through the crop.",
+    "zh": "一只宽大、壁薄的囊，占了胸部的一大部分。嚼碎的叶片先聚在这里，存一段时间再往后送 [S7]。\n\n消化在嗉囊里就开始了：随食物咽下的唾液，和从中肠倒流过来的消化液，都在这里起作用 [S8]。沙漠蝗的一种分解糖类的酶，大部分就在前肠里 [S10]。\n\n模型里，食物颗粒经过嗉囊时会放慢。"
    },
    "primitive": {
     "kind": "sweep",
@@ -5185,12 +5185,12 @@
    },
    "group": "digestive",
    "summary": {
-    "en": "Toothed muscular bag that grinds food further",
-    "zh": "带齿的肌肉囊，进一步磨碎食物"
+    "en": "Muscular valve that lets food from the crop into the midgut",
+    "zh": "嗉囊与中肠之间短而有力的肌肉阀"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "The last part of the foregut: a short section with a strong muscle wall. In grasshoppers its lining has six lengthwise folds with small teeth of cuticle [S10].\n\nIt works as a valve, controlling how fast food passes from the crop into the midgut, and in some insects its teeth help break up the food [S10].\n\nIn the model its six inner ridges show when the body is cut open along the middle.",
+    "zh": "前肠的最后一段：很短，管壁肌肉发达。蝗虫前胃的内壁有六条纵褶，上面有表皮形成的小齿 [S10]。\n\n它像一个阀门，控制食物从嗉囊进入中肠的快慢；在一些昆虫里，这些齿还能把食物弄碎 [S10]。\n\n沿正中线剖开时，模型里能看到它内壁的六条脊。"
    },
    "primitive": {
     "kind": "sweep",
@@ -5243,12 +5243,12 @@
    },
    "group": "digestive",
    "summary": {
-    "en": "Six finger-like pouches that help digest food",
-    "zh": "六个指状囊，帮助消化、吸收"
+    "en": "Finger-like pouches that help digest and absorb food",
+    "zh": "指状的囊，帮助消化和吸收"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "A ring of finger-like pouches, closed at one end, around the front of the midgut. In grasshoppers each has a forward arm, lying along the crop, and a backward arm, lying along the midgut [S8].\n\nInsects usually have four, six or eight such pouches [S10]; the model shows six. In the desert locust they are important for taking sugars and some amino acids into the body [S10].\n\nThey have no exact match in the human gut; they work like extra stretches of small intestine.",
+    "zh": "中肠前端一圈一端封闭的指状囊。蝗虫的每个盲囊都有一条向前的臂，贴着嗉囊，和一条向后的臂，贴着中肠 [S8]。\n\n昆虫一般有四、六或八个胃盲囊 [S10]；模型画了六个。沙漠蝗吸收糖和一部分氨基酸，主要靠它们 [S10]。\n\n人的消化道里没有完全对应的结构；它们的作用像多出来的几段小肠。"
    },
    "primitive": {
     "kind": "sweep",
@@ -5326,8 +5326,8 @@
     "zh": "消化和吸收养分的主要地方"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "The middle part of the gut, sometimes called the stomach. Its cells release digestive enzymes and take in the digested food, which passes straight into the blood in the body cavity [S7, S10].\n\nUnlike the foregut and hindgut it has no cuticle lining. A thin sleeve called the peritrophic membrane wraps the food and protects the gut wall [S10].\n\nIn the desert locust, young nymphs use about 78 % of the dry weight of their food, but fifth-stage nymphs only about 35 %; the rest leaves in the droppings [S10].",
+    "zh": "消化道的中段，有时也叫“胃”。它的细胞分泌消化酶，并吸收消化好的养分，养分直接进入体腔里的血液 [S7, S10]。\n\n和前肠、后肠不同，它没有表皮衬里。一层叫“围食膜”的薄套子包住食物，保护肠壁 [S10]。\n\n沙漠蝗的一龄若虫能利用食物干重的约 78 %，五龄若虫只有约 35 %；其余的随粪便排出 [S10]。"
    },
    "primitive": {
     "kind": "sweep",
@@ -5400,11 +5400,11 @@
    "group": "digestive",
    "summary": {
     "en": "Collect waste from the blood into the gut",
-    "zh": "从血淋巴里收集废物，排进肠道"
+    "zh": "从血液里收集废物，排进肠道"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "Fine tubes that open into the gut where the midgut meets the hindgut and trail through the body cavity, bathed in blood. Their cells take wastes out of the blood and pass them into the gut [S7].\n\nThe desert locust has about 250, arranged in twelve groups. They are not all present at hatching: new ones are added in every nymphal stage [S12]. The model draws 24, a schematic number.\n\nThey do the work our kidneys do, but they empty into the gut rather than into a bladder, so wastes leave with the droppings.",
+    "zh": "一根根细管，开口在中肠与后肠交界处，在体腔里盘绕，泡在血液中。它们的细胞从血液里取出废物，送进肠道 [S7]。\n\n沙漠蝗约有 250 根，分成 12 组。它们不是一孵出来就齐全的：每一龄若虫都会长出新的 [S12]。模型画了 24 根，是示意数目。\n\n它们做的是我们的肾的工作，但不是排进膀胱，而是排进肠道，废物随粪便一起排出。"
    },
    "primitive": {
     "kind": "sweep",
@@ -5629,8 +5629,8 @@
     "zh": "回收水分，形成粪粒"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "The narrow front part of the hindgut, the ileum and colon, carries the remains of the food and the wastes from the Malpighian tubules towards the rectum [S8].\n\nLike the foregut it is lined with cuticle, which is shed at each moult [S10].\n\nLittle digestion takes place here; the rectum behind it takes most of the water back [S10].",
+    "zh": "后肠前段细窄的回肠和结肠，把食物残渣和马氏管送来的废物运往直肠 [S8]。\n\n它和前肠一样衬着表皮，每次蜕皮时一起脱掉 [S10]。\n\n这里几乎不再消化食物；后面的直肠把大部分水吸回 [S10]。"
    },
    "primitive": {
     "kind": "sweep",
@@ -5724,8 +5724,8 @@
     "zh": "再回收水和盐，排出干燥的粪粒"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "The last part of the gut. Its wall has thick pads of tall cells, the rectal pads, that take water, salts and amino acids back into the blood [S10]. Insects usually have six such pads [S10].\n\nMuscles around the rectum squeeze its contents, helping to press water out of the droppings [S9]. The droppings, called frass, leave as dry pellets.\n\nOn land, saving water is important for a small animal; the rectum is where most of it is saved.",
+    "zh": "消化道的最后一段。肠壁上有由高细胞组成的厚垫，叫“直肠垫”，把水、盐和氨基酸吸回血液 [S10]。昆虫一般有六个直肠垫 [S10]。\n\n直肠周围的肌肉挤压里面的东西，帮助把粪便里的水挤出来 [S9]。粪便以干燥的颗粒排出。\n\n对生活在陆地上的小动物来说，保住水分很重要；大部分水是在直肠里回收的。"
    },
    "primitive": {
     "kind": "sweep",
@@ -5961,8 +5961,8 @@
     "zh": "处理眼和触角传来的信息"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "The brain sits in the head above the oesophagus. Large optic lobes reach out to the compound eyes, and nerves run to the antennae and the simple eyes [S7].\n\nIt starts and coordinates behaviour, but it is a less complete control centre than a vertebrate brain: much of the control of movement lies in the ganglia along the body [S7].\n\nThe model shows the brain as two lobes with the optic lobes; its many internal parts are not drawn.",
+    "zh": "脑在头里、食道的上方。两侧大大的视叶伸向复眼，另有神经通往触角和单眼 [S7]。\n\n它发起并协调各种行为；但和脊椎动物的脑相比，它不算完整的控制中心：控制运动的工作很大一部分由身体里的神经节承担 [S7]。\n\n模型把脑画成两叶加视叶，里面众多的结构没有画。"
    },
    "primitive": {
     "kind": "sweep",
@@ -6231,8 +6231,8 @@
     "zh": "食道下方的神经中心，控制口器"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "The second nerve centre in the head, below the oesophagus. A ring of nerves around the oesophagus joins it to the brain [S7].\n\nIt formed from the fused nerve centres of the three mouthpart segments, and its nerves go to the mandibles, maxillae and labium [S10].\n\nFrom here the ventral nerve cord runs back along the floor of the body.",
+    "zh": "头里的第二个神经中心，在食道下方。绕过食道的一圈神经把它和脑连在一起 [S7]。\n\n它由三个口器体节的神经节愈合而成，神经通往上颚、下颚和下唇 [S10]。\n\n腹神经索就从这里沿着身体底部向后延伸。"
    },
    "primitive": {
     "kind": "sweep",
@@ -6373,8 +6373,8 @@
     "zh": "控制足和翅的神经中心"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "One ganglion in each thorax segment. Each controls the legs of its segment, and the two rear ones also the wings [S7].\n\nThe hindmost is the largest: in grasshoppers it is made of the ganglion of the third thorax segment fused with those of the first three abdominal segments [S7]. It works the hind legs and the hind wings [S7].\n\nBecause each ganglion has much local control, an insect whose head has been removed can still walk for a time [S7].",
+    "zh": "每个胸节各有一个神经节。每个神经节控制本节的足，后面两个还控制翅 [S7]。\n\n最后一个最大：蝗虫的后胸神经节由后胸神经节和腹部前三节的神经节愈合而成 [S7]。它控制后足和后翅 [S7]。\n\n由于每个神经节都能在很大程度上就地控制，昆虫失去头以后，还能走动一段时间 [S7]。"
    },
    "primitive": {
     "kind": "sweep",
@@ -6562,8 +6562,8 @@
     "zh": "控制呼吸和产卵的神经中心"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "In grasshoppers separate ganglia lie in the fourth to eighth abdominal segments [S7]. The model draws four small ganglia and a larger last one.\n\nThey control the muscles of the abdomen, including those used to pump air and to dig and lay eggs. In the locust the rhythm of the breathing strokes probably comes from the hindmost thoracic ganglion, which signals to every abdominal segment at once [S10].\n\nHow many ganglia fuse together differs between kinds of insect [S10].",
+    "zh": "蝗虫腹部第 4 到第 8 节各有独立的神经节 [S7]。模型画了四个小神经节和一个较大的末端神经节。\n\n它们控制腹部的肌肉，包括泵气用的肌肉和挖洞、产卵用的肌肉。蝗虫呼吸动作的节律，很可能来自后胸神经节，由它同时向腹部各节发出信号 [S10]。\n\n神经节愈合的程度，不同种类的昆虫各不相同 [S10]。"
    },
    "primitive": {
     "kind": "sweep",
@@ -6856,8 +6856,8 @@
     "zh": "沿腹面串起各神经节的成对神经索"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "Two parallel nerve strands that run along the floor of the body from the suboesophageal ganglion to the last abdominal ganglion, joining the ganglia like beads on a string [S7].\n\nSignals travel along it between the brain and the ganglia, and between one segment and the next [S7].\n\nOur spinal cord runs along the back and is a single hollow tube; an insect's nerve cord lies along the belly, below the gut.",
+    "zh": "两条平行的神经索，沿身体底部从咽下神经节一直通到最后一个腹神经节，把各神经节像珠子一样串起来 [S7]。\n\n脑与各神经节之间、一个体节与下一个体节之间的信号都沿着它传递 [S7]。\n\n我们的脊髓沿着背部，是一根中空的管；昆虫的神经索沿着腹面，在消化道的下方。"
    },
    "primitive": {
     "kind": "sweep",
@@ -7214,8 +7214,8 @@
     "zh": "把胸部的指令送到足的肌肉"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "Each thoracic ganglion sends nerves into the legs of its segment. They carry commands out to the muscles and bring back signals from sense organs on the legs [S7, S10].\n\nIn the hind leg its branches reach the extensor and flexor muscles that work the jump.\n\nThe model draws only the main nerve of each leg.",
+    "zh": "每个胸神经节都把神经送进本节的足。它们把指令送到肌肉，也把足上感觉器的信号带回来 [S7, S10]。\n\n后足的神经分支通进股节，到达控制起跳的伸肌和屈肌。\n\n模型只画了每条足的主神经。"
    },
    "primitive": {
     "kind": "sweep",
@@ -7417,8 +7417,8 @@
     "zh": "把鼓膜的振动变成神经信号"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "A small sense organ, Müller's organ, attached to the inner face of the eardrum. When sound makes the membrane vibrate, its sensory cells fire [S7].\n\nIn locusts it has about 80 sensory cells; the largest group of them responds best to sounds of about 3,000 vibrations a second [S30]. Its nerve runs to the hindmost thoracic ganglion [S10].\n\nGrasshoppers hear with these organs on the abdomen, not on the head.",
+    "zh": "贴在鼓膜内侧的一个小感觉器，叫“米勒氏器”。声音使鼓膜振动时，它的感觉细胞就会发出信号 [S7]。\n\n蝗虫的这个器官约有 80 个感觉细胞，其中最大的一组对每秒约 3,000 次振动的声音最敏感 [S30]。它的神经通往后胸神经节 [S10]。\n\n蚱蜢用腹部的这对器官听声音，而不是用头。"
    },
    "primitive": {
     "kind": "sweep",
@@ -7556,12 +7556,12 @@
    },
    "group": "breathing-circulation",
    "summary": {
-    "en": "Breathing holes along the sides; open and close",
+    "en": "Breathing holes along the sides; they open and close",
     "zh": "体侧的呼吸孔，可开可关"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "Ten pairs of small breathing holes: two on the thorax and eight on the abdomen [S7, S8]. Each has a valve that can close it, which saves water [S10].\n\nIn locusts and grasshoppers air usually goes in through the front spiracles and out through the rear ones, so it flows through the body in one direction. In locusts the first four pairs mostly take air in and the rear pairs let it out; exactly which ones open changes with activity [S24, S10].\n\nThe first abdominal spiracle sits in the same hollow as the eardrum; the spiracles become smaller towards the tail [S9].",
+    "zh": "十对小呼吸孔：胸部两对，腹部八对 [S7, S8]。每个气门都有能关闭的阀，可以减少水分散失 [S10]。\n\n蝗虫的空气通常从前面的气门进、从后面的气门出，所以在体内单向流动。蝗虫的前四对气门主要吸气，后面的主要呼气；具体哪几对打开，随活动而变 [S24, S10]。\n\n腹部第一对气门和鼓膜在同一个凹陷里；越往尾部，气门越小 [S9]。"
    },
    "primitive": {
     "kind": "sweep",
@@ -8347,11 +8347,11 @@
    "group": "breathing-circulation",
    "summary": {
     "en": "Air tubes that carry air straight to the tissues",
-    "zh": "把空气直接送到全身组织的管道"
+    "zh": "把空气直接送到组织的管道"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "From each spiracle an air tube, a trachea, runs into the body. Long trunks along the sides join them, and they branch into finer and finer tubes that reach every tissue [S7].\n\nSo oxygen reaches the cells through air-filled tubes, not in the blood [S7, S10]. A spiral thickening of cuticle in the wall keeps each tube from collapsing, like the wire in a vacuum-cleaner hose [S10].\n\nThe model draws only the main trunks and the cross-links in each segment; the real system has many thousands of branches.",
+    "zh": "每个气门都连着一根气管通进体内。体侧的纵干把它们连起来，再分出越来越细的分支，通到每一处组织 [S7]。\n\n所以氧气是经过充满空气的管子送到细胞的，而不是靠血液 [S7, S10]。管壁里螺旋状的表皮加厚让管子不会瘪下去，就像吸尘器软管里的钢丝 [S10]。\n\n模型只画了主干和每节的横连；真实的气管有成千上万的分支。"
    },
    "primitive": {
     "kind": "sweep",
@@ -9315,8 +9315,8 @@
     "zh": "薄壁气囊，像风箱一样帮助换气"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "Thin-walled, balloon-like swellings of the tracheae in the thorax and abdomen. When the abdomen is squeezed they are emptied; when it relaxes they fill again, so air is pumped in and out [S10].\n\nIn American desert locusts held still at about 22 °C, the air sacs fill about 48 times a minute [S26]. In this simulation the resting rate is 45 a minute [S35].\n\nWe have lungs where air and blood meet; a grasshopper has no lungs, and its air sacs only move air.",
+    "zh": "胸部和腹部里气管膨大成的薄壁气囊，像气球。腹部被挤压时它们排空，放松时重新充满，空气就这样被泵进泵出 [S10]。\n\n约 22℃时，静止的美洲沙漠蝗每分钟气囊充气约 48 次 [S26]。在这个模拟里，静息时每分钟 45 次 [S35]。\n\n我们的肺是空气与血液相遇的地方；蚱蜢没有肺，它的气囊只负责推动空气。"
    },
    "primitive": {
     "kind": "sweep",
@@ -9695,12 +9695,12 @@
    },
    "group": "breathing-circulation",
    "summary": {
-    "en": "Tube-shaped heart along the back; pumps forward",
-    "zh": "背上的管状心脏，把血淋巴向前泵"
+    "en": "Tube-shaped heart along the back; pumps blood forward",
+    "zh": "背上的管状心脏，把血液向前泵"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "A thin tube along the middle of the back. The rear part, in the abdomen, is the heart: blood enters it through pairs of valved openings, the ostia, and waves of contraction push it forwards. The front part, the aorta, has no openings and carries the blood into the head [S7, S10].\n\nThe blood pours out in the head and seeps back through the body cavity around the organs. In adult American desert locusts at about 25 °C the heart beats about 76–80 times a minute [S25]. In this simulation it beats 80 times a minute at rest and 110 after activity [S35].\n\nOur heart is in the chest and pumps blood round closed vessels; a grasshopper's heart lies along its back and the blood flows freely.",
+    "zh": "沿背中线的一根细管。后段在腹部，是心脏：血液从两侧成对、带瓣的开口“心门”进入，一阵阵收缩波把它向前推。前段叫主动脉，没有开口，把血液送进头部 [S7, S10]。\n\n血液在头部涌出，再从体腔里绕过各器官慢慢流回。约 25℃时，美洲沙漠蝗成虫的心跳约每分钟 76–80 次 [S25]。在这个模拟里，静息时每分钟 80 次，活动后 110 次 [S35]。\n\n我们的心在胸腔里，把血液泵进封闭的血管；蚱蜢的心沿着背部，血液在体内自由流动。"
    },
    "primitive": {
     "kind": "sweep",
@@ -9979,8 +9979,8 @@
     "zh": "伸直小腿的大肌，跳跃的动力"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "The large muscle that fills most of the hind femur. Its many short fibres are set at an angle to a central tendon, like the barbs of a feather, which gives great force over a short distance [S8, S13].\n\nIn the desert locust it can pull with a force of more than 15 newtons [S13], several hundred times the weight of an adult of about 2 grams [S19], but it takes about 0.3 seconds to build up that force [S13]. That is far too slow to throw the body directly, so the muscle loads springs instead.\n\nThe model draws it as one smooth mass; the real muscle is made of many bundles.",
+    "zh": "占据后足股节大部分空间的大块肌肉。它许多短短的肌纤维斜着排在中间的肌腱两侧，像羽毛的羽枝，能在很短的距离里产生很大的力 [S8, S13]。\n\n在沙漠蝗身上，它能产生超过 15 牛的拉力 [S13]，是约 2 克重的成虫体重的几百倍 [S19]，但要约 0.3 秒才能把力建立起来 [S13]。这太慢了，不能直接把身体抛出去，所以它先给“弹簧”上弦。\n\n模型把它画成一整块；真实的肌肉由许多肌束组成。"
    },
    "primitive": {
     "kind": "sweep",
@@ -10106,8 +10106,8 @@
     "zh": "收起小腿，并在起跳前锁住膝"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "A smaller muscle under the extensor in the femur. It pulls the shin in against the thigh [S15].\n\nWhen the shin is fully folded, the flexor's tendon slides over a small bump of cuticle inside the knee and catches, giving it a large advantage over the extensor. Both muscles then contract together for about 0.3–0.6 seconds while the springs are loaded. When the flexor relaxes, the catch lets go and the leg straightens [S14, S15].\n\nThe flexor's peak force is only about 0.7 newtons, about a twentieth of the extensor's [S15].",
+    "zh": "股节里伸肌下方一块较小的肌肉，把小腿收向大腿 [S15]。\n\n小腿完全收起时，屈肌腱滑过膝部内面的一个小突起并卡住，这时它对伸肌占了很大的杠杆优势。接着两块肌肉一起收缩约 0.3–0.6 秒，把“弹簧”上满。屈肌一放松，卡扣松开，后足就伸直了 [S14, S15]。\n\n屈肌的最大力只有约 0.7 牛，约为伸肌的二十分之一 [S15]。"
    },
    "primitive": {
     "kind": "sweep",
@@ -10218,8 +10218,8 @@
     "zh": "使胸部变形，带动翅上下拍动"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "Two sets of large muscles fill the wing box of the thorax: muscles running from front to back along the top, and muscles running from the roof down to the floor [S10].\n\nThese big muscles are not attached to the wings. They move them by squeezing and stretching the thorax, which rocks the wings at their hinges; smaller muscles attached to the wing bases also help [S10].\n\nIn the migratory locust all the flight muscles are already present in the nymphs, before there are wings to work [S10].",
+    "zh": "胸部的“翅盒”里塞满两组大肌肉：沿顶部前后走向的一组，和从顶到底竖直走向的一组 [S10]。\n\n这两组大肌肉并不连在翅上。它们靠挤压、拉伸胸部，使翅在铰链处上下摆动；连在翅基上的小肌肉也起作用 [S10]。\n\n飞蝗的若虫还没有能用的翅时，全部飞行肌就已经有了 [S10]。"
    },
    "primitive": {
     "kind": "sweep",
@@ -10395,8 +10395,8 @@
     "zh": "产生卵"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "Two ovaries lie in the abdomen above the gut. Each is a bundle of egg tubes, the ovarioles, in which eggs grow one behind another; the tubes lead into the oviducts and out at the base of the ovipositor [S10].\n\nLarger grasshoppers usually have more ovarioles; locusts have about 100 in all [S10]. The model draws 12 on each side, a schematic number. In the laboratory, female Valanga laid on average 158 eggs each [S3].\n\nThe ovaries fill more and more of the abdomen as the eggs ripen.",
+    "zh": "两个卵巢位于腹部、消化道的上方。每个卵巢由一束卵巢管组成，卵在管里一个接一个地发育；卵巢管通进输卵管，开口在产卵器的基部 [S10]。\n\n体型越大的蝗虫，卵巢管通常越多；飞蝗一类总共约 100 条 [S10]。模型每侧画了 12 条，是示意数目。在实验室里，黑角瓦兰蝗雌虫平均每只产卵 158 粒 [S3]。\n\n卵逐渐成熟时，卵巢会占据腹部越来越多的空间。"
    },
    "primitive": {
     "kind": "sweep",
@@ -10959,8 +10959,8 @@
     "zh": "产在湿土里的卵，顶上有泡沫塞封口"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "The female digs a hole in moist soil with her ovipositor and lays a batch of eggs at the bottom, coated in froth that hardens into a spongy plug. The plug leaves air spaces for the eggs and for the young when they hatch [S7].\n\nFor Valanga, pods are described as brown, about 1–3 cm long, with about 70–100 eggs [S5]; in Java a female's first pod holds about 90 and later ones fewer, the last only about 10 [S4]. In this model the pod and the number of eggs are schematic.\n\nEgg-pods can be eaten by ants and the larvae of blister beetles, and small Scelio wasps lay their own eggs inside the grasshopper eggs [S4, S5].",
+    "zh": "雌虫用产卵器在湿土里挖一个洞，把一批卵产在洞底，再盖上泡沫；泡沫变硬后成了海绵状的塞子，给卵和孵出的若虫留下空气 [S7]。\n\n关于黑角瓦兰蝗，资料描述的卵荚为褐色，长约 1–3 cm，每荚约 70–100 粒 [S5]；在爪哇，雌虫的第一个卵荚约 90 粒，后面的越来越少，最后一个只有约 10 粒 [S4]。本模型里卵荚的大小和卵数是示意。\n\n卵荚会被蚂蚁和芫菁（一种甲虫）的幼虫吃掉；细小的黑卵蜂会把自己的卵产在蚱蜢的卵里 [S4, S5]。"
    },
    "primitive": {
     "kind": "sweep",
@@ -11338,12 +11338,12 @@
    },
    "group": "growth",
    "summary": {
-    "en": "Hatchling: no wings, big head",
+    "en": "Hatchling: no wings, large head",
     "zh": "刚孵出：没有翅，头大"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "A newly hatched nymph wriggles up through the froth plug to the surface and sheds a thin embryonic skin as it emerges [S7]. It looks like a small adult with a large head, short antennae with fewer rings, and no wings [S7, S10].\n\nIt starts to feed at once, on the same kinds of plants as the adult. The stages in this tray are drawn at the same enlargement as the adult, but their sizes are schematic: no published measurements for each stage of Valanga were found [S35].\n\nNymphs of this species are usually green, sometimes brown, pink, red or yellow [S6].",
+    "zh": "刚孵出的若虫穿过泡沫塞爬到地面，一边出来一边蜕掉一层薄薄的胚胎皮 [S7]。它像一只小成虫：头大，触角短、环节少，没有翅 [S7, S10]。\n\n它马上开始取食，吃的植物和成虫一样。标本盘里各龄与成虫按同样的倍数放大，但大小是示意：没有找到黑角瓦兰蝗各龄体长的公开测量 [S35]。\n\n这个种的若虫通常是绿色，有时是褐色、粉红色、红色或黄色 [S6]。"
    },
    "primitive": {
     "kind": "sweep",
@@ -12091,8 +12091,8 @@
     "zh": "第一次蜕皮后长大"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "After its first moult the nymph is larger and its body a little longer in proportion. Between moults the hard plates do not grow; only the soft membranes between the abdominal segments stretch [S7].\n\nThe stages in this tray are drawn at the same enlargement as the adult, but their sizes are schematic: no published measurements for each stage of Valanga were found [S35].",
+    "zh": "第一次蜕皮后，若虫变大，身体也相对长一些。两次蜕皮之间，坚硬的骨片不会长大，只有腹部各节之间柔软的膜能撑开 [S7]。\n\n标本盘里各龄与成虫按同样的倍数放大，但大小是示意：没有找到黑角瓦兰蝗各龄体长的公开测量 [S35]。"
    },
    "primitive": {
     "kind": "sweep",
@@ -12840,8 +12840,8 @@
     "zh": "体侧出现小翅芽"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "Small wing pads, outgrowths of the back plates of the second and third thorax segments, appear on the sides. They grow a little at each moult but cannot be used to fly [S10].\n\nThe antennae gain more rings at each moult [S10].\n\nThe stages in this tray are drawn at the same enlargement as the adult, but their sizes are schematic: no published measurements for each stage of Valanga were found [S35].",
+    "zh": "中胸和后胸背板的边缘长出小小的翅芽，位于体侧。它们每蜕一次皮就长大一点，但不能用来飞 [S10]。\n\n触角每蜕一次皮都会增加环节 [S10]。\n\n标本盘里各龄与成虫按同样的倍数放大，但大小是示意：没有找到黑角瓦兰蝗各龄体长的公开测量 [S35]。"
    },
    "primitive": {
     "kind": "sweep",
@@ -13715,8 +13715,8 @@
     "zh": "翅芽在体侧长大"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "The wing pads are larger but still point down along the sides of the thorax [S10].\n\nThe nymph stages of Valanga together last about 80 days [S4, S5].\n\nThe stages in this tray are drawn at the same enlargement as the adult, but their sizes are schematic: no published measurements for each stage of Valanga were found [S35].",
+    "zh": "翅芽更大了，但仍然朝下贴在胸部两侧 [S10]。\n\n黑角瓦兰蝗的若虫期总共约 80 天 [S4, S5]。\n\n标本盘里各龄与成虫按同样的倍数放大，但大小是示意：没有找到黑角瓦兰蝗各龄体长的公开测量 [S35]。"
    },
    "primitive": {
     "kind": "sweep",
@@ -14590,8 +14590,8 @@
     "zh": "翅芽翻到背上"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "In grasshoppers the wing pads twist at the third-from-last moult and turn up onto the back, where they stay for the last nymph stages [S10].\n\nThey still cannot be used to fly.\n\nThe stages in this tray are drawn at the same enlargement as the adult, but their sizes are schematic: no published measurements for each stage of Valanga were found [S35].",
+    "zh": "蝗虫的翅芽在倒数第三次蜕皮时扭转、翻到背上，在最后几龄一直保持这个位置 [S10]。\n\n它们还是不能用来飞。\n\n标本盘里各龄与成虫按同样的倍数放大，但大小是示意：没有找到黑角瓦兰蝗各龄体长的公开测量 [S35]。"
    },
    "primitive": {
     "kind": "sweep",
@@ -15451,12 +15451,12 @@
    },
    "group": "growth",
    "summary": {
-    "en": "Last stage before the adult moult",
-    "zh": "变成成虫前的最后一龄"
+    "en": "Sixth stage; in males the last before the adult",
+    "zh": "六龄；雄虫在这一龄之后就变成成虫"
    },
    "detail": {
-    "en": "Draft: the detail text, its numbers and sources are written in the facts step (docs/14 §3.3, §9.2).",
-    "zh": "草稿：细看文字、数字与来源在事实步骤里写（docs/14 §3.3、§9.2）。"
+    "en": "In the laboratory Valanga nymphs normally pass through six stages in males and seven in females [S3]. The tray shows six; a female like the adult in this model would moult once more before the final moult.\n\nAt the final moult the adult climbs out of the old skin with soft, crumpled wings, which expand and harden [S10].\n\nThe stages in this tray are drawn at the same enlargement as the adult, but their sizes are schematic: no published measurements for each stage of Valanga were found [S35].",
+    "zh": "在实验室里，黑角瓦兰蝗雄若虫通常有六龄，雌若虫有七龄 [S3]。标本盘画了六龄；像本模型这样的雌虫，在最后一次蜕皮之前还要再蜕一次。\n\n最后一次蜕皮时，成虫从旧皮里爬出来，翅软软地皱着，随后展开、变硬 [S10]。\n\n标本盘里各龄与成虫按同样的倍数放大，但大小是示意：没有找到黑角瓦兰蝗各龄体长的公开测量 [S35]。"
    },
    "primitive": {
     "kind": "sweep",
@@ -16315,8 +16315,8 @@
     "zh": "真实长度：0 到 70 毫米"
    },
    "detail": {
-    "en": "Scenery: a 70 mm ruler on the ground at the model's enlargement (1 model unit = 25 mm), its zero at the front of the head.",
-    "zh": "场景件：按模型放大倍数（1 模型单位 = 25 毫米）画的 70 毫米尺，零点对齐头的前端。"
+    "en": "Scenery: a 70 mm ruler on the ground at the model's enlargement (1 model unit = 25 mm), its zero at the front of the head. The adult in this model is 64 mm long [S35].",
+    "zh": "场景件：按模型放大倍数（1 模型单位 = 25 毫米）画的 70 毫米尺，零点对齐头的前端。本模型的成虫长 64 mm [S35]。"
    },
    "primitive": {
     "kind": "bevelBox",
@@ -18476,8 +18476,8 @@
     "zh": "腹部泵气"
    },
    "unit": "/min",
-   "idle": 20,
-   "run": 40,
+   "idle": 45,
+   "run": 80,
    "lag": 20,
    "decimals": 0
   },
@@ -18501,17 +18501,6 @@
    "idle": 0,
    "run": 3,
    "lag": 2,
-   "decimals": 1
-  },
-  {
-   "key": {
-    "en": "Jump force",
-    "zh": "伸肌力"
-   },
-   "unit": "N",
-   "idle": 0,
-   "run": 14,
-   "lag": 0.4,
    "decimals": 1
   }
  ]

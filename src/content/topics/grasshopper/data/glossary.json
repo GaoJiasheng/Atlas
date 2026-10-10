@@ -1,3 +1,309 @@
 {
-  "terms": []
+  "terms": [
+    {
+      "id": "exoskeleton",
+      "term": {
+        "en": "Exoskeleton",
+        "zh": "外骨骼"
+      },
+      "definition": {
+        "en": "A hard skeleton on the outside of the body. It protects the soft parts inside and the muscles pull on it from within. It cannot stretch, so it has to be shed and replaced as the animal grows.",
+        "zh": "长在身体外面的硬壳，起骨骼的作用：保护里面柔软的器官，肌肉从里面附着在它上面。它不能撑大，所以动物长大时必须把它蜕掉、换上新的。"
+      },
+      "see": [
+        "moult"
+      ]
+    },
+    {
+      "id": "moult",
+      "term": {
+        "en": "Moult",
+        "zh": "蜕皮"
+      },
+      "definition": {
+        "en": "Shedding the old exoskeleton. A new, larger one forms underneath first; it is soft at first and hardens over the next hours.",
+        "zh": "脱去旧的外骨骼。新的、更大的外骨骼先在里面长好；刚蜕皮时它是软的，几个小时后才变硬。"
+      },
+      "see": [
+        "exoskeleton",
+        "instar"
+      ]
+    },
+    {
+      "id": "instar",
+      "term": {
+        "en": "Instar",
+        "zh": "龄"
+      },
+      "definition": {
+        "en": "One stage of a young insect's life, between two moults. A first-instar nymph has just hatched; each moult starts the next instar.",
+        "zh": "幼虫或若虫在两次蜕皮之间的一个阶段。一龄若虫是刚孵出的，每蜕一次皮就进入下一龄。"
+      },
+      "see": [
+        "moult",
+        "nymph"
+      ]
+    },
+    {
+      "id": "nymph",
+      "term": {
+        "en": "Nymph",
+        "zh": "若虫"
+      },
+      "definition": {
+        "en": "The young of an insect such as a grasshopper or cockroach. It looks like a small adult without working wings and lives and feeds in the same way.",
+        "zh": "蚱蜢、蟑螂这类昆虫的幼体。它像一只没有能飞的翅的小成虫，生活方式和吃的东西也和成虫一样。"
+      },
+      "see": [
+        "instar",
+        "incomplete-metamorphosis"
+      ]
+    },
+    {
+      "id": "incomplete-metamorphosis",
+      "term": {
+        "en": "Incomplete metamorphosis",
+        "zh": "不完全变态"
+      },
+      "definition": {
+        "en": "A life cycle with three stages, egg, nymph and adult, and no pupa. The young change gradually with each moult. Butterflies and beetles have four stages instead: egg, larva, pupa and adult.",
+        "zh": "只有卵、若虫、成虫三个阶段、没有蛹的生活史。幼体每蜕一次皮就变得更像成虫。蝴蝶、甲虫则有四个阶段：卵、幼虫、蛹、成虫。"
+      },
+      "see": [
+        "nymph"
+      ]
+    },
+    {
+      "id": "compound-eye",
+      "term": {
+        "en": "Compound eye",
+        "zh": "复眼"
+      },
+      "definition": {
+        "en": "An eye made of thousands of small units, each with its own lens, pointing in slightly different directions. Together they build up one picture and are very good at detecting movement.",
+        "zh": "由几千个小眼组成的眼。每个小眼有自己的晶体，朝向略有不同，合起来拼成一幅图像，对运动特别敏感。"
+      },
+      "see": [
+        "ocellus"
+      ]
+    },
+    {
+      "id": "ocellus",
+      "term": {
+        "en": "Ocellus",
+        "zh": "单眼"
+      },
+      "definition": {
+        "en": "A small simple eye with a single lens. It does not form a sharp picture but senses changes in brightness. Grasshoppers have three.",
+        "zh": "只有一个晶体的简单小眼。它看不清图像，但能感受明暗的变化。蚱蜢有三个。"
+      },
+      "see": [
+        "compound-eye"
+      ]
+    },
+    {
+      "id": "mandible",
+      "term": {
+        "en": "Mandible",
+        "zh": "上颚"
+      },
+      "definition": {
+        "en": "One of a pair of hard jaws at the sides of the mouth. In grasshoppers they move sideways, towards and away from each other, to cut and grind plants.",
+        "zh": "口两侧一对坚硬的颚。蚱蜢的上颚左右相向开合，用来切断、磨碎植物。"
+      }
+    },
+    {
+      "id": "femur",
+      "term": {
+        "en": "Femur and tibia",
+        "zh": "股节与胫节"
+      },
+      "definition": {
+        "en": "The third and fourth parts of an insect's leg, roughly its thigh and shin. A grasshopper's hind femur holds the large muscles used for jumping.",
+        "zh": "昆虫足的第三节和第四节，大致相当于大腿和小腿。蚱蜢后足的股节里装着跳跃用的大块肌肉。"
+      },
+      "see": [
+        "resilin"
+      ]
+    },
+    {
+      "id": "resilin",
+      "term": {
+        "en": "Resilin",
+        "zh": "节肢弹性蛋白"
+      },
+      "definition": {
+        "en": "A rubber-like protein found in insects. It can be bent or stretched and then spring back, giving back almost all the energy put into it.",
+        "zh": "昆虫体内一种像橡胶的蛋白质。它被压弯或拉长后能弹回原样，几乎把储存的能量全部释放出来。"
+      },
+      "see": [
+        "femur"
+      ]
+    },
+    {
+      "id": "stridulation",
+      "term": {
+        "en": "Stridulation",
+        "zh": "摩擦发声"
+      },
+      "definition": {
+        "en": "Making sound by rubbing one part of the body against another, like a comb drawn over an edge. Many grasshoppers rub a hind leg against a forewing.",
+        "zh": "用身体的一部分摩擦另一部分来发出声音，像梳子刮过边缘。许多蝗虫用后足摩擦前翅。"
+      },
+      "see": [
+        "tympanum"
+      ]
+    },
+    {
+      "id": "crop",
+      "term": {
+        "en": "Crop",
+        "zh": "嗉囊"
+      },
+      "definition": {
+        "en": "A thin-walled bag in the front part of the gut where chewed food is stored before it is digested.",
+        "zh": "前肠里一个薄壁的囊，嚼碎的食物先存在这里，再往后送去消化。"
+      },
+      "see": [
+        "gastric-caeca"
+      ]
+    },
+    {
+      "id": "gastric-caeca",
+      "term": {
+        "en": "Gastric caeca",
+        "zh": "胃盲囊"
+      },
+      "definition": {
+        "en": "Finger-shaped pouches, closed at one end, around the front of the midgut. They add surface where food is digested and taken into the body.",
+        "zh": "中肠前端一圈一端封闭的指状囊。它们增加了消化食物、吸收养分的面积。"
+      },
+      "see": [
+        "crop",
+        "malpighian-tubules"
+      ]
+    },
+    {
+      "id": "malpighian-tubules",
+      "term": {
+        "en": "Malpighian tubules",
+        "zh": "马氏管"
+      },
+      "definition": {
+        "en": "Thin tubes that float in the body fluid and take wastes out of it, then empty them into the gut. They do the job our kidneys do.",
+        "zh": "漂在体液里的细管，从体液中收集废物，再排进肠道。它们的作用相当于我们的肾。"
+      },
+      "see": [
+        "haemolymph"
+      ]
+    },
+    {
+      "id": "spiracle",
+      "term": {
+        "en": "Spiracle",
+        "zh": "气门"
+      },
+      "definition": {
+        "en": "One of the small breathing holes along the sides of an insect's body. Each can open and close.",
+        "zh": "昆虫身体两侧的小呼吸孔，每个都能开能关。"
+      },
+      "see": [
+        "trachea"
+      ]
+    },
+    {
+      "id": "trachea",
+      "term": {
+        "en": "Trachea (insect)",
+        "zh": "气管（昆虫）"
+      },
+      "definition": {
+        "en": "An air tube that runs from a spiracle into the body and branches into finer and finer tubes, carrying air right up to the cells.",
+        "zh": "从气门通进身体的空气管道，越分越细，把空气一直送到细胞旁边。"
+      },
+      "see": [
+        "spiracle"
+      ]
+    },
+    {
+      "id": "haemolymph",
+      "term": {
+        "en": "Haemolymph",
+        "zh": "血淋巴"
+      },
+      "definition": {
+        "en": "An insect's blood. It is colourless or pale yellow and carries food, wastes, hormones and blood cells, but hardly any oxygen.",
+        "zh": "昆虫的血液。它无色或淡黄色，运送养分、废物、激素和血细胞，但几乎不运送氧气。"
+      },
+      "see": [
+        "open-circulation",
+        "dorsal-vessel"
+      ]
+    },
+    {
+      "id": "open-circulation",
+      "term": {
+        "en": "Open circulation",
+        "zh": "开放式循环"
+      },
+      "definition": {
+        "en": "A circulation in which the blood leaves the vessels and flows freely around the organs in the body cavity before returning to the heart.",
+        "zh": "血液离开血管、在体腔里自由地流过各器官，再回到心脏的循环方式。"
+      },
+      "see": [
+        "dorsal-vessel",
+        "haemolymph"
+      ]
+    },
+    {
+      "id": "dorsal-vessel",
+      "term": {
+        "en": "Dorsal vessel",
+        "zh": "背血管"
+      },
+      "definition": {
+        "en": "The tube along an insect's back that pumps the blood forwards. The back part, with openings in its sides, is the heart; the front part, without openings, is the aorta.",
+        "zh": "昆虫背上的一条管子，把血液向前泵。后段侧面有开口，叫心脏；前段没有开口，叫主动脉。"
+      },
+      "see": [
+        "open-circulation"
+      ]
+    },
+    {
+      "id": "ganglion",
+      "term": {
+        "en": "Ganglion",
+        "zh": "神经节"
+      },
+      "definition": {
+        "en": "A small knot of nerve cells. In insects a chain of ganglia runs along the belly, and each one controls the part of the body around it.",
+        "zh": "神经细胞聚成的小结。昆虫腹面有一串神经节，每个神经节控制它附近的身体部分。"
+      }
+    },
+    {
+      "id": "tympanum",
+      "term": {
+        "en": "Tympanum",
+        "zh": "鼓膜（昆虫）"
+      },
+      "definition": {
+        "en": "A thin membrane stretched like a drum skin that vibrates when sound reaches it. A grasshopper has one on each side of the first segment of its abdomen.",
+        "zh": "像鼓面一样绷紧的薄膜，声音传来时会振动。蚱蜢腹部第一节的两侧各有一个。"
+      },
+      "see": [
+        "stridulation"
+      ]
+    },
+    {
+      "id": "ovipositor",
+      "term": {
+        "en": "Ovipositor",
+        "zh": "产卵器（产卵瓣）"
+      },
+      "definition": {
+        "en": "The egg-laying organ at the tip of a female insect's abdomen. A female grasshopper's has four short hard prongs that push the soil apart to dig a hole for her eggs.",
+        "zh": "雌性昆虫腹部末端的产卵器官。雌蚱蜢的产卵器是四片短而硬的瓣，靠把泥土撑开挖出产卵的洞。"
+      }
+    }
+  ]
 }

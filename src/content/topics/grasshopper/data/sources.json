@@ -1,1 +1,471 @@
-{ "sources": [] }
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": {
+        "en": "Yin Z.-L., Yang J.-C., Deng Y., Chen H.-Y. & Chen J.-Y. (2025). First record of Valanga from China (Acrididae: Cyrtacanthacridinae), with a key to Chinese genera of Cyrtacanthacridinae. The Indochina Entomologist 1(74): 745–752, doi:10.70590/ice.2025.01.74 (CC BY 4.0). Valanga nigricornis nigricornis: body 44.20–65.31 mm, female 63.92–65.31 mm; body yellowish or greenish brown; median carina of the pronotum distinct, cut deeply by three transverse sulci; prosternal process conical, slightly acute, curved backward in side view; tegmina yellow-brown with few inconspicuous black spots; hind femur yellowish brown with 2–3 dark bands; hind tibia with 10 inner and 8 outer spines, no external apical spine; hind wing dark brown with a red base. Subfamily Cyrtacanthacridinae; distribution includes Singapore.",
+        "zh": "殷等（2025）。瓦兰蝗属中国新纪录（蝗科：刺胸蝗亚科），附中国刺胸蝗亚科分属检索表。《The Indochina Entomologist》1(74): 745–752，doi:10.70590/ice.2025.01.74（CC BY 4.0）。黑角瓦兰蝗指名亚种：体长 44.20–65.31 mm，雌 63.92–65.31 mm；体黄褐或绿褐；前胸背板中隆线明显，被三条横沟深切；前胸腹板突圆锥形、端略尖、侧看向后弯；覆翅黄褐，有少数不明显黑斑；后足股节黄褐，有 2–3 条暗带；后胫节内侧 10 刺、外侧 8 刺，无外端刺；后翅暗褐、基部红。属刺胸蝗亚科；分布含新加坡。"
+      },
+      "url": "https://www.indochinaentomologist.com/uploadfile/202510/9e30d9efca21d7f.pdf",
+      "note": {
+        "en": "Read in full 2026-10-10. Based on one male and one female from Hainan plus photographs, so the ranges are narrow. The identification key (couplet 5) gives different tibial spine counts for the genus (8–10 inner, 11–12 outer); this topic uses the species diagnosis (10 inner, 8 outer). No separate male length is printed; 44.20 mm is presumably the male.",
+        "zh": "2026-10-10 读全文。依据海南的一雄一雌标本和照片，所以范围很窄。检索表第 5 条给属的后胫节刺数不同（内 8–10、外 11–12）；本主题用种的鉴别特征（内 10、外 8）。文中没有单列雄虫体长；44.20 mm 应是雄虫。"
+      }
+    },
+    {
+      "id": "S2",
+      "text": {
+        "en": "Orthoptera Species File (Cigliano M.M. et al.), Valanga nigricornis (Burmeister, 1838): original combination Acridium nigricorne Burmeister, 1838; 23 valid subspecies; neotype of the nominate subspecies, a male in the Natural History Museum, London, from Singapore.",
+        "zh": "直翅目物种档案（Orthoptera Species File），Valanga nigricornis (Burmeister, 1838)：原始组合 Acridium nigricorne Burmeister, 1838；有效亚种 23 个；指名亚种的新模标本为一头雄虫，产地新加坡，藏伦敦自然历史博物馆。"
+      },
+      "url": "https://orthoptera.speciesfile.org/otus/819251",
+      "note": {
+        "en": "Read 2026-10-10 (species page and the page of the nominate subspecies, otus/819253). Singapore is the type locality by neotype.",
+        "zh": "2026-10-10 读取（种页与指名亚种页 otus/819253）。新加坡是新模标本的产地，即模式产地。"
+      }
+    },
+    {
+      "id": "S3",
+      "text": {
+        "en": "Kok M.L. (1971). Laboratory studies on the life-history of Valanga nigricornis nigricornis (Burm.) (Orth., Acrididae). Bulletin of Entomological Research 60(3): 439–446, doi:10.1017/S0007485300040360. In the laboratory at a mean of about 28 °C and 80 % relative humidity the life cycle took 6½–8½ months; nymphs normally had six instars in males and seven in females; females laid a mean of 158 eggs.",
+        "zh": "Kok（1971）。黑角瓦兰蝗指名亚种生活史的实验室研究。《Bulletin of Entomological Research》60(3): 439–446，doi:10.1017/S0007485300040360。实验室平均约 28℃、相对湿度 80 %：整个生活史 6½–8½ 个月；若虫通常雄 6 龄、雌 7 龄；雌虫平均产卵 158 粒。"
+      },
+      "url": "https://doi.org/10.1017/S0007485300040360",
+      "note": {
+        "en": "Abstract only (publisher record), read 2026-10-10. Laboratory figures; durations in the field may differ.",
+        "zh": "只读到摘要（出版社记录），2026-10-10。实验室数据，野外历期可能不同。"
+      }
+    },
+    {
+      "id": "S4",
+      "text": {
+        "en": "Kalshoven L.G.E. (1981). The Pests of Crops in Indonesia, revised and translated by P.A. van der Laan. Ichtiar Baru–Van Hoeve, Jakarta, pp. 51–55, Valanga nigricornis. For the Javanese teak pest (subspecies melanocornis): female 58–71 mm and male 49–63 mm from head to wing tip; eggs laid in brown pods 2–3 cm long, in holes 5–8 cm deep filled with hardening foam; a female's first pod holds about 90 eggs, later pods fewer, the last about 10; nymphs develop in about 80 days in the field; females live 3–4 months, males 4–5 months; eggs rest through the dry season, so there is one generation a year; egg pods are damaged by ants, blister-beetle larvae (Mylabris, Epicauta) and Scelio wasps; hosts include teak, Albizia, Acacia, coconut, banana and mango.",
+        "zh": "Kalshoven（1981）。《印度尼西亚作物害虫》，van der Laan 修订并英译，雅加达，第 51–55 页，黑角瓦兰蝗条。对象是爪哇的柚木害虫（melanocornis 亚种）：头到翅端雌 58–71 mm、雄 49–63 mm；卵产在长 2–3 cm 的褐色卵荚里，洞深 5–8 cm，填满会变硬的泡沫；雌虫第一个卵荚约 90 粒，后面的越来越少，最后一个约 10 粒；野外若虫期约 80 天；雌虫活 3–4 个月、雄虫 4–5 个月；卵在旱季休眠，所以一年一代；卵荚会被蚂蚁、芫菁幼虫（Mylabris、Epicauta）和黑卵蜂（Scelio）破坏；寄主有柚木、合欢、金合欢、椰子、香蕉、杧果等。"
+      },
+      "url": "https://books.google.com/books?id=nVEgAQAAMAAJ",
+      "note": {
+        "en": "Read as Google Books snippets, 2026-10-10; the full book was not seen. Most figures are for the Javanese subspecies melanocornis, not the Singapore nominate form, and the length is to the wing tip. The one-generation-a-year pattern depends on Java's dry season; Singapore has no long dry season and is not inferred from it.",
+        "zh": "2026-10-10 通过 Google 图书片段读取，未见全书。大部分数字针对爪哇的 melanocornis 亚种，不是新加坡的指名亚种；体长量到翅端。一年一代取决于爪哇的旱季；新加坡没有长旱季，不据此推断。"
+      }
+    },
+    {
+      "id": "S5",
+      "text": {
+        "en": "Muniappan R., Shepard B.M., Carner G.R. & Ooi P.A.-C. (2012). Arthropod Pests of Horticultural Crops in Tropical Asia. CABI, Wallingford, p. 107, Valanga nigricornis: polyphagous, attacking avocado, coconut, rubber and oil palm; eggs laid in the soil in brown pods 1–3 cm long containing 70–100 eggs; egg stage about two months; nymphal stages about 80 days; life cycle about 6.5–8.5 months; eggs parasitised by Scelio spp. and nymphs infected by the muscardine fungus Metarhizium; severe defoliation in certain seasons.",
+        "zh": "Muniappan 等（2012）。《热带亚洲园艺作物节肢动物害虫》，CABI，第 107 页，黑角瓦兰蝗：多食性，为害鳄梨、椰子、橡胶和油棕；卵产在土中，卵荚褐色，长 1–3 cm，每荚 70–100 粒；卵期约两个月；若虫期约 80 天；生活史约 6.5–8.5 个月；卵被黑卵蜂寄生，若虫会感染绿僵菌；某些季节严重吃光叶片。"
+      },
+      "url": "https://books.google.com/books?id=kY_pr8kIPXgC",
+      "note": {
+        "en": "Read as Google Books search-inside snippets, 2026-10-10; the book cites Ooi (1988) and Khoo et al. (1991) for these figures. The egg stage here (about two months) is much shorter than the dormant eggs of Java in S4.",
+        "zh": "2026-10-10 通过 Google 图书书内检索片段读取；书中这些数字引自 Ooi（1988）和 Khoo 等（1991）。这里的卵期（约两个月）比 S4 里爪哇休眠的卵短得多。"
+      }
+    },
+    {
+      "id": "S6",
+      "text": {
+        "en": "Lee Kong Chian Natural History Museum, National University of Singapore, Digital Nature Archive of Singapore: Valanga nigricornis. The largest grasshopper in Singapore, 39–70 mm; common; found throughout Singapore and its offshore islands (mapped records include Sentosa, St John's Island and Sungei Buloh Wetland Reserve); nymphs usually green and brown, sometimes pink, red or yellow; often regarded as a pest by horticulturists, and a potential serious pest in oil palm and rubber plantations.",
+        "zh": "新加坡国立大学李光前自然历史博物馆，新加坡数字自然档案：黑角瓦兰蝗。新加坡最大的蝗虫，39–70 mm；常见；遍布新加坡本岛和离岛（地图上的记录包括圣淘沙、圣约翰岛和双溪布洛湿地保护区）；若虫通常绿色和褐色，有时粉红、红或黄色；园艺工作者常把它当作害虫，在油棕和橡胶种植园里被视为可能的严重害虫。"
+      },
+      "url": "https://web.archive.org/web/20150412151805/http://lkcnhm.nus.edu.sg/dna/organisms/details/811",
+      "note": {
+        "en": "Read 2026-10-10 from the Internet Archive copy of 12 April 2015; the original page is no longer online.",
+        "zh": "2026-10-10 读取互联网档案馆 2015 年 4 月 12 日的存档；原网页已下线。"
+      }
+    },
+    {
+      "id": "S7",
+      "text": {
+        "en": "Snodgrass R.E. (1930). Insects, Their Ways and Means of Living. Smithsonian Scientific Series 5, New York (public domain). Grasshopper chapter: lengthwise section and alimentary canal of a grasshopper (figs 67, 68), head and mouthparts (fig. 66); the crop stores food; Malpighian tubules take nitrogenous wastes from the blood and act like kidneys; insects usually have ten pairs of spiracles, two on the thorax and eight on the abdomen; tracheae carry air directly to the tissues; the blood is a colourless or slightly yellow liquid in the body cavity, kept moving by a dorsal heart with an aorta; the ganglia have much independence, so the head of an insect may be cut off and the rest can still walk; the metathoracic ganglion includes the ganglia of the first three abdominal segments, with separate ganglia in the fourth to eighth; tympanal organs on the first abdominal segment; egg pods with froth that hardens into a spongy cover, from half a dozen to 150 eggs a pod; the first moult sheds the embryonic skin as the young emerge.",
+        "zh": "Snodgrass（1930）。《昆虫：它们的生活方式》，史密森科学丛书第 5 卷（公有领域）。蚱蜢一章：蚱蜢纵剖面与消化道（图 67、68）、头与口器（图 66）；嗉囊暂存食物；马氏管从血液中取出含氮废物，作用如肾；昆虫一般有十对气门，胸部两对、腹部八对；气管把空气直接送到组织；血液是体腔里无色或略带黄色的液体，靠背上的心脏和主动脉推动；各神经节相当独立，昆虫的头被切去后其余部分仍能行走；后胸神经节包含腹部前三节的神经节，第四到第八节有各自的神经节；鼓膜听器在腹部第一节；卵荚的泡沫变硬成海绵状外壳，每荚从五六粒到 150 粒；第一次蜕皮是若虫出土时脱去胚胎皮。"
+      },
+      "url": "https://archive.org/details/insectstheirways05snod",
+      "note": {
+        "en": "Read in full (scanned text), 2026-10-10. The anatomy is of North American grasshoppers; it is used for the general acridid body plan.",
+        "zh": "2026-10-10 读全文（扫描文字）。解剖对象是北美的蝗虫，用于蝗科共同的身体构造。"
+      }
+    },
+    {
+      "id": "S8",
+      "text": {
+        "en": "Snodgrass R.E. (1935). Principles of Insect Morphology. McGraw-Hill, New York. Grasshopper (Dissosteira carolina) examples throughout: hypognathous head with the mouthparts pointing down; legs of coxa, trochanter, femur, tibia, tarsus and pretarsus, the acridid tarsus with three fused basal subsegments and pads beneath; the hind femur's levator (extensor) muscle fills about the dorsal three-quarters of the femur, attached between the herringbone ridges of its walls; gastric caeca usually two to six, each divided in the Acrididae into an anterior and a posterior branch; food in the crop is digested by saliva and by juices passing forward from the midgut; the ileum and colon of the hindgut; summaries of studies showing that in grasshoppers the first four spiracles are usually inspiratory and the last six expiratory, and that the breathing rate of female Melanoplus femur-rubrum rose from 5.8 a minute at 49 °F (about 9 °C) to 26.6 a minute at 80 °F (about 27 °C) (Lee 1925).",
+        "zh": "Snodgrass（1935）。《昆虫形态学原理》，纽约。全书以蝗虫（Dissosteira carolina）为例：下口式头，口器朝下；足由基节、转节、股节、胫节、跗节和前跗节组成，蝗科的跗节基部三节愈合，下面有垫；后足股节的提肌（伸肌）占股节腔的背侧约四分之三，附着在壁上人字形脊之间；胃盲囊一般二到六个，蝗科的每个分成前、后两支；嗉囊里的食物被唾液和从中肠向前流的消化液消化；后肠的回肠和结肠；综述了蝗虫前四对气门通常吸气、后六对呼气的研究，以及一种蝗虫（Melanoplus femur-rubrum）雌虫的呼吸频率从 49 °F（约 9℃）时每分钟 5.8 次升到 80 °F（约 27℃）时 26.6 次（Lee 1925）。"
+      },
+      "url": "https://archive.org/details/in.ernet.dli.2015.50045",
+      "note": {
+        "en": "Read in full (scanned text), 2026-10-10. The spiracle pattern is a summary of older studies (McArthur 1929, Fraenkel 1932); the book notes it varies.",
+        "zh": "2026-10-10 读全文（扫描文字）。气门的吸呼方式是对较早研究（McArthur 1929、Fraenkel 1932）的综述，书中说明它会变化。"
+      }
+    },
+    {
+      "id": "S9",
+      "text": {
+        "en": "Snodgrass R.E. (1935). The abdominal mechanisms of a grasshopper. Smithsonian Miscellaneous Collections 94(6): 1–89 (public domain). On Dissosteira carolina: tympanal organs on the sides of the first abdominal tergum, with the first abdominal spiracles in the tympanal hollows; the abdominal spiracles become successively smaller to the eighth; segments joined by ample membranes; the eleventh segment forms the epiproct and paraprocts around the anus, with the cerci arising from the membranes between them; the female ovipositor of four short, strongly sclerotised prongs is a digging organ that works by forcibly separating its valves, compressing the earth outwards; muscles around the rectal sac may press water from the faeces.",
+        "zh": "Snodgrass（1935）。蝗虫腹部的机制。《史密森杂集》94(6): 1–89（公有领域）。以 Dissosteira carolina 为对象：鼓膜听器在腹部第一节背板两侧，腹部第一对气门就在鼓膜凹陷里；腹部气门往后逐个变小，到第八对；各节之间有宽大的膜；第十一节形成肛门周围的肛上板和肛侧板，尾须从两者之间的膜上长出；雌虫产卵器由四片短而高度骨化的瓣组成，是挖掘器官，靠把瓣用力撑开、向四周挤压泥土工作；直肠囊周围的肌肉可把水从粪便里挤出。"
+      },
+      "url": "https://archive.org/details/smithsonianmisce941936smit",
+      "note": {
+        "en": "Read in full (scanned text of volume 94), 2026-10-10.",
+        "zh": "2026-10-10 读全文（第 94 卷扫描文字）。"
+      }
+    },
+    {
+      "id": "S10",
+      "text": {
+        "en": "Chapman R.F. (1969). The Insects: Structure and Function, 1st edn. English Universities Press, London. Used for: compound eyes and ocelli (ocelli perceive changes in light intensity); antennal annuli increase at each moult (a first-instar Dociostaurus has 13, the adult 25) and antennal sensilla for touch, smell, taste, humidity and temperature; locusts vibrate their palps on possible food to test it by taste before biting; the labrum bears sensilla; the acridid proventriculus has six longitudinal folds with small cuticular teeth and acts as a valve; foregut and hindgut lined with cuticle shed at each moult; in Schistocerca most α-glucosidase is in the foregut lumen, sugars and amino acids are absorbed especially in the midgut caeca; midgut usually with four, six or eight caeca; peritrophic membrane; usually six rectal pads that reabsorb water, salts and amino acids; fifth-instar Schistocerca use 35 % and first instars 78 % of the dry weight of their food; ten pairs of spiracles at most, two thoracic and eight abdominal; tracheae kept open by spiral taenidia; abdominal ventilation, probably driven from the metathoracic ganglion in the locust; insect haemolymph is unimportant in oxygen transport; heart with valved ostia and an aorta, contraction waves from the back pumping blood forwards; heart rates of insects from 14 to 150 beats a minute, raised by temperature and activity; the auditory nerve of the locust ear runs to the metathoracic ganglion; most Acridoidea produce sound by rubbing the hind femora against the forewings; leathery forewings (tegmina) protect the hind wings, which are folded into longitudinal pleats by a muscle at the wing base; indirect flight muscles move the wings by distorting the thorax; in Locusta all flight muscles are present in the nymph; acridid wing buds twist and turn up onto the back at the antepenultimate moult; ovarioles about 100 in large locusts; insects are poikilothermic and their metabolism rises with temperature.",
+        "zh": "Chapman（1969）。《昆虫：结构与功能》第 1 版，伦敦。用于：复眼与单眼（单眼感受光强的变化）；触角环节每次蜕皮增加（一种蝗虫 Dociostaurus 一龄 13 节、成虫 25 节），触角上的感觉器管触觉、嗅觉、味觉、湿度和温度；蝗虫碰到可能的食物时快速用须点触、尝味后才咬；上唇有感觉器；蝗科前胃有六条带小表皮齿的纵褶，起阀门作用；前肠、后肠衬表皮，每次蜕皮时脱去；沙漠蝗的 α-葡萄糖苷酶大多在前肠腔里，糖和氨基酸主要在中肠盲囊吸收；中肠一般有四、六或八个盲囊；围食膜；直肠垫一般六个，回收水、盐和氨基酸；沙漠蝗五龄若虫利用食物干重的 35 %、一龄 78 %；气门最多十对，胸部两对、腹部八对；气管靠螺旋状的螺旋丝撑开；腹部通气，在蝗虫中很可能由后胸神经节驱动；昆虫血淋巴在运氧上不重要；心脏有带瓣的心门和主动脉，收缩波从后向前推动血液；昆虫心率从每分钟 14 次到 150 次，随温度和活动升高；蝗虫耳的听神经通往后胸神经节；多数蝗总科靠后足股节摩擦前翅发声；革质的前翅（覆翅）保护后翅，后翅由翅基的一块肌肉纵向折成褶；间接飞行肌靠使胸部变形带动翅；飞蝗若虫已有全部飞行肌；蝗科翅芽在倒数第三次蜕皮时扭转、翻到背上；大型蝗虫卵巢管约 100 条；昆虫是变温动物，代谢随温度升高。"
+      },
+      "url": "https://archive.org/details/in.ernet.dli.2015.218436",
+      "note": {
+        "en": "Read in full (scanned text), 2026-10-10. The first edition is used because its full text could be read; later editions (5th edn, 2013) cover the same points in more detail. The heart-rate range is from Beard (1953) as cited there.",
+        "zh": "2026-10-10 读全文（扫描文字）。用第 1 版是因为能读到全文；后来的版本（2013 年第 5 版）讲得更详细。心率范围是书中引 Beard（1953）的数据。"
+      }
+    },
+    {
+      "id": "S11",
+      "text": {
+        "en": "Simmons P.J., Sztarker J. & Rind F.C. (2013). Looming detection by identified visual interneurons during larval development of the locust Locusta migratoria. Journal of Experimental Biology 216: 2266–2275, doi:10.1242/jeb.083360. Citing earlier counts: in the desert locust the number of facets rises from about 2,500 in the first instar to 9,000–9,500 in the adult; an adult Locusta eye has about 8,250 facets (their own estimate 8,134), against about 2,200 in the first instar.",
+        "zh": "Simmons 等（2013）。飞蝗若虫发育过程中视觉中间神经元对逼近物的检测。《实验生物学杂志》216: 2266–2275，doi:10.1242/jeb.083360。引用早期计数：沙漠蝗的小眼数从一龄约 2,500 个增加到成虫 9,000–9,500 个；飞蝗成虫每只复眼约 8,250 个（作者自己估计 8,134 个），一龄约 2,200 个。"
+      },
+      "url": "https://doi.org/10.1242/jeb.083360",
+      "note": {
+        "en": "Read 2026-10-10. The desert-locust counts are from Bernard (1937) and Rafi & Burtt (1974) as cited there. No count is published for Valanga.",
+        "zh": "2026-10-10 读取。沙漠蝗的计数是文中引 Bernard（1937）和 Rafi & Burtt（1974）的。黑角瓦兰蝗没有公开的计数。"
+      }
+    },
+    {
+      "id": "S12",
+      "text": {
+        "en": "Savage A.A. (1956). The development of the Malpighian tubules of Schistocerca gregaria (Orthoptera). Quarterly Journal of Microscopical Science s3-97: 599–615, doi:10.1242/jcs.s3-97.40.599. The desert locust has about 250 Malpighian tubules in twelve groups; 6 primary and 12 secondary tubules form in the embryo, and each of the five nymphal instars adds more (means 25, 51, 88, 63 and 6).",
+        "zh": "Savage（1956）。沙漠蝗马氏管的发育。《显微科学季刊》s3-97: 599–615，doi:10.1242/jcs.s3-97.40.599。沙漠蝗约有 250 根马氏管，分 12 组；胚胎期形成 6 根初级管和 12 根次级管，五个若虫龄每龄再增加（平均 25、51、88、63、6 根）。"
+      },
+      "url": "https://doi.org/10.1242/jcs.s3-97.40.599",
+      "note": {
+        "en": "Abstract read on the publisher's page, 2026-10-10.",
+        "zh": "2026-10-10 在出版社页面读到摘要。"
+      }
+    },
+    {
+      "id": "S13",
+      "text": {
+        "en": "Bennet-Clark H.C. (1975). The energetics of the jump of the locust Schistocerca gregaria. Journal of Experimental Biology 63: 53–83, doi:10.1242/jeb.63.1.53. A jump needs 9 mJ (males) or 11 mJ (females); the semilunar processes of each hind femur store 4 mJ and the extensor apodeme a further 3 mJ, 14 mJ in both legs; the extensor tibiae muscle produces a maximum force of over 15 N at 30 °C and takes 0.3 s to reach it; its peak power is 36 mW while the jump needs 0.75 W; the jump impulse lasts 25–30 ms and a take-off velocity of 3.2 m/s follows a peak acceleration of 180 m/s²; the major part of the jump energy is stored before the jump.",
+        "zh": "Bennet-Clark（1975）。沙漠蝗跳跃的能量学。《实验生物学杂志》63: 53–83，doi:10.1242/jeb.63.1.53。一跳需要 9 mJ（雄）或 11 mJ（雌）；每条后足股节的半月形突储存 4 mJ，伸肌腱再储存 3 mJ，两条腿共 14 mJ；胫节伸肌在 30℃时最大力超过 15 N，要 0.3 秒才达到；肌肉的峰值功率 36 mW，跳跃需要 0.75 W；蹬地持续 25–30 毫秒，峰值加速度 180 m/s² 后起跳速度达 3.2 m/s；跳跃的大部分能量是起跳前储存的。"
+      },
+      "url": "https://doi.org/10.1242/jeb.63.1.53",
+      "note": {
+        "en": "Abstract read on the publisher's page, 2026-10-10; the full text is paywalled. Peak acceleration 180 m/s² is about 18 times the acceleration due to gravity. Later measurements give lower take-off speeds (S18, S19).",
+        "zh": "2026-10-10 在出版社页面读到摘要，全文需付费。180 m/s² 约为重力加速度的 18 倍。后来的测量给出较低的起跳速度（S18、S19）。"
+      }
+    },
+    {
+      "id": "S14",
+      "text": {
+        "en": "Heitler W.J. & Burrows M. (1977). The locust jump. I. The motor programme. Journal of Experimental Biology 66: 203–219, doi:10.1242/jeb.66.1.203. The jump (and kick) has three stages: initial flexion of the hind tibiae; co-contraction, in which flexor and extensor motor neurons fire together at high frequency for 300–600 ms; and the trigger, when the flexor is inhibited and the tibia extends. Without the trigger the jump or kick is aborted.",
+        "zh": "Heitler & Burrows（1977）。蝗虫的跳跃 I：运动程序。《实验生物学杂志》66: 203–219，doi:10.1242/jeb.66.1.203。跳跃（和踢腿）分三个阶段：后胫节先屈起；共收缩，屈肌和伸肌的运动神经元同时高频放电 300–600 毫秒；触发，屈肌被抑制，胫节伸直。没有触发，跳跃或踢腿就中止。"
+      },
+      "url": "https://doi.org/10.1242/jeb.66.1.203",
+      "note": {
+        "en": "Abstract read (Europe PMC), 2026-10-10. The recordings are of defensive kicks, which the authors take to use the same programme as jumps.",
+        "zh": "2026-10-10 读到摘要（Europe PMC）。记录的是防御性踢腿，作者认为与跳跃用的是同一套程序。"
+      }
+    },
+    {
+      "id": "S15",
+      "text": {
+        "en": "Heitler W.J., University of St Andrews, 'How grasshoppers jump' (teaching pages by the author of the original lock study, Heitler 1974, J. Comp. Physiol. 89: 93–104). The extensor tibiae can exert about 14 N and the flexor about 0.7 N; the flexor tendon slides over a cuticular lump in the knee and, at full flexion, gains a large mechanical advantage over the extensor, locking the joint; a desert locust can jump up to about a metre in length and about 25 cm high, accelerating at close to 20 g.",
+        "zh": "Heitler，圣安德鲁斯大学“蚱蜢怎样跳”教学网页（作者即膝部锁扣原始研究 Heitler 1974 的作者）。胫节伸肌可产生约 14 N 的力，屈肌约 0.7 N；屈肌腱滑过膝内一个表皮小突起，完全屈起时对伸肌占很大的杠杆优势，把关节锁住；沙漠蝗跳远可达约 1 米，跳高约 25 厘米，加速度接近 20 g。"
+      },
+      "url": "https://www.st-andrews.ac.uk/~wjh/jumping/",
+      "note": {
+        "en": "Read in full 2026-10-10 (pages flexor, leg-work, muscle-speed and perform). A secondary source by the same author; the 1974 paper itself could not be opened. The 14 N figure is close to Bennet-Clark's 'over 15 N' (S13).",
+        "zh": "2026-10-10 读全文（flexor、leg-work、muscle-speed、perform 各页）。同一作者写的二手资料；1974 年原论文打不开。14 N 与 Bennet-Clark 的“超过 15 N”（S13）相近。"
+      }
+    },
+    {
+      "id": "S16",
+      "text": {
+        "en": "Burrows M. (2016). Development and deposition of resilin in energy stores for locust jumping. Journal of Experimental Biology 219: 2449–2457, doi:10.1242/jeb.138941. Desert locusts store jump energy in the paired semilunar processes at each hind knee and in the extensor tendons; nymphs of all instars jump; resilin is laid down within each instar and discarded at each moult; in adults the resilin layer of the semilunar processes thickens fourfold by four weeks after the final moult.",
+        "zh": "Burrows（2016）。蝗虫跳跃储能结构中节肢弹性蛋白的发育与沉积。《实验生物学杂志》219: 2449–2457，doi:10.1242/jeb.138941。沙漠蝗把跳跃的能量储存在每个后膝两侧成对的半月形突和伸肌腱里；各龄若虫都会跳；节肢弹性蛋白在每一龄内沉积、每次蜕皮时脱掉；成虫最后一次蜕皮后四周，半月形突的弹性蛋白层增厚到四倍。"
+      },
+      "url": "https://doi.org/10.1242/jeb.138941",
+      "note": {
+        "en": "Abstract read (Europe PMC), 2026-10-10.",
+        "zh": "2026-10-10 读到摘要（Europe PMC）。"
+      }
+    },
+    {
+      "id": "S17",
+      "text": {
+        "en": "Burrows M. & Sutton G.P. (2012). Locusts use a composite of resilin and hard cuticle as an energy store for jumping and kicking. Journal of Experimental Biology 215: 3501–3512, doi:10.1242/jeb.071993. The semilunar processes are a composite of hard cuticle and resilin and store about half the energy needed for a kick.",
+        "zh": "Burrows & Sutton（2012）。蝗虫用节肢弹性蛋白与硬表皮的复合结构储存跳跃和踢腿的能量。《实验生物学杂志》215: 3501–3512，doi:10.1242/jeb.071993。半月形突由硬表皮和节肢弹性蛋白复合而成，储存踢腿所需能量的约一半。"
+      },
+      "url": "https://doi.org/10.1242/jeb.071993",
+      "note": {
+        "en": "Abstract read, 2026-10-10.",
+        "zh": "2026-10-10 读到摘要。"
+      }
+    },
+    {
+      "id": "S18",
+      "text": {
+        "en": "Katz S.L. & Gosline J.M. (1993). Ontogenetic scaling of jump performance in the African desert locust (Schistocerca gregaria). Journal of Experimental Biology 177: 81–111, doi:10.1242/jeb.177.1.81. From first instars to adults, measured on a force plate: nymphs take off at 0.9–1.2 m/s, about the same whatever their size, and jump on average 20–30 cm; adults take off about twice as fast, about 2.5 m/s, which matches their minimum flight speed.",
+        "zh": "Katz & Gosline（1993）。沙漠蝗跳跃能力随发育的标度关系。《实验生物学杂志》177: 81–111，doi:10.1242/jeb.177.1.81。从一龄到成虫用测力板测量：若虫起跳速度 0.9–1.2 m/s，大小不同也差不多，平均跳远 20–30 cm；成虫起跳速度约快一倍，约 2.5 m/s，与它们的最低飞行速度相当。"
+      },
+      "url": "https://doi.org/10.1242/jeb.177.1.81",
+      "note": {
+        "en": "Abstract read (OpenAlex record), 2026-10-10.",
+        "zh": "2026-10-10 读到摘要（OpenAlex 记录）。"
+      }
+    },
+    {
+      "id": "S19",
+      "text": {
+        "en": "Rogers S.M., Cullen D.A., Labonte D., Sutton G.P., Vanden Broeck J. & Burrows M. (2025). RNAi of the elastomeric protein resilin reduces jump velocity and resilience to damage in locusts. Proceedings of the National Academy of Sciences 122(1): e2415625121, doi:10.1073/pnas.2415625121 (open access). Adult desert locusts 12–14 days after the final moult weighed 1.80 ± 0.34 g; maximum take-off velocity 2.54 ± 0.31 m/s, mean 2.19 m/s; about half the elastic energy is stored in the semilunar processes and half in the tendon; small animals commonly jump with catapult-like mechanisms.",
+        "zh": "Rogers 等（2025）。用 RNA 干扰减少节肢弹性蛋白会降低蝗虫的起跳速度和抗损伤能力。《美国国家科学院院刊》122(1): e2415625121，doi:10.1073/pnas.2415625121（开放获取）。最后一次蜕皮后 12–14 天的沙漠蝗成虫体重 1.80 ± 0.34 g；最大起跳速度 2.54 ± 0.31 m/s，平均 2.19 m/s；弹性能量约一半储存在半月形突、一半在肌腱；小动物普遍用弹射式机制起跳。"
+      },
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11725850/",
+      "note": {
+        "en": "Read in full 2026-10-10. Its 50/50 split of the stored energy differs from Bennet-Clark's 4 mJ to 3 mJ (about 57/43, S13); the text gives both.",
+        "zh": "2026-10-10 读全文。它给出的储能各半，与 Bennet-Clark 的 4 mJ 比 3 mJ（约 57 比 43，S13）不同；正文两者并列。"
+      }
+    },
+    {
+      "id": "S20",
+      "text": {
+        "en": "Sutton G.P., Doroshenko M., Cullen D.A. & Burrows M. (2016). Take-off speed in jumping mantises depends on body size and a power-limited mechanism. Journal of Experimental Biology 219: 2127–2136, doi:10.1242/jeb.133728 (open access). For catapult jumpers the take-off velocity is independent of body mass ('Borelli's law', after Borelli 1680): energy stored and mass to be moved both scale with body size, so small and large animals reach similar take-off speeds and jump heights.",
+        "zh": "Sutton 等（2016）。螳螂的起跳速度取决于体型和功率限制的机制。《实验生物学杂志》219: 2127–2136，doi:10.1242/jeb.133728（开放获取）。对弹射式跳跃者来说，起跳速度与体重无关（“博雷利定律”，源自 1680 年的博雷利）：储存的能量和要推动的质量都随体型同比例变化，所以大小动物的起跳速度和跳高相近。"
+      },
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4958293/",
+      "note": {
+        "en": "Read in full 2026-10-10.",
+        "zh": "2026-10-10 读全文。"
+      }
+    },
+    {
+      "id": "S21",
+      "text": {
+        "en": "Bennet-Clark H.C. & Alder G.M. (1979). The effect of air resistance on the jumping performance of insects. Journal of Experimental Biology 82: 105–121, doi:10.1242/jeb.82.1.105. Locusts jump to a height of about 0.35 m with an efficiency of over 0.9 against air resistance; fleas reach about 0.1 m, air resistance taking a much larger share of a small jumper's energy.",
+        "zh": "Bennet-Clark & Alder（1979）。空气阻力对昆虫跳跃的影响。《实验生物学杂志》82: 105–121，doi:10.1242/jeb.82.1.105。蝗虫能跳到约 0.35 m 高，扣除空气阻力后效率超过 0.9；跳蚤只能跳约 0.1 m，体型越小，空气阻力消耗的能量比例越大。"
+      },
+      "url": "https://doi.org/10.1242/jeb.82.1.105",
+      "note": {
+        "en": "Abstract read, 2026-10-10.",
+        "zh": "2026-10-10 读到摘要。"
+      }
+    },
+    {
+      "id": "S22",
+      "text": {
+        "en": "Sutton G.P. & Burrows M. (2011). Biomechanics of jumping in the flea. Journal of Experimental Biology 214: 836–847, doi:10.1242/jeb.052399. Fleas jump by storing and releasing energy in a cuticular spring.",
+        "zh": "Sutton & Burrows（2011）。跳蚤跳跃的生物力学。《实验生物学杂志》214: 836–847，doi:10.1242/jeb.052399。跳蚤靠表皮形成的弹簧储存并释放能量起跳。"
+      },
+      "url": "https://doi.org/10.1242/jeb.052399",
+      "note": {
+        "en": "Abstract read, 2026-10-10.",
+        "zh": "2026-10-10 读到摘要。"
+      }
+    },
+    {
+      "id": "S23",
+      "text": {
+        "en": "Burrows M. (2006). Jumping performance of froghopper insects. Journal of Experimental Biology 209: 4607–4621, doi:10.1242/jeb.02539. The froghopper Philaenus jumps up to 700 mm high, 115 times its body length, taking off at 4.7 m/s within 0.875 ms with an acceleration of about 550 times gravity.",
+        "zh": "Burrows（2006）。沫蝉的跳跃能力。《实验生物学杂志》209: 4607–4621，doi:10.1242/jeb.02539。沫蝉 Philaenus 能跳到 700 mm 高，是体长的 115 倍；在 0.875 毫秒内以约 550 倍重力加速度起跳，速度 4.7 m/s。"
+      },
+      "url": "https://doi.org/10.1242/jeb.02539",
+      "note": {
+        "en": "Abstract read, 2026-10-10.",
+        "zh": "2026-10-10 读到摘要。"
+      }
+    },
+    {
+      "id": "S24",
+      "text": {
+        "en": "Hamilton A.G. (1937). The mechanism of respiration of locusts and its bearing on the problem of inhalation of poison dusts. Bulletin of Entomological Research 28: 53–68, doi:10.1017/S0007485300038293. In Locusta and Schistocerca spiracles 1 to 4 are inspiratory and spiracles 5 to 9 expiratory; spiracle 10 is expiratory in flight and when the insect is motionless.",
+        "zh": "Hamilton（1937）。蝗虫的呼吸机制及其与吸入毒粉问题的关系。《Bulletin of Entomological Research》28: 53–68，doi:10.1017/S0007485300038293。飞蝗和沙漠蝗的第 1–4 对气门吸气，第 5–9 对呼气；第 10 对在飞行时和静止时呼气。"
+      },
+      "url": "https://doi.org/10.1017/S0007485300038293",
+      "note": {
+        "en": "Abstract read on the publisher's page, 2026-10-10. Later work (Miller 1960, summarised in S10) shows that at rest the pattern can be narrower: spiracles 1, 2 and 4 open for inspiration and only 10 for expiration, with 5 to 10 used when the insect is more active. The text says 'mostly' for this reason.",
+        "zh": "2026-10-10 在出版社页面读到摘要。后来的研究（Miller 1960，见 S10 的综述）表明静息时可能更窄：第 1、2、4 对吸气，只有第 10 对呼气；活动增加时第 5–10 对都用来呼气。所以正文写“主要”。"
+      }
+    },
+    {
+      "id": "S25",
+      "text": {
+        "en": "Harrison J.F., Adjerid K., Kassi E. et al. (2020). Physiological responses to gravity in an insect. Proceedings of the National Academy of Sciences 117(4): 2180–2186, doi:10.1073/pnas.1915424117 (open access). In adult American desert locusts (Schistocerca americana) at about 25 °C, the heart beat about 76–80 times a minute in different body positions (observed through the body wall) and abdominal pumping ran at about 0.72–0.87 per second (about 43–52 a minute); insects show heart-rate responses to body position like those of vertebrates.",
+        "zh": "Harrison 等（2020）。昆虫对重力的生理反应。《美国国家科学院院刊》117(4): 2180–2186，doi:10.1073/pnas.1915424117（开放获取）。美洲沙漠蝗（Schistocerca americana）成虫在约 25℃时，不同体位下心跳约每分钟 76–80 次（隔着体壁观察），腹部泵气每秒约 0.72–0.87 次（每分钟约 43–52 次）；昆虫心率对体位的反应与脊椎动物相似。"
+      },
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6994993/",
+      "note": {
+        "en": "Read in full 2026-10-10; the values are read off the bar charts of figure 3 (panel A labels the axis Hz, but the values of about 78 can only be beats per minute). X-ray video of four animals gave lower heart rates, about 42–67 a minute. The animals were restrained, so these are resting values.",
+        "zh": "2026-10-10 读全文；数值读自图 3 的柱状图（A 图坐标写 Hz，但约 78 的数值只能是每分钟次数）。四只虫的 X 光录像给出的心率较低，约每分钟 42–67 次。实验中虫体被固定，所以这些是静息值。"
+      }
+    },
+    {
+      "id": "S26",
+      "text": {
+        "en": "Greenlee K.J., Henry J.R., Kirkton S.D., Westneat M.W., Fezzaa K., Lee W.-K. & Harrison J.F. (2009). Synchrotron imaging of the grasshopper tracheal system: morphological and physiological components of tracheal hypermetry. American Journal of Physiology – Regulatory, Integrative and Comparative Physiology 297: R1343–R1350, doi:10.1152/ajpregu.00231.2009. In adult Schistocerca americana at 22 ± 2 °C in normal air, the air sacs inflated about 48 times a minute.",
+        "zh": "Greenlee 等（2009）。用同步辐射成像观察蚱蜢的气管系统：气管超比例增长的形态与生理成分。《美国生理学杂志：调节、整合与比较生理》297: R1343–R1350，doi:10.1152/ajpregu.00231.2009。美洲沙漠蝗成虫在 22 ± 2℃、正常空气中，气囊每分钟充气约 48 次。"
+      },
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3774187/",
+      "note": {
+        "en": "Read in full 2026-10-10. Animals were held still for X-ray imaging, so this is a resting value.",
+        "zh": "2026-10-10 读全文。实验时虫体被固定以拍 X 光，所以是静息值。"
+      }
+    },
+    {
+      "id": "S27",
+      "text": {
+        "en": "Krolikowski K. & Harrison J.F. (1996). Haemolymph acid-base status, tracheal gas levels and the control of post-exercise ventilation rate in grasshoppers. Journal of Experimental Biology 199: 391–399, doi:10.1242/jeb.199.2.391. In grasshoppers the ventilation rate increases after jumping.",
+        "zh": "Krolikowski & Harrison（1996）。蚱蜢运动后的血淋巴酸碱状态、气管气体水平与通气频率的控制。《实验生物学杂志》199: 391–399，doi:10.1242/jeb.199.2.391。蚱蜢跳跃后通气频率升高。"
+      },
+      "url": "https://doi.org/10.1242/jeb.199.2.391",
+      "note": {
+        "en": "Abstract read, 2026-10-10; no per-minute rate after activity was obtained, so the simulated active rate in S35 is not taken from this paper.",
+        "zh": "2026-10-10 读到摘要；没有拿到活动后每分钟的具体次数，所以 S35 里模拟的活动值不是取自本文。"
+      }
+    },
+    {
+      "id": "S28",
+      "text": {
+        "en": "Kaiser A., Klok C.J., Socha J.J., Lee W.-K., Quinlan M.C. & Harrison J.F. (2007). Increase in tracheal investment with beetle size supports hypothesis of oxygen limitation on insect gigantism. Proceedings of the National Academy of Sciences 104(32): 13198–13203, doi:10.1073/pnas.0611544104. In four species of darkling beetles the volume of the tracheae rose faster than body mass (as mass to the power 1.29), so larger beetles devote more of their bodies to air tubes; space in the legs may limit the maximum size.",
+        "zh": "Kaiser 等（2007）。甲虫体型越大气管投入越多，支持氧气限制昆虫巨型化的假说。《美国国家科学院院刊》104(32): 13198–13203，doi:10.1073/pnas.0611544104。四种拟步甲的气管体积比体重增加得快（与体重的 1.29 次方成正比），体型越大，身体用于气管的比例越大；足里的空间可能限制最大体型。"
+      },
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1941816/",
+      "note": {
+        "en": "Abstract read, 2026-10-10.",
+        "zh": "2026-10-10 读到摘要。"
+      }
+    },
+    {
+      "id": "S29",
+      "text": {
+        "en": "Harrison J.F., Kaiser A. & VandenBrooks J.M. (2010). Atmospheric oxygen level and the evolution of insect body size. Proceedings of the Royal Society B 277: 1937–1946, doi:10.1098/rspb.2010.0001. Tracheal oxygen delivery may be centrally involved in setting the relatively small size of insects, but the fossil record makes it impossible to accept or reject this definitively; the review also discusses the open circulation, the mass of the exoskeleton (not supported, since exoskeleton mass scales in proportion to body mass) and the soft, newly moulted exoskeleton as possible limits.",
+        "zh": "Harrison 等（2010）。大气氧含量与昆虫体型的演化。《英国皇家学会会刊 B》277: 1937–1946，doi:10.1098/rspb.2010.0001。气管送氧可能是昆虫体型相对较小的核心原因，但化石记录无法明确证实或否定；综述也讨论了开放式循环、外骨骼的重量（数据不支持：外骨骼重量与体重同比例增加）和刚蜕皮时柔软的外骨骼等可能的限制。"
+      },
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2880098/",
+      "note": {
+        "en": "Read 2026-10-10. The size limits are presented as hypotheses, and the text treats them that way.",
+        "zh": "2026-10-10 读取。体型限制都是假说，正文也照此表述。"
+      }
+    },
+    {
+      "id": "S30",
+      "text": {
+        "en": "Warren B., Fenton G.E., Klenschi E., Windmill J.F.C. & French A.S. (2020). Physiological basis of noise-induced hearing loss in a tympanal ear. Journal of Neuroscience 40: 3130–3140, doi:10.1523/JNEUROSCI.2279-19.2019 (open access). Müller's organ of the desert locust ear has about 80 auditory neurons; the largest group, about 46, is broadly tuned to about 3 kHz.",
+        "zh": "Warren 等（2020）。鼓膜耳噪声性听力损失的生理基础。《神经科学杂志》40: 3130–3140，doi:10.1523/JNEUROSCI.2279-19.2019（开放获取）。沙漠蝗耳中的米勒氏器约有 80 个听觉神经元；最大的一组约 46 个，对约 3 kHz 的声音最敏感。"
+      },
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7141877/",
+      "note": {
+        "en": "Read 2026-10-10. The neuron count is from Jacobs et al. (1999) as cited there. Older work counts 60–80 sense units attached to the eardrum.",
+        "zh": "2026-10-10 读取。神经元数目是文中引 Jacobs 等（1999）的。较早的研究记为 60–80 个附着在鼓膜上的感觉单元。"
+      }
+    },
+    {
+      "id": "S31",
+      "text": {
+        "en": "Meteorological Service Singapore, Climate of Singapore (1991–2020 climatological normals): daily minimum usually not below 23–25 °C and maximum not above 31–33 °C; May the warmest month (mean 28.6 °C) and December–January the coolest (26.8 °C); mean annual rainfall 2,113.3 mm, with rain on 171 days a year.",
+        "zh": "新加坡气象局，新加坡的气候（1991–2020 年气候平均值）：日最低温通常不低于 23–25℃，最高温不超过 31–33℃；5 月最暖（月均 28.6℃），12 月和 1 月最凉（26.8℃）；年均降雨量 2,113.3 mm，一年有 171 天下雨。"
+      },
+      "url": "https://www.weather.gov.sg/climate-climate-of-singapore/",
+      "note": {
+        "en": "Read 2026-10-10. The page gives monthly but not annual mean temperatures; the text says the monthly means stay between about 27 and 29 °C.",
+        "zh": "2026-10-10 读取。网页给出月均温而没有年均温；正文写月均温在约 27–29℃之间。"
+      }
+    },
+    {
+      "id": "S32",
+      "text": {
+        "en": "Food and Agriculture Organization of the United Nations, Locust Watch, Frequently asked questions about locusts. Locusts differ from grasshoppers in that they can change their behaviour and habits when crowded, from solitarious to gregarious, and migrate over large distances; a desert locust adult can eat roughly its own weight in fresh food a day, about 2 g; a swarm of 1 km² contains about 40 million locusts, which eat as much in a day as about 35,000 people; swarms range from under 1 km² to several hundred km².",
+        "zh": "联合国粮食及农业组织“蝗虫观察”，蝗虫常见问题。蝗虫与一般蚱蜢的不同在于：密度高时它们能改变行为与习性，从散居型变成群居型，并能长距离迁飞；沙漠蝗成虫一天能吃下约与自身体重相当的新鲜食物，约 2 克；1 km² 的蝗群约有 4,000 万只，一天吃的食物相当于约 35,000 人；蝗群面积从不到 1 km² 到几百 km²。"
+      },
+      "url": "https://www.fao.org/locust-watch/resources/frequently-asked-questions-(faqs)-about-locusts/en",
+      "note": {
+        "en": "Read 2026-10-10. The comparison with people assumes 2.3 kg of food per person a day.",
+        "zh": "2026-10-10 读取。与人的比较按每人每天 2.3 kg 食物计。"
+      }
+    },
+    {
+      "id": "S33",
+      "text": {
+        "en": "Ministry of Education, Singapore, Science Syllabus Primary 3 to 6 (implementation from the 2023 Primary 3 cohort, updated October 2022): Primary 3, compare the life cycles of animals including the chicken, cockroach, frog, grasshopper, beetle, butterfly and mosquito, and classify animals into broad groups including insects; Primary 4, the human digestive system; Primary 5, the human respiratory and circulatory systems.",
+        "zh": "新加坡教育部，小学三至六年级科学课程纲要（2023 年小三入学起实施，2022 年 10 月更新）：小三比较鸡、蟑螂、青蛙、蚱蜢、甲虫、蝴蝶、蚊子等动物的生活史，并把动物分成包括昆虫在内的几大类；小四学人体消化系统；小五学人体呼吸系统和循环系统。"
+      },
+      "url": "https://www.moe.gov.sg/-/media/files/primary/syllabus/2023-primary-science.ashx",
+      "note": {
+        "en": "Read in full 2026-10-10 from the Internet Archive copy of the PDF; the live link refused automated access. The syllabus itself does not use the words nymph, larva or pupa.",
+        "zh": "2026-10-10 从互联网档案馆的 PDF 存档读全文；原链接拒绝自动访问。课程纲要本身没有用“若虫”“幼虫”“蛹”这些词。"
+      }
+    },
+    {
+      "id": "S34",
+      "text": {
+        "en": "National Parks Board, Singapore, When encountering animals: it is illegal to remove wild animals found in nature reserves and other areas managed by NParks under the Parks and Trees Act.",
+        "zh": "新加坡国家公园局，遇到动物时：根据《公园与树木法》，从自然保护区和国家公园局管理的其他地区带走野生动物是违法的。"
+      },
+      "url": "https://www.nparks.gov.sg/visit/when-visiting-parks/when-encountering-animals",
+      "note": {
+        "en": "Read 2026-10-10.",
+        "zh": "2026-10-10 读取。"
+      }
+    },
+    {
+      "id": "S35",
+      "text": {
+        "en": "Atlas design study for this topic (a reconstruction from published anatomy, not a scan of any specimen; docs/14 §1.2). Design values: an adult female Valanga nigricornis 64 mm long, modelled 40 times life size (1 model unit = 25 mm); head about 9 mm, pronotum about 14.5 mm, hind femur about 30 mm, hind tibia about 27.5 mm and antennae about 22 mm long, measured from reference photographs; schematic counts: 24 Malpighian tubules, 12 ovarioles a side, 6 gastric caeca, the main tracheal trunks only; six nymph stages in the life-cycle tray, their sizes schematic. Simulated readings (STATE panel): abdominal pumping 45 a minute at rest and 80 after activity; heartbeat 80 a minute at rest and 110 after activity; chewing 0 at rest and 3 bites a second while feeding. On screen the jump's release pose takes 0.15 s. Estimate in chapter 3: a body launched at 3.2 m/s (S13) at 45° with no air resistance travels v² ÷ g = 3.2 × 3.2 ÷ 9.8 ≈ 1.0 m.",
+        "zh": "本主题的 Atlas 设计研究（根据已发表的解剖资料重建，不是任何标本的扫描；docs/14 §1.2）。设计值：一只黑角瓦兰蝗雌性成虫，体长 64 mm，按 40 倍建模（1 模型单位 = 25 mm）；头约 9 mm、前胸背板约 14.5 mm、后足股节约 30 mm、后足胫节约 27.5 mm、触角约 22 mm，量自参考照片；示意数目：马氏管 24 根、卵巢管每侧 12 条、胃盲囊 6 个、气管只画主干；生活史标本盘画六龄若虫，大小为示意。模拟读数（STATE 面板）：腹部泵气静息每分钟 45 次、活动后 80 次；心跳静息每分钟 80 次、活动后 110 次；咀嚼静息 0、进食时每秒 3 口。画面上起跳“放”的姿态用时 0.15 秒。第 3 章的估算：以 3.2 m/s（S13）、45° 抛出、不计空气阻力，射程 = v² ÷ g = 3.2 × 3.2 ÷ 9.8 ≈ 1.0 m。"
+      },
+      "note": {
+        "en": "Not measurements. The body length lies within the published range for females (63.9–65.3 mm, S1; 39–70 mm for the species in Singapore, S6). The resting pumping rate (45 a minute) lies within the 43–52 a minute measured in a related locust at 22–25 °C (S25, S26), and the resting heart rate (80 a minute) at the top of the 76–80 a minute measured there (S25). Both rates are known to rise with activity and temperature (S10, S27), but no published per-minute values after activity were found, so 80 and 110 a minute are illustrative. No published chewing rate for grasshoppers was found; 3 bites a second is a readable animation speed. The movements on screen (chewing, pumping, heartbeat, the jump) are shown at speeds that can be followed, not at their real speeds.",
+        "zh": "不是实测值。体长在已发表的雌虫范围内（63.9–65.3 mm，S1；新加坡这一种 39–70 mm，S6）。静息泵气（每分钟 45 次）在近缘蝗虫 22–25℃时实测的每分钟 43–52 次之内（S25、S26），静息心率（每分钟 80 次）在那里实测的每分钟 76–80 次的上端（S25）。两者都会随活动和温度升高（S10、S27），但没有找到活动后每分钟次数的公开数据，所以 80 和 110 次是示意。没有找到蚱蜢咀嚼频率的公开数据；每秒 3 口是便于观看的动画速度。画面里的动作（咀嚼、泵气、心跳、起跳）都按看得清的速度显示，不是真实速度。"
+      }
+    },
+    {
+      "id": "S36",
+      "text": {
+        "en": "Tan M.K., Ngiam R.W.J. & Ismail M.R.B. (2012). A checklist of Orthoptera in Singapore parks. Nature in Singapore 5: 61–67. Valanga nigricornis was recorded (as nymphs) in East Coast Park, Labrador Nature Reserve, Pasir Ris Park and Sengkang Riverside Park in surveys from March to June 2011.",
+        "zh": "Tan、Ngiam & Ismail（2012）。新加坡公园直翅目名录。《Nature in Singapore》5: 61–67。2011 年 3–6 月的调查在东海岸公园、拉柏多自然保护区、巴西立公园和盛港河畔公园记录到黑角瓦兰蝗（若虫）。"
+      },
+      "url": "https://lkcnhm.nus.edu.sg/wp-content/uploads/sites/11/app/uploads/2017/04/2012nis061-067.pdf",
+      "note": {
+        "en": "Read in full 2026-10-10.",
+        "zh": "2026-10-10 读全文。"
+      }
+    },
+    {
+      "id": "S37",
+      "text": {
+        "en": "iNaturalist, research-grade observations of Valanga nigricornis in Singapore (place 6734): 2,676 observations on 10 October 2026.",
+        "zh": "iNaturalist 上黑角瓦兰蝗在新加坡（地点 6734）的研究级观察记录：2026 年 10 月 10 日共 2,676 条。"
+      },
+      "url": "https://www.inaturalist.org/observations?taxon_name=Valanga%20nigricornis&place_id=6734&quality_grade=research",
+      "note": {
+        "en": "Count from the iNaturalist API on 2026-10-10 (quality_grade=research); with all quality grades the count was 2,758. The number grows as people add records.",
+        "zh": "2026-10-10 用 iNaturalist API 查询（quality_grade=research）；包括所有质量等级时为 2,758 条。数字会随新记录增加。"
+      }
+    },
+    {
+      "id": "S38",
+      "text": {
+        "en": "Alberta Agriculture and Forestry, Grasshoppers: life cycle, damage assessment and management strategy (Agdex 3497). Grasshopper eggs are eaten by bee flies, blister beetles, ground beetles and crickets; spiders, some wasps and many birds feed on grasshoppers; Scelio wasps may destroy 5–50 % of the eggs; flesh flies and tachinid flies may parasitise up to 60 % of nymphs and adults; a fungus also kills grasshoppers.",
+        "zh": "加拿大艾伯塔省农业与林业厅，蚱蜢：生活史、危害评估与管理（Agdex 3497）。蚱蜢的卵会被蜂虻、芫菁、步甲和蟋蟀吃掉；蜘蛛、一些胡蜂和许多鸟吃蚱蜢；黑卵蜂可毁掉 5–50 % 的卵；麻蝇和寄蝇可寄生多达 60 % 的若虫和成虫；还有一种真菌会杀死蚱蜢。"
+      },
+      "url": "https://www1.agric.gov.ab.ca/$department/deptdocs.nsf/all/agdex3497",
+      "note": {
+        "en": "Read 2026-10-10. It describes grasshoppers of the Canadian prairies; it is used only for the kinds of animals that eat grasshoppers in general.",
+        "zh": "2026-10-10 读取。对象是加拿大草原的蚱蜢，只用来说明一般吃蚱蜢的动物有哪些。"
+      }
+    },
+    {
+      "id": "S39",
+      "text": {
+        "en": "Parks and Trees Act (Singapore, Cap. 216), section 9: no person shall, without the approval of the Commissioner, capture, displace or feed any animal, or collect or remove any other organism, in a national park or nature reserve; 'animal' includes insects; the penalty is a fine of up to $50,000, imprisonment of up to six months, or both.",
+        "zh": "新加坡《公园与树木法》（第 216 章）第 9 条：未经专员批准，不得在国家公园或自然保护区内捕捉、驱赶或喂养任何动物，或采集、带走任何其他生物；“动物”包括昆虫；违者最高罚款 5 万元、监禁最长六个月，或两者兼施。"
+      },
+      "url": "https://faolex.fao.org/docs/pdf/sin52454.pdf",
+      "note": {
+        "en": "Read 2026-10-10 in the FAOLEX consolidation (in force from 2 January 2011); the current official text is on Singapore Statutes Online, which refused automated access. Rules for ordinary public parks are in the Parks and Trees Regulations, which were not read.",
+        "zh": "2026-10-10 读 FAOLEX 收录的合并文本（2011 年 1 月 2 日起有效）；新加坡法规在线的现行官方文本拒绝自动访问。普通公园的规定在《公园与树木条例》里，未读。"
+      }
+    }
+  ]
+}
