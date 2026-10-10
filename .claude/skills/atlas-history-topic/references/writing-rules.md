@@ -23,6 +23,7 @@
 - 行军路线（`path`）按真实路线取点；短路线（几十到一两百公里、一次渡海）**7 个途经点**够用，长路线再加，不要为凑数加点。
 - **有些站点会挡爬虫 / 搜索摘要**（Britannica、1914-1918-online、IWM、CWGC、PubMed）：用浏览器工具把原文读一遍再引用，`sources.json` 只写你**读到并核对过**的内容；只看到搜索摘要的来源在 `note` 里写明"据搜索摘要"，并列入 spec 的已知差距，等人工核对。
 - `sources.json` 改完跑 `pnpm tsx scripts/sources-md.ts <slug>` 重写 `SOURCES.md` 的生成块。
+- **SpaceScene 主题的数字**（aircon）：设计值（规格行）与模拟值（STATE 读数、算出来的温度 / 流量）不是观测，也要有来源：写一条自描述来源（它的 `note` 讲清"设计取值 / 由哪些数据按什么算式算出"），`<Num>` 引它；演示字幕与零件说明里没有 `<Num>` 的模拟数字，句里写明"在这个模拟里 / at this simulated operating point"。
 
 ## 细看 `<More>`
 

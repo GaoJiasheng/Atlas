@@ -13,6 +13,26 @@ state:
   labels: [top-grille, louvre, drain-hose, fan-grille]
   camera: { position: [1.8, 1.76, 4.41], target: [0.01, 0.41, 0.06], fov: 30 }
   summary: { en: "Room air is cooled and dried as it crosses the cold coil; outside, the heat it lost, plus the electricity the unit used, leaves as a stream of warm air.", zh: "房间空气流过冰冷的盘管时被降温、除湿；它失去的热，加上空调用掉的电，在室外变成一股热风吹出去。" }
+  beats:
+    - camera: { position: [1.65, 1.8, 4.0], target: [0.05, 0.5, 0.0], fov: 30 }
+      caption: { en: "Indoors a stream of cool air leaves the unit; outdoors a stream of warm air does. Follow the dots to see where the air comes in and where it goes.", zh: "室内机吹出一股冷风，室外机吹出一股热风。顺着小点，看空气从哪里进、往哪里去。" }
+    - view: xray
+      camera: { position: [0.1, 1.8, 2.5], target: [-0.75, 1.05, 0], fov: 30 }
+      labels: [top-grille, air-filter, evaporator-front, louvre]
+      caption: { en: "In the simulation the fan draws 27 °C room air in at the top, through the filters and across the cold evaporator. It leaves under the louvre at about 17 °C.", zh: "在模拟中，风扇从顶部吸进 27℃的房间空气，经过滤网，流过冰冷的蒸发器，在导风板下面吹出来，约 17℃。" }
+    - view: xray
+      camera: { position: [0.6, 1.6, 3.0], target: [-0.45, 0.9, 0], fov: 30 }
+      labels: [drain-pan, drain-hose, evaporator-front]
+      caption: { en: "The cold fins also pull water out of the air. It drips into the drain pan and leaves through the hose, about a litre an hour at this operating point.", zh: "冰冷的鳍片还会把空气里的水汽凝成水。水滴进接水盘，从排水管流出去，在这个运行点约每小时 1 升。" }
+    - view: xray
+      camera: outdoor-unit
+      labels: [condenser-coil, outdoor-fan, fan-grille]
+      caption: { en: "In the simulation, outdoors, the fan pulls 33 °C air through the condenser, which warms it to about 38 °C before it leaves through the front. That is why the outdoor unit blows hot.", zh: "在模拟中，室外的风扇把 33℃的空气抽过冷凝器，空气被加热到约 38℃，再从前面吹出去，所以室外机吹的是热风。" }
+    - view: xray
+      layers: [indoor, line-set, outdoor, refrigerant, air]
+      camera: { position: [1.65, 1.8, 4.0], target: [0.05, 0.5, 0.0], fov: 30 }
+      labels: [evaporator-front, compressor, condenser-coil]
+      caption: { en: "Heat is moved, not destroyed. In the simulation the outdoor unit gives out 3.25 kilowatts: the 2.6 taken from the room, plus the 0.65 of electricity the unit uses.", zh: "热是被搬走的，不是被消灭的。模拟中室外机放出 3.25 千瓦：从房间取走的 2.6 千瓦，加上空调用掉的 0.65 千瓦电。" }
 ---
 
 <Lang en>

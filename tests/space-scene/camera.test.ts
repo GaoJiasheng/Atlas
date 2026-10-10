@@ -67,6 +67,10 @@ describe('fitCameraToAspect', () => {
     const narrow = fitCameraToAspect(cam, 0.8);
     expect(narrow.position[2]).toBeCloseTo(20);
     expect(fitCameraToAspect(narrow, 0.8, true).position[2]).toBeCloseTo(10);
+    // Phones: half the pull-back (1.6 × 0.5 / 0.4 = 2), never closer than the authored camera.
+    expect(fitCameraToAspect(cam, 0.4).position[2]).toBeCloseTo(20);
+    expect(fitCameraToAspect(cam, 0.46).position[2]).toBeLessThan(fitCameraToAspect(cam, 0.8).position[2]);
+    expect(fitCameraToAspect(fitCameraToAspect(cam, 0.46), 0.46, true).position[2]).toBeCloseTo(10);
   });
 });
 

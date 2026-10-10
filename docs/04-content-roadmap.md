@@ -8,7 +8,7 @@
 |---|---|---|---|---|---|---|
 | 第二次世界大战 | history | time | TimeScene/Geo | SS P4 二战结束；SS P5 新加坡沦陷、日据 | **2026 首发** | 已完成 11 章（待审） |
 | 第一次世界大战 | history | time | TimeScene/Geo | 课外（未找到对应 MOE 条目）；见 docs/11 | 2026 第二个历史主题 | 已完成 10 章（待审） |
-| 空调是怎么把房间变冷的 | science | space | SpaceScene/Model3D | Sci P5 热；课外 | 2026 第二个（验证 SpaceScene） |
+| 空调是怎么把房间变冷的 | science | space | SpaceScene/Model3D | Sci P5 热；课外 | 2026 第二个（验证 SpaceScene） | 已完成 5 章（待审） |
 | 新加坡 1819–1965 | history | time | TimeScene/Geo | SS P4 新加坡故事 | 2027 |
 | 植物的身体（根茎叶花） | biology | space | SpaceScene/Layer2D | Sci P3/P4 植物系统 | 2027 |
 | 生物分类与多样性 | biology | space（树状） | Layer2D | Sci P3 Diversity | 2027 |
@@ -56,10 +56,10 @@
 - 事件与兵力：Wikipedia 各战役条目，取整
 - 新加坡章：National Archives of Singapore、NLB Infopedia、MOE 社会课教材配套
 
-## 空调主题大纲（第二个主题，验证 SpaceScene）
+## 空调主题大纲（已完成，5 章；详见 docs/12）
 
-1. 整机：室内机 + 室外机，一根管子连着
-2. 拆开看四大件：压缩机、冷凝器、膨胀阀、蒸发器
-3. 通电：冷媒循环流动，风扇转
-4. 空气去哪了：热空气进、冷空气出，热被"搬"到室外
-5. 为什么室外机会吹热风（对齐 Sci P5 热的传递）
+1. 整机（whole-machine）：室内机 + 室外机 + 连接管，示意布局
+2. 拆开看：四大件（open-it-up）：压缩机、冷凝器、膨胀阀、蒸发器，拆开外壳、爆炸图
+3. 通电：冷媒循环（switch-on）：X 光 + 冷媒流，压缩、冷凝、节流、蒸发，带模拟读数
+4. 空气去哪了（where-the-air-goes）：室内冷风、室外热风、凝结水，热被"搬"到室外（对齐 Sci P5 热的传递）
+5. 用得好、用得省（efficiency-and-use）：变频、滤网、设定 25 °C、能效标签、冷媒回收
