@@ -240,7 +240,8 @@ describe('sample-space topic', () => {
 
   it('engine data parses', () => {
     const data = spaceSceneData.parse(loadData('sample-space'));
-    expect(data.parts.parts).toHaveLength(13);
+    expect(data.parts.parts).toHaveLength(15);
+    expect(data.parts.parts.filter((p) => p.context)).toHaveLength(1);
     expect(data.parts.groups).toHaveLength(3);
     expect(data.parts.flows).toHaveLength(2);
     expect(data.parts.animations).toHaveLength(3);

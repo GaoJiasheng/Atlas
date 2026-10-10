@@ -1,14 +1,18 @@
 /**
  * Selected part details (InfoPanel "inspector" slot), in the plate's hairline
- * grammar: part number + name (中文 beneath), summary, detail
- * behind "more", group swatch, and "connected to" chips that select the
- * connected part.
+ * grammar: part number + name (中文 beneath), summary, detail behind "more"
+ * (blank lines = paragraphs; `[S3]` markers = source superscripts that open
+ * the host's source popover), group swatch, and "connected to" chips that
+ * select the connected part.
  */
 import { useId, useState } from 'react';
 import { useScene, useSceneContext, useSceneStore, useT } from '../../core/context';
 import { tx } from '../../../i18n';
 import { resolveColorRef } from '../../../theme/theme';
 import { Icon } from '../../widgets/icons';
+import { SourceRefs } from '../../widgets/SourcePopover';
+import { detailParagraphs } from '../lib/detail';
+import { partNumber } from '../hud/common';
 import type { SpaceSceneExt } from '../index';
 import type { Part, PartsFile } from '../schema';
 
@@ -18,17 +22,17 @@ function PartDetails({ part, file }: { part: Part; file: PartsFile }) {
   const store = useSceneStore<SpaceSceneExt>();
   const [open, setOpen] = useState(false);
   const detailId = useId();
-  const group = file.groups.find((g) => g.id === part.group);
+  const group = part.group !== undefined ? file.groups.find((g) => g.id === part.group) : undefined;
   const connects = part.connects
     .map((id) => file.parts.find((p) => p.id === id))
     .filter((p): p is Part => p !== undefined);
-  const detail = tx(part.detail, locale);
+  const detail = detailParagraphs(tx(part.detail, locale));
 
   return (
     <section className="space-inspector" aria-label={tx(part.name, locale)}>
       <header className="space-inspector__header">
         <span className="space-inspector__no" aria-hidden="true">
-          {String(file.parts.indexOf(part) + 1).padStart(2, '0')}
+          {partNumber(file, part.id)}
         </span>
         <h3 className="space-inspector__title">
           {tx(part.name, locale)}
@@ -48,11 +52,15 @@ function PartDetails({ part, file }: { part: Part; file: PartsFile }) {
 
       <p className="space-inspector__summary">{tx(part.summary, locale)}</p>
 
-      {detail && (
+      {detail.length > 0 && (
         <>
-          <p id={detailId} className="space-inspector__detail" hidden={!open}>
-            {detail}
-          </p>
+          <div id={detailId} className="space-inspector__detail" hidden={!open}>
+            {detail.map((runs, i) => (
+              <p key={i}>
+                {runs.map((run, j) => ('text' in run ? run.text : <SourceRefs key={j} ids={run.sources} locale={locale} />))}
+              </p>
+            ))}
+          </div>
           <button
             type="button"
             className="atlas-control atlas-control--ghost space-inspector__more"
@@ -96,7 +104,7 @@ function PartDetails({ part, file }: { part: Part; file: PartsFile }) {
 export function Inspector({ file }: { file: PartsFile }) {
   const t = useT();
   const partId = useScene<SpaceSceneExt, string | null>((s) => s.part);
-  const part = partId ? file.parts.find((p) => p.id === partId) : undefined;
+  const part = partId ? file.parts.find((p) => p.id === partId && !p.context) : undefined;
   if (!part) return <p className="space-hint">{t('space.hint')}</p>;
   // Keyed so "more" collapses again when the selection changes.
   return <PartDetails key={part.id} part={part} file={file} />;

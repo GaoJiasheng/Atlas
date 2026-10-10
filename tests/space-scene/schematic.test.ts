@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { elevation, labelBudget, partChain, planeAxes, scaleStep, stackColumn } from '../../src/engines/space-scene/lib/schematic';
+import { chainKey, elevation, flowLinks, labelBudget, partChain, planeAxes, scaleStep, stackColumn } from '../../src/engines/space-scene/lib/schematic';
 import type { Part } from '../../src/engines/space-scene/schema';
 
 const p = (id: string, group: string, at: [number, number, number], connects: string[] = []) =>
@@ -70,3 +70,31 @@ describe('leader label layout', () => {
     expect(stackColumn([10], [30], 50, 300, 8)).toEqual([50]);
   });
 });
+
+describe('partChain: flow-only groups, context parts, compact rows', () => {
+  const wall = { ...p('wall', 'g1', [0, 0, -2]), context: true };
+  it('gives groups without parts no column and leaves context parts out', () => {
+    const layout = partChain([...parts, wall], [{ id: 'g1' }, { id: 'air' }, { id: 'g2' }], 300);
+    expect(layout.columns.map((c) => c.id)).toEqual(['g1', 'g2']);
+    expect(layout.nodes.map((n) => n.id)).toEqual(['a', 'b', 'c']);
+    expect(layout.compact).toBe(false);
+  });
+  it('switches to the compact row pitch above ten rows', () => {
+    const many = Array.from({ length: 11 }, (_, i) => p(`p${i}`, 'g1', [i, 0, 0]));
+    const layout = partChain(many, [{ id: 'g1' }], 300, { row: 23, compactRow: 16 });
+    expect(layout.compact).toBe(true);
+    expect(layout.nodes[1]!.y - layout.nodes[0]!.y).toBe(16);
+    expect(layout.nodes[0]!.h).toBeGreaterThanOrEqual(12);
+  });
+  it('maps flow part lists onto chain links with their position', () => {
+    const hits = flowLinks([{ id: 'f', parts: ['a', 'b', 'c'] }, { id: 'g', parts: ['b', 'a'] }]);
+    expect(hits.get(chainKey('a', 'b'))).toEqual({ flow: 'f', u: 0.25 });
+    expect(hits.get(chainKey('c', 'b'))).toEqual({ flow: 'f', u: 0.75 });
+    expect(hits.size).toBe(2);
+  });
+  it('draws context parts in the elevation without exploding them', () => {
+    const el = elevation([...parts, wall], 'xy', 1);
+    expect(el.rects.find((r) => r.id === 'wall')).toMatchObject({ context: true, v0: -0.5 });
+  });
+});
+

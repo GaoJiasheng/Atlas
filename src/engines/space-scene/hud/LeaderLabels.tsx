@@ -85,19 +85,24 @@ export function LeaderLabels({ file, chapters, bridge }: { file: PartsFile; chap
   const { locale } = useSceneContext();
   const store = useSceneStore<SpaceSceneExt>();
   const labelsOn = useHud((h) => h.labels && h.hud);
-  const s = useScene<SpaceSceneExt, { part: string | null; view: SpaceSceneExt['view']; layers: string[]; chapter: string | null }>((st) => ({
+  const s = useScene<
+    SpaceSceneExt,
+    { part: string | null; view: SpaceSceneExt['view']; layers: string[]; hidden: string[]; chapter: string | null }
+  >((st) => ({
     part: st.part,
     view: st.view,
     layers: st.layers,
+    hidden: st.hidden,
     chapter: st.chapter,
   }));
   const sizes = useMemo(() => priority(file), [file]);
   const candidates = useMemo(() => {
-    const displays = resolveAllPartDisplays(file.parts, { view: s.view, part: s.part, layers: s.layers });
+    const displays = resolveAllPartDisplays(file.parts, { view: s.view, part: s.part, layers: s.layers, hidden: s.hidden });
     const listed = chapters.find((c) => c.id === s.chapter)?.state.labels;
     const pool = Array.isArray(listed) ? listed.filter((x): x is string => typeof x === 'string') : file.parts.map((p) => p.id);
-    const ids = pool.filter((id) => displays.get(id)?.visible).sort((a, b) => (sizes.get(b) ?? 0) - (sizes.get(a) ?? 0));
-    if (s.part && displays.get(s.part)?.visible) return [s.part, ...ids.filter((id) => id !== s.part)];
+    const labelled = (id: string) => displays.get(id)?.visible === true && displays.get(id)?.selectable === true;
+    const ids = pool.filter(labelled).sort((a, b) => (sizes.get(b) ?? 0) - (sizes.get(a) ?? 0));
+    if (s.part && labelled(s.part)) return [s.part, ...ids.filter((id) => id !== s.part)];
     return ids;
   }, [file.parts, chapters, s, sizes]);
 

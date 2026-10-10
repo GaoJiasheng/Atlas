@@ -63,7 +63,7 @@ export function stageBounds(parts: readonly Part[], shapes: ReadonlyMap<string, 
     const rest = partBounds(part);
     const r = shape.radius;
     for (const amount of [0, 1] as const) {
-      const c = explodedPosition(shape.position, part.explode, amount);
+      const c = part.context ? shape.position : explodedPosition(shape.position, part.explode, amount);
       const dy = c[1] - shape.position[1];
       const low = rest ? rest.min[1] + dy : c[1] - r;
       floor[amount] = Math.min(floor[amount], low);

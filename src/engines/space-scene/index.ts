@@ -15,6 +15,8 @@ export interface SpaceSceneExt {
   explode: number;
   run: boolean;
   cutaway: 'none' | 'half';
+  /** Parts put aside (chapter / beat `hide`; not cumulative, never in the URL). */
+  hidden: string[];
 }
 
 function isView(value: unknown): value is SpaceView {
@@ -32,6 +34,7 @@ export const spaceSceneEngine = defineEngine<SpaceSceneExt, SpaceSceneData>({
       explode: 0,
       run: false,
       cutaway: 'none',
+      hidden: [],
       // All groups visible by default.
       layers: data ? data.parts.groups.map((g) => g.id) : [],
     };
@@ -43,6 +46,8 @@ export const spaceSceneEngine = defineEngine<SpaceSceneExt, SpaceSceneData>({
     if (typeof state.explode === 'number') out.explode = clamp01(state.explode);
     if (typeof state.run === 'boolean') out.run = state.run;
     if (state.cutaway === 'none' || state.cutaway === 'half') out.cutaway = state.cutaway;
+    // Not cumulative: a chapter without `hide` shows every part.
+    out.hidden = Array.isArray(state.hide) ? state.hide.filter((id): id is string => typeof id === 'string') : [];
     return out;
   },
   fromUrl(fields) {

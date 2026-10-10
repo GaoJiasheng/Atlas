@@ -11,3 +11,4 @@ stage: model3d
 theme: paper
 sensitivity: open
 status: draft
+note: { en: "Placeholder topic · not a real machine", zh: "占位主题 · 不是真实的机器" }

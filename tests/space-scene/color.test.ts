@@ -73,3 +73,28 @@ describe('resolveMaterialLook', () => {
     expect(resolveMaterialLook('glass', cinemaTokens, 'cinema').opacity).toBeLessThan(1);
   });
 });
+
+describe('enamel, brass and tints', () => {
+  it('enamel is a warm, non-metal white a step darker than the paper', () => {
+    const look = resolveMaterialLook('enamel', paperTokens, 'paper');
+    expect(look.metalness).toBe(0);
+    const c = parseCssColor(look.color)!;
+    const paper = parseCssColor('#e9e4d8')!;
+    expect(c.r).toBeGreaterThan(c.b);
+    expect(c.r + c.g + c.b).toBeLessThan(paper.r + paper.g + paper.b - 0.1);
+    expect(c.r + c.g + c.b).toBeGreaterThan(2.2);
+  });
+  it('brass is a yellow metal', () => {
+    const look = resolveMaterialLook('brass', paperTokens, 'paper');
+    const c = parseCssColor(look.color)!;
+    expect(look.metalness).toBeGreaterThan(0.8);
+    expect(c.r).toBeGreaterThan(c.b + 0.2);
+  });
+  it('a tint replaces the family colour and keeps its finish', () => {
+    const plain = resolveMaterialLook('powder', paperTokens, 'paper');
+    const grey = resolveMaterialLook('powder', paperTokens, 'paper', '#c4c6c2');
+    expect(grey).toEqual({ ...plain, color: '#c4c6c2' });
+    expect(resolveMaterialLook('powder', paperTokens, 'paper', 'token:accent-1').color).toBe('#a63d2f');
+  });
+});
+

@@ -128,6 +128,8 @@ export function primitiveLocalBox(p: Primitive): Box3Like {
     }
     case 'vessel':
       return sym(p.radius, p.length / 2 + p.radius * p.headRatio, p.radius);
+    case 'panelHole':
+      return sym(p.size[0] / 2, p.size[1] / 2, p.size[2] / 2);
   }
 }
 

@@ -10,7 +10,7 @@ import { useScene, useSceneContext, useT } from '../../core/context';
 import type { Chapter } from '../../core/types';
 import { tx } from '../../../i18n';
 import { resolveColorRef } from '../../../theme/theme';
-import { elevation } from '../lib/schematic';
+import { elevation, numberedParts } from '../lib/schematic';
 import type { SpaceSceneExt } from '../index';
 import type { Part, PartsFile } from '../schema';
 import { clip, partNumber } from './common';
@@ -21,7 +21,7 @@ const IH = 96;
 function ExplodedIcon({ file, part }: { file: PartsFile; part: Part }) {
   const plane = file.views.section?.plane ?? 'xy';
   const { rest, out } = useMemo(() => {
-    const set = file.parts.filter((p) => p.id === part.id || part.connects.includes(p.id));
+    const set = file.parts.filter((p) => !p.context && (p.id === part.id || part.connects.includes(p.id)));
     return { rest: elevation(set, plane, 0), out: elevation(set, plane, 0.6) };
   }, [file.parts, part, plane]);
   const u0 = Math.min(rest.u0, out.u0);
@@ -76,7 +76,7 @@ export function DetailPanel({ file, chapters }: { file: PartsFile; chapters: rea
     chapter: st.chapter,
     view: st.view,
   }));
-  const part = s.part ? file.parts.find((p) => p.id === s.part) : undefined;
+  const part = s.part ? file.parts.find((p) => p.id === s.part && !p.context) : undefined;
 
   if (!part) {
     const chapter = chapters.find((c) => c.id === s.chapter);
@@ -89,14 +89,14 @@ export function DetailPanel({ file, chapters }: { file: PartsFile; chapters: rea
           <p className="space-detail__zh" lang="zh-Hans">
             {tx(chapter?.title, 'zh')}
           </p>
-          <p className="space-detail__line">{t('space.detail.parts', { n: file.parts.length, groups: file.groups.length })}</p>
+          <p className="space-detail__line">{t('space.detail.parts', { n: numberedParts(file.parts).length, groups: file.groups.length })}</p>
           <p className="space-detail__hint">{t('space.hint')}</p>
         </div>
       </div>
     );
   }
 
-  const group = file.groups.find((g) => g.id === part.group);
+  const group = part.group !== undefined ? file.groups.find((g) => g.id === part.group) : undefined;
   const connects = part.connects.map((id) => file.parts.find((p) => p.id === id)).filter((p): p is Part => p !== undefined);
   return (
     <div className="space-detail">

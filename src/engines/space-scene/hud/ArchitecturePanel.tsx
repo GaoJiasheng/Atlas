@@ -2,13 +2,15 @@
  * Bottom panel 01 / ARCHITECTURE: an elevation drawn straight from the part
  * data (rest bounds of every primitive part on the section plane, default
  * front XY), zones numbered by group, a ground line and a scale bar in model
- * units. The selected part is outlined in the signal colour.
+ * units. The selected part is outlined in the signal colour; parts put aside
+ * (`hide`) are dashed outlines; context scenery (a wall) is hatched and
+ * belongs to no zone.
  */
-import { useMemo } from 'react';
+import { useId, useMemo } from 'react';
 import { useScene, useT } from '../../core/context';
 import { tx } from '../../../i18n';
 import { resolveColorRef } from '../../../theme/theme';
-import { elevation, scaleStep } from '../lib/schematic';
+import { elevation, numberedParts, scaleStep } from '../lib/schematic';
 import type { SpaceSceneExt } from '../index';
 import type { PartsFile } from '../schema';
 import { clip } from './common';
@@ -23,7 +25,9 @@ const f2 = (n: number) => Number(n.toFixed(2));
 
 export function ArchitecturePanel({ file }: { file: PartsFile }) {
   const t = useT();
-  const part = useScene<SpaceSceneExt, string | null>((st) => st.part);
+  const hatchId = `space-hatch-${useId().replace(/:/g, '')}`;
+  const s = useScene<SpaceSceneExt, { part: string | null; hidden: string[] }>((st) => ({ part: st.part, hidden: st.hidden }));
+  const part = s.part;
   const plane = file.views.section?.plane ?? 'xy';
   const el = useMemo(() => elevation(file.parts, plane), [file.parts, plane]);
 
@@ -39,32 +43,44 @@ export function ArchitecturePanel({ file }: { file: PartsFile }) {
 
   const zones = file.groups
     .map((g, i) => {
-      const rs = el.rects.filter((r) => r.group === g.id);
+      const rs = el.rects.filter((r) => r.group === g.id && !r.context);
       if (rs.length === 0) return null;
       return { id: g.id, n: i + 1, name: tx(g.name, 'en'), u0: Math.min(...rs.map((r) => r.u0)), u1: Math.max(...rs.map((r) => r.u1)), color: g.color };
     })
     .filter((z): z is NonNullable<typeof z> => z !== null);
   const groupColor = new Map(file.groups.map((g) => [g.id, g.color]));
+  const hidden = new Set(s.hidden);
   const step = scaleStep(spanU);
 
   return (
     <svg className="space-elev" viewBox={`0 0 ${VW} ${VH}`} preserveAspectRatio="xMidYMid meet" role="img" aria-label={t('space.panel.architecture')}>
+      <defs>
+        <pattern id={hatchId} width={5} height={5} patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+          <line x1={0} y1={0} x2={0} y2={5} className="space-elev__hatch" />
+        </pattern>
+      </defs>
       <text x={PAD.l} y={11} className="space-elev__tag">
-        {plane.toUpperCase()} · {String(file.parts.length).padStart(2, '0')} {t('space.spec.parts').toLocaleUpperCase()}
+        {plane.toUpperCase()} · {String(numberedParts(file.parts).length).padStart(2, '0')} {t('space.spec.parts').toLocaleUpperCase()}
       </text>
       <line x1={PAD.l} x2={VW - PAD.r} y1={groundY} y2={groundY} className="space-elev__ground" />
       {el.rects.map((r) => {
         const on = r.id === part;
+        const box = {
+          x: x(r.u0),
+          y: Math.min(y(r.v0), y(r.v1)),
+          width: Math.max(0.6, f2((r.u1 - r.u0) * k)),
+          height: Math.max(0.6, f2((r.v1 - r.v0) * k)),
+        };
+        if (r.context) return <rect key={r.id} {...box} className="space-elev__context" style={{ fill: `url(#${hatchId})` }} />;
+        const aside = hidden.has(r.id);
         return (
           <rect
             key={r.id}
-            x={x(r.u0)}
-            y={Math.min(y(r.v0), y(r.v1))}
-            width={Math.max(0.6, f2((r.u1 - r.u0) * k))}
-            height={Math.max(0.6, f2((r.v1 - r.v0) * k))}
+            {...box}
             className="space-elev__part"
             data-on={on || undefined}
-            style={on ? undefined : { fill: resolveColorRef(groupColor.get(r.group) ?? 'token:ink') }}
+            data-hidden={aside || undefined}
+            style={on || aside ? undefined : { fill: resolveColorRef(groupColor.get(r.group) ?? 'token:ink') }}
           />
         );
       })}

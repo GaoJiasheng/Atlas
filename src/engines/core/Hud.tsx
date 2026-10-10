@@ -274,7 +274,13 @@ export function TitleBlock({
         ))}
       </dl>
       <p className="atlas-title__note">
-        {upper(t('en', 'hud.note'))} · <span lang="zh-Hans">{t('zh', 'hud.note')}</span>
+        {upper(topic.note?.en ?? t('en', 'hud.note'))}
+        {(topic.note ? topic.note.zh : t('zh', 'hud.note')) && (
+          <>
+            {' · '}
+            <span lang="zh-Hans">{topic.note ? topic.note.zh : t('zh', 'hud.note')}</span>
+          </>
+        )}
       </p>
     </section>
   );

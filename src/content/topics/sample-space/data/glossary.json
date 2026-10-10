@@ -1,0 +1,12 @@
+{
+  "terms": [
+    {
+      "id": "sample-shell",
+      "term": { "en": "Shell", "zh": "外壳" },
+      "definition": {
+        "en": "Placeholder term: the outer cover of a machine. In X-ray only the shells turn see-through.",
+        "zh": "占位名词：机器外面的罩壳。透视时只有外壳变透明。"
+      }
+    }
+  ]
+}

@@ -1,8 +1,10 @@
 /**
  * One part on the stage: position (shared eased explode), fade (visibility /
- * x-ray), animation pose, family material with selection edge and cut face,
- * and pointer picking. A part is one or more pieces (meshes or instanced
- * meshes) sharing the part's material.
+ * x-ray), put-aside motion (`hide`: slide out along the explode direction,
+ * then fade; back the same way), animation pose, family material with
+ * selection edge and cut face, and pointer picking (never for context
+ * parts). A part is one or more pieces (meshes or instanced meshes) sharing
+ * the part's material.
  */
 import { useEffect, useLayoutEffect, useMemo, useRef, type Ref } from 'react';
 import { useFrame, type ThreeEvent } from '@react-three/fiber';
@@ -11,7 +13,7 @@ import type { Part, PartAnimation } from '../../schema';
 import type { PartDisplay } from '../../lib/visibility';
 import { animationAngle, animationScale } from '../../lib/animation';
 import { explodeOffset } from '../../lib/explode';
-import { damp, normalize3, type Vec3 } from '../../lib/math';
+import { damp, easeInOutCubic, normalize3, type Vec3 } from '../../lib/math';
 import { keepAnimating, MAX_DT, useRuntime } from './runtime';
 import { createPartMaterial, setPartClipping, stylePartMaterial, type PartStyle } from './materials';
 import type { ShapePiece } from './geometry';
@@ -67,6 +69,13 @@ const noRaycast = () => {};
 const LONG_PRESS_MS = 400;
 /** X-RAY fade rate: ~0.3 s to settle (master-spec H). */
 const FADE_RATE = 11;
+/** Put aside (`hide`): 0.6 s, sliding out a quarter of the explode distance, fading over the second half. */
+const HIDE_S = 0.6;
+const HIDE_SLIDE = 0.25;
+const smooth = (e0: number, e1: number, x: number) => {
+  const k = Math.min(1, Math.max(0, (x - e0) / (e1 - e0)));
+  return k * k * (3 - 2 * k);
+};
 
 const tmpQ = new Quaternion();
 
@@ -114,12 +123,19 @@ export function PartNode(props: PartNodeProps) {
   const posRef = useRef<Group>(null);
   const animRef = useRef<Group>(null);
   const pieces = useRef(new Map<ShapePiece, Object3D>());
-  const motion = useRef({ fade: display.visible ? display.opacity * style.look.opacity : 0, sel: 0, snap: true, cast: false });
+  const motion = useRef({
+    base: display.visible ? display.opacity * style.look.opacity : 0,
+    fade: display.visible ? display.opacity * style.look.opacity : 0,
+    aside: display.hidden ? 1 : 0,
+    sel: 0,
+    snap: true,
+    cast: false,
+  });
   const press = useRef<{ timer: ReturnType<typeof setTimeout> | null; x: number; y: number }>({ timer: null, x: 0, y: 0 });
 
   const pm = useMemo(() => createPartMaterial(), []);
-  // Per-frame maths without allocation: explode vector and unit animation axes, once.
-  const push = useMemo(() => explodeOffset(part.explode, 1), [part.explode]);
+  // Per-frame maths without allocation: explode vector and unit animation axes, once. Context parts stay put.
+  const push = useMemo(() => (part.context ? ([0, 0, 0] as Vec3) : explodeOffset(part.explode, 1)), [part.explode, part.context]);
   const axes = useMemo(
     () => props.animations.map((a) => (a.kind === 'pulse' ? new Vector3(0, 1, 0) : new Vector3(...normalize3(a.axis)))),
     [props.animations],
@@ -163,13 +179,14 @@ export function PartNode(props: PartNodeProps) {
     [handle],
   );
 
-  // Hidden parts do not take part in picking.
+  // Hidden and context parts do not take part in picking (clicks pass through scenery).
+  const pickable = display.visible && display.selectable;
   useEffect(() => {
     for (const o of pieces.current.values()) {
       const own = o instanceof InstancedMesh ? InstancedMesh.prototype.raycast : Mesh.prototype.raycast;
-      o.raycast = display.visible ? own : noRaycast;
+      o.raycast = pickable ? own : noRaycast;
     }
-  }, [display.visible, shape]);
+  }, [pickable, shape]);
 
   useEffect(
     () => () => {
@@ -184,8 +201,13 @@ export function PartNode(props: PartNodeProps) {
     const snap = m.snap;
     m.snap = false;
 
+    // Put aside: linear clock, eased slide, fade over the second half.
+    const asideTarget = display.hidden ? 1 : 0;
+    m.aside = snap ? asideTarget : m.aside + Math.sign(asideTarget - m.aside) * Math.min(Math.abs(asideTarget - m.aside), dt / HIDE_S);
+    const slide = easeInOutCubic(m.aside) * HIDE_SLIDE;
+
     // Explode (eased centrally, see ExplodeClock).
-    const e = runtime.explode;
+    const e = runtime.explode + slide;
     const g = posRef.current;
     if (g) {
       const x = shape.position[0] + push[0] * e;
@@ -197,11 +219,13 @@ export function PartNode(props: PartNodeProps) {
       }
     }
 
-    // Fade.
-    const targetFade = display.visible ? display.opacity * style.look.opacity : 0;
+    // Fade (a part being put aside keeps its look until the aside fade takes it).
+    const targetBase = display.visible || display.hidden ? display.opacity * style.look.opacity : 0;
+    m.base = snap ? targetBase : damp(m.base, targetBase, FADE_RATE, dt);
+    if (Math.abs(m.base - targetBase) < 0.002) m.base = targetBase;
     const prevFade = m.fade;
-    m.fade = snap ? targetFade : damp(m.fade, targetFade, FADE_RATE, dt);
-    if (Math.abs(m.fade - targetFade) < 0.002) m.fade = targetFade;
+    m.fade = m.base * (1 - smooth(0.45, 1, m.aside));
+    const targetFade = display.hidden ? 0 : targetBase;
     const shown = m.fade > 0.004;
     const mat = pm.material;
     mat.opacity = m.fade;
@@ -245,17 +269,17 @@ export function PartNode(props: PartNodeProps) {
       if (props.castShadow && runtime.energy > 0) runtime.shadowDirty = true;
     }
 
-    if (m.fade !== targetFade || m.sel !== selTarget) keepAnimating(state.invalidate);
+    if (m.fade !== targetFade || m.base !== targetBase || m.aside !== asideTarget || m.sel !== selTarget) keepAnimating(state.invalidate);
   });
 
   const onClick = (e: ThreeEvent<MouseEvent>) => {
     // A drag that ends over a part is an orbit, not a pick.
-    if (!display.visible || e.delta > 6) return;
+    if (!pickable || e.delta > 6) return;
     e.stopPropagation();
     props.onSelect(part.id);
   };
   const onPointerOver = (e: ThreeEvent<PointerEvent>) => {
-    if (!display.visible) return;
+    if (!pickable) return;
     e.stopPropagation();
     if (e.pointerType !== 'touch') props.onHover(part.id);
   };
@@ -267,7 +291,7 @@ export function PartNode(props: PartNodeProps) {
     press.current.timer = null;
   };
   const onPointerDown = (e: ThreeEvent<PointerEvent>) => {
-    if (e.pointerType !== 'touch' || !display.visible) return;
+    if (e.pointerType !== 'touch' || !pickable) return;
     e.stopPropagation();
     cancelPress();
     press.current.x = e.nativeEvent.clientX;

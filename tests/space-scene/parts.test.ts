@@ -21,6 +21,7 @@ const ENGINEERED = {
   flange: { kind: 'flange', radius: 0.1, thickness: 0.02, boltCount: 8, boltRadius: 0.075 },
   fins: { kind: 'fins', size: [0.5, 0.12, 0.01], count: 9, gap: 0.04, axis: 'x' },
   vessel: { kind: 'vessel', radius: 0.25, length: 0.5, headRatio: 0.5 },
+  panelHole: { kind: 'panelHole', size: [0.78, 0.55, 0.012], hole: { r: 0.2, at: [-0.12, 0.005] } },
 } as const;
 
 /** Union of the pieces' boxes (instances applied). */
@@ -161,3 +162,53 @@ describe('geometry builders', () => {
     expect(modelBounds([part('b', ENGINEERED.vessel)])!.min[1]).toBeCloseTo(-0.375);
   });
 });
+
+describe('panelHole', () => {
+  it('rejects a hole that leaves the panel', () => {
+    const ok = { kind: 'panelHole', size: [0.6, 0.4, 0.02], hole: { r: 0.15, at: [0, 0] }, at: [0, 0, 0], color: 'enamel' };
+    expect(primitiveSchema.safeParse(ok).success).toBe(true);
+    expect(primitiveSchema.safeParse({ ...ok, hole: { r: 0.15, at: [0.2, 0] } }).success).toBe(false);
+    expect(primitiveSchema.safeParse({ ...ok, hole: { r: 0.21, at: [0, 0] } }).success).toBe(false);
+  });
+
+  it('is a closed slab with a round opening: no faces inside the hole', () => {
+    const pt = part('front', ENGINEERED.panelHole);
+    const g = primitivePieces(pt)[0]!.geometry;
+    const pos = g.getAttribute('position');
+    const [cx, cy] = ENGINEERED.panelHole.hole.at;
+    const r = ENGINEERED.panelHole.hole.r;
+    // Every triangle centroid lies outside the hole (or on its wall).
+    for (let i = 0; i < pos.count; i += 3) {
+      const x = (pos.getX(i) + pos.getX(i + 1) + pos.getX(i + 2)) / 3;
+      const y = (pos.getY(i) + pos.getY(i + 1) + pos.getY(i + 2)) / 3;
+      expect(Math.hypot(x - cx, y - cy)).toBeGreaterThan(r * 0.99);
+    }
+    expect(isClosedKind('panelHole')).toBe(true);
+    // Front face area = rectangle − circle (polygonal circle: within 0.5 %).
+    let area = 0;
+    const nz = g.getAttribute('normal');
+    for (let i = 0; i < pos.count; i += 3) {
+      if (nz.getZ(i) < 0.99) continue;
+      const ax = pos.getX(i), ay = pos.getY(i);
+      area += ((pos.getX(i + 1) - ax) * (pos.getY(i + 2) - ay) - (pos.getX(i + 2) - ax) * (pos.getY(i + 1) - ay)) / 2;
+    }
+    const [w, h] = ENGINEERED.panelHole.size;
+    expect(area / (w * h - Math.PI * r * r)).toBeCloseTo(1, 2);
+  });
+});
+
+describe('part flags', () => {
+  it('only context parts may leave out the group', () => {
+    const raw = { ...base, id: 'wall', primitive: { kind: 'box', size: [1, 1, 0.1], at: [0, 0, 0], color: 'plastic' } };
+    const { group: _drop, ...noGroup } = raw;
+    expect(partSchema.safeParse(noGroup).success).toBe(false);
+    expect(partSchema.safeParse({ ...noGroup, context: true }).success).toBe(true);
+    expect(partSchema.parse({ ...noGroup, context: true, explode: undefined }).explode.dist).toBe(0);
+  });
+
+  it('fins go up to 512 plates', () => {
+    expect(primitiveSchema.safeParse({ ...ENGINEERED.fins, count: 512, at: [0, 0, 0], color: 'casing' }).success).toBe(true);
+    expect(primitiveSchema.safeParse({ ...ENGINEERED.fins, count: 513, at: [0, 0, 0], color: 'casing' }).success).toBe(false);
+  });
+});
+

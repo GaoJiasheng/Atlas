@@ -122,6 +122,7 @@ export function SceneRoot({ store, ui, bridge, data, chapters, look }: SceneRoot
       run: st.run,
       cutaway: st.cutaway,
       layers: st.layers,
+      hidden: st.hidden,
       transitionId: st.transition.id,
       instant: st.transition.instant,
     })),
@@ -184,9 +185,9 @@ export function SceneRoot({ store, ui, bridge, data, chapters, look }: SceneRoot
     const ink = resolveDataColor('token:ink', look.tokens, look.theme, '#2a2824');
     const out = new Map<string, PartStyle>();
     for (const part of data.parts) {
-      const ref = part.primitive?.color ?? groupColors.get(part.group) ?? 'steel';
+      const ref = part.primitive?.color ?? (part.group !== undefined ? groupColors.get(part.group) : undefined) ?? 'steel';
       out.set(part.id, {
-        look: resolveMaterialLook(ref, look.tokens, look.theme),
+        look: resolveMaterialLook(ref, look.tokens, look.theme, part.primitive?.tint),
         kit,
         signal,
         cut,
@@ -201,8 +202,8 @@ export function SceneRoot({ store, ui, bridge, data, chapters, look }: SceneRoot
 
   /* ---------------- explorer state -> display ---------------- */
   const displays = useMemo(
-    () => resolveAllPartDisplays(data.parts, { view: s.view, part: s.part, layers: s.layers }),
-    [data.parts, s.view, s.part, s.layers],
+    () => resolveAllPartDisplays(data.parts, { view: s.view, part: s.part, layers: s.layers, hidden: s.hidden }),
+    [data.parts, s.view, s.part, s.layers, s.hidden],
   );
   const explodeTarget = targetExplodeAmount(s.view, s.explode);
   const anims = useMemo(() => animationsByPart(data.animations), [data.animations]);
@@ -225,7 +226,7 @@ export function SceneRoot({ store, ui, bridge, data, chapters, look }: SceneRoot
     if (s.instant) snap.current.key += 1;
   }
 
-  const hoverVisible = hovered && displays.get(hovered)?.visible ? hovered : null;
+  const hoverVisible = hovered && displays.get(hovered)?.visible && displays.get(hovered)?.selectable ? hovered : null;
   useEffect(() => {
     gl.domElement.style.cursor = hoverVisible ? 'pointer' : '';
   }, [gl, hoverVisible]);
@@ -259,7 +260,9 @@ export function SceneRoot({ store, ui, bridge, data, chapters, look }: SceneRoot
             animations={anims.get(part.id) ?? []}
             hovered={hovered === part.id}
             clipping={clipping}
-            castShadow={style.look.opacity === 1 && shape.radius >= bounds.modelRadius * SHADOW_CASTER_RATIO}
+            castShadow={
+              part.castShadow ?? (!part.context && style.look.opacity === 1 && shape.radius >= bounds.modelRadius * SHADOW_CASTER_RATIO)
+            }
             anchorOffset={anchors.get(part.id) ?? [0, 0, 0]}
             anchorRadius={radii.get(part.id) ?? 0}
             handles={handles}

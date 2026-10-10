@@ -2,9 +2,10 @@
  * Colour and material resolution for the 3D stage (pure, unit-tested).
  *
  * Part colours in data are a material family (`casing`, `steel`, `powder`,
- * `stainless`, `copper`, `rubber`, `plastic`, `glass`; `metal` / `matte` are
- * aliases of `steel` / `plastic`), a theme token (`token:accent-1`) or a hex
- * literal. Families carry a physically plausible finish (master-spec E):
+ * `stainless`, `copper`, `rubber`, `plastic`, `glass`, `enamel`, `brass`;
+ * `metal` / `matte` are aliases of `steel` / `plastic`), a theme token
+ * (`token:accent-1`) or a hex literal. A family can take a `tint` (token or
+ * hex) that replaces its colour and keeps the rest of its finish. Families carry a physically plausible finish (master-spec E):
  * colour, metalness, roughness and which procedural map gives them their
  * surface (brushed, axially brushed, orange peel, fine grain). Tokens and hex
  * colours are treated as a satin paint finish. Tokens resolve against the
@@ -101,6 +102,10 @@ export const MATERIAL_FAMILIES: Record<MaterialFamily, FamilySpec> = {
   rubber: { color: { paper: '#1e1f20', cinema: '#202123' }, metalness: 0, roughness: 0.78, finish: 'grain', envIntensity: 0.5 },
   plastic: { color: { paper: '#c9bc9f', cinema: '#8c836f' }, metalness: 0, roughness: 0.62, finish: 'grain' },
   glass: { color: { paper: '#cfe0de', cinema: '#b9d0cd' }, metalness: 0, roughness: 0.05, finish: 'grain', opacity: 0.22, envIntensity: 1.8 },
+  // Baked appliance enamel: warm white a step darker than the paper (#e9e4d8) so a casing keeps its
+  // silhouette on the sheet; low roughness under the fine grain map gives a soft, satin sheen.
+  enamel: { color: { paper: '#dcd7cb', cinema: '#cfcabd' }, metalness: 0, roughness: 0.34, finish: 'grain', envIntensity: 0.85 },
+  brass: { color: { paper: '#a88a4c', cinema: '#b39555' }, metalness: 0.9, roughness: 0.32, finish: 'grain' },
 };
 
 /** Base colour of every preset per theme (aliases included). */
@@ -143,11 +148,12 @@ export function resolveMaterialLook(
   ref: string,
   tokens: Partial<Record<string, string>>,
   theme: Theme,
+  tint?: string,
 ): MaterialLook {
   if (isMaterialPreset(ref)) {
     const f = MATERIAL_FAMILIES[familyOf(ref)];
     return {
-      color: f.color[theme],
+      color: tint ? resolveDataColor(tint, tokens, theme, f.color[theme]) : f.color[theme],
       metalness: f.metalness,
       roughness: f.roughness,
       opacity: f.opacity ?? 1,
