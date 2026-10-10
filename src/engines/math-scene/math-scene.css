@@ -1,0 +1,1449 @@
+/*
+ * MathScene (docs/15 §4.3–4.5): the SVG stage, the answer tray, the bottom bar
+ * of steps and the HUD panel bodies. Technical-plate grammar: paper, ink
+ * hairlines, the child's marks in signal orange, given / second amounts cold
+ * / hot, taken away = ink hatch, the answer = dashed ink. Tokens only; HUD
+ * sizes × --u, touch targets ≥ 44 px.
+ */
+
+/* The tray's band in the HUD grid (height written by the view as --task-h): the HUD columns end above it. */
+.atlas-scene[data-engine="math-scene"] .atlas-hud {
+  grid-template-rows: minmax(0, 1fr) var(--task-h, 0px) auto;
+  grid-template-areas:
+    "left . right"
+    ". . ."
+    "dock dock dock";
+}
+@media (max-width: 759px) {
+  .atlas-scene[data-engine="math-scene"] .atlas-hud {
+    grid-template-areas:
+      "left right"
+      ". ."
+      "dock dock";
+  }
+}
+
+.ms-root {
+  position: absolute;
+  inset: 0;
+  font-family: var(--font-hud);
+}
+.ms-svg {
+  position: absolute;
+  inset: 0;
+  display: block;
+  overflow: visible;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ------------------------------------------------------------------ */
+/* Models                                                              */
+/* ------------------------------------------------------------------ */
+
+.ms-part__shape {
+  fill: color-mix(in srgb, var(--panel-solid) 80%, transparent);
+  stroke: var(--ink);
+  stroke-width: 1;
+  transition: fill var(--dur-fast) var(--ease-out);
+}
+.ms-part[data-mark="mine"] .ms-part__shape,
+.ms-part__shape[data-mark="mine"] {
+  fill: color-mix(in srgb, var(--signal) 58%, var(--panel-solid));
+}
+.ms-part[data-mark="cold"] .ms-part__shape,
+.ms-part__shape[data-mark="cold"] {
+  fill: color-mix(in srgb, var(--cold) 50%, var(--panel-solid));
+}
+.ms-part[data-mark="hot"] .ms-part__shape,
+.ms-part__shape[data-mark="hot"] {
+  fill: color-mix(in srgb, var(--hot) 50%, var(--panel-solid));
+}
+.ms-part[data-mark="taken"] .ms-part__shape {
+  fill: color-mix(in srgb, var(--cold) 22%, var(--panel-solid));
+}
+.ms-part[role="button"] {
+  cursor: pointer;
+  outline: none;
+}
+.ms-part[role="button"]:focus-visible .ms-part__shape {
+  stroke: var(--signal);
+  stroke-width: 3;
+}
+@media (hover: hover) {
+  .ms-part[role="button"]:not([aria-disabled]):hover .ms-part__shape {
+    stroke-width: 2;
+  }
+}
+.ms-part__hatch {
+  pointer-events: none;
+}
+.ms-hatch__line {
+  stroke: var(--ink);
+  stroke-width: 1.3;
+}
+.ms-fine__line {
+  stroke: var(--ink);
+  stroke-width: 0.8;
+  opacity: 0.45;
+}
+.ms-part__strike {
+  stroke: var(--ink);
+  stroke-width: 1.6;
+  pointer-events: none;
+}
+.ms-outline {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.6;
+  pointer-events: none;
+}
+.ms-detail {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 0.8;
+  pointer-events: none;
+}
+.ms-whole-no,
+.ms-dim text {
+  fill: var(--ink-2);
+  font: 500 11px / 1 var(--font-hud);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.ms-dim line {
+  stroke: var(--ink-2);
+  stroke-width: 1;
+}
+.ms-arrowhead {
+  fill: none;
+  stroke: var(--ink-2);
+  stroke-width: 1;
+}
+.ms-frac text {
+  fill: var(--ink);
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+.ms-frac line {
+  stroke: var(--ink);
+  stroke-width: 1.2;
+}
+.ms-part-label text {
+  fill: var(--ink-2);
+}
+.ms-part-label line {
+  stroke: var(--ink-2);
+  stroke-width: 0.8;
+}
+.ms-part-label,
+.ms-symbol,
+.ms-line__frac,
+.ms-rows__unitfrac {
+  pointer-events: none;
+}
+.ms-symbol text,
+.ms-symbol--sign {
+  fill: var(--signal);
+  font-family: var(--font-mono);
+}
+.ms-symbol--sign {
+  font-size: 40px;
+}
+.ms-symbol line {
+  stroke: var(--signal);
+  stroke-width: 2;
+}
+
+/* Folding: creases stay, a flap turns over once. */
+.ms-creases line {
+  stroke: var(--ink-2);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+.ms-fold-flap {
+  fill: var(--panel-solid);
+  stroke: var(--ink);
+  stroke-width: 1.2;
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ms-fold 760ms var(--ease-in-out) both;
+  pointer-events: none;
+}
+@keyframes ms-fold {
+  0% {
+    transform: scaleX(1);
+    opacity: 0.95;
+  }
+  60% {
+    transform: scaleX(-1);
+    opacity: 0.95;
+  }
+  100% {
+    transform: scaleX(-1);
+    opacity: 0;
+  }
+}
+
+/* "Show me": the answer as a dashed ink outline. */
+.ms-ghost__part,
+.ms-ghost__ring {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2;
+  stroke-dasharray: 6 4;
+  pointer-events: none;
+}
+.ms-ghost__cut {
+  stroke: var(--ink);
+  stroke-width: 1.2;
+  stroke-dasharray: 4 4;
+  pointer-events: none;
+}
+.ms-ghost__cut--strong {
+  stroke-width: 2;
+}
+
+/* Example pointer: a signal ring that moves to the part being done. */
+.ms-pointer {
+  fill: none;
+  stroke: var(--signal);
+  stroke-width: 2.5;
+  pointer-events: none;
+  transition:
+    cx var(--dur-slow) var(--ease-in-out),
+    cy var(--dur-slow) var(--ease-in-out);
+}
+
+/* E: finer names under the bar. */
+.ms-equiv rect {
+  fill: none;
+  stroke: var(--hair);
+}
+.ms-equiv rect[data-on] {
+  fill: color-mix(in srgb, var(--signal) 20%, transparent);
+}
+.ms-equiv text,
+.ms-aligned text {
+  fill: var(--ink-3);
+  font: 500 11px / 1 var(--font-mono);
+}
+.ms-aligned line {
+  stroke: var(--ink-2);
+  stroke-width: 1;
+}
+
+/* A right answer: one signal pulse around the model. */
+.ms-pulse {
+  fill: none;
+  stroke: var(--signal);
+  stroke-width: 2;
+  pointer-events: none;
+  animation: ms-pulse 900ms var(--ease-out) both;
+}
+@keyframes ms-pulse {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Number line */
+.ms-line__axis,
+.ms-line__major {
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+.ms-line__minor {
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+.ms-line__num {
+  fill: var(--ink);
+  font: 500 14px / 1 var(--font-mono);
+}
+.ms-line__hit,
+.ms-line__marker-hit,
+.ms-rows__hit,
+.ms-cut__hit,
+.ms-cut__grab {
+  fill: transparent;
+  cursor: pointer;
+}
+.ms-cut__grab {
+  cursor: ew-resize;
+}
+.ms-line__marker {
+  cursor: grab;
+  outline: none;
+  transition: transform 180ms var(--ease-out);
+}
+.ms-line__marker:not([data-placed]) {
+  opacity: 0.35;
+}
+.ms-line__marker-head,
+.ms-line__marker-dot {
+  fill: var(--signal);
+}
+.ms-line__marker:focus-visible .ms-line__marker-head {
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+.ms-line__arcs path {
+  fill: none;
+  stroke: var(--signal);
+  stroke-width: 1.4;
+}
+.ms-line__arcs text {
+  fill: var(--signal);
+  font: 500 12px / 1 var(--font-mono);
+}
+.ms-line__arrow path {
+  fill: var(--ink);
+}
+.ms-line__arrow line {
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+.ms-line__point circle {
+  fill: var(--cold);
+  stroke: var(--ink);
+}
+.ms-line__point[data-tone="mine"] circle {
+  fill: var(--signal);
+}
+
+/* Rows: fraction wall, compare bars */
+.ms-rows__row {
+  cursor: pointer;
+  outline: none;
+}
+.ms-rows__row:focus-visible .ms-outline {
+  stroke: var(--signal);
+  stroke-width: 3;
+}
+.ms-rows__picked {
+  fill: none;
+  stroke: var(--signal);
+  stroke-width: 2.5;
+}
+.ms-rows__orig {
+  stroke: var(--ink);
+  stroke-width: 1.8;
+}
+.ms-rows__align {
+  stroke: var(--ink-2);
+  stroke-width: 1;
+  stroke-dasharray: 2 3;
+}
+.ms-rows__unit {
+  fill: var(--ink-2);
+  font: 500 12px / 1 var(--font-mono);
+}
+.ms-rows__unitfrac text {
+  fill: var(--ink-2);
+}
+.ms-rows__unitfrac line {
+  stroke: var(--ink-2);
+}
+
+/* Model drawing */
+.ms-diagram__seg rect {
+  fill: color-mix(in srgb, var(--panel-solid) 80%, transparent);
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+.ms-diagram__seg[data-tone="cold"] > rect:first-child {
+  fill: color-mix(in srgb, var(--cold) 50%, var(--panel-solid));
+}
+.ms-diagram__seg[data-tone="hot"] > rect:first-child {
+  fill: color-mix(in srgb, var(--hot) 50%, var(--panel-solid));
+}
+.ms-diagram__seg[data-tone="signal"] > rect:first-child {
+  fill: color-mix(in srgb, var(--signal) 58%, var(--panel-solid));
+}
+.ms-diagram__name {
+  fill: var(--ink);
+  font: 600 13px / 1 var(--font-hud);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.ms-diagram__seglabel {
+  fill: var(--ink-2);
+  font: 500 12px / 1 var(--font-hud);
+  letter-spacing: 0.06em;
+}
+.ms-diagram__q,
+.ms-brace text {
+  fill: var(--ink);
+  font: 600 20px / 1 var(--font-mono);
+}
+.ms-diagram__unit {
+  stroke: var(--ink-2);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+.ms-brace path {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.2;
+}
+
+/* Picture options */
+.ms-option {
+  cursor: pointer;
+  outline: none;
+}
+.ms-option__card {
+  fill: color-mix(in srgb, var(--panel-solid) 55%, transparent);
+  stroke: var(--line);
+  stroke-width: 1;
+}
+.ms-option[data-on] .ms-option__card {
+  stroke: var(--signal);
+  stroke-width: 3;
+}
+.ms-option:focus-visible .ms-option__card {
+  stroke: var(--signal);
+  stroke-dasharray: 5 3;
+  stroke-width: 2;
+}
+.ms-option__letter {
+  fill: var(--ink-2);
+  font: 600 14px / 1 var(--font-mono);
+}
+
+/* Cut ruler */
+.ms-cut__ruler line {
+  stroke: var(--ink-3);
+  stroke-width: 1;
+}
+.ms-cut__ruler text {
+  fill: var(--ink-3);
+  font: 500 10px / 1 var(--font-mono);
+}
+.ms-cut__line line {
+  stroke: var(--ink);
+  stroke-width: 2.4;
+}
+.ms-cut__measure {
+  fill: var(--ink-2);
+  font: 600 13px / 1 var(--font-mono);
+}
+.ms-cut__cursor {
+  outline: none;
+}
+.ms-cut__caret {
+  fill: var(--signal);
+  opacity: 0;
+}
+.ms-cut__guide {
+  stroke: var(--signal);
+  stroke-dasharray: 3 3;
+  opacity: 0;
+}
+.ms-cut__cursor:focus-visible .ms-cut__caret,
+.ms-cut__cursor:focus-visible .ms-cut__guide {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ms-fold-flap,
+  .ms-pulse {
+    display: none;
+  }
+  .ms-pointer,
+  .ms-line__marker,
+  .ms-part__shape {
+    transition: none;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Buttons (child-facing: ≥ 44 px, sentence case)                      */
+/* ------------------------------------------------------------------ */
+
+.ms-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: var(--hit);
+  min-width: var(--hit);
+  margin: 0;
+  padding: 0 16px;
+  border: 1px solid var(--ink);
+  border-radius: var(--radius-hud);
+  background: var(--panel-solid);
+  color: var(--ink);
+  font: 600 15px / 1 var(--font-hud);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
+}
+.ms-btn kbd {
+  font: 500 11px / 1 var(--font-mono);
+  color: var(--ink-3);
+}
+.ms-btn--ghost {
+  border-color: var(--line);
+  background: transparent;
+  font-weight: 500;
+}
+.ms-btn--icon {
+  width: var(--hit);
+  padding: 0;
+  font-size: 17px;
+}
+.ms-btn--small {
+  min-height: 34px;
+  padding: 0 10px;
+  font-size: 13px;
+}
+.ms-btn[data-ready],
+.ms-tray__next[data-done] {
+  border-color: var(--signal);
+  background: var(--signal);
+  color: var(--ink-on);
+}
+.ms-btn[data-ready] kbd,
+.ms-tray__next[data-done] kbd {
+  color: color-mix(in srgb, var(--ink-on) 70%, transparent);
+}
+.ms-btn[aria-pressed="true"] {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--ink-on);
+}
+.ms-btn:disabled {
+  border-color: var(--hair);
+  background: transparent;
+  color: var(--ink-3);
+  cursor: default;
+}
+.ms-btn:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 2px;
+}
+@media (hover: hover) {
+  .ms-btn:not(:disabled):hover {
+    background: color-mix(in srgb, var(--ink) 8%, var(--panel-solid));
+  }
+  .ms-btn[data-ready]:not(:disabled):hover,
+  .ms-tray__next[data-done]:hover {
+    background: color-mix(in srgb, var(--signal) 88%, var(--ink));
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Tray                                                                */
+/* ------------------------------------------------------------------ */
+
+.ms-tray-slot {
+  position: absolute;
+  z-index: 4;
+  display: flex;
+  justify-content: center;
+}
+.ms-tray-slot[hidden] {
+  display: none;
+}
+.ms-tray {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-hud);
+  background: var(--panel);
+  backdrop-filter: blur(2px);
+  color: var(--ink);
+}
+.ms-tray[data-compact] {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  backdrop-filter: none;
+}
+.ms-tray__head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+.ms-tray__where {
+  flex: none;
+  font: 500 13px / 1 var(--font-mono);
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+}
+.ms-tray__prompt {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font: 400 clamp(16px, calc(19 * var(--u)), 22px) / 1.35 var(--font-serif);
+  text-wrap: pretty;
+}
+.ms-tray__prompt--example b {
+  margin-right: 6px;
+  font: 600 12px / 1 var(--font-hud);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--signal);
+}
+.ms-tray__readout {
+  flex: none;
+  font: 600 15px / 1 var(--font-mono);
+  color: var(--signal);
+}
+.ms-tray__controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 18px;
+}
+.ms-tray__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.ms-tray__count,
+.ms-tray__note {
+  font: 500 14px / 1.3 var(--font-hud);
+  color: var(--ink-2);
+}
+.ms-tray__body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  min-height: var(--hit);
+}
+.ms-tray__next {
+  margin-left: auto;
+}
+.ms-tray__feedback {
+  display: flex;
+  flex: 1 1 220px;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+  margin: 0;
+  font: 400 clamp(15px, calc(16.5 * var(--u)), 19px) / 1.35 var(--font-serif);
+  color: var(--ink);
+}
+.ms-tray__feedback i {
+  flex: none;
+  font: 600 15px / 1 var(--font-mono);
+  font-style: normal;
+  color: var(--ink-2);
+}
+.ms-tray__feedback[data-tone="correct"] i,
+.ms-tray__feedback[data-tone="phase"] i {
+  color: var(--signal);
+}
+.ms-tray__feedback[data-tone="hint"],
+.ms-tray__feedback[data-tone="info"] {
+  color: var(--ink-2);
+}
+.ms-tray__answer {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border: 1px dashed var(--ink);
+  font: 500 15px / 1 var(--font-hud);
+}
+
+/* Fraction boxes and keypad */
+.ms-input {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+}
+.ms-input__rows {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.ms-input__row {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.ms-input__frac {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.ms-input__frac > i {
+  width: 52px;
+  height: 0;
+  border-top: 2px solid var(--ink);
+}
+.ms-input__eq,
+.ms-input__given {
+  font: 500 22px / 1 var(--font-mono);
+}
+.ms-box {
+  box-sizing: border-box;
+  width: 52px;
+  height: var(--hit);
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-hud);
+  background: var(--panel-solid);
+  color: var(--ink);
+  font: 600 22px / 1 var(--font-mono);
+  text-align: center;
+  caret-color: var(--signal);
+}
+.ms-box[data-active] {
+  border-color: var(--signal);
+  box-shadow: inset 0 0 0 1px var(--signal);
+}
+.ms-box:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 1px;
+}
+.ms-box--printed {
+  display: inline-grid;
+  place-items: center;
+  border-color: transparent;
+  background: transparent;
+}
+.ms-keypad {
+  display: grid;
+  grid-template-columns: repeat(11, var(--hit));
+  gap: 4px;
+}
+.ms-key {
+  width: var(--hit);
+  height: var(--hit);
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-hud);
+  background: transparent;
+  color: var(--ink);
+  font: 500 18px / 1 var(--font-mono);
+  cursor: pointer;
+}
+.ms-key:disabled {
+  color: var(--ink-3);
+  cursor: default;
+}
+@media (hover: hover) {
+  .ms-key:not(:disabled):hover {
+    background: color-mix(in srgb, var(--ink) 8%, transparent);
+  }
+}
+.ms-key:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 1px;
+}
+
+/* < = > */
+.ms-symbols {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ms-symbols__side {
+  font-size: 22px;
+}
+.ms-symbol-btn,
+.ms-chip {
+  min-width: 56px;
+  height: var(--hit);
+  margin: 0;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-hud);
+  background: transparent;
+  color: var(--ink);
+  font: 600 20px / 1 var(--font-mono);
+  cursor: pointer;
+}
+.ms-chip {
+  font-size: 17px;
+}
+.ms-symbol-btn[aria-checked="true"],
+.ms-chip[aria-checked="true"] {
+  border-color: var(--signal);
+  background: var(--signal);
+  color: var(--ink-on);
+}
+.ms-symbol-btn[data-ghost] {
+  outline: 2px dashed var(--ink);
+  outline-offset: 3px;
+}
+.ms-chip[data-blocked] {
+  border-style: dashed;
+  color: var(--ink-3);
+  text-decoration: line-through;
+}
+.ms-symbol-btn:focus-visible,
+.ms-chip:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 2px;
+}
+.ms-chips-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+}
+.ms-chips {
+  display: flex;
+  gap: 8px;
+}
+
+/* Sentence choices */
+.ms-choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  flex: 1 1 100%;
+}
+.ms-choice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: var(--hit);
+  margin: 0;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-hud);
+  background: transparent;
+  color: var(--ink);
+  font: 400 16px / 1.3 var(--font-serif);
+  text-align: left;
+  cursor: pointer;
+}
+.ms-choice b {
+  font: 600 13px / 1 var(--font-mono);
+  color: var(--ink-2);
+}
+.ms-choice[aria-checked="true"] {
+  border-color: var(--signal);
+  box-shadow: inset 0 0 0 2px var(--signal);
+}
+.ms-choice[data-ghost] {
+  outline: 2px dashed var(--ink);
+  outline-offset: 2px;
+}
+.ms-choice:focus-visible {
+  outline: 2px solid var(--signal);
+}
+
+/* Order */
+.ms-order {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+}
+.ms-order__cards,
+.ms-order__slots {
+  display: flex;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ms-order__dir {
+  font: 500 13px / 1 var(--font-hud);
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+}
+.ms-card,
+.ms-slot {
+  display: inline-grid;
+  place-items: center;
+  box-sizing: border-box;
+  width: 58px;
+  height: 58px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-hud);
+  background: var(--panel-solid);
+  color: var(--ink);
+  font-size: 22px;
+  cursor: pointer;
+}
+.ms-card--gone {
+  border-style: dashed;
+  background: transparent;
+  cursor: default;
+}
+.ms-card--placed {
+  border-color: var(--signal);
+}
+.ms-slot {
+  border-style: dashed;
+  background: transparent;
+  cursor: default;
+}
+.ms-order__slots li {
+  position: relative;
+}
+.ms-order__slots li[data-ghost]::after {
+  content: attr(data-ghost);
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  margin-top: 4px;
+  font: 500 12px / 1 var(--font-mono);
+  text-align: center;
+  color: var(--ink);
+}
+.ms-stepper {
+  margin-left: auto;
+}
+
+.ms-preview-chip {
+  position: absolute;
+  z-index: 4;
+}
+
+/* Practice summary */
+.ms-summary {
+  position: absolute;
+  z-index: 4;
+  box-sizing: border-box;
+  overflow-y: auto;
+  padding: 18px 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-hud);
+  background: var(--panel);
+}
+.ms-summary__title {
+  margin: 0 0 6px;
+  font: 600 13px / 1 var(--font-hud);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.ms-summary__line {
+  margin: 0 0 12px;
+  font: 400 20px / 1.35 var(--font-serif);
+}
+.ms-summary__table {
+  width: 100%;
+  margin-bottom: 14px;
+  border-collapse: collapse;
+  font: 400 15px / 1.3 var(--font-serif);
+}
+.ms-summary__table th {
+  padding: 4px 8px;
+  border-bottom: 1px solid var(--line);
+  font: 500 11px / 1 var(--font-hud);
+  letter-spacing: 0.12em;
+  text-align: left;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.ms-summary__table td {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--hair);
+  vertical-align: middle;
+}
+.ms-summary__no,
+.ms-summary__mark {
+  font: 600 14px / 1 var(--font-mono);
+}
+
+/* ------------------------------------------------------------------ */
+/* HUD bodies                                                          */
+/* ------------------------------------------------------------------ */
+
+.ms-card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(8 * var(--u));
+  padding: calc(10 * var(--u)) calc(12 * var(--u));
+}
+.ms-card-body--compare {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.ms-card-body__frac {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: calc(10 * var(--u));
+  width: 100%;
+}
+.ms-card-body__lead {
+  font: 600 calc(10.4 * var(--u)) / 1.3 var(--font-hud);
+  letter-spacing: 0.08em;
+  color: var(--ink-2);
+}
+.ms-card-body__lead b {
+  display: block;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+.ms-card-body__lead small {
+  display: block;
+  margin-top: 2px;
+  font-weight: 400;
+  color: var(--ink-3);
+}
+.ms-card-body__lead--n {
+  align-self: start;
+  text-align: right;
+}
+.ms-card-body__lead--d {
+  align-self: end;
+}
+.ms-card-body__sign {
+  font: 500 calc(30 * var(--u)) / 1 var(--font-mono);
+}
+.ms-card-body__words,
+.ms-card-body__empty {
+  width: 100%;
+  margin: 0;
+  font: 400 calc(13 * var(--u)) / 1.3 var(--font-serif);
+  text-align: center;
+  color: var(--ink-2);
+}
+.ms-card-body__more {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 4px 10px;
+  width: 100%;
+  margin: 0;
+  font: 400 calc(12 * var(--u)) / 1.4 var(--font-hud);
+}
+.ms-card-body__more dt {
+  color: var(--ink-3);
+}
+.ms-card-body__more dd {
+  margin: 0;
+}
+.ms-big {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(6 * var(--u));
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+.ms-big__w {
+  font-size: calc(46 * var(--u));
+}
+.ms-big__f {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+  font-size: calc(38 * var(--u));
+  line-height: 1.05;
+  text-align: center;
+}
+.ms-big__f > span:first-child {
+  padding: 0 calc(6 * var(--u)) calc(3 * var(--u));
+  border-bottom: 2px solid currentColor;
+}
+.ms-big[data-tone="cold"] {
+  color: var(--cold);
+}
+.ms-big[data-tone="hot"] {
+  color: var(--hot);
+}
+
+.ms-panel__empty {
+  margin: 0;
+  padding: calc(8 * var(--u)) calc(12 * var(--u));
+  font: 400 calc(11.3 * var(--u)) / 1.4 var(--font-hud);
+  color: var(--ink-3);
+}
+.ms-history {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: calc(6 * var(--u)) calc(10 * var(--u));
+  list-style: none;
+  overflow-y: auto;
+  max-height: 100%;
+}
+.ms-history__item {
+  display: flex;
+  align-items: center;
+  gap: calc(10 * var(--u));
+  width: 100%;
+  min-height: calc(22 * var(--u));
+  margin: 0;
+  padding: 0 4px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: 500 calc(10.6 * var(--u)) / 1 var(--font-mono);
+  letter-spacing: 0.04em;
+  text-align: left;
+  cursor: pointer;
+}
+.ms-history__item[aria-pressed="true"] {
+  background: color-mix(in srgb, var(--signal) 16%, transparent);
+}
+.ms-thumb {
+  flex: none;
+  width: calc(64 * var(--u));
+  height: calc(14 * var(--u));
+}
+.ms-thumb rect {
+  fill: none;
+  stroke: var(--ink-2);
+  stroke-width: 0.6;
+}
+.ms-thumb rect[data-mark="mine"] {
+  fill: var(--signal);
+}
+.ms-thumb rect[data-mark="cold"] {
+  fill: var(--cold);
+}
+.ms-thumb rect[data-mark="taken"] {
+  fill: var(--ink-3);
+}
+.ms-thumb line {
+  stroke: var(--ink);
+}
+.ms-working {
+  margin: 0;
+  padding: calc(8 * var(--u)) calc(14 * var(--u));
+  list-style: none;
+  font: 500 calc(14 * var(--u)) / 1.6 var(--font-mono);
+}
+.ms-working[data-done] li:last-child {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 6px;
+}
+.ms-state {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: calc(6 * var(--u)) calc(12 * var(--u));
+}
+.ms-state__row {
+  display: grid;
+  grid-template-columns: calc(112 * var(--u)) minmax(0, 1fr);
+  align-items: baseline;
+  padding: calc(2 * var(--u)) 0;
+  border-bottom: 1px solid var(--hair);
+}
+.ms-state__row dt {
+  font: 500 calc(10.4 * var(--u)) / 1.2 var(--font-hud);
+  letter-spacing: 0.12em;
+  color: var(--ink-3);
+}
+.ms-state__row dt small {
+  margin-left: calc(5 * var(--u));
+  font-size: calc(10.2 * var(--u));
+  letter-spacing: 0.06em;
+}
+.ms-state__row dd {
+  margin: 0;
+  font: 500 calc(11 * var(--u)) / 1.2 var(--font-mono);
+  color: var(--ink-2);
+}
+.ms-state__row[data-on] dd {
+  color: var(--ink);
+}
+.ms-state__bar {
+  position: relative;
+  height: calc(6 * var(--u));
+  margin: calc(10 * var(--u)) 0 calc(14 * var(--u));
+  border: 1px solid var(--line);
+}
+.ms-state__bar span {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: var(--signal);
+}
+.ms-state__bar i {
+  position: absolute;
+  top: calc(8 * var(--u));
+  font: 500 calc(10 * var(--u)) / 1 var(--font-mono);
+  font-style: normal;
+  color: var(--ink-3);
+}
+.ms-state__bar i:first-of-type {
+  left: 0;
+}
+.ms-state__bar i:last-of-type {
+  right: 0;
+}
+
+/* Reader inspector */
+.ms-inspector {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 6px;
+  padding-top: 10px;
+  border-top: 1px solid var(--hair);
+}
+.ms-inspector__lo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  font: 400 13px / 1.4 var(--font-hud);
+  color: var(--ink-2);
+}
+.ms-inspector__lo b {
+  margin-right: 4px;
+  font: 600 11px / 1 var(--font-hud);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.ms-inspector__head {
+  margin: 0;
+  font: 600 13px / 1.4 var(--font-hud);
+  letter-spacing: 0.04em;
+}
+.ms-inspector__guide,
+.ms-inspector__feedback,
+.ms-inspector__reveal,
+.ms-inspector__hints {
+  margin: 0;
+  font: 400 1rem / 1.55 var(--font-serif);
+}
+.ms-inspector__hints {
+  padding-left: 1.2em;
+  color: var(--ink-2);
+}
+.ms-inspector__feedback,
+.ms-inspector__reveal {
+  padding-left: 10px;
+  border-left: 2px solid var(--ink);
+}
+.ms-inspector__feedback[data-tone="correct"] {
+  border-left-color: var(--signal);
+}
+.ms-inspector__reveal {
+  border-left-style: dashed;
+}
+
+/* ------------------------------------------------------------------ */
+/* Bottom bar: steps                                                   */
+/* ------------------------------------------------------------------ */
+
+.ms-bar-bottom {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
+  pointer-events: auto;
+}
+.ms-bar-bottom .ms-btn {
+  font-size: 14px;
+}
+.ms-bar-bottom__status {
+  flex: none;
+  font: 500 calc(10.8 * var(--u)) / 1 var(--font-mono);
+  letter-spacing: 0.08em;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+.ms-steps {
+  flex: 1;
+  min-width: 0;
+}
+.ms-steps ol {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ms-steps__seg {
+  position: relative;
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  min-width: 0;
+  border-left: 1px solid var(--hair);
+}
+.ms-steps__seg:last-child {
+  border-right: 1px solid var(--hair);
+}
+.ms-steps__chap {
+  height: 18px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink-3);
+  font: 500 11px / 18px var(--font-mono);
+  cursor: pointer;
+}
+.ms-steps__seg[data-current] .ms-steps__chap {
+  color: var(--signal);
+  font-weight: 600;
+}
+.ms-steps__seg[data-current]::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  background: var(--signal);
+}
+.ms-steps__ticks {
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+  min-height: 26px;
+}
+.ms-steps__tick {
+  position: relative;
+  width: 14px;
+  height: 26px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.ms-steps__tick::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border: 1px solid var(--ink-2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+.ms-steps__tick[data-shape="square"]::before {
+  border-radius: 0;
+}
+.ms-steps__tick[data-done]::before {
+  border-color: var(--ink);
+  background: var(--ink);
+}
+.ms-steps__tick[aria-current="step"]::before {
+  border-color: var(--signal);
+  background: var(--signal);
+}
+.ms-steps__tick:focus-visible,
+.ms-steps__chap:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: -2px;
+}
+@media (pointer: coarse) {
+  .ms-steps__chap {
+    height: 22px;
+  }
+}
+@media (max-width: 1279px) {
+  .ms-bar-bottom__status {
+    display: none;
+  }
+}
+@media (max-width: 759px) {
+  .ms-steps__ticks {
+    display: none;
+  }
+  .ms-steps__chap {
+    height: var(--hit);
+    font-size: 10px;
+  }
+  .ms-bar-bottom__back,
+  .ms-bar-bottom .ms-btn kbd {
+    display: none;
+  }
+  .ms-bar-bottom .ms-btn {
+    padding: 0 10px;
+  }
+  .ms-tray {
+    padding: 8px 10px;
+    gap: 8px;
+  }
+  .ms-tray__where {
+    display: none;
+  }
+  .ms-keypad {
+    grid-template-columns: repeat(6, var(--hit));
+  }
+  .ms-tray__head .ms-btn kbd {
+    display: none;
+  }
+}
+.ms-steps__seg[data-practice] {
+  flex-grow: 2;
+}
+.ms-card-body__expr {
+  margin: calc(6 * var(--u)) 0;
+  font: 500 calc(22 * var(--u)) / 1.4 var(--font-mono);
+  text-align: center;
+}
+/* No feedback yet: the live region stays (screen readers) but takes no room, so Next sits on the controls' line. */
+.ms-tray__feedback[data-empty] {
+  flex: 0 0 0;
+  min-width: 0;
+}
+/* The left column (title block, chapter rail) ends above the tray's band: when the tray is tall, the rail gives way rather than run under it. */
+.atlas-scene[data-engine="math-scene"] .atlas-hud__left {
+  overflow: clip;
+}
+
+/* Short screens (720p laptops): the tray stays one line where it can — fraction boxes side by side with a slash —
+   and the title block keeps its title (the spec table and the note give way to the tray's band). */
+@media (max-height: 820px) {
+  .atlas-scene[data-engine="math-scene"] .atlas-spec,
+  .atlas-scene[data-engine="math-scene"] .atlas-title__note {
+    display: none;
+  }
+  .ms-tray {
+    gap: 6px;
+    padding: 8px 12px;
+  }
+  .ms-tray__prompt {
+    font-size: 16px;
+  }
+  .ms-input__frac {
+    flex-direction: row;
+    gap: 6px;
+  }
+  .ms-input__frac > i {
+    width: 0;
+    height: 30px;
+    border-top: 0;
+    border-left: 2px solid var(--ink);
+    transform: rotate(22deg);
+  }
+  .ms-choice {
+    min-height: 40px;
+    padding: 4px 10px;
+    font-size: 15px;
+  }
+  .ms-choices {
+    gap: 4px;
+  }
+}

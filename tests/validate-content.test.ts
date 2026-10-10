@@ -12,6 +12,7 @@ import { mergeSourcesMd, sourceLine, sourcesBlock, BEGIN, END } from '../scripts
 const ROOT = join(import.meta.dirname, '..');
 const SAMPLE = join(ROOT, 'src/content/topics/sample-time');
 const SAMPLE_SPACE = join(ROOT, 'src/content/topics/sample-space');
+const FRACTIONS = join(ROOT, 'src/content/topics/fractions');
 
 let dir = '';
 let output = '';
@@ -22,7 +23,7 @@ function topic(slug: string, edit: (root: string) => void = () => {}, from = SAM
   const root = join(dir, slug);
   cpSync(from, root, { recursive: true });
   const yaml = join(root, 'topic.yaml');
-  writeFileSync(yaml, readFileSync(yaml, 'utf8').replace(/^id: sample-(time|space)$/m, `id: ${slug}`));
+  writeFileSync(yaml, readFileSync(yaml, 'utf8').replace(/^id: (sample-time|sample-space|fractions)$/m, `id: ${slug}`));
   edit(root);
 }
 
@@ -123,6 +124,20 @@ beforeAll(() => {
       }),
     SAMPLE_SPACE,
   );
+  topic('lesson-clean', () => {}, FRACTIONS);
+  topic(
+    'lesson-bad',
+    (root) => {
+      rmSync(join(root, 'chapters/05-comparing-fractions.mdx'));
+      const body = join(root, 'chapters/03-non-unit-fractions.mdx');
+      writeFileSync(body, readFileSync(body, 'utf8').replace('<Lang en>\n\n', '<Lang en>\n\nOpen <Task id="nowhere">this</Task> and <Frac n="a" d={4} />. '));
+      editJson(join(root, 'data/lesson.json'), (lesson: { steps: { tasks: { prompt: { en: string }; options?: { misconception?: string }[] }[] }[] }) => {
+        lesson.steps[0]!.tasks[1]!.prompt.en += ' {3/x}';
+        delete lesson.steps[1]!.tasks[2]!.options![1]!.misconception;
+      });
+    },
+    FRACTIONS,
+  );
   try {
     output = execFileSync(join(ROOT, 'node_modules/.bin/tsx'), ['scripts/validate-content.ts'], {
       cwd: ROOT,
@@ -143,7 +158,7 @@ afterAll(() => {
 describe('validate-content', () => {
   it('fails the run when any topic has errors', () => {
     expect(status).toBe(1);
-    expect(output).toMatch(/12 topic\(s\)/);
+    expect(output).toMatch(/14 topic\(s\)/);
   });
 
   it('passes an unmodified copy', () => {
@@ -199,6 +214,21 @@ describe('validate-content: SpaceScene beats and presets', () => {
 
   it('keeps the engine\'s own preset ids (ORBIT, REF.) for the engine', () => {
     expect(linesFor('space-orbit-preset').join('\n')).toContain('data.parts.presets.2.id: "orbit" is the engine\'s own preset id');
+  });
+});
+
+describe('validate-content: MathScene lesson (docs/15 §4.10)', () => {
+  it('passes an unmodified copy of the fractions lesson', () => {
+    expect(linesFor('lesson-clean').filter((l) => l.startsWith('error'))).toEqual([]);
+  });
+
+  it('checks chapters against steps, <Task> / <Frac>, tokens and planned feedback', () => {
+    const lines = linesFor('lesson-bad').join('\n');
+    expect(lines).toContain('step "comparing-fractions" has no chapter');
+    expect(lines).toContain('<Task id="nowhere">: unknown sub-step');
+    expect(lines).toContain('<Frac> needs whole numbers n and d');
+    expect(lines).toContain('"{3/x}" is not a fraction token');
+    expect(lines).toContain('option "b" is wrong but names no misconception');
   });
 });
 

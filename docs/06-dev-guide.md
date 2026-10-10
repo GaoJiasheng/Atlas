@@ -38,6 +38,7 @@ src/
                               # LangToggle ThemeToggle（均基于 Dropdown）GlobalToggles icons
     time-scene/               # descriptor + schema + View + stages/geo + timeline + hud（见「TimeScene」）
     space-scene/              # descriptor + schema + View + stages/model3d + hud + explorer（见「SpaceScene」）
+    math-scene/               # descriptor + schema + View + stage（SVG）+ tray + hud + practice + lib（见「MathScene」）
     simulation/               # 后期占位引擎（只有 descriptor + schema + StubStage；不在一期范围）
     registry.ts               # 客户端引擎注册表（descriptor 同步，View 懒加载）
     schemas.ts                # 构建期引擎 schema 注册表（含 zod，禁止进客户端）
@@ -100,6 +101,8 @@ pnpm tsx scripts/new-topic.ts <slug> --engine space-scene --subject science|biol
      | `<Num>` | `<Num s="S3">about 70,000</Num>`；多个来源 `s="S3,S7"` | 数字后跟 mono 上标来源号，点开来源弹层（文本、说明、链接，不联网） |
      | `<FlyTo>` | `<FlyTo preset="singapore-island">Singapore island</FlyTo>` | 正文里的 hairline 按钮，镜头飞到命名预设（TimeScene `presets.json`，SpaceScene `parts.json` 的 `presets`；与 VIEW 按钮同一动作；手机上顺便收起阅读面板） |
      | `<Term>` | `<Term id="blitzkrieg">闪电战</Term>` | 名词：点状下划线的 `span`（`role="button"`，Enter / 空格也能开），点开在阅读面板 inspector 区显示 `glossary.json` 里的定义和相关词（见「名词表」）；只包全主题第一次出现处 |
+     | `<Frac>` | `<Frac n={3} d={4} />`、`<Frac w={1} n={3} d={4} />` | 静态竖排分数（与数据文本里的 `{3/4}` 同一套标记），读屏读文字（"three quarters" /「四分之三」）；校验 n、d 是整数、d ≥ 1 |
+     | `<Task>` | `<Task id="cut-toast-thirds">the toast</Task>` | MathScene：hairline 按钮，在舞台上打开这个小步（SceneHost 委托 `data-task` → `SceneControls.goToTask`）；校验 id 是 `lesson.json` 的小步 |
 4. 引擎数据放 `data/*.json`，文件名（去掉 `.json`）就是数据对象的 key：
    - TimeScene/geo：`entities.json`、`control.json`、`movements.json`、`events.json`；可选 `presets.json`（额外镜头）
    - SpaceScene：`parts.json`（含 parts / groups / flows / animations / views）
@@ -131,6 +134,7 @@ pnpm tsx scripts/new-topic.ts <slug> --engine space-scene --subject science|biol
 - `topic.yaml` 的 `blocLabels` 只允许 `axis / allied / neutral / out` 四个键，每项都是 `{ en, zh }`
 - 背景章（`kind: background`）至多一个且 `order: 0`；`state.note`（阅读说明）只能写在背景章
 - `ui.en.json` 与 `ui.zh.json` key 一致
+- MathScene（docs/15 §4.10，`math-scene/validate.ts`，经 `schemas.ts` 的 `topicIssues` / `taskIds`）：章 ↔ 步一一对应、练习章 `practice: true` 唯一且在最后；`lo` 与课纲来源存在；P2 / P3 步分母 ≤ 12、加减结果在 0–1、异分母要相关；目标能在模型上表示（涂得出、在刻度上、因子可达、对折可达、`accept: exact` 的份数 = 分母）；`choose` 的错选项都有误解且在 `feedback.wrong` 里有一句；单选恰有一个对；练习 6–10 题、至少 5 种题型、`revisit` 是步；题干 EN ≤ 120 / ZH ≤ 40 字（warning，`{a/b}` 记号算一字）；所有文本里的 `{a/b}` 记号合法
 
 ## 背景章（`kind: background`）
 
@@ -264,7 +268,8 @@ import { useSceneControls, useHud } from '../core/context';
 import type { SceneControls } from '../core/controls';
 
 const controls = useMemo<SceneControls>(() => ({
-  presets: { items: [{ id, label: '01', title?, chapter? }], set(id, { instant }) {} },   // 数字键 1–9，第 10 个是 0，再往后只有按钮（不显示数字）
+  presets: { items: [{ id, label: '01', title?, chapter? }], set(id, { instant }) {},   // 数字键 1–9，第 10 个是 0，再往后只有按钮（不显示数字）
+             current?: 'bar', status?: 'MODEL BAR' },   // 可选：引擎自己决定亮哪个（给了就以它为准，宿主不跟踪 FREE CAMERA，VIEW 组带 data-presets="engine"），status = 状态行那一段
   modes:   { items: [{ id: 'xray', key: 'x', label, on, disabled?, status?: 'EXPLODED 70', tone?: 'xray' | 'hot' | 'cold' | 'cut' | 'signal',
                       phone?: false }],   // phone:false = < 760 px 宽（手机）控制面板不画这一行（键仍可用）
              set(id, on, { instant }) {} },                                                 // 字母键
@@ -277,6 +282,9 @@ const controls = useMemo<SceneControls>(() => ({
   cardToggle: { expanded, set(expanded) {} },   // 可选：卡片表头变成展开按钮
   panels:  { panel01: { en, zh }, panel02: …, panel03: … },
   beats:   presentation.controls,     // 可选：演示节拍（usePresentation 给的；__atlas.beats / goToBeat / state().presentation / setAutoplay / setVoice / voiceLog），见「演示系统（core）」
+  commands: [{ id: 'check', key: 'c', label, disabled?, run() {} }],   // 可选：一次性命令（不是开关）；键、带 data-command 的按钮、__atlas.runCommand 同一路径；keymap 类型 'command'
+  test:    { task: () => …, solve: () => … },   // 可选：引擎专属测试钩子，挂成 __atlas.engine.*
+  goToTask: (id) => boolean,         // 可选：正文 <Task id> 被点（SceneHost 委托 data-task）
   escape:  () => boolean,            // ESC：退出选中 / focus，处理了返回 true
 }), [deps]);
 useSceneControls(controls);
@@ -305,7 +313,7 @@ const labelsOn = useHud((s) => s.labels);   // 或 CSS：.atlas-scene[data-label
 | H | 隐藏 / 显示 HUD（只进 HUD store，不进 URL；0.35 s 淡出，左下留「H 显示界面」可点） |
 | ESC | HUD 隐藏时恢复；否则交给引擎 `escape` |
 
-带 Ctrl / Cmd / Alt 的不处理；已被处理（`defaultPrevented`）的不处理；焦点在 `input / textarea / select / contenteditable / [data-keys="own"]` 里不处理；方向键还让给 `[role=slider|radiogroup|tablist]`；空格让给获得焦点的按钮类元素（鼠标点完 HUD 按钮会自动失焦）。Shift+← → 留给 TimeScene 微调时间。
+带 Ctrl / Cmd / Alt 的不处理；已被处理（`defaultPrevented`）的不处理；焦点在 `input / textarea / select / contenteditable / [data-keys="own"]` 里不处理；方向键还让给 `[role=slider|radiogroup|tablist]` 和 `[data-keys="arrows"]`（模型内部用方向键，其它宿主键照常）；注册的命令字母（`commands`）在模式字母之后处理；空格让给获得焦点的按钮类元素（鼠标点完 HUD 按钮会自动失焦）。Shift+← → 留给 TimeScene 微调时间。
 
 ### `window.__atlas`（`core/test-api.ts`，docs/08 §7）
 
@@ -314,7 +322,9 @@ await __atlas.ready                 // 视图已挂载且舞台 canvas 有尺寸
 __atlas.chapters(); __atlas.goToChapter(id, { instant })
 __atlas.presets();  __atlas.setPreset(id, { instant })           // instant 默认 false
 __atlas.modes();    __atlas.setMode(id, on, { instant })          // instant 默认 true（会 snap）
-__atlas.keymap()    // [{ key, type: 'preset'|'mode'|'pause'|'hud'|'escape'|'chapter', name }]
+__atlas.keymap()    // [{ key, type: 'preset'|'mode'|'command'|'pause'|'hud'|'escape'|'chapter', name }]
+__atlas.commands(); __atlas.runCommand(id)         // 一次性命令 [{ id, key?, disabled }]；runCommand 同键与按钮，禁用时返回 false
+__atlas.engine      // 引擎专属测试钩子（SceneControls.test；MathScene 见「MathScene」），没有就是 {}
 __atlas.beats();    __atlas.goToBeat(i, { instant })    // 演示节拍（用 core 演示系统的引擎）：beats() = [{ chapter, index, caption }]（index = 本章内第几拍，0 起）；goToBeat 需要时先进入演示，instant 默认 false
 __atlas.state().presentation                    // 正在演示的拍 { chapter, beat, autoplay, voice }（beat = 本章内位置，0 起）；没在演示 = null
 __atlas.setAutoplay(on)                         // 演示自动播放开关（写 sessionStorage `atlas:autoplay`）；引擎没有演示就返回 false
@@ -343,6 +353,9 @@ interface PresentationAdapter<B extends BeatBase, S> {          // BeatBase = { 
   afterCameraSettle?: () => Promise<void>;                      // 镜头落定；没有就用 applyBeat 返回的 promise，再没有就固定 2.3 s
   onEnter?(): void;                                             // 进入时、saveState 之前：退出互斥模式、清选中
   readout?: ReactNode;                                          // 字幕卡表头章名后的一段（TimeScene：日期）；没有就不画
+  cardActions?: ReactNode;                                      // 可选：字幕卡里字幕下方的控件区（MathScene：作答托盘），点那里不翻页
+  renderCaption?(beat, locale): ReactNode;                      // 可选：显示用的字幕（如竖排分数）；captionOf 仍是朗读的纯文本
+  gate?(beat): Promise<void> | null;                            // 可选：要读者动手的拍，自动播放在它 resolve 后才计时，之前的输入不算停住
 }
 // Beat<B> = { chapter, chapterIndex, index, count, caption, audio?, spec?: B }（spec = 引擎自己的拍；默认拍没有）
 
@@ -858,6 +871,64 @@ core 演示系统（字幕卡、两级进度条、自动播放、语音、拍键
 - 计数（sample-space，1920×1080；18 个零件（3 对双侧）+ 1 个 context 墙）：静止 25–27 draw calls、~45 k 三角形；FLOW +2 calls。
 - 包体：舞台 chunk ~225 KB gz（three + R3F 为主；圆角盒用 `RoundedBoxGeometry`；写实轮次的 `extrude` / 贯流叶片引入 `ExtrudeGeometry` / `Shape` 一族，+10 KB，`panelHole` 仍手工三角化）。GLTF 加载器单独成 chunk（21 KB gz），只有写了 `mesh` 的主题才加载。
 
+## MathScene（交互式分步课，docs/15）
+
+`engine: math-scene`、`stage: svg`、`mode: lesson`（索引页徽章"Lesson / 课"）。代码在 `src/engines/math-scene/`：
+
+```
+index.ts            descriptor：扩展字段 task（1 起）、model（VIEW 组的模型，null = 小步自己的）；每章从第 1 小步开始；fromUrl 收 task / model，从不收作答
+schema.ts           lesson.json 的 zod（构建期）：分数字符串 "3/4" / "1 3/4" / "2" 解析成 { w?, n, d }；模型、11 种小步、选项、练习题、课纲条目；章节 state
+validate.ts         docs/15 §4.10 的主题级规则（构建期）
+View.tsx            HUD 注册、舞台、托盘、底部条、卡片、三面板、inspector、控制面板、演示适配器
+controller.ts       孩子的动作：标记、检查、提示、看答案、撤销、例子、换小步、练习流程；也是 __atlas.engine 的实现
+ui.ts               引擎自己的内存 store：每个小步的作答（模型状态、尝试次数、提示级、反馈、看答案、完成）、练习结果、例子、模式
+lib/                纯函数（有单测）：fraction（整数运算）、state（小步状态与动作 reduce）、check（每种小步的检查 + 误解诊断 + 分数框）、
+                    solve（正确解法、例子分帧、错答 sample → 状态）、beats（演示拍）、lesson（定位、VIEW 可切换的模型）、working（算式）、words（读法）
+stage/              SVG：Stage（按小步和视图摆模型）、BarModel、CircleModel、NumberLine、Rows（分数墙 / 比较条）、BarModelDiagram（模型图）、CutBar、OptionGrid、svg（图案、线稿、部件的点按 / 拖动 / 方向键）、layout（舞台布局与托盘的带）
+tray/Tray.tsx       作答托盘（分数框 + 数字键、< = >、选项、排序槽、×k / ÷k 芯片、对折、−/+）
+hud/                Panels（卡片 FRACTION、01 HISTORY、02 WORKING、03 STATE、inspector）、StepBar（底部条）、Overlay（控制面板）
+practice/Summary    练习总结
+math-scene.css      全部样式（token、× --u、触控 ≥ 44 px）
+```
+
+### 数据（`data/lesson.json`）
+
+```json
+{ "syllabus": [{ "id": "p3-equivalent", "level": "P3", "ref": "P3 1.1", "page": 35, "source": "S1", "text": { "en": "equivalent fractions", "zh": "等值分数" } }],
+  "steps": [{ "id": "equivalent-fractions", "lo": ["p3-equivalent"], "views": ["bar", "circle"], "tasks": [
+    { "id": "split-thirds-into-twelfths", "kind": "split", "factors": [2, 3, 4], "target": "8/12",
+      "then": { "answer": "8/12", "form": "equal", "from": "2/3" },
+      "model": { "kind": "bar", "parts": 3, "given": 2, "object": "strip" },
+      "prompt": { "en": "…", "zh": "…" }, "guide": { … }, "hints": [{ … }],
+      "feedback": { "correct": { … }, "fallback": { … }, "reveal": { … },
+                    "wrong": [{ "when": "scaled-one-part", "say": { … }, "sample": "=2/12" }] },
+      "example": { "model": { … }, "factors": [2], "target": "1/2", "say": [{ … }, { … }] } }] }],
+  "practice": [{ "id": "q4-…", "revisit": ["simplest-form"], "task": { "id": "q4-…", "kind": "input", … } }] }
+```
+
+- 一章一步：章 id = 步 id；练习章 `state.practice: true`（最后一章）；背景章照常（`kind: background` + `note`）。章节 `state` 只有 `summary`、可选 `model`（本章默认视图）、`practice`、`note`、`theme`。
+- 模型：`bar`（`parts`、`given` 题目给的 / `shaded` 孩子的起始标记，数字 = 从左数几份或下标数组；`wholes` 2–3；`cuts` 不等分的图、`diagonal` 对角切的正方形；`rows` 叠放比较；`object` strip / toast / kueh / chocolate / ribbon / bottle / cake）、`circle`（prata / cake / plain）、`numberline`（`from`、`to`、每个整体的 `intervals`、`labels`、`arrow`、`withBar`）、`wall`（行 = 分母）、`barmodel`（部分–整体 / 比较，段的 `tone`、`unknown`、`brace`、`units` = "分成十分之几"）。
+- 小步：`shade`（`target`，`accept`，可选 `then` = 接着写）、`cut`（`parts`，`snap` 12 / 24）、`fold`（折后 `parts`）、`split` / `merge`（`factors`、`target`）、`place`（`target`、`snap`）、`compare`（`a`、`b`、`ask` symbol / greater / smaller、`align` split）、`order`（`items`、`direction`、`line`）、`choose`（`options`：`value` / `model` / `text`，`correct`，错选项的 `misconception`；对选项上的 `misconception` = 漏选它暴露的误解）、`input`（`answer` 一个或几个、`form` equal / equivalent / simplest / mixed / whole、`blanks`、`from`、`sum`）、`build-sum`（`op`、`a`、`b`、`convert`、`answer`）。
+- **`feedback.wrong[].sample`**：这个误解的一个错答，按小步的作答写法：input `"5/14"`、`"1 3/11"`、几个分数逗号分隔；shade 从左涂几份 `"3"`；place 跳几段 `"5"`；compare `"<"` 或 `"a"` / `"b"`；order `"1/2,3/4,3/8"`；cut 刀的格位 `"4,9"`；choose 选项 id；split / merge `"x2"`；多段小步以 `=` 开头 = 前几段做对后写下的答案。`tests/math-scene/lesson.test.ts` 逐条证明 sample 被诊断成它的误解、每个错选项也是，每个小步的标准解法通过。
+- 文本里的 `{3/4}`、`{1 3/4}`、`{?/12}` 是排版记号（`src/lib/rich-text.ts`：`renderRich` 竖排、`speakable` 读成文字），托盘、卡片、inspector、名词卡、演示字幕都用它；正文用 `<Frac>`。
+
+### 舞台、托盘、HUD
+
+- **布局**（`stage/layout.ts`）：托盘属于舞台（H 隐藏 HUD 时仍在），但坐在 HUD 网格给它留的一条带里：引擎把托盘高度写到 `.atlas-scene` 的 `--task-h`，`math-scene.css` 给 `.atlas-hud` 加一行 `"left . right" / ". . ." / "dock dock dock"`，左右两列在托盘上方结束，所以 `pnpm shoot --layout` 的重叠检查覆盖托盘（`data-hud-panel="task"`）。模型画在舞台剩下的最大空白矩形里（左右两列之间，或两列下方）；演示时字幕卡是地板、标题块是障碍。
+- **视图**：VIEW 组 = 本步 `views` 里这个小步能画的模型（`lib/lesson.ts canShow`）；引擎用 `presets.current` 决定亮哪个，状态行写 `MODEL BAR`。背景章是一个示例分数 {3/4} 的四种画法。
+- **模式**：S 符号（模型旁大号分数）、E 等值（条下更细的分法与名字）、N 数轴（条下对齐的数轴）、宿主 L（每份标 1/n；默认关，是辅助）、P 演示。练习里 S / E / N 禁用、L 不注册，状态行写 `PRACTICE 4/8 · ASSISTS OFF`。
+- **命令**：C 检查、I 提示、U 撤销、W 看例子（core `commands`，键与按钮同一路径，按钮带 `data-command`）；Shift + ← → 上 / 下一小步（引擎监听，焦点在模型、托盘输入里时不拦）。分数框与数字键是 `data-keys="own"`（数字、Enter = 检查）；模型的份 / 标记 / 刀位是 `data-keys="arrows"` 或 `role="slider"`（方向键留在模型里）。
+- **反馈**：对 → `feedback.correct` + 一次 signal 脉冲；错 → 诊断出的误解那一句，否则 `fallback`；`not-simplest` 是"差一步"，不算尝试；第二次不对后出现"看答案"（墨色虚线画出正确状态 + `reveal`）。练习每题只检查一次：立即反馈、锁定、错了画出正确模型并给"回看第 NN 步"；第 8 题后是总结（hairline 表、一句话、再做一次）。HUD 读数（卡片、状态行、03 STATE、02 WORKING）不先说答案：要孩子写的值只在他写了以后显示。
+- 底部条：每步一段、每个小步一个小圆（做完 = 墨、当前 = signal），练习 8 个小方块（对 = 墨），状态串、◁ 上一小题、Hint（I）、Check（C）。卡片 A FRACTION（大号竖排分数 + 分子 / 分母的引线说明 + 读法；展开：等值的名字与最简分数）；01 HISTORY（每步动作的小条 + mono 说明，点一下在舞台上只读地看那一步）；02 WORKING（算式）；03 STATE（份数、涂色、分数、最简 + 0–1 位置条）；inspector（课纲条目 + 来源、怎么想、已看的提示、最近的反馈、看答案的说明）。
+
+### 演示、URL、测试 API、截图
+
+- **演示**（core `usePresentation`）：`lib/beats.ts` 从数据推拍：每个小步 = 例子每句一拍（舞台播放例子解法的一段）+ 一个"你来做"拍（字幕 = 题目，舞台换成本题、作答清空）；练习每题一拍 + 总结一拍；背景章一拍。适配器用 core 的三个扩展：`cardActions`（你来做拍的作答控件与 Hint / Check / 看答案放在字幕卡里，点那里不翻页）、`renderCaption`（字幕里的分数竖排；`captionOf` 给朗读的文字）、`gate`（自动播放在孩子做对或看答案后才开始计时，之前的输入不算"停住"）。演示中焦点在托盘输入 / 模型 / slider / radiogroup 时 → / 空格 / ← 不翻页。
+- **URL**：`ch`、`task`（≠ 1 才写）、`model`（≠ 本小步默认才写）；作答、进度、练习结果从不进 URL、不进 storage（刷新即清）。
+- **`__atlas.engine`**（core `SceneControls.test`）：`task()`（`{ step, index, id, kind, phase, answered, done, tries, hints, revealed, feedback: { tone, code }, example, practice }`）、`tasks()`（每个小步 / 练习题 `{ step, index, id, kind, example, practice, wrong }`，`wrong` = 第一个可构造的误解）、`goToTask(step, i, { instant })`、`solve()`（把当前段做对，不检查）、`answer(code | 'correct')`（摆出这个误解的错答或正确答案，不检查）、`act(action)`（孩子的一个动作，如 `{ do: 'fold' }`、`{ do: 'shade', part: 2 }`）、`practice()`（`{ index, summary, score, results }`）。`__atlas.commands()` / `runCommand('check')` 走同一命令（`disabled` 在下一次渲染才更新：改完状态后等一帧再 runCommand）。`__atlas.ready` 认 SVG 舞台（`[data-stage-surface]`）。
+- **`pnpm shoot <topic> --tasks`**：每个小步三张 `task-<step>-<n>`（起始）、`-wrong`（第一个误解的错答，检查后，诊断不符即失败）、`-solved`（逐段做对）；练习每题 `practice-q<n>`（单数题做对、双数题用错答）+ `practice-summary`。`--keys` 另核对命令 C / I / U / W（各在一个新的、有例子的小步上），引擎自己亮 VIEW 的主题跳过"拖动 → FREE CAMERA"。
+- e2e：`tests-e2e/fractions.spec.ts`（点按涂色、纯键盘涂色、比较、错 → 诊断 → 对与看答案、练习一次检查与总结、URL、演示你来做拍、六尺寸布局 en / zh）。
+
 ## PWA、部署与 e2e（Phase 3）
 
 - **PWA**：`@vite-pwa/astro`（`astro.config.mjs`），`generateSW` + `autoUpdate`。预缓存构建出的页面、JS、CSS、图标；`/geo/*.json`、`/models/*.glb` 与 `/topics/*/data.json`（引擎数据）**不**预缓存，走 CacheFirst 运行时缓存（没有 `maximumFileSizeToCacheInBytes` 例外：预缓存里不该有大文件）。scope / start_url 跟随 `ATLAS_BASE`。仅生产构建注册（BaseLayout 里 `import.meta.env.PROD`），`pnpm dev` 无 service worker。
@@ -883,6 +954,8 @@ core 演示系统（字幕卡、两级进度条、自动播放、语音、拍键
 | `run` | 通电运转 | `1` \| `0` | SpaceScene | `run=1` |
 | `cut` | 剖切 | `none` \| `half` \| 命名剖切面（`views.cuts`，数据里没有就不切） | SpaceScene | `cut=sagittal` |
 | `pose` | 姿态 | `parts.json` `poses` 里的名字；空值 = 静止 | SpaceScene | `pose=wings-open` |
+| `task` | 小步 / 练习题 | 1 起的整数（= 1 时不写） | MathScene | `task=2` |
+| `model` | 模型视图 | `bar` \| `circle` \| `numberline` \| `wall` \| `barmodel`；= 小步默认时不写 | MathScene | `model=circle` |
 
 新增可链接字段：改 `core/types.ts` 的 `UrlEngineFields`、`core/url-state.ts`（`URL_KEY_ORDER`、编解码）、`SceneHost.tsx` 里解构的字段、descriptor 的 `fromUrl`，并补 `tests/url-state.test.ts`。
 

@@ -74,9 +74,9 @@ export function HudButton({
   );
 }
 
-function HudGroup({ label, className, children }: { label: string; className?: string; children: ReactNode }) {
+function HudGroup({ label, className, owner, children }: { label: string; className?: string; owner?: 'engine'; children: ReactNode }) {
   return (
-    <div className={className ? `hud-group ${className}` : 'hud-group'} role="group" aria-label={label}>
+    <div className={className ? `hud-group ${className}` : 'hud-group'} role="group" aria-label={label} data-presets={owner}>
       <span className="hud-group__label" aria-hidden="true">
         {label}
       </span>
@@ -118,8 +118,12 @@ export function TopBar({ topic, chapters, chapter, chapterNumber, locale, path, 
   const numbers = chapterNumbers(chapters);
 
   const presetIndex = presets.findIndex((p) => p.id === active);
+  // An engine that lights its own VIEW button (MathScene's model switch) also names it in the status line.
+  const engineView = controls.presets?.current !== undefined;
   const view =
-    presetIndex >= 0
+    engineView && controls.presets?.status
+      ? controls.presets.status
+      : presetIndex >= 0
       ? tr('hud.viewN', { n: tx(presets[presetIndex]!.label, locale) })
       : free || !chapter
         ? tr('hud.free')
@@ -132,6 +136,7 @@ export function TopBar({ topic, chapters, chapter, chapterNumber, locale, path, 
   ].map(upper);
 
   const modeKeys = modes.map((m) => m.key).filter((k): k is string => !!k);
+  const commandKeys = (controls.commands ?? []).map((c) => c.key).filter((k): k is string => !!k);
   const presetTitle = (i: number, title?: HudText) =>
     title ? tx(title, locale) : tr('hud.presetTitle', { n: i + 1, title: tx(chapters[i]?.title, locale) });
   // A digit beside the label (1–9, then 0 for the tenth; none after), unless the label already is the number (`01`).
@@ -177,7 +182,7 @@ export function TopBar({ topic, chapters, chapter, chapterNumber, locale, path, 
         {(presets.length > 0 || present) && (
           <div className="atlas-topbar__ctl">
             {presets.length > 0 && (
-              <HudGroup label={upper(tr('hud.view'))} className="hud-group--view">
+              <HudGroup label={upper(tr('hud.view'))} className="hud-group--view" owner={engineView ? 'engine' : undefined}>
                 {presets.map((p, i) => {
                   const d = digit(i, p.label);
                   return (
@@ -230,6 +235,11 @@ export function TopBar({ topic, chapters, chapter, chapterNumber, locale, path, 
           {modeKeys.length > 0 && (
             <span>
               <kbd>{modeKeys.map(upper).join(' ')}</kbd> {tr('hud.keys.modes')}
+            </span>
+          )}
+          {commandKeys.length > 0 && (
+            <span>
+              <kbd>{commandKeys.map(upper).join(' ')}</kbd> {tr('hud.keys.commands')}
             </span>
           )}
           {pause && (

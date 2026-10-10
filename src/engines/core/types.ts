@@ -46,6 +46,10 @@ export interface UrlEngineFields {
   cutaway?: string;
   /** SpaceScene: pose on show (`null` = rest). URL `pose`. */
   pose?: string | null;
+  /** MathScene: sub-step (or practice question) of the step, 1-based. URL `task`. */
+  task?: number;
+  /** MathScene: model view (`bar`, `circle`, `numberline`, `wall`; `null` = the sub-step's own). URL `model`. */
+  model?: string | null;
 }
 
 /**

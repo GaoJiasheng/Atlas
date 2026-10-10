@@ -109,13 +109,41 @@ export interface VoiceLogEntry {
   reason: string | null;
 }
 
+/**
+ * A one-off command (not a switch): check an answer, ask for a hint, undo …
+ * Its key, its buttons (`data-command`) and `__atlas.runCommand` call the same `run`.
+ */
+export interface SceneCommand {
+  id: string;
+  /** Single lowercase letter (not one of the reserved keys or a mode's). */
+  key?: string;
+  label: HudText;
+  /** Nothing to do right now: buttons disabled, key ignored. */
+  disabled?: boolean;
+  run(): void;
+}
+
 /** What an engine registers. Every field is optional. */
 export interface SceneControls {
   /** Camera presets, in key order (digit `1` = first, …, `9`, then `0` = the tenth; later ones have buttons only). */
   presets?: {
     items: readonly ScenePreset[];
     set(id: string, options: InstantOption): void;
+    /**
+     * The engine decides which preset is lit (MathScene: the VIEW group switches
+     * the model, it is not a camera). Given (even `null`), the host shows this
+     * one and never tracks FREE CAMERA for the group.
+     */
+    current?: string | null;
+    /** Status-line text for the lit preset (e.g. `MODEL BAR`), with `current`. */
+    status?: string;
   };
+  /** One-off commands with their keys (MathScene: check, hint, undo, example). */
+  commands?: readonly SceneCommand[];
+  /** Engine-specific test hooks, exposed as `window.__atlas.engine` (docs/06). */
+  test?: Record<string, (...args: never[]) => unknown>;
+  /** A `<Task id>` in a chapter body was pressed: go to that sub-step; true when it exists. */
+  goToTask?(id: string): boolean;
   /** Mode switches. `set` receives `instant: true` when the caller wants the end state now (tests, shots). */
   modes?: {
     items: readonly SceneMode[];
@@ -250,6 +278,8 @@ export function allModes(controls: SceneControls, labelsOn: boolean, labelsText:
 
 /** The active preset id: explicit pick, else the current chapter's own preset, unless the camera was moved. */
 export function activePreset(state: Pick<HudState, 'controls' | 'presetId' | 'cameraFree'>, chapter: string | null): string | null {
+  const own = state.controls.presets?.current;
+  if (own !== undefined) return own;
   if (state.cameraFree) return null;
   const items = state.controls.presets?.items ?? [];
   if (state.presetId && items.some((p) => p.id === state.presetId)) return state.presetId;
@@ -259,7 +289,7 @@ export function activePreset(state: Pick<HudState, 'controls' | 'presetId' | 'ca
 export interface KeyBinding {
   /** `KeyboardEvent.key` (lower-case letters, `' '` for space). */
   key: string;
-  type: 'preset' | 'mode' | 'pause' | 'hud' | 'escape' | 'chapter';
+  type: 'preset' | 'mode' | 'command' | 'pause' | 'hud' | 'escape' | 'chapter';
   name: string;
 }
 
@@ -292,6 +322,11 @@ export function buildKeymap(controls: SceneControls): KeyBinding[] {
   for (const m of allModes(controls, true, '')) {
     const key = m.key?.toLowerCase();
     if (key && key.length === 1 && !RESERVED_KEYS.has(key) && !/\d/.test(key)) out.push({ key, type: 'mode', name: m.id });
+  }
+  const taken = new Set(out.map((b) => b.key));
+  for (const c of controls.commands ?? []) {
+    const key = c.key?.toLowerCase();
+    if (key && key.length === 1 && !RESERVED_KEYS.has(key) && !/\d/.test(key) && !taken.has(key)) out.push({ key, type: 'command', name: c.id });
   }
   if (controls.pause) out.push({ key: ' ', type: 'pause', name: 'pause' });
   out.push({ key: 'h', type: 'hud', name: 'hud' });
@@ -326,6 +361,8 @@ export interface HudActions {
   setCard(expanded: boolean): void;
   /** Open a glossary term (`GLOSSARY_ALL` = the list) in the reader's inspector; `null` closes it. */
   setGlossary(id: string | null): void;
+  /** Run a registered command (`false` when unknown or disabled). */
+  runCommand(id: string): boolean;
   escape(): void;
 }
 
@@ -374,6 +411,12 @@ export function createHudActions(hud: HudStore, camera: { suppress(fn: () => voi
     },
     setGlossary(id) {
       hud.setState({ glossary: id });
+    },
+    runCommand(id) {
+      const command = controls().commands?.find((c) => c.id === id);
+      if (!command || command.disabled) return false;
+      command.run();
+      return true;
     },
     escape() {
       if (!hud.getState().hud) {

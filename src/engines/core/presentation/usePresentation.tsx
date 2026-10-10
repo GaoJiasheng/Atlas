@@ -23,10 +23,13 @@ import { beatInfos, buildBeats, current, presentationStatus, startIndex, stepInd
 import type { PresentationAdapter } from './adapter';
 import { Presentation } from './Presentation';
 
+/** Regions whose keys are their own while presenting (MathScene's answer tray and models). */
+const OWN_KEYS = '[data-keys="own"], [data-keys="arrows"], [role="slider"], [role="radiogroup"], textarea, input:not([type="checkbox"])';
+
 export interface PresentationApi<B extends BeatBase> {
   beats: readonly Beat<B>[];
   /** The beat on show (`index` into `beats`; `serial` counts beats shown; `settled` as `PresentationAdapter.afterCameraSettle` gave it); `null` outside the presentation. */
-  beat: { index: number; serial: number; instant: boolean; settled: Promise<void> | null } | null;
+  beat: { index: number; serial: number; instant: boolean; settled: Promise<void> | null; gate: Promise<void> | null } | null;
   presenting: boolean;
   /** Synchronous check for store subscriptions and the ESC chain. */
   isPresenting(): boolean;
@@ -48,7 +51,7 @@ export function usePresentation<B extends BeatBase, S>(adapter: PresentationAdap
   adapterRef.current = adapter;
 
   const beats = useMemo(() => buildBeats(chapters, (c) => adapterRef.current.beatsOf(c)), [chapters]);
-  const [beat, setBeat] = useState<{ index: number; serial: number; instant: boolean; settled: Promise<void> | null } | null>(null);
+  const [beat, setBeat] = useState<{ index: number; serial: number; instant: boolean; settled: Promise<void> | null; gate: Promise<void> | null } | null>(null);
   const serial = useRef(0);
   const presenting = beat !== null;
   const presentingRef = useRef(false);
@@ -71,7 +74,7 @@ export function usePresentation<B extends BeatBase, S>(adapter: PresentationAdap
       const a = adapterRef.current;
       const applied = a.applyBeat(b, { instant });
       const settled = a.afterCameraSettle ? a.afterCameraSettle() : applied instanceof Promise ? applied : null;
-      setBeat({ index: i, serial: ++serial.current, instant, settled });
+      setBeat({ index: i, serial: ++serial.current, instant, settled, gate: a.gate?.(b) ?? null });
       stopAudio();
       const clip = b.audio ? audio.current.get(b.audio) : undefined;
       // Autoplay may be refused until the reader has interacted; the beat works without sound.
@@ -160,11 +163,13 @@ export function usePresentation<B extends BeatBase, S>(adapter: PresentationAdap
       }),
     [hud, stop],
   );
-  // Beat keys: → / SPACE next, ← previous. Captured before the host's chapter / pause keys.
+  // Beat keys: → / SPACE next, ← previous. Captured before the host's chapter / pause keys,
+  // except inside regions that own their keys (an answer box, a model's arrow keys, a slider).
   useEffect(() => {
     if (!presenting) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+      if (e.target instanceof Element && e.target.closest(OWN_KEYS)) return;
       const dir = e.key === 'ArrowRight' || e.key === ' ' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
       if (!dir) return;
       e.preventDefault();
@@ -204,8 +209,11 @@ export function usePresentation<B extends BeatBase, S>(adapter: PresentationAdap
       chapters={chapters}
       locale={locale}
       caption={captionAt(beat.index)}
+      captionNode={adapter.renderCaption && beats[beat.index] ? adapter.renderCaption(beats[beat.index]!, locale) : undefined}
       captionAt={captionAt}
       readout={adapter.readout}
+      actions={adapter.cardActions}
+      gate={beat.gate}
       onStep={step}
       onGo={(i) => show(i, false)}
       audio={clipName ? (audio.current.get(clipName) ?? null) : null}

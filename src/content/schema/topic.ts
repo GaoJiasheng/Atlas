@@ -13,7 +13,7 @@ export const SUBJECTS = [
 export const subject = z.enum(SUBJECTS);
 export type Subject = z.infer<typeof subject>;
 
-export const ENGINES = ['time-scene', 'space-scene', 'simulation'] as const;
+export const ENGINES = ['time-scene', 'space-scene', 'simulation', 'math-scene'] as const;
 export const engineId = z.enum(ENGINES);
 export type EngineId = z.infer<typeof engineId>;
 
@@ -22,6 +22,7 @@ export const ENGINE_STAGES = {
   'time-scene': ['geo', 'diagram'],
   'space-scene': ['model3d', 'layer2d'],
   simulation: ['chart', 'diagram'],
+  'math-scene': ['svg'],
 } as const satisfies Record<EngineId, readonly string[]>;
 
 /** Bloc names a topic may override; each needs both languages (the site-wide `time.bloc.*` strings are the fallback). */
@@ -48,7 +49,8 @@ export const topicSchema = z
     /** Planning metadata (e.g. `beyond-syllabus`, `singapore`); never rendered. */
     tags: z.array(kebabId).optional(),
     moe: z.array(z.string().min(1)).default([]),
-    mode: z.enum(['time', 'space', 'both']),
+    /** Index badge: `time`, `space`, `both`, or `lesson` (a guided lesson with practice, MathScene). */
+    mode: z.enum(['time', 'space', 'both', 'lesson']),
     engine: engineId,
     stage: z.string().min(1),
     theme: theme.default('paper'),

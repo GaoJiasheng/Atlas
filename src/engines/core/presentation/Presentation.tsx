@@ -42,8 +42,14 @@ export interface PresentationProps {
   settled: Promise<void> | null;
   chapters: readonly Chapter[];
   locale: Locale;
-  /** This beat's caption as plain text in `locale`. */
+  /** This beat's caption as plain text in `locale` (spoken; shown unless `captionNode`). */
   caption: string;
+  /** The caption as displayed, when the engine typesets it. */
+  captionNode?: ReactNode;
+  /** The engine's controls for this beat, under the caption (clicks there never turn the page). */
+  actions?: ReactNode;
+  /** Auto-play waits for this before counting (a beat the reader acts on); input before then does not hold it. */
+  gate?: Promise<void> | null;
   /** The beat's caption in `locale` for the progress bar's labels. */
   captionAt(index: number): string;
   /** Header segment after the chapter title (e.g. the date); omitted = none. */
@@ -70,6 +76,9 @@ export function Presentation({
   chapters,
   locale,
   caption: captionText,
+  captionNode,
+  actions,
+  gate = null,
   captionAt,
   readout,
   onStep,
@@ -131,7 +140,7 @@ export function Presentation({
   const onCardClick = (e: MouseEvent<HTMLDivElement>) => {
     const p = press.current;
     press.current = null;
-    if (e.target instanceof Element && e.target.closest('button, label, input, a, nav')) return;
+    if (e.target instanceof Element && e.target.closest('button, label, input, a, nav, [data-present-actions]')) return;
     if (!p || Math.hypot(e.clientX - p.x, e.clientY - p.y) > ADVANCE_SLOP) return;
     onStep(1);
   };
@@ -144,6 +153,19 @@ export function Presentation({
    */
   const [held, setHeld] = useState(false);
   useEffect(() => setHeld(false), [index]);
+  /* A gated beat (the reader acts on it) only counts once the gate opens; until then input does not hold auto-play. */
+  const gateOpen = useRef(false);
+  useEffect(() => {
+    gateOpen.current = gate === null;
+    if (!gate) return;
+    let live = true;
+    gate.then(() => {
+      if (live) gateOpen.current = true;
+    });
+    return () => {
+      live = false;
+    };
+  }, [gate, serial]);
   const last = index >= beats.length - 1;
 
   /*
@@ -216,7 +238,12 @@ export function Presentation({
     let dwell = 0;
     let stopWaiting = () => {};
     const advance = () => onStep(1);
+    let cancelled = false;
     const cancelWait = afterSettle(instant, settled, () => {
+      if (gate) gate.then(() => !cancelled && count());
+      else count();
+    });
+    function count() {
       if (audio?.ended) advance();
       else if (audio && !audio.paused) audio.addEventListener('ended', advance, { once: true });
       else if (voiceOn && speech.current.state !== 'idle') {
@@ -233,15 +260,17 @@ export function Presentation({
           dwell = window.setTimeout(advance, lostEndFallback(sp.chars, sp.parts));
         }
       } else dwell = window.setTimeout(advance, autoplayDwell([...captionText].length));
-    });
+    }
     const hold = (e: Event) => {
       if (e.target instanceof Element && e.target.closest('.atlas-present__auto')) return;
+      if (!gateOpen.current) return;
       setHeld(true);
     };
     window.addEventListener('pointerdown', hold, true);
     window.addEventListener('keydown', hold, true);
     window.addEventListener('wheel', hold, true);
     return () => {
+      cancelled = true;
       cancelWait();
       window.clearTimeout(dwell);
       stopWaiting();
@@ -250,7 +279,7 @@ export function Presentation({
       window.removeEventListener('keydown', hold, true);
       window.removeEventListener('wheel', hold, true);
     };
-  }, [autoplay, held, last, index, instant, settled, audio, captionText, spoken, onStep, voiceOn]);
+  }, [autoplay, held, last, index, instant, settled, gate, audio, captionText, spoken, onStep, voiceOn]);
   return (
     <div className="atlas-present" data-instant={instant || undefined} data-free={free || undefined}>
       <div className="atlas-present__hit" aria-hidden="true" />
@@ -292,8 +321,13 @@ export function Presentation({
           )}
         </p>
         <p className="atlas-present__caption" key={index} ref={caption} aria-live="polite">
-          {captionText}
+          {captionNode ?? captionText}
         </p>
+        {actions && (
+          <div className="atlas-present__actions" data-present-actions="">
+            {actions}
+          </div>
+        )}
         <div className="atlas-present__row">
           <nav className="atlas-present__bar" aria-label={tr('present.beats')}>
             <ol>

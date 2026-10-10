@@ -11,10 +11,11 @@
  *   pnpm shoot sample-time --layout                  # HUD overlap / overflow at six sizes
  *   pnpm shoot ww2 --beats                           # every presentation beat -> shots/<topic>/<locale>-<theme>/beat-<chapter>-<n>.png
  *   pnpm shoot sample-space --perf --json out.json   # renderer numbers per shot
+ *   pnpm shoot fractions --tasks                     # MathScene: every sub-step (start, a planned wrong answer, solved) and every practice question + the summary
  *
  * `--beats` also lists the ids each chapter's own state asks to label (TimeScene `highlight`, SpaceScene `labels`) that have no label on screen at the chapter camera (listed, not failed).
  * `--locale` and `--theme` take a value, a comma list, or `all` (default: en, paper).
- * `--keys` / `--layout` / `--beats` replace the shot run unless shot names or `--shots` are given.
+ * `--keys` / `--layout` / `--beats` / `--tasks` replace the shot run unless shot names or `--shots` are given.
  *
  * shots.json: { "name": { "chapter": "id", "preset": "id", "modes": { "xray": true }, "hud": false, "wait": 900, "js": "window.__atlas…" } }
  *
@@ -92,6 +93,8 @@ interface RunReport {
   beatNotes: string[];
   /** Chapters whose own `state.highlight` / `state.labels` has ids with no label on screen at the chapter camera (content issues, not failures). */
   chapterNotes: string[];
+  /** Sub-steps whose solution did not end done (MathScene `--tasks`). */
+  taskFailures: string[];
   /** JavaScript the page loaded (gzip -9 of the files in dist/). */
   js: { files: number; gzKB: number };
   logs: { type: string; text: string }[];
@@ -104,7 +107,7 @@ interface RunReport {
 function usage(): never {
   console.error(
     'usage: pnpm shoot <topic> [--locale en|zh|all] [--theme paper|cinema|all] [--size WxH] [--suffix _4k]\n' +
-      '                          [--shots file.json] [--keys] [--layout] [--beats] [--perf] [--gpu] [--json out.json] [names...]',
+      '                          [--shots file.json] [--keys] [--layout] [--beats] [--tasks] [--perf] [--gpu] [--json out.json] [names...]',
   );
   process.exit(2);
 }
@@ -390,6 +393,105 @@ async function runChapterHighlights(s: Session, report: RunReport): Promise<void
 }
 
 /* ------------------------------------------------------------------ */
+/* Tasks (MathScene)                                                   */
+/* ------------------------------------------------------------------ */
+
+interface TaskRow {
+  step: string;
+  index: number;
+  id: string;
+  kind: string;
+  example: boolean;
+  practice: boolean;
+  wrong: string | null;
+}
+interface TaskNow {
+  id: string | null;
+  done: boolean;
+  phase: string;
+  feedback: { tone: string; code: string | null } | null;
+}
+
+/** The engine's test hooks (MathScene `SceneControls.test`), typed for the shoot script. */
+const engine = (s: Session) => ({
+  tasks: () => s.page.evaluate(() => (window.__atlas!.engine as unknown as { tasks(): TaskRow[] }).tasks()),
+  task: () => s.page.evaluate(() => (window.__atlas!.engine as unknown as { task(): TaskNow }).task()),
+  go: (step: string, index: number) =>
+    s.page.evaluate(([st, i]) => (window.__atlas!.engine as unknown as { goToTask(s: string, i: number, o: { instant: boolean }): void }).goToTask(st as string, i as number, { instant: true }), [step, index] as const),
+  answer: (code: string) => s.page.evaluate((c) => (window.__atlas!.engine as unknown as { answer(c: string): boolean }).answer(c), code),
+  solve: () => s.page.evaluate(() => (window.__atlas!.engine as unknown as { solve(): boolean }).solve()),
+  check: async () => {
+    // Let the view re-register its commands (Check is disabled until something is answered).
+    await s.page.waitForTimeout(80);
+    return s.page.evaluate(() => window.__atlas!.runCommand('check'));
+  },
+});
+
+/** Solve the current sub-step phase by phase (as a child would), checking each phase. */
+async function solveAll(s: Session): Promise<boolean> {
+  const e = engine(s);
+  for (let i = 0; i < 5; i++) {
+    if ((await e.task()).done) return true;
+    await e.solve();
+    await e.check();
+  }
+  return (await e.task()).done;
+}
+
+/** MathScene: every sub-step at its start, with a planned wrong answer checked, and solved; every practice question; the practice summary. */
+async function runTasks(s: Session, out: string, report: RunReport): Promise<void> {
+  const e = engine(s);
+  if (!(await s.ev(() => typeof (window.__atlas!.engine as { tasks?: unknown }).tasks === 'function'))) {
+    console.log('  (this topic has no lesson tasks)');
+    return;
+  }
+  const rows = await e.tasks();
+  mkdirSync(out, { recursive: true });
+  const shot = async (name: string) => {
+    await s.page.waitForTimeout(450);
+    await s.page.screenshot({ path: join(out, `${name}.png`) });
+  };
+  for (const r of rows.filter((x) => !x.practice)) {
+    const base = `task-${r.step}-${r.index}`;
+    await s.apply({ wait: 200 });
+    await e.go(r.step, r.index);
+    await shot(base);
+    if (r.wrong) {
+      await e.answer(r.wrong);
+      await e.check();
+      const now = await e.task();
+      if (now.feedback?.code !== r.wrong && now.feedback?.tone !== 'near') report.taskFailures.push(`${base}: wrong answer "${r.wrong}" was diagnosed as ${JSON.stringify(now.feedback)}`);
+      await shot(`${base}-wrong`);
+    }
+    const ok = await solveAll(s);
+    if (!ok) report.taskFailures.push(`${base}: the solution did not finish the task`);
+    await shot(`${base}-solved`);
+    console.log(`  ${base.padEnd(44)} ${ok ? 'OK' : 'FAIL'}${r.wrong ? `  (wrong: ${r.wrong})` : ''}`);
+  }
+  const practice = rows.filter((x) => x.practice);
+  for (const [i, r] of practice.entries()) {
+    await s.apply({ wait: 200 });
+    await e.go(r.step, r.index);
+    await shot(`practice-q${r.index}`);
+    // Every other question answered with its first planned wrong answer, so the summary shows both kinds of row.
+    if (i % 2 === 1 && r.wrong) {
+      await e.answer(r.wrong);
+      await e.check();
+    } else await solveAll(s);
+    console.log(`  practice-q${r.index}`.padEnd(46) + ((await e.task()).done ? 'OK' : 'FAIL'));
+  }
+  if (practice.length) {
+    const last = practice.at(-1)!;
+    await e.go(last.step, last.index);
+    await s.page.locator('.ms-tray__next').click();
+    await shot('practice-summary');
+    console.log('  practice-summary');
+  }
+  await s.apply({ wait: 300 });
+  console.log(`  tasks -> ${out}`);
+}
+
+/* ------------------------------------------------------------------ */
 /* Keys                                                                */
 /* ------------------------------------------------------------------ */
 
@@ -443,6 +545,52 @@ async function runKeys(s: Session, o: Options, report: RunReport): Promise<void>
       if (back !== before) {
         ok = false;
         note += ` not restored (${back})`;
+      }
+    } else if (k.type === 'command') {
+      // A fresh sub-step with an example for each command (a finished one takes no hint, undo or check); the effect is read from the engine's test hooks.
+      const e = engine(s);
+      const order = ['check', 'hint', 'undo', 'example'];
+      const row = (await e.tasks()).filter((r) => r.example && !r.practice)[Math.max(0, order.indexOf(k.name))];
+      if (!row) {
+        record({ ...base, ok: true, note: 'no lesson task (skipped)' });
+        continue;
+      }
+      await e.go(row.step, row.index);
+      await page.waitForTimeout(300);
+      const now = () => s.ev(() => (window.__atlas!.engine as unknown as { task(): { done: boolean; hints: number; answered: boolean; example: boolean } }).task());
+      if (k.name === 'check') {
+        // The current phase solved, unchecked: C must accept it (done, or on to the next phase).
+        await e.solve();
+        await page.waitForTimeout(200);
+        await press(k.key);
+        await page.waitForTimeout(250);
+        const after = await e.task();
+        ok = after.done || after.feedback?.tone === 'phase' || after.feedback?.tone === 'correct';
+        if (!ok) note = `C: ${JSON.stringify(after.feedback)}`;
+      } else if (k.name === 'hint') {
+        const before = (await now()).hints;
+        await press(k.key);
+        await page.waitForTimeout(250);
+        ok = (await now()).hints === before + 1;
+        if (!ok) note = 'I did not show a hint';
+      } else if (k.name === 'undo') {
+        await e.solve();
+        await page.waitForTimeout(200);
+        const before = (await now()).answered;
+        await press(k.key);
+        await page.waitForTimeout(250);
+        ok = before && !(await now()).answered;
+        if (!ok) note = 'U did not undo the last move';
+      } else if (k.name === 'example') {
+        await press(k.key);
+        await page.waitForTimeout(250);
+        ok = (await now()).example;
+        await press(k.key);
+        await page.waitForTimeout(250);
+        if (ok && (await now()).example) {
+          ok = false;
+          note = 'W did not stop the example';
+        } else if (!ok) note = 'W did not play the example';
       }
     } else if (k.type === 'pause') {
       const before = (await s.state()).paused;
@@ -505,7 +653,9 @@ async function runKeys(s: Session, o: Options, report: RunReport): Promise<void>
   const [w, h] = o.size;
   await s.apply({ chapter: firstChapter, wait: 1200 });
   const first = keymap.find((k) => k.type === 'preset');
-  if (first) {
+  // An engine that lights its own VIEW button (MathScene's model switch) has no camera to free.
+  const engineOwned = await page.evaluate(() => document.querySelector('[data-presets="engine"]') !== null);
+  if (first && !engineOwned) {
     // Light a preset first: a chapter's own view is not a preset (TimeScene has geographic presets only), so "free" must be earned by the drag.
     await page.keyboard.press(first.key);
     await page.waitForTimeout(2400);
@@ -576,6 +726,7 @@ interface Options {
   keys: boolean;
   layout: boolean;
   beats: boolean;
+  tasks: boolean;
   perf: boolean;
   gpu: boolean;
   json?: string;
@@ -594,6 +745,7 @@ function parse(): Options {
       keys: { type: 'boolean', default: false },
       layout: { type: 'boolean', default: false },
       beats: { type: 'boolean', default: false },
+      tasks: { type: 'boolean', default: false },
       perf: { type: 'boolean', default: false },
       gpu: { type: 'boolean', default: false },
       json: { type: 'string' },
@@ -612,6 +764,7 @@ function parse(): Options {
     keys: values.keys,
     layout: values.layout,
     beats: values.beats,
+    tasks: values.tasks,
     perf: values.perf,
     gpu: values.gpu,
     json: values.json,
@@ -629,7 +782,7 @@ async function main(): Promise<number> {
     console.error(`dist/ has no page for topic "${o.topic}" (rebuild with \`pnpm build\`, or check the id).`);
     return 1;
   }
-  const checksOnly = (o.keys || o.layout || o.beats) && o.names.length === 0 && !o.shotsFile;
+  const checksOnly = (o.keys || o.layout || o.beats || o.tasks) && o.names.length === 0 && !o.shotsFile;
   const { server, origin } = await serveDist();
   const browser = await chromium.launch({ headless: true, args: o.gpu ? HARDWARE_GL : SOFTWARE_GL });
   const reports: RunReport[] = [];
@@ -640,7 +793,7 @@ async function main(): Promise<number> {
         const out = join(ROOT, 'shots', o.topic, `${locale}-${theme}`);
         console.log(`\n== ${o.topic} · ${locale} · ${theme} · ${o.size.join('x')}`);
         const s = await Session.open(browser, origin, o.topic, locale, theme, o.size);
-        const report: RunReport = { topic: o.topic, locale, theme, size: o.size.join('x'), shots: {}, keys: [], layout: [], beatFailures: [], beatNotes: [], chapterNotes: [], js: { files: 0, gzKB: 0 }, logs: [] };
+        const report: RunReport = { topic: o.topic, locale, theme, size: o.size.join('x'), shots: {}, keys: [], layout: [], beatFailures: [], beatNotes: [], chapterNotes: [], taskFailures: [], js: { files: 0, gzKB: 0 }, logs: [] };
         try {
           if (!checksOnly) await runShots(s, o, out, report);
           if (o.beats) {
@@ -648,6 +801,10 @@ async function main(): Promise<number> {
             await runBeats(s, o, out, report);
             console.log('  -- chapter highlights');
             await runChapterHighlights(s, report);
+          }
+          if (o.tasks) {
+            console.log('  -- tasks');
+            await runTasks(s, out, report);
           }
           if (o.keys) {
             console.log('  -- keys');
@@ -671,7 +828,9 @@ async function main(): Promise<number> {
         if (o.keys) console.log(`  key failures: ${keyFails}`);
         if (o.layout) console.log(`  layout issues: ${report.layout.length}`);
         if (o.beats) console.log(`  beat failures: ${report.beatFailures.length}`);
-        if (keyFails || report.layout.length || report.beatFailures.length || bad.length) failed = true;
+        if (o.tasks) console.log(`  task failures: ${report.taskFailures.length}`);
+        for (const f of report.taskFailures) console.log(`    ${f}`);
+        if (keyFails || report.layout.length || report.beatFailures.length || report.taskFailures.length || bad.length) failed = true;
         reports.push(report);
       }
     }

@@ -11,11 +11,13 @@ import type { AnyEngineDescriptor } from './core/engine';
 import { timeSceneEngine } from './time-scene';
 import { spaceSceneEngine } from './space-scene';
 import { simulationEngine } from './simulation';
+import { mathSceneEngine } from './math-scene';
 
 const ENGINES: Record<EngineId, AnyEngineDescriptor> = {
   'time-scene': timeSceneEngine,
   'space-scene': spaceSceneEngine,
   simulation: simulationEngine,
+  'math-scene': mathSceneEngine,
 };
 
 export function getEngine(id: EngineId): AnyEngineDescriptor {
