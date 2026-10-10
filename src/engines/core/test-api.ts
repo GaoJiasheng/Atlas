@@ -27,8 +27,6 @@ export type AtlasState = SceneSnapshot & {
   panels: boolean;
   /** Top-right card expanded (folded = a vertical tab at the stage's right edge). */
   card: boolean;
-  /** A chapter auto-run is animating the engine's time (TimeScene); always false elsewhere. */
-  running: boolean;
   /** The continuous time on show (TimeScene: the playhead as a number); `null` when the engine has none. */
   playhead: number | null;
   /** Active camera preset, `null` = free camera. */
@@ -45,8 +43,6 @@ export interface AtlasTestApi {
   ready: Promise<boolean>;
   chapters(): string[];
   goToChapter(id: string, options?: { instant?: boolean }): void;
-  /** Pick a chapter as the rail does (camera flight, and in TimeScene the time auto-run); a second call re-runs it. */
-  runChapter(id: string): void;
   presets(): string[];
   setPreset(id: string, options?: { instant?: boolean }): void;
   modes(): string[];
@@ -129,7 +125,6 @@ export function installTestApi(deps: TestApiDeps): () => void {
     ready,
     chapters: () => [...deps.chapterIds],
     goToChapter: (id, options) => store.getState().goToChapter(id, { instant: options?.instant ?? false }),
-    runChapter: (id) => store.getState().goToChapter(id, { instant: false }),
     presets: () => (hud.getState().controls.presets?.items ?? []).map((p) => p.id),
     setPreset: (id, options) => {
       actions.setPreset(id, { instant: options?.instant ?? false });
@@ -170,7 +165,6 @@ export function installTestApi(deps: TestApiDeps): () => void {
         reader: h.reader,
         panels: h.panelsOpen,
         card: h.cardOpen,
-        running: h.controls.time?.running() ?? false,
         playhead: h.controls.time?.now() ?? null,
         preset: activePreset(h, snapshot.chapter),
         modes: Object.fromEntries(allModes(h.controls, h.labels, '').map((m) => [m.id, m.on])),

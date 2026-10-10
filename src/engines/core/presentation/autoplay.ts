@@ -9,6 +9,9 @@
 /** A beat's camera flight (TimeScene FLY_MS 2.2 s) and caption fade-in end about here; auto-play and voice count from then. */
 export const BEAT_SETTLE_MS = 2300;
 
+/** The caption fades in 1.6 s after a beat starts, for 0.6 s (styles/scene.css `atlas-caption-in`): the stage is free after both this and the settle. */
+export const CAPTION_IN_MS = 2200;
+
 /** Auto-play dwell on a caption that is neither spoken nor has a clip: 4 s + 60 ms per character, within 6–20 s. */
 export const autoplayDwell = (chars: number): number => Math.min(20_000, Math.max(6_000, 4_000 + 60 * chars));
 

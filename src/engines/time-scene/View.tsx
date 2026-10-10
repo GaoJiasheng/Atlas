@@ -6,19 +6,22 @@
  * docs/06 "TimeScene".
  *
  * Time flows through two layers:
- *  - the store's `t` (TimePoint, in the URL, set by chapters and deep links)
+ *  - the store's `t` (TimePoint, in the URL, set by chapters, beats and deep links)
  *  - the playhead (continuous number the map renders at; lib/playhead.ts)
- * Picking a chapter (rail, node, ← →, Next / Back) AUTO-RUNS it: the playhead
- * eases from the chapter's span start to its time over 5 s (movements advance,
- * events pulse in order; the store's `t` is already the chapter time). The
- * playhead is draggable at any time: touching it, or any key that changes `t`,
- * cancels the run and leaves `t` where it is. Scrubbing writes a rounded `t`
- * back with `patch()`. There is no other free-running playback: the top
- * bar's PRESENT button (key P) starts the presentation.
+ * The bottom bar is segmented like the presentation's progress bar (one
+ * segment per story chapter, a tick per beat; lib/segmentScale.ts). Picking a
+ * chapter (segment, rail, chips, ← →, Next / Back) goes there and then applies
+ * its FIRST BEAT (camera, `t`, layers, highlight) with the normal transition:
+ * the camera flies and the playhead eases to the beat's time in 1.6 s; there
+ * is no auto-run. A tick applies its beat the same way (the chapter follows;
+ * the HUD and the reader stay as they are). The playhead drags at any time;
+ * scrubbing writes a rounded `t` back with `patch()`. There is no
+ * free-running playback: the top bar's PRESENT button (key P) starts the
+ * presentation.
  *
  * A background chapter (`kind: background`, core/chapters.ts) has no time of
- * its own: no timeline node, no auto-run, ignored by the rule's hybrid scale;
- * its map is the first keyframe (or its `state.time`).
+ * its own: no segment on the bar; its map is the first keyframe (or its
+ * `state.time`).
  *
  * PRESENTATION (P) runs on the core presentation system
  * (core/presentation: beats, caption card, progress bar, auto-play, voice,
@@ -26,14 +29,17 @@
  * plus the beat's `t` / `camera` / `layers` / `highlight`, applied with the
  * store's `applyState` (camera flight, `t` ease); the caption card's header
  * shows the playhead date; entering leaves REFERENCE and drops selections;
- * the map shows leader labels for the beat's highlighted ids only.
+ * the map shows leader labels for the beat's highlighted ids only. Once a
+ * beat has settled the map is free to pan and zoom (core lifts its input
+ * layer); clicking the map selects nothing and does not advance; the next
+ * beat flies from wherever the reader left the camera.
  */
 import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
 import type { EngineViewProps, GeoCamera, SceneSnapshot } from '../core/types';
-import { SceneSlot, useScene, useSceneControls, useSceneStore, useT } from '../core/context';
+import { SceneSlot, useScene, useSceneContext, useSceneControls, useSceneStore, useT } from '../core/context';
 import { storyChapters } from '../core/chapters';
 import type { SceneControls, SpecRow } from '../core/controls';
-import { usePresentation, type PresentationAdapter } from '../core/presentation';
+import { usePresentation, type Beat, type PresentationAdapter } from '../core/presentation';
 import { ControlPanel, type ControlRow } from '../widgets/ControlPanel';
 import type { LegendItem } from '../widgets/Legend';
 import { Icon } from '../widgets/icons';
@@ -43,6 +49,7 @@ import type { TimeSceneExt } from './index';
 import type { TimeBeat, TimeChapterState, TimeSceneGeoData } from './schema';
 import { buildTimeModel, type TimeModel } from './lib/model';
 import { createPlayhead, type Playhead } from './lib/playhead';
+import type { Anchor, SegmentSpec } from './lib/segmentScale';
 import { clamp, fromNumber, stepFor, toNumber, type TimePoint } from './lib/time';
 import { frameAt } from './lib/frame';
 import { referencePair } from './lib/stats';
@@ -59,8 +66,6 @@ import { blocLabel, blocLabelText } from './lib/blocLabels';
 import './time-scene.css';
 
 const CHAPTER_TWEEN_MS = 1600;
-/** A chapter's auto-run: the playhead eases from the span start to the chapter time. */
-const CHAPTER_RUN_MS = 5000;
 const SQUARE_KINDS = new Set<string>(['massacre', 'atrocity']);
 const TRIANGLE_KINDS = new Set<string>(['disaster']);
 /** Up to this many entities, the legend names each one; above, it groups by bloc. */
@@ -83,6 +88,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   const t = useT();
   const geo = data as TimeSceneGeoData;
   const store = useSceneStore<TimeSceneExt>();
+  const { hud } = useSceneContext();
   const currentChapter = useScene<TimeSceneExt, string | null>((s) => s.chapter);
   const layers = useScene<TimeSceneExt, string[]>((s) => s.layers);
   const highlight = useScene<TimeSceneExt, string[]>((s) => s.highlight);
@@ -123,60 +129,23 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     [playhead, model, store],
   );
 
-  /* ---------- chapter auto-run ---------- */
-  const [running, setRunning] = useState(false);
-  const runningRef = useRef(false);
-  const runToken = useRef(0);
-  /**
-   * Where a chapter's run starts and ends: its first beat's `t` if it has one, else the previous
-   * story chapter's time, else the data minimum (each only when it is before the chapter time).
-   * The background chapter has no span (it eases to its time, it does not run).
-   */
-  const chapterSpan = useCallback(
-    (id: string | null): [number, number] | null => {
-      const i = story.findIndex((c) => c.id === id);
-      const chapter = story[i];
-      const end = chapter ? store.getState().chapterTarget(chapter.id).t : null;
-      if (!chapter || end === null) return null;
-      const to = clamp(toNumber(end), model.min, model.max);
-      const beatT = (chapter.state as TimeChapterState).beats?.[0]?.t;
-      const prev = i > 0 ? store.getState().chapterTarget(story[i - 1]!.id).t : null;
-      const candidates = [beatT !== undefined ? toNumber(beatT as TimePoint) : null, prev !== null ? toNumber(prev) : null, model.min];
-      for (const c of candidates) {
-        if (c === null || !Number.isFinite(c)) continue;
-        const from = clamp(c, model.min, model.max);
-        if (from < to) return [from, to];
-      }
-      return [to, to];
-    },
+  /* ---------- segments: one per story chapter, a tick per beat (the bar and the band card) ---------- */
+  const segments = useMemo<SegmentSpec[]>(
+    () =>
+      story.map((c) => {
+        const own = store.getState().chapterTarget(c.id).t;
+        const beats = (c.state as TimeChapterState).beats ?? [];
+        const first = beats.find((b) => b.t !== undefined)?.t;
+        const timeOf = (p: TimePoint | null | undefined) => (p !== null && p !== undefined ? toNumber(p) : Number.NaN);
+        const time = [timeOf(own), timeOf(first as TimePoint | undefined), model.min].find(Number.isFinite)!;
+        return { id: c.id, time, beats: beats.map((b) => (b.t !== undefined ? toNumber(b.t as TimePoint) : time)) };
+      }),
     [story, store, model],
   );
-  const startRun = useCallback(
-    (chapter: string | null, target: number) => {
-      const span = chapterSpan(chapter);
-      const token = ++runToken.current;
-      if (!span || span[0] >= span[1]) {
-        runningRef.current = false;
-        setRunning(false);
-        playhead.tweenTo(target, CHAPTER_TWEEN_MS);
-        return;
-      }
-      runningRef.current = true;
-      setRunning(true);
-      playhead.tweenTo(span[1], CHAPTER_RUN_MS, {
-        from: span[0],
-        onDone: () => {
-          if (token !== runToken.current) return;
-          runningRef.current = false;
-          setRunning(false);
-        },
-      });
-    },
-    [chapterSpan, playhead],
-  );
-
-  /** α of the timeline mapping, fitted by the rule to its width; the band card reuses it. */
-  const [alpha, setAlpha] = useState(1);
+  /** Where the playhead belongs on the bar: the chapter's segment, and the beat it rests on. */
+  const [anchor, setAnchor] = useState<Anchor | null>(null);
+  /** The beat being applied (so the transition it causes anchors the playhead on its tick). */
+  const pendingBeat = useRef<{ chapter: string; index: number } | null>(null);
 
   /* ---------- selection: an event (map / labels) or an entity (card row) ---------- */
   const [selected, setSelected] = useState<string | null>(null);
@@ -188,6 +157,8 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   }, [store]);
   const selectEvent = useCallback(
     (id: string) => {
+      // The presentation's map is for looking around: the caption says what the beat is about.
+      if (presentation.isPresenting()) return;
       setSelectedEntity(null);
       setSelected(id);
       store.getState().patch({ highlight: [id] });
@@ -226,6 +197,22 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
         if (transitioned) {
           setSelected(null);
           setSelectedEntity(null);
+          const segment = story.findIndex((c) => c.id === s.chapter);
+          const pending = pendingBeat.current;
+          pendingBeat.current = null;
+          // A chapter without beats of its own is its single beat.
+          const ownBeats = (story[segment]?.state as TimeChapterState | undefined)?.beats?.length ?? 0;
+          const tick = pending?.chapter === s.chapter ? pending.index : s.transition.reason === 'chapter' && ownBeats === 0 ? 0 : null;
+          setAnchor(segment >= 0 ? { segment, tick } : null);
+          // A chapter picked by the reader (segment, rail, chips, ← →) opens on its first beat, once this transition is out.
+          if (s.transition.reason === 'chapter' && !s.transition.instant && !presentation.isPresenting() && ownBeats > 0) {
+            const id = s.transition.id;
+            const chapter = s.chapter;
+            queueMicrotask(() => {
+              const first = beatsRef.current.find((b) => b.chapter === chapter && b.index === 0);
+              if (first && store.getState().transition.id === id && !presentation.isPresenting()) applyBeatState(first, false);
+            });
+          }
         }
         if (!transitioned && s.t === prev.t) return;
         if (s.t === null) return;
@@ -235,21 +222,31 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
         const target = clamp(toNumber(s.t), model.min, model.max);
         if (!Number.isFinite(target)) return;
         if (!transitioned || s.transition.instant) playhead.set(target);
-        else if (s.transition.reason === 'chapter' && !presentation.isPresenting()) startRun(s.chapter, target);
         else playhead.tweenTo(target, CHAPTER_TWEEN_MS);
       }),
-    [store, playhead, model, startRun],
+    // `applyBeatState` and `presentation.isPresenting` read refs only.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [store, playhead, model, story],
   );
 
   /* ---------- user time controls ---------- */
   const step = stepFor(model.span, model.scale);
   const nudge = useCallback(
-    (dir: 1 | -1, big = false) => commit(playhead.get() + dir * step * (big ? 10 : 1)),
+    (dir: 1 | -1, big = false) => {
+      setAnchor((a) => (a ? { segment: a.segment, tick: null } : a));
+      commit(playhead.get() + dir * step * (big ? 10 : 1));
+    },
     [commit, playhead, step],
   );
   const scrubStart = useCallback(() => playhead.cancelTween(), [playhead]);
-  const goToChapterFromRule = useCallback((id: string) => store.getState().goToChapter(id), [store]);
-  const currentSpan = useMemo(() => chapterSpan(currentChapter), [chapterSpan, currentChapter]);
+  const scrub = useCallback(
+    (n: number, segment: number) => {
+      setAnchor({ segment, tick: null });
+      commit(n);
+    },
+    [commit],
+  );
+  const goToChapterFromBar = useCallback((id: string) => store.getState().goToChapter(id), [store]);
 
   // Shift+←/→ anywhere (outside text fields, the map and the timeline itself) nudges time.
   useEffect(() => {
@@ -289,24 +286,31 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     if (controller && referenceRef.current) controller.setReference(true, true);
   }, [controller]);
 
+  /* ---------- beats: the presentation's, and the bar's ticks (the same state) ---------- */
+  /** Put the scene in a beat's state: the chapter's target plus the beat's `t` / `camera` / `layers` / `highlight`. */
+  const applyBeatState = (b: Beat<TimeBeat>, instant: boolean) => {
+    const s = store.getState();
+    const spec = b.spec;
+    pendingBeat.current = { chapter: b.chapter, index: b.index };
+    s.applyState(
+      {
+        ...s.chapterTarget(b.chapter),
+        ...(spec?.t !== undefined ? { t: spec.t as TimePoint } : {}),
+        ...(spec?.camera ? { camera: spec.camera } : {}),
+        ...(spec?.layers ? { layers: [...spec.layers] } : {}),
+        ...(spec?.highlight ? { highlight: [...spec.highlight] } : {}),
+      },
+      { instant },
+    );
+    // A beat's camera is authored, not the reader's: the status line keeps "CHAPTER NN VIEW".
+    hud.setState({ cameraFree: false });
+  };
+
   /* ---------- PRESENTATION (P): the core presentation over this map ---------- */
   const presentationAdapter: PresentationAdapter<TimeBeat, SceneSnapshot<TimeSceneExt>> = {
     beatsOf: (c) => (c.state as TimeChapterState).beats,
     captionOf: (b, l) => tx(b.caption, l),
-    applyBeat: (b, { instant }) => {
-      const s = store.getState();
-      const spec = b.spec;
-      s.applyState(
-        {
-          ...s.chapterTarget(b.chapter),
-          ...(spec?.t !== undefined ? { t: spec.t as TimePoint } : {}),
-          ...(spec?.camera ? { camera: spec.camera } : {}),
-          ...(spec?.layers ? { layers: [...spec.layers] } : {}),
-          ...(spec?.highlight ? { highlight: [...spec.highlight] } : {}),
-        },
-        { instant },
-      );
-    },
+    applyBeat: (b, { instant }) => applyBeatState(b, instant),
     saveState: () => store.getState().snapshot(),
     restoreState: (saved) => store.getState().applyState(saved, { instant: false }),
     onEnter: () => {
@@ -318,6 +322,29 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     readout: <BeatReadout model={model} playhead={playhead} locale={locale} />,
   };
   const presentation = usePresentation(presentationAdapter);
+  const beatsRef = useRef(presentation.beats);
+  beatsRef.current = presentation.beats;
+  /** A tick on the bar: that beat's state, outside the presentation (HUD and reader as they are). */
+  const goToBeatFromBar = useCallback(
+    (chapter: string, index: number) => {
+      const b = beatsRef.current.find((x) => x.chapter === chapter && x.index === index);
+      if (b) applyBeatState(b, false);
+    },
+    // `applyBeatState` reads the store and a ref only.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
+  );
+  /** A tick's caption and date as written (a beat dated to the month reads as that month). */
+  const beatLabel = useCallback(
+    (chapter: string, index: number) => {
+      const b = presentation.beats.find((x) => x.chapter === chapter && x.index === index);
+      const when = (b?.spec?.t as TimePoint | undefined) ?? store.getState().chapterTarget(chapter).t;
+      const date = when !== null && when !== undefined ? formatTime(when, locale) : '';
+      return { caption: b ? tx(b.caption, locale) : '', date: locale === 'en' ? date.toLocaleUpperCase('en') : date };
+    },
+    [presentation.beats, locale, store],
+  );
+  const currentSegment = story.findIndex((c) => c.id === currentChapter);
   const { presenting, isPresenting, status: presentationStatus, controls: beatControls, start: startPresentation, stop: stopPresentation } = presentation;
   // Leader labels for the beat's highlighted ids only (the caption and the map agree).
   useEffect(() => controller?.setPresentation(presenting), [controller, presenting]);
@@ -483,8 +510,8 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
         return s ?? {};
       },
       specRows,
-      status: [statusT, running ? 'RUNNING' : ''].filter(Boolean),
-      time: { running: () => runningRef.current, now: () => playhead.get() },
+      status: [statusT],
+      time: { now: () => playhead.get() },
       card: bi('time.card.title'),
       cardToggle: { expanded: cardExpanded, set: setCardExpanded },
       beats: beatControls,
@@ -536,7 +563,6 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     readStats,
     specRows,
     statusT,
-    running,
     playhead,
     cardExpanded,
     selected,
@@ -585,9 +611,10 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
           model={model}
           playhead={playhead}
           locale={locale}
-          chapter={currentChapter}
           highlight={highlight}
-          alpha={alpha}
+          segments={segments}
+          anchor={anchor}
+          current={currentSegment}
           expanded={cardExpanded}
           selected={selectedEntity}
           onSelect={selectEntity}
@@ -604,15 +631,16 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
           playhead={playhead}
           locale={locale}
           chapters={story}
+          segments={segments}
+          beatLabel={beatLabel}
           currentChapter={currentChapter}
           highlight={highlight}
-          onScrub={commit}
+          anchor={anchor}
+          onScrub={scrub}
           onScrubStart={scrubStart}
           onNudge={nudge}
-          onChapter={goToChapterFromRule}
-          span={currentSpan}
-          running={running}
-          onAlpha={setAlpha}
+          onChapter={goToChapterFromBar}
+          onBeat={goToBeatFromBar}
         />
       </SceneSlot>
 

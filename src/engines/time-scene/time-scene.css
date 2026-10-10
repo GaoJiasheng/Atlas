@@ -511,7 +511,8 @@ button.ts-co:focus-visible {
 }
 
 /* ------------------------------------------------------------------ */
-/* Bottom bar (bottomBar): controls · rule · state cluster, lanes below */
+/* Bottom bar (bottomBar): controls · segmented rule · state cluster,  */
+/* lanes below                                                          */
 /* ------------------------------------------------------------------ */
 
 .ts-timeline {
@@ -580,7 +581,7 @@ button.ts-co:focus-visible {
   grid-area: rule;
   position: relative;
   min-width: 0;
-  padding: 0 22px; /* half a node, so both ends are reachable */
+  padding: 0 22px; /* half the playhead's 44 px hit area, so it stays inside the bar at either end */
 }
 /* State cluster (was panel 03): mono counts, labels in the titles. */
 .ts-state {
@@ -640,6 +641,8 @@ button.ts-co:focus-visible {
   height: 52px;
   cursor: ew-resize;
   touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
   outline: none;
 }
 .ts-rule__svg {
@@ -650,41 +653,146 @@ button.ts-co:focus-visible {
   overflow: visible;
   pointer-events: none;
 }
-.ts-rule__base {
-  stroke: var(--line);
-  stroke-width: 1;
+/* One hairline track per chapter, like the presentation's progress bar: done ink, current signal up to the playhead. */
+.ts-seg__track {
+  stroke: color-mix(in srgb, var(--ink) 20%, transparent);
+  stroke-width: 2;
 }
-.ts-rule__done {
-  stroke: var(--ink);
-  stroke-width: 1.6;
+.ts-seg__done {
+  stroke: var(--ink-2);
+  stroke-width: 2;
 }
-.ts-rule__minor {
+.ts-seg__edge {
   stroke: var(--ink-3);
-  stroke-width: 0.8;
-}
-.ts-rule__major {
-  stroke: var(--ink);
   stroke-width: 1;
 }
-.ts-rule__label,
-.ts-rule__unit {
-  font: 500 9px / 1 var(--font-mono);
-  letter-spacing: 0.04em;
-  fill: var(--ink-2);
+.ts-rule__svg [data-state="current"] .ts-seg__track {
+  stroke: color-mix(in srgb, var(--signal) 30%, transparent);
 }
-.ts-rule__unit {
-  fill: var(--ink-3);
+.ts-rule__svg [data-state="current"] .ts-seg__done,
+.ts-rule__svg [data-state="current"] .ts-seg__edge {
+  stroke: var(--signal);
 }
 .ts-rule__key {
   fill: var(--paper);
-  stroke: var(--ink-2);
+  stroke: var(--ink-3);
   stroke-width: 0.8;
 }
+.ts-segs {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  pointer-events: none;
+}
+.ts-seg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+/* The segment: a 44 px button over its track and its label (number over YYYY-MM, at the left boundary). */
+.ts-seg__btn {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  height: 44px;
+  margin: 0;
+  padding: 23px 0 0;
+  border: 0;
+  background: transparent;
+  font: 500 9.5px / 1 var(--font-mono);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
+  pointer-events: auto;
+}
+.ts-seg__no {
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.ts-seg__date {
+  color: var(--ink-3);
+}
+.ts-seg[data-state="current"] .ts-seg__no,
+.ts-seg[data-state="current"] .ts-seg__date {
+  color: var(--signal);
+}
+@media (hover: hover) {
+  .ts-seg__btn:hover .ts-seg__no,
+  .ts-seg__btn:hover .ts-seg__date {
+    color: var(--ink);
+  }
+}
+.ts-seg__btn:focus-visible {
+  outline: 1px solid var(--signal);
+  outline-offset: -1px;
+}
+/* A tick per beat on the track; its hit area reaches halfway to its neighbours (width set inline). */
+.ts-seg__tick {
+  position: absolute;
+  z-index: 1;
+  top: 12px;
+  height: 24px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  transform: translateX(-50%);
+  cursor: pointer;
+  pointer-events: auto;
+}
+.ts-seg__tick::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  box-sizing: border-box;
+  border: 1px solid var(--ink-3);
+  border-radius: 50%;
+  background: var(--panel-solid);
+  transform: translate(-50%, -50%);
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.ts-seg[data-state="current"] .ts-seg__tick::before {
+  border-color: var(--ink);
+}
+.ts-seg .ts-seg__tick[data-filled]::before {
+  border-color: var(--signal);
+  background: var(--signal);
+}
+@media (hover: hover) {
+  .ts-seg__tick:hover::before {
+    border-color: var(--signal);
+    transform: translate(-50%, -50%) scale(1.3);
+  }
+}
+.ts-seg__tick:focus-visible {
+  outline: none;
+}
+.ts-seg__tick:focus-visible::before {
+  outline: 1px solid var(--signal);
+  outline-offset: 2px;
+}
+/* Phones: segments only. */
+@container ts-bar (max-width: 560px) {
+  .ts-seg__tick {
+    display: none;
+  }
+}
 .ts-rule__head {
-  /* Visual playhead: a 12 px dot on a hairline stem, under the chapter nodes. The 44 px hit area is .ts-rule__grab. */
+  /* Visual playhead: a 12 px dot on a hairline stem, under the ticks. The 44 px hit area is .ts-rule__grab. */
   position: absolute;
   top: 12px;
-  height: 30px;
+  height: 24px;
   width: 0;
   border-left: 1px solid var(--signal);
   transform: translateX(-0.5px);
@@ -693,23 +801,20 @@ button.ts-co:focus-visible {
 .ts-rule__head::after {
   content: "";
   position: absolute;
-  left: -6.5px; /* 12 px dot centred on the stem, on the rule line */
-  top: 9px;
+  left: -6.5px; /* 12 px dot centred on the stem, on the track */
+  top: 6px;
   width: 12px;
   height: 12px;
   box-sizing: border-box;
   border-radius: 50%;
   border: 1.5px solid var(--signal);
-  background: var(--signal);
-  box-shadow: 0 0 0 2px var(--panel-solid);
-}
-.ts-rule__rail[data-running] .ts-rule__head::after {
   background: var(--panel-solid);
+  box-shadow: 0 0 0 2px var(--panel-solid);
 }
 .ts-rule__grab {
   position: absolute;
-  z-index: 2; /* above the chapter nodes: the playhead rests on its chapter's node and must stay grabbable */
-  top: 5px; /* 44 px box centred on the rule line */
+  z-index: 2; /* above the ticks: the playhead rests on its beat's tick and must stay grabbable */
+  top: 2px; /* 44 px box centred on the track */
   width: 44px;
   height: 44px;
   margin-left: -22px;
@@ -733,65 +838,29 @@ button.ts-co:focus-visible {
   pointer-events: none;
   text-shadow: 0 0 3px var(--panel-solid);
 }
-.ts-rule__nodes {
+/* Tick tooltip: the beat's date and the start of its caption, a hairline card above the track. */
+.ts-tip {
   position: absolute;
-  left: 22px;
-  right: 22px;
-  top: 27px;
-  height: 0;
+  z-index: 3;
+  bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: max-content;
+  max-width: 16em;
   margin: 0;
-  padding: 0;
-  list-style: none;
+  padding: 5px 8px 6px;
+  border: 1px solid var(--line);
+  background: var(--panel-solid);
+  transform: translateX(-50%);
+  font: 400 11px / 1.3 var(--font-hud);
+  color: var(--ink);
   pointer-events: none;
 }
-.ts-rule__nodes > li {
-  position: absolute;
-  top: 0;
-  transform: translate(-50%, -50%);
-}
-.ts-rule__node {
-  display: grid;
-  place-items: center;
-  width: var(--hit);
-  height: var(--hit);
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: var(--ink);
-  cursor: pointer;
-  pointer-events: auto;
-}
-.ts-rule__node > span {
-  display: grid;
-  place-items: center;
-  width: 17px;
-  height: 17px;
-  border-radius: 50%;
-  border: 1px solid var(--ink);
-  background: var(--panel-solid);
-  font: 500 8px / 1 var(--font-mono);
-  letter-spacing: 0;
-  transition: transform var(--dur-fast) var(--ease-out);
-}
-.ts-rule__node[aria-current="step"] > span {
-  border-color: var(--signal);
-  background: var(--signal);
-  color: var(--ink-on);
-}
-@media (hover: hover) {
-  .ts-rule__node:hover > span {
-    border-color: var(--signal);
-  }
-}
-.ts-rule__node:active > span {
-  transform: scale(0.92);
-}
-.ts-rule__node:focus-visible {
-  outline: none;
-}
-.ts-rule__node:focus-visible > span {
-  outline: 1px solid var(--signal);
-  outline-offset: 2px;
+.ts-tip b {
+  font: 500 9.5px / 1 var(--font-mono);
+  letter-spacing: 0.06em;
+  color: var(--signal);
 }
 
 /* ------------------------------------------------------------------ */

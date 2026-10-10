@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { ruleTicks } from '../../src/engines/time-scene/lib/ticks';
+import { ruleTicks, thinTicks } from '../../src/engines/time-scene/lib/ticks';
 import { toNumber } from '../../src/engines/time-scene/lib/time';
 
 describe('ruleTicks', () => {
@@ -43,5 +43,18 @@ describe('ruleTicks', () => {
 
   it('returns nothing for an empty span', () => {
     expect(ruleTicks(5, 5, 'date', 10).major).toEqual([]);
+  });
+});
+
+describe('thinTicks', () => {
+  it('thins labels and minor ticks where the mapping compresses time', () => {
+    const { major, minor } = thinTicks(
+      [{ t: 0 }, { t: 1 }, { t: 2 }, { t: 3 }],
+      [0.5, 0.52, 1.5, 2.5],
+      (t) => (t < 2 ? t * 10 : 20 + (t - 2) * 100),
+      30,
+    );
+    expect(major.map((m) => m.showLabel)).toEqual([true, false, false, true]);
+    expect(minor).toEqual([5, 15, 70]);
   });
 });

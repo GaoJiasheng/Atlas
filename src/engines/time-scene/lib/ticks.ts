@@ -1,5 +1,5 @@
 /**
- * Tick marks for the timeline rule (bottom bar, panel 01, the card's axis).
+ * Tick marks for the participation card's time axis.
  * Pure and unit-tested. The step adapts to the span and the room available:
  * the finest ladder rung whose major ticks fit `maxMajors` wins, e.g.
  *
@@ -163,4 +163,37 @@ export function ruleTicks(min: number, max: number, scale: TimeScale, maxMajors:
     DATE_LADDER.find((r) => span / (r.major === 'month' ? r.months / 12 : r.years) <= limit) ??
     DATE_LADDER[DATE_LADDER.length - 1]!;
   return dateTicks(min, max, rung, locale);
+}
+
+/**
+ * Tick thinning for a non-linear axis (the band card on the timeline's
+ * segmented mapping): keep a major tick's label only when it is at least
+ * `labelGap` px from the last kept label, and drop minor ticks closer than
+ * `minorGap` px to the previous tick drawn. Minor ticks come back as px
+ * positions.
+ */
+export function thinTicks<T extends { t: number }>(
+  major: readonly T[],
+  minor: readonly number[],
+  x: (t: number) => number,
+  labelGap: number,
+  minorGap = 3,
+): { major: (T & { x: number; showLabel: boolean })[]; minor: number[] } {
+  let lastLabel = -Infinity;
+  const majors = major.map((m) => {
+    const px = x(m.t);
+    const showLabel = px - lastLabel >= labelGap;
+    if (showLabel) lastLabel = px;
+    return { ...m, x: px, showLabel };
+  });
+  const majorX = majors.map((m) => m.x);
+  const minors: number[] = [];
+  let last = -Infinity;
+  for (const t of minor) {
+    const px = x(t);
+    if (px - last < minorGap || majorX.some((mx) => Math.abs(mx - px) < minorGap)) continue;
+    minors.push(px);
+    last = px;
+  }
+  return { major: majors, minor: minors };
 }

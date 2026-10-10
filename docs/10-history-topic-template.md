@@ -14,7 +14,7 @@
 
 ## 新增约定
 
-- **背景章**：章节 frontmatter `kind: background`（默认 `chapter`），`order: 0`，每个主题至多一个。没有时间轴节点、没有自己的时间（地图显示第一帧，或它的 `state.time`），不自动跑；章节轨写"Background / 背景"不编号，doc id 用 `00`；第一次进入时阅读面板展开（不管之前是否收起）；← → 照常经过它；演示先播它的拍（默认一拍 = `summary`）。二战没有背景章。
+- **背景章**：章节 frontmatter `kind: background`（默认 `chapter`），`order: 0`，每个主题至多一个。没有时间轴分段、没有自己的时间（地图显示第一帧，或它的 `state.time`）；章节轨写"Background / 背景"不编号，doc id 用 `00`；第一次进入时阅读面板展开（不管之前是否收起）；← → 照常经过它；演示先播它的拍（默认一拍 = `summary`）。二战没有背景章。
 - **阅读说明**：背景章的 `state.note`（双语），阅读面板正文顶部的细框，标题"How this topic is written / 阅读说明"。写本主题的视角、数字写法、地图来源。
 - **名词表**：`data/glossary.json`（`{ terms: [{ id, term, definition, see? }] }`，共享 schema `src/content/schema/glossary.ts`）；正文 `<Term id="blitzkrieg">闪电战</Term>` 是点状下划线，点开在阅读面板的 inspector 区显示定义和相关词；控制面板 TOOLS 的"名词 / Glossary"列出全部。每个词只包全主题第一次出现处（EN、ZH 各一处）。
 - **阵营名按主题**：引擎的 bloc 只有 `axis / allied / neutral`，显示名由 `topic.yaml` 的可选 `blocLabels: { axis?, allied?, neutral?, out? }`（每项 `{ en, zh }`）决定，缺省回退全站 `time.bloc.*`。一战：`allied` = 协约国（Allies (Entente)），`axis` = 同盟国（Central Powers）。实体不能随时间改名，要换名写在控制区要素的 `label` 里。

@@ -152,7 +152,7 @@ test('reading panel: collapse is sticky (survives a reload and chapter changes, 
   expect(await width(reader)).toBeLessThanOrEqual(29);
   expect((await api()).reader).toBe(false);
 
-  await page.locator('.ts-rule__node').nth(2).click();
+  await page.locator('.ts-seg__btn').nth(2).click();
   await expect.poll(async () => (await api()).chapter).toBe('third-look');
   await expect.poll(flashes).toBe(2);
   await expect(flashing).toHaveCount(0, { timeout: 3000 });
@@ -181,113 +181,159 @@ test('reading panel: collapse is sticky (survives a reload and chapter changes, 
   await expect(page.locator('.atlas-panel__summary')).toHaveText(/Sample question/);
 });
 
-test('chapter auto-run: the playhead runs from the span start to the chapter time and lands exactly; the playhead drags, nudges and jumps; any touch cancels the run', async ({ page }) => {
-  test.setTimeout(90_000);
+type TimeState = ReturnType<NonNullable<typeof window.__atlas>['state']> & { t?: string; highlight?: string[]; camera?: { center: [number, number]; zoom: number } };
+
+test('segmented timeline: a segment per chapter (number · YYYY-MM), a chapter lands on its time without an auto-run; the playhead drags, nudges and jumps', async ({ page }) => {
+  test.setTimeout(60_000);
   await page.setViewportSize({ width: 1440, height: 900 });
   await openScene(page, '/en/topics/sample-time/?ch=first-look');
-  const api = () => page.evaluate(() => window.__atlas!.state());
-  const running = async () => (await api()).running;
+  const api = () => page.evaluate(() => window.__atlas!.state() as TimeState);
   const head = async () => (await api()).playhead!;
   const grab = page.locator('.ts-rule__grab');
   const readout = page.locator('.ts-rule__date');
-  await expect.poll(running).toBe(false);
-  const p1 = await head(); // first-look rests on its own time
+  expect(await page.evaluate(() => 'runChapter' in window.__atlas!)).toBe(false);
+  expect('running' in (await api())).toBe(false);
 
-  // Rail row: second-look runs from the previous chapter's time (= p1) to its own. Status line says RUNNING meanwhile.
-  await page.locator('.atlas-rail__item').nth(1).click();
-  await expect.poll(running, { timeout: 2000 }).toBe(true);
-  const early = await head();
-  expect(early).toBeGreaterThanOrEqual(p1);
-  await expect(page.locator('.atlas-topbar')).toContainText('RUNNING');
+  // One segment per chapter, labelled at its left boundary; chapters without beats have one tick at their time.
+  const segs = page.locator('.ts-seg');
+  await expect(segs).toHaveCount(3);
+  await expect(page.locator('.ts-seg__no')).toHaveText(['01', '02', '03']);
+  await expect(page.locator('.ts-seg__date')).toHaveText(['2000-01', '2000-03', '2000-07']);
+  await expect(page.locator('.ts-seg__tick')).toHaveCount(3);
+  await expect(page.locator('.ts-seg[data-state="current"] .ts-seg__no')).toHaveText('01');
+  await expect(page.locator('.ts-seg[data-state="current"] .ts-seg__tick[data-filled]')).toHaveCount(1);
+  const p1 = await head();
+
+  // A segment: the chapter, its time eased in 1.6 s; never RUNNING, and nothing moves after it lands.
+  await page.locator('.ts-seg__btn').nth(1).click();
   await expect.poll(async () => (await api()).chapter).toBe('second-look');
-  await expect.poll(running, { timeout: 10_000 }).toBe(false);
-  const p2 = await head();
-  expect(p2).toBeGreaterThan(p1);
-  expect(early).toBeLessThan(p1 + (p2 - p1) * 0.3);
-  await expect(readout).toHaveText(/11 MAR 2000/);
   await expect(page.locator('.atlas-topbar')).not.toContainText('RUNNING');
-  expect(page.url()).not.toContain('t='); // the chapter time is the chapter's own baseline, so the URL carries none
-
-  // A second click on the same chapter re-runs it, and ends on exactly the same time.
-  await page.locator('.atlas-rail__item').nth(1).click();
-  await expect.poll(running, { timeout: 2000 }).toBe(true);
-  expect(await head()).toBeLessThan(p2);
-  await expect.poll(running, { timeout: 10_000 }).toBe(false);
+  await expect.poll(head, { timeout: 4000 }).toBeGreaterThan(p1 + 0.1);
+  await page.waitForTimeout(2000);
+  const p2 = await head();
+  await page.waitForTimeout(1500);
   expect(await head()).toBe(p2);
+  await expect(readout).toHaveText(/11 MAR 2000/);
+  expect(page.url()).not.toContain('t='); // the chapter time is the chapter's own baseline, so the URL carries none
+  await expect(page.locator('.ts-seg[data-state="current"] .ts-seg__no')).toHaveText('02');
+  await expect(page.locator('.ts-seg[data-state="done"]')).toHaveCount(1);
 
-  // Timeline node, then the programmatic API, run the same way.
-  await page.locator('.ts-rule__node').nth(2).click();
-  await expect.poll(running, { timeout: 2000 }).toBe(true);
-  await expect.poll(running, { timeout: 10_000 }).toBe(false);
+  // The rail row and ← → behave the same.
+  await page.locator('.atlas-rail__item').nth(2).click();
+  await expect.poll(async () => (await api()).chapter).toBe('third-look');
+  await page.waitForTimeout(2000);
   const p3 = await head();
   expect(p3).toBeGreaterThan(p2);
-  await page.evaluate(() => window.__atlas!.runChapter('second-look'));
-  await expect.poll(running, { timeout: 2000 }).toBe(true);
-  await expect.poll(running, { timeout: 10_000 }).toBe(false);
-  expect(await head()).toBe(p2);
 
-  // Dragging the playhead mid-run cancels it, and releasing leaves t where it is.
-  await page.locator('.atlas-rail__item').nth(2).click();
-  await expect.poll(running, { timeout: 2000 }).toBe(true);
-  await page.waitForTimeout(1500);
+  // Dragging the playhead scrubs continuous time without changing the chapter; releasing leaves it there.
   const box = (await grab.boundingBox())!;
   expect(box.width).toBeGreaterThanOrEqual(44);
   const [cx, cy] = [box.x + box.width / 2, box.y + box.height / 2];
   await page.mouse.move(cx, cy);
   await page.mouse.down();
-  await page.mouse.move(cx + 40, cy, { steps: 4 });
-  expect(await running()).toBe(false);
-  await page.mouse.move(cx - 90, cy, { steps: 8 });
+  await page.mouse.move(cx - 60, cy, { steps: 4 });
+  await page.mouse.move(cx - 260, cy, { steps: 8 });
   await page.mouse.up();
   const dropped = await head();
   expect(dropped).toBeLessThan(p3);
-  expect(dropped).toBeGreaterThan(p1);
   await page.waitForTimeout(900);
   expect(await head()).toBe(dropped);
-  expect(await running()).toBe(false);
+  expect((await api()).chapter).toBe('third-look');
   await expect.poll(() => page.url()).toContain('t=2000-0'); // a scrubbed time is written back
 
-  // Keyboard on the focused playhead: Home / End jump to the chapter's span ends, arrows nudge one tick.
-  await grab.focus();
-  await page.keyboard.press('Home');
-  expect(await head()).toBe(p2);
-  await page.keyboard.press('End');
-  expect(await head()).toBe(p3);
-  await page.keyboard.press('ArrowLeft');
-  const nudged = await head();
-  expect(nudged).toBeLessThan(p3);
-  await page.keyboard.press('ArrowRight');
-  expect(await head()).toBeGreaterThan(nudged);
-  expect((await api()).chapter).toBe('third-look'); // arrows on the playhead never change chapter
-
-  // Clicking the rule scrubs too (and cancels), and Shift+← cancels a run started by ← →.
-  await page.keyboard.press('Home');
-  await page.locator('.atlas-rail__item').nth(1).click();
-  await expect.poll(running, { timeout: 2000 }).toBe(true);
-  await page.keyboard.press('Shift+ArrowRight');
-  expect(await running()).toBe(false);
-  await page.locator('.atlas-rail__item').nth(2).click();
-  await expect.poll(running, { timeout: 2000 }).toBe(true);
-  const rail = (await page.locator('.ts-rule__rail').boundingBox())!;
-  await page.mouse.click(rail.x + rail.width * 0.15, rail.y + 8);
-  expect(await running()).toBe(false);
+  // Dragging from a segment's label scrubs too (a press that moves is never a click on the segment).
+  const seg0 = (await page.locator('.ts-seg__btn').nth(0).boundingBox())!;
+  await page.mouse.move(seg0.x + 30, seg0.y + seg0.height - 6);
+  await page.mouse.down();
+  await page.mouse.move(seg0.x + 60, seg0.y + seg0.height - 6, { steps: 6 });
+  await page.mouse.up();
+  await page.waitForTimeout(300);
+  expect((await api()).chapter).toBe('third-look');
   expect(await head()).toBeLessThan(p2);
+
+  // Keyboard on the focused playhead: Home / End jump to the ends of its segment, arrows nudge one step.
+  await grab.focus();
+  await page.keyboard.press('End');
+  expect(await head()).toBe(p2);
+  await page.keyboard.press('Home');
+  expect(await head()).toBe(p1);
+  await page.keyboard.press('ArrowRight');
+  const nudged = await head();
+  expect(nudged).toBeGreaterThan(p1);
+  await page.keyboard.press('ArrowLeft');
+  expect(await head()).toBeLessThan(nudged);
+  expect((await api()).chapter).toBe('third-look'); // arrows on the playhead never change chapter
 });
 
-test('timeline: chapter nodes at least 56 px apart, one bottom bar with the state cluster, lanes on demand', async ({ page }) => {
-  await page.setViewportSize({ width: 1920, height: 1080 });
-  await openScene(page, '/en/topics/sample-time/');
+test('segmented timeline (ww2): a segment opens its chapter on the first beat, a tick applies its beat (tooltip on hover), ← → land on first beats; segments equal, ticks apart', async ({ page }) => {
+  test.setTimeout(90_000);
+  await page.setViewportSize({ width: 1600, height: 900 });
+  await openScene(page, '/en/topics/ww2/?ch=asia-1937');
+  const api = () => page.evaluate(() => window.__atlas!.state() as TimeState);
+  const chapters = await page.evaluate(() => window.__atlas!.chapters());
+  await expect(page.locator('.ts-seg')).toHaveCount(chapters.length);
   await expect(page.locator('[data-hud-panel^="panel0"]')).toHaveCount(0);
-  const alpha = Number(await page.locator('.ts-rule__rail').getAttribute('data-alpha'));
-  expect(alpha).toBeGreaterThanOrEqual(0);
-  expect(alpha).toBeLessThanOrEqual(1);
-  const xs = await page.locator('.ts-rule__nodes > li').evaluateAll((els) => els.map((e) => e.getBoundingClientRect().left + e.getBoundingClientRect().width / 2));
-  const sorted = [...xs].sort((a, b) => a - b);
-  for (let i = 1; i < sorted.length; i++) expect(sorted[i]! - sorted[i - 1]!).toBeGreaterThanOrEqual(55.5);
+  await expect(page.locator('.ts-seg__date').nth(1)).toHaveText('1938-01'); // the first beat is before the chapter time
+  await expect(page.locator('.ts-seg__date').nth(2)).toHaveText('1939-09');
+  await expect(page.locator('.ts-seg__btn').nth(1)).toHaveAttribute('aria-label', 'Chapter 2: The world before the war, from 1938-01');
+
+  // Equal segments; inside each, ticks at least 10 px apart when there is room.
+  const geo = await page.locator('.ts-seg').evaluateAll((els) =>
+    els.map((el) => ({ w: el.getBoundingClientRect().width, ticks: [...el.querySelectorAll('.ts-seg__tick')].map((t) => t.getBoundingClientRect().x + t.getBoundingClientRect().width / 2) })),
+  );
+  const inner = geo.slice(1, -1).map((g) => g.w);
+  for (const w of inner) expect(Math.abs(w - inner[0]!)).toBeLessThan(0.6);
+  for (const g of geo) {
+    const xs = [...g.ticks].sort((a, b) => a - b);
+    const room = g.w / Math.max(1, xs.length - 1);
+    for (let i = 1; i < xs.length; i++) expect(xs[i]! - xs[i - 1]!).toBeGreaterThanOrEqual(Math.min(10, room) - 0.6);
+  }
   await expect(page.locator('.ts-state [data-stat]')).toHaveCount(4);
-  // No free-running playback and no PRESENT here (it is in the top bar): the bar's only button is the lanes chevron.
-  await expect(page.locator('.ts-timeline__play, .ts-timeline__speed, .ts-timeline__present')).toHaveCount(0);
   await expect(page.locator('.ts-timeline__controls button')).toHaveCount(1);
+
+  // A segment: the chapter on its first beat (time, highlight, camera), no auto-run; the HUD and the reader stay.
+  const reader = (await api()).reader;
+  // The label row (the track above it belongs to the ticks).
+  await page.locator('.ts-seg__btn[data-segment="world-1939"]').click({ position: { x: 6, y: 38 } });
+  await expect.poll(async () => (await api()).chapter).toBe('world-1939');
+  await expect.poll(async () => (await api()).t).toBe('1938-01-15');
+  expect((await api()).highlight).toEqual(['japan', 'manchukuo', 'china']);
+  await expect.poll(async () => (await api()).camera?.center, { timeout: 6000 }).toEqual([60, 28]);
+  expect(await api()).toMatchObject({ hud: true, presentation: null, reader });
+  await expect(page.locator('.atlas-topbar')).toContainText('CHAPTER 02 VIEW'); // a beat's camera is not a free camera
+  await page.waitForTimeout(1800); // the 1.6 s ease to the beat's time
+  const landed = (await api()).playhead;
+  await page.waitForTimeout(1500);
+  expect((await api()).playhead).toBe(landed);
+  await expect(page.locator('.ts-seg__tick[data-beat="world-1939.0"]')).toHaveAttribute('data-filled', 'true');
+
+  // Hover a tick: its date and the first words of its caption.
+  const tick = page.locator('.ts-seg__tick[data-beat="world-1939.2"]');
+  await tick.hover();
+  await expect(page.locator('.ts-tip')).toBeVisible();
+  await expect(page.locator('.ts-tip b')).toHaveText('5 OCT 1938');
+  await expect(page.locator('.ts-tip span')).toContainText('March 1938');
+  // Click it: that beat's state, in this chapter.
+  await tick.click();
+  await expect.poll(async () => (await api()).t).toBe('1938-10-05');
+  expect((await api()).highlight).toEqual(['anschluss', 'munich-1938']);
+  await expect(tick).toHaveAttribute('data-filled', 'true');
+  await expect.poll(async () => (await api()).camera?.center, { timeout: 6000 }).toEqual([14.5, 49.3]);
+  // A tick of another chapter brings its chapter along.
+  await page.locator('.ts-seg__tick[data-beat="poland-1939.1"]').click();
+  await expect.poll(async () => (await api()).chapter).toBe('poland-1939');
+  await expect.poll(async () => (await api()).t).toBe('1939-09-19');
+  expect(await api()).toMatchObject({ hud: true, presentation: null, reader });
+
+  // ← → land on the next chapter's first beat as well.
+  await page.keyboard.press('ArrowRight');
+  await expect.poll(async () => (await api()).chapter).toBe('blitzkrieg');
+  await expect.poll(async () => (await api()).t).toBe('1940-04-09');
+  // A deep link (or the API's instant jump) shows the chapter's own state.
+  await page.evaluate(() => window.__atlas!.goToChapter('blitzkrieg', { instant: true }));
+  await expect.poll(async () => (await api()).t).toBe('1940-06-22');
+
+  // Lanes on demand, on the same mapping.
   await expect(page.locator('.ts-lanes')).toHaveCount(0);
   await page.locator('.ts-timeline__lanes').click();
   await expect(page.locator('.ts-lanes svg')).toBeVisible();
@@ -311,7 +357,7 @@ test('participation card: expands in place, a row selects its entity (map + insp
   await expect(page.locator('.ts-entity')).toHaveCount(0);
 });
 
-test('PRESENTATION: user-paced beats (keys, dots, click), no auto-advance, ESC and P restore the scene', async ({ page }) => {
+test('PRESENTATION: user-paced beats (keys, dots, a click on the card), no auto-advance, ESC and P restore the scene', async ({ page }) => {
   await page.setViewportSize({ width: 1920, height: 1080 });
   await openScene(page, '/en/topics/sample-time/?ch=first-look');
   const api = () => page.evaluate(() => window.__atlas!.state());
@@ -337,7 +383,7 @@ test('PRESENTATION: user-paced beats (keys, dots, click), no auto-advance, ESC a
   await expect.poll(async () => (await api()).chapter).toBe('third-look');
   await page.keyboard.press('ArrowLeft');
   await expect.poll(async () => (await api()).chapter).toBe('second-look');
-  await page.mouse.click(960, 400);
+  await page.locator('.atlas-present__caption').click();
   await expect.poll(async () => (await api()).chapter).toBe('third-look');
 
   await page.keyboard.press('Escape');
@@ -354,6 +400,66 @@ test('PRESENTATION: user-paced beats (keys, dots, click), no auto-advance, ESC a
   await page.keyboard.press('p');
   await expect.poll(async () => (await api()).modes.presentation).toBe(false);
   await expect.poll(async () => (await api()).chapter).toBe('first-look');
+});
+
+test('PRESENTATION free look (TimeScene): the stage is held while a beat flies in, then pans and zooms; only a plain click on the card advances; ⌄ tucks the card until the next beat', async ({ page }) => {
+  test.setTimeout(60_000);
+  await page.setViewportSize({ width: 1920, height: 1080 });
+  await openScene(page, '/en/topics/sample-time/?ch=first-look');
+  const api = () => page.evaluate(() => window.__atlas!.state() as TimeState);
+  const root = page.locator('.atlas-present');
+  await page.keyboard.press('p');
+  await expect.poll(async () => (await api()).presentation?.chapter).toBe('first-look');
+  // Flying in: the input layer holds the stage, and a click on it does nothing.
+  await expect(root).not.toHaveAttribute('data-free', 'true');
+  await page.mouse.click(960, 400);
+  // Settled (camera and caption): the layer lifts.
+  await expect(root).toHaveAttribute('data-free', 'true', { timeout: 6000 });
+  expect((await api()).presentation).toMatchObject({ chapter: 'first-look', beat: 0 });
+  const beatCamera = (await api()).camera!;
+
+  // Drag and wheel move the map; the beat stays.
+  await page.mouse.move(900, 420);
+  await page.mouse.down();
+  await page.mouse.move(700, 470, { steps: 10 });
+  await page.mouse.up();
+  await expect.poll(async () => (await api()).camera?.center, { timeout: 4000 }).not.toEqual(beatCamera.center);
+  await page.mouse.move(960, 420);
+  await page.mouse.wheel(0, -500);
+  await expect.poll(async () => (await api()).camera?.zoom ?? 0, { timeout: 6000 }).toBeGreaterThan(beatCamera.zoom + 0.2);
+  // A plain click on the map, and a drag that starts on the card, do not advance.
+  await page.mouse.click(960, 400);
+  const caption = (await page.locator('.atlas-present__caption').boundingBox())!;
+  await page.mouse.move(caption.x + caption.width / 2, caption.y + caption.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(caption.x + caption.width / 2 + 40, caption.y + caption.height / 2, { steps: 5 });
+  await page.mouse.up();
+  await page.waitForTimeout(500);
+  expect((await api()).presentation).toMatchObject({ chapter: 'first-look', beat: 0 });
+
+  // A plain click on the card: the next beat takes the camera back (no free look while it flies in).
+  await page.locator('.atlas-present__chapter').click();
+  await expect.poll(async () => (await api()).chapter).toBe('second-look');
+  await expect(root).not.toHaveAttribute('data-free', 'true');
+  // Back to the first beat: its own camera again, wherever the reader had left the map.
+  await page.keyboard.press('ArrowLeft');
+  await expect.poll(async () => (await api()).camera).toEqual(beatCamera);
+
+  // ⌄ tucks the card into a 24 px strip (caption and bar hidden); the next beat brings it back.
+  const foot = page.locator('.atlas-present__foot');
+  await page.locator('.atlas-present__tuck').click();
+  await expect(foot).toHaveAttribute('data-tucked', 'true');
+  expect((await foot.boundingBox())!.height).toBeLessThanOrEqual(27);
+  await expect(page.locator('.atlas-present__caption')).toBeHidden();
+  expect((await api()).presentation).toMatchObject({ chapter: 'first-look', beat: 0 });
+  await page.keyboard.press('ArrowRight');
+  await expect.poll(async () => (await api()).chapter).toBe('second-look');
+  await expect(foot).not.toHaveAttribute('data-tucked', 'true');
+  await expect(page.locator('.atlas-present__caption')).toBeVisible();
+
+  await page.keyboard.press('Escape');
+  await expect.poll(async () => (await api()).presentation).toBeNull();
+  expect((await api()).chapter).toBe('first-look');
 });
 
 test('PRESENTATION progress bar: chapter segments, beat ticks, header, jumps, beat labels, scrolling caption', async ({ page }) => {
@@ -816,11 +922,26 @@ test('sample-space PRESENTATION: beats on the 3D stage (hide, the beat\'s labels
   await expect(loop).toContainText('示例回路');
   await expect.poll(() => loop.evaluate((e) => Number((e as SVGElement).style.opacity)), { timeout: 10_000 }).toBeGreaterThan(0.9);
 
-  // ← back, a click on the stage forward; the last beat stays.
+  // ← back. Once the beat has settled the stage orbits; a click on the model or on empty space neither advances nor changes the beat's part.
   await page.keyboard.press('ArrowLeft');
   await expect.poll(async () => (await api()).presentation?.beat).toBe(0);
+  await expect(page.locator('.atlas-present')).toHaveAttribute('data-free', 'true', { timeout: 8000 });
+  const settled = (await api()).camera;
+  await page.mouse.move(900, 450);
+  await page.mouse.down();
+  await page.mouse.move(700, 420, { steps: 10 });
+  await page.mouse.up();
+  // Orbit damping is frame-count based: under software GL the camera is written back only seconds after the drag.
+  await expect.poll(async () => (await api()).camera, { timeout: 20_000 }).not.toEqual(settled);
   await page.mouse.click(960, 400);
+  await page.mouse.click(1880, 120);
+  await page.waitForTimeout(500);
+  expect(await api()).toMatchObject({ part: 'sample-drum', presentation: { chapter: 'switch-on', beat: 0 } });
+  // A plain click on the card: the next beat, and the system has the camera again.
+  await page.locator('.atlas-present__caption').click();
   await expect.poll(async () => (await api()).presentation?.beat).toBe(1);
+  await expect(page.locator('.atlas-present')).not.toHaveAttribute('data-free', 'true');
+  await expect.poll(async () => (await api()).camera?.position).toEqual([-2.4, 1, 2.6]);
   await page.evaluate((last) => window.__atlas!.goToBeat(last, { instant: true }), beats.length - 1);
   await expect.poll(async () => (await api()).presentation).toMatchObject({ chapter: 'inside-look', beat: 2 });
   // The organism beat: a named cut, the pose and the faint machine.

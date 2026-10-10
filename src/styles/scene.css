@@ -2463,14 +2463,17 @@
 
 /* ------------------------------------------------------------------ */
 /* PRESENTATION (core/presentation, every engine): title block, caption */
-/* card with its two-level progress bar and switches; the stage takes   */
-/* no input. Sizes in design px × --u.                                  */
+/* card with its two-level progress bar and switches. While a beat flies */
+/* in, the input layer keeps the stage still; once it has settled       */
+/* (`data-free`) the stage is the reader's (pan, zoom, orbit). The card */
+/* takes input on its own area only. Sizes in design px × --u.          */
 /* ------------------------------------------------------------------ */
 
 .atlas-present {
   position: absolute;
   inset: 0;
   z-index: 5;
+  pointer-events: none;
   color: var(--ink);
   text-shadow:
     0 0 calc(3 * var(--u)) var(--bg),
@@ -2479,8 +2482,11 @@
 .atlas-present__hit {
   position: absolute;
   inset: 0;
-  cursor: pointer;
+  pointer-events: auto;
   touch-action: none;
+}
+.atlas-present[data-free] .atlas-present__hit {
+  display: none;
 }
 .atlas-present__title {
   position: absolute;
@@ -2522,7 +2528,71 @@
   border: 1px solid var(--line);
   background: color-mix(in srgb, var(--paper) 93%, transparent);
   text-shadow: none;
-  pointer-events: none;
+  cursor: pointer;
+  pointer-events: auto;
+}
+/* ⌄ in the card's top-right corner: tuck the card into a 24 px strip (the next beat brings it back). */
+.atlas-present__tuck {
+  position: absolute;
+  top: calc(4 * var(--u));
+  right: calc(6 * var(--u));
+  display: grid;
+  place-items: center;
+  width: calc(20 * var(--u));
+  height: calc(16 * var(--u));
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink-3);
+  cursor: pointer;
+}
+.atlas-present__tuck::after {
+  /* 44 px tap target around the small chevron */
+  content: "";
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: var(--hit);
+  height: var(--hit);
+  transform: translate(-50%, -50%);
+}
+.atlas-present__tuck i {
+  width: calc(6 * var(--u));
+  height: calc(6 * var(--u));
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: translateY(-25%) rotate(45deg);
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.atlas-present__tuck[aria-expanded="false"] i {
+  transform: translateY(25%) rotate(-135deg);
+}
+@media (hover: hover) {
+  .atlas-present__tuck:hover {
+    color: var(--ink);
+  }
+}
+.atlas-present__tuck:focus-visible {
+  outline: 1px solid var(--signal);
+  outline-offset: 1px;
+}
+.atlas-present__foot[data-tucked] {
+  justify-content: center;
+  height: max(24px, calc(24 * var(--u)));
+  padding-block: 0;
+  gap: 0;
+}
+.atlas-present__foot[data-tucked] .atlas-present__chapter {
+  padding: 0 calc(24 * var(--u));
+  border: 0;
+}
+.atlas-present__foot[data-tucked] .atlas-present__tuck {
+  top: 50%;
+  transform: translateY(-50%);
+}
+.atlas-present__foot[data-tucked] .atlas-present__caption,
+.atlas-present__foot[data-tucked] .atlas-present__row {
+  display: none;
 }
 /* 04 / 11 · chapter · date · 2 / 3 */
 .atlas-present__chapter {
@@ -2569,8 +2639,6 @@
   font: 400 var(--caption-size) / 1.4 var(--font-serif);
   text-align: center;
   text-wrap: pretty;
-  cursor: pointer;
-  pointer-events: auto;
   touch-action: pan-y;
   animation: atlas-caption-in 600ms var(--ease-out) 1600ms both;
 }
