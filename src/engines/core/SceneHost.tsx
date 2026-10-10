@@ -227,8 +227,8 @@ export default function SceneHost(props: SceneHostProps) {
   useEffect(() => {
     if (!dataReady) return;
     const decoded = decodeSceneState(window.location.search);
-    const { t: time, highlight, part, view, explode, run, cutaway, ...common } = decoded;
-    const engineFields: UrlEngineFields = { t: time, highlight, part, view, explode, run, cutaway };
+    const { t: time, highlight, part, view, explode, run, cutaway, pose, ...common } = decoded;
+    const engineFields: UrlEngineFields = { t: time, highlight, part, view, explode, run, cutaway, pose };
     const patch = { ...common, ...engine.fromUrl(engineFields) };
     if (Object.keys(patch).length > 0) store.getState().hydrate(patch);
     return startUrlSync({

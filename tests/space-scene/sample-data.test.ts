@@ -10,12 +10,26 @@ const data = spaceSceneData.parse({ parts: read('parts'), sources: read('sources
 const file = data.parts;
 
 describe('sample-space data (placeholder)', () => {
-  it('stays small: 14 parts + 1 context wall in 3 groups', () => {
-    expect(file.parts).toHaveLength(15);
+  it('stays small: 18 parts (3 bilateral pairs) + 1 context wall in 4 groups', () => {
+    // 18 numbered parts, 3 mirror twins added by the bilateral expansion, the wall.
+    expect(file.parts).toHaveLength(22);
+    expect(file.parts.filter((p) => p.twinOf)).toHaveLength(3);
     expect(file.parts.filter((p) => p.context)).toHaveLength(1);
-    expect(file.groups).toHaveLength(3);
+    expect(file.groups).toHaveLength(4);
     expect(file.flows).toHaveLength(2);
-    expect(file.animations).toHaveLength(3);
+    // 4 written + the leg's mirrored step.
+    expect(file.animations).toHaveLength(5);
+  });
+  it('exercises the organism features: sweep, wing, scale, bilateral, pose, named cut, units, organism materials', () => {
+    const kinds = new Set(file.parts.flatMap((p) => [p.primitive?.kind, ...(p.extra ?? []).map((e) => e.kind)]));
+    expect(kinds.has('sweep') && kinds.has('wing')).toBe(true);
+    expect(file.parts.some((p) => p.primitive?.scale)).toBe(true);
+    expect(Object.keys(file.poses ?? {})).toContain('sample-open');
+    expect(Object.keys(file.views.cuts ?? {})).toContain('sample-cross');
+    expect(file.units).toEqual({ modelUnit: 'cm', scale: 25 });
+    const colors = new Set(file.parts.flatMap((p) => [p.primitive?.color, ...(p.extra ?? []).map((e) => e.color)]));
+    for (const c of ['chitin', 'membrane', 'tissue', 'eye']) expect(colors.has(c as never)).toBe(true);
+    expect(file.animations.some((a) => a.pivot)).toBe(true);
   });
   it('exercises every engineered kind and one repeat', () => {
     const kinds = new Set(file.parts.map((p) => p.primitive?.kind));
@@ -25,7 +39,7 @@ describe('sample-space data (placeholder)', () => {
   it('stays well under the draw-call budget', () => {
     // One draw call per piece (instanced pieces included).
     const pieces = file.parts.reduce((n, p) => n + primitivePieces(p).length, 0);
-    expect(pieces).toBeLessThan(22);
+    expect(pieces).toBeLessThan(28);
   });
   it('exercises hide, shells, enamel, stops + open ends, spec, telemetry', () => {
     expect(file.parts.filter((p) => p.shell).length).toBeGreaterThan(0);

@@ -2,7 +2,8 @@
  * Selected part details (InfoPanel "inspector" slot), in the plate's hairline
  * grammar: part number + name (中文 beneath), summary, detail behind "more"
  * (blank lines = paragraphs; `[S3]` markers = source superscripts that open
- * the host's source popover), group swatch, and "connected to" chips that
+ * the host's source popover), group swatch, "left / right" chips for a
+ * bilateral pair (select the other side), and "connected to" chips that
  * select the connected part.
  */
 import { useId, useState } from 'react';
@@ -71,6 +72,29 @@ function PartDetails({ part, file }: { part: Part; file: PartsFile }) {
             {open ? t('space.less') : t('space.more')}
           </button>
         </>
+      )}
+
+      {part.pair && part.side && (
+        <div className="space-inspector__row">
+          <span className="space-inspector__label">{t('space.side')}</span>
+          <ul className="space-chips">
+            {(['left', 'right'] as const).map((side) => (
+              <li key={side}>
+                <button
+                  type="button"
+                  className="atlas-control space-chip"
+                  aria-pressed={part.side === side}
+                  data-side={side}
+                  onClick={() => {
+                    if (part.side !== side) store.getState().patch({ part: part.pair! });
+                  }}
+                >
+                  {t(side === 'left' ? 'space.side.left' : 'space.side.right')}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
 
       {group && (

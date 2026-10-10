@@ -19,7 +19,7 @@ describe('resolvePartDisplay', () => {
     expect(visibleIds('assembled', null, all)).toEqual(['a1', 'a2', 'b1']);
     expect(visibleIds('assembled', 'a1', all)).toEqual(['a1', 'a2', 'b1']);
     const d = resolvePartDisplay(parts[2]!, { view: 'assembled', part: 'a1', layers: all }, parts);
-    expect(d).toEqual({ visible: true, opacity: 1, selected: false, ghost: false, hidden: false, selectable: true });
+    expect(d).toEqual({ visible: true, opacity: 1, selected: false, ghost: false, hidden: false, selectable: true, faint: false });
   });
 
   it('layers hide whole groups in every view, also the selected part', () => {
@@ -34,8 +34,8 @@ describe('resolvePartDisplay', () => {
     const state = { view: 'xray' as const, part: 'a2', layers: all };
     const sel = resolvePartDisplay(parts[1]!, state, parts);
     const other = resolvePartDisplay(parts[0]!, state, parts);
-    expect(sel).toEqual({ visible: true, opacity: 1, selected: true, ghost: false, hidden: false, selectable: true });
-    expect(other).toEqual({ visible: true, opacity: XRAY_OPACITY, selected: false, ghost: true, hidden: false, selectable: true });
+    expect(sel).toEqual({ visible: true, opacity: 1, selected: true, ghost: false, hidden: false, selectable: true, faint: false });
+    expect(other).toEqual({ visible: true, opacity: XRAY_OPACITY, selected: false, ghost: true, hidden: false, selectable: true, faint: false });
     expect(XRAY_OPACITY).toBe(0.15);
     // Without a selection everything is a ghost.
     expect(resolvePartDisplay(parts[0]!, { ...state, part: null }, parts).ghost).toBe(true);

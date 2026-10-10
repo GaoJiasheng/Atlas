@@ -59,6 +59,14 @@ Gavin 对空调第一版的反馈是"太抽象"：结构没对上真机。写实
 | `grille` rings | `{ "kind": "grille", "style": "rings", "radius": 0.201, "count": 10, "spokes": 8, "bar": 0.0016, "rotation": [90, 0, 0], … }` | 风扇护网 |
 | `grille` slats | `{ "kind": "grille", "style": "slats", "size": [0.756, 0.128, 0.007], "count": 64, "bar": 0.0034, … }`；`size = [w, d, h]`，格条沿 d、沿 w 排列，带边框 | 进风格栅、滤网、百叶 |
 
+### 有机零件（生物，`lib/sweep.ts` / `lib/wing.ts`）
+
+| kind / 字段 | 例（要点） | 用途 |
+|---|---|---|
+| `sweep` | `{ "kind": "sweep", "path": [[0,0,0],[0.4,0.3,0.1],[0.8,0,0.2]], "radius": [0.06,0.05,0.02], "section": { "flat": 0.5 }, "up": [0,0,1], "rings": { "every": 0.05, "depth": 0.12 }, … }`；平滑曲线（centripetal Catmull-Rom）穿过 path（相对 `at`，≤ 128 点）；radius 一个数或每点一个；`section` round / flat / u / `{flat}` / `{u, flat?}`（flat 沿 `up` 压扁，U 的开口背向 `up`）；`hollow` 壁厚（剖切看到腔）；`caps` round / flat / none；`closed` 闭环；默认 radial 16（U 20），segments 按长度与环节自动 | 足各节、触角（`rings` = 分节）、须、消化道（`hollow`）、马氏管、气管（`rings` = 螺旋丝）、神经、背血管（radius 轮廓 = 心室膨大）、前胸背板（`section: u`）、腹部（radius 轮廓 + rings） |
+| `wing` | `{ "kind": "wing", "outline": [[x,y]…], "veins": [[[x,y]…]…], "thickness": 0.004, "fold": { "hinge": [0,0], "segments": 8, "lead": [1.9,0], "rest": 0 }, "rotation": [90,0,0], … }`；外形在 XY（厚度沿 Z），`rotation: [90,0,0]` 把它放平（轮廓 y → 场景 +z）；翅脉 = 墨色细线（`membrane` / `glass` 一层在中面，不透明翅两面各一层）；`fold` = 扇面折叠，`fan` 0 收拢 / 1 = 按 outline 展开；`rest` 静止时的 fan（默认 0） | 覆翅（`chitin` + tint，可不写 fold）、后翅（`membrane`、`fold`）、鳍、花瓣 |
+| `scale` | 任意 primitive 上 `"scale": [sx, sy, sz]`（> 0）：沿自身轴先缩放，再 `mirror`、再 `rotation` | 椭球（复眼、脑、神经节、卵、气囊）、椭圆截面的 lathe 头壳 / 体节 |
+
 ## 4. 零件级开关
 
 | 字段 | 写法 | 何时用 |
@@ -72,6 +80,7 @@ Gavin 对空调第一版的反馈是"太抽象"：结构没对上真机。写实
 | `castShadow` | `true / false` | 覆盖自动判断：长细管、贴墙的件、悬空的室内机设 `false`（投在地面上读作悬空）；context 墙要影子设 `true` |
 | `explode` | `{ "dir": [0, 0, 1], "dist": 0.3 }` | 按**装配逻辑**拆：外壳向外、面板向前、内件沿可拆方向；不许每个螺栓乱飞。`hide` 也沿这个方向移出 0.25 × dist |
 | `connects` | 零件 id 列表 | 右上零件链路卡的连线与详情卡芯片：按真实连接（管路、电线、关节）写 |
+| `bilateral` | `true`，或 `{ "axis": "z", "side": "left", "labelBoth": false }` | 成对的结构（复眼、触角、足、翅、上颚、气门、卵巢）：只建 +Z 一侧，引擎镜像出 `<id>-r`（几何、材质、拆开方向、动画、姿态、`connects` 都镜像）；镜像件不另编号、不进链路卡，每材质槽 +1 draw call |
 
 ## 5. 材质族
 
@@ -79,7 +88,7 @@ Gavin 对空调第一版的反馈是"太抽象"：结构没对上真机。写实
 
 - 每个材质族要在截图里**可辨**（master-spec E）：外壳 vs 内件 vs 管路 vs 框架。dark plate（cinema）下再看一遍：深色件不能糊成一片。
 - 产品本色用材质族 + `tint`（`"color": "powder", "tint": "#b3b6b1"`），不要直接写 `#hex` 当 `color`（会丢掉粗糙度贴图）；token 颜色会随主题翻转，产品本色用 hex。
-- **生物**：现有族都是工业材质。几丁质 / 甲壳用 `plastic` 或 `enamel` + `tint`（缎面），膜质翅用 `glass` + `tint`，软组织用 `plastic` + 暖色 `tint`；颜色按参考图取中性化后的本色，不用饱和色。若需要湿润、半透明或绒毛质感，列为引擎缺口。
+- **生物**：`chitin`（半光泽角质：外骨骼、足、覆翅；`tint` 给物种本色）、`membrane`（半透明 .55、双面、不写深度、不填剖面：后翅、鼓膜、气囊）、`tissue`（哑光软组织 + 微弱自发光仿透光：消化道、腺体、卵巢、卵；按器官 `tint` 低饱和粉 / 赭 / 乳黄）、`muscle`（纤维法线：伸肌、屈肌、飞行肌）、`trachea`（白、环纹法线）、`nerve`（淡黄：脑、神经节、神经索）、`eye`（深色高光 + 六边形小眼法线）。sweep 的 UV 沿管长按周长归一，纤维 / 环纹密度跟管径走。不用"血腥红"；dark plate 下每族都要读得出。绒毛、湿润高光仍是缺口。
 
 ## 6. 写实轮次（D：R2 → R3 → R4）
 
@@ -112,10 +121,10 @@ Gavin 对空调第一版的反馈是"太抽象"：结构没对上真机。写实
 
 ## 8. 已知限制（写进 spec §12，决定绕过还是补引擎）
 
-- **单一剖切面**：`views.cutaway` 一个平面同时切所有零件，不能每个部件选最佳剖切位置；剖面填充在鳍片块上读作实心色块。
+- **同一时刻一个剖切面**：`views.cutaway` 或一个命名 `views.cuts`（章 / 拍切换，如矢状 / 胸部横切）同时切所有零件，不能每个部件选最佳剖切位置；剖面填充在鳍片块上读作实心色块。
 - **盘管只有平直和 L 形**：弧形盘管用两三段倾斜的平直 `coilBank` 拼。
 - **鳍片片距**：真实 1.2–1.8 mm 会出摩尔纹，模型用约 4.5 mm，detail 里写真实值。
 - **没有贴花与文字**：铭牌、标签、屏幕、斑纹、纹理图案都不能上模型。
-- **动画只有 rotate / oscillate / pulse**：没有铰链开合（用 `hide` 的位移 + 淡出代替）、没有偏心运动、没有沿身体传播的波（生物的爬行、呼吸、心跳只能用 pulse / oscillate 近似）。
+- **动画**：rotate / oscillate / pulse（可绕 `pivot`，pulse 可分轴）+ `sequence` 关键帧 + `poses`（章 / 拍缓动）覆盖了铰链开合、关节屈伸、扇形展翅；仍没有沿身体传播的波（蠕动、心跳波：B15）、没有骨骼蒙皮。
 - **流不随拆开移动**：EXPLODED 时 FLOW 禁用。
-- **硬表面为主**：没有软体变形、蒙皮、毛发、半透明组织；曲面靠 `lathe` / `extrude` / `curvedPanel` 拼。
+- **软体有限**：`sweep` / `wing` / `scale` 给出有机外形，但没有软体变形、蒙皮、毛发；翅膜没有沿翅变色（`tintStops` 未做，用 `tint` 单色）；`variants`（同一模型逐龄长大）未做。

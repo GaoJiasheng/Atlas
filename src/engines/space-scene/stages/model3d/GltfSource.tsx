@@ -55,6 +55,7 @@ export default function GltfSource({
         radius: (sphere?.radius ?? 0.5) * maxScale,
         closed: true,
         twoSided: false,
+        restFan: 1,
       });
     }
     onShapes(out);

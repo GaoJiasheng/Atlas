@@ -2,8 +2,9 @@
  * Colour and material resolution for the 3D stage (pure, unit-tested).
  *
  * Part colours in data are a material family (`casing`, `steel`, `powder`,
- * `stainless`, `copper`, `rubber`, `plastic`, `glass`, `enamel`, `brass`;
- * `metal` / `matte` are aliases of `steel` / `plastic`), a theme token
+ * `stainless`, `copper`, `rubber`, `plastic`, `glass`, `enamel`, `brass`, and
+ * the organism families `chitin`, `membrane`, `tissue`, `muscle`, `trachea`,
+ * `nerve`, `eye`; `metal` / `matte` are aliases of `steel` / `plastic`), a theme token
  * (`token:accent-1`) or a hex literal. A family can take a `tint` (token or
  * hex) that replaces its colour and keeps the rest of its finish. Families carry a physically plausible finish (master-spec E):
  * colour, metalness, roughness and which procedural map gives them their
@@ -64,8 +65,12 @@ export function rgbaToHex({ r, g, b }: Rgba): string {
   return `#${h(r)}${h(g)}${h(b)}`;
 }
 
-/** Procedural surface map a finish uses (built once per stage, see stages/model3d/textures.ts). */
-export type SurfaceFinish = 'brushed' | 'brushed-axial' | 'peel' | 'grain';
+/**
+ * Procedural surface map a finish uses (built once per stage, see stages/model3d/textures.ts):
+ * roughness streaks (brushed), orange peel, fine grain, and the organism normal maps
+ * hex (compound-eye facets), fibres (muscle), rings (tracheal taenidia).
+ */
+export type SurfaceFinish = 'brushed' | 'brushed-axial' | 'peel' | 'grain' | 'hex' | 'fibres' | 'rings';
 
 export interface MaterialLook {
   /** `#rrggbb` sRGB. */
@@ -77,6 +82,12 @@ export interface MaterialLook {
   finish: SurfaceFinish;
   /** Multiplier on the room environment reflections. */
   envIntensity: number;
+  /** Strength of the finish's normal map (0 = flat). */
+  normal: number;
+  /** Self-light as a fraction of the colour (soft tissue's lit-through look); 0 for most. */
+  glow: number;
+  /** Drawn from both sides and never cut-filled (membranes). */
+  doubleSided: boolean;
 }
 
 interface FamilySpec {
@@ -86,6 +97,9 @@ interface FamilySpec {
   finish: SurfaceFinish;
   opacity?: number;
   envIntensity?: number;
+  normal?: number;
+  glow?: number;
+  doubleSided?: boolean;
 }
 
 /**
@@ -106,6 +120,22 @@ export const MATERIAL_FAMILIES: Record<MaterialFamily, FamilySpec> = {
   // silhouette on the sheet; low roughness under the fine grain map gives a soft, satin sheen.
   enamel: { color: { paper: '#dcd7cb', cinema: '#cfcabd' }, metalness: 0, roughness: 0.34, finish: 'grain', envIntensity: 0.85 },
   brass: { color: { paper: '#a88a4c', cinema: '#b39555' }, metalness: 0.9, roughness: 0.32, finish: 'grain' },
+  // Organisms (docs/14 §3.4): restrained, low-saturation colours (no "gore" red); tint chitin per species.
+  chitin: { color: { paper: '#8b6d43', cinema: '#a3845a' }, metalness: 0, roughness: 0.42, finish: 'peel', normal: 0.05, envIntensity: 0.9 },
+  membrane: {
+    color: { paper: '#d6ccb4', cinema: '#a39a87' },
+    metalness: 0,
+    roughness: 0.48,
+    finish: 'grain',
+    opacity: 0.55,
+    envIntensity: 0.7,
+    doubleSided: true,
+  },
+  tissue: { color: { paper: '#c99a8c', cinema: '#c49386' }, metalness: 0, roughness: 0.64, finish: 'grain', glow: 0.14, envIntensity: 0.6 },
+  muscle: { color: { paper: '#a8685d', cinema: '#b5766a' }, metalness: 0, roughness: 0.58, finish: 'fibres', normal: 0.4, glow: 0.08, envIntensity: 0.6 },
+  trachea: { color: { paper: '#e4dfd2', cinema: '#d8d3c6' }, metalness: 0, roughness: 0.34, finish: 'rings', normal: 0.5, envIntensity: 0.9 },
+  nerve: { color: { paper: '#dcc77e', cinema: '#d8c47e' }, metalness: 0, roughness: 0.4, finish: 'grain', glow: 0.06, envIntensity: 0.8 },
+  eye: { color: { paper: '#2b2723', cinema: '#36302b' }, metalness: 0.1, roughness: 0.16, finish: 'hex', normal: 0.65, envIntensity: 1.5 },
 };
 
 /** Base colour of every preset per theme (aliases included). */
@@ -159,6 +189,9 @@ export function resolveMaterialLook(
       opacity: f.opacity ?? 1,
       finish: f.finish,
       envIntensity: f.envIntensity ?? 1,
+      normal: f.normal ?? (f.finish === 'peel' ? 0.1 : 0),
+      glow: f.glow ?? 0,
+      doubleSided: f.doubleSided ?? false,
     };
   }
   // Token / hex colours: satin paint.
@@ -169,5 +202,8 @@ export function resolveMaterialLook(
     opacity: 1,
     finish: 'grain',
     envIntensity: 1,
+    normal: 0,
+    glow: 0,
+    doubleSided: false,
   };
 }

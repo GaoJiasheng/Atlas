@@ -10,12 +10,19 @@ export const MATERIAL_PRESET_IDS = [
   'glass',
   'enamel',
   'brass',
+  'chitin',
+  'membrane',
+  'tissue',
+  'muscle',
+  'trachea',
+  'nerve',
+  'eye',
   'metal',
   'matte',
 ] as const;
 export type MaterialPreset = (typeof MATERIAL_PRESET_IDS)[number];
 
-/** The ten material families; `metal` and `matte` are aliases. */
+/** The material families (ten machine, seven organism); `metal` and `matte` are aliases. */
 export type MaterialFamily = Exclude<MaterialPreset, 'metal' | 'matte'>;
 
 export const PRESET_ALIASES: Record<'metal' | 'matte', MaterialFamily> = { metal: 'steel', matte: 'plastic' };

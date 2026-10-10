@@ -13,6 +13,8 @@
  * the registry stays the single source of state; the `hud` row hides the HUD
  * (H); the `glossary` row lists the topic's terms in the reader (HUD store
  * `glossary`, no key). Rows of modes flagged `phone: false` are not drawn below 760 px.
+ * A `layer` row may carry a `solo` switch (SpaceScene: show this group alone,
+ * the rest faint), drawn as a ⊙ button at the row's end.
  */
 import type { ReactNode } from 'react';
 import { useStore } from 'zustand';
@@ -23,8 +25,15 @@ import { resolveColorRef } from '../../theme/theme';
 import { Legend, type LegendItem } from './Legend';
 import { Icon } from './icons';
 
+/** A layer row's solo switch: on / off, its accessible name, and the toggle. */
+export interface LayerSolo {
+  on: boolean;
+  label: string;
+  toggle(): void;
+}
+
 export type ControlRow =
-  | { kind: 'layer'; id: string; label: HudText; color?: string }
+  | { kind: 'layer'; id: string; label: HudText; color?: string; solo?: LayerSolo }
   /** A registered mode; the label defaults to the mode's own. */
   | { kind: 'mode'; id: string; label?: HudText }
   | { kind: 'hud' }
@@ -113,7 +122,7 @@ export function ControlPanel({ layers, tools, legend }: ControlPanelProps) {
   const row = (r: ControlRow) => {
     if (r.kind === 'layer') {
       const on = active.includes(r.id);
-      return (
+      const layer = (
         <Row
           key={`layer-${r.id}`}
           on={on}
@@ -122,6 +131,27 @@ export function ControlPanel({ layers, tools, legend }: ControlPanelProps) {
           onClick={() => store.getState().toggleLayer(r.id)}
           data={{ 'data-layer': r.id }}
         />
+      );
+      if (!r.solo) return layer;
+      const solo = r.solo;
+      return (
+        <div key={`layer-${r.id}`} className="atlas-ctl__pair">
+          {layer}
+          <button
+            type="button"
+            className="atlas-ctl__solo"
+            aria-pressed={solo.on}
+            aria-label={solo.label}
+            title={solo.label}
+            data-solo={r.id}
+            onClick={(e) => {
+              solo.toggle();
+              blurAfterPointer(e);
+            }}
+          >
+            <span aria-hidden="true">⊙</span>
+          </button>
+        </div>
       );
     }
     if (r.kind === 'hud') {

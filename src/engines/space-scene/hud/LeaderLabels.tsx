@@ -18,6 +18,9 @@
  *    occluded (throttled raycast in the stage, for the labelled parts only);
  *    fewer labels in close-ups
  *  - set = the chapter's `labels`, else every visible part (largest first);
+ *    a bilateral pair is one placard (its data side) unless the part has
+ *    `labelBoth` (then a listed `<id>` names both sides); faint parts
+ *    (`ghost`, solo) get none;
  *    the selected part is always labelled and highlighted. A `group:<id>`
  *    entry is one placard for the whole group (group name, anchored at the
  *    bounding centre of its visible parts)
@@ -115,12 +118,22 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
   const labelsOn = useHud((h) => h.labels && (h.hud || presenting));
   const s = useScene<
     SpaceSceneExt,
-    { part: string | null; view: SpaceSceneExt['view']; layers: string[]; hidden: string[]; chapter: string | null }
+    {
+      part: string | null;
+      view: SpaceSceneExt['view'];
+      layers: string[];
+      hidden: string[];
+      ghosted: string[];
+      solo: string | null;
+      chapter: string | null;
+    }
   >((st) => ({
     part: st.part,
     view: st.view,
     layers: st.layers,
     hidden: st.hidden,
+    ghosted: st.ghosted,
+    solo: st.solo,
     chapter: st.chapter,
   }));
   const sizes = useMemo(() => priority(file), [file]);
@@ -129,9 +142,23 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
     () => listedLabels({ presenting, beat: beatLabels, chapter: chapters.find((c) => c.id === s.chapter)?.state.labels }),
     [presenting, beatLabels, chapters, s.chapter],
   );
+  // Twins whose part names both sides (`labelBoth`), by the part's id.
+  const both = useMemo(
+    () => new Map(file.parts.filter((p) => p.pair && !p.twinOf && typeof p.bilateral === 'object' && p.bilateral.labelBoth).map((p) => [p.id, p.pair!])),
+    [file.parts],
+  );
   const candidates = useMemo(() => {
-    const displays = resolveAllPartDisplays(file.parts, { view: s.view, part: s.part, layers: s.layers, hidden: s.hidden });
-    const pool = listed ?? file.parts.map((p) => p.id);
+    const displays = resolveAllPartDisplays(file.parts, {
+      view: s.view,
+      part: s.part,
+      layers: s.layers,
+      hidden: s.hidden,
+      ghosted: s.ghosted,
+      solo: s.solo,
+    });
+    const pool = listed
+      ? listed.flatMap((id) => (both.has(id) ? [id, both.get(id)!] : [id]))
+      : file.parts.filter((p) => !p.twinOf || [...both.values()].includes(p.id)).map((p) => p.id);
     const labelled = (id: string) => displays.get(id)?.visible === true && displays.get(id)?.selectable === true;
     // A group placard while any of its parts is on show.
     const groupShown = (g: string) => groups.has(g) && file.parts.some((p) => p.group === g && labelled(p.id));
@@ -145,7 +172,7 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
     // The selected part comes first; outside an explicit presentation list it is always labelled.
     if (s.part && labelled(s.part) && (!presenting || listed === null || ids.includes(s.part))) return [s.part, ...ids.filter((id) => id !== s.part)];
     return ids;
-  }, [file.parts, groups, listed, presenting, s, sizes]);
+  }, [file.parts, groups, listed, presenting, s, sizes, both]);
 
   const root = useRef<SVGGElement>(null);
   const labels = useRef(new Map<string, LabelState>());

@@ -46,7 +46,12 @@ export interface SpaceBeatSpec extends BeatBase {
   part?: string | null;
   explode?: number;
   run?: boolean;
-  cutaway?: 'none' | 'half';
+  /** `none`, `half` or a named cut. */
+  cutaway?: string;
+  /** A named pose (`null`: rest). */
+  pose?: string | null;
+  /** Groups or parts drawn faint in this beat only. */
+  ghost?: string[];
   /** An orbit camera, or the id of a named preset (its camera only). */
   camera?: OrbitCamera | string;
   layers?: string[];
@@ -65,8 +70,10 @@ export interface SpaceSavedState {
   part: string | null;
   explode: number;
   run: boolean;
-  cutaway: 'none' | 'half';
+  cutaway: string;
   hidden: string[];
+  pose: string | null;
+  ghosted: string[];
   /** Leader labels of the beat on show (`null` = the chapter's own). */
   labels: string[] | null;
   /** ORBIT turntable on. */

@@ -267,6 +267,101 @@
       "level": "P3"
     },
     {
+      "id": "sample-body",
+      "name": { "en": "Sample body", "zh": "示例躯干" },
+      "group": "sample-organic",
+      "summary": { "en": "A placeholder ringed body with a head and a collar.", "zh": "一段带环节的占位躯干，前面有头和领片。" },
+      "detail": {
+        "en": "Sample detail text. Tests the sweep part (a radius profile, flattened section and ring grooves), a scaled sphere, a U-section collar and a hollow tube inside, in the chitin and tissue materials.",
+        "zh": "示例详细说明。测试扫掠零件（半径轮廓、压扁截面和环节沟）、缩放的球体、U 形截面的领片和里面的空心管，用角质和软组织材质。"
+      },
+      "primitive": {
+        "kind": "sweep",
+        "path": [[-0.2, 0, 0], [0.04, 0.02, 0], [0.3, 0, 0], [0.54, -0.05, 0]],
+        "radius": [0.07, 0.085, 0.07, 0.028],
+        "section": { "flat": 0.82 },
+        "rings": { "every": 0.06, "depth": 0.1 },
+        "at": [0, 0.62, 0],
+        "color": "chitin"
+      },
+      "extra": [
+        { "kind": "sphere", "size": [0.068], "scale": [1, 0.9, 0.82], "at": [-0.25, 0.64, 0], "color": "chitin" },
+        { "kind": "sweep", "path": [[-0.24, 0, 0], [-0.1, 0.012, 0]], "radius": 0.092, "section": { "u": 150 }, "caps": "flat", "at": [0, 0.64, 0], "color": "chitin" },
+        { "kind": "sweep", "path": [[-0.22, -0.01, 0], [0.04, 0.0, 0], [0.3, -0.01, 0], [0.5, -0.05, 0]], "radius": 0.026, "hollow": 0.008, "at": [0, 0.62, 0], "color": "tissue" }
+      ],
+      "explode": { "dir": [0, 1, 0], "dist": 0.4 },
+      "connects": ["sample-leg", "sample-wing", "sample-eye"],
+      "level": "P5"
+    },
+    {
+      "id": "sample-eye",
+      "name": { "en": "Sample eye", "zh": "示例眼" },
+      "group": "sample-organic",
+      "summary": { "en": "A placeholder eye on each side of the head.", "zh": "头两侧各一只占位眼。" },
+      "detail": {
+        "en": "Sample detail text. Tests a bilateral part (the engine adds its mirror twin) and an ellipsoid (a sphere with `scale`) in the eye material.",
+        "zh": "示例详细说明。测试双侧零件（引擎镜像出另一侧）和椭球（加了 scale 的球体），用复眼材质。"
+      },
+      "primitive": { "kind": "sphere", "size": [0.03], "scale": [0.9, 1.25, 0.7], "at": [-0.275, 0.665, 0.048], "color": "eye" },
+      "explode": { "dir": [0, 0.2, 1], "dist": 0.3 },
+      "connects": ["sample-body"],
+      "bilateral": true,
+      "level": "P5"
+    },
+    {
+      "id": "sample-leg",
+      "name": { "en": "Sample leg", "zh": "示例腿" },
+      "group": "sample-organic",
+      "summary": { "en": "A placeholder jointed leg on each side.", "zh": "两侧各一条占位的分节腿。" },
+      "detail": {
+        "en": "Sample detail text. Tests a tapering, flattened sweep, a bilateral pair, an animation turning about a joint (`pivot`) and a pose.",
+        "zh": "示例详细说明。测试逐渐变细、截面压扁的扫掠，双侧成对，绕关节（pivot）转动的动画，以及姿态。"
+      },
+      "primitive": {
+        "kind": "sweep",
+        "path": [[0, 0, 0], [0.12, 0.13, 0.1], [0.22, -0.05, 0.16], [0.28, -0.24, 0.2]],
+        "radius": [0.022, 0.019, 0.013, 0.007],
+        "section": { "flat": 0.62 },
+        "up": [0, 0, 1],
+        "at": [0.1, 0.58, 0.05],
+        "color": "chitin"
+      },
+      "explode": { "dir": [0, -0.3, 1], "dist": 0.45 },
+      "connects": ["sample-body"],
+      "bilateral": { "labelBoth": false },
+      "level": "P5"
+    },
+    {
+      "id": "sample-wing",
+      "name": { "en": "Sample wing", "zh": "示例翅" },
+      "group": "sample-organic",
+      "summary": { "en": "A placeholder see-through wing that folds like a fan.", "zh": "一片会像扇子一样折起的透明占位翅。" },
+      "detail": {
+        "en": "Sample detail text. Tests the wing part: an outline, vein hairlines on both faces and a fan fold that a pose opens.",
+        "zh": "示例详细说明。测试翅零件：外形、两面的翅脉细线，以及由姿态打开的扇形折叠。"
+      },
+      "primitive": {
+        "kind": "wing",
+        "outline": [[0, 0], [0.5, 0], [0.53, 0.06], [0.48, 0.17], [0.37, 0.26], [0.2, 0.3], [0.06, 0.2]],
+        "veins": [
+          [[0, 0], [0.52, 0.03]],
+          [[0, 0], [0.46, 0.15]],
+          [[0, 0], [0.34, 0.25]],
+          [[0, 0], [0.16, 0.26]],
+          [[0.26, 0.04], [0.25, 0.14], [0.2, 0.22]]
+        ],
+        "thickness": 0.004,
+        "fold": { "hinge": [0, 0], "segments": 6, "lead": [0.5, 0] },
+        "at": [-0.04, 0.71, 0.02],
+        "rotation": [90, 0, 0],
+        "color": "membrane"
+      },
+      "explode": { "dir": [0, 1, 0.6], "dist": 0.5 },
+      "connects": ["sample-body"],
+      "bilateral": true,
+      "level": "P5"
+    },
+    {
       "id": "sample-wall",
       "name": { "en": "Sample wall", "zh": "示例墙" },
       "summary": { "en": "A placeholder slice of wall behind the object.", "zh": "物体后面的一段占位墙。" },
@@ -282,7 +377,8 @@
   "groups": [
     { "id": "sample-core", "name": { "en": "Sample frame", "zh": "示例框架" }, "color": "token:neutral" },
     { "id": "sample-drive", "name": { "en": "Sample drive", "zh": "示例驱动" }, "color": "token:accent-1" },
-    { "id": "sample-loop", "name": { "en": "Sample loop", "zh": "示例回路" }, "color": "token:accent-2" }
+    { "id": "sample-loop", "name": { "en": "Sample loop", "zh": "示例回路" }, "color": "token:accent-2" },
+    { "id": "sample-organic", "name": { "en": "Sample organism", "zh": "示例生物" }, "color": "token:food" }
   ],
   "flows": [
     {
@@ -345,12 +441,30 @@
       "hz": 0.5,
       "whenRun": true
     },
-    { "id": "sample-ball-pulse", "target": "sample-ball", "kind": "pulse", "scale": 1.12, "hz": 0.8, "whenRun": true }
+    { "id": "sample-ball-pulse", "target": "sample-ball", "kind": "pulse", "scale": 1.12, "hz": 0.8, "whenRun": true },
+    {
+      "id": "sample-leg-step",
+      "target": "sample-leg",
+      "kind": "oscillate",
+      "axis": [0, 0, 1],
+      "amplitude": 9,
+      "hz": 0.6,
+      "pivot": [0.1, 0.58, 0.05],
+      "whenRun": true
+    }
   ],
+  "poses": {
+    "sample-open": {
+      "sample-wing": { "pivot": [-0.04, 0.71, 0.02], "rotation": [-14, 0, 0], "fan": 1 },
+      "sample-leg": { "pivot": [0.1, 0.58, 0.05], "rotation": [0, 0, 14] }
+    }
+  },
+  "units": { "modelUnit": "cm", "scale": 25 },
   "views": {
     "assembled": { "camera": { "position": [2.5, 1.3, 3.25], "target": [0, -0.38, 0], "fov": 34 } },
     "exploded": { "camera": { "position": [3.5, 2.3, 4.6], "target": [0.05, -0.5, 0], "fov": 34 } },
     "cutaway": { "normal": [0, 0, -1], "offset": 0.05 },
+    "cuts": { "sample-cross": { "normal": [-1, 0, 0], "offset": 0.22, "label": { "en": "Cross", "zh": "横切" } } },
     "section": { "plane": "xy" }
   },
   "spec": [
@@ -364,6 +478,7 @@
     { "key": { "en": "Power", "zh": "功率" }, "unit": "kW", "idle": 0, "run": 0.65, "lag": 2 }
   ],
   "presets": [
-    { "id": "sample-left", "label": { "en": "Left", "zh": "左前" }, "camera": { "position": [-2.4, 1.0, 2.6], "target": [-0.1, -0.3, 0], "fov": 34 } }
+    { "id": "sample-left", "label": { "en": "Left", "zh": "左前" }, "camera": { "position": [-2.4, 1.0, 2.6], "target": [-0.1, -0.3, 0], "fov": 34 } },
+    { "id": "sample-above", "label": { "en": "Top", "zh": "俯视" }, "camera": { "position": [0.16, 2.55, 0.35], "target": [0.16, 0.62, 0], "fov": 34 } }
   ]
 }

@@ -4,7 +4,8 @@
  * energy-weighted running time (drives animations and flows that run with
  * `run`); `elapsed` is wall time for always-on effects; `explode` is the
  * eased explode amount every part reads; `shadowDirty` asks for one shadow
- * map update (shadow maps do not auto-update, perf-lessons §2).
+ * map update (shadow maps do not auto-update, perf-lessons §2); `moved`
+ * counts frames in which a part moved into a pose (labels re-check occlusion).
  */
 import { createContext, useContext } from 'react';
 
@@ -14,10 +15,11 @@ export interface StageRuntime {
   elapsed: number;
   explode: number;
   shadowDirty: boolean;
+  moved: number;
 }
 
 export function createRuntime(run: boolean, explode: number): StageRuntime {
-  return { energy: run ? 1 : 0, phase: 0, elapsed: 0, explode, shadowDirty: true };
+  return { energy: run ? 1 : 0, phase: 0, elapsed: 0, explode, shadowDirty: true, moved: 0 };
 }
 
 export const RuntimeContext = createContext<StageRuntime | null>(null);

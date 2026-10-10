@@ -3,7 +3,7 @@ import { expect, test, type ConsoleMessage, type Page } from '@playwright/test';
 const LOCALES = ['en', 'zh'] as const;
 const TOPICS = [
   { slug: 'sample-time', chapters: ['first-look', 'second-look', 'third-look'] },
-  { slug: 'sample-space', chapters: ['whole-thing', 'pull-apart', 'switch-on'] },
+  { slug: 'sample-space', chapters: ['whole-thing', 'pull-apart', 'switch-on', 'inside-look'] },
 ] as const;
 
 /** Headless chromium has no GPU; these are expected and harmless. */
@@ -71,7 +71,7 @@ for (const locale of LOCALES) {
 
       // And back again.
       await page.keyboard.press('ArrowLeft');
-      await expect.poll(() => page.url(), { timeout: 10_000 }).toContain(`ch=${topic.chapters[1]}`);
+      await expect.poll(() => page.url(), { timeout: 10_000 }).toContain(`ch=${topic.chapters[topic.chapters.length - 2]}`);
 
       expect(errors).toEqual([]);
     });

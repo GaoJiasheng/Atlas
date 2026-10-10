@@ -645,3 +645,57 @@ div.space-inspector__detail:not([hidden]) {
     0 0 calc(3 * var(--u)) var(--bg),
     0 0 calc(6 * var(--u)) var(--bg);
 }
+
+/* Control panel: a layer row with its ⊙ solo switch (that group alone, the rest faint). */
+.atlas-ctl__pair {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid var(--hair);
+}
+.atlas-ctl__pair:last-child {
+  border-bottom: 0;
+}
+.atlas-ctl__pair > .atlas-ctl__row {
+  flex: 1;
+  min-width: 0;
+  border-bottom: 0;
+}
+.atlas-ctl__solo {
+  flex: none;
+  display: grid;
+  place-items: center;
+  min-width: 30px;
+  min-height: 30px;
+  padding: 0;
+  border: 0;
+  border-left: 1px solid var(--hair);
+  border-radius: 0;
+  background: transparent;
+  color: var(--ink-3);
+  font: 500 15px/1 var(--font-hud);
+  cursor: pointer;
+}
+.atlas-ctl__solo[aria-pressed='true'] {
+  background: var(--ink);
+  color: var(--ink-on);
+}
+@media (pointer: coarse) {
+  .atlas-ctl__solo {
+    min-width: var(--hit);
+    min-height: var(--hit);
+  }
+}
+@media (hover: hover) {
+  .atlas-ctl__solo:hover {
+    background: var(--overlay);
+    color: var(--ink);
+  }
+  .atlas-ctl__solo[aria-pressed='true']:hover {
+    background: var(--ink);
+    color: var(--ink-on);
+  }
+}
+.atlas-ctl__solo:focus-visible {
+  outline: 1px solid var(--signal);
+  outline-offset: -1px;
+}

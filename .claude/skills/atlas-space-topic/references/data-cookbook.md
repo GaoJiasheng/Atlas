@@ -30,7 +30,7 @@ note: { en: "Generic design study · schematic layout · not a specific brand or
 
 ## parts.json
 
-顶层键：`parts`（必填）、`groups`、`flows`、`animations`、`views`、`spec`（≤ 4）、`telemetry`（≤ 6）、`presets`（≤ 6），可选 `model`（glb，Atlas 默认不用）。
+顶层键：`parts`（必填）、`groups`、`flows`、`animations`、`views`、`spec`（≤ 4）、`telemetry`（≤ 6）、`presets`（≤ 6）、`poses`（≤ 8）、`units`，可选 `model`（glb，Atlas 默认不用）。生物主题的字段集中在下面「生物（organisms）」一节。
 
 ### parts
 
@@ -88,7 +88,7 @@ note: { en: "Generic design study · schematic layout · not a specific brand or
 { "id": "heart-beat", "target": "heart", "kind": "pulse", "scale": 1.05, "hz": 1.2 }
 ```
 
-`axis` 是场景坐标、绕零件 `at` 转（含 `extra`）；`amplitude` 单位度；`pulse` 的 `scale` 是峰值缩放。转速写可读值（30–60 rpm 量级）。`whenRun` 默认 true。
+`axis` 是场景坐标、绕零件 `at` 转（含 `extra`），写了 `pivot`（场景坐标）就绕过 pivot 的轴转 / 以 pivot 为中心缩放；`amplitude` 单位度；`pulse` 的 `scale` 是峰值缩放（数，或 `[sx, sy, sz]` 分轴）。转速写可读值（30–60 rpm 量级）。`whenRun` 默认 true。`kind: "sequence"` 是关键帧片段，见「生物」。
 
 ### views
 
@@ -108,6 +108,7 @@ note: { en: "Generic design study · schematic layout · not a specific brand or
 - `section.plane`：ARCHITECTURE 立面与 REFERENCE 方向，`xy` 正面 / `zy` 侧面 / `xz` 俯视。
 - `cover`：直接是镜头（不套 `camera`），HUD 关（H、`hero-clean`）时飞过去；没写就自动取景到模型占宽 75 %。
 - `reference`：可选；默认按包围盒自动取长焦正视。
+- `cuts`：可选，≤ 4 个命名剖切面 `{ "<名字>": { "normal", "offset", "label": {en, zh} } }`，章 / 拍 `cutaway: "<名字>"`（名字不能是 `none` / `half`）。
 
 ### presets（VIEW 按钮、`<FlyTo preset>`、拍的 `camera: "<id>"`）
 
@@ -146,7 +147,9 @@ state:
   explode: 0                     # 0..1，exploded 时生效
   part: compressor               # 选中零件（非 context）；null 取消
   run: true                      # 动画 + 流
-  cutaway: none                  # none | half
+  cutaway: none                  # none | half | views.cuts 的名字
+  pose: wings-open               # 可选：姿态（不累积；不写 = 静止；null = 静止）
+  ghost: [exoskeleton]           # 可选：淡显的组或零件（不累积）
   layers: [indoor, line-set, outdoor, refrigerant]   # 可见的组
   hide: [front-panel, outdoor-front, insulation]     # 本章移开的零件（不累积）
   labels: [compressor, condenser-coil, "group:outdoor"]  # 本章引线（不累积；3–6 个，镜头下看得见）
@@ -168,11 +171,34 @@ state:
 ---
 ```
 
-- **累积**：章节目标只写和上一章不同的字段（`view` `explode` `part` `run` `cutaway` `layers` `camera` `theme` 沿用上一章）；`hide`、`labels` **不累积**，只看本章。
-- **拍** = 本章目标 ⊕ 拍里写的 `view / part / explode / run / cutaway / layers / camera`；`hide`、`labels` 写了就替换本章的，不写就用本章的；`camera` 不写 = 本章进入时的镜头。
-- **校验**：`part` / `hide` / `labels` 是零件（`part`、`labels` 不能是 context），`labels` 也可以是 `group:<组 id>`，`layers` 是组，拍的字符串 `camera` 是命名预设。
+- **累积**：章节目标只写和上一章不同的字段（`view` `explode` `part` `run` `cutaway` `layers` `camera` `theme` 沿用上一章）；`hide`、`labels`、`pose`、`ghost` **不累积**，只看本章。
+- **拍** = 本章目标 ⊕ 拍里写的 `view / part / explode / run / cutaway / layers / camera / pose`；`hide`、`ghost`、`labels` 写了就替换本章的，不写就用本章的；`camera` 不写 = 本章进入时的镜头。
+- **校验**：`part` / `hide` / `labels` 是零件（`part`、`labels` 不能是 context；双侧零件的 `<id>-r` 也算），`labels` 也可以是 `group:<组 id>`，`layers` 是组，`ghost` 是组或零件，`pose` 是 `poses` 里的名字，`cutaway` 是 none / half / `views.cuts` 的名字，拍的字符串 `camera` 是命名预设。
 - `labels` 要标被外壳挡住的零件时，本章 `hide` 外壳、用 X-RAY，或者改用组标注；`pnpm shoot <slug> --beats` 末尾的 `chapter highlights` 必须 `all on screen`。
 - `quiz` 默认不写（不做测验）；`level` 可选、不渲染。
+
+## 生物（organisms）：sweep、wing、scale、bilateral、pivot、sequence、poses、units、ghost
+
+权威：docs/06「生物与有机形体」与 `schema.ts`。示例：`sample-space` 第 04 章与 `parts.json` 里的 `sample-body / sample-eye / sample-leg / sample-wing`。
+
+```json
+{ "id": "hind-femora", "group": "legs-wings", "bilateral": true,
+  "primitive": { "kind": "sweep", "path": [[0,0,0], [0.55,0.24,0.03], [1.1,0.41,0.05]], "radius": [0.09, 0.13, 0.05],
+                 "section": { "flat": 0.42 }, "up": [0, 0, 1], "at": [-0.08, 0.45, 0.26], "color": "chitin", "tint": "#8f7446" },
+  "explode": { "dir": [0, 0, 1], "dist": 1.0 }, … }
+{ "id": "compound-eyes", "bilateral": true, "primitive": { "kind": "sphere", "size": [0.1], "scale": [0.7, 1, 0.45], "at": [-1.12, 0.8, 0.15], "color": "eye" }, … }
+{ "id": "hindwings", "bilateral": true,
+  "primitive": { "kind": "wing", "outline": [[0,0], [1.9,0], …], "veins": [[[0,0], [1.8,0.1]], …], "thickness": 0.004,
+                 "fold": { "hinge": [0, 0], "segments": 8, "lead": [1.9, 0] }, "rotation": [90, 0, 0], "at": [-0.38, 0.84, 0.1], "color": "membrane" }, … }
+```
+
+- **bilateral**：只写 +Z（动物左侧）一份；引擎镜像出 `<id>-r`（关于 z = 0；`{ "axis": "x" }` 可换平面，`"side": "right"` = 数据画的是右侧、双胞胎叫 `<id>-l`）。双胞胎可选、可标注、可在 `hide` / `ghost` / `labels` / 流的 `parts` / 姿态里点名；不另编号、不进链路卡；`labelBoth: true` 时列出 `<id>` = 两侧各一个标注。`hide` / `ghost` 写 `<id>` 同时作用于两侧。每个镜像件每个材质槽 +1 draw call。
+- **animations**：`"pivot": [x,y,z]`（场景坐标的关节点）；`pulse.scale` 可 `[sx, sy, sz]`；关键帧：`{ "id": "kick", "target": "hind-tibiae", "kind": "sequence", "pivot": [1.02,0.86,0.32], "loop": true, "keys": [{ "t": 0, "rotation": [0,0,0] }, { "t": 1.4, "rotation": [0,0,25] }, { "t": 2.0, "rotation": [0,0,-120] }] }`（t 秒递增；每键可写 `rotation` / `offset` / `scale` / `fan`；`fan` 要么每键都写要么都不写；`loop: false` = 每次运转从头播一次）。指向双侧零件的动画自动镜像给双胞胎（id `<动画 id>-r`）。
+- **poses**：`"poses": { "jump-cocked": { "hind-tibiae": { "pivot": [1.02,0.86,0.32], "rotation": [0,0,25] }, "semilunar-processes": { "scale": [1, 0.92, 1] }, "duration": 0.8 } }`；章 / 拍 `pose: "jump-cocked"`（`null` = 静止）；URL `pose=`。变换：绕 pivot 先 scale 再 rotation，再 offset。`fan` 只给带 `fold` 的 wing（0 收拢、1 展开）。双侧零件的条目自动镜像。
+- **views.cuts**：`{ "sagittal": { "normal": [0,0,-1], "offset": 0, "label": { "en": "Sagittal", "zh": "矢状" } }, "thorax": { "normal": [-1,0,0], "offset": -0.3, "label": { "en": "Thorax", "zh": "胸部横切" } } }`；章 / 拍 `cutaway: "thorax"`。
+- **ghost / solo / card**：章 / 拍 `ghost: ["exoskeleton", "legs-wings"]`（淡显 .12、不可点、不标注）；读者可在 LAYERS 行末 `⊙` 单显一组；组 `"card": false` 不进链路卡；context 零件写 `group` 后受图层、ghost、solo 控制。
+- **units**：`"units": { "modelUnit": "mm", "scale": 25 }` = 1 场景单位 25 mm；ARCHITECTURE 比例尺与跨度用 mm / cm。
+- **token**：`token:food`（食物，赭绿）、`token:haemolymph`（血淋巴，灰青）。
 
 ## 正文组件
 

@@ -4,13 +4,15 @@
  * front XY), zones numbered by group, a ground line and a scale bar in model
  * units. The selected part is outlined in the signal colour; parts put aside
  * (`hide`) are dashed outlines; context scenery (a wall) is hatched and
- * belongs to no zone.
+ * belongs to no zone. With `parts.json` `units` the scale bar and the span in
+ * the tag read in real units (mm / cm / m), else in scene units (U).
  */
 import { useId, useMemo } from 'react';
 import { useScene, useT } from '../../core/context';
 import { tx } from '../../../i18n';
 import { resolveColorRef } from '../../../theme/theme';
-import { elevation, numberedParts, scaleStep } from '../lib/schematic';
+import { elevation, numberedParts } from '../lib/schematic';
+import { realLength, scaleBar } from '../lib/units';
 import type { SpaceSceneExt } from '../index';
 import type { PartsFile } from '../schema';
 import { clip } from './common';
@@ -20,6 +22,8 @@ const VH = 140;
 /** Drawing area; the zone legend and scale bar sit in the right-hand column. */
 const PAD = { l: 14, r: 170, t: 18, b: 40 };
 const LEGEND_X = VW - 150;
+/** Rows of zone brackets under the drawing. */
+const ZONE_ROWS = 3;
 
 const f2 = (n: number) => Number(n.toFixed(2));
 
@@ -48,9 +52,25 @@ export function ArchitecturePanel({ file }: { file: PartsFile }) {
       return { id: g.id, n: i + 1, name: tx(g.name, 'en'), u0: Math.min(...rs.map((r) => r.u0)), u1: Math.max(...rs.map((r) => r.u1)), color: g.color };
     })
     .filter((z): z is NonNullable<typeof z> => z !== null);
+  // Zone brackets under the drawing share up to three rows (a zone goes in the first row it fits beside
+  // the ones already there, number included); the legend tightens for more than five zones.
+  const lanes = new Map<string, number>();
+  const ends: number[] = [];
+  for (const z of [...zones].sort((a, b) => a.u0 - b.u0)) {
+    const lane = ends.findIndex((end) => x(z.u0) > end + 4);
+    const row = lane >= 0 ? lane : ends.length < ZONE_ROWS ? ends.length : -1;
+    if (row < 0) continue;
+    lanes.set(z.id, row);
+    ends[row] = x(z.u1) + 16;
+  }
+  const legendPitch = zones.length > 5 ? 12 : 17;
   const groupColor = new Map(file.groups.map((g) => [g.id, g.color]));
   const hidden = new Set(s.hidden);
-  const step = scaleStep(spanU);
+  const bar = scaleBar(spanU, file.units);
+  const step = bar.step;
+  // The model's span along the drawing, in real units (only with `units`; context scenery left out).
+  const own = el.rects.filter((r) => !r.context);
+  const span = own.length ? realLength(Math.max(...own.map((r) => r.u1)) - Math.min(...own.map((r) => r.u0)), file.units) : null;
 
   return (
     <svg className="space-elev" viewBox={`0 0 ${VW} ${VH}`} preserveAspectRatio="xMidYMid meet" role="img" aria-label={t('space.panel.architecture')}>
@@ -61,6 +81,7 @@ export function ArchitecturePanel({ file }: { file: PartsFile }) {
       </defs>
       <text x={PAD.l} y={11} className="space-elev__tag">
         {plane.toUpperCase()} · {String(numberedParts(file.parts).length).padStart(2, '0')} {t('space.spec.parts').toLocaleUpperCase()}
+        {span ? ` · ${span}` : ''}
       </text>
       <line x1={PAD.l} x2={VW - PAD.r} y1={groundY} y2={groundY} className="space-elev__ground" />
       {el.rects.map((r) => {
@@ -84,8 +105,10 @@ export function ArchitecturePanel({ file }: { file: PartsFile }) {
           />
         );
       })}
-      {zones.map((z, i) => {
-        const yy = VH - PAD.b + 8 + i * 11;
+      {zones.map((z) => {
+        const lane = lanes.get(z.id);
+        if (lane === undefined) return null;
+        const yy = VH - PAD.b + 8 + lane * 11;
         return (
           <g key={z.id} className="space-elev__zone">
             <path d={`M${x(z.u0)} ${yy - 3}V${yy}H${x(z.u1)}V${yy - 3}`} style={{ stroke: resolveColorRef(z.color) }} />
@@ -97,7 +120,7 @@ export function ArchitecturePanel({ file }: { file: PartsFile }) {
       })}
       <g className="space-elev__legend">
         {zones.map((z, i) => (
-          <g key={z.id} transform={`translate(${LEGEND_X} ${PAD.t + 8 + i * 17})`}>
+          <g key={z.id} transform={`translate(${LEGEND_X} ${PAD.t + 8 + i * legendPitch})`}>
             <rect x={0} y={-7} width={12} height={7} style={{ fill: resolveColorRef(z.color) }} />
             <text x={18} y={0}>
               {String(z.n).padStart(2, '0')} {clip(z.name.toUpperCase(), 17)}
@@ -108,7 +131,7 @@ export function ArchitecturePanel({ file }: { file: PartsFile }) {
       <g className="space-elev__scale">
         <path d={`M${LEGEND_X} ${VH - 8}h${f2(step * k)}M${LEGEND_X} ${VH - 11}v6M${f2(LEGEND_X + step * k)} ${VH - 11}v6`} />
         <text x={LEGEND_X} y={VH - 16}>
-          {t('space.scale').toLocaleUpperCase()} {step} U
+          {t('space.scale').toLocaleUpperCase()} {bar.label}
         </text>
       </g>
     </svg>
