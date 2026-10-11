@@ -20,3 +20,14 @@ CShapes 2.0 (CC BY-NC-SA 4.0) and from Wikimedia Commons maps (CC BY-SA); the
 derived data must carry compatible terms. Third-party sources and their own
 licences are listed per topic in `src/content/topics/*/data/SOURCES.md`,
 `scripts/geo/*/SOURCES-GEO.md`, and summarised in `THIRD-PARTY-NOTICES.md`.
+
+Exception — human muscle series (topics `muscles-*`): the 3D models
+(`public/models/muscles-*.glb`), the geometry derived from them
+(`scripts/anatomy/<topic>/rig.json`, `attachments.json`, the `sites`
+coordinates in `data/parts.json`), the hero plates redrawn from model renders
+(`public/illustrations/muscles-*.webp`) and the screenshots under
+`docs/screenshots/muscles-*/` are derived from Z-Anatomy (CC BY-SA 4.0) and are
+licensed CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/), with
+the attribution given in `THIRD-PARTY-NOTICES.md`. The texts, muscle sheets and
+exercise sheets of those topics (`src/content/shared/fitness/**`,
+`src/content/topics/muscles-*/chapters/**`) stay under CC BY-NC-SA 4.0 as above.
