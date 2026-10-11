@@ -1,0 +1,311 @@
+{
+  "license": "CC BY-SA 4.0",
+  "units": "m",
+  "coordinates": {
+    "unit": "m",
+    "up": "+Y",
+    "front": "+Z",
+    "left": "+X",
+    "centre": "sternal angle; source floor recorded in rig.json"
+  },
+  "sourceChestCentre": [
+    -1.6483021681779064e-05,
+    -0.055000342428684235,
+    1.3499360084533691
+  ],
+  "floorY": -1.3503184508299455,
+  "coordinateCheck": {
+    "unit": "m",
+    "up": "+Y",
+    "front": "+Z",
+    "left": "+X",
+    "sourceChestCentre": [
+      -1.6483021681779064e-05,
+      -0.055000342428684235,
+      1.3499360084533691
+    ],
+    "floorY": -1.3503184508299455,
+    "floorPlusChestCentreY": -0.00038244237657636404,
+    "sternum": [
+      6.141786798252724e-06,
+      -0.033857159316539764,
+      0.026162592694163322
+    ],
+    "leftClavicle": [
+      0.08242696523666382,
+      0.06014975905418396,
+      -0.05372275039553642
+    ],
+    "thoracicSpine": [
+      1.5291781892301515e-05,
+      -0.0549442358314991,
+      -0.11518897861242294
+    ],
+    "leftPositiveX": true,
+    "sternumAnteriorPositiveZ": true,
+    "statureM": 1.7095352601027116
+  },
+  "joints": [
+    {
+      "name": "trunk",
+      "node": "joint.trunk",
+      "position": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "parent": null,
+      "axes": {
+        "flexion": [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        "abduction": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "rotation": [
+          0.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": "sternal angle frame",
+      "review": "pending"
+    },
+    {
+      "name": "scapula.l",
+      "node": "joint.scapula.l",
+      "position": [
+        0.16615375876426697,
+        0.02140510082244873,
+        -0.0958547443151474
+      ],
+      "parent": "trunk",
+      "axes": {
+        "flexion": [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        "abduction": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "rotation": [
+          0.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": "glenoid .j landmark",
+      "review": "pending"
+    },
+    {
+      "name": "shoulder.l",
+      "node": "joint.shoulder.l",
+      "position": [
+        0.17263619601726532,
+        0.03655705600976944,
+        -0.0808429941534996
+      ],
+      "parent": "scapula.l",
+      "axes": {
+        "flexion": [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        "abduction": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "rotation": [
+          0.1801227480173111,
+          -0.9823485612869263,
+          -0.0504680871963501
+        ]
+      },
+      "source": "humeral head sphere fit",
+      "review": "pending"
+    },
+    {
+      "name": "elbow.l",
+      "node": "joint.elbow.l",
+      "position": [
+        0.22320204973220825,
+        -0.2392176389694214,
+        -0.0950108990073204
+      ],
+      "parent": "shoulder.l",
+      "axes": {
+        "flexion": [
+          -0.9966964721679688,
+          -0.030239436775445938,
+          0.07537702471017838
+        ],
+        "abduction": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "rotation": [
+          0.07507092505693436,
+          -0.9787099361419678,
+          0.19102655351161957
+        ]
+      },
+      "source": "midpoint of epicondyle .j landmarks",
+      "review": "pending"
+    },
+    {
+      "name": "wrist.l",
+      "node": "joint.wrist.l",
+      "position": [
+        0.24354533851146698,
+        -0.5044358968734741,
+        -0.04324507340788841
+      ],
+      "parent": "elbow.l",
+      "axes": {
+        "flexion": [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        "abduction": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "rotation": [
+          0.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": "styloid landmark / distal forearm",
+      "review": "pending"
+    },
+    {
+      "name": "scapula.r",
+      "node": "joint.scapula.r",
+      "position": [
+        -0.1661207228899002,
+        0.021405041217803955,
+        -0.0958547368645668
+      ],
+      "parent": "trunk",
+      "axes": {
+        "flexion": [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        "abduction": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "rotation": [
+          0.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": "glenoid .j landmark",
+      "review": "pending"
+    },
+    {
+      "name": "shoulder.r",
+      "node": "joint.shoulder.r",
+      "position": [
+        -0.17260324954986572,
+        0.036557089537382126,
+        -0.08084297180175781
+      ],
+      "parent": "scapula.r",
+      "axes": {
+        "flexion": [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        "abduction": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "rotation": [
+          -0.18012265861034393,
+          -0.9823486804962158,
+          -0.05046815797686577
+        ]
+      },
+      "source": "humeral head sphere fit",
+      "review": "pending"
+    },
+    {
+      "name": "elbow.r",
+      "node": "joint.elbow.r",
+      "position": [
+        -0.22316908836364746,
+        -0.23921768367290497,
+        -0.0950108990073204
+      ],
+      "parent": "shoulder.r",
+      "axes": {
+        "flexion": [
+          -0.9966965317726135,
+          0.030239010229706764,
+          -0.07537703961133957
+        ],
+        "abduction": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "rotation": [
+          -0.07507108896970749,
+          -0.9787099361419678,
+          0.19102652370929718
+        ]
+      },
+      "source": "midpoint of epicondyle .j landmarks",
+      "review": "pending"
+    },
+    {
+      "name": "wrist.r",
+      "node": "joint.wrist.r",
+      "position": [
+        -0.24351242184638977,
+        -0.5044359564781189,
+        -0.04324508085846901
+      ],
+      "parent": "elbow.r",
+      "axes": {
+        "flexion": [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        "abduction": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "rotation": [
+          0.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": "styloid landmark / distal forearm",
+      "review": "pending"
+    }
+  ]
+}

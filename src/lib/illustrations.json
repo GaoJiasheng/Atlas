@@ -59,6 +59,26 @@
       "0000000000000000"
     ]
   },
+  "muscles-chest": {
+    "mask": [
+      "0000000000000000",
+      "0000002662000000",
+      "000598cffc895000",
+      "008ffffffffff800",
+      "02effffffffffe20",
+      "04ffffffffffff40",
+      "03ffffffffffff30",
+      "05ffffffffffff50",
+      "07fceffffffebf70",
+      "06f6cffffffc5f50",
+      "06e29ffffff92e50",
+      "0ae07ffffff71da0",
+      "09907ffffff60990",
+      "0a509ffffff905a0",
+      "032029dddd920140",
+      "0000001111000000"
+    ]
+  },
   "ww1": {
     "mask": [
       "0000000000000000",
