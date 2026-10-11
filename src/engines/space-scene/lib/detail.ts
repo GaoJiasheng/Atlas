@@ -1,13 +1,13 @@
 /**
  * A part's `detail` text as paragraphs of text runs and source markers
- * (`[S3]`, `[S3, S7]`; pure, unit-tested). The inspector renders markers as
+ * (`[S3]`, `[S3, S7]`, shared `[M3]`; pure, unit-tested). The inspector renders markers as
  * the same source superscripts as `<Num s>` in chapter bodies.
  */
 
-/** `[S3]` / `[S3, S7]` source markers (ids in data/sources.json). */
-const MARKER = /\[(S[1-9]\d*(?:\s*,\s*S[1-9]\d*)*)\]/g;
+/** `[S3]` / `[S3, S7]` source markers (ids in data/sources.json; `[M3]` a shared source). */
+const MARKER = /\[([SM][1-9]\d*(?:\s*,\s*[SM][1-9]\d*)*)\]/g;
 
-/** Source ids cited by `[S#]` markers in a text (the schema checks them against data/sources.json). */
+/** Source ids cited by `[S#]` / `[M#]` markers in a text (the schema checks them against data/sources.json and the shared sources). */
 export function detailSourceIds(text: string): string[] {
   return [...text.matchAll(MARKER)].flatMap((m) => m[1]!.split(/\s*,\s*/));
 }

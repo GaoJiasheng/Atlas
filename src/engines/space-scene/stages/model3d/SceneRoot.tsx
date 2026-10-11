@@ -5,7 +5,7 @@
  */
 import { Component, lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
-import { Plane, Vector3 } from 'three';
+import { Plane, Vector3, type Group } from 'three';
 import { useStore } from 'zustand';
 import { useShallow } from 'zustand/react/shallow';
 import type { SceneStore } from '../../../core/store';
@@ -13,10 +13,13 @@ import type { Chapter } from '../../../core/types';
 import { withBase } from '../../../../i18n';
 import type { SpaceSceneExt } from '../../index';
 import type { PartsFile } from '../../schema';
+import type { FitnessBundle } from '../../../../content/schema/fitness';
 import type { SpaceUiStore } from '../../ui';
 import type { StageBridge } from '../../bridge';
 import { resolveAllPartDisplays } from '../../lib/visibility';
-import { targetExplodeAmount } from '../../lib/explode';
+import { explodeStages, targetExplodeAmount } from '../../lib/explode';
+import { jointOf, musclePartIds } from '../../lib/rig';
+import { activeSites } from '../../lib/sites';
 import { animationsByPart } from '../../lib/animation';
 import { resolveDataColor, resolveMaterialLook } from '../../lib/color';
 import { damp, easeInOutCubic, normalize3, type Vec3 } from '../../lib/math';
@@ -27,11 +30,15 @@ import { Flows } from './Flows';
 import { CameraRig } from './CameraRig';
 import { Lighting } from './Lighting';
 import { GroundShadow } from './GroundShadow';
-import { LabelProbe, ResolutionGovernor, ShadowUpdater, StatsProbe, type GroupMembers } from './probes';
+import { LabelProbe, ResolutionGovernor, ShadowUpdater, SitesProbe, StatsProbe, type GroupMembers } from './probes';
+import { MotionDriver } from './MotionDriver';
+import { Equipment } from './Equipment';
+import type { GltfRig } from './GltfSource';
 import { partBounds, partMaterialSlots } from '../../lib/parts';
 import { anchorHalf, anchorOffset, anchorPoint, anchorRadius, primitiveShape, stageBounds } from './shapes';
 import { createTextureKit } from './textures';
 import type { PartStyle } from './materials';
+import type { Box3Like } from '../../lib/parts';
 import type { StageLook } from './look';
 import { stageDpr } from './dpr';
 
@@ -42,8 +49,22 @@ export interface SceneRootProps {
   ui: SpaceUiStore;
   bridge: StageBridge;
   data: PartsFile;
+  /** Shared fitness data merged into the topic (muscle topics). */
+  fitness: FitnessBundle | undefined;
+  /** Exercise ids the topic can play (its training.json). */
+  playable: ReadonlySet<string>;
   chapters: readonly Chapter[];
   look: StageLook;
+}
+
+const NO_IDS: readonly string[] = [];
+const NO_EQUIPMENT: readonly never[] = [];
+
+/** Label anchor fields from a glb part's measured rest bounds (relative to its centre). */
+function boxAnchor(box: Box3Like, at: readonly number[]): { offset: Vec3; half: Vec3; radius: number } {
+  const offset: Vec3 = [(box.min[0] + box.max[0]) / 2 - at[0]!, (box.min[1] + box.max[1]) / 2 - at[1]!, (box.min[2] + box.max[2]) / 2 - at[2]!];
+  const half: Vec3 = [(box.max[0] - box.min[0]) / 2, (box.max[1] - box.min[1]) / 2, (box.max[2] - box.min[2]) / 2];
+  return { offset, half, radius: Math.hypot(half[0], half[1], half[2]) * 0.75 };
 }
 
 /** FLOW fade-in (master-spec H: ~0.6 s). */
@@ -105,21 +126,21 @@ function ExplodeClock({ target, snapKey }: { target: number; snapKey: number }) 
   return null;
 }
 
-/** Keeps a failing glb from taking the whole stage down (primitives still render). */
-class GltfBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
+/** Keeps a failing glb from taking the whole stage down (primitives still render); the stage shows the failure note. */
+class GltfBoundary extends Component<{ children: ReactNode; ui: SpaceUiStore }, { failed: boolean }> {
   override state = { failed: false };
   static getDerivedStateFromError() {
     return { failed: true };
   }
-  override componentDidCatch(error: unknown) {
-    console.warn('[atlas] space-scene: model failed to load', error);
+  override componentDidCatch() {
+    this.props.ui.setState({ model: { state: 'failed', progress: 0 } });
   }
   override render() {
     return this.state.failed ? null : this.props.children;
   }
 }
 
-export function SceneRoot({ store, ui, bridge, data, chapters, look }: SceneRootProps) {
+export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters, look }: SceneRootProps) {
   const s = useStore(
     store,
     useShallow((st) => ({
@@ -133,6 +154,10 @@ export function SceneRoot({ store, ui, bridge, data, chapters, look }: SceneRoot
       ghosted: st.ghosted,
       solo: st.solo,
       pose: st.pose,
+      exercise: st.exercise,
+      tints: st.tints,
+      sites: st.sites,
+      demo: st.demo,
       transitionId: st.transition.id,
       instant: st.transition.instant,
     })),
@@ -169,7 +194,15 @@ export function SceneRoot({ store, ui, bridge, data, chapters, look }: SceneRoot
     [data.parts],
   );
   const [meshShapes, setMeshShapes] = useState<Map<string, PartShape> | null>(null);
-  const onMeshShapes = useCallback((m: Map<string, PartShape>) => setMeshShapes(m), []);
+  const [rig, setRig] = useState<GltfRig | null>(null);
+  const onMeshShapes = useCallback((m: Map<string, PartShape>, r: GltfRig) => {
+    setMeshShapes(m);
+    setRig(r);
+  }, []);
+  const hasModel = data.model !== undefined && meshNames.size > 0;
+  useEffect(() => {
+    if (hasModel && ui.getState().model.state === 'none') ui.setState({ model: { state: 'loading', progress: 0 } });
+  }, [hasModel, ui]);
 
   // A glb mesh wins over a primitive stand-in once loaded.
   const shapes = useMemo(() => {
@@ -178,16 +211,25 @@ export function SceneRoot({ store, ui, bridge, data, chapters, look }: SceneRoot
     return out;
   }, [primitiveShapes, meshShapes]);
   const bounds = useMemo(() => stageBounds(data.parts, shapes), [data.parts, shapes]);
-  const anchors = useMemo(() => new Map(data.parts.map((p) => [p.id, anchorOffset(p)] as [string, Vec3])), [data.parts]);
-  const points = useMemo(() => new Map(data.parts.map((p) => [p.id, anchorPoint(p)] as [string, Vec3])), [data.parts]);
-  const radii = useMemo(() => new Map(data.parts.map((p) => [p.id, anchorRadius(p)] as [string, number])), [data.parts]);
-  const halves = useMemo(() => new Map(data.parts.map((p) => [p.id, anchorHalf(p)] as [string, Vec3])), [data.parts]);
+  // Label anchors: from the primitives, or a glb part's measured bounds once it has loaded.
+  const glbAnchors = useMemo(() => {
+    const out = new Map<string, { offset: Vec3; half: Vec3; radius: number }>();
+    meshShapes?.forEach((shape, id) => {
+      if (shape.box) out.set(id, boxAnchor(shape.box, shape.position));
+    });
+    return out;
+  }, [meshShapes]);
+  const anchors = useMemo(() => new Map(data.parts.map((p) => [p.id, glbAnchors.get(p.id)?.offset ?? anchorOffset(p)] as [string, Vec3])), [data.parts, glbAnchors]);
+  const points = useMemo(() => new Map(data.parts.map((p) => [p.id, glbAnchors.get(p.id)?.offset ?? anchorPoint(p)] as [string, Vec3])), [data.parts, glbAnchors]);
+  const radii = useMemo(() => new Map(data.parts.map((p) => [p.id, glbAnchors.get(p.id)?.radius ?? anchorRadius(p)] as [string, number])), [data.parts, glbAnchors]);
+  const halves = useMemo(() => new Map(data.parts.map((p) => [p.id, glbAnchors.get(p.id)?.half ?? anchorHalf(p)] as [string, Vec3])), [data.parts, glbAnchors]);
+  const stages = useMemo(() => explodeStages(data.parts), [data.parts]);
   // Group labels: each group's non-context parts with the half extents of their bounds.
   const groupMembers = useMemo<GroupMembers>(() => {
     const out = new Map<string, { id: string; half: Vec3 }[]>();
     for (const p of data.parts) {
       if (p.context || p.group === undefined) continue;
-      const b = partBounds(p);
+      const b = partBounds(p) ?? shapes.get(p.id)?.box ?? null;
       const r = (shapes.get(p.id)?.radius ?? 0) / Math.sqrt(3);
       const half: Vec3 = b ? [(b.max[0] - b.min[0]) / 2, (b.max[1] - b.min[1]) / 2, (b.max[2] - b.min[2]) / 2] : [r, r, r];
       out.set(p.group, [...(out.get(p.group) ?? []), { id: p.id, half }]);
@@ -197,7 +239,8 @@ export function SceneRoot({ store, ui, bridge, data, chapters, look }: SceneRoot
   useEffect(() => {
     bridge.modelRadius = bounds.modelRadius;
   }, [bridge, bounds]);
-  const sphere = useMemo(() => ({ center: bounds.center, radius: bounds.modelRadius }), [bounds]);
+  // The camera frames the subject, not the context around it (M12).
+  const sphere = useMemo(() => ({ center: bounds.fit.center, radius: bounds.fit.radius }), [bounds]);
 
   /* ---------------- materials ---------------- */
   const kit = useMemo(() => createTextureKit(), []);
@@ -208,25 +251,26 @@ export function SceneRoot({ store, ui, bridge, data, chapters, look }: SceneRoot
     const signal = resolveDataColor('token:signal', look.tokens, look.theme, '#cc6328');
     const cut = resolveDataColor('token:cut', look.tokens, look.theme, '#b8973c');
     const ink = resolveDataColor('token:ink', look.tokens, look.theme, '#2a2824');
+    const cold = resolveDataColor('token:cold', look.tokens, look.theme, '#4f7f8c');
+    const styleFor = (slot: { color: string; tint?: string | undefined }): PartStyle => ({
+      look: resolveMaterialLook(slot.color, look.tokens, look.theme, slot.tint),
+      kit,
+      signal,
+      cold,
+      cut,
+      ink: cinema ? CINEMA_INK : ink,
+      rim: cinema ? 0.35 : 0.75,
+      tint: cinema ? 0.03 : 0.02,
+      hatchPx: Math.round(7 * dpr),
+    });
     const out = new Map<string, PartStyle[]>();
     for (const part of data.parts) {
       const fallback = (part.group !== undefined ? groupColors.get(part.group) : undefined) ?? 'steel';
-      const slots = part.primitive ? partMaterialSlots(part) : [{ color: fallback }];
-      out.set(
-        part.id,
-        slots.map((slot) => ({
-          look: resolveMaterialLook(slot.color, look.tokens, look.theme, slot.tint),
-          kit,
-          signal,
-          cut,
-          ink: cinema ? CINEMA_INK : ink,
-          rim: cinema ? 0.35 : 0.75,
-          tint: cinema ? 0.03 : 0.02,
-          hatchPx: Math.round(7 * dpr),
-        })),
-      );
+      // A glb part's own `material`; a primitive part's slots (a glb mesh replacing a primitive stand-in keeps its material).
+      const slots = part.primitive ? partMaterialSlots(part) : [part.material ?? { color: fallback }];
+      out.set(part.id, slots.map(styleFor));
     }
-    return out;
+    return { parts: out, styleFor };
   }, [data.parts, groupColors, look, kit, dpr]);
   // Wing veins: ink hairlines; on the dark plate a dark ink too (veins read darker than the lit membrane).
   const lineColor = useMemo(
@@ -235,10 +279,51 @@ export function SceneRoot({ store, ui, bridge, data, chapters, look }: SceneRoot
   );
 
   /* ---------------- explorer state -> display ---------------- */
-  const displays = useMemo(
+  // Exercise mode (docs/16 §6.5): prime movers signal, synergists cold, the other muscles faint.
+  const exerciseSheet = s.exercise ? fitness?.exercises.find((e) => e.id === s.exercise!.id) : undefined;
+  const exerciseLook = useMemo(() => {
+    if (!exerciseSheet) return null;
+    const parentOf = new Map((fitness?.muscles ?? []).map((m) => [m.id, m.parent]));
+    const of = (ids: readonly string[]) => ids.flatMap((m) => musclePartIds(data.parts, m, parentOf));
+    const signal = of(exerciseSheet.primary);
+    const cold = of(exerciseSheet.secondary);
+    const used = new Set([...signal, ...cold, ...of(exerciseSheet.stabilisers)]);
+    const faint = data.parts.filter((p) => p.muscle !== undefined && !p.context && !used.has(p.id)).map((p) => p.id);
+    return { signal, cold, faint };
+  }, [exerciseSheet, fitness, data.parts]);
+  const highlight = useMemo(
     () =>
-      resolveAllPartDisplays(data.parts, { view: s.view, part: s.part, layers: s.layers, hidden: s.hidden, ghosted: s.ghosted, solo: s.solo }),
-    [data.parts, s.view, s.part, s.layers, s.hidden, s.ghosted, s.solo],
+      exerciseLook
+        ? { signal: [...exerciseLook.signal, ...(s.tints?.signal ?? NO_IDS)], cold: [...exerciseLook.cold, ...(s.tints?.cold ?? NO_IDS)] }
+        : s.tints,
+    [exerciseLook, s.tints],
+  );
+  const ghosted = useMemo(() => (exerciseLook ? [...s.ghosted, ...exerciseLook.faint] : s.ghosted), [exerciseLook, s.ghosted]);
+  const displays = useMemo(
+    () => resolveAllPartDisplays(data.parts, { view: s.view, part: s.part, layers: s.layers, hidden: s.hidden, ghosted, solo: s.solo, highlight }),
+    [data.parts, s.view, s.part, s.layers, s.hidden, ghosted, s.solo, highlight],
+  );
+  const sitesOn = useMemo(() => activeSites(data.sites, s.part, s.sites), [data.sites, s.part, s.sites]);
+  const equipment = useMemo(() => {
+    const e = exerciseSheet && playable.has(exerciseSheet.id) ? exerciseSheet.motion?.equipment : undefined;
+    return e === undefined ? NO_EQUIPMENT : Array.isArray(e) ? e : [e];
+  }, [exerciseSheet, playable]);
+  const hands = useMemo(() => {
+    const node = (name: string) => {
+      const j = data.rig?.joints[name];
+      return (j && rig?.node(j.node)) ?? null;
+    };
+    return { l: node('hand.l'), r: node('hand.r') };
+  }, [rig, data.rig]);
+  const rootRef = useRef<Group>(null);
+  // Only topics with a rig, contraction or exercises run the MotionDriver (machines and insects never pay for it).
+  const needsMotion = useMemo(
+    () =>
+      data.rig !== undefined ||
+      fitness !== undefined ||
+      data.animations.some((a) => a.kind === 'contract' || (a.kind === 'sequence' && (jointOf(a.target) !== null || a.keys.some((k) => k.contract !== undefined)))) ||
+      Object.values(data.poses ?? {}).some((p) => Object.keys(p.contract).length > 0 || Object.keys(p.joints).length > 0),
+    [data.rig, data.animations, data.poses, fitness],
   );
 
   /* ---------------- poses ---------------- */
@@ -297,10 +382,26 @@ export function SceneRoot({ store, ui, bridge, data, chapters, look }: SceneRoot
       <ExplodeClock target={explodeTarget} snapKey={snap.current.key} />
       <Lighting look={look} center={bounds.center} radius={bounds.modelRadius} runtime={runtime} />
       <GroundShadow floor={bounds.floor} radius={bounds.radius} look={look} runtime={runtime} />
+      {needsMotion && (
+        <MotionDriver
+          data={data}
+          fitness={fitness}
+          rig={rig}
+          input={{ pose: s.pose, exercise: s.exercise, demo: s.demo }}
+          playable={playable}
+          rootRef={rootRef}
+          center={bounds.center}
+          snapKey={snap.current.key}
+        />
+      )}
+      {rig && <primitive object={rig.root} />}
+      {equipment.length > 0 && <Equipment specs={equipment} held={false} hands={hands} styleFor={styles.styleFor} floor={bounds.floor[0]} />}
+      <group ref={rootRef} matrixAutoUpdate={false}>
+      {equipment.length > 0 && <Equipment specs={equipment} held hands={hands} styleFor={styles.styleFor} floor={bounds.floor[0]} />}
       {data.parts.map((part) => {
         const shape = shapes.get(part.id);
         const display = displays.get(part.id);
-        const partStyles = styles.get(part.id);
+        const partStyles = styles.parts.get(part.id);
         if (!shape || !display || !partStyles) return null;
         return (
           <PartNode
@@ -324,21 +425,24 @@ export function SceneRoot({ store, ui, bridge, data, chapters, look }: SceneRoot
             anchorHalf={halves.get(part.id) ?? NO_HALF}
             handles={handles}
             snapKey={snap.current.key}
+            stages={stages}
             onSelect={onSelect}
             onHover={onHover}
           />
         );
       })}
+      </group>
       {/* Flow paths do not follow the parts apart: no particles while exploded (docs/12 §7.5, G16). */}
       <Flows flows={data.flows} layers={s.view === 'exploded' ? NO_LAYERS : s.layers} look={look} clipping={clipping} />
-      <CameraRig store={store} ui={ui} bridge={bridge} chapters={chapters} views={data.views} sphere={sphere} minDistance={bounds.modelRadius * 0.9} />
-      {data.model && meshNames.size > 0 && (
-        <GltfBoundary>
+      <CameraRig store={store} ui={ui} bridge={bridge} chapters={chapters} views={data.views} sphere={sphere} minDistance={bounds.fit.radius * 0.9} />
+      {hasModel && (
+        <GltfBoundary ui={ui}>
           <Suspense fallback={null}>
-            <GltfSource url={withBase(data.model)} meshes={meshNames} onShapes={onMeshShapes} />
+            <GltfSource url={withBase(data.model!)} meshes={meshNames} ui={ui} onShapes={onMeshShapes} />
           </Suspense>
         </GltfBoundary>
       )}
+      {data.sites && <SitesProbe bridge={bridge} handles={handles} sites={data.sites} active={sitesOn} clipping={clipping} />}
       <LabelProbe bridge={bridge} handles={handles} groups={groupMembers} clipping={clipping} xray={s.view === 'xray'} runtime={runtime} />
       <StatsProbe bridge={bridge} />
       <ShadowUpdater runtime={runtime} />

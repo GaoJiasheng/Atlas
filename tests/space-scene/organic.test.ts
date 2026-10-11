@@ -264,7 +264,7 @@ describe('animation pivots, vector pulse, sequences (B5)', () => {
 describe('poses (B6)', () => {
   it('parse into { duration, parts }, check the parts and that `fan` meets a folding wing', () => {
     const ok = partsFile.parse(file([part('a')], { poses: { up: { a: { rotation: [0, 0, 10] } } } }));
-    expect(ok.poses!.up).toEqual({ duration: 0.8, parts: { a: { rotation: [0, 0, 10] } } });
+    expect(ok.poses!.up).toEqual({ duration: 0.8, parts: { a: { rotation: [0, 0, 10] } }, joints: {}, contract: {} });
     expect(partsFile.safeParse(file([part('a')], { poses: { up: { b: { rotation: [0, 0, 10] } } } })).success).toBe(false);
     expect(partsFile.safeParse(file([part('a')], { poses: { up: { a: { fan: 1 } } } })).success).toBe(false);
     expect(partsFile.safeParse(file([part('a')], { poses: { up: { duration: -1 } } })).success).toBe(false);

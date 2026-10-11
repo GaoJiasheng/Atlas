@@ -1,0 +1,4 @@
+{
+  "exercises": ["sample-curl", "sample-raise"],
+  "note": { "en": "Sample training note: one principle in words.", "zh": "示例训练说明：一条用文字写的原则。" }
+}

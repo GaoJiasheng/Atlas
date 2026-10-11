@@ -25,6 +25,14 @@
  *     feedback, prompt length, `{a/b}` tokens; `<Task id>` names a sub-step and
  *     `<Frac n d>` has whole numbers (d ≥ 1)
  *   - referenced files (cover) exist
+ *   - SpaceScene glb (`model`, scripts/lib/glb-check.ts): exists under public/,
+ *     ≤ 8 MB, `asset.copyright` set, every part `mesh` and rig `node` in its
+ *     node table (an error, not a warning)
+ *   - shared fitness data (src/content/shared/fitness, docs/16 §4): every file
+ *     parses, ids unique across files, muscle ↔ exercise links, `M#` sources,
+ *     exercise drawings exist; merged into each topic that uses it
+ *     (`withSharedFitness`) and checked there (part `muscle`, training.json,
+ *     motion joints in the rig, chapter `exercise` / `sites` / `highlight`)
  * Plus: UI dictionaries (src/i18n/ui.*.json) have identical keys.
  *
  * Exit code 1 if any error.
@@ -40,10 +48,25 @@ import { KEBAB_ID } from '../src/content/schema/common';
 import { sourceIds, type SourcesFile } from '../src/content/schema/sources';
 import { glossaryIds, type GlossaryFile } from '../src/content/schema/glossary';
 import { engineSchemas, formatIssues } from '../src/engines/schemas';
+import {
+  exercisesFile,
+  musclesFile,
+  sharedFitnessIssues,
+  withSharedFitness,
+  type FitnessBundle,
+  type SharedFitnessParsed,
+  type SharedFitnessRaw,
+} from '../src/content/schema/fitness';
+import { sharedSourcesFile } from '../src/content/schema/sources';
+import { glbIssues } from './lib/glb-check';
+import { readSharedFitness } from './lib/shared-data';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 // ATLAS_TOPICS_DIR lets tests / tooling validate another tree.
 const TOPICS_DIR = process.env.ATLAS_TOPICS_DIR ? resolve(process.env.ATLAS_TOPICS_DIR) : join(ROOT, 'src/content/topics');
+// ATLAS_SHARED_DIR: another shared-data tree (tests); the site's public/ for glb and drawings.
+const SHARED_DIR = process.env.ATLAS_SHARED_DIR ? resolve(process.env.ATLAS_SHARED_DIR) : join(ROOT, 'src/content/shared');
+const PUBLIC_DIR = join(ROOT, 'public');
 
 /* ------------------------------------------------------------------ */
 /* Reporting                                                           */
@@ -213,10 +236,50 @@ class IdRegistry {
 }
 
 /* ------------------------------------------------------------------ */
+/* Shared data (src/content/shared/fitness, docs/16 §4)                */
+/* ------------------------------------------------------------------ */
+
+/** Parse every shared file and check the references between them. */
+function validateSharedFitness(raw: SharedFitnessRaw): void {
+  const dir = join(SHARED_DIR, 'fitness');
+  const tree: SharedFitnessParsed = { muscles: new Map(), exercises: new Map(), sources: [] };
+  for (const [stem, value] of Object.entries(raw.muscles)) {
+    const file = join(dir, 'muscles', `${stem}.json`);
+    checkBilingual(file, value);
+    const parsed = musclesFile.safeParse(value);
+    if (parsed.success) tree.muscles.set(stem, parsed.data);
+    else reportZod(file, parsed.error);
+  }
+  for (const [stem, value] of Object.entries(raw.exercises)) {
+    const file = join(dir, 'exercises', `${stem}.json`);
+    checkBilingual(file, value);
+    const parsed = exercisesFile.safeParse(value);
+    if (parsed.success) {
+      tree.exercises.set(stem, parsed.data);
+      for (const e of parsed.data.exercises) {
+        if (!e.sketch) continue;
+        for (const variant of ['', '@2x']) {
+          const img = join(PUBLIC_DIR, 'illustrations/exercises', `${e.sketch}${variant}.webp`);
+          if (!existsSync(img)) error(file, `${e.id}: sketch file not found: ${relative(ROOT, img)}`);
+        }
+      }
+    } else reportZod(file, parsed.error);
+  }
+  if (raw.sources !== undefined) {
+    const file = join(dir, 'sources.json');
+    checkBilingual(file, raw.sources);
+    const parsed = sharedSourcesFile.safeParse(raw.sources);
+    if (parsed.success) tree.sources = parsed.data.sources;
+    else reportZod(file, parsed.error);
+  }
+  for (const issue of sharedFitnessIssues(tree)) (issue.level === 'error' ? error : warn)(join(dir, issue.where.split(' ')[0]!), issue.where.split(' ').slice(1).join(' ') + ': ' + issue.message);
+}
+
+/* ------------------------------------------------------------------ */
 /* Topic                                                               */
 /* ------------------------------------------------------------------ */
 
-function validateTopic(dir: string): void {
+async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<void> {
   const slug = basename(dir);
   const topicFile = join(dir, 'topic.yaml');
   if (!existsSync(topicFile)) {
@@ -261,16 +324,32 @@ function validateTopic(dir: string): void {
   }
 
   let data: unknown;
-  const parsedData = schemas.data.safeParse(raw);
+  const parsedData = schemas.data.safeParse(withSharedFitness(raw, shared));
   if (parsedData.success) {
     data = parsedData.data;
     for (const { kind, id } of schemas.ids(data)) ids.add(id, kind, dataDir);
   } else {
     reportZod(dataDir, parsedData.error, 'data.');
   }
-  // Ids chapter bodies may cite / fly to (null: the topic has no sources.json).
+  // Ids chapter bodies may cite / fly to (null: the topic has no sources.json and uses no shared data).
   const sourcesFile = data !== undefined ? (data as { sources?: SourcesFile }).sources : undefined;
-  const sources = sourcesFile ? sourceIds(sourcesFile) : 'sources' in raw ? new Set<string>() : null;
+  const fitness = data !== undefined ? (data as { fitness?: FitnessBundle }).fitness : undefined;
+  const sources =
+    sourcesFile || fitness
+      ? new Set([...sourceIds(sourcesFile), ...(fitness?.sources ?? []).map((x) => x.id)])
+      : 'sources' in raw
+        ? new Set<string>()
+        : null;
+  // A glb model: present, within budget, licensed, and holding every node the parts and rig name.
+  const model = data !== undefined ? (data as { parts?: { model?: string } }).parts?.model : undefined;
+  if (model !== undefined && data !== undefined) {
+    const file = (data as { parts: PartsLike }).parts;
+    const nodes = [
+      ...file.parts.flatMap((p) => (p.mesh ? [{ node: p.mesh, what: `part "${p.id}" mesh` }] : [])),
+      ...Object.entries(file.rig?.joints ?? {}).map(([name, j]) => ({ node: j.node, what: `rig joint "${name}"` })),
+    ];
+    for (const message of await glbIssues(join(PUBLIC_DIR, model), nodes)) error(join(dataDir, 'parts.json'), `model ${model}: ${message}`);
+  }
   const presets = new Set(data !== undefined ? schemas.presetIds(data) : []);
   const glossaryFile = data !== undefined ? (data as { glossary?: GlossaryFile }).glossary : undefined;
   const terms = glossaryFile ? glossaryIds(glossaryFile) : 'glossary' in raw ? new Set<string>() : null;
@@ -349,6 +428,11 @@ function validateTopic(dir: string): void {
 /* UI dictionaries                                                     */
 /* ------------------------------------------------------------------ */
 
+interface PartsLike {
+  parts: { id: string; mesh?: string }[];
+  rig?: { joints: Record<string, { node: string }> };
+}
+
 function validateUiStrings(): void {
   const enFile = join(ROOT, 'src/i18n/ui.en.json');
   const zhFile = join(ROOT, 'src/i18n/ui.zh.json');
@@ -366,7 +450,7 @@ function validateUiStrings(): void {
 /* Main                                                                */
 /* ------------------------------------------------------------------ */
 
-function main(): void {
+async function main(): Promise<void> {
   const topics = isDir(TOPICS_DIR)
     ? readdirSync(TOPICS_DIR)
         .map((name) => join(TOPICS_DIR, name))
@@ -374,7 +458,9 @@ function main(): void {
     : [];
 
   validateUiStrings();
-  for (const dir of topics) validateTopic(dir);
+  const shared = readSharedFitness(SHARED_DIR, error);
+  validateSharedFitness(shared);
+  for (const dir of topics) await validateTopic(dir, shared);
 
   const tty = process.stdout.isTTY;
   const paint = (code: number, s: string) => (tty ? `\x1b[${code}m${s}\x1b[0m` : s);
@@ -390,4 +476,4 @@ function main(): void {
   process.exitCode = errors.length ? 1 : 0;
 }
 
-main();
+await main();

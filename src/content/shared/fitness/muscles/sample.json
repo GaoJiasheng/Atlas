@@ -1,0 +1,36 @@
+{
+  "muscles": [
+    {
+      "id": "sample-flexor",
+      "name": { "en": "Sample flexor (placeholder)", "zh": "示例屈肌（占位）" },
+      "short": { "en": "Sample flexor", "zh": "示例屈肌" },
+      "regions": ["sample"],
+      "layer": "superficial",
+      "origin": {
+        "text": { "en": "Sample text: starts high on the upper sample segment.", "zh": "示例文字：起于上段示例骨的高处。" },
+        "bones": ["sample-upper"]
+      },
+      "insertion": {
+        "text": { "en": "Sample text: ends just below the sample elbow.", "zh": "示例文字：止于示例肘下方。" },
+        "bones": ["sample-lower"]
+      },
+      "fibres": {
+        "arrangement": "fusiform",
+        "direction": { "en": "Sample text: straight down the segment.", "zh": "示例文字：沿着肢段竖直向下。" }
+      },
+      "actions": [
+        { "joint": "elbow", "movement": "flexion", "role": "prime" },
+        { "joint": "shoulder", "movement": "flexion", "role": "assist" },
+        { "joint": "forearm", "movement": "supination", "role": "assist" }
+      ],
+      "feel": { "en": "Sample text: where you would feel this placeholder muscle.", "zh": "示例文字：这块占位肌肉应在哪里有感觉。" },
+      "mistakes": [{ "en": "Sample mistake text.", "zh": "示例错误文字。" }],
+      "exercises": ["sample-curl", "sample-raise", "sample-hang"],
+      "summary": { "en": "A placeholder muscle on a two-bone limb.", "zh": "两节示例肢体上的一块占位肌肉。" },
+      "detail": {
+        "en": "Sample detail text. Tests a skinned glb part with fibre data: it contracts along its fibres, follows the bones and shows its attachments.",
+        "zh": "示例详细说明。测试带纤维数据的蒙皮 glb 零件：沿纤维收缩、跟着骨骼动、显示起止点。"
+      }
+    }
+  ]
+}

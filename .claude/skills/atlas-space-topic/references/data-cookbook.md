@@ -4,7 +4,7 @@
 
 ## id 约定
 
-- 全部 kebab-case。**一个命名空间**：主题、章节、零件、组、流、动画、命名预设共用，不能重名；名词 id、来源 id（`S1, S2 …`）各自一个。
+- 全部 kebab-case。**一个命名空间**：主题、章节、零件、组、流、动画、命名预设共用，不能重名；名词 id、来源 id（`S1, S2 …`；共享来源 `M1, M2 …`）各自一个。rig 关节名可带 `.l` / `.r`（`shoulder.l`）。
 - 零件用部件名（`compressor`、`hind-leg`），组用分区名（`indoor`、`thorax`），流写"组-段"（`ref-hot-gas`、`air-indoor`），动画写"零件-动作"（`crossflow-spin`、`louvre-swing`）。
 - 预设不能叫 `orbit` / `reference`，也不能和组重名：空调的预设是 `indoor-unit`、`outdoor-unit`，因为 `indoor`、`outdoor` 是组。
 
@@ -30,7 +30,7 @@ note: { en: "Generic design study · schematic layout · not a specific brand or
 
 ## parts.json
 
-顶层键：`parts`（必填）、`groups`、`flows`、`animations`、`views`、`spec`（≤ 4）、`telemetry`（≤ 6）、`presets`（≤ 6）、`poses`（≤ 8）、`units`，可选 `model`（glb，Atlas 默认不用）。生物主题的字段集中在下面「生物（organisms）」一节。
+顶层键：`parts`（必填）、`groups`、`flows`、`animations`、`views`、`spec`（≤ 4）、`telemetry`（≤ 6）、`presets`（≤ 6）、`poses`（≤ 32）、`units`，可选 `model`（glb，只给真实解剖网格这类画不出来的有机体）、`rig`、`sites`。生物主题的字段集中在下面「生物（organisms）」一节，真实网格与人体肌肉在「真实网格与肌肉」一节。
 
 ### parts
 
@@ -199,6 +199,37 @@ state:
 - **ghost / solo / card**：章 / 拍 `ghost: ["exoskeleton", "legs-wings"]`（淡显 .12、不可点、不标注）；读者可在 LAYERS 行末 `⊙` 单显一组；组 `"card": false` 不进链路卡；context 零件写 `group` 后受图层、ghost、solo 控制。
 - **units**：`"units": { "modelUnit": "mm", "scale": 25 }` = 1 场景单位 25 mm；ARCHITECTURE 比例尺与跨度用 mm / cm。
 - **token**：`token:food`（食物，赭绿）、`token:haemolymph`（血淋巴，灰青）。
+
+## 真实网格与肌肉（glb、rig、sites、contract、exercise、共享 fitness 数据）
+
+权威：docs/06「真实网格与人体肌肉」、`schema.ts`、`src/content/schema/fitness.ts`；规格 docs/16。示例：`sample-space` 第 05 章、`parts.json` 的 `sample-flexor / sample-upper / sample-lower`、`src/content/shared/fitness/*/sample.json`、`data/training.json`（模型由 `pnpm tsx scripts/make-sample-glb.ts` 生成）。
+
+```jsonc
+// parts.json
+"model": "/models/muscles-chest.glb",                 // ≤ 8 MB，asset.copyright 写署名与许可；每个 mesh / rig node 都要在节点表里（validate 报 error）
+"rig": { "joints": { "shoulder.l": { "node": "shoulder.l", "axes": { "flexion": [-1,0,0], "abduction": [0,0,1] } },
+                     "elbow.l": { "node": "elbow.l", "axes": { "flexion": [-1,0,0] } }, "hand.l": { "node": "hand.l", "axes": { "flexion": [-1,0,0] } } },
+         "demo": { "elbow": { "flexion": 110 } } },   // 肌肉卡 ACTIONS 演示角（默认 60°）
+"sites": [ { "muscle": "pectoralis-minor", "kind": "origin", "bone": "thorax", "points": [[0.06,0.12,0.09], [0.07,0.08,0.1]] },
+           { "muscle": "pectoralis-minor", "kind": "insertion", "bone": "scapula", "points": [[0.15,0.2,0.04]] } ],
+"views": { "explodeLabel": { "en": "Peel", "zh": "剥层" } },
+{ "id": "pectoralis-minor", "name": {…}, "short": { "en": "Pec minor", "zh": "胸小肌" }, "group": "intermediate",
+  "mesh": "pectoralis-minor.l", "bilateral": { "axis": "x", "mesh": "pectoralis-minor.r" },
+  "material": { "color": "muscle", "tint": "token:muscle-2" }, "muscle": "pectoralis-minor",
+  "explode": { "dir": [0.1,0.1,1], "dist": 0.05, "stage": 1 }, "connects": ["thorax", "scapula"] }   // summary / detail 不写 = 肌肉卡的
+"poses": { "reach": { "joint:shoulder.l": { "flexion": 90 }, "contract": { "serratus-anterior": 0.7 }, "duration": 1.2 } }
+"animations": [ { "id": "breathe", "target": "external-intercostals", "kind": "contract", "amount": 0.4, "hz": 0.25, "whenRun": false },
+                { "id": "lift", "target": "joint:shoulder.l", "kind": "sequence", "keys": [{ "t": 0, "angles": { "flexion": 0 } }, { "t": 2, "angles": { "flexion": 90 } }] } ]
+```
+
+- **名字**：glb 节点名 = 零件 id + `.l` / `.r`；数据只写左侧零件（身体自己的左 = +X），右侧用 `bilateral.mesh` 指向 `.r` 节点（不镜像几何；右侧仍是完整零件 `<id>-r`）。three 读节点名时去掉 `.`，引擎自动对得上；两个名字去点后不能撞（validate 查）。
+- **材质**：glb 零件必须写 `material`（`muscle` + `token:muscle-1/2/3` 浅 → 深；骨 `tissue` + `token:bone`；皮肤 `membrane` + `shell: true` + `context: true`）。glb 节点 `extras.closed: false` = 剖切不填剖面。
+- **关节**：`axes` 是场景坐标的解剖轴，正角 = 这一侧做这个动作；反向动作自动取负（一对只写一根）；按书写顺序作用、相对父骨。左关节的角自动驱动右关节。姿态写 `joint:<名>`，片段 `target: "joint:<名>"` + 每键 `angles`。
+- **收缩**：0..1；管线烘焙 `_U` / `_FIBRE` 时沿纤维缩短 + 鼓起 + 细纹，没有就整体缩放。姿态 `contract`、片段键的 `contract`、`kind: contract` 动画、动作关键帧都能给。
+- **剥层**：`explode.stage` 0 / 1 / 2 = 浅 / 中 / 深依次外移（窗口 0–0.4 / 0.3–0.7 / 0.6–1.0）；骨与邻区 `dist: 0`。
+- **章 / 拍**：`exercise: { id, phase: start | end | loop }`（id 在 training.json 里）、`highlight: { signal: [...], cold: [...] }`、`sites: [肌肉零件]`（选中的肌肉零件总会显示自己的起止点）；三者都不累积。
+- **共享数据**：`src/content/shared/fitness/muscles/<区>.json`、`exercises/<模式>.json`、`sources.json`（`M#`）；主题 `data/training.json` = `{ "exercises": [...], "note"?: {en, zh}, "session"?: {…} }`。动作 `dose` 只写原则：`[{ "text": {en, zh}, "s": ["M12"] }]`，不写组数次数；`motion` = `{ root?: { rotation, offset? }, equipment?: { kind: barbell | dumbbell | cable-handle | bench | parallel-bars, grip?, width?, at?, turn?, incline? } | [...], keys: [{ phase: start, joints, contract? }, { phase: mid? }, { phase: end, … }], tempo?: [下, 停, 上, 停] }`。正文 `<Num s="M3">`、详情 `[M3]` 引共享来源；`pnpm tsx scripts/sources-md.ts --shared fitness` 生成共享来源清单。
+- **验收看点**：`pnpm shoot <slug> --beats` 给 loop 的动作拍多拍 `-start` / `-end` 两张；draw calls 每零件一次（器械 1–2 次 / 件）；蒙皮无撕裂（肩外展 90°、肘屈 120°）；起止点落在 Gray / OpenStax 描述的骨面上。
 
 ## 正文组件
 

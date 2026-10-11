@@ -11,6 +11,7 @@
  *   --signal  emphasis: selection, current chapter
  *   --xray    X-RAY state                         --cut   cutaway face (ochre)
  *   --food    food in a gut (ochre-green)         --haemolymph  insect blood (teal-grey)
+ *   --muscle-1/2/3  human muscle layers (surface → deep)   --bone  bone (ivory)
  * Older names (`--accent-*`, `--bg`, `--surface`, `--border` ...) are mapped
  * onto these so engines and data refs (`token:accent-1`) keep working.
  *
@@ -97,6 +98,11 @@
   --cut: #b8973c;
   --food: #8a8a3c;
   --haemolymph: #7d948f;
+  /* Human anatomy (docs/16 §5.2): muscle layers, surface warmest to deep darkest; low-saturation, not blood red. */
+  --muscle-1: #c48a76;
+  --muscle-2: #ad7b6c;
+  --muscle-3: #8f6a62;
+  --bone: #e0d6bf;
 
   /* Legacy names mapped onto the plate palette. */
   --bg: var(--paper);
@@ -173,6 +179,10 @@
   --cut: #cdb165;
   --food: #aead5c;
   --haemolymph: #9cb4ae;
+  --muscle-1: #d59d89;
+  --muscle-2: #c18e7f;
+  --muscle-3: #a68077;
+  --bone: #cfc5af;
 
   --bg: var(--paper);
   --surface: var(--panel-solid);

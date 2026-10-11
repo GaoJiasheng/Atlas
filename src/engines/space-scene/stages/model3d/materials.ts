@@ -10,12 +10,32 @@
  *    double-sided; back faces (only visible through the cut on closed parts)
  *    are flat-filled in the `--cut` ochre with a 45° screen-space hatch in
  *    ink, so the section reads like a museum cutaway, not a deleted half.
+ *  - muscle contraction (docs/16 §6.4, lib/rig.ts): glb muscles carry `_U`
+ *    (0 at the origin → 1 at the insertion) and `_FIBRE` (unit fibre
+ *    direction) per vertex; `uContract` shortens the muscle along its fibres
+ *    toward the middle and swells its belly along the normal, before skinning
+ *    (three adds the skinning chunks itself for skinned meshes, after ours, so
+ *    the cut, x-ray fade and selection work on skinned parts unchanged); faint
+ *    signal stripes (`uStripe` ≤ .35) move along `_U` while it works.
+ *  - highlight tint (`uHi`): the base colour mixed toward the signal or cold
+ *    colour (exercise mode's prime movers / synergists).
  */
 import { Color, DoubleSide, FrontSide, MeshStandardMaterial, type Plane } from 'three';
 import type { MaterialLook } from '../../lib/color';
 import type { TextureKit } from './textures';
+import { DEFAULT_BULGE, MAX_SHORTEN } from '../../lib/rig';
 
 export interface PartUniforms {
+  uContract: { value: number };
+  /** Muscle length (origin → insertion, local units) and belly thickness. */
+  uLen: { value: number };
+  uThick: { value: number };
+  uShorten: { value: number };
+  uBulge: { value: number };
+  uStripe: { value: number };
+  uTime: { value: number };
+  uHi: { value: number };
+  uHiColor: { value: Color };
   uSel: { value: number };
   uSelColor: { value: Color };
   uSelRim: { value: number };
@@ -26,7 +46,33 @@ export interface PartUniforms {
   uHatchPx: { value: number };
 }
 
+const VERTEX_DECLS = /* glsl */ `
+uniform float uContract;
+uniform float uLen;
+uniform float uThick;
+uniform float uShorten;
+uniform float uBulge;
+attribute float atlasU;
+attribute vec3 atlasFibre;
+varying float vAtlasU;
+`;
+
+const CONTRACT = /* glsl */ `
+#include <begin_vertex>
+vAtlasU = atlasU;
+if (uContract > 0.0001) {
+  float u = clamp(atlasU, 0.0, 1.0);
+  transformed -= atlasFibre * (u - 0.5) * uLen * uShorten * uContract;
+  transformed += normal * sin(3.14159265 * u) * uThick * uBulge * uContract;
+}
+`;
+
 const FRAGMENT_DECLS = /* glsl */ `
+uniform float uStripe;
+uniform float uTime;
+uniform float uHi;
+uniform vec3 uHiColor;
+varying float vAtlasU;
 uniform float uSel;
 uniform vec3 uSelColor;
 uniform float uSelRim;
@@ -49,6 +95,16 @@ if (uCut > 0.5 && !gl_FrontFacing) {
 }
 `;
 
+const TINT = /* glsl */ `
+#include <color_fragment>
+diffuseColor.rgb = mix(diffuseColor.rgb, uHiColor, uHi);
+if (uStripe > 0.001) {
+  float w = fract(vAtlasU * 7.0 - uTime * 0.8);
+  float band = smoothstep(0.0, 0.16, w) * (1.0 - smoothstep(0.2, 0.42, w));
+  diffuseColor.rgb = mix(diffuseColor.rgb, uSelColor, band * uStripe);
+}
+`;
+
 const SELECTION = /* glsl */ `
 #include <emissivemap_fragment>
 if (uSel > 0.001) {
@@ -65,6 +121,15 @@ export interface PartMaterial {
 
 export function createPartMaterial(): PartMaterial {
   const uniforms: PartUniforms = {
+    uContract: { value: 0 },
+    uLen: { value: 0 },
+    uThick: { value: 0 },
+    uShorten: { value: MAX_SHORTEN },
+    uBulge: { value: DEFAULT_BULGE },
+    uStripe: { value: 0 },
+    uTime: { value: 0 },
+    uHi: { value: 0 },
+    uHiColor: { value: new Color() },
     uSel: { value: 0 },
     uSelColor: { value: new Color() },
     uSelRim: { value: 1 },
@@ -78,19 +143,22 @@ export function createPartMaterial(): PartMaterial {
   const material = new MeshStandardMaterial({ clipShadows: true, forceSinglePass: true });
   material.onBeforeCompile = (shader) => {
     Object.assign(shader.uniforms, uniforms);
+    shader.vertexShader = VERTEX_DECLS + shader.vertexShader.replace('#include <begin_vertex>', CONTRACT);
     shader.fragmentShader = FRAGMENT_DECLS + shader.fragmentShader
       .replace('#include <clipping_planes_fragment>', CUT_FACE)
+      .replace('#include <color_fragment>', TINT)
       .replace('#include <emissivemap_fragment>', SELECTION);
   };
-  material.customProgramCacheKey = () => 'atlas-part-1';
+  material.customProgramCacheKey = () => 'atlas-part-2';
   return { material, uniforms };
 }
 
 export interface PartStyle {
   look: MaterialLook;
   kit: TextureKit;
-  /** Theme accent for the selection edge, cut ochre, hatch ink (sRGB hex). */
+  /** Theme accent for the selection edge, cut ochre, hatch ink (sRGB hex); `cold` tints synergists. */
   signal: string;
+  cold: string;
   cut: string;
   ink: string;
   /** Selection rim strength (paper: crisp ink-like edge; dark plate: ≤ .35 glow). */

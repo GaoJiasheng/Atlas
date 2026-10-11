@@ -135,6 +135,9 @@ pnpm tsx scripts/new-topic.ts <slug> --engine space-scene --subject science|biol
 - `topic.yaml` 的 `blocLabels` 只允许 `axis / allied / neutral / out` 四个键，每项都是 `{ en, zh }`
 - 背景章（`kind: background`）至多一个且 `order: 0`；`state.note`（阅读说明）只能写在背景章
 - `ui.en.json` 与 `ui.zh.json` key 一致
+- 共享数据（`src/content/shared/fitness/`，docs/16 §4）：肌肉卡 / 动作卡 / 共享来源各按 schema 解析；肌肉 id、动作 id 跨文件唯一；`parent`、肌肉的 `exercises`、动作的 `primary` / `secondary` / `stabilisers` / `motion.keys[].contract` 必须指向已有条目；`s` / `[M#]` 只能引用共享来源 `M#` 且必须存在；`sketch` 的 `public/illustrations/exercises/<stem>.webp` 与 `@2x.webp` 必须存在。warning：叶肌肉的动作不是 3–5 个、`summary` 超 60 字符、`dose` 里有数字（决定 11：只写原则）
+- 用到共享数据的主题：零件 `muscle` 必须是已有肌肉；`training.json` 的每个动作必须存在、至少一个 `primary` 是本主题的零件、`motion` 里的关节都在本主题 `rig` 里；章 / 拍 `exercise` 必须在 `training.json` 里，`sites` 必须是写了 `sites` 的零件，`highlight` 是组或零件；正文 `<Num s="M3">` 与 `[M3]` 查共享来源
+- glb 模型（`parts.json` 的 `model`，`scripts/lib/glb-check.ts`）：`public/` 下存在、≤ 8 MB、`asset.copyright` 非空；零件 `mesh`（含 `bilateral.mesh` 双胞胎）与 `rig` 关节的 `node` 都要在 glb 节点表里——缺节点是 **error**；两个节点名被 three 的 GLTFLoader 去掉 `.` `:` `/` `[` `]` 后撞名也是 error
 - MathScene（docs/15 §4.10，`math-scene/validate.ts`，经 `schemas.ts` 的 `topicIssues` / `taskIds`）：章 ↔ 步一一对应、练习章 `practice: true` 唯一且在最后；`lo` 与课纲来源存在；P2 / P3 步分母 ≤ 12、加减结果在 0–1、异分母要相关；目标能在模型上表示（涂得出、在刻度上、因子可达、对折可达、`accept: exact` 的份数 = 分母）；`choose` 的错选项都有误解且在 `feedback.wrong` 里有一句；单选恰有一个对；练习 6–10 题、至少 5 种题型、`revisit` 是步；题干 EN ≤ 120 / ZH ≤ 40 字（warning，`{a/b}` 记号算一字）；所有文本里的 `{a/b}` 记号合法
 
 ## 背景章（`kind: background`）
@@ -610,7 +613,7 @@ MapLibre 只在 `controller` chunk 里，View 挂载后才加载（时间轴先�
 `engine: space-scene`、`stage: model3d`。代码在 `src/engines/space-scene/`：
 
 ```
-index.ts                 descriptor（part/view/explode/run/cutaway/pose；不进 URL 的 hidden/ghosted/solo）
+index.ts                 descriptor（part/view/explode/run/cutaway/pose；不进 URL 的 hidden/ghosted/solo/exercise/tints/sites/demo）
 schema.ts                parts.json 的 zod（构建期）
 View.tsx                 HUD 控件注册（预设 / 模式 / 规格行 / 卡片与面板标题）+ 各插槽内容 + 懒加载 Model3DStage
 ui.ts                    引擎内 UI store（ORBIT、REFERENCE、演示中 + 这一拍的标注、封面镜头；不进 URL，View 与舞台共用）
@@ -620,13 +623,15 @@ lib/                     纯函数，有单测：explode / visibility（图层�
                          camera（球坐标插值、REFERENCE 镜头、过渡目标）/ parts（零件包围盒、repeat 变换）/
                          schematic（零件链路、流经连线、立面、标注预算）/ labels（组标注 id、演示时用哪张标注表、组包围盒）/
                          leader-layout（引线标注摆放：两列、避让 HUD 与被标零件、代价搜索）/ shaped（成形零件的版式数学：盘管管位、回弯、叶片）/ xform / math /
-                         sweep（扫掠站点、标架、半径轮廓、环节沟）/ wing（扇形折叠）/ bilateral（双侧镜像）/ pose（姿态、关键帧）/ units（实长）
+                         sweep（扫掠站点、标架、半径轮廓、环节沟）/ wing（扇形折叠）/ bilateral（双侧镜像）/ pose（姿态、关键帧）/ units（实长）/
+                         rig（关节角、解剖轴、收缩、动作节拍、肌肉 ↔ 零件）/ sites（起止点）/ equipment（动作器械的基本体）
 stages/model3d/          R3F 舞台：Model3DStage（createRoot 宿主）、SceneRoot、PartNode、geometry（程序化零件）、shaped（成形零件构建）、organic（sweep / wing 构建、FanDeform）、
                          materials（材质 + 选中边缘 / 剖面 shader 补丁）、textures（程序化贴图）、Lighting、
-                         GroundShadow、CameraRig、Flows + flowMaterial、probes（标注投影 / 计数 / 阴影更新）、GltfSource
-hud/                     LeaderLabels（leaders）、PartChainCard（card）、ArchitecturePanel / DetailPanel / StatePanel
+                         GroundShadow、CameraRig、Flows + flowMaterial、probes（标注投影 / 起止点投影 / 计数 / 阴影更新）、GltfSource（glb、蒙皮、骨架）、
+                         MotionDriver（关节、收缩、动作体位）、Equipment（动作器械）
+hud/                     LeaderLabels + SitesOverlay（leaders）、PartChainCard（card）、ArchitecturePanel / DetailPanel / StatePanel
                          （panel01–03）、PerfReadout（perf）、spec（标题块规格行）
-explorer/                ExplorerBar（bottomBar：只剩拆开滑块）、ExplorerOverlay（stageOverlay）、Inspector（inspector）
+explorer/                ExplorerBar（bottomBar：只剩拆开滑块）、ExplorerOverlay（stageOverlay）、Inspector（inspector：零件详情、MuscleSheet 四页、ExerciseCard）
 space-scene.css          舞台、标注、卡片与面板绘图、滑块、详情样式（只用 token，尺寸 × --u）
 ```
 
@@ -713,7 +718,7 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
 - **材质族**（`color`）：`casing`（拉丝铝，各向异性）、`steel`（机加工钢）、`powder`（缎面黑粉末涂层，轻微橘皮）、`stainless`（轴向拉丝不锈钢）、`copper`、`brass`（黄铜：阀门、喇叭口螺母）、`rubber`（近黑，roughness .78）、`plastic`（哑光暖砂色，不是默认灰）、`enamel`（暖白烤漆，比纸色深一档，低粗糙度 + 细颗粒粗糙度贴图 = 缎面光泽，家电外壳）、`glass`（半透明）；旧名 `metal` = steel、`matte` = plastic。或者 `token:<name>` / `#hex`：缎面漆。`primitive.tint`（token 或 #hex）给材质族换颜色、保留它的金属度 / 粗糙度 / 贴图，例如浅灰 `powder` 外壳：`"color": "powder", "tint": "#c4c6c2"`。程序化 canvas 贴图给拉丝方向、粗糙度变化、橘皮法线（`stages/model3d/textures.ts`，种子固定，截图可复现）。
 - **流场**：`path` 首尾点相同 = 闭环。centripetal Catmull-Rom，按弧长烘焙进 shader：每 8 mm（0.008 场景单位）一个点，64–512 个，存成一行浮点纹理（`texelFetch` 取样，不占 uniform 数组），粒子在弯头处贴着曲线走、不抄近路（4 m 的冷媒段约 500 个点，弯头偏差从 64 点时的 15–20 mm 降到 3 mm 以内；盘管仍只能画 2–3 程，不能逐根追 U 形弯头），默认每条 360 个细粒子（贴着中心线，像 CFD 流线而不是魔法粒子），`speed` 是场景单位/秒。`stops` 在顶点着色器里按粒子位置插值（线性 RGB）；分段流（冷媒四段）用 `ends: "open"`，并让各段 `count / 长度 × speed` 大致相等（粒子通量连续）。`whenRun: false` 的流/动画一直播放（只受图层开关）。每条流一次绘制。
 - **已知限制**：同一时刻只有一个剖切面（`views.cutaway` 或一个命名 `views.cuts`，同时切所有零件；两个平面一起切暂不做）；`coilBank` 只做平直和 L 形（弧形蒸发器用两三段倾斜的平直盘管拼）；流不随拆开移动；`extrude` / 贯流叶片用 three 的 `ExtrudeGeometry`（`panelHole` 仍是手工三角化）。
-- **glb**：不要用 Draco/meshopt 压缩（drei 默认去 CDN 拉 Draco 解码器，Atlas 不允许运行时外部请求，所以我们关掉了）。mesh 名找不到会 console.warn，该零件不显示；glb 整体加载失败时积木零件照常显示。
+- **glb**：可以用 meshopt 压缩 + 量化（解码器内联，见「真实网格与人体肌肉」）；不要用 Draco（解码器在 CDN，Atlas 不允许运行时外部请求）。mesh 名找不到是 `pnpm validate` 的 error（运行时不再 console.warn）；glb 整体加载失败时舞台中央出双语说明，积木零件照常显示。glb 零件写 `material`。
 
 ### 生物与有机形体（docs/14 §8 B1–B12）
 
@@ -761,7 +766,7 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
   "keys": [ { "t": 0, "rotation": [0, 0, 0] }, { "t": 1.4, "rotation": [0, 0, 25] }, { "t": 1.9, "rotation": [0, 0, 25] }, { "t": 2.0, "rotation": [0, 0, -120] }, { "t": 2.4, "rotation": [0, 0, 0] } ] }
 // sequence：keys 的 t（秒）递增，rotation（XYZ 欧拉，度，绕 pivot）/ offset / scale / fan，键与键之间 smoothstep；loop:false = 每次运转从头播一次、停在最后一键
 
-// poses（≤ 8）：{ "<姿态名>": { "<零件 id>": { pivot?, rotation?, offset?, scale?, fan? }, …, "duration"?: 秒 } }
+// poses（≤ 32）：{ "<姿态名>": { "<零件 id>": { pivot?, rotation?, offset?, scale?, fan? }, …, "duration"?: 秒 } }（关节角与收缩见下节）
 // 变换顺序：绕 pivot（场景坐标，默认零件中心）先 scale 再 rotation，然后 offset。duration 默认 0.8 s（"duration" 是保留键）。
 // 双侧零件的条目自动镜像给双胞胎（除非该姿态也写了 `<id>-r`）。fan 只给带 fold 的 wing。
 
@@ -778,6 +783,69 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
 - **淡显**：章 / 拍 `ghost: [组或零件]`（不累积）与控制面板 LAYERS 每行末尾的 `⊙`（单显这一组、其余淡显；再点或 ESC 取消；存 store 的 `solo`，换章清掉，不进 URL）。淡显 = .12 透明、不写深度、不可点、不标注、不遮挡标注；选中的零件不淡显；被单显的组即使图层关着也显示。
 - **剖切面名**：状态行写 `CUTAWAY <label>`（默认面仍是 `CUTAWAY 50`）；C 键仍切默认面（开着命名剖切时 C = 关）。
 - **ARCHITECTURE 实长**：有 `units` 时比例尺写 `10 MM` / `5 CM`（1 / 2 / 5 × 10ⁿ 的实长），标签行加模型在立面上的跨度（`XY · 47 PARTS · 64 MM`）；没有时照旧 `U`。分区括号最多三行（放得下就并排），组多于 5 个时图例行距收紧。
+
+### 真实网格与人体肌肉（docs/16 §9 M1–M13）
+
+肌肉主题（docs/16）用 glb 真实网格，不用程序化积木；下面的字段全部可选、向后兼容。形状对照 `sample-space` 第 05 章（一段占位"肢体"：`public/models/sample-space.glb`，由 `pnpm tsx scripts/make-sample-glb.ts` 生成，两根骨、一块带纤维数据的蒙皮"肌肉"、两侧真实节点、肘部动作、起止点、哑铃）。
+
+**glb 加载（M1）**：three 自带的 GLTFLoader + meshopt 解码器（`three/examples/jsm/libs/meshopt_decoder.module.js`，内联 wasm，不发任何请求；构建产物里无外部 URL）+ 原生 `KHR_mesh_quantization`；Draco 仍关（解码器在 CDN）。加载时舞台中央一条 hairline 进度条（按字节），失败时舞台中央一行双语说明（程序化零件照常画）。three 读 glb 时会去掉节点名里的 `.` `:` `/` `[` `]`（`pec.l` → `pecl`），引擎按同样规则查名，数据里照写原名。场景被克隆（SkeletonUtils），网格取出交给 PartNode（每个零件一个材质、一次绘制），剩下的骨架挂在舞台上。PWA 运行时缓存 `/models/*.glb`（不预缓存）。
+
+```jsonc
+// parts.json 顶层
+"model": "/models/muscles-chest.glb",          // asset.copyright 写署名与许可（validate 查非空）
+"rig": {
+  "joints": {                                   // 关节名：kebab-case + 可选 .l / .r（身体自己的左 = +X）
+    "shoulder.l": { "node": "shoulder.l",       // glb 骨骼节点名
+                    "axes": { "flexion": [-1, 0, 0], "abduction": [0, 0, 1], "internal-rotation": [0, 1, 0] } },
+    "elbow.l":    { "node": "elbow.l", "axes": { "flexion": [-1, 0, 0] } },
+    "hand.l":     { "node": "hand.l", "axes": { "flexion": [-1, 0, 0] } }   // hand.l / hand.r 的骨原点 = 握点：手持器械挂在这里
+  },
+  "demo": { "elbow": { "flexion": 110 } }       // 肌肉卡 ACTIONS 页"演示"摆到的角度（按动作关节 × 动作；默认 60°）
+},
+"sites": [                                       // 起止点（M6）：muscle = 肌肉零件 id，bone = 骨零件 id，points = 1–8 个场景坐标点（宽附着写 2–4 个点的折线）
+  { "muscle": "pectoralis-major-clavicular", "kind": "origin",    "bone": "clavicle", "points": [[0.04, 0.21, 0.07], [0.09, 0.22, 0.06]] },
+  { "muscle": "pectoralis-major-clavicular", "kind": "insertion", "bone": "humerus",  "points": [[0.17, 0.12, 0.05]] }
+],
+"views": { "explodeLabel": { "en": "Peel", "zh": "剥层" } }   // EXPLODED 模式与滑块在本主题的名字（M4）
+
+// part
+{ "id": "pectoralis-major-clavicular",
+  "mesh": "pectoralis-major-clavicular.l",                       // glb 节点名 = 零件 id + .l / .r
+  "bilateral": { "axis": "x", "mesh": "pectoralis-major-clavicular.r" },   // M3：双胞胎画 glb 里真实的右侧节点，不镜像几何（真实身体不完全对称）
+  "material": { "color": "muscle", "tint": "token:muscle-1" },   // M2：glb 零件的材质（没有 primitive 时必填）
+  "muscle": "pectoralis-major-clavicular",                       // M9：共享肌肉卡；summary / detail / short 不写时取肌肉卡的
+  "short": { "en": "Pec maj · clav", "zh": "胸大肌锁骨部" },       // M13：卡片、引线、DETAIL 面板优先用短名
+  "explode": { "dir": [0.2, 0, 1], "dist": 0.06, "stage": 0 },   // M4：剥层，stage 0 先走
+  "group": "superficial", "connects": ["clavicle", "humerus"] }
+// glb 节点 extras.closed: false → 剖切不填剖面（默认填）
+
+// poses：零件条目之外可以写关节角与收缩
+"poses": { "bench-bottom": {
+  "joint:shoulder.l": { "horizontal-abduction": 30, "abduction": 60 },   // 关节角（度）沿 rig 的解剖轴
+  "joint:elbow.l": { "flexion": 95 },
+  "contract": { "pectoralis-major-sternocostal": 0.2 },   // 零件 id → 0..1（0 = 伸长 / 静止，1 = 最短）
+  "duration": 1.2 } }
+
+// animations：sequence 可以驱动关节；新 kind contract（M7）
+{ "id": "wave", "target": "joint:shoulder.l", "kind": "sequence", "keys": [ { "t": 0, "angles": { "abduction": 0 } }, { "t": 1.5, "angles": { "abduction": 20 } } ] }
+{ "id": "work", "target": "pectoralis-minor", "kind": "contract", "amount": 0.7, "bulge": 0.08, "hz": 0.5 }   // 0 → amount → 0；零件 sequence 的键也可以写 "contract": 0..1
+```
+
+- **关节角（M5）**：`axes` 给每个动作的旋转轴（场景坐标，静止姿态下；正角 = 这一侧身体做这个动作），反向动作用同一根轴取负（extension 20 = flexion −20；一对反向动作只写一根轴）。角按 `axes` 的书写顺序作用在骨骼自身原点上、相对父骨（肘的轴跟着上臂走）。左关节（`.l`）的角自动驱动右关节（`.r`，rig 有它且姿态 / 动作 / 片段没单独写它时）——因为轴是解剖轴，同样的数字就是镜像动作。`joint:<名>` 的 sequence 片段同理自动生成 `-r` 副本。
+- **蒙皮（M5）**：glb 里蒙皮的网格画成 SkinnedMesh（detached bind mode：拆开、移开、刚体姿态照常叠加在骨骼之上）；不做视锥裁剪；X-RAY / 剖切 / 淡显 / 选中边缘的 shader 补丁不替换顶点块，three 自带的蒙皮块照常生效。引线锚点按蒙皮后的包围盒每 6 帧重算一次（采样 ≤ 256 个顶点，只在骨骼动时）。取景、立面、地面阴影用静止时蒙皮后的包围盒。
+- **收缩（M7）**：管线给肌肉烘焙 `_U`（起点 0 → 止点 1）与 `_FIBRE`（单位纤维方向）两个顶点属性。收缩值 c（姿态 `contract`、动作关键帧、`contract` 动画、肌肉卡演示，取最大）在顶点着色器里沿纤维向中段缩短（最多 20 %）、沿法线鼓起 `bulge` × 肌腹厚度（加在蒙皮之前），片元叠一条沿 `_U` 移动的 signal 色细纹（≤ .35）。没有这两个属性的零件退回整体缩放（沿最长轴缩短、横向鼓起）。
+- **剥层（M4）**：有 `explode.stage` 的零件按层错时外移：n 层时第 s 层在滑块 [s × 0.6/(n−1), +0.4] 里缓动走完（三层 = 0–0.4、0.3–0.7、0.6–1.0）；没写 stage 的零件照旧随滑块线性移动。`views.explodeLabel` 给模式按钮、状态行、滑块改名。
+- **起止点（M6）**：选中的肌肉零件、章 / 拍 `sites` 列出的肌肉零件显示：起点空心圆、止点实心圆（屏幕恒定大小、HUD 墨色）、多点附着连一条细线、起止质心之间一条虚线 = 拉力方向；点跟着骨走（蒙皮骨：按骨零件上最近顶点的蒙皮权重混合；刚体骨：跟零件变换）。点标记（44 px 命中区）= 选中那块骨。双侧肌肉的 sites 自动镜像给双胞胎（除非数据写了双胞胎自己的）。
+- **单显与高亮（M11）**：store 的 `solo` 可以是组 id（控制面板 ⊙）或零件 id（肌肉卡的 SOLO 按钮）：零件单显 = 这个零件、它 `connects` 的零件、shell 与 context 零件实心，其余 .12 淡显；ESC 依次取消选中、单显、演示、动作。章 / 拍 `highlight: { signal: [...], cold: [...] }`（组或零件）把底色往 signal / cold 色混 55 %，不换材质族（store 字段叫 `tints`：`highlight` 是 TimeScene 的 URL 字段）。
+- **取景（M12）**：最小镜头距离与封面镜头只按非 context 零件取景（全身皮肤轮廓不把镜头推远）；灯光、阴影、标注预算仍按全部零件。
+
+**共享肌肉 / 动作数据（M10）**：`src/content/shared/fitness/muscles/<区>.json`（`{ muscles: [...] }`）、`exercises/<模式>.json`（`{ exercises: [...] }`）、`sources.json`（`{ sources: [{ id: "M1", … }] }`），schema 在 `src/content/schema/fitness.ts`（字段见 docs/16 §4.2 / §4.3；`dose` 按决定 11 改为 `[{ text: {en, zh}, s: ["M#"] }]` 只写原则）。主题写 `data/training.json`：`{ "exercises": [动作 id…], "note"?: {en, zh}（肌肉卡 TRAINING 页的一句原则）, "session"?: { title, blocks: [{ exercise, note? }], note?, s? } }`。构建（`src/lib/content.ts`）与 `pnpm validate`（`scripts/lib/shared-data.ts`）都用 `withSharedFitness` 把主题用到的条目合并进 data.json 的 `fitness`：零件 `muscle` 链到的肌肉（及其 parent），training 与这些肌肉列出的动作，这些动作提到的肌肉，加全部共享来源。共享来源编号 `M#`：正文 `<Num s="M3">`、详情 `[M3]`、来源浮层都认；`pnpm tsx scripts/sources-md.ts --shared fitness` 写 `shared/fitness/SOURCES.md`，有 training.json 的主题跑 `sources-md.ts <slug>` 时 SOURCES.md 多一块共享来源。许可字段：glb 的 `asset.copyright`（validate 查非空）、主题 `SOURCES.md` 的 S# 条目、`topic.yaml` 的 `note`（docs/16 §3.2）。
+
+**动作模式（M8）**：章 / 拍 `exercise: { id, phase: start | end | loop }`（默认 loop；必须在 training.json 里）或肌肉卡 EXERCISES 页的芯片进入。引擎读共享动作的 `motion`：`root.rotation`（整个模型绕模型中心转到动作体位，例如卧推 [-90, 0, 0]，可加 `offset`）、`keys`（start / mid? / end，`joints` 关节角 + `contract` 肌肉 id → 0..1，本主题里显示该肌肉或其头的零件都收缩）、`tempo` [start→end 秒, 停, end→start 秒, 停]（默认 [2, 0, 1, 0]）。`primary` 的零件 signal 色、`secondary` cold 色、`stabilisers` 原色、其余链接了肌肉的零件淡显。器械 `equipment: { kind, grip?, width?, at?, turn?, incline? }`（一个或 ≤ 4 个；`lib/equipment.ts`，引擎基本体拼成，场景单位按米画）：barbell（2.2 m 杠在两手之间）、dumbbell（每只手一个，`grip: neutral` 时前后向）、cable-handle（每只手一个）挂在 `hand.l` / `hand.r` 骨原点上，随身体转；bench（座面顶在 `at`，长轴沿 Z、头端 −Z，`incline` 抬起靠背，`turn` 绕 Y）、parallel-bars（两杠沿 Z、相距 `width`、杠顶在 `at`）站在场景里。每件一到两次绘制，不可点、不标注。阅读面板的检视器先出**动作卡**：示意图（`sketch`，两格石墨图；cinema 下反相）、器械与级别、START / END / LOOP（能播放时）、主动 / 协同 / 稳定肌芯片（点 = 选中显示该肌肉的零件）、准备、步骤、提示、错误、练多少（带来源）、注意事项、研究显示、固定的安全行（UI 文案）。`pnpm shoot --beats` 对 loop 的动作拍再各拍一张起始键与结束键（`beat-<章>-<n>-start.png` / `-end.png`，测试钩子 `__atlas.engine.exercisePhase(phase)`）。
+
+**肌肉卡（M9）**：零件链接了 `muscle` 时，检视器（手机上是同一个底部抽屉）出 SOLO 按钮与四页：FEATURES（层、起点 / 止点文字 + 骨芯片、纤维排列与走向、在自己身上找到它、"Tell me more" = detail）、ACTIONS（关节 · 动作 · 角色，每行"演示"按钮：该侧关节按 `rig.demo` 角来回摆、这块肌肉同步收缩；rig 没有那根轴时不出按钮）、TRAINING（常见错误、training.json 的 `note`、伤病）、EXERCISES（动作芯片 → 动作模式 + 动作卡）。标签页是 WAI-ARIA tablist（← → 切换，44 px）。
+
+**token**：`token:muscle-1` / `muscle-2` / `muscle-3`（浅层最暖 → 深层最暗，低饱和，不是血红）、`token:bone`（象牙），两套主题都有。
 
 ### 章节怎么写（`state`）
 
@@ -804,11 +872,14 @@ state:
       ghost: [legs-wings]                 # 这一拍淡显的组（不写 = 本章的）
       labels: [compressor, accumulator]   # 这一拍的引线标注（≤ 6，不累积；不写 = 本章的 labels）
       hide: [outdoor-front]               # 这一拍移开的零件（不累积；不写 = 本章的 hide）
+      exercise: { id: barbell-bench-press, phase: loop }   # 动作模式（肌肉主题；null = 无；不写 = 本章的）
+      highlight: { signal: [pectoralis-major-clavicular], cold: [deltoid-anterior] }   # 高亮（组或零件；不写 = 本章的）
+      sites: [pectoralis-minor]           # 显示起止点的肌肉零件（不写 = 本章的）
       caption: { en: "…", zh: "…" }
       audio: /audio/aircon/ch03-1.mp3     # 可选：进拍时播放的旁白文件（站内路径）
 ```
 
-章节目标照常累积（`labels`、`hide`、`pose`、`ghost` 不累积，只看本章）。**镜头规则**（`lib/camera.ts transitionCamera`，有单测；CameraRig 订阅 store，transition 一发出就按顺序处理，所以同一 tick 里先 `setPreset` 再 `setMode`（snap）也落在预设镜头上，截图脚本不需要延时）：切章 / 首次加载 / URL：本章自己写了 `camera`（或 URL `cam=` 与本章基线不同）就用它；否则 `views[当前 view].camera`；都没有就沿用。**预设（VIEW 按钮 / 数字键）永远落在该预设的镜头上**（P1 遗留问题：本章没有自己镜头时，基线是继承来的，曾被误判成"非显式"而飞去视图预设；已修）。模式切换（X / E / C / F）不动镜头。较窄的舞台（宽高比 < 1.6：HUD 占去两侧的桌面、平板、竖屏手机）自动把镜头往后拉（手机竖屏、宽高比 < 0.8 时 HUD 叠在上面，模型独占整宽，拉回量渐减到一半），回写 URL 时换算回来，链接与设备无关。**封面镜头**：演示以外隐藏 HUD（H、`pnpm shoot` 的 `hero-clean`）时 0.8 s 飞到 `views.cover`；没写就沿当前视线方向重新取景，让模型包围球占舞台宽 75 %（宽屏上最多超出高度 30 %，`fitSphereCamera`），舞台尺寸变了再重算；显示 HUD 时 0.8 s 飞回离开时的镜头——中间换过章、按过预设或拖过镜头就不飞回。章节镜头按带 HUD 的舞台取景：模型放在 HUD 块之间的空带里（1600×900 约 590 × 680 px），给引线标注留位置；封面镜头按满屏取景（模型约占宽 70 %）。
+章节目标照常累积（`labels`、`hide`、`pose`、`ghost`、`exercise`、`highlight`、`sites` 不累积，只看本章；这三项肌肉主题字段在章 state 与拍里写法相同）。**镜头规则**（`lib/camera.ts transitionCamera`，有单测；CameraRig 订阅 store，transition 一发出就按顺序处理，所以同一 tick 里先 `setPreset` 再 `setMode`（snap）也落在预设镜头上，截图脚本不需要延时）：切章 / 首次加载 / URL：本章自己写了 `camera`（或 URL `cam=` 与本章基线不同）就用它；否则 `views[当前 view].camera`；都没有就沿用。**预设（VIEW 按钮 / 数字键）永远落在该预设的镜头上**（P1 遗留问题：本章没有自己镜头时，基线是继承来的，曾被误判成"非显式"而飞去视图预设；已修）。模式切换（X / E / C / F）不动镜头。较窄的舞台（宽高比 < 1.6：HUD 占去两侧的桌面、平板、竖屏手机）自动把镜头往后拉（手机竖屏、宽高比 < 0.8 时 HUD 叠在上面，模型独占整宽，拉回量渐减到一半），回写 URL 时换算回来，链接与设备无关。**封面镜头**：演示以外隐藏 HUD（H、`pnpm shoot` 的 `hero-clean`）时 0.8 s 飞到 `views.cover`；没写就沿当前视线方向重新取景，让模型包围球占舞台宽 75 %（宽屏上最多超出高度 30 %，`fitSphereCamera`），舞台尺寸变了再重算；显示 HUD 时 0.8 s 飞回离开时的镜头——中间换过章、按过预设或拖过镜头就不飞回。章节镜头按带 HUD 的舞台取景：模型放在 HUD 块之间的空带里（1600×900 约 590 × 680 px），给引线标注留位置；封面镜头按满屏取景（模型约占宽 70 %）。
 
 ### HUD 控件与内容（docs/08 §2、§3）
 

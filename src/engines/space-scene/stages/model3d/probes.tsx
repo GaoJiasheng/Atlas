@@ -10,18 +10,35 @@
  *    camera or the parts moved or were put aside / faded; up to
  *    five rays a part: hidden only when none reaches it) and
  *    notifies the HUD listeners
+ *  - SitesProbe: projects the attachment markers on show (lib/sites.ts),
+ *    each point following its bone (skinned: blended by the bone part's
+ *    nearest vertex's skin weights; rigid: the part's transform)
  *  - StatsProbe: renderer counters and a rolling FPS (`__atlas.stats()`, perf readout)
  *  - ShadowUpdater: one shadow-map update when something that casts moved
  *  - ResolutionGovernor: drops the pixel ratio while frames are slow (perf-lessons §3)
  */
 import { useEffect, useMemo } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
-import { Matrix4, Raycaster, Vector3, type Camera, type Intersection, type Object3D, type PerspectiveCamera, type Plane, type WebGLRenderer } from 'three';
+import {
+  Matrix4,
+  Raycaster,
+  Vector3,
+  Vector4,
+  type BufferAttribute,
+  type Camera,
+  type Intersection,
+  type Object3D,
+  type PerspectiveCamera,
+  type Plane,
+  type SkinnedMesh,
+  type WebGLRenderer,
+} from 'three';
 import type { ScreenAnchor, StageBridge } from '../../bridge';
 import type { PartHandle } from './PartNode';
 import { keepAnimating, type StageRuntime } from './runtime';
 import { groupLabelId, unionBox, type BoxMember } from '../../lib/labels';
 import type { Vec3 } from '../../lib/math';
+import { siteCentroid, siteKey, type SiteLike } from '../../lib/sites';
 
 /** A group's parts for its label anchor: part id and the half extents of its bounds. */
 export type GroupMembers = ReadonlyMap<string, readonly { id: string; half: Vec3 }[]>;
@@ -43,6 +60,7 @@ const OCCLUSION_SAMPLES: readonly (readonly [number, number])[] = [
 /** On-screen radius of a group anchor = its projected half-diagonal × this (label columns keep clear of the whole group). */
 const GROUP_CLEARANCE = 1;
 
+const IDENTITY = new Matrix4();
 const newAnchor = (): ScreenAnchor => ({ x: 0, y: 0, onScreen: false, occluded: false, shown: false, depth: 0, r: 0, x0: 0, y0: 0, x1: 0, y1: 0 });
 
 /**
@@ -50,7 +68,7 @@ const newAnchor = (): ScreenAnchor => ({ x: 0, y: 0, onScreen: false, occluded: 
  * (cx, cy, cz) with half extents `half` (scene axes); a box with no extent,
  * or one reaching behind the camera, falls back to the anchor ± its radius.
  */
-function screenBox(a: ScreenAnchor, cx: number, cy: number, cz: number, half: readonly number[], camera: Camera, W: number, H: number): void {
+function screenBox(a: ScreenAnchor, cx: number, cy: number, cz: number, half: readonly number[], camera: Camera, W: number, H: number, root: Matrix4 | null): void {
   const [hx = 0, hy = 0, hz = 0] = half;
   if (hx + hy + hz > 0) {
     let x0 = Infinity;
@@ -59,7 +77,9 @@ function screenBox(a: ScreenAnchor, cx: number, cy: number, cz: number, half: re
     let y1 = -Infinity;
     let ok = true;
     for (let i = 0; i < 8 && ok; i++) {
-      _q.set(cx + (i & 1 ? hx : -hx), cy + (i & 2 ? hy : -hy), cz + (i & 4 ? hz : -hz)).project(camera);
+      _q.set(cx + (i & 1 ? hx : -hx), cy + (i & 2 ? hy : -hy), cz + (i & 4 ? hz : -hz));
+      if (root) _q.applyMatrix4(root);
+      _q.project(camera);
       if (_q.z <= -1 || _q.z >= 1) ok = false;
       const sx = (_q.x * 0.5 + 0.5) * W;
       const sy = (-_q.y * 0.5 + 0.5) * H;
@@ -141,6 +161,8 @@ export function LabelProbe({
 
     const fov = (camera as PerspectiveCamera).fov;
     const focal = H / 2 / Math.tan((fov * Math.PI) / 360);
+    // The body turned into an exercise position: anchors are in the model's frame.
+    const rooted = !runtime.root.equals(IDENTITY);
     for (const [id, h] of handles) {
       let a: ScreenAnchor | undefined = bridge.anchors.get(id);
       if (!a) {
@@ -149,6 +171,7 @@ export function LabelProbe({
       }
       const o = h.object.position;
       _p.set(o.x + h.point[0], o.y + h.point[1], o.z + h.point[2]);
+      if (rooted) _p.applyMatrix4(runtime.root);
       a.shown = h.visible && !clipped(_p);
       a.depth = _p.distanceTo(camera.position);
       a.r = a.depth > 0 ? (h.radius / a.depth) * focal : 0;
@@ -156,7 +179,7 @@ export function LabelProbe({
       a.x = (_p.x * 0.5 + 0.5) * W;
       a.y = (-_p.y * 0.5 + 0.5) * H;
       a.onScreen = _p.z > -1 && _p.z < 1 && Math.abs(_p.x) < 1.02 && Math.abs(_p.y) < 1.02;
-      screenBox(a, o.x + h.offset[0], o.y + h.offset[1], o.z + h.offset[2], h.half, camera, W, H);
+      screenBox(a, o.x + h.offset[0], o.y + h.offset[1], o.z + h.offset[2], h.half, camera, W, H, rooted ? runtime.root : null);
     }
     for (const g of boxes) {
       let a = bridge.anchors.get(g.key);
@@ -176,6 +199,7 @@ export function LabelProbe({
       a.shown = unionBox(g.shown, g.out);
       if (!a.shown) continue;
       _p.set(g.out.center[0], g.out.center[1], g.out.center[2]);
+      if (rooted) _p.applyMatrix4(runtime.root);
       a.depth = _p.distanceTo(camera.position);
       a.r = a.depth > 0 ? (Math.hypot(g.out.half[0], g.out.half[1], g.out.half[2]) * GROUP_CLEARANCE * focal) / a.depth : 0;
       a.occluded = false;
@@ -183,7 +207,7 @@ export function LabelProbe({
       a.x = (_p.x * 0.5 + 0.5) * W;
       a.y = (-_p.y * 0.5 + 0.5) * H;
       a.onScreen = _p.z > -1 && _p.z < 1 && Math.abs(_p.x) < 1.02 && Math.abs(_p.y) < 1.02;
-      screenBox(a, g.out.center[0], g.out.center[1], g.out.center[2], g.out.half, camera, W, H);
+      screenBox(a, g.out.center[0], g.out.center[1], g.out.center[2], g.out.half, camera, W, H, rooted ? runtime.root : null);
     }
     for (const id of bridge.anchors.keys()) if (!handles.has(id) && !groupKeys.has(id)) bridge.anchors.delete(id);
 
@@ -219,6 +243,7 @@ export function LabelProbe({
         if (k > 0 && hx + hy + hz <= 0) break;
         if (k === 0) _p.set(o.x + h.point[0], o.y + h.point[1], o.z + h.point[2]);
         else _p.set(cx + sx * hx * 0.5, cy + sy * hy * 0.5, fz);
+        if (rooted) _p.applyMatrix4(runtime.root);
         _dir.subVectors(_p, camera.position);
         const dist = _dir.length();
         st.raycaster.set(camera.position, _dir.normalize());
@@ -232,6 +257,129 @@ export function LabelProbe({
 
     for (const listener of bridge.listeners) listener();
     if (pending) keepAnimating(state.invalidate);
+  });
+  return null;
+}
+
+/**
+ * How an attachment point rides on a skinned bone: the skin influences of the
+ * bone part's vertex nearest to it at rest, and the inverse of that vertex's
+ * rest blend (so the point moves with the blend exactly as the vertex does).
+ */
+interface PointSkin {
+  index: Vector4;
+  weight: Vector4;
+  restInverse: Matrix4;
+}
+
+const _w = new Vector3();
+const _bm = new Matrix4();
+const _blend = new Matrix4();
+const _e = new Matrix4();
+
+/** Σ w_k · bone_k · inverse(bind_k), with each bone's world matrix from `world(k)`. */
+function blend(sk: SkinnedMesh, index: Vector4, weight: Vector4, world: (k: number) => Matrix4, out: Matrix4): Matrix4 {
+  out.makeScale(0, 0, 0);
+  out.elements[15] = 0;
+  for (let k = 0; k < 4; k++) {
+    const w = weight.getComponent(k);
+    const b = index.getComponent(k);
+    if (w === 0 || !sk.skeleton.bones[b]) continue;
+    _bm.multiplyMatrices(world(b), sk.skeleton.boneInverses[b]!);
+    for (let e = 0; e < 16; e++) out.elements[e]! += _bm.elements[e]! * w;
+  }
+  return out;
+}
+
+/** The influences of the vertex of a skinned bone part nearest to `p` (rest scene coordinates), at rest. */
+function nearestSkin(sk: SkinnedMesh, rest: readonly Matrix4[], restWorld: Matrix4, p: Vector3): PointSkin | null {
+  const pos = sk.geometry.getAttribute('position');
+  const si = sk.geometry.getAttribute('skinIndex') as BufferAttribute | undefined;
+  const sw = sk.geometry.getAttribute('skinWeight') as BufferAttribute | undefined;
+  if (!pos || !si || !sw) return null;
+  const index = new Vector4();
+  const weight = new Vector4();
+  // The vertex's rest position: restWorld · bindInverse · blend_rest · bind · v.
+  const toScene = new Matrix4();
+  let best: { index: Vector4; weight: Vector4; m: Matrix4 } | null = null;
+  let bestD = Infinity;
+  const step = Math.max(1, Math.floor(pos.count / 4096));
+  for (let i = 0; i < pos.count; i += step) {
+    index.fromBufferAttribute(si, i);
+    weight.fromBufferAttribute(sw, i);
+    blend(sk, index, weight, (k) => rest[k]!, _blend);
+    toScene.copy(restWorld).multiply(sk.bindMatrixInverse).multiply(_blend).multiply(sk.bindMatrix);
+    const d = _w.fromBufferAttribute(pos, i).applyMatrix4(toScene).distanceToSquared(p);
+    if (d < bestD) {
+      bestD = d;
+      best = { index: index.clone(), weight: weight.clone(), m: _blend.clone() };
+    }
+  }
+  return best ? { index: best.index, weight: best.weight, restInverse: best.m.invert() } : null;
+}
+
+/** World position of an attachment point `p` (rest scene coordinates) on its bone part now. */
+function sitePoint(p: readonly number[], h: PartHandle, cache: Map<string, PointSkin | null>, key: string, out: Vector3): Vector3 {
+  const mesh = h.skinned ?? h.meshes[0];
+  out.set(p[0] ?? 0, p[1] ?? 0, p[2] ?? 0);
+  if (!mesh) return out;
+  mesh.updateWorldMatrix(true, false);
+  const sk = h.skinned;
+  if (!sk || !h.skinRest) return out.applyMatrix4(h.restInverse).applyMatrix4(mesh.matrixWorld);
+  let skin = cache.get(key);
+  if (skin === undefined) cache.set(key, (skin = nearestSkin(sk, h.skinRest, _e.copy(h.restInverse).invert(), out.clone())));
+  if (!skin) return out.applyMatrix4(h.restInverse).applyMatrix4(mesh.matrixWorld);
+  // now = meshWorld · bindInverse · blend_now · blend_rest⁻¹ · bind · restWorld⁻¹ · p
+  blend(sk, skin.index, skin.weight, (k) => sk.skeleton.bones[k]!.matrixWorld, _blend);
+  return out
+    .applyMatrix4(h.restInverse)
+    .applyMatrix4(sk.bindMatrix)
+    .applyMatrix4(skin.restInverse)
+    .applyMatrix4(_blend)
+    .applyMatrix4(sk.bindMatrixInverse)
+    .applyMatrix4(mesh.matrixWorld);
+}
+
+export function SitesProbe({
+  bridge,
+  handles,
+  sites,
+  active,
+  clipping,
+}: {
+  bridge: StageBridge;
+  handles: Map<string, PartHandle>;
+  sites: readonly SiteLike[];
+  /** Indices of the sites on show (lib/sites.ts `activeSites`). */
+  active: readonly number[];
+  clipping: Plane[] | null;
+}) {
+  const cache = useMemo(() => new Map<string, PointSkin | null>(), []);
+  useEffect(() => {
+    bridge.sites.clear();
+    bridge.invalidate();
+  }, [bridge, active, sites]);
+  useEffect(() => () => cache.clear(), [cache, sites]);
+  useFrame((state) => {
+    if (active.length === 0) return;
+    const W = state.size.width;
+    const H = state.size.height;
+    const put = (key: string, v: Vector3) => {
+      let pt = bridge.sites.get(key);
+      if (!pt) bridge.sites.set(key, (pt = { x: 0, y: 0, shown: false }));
+      const cut = clipping !== null && clipping.some((pl) => pl.distanceToPoint(v) < 0);
+      v.project(state.camera);
+      pt.x = (v.x * 0.5 + 0.5) * W;
+      pt.y = (-v.y * 0.5 + 0.5) * H;
+      pt.shown = !cut && v.z > -1 && v.z < 1;
+    };
+    for (const i of active) {
+      const site = sites[i]!;
+      const h = handles.get(site.bone);
+      if (!h) continue;
+      site.points.forEach((p, j) => put(siteKey(i, j), sitePoint(p, h, cache, siteKey(i, j), _p)));
+      put(siteKey(i, 'c'), sitePoint(siteCentroid(site.points), h, cache, siteKey(i, 'c'), _p));
+    }
   });
   return null;
 }

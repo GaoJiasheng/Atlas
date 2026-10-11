@@ -73,6 +73,12 @@ export interface SpaceBeatSpec extends BeatBase {
   labels?: string[];
   /** Parts hidden in this beat only (not cumulative). */
   hide?: string[];
+  /** Exercise mode for this beat (`null`: none); default the chapter's. */
+  exercise?: { id: string; phase: 'start' | 'end' | 'loop' } | null;
+  /** Signal / cold tints for this beat; default the chapter's. */
+  highlight?: { signal: string[]; cold: string[] } | null;
+  /** Muscle parts whose attachment markers show in this beat; default the chapter's. */
+  sites?: string[];
 }
 
 export interface SpaceSavedState {
@@ -88,6 +94,9 @@ export interface SpaceSavedState {
   hidden: string[];
   pose: string | null;
   ghosted: string[];
+  exercise: { id: string; phase: 'start' | 'end' | 'loop' } | null;
+  tints: { signal: string[]; cold: string[] } | null;
+  sites: string[];
   /** Leader labels of the beat on show (`null` = the chapter's own). */
   labels: string[] | null;
   /** ORBIT turntable on. */

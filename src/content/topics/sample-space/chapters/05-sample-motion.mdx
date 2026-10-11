@@ -1,0 +1,40 @@
+---
+id: sample-motion
+order: 5
+title: { en: "Sample step five", zh: "示例第五步" }
+level: P5
+state:
+  view: assembled
+  explode: 0
+  run: false
+  part: sample-flexor
+  pose: null
+  sites: [sample-flexor]
+  camera: { position: [3.6, 0.45, 0.85], target: [1.72, 0.05, -0.3], fov: 34 }
+  labels: [sample-flexor, sample-upper, sample-lower]
+  beats:
+    - pose: sample-curl
+      labels: [sample-flexor, sample-lower]
+      caption: { en: "Sample beat one: the sample elbow bends and the sample flexor shortens and swells.", zh: "示例节拍一：示例肘弯曲，示例屈肌缩短、鼓起。" }
+    - part: null
+      exercise: { id: sample-curl, phase: loop }
+      labels: [sample-flexor]
+      caption: { en: "Sample beat two: a placeholder exercise loops, its prime mover tinted, with a dumbbell in each sample hand.", zh: "示例节拍二：一个占位动作循环播放，主动肌着色，两只示例手里各拿一只哑铃。" }
+    - view: exploded
+      explode: 0.7
+      sites: []
+      labels: [sample-flexor]
+      caption: { en: "Sample beat three: the sample flexor lifts away from the bones.", zh: "示例节拍三：示例屈肌从骨上抬开。" }
+---
+
+<Lang en>
+
+Sample step five: a placeholder limb from a glb model. Its muscle is skinned to two bones, contracts along its fibres and shows where it starts and ends.
+
+</Lang>
+
+<Lang zh>
+
+示例第五步：一段来自 glb 模型的占位肢体。它的肌肉蒙皮在两根骨上，沿纤维收缩，并标出起点和止点。
+
+</Lang>

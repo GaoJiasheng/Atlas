@@ -1,4 +1,5 @@
 {
+  "model": "/models/sample-space.glb",
   "parts": [
     {
       "id": "sample-base",
@@ -372,13 +373,54 @@
       "primitive": { "kind": "box", "size": [1.8, 0.8, 0.04], "at": [-0.1, -0.34, -1.25], "color": "plastic", "tint": "token:neutral" },
       "context": true,
       "level": "P3"
+    },
+    {
+      "id": "sample-flexor",
+      "name": { "en": "Sample flexor", "zh": "示例屈肌" },
+      "group": "sample-limb",
+      "mesh": "sample-flexor.l",
+      "material": { "color": "muscle", "tint": "token:muscle-1" },
+      "muscle": "sample-flexor",
+      "explode": { "dir": [0, 0, 1], "dist": 0.3, "stage": 0 },
+      "connects": ["sample-upper", "sample-lower"],
+      "bilateral": { "axis": "x", "mesh": "sample-flexor.r" },
+      "level": "P5"
+    },
+    {
+      "id": "sample-upper",
+      "name": { "en": "Sample upper segment", "zh": "示例上段" },
+      "group": "sample-limb",
+      "summary": { "en": "A placeholder bone the sample flexor starts on.", "zh": "示例屈肌起始处的一根占位骨。" },
+      "detail": {
+        "en": "Sample detail text. Tests a glb part skinned to one bone of the placeholder skeleton, with its real right-side node (bilateral mesh).",
+        "zh": "示例详细说明。测试蒙皮到占位骨架一根骨上的 glb 零件，以及它真实的右侧节点（bilateral mesh）。"
+      },
+      "mesh": "sample-upper.l",
+      "material": { "color": "tissue", "tint": "token:bone" },
+      "bilateral": { "axis": "x", "mesh": "sample-upper.r" },
+      "level": "P5"
+    },
+    {
+      "id": "sample-lower",
+      "name": { "en": "Sample lower segment", "zh": "示例下段" },
+      "group": "sample-limb",
+      "summary": { "en": "A placeholder bone the sample flexor pulls on.", "zh": "示例屈肌牵拉的一根占位骨。" },
+      "detail": {
+        "en": "Sample detail text. Tests a glb part that follows the elbow bone as the joint bends.",
+        "zh": "示例详细说明。测试跟着肘部骨骼转动的 glb 零件。"
+      },
+      "mesh": "sample-lower.l",
+      "material": { "color": "tissue", "tint": "token:bone" },
+      "bilateral": { "axis": "x", "mesh": "sample-lower.r" },
+      "level": "P5"
     }
   ],
   "groups": [
     { "id": "sample-core", "name": { "en": "Sample frame", "zh": "示例框架" }, "color": "token:neutral" },
     { "id": "sample-drive", "name": { "en": "Sample drive", "zh": "示例驱动" }, "color": "token:accent-1" },
     { "id": "sample-loop", "name": { "en": "Sample loop", "zh": "示例回路" }, "color": "token:accent-2" },
-    { "id": "sample-organic", "name": { "en": "Sample organism", "zh": "示例生物" }, "color": "token:food" }
+    { "id": "sample-organic", "name": { "en": "Sample organism", "zh": "示例生物" }, "color": "token:food" },
+    { "id": "sample-limb", "name": { "en": "Sample limb", "zh": "示例肢体" }, "color": "token:muscle-1" }
   ],
   "flows": [
     {
@@ -451,14 +493,46 @@
       "hz": 0.6,
       "pivot": [0.1, 0.58, 0.05],
       "whenRun": true
+    },
+    { "id": "sample-flexor-work", "target": "sample-flexor", "kind": "contract", "amount": 0.6, "hz": 0.5 },
+    {
+      "id": "sample-wave",
+      "target": "joint:shoulder.l",
+      "kind": "sequence",
+      "keys": [
+        { "t": 0, "angles": { "abduction": 0 } },
+        { "t": 1.5, "angles": { "abduction": 20 } },
+        { "t": 3, "angles": { "abduction": 0 } }
+      ]
     }
   ],
   "poses": {
     "sample-open": {
       "sample-wing": { "pivot": [-0.04, 0.71, 0.02], "rotation": [-14, 0, 0], "fan": 1 },
       "sample-leg": { "pivot": [0.1, 0.58, 0.05], "rotation": [0, 0, 14] }
+    },
+    "sample-curl": {
+      "joint:elbow.l": { "flexion": 100 },
+      "joint:shoulder.l": { "flexion": 15 },
+      "contract": { "sample-flexor": 0.8 },
+      "duration": 1
     }
   },
+  "rig": {
+    "joints": {
+      "shoulder.l": { "node": "shoulder.l", "axes": { "flexion": [-1, 0, 0], "abduction": [0, 0, 1] } },
+      "elbow.l": { "node": "elbow.l", "axes": { "flexion": [-1, 0, 0] } },
+      "hand.l": { "node": "hand.l", "axes": { "flexion": [-1, 0, 0] } },
+      "shoulder.r": { "node": "shoulder.r", "axes": { "flexion": [-1, 0, 0], "abduction": [0, 0, -1] } },
+      "elbow.r": { "node": "elbow.r", "axes": { "flexion": [-1, 0, 0] } },
+      "hand.r": { "node": "hand.r", "axes": { "flexion": [-1, 0, 0] } }
+    },
+    "demo": { "elbow": { "flexion": 110 } }
+  },
+  "sites": [
+    { "muscle": "sample-flexor", "kind": "origin", "bone": "sample-upper", "points": [[1.78, 0.47, -0.29], [1.78, 0.42, -0.29]] },
+    { "muscle": "sample-flexor", "kind": "insertion", "bone": "sample-lower", "points": [[1.78, -0.08, -0.29]] }
+  ],
   "units": { "modelUnit": "cm", "scale": 25 },
   "views": {
     "assembled": { "camera": { "position": [2.5, 1.3, 3.25], "target": [0, -0.38, 0], "fov": 34 } },

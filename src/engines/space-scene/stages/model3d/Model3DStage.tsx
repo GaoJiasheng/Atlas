@@ -9,14 +9,19 @@
  * ratio to `min(dpr, 3840 / innerWidth, 2)` (master-spec M), tone-map with
  * ACES filmic, update shadow maps only on demand and render on demand (`frameloop: 'demand'`; animations
  * request frames while they run and stop while the tab is hidden).
+ * Topics with a glb get a hairline progress bar across the stage while it
+ * loads and a short bilingual note if it fails (the primitives still draw).
  */
-import { useEffect, useLayoutEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef } from 'react';
+import { useStore } from 'zustand';
 import { createRoot, events as createPointerEvents, type ReconcilerRoot, type RootState } from '@react-three/fiber';
 import type { StoreApi, UseBoundStore } from 'zustand';
 import type { SceneStore } from '../../../core/store';
 import type { Chapter } from '../../../core/types';
 import type { SpaceSceneExt } from '../../index';
 import type { PartsFile } from '../../schema';
+import type { FitnessBundle } from '../../../../content/schema/fitness';
+import { t, type Locale } from '../../../../i18n';
 import type { SpaceUiStore } from '../../ui';
 import type { StageBridge } from '../../bridge';
 import { DEFAULT_CAMERA } from '../../lib/camera';
@@ -33,11 +38,20 @@ export interface Model3DStageProps {
   chapters: readonly Chapter[];
   /** Accessible description of the stage. */
   label: string;
+  /** Shared fitness data merged into the topic (muscle topics). */
+  fitness?: FitnessBundle | undefined;
+  /** Exercise ids of the topic's training.json (exercise mode plays these). */
+  training?: readonly string[] | undefined;
+  locale: Locale;
 }
 
 type RootStore = UseBoundStore<StoreApi<RootState>>;
 
-export default function Model3DStage({ store, data, ui, bridge, chapters, label }: Model3DStageProps) {
+const NO_TRAINING: readonly string[] = [];
+
+export default function Model3DStage({ store, data, ui, bridge, chapters, label, fitness, training = NO_TRAINING, locale }: Model3DStageProps) {
+  const playable = useMemo(() => new Set(training), [training]);
+  const model = useStore(ui, (u) => u.model);
   const wrapRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rootRef = useRef<ReconcilerRoot<HTMLCanvasElement> | null>(null);
@@ -103,9 +117,9 @@ export default function Model3DStage({ store, data, ui, bridge, chapters, label 
     const root = rootRef.current;
     if (!root) return;
     rootStore.current = root.render(
-      <SceneRoot store={store} ui={ui} bridge={bridge} data={data} chapters={chapters} look={look} />,
+      <SceneRoot store={store} ui={ui} bridge={bridge} data={data} fitness={fitness} playable={playable} chapters={chapters} look={look} />,
     ) as RootStore;
-  }, [store, ui, bridge, data, chapters, look]);
+  }, [store, ui, bridge, data, fitness, playable, chapters, look]);
 
   useEffect(() => {
     rootStore.current?.getState().invalidate();
@@ -114,6 +128,24 @@ export default function Model3DStage({ store, data, ui, bridge, chapters, label 
   return (
     <div ref={wrapRef} className="space-stage" role="img" aria-label={label}>
       <canvas ref={canvasRef} className="space-stage__canvas" />
+      {model.state === 'loading' && (
+        <div
+          className="space-stage__progress"
+          role="progressbar"
+          aria-label={t(locale, 'space.model.loading')}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={Math.round(model.progress * 100)}
+        >
+          <i style={{ transform: `scaleX(${model.progress.toFixed(3)})` }} />
+        </div>
+      )}
+      {model.state === 'failed' && (
+        <p className="space-stage__failed" role="status">
+          {t('en', 'space.model.failed')}
+          <span lang="zh-Hans">{t('zh', 'space.model.failed')}</span>
+        </p>
+      )}
     </div>
   );
 }

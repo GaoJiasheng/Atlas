@@ -36,7 +36,7 @@ import { DEFAULT_CAMERA, fitCameraToAspect, REFERENCE_TWEEN_MS, referenceCamera,
 import { modelBounds } from './lib/parts';
 import { POSE_DURATION } from './lib/pose';
 import { targetExplodeAmount } from './lib/explode';
-import type { SpaceSceneExt } from './index';
+import { exerciseOf, highlightOf, type SpaceSceneExt } from './index';
 import type { SpaceChapterState, SpaceSceneData, SpaceView, ViewPresets } from './schema';
 import { createSpaceUi } from './ui';
 import { cameraSettled, createBridge } from './bridge';
@@ -51,6 +51,7 @@ import { PerfReadout } from './hud/PerfReadout';
 import { spaceSpecRows } from './hud/spec';
 import { partNumber } from './hud/common';
 import { LeaderLabels } from './hud/LeaderLabels';
+import { SitesOverlay } from './hud/SitesOverlay';
 import './space-scene.css';
 
 const Model3DStage = lazy(() => import('./stages/model3d/Model3DStage'));
@@ -183,6 +184,10 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
         hidden: spec?.hide ? [...spec.hide] : target.hidden,
         pose: spec?.pose !== undefined ? spec.pose : target.pose,
         ghosted: spec?.ghost ? [...spec.ghost] : target.ghosted,
+        exercise: spec?.exercise !== undefined ? exerciseOf(spec.exercise) : target.exercise,
+        tints: spec?.highlight !== undefined ? highlightOf(spec.highlight) : target.tints,
+        sites: spec?.sites ? [...spec.sites] : target.sites,
+        demo: null,
         camera,
       };
       ui.setState({ orbit: false, beatLabels: spec?.labels ? [...spec.labels] : null, nextTweenMs: instant ? null : BEAT_TWEEN_MS });
@@ -190,7 +195,10 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       if (instant) return;
       const id = store.getState().transition.id;
       const after = store.getState();
-      const poseMs = before.pose === after.pose ? 0 : ((after.pose ? file.poses?.[after.pose]?.duration : undefined) ?? POSE_DURATION) * 1000;
+      const poseMs =
+        before.pose === after.pose && before.exercise?.id === after.exercise?.id && before.exercise?.phase === after.exercise?.phase
+          ? 0
+          : ((after.pose ? file.poses?.[after.pose]?.duration : undefined) ?? POSE_DURATION) * 1000;
       const motion = Math.max(
         poseMs,
         targetExplodeAmount(before.view, before.explode) !== targetExplodeAmount(after.view, after.explode)
@@ -221,6 +229,9 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
         hidden: [...snap.hidden],
         pose: snap.pose,
         ghosted: [...snap.ghosted],
+        exercise: snap.exercise,
+        tints: snap.tints,
+        sites: [...snap.sites],
         labels: u.beatLabels,
         orbit: u.orbit,
         presetId: ref ? ref.presetId : h.presetId,
@@ -233,8 +244,10 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
     saveState: () => entered.current!,
     restoreState: (saved) => {
       ui.setState({ presenting: false, beatLabels: saved.labels, orbit: saved.orbit });
-      const { chapter, layers, camera, view, part, explode, run, cutaway, hidden, pose, ghosted } = saved;
-      store.getState().applyState({ chapter, layers, camera, view, part, explode, run, cutaway, hidden, pose, ghosted }, { instant: false });
+      const { chapter, layers, camera, view, part, explode, run, cutaway, hidden, pose, ghosted, exercise, tints, sites } = saved;
+      store
+        .getState()
+        .applyState({ chapter, layers, camera, view, part, explode, run, cutaway, hidden, pose, ghosted, exercise, tints, sites, demo: null }, { instant: false });
       hud.setState({ presetId: saved.presetId, cameraFree: saved.cameraFree });
     },
   };
@@ -277,10 +290,11 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       {
         id: 'exploded',
         key: 'e',
-        label: t('space.mode.exploded'),
+        // A topic may name it (PEEL / 剥层 for staged muscle layers).
+        label: file.views.explodeLabel ? tx(file.views.explodeLabel, locale) : t('space.mode.exploded'),
         on: s.view === 'exploded',
         disabled: inReference,
-        status: `${t('space.state.explode')} ${pct}`,
+        status: `${file.views.explodeLabel ? tx(file.views.explodeLabel, 'en').toUpperCase() : t('space.state.explode')} ${pct}`,
       },
       { id: 'cutaway', key: 'c', label: t('space.mode.cutaway'), on: s.cutaway !== 'none', tone: 'cut', status: cutStatus },
       // Flow paths do not follow the parts apart (docs/12 §7.5): no FLOW while exploded.
@@ -364,6 +378,15 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
         panel03: both('space.panel.state'),
       },
       beats: beatControls,
+      // `pnpm shoot --beats`: hold an exercise beat at its start / end key for a still.
+      test: {
+        exercisePhase: (phase: 'start' | 'end' | 'loop') => {
+          const ex = store.getState().exercise;
+          if (!ex) return false;
+          store.getState().applyState({ exercise: { id: ex.id, phase } }, { instant: true });
+          return true;
+        },
+      },
       escape: () => {
         if (isPresenting()) {
           stopPresentation(true);
@@ -375,6 +398,14 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
         }
         if (store.getState().solo !== null) {
           set({ solo: null });
+          return true;
+        }
+        if (store.getState().demo !== null) {
+          set({ demo: null });
+          return true;
+        }
+        if (store.getState().exercise !== null) {
+          set({ exercise: null });
           return true;
         }
         if (ui.getState().reference) {
@@ -413,13 +444,24 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
   return (
     <>
       <Suspense fallback={<StageLoading label={t('space.loading')} />}>
-        <Model3DStage store={store} ui={ui} bridge={bridge} data={file} chapters={chapters} label={t('space.stage')} />
+        <Model3DStage
+          store={store}
+          ui={ui}
+          bridge={bridge}
+          data={file}
+          fitness={(data as SpaceSceneData).fitness}
+          training={(data as SpaceSceneData).training?.exercises}
+          chapters={chapters}
+          label={t('space.stage')}
+          locale={locale}
+        />
       </Suspense>
 
       {presentation.element}
 
       <SceneSlot name="leaders">
         <LeaderLabels file={file} chapters={chapters} bridge={bridge} ui={ui} />
+        <SitesOverlay file={file} bridge={bridge} />
       </SceneSlot>
       <SceneSlot name="card">
         <PartChainCard file={file} />
@@ -440,10 +482,10 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
         <ExplorerOverlay file={file} glossary={((data as SpaceSceneData).glossary?.terms.length ?? 0) > 0} />
       </SceneSlot>
       <SceneSlot name="bottomBar">
-        <ExplorerBar />
+        <ExplorerBar label={file.views.explodeLabel} />
       </SceneSlot>
       <SceneSlot name="inspector">
-        <Inspector file={file} />
+        <Inspector file={file} fitness={(data as SpaceSceneData).fitness} training={(data as SpaceSceneData).training} />
       </SceneSlot>
     </>
   );

@@ -699,3 +699,184 @@ div.space-inspector__detail:not([hidden]) {
   outline: 1px solid var(--signal);
   outline-offset: -1px;
 }
+
+/* ------------------------------------------------------------------ */
+/* glb model: hairline loading bar, failure note                        */
+/* ------------------------------------------------------------------ */
+.space-stage__progress {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(40%, calc(320 * var(--u)));
+  height: 1px;
+  transform: translate(-50%, 0);
+  background: var(--hair);
+  pointer-events: none;
+}
+.space-stage__progress i {
+  position: absolute;
+  inset: 0;
+  background: var(--ink);
+  transform-origin: 0 50%;
+  transition: transform 0.2s linear;
+}
+.space-stage__failed {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: calc(8 * var(--u)) calc(12 * var(--u));
+  border: 1px solid var(--line);
+  background: var(--panel);
+  font: 500 calc(11 * var(--u)) / 1.4 var(--font-hud);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-align: center;
+}
+.space-stage__failed span {
+  display: block;
+  text-transform: none;
+  color: var(--ink-2);
+}
+
+/* ------------------------------------------------------------------ */
+/* Muscle attachment markers (origin hollow, insertion solid)          */
+/* ------------------------------------------------------------------ */
+.space-sites__pull {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1;
+  stroke-dasharray: 5 4;
+  vector-effect: non-scaling-stroke;
+}
+.space-sites__spread {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.4;
+  vector-effect: non-scaling-stroke;
+}
+.space-sites__dot {
+  stroke: var(--ink);
+  stroke-width: 1.2;
+  pointer-events: none;
+}
+.space-sites__mark[data-kind="origin"] .space-sites__dot {
+  fill: var(--bg);
+}
+.space-sites__mark[data-kind="insertion"] .space-sites__dot {
+  fill: var(--ink);
+}
+.space-sites__hit {
+  fill: transparent;
+  stroke: none;
+  pointer-events: auto;
+  cursor: pointer;
+}
+.space-leaders[data-presenting] ~ .space-sites .space-sites__hit {
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------------ */
+/* Muscle sheet tabs and the exercise card                             */
+/* ------------------------------------------------------------------ */
+.space-sheet {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+.space-sheet__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--hair);
+}
+.space-sheet__tab {
+  flex: 1 1 auto;
+  border-radius: 0;
+  border-bottom: 2px solid transparent;
+  font: 500 0.75rem/1 var(--font-hud);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.space-sheet__tab[aria-selected="true"],
+.space-sheet__tab[aria-pressed="true"] {
+  border-bottom-color: var(--signal);
+  color: var(--ink);
+}
+.space-sheet__panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+.space-sheet__block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+.space-sheet__block p,
+.space-sheet__panel > p {
+  margin: 0;
+  line-height: 1.55;
+}
+.space-sheet__list {
+  margin: 0;
+  padding-left: 1.25rem;
+  line-height: 1.5;
+}
+.space-sheet__list li + li {
+  margin-top: 0.25rem;
+}
+.space-sheet__actions {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.space-sheet__actions li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid var(--hair);
+}
+.space-sheet__action small {
+  display: block;
+  color: var(--ink-muted);
+  font-size: 0.8125rem;
+}
+.space-sheet__empty {
+  color: var(--ink-muted);
+}
+.space-sheet__exercises .space-chip small {
+  color: var(--ink-muted);
+  font-size: 0.75rem;
+}
+.space-exercise__meta {
+  margin: 0;
+  font: 500 0.6875rem/1 var(--font-hud);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.space-exercise__sketch {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--hair);
+  background: var(--paper);
+}
+:root[data-theme="cinema"] .space-exercise__sketch {
+  /* Graphite on paper reads as a light drawing on the dark plate. */
+  filter: invert(0.88) hue-rotate(180deg);
+}
+.space-exercise__safety {
+  margin: 0;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--hair);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--ink-muted);
+}

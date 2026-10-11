@@ -8,10 +8,21 @@
  * This module is build-time only (zod); client code imports its *types* only.
  */
 import { z } from 'zod';
-import { bilingual, colorRef, KEBAB_ID, kebabId, level, theme, vec3 } from '../../content/schema/common';
+import { bilingual, colorRef, KEBAB_ID, kebabId, level, theme, vec3, type Bilingual } from '../../content/schema/common';
 import { orbitCamera } from '../../content/schema/camera';
 import { sourcesFile } from '../../content/schema/sources';
 import { glossaryFile } from '../../content/schema/glossary';
+import {
+  contractMap,
+  fitnessBundle,
+  jointAngles,
+  jointName,
+  trainingFile,
+  type FitnessBundle,
+  type JointAngles,
+  type MuscleSheet,
+} from '../../content/schema/fitness';
+import { ACTION_JOINTS, EXERCISE_PHASES, MOVEMENTS, OPPOSITE_MOVEMENTS, otherSideJoint, type Movement } from '../../lib/anatomy';
 import { detailSourceIds } from './lib/detail';
 import { GROUP_LABEL_PREFIX } from './lib/labels';
 import {
@@ -27,6 +38,8 @@ import {
   type Side,
 } from './lib/bilateral';
 import { MAX_POSES, POSE_DURATION } from './lib/pose';
+import { DEFAULT_BULGE, JOINT_PREFIX, jointOf, musclePartIds } from './lib/rig';
+import { MAX_EXPLODE_STAGE } from './lib/explode';
 
 /* ------------------------------------------------------------------ */
 /* Parts                                                               */
@@ -442,20 +455,36 @@ export const repeatSchema = z.union([
 ]);
 export type PartRepeat = z.output<typeof repeatSchema>;
 
+/** Material of a glb part (mesh parts have no primitive to carry one): a family or colour, and an optional family tint. */
+export const partMaterialSchema = z
+  .object({
+    color: z.union([z.enum(MATERIAL_PRESETS), colorRef]),
+    tint: colorRef.optional(),
+  })
+  .strict();
+
 export const partSchema = z
   .object({
     id: kebabId,
     name: bilingual,
+    /** Card and leader-label name when `name` is long (default: the linked muscle's `short`, else `name`). */
+    short: bilingual.optional(),
     /** Required, except for `context` parts (which may stand outside every group). */
     group: kebabId.optional(),
-    summary: bilingual,
+    /** Required, except for parts that link a `muscle` (then the muscle sheet's). */
+    summary: bilingual.optional(),
     /**
      * "Tell me more" text. Blank lines (`\n\n`) split paragraphs; `[S3]` or
-     * `[S3, S7]` cite data/sources.json and render as source superscripts.
+     * `[S3, S7]` cite data/sources.json (`[M3]` a shared source) and render as
+     * source superscripts. Default for a `muscle` part: the muscle sheet's.
      */
-    detail: bilingual,
-    /** Mesh name inside a glb model; the name is the part id's counterpart. */
+    detail: bilingual.optional(),
+    /** Node name inside the glb model (`model`); docs/16 §2: the part id + `.l` / `.r`. */
     mesh: z.string().min(1).optional(),
+    /** Material of a glb-only part (required without a `primitive`). */
+    material: partMaterialSchema.optional(),
+    /** Shared muscle sheet this part shows (src/content/shared/fitness): the inspector's four tabs. */
+    muscle: kebabId.optional(),
     primitive: primitiveSchema.optional(),
     /**
      * More primitives belonging to the same part (`at` in scene coordinates,
@@ -466,8 +495,14 @@ export const partSchema = z
     extra: z.array(primitiveSchema).min(1).max(MAX_EXTRA_PRIMITIVES).optional(),
     /** Instanced copies of the primitive (see repeatSchema). */
     repeat: repeatSchema.optional(),
-    /** Exploded-view move (dir is normalised). Default: none (context parts never move). */
-    explode: z.object({ dir: vec3, dist: z.number().nonnegative() }).strict().default({ dir: [0, 1, 0], dist: 0 }),
+    /**
+     * Exploded-view move (dir is normalised). Default: none (context parts never move).
+     * `stage` (0–3): peel in layers, stage 0 moving first (lib/explode.ts `stagedAmount`).
+     */
+    explode: z
+      .object({ dir: vec3, dist: z.number().nonnegative(), stage: z.number().int().min(0).max(MAX_EXPLODE_STAGE).optional() })
+      .strict()
+      .default({ dir: [0, 1, 0], dist: 0 }),
     connects: z.array(kebabId).default([]),
     /**
      * Outer skin (casing, cover, insulation): in X-RAY only parts flagged
@@ -488,7 +523,9 @@ export const partSchema = z
      * twin `<id>-r` (`<id>-l` when `side: right`), reflected in the plane through
      * the origin normal to `axis` (default z), with mirrored explode, animations,
      * pose entries and `connects`. `true` = `{ axis: z, side: left }`;
-     * `labelBoth`: leader labels name both sides (default: this side only).
+     * `labelBoth`: leader labels name both sides (default: this side only);
+     * `mesh`: the twin draws this glb node (the real other side) instead of a
+     * mirror image of this part's geometry.
      */
     bilateral: z
       .union([
@@ -498,6 +535,7 @@ export const partSchema = z
             axis: z.enum(['x', 'y', 'z']).optional(),
             side: z.enum(['left', 'right']).optional(),
             labelBoth: z.boolean().optional(),
+            mesh: z.string().min(1).optional(),
           })
           .strict(),
       ])
@@ -509,6 +547,18 @@ export const partSchema = z
   .refine((p) => p.mesh !== undefined || p.primitive !== undefined, {
     message: 'a part needs either `mesh` or `primitive`',
     path: ['primitive'],
+  })
+  .refine((p) => p.primitive !== undefined || p.material !== undefined, {
+    message: 'a glb-only part needs a `material` ({ color, tint? })',
+    path: ['material'],
+  })
+  .refine((p) => p.muscle !== undefined || (p.summary !== undefined && p.detail !== undefined), {
+    message: 'a part needs `summary` and `detail` (only parts that link a `muscle` may leave them to the muscle sheet)',
+    path: ['summary'],
+  })
+  .refine((p) => typeof p.bilateral !== 'object' || p.bilateral.mesh === undefined || p.mesh !== undefined, {
+    message: '`bilateral.mesh` pairs a glb node with this part\'s own `mesh`',
+    path: ['bilateral', 'mesh'],
   })
   .refine((p) => p.extra === undefined || p.primitive !== undefined, {
     message: '`extra` needs a main `primitive`',
@@ -532,7 +582,8 @@ export interface PairInfo {
   pair?: string;
   twinOf?: string;
 }
-export type Part = z.output<typeof partSchema> & PairInfo;
+/** A part after the build: `summary` and `detail` filled in (from the muscle sheet where the data leaves them out). */
+export type Part = Omit<z.output<typeof partSchema>, 'summary' | 'detail'> & { summary: Bilingual; detail: Bilingual } & PairInfo;
 
 /* ------------------------------------------------------------------ */
 /* Groups, flows, animations, views                                    */
@@ -611,9 +662,14 @@ export const flowSchema = z
   });
 export type Flow = z.output<typeof flowSchema>;
 
+/** A rig joint as an animation / pose target: `joint:shoulder.l`. */
+export const jointRef = z.string().refine((v) => v.startsWith(JOINT_PREFIX) && jointName.safeParse(v.slice(JOINT_PREFIX.length)).success, {
+  message: 'joint:<name>, e.g. joint:elbow.l',
+});
+
 const animationBase = {
   id: kebabId,
-  /** Part id to animate. */
+  /** Part id to animate (a `sequence` may also drive a rig joint: `joint:<name>`). */
   target: kebabId,
   whenRun: z.boolean().default(true),
   /** Point the motion turns / scales about, scene coordinates (a joint); default the part centre. */
@@ -630,7 +686,14 @@ const transformFields = {
   fan: z.number().min(0).max(1).optional(),
 };
 
-export const sequenceKeySchema = z.object({ t: z.number().nonnegative(), ...transformFields }).strict();
+/**
+ * A keyframe: a transform for a part, or for a `joint:<name>` target its
+ * `angles` (`{ movement: degrees }`); `contract` (0..1) contracts a part along
+ * its fibres at that key.
+ */
+export const sequenceKeySchema = z
+  .object({ t: z.number().nonnegative(), ...transformFields, angles: jointAngles.optional(), contract: z.number().min(0).max(1).optional() })
+  .strict();
 export type SequenceKeyData = z.output<typeof sequenceKeySchema>;
 
 export const animationSchema = z.discriminatedUnion('kind', [
@@ -654,12 +717,29 @@ export const animationSchema = z.discriminatedUnion('kind', [
     /**
      * Keyframe clip: `keys` (t in seconds, ascending, ≤ 32) eased key to key;
      * `loop` (default) repeats it, else it plays once per run and holds the last key.
+     * Aimed at `joint:<name>`, its keys carry `angles`.
      */
     .object({
       ...animationBase,
+      target: z.union([kebabId, jointRef]),
       kind: z.literal('sequence'),
       keys: z.array(sequenceKeySchema).min(2).max(32),
       loop: z.boolean().default(true),
+    })
+    .strict(),
+  z
+    /**
+     * A muscle contracting along its fibres (docs/16 §6.4): 0 → `amount` → 0 at
+     * `hz`, shortening up to 20 % and swelling by `bulge` × its thickness, with
+     * moving signal stripes; needs the glb's `_U` / `_FIBRE` attributes
+     * (without them the part scales instead).
+     */
+    .object({
+      ...animationBase,
+      kind: z.literal('contract'),
+      amount: z.number().min(0).max(1).default(0.7),
+      bulge: z.number().min(0).max(0.3).default(DEFAULT_BULGE),
+      hz: z.number().positive().max(4),
     })
     .strict(),
 ]);
@@ -717,6 +797,8 @@ export const viewsSchema = z
     section: z.object({ plane: z.enum(SECTION_PLANES) }).strict().optional(),
     /** Optional REFERENCE camera; default: a long-lens straight view on the section plane. */
     reference: viewPreset.optional(),
+    /** Name of the EXPLODED mode and slider in this topic (e.g. PEEL / 剥层 for staged muscle layers). */
+    explodeLabel: bilingual.optional(),
     /**
      * Optional cover camera `{ position, target, fov? }`: where the camera goes
      * while the HUD is hidden (H, `hero-clean` shots); default: the current
@@ -796,27 +878,100 @@ export const poseEntrySchema = z.object({ pivot: vec3.optional(), ...transformFi
 export type PoseEntry = z.output<typeof poseEntrySchema>;
 
 /**
- * A pose: `{ "<part id>": entry, …, "duration"?: seconds }` (`duration` is
- * reserved: the transition into the pose, default 0.8 s). Parsed into
- * `{ duration, parts }`.
+ * A pose: `{ "<part id>": entry, …, "joint:<name>": { movement: degrees }, …,
+ * "contract": { "<part id>": 0..1 }, "duration"?: seconds }` (`duration` and
+ * `contract` are reserved keys: the transition into the pose, default 0.8 s,
+ * and how far the named muscle parts are contracted). Parsed into
+ * `{ duration, parts, joints, contract }`.
  */
 export const poseSchema = z
-  .record(z.string(), z.union([z.number(), poseEntrySchema]))
+  .record(z.string(), z.unknown())
   .superRefine((r, ctx) => {
+    const issue = (key: string, message: string) => ctx.addIssue({ code: z.ZodIssueCode.custom, path: [key], message });
     for (const [key, value] of Object.entries(r)) {
       if (key === 'duration') {
-        if (typeof value !== 'number' || value < 0 || value > 10)
-          ctx.addIssue({ code: z.ZodIssueCode.custom, path: [key], message: '`duration` is the transition in seconds (0–10)' });
-      } else if (!KEBAB_ID.test(key)) ctx.addIssue({ code: z.ZodIssueCode.custom, path: [key], message: 'a part id (kebab-case)' });
-      else if (typeof value === 'number') ctx.addIssue({ code: z.ZodIssueCode.custom, path: [key], message: 'a pose entry `{ pivot?, rotation?, offset?, scale?, fan? }`' });
+        if (typeof value !== 'number' || value < 0 || value > 10) issue(key, '`duration` is the transition in seconds (0–10)');
+      } else if (key === 'contract') {
+        const c = contractMap.safeParse(value);
+        if (!c.success) issue(key, '`contract` maps part ids to 0..1');
+      } else if (jointOf(key) !== null) {
+        if (!jointRef.safeParse(key).success) issue(key, 'joint:<name>, e.g. joint:elbow.l');
+        else if (!jointAngles.safeParse(value).success) issue(key, 'joint angles `{ movement: degrees }`, e.g. { "flexion": 90 }');
+      } else if (!KEBAB_ID.test(key)) issue(key, 'a part id (kebab-case) or joint:<name>');
+      else if (!poseEntrySchema.safeParse(value).success) issue(key, 'a pose entry `{ pivot?, rotation?, offset?, scale?, fan? }`');
     }
   })
   .transform((r) => {
     const parts: Record<string, PoseEntry> = {};
-    for (const [key, value] of Object.entries(r)) if (key !== 'duration' && typeof value !== 'number') parts[key] = value;
-    return { duration: typeof r.duration === 'number' ? r.duration : POSE_DURATION, parts };
+    const joints: Record<string, JointAngles> = {};
+    let contract: Record<string, number> = {};
+    for (const [key, value] of Object.entries(r)) {
+      if (key === 'duration') continue;
+      if (key === 'contract') contract = contractMap.parse(value);
+      else {
+        const joint = jointOf(key);
+        if (joint !== null) joints[joint] = jointAngles.parse(value);
+        else parts[key] = poseEntrySchema.parse(value);
+      }
+    }
+    return { duration: typeof r.duration === 'number' ? r.duration : POSE_DURATION, parts, joints, contract };
   });
 export type Pose = z.output<typeof poseSchema>;
+
+/**
+ * A rig joint (docs/16 §5): the glb bone `node` it turns, and per movement
+ * the rotation axis in scene coordinates at rest (positive = that movement
+ * on that side of the body; the opposite movement uses it negated). Angles
+ * apply in the order the axes are listed.
+ */
+export const rigJointSchema = z
+  .object({
+    node: z.string().min(1),
+    axes: z
+      .record(z.enum(MOVEMENTS), vec3)
+      .refine((r) => Object.keys(r).length > 0, { message: 'a joint needs at least one axis' })
+      .refine((r) => Object.values(r).every((v) => Math.hypot(...v) > 1e-9), { message: 'axes must not be zero' })
+      .refine((r) => !(Object.keys(r) as Movement[]).some((m) => OPPOSITE_MOVEMENTS[m] !== undefined && OPPOSITE_MOVEMENTS[m]! in r), {
+        message: 'give one axis per pair of opposite movements (flexion or extension, not both)',
+      })
+      .refine((r) => !('stabilisation' in r), { message: '`stabilisation` is not an axis' }),
+  })
+  .strict();
+export type RigJoint = z.output<typeof rigJointSchema>;
+
+/** Most joints a rig may declare. */
+export const MAX_RIG_JOINTS = 64;
+
+export const rigSchema = z
+  .object({
+    joints: z
+      .record(jointName, rigJointSchema)
+      .refine((r) => Object.keys(r).length <= MAX_RIG_JOINTS, { message: `at most ${MAX_RIG_JOINTS} joints` }),
+    /**
+     * Angles the muscle sheet's ACTIONS "demo" buttons swing to, per action
+     * joint (`shoulder`, `elbow` …, no side) and movement (default 60°).
+     */
+    demo: z.record(z.enum(ACTION_JOINTS), jointAngles).optional(),
+  })
+  .strict();
+export type Rig = z.output<typeof rigSchema>;
+
+/**
+ * Where a muscle attaches (docs/16 §6.3): origin or insertion on `bone` (a
+ * part id), as 1–8 points in scene coordinates (several for a broad
+ * attachment). `muscle` is the muscle's part id. Drawn as hollow (origin) /
+ * solid (insertion) dots with a dashed line of pull between their centroids,
+ * following the bone as it moves.
+ */
+export const siteSchema = z
+  .object({
+    muscle: kebabId,
+    kind: z.enum(['origin', 'insertion']),
+    bone: kebabId,
+    points: z.array(vec3).min(1).max(8),
+  })
+  .strict();
+export type Site = z.output<typeof siteSchema>;
 
 /** Real-world units: one scene unit is `scale` `modelUnit` (lib/units.ts). */
 export const unitsSchema = z.object({ modelUnit: z.enum(['mm', 'cm', 'm']), scale: positive }).strict();
@@ -843,13 +998,17 @@ export const partsFileBase = z
     telemetry: z.array(telemetrySchema).min(1).max(MAX_TELEMETRY_ROWS).optional(),
     /** Named camera presets (≤ 6; see cameraPresetSchema). */
     presets: z.array(cameraPresetSchema).min(1).max(MAX_NAMED_PRESETS).optional(),
-    /** Named poses (≤ 8; see poseSchema): a chapter or beat `pose: "<name>"` eases the parts into one. */
+    /** Named poses (≤ 32; see poseSchema): a chapter or beat `pose: "<name>"` eases the parts into one. */
     poses: z
       .record(kebabId, poseSchema)
       .refine((r) => Object.keys(r).length <= MAX_POSES, { message: `at most ${MAX_POSES} poses` })
       .optional(),
     /** Real-world units of the model (see unitsSchema); default: scene units. */
     units: unitsSchema.optional(),
+    /** Joints of the glb skeleton that poses, clips and exercises turn (see rigSchema). */
+    rig: rigSchema.optional(),
+    /** Muscle attachments (see siteSchema). */
+    sites: z.array(siteSchema).max(256).optional(),
   })
   .strict()
   .superRefine((file, ctx) => {
@@ -878,19 +1037,37 @@ export const partsFileBase = z
       if (file.groups.findIndex((x) => x.id === g.id) !== i)
         ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['groups', i, 'id'], message: `duplicate group "${g.id}"` });
     });
+    const joints = new Set(Object.keys(file.rig?.joints ?? {}));
+    const noJoint = (path: (string | number)[], name: string) =>
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path, message: file.rig ? `unknown joint "${name}" (not in rig.joints)` : `joint "${name}": parts.json has no \`rig\`` });
     Object.entries(file.poses ?? {}).forEach(([name, pose]) => {
       for (const [id, entry] of Object.entries(pose.parts)) {
         if (!parts.has(id)) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['poses', name, id], message: `unknown part "${id}"` });
         else if (entry.fan !== undefined && !folds(id))
           ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['poses', name, id, 'fan'], message: `"${id}" has no folding wing (\`wing\` with \`fold\`)` });
       }
+      for (const joint of Object.keys(pose.joints)) if (!joints.has(joint)) noJoint(['poses', name, `${JOINT_PREFIX}${joint}`], joint);
+      for (const id of Object.keys(pose.contract)) if (!parts.has(id)) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['poses', name, 'contract', id], message: `unknown part "${id}"` });
     });
+    (file.sites ?? []).forEach((site, i) => {
+      for (const field of ['muscle', 'bone'] as const)
+        if (!parts.has(site[field])) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['sites', i, field], message: `unknown part "${site[field]}"` });
+    });
+    if (file.rig && file.model === undefined) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['rig'], message: 'a rig turns the bones of a glb skeleton: add `model`' });
     file.animations.forEach((a, i) => {
       if (a.kind !== 'sequence') return;
+      const joint = jointOf(a.target);
       a.keys.forEach((k, j) => {
         const prev = a.keys[j - 1];
         if (prev && k.t <= prev.t) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['animations', i, 'keys', j, 't'], message: 'key times must increase' });
+        if (joint !== null && (k.angles === undefined || k.rotation || k.offset || k.scale !== undefined || k.fan !== undefined || k.contract !== undefined))
+          ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['animations', i, 'keys', j], message: 'a joint clip\'s keys give `angles` only' });
+        if (joint === null && k.angles !== undefined) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['animations', i, 'keys', j, 'angles'], message: '`angles` belong to a joint:<name> clip' });
       });
+      if (joint !== null) {
+        if (!joints.has(joint)) noJoint(['animations', i, 'target'], joint);
+        return;
+      }
       const fans = a.keys.filter((k) => k.fan !== undefined).length;
       if (fans > 0 && fans < a.keys.length) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['animations', i, 'keys'], message: 'give `fan` in every key or in none' });
       else if (fans > 0 && parts.has(a.target) && !folds(a.target))
@@ -932,7 +1109,7 @@ export const partsFileBase = z
       });
     }
     file.animations.forEach((a, i) => {
-      if (!parts.has(a.target)) {
+      if (jointOf(a.target) === null && !parts.has(a.target)) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           path: ['animations', i, 'target'],
@@ -946,10 +1123,16 @@ type FlowData = z.output<typeof flowSchema>;
 
 /**
  * Expand bilateral parts and flows (lib/bilateral.ts): each twin follows its
- * part; animations aimed at a bilateral part get a mirrored copy aimed at the
- * twin (`<animation id>-r`), poses a mirrored entry for the twin (unless the
- * pose names the twin itself), `connects` to other bilateral parts point at
- * the same side. Runs at build time, so data.json carries the twins.
+ * part (or draws its own glb node, `bilateral.mesh`); animations aimed at a
+ * bilateral part get a mirrored copy aimed at the twin (`<animation id>-r`),
+ * poses a mirrored entry for the twin (unless the pose names the twin
+ * itself), `connects` to other bilateral parts point at the same side, a
+ * pose's `contract` covers both sides and a part's `sites` are mirrored for
+ * its twin (unless the data lists the twin's own). Rig joints on the left
+ * (`<name>.l`) also drive their right counterpart (`<name>.r`, when the rig
+ * has it and the pose or clip does not name it): the rig's axes are
+ * anatomical, so the same angles make the mirror movement. Runs at build
+ * time, so data.json carries the twins.
  */
 export function expandBilateral(file: PartsFileInput): Omit<PartsFileInput, 'parts'> & { parts: Part[] } {
   const specs = new Map<string, BilateralSpec>();
@@ -957,13 +1140,15 @@ export function expandBilateral(file: PartsFileInput): Omit<PartsFileInput, 'par
     const spec = bilateralSpec(p.bilateral);
     if (spec) specs.set(p.id, spec);
   }
-  if (specs.size === 0 && !file.flows.some((f) => f.bilateral)) return file;
+  const rigJoints = new Set(Object.keys(file.rig?.joints ?? {}));
+  const rightOf = (joint: string) => (joint.endsWith('.l') && rigJoints.has(otherSideJoint(joint)) ? otherSideJoint(joint) : null);
+  if (specs.size === 0 && !file.flows.some((f) => f.bilateral) && rigJoints.size === 0) return file as Omit<PartsFileInput, 'parts'> & { parts: Part[] };
   const twinOf = (id: string) => {
     const spec = specs.get(id);
     return spec ? twinId(id, spec) : id;
   };
   const parts: Part[] = [];
-  for (const p of file.parts) {
+  for (const p of file.parts as Part[]) {
     const spec = specs.get(p.id);
     if (!spec) {
       parts.push(p);
@@ -978,6 +1163,7 @@ export function expandBilateral(file: PartsFileInput): Omit<PartsFileInput, 'par
       side: otherSide(spec.side),
       pair: p.id,
       twinOf: p.id,
+      ...(spec.mesh ? { mesh: spec.mesh } : {}),
       ...(p.primitive ? { primitive: mirrorPrimitive(p.primitive, axis) } : {}),
       ...(p.extra ? { extra: p.extra.map((e) => mirrorPrimitive(e, axis)) } : {}),
       ...(p.repeat ? { repeat: mirrorRepeat(p.repeat, axis) } : {}),
@@ -987,8 +1173,11 @@ export function expandBilateral(file: PartsFileInput): Omit<PartsFileInput, 'par
   }
   const animations = file.animations.flatMap((a) => {
     const spec = specs.get(a.target);
-    if (!spec) return [a];
-    return [a, mirrorAnimation(a, spec.axis, twinId(a.id, spec), twinOf(a.target))];
+    if (spec) return [a, mirrorAnimation(a, spec.axis, twinId(a.id, spec), twinOf(a.target))];
+    const joint = jointOf(a.target);
+    const right = joint !== null ? rightOf(joint) : null;
+    if (right === null || file.animations.some((b) => b.target === `${JOINT_PREFIX}${right}`)) return [a];
+    return [a, { ...a, id: `${a.id}-r`, target: `${JOINT_PREFIX}${right}` }];
   });
   const flows = file.flows.flatMap((f): FlowData[] => {
     const spec = bilateralSpec(f.bilateral);
@@ -1005,37 +1194,98 @@ export function expandBilateral(file: PartsFileInput): Omit<PartsFileInput, 'par
             const spec = specs.get(id);
             if (spec && out[twinOf(id)] === undefined) out[twinOf(id)] = mirrorTransform(entry, spec.axis);
           }
-          return [name, { ...pose, parts: out }];
+          const joints = { ...pose.joints };
+          for (const [joint, angles] of Object.entries(pose.joints)) {
+            const right = rightOf(joint);
+            if (right !== null && joints[right] === undefined) joints[right] = angles;
+          }
+          const contract = { ...pose.contract };
+          for (const [id, c] of Object.entries(pose.contract)) if (specs.has(id) && contract[twinOf(id)] === undefined) contract[twinOf(id)] = c;
+          return [name, { ...pose, parts: out, joints, contract }];
         }),
       )
     : undefined;
-  return { ...file, parts, animations, flows, ...(poses ? { poses } : {}) };
+  const sites = file.sites?.flatMap((site) => {
+    const spec = specs.get(site.muscle);
+    if (!spec || file.sites!.some((o) => o.muscle === twinOf(site.muscle) && o.kind === site.kind)) return [site];
+    return [site, { ...site, muscle: twinOf(site.muscle), bone: twinOf(site.bone), points: site.points.map((q) => mirrorPoint(q, spec.axis)) }];
+  });
+  return { ...file, parts, animations, flows, ...(poses ? { poses } : {}), ...(sites ? { sites } : {}) };
 }
 
 export const partsFile = partsFileBase.transform(expandBilateral);
 export type PartsFile = z.output<typeof partsFile>;
 
-/** Parsed `data/*.json` of a SpaceScene topic, keyed by file name. */
-/** `parts.json`, plus the optional shared `sources.json` (content/schema/sources.ts). */
+/**
+ * Parsed `data/*.json` of a SpaceScene topic, keyed by file name: `parts.json`,
+ * the optional `sources.json` and `glossary.json` (content/schema), a muscle
+ * topic's `training.json` and the shared fitness data the build merged in
+ * (`fitness`, content/schema/fitness.ts `withSharedFitness`). Parts that link a
+ * `muscle` take its summary, detail and short name unless they give their own.
+ */
 export const spaceSceneData = z
-  .object({ parts: partsFile, sources: sourcesFile.optional(), glossary: glossaryFile.optional() })
+  .object({
+    parts: partsFile,
+    sources: sourcesFile.optional(),
+    glossary: glossaryFile.optional(),
+    training: trainingFile.optional(),
+    fitness: fitnessBundle.optional(),
+  })
   .strict()
   .superRefine((data, ctx) => {
-    // `[S#]` markers in part details must cite data/sources.json.
+    const issue = (path: (string | number)[], message: string) => ctx.addIssue({ code: z.ZodIssueCode.custom, path, message });
+    // `[S#]` markers in part details must cite data/sources.json, `[M#]` the shared sources.
     const known = new Set((data.sources?.sources ?? []).map((s) => s.id));
+    const shared = new Set((data.fitness?.sources ?? []).map((s) => s.id));
+    const muscles = new Map((data.fitness?.muscles ?? []).map((m) => [m.id, m]));
+    const exercises = new Map((data.fitness?.exercises ?? []).map((e) => [e.id, e]));
+    const parentOf = new Map([...muscles.values()].map((m) => [m.id, m.parent]));
     data.parts.parts.forEach((p, i) => {
+      if (p.twinOf) return;
       for (const lang of ['en', 'zh'] as const) {
-        for (const id of detailSourceIds(p.detail[lang])) {
-          if (known.has(id)) continue;
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            path: ['parts', 'parts', i, 'detail', lang],
-            message: data.sources ? `[${id}]: unknown source (not in data/sources.json)` : `[${id}]: the topic has no data/sources.json`,
-          });
+        for (const id of detailSourceIds(p.detail?.[lang] ?? '')) {
+          if (id.startsWith('M')) {
+            if (!shared.has(id)) issue(['parts', 'parts', i, 'detail', lang], `[${id}]: unknown shared source (not in shared/fitness/sources.json)`);
+          } else if (!known.has(id)) {
+            issue(['parts', 'parts', i, 'detail', lang], data.sources ? `[${id}]: unknown source (not in data/sources.json)` : `[${id}]: the topic has no data/sources.json`);
+          }
         }
       }
+      if (p.muscle !== undefined && !muscles.has(p.muscle))
+        issue(['parts', 'parts', i, 'muscle'], data.fitness ? `unknown muscle "${p.muscle}" (not in src/content/shared/fitness/muscles)` : `muscle "${p.muscle}": no shared fitness data was merged`);
     });
+    if (data.training && !data.fitness) issue(['training'], 'training.json needs the shared fitness data (src/content/shared/fitness)');
+    const rig = data.parts.rig?.joints ?? {};
+    data.training?.exercises.forEach((id, i) => {
+      const e = exercises.get(id);
+      if (!e) {
+        issue(['training', 'exercises', i], `unknown exercise "${id}" (not in src/content/shared/fitness/exercises)`);
+        return;
+      }
+      if (!e.primary.some((m) => musclePartIds(data.parts.parts, m, parentOf).length > 0))
+        issue(['training', 'exercises', i], `"${id}": none of its primary muscles (${e.primary.join(', ')}) is a part of this topic`);
+      e.motion?.keys.forEach((k, j) => {
+        for (const joint of Object.keys(k.joints))
+          if (!(joint in rig)) issue(['training', 'exercises', i], `"${id}" motion.keys.${j}: joint "${joint}" is not in this topic's rig`);
+      });
+    });
+    data.training?.session?.blocks.forEach((b, i) => {
+      if (!data.training!.exercises.includes(b.exercise)) issue(['training', 'session', 'blocks', i, 'exercise'], `"${b.exercise}" is not in training.exercises`);
+    });
+  })
+  .transform((data) => {
+    const muscles = new Map((data.fitness?.muscles ?? []).map((m) => [m.id, m]));
+    if (muscles.size === 0) return data;
+    const fill = (p: Part): Part => {
+      const m: MuscleSheet | undefined = p.muscle ? muscles.get(p.muscle) : undefined;
+      if (!m) return p;
+      const short = p.short ?? m.short;
+      return { ...p, summary: p.summary ?? m.summary, detail: p.detail ?? m.detail, ...(short ? { short } : {}) };
+    };
+    return { ...data, parts: { ...data.parts, parts: data.parts.parts.map(fill) } };
   });
+/** Shared fitness data as merged into a topic (the type the client sees). */
+export type { FitnessBundle };
 export type SpaceSceneData = z.output<typeof spaceSceneData>;
 
 /* ------------------------------------------------------------------ */
@@ -1063,6 +1313,28 @@ export const MAX_BEAT_LABELS = 6;
 /** `none`, `half` (the default plane, `views.cutaway`) or the name of a cut in `views.cuts`. */
 export const cutawayRef = kebabId;
 
+/**
+ * Exercise mode (docs/16 §6.5): a shared exercise of the topic's
+ * training.json; `phase` holds its `start` or `end` key, or `loop`s through
+ * them at its tempo (default `loop`). `null`: none.
+ */
+export const exerciseRef = z.object({ id: kebabId, phase: z.enum(EXERCISE_PHASES).default('loop') }).strict();
+export type ExerciseRef = z.output<typeof exerciseRef>;
+
+/** Parts (or groups) tinted in the signal colour (prime movers) and the cold colour (synergists). */
+export const highlightSchema = z.object({ signal: z.array(kebabId).default([]), cold: z.array(kebabId).default([]) }).strict();
+export type Highlight = z.output<typeof highlightSchema>;
+
+/** Fields a chapter state and a beat share for the muscle topics (each not cumulative). */
+const muscleStateFields = {
+  /** Exercise mode (see exerciseRef); `null` = none. */
+  exercise: exerciseRef.nullable().optional(),
+  /** Tints (see highlightSchema). */
+  highlight: highlightSchema.nullable().optional(),
+  /** Muscle parts whose origin / insertion markers show (parts.json `sites`). */
+  sites: z.array(kebabId).optional(),
+};
+
 export const spaceBeat = z
   .object({
     view: z.enum(SPACE_VIEWS).optional(),
@@ -1078,6 +1350,7 @@ export const spaceBeat = z
     pose: kebabId.nullable().optional(),
     /** Groups (or parts) drawn faint for this beat (not cumulative); default the chapter's. */
     ghost: z.array(kebabId).optional(),
+    ...muscleStateFields,
     caption: bilingual,
     audio: z
       .string()
@@ -1126,6 +1399,7 @@ export const spaceChapterState = z
     summary: bilingual.optional(),
     /** The child's question for this chapter (reading panel header when there is no `summary`). */
     question: bilingual.optional(),
+    ...muscleStateFields,
     /** PRESENTATION beats for this chapter; default = one beat (the chapter's state, `summary` as caption). */
     beats: z.array(spaceBeat).min(1).optional(),
   })
@@ -1166,7 +1440,12 @@ export function spaceChapterIssues(state: SpaceChapterState, data: SpaceSceneDat
   const out: string[] = [];
   const poses = new Set(Object.keys(f.poses ?? {}));
   const cuts = new Set(['none', 'half', ...Object.keys(f.views.cuts ?? {})]);
-  const check = (where: string, s: Pick<SpaceBeat, 'part' | 'hide' | 'labels' | 'layers' | 'pose' | 'ghost' | 'cutaway'> & { camera?: unknown }) => {
+  const training = new Set(data.training?.exercises ?? []);
+  const sited = new Set((f.sites ?? []).map((x) => x.muscle));
+  const check = (
+    where: string,
+    s: Pick<SpaceBeat, 'part' | 'hide' | 'labels' | 'layers' | 'pose' | 'ghost' | 'cutaway' | 'exercise' | 'highlight' | 'sites'> & { camera?: unknown },
+  ) => {
     const part = (field: string, id: string, selectable: boolean) => {
       const p = parts.get(id);
       if (!p) out.push(`${where}${field}: unknown part "${id}"`);
@@ -1184,6 +1463,10 @@ export function spaceChapterIssues(state: SpaceChapterState, data: SpaceSceneDat
     if (s.cutaway !== undefined && !cuts.has(s.cutaway)) out.push(`${where}cutaway: unknown cut "${s.cutaway}" (none, half or a views.cuts name)`);
     if (typeof s.camera === 'string' && !presets.has(s.camera))
       out.push(`${where}camera: unknown preset "${s.camera}" (not in parts.json presets)`);
+    if (s.exercise && !training.has(s.exercise.id)) out.push(`${where}exercise: "${s.exercise.id}" is not in data/training.json exercises`);
+    for (const id of [...(s.highlight?.signal ?? []), ...(s.highlight?.cold ?? [])])
+      if (!groups.has(id) && !parts.has(id)) out.push(`${where}highlight: unknown group or part "${id}"`);
+    for (const id of s.sites ?? []) if (!sited.has(id)) out.push(`${where}sites: "${id}" has no sites in parts.json`);
   };
   check('state.', state);
   state.beats?.forEach((b, i) => check(`state.beats.${i}.`, b));

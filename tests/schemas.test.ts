@@ -1,4 +1,6 @@
 import { readFileSync, readdirSync } from 'node:fs';
+import { withSharedFitness } from '../src/content/schema/fitness';
+import { readSharedFitness } from '../scripts/lib/shared-data';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { parse as parseYaml } from 'yaml';
@@ -12,13 +14,15 @@ import { mathChapterState, mathSceneData, frac } from '../src/engines/math-scene
 
 const TOPICS = join(import.meta.dirname, '../src/content/topics');
 
+/** A topic's data/*.json with the shared data it uses merged in (as the build does). */
 function loadData(slug: string): Record<string, unknown> {
   const dir = join(TOPICS, slug, 'data');
-  return Object.fromEntries(
+  const raw = Object.fromEntries(
     readdirSync(dir)
       .filter((f) => f.endsWith('.json'))
       .map((f) => [f.replace(/\.json$/, ''), JSON.parse(readFileSync(join(dir, f), 'utf8'))]),
   );
+  return withSharedFitness(raw, readSharedFitness(join(TOPICS, '../shared')));
 }
 
 function loadChapters(slug: string): unknown[] {
@@ -241,11 +245,13 @@ describe('sample-space topic', () => {
 
   it('engine data parses', () => {
     const data = spaceSceneData.parse(loadData('sample-space'));
-    expect(data.parts.parts).toHaveLength(22);
+    // 21 numbered parts, 3 mirrored twins and 3 glb twins (`bilateral.mesh`), the wall.
+    expect(data.parts.parts).toHaveLength(28);
     expect(data.parts.parts.filter((p) => p.context)).toHaveLength(1);
-    expect(data.parts.groups).toHaveLength(4);
+    expect(data.parts.groups).toHaveLength(5);
     expect(data.parts.flows).toHaveLength(2);
-    expect(data.parts.animations).toHaveLength(5);
+    // 6 written + the leg's and the flexor's mirrored copies + the shoulder clip's right-side copy.
+    expect(data.parts.animations).toHaveLength(9);
   });
 
   it('chapters and their states parse', () => {

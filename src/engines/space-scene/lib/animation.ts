@@ -6,6 +6,7 @@
  *   pulse      scale "breathing" between 1 and `scale` (a number, or [sx, sy, sz]
  *              per axis), `hz` breaths/s
  *   sequence   keyframe clip (lib/pose.ts `sampleSequence`), looping or once
+ *   contract   a muscle shortening along its fibres (lib/rig.ts; the stage's MotionDriver)
  *
  * The axis is in the part's parent frame and passes through the part centre,
  * or through `pivot` (scene coordinates: a jaw or knee joint).
@@ -69,7 +70,7 @@ export function animationScale3(anim: PartAnimation, phase: number, energy: numb
  */
 export function animationPose(anim: PartAnimation, phase: number, energy = 1): AnimationPose {
   if (anim.kind === 'pulse') return { ...IDENTITY, scale: animationScale(anim, phase, energy) };
-  if (anim.kind === 'sequence') return IDENTITY;
+  if (anim.kind === 'sequence' || anim.kind === 'contract') return IDENTITY;
   return { axis: normalize3(anim.axis), angle: animationAngle(anim, phase, energy), scale: 1 };
 }
 

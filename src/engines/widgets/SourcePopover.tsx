@@ -28,11 +28,16 @@ export function SourceRefs({ ids, locale }: { ids: readonly string[]; locale: Lo
   );
 }
 
-/** Sources of a topic from its parsed engine data (any engine; empty when the topic has none). */
+/**
+ * Sources of a topic from its parsed engine data (any engine; empty when the
+ * topic has none): its own `S#`, then the shared `M#` merged in with shared
+ * data (`fitness.sources`).
+ */
 export function topicSources(data: unknown): readonly SourceEntry[] {
-  if (!data || typeof data !== 'object' || !('sources' in data)) return [];
-  const file = (data as { sources?: { sources?: SourceEntry[] } }).sources;
-  return file?.sources ?? [];
+  if (!data || typeof data !== 'object') return [];
+  const own = (data as { sources?: { sources?: SourceEntry[] } }).sources?.sources ?? [];
+  const shared = (data as { fitness?: { sources?: SourceEntry[] } }).fitness?.sources ?? [];
+  return shared.length ? [...own, ...shared] : own;
 }
 
 const GAP = 6;

@@ -27,14 +27,16 @@ export interface BilateralSpec {
   side: Side;
   /** Leader labels name both sides (one placard each); default: the data side only. */
   labelBoth: boolean;
+  /** The twin's own glb node (a real other side, not a mirror image); undefined = mirror. */
+  mesh?: string | undefined;
 }
 
-export type BilateralInput = true | { axis?: MirrorAxis; side?: Side; labelBoth?: boolean } | undefined;
+export type BilateralInput = true | { axis?: MirrorAxis | undefined; side?: Side | undefined; labelBoth?: boolean | undefined; mesh?: string | undefined } | undefined;
 
 export function bilateralSpec(b: BilateralInput): BilateralSpec | null {
   if (b === undefined) return null;
   if (b === true) return { axis: 'z', side: 'left', labelBoth: false };
-  return { axis: b.axis ?? 'z', side: b.side ?? 'left', labelBoth: b.labelBoth ?? false };
+  return { axis: b.axis ?? 'z', side: b.side ?? 'left', labelBoth: b.labelBoth ?? false, ...(b.mesh ? { mesh: b.mesh } : {}) };
 }
 
 export const otherSide = (side: Side): Side => (side === 'left' ? 'right' : 'left');

@@ -5,6 +5,7 @@
 import { defineEngine } from '../core/engine';
 import type { ChapterState } from '../core/types';
 import type { SpaceSceneData, SpaceView } from './schema';
+import { EXERCISE_PHASES, type ExercisePhase } from '../../lib/anatomy';
 
 export const SPACE_VIEW_IDS: readonly SpaceView[] = ['assembled', 'xray', 'exploded', 'isolate'];
 
@@ -22,8 +23,23 @@ export interface SpaceSceneExt {
   pose: string | null;
   /** Groups or parts drawn faint (chapter / beat `ghost`; not cumulative, never in the URL). */
   ghosted: string[];
-  /** Group soloed from the control panel (the rest drawn faint); reset by a chapter change, never in the URL. */
+  /**
+   * Group soloed from the control panel, or a part soloed from the inspector
+   * (SOLO: that part, the parts it connects and the shells stay; the rest
+   * drawn faint); reset by a chapter change, never in the URL.
+   */
   solo: string | null;
+  /** Exercise mode (chapter / beat `exercise`, or an exercise chip; not cumulative, never in the URL). */
+  exercise: { id: string; phase: ExercisePhase } | null;
+  /**
+   * Signal / cold tints (chapter / beat `highlight`; exercise mode adds its own; not cumulative, never
+   * in the URL: the store's `highlight` is TimeScene's URL field, hence the other name).
+   */
+  tints: { signal: string[]; cold: string[] } | null;
+  /** Muscle parts whose origin / insertion markers show (chapter / beat `sites`; not cumulative). */
+  sites: string[];
+  /** A muscle sheet's ACTIONS demo on show: that part's joint swinging through the movement (never in the URL). */
+  demo: { part: string; joint: string; movement: string } | null;
 }
 
 const KEBAB = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -34,6 +50,22 @@ function isView(value: unknown): value is SpaceView {
 }
 
 const clamp01 = (n: number) => Math.min(1, Math.max(0, n));
+
+/** A chapter / beat `exercise` (`{ id, phase? }`), or null. */
+export function exerciseOf(value: unknown): SpaceSceneExt['exercise'] {
+  if (!value || typeof value !== 'object') return null;
+  const { id, phase } = value as { id?: unknown; phase?: unknown };
+  if (!isId(id)) return null;
+  return { id, phase: (EXERCISE_PHASES as readonly unknown[]).includes(phase) ? (phase as ExercisePhase) : 'loop' };
+}
+
+/** A chapter / beat `highlight` (`{ signal?, cold? }`), or null. */
+export function highlightOf(value: unknown): SpaceSceneExt['tints'] {
+  if (!value || typeof value !== 'object') return null;
+  const { signal, cold } = value as { signal?: unknown; cold?: unknown };
+  const ids = (v: unknown) => (Array.isArray(v) ? v.filter(isId) : []);
+  return { signal: ids(signal), cold: ids(cold) };
+}
 
 export const spaceSceneEngine = defineEngine<SpaceSceneExt, SpaceSceneData>({
   id: 'space-scene',
@@ -48,6 +80,10 @@ export const spaceSceneEngine = defineEngine<SpaceSceneExt, SpaceSceneData>({
       pose: null,
       ghosted: [],
       solo: null,
+      exercise: null,
+      tints: null,
+      sites: [],
+      demo: null,
       // All groups visible by default.
       layers: data ? data.parts.groups.map((g) => g.id) : [],
     };
@@ -63,6 +99,10 @@ export const spaceSceneEngine = defineEngine<SpaceSceneExt, SpaceSceneData>({
     out.hidden = Array.isArray(state.hide) ? state.hide.filter((id): id is string => typeof id === 'string') : [];
     out.pose = isId(state.pose) ? state.pose : null;
     out.ghosted = Array.isArray(state.ghost) ? state.ghost.filter(isId) : [];
+    out.exercise = exerciseOf(state.exercise);
+    out.tints = highlightOf(state.highlight);
+    out.sites = Array.isArray(state.sites) ? state.sites.filter(isId) : [];
+    out.demo = null;
     return out;
   },
   fromUrl(fields) {

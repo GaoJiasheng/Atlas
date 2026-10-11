@@ -28,6 +28,14 @@ export interface ScreenAnchor {
   y1: number;
 }
 
+/** A projected attachment point (lib/sites.ts keys), stage CSS pixels. */
+export interface SitePoint {
+  x: number;
+  y: number;
+  /** In front of the camera, on the stage and not cut away. */
+  shown: boolean;
+}
+
 export interface StageStats {
   calls: number;
   triangles: number;
@@ -51,6 +59,8 @@ export interface StageBridge {
   cameraDistance: number;
   modelRadius: number;
   anchors: Map<string, ScreenAnchor>;
+  /** Attachment markers on show, projected (keys from lib/sites.ts `siteKey`). */
+  sites: Map<string, SitePoint>;
   /** Ids the HUD may label now (`null`: any): the stage checks occlusion for these only. */
   labelled: ReadonlySet<string> | null;
   stats: StageStats;
@@ -91,6 +101,7 @@ export function createBridge(): StageBridge {
     cameraDistance: 0,
     modelRadius: 1,
     anchors: new Map(),
+    sites: new Map(),
     labelled: null,
     stats: { calls: 0, triangles: 0, geometries: 0, textures: 0, fps: undefined, gpu: undefined, buffer: [0, 0], lastFrame: 0 },
     listeners: new Set(),

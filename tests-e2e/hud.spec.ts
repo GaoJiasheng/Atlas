@@ -870,6 +870,58 @@ test('sample-space organisms: pose, named cut and ghost from the chapter and the
   await expect(page.locator('.space-inspector [data-side="right"]')).toHaveAttribute('aria-pressed', 'true');
 });
 
+test('sample-space glb limb (docs/16 M1–M11): loads with no external request; sites, the muscle sheet\'s four tabs, SOLO, a demo, an exercise card', async ({ page }) => {
+  test.setTimeout(90_000);
+  await page.setViewportSize({ width: 1920, height: 1080 });
+  const external: string[] = [];
+  page.on('request', (r) => {
+    if (!/^https?:\/\/127\.0\.0\.1[:/]/.test(r.url()) && !r.url().startsWith('data:') && !r.url().startsWith('blob:')) external.push(r.url());
+  });
+  const errors: string[] = [];
+  page.on('pageerror', (e) => errors.push(String(e)));
+  await openScene(page, '/en/topics/sample-space/?ch=sample-motion');
+  const api = () => page.evaluate(() => window.__atlas!.state() as SpaceState & { exercise: { id: string; phase: string } | null; demo: unknown; sites: string[] });
+  // The model arrives (the hairline progress bar goes) and does not fail.
+  await expect(page.locator('.space-stage__progress')).toHaveCount(0, { timeout: 30_000 });
+  await expect(page.locator('.space-stage__failed')).toHaveCount(0);
+  // The chapter shows the flexor's sites: two origin points, one insertion, one line of pull.
+  expect((await api()).sites).toEqual(['sample-flexor']);
+  await expect(page.locator('.space-sites .space-sites__dot')).toHaveCount(3);
+  await expect(page.locator('.space-sites__pull')).toHaveCount(1);
+  // The muscle sheet: four tabs, arrow keys move between them.
+  const tabs = page.locator('.space-sheet [role="tab"]');
+  await expect(tabs).toHaveCount(4);
+  await expect(tabs.nth(0)).toHaveAttribute('aria-selected', 'true');
+  await tabs.nth(0).focus();
+  await page.keyboard.press('ArrowRight');
+  await expect(tabs.nth(1)).toHaveAttribute('aria-selected', 'true');
+  // ACTIONS: the elbow demo swings the joint; again stops it.
+  const demo = page.locator('.space-sheet__actions button').first();
+  await demo.click();
+  await expect.poll(async () => (await api()).demo).toEqual({ part: 'sample-flexor', joint: 'elbow', movement: 'flexion' });
+  await demo.click();
+  await expect.poll(async () => (await api()).demo).toBeNull();
+  // SOLO: this muscle, its bones and the shells; the rest faint.
+  const solo = page.locator('.space-inspector__row button', { hasText: 'Solo' });
+  await solo.click();
+  await expect.poll(async () => (await api()).solo).toBe('sample-flexor');
+  await solo.click();
+  await expect.poll(async () => (await api()).solo).toBeNull();
+  // EXERCISES: a chip enters exercise mode with the card; END holds the end key; the card's close leaves.
+  await tabs.nth(3).click();
+  await page.locator('.space-sheet__exercises button').first().click();
+  await expect.poll(async () => (await api()).exercise).toEqual({ id: 'sample-curl', phase: 'loop' });
+  const card = page.locator('.space-exercise');
+  await expect(card).toBeVisible();
+  await expect(card).toContainText('qualified coach');
+  await card.locator('button', { hasText: 'End' }).click();
+  await expect.poll(async () => (await api()).exercise).toEqual({ id: 'sample-curl', phase: 'end' });
+  await card.locator('.space-inspector__close').click();
+  await expect.poll(async () => (await api()).exercise).toBeNull();
+  expect(external).toEqual([]);
+  expect(errors).toEqual([]);
+});
+
 test('sample-space PRESENTATION: beats on the 3D stage (hide, the beat\'s labels, group placards, a named preset camera), ESC restores the scene', async ({ page }) => {
   test.setTimeout(90_000);
   await page.setViewportSize({ width: 1920, height: 1080 });
@@ -896,6 +948,9 @@ test('sample-space PRESENTATION: beats on the 3D stage (hide, the beat\'s labels
     'inside-look.0',
     'inside-look.1',
     'inside-look.2',
+    'sample-motion.0',
+    'sample-motion.1',
+    'sample-motion.2',
   ]);
 
   // P starts at the current chapter's first beat: the beat's view, hide and labels on top of the chapter.
@@ -942,13 +997,17 @@ test('sample-space PRESENTATION: beats on the 3D stage (hide, the beat\'s labels
   await expect.poll(async () => (await api()).presentation?.beat).toBe(1);
   await expect(page.locator('.atlas-present')).not.toHaveAttribute('data-free', 'true');
   await expect.poll(async () => (await api()).camera?.position).toEqual([-2.4, 1, 2.6]);
-  await page.evaluate((last) => window.__atlas!.goToBeat(last, { instant: true }), beats.length - 1);
+  const organism = beats.findIndex((b) => b.chapter === 'inside-look' && b.index === 2);
+  await page.evaluate((i) => window.__atlas!.goToBeat(i, { instant: true }), organism);
   await expect.poll(async () => (await api()).presentation).toMatchObject({ chapter: 'inside-look', beat: 2 });
   // The organism beat: a named cut, the pose and the faint machine.
   expect(await api()).toMatchObject({ cutaway: 'sample-cross', pose: 'sample-open', ghosted: ['sample-core', 'sample-drive', 'sample-loop'] });
+  // The last beat stays the last.
+  await page.evaluate((last) => window.__atlas!.goToBeat(last, { instant: true }), beats.length - 1);
+  await expect.poll(async () => (await api()).presentation).toMatchObject({ chapter: 'sample-motion', beat: 2 });
   await page.keyboard.press('ArrowRight');
   await page.waitForTimeout(400);
-  expect((await api()).presentation).toMatchObject({ chapter: 'inside-look', beat: 2 });
+  expect((await api()).presentation).toMatchObject({ chapter: 'sample-motion', beat: 2 });
 
   // ESC: the HUD and the scene as they were (chapter, view, hide, selection, ORBIT).
   await page.keyboard.press('Escape');

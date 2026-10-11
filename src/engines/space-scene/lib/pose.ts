@@ -18,7 +18,7 @@ import type { Vec3 } from './math';
 /** Default pose transition (s). */
 export const POSE_DURATION = 0.8;
 /** Most poses a topic may declare. */
-export const MAX_POSES = 8;
+export const MAX_POSES = 32;
 
 export interface PartTransform {
   /** Scene coordinates; `null` = the part centre. */

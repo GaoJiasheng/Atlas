@@ -124,6 +124,20 @@ beforeAll(() => {
       }),
     SAMPLE_SPACE,
   );
+  topic(
+    'space-glb-node',
+    (root) => {
+      // A glb node the model does not have, an exercise beat outside training.json, a shared source the tree lacks.
+      editJson(join(root, 'data/parts.json'), (parts: { parts: { id: string; mesh?: string }[] }) => {
+        parts.parts.find((p) => p.id === 'sample-lower')!.mesh = 'sample-forearm.l';
+      });
+      const file = join(root, 'chapters/05-sample-motion.mdx');
+      writeFileSync(file, readFileSync(file, 'utf8').replace('exercise: { id: sample-curl, phase: loop }', 'exercise: { id: sample-hang, phase: loop }'));
+      const body = join(root, 'chapters/01-whole-thing.mdx');
+      writeFileSync(body, readFileSync(body, 'utf8').replace('<Lang en>\n\n', '<Lang en>\n\nA <Num s="M7">shared</Num> number. '));
+    },
+    SAMPLE_SPACE,
+  );
   topic('lesson-clean', () => {}, FRACTIONS);
   topic(
     'lesson-bad',
@@ -158,7 +172,7 @@ afterAll(() => {
 describe('validate-content', () => {
   it('fails the run when any topic has errors', () => {
     expect(status).toBe(1);
-    expect(output).toMatch(/14 topic\(s\)/);
+    expect(output).toMatch(/15 topic\(s\)/);
   });
 
   it('passes an unmodified copy', () => {
@@ -214,6 +228,15 @@ describe('validate-content: SpaceScene beats and presets', () => {
 
   it('keeps the engine\'s own preset ids (ORBIT, REF.) for the engine', () => {
     expect(linesFor('space-orbit-preset').join('\n')).toContain('data.parts.presets.2.id: "orbit" is the engine\'s own preset id');
+  });
+});
+
+describe('validate-content: glb models and shared fitness data (docs/16 M1, M10)', () => {
+  it('checks every glb node the parts name, exercise beats against training.json and shared source ids', () => {
+    const lines = linesFor('space-glb-node').join('\n');
+    expect(lines).toContain('model /models/sample-space.glb: part "sample-lower" mesh: no node named "sample-forearm.l"');
+    expect(lines).toContain('state.beats.1.exercise: "sample-hang" is not in data/training.json exercises');
+    expect(lines).toContain('<Num s="M7">: unknown source "M7"');
   });
 });
 

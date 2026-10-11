@@ -16,6 +16,10 @@
  *    group soloed from the control panel: every other part): drawn faint
  *    (opacity 0.12, no depth write), never picked or labelled; the selected
  *    part stays solid. A soloed group shows even when its layer is off.
+ *  - `solo` naming a part (SOLO in the inspector, docs/16 §6.1): that part,
+ *    the parts it `connects` (a muscle's bones), shells and context parts stay;
+ *    every other part is drawn faint.
+ *  - `highlight` (signal / cold: part or group ids): the part's tint.
  *  - a bilateral pair: `hide` / `ghost` naming the data part (`<id>`) cover its
  *    twin (`<id>-r`) too; naming the twin covers the twin only.
  *  - `context` parts (scenery) are never selectable.
@@ -33,6 +37,7 @@ export interface PartRef {
   context?: boolean | undefined;
   /** A bilateral twin: the part it mirrors. */
   twinOf?: string | undefined;
+  connects?: readonly string[] | undefined;
 }
 
 export interface DisplayState {
@@ -43,9 +48,13 @@ export interface DisplayState {
   hidden?: readonly string[];
   /** Group or part ids drawn faint (chapter / beat `ghost`). */
   ghosted?: readonly string[];
-  /** Soloed group: every part outside it is drawn faint. */
+  /** Soloed group (every part outside it faint) or soloed part (see above). */
   solo?: string | null;
+  /** Tints: part or group ids. */
+  highlight?: { signal: readonly string[]; cold: readonly string[] } | null;
 }
+
+export type PartTint = 'signal' | 'cold' | null;
 
 export interface PartDisplay {
   visible: boolean;
@@ -60,6 +69,8 @@ export interface PartDisplay {
   selectable: boolean;
   /** Drawn faint (`ghost` / solo). */
   faint: boolean;
+  /** Highlight tint. */
+  tint: PartTint;
 }
 
 /** Whether a part list uses the `shell` flag (then X-RAY ghosts only shells). */
@@ -75,8 +86,11 @@ export function resolvePartDisplay(
 ): PartDisplay {
   const selectedPart = state.part ? parts.find((p) => p.id === state.part && !p.context) ?? null : null;
   const selected = selectedPart !== null && selectedPart.id === part.id;
-  const soloed = state.solo != null && part.group === state.solo;
-  let visible = part.group === undefined ? true : soloed || state.layers.includes(part.group);
+  const soloPart = state.solo != null && !parts.some((p) => p.group === state.solo) ? parts.find((p) => p.id === state.solo) : undefined;
+  const soloed = soloPart
+    ? part.id === soloPart.id || (soloPart.connects?.includes(part.id) ?? false) || part.shell === true || part.context === true
+    : state.solo != null && part.group === state.solo;
+  let visible = part.group === undefined ? true : (soloed && !soloPart) || state.layers.includes(part.group);
   if (visible && state.view === 'isolate' && selectedPart) {
     visible = selected || (part.group !== undefined && part.group === selectedPart.group);
   }
@@ -86,13 +100,15 @@ export function resolvePartDisplay(
   if (hidden) visible = false;
   const faint =
     !selected &&
-    ((state.solo != null && !soloed && (part.group !== undefined || names(state.ghosted))) ||
+    ((state.solo != null && !soloed && (part.group !== undefined || soloPart !== undefined || names(state.ghosted))) ||
       names(state.ghosted) ||
       (part.group !== undefined && (state.ghosted?.includes(part.group) ?? false)));
   const xray = state.view === 'xray' && !selected && (!shells || part.shell === true);
   const ghost = xray || faint;
   const opacity = faint ? GHOST_OPACITY : xray ? XRAY_OPACITY : 1;
-  return { visible, opacity, selected, ghost, hidden, selectable: part.context !== true && !faint, faint };
+  const lists = (ids: readonly string[] | undefined) => names(ids) || (part.group !== undefined && (ids?.includes(part.group) ?? false));
+  const tint: PartTint = lists(state.highlight?.signal) ? 'signal' : lists(state.highlight?.cold) ? 'cold' : null;
+  return { visible, opacity, selected, ghost, hidden, selectable: part.context !== true && !faint, faint, tint };
 }
 
 /** Display for every part, keyed by id. */

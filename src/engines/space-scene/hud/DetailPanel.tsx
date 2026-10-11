@@ -103,10 +103,10 @@ export function DetailPanel({ file, chapters }: { file: PartsFile; chapters: rea
       <ExplodedIcon file={file} part={part} />
       <div className="space-detail__text">
         <p className="space-detail__en">
-          <i>{partNumber(file, part.id)}</i> {tx(part.name, 'en').toUpperCase()}
+          <i>{partNumber(file, part.id)}</i> {tx(part.short ?? part.name, 'en').toUpperCase()}
         </p>
         <p className="space-detail__zh" lang="zh-Hans">
-          {tx(part.name, 'zh')}
+          {tx(part.short ?? part.name, 'zh')}
         </p>
         <dl className="space-detail__dl">
           <dt>{t('space.detail.group')}</dt>

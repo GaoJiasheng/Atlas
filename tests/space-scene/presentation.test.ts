@@ -1,4 +1,6 @@
 import { describe, expect, it } from 'vitest';
+import { withSharedFitness } from '../../src/content/schema/fitness';
+import { readSharedFitness } from '../../scripts/lib/shared-data';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { parse as parseYaml } from 'yaml';
@@ -113,7 +115,9 @@ describe('leader-label targets (G12)', () => {
 describe('sample-space presentation data', () => {
   const root = join(__dirname, '../../src/content/topics/sample-space');
   const read = (name: string) => JSON.parse(readFileSync(join(root, `data/${name}.json`), 'utf8'));
-  const sample = spaceSceneData.parse({ parts: read('parts'), sources: read('sources'), glossary: read('glossary') });
+  const sample = spaceSceneData.parse(
+    withSharedFitness({ parts: read('parts'), sources: read('sources'), glossary: read('glossary'), training: read('training') }, readSharedFitness(join(root, '../../shared'))),
+  );
   const front = parseYaml(readFileSync(join(root, 'chapters/03-switch-on.mdx'), 'utf8').split('---')[1]!) as { state: unknown };
   const state = spaceChapterState.parse(front.state);
   it('chapter 03 has two beats: one hides parts, one uses a group label and a named preset camera', () => {

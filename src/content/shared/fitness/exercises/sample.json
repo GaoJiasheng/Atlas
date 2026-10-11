@@ -1,0 +1,57 @@
+{
+  "exercises": [
+    {
+      "id": "sample-curl",
+      "name": { "en": "Sample curl (placeholder)", "zh": "示例弯举（占位）" },
+      "short": { "en": "Sample curl", "zh": "示例弯举" },
+      "equipment": "dumbbell",
+      "pattern": "isolation",
+      "level": "beginner",
+      "primary": ["sample-flexor"],
+      "setup": { "en": "Sample set-up text.", "zh": "示例准备文字。" },
+      "steps": [
+        { "en": "Sample step one.", "zh": "示例步骤一。" },
+        { "en": "Sample step two.", "zh": "示例步骤二。" }
+      ],
+      "cues": [{ "en": "Sample cue.", "zh": "示例要点。" }],
+      "mistakes": [{ "en": "Sample mistake, and why it matters.", "zh": "示例错误，以及为什么要紧。" }],
+      "cautions": [{ "en": "Sample caution.", "zh": "示例注意事项。" }],
+      "motion": {
+        "equipment": { "kind": "dumbbell", "grip": "supinated" },
+        "keys": [
+          { "phase": "start", "joints": { "elbow.l": { "flexion": 5 } }, "contract": { "sample-flexor": 0.1 } },
+          { "phase": "end", "joints": { "elbow.l": { "flexion": 120 }, "shoulder.l": { "flexion": 10 } }, "contract": { "sample-flexor": 0.9 } }
+        ],
+        "tempo": [1.2, 0.3, 1.4, 0.3]
+      }
+    },
+    {
+      "id": "sample-raise",
+      "name": { "en": "Sample raise (placeholder)", "zh": "示例前举（占位）" },
+      "equipment": "cable",
+      "pattern": "isolation",
+      "level": "beginner",
+      "primary": ["sample-flexor"],
+      "setup": { "en": "Sample set-up text.", "zh": "示例准备文字。" },
+      "steps": [{ "en": "Sample step.", "zh": "示例步骤。" }],
+      "motion": {
+        "equipment": { "kind": "cable-handle", "grip": "neutral" },
+        "keys": [
+          { "phase": "start", "joints": { "shoulder.l": { "flexion": 0 }, "elbow.l": { "flexion": 10 } } },
+          { "phase": "mid", "joints": { "shoulder.l": { "flexion": 45 }, "elbow.l": { "flexion": 10 } }, "contract": { "sample-flexor": 0.4 } },
+          { "phase": "end", "joints": { "shoulder.l": { "flexion": 85 }, "elbow.l": { "flexion": 10 } }, "contract": { "sample-flexor": 0.5 } }
+        ]
+      }
+    },
+    {
+      "id": "sample-hang",
+      "name": { "en": "Sample hang (placeholder)", "zh": "示例悬垂（占位）" },
+      "equipment": "bodyweight",
+      "pattern": "isolation",
+      "level": "beginner",
+      "primary": ["sample-flexor"],
+      "setup": { "en": "Sample set-up text.", "zh": "示例准备文字。" },
+      "steps": [{ "en": "Sample step.", "zh": "示例步骤。" }]
+    }
+  ]
+}

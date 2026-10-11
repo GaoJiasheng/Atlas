@@ -2,6 +2,7 @@
  * Leader labels (master-spec J) in the host's `leaders` SVG slot.
  *
  *  - label = number + EN name (bold) / 中文 / one-line note (the part's summary);
+ *    a part's `short` name when it has one (M13);
  *    left-hand placards set right, right-hand ones set left behind a small triangle
  *  - thin leader: label edge → short horizontal → straight run → hollow circle
  *    on the projected anchor (the part's bounds centre; a pipe's path midpoint)
@@ -430,8 +431,8 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
             key={id}
             id={id}
             n={partNumber(file, id)}
-            en={tx(part.name, 'en')}
-            zh={tx(part.name, 'zh')}
+            en={tx(part.short ?? part.name, 'en')}
+            zh={tx(part.short ?? part.name, 'zh')}
             note={clip(tx(part.summary, locale), locale === 'zh' ? 18 : 34)}
             on={id === selected}
             register={register}

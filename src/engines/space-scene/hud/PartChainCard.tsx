@@ -1,7 +1,7 @@
 /**
  * Top-right card: the part chain as a schematic — groups with parts as
  * columns (flow-only groups get none), parts as numbered nodes (context
- * scenery left out), `connects` as hairlines. Columns longer than ten rows
+ * scenery left out; a part's `short` name when it has one), `connects` as hairlines. Columns longer than ten rows
  * switch to a compact row pitch. The selected part is filled in the signal
  * colour. While the scene runs, the lines a flow with `parts` runs along take
  * that flow's colour at that point of its chain (its `stops`) and march;
@@ -91,7 +91,7 @@ export function PartChainCard({ file }: { file: PartsFile }) {
               {String(n.n).padStart(2, '0')}
             </text>
             <text x={n.x + 20} y={n.y + n.h / 2 + textDy} className="space-chain__name">
-              {clip(tx(part.name, 'en').toUpperCase(), maxChars)}
+              {clip(tx(part.short ?? part.name, 'en').toUpperCase(), maxChars)}
             </text>
           </g>
         );

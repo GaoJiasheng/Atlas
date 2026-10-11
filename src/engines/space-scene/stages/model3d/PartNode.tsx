@@ -11,18 +11,44 @@
  *
  * Transform stack: position (rest centre + explode) → pose (matrix) →
  * animations (matrix) → the shape's own transform (glb meshes).
+ *
+ * glb parts skinned to the model's skeleton draw as skinned meshes in
+ * detached bind mode, so the explode / put-aside / pose transforms still
+ * apply on top of the bones; their leader-label anchor follows the skinned
+ * bounds (re-measured every few frames while the bones move). Contraction
+ * (MotionDriver → `runtime.contract`) drives the material's fibre shader, or
+ * scales a part without fibre data; `display.tint` mixes in the signal / cold
+ * colour; a peel (`explode.stage`) moves the part in its layer's window.
  */
 import { useEffect, useLayoutEffect, useMemo, useRef, type Ref } from 'react';
 import { useFrame, type ThreeEvent } from '@react-three/fiber';
-import { Euler, InstancedMesh, LineBasicMaterial, LineSegments, Matrix4, Mesh, Quaternion, Vector3, type Group, type Object3D, type Plane } from 'three';
+import {
+  Box3,
+  DetachedBindMode,
+  Euler,
+  InstancedMesh,
+  LineBasicMaterial,
+  LineSegments,
+  Matrix4,
+  Mesh,
+  Quaternion,
+  SkinnedMesh,
+  Vector3,
+  type Group,
+  type Object3D,
+  type Plane,
+} from 'three';
 import type { Part, PartAnimation } from '../../schema';
 import type { PartDisplay } from '../../lib/visibility';
+import type { Box3Like } from '../../lib/parts';
 import { animationAngle, animationScale3 } from '../../lib/animation';
-import { explodeOffset } from '../../lib/explode';
+import { explodeOffset, stagedAmount } from '../../lib/explode';
+import { contractScale, STRIPE_OPACITY } from '../../lib/rig';
 import { damp, DEG2RAD, easeInOutCubic, normalize3, type Vec3 } from '../../lib/math';
 import { isRest, lerpTransform, restTransform, sampleSequence, sequenceLength, smoothstep01, type PartTransform } from '../../lib/pose';
 import { keepAnimating, MAX_DT, useRuntime } from './runtime';
 import { createPartMaterial, setPartClipping, stylePartMaterial, type PartStyle } from './materials';
+import { skinnedRaycast } from './skinPick';
 import type { ShapePiece } from './geometry';
 
 /** Geometry + rest transform of a part (from a primitive or a glb mesh). */
@@ -41,6 +67,10 @@ export interface PartShape {
   twoSided: boolean;
   /** Fan of its folding wings at rest (1 without one). */
   restFan: number;
+  /** Rest bounds in scene coordinates (glb parts, measured from the geometry): label anchor and stage bounds. */
+  box?: Box3Like;
+  /** A glb muscle's fibre data (`_U` / `_FIBRE`): length origin → insertion and belly thickness, mesh units. */
+  fibre?: { length: number; thickness: number };
 }
 
 /** What the label probe needs to know about a part (filled by PartNode). */
@@ -58,6 +88,11 @@ export interface PartHandle {
   /** Current fade (0 hidden .. 1 solid). */
   fade: number;
   visible: boolean;
+  /** Inverse of the part's rest transform (scene ← its mesh frame): sites on a rigid part follow it. */
+  restInverse: Matrix4;
+  /** The skinned mesh of a skinned glb part (sites follow its bones) and its bones' rest world matrices. */
+  skinned: SkinnedMesh | null;
+  skinRest: Matrix4[] | null;
 }
 
 export interface PartNodeProps {
@@ -83,6 +118,8 @@ export interface PartNodeProps {
   handles: Map<string, PartHandle>;
   /** Changes when the stage must jump without easing (instant transitions). */
   snapKey: number;
+  /** Peel stages of the topic (0: no part has `explode.stage`). */
+  stages: number;
   onSelect(id: string): void;
   onHover(id: string | null): void;
 }
@@ -101,7 +138,15 @@ const smooth = (e0: number, e1: number, x: number) => {
   return k * k * (3 - 2 * k);
 };
 
+/** Re-measure a skinned part's label anchor every this many frames while the bones move. */
+const SKIN_ANCHOR_EVERY = 6;
+/** Vertices sampled for that measure. */
+const SKIN_ANCHOR_SAMPLES = 256;
+/** Highlight tint strength (mix toward the signal / cold colour). */
+const TINT = 0.55;
 const tmpQ = new Quaternion();
+const tmpBox = new Box3();
+const tmpInv = new Matrix4();
 const tmpM = new Matrix4();
 const tmpT = new Matrix4();
 const tmpE = new Euler();
@@ -136,7 +181,7 @@ function Piece({
   register(o: Object3D | null, piece: ShapePiece): void;
   handlers: Record<string, unknown>;
 }) {
-  const ref = useRef<Mesh | InstancedMesh | LineSegments>(null);
+  const ref = useRef<Mesh | InstancedMesh | LineSegments | SkinnedMesh>(null);
   useLayoutEffect(() => {
     const mesh = ref.current;
     if (mesh instanceof InstancedMesh && piece.matrices) {
@@ -144,9 +189,19 @@ function Piece({
       mesh.instanceMatrix.needsUpdate = true;
       mesh.computeBoundingSphere();
     }
+    if (mesh instanceof SkinnedMesh && piece.skin) {
+      // Detached: the bind matrix stays the rest one, so the part's own transform (explode, pose) applies on top of the bones.
+      mesh.bindMode = DetachedBindMode;
+      mesh.bind(piece.skin.skeleton, piece.skin.bindMatrix);
+      // Bones move the vertices far from the rest bounds: never culled (a few dozen meshes at most).
+      mesh.frustumCulled = false;
+    }
     register(mesh, piece);
     return () => register(null, piece);
   }, [piece, register]);
+  if (piece.skin) {
+    return <skinnedMesh ref={ref as Ref<SkinnedMesh>} geometry={piece.geometry} material={material} castShadow={castShadow} dispose={null} {...handlers} />;
+  }
   if (piece.lines) {
     return <lineSegments ref={ref as Ref<LineSegments>} geometry={piece.geometry} material={material} raycast={noRaycast} dispose={null} />;
   }
@@ -189,6 +244,11 @@ export function PartNode(props: PartNodeProps) {
     /** Phase at which the current run started (one-shot clips play from here). */
     runStart: 0,
     wasRunning: false,
+    /** Contraction and highlight tint now; the bone-motion count the skinned anchor was last measured at. */
+    contract: 0,
+    tint: 0,
+    skinMoved: -1,
+    frame: 0,
   });
   const press = useRef<{ timer: ReturnType<typeof setTimeout> | null; x: number; y: number }>({ timer: null, x: 0, y: 0 });
 
@@ -258,13 +318,24 @@ export function PartNode(props: PartNodeProps) {
       offset: [...props.anchorOffset] as Vec3,
       point: [...props.anchorPoint] as Vec3,
       radius: props.anchorRadius,
-      half: props.anchorHalf,
+      half: [...props.anchorHalf] as Vec3,
       meshes: [],
       fade: 0,
       visible: false,
+      restInverse: new Matrix4()
+        .compose(new Vector3(...shape.position), shape.quaternion, shape.scale)
+        .invert(),
+      skinned: null,
+      skinRest: shape.pieces.find((p) => p.skin)?.skin?.boneRest ?? null,
     }),
-    [props.anchorOffset, props.anchorPoint, props.anchorRadius, props.anchorHalf],
+    [props.anchorOffset, props.anchorPoint, props.anchorRadius, props.anchorHalf, shape],
   );
+  const skinSamples = useMemo(() => {
+    const piece = shape.pieces.find((p) => p.skin);
+    const count = piece?.geometry.getAttribute('position')?.count ?? 0;
+    const step = Math.max(1, Math.ceil(count / SKIN_ANCHOR_SAMPLES));
+    return Array.from({ length: Math.ceil(count / step) }, (_, i) => i * step);
+  }, [shape]);
   const { handles } = props;
   useLayoutEffect(() => {
     if (!posRef.current) return;
@@ -281,6 +352,7 @@ export function PartNode(props: PartNodeProps) {
       if (o) pieces.current.set(piece, o);
       else pieces.current.delete(piece);
       handle.meshes = [...pieces.current.values()].filter((x) => !(x instanceof LineSegments));
+      handle.skinned = (handle.meshes.find((x) => x instanceof SkinnedMesh) as SkinnedMesh | undefined) ?? null;
     },
     [handle],
   );
@@ -290,10 +362,15 @@ export function PartNode(props: PartNodeProps) {
   useEffect(() => {
     for (const o of pieces.current.values()) {
       if (o instanceof LineSegments) continue;
-      const own = o instanceof InstancedMesh ? InstancedMesh.prototype.raycast : Mesh.prototype.raycast;
+      const own =
+        o instanceof InstancedMesh
+          ? InstancedMesh.prototype.raycast
+          : o instanceof SkinnedMesh
+            ? skinnedRaycast(o, () => runtime.bonesMoved)
+            : Mesh.prototype.raycast;
       o.raycast = pickable ? own : noRaycast;
     }
-  }, [pickable, shape]);
+  }, [pickable, shape, runtime]);
 
   useEffect(
     () => () => {
@@ -314,8 +391,8 @@ export function PartNode(props: PartNodeProps) {
     m.aside = snap ? asideTarget : m.aside + Math.sign(asideTarget - m.aside) * Math.min(Math.abs(asideTarget - m.aside), dt / HIDE_S);
     const slide = easeInOutCubic(m.aside) * HIDE_SLIDE;
 
-    // Explode (eased centrally, see ExplodeClock).
-    const e = runtime.explode + slide;
+    // Explode (eased centrally, see ExplodeClock; a peel stage moves in its own window).
+    const e = (props.stages > 0 ? stagedAmount(runtime.explode, part.explode.stage, props.stages) : runtime.explode) + slide;
     const g = posRef.current;
     if (g) {
       const x = shape.position[0] + push[0] * e;
@@ -363,6 +440,32 @@ export function PartNode(props: PartNodeProps) {
     if (Math.abs(m.sel - selTarget) < 0.003) m.sel = selTarget;
     for (const pm of pms) pm.uniforms.uSel.value = m.sel;
 
+    // Highlight tint (exercise mode, `highlight`): eased like the selection.
+    const tintTarget = display.tint ? TINT : 0;
+    m.tint = snap ? tintTarget : damp(m.tint, tintTarget, 8, dt);
+    if (Math.abs(m.tint - tintTarget) < 0.003) m.tint = tintTarget;
+    for (const pm of pms) {
+      pm.uniforms.uHi.value = m.tint;
+      pm.uniforms.uHiColor.value.set(display.tint === 'cold' ? style.cold : style.signal);
+    }
+
+    // Contraction (MotionDriver): along the fibres in the shader, else a scale below.
+    const c = runtime.contract.get(part.id) ?? 0;
+    const contractChanged = c !== m.contract;
+    m.contract = c;
+    if (shape.fibre) {
+      for (const pm of pms) {
+        const u = pm.uniforms;
+        u.uContract.value = c;
+        u.uLen.value = shape.fibre.length;
+        u.uThick.value = shape.fibre.thickness;
+        u.uStripe.value = STRIPE_OPACITY * Math.min(1, c * 3);
+        u.uTime.value = runtime.elapsed;
+      }
+      if (c > 0) keepAnimating(state.invalidate);
+    }
+    if (contractChanged && props.castShadow) runtime.shadowDirty = true;
+
     // Pose: ease from where the part was to the target (instant transitions jump).
     if (snap || m.poseMs <= 0) {
       m.poseNow = m.poseTo;
@@ -385,14 +488,18 @@ export function PartNode(props: PartNodeProps) {
         out[1] = tmpV.y;
         out[2] = tmpV.z;
       };
-      move(props.anchorPoint, handle.point);
-      move(props.anchorOffset, handle.offset);
+      // (A skinned part measures its anchor from the skinned bounds below.)
+      if (!handle.skinned) {
+        move(props.anchorPoint, handle.point);
+        move(props.anchorOffset, handle.offset);
+      }
     }
 
     // Animations (about their pivots) and the fan they or the pose give a folding wing.
     let fan = m.poseNow.fan ?? shape.restFan;
     const anim = animRef.current;
-    if (anim && props.animations.length > 0) {
+    const scaled = !shape.fibre && (c > 0 || contractChanged);
+    if (anim && (props.animations.length > 0 || scaled)) {
       anim.matrix.identity();
       const running = runtime.energy > 0;
       if (running && !m.wasRunning) m.runStart = runtime.phase;
@@ -416,9 +523,14 @@ export function PartNode(props: PartNodeProps) {
           aboutPivot(anim.matrix, tmpM.makeScale(tmpS3[0], tmpS3[1], tmpS3[2]), pivots[i]!);
           return;
         }
+        if (a.kind === 'contract') return; // MotionDriver: runtime.contract
         const angle = animationAngle(a, t, k);
         if (angle !== 0) aboutPivot(anim.matrix, tmpM.makeRotationFromQuaternion(tmpQ.setFromAxisAngle(axes[i]!, angle)), pivots[i]!);
       });
+      if (scaled && c > 0) {
+        contractScale(props.anchorHalf, c, undefined).forEach((v, i) => (tmpS3[i] = v));
+        aboutPivot(anim.matrix, tmpM.makeScale(tmpS3[0], tmpS3[1], tmpS3[2]), props.anchorOffset);
+      }
       anim.matrixWorldNeedsUpdate = true;
       if (props.castShadow && runtime.energy > 0) runtime.shadowDirty = true;
     }
@@ -428,7 +540,30 @@ export function PartNode(props: PartNodeProps) {
       if (props.castShadow) runtime.shadowDirty = true;
     }
 
-    if (moving || m.fade !== targetFade || m.base !== targetBase || m.aside !== asideTarget || m.sel !== selTarget) keepAnimating(state.invalidate);
+    // A skinned part's anchor follows its skinned bounds while the bones move (sampled, every few frames).
+    m.frame++;
+    const sk = handle.skinned;
+    if (sk && m.skinMoved !== runtime.bonesMoved && (m.frame % SKIN_ANCHOR_EVERY === 0 || runtime.bonesMoved === 0)) {
+      m.skinMoved = runtime.bonesMoved;
+      sk.updateMatrixWorld();
+      tmpBox.makeEmpty();
+      tmpInv.copy(runtime.root).invert().multiply(sk.matrixWorld);
+      for (const i of skinSamples) tmpBox.expandByPoint(sk.getVertexPosition(i, tmpV).applyMatrix4(tmpInv));
+      if (!tmpBox.isEmpty() && g) {
+        const cx = (tmpBox.min.x + tmpBox.max.x) / 2 - g.position.x;
+        const cy = (tmpBox.min.y + tmpBox.max.y) / 2 - g.position.y;
+        const cz = (tmpBox.min.z + tmpBox.max.z) / 2 - g.position.z;
+        handle.point[0] = handle.offset[0] = cx;
+        handle.point[1] = handle.offset[1] = cy;
+        handle.point[2] = handle.offset[2] = cz;
+        handle.half[0] = (tmpBox.max.x - tmpBox.min.x) / 2;
+        handle.half[1] = (tmpBox.max.y - tmpBox.min.y) / 2;
+        handle.half[2] = (tmpBox.max.z - tmpBox.min.z) / 2;
+      }
+    }
+
+    if (moving || m.fade !== targetFade || m.base !== targetBase || m.aside !== asideTarget || m.sel !== selTarget || m.tint !== tintTarget)
+      keepAnimating(state.invalidate);
   });
 
   const onClick = (e: ThreeEvent<MouseEvent>) => {

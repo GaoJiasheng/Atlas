@@ -27,6 +27,7 @@ import {
   TubeGeometry,
   Vector2,
   Vector3,
+  type Skeleton,
 } from 'three';
 import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
 import type { Part, Primitive } from '../../schema';
@@ -58,6 +59,12 @@ export interface ShapePiece {
   lines?: boolean;
   /** A folding wing's piece: redrawn for the part's fan (`geometry` is `fan.output`). */
   fan?: FanDeform;
+  /**
+   * A glb mesh skinned to the model's skeleton (drawn as a skinned mesh,
+   * detached bind mode); `boneRest`: the bones' world matrices at rest (sites
+   * on a skinned bone follow it relative to them).
+   */
+  skin?: { skeleton: Skeleton; bindMatrix: Matrix4; boneRest: Matrix4[] };
 }
 
 /** A piece of one primitive before placement: geometry, instances, and a material other than the primitive's own. */

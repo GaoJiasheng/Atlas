@@ -1,18 +1,22 @@
 /**
  * The engine's bottom bar holds only what the top bar lacks: the explode
- * slider, while EXPLODED is on (44 px thumb, keyboard operable). Views, run
+ * slider, while EXPLODED is on (44 px thumb, keyboard operable; named by
+ * `views.explodeLabel` when the topic gives one, e.g. PEEL). Views, run
  * and cutaway are MODE buttons in the host's top bar (docs/08 §3). Renders
  * nothing otherwise, so the host hides the empty bar.
  */
 import { useId } from 'react';
-import { useScene, useSceneStore, useT } from '../../core/context';
+import { useScene, useSceneContext, useSceneStore, useT } from '../../core/context';
+import { tx } from '../../../i18n';
+import type { Bilingual } from '../../../content/schema/common';
 import type { SpaceSceneExt } from '../index';
 
 /** Explode amount used when EXPLODED is switched on from (almost) 0. */
 export const DEFAULT_EXPLODE = 0.7;
 
-export function ExplorerBar() {
+export function ExplorerBar({ label }: { label?: Bilingual | undefined }) {
   const t = useT();
+  const { locale } = useSceneContext();
   const store = useSceneStore<SpaceSceneExt>();
   const s = useScene<SpaceSceneExt, Pick<SpaceSceneExt, 'view' | 'explode'>>((st) => ({ view: st.view, explode: st.explode }));
   const sliderId = useId();
@@ -20,7 +24,7 @@ export function ExplorerBar() {
   return (
     <div className="space-bar">
       <label className="space-range" htmlFor={sliderId}>
-        <span>{t('space.explode')}</span>
+        <span>{label ? tx(label, locale) : t('space.explode')}</span>
         <input
           id={sliderId}
           type="range"

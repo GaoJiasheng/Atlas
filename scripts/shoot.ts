@@ -13,7 +13,8 @@
  *   pnpm shoot sample-space --perf --json out.json   # renderer numbers per shot
  *   pnpm shoot fractions --tasks                     # MathScene: every sub-step (start, a planned wrong answer, solved) and every practice question + the summary
  *
- * `--beats` also lists the ids each chapter's own state asks to label (TimeScene `highlight`, SpaceScene `labels`) that have no label on screen at the chapter camera (listed, not failed).
+ * `--beats` shoots a looping exercise beat (SpaceScene exercise mode) again held at its start and end keys
+ * (`beat-<chapter>-<n>-start.png` / `-end.png`), and lists the ids each chapter's own state asks to label (TimeScene `highlight`, SpaceScene `labels`) that have no label on screen at the chapter camera (listed, not failed).
  * `--locale` and `--theme` take a value, a comma list, or `all` (default: en, paper).
  * `--keys` / `--layout` / `--beats` / `--tasks` replace the shot run unless shot names or `--shots` are given.
  *
@@ -374,6 +375,23 @@ async function runBeats(s: Session, o: Options, out: string, report: RunReport):
     if (missing.length) report.beatNotes.push(`${name}: no label for ${missing.join(', ')}`);
     await s.page.screenshot({ path: join(out, `${name}${o.suffix}.png`) });
     console.log(`  ${name.padEnd(36)} ${landed ? 'OK' : 'FAIL'}${missing.length ? `  (no label: ${missing.join(', ')})` : ''}`);
+    // A looping exercise beat (SpaceScene exercise mode) also gets a still at its start and end keys.
+    const exercise = (st as { exercise?: { id: string; phase: string } | null }).exercise;
+    if (exercise?.phase === 'loop') {
+      for (const phase of ['start', 'end'] as const) {
+        const held = await s.page.evaluate(
+          (p) => (window.__atlas!.engine as unknown as { exercisePhase?(p: string): boolean }).exercisePhase?.(p) ?? false,
+          phase,
+        );
+        if (!held) {
+          report.beatFailures.push(`${name}: could not hold exercise "${exercise.id}" at ${phase}`);
+          continue;
+        }
+        await s.page.waitForTimeout(o.perf ? 2400 : 1500);
+        await s.page.screenshot({ path: join(out, `${name}-${phase}${o.suffix}.png`) });
+        console.log(`  ${`${name}-${phase}`.padEnd(36)} OK  (exercise ${exercise.id})`);
+      }
+    }
   }
   await s.apply({ wait: 300 });
   console.log(`  beats -> ${out} (${beats.length})`);

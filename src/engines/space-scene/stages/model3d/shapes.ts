@@ -85,17 +85,28 @@ export interface StageBounds {
   /** Centre and bounding radius of the assembled model. */
   center: Vec3;
   modelRadius: number;
+  /** The camera's fit sphere: the non-context parts (all parts when every part is context). */
+  fit: { center: Vec3; radius: number };
 }
 
+/**
+ * Floor, footprint and the assembled model's centre and radius (all parts),
+ * plus the camera's fit sphere (minimum distance, cover camera), which counts
+ * only non-context parts when there are any (docs/16 M12: a body outline
+ * around a chest must not push the camera back).
+ */
 export function stageBounds(parts: readonly Part[], shapes: ReadonlyMap<string, PartShape>): StageBounds {
   const floor: [number, number] = [Infinity, Infinity];
   let radius = 0.5;
   const min: Vec3 = [Infinity, Infinity, Infinity];
   const max: Vec3 = [-Infinity, -Infinity, -Infinity];
+  const subject = parts.some((p) => !p.context && shapes.has(p.id));
+  const fmin: Vec3 = [Infinity, Infinity, Infinity];
+  const fmax: Vec3 = [-Infinity, -Infinity, -Infinity];
   for (const part of parts) {
     const shape = shapes.get(part.id);
     if (!shape) continue;
-    const rest = partBounds(part);
+    const rest = partBounds(part) ?? shape.box ?? null;
     const r = shape.radius;
     for (const amount of [0, 1] as const) {
       const c = part.context ? shape.position : explodedPosition(shape.position, part.explode, amount);
@@ -105,15 +116,24 @@ export function stageBounds(parts: readonly Part[], shapes: ReadonlyMap<string, 
       radius = Math.max(radius, Math.hypot(c[0], c[2]) + r);
     }
     for (let i = 0; i < 3; i++) {
-      min[i] = Math.min(min[i]!, rest ? rest.min[i]! : shape.position[i]! - r);
-      max[i] = Math.max(max[i]!, rest ? rest.max[i]! : shape.position[i]! + r);
+      const lo = rest ? rest.min[i]! : shape.position[i]! - r;
+      const hi = rest ? rest.max[i]! : shape.position[i]! + r;
+      min[i] = Math.min(min[i]!, lo);
+      max[i] = Math.max(max[i]!, hi);
+      if (subject && part.context) continue;
+      fmin[i] = Math.min(fmin[i]!, lo);
+      fmax[i] = Math.max(fmax[i]!, hi);
     }
   }
   const ok = Number.isFinite(min[0]);
+  const fitOk = Number.isFinite(fmin[0]);
   return {
     floor: ok ? [floor[0] - 0.002, Math.min(floor[0], floor[1]) - 0.002] : [-1, -1],
     radius,
     center: ok ? [(min[0] + max[0]) / 2, (min[1] + max[1]) / 2, (min[2] + max[2]) / 2] : [0, 0, 0],
     modelRadius: ok ? Math.hypot(max[0] - min[0], max[1] - min[1], max[2] - min[2]) / 2 : 1,
+    fit: fitOk
+      ? { center: [(fmin[0] + fmax[0]) / 2, (fmin[1] + fmax[1]) / 2, (fmin[2] + fmax[2]) / 2], radius: Math.hypot(fmax[0] - fmin[0], fmax[1] - fmin[1], fmax[2] - fmin[2]) / 2 }
+      : { center: [0, 0, 0], radius: 1 },
   };
 }

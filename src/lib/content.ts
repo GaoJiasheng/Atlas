@@ -4,6 +4,7 @@
  */
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { parseEngineData } from '../engines/schemas';
+import { withSharedFitness, type SharedFitnessRaw } from '../content/schema/fitness';
 import { resolveChapterTargets } from '../engines/core/store';
 import type { Chapter, SceneSnapshot, Theme } from '../engines/core/types';
 
@@ -49,7 +50,22 @@ const DATA_FILES = import.meta.glob<unknown>('/src/content/topics/*/data/*.json'
   import: 'default',
 });
 
-/** Raw `data/*.json` of a topic keyed by file base name. */
+// Shared fitness data (docs/16 §4): muscles/<region>.json, exercises/<pattern>.json, sources.json.
+const FITNESS_FILES = import.meta.glob<unknown>('/src/content/shared/fitness/**/*.json', { eager: true, import: 'default' });
+
+function sharedFitness(): SharedFitnessRaw {
+  const out: SharedFitnessRaw = { muscles: {}, exercises: {} };
+  const root = '/src/content/shared/fitness/';
+  for (const [path, value] of Object.entries(FITNESS_FILES)) {
+    const rest = path.slice(root.length).replace(/\.json$/, '');
+    if (rest === 'sources') out.sources = value;
+    else if (rest.startsWith('muscles/')) out.muscles[rest.slice('muscles/'.length)] = value;
+    else if (rest.startsWith('exercises/')) out.exercises[rest.slice('exercises/'.length)] = value;
+  }
+  return out;
+}
+
+/** Raw `data/*.json` of a topic keyed by file base name, with the shared data it uses merged in (`fitness`). */
 export function rawTopicData(slug: string): Record<string, unknown> {
   const prefix = `/src/content/topics/${slug}/data/`;
   const out: Record<string, unknown> = {};
@@ -58,7 +74,7 @@ export function rawTopicData(slug: string): Record<string, unknown> {
     const name = path.slice(prefix.length).replace(/\.json$/, '');
     out[name] = value;
   }
-  return out;
+  return withSharedFitness(out, sharedFitness());
 }
 
 /** Parsed engine data for a topic (throws on invalid data, failing the build). */
