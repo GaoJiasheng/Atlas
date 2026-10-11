@@ -1,30 +1,79 @@
 ---
 /**
- * Topic index (published topics only). The six fixed categories (SUBJECTS) are the primary entry and
- * double as the filter. Filters are progressive
- * enhancement (src/scripts/topic-filters.ts) and live in the query string.
+ * Home: the frontispiece and catalogue of an illustrated atlas (docs/08 §9).
+ *   1. frontispiece   title + up to five featured drawings with leader labels
+ *   2. category row   the six fixed subjects (SUBJECTS), each a filter with its count
+ *   3. plates         one card per published topic; one grid, or one section per subject
+ *                     once the catalogue passes SECTION_THRESHOLD
+ *   4. footer         disclaimer + ex-libris stamp
+ * Filters are progressive enhancement (src/scripts/topic-filters.ts) and live in the query string.
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SiteToggles from '../../components/SiteToggles';
+import Frontispiece from '../../components/home/Frontispiece.astro';
+import PlateCard from '../../components/home/PlateCard.astro';
+import SubjectIcon from '../../components/home/SubjectIcon.astro';
+import ExLibris from '../../components/home/ExLibris.astro';
 import { LOCALES, localeHref, t, tx, type Locale, type UiKey } from '../../i18n';
-import { getChapterCounts, getTopics } from '../../lib/content';
-import { SUBJECTS } from '../../content/schema/topic';
+import { getChapterCounts, getTopics, rawTopicData } from '../../lib/content';
+import { catalogueLayout, illustrationMeta, pickFeatured, topicStats, type FrontEntry } from '../../lib/home';
+import { SUBJECTS, type Subject } from '../../content/schema/topic';
 
 export function getStaticPaths() {
   return LOCALES.map((locale) => ({ params: { locale } }));
 }
 
 const locale = Astro.params.locale as Locale;
+const other: Locale = locale === 'en' ? 'zh' : 'en';
 // Draft and ready topics stay buildable and reachable by URL, but only published ones are listed.
 const topics = (await getTopics()).filter((topic) => topic.data.status === 'published');
 const counts = await getChapterCounts();
-const subjectCount = (s: string) => topics.filter((topic) => topic.data.subject === s).length;
 const countLabel = (n: number) => t(locale, n === 1 ? 'index.count.one' : 'index.count', { n });
 const subjectKey = (s: string) => `subject.${s}` as UiKey;
 const typeKeys = (mode: 'time' | 'space' | 'both' | 'lesson'): UiKey[] =>
   mode === 'both' ? ['type.time', 'type.space'] : mode === 'lesson' ? ['type.lesson'] : [mode === 'time' ? 'type.time' : 'type.space'];
+
+const plates = topics.map((topic, i) => {
+  const d = topic.data;
+  const meta = illustrationMeta(d.illustration);
+  const stats = topicStats(d.engine, rawTopicData(topic.id), counts.get(topic.id) ?? 0)
+    .map((s) => t(locale, (s.n === 1 ? `${s.key}.one` : s.key) as UiKey, { n: s.n }))
+    .join(' · ');
+  return {
+    id: topic.id,
+    subject: d.subject,
+    href: localeHref(locale, `/topics/${topic.id}/`),
+    plate: t(locale, 'index.plate', { n: String(i + 1).padStart(2, '0') }),
+    title: tx(d.title, locale),
+    subtitle: tx(d.subtitle, locale),
+    badges: [
+      { text: t(locale, subjectKey(d.subject)) },
+      ...typeKeys(d.mode).map((key) => ({ text: t(locale, key) })),
+    ],
+    stats,
+    stem: meta ? (d.illustration ?? null) : null,
+    mask: meta?.mask,
+    featured: d.featured,
+    hasIllustration: meta !== null,
+    label: { en: d.shortTitle?.en ?? d.title.en, zh: tx(d.shortTitle ?? d.title, 'zh') },
+  };
+});
+
+const front: FrontEntry[] = pickFeatured(plates).map((p) => ({
+  id: p.id,
+  href: p.href,
+  alt: p.title,
+  stem: p.stem!,
+  mask: p.mask,
+  label: p.label,
+}));
+const catalogue = catalogueLayout(plates);
+const subjectCount = (s: Subject) => plates.filter((p) => p.subject === s).length;
+const soon = SUBJECTS.filter((s) => subjectCount(s) === 0);
+const platesLabel = t(locale, plates.length === 1 ? 'index.plates.one' : 'index.plates', { n: plates.length });
 ---
 <BaseLayout locale={locale} title={t(locale, 'site.name')}>
+  <div class="atlas-grain atlas-grain--page" aria-hidden="true"></div>
   <header
     class="sticky top-0 z-20 flex items-center gap-3 border-b border-border bg-bg/90 px-4 py-2 backdrop-blur sm:px-6"
   >
@@ -37,15 +86,38 @@ const typeKeys = (mode: 'time' | 'space' | 'both' | 'lesson'): UiKey[] =>
     <SiteToggles client:idle locale={locale} path={Astro.url.pathname} />
   </header>
 
-  <main id="atlas-main" class="mx-auto max-w-6xl px-4 pt-8 pb-16 sm:px-6">
-    <h1 class="m-0 text-4xl sm:text-5xl">{t(locale, 'index.heading')}</h1>
-    <p class="mt-3 max-w-2xl text-lg text-ink-muted">{t(locale, 'index.intro')}</p>
+  <main id="atlas-main" class="home">
+    <section class="home__hero" aria-labelledby="home-title">
+      <div class="home__wrap home__hero-grid">
+        <div class="home__intro">
+          <p class="home__kicker">
+            <span>{t(locale, 'index.kicker')}</span>
+            <span class="home__kicker-rule" aria-hidden="true"></span>
+            <span>{platesLabel}</span>
+          </p>
+          <h1 id="home-title" class="home__title">{t(locale, 'index.heading')}</h1>
+          <p class="home__title-alt" lang={other === 'zh' ? 'zh-Hans' : 'en'}>{t(other, 'index.heading')}</p>
+          <p class="home__lede">{t(locale, 'index.intro')}</p>
+          <p class="home__epigraph">{t(locale, 'index.epigraph')}</p>
+          <a class="home__browse" href="#plates">
+            <span>{t(locale, 'index.browse')}</span>
+            <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1.5v10M2.5 7.5 7 12l4.5-4.5" fill="none" stroke="currentColor" stroke-width="1.25" /></svg>
+          </a>
+        </div>
+        {front.length > 0 && <Frontispiece entries={front} />}
+      </div>
+    </section>
 
-    <section class="mt-8 flex flex-col gap-4" aria-label={t(locale, 'index.filter.subject')} data-topic-filters>
-      <div class="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-7">
-        <button type="button" class="atlas-control atlas-category" data-filter="subject" data-value="" aria-pressed="true">
-          <span>{t(locale, 'index.filter.all')}</span>
-          <span class="atlas-category__meta">{countLabel(topics.length)}</span>
+    <section class="home__wrap home__filters" aria-label={t(locale, 'index.filter.subject')} data-topic-filters>
+      <div class="home__cats" role="group" aria-label={t(locale, 'index.filter.subject')}>
+        <button type="button" class="atlas-control atlas-category home-cat" data-filter="subject" data-value="" aria-pressed="true">
+          <svg class="atlas-subject-icon" width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true" data-icon="all">
+            <rect x="4.5" y="4.5" width="8" height="8" /><rect x="15.5" y="4.5" width="8" height="8" /><rect x="4.5" y="15.5" width="8" height="8" /><rect x="15.5" y="15.5" width="8" height="8" />
+          </svg>
+          <span class="home-cat__text">
+            <span class="home-cat__name">{t(locale, 'index.filter.all')}</span>
+            <span class="atlas-category__meta">{countLabel(plates.length)}</span>
+          </span>
         </button>
         {
           SUBJECTS.map((s) => {
@@ -53,56 +125,94 @@ const typeKeys = (mode: 'time' | 'space' | 'both' | 'lesson'): UiKey[] =>
             return (
               <button
                 type="button"
-                class="atlas-control atlas-category"
+                class="atlas-control atlas-category home-cat"
                 data-filter="subject"
                 data-value={s}
+                data-soon={n === 0 ? '' : undefined}
                 aria-pressed="false"
                 disabled={n === 0}
               >
-                <span>{t(locale, subjectKey(s))}</span>
-                <span class="atlas-category__meta">
-                  {n === 0 ? t(locale, 'index.category.soon') : countLabel(n)}
+                <SubjectIcon subject={s} dotted={n === 0} />
+                <span class="home-cat__text">
+                  <span class="home-cat__name">{t(locale, subjectKey(s))}</span>
+                  <span class="atlas-category__meta">{n === 0 ? t(locale, 'index.category.soon') : countLabel(n)}</span>
                 </span>
               </button>
             );
           })
         }
       </div>
-      <p class="m-0 text-sm text-ink-muted" aria-live="polite" data-count data-template={t(locale, 'index.count')} data-template-one={t(locale, 'index.count.one')}>
-        {countLabel(topics.length)}
+      <p class="home__count" aria-live="polite" data-count data-template={t(locale, 'index.count')} data-template-one={t(locale, 'index.count.one')}>
+        {countLabel(plates.length)}
       </p>
     </section>
 
-    <ul class="mt-6 grid list-none gap-4 p-0 sm:grid-cols-2 lg:grid-cols-3">
+    <section id="plates" class="home__wrap home__plates" aria-labelledby="plates-title" data-catalogue={catalogue.mode}>
+      <h2 id="plates-title" class="home__section-title">
+        <span>{t(locale, 'index.catalogue')}</span>
+        <span class="home__section-rule" aria-hidden="true"></span>
+      </h2>
       {
-        topics.map((topic) => {
-          const d = topic.data;
-          return (
-            <li data-topic data-subject={d.subject}>
-              <a
-                href={localeHref(locale, `/topics/${topic.id}/`)}
-                class="group flex h-full flex-col gap-3 rounded-lg border border-border bg-surface p-5 no-underline shadow-panel transition-colors hover:border-border-strong"
-              >
-                <div class="flex flex-wrap items-center gap-2">
-                  <span class="atlas-badge atlas-badge--accent">{t(locale, subjectKey(d.subject))}</span>
-                  {typeKeys(d.mode).map((key) => <span class="atlas-badge">{t(locale, key)}</span>)}
-                </div>
-                <h2 class="m-0 text-2xl">{tx(d.title, locale)}</h2>
-                <p class="m-0 flex-1 text-ink-muted">{tx(d.subtitle, locale)}</p>
-                <p class="m-0 flex items-center gap-2 text-sm text-ink-faint">
-                  <span>{t(locale, 'index.chapters', { n: counts.get(topic.id) ?? 0 })}</span>
-                </p>
-              </a>
-            </li>
-          );
-        })
+        catalogue.mode === 'grid' ? (
+          <ul class="home__grid">
+            {catalogue.items.map((p) => (
+              <li data-topic data-subject={p.subject}>
+                <PlateCard {...p} placeholder={t(locale, 'index.placeholder')} />
+              </li>
+            ))}
+            {catalogue.items.length % 2 === 1 && (
+              <li class="home__more" data-catalogue-end>
+                <p class="home__more-title">{t(locale, 'index.more.title')}</p>
+                {soon.length > 0 && (
+                  <>
+                    <p class="home__more-lede">{t(locale, 'index.more.next')}</p>
+                    <ul class="home__more-list">
+                      {soon.map((s) => (
+                        <li>
+                          <SubjectIcon subject={s} dotted />
+                          <span>{t(locale, subjectKey(s))}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                )}
+              </li>
+            )}
+          </ul>
+        ) : (
+          catalogue.sections.map((g) => (
+            <section class="home__subject" id={`subject-${g.subject}`} data-section={g.subject} aria-labelledby={`subject-${g.subject}-title`}>
+              <h3 id={`subject-${g.subject}-title`} class="home__subject-title">
+                <SubjectIcon subject={g.subject} size={22} />
+                <span>{t(locale, subjectKey(g.subject))}</span>
+                <span class="home__subject-count">{countLabel(g.items.length)}</span>
+              </h3>
+              <ul class="home__grid">
+                {g.items.map((p) => (
+                  <li data-topic data-subject={p.subject}>
+                    <PlateCard {...p} level={4} placeholder={t(locale, 'index.placeholder')} />
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))
+        )
       }
-    </ul>
-    <p class="mt-6 hidden text-ink-muted" data-empty>{t(locale, 'index.empty')}</p>
+      <p class="home__empty hidden" data-empty>{t(locale, 'index.empty')}</p>
+    </section>
+
+    <footer class="home__wrap">
+      <div class="home__footer">
+        <p class="home__footer-note">{t(locale, 'index.footer.note')}</p>
+        <ExLibris label={t(locale, 'index.footer.stamp')} />
+      </div>
+    </footer>
   </main>
 </BaseLayout>
 
 <script>
   import { initTopicFilters } from '../../scripts/topic-filters';
+  import { initDrawingFallbacks } from '../../lib/drawing-fallback';
   initTopicFilters();
+  initDrawingFallbacks();
 </script>

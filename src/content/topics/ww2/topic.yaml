@@ -9,3 +9,6 @@ stage: geo
 theme: paper
 sensitivity: open
 status: published
+illustration: ww2
+shortTitle: { en: "Second World War", zh: "第二次世界大战" }
+featured: 2

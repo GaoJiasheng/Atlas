@@ -1,0 +1,37 @@
+---
+/**
+ * Ex-libris ink stamp for the home footer (docs/08 §9): a double ring, the legend set
+ * around it and a tiny globe, in signal orange at 70 %, slightly rotated, inked unevenly.
+ */
+interface Props {
+  label: string;
+  size?: number;
+}
+const { label, size = 72 } = Astro.props;
+---
+<svg class="atlas-exlibris" width={size} height={size} viewBox="0 0 100 100" role="img" aria-label={label}>
+  <defs>
+    <path id="atlas-exlibris-ring" d="M50 50m-33.6 0a33.6 33.6 0 1 1 67.2 0a33.6 33.6 0 1 1-67.2 0" />
+    <filter id="atlas-exlibris-ink" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" result="noise" />
+      <feColorMatrix in="noise" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.7 1.9" result="speckle" />
+      <feComposite in="SourceGraphic" in2="speckle" operator="in" result="inked" />
+      <feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="1" seed="3" result="warp" />
+      <feDisplacementMap in="inked" in2="warp" scale="1.4" />
+    </filter>
+  </defs>
+  <g filter="url(#atlas-exlibris-ink)" fill="none" stroke="currentColor">
+    <circle cx="50" cy="50" r="46.5" stroke-width="2" />
+    <circle cx="50" cy="50" r="43" stroke-width="0.9" />
+    <circle cx="50" cy="50" r="24.5" stroke-width="0.9" />
+    <text fill="currentColor" stroke="none" font-size="10" font-weight="600" letter-spacing="0.4">
+      <textPath href="#atlas-exlibris-ring" textLength="206" lengthAdjust="spacing">ATLAS · 会动的课本 · EST. 2026 ·</textPath>
+    </text>
+    <g stroke-width="1.1">
+      <circle cx="50" cy="50" r="12" />
+      <ellipse cx="50" cy="50" rx="5" ry="12" />
+      <path d="M38 50h24M39.6 44h20.8M39.6 56h20.8" />
+    </g>
+    
+  </g>
+</svg>

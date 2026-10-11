@@ -60,6 +60,18 @@ export const topicSchema = z
     /** Path relative to the topic directory, e.g. `./cover.jpg`. */
     cover: z.string().min(1).optional(),
     /**
+     * Home-page drawing: file stem under `public/illustrations/` (`<stem>.webp` + `<stem>@2x.webp`,
+     * made by `scripts/illustrate.ts`). Missing or not yet drawn = a dotted placeholder plate.
+     */
+    illustration: kebabId.optional(),
+    /** Short name for the drawing's leader label in the frontispiece (EN small caps + 中文); defaults to the title. */
+    shortTitle: bilingual.optional(),
+    /**
+     * Shown in the home frontispiece (at most five, published topics with a drawing only).
+     * `true`, or a rank: 1 takes the largest slot, then 2, 3 …; plain `true` comes after the ranked ones.
+     */
+    featured: z.union([z.boolean(), z.number().int().min(1).max(99)]).default(false),
+    /**
      * TimeScene: per-topic names of the engine's blocs (legend, entity inspector, leader notes),
      * overriding the site-wide `time.bloc.*` strings. `out` = "no longer at war".
      */

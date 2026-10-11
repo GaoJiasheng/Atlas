@@ -11,4 +11,7 @@ stage: model3d
 theme: paper
 sensitivity: open
 status: published
+illustration: aircon
+shortTitle: { en: "Air conditioner", zh: "空调" }
+featured: 3
 note: { en: "Generic design study · schematic layout · not a specific brand or model", zh: "通用设计研究 · 示意布局 · 不代表任何品牌或型号" }

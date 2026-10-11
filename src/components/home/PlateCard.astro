@@ -1,0 +1,49 @@
+---
+/**
+ * A catalogue "plate" (docs/08 §9): drawing (left on wide cards, on top on phones),
+ * PLATE NN in signal orange + subject / type tags, serif title, subtitle and a mono
+ * stats line, in a hairline frame with corner ticks. The whole card is one link.
+ * No drawing yet (or the file fails to load, src/lib/drawing-fallback.ts): a dotted
+ * placeholder frame with the subject icon.
+ */
+import Drawing from './Drawing.astro';
+import SubjectIcon from './SubjectIcon.astro';
+import type { Subject } from '../../content/schema/topic';
+
+interface Props {
+  href: string;
+  plate: string;
+  title: string;
+  subtitle: string;
+  subject: Subject;
+  badges: { text: string; accent?: boolean }[];
+  stats: string;
+  stem: string | null;
+  placeholder: string;
+  /** 3 in the single grid, 4 under a subject section heading. */
+  level?: 3 | 4;
+}
+const { href, plate, title, subtitle, subject, badges, stats, stem, placeholder, level = 3 } = Astro.props;
+const Heading = level === 4 ? 'h4' : 'h3';
+---
+<a class="plate" href={href} data-plate>
+  <span class="plate__tick plate__tick--tl" aria-hidden="true"></span>
+  <span class="plate__tick plate__tick--tr" aria-hidden="true"></span>
+  <span class="plate__tick plate__tick--bl" aria-hidden="true"></span>
+  <span class="plate__tick plate__tick--br" aria-hidden="true"></span>
+  <div class="plate__figure" data-figure={stem ? 'drawing' : 'placeholder'}>
+    {stem && <Drawing stem={stem} alt={title} sizes="(min-width: 1024px) 240px, (min-width: 640px) 34vw, 70vw" />}
+    <div class="plate__placeholder" role="img" aria-label={placeholder} data-placeholder>
+      <SubjectIcon subject={subject} size={44} />
+    </div>
+  </div>
+  <div class="plate__body">
+    <div class="plate__meta">
+      <span class="plate__no">{plate}</span>
+      {badges.map((b) => <span class:list={['atlas-badge', b.accent && 'atlas-badge--accent']}>{b.text}</span>)}
+    </div>
+    <Heading class="plate__title"><span>{title}</span></Heading>
+    <p class="plate__subtitle">{subtitle}</p>
+    <p class="plate__stats" data-stats>{stats}</p>
+  </div>
+</a>

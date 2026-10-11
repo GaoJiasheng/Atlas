@@ -21,6 +21,8 @@ function collectConsoleErrors(page: Page): string[] {
   return errors;
 }
 
+const WW2_STATS = { en: '11 chapters · 78 events · 12 maps', zh: '11 章 · 78 个事件 · 12 幅地图' } as const;
+
 for (const locale of LOCALES) {
   test(`index (${locale}) lists published topics only`, async ({ page }) => {
     const errors = collectConsoleErrors(page);
@@ -41,6 +43,7 @@ for (const locale of LOCALES) {
     await expect(page.locator('[data-topic] .atlas-badge')).toHaveCount(10);
     await page.locator('[data-filter="subject"][data-value="history"]').click();
     await expect(page.locator('[data-topic]:visible')).toHaveCount(2);
+    await expect(page.locator('[data-catalogue-end]')).toBeHidden();
     await page.locator('[data-filter="subject"][data-value="science"]').click();
     await expect(page.locator('[data-topic]:visible')).toHaveCount(1);
     await page.locator('[data-filter="subject"][data-value="biology"]').click();
@@ -53,6 +56,69 @@ for (const locale of LOCALES) {
     expect(errors).toEqual([]);
   });
 
+  test(`index (${locale}) frontispiece, category icons and plate cards`, async ({ page }) => {
+    const errors = collectConsoleErrors(page);
+    await page.goto(`/${locale}/`);
+    // Frontispiece: all five published topics are featured and drawn; each drawing opens its topic and has a leader label.
+    const front = page.locator('[data-frontispiece] .fp__box--wide');
+    await expect(front).toBeVisible();
+    await expect(front.locator('.fp__item')).toHaveCount(5);
+    await expect(front.locator('.fp__label')).toHaveCount(5);
+    await expect(front.locator('.fp__leaders path')).toHaveCount(5);
+    await expect(front.locator('.fp__item').first()).toHaveAttribute('href', new RegExp(`/${locale}/topics/grasshopper/$`));
+    await expect(front.locator('.fp__item img').first()).toHaveAttribute('alt', locale === 'en' ? 'Inside a Grasshopper' : '一只蝗虫的身体');
+    await expect(front.locator('.fp__label').first()).toContainText('蝗虫');
+    for (const img of await front.locator('img').all()) {
+      await expect.poll(() => img.evaluate((el: HTMLImageElement) => el.complete && el.naturalWidth > 0)).toBe(true);
+    }
+    // Category tiles: a line icon each (All + six subjects); the two empty subjects are dotted and disabled.
+    await expect(page.locator('[data-filter="subject"] svg.atlas-subject-icon')).toHaveCount(7);
+    await expect(page.locator('[data-filter="subject"][data-soon]')).toHaveCount(2);
+    await expect(page.locator('[data-filter="subject"][data-soon] svg[stroke-dasharray]')).toHaveCount(2);
+    // Plate cards: one link each, numbered, with a drawing and a stats line counted from the topic data.
+    await expect(page.locator('[data-topic] [data-plate]')).toHaveCount(5);
+    await expect(page.locator('[data-topic] [data-figure="drawing"] img')).toHaveCount(5);
+    const ww2 = page.locator('[data-topic]', { has: page.locator(`a[href$="/${locale}/topics/ww2/"]`) });
+    await expect(ww2.locator('[data-stats]')).toHaveText(WW2_STATS[locale]);
+    await expect(ww2.locator('.plate__no')).toHaveText(locale === 'en' ? 'Plate 05' : '图版 05');
+    await expect(page.locator('[data-topic] [data-stats]:empty')).toHaveCount(0);
+    // Reserved image boxes: no layout shift while drawings load.
+    const box = await page.locator('[data-topic] [data-figure] img').first().boundingBox();
+    expect(Math.abs((box?.width ?? 0) - (box?.height ?? 1))).toBeLessThan(1);
+    await expect(page.locator('h1')).toHaveCount(1);
+    await expect(page.locator('h2#plates-title')).toBeVisible();
+    await expect(page.locator('.atlas-exlibris')).toBeVisible();
+    expect(errors).toEqual([]);
+  });
+}
+
+test('index: a plate whose drawing fails to load falls back to the dotted placeholder', async ({ page }) => {
+  await page.route('**/illustrations/ww1*.webp', (route) => route.abort());
+  await page.goto('/en/');
+  const ww1 = page.locator('[data-topic]', { has: page.locator('a[href$="/en/topics/ww1/"]') });
+  await ww1.scrollIntoViewIfNeeded();
+  await expect(ww1.locator('[data-figure="placeholder"] [data-placeholder]')).toBeVisible();
+  await expect(ww1.locator('[data-placeholder] svg[data-icon="history"]')).toBeVisible();
+  await expect(page.locator('[data-figure="placeholder"]')).toHaveCount(1);
+});
+
+test('index on a phone: two-drawing frontispiece, plates stacked, category row scrolls', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/en/');
+  await expect(page.locator('[data-frontispiece] .fp__box--wide')).toBeHidden();
+  const narrow = page.locator('[data-frontispiece] .fp__box--narrow');
+  await expect(narrow).toBeVisible();
+  await expect(narrow.locator('.fp__item')).toHaveCount(2);
+  const row = page.locator('.home__cats');
+  expect(await row.evaluate((el) => el.scrollWidth > el.clientWidth)).toBe(true);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  const card = page.locator('[data-topic] [data-plate]').first();
+  const figure = await card.locator('[data-figure]').boundingBox();
+  const title = await card.locator('.plate__title').boundingBox();
+  expect((figure?.y ?? 0) + (figure?.height ?? 0)).toBeLessThanOrEqual(title?.y ?? 0);
+});
+
+for (const locale of LOCALES) {
   for (const topic of TOPICS) {
     test(`${topic.slug} (${locale}): stage renders, arrows step chapters`, async ({ page }) => {
       const errors = collectConsoleErrors(page);

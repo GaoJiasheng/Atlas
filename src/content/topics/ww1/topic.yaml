@@ -9,6 +9,9 @@ stage: geo
 theme: paper
 sensitivity: open
 status: published
+illustration: ww1
+shortTitle: { en: "First World War", zh: "第一次世界大战" }
+featured: 4
 # The engine's fixed blocs, named for this war (docs/06 blocLabels): allied = the Entente and its partners.
 blocLabels:
   axis: { en: "Central Powers", zh: "同盟国" }

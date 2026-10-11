@@ -36,12 +36,12 @@ atlas/
   docs/                         # 本套文档
   src/
     pages/[locale]/             # /en/... /zh/...
-      index.astro               # 主题索引（六类入口，按类筛选）
+      index.astro               # 首页：扉页（精选插图构图）+ 六类入口（按类筛选）+ 图版目录（docs/08 §9）
       topics/[slug].astro       # 主题页：挂 Scene 岛 + MDX 正文
     content/
       config.ts                 # collections + zod schema
       topics/<slug>/
-        topic.yaml              # 元信息（分类、规划标签、形态、主题色、状态；年级为可选规划字段）
+        topic.yaml              # 元信息（分类、规划标签、形态、主题色、状态、首页插图与精选；年级为可选规划字段）
         chapters/<nn>-<id>.mdx  # 章节正文，frontmatter 里是章节状态定义
         data/*.json             # 引擎数据（关键帧、事件、箭头、零件清单）
     engines/
@@ -66,6 +66,7 @@ atlas/
     geo/                        # natural-earth-50m.topojson, borders-1939.geojson ...
     models/                     # *.glb
     img/
+    illustrations/              # 首页铅笔插图 <stem>.webp + @2x（scripts/illustrate.ts）
     fonts/
   scripts/
     validate-content.ts         # 双语完整性、引用存在性、schema

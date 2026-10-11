@@ -1,0 +1,76 @@
+---
+/**
+ * Frontispiece composition (docs/08 §9): up to five featured drawings in a designed
+ * arrangement (src/lib/home.ts FRONT_LAYOUTS), each with a hairline leader label
+ * (EN small caps · 中文) ending in a hollow circle on the drawing. Clicking a drawing
+ * or its label opens the topic. Two arrangements are rendered, `wide` and `narrow`
+ * (phones, first two drawings); CSS shows one.
+ */
+import Drawing from './Drawing.astro';
+import { composeFrontispiece, frontCapacity, type FrontEntry, type FrontLayout } from '../../lib/home';
+
+interface Props {
+  entries: FrontEntry[];
+}
+const { entries } = Astro.props;
+const layouts: FrontLayout[] = ['wide', 'narrow'];
+const pct = (v: number, of: number) => `${Math.round((v / of) * 100000) / 1000}%`;
+---
+<div class="fp" data-frontispiece={entries.length}>
+  {
+    layouts.map((layout) => {
+      const used = entries.slice(0, frontCapacity(layout));
+      const comp = composeFrontispiece(used, layout);
+      const { width: W, height: H } = comp;
+      return (
+        <div class={`fp__box fp__box--${layout}`} style={`aspect-ratio: ${W} / ${H}`} data-layout={layout}>
+          {comp.items.map((item, i) => {
+            const e = used[i]!;
+            return (
+              <a
+                class="fp__item"
+                href={e.href}
+                data-k={i}
+                data-fp-item={e.id}
+                style={`left:${pct(item.x, W)};top:${pct(item.y, H)};width:${pct(item.w, W)};z-index:${item.z};--rot:${item.rot}deg;--i:${i}`}
+              >
+                <Drawing
+                  stem={e.stem}
+                  alt={e.alt}
+                  sizes={layout === 'wide' ? `(min-width: 1024px) ${Math.round(item.w * 0.045)}vw, 50vw` : `${Math.round(item.w * 0.09)}vw`}
+                  eager={layout === 'wide' && i === 0}
+                />
+              </a>
+            );
+          })}
+          <svg class="fp__leaders" viewBox={`0 0 ${W} ${H}`} aria-hidden="true" focusable="false">
+            {comp.items.map((item, i) => (
+              <g data-k={i} style={`--i:${i}`}>
+                <path d={item.leader} pathLength="1" />
+                <circle cx={item.anchor.x.toFixed(1)} cy={item.anchor.y.toFixed(1)} r={layout === 'wide' ? 7 : 14} />
+              </g>
+            ))}
+          </svg>
+          {comp.items.map((item, i) => {
+            const e = used[i]!;
+            return (
+              <a
+                class="fp__label"
+                href={e.href}
+                tabindex="-1"
+                aria-hidden="true"
+                data-k={i}
+                data-align={item.label.align}
+                style={`left:${pct(item.label.x, W)};top:${pct(item.label.y, H)};--i:${i}`}
+              >
+                <span class="fp__label-en">{e.label.en}</span>
+                <span class="fp__label-sep">·</span>
+                <span class="fp__label-zh" lang="zh-Hans">{e.label.zh}</span>
+              </a>
+            );
+          })}
+        </div>
+      );
+    })
+  }
+</div>

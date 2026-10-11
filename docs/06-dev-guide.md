@@ -45,12 +45,13 @@ src/
   i18n/                       # ui.en.json ui.zh.json + t() / tx() / 路径工具
   theme/                      # tokens.css, theme.ts（解析/应用/读 token）, map-style.ts
   lib/                        # content.ts（构建期取内容）, prefs.ts（localStorage）, time.ts, levels.ts（仅供 schema 校验可选的规划字段 `level`）,
+                              # home.ts（首页：统计行、精选、扉页构图、目录分节）+ illustrations.json（插图清单，illustrate.ts 写）, drawing-fallback.ts,
                               # speech.ts（演示语音：选声、朗读队列、voiceLog）
-  components/                 # SiteToggles 岛、MDX 组件（Lang / More / Num / FlyTo / Term）
+  components/                 # SiteToggles 岛、MDX 组件（Lang / More / Num / FlyTo / Term）、home/（首页：Frontispiece / PlateCard / SubjectIcon / Drawing / ExLibris）
   layouts/BaseLayout.astro    # <html lang>、首帧前主题脚本、hreflang
   pages/                      # index.astro（跳转）, [locale]/index.astro, [locale]/topics/[slug].astro
   styles/                     # global.css（Tailwind + token 映射）, fonts.css（自托管 Plex woff2）, scene.css（HUD 布局与部件）
-scripts/                      # validate-content.ts, build-geo.ts, build-icons.ts, shoot.ts（pnpm shoot）,
+scripts/                      # validate-content.ts, build-geo.ts, build-icons.ts, illustrate.ts（首页插图）, shoot.ts（pnpm shoot）,
                               # new-topic.ts（主题脚手架）, sources-md.ts, geo/lib/（真实地图管线）+ geo/<slug>/（每主题清单）
 tests/                        # vitest（数据层与纯函数）
 tests-e2e/                    # Playwright：smoke.spec.ts, hud.spec.ts, hud-layout.ts（pnpm shoot --layout 共用）
@@ -411,7 +412,12 @@ pnpm shoot sample-time --shots mine.json hero    # 自定义截图表（{name: {
 ### 年级、索引页与偏好
 
 - 站点不展示年级：没有年级选择器、章节轨没有年级芯片、规格表没有年级行；所有章节始终可进入，←→ 和上下章按钮逐章走。`level` / `levels` 只是 `topic.yaml` / 章节 / 零件上可选的规划元数据（schema 接受缺省，不渲染）。
-- 索引页**只列 `status: published` 的主题**，以固定六类（science / math / history / geography / biology / computer）为主入口并按类筛选；类别计数只数已发布主题，没有已发布主题的类别置灰标“即将推出”。卡片标签只有学科和类型（`mode`：`time` → 时间 / Time，`space` → 空间 / Space，`both` 两个都有），再加章数。
+- 索引页（首页，视觉语法见 docs/08 §9）**只列 `status: published` 的主题**，自上而下：扉页（标题 + 最多五幅精选插图的构图）→ 六类学科行（固定 science / math / history / geography / biology / computer，每格一个 hairline 图标 + 计数，兼作筛选；没有已发布主题的类别用点线框画“即将推出”并禁用；手机上横向滚动、吸附）→ 图版目录（每个主题一张“图版”卡）→ 页脚声明 + 藏书票。卡片标签只有学科和类型（`mode`：`time` → 时间 / Time，`space` → 空间 / Space，`both` 两个都有，`lesson` → 课 / Lesson）；`PLATE NN` 按目录顺序编号；统计行由数据算出（`src/lib/home.ts topicStats`，不需要新字段）：TimeScene = 章 · 事件 · 地图（`control.json` 关键帧数），SpaceScene = 章 · 部件，MathScene = 步 · 小题 · 练习题。主题超过 9 个（`SECTION_THRESHOLD`）时目录自动按学科分节（`catalogueLayout`），学科格同时是筛选和锚点（点了滚到那一节）；单栅格里主题数为奇数时末尾补一张点线的“更多图版正在绘制”卡（列出即将推出的学科，筛选时隐藏）。
+- `topic.yaml` 的首页字段（都可选）：`illustration: <stem>`（`public/illustrations/<stem>.webp` + `@2x`，见下条；还没做出来时卡片画点线占位框 + 学科图标，扉页跳过它；运行时图片加载失败也退回占位框，`src/lib/drawing-fallback.ts`）、`shortTitle: { en, zh }`（扉页引线标签用的短名，缺省用标题）、`featured: true | <名次>`（上扉页；`1` 占最大位，然后 2、3…，`true` 排在有名次的后面、按目录顺序；最多五幅，只取有插图的；一个都没标就取目录里前五个有插图的）。
+- **首页插图**（`scripts/illustrate.ts`，只用 sharp）：透明底石墨铅笔素描，科学图版风格，无彩色。
+  - `pnpm tsx scripts/illustrate.ts process <src.png> <stem>`：按 alpha 裁掉透明边、补成正方形（四周留 6 %）、去色，导出 `public/illustrations/<stem>.webp`（800 px，目标 ≤ 90 KB）和 `<stem>@2x.webp`（1600 px，≤ 260 KB），质量从 82 起每次降 6 直到进预算；同时把 16×16 的覆盖掩码写进 `src/lib/illustrations.json`（扉页用它把引线锚点吸到有墨的地方；清单里有这个 stem = 插图存在）。
+  - `pnpm tsx scripts/illustrate.ts gen <stem> "<subject>"`：在临时目录里跑 `codex exec --skip-git-repo-check -C <tmpdir> "<共用风格 brief + subject>" < /dev/null`，再对结果跑 `process`。brief（`STYLE_BRIEF`）：精细石墨铅笔科学图版、排线与点描、只用石墨灰，无彩色 / 纸纹 / 背景 / 边框 / 文字 / 投影，透明 PNG，主体约占 1024 方形的 85 %。生成的图先看一遍再用（历史主题的插图不带任何一方的国徽、机徽或旗帜）。
+  - 换图：重跑 `process`，`src/lib/illustrations.json` 和两个 webp 一起提交；`tests/home.test.ts` 检查每个已发布主题的插图都在、在预算内。首页截图：`docs/screenshots/index/{en,zh,dark,phone-390}.png`（1600×900，手机 390×844）。
 - 外观与语言是两个 hairline 下拉菜单（`widgets/Dropdown.tsx`，`hud-btn` 语法）：“LOOK ▾”（Auto / Paper / Cinema）、“EN ▾ / 中文 ▾”（English / 中文）。索引页和主题 HUD 共用；键盘可用（Enter/空格/↓ 打开，↑↓ Home End 移动，Esc 或点外面关闭），点击区 ≥ 44px。语言切换保留路径、query 和 hash。
 - 读写偏好走 `src/lib/prefs.ts` 的 hook（`useThemeOverride`；语言偏好用 `setSavedLocale`；阅读面板收起用 `getReaderExpanded / setReaderExpanded`、底部面板收起用 `getPanelsExpanded / setPanelsExpanded`、右上卡折叠用 `getCardExpanded / setCardExpanded`，sessionStorage），不要直接碰 storage；场景状态不进 storage，只进 URL。
 
