@@ -87,6 +87,7 @@ export function ExerciseCard({ exercise, file, fitness, playable }: { exercise: 
         <h3 className="space-inspector__title">
           {name}
           {locale === 'en' && exercise.name.zh && <small lang="zh-Hans">{exercise.name.zh}</small>}
+          {locale === 'zh' && exercise.name.zh && <small lang="en">{exercise.name.en}</small>}
         </h3>
         <button
           type="button"

@@ -3,10 +3,25 @@
  * appears before three.js arrives) + the technical-plate HUD content in the
  * host's slots (docs/08 §2–§3): VIEW presets (ORBIT, REFERENCE, then the
  * named presets of parts.json; chapters are the top bar's number chips),
- * mode switches
- * (X / E / C / F / R / P, buttons in the overlay's control panel), part-chain
- * card, the three bottom panels, perf readout, two-column leader labels,
- * explode slider and the part inspector.
+ * mode switches (X / E / C / F / R / P, buttons in the overlay's control
+ * panel, the explode slider under them while EXPLODED), part-chain card,
+ * two-column leader labels, the chapter axis at the bottom (`bottomBar`), the
+ * left column's PLATE block (`plate`: elevation, state rows, selection, perf),
+ * and the reading panel's beat line + inspector (`readerTop`) and chapter
+ * index (`readerEnd`).
+ *
+ * BEATS OUTSIDE THE PRESENTATION (docs/08 §2 HUD 铁律 a): the chapter axis
+ * (core/axis) has a segment per chapter and a tick per beat. A tick, `,` /
+ * `.`, or the beat line's ‹ › apply that beat exactly as the presentation
+ * does (camera flight, layers, ghost, tints, labels, pose, cut, exercise,
+ * sites, run) without entering it: no caption card, the HUD stays, the
+ * caption is the reading panel's beat line. A chapter picked by the reader
+ * (segment, chips, rail, ← →) opens on its first beat once the chapter
+ * transition is out; instant chapter changes (tests, shots) show the
+ * chapter's own state (`beat: null`). The store's `beat` is in the URL (`b`,
+ * 1-based); a deep link with `b` gets the beat's non-URL fields (hide, ghost,
+ * exercise, tints, sites) on top of the URL's. After the flight the reader may
+ * orbit; selecting a part keeps the beat. P starts at the beat on show.
  *
  * PRESENTATION (P) runs on the core presentation system (core/presentation).
  * SpaceScene's adapter: a beat is its chapter's target plus the beat's view /
@@ -26,11 +41,14 @@
  */
 import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useStore } from 'zustand';
-import type { Chapter, EngineViewProps, OrbitCamera } from '../core/types';
+import type { Chapter, EngineViewProps, OrbitCamera, SceneSnapshot } from '../core/types';
 import { SceneSlot, useHud, useScene, useSceneContext, useSceneControls, useSceneStore, useT } from '../core/context';
+import { chapterNumbers, isBackground } from '../core/chapters';
+import { ChapterAxis, type AxisChapter } from '../core/axis/ChapterAxis';
+import { axisCounter, flatIndex, stepBeat } from '../core/axis/axis';
 import type { SceneControls, SceneMode, ScenePreset, SceneStats } from '../core/controls';
 import { isOrbitCamera, normalizeCamera } from '../core/camera';
-import { usePresentation, type SpaceBeatSpec, type SpacePresentationAdapter, type SpaceSavedState } from '../core/presentation';
+import { usePresentation, type Beat, type SpaceBeatSpec, type SpacePresentationAdapter, type SpaceSavedState } from '../core/presentation';
 import { t as tl, tx, type BilingualText, type UiKey } from '../../i18n';
 import { DEFAULT_CAMERA, fitCameraToAspect, REFERENCE_TWEEN_MS, referenceCamera, roundCamera } from './lib/camera';
 import { modelBounds } from './lib/parts';
@@ -40,14 +58,13 @@ import { exerciseOf, highlightOf, type SpaceSceneExt } from './index';
 import type { SpaceChapterState, SpaceSceneData, SpaceView, ViewPresets } from './schema';
 import { createSpaceUi } from './ui';
 import { cameraSettled, createBridge } from './bridge';
-import { ExplorerBar, DEFAULT_EXPLODE } from './explorer/ExplorerBar';
+import { DEFAULT_EXPLODE } from './explorer/ExplorerBar';
 import { ExplorerOverlay } from './explorer/ExplorerOverlay';
 import { Inspector } from './explorer/Inspector';
+import { BeatLine } from './explorer/BeatLine';
+import { ChapterIndex } from './explorer/ChapterIndex';
 import { PartChainCard } from './hud/PartChainCard';
-import { ArchitecturePanel } from './hud/ArchitecturePanel';
-import { DetailPanel } from './hud/DetailPanel';
-import { StatePanel } from './hud/StatePanel';
-import { PerfReadout } from './hud/PerfReadout';
+import { PlateBlock } from './hud/PlateBlock';
 import { spaceSpecRows } from './hud/spec';
 import { partNumber } from './hud/common';
 import { LeaderLabels } from './hud/LeaderLabels';
@@ -90,12 +107,15 @@ function chapterCamera(chapter: Chapter | undefined, inherited: unknown, view: S
   return asOrbit(chapter?.state.camera) ?? views[view]?.camera ?? asOrbit(inherited) ?? DEFAULT_CAMERA;
 }
 
-type Pick5 = Pick<SpaceSceneExt, 'view' | 'explode' | 'run' | 'cutaway' | 'part'> & { chapter: string | null };
+type Pick5 = Pick<SpaceSceneExt, 'view' | 'explode' | 'run' | 'cutaway' | 'part' | 'beat'> & { chapter: string | null };
+
+const sameJson = (a: unknown, b: unknown) => JSON.stringify(a ?? null) === JSON.stringify(b ?? null);
+const ownBeats = (c: Chapter | undefined): readonly SpaceBeatSpec[] => (c?.state as SpaceChapterState | undefined)?.beats ?? [];
 
 export default function SpaceSceneView({ data, chapters, locale }: EngineViewProps) {
   const file = (data as SpaceSceneData).parts;
   const store = useSceneStore<SpaceSceneExt>();
-  const { hud } = useSceneContext();
+  const { hud, actions } = useSceneContext();
   const t = useT();
   const [ui] = useState(createSpaceUi);
   const [bridge] = useState(createBridge);
@@ -108,6 +128,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
     cutaway: st.cutaway,
     part: st.part,
     chapter: st.chapter,
+    beat: st.beat,
   }));
 
   const bounds = useMemo(() => modelBounds(file.parts), [file.parts]);
@@ -161,54 +182,67 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
   const named = useMemo(() => file.presets ?? [], [file.presets]);
   /** The scene on entering (before ORBIT / REFERENCE / the selection were dropped). */
   const entered = useRef<SpaceSavedState | null>(null);
+  /**
+   * Put the stage in a beat's state: its chapter's target plus the beat's
+   * view / part / explode / run / cutaway / layers / hide / pose / ghost /
+   * exercise / highlight / sites and its camera (an orbit camera, a named
+   * preset's camera, else the chapter's). The presentation's `applyBeat` and
+   * the chapter axis share it; the promise says when the beat has settled.
+   */
+  const beatScene = (b: Beat<SpaceBeatSpec>) => {
+    const st = store.getState();
+    const target = st.chapterTarget(b.chapter);
+    const spec: SpaceBeatSpec | undefined = b.spec;
+    const view = spec?.view ?? target.view;
+    const preset = typeof spec?.camera === 'string' ? named.find((p) => p.id === spec.camera)?.camera : undefined;
+    const own = typeof spec?.camera === 'object' ? spec.camera : undefined;
+    const camera = own ?? preset ?? chapterCamera(chapters.find((c) => c.id === b.chapter), target.camera, view, file.views);
+    const next: Partial<SceneSnapshot<SpaceSceneExt>> = {
+      ...target,
+      view,
+      ...(spec?.part !== undefined ? { part: spec.part } : {}),
+      ...(spec?.explode !== undefined ? { explode: spec.explode } : {}),
+      ...(spec?.run !== undefined ? { run: spec.run } : {}),
+      ...(spec?.cutaway !== undefined ? { cutaway: spec.cutaway } : {}),
+      ...(spec?.layers ? { layers: [...spec.layers] } : {}),
+      hidden: spec?.hide ? [...spec.hide] : target.hidden,
+      pose: spec?.pose !== undefined ? spec.pose : target.pose,
+      ghosted: spec?.ghost ? [...spec.ghost] : target.ghosted,
+      exercise: spec?.exercise !== undefined ? exerciseOf(spec.exercise) : target.exercise,
+      tints: spec?.highlight !== undefined ? highlightOf(spec.highlight) : target.tints,
+      sites: spec?.sites ? [...spec.sites] : target.sites,
+      demo: null,
+      beat: b.index,
+      camera,
+    };
+    return next;
+  };
+  const applyBeatState = (b: Beat<SpaceBeatSpec>, instant: boolean): Promise<void> | undefined => {
+    const st = store.getState();
+    const before = st.snapshot();
+    ui.setState({ orbit: false, nextTweenMs: instant ? null : BEAT_TWEEN_MS });
+    st.applyState(beatScene(b), { instant });
+    if (instant) return;
+    const id = store.getState().transition.id;
+    const after = store.getState();
+    const poseMs =
+      before.pose === after.pose && before.exercise?.id === after.exercise?.id && before.exercise?.phase === after.exercise?.phase
+        ? 0
+        : ((after.pose ? file.poses?.[after.pose]?.duration : undefined) ?? POSE_DURATION) * 1000;
+    const motion = Math.max(
+      poseMs,
+      targetExplodeAmount(before.view, before.explode) !== targetExplodeAmount(after.view, after.explode)
+        ? EXPLODE_MS
+        : sameIds(before.hidden, after.hidden)
+          ? 0
+          : HIDE_MS,
+    );
+    return Promise.all([cameraSettled(bridge, id, SETTLE_TIMEOUT_MS), wait(motion)]).then(() => undefined);
+  };
   const presentationAdapter: SpacePresentationAdapter = {
     beatsOf: (c) => (c.state as SpaceChapterState).beats,
     captionOf: (b, l) => tx(b.caption, l),
-    applyBeat: (b, { instant }) => {
-      const st = store.getState();
-      const before = st.snapshot();
-      const target = st.chapterTarget(b.chapter);
-      const spec: SpaceBeatSpec | undefined = b.spec;
-      const view = spec?.view ?? target.view;
-      const preset = typeof spec?.camera === 'string' ? named.find((p) => p.id === spec.camera)?.camera : undefined;
-      const own = typeof spec?.camera === 'object' ? spec.camera : undefined;
-      const camera = own ?? preset ?? chapterCamera(chapters.find((c) => c.id === b.chapter), target.camera, view, file.views);
-      const next: Partial<typeof before> = {
-        ...target,
-        view,
-        ...(spec?.part !== undefined ? { part: spec.part } : {}),
-        ...(spec?.explode !== undefined ? { explode: spec.explode } : {}),
-        ...(spec?.run !== undefined ? { run: spec.run } : {}),
-        ...(spec?.cutaway !== undefined ? { cutaway: spec.cutaway } : {}),
-        ...(spec?.layers ? { layers: [...spec.layers] } : {}),
-        hidden: spec?.hide ? [...spec.hide] : target.hidden,
-        pose: spec?.pose !== undefined ? spec.pose : target.pose,
-        ghosted: spec?.ghost ? [...spec.ghost] : target.ghosted,
-        exercise: spec?.exercise !== undefined ? exerciseOf(spec.exercise) : target.exercise,
-        tints: spec?.highlight !== undefined ? highlightOf(spec.highlight) : target.tints,
-        sites: spec?.sites ? [...spec.sites] : target.sites,
-        demo: null,
-        camera,
-      };
-      ui.setState({ orbit: false, beatLabels: spec?.labels ? [...spec.labels] : null, nextTweenMs: instant ? null : BEAT_TWEEN_MS });
-      st.applyState(next, { instant });
-      if (instant) return;
-      const id = store.getState().transition.id;
-      const after = store.getState();
-      const poseMs =
-        before.pose === after.pose && before.exercise?.id === after.exercise?.id && before.exercise?.phase === after.exercise?.phase
-          ? 0
-          : ((after.pose ? file.poses?.[after.pose]?.duration : undefined) ?? POSE_DURATION) * 1000;
-      const motion = Math.max(
-        poseMs,
-        targetExplodeAmount(before.view, before.explode) !== targetExplodeAmount(after.view, after.explode)
-          ? EXPLODE_MS
-          : sameIds(before.hidden, after.hidden)
-            ? 0
-            : HIDE_MS,
-      );
-      return Promise.all([cameraSettled(bridge, id, SETTLE_TIMEOUT_MS), wait(motion)]).then(() => undefined);
-    },
+    applyBeat: (b, { instant }) => applyBeatState(b, instant),
     onEnter: () => {
       const st = store.getState();
       const snap = st.snapshot();
@@ -232,7 +266,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
         exercise: snap.exercise,
         tints: snap.tints,
         sites: [...snap.sites],
-        labels: u.beatLabels,
+        beat: snap.beat,
         orbit: u.orbit,
         presetId: ref ? ref.presetId : h.presetId,
         cameraFree: ref ? ref.cameraFree : h.cameraFree,
@@ -243,16 +277,93 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
     },
     saveState: () => entered.current!,
     restoreState: (saved) => {
-      ui.setState({ presenting: false, beatLabels: saved.labels, orbit: saved.orbit });
-      const { chapter, layers, camera, view, part, explode, run, cutaway, hidden, pose, ghosted, exercise, tints, sites } = saved;
+      ui.setState({ presenting: false, orbit: saved.orbit });
+      const { chapter, layers, camera, view, part, explode, run, cutaway, hidden, pose, ghosted, exercise, tints, sites, beat } = saved;
       store
         .getState()
-        .applyState({ chapter, layers, camera, view, part, explode, run, cutaway, hidden, pose, ghosted, exercise, tints, sites, demo: null }, { instant: false });
+        .applyState({ chapter, layers, camera, view, part, explode, run, cutaway, hidden, pose, ghosted, exercise, tints, sites, beat, demo: null }, { instant: false });
       hud.setState({ presetId: saved.presetId, cameraFree: saved.cameraFree });
     },
   };
   const presentation = usePresentation(presentationAdapter);
   const { presenting, isPresenting, status: presentationStatus, controls: beatControls, start: startPresentation, stop: stopPresentation } = presentation;
+  const beatsRef = useRef(presentation.beats);
+  beatsRef.current = presentation.beats;
+
+  /* ---------- BEATS OUTSIDE THE PRESENTATION: chapter axis, `,` / `.`, the beat line ---------- */
+  /** Apply a beat with the HUD on (no caption card): leave REFERENCE, then the beat's scene; its camera is authored, not free. */
+  const showBeat = useCallback(
+    (b: Beat<SpaceBeatSpec>) => {
+      exitReference(false);
+      applyBeatState(b, false);
+      hud.setState({ presetId: typeof b.spec?.camera === 'string' ? b.spec.camera : null, cameraFree: false });
+    },
+    // `applyBeatState` reads the stores, refs and data only.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [exitReference, hud],
+  );
+  const goToBeat = useCallback(
+    (chapter: string, index: number) => {
+      const b = beatsRef.current.find((x) => x.chapter === chapter && x.index === index);
+      if (b) showBeat(b);
+    },
+    [showBeat],
+  );
+  /** `,` / `.` and the beat line's ‹ ›: one beat back / on, across chapters; in the presentation, its own step. */
+  const beatStep = useCallback(
+    (direction: 1 | -1) => {
+      const beats = beatsRef.current;
+      if (isPresenting()) {
+        const cur = beatControls.current();
+        const i = cur ? flatIndex(beats, cur.chapter, cur.beat) + direction : -1;
+        if (i >= 0 && i < beats.length) beatControls.go(i, { instant: false });
+        return;
+      }
+      const st = store.getState();
+      const i = stepBeat(beats, st.chapter, st.beat, ownBeats(chapters.find((c) => c.id === st.chapter)).length > 0, direction);
+      if (i !== null) showBeat(beats[i]!);
+    },
+    [store, chapters, isPresenting, beatControls, showBeat],
+  );
+  // A chapter picked by the reader (axis segment, chips, rail, ← →) opens on its first beat, once that transition is out.
+  // A deep link with `b` gets the beat's fields the URL does not carry (hide, ghost, exercise, tints, sites).
+  const urlBeatDone = useRef(false);
+  useEffect(() => {
+    const settleUrlBeat = () => {
+      const st = store.getState();
+      if (urlBeatDone.current || st.transition.reason !== 'url') return;
+      urlBeatDone.current = true;
+      if (st.beat === null) return;
+      const b = beatsRef.current.find((x) => x.chapter === st.chapter && x.index === st.beat);
+      if (!b) {
+        st.patch({ beat: null });
+        return;
+      }
+      const next = beatScene(b);
+      st.applyState({ hidden: next.hidden!, ghosted: next.ghosted!, exercise: next.exercise!, tints: next.tints!, sites: next.sites!, demo: null }, { instant: true });
+      ui.setState({ orbit: false });
+      hud.setState({ presetId: null, cameraFree: !sameJson(store.getState().camera, next.camera) });
+    };
+    settleUrlBeat();
+    return store.subscribe((st, prev) => {
+      if (st.transition.id === prev.transition.id) return;
+      const { reason, instant, id } = st.transition;
+      if (reason === 'url') {
+        queueMicrotask(settleUrlBeat);
+        return;
+      }
+      if (reason !== 'chapter' || instant || isPresenting()) return;
+      const chapter = st.chapter;
+      if (ownBeats(chapters.find((c) => c.id === chapter)).length === 0) return;
+      queueMicrotask(() => {
+        if (store.getState().transition.id !== id || isPresenting()) return;
+        const first = beatsRef.current.find((b) => b.chapter === chapter && b.index === 0);
+        if (first) showBeat(first);
+      });
+    });
+    // `beatScene` reads the stores, refs and data only.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [store, ui, hud, chapters, isPresenting, showBeat]);
 
   // Free look in the presentation: a click on a part or on empty space must not change the beat's selection.
   useEffect(() => {
@@ -342,7 +453,12 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
             if (on) enterReference(instant);
             else exitReference(true, instant);
           } else if (id === 'presentation') {
-            if (on) startPresentation(null, instant);
+            if (on) {
+              // Start at the beat on show (the chapter's first when it shows its own state).
+              const st = store.getState();
+              const i = flatIndex(beatsRef.current, st.chapter, st.beat);
+              startPresentation(i >= 0 ? i : null, instant);
+            }
             else stopPresentation(true);
           }
         },
@@ -372,12 +488,8 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       specRows: spaceSpecRows(file),
       status,
       card: both('space.card.title'),
-      panels: {
-        panel01: both('space.panel.architecture'),
-        panel02: both('space.panel.detail'),
-        panel03: both('space.panel.state'),
-      },
       beats: beatControls,
+      beatStep,
       // `pnpm shoot --beats`: hold an exercise beat at its start / end key for a still.
       test: {
         exercisePhase: (phase: 'start' | 'end' | 'loop') => {
@@ -440,12 +552,33 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
     presenting,
     presentationStatus,
     beatControls,
+    beatStep,
     isPresenting,
     startPresentation,
     stopPresentation,
     locale, // `t` is bound to `locale`
   ]);
   useSceneControls(controls);
+
+  /* ---------- the chapter axis, the beat line, the chapter index ---------- */
+  const axisOpen = useHud((h) => h.panelsOpen);
+  const axisChapters = useMemo<AxisChapter[]>(() => {
+    const numbers = chapterNumbers(chapters);
+    return chapters.map((c) => ({
+      id: c.id,
+      number: isBackground(c) ? tl(locale, 'chapter.backgroundShort') : String(numbers.get(c.id) ?? 0).padStart(2, '0'),
+      title: tx(c.title, locale),
+      beats: presentation.beats.filter((b) => b.chapter === c.id).map((b) => tx(b.caption, locale)),
+    }));
+  }, [chapters, presentation.beats, locale]);
+  const here = chapters.find((c) => c.id === s.chapter);
+  const hereAxis = axisChapters.find((c) => c.id === s.chapter);
+  const hereOwn = ownBeats(here);
+  // A chapter without beats of its own is its one beat.
+  const shownBeat = s.beat ?? (hereOwn.length === 0 ? 0 : null);
+  const fitness = (data as SpaceSceneData).fitness;
+  const training = (data as SpaceSceneData).training;
+  const canStep = (dir: 1 | -1) => stepBeat(presentation.beats, s.chapter, s.beat, hereOwn.length > 0, dir) !== null;
 
   return (
     <>
@@ -472,26 +605,37 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       <SceneSlot name="card">
         <PartChainCard file={file} />
       </SceneSlot>
-      <SceneSlot name="panel01">
-        <ArchitecturePanel file={file} ui={ui} />
-      </SceneSlot>
-      <SceneSlot name="panel02">
-        <DetailPanel file={file} chapters={chapters} />
-      </SceneSlot>
-      <SceneSlot name="panel03">
-        <StatePanel file={file} ui={ui} />
-      </SceneSlot>
-      <SceneSlot name="perf">
-        <PerfReadout bridge={bridge} />
+      <SceneSlot name="plate">
+        <PlateBlock file={file} ui={ui} bridge={bridge} />
       </SceneSlot>
       <SceneSlot name="stageOverlay">
         <ExplorerOverlay file={file} glossary={((data as SpaceSceneData).glossary?.terms.length ?? 0) > 0} />
       </SceneSlot>
       <SceneSlot name="bottomBar">
-        <ExplorerBar label={file.views.explodeLabel} />
+        <ChapterAxis
+          chapters={axisChapters}
+          chapter={s.chapter}
+          beat={shownBeat}
+          open={axisOpen}
+          onOpen={actions.setPanels}
+          onChapter={(id) => store.getState().goToChapter(id)}
+          onBeat={goToBeat}
+          status={hereAxis ? axisCounter(hereAxis.number, shownBeat, hereAxis.beats.length) : undefined}
+          locale={locale}
+        />
       </SceneSlot>
-      <SceneSlot name="inspector">
-        <Inspector file={file} fitness={(data as SpaceSceneData).fitness} training={(data as SpaceSceneData).training} />
+      <SceneSlot name="readerTop">
+        <BeatLine
+          captions={hereOwn.length > 0 ? (hereAxis?.beats ?? []) : []}
+          beat={s.beat}
+          canPrev={canStep(-1)}
+          canNext={canStep(1)}
+          onStep={beatStep}
+        />
+        <Inspector file={file} fitness={fitness} training={training} />
+      </SceneSlot>
+      <SceneSlot name="readerEnd">
+        <ChapterIndex index={(here?.state as SpaceChapterState | undefined)?.index} file={file} fitness={fitness} training={training} />
       </SceneSlot>
     </>
   );

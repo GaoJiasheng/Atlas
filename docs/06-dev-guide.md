@@ -103,7 +103,8 @@ pnpm tsx scripts/new-topic.ts <slug> --engine space-scene --subject science|biol
      | `<FlyTo>` | `<FlyTo preset="singapore-island">Singapore island</FlyTo>` | 正文里的 hairline 按钮，镜头飞到命名预设（TimeScene `presets.json`，SpaceScene `parts.json` 的 `presets`；与 VIEW 按钮同一动作；手机上顺便收起阅读面板） |
      | `<Term>` | `<Term id="blitzkrieg">闪电战</Term>` | 名词：点状下划线的 `span`（`role="button"`，Enter / 空格也能开），点开在阅读面板 inspector 区显示 `glossary.json` 里的定义和相关词（见「名词表」）；只包全主题第一次出现处 |
      | `<Frac>` | `<Frac n={3} d={4} />`、`<Frac w={1} n={3} d={4} />` | 静态竖排分数（与数据文本里的 `{3/4}` 同一套标记），读屏读文字（"three quarters" /「四分之三」）；校验 n、d 是整数、d ≥ 1 |
-     | `<Task>` | `<Task id="cut-toast-thirds">the toast</Task>` | MathScene：hairline 按钮，在舞台上打开这个小步（SceneHost 委托 `data-task` → `SceneControls.goToTask`）；校验 id 是 `lesson.json` 的小步 |
+     | `<Task>` | `<Task id="equivalent-fractions">try one question</Task>` | MathScene：hairline 按钮，打开本章小测（步 id：从题库抽一道；也可写题库题 id）（SceneHost 委托 `data-task` → `SceneControls.goToTask`）；校验 id 是 `lesson.json` 的步或题库题 |
+     | `<Beat>` | `<Beat n={2}>fold it in half again</Beat>` | MathScene：句中的 hairline 链接，舞台跳到本章第 n 个讲解拍（`data-task="beat-2"`，同上委托）；当前拍的链接高亮；校验 n 在本章拍数内 |
 4. 引擎数据放 `data/*.json`，文件名（去掉 `.json`）就是数据对象的 key：
    - TimeScene/geo：`entities.json`、`control.json`、`movements.json`、`events.json`；可选 `presets.json`（额外镜头）
    - SpaceScene：`parts.json`（含 parts / groups / flows / animations / views）
@@ -138,7 +139,7 @@ pnpm tsx scripts/new-topic.ts <slug> --engine space-scene --subject science|biol
 - 共享数据（`src/content/shared/fitness/`，docs/16 §4）：肌肉卡 / 动作卡 / 共享来源各按 schema 解析；肌肉 id、动作 id 跨文件唯一；`parent`、肌肉的 `exercises`、动作的 `primary` / `secondary` / `stabilisers` / `motion.keys[].contract` 必须指向已有条目；`s` / `[M#]` 只能引用共享来源 `M#` 且必须存在；`sketch` 的 `public/illustrations/exercises/<stem>.webp` 与 `@2x.webp` 必须存在。warning：叶肌肉的动作不是 3–5 个、`summary` 超 60 字符、`dose` 里有数字（决定 11：只写原则）
 - 用到共享数据的主题：零件 `muscle` 必须是已有肌肉；`training.json` 的每个动作必须存在、至少一个 `primary` 是本主题的零件、`motion` 里的关节都在本主题 `rig` 里；章 / 拍 `exercise` 必须在 `training.json` 里，`sites` 必须是写了 `sites` 的零件，`highlight` 是组或零件；正文 `<Num s="M3">` 与 `[M3]` 查共享来源
 - glb 模型（`parts.json` 的 `model`，`scripts/lib/glb-check.ts`）：`public/` 下存在、≤ 8 MB、`asset.copyright` 非空；零件 `mesh`（含 `bilateral.mesh` 双胞胎）与 `rig` 关节的 `node` 都要在 glb 节点表里——缺节点是 **error**；两个节点名被 three 的 GLTFLoader 去掉 `.` `:` `/` `[` `]` 后撞名也是 error
-- MathScene（docs/15 §4.10，`math-scene/validate.ts`，经 `schemas.ts` 的 `topicIssues` / `taskIds`）：章 ↔ 步一一对应、练习章 `practice: true` 唯一且在最后；`lo` 与课纲来源存在；P2 / P3 步分母 ≤ 12、加减结果在 0–1、异分母要相关；目标能在模型上表示（涂得出、在刻度上、因子可达、对折可达、`accept: exact` 的份数 = 分母）；`choose` 的错选项都有误解且在 `feedback.wrong` 里有一句；单选恰有一个对；练习 6–10 题、至少 5 种题型、`revisit` 是步；题干 EN ≤ 120 / ZH ≤ 40 字（warning，`{a/b}` 记号算一字）；所有文本里的 `{a/b}` 记号合法
+- MathScene（docs/15 §4.10、§10，`math-scene/validate.ts`，经 `schemas.ts` 的 `topicIssues` / `taskIds`）：章 ↔ 步一一对应、练习章 `practice: true` 唯一且在最后；每步 3–5 个讲解拍且拍的模型画得出（份数、数轴刻度、分数墙的行）、题库 8–10 道、题 id 全主题唯一、`<Beat n>` 在本章拍数内；`lo` 与课纲来源存在；P2 / P3 步分母 ≤ 12、加减结果在 0–1、异分母要相关；目标能在模型上表示（涂得出、在刻度上、因子可达、对折可达、`accept: exact` 的份数 = 分母）；`choose` 的错选项都有误解且在 `feedback.wrong` 里有一句；单选恰有一个对；练习 6–10 题、至少 5 种题型、`revisit` 是步；题干 EN ≤ 120 / ZH ≤ 40 字（warning，`{a/b}` 记号算一字）；所有文本里的 `{a/b}` 记号合法
 
 ## 背景章（`kind: background`）
 
@@ -221,7 +222,7 @@ store.getState().chapterTarget(id);                                // 某章的�
 
 ### URL 同步
 
-- key：`ch, layers, cam, theme` + 引擎 `t, hl, part, view, explode, run, cut`（完整说明见文末「URL 参数」）。与当前章节目标相同的字段不写进 URL（普通章节链接就是 `?ch=<id>`）；其它 query 参数原样保留。
+- key：`ch, layers, cam, theme` + 引擎 `b, t, hl, part, view, explode, run, cut`（完整说明见文末「URL 参数」）。与当前章节目标相同的字段不写进 URL（普通章节链接就是 `?ch=<id>`）；其它 query 参数原样保留。
 - 写入用 `history.replaceState`，250 ms 防抖；切语言前自动 flush。纯函数 `encodeSceneState / decodeSceneState / mergeSearch` 有单测。
 - 新增可链接字段：在 `UrlEngineFields`（core/types.ts）和 `url-state.ts` 的编解码里各加一处，再在 descriptor 的 `fromUrl` 接收。
 
@@ -232,14 +233,27 @@ store.getState().chapterTarget(id);                                // 某章的�
 ```
 顶栏  ◇ ATLAS · 学科 [01][02]…[NN] │ VIEW [WORLD 1][WHOLE AREA 2]… [▶ PRESENT 演示] │ LOOK ▾  EN ▾   （左 / 中 / 右三段；< 1180 px 中段独占第二行；手机只剩品牌 + LOOK / 语言）
       状态行 ATL-{TOPIC6}-{NN} · CHAPTER 07 VIEW · PAUSED · FLOW          键位提示
-左列  标题块（PLATE NN · 章节名 / 主题名 / 副标题 / 规格 dl / 声明）+ ChapterRail
+左列  标题块（PLATE NN · 章节名 / 主题名 / 副标题 / 规格 dl / 声明）+ ChapterRail + plate（左列底部的 PLATE 图版块，引擎填）
 右列  card（右上示意卡，可展开）+ stageOverlay（控制面板：LAYERS / TOOLS / KEY）
-底部  perf（安静读数）→ panel01‖panel02‖panel03（引擎注册了才有；整组可收成 28 px 横条）→ bottomBar（引擎控件）
-阅读面板  编号 / 章名 / summary 一句（衬线、弱墨）→ 正文 → inspector → 测验；左缘把手收起成 28 px 竖条（宿主级，两个引擎一样）
+底部  perf（安静读数，TimeScene）→ panel01‖panel02‖panel03（现在没有引擎注册；整组可收成 28 px 横条）→ bottomBar（章节轴 / 时间轴）
+阅读面板  编号 / 章名 / summary 一句（衬线、弱墨）→ readerTop（节拍行、选中对象）→ 正文 → readerEnd（本章索引）→ inspector → 测验；左缘把手收起成 28 px 竖条（宿主级，各引擎一样）
 ```
 
 - **顶栏三段**（`core/Hud.tsx TopBar`）：左 = 品牌 + **章节芯片**（`<nav class="atlas-chips">`，每个 `.hud-btn.atlas-chip-btn[data-chapter=<id>]`，当前章 `.on` + `aria-current="step"`，点击 = `store.goToChapter(id)`，与章节轨同一路径，点完自动失焦让 ← → 继续生效；背景章 `BG`；手机隐藏，用章节轨的方块行）；中 = VIEW 组 + `.hud-btn--present`（`data-mode="presentation"`、`aria-pressed`、signal 橙实心；只在引擎注册了 `presentation` 模式时出现，走 `actions.setMode`，与 P 键、TOOLS 行同一状态）；右 = `GlobalToggles`（LOOK / 语言）。外侧两列 `minmax(max-content, 1fr)`。**doc id 在状态行最前**（`.atlas-docid`，手机隐藏）。
-- **底部面板整组收起**（≥ 1 个 `panelNN` 注册时）：条**上缘左对齐**的 hairline 页签 `.atlas-panels__fold`（24 px 高、≥ 44 px 宽、`aria-expanded`，展开时 chevron 朝下、收起后朝上，两种状态都在）→ 28 px 横条 `.atlas-panels__bar`（`data-hud-panel="panels-bar"`，三个标题，点它展开）。状态 `HudState.panelsOpen`（默认 `true`），动作 `actions.setPanels(expanded)`，按标签页存 `sessionStorage['atlas:panels']`（`lib/prefs.ts` 的 `getPanelsExpanded / setPanelsExpanded`；`'collapsed'` / `'open'`），不进 URL，换章不改；`.atlas-scene[data-panels="open|collapsed"]`；`__atlas.state().panels` / `__atlas.setPanels(on)`。**舞台重排**：`BottomPanels` 用 ResizeObserver 量出面板条顶边到舞台区底边的距离，写成 `.atlas-scene` 的 `--stage-inset`，`.atlas-stage` 和 `.atlas-leaders` 的 `bottom` 都用它（所以舞台画布和引线层同尺寸，收起后变高；没有面板的引擎 = 0；HUD 隐藏时恒为 0）。引擎不用管，只管照常 portal 进 `panel01–03`（收起时内容仍挂载、`display: none`）。LAYERS / TOOLS 控制面板自带关闭按钮，不在这个组里。
+- **全引擎 HUD 铁律**（docs/08 §2：a 底部是章节轴、b 没有别的底部条、c 选中详情在章头正下方、d 阅读面板顺序、e 章节提到的对象都能从索引点到）：新引擎、新主题照做，不必在主题 spec 里重复。
+- **章节轴**（`core/axis/ChapterAxis.tsx` + `core/axis/axis.ts` 纯函数，样式 `.atlas-axis*` 在 `styles/scene.css`；引擎放进 `bottomBar`）：
+
+  ```ts
+  <ChapterAxis
+    chapters={[{ id, number: '05' | 'BG', title, beats: [caption…] }]}  // 每章至少一拍（没写拍 = 一拍）
+    chapter={store.chapter} beat={当前拍 | null}                          // null = 本章自身状态，不填刻度
+    open={hud.panelsOpen} onOpen={actions.setPanels}                      // ⌄ 收成发丝线（只留章号），按标签页记住
+    onChapter={(id) => store.goToChapter(id)} onBeat={(id, k) => …}       // 点段 = 那一章第一拍；点刻度 = 那一拍
+    status="05 · 2/8" locale={locale} />                                  // 右端短读数（axisCounter）
+  ```
+
+  每章一段（等宽，`flex: 1 1 0`），段左界写章号 + 章名（段宽 < 72 px 只剩章号），段里每拍一个空心小圆（均匀排，命中区 = 本段宽 / 拍数，最多 28 px），已过的章墨色、当前章 signal 填到当前拍、当前拍实心（`data-filled`）。段是 44 px 高的按钮（`data-chapter`、`aria-current`），刻度是按钮（`data-beat="<章>.<k>"`，只有当前段的刻度进 Tab 顺序）。手机（< 760）只剩章号、没有刻度。引擎注册 `SceneControls.beatStep(dir)` 后宿主绑定 `,` / `.`（`BEAT_KEYS`，keymap 类型 `beat`），键位提示多一段 `, . 节拍`。纯函数 `tickPosition / segmentFill / flatIndex / stepBeat / axisCounter` 在 `tests/core/axis.test.ts`。**同一族**：TimeScene 的 `timeline/Timeline.tsx`（分段时间轴，多了按时间排的刻度、播放头和泳道）MathScene 已改用这个组件（小测与练习题的刻度是方块，引擎加 `data-shape="square"`）。
+- **底部面板整组收起**（≥ 1 个 `panelNN` 注册时；现在没有引擎注册）：条**上缘左对齐**的 hairline 页签 `.atlas-panels__fold`（24 px 高、≥ 44 px 宽、`aria-expanded`，展开时 chevron 朝下、收起后朝上，两种状态都在）→ 28 px 横条 `.atlas-panels__bar`（`data-hud-panel="panels-bar"`，三个标题，点它展开）。状态 `HudState.panelsOpen`（默认 `true`），动作 `actions.setPanels(expanded)`，按标签页存 `sessionStorage['atlas:panels']`（`lib/prefs.ts` 的 `getPanelsExpanded / setPanelsExpanded`；`'collapsed'` / `'open'`），不进 URL，换章不改；`.atlas-scene[data-panels="open|collapsed"]`；`__atlas.state().panels` / `__atlas.setPanels(on)`。**舞台重排**：`BottomPanels` 用 ResizeObserver 量出面板条顶边到舞台区底边的距离，写成 `.atlas-scene` 的 `--stage-inset`，`.atlas-stage` 和 `.atlas-leaders` 的 `bottom` 都用它（所以舞台画布和引线层同尺寸，收起后变高；没有面板的引擎 = 0；HUD 隐藏时恒为 0）。引擎不用管，只管照常 portal 进 `panel01–03`（收起时内容仍挂载、`display: none`）。LAYERS / TOOLS 控制面板自带关闭按钮，不在这个组里。
 
 - **右上卡折叠**（`controls.card` 注册时）：卡片标题行右端 `.atlas-card__fold`（chevron 朝右，≥ 44 px 命中区；与 `cardToggle` 的「展开全部行」是两个控件）→ 卡片 `display: none`（槽仍挂载），舞台右缘 28 px 竖页签 `.atlas-card__tab`（`data-hud-panel="card-tab"`，竖排标题、chevron 朝左，点它恢复）；`.atlas-stage__overlay`（LAYERS / TOOLS）上移补位。状态 `HudState.cardOpen`（默认 `true`），动作 `actions.setCard(expanded)`，按标签页存 `sessionStorage['atlas:card']`（`getCardExpanded / setCardExpanded`），不进 URL，换章不改；`.atlas-scene[data-card="open|collapsed"]`；`__atlas.state().card` / `__atlas.setCard(on)`。引擎做引线或标牌避让时读 `[data-hud-panel]` 矩形即可，折叠后 `card` 面积为 0、`card-tab` 出现；SpaceScene 的 `LeaderLabels` 另订阅 `cardOpen` 立即重量。
 - **阅读面板收起**（≥1024px）：左缘一个 hairline 小把手（`.atlas-reader__handle`）把它收成 28 px 竖条（`.atlas-reader__strip`：三行网格，章节号在中线上方、竖排章名垂直居中、小箭头在章名下方，点它展开）；舞台随之占满宽度（地图的 ResizeObserver 调 `map.resize()`）。默认展开。**收起是用户的选择，粘住**：点章节轨、底部条的段或拍刻度、← →、Next / Back 换章**都不会**重新展开；只有点把手或竖条才展开（`actions.setReader`）。收起时换章（章 id 变了才算）会让竖条闪一下提示有新文字：`.atlas-reader` 上 `data-flash` 约 900 ms，CSS 画两次 signal 橙 2 px 轮廓脉冲（`atlas-reader-flash`，450 ms × 2；`prefers-reduced-motion` 下改为静态轮廓）；已展开则不闪。演示进入时 HUD 整体隐藏（阅读面板随之消失），退出时恢复，不改 `reader`。状态在 HUD store 的 `reader`，按标签页存 `sessionStorage['atlas:reader']`（`lib/prefs.ts` 的 `getReaderExpanded / setReaderExpanded`），**不进 URL**。< 1024 的底部抽屉不受影响。
@@ -253,10 +267,13 @@ store.getState().chapterTarget(id);                                // 某章的�
 |---|---|---|
 | `bottomBar` | 底部最下 | 时间轴 / Explorer 控件（44px 触控，不随 HUD 缩小，4K 时放大） |
 | `stageOverlay` | 右列，示意卡下 | 控制面板 `ControlPanel`：LAYERS（图层 + 绘制类模式）、TOOLS（其余模式 + 隐藏 HUD）、KEY（图例） |
-| `inspector` | InfoPanel 内 | 选中对象详情 |
+| `inspector` | InfoPanel 内，正文之后 | 选中对象详情（TimeScene） |
+| `readerTop` | InfoPanel 滚动区最上，章头正下方、正文之前 | SpaceScene：节拍行 + 选中零件 / 当前动作卡（docs/08 §2 铁律 c、d）；MathScene：节拍行 + 小测托盘 |
+| `readerEnd` | InfoPanel 内，正文之后 | SpaceScene：本章索引（`state.index`）；MathScene：要点 + 课纲对照 |
+| `plate` | 左列底部，章节轨之下 | 次级读数的紧凑块（SpaceScene：PLATE 图版块；MathScene：模型 · 份数 · 标记 · 分数）；手机隐藏 |
 | `card` | 右列顶 | 示意 SVG 卡的**内容**；标题由 `controls.card` 注册，宿主画框和 `A NAME 中文` 表头；注册了 `cardToggle` 时表头是展开按钮（`aria-expanded`），框带 `data-expanded`，展开后高 ≤ 右列 60%，内容自己滚动 |
-| `panel01` `panel02` `panel03` | 底部三块等高面板 | 面板**内容**；标题由 `controls.panels` 注册，宿主画框和 `01 NAME 中文` 表头；没注册标题的面板不出现，一个都没注册时整条面板带不出现（TimeScene 就是这样） |
-| `perf` | 底部右上，安静小字 | `60 FPS · 16 CALLS · 0.02M TRIS · 1520×1026` / `FEATURES 63 · ZOOM 5.5 · 60 FPS` |
+| `panel01` `panel02` `panel03` | 底部三块等高面板 | 面板**内容**；标题由 `controls.panels` 注册，宿主画框和 `01 NAME 中文` 表头；没注册标题的面板不出现，一个都没注册时整条面板带不出现（现在三个引擎都不注册） |
+| `perf` | 底部右上，安静小字 | `FEATURES 63 · ZOOM 5.5 · 60 FPS`（TimeScene；SpaceScene 的 perf 在 PLATE 块末行） |
 | `leaders` | 覆盖舞台的 `<svg>` | 引线标注；往里 portal SVG 元素（`<path>`、`<circle>`） |
 
 - HUD 尺寸用设计像素（1920×1080 下的 px）乘 `--u` 写：`height: calc(18 * var(--u))`。卡片、面板里的 SVG 用 viewBox + 100% 宽高。
@@ -284,7 +301,8 @@ const controls = useMemo<SceneControls>(() => ({
   status:  ['SIMULATED'],            // 状态行追加段（大写）
   card:    { en: 'Process flow', zh: '工艺流程' },
   cardToggle: { expanded, set(expanded) {} },   // 可选：卡片表头变成展开按钮
-  panels:  { panel01: { en, zh }, panel02: …, panel03: … },
+  panels:  { panel01: { en, zh }, panel02: …, panel03: … },   // 可选；现在没有引擎用
+  beatStep: (dir) => {},             // 可选：演示之外的上一拍 / 下一拍（, .），章节轴的引擎注册
   beats:   presentation.controls,     // 可选：演示节拍（usePresentation 给的；__atlas.beats / goToBeat / state().presentation / setAutoplay / setVoice / voiceLog），见「演示系统（core）」
   commands: [{ id: 'check', key: 'c', label, disabled?, run() {} }],   // 可选：一次性命令（不是开关）；键、带 data-command 的按钮、__atlas.runCommand 同一路径；keymap 类型 'command'
   test:    { task: () => …, solve: () => … },   // 可选：引擎专属测试钩子，挂成 __atlas.engine.*
@@ -311,6 +329,7 @@ const labelsOn = useHud((s) => s.labels);   // 或 CSS：.atlas-scene[data-label
 | 键 | 作用 |
 |---|---|
 | ← → | 上一章 / 下一章（跳过折叠章节） |
+| , . | 上一拍 / 下一拍，跨章（引擎注册了 `beatStep` 时；SpaceScene 的章节轴） |
 | 1–9, 0 | 镜头预设（TimeScene：地理预设，按 VIEW 组顺序）；0 = 第 10 个，再往后只有按钮，按钮上也不写数字 |
 | 注册的字母 | 模式开关（L = 标注；`h`、空格、数字保留给宿主） |
 | SPACE | 暂停 / 运行（没注册 `pause` 时不拦截） |
@@ -391,7 +410,7 @@ pnpm shoot sample-time --shots mine.json hero    # 自定义截图表（{name: {
 
 - `--locale en|zh|all`、`--theme paper|cinema|all`（也接受逗号列表），默认 `en` + `paper`；`shots/` 已 gitignore。主题用 `__atlas.setTheme()` 切换。`--gpu` 改用真 GPU（macOS 走 Metal），默认软件 GL（SwiftShader，与 e2e 相同），fps 数字只在 `--gpu` 下有意义。
 - 默认截图：每章一张；首章上每个注册模式各一张（`presentation` 除外；默认开着的模式截"关"，文件名 `mode-<id>-off`）；非章节预设（`orbit` / `reference` / `world` / `theatre` / `presets.json` 里的）各一张；`hero-clean`（HUD 关；SpaceScene 这时是封面镜头，等 0.8 s 的飞行做完）。截图表里 `preset` 和 `modes` 同时写也落在预设镜头上（不用 `js` 延时）。每次截图前把模式、HUD、暂停恢复到加载时的状态（阅读面板、卡片、泳道这些宿主 / 引擎 UI 状态不复位，自定截图表里的 `js` 要自己摆好）。
-- `--keys`：对 `keymap()` 逐项按键：预设（`state().preset` + `[data-preset]` 的 `aria-pressed`）、模式（状态翻转 + `[data-mode]` 的 `aria-pressed`，再按一次恢复；按钮在控制面板里，面板收起也照样在 DOM 里；按钮被禁用则跳过）、SPACE、H（HUD 隐藏且"H 显示界面"可见）、ESC（HUD 隐藏后恢复）、← →；最后拖动舞台应变 FREE CAMERA（没有预设亮着），再按预设应收回。
+- `--keys`：对 `keymap()` 逐项按键：预设（`state().preset` + `[data-preset]` 的 `aria-pressed`）、模式（状态翻转 + `[data-mode]` 的 `aria-pressed`，再按一次恢复；按钮在控制面板里，面板收起也照样在 DOM 里；按钮被禁用则跳过）、SPACE、H（HUD 隐藏且"H 显示界面"可见）、ESC（HUD 隐藏后恢复）、← →、`,` / `.`（注册了 `beatStep` 的引擎：当前拍在拍表里前后移一格、不进演示、对应刻度 `data-filled`）；最后拖动舞台应变 FREE CAMERA（没有预设亮着），再按预设应收回。
 - `--layout`：3840×2160 / 2560×1440 / 1920×1080 / 1280×720 / 900×1200 / 390×844 × 每章 × 额外预设，用 `tests-e2e/hud-layout.ts` 的 `hudLayoutIssues()`（与 `pnpm e2e` 共用同一份逻辑）查 `[data-hud-panel]` 出屏 / 重叠（1 px 容差）/ 横向溢出，并存 `layout-WxH.png`。
 - 一直收集 console error / warning、pageerror、同源 4xx/5xx 和任何指向外部主机的请求（违反"无运行时外部请求"）；GPU / SwiftShader 噪音与 smoke.spec.ts 同一过滤。退出码 1 = 有 error / pageerror / 外部请求 / 键位失败 / 布局问题（warning 只打印）。
 - 轨道阻尼按帧数衰减，软件 GL 下拖动后要几秒才回写相机，`--keys` 的 FREE CAMERA 检查已按此放宽。
@@ -401,7 +420,7 @@ pnpm shoot sample-time --shots mine.json hero    # 自定义截图表（{name: {
 - `--k = clamp(min(W/1920, H/1080), .6, 1.6)`（手机 = 1），SceneHost 在 resize 时写到 `.atlas-scene`。
 - 实际排版用 `--u = --kt px`，`--kt = max(--k, .8)`：HUD 文字不小于 1080p 尺寸的 80%（720p、平板的可读性下限）。
 - **HUD 字号刻度**（设计像素，k = 1；`tokens.css` 的 `--hud-font-*`，面向小学生的笔记本屏）：最小 10 px（`label` 10.4 / SVG 里的 mono 刻度 10）、状态行与键位提示 ≥ 10.5（`status` 10.8）、按钮 11.1、面板标题与正文 11.3、标题块 30。写新 HUD 文字用这些 token，不要再写 < 10 的 `calc(N * var(--u))`；viewBox 里的 SVG 文字（部件链路卡）按渲染比例折算，保证渲染后 ≥ 10 px。`--kb = max(1, --k)`：触控控件和阅读正文只放大不缩小（4K 时 `bottomBar` / `stageOverlay` 用 `zoom: var(--kb)` 放大）。
-- ≥1440 完整；1080 完整略小；高度 ≤ 820（720p）底部三面板折成一行标签页（点开一块）；< 1024 InfoPanel 变底部抽屉（不能收成竖条）；< 1180 宽或触屏顶栏中段（VIEW + PRESENT）独占第二行居中，VIEW 组放不下再折成多行（没有下拉菜单）；< 760（手机）隐藏示意卡、三面板、perf、引线、规格表、键位提示、顶栏章节芯片、VIEW 组和 PRESENT，章节轨折成编号芯片条；标了 `phone: false` 的模式（TimeScene G / P、SpaceScene R）在控制面板里不画行。
+- ≥1440 完整；1080 完整略小；高度 ≤ 820（720p）MathScene 的底部三面板折成一行标签页（点开一块），高度 ≤ 760 SpaceScene 的 PLATE 块去掉立面缩略图；< 1024 InfoPanel 变底部抽屉（不能收成竖条）；< 1180 宽或触屏顶栏中段（VIEW + PRESENT）独占第二行居中，VIEW 组放不下再折成多行（没有下拉菜单）；< 760（手机）隐藏示意卡、三面板、perf、引线、规格表、键位提示、顶栏章节芯片、VIEW 组和 PRESENT，章节轨折成编号芯片条；标了 `phone: false` 的模式（TimeScene G / P、SpaceScene R）在控制面板里不画行。
 - 任何尺寸不得重叠、不得横向溢出：`tests-e2e/hud-layout.ts` 的 `hudLayoutIssues()` 在 3840×2160 / 2560×1440 / 1920×1080 / 1280×720 / 900×1200 / 390×844 × 每章 × 中英检查所有可见 `[data-hud-panel]`（`tests-e2e/hud.spec.ts`，`pnpm e2e` 的一部分）。
 
 ### 主题
@@ -613,10 +632,10 @@ MapLibre 只在 `controller` chunk 里，View 挂载后才加载（时间轴先�
 `engine: space-scene`、`stage: model3d`。代码在 `src/engines/space-scene/`：
 
 ```
-index.ts                 descriptor（part/view/explode/run/cutaway/pose；不进 URL 的 hidden/ghosted/solo/exercise/tints/sites/demo）
+index.ts                 descriptor（part/view/explode/run/cutaway/pose/beat；不进 URL 的 hidden/ghosted/solo/exercise/tints/sites/demo）
 schema.ts                parts.json 的 zod（构建期）
-View.tsx                 HUD 控件注册（预设 / 模式 / 规格行 / 卡片与面板标题）+ 各插槽内容 + 懒加载 Model3DStage
-ui.ts                    引擎内 UI store（ORBIT、REFERENCE、演示中 + 这一拍的标注、封面镜头；不进 URL，View 与舞台共用）
+View.tsx                 HUD 控件注册（预设 / 模式 / 规格行 / 卡片标题 / beatStep）+ 各插槽内容 + 演示之外的拍（章节轴、, .、节拍行、URL b）+ 懒加载 Model3DStage
+ui.ts                    引擎内 UI store（ORBIT、REFERENCE、演示中、封面镜头；不进 URL，View 与舞台共用）
 bridge.ts                舞台 → HUD 的桥：每帧投影好的标注锚点与屏幕框（零件 + `group:<id>` 组锚点）、HUD 可能标注的 id（遮挡只查这些）、渲染计数、帧回调、镜头落定（`settledTransition` / `cameraSettled`）（View 侧不 import three）
 lib/                     纯函数，有单测：explode / visibility（图层、isolate、hide、shell、context）/ flow-curve / flow-stops（沿路径变色）/
                          color（材质族、tint）/ presets（材质名，无 zod）/ animation / telemetry（一阶滞后读数）/ detail（段落 + [S#]）/
@@ -629,9 +648,10 @@ stages/model3d/          R3F 舞台：Model3DStage（createRoot 宿主）、Scen
                          materials（材质 + 选中边缘 / 剖面 shader 补丁）、textures（程序化贴图）、Lighting、
                          GroundShadow、CameraRig、Flows + flowMaterial、probes（标注投影 / 起止点投影 / 计数 / 阴影更新）、GltfSource（glb、蒙皮、骨架）、
                          MotionDriver（关节、收缩、动作体位）、Equipment（动作器械）
-hud/                     LeaderLabels + SitesOverlay（leaders）、PartChainCard（card）、ArchitecturePanel / DetailPanel / StatePanel
-                         （panel01–03）、PerfReadout（perf）、spec（标题块规格行）
-explorer/                ExplorerBar（bottomBar：只剩拆开滑块）、ExplorerOverlay（stageOverlay）、Inspector（inspector：零件详情、MuscleSheet 四页、ExerciseCard）
+hud/                     LeaderLabels + SitesOverlay（leaders）、PartChainCard（card）、PlateBlock（plate：立面缩略图、状态小行、模拟读数、当前选中、
+                         PerfReadout）、spec（标题块规格行）
+explorer/                ExplorerOverlay（stageOverlay，EXPLODED 时带 ExplorerBar 拆开滑块）、BeatLine + Inspector（readerTop：节拍行；零件详情、
+                         MuscleSheet 四页、ExerciseCard）、ChapterIndex（readerEnd：本章索引）；章节轴是 core 的 ChapterAxis（bottomBar）
 space-scene.css          舞台、标注、卡片与面板绘图、滑块、详情样式（只用 token，尺寸 × --u）
 ```
 
@@ -676,13 +696,13 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
     "exploded":  { "camera": { ... } },     // 每个视图可选一个预设镜头
     "cutaway":   { "normal": [-1,0,0], "offset": 0 },   // 可选剖切面；默认切掉 x>0 一半
     "cover":     { "position": [2.6,1.6,3.4], "target": [0,0.3,0], "fov": 30 },   // 可选封面镜头（直接是镜头，不套 camera）：演示以外隐藏 HUD（H、hero-clean 截图）时用
-    "section":   { "plane": "xy" },         // 可选：ARCHITECTURE 立面与 REFERENCE 正视方向（xy 正面 / zy 侧面 / xz 俯视）
+    "section":   { "plane": "xy" },         // 可选：PLATE 块立面与 REFERENCE 正视方向（xy 正面 / zy 侧面 / xz 俯视）
     "reference": { "camera": { ... } }      // 可选：自定 REFERENCE 镜头（默认按包围盒自动取长焦正视）
   },
   "spec": [                                // 可选，≤ 4 行：标题块规格行（宿主 3 行 + PARTS + 这些，总共 ≤ 8）；有它时 GROUPS / FLOWS 行不画
     { "key": {en, zh}, "value": "R32 · 0.60 kg", "tag": "design" },   // value：字符串（mono）或 {en, zh}；tag：typical | design | sim（sim 带 SIM 芯片，其余不出芯片）
   ],
-  "telemetry": [                           // 可选，≤ 6 行：STATE 面板 = RUN + 这些模拟读数（带 SIM 芯片），替代默认的 FLOW / ANIMATIONS / VIEW / EXPLODE
+  "telemetry": [                           // 可选，≤ 6 行：PLATE 块在 RUN / FLOW / ANIM / VIEW / EXPLODE 之后接这些模拟读数（一枚 SIM 芯片，`标签 值 单位` 连排）
     { "key": {en, zh}, "unit": "MPa abs", "idle": 1.93, "run": 3.0, "lag": 10, "decimals": 2 }   // 一阶滞后 τ = lag 秒；decimals 默认取 idle / run 写出的位数
   ],
   "presets": [                             // 可选，≤ 6 个命名镜头预设（docs/12 §7.4 G7）：VIEW 按钮排在 ORBIT、REF. 之后（数字键接着排：1–9，第 10 个是 0，再往后只有按钮）
@@ -690,7 +710,7 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
       "view": "xray" }                     // view 可选：按预设时同时切视图（exploded 时拆开到 0.7 或当前值）；id 全主题唯一，不能叫 orbit / reference
   ],
   "poses": { "wings-open": { "hindwings": { "pivot": [-0.38, 0.84, 0.1], "rotation": [-15, 0, 0], "fan": 1 }, "duration": 0.8 } },  // 可选，见「生物与有机形体」
-  "units": { "modelUnit": "mm", "scale": 25 }   // 可选：1 场景单位 = 25 mm（比例尺与 ARCHITECTURE 读数用实长）
+  "units": { "modelUnit": "mm", "scale": 25 }   // 可选：1 场景单位 = 25 mm（比例尺与 PLATE 块立面读数用实长）
 }
 ```
 
@@ -782,7 +802,7 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
 - **姿态与动画的叠加**：零件变换 = 位置（静止中心 + 拆开 / 移开）→ 姿态（缓动矩阵）→ 动画（绕各自 pivot）→ 形状。姿态跟拆开、X-RAY、剖切都兼容；引线锚点跟着姿态走（不跟动画走）。REFERENCE 不重置姿态。
 - **淡显**：章 / 拍 `ghost: [组或零件]`（不累积）与控制面板 LAYERS 每行末尾的 `⊙`（单显这一组、其余淡显；再点或 ESC 取消；存 store 的 `solo`，换章清掉，不进 URL）。淡显 = .12 透明、不写深度、不可点、不标注、不遮挡标注；选中的零件不淡显；被单显的组即使图层关着也显示。
 - **剖切面名**：状态行写 `CUTAWAY <label>`（默认面仍是 `CUTAWAY 50`）；C 键仍切默认面（开着命名剖切时 C = 关）。
-- **ARCHITECTURE 实长**：有 `units` 时比例尺写 `10 MM` / `5 CM`（1 / 2 / 5 × 10ⁿ 的实长），标签行加模型在立面上的跨度（`XY · 47 PARTS · 64 MM`）；没有时照旧 `U`。分区括号最多三行（放得下就并排），组多于 5 个时图例行距收紧。
+- **PLATE 立面实长**：有 `units` 时比例尺写 `10 MM` / `5 CM`（1 / 2 / 5 × 10ⁿ 的实长），标签行加模型在立面上的跨度（`XY · 47 PARTS · 64 MM`）；没有时照旧 `U`。分区括号最多三行（放得下就并排），组多于 5 个时图例行距收紧。
 
 ### 真实网格与人体肌肉（docs/16 §9 M1–M13）
 
@@ -815,7 +835,7 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
   "bilateral": { "axis": "x", "mesh": "pectoralis-major-clavicular.r" },   // M3：双胞胎画 glb 里真实的右侧节点，不镜像几何（真实身体不完全对称）
   "material": { "color": "muscle", "tint": "token:muscle-1" },   // M2：glb 零件的材质（没有 primitive 时必填）
   "muscle": "pectoralis-major-clavicular",                       // M9：共享肌肉卡；summary / detail / short 不写时取肌肉卡的
-  "short": { "en": "Pec maj · clav", "zh": "胸大肌锁骨部" },       // M13：卡片、引线、DETAIL 面板优先用短名
+  "short": { "en": "Pec maj · clav", "zh": "胸大肌锁骨部" },       // M13：卡片、引线、本章索引、PLATE 选中行优先用短名
   "explode": { "dir": [0.2, 0, 1], "dist": 0.06, "stage": 0 },   // M4：剥层，stage 0 先走
   "group": "superficial", "connects": ["clavicle", "humerus"] }
 // glb 节点 extras.closed: false → 剖切不填剖面（默认填）
@@ -862,7 +882,7 @@ state:
   ghost: [exoskeleton]  # 可选：淡显的组或零件（不累积）
   layers: [refrigerant, air]   # 可见的组
   labels: [compressor, "group:outdoor"]   # 可选：本章引线标注哪些零件（默认：所有可见零件，大件优先，按镜头距离限量）；`group:<组 id>` = 整组一个标注（组锚点）
-  hide: [front-panel]          # 可选：本章移开的零件（沿自己的 explode 方向移出 0.25 × dist，后半段淡出，共 .6 s；回来反向）。不累积、不进 URL（store 字段 `hidden`）；被移开的零件不投影、不可点、不标注，ARCHITECTURE 画虚线框
+  hide: [front-panel]          # 可选：本章移开的零件（沿自己的 explode 方向移出 0.25 × dist，后半段淡出，共 .6 s；回来反向）。不累积、不进 URL（store 字段 `hidden`）；被移开的零件不投影、不可点、不标注，PLATE 块立面画虚线框
   camera: { position: [4, 3, 5], target: [0, 0.3, 0], fov: 34 }
   summary: { en: "…", zh: "…" }   # 可选：阅读面板章名下的一句概述，也是没写 beats 时的默认字幕
   question: { en: "…", zh: "…" }  # 可选：孩子会问的问题（没有 summary 时作阅读面板头句 / 默认字幕）
@@ -879,7 +899,13 @@ state:
       sites: [pectoralis-minor]           # 显示起止点的肌肉零件（不写 = 本章的）
       caption: { en: "…", zh: "…" }
       audio: /audio/aircon/ch03-1.mp3     # 可选：进拍时播放的旁白文件（站内路径）
+  index:                          # 可选（docs/08 §2 铁律 e：章节提到的对象都要能从阅读面板点到）：正文之后的本章索引
+    parts: [compressor, condenser-coil]          # 零件（非 context）：编号、短名、一行说明；点 = 选中，详情出现在章头下
+    exercises: [barbell-bench-press, push-up]    # 或动作（training.json 的 exercises）：按器械分组（杠铃、哑铃、徒手、绳索、器械）、
+                                                 # 草图缩略图、名称、器械、主动肌短名；点 = 动作模式，动作卡出现在章头下；之后接 training.session
 ```
+
+`pnpm validate` 核对 `index.parts` 是零件（不是 context）、`index.exercises` 在 `training.json` 里。
 
 章节目标照常累积（`labels`、`hide`、`pose`、`ghost`、`exercise`、`highlight`、`sites` 不累积，只看本章；这三项肌肉主题字段在章 state 与拍里写法相同）。**镜头规则**（`lib/camera.ts transitionCamera`，有单测；CameraRig 订阅 store，transition 一发出就按顺序处理，所以同一 tick 里先 `setPreset` 再 `setMode`（snap）也落在预设镜头上，截图脚本不需要延时）：切章 / 首次加载 / URL：本章自己写了 `camera`（或 URL `cam=` 与本章基线不同）就用它；否则 `views[当前 view].camera`；都没有就沿用。**预设（VIEW 按钮 / 数字键）永远落在该预设的镜头上**（P1 遗留问题：本章没有自己镜头时，基线是继承来的，曾被误判成"非显式"而飞去视图预设；已修）。模式切换（X / E / C / F）不动镜头。较窄的舞台（宽高比 < 1.6：HUD 占去两侧的桌面、平板、竖屏手机）自动把镜头往后拉（手机竖屏、宽高比 < 0.8 时 HUD 叠在上面，模型独占整宽，拉回量渐减到一半），回写 URL 时换算回来，链接与设备无关。**封面镜头**：演示以外隐藏 HUD（H、`pnpm shoot` 的 `hero-clean`）时 0.8 s 飞到 `views.cover`；没写就沿当前视线方向重新取景，让模型包围球占舞台宽 75 %（宽屏上最多超出高度 30 %，`fitSphereCamera`），舞台尺寸变了再重算；显示 HUD 时 0.8 s 飞回离开时的镜头——中间换过章、按过预设或拖过镜头就不飞回。章节镜头按带 HUD 的舞台取景：模型放在 HUD 块之间的空带里（1600×900 约 590 × 680 px），给引线标注留位置；封面镜头按满屏取景（模型约占宽 70 %）。
 
@@ -901,13 +927,12 @@ state:
 
 - 状态行追加：选中零件 `#06 SAMPLE DRUM`、`EXPLODE 80`、`CUTAWAY 50`、REFERENCE 时的锁定说明。规格行追加 PARTS / GROUPS / FLOWS（`hud/spec.ts`）；有 `spec` 时是 PARTS + 主题行。标题块声明行 = `topic.yaml` 的 `note`（没有时用全站文案）。
 - `card`：零件链路示意（有零件的组 = 列，列号 = 组的分区号；零件 = 带编号节点，context 零件不进；`connects` = 细线）；最长一列 > 10 行时行距从 23 降到 16（字号 10）；选中零件填 signal 色；运转时：有 `parts` 的流把它流经的相邻零件之间的连线染成 `stops` 在该处的颜色（`color-mix`）并步进，没有 `parts` 的流照旧染本组内的连线。
-- `panel01` ARCHITECTURE：由零件包围盒直接画的立面（`views.section`，默认 XY；glb 零件用加载后量到的静止包围盒，glb 的 context 零件不画），按组编号的分区括号 + 图例、地面线、模型单位比例尺；选中零件描 signal 色；被 `hide` 的零件画虚线框；context 零件画斜线填充，不属于任何分区。
-- `panel02` DETAIL：选中零件（编号、EN + 中文、所属组、相连零件编号、一行说明、迷你爆炸图：静止虚线框 + 拆开实线框 + 位移线）；无选中时显示本章标题与模型概要。
-- `panel03` STATE：RUN / FLOW / ANIMATIONS / VIEW / EXPLODE 实时值（mono），运行时数值带 `SIM` 芯片。有 `telemetry` 时 = RUN + 主题读数：x(t) = target + (x₀ − target)·e^(−t/lag)，target = run ? `run` : `idle`，4 Hz 刷新、不加抖动；瞬时过渡（深链接、测试 / 截图的 snap）直接跳到终值。
-- `perf`：`60 FPS · 16 CALLS · 0.02M TRIS · 1520×1026`（滚动平均；按需渲染空闲时显示 `IDLE`）。
-- `bottomBar`：只有 EXPLODED 时出现拆开滑块（44 px 拇指）；模式开关都在控制面板，不重复。
-- `stageOverlay`：控制面板（`explorer/ExplorerOverlay.tsx`）：LAYERS = 零件组（有零件的组行末带 `⊙` 单显开关，`data-solo`），TOOLS = X-RAY / EXPLODED / CUTAWAY / FLOW / REFERENCE / PRESENTATION / LABELS /（有 `glossary.json` 时）名词表 / 隐藏界面，KEY = 组与流的图例。章节正文里的 `<Term>` 与 TimeScene 相同。
-- `inspector`：选中零件详情（编号 + 名称 + 中文、级别、说明、了解更多、所属组、相连芯片），hairline 皮肤。`detail` 里空行分段；`[S3]`、`[S3, S7]` 渲染成与 `<Num s>` 相同的来源上标（点开宿主的来源浮层；schema 校验编号在 `data/sources.json` 里）。
+- 原来的三块底部面板（ARCHITECTURE / DETAIL / STATE）已去掉（Gavin 2026-10-11：占地方、DETAIL 常常是空框）：结构和状态并进左列的 PLATE 块，零件详情只在阅读面板里。
+- `bottomBar` = **章节轴**（core `ChapterAxis`，见「布局」）：每章一段、每拍一个刻度，右端 `05 · 2/8`（章号 · 当前拍 / 本章拍数，本章自身状态写 `–`）。点段 = `goToChapter`，读者换章（段、芯片、章节轨、← →，非 instant）后在 microtask 里应用本章第一拍；点刻度、`,` / `.`、节拍行 ‹ › = 在**演示之外**应用那一拍：与演示的 `applyBeat` 同一个 `beatScene()`（镜头 1.4 s、图层、ghost、高亮、标注、姿态、剖切、动作、起止点、运转），先退出 REFERENCE、停 ORBIT，不进演示、不藏 HUD、没有字幕卡；拍的镜头算作者镜头（不是 FREE CAMERA；拍写的是命名预设就亮那个预设）。落定后照常可以转、缩；选零件不改拍。store 字段 `beat`（本章第几拍，0 起；`null` = 本章自身状态：instant 换章、没带 `b` 的深链接），URL `b`（从 1 起）；带 `b` 的深链接在 URL 字段之上补这一拍不进 URL 的字段（hide / ghost / exercise / tints / sites）。P 从当前拍开始演示，退出时放回原来的 `beat`。⌄ 把轴收成发丝线（`panelsOpen`）。引线标注：有当前拍时用这一拍的 `labels`（演示之外不限 6 个）。
+- `plate`（左列底部 PLATE / 图版块，`hud/PlateBlock.tsx`，表头可收起，`sessionStorage['atlas:plate']`，手机隐藏）：左 = 立面缩略图（零件包围盒在 `views.section` 上的投影，默认 XY；glb 零件用加载后量到的静止包围盒；组色填充、选中描 signal、被 `hide` 的画虚线框、context 斜线；地面线 + 比例尺，有 `units` 用实长）；右 = 小号 标签–值 行 RUN / FLOW（有流时）/ ANIM / VIEW（REFERENCE、亮着的预设、FREE CAMERA 或 `CH 05`）/ EXPLODE（或主题的 `explodeLabel`）；下 = 一行组色图例（名字截短）；有 `telemetry` 时一枚 `SIM` 芯片 + `标签 值 单位` 连排（x(t) = target + (x₀ − target)·e^(−t/lag)，target = run ? `run` : `idle`，4 Hz 刷新、不加抖动；瞬时过渡直接跳到终值）；再下 = 当前选中一行（`#28 COMPRESSOR`，点它展开阅读面板并滚到详情）；末行 perf（`60 FPS · 16 CALLS · 0.02M TRIS · 1520×1026`，按需渲染空闲时 `IDLE`）。高度 ≤ 760 时不画缩略图、图例和 perf。
+- `stageOverlay`：控制面板（`explorer/ExplorerOverlay.tsx`）：LAYERS = 零件组（有零件的组行末带 `⊙` 单显开关，`data-solo`），TOOLS = X-RAY / EXPLODED / CUTAWAY / FLOW / REFERENCE / PRESENTATION / LABELS /（有 `glossary.json` 时）名词表 / 隐藏界面，EXPLODED 时其下出现拆开滑块（44 px 拇指），KEY = 组与流的图例。章节正文里的 `<Term>` 与 TimeScene 相同。
+- `readerTop`（阅读面板章头正下方，docs/08 §2 铁律 c、d）：**节拍行**（`explorer/BeatLine.tsx`：`BEAT 2/8` + 这一拍的字幕（页面语言）+ ‹ ›，44 px 命中区；本章没写拍就不画；拍、章、选中零件或动作一变，阅读面板滚回顶部），然后**选中对象**：动作模式时的动作卡（ExerciseCard），选中零件的详情（编号 + 名称 + 另一种语言、说明、了解更多 / 肌肉零件的四页肌肉卡与 SOLO、左右、所属组、相连芯片），hairline 皮肤；什么都没选就什么都不画（不再有提示框，也不再有迷你爆炸图）。
+- `readerEnd`（正文之后）：**本章索引**（`explorer/ChapterIndex.tsx`，来自 `state.index`）：`parts` = 编号、短名、一行说明，点 = 选中；`exercises` = 按器械分组（杠铃、哑铃、徒手、绳索、器械，组内按列表顺序）的行：草图缩略图（`/illustrations/exercises/<sketch>.webp`，dark plate 反相）、名称 + 另一种语言、器械 · 主动肌短名，点 = 动作模式（同肌肉卡的动作芯片），动作卡出现在章头下；之后接 `training.json` 的 `session`（标题、每一块的动作（可点）与说明、说明 + 来源）。行 ≥ 44 px，当前的 `aria-pressed`。`detail` 里空行分段；`[S3]`、`[S3, S7]` 渲染成与 `<Num s>` 相同的来源上标（点开宿主的来源浮层；schema 校验编号在 `data/sources.json` 里）。
 - `__atlas.stats()` 合并 `{calls, triangles, geometries, textures, fps, gpu}`（renderer.info + 滚动 FPS + WEBGL_debug_renderer_info）。
 
 ### 引线标注（`hud/LeaderLabels.tsx` + `lib/leader-layout.ts`，master-spec J）
@@ -919,6 +944,7 @@ state:
 - 数量：`labelBudget(镜头距离 / 模型半径)` 3–10 条（近景少），放不下的不画。HUD 之间的空带 < 480 px（720p 笔记本）时只标选中的零件，其余靠右上零件链路卡和点选。手机（< 760）宿主隐藏 `leaders`。
 - 点标签（触屏点一下）= 选中零件；标签热区高 ≥ 44 px。
 - **组标注**（docs/12 §8 G12）：`labels` 里写 `group:<组 id>` = 整组一个标签：EN 组名（大写）/ 中文组名，不带编号和说明，不可点。锚点 = 组内**可见**零件（含拆开、移开后的实际位置）包围盒的中心（`LabelProbe` 每帧算，不判遮挡），屏幕框 = 这个包围盒的投影，别的标签不压整组。排在零件标签前面。
+- **演示之外的当前拍**（章节轴、`,` / `.`、节拍行）：标这一拍的 `labels`（没写就是本章的），不限 6 个、照常按镜头距离限量。
 - **演示中**：只标这一拍的 `labels`（没写就是本章的，再没写就是默认的全部可见零件），至多 6 个、不按镜头距离限量，字号 +20 %，不可点（点 = 下一拍）；HUD 隐藏时 `leaders` 照常显示（`.atlas-leaders[data-present]`），**只**把字幕卡和标题块（`data-hud-panel="present*"`）当障碍（HUD 面板淡出时 `visibility` 还留着，不能算），进入演示时立刻重新测量。
 - 章节的 `labels` 写 3–6 个在本章镜头下**看得见**的零件（被外壳挡住的会因遮挡淡出；要标里面的零件，本章 `hide` 掉外壳、用 X-RAY，或者用组标注）。`pnpm shoot <topic> --beats` 的 `chapter highlights` 在 1600×900 和 1920×1080 都应是 `all on screen`。
 - 测试钩子：每个标签 `data-id`（零件 id 或 `group:<id>`）；有明确列表时 `.space-leaders` 带 `data-want`（`pnpm shoot --beats` 的漏标核对）。
@@ -929,7 +955,7 @@ core 演示系统（字幕卡、两级进度条、自动播放、语音、拍键
 
 - **节拍**：章节 `state.beats`（schema `spaceBeat`）；没写的章 = 一拍（本章 state，字幕 `summary` > `question` > 章名）。一拍 = 本章目标（`chapterTarget`）叠上拍里写的字段：`view` / `part` / `explode` / `run` / `cutaway` / `layers` / `pose` 覆盖；`hide`、`ghost`、`labels` 只看这一拍（不写 = 本章的）；拍的落定还要等姿态的 `duration`；`camera` = 拍的镜头，或命名预设的镜头（只取镜头，不取它的 `view`），都没有就是本章进入时的镜头（本章镜头 > 视图预设 > 继承）。
 - **applyBeat**：`applyState`（reason `state`）一次写入，镜头 1.4 s（`ui.nextTweenMs`），拆开 2 s、移开 .6 s 照舞台原样过渡；返回的 promise 在舞台报告镜头落定（`bridge.settledTransition`，CameraRig 在缓动结束 / 被拖断 / 无需移动时写）且拆开或移开的过渡做完后 resolve，4 s 兜底（舞台还没加载完）。自动播放和语音从这时开始计（core）。`instant`（`goToBeat(i, { instant: true })`、截图）直接跳到终态。
-- **进入**（`onEnter`）：先记下进入前的场景（`SpaceSavedState`：章、视图、选中、拆开、运转、剖切、`hidden`、图层、标注、镜头（活镜头，换算回与舞台宽高比无关的值）、ORBIT、亮着的预设与 FREE CAMERA；在 REFERENCE 里进入则记 REFERENCE 进入前的那份），再退出 REFERENCE（不飞回）、停 ORBIT、取消选中。**退出**（ESC / P / H / 显示界面）：`applyState` 放回这些，ORBIT 与 VIEW 预设高亮也放回。
+- **进入**（`onEnter`）：从当前拍开始（章节轴上亮着的那一拍；本章自身状态时从本章第一拍）。先记下进入前的场景（`SpaceSavedState`：章、当前拍 `beat`、视图、选中、拆开、运转、剖切、`hidden`、图层、镜头（活镜头，换算回与舞台宽高比无关的值）、ORBIT、亮着的预设与 FREE CAMERA；在 REFERENCE 里进入则记 REFERENCE 进入前的那份），再退出 REFERENCE（不飞回）、停 ORBIT、取消选中。**退出**（ESC / P / H / 显示界面）：`applyState` 放回这些，ORBIT 与 VIEW 预设高亮也放回。
 - 演示中 REFERENCE（R）禁用；拍飞行中 core 的输入层挡住舞台，落定后可以旋转、缩放（OrbitControls；停手 400 ms 写回 `camera`，下一拍从那里飞走，过渡时丢弃未写回的那次）；点零件 / 空白处不改这拍的 `part`（`View.tsx` 订阅 store，演示中非过渡的 `part` 变化立即改回），也不翻页；引线标注见上一节。
 - 语音、自动播放、音频文件、`__atlas.beats / goToBeat / setAutoplay / setVoice / voiceLog / state().presentation` 都来自 core，不需要引擎代码（e2e：`sample-space PRESENTATION …` 两条，含假 `speechSynthesis`：拍落定后才读、读完才进下一拍）。
 
@@ -950,63 +976,69 @@ core 演示系统（字幕卡、两级进度条、自动播放、语音、拍键
 - 计数（sample-space，1920×1080；18 个零件（3 对双侧）+ 1 个 context 墙）：静止 25–27 draw calls、~45 k 三角形；FLOW +2 calls。
 - 包体：舞台 chunk ~225 KB gz（three + R3F 为主；圆角盒用 `RoundedBoxGeometry`；写实轮次的 `extrude` / 贯流叶片引入 `ExtrudeGeometry` / `Shape` 一族，+10 KB，`panelHole` 仍手工三角化）。GLTF 加载器单独成 chunk（21 KB gz），只有写了 `mesh` 的主题才加载。
 
-## MathScene（交互式分步课，docs/15）
+## MathScene（讲解优先的课，docs/15 §10）
 
-`engine: math-scene`、`stage: svg`、`mode: lesson`（索引页徽章"Lesson / 课"）。代码在 `src/engines/math-scene/`：
+`engine: math-scene`、`stage: svg`、`mode: lesson`（索引页徽章"Lesson / 课"；卡片统计 = 步数 · 讲解节拍数 · 练习题数）。2026-10-11 起的形态：每章（一步）= 3–5 个**讲解节拍** + 1 个**章末小测**（从这一步的题库 8–10 道里随机抽一道）；最后是 8 道固定题的练习章。代码在 `src/engines/math-scene/`：
 
 ```
-index.ts            descriptor：扩展字段 task（1 起）、model（VIEW 组的模型，null = 小步自己的）；每章从第 1 小步开始；fromUrl 收 task / model，从不收作答
-schema.ts           lesson.json 的 zod（构建期）：分数字符串 "3/4" / "1 3/4" / "2" 解析成 { w?, n, d }；模型、11 种小步、选项、练习题、课纲条目；章节 state
-validate.ts         docs/15 §4.10 的主题级规则（构建期）
-View.tsx            HUD 注册、舞台、托盘、底部条、卡片、三面板、inspector、控制面板、演示适配器
-controller.ts       孩子的动作：标记、检查、提示、看答案、撤销、例子、换小步、练习流程；也是 __atlas.engine 的实现
-ui.ts               引擎自己的内存 store：每个小步的作答（模型状态、尝试次数、提示级、反馈、看答案、完成）、练习结果、例子、模式
-lib/                纯函数（有单测）：fraction（整数运算）、state（小步状态与动作 reduce）、check（每种小步的检查 + 误解诊断 + 分数框）、
-                    solve（正确解法、例子分帧、错答 sample → 状态）、beats（演示拍）、lesson（定位、VIEW 可切换的模型）、working（算式）、words（读法）
-stage/              SVG：Stage（按小步和视图摆模型）、BarModel、CircleModel、NumberLine、Rows（分数墙 / 比较条）、BarModelDiagram（模型图）、CutBar、OptionGrid、svg（图案、线稿、部件的点按 / 拖动 / 方向键）、layout（舞台布局与托盘的带）
-tray/Tray.tsx       作答托盘（分数框 + 数字键、< = >、选项、排序槽、×k / ÷k 芯片、对折、−/+）
-hud/                Panels（卡片 FRACTION、01 HISTORY、02 WORKING、03 STATE、inspector）、StepBar（底部条）、Overlay（控制面板）
+index.ts            descriptor：扩展字段 beat（0 起；URL b，1 起）、model（小测时 VIEW 组的模型，null = 题目自己的）；每章从第一拍开始；fromUrl 收 b / model，从不收作答和抽到的题
+schema.ts           lesson.json 的 zod（构建期）：分数字符串；模型；讲解节拍（beatSchema）；11 种任务；步（beats、pool、keyFacts）；练习题；课纲条目；章节 state
+validate.ts         docs/15 §4.10 / §10 的主题级规则：章 ↔ 步、3–5 拍且模型画得出、题库 8–10 道、每道题的规则（taskIssues，与 check-pool 共用）
+View.tsx            HUD 注册、舞台（节拍 / 小测）、算式行、章节轴、阅读面板（节拍行、小测托盘、本章索引）、右上卡、PLATE 块、控制面板、演示适配器
+controller.ts       换拍、抽题（visit / another / skip / force）、孩子的动作、检查、提示、看答案、撤销、练习流程；也是 __atlas.engine 的实现
+ui.ts               引擎自己的内存 store：每道题的作答（模型状态、尝试、提示级、反馈、看答案、完成、"你的尝试"）、每步抽到的题、练习结果、模式
+lib/                纯函数（有单测）：fraction、state、check（检查 + 误解诊断）、solve（正确解法、错例 sample → 状态）、proof（任务自证）、
+                    pool（按页面种子抽题，避开上一道）、beats（演示拍）、lesson（定位、拍的槽位、VIEW 可切换的模型）、working（算式）、words（读法）
+stage/              SVG：Stage（小测的模型）、BeatModel（讲解节拍：五种模型 + 叠加 + 过渡）、BarModel、CircleModel、NumberLine、Rows、BarModelDiagram、CutBar、OptionGrid、svg、layout
+tray/Tray.tsx       小测托盘（分数框 + 数字键、< = >、选项、排序、×k / ÷k、对折、−/+；你的尝试；提示 / 检查 / 看答案 / 再来一道 / 跳过 / 下一章）
+hud/                Panels（右上卡 FRACTION）、BeatLine（节拍行）、ChapterIndex（要点 + 课纲对照）、PlateBlock（左列 PLATE 块）、Overlay（控制面板）
 practice/Summary    练习总结
-math-scene.css      全部样式（token、× --u、触控 ≥ 44 px）
+math-scene.css      全部样式（token、× --u、触控 ≥ 44 px；节拍过渡；1024 px 以下停在舞台上的托盘）
+scripts/math/check-pool.ts   题库草稿自证：pnpm tsx scripts/math/check-pool.ts <draft.json> [--bridge]
 ```
 
 ### 数据（`data/lesson.json`）
 
 ```json
 { "syllabus": [{ "id": "p3-equivalent", "level": "P3", "ref": "P3 1.1", "page": 35, "source": "S1", "text": { "en": "equivalent fractions", "zh": "等值分数" } }],
-  "steps": [{ "id": "equivalent-fractions", "lo": ["p3-equivalent"], "views": ["bar", "circle"], "tasks": [
-    { "id": "split-thirds-into-twelfths", "kind": "split", "factors": [2, 3, 4], "target": "8/12",
+  "steps": [{ "id": "equivalent-fractions", "lo": ["p3-equivalent"], "views": ["bar", "circle"],
+    "beats": [
+      { "model": { "kind": "bar", "parts": 2, "given": 1, "object": "strip" }, "equation": "{1/2}", "caption": { "en": "…", "zh": "…" } },
+      { "model": { "kind": "bar", "parts": 4, "given": 2, "object": "strip" }, "move": "fold", "equation": "{1/2} = {2/4}", "caption": { … } },
+      { "model": { "kind": "wall", "rows": [1, 2, 4, 8] }, "highlight": ["1/2", "2/4", "4/8"], "move": "morph", "caption": { … } }],
+    "keyFacts": [{ "en": "Equivalent fractions name the same amount.", "zh": "等值分数表示同样多。" }],
+    "pool": [{ "id": "split-thirds-into-twelfths", "kind": "split", "factors": [2, 3, 4], "target": "8/12",
       "then": { "answer": "8/12", "form": "equal", "from": "2/3" },
       "model": { "kind": "bar", "parts": 3, "given": 2, "object": "strip" },
-      "prompt": { "en": "…", "zh": "…" }, "guide": { … }, "hints": [{ … }],
+      "prompt": { … }, "guide": { … }, "hints": [{ … }],
       "feedback": { "correct": { … }, "fallback": { … }, "reveal": { … },
-                    "wrong": [{ "when": "scaled-one-part", "say": { … }, "sample": "=2/12" }] },
-      "example": { "model": { … }, "factors": [2], "target": "1/2", "say": [{ … }, { … }] } }] }],
+                    "wrong": [{ "when": "scaled-one-part", "say": { … }, "sample": "=2/12" }] } }] }],
   "practice": [{ "id": "q4-…", "revisit": ["simplest-form"], "task": { "id": "q4-…", "kind": "input", … } }] }
 ```
 
-- 一章一步：章 id = 步 id；练习章 `state.practice: true`（最后一章）；背景章照常（`kind: background` + `note`）。章节 `state` 只有 `summary`、可选 `model`（本章默认视图）、`practice`、`note`、`theme`。
-- 模型：`bar`（`parts`、`given` 题目给的 / `shaded` 孩子的起始标记，数字 = 从左数几份或下标数组；`wholes` 2–3；`cuts` 不等分的图、`diagonal` 对角切的正方形；`rows` 叠放比较；`object` strip / toast / kueh / chocolate / ribbon / bottle / cake）、`circle`（prata / cake / plain）、`numberline`（`from`、`to`、每个整体的 `intervals`、`labels`、`arrow`、`withBar`）、`wall`（行 = 分母）、`barmodel`（部分–整体 / 比较，段的 `tone`、`unknown`、`brace`、`units` = "分成十分之几"）。
-- 小步：`shade`（`target`，`accept`，可选 `then` = 接着写）、`cut`（`parts`，`snap` 12 / 24）、`fold`（折后 `parts`）、`split` / `merge`（`factors`、`target`）、`place`（`target`、`snap`）、`compare`（`a`、`b`、`ask` symbol / greater / smaller、`align` split）、`order`（`items`、`direction`、`line`）、`choose`（`options`：`value` / `model` / `text`，`correct`，错选项的 `misconception`；对选项上的 `misconception` = 漏选它暴露的误解）、`input`（`answer` 一个或几个、`form` equal / equivalent / simplest / mixed / whole、`blanks`、`from`、`sum`）、`build-sum`（`op`、`a`、`b`、`convert`、`answer`）。
-- **`feedback.wrong[].sample`**：这个误解的一个错答，按小步的作答写法：input `"5/14"`、`"1 3/11"`、几个分数逗号分隔；shade 从左涂几份 `"3"`；place 跳几段 `"5"`；compare `"<"` 或 `"a"` / `"b"`；order `"1/2,3/4,3/8"`；cut 刀的格位 `"4,9"`；choose 选项 id；split / merge `"x2"`；多段小步以 `=` 开头 = 前几段做对后写下的答案。`tests/math-scene/lesson.test.ts` 逐条证明 sample 被诊断成它的误解、每个错选项也是，每个小步的标准解法通过。
-- 文本里的 `{3/4}`、`{1 3/4}`、`{?/12}` 是排版记号（`src/lib/rich-text.ts`：`renderRich` 竖排、`speakable` 读成文字），托盘、卡片、inspector、名词卡、演示字幕都用它；正文用 `<Frac>`。分数与旁边的运算符（`= + − < >`，以及 `= 1` 里的数）包进 `.atlas-nowrap`（`src/lib/frac-glue.ts`：`renderRich` 与 MDX 的 rehype 插件 `rehypeFracGlue`，在 `astro.config.mjs`），不会被换行拆开；阅读面板里分数的数字与正文同大（≈ 1.05em）。手机（< 760 px）上控制面板收在一个「工具和图例」按钮后面（`hud/Overlay.tsx` 的 `compact`），不占舞台；其余宽度下控制面板列在舞台高度内滚动（发丝滚动条常显），短舞台（≤ 940 px）先压紧行高。图片选项（`choose` 的 `model`）的无障碍名字是图的文字描述（`lib/words.ts describePicture`）。
+- 一章一步：章 id = 步 id；练习章 `state.practice: true`（最后一章）；背景章照常。章节 `state` 只有 `summary`、`practice`、`note`、`theme`。
+- **讲解节拍**（`beats`，3–5）：`model`（与任务同一套模型；`given` 冷色 = 给定的量，`shaded` 信号橙 = 新加上的）、`crossed`（拿走的份）、`highlight`（分数墙上点亮的分数）、`overlay`（`labels` / `equivalent` / `numberline` / `symbol`）、`equation`（模型下方一行算式，`{a/b}` 记号）、`move`（从上一拍过来的方式：`cut` `fold` `split` `convert` 扫过，`merge` 合拢，`morph` 换模型，`shade` `cross` `place` 逐份过渡）、`caption`（节拍行与演示字幕，也是朗读文本）。
+- **题库**（`pool`，8–10）：任务格式见下（没有 `example`）；进入一章时抽一道（与上一次不同），种子每次打开页面生成，从不进 URL 和存储。
+- **要点**（`keyFacts`，2–4 条一句话）：阅读面板正文后的本章索引。
+- 任务：`shade`、`cut`、`fold`、`split` / `merge`、`place`、`compare`、`order`、`choose`、`input`、`build-sum`（字段同前：`target`、`accept`、`then`、`parts`、`snap`、`factors`、`ask`、`align`、`items`、`direction`、`line`、`options`、`answer`、`form`、`blanks`、`from`、`sum`、`op`、`a`、`b`、`convert`）。**`feedback.wrong[].sample`** 是这个误解的一个错答（写法同前：input `"5/14"`，shade `"3"`，place `"5"`，compare `"<"` / `"a"`，order `"1/2,3/4,3/8"`，cut `"4,9"`，choose 选项 id，split / merge `"x2"`，多段任务以 `=` 开头）。`lib/proof.ts proveTask` 证明每道题：解法通过、起点不通过、每个 sample 与错选项诊断成声明的误解；`tests/math-scene/lesson.test.ts` 对全部题库题与练习题跑一遍。
+- 正文组件：`<Beat n={2}>短语</Beat>`（跳到本章第 n 拍；当前拍的链接高亮；validate 检查 n 在拍数内）、`<Task id="<step-id>">`（打开本章小测；也可写题库题 id）、`<Frac>`、`<Term>`、`<Num>`、`<More>`。`{3/4}` 记号与 `.atlas-nowrap` 同前（`src/lib/rich-text.ts`、`src/lib/frac-glue.ts`）。
 
-### 舞台、托盘、HUD
+### 舞台、阅读面板、HUD（docs/08 §2 全引擎 HUD 铁律）
 
-- **布局**（`stage/layout.ts`）：托盘属于舞台（H 隐藏 HUD 时仍在），但坐在 HUD 网格给它留的一条带里：引擎把托盘高度写到 `.atlas-scene` 的 `--task-h`，`math-scene.css` 给 `.atlas-hud` 加一行 `"left . right" / ". . ." / "dock dock dock"`，左右两列在托盘上方结束，所以 `pnpm shoot --layout` 的重叠检查覆盖托盘（`data-hud-panel="task"`）。模型画在舞台剩下的最大空白矩形里（左右两列之间，或两列下方）；演示时字幕卡是地板、标题块是障碍。
-- **视图**：VIEW 组 = 本步 `views` 里这个小步能画的模型（`lib/lesson.ts canShow`）；引擎用 `presets.current` 决定亮哪个，状态行写 `MODEL BAR`。背景章是一个示例分数 {3/4} 的四种画法。
-- **模式**：S 符号（模型旁大号分数）、E 等值（条下更细的分法与名字）、N 数轴（条下对齐的数轴）、宿主 L（每份标 1/n；默认关，是辅助）、P 演示。练习里 S / E / N 禁用、L 不注册，状态行写 `PRACTICE 4/8 · ASSISTS OFF`。
-- **命令**：C 检查、I 提示、U 撤销、W 看例子（core `commands`，键与按钮同一路径，按钮带 `data-command`）；Shift + ← → 上 / 下一小步（引擎监听，焦点在模型、托盘输入里时不拦）。分数框与数字键是 `data-keys="own"`（数字、Enter = 检查）；模型的份 / 标记 / 刀位是 `data-keys="arrows"` 或 `role="slider"`（方向键留在模型里）。
-- **反馈**：对 → `feedback.correct` + 一次 signal 脉冲；错 → 诊断出的误解那一句，否则 `fallback`；`not-simplest` 是"差一步"，不算尝试；第二次不对后出现"看答案"（墨色虚线画出正确状态 + `reveal`）。练习每题只检查一次：立即反馈、锁定、错了画出正确模型并给"回看第 NN 步"；第 8 题后是总结（hairline 表、一句话、再做一次）。HUD 读数（卡片、状态行、03 STATE、02 WORKING）不先说答案：要孩子写的值只在他写了以后显示。
-- 底部条：每步一段、每个小步一个小圆（做完 = 墨、当前 = signal），练习 8 个小方块（对 = 墨），状态串、◁ 上一小题、Hint（I）、Check（C）。卡片 A FRACTION（大号竖排分数 + 分子 / 分母的引线说明 + 读法；展开：等值的名字与最简分数）；01 HISTORY（每步动作的小条 + mono 说明，点一下在舞台上只读地看那一步）；02 WORKING（算式）；03 STATE（份数、涂色、分数、最简 + 0–1 位置条）；inspector（课纲条目 + 来源、怎么想、已看的提示、最近的反馈、看答案的说明）。
+- **舞台**：讲解拍由 `BeatModel` 画（只读）；结构变了（模型种类、份数）整幅重挂载并按 `move` 播放过渡，只有标记变了时逐份过渡。模型下方一行算式（`.ms-equation`，贴在模型包围盒下方）：讲解拍 = `equation`，小测 = `workingLines` 的最后一行（不先说答案），练习不显示。
+- **底部 = 章节轴**（core `ChapterAxis`）：每章一段，讲解拍是圆点，小测和练习题是小方块（引擎给刻度加 `data-shape="square"`）；点段 = 第一拍，点刻度 = 那一拍 / 小测；不自动跑；右端 `07 · 3/6`（小测时加 `· CHECK`；手机不显示）；⌄ 收起（HUD store `panelsOpen`）。
+- **阅读面板**：章头 → 节拍行（`BEAT 2/5` + 字幕，‹ › 同 `,` / `.`，跨章）→ 小测托盘（在方块上时）→ 正文 → 本章索引（要点、课纲对照 + 来源芯片、"做一做本章的小测"）。**1024 px 以下**阅读面板是抽屉，小测托盘停在舞台底部、章节轴上方：引擎把托盘高度写到 `.atlas-scene` 的 `--task-h`，`math-scene.css` 给 HUD 网格加一行带，左右两列在带上方结束（布局检查覆盖托盘）。
+- **右上卡** FRACTION：讲解拍 = 这一拍的分数（没有时写"舞台上还没有分数"），小测 = 孩子写的 / 标的值；比较题 `a ○ b`，加减题写算式；展开 = 等值的名字与最简分数。**左列 PLATE 块**：MODEL · PARTS · MARKED · VALUE（练习：QUESTION · ANSWERED · ASSISTS OFF），可收起（sessionStorage `atlas:plate`），手机隐藏。没有底部三面板。
+- **视图**：VIEW 组只在小测时出现 = 这道题能画的模型（`lib/lesson.ts canShow`），`presets.current` 由引擎决定。**模式**：S / E / N / 宿主 L / P，练习里 S / E / N 禁用、L 不注册。**命令**：C 检查、I 提示、U 撤销（core `commands`）；`,` / `.` 翻拍（core `beatStep`）；← → 换章。
+- **小测**：反馈同前（对 → `correct` + 脉冲；错 → 诊断句或 `fallback`；`not-simplest` 不算尝试；两次不对后"看答案"）；"你的尝试"列出每次检查（✓ / ○ + 当时的答案）；"再来一道"从题库再抽；"跳过"去下一章。练习每题只检查一次，第 8 题后总结。
 
 ### 演示、URL、测试 API、截图
 
-- **演示**（core `usePresentation`）：`lib/beats.ts` 从数据推拍：每个小步 = 例子每句一拍（舞台播放例子解法的一段）+ 一个"你来做"拍（字幕 = 题目，舞台换成本题、作答清空）；练习每题一拍 + 总结一拍；背景章一拍。适配器用 core 的三个扩展：`cardActions`（你来做拍的作答控件与 Hint / Check / 看答案放在字幕卡里，点那里不翻页）、`renderCaption`（字幕里的分数竖排；`captionOf` 给朗读的文字）、`gate`（自动播放在孩子做对或看答案后才开始计时，之前的输入不算"停住"）。演示中焦点在托盘输入 / 模型 / slider / radiogroup 时 → / 空格 / ← 不翻页。
-- **URL**：`ch`、`task`（≠ 1 才写）、`model`（≠ 本小步默认才写）；作答、进度、练习结果从不进 URL、不进 storage（刷新即清）。
-- **`__atlas.engine`**（core `SceneControls.test`）：`task()`（`{ step, index, id, kind, phase, answered, done, tries, hints, revealed, feedback: { tone, code }, example, practice }`）、`tasks()`（每个小步 / 练习题 `{ step, index, id, kind, example, practice, wrong }`，`wrong` = 第一个可构造的误解）、`goToTask(step, i, { instant })`、`solve()`（把当前段做对，不检查）、`answer(code | 'correct')`（摆出这个误解的错答或正确答案，不检查）、`act(action)`（孩子的一个动作，如 `{ do: 'fold' }`、`{ do: 'shade', part: 2 }`）、`practice()`（`{ index, summary, score, results }`）。`__atlas.commands()` / `runCommand('check')` 走同一命令（`disabled` 在下一次渲染才更新：改完状态后等一帧再 runCommand）。`__atlas.ready` 认 SVG 舞台（`[data-stage-surface]`）。
-- **`pnpm shoot <topic> --tasks`**：每个小步三张 `task-<step>-<n>`（起始）、`-wrong`（第一个误解的错答，检查后，诊断不符即失败）、`-solved`（逐段做对）；练习每题 `practice-q<n>`（单数题做对、双数题用错答）+ `practice-summary`。`--keys` 另核对命令 C / I / U / W（各在一个新的、有例子的小步上），引擎自己亮 VIEW 的主题跳过"拖动 → FREE CAMERA"。
-- e2e：`tests-e2e/fractions.spec.ts`（点按涂色、纯键盘涂色、比较、错 → 诊断 → 对与看答案、练习一次检查与总结、URL、演示你来做拍、六尺寸布局 en / zh）。
+- **演示**（core `usePresentation`）：`lib/beats.ts` 从数据推拍：每步 = 讲解拍 + 小测拍（字幕"轮到你了"，托盘在字幕卡里、带题目句）；练习每题一拍 + 总结一拍；背景章一拍。`gate`：小测拍在答对、看答案或"跳过"之前，自动播放不前进。
+- **URL**：`ch`、`b`（≠ 1 才写）、`model`（≠ 题目默认才写）；作答、抽到的题、进度、练习结果从不进 URL、不进 storage。
+- **`__atlas.engine`**：`task()`（`{ step, beat, slot, index（题库第几道）, id, kind, phase, answered, done, tries, hints, revealed, attempts, feedback, practice }`）、`tasks()`（每道题库题 / 练习题 `{ step, index, id, kind, practice, wrong }`）、`goToTask(step, i, { instant })`（第 i 道题库题作为这一章的小测；练习章 = 第 i 题）、`goToBeat(chapter, i)`、`another()`、`skip()`、`solve()`、`answer(code | 'correct')`、`act(action)`、`practice()`。
+- **`pnpm shoot <topic> --tasks`**：每道题库题三张 `task-<step>-<n>`、`-wrong`、`-solved`；练习每题 `practice-q<n>` + `practice-summary`。`--beats` 每拍一张（小测拍带字幕卡里的托盘）。`--keys` 核对 C / I / U 与 `,` / `.`。
+- e2e：`tests-e2e/fractions.spec.ts`（点刻度换拍、节拍行与 `<Beat>`、方块打开小测、点按 / 纯键盘作答、错 → 诊断 → 看答案、再来一道、跳过、练习与总结、URL、演示停在小测、zh、390×844、七尺寸布局 en / zh）。
 
 ## PWA、部署与 e2e（Phase 3）
 
@@ -1022,6 +1054,7 @@ math-scene.css      全部样式（token、× --u、触控 ≥ 44 px）
 | key | 含义 | 取值 | 引擎 | 例 |
 |---|---|---|---|---|
 | `ch` | 当前章节 | 章节 id | 通用 | `ch=power-on` |
+| `b` | 本章的当前拍（章节轴） | 1 起的整数；不写 = 本章自身状态（MathScene：= 1 时不写；讲解拍之后的一拍是小测，练习章第 k 拍是第 k 题） | SpaceScene、MathScene | `ch=training-the-chest&b=2` |
 | `layers` | 打开的图层 / 组 | 逗号分隔 id；空值 = 全关 | 通用 | `layers=control,battles` |
 | `cam` | 镜头 | 地图 `lng,lat,zoom[,pitch[,bearing]]`；3D `px,py,pz,tx,ty,tz`；空值 = 无 | 通用 | `cam=103.8,1.35,7.5` |
 | `theme` | 场景主题 | `paper` \| `cinema` | 通用 | `theme=cinema` |
@@ -1033,8 +1066,7 @@ math-scene.css      全部样式（token、× --u、触控 ≥ 44 px）
 | `run` | 通电运转 | `1` \| `0` | SpaceScene | `run=1` |
 | `cut` | 剖切 | `none` \| `half` \| 命名剖切面（`views.cuts`，数据里没有就不切） | SpaceScene | `cut=sagittal` |
 | `pose` | 姿态 | `parts.json` `poses` 里的名字；空值 = 静止 | SpaceScene | `pose=wings-open` |
-| `task` | 小步 / 练习题 | 1 起的整数（= 1 时不写） | MathScene | `task=2` |
-| `model` | 模型视图 | `bar` \| `circle` \| `numberline` \| `wall` \| `barmodel`；= 小步默认时不写 | MathScene | `model=circle` |
+| `model` | 小测的模型视图 | `bar` \| `circle` \| `numberline` \| `wall` \| `barmodel`；= 题目默认时不写 | MathScene | `model=circle` |
 
 新增可链接字段：改 `core/types.ts` 的 `UrlEngineFields`、`core/url-state.ts`（`URL_KEY_ORDER`、编解码）、`SceneHost.tsx` 里解构的字段、descriptor 的 `fromUrl`，并补 `tests/url-state.test.ts`。
 

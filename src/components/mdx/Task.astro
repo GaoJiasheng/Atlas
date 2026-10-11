@@ -1,9 +1,10 @@
 ---
 /**
- * `<Task id="fold-strip-quarters">Fold a strip</Task>`: a hairline button in a
- * lesson chapter body that opens that sub-step on the stage (SceneHost hands
- * `data-task` to the engine's `goToTask`, the same move as the bottom bar's
- * ticks). `pnpm validate` checks the id is a sub-step of the lesson.
+ * `<Task id="equivalent-fractions">Try the check</Task>`: a hairline button in
+ * a lesson chapter body that opens the chapter's check (a step id: one task
+ * drawn from its pool) or one pool task (its id) in the reading panel
+ * (SceneHost hands `data-task` to the engine's `goToTask`, the same move as
+ * the square tick on the chapter axis). `pnpm validate` checks the id.
  */
 import { t } from '../../i18n';
 import { pageLocale } from './locale';
@@ -14,4 +15,4 @@ interface Props {
 const { id } = Astro.props;
 const locale = pageLocale(Astro.url, Astro.currentLocale);
 ---
-<button type="button" class="atlas-flyto atlas-task-link" data-task={id} title={t(locale, 'math.task.link')}><svg class="atlas-flyto__icon" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><rect x="1.5" y="3.5" width="9" height="5" /><path d="M6 3.5V8.5" /></svg><span><slot /></span></button>
+<button type="button" class="atlas-flyto atlas-task-link" data-task={id} title={t(locale, 'math.task.link')}><svg class="atlas-flyto__icon" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><rect x="2" y="2" width="8" height="8" /></svg><span><slot /></span></button>

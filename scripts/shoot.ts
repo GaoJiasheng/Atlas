@@ -11,12 +11,13 @@
  *   pnpm shoot sample-time --layout                  # HUD overlap / overflow at seven sizes (incl. 1600x900)
  *   pnpm shoot ww2 --beats                           # every presentation beat -> shots/<topic>/<locale>-<theme>/beat-<chapter>-<n>.png
  *   pnpm shoot sample-space --perf --json out.json   # renderer numbers per shot
- *   pnpm shoot fractions --tasks                     # MathScene: every sub-step (start, a planned wrong answer, solved) and every practice question + the summary
+ *   pnpm shoot fractions --tasks                     # MathScene: every check-pool task (start, a planned wrong answer, solved) and every practice question + the summary
  *
  * `--beats` shoots a looping exercise beat (SpaceScene exercise mode) again held at its start and end keys
  * (`beat-<chapter>-<n>-start.png` / `-end.png`), and lists the ids each chapter's own state asks to label (TimeScene `highlight`, SpaceScene `labels`) that have no label on screen at the chapter camera (listed, not failed).
  * `--locale` and `--theme` take a value, a comma list, or `all` (default: en, paper).
  * `--keys` / `--layout` / `--beats` / `--tasks` replace the shot run unless shot names or `--shots` are given.
+ * `--keys` also checks `,` / `.` (beats outside the presentation, SpaceScene's chapter axis) where the engine registers them.
  *
  * shots.json: { "name": { "chapter": "id", "preset": "id", "modes": { "xray": true }, "hud": false, "wait": 900, "js": "window.__atlas…" } }
  *
@@ -94,7 +95,7 @@ interface RunReport {
   beatNotes: string[];
   /** Chapters whose own `state.highlight` / `state.labels` has ids with no label on screen at the chapter camera (content issues, not failures). */
   chapterNotes: string[];
-  /** Sub-steps whose solution did not end done (MathScene `--tasks`). */
+  /** Check tasks whose solution did not end done (MathScene `--tasks`). */
   taskFailures: string[];
   /** JavaScript the page loaded (gzip -9 of the files in dist/). */
   js: { files: number; gzKB: number };
@@ -416,10 +417,10 @@ async function runChapterHighlights(s: Session, report: RunReport): Promise<void
 
 interface TaskRow {
   step: string;
+  /** 1-based: the pool task of a step's check, or the practice question. */
   index: number;
   id: string;
   kind: string;
-  example: boolean;
   practice: boolean;
   wrong: string | null;
 }
@@ -445,7 +446,7 @@ const engine = (s: Session) => ({
   },
 });
 
-/** Solve the current sub-step phase by phase (as a child would), checking each phase. */
+/** Solve the task on show phase by phase (as a child would), checking each phase. */
 async function solveAll(s: Session): Promise<boolean> {
   const e = engine(s);
   for (let i = 0; i < 5; i++) {
@@ -456,7 +457,7 @@ async function solveAll(s: Session): Promise<boolean> {
   return (await e.task()).done;
 }
 
-/** MathScene: every sub-step at its start, with a planned wrong answer checked, and solved; every practice question; the practice summary. */
+/** MathScene: every check-pool task at its start (forced as the step's check), with a planned wrong answer checked, and solved; every practice question; the practice summary. */
 async function runTasks(s: Session, out: string, report: RunReport): Promise<void> {
   const e = engine(s);
   if (!(await s.ev(() => typeof (window.__atlas!.engine as { tasks?: unknown }).tasks === 'function'))) {
@@ -524,7 +525,7 @@ async function runKeys(s: Session, o: Options, report: RunReport): Promise<void>
     console.log(`  key ${JSON.stringify(r.key).padEnd(13)} ${r.type.padEnd(8)} ${r.name.padEnd(14)} ${r.ok ? 'OK' : 'FAIL'}${r.note ? '  ' + r.note : ''}`);
   };
 
-  // A lesson keeps the child's work in memory (--tasks finished every sub-step): start the key checks from a fresh page.
+  // A lesson keeps the child's work in memory (--tasks finished every check): start the key checks from a fresh page.
   if (await s.ev(() => typeof (window.__atlas!.engine as { tasks?: unknown }).tasks === 'function')) {
     await page.reload();
     await page.waitForFunction(() => window.__atlas !== undefined, null, { timeout: 60_000 });
@@ -571,17 +572,17 @@ async function runKeys(s: Session, o: Options, report: RunReport): Promise<void>
         note += ` not restored (${back})`;
       }
     } else if (k.type === 'command') {
-      // A fresh sub-step with an example for each command (a finished one takes no hint, undo or check); the effect is read from the engine's test hooks.
+      // A fresh check task for each command (a finished one takes no hint, undo or check); the effect is read from the engine's test hooks.
       const e = engine(s);
-      const order = ['check', 'hint', 'undo', 'example'];
-      const row = (await e.tasks()).filter((r) => r.example && !r.practice)[Math.max(0, order.indexOf(k.name))];
+      const order = ['check', 'hint', 'undo'];
+      const row = (await e.tasks()).filter((r) => !r.practice)[Math.max(0, order.indexOf(k.name))];
       if (!row) {
         record({ ...base, ok: true, note: 'no lesson task (skipped)' });
         continue;
       }
       await e.go(row.step, row.index);
       await page.waitForTimeout(300);
-      const now = () => s.ev(() => (window.__atlas!.engine as unknown as { task(): { done: boolean; hints: number; answered: boolean; example: boolean } }).task());
+      const now = () => s.ev(() => (window.__atlas!.engine as unknown as { task(): { done: boolean; hints: number; answered: boolean } }).task());
       if (k.name === 'check') {
         // The current phase solved, unchecked: C must accept it (done, or on to the next phase).
         await e.solve();
@@ -605,16 +606,6 @@ async function runKeys(s: Session, o: Options, report: RunReport): Promise<void>
         await page.waitForTimeout(250);
         ok = before && !(await now()).answered;
         if (!ok) note = 'U did not undo the last move';
-      } else if (k.name === 'example') {
-        await press(k.key);
-        await page.waitForTimeout(250);
-        ok = (await now()).example;
-        await press(k.key);
-        await page.waitForTimeout(250);
-        if (ok && (await now()).example) {
-          ok = false;
-          note = 'W did not stop the example';
-        } else if (!ok) note = 'W did not play the example';
       }
     } else if (k.type === 'pause') {
       const before = (await s.state()).paused;
@@ -628,12 +619,17 @@ async function runKeys(s: Session, o: Options, report: RunReport): Promise<void>
       await press(k.key);
       await page.waitForTimeout(900);
       const hidden = !(await s.state()).hud;
-      const restoreShown = await page.evaluate(() => {
-        const el = document.querySelector('.atlas-hud-restore');
-        if (!el) return false;
-        const cs = getComputedStyle(el);
-        return cs.visibility !== 'hidden' && Number.parseFloat(cs.opacity) > 0.5;
-      });
+      // The chip fades in (0.35 s); on a heavy stage under software GL the cover-camera flight can hold the main thread past 1 s.
+      let restoreShown = false;
+      for (let i = 0; i < 20 && !restoreShown; i++) {
+        restoreShown = await page.evaluate(() => {
+          const el = document.querySelector('.atlas-hud-restore');
+          if (!el) return false;
+          const cs = getComputedStyle(el);
+          return cs.visibility !== 'hidden' && Number.parseFloat(cs.opacity) > 0.5;
+        });
+        if (!restoreShown) await page.waitForTimeout(250);
+      }
       ok = hidden && restoreShown;
       if (!ok) note = `hud hidden=${hidden} restore-chip=${restoreShown}`;
       await press(k.key);
@@ -649,6 +645,36 @@ async function runKeys(s: Session, o: Options, report: RunReport): Promise<void>
       await page.waitForTimeout(500);
       ok = (await s.state()).hud;
       if (!ok) note = 'ESC did not restore the HUD';
+    } else if (k.type === 'beat') {
+      // `,` / `.` outside the presentation (SpaceScene's chapter axis): the beat on show moves one step in the flat list and its tick fills.
+      const beats = await s.ev(() => window.__atlas!.beats());
+      const at = async () => {
+        const st = (await s.state()) as unknown as { chapter: string | null; beat?: number | null; presentation: unknown; hud: boolean };
+        return { st, i: beats.findIndex((b) => b.chapter === st.chapter && b.index === (st.beat ?? 0)) };
+      };
+      const filled = (chapter: string | null, beat: number | null | undefined) =>
+        page.evaluate(([c, b]) => document.querySelector(`[data-beat="${c}.${b}"]`)?.hasAttribute('data-filled') ?? false, [chapter, beat] as const);
+      if (beats.length < 3) {
+        record({ ...base, ok: true, note: 'fewer than three beats (skipped)' });
+        continue;
+      }
+      await press('.');
+      await page.waitForTimeout(500);
+      const first = (await at()).i;
+      await press('.');
+      await page.waitForTimeout(600);
+      const a = await at();
+      if (k.name === 'next') {
+        ok = first >= 0 && a.i === first + 1 && a.st.beat !== null && a.st.presentation === null && a.st.hud && (await filled(a.st.chapter, a.st.beat));
+        if (!ok) note = `'.' went from flat ${first} to ${a.i} (chapter=${a.st.chapter} beat=${a.st.beat})`;
+      } else {
+        await press(',');
+        await page.waitForTimeout(600);
+        const b = await at();
+        ok = b.i === a.i - 1 && (await filled(b.st.chapter, b.st.beat));
+        if (!ok) note = `',' went from flat ${a.i} to ${b.i}`;
+      }
+      await page.waitForTimeout(1200); // camera flight
     } else if (k.type === 'chapter') {
       const chapters = await s.ev(() => window.__atlas!.chapters());
       const here = chapters.indexOf((await s.state()).chapter ?? '');

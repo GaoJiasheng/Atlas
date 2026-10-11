@@ -10,7 +10,9 @@
  *   overlay column, bottom dock with panels and the engine bar), the reading
  *   InfoPanel is a docked column >= 1024px (collapsible to a 28 px strip,
  *   kept per tab in sessionStorage) and a bottom sheet below
- * - the bottom panel strip (panel01-03) folds as one group into a 28 px bar,
+ * - the left column ends in the engine's `plate` block; the reading panel has
+ *   engine slots above the chapter body (`readerTop`) and after it (`readerEnd`)
+ * - the bottom panel strip (panel01-03, MathScene) folds as one group into a 28 px bar,
  *   per tab in sessionStorage (`atlas:panels`); BottomPanels tells the stage
  *   where the strip starts (`--stage-inset`) so the canvas reflows
  * - the top-right card folds into a 28 px vertical tab at the stage's right
@@ -227,8 +229,8 @@ export default function SceneHost(props: SceneHostProps) {
   useEffect(() => {
     if (!dataReady) return;
     const decoded = decodeSceneState(window.location.search);
-    const { t: time, highlight, part, view, explode, run, cutaway, pose, task, model, ...common } = decoded;
-    const engineFields: UrlEngineFields = { t: time, highlight, part, view, explode, run, cutaway, pose, task, model };
+    const { t: time, beat, highlight, part, view, explode, run, cutaway, pose, task, model, ...common } = decoded;
+    const engineFields: UrlEngineFields = { t: time, beat, highlight, part, view, explode, run, cutaway, pose, task, model };
     const patch = { ...common, ...engine.fromUrl(engineFields) };
     if (Object.keys(patch).length > 0) store.getState().hydrate(patch);
     return startUrlSync({
@@ -506,6 +508,7 @@ export default function SceneHost(props: SceneHostProps) {
               locale={locale}
               onSelect={(id) => store.getState().goToChapter(id)}
             />
+            <div ref={slotRef('plate')} className="atlas-plate" />
           </div>
           <div className="atlas-hud__right">
             <CardFrame hud={hud} slotRef={slotRef} locale={locale} actions={actions} />
@@ -561,6 +564,8 @@ export default function SceneHost(props: SceneHostProps) {
             summary={chapterSummary(chapter)}
             note={chapterNote(chapter)}
             body={props.children ? <ChapterBodies currentId={currentId}>{props.children}</ChapterBodies> : undefined}
+            lead={<div ref={slotRef('readerTop')} className="atlas-reader-top" />}
+            tail={<div ref={slotRef('readerEnd')} className="atlas-reader-end" />}
             hasPrev={hasPrev}
             hasNext={hasNext}
             onPrev={() => step(-1)}

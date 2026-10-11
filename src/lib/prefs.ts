@@ -108,7 +108,7 @@ export function setReaderExpanded(expanded: boolean): void {
   }
 }
 
-/** Bottom panel strip (SpaceScene's three panels) collapsed / expanded: per tab, never in the URL. */
+/** Bottom strip folded / expanded: MathScene's three panels, SpaceScene's chapter axis (a hairline when folded). Per tab, never in the URL. */
 export const PANELS_KEY = 'atlas:panels';
 
 /** `true` = expanded (the default, also when storage is unavailable). */
@@ -141,6 +141,25 @@ export function getCardExpanded(): boolean {
 export function setCardExpanded(expanded: boolean): void {
   try {
     window.sessionStorage.setItem(CARD_KEY, expanded ? 'open' : 'collapsed');
+  } catch {
+    /* storage unavailable: the state lasts for this page view */
+  }
+}
+
+/** The left column's plate block (SpaceScene: elevation, state rows, selection) folded / expanded: per tab, never in the URL. */
+export const PLATE_KEY = 'atlas:plate';
+
+/** `true` = expanded (the default, also when storage is unavailable). */
+export function getPlateExpanded(): boolean {
+  try {
+    return window.sessionStorage.getItem(PLATE_KEY) !== 'collapsed';
+  } catch {
+    return true;
+  }
+}
+export function setPlateExpanded(expanded: boolean): void {
+  try {
+    window.sessionStorage.setItem(PLATE_KEY, expanded ? 'open' : 'collapsed');
   } catch {
     /* storage unavailable: the state lasts for this page view */
   }

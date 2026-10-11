@@ -31,7 +31,7 @@ SpaceScene / Model3DStage，paper 默认、cinema 可切。原型：〔archetype
 | 4 | 章数〔N〕，按 docs/04 大纲〔调整之处〕 |
 | 5 | 分区 01–05 = 〔…〕；哪些是零件组、哪些是只有流的组 |
 | 6 | 模型布局：〔写实 / 示意映射（哪里缩短、并排、放大）〕；标题块 `note` 写〔…〕 |
-| 7 | 事实纪律：规格行 = DESIGN（落在 TYPICAL 内）；STATE 读数 = SIM 且自洽；设计研究来源一条（S1） |
+| 7 | 事实纪律：规格行 = DESIGN（落在 TYPICAL 内）；PLATE 块模拟读数 = SIM 且自洽；设计研究来源一条（S1） |
 | 8 | 不做：品牌 / 型号 / 照片贴图 / 配音文件 / 视频 / 测验（默认不做） |
 | 9 | 单位：SI；〔另注的本地常用单位，如 BTU/h〕；〔压力写绝对压力等约定〕 |
 
@@ -49,19 +49,19 @@ SpaceScene / Model3DStage，paper 默认、cinema 可切。原型：〔archetype
 | F-1 | 〔外形尺寸〕 | 〔范围〕（P#） | 〔本设计〕 | |
 | F-2 | 〔核心性能〕 | 〔…〕 | 〔…〕 | 是 |
 
-**模拟运行点（SIM，内部自洽）**：〔输入条件〕→〔逐步算式：能量 / 质量守恒、单位换算〕→〔STATE 面板与细看里出现的每个结果〕。这些数字只出现在 STATE（带 SIM）和细看（写明"模拟运行点"）；正文写取整的典型范围。
+**模拟运行点（SIM，内部自洽）**：〔输入条件〕→〔逐步算式：能量 / 质量守恒、单位换算〕→〔PLATE 块读数与细看里出现的每个结果〕。这些数字只出现在 PLATE 块读数（带 SIM）和细看（写明"模拟运行点"）；正文写取整的典型范围。
 
 ### 1.3 口吻
 按 skill `atlas-space-topic` 的 `writing-rules.md`；本主题对齐的课纲用词：〔MOE 小学科学 / 生物主题词〕；进名词表的专业词：〔…〕；本主题的安全 / 伦理说明：〔…〕。
 
-## 2. 分区 01–05（模型、右上卡、底部三面板共用）
+## 2. 分区 01–05（模型、右上卡、PLATE 块立面共用）
 
 | 分区 | 组 id | 名称 EN / ZH | 内容 | 组色（token） |
 |---|---|---|---|---|
 | 01 | `〔…〕` | 〔…〕 | 〔零件〕 | `token:ink-2` |
 | 04 | `〔…〕` | 〔…〕 | 只有流 | `token:hot` |
 
-- `groups` 数组按分区号写；有零件的组在 ARCHITECTURE 有分区括号，只有流的组只在 LAYERS 和 KEY 里。
+- `groups` 数组按分区号写；有零件的组在 PLATE 块立面里按组色画、在图例里出现，只有流的组只在 LAYERS 和 KEY 里。
 - context 零件（墙、地面、展台、植物茎）不属于任何分区。
 
 ## 3. 零件表
@@ -99,7 +99,7 @@ SpaceScene / Model3DStage，paper 默认、cinema 可切。原型：〔archetype
 
 ## 5. 动画
 
-全部 `whenRun: true`（除非常动）；转速是**可读的视觉速度**，真实值只在 STATE 和细看里出现。
+全部 `whenRun: true`（除非常动）；转速是**可读的视觉速度**，真实值只在 PLATE 块读数和细看里出现。
 
 | id | target | kind | 参数 | 说明 |
 |---|---|---|---|---|
@@ -123,6 +123,7 @@ SpaceScene / Model3DStage，paper 默认、cinema 可切。原型：〔archetype
 | 1 | 本章（hero） | 〔…〕 |
 
 - **细看**：〔2–4 个标题与要点：模拟运行点的数字、模型与真实的差别、常见误解、与生活 / 新加坡的联系〕
+- **本章索引**（`state.index`，docs/08 §2 铁律 e）：`parts: [〔正文和拍里讲到的 3–10 个零件〕]`，或（训练类）`exercises: [〔…〕]`
 - **名词首现**：〔ids〕
 
 ### 6.N 名词表 `glossary.json`（候选 12–16 个，正文用不到的删）
@@ -141,9 +142,10 @@ SpaceScene / Model3DStage，paper 默认、cinema 可切。原型：〔archetype
 ### 7.2 右上卡（零件链路）
 列 = 有零件的组；`connects` 构成的链：〔…〕；运转时按流的 `parts` 染色步进：〔…〕。零件 EN 名 ≤ 14 字符。
 
-### 7.3 底部三面板
-- ARCHITECTURE：`views.section.plane` = 〔xy / zy / xz〕（REFERENCE 用同一立面）。
-- STATE：`telemetry` ≤ 6 行：
+### 7.3 HUD（docs/08 §2「全引擎 HUD 铁律」a–e 自动生效，这里只填数据）
+底部章节轴、左列 PLATE 块、阅读面板顺序（章头 → 节拍行 → 选中详情 → 正文 → 本章索引）都是引擎给的，不在 spec 里重新设计；每章的 `index` 在 §6 每章的「本章索引」里写。
+- PLATE 块立面：`views.section.plane` = 〔xy / zy / xz〕（REFERENCE 用同一立面）。
+- PLATE 块模拟读数：`telemetry` ≤ 6 行：
 
 | key EN / ZH | unit | idle | run | lag（s） | decimals |
 |---|---|---|---|---|---|
@@ -176,7 +178,7 @@ SpaceScene / Model3DStage，paper 默认、cinema 可切。原型：〔archetype
 ### 9.2 来源计划（≥ 20，P# → 施工时的 S#）
 | P# | 内容 | 候选来源 | 用于 |
 |---|---|---|---|
-| P1 | 本设计研究（设计值与模拟运行点） | 本 spec §1.2 | 规格行、STATE、细看 |
+| P1 | 本设计研究（设计值与模拟运行点） | 本 spec §1.2 | 规格行、PLATE 块读数、细看 |
 
 ## 10. 施工顺序与验收
 按 skill `atlas-space-topic` 的 `build-order.md`（E → D → T → B → P）；验收按 `acceptance.md`，本主题另加：〔…〕。

@@ -38,6 +38,14 @@ export interface SpaceSceneExt {
   tints: { signal: string[]; cold: string[] } | null;
   /** Muscle parts whose origin / insertion markers show (chapter / beat `sites`; not cumulative). */
   sites: string[];
+  /**
+   * The beat of the current chapter on show (0-based index into its `beats`;
+   * a chapter without beats has one, 0), applied by the chapter axis, the
+   * `,` / `.` keys, the reading panel's beat line or the presentation; `null`
+   * = the chapter's own state (deep links without `b`, instant chapter
+   * changes). Not cumulative. URL `b` (1-based).
+   */
+  beat: number | null;
   /** A muscle sheet's ACTIONS demo on show: that part's joint swinging through the movement (never in the URL). */
   demo: { part: string; joint: string; movement: string } | null;
 }
@@ -84,6 +92,7 @@ export const spaceSceneEngine = defineEngine<SpaceSceneExt, SpaceSceneData>({
       tints: null,
       sites: [],
       demo: null,
+      beat: null,
       // All groups visible by default.
       layers: data ? data.parts.groups.map((g) => g.id) : [],
     };
@@ -103,6 +112,7 @@ export const spaceSceneEngine = defineEngine<SpaceSceneExt, SpaceSceneData>({
     out.tints = highlightOf(state.highlight);
     out.sites = Array.isArray(state.sites) ? state.sites.filter(isId) : [];
     out.demo = null;
+    out.beat = null;
     return out;
   },
   fromUrl(fields) {
@@ -113,6 +123,7 @@ export const spaceSceneEngine = defineEngine<SpaceSceneExt, SpaceSceneData>({
     if (fields.run !== undefined) out.run = fields.run;
     if (isId(fields.cutaway)) out.cutaway = fields.cutaway;
     if (fields.pose === null || isId(fields.pose)) out.pose = fields.pose;
+    if (fields.beat === null || (typeof fields.beat === 'number' && Number.isInteger(fields.beat) && fields.beat >= 0)) out.beat = fields.beat;
     return out;
   },
   load: () => import('./View'),

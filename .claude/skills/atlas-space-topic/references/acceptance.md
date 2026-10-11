@@ -20,14 +20,20 @@
 - [ ] 引线标注两列对齐、不压面板、近景减量；每章 `labels` 在章节镜头下都标得出
 - [ ] 右上卡（零件链路）的列宽 = (330 − 间距) ÷ 列数，名称按 `(列宽 − 22) ÷ 5.8` 个字符截断：**列数 ≤ 4** 才读得出（72 px ≈ 8 个字符）。组多时给不需要进链路的组（外壳、成长、场景）设 `card: false`，只留有 `connects` 链和流经过的系统；仍有被截断的名称要写进已知差距（引擎限制：没有短名字段）
 - [ ] 模式组合逐一过：X-RAY + FLOW（shell 透明、内件实心、粒子可见）、CUTAWAY + FLOW（`clip: false` 的流不被切）、EXPLODED + FLOW（FLOW 禁用、状态行说明）、hide + EXPLODED（隐藏的仍隐藏）、REFERENCE + run（运转暂停、读数回停机值）、X-RAY + CUTAWAY
-- [ ] 手机（390 × 844）：舞台 + 章节芯片 + 底部章节条可用；触控目标 ≥ 44 px；`phone-390.png` 存档
+- [ ] 手机（390 × 844）：舞台 + 章节芯片 + 底部章节轴（只剩章号）+ 抽屉里的节拍行 ‹ › 可用；触控目标 ≥ 44 px；`phone-390.png` 存档
 - [ ] 规范截图存进 `docs/screenshots/<slug>/`：`hero-paper`、`hero-clean`、`hero-dark`、`hero-zh`、`mode-xray`、`mode-exploded`、`phone-390`
+
+## HUD 铁律（docs/08 §2「全引擎 HUD 铁律」a–e，所有主题一样，spec 不必重复）
+- [ ] 底部只有章节轴：段数 = 章数，刻度数 = 每章拍数；点每章第 2 个刻度，模型落到那一拍（不进演示、HUD 在、节拍行写着这一拍的字幕），URL 带 `b=2`；`,` / `.` 跨章翻拍；⌄ 收成发丝线
+- [ ] 左列底部 PLATE 块：立面缩略图、RUN / FLOW / ANIM / VIEW / EXPLODE、（有 `telemetry` 时）模拟读数、当前选中一行；1080p 下章节轨与 PLATE 块都在左列里，不压标题块
+- [ ] 选中一个零件：详情在阅读面板章头正下方（编号、EN + 中文名、所属组、相连、说明；肌肉零件四页卡），不用滚动；没选中时那里什么都没有
+- [ ] 每章 `state.index` 列出正文和拍里讲到的零件 / 动作（3–10 个），每行点了都有反应；没有只能从某一拍或另一张卡里找到的对象
 
 ## 内容与事实
 - [ ] 每个正文数字有 `<Num s>`；零件 detail 的数字有 `[S#]`；来源冲突列了区间
 - [ ] 设计研究来源自描述（设计值、模拟运行点、结果、`note` 写"不是实测"与算式出处）
-- [ ] 规格行、STATE 读数、正文、细看、字幕、detail 里同一个量同一个值；模拟值都写明"模拟"
-- [ ] 事实审计：页面上所有带数字的 UI 字符串（规格行、STATE、引线说明、字幕、详情）要么有来源，要么带 SIM / 写明模拟。可用：`grep -nE '[0-9]' src/content/topics/<slug>/chapters/*.mdx` 逐条看字幕；`python3 -c` 读 parts.json 列出 summary / detail / spec 里的数字
+- [ ] 规格行、PLATE 块模拟读数、正文、细看、字幕、detail 里同一个量同一个值；模拟值都写明"模拟"
+- [ ] 事实审计：页面上所有带数字的 UI 字符串（规格行、PLATE 块读数、引线说明、字幕、详情）要么有来源，要么带 SIM / 写明模拟。可用：`grep -nE '[0-9]' src/content/topics/<slug>/chapters/*.mdx` 逐条看字幕；`python3 -c` 读 parts.json 列出 summary / detail / spec 里的数字
 - [ ] 无品牌、型号、商标：`grep -niE '<品牌名列表>' src/content/topics/<slug> -r` 为空（品牌只能出现在 `sources.json` 的来源标题里，且只当"典型"引用）
 - [ ] 两种语言都完整：中文独立成文，没有缺 `zh` 的字段
 - [ ] 名词表 12–16 个，每个在 EN、ZH 正文里各包了第一次出现

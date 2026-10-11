@@ -16,7 +16,11 @@ import { translator, type UiKey, type TemplateVars } from '../../i18n';
  * (docs/06 "布局插槽"). Empty slots render nothing.
  *  - `bottomBar`    engine controls at the bottom of the stage (timeline, explorer)
  *  - `stageOverlay` floating UI, right column under the card (control panel: layers, tools, key)
- *  - `inspector`    details of the selected object, inside the InfoPanel
+ *  - `inspector`    details of the selected object, inside the InfoPanel (after the chapter body)
+ *  - `readerTop`    top of the InfoPanel's scroll area, before the chapter body (SpaceScene: beat line, inspector)
+ *  - `readerEnd`    after the chapter body, before the inspector slot (SpaceScene: the chapter index)
+ *  - `plate`        the left column's compact block at its foot, under the chapter rail (secondary readouts:
+ *                   SpaceScene's elevation, state rows and selection; docs/08 §2 HUD 铁律 b)
  *  - `card`         body of the top-right schematic card (title via `controls.card`)
  *  - `panel01..03`  bodies of the three bottom panels (titles via `controls.panels`)
  *  - `perf`         quiet bottom-right readout (FPS · DRAW CALLS … / FEATURES · ZOOM)
@@ -26,6 +30,9 @@ export type SlotName =
   | 'bottomBar'
   | 'stageOverlay'
   | 'inspector'
+  | 'readerTop'
+  | 'readerEnd'
+  | 'plate'
   | 'card'
   | 'panel01'
   | 'panel02'

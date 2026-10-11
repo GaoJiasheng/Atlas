@@ -21,12 +21,13 @@ export const PRESENT_LABEL_CAP = 6;
 
 /**
  * The labels asked for, or `null` when none are listed (then every visible
- * part is a candidate): the beat's own list while presenting, else the
- * chapter's; capped at `PRESENT_LABEL_CAP` while presenting.
+ * part is a candidate): the list of the beat on show (presentation or the
+ * chapter axis) when it has one, else the chapter's; capped at
+ * `PRESENT_LABEL_CAP` while presenting.
  */
 export function listedLabels(input: { presenting: boolean; beat: readonly string[] | null; chapter: unknown }): string[] | null {
   const own = Array.isArray(input.chapter) ? input.chapter.filter((x): x is string => typeof x === 'string') : null;
-  const list = input.presenting && input.beat ? [...input.beat] : own;
+  const list = input.beat ? [...input.beat] : own;
   return list && input.presenting ? list.slice(0, PRESENT_LABEL_CAP) : list;
 }
 

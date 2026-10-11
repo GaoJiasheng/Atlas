@@ -25,7 +25,7 @@ const field = (v: unknown, k: string): unknown => (v && typeof v === 'object' ? 
 /**
  * Counts for a plate card, from the topic's raw `data/*.json` (keyed by file base name):
  * history maps (TimeScene) chapters · events · keyframes; object anatomy (SpaceScene)
- * chapters · parts; lessons (MathScene) steps · tasks · questions. Zero counts are dropped.
+ * chapters · parts; lessons (MathScene) steps · explanation beats · practice questions. Zero counts are dropped.
  */
 export function topicStats(engine: EngineId, raw: Record<string, unknown>, chapters: number): StatItem[] {
   const out: StatItem[] = [];
@@ -45,7 +45,7 @@ export function topicStats(engine: EngineId, raw: Record<string, unknown>, chapt
     case 'math-scene': {
       const steps = field(raw.lesson, 'steps');
       add(len(steps), 'index.stats.steps');
-      add(Array.isArray(steps) ? steps.reduce((sum: number, s) => sum + len(field(s, 'tasks')), 0) : 0, 'index.stats.tasks');
+      add(Array.isArray(steps) ? steps.reduce((sum: number, s) => sum + len(field(s, 'beats')), 0) : 0, 'index.stats.beats');
       add(len(field(raw.lesson, 'practice')), 'index.stats.questions');
       break;
     }

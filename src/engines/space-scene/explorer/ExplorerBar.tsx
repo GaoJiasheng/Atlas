@@ -1,9 +1,8 @@
 /**
- * The engine's bottom bar holds only what the top bar lacks: the explode
- * slider, while EXPLODED is on (44 px thumb, keyboard operable; named by
- * `views.explodeLabel` when the topic gives one, e.g. PEEL). Views, run
- * and cutaway are MODE buttons in the host's top bar (docs/08 §3). Renders
- * nothing otherwise, so the host hides the empty bar.
+ * The explode slider, in the control panel under the mode rows while
+ * EXPLODED is on (44 px thumb, keyboard operable; named by
+ * `views.explodeLabel` when the topic gives one, e.g. PEEL). Renders nothing
+ * otherwise.
  */
 import { useId } from 'react';
 import { useScene, useSceneContext, useSceneStore, useT } from '../../core/context';

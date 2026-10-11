@@ -20,10 +20,12 @@
  *     in a chapter body names a listed term
  *   - at most one `kind: background` chapter, with `order: 0`; `state.note`
  *     only on the background chapter
- *   - MathScene (docs/15 §4.10): chapters and steps one-to-one, the practice
- *     chapter, syllabus / source refs, denominators and sums, targets, planned
- *     feedback, prompt length, `{a/b}` tokens; `<Task id>` names a sub-step and
- *     `<Frac n d>` has whole numbers (d ≥ 1)
+ *   - MathScene (docs/15 §4.10, §10): chapters and steps one-to-one, the practice
+ *     chapter, 3–5 drawable explanation beats and a check pool of 8–10 per step,
+ *     syllabus / source refs, denominators and sums, targets, planned feedback,
+ *     prompt length, `{a/b}` tokens; `<Task id>` names a step (its check) or a
+ *     pool task, `<Beat n>` a beat of the chapter's step, and `<Frac n d>` has
+ *     whole numbers (d ≥ 1)
  *   - referenced files (cover) exist
  *   - SpaceScene glb (`model`, scripts/lib/glb-check.ts): exists under public/,
  *     ≤ 8 MB, `asset.copyright` set, every part `mesh` and rig `node` in its
@@ -175,7 +177,7 @@ function fracAttrs(raw: string): Record<string, number | null> {
   return out;
 }
 
-/** `<Num s>`, `<FlyTo preset>`, `<More title>`, `<Term id>`, `<Task id>` and `<Frac>` in a chapter body. */
+/** `<Num s>`, `<FlyTo preset>`, `<More title>`, `<Term id>`, `<Task id>`, `<Beat n>` and `<Frac>` in a chapter body. */
 function checkBodyComponents(
   file: string,
   body: string,
@@ -183,6 +185,7 @@ function checkBodyComponents(
   presets: Set<string>,
   terms: Set<string> | null,
   tasks: Set<string> | null,
+  beats: number | null,
 ): void {
   for (const { raw, attrs } of tagAttrs(body, 'Num')) {
     const ids = (attrs.s ?? '').split(/[\s,]+/).filter(Boolean);
@@ -213,12 +216,26 @@ function checkBodyComponents(
     const id = attrs.id;
     if (!id) error(file, `<Task> needs an id, e.g. <Task id="fold-strip-quarters">: ${raw}`);
     else if (!tasks) error(file, `<Task id="${id}">: this engine has no lesson sub-steps`);
-    else if (!tasks.has(id)) error(file, `<Task id="${id}">: unknown sub-step (not in data/lesson.json)`);
+    else if (!tasks.has(id)) error(file, `<Task id="${id}">: unknown step or check task (not in data/lesson.json)`);
+  }
+  for (const m of body.matchAll(/<Beat(?![A-Za-z])([^>]*)>/g)) {
+    const n = /\bn\s*=\s*(?:"(\d+)"|\{\s*(\d+)\s*\})/.exec(m[1] ?? '');
+    const k = n ? Number(n[1] ?? n[2]) : null;
+    if (k === null) error(file, `<Beat> needs a beat number, e.g. <Beat n={2}>: ${m[0]}`);
+    else if (beats === null) error(file, `<Beat n={${k}}>: this chapter has no explanation beats (lesson.json steps[].beats)`);
+    else if (k < 1 || k > beats) error(file, `<Beat n={${k}}>: the chapter has beats 1–${beats}`);
   }
   for (const m of body.matchAll(/<Frac(?![A-Za-z])([^>]*)>/g)) {
     const a = fracAttrs(m[1] ?? '');
     if (a.n == null || a.d == null || a.d < 1 || (('w' in a) && a.w == null)) error(file, `<Frac> needs whole numbers n and d (d ≥ 1), e.g. <Frac n={3} d={4} />: ${m[0]}`);
   }
+}
+
+/** MathScene: the explanation beats of a chapter's step (`<Beat n>`), `null` when the chapter has none. */
+function lessonBeats(data: unknown, chapter: unknown): number | null {
+  const steps = (data as { lesson?: { steps?: { id: string; beats?: unknown[] }[] } }).lesson?.steps;
+  const step = steps?.find((x) => x.id === chapter);
+  return step?.beats ? step.beats.length : null;
 }
 
 class IdRegistry {
@@ -383,7 +400,7 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
     checkBilingual(file, front);
     checkLangBlocks(file, match[2] ?? '');
     // Only when the data parsed: otherwise the data errors already explain missing ids.
-    if (data !== undefined) checkBodyComponents(file, match[2] ?? '', sources, presets, terms, tasks);
+    if (data !== undefined) checkBodyComponents(file, match[2] ?? '', sources, presets, terms, tasks, lessonBeats(data, (front as { id?: unknown }).id));
 
     const parsed = chapterSchema.safeParse(front);
     if (!parsed.success) {

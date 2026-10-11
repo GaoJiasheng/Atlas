@@ -9,6 +9,7 @@
 - 内容路线：`docs/04-content-roadmap.md`；加主题看 `docs/05-briefing-playbook.md`
 - **历史主题（时间线 + 地图，像二战那样）**：用项目级 skill `.claude/skills/atlas-history-topic/`（总览 `docs/10-history-topic-template.md`），脚手架 `pnpm tsx scripts/new-topic.ts`，地图管线 `scripts/geo/lib/<step>.ts --topic <slug>`
 - **拆解主题（3D 拆解 + 工作原理，像空调那样；机器或生物解剖）**：用项目级 skill `.claude/skills/atlas-space-topic/`（总览 `docs/13-space-topic-template.md`），脚手架 `pnpm tsx scripts/new-topic.ts <slug> --engine space-scene`，参考图放 `scripts/geo/<slug>/refs/`（不进 git）
+- **课主题（MathScene：讲解节拍 + 章末一道小测 + 练习，像分数那样）**：用项目级 skill `.claude/skills/atlas-lesson-topic/`（样板 `docs/15-fractions-content-spec.md` §10），题库草稿自证 `pnpm tsx scripts/math/check-pool.ts <draft.json>`
 
 ## 硬规则
 - 纯静态：无 SSR、无 API、无运行时外部请求（无 CDN、无 Google Fonts、无瓦片服务）
@@ -16,6 +17,7 @@
 - 两套主题都要能跑：paper 是技术图版标准实现，cinema 是 dark plate 变体
 - 可点目标 ≥ 44px，关键操作不依赖 hover；快捷键与按钮共用 store
 - 交付物里无 TODO / placeholder / 死代码 / console 噪音
+- **HUD 铁律**（所有引擎、所有主题）：见 docs/08 §2「全引擎 HUD 铁律」——底部只有章节轴（章 = 段、拍 = 刻度、点了就跳、不自动播放）；次级读数进左列 PLATE 块；选中详情在阅读面板章头正下方；阅读面板 章头 → 节拍行 → 详情 → 正文 → 本章索引；章节提到的对象都能从索引点到
 - **地图类内容必须用真实数据**：版图、国界、前线、路线一律来自公开地理数据集（CShapes、Natural Earth、OpenHistoricalMap、UMN 历史国界等）或把真实出版地图 / 维基共享资源地图配准后描摹，每个关键帧在 `data/SOURCES.md` 记来源、许可、配准方法；禁止用几何图形、随手多边形凑合（Gavin 2026-10-08 明确要求，对所有主题生效）
 - 历史内容**客观、全球视角、不带立场**：各方的侵略、罪行、牺牲用同一套写法写全（含同盟国一方），不写成任何一国的胜利叙事，不用"我们 / 敌人"；新加坡、中国只是视角之一，篇幅按历史分量分配。沉重内容（屠杀、轰炸、集中营）讲细节和数字，不回避；用词克制、尊重受害者，数字带来源
 

@@ -2,8 +2,9 @@
  * Stage overlay: the control panel (docs/06) — group (layer) toggles (each
  * with a ⊙ solo switch: that group alone, every other part faint), the
  * mode switches (X-RAY, EXPLODED, CUTAWAY, FLOW, REFERENCE, PRESENTATION, LABELS), the
- * glossary list (topics with data/glossary.json) and Hide HUD as tools, and a
- * colour key of the groups and flows.
+ * glossary list (topics with data/glossary.json) and Hide HUD as tools, the
+ * explode slider while EXPLODED (nothing else sits at the bottom but the
+ * chapter axis), and a colour key of the groups and flows.
  */
 import { useScene, useSceneContext, useSceneStore, useT } from '../../core/context';
 import { tx } from '../../../i18n';
@@ -11,6 +12,7 @@ import { ControlPanel, type ControlRow } from '../../widgets/ControlPanel';
 import type { LegendItem } from '../../widgets/Legend';
 import type { SpaceSceneExt } from '../index';
 import type { PartsFile } from '../schema';
+import { ExplorerBar } from './ExplorerBar';
 
 const MODES: ControlRow[] = [
   { kind: 'mode', id: 'xray' },
@@ -56,6 +58,7 @@ export function ExplorerOverlay({ file, glossary = false }: { file: PartsFile; g
   return (
     <div className="atlas-overlay-card space-overlay">
       <ControlPanel layers={layers} tools={glossary ? TOOLS_GLOSSARY : TOOLS} legend={legend} />
+      <ExplorerBar label={file.views.explodeLabel} />
     </div>
   );
 }

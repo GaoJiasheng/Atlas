@@ -95,6 +95,14 @@ describe('registration, modes and keymap', () => {
     ]);
   });
 
+  it('adds , and . for the beats when the engine steps beats outside the presentation (beatStep)', () => {
+    const keys = buildKeymap({ ...controls, beatStep: vi.fn() }).map((k) => `${k.key}:${k.type}:${k.name}`);
+    expect(keys.slice(-2)).toEqual([',:beat:prev', '.:beat:next']);
+    // Never a mode letter.
+    const taken = buildKeymap({ modes: { items: [{ id: 'm', key: ',', label: 'M', on: false }], set: vi.fn() } });
+    expect(taken.some((k) => k.type === 'mode')).toBe(false);
+  });
+
   it('unregisters only its own registration', () => {
     const hud = createHudStore();
     const off = registerSceneControls(hud, controls);

@@ -32,6 +32,8 @@ export interface SceneState {
 export interface UrlEngineFields {
   /** TimeScene: current time. URL `t`. */
   t?: TimePoint | null;
+  /** SpaceScene: beat of the current chapter on show (0-based; `null` = the chapter's own state). URL `b`, 1-based. */
+  beat?: number | null;
   /** SpaceScene: selected part. URL `part`. */
   part?: string | null;
   /** SpaceScene: view mode. URL `view`. */

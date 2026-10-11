@@ -44,22 +44,30 @@
 │       状态行：ATL-WW2-07 · {VIEW} · {RUNNING|PAUSED} · {MODE 50}              快捷键提示         │
 ├ 左：章节轨（编号 01–NN）                                           │
 │ 左上贴画布：标题 / 副标题 EN+中文 / 规格 dl（4–8 行，mono 数字，来源芯片）            │
+│ 左列底部：PLATE 图版块（次级读数：立面缩略图 + 状态小行 + 当前选中 + perf；可收起）     │
 │ 右上：一张示意 SVG 卡（引擎决定：过程链 / 时间条 / 剖面）随状态高亮，可原地展开；标题右端 › 收成舞台右缘 28 px 竖页签 │
 │ 右上卡下：控制面板 LAYERS / TOOLS / KEY（模式开关都在这里；顶栏只多一个 PRESENT）     │
 │ 舞台中央：地图或 3D；两列引线标注                                                     │
-│ 右：阅读面板（编号 + 章名 + summary 一句、章节正文、选中对象、测验；可收成 28 px 竖条，宿主级）│
-├ 底（SpaceScene）：三块等高面板 01 ARCHITECTURE / 02 DETAIL / 03 STATE；上缘左侧的小页签整组收成 28 px 横条，舞台随之变高 ─ │
-├ 底（TimeScene）：一条底部条 [▾] · 时间标尺 · 状态串；泳道可展开（PRESENT 在顶栏，这里没有）  │
-└ 右下安静小字：FPS · DRAW CALLS · TRIS · RES（仅 3D；地图显示 FEATURES · ZOOM）        ┘
+│ 右：阅读面板（章头 → 节拍行 → 选中对象 → 正文 → 本章索引 → 测验；可收成 28 px 竖条，宿主级）│
+├ 底（SpaceScene）：一条章节轴 [⌄] · 每章一段 + 每拍一刻度 · 右端 `05 · 2/8`；⌄ 收成一条发丝线只留章号 │
+├ 底（TimeScene）：一条底部条 [▾] · 分段时间轴 · 状态串；泳道可展开（同一语法，PRESENT 在顶栏，这里没有）│
+└ 安静小字 perf：SpaceScene 在 PLATE 块末行；TimeScene 右下 FEATURES · ZOOM                ┘
 ```
 
 - DOC-ID 规则：`ATL-{TOPIC 大写去连字符前 6}-{章节序号 2 位}`，如 `ATL-SAMPLE-02`；它在**状态行最前面**（顶栏里不再有），手机上隐藏。
 - **顶栏三段**（`core/Hud.tsx TopBar`）：左 = 品牌 `◇ ATLAS · {学科}` + **章节号码芯片** `01 … NN`（背景章 `BG`；带 `data-chapter="<id>"`，当前章 `.on` 实心、`aria-current="step"`；点击 = 章节轨的同一动作 `goToChapter`，← → 不变）；中 = **VIEW 组**（地理 / 模型视角预设、ORBIT、REF.，数字键）加它右端的 **`▶ PRESENT 演示`**（signal 橙实心，整个 HUD 唯一的实心橙按钮，`data-mode="presentation"`、`aria-pressed`，开关 `presentation` 模式 = 键 P；控制面板 TOOLS 里仍保留同一行）；右 = 只有 LOOK ▾ 和语言 ▾。三段用 grid：外侧两列 `minmax(max-content, 1fr)`，放得下时左右等宽，VIEW 组落在顶栏正中；放不下时各按内容宽度，中段略偏。< 1180 px 宽或触屏中段独占第二行居中；< 760（手机）芯片和 VIEW / PRESENT 都隐藏，章节走已有的章节轨小方块行（桌面顶栏芯片是它的桌面版）。VIEW 组**只放视角**：SpaceScene 不再有章节预设（章节就是顶栏芯片），数字键 1 = ORBIT。
-- **底部面板整组收起**（SpaceScene 的 panel01–03）：条**上缘左对齐**一个 hairline 小页签（`.atlas-panels__fold`，24 px 高、≥ 44 px 宽，坐在上边框上，`aria-expanded`；展开时 chevron 朝**下**，点它收起；收起后页签留在横条上缘、chevron 朝**上**）把三块一起收成一条 28 px 横条（`.atlas-panels__bar`，只显示 `01 ARCHITECTURE 结构 · 02 DETAIL 细节 · 03 STATE 状态`，点它或页签展开）；状态在 HUD store 的 `panelsOpen`，按标签页存 `sessionStorage['atlas:panels']`（默认展开，**不进 URL**，粘住：换章不会展开；`__atlas.state().panels` / `setPanels`）。**舞台随之重排**：舞台（和引线 svg）的底边 = 面板条的顶边（`BottomPanels` 量出来写到 `.atlas-scene` 的 `--stage-inset`），收起后 3D 画布变高；HUD 隐藏（H / 演示）时舞台仍占满整张。阅读面板的 28 px 把手是宿主级的，两个引擎一样。LAYERS / TOOLS 控制面板自带关闭按钮，不跟这个走。
+- **全引擎 HUD 铁律**（Gavin 2026-10-11，所有引擎、所有主题，新主题不用再写进自己的 spec）：
+  - **a · 底部是章节轴**：每个引擎底部都有章节轴（`core/axis/ChapterAxis.tsx`；TimeScene 的分段时间轴、MathScene 的步骤条是同一族，后续统一到这个组件）：章 = 等宽段（章号 + 短标题，背景章 `BG`），拍 = 段里的刻度（没写拍的章一个刻度），当前章亮、当前拍实心；点段 = 那一章第一拍，点刻度 = 那一拍，键 `,` / `.` 上一拍 / 下一拍（跨章）；不自动播放。拍在演示之外应用 = 演示里同一套舞台状态，但不进演示、没有字幕卡：字幕写进阅读面板的节拍行；URL 带 `b`（本章第几拍，从 1 起）；P 从当前拍开始。
+  - **b · 底部没有别的条**：次级读数（结构 / 状态 / 选中 / perf）放在左列底部一个紧凑的 PLATE / 图版块里（可收起、手机隐藏），不另开底部面板。
+  - **c · 选中对象的详情在阅读面板章头正下方**：读者点了什么，不用滚动就能看到；什么都没选就什么都不放。
+  - **d · 阅读面板顺序** = 章头（n/N、章名、summary）→ 节拍行（‹ ›）→ 选中对象 / 当前动作卡 → 正文 → 本章索引 → 测验。
+  - **e · 章节提到的每个对象都要能从阅读面板的索引里点到**（`state.index`：零件或动作），不能只藏在某一拍或另一张卡里。
+- **章节轴折叠**（SpaceScene；MathScene 的三面板仍用同一个状态）：轴左端 ⌄（`.atlas-axis__fold`，44 px 宽、`aria-expanded`）把整条收成一条发丝线（`.atlas-axis[data-folded]`，只留章号的小页签，命中区向上补到 44 px），再点展开；状态是 HUD store 的 `panelsOpen`，按标签页存 `sessionStorage['atlas:panels']`，不进 URL，粘住。轴浮在舞台底部，舞台不缩（`--stage-inset` 只给 MathScene 的面板条用）。
+- **底部面板整组收起**（MathScene 的 panel01–03；SpaceScene 已不用面板）：条**上缘左对齐**一个 hairline 小页签（`.atlas-panels__fold`，24 px 高、≥ 44 px 宽，坐在上边框上，`aria-expanded`；展开时 chevron 朝**下**，点它收起；收起后页签留在横条上缘、chevron 朝**上**）把三块一起收成一条 28 px 横条（`.atlas-panels__bar`，只显示三个面板的编号和标题，点它或页签展开）；状态在 HUD store 的 `panelsOpen`，按标签页存 `sessionStorage['atlas:panels']`（默认展开，**不进 URL**，粘住：换章不会展开；`__atlas.state().panels` / `setPanels`）。**舞台随之重排**：舞台（和引线 svg）的底边 = 面板条的顶边（`BottomPanels` 量出来写到 `.atlas-scene` 的 `--stage-inset`），收起后 3D 画布变高；HUD 隐藏（H / 演示）时舞台仍占满整张。阅读面板的 28 px 把手是宿主级的，各引擎一样。LAYERS / TOOLS 控制面板自带关闭按钮，不跟这个走。
 - **右上卡可收成竖页签**（两个引擎的 `card` 槽：SpaceScene 零件链 / TimeScene 参与卡）：卡片标题行**右端**一个 chevron 朝**右**的折叠钮（`.atlas-card__fold`，`aria-expanded`，≥ 44 px 命中区；TimeScene 参与卡自己的「展开全部行」切换是另一个控件，保留）。收起后卡片 `display: none`（引擎仍挂载在里面），舞台右缘出现一条 28 px 竖页签（`.atlas-card__tab`，`data-hud-panel="card-tab"`，章名竖排、chevron 朝**左**，点它恢复）；下面的 LAYERS / TOOLS 控制面板自然上移补位；引线标注与地图标牌把页签当障碍、把收起的卡片丢掉。状态在 HUD store 的 `cardOpen`，按标签页存 `sessionStorage['atlas:card']`（默认展开，不进 URL，粘住；`__atlas.state().card` / `setCard`）；`.atlas-scene[data-card="open|collapsed"]`。< 1024 px 卡片本来就隐藏。
 - 阅读面板收起后的竖条：章号在中线上方、竖排章名**垂直居中**、chevron 在章名下方，三者水平居中。
 - 所有 HUD 块带 `data-hud-panel`，缩放系数 `--k = clamp(min(W/1920, H/1080), .6, 1.6)`，各角以所在角为 transform-origin。
-- 响应式：≥1440 完整；1080 完整略小；720 底部三面板压缩成一行标签页；VIEW 组放不下就折行（< 1180 px 宽独占第二行）；< 1024 阅读面板是底部抽屉；< 760 宽（手机）保留舞台 + 章节轨折叠 + 底部控制，隐藏右上卡与三面板。任何尺寸不重叠、不横向溢出。
+- 响应式：≥1440 完整；1080 完整略小；720 PLATE 块去掉立面缩略图只留状态行（MathScene 的三面板压缩成一行标签页）；VIEW 组放不下就折行（< 1180 px 宽独占第二行）；< 1024 阅读面板是底部抽屉；< 760 宽（手机）保留舞台 + 章节轨折叠 + 章节轴（只剩章号，没有刻度；拍用阅读面板的节拍行 ‹ › 翻）+ 底部抽屉，隐藏右上卡、PLATE 块与三面板。任何尺寸不重叠、不横向溢出。
 - 现有 ChapterRail / InfoPanel / QuizCard / Counter 保留职责，按上面的排版重做皮肤（hairline、编号、芯片）。
 
 ## 3. 交互契约
@@ -78,7 +86,8 @@
 | SPACE | 运转暂停 | 演示中：下一拍 |
 | P | PRESENTATION（同右列的节拍规则） | PRESENTATION：用户翻页的节拍（点字幕卡 / → / SPACE 下一拍，← 上一拍，点节拍点跳转，不自动前进；点舞台不翻页） |
 | H | 隐藏 HUD | 同左 |
-| ← → | 章节 | 章节 |
+| ← → | 章节（落在第一拍） | 章节 |
+| , . | 上一拍 / 下一拍（演示之外，跨章；章节轴） | — |
 | ESC | 退出 focus / REFERENCE | 退出演示 / REFERENCE / 展开的参与卡 / 选中 |
 
 - 按钮与键共用同一个 store 字段；按钮 `.on` 由 state 推导。模式按钮在控制面板里（LAYERS / TOOLS，每行右侧写键位字母），注册表是唯一状态来源。输入框聚焦时不响应快捷键。无意义的组合显式禁用并在状态行说明。
@@ -91,7 +100,7 @@
 - 引擎提供的程序化零件（在 `primitive.kind` 基础上扩展）：`bevelBox`（真实截面 + 倒角）、`tube`（沿路径、统一弯曲半径）、`flange`（带螺栓圆）、`fins`（散热鳍片阵列）、`vessel`（圆柱 + 封头）；`repeat: {count, axis, spacing | radius}` 生成 `InstancedMesh`。
 - 材质族：`casing`（拉丝铝）、`steel`（机加工钢）、`powder`（粉末涂层黑框架）、`stainless`（管路，轴向拉丝）、`copper`、`rubber`、`plastic`（哑光，非默认灰）、`glass`。程序化 canvas 纹理给 roughness 变化与拉丝方向。
 - 生物 / 有机形体（docs/06「生物与有机形体」，docs/14 §8）：`sweep`（沿平滑路径放样的变径管：圆 / 扁 / U 截面、壁厚、环节沟、圆帽）、`wing`（薄膜 + 两面墨色翅脉细线，可扇形折叠）、任意 primitive 的 `scale`（椭球、扁壳）、`bilateral` 零件（只建一侧，引擎镜像另一侧；镜像件可选、可标注，不另编号）、动画 `pivot`（绕关节转）与 `sequence` 关键帧、`poses`（章 / 拍缓动到姿态，默认 0.8 s）。生物材质族：`chitin`（半光泽、按物种 tint）、`membrane`（半透明双面、不写深度、不填剖面）、`tissue`（哑光、微弱自发光仿透光）、`muscle`（纤维法线）、`trachea`（白、环纹法线）、`nerve`（淡黄）、`eye`（深色高光 + 六边形小眼法线）。软组织用低饱和的粉、赭、乳黄，不用"血腥红"；两套主题都要读得出。
-- 系统分层的读法：章 / 拍 `ghost`（组以 .12 淡显、不可点、不标注）与 LAYERS 行末 `⊙` 单显，让一个系统在身体轮廓里被看见；命名剖切面 `views.cuts`（矢状 / 横切）在状态行写名字。比例尺与 ARCHITECTURE 读数按 `units` 用实长（放大 40 倍的昆虫写 `10 MM`，不写 `U`）。
+- 系统分层的读法：章 / 拍 `ghost`（组以 .12 淡显、不可点、不标注）与 LAYERS 行末 `⊙` 单显，让一个系统在身体轮廓里被看见；命名剖切面 `views.cuts`（矢状 / 横切）在状态行写名字。比例尺与 PLATE 块立面的读数按 `units` 用实长（放大 40 倍的昆虫写 `10 MM`，不写 `U`）。
 - 灯光：1 大柔 key（暖中性）+ 弱 fill + 半球/RoomEnvironment + 1 中性 rim，ACES Filmic。只有大件投影，地面接触阴影。
 - CUTAWAY：保留 40–55% 外壳，切口 ochre + 剖面线（背面着色法，见 `perf-lessons.md` §9）。
 - 性能：draw calls < 100（上限 150），三角形 ≤ 1.5 M，pixelRatio `min(dpr, 3840/W, 2)`，渲染循环零分配，`frameloop="demand"` 非运转时不渲。
@@ -146,7 +155,7 @@
 | 轮 | 范围 | 完成标准 |
 |---|---|---|
 | P1 设计语言 | tokens、字体、SceneHost 布局、widgets 皮肤、`__atlas` API、H / 数字键 / 状态行 | 两套主题下示例主题的 HUD 像技术图版；`--layout` 六个尺寸通过 |
-| P2 SpaceScene | 材质族、灯光、剖切面、引线标注、模式键、ORBIT / REFERENCE、程序化零件扩展、perf 读数、右上卡与底部三面板 | 关 HUD 的 HERO 能当封面；draw calls < 100；`--keys` 通过 |
+| P2 SpaceScene | 材质族、灯光、剖切面、引线标注、模式键、ORBIT / REFERENCE、程序化零件扩展、perf 读数、右上卡与底部章节轴 / 左列 PLATE 块 | 关 HUD 的 HERO 能当封面；draw calls < 100；`--keys` 通过 |
 | P3 TimeScene | 纸面底图、斜线填充、工程流线、引线标注、标尺时间轴、右上条带卡、三面板 | 同上；两主题 |
 | P4 QA 与审计 | `shoot.ts`、e2e 更新、文档与截图刷新、删 TODO / 死代码、Lighthouse | 全部门槛绿；docs/06 与 08 对齐实现 |
 | P5 内容期（每个主题） | skill `rounds.md` 的 R2（几何比例）→ R4（原理动画）→ R9（事实审计）按主题跑 | 主题 `status: published` 前必须过 |
@@ -187,3 +196,4 @@
 | P4 QA 与审计 | `c6134d1` | `pnpm shoot`（`scripts/shoot.ts`）；HUD 字号刻度上调（最小 10 px / 状态行 ≥ 10.5 px）；手机顶栏 `SceneMode.phone`；SpaceScene 引线标注避让模型、窄带只标选中；删未用 i18n 键与死导出；docs/06 对齐代码；截图收拢到 `docs/screenshots/<topic>/` | 未跑 Lighthouse（不新增依赖）；`simulation` 仍是后期占位引擎；软件 GL 下 fps 数字不代表真机，4K60 未在真 GPU 上验证 |
 | P5 内容期 | — | — | 未开始（等 Gavin 定稿内容） |
 | 版面轮（主题页） | 未提交 | 顶栏 VIEW 只放地理预设并折行、去掉 MODE 组；模式进控制面板（LAYERS / TOOLS）；阅读面板可收成 28 px 竖条（sessionStorage）、头部带 summary；TimeScene 底部合成一条（播放 · 标尺 · 状态串 · 可展开泳道），时间轴最小间距混合映射；参与卡可展开、行可点（地图加粗 + 实体详情）；PRESENTATION 改成用户翻页的节拍（ww2 第 07、11 章各四拍） | SpaceScene 保留章节镜头预设和三面板；节拍 `audio` 只预留，没有音频文件 |
+| 章节轴轮（SpaceScene） | 未提交 | 三块底部面板去掉：章节轴（core/axis，段 = 章、刻度 = 拍，点刻度在演示之外应用这一拍，`,` / `.`，URL `b`，P 从当前拍开始，⌄ 收成发丝线）；左列底部 PLATE 块（立面缩略图 + RUN / FLOW / ANIM / VIEW / EXPLODE + 模拟读数 + 当前选中 + perf）；阅读面板顺序 章头 → 节拍行 → 选中对象 → 正文 → 本章索引（`state.index`：零件或按器械分组的动作 + 示例训练课）；§2「全引擎 HUD 铁律」 | TimeScene 时间轴、MathScene 步骤条尚未换成 core 章节轴组件（同一语法，待统一）；MathScene 仍有三面板 |

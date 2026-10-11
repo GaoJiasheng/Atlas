@@ -253,6 +253,11 @@ export function TopBar({ topic, chapters, chapter, chapterNumber, locale, path, 
           <span>
             <kbd>← →</kbd> {tr('hud.keys.chapter')}
           </span>
+          {controls.beatStep && (
+            <span>
+              <kbd>, .</kbd> {tr('hud.keys.beats')}
+            </span>
+          )}
         </p>
       </div>
     </header>

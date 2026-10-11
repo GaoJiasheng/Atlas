@@ -1367,6 +1367,21 @@ export const spaceBeat = z
   .strict();
 export type SpaceBeat = z.output<typeof spaceBeat>;
 
+/**
+ * A chapter's index in the reading panel (docs/08 §2 HUD 铁律 e): every
+ * object the chapter talks about, reachable from a list. `exercises` (ids of
+ * `data/training.json` `exercises`) lists them grouped by equipment, with the
+ * example session after them; `parts` lists parts (not context ones).
+ */
+export const spaceChapterIndex = z
+  .object({
+    exercises: z.array(kebabId).min(1).optional(),
+    parts: z.array(kebabId).min(1).optional(),
+  })
+  .strict()
+  .refine((x) => x.exercises !== undefined || x.parts !== undefined, 'index: give `exercises` or `parts`');
+export type SpaceChapterIndex = z.output<typeof spaceChapterIndex>;
+
 /** `state:` in a SpaceScene chapter's frontmatter (a "step"). */
 export const spaceChapterState = z
   .object({
@@ -1409,6 +1424,8 @@ export const spaceChapterState = z
     ...muscleStateFields,
     /** PRESENTATION beats for this chapter; default = one beat (the chapter's state, `summary` as caption). */
     beats: z.array(spaceBeat).min(1).optional(),
+    /** The chapter index after the body in the reading panel (exercises or parts). */
+    index: spaceChapterIndex.optional(),
   })
   .strict();
 export type SpaceChapterState = z.output<typeof spaceChapterState>;
@@ -1437,7 +1454,8 @@ export function spacePresetIds(data: SpaceSceneData): string[] {
  * What a chapter state (and each of its beats) names that the data does not
  * have: `part` / `hide` must be parts (not context ones), `labels` parts or
  * `group:<id>` groups, `layers` groups, `ghost` groups or parts, `pose` a pose,
- * `cutaway` none / half / a named cut, a beat's string `camera` a named preset.
+ * `cutaway` none / half / a named cut, a beat's string `camera` a named preset,
+ * `index.parts` parts (not context ones), `index.exercises` training exercises.
  */
 export function spaceChapterIssues(state: SpaceChapterState, data: SpaceSceneData): string[] {
   const f = data.parts;
@@ -1477,5 +1495,12 @@ export function spaceChapterIssues(state: SpaceChapterState, data: SpaceSceneDat
   };
   check('state.', state);
   state.beats?.forEach((b, i) => check(`state.beats.${i}.`, b));
+  for (const id of state.index?.parts ?? []) {
+    const p = parts.get(id);
+    if (!p) out.push(`state.index.parts: unknown part "${id}"`);
+    else if (p.context) out.push(`state.index.parts: "${id}" is a context part (never selected)`);
+  }
+  for (const id of state.index?.exercises ?? [])
+    if (!training.has(id)) out.push(`state.index.exercises: "${id}" is not in data/training.json exercises`);
   return out;
 }

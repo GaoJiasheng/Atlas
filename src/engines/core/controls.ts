@@ -191,6 +191,12 @@ export interface SceneControls {
     /** The last 10 utterances of the caption narration (`__atlas.voiceLog()`). */
     voiceLog?(): VoiceLogEntry[];
   };
+  /**
+   * Previous / next beat outside the presentation (`,` / `.`; SpaceScene's
+   * chapter axis): the engine applies the beat one step away in the flattened
+   * beat list, crossing chapters. Omit when the engine has no such axis.
+   */
+  beatStep?(direction: 1 | -1): void;
   /** The continuous time on show (TimeScene's playhead; `__atlas.state().playhead`), `null` when the engine has none. */
   time?: {
     now(): number | null;
@@ -215,8 +221,10 @@ export interface HudState {
    */
   reader: boolean;
   /**
-   * Bottom panel strip (panel01–03) expanded; collapsed = one 28 px bar with
-   * the three titles. Kept in sessionStorage by the host, never in the URL.
+   * Bottom strip expanded: MathScene's panel01–03 (collapsed = one 28 px bar
+   * with the three titles) and SpaceScene's chapter axis (collapsed = a
+   * hairline with the chapter number). Kept in sessionStorage by the host,
+   * never in the URL.
    */
   panelsOpen: boolean;
   /**
@@ -267,7 +275,9 @@ export function registerSceneControls(hud: HudStore, controls: SceneControls): (
 
 export const LABELS_MODE_ID = 'labels';
 export const LABELS_KEY = 'l';
-const RESERVED_KEYS = new Set([' ', 'h', 'escape']);
+const RESERVED_KEYS = new Set([' ', 'h', 'escape', ',', '.']);
+/** Previous / next beat outside the presentation (`SceneControls.beatStep`). */
+export const BEAT_KEYS = { prev: ',', next: '.' } as const;
 
 /** Engine modes plus the host's LABELS switch when the engine supports it. */
 export function allModes(controls: SceneControls, labelsOn: boolean, labelsText: HudText): SceneMode[] {
@@ -289,7 +299,7 @@ export function activePreset(state: Pick<HudState, 'controls' | 'presetId' | 'ca
 export interface KeyBinding {
   /** `KeyboardEvent.key` (lower-case letters, `' '` for space). */
   key: string;
-  type: 'preset' | 'mode' | 'command' | 'pause' | 'hud' | 'escape' | 'chapter';
+  type: 'preset' | 'mode' | 'command' | 'pause' | 'hud' | 'escape' | 'chapter' | 'beat';
   name: string;
 }
 
@@ -333,6 +343,10 @@ export function buildKeymap(controls: SceneControls): KeyBinding[] {
   out.push({ key: 'Escape', type: 'escape', name: 'escape' });
   out.push({ key: 'ArrowLeft', type: 'chapter', name: 'prev' });
   out.push({ key: 'ArrowRight', type: 'chapter', name: 'next' });
+  if (controls.beatStep) {
+    out.push({ key: BEAT_KEYS.prev, type: 'beat', name: 'prev' });
+    out.push({ key: BEAT_KEYS.next, type: 'beat', name: 'next' });
+  }
   return out;
 }
 

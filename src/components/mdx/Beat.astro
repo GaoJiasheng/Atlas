@@ -1,0 +1,18 @@
+---
+/**
+ * `<Beat n={2}>the half folded again</Beat>`: a hairline button in a lesson
+ * chapter body that shows beat n of the chapter on the stage (SceneHost hands
+ * `data-task="beat-2"` to the engine's `goToTask`, the same move as a tick on
+ * the chapter axis); the link of the beat on show is marked. `pnpm validate`
+ * checks n is one of the chapter's explanation beats.
+ */
+import { t } from '../../i18n';
+import { pageLocale } from './locale';
+
+interface Props {
+  n: number;
+}
+const { n } = Astro.props;
+const locale = pageLocale(Astro.url, Astro.currentLocale);
+---
+<button type="button" class="atlas-flyto atlas-beat-link" data-task={`beat-${n}`} title={t(locale, 'math.beat.link')}><b class="atlas-beat-link__no">{n}</b><span><slot /></span></button>

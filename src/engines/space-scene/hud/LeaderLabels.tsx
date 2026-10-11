@@ -25,6 +25,7 @@
  *    the selected part is always labelled and highlighted. A `group:<id>`
  *    entry is one placard for the whole group (group name, anchored at the
  *    bounding centre of its visible parts)
+ *  - a beat on show (chapter axis, `,` / `.`, beat line): its `labels` (else the chapter's)
  *  - PRESENTATION: the beat's `labels` (else the chapter's) only, at most 6,
  *    20 % larger, not capped by camera distance, and shown with the HUD
  *    hidden (they keep clear of the caption card and the title block only)
@@ -44,7 +45,7 @@ import { labelBudget } from '../lib/schematic';
 import { layoutLeaders, type LeaderFrame, type LeaderItem, type ScreenRect, type Side } from '../lib/leader-layout';
 import { groupLabelId, labelGroup, listedLabels, PRESENT_LABEL_CAP } from '../lib/labels';
 import type { SpaceSceneExt } from '../index';
-import type { PartsFile } from '../schema';
+import type { PartsFile, SpaceChapterState } from '../schema';
 import type { ScreenAnchor, StageBridge } from '../bridge';
 import type { SpaceUiStore } from '../ui';
 import { clip, partNumber } from './common';
@@ -113,9 +114,10 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
   const { locale } = useSceneContext();
   const store = useSceneStore<SpaceSceneExt>();
   const presenting = useStore(ui, (u) => u.presenting);
-  const beatLabels = useStore(ui, (u) => u.beatLabels);
   const hudOn = useHud((h) => h.hud);
   const cardOpen = useHud((h) => h.cardOpen);
+  // The chapter axis folds to a hairline (`panelsOpen`): the band below the labels changes.
+  const axisOpen = useHud((h) => h.panelsOpen);
   const labelsOn = useHud((h) => h.labels && (h.hud || presenting));
   const s = useScene<
     SpaceSceneExt,
@@ -127,6 +129,7 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
       ghosted: string[];
       solo: string | null;
       chapter: string | null;
+      beat: number | null;
     }
   >((st) => ({
     part: st.part,
@@ -136,13 +139,15 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
     ghosted: st.ghosted,
     solo: st.solo,
     chapter: st.chapter,
+    beat: st.beat,
   }));
   const sizes = useMemo(() => priority(file), [file]);
   const groups = useMemo(() => new Map(file.groups.map((g) => [g.id, g])), [file.groups]);
-  const listed = useMemo(
-    () => listedLabels({ presenting, beat: beatLabels, chapter: chapters.find((c) => c.id === s.chapter)?.state.labels }),
-    [presenting, beatLabels, chapters, s.chapter],
-  );
+  const listed = useMemo(() => {
+    const state = chapters.find((c) => c.id === s.chapter)?.state as SpaceChapterState | undefined;
+    const beatLabels = s.beat !== null ? (state?.beats?.[s.beat]?.labels ?? null) : null;
+    return listedLabels({ presenting, beat: beatLabels, chapter: state?.labels });
+  }, [presenting, chapters, s.chapter, s.beat]);
   // Twins whose part names both sides (`labelBoth`), by the part's id.
   const both = useMemo(
     () => new Map(file.parts.filter((p) => p.pair && !p.twinOf && typeof p.bilateral === 'object' && p.bilateral.labelBoth).map((p) => [p.id, p.pair!])),
@@ -237,7 +242,7 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
       if (getComputedStyle(el).visibility === 'hidden') continue;
       rects.push({ x0: r.left - box.left, y0: r.top - box.top, x1: r.right - box.left, y1: r.bottom - box.top });
     }
-    // Blocks across the middle at the bottom (panels, bar, reader sheet) close the band from below.
+    // Blocks across the middle at the bottom (the chapter axis, the reader sheet) close the band from below.
     for (const r of rects) if (r.y0 > H * 0.45 && r.x0 < W / 2 && r.x1 > W / 2) bottom = Math.min(bottom, r.y0 - 12);
     for (const r of rects) {
       if (r.y0 >= bottom || r.y1 <= top) continue;
@@ -250,7 +255,7 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
 
   useLayoutEffect(() => {
     measure();
-  }, [measure, candidates, locale, labelsOn, presenting, cardOpen]);
+  }, [measure, candidates, locale, labelsOn, presenting, cardOpen, axisOpen]);
 
   // The HUD fades out (presentation) or in: its blocks count as obstacles only once they are there
   // (the fade's `visibility` step ends it; the timer covers reduced motion and slow frames).

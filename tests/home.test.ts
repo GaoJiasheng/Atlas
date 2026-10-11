@@ -47,7 +47,7 @@ describe('topicStats', () => {
     ]);
     expect(topicStats('math-scene', loadData('fractions'), 14)).toEqual([
       { n: 12, key: 'index.stats.steps' },
-      { n: 35, key: 'index.stats.tasks' },
+      { n: 51, key: 'index.stats.beats' },
       { n: 8, key: 'index.stats.questions' },
     ]);
   });

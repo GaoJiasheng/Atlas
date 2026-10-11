@@ -40,6 +40,19 @@
   align-items: center;
   gap: 0.5rem;
   width: 100%;
+  padding: 0 8px 4px;
+  border-top: 1px solid var(--hair);
+}
+.space-bar .space-range {
+  width: 100%;
+  font: 500 11px / 1 var(--font-hud);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.space-bar .space-range input[type="range"] {
+  flex: 1;
+  width: auto;
+  min-width: 0;
 }
 .space-toggle__icon {
   flex: none;
@@ -107,14 +120,6 @@
 /* Inspector                                                           */
 /* ------------------------------------------------------------------ */
 
-.space-hint {
-  margin: 0;
-  padding: 0.75rem 1rem;
-  border: 1px dashed var(--border-strong);
-  border-radius: var(--radius-md);
-  color: var(--ink-muted);
-  font-size: 0.9375rem;
-}
 .space-inspector {
   display: flex;
   flex-direction: column;
@@ -390,21 +395,264 @@ div.space-inspector__detail:not([hidden]) {
 }
 
 /* ------------------------------------------------------------------ */
-/* Panel 01: elevation                                                 */
+/* PLATE block (slot `plate`, foot of the left column): elevation,     */
+/* state rows, selection, perf (docs/08 §2 HUD 铁律 b)                  */
 /* ------------------------------------------------------------------ */
 
-.space-elev {
-  position: absolute;
-  inset: calc(4 * var(--u)) calc(10 * var(--u)) calc(6 * var(--u));
-  width: calc(100% - 20 * var(--u));
-  height: calc(100% - 10 * var(--u));
+.space-plate {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border-top: 1px solid var(--line);
+  text-shadow: none;
 }
-.space-elev__tag,
-.space-elev__zone text,
-.space-elev__legend text,
-.space-elev__scale text {
-  font: 500 10.4px/1 var(--font-mono);
+.space-plate__head {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0;
+  padding: calc(6 * var(--u)) 0 calc(5 * var(--u));
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: 600 calc(10.5 * var(--u)) / 1 var(--font-hud);
+  letter-spacing: 0.14em;
+  text-align: left;
+  cursor: pointer;
+}
+.space-plate__head small {
+  margin-left: calc(8 * var(--u));
+  font-weight: 400;
   letter-spacing: 0.06em;
+  color: var(--ink-3);
+}
+.space-plate__head i {
+  width: 5px;
+  height: 5px;
+  margin-right: 4px;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: translateY(-1px) rotate(45deg);
+}
+.space-plate[data-folded] .space-plate__head i {
+  transform: translateY(1px) rotate(-135deg);
+}
+/* 44 px hit area. */
+.space-plate__head::after {
+  content: "";
+  position: absolute;
+  inset: calc(50% - 22px) 0;
+}
+@media (hover: hover) {
+  .space-plate__head:hover {
+    color: var(--signal);
+  }
+}
+.space-plate__head:focus-visible {
+  outline: 1px solid var(--signal);
+  outline-offset: -1px;
+}
+.space-plate__body {
+  display: flex;
+  flex-direction: column;
+  gap: calc(6 * var(--u));
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+.space-plate__head,
+.space-plate__body > * {
+  flex: none;
+}
+.space-plate__body[hidden] {
+  display: none;
+}
+.space-plate__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: calc(12 * var(--u));
+  align-items: start;
+}
+.space-plate__fig {
+  margin: 0;
+  min-width: 0;
+}
+.space-plate__elev {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 160 / 104;
+}
+.space-plate__key {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: calc(6 * var(--u));
+  overflow: hidden;
+  margin: 0;
+  font: 500 calc(10 * var(--u)) / 1.2 var(--font-hud);
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+.space-plate__key span {
+  display: inline-flex;
+  flex: 1 1 0;
+  align-items: center;
+  gap: calc(3 * var(--u));
+  min-width: 0;
+}
+.space-plate__key i {
+  flex: none;
+  width: calc(8 * var(--u));
+  height: calc(5 * var(--u));
+}
+.space-plate__key em {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-style: normal;
+}
+.space-plate__rows {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: calc(8 * var(--u));
+  row-gap: calc(3 * var(--u));
+  margin: 0;
+}
+.space-plate__row {
+  display: contents;
+}
+.space-plate__row dt {
+  font: 500 calc(10 * var(--u)) / 1.25 var(--font-hud);
+  letter-spacing: 0.12em;
+  color: var(--ink-3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.space-plate__row[data-on] dt::before {
+  content: "";
+  display: inline-block;
+  width: calc(4 * var(--u));
+  height: calc(4 * var(--u));
+  margin-right: calc(4 * var(--u));
+  background: var(--signal);
+  vertical-align: middle;
+}
+.space-plate__row dd {
+  margin: 0;
+  font: 500 calc(10.6 * var(--u)) / 1.25 var(--font-mono);
+  letter-spacing: 0.04em;
+  color: var(--ink-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.space-plate__row[data-on] dd {
+  color: var(--ink);
+}
+.space-plate__row dd small {
+  font-size: inherit;
+  color: var(--ink-3);
+}
+/* Simulated readings (parts.json `telemetry`): one SIM chip, then `LABEL value unit` pairs flowing over a few lines. */
+.space-plate__sim {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  row-gap: calc(1 * var(--u));
+  margin: 0;
+  padding-top: calc(5 * var(--u));
+  border-top: 1px solid var(--hair);
+  font: 500 calc(9.8 * var(--u)) / 1.45 var(--font-hud);
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+}
+.space-plate__sim .atlas-chip {
+  margin: 0 calc(6 * var(--u)) 0 0;
+}
+.space-plate__reading {
+  margin-right: calc(8 * var(--u));
+  white-space: nowrap;
+}
+.space-plate__reading:last-child {
+  margin-right: 0;
+}
+.space-plate__reading b {
+  font: 500 calc(10.4 * var(--u)) / 1 var(--font-mono);
+  letter-spacing: 0.02em;
+  color: var(--ink-2);
+}
+.space-plate__reading[data-on] b {
+  color: var(--ink);
+}
+.space-plate__reading small {
+  font-size: inherit;
+  letter-spacing: 0.02em;
+}
+.space-plate__sel {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: calc(6 * var(--u));
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: calc(5 * var(--u)) 0 0;
+  border: 0;
+  border-top: 1px solid var(--hair);
+  background: transparent;
+  color: var(--ink);
+  font: 600 calc(10.6 * var(--u)) / 1.2 var(--font-hud);
+  letter-spacing: 0.1em;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+button.space-plate__sel {
+  cursor: pointer;
+}
+button.space-plate__sel::after {
+  content: "";
+  position: absolute;
+  inset: calc(50% - 22px) 0;
+}
+.space-plate__sel b {
+  font: 600 calc(10.6 * var(--u)) / 1 var(--font-mono);
+  color: var(--signal);
+}
+.space-plate__sel[data-none] {
+  font-weight: 500;
+  color: var(--ink-3);
+}
+@media (hover: hover) {
+  button.space-plate__sel:hover {
+    color: var(--signal);
+  }
+}
+button.space-plate__sel:focus-visible {
+  outline: 1px solid var(--signal);
+  outline-offset: -1px;
+}
+/* Short screens: the plate keeps its rows and the selection; the elevation thumbnail, its key and perf go. */
+@media (max-height: 760px) {
+  .space-plate__fig,
+  .space-plate__key,
+  .space-plate .space-perf {
+    display: none;
+  }
+  .space-plate__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Elevation drawing (the plate's thumbnail). */
+.space-elev__scale text {
+  font: 500 9px/1 var(--font-mono);
+  letter-spacing: 0.04em;
   fill: var(--ink-3);
 }
 .space-elev__ground {
@@ -438,212 +686,226 @@ div.space-inspector__detail:not([hidden]) {
   stroke: var(--signal);
   stroke-width: 1.4;
 }
-.space-elev__zone path {
-  fill: none;
-  stroke-width: 1.2;
-}
 .space-elev__scale path {
   fill: none;
   stroke: var(--ink);
   stroke-width: 0.8;
 }
 
-/* ------------------------------------------------------------------ */
-/* Panel 02: detail                                                    */
-/* ------------------------------------------------------------------ */
-
-.space-detail {
-  position: absolute;
-  inset: calc(8 * var(--u)) calc(12 * var(--u)) calc(8 * var(--u));
-  display: grid;
-  grid-template-columns: calc(112 * var(--u)) minmax(0, 1fr);
-  gap: calc(12 * var(--u));
-  align-items: start;
-  color: var(--ink);
-  overflow: hidden;
-}
-.space-detail--chapter {
-  grid-template-columns: calc(40 * var(--u)) minmax(0, 1fr);
-}
-.space-detail__icon {
-  width: 100%;
-  height: auto;
-  border: 1px solid var(--hair);
-  background: color-mix(in srgb, var(--panel-solid) 60%, transparent);
-}
-.space-detail__rest {
-  fill: none;
-  stroke: var(--ink-3);
-  stroke-width: 0.6;
-  stroke-dasharray: 1.5 1.5;
-}
-.space-detail__out {
-  fill-opacity: 0.2;
-  stroke: var(--ink);
-  stroke-width: 0.7;
-}
-.space-detail__out[data-on] {
-  fill: var(--signal);
-  fill-opacity: 0.45;
-  stroke: var(--signal);
-}
-.space-detail__move {
-  stroke: var(--ink-3);
-  stroke-width: 0.5;
-}
-.space-detail__no {
-  margin: 0;
-  font: 500 calc(22 * var(--u)) / 1 var(--font-mono);
+/* Quiet perf readout, the plate's last line. */
+.space-perf {
+  display: block;
+  font: 500 calc(10 * var(--u)) / 1 var(--font-mono);
+  letter-spacing: 0.06em;
   color: var(--ink-3);
-}
-.space-detail__text {
-  min-width: 0;
-}
-.space-detail__text p {
-  margin: 0;
-}
-.space-detail__en {
-  font: 600 calc(11.7 * var(--u)) / 1.2 var(--font-hud);
-  letter-spacing: 0.1em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
 }
-.space-detail__en i {
-  font: 500 calc(11.2 * var(--u)) / 1 var(--font-mono);
-  font-style: normal;
-  color: var(--signal);
+.space-perf:empty {
+  display: none;
 }
-.space-detail__zh {
-  margin-top: calc(2 * var(--u)) !important;
-  font: 400 calc(11.1 * var(--u)) / 1.3 var(--font-hud);
-  letter-spacing: 0.08em;
+
+/* ------------------------------------------------------------------ */
+/* Reading panel: beat line (readerTop) and chapter index (readerEnd)  */
+/* ------------------------------------------------------------------ */
+
+.space-beatline {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 0 0 10px;
+  border-bottom: 1px solid var(--hair);
+}
+.space-beatline[hidden] {
+  display: none;
+}
+.space-beatline__text {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font: 400 calc(14px * var(--kb)) / 1.45 var(--font-serif);
   color: var(--ink-2);
 }
-.space-detail__dl {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: calc(3 * var(--u)) calc(10 * var(--u));
-  margin: calc(8 * var(--u)) 0 0;
-  padding-top: calc(6 * var(--u));
-  border-top: 1px solid var(--hair);
+.space-beatline__no {
+  display: block;
+  margin-bottom: 3px;
+  font: 600 calc(10.5px * var(--kb)) / 1.2 var(--font-mono);
+  letter-spacing: 0.08em;
+  color: var(--signal);
 }
-.space-detail__dl dt {
-  font: 500 calc(10.4 * var(--u)) / 1.4 var(--font-hud);
+.space-beatline__nav {
+  display: inline-flex;
+  flex: none;
+  gap: 4px;
+}
+.space-beatline__btn {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-hud);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+/* 44 px hit area around the 32 px button. */
+.space-beatline__btn::after {
+  content: "";
+  position: absolute;
+  inset: -6px -2px;
+}
+.space-beatline__btn:disabled {
+  color: var(--ink-3);
+  border-color: var(--hair);
+  cursor: default;
+}
+@media (hover: hover) {
+  .space-beatline__btn:not(:disabled):hover {
+    border-color: var(--signal);
+    color: var(--signal);
+  }
+}
+.space-beatline__btn:focus-visible {
+  outline: 1px solid var(--signal);
+  outline-offset: 1px;
+}
+
+.space-index {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+.space-index__title {
+  margin: 0;
+  font: 600 11px / 1.2 var(--font-hud);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.space-index__eq {
+  margin: 6px 0 2px;
+  font: 500 10.5px / 1.2 var(--font-hud);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink-3);
 }
-.space-detail__dl dd {
-  display: flex;
-  align-items: center;
-  gap: calc(5 * var(--u));
-  min-width: 0;
-  margin: 0;
-  font: 500 calc(11 * var(--u)) / 1.4 var(--font-hud);
-  letter-spacing: 0.04em;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.space-detail__mono {
-  font-family: var(--font-mono) !important;
-}
-.space-detail__swatch {
-  flex: none;
-  width: calc(10 * var(--u));
-  height: calc(5 * var(--u));
-}
-.space-detail__line {
-  margin-top: calc(7 * var(--u)) !important;
-  font: 400 calc(11 * var(--u)) / 1.35 var(--font-hud);
-  letter-spacing: 0.03em;
-  color: var(--ink-2);
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.space-detail__hint {
-  margin-top: calc(4 * var(--u)) !important;
-  font: 400 calc(10.7 * var(--u)) / 1.35 var(--font-hud);
-  color: var(--ink-3);
-}
-
-/* ------------------------------------------------------------------ */
-/* Panel 03: state                                                     */
-/* ------------------------------------------------------------------ */
-
-.space-state {
-  position: absolute;
-  inset: calc(6 * var(--u)) calc(12 * var(--u)) calc(6 * var(--u));
+.space-index__list,
+.space-index__session {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   margin: 0;
+  padding: 0;
+  list-style: none;
 }
-.space-state__row {
-  display: grid;
-  grid-template-columns: calc(112 * var(--u)) minmax(0, 1fr);
-  align-items: baseline;
-  padding: calc(2 * var(--u)) 0;
+.space-index__row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: var(--hit);
+  margin: 0;
+  padding: 6px 4px;
+  border: 0;
   border-bottom: 1px solid var(--hair);
+  background: transparent;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
 }
-.space-state[data-telemetry] .space-state__row {
-  grid-template-columns: calc(168 * var(--u)) minmax(0, 1fr);
+.space-index__row[aria-pressed="true"] {
+  box-shadow: inset 2px 0 0 var(--signal);
 }
-.space-state[data-telemetry] dt {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.space-index__row[aria-pressed="true"] .space-index__name {
+  color: var(--signal);
 }
-.space-state[data-dense] .space-state__row {
-  padding: calc(1 * var(--u)) 0;
+@media (hover: hover) {
+  .space-index__row:hover .space-index__name,
+  .space-index__step:hover {
+    color: var(--signal);
+  }
 }
-.space-state__unit {
+.space-index__row:focus-visible,
+.space-index__step:focus-visible {
+  outline: 1px solid var(--signal);
+  outline-offset: -1px;
+}
+.space-index__thumb {
+  flex: none;
+  width: 72px;
+  height: 48px;
+  object-fit: contain;
+  border: 1px solid var(--hair);
+  background: var(--paper);
+}
+:root[data-theme="cinema"] img.space-index__thumb {
+  /* Graphite on paper reads as a light drawing on the dark plate (as the card's sketch). */
+  filter: invert(0.88) hue-rotate(180deg);
+}
+.space-index__no {
+  flex: none;
+  min-width: 2ch;
+  font: 600 11px / 1 var(--font-mono);
   color: var(--ink-3);
 }
-.space-state__row:last-child {
-  border-bottom: 0;
+.space-index__row[aria-pressed="true"] .space-index__no {
+  color: var(--signal);
 }
-.space-state__row dt {
-  font: 500 calc(10.4 * var(--u)) / 1.2 var(--font-hud);
-  letter-spacing: 0.12em;
+.space-index__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.space-index__name {
+  font: 500 14px / 1.25 var(--font-hud);
+  letter-spacing: 0.02em;
+}
+.space-index__name small {
+  margin-left: 6px;
+  font-size: 12px;
   color: var(--ink-3);
 }
-.space-state__row dt small {
-  margin-left: calc(5 * var(--u));
-  font-size: calc(10.2 * var(--u));
-  letter-spacing: 0.06em;
-}
-.space-state__row dd {
-  margin: 0;
-  font: 500 calc(11 * var(--u)) / 1.2 var(--font-mono);
-  letter-spacing: 0.04em;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.space-index__meta {
+  font: 400 12.5px / 1.35 var(--font-hud);
   color: var(--ink-2);
 }
-.space-state__row[data-on] dd {
+.space-index__session > li {
+  padding: 6px 0;
+  border-bottom: 1px solid var(--hair);
+}
+.space-index__session p,
+.space-index__note {
+  margin: 2px 0 0;
+  font: 400 14px / 1.45 var(--font-serif);
+  color: var(--ink-2);
+}
+.space-index__step {
+  min-height: var(--hit);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
   color: var(--ink);
+  font: 500 14px / 1.25 var(--font-hud);
+  text-align: left;
+  text-decoration: underline;
+  text-decoration-color: var(--line);
+  text-underline-offset: 3px;
+  cursor: pointer;
 }
-.space-state__row[data-on] dt::before {
-  content: "";
-  display: inline-block;
-  width: calc(4 * var(--u));
-  height: calc(4 * var(--u));
-  margin-right: calc(4 * var(--u));
-  background: var(--signal);
-  vertical-align: middle;
+.space-index__step[aria-pressed="true"] {
+  color: var(--signal);
 }
-
-/* Quiet perf readout (slot `perf`), pressed onto the stage like the title block. */
-.space-perf {
-  font-variant-numeric: tabular-nums;
-  text-shadow:
-    0 0 calc(3 * var(--u)) var(--bg),
-    0 0 calc(6 * var(--u)) var(--bg);
+.space-index__session li {
+  counter-increment: none;
 }
 
 /* Control panel: a layer row with its ⊙ solo switch (that group alone, the rest faint). */
@@ -801,7 +1063,9 @@ div.space-inspector__detail:not([hidden]) {
 }
 .space-sheet__tab[aria-selected="true"],
 .space-sheet__tab[aria-pressed="true"] {
+  border-color: var(--line);
   border-bottom-color: var(--signal);
+  background: transparent;
   color: var(--ink);
 }
 .space-sheet__panel {

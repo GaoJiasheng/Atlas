@@ -144,10 +144,12 @@ beforeAll(() => {
     (root) => {
       rmSync(join(root, 'chapters/05-comparing-fractions.mdx'));
       const body = join(root, 'chapters/03-non-unit-fractions.mdx');
-      writeFileSync(body, readFileSync(body, 'utf8').replace('<Lang en>\n\n', '<Lang en>\n\nOpen <Task id="nowhere">this</Task> and <Frac n="a" d={4} />. '));
-      editJson(join(root, 'data/lesson.json'), (lesson: { steps: { tasks: { prompt: { en: string }; options?: { misconception?: string }[] }[] }[] }) => {
-        lesson.steps[0]!.tasks[1]!.prompt.en += ' {3/x}';
-        delete lesson.steps[1]!.tasks[2]!.options![1]!.misconception;
+      writeFileSync(body, readFileSync(body, 'utf8').replace('<Lang en>\n\n', '<Lang en>\n\nOpen <Task id="nowhere">this</Task>, <Beat n={9}>that</Beat> and <Frac n="a" d={4} />. '));
+      editJson(join(root, 'data/lesson.json'), (lesson: { steps: { beats: unknown[]; pool: { prompt: { en: string }; options?: { misconception?: string }[] }[] }[] }) => {
+        lesson.steps[0]!.pool[1]!.prompt.en += ' {3/x}';
+        delete lesson.steps[1]!.pool[2]!.options![1]!.misconception;
+        lesson.steps[3]!.pool = lesson.steps[3]!.pool.slice(0, 5);
+        lesson.steps[4]!.beats = lesson.steps[4]!.beats.slice(0, 2);
       });
     },
     FRACTIONS,
@@ -240,15 +242,18 @@ describe('validate-content: glb models and shared fitness data (docs/16 M1, M10)
   });
 });
 
-describe('validate-content: MathScene lesson (docs/15 §4.10)', () => {
+describe('validate-content: MathScene lesson (docs/15 §4.10, §10)', () => {
   it('passes an unmodified copy of the fractions lesson', () => {
     expect(linesFor('lesson-clean').filter((l) => l.startsWith('error'))).toEqual([]);
   });
 
-  it('checks chapters against steps, <Task> / <Frac>, tokens and planned feedback', () => {
+  it('checks chapters against steps, beats and check pools, <Task> / <Beat> / <Frac>, tokens and planned feedback', () => {
     const lines = linesFor('lesson-bad').join('\n');
     expect(lines).toContain('step "comparing-fractions" has no chapter');
-    expect(lines).toContain('<Task id="nowhere">: unknown sub-step');
+    expect(lines).toContain('<Task id="nowhere">: unknown step or check task');
+    expect(lines).toContain('<Beat n={9}>: the chapter has beats 1–4');
+    expect(lines).toContain('step "number-line": the check pool has 5 tasks (8–10)');
+    expect(lines).toContain('step "comparing-fractions": 2 beats (3–5)');
     expect(lines).toContain('<Frac> needs whole numbers n and d');
     expect(lines).toContain('"{3/x}" is not a fraction token');
     expect(lines).toContain('option "b" is wrong but names no misconception');

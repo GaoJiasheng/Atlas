@@ -5,6 +5,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { parse as parseYaml } from 'yaml';
 import { partsFile, spaceBeat, spaceChapterIssues, spaceChapterState, spacePresetIds, spaceSceneData, spaceSceneIds } from '../../src/engines/space-scene/schema';
+import { groupByEquipment } from '../../src/engines/space-scene/explorer/ChapterIndex';
 import { groupLabelId, labelGroup, listedLabels, PRESENT_LABEL_CAP, unionBox } from '../../src/engines/space-scene/lib/labels';
 
 const part = (id: string, extra: Record<string, unknown> = {}) => ({
@@ -23,6 +24,40 @@ const parts = {
   presets: [{ id: 'side', label: { en: 'Side', zh: '侧面' }, camera, view: 'xray' }],
 };
 const data = spaceSceneData.parse({ parts });
+
+describe('chapter index (state.index, docs/08 §2 HUD 铁律 e)', () => {
+  it('takes exercises or parts, never neither', () => {
+    expect(spaceChapterState.parse({ index: { parts: ['a'] } }).index).toEqual({ parts: ['a'] });
+    expect(spaceChapterState.safeParse({ index: {} }).success).toBe(false);
+    expect(spaceChapterState.safeParse({ index: { parts: [] } }).success).toBe(false);
+    expect(spaceChapterState.safeParse({ index: { parts: ['a'], other: [] } }).success).toBe(false);
+  });
+  it('checks parts against parts.json (no context parts) and exercises against training.json', () => {
+    const state = spaceChapterState.parse({ index: { parts: ['a', 'wall', 'nope'], exercises: ['push-up'] } });
+    expect(spaceChapterIssues(state, data)).toEqual([
+      'state.index.parts: "wall" is a context part (never selected)',
+      'state.index.parts: unknown part "nope"',
+      'state.index.exercises: "push-up" is not in data/training.json exercises',
+    ]);
+  });
+  it('groups exercises by equipment: barbell, dumbbell, bodyweight, cable, machine, in list order inside a group', () => {
+    const ex = [
+      { id: 'm', equipment: 'machine' },
+      { id: 'p', equipment: 'bodyweight' },
+      { id: 'd1', equipment: 'dumbbell' },
+      { id: 'b', equipment: 'barbell' },
+      { id: 'd2', equipment: 'dumbbell' },
+      { id: 'c', equipment: 'cable' },
+    ] as const;
+    expect(groupByEquipment(ex).map((g) => [g.equipment, g.items.map((e) => e.id)])).toEqual([
+      ['barbell', ['b']],
+      ['dumbbell', ['d1', 'd2']],
+      ['bodyweight', ['p']],
+      ['cable', ['c']],
+      ['machine', ['m']],
+    ]);
+  });
+});
 
 describe('space beats (G1)', () => {
   it('a beat takes the scene fields, a caption, an orbit camera or a named preset id', () => {
@@ -92,7 +127,9 @@ describe('leader-label targets (G12)', () => {
     const many = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
     expect(listedLabels({ presenting: true, beat: ['a'], chapter: ['b'] })).toEqual(['a']);
     expect(listedLabels({ presenting: true, beat: null, chapter: many })).toEqual(many.slice(0, PRESENT_LABEL_CAP));
-    expect(listedLabels({ presenting: false, beat: ['a'], chapter: many })).toEqual(many);
+    // Outside the presentation a beat applied from the chapter axis has its own list too (not capped).
+    expect(listedLabels({ presenting: false, beat: ['a'], chapter: many })).toEqual(['a']);
+    expect(listedLabels({ presenting: false, beat: null, chapter: many })).toEqual(many);
     expect(listedLabels({ presenting: false, beat: null, chapter: undefined })).toBeNull();
     expect(listedLabels({ presenting: true, beat: null, chapter: undefined })).toBeNull();
   });

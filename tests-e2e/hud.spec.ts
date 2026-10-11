@@ -1188,88 +1188,115 @@ for (const topic of TOPICS) {
   });
 }
 
-test('bottom panels (SpaceScene): a chevron folds the three into one 28 px bar with their titles, the stage reflows, the choice is per tab; the reader handle works here too', async ({ page }) => {
+test('chapter axis (SpaceScene): a segment per chapter and a tick per beat; segment = first beat, tick = that beat outside the presentation (beat line, URL b, , and .); P starts there; folds to a hairline per tab; no bottom panels', async ({ page }) => {
+  test.setTimeout(120_000);
   await page.setViewportSize({ width: 1440, height: 900 });
   await openScene(page, '/en/topics/sample-space/');
-  const api = () => page.evaluate(() => window.__atlas!.state());
-  const strip = page.locator('.atlas-panels');
-  const stage = page.locator('.atlas-stage');
-  const height = async (l: typeof strip) => (await l.boundingBox())?.height ?? 0;
-  const fold = page.locator('.atlas-panels__fold');
-  const bar = page.locator('.atlas-panels__bar');
-  await expect(fold).toBeVisible();
-  await expect(fold).toHaveAttribute('aria-expanded', 'true');
-  await expect(bar).toBeHidden();
-  await expect(page.locator('[data-hud-panel^="panel0"]')).toHaveCount(3);
-  // The fold is a 24 px tab on the strip's top edge, left-aligned, chevron down.
-  const foldBox = (await fold.boundingBox())!;
-  const stripBox = (await strip.boundingBox())!;
-  expect(Math.round(foldBox.height)).toBe(24);
-  expect(foldBox.width).toBeGreaterThanOrEqual(44);
-  expect(Math.abs(foldBox.x - stripBox.x)).toBeLessThanOrEqual(1);
-  expect(Math.abs(foldBox.y + foldBox.height - stripBox.y)).toBeLessThanOrEqual(1);
-  const chevron = () => fold.locator('i').evaluate((el) => getComputedStyle(el).transform);
-  const down = await chevron();
-  // The stage ends where the strip starts.
-  const stageBox = (await stage.boundingBox())!;
-  expect(Math.abs(stageBox.y + stageBox.height - stripBox.y)).toBeLessThanOrEqual(2);
-  const openHeight = stageBox.height;
-  const canvasOpen = (await api().then(() => page.evaluate(() => window.__atlas!.stats()))).buffer[1];
-  expect((await api()).panels).toBe(true);
+  const api = () => page.evaluate(() => window.__atlas!.state() as unknown as { chapter: string; beat: number | null; panels: boolean; presentation: unknown; hud: boolean });
+  const axis = page.locator('.atlas-axis');
+  const chapters = await page.evaluate(() => window.__atlas!.chapters());
+  const beats = await page.evaluate(() => window.__atlas!.beats());
+  await expect(axis).toBeVisible();
+  await expect(page.locator('.atlas-panels')).toHaveCount(0);
+  await expect(page.locator('[data-hud-panel^="panel0"]')).toHaveCount(0);
+  await expect(page.locator('.atlas-axis__seg')).toHaveCount(chapters.length);
+  for (const c of chapters) await expect(page.locator(`.atlas-axis__seg:has([data-chapter="${c}"]) .atlas-axis__tick`)).toHaveCount(beats.filter((b) => b.chapter === c).length);
+  expect(Math.round((await axis.boundingBox())!.height)).toBe(44);
+  // One slim row: segments are 44 px targets, equal width.
+  const widths = await page.locator('.atlas-axis__seg').evaluateAll((els) => els.map((e) => Math.round(e.getBoundingClientRect().width)));
+  expect(Math.max(...widths) - Math.min(...widths)).toBeLessThanOrEqual(1);
+  expect(Math.round((await page.locator('.atlas-axis__btn').first().boundingBox())!.height)).toBeGreaterThanOrEqual(44);
 
+  // A segment opens its chapter on the first beat (no auto-run); the counter and the beat line follow.
+  await page.locator('.atlas-axis__btn[data-chapter="switch-on"]').click();
+  await expect.poll(async () => [(await api()).chapter, (await api()).beat]).toEqual(['switch-on', 0]);
+  await expect(page.locator('[data-beat="switch-on.0"]')).toHaveAttribute('data-filled', 'true');
+  await expect(page.locator('.atlas-axis__status')).toHaveText('03 · 1/2');
+  const line = page.locator('.space-beatline');
+  await expect(line).toContainText('BEAT 1/2');
+  // A tick: that beat, with the HUD and reader as they are (no caption card).
+  await page.locator('[data-beat="switch-on.1"]').click();
+  await expect.poll(async () => (await api()).beat).toBe(1);
+  expect((await api()).hud).toBe(true);
+  expect((await api()).presentation).toBeNull();
+  await expect(page.locator('[data-hud-panel="present"]')).toHaveCount(0);
+  await expect(line).toContainText('BEAT 2/2');
+  await expect(line).toContainText(beats.find((b) => b.chapter === 'switch-on' && b.index === 1)!.caption.en.slice(0, 20));
+  await expect.poll(() => new URL(page.url()).searchParams.get('b')).toBe('2');
+  // , and . step beats across chapters; the beat line's ‹ › too.
+  await page.keyboard.press('.');
+  await expect.poll(async () => [(await api()).chapter, (await api()).beat]).toEqual(['inside-look', 0]);
+  await page.keyboard.press(',');
+  await expect.poll(async () => [(await api()).chapter, (await api()).beat]).toEqual(['switch-on', 1]);
+  await page.locator('.space-beatline__btn').first().click();
+  await expect.poll(async () => (await api()).beat).toBe(0);
+  // P starts at the beat on show.
+  await page.keyboard.press('p');
+  await expect.poll(async () => (await api()).presentation).toMatchObject({ chapter: 'switch-on', beat: 0 });
+  await page.keyboard.press('Escape');
+  await expect.poll(async () => (await api()).presentation).toBeNull();
+
+  // A deep link with b lands on that beat.
+  await openScene(page, '/en/topics/sample-space/?ch=inside-look&b=3');
+  await expect.poll(async () => [(await api()).chapter, (await api()).beat]).toEqual(['inside-look', 2]);
+  await expect(page.locator('[data-beat="inside-look.2"]')).toHaveAttribute('data-filled', 'true');
+
+  // The chevron folds the axis into a hairline with the chapter number only; sticky per tab, never in the URL.
+  const fold = page.locator('.atlas-axis__fold');
+  await expect(fold).toHaveAttribute('aria-expanded', 'true');
   await fold.click();
-  await expect(strip).toHaveAttribute('data-collapsed', '');
-  await expect(bar).toBeVisible();
-  await expect(bar).toHaveAttribute('aria-expanded', 'false');
-  // The tab stays on the folded bar's top edge, left-aligned, chevron up.
+  await expect(axis).toHaveAttribute('data-folded', '');
   await expect(fold).toHaveAttribute('aria-expanded', 'false');
-  const foldBox2 = (await fold.boundingBox())!;
-  const barBox = (await bar.boundingBox())!;
-  expect(Math.abs(foldBox2.x - barBox.x)).toBeLessThanOrEqual(1);
-  expect(Math.abs(foldBox2.y + foldBox2.height - barBox.y)).toBeLessThanOrEqual(1);
-  expect(await chevron()).not.toBe(down);
-  for (const id of ['panel01', 'panel02', 'panel03']) await expect(page.locator(`[data-hud-panel="${id}"]`)).toBeHidden();
-  expect(Math.round(await height(bar))).toBe(28);
-  await expect(bar).toContainText('01');
-  await expect(bar).toContainText('ARCHITECTURE');
-  await expect(bar).toContainText('DETAIL');
-  await expect(bar).toContainText('STATE');
-  await expect.poll(() => height(stage)).toBeGreaterThan(openHeight + 100);
-  await expect.poll(async () => (await page.evaluate(() => window.__atlas!.stats())).buffer[1]).toBeGreaterThan(canvasOpen!);
+  await expect(fold).toHaveText('04');
+  await expect(page.locator('.atlas-axis__seg')).toHaveCount(0);
+  expect((await axis.boundingBox())!.height).toBeLessThanOrEqual(23);
   expect((await api()).panels).toBe(false);
   expect(await page.evaluate(() => sessionStorage.getItem('atlas:panels'))).toBe('collapsed');
-  await page.waitForTimeout(400);
-  expect(page.url()).not.toContain('panels');
-  expect(await hudLayoutIssues(page)).toEqual([]);
-
-  // Sticky: a reload and a chapter change keep it folded.
   await page.reload();
   await page.waitForFunction(() => window.__atlas !== undefined);
   expect(await page.evaluate(() => window.__atlas!.ready)).toBe(true);
-  await expect(strip).toHaveAttribute('data-collapsed', '');
-  const chapters = await page.evaluate(() => window.__atlas!.chapters());
-  await page.locator(`.atlas-topbar [data-chapter="${chapters[1]}"]`).click();
-  await expect.poll(async () => (await api()).chapter).toBe(chapters[1]);
-  await expect(strip).toHaveAttribute('data-collapsed', '');
-
-  // The reading panel folds independently of the strip (its handle is host-level, not TimeScene's).
-  const reader = page.locator('[data-hud-panel="reader"]');
-  await page.locator('.atlas-reader__handle').click();
-  await expect.poll(async () => (await reader.boundingBox())?.width ?? 0).toBeLessThanOrEqual(29);
-  await expect.poll(async () => (await api()).reader).toBe(false);
-  await expect(strip).toHaveAttribute('data-collapsed', '');
-  await page.locator('.atlas-reader__strip').click();
-  await expect.poll(async () => (await reader.boundingBox())?.width ?? 0).toBeGreaterThan(300);
-
-  await fold.click();
-  await expect(strip).not.toHaveAttribute('data-collapsed', '');
-  await expect(fold).toHaveAttribute('aria-expanded', 'true');
-  expect(await chevron()).toBe(down);
-  for (const id of ['panel01', 'panel02', 'panel03']) await expect(page.locator(`[data-hud-panel="${id}"]`)).toBeVisible();
-  await expect.poll(() => height(stage)).toBeLessThan(openHeight + 2);
-  expect((await api()).panels).toBe(true);
-  expect(await page.evaluate(() => sessionStorage.getItem('atlas:panels'))).toBe('open');
+  await expect(axis).toHaveAttribute('data-folded', '');
+  expect(page.url()).not.toContain('panels');
   expect(await hudLayoutIssues(page)).toEqual([]);
+  await fold.click();
+  await expect(axis).not.toHaveAttribute('data-folded', '');
+  expect(await hudLayoutIssues(page)).toEqual([]);
+});
+
+test('reading panel (SpaceScene): header, beat line, inspector, body, chapter index in that order; the index selects; the left column PLATE block shows state rows and the selection', async ({ page }) => {
+  await page.setViewportSize({ width: 1600, height: 1000 });
+  await openScene(page, '/en/topics/sample-space/?ch=whole-thing');
+  const order = await page.evaluate(() => {
+    const scroll = document.querySelector('#atlas-panel-scroll')!;
+    const pos = (sel: string) => [...scroll.querySelectorAll('*')].indexOf(scroll.querySelector(sel)!);
+    return [pos('.atlas-reader-top'), pos('.atlas-prose'), pos('.atlas-reader-end')];
+  });
+  expect(order[0]).toBeLessThan(order[1]!);
+  expect(order[1]).toBeLessThan(order[2]!);
+  // Nothing selected: nothing extra above the body.
+  await expect(page.locator('.space-inspector')).toHaveCount(0);
+  const row = page.locator('.space-index__row[data-part="sample-drum"]');
+  await expect(row).toBeVisible();
+  await row.click();
+  await expect.poll(async () => (await page.evaluate(() => window.__atlas!.state() as unknown as { part: string | null })).part).toBe('sample-drum');
+  await expect(row).toHaveAttribute('aria-pressed', 'true');
+  const inspector = page.locator('.atlas-reader-top .space-inspector');
+  await expect(inspector).toBeVisible();
+  // Right under the header: the panel scrolled back to its top.
+  const header = (await page.locator('.atlas-panel__header').boundingBox())!;
+  expect((await inspector.boundingBox())!.y).toBeLessThan(header.y + header.height + 80);
+  const plate = page.locator('[data-hud-panel="plate"]');
+  await expect(plate).toBeVisible();
+  for (const label of ['RUN', 'ANIM', 'VIEW', 'EXPLODE']) await expect(plate.locator('dt', { hasText: label })).toHaveCount(1);
+  await expect(plate.locator('.space-plate__sel')).toContainText('DRUM');
+  await expect(plate.locator('.space-plate__elev')).toBeVisible();
+  // The plate folds by its header, per tab.
+  await plate.locator('.space-plate__head').click();
+  await expect(plate).toHaveAttribute('data-folded', '');
+  await expect(plate.locator('.space-plate__elev')).toBeHidden();
+  expect(await page.evaluate(() => sessionStorage.getItem('atlas:plate'))).toBe('collapsed');
+  await plate.locator('.space-plate__head').click();
+  await expect(plate.locator('.space-plate__elev')).toBeVisible();
 });
 
 /** The folded tab slides in; let it land before measuring. */
@@ -1377,18 +1404,17 @@ test('collapsed reader strip: the chapter title is centred in the strip, the num
   expect(Math.abs(span.x + span.width / 2 - (s.x + s.width / 2))).toBeLessThanOrEqual(2);
 });
 
-test('bottom panels: H hides them with the HUD and gives the stage the whole sheet; the TimeScene has no strip and no inset', async ({ page }) => {
+test('stage: neither engine insets it (the chapter axis floats over its foot); H gives it the whole sheet', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
-  await openScene(page, '/en/topics/sample-space/');
-  const stage = page.locator('.atlas-stage');
-  await page.keyboard.press('h');
-  await expect.poll(async () => Math.round((await stage.boundingBox())!.height)).toBe(900);
-  await page.keyboard.press('Escape');
-  await expect.poll(async () => (await stage.boundingBox())!.height).toBeLessThan(800);
-
-  await openScene(page, '/en/topics/sample-time/');
-  await expect(page.locator('.atlas-panels')).toHaveCount(0);
-  const area = (await page.locator('.atlas-stage-area').boundingBox())!;
-  const box = (await page.locator('.atlas-stage').boundingBox())!;
-  expect(Math.round(box.height)).toBe(Math.round(area.height));
+  for (const topic of ['sample-space', 'sample-time']) {
+    await openScene(page, `/en/topics/${topic}/`);
+    await expect(page.locator('.atlas-panels')).toHaveCount(0);
+    const area = (await page.locator('.atlas-stage-area').boundingBox())!;
+    const stage = page.locator('.atlas-stage');
+    expect(Math.round((await stage.boundingBox())!.height)).toBe(Math.round(area.height));
+    await page.keyboard.press('h');
+    await expect.poll(async () => Math.round((await stage.boundingBox())!.height)).toBe(900);
+    await page.keyboard.press('Escape');
+    await expect.poll(async () => Math.round((await stage.boundingBox())!.height)).toBe(Math.round(area.height));
+  }
 });

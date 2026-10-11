@@ -2,6 +2,7 @@
  * Scene keyboard (docs/08 §3), one window listener per scene:
  *   ← →  chapter            1–9, 0  camera presets (0 = the tenth)   letters  registered modes (L = labels)
  *   SPACE pause / run        H    hide / show HUD      ESC      show HUD, else engine escape
+ *   , .  previous / next beat outside the presentation (when the engine registers `beatStep`)
  *   other letters: registered commands (check, hint …)
  * Ignored with Ctrl / Cmd / Alt, when an event was already handled, inside
  * text fields and selects, and inside `[data-keys="own"]` regions. Arrows also
@@ -9,7 +10,7 @@
  * (a model whose parts take the arrow keys); SPACE yields to focused buttons.
  */
 import { useEffect } from 'react';
-import { allModes, presetIndexOfKey, type HudActions, type HudStore } from './controls';
+import { allModes, BEAT_KEYS, presetIndexOfKey, type HudActions, type HudStore } from './controls';
 
 const TEXT_FIELDS = 'input, textarea, select, [contenteditable="true"], [data-keys="own"]';
 const OWN_ARROW_KEYS = '[role="slider"], [role="radiogroup"], [role="tablist"], [data-keys="arrows"]';
@@ -40,6 +41,12 @@ export function useSceneKeys(hud: HudStore, actions: HudActions, step: (delta: 1
         if (!controls.pause || target?.closest(OWN_SPACE)) return;
         e.preventDefault();
         actions.togglePaused();
+        return;
+      }
+      if (key === BEAT_KEYS.prev || key === BEAT_KEYS.next) {
+        if (!controls.beatStep) return;
+        e.preventDefault();
+        controls.beatStep(key === BEAT_KEYS.next ? 1 : -1);
         return;
       }
       const index = presetIndexOfKey(key);

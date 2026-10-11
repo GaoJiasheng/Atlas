@@ -24,6 +24,17 @@ describe('url-state encode/decode', () => {
     expect(decodeSceneState(search)).toEqual(state);
   });
 
+  it('round-trips a SpaceScene beat (b, 1-based in the URL, 0-based in the state) next to ch', () => {
+    const state: UrlState = { chapter: 'training-the-chest', beat: 1, part: 'deltoid-anterior' };
+    expect(toSearch(state)).toBe('?ch=training-the-chest&b=2&part=deltoid-anterior');
+    expect(decodeSceneState(toSearch(state))).toEqual(state);
+    // The chapter's own state (beat null) equals the chapter baseline: no `b`.
+    expect(toSearch({ chapter: 'x', beat: null }, { chapter: 'x', beat: null })).toBe('?ch=x');
+    expect(decodeSceneState('?b=')).toEqual({ beat: null });
+    expect(decodeSceneState('?b=0')).toEqual({});
+    expect(decodeSceneState('?b=x')).toEqual({});
+  });
+
   it('round-trips a lesson sub-step and model view (MathScene task / model), never more', () => {
     const state: UrlState = { chapter: 'equivalent-fractions', task: 2, model: 'circle' };
     expect(toSearch(state)).toBe('?ch=equivalent-fractions&task=2&model=circle');

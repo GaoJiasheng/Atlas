@@ -97,8 +97,8 @@ export interface SpaceSavedState {
   exercise: { id: string; phase: 'start' | 'end' | 'loop' } | null;
   tints: { signal: string[]; cold: string[] } | null;
   sites: string[];
-  /** Leader labels of the beat on show (`null` = the chapter's own). */
-  labels: string[] | null;
+  /** The beat on show outside the presentation (chapter axis; `null` = the chapter's own state). */
+  beat: number | null;
   /** ORBIT turntable on. */
   orbit: boolean;
   /** The VIEW preset lit before, and whether the camera had been moved since. */

@@ -4,7 +4,7 @@
  *   /en/topics/ww2/?ch=fall-of-singapore&t=1942-02-10&layers=control,battles&cam=103.8,1.35,7.5
  *   /en/topics/aircon/?ch=power-on&part=compressor&view=xray&run=1
  *
- * Keys: `ch`, `layers`, `cam`, `theme` (core) and `task`, `model`, `t`, `hl`, `part`, `view`,
+ * Keys: `ch`, `layers`, `cam`, `theme` (core) and `b` (beat, 1-based), `task`, `model`, `t`, `hl`, `part`, `view`,
  * `explode`, `run`, `cut`, `pose` (engine passthrough). Values equal to the current chapter's
  * target are omitted, so a plain chapter link is just `?ch=<id>`.
  * Unknown query parameters (utm_*, etc.) are preserved.
@@ -20,7 +20,7 @@ import { isTheme } from '../../theme/theme';
 export type UrlState = Partial<SceneState & UrlEngineFields>;
 
 /** Order in which keys are written (most meaningful first). */
-export const URL_KEY_ORDER = ['ch', 'task', 'model', 't', 'hl', 'part', 'view', 'explode', 'run', 'cut', 'pose', 'layers', 'cam', 'theme'] as const;
+export const URL_KEY_ORDER = ['ch', 'b', 'task', 'model', 't', 'hl', 'part', 'view', 'explode', 'run', 'cut', 'pose', 'layers', 'cam', 'theme'] as const;
 export type UrlKey = (typeof URL_KEY_ORDER)[number];
 
 const ID_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -40,6 +40,8 @@ function encodeField(key: UrlKey, state: UrlState): string | null {
   switch (key) {
     case 'ch':
       return state.chapter ?? null;
+    case 'b':
+      return state.beat === undefined ? null : state.beat === null ? '' : String(state.beat + 1);
     case 'layers':
       return state.layers ? state.layers.join(',') : null;
     case 'cam':
@@ -92,6 +94,10 @@ export function decodeSceneState(input: string | URLSearchParams): UrlState {
 
   const ch = params.get('ch');
   if (ch !== null && ID_RE.test(ch)) out.chapter = ch;
+
+  const b = params.get('b');
+  if (b === '') out.beat = null;
+  else if (b !== null && /^[1-9]\d{0,2}$/.test(b)) out.beat = Number(b) - 1;
 
   const layers = params.get('layers');
   if (layers !== null) {

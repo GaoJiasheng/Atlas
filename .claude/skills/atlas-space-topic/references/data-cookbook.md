@@ -46,7 +46,7 @@ note: { en: "Generic design study · schematic layout · not a specific brand or
 
 - 必填：`id`、`name`、`group`（context 零件可省）、`summary`（≤ 60 字符，也是引线的一行说明）、`detail`（空行分段，`[S3]` / `[S3, S7]` 渲染成来源上标，编号必须在 sources.json）、`primitive`。
 - 可选：`extra`、`repeat`、`explode`（默认不动）、`connects`、`shell`、`context`、`castShadow`、`level`（规划用）。
-- **数组顺序就是编号**（#01…，状态行、链路卡、ARCHITECTURE 都用）：按组、组内按工作顺序写；context 零件放末尾。
+- **数组顺序就是编号**（#01…，状态行、链路卡、PLATE 块选中行、本章索引都用）：按组、组内按工作顺序写；context 零件放末尾。
 
 ### groups
 
@@ -105,7 +105,7 @@ note: { en: "Generic design study · schematic layout · not a specific brand or
 
 - `assembled` / `xray` / `exploded` / `isolate` 各可带一个镜头（本章没写 `camera` 时用）。
 - `cutaway`：裁掉 `dot(normal, p) + offset < 0` 的一侧（`[0, 0, -1]` = 切掉 z > 0 的前半）；默认 `[-1, 0, 0]` 切掉右半。
-- `section.plane`：ARCHITECTURE 立面与 REFERENCE 方向，`xy` 正面 / `zy` 侧面 / `xz` 俯视。
+- `section.plane`：PLATE 块立面与 REFERENCE 方向，`xy` 正面 / `zy` 侧面 / `xz` 俯视。
 - `cover`：直接是镜头（不套 `camera`），HUD 关（H、`hero-clean`）时飞过去；没写就自动取景到模型占宽 75 %。
 - `reference`：可选；默认按包围盒自动取长焦正视。
 - `cuts`：可选，≤ 4 个命名剖切面 `{ "<名字>": { "normal", "offset", "label": {en, zh} } }`，章 / 拍 `cutaway: "<名字>"`（名字不能是 `none` / `half`）。
@@ -119,7 +119,7 @@ note: { en: "Generic design study · schematic layout · not a specific brand or
 
 排在 ORBIT、REF. 之后，数字键接着排（第 10 个是 `0`）。`view` 可选：按预设时同时切视图（拍里引用预设只取镜头，不取 `view`）。
 
-### spec（标题块规格行）与 telemetry（STATE 读数）
+### spec（标题块规格行）与 telemetry（PLATE 块模拟读数）
 
 ```json
 "spec": [
@@ -132,7 +132,7 @@ note: { en: "Generic design study · schematic layout · not a specific brand or
 ```
 
 - `spec`：`value` 是字符串（mono，数字和单位）或 `{ en, zh }`（文字）；`tag`：`typical | design | sim`，只有 `sim` 画 SIM 芯片。有 `spec` 时引擎只留 PARTS 行，标题块总共 ≤ 8 行。
-- `telemetry`：STATE 面板 = RUN + 这些行（都带 SIM 芯片）。**范围限制：读数只跟 RUN（静息 → 活动）走，不能跟某个姿态、拍或动画走。** 只在某个姿态下才有意义的量（跳跃时的伸肌力）不要放进 telemetry：运转咀嚼时它也会显示成峰值。把它写进细看（带来源），等引擎支持 `follow`（spec B13）再做。**滞后语义**：一阶滞后 `x(t) = target + (x₀ − target) · e^(−t / lag)`，target = 运转 ? `run` : `idle`；`lag` 秒后走完约 63 %、3 × `lag` 后约 95 %；开机关机同一个 `lag`；暂停时冻结；4 Hz 刷新，不加抖动；深链接和截图（snap）直接跳到终值。`lag` 按物理惯性取：转子 4–6 s、压力 10 s、空气温度 20–25 s。`idle` / `run` 必须等于设计研究来源 S1 里的数（停机值 = 环境 / 平衡值）。`decimals` 默认取 `idle` / `run` 写出的小数位。
+- `telemetry`：PLATE 块在 RUN / FLOW / ANIM / VIEW / EXPLODE 之后接这些读数（一枚 SIM 芯片）。**范围限制：读数只跟 RUN（静息 → 活动）走，不能跟某个姿态、拍或动画走。** 只在某个姿态下才有意义的量（跳跃时的伸肌力）不要放进 telemetry：运转咀嚼时它也会显示成峰值。把它写进细看（带来源），等引擎支持 `follow`（spec B13）再做。**滞后语义**：一阶滞后 `x(t) = target + (x₀ − target) · e^(−t / lag)`，target = 运转 ? `run` : `idle`；`lag` 秒后走完约 63 %、3 × `lag` 后约 95 %；开机关机同一个 `lag`；暂停时冻结；4 Hz 刷新，不加抖动；深链接和截图（snap）直接跳到终值。`lag` 按物理惯性取：转子 4–6 s、压力 10 s、空气温度 20–25 s。`idle` / `run` 必须等于设计研究来源 S1 里的数（停机值 = 环境 / 平衡值）。`decimals` 默认取 `idle` / `run` 写出的小数位。
 
 ## 章节 frontmatter
 
@@ -168,10 +168,14 @@ state:
       hide: [outdoor-front, outdoor-side]
       caption: { en: "…", zh: "…" }
       # audio: /audio/aircon/ch03-2.mp3   # 可选：站内旁白文件（默认用浏览器语音读 caption）
+  index:                         # 本章索引（docs/08 §2 铁律 e）：正文和拍里讲到的对象，阅读面板正文之后列出
+    parts: [compressor, condenser-coil, expansion-valve, evaporator-front]   # 3–10 个零件（非 context）；点 = 选中
+    # exercises: [barbell-bench-press, push-up]   # 训练类：training.json 的动作，按器械分组、带草图；之后接 training.session
 ---
 ```
 
 - **累积**：章节目标只写和上一章不同的字段（`view` `explode` `part` `run` `cutaway` `layers` `camera` `theme` 沿用上一章）；`hide`、`labels`、`pose`、`ghost` **不累积**，只看本章。
+- **本章索引** `index`：`parts` 或 `exercises`（至少一个；`pnpm validate` 核对 id）。每章都写：正文提到、拍里标注的零件都要在这里点得到，不能只藏在某一拍或某张卡里。拍同时是底部章节轴的刻度（点刻度 = 在演示之外应用这一拍；URL `b`），第一拍是读者点进本章看到的样子。
 - **拍** = 本章目标 ⊕ 拍里写的 `view / part / explode / run / cutaway / layers / camera / pose`；`hide`、`ghost`、`labels` 写了就替换本章的，不写就用本章的；`camera` 不写 = 本章进入时的镜头。
 - **校验**：`part` / `hide` / `labels` 是零件（`part`、`labels` 不能是 context；双侧零件的 `<id>-r` 也算），`labels` 也可以是 `group:<组 id>`，`layers` 是组，`ghost` 是组或零件，`pose` 是 `poses` 里的名字，`cutaway` 是 none / half / `views.cuts` 的名字，拍的字符串 `camera` 是命名预设。
 - `labels` 要标被外壳挡住的零件时，本章 `hide` 外壳、用 X-RAY，或者改用组标注；`pnpm shoot <slug> --beats` 末尾的 `chapter highlights` 必须 `all on screen`。
@@ -197,7 +201,7 @@ state:
 - **poses**：`"poses": { "jump-cocked": { "hind-tibiae": { "pivot": [1.02,0.86,0.32], "rotation": [0,0,25] }, "semilunar-processes": { "scale": [1, 0.92, 1] }, "duration": 0.8 } }`；章 / 拍 `pose: "jump-cocked"`（`null` = 静止）；URL `pose=`。变换：绕 pivot 先 scale 再 rotation，再 offset。`fan` 只给带 `fold` 的 wing（0 收拢、1 展开）。双侧零件的条目自动镜像。
 - **views.cuts**：`{ "sagittal": { "normal": [0,0,-1], "offset": 0, "label": { "en": "Sagittal", "zh": "矢状" } }, "thorax": { "normal": [-1,0,0], "offset": -0.3, "label": { "en": "Thorax", "zh": "胸部横切" } } }`；章 / 拍 `cutaway: "thorax"`。
 - **ghost / solo / card**：章 / 拍 `ghost: ["exoskeleton", "legs-wings"]`（淡显 .12、不可点、不标注）；读者可在 LAYERS 行末 `⊙` 单显一组；组 `"card": false` 不进链路卡；context 零件写 `group` 后受图层、ghost、solo 控制。
-- **units**：`"units": { "modelUnit": "mm", "scale": 25 }` = 1 场景单位 25 mm；ARCHITECTURE 比例尺与跨度用 mm / cm。
+- **units**：`"units": { "modelUnit": "mm", "scale": 25 }` = 1 场景单位 25 mm；PLATE 块立面比例尺用 mm / cm。
 - **token**：`token:food`（食物，赭绿）、`token:haemolymph`（血淋巴，灰青）。
 
 ## 真实网格与肌肉（glb、rig、sites、contract、exercise、共享 fitness 数据）

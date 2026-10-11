@@ -14,6 +14,10 @@ export interface InfoPanelProps {
   note?: BilingualText | null;
   /** Rendered MDX body of the chapter (already in the active locale). */
   body?: ReactNode;
+  /** Above the body, at the top of the scroll area (engine slot `readerTop`: beat line, selected object). */
+  lead?: ReactNode;
+  /** Right after the body (engine slot `readerEnd`: the chapter index). */
+  tail?: ReactNode;
   hasPrev: boolean;
   hasNext: boolean;
   onPrev(): void;
@@ -30,8 +34,9 @@ export interface InfoPanelProps {
 
 /**
  * Reading panel: chapter header (HUD grammar: number, title, the summary
- * sentence in muted serif), the background chapter's reading note, the body (serif),
- * quiz and selected-object details, chapter buttons. A docked column on wide
+ * sentence in muted serif), the engine's lead (beat line, selected object),
+ * the background chapter's reading note, the body (serif), the engine's tail
+ * (chapter index), quiz and selected-object details, chapter buttons. A docked column on wide
  * layouts, a bottom sheet below 1024px.
  */
 export function InfoPanel({
@@ -41,6 +46,8 @@ export function InfoPanel({
   summary,
   note,
   body,
+  lead,
+  tail,
   hasPrev,
   hasNext,
   onPrev,
@@ -78,6 +85,7 @@ export function InfoPanel({
         </header>
       )}
       <div id="atlas-panel-scroll" className="atlas-panel__scroll">
+        {lead}
         {chapter && note && (
           <aside className="atlas-note" aria-labelledby="atlas-note-title">
             <h3 id="atlas-note-title" className="atlas-note__title">
@@ -87,6 +95,7 @@ export function InfoPanel({
           </aside>
         )}
         {chapter && body && <div className="atlas-prose">{body}</div>}
+        {tail}
         {children}
       </div>
       <footer className="atlas-panel__footer">

@@ -1,13 +1,16 @@
 /**
- * Selected part details (InfoPanel "inspector" slot), in the plate's hairline
- * grammar: part number + name (中文 beneath), summary, detail behind "more"
+ * Selected part details, at the top of the reading panel right under the
+ * chapter header and the beat line (slot `readerTop`, docs/08 §2 HUD 铁律 c),
+ * in the plate's hairline grammar: part number + name (the other language
+ * beneath), summary, detail behind "more"
  * (blank lines = paragraphs; `[S3]` markers = source superscripts that open
  * the host's source popover), group swatch, "left / right" chips for a
  * bilateral pair (select the other side), "connected to" chips that select
  * the connected part. A part that links a shared muscle shows SOLO (that
  * part, what it connects to and the shells; the rest faint; Esc ends it) and
- * the four-tab muscle sheet (MuscleSheet) instead of detail and connects. In
- * exercise mode the exercise card comes first.
+ * the four-tab muscle sheet (MuscleSheet) instead of the detail. In exercise
+ * mode the exercise card comes first. Nothing selected: nothing (the chapter
+ * text below is enough).
  */
 import { useId, useState } from 'react';
 import { useScene, useSceneContext, useSceneStore, useT } from '../../core/context';
@@ -46,9 +49,8 @@ function PartDetails({ part, file, fitness, training }: { part: Part; file: Part
         </span>
         <h3 className="space-inspector__title">
           {tx(part.name, locale)}
-          {locale === 'en' && part.name.zh && (
-            <small lang="zh-Hans">{part.name.zh}</small>
-          )}
+          {locale === 'en' && part.name.zh && <small lang="zh-Hans">{part.name.zh}</small>}
+          {locale === 'zh' && part.name.zh && <small lang="en">{part.name.en}</small>}
         </h3>
         <button
           type="button"
@@ -132,7 +134,7 @@ function PartDetails({ part, file, fitness, training }: { part: Part; file: Part
         </div>
       )}
 
-      {!sheet && connects.length > 0 && (
+      {connects.length > 0 && (
         <div className="space-inspector__row">
           <span className="space-inspector__label">{t('space.connects')}</span>
           <ul className="space-chips">
@@ -151,7 +153,6 @@ function PartDetails({ part, file, fitness, training }: { part: Part; file: Part
 }
 
 export function Inspector({ file, fitness, training }: { file: PartsFile; fitness?: FitnessBundle | undefined; training?: TrainingFile | undefined }) {
-  const t = useT();
   const partId = useScene<SpaceSceneExt, string | null>((s) => s.part);
   const exerciseId = useScene<SpaceSceneExt, string | null>((s) => s.exercise?.id ?? null);
   const part = partId ? file.parts.find((p) => p.id === partId && !p.context) : undefined;
@@ -162,11 +163,7 @@ export function Inspector({ file, fitness, training }: { file: PartsFile; fitnes
         <ExerciseCard key={exercise.id} exercise={exercise} file={file} fitness={fitness} playable={training?.exercises.includes(exercise.id) ?? false} />
       )}
       {/* Keyed so "more" collapses again when the selection changes. */}
-      {part ? (
-        <PartDetails key={part.id} part={part} file={file} fitness={fitness} training={training} />
-      ) : (
-        !exercise && <p className="space-hint">{t('space.hint')}</p>
-      )}
+      {part && <PartDetails key={part.id} part={part} file={file} fitness={fitness} training={training} />}
     </>
   );
 }
