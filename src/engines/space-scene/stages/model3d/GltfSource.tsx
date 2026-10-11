@@ -16,8 +16,9 @@
  *    stay current for skinning, the rig, sites and equipment.
  *  - per part: the rest transform, scene-space bounds (label anchor, stage
  *    bounds), `extras.closed` (false: the cut leaves it open), and for muscles
- *    with `_U` / `_FIBRE` the fibre length and belly thickness the
- *    contraction shader needs (the attributes are renamed `atlasU` /
+ *    with `_U` / `_FIBRE` the fibre length, belly thickness, dominant fibre
+ *    direction, centre and metres per mesh unit the contraction and grain
+ *    shader needs (the attributes are renamed `atlasU` /
  *    `atlasFibre`, the names the shader reads).
  */
 import { useEffect } from 'react';
@@ -52,34 +53,60 @@ const _v = new Vector3();
 const _a = new Vector3();
 const _b = new Vector3();
 
+/** A muscle's fibre data in mesh units (glb positions may be quantised: `metres` converts). */
+export interface FibreMeasure {
+  /** Metres per mesh unit. */
+  metres?: number;
+  /** Origin end → insertion end. */
+  length: number;
+  /** Mean distance of the vertices from that line. */
+  thickness: number;
+  /** Mesh-wide dominant fibre direction (unit, origin → insertion). */
+  dir: [number, number, number];
+  /** Centroid of the vertices. */
+  centre: [number, number, number];
+}
+
 /**
- * Fibre length (origin end → insertion end, mesh units) and belly thickness
- * (mean distance of the vertices from that line) of a muscle with `atlasU`.
+ * Fibre length (origin end → insertion end, mesh units), belly thickness
+ * (mean distance of the vertices from that line), dominant fibre direction
+ * (mean `atlasFibre`, oriented origin → insertion) and centroid of a muscle
+ * with `atlasU`.
  */
-export function fibreMeasure(geometry: BufferGeometry): { length: number; thickness: number } | null {
+export function fibreMeasure(geometry: BufferGeometry): FibreMeasure | null {
   const u = geometry.getAttribute('atlasU');
   const pos = geometry.getAttribute('position');
-  if (!u || !pos || !geometry.getAttribute('atlasFibre')) return null;
+  const fib = geometry.getAttribute('atlasFibre');
+  if (!u || !pos || !fib) return null;
   const lo = new Vector3();
   const hi = new Vector3();
+  const mean = new Vector3();
+  const centre = new Vector3();
   let nLo = 0;
   let nHi = 0;
   for (let i = 0; i < pos.count; i++) {
     const t = u.getX(i);
+    _v.fromBufferAttribute(pos, i);
+    centre.add(_v);
     if (t < 0.12) {
-      lo.add(_v.fromBufferAttribute(pos, i));
+      lo.add(_v);
       nLo++;
     } else if (t > 0.88) {
-      hi.add(_v.fromBufferAttribute(pos, i));
+      hi.add(_v);
       nHi++;
     }
+    mean.add(_a.fromBufferAttribute(fib, i));
   }
   if (nLo === 0 || nHi === 0) return null;
   lo.divideScalar(nLo);
   hi.divideScalar(nHi);
+  centre.divideScalar(pos.count);
   const length = lo.distanceTo(hi);
   if (length <= 0) return null;
   _a.subVectors(hi, lo).normalize();
+  // Fibres that disagree (a fan) average short: fall back on the origin → insertion line.
+  const dir = mean.length() > 0.3 * pos.count ? mean.normalize() : _b.copy(_a);
+  if (dir.dot(_a) < 0) dir.negate();
   let sum = 0;
   const step = Math.max(1, Math.floor(pos.count / 512));
   let n = 0;
@@ -88,7 +115,7 @@ export function fibreMeasure(geometry: BufferGeometry): { length: number; thickn
     sum += _b.sub(_v.copy(_a).multiplyScalar(_b.dot(_a))).length();
     n++;
   }
-  return { length, thickness: n > 0 ? sum / n : 0 };
+  return { length, thickness: n > 0 ? sum / n : 0, dir: [dir.x, dir.y, dir.z], centre: [centre.x, centre.y, centre.z] };
 }
 
 /** Rename the pipeline's custom attributes (`_U` → `_u` by the loader) to the shader's names. */
@@ -167,6 +194,12 @@ export default function GltfSource({
       const size = box.getSize(new Vector3());
       const extras = { ...mesh.parent?.userData, ...mesh.userData } as { closed?: unknown };
       const fibre = fibreMeasure(geometry);
+      if (fibre) {
+        // Quantised positions: the scene bounds over the raw attribute bounds give metres per mesh unit.
+        if (!geometry.boundingBox) geometry.computeBoundingBox();
+        const raw = geometry.boundingBox!.getSize(new Vector3()).length();
+        fibre.metres = raw > 0 ? size.length() / raw : 1;
+      }
       out.set(partId, {
         pieces: [
           {

@@ -656,56 +656,56 @@
       "id": "pectoralis-major-clavicular-contract",
       "target": "pectoralis-major-clavicular",
       "kind": "contract",
-      "amount": 0.32,
+      "amount": 0.8,
       "hz": 0.45
     },
     {
       "id": "pectoralis-major-sternocostal-contract",
       "target": "pectoralis-major-sternocostal",
       "kind": "contract",
-      "amount": 0.32,
+      "amount": 0.8,
       "hz": 0.45
     },
     {
       "id": "pectoralis-major-abdominal-contract",
       "target": "pectoralis-major-abdominal",
       "kind": "contract",
-      "amount": 0.32,
+      "amount": 0.8,
       "hz": 0.45
     },
     {
       "id": "pectoralis-minor-contract",
       "target": "pectoralis-minor",
       "kind": "contract",
-      "amount": 0.27,
+      "amount": 0.68,
       "hz": 0.45
     },
     {
       "id": "serratus-anterior-contract",
       "target": "serratus-anterior",
       "kind": "contract",
-      "amount": 0.27,
+      "amount": 0.68,
       "hz": 0.45
     },
     {
       "id": "subclavius-contract",
       "target": "subclavius",
       "kind": "contract",
-      "amount": 0.23,
+      "amount": 0.57,
       "hz": 0.45
     },
     {
       "id": "intercostals-external-contract",
       "target": "intercostals-external",
       "kind": "contract",
-      "amount": 0.23,
+      "amount": 0.57,
       "hz": 0.3
     },
     {
       "id": "intercostals-internal-contract",
       "target": "intercostals-internal",
       "kind": "contract",
-      "amount": 0.18,
+      "amount": 0.45,
       "hz": 0.3
     }
   ],
@@ -978,9 +978,9 @@
         "flexion": 15
       },
       "contract": {
-        "pectoralis-major-clavicular": 0.32,
-        "pectoralis-major-sternocostal": 0.32,
-        "pectoralis-major-abdominal": 0.32
+        "pectoralis-major-clavicular": 0.8,
+        "pectoralis-major-sternocostal": 0.8,
+        "pectoralis-major-abdominal": 0.8
       },
       "duration": 1.2
     },
@@ -992,8 +992,8 @@
         "flexion": 10
       },
       "contract": {
-        "pectoralis-major-clavicular": 0.34,
-        "deltoid-anterior": 0.24
+        "pectoralis-major-clavicular": 0.85,
+        "deltoid-anterior": 0.6
       },
       "duration": 1.2
     },
@@ -1015,8 +1015,8 @@
         "flexion": 10
       },
       "contract": {
-        "pectoralis-major-sternocostal": 0.34,
-        "pectoralis-major-abdominal": 0.32
+        "pectoralis-major-sternocostal": 0.85,
+        "pectoralis-major-abdominal": 0.8
       },
       "duration": 1.6
     },
@@ -1035,9 +1035,9 @@
         "flexion": 90
       },
       "contract": {
-        "pectoralis-major-clavicular": 0.24,
-        "pectoralis-major-sternocostal": 0.24,
-        "pectoralis-major-abdominal": 0.24
+        "pectoralis-major-clavicular": 0.6,
+        "pectoralis-major-sternocostal": 0.6,
+        "pectoralis-major-abdominal": 0.6
       },
       "duration": 1.2
     },
@@ -1049,20 +1049,20 @@
         "flexion": 5
       },
       "contract": {
-        "serratus-anterior": 0.34,
-        "pectoralis-minor": 0.24
+        "serratus-anterior": 0.85,
+        "pectoralis-minor": 0.6
       },
       "duration": 1.2
     },
     "inhale": {
       "contract": {
-        "intercostals-external": 0.32
+        "intercostals-external": 0.8
       },
       "duration": 1.6
     },
     "exhale": {
       "contract": {
-        "intercostals-internal": 0.32
+        "intercostals-internal": 0.8
       },
       "duration": 1.6
     }
@@ -1073,6 +1073,56 @@
   },
   "rig": {
     "joints": {
+      "trunk": {
+        "node": "joint.trunk",
+        "axes": {
+          "flexion": [
+            -1,
+            0,
+            0
+          ],
+          "lateral-flexion": [
+            0,
+            0,
+            1
+          ],
+          "rotation": [
+            0,
+            1,
+            0
+          ]
+        }
+      },
+      "scapula.l": {
+        "node": "joint.clavicle.l",
+        "axes": {
+          "protraction": [
+            0,
+            -1,
+            0
+          ],
+          "elevation": [
+            0,
+            0,
+            1
+          ]
+        }
+      },
+      "scapula.r": {
+        "node": "joint.clavicle.r",
+        "axes": {
+          "protraction": [
+            0,
+            1,
+            0
+          ],
+          "elevation": [
+            0,
+            0,
+            -1
+          ]
+        }
+      },
       "shoulder.l": {
         "node": "joint.shoulder.l",
         "axes": {
@@ -1116,7 +1166,8 @@
             0,
             0
           ]
-        }
+        },
+        "offset": 0.08
       },
       "shoulder.r": {
         "node": "joint.shoulder.r",
@@ -1161,7 +1212,8 @@
             0,
             0
           ]
-        }
+        },
+        "offset": 0.08
       }
     },
     "demo": {
@@ -1175,6 +1227,10 @@
       },
       "elbow": {
         "flexion": 110
+      },
+      "scapula": {
+        "protraction": 12,
+        "elevation": 10
       }
     }
   },

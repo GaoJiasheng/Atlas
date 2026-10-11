@@ -55,7 +55,7 @@ export interface StageBridge {
   height: number;
   /** Resolution governor scale on top of the clamped pixel ratio (0.5..1). */
   resolution: number;
-  /** Camera distance to its target and the model's bounding radius (label budget). */
+  /** Camera distance to its target and the subject's bounding radius (non-context parts; label budget). */
   cameraDistance: number;
   modelRadius: number;
   anchors: Map<string, ScreenAnchor>;

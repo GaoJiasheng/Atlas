@@ -456,7 +456,16 @@ def make_rig(centre, floor, check):
         forearm = SELECTED['forearm.'+side]['points']
         wrist = landmark('Ulnar styloid process', side)
         wrist = wrist if wrist is not None else centroid([p for p in forearm if p.z < min(v.z for v in forearm)+.015])
-        joints += [{'name':'scapula.'+side,'position':scapula,'parent':'trunk','source':scapula_source},
+        # Shoulder girdle chain: the clavicle turns at the sternoclavicular joint (its medial end), the
+        # scapula at the acromioclavicular joint (the clavicle's lateral end), so protraction and elevation
+        # swing the collarbone about the sternum and carry the blade around the ribs.
+        clavicle = SELECTED['clavicle.'+side]['points']
+        inner = min(abs(p.x) for p in clavicle)
+        outer = max(abs(p.x) for p in clavicle)
+        sternoclavicular = centroid([p for p in clavicle if abs(p.x) < inner+.012])
+        acromioclavicular = centroid([p for p in clavicle if abs(p.x) > outer-.012])
+        joints += [{'name':'clavicle.'+side,'position':sternoclavicular,'parent':'trunk','source':'medial end of clavicle (sternoclavicular joint)'},
+                   {'name':'scapula.'+side,'position':acromioclavicular,'parent':'clavicle.'+side,'source':'lateral end of clavicle (acromioclavicular joint); glenoid: '+scapula_source},
                    {'name':'shoulder.'+side,'position':shoulder,'parent':'scapula.'+side,'source':'humeral head sphere fit'},
                    {'name':'elbow.'+side,'position':elbow,'parent':'shoulder.'+side,'source':elbow_source},
                    {'name':'wrist.'+side,'position':wrist,'parent':'elbow.'+side,'source':'styloid landmark / distal forearm'}]
@@ -499,6 +508,7 @@ def make_rig(centre, floor, check):
         name = joint['name']
         mesh_name = ('humerus.'+name[-1] if name.startswith(('shoulder.','elbow.')) else
                      'scapula.'+name[-1] if name.startswith('scapula.') else
+                     'clavicle.'+name[-1] if name.startswith('clavicle.') else
                      'forearm.'+name[-1] if name.startswith('wrist.') else 'sternum')
         points = [target(p) for p in SELECTED[mesh_name]['points']]
         lower = [min(p[i] for p in points) for i in range(3)]
@@ -509,7 +519,8 @@ def make_rig(centre, floor, check):
         if name.startswith('elbow.'):
             assert abs(joint['position'][1]-lower[1]) < .04, 'Elbow above distal humerus'
         print('RIG CHECK '+json.dumps({'joint':name,'position':joint['position'],'mesh':mesh_name,'bounds':[lower,upper]}),flush=True)
-    assert Vector(output[2]['axes']['flexion']).cross(positions['elbow.l']-positions['shoulder.l']).z > 0
+    shoulder_l = next(j for j in output if j['name'] == 'shoulder.l')
+    assert Vector(shoulder_l['axes']['flexion']).cross(positions['elbow.l']-positions['shoulder.l']).z > 0
     return rig, joints
 
 
@@ -518,7 +529,7 @@ def epicondyle_axis(side):
 
 
 def bone_joint(id, side):
-    return {'clavicle':'scapula','scapula':'scapula','humerus':'shoulder','forearm':'elbow'}.get(id, 'trunk') + (
+    return {'clavicle':'clavicle','scapula':'scapula','humerus':'shoulder','forearm':'elbow'}.get(id, 'trunk') + (
         '.'+side if side and id in ['clavicle','scapula','humerus','forearm'] else '')
 
 

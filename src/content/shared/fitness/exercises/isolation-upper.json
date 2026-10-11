@@ -115,11 +115,6 @@
             -90,
             0,
             0
-          ],
-          "offset": [
-            0,
-            -0.27,
-            0
           ]
         },
         "equipment": [
@@ -131,8 +126,8 @@
             "kind": "bench",
             "at": [
               0,
-              -0.88,
-              -0.35
+              -0.205,
+              0.2
             ]
           }
         ],
@@ -149,7 +144,7 @@
               }
             },
             "contract": {
-              "pectoralis-major": 0.04
+              "pectoralis-major": 0.1
             }
           },
           {
@@ -164,8 +159,8 @@
               }
             },
             "contract": {
-              "pectoralis-major": 0.32,
-              "deltoid-anterior": 0.16
+              "pectoralis-major": 0.8,
+              "deltoid-anterior": 0.4
             }
           }
         ],
@@ -310,7 +305,7 @@
               }
             },
             "contract": {
-              "pectoralis-major": 0.04
+              "pectoralis-major": 0.1
             }
           },
           {
@@ -325,9 +320,9 @@
               }
             },
             "contract": {
-              "pectoralis-major-sternocostal": 0.34,
-              "pectoralis-major-abdominal": 0.34,
-              "pectoralis-major-clavicular": 0.16
+              "pectoralis-major-sternocostal": 0.85,
+              "pectoralis-major-abdominal": 0.85,
+              "pectoralis-major-clavicular": 0.4
             }
           }
         ],

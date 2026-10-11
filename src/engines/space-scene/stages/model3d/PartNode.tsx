@@ -47,7 +47,8 @@ import { contractScale, STRIPE_OPACITY } from '../../lib/rig';
 import { damp, DEG2RAD, easeInOutCubic, normalize3, type Vec3 } from '../../lib/math';
 import { isRest, lerpTransform, restTransform, sampleSequence, sequenceLength, smoothstep01, type PartTransform } from '../../lib/pose';
 import { keepAnimating, MAX_DT, useRuntime } from './runtime';
-import { createPartMaterial, setPartClipping, stylePartMaterial, type PartStyle } from './materials';
+import { createPartMaterial, setPartClipping, stylePartMaterial, styleFibreGrain, type PartStyle } from './materials';
+import type { FibreMeasure } from './GltfSource';
 import { skinnedRaycast } from './skinPick';
 import type { ShapePiece } from './geometry';
 
@@ -69,8 +70,8 @@ export interface PartShape {
   restFan: number;
   /** Rest bounds in scene coordinates (glb parts, measured from the geometry): label anchor and stage bounds. */
   box?: Box3Like;
-  /** A glb muscle's fibre data (`_U` / `_FIBRE`): length origin → insertion and belly thickness, mesh units. */
-  fibre?: { length: number; thickness: number };
+  /** A glb muscle's fibre data (`_U` / `_FIBRE`): length origin → insertion, belly thickness, dominant direction and centre (mesh units), metres per mesh unit. */
+  fibre?: FibreMeasure;
 }
 
 /** What the label probe needs to know about a part (filled by PartNode). */
@@ -278,8 +279,12 @@ export function PartNode(props: PartNodeProps) {
   useEffect(() => () => lineMat?.dispose(), [lineMat]);
 
   useEffect(() => {
-    pms.forEach((pm, i) => stylePartMaterial(pm, styles[i] ?? style));
-  }, [pms, styles, style]);
+    pms.forEach((pm, i) => {
+      stylePartMaterial(pm, styles[i] ?? style);
+      // glb muscles: the fibre grain follows `_FIBRE` (the UVs wrap around the belly).
+      if (shape.fibre) styleFibreGrain(pm, shape.fibre, (styles[i] ?? style).look.normal);
+    });
+  }, [pms, styles, style, shape.fibre]);
   useEffect(() => {
     lineMat?.color.set(props.lineColor);
   }, [lineMat, props.lineColor]);
@@ -545,7 +550,8 @@ export function PartNode(props: PartNodeProps) {
     const sk = handle.skinned;
     if (sk && m.skinMoved !== runtime.bonesMoved && (m.frame % SKIN_ANCHOR_EVERY === 0 || runtime.bonesMoved === 0)) {
       m.skinMoved = runtime.bonesMoved;
-      sk.updateMatrixWorld();
+      // Parents too: the root group's new matrix (exercise turn) reaches the mesh before the render does.
+      sk.updateWorldMatrix(true, false);
       tmpBox.makeEmpty();
       tmpInv.copy(runtime.root).invert().multiply(sk.matrixWorld);
       for (const i of skinSamples) tmpBox.expandByPoint(sk.getVertexPosition(i, tmpV).applyMatrix4(tmpInv));
@@ -560,7 +566,7 @@ export function PartNode(props: PartNodeProps) {
         handle.half[1] = (tmpBox.max.y - tmpBox.min.y) / 2;
         handle.half[2] = (tmpBox.max.z - tmpBox.min.z) / 2;
       }
-    }
+    } else if (sk && m.skinMoved !== runtime.bonesMoved) keepAnimating(state.invalidate); // the last pose still needs measuring
 
     if (moving || m.fade !== targetFade || m.base !== targetBase || m.aside !== asideTarget || m.sel !== selTarget || m.tint !== tintTarget)
       keepAnimating(state.invalidate);

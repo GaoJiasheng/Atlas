@@ -133,7 +133,7 @@ export const equipmentSchema = z
     grip: z.enum(['pronated', 'supinated', 'neutral']).optional(),
     /** Grip width between the hands, metres (barbell); for the record, the engine follows the hands. */
     width: z.number().positive().max(2).optional(),
-    /** Free-standing equipment (bench, bars): position in scene coordinates (metres). */
+    /** Free-standing equipment (bench, floor, bars): position relative to the trunk joint after the root turn (metres). */
     at: vec3.optional(),
     /** Turn about Y, degrees (bench, bars). */
     turn: z.number().min(-180).max(180).optional(),
@@ -153,7 +153,7 @@ export const motionKey = z
 
 export const exerciseMotion = z
   .object({
-    /** Whole-body turn into the exercise position (bench press: lying on the back), XYZ degrees about the model centre. */
+    /** Whole-body turn into the exercise position (bench press: lying on the back), XYZ degrees about the trunk joint, then `offset` metres. */
     root: z.object({ rotation: vec3, offset: vec3.optional() }).strict().optional(),
     equipment: z.union([equipmentSchema, z.array(equipmentSchema).min(1).max(4)]).optional(),
     /** Two or three keys (`start`, optional `mid`, `end`), in that order. */

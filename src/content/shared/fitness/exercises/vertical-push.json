@@ -143,26 +143,26 @@
               }
             },
             "contract": {
-              "pectoralis-major-sternocostal": 0.24,
-              "pectoralis-major-abdominal": 0.24,
-              "triceps-brachii": 0.24
+              "pectoralis-major-sternocostal": 0.6,
+              "pectoralis-major-abdominal": 0.6,
+              "triceps-brachii": 0.6
             }
           },
           {
             "phase": "end",
             "joints": {
               "shoulder.l": {
-                "flexion": -45,
-                "abduction": 18
+                "extension": 65,
+                "abduction": 15
               },
               "elbow.l": {
-                "flexion": 90
+                "flexion": 80
               }
             },
             "contract": {
-              "pectoralis-major-sternocostal": 0.04,
-              "pectoralis-major-abdominal": 0.04,
-              "triceps-brachii": 0.04
+              "pectoralis-major-sternocostal": 0.1,
+              "pectoralis-major-abdominal": 0.1,
+              "triceps-brachii": 0.1
             }
           }
         ],
@@ -171,6 +171,11 @@
           0.3,
           1.2,
           0.5
+        ],
+        "equipment": [
+          {
+            "kind": "parallel-bars"
+          }
         ]
       },
       "sources": [

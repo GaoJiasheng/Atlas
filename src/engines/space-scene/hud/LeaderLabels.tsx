@@ -311,8 +311,10 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
       const map = labels.current;
       // Band between the HUD blocks too narrow for placards beside the model (720p laptops): only the selected part is labelled.
       const roomy = f.right - f.left >= MIN_BAND;
-      // Presenting: the beat's list as it is (≤ 6); otherwise fewer labels in close-ups.
-      const wanted = presenting ? PRESENT_LABEL_CAP : labelBudget(bridge.modelRadius > 0 ? bridge.cameraDistance / bridge.modelRadius : 3);
+      // Presenting: the beat's list as it is (≤ 6); otherwise fewer labels in close-ups, but never fewer than the chapter lists (≤ 6).
+      const wanted = presenting
+        ? PRESENT_LABEL_CAP
+        : Math.max(labelBudget(bridge.modelRadius > 0 ? bridge.cameraDistance / bridge.modelRadius : 3), Math.min(listed?.length ?? 0, PRESENT_LABEL_CAP));
       const budget = roomy ? wanted : selected ? 1 : 0;
       items.length = 0;
       for (const id of candidates) {
@@ -402,7 +404,7 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
     return () => {
       bridge.listeners.delete(layout);
     };
-  }, [bridge, candidates, selected, labelsOn, presenting]);
+  }, [bridge, candidates, selected, labelsOn, presenting, listed]);
 
   if (!labelsOn) return null;
   return (

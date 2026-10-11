@@ -11,9 +11,10 @@
  *  - Poses, keyframe clips, the action demo and exercises name joints as
  *    `joint:<name>` / by name with `{ movement: degrees }`.
  *  - Contraction 0..1 (0 = lengthened or at rest, 1 = shortest): the part
- *    shortens along its fibres toward the middle (up to 20 %) and its belly
- *    swells (`bulge` × its thickness), with signal stripes moving along the
- *    fibres; parts without fibre data scale instead.
+ *    shortens along its fibres toward its origin (the origin end stays on the
+ *    bone; up to 20 % × contraction, softly capped at 12 % of the fibre
+ *    length) and its belly swells (`bulge` × its thickness), with signal
+ *    stripes moving along the fibres; parts without fibre data scale instead.
  */
 import { OPPOSITE_MOVEMENTS, type Movement } from '../../../lib/anatomy';
 import { smoothstep01 } from './pose';
@@ -110,6 +111,8 @@ export function lerpAngles(a: Angles, b: Angles, k: number): Angles {
 
 /** Most a muscle shortens along its fibres at contraction 1 (docs/16 §6.4). */
 export const MAX_SHORTEN = 0.2;
+/** Most any vertex moves toward the origin, as a fraction of the fibre length (soft cap). */
+export const MAX_SHORTEN_CAP = 0.12;
 /** Default belly swell at contraction 1, as a fraction of its thickness. */
 export const DEFAULT_BULGE = 0.08;
 /** Strongest the signal stripes get over the muscle colour (docs/16 §9 M7). */

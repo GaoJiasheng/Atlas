@@ -76,12 +76,12 @@
       "review": "pending"
     },
     {
-      "name": "scapula.l",
-      "node": "joint.scapula.l",
+      "name": "clavicle.l",
+      "node": "joint.clavicle.l",
       "position": [
-        0.16615375876426697,
-        0.02140510082244873,
-        -0.0958547443151474
+        0.016702312976121902,
+        0.05115518346428871,
+        -0.02025292068719864
       ],
       "parent": "trunk",
       "axes": {
@@ -101,7 +101,36 @@
           0.0
         ]
       },
-      "source": "glenoid .j landmark",
+      "source": "medial end of clavicle (sternoclavicular joint)",
+      "review": "pending"
+    },
+    {
+      "name": "scapula.l",
+      "node": "joint.scapula.l",
+      "position": [
+        0.14957821369171143,
+        0.06725191324949265,
+        -0.090720534324646
+      ],
+      "parent": "clavicle.l",
+      "axes": {
+        "flexion": [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        "abduction": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "rotation": [
+          0.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": "lateral end of clavicle (acromioclavicular joint); glenoid: glenoid .j landmark",
       "review": "pending"
     },
     {
@@ -192,12 +221,12 @@
       "review": "pending"
     },
     {
-      "name": "scapula.r",
-      "node": "joint.scapula.r",
+      "name": "clavicle.r",
+      "node": "joint.clavicle.r",
       "position": [
-        -0.1661207228899002,
-        0.021405041217803955,
-        -0.0958547368645668
+        -0.016669338569045067,
+        0.05115518346428871,
+        -0.02025292068719864
       ],
       "parent": "trunk",
       "axes": {
@@ -217,7 +246,36 @@
           0.0
         ]
       },
-      "source": "glenoid .j landmark",
+      "source": "medial end of clavicle (sternoclavicular joint)",
+      "review": "pending"
+    },
+    {
+      "name": "scapula.r",
+      "node": "joint.scapula.r",
+      "position": [
+        -0.14954528212547302,
+        0.06725191324949265,
+        -0.090720534324646
+      ],
+      "parent": "clavicle.r",
+      "axes": {
+        "flexion": [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        "abduction": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "rotation": [
+          0.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": "lateral end of clavicle (acromioclavicular joint); glenoid: glenoid .j landmark",
       "review": "pending"
     },
     {

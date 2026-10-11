@@ -34,6 +34,7 @@ import { LabelProbe, ResolutionGovernor, ShadowUpdater, SitesProbe, StatsProbe, 
 import { MotionDriver } from './MotionDriver';
 import { Equipment } from './Equipment';
 import type { GltfRig } from './GltfSource';
+import { makeGrip } from './grip';
 import { partBounds, partMaterialSlots } from '../../lib/parts';
 import { anchorHalf, anchorOffset, anchorPoint, anchorRadius, primitiveShape, stageBounds } from './shapes';
 import { createTextureKit } from './textures';
@@ -77,6 +78,8 @@ const NO_LAYERS: readonly string[] = [];
 const NO_HALF: Vec3 = [0, 0, 0];
 /** Ink of section hatching and wing veins on the dark plate (darker than the lit surfaces it marks). */
 const CINEMA_INK = '#1f2124';
+/** The toes' contact point above the model's floor (metres). */
+const TOE_LIFT = 0.015;
 /** Parts at least this fraction of the model radius cast the key light's shadow. */
 const SHADOW_CASTER_RATIO = 0.28;
 
@@ -219,6 +222,15 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
     });
     return out;
   }, [meshShapes]);
+  // The ARCHITECTURE elevation draws glb parts from their measured rest bounds.
+  useEffect(() => {
+    if (!meshShapes) return;
+    const out = new Map<string, { min: readonly number[]; max: readonly number[] }>();
+    meshShapes.forEach((shape, id) => {
+      if (shape.box) out.set(id, shape.box);
+    });
+    ui.setState({ meshBounds: out });
+  }, [meshShapes, ui]);
   const anchors = useMemo(() => new Map(data.parts.map((p) => [p.id, glbAnchors.get(p.id)?.offset ?? anchorOffset(p)] as [string, Vec3])), [data.parts, glbAnchors]);
   const points = useMemo(() => new Map(data.parts.map((p) => [p.id, glbAnchors.get(p.id)?.offset ?? anchorPoint(p)] as [string, Vec3])), [data.parts, glbAnchors]);
   const radii = useMemo(() => new Map(data.parts.map((p) => [p.id, glbAnchors.get(p.id)?.radius ?? anchorRadius(p)] as [string, number])), [data.parts, glbAnchors]);
@@ -237,7 +249,8 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
     return out;
   }, [data.parts, shapes]);
   useEffect(() => {
-    bridge.modelRadius = bounds.modelRadius;
+    // Label budget by camera distance: the subject's radius, not the context around it (M12).
+    bridge.modelRadius = bounds.fit.radius;
   }, [bridge, bounds]);
   // The camera frames the subject, not the context around it (M12).
   const sphere = useMemo(() => ({ center: bounds.fit.center, radius: bounds.fit.radius }), [bounds]);
@@ -308,13 +321,18 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
     const e = exerciseSheet && playable.has(exerciseSheet.id) ? exerciseSheet.motion?.equipment : undefined;
     return e === undefined ? NO_EQUIPMENT : Array.isArray(e) ? e : [e];
   }, [exerciseSheet, playable]);
-  const hands = useMemo(() => {
-    const node = (name: string) => {
+  // The palms: the rig's hand bones plus their offset along the forearm (equipment sits there; planted palms stay put).
+  const grips = useMemo(() => {
+    const grip = (name: string) => {
       const j = data.rig?.joints[name];
-      return (j && rig?.node(j.node)) ?? null;
+      return makeGrip((j && rig?.node(j.node)) ?? null, j?.offset);
     };
-    return { l: node('hand.l'), r: node('hand.r') };
+    return { l: grip('hand.l'), r: grip('hand.r') };
   }, [rig, data.rig]);
+  // The toe tips at rest (the model's floor, its front-most point: a standing body's toes): a push-up hinges there.
+  const feet = useMemo<Vec3>(() => [0, bounds.min[1] + TOE_LIFT, bounds.max[2]], [bounds]);
+  // Equipment: one neutral matte dark grey, so the muscles stay the subject (docs/16 decision 13).
+  const equipmentStyle = useMemo(() => styles.styleFor({ color: 'rubber', tint: 'token:neutral' }), [styles]);
   const rootRef = useRef<Group>(null);
   // Only topics with a rig, contraction or exercises run the MotionDriver (machines and insects never pay for it).
   const needsMotion = useMemo(
@@ -390,14 +408,16 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
           input={{ pose: s.pose, exercise: s.exercise, demo: s.demo }}
           playable={playable}
           rootRef={rootRef}
-          center={bounds.center}
+          center={bounds.fit.center}
+          grips={grips}
+          feet={feet}
           snapKey={snap.current.key}
         />
       )}
       {rig && <primitive object={rig.root} />}
-      {equipment.length > 0 && <Equipment specs={equipment} held={false} hands={hands} styleFor={styles.styleFor} floor={bounds.floor[0]} />}
+      {equipment.length > 0 && <Equipment specs={equipment} held={false} grips={grips} style={equipmentStyle} />}
       <group ref={rootRef} matrixAutoUpdate={false}>
-      {equipment.length > 0 && <Equipment specs={equipment} held hands={hands} styleFor={styles.styleFor} floor={bounds.floor[0]} />}
+      {equipment.length > 0 && <Equipment specs={equipment} held grips={grips} style={equipmentStyle} />}
       {data.parts.map((part) => {
         const shape = shapes.get(part.id);
         const display = displays.get(part.id);

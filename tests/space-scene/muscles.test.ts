@@ -27,7 +27,7 @@ import {
 import { explodeStages, stagedAmount } from '../../src/engines/space-scene/lib/explode';
 import { activeSites, pullLines, siteCentroid, siteKey } from '../../src/engines/space-scene/lib/sites';
 import { resolveAllPartDisplays } from '../../src/engines/space-scene/lib/visibility';
-import { barbellShape, benchShape, cableHandleShape, dumbbellShape, parallelBarsShape } from '../../src/engines/space-scene/lib/equipment';
+import { BAR, barbellShape, BENCH, benchShape, cableHandleShape, dipBarShape, DUMBBELL, dumbbellShape, equipmentFloor, floorShape, placeFixed } from '../../src/engines/space-scene/lib/equipment';
 import { partsFile, spaceChapterIssues, spaceChapterState, spaceSceneData } from '../../src/engines/space-scene/schema';
 import { exerciseSheet, musclesFile, sharedFitnessIssues, withSharedFitness, type SharedFitnessParsed } from '../../src/content/schema/fitness';
 import { detailSourceIds } from '../../src/engines/space-scene/lib/detail';
@@ -271,11 +271,30 @@ describe('shared fitness data (M10)', () => {
 
 describe('equipment (M8)', () => {
   it('builds every kind from engine primitives, one or two materials each', () => {
-    for (const shape of [barbellShape(), dumbbellShape(), cableHandleShape(), benchShape(), benchShape(30), parallelBarsShape(0.5, 1)]) {
+    for (const shape of [barbellShape(), dumbbellShape(), cableHandleShape(), benchShape(), benchShape(30), dipBarShape(), floorShape()]) {
       const pieces = partPieces({ primitive: shape.primitive, ...(shape.extra ? { extra: shape.extra } : {}) });
-      expect(pieces.length).toBeGreaterThan(0);
-      expect(pieces.length).toBeLessThanOrEqual(2);
+      expect(pieces.length).toBe(1);
     }
+  });
+  it('is drawn at real size (metres)', () => {
+    const size = (shape: ReturnType<typeof barbellShape>) => {
+      const [piece] = partPieces({ primitive: shape.primitive, ...(shape.extra ? { extra: shape.extra } : {}) });
+      piece!.geometry.computeBoundingBox();
+      const box = piece!.geometry.boundingBox!;
+      return [box.max.x - box.min.x, box.max.y - box.min.y, box.max.z - box.min.z].map((v) => Math.round(v * 1000) / 1000);
+    };
+    expect(size(barbellShape())).toEqual([BAR.length, BAR.plate, BAR.plate]);
+    expect(size(dumbbellShape())).toEqual([DUMBBELL.length, DUMBBELL.head, DUMBBELL.head]);
+    expect(size(benchShape())).toEqual([BENCH.width, BENCH.height, BENCH.length]);
+  });
+  it('puts the bench and floor relative to the trunk, the dip bars under the planted palms', () => {
+    const trunk = [0, 0.2, 0.1] as const;
+    const palms = [[0.25, -0.5, 0.2], [-0.25, -0.5, 0.2]] as const;
+    expect(placeFixed({ kind: 'bench', at: [0, -0.17, 0.15] }, trunk, null, null)).toEqual([0, 0.03, 0.25]);
+    expect(equipmentFloor([{ kind: 'bench', at: [0, -0.17, 0.15] }], trunk, null)).toBeCloseTo(0.03 - BENCH.height);
+    expect(equipmentFloor([{ kind: 'floor' }], trunk, palms)).toBeCloseTo(-0.515);
+    expect(placeFixed({ kind: 'parallel-bars' }, trunk, palms, null, 1)[0]).toBe(-0.25);
+    expect(equipmentFloor([{ kind: 'barbell' }], trunk, null)).toBeNull();
   });
   it('an inclined bench raises its back toward −Z', () => {
     const back = benchShape(45).extra![0]!;

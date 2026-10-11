@@ -2,7 +2,7 @@
  * Engine-local UI state shared by the View (HUD controls) and the WebGL
  * stage (separate React roots): ORBIT turntable, REFERENCE mode, the
  * presentation (on, and the leader labels of the beat on show) and the cover
- * camera (HUD hidden) and the glb's loading state. None of it
+ * camera (HUD hidden) and the glb's loading state and part bounds. None of it
  * goes into the URL; a chapter change ends ORBIT and REFERENCE.
  */
 import { createStore, type StoreApi } from 'zustand/vanilla';
@@ -34,6 +34,8 @@ export interface SpaceUiState {
   cover: boolean;
   /** The glb model (topics with `mesh` parts): `none` without one; loading progress 0..1; `failed` shows a note on the stage. */
   model: { state: 'none' | 'loading' | 'ready' | 'failed'; progress: number };
+  /** Rest bounds of the glb parts once loaded (the ARCHITECTURE elevation draws them; primitives come from the data). */
+  meshBounds: ReadonlyMap<string, { min: readonly number[]; max: readonly number[] }> | null;
 }
 
 export type SpaceUiStore = StoreApi<SpaceUiState>;
@@ -47,5 +49,6 @@ export function createSpaceUi(): SpaceUiStore {
     beatLabels: null,
     cover: false,
     model: { state: 'none', progress: 0 },
+    meshBounds: null,
   }));
 }

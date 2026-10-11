@@ -2,7 +2,7 @@
  * Ground under the model: a soft radial contact shadow (one quad, tiny
  * shader) plus a shadow-catcher plane for the key light's soft shadow. Both
  * are transparent so the paper shows through, and follow the model's floor
- * as it explodes.
+ * as it explodes (in exercise mode: the floor the equipment stands on).
  */
 import { useEffect, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
@@ -75,8 +75,12 @@ export function GroundShadow({
   useFrame(() => {
     const g = group.current;
     if (!g) return;
-    const y = floor[0] + (floor[1] - floor[0]) * runtime.explode;
-    if (g.position.y !== y) g.position.y = y;
+    // Exercise mode: the floor the equipment stands on (bench feet, the planted palms), under the trunk.
+    const ex = runtime.exercise;
+    const y = ex?.floor ?? floor[0] + (floor[1] - floor[0]) * runtime.explode;
+    const x = ex?.floor != null ? ex.trunk.x : 0;
+    const z = ex?.floor != null ? ex.trunk.z : 0;
+    if (g.position.y !== y || g.position.x !== x || g.position.z !== z) g.position.set(x, y, z);
   });
   return (
     <group ref={group} position={[0, floor[0], 0]}>

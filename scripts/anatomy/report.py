@@ -126,7 +126,7 @@ lines += ['', '## Native preview and motion checks', '',
           'The opaque skin and translucent same-camera shell passes place the selected anatomy inside the source body outline; '
           'source regional skin seams remain visible. Anatomical attachment approval remains separate.', '']
 lines += ['', '## Budgets and coordinate gates', '',
-          f"Native Blender FBX → glTF pipeline; {len(rows)} mesh nodes, 9 joints and 1 rig root.",
+          f"Native Blender FBX → glTF pipeline; {len(rows)} mesh nodes, 11 joints and 1 rig root.",
           f"Soft targets: {summary['bytes']:,} / {manifest['budgets']['total']['targetBytes']:,} bytes; {summary['triangles']:,} / 350,000 triangles.",
           'Mandatory caps: intercostals external/internal 20,000 each; external oblique 8,000 per side; skin 30,000; thorax 25,000.',
           'Coordinates: metres, Y up, front +Z, own left +X. Chest centre is the inferior manubrium / sternal angle.',

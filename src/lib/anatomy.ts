@@ -94,7 +94,7 @@ export function otherSideJoint(name: string): string {
 }
 
 /** Equipment the exercise mode draws (docs/16 §6.5). */
-export const EQUIPMENT_KINDS = ['barbell', 'dumbbell', 'bench', 'cable-handle', 'parallel-bars'] as const;
+export const EQUIPMENT_KINDS = ['barbell', 'dumbbell', 'bench', 'cable-handle', 'parallel-bars', 'floor'] as const;
 export type EquipmentKind = (typeof EQUIPMENT_KINDS)[number];
 
 /** Phases of an exercise key: a beat shows one, or loops through them (`loop`). */

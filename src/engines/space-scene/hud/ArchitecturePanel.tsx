@@ -1,13 +1,15 @@
 /**
  * Bottom panel 01 / ARCHITECTURE: an elevation drawn straight from the part
  * data (rest bounds of every primitive part on the section plane, default
- * front XY), zones numbered by group, a ground line and a scale bar in model
+ * front XY; glb parts from their measured rest bounds once loaded), zones numbered by group, a ground line and a scale bar in model
  * units. The selected part is outlined in the signal colour; parts put aside
  * (`hide`) are dashed outlines; context scenery (a wall) is hatched and
  * belongs to no zone. With `parts.json` `units` the scale bar and the span in
  * the tag read in real units (mm / cm / m), else in scene units (U).
  */
 import { useId, useMemo } from 'react';
+import { useStore } from 'zustand';
+import type { SpaceUiStore } from '../ui';
 import { useScene, useT } from '../../core/context';
 import { tx } from '../../../i18n';
 import { resolveColorRef } from '../../../theme/theme';
@@ -27,13 +29,14 @@ const ZONE_ROWS = 3;
 
 const f2 = (n: number) => Number(n.toFixed(2));
 
-export function ArchitecturePanel({ file }: { file: PartsFile }) {
+export function ArchitecturePanel({ file, ui }: { file: PartsFile; ui: SpaceUiStore }) {
   const t = useT();
   const hatchId = `space-hatch-${useId().replace(/:/g, '')}`;
   const s = useScene<SpaceSceneExt, { part: string | null; hidden: string[] }>((st) => ({ part: st.part, hidden: st.hidden }));
   const part = s.part;
   const plane = file.views.section?.plane ?? 'xy';
-  const el = useMemo(() => elevation(file.parts, plane), [file.parts, plane]);
+  const meshBounds = useStore(ui, (u) => u.meshBounds);
+  const el = useMemo(() => elevation(file.parts, plane, 0, meshBounds), [file.parts, plane, meshBounds]);
 
   const spanU = el.u1 - el.u0;
   const spanV = el.v1 - el.v0;

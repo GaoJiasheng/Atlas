@@ -200,19 +200,25 @@ export function planeAxes(plane: SectionPlane): [number, number, number] {
 /**
  * Rest bounds of every primitive part projected on the section plane
  * (exploded by `explode` 0..1 along each part's explode direction),
- * sorted back to front.
+ * sorted back to front. glb parts draw from their measured rest bounds
+ * (`meshBounds`, once the model has loaded); a glb context part (a body
+ * outline around a chest) is left out, so it does not shrink the subject.
  */
 export function elevation(
   parts: readonly (Pick<Part, 'id' | 'group' | 'primitive' | 'extra' | 'repeat' | 'explode'> & { context?: boolean | undefined })[],
   plane: SectionPlane,
   explode = 0,
+  meshBounds: ReadonlyMap<string, { min: readonly number[]; max: readonly number[] }> | null = null,
 ): Elevation {
   const [u, v, w] = planeAxes(plane);
   const rects: ElevationRect[] = [];
   let u0 = Infinity, u1 = -Infinity, v0 = Infinity, v1 = -Infinity;
   for (const p of parts) {
     // Context parts never explode.
-    const b = partBounds(p, p.context ? [0, 0, 0] : explodeOffset(p.explode, explode));
+    const off = p.context ? [0, 0, 0] : explodeOffset(p.explode, explode);
+    let b = partBounds(p, off as [number, number, number]);
+    const m = b ? undefined : meshBounds?.get(p.id);
+    if (m && !p.context) b = { min: m.min.map((x, i) => x + off[i]!), max: m.max.map((x, i) => x + off[i]!) } as typeof b;
     if (!b) continue;
     const r: ElevationRect = {
       id: p.id,

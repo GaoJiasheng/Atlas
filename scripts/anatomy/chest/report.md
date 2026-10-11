@@ -1,6 +1,6 @@
 # Chest mesh review
 
-Final GLB: **3,679,624 bytes** (3.680 MB), **231,986 triangles**.
+Final GLB: **3,685,024 bytes** (3.685 MB), **231,986 triangles**.
 
 Geometry and attachments: CC BY-SA 4.0.
 
@@ -62,8 +62,8 @@ The opaque skin and translucent same-camera shell passes place the selected anat
 
 ## Budgets and coordinate gates
 
-Native Blender FBX → glTF pipeline; 39 mesh nodes, 9 joints and 1 rig root.
-Soft targets: 3,679,624 / 4,000,000 bytes; 231,986 / 350,000 triangles.
+Native Blender FBX → glTF pipeline; 39 mesh nodes, 11 joints and 1 rig root.
+Soft targets: 3,685,024 / 4,000,000 bytes; 231,986 / 350,000 triangles.
 Mandatory caps: intercostals external/internal 20,000 each; external oblique 8,000 per side; skin 30,000; thorax 25,000.
 Coordinates: metres, Y up, front +Z, own left +X. Chest centre is the inferior manubrium / sternal angle.
 Chest source centre: [-1.6483021681779064e-05, -0.055000342428684235, 1.3499360084533691]; centred floorY = -1.350318 m (add chest-centre height to recover source floor).
@@ -73,11 +73,13 @@ Chest source centre: [-1.6483021681779064e-05, -0.055000342428684235, 1.34993600
 | Joint | Position (m; X, Y, Z) | Source | Unit axes |
 |---|---|---|---|
 | trunk | 0.00000, 0.00000, -0.00000 | sternal angle frame | passed |
-| scapula.l | 0.16615, 0.02141, -0.09585 | glenoid .j landmark | passed |
+| clavicle.l | 0.01670, 0.05116, -0.02025 | medial end of clavicle (sternoclavicular joint) | passed |
+| scapula.l | 0.14958, 0.06725, -0.09072 | lateral end of clavicle (acromioclavicular joint); glenoid: glenoid .j landmark | passed |
 | shoulder.l | 0.17264, 0.03656, -0.08084 | humeral head sphere fit | passed |
 | elbow.l | 0.22320, -0.23922, -0.09501 | midpoint of epicondyle .j landmarks | passed |
 | wrist.l | 0.24355, -0.50444, -0.04325 | styloid landmark / distal forearm | passed |
-| scapula.r | -0.16612, 0.02141, -0.09585 | glenoid .j landmark | passed |
+| clavicle.r | -0.01667, 0.05116, -0.02025 | medial end of clavicle (sternoclavicular joint) | passed |
+| scapula.r | -0.14955, 0.06725, -0.09072 | lateral end of clavicle (acromioclavicular joint); glenoid: glenoid .j landmark | passed |
 | shoulder.r | -0.17260, 0.03656, -0.08084 | humeral head sphere fit | passed |
 | elbow.r | -0.22317, -0.23922, -0.09501 | midpoint of epicondyle .j landmarks | passed |
 | wrist.r | -0.24351, -0.50444, -0.04325 | styloid landmark / distal forearm | passed |

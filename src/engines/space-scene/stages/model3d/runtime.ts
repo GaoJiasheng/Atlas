@@ -6,11 +6,22 @@
  * eased explode amount every part reads; `shadowDirty` asks for one shadow
  * map update (shadow maps do not auto-update, perf-lessons §2); `moved`
  * counts frames in which a part moved into a pose (labels re-check occlusion);
- * `contract`, `root` and `bonesMoved` carry the MotionDriver's output (rig,
- * contraction, exercise position) to the parts, labels and sites.
+ * `contract`, `root`, `bonesMoved` and `exercise` carry the MotionDriver's
+ * output (rig, contraction, exercise position) to the parts, labels, sites,
+ * equipment and ground.
  */
 import { createContext, useContext } from 'react';
-import { Matrix4 } from 'three';
+import { Matrix4, Vector3 } from 'three';
+
+/** Where the exercise puts the body (scene coordinates), for the free-standing equipment and the ground. */
+export interface ExercisePlacement {
+  /** The trunk joint (the root turn's pivot) after the turn and offset. */
+  trunk: Vector3;
+  /** Palms held still on the floor or bars (closed chain), or null. */
+  palms: [Vector3, Vector3] | null;
+  /** Floor height the ground shadow moves to, or null (the model's own floor). */
+  floor: number | null;
+}
 
 export interface StageRuntime {
   energy: number;
@@ -25,10 +36,12 @@ export interface StageRuntime {
   root: Matrix4;
   /** Counts frames in which the skeleton or the root moved (skinned anchors, sites, labels re-measure). */
   bonesMoved: number;
+  /** Exercise mode's placement (null when no exercise is on show). */
+  exercise: ExercisePlacement | null;
 }
 
 export function createRuntime(run: boolean, explode: number): StageRuntime {
-  return { energy: run ? 1 : 0, phase: 0, elapsed: 0, explode, shadowDirty: true, moved: 0, contract: new Map(), root: new Matrix4(), bonesMoved: 0 };
+  return { energy: run ? 1 : 0, phase: 0, elapsed: 0, explode, shadowDirty: true, moved: 0, contract: new Map(), root: new Matrix4(), bonesMoved: 0, exercise: null };
 }
 
 export const RuntimeContext = createContext<StageRuntime | null>(null);

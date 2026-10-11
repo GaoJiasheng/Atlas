@@ -96,7 +96,7 @@ else:
 
 summary = json.loads((CACHE/'chest-optimize-stats.json').read_text())
 print(f"FINAL GLB: {summary['bytes']:,} bytes ({summary['bytes']/1e6:.3f} MB), {summary['triangles']:,} triangles")
-print(f"NODE COUNT: {len(summary['nodes'])} meshes / {len(summary['nodes'])+10} total (9 joints + rig root)")
+print(f"NODE COUNT: {len(summary['nodes'])} meshes / {len(summary['nodes'])+12} total (11 joints + rig root)")
 print('MESH NODES: ' + ', '.join(row['node'] for row in summary['nodes']))
 for path in json.loads((CACHE/'chest-preview-paths.json').read_text()):
     print('PREVIEW: ' + path)

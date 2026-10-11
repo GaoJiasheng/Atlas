@@ -386,6 +386,12 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
           store.getState().applyState({ exercise: { id: ex.id, phase } }, { instant: true });
           return true;
         },
+        // QA: hold a pose of parts.json (null = rest).
+        pose: (name: string | null) => {
+          if (name !== null && !(file.poses && name in file.poses)) return false;
+          store.getState().applyState({ pose: name, exercise: null }, { instant: true });
+          return true;
+        },
       },
       escape: () => {
         if (isPresenting()) {
@@ -467,7 +473,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
         <PartChainCard file={file} />
       </SceneSlot>
       <SceneSlot name="panel01">
-        <ArchitecturePanel file={file} />
+        <ArchitecturePanel file={file} ui={ui} />
       </SceneSlot>
       <SceneSlot name="panel02">
         <DetailPanel file={file} chapters={chapters} />

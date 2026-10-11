@@ -91,3 +91,20 @@ describe('partChain: flow-only groups, context parts, compact rows', () => {
   });
 });
 
+
+describe('elevation of glb parts', () => {
+  it('draws mesh parts from their measured bounds and leaves glb context out', () => {
+    const mesh = [
+      { id: 'pec', group: 'g', explode: { dir: [0, 0, 1], dist: 0 } },
+      { id: 'skin', group: 'b', context: true, explode: { dir: [0, 0, 1], dist: 0 } },
+    ] as unknown as Part[];
+    expect(elevation(mesh, 'xy').rects).toEqual([]);
+    const bounds = new Map([
+      ['pec', { min: [0, -0.1, 0], max: [0.2, 0.1, 0.05] }],
+      ['skin', { min: [-0.4, -1.35, -0.2], max: [0.4, 0.36, 0.1] }],
+    ]);
+    const el = elevation(mesh, 'xy', 0, bounds);
+    expect(el.rects.map((r) => r.id)).toEqual(['pec']);
+    expect([el.u0, el.u1, el.v0, el.v1]).toEqual([0, 0.2, -0.1, 0.1]);
+  });
+});

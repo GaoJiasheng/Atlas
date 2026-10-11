@@ -935,6 +935,13 @@ export const rigJointSchema = z
         message: 'give one axis per pair of opposite movements (flexion or extension, not both)',
       })
       .refine((r) => !('stabilisation' in r), { message: '`stabilisation` is not an axis' }),
+    /**
+     * Where held equipment sits relative to the bone's origin (hand joints):
+     * metres along the parent → joint axis (the forearm for a wrist bone: the
+     * palm is ~0.08 m past the wrist), or a vector in scene coordinates at rest
+     * that turns with the bone.
+     */
+    offset: z.union([z.number().min(-0.5).max(0.5), vec3]).optional(),
   })
   .strict();
 export type RigJoint = z.output<typeof rigJointSchema>;
