@@ -1,0 +1,102 @@
+---
+id: under-the-pecs
+order: 3
+title: { en: "Under the pecs", zh: "胸大肌下面" }
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  pose: null
+  layers: [superficial, intermediate, deep, skeleton, neighbours, body]
+  ghost: [superficial, neighbours, body]
+  sites: [pectoralis-minor]
+  labels: [pectoralis-minor, serratus-anterior, subclavius]
+  camera: { position: [0.57, 0.19, 1.39], target: [0.0, -0.08, -0.04], fov: 30 }
+  summary:
+    en: "Beneath pectoralis major: two muscles that move the shoulder blade, one that steadies the collarbone, and the thin sheets between the ribs."
+    zh: "胸大肌下面：两块移动肩胛骨的肌肉、一块稳住锁骨的肌肉，以及肋骨之间的薄肌片。"
+  beats:
+    - camera: armpit
+      labels: [pectoralis-minor, scapula, thorax]
+      caption:
+        en: "With pectoralis major faded: pectoralis minor runs from the third, fourth and fifth ribs up to the coracoid process, the hook of the shoulder blade that sticks forward under the collarbone."
+        zh: "把胸大肌调淡：胸小肌从第三、四、五肋向上长到喙突，也就是肩胛骨在锁骨下方向前伸出的那个钩。"
+    - camera: left-side
+      sites: [serratus-anterior]
+      labels: [serratus-anterior, scapula]
+      caption:
+        en: "From the side: serratus anterior starts with finger-like slips on the upper eight or nine ribs. Its lower slips interlock with those of the external oblique."
+        zh: "从侧面看：前锯肌以手指一样的肌齿起于上八或九根肋骨。它下部的肌齿和腹外斜肌的肌齿互相交错。"
+    - camera: back
+      ghost: [superficial, neighbours, body, scapula]
+      sites: [serratus-anterior]
+      labels: [serratus-anterior, thoracic-spine]
+      caption:
+        en: "From behind, with the shoulder blade faded: serratus runs under the blade and ends along its inner border. Pulling there, it slides the blade forward around the ribs."
+        zh: "从背后看，把肩胛骨调淡：前锯肌从肩胛骨下面穿过，止在它的内侧缘。它在这里一拉，肩胛骨就沿着肋骨向前滑。"
+    - camera: front
+      sites: [subclavius]
+      labels: [subclavius, clavicle, intercostals-external, intercostals-internal]
+      caption:
+        en: "Deepest of all: subclavius, between the collarbone and the first rib, and the two intercostal layers filling the spaces between the ribs."
+        zh: "最深的一层：夹在锁骨和第一肋之间的锁骨下肌，以及填满肋间隙的两层肋间肌。"
+    - cutaway: transverse-t4
+      ghost: [neighbours, body]
+      sites: []
+      camera: { position: [0.3, 0.62, 0.62], target: [0.02, 0.0, -0.04], fov: 30 }
+      labels: [pectoralis-major-sternocostal, pectoralis-minor, intercostals-external, thorax]
+      caption:
+        en: "A slice across the chest at the level of the fourth thoracic vertebra. From the skin side inwards: pectoralis major, pectoralis minor, the intercostals, then the ribs."
+        zh: "在第四胸椎高度横切胸部。从皮肤一侧往里：胸大肌、胸小肌、肋间肌，然后是肋骨。"
+---
+
+<Lang en>
+
+Fade pectoralis major and the middle layer appears. **Pectoralis minor** is a thin triangle that starts on the third, fourth and fifth ribs near their cartilages and ends on the <Term id="coracoid-process">coracoid process</Term>, the hook of the shoulder blade that points forward under the collarbone [M1]. It pulls the point of the shoulder down and forward against the rib cage [M1] [M30]. <FlyTo preset="armpit">Look into the armpit</FlyTo>
+
+**Serratus anterior** starts with <Num s="M1">eight or nine</Num> finger-like slips on the upper ribs. It wraps backwards around the side of the chest, passes under the shoulder blade and ends along its inner border [M1]. When it pulls, the shoulder blade slides forward around the ribs, as in pushing or punching. This movement is <Term id="protraction">protraction</Term>. Its strong lower slips also turn the shoulder blade upward, which lets the arm rise above the head [M1] [M29].
+
+The deep layer is small. **Subclavius** is a short muscle from the first rib to a groove under the collarbone; it steadies the collarbone and draws it down [M1] [M6]. Between the ribs lie the **external** and **internal intercostals**, two thin sheets with fibres crossing at roughly right angles [M1].
+
+The slice at the end of this chapter shows the order from the skin inwards: pectoralis major, pectoralis minor, the intercostals and the ribs.
+
+<More title={{ en: "When serratus anterior is weak", zh: "前锯肌无力时" }}>
+
+Serratus anterior holds the inner border of the shoulder blade flat against the ribs. If it is weak, usually because its nerve has been injured, that border lifts away from the back when the person pushes against a wall. This is called <Term id="scapular-winging">scapular winging</Term> [M6] [M29]. It needs a medical assessment, not more exercise.
+
+</More>
+
+<More title={{ en: "Do the intercostals move the ribs?", zh: "肋间肌会移动肋骨吗" }}>
+
+Modern textbooks give the external intercostals the job of lifting the ribs as you breathe in, and the internal intercostals the job of pulling them down when you breathe out hard [M2]. Gray's Anatomy of 1918 doubted that they move the ribs at all and saw them mainly as braces that keep the spaces between the ribs from sucking in or bulging out [M1]. Both views are given here; the model shows them as context.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+把胸大肌调淡，中层就露出来了。**胸小肌**是一块薄薄的三角形肌肉，起于第三、四、五肋靠近肋软骨的地方，止于<Term id="coracoid-process">喙突</Term>，也就是肩胛骨在锁骨下方向前伸出的那个钩 [M1]。它把肩峰那一端往前下方拉，压向胸廓 [M1] [M30]。<FlyTo preset="armpit">看腋窝里面</FlyTo>
+
+**前锯肌**以 <Num s="M1">8 或 9 个</Num>手指一样的肌齿起于上部肋骨。它绕过胸廓侧面向后，从肩胛骨下面穿过，止在肩胛骨的内侧缘 [M1]。它一收缩，肩胛骨就沿着肋骨向前滑，就像推东西或出拳时那样。这个动作叫<Term id="protraction">前伸</Term>。它强壮的下部肌齿还让肩胛骨向上回旋，手臂才能举过头顶 [M1] [M29]。
+
+深层的肌肉都很小。**锁骨下肌**是一块从第一肋到锁骨下面一条浅沟的短肌，它稳住锁骨，并把锁骨往下拉 [M1] [M6]。肋骨之间是**肋间外肌**和**肋间内肌**，两层薄薄的肌片，纤维方向大致垂直交叉 [M1]。
+
+本章最后的横切面，显示了从皮肤往里的顺序：胸大肌、胸小肌、肋间肌，然后是肋骨。
+
+<More title={{ en: "When serratus anterior is weak", zh: "前锯肌无力时" }}>
+
+前锯肌把肩胛骨的内侧缘平平地按在肋骨上。如果它无力，通常是支配它的神经受了伤，那么人用手推墙时，这条边就会从背上翘起来，叫<Term id="scapular-winging">翼状肩胛</Term> [M6] [M29]。这需要医生评估，而不是多做练习。
+
+</More>
+
+<More title={{ en: "Do the intercostals move the ribs?", zh: "肋间肌会移动肋骨吗" }}>
+
+现代教科书认为，肋间外肌在吸气时把肋骨提起，肋间内肌在用力呼气时把肋骨往下拉 [M2]。1918 年版的格氏解剖学则怀疑它们根本不移动肋骨，认为它们主要起支撑作用，让肋间隙既不被吸进去也不鼓出来 [M1]。这里两种观点都写出来；模型只把它们当作背景。
+
+</More>
+
+</Lang>

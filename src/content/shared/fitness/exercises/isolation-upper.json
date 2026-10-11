@@ -1,0 +1,348 @@
+{
+  "exercises": [
+    {
+      "id": "dumbbell-fly",
+      "name": {
+        "en": "Dumbbell fly",
+        "zh": "哑铃飞鸟"
+      },
+      "short": {
+        "en": "DB fly",
+        "zh": "哑铃飞鸟"
+      },
+      "equipment": "dumbbell",
+      "pattern": "isolation",
+      "level": "intermediate",
+      "primary": [
+        "pectoralis-major"
+      ],
+      "secondary": [
+        "deltoid-anterior"
+      ],
+      "stabilisers": [
+        "serratus-anterior"
+      ],
+      "setup": {
+        "en": "Use a flat bench and light dumbbells, lighter than you would press: with the arms wide, the weights are far from the shoulder.",
+        "zh": "用平板凳和较轻的哑铃，比卧推用的轻：手臂张开时，重量离肩关节很远。"
+      },
+      "steps": [
+        {
+          "en": "Lie back with the dumbbells, head, upper back and buttocks on the bench. Hold them above your chest, palms facing each other.",
+          "zh": "带着哑铃躺下，头、上背和臀部贴住凳面。把哑铃举在胸口上方，掌心相对。"
+        },
+        {
+          "en": "Bend your elbows slightly and keep that same bend all the way.",
+          "zh": "两肘微屈，整个过程保持这个角度不变。"
+        },
+        {
+          "en": "Breathe in and open your arms in a wide arc, slowly, until your upper arms are about level with your body.",
+          "zh": "吸气，手臂沿一条宽弧线慢慢张开，直到上臂大约与身体齐平。"
+        },
+        {
+          "en": "Breathe out and bring the dumbbells back up along the same arc until they are above your chest, without knocking them together.",
+          "zh": "呼气，沿同一条弧线把哑铃收回到胸口上方，不要让它们相撞。"
+        },
+        {
+          "en": "To finish, bend your elbows, bring the weights to your chest and sit up with them.",
+          "zh": "结束时屈肘，把哑铃收到胸前，带着它们坐起。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Hug a big tree: the upper arms move, the elbow angle does not.",
+          "zh": "像抱一棵大树：动的是上臂，肘的角度不变。"
+        },
+        {
+          "en": "Feel a stretch across the chest, not a pinch in the shoulder.",
+          "zh": "感到的是胸前的拉伸，不是肩部的夹痛。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Straightening the elbows. Why: the longer lever loads the shoulder and elbow much more.",
+          "zh": "把肘伸直。为什么：力臂变长，肩和肘受的力大很多。"
+        },
+        {
+          "en": "Lowering the arms below the body. Why: the shoulder is stretched further than you can control.",
+          "zh": "手臂放得比身体还低。为什么：肩部被拉到超出你能控制的范围。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Start light enough that every repetition follows the same smooth path; add load or repetitions in small steps only once that feels easy.",
+            "zh": "起始重量要轻到每一次都能走同一条平稳的路线；等它变得轻松了，再小步增加重量或次数。"
+          },
+          "s": [
+            "M23"
+          ]
+        },
+        {
+          "text": {
+            "en": "Light and heavy loads both build muscle when the sets are hard; heavier loads build more maximal strength.",
+            "zh": "只要每组都练得够吃力，轻重量和大重量都能增肌；大重量更能提高最大力量。"
+          },
+          "s": [
+            "M20"
+          ]
+        },
+        {
+          "text": {
+            "en": "Spreading chest work over more than one day a week tends to work better than one big session.",
+            "zh": "把胸部训练分散到一周里不止一天，通常比一次练完效果好。"
+          },
+          "s": [
+            "M21"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "Stop if the front of the shoulder hurts; a press may suit you better.",
+          "zh": "肩前部疼痛就停下；卧推类动作可能更适合你。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [],
+      "sketch": "dumbbell-fly",
+      "motion": {
+        "root": {
+          "rotation": [
+            -90,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            -0.27,
+            0
+          ]
+        },
+        "equipment": [
+          {
+            "kind": "dumbbell",
+            "grip": "neutral"
+          },
+          {
+            "kind": "bench",
+            "at": [
+              0,
+              -0.88,
+              -0.35
+            ]
+          }
+        ],
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "shoulder.l": {
+                "abduction": 80,
+                "horizontal-abduction": 8
+              },
+              "elbow.l": {
+                "flexion": 20
+              }
+            },
+            "contract": {
+              "pectoralis-major": 0.04
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "shoulder.l": {
+                "flexion": 88,
+                "abduction": 8
+              },
+              "elbow.l": {
+                "flexion": 20
+              }
+            },
+            "contract": {
+              "pectoralis-major": 0.32,
+              "deltoid-anterior": 0.16
+            }
+          }
+        ],
+        "tempo": [
+          1.2,
+          0.4,
+          2,
+          0.3
+        ]
+      },
+      "sources": [
+        "M5",
+        "M23"
+      ]
+    },
+    {
+      "id": "cable-fly",
+      "name": {
+        "en": "Cable fly (high to low)",
+        "zh": "绳索夹胸（高位向下）"
+      },
+      "short": {
+        "en": "Cable fly",
+        "zh": "绳索夹胸"
+      },
+      "equipment": "cable",
+      "pattern": "isolation",
+      "level": "beginner",
+      "primary": [
+        "pectoralis-major-sternocostal",
+        "pectoralis-major-abdominal"
+      ],
+      "secondary": [
+        "pectoralis-major-clavicular",
+        "deltoid-anterior"
+      ],
+      "stabilisers": [
+        "serratus-anterior"
+      ],
+      "setup": {
+        "en": "Set both pulleys high, above shoulder height, with a single handle on each. Choose a light weight and stand in the middle with room to move.",
+        "zh": "把两侧滑轮调到高于肩膀的位置，各挂一个单手把手。选较轻的重量，站在中间，留出活动空间。"
+      },
+      "steps": [
+        {
+          "en": "Take a handle in each hand and step forward into a split stance until the cables pull gently. Arms are out to the sides, elbows slightly bent.",
+          "zh": "双手各握一个把手，向前迈一步成前后脚站立，直到绳索轻轻拉住手臂。手臂向两侧张开，肘微屈。"
+        },
+        {
+          "en": "Keep your ribs over your hips and your neck relaxed.",
+          "zh": "肋骨在髋部正上方，脖子放松。"
+        },
+        {
+          "en": "Breathe out and sweep both arms down and in, in an arc, until your hands meet in front of your lower chest.",
+          "zh": "呼气，双臂沿弧线向下、向内扫，直到双手在下胸前方会合。"
+        },
+        {
+          "en": "Breathe in and let the arms open slowly along the same arc, stopping before the cables pull your shoulders back too far.",
+          "zh": "吸气，沿同一条弧线慢慢张开手臂，在绳索把肩膀拉得太靠后之前停下。"
+        },
+        {
+          "en": "To finish, bring the handles together and step back until the weights rest, then let go.",
+          "zh": "结束时双手并拢，向后退直到配重落稳，再松手。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Sweep the upper arms; the hands follow.",
+          "zh": "扫动的是上臂，手只是跟着走。"
+        },
+        {
+          "en": "Stand still: only the arms move.",
+          "zh": "身体站稳：只有手臂在动。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Swinging the body forward to bring the handles together. Why: momentum does the work and the return snaps back.",
+          "zh": "身体前冲把把手合拢。为什么：靠惯性完成动作，回程时会被猛地拉回去。"
+        },
+        {
+          "en": "Straightening and bending the elbows each repetition. Why: it becomes a press, not a fly.",
+          "zh": "每次都伸肘屈肘。为什么：那就变成推，而不是夹胸了。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Start light enough that every repetition follows the same smooth path; add load or repetitions in small steps only once that feels easy.",
+            "zh": "起始重量要轻到每一次都能走同一条平稳的路线；等它变得轻松了，再小步增加重量或次数。"
+          },
+          "s": [
+            "M23"
+          ]
+        },
+        {
+          "text": {
+            "en": "Light and heavy loads both build muscle when the sets are hard; heavier loads build more maximal strength.",
+            "zh": "只要每组都练得够吃力，轻重量和大重量都能增肌；大重量更能提高最大力量。"
+          },
+          "s": [
+            "M20"
+          ]
+        },
+        {
+          "text": {
+            "en": "Spreading chest work over more than one day a week tends to work better than one big session.",
+            "zh": "把胸部训练分散到一周里不止一天，通常比一次练完效果好。"
+          },
+          "s": [
+            "M21"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "Keep fingers clear of pulleys and the weight stack; never let the handles snap back.",
+          "zh": "手指远离滑轮和配重片；不要让把手猛地弹回。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [],
+      "sketch": "cable-fly",
+      "motion": {
+        "equipment": {
+          "kind": "cable-handle",
+          "grip": "neutral"
+        },
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "shoulder.l": {
+                "abduction": 85,
+                "horizontal-abduction": 10
+              },
+              "elbow.l": {
+                "flexion": 15
+              }
+            },
+            "contract": {
+              "pectoralis-major": 0.04
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "shoulder.l": {
+                "flexion": 35,
+                "abduction": -12
+              },
+              "elbow.l": {
+                "flexion": 15
+              }
+            },
+            "contract": {
+              "pectoralis-major-sternocostal": 0.34,
+              "pectoralis-major-abdominal": 0.34,
+              "pectoralis-major-clavicular": 0.16
+            }
+          }
+        ],
+        "tempo": [
+          1.2,
+          0.5,
+          2,
+          0.3
+        ]
+      },
+      "sources": [
+        "M1",
+        "M5",
+        "M23"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "muscles": [
+    {
+      "id": "deltoid-anterior",
+      "name": {
+        "en": "Deltoid, clavicular (anterior) part",
+        "zh": "三角肌锁骨部（前部）"
+      },
+      "short": {
+        "en": "Front deltoid",
+        "zh": "三角肌前部"
+      },
+      "common": {
+        "en": "front delt",
+        "zh": "前束"
+      },
+      "latin": "Pars clavicularis musculi deltoidei",
+      "fma": "FMA34677",
+      "zAnatomy": "Clavicular part of deltoid muscle",
+      "regions": [
+        "shoulders"
+      ],
+      "layer": "superficial",
+      "origin": {
+        "text": {
+          "en": "Front border and upper surface of the outer third of the clavicle.",
+          "zh": "锁骨外侧三分之一的前缘和上面。"
+        },
+        "bones": [
+          "clavicle"
+        ],
+        "s": [
+          "M1",
+          "M31"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Deltoid tuberosity, on the outer side of the middle of the humerus.",
+          "zh": "三角肌粗隆，位于肱骨中段外侧。"
+        },
+        "bones": [
+          "humerus"
+        ],
+        "s": [
+          "M1",
+          "M31"
+        ]
+      },
+      "fibres": {
+        "arrangement": "parallel",
+        "direction": {
+          "en": "Down and back over the front of the shoulder to the side of the arm.",
+          "zh": "经肩前方向后下斜行到上臂外侧。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "shoulder",
+          "movement": "flexion",
+          "role": "prime",
+          "s": [
+            "M31"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "internal-rotation",
+          "role": "assist",
+          "s": [
+            "M31"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "Touch the front of your shoulder, just outside the collarbone, and lift your arm straight forward: the rounded muscle there hardens.",
+        "zh": "摸肩膀前面、锁骨外侧那一块，然后把手臂向正前方抬起：那块圆鼓鼓的肌肉会变硬。"
+      },
+      "mistakes": [
+        {
+          "en": "Letting a steep incline turn a chest press into a shoulder press.",
+          "zh": "凳子太陡，把推胸做成了推肩。"
+        },
+        {
+          "en": "Lowering the bar or dumbbells so far that the front of the shoulder is strained.",
+          "zh": "杠铃或哑铃放得太低，肩前部被拉得难受。"
+        }
+      ],
+      "exercises": [
+        "incline-dumbbell-press",
+        "barbell-bench-press",
+        "push-up",
+        "machine-chest-press"
+      ],
+      "summary": {
+        "en": "Raises the arm forward; helps in every chest press.",
+        "zh": "向前抬手臂；每一种推胸动作都有它帮忙。"
+      },
+      "detail": {
+        "en": "The front third of the deltoid, from the outer part of the collarbone. It is the main forward lifter of the arm and works alongside the clavicular part of pectoralis major in pressing [M31] [M5].\n\nResearch shows: as the bench gets steeper, its EMG rises, reaching its highest at 60°, while upper-chest EMG peaks at 30° [M8]. The shoulder topic covers the whole deltoid.",
+        "zh": "三角肌的前三分之一，起于锁骨外侧。它是把手臂往前抬的主力，推的时候和胸大肌锁骨部一起出力 [M31] [M5]。\n\n研究显示：凳子越陡，它的肌电越高，到 60° 时最高；上胸的肌电则在 30° 时最高 [M8]。肩部主题会完整讲三角肌。"
+      }
+    }
+  ]
+}

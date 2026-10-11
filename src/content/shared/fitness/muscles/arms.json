@@ -1,0 +1,99 @@
+{
+  "muscles": [
+    {
+      "id": "triceps-brachii",
+      "name": {
+        "en": "Triceps brachii",
+        "zh": "肱三头肌"
+      },
+      "short": {
+        "en": "Triceps",
+        "zh": "肱三头肌"
+      },
+      "common": {
+        "en": "triceps",
+        "zh": "三头肌"
+      },
+      "latin": "Musculus triceps brachii",
+      "fma": "FMA37688",
+      "zAnatomy": "Triceps brachii muscle",
+      "regions": [
+        "arms"
+      ],
+      "layer": "superficial",
+      "origin": {
+        "text": {
+          "en": "Three heads: the long head from just below the shoulder socket on the scapula; the lateral and medial heads from the back of the humerus.",
+          "zh": "三个头：长头起于肩胛骨关节盂下方；外侧头和内侧头起于肱骨后面。"
+        },
+        "bones": [
+          "scapula",
+          "humerus"
+        ],
+        "s": [
+          "M1",
+          "M32"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Olecranon of the ulna, the point of the elbow.",
+          "zh": "尺骨鹰嘴，也就是肘尖。"
+        },
+        "bones": [
+          "forearm"
+        ],
+        "s": [
+          "M1",
+          "M32"
+        ]
+      },
+      "fibres": {
+        "arrangement": "multipennate",
+        "direction": {
+          "en": "Down the back of the arm into one tendon at the elbow.",
+          "zh": "沿上臂后面向下，汇入肘部的一条肌腱。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "elbow",
+          "movement": "extension",
+          "role": "prime",
+          "s": [
+            "M1",
+            "M32"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "Hold the back of your upper arm and straighten your elbow against your other hand: the whole back of the arm hardens.",
+        "zh": "握住上臂后面，用另一只手顶住，把肘伸直：上臂后面整片都会变硬。"
+      },
+      "mistakes": [
+        {
+          "en": "Snapping the elbows straight at the top of a press.",
+          "zh": "推到顶时把肘猛地锁直。"
+        },
+        {
+          "en": "Letting the elbows drift far behind the wrists, so the forearms tilt.",
+          "zh": "手肘跑到手腕后面太远，前臂歪斜。"
+        }
+      ],
+      "exercises": [
+        "barbell-bench-press",
+        "chest-dip",
+        "push-up",
+        "machine-chest-press"
+      ],
+      "summary": {
+        "en": "Straightens the elbow at the end of every press.",
+        "zh": "每一次推起时把肘伸直。"
+      },
+      "detail": {
+        "en": "The muscle on the back of the upper arm, three heads joined in one tendon on the point of the elbow [M1]. In every press and push-up it straightens the elbow while the chest muscles move the upper arm [M32].\n\nThe model draws the three heads as one part; the arm topic separates them.",
+        "zh": "上臂后面的肌肉，三个头在肘尖汇成一条肌腱 [M1]。每一次推和俯卧撑，胸肌移动上臂的同时，它把肘伸直 [M32]。\n\n模型把三个头画成一个零件；手臂主题会把它们分开讲。"
+      }
+    }
+  ]
+}

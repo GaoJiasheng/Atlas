@@ -134,7 +134,7 @@ beforeAll(() => {
       const file = join(root, 'chapters/05-sample-motion.mdx');
       writeFileSync(file, readFileSync(file, 'utf8').replace('exercise: { id: sample-curl, phase: loop }', 'exercise: { id: sample-hang, phase: loop }'));
       const body = join(root, 'chapters/01-whole-thing.mdx');
-      writeFileSync(body, readFileSync(body, 'utf8').replace('<Lang en>\n\n', '<Lang en>\n\nA <Num s="M7">shared</Num> number. '));
+      writeFileSync(body, readFileSync(body, 'utf8').replace('<Lang en>\n\n', '<Lang en>\n\nA <Num s="M999">shared</Num> number. '));
     },
     SAMPLE_SPACE,
   );
@@ -236,7 +236,7 @@ describe('validate-content: glb models and shared fitness data (docs/16 M1, M10)
     const lines = linesFor('space-glb-node').join('\n');
     expect(lines).toContain('model /models/sample-space.glb: part "sample-lower" mesh: no node named "sample-forearm.l"');
     expect(lines).toContain('state.beats.1.exercise: "sample-hang" is not in data/training.json exercises');
-    expect(lines).toContain('<Num s="M7">: unknown source "M7"');
+    expect(lines).toContain('<Num s="M999">: unknown source "M999"');
   });
 });
 

@@ -1,0 +1,994 @@
+{
+  "muscles": [
+    {
+      "id": "pectoralis-major",
+      "name": {
+        "en": "Pectoralis major",
+        "zh": "胸大肌"
+      },
+      "short": {
+        "en": "Pec major",
+        "zh": "胸大肌"
+      },
+      "common": {
+        "en": "pecs, chest",
+        "zh": "胸肌"
+      },
+      "latin": "Musculus pectoralis major",
+      "fma": "FMA9627",
+      "zAnatomy": "Pectoralis major muscle",
+      "regions": [
+        "chest"
+      ],
+      "layer": "superficial",
+      "origin": {
+        "text": {
+          "en": "Front of the inner half of the clavicle; front of the sternum down to the sixth or seventh cartilage; the cartilages of the true ribs (often not the first or seventh); the aponeurosis of the external oblique.",
+          "zh": "锁骨内侧半的前面；胸骨前面，向下到第 6 或第 7 肋软骨；真肋的肋软骨（第 1 或第 7 肋常常不在内）；腹外斜肌腱膜。"
+        },
+        "bones": [
+          "clavicle",
+          "thorax"
+        ],
+        "s": [
+          "M1",
+          "M2"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Crest of the greater tubercle of the humerus, the outer lip of the groove that carries the long tendon of biceps. The flat tendon is two layers; the lower fibres turn behind the upper ones and reach higher, so the tendon looks twisted.",
+          "zh": "肱骨大结节嵴，即容纳肱二头肌长头腱那条结节间沟的外侧唇。扁平的止腱分前后两层；下部纤维转到上部纤维后面、止得更高，所以止腱看上去是扭转的。"
+        },
+        "bones": [
+          "humerus"
+        ],
+        "s": [
+          "M1"
+        ]
+      },
+      "fibres": {
+        "arrangement": "convergent",
+        "direction": {
+          "en": "A fan: upper fibres run down and out, middle fibres across, lower fibres up and out, all converging on one tendon.",
+          "zh": "呈扇形：上部纤维向外下，中部横行，下部向外上，全部汇聚到同一条止腱。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "shoulder",
+          "movement": "adduction",
+          "role": "prime",
+          "s": [
+            "M1"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "internal-rotation",
+          "role": "prime",
+          "s": [
+            "M1"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "horizontal-adduction",
+          "role": "prime",
+          "s": [
+            "M5"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "flexion",
+          "role": "assist",
+          "s": [
+            "M1",
+            "M5"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "extension",
+          "role": "assist",
+          "s": [
+            "M1",
+            "M5"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "Press your palms together in front of your chest and put the other hand flat below your collarbone: the broad muscle that firms up under your hand is pectoralis major.",
+        "zh": "双手在胸前合掌、互相用力推，另一只手平放在锁骨下方：手底下变硬的那一大片就是胸大肌。"
+      },
+      "mistakes": [
+        {
+          "en": "Chasing an \"inner chest\": no fibres belong only to the inner edge, every fibre runs from its start to the arm.",
+          "zh": "追求练“内胸”：没有只属于内侧边缘的纤维，每一根纤维都从起点一直长到上臂。"
+        },
+        {
+          "en": "Bouncing or dropping into the stretch at the bottom of a press, fly or dip.",
+          "zh": "卧推、飞鸟或臂屈伸到底时借反弹或猛地下沉。"
+        }
+      ],
+      "exercises": [
+        "barbell-bench-press",
+        "incline-dumbbell-press",
+        "push-up",
+        "dumbbell-fly",
+        "machine-chest-press"
+      ],
+      "summary": {
+        "en": "Draws the arm across the chest and turns it in.",
+        "zh": "把手臂拉向胸前，并向内旋转。"
+      },
+      "detail": {
+        "en": "One fan-shaped muscle in three parts: clavicular, sternocostal and abdominal. Gym names such as upper, middle and lower chest point at these parts, but they share one tendon on the humerus [M1].\n\nThe tendon is two layers. The clavicular and upper sternal fibres form the front layer; the lower fibres turn behind them and reach higher on the bone, so the tendon is twisted [M1]. Because each fibre runs from its start to that tendon, there is no separate \"inner chest\" to isolate [M1] [M2].\n\nAs a whole it pulls the arm in and turns it inward [M1]; which part pulls hardest depends on where the arm starts [M5].",
+        "zh": "胸大肌是一块扇形肌，分锁骨部、胸肋部和腹部三个部分。健身里说的“上胸、中胸、下胸”大致对应这三部分，但它们在肱骨上共用一条止腱 [M1]。\n\n止腱分两层：锁骨部和上部胸骨纤维组成前层；下部纤维转到它们后面，止在骨上更高的地方，所以止腱是扭转的 [M1]。每一根纤维都从起点长到这条止腱，因此并没有一块可以单独练的“内胸” [M1] [M2]。\n\n整块收缩时，它把手臂内收并向内旋 [M1]；哪一部分出力最多，要看手臂从什么位置开始动 [M5]。"
+      },
+      "injury": {
+        "en": "Tears are rare: a 2012 review found 365 reported cases worldwide since 1822, about half of them during weight training [M14]. A cadaver study found that the short lowest fibres stretch the most near the end of lowering, as at the bottom of a bench press [M15].",
+        "zh": "胸大肌撕裂很少见：2012 年的一篇综述收集到自 1822 年以来全世界报告的 365 例，约一半发生在力量训练中 [M14]。一项尸体研究发现，在下放动作快结束时，最下面那些短纤维被拉长得最多，也就是卧推到底的时候 [M15]。"
+      }
+    },
+    {
+      "id": "pectoralis-major-clavicular",
+      "parent": "pectoralis-major",
+      "name": {
+        "en": "Pectoralis major, clavicular part",
+        "zh": "胸大肌锁骨部"
+      },
+      "short": {
+        "en": "Pec maj · clav",
+        "zh": "胸大肌锁骨部"
+      },
+      "common": {
+        "en": "upper chest",
+        "zh": "上胸"
+      },
+      "latin": "Pars clavicularis musculi pectoralis majoris",
+      "fma": "FMA34687",
+      "zAnatomy": "Clavicular head of pectoralis major muscle",
+      "regions": [
+        "chest"
+      ],
+      "layer": "superficial",
+      "origin": {
+        "text": {
+          "en": "Front of the inner (sternal) half of the clavicle.",
+          "zh": "锁骨内侧半（靠胸骨的一半）的前面。"
+        },
+        "bones": [
+          "clavicle"
+        ],
+        "s": [
+          "M1",
+          "M2"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Crest of the greater tubercle of the humerus, the outer lip of the groove that carries the long tendon of biceps. Its fibres form the front layer of the tendon and end lowest on the crest.",
+          "zh": "肱骨大结节嵴，即容纳肱二头肌长头腱那条结节间沟的外侧唇。它的纤维组成止腱的前层，在骨嵴上止得最低。"
+        },
+        "bones": [
+          "humerus"
+        ],
+        "s": [
+          "M1"
+        ]
+      },
+      "fibres": {
+        "arrangement": "convergent",
+        "direction": {
+          "en": "Down and out from the collarbone to the arm.",
+          "zh": "从锁骨向外下斜行到上臂。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "shoulder",
+          "movement": "flexion",
+          "role": "prime",
+          "s": [
+            "M5",
+            "M6"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "horizontal-adduction",
+          "role": "prime",
+          "s": [
+            "M5"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "adduction",
+          "role": "assist",
+          "s": [
+            "M1"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "internal-rotation",
+          "role": "assist",
+          "s": [
+            "M1"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "Rest your fingertips just below the collarbone and lift your arm forward against your other hand: the band that tightens there is the clavicular part, working with the front of the shoulder.",
+        "zh": "指尖放在锁骨正下方，另一只手按住，手臂向前上抬：那里绷紧的一条就是锁骨部，它和肩前部一起用力。"
+      },
+      "mistakes": [
+        {
+          "en": "Making the bench so steep that the press turns into a shoulder press.",
+          "zh": "凳子调得太陡，卧推变成了肩上推举。"
+        },
+        {
+          "en": "Shrugging the shoulders up towards the ears as the weight rises.",
+          "zh": "推起时耸肩，肩膀往耳朵方向提。"
+        }
+      ],
+      "exercises": [
+        "incline-dumbbell-press",
+        "barbell-bench-press",
+        "push-up",
+        "machine-chest-press"
+      ],
+      "summary": {
+        "en": "Lifts the arm forward and brings it across the chest.",
+        "zh": "把手臂向前抬起，并拉向胸前。"
+      },
+      "detail": {
+        "en": "The upper band of the muscle, starting on the collarbone. It helps raise the arm forward, so it works with the front of the deltoid [M5] [M6].\n\nResearch shows: in 30 trained adults pressing 60 % of their maximum on five bench angles, upper-chest electrical activity (EMG) was highest at 30°, while the front deltoid was highest at the steepest angle, 60° [M8]. A smaller study of 14 trained men saw the upper chest more active at 30° and 45° than flat only during part of the lift [M7]. Higher EMG does not by itself mean more growth [M9].",
+        "zh": "胸大肌最上面的一条，起于锁骨。它协助手臂前举，所以总和三角肌前部一起工作 [M5] [M6]。\n\n研究显示：30 名有训练经验的成年人用自己最大重量的 60 % 在五种凳子角度上做卧推，上胸的肌电在 30° 时最高，而三角肌前部在最陡的 60° 时最高 [M8]。另一项 14 名有训练男性的小研究发现，30° 和 45° 时上胸比平板更活跃，但只出现在推起过程的一段 [M7]。肌电高本身不等于长得更多 [M9]。"
+      }
+    },
+    {
+      "id": "pectoralis-major-sternocostal",
+      "parent": "pectoralis-major",
+      "name": {
+        "en": "Pectoralis major, sternocostal part",
+        "zh": "胸大肌胸肋部"
+      },
+      "short": {
+        "en": "Pec maj · sternocostal",
+        "zh": "胸大肌胸肋部"
+      },
+      "common": {
+        "en": "middle chest",
+        "zh": "中胸"
+      },
+      "latin": "Pars sternocostalis musculi pectoralis majoris",
+      "fma": "FMA34696",
+      "zAnatomy": "Sternocostal head of pectoralis major muscle",
+      "regions": [
+        "chest"
+      ],
+      "layer": "superficial",
+      "origin": {
+        "text": {
+          "en": "Front of the sternum down to the sixth or seventh cartilage, and the cartilages of the true ribs beside it.",
+          "zh": "胸骨前面（向下到第 6 或第 7 肋软骨），以及旁边真肋的肋软骨。"
+        },
+        "bones": [
+          "thorax"
+        ],
+        "s": [
+          "M1",
+          "M2"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Crest of the greater tubercle of the humerus, the outer lip of the groove that carries the long tendon of biceps. Its upper fibres join the front layer; most of it turns into the back layer, which ends higher.",
+          "zh": "肱骨大结节嵴，即容纳肱二头肌长头腱那条结节间沟的外侧唇。它的上部纤维并入前层；大部分转入后层，止得更高。"
+        },
+        "bones": [
+          "humerus"
+        ],
+        "s": [
+          "M1"
+        ]
+      },
+      "fibres": {
+        "arrangement": "convergent",
+        "direction": {
+          "en": "Across the chest, the lower fibres rising towards the arm.",
+          "zh": "横过胸前，下部纤维向外上斜行到上臂。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "shoulder",
+          "movement": "horizontal-adduction",
+          "role": "prime",
+          "s": [
+            "M5"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "adduction",
+          "role": "prime",
+          "s": [
+            "M1",
+            "M2"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "internal-rotation",
+          "role": "prime",
+          "s": [
+            "M1"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "extension",
+          "role": "prime",
+          "s": [
+            "M5"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "Put a flat hand beside your breastbone and squeeze your hands together in front of you: the broad part firming up under your palm is the sternocostal part.",
+        "zh": "一只手平放在胸骨旁边，两手在身前合拢挤压：掌心下变硬的那一大片就是胸肋部。"
+      },
+      "mistakes": [
+        {
+          "en": "Bouncing the bar off the chest instead of lowering it under control.",
+          "zh": "杠铃砸在胸口借力反弹，而不是有控制地放下。"
+        },
+        {
+          "en": "Letting the elbows flare straight out to the sides with the wrists behind them.",
+          "zh": "两肘完全朝两侧张开，手腕落在手肘后面。"
+        }
+      ],
+      "exercises": [
+        "barbell-bench-press",
+        "push-up",
+        "dumbbell-fly",
+        "cable-fly",
+        "chest-dip"
+      ],
+      "summary": {
+        "en": "Pulls the arm across the chest and down from overhead.",
+        "zh": "把手臂拉向胸前，也把举高的手臂往下拉。"
+      },
+      "detail": {
+        "en": "The largest part, from the breastbone and the cartilages beside it. Its middle fibres pull straight across the chest; its lower fibres pull a raised arm down and in, which is why it works hard in dips and pull-downs from overhead [M1] [M5].\n\nExtension here means bringing a forward-raised arm back down towards the side, not swinging the arm behind the body [M5].",
+        "zh": "面积最大的一部分，起于胸骨和旁边的肋软骨。中部纤维把手臂横着拉向胸前；下部纤维把举起的手臂往下、往里拉，所以做双杠臂屈伸、从头顶往下拉时它出力很多 [M1] [M5]。\n\n这里说的“伸”，是把向前举起的手臂放回身体两侧，不是把手臂甩到身后 [M5]。"
+      }
+    },
+    {
+      "id": "pectoralis-major-abdominal",
+      "parent": "pectoralis-major",
+      "name": {
+        "en": "Pectoralis major, abdominal part",
+        "zh": "胸大肌腹部"
+      },
+      "short": {
+        "en": "Pec maj · abd",
+        "zh": "胸大肌腹部"
+      },
+      "common": {
+        "en": "lower chest",
+        "zh": "下胸"
+      },
+      "latin": "Pars abdominalis musculi pectoralis majoris",
+      "fma": "FMA34699",
+      "zAnatomy": "(Abdominal part of pectoralis major muscle)",
+      "regions": [
+        "chest"
+      ],
+      "layer": "superficial",
+      "origin": {
+        "text": {
+          "en": "The aponeurosis (flat tendon sheet) of the external oblique, over the top of the abdominal wall.",
+          "zh": "腹壁上端的腹外斜肌腱膜（一层扁平的腱性薄膜）。"
+        },
+        "bones": [
+          "external-oblique"
+        ],
+        "s": [
+          "M1",
+          "M2"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Crest of the greater tubercle of the humerus, the outer lip of the groove that carries the long tendon of biceps. These are the lowest fibres; they turn behind all the others and end highest.",
+          "zh": "肱骨大结节嵴，即容纳肱二头肌长头腱那条结节间沟的外侧唇。这是最下面的纤维，转到其他纤维后面，止得最高。"
+        },
+        "bones": [
+          "humerus"
+        ],
+        "s": [
+          "M1"
+        ]
+      },
+      "fibres": {
+        "arrangement": "convergent",
+        "direction": {
+          "en": "Up and out from the top of the abdominal wall to the armpit.",
+          "zh": "从腹壁上端向外上斜行到腋窝。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "shoulder",
+          "movement": "extension",
+          "role": "assist",
+          "s": [
+            "M1"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "adduction",
+          "role": "assist",
+          "s": [
+            "M1"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "internal-rotation",
+          "role": "assist",
+          "s": [
+            "M1"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "Find the lower edge of the chest muscle where it forms the front fold of the armpit, then press your arm down against a table: that edge firms up.",
+        "zh": "找到胸肌下缘，也就是腋窝前壁那条边，然后手臂往下压桌面：那条边会变硬。"
+      },
+      "mistakes": [
+        {
+          "en": "Sinking very deep in a dip to \"hit the lower chest\": depth adds stress at the front of the shoulder.",
+          "zh": "做双杠臂屈伸时为了“练下胸”沉得很深：越深，肩前部受力越大。"
+        },
+        {
+          "en": "Treating the lower chest as a separate muscle: it shares the same tendon.",
+          "zh": "把下胸当成一块独立的肌肉：它和其他部分共用一条止腱。"
+        }
+      ],
+      "exercises": [
+        "chest-dip",
+        "cable-fly",
+        "barbell-bench-press"
+      ],
+      "summary": {
+        "en": "A small low band; pulls a raised arm down.",
+        "zh": "下缘的一小条，把举起的手臂往下拉。"
+      },
+      "detail": {
+        "en": "A small slip at the bottom of the muscle that starts on the tendon sheet of the abdominal wall rather than on bone [M1]. Its fibres rise steeply, so they help pull a raised arm down and in, together with the lower sternocostal fibres [M1].\n\nA cadaver study found these short lowest fibres stretch the most near the end of lowering, which may explain why tears happen at the bottom of a heavy press [M15].",
+        "zh": "胸大肌最下面的一小束，起于腹壁的腱膜，而不是骨头 [M1]。它的纤维陡直向上，所以和胸肋部的下部纤维一起，把举起的手臂往下、往里拉 [M1]。\n\n一项尸体研究发现，下放快结束时这些最下面的短纤维被拉长得最多，这也许能解释为什么撕裂常发生在大重量卧推的最低点 [M15]。"
+      }
+    },
+    {
+      "id": "pectoralis-minor",
+      "name": {
+        "en": "Pectoralis minor",
+        "zh": "胸小肌"
+      },
+      "short": {
+        "en": "Pec minor",
+        "zh": "胸小肌"
+      },
+      "latin": "Musculus pectoralis minor",
+      "fma": "FMA13109",
+      "zAnatomy": "Pectoralis minor muscle",
+      "regions": [
+        "chest"
+      ],
+      "layer": "intermediate",
+      "origin": {
+        "text": {
+          "en": "Upper edges and outer surfaces of the third, fourth and fifth ribs, near their cartilages.",
+          "zh": "第 3、4、5 肋的上缘和外面，靠近肋软骨处。"
+        },
+        "bones": [
+          "thorax"
+        ],
+        "s": [
+          "M1",
+          "M2"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Inner edge and upper surface of the coracoid process of the scapula.",
+          "zh": "肩胛骨喙突的内侧缘和上面。"
+        },
+        "bones": [
+          "scapula"
+        ],
+        "s": [
+          "M1",
+          "M2"
+        ]
+      },
+      "fibres": {
+        "arrangement": "convergent",
+        "direction": {
+          "en": "Three slips run up and out, converging on the coracoid.",
+          "zh": "三束肌齿向外上斜行，汇聚到喙突。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "scapula",
+          "movement": "depression",
+          "role": "prime",
+          "s": [
+            "M1",
+            "M2"
+          ]
+        },
+        {
+          "joint": "scapula",
+          "movement": "protraction",
+          "role": "assist",
+          "s": [
+            "M30"
+          ]
+        },
+        {
+          "joint": "scapula",
+          "movement": "downward-rotation",
+          "role": "assist",
+          "s": [
+            "M30"
+          ]
+        },
+        {
+          "joint": "ribs",
+          "movement": "inspiration",
+          "role": "assist",
+          "s": [
+            "M1",
+            "M30"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "It lies under pectoralis major, so you cannot feel it directly. Press your hand on a table and push your shoulder down towards it: the pull you sense deep under the front of the shoulder is partly this muscle.",
+        "zh": "它在胸大肌下面，直接摸不到。手撑在桌面上，把肩膀往下压向桌面：肩前部深处那股牵拉感，有一部分来自它。"
+      },
+      "mistakes": [
+        {
+          "en": "Blaming every forward-hunched shoulder on a \"tight pec minor\": posture alone does not show that.",
+          "zh": "把所有含胸、肩膀前倾都归结为“胸小肌太紧”：光看姿势判断不了。"
+        },
+        {
+          "en": "Shrugging during push-ups and dips, so the shoulder rides up instead of staying steady.",
+          "zh": "做俯卧撑和双杠臂屈伸时耸肩，肩膀往上窜，稳不住。"
+        }
+      ],
+      "exercises": [
+        "push-up-plus",
+        "push-up",
+        "chest-dip"
+      ],
+      "summary": {
+        "en": "Pulls the shoulder blade down and forward.",
+        "zh": "把肩胛骨往前下方拉。"
+      },
+      "detail": {
+        "en": "A thin triangle under pectoralis major, from three front ribs to the coracoid process. It draws the point of the shoulder down and forward against the rib cage [M1]; with the shoulder blade held still it can help lift the ribs in a deep breath [M1].\n\nIn 50 pain-free people, those with a shorter pectoralis minor kept the shoulder blade tipped further forward as the arm rose [M12]. But a 2026 review found that none of the tests used to measure its length yet has enough evidence behind it, so a hunched posture alone says little about this muscle [M13].",
+        "zh": "胸大肌下面的一块薄三角形肌肉，从三根前肋长到喙突。它把肩峰端往前下方拉，贴向胸廓 [M1]；肩胛骨固定时，它还能在深吸气时帮着提肋 [M1]。\n\n一项研究观察了 50 名没有疼痛的人：胸小肌较短的人抬臂时，肩胛骨始终更向前倾 [M12]。但 2026 年的一篇综述认为，现有测胸小肌长度的方法，证据都还不够充分，所以只看含胸的姿势，说明不了这块肌肉怎么样 [M13]。"
+      }
+    },
+    {
+      "id": "serratus-anterior",
+      "name": {
+        "en": "Serratus anterior",
+        "zh": "前锯肌"
+      },
+      "short": {
+        "en": "Serratus ant.",
+        "zh": "前锯肌"
+      },
+      "common": {
+        "en": "serratus",
+        "zh": "锯肌"
+      },
+      "latin": "Musculus serratus anterior",
+      "fma": "FMA13397",
+      "zAnatomy": "Serratus anterior muscle",
+      "regions": [
+        "chest"
+      ],
+      "layer": "intermediate",
+      "origin": {
+        "text": {
+          "en": "Outer surfaces of the upper eight or nine ribs, by finger-like slips (the first from the first and second ribs).",
+          "zh": "上 8 或 9 根肋骨的外面，以指状肌齿起始（第一齿起于第 1、2 肋）。"
+        },
+        "bones": [
+          "thorax"
+        ],
+        "s": [
+          "M1",
+          "M2"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "The rib-facing surface of the inner (vertebral) border of the scapula, from the top corner to the bottom corner; the lower slips gather at the bottom corner.",
+          "zh": "肩胛骨内侧缘（脊柱缘）的前面（贴肋骨的一面），从上角一直到下角；下部肌齿汇聚在下角。"
+        },
+        "bones": [
+          "scapula"
+        ],
+        "s": [
+          "M1",
+          "M2"
+        ]
+      },
+      "fibres": {
+        "arrangement": "convergent",
+        "direction": {
+          "en": "Back around the side of the chest, under the shoulder blade to its inner border.",
+          "zh": "绕过胸廓侧面向后，从肩胛骨下面到它的内侧缘。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "scapula",
+          "movement": "protraction",
+          "role": "prime",
+          "s": [
+            "M1",
+            "M2",
+            "M29"
+          ]
+        },
+        {
+          "joint": "scapula",
+          "movement": "upward-rotation",
+          "role": "prime",
+          "s": [
+            "M1",
+            "M29"
+          ]
+        },
+        {
+          "joint": "scapula",
+          "movement": "stabilisation",
+          "role": "stabilise",
+          "s": [
+            "M6",
+            "M29"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "Put your fingertips on your side ribs just below the armpit and push a wall away with a straight arm, letting the shoulder reach forward: the saw-toothed slips tighten under your fingers.",
+        "zh": "指尖放在腋下的侧胸肋骨上，伸直手臂推墙，让肩膀往前送：手指下面像锯齿一样的肌齿会绷紧。"
+      },
+      "mistakes": [
+        {
+          "en": "Pinning the shoulder blades together through every push-up, so they never glide forward.",
+          "zh": "整个俯卧撑都把两块肩胛骨夹紧，它们始终没法向前滑。"
+        },
+        {
+          "en": "Rounding the upper back or shrugging to fake the \"plus\" at the top.",
+          "zh": "在顶端靠拱背或耸肩假装做出“加”的那一下。"
+        }
+      ],
+      "exercises": [
+        "push-up-plus",
+        "push-up",
+        "incline-dumbbell-press"
+      ],
+      "summary": {
+        "en": "Slides the shoulder blade forward and holds it to the ribs.",
+        "zh": "把肩胛骨向前推，并把它贴在肋骨上。"
+      },
+      "detail": {
+        "en": "A sheet of eight or nine slips along the side of the chest that runs under the shoulder blade to its inner border. It carries the shoulder blade forward around the ribs, as in pushing or punching, and its strong lower fibres turn the blade upward so the arm can rise overhead [M1].\n\nResearch shows: the \"plus\" phase at the top of a push-up, where the shoulder blades glide forward, gives high serratus EMG compared with the shoulder trapezius [M10] [M11]. If serratus is weak, the inner border of the blade can lift off the ribs (\"winging\") [M6] [M29].",
+        "zh": "沿胸廓侧面排列的 8 到 9 个肌齿，从肩胛骨下面一直到它的内侧缘。它把肩胛骨沿着肋骨往前推，比如推东西、出拳；它强壮的下部纤维还让肩胛骨向上回旋，手臂才能举过头顶 [M1]。\n\n研究显示：俯卧撑顶端再把肩胛骨往前推的“加”那一下，前锯肌的肌电比斜方肌上部高得多 [M10] [M11]。前锯肌无力时，肩胛骨内侧缘会离开肋骨翘起来，叫“翼状肩胛” [M6] [M29]。"
+      }
+    },
+    {
+      "id": "subclavius",
+      "name": {
+        "en": "Subclavius",
+        "zh": "锁骨下肌"
+      },
+      "short": {
+        "en": "Subclavius",
+        "zh": "锁骨下肌"
+      },
+      "latin": "Musculus subclavius",
+      "fma": "FMA13410",
+      "zAnatomy": "Subclavius muscle",
+      "regions": [
+        "chest"
+      ],
+      "layer": "deep",
+      "origin": {
+        "text": {
+          "en": "First rib and its cartilage, where they meet, by a short thick tendon.",
+          "zh": "第 1 肋与第 1 肋软骨交界处，以一条短而粗的腱起始。"
+        },
+        "bones": [
+          "thorax"
+        ],
+        "s": [
+          "M1",
+          "M2"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Groove on the underside of the middle of the clavicle.",
+          "zh": "锁骨中段下面的一条浅沟。"
+        },
+        "bones": [
+          "clavicle"
+        ],
+        "s": [
+          "M1",
+          "M6"
+        ]
+      },
+      "fibres": {
+        "arrangement": "fusiform",
+        "direction": {
+          "en": "Out and up from the first rib to the collarbone.",
+          "zh": "从第 1 肋向外上斜行到锁骨。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "scapula",
+          "movement": "depression",
+          "role": "assist",
+          "s": [
+            "M1",
+            "M2",
+            "M6"
+          ]
+        },
+        {
+          "joint": "scapula",
+          "movement": "stabilisation",
+          "role": "stabilise",
+          "s": [
+            "M2",
+            "M6"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "It is too deep to feel. Trace your collarbone with a fingertip: the muscle lies right under its middle, between it and the first rib.",
+        "zh": "它太深，摸不到。用指尖沿着锁骨摸：这块肌肉就在锁骨中段正下方，夹在锁骨和第 1 肋之间。"
+      },
+      "mistakes": [
+        {
+          "en": "Digging hard under the collarbone to find it: nerves and vessels run there.",
+          "zh": "在锁骨下面用力按着找它：那里走着神经和血管。"
+        },
+        {
+          "en": "Expecting an exercise to target it: it works as a steadying muscle in every press.",
+          "zh": "指望有动作能专门练它：它在每一种推的动作里都只是负责稳定。"
+        }
+      ],
+      "exercises": [
+        "barbell-bench-press",
+        "push-up",
+        "chest-dip"
+      ],
+      "summary": {
+        "en": "Steadies the collarbone and draws it down.",
+        "zh": "稳住锁骨，并把它往下拉。"
+      },
+      "detail": {
+        "en": "A small muscle tucked between the collarbone and the first rib. It pulls the collarbone down and forward and steadies the joint between collarbone and breastbone when the arm is loaded [M1] [M2] [M6].\n\nNo exercise isolates it; the exercises listed are ones where it works as a stabiliser.",
+        "zh": "一块夹在锁骨和第 1 肋之间的小肌肉。它把锁骨往前下方拉，手臂受力时稳住胸锁关节 [M1] [M2] [M6]。\n\n没有动作能单独练它；这里列出的动作，是它在其中担任稳定肌的动作。"
+      }
+    },
+    {
+      "id": "external-intercostals",
+      "name": {
+        "en": "External intercostals",
+        "zh": "肋间外肌"
+      },
+      "short": {
+        "en": "Ext. intercostals",
+        "zh": "肋间外肌"
+      },
+      "latin": "Musculi intercostales externi",
+      "fma": "FMA9756",
+      "zAnatomy": "External intercostal muscles",
+      "regions": [
+        "chest"
+      ],
+      "layer": "deep",
+      "origin": {
+        "text": {
+          "en": "Lower border of each rib, from the tubercle behind to near the cartilage in front.",
+          "zh": "每根肋骨的下缘，从后面的肋结节到前面靠近肋软骨处。"
+        },
+        "bones": [
+          "thorax"
+        ],
+        "s": [
+          "M1"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Upper border of the rib below. Between the cartilages in front, the muscle is replaced by a thin membrane.",
+          "zh": "下一根肋骨的上缘。在前面的肋软骨之间，肌肉换成一层薄膜。"
+        },
+        "bones": [
+          "thorax"
+        ],
+        "s": [
+          "M1"
+        ]
+      },
+      "fibres": {
+        "arrangement": "parallel",
+        "direction": {
+          "en": "Down and forward at the front of the chest, like hands slipped into front pockets.",
+          "zh": "在胸前向前下方斜行，像双手插进前面的衣袋。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "ribs",
+          "movement": "inspiration",
+          "role": "prime",
+          "s": [
+            "M2"
+          ]
+        },
+        {
+          "joint": "ribs",
+          "movement": "elevation",
+          "role": "prime",
+          "s": [
+            "M2"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "Lay a hand on the side of your ribs and breathe in slowly: the ribs lifting and spreading under your hand are partly their work.",
+        "zh": "一只手放在侧胸的肋骨上，慢慢吸气：手下肋骨上提、张开，有一部分是它们的作用。"
+      },
+      "mistakes": [
+        {
+          "en": "Holding your breath all the way through a set: breathe in as you lower, out as you push.",
+          "zh": "整组动作一直憋气：下放时吸气，推起时呼气。"
+        },
+        {
+          "en": "Treating rib pain as a normal muscle burn: sharp pain when breathing is a reason to stop.",
+          "zh": "把肋骨处的疼痛当成正常的肌肉酸胀：呼吸时出现刺痛，就该停下。"
+        }
+      ],
+      "exercises": [
+        "push-up",
+        "barbell-bench-press",
+        "push-up-plus"
+      ],
+      "summary": {
+        "en": "Lift the ribs as you breathe in.",
+        "zh": "吸气时把肋骨提起。"
+      },
+      "detail": {
+        "en": "Eleven thin sheets on each side, filling the outer layer of each gap between the ribs [M1]. Modern textbooks give them the job of lifting the ribs so the chest widens and air flows in [M2]; Gray in 1918 thought they mainly brace the spaces between the ribs [M1].\n\nThey are shown here as context. The exercises listed are moments to notice breathing; none of them trains these muscles on purpose.",
+        "zh": "每侧 11 层薄薄的肌片，填在每两根肋骨之间的外层 [M1]。现代教科书认为，它们把肋骨提起，胸腔变宽，空气就流进来 [M2]；1918 年的格氏解剖学则认为，它们主要是撑住肋骨之间的空隙 [M1]。\n\n这里把它们作为背景画出来。列出的动作只是留意呼吸的时机，没有哪个动作是专门练它们的。"
+      }
+    },
+    {
+      "id": "internal-intercostals",
+      "name": {
+        "en": "Internal intercostals",
+        "zh": "肋间内肌"
+      },
+      "short": {
+        "en": "Int. intercostals",
+        "zh": "肋间内肌"
+      },
+      "latin": "Musculi intercostales interni",
+      "fma": "FMA9757",
+      "zAnatomy": "Internal intercostal muscles",
+      "regions": [
+        "chest"
+      ],
+      "layer": "deep",
+      "origin": {
+        "text": {
+          "en": "Ridge on the inner surface of each rib and its cartilage, from the sternum back to the angle of the rib.",
+          "zh": "每根肋骨及其肋软骨内面的骨嵴，从胸骨向后到肋角。"
+        },
+        "bones": [
+          "thorax"
+        ],
+        "s": [
+          "M1"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Upper border of the rib below. Behind the angle of the rib, the muscle continues as a thin membrane.",
+          "zh": "下一根肋骨的上缘。在肋角后面，肌肉延续为一层薄膜。"
+        },
+        "bones": [
+          "thorax"
+        ],
+        "s": [
+          "M1"
+        ]
+      },
+      "fibres": {
+        "arrangement": "parallel",
+        "direction": {
+          "en": "Down and back, crossing the external layer at right angles.",
+          "zh": "向后下方斜行，与外层纤维大致垂直交叉。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "ribs",
+          "movement": "expiration",
+          "role": "prime",
+          "s": [
+            "M2"
+          ]
+        },
+        {
+          "joint": "ribs",
+          "movement": "depression",
+          "role": "prime",
+          "s": [
+            "M2"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "With a hand on your lower ribs, blow out hard as if cooling soup: the ribs pulled down and in are partly their work.",
+        "zh": "一只手放在下胸的肋骨上，像吹凉热汤一样用力呼气：肋骨被往下、往里拉，有一部分是它们的作用。"
+      },
+      "mistakes": [
+        {
+          "en": "Forcing a hard breath out on every repetition: steady breathing is enough.",
+          "zh": "每一次都使劲呼气：平稳呼吸就够了。"
+        },
+        {
+          "en": "Ignoring sharp pain between the ribs: stop and get it checked.",
+          "zh": "忽视肋骨之间的刺痛：应停下来并去检查。"
+        }
+      ],
+      "exercises": [
+        "push-up",
+        "barbell-bench-press",
+        "push-up-plus"
+      ],
+      "summary": {
+        "en": "Pull the ribs down in a forced breath out.",
+        "zh": "用力呼气时把肋骨往下拉。"
+      },
+      "detail": {
+        "en": "The layer just inside the external intercostals, with fibres running the other way [M1]. Quiet breathing out is mostly elastic recoil of the lungs and chest; textbooks give these muscles a pull when you breathe out hard, as in coughing or blowing [M2], while Gray in 1918 saw them mainly as braces [M1].\n\nThey are shown here as context. The exercises listed are moments to notice breathing; none of them trains these muscles on purpose.",
+        "zh": "紧贴在肋间外肌里面的一层，纤维方向和外层相反 [M1]。平静呼气主要靠肺和胸廓的弹性回缩；教科书认为用力呼气时，比如咳嗽、吹气，这层肌肉才出力往下拉 [M2]；1918 年的格氏解剖学则认为它们主要起支撑作用 [M1]。\n\n这里把它们作为背景画出来。列出的动作只是留意呼吸的时机，没有哪个动作是专门练它们的。"
+      }
+    }
+  ]
+}

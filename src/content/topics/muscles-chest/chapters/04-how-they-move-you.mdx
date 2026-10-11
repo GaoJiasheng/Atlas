@@ -1,0 +1,107 @@
+---
+id: how-they-move-you
+order: 4
+title: { en: "How they move you", zh: "它们怎样让你动起来" }
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  pose: hug
+  layers: [superficial, intermediate, deep, skeleton, neighbours, body]
+  ghost: [body]
+  labels: [pectoralis-major-clavicular, pectoralis-major-sternocostal, deltoid-anterior]
+  camera: { position: [1.28, 0.56, 0.64], target: [0.06, -0.06, 0.04], fov: 30 }
+  summary:
+    en: "A muscle can only pull. Which way the arm moves depends on where the muscle's fibres run and where the arm starts."
+    zh: "肌肉只能拉。手臂往哪里动，取决于纤维朝哪个方向走，以及手臂从哪里开始动。"
+  beats:
+    - pose: hug
+      labels: [pectoralis-major-clavicular, pectoralis-major-sternocostal, pectoralis-major-abdominal]
+      caption:
+        en: "Horizontal adduction: all three parts of pectoralis major shorten and swing the arm forward and across, as in a hug. This is the main job of the whole muscle."
+        zh: "水平内收：胸大肌三部分一起缩短，把手臂向前、向胸口方向拉，就像拥抱。这是整块胸大肌最主要的工作。"
+    - pose: arm-forward
+      labels: [pectoralis-major-clavicular, deltoid-anterior]
+      caption:
+        en: "Raising the arm forward: the clavicular part shortens together with the front of the deltoid. The lower fibres hardly help here."
+        zh: "向前抬臂：锁骨部和三角肌前部一起缩短。下部的纤维在这里几乎帮不上忙。"
+    - pose: arm-high
+      labels: [pectoralis-major-sternocostal, latissimus-dorsi]
+      caption:
+        en: "Now the arm starts high. The sternocostal fibres are stretched, ready to pull."
+        zh: "现在手臂从高处开始。胸肋部的纤维被拉长，准备发力。"
+    - pose: pull-down
+      labels: [pectoralis-major-sternocostal, pectoralis-major-abdominal]
+      caption:
+        en: "Pulling the raised arm down towards the side: now the sternocostal and abdominal parts do the work, helped by the broad back muscle."
+        zh: "把举起的手臂往身体两侧拉下来：这时出力的是胸肋部和腹部，背阔肌在旁边帮忙。"
+    - pose: turn-in
+      labels: [pectoralis-major-sternocostal, humerus]
+      caption:
+        en: "Turning the arm inward, with the elbow bent: pectoralis major wraps the front of the humerus, so pulling it turns the bone in and the hand swings across the belly."
+        zh: "屈肘时把手臂向内旋：胸大肌绕在肱骨前面，一拉，骨头就向内转，手掠过腹前。"
+    - pose: reach
+      ghost: [superficial, body]
+      sites: [serratus-anterior]
+      labels: [serratus-anterior, pectoralis-minor, scapula]
+      caption:
+        en: "Reaching forward: serratus anterior and pectoralis minor pull the shoulder blade forward around the ribs. The model shows the pull; the blade itself is drawn fixed."
+        zh: "向前够：前锯肌和胸小肌把肩胛骨沿着肋骨往前拉。模型画出了这股拉力，但肩胛骨本身画成固定不动。"
+    - pose: inhale
+      ghost: [superficial, intermediate, neighbours, body]
+      labels: [intercostals-external, thorax]
+      caption:
+        en: "Breathing in: the external intercostals shorten between the ribs and lift the rib cage, so the chest widens and air flows in."
+        zh: "吸气：肋间外肌在肋骨之间缩短，把胸廓提起，胸腔变宽，空气就流进来。"
+---
+
+<Lang en>
+
+A muscle can only pull its insertion towards its origin. So the direction of its fibres, and the position the arm starts from, decide what a muscle does. Pectoralis major is the clearest example, because its fan of fibres pulls in many directions at once.
+
+All three parts together bring the arm forward and across the chest, the movement of a hug, a fly or the top of a press. Anatomists call this <Term id="horizontal-adduction">horizontal adduction</Term> [M5]. The same pull also draws the arm into the side and turns it inward, because the tendon wraps the front of the humerus [M1].
+
+The parts then divide the work. The **clavicular part**, running down from the collarbone, helps raise the arm forward up to about shoulder height, together with the front of the deltoid [M5] [M6]. The **sternocostal** and **abdominal** fibres, running up from below, do the opposite: when the arm starts high in front, they pull it back down towards the side [M1] [M5]. That is why the lower fibres work hard in a dip and the upper fibres in an incline press.
+
+Below pectoralis major, **serratus anterior** and **pectoralis minor** move the shoulder blade forward around the ribs when you reach or push [M29] [M30], and the **external intercostals** lift the ribs when you breathe in [M2]. <FlyTo preset="left-side">See the side of the chest</FlyTo>
+
+<More title={{ en: "What the model can and cannot show", zh: "模型能演示什么、不能演示什么" }}>
+
+The model turns the shoulder and elbow joints and shortens each muscle along its fibres. Its shoulder blade cannot glide over the ribs, so in the reaching beat the muscles that move it are shown working while the blade stays where it is. Each muscle sheet has a DEMO button for every action the shoulder and elbow can show.
+
+</More>
+
+<More title={{ en: "Same muscle, different jobs", zh: "同一块肌肉，不同的工作" }}>
+
+Whether a fibre helps a movement depends on which side of the joint it passes. Raise your arm overhead and the lower fibres of pectoralis major sit above the line they pull along, so they pull the arm down. Let the arm hang and the same fibres mostly squeeze it against the side. Anatomy references describe exactly this split: the clavicular part raises the arm, the sternocostal part pulls a raised arm back down [M5].
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+肌肉只能把止点拉向起点。所以纤维朝哪个方向走、手臂从什么位置开始，决定了一块肌肉起什么作用。胸大肌是最清楚的例子，因为它扇形的纤维同时朝很多方向拉。
+
+三部分一起收缩，把手臂向前、向胸口方向拉过来，这就是拥抱、飞鸟、推到顶时的动作。解剖学上叫<Term id="horizontal-adduction">水平内收</Term> [M5]。同样的拉力还会把手臂拉向身体侧面，并让它向内旋，因为止腱是绕在肱骨前面的 [M1]。
+
+接着，各部分分工。**锁骨部**从锁骨向下斜行，和三角肌前部一起，帮助手臂向前抬到大约肩膀高度 [M5] [M6]。**胸肋部**和**腹部**的纤维从下方向上斜行，作用正好相反：手臂在前方举高时，它们把手臂拉回身体两侧 [M1] [M5]。所以双杠臂屈伸时下部纤维出力多，上斜卧推时上部纤维出力多。
+
+胸大肌下面，**前锯肌**和**胸小肌**在你伸手、推东西时，把肩胛骨沿着肋骨往前拉 [M29] [M30]；**肋间外肌**在吸气时把肋骨提起 [M2]。<FlyTo preset="left-side">看胸部侧面</FlyTo>
+
+<More title={{ en: "What the model can and cannot show", zh: "模型能演示什么、不能演示什么" }}>
+
+模型能转动肩关节和肘关节，能让每块肌肉沿纤维缩短。但它的肩胛骨不能在肋骨上滑动，所以“向前够”那一拍里，带动肩胛骨的肌肉在用力，肩胛骨却留在原处。每张肌肉卡上，肩和肘能演示的每个作用都有一个“演示”按钮。
+
+</More>
+
+<More title={{ en: "Same muscle, different jobs", zh: "同一块肌肉，不同的工作" }}>
+
+一根纤维能不能帮上某个动作，要看它从关节的哪一侧经过。把手臂举过头顶，胸大肌的下部纤维就到了它拉力线的上方，于是把手臂往下拉；手臂自然下垂时，同样的纤维主要是把手臂夹向身体侧面。解剖学资料正是这样分工描述的：锁骨部把手臂抬起，胸肋部把抬起的手臂拉回 [M5]。
+
+</More>
+
+</Lang>

@@ -1,0 +1,108 @@
+---
+id: injuries-and-posture
+order: 6
+title: { en: "Injuries and posture", zh: "伤病与体态" }
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  pose: null
+  layers: [superficial, intermediate, deep, skeleton, neighbours, body]
+  ghost: [neighbours, body]
+  sites: [pectoralis-major-abdominal]
+  labels: [pectoralis-major-abdominal, pectoralis-major-sternocostal, humerus]
+  camera: { position: [0.62, 0.06, 0.64], target: [0.12, -0.04, -0.04], fov: 28 }
+  summary:
+    en: "What is known about the commonest chest injury and about rounded shoulders, in general terms. Not medical advice."
+    zh: "关于最常见的胸部伤和“圆肩”，目前知道些什么，只讲一般知识。不是医疗建议。"
+  beats:
+    - camera: { position: [0.62, 0.06, 0.64], target: [0.12, -0.04, -0.04], fov: 28 }
+      labels: [pectoralis-major-abdominal, pectoralis-major-sternocostal, humerus]
+      caption:
+        en: "The tendon of pectoralis major on the humerus. Tears here are rare: a review found 365 reported cases worldwide, about half of them during weight training."
+        zh: "胸大肌在肱骨上的止腱。这里撕裂很少见：一篇综述找到全世界报告的 365 例，约一半发生在力量训练中。"
+    - exercise: { id: barbell-bench-press, phase: end }
+      camera: { position: [1.4, 0.58, 0.45], target: [0.0, -0.66, -0.42], fov: 30 }
+      ghost: [body, latissimus-dorsi, external-oblique, rectus-abdominis, biceps-brachii-short, coracobrachialis]
+      highlight: { signal: [pectoralis-major-abdominal, pectoralis-major-sternocostal] }
+      labels: [pectoralis-major-abdominal, pectoralis-major-sternocostal]
+      caption:
+        en: "The bottom of a bench press. With the upper arm far back, the short lowest fibres are stretched the most, which may be why tears tend to happen in this part of the lift."
+        zh: "卧推的最低点。上臂被拉到很靠后，最下面的短纤维被拉得最长，这也许就是撕裂常发生在这一段的原因。"
+    - exercise: { id: chest-dip, phase: end }
+      camera: { position: [0.95, 0.05, 0.75], target: [0.02, -0.15, 0.05], fov: 30 }
+      ghost: [body, latissimus-dorsi, external-oblique, rectus-abdominis, biceps-brachii-short, coracobrachialis]
+      labels: [pectoralis-major-sternocostal, deltoid-anterior]
+      caption:
+        en: "The bottom of a deep dip: the upper arm is drawn far behind the body and the front of the shoulder is stretched under the whole body weight. A shallower dip asks much less of it."
+        zh: "很深的双杠臂屈伸最低点：上臂被拉到身体后方很远，肩前部在整个体重下被拉伸。浅一点的幅度，对它的要求就小得多。"
+    - camera: armpit
+      ghost: [superficial, neighbours, body]
+      sites: [pectoralis-minor]
+      labels: [pectoralis-minor, scapula]
+      caption:
+        en: "Pectoralis minor and rounded shoulders. A shorter pectoralis minor has been linked to a forward-tipped shoulder blade, but no test of its length yet has enough evidence behind it."
+        zh: "胸小肌与“圆肩”。胸小肌较短与肩胛骨前倾有关联，但现有的胸小肌长度测试，证据都还不够充分。"
+    - camera: { position: [0.57, 0.19, 1.39], target: [0.0, -0.08, -0.04], fov: 30 }
+      ghost: [body]
+      sites: []
+      labels: ["group:superficial", "group:intermediate"]
+      caption:
+        en: "Strength training itself lowers the risk of sports injuries. This chapter is general information, not medical advice: for pain or an injury, see a doctor or physiotherapist."
+        zh: "力量训练本身能降低运动损伤的风险。本章是一般性知识，不是医疗建议：有疼痛或受伤，请咨询医生或物理治疗师。"
+---
+
+<Lang en>
+
+The best-known chest injury in the gym is a tear of pectoralis major, usually at or near its tendon on the humerus. It is rare. A review in 2012 found <Num s="M14">365</Num> cases reported worldwide since 1822, <Num s="M14">75 %</Num> of them in the previous 20 years and <Num s="M14">48 %</Num> during weight training [M14]. Most happened during a heavy lift, often as the bar was lowered.
+
+The twisted tendon from chapter 2 helps explain why. In a cadaver study, the short lowest fibres stretched the most in the final <Num s="M15">30°</Num> of the arm moving back, which is the bottom of a bench press [M15]. That is the point to lower slowly, use safety bars or a spotter, and stop if you feel sharp pain or a sudden tearing sensation. <FlyTo preset="close-pec">See the tendon</FlyTo>
+
+Deep dips and very deep flies stretch the front of the shoulder under load. A comfortable depth that you can reverse smoothly is enough to train the chest.
+
+"Rounded shoulders" are often blamed on a tight pectoralis minor. In <Num s="M12">50</Num> pain-free people, those with a shorter pectoralis minor did keep the shoulder blade tipped further forward as the arm rose [M12]. But a review in 2026 found that none of the tests used to measure its length has enough evidence behind it [M13]. A slouched posture on its own says little about this muscle, and it is not a diagnosis.
+
+Strength training helps more than it harms: across <Num s="M27">25</Num> trials, strength training cut sports injuries to about a third [M27]. This chapter is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.
+
+<More title={{ en: "Lowering is where control matters", zh: "下放时最需要控制" }}>
+
+The lowering half of a lift is the <Term id="eccentric-phase">eccentric phase</Term>: the muscle is working while it lengthens. Lowering the bar slowly, pausing lightly on the chest instead of bouncing, and never training heavy without a way to escape a failed repetition keep the stretched fibres under control.
+
+</More>
+
+<More title={{ en: "What this chapter does not do", zh: "这一章不做什么" }}>
+
+It does not diagnose. Pain at the front of the shoulder, a lump or bruise in the armpit after a lift, a shoulder blade that sticks out, or weakness are reasons to see a professional, not to stretch or train through.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+健身房里最为人知的胸部伤，是胸大肌撕裂，通常发生在它肱骨止腱处或附近。这种伤很少见。2012 年的一篇综述找到自 1822 年以来全世界报告的 <Num s="M14">365</Num> 例，其中 <Num s="M14">75 %</Num> 在此前 20 年里，<Num s="M14">48 %</Num> 发生在力量训练中 [M14]。大多发生在大重量练习中，常常是在杠铃下放的时候。
+
+第 2 章讲过的扭转止腱，有助于解释原因。一项尸体研究发现，手臂向后移动的最后 <Num s="M15">30°</Num> 里，最下面的短纤维被拉长得最多，这正是卧推的最低点 [M15]。所以在这里要慢慢下放、用保护杠或请人保护；一旦感到刺痛或突然的撕裂感就停下。<FlyTo preset="close-pec">看止腱</FlyTo>
+
+很深的双杠臂屈伸和很深的飞鸟，会在负重下拉伸肩前部。练胸只需要一个舒服、能平稳推回的幅度。
+
+“圆肩”常被归咎于胸小肌太紧。在 <Num s="M12">50</Num> 名没有疼痛的人中，胸小肌较短的人抬臂时，肩胛骨确实更向前倾 [M12]。但 2026 年的一篇综述发现，现有测胸小肌长度的方法，证据都还不够充分 [M13]。只看含胸的姿势，说明不了这块肌肉怎么样，更不能当作诊断。
+
+力量训练利大于弊：综合 <Num s="M27">25</Num> 项试验，力量训练让运动损伤减少到约三分之一 [M27]。本章是一般性知识，不是医疗建议。有疼痛或受伤，请咨询医生或物理治疗师。
+
+<More title={{ en: "Lowering is where control matters", zh: "下放时最需要控制" }}>
+
+动作的下放那一半叫<Term id="eccentric-phase">离心阶段</Term>：肌肉一边用力一边被拉长。慢慢下放杠铃，在胸口轻轻停一下而不是砸胸反弹，没有保护措施时不做大重量，这些都能让被拉长的纤维保持在控制之中。
+
+</More>
+
+<More title={{ en: "What this chapter does not do", zh: "这一章不做什么" }}>
+
+它不做诊断。肩前部疼痛、练完后腋窝出现肿块或淤青、肩胛骨翘起、手臂无力，都应该去看专业人员，而不是继续拉伸或硬练。
+
+</More>
+
+</Lang>

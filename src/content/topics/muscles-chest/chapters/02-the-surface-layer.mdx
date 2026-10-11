@@ -1,0 +1,98 @@
+---
+id: the-surface-layer
+order: 2
+title: { en: "The surface layer: pectoralis major", zh: "浅层：胸大肌" }
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  pose: null
+  layers: [superficial, skeleton, neighbours, body]
+  ghost: [neighbours, body]
+  sites: [pectoralis-major-clavicular, pectoralis-major-sternocostal, pectoralis-major-abdominal]
+  labels: [pectoralis-major-clavicular, pectoralis-major-sternocostal, pectoralis-major-abdominal]
+  camera: { position: [0.57, 0.19, 1.39], target: [0.0, -0.08, -0.04], fov: 30 }
+  summary:
+    en: "One fan-shaped muscle in three parts, all pulling on one twisted tendon on the upper arm."
+    zh: "一块扇形肌肉，分三部分，全部拉在上臂的同一条扭转的止腱上。"
+  beats:
+    - sites: []
+      caption:
+        en: "Pectoralis major, alone on the bones: the clavicular part from the collarbone, the sternocostal part from the breastbone and rib cartilages, the abdominal part from the top of the belly wall."
+        zh: "只留下骨骼上的胸大肌：锁骨部起于锁骨，胸肋部起于胸骨和肋软骨，腹部起于腹壁上端。"
+    - run: true
+      sites: []
+      caption:
+        en: "Contracting. The stripes run along the fibres: down and out from the collarbone, straight across from the breastbone, up and out from below. All of them meet at the armpit."
+        zh: "正在收缩。条纹沿着纤维移动：从锁骨向外下，从胸骨横向外，从下方向外上。它们全都汇聚到腋窝。"
+    - camera: close-pec
+      labels: [pectoralis-major-clavicular, pectoralis-major-abdominal, humerus]
+      caption:
+        en: "The insertion, close up. Hollow dots mark where each part starts, solid dots where it ends. The lowest fibres turn behind the others and end highest on the bone, so the tendon is twisted."
+        zh: "近看止点。空心圆是每部分的起点，实心圆是止点。最下面的纤维转到其他纤维后面，在骨上止得最高，所以止腱是扭转的。"
+    - camera: on-my-body
+      view: xray
+      ghost: []
+      sites: []
+      highlight: { signal: [superficial] }
+      labels: [pectoralis-major-sternocostal]
+      caption:
+        en: "Find it on yourself: press your palms together in front of your chest and lay your other hand below the collarbone. The broad muscle that firms up is pectoralis major."
+        zh: "在自己身上找到它：双手在胸前合掌用力，另一只手放在锁骨下方。变硬的那一大片就是胸大肌。"
+    - pose: hug
+      sites: []
+      caption:
+        en: "Working together, the three parts swing the arm forward and across the chest, the movement of a hug or a fly."
+        zh: "三部分一起收缩，把手臂向前、向胸口方向拉过来，就是拥抱或飞鸟的动作。"
+---
+
+<Lang en>
+
+With the other muscles faded, pectoralis major stands alone on the bones. It is one muscle in three parts. The **clavicular part** starts on the front of the inner half of the collarbone. The **sternocostal part**, the largest, starts on the front of the breastbone and the <Term id="costal-cartilage">costal cartilages</Term> beside it. The small **abdominal part** starts on the <Term id="aponeurosis">aponeurosis</Term> of the external oblique, the flat tendon sheet at the top of the belly wall [M1] [M2].
+
+All three converge on one flat tendon about <Num s="M1">5 cm</Num> wide, which ends on a ridge just below the head of the humerus [M1]. A muscle shaped like this, with fibres fanning in from a wide start to a narrow end, is a <Term id="fan-shaped-muscle">fan-shaped muscle</Term>: each fibre pulls in a slightly different direction.
+
+The tendon is two layers. The collarbone and upper breastbone fibres make the front layer and end lowest on the bone. The lower fibres turn behind them and end highest, so the tendon looks twisted [M1]. <FlyTo preset="close-pec">See the tendon close up</FlyTo>
+
+This explains a common gym idea. There is no separate "inner chest": every fibre runs from its start on the collarbone, breastbone or rib cartilages all the way to the arm [M1]. Squeezing your hands together works the whole fan. What changes from one exercise to another is which part is pulling hardest, which depends on where the arm starts [M5].
+
+<More title={{ en: "Gym names and anatomical names", zh: "健身俗名与解剖学名" }}>
+
+Upper chest roughly means the clavicular part, middle chest the sternocostal part and lower chest its lowest fibres with the abdominal part. These are useful as places on the body, but they share one tendon, so none of them can be trained completely on its own.
+
+</More>
+
+<More title={{ en: "Why the twist matters", zh: "止腱为什么扭转" }}>
+
+Because the lowest fibres wrap behind the others, they are the ones stretched most when the arm is pulled far back, as at the bottom of a deep bench press. A cadaver study found these short lower fibres lengthen the most in the final part of that movement [M15]. Chapter 6 comes back to this.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+把其他肌肉调淡后，骨骼上只剩下胸大肌。它是一块肌肉，分三部分。**锁骨部**起于锁骨内侧半的前面。**胸肋部**面积最大，起于胸骨前面和旁边的<Term id="costal-cartilage">肋软骨</Term>。小小的**腹部**起于腹外斜肌的<Term id="aponeurosis">腱膜</Term>，也就是腹壁上端那层扁平的腱性薄膜 [M1] [M2]。
+
+三部分汇聚成一条约 <Num s="M1">5 厘米</Num>宽的扁平止腱，止在肱骨头正下方的一条骨嵴上 [M1]。像这样从宽阔的起点向狭窄的止点收拢的肌肉，叫<Term id="fan-shaped-muscle">扇形肌</Term>：每一根纤维拉的方向都略有不同。
+
+这条止腱分前后两层。锁骨和胸骨上部的纤维组成前层，在骨上止得最低；下部的纤维转到它们后面，止得最高，所以止腱看起来是扭转的 [M1]。<FlyTo preset="close-pec">近看止腱</FlyTo>
+
+这也回答了健身房里常听到的一种说法：并没有一块单独的“内胸”。每一根纤维都从锁骨、胸骨或肋软骨上的起点，一直长到上臂 [M1]。双手往中间夹，练到的是整把扇子。不同动作之间真正变化的，是哪一部分拉得最用力，这取决于手臂从什么位置开始动 [M5]。
+
+<More title={{ en: "Gym names and anatomical names", zh: "健身俗名与解剖学名" }}>
+
+“上胸”大致指锁骨部，“中胸”指胸肋部，“下胸”指胸肋部最下面的纤维加上腹部。作为身体上的位置，这些叫法很好用；但它们共用一条止腱，所以哪一部分都不可能被完全单独地练到。
+
+</More>
+
+<More title={{ en: "Why the twist matters", zh: "止腱为什么扭转" }}>
+
+最下面的纤维绕到了其他纤维后面，所以当手臂被拉到很靠后的位置，比如很深的卧推最低点时，被拉长最多的就是它们。一项尸体研究发现，在这个动作的最后一段，这些下部短纤维拉长得最多 [M15]。第 6 章会再讲到这一点。
+
+</More>
+
+</Lang>

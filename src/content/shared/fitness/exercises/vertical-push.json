@@ -1,0 +1,183 @@
+{
+  "exercises": [
+    {
+      "id": "chest-dip",
+      "name": {
+        "en": "Chest dip",
+        "zh": "双杠臂屈伸（前倾）"
+      },
+      "short": {
+        "en": "Chest dip",
+        "zh": "前倾臂屈伸"
+      },
+      "equipment": "bodyweight",
+      "pattern": "vertical-push",
+      "level": "intermediate",
+      "primary": [
+        "pectoralis-major-sternocostal",
+        "pectoralis-major-abdominal"
+      ],
+      "secondary": [
+        "triceps-brachii",
+        "deltoid-anterior",
+        "pectoralis-minor"
+      ],
+      "stabilisers": [
+        "serratus-anterior",
+        "subclavius"
+      ],
+      "setup": {
+        "en": "Use steady parallel bars with a step to get on and off. If you cannot yet lower yourself slowly, start with an assisted dip machine or with your feet supported. This asks a lot of the front of the shoulder; it is not a first exercise.",
+        "zh": "用稳固的双杠，并准备一个上下用的台阶。还不能慢慢放低身体时，先用助力臂屈伸器械，或让脚有支撑。这个动作对肩前部要求很高，不适合作为入门的第一个动作。"
+      },
+      "steps": [
+        {
+          "en": "From the step, grip both bars with palms facing in and press up until your arms are straight and your weight is on your hands.",
+          "zh": "站在台阶上双手握杠，掌心相对，撑起直到手臂伸直，体重落在手上。"
+        },
+        {
+          "en": "Lean your trunk slightly forward as one piece and bend your knees so your feet are behind you.",
+          "zh": "整个躯干一起稍向前倾，屈膝让双脚在身后。"
+        },
+        {
+          "en": "Breathe in and bend your elbows to lower yourself slowly, elbows going back and a little out.",
+          "zh": "吸气，屈肘慢慢放低身体，两肘向后、略向外。"
+        },
+        {
+          "en": "Stop at a comfortable depth, before the front of the shoulder feels strained; the upper arms need not go past level.",
+          "zh": "在舒服的深度停下，在肩前部感到被拉紧之前；上臂不必低于水平。"
+        },
+        {
+          "en": "Breathe out and press down through the bars to straighten your arms, keeping the same lean.",
+          "zh": "呼气，向下压杠把手臂撑直，保持同样的前倾。"
+        },
+        {
+          "en": "Put your feet back on the step before letting go of the bars.",
+          "zh": "先把脚放回台阶上，再松开双杠。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Press the bars down towards the floor.",
+          "zh": "把双杠往地面方向压。"
+        },
+        {
+          "en": "Keep the forward lean small and steady.",
+          "zh": "前倾的幅度小而稳定。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Dropping very deep. Why: the upper arm goes far behind the body and the front of the shoulder takes a large stretch under load.",
+          "zh": "沉得很深。为什么：上臂被带到身体后方很远，肩前部在负重下被大幅拉伸。"
+        },
+        {
+          "en": "Swinging the legs to get out of the bottom. Why: the load jerks onto the shoulder.",
+          "zh": "靠摆腿从最低点起来。为什么：负荷会猛地冲到肩上。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Use enough assistance to move slowly through a comfortable depth; reduce it in small steps.",
+            "zh": "借足够的助力，在舒服的深度里慢慢做；再一点点减少助力。"
+          },
+          "s": [
+            "M23"
+          ]
+        },
+        {
+          "text": {
+            "en": "Spreading chest work over more than one day a week tends to work better than one big session.",
+            "zh": "把胸部训练分散到一周里不止一天，通常比一次练完效果好。"
+          },
+          "s": [
+            "M21"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "Stop at pain at the front of the shoulder, sharp chest pain or a tearing feeling.",
+          "zh": "肩前部疼痛、胸部刺痛或有撕裂感时停下。"
+        },
+        {
+          "en": "Skip it, or use assistance, if you cannot hold the top position steadily.",
+          "zh": "在顶端还撑不稳时，先不做或用助力。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [
+        {
+          "text": {
+            "en": "Research shows: in 13 experienced men, upper-chest EMG was higher on the bars than with the hands on a bench behind the body, and highest on gymnastic rings.",
+            "zh": "研究显示：13 名有经验的男性，在双杠上做时上胸肌电高于手撑在身后凳子上做，吊环上最高。"
+          },
+          "s": [
+            "M28"
+          ]
+        }
+      ],
+      "sketch": "chest-dip",
+      "motion": {
+        "root": {
+          "rotation": [
+            18,
+            0,
+            0
+          ]
+        },
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "shoulder.l": {
+                "flexion": -5,
+                "abduction": 10
+              },
+              "elbow.l": {
+                "flexion": 8
+              }
+            },
+            "contract": {
+              "pectoralis-major-sternocostal": 0.24,
+              "pectoralis-major-abdominal": 0.24,
+              "triceps-brachii": 0.24
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "shoulder.l": {
+                "flexion": -45,
+                "abduction": 18
+              },
+              "elbow.l": {
+                "flexion": 90
+              }
+            },
+            "contract": {
+              "pectoralis-major-sternocostal": 0.04,
+              "pectoralis-major-abdominal": 0.04,
+              "triceps-brachii": 0.04
+            }
+          }
+        ],
+        "tempo": [
+          2,
+          0.3,
+          1.2,
+          0.5
+        ]
+      },
+      "sources": [
+        "M5",
+        "M15",
+        "M28"
+      ]
+    }
+  ]
+}

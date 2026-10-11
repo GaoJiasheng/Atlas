@@ -1,0 +1,14 @@
+id: muscles-chest
+title: { en: "Chest muscles", zh: "胸部肌肉" }
+subtitle: { en: "Layer by layer: where they attach, how they move the arm, how to train them", zh: "一层一层看：长在哪里、怎样带动手臂、怎样练" }
+subject: biology
+tags: [health, fitness, space]
+moe: []
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: draft
+shortTitle: { en: "Chest muscles", zh: "胸部肌肉" }
+note: { en: "Male reference anatomy · meshes Z-Anatomy / BodyParts3D, CC BY-SA 4.0", zh: "男性参考解剖 · 网格 Z-Anatomy / BodyParts3D，CC BY-SA 4.0" }

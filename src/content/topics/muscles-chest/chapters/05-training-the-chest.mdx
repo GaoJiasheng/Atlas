@@ -1,0 +1,110 @@
+---
+id: training-the-chest
+order: 5
+title: { en: "Training the chest", zh: "怎样练胸" }
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  pose: null
+  layers: [superficial, intermediate, deep, skeleton, neighbours, body]
+  ghost: [body, latissimus-dorsi, external-oblique, rectus-abdominis, biceps-brachii-short, coracobrachialis]
+  exercise: { id: barbell-bench-press, phase: loop }
+  labels: [pectoralis-major-sternocostal, deltoid-anterior, triceps-brachii]
+  camera: { position: [1.82, 0.95, 0.71], target: [0.0, -0.66, -0.42], fov: 30 }
+  summary:
+    en: "Eight exercises, what each one asks of the chest, and a few principles for training safely. General information, not a personal plan."
+    zh: "八个动作、每个动作让胸部做什么，以及安全训练的几条原则。这是一般知识，不是个人训练计划。"
+  beats:
+    - exercise: { id: barbell-bench-press, phase: loop }
+      labels: [pectoralis-major-sternocostal, deltoid-anterior, triceps-brachii]
+      caption:
+        en: "Barbell bench press. The bar comes down to the lower chest and goes back up over the shoulders. Pectoralis major is highlighted; the front deltoid and triceps help."
+        zh: "杠铃卧推。杠铃放到下胸，再推回肩膀上方。高亮的是胸大肌；三角肌前部和肱三头肌在帮忙。"
+    - exercise: { id: incline-dumbbell-press, phase: loop }
+      camera: { position: [0.8, 0.38, 0.2], target: [0.0, -0.62, -0.46], fov: 30 }
+      labels: [pectoralis-major-clavicular, deltoid-anterior]
+      caption:
+        en: "Incline dumbbell press on a low bench. The clavicular part is the prime mover here; on a steeper bench the front deltoid takes more of the work."
+        zh: "低角度上斜哑铃卧推。这里的主动肌是锁骨部；凳子越陡，三角肌前部承担得越多。"
+    - exercise: { id: push-up, phase: loop }
+      camera: { position: [1.45, -0.45, 1.05], target: [0.0, -0.88, 0.32], fov: 30 }
+      labels: [pectoralis-major-sternocostal, triceps-brachii, serratus-anterior]
+      caption:
+        en: "Push-up. The same pressing movement with body weight: the chest, front deltoid and triceps push, and serratus anterior keeps the shoulder blades on the ribs."
+        zh: "俯卧撑。用自身体重做同样的推：胸肌、三角肌前部和肱三头肌负责推，前锯肌把肩胛骨稳在肋骨上。"
+    - exercise: { id: dumbbell-fly, phase: loop }
+      labels: [pectoralis-major-sternocostal, pectoralis-major-clavicular]
+      caption:
+        en: "Dumbbell fly. The elbows stay slightly bent while the arms open and close in a wide arc. This is horizontal adduction with the whole fan of pectoralis major."
+        zh: "哑铃飞鸟。手肘保持微屈，手臂沿宽弧线张开、合拢。这是整把胸大肌扇子在做水平内收。"
+    - exercise: { id: push-up-plus, phase: loop }
+      camera: { position: [1.45, -0.45, 1.05], target: [0.0, -0.88, 0.32], fov: 30 }
+      labels: [serratus-anterior, pectoralis-minor]
+      caption:
+        en: "Push-up plus. At the top of a push-up, push the floor a little further away. Serratus anterior is the prime mover; it slides the shoulder blades forward around the ribs."
+        zh: "俯卧撑加。在俯卧撑顶端，再把地面推远一点。主动肌是前锯肌，它让肩胛骨沿着肋骨向前滑。"
+---
+
+<Lang en>
+
+Each exercise card in this chapter lists the muscles that drive the movement, the steps, cues, common mistakes and what research shows. Pick a card in the reading panel or press a chip on a muscle sheet: the model takes up the exercise, the prime movers turn orange and the helpers blue-grey. The first time, start with body weight or a light load and learn the movement from a qualified coach; children and teenagers should train with an adult supervising [M25].
+
+The eight exercises cover the three ways of loading the chest. **Presses** (bench press, incline dumbbell press, push-up, machine press) move the upper arm forward while the elbow straightens. **Flies** (dumbbell fly, cable fly) swing the arm in an arc with the elbow almost still, which is pure horizontal adduction. The **chest dip** pulls the arm down from behind the body. The **push-up plus** trains serratus anterior.
+
+Which is best? There is no single best one. Research measures muscle activity with surface <Term id="emg">EMG</Term>, and higher EMG is not proof that a muscle grows more [M9]. In one study push-ups made as hard as a heavy bench press raised strength just as much [M17]. Choose exercises you can do with good form and equipment you have.
+
+A few principles hold for all of them. Adults are advised to do muscle-strengthening activities on <Num s="M22">two or more days a week</Num>; Singapore's guidelines say the same [M26]. Light and heavy loads both build muscle when the sets are hard, though heavy loads build more maximal strength [M20]. Add load in small steps, only once the movement is easy [M23].
+
+<More title={{ en: "Bench angle and the upper chest", zh: "凳子角度与上胸" }}>
+
+Thirty trained adults pressed <Num s="M8">60 %</Num> of their <Term id="one-rep-max">one-repetition maximum</Term> at five bench angles. Upper-chest EMG was highest at <Num s="M8">30°</Num>, the middle and lower chest at <Num s="M8">0°</Num>, and the front deltoid at the steepest angle, <Num s="M8">60°</Num>. A smaller study of <Num s="M7">14</Num> men found the upper chest more active at <Num s="M7">30°</Num> and <Num s="M7">45°</Num> than flat in only part of the lift.
+
+</More>
+
+<More title={{ en: "A sample session", zh: "一节训练课示例" }}>
+
+One common way to arrange a chest session, not a prescription: an easy push-up warm-up; the bench press as the main lift with safety bars or a spotter; a low-incline dumbbell press; a light cable fly; and push-up plus to finish. Big multi-joint lifts come first, lighter single-joint work later, and a hard chest session is followed by at least a day off for the chest [M21] [M23] [M24].
+
+</More>
+
+<More title={{ en: "Why the card has no sets and repetitions", zh: "卡片上为什么没有组数和次数" }}>
+
+How much to do depends on the person, their goal and their training so far. These cards give principles only. A coach can turn them into a plan; for children and teenagers that plan should be designed and supervised by a qualified professional [M25].
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+本章每张动作卡都列出驱动动作的肌肉、步骤、要点、常见错误和研究发现。在阅读面板里选一张卡，或在肌肉卡上点动作芯片：模型就做出这个动作，主动肌变成橙色，协同肌变成蓝灰色。第一次做时，先用自重或轻重量，在合格教练指导下学动作；儿童和青少年要在成人监督下练习 [M25]。
+
+这八个动作涵盖了给胸部加负荷的三种方式。**推**（卧推、上斜哑铃卧推、俯卧撑、器械推胸）让上臂向前，同时伸直手肘。**夹**（哑铃飞鸟、绳索夹胸）让手臂沿弧线摆动，手肘几乎不动，是纯粹的水平内收。**双杠臂屈伸**把手臂从身体后方往下拉。**俯卧撑加**练的是前锯肌。
+
+哪个动作最好？没有唯一最好的。研究用表面<Term id="emg">肌电</Term>测量肌肉活动，而肌电高并不能证明肌肉长得更多 [M9]。一项研究里，难度加到和大重量卧推相当的俯卧撑，提高的力量与卧推一样多 [M17]。选你能做得标准、手边有器械的动作就好。
+
+有几条原则对所有动作都适用。建议成年人<Num s="M22">每周两天或以上</Num>做肌肉强化活动；新加坡的指南也这样建议 [M26]。只要每组都练得够吃力，轻重量和大重量都能增肌，不过大重量更能提高最大力量 [M20]。等动作变轻松了，再小步加重 [M23]。
+
+<More title={{ en: "Bench angle and the upper chest", zh: "凳子角度与上胸" }}>
+
+30 名有训练经验的成年人，用自己<Term id="one-rep-max">一次最大重量</Term>的 <Num s="M8">60 %</Num>，在五种凳子角度上做卧推。上胸的肌电在 <Num s="M8">30°</Num> 时最高，中胸和下胸在 <Num s="M8">0°</Num> 时最高，三角肌前部在最陡的 <Num s="M8">60°</Num> 时最高。另一项 <Num s="M7">14</Num> 名男性的小研究发现，<Num s="M7">30°</Num> 和 <Num s="M7">45°</Num> 时上胸比平板更活跃，但只出现在推起过程的一段。
+
+</More>
+
+<More title={{ en: "A sample session", zh: "一节训练课示例" }}>
+
+一种常见的胸部训练安排，不是处方：先用简单的俯卧撑热身；主项是卧推，用保护杠或请人保护；接着做低角度上斜哑铃卧推；再做较轻的绳索夹胸；最后用俯卧撑加收尾。多关节的大动作放在前面，较轻的单关节动作放在后面；胸部练得很累之后，至少休息一天再练胸 [M21] [M23] [M24]。
+
+</More>
+
+<More title={{ en: "Why the card has no sets and repetitions", zh: "卡片上为什么没有组数和次数" }}>
+
+练多少，要看这个人、他的目标和他之前的训练。这些卡片只写原则。教练可以把它们变成计划；儿童和青少年的计划，应由合格的专业人员设计并监督 [M25]。
+
+</More>
+
+</Lang>

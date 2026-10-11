@@ -1,0 +1,1515 @@
+{
+  "model": "/models/muscles-chest.glb",
+  "parts": [
+    {
+      "id": "pectoralis-major-clavicular",
+      "name": {
+        "en": "Pectoralis major, clavicular part",
+        "zh": "胸大肌锁骨部"
+      },
+      "group": "superficial",
+      "mesh": "pectoralis-major-clavicular.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-1"
+      },
+      "muscle": "pectoralis-major-clavicular",
+      "explode": {
+        "dir": [
+          0.25,
+          0.15,
+          1
+        ],
+        "dist": 0.07,
+        "stage": 0
+      },
+      "connects": [
+        "clavicle",
+        "humerus"
+      ],
+      "bilateral": {
+        "axis": "x",
+        "mesh": "pectoralis-major-clavicular.r"
+      }
+    },
+    {
+      "id": "pectoralis-major-sternocostal",
+      "name": {
+        "en": "Pectoralis major, sternocostal part",
+        "zh": "胸大肌胸肋部"
+      },
+      "group": "superficial",
+      "mesh": "pectoralis-major-sternocostal.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-1"
+      },
+      "muscle": "pectoralis-major-sternocostal",
+      "explode": {
+        "dir": [
+          0.2,
+          0,
+          1
+        ],
+        "dist": 0.07,
+        "stage": 0
+      },
+      "connects": [
+        "thorax",
+        "humerus"
+      ],
+      "bilateral": {
+        "axis": "x",
+        "mesh": "pectoralis-major-sternocostal.r"
+      }
+    },
+    {
+      "id": "pectoralis-major-abdominal",
+      "name": {
+        "en": "Pectoralis major, abdominal part",
+        "zh": "胸大肌腹部"
+      },
+      "group": "superficial",
+      "mesh": "pectoralis-major-abdominal.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-1"
+      },
+      "muscle": "pectoralis-major-abdominal",
+      "explode": {
+        "dir": [
+          0.2,
+          -0.15,
+          1
+        ],
+        "dist": 0.07,
+        "stage": 0
+      },
+      "connects": [
+        "humerus"
+      ],
+      "bilateral": {
+        "axis": "x",
+        "mesh": "pectoralis-major-abdominal.r"
+      }
+    },
+    {
+      "id": "pectoralis-minor",
+      "name": {
+        "en": "Pectoralis minor",
+        "zh": "胸小肌"
+      },
+      "group": "intermediate",
+      "mesh": "pectoralis-minor.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-2"
+      },
+      "muscle": "pectoralis-minor",
+      "explode": {
+        "dir": [
+          0.3,
+          0.05,
+          1
+        ],
+        "dist": 0.05,
+        "stage": 1
+      },
+      "connects": [
+        "thorax",
+        "scapula"
+      ],
+      "bilateral": {
+        "axis": "x",
+        "mesh": "pectoralis-minor.r"
+      }
+    },
+    {
+      "id": "serratus-anterior",
+      "name": {
+        "en": "Serratus anterior",
+        "zh": "前锯肌"
+      },
+      "group": "intermediate",
+      "mesh": "serratus-anterior.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-2"
+      },
+      "muscle": "serratus-anterior",
+      "explode": {
+        "dir": [
+          1,
+          0,
+          0.35
+        ],
+        "dist": 0.05,
+        "stage": 1
+      },
+      "connects": [
+        "thorax",
+        "scapula"
+      ],
+      "bilateral": {
+        "axis": "x",
+        "mesh": "serratus-anterior.r"
+      }
+    },
+    {
+      "id": "subclavius",
+      "name": {
+        "en": "Subclavius",
+        "zh": "锁骨下肌"
+      },
+      "group": "deep",
+      "mesh": "subclavius.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-3"
+      },
+      "muscle": "subclavius",
+      "explode": {
+        "dir": [
+          0.2,
+          0.3,
+          1
+        ],
+        "dist": 0.04,
+        "stage": 2
+      },
+      "connects": [
+        "thorax",
+        "clavicle"
+      ],
+      "bilateral": {
+        "axis": "x",
+        "mesh": "subclavius.r"
+      }
+    },
+    {
+      "id": "intercostals-external",
+      "name": {
+        "en": "External intercostals",
+        "zh": "肋间外肌"
+      },
+      "group": "deep",
+      "mesh": "intercostals-external",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-3"
+      },
+      "muscle": "external-intercostals",
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.03,
+        "stage": 2
+      },
+      "connects": [
+        "thorax"
+      ]
+    },
+    {
+      "id": "intercostals-internal",
+      "name": {
+        "en": "Internal intercostals",
+        "zh": "肋间内肌"
+      },
+      "group": "deep",
+      "mesh": "intercostals-internal",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-3"
+      },
+      "muscle": "internal-intercostals",
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.02,
+        "stage": 2
+      },
+      "connects": [
+        "thorax"
+      ]
+    },
+    {
+      "id": "clavicle",
+      "name": {
+        "en": "Clavicle",
+        "zh": "锁骨"
+      },
+      "group": "skeleton",
+      "mesh": "clavicle.l",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "The collarbone: a strut from breastbone to shoulder.",
+        "zh": "锁骨：从胸骨撑到肩部的一根支杆。"
+      },
+      "detail": {
+        "en": "An S-shaped bone you can feel along its whole length under the skin. Its inner end joins the breastbone, its outer end the shoulder blade, so the arm hangs from the trunk on this strut [M1].\n\nThe front of its inner half gives the clavicular part of pectoralis major its start; subclavius sits in a groove on its underside [M1].",
+        "zh": "一根 S 形的骨，整条都能隔着皮肤摸到。内侧端连胸骨，外侧端连肩胛骨，手臂就靠这根支杆挂在躯干上 [M1]。\n\n它内侧半的前面是胸大肌锁骨部的起点；锁骨下肌贴在它下面的一条浅沟里 [M1]。"
+      },
+      "connects": [],
+      "bilateral": {
+        "axis": "x",
+        "mesh": "clavicle.r"
+      }
+    },
+    {
+      "id": "scapula",
+      "name": {
+        "en": "Scapula",
+        "zh": "肩胛骨"
+      },
+      "group": "skeleton",
+      "mesh": "scapula.l",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "The shoulder blade: it slides and turns on the ribs.",
+        "zh": "肩胛骨：贴着肋骨滑动、转动。"
+      },
+      "detail": {
+        "en": "A flat triangular bone on the back of the rib cage, held there by muscles rather than by a joint with the ribs. Its hook-shaped coracoid process points forward under the collarbone: pectoralis minor ends on it [M1].\n\nSerratus anterior runs under the blade to its inner edge and holds that edge against the ribs [M1].",
+        "zh": "一块扁平的三角形骨，贴在胸廓背面，靠肌肉而不是靠关节固定在肋骨上。它向前伸出的钩状突起叫喙突，藏在锁骨下方，胸小肌就止在这里 [M1]。\n\n前锯肌从它下面绕过去，止在它的内侧缘，把这条边压在肋骨上 [M1]。"
+      },
+      "connects": [],
+      "short": {
+        "en": "Scapula",
+        "zh": "肩胛骨"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "scapula.r"
+      }
+    },
+    {
+      "id": "humerus",
+      "name": {
+        "en": "Humerus",
+        "zh": "肱骨"
+      },
+      "group": "skeleton",
+      "mesh": "humerus.l",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "The upper-arm bone: pectoralis major pulls on it.",
+        "zh": "上臂骨：胸大肌拉的就是它。"
+      },
+      "detail": {
+        "en": "The long bone of the upper arm. Its rounded head sits in the shallow socket of the shoulder blade, which is why the shoulder moves so freely [M2].\n\nAll three parts of pectoralis major end on a ridge just below the head, on the outer lip of the groove that carries the long biceps tendon [M1].",
+        "zh": "上臂的长骨。圆圆的肱骨头放在肩胛骨一个很浅的关节窝里，所以肩关节能朝各个方向活动 [M2]。\n\n胸大肌的三个部分都止在肱骨头下方的一条骨嵴上，也就是容纳肱二头肌长头腱那条沟的外侧唇 [M1]。"
+      },
+      "connects": [],
+      "bilateral": {
+        "axis": "x",
+        "mesh": "humerus.r"
+      }
+    },
+    {
+      "id": "forearm",
+      "name": {
+        "en": "Radius and ulna",
+        "zh": "桡骨与尺骨"
+      },
+      "group": "skeleton",
+      "mesh": "forearm.l",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "The two forearm bones, shown to make the arm whole.",
+        "zh": "前臂的两根骨，画出来让手臂完整。"
+      },
+      "detail": {
+        "en": "The radius and ulna are drawn as one part here. No chest muscle reaches them, but the elbow bends and straightens in the exercises, and the triceps pulls on the ulna when you press [M2].",
+        "zh": "这里把桡骨和尺骨画成一个零件。胸部肌肉都不到这里，但做动作时肘部要屈伸，推起时肱三头肌拉的就是尺骨 [M2]。"
+      },
+      "connects": [],
+      "short": {
+        "en": "Radius & ulna",
+        "zh": "桡骨与尺骨"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "forearm.r"
+      }
+    },
+    {
+      "id": "thorax",
+      "name": {
+        "en": "Sternum, ribs and costal cartilages",
+        "zh": "胸骨、肋骨与肋软骨"
+      },
+      "group": "skeleton",
+      "mesh": "thorax",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "The rib cage: most chest muscles start here.",
+        "zh": "胸廓：大多数胸部肌肉从这里起始。"
+      },
+      "detail": {
+        "en": "Twelve pairs of ribs, the breastbone in front and the bars of cartilage that join them. Pectoralis major starts on the breastbone and the upper cartilages, pectoralis minor on the third to fifth ribs, serratus anterior on the upper eight or nine [M1].\n\nThe muscles between the ribs make the cage rise and fall as you breathe [M2].",
+        "zh": "十二对肋骨、前面的胸骨，以及把两者连起来的肋软骨。胸大肌起于胸骨和上部肋软骨，胸小肌起于第 3 到第 5 肋，前锯肌起于上 8 或 9 根肋骨 [M1]。\n\n肋骨之间的肌肉让胸廓随呼吸上提、下降 [M2]。"
+      },
+      "connects": [],
+      "short": {
+        "en": "Rib cage",
+        "zh": "胸廓"
+      }
+    },
+    {
+      "id": "thoracic-spine",
+      "name": {
+        "en": "Thoracic vertebrae",
+        "zh": "胸椎"
+      },
+      "group": "skeleton",
+      "mesh": "thoracic-spine",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "The twelve vertebrae the ribs hang from.",
+        "zh": "十二节胸椎，肋骨挂在它们上面。"
+      },
+      "detail": {
+        "en": "Each rib joins a thoracic vertebra at the back. No chest muscle attaches here; the spine is drawn so the rib cage reads as a whole and the back view makes sense [M2].",
+        "zh": "每根肋骨在背后都连着一节胸椎。胸部肌肉不附着在这里；画出脊柱，是为了让胸廓看起来完整，背面视图也看得明白 [M2]。"
+      },
+      "connects": []
+    },
+    {
+      "id": "deltoid-anterior",
+      "name": {
+        "en": "Deltoid, clavicular part",
+        "zh": "三角肌锁骨部"
+      },
+      "group": "neighbours",
+      "mesh": "deltoid-anterior.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "deltoid-anterior.r"
+      },
+      "material": {
+        "color": "muscle",
+        "tint": "token:neutral"
+      },
+      "muscle": "deltoid-anterior"
+    },
+    {
+      "id": "triceps-brachii",
+      "name": {
+        "en": "Triceps brachii",
+        "zh": "肱三头肌"
+      },
+      "group": "neighbours",
+      "mesh": "triceps-brachii.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "triceps-brachii.r"
+      },
+      "material": {
+        "color": "muscle",
+        "tint": "token:neutral"
+      },
+      "muscle": "triceps-brachii"
+    },
+    {
+      "id": "biceps-brachii-short",
+      "name": {
+        "en": "Biceps brachii, short head",
+        "zh": "肱二头肌短头"
+      },
+      "group": "neighbours",
+      "mesh": "biceps-brachii-short.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "biceps-brachii-short.r"
+      },
+      "material": {
+        "color": "muscle",
+        "tint": "token:neutral"
+      },
+      "short": {
+        "en": "Biceps · short",
+        "zh": "二头肌短头"
+      },
+      "summary": {
+        "en": "Starts on the coracoid; bends the elbow.",
+        "zh": "起于喙突，屈肘。"
+      },
+      "detail": {
+        "en": "The short head of biceps starts on the tip of the coracoid process, right beside pectoralis minor and coracobrachialis, and runs down the front of the arm to the forearm [M2]. It is drawn here as a neighbour: in a fly it helps hold the slightly bent elbow still.",
+        "zh": "肱二头肌短头起于喙突尖，紧挨着胸小肌和喙肱肌，沿上臂前面一直到前臂 [M2]。这里把它画作邻近肌肉：做飞鸟时，它帮着把微屈的肘固定住。"
+      }
+    },
+    {
+      "id": "coracobrachialis",
+      "name": {
+        "en": "Coracobrachialis",
+        "zh": "喙肱肌"
+      },
+      "group": "neighbours",
+      "mesh": "coracobrachialis.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "coracobrachialis.r"
+      },
+      "material": {
+        "color": "muscle",
+        "tint": "token:neutral"
+      },
+      "summary": {
+        "en": "From coracoid to humerus; helps raise the arm forward.",
+        "zh": "从喙突到肱骨，协助手臂向前抬。"
+      },
+      "detail": {
+        "en": "A small muscle from the coracoid process to the middle of the humerus. It helps raise the arm forward and draw it in, the same direction as the clavicular part of pectoralis major [M2].",
+        "zh": "一块从喙突到肱骨中段的小肌肉。它协助手臂前举和内收，方向和胸大肌锁骨部一样 [M2]。"
+      }
+    },
+    {
+      "id": "latissimus-dorsi",
+      "name": {
+        "en": "Latissimus dorsi",
+        "zh": "背阔肌"
+      },
+      "group": "neighbours",
+      "mesh": "latissimus-dorsi.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "latissimus-dorsi.r"
+      },
+      "material": {
+        "color": "muscle",
+        "tint": "token:neutral"
+      },
+      "short": {
+        "en": "Latissimus",
+        "zh": "背阔肌"
+      },
+      "summary": {
+        "en": "The broad back muscle; forms the back fold of the armpit.",
+        "zh": "宽阔的背部肌肉，构成腋窝后壁。"
+      },
+      "detail": {
+        "en": "The widest muscle of the back. It ends on the humerus close to pectoralis major, so the two make the back and front folds of the armpit [M2]. It pulls a raised arm down, like the sternocostal part of pectoralis major; the back topic covers it in full.",
+        "zh": "背部最宽的肌肉。它止在肱骨上，离胸大肌止点很近，所以两者分别构成腋窝的后壁和前壁 [M2]。它把举起的手臂往下拉，作用和胸大肌胸肋部相似；背部主题会详细讲它。"
+      }
+    },
+    {
+      "id": "external-oblique",
+      "name": {
+        "en": "External oblique",
+        "zh": "腹外斜肌"
+      },
+      "group": "neighbours",
+      "mesh": "external-oblique.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "external-oblique.r"
+      },
+      "material": {
+        "color": "muscle",
+        "tint": "token:neutral"
+      },
+      "short": {
+        "en": "Ext. oblique",
+        "zh": "腹外斜肌"
+      },
+      "summary": {
+        "en": "Side wall of the belly; its sheet gives the abdominal part a start.",
+        "zh": "腹壁外侧的肌肉；它的腱膜是胸大肌腹部的起点。"
+      },
+      "detail": {
+        "en": "The outer layer of the side abdominal wall. Its top slips interlock with those of serratus anterior on the lower ribs, and its flat tendon sheet (aponeurosis) gives the abdominal part of pectoralis major its start [M1]. The core topic covers it in full.",
+        "zh": "腹壁外侧最外面的一层肌肉。它上端的肌齿和前锯肌的肌齿在下位肋骨上交错，它扁平的腱膜就是胸大肌腹部的起点 [M1]。腰腹主题会详细讲它。"
+      }
+    },
+    {
+      "id": "rectus-abdominis",
+      "name": {
+        "en": "Rectus abdominis",
+        "zh": "腹直肌"
+      },
+      "group": "neighbours",
+      "mesh": "rectus-abdominis.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "rectus-abdominis.r"
+      },
+      "material": {
+        "color": "muscle",
+        "tint": "token:neutral"
+      },
+      "short": {
+        "en": "Rectus abd.",
+        "zh": "腹直肌"
+      },
+      "summary": {
+        "en": "The strap down the front of the belly.",
+        "zh": "腹前正中的一条长带状肌。"
+      },
+      "detail": {
+        "en": "The long strap muscle from the pubic bone to the fifth to seventh costal cartilages, just below pectoralis major [M2]. In a push-up it works to keep the hips from sagging. The core topic covers it in full.",
+        "zh": "从耻骨到第 5 至第 7 肋软骨的一条长带状肌，就在胸大肌下方 [M2]。做俯卧撑时，它出力防止髋部下塌。腰腹主题会详细讲它。"
+      }
+    },
+    {
+      "id": "skin-outline",
+      "name": {
+        "en": "Body outline",
+        "zh": "体表轮廓"
+      },
+      "group": "body",
+      "context": true,
+      "shell": true,
+      "mesh": "skin-outline",
+      "material": {
+        "color": "membrane",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "The skin surface of the whole body, for finding the muscles on yourself.",
+        "zh": "全身的皮肤表面，用来在自己身上找到这些肌肉。"
+      },
+      "detail": {
+        "en": "A low-detail skin surface of the same male reference body the muscles come from [M3]. It is drawn faint so the chest muscles show through.",
+        "zh": "与肌肉同一具男性参考人体的皮肤表面，做了简化 [M3]。画得很淡，让胸部肌肉透出来。"
+      }
+    }
+  ],
+  "groups": [
+    {
+      "id": "superficial",
+      "name": {
+        "en": "Surface layer",
+        "zh": "浅层"
+      },
+      "color": "token:muscle-1"
+    },
+    {
+      "id": "intermediate",
+      "name": {
+        "en": "Middle layer",
+        "zh": "中层"
+      },
+      "color": "token:muscle-2"
+    },
+    {
+      "id": "deep",
+      "name": {
+        "en": "Deep layer",
+        "zh": "深层"
+      },
+      "color": "token:muscle-3"
+    },
+    {
+      "id": "skeleton",
+      "name": {
+        "en": "Bones",
+        "zh": "骨骼"
+      },
+      "color": "token:bone"
+    },
+    {
+      "id": "neighbours",
+      "name": {
+        "en": "Neighbouring muscles",
+        "zh": "邻近肌肉"
+      },
+      "color": "token:neutral",
+      "card": false
+    },
+    {
+      "id": "body",
+      "name": {
+        "en": "Body outline",
+        "zh": "体表轮廓"
+      },
+      "color": "token:ink-3",
+      "card": false
+    }
+  ],
+  "animations": [
+    {
+      "id": "pectoralis-major-clavicular-contract",
+      "target": "pectoralis-major-clavicular",
+      "kind": "contract",
+      "amount": 0.32,
+      "hz": 0.45
+    },
+    {
+      "id": "pectoralis-major-sternocostal-contract",
+      "target": "pectoralis-major-sternocostal",
+      "kind": "contract",
+      "amount": 0.32,
+      "hz": 0.45
+    },
+    {
+      "id": "pectoralis-major-abdominal-contract",
+      "target": "pectoralis-major-abdominal",
+      "kind": "contract",
+      "amount": 0.32,
+      "hz": 0.45
+    },
+    {
+      "id": "pectoralis-minor-contract",
+      "target": "pectoralis-minor",
+      "kind": "contract",
+      "amount": 0.27,
+      "hz": 0.45
+    },
+    {
+      "id": "serratus-anterior-contract",
+      "target": "serratus-anterior",
+      "kind": "contract",
+      "amount": 0.27,
+      "hz": 0.45
+    },
+    {
+      "id": "subclavius-contract",
+      "target": "subclavius",
+      "kind": "contract",
+      "amount": 0.23,
+      "hz": 0.45
+    },
+    {
+      "id": "intercostals-external-contract",
+      "target": "intercostals-external",
+      "kind": "contract",
+      "amount": 0.23,
+      "hz": 0.3
+    },
+    {
+      "id": "intercostals-internal-contract",
+      "target": "intercostals-internal",
+      "kind": "contract",
+      "amount": 0.18,
+      "hz": 0.3
+    }
+  ],
+  "views": {
+    "assembled": {
+      "camera": {
+        "position": [
+          0.57,
+          0.19,
+          1.39
+        ],
+        "target": [
+          0.0,
+          -0.08,
+          -0.04
+        ],
+        "fov": 30
+      }
+    },
+    "exploded": {
+      "camera": {
+        "position": [
+          0.66,
+          0.25,
+          1.55
+        ],
+        "target": [
+          0.0,
+          -0.06,
+          -0.02
+        ],
+        "fov": 30
+      }
+    },
+    "cover": {
+      "position": [
+        0.4,
+        0.1,
+        0.98
+      ],
+      "target": [
+        0.0,
+        -0.1,
+        -0.04
+      ],
+      "fov": 30
+    },
+    "section": {
+      "plane": "xy"
+    },
+    "cutaway": {
+      "normal": [
+        -1,
+        0,
+        0
+      ],
+      "offset": 0.1
+    },
+    "cuts": {
+      "sagittal-pec": {
+        "normal": [
+          -1,
+          0,
+          0
+        ],
+        "offset": 0.1,
+        "label": {
+          "en": "Sagittal · left chest",
+          "zh": "矢状 · 左胸"
+        }
+      },
+      "transverse-t4": {
+        "normal": [
+          0,
+          -1,
+          0
+        ],
+        "offset": 0.012,
+        "label": {
+          "en": "Transverse · T4",
+          "zh": "横切 · T4"
+        }
+      }
+    },
+    "explodeLabel": {
+      "en": "Peel",
+      "zh": "剥层"
+    }
+  },
+  "spec": [
+    {
+      "key": {
+        "en": "Muscles",
+        "zh": "肌肉"
+      },
+      "value": {
+        "en": "8 parts · 3 layers",
+        "zh": "8 个 · 3 层"
+      },
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Exercises",
+        "zh": "动作"
+      },
+      "value": "8",
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Model",
+        "zh": "模型"
+      },
+      "value": {
+        "en": "Z-Anatomy · male reference",
+        "zh": "Z-Anatomy · 男性参考"
+      },
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Stature",
+        "zh": "身高"
+      },
+      "value": "1.71 m",
+      "tag": "design"
+    }
+  ],
+  "presets": [
+    {
+      "id": "front",
+      "label": {
+        "en": "Front",
+        "zh": "正面"
+      },
+      "camera": {
+        "position": [
+          0.0,
+          -0.05,
+          1.35
+        ],
+        "target": [
+          0.0,
+          -0.09,
+          -0.04
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "back",
+      "label": {
+        "en": "Back",
+        "zh": "背面"
+      },
+      "camera": {
+        "position": [
+          0.3,
+          0.05,
+          -0.98
+        ],
+        "target": [
+          0.0,
+          -0.06,
+          -0.1
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "left-side",
+      "label": {
+        "en": "Left side",
+        "zh": "左侧"
+      },
+      "camera": {
+        "position": [
+          0.95,
+          0.02,
+          0.18
+        ],
+        "target": [
+          0.1,
+          -0.06,
+          -0.05
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "close-pec",
+      "label": {
+        "en": "Close",
+        "zh": "近景"
+      },
+      "camera": {
+        "position": [
+          0.46,
+          0.02,
+          0.44
+        ],
+        "target": [
+          0.14,
+          -0.03,
+          -0.04
+        ],
+        "fov": 28
+      }
+    },
+    {
+      "id": "armpit",
+      "label": {
+        "en": "Armpit",
+        "zh": "腋窝"
+      },
+      "camera": {
+        "position": [
+          0.62,
+          -0.2,
+          0.38
+        ],
+        "target": [
+          0.11,
+          -0.03,
+          -0.05
+        ],
+        "fov": 28
+      }
+    },
+    {
+      "id": "on-my-body",
+      "label": {
+        "en": "On my body",
+        "zh": "在身上"
+      },
+      "camera": {
+        "position": [
+          0.9,
+          0.0,
+          2.9
+        ],
+        "target": [
+          0.0,
+          -0.45,
+          0.0
+        ],
+        "fov": 30
+      },
+      "view": "xray"
+    }
+  ],
+  "poses": {
+    "arms-out": {
+      "joint:shoulder.l": {
+        "abduction": 85
+      },
+      "joint:elbow.l": {
+        "flexion": 10
+      },
+      "contract": {},
+      "duration": 1.2
+    },
+    "hug": {
+      "joint:shoulder.l": {
+        "horizontal-adduction": 60,
+        "abduction": 70
+      },
+      "joint:elbow.l": {
+        "flexion": 15
+      },
+      "contract": {
+        "pectoralis-major-clavicular": 0.32,
+        "pectoralis-major-sternocostal": 0.32,
+        "pectoralis-major-abdominal": 0.32
+      },
+      "duration": 1.2
+    },
+    "arm-forward": {
+      "joint:shoulder.l": {
+        "flexion": 75
+      },
+      "joint:elbow.l": {
+        "flexion": 10
+      },
+      "contract": {
+        "pectoralis-major-clavicular": 0.34,
+        "deltoid-anterior": 0.24
+      },
+      "duration": 1.2
+    },
+    "arm-high": {
+      "joint:shoulder.l": {
+        "flexion": 105
+      },
+      "joint:elbow.l": {
+        "flexion": 10
+      },
+      "contract": {},
+      "duration": 1.2
+    },
+    "pull-down": {
+      "joint:shoulder.l": {
+        "flexion": 35
+      },
+      "joint:elbow.l": {
+        "flexion": 10
+      },
+      "contract": {
+        "pectoralis-major-sternocostal": 0.34,
+        "pectoralis-major-abdominal": 0.32
+      },
+      "duration": 1.6
+    },
+    "elbow-bent": {
+      "joint:elbow.l": {
+        "flexion": 90
+      },
+      "contract": {},
+      "duration": 1.2
+    },
+    "turn-in": {
+      "joint:shoulder.l": {
+        "internal-rotation": 50
+      },
+      "joint:elbow.l": {
+        "flexion": 90
+      },
+      "contract": {
+        "pectoralis-major-clavicular": 0.24,
+        "pectoralis-major-sternocostal": 0.24,
+        "pectoralis-major-abdominal": 0.24
+      },
+      "duration": 1.2
+    },
+    "reach": {
+      "joint:shoulder.l": {
+        "flexion": 75
+      },
+      "joint:elbow.l": {
+        "flexion": 5
+      },
+      "contract": {
+        "serratus-anterior": 0.34,
+        "pectoralis-minor": 0.24
+      },
+      "duration": 1.2
+    },
+    "inhale": {
+      "contract": {
+        "intercostals-external": 0.32
+      },
+      "duration": 1.6
+    },
+    "exhale": {
+      "contract": {
+        "intercostals-internal": 0.32
+      },
+      "duration": 1.6
+    }
+  },
+  "units": {
+    "modelUnit": "m",
+    "scale": 1
+  },
+  "rig": {
+    "joints": {
+      "shoulder.l": {
+        "node": "joint.shoulder.l",
+        "axes": {
+          "horizontal-adduction": [
+            0,
+            -1,
+            0
+          ],
+          "flexion": [
+            -1,
+            0,
+            0
+          ],
+          "abduction": [
+            0,
+            0,
+            1
+          ],
+          "internal-rotation": [
+            0.178,
+            -0.983,
+            -0.05
+          ]
+        }
+      },
+      "elbow.l": {
+        "node": "joint.elbow.l",
+        "axes": {
+          "flexion": [
+            -0.997,
+            -0.03,
+            0.075
+          ]
+        }
+      },
+      "hand.l": {
+        "node": "joint.wrist.l",
+        "axes": {
+          "flexion": [
+            -1,
+            0,
+            0
+          ]
+        }
+      },
+      "shoulder.r": {
+        "node": "joint.shoulder.r",
+        "axes": {
+          "horizontal-adduction": [
+            0,
+            1,
+            0
+          ],
+          "flexion": [
+            -1,
+            0,
+            0
+          ],
+          "abduction": [
+            0,
+            0,
+            -1
+          ],
+          "internal-rotation": [
+            0.178,
+            0.983,
+            0.05
+          ]
+        }
+      },
+      "elbow.r": {
+        "node": "joint.elbow.r",
+        "axes": {
+          "flexion": [
+            -0.997,
+            0.03,
+            -0.075
+          ]
+        }
+      },
+      "hand.r": {
+        "node": "joint.wrist.r",
+        "axes": {
+          "flexion": [
+            -1,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    "demo": {
+      "shoulder": {
+        "flexion": 90,
+        "extension": 30,
+        "abduction": 80,
+        "adduction": 20,
+        "horizontal-adduction": 45,
+        "internal-rotation": 50
+      },
+      "elbow": {
+        "flexion": 110
+      }
+    }
+  },
+  "sites": [
+    {
+      "muscle": "pectoralis-major-clavicular",
+      "kind": "origin",
+      "bone": "clavicle",
+      "points": [
+        [
+          0.0333,
+          0.0484,
+          -0.0108
+        ],
+        [
+          0.0616,
+          0.0525,
+          -0.0175
+        ],
+        [
+          0.0818,
+          0.0536,
+          -0.0327
+        ]
+      ]
+    },
+    {
+      "muscle": "pectoralis-major-clavicular",
+      "kind": "insertion",
+      "bone": "humerus",
+      "points": [
+        [
+          0.198,
+          -0.045,
+          -0.0711
+        ],
+        [
+          0.194,
+          -0.029,
+          -0.0706
+        ],
+        [
+          0.1881,
+          -0.012,
+          -0.0707
+        ]
+      ]
+    },
+    {
+      "muscle": "pectoralis-major-sternocostal",
+      "kind": "origin",
+      "bone": "thorax",
+      "points": [
+        [
+          0.0262,
+          0.0342,
+          -0.0028
+        ],
+        [
+          0.0145,
+          0.0072,
+          0.0245
+        ],
+        [
+          0.0157,
+          -0.0392,
+          0.0394
+        ],
+        [
+          0.0172,
+          -0.0767,
+          0.0518
+        ],
+        [
+          0.0384,
+          -0.1084,
+          0.0559
+        ],
+        [
+          0.0763,
+          -0.1247,
+          0.0479
+        ]
+      ]
+    },
+    {
+      "muscle": "pectoralis-major-sternocostal",
+      "kind": "insertion",
+      "bone": "humerus",
+      "points": [
+        [
+          0.1891,
+          -0.019,
+          -0.0707
+        ],
+        [
+          0.1849,
+          -0.008,
+          -0.0711
+        ]
+      ]
+    },
+    {
+      "muscle": "pectoralis-major-abdominal",
+      "kind": "origin",
+      "bone": "external-oblique",
+      "points": [
+        [
+          0.0573,
+          -0.1544,
+          0.0646
+        ],
+        [
+          0.0698,
+          -0.1624,
+          0.0619
+        ],
+        [
+          0.0829,
+          -0.1699,
+          0.0553
+        ]
+      ]
+    },
+    {
+      "muscle": "pectoralis-major-abdominal",
+      "kind": "insertion",
+      "bone": "humerus",
+      "points": [
+        [
+          0.185,
+          -0.02,
+          -0.0708
+        ],
+        [
+          0.181,
+          -0.002,
+          -0.0706
+        ]
+      ]
+    },
+    {
+      "muscle": "pectoralis-minor",
+      "kind": "origin",
+      "bone": "thorax",
+      "points": [
+        [
+          0.0889,
+          -0.012,
+          -0.0101
+        ],
+        [
+          0.1089,
+          -0.045,
+          -0.0041
+        ],
+        [
+          0.1102,
+          -0.081,
+          0.0142
+        ]
+      ]
+    },
+    {
+      "muscle": "pectoralis-minor",
+      "kind": "insertion",
+      "bone": "scapula",
+      "points": [
+        [
+          0.132,
+          0.042,
+          -0.0551
+        ],
+        [
+          0.1263,
+          0.0447,
+          -0.0627
+        ]
+      ]
+    },
+    {
+      "muscle": "serratus-anterior",
+      "kind": "origin",
+      "bone": "thorax",
+      "points": [
+        [
+          0.0687,
+          0.0622,
+          -0.0515
+        ],
+        [
+          0.0911,
+          0.055,
+          -0.0691
+        ],
+        [
+          0.1114,
+          0.009,
+          -0.0519
+        ],
+        [
+          0.1246,
+          -0.0239,
+          -0.0459
+        ],
+        [
+          0.1262,
+          -0.066,
+          -0.0179
+        ],
+        [
+          0.1365,
+          -0.1,
+          -0.0329
+        ],
+        [
+          0.1411,
+          -0.125,
+          -0.049
+        ],
+        [
+          0.1346,
+          -0.165,
+          -0.056
+        ]
+      ]
+    },
+    {
+      "muscle": "serratus-anterior",
+      "kind": "insertion",
+      "bone": "scapula",
+      "points": [
+        [
+          0.0792,
+          0.0482,
+          -0.1362
+        ],
+        [
+          0.0734,
+          0.012,
+          -0.1495
+        ],
+        [
+          0.0811,
+          -0.0243,
+          -0.1528
+        ],
+        [
+          0.0894,
+          -0.085,
+          -0.1559
+        ]
+      ]
+    },
+    {
+      "muscle": "subclavius",
+      "kind": "origin",
+      "bone": "thorax",
+      "points": [
+        [
+          0.0441,
+          0.0412,
+          -0.0157
+        ]
+      ]
+    },
+    {
+      "muscle": "subclavius",
+      "kind": "insertion",
+      "bone": "clavicle",
+      "points": [
+        [
+          0.075,
+          0.0522,
+          -0.0339
+        ],
+        [
+          0.085,
+          0.0581,
+          -0.048
+        ],
+        [
+          0.0939,
+          0.0614,
+          -0.061
+        ]
+      ]
+    },
+    {
+      "muscle": "intercostals-external",
+      "kind": "origin",
+      "bone": "thorax",
+      "points": [
+        [
+          0.1303,
+          -0.0639,
+          -0.0473
+        ]
+      ]
+    },
+    {
+      "muscle": "intercostals-external",
+      "kind": "insertion",
+      "bone": "thorax",
+      "points": [
+        [
+          0.1327,
+          -0.0922,
+          -0.031
+        ]
+      ]
+    },
+    {
+      "muscle": "intercostals-internal",
+      "kind": "origin",
+      "bone": "thorax",
+      "points": [
+        [
+          0.0723,
+          -0.0704,
+          0.031
+        ]
+      ]
+    },
+    {
+      "muscle": "intercostals-internal",
+      "kind": "insertion",
+      "bone": "thorax",
+      "points": [
+        [
+          0.09,
+          -0.0882,
+          0.0349
+        ]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,966 @@
+{
+  "exercises": [
+    {
+      "id": "barbell-bench-press",
+      "name": {
+        "en": "Barbell bench press",
+        "zh": "杠铃卧推"
+      },
+      "short": {
+        "en": "Bench press",
+        "zh": "卧推"
+      },
+      "equipment": "barbell",
+      "pattern": "horizontal-push",
+      "level": "beginner",
+      "primary": [
+        "pectoralis-major-sternocostal",
+        "pectoralis-major-clavicular"
+      ],
+      "secondary": [
+        "deltoid-anterior",
+        "triceps-brachii"
+      ],
+      "stabilisers": [
+        "serratus-anterior",
+        "subclavius"
+      ],
+      "setup": {
+        "en": "Use a flat bench in a rack with the safety bars set just below your lowest point, or have a spotter stand behind your head. Set the hooks so you can lift the bar out with your arms almost straight. Start with the empty bar and put collars on any plates.",
+        "zh": "用放在深蹲架里的平板凳，保护杠调到比你的最低点稍低一点，或者请一位保护者站在你头后。挂钩的高度要让你手臂几乎伸直就能把杠取下。先用空杠练，加了杠片一定要上卡扣。"
+      },
+      "steps": [
+        {
+          "en": "Lie with your eyes under the bar, feet flat on the floor, and your head, upper back and buttocks on the bench. Draw your shoulder blades gently back and down.",
+          "zh": "躺下，眼睛在杠铃正下方，双脚平踩地面，头、上背和臀部都贴着凳面。肩胛骨轻轻往后、往下收。"
+        },
+        {
+          "en": "Grip the bar a little wider than your shoulders with your thumbs wrapped around it. The bar sits over the heel of your palm, wrists close to straight.",
+          "zh": "双手握距比肩稍宽，拇指扣住杠。杠压在掌根上，手腕尽量保持平直。"
+        },
+        {
+          "en": "Lift the bar off the hooks and hold it still above your shoulders, arms straight but not forced.",
+          "zh": "把杠从挂钩上取下，停在肩膀正上方，手臂伸直但不要硬锁。"
+        },
+        {
+          "en": "Breathe in and lower the bar slowly to the lower half of your chest. Elbows travel out and down at a slight angle from your body; forearms stay close to vertical.",
+          "zh": "吸气，慢慢把杠放到胸部下半部。两肘斜向外下方走，与身体成一个角度；前臂尽量保持竖直。"
+        },
+        {
+          "en": "Breathe out and press the bar up and slightly back until it is over your shoulders again. Keep your feet planted and your buttocks on the bench.",
+          "zh": "呼气，把杠向上、略向后推回到肩膀正上方。双脚踩稳，臀部不离开凳面。"
+        },
+        {
+          "en": "After the last repetition, move the bar back against the uprights and lower it onto both hooks before letting go.",
+          "zh": "最后一次做完，把杠向后贴住立柱，确认落在两边挂钩上再松手。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Stack bar, wrist and elbow in one line under the load.",
+          "zh": "杠、手腕、手肘在受力方向上叠成一条线。"
+        },
+        {
+          "en": "Lower under control and press back along the same path.",
+          "zh": "有控制地放下，沿同一条路线推回。"
+        },
+        {
+          "en": "You should feel the work across the chest and the backs of the arms, not in the wrists or low back.",
+          "zh": "用力感应该在整个胸前和上臂后面，而不是手腕或下背。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Bouncing the bar off the chest. Why: the rebound takes control away just where the lowest fibres of the chest are most stretched.",
+          "zh": "杠铃砸胸反弹。为什么：反弹让你在胸肌最下面的纤维被拉得最长的位置失去控制。"
+        },
+        {
+          "en": "Lifting the hips to finish a heavy repetition. Why: it arches the low back and changes the pressing angle instead of letting the arms do the work.",
+          "zh": "推不动时抬臀。为什么：这会让下背过度弓起、改变推的角度，而不是靠手臂完成动作。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Start light enough that every repetition follows the same smooth path; add load or repetitions in small steps only once that feels easy.",
+            "zh": "起始重量要轻到每一次都能走同一条平稳的路线；等它变得轻松了，再小步增加重量或次数。"
+          },
+          "s": [
+            "M23",
+            "M24"
+          ]
+        },
+        {
+          "text": {
+            "en": "Light and heavy loads both build muscle when the sets are hard; heavier loads build more maximal strength.",
+            "zh": "只要每组都练得够吃力，轻重量和大重量都能增肌；大重量更能提高最大力量。"
+          },
+          "s": [
+            "M20"
+          ]
+        },
+        {
+          "text": {
+            "en": "Spreading chest work over more than one day a week tends to work better than one big session.",
+            "zh": "把胸部训练分散到一周里不止一天，通常比一次练完效果好。"
+          },
+          "s": [
+            "M21"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "Never train heavy without safety bars or a spotter who knows what to do.",
+          "zh": "没有保护杠或懂得如何保护的保护者时，不要做大重量。"
+        },
+        {
+          "en": "Stop at sharp pain at the front of the shoulder or in the chest, or a sudden tearing feeling.",
+          "zh": "肩前部或胸部出现刺痛，或突然有撕裂感，立刻停下。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [
+        {
+          "text": {
+            "en": "Research shows: in 12 trained men, chest EMG did not differ between barbell, dumbbell and Smith-machine presses, but they could lift about 17 % more with the barbell than with dumbbells.",
+            "zh": "研究显示：12 名有训练男性用杠铃、哑铃和史密斯机推胸，胸肌肌电没有差别，但用杠铃能比用哑铃多推约 17 %。"
+          },
+          "s": [
+            "M16"
+          ]
+        }
+      ],
+      "sketch": "barbell-bench-press",
+      "motion": {
+        "root": {
+          "rotation": [
+            -90,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            -0.27,
+            0
+          ]
+        },
+        "equipment": [
+          {
+            "kind": "barbell",
+            "grip": "pronated",
+            "width": 0.8
+          },
+          {
+            "kind": "bench",
+            "at": [
+              0,
+              -0.88,
+              -0.35
+            ]
+          }
+        ],
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "shoulder.l": {
+                "flexion": 90,
+                "abduction": 22
+              },
+              "elbow.l": {
+                "flexion": 5
+              }
+            },
+            "contract": {
+              "pectoralis-major": 0.26,
+              "deltoid-anterior": 0.2,
+              "triceps-brachii": 0.24
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "shoulder.l": {
+                "abduction": 55,
+                "horizontal-abduction": 15
+              },
+              "elbow.l": {
+                "flexion": 90
+              }
+            },
+            "contract": {
+              "pectoralis-major": 0.04,
+              "deltoid-anterior": 0.08,
+              "triceps-brachii": 0.04
+            }
+          }
+        ],
+        "tempo": [
+          2,
+          0.3,
+          1.2,
+          0.5
+        ]
+      },
+      "sources": [
+        "M1",
+        "M5",
+        "M16",
+        "M23"
+      ]
+    },
+    {
+      "id": "incline-dumbbell-press",
+      "name": {
+        "en": "Incline dumbbell press",
+        "zh": "上斜哑铃卧推"
+      },
+      "short": {
+        "en": "Incline DB press",
+        "zh": "上斜哑铃推"
+      },
+      "equipment": "dumbbell",
+      "pattern": "horizontal-push",
+      "level": "beginner",
+      "primary": [
+        "pectoralis-major-clavicular"
+      ],
+      "secondary": [
+        "pectoralis-major-sternocostal",
+        "deltoid-anterior",
+        "triceps-brachii"
+      ],
+      "stabilisers": [
+        "serratus-anterior"
+      ],
+      "setup": {
+        "en": "Set an adjustable bench to a low incline, about 30° as in the drawing. Choose dumbbells you can lift onto your knees and put down again without twisting.",
+        "zh": "把可调凳调成较低的上斜角度，图中约 30°。选择能轻松放到膝上、再放回地面而不用扭身的哑铃。"
+      },
+      "steps": [
+        {
+          "en": "Sit with a dumbbell on each thigh. Lie back and bring them to your chest together, using your knees to help.",
+          "zh": "坐在凳上，哑铃立放在两腿上。向后躺下，借膝盖的力把两只哑铃一起带到胸前。"
+        },
+        {
+          "en": "Head, upper back and buttocks on the bench, feet flat. Hold the dumbbells beside your upper chest, palms facing your feet, wrists over elbows.",
+          "zh": "头、上背和臀部贴住凳面，双脚踩平。哑铃放在上胸两侧，掌心朝向脚的方向，手腕在手肘正上方。"
+        },
+        {
+          "en": "Breathe out and press both dumbbells up until your arms are straight above your shoulders. Let them come towards each other without touching.",
+          "zh": "呼气，把两只哑铃同时推起，直到手臂在肩膀上方伸直。两只哑铃向中间靠拢，但不要碰在一起。"
+        },
+        {
+          "en": "Breathe in and lower them slowly along the same path to the sides of your upper chest.",
+          "zh": "吸气，沿同一条路线慢慢放回上胸两侧。"
+        },
+        {
+          "en": "To finish, bring the dumbbells to your chest, tuck your knees up and roll up to sitting with the weights on your thighs.",
+          "zh": "结束时，把哑铃收到胸前，抬膝，带着哑铃坐起，把它们放回大腿上。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Keep the bench low: steeper turns it into a shoulder press.",
+          "zh": "凳子保持低角度：太陡就变成推肩了。"
+        },
+        {
+          "en": "Drive the upper arms up and in towards the middle of your chest.",
+          "zh": "上臂向上、向胸口中线方向推。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Setting the bench steep. Why: above about 45° the front deltoid takes over more of the work.",
+          "zh": "凳子调得太陡。为什么：超过约 45° 后，三角肌前部承担的比例越来越大。"
+        },
+        {
+          "en": "Letting the dumbbells drop far below the chest. Why: the shoulder is stretched into a range you cannot reverse smoothly.",
+          "zh": "哑铃放得远低于胸部。为什么：肩部被拉到一个你无法平稳推回的范围。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Start light enough that every repetition follows the same smooth path; add load or repetitions in small steps only once that feels easy.",
+            "zh": "起始重量要轻到每一次都能走同一条平稳的路线；等它变得轻松了，再小步增加重量或次数。"
+          },
+          "s": [
+            "M23",
+            "M24"
+          ]
+        },
+        {
+          "text": {
+            "en": "Light and heavy loads both build muscle when the sets are hard; heavier loads build more maximal strength.",
+            "zh": "只要每组都练得够吃力，轻重量和大重量都能增肌；大重量更能提高最大力量。"
+          },
+          "s": [
+            "M20"
+          ]
+        },
+        {
+          "text": {
+            "en": "Spreading chest work over more than one day a week tends to work better than one big session.",
+            "zh": "把胸部训练分散到一周里不止一天，通常比一次练完效果好。"
+          },
+          "s": [
+            "M21"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "Ask for help getting the dumbbells into position if they are heavy for you.",
+          "zh": "哑铃对你来说较重时，请人帮忙就位。"
+        },
+        {
+          "en": "Lower the incline or the weight if the front of the shoulder pinches.",
+          "zh": "肩前部有夹痛感时，降低角度或减轻重量。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [
+        {
+          "text": {
+            "en": "Research shows: in 30 trained adults pressing 60 % of their maximum, upper-chest EMG was highest at 30°; the front deltoid was highest at 60°.",
+            "zh": "研究显示：30 名有训练的成年人用最大重量的 60 % 卧推，上胸肌电在 30° 时最高；三角肌前部在 60° 时最高。"
+          },
+          "s": [
+            "M8"
+          ]
+        },
+        {
+          "text": {
+            "en": "Higher EMG is not proof of more growth: EMG has not been shown to predict how much a muscle grows.",
+            "zh": "肌电更高不等于长得更多：没有证据表明肌电能预测肌肉增长多少。"
+          },
+          "s": [
+            "M9"
+          ]
+        }
+      ],
+      "sketch": "incline-dumbbell-press",
+      "motion": {
+        "root": {
+          "rotation": [
+            -60,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            -0.24,
+            0
+          ]
+        },
+        "equipment": [
+          {
+            "kind": "dumbbell",
+            "grip": "pronated"
+          },
+          {
+            "kind": "bench",
+            "incline": 30,
+            "at": [
+              0,
+              -0.88,
+              -0.185
+            ]
+          }
+        ],
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "shoulder.l": {
+                "abduction": 50,
+                "horizontal-abduction": 10
+              },
+              "elbow.l": {
+                "flexion": 95
+              }
+            },
+            "contract": {
+              "pectoralis-major-clavicular": 0.06,
+              "pectoralis-major-sternocostal": 0.04
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "shoulder.l": {
+                "flexion": 105,
+                "abduction": 12
+              },
+              "elbow.l": {
+                "flexion": 5
+              }
+            },
+            "contract": {
+              "pectoralis-major-clavicular": 0.32,
+              "pectoralis-major-sternocostal": 0.24,
+              "deltoid-anterior": 0.28,
+              "triceps-brachii": 0.24
+            }
+          }
+        ],
+        "tempo": [
+          1.2,
+          0.5,
+          2,
+          0.3
+        ]
+      },
+      "sources": [
+        "M5",
+        "M7",
+        "M8",
+        "M9"
+      ]
+    },
+    {
+      "id": "push-up",
+      "name": {
+        "en": "Push-up",
+        "zh": "俯卧撑"
+      },
+      "equipment": "bodyweight",
+      "pattern": "horizontal-push",
+      "level": "beginner",
+      "primary": [
+        "pectoralis-major"
+      ],
+      "secondary": [
+        "deltoid-anterior",
+        "triceps-brachii",
+        "serratus-anterior"
+      ],
+      "stabilisers": [
+        "pectoralis-minor",
+        "subclavius"
+      ],
+      "setup": {
+        "en": "Clear a space on a firm, non-slip floor. To make it easier, put your hands on a sturdy bench or wall instead: the higher the hands, the lighter the push.",
+        "zh": "在结实、不打滑的地面上留出空间。想容易一些，可以把手撑在稳固的凳子或墙上：手放得越高，推起来越轻。"
+      },
+      "steps": [
+        {
+          "en": "Place your hands flat, a little wider than your shoulders, fingers spread. Step your feet back until your body is straight from head to heels.",
+          "zh": "双手平放，比肩稍宽，手指张开。双脚向后迈，直到从头到脚跟成一条直线。"
+        },
+        {
+          "en": "Tighten your stomach and buttocks a little; look at the floor just ahead of your hands.",
+          "zh": "腹部和臀部稍微收紧；眼睛看手前方一点的地面。"
+        },
+        {
+          "en": "Breathe in and bend your elbows to lower your chest towards the floor between your hands. Elbows point back at an angle, not straight out to the sides.",
+          "zh": "吸气，屈肘，让胸口朝两手之间的地面下降。两肘斜向后方，不要完全向两侧张开。"
+        },
+        {
+          "en": "Go only as low as you can keep the body straight; hips do not sag and the chin does not poke forward.",
+          "zh": "只下到身体还能保持笔直的深度；髋部不塌，下巴不往前伸。"
+        },
+        {
+          "en": "Breathe out and push the floor away until your arms are straight, chest and hips rising together.",
+          "zh": "呼气，把地面推开直到手臂伸直，胸口和髋部一起上升。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Move as one plank: chest and hips together.",
+          "zh": "整个人像一块板：胸口和髋部一起动。"
+        },
+        {
+          "en": "Push through the whole palm.",
+          "zh": "用整个手掌推地。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Letting the hips sag. Why: the low back arches and the trunk muscles stop holding you straight.",
+          "zh": "髋部下塌。为什么：下背过度弓起，躯干肌肉不再支撑身体保持笔直。"
+        },
+        {
+          "en": "Dipping the head instead of the chest. Why: the neck moves and the shoulders hardly do.",
+          "zh": "用低头代替降胸。为什么：动的是脖子，肩关节几乎没动。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Make it harder in small steps: lower hands, then floor, then more repetitions, keeping the same straight body.",
+            "zh": "分小步加难：先降低手的高度，再到地面，再增加次数，身体始终保持笔直。"
+          },
+          "s": [
+            "M23"
+          ]
+        },
+        {
+          "text": {
+            "en": "Light and heavy loads both build muscle when the sets are hard; heavier loads build more maximal strength.",
+            "zh": "只要每组都练得够吃力，轻重量和大重量都能增肌；大重量更能提高最大力量。"
+          },
+          "s": [
+            "M20"
+          ]
+        },
+        {
+          "text": {
+            "en": "Spreading chest work over more than one day a week tends to work better than one big session.",
+            "zh": "把胸部训练分散到一周里不止一天，通常比一次练完效果好。"
+          },
+          "s": [
+            "M21"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "Use a raised surface if your wrists hurt on the floor, and stop if wrist pain stays.",
+          "zh": "手腕撑地疼就改为撑在高处；手腕持续疼痛就停下。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [
+        {
+          "text": {
+            "en": "Research shows: in 30 trained students over five weeks, push-ups made heavy with elastic bands raised bench-press strength as much as bench pressing did.",
+            "zh": "研究显示：30 名有训练的学生练了五周，加弹力带加重的俯卧撑和卧推一样提高了卧推力量。"
+          },
+          "s": [
+            "M17"
+          ]
+        },
+        {
+          "text": {
+            "en": "In 23 moderately trained men over four weeks, bench-press strength rose both with progressively harder push-ups and with bench pressing.",
+            "zh": "23 名有中等训练基础的男性练了四周，逐步加难的俯卧撑组和卧推组，卧推力量都提高了。"
+          },
+          "s": [
+            "M18"
+          ]
+        }
+      ],
+      "sketch": "push-up",
+      "motion": {
+        "root": {
+          "rotation": [
+            72,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            -0.36,
+            0
+          ]
+        },
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "shoulder.l": {
+                "flexion": 72,
+                "abduction": 12
+              },
+              "elbow.l": {
+                "flexion": 5
+              }
+            },
+            "contract": {
+              "pectoralis-major": 0.24,
+              "triceps-brachii": 0.24,
+              "serratus-anterior": 0.16
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "shoulder.l": {
+                "abduction": 45,
+                "horizontal-abduction": 15
+              },
+              "elbow.l": {
+                "flexion": 90
+              }
+            },
+            "contract": {
+              "pectoralis-major": 0.04,
+              "triceps-brachii": 0.04,
+              "serratus-anterior": 0.04
+            }
+          }
+        ],
+        "tempo": [
+          2,
+          0.3,
+          1.2,
+          0.5
+        ]
+      },
+      "sources": [
+        "M17",
+        "M18",
+        "M23"
+      ]
+    },
+    {
+      "id": "machine-chest-press",
+      "name": {
+        "en": "Machine chest press",
+        "zh": "器械推胸"
+      },
+      "short": {
+        "en": "Machine press",
+        "zh": "器械推胸"
+      },
+      "equipment": "machine",
+      "pattern": "horizontal-push",
+      "level": "beginner",
+      "primary": [
+        "pectoralis-major"
+      ],
+      "secondary": [
+        "deltoid-anterior",
+        "triceps-brachii"
+      ],
+      "stabilisers": [
+        "serratus-anterior"
+      ],
+      "setup": {
+        "en": "Use a seated chest-press machine. Adjust the seat so the handles are level with the middle of your chest, and set the lightest weight first.",
+        "zh": "用坐姿推胸器械。调节座椅，让把手与胸口中部齐平，先插最轻的配重。"
+      },
+      "steps": [
+        {
+          "en": "Sit with your back and head against the pad, feet flat, and take hold of the handles with wrists straight.",
+          "zh": "背和头靠住靠垫，双脚踩平，握住把手，手腕保持平直。"
+        },
+        {
+          "en": "Check that your elbows are a little below shoulder height and not pulled far behind your body.",
+          "zh": "确认两肘略低于肩膀，没有被拉到身体后面很远。"
+        },
+        {
+          "en": "Breathe out and press the handles forward until your arms are almost straight. Keep your back on the pad.",
+          "zh": "呼气，把把手向前推，直到手臂接近伸直。背部始终贴住靠垫。"
+        },
+        {
+          "en": "Breathe in and let the handles come back slowly to the start, without letting the weights touch down hard.",
+          "zh": "吸气，让把手慢慢回到起点，不要让配重片重重落下。"
+        },
+        {
+          "en": "After the last repetition, return the handles fully before letting go.",
+          "zh": "最后一次做完，把把手完全送回原位再松手。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Fit the machine to you, not you to the machine.",
+          "zh": "让器械适合你，而不是你去迁就器械。"
+        },
+        {
+          "en": "Press smoothly and let the stack return quietly.",
+          "zh": "推得平稳，让配重片轻轻回落。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Using a seat height that puts the handles at the neck or the stomach. Why: the fixed path then forces the wrists and shoulders out of line.",
+          "zh": "座椅高度让把手对着脖子或肚子。为什么：器械的路线是固定的，会把手腕和肩膀带偏。"
+        },
+        {
+          "en": "Letting the weights crash down between repetitions. Why: the load jolts the shoulder at its most stretched point.",
+          "zh": "每次之间让配重砸下来。为什么：在肩部最被拉长的位置受到冲击。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Start light enough that every repetition follows the same smooth path; add load or repetitions in small steps only once that feels easy.",
+            "zh": "起始重量要轻到每一次都能走同一条平稳的路线；等它变得轻松了，再小步增加重量或次数。"
+          },
+          "s": [
+            "M23",
+            "M24"
+          ]
+        },
+        {
+          "text": {
+            "en": "Light and heavy loads both build muscle when the sets are hard; heavier loads build more maximal strength.",
+            "zh": "只要每组都练得够吃力，轻重量和大重量都能增肌；大重量更能提高最大力量。"
+          },
+          "s": [
+            "M20"
+          ]
+        },
+        {
+          "text": {
+            "en": "Spreading chest work over more than one day a week tends to work better than one big session.",
+            "zh": "把胸部训练分散到一周里不止一天，通常比一次练完效果好。"
+          },
+          "s": [
+            "M21"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "Keep fingers away from the weight stack and moving levers.",
+          "zh": "手指远离配重片和活动杠杆。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [
+        {
+          "text": {
+            "en": "Research shows: an overview of 137 reviews found that the type of equipment, machine or free weight, did not consistently change the result.",
+            "zh": "研究显示：一项综合 137 篇综述的研究发现，用器械还是自由重量，结果没有一致的差别。"
+          },
+          "s": [
+            "M24"
+          ]
+        }
+      ],
+      "sketch": "machine-chest-press",
+      "motion": {
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "shoulder.l": {
+                "abduction": 60,
+                "horizontal-abduction": 10
+              },
+              "elbow.l": {
+                "flexion": 95
+              }
+            },
+            "contract": {
+              "pectoralis-major": 0.04
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "shoulder.l": {
+                "flexion": 80,
+                "abduction": 18
+              },
+              "elbow.l": {
+                "flexion": 8
+              }
+            },
+            "contract": {
+              "pectoralis-major": 0.28,
+              "deltoid-anterior": 0.24,
+              "triceps-brachii": 0.24
+            }
+          }
+        ],
+        "tempo": [
+          1.2,
+          0.4,
+          2,
+          0.3
+        ]
+      },
+      "sources": [
+        "M24"
+      ]
+    },
+    {
+      "id": "push-up-plus",
+      "name": {
+        "en": "Push-up plus",
+        "zh": "俯卧撑加"
+      },
+      "equipment": "bodyweight",
+      "pattern": "horizontal-push",
+      "level": "beginner",
+      "primary": [
+        "serratus-anterior"
+      ],
+      "secondary": [
+        "pectoralis-minor",
+        "pectoralis-major"
+      ],
+      "stabilisers": [
+        "triceps-brachii"
+      ],
+      "setup": {
+        "en": "Start at the top of a push-up, or with your hands on a bench or wall to make it easier. The \"plus\" is a small extra push at the top: the shoulder blades slide forward around the ribs.",
+        "zh": "从俯卧撑的顶端开始；想容易些就把手撑在凳子或墙上。“加”指顶端多出的一个小推：肩胛骨沿着肋骨向前滑。"
+      },
+      "steps": [
+        {
+          "en": "Hands under or just outside your shoulders, body straight from head to heels, elbows straight.",
+          "zh": "手在肩膀正下方或稍外侧，从头到脚跟成一条直线，手肘伸直。"
+        },
+        {
+          "en": "Let your chest sink a little between your shoulder blades without bending your elbows.",
+          "zh": "不屈肘，让胸口在两块肩胛骨之间稍微下沉。"
+        },
+        {
+          "en": "Breathe out and push the floor further away, so your upper back rises and the shoulder blades spread apart and forward.",
+          "zh": "呼气，把地面推得更远，上背随之升起，两块肩胛骨向两侧、向前分开。"
+        },
+        {
+          "en": "Hold for a moment without shrugging, then breathe in and let the chest sink back slowly.",
+          "zh": "保持一下，不要耸肩，然后吸气，让胸口慢慢落回。"
+        },
+        {
+          "en": "Once this is easy, add the plus to the top of an ordinary push-up.",
+          "zh": "这个动作熟练后，可以把“加”接在普通俯卧撑的顶端。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Reach long through your arms: push the floor away.",
+          "zh": "手臂往远处伸：把地面推开。"
+        },
+        {
+          "en": "You should feel it on the side of your ribs, under the armpit.",
+          "zh": "用力感应该在腋下的侧胸肋骨上。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Bending the elbows. Why: that turns it into a small push-up and takes the work off the serratus.",
+          "zh": "屈肘。为什么：这就变成了一个小俯卧撑，前锯肌的工作被别的肌肉替代。"
+        },
+        {
+          "en": "Rounding the whole back and dropping the head. Why: the spine moves instead of the shoulder blades.",
+          "zh": "整个背拱起、低头。为什么：动的是脊柱，不是肩胛骨。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Learn it slowly against a wall first; move to a bench and the floor only when the shoulder blades glide without shrugging.",
+            "zh": "先对着墙慢慢学；肩胛骨能不耸肩地滑动之后，再换到凳子和地面上做。"
+          },
+          "s": [
+            "M23"
+          ]
+        },
+        {
+          "text": {
+            "en": "Spreading chest work over more than one day a week tends to work better than one big session.",
+            "zh": "把胸部训练分散到一周里不止一天，通常比一次练完效果好。"
+          },
+          "s": [
+            "M21"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "Use a higher hand support if you cannot keep the body straight.",
+          "zh": "身体保持不了笔直，就把手撑得高一些。"
+        },
+        {
+          "en": "A shoulder blade that sticks out at rest and a weak arm should be checked by a professional.",
+          "zh": "静止时肩胛骨明显翘起、手臂无力，应找专业人员检查。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [
+        {
+          "text": {
+            "en": "Research shows: in 30 people, the standard push-up plus gave the highest serratus anterior activity of the push-up variations, with little upper trapezius activity in the plus phase.",
+            "zh": "研究显示：在 30 名受试者中，标准俯卧撑加是几种俯卧撑里前锯肌活动最高的，“加”的阶段上斜方肌活动很少。"
+          },
+          "s": [
+            "M10"
+          ]
+        },
+        {
+          "text": {
+            "en": "In 20 healthy people, the push-up plus and the \"dynamic hug\" gave the highest serratus anterior EMG of eight exercises.",
+            "zh": "在 20 名健康人做的八个动作里，俯卧撑加和“动态拥抱”的前锯肌肌电最高。"
+          },
+          "s": [
+            "M11"
+          ]
+        }
+      ],
+      "sketch": "push-up-plus",
+      "motion": {
+        "root": {
+          "rotation": [
+            72,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            -0.36,
+            0
+          ]
+        },
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "shoulder.l": {
+                "flexion": 72,
+                "abduction": 10
+              },
+              "elbow.l": {
+                "flexion": 5
+              }
+            },
+            "contract": {
+              "serratus-anterior": 0.06,
+              "pectoralis-minor": 0.04
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "shoulder.l": {
+                "flexion": 78,
+                "abduction": 10
+              },
+              "elbow.l": {
+                "flexion": 3
+              }
+            },
+            "contract": {
+              "serratus-anterior": 0.38,
+              "pectoralis-minor": 0.24
+            }
+          }
+        ],
+        "tempo": [
+          1,
+          0.8,
+          1.2,
+          0.5
+        ]
+      },
+      "sources": [
+        "M10",
+        "M11",
+        "M29"
+      ]
+    }
+  ]
+}

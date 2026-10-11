@@ -1,0 +1,19 @@
+{
+  "exercises": ["barbell-bench-press", "incline-dumbbell-press", "push-up", "dumbbell-fly", "cable-fly", "chest-dip", "machine-chest-press", "push-up-plus"],
+  "note": {
+    "en": "Train the chest on more than one day a week, keep every repetition under control, and add load in small steps only once the movement feels easy.",
+    "zh": "胸部每周练不止一天；每一次都要有控制；动作变得轻松后，再小步加重。"
+  },
+  "session": {
+    "title": { "en": "One way to arrange a chest session (an example, not a prescription)", "zh": "一种胸部训练课的安排（示例，不是处方）" },
+    "blocks": [
+      { "exercise": "push-up", "note": { "en": "Warm up with an easy version, hands raised if needed.", "zh": "先做容易的版本热身，需要时把手撑高。" } },
+      { "exercise": "barbell-bench-press", "note": { "en": "The main lift, with safety bars or a spotter; build up from the empty bar.", "zh": "主项，用保护杠或请人保护；从空杠逐步加重。" } },
+      { "exercise": "incline-dumbbell-press", "note": { "en": "A low incline for the upper part of the muscle.", "zh": "低角度上斜，照顾胸大肌上部。" } },
+      { "exercise": "cable-fly", "note": { "en": "Lighter, slower work through a comfortable range.", "zh": "较轻、较慢，在舒服的幅度里做。" } },
+      { "exercise": "push-up-plus", "note": { "en": "Finish with the shoulder blades: slow and without shrugging.", "zh": "最后练肩胛骨：慢，不耸肩。" } }
+    ],
+    "note": { "en": "Big multi-joint lifts come first while you are fresh; lighter single-joint work comes later. Leave a day or more before training the chest hard again.", "zh": "精力最好时先做多关节的大动作，后面再做较轻的单关节动作。胸部练得很累之后，至少隔一天再练。" },
+    "s": ["M21", "M23", "M24"]
+  }
+}

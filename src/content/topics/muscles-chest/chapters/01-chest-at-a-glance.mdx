@@ -1,0 +1,106 @@
+---
+id: chest-at-a-glance
+order: 1
+title: { en: "The chest at a glance", zh: "一眼看胸部" }
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  pose: null
+  layers: [superficial, intermediate, deep, skeleton, neighbours, body]
+  ghost: [body]
+  labels: ["group:superficial", "group:intermediate", "group:skeleton", "group:neighbours"]
+  camera: { position: [0.57, 0.19, 1.39], target: [0.0, -0.08, -0.04], fov: 30 }
+  summary:
+    en: "Eight chest muscles in three layers, laid over the rib cage and pulling on the collarbone, shoulder blade and upper arm."
+    zh: "八块胸部肌肉分三层铺在胸廓上，拉动锁骨、肩胛骨和上臂。"
+  beats:
+    - camera: on-my-body
+      view: xray
+      ghost: []
+      highlight: { signal: [superficial, intermediate, deep] }
+      labels: ["group:superficial"]
+      caption:
+        en: "The chest muscles sit on the front and sides of the rib cage, between the collarbones and the bottom of the breastbone. The faint outline is the skin of the whole body."
+        zh: "胸部肌肉铺在胸廓的前面和两侧，上到锁骨，下到胸骨下端。淡淡的轮廓是全身的皮肤。"
+    - camera: front
+      labels: ["group:superficial", "group:intermediate", "group:deep", "group:neighbours"]
+      caption:
+        en: "Three layers. The surface layer is the big fan of pectoralis major; the middle and deep layers lie underneath. Grey muscles belong to the shoulder, arm, back and belly."
+        zh: "分三层。浅层是胸大肌这把大扇子；中层和深层在它下面。灰色的是肩、臂、背和腹部的肌肉。"
+    - view: exploded
+      explode: 0.8
+      labels: ["group:superficial", "group:intermediate", "group:deep"]
+      caption:
+        en: "Peeling the layers: the surface layer lifts away first, then the middle layer, then the deep one. Bones and neighbouring muscles stay where they are."
+        zh: "一层层剥开：浅层先抬起来，然后是中层，最后是深层。骨骼和邻近的肌肉留在原处。"
+    - layers: [skeleton, body]
+      labels: [clavicle, scapula, humerus, thorax]
+      caption:
+        en: "The frame underneath: the rib cage, the collarbone, the shoulder blade and the upper-arm bone. Every chest muscle runs from one of these to another."
+        zh: "下面的骨架：胸廓、锁骨、肩胛骨和肱骨。每一块胸部肌肉都从其中一块骨长到另一块。"
+    - labels: [pectoralis-major-clavicular, pectoralis-major-sternocostal, pectoralis-major-abdominal]
+      caption:
+        en: "Pectoralis major in three parts, from the collarbone, the breastbone and the top of the belly wall. Serratus anterior wraps the side of the chest."
+        zh: "胸大肌分三部分，分别起于锁骨、胸骨和腹壁上端。前锯肌包在胸廓侧面。"
+    - ghost: [superficial, body]
+      labels: [pectoralis-minor, subclavius, intercostals-external, serratus-anterior]
+      caption:
+        en: "With the surface layer faded: pectoralis minor and subclavius underneath, and the thin intercostal sheets filling the gaps between the ribs."
+        zh: "把浅层调淡：下面是胸小肌和锁骨下肌，还有填在肋骨之间的薄薄的肋间肌。"
+---
+
+<Lang en>
+
+The model on the stage is a man's upper body, built from a real anatomical scan. The chest muscles are drawn in warm colours, the bones in ivory and the neighbouring muscles of the shoulder, arm, back and belly in grey. Left and right always mean the body's own left and right.
+
+The muscles lie in three layers. On the surface is **pectoralis major**, a fan in three parts that covers most of the front of the chest. Under it, in the middle layer, are **pectoralis minor**, a thin triangle running up to the shoulder blade, and **serratus anterior**, the saw-toothed sheet on the side of the ribs. The deep layer holds **subclavius**, a small muscle tucked under the collarbone, and the two **intercostal** layers between the ribs.
+
+Every muscle has an <Term id="origin">origin</Term>, the end that usually stays still, and an <Term id="insertion">insertion</Term>, the end it pulls. When a muscle contracts it shortens and draws the insertion towards the origin. That is all a muscle can do: pull, never push. Pressing a bar away from your chest is the chest muscles pulling your upper arms forward and across.
+
+One line for each: pectoralis major moves the arm across the chest; pectoralis minor and subclavius steady the shoulder girdle; serratus anterior slides the shoulder blade forward around the ribs; the intercostals help you breathe [M1] [M2]. <FlyTo preset="front">See the front</FlyTo>
+
+<More title={{ en: "Where this model comes from", zh: "这个模型从哪里来" }}>
+
+The meshes come from Z-Anatomy, an open atlas built on BodyParts3D, which was made from MRI scans of one adult male volunteer <Num s="M4">at 2 mm intervals</Num>. The model stands <Num s="M4">1.71 m</Num> tall. Atlas selected the chest structures, simplified them and added fibre directions and attachment points. The model and its geometry are shared under CC BY-SA 4.0.
+
+No open model of the full female muscle system exists yet, so this series uses this one body. Real bodies vary: rib counts and attachment details differ between people.
+
+</More>
+
+<More title={{ en: "Peel, not explode", zh: "剥层，而不是拆开" }}>
+
+In this topic the explode slider is called PEEL. Instead of pulling every part outwards at once, it lifts the surface layer first, then the middle, then the deep layer, the order in which an anatomist would uncover them.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+舞台上的模型是一名男性的上半身，根据真实的解剖扫描数据建成。胸部肌肉画成暖色，骨骼是象牙色，肩、上臂、背部和腹部的邻近肌肉画成灰色。文中说的左和右，一律指身体自己的左右。
+
+这些肌肉分三层。最表面的是**胸大肌**，像一把分成三部分的扇子，盖住胸前的大部分。它下面的中层有**胸小肌**，一块向上长到肩胛骨的薄三角形；还有**前锯肌**，贴在胸廓侧面、边缘像锯齿的一片肌肉。深层有**锁骨下肌**，一块藏在锁骨下面的小肌肉；以及肋骨之间的两层**肋间肌**。
+
+每块肌肉都有<Term id="origin">起点</Term>，通常是不动的那一端；还有<Term id="insertion">止点</Term>，是它拉动的那一端。肌肉收缩时变短，把止点拉向起点。肌肉能做的只有这一件事：拉，而不能推。把杠铃从胸口推开，其实是胸部肌肉把上臂向前、向里拉。
+
+每块一句话：胸大肌把手臂拉向胸前；胸小肌和锁骨下肌稳住肩带；前锯肌让肩胛骨沿着肋骨往前滑；肋间肌帮你呼吸 [M1] [M2]。<FlyTo preset="front">看正面</FlyTo>
+
+<More title={{ en: "Where this model comes from", zh: "这个模型从哪里来" }}>
+
+网格来自 Z-Anatomy，一个以 BodyParts3D 为基础的开源解剖图谱；BodyParts3D 则来自一名成年男性志愿者的核磁共振扫描，<Num s="M4">每隔 2 毫米一层</Num>。模型身高 <Num s="M4">1.71 米</Num>。Atlas 选取了胸部结构，做了简化，并加上纤维方向和附着点。模型及其几何数据按 CC BY-SA 4.0 许可共享。
+
+目前还没有完整女性肌肉系统的开放模型，所以本系列都用这一具身体。真实的人各不相同：肋骨数目和附着细节因人而异。
+
+</More>
+
+<More title={{ en: "Peel, not explode", zh: "剥层，而不是拆开" }}>
+
+在这个主题里，拆开滑块叫“剥层”。它不是把所有零件同时往外拉，而是先抬起浅层，再是中层，最后是深层，就像解剖时一层层揭开的顺序。
+
+</More>
+
+</Lang>
