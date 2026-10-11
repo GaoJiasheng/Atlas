@@ -9,6 +9,7 @@ engine: space-scene
 stage: model3d
 theme: paper
 sensitivity: open
-status: draft
+status: published
+illustration: muscles-chest
 shortTitle: { en: "Chest muscles", zh: "胸部肌肉" }
 note: { en: "Male reference anatomy · meshes Z-Anatomy / BodyParts3D, CC BY-SA 4.0", zh: "男性参考解剖 · 网格 Z-Anatomy / BodyParts3D，CC BY-SA 4.0" }

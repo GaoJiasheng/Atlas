@@ -412,7 +412,7 @@
       },
       "material": {
         "color": "muscle",
-        "tint": "token:neutral"
+        "tint": "token:ink-3"
       },
       "muscle": "deltoid-anterior"
     },
@@ -430,7 +430,7 @@
       },
       "material": {
         "color": "muscle",
-        "tint": "token:neutral"
+        "tint": "token:ink-3"
       },
       "muscle": "triceps-brachii"
     },
@@ -448,7 +448,7 @@
       },
       "material": {
         "color": "muscle",
-        "tint": "token:neutral"
+        "tint": "token:ink-3"
       },
       "short": {
         "en": "Biceps · short",
@@ -477,7 +477,7 @@
       },
       "material": {
         "color": "muscle",
-        "tint": "token:neutral"
+        "tint": "token:ink-3"
       },
       "summary": {
         "en": "From coracoid to humerus; helps raise the arm forward.",
@@ -502,7 +502,7 @@
       },
       "material": {
         "color": "muscle",
-        "tint": "token:neutral"
+        "tint": "token:ink-3"
       },
       "short": {
         "en": "Latissimus",
@@ -531,7 +531,7 @@
       },
       "material": {
         "color": "muscle",
-        "tint": "token:neutral"
+        "tint": "token:ink-3"
       },
       "short": {
         "en": "Ext. oblique",
@@ -560,7 +560,7 @@
       },
       "material": {
         "color": "muscle",
-        "tint": "token:neutral"
+        "tint": "token:ink-3"
       },
       "short": {
         "en": "Rectus abd.",
@@ -638,7 +638,7 @@
         "en": "Neighbouring muscles",
         "zh": "邻近肌肉"
       },
-      "color": "token:neutral",
+      "color": "token:ink-3",
       "card": false
     },
     {
@@ -1042,6 +1042,9 @@
       "duration": 1.2
     },
     "reach": {
+      "joint:scapula.l": {
+        "protraction": 12
+      },
       "joint:shoulder.l": {
         "flexion": 75
       },

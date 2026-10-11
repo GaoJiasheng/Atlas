@@ -8,6 +8,7 @@ Rules: skill atlas-space-topic (references/writing-rules.md), docs/16 §1.2 and 
 |---|---|
 | File | `public/models/muscles-chest.glb` (3.68 MB, about 232,000 triangles, 39 mesh nodes, 9 joints) |
 | Meshes | Z-Anatomy, the open source atlas of anatomy, CC BY-SA 4.0 [M3], derived from BodyParts3D, © The Database Center for Life Science [M4] (CC BY-SA 2.1 Japan as stated by Z-Anatomy; BodyParts3D is now CC BY 4.0) |
+| Attribution lines required by Z-Anatomy (the glb `asset.copyright` and the title block `note` carry the same attribution; docs/16 §3) | "BodyParts3D - The Database Center for Life Science - CC-BY-SA 2.1 Japan" and "Z-Anatomy - The open source atlas of anatomy - CC-BY-SA 4.0" |
 | Source body | One adult male volunteer (MRI at 2 mm intervals, BodyParts3D [M4]); stature measured on the model 1.71 m |
 | Licence of the glb and of the geometry derived from it (`sites`, `rig` axes, fibre data) | CC BY-SA 4.0 (docs/16 §3) |
 | Licence of the text (muscle sheets, exercise cards, chapters) | the site's CC BY-NC-SA 4.0 |

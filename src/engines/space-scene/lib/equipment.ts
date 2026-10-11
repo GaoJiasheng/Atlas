@@ -6,9 +6,9 @@
  * matte dark grey).
  *
  *   barbell        held: Olympic bar, 2.2 m long, 28 mm shaft, 50 mm sleeves,
- *                  a 450 mm × 30 mm plate on each sleeve; the shaft runs along
+ *                  a 300 mm × 25 mm iron plate (the standard 10 kg size) on each sleeve; the shaft runs along
  *                  X between the palms
- *   dumbbell       held: 350 mm long, 200 mm heads, handle along X
+ *   dumbbell       held: 350 mm long, 170 mm heads, handle along X
  *   cable-handle   held: a stirrup handle, grip along X, ring toward −Y
  *   bench          free-standing: 1.2 × 0.3 m pad with its top at the origin,
  *                  0.45 m above the floor; long axis along Z (head end −Z);
@@ -26,8 +26,8 @@ export const HELD_EQUIPMENT: readonly EquipmentKind[] = ['barbell', 'dumbbell', 
 export const PLANTED_EQUIPMENT: readonly EquipmentKind[] = ['floor', 'parallel-bars'];
 
 /** Real sizes (metres). */
-export const BAR = { length: 2.2, shaft: 0.028, sleeve: 0.05, sleeveLength: 0.415, plate: 0.45, plateThick: 0.03 } as const;
-export const DUMBBELL = { length: 0.35, head: 0.2, handle: 0.034, grip: 0.13 } as const;
+export const BAR = { length: 2.2, shaft: 0.028, sleeve: 0.05, sleeveLength: 0.415, plate: 0.3, plateThick: 0.025 } as const;
+export const DUMBBELL = { length: 0.35, head: 0.17, handle: 0.034, grip: 0.13 } as const;
 export const BENCH = { length: 1.2, width: 0.3, height: 0.45, pad: 0.06 } as const;
 /** Bench seat (the part that stays flat under an inclined back). */
 const SEAT = 0.42;
