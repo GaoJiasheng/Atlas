@@ -2,14 +2,14 @@
  * The lesson's SVG stage (docs/15 §4.3): draws the current sub-step's model in
  * the chosen view (bar, circle, number line, wall, model drawing) inside the
  * free rectangle the layout found, wires taps / drags / keys to the
- * controller, and adds what the moment needs: the example being played, a
- * HISTORY preview, "Show me" ghosts, the S / E / N / L display modes. The
- * background chapter shows one specimen fraction ({3/4}) in every view.
+ * controller, and adds what the moment needs: "Show me" ghosts and the
+ * S / E / N / L display modes. An explanation beat is drawn by `BeatModel`;
+ * the background chapter shows one specimen fraction ({3/4}) in every view.
  */
 import type { ReactNode } from 'react';
 import type { Locale } from '../../core/types';
 import { t, tx } from '../../../i18n';
-import type { ModelView, Task } from '../schema';
+import type { Beat, ModelView, Task } from '../schema';
 import type { Controller } from '../controller';
 import type { TaskRun } from '../ui';
 import { canShow } from '../lib/lesson';
@@ -27,6 +27,7 @@ import { BarModelDiagram } from './BarModelDiagram';
 import { CutBar } from './CutBar';
 import { OptionGrid, type OptionCell } from './OptionGrid';
 import { SvgFrac, type BarObject } from './svg';
+import { BeatModel } from './BeatModel';
 
 export interface DisplayModes {
   symbol: boolean;
@@ -43,14 +44,14 @@ export interface StageContentProps {
   /** The background chapter: the specimen in this view. */
   specimen?: ModelView;
   task?: Task | null;
-  /** The state drawn (the run, an example frame, or a HISTORY preview). */
+  /** The state drawn (the run). */
   state?: TaskState | null;
   run?: TaskRun | null;
   view?: ModelView;
   /** Taps and keys act on the model. */
   editable?: boolean;
-  /** Example pointer over a part. */
-  pointer?: number | null;
+  /** An explanation beat (read-only): drawn instead of a task. */
+  beat?: Beat | null;
   /** Practice: the right answer drawn after a wrong one. */
   ctl?: Controller;
 }
@@ -76,6 +77,7 @@ export function StageContent(p: StageContentProps) {
   const { box } = p;
   if (box.w < 40 || box.h < 40) return null;
   if (p.specimen) return <Specimen {...p} view={p.specimen} />;
+  if (p.beat) return <BeatModel beat={p.beat} box={box} defs={p.defs} modes={p.modes} locale={p.locale} />;
   const task = p.task;
   const state = p.state;
   if (!task || !state) return null;
@@ -345,7 +347,6 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
         ghost={ghost && phase !== 'input' ? ghostOf(task) : null}
         labels={labels}
         hatchMine={state.given.length > 0}
-        pointer={p.pointer}
        
         label={label}
         locale={locale}
@@ -398,7 +399,6 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
       equivalent={p.modes.equivalent}
       numberline={p.modes.numberline}
       hatchMine={state.given.length > 0}
-      pointer={p.pointer}
      
       label={label}
       locale={locale}

@@ -1,5 +1,5 @@
 /**
- * The abstract column of the lesson (docs/15 §4.5 panel 02 WORKING, the "A" of
+ * The abstract line of the lesson (docs/15 §10: the number sentence under the model on a check, the "A" of
  * concrete–pictorial–abstract): the number sentences the child's moves amount
  * to, written with `{a/b}` tokens, e.g. `{1/8} + {1/8} + {1/8} = {3/8}`,
  * `{2/3} = {8/12} (× 4)`, `{1/2} + {1/4} = {2/4} + {1/4} = {3/4}`. Pure.
@@ -107,7 +107,7 @@ export function workingLines(task: Task, state: TaskState, locale: Locale, done 
 }
 
 /**
- * The fraction the card, the status line and panel 03 show. Where the child
+ * The fraction the card, the status line and the plate block show. Where the child
  * still has to write the answer (an input phase, a sum), it is what the
  * child wrote, or nothing: the HUD never says the answer first. Where the
  * marks are the answer (shade, fold, split, merge, place), it is their value.

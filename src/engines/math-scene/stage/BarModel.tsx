@@ -46,8 +46,6 @@ export interface BarModelProps {
   numberline?: boolean;
   /** The child's marks get a fine hatch too (a given or second amount shares the model). */
   hatchMine?: boolean;
-  /** Example pointer over part i. */
-  pointer?: number | null;
   label: string;
   locale: Locale;
 }
@@ -162,9 +160,6 @@ export function BarModel(p: BarModelProps) {
           return <SvgFrac key={`lab${i}`} cx={g.x + g.w / 2} cy={g.y + g.h / 2 - 3} n={1} d={parts} size={Math.min(14, g.w / 3)} className="ms-part-label" />;
         })}
       {p.ghost && <BarGhostLayer {...p} ghost={p.ghost} wholes={wholes} />}
-      {p.pointer !== null && p.pointer !== undefined && p.pointer < total && (
-        <circle className="ms-pointer" cx={geom(p.pointer).x + geom(p.pointer).w / 2} cy={geom(p.pointer).y + p.h / 2} r={Math.min(18, p.h / 3)} />
-      )}
       {p.equivalent && wholes === 1 && !p.cuts && !p.diagonal && <EquivalentRows x={p.x} y={below + 10} w={p.w} parts={parts} count={value.n} locale={p.locale} />}
       {p.numberline && wholes === 1 && !p.cuts && !p.diagonal && <AlignedLine x={p.x} y={below + (p.equivalent ? 2 * EQUIV_ROW + 14 : 14)} w={p.w} parts={parts} />}
     </g>

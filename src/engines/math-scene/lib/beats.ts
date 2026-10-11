@@ -1,46 +1,32 @@
 /**
- * Presentation beats of the lesson (docs/15 §4.7), derived from the data so
- * authors keep one copy: every sub-step gives one beat per line of its
- * example (`example.say`: the engine plays a share of the example's solution)
- * and then one "your turn" beat (the sub-step's own model; the caption is its
- * prompt; the child answers on the stage, auto-play waits). The practice
- * chapter gives one beat per question and a summary beat; the background
- * chapter keeps the core's default beat (its summary). Pure.
+ * Presentation beats of the lesson (docs/15 §4.7, §10), from the data so
+ * authors keep one copy: a step gives its explanation beats (the caption is
+ * the beat's own) and then its check (the presentation stops there with the
+ * answer controls open; auto-play waits until it is answered, shown or
+ * skipped); the practice gives one beat per question and a summary beat; the
+ * background chapter keeps the core's default beat (its summary). The same
+ * list, without the summary, is the chapter axis's ticks. Pure.
  */
 import type { BilingualText } from '../../../i18n';
-import type { Lesson, Task } from '../schema';
+import type { Lesson } from '../schema';
 
 export interface LessonBeat {
   caption: BilingualText;
-  /** `example`: watch a line of the example · `try`: the child's turn · `summary`: the practice summary. */
-  kind: 'example' | 'try' | 'summary';
-  /** The sub-step (or question) the beat belongs to (`null` for the summary). */
-  task: string | null;
-  /** 0-based position of the sub-step in its step (or of the question). */
+  /** `explain`: an explanation beat · `check`: the chapter's check · `question`: a practice question · `summary`: the practice summary. */
+  kind: 'explain' | 'check' | 'question' | 'summary';
+  /** Position in the chapter (= the store's `beat`; the summary is one past the last question). */
   index: number;
-  /** Example line (0-based) for `example` beats. */
-  line?: number;
-}
-
-/** The steps' and the practice's tasks by chapter id. */
-export function chapterTasks(lesson: Lesson, chapter: string): Task[] | null {
-  const step = lesson.steps.find((s) => s.id === chapter);
-  if (step) return step.tasks;
-  return null;
 }
 
 /** Beats of one chapter: a step, the practice (when `practice` is set), else none (the core's default beat). */
-export function lessonBeats(lesson: Lesson, chapter: string, practice: boolean, summaryCaption: BilingualText): LessonBeat[] | undefined {
+export function lessonBeats(lesson: Lesson, chapter: string, practice: boolean, captions: { check: BilingualText; summary: BilingualText }): LessonBeat[] | undefined {
   if (practice) {
     return [
-      ...lesson.practice.map((q, index): LessonBeat => ({ caption: q.task.prompt, kind: 'try', task: q.id, index })),
-      { caption: summaryCaption, kind: 'summary', task: null, index: lesson.practice.length },
+      ...lesson.practice.map((q, index): LessonBeat => ({ caption: q.task.prompt, kind: 'question', index })),
+      { caption: captions.summary, kind: 'summary', index: lesson.practice.length },
     ];
   }
-  const tasks = chapterTasks(lesson, chapter);
-  if (!tasks) return undefined;
-  return tasks.flatMap((task, index): LessonBeat[] => [
-    ...(task.example?.say ?? []).map((caption, line): LessonBeat => ({ caption, kind: 'example', task: task.id, index, line })),
-    { caption: task.prompt, kind: 'try', task: task.id, index },
-  ]);
+  const step = lesson.steps.find((s) => s.id === chapter);
+  if (!step) return undefined;
+  return [...step.beats.map((b, index): LessonBeat => ({ caption: b.caption, kind: 'explain', index })), { caption: captions.check, kind: 'check', index: step.beats.length }];
 }

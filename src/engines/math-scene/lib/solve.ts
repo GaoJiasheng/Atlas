@@ -1,7 +1,7 @@
 /**
  * The model's correct way through a task (docs/15 §4.8): `solve(task)` is the
- * list of actions the "Show me" ghost, the examples of the presentation,
- * `__atlas.engine.solve()` and the unit tests all replay with `apply`.
+ * list of actions the "Show me" ghost, `__atlas.engine.solve()` and the
+ * unit tests all replay with `apply`.
  * `sampleState` builds the state of a wrong answer written in a task's
  * answer notation (the `sample` of a `feedback.wrong` entry, docs/06 MathScene).
  */
@@ -102,30 +102,6 @@ export function step(task: Task, state: TaskState, action: Action): TaskState {
 /** The solved state (what "Show me" draws, and where a finished sub-step is shown again). */
 export function solvedState(task: Task): TaskState {
   return apply(task, solve(task));
-}
-
-/* ------------------------------------------------------------------ */
-/* Examples                                                            */
-/* ------------------------------------------------------------------ */
-
-/** The example of a sub-step as a task of its own (the sub-step with the example's model and numbers). */
-export function exampleTask(task: Task): Task | null {
-  if (!task.example) return null;
-  const { say: _say, ...fields } = task.example;
-  void _say;
-  return { ...task, ...fields, example: undefined } as Task;
-}
-
-/** The example's states, one per caption line: the first line shows the start, the last the answer, the rest share the actions between them. */
-export function exampleFrames(task: Task): TaskState[] {
-  const ex = exampleTask(task);
-  if (!ex || !task.example) return [];
-  const actions = solve(ex);
-  const lines = task.example.say.length;
-  return Array.from({ length: lines }, (_, i) => {
-    const upto = lines === 1 ? actions.length : Math.round((i / (lines - 1)) * actions.length);
-    return apply(ex, actions.slice(0, upto));
-  });
 }
 
 /* ------------------------------------------------------------------ */

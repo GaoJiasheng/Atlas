@@ -1,33 +1,56 @@
 /**
- * The real lesson (src/content/topics/fractions/data/lesson.json): every sub-step
- * and practice question is solved by its own `solve()`, every planned wrong
- * answer (`feedback.wrong[].sample`) is diagnosed as the misconception it is
- * filed under, and every wrong `choose` option shows its declared one
- * (docs/15 §4.8: the automated proof that each distractor gets the right feedback).
+ * The real lesson (src/content/topics/fractions/data/lesson.json, docs/15 §10):
+ * every step explains in 3–5 beats whose models can be drawn and ends in a
+ * check pool of 8–10 tasks; every pool task and practice question is solved
+ * by its own `solve()`, every planned wrong answer (`feedback.wrong[].sample`)
+ * is diagnosed as the misconception it is filed under, and every wrong
+ * `choose` option shows its declared one (docs/15 §4.8: the automated proof
+ * that each distractor gets the right feedback, whichever task is drawn).
  */
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { lessonFile, type Task } from '../../src/engines/math-scene/schema';
 import { check } from '../../src/engines/math-scene/lib/check';
-import { apply, exampleFrames, exampleTask, sampleState, solve } from '../../src/engines/math-scene/lib/solve';
+import { apply, sampleState, solve } from '../../src/engines/math-scene/lib/solve';
 import { initialState, phasesOf } from '../../src/engines/math-scene/lib/state';
 import { lessonBeats } from '../../src/engines/math-scene/lib/beats';
+import { beatCount, beatSlot, locate } from '../../src/engines/math-scene/lib/lesson';
+import { proveTask } from '../../src/engines/math-scene/lib/proof';
 import { add, sub, related, compare, toImproper, type Frac } from '../../src/engines/math-scene/lib/fraction';
+import { badTokens } from '../../src/lib/rich-text';
 
 const FILE = join(import.meta.dirname, '../../src/content/topics/fractions/data/lesson.json');
 const lesson = lessonFile.parse(JSON.parse(readFileSync(FILE, 'utf8')));
 const all: { where: string; task: Task; bridge: boolean }[] = [
-  ...lesson.steps.flatMap((s) => s.tasks.map((task) => ({ where: s.id, task, bridge: !!s.bridge }))),
+  ...lesson.steps.flatMap((s) => s.pool.map((task) => ({ where: s.id, task, bridge: !!s.bridge }))),
   ...lesson.practice.map((q) => ({ where: 'practice', task: q.task, bridge: false })),
 ];
+const captions = { check: { en: 'Your turn', zh: '轮到你' }, summary: { en: 'Summary', zh: '小结' } };
 
 describe('fractions lesson', () => {
-  it('has 12 steps, 35 sub-steps and 8 practice questions', () => {
+  it('has 12 steps of 3–5 beats with a check pool of 8–10, and 8 practice questions', () => {
     expect(lesson.steps).toHaveLength(12);
-    expect(lesson.steps.reduce((n, s) => n + s.tasks.length, 0)).toBe(35);
+    for (const s of lesson.steps) {
+      expect(s.beats.length, `${s.id} beats`).toBeGreaterThanOrEqual(3);
+      expect(s.beats.length, `${s.id} beats`).toBeLessThanOrEqual(5);
+      expect(s.pool.length, `${s.id} pool`).toBeGreaterThanOrEqual(8);
+      expect(s.pool.length, `${s.id} pool`).toBeLessThanOrEqual(10);
+    }
     expect(lesson.practice).toHaveLength(8);
     expect(new Set(lesson.practice.map((q) => q.task.kind)).size).toBeGreaterThanOrEqual(5);
+    const ids = all.map((x) => x.task.id);
+    expect(new Set(ids).size).toBe(ids.length);
+  });
+
+  it('writes every beat caption and equation with valid fraction tokens', () => {
+    for (const s of lesson.steps) {
+      for (const b of s.beats) {
+        expect(b.caption.en.length).toBeGreaterThan(0);
+        expect(b.caption.zh.length).toBeGreaterThan(0);
+        for (const text of [b.caption.en, b.caption.zh, b.equation ?? '']) expect(badTokens(text), `${s.id}: ${text}`).toEqual([]);
+      }
+    }
   });
 
   for (const { where, task } of all) {
@@ -64,14 +87,9 @@ describe('fractions lesson', () => {
         });
       }
 
-      if (task.example) {
-        it('has an example that ends solved', () => {
-          const ex = exampleTask(task)!;
-          const frames = exampleFrames(task);
-          expect(frames).toHaveLength(task.example!.say.length);
-          expect(check(ex, frames.at(-1)!).ok).toBe(true);
-        });
-      }
+      it('passes the shared proof (scripts/math/check-pool.ts)', () => {
+        expect(proveTask(task)).toEqual([]);
+      });
     });
   }
 
@@ -90,17 +108,25 @@ describe('fractions lesson', () => {
       }
     }
     for (const s of lesson.steps.filter((x) => x.id === 'adding-related' || x.id === 'subtracting-related')) {
-      for (const t of s.tasks) for (const [a, b] of sums(t)) expect(related(a, b), `${t.id}: related denominators`).toBe(true);
+      for (const t of s.pool) for (const [a, b] of sums(t)) expect(related(a, b) && a.d !== b.d, `${t.id}: related, different denominators`).toBe(true);
     }
   });
 
-  it('derives one beat per example line plus one per sub-step', () => {
+  it('derives the beats: explanation beats, then the check; the practice questions and a summary', () => {
     for (const s of lesson.steps) {
-      const beats = lessonBeats(lesson, s.id, false, { en: 'Summary', zh: '小结' })!;
-      const lines = s.tasks.reduce((n, t) => n + (t.example?.say.length ?? 0), 0);
-      expect(beats).toHaveLength(lines + s.tasks.length);
-      expect(beats.filter((b) => b.kind === 'try').map((b) => b.task)).toEqual(s.tasks.map((t) => t.id));
+      const beats = lessonBeats(lesson, s.id, false, captions)!;
+      expect(beats).toHaveLength(s.beats.length + 1);
+      expect(beats.at(-1)!.kind).toBe('check');
+      expect(beats.filter((b) => b.kind === 'explain')).toHaveLength(s.beats.length);
+      const place = locate(lesson, s.id, false);
+      expect(beatCount(place)).toBe(s.beats.length + 1);
+      expect(beatSlot(place, s.beats.length).kind).toBe('check');
+      expect(beatSlot(place, 99).kind).toBe('check');
+      expect(beatSlot(place, 0).kind).toBe('explain');
     }
-    expect(lessonBeats(lesson, 'practice', true, { en: 'Summary', zh: '小结' })).toHaveLength(lesson.practice.length + 1);
+    const practice = lessonBeats(lesson, 'practice', true, captions)!;
+    expect(practice).toHaveLength(lesson.practice.length + 1);
+    expect(practice.filter((b) => b.kind === 'question')).toHaveLength(lesson.practice.length);
+    expect(lessonBeats(lesson, 'before-you-start', false, captions)).toBeUndefined();
   });
 });

@@ -1,21 +1,32 @@
 /**
- * MathScene view (docs/15 §4): the lesson on an SVG stage inside the
- * technical-plate HUD. Registers the VIEW group as the model switch (the
- * engine lights it, core C2), the display modes S / E / N (+ host L) and P,
- * the commands C check · I hint · U undo · W example (core C3), the test
- * hooks `__atlas.engine` (C7) and `<Task id>` links (C9). Draws the stage,
- * the answer tray, the bottom bar of steps, the card, the three panels, the
- * reader inspector and the control panel; runs the presentation with "your
- * turn" beats the child answers on the stage (core C4: the tray's controls in
- * the caption card, auto-play waiting for a right answer or "Show me").
+ * MathScene view (docs/15 §4, §10): an explanation-first lesson on an SVG
+ * stage inside the technical-plate HUD. Each step is told in beats (the
+ * stage animates the model, the number sentence sits under it, the caption
+ * is the reading panel's beat line) and ends in one short check drawn from
+ * the step's pool; the practice chapter is eight fixed questions.
+ *
+ * HUD (docs/08 §2 全引擎 HUD 铁律): the chapter axis at the bottom (core
+ * `ChapterAxis`: a segment per chapter, a circle per beat, the check and the
+ * practice questions as squares; click = go there, nothing runs by itself),
+ * the top-right FRACTION card, the left column's compact PLATE block, and in
+ * the reading panel: beat line → check tray (on the check) → chapter body →
+ * chapter index (key facts, syllabus links). Registers the VIEW group as the
+ * model switch on a check (core C2), the display modes S / E / N (+ host L)
+ * and P, the commands C check · I hint · U undo (core C3), `,` / `.` beats,
+ * the test hooks `__atlas.engine` (C7) and `<Beat n>` / `<Task id>` links
+ * (C9). The presentation walks the beats and stops at each check with the
+ * tray in its caption card; auto-play waits until it is answered, shown or
+ * skipped (core C4).
  */
-import { useEffect, useId, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useStore } from 'zustand';
 import type { EngineViewProps } from '../core/types';
 import { SceneSlot, useHud, useScene, useSceneContext, useSceneControls, useSceneStore } from '../core/context';
 import type { SceneCommand, SceneControls, SceneMode, ScenePreset, SpecRow } from '../core/controls';
 import { usePresentation, type PresentationAdapter } from '../core/presentation';
 import { chapterNumbers } from '../core/chapters';
+import { ChapterAxis, type AxisChapter } from '../core/axis/ChapterAxis';
+import { axisCounter, flatIndex } from '../core/axis/axis';
 import { t, tx, type BilingualText } from '../../i18n';
 import { renderRich, speakable } from '../../lib/rich-text';
 import type { MathSceneExt } from './index';
@@ -23,19 +34,21 @@ import type { MathChapterState, MathSceneData, MisconceptionCode, ModelView } fr
 import { createMathUi } from './ui';
 import { createController } from './controller';
 import { lessonBeats, type LessonBeat } from './lib/beats';
-import { viewsFor } from './lib/lesson';
+import { beatCount, viewsFor } from './lib/lesson';
 import { answered } from './lib/check';
-import { exampleFrames, exampleTask } from './lib/solve';
 import type { Action } from './lib/state';
-import { cardValue } from './lib/working';
+import { cardValue, workingLines } from './lib/working';
 import { formatFrac } from './lib/fraction';
 import { Defs } from './stage/svg';
 import { StageContent } from './stage/Stage';
-import { useStageLayout, type LayoutMode } from './stage/layout';
+import { beatCounts, beatFraction, beatPair, beatShape } from './stage/BeatModel';
+import { useStageLayout, type LayoutMode, type Rect } from './stage/layout';
 import { Tray, partsAreNarrow } from './tray/Tray';
-import { FractionCard, HistoryPanel, StatePanel, TaskInspector, WorkingPanel } from './hud/Panels';
-import { StepBar } from './hud/StepBar';
+import { FractionCard } from './hud/Panels';
 import { MathOverlay } from './hud/Overlay';
+import { BeatLine } from './hud/BeatLine';
+import { ChapterIndex } from './hud/ChapterIndex';
+import { PlateBlock, modelRows, type PlateRow } from './hud/PlateBlock';
 import { PracticeSummary } from './practice/Summary';
 import './math-scene.css';
 
@@ -49,12 +62,12 @@ const VIEW_KEY: Record<ModelView, Parameters<typeof t>[1]> = {
   barmodel: 'math.view.barmodel',
 };
 const SPECIMEN_VIEWS: ModelView[] = ['bar', 'circle', 'numberline', 'wall'];
-/** One example line on the stage before the next (outside the presentation). */
-const EXAMPLE_LINE_MS = 2800;
 /** A beat's model change settles (the stage is SVG: a short ease). */
-const BEAT_SETTLE_MS = 600;
+const BEAT_SETTLE_MS = 650;
+/** Height of the number-sentence line under the model. */
+const EQUATION_H = 58;
 
-type LessonBeatSpec = LessonBeat & { caption: BilingualText };
+type Saved = { chapter: string | null; beat: number; model: ModelView | null };
 
 function useMedia(query: string): boolean {
   const [on, setOn] = useState(false);
@@ -72,97 +85,82 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
   const file = data as MathSceneData;
   const lesson = file.lesson;
   const store = useSceneStore<MathSceneExt>();
-  const { hud } = useSceneContext();
+  const { hud, actions } = useSceneContext();
   const [ui] = useState(createMathUi);
   const practiceChapter = useMemo(() => chapters.find((c) => (c.state as MathChapterState).practice)?.id ?? null, [chapters]);
-  const chapterIds = useMemo(() => chapters.map((c) => c.id), [chapters]);
   const numbers = useMemo(() => chapterNumbers(chapters), [chapters]);
-  const ctl = useMemo(() => createController(lesson, store, ui, practiceChapter, chapterIds), [lesson, store, ui, practiceChapter, chapterIds]);
+  const ctl = useMemo(
+    () =>
+      createController(lesson, store, ui, practiceChapter, {
+        // Below 1024 px the reader is a sheet and the check sits on the stage instead.
+        openReader: () => actions.setReader(true),
+      }),
+    [lesson, store, ui, practiceChapter, actions],
+  );
   const defs = `ms${useId().replace(/[^a-z0-9]/gi, '')}`;
 
-  const s = useScene<MathSceneExt, { chapter: string | null; task: number; model: ModelView | null }>((st) => ({ chapter: st.chapter, task: st.task, model: st.model }));
+  const s = useScene<MathSceneExt, Saved>((st) => ({ chapter: st.chapter, beat: st.beat, model: st.model }));
   const u = useStore(ui);
   const cur = ctl.current();
-  const { place, practice, index, task, run } = cur;
-  const step = place.kind === 'step' ? place.step : null;
-  const tasks = place.kind === 'background' ? [] : place.tasks;
-  const chapterNo = String(numbers.get(s.chapter ?? '') ?? 0).padStart(2, '0');
+  const { place, practice, slot, task, run, step } = cur;
+  const background = place.kind === 'background';
+  const explain = slot.kind === 'explain' ? slot.beat : null;
+  const number = (id: string | null) => {
+    const c = chapters.find((x) => x.id === id);
+    return c?.kind === 'background' ? t(locale, 'chapter.backgroundShort') : String(numbers.get(id ?? '') ?? 0).padStart(2, '0');
+  };
+  const chapterNo = number(s.chapter);
   const hudOn = useHud((h) => h.hud);
   const labelsOn = useHud((h) => h.labels);
-  const phone = useMedia('(max-width: 759px)');
+  const axisOpen = useHud((h) => h.panelsOpen);
   const coarse = useMedia('(pointer: coarse)');
+  const phone = useMedia('(max-width: 759px)');
+  // Below 1024 px the reader is a sheet over the stage: the check tray docks on the stage above the axis.
+  const sheet = useMedia('(max-width: 1023px)');
 
-  // Labels (L) name every part 1/n: an assist the child switches on, so the lesson starts without them.
+  // Labels (L) name every part 1/n: an assist the reader switches on, so the lesson starts without them.
   useEffect(() => hud.setState({ labels: false }), [hud]);
 
-  /* ---------- the view: the VIEW group's model, else the chapter's, else the task's own ---------- */
-  const views = task ? (practice ? [task.model.kind] : viewsFor(step, task)) : place.kind === 'background' ? SPECIMEN_VIEWS : [];
-  const view: ModelView = s.model && views.includes(s.model) ? s.model : task ? task.model.kind : (s.model ?? 'bar');
-
-  /* ---------- entering a sub-step: fresh unless finished; clamp the index ---------- */
+  /* ---------- entering a chapter draws its check; a beat past the end shows the last one ---------- */
   useEffect(() => {
-    if (tasks.length > 0 && s.task > tasks.length) store.getState().patch({ task: tasks.length });
-  }, [s.task, tasks.length, store]);
-  const presentingRef = useRef(false);
+    ctl.visit(s.chapter);
+    ui.setState({ summary: false });
+  }, [s.chapter, ctl, ui]);
   useEffect(() => {
-    if (!presentingRef.current) {
-      ctl.enter();
-      ui.setState({ example: null, summary: false });
-    }
-  }, [s.chapter, s.task, ctl, ui]);
+    const n = beatCount(place);
+    if (s.beat > n - 1) store.getState().patch({ beat: n - 1 });
+  }, [s.beat, place, store]);
 
-  /* ---------- example playback (W): one caption line every few seconds ---------- */
-  const exampleOn = !!task && u.example?.task === task.id;
-  const frames = useMemo(() => (task && exampleOn ? exampleFrames(task) : []), [task, exampleOn]);
-  useEffect(() => {
-    if (!u.example || u.presenting || !task?.example) return;
-    if (u.example.line >= task.example.say.length - 1) return;
-    const timer = window.setTimeout(() => ui.setState((x) => (x.example ? { example: { ...x.example, line: x.example.line + 1 } } : {})), EXAMPLE_LINE_MS);
-    return () => window.clearTimeout(timer);
-  }, [u.example, u.presenting, task, ui]);
+  /* ---------- the view on a check: the VIEW group's model, else the task's own ---------- */
+  const views = task && slot.kind === 'check' ? viewsFor(step, task) : background ? SPECIMEN_VIEWS : [];
+  const view: ModelView = task ? (s.model && views.includes(s.model) ? s.model : task.model.kind) : (s.model ?? 'bar');
 
-  /* ---------- Shift + ← → : previous / next sub-step ---------- */
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (!e.shiftKey || e.altKey || e.ctrlKey || e.metaKey || e.defaultPrevented) return;
-      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
-      const target = e.target instanceof Element ? e.target : null;
-      if (target?.closest('input, textarea, select, [data-keys="own"], [data-keys="arrows"], [role="slider"], [role="radiogroup"]')) return;
-      if (presentingRef.current) return;
-      e.preventDefault();
-      if (e.key === 'ArrowRight') ctl.next();
-      else ctl.prev();
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [ctl]);
+  /* ---------- the flat list of beats (axis ticks, `,` / `.`) ---------- */
+  const flat = useMemo(() => chapters.flatMap((c) => Array.from({ length: ctl.beatCount(c.id) }, (_, index) => ({ chapter: c.id, index }))), [chapters, ctl]);
 
-  /* ---------- PRESENTATION: beats from the data (examples + "your turn") ---------- */
-  const summaryCaption = useMemo(() => both('math.summary.beat'), []);
-  const adapter: PresentationAdapter<LessonBeatSpec, { chapter: string | null; task: number; model: ModelView | null }> = {
-    beatsOf: (c) => lessonBeats(lesson, c.id, c.id === practiceChapter, summaryCaption) as LessonBeatSpec[] | undefined,
+  /* ---------- PRESENTATION: beats from the data (explanation beats, then the check) ---------- */
+  const captions = useMemo(() => ({ check: both('math.check.beat'), summary: both('math.summary.beat') }), []);
+  const adapter: PresentationAdapter<LessonBeat, Saved> = {
+    beatsOf: (c) => lessonBeats(lesson, c.id, c.id === practiceChapter, captions),
     captionOf: (b, l) => speakable(tx(b.caption, l), l),
     renderCaption: (b, l) => renderRich(tx(b.caption, l), l),
     applyBeat: (b, { instant }) => {
       const spec = b.spec;
       const st = store.getState();
       // The summary beat stays on the last question (its index is one past it).
-      st.applyState({ chapter: b.chapter, task: spec ? Math.min(spec.index, spec.kind === 'summary' ? spec.index - 1 : spec.index) + 1 : 1, model: null }, { instant });
+      st.applyState({ chapter: b.chapter, beat: spec ? (spec.kind === 'summary' ? spec.index - 1 : spec.index) : 0, model: null }, { instant });
+      ui.setState({ summary: spec?.kind === 'summary' });
       const { task: now } = ctl.current();
-      if (!spec || spec.kind === 'summary') ui.setState({ example: null, summary: spec?.kind === 'summary', preview: null });
-      else if (spec.kind === 'example' && now) ui.setState({ example: { task: now.id, line: spec.line ?? 0 }, summary: false, preview: null });
-      else if (now) {
-        ui.setState({ example: null, summary: false, preview: null });
-        if (!(practice && ui.getState().practice[now.id])) ctl.reset(now);
-      }
+      if (now && (spec?.kind === 'check' || spec?.kind === 'question') && !(practice && ui.getState().practice[now.id])) ctl.reset(now);
       return instant ? undefined : new Promise<void>((resolve) => window.setTimeout(resolve, BEAT_SETTLE_MS));
     },
     gate: (b) => {
-      if (b.spec?.kind !== 'try' || !b.spec.task) return null;
-      const id = b.spec.task;
+      if (b.spec?.kind !== 'check' && b.spec?.kind !== 'question') return null;
       const open = () => {
-        const r = ui.getState().runs[id];
-        return !!r && (r.done || r.revealed);
+        const { task: now } = ctl.current();
+        if (!now) return true;
+        const r = ui.getState().runs[now.id];
+        return ui.getState().skipped[now.id] === true || (!!r && (r.done || r.revealed));
       };
       return new Promise<void>((resolve) => {
         if (open()) return resolve();
@@ -174,36 +172,67 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
         });
       });
     },
-    onEnter: () => {
-      presentingRef.current = true;
-      ui.setState({ presenting: true, example: null, preview: null });
-    },
-    saveState: () => ({ chapter: store.getState().chapter, task: store.getState().task, model: store.getState().model }),
+    onEnter: () => ui.setState({ presenting: true, skipped: {} }),
+    saveState: () => ({ chapter: store.getState().chapter, beat: store.getState().beat, model: store.getState().model }),
     restoreState: (saved) => {
-      presentingRef.current = false;
-      ui.setState({ presenting: false, example: null, summary: false });
+      ui.setState({ presenting: false, summary: false });
       store.getState().applyState(saved, { instant: false });
     },
     cardActions:
-      u.presenting && task && run && !exampleOn && !u.summary ? (
-        <Tray ctl={ctl} lesson={lesson} task={task} run={run} where={null} practice={practice} example={null} compact narrow={coarse} locale={locale} />
-      ) : undefined,
+      u.presenting && task && run && !u.summary ? <Tray ctl={ctl} task={task} run={run} where={null} practice={practice} pool={step?.pool.length} compact captioned={practice} narrow={coarse} locale={locale} /> : undefined,
   };
   const presentation = usePresentation(adapter);
   const { presenting, isPresenting, status: presentationStatus, controls: beatControls, start: startPresentation, stop: stopPresentation } = presentation;
+
+  /** `,` / `.` and the beat line's ‹ ›: one beat back / on, across chapters; in the presentation, its own step. */
+  const beatStep = useCallback(
+    (direction: 1 | -1) => {
+      if (isPresenting()) {
+        const now = beatControls.current();
+        const all = presentation.beats;
+        const i = now ? all.findIndex((b) => b.chapter === now.chapter && b.index === now.beat) + direction : -1;
+        if (i >= 0 && i < all.length) beatControls.go(i, { instant: false });
+        return;
+      }
+      const st = store.getState();
+      const i = flatIndex(flat, st.chapter, Math.min(st.beat, ctl.beatCount(st.chapter ?? '') - 1)) + direction;
+      const target = flat[i];
+      if (target) ctl.goToBeat(target.chapter, target.index);
+    },
+    [isPresenting, beatControls, presentation.beats, store, flat, ctl],
+  );
+  const at = flatIndex(flat, s.chapter, cur.beat);
+
+  /* ---------- `<Beat n>` links in the body: the one on show is marked ---------- */
+  useEffect(() => {
+    for (const el of document.querySelectorAll<HTMLElement>('[data-task^="beat-"]')) {
+      if (el.dataset.task === `beat-${cur.beat + 1}` && slot.kind === 'explain') el.setAttribute('aria-current', 'step');
+      else el.removeAttribute('aria-current');
+    }
+  }, [cur.beat, slot.kind, s.chapter]);
 
   /* ---------- layout ---------- */
   const rootRef = useRef<HTMLDivElement>(null);
   const trayRef = useRef<HTMLDivElement>(null);
   const mode: LayoutMode = presenting ? 'present' : hudOn ? 'hud' : 'bare';
-  const L = useStageLayout(rootRef, trayRef, mode, `${s.chapter}|${s.task}|${u.summary}|${exampleOn}|${run?.state.phase}|${run?.feedback?.tone}|${locale}`);
+  const L = useStageLayout(rootRef, trayRef, mode, `${s.chapter}|${cur.beat}|${u.summary}|${run?.state.phase}|${run?.feedback?.tone}|${sheet}|${locale}`);
+
+  // The docked tray's band in the HUD grid (math-scene.css): the left and right columns end above it.
+  const docked = sheet && !presenting && !(practice && u.summary) && !!task && !!run;
+  useLayoutEffect(() => {
+    const scene = rootRef.current?.closest<HTMLElement>('.atlas-scene');
+    if (!scene) return;
+    const h = docked && trayRef.current ? `${Math.ceil(trayRef.current.offsetHeight)}px` : '0px';
+    if (scene.style.getPropertyValue('--task-h') !== h) scene.style.setProperty('--task-h', h);
+  });
+  useEffect(() => {
+    const scene = rootRef.current?.closest<HTMLElement>('.atlas-scene');
+    return () => {
+      scene?.style.removeProperty('--task-h');
+    };
+  }, []);
 
   /* ---------- what the stage draws ---------- */
-  const preview = run && u.preview !== null ? (run.log[u.preview]?.state ?? null) : null;
-  const exTask = exampleOn && task ? exampleTask(task) : null;
-  const exState = exampleOn && u.example ? (frames[Math.min(u.example.line, frames.length - 1)] ?? null) : null;
-  const exPrev = exampleOn && u.example && u.example.line > 0 ? (frames[u.example.line - 1] ?? null) : null;
-  const pointer = exState && exPrev ? ([...exState.shaded, ...exState.crossed].find((i) => !exPrev.shaded.includes(i) && !exPrev.crossed.includes(i)) ?? null) : null;
   const practiceLocked = practice && !!task && !!u.practice[task.id];
   const modes = {
     symbol: u.modes.symbol && !practice,
@@ -211,26 +240,41 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
     numberline: u.modes.numberline && !practice && view !== 'numberline',
     labels: labelsOn && !practice,
   };
-  const value = task && run ? cardValue(task, run.state, run.done) : null;
+  const equation = explain ? (explain.equation ?? null) : task && run && !practice ? (workingLines(task, run.state, locale, run.done).at(-1) ?? null) : null;
+  const modelBox: Rect = equation ? { ...L.free, h: Math.max(0, L.free.h - EQUATION_H) } : L.free;
+  // The sentence sits right under the drawing (its bounding box), not at the foot of the free rectangle.
+  const drawingRef = useRef<SVGGElement>(null);
+  const [equationTop, setEquationTop] = useState(0);
+  useLayoutEffect(() => {
+    const g = drawingRef.current;
+    if (!g || !equation) return;
+    const bb = g.getBBox();
+    const top = Math.round(Math.min(modelBox.y + modelBox.h, Math.max(modelBox.y, bb.y + bb.height + 10)));
+    if (top !== equationTop) setEquationTop(top);
+  });
+  const value = task && run ? cardValue(task, run.state, run.done) : explain ? beatFraction(explain) : background ? { n: 3, d: 4 } : null;
 
   /* ---------- HUD registration ---------- */
-  const canCheck = !!task && !!run && !run.done && !exampleOn && answered(task, run.state);
+  const canCheck = !!task && !!run && !run.done && answered(task, run.state);
   const commands: SceneCommand[] = [
     { id: 'check', key: 'c', label: t(locale, 'math.cmd.check'), disabled: !canCheck, run: () => ctl.check() },
     { id: 'hint', key: 'i', label: t(locale, 'math.cmd.hint'), disabled: !ctl.canHint(), run: () => ctl.hint() },
     { id: 'undo', key: 'u', label: t(locale, 'math.cmd.undo'), disabled: !ctl.canUndo(), run: () => ctl.undo() },
-    { id: 'example', key: 'w', label: t(locale, 'math.cmd.example'), disabled: !task?.example || practice, run: () => ctl.example() },
   ];
+  const count = beatCount(place);
   const status = practice
-    ? [`${UP(t('en', 'math.status.practice'))} ${index + 1}/${tasks.length}`, UP(t('en', 'math.status.assistsOff'))]
-    : task && run
-      ? [`${UP(t('en', 'math.status.task'))} ${index + 1}/${tasks.length}`, ...(value ? [`${UP(t('en', 'math.status.value'))} ${formatFrac(value)}`] : []), ...(run.done ? [UP(t('en', 'math.status.done'))] : [])]
-      : [`${UP(t('en', 'math.status.specimen'))} 3/4`];
+    ? [`${UP(t('en', 'math.status.practice'))} ${cur.beat + 1}/${count}`, UP(t('en', 'math.status.assistsOff'))]
+    : slot.kind === 'check' && run
+      ? [UP(t('en', 'math.check.title')), ...(value ? [`${UP(t('en', 'math.status.value'))} ${formatFrac(value)}`] : []), ...(run.done ? [UP(t('en', 'math.status.done'))] : [])]
+      : explain
+        ? [`${UP(t('en', 'math.beat.label'))} ${cur.beat + 1}/${count - 1}`, ...(value ? [`${UP(t('en', 'math.status.value'))} ${formatFrac(value)}`] : [])]
+        : [`${UP(t('en', 'math.status.specimen'))} 3/4`];
   const [cardExpanded, setCardExpanded] = useState(false);
   const specRows = useMemo<SpecRow[]>(
     () => [
       { id: 'steps', label: both('math.spec.steps'), value: String(lesson.steps.length).padStart(2, '0'), mono: true, source: 'ref' },
-      { id: 'tasks', label: both('math.spec.tasks'), value: String(lesson.steps.reduce((n, x) => n + x.tasks.length, 0)), mono: true, source: 'ref' },
+      { id: 'beats', label: both('math.spec.beats'), value: String(lesson.steps.reduce((n, x) => n + x.beats.length, 0)), mono: true },
+      { id: 'checks', label: both('math.spec.checks'), value: `${lesson.steps.length} × ${Math.min(...lesson.steps.map((x) => x.pool.length))}–${Math.max(...lesson.steps.map((x) => x.pool.length))}`, mono: true },
       { id: 'practice', label: both('math.spec.practice'), value: String(lesson.practice.length), mono: true },
       { id: 'levels', label: both('math.spec.levels'), value: 'P2–P3 (+P4)', mono: true, source: 'ref' },
       { id: 'denominators', label: both('math.spec.denominators'), value: '≤ 12', mono: true, source: 'ref' },
@@ -247,12 +291,16 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
       { id: 'presentation', key: 'p', label: t(locale, 'present.mode'), on: presenting, tone: 'signal', status: presentationStatus, phone: false },
     ];
     return {
-      presets: {
-        items: presets,
-        set: (id) => ctl.setView(id as ModelView),
-        current: views.includes(view) ? view : null,
-        status: `${UP(t('en', 'math.status.model'))} ${UP(t('en', VIEW_KEY[view]))}`,
-      },
+      ...(presets.length > 0
+        ? {
+            presets: {
+              items: presets,
+              set: (id: string) => ctl.setView(id as ModelView),
+              current: views.includes(view) ? view : null,
+              status: `${UP(t('en', 'math.status.model'))} ${UP(t('en', VIEW_KEY[view]))}`,
+            },
+          }
+        : {}),
       modes: {
         items: modeItems,
         set: (id, on, { instant }) => {
@@ -271,35 +319,23 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
       status,
       card: both('math.card.title'),
       cardToggle: { expanded: cardExpanded, set: setCardExpanded },
-      panels: { panel01: both('math.panel.history'), panel02: both('math.panel.working'), panel03: both('math.panel.state') },
       beats: beatControls,
+      beatStep,
       goToTask: (id) => ctl.goToTask(id),
       escape: () => {
         if (isPresenting()) {
           stopPresentation(true);
           return true;
         }
-        if (ui.getState().example) {
-          ui.setState({ example: null });
-          return true;
-        }
-        if (ui.getState().preview !== null) {
-          ui.setState({ preview: null });
-          return true;
-        }
         return false;
       },
       test: {
         task: () => ctl.info(),
-        tasks: () => {
-          const firstWrong = (x: (typeof lesson.steps)[number]['tasks'][number]) =>
-            x.feedback.wrong.find((w) => w.sample)?.when ?? (x.kind === 'choose' ? (x.options.find((o) => !o.correct && o.misconception)?.misconception ?? null) : null);
-          return [
-            ...lesson.steps.flatMap((st) => st.tasks.map((x, i) => ({ step: st.id, index: i + 1, id: x.id, kind: x.kind, example: !!x.example, practice: false, wrong: firstWrong(x) }))),
-            ...lesson.practice.map((q, i) => ({ step: practiceChapter, index: i + 1, id: q.id, kind: q.task.kind, example: false, practice: true, wrong: firstWrong(q.task) })),
-          ];
-        },
-        goToTask: (stepId: string, i: number, options?: { instant?: boolean }) => ctl.goTo(stepId, i - 1, options?.instant ?? false),
+        tasks: () => ctl.tasks(),
+        goToTask: (stepId: string, i: number, options?: { instant?: boolean }) => ctl.goToTaskAt(stepId, i, options?.instant ?? false),
+        goToBeat: (chapter: string, i: number) => ctl.goToBeat(chapter, i - 1),
+        another: () => ctl.another(),
+        skip: () => ctl.skip(),
         solve: () => ctl.solve(),
         answer: (code: MisconceptionCode | 'correct') => ctl.answer(code),
         act: (action: Action) => ctl.act(action),
@@ -307,18 +343,53 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
       },
     };
     // `commands`, `status` and the modes are rebuilt from state every render; the deps below cover what they read.
-  }, [ctl, ui, u, s, run, task, view, views.join(','), practice, presenting, presentationStatus, beatControls, isPresenting, startPresentation, stopPresentation, specRows, cardExpanded, locale, labelsOn, canCheck]);
+  }, [ctl, ui, u, s, run, task, view, views.join(','), practice, presenting, presentationStatus, beatControls, beatStep, isPresenting, startPresentation, stopPresentation, specRows, cardExpanded, locale, labelsOn, canCheck]);
   useSceneControls(controls);
 
-  /* ---------- tray placement ---------- */
-  const trayStyle = L.tray ? { left: L.tray.left, width: L.tray.width, bottom: L.tray.bottom } : undefined;
+  /* ---------- the chapter axis ---------- */
+  const axisChapters = useMemo<AxisChapter[]>(
+    () =>
+      chapters.map((c) => {
+        const beats = lessonBeats(lesson, c.id, c.id === practiceChapter, captions)?.filter((b) => b.kind !== 'summary');
+        return {
+          id: c.id,
+          number: number(c.id),
+          title: tx(c.title, locale),
+          beats: beats ? beats.map((b) => speakable(tx(b.caption, locale), locale)) : [speakable(tx((c.state as MathChapterState).summary ?? c.title, locale), locale)],
+        };
+      }),
+    // `number` reads `chapters`, `numbers` and `locale`.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [chapters, lesson, practiceChapter, captions, numbers, locale],
+  );
+
+  // The check and the practice questions are squares on the axis (the core axis draws circles; the shape is ours).
+  useEffect(() => {
+    for (const c of axisChapters) {
+      const st = lesson.steps.find((x) => x.id === c.id);
+      const squares = c.id === practiceChapter ? c.beats.map((_, k) => k) : st ? [st.beats.length] : [];
+      for (const k of squares) document.querySelector(`.atlas-axis__tick[data-beat="${c.id}.${k}"]`)?.setAttribute('data-shape', 'square');
+    }
+  });
+
+  /* ---------- the plate ---------- */
+  const plateRows: PlateRow[] = practice
+    ? [
+        { key: 'math.state.question', value: `${cur.beat + 1}/${count}`, on: true },
+        { key: 'math.state.answered', value: `${Object.keys(u.practice).length}/${lesson.practice.length}` },
+        { key: 'math.state.assists', value: UP(t('en', 'math.state.off')) },
+      ]
+    : explain
+      ? modelRows(t('en', VIEW_KEY[explain.model.kind]), beatCounts(explain).parts, beatCounts(explain).marked, value)
+      : task && run
+        ? modelRows(t('en', VIEW_KEY[view]), run.state.parts * run.state.wholes || null, run.done || slot.kind === 'check' ? run.state.shaded.length + run.state.given.length - run.state.crossed.length : null, value)
+        : modelRows(t('en', VIEW_KEY[view]), 4, 3, value);
+
   const narrow = coarse || (task ? partsAreNarrow(task, Math.min(900, L.free.w - 60)) : false);
-  const exLines = task?.example?.say.length ?? 0;
-  const exampleLine = exampleOn && u.example && task?.example ? { line: u.example.line, lines: exLines, say: tx(task.example.say[Math.min(u.example.line, exLines - 1)]!, locale) } : null;
-  const revisit = practice && task && run?.done && !u.practice[task.id]?.ok ? lesson.practice[index]?.revisit.map((id) => ({ id, number: String(numbers.get(id) ?? 0).padStart(2, '0') })) : undefined;
-  const segments = chapters.filter((c) => lesson.steps.some((x) => x.id === c.id) || c.id === practiceChapter).map((c) => ({ id: c.id, number: String(numbers.get(c.id) ?? 0).padStart(2, '0'), title: tx(c.title, locale), practice: c.id === practiceChapter }));
+  const revisit = practice && task && run?.done && !u.practice[task.id]?.ok ? lesson.practice[cur.beat]?.revisit.map((id) => ({ id, number: number(id) })) : undefined;
   const showSummary = practice && u.summary;
-  const background = place.kind === 'background';
+  const where = slot.kind === 'check' ? `${chapterNo} · ${UP(t('en', 'math.check.title'))}` : practice ? `${chapterNo} · ${cur.beat + 1} / ${count}` : null;
+  const beatCaption = explain ? tx(explain.caption, locale) : null;
 
   return (
     <div className="ms-root" ref={rootRef} data-presenting={presenting || undefined}>
@@ -326,98 +397,71 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
         <Defs id={defs} />
         {!showSummary &&
           (background ? (
-            <StageContent defs={defs} box={L.free} locale={locale} modes={modes} specimen={view} />
+            <StageContent defs={defs} box={modelBox} locale={locale} modes={modes} specimen={view} />
+          ) : explain ? (
+            <g ref={drawingRef} key={`${s.chapter}|${beatShape(explain)}`} className="ms-beat" data-move={explain.move ?? 'none'}>
+              <StageContent defs={defs} box={modelBox} locale={locale} modes={modes} beat={explain} />
+            </g>
           ) : (
-            <StageContent
-              defs={defs}
-              box={L.free}
-              locale={locale}
-              modes={modes}
-              task={exTask ?? task}
-              state={exState ?? preview ?? run?.state ?? null}
-              run={exTask ? null : run}
-              view={exTask ? exTask.model.kind : view}
-              editable={!exTask && !preview && !practiceLocked && !!run && !run.done}
-              pointer={pointer}
-              ctl={ctl}
-            />
+            <g ref={drawingRef} key={task?.id ?? 'none'} className="ms-beat" data-move="morph">
+              <StageContent defs={defs} box={modelBox} locale={locale} modes={modes} task={task} state={run?.state ?? null} run={run} view={view} editable={!practiceLocked && !!run && !run.done} ctl={ctl} />
+            </g>
           ))}
-        {u.pulse > 0 && !showSummary && <rect key={u.pulse} className="ms-pulse" x={L.free.x - 6} y={L.free.y - 6} width={L.free.w + 12} height={L.free.h + 12} />}
+        {u.pulse > 0 && !showSummary && !explain && <rect key={u.pulse} className="ms-pulse" x={L.free.x - 6} y={L.free.y - 6} width={L.free.w + 12} height={L.free.h + 12} />}
       </svg>
-      {showSummary && (
-        <PracticeSummary lesson={lesson} results={u.practice} numbers={numbers} ctl={ctl} locale={locale} style={{ left: L.free.x, top: L.free.y, width: L.free.w, maxHeight: L.free.h }} />
+      {equation && !showSummary && L.free.w > 0 && (
+        <p key={`${s.chapter}|${cur.beat}|${equation}`} className="ms-equation" data-hud-panel="equation" style={{ left: L.free.x, width: L.free.w, top: equationTop || modelBox.y + modelBox.h, height: EQUATION_H }}>
+          <span>{renderRich(equation, locale)}</span>
+        </p>
       )}
-      {preview && (
-        <button type="button" className="ms-btn ms-preview-chip" style={{ left: L.free.x, top: L.free.y }} onClick={() => ui.setState({ preview: null })}>
-          {t(locale, 'math.history.back')}
-        </button>
+      {docked && task && run && (
+        <div ref={trayRef} className="ms-tray-dock" style={{ bottom: L.dock }}>
+          <Tray ctl={ctl} task={task} run={run} where={where} practice={practice} pool={step?.pool.length} last={practice && cur.beat === count - 1} revisit={revisit} narrow={narrow} locale={locale} />
+        </div>
       )}
-      <div ref={trayRef} className="ms-tray-slot" style={trayStyle} hidden={presenting || !L.tray}>
-        {background ? (
-          <div className="ms-tray" data-hud-panel="task" role="group" aria-label={t(locale, 'math.tray.label')}>
-            <div className="ms-tray__head">
-              <p className="ms-tray__prompt">{renderRich(t(locale, 'math.start.line'), locale)}</p>
-              <button type="button" className="ms-btn ms-tray__next" data-done="" onClick={() => ctl.next()}>
-                {t(locale, 'math.start.go')} <span aria-hidden="true">→</span>
-              </button>
-            </div>
-          </div>
-        ) : showSummary ? null : (
-          <Tray
-            ctl={ctl}
-            lesson={lesson}
-            task={task}
-            run={run}
-            where={task ? { step: chapterNo, index: index + 1, count: tasks.length } : null}
-            practice={practice}
-            example={exampleLine}
-            revisit={revisit}
-            narrow={narrow}
-            readout={phone}
-            locale={locale}
-          />
-        )}
-      </div>
+      {showSummary && <PracticeSummary lesson={lesson} results={u.practice} numbers={numbers} ctl={ctl} locale={locale} style={{ left: L.free.x, top: L.free.y, width: L.free.w, maxHeight: L.free.h }} />}
       {presentation.element}
 
       <SceneSlot name="card">
-        <FractionCard task={showSummary ? null : (exTask ?? task)} state={exState ?? preview ?? run?.state ?? null} done={!exTask && !!run?.done} specimen={background} expanded={cardExpanded} locale={locale} />
+        <FractionCard task={showSummary ? null : task} state={run?.state ?? null} done={!!run?.done} fixed={showSummary ? null : value} pair={explain ? beatPair(explain) : null} expanded={cardExpanded} locale={locale} />
       </SceneSlot>
-      <SceneSlot name="panel01">
-        <HistoryPanel run={run} ui={ui} locale={locale} />
-      </SceneSlot>
-      <SceneSlot name="panel02">
-        <WorkingPanel task={exTask ?? task} state={exState ?? preview ?? run?.state ?? null} done={!!run?.done} locale={locale} />
-      </SceneSlot>
-      <SceneSlot name="panel03">
-        <StatePanel
-          task={exTask ?? task}
-          state={exState ?? preview ?? run?.state ?? null}
-          done={!exTask && !!run?.done}
-          practice={practice ? { index: index + 1, total: tasks.length } : null}
-          lesson={lesson}
-          answered={Object.keys(u.practice).length}
-        />
+      <SceneSlot name="plate">
+        <PlateBlock rows={plateRows} locale={locale} />
       </SceneSlot>
       <SceneSlot name="stageOverlay">
         <MathOverlay glossary={(file.glossary?.terms.length ?? 0) > 0} compact={phone} />
       </SceneSlot>
       <SceneSlot name="bottomBar">
-        <StepBar
-          lesson={lesson}
-          ctl={ctl}
-          ui={u}
-          segments={segments}
+        <ChapterAxis
+          chapters={axisChapters}
           chapter={s.chapter}
-          index={index}
-          canCheck={canCheck}
-          canHint={ctl.canHint()}
-          status={background ? UP(t('en', 'chapter.background')) : `${practice ? UP(t('en', 'math.status.practice')) : `${UP(t('en', 'math.status.step'))} ${chapterNo}`} · ${index + 1}/${tasks.length}`}
+          beat={cur.beat}
+          open={axisOpen}
+          onOpen={actions.setPanels}
+          onChapter={(id) => ctl.goToBeat(id, 0)}
+          onBeat={(id, k) => ctl.goToBeat(id, k)}
+          status={phone ? undefined : axisCounter(chapterNo, cur.beat, count) + (slot.kind === 'check' ? ` · ${UP(t('en', 'math.check.title'))}` : '')}
           locale={locale}
         />
       </SceneSlot>
-      <SceneSlot name="inspector">
-        <TaskInspector task={task} run={run} step={step} lesson={lesson} where={`${chapterNo} · ${index + 1}/${Math.max(1, tasks.length)}`} practice={practice} locale={locale} />
+      <SceneSlot name="readerTop">
+        {!background && (
+          <BeatLine
+            kind={slot.kind === 'check' ? 'check' : practice ? 'question' : 'explain'}
+            beat={cur.beat}
+            count={slot.kind === 'explain' ? count - 1 : count}
+            caption={beatCaption}
+            canPrev={at > 0}
+            canNext={at >= 0 && at < flat.length - 1}
+            onStep={beatStep}
+            focus={`${s.chapter}|${cur.beat}`}
+            locale={locale}
+          />
+        )}
+        {!sheet && !presenting && !showSummary && task && run && <Tray ctl={ctl} task={task} run={run} where={where} practice={practice} pool={step?.pool.length} last={practice && cur.beat === count - 1} revisit={revisit} narrow={narrow} locale={locale} />}
+      </SceneSlot>
+      <SceneSlot name="readerEnd">
+        <ChapterIndex step={step} lesson={lesson} onCheck={() => step && ctl.goToBeat(step.id, step.beats.length)} locale={locale} />
       </SceneSlot>
     </div>
   );

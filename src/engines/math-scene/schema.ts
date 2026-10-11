@@ -1,7 +1,8 @@
 /**
- * MathScene data (docs/15 §4.2): `data/lesson.json` — the syllabus lines the
- * lesson follows, the steps (one per chapter) with their sub-steps (tasks),
- * and the practice questions — plus the shared `sources.json` / `glossary.json`.
+ * MathScene data (docs/15 §4.2, §10): `data/lesson.json` — the syllabus lines
+ * the lesson follows, the steps (one per chapter: explanation beats, a pool of
+ * check tasks of which one is drawn per visit, key facts) and the practice
+ * questions — plus the shared `sources.json` / `glossary.json`.
  *
  * Fractions are strings in the data (`"3/4"`, `"1 3/4"`, `"2"`) and parse into
  * `Frac` objects here, so `data.json` and the client get structured values.
@@ -237,22 +238,18 @@ const buildSumFields = z.object({
   answer: inputSpec,
 });
 
-/** An example (the "watch" half of a sub-step): another model and other numbers, one caption line per beat. */
-const exampleOf = <T extends z.ZodRawShape>(fields: z.ZodObject<T>) =>
-  z.object({ model, say: z.array(bilingual).min(1).max(5) }).merge(fields.partial()).strict();
-
 export const taskSchema = z.discriminatedUnion('kind', [
-  base.extend({ kind: z.literal('shade') }).merge(shadeFields).extend({ example: exampleOf(shadeFields).optional() }).strict(),
-  base.extend({ kind: z.literal('cut') }).merge(cutFields).extend({ example: exampleOf(cutFields).optional() }).strict(),
-  base.extend({ kind: z.literal('fold') }).merge(foldFields).extend({ example: exampleOf(foldFields).optional() }).strict(),
-  base.extend({ kind: z.literal('split') }).merge(scaleFields).extend({ example: exampleOf(scaleFields).optional() }).strict(),
-  base.extend({ kind: z.literal('merge') }).merge(scaleFields).extend({ example: exampleOf(scaleFields).optional() }).strict(),
-  base.extend({ kind: z.literal('place') }).merge(placeFields).extend({ example: exampleOf(placeFields).optional() }).strict(),
-  base.extend({ kind: z.literal('compare') }).merge(compareFields).extend({ example: exampleOf(compareFields).optional() }).strict(),
-  base.extend({ kind: z.literal('order') }).merge(orderFields).extend({ example: exampleOf(orderFields).optional() }).strict(),
-  base.extend({ kind: z.literal('choose') }).merge(chooseFields).extend({ example: exampleOf(chooseFields).optional() }).strict(),
-  base.extend({ kind: z.literal('input') }).merge(inputSpec).extend({ example: exampleOf(inputSpec).optional() }).strict(),
-  base.extend({ kind: z.literal('build-sum') }).merge(buildSumFields).extend({ example: exampleOf(buildSumFields).optional() }).strict(),
+  base.extend({ kind: z.literal('shade') }).merge(shadeFields).strict(),
+  base.extend({ kind: z.literal('cut') }).merge(cutFields).strict(),
+  base.extend({ kind: z.literal('fold') }).merge(foldFields).strict(),
+  base.extend({ kind: z.literal('split') }).merge(scaleFields).strict(),
+  base.extend({ kind: z.literal('merge') }).merge(scaleFields).strict(),
+  base.extend({ kind: z.literal('place') }).merge(placeFields).strict(),
+  base.extend({ kind: z.literal('compare') }).merge(compareFields).strict(),
+  base.extend({ kind: z.literal('order') }).merge(orderFields).strict(),
+  base.extend({ kind: z.literal('choose') }).merge(chooseFields).strict(),
+  base.extend({ kind: z.literal('input') }).merge(inputSpec).strict(),
+  base.extend({ kind: z.literal('build-sum') }).merge(buildSumFields).strict(),
 ]);
 export type Task = z.output<typeof taskSchema>;
 export type TaskOf<K extends TaskKind> = Extract<Task, { kind: K }>;
@@ -277,6 +274,46 @@ const syllabusLine = z
   })
   .strict();
 
+/* ------------------------------------------------------------------ */
+/* Beats (the explanation, docs/15 §10)                                */
+/* ------------------------------------------------------------------ */
+
+/** How the stage gets from the previous beat to this one (a short eased transition; `morph` = another model kind). */
+export const BEAT_MOVES = ['cut', 'shade', 'fold', 'split', 'merge', 'convert', 'place', 'cross', 'morph'] as const;
+export type BeatMove = (typeof BEAT_MOVES)[number];
+
+const beatOverlay = z
+  .object({
+    /** Finer equivalent cuts and their names under a bar (the E mode). */
+    equivalent: z.boolean().optional(),
+    /** An aligned number line under a bar (the N mode). */
+    numberline: z.boolean().optional(),
+    /** Every part named 1/n (the L mode). */
+    labels: z.boolean().optional(),
+    /** The fraction beside the model, big and stacked (the S mode). */
+    symbol: z.boolean().optional(),
+  })
+  .strict();
+
+export const beatSchema = z
+  .object({
+    /** What the stage shows: the same models as the tasks (`given` = cold, `shaded` = signal). */
+    model,
+    /** Bar / circle: given parts taken away (ink hatch). */
+    crossed: partSet.optional(),
+    /** Fraction wall: fractions lit on their rows (two = cold and hot, compared; more = cold, equivalents or an order). */
+    highlight: z.array(frac).min(1).max(6).optional(),
+    overlay: beatOverlay.optional(),
+    /** The number sentence under the model, `{a/b}` tokens: `{3/4} = {6/8}`. */
+    equation: z.string().min(1).optional(),
+    /** The transition from the previous beat. */
+    move: z.enum(BEAT_MOVES).optional(),
+    /** One or two sentences (also the voice text): what to see on the model now. */
+    caption: bilingual,
+  })
+  .strict();
+export type Beat = z.output<typeof beatSchema>;
+
 const step = z
   .object({
     /** = the chapter id (one chapter per step). */
@@ -285,9 +322,14 @@ const step = z
     lo: z.array(kebabId).min(1),
     /** P4 bridge step (the reader's eyebrow says BRIDGE · P4). */
     bridge: z.boolean().optional(),
-    /** Model views the VIEW group offers in this step (default: the first task's model). */
+    /** Model views the VIEW group offers on the check (default: the drawn task's model). */
     views: z.array(modelView).min(1).optional(),
-    tasks: z.array(taskSchema).min(2).max(4),
+    /** The explanation, 3–5 beats (validate). */
+    beats: z.array(beatSchema).min(1),
+    /** The check at the end of the chapter: 8–10 tasks on the same idea (validate); one is drawn per visit. */
+    pool: z.array(taskSchema).min(1),
+    /** The chapter index in the reading panel: 2–4 one-line facts. */
+    keyFacts: z.array(bilingual).min(1).max(4).optional(),
   })
   .strict();
 export type Step = z.output<typeof step>;
@@ -318,11 +360,10 @@ export const mathSceneData = z
   .strict();
 export type MathSceneData = z.output<typeof mathSceneData>;
 
-/** A chapter's `state` (docs/15 §4.2): reader summary, default model view, the practice / background flags. */
+/** A chapter's `state` (docs/15 §4.2): reader summary, the practice / background flags. */
 export const mathChapterState = z
   .object({
     summary: bilingual.optional(),
-    model: modelView.optional(),
     practice: z.boolean().optional(),
     note: bilingual.optional(),
     theme: theme.optional(),
@@ -335,7 +376,7 @@ export function mathSceneIds(data: MathSceneData): { kind: string; id: string }[
   const out: { kind: string; id: string }[] = [];
   for (const line of data.lesson.syllabus) out.push({ kind: 'syllabus line', id: line.id });
   const optionIds = (t: Task) => (t.kind === 'choose' ? t.options.map((o) => ({ kind: 'option', id: `${t.id}-${o.id}` })) : []);
-  for (const s of data.lesson.steps) for (const t of s.tasks) out.push({ kind: 'task', id: t.id }, ...optionIds(t));
+  for (const s of data.lesson.steps) for (const t of s.pool) out.push({ kind: 'task', id: t.id }, ...optionIds(t));
   for (const q of data.lesson.practice) out.push({ kind: 'question', id: q.id }, ...optionIds(q.task));
   return out;
 }

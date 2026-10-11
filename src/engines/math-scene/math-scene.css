@@ -1,12 +1,13 @@
 /*
- * MathScene (docs/15 §4.3–4.5): the SVG stage, the answer tray, the bottom bar
- * of steps and the HUD panel bodies. Technical-plate grammar: paper, ink
+ * MathScene (docs/15 §4.3–4.5, §10): the SVG stage and its beats, the number
+ * sentence under the model, the check tray in the reading panel, the beat
+ * line, the chapter index, the plate block and the card body. Technical-plate grammar: paper, ink
  * hairlines, the child's marks in signal orange, given / second amounts cold
  * / hot, taken away = ink hatch, the answer = dashed ink. Tokens only; HUD
  * sizes × --u, touch targets ≥ 44 px.
  */
 
-/* The tray's band in the HUD grid (height written by the view as --task-h): the HUD columns end above it. */
+/* The docked check tray's band in the HUD grid (below 1024 px; height written by the view as --task-h, else 0): the HUD columns end above it. */
 .atlas-scene[data-engine="math-scene"] .atlas-hud {
   grid-template-rows: minmax(0, 1fr) var(--task-h, 0px) auto;
   grid-template-areas:
@@ -21,6 +22,15 @@
       ". ."
       "dock dock";
   }
+}
+/* The left column (title block, chapter rail, plate) gives way to the band rather than run under it. */
+.atlas-scene[data-engine="math-scene"] .atlas-hud__left {
+  overflow: clip;
+}
+.atlas-scene[data-engine="math-scene"] .atlas-hud__left .atlas-title {
+  flex: 0 1 auto;
+  min-height: 0;
+  overflow: clip;
 }
 
 .ms-root {
@@ -208,17 +218,6 @@
 }
 .ms-ghost__cut--strong {
   stroke-width: 2;
-}
-
-/* Example pointer: a signal ring that moves to the part being done. */
-.ms-pointer {
-  fill: none;
-  stroke: var(--signal);
-  stroke-width: 2.5;
-  pointer-events: none;
-  transition:
-    cx var(--dur-slow) var(--ease-in-out),
-    cy var(--dur-slow) var(--ease-in-out);
 }
 
 /* E: finer names under the bar. */
@@ -463,7 +462,6 @@
   .ms-pulse {
     display: none;
   }
-  .ms-pointer,
   .ms-line__marker,
   .ms-part__shape {
     transition: none;
@@ -554,15 +552,6 @@
 /* Tray                                                                */
 /* ------------------------------------------------------------------ */
 
-.ms-tray-slot {
-  position: absolute;
-  z-index: 4;
-  display: flex;
-  justify-content: center;
-}
-.ms-tray-slot[hidden] {
-  display: none;
-}
 .ms-tray {
   display: flex;
   flex-direction: column;
@@ -600,18 +589,6 @@
   font: 400 clamp(16px, calc(19 * var(--u)), 22px) / 1.35 var(--font-serif);
   text-wrap: pretty;
 }
-.ms-tray__prompt--example b {
-  margin-right: 6px;
-  font: 600 12px / 1 var(--font-hud);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--signal);
-}
-.ms-tray__readout {
-  flex: none;
-  font: 600 15px / 1 var(--font-mono);
-  color: var(--signal);
-}
 .ms-tray__controls {
   display: flex;
   flex-wrap: wrap;
@@ -629,19 +606,12 @@
   font: 500 14px / 1.3 var(--font-hud);
   color: var(--ink-2);
 }
-.ms-tray__body {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px 12px;
-  min-height: var(--hit);
-}
 .ms-tray__next {
   margin-left: auto;
 }
 .ms-tray__feedback {
   display: flex;
-  flex: 1 1 220px;
+  flex: none;
   align-items: baseline;
   gap: 8px;
   min-width: 0;
@@ -924,11 +894,6 @@
   margin-left: auto;
 }
 
-.ms-preview-chip {
-  position: absolute;
-  z-index: 4;
-}
-
 /* Practice summary */
 .ms-summary {
   position: absolute;
@@ -1076,333 +1041,6 @@
   color: var(--hot);
 }
 
-.ms-panel__empty {
-  margin: 0;
-  padding: calc(8 * var(--u)) calc(12 * var(--u));
-  font: 400 calc(11.3 * var(--u)) / 1.4 var(--font-hud);
-  color: var(--ink-3);
-}
-.ms-history {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  margin: 0;
-  padding: calc(6 * var(--u)) calc(10 * var(--u));
-  list-style: none;
-  overflow-y: auto;
-  max-height: 100%;
-}
-.ms-history__item {
-  display: flex;
-  align-items: center;
-  gap: calc(10 * var(--u));
-  width: 100%;
-  min-height: calc(22 * var(--u));
-  margin: 0;
-  padding: 0 4px;
-  border: 0;
-  background: transparent;
-  color: var(--ink);
-  font: 500 calc(10.6 * var(--u)) / 1 var(--font-mono);
-  letter-spacing: 0.04em;
-  text-align: left;
-  cursor: pointer;
-}
-.ms-history__item[aria-pressed="true"] {
-  background: color-mix(in srgb, var(--signal) 16%, transparent);
-}
-.ms-thumb {
-  flex: none;
-  width: calc(64 * var(--u));
-  height: calc(14 * var(--u));
-}
-.ms-thumb rect {
-  fill: none;
-  stroke: var(--ink-2);
-  stroke-width: 0.6;
-}
-.ms-thumb rect[data-mark="mine"] {
-  fill: var(--signal);
-}
-.ms-thumb rect[data-mark="cold"] {
-  fill: var(--cold);
-}
-.ms-thumb rect[data-mark="taken"] {
-  fill: var(--ink-3);
-}
-.ms-thumb line {
-  stroke: var(--ink);
-}
-.ms-working {
-  margin: 0;
-  padding: calc(8 * var(--u)) calc(14 * var(--u));
-  list-style: none;
-  font: 500 calc(14 * var(--u)) / 1.6 var(--font-mono);
-}
-.ms-working[data-done] li:last-child {
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 6px;
-}
-.ms-state {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  padding: calc(6 * var(--u)) calc(12 * var(--u));
-}
-.ms-state__row {
-  display: grid;
-  grid-template-columns: calc(112 * var(--u)) minmax(0, 1fr);
-  align-items: baseline;
-  padding: calc(2 * var(--u)) 0;
-  border-bottom: 1px solid var(--hair);
-}
-.ms-state__row dt {
-  font: 500 calc(10.4 * var(--u)) / 1.2 var(--font-hud);
-  letter-spacing: 0.12em;
-  color: var(--ink-3);
-}
-.ms-state__row dt small {
-  margin-left: calc(5 * var(--u));
-  font-size: calc(10.2 * var(--u));
-  letter-spacing: 0.06em;
-}
-.ms-state__row dd {
-  margin: 0;
-  font: 500 calc(11 * var(--u)) / 1.2 var(--font-mono);
-  color: var(--ink-2);
-}
-.ms-state__row[data-on] dd {
-  color: var(--ink);
-}
-.ms-state__bar {
-  position: relative;
-  height: calc(6 * var(--u));
-  margin: calc(10 * var(--u)) 0 calc(14 * var(--u));
-  border: 1px solid var(--line);
-}
-.ms-state__bar span {
-  position: absolute;
-  inset: 0 auto 0 0;
-  background: var(--signal);
-}
-.ms-state__bar i {
-  position: absolute;
-  top: calc(8 * var(--u));
-  font: 500 calc(10 * var(--u)) / 1 var(--font-mono);
-  font-style: normal;
-  color: var(--ink-3);
-}
-.ms-state__bar i:first-of-type {
-  left: 0;
-}
-.ms-state__bar i:last-of-type {
-  right: 0;
-}
-
-/* Reader inspector */
-.ms-inspector {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 6px;
-  padding-top: 10px;
-  border-top: 1px solid var(--hair);
-}
-.ms-inspector__lo {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin: 0;
-  font: 400 13px / 1.4 var(--font-hud);
-  color: var(--ink-2);
-}
-.ms-inspector__lo b {
-  margin-right: 4px;
-  font: 600 11px / 1 var(--font-hud);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-}
-.ms-inspector__head {
-  margin: 0;
-  font: 600 13px / 1.4 var(--font-hud);
-  letter-spacing: 0.04em;
-}
-.ms-inspector__guide,
-.ms-inspector__feedback,
-.ms-inspector__reveal,
-.ms-inspector__hints {
-  margin: 0;
-  font: 400 1rem / 1.55 var(--font-serif);
-}
-.ms-inspector__hints {
-  padding-left: 1.2em;
-  color: var(--ink-2);
-}
-.ms-inspector__feedback,
-.ms-inspector__reveal {
-  padding-left: 10px;
-  border-left: 2px solid var(--ink);
-}
-.ms-inspector__feedback[data-tone="correct"] {
-  border-left-color: var(--signal);
-}
-.ms-inspector__reveal {
-  border-left-style: dashed;
-}
-
-/* ------------------------------------------------------------------ */
-/* Bottom bar: steps                                                   */
-/* ------------------------------------------------------------------ */
-
-.ms-bar-bottom {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  min-width: 0;
-  pointer-events: auto;
-}
-.ms-bar-bottom .ms-btn {
-  font-size: 14px;
-}
-.ms-bar-bottom__status {
-  flex: none;
-  font: 500 calc(10.8 * var(--u)) / 1 var(--font-mono);
-  letter-spacing: 0.08em;
-  color: var(--ink-2);
-  white-space: nowrap;
-}
-.ms-steps {
-  flex: 1;
-  min-width: 0;
-}
-.ms-steps ol {
-  display: flex;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.ms-steps__seg {
-  position: relative;
-  display: flex;
-  flex: 1 1 0;
-  flex-direction: column;
-  min-width: 0;
-  border-left: 1px solid var(--hair);
-}
-.ms-steps__seg:last-child {
-  border-right: 1px solid var(--hair);
-}
-.ms-steps__chap {
-  height: 18px;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: var(--ink-3);
-  font: 500 11px / 18px var(--font-mono);
-  cursor: pointer;
-}
-.ms-steps__seg[data-current] .ms-steps__chap {
-  color: var(--signal);
-  font-weight: 600;
-}
-.ms-steps__seg[data-current]::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: 2px;
-  background: var(--signal);
-}
-.ms-steps__ticks {
-  display: flex;
-  justify-content: center;
-  gap: 2px;
-  min-height: 26px;
-}
-.ms-steps__tick {
-  position: relative;
-  width: 14px;
-  height: 26px;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-}
-.ms-steps__tick::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 7px;
-  height: 7px;
-  border: 1px solid var(--ink-2);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-}
-.ms-steps__tick[data-shape="square"]::before {
-  border-radius: 0;
-}
-.ms-steps__tick[data-done]::before {
-  border-color: var(--ink);
-  background: var(--ink);
-}
-.ms-steps__tick[aria-current="step"]::before {
-  border-color: var(--signal);
-  background: var(--signal);
-}
-.ms-steps__tick:focus-visible,
-.ms-steps__chap:focus-visible {
-  outline: 2px solid var(--signal);
-  outline-offset: -2px;
-}
-@media (pointer: coarse) {
-  .ms-steps__chap {
-    height: 22px;
-  }
-}
-@media (max-width: 1279px) {
-  .ms-bar-bottom__status {
-    display: none;
-  }
-}
-@media (max-width: 759px) {
-  .ms-steps__ticks {
-    display: none;
-  }
-  .ms-steps__chap {
-    height: var(--hit);
-    font-size: 10px;
-  }
-  .ms-bar-bottom__back,
-  .ms-bar-bottom .ms-btn kbd {
-    display: none;
-  }
-  .ms-bar-bottom .ms-btn {
-    padding: 0 10px;
-  }
-  .ms-tray {
-    padding: 8px 10px;
-    gap: 8px;
-  }
-  .ms-tray__where {
-    display: none;
-  }
-  .ms-keypad {
-    grid-template-columns: repeat(6, var(--hit));
-  }
-  .ms-tray__head .ms-btn kbd {
-    display: none;
-  }
-}
-.ms-steps__seg[data-practice] {
-  flex-grow: 2;
-}
 .ms-card-body__expr {
   margin: calc(6 * var(--u)) 0;
   font: 500 calc(22 * var(--u)) / 1.4 var(--font-mono);
@@ -1413,48 +1051,10 @@
   flex: 0 0 0;
   min-width: 0;
 }
-/* The left column (title block, chapter rail) ends above the tray's band: when the tray is tall, the rail gives way rather than run under it. */
-.atlas-scene[data-engine="math-scene"] .atlas-hud__left {
-  overflow: clip;
-}
-.atlas-scene[data-engine="math-scene"] .atlas-hud__left .atlas-title {
-  flex: 0 1 auto;
-  min-height: 0;
-  overflow: clip;
-}
-
-/* Short screens (720p laptops): the tray stays one line where it can — fraction boxes side by side with a slash —
-   and the title block keeps its title (the spec table and the note give way to the tray's band). */
-@media (max-height: 820px), (max-width: 759px) {
-  .atlas-scene[data-engine="math-scene"] .atlas-spec,
+/* Short screens (720p laptops): the title block keeps its title; its note gives way. */
+@media (max-height: 820px) {
   .atlas-scene[data-engine="math-scene"] .atlas-title__note {
     display: none;
-  }
-  .ms-tray {
-    gap: 6px;
-    padding: 8px 12px;
-  }
-  .ms-tray__prompt {
-    font-size: 16px;
-  }
-  .ms-input__frac {
-    flex-direction: row;
-    gap: 6px;
-  }
-  .ms-input__frac > i {
-    width: 0;
-    height: 30px;
-    border-top: 0;
-    border-left: 2px solid var(--ink);
-    transform: rotate(22deg);
-  }
-  .ms-choice {
-    min-height: 40px;
-    padding: 4px 10px;
-    font-size: 15px;
-  }
-  .ms-choices {
-    gap: 4px;
   }
 }
 /* Phones keep the 44 px finger target on the sentence choices. */
@@ -1482,4 +1082,458 @@
 .ms-overlay__toggle:focus-visible {
   outline: 2px solid var(--signal);
   outline-offset: 2px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Beats: the move from the previous beat (docs/15 §10)                */
+/* ------------------------------------------------------------------ */
+
+/* A structural change remounts the drawing: another model fades up, a re-cut sweeps across, a join closes in. */
+.ms-beat {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.ms-beat[data-move="morph"] {
+  animation: ms-beat-morph 560ms var(--ease-out) both;
+}
+.ms-beat[data-move="cut"],
+.ms-beat[data-move="fold"],
+.ms-beat[data-move="split"],
+.ms-beat[data-move="convert"] {
+  animation: ms-beat-sweep 700ms var(--ease-in-out) both;
+}
+.ms-beat[data-move="merge"] {
+  animation: ms-beat-join 640ms var(--ease-in-out) both;
+}
+@keyframes ms-beat-morph {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes ms-beat-sweep {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes ms-beat-join {
+  from {
+    opacity: 0.2;
+    transform: scaleX(1.04);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+/* A new mark on the line drops in (the rest stay). */
+.ms-line__point {
+  animation: ms-point-in 420ms var(--ease-out) both;
+}
+@keyframes ms-point-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* The number sentence under the model (the "A" of concrete–pictorial–abstract). */
+.ms-equation {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0 12px;
+  font: 500 clamp(17px, calc(26 * var(--u)), 30px) / 1.2 var(--font-mono);
+  color: var(--ink);
+  text-align: center;
+  text-wrap: balance;
+  pointer-events: none;
+  animation: ms-equation-in 480ms var(--ease-out) 120ms both;
+}
+@keyframes ms-equation-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (max-width: 759px) {
+  .ms-equation {
+    font-size: 16px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ms-beat,
+  .ms-line__point,
+  .ms-equation {
+    animation: none;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Reading panel: beat line, check tray, chapter index                 */
+/* ------------------------------------------------------------------ */
+
+.ms-beatline {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 0 0 12px;
+  border-bottom: 1px solid var(--hair);
+}
+.ms-beatline__text {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font: 400 calc(16px * var(--kb, 1)) / 1.5 var(--font-serif);
+  color: var(--ink);
+  text-wrap: pretty;
+}
+.ms-beatline__no {
+  display: block;
+  margin-bottom: 4px;
+  font: 600 calc(10.5px * var(--kb, 1)) / 1.2 var(--font-mono);
+  letter-spacing: 0.08em;
+  color: var(--signal);
+}
+.ms-beatline__nav {
+  display: inline-flex;
+  flex: none;
+  gap: 4px;
+}
+.ms-beatline__btn {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-hud);
+  background: transparent;
+  color: var(--ink);
+  font: 400 20px / 1 var(--font-hud);
+  cursor: pointer;
+}
+/* 44 px hit area. */
+.ms-beatline__btn::after {
+  content: "";
+  position: absolute;
+  inset: -5px -2px;
+}
+.ms-beatline__btn:disabled {
+  border-color: var(--hair);
+  color: var(--ink-3);
+  cursor: default;
+}
+@media (hover: hover) {
+  .ms-beatline__btn:not(:disabled):hover {
+    border-color: var(--signal);
+    color: var(--signal);
+  }
+}
+.ms-beatline__btn:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 2px;
+}
+
+/* The check tray in the reading panel: a column, controls wrap to the panel's width. */
+.atlas-reader-top .ms-tray {
+  gap: 12px;
+  padding: 12px;
+  backdrop-filter: none;
+  background: var(--panel-solid);
+}
+.atlas-reader-top .ms-tray__head {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+.atlas-reader-top .ms-tray__where {
+  font-size: 11px;
+  color: var(--signal);
+}
+.atlas-reader-top .ms-tray__prompt {
+  font-size: calc(17px * var(--kb, 1));
+}
+.atlas-reader-top .ms-tray__controls {
+  gap: 10px 14px;
+}
+.atlas-reader-top .ms-keypad {
+  grid-template-columns: repeat(6, var(--hit));
+}
+.atlas-reader-top .ms-tray__feedback[data-empty] {
+  display: none;
+}
+.ms-tray__why {
+  margin: 0;
+  font: 400 15px / 1.45 var(--font-serif);
+  color: var(--ink-2);
+}
+.ms-tray__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.ms-tray__actions .ms-tray__next {
+  margin-left: auto;
+}
+.ms-btn--quiet {
+  border-color: transparent;
+  background: transparent;
+  color: var(--ink-2);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: var(--hair);
+  text-underline-offset: 4px;
+}
+.ms-tray[data-compact] .ms-tray__actions .ms-btn {
+  min-height: 40px;
+}
+/* "Your attempts": what was checked, ✓ / ○, newest last. */
+.ms-attempts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  margin: 0;
+  font: 500 12px / 1.4 var(--font-mono);
+  color: var(--ink-2);
+}
+.ms-attempts b {
+  font: 600 10.5px / 1.4 var(--font-hud);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.ms-attempts i {
+  font-style: normal;
+}
+.ms-attempts [data-tone="correct"] i,
+.ms-attempts [data-tone="phase"] i {
+  color: var(--signal);
+}
+
+/* Chapter index: key facts and the syllabus lines. */
+.ms-index {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 14px;
+  border-top: 1px solid var(--hair);
+}
+.ms-index__head {
+  margin: 4px 0 0;
+  font: 600 10.5px / 1.2 var(--font-hud);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.ms-index__facts {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0 0 0 18px;
+  font: 400 calc(15px * var(--kb, 1)) / 1.45 var(--font-serif);
+  color: var(--ink);
+}
+.ms-index__lo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  font: 400 13px / 1.45 var(--font-hud);
+  color: var(--ink-2);
+}
+.ms-index__lo b {
+  font: 600 11px / 1 var(--font-mono);
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+.ms-index__check {
+  align-self: flex-start;
+  margin-top: 4px;
+}
+
+/* <Beat n> in the body: part of the sentence (serif, sentence case) in a hairline box with its number; the beat on show is marked. */
+.atlas-flyto.atlas-beat-link {
+  display: inline;
+  padding: 0.05em 0.35em;
+  font: inherit;
+  letter-spacing: 0;
+  text-transform: none;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.atlas-beat-link__no {
+  display: inline-grid;
+  place-items: center;
+  min-width: 16px;
+  height: 16px;
+  margin-right: 5px;
+  vertical-align: 0.1em;
+  color: var(--signal);
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font: 600 10px / 1 var(--font-mono);
+}
+.atlas-beat-link[aria-current="step"] {
+  border-color: var(--signal);
+  color: var(--signal);
+}
+
+/* ------------------------------------------------------------------ */
+/* Plate block (left column) and chapter-axis squares                  */
+/* ------------------------------------------------------------------ */
+
+.ms-plate {
+  border-top: 1px solid var(--line);
+  text-shadow: none;
+}
+.ms-plate__head {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0;
+  padding: calc(6 * var(--u)) 0 calc(5 * var(--u));
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: 600 calc(10.5 * var(--u)) / 1 var(--font-hud);
+  letter-spacing: 0.14em;
+  text-align: left;
+  cursor: pointer;
+}
+.ms-plate__head small {
+  margin-left: calc(8 * var(--u));
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+}
+.ms-plate__head i {
+  width: 5px;
+  height: 5px;
+  margin-right: 4px;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: translateY(-1px) rotate(45deg);
+}
+.ms-plate[data-folded] .ms-plate__head i {
+  transform: translateY(1px) rotate(-135deg);
+}
+.ms-plate__head::after {
+  content: "";
+  position: absolute;
+  inset: calc(50% - 22px) 0;
+}
+@media (hover: hover) {
+  .ms-plate__head:hover {
+    color: var(--signal);
+  }
+}
+.ms-plate__head:focus-visible {
+  outline: 1px solid var(--signal);
+  outline-offset: -1px;
+}
+.ms-plate__rows {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: calc(3 * var(--u)) calc(14 * var(--u));
+  margin: 0;
+}
+.ms-plate__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  border-bottom: 1px solid var(--hair);
+}
+.ms-plate__row dt {
+  font: 500 calc(10 * var(--u)) / 1.6 var(--font-hud);
+  letter-spacing: 0.1em;
+  color: var(--ink-3);
+}
+.ms-plate__row dd {
+  margin: 0;
+  font: 500 calc(11.5 * var(--u)) / 1.5 var(--font-mono);
+  color: var(--ink);
+}
+.ms-plate__row[data-on] dd {
+  color: var(--signal);
+}
+
+/* The check and the practice questions are squares on the chapter axis. */
+.atlas-scene[data-engine="math-scene"]
+  .atlas-axis__tick[data-shape="square"]::before {
+  width: 8px;
+  height: 8px;
+  border-radius: 0;
+}
+
+/* Below 1024 px (the reader is a sheet): the check tray docks on the stage, above the chapter axis. */
+.ms-tray-dock {
+  position: absolute;
+  z-index: 4;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  justify-content: center;
+}
+.ms-tray-dock .ms-tray {
+  max-width: 760px;
+  gap: 8px;
+  padding: 8px 10px;
+  background: var(--panel-solid);
+}
+.ms-tray-dock .ms-tray__head {
+  gap: 10px;
+}
+.ms-tray-dock .ms-tray__prompt {
+  font-size: 16px;
+}
+.ms-tray-dock .ms-tray__feedback[data-empty] {
+  display: none;
+}
+.ms-tray-dock .ms-tray__actions kbd {
+  display: none;
+}
+@media (max-width: 759px) {
+  .ms-tray-dock .ms-tray__where {
+    display: none;
+  }
+  .ms-tray-dock .ms-keypad {
+    grid-template-columns: repeat(6, var(--hit));
+  }
+  .ms-tray-dock .ms-input__frac {
+    flex-direction: row;
+    gap: 6px;
+  }
+  .ms-tray-dock .ms-input__frac > i {
+    width: 0;
+    height: 30px;
+    border-top: 0;
+    border-left: 2px solid var(--ink);
+    transform: rotate(22deg);
+  }
 }

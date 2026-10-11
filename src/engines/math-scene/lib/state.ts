@@ -3,7 +3,7 @@
  * the model (parts, the child's marks, cuts, folds, the marker …), the answer
  * controls (symbol, order, chosen options, input boxes) and the phase of a
  * multi-part task (shade, then write it). `reduce` applies one action; the
- * same actions drive the tap / key paths, `solve()` and the examples. Pure.
+ * same actions drive the tap / key paths, `solve()` and the "Show me" ghost. Pure.
  * In memory only: never in the URL or storage.
  */
 import type { InputSpec, Task, TaskKind } from '../schema';

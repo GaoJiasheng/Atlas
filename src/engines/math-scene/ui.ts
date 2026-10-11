@@ -1,8 +1,9 @@
 /**
- * MathScene's own UI store (docs/15 §4.9): the child's work on every sub-step
- * (model state, tries, hints, feedback, "Show me", done), the practice
- * results, the example being played, the display modes and the presentation
- * flag. In memory only: never in the URL or any storage, gone on reload (D6).
+ * MathScene's own UI store (docs/15 §4.9, §10): the child's work on every
+ * check and practice question (model state, attempts, hints, feedback,
+ * "Show me", done), which pool task each step drew, the practice results,
+ * the display modes and the presentation flag. In memory only: never in the
+ * URL or any storage, gone on reload (D6).
  */
 import { createStore, type StoreApi } from 'zustand/vanilla';
 import type { BilingualText } from '../../i18n';
@@ -17,11 +18,17 @@ export interface Feedback {
   code?: MisconceptionCode | null;
 }
 
-/** One move in the HISTORY panel: what was done and the model after it. */
+/** One move on the model or in the answer controls (undo goes back through these). */
 export interface LogEntry {
-  /** Mono caption, e.g. `FOLD → 4`, `SHADE 3/8`. */
+  /** Mono caption of the answer after the move, e.g. `SHADE 3/8`, `WRITE 5/7`. */
   label: string;
   state: TaskState;
+}
+
+/** One press of Check: what the answer was and how it went ("your attempts" in the tray). */
+export interface Attempt {
+  label: string;
+  tone: 'correct' | 'wrong' | 'near' | 'phase';
 }
 
 export interface TaskRun {
@@ -35,6 +42,7 @@ export interface TaskRun {
   revealed: boolean;
   done: boolean;
   log: LogEntry[];
+  attempts: Attempt[];
 }
 
 export interface PracticeResult {
@@ -45,15 +53,15 @@ export interface PracticeResult {
 
 export interface MathUiState {
   runs: Record<string, TaskRun>;
-  /** The example being played on the stage (W, or a presentation example beat). */
-  example: { task: string; line: number } | null;
+  /** Pool index drawn for each step's check (by step id). */
+  drawn: Record<string, number>;
+  /** Checks skipped in the presentation (task id): its auto-play goes on. */
+  skipped: Record<string, boolean>;
   modes: { symbol: boolean; equivalent: boolean; numberline: boolean };
   practice: Record<string, PracticeResult>;
   /** The practice summary is on show. */
   summary: boolean;
   presenting: boolean;
-  /** A HISTORY thumbnail shown on the stage (index into the current run's log), read-only. */
-  preview: number | null;
   /** Bumped on every right answer (one signal pulse on the model). */
   pulse: number;
 }
@@ -63,12 +71,12 @@ export type MathUiStore = StoreApi<MathUiState>;
 export function createMathUi(): MathUiStore {
   return createStore<MathUiState>()(() => ({
     runs: {},
-    example: null,
+    drawn: {},
+    skipped: {},
     modes: { symbol: false, equivalent: false, numberline: false },
     practice: {},
     summary: false,
     presenting: false,
-    preview: null,
     pulse: 0,
   }));
 }

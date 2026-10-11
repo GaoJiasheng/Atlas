@@ -1,30 +1,54 @@
 /**
- * Where things are in the lesson (docs/15 §4.2, §4.3): the chapter a sub-step
- * belongs to, the tasks of a chapter, and the model views a sub-step can be
- * switched between in the VIEW group. Pure.
+ * Where things are in the lesson (docs/15 §4.2, §10): what a chapter is (a
+ * step with its beats and check pool, the practice, or the background), what
+ * a beat of it shows (an explanation beat, the check, a practice question),
+ * where a pool task lives, and the model views a task can be switched between
+ * in the VIEW group. Pure.
  */
-import type { Lesson, ModelView, Question, Step, Task } from '../schema';
+import type { Beat, Lesson, ModelView, Question, Step, Task } from '../schema';
 
 export type Place =
-  | { kind: 'step'; step: Step; tasks: Task[] }
-  | { kind: 'practice'; questions: Question[]; tasks: Task[] }
+  | { kind: 'step'; step: Step }
+  | { kind: 'practice'; questions: Question[] }
   | { kind: 'background' };
 
 /** What a chapter is in the lesson. */
 export function locate(lesson: Lesson, chapter: string | null, practice: boolean): Place {
-  if (practice) return { kind: 'practice', questions: lesson.practice, tasks: lesson.practice.map((q) => q.task) };
+  if (practice) return { kind: 'practice', questions: lesson.practice };
   const step = lesson.steps.find((s) => s.id === chapter);
-  return step ? { kind: 'step', step, tasks: step.tasks } : { kind: 'background' };
+  return step ? { kind: 'step', step } : { kind: 'background' };
 }
 
-/** The chapter and 0-based index of a sub-step or practice question. */
-export function findTask(lesson: Lesson, id: string, practiceChapter: string | null): { chapter: string; index: number } | null {
+/** The beats of a chapter on the axis: a step's explanation beats + its check, the practice questions, the background's one. */
+export function beatCount(place: Place): number {
+  if (place.kind === 'step') return place.step.beats.length + 1;
+  if (place.kind === 'practice') return place.questions.length;
+  return 1;
+}
+
+export type BeatSlot =
+  | { kind: 'explain'; index: number; beat: Beat }
+  | { kind: 'check'; index: number }
+  | { kind: 'question'; index: number; question: Question }
+  | { kind: 'background'; index: 0 };
+
+/** What beat `i` (clamped) of a chapter shows. */
+export function beatSlot(place: Place, i: number): BeatSlot {
+  const n = beatCount(place);
+  const index = Math.min(Math.max(0, Math.floor(i)), n - 1);
+  if (place.kind === 'step') return index < place.step.beats.length ? { kind: 'explain', index, beat: place.step.beats[index]! } : { kind: 'check', index };
+  if (place.kind === 'practice') return { kind: 'question', index, question: place.questions[index]! };
+  return { kind: 'background', index: 0 };
+}
+
+/** The step and pool index of a pool task, or the practice index of a question. */
+export function findTask(lesson: Lesson, id: string): { step: string; pool: number } | { practice: number } | null {
   for (const s of lesson.steps) {
-    const index = s.tasks.findIndex((t) => t.id === id);
-    if (index >= 0) return { chapter: s.id, index };
+    const pool = s.pool.findIndex((t) => t.id === id);
+    if (pool >= 0) return { step: s.id, pool };
   }
   const q = lesson.practice.findIndex((x) => x.id === id);
-  return q >= 0 && practiceChapter ? { chapter: practiceChapter, index: q } : null;
+  return q >= 0 ? { practice: q } : null;
 }
 
 /** The view a task's own model is drawn in. */
@@ -51,7 +75,7 @@ export function canShow(task: Task, view: ModelView): boolean {
   return false;
 }
 
-/** The VIEW group of a sub-step: the step's views it can be drawn in, its own first when the step does not list it. */
+/** The VIEW group of a task: the step's views it can be drawn in, its own first when the step does not list it. */
 export function viewsFor(step: Step | null, task: Task): ModelView[] {
   const own = ownView(task);
   const listed = (step?.views ?? [own]).filter((v) => canShow(task, v));

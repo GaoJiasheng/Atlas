@@ -1,22 +1,26 @@
 /**
- * The answer tray (docs/15 §4.4): a hairline paper card at the bottom of the
- * stage. First line: step · sub-step, the task in one sentence, "Watch an
- * example". Middle: the controls this sub-step needs (fraction boxes and an
- * on-screen keypad, the < = > symbols, option buttons, order slots, ×k / ÷k
- * chips, Fold, steppers). Last line: the feedback (`aria-live`), "Show me"
- * after two tries, "Next". The answer boxes and keypad are `data-keys="own"`:
- * digits and Enter belong to them (Enter = Check); elsewhere in the tray the
- * command keys (C, I, U, W) work as on the stage. The presentation puts the same controls, with Hint /
- * Check / Show me, in its caption card (`compact`).
+ * The check tray (docs/15 §4.4, §10): the answer controls of a step's check
+ * or a practice question, in the reading panel under the beat line. Head:
+ * where it is (`07 · CHECK`, `13 · 3 / 8`), the task in one sentence.
+ * Middle: the controls this task needs (fraction boxes and an on-screen
+ * keypad, the < = > symbols, option buttons, order slots, ×k / ÷k chips,
+ * Fold, steppers). Then the feedback (`aria-live`), the child's attempts so
+ * far, and the actions: Hint (I), Check (C), "Show me" after two tries,
+ * "Another one" (a different task from the step's pool), "Skip" and Next.
+ * Nothing is forced: Skip moves on, Another one draws again. The answer boxes
+ * and keypad are `data-keys="own"`: digits and Enter belong to them (Enter =
+ * Check). The presentation puts the same tray, without its head, in its
+ * caption card (`compact`: the task's sentence under the caption, no place
+ * label, no Next); Skip there lets the auto-play go on.
  */
 import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
 import type { Locale } from '../../core/types';
 import { t, tx } from '../../../i18n';
 import { renderRich } from '../../../lib/rich-text';
-import type { Lesson, Task } from '../schema';
+import type { Task } from '../schema';
 import type { Controller } from '../controller';
 import type { TaskRun } from '../ui';
-import { canMerge, commonParts, inputSpecOf, modelValue, phasesOf, type TaskState } from '../lib/state';
+import { canMerge, commonParts, inputSpecOf, phasesOf, type TaskState } from '../lib/state';
 import { answered, answersOf, inputRows, segments } from '../lib/check';
 import { solvedState } from '../lib/solve';
 import { denominatorEn, numberZh } from '../lib/words';
@@ -24,23 +28,24 @@ import { formatFrac } from '../lib/fraction';
 
 export interface TrayProps {
   ctl: Controller;
-  lesson: Lesson;
   task: Task | null;
   run: TaskRun | null;
-  /** `07 · 2 / 3` */
-  where: { step: string; index: number; count: number } | null;
+  /** `07 · CHECK` or `13 · 3 / 8` */
+  where: string | null;
   practice: boolean;
-  /** The example being played: its caption line. */
-  example: { line: number; lines: number; say: string } | null;
+  /** Pool size of the step's check (Another one when > 1). */
+  pool?: number;
+  /** The last practice question (Next shows the results). */
+  last?: boolean;
   /** Revisit buttons after a wrong practice answer. */
   revisit?: { id: string; number: string }[];
-  /** Presentation card: controls, feedback and the Hint / Check / Show me buttons, no header. */
+  /** Presentation card: no place label or Next; Skip lets the auto-play go on. */
   compact?: boolean;
+  /** The caption already says the task (a practice question's beat): no sentence here. */
+  captioned?: boolean;
   /** Parts narrower than a finger: show the −/+ stepper. */
   narrow?: boolean;
   locale: Locale;
-  /** Phone: the current value in the header (the card and panels are hidden). */
-  readout?: boolean;
 }
 
 const tr = (locale: Locale) => (key: Parameters<typeof t>[1], vars?: Record<string, string | number>) => t(locale, key, vars);
@@ -61,80 +66,75 @@ export function Tray(p: TrayProps) {
   const phase = phasesOf(task)[run.state.phase] ?? 'model';
   const locked = run.done;
   const fb = run.feedback;
-  const value = modelValue(task, run.state);
+  const ready = !locked && answered(task, run.state);
+  const spec = inputSpecOf(task);
   return (
     <div ref={rootRef} className="ms-tray" data-hud-panel={p.compact ? undefined : 'task'} data-compact={p.compact || undefined} onKeyDown={onKey} role="group" aria-label={T('math.tray.label')}>
-      {!p.compact && (
+      {!p.captioned && (
         <div className="ms-tray__head">
-          {p.where && (
-            <span className="ms-tray__where">
-              {p.where.step} · {p.where.index} / {p.where.count}
-            </span>
-          )}
-          {p.example ? (
-            <p className="ms-tray__prompt ms-tray__prompt--example">
-              <b>{T('math.example.title', { k: p.example.line + 1, n: p.example.lines })}</b> {renderRich(p.example.say, locale)}
-            </p>
-          ) : (
-            <p className="ms-tray__prompt">{renderRich(tx(task.prompt, locale), locale)}</p>
-          )}
-          {p.readout && value && <span className="ms-tray__readout">{formatFrac(value)}</span>}
-          {task.example && !p.practice && (
-            <button type="button" className="ms-btn ms-btn--ghost" data-command="example" aria-pressed={!!p.example} onClick={() => ctl.example()}>
-              {p.example ? T('math.example.stop') : T('math.example.watch')}
-              <kbd>W</kbd>
-            </button>
-          )}
+          {p.where && <span className="ms-tray__where">{p.where}</span>}
+          <p className="ms-tray__prompt">{renderRich(tx(task.prompt, locale), locale)}</p>
         </div>
       )}
-      {!p.example && (
-        <div className="ms-tray__body">
-          <Controls {...p} phase={phase} locked={locked} />
-          <p className="ms-tray__feedback" aria-live="polite" data-tone={fb?.tone} data-empty={fb ? undefined : ''}>
-            {fb && (
-              <>
-                <i aria-hidden="true">{fb.tone === 'correct' ? '✓' : fb.tone === 'hint' ? 'i' : fb.tone === 'phase' ? '✓' : '○'}</i>
-                <span>{renderRich(tx(fb.text, locale), locale)}</span>
-              </>
-            )}
-          </p>
-          {run.revealed && inputSpecOf(task) && <span className="ms-tray__answer">{T('math.tray.answer')} {renderRich(answersOf(inputSpecOf(task)!).map((f) => `{${f.w ? `${f.w} ` : ''}${f.n}/${f.d}}`).join(' = '), locale)}</span>}
-          {!p.compact &&
-            p.revisit?.map((r) => (
-            <button key={r.id} type="button" className="ms-btn ms-btn--ghost" onClick={() => ctl.goTo(r.id, 0)}>
+      <Controls {...p} phase={phase} locked={locked} />
+      <p className="ms-tray__feedback" aria-live="polite" data-tone={fb?.tone} data-empty={fb ? undefined : ''}>
+        {fb && (
+          <>
+            <i aria-hidden="true">{fb.tone === 'correct' || fb.tone === 'phase' ? '✓' : fb.tone === 'hint' ? 'i' : '○'}</i>
+            <span>{renderRich(tx(fb.text, locale), locale)}</span>
+          </>
+        )}
+      </p>
+      {run.revealed && spec && <span className="ms-tray__answer">{T('math.tray.answer')} {renderRich(answersOf(spec).map((f) => `{${f.w ? `${f.w} ` : ''}${f.n}/${f.d}}`).join(' = '), locale)}</span>}
+      {run.revealed && !p.practice && run.feedback?.tone !== 'reveal' && <p className="ms-tray__why">{renderRich(tx(task.feedback.reveal, locale), locale)}</p>}
+      {run.attempts.length > 0 && (
+        <p className="ms-attempts">
+          <b>{T('math.check.attempts')}</b>
+          {run.attempts.map((a, i) => (
+            <span key={i} data-tone={a.tone}>
+              <i aria-hidden="true">{a.tone === 'correct' || a.tone === 'phase' ? '✓' : '○'}</i> {a.label}
+            </span>
+          ))}
+        </p>
+      )}
+      <div className="ms-tray__actions">
+        <button type="button" className="ms-btn ms-btn--ghost" data-command="hint" disabled={!ctl.canHint()} title={`${T('math.cmd.hint')} (I)`} onClick={() => ctl.hint()}>
+          {T('math.cmd.hint')}
+          {!p.compact && <kbd>I</kbd>}
+        </button>
+        <button type="button" className="ms-btn" data-command="check" data-ready={ready || undefined} disabled={!ready} title={ready ? `${T('math.cmd.check')} (C)` : T('math.cmd.checkWhy')} onClick={() => ctl.check()}>
+          {T('math.cmd.check')}
+          {!p.compact && <kbd>C</kbd>}
+        </button>
+        {!p.practice && !locked && run.tries >= 2 && !run.revealed && (
+          <button type="button" className="ms-btn ms-btn--ghost" data-show-me="" onClick={() => ctl.showMe()}>
+            {T('math.tray.showMe')}
+          </button>
+        )}
+        {!p.practice && (p.pool ?? 0) > 1 && (
+          <button type="button" className="ms-btn ms-btn--ghost" data-another="" onClick={() => ctl.another()}>
+            {T('math.check.another')}
+          </button>
+        )}
+        {!locked && (
+          <button type="button" className="ms-btn ms-btn--quiet" data-skip="" onClick={() => ctl.skip()}>
+            {T('math.check.skip')}
+          </button>
+        )}
+        {!p.compact &&
+          p.revisit?.map((r) => (
+            <button key={r.id} type="button" className="ms-btn ms-btn--ghost" onClick={() => ctl.goToBeat(r.id, 0)}>
               {T('math.practice.revisit', { n: r.number })}
             </button>
-            ))}
-          {p.compact && (
-            <>
-              <button type="button" className="ms-btn ms-btn--ghost" data-command="hint" disabled={!ctl.canHint()} onClick={() => ctl.hint()}>
-                {T('math.cmd.hint')}
-              </button>
-              <button type="button" className="ms-btn" data-command="check" data-ready={(!locked && answered(task, run.state)) || undefined} disabled={locked} onClick={() => ctl.check()}>
-                {T('math.cmd.check')}
-              </button>
-            </>
-          )}
-          {!p.practice && !locked && run.tries >= 2 && !run.revealed && (
-            <button type="button" className="ms-btn ms-btn--ghost" data-show-me="" onClick={() => ctl.showMe()}>
-              {T('math.tray.showMe')}
-            </button>
-          )}
-          {!p.compact && (
-            <button type="button" className="ms-btn ms-tray__next" data-done={locked || undefined} onClick={() => ctl.next()}>
-              {nextLabel(p, T)} <span aria-hidden="true">→</span>
-            </button>
-          )}
-        </div>
-      )}
+          ))}
+        {!p.compact && locked && (
+          <button type="button" className="ms-btn ms-tray__next" data-done="" onClick={() => ctl.next()}>
+            {T(p.practice ? (p.last ? 'math.practice.results' : 'math.tray.nextQuestion') : 'math.tray.nextStep')} <span aria-hidden="true">→</span>
+          </button>
+        )}
+      </div>
     </div>
   );
-}
-
-function nextLabel(p: TrayProps, T: ReturnType<typeof tr>): string {
-  const last = p.where ? p.where.index >= p.where.count : false;
-  if (p.practice) return last ? T('math.practice.results') : T('math.tray.nextQuestion');
-  return last ? T('math.tray.nextStep') : T('math.tray.next');
 }
 
 /* ------------------------------------------------------------------ */

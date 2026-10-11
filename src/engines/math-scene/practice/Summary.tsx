@@ -49,7 +49,7 @@ export function PracticeSummary({ lesson, results, numbers, ctl, locale, style }
                 <td>
                   {!r?.ok &&
                     q.revisit.map((id) => (
-                      <button key={id} type="button" className="ms-btn ms-btn--ghost ms-btn--small" onClick={() => ctl.goTo(id, 0)}>
+                      <button key={id} type="button" className="ms-btn ms-btn--ghost ms-btn--small" onClick={() => ctl.goToBeat(id, 0)}>
                         {T('math.practice.revisit', { n: no(id) })}
                       </button>
                     ))}

@@ -24,7 +24,6 @@ export interface CircleModelProps {
   ghost?: { parts: number; marked: number[] } | null;
   labels?: boolean;
   hatchMine?: boolean;
-  pointer?: number | null;
   label: string;
   locale: Locale;
 }
@@ -99,9 +98,6 @@ export function CircleModel(p: CircleModelProps) {
             <path key={i} className="ms-ghost__part" d={sector(p.cx, p.cy, p.r - 4, i, p.ghost!.parts)} />
           ))}
         </g>
-      )}
-      {p.pointer !== null && p.pointer !== undefined && p.pointer < p.parts && (
-        <circle className="ms-pointer" cx={polar(p.cx, p.cy, p.r * 0.6, (p.pointer + 0.5) / p.parts)[0]} cy={polar(p.cx, p.cy, p.r * 0.6, (p.pointer + 0.5) / p.parts)[1]} r={Math.min(18, p.r / 4)} />
       )}
     </g>
   );

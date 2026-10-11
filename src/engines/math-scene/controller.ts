@@ -1,28 +1,34 @@
 /**
- * The lesson's actions (docs/15 §2.0, §3, §4.3): mark the model, check, hint,
- * "Show me", undo, the example, moving between sub-steps and the practice
- * flow. One object shared by the stage, the tray, the bottom bar, the keys
- * (commands C / I / U / W), the presentation and `__atlas.engine`, so every
- * path does the same thing. Reads the scene store (chapter, `task`, `model`)
- * and writes the child's work into the engine's UI store only.
+ * The lesson's actions (docs/15 §2.0, §3, §4.3, §10): moving between beats,
+ * drawing a step's check from its pool ("Another one", "Skip"), marking the
+ * model, check, hint, "Show me", undo and the practice flow. One object shared
+ * by the stage, the check tray, the chapter axis, the keys (commands C / I /
+ * U), the presentation and `__atlas.engine`, so every path does the same
+ * thing. Reads the scene store (chapter, `beat`, `model`) and writes the
+ * child's work and the drawn tasks into the engine's UI store only.
  */
 import type { BilingualText } from '../../i18n';
 import { t } from '../../i18n';
 import type { SceneStore } from '../core/store';
 import type { MathSceneExt } from './index';
-import type { Lesson, MisconceptionCode, ModelView, Task } from './schema';
-import type { Feedback, MathUiStore, TaskRun } from './ui';
+import type { Lesson, MisconceptionCode, ModelView, Step, Task } from './schema';
+import type { Attempt, Feedback, MathUiStore, TaskRun } from './ui';
 import { answered, check, readInput, segments } from './lib/check';
 import { apply, sampleState, solve, step } from './lib/solve';
 import { initialState, inputSpecOf, phasesOf, type Action, type TaskState } from './lib/state';
-import { findTask, locate, type Place } from './lib/lesson';
+import { beatCount, beatSlot, findTask, locate, type BeatSlot, type Place } from './lib/lesson';
+import { drawIndex, pageSeed } from './lib/pool';
 import { formatFrac, lcm } from './lib/fraction';
 
 export interface Current {
   chapter: string | null;
   place: Place;
+  step: Step | null;
   practice: boolean;
-  index: number;
+  /** The beat on show (clamped to the chapter). */
+  beat: number;
+  slot: BeatSlot;
+  /** The task being answered: the step's drawn check, or the practice question (`null` on an explanation beat). */
   task: Task | null;
   run: TaskRun | null;
 }
@@ -30,10 +36,10 @@ export interface Current {
 const both = (key: Parameters<typeof t>[1], vars?: Record<string, string | number>): BilingualText => ({ en: t('en', key, vars), zh: t('zh', key, vars) });
 
 export function freshRun(task: Task): TaskRun {
-  return { state: initialState(task), tries: 0, hints: 0, feedback: null, revealed: false, done: false, log: [] };
+  return { state: initialState(task), tries: 0, hints: 0, feedback: null, revealed: false, done: false, log: [], attempts: [] };
 }
 
-/** Mono HISTORY caption for a move. */
+/** Mono caption of the answer after a move (undo log, "your attempts"). */
 function describe(task: Task, action: Action, s: TaskState): string {
   const total = s.parts * s.wholes;
   switch (action.do) {
@@ -73,6 +79,36 @@ function describe(task: Task, action: Action, s: TaskState): string {
   }
 }
 
+/** Mono caption of the answer a state holds (a check's "your attempts" line). */
+export function answerLabel(task: Task, s: TaskState): string {
+  const phase = phasesOf(task)[s.phase];
+  if (phase === 'input') return describe(task, { do: 'input', field: '', value: '' }, s);
+  if (phase === 'convert') return describe(task, { do: 'factor', k: s.factor }, s);
+  switch (task.kind) {
+    case 'shade':
+      return describe(task, { do: 'shade', part: 0 }, s);
+    case 'build-sum':
+      return describe(task, task.op === '-' ? { do: 'cross', part: 0 } : { do: 'shade', part: 0 }, s);
+    case 'cut':
+      return describe(task, { do: 'cut', at: 0 }, s);
+    case 'fold':
+      return describe(task, { do: 'fold' }, s);
+    case 'split':
+    case 'merge':
+      return describe(task, { do: 'factor', k: s.factor }, s);
+    case 'place':
+      return describe(task, { do: 'place', at: 0 }, s);
+    case 'compare':
+      return task.ask === 'symbol' && s.symbol ? describe(task, { do: 'symbol', value: s.symbol }, s) : describe(task, { do: 'pick', side: s.pick ?? 'a' }, s);
+    case 'order':
+      return describe(task, { do: 'order', item: 0 }, s);
+    case 'choose':
+      return describe(task, { do: 'choose', id: '' }, s);
+    case 'input':
+      return describe(task, { do: 'input', field: '', value: '' }, s);
+  }
+}
+
 const sameState = (a: TaskState, b: TaskState) => JSON.stringify(a) === JSON.stringify(b);
 
 /** The state with phases 0..`phase` solved: the earlier ones checked, the last one not yet. */
@@ -86,18 +122,31 @@ export function solvedUpTo(task: Task, phase: number): TaskState {
   return apply(task, actions);
 }
 
-export function createController(lesson: Lesson, scene: SceneStore<MathSceneExt>, ui: MathUiStore, practiceChapter: string | null, chapterIds: readonly string[]) {
+export interface ControllerOptions {
+  /** The page view's seed for drawing checks (tests pass a fixed one). */
+  seed?: number;
+  /** Open the reading panel (a check is answered there). */
+  openReader?(): void;
+}
+
+export function createController(lesson: Lesson, scene: SceneStore<MathSceneExt>, ui: MathUiStore, practiceChapter: string | null, options: ControllerOptions = {}) {
+  const seed = options.seed ?? pageSeed();
+  const draws = new Map<string, number>();
+  /** A pool task forced for the next visit of a step (`__atlas.engine.goToTask`). */
+  const forced = new Map<string, number>();
   const runOf = (task: Task): TaskRun => ui.getState().runs[task.id] ?? freshRun(task);
   const setRun = (task: Task, run: TaskRun) => ui.setState((u) => ({ runs: { ...u.runs, [task.id]: run } }));
 
+  const drawnTask = (step: Step): Task => step.pool[Math.min(ui.getState().drawn[step.id] ?? 0, step.pool.length - 1)]!;
+
   const current = (): Current => {
-    const { chapter, task: n } = scene.getState();
+    const { chapter, beat } = scene.getState();
     const practice = chapter !== null && chapter === practiceChapter;
     const place = locate(lesson, chapter, practice);
-    const tasks = place.kind === 'background' ? [] : place.tasks;
-    const index = Math.min(Math.max(0, n - 1), Math.max(0, tasks.length - 1));
-    const task = tasks[index] ?? null;
-    return { chapter, place, practice, index, task, run: task ? runOf(task) : null };
+    const slot = beatSlot(place, beat);
+    const step = place.kind === 'step' ? place.step : null;
+    const task = slot.kind === 'check' && step ? drawnTask(step) : slot.kind === 'question' ? slot.question.task : null;
+    return { chapter, place, step, practice, beat: slot.index, slot, task, run: task ? runOf(task) : null };
   };
 
   const say = (task: Task, code: MisconceptionCode | null): BilingualText =>
@@ -109,25 +158,110 @@ export function createController(lesson: Lesson, scene: SceneStore<MathSceneExt>
     return both('math.phase.next');
   };
 
+  const attempt = (task: Task, run: TaskRun, tone: Attempt['tone']): Attempt[] => [...run.attempts, { label: answerLabel(task, run.state), tone }].slice(-6);
+
+  /** Draw the step's check: a fresh pool task (not the one shown last), started afresh. */
+  const draw = (step: Step) => {
+    const count = draws.get(step.id) ?? 0;
+    draws.set(step.id, count + 1);
+    const prev = ui.getState().drawn[step.id];
+    const pick = forced.get(step.id) ?? drawIndex(seed, step.id, count, step.pool.length, prev ?? null);
+    forced.delete(step.id);
+    const task = step.pool[pick]!;
+    ui.setState((u) => ({ drawn: { ...u.drawn, [step.id]: pick }, runs: { ...u.runs, [task.id]: freshRun(task) } }));
+  };
+
   const api = {
     current,
     runOf,
+
+    /** A chapter was entered (any path): its check is drawn again (or the forced one). */
+    visit(chapter: string | null) {
+      const step = lesson.steps.find((s) => s.id === chapter);
+      if (step) draw(step);
+    },
+
+    /** Show beat `index` (0-based) of `chapter`; the check beat opens the reading panel where it is answered. */
+    goToBeat(chapter: string, index: number, instant = false) {
+      const st = scene.getState();
+      if (st.chapter !== chapter) st.goToChapter(chapter, { instant });
+      scene.getState().patch({ beat: index, model: null });
+      const { slot } = current();
+      if (slot.kind === 'check' || slot.kind === 'question') options.openReader?.();
+    },
+
+    /** Beat `n` (1-based) of the chapter on show (`<Beat n>` in a chapter body). */
+    goToBeatOfChapter(n: number): boolean {
+      const { chapter, place } = current();
+      if (!chapter || place.kind !== 'step' || n < 1 || n > place.step.beats.length) return false;
+      api.goToBeat(chapter, n - 1);
+      return true;
+    },
+
+    /** A `<Task id>` in a chapter body: a step id opens its check, a pool task id that task. */
+    goToTask(id: string): boolean {
+      const beat = /^beat-(\d+)$/.exec(id);
+      if (beat) return api.goToBeatOfChapter(Number(beat[1]));
+      const step = lesson.steps.find((s) => s.id === id);
+      if (step) {
+        api.goToBeat(step.id, step.beats.length);
+        return true;
+      }
+      const at = findTask(lesson, id);
+      if (!at) return false;
+      if ('practice' in at) {
+        if (practiceChapter) api.goToBeat(practiceChapter, at.practice);
+        return !!practiceChapter;
+      }
+      api.force(at.step, at.pool);
+      return true;
+    },
+
+    /** Show pool task `pool` (0-based) as the check of `stepId` (tests, `<Task id>` with a pool id). */
+    force(stepId: string, pool: number, instant = false) {
+      const step = lesson.steps.find((s) => s.id === stepId);
+      if (!step) return;
+      const pick = Math.min(Math.max(0, pool), step.pool.length - 1);
+      if (scene.getState().chapter === stepId) {
+        const task = step.pool[pick]!;
+        ui.setState((u) => ({ drawn: { ...u.drawn, [step.id]: pick }, runs: { ...u.runs, [task.id]: freshRun(task) } }));
+      } else forced.set(stepId, pick);
+      api.goToBeat(stepId, step.beats.length, instant);
+    },
+
+    /** "Another one": a different task from the step's pool. */
+    another(): boolean {
+      const { step, slot } = current();
+      if (!step || slot.kind !== 'check' || step.pool.length < 2) return false;
+      draw(step);
+      scene.getState().patch({ model: null });
+      return true;
+    },
+
+    /** "Skip": nothing is forced. Presenting, the auto-play goes on; otherwise the next chapter. */
+    skip() {
+      const { task, practice } = current();
+      if (ui.getState().presenting) {
+        if (task) ui.setState((u) => ({ skipped: { ...u.skipped, [task.id]: true } }));
+        return;
+      }
+      if (practice) api.next();
+      else scene.getState().stepChapter(1);
+    },
 
     /** A move on the model or in the answer controls. */
     act(action: Action): boolean {
       const { task, run, practice } = current();
       if (!task || !run || run.done || action.do === 'check') return false;
       if (practice && ui.getState().practice[task.id]) return false;
-      if (ui.getState().example) ui.setState({ example: null });
       const next = step(task, run.state, action);
       if (sameState(next, run.state)) return false;
       const keep = run.feedback && (run.feedback.tone === 'hint' || run.feedback.tone === 'phase') ? run.feedback : null;
       setRun(task, { ...run, state: next, feedback: keep, log: [...run.log, { label: describe(task, action, next), state: next }].slice(-12) });
-      ui.setState({ preview: null });
       return true;
     },
 
-    /** Check (C, the Check buttons, Enter in the tray). */
+    /** Check (C, the Check buttons, Enter in an answer box). */
     check(): boolean {
       const { task, run, practice } = current();
       if (!task || !run || run.done) return false;
@@ -139,29 +273,28 @@ export function createController(lesson: Lesson, scene: SceneStore<MathSceneExt>
       const phases = phasesOf(task);
       const last = run.state.phase >= phases.length - 1;
       if (r.ok && !last) {
-        setRun(task, { ...run, state: { ...run.state, phase: run.state.phase + 1 }, feedback: { tone: 'phase', text: phaseText(task, phases[run.state.phase + 1]!) } });
+        setRun(task, { ...run, state: { ...run.state, phase: run.state.phase + 1 }, attempts: attempt(task, run, 'phase'), feedback: { tone: 'phase', text: phaseText(task, phases[run.state.phase + 1]!) } });
         ui.setState((u) => ({ pulse: u.pulse + 1 }));
         return true;
       }
       if (practice) {
         // One check per question: right, or the diagnosis and the right model drawn.
-        const fb: Feedback = r.ok
-          ? { tone: 'correct', text: task.feedback.correct }
-          : { tone: 'wrong', text: say(task, r.code), code: r.code };
-        setRun(task, { ...run, done: true, revealed: !r.ok, feedback: fb });
+        const fb: Feedback = r.ok ? { tone: 'correct', text: task.feedback.correct } : { tone: 'wrong', text: say(task, r.code), code: r.code };
+        setRun(task, { ...run, done: true, revealed: !r.ok, feedback: fb, attempts: attempt(task, run, r.ok ? 'correct' : 'wrong') });
         ui.setState((u) => ({ practice: { ...u.practice, [task.id]: { ok: r.ok, code: r.code, near: !!r.near } }, pulse: r.ok ? u.pulse + 1 : u.pulse }));
         return r.ok;
       }
       if (r.ok) {
-        setRun(task, { ...run, done: true, feedback: { tone: 'correct', text: task.feedback.correct } });
+        setRun(task, { ...run, done: true, feedback: { tone: 'correct', text: task.feedback.correct }, attempts: attempt(task, run, 'correct') });
         ui.setState((u) => ({ pulse: u.pulse + 1 }));
         return true;
       }
       if (r.near) {
-        setRun(task, { ...run, feedback: { tone: 'near', text: say(task, 'not-simplest') === task.feedback.fallback ? both('math.feedback.near') : say(task, 'not-simplest'), code: 'not-simplest' } });
+        const text = say(task, 'not-simplest') === task.feedback.fallback ? both('math.feedback.near') : say(task, 'not-simplest');
+        setRun(task, { ...run, feedback: { tone: 'near', text, code: 'not-simplest' }, attempts: attempt(task, run, 'near') });
         return false;
       }
-      setRun(task, { ...run, tries: run.tries + 1, feedback: { tone: 'wrong', text: say(task, r.code), code: r.code } });
+      setRun(task, { ...run, tries: run.tries + 1, feedback: { tone: 'wrong', text: say(task, r.code), code: r.code }, attempts: attempt(task, run, 'wrong') });
       return false;
     },
 
@@ -197,7 +330,6 @@ export function createController(lesson: Lesson, scene: SceneStore<MathSceneExt>
       const log = run.log.slice(0, -1);
       const state = log.at(-1)?.state ?? { ...initialState(task), phase: run.state.phase };
       setRun(task, { ...run, state: { ...state, phase: Math.min(state.phase, run.state.phase) }, log, feedback: null });
-      ui.setState({ preview: null });
       return true;
     },
 
@@ -206,53 +338,15 @@ export function createController(lesson: Lesson, scene: SceneStore<MathSceneExt>
       return !!run && !run.done && run.log.length > 0;
     },
 
-    /** Play (W) or stop the example of the current sub-step. */
-    example(on?: boolean): boolean {
-      const { task, practice } = current();
-      if (!task?.example || practice) return false;
-      const playing = ui.getState().example?.task === task.id;
-      const want = on ?? !playing;
-      ui.setState({ example: want ? { task: task.id, line: 0 } : null, preview: null });
-      return true;
-    },
-
-    /** Go to sub-step `index` (0-based) of `chapter`. */
-    goTo(chapter: string, index: number, instant = false) {
-      const st = scene.getState();
-      if (st.chapter !== chapter) st.goToChapter(chapter, { instant });
-      scene.getState().patch({ task: index + 1, model: null });
-    },
-
-    /** A `<Task id>` in a chapter body. */
-    goToTask(id: string): boolean {
-      const at = findTask(lesson, id, practiceChapter);
-      if (!at) return false;
-      api.goTo(at.chapter, at.index);
-      return true;
-    },
-
+    /** After a check or a question: the next chapter, the next question, the practice summary. */
     next() {
-      const { place, index, practice } = current();
-      if (place.kind === 'background') {
-        scene.getState().stepChapter(1);
+      const { place, beat, practice } = current();
+      if (practice && place.kind === 'practice') {
+        if (beat < place.questions.length - 1) scene.getState().patch({ beat: beat + 1, model: null });
+        else ui.setState({ summary: true });
         return;
       }
-      if (index < place.tasks.length - 1) scene.getState().patch({ task: index + 2, model: null });
-      else if (practice) ui.setState({ summary: true });
-      else scene.getState().stepChapter(1);
-    },
-
-    prev() {
-      const { index, chapter } = current();
-      if (index > 0) {
-        scene.getState().patch({ task: index, model: null });
-        return;
-      }
-      const i = chapterIds.indexOf(chapter ?? '');
-      const before = chapterIds[i - 1];
-      if (!before) return;
-      const prevPlace = locate(lesson, before, before === practiceChapter);
-      api.goTo(before, prevPlace.kind === 'background' ? 0 : prevPlace.tasks.length - 1);
+      scene.getState().stepChapter(1);
     },
 
     setView(view: ModelView | null) {
@@ -268,31 +362,29 @@ export function createController(lesson: Lesson, scene: SceneStore<MathSceneExt>
         summary: false,
         runs: Object.fromEntries(Object.entries(u.runs).filter(([id]) => !ids.has(id))),
       }));
-      scene.getState().patch({ task: 1, model: null });
+      scene.getState().patch({ beat: 0, model: null });
     },
 
-    /** Entering a sub-step: start it afresh unless it was finished (a finished one shows its right answer). */
-    enter() {
-      const { task, run } = current();
-      if (!task || !run) return;
-      if (!run.done) setRun(task, freshRun(task));
-      ui.setState({ preview: null });
-    },
-
-    /** Reset a sub-step to its start (a presentation "your turn" beat). */
+    /** Reset the task on show to its start (a presentation check beat). */
     reset(task: Task) {
       setRun(task, freshRun(task));
     },
 
+    /** The chapter's beats on the axis. */
+    beatCount(chapter: string): number {
+      return beatCount(locate(lesson, chapter, chapter === practiceChapter));
+    },
+
     /* ---------------- test hooks (window.__atlas.engine) ---------------- */
 
-    /** The current sub-step as tests see it. */
+    /** The beat and the task on show as tests see it. */
     info() {
-      const { chapter, index, task, run, practice } = current();
-      if (!task || !run) return { step: chapter, index: null, id: null, kind: null };
+      const { chapter, beat, slot, task, run, practice, step } = current();
+      const base = { step: chapter, beat: beat + 1, slot: slot.kind };
+      if (!task || !run) return { ...base, index: null, id: null, kind: null };
       return {
-        step: chapter,
-        index: index + 1,
+        ...base,
+        index: step ? (ui.getState().drawn[step.id] ?? 0) + 1 : beat + 1,
         id: task.id,
         kind: task.kind,
         phase: phasesOf(task)[run.state.phase],
@@ -301,13 +393,28 @@ export function createController(lesson: Lesson, scene: SceneStore<MathSceneExt>
         tries: run.tries,
         hints: run.hints,
         revealed: run.revealed,
+        attempts: run.attempts.length,
         feedback: run.feedback ? { tone: run.feedback.tone, code: run.feedback.code ?? null } : null,
-        example: ui.getState().example?.task === task.id,
         practice,
       };
     },
 
-    /** Do the right moves for the phase the current sub-step is in (as the child would), unchecked. */
+    /** Every pool task and practice question: `{ step, index (1-based pool / question), id, kind, practice, wrong }`. */
+    tasks() {
+      const firstWrong = (x: Task) => x.feedback.wrong.find((w) => w.sample)?.when ?? (x.kind === 'choose' ? (x.options.find((o) => !o.correct && o.misconception)?.misconception ?? null) : null);
+      return [
+        ...lesson.steps.flatMap((st) => st.pool.map((x, i) => ({ step: st.id, index: i + 1, id: x.id, kind: x.kind, practice: false, wrong: firstWrong(x) }))),
+        ...lesson.practice.map((q, i) => ({ step: practiceChapter, index: i + 1, id: q.id, kind: q.task.kind, practice: true, wrong: firstWrong(q.task) })),
+      ];
+    },
+
+    /** Open pool task `i` (1-based) as the step's check, or practice question `i`. */
+    goToTaskAt(stepId: string, i: number, instant = false) {
+      if (stepId === practiceChapter) api.goToBeat(stepId, i - 1, instant);
+      else api.force(stepId, i - 1, instant);
+    },
+
+    /** Do the right moves for the phase the task on show is in (as the child would), unchecked. */
     solve(): boolean {
       const { task, run } = current();
       if (!task || !run || run.done) return false;
@@ -316,7 +423,7 @@ export function createController(lesson: Lesson, scene: SceneStore<MathSceneExt>
       return true;
     },
 
-    /** Put a planned wrong answer (`code`) or the right one (`'correct'`) on the current sub-step, unchecked. */
+    /** Put a planned wrong answer (`code`) or the right one (`'correct'`) on the task on show, unchecked. */
     answer(code: MisconceptionCode | 'correct'): boolean {
       const { task, run } = current();
       if (!task || !run || run.done) return false;
@@ -325,15 +432,15 @@ export function createController(lesson: Lesson, scene: SceneStore<MathSceneExt>
       const option = task.kind === 'choose' ? task.options.find((o) => !o.correct && o.misconception === code) : undefined;
       const state = sample ? sampleState(task, sample) : option ? { ...initialState(task), chosen: [option.id] } : null;
       if (!state) return false;
-      setRun(task, { ...run, state, feedback: null });
+      setRun(task, { ...run, state, feedback: null, log: [...run.log, { label: code.toUpperCase(), state }] });
       return true;
     },
 
     practiceInfo() {
       const results = ui.getState().practice;
-      const { practice, index } = current();
+      const { practice, beat } = current();
       return {
-        index: practice ? index + 1 : null,
+        index: practice ? beat + 1 : null,
         summary: ui.getState().summary,
         score: Object.values(results).filter((r) => r.ok).length,
         results: lesson.practice.map((q) => (results[q.id] ? { id: q.id, ok: results[q.id]!.ok, code: results[q.id]!.code } : { id: q.id, ok: null, code: null })),
