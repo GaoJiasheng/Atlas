@@ -1,71 +1,85 @@
-# Atlas chest anatomy pipeline
+# Atlas human muscle mesh pipeline
 
-Offline native Blender pipeline for `docs/16-muscles-content-spec.md` §2.2, §5 and M5–M7. All source files are already in `cache/`; nothing is downloaded. Only pipeline files and `public/models/muscles-chest.glb` are generated. No application build, tests, checks or dependency changes are needed.
+Offline native Blender pipeline for all six topics in `docs/16-muscles-content-spec.md` §5. Cached FBX inputs only; no downloads or application build/test/check commands. Generated files stay under `scripts/anatomy/` and `public/models/muscles-*.glb`.
 
 ## Run
 
-Requirements: Blender 5.1 on PATH (FBX/glTF importers, bundled NumPy, Workbench renderer), Python 3, Node ≥22, pnpm and the installed `tsx`, glTF Transform and meshoptimizer dependencies.
+Requirements: Blender 5.1 on PATH, bundled NumPy, Python 3, Node ≥22, pnpm and the already installed tsx, glTF Transform and meshoptimizer dependencies. Pillow is used only for optional contact sheets.
 
 ```sh
-python3 scripts/anatomy/run.py
+python3 scripts/anatomy/run.py --topic back
 ```
 
-Each native step runs directly, aborting on a failed gate:
+Topics: `chest` (default), `back`, `shoulders`, `arms`, `legs`, `core`. Run the same command for each topic. The manifest must exist before building. Cached inventory is reused; `--refresh-inventory` scans the four local FBX systems again.
+
+`manifests.py` expands docs §5.3 and the reviewed draft IDs/Z-Anatomy names into exact source selections, validating both sides against `cache/inventory.json`. It writes **each manifest immediately followed by that topic's `MANIFEST-READY`**, containing the manifest SHA-256, before starting any geometry work:
 
 ```sh
-blender -b --python-exit-code 1 -P scripts/anatomy/inventory.py
-blender -b --python-exit-code 1 -P scripts/anatomy/build.py
-pnpm exec node --import tsx scripts/anatomy/optimize.ts
-blender -b --python-exit-code 1 -P scripts/anatomy/chest/preview.py
-blender -b --python-exit-code 1 -P scripts/anatomy/report.py
+python3 scripts/anatomy/manifests.py
 ```
 
-The preview command also poses the decoded final skin at shoulder.l flexion 90° and elbow.l flexion 90° and checks that the humerus moves forward. Blender cannot import scalar custom attributes: `chest.audit.glb` is read back from the final compressed bytes, dequantized, and stripped only of `_U` and `_FIBRE`. The published GLB retains both float32 attributes, UVs, joints and weights.
+This publishes the five new topics; the existing chest manifest remains the regression baseline. Parent `.g` cards remain navigation groups rather than duplicate geometry. Optional thoracolumbar fascia, linea alba and diaphragm display parts are omitted. Lumbar multifidus is present and uses its actual left/right main meshes. Deep forearm and intrinsic hand/foot muscles are excluded by the v1 scope. Core erectors retain the full named iliocostalis-lumborum/longissimus-thoracis sources; a lumbar-only teaching crop remains [待核]. Neighbours are adjacent exercise secondary/stabiliser muscles, retaining their whole named source extents at low triangle targets.
 
-## Selection, coordinates and rig
+Each native step can also run independently:
 
-`chest/manifest.json` selects exact named source structures. Muscles and moving bones retain both real sides; no mirrored geometry is invented. Pectoralis major retains its three parts per side. The intercostals merge into two unsided neighbour/context meshes; the three triceps heads merge per side; radius and ulna merge per side. Sternum/ribs/cartilages merge into `thorax`, with thoracic spine separate. Source helpers are removed even when hidden. Review imports use `disable_bone_shape=True`: Blender otherwise creates an `Icosphere` display helper after import, which caused the original report failure even though it was absent from the exported file. Only the manifest meshes, `chest-rig` and eleven named joint nodes may appear in the GLB; the optimizer rejects missing, unexpected or duplicate names.
+```sh
+blender -b --python-exit-code 1 -P scripts/anatomy/build.py -- --topic back
+pnpm exec node --import tsx scripts/anatomy/optimize.ts --topic back
+blender -b --python-exit-code 1 -P scripts/anatomy/preview.py -- --topic back
+blender -b --python-exit-code 1 -P scripts/anatomy/report.py -- --topic back
+python3 scripts/anatomy/contact.py --topic back
+```
 
-Blender source coordinates are metres, Z up, front −Y. The frame subtracts the inferior manubrium centroid as the sternal-angle estimate and exports `(x,y,z) → (x,z,−y)` to glTF. Both build and decoded-output checks enforce metres, Y up, body front +Z and own left +X. Sternum is anterior to spine; left clavicle lies at positive X. The trunk joint is the chest origin. `sourceChestCentre` records the original XYZ centre; `floorY = sourceFloorZ − sourceChestCentre[2]`. Adding chest-centre height to the centred floor recovers the source floor; a viewer can add `−floorY` to put the feet on world y=0.
-
-The shoulder girdle is a chain: `clavicle.<side>` pivots at the sternoclavicular joint (the clavicle's medial end) and carries the clavicle, `scapula.<side>` pivots at the acromioclavicular joint (its lateral end) and carries the scapula, and the shoulder hangs from the scapula; so protraction or elevation swings the collarbone about the sternum and carries the blade round the ribs instead of lifting the collarbone off the sternum. Muscles weight proximal → distal joint along `_U` with a smoothstep over the whole fibre length (already the widest blend). Joint centres use glenoid/epicondyle landmarks, a numerical humeral-head sphere fit (no helper sphere), and wrist landmarks. Build prints every joint against its associated bone bounds and verifies unit axes. Shoulder/elbow flexion uses a negative-X axis so the downward arm moves forward (+Z). `chest/rig.json` records candidate centres, hierarchy, axes and source evidence. The independent pose check can also run with `blender -b --python-exit-code 1 -P scripts/anatomy/chest/pose.py`.
-
-Muscle `_U` is the ratio of two mesh-edge distance fields, seeded from classified attachments; each disconnected component gets both endpoints. `_FIBRE` is the normalized surface gradient, explicitly rotated for glTF; UV u follows `_U`, with radial v and unwrapped seams. Skin and muscles have up to four weights; bones are rigidly bound. Muscle attachment candidates retain raw labels, source objects, proximity distances and review flags; proximity does not approve anatomy.
-
-## Simplification and gates
-
-Simplification runs before fibre/skin baking. Coincident position seams are welded into a **compact** vertex buffer; orphan duplicate vertices must not remain as implicit seams. meshoptimizer updates positions using absolute metre errors, locks source borders and preserves folds. An independent symmetric nearest-triangle audit checks the actual surface. Context meshes protect offending thin-fold vertices and retry from the source instead of freezing the whole mesh; other meshes retry with a smaller error. Opposite coincident triangle pairs produced by collapsed thin folds are cancelled together before export; Blender would remove only one and create a boundary. Unreferenced source vertices are excluded from surface samples, since they are not part of any triangle.
-
-| Role / context mesh | Absolute error | Mandatory triangle cap |
-|---|---:|---:|
-| Region muscles | 0.5 mm | manifest targets subordinate to error |
-| Neighbour muscles | 1.5 mm | manifest targets subordinate to error |
-| Intercostals external/internal | 1.5 mm | 20,000 each |
-| External oblique | 1.5 mm | 8,000 per side |
-| Bones | 1 mm | thorax 25,000 |
-| Skin outline | 3 mm | 30,000 |
-
-Optimization welds, reorders, quantizes positions/normals/UVs/weights and uses required `EXT_meshopt_compression` with `KHR_mesh_quantization`. It validates attributes, unit fibre vectors, normalized skin weights and all joint references before writing. Both **4,000,000 bytes / 350,000 triangles soft targets** are enforced, along with the 8 MB / 500k hard ceilings and context caps. `report.py` compares original and decoded final rest surfaces using referenced vertices plus 6,000 area-weighted interior samples per direction. The Hausdorff result is sampled, not a proof of a global maximum. Boundary creation on a previously boundary-free surface fails. Closedness welds positional seams at 0.1 µm; open/nonmanifold sources remain marked for section-cap review.
-
-## Previews and review
-
-Workbench uses studio lighting (no matcap), flat paper `#EDE7D6`, warm clay region muscles, grey-green neighbours and bone-white skeleton. The anatomy cameras are orthographic and fit evaluated non-skin bounds with 5% margin per edge. A same-camera shell pass is composited at 30% opacity, because Workbench has no independent object render opacity. The exploded view leaves skin hidden to expose the lifted layers: superficial 0.12 m and intermediate 0.06 m along the outward radial direction; deep/context/bones stay in place. The opaque skin view frames the full skin bounds to inspect enclosure. The pose view hides skin to expose axilla deformation.
-
-Generated PNGs:
-
-- `cache/preview-front.png`
-- `cache/preview-back.png`
-- `cache/preview-left.png` (body's own left)
-- `cache/preview-exploded-by-layer.png`
-- `cache/preview-skin.png`
-- `cache/preview-pose.png`
-
-Review the PNGs plus `chest/report.md`, `chest/attachments.json` and `chest/rig.json`. The report includes per-mesh counts/errors/topology, budgets, coordinates, a rig table and unchecked anatomical attachment candidates. Automatic geometry success does not mark the attachment wording or source-label disagreements as anatomically approved.
+`chest/preview.py` remains a compatibility entry point accepting `--topic`; `chest/pose.py` independently runs the chest pose check through the shared renderer. Inventory is a shared source scan rather than a per-topic artifact. `simplify.ts` takes explicit topic-prefixed input/output filenames from `build.py`. Historical fallback/probe scripts are retained for provenance and are not part of the native acceptance command.
 
 ## Artifacts
 
-`cache/inventory.json` and `inventory-report.md` cover all four cached FBX systems. `chest-review.blend` stores original comparison surfaces; the export scene removes these before writing `chest.raw.glb`. `chest.audit.glb` is the decoded geometry/skin audit copy. JSON stats record build, optimization, surface audit, preview backend/paths and pose measurements. Logs and probes stay in ignored `cache/`. `fallback/` and `assimp_inventory.py` retain the historical CPU route for inspection; the acceptance command above uses native Blender throughout.
+- `<topic>/manifest.json`, `rig.json`, `attachments.json`, `report.md`, `preview-review.md`.
+- `cache/<topic>-raw.glb`, `cache/<topic>-audit.glb`, `<topic>-review.blend`.
+- `cache/<topic>-{build,optimize,report,pose}-stats.json`, preview metadata, simplification jobs and logs.
+- `cache/<topic>-preview-{front,back,left,exploded-by-layer,skin,pose}.png`; optional contact sheet.
+- `public/models/muscles-<topic>.glb`.
 
-Geometry, GLB and derived attachment/rig data use CC BY-SA 4.0. Exact attribution is embedded in the GLB. Original license, provenance and checksums remain in `cache/License.txt`, `FETCHED.txt` and `SHA256SUMS.txt`.
+The audit GLB is decoded from the actual compressed output, dequantized and stripped only of scalar custom attributes that Blender cannot import. The published GLB retains `_U`, `_FIBRE`, UVs, joints, normalized weights and required `EXT_meshopt_compression` / `KHR_mesh_quantization`.
 
-Current native result: **3,685,024 bytes (3.685 MB), 231,986 triangles, 39 mesh nodes / 51 total nodes**. All geometry/error/cap/coordinate gates passed. The 90° shoulder input moves the left humerus 0.145641 m forward; the 90° elbow input produces a 103.00° bend including the source rest angle. Source/open and simplification nonmanifold surfaces keep section caps disabled as listed in the report.
+## Selection, frames and rigs
+
+All source sides are real cached geometry. No mirroring, guessed muscle substitutes, marker helpers, hair, nails or section planes are exported. Moving bones are sided. Ribs, cartilage and sternum merge into `thorax`. Arms retain **separate radius and ulna**, with hand bones merged per side; legs merge tibia/fibula and foot bones per side. Pelvis merges both hip bones, sacrum and coccyx. Thoracic/lumbar/cervical columns remain named static meshes when relevant. `referenceParts` supplies actual unexported bones or connective surfaces needed to measure joints and attachments outside the display region.
+
+Source coordinates are metres, Z up, anterior −Y, own left +X. Export is `(x,y,z) → (x,z,−y)`. Topic centres are near the selected anatomy: chest sternal angle, back spine, shoulders clavicle midline, arms humerus midline, legs pelvis, core lumbar spine. `rig.json` records source centre, `floorY`, stature and orientation evidence. Add `−floorY` to ground the whole-body shell. Build and decoded-output gates verify stature, floor and bilateral signs; no silent mirroring/rescaling is allowed.
+
+Upper-body chains: trunk → clavicle → scapula → shoulder → elbow → hand. Arms insert **forearm** between elbow and hand: ulna remains rigid on elbow, radius/hand follow forearm pronation. Hip pivots come from acetabulum landmark cubes, checked against numerical femoral-head sphere fits. Knee centres are femoral epicondyle midpoints; ankles are medial/lateral malleolar midpoints. Upper joint centres use medial/lateral clavicle endpoints, glenoid/epicondyle landmarks, humeral-head sphere fits and wrist styloid midpoints. Hand metadata provides a **0.08 m grip offset** distal to its wrist pivot.
+
+Only region-relevant joints are exported. Drafts currently list full-body exercise keyframes even for regional topics; excluded keys are recorded in each rig/report and require a whole-body motion driver. Arms drafts currently put pronation/supination on `elbow.*`; `motionAliases` redirects those actions to the actual `forearm.*` longitudinal axes. Joint centre/axis evidence remains anatomically unapproved.
+
+**Chest byte compatibility:** its existing eleven joint nodes include `wrist.l/.r`; those names and its geometry/encoding remain unchanged. Renaming them to `hand` would violate the required byte baseline. The chest-only legacy rig branch is isolated in `build.py`; new rigs use `hand`. Chest rig metadata maps `hand.*` to legacy `wrist.*` and records the same 0.08 m grip offset. Every successful run prints chest SHA-256 before/after and rejects a regression. The full native chest rerun reproduced SHA-256 `4ddd10ce16131977074cb4ba0a1bbf223a7dbee928b8b84c369553e9362a6687` byte-for-byte.
+
+Muscle `_U` comes from two mesh-edge distance fields seeded by attachment candidates; disconnected components receive both endpoints. `_FIBRE` is the normalized surface gradient rotated to glTF; UV u follows `_U`, radial v unwraps across seams. Muscle weights blend across the entire fibre length with smoothstep; long multi-joint muscles include intervening joints. Skin uses sided nearby joints and widened neighbour smoothing, with up to four weights. Bones are rigidly bound.
+
+## Simplification and output gates
+
+| Role | Sampled surface tolerance | Triangle targets / caps |
+|---|---:|---|
+| Region | 0.5 mm | nominal 4–8k; smaller original meshes retain their full source |
+| Neighbour | 1.5 mm | nominal 1–2k, subject to surface tolerance |
+| Bone | 1 mm | nominal 2–6k; named static groups may be larger |
+| Skin | 3 mm | target 18–30k; mandatory cap 30k |
+| Thorax | 1 mm | mandatory cap 25k |
+| External oblique as neighbour | 1.5 mm | mandatory cap 8k per side |
+| Chest external/internal intercostals | 1.5 mm | mandatory cap 20k each |
+
+Core external oblique is a **region** muscle: its stricter 0.5 mm tolerance takes precedence over the neighbour-only 8k cap. Total output is always **≤4,000,000 bytes and ≤350,000 triangles**, including bones and full-body skin. Both ceilings are checked before publishing. Triangle targets are subordinate to the absolute surface tolerance; caps remain mandatory where specified.
+
+Simplification welds coincident positions into compact buffers, preserves source borders/folds, protects vertices responsible for thin-fold error and retries conservatively. New topics also reduce the global simplifier tolerance when protection alone stops improving an error; unresolved pieces retain original geometry. Opposite coincident collapsed-fold triangles are cancelled in pairs to avoid introducing artificial boundaries. The independent final decoded audit samples referenced vertices plus 6,000 area-weighted triangle-interior points in both directions. These are sampled Hausdorff estimates, not certified global maxima. New boundaries on boundary-free sources fail; open/nonmanifold sources keep section filling disabled.
+
+Positions/normals/weights retain the chest quantization settings. New topics keep custom accessors **float32** while rounding excess mantissa precision on binary grids: `_U` 1/32768, `_FIBRE` 1/4096, UV 1/8192. Fibre direction changes are below 0.013°, endpoint parameters stay exactly 0/1, and decoded fibre length stays within 0.0003 of unity. All decoded weights/attributes/joint references are validated. Chest skips this rounding so its bytes are preserved.
+
+## Workbench review
+
+Workbench studio `paint.sl`, flat paper `#EDE7D6`, warm clay region muscles, grey-green neighbours, bone-white skeleton. Orthographic cameras fit evaluated non-skin bounds with 5% margin per edge. A same-camera opaque shell is composited at 30% opacity because Workbench has no independent object opacity. The opaque skin view frames the full body.
+
+Exploded previews move superficial/intermediate muscles out 0.12/0.06 m radially; deep, neighbours and bones stay fixed. Back uses a posterior exploded camera so its deeper structures can be reviewed. Pose previews hide skin and deform the decoded final skinning, checking finite geometry and anterior flexion. Arms also exercise pronation and wrist flexion; legs exercise hip/knee/ankle; core exercises trunk and hip. This verifies regional poses, not full exercise/contact kinematics.
+
+`preview-review.md` records actual inspection of all six PNGs. Attachment candidates preserve `.o/.e` nodes, raw labels, classification, named surface distance and explicit proximity fallbacks. Every candidate remains **[待核]**: geometry success does not approve anatomical wording, tendon identity, source-label disagreements or exercise-specific motion quality.
+
+Geometry, GLB and derived data: CC BY-SA 4.0. GLB attribution is embedded. Original license/provenance/checksums remain in `cache/License.txt`, `FETCHED.txt` and `SHA256SUMS.txt`.

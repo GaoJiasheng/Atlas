@@ -129,5 +129,21 @@ def surface_deviation(points_a, faces_a, points_b, faces_b):
                max(tree_a.find_nearest(p)[3] for p in samples(points_b, faces_b)))
 
 
-def mobile_skin_region(name):
+def mobile_skin_region(name, topic="chest"):
+    if topic != "chest" and re.search(r"thigh|knee|leg|ankle|foot|halluc|heel|malleol|metatars|sole|plantar|gluteal|hip region|femoral|popliteal", name.lower()):
+        return topic in ("legs", "core")
+    if topic in ("legs", "core"):
+        return False
     return bool(re.search(r'arm|elbow|wrist|hand|bicipital|cubital|carpal|palmar|palm|radial foveola|deltoid region|scapular region|pectoral|mammary region|presternal region|infraclavicular fossa|deltopectoral triangle|lateral region of thorax|triangle of auscultation|supraclavicular fossa', name.lower()))
+
+
+TOPICS = ('chest', 'back', 'shoulders', 'arms', 'legs', 'core')
+
+def topic_argument():
+    """Blender arguments follow --; ordinary Python scripts use argv directly."""
+    import argparse
+    import sys
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--topic', choices=TOPICS, default='chest')
+    arguments = sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else sys.argv[1:]
+    return parser.parse_known_args(arguments)[0].topic

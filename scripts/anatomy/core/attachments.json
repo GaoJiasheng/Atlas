@@ -1,0 +1,4796 @@
+{
+  "license": "CC BY-SA 4.0",
+  "status": "candidates \u2014 human review required",
+  "units": "m",
+  "sites": [
+    {
+      "muscle": "rectus-abdominis.l",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.011762087233364582,
+          -0.18786509335041046,
+          0.08050952851772308
+        ]
+      ],
+      "centroid": [
+        0.011762087233364582,
+        -0.18786509335041046,
+        0.08050952851772308
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 15,
+      "review": "pending"
+    },
+    {
+      "muscle": "rectus-abdominis.l",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          0.0036889014299958944,
+          -0.1728661209344864,
+          0.08639352768659592
+        ],
+        [
+          0.00713493674993515,
+          -0.0035920951049774885,
+          0.1240517869591713
+        ],
+        [
+          0.007130340673029423,
+          0.16398213803768158,
+          0.13721579313278198
+        ]
+      ],
+      "centroid": [
+        0.005989488679915667,
+        -0.003808672307059169,
+        0.11594819277524948
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Rectus abdominis muscle.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.09449955821037292,
+      "muscleDistanceM": 0.007829294539988041,
+      "review": "REQUIRED: attachment away from named surface"
+    },
+    {
+      "muscle": "rectus-abdominis.l",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          0.01660187542438507,
+          0.18859900534152985,
+          0.13905932009220123
+        ],
+        [
+          0.04276897758245468,
+          0.2003878802061081,
+          0.1406603902578354
+        ],
+        [
+          0.0710429921746254,
+          0.2034701555967331,
+          0.13727104663848877
+        ]
+      ],
+      "centroid": [
+        0.04348301514983177,
+        0.19748921692371368,
+        0.138996884226799
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Rectus abdominis muscle.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0008448587614111602,
+      "muscleDistanceM": 0.00461784191429615,
+      "review": "pending"
+    },
+    {
+      "muscle": "rectus-abdominis.r",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          -0.012332714162766933,
+          -0.18772216141223907,
+          0.0804092139005661
+        ]
+      ],
+      "centroid": [
+        -0.012332714162766933,
+        -0.18772216141223907,
+        0.0804092139005661
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 23,
+      "review": "pending"
+    },
+    {
+      "muscle": "rectus-abdominis.r",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.0036888979375362396,
+          -0.17286625504493713,
+          0.08639353513717651
+        ],
+        [
+          -0.007134932093322277,
+          -0.003592203138396144,
+          0.1240517869591713
+        ],
+        [
+          -0.007130337879061699,
+          0.16398200392723083,
+          0.13721579313278198
+        ]
+      ],
+      "centroid": [
+        -0.0059894840233027935,
+        -0.003808793844655156,
+        0.11594819277524948
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Rectus abdominis muscle.er"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0944996178150177,
+      "muscleDistanceM": 0.007603077683597803,
+      "review": "REQUIRED: attachment away from named surface"
+    },
+    {
+      "muscle": "rectus-abdominis.r",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.0710645541548729,
+          0.2034706473350525,
+          0.13726940751075745
+        ],
+        [
+          -0.042804084718227386,
+          0.20039811730384827,
+          0.14065943658351898
+        ],
+        [
+          -0.016616547480225563,
+          0.18860772252082825,
+          0.13905960321426392
+        ]
+      ],
+      "centroid": [
+        -0.04348301514983177,
+        0.19748921692371368,
+        0.138996884226799
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Rectus abdominis muscle.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0008448403095826507,
+      "muscleDistanceM": 0.003751791315153241,
+      "review": "pending"
+    },
+    {
+      "muscle": "external-oblique.l",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          0.13056112825870514,
+          0.1961090862751007,
+          0.07581057399511337
+        ],
+        [
+          0.1331404745578766,
+          0.19731095433235168,
+          0.06800345331430435
+        ],
+        [
+          0.1356673687696457,
+          0.19953498244285583,
+          0.058004625141620636
+        ]
+      ],
+      "centroid": [
+        0.13312290608882904,
+        0.19765160977840424,
+        0.0672728568315506
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "External abdominal oblique muscle.o1l"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0003111777186859399,
+      "muscleDistanceM": 0.002843547146767378,
+      "review": "pending"
+    },
+    {
+      "muscle": "external-oblique.l",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          0.1395600587129593,
+          0.16349206864833832,
+          0.06069754809141159
+        ],
+        [
+          0.14063723385334015,
+          0.17059381306171417,
+          0.04624159634113312
+        ],
+        [
+          0.13961657881736755,
+          0.17603807151317596,
+          0.034627772867679596
+        ]
+      ],
+      "centroid": [
+        0.1399378478527069,
+        0.1700413078069687,
+        0.04718897119164467
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "External abdominal oblique muscle.o2l"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0004821894399356097,
+      "muscleDistanceM": 0.0016794436378404498,
+      "review": "pending"
+    },
+    {
+      "muscle": "external-oblique.l",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          0.13484211266040802,
+          0.13074424862861633,
+          0.042242538183927536
+        ],
+        [
+          0.13393504917621613,
+          0.13983659446239471,
+          0.02450859732925892
+        ],
+        [
+          0.129746675491333,
+          0.14705222845077515,
+          0.01367731299251318
+        ]
+      ],
+      "centroid": [
+        0.1328413486480713,
+        0.13921108841896057,
+        0.026809487491846085
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "External abdominal oblique muscle.o3l"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0016670400509610772,
+      "muscleDistanceM": 0.002749963430687785,
+      "review": "pending"
+    },
+    {
+      "muscle": "external-oblique.l",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          0.11441075056791306,
+          0.22041642665863037,
+          0.09446671605110168
+        ],
+        [
+          0.12540718913078308,
+          0.23163680732250214,
+          0.07203689217567444
+        ],
+        [
+          0.12848007678985596,
+          0.23600327968597412,
+          0.06087217852473259
+        ]
+      ],
+      "centroid": [
+        0.12277160584926605,
+        0.2293587028980255,
+        0.07577730715274811
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "External abdominal oblique muscle.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0008726594387553632,
+      "muscleDistanceM": 0.0029447393026202917,
+      "review": "pending"
+    },
+    {
+      "muscle": "external-oblique.l",
+      "kind": "insertion",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.1266663819551468,
+          -0.06539043039083481,
+          0.06336553394794464
+        ],
+        [
+          0.1204526498913765,
+          -0.03874948248267174,
+          0.030136503279209137
+        ],
+        [
+          0.10543949902057648,
+          -0.03113686479628086,
+          0.009008578024804592
+        ]
+      ],
+      "centroid": [
+        0.11749925464391708,
+        -0.0450688898563385,
+        0.03412815183401108
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "External abdominal oblique muscle.o4l"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0032247023191303015,
+      "muscleDistanceM": 0.010592055507004261,
+      "review": "pending"
+    },
+    {
+      "muscle": "external-oblique.l",
+      "kind": "insertion",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.0721910148859024,
+          -0.14843226969242096,
+          0.08489736914634705
+        ],
+        [
+          0.10197783261537552,
+          -0.11480608582496643,
+          0.0857946127653122
+        ],
+        [
+          0.1133350133895874,
+          -0.09961230307817459,
+          0.08714644610881805
+        ]
+      ],
+      "centroid": [
+        0.09583457559347153,
+        -0.12095022201538086,
+        0.08594619482755661
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "External abdominal oblique muscle.o5l"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.023476041853427887,
+      "muscleDistanceM": 0.00353633682243526,
+      "review": "REQUIRED: attachment away from named surface"
+    },
+    {
+      "muscle": "external-oblique.r",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.1305612474679947,
+          0.1961090862751007,
+          0.07581058889627457
+        ],
+        [
+          -0.13314059376716614,
+          0.19731095433235168,
+          0.06800347566604614
+        ],
+        [
+          -0.13566739857196808,
+          0.19953498244285583,
+          0.058004654943943024
+        ]
+      ],
+      "centroid": [
+        -0.1331229954957962,
+        0.19765160977840424,
+        0.06727287173271179
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "External abdominal oblique muscle.o1r"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0003111777186859399,
+      "muscleDistanceM": 0.002842587186023593,
+      "review": "pending"
+    },
+    {
+      "muscle": "external-oblique.r",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.13956011831760406,
+          0.16349206864833832,
+          0.06069757416844368
+        ],
+        [
+          -0.14063724875450134,
+          0.17059381306171417,
+          0.04624162241816521
+        ],
+        [
+          -0.13961665332317352,
+          0.17603807151317596,
+          0.03462778776884079
+        ]
+      ],
+      "centroid": [
+        -0.13993795216083527,
+        0.1700413078069687,
+        0.047189000993967056
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "External abdominal oblique muscle.o2r"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0004821568145416677,
+      "muscleDistanceM": 0.001679298235103488,
+      "review": "pending"
+    },
+    {
+      "muscle": "external-oblique.r",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.1348421275615692,
+          0.1307443380355835,
+          0.042242515832185745
+        ],
+        [
+          -0.13393506407737732,
+          0.13983668386936188,
+          0.024508584290742874
+        ],
+        [
+          -0.1297466903924942,
+          0.14705237746238708,
+          0.013677304610610008
+        ]
+      ],
+      "centroid": [
+        -0.13284136354923248,
+        0.13921119272708893,
+        0.02680947445333004
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "External abdominal oblique muscle.o3r"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0016670689219608903,
+      "muscleDistanceM": 0.002749913837760687,
+      "review": "pending"
+    },
+    {
+      "muscle": "external-oblique.r",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.11441083997488022,
+          0.22041642665863037,
+          0.09446673840284348
+        ],
+        [
+          -0.12540726363658905,
+          0.23163680732250214,
+          0.07203690707683563
+        ],
+        [
+          -0.12848016619682312,
+          0.23600327968597412,
+          0.06087219715118408
+        ]
+      ],
+      "centroid": [
+        -0.12277168035507202,
+        0.2293587028980255,
+        0.0757773220539093
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "External abdominal oblique muscle.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.000872675736900419,
+      "muscleDistanceM": 0.0029885561671108007,
+      "review": "pending"
+    },
+    {
+      "muscle": "external-oblique.r",
+      "kind": "insertion",
+      "bone": "pelvis",
+      "points": [
+        [
+          -0.12666639685630798,
+          -0.06539043039083481,
+          0.06336553394794464
+        ],
+        [
+          -0.1204526498913765,
+          -0.03874948248267174,
+          0.030136503279209137
+        ],
+        [
+          -0.10543950647115707,
+          -0.03113686479628086,
+          0.009008580818772316
+        ]
+      ],
+      "centroid": [
+        -0.11749925464391708,
+        -0.0450688898563385,
+        0.03412815183401108
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "External abdominal oblique muscle.o4r"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.003224695799872279,
+      "muscleDistanceM": 0.010592088103294373,
+      "review": "pending"
+    },
+    {
+      "muscle": "external-oblique.r",
+      "kind": "insertion",
+      "bone": "pelvis",
+      "points": [
+        [
+          -0.072191022336483,
+          -0.14843226969242096,
+          0.08489736914634705
+        ],
+        [
+          -0.10197784006595612,
+          -0.11480608582496643,
+          0.0857946127653122
+        ],
+        [
+          -0.1133350282907486,
+          -0.09961230307817459,
+          0.08714644610881805
+        ]
+      ],
+      "centroid": [
+        -0.09583459049463272,
+        -0.12095022201538086,
+        0.08594619482755661
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "External abdominal oblique muscle.o5r"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.02347603254020214,
+      "muscleDistanceM": 0.00353640946559608,
+      "review": "REQUIRED: attachment away from named surface"
+    },
+    {
+      "muscle": "internal-oblique.l",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.12096337974071503,
+          -0.08596432209014893,
+          0.0836036279797554
+        ],
+        [
+          0.11997262388467789,
+          -0.044387903064489365,
+          0.04228054732084274
+        ],
+        [
+          0.09374236315488815,
+          -0.031115438789129257,
+          0.0014505424769595265
+        ]
+      ],
+      "centroid": [
+        0.11154472082853317,
+        -0.05377216264605522,
+        0.04238039255142212
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Internal abdominal oblique muscle.o3l"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.003594091394916177,
+      "muscleDistanceM": 0.011393861845135689,
+      "review": "pending"
+    },
+    {
+      "muscle": "internal-oblique.l",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          0.10645854473114014,
+          0.028497999534010887,
+          0.07613301277160645
+        ],
+        [
+          0.08697947859764099,
+          0.060724470764398575,
+          0.11361750960350037
+        ],
+        [
+          0.08976604789495468,
+          0.08634228259325027,
+          0.11917244642972946
+        ]
+      ],
+      "centroid": [
+        0.0943855568766594,
+        0.05856086686253548,
+        0.10300946980714798
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Internal abdominal oblique muscle.o1l"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0014999662525951862,
+      "muscleDistanceM": 0.00993659533560276,
+      "review": "pending"
+    },
+    {
+      "muscle": "internal-oblique.l",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          0.12261606007814407,
+          0.03346576914191246,
+          0.04730917513370514
+        ],
+        [
+          0.12302348017692566,
+          0.035233259201049805,
+          0.0441637821495533
+        ],
+        [
+          0.12410852313041687,
+          0.038860972970724106,
+          0.039099279791116714
+        ]
+      ],
+      "centroid": [
+        0.12325028330087662,
+        0.035856977105140686,
+        0.04351832717657089
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Internal abdominal oblique muscle.o2l"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.000522370683029294,
+      "muscleDistanceM": 0.0011690431274473667,
+      "review": "pending"
+    },
+    {
+      "muscle": "internal-oblique.l",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          0.11349793523550034,
+          0.01926044374704361,
+          0.029663018882274628
+        ],
+        [
+          0.11329220235347748,
+          0.02570742554962635,
+          0.020556379109621048
+        ],
+        [
+          0.10901082307100296,
+          0.04052984341979027,
+          0.0030396925285458565
+        ]
+      ],
+      "centroid": [
+        0.11193326115608215,
+        0.0285020899027586,
+        0.017749309539794922
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Internal abdominal oblique muscle.o4l"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0003196960315108299,
+      "muscleDistanceM": 0.0017213844694197178,
+      "review": "pending"
+    },
+    {
+      "muscle": "internal-oblique.l",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          0.081679567694664,
+          0.016476156190037727,
+          -0.006826200522482395
+        ],
+        [
+          0.08235174417495728,
+          0.019948167726397514,
+          -0.009603907354176044
+        ],
+        [
+          0.08031448721885681,
+          0.028737584128975868,
+          -0.0168527290225029
+        ]
+      ],
+      "centroid": [
+        0.08144867420196533,
+        0.021720638498663902,
+        -0.011094282381236553
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Internal abdominal oblique muscle.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0019945004023611546,
+      "muscleDistanceM": 0.0022839359007775784,
+      "review": "pending"
+    },
+    {
+      "muscle": "internal-oblique.r",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          -0.12096337974071503,
+          -0.08596432209014893,
+          0.0836036279797554
+        ],
+        [
+          -0.11997262388467789,
+          -0.044387903064489365,
+          0.04228055477142334
+        ],
+        [
+          -0.09374236315488815,
+          -0.031115438789129257,
+          0.001450546202249825
+        ]
+      ],
+      "centroid": [
+        -0.11154472082853317,
+        -0.05377216264605522,
+        0.04238039255142212
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Internal abdominal oblique muscle.o3r"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0035940937232226133,
+      "muscleDistanceM": 0.011393976397812366,
+      "review": "pending"
+    },
+    {
+      "muscle": "internal-oblique.r",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.10645852982997894,
+          0.028497999534010887,
+          0.07613301277160645
+        ],
+        [
+          -0.08697947859764099,
+          0.060724470764398575,
+          0.11361750960350037
+        ],
+        [
+          -0.08976604789495468,
+          0.08634228259325027,
+          0.11917244642972946
+        ]
+      ],
+      "centroid": [
+        -0.0943855494260788,
+        0.05856086686253548,
+        0.10300946980714798
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Internal abdominal oblique muscle.o1r"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0014999662525951862,
+      "muscleDistanceM": 0.009936610236763954,
+      "review": "pending"
+    },
+    {
+      "muscle": "internal-oblique.r",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.12261611223220825,
+          0.03346577286720276,
+          0.047309182584285736
+        ],
+        [
+          -0.12302350997924805,
+          0.035233259201049805,
+          0.04416380822658539
+        ],
+        [
+          -0.12410857528448105,
+          0.038860972970724106,
+          0.03909929841756821
+        ]
+      ],
+      "centroid": [
+        -0.12325034290552139,
+        0.035856977105140686,
+        0.043518345803022385
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Internal abdominal oblique muscle.o2r"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0005223629414103925,
+      "muscleDistanceM": 0.0011707332450896502,
+      "review": "pending"
+    },
+    {
+      "muscle": "internal-oblique.r",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.11349795758724213,
+          0.01926044374704361,
+          0.02966301329433918
+        ],
+        [
+          -0.11329221725463867,
+          0.02570742554962635,
+          0.0205563735216856
+        ],
+        [
+          -0.10901084542274475,
+          0.04052984341979027,
+          0.003039685310795903
+        ]
+      ],
+      "centroid": [
+        -0.11193329095840454,
+        0.0285020899027586,
+        0.017749303951859474
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Internal abdominal oblique muscle.o4r"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0003196950419805944,
+      "muscleDistanceM": 0.0017177744302898645,
+      "review": "pending"
+    },
+    {
+      "muscle": "internal-oblique.r",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.0816795751452446,
+          0.01647602766752243,
+          -0.006826205179095268
+        ],
+        [
+          -0.08235175907611847,
+          0.019948052242398262,
+          -0.009603912010788918
+        ],
+        [
+          -0.08031449466943741,
+          0.02873747982084751,
+          -0.016852732747793198
+        ]
+      ],
+      "centroid": [
+        -0.08144868910312653,
+        0.021720536053180695,
+        -0.011094284243881702
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Internal abdominal oblique muscle.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0019945085514336824,
+      "muscleDistanceM": 0.0022836653515696526,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.l",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.023771733045578003,
+          -0.11360234767198563,
+          -0.04526711627840996
+        ]
+      ],
+      "centroid": [
+        0.023771733045578003,
+        -0.11360234767198563,
+        -0.04526711627840996
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 286,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.l",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.023771733045578003,
+          -0.11360234767198563,
+          -0.04526711627840996
+        ]
+      ],
+      "centroid": [
+        0.023771733045578003,
+        -0.11360234767198563,
+        -0.04526711627840996
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 286,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.l",
+      "kind": "origin",
+      "bone": "lumbar-spine",
+      "points": [
+        [
+          0.01360533107072115,
+          -0.0006983632920309901,
+          -0.022676557302474976
+        ]
+      ],
+      "centroid": [
+        0.01360533107072115,
+        -0.0006983632920309901,
+        -0.022676557302474976
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 178,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.l",
+      "kind": "origin",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          0.0331917367875576,
+          0.2668498754501343,
+          -0.04166126623749733
+        ]
+      ],
+      "centroid": [
+        0.0331917367875576,
+        0.2668498754501343,
+        -0.04166126623749733
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 160,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.l",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          0.058895211666822433,
+          0.2140621542930603,
+          -0.06068287417292595
+        ],
+        [
+          0.061466965824365616,
+          0.2126806676387787,
+          -0.06146739795804024
+        ],
+        [
+          0.06370987743139267,
+          0.21151474118232727,
+          -0.06225963309407234
+        ]
+      ],
+      "centroid": [
+        0.061364080756902695,
+        0.2127489447593689,
+        -0.06147214397788048
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e10l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 2.5367902708239853e-05,
+      "muscleDistanceM": 0.0015744281699880958,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.l",
+      "kind": "insertion",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          0.03468543291091919,
+          0.2206263393163681,
+          -0.05063672736287117
+        ],
+        [
+          0.03324302285909653,
+          0.2211970090866089,
+          -0.05266474559903145
+        ],
+        [
+          0.03164878860116005,
+          0.2225433588027954,
+          -0.054552264511585236
+        ]
+      ],
+      "centroid": [
+        0.03318127244710922,
+        0.22146174311637878,
+        -0.05263271555304527
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e11l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0006674225442111492,
+      "muscleDistanceM": 0.001342839328572154,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.l",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          0.06429287791252136,
+          0.24398766458034515,
+          -0.06203565001487732
+        ],
+        [
+          0.06710072606801987,
+          0.2437519133090973,
+          -0.06279849261045456
+        ],
+        [
+          0.06871642172336578,
+          0.24434804916381836,
+          -0.06315109878778458
+        ]
+      ],
+      "centroid": [
+        0.06671138107776642,
+        0.24403052031993866,
+        -0.0626637265086174
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e12l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00020987121388316154,
+      "muscleDistanceM": 0.0022231522016227245,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.l",
+      "kind": "insertion",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          0.035442475229501724,
+          0.2528197169303894,
+          -0.054579958319664
+        ],
+        [
+          0.036072246730327606,
+          0.25493746995925903,
+          -0.054910797625780106
+        ],
+        [
+          0.03463754802942276,
+          0.2574302554130554,
+          -0.056006480008363724
+        ]
+      ],
+      "centroid": [
+        0.03538060560822487,
+        0.2550736367702484,
+        -0.05516967922449112
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e13l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0005933190113864839,
+      "muscleDistanceM": 0.0011896876385435462,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.l",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          0.0642290934920311,
+          0.2792217433452606,
+          -0.0639299601316452
+        ],
+        [
+          0.06695474684238434,
+          0.2788754999637604,
+          -0.0640714019536972
+        ],
+        [
+          0.06953475624322891,
+          0.27879029512405396,
+          -0.06420869380235672
+        ]
+      ],
+      "centroid": [
+        0.06690619140863419,
+        0.27896252274513245,
+        -0.06407002359628677
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e14l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0001823508646339178,
+      "muscleDistanceM": 0.0006823983276262879,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.l",
+      "kind": "insertion",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          0.03585147485136986,
+          0.28515729308128357,
+          -0.05792100727558136
+        ],
+        [
+          0.03570989519357681,
+          0.2869052290916443,
+          -0.05806088075041771
+        ],
+        [
+          0.035458751022815704,
+          0.2889762818813324,
+          -0.05821162462234497
+        ]
+      ],
+      "centroid": [
+        0.03567337617278099,
+        0.2870129644870758,
+        -0.05806449428200722
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e15l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.000495364423841238,
+      "muscleDistanceM": 0.001302257995121181,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.l",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          0.06041639298200607,
+          0.31106996536254883,
+          -0.0503125824034214
+        ],
+        [
+          0.06276967376470566,
+          0.3103545606136322,
+          -0.05103623494505882
+        ],
+        [
+          0.06553198397159576,
+          0.3107142448425293,
+          -0.05163482949137688
+        ]
+      ],
+      "centroid": [
+        0.06292182207107544,
+        0.3107127845287323,
+        -0.050998397171497345
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e16l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00020591399515978992,
+      "muscleDistanceM": 0.0018322044052183628,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.l",
+      "kind": "insertion",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          0.03721591830253601,
+          0.31382375955581665,
+          -0.04694407433271408
+        ],
+        [
+          0.03677891939878464,
+          0.31449681520462036,
+          -0.049517009407281876
+        ],
+        [
+          0.036172203719615936,
+          0.31506118178367615,
+          -0.05139860138297081
+        ]
+      ],
+      "centroid": [
+        0.03671881929039955,
+        0.31446513533592224,
+        -0.04930330440402031
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e17l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00010286516771884635,
+      "muscleDistanceM": 0.0007691014325246215,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.l",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          0.05811323970556259,
+          0.34066835045814514,
+          -0.044206228107213974
+        ],
+        [
+          0.05779154226183891,
+          0.3444131016731262,
+          -0.04258447885513306
+        ],
+        [
+          0.05663032829761505,
+          0.3464365303516388,
+          -0.04153543710708618
+        ]
+      ],
+      "centroid": [
+        0.05750977620482445,
+        0.34384942054748535,
+        -0.042770832777023315
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e18l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00024001811107154936,
+      "muscleDistanceM": 0.0008658422739244998,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.l",
+      "kind": "insertion",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          0.03495188429951668,
+          0.3407426178455353,
+          -0.04158715903759003
+        ],
+        [
+          0.0350065603852272,
+          0.34288403391838074,
+          -0.041857004165649414
+        ],
+        [
+          0.034498706459999084,
+          0.34491512179374695,
+          -0.04310305416584015
+        ]
+      ],
+      "centroid": [
+        0.03481704741716385,
+        0.34286028146743774,
+        -0.042188163846731186
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e19l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0003571540873963386,
+      "muscleDistanceM": 0.0006726123974658549,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.l",
+      "kind": "insertion",
+      "bone": "lumbar-spine",
+      "points": [
+        [
+          0.001967604970559478,
+          0.013857875019311905,
+          -0.032883886247873306
+        ],
+        [
+          0.016220606863498688,
+          0.03513377532362938,
+          -0.017258012667298317
+        ],
+        [
+          0.022924602031707764,
+          0.04494998976588249,
+          -0.0139303645119071
+        ]
+      ],
+      "centroid": [
+        0.013704263605177402,
+        0.031313877552747726,
+        -0.021357422694563866
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e1l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.012473600916564465,
+      "muscleDistanceM": 0.0036852043122053146,
+      "review": "REQUIRED: attachment away from named surface"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.l",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          0.05104311183094978,
+          0.36800137162208557,
+          -0.02852042205631733
+        ],
+        [
+          0.05332609638571739,
+          0.36778494715690613,
+          -0.029084261506795883
+        ],
+        [
+          0.05558586120605469,
+          0.3676068186759949,
+          -0.029766779392957687
+        ]
+      ],
+      "centroid": [
+        0.05332629755139351,
+        0.3677971661090851,
+        -0.02912607043981552
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e20l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00022031024855095893,
+      "muscleDistanceM": 0.0012435526587069035,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.l",
+      "kind": "insertion",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          0.033062078058719635,
+          0.36605146527290344,
+          -0.030074918642640114
+        ],
+        [
+          0.0340651273727417,
+          0.36686834692955017,
+          -0.03219497203826904
+        ],
+        [
+          0.033759742975234985,
+          0.3669954538345337,
+          -0.03545292094349861
+        ]
+      ],
+      "centroid": [
+        0.033628981560468674,
+        0.36663830280303955,
+        -0.03257426619529724
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e21l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00037338404217734933,
+      "muscleDistanceM": 0.0017846853006631136,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.l",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          0.05015634000301361,
+          0.3885357081890106,
+          -0.012477879412472248
+        ],
+        [
+          0.051568638533353806,
+          0.3883582651615143,
+          -0.012215799652040005
+        ],
+        [
+          0.053561169654130936,
+          0.3881767988204956,
+          -0.011815855279564857
+        ]
+      ],
+      "centroid": [
+        0.051762063056230545,
+        0.3883568346500397,
+        -0.01216984260827303
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e22l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00015912560047581792,
+      "muscleDistanceM": 0.0013053235597908497,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.l",
+      "kind": "insertion",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          0.0364702008664608,
+          0.3884470760822296,
+          -0.018175533041357994
+        ],
+        [
+          0.03696468845009804,
+          0.3902881443500519,
+          -0.01862681843340397
+        ],
+        [
+          0.03737102448940277,
+          0.3926047682762146,
+          -0.018440481275320053
+        ]
+      ],
+      "centroid": [
+        0.03693531081080437,
+        0.39044681191444397,
+        -0.01841427944600582
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e23l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 9.458114072913304e-05,
+      "muscleDistanceM": 0.0022978384513407946,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.l",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          0.04527753219008446,
+          0.3981438875198364,
+          0.002231241436675191
+        ],
+        [
+          0.04400285705924034,
+          0.40011677145957947,
+          0.0013369371881708503
+        ],
+        [
+          0.042859941720962524,
+          0.4013587534427643,
+          0.0004314971447456628
+        ]
+      ],
+      "centroid": [
+        0.044042035937309265,
+        0.39987918734550476,
+        0.0013296181568875909
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e24l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 9.962877811631188e-05,
+      "muscleDistanceM": 0.0015601121122017503,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.l",
+      "kind": "insertion",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          0.038382455706596375,
+          0.40697309374809265,
+          -0.004217087756842375
+        ],
+        [
+          0.038641590625047684,
+          0.4068725109100342,
+          -0.005549258552491665
+        ],
+        [
+          0.038206830620765686,
+          0.4067191481590271,
+          -0.007559929043054581
+        ]
+      ],
+      "centroid": [
+        0.03841044753789902,
+        0.40685421228408813,
+        -0.005784278269857168
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e25l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00024112651590257883,
+      "muscleDistanceM": 0.0005625054473057389,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.l",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          0.03705164045095444,
+          0.08997660875320435,
+          -0.027188220992684364
+        ],
+        [
+          0.037603408098220825,
+          0.09165015071630478,
+          -0.026751911267638206
+        ],
+        [
+          0.03765185549855232,
+          0.09355342388153076,
+          -0.025615382939577103
+        ]
+      ],
+      "centroid": [
+        0.037436820566654205,
+        0.0917322188615799,
+        -0.02651640772819519
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e26l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 4.930554496240802e-05,
+      "muscleDistanceM": 0.0008155167452059686,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.l",
+      "kind": "insertion",
+      "bone": "lumbar-spine",
+      "points": [
+        [
+          0.0018669669516384602,
+          0.040591638535261154,
+          -0.03555712476372719
+        ],
+        [
+          0.02060987427830696,
+          0.07089462876319885,
+          -0.019833803176879883
+        ],
+        [
+          0.0226716510951519,
+          0.07589264959096909,
+          -0.02061263658106327
+        ]
+      ],
+      "centroid": [
+        0.01504950039088726,
+        0.06245959922671318,
+        -0.025334537029266357
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e2l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.011726205237209797,
+      "muscleDistanceM": 0.004905967507511377,
+      "review": "REQUIRED: attachment away from named surface"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.l",
+      "kind": "insertion",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          0.02207086980342865,
+          0.1068851575255394,
+          -0.02697865664958954
+        ],
+        [
+          0.020847007632255554,
+          0.10717520862817764,
+          -0.0303050447255373
+        ],
+        [
+          0.019272686913609505,
+          0.1084739938378334,
+          -0.0314498245716095
+        ]
+      ],
+      "centroid": [
+        0.020730195567011833,
+        0.10751152783632278,
+        -0.029577849432826042
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e3l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0007639959803782403,
+      "muscleDistanceM": 0.0014744086656719446,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.l",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          0.04609595611691475,
+          0.11827179789543152,
+          -0.044531840831041336
+        ],
+        [
+          0.04443570598959923,
+          0.12080377340316772,
+          -0.044150836765766144
+        ],
+        [
+          0.04266989603638649,
+          0.12352164089679718,
+          -0.043522175401449203
+        ]
+      ],
+      "centroid": [
+        0.04439598694443703,
+        0.12087269127368927,
+        -0.04406686872243881
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e4l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 3.4544984373496845e-05,
+      "muscleDistanceM": 0.001153750577941537,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.l",
+      "kind": "insertion",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          0.02308768220245838,
+          0.13647878170013428,
+          -0.0341058075428009
+        ],
+        [
+          0.024577705189585686,
+          0.13773566484451294,
+          -0.03362063691020012
+        ],
+        [
+          0.02677427977323532,
+          0.13749943673610687,
+          -0.0326436422765255
+        ]
+      ],
+      "centroid": [
+        0.024822652339935303,
+        0.1372392177581787,
+        -0.03345278650522232
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e5l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00021537554857786745,
+      "muscleDistanceM": 0.0008983428706414998,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.l",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          0.0559593066573143,
+          0.14546503126621246,
+          -0.05003487318754196
+        ],
+        [
+          0.055304791778326035,
+          0.14731693267822266,
+          -0.050070635974407196
+        ],
+        [
+          0.053888119757175446,
+          0.15125307440757751,
+          -0.04984663426876068
+        ]
+      ],
+      "centroid": [
+        0.055050745606422424,
+        0.1480117291212082,
+        -0.04998401552438736
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e6l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 3.9614660636289045e-05,
+      "muscleDistanceM": 0.0007080362411215901,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.l",
+      "kind": "insertion",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          0.030837880447506905,
+          0.1582672894001007,
+          -0.043988265097141266
+        ],
+        [
+          0.03165937960147858,
+          0.16263118386268616,
+          -0.04433351010084152
+        ],
+        [
+          0.03270246833562851,
+          0.1659289449453354,
+          -0.04382430762052536
+        ]
+      ],
+      "centroid": [
+        0.0317358560860157,
+        0.16228747367858887,
+        -0.04404884949326515
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e7l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0009518764563836157,
+      "muscleDistanceM": 0.0014639288419857621,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.l",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          0.05871623009443283,
+          0.1793316900730133,
+          -0.05853873863816261
+        ],
+        [
+          0.05842415988445282,
+          0.18187640607357025,
+          -0.05879823863506317
+        ],
+        [
+          0.05861319974064827,
+          0.18427115678787231,
+          -0.05924670398235321
+        ]
+      ],
+      "centroid": [
+        0.05858450382947922,
+        0.18182645738124847,
+        -0.05886123701930046
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e8l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00022469554096460342,
+      "muscleDistanceM": 0.002771457890048623,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.l",
+      "kind": "insertion",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          0.032285209745168686,
+          0.1902853399515152,
+          -0.050395578145980835
+        ],
+        [
+          0.03174382820725441,
+          0.19169674813747406,
+          -0.05262592062354088
+        ],
+        [
+          0.030744899064302444,
+          0.1923610270023346,
+          -0.05410343036055565
+        ]
+      ],
+      "centroid": [
+        0.03158793970942497,
+        0.19145333766937256,
+        -0.05238458886742592
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e9l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00022679107496514916,
+      "muscleDistanceM": 0.0006590361590497196,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.l",
+      "kind": "insertion",
+      "bone": "lumbar-spine",
+      "points": [
+        [
+          0.002209626603871584,
+          -0.01315964013338089,
+          -0.03252071887254715
+        ],
+        [
+          0.0013412763364613056,
+          -0.010140541940927505,
+          -0.03266523778438568
+        ],
+        [
+          0.000933623465243727,
+          -0.006101740524172783,
+          -0.03201096132397652
+        ]
+      ],
+      "centroid": [
+        0.0014948417665436864,
+        -0.009800640866160393,
+        -0.032398976385593414
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0002451387990731746,
+      "muscleDistanceM": 0.0017300592735409737,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.r",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          -0.023916978389024734,
+          -0.11300311982631683,
+          -0.045290667563676834
+        ]
+      ],
+      "centroid": [
+        -0.023916978389024734,
+        -0.11300311982631683,
+        -0.045290667563676834
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 214,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.r",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          -0.023916978389024734,
+          -0.11300311982631683,
+          -0.045290667563676834
+        ]
+      ],
+      "centroid": [
+        -0.023916978389024734,
+        -0.11300311982631683,
+        -0.045290667563676834
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 214,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.r",
+      "kind": "origin",
+      "bone": "lumbar-spine",
+      "points": [
+        [
+          -0.01374448649585247,
+          -0.0005645485362038016,
+          -0.022475339472293854
+        ]
+      ],
+      "centroid": [
+        -0.01374448649585247,
+        -0.0005645485362038016,
+        -0.022475339472293854
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 133,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.r",
+      "kind": "origin",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          -0.03317674621939659,
+          0.27553117275238037,
+          -0.03940412029623985
+        ]
+      ],
+      "centroid": [
+        -0.03317674621939659,
+        0.27553117275238037,
+        -0.03940412029623985
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 131,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.r",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.06372040510177612,
+          0.2115267515182495,
+          -0.06226465851068497
+        ],
+        [
+          -0.06148429587483406,
+          0.21267205476760864,
+          -0.0614817775785923
+        ],
+        [
+          -0.058906689286231995,
+          0.21403850615024567,
+          -0.06067632883787155
+        ]
+      ],
+      "centroid": [
+        -0.061364103108644485,
+        0.21274903416633606,
+        -0.06147214397788048
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e10r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 2.53711077675689e-05,
+      "muscleDistanceM": 0.001859240117482841,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.r",
+      "kind": "insertion",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          -0.0346854031085968,
+          0.2206263393163681,
+          -0.05063672736287117
+        ],
+        [
+          -0.03324298933148384,
+          0.2211970090866089,
+          -0.05266474559903145
+        ],
+        [
+          -0.03164875507354736,
+          0.2225433588027954,
+          -0.054552264511585236
+        ]
+      ],
+      "centroid": [
+        -0.033181242644786835,
+        0.22146174311637878,
+        -0.05263271555304527
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e11r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0006674225442111492,
+      "muscleDistanceM": 0.0013427907833829522,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.r",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.06872400641441345,
+          0.2443784773349762,
+          -0.06315071135759354
+        ],
+        [
+          -0.06713102012872696,
+          0.2437448501586914,
+          -0.06280495226383209
+        ],
+        [
+          -0.06430821120738983,
+          0.24396903812885284,
+          -0.06204291805624962
+        ]
+      ],
+      "centroid": [
+        -0.0667114183306694,
+        0.24403052031993866,
+        -0.0626637190580368
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e12r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.000209862322662957,
+      "muscleDistanceM": 0.002223164541646838,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.r",
+      "kind": "insertion",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          -0.03544245660305023,
+          0.2528197169303894,
+          -0.054579958319664
+        ],
+        [
+          -0.036072224378585815,
+          0.25493746995925903,
+          -0.054910797625780106
+        ],
+        [
+          -0.03463752940297127,
+          0.2574302554130554,
+          -0.056006480008363724
+        ]
+      ],
+      "centroid": [
+        -0.03538059443235397,
+        0.2550736367702484,
+        -0.05516967549920082
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e13r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.000593320932239294,
+      "muscleDistanceM": 0.00139137904625386,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.r",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.06953485310077667,
+          0.2787902355194092,
+          -0.06420867145061493
+        ],
+        [
+          -0.06695482134819031,
+          0.278875470161438,
+          -0.0640714019536972
+        ],
+        [
+          -0.06422917544841766,
+          0.279221773147583,
+          -0.06392992287874222
+        ]
+      ],
+      "centroid": [
+        -0.06690629571676254,
+        0.27896252274513245,
+        -0.06407000869512558
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e14r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00018233667651657015,
+      "muscleDistanceM": 0.0006822241703048348,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.r",
+      "kind": "insertion",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          -0.035851459950208664,
+          0.28515729308128357,
+          -0.05792100355029106
+        ],
+        [
+          -0.03570987656712532,
+          0.2869052290916443,
+          -0.05806088075041771
+        ],
+        [
+          -0.035458724945783615,
+          0.2889762818813324,
+          -0.05821162462234497
+        ]
+      ],
+      "centroid": [
+        -0.0356733575463295,
+        0.2870129644870758,
+        -0.05806449428200722
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e15r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0004953607567586005,
+      "muscleDistanceM": 0.001851903391070664,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.r",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.06555695086717606,
+          0.31076255440711975,
+          -0.0516277551651001
+        ],
+        [
+          -0.06282196938991547,
+          0.3103067874908447,
+          -0.05105685070157051
+        ],
+        [
+          -0.060432128608226776,
+          0.31106317043304443,
+          -0.05032290145754814
+        ]
+      ],
+      "centroid": [
+        -0.062921904027462,
+        0.3107127845287323,
+        -0.05099840462207794
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e16r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00020591756037902087,
+      "muscleDistanceM": 0.001898729708045721,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.r",
+      "kind": "insertion",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          -0.03721589595079422,
+          0.31382375955581665,
+          -0.04694407433271408
+        ],
+        [
+          -0.03677889704704285,
+          0.31449681520462036,
+          -0.049517009407281876
+        ],
+        [
+          -0.03617217764258385,
+          0.31506118178367615,
+          -0.05139860138297081
+        ]
+      ],
+      "centroid": [
+        -0.036718789488077164,
+        0.31446513533592224,
+        -0.04930330440402031
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e17r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00010276878310833126,
+      "muscleDistanceM": 0.0007436667801812291,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.r",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.058113306760787964,
+          0.34066835045814514,
+          -0.044206228107213974
+        ],
+        [
+          -0.057791631668806076,
+          0.3444131016731262,
+          -0.04258447885513306
+        ],
+        [
+          -0.05663038045167923,
+          0.3464365303516388,
+          -0.04153543710708618
+        ]
+      ],
+      "centroid": [
+        -0.05750984698534012,
+        0.34384942054748535,
+        -0.042770832777023315
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e18r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0002400147495791316,
+      "muscleDistanceM": 0.002367825945839286,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.r",
+      "kind": "insertion",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          -0.03495185077190399,
+          0.3407426178455353,
+          -0.04158715903759003
+        ],
+        [
+          -0.035006530582904816,
+          0.34288403391838074,
+          -0.041857004165649414
+        ],
+        [
+          -0.0344986692070961,
+          0.34491512179374695,
+          -0.04310305416584015
+        ]
+      ],
+      "centroid": [
+        -0.03481701388955116,
+        0.34286028146743774,
+        -0.042188163846731186
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e19r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0003571458510123193,
+      "muscleDistanceM": 0.0006726711289957166,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.r",
+      "kind": "insertion",
+      "bone": "lumbar-spine",
+      "points": [
+        [
+          -0.001967587973922491,
+          0.013857875019311905,
+          -0.032883886247873306
+        ],
+        [
+          -0.0162205770611763,
+          0.03513377904891968,
+          -0.017258016392588615
+        ],
+        [
+          -0.022924572229385376,
+          0.04495000094175339,
+          -0.013930369168519974
+        ]
+      ],
+      "centroid": [
+        -0.01370424684137106,
+        0.031313881278038025,
+        -0.021357424557209015
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e1r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.012473606504499912,
+      "muscleDistanceM": 0.003858777694404125,
+      "review": "REQUIRED: attachment away from named surface"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.r",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.05559414625167847,
+          0.3675897717475891,
+          -0.02977718412876129
+        ],
+        [
+          -0.053357016295194626,
+          0.36778557300567627,
+          -0.029091428965330124
+        ],
+        [
+          -0.05105176195502281,
+          0.3680132329463959,
+          -0.028516046702861786
+        ]
+      ],
+      "centroid": [
+        -0.05332634598016739,
+        0.3677970767021179,
+        -0.02912607602775097
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e20r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0002203162293881178,
+      "muscleDistanceM": 0.001243525417521596,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.r",
+      "kind": "insertion",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          -0.033062029629945755,
+          0.36605146527290344,
+          -0.030074918642640114
+        ],
+        [
+          -0.03406507149338722,
+          0.36686834692955017,
+          -0.03219497203826904
+        ],
+        [
+          -0.03375969082117081,
+          0.3669954538345337,
+          -0.03545292094349861
+        ]
+      ],
+      "centroid": [
+        -0.033628929406404495,
+        0.36663830280303955,
+        -0.03257426619529724
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e21r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00037338939728215337,
+      "muscleDistanceM": 0.0017848563147708774,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.r",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.0535612478852272,
+          0.388176828622818,
+          -0.011815854348242283
+        ],
+        [
+          -0.05156872048974037,
+          0.38835832476615906,
+          -0.012215799652040005
+        ],
+        [
+          -0.05015638843178749,
+          0.3885357081890106,
+          -0.012477881275117397
+        ]
+      ],
+      "centroid": [
+        -0.05176213011145592,
+        0.3883568346500397,
+        -0.012169847264885902
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e22r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00015912787057459354,
+      "muscleDistanceM": 0.0013052999274805188,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.r",
+      "kind": "insertion",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          -0.036470137536525726,
+          0.3884470760822296,
+          -0.018175533041357994
+        ],
+        [
+          -0.03696463257074356,
+          0.3902881443500519,
+          -0.01862681657075882
+        ],
+        [
+          -0.037370964884757996,
+          0.3926047682762146,
+          -0.018440481275320053
+        ]
+      ],
+      "centroid": [
+        -0.036935240030288696,
+        0.39044681191444397,
+        -0.01841427944600582
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e23r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 9.45770661928691e-05,
+      "muscleDistanceM": 0.0020115259103477,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.r",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.04527759179472923,
+          0.3981438875198364,
+          0.002231237245723605
+        ],
+        [
+          -0.04400291666388512,
+          0.40011677145957947,
+          0.0013369307853281498
+        ],
+        [
+          -0.0428600087761879,
+          0.4013587534427643,
+          0.0004314906836953014
+        ]
+      ],
+      "centroid": [
+        -0.04404209181666374,
+        0.39987918734550476,
+        0.0013296125689521432
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e24r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 9.96203743852675e-05,
+      "muscleDistanceM": 0.001560225267894566,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.r",
+      "kind": "insertion",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          -0.03838248550891876,
+          0.40697309374809265,
+          -0.0042170868255198
+        ],
+        [
+          -0.038641609251499176,
+          0.4068725109100342,
+          -0.005549258552491665
+        ],
+        [
+          -0.03820684924721718,
+          0.4067191481590271,
+          -0.007559929043054581
+        ]
+      ],
+      "centroid": [
+        -0.03841047361493111,
+        0.40685421228408813,
+        -0.005784278269857168
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e25r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0002411262976238504,
+      "muscleDistanceM": 0.001142866793088615,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.r",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.037051647901535034,
+          0.08997651189565659,
+          -0.027188222855329514
+        ],
+        [
+          -0.037603430449962616,
+          0.09165003150701523,
+          -0.026751916855573654
+        ],
+        [
+          -0.03765186294913292,
+          0.0935533195734024,
+          -0.02561538852751255
+        ]
+      ],
+      "centroid": [
+        -0.0374368391931057,
+        0.09173207730054855,
+        -0.02651640772819519
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e26r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 4.93222578370478e-05,
+      "muscleDistanceM": 0.0012788224266842008,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.r",
+      "kind": "insertion",
+      "bone": "lumbar-spine",
+      "points": [
+        [
+          -0.0018669512355700135,
+          0.04059161618351936,
+          -0.03555712103843689
+        ],
+        [
+          -0.02060985192656517,
+          0.07089464366436005,
+          -0.019833803176879883
+        ],
+        [
+          -0.02267162688076496,
+          0.07589264959096909,
+          -0.02061263658106327
+        ]
+      ],
+      "centroid": [
+        -0.01504947617650032,
+        0.06245959922671318,
+        -0.025334535166621208
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e2r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.011726207099854946,
+      "muscleDistanceM": 0.004997034091502428,
+      "review": "REQUIRED: attachment away from named surface"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.r",
+      "kind": "insertion",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          -0.02207089215517044,
+          0.1068851575255394,
+          -0.026978662237524986
+        ],
+        [
+          -0.020847031846642494,
+          0.10717520862817764,
+          -0.0303050447255373
+        ],
+        [
+          -0.019272709265351295,
+          0.1084739938378334,
+          -0.0314498245716095
+        ]
+      ],
+      "centroid": [
+        -0.020730212330818176,
+        0.10751152783632278,
+        -0.029577849432826042
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e3r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.000764005642849952,
+      "muscleDistanceM": 0.0014743416104465723,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.r",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.04609597101807594,
+          0.11827179789543152,
+          -0.044531844556331635
+        ],
+        [
+          -0.04443572461605072,
+          0.12080377340316772,
+          -0.04415084794163704
+        ],
+        [
+          -0.04266992211341858,
+          0.12352164089679718,
+          -0.0435221791267395
+        ]
+      ],
+      "centroid": [
+        -0.04439600557088852,
+        0.12087269127368927,
+        -0.04406687244772911
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e4r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 3.4544984373496845e-05,
+      "muscleDistanceM": 0.00185391737613827,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.r",
+      "kind": "insertion",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          -0.02679179236292839,
+          0.1374768167734146,
+          -0.03262399137020111
+        ],
+        [
+          -0.024605298414826393,
+          0.13772627711296082,
+          -0.033609285950660706
+        ],
+        [
+          -0.023095732554793358,
+          0.1365249902009964,
+          -0.034115489572286606
+        ]
+      ],
+      "centroid": [
+        -0.024822598323225975,
+        0.1372392177581787,
+        -0.03345278650522232
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e5r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.000215374500839971,
+      "muscleDistanceM": 0.000935499498154968,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.r",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.05595935136079788,
+          0.14546503126621246,
+          -0.050034891813993454
+        ],
+        [
+          -0.05530484765768051,
+          0.14731693267822266,
+          -0.05007064715027809
+        ],
+        [
+          -0.05388816446065903,
+          0.15125307440757751,
+          -0.04984665289521217
+        ]
+      ],
+      "centroid": [
+        -0.0550508052110672,
+        0.1480117291212082,
+        -0.04998401924967766
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e6r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 3.962286427849904e-05,
+      "muscleDistanceM": 0.0007081358344294131,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.r",
+      "kind": "insertion",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          -0.030837902799248695,
+          0.1582672894001007,
+          -0.043988268822431564
+        ],
+        [
+          -0.03165939450263977,
+          0.16263118386268616,
+          -0.04433351010084152
+        ],
+        [
+          -0.0327024832367897,
+          0.1659289449453354,
+          -0.043824296444654465
+        ]
+      ],
+      "centroid": [
+        -0.031735870987176895,
+        0.16228747367858887,
+        -0.04404884949326515
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e7r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0008979307021945715,
+      "muscleDistanceM": 0.0019917001482099295,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.r",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.05871626362204552,
+          0.1793316900730133,
+          -0.05853874981403351
+        ],
+        [
+          -0.05842418968677521,
+          0.18187640607357025,
+          -0.058798257261514664
+        ],
+        [
+          -0.05861325189471245,
+          0.18427115678787231,
+          -0.059246718883514404
+        ]
+      ],
+      "centroid": [
+        -0.0585845522582531,
+        0.18182645738124847,
+        -0.058861248195171356
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e8r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00022469554096460342,
+      "muscleDistanceM": 0.0027715126052498817,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.r",
+      "kind": "insertion",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          -0.032285209745168686,
+          0.1902853399515152,
+          -0.050395578145980835
+        ],
+        [
+          -0.03174382820725441,
+          0.19169674813747406,
+          -0.05262592062354088
+        ],
+        [
+          -0.030744899064302444,
+          0.1923610270023346,
+          -0.05410343036055565
+        ]
+      ],
+      "centroid": [
+        -0.03158794343471527,
+        0.19145333766937256,
+        -0.05238458886742592
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.e9r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00022679107496514916,
+      "muscleDistanceM": 0.0005049565224908292,
+      "review": "pending"
+    },
+    {
+      "muscle": "erector-spinae-lumbar.r",
+      "kind": "insertion",
+      "bone": "lumbar-spine",
+      "points": [
+        [
+          -0.0022096093744039536,
+          -0.01315964013338089,
+          -0.03252071514725685
+        ],
+        [
+          -0.0013412575935944915,
+          -0.010140541940927505,
+          -0.03266523778438568
+        ],
+        [
+          -0.0009336034418083727,
+          -0.006101741921156645,
+          -0.03201096132397652
+        ]
+      ],
+      "centroid": [
+        -0.0014948233729228377,
+        -0.009800640866160393,
+        -0.03239898011088371
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Longissimus thoracis muscle.er"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00022507246467284858,
+      "muscleDistanceM": 0.001811738358810544,
+      "review": "pending"
+    },
+    {
+      "muscle": "transversus-abdominis.l",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.11586087942123413,
+          -0.09129868447780609,
+          0.084244005382061
+        ],
+        [
+          0.1162429228425026,
+          -0.06078081950545311,
+          0.05526897683739662
+        ],
+        [
+          0.07212305068969727,
+          -0.039007119834423065,
+          -0.012653284706175327
+        ]
+      ],
+      "centroid": [
+        0.1013854518532753,
+        -0.06365054100751877,
+        0.04221823066473007
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Transversus abdominis muscle.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.011686737649142742,
+      "muscleDistanceM": 0.020658915862441063,
+      "review": "REQUIRED: attachment away from named surface"
+    },
+    {
+      "muscle": "transversus-abdominis.l",
+      "kind": "insertion",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.09608427435159683,
+          -0.08034718781709671,
+          0.05034613981842995
+        ]
+      ],
+      "centroid": [
+        0.09608427435159683,
+        -0.08034718781709671,
+        0.05034613981842995
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 162,
+      "review": "pending"
+    },
+    {
+      "muscle": "transversus-abdominis.r",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          -0.11586088687181473,
+          -0.09129868447780609,
+          0.084244005382061
+        ],
+        [
+          -0.1162429228425026,
+          -0.06078081950545311,
+          0.05526897683739662
+        ],
+        [
+          -0.07212306559085846,
+          -0.039007119834423065,
+          -0.012653281912207603
+        ]
+      ],
+      "centroid": [
+        -0.1013854518532753,
+        -0.06365054100751877,
+        0.04221823066473007
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Transversus abdominis muscle.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.011686744168400764,
+      "muscleDistanceM": 0.02065904438495636,
+      "review": "REQUIRED: attachment away from named surface"
+    },
+    {
+      "muscle": "transversus-abdominis.r",
+      "kind": "insertion",
+      "bone": "pelvis",
+      "points": [
+        [
+          -0.09573136270046234,
+          -0.08062613010406494,
+          0.05036073550581932
+        ]
+      ],
+      "centroid": [
+        -0.09573136270046234,
+        -0.08062613010406494,
+        0.05036073550581932
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 158,
+      "review": "pending"
+    },
+    {
+      "muscle": "quadratus-lumborum.l",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.04678195342421532,
+          -0.07192260026931763,
+          -0.03192252665758133
+        ]
+      ],
+      "centroid": [
+        0.04678195342421532,
+        -0.07192260026931763,
+        -0.03192252665758133
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 105,
+      "review": "pending"
+    },
+    {
+      "muscle": "quadratus-lumborum.l",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          0.04823925346136093,
+          0.07221215963363647,
+          -0.028759507462382317
+        ]
+      ],
+      "centroid": [
+        0.04823925346136093,
+        0.07221215963363647,
+        -0.028759507462382317
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 90,
+      "review": "pending"
+    },
+    {
+      "muscle": "quadratus-lumborum.l",
+      "kind": "insertion",
+      "bone": "lumbar-spine",
+      "points": [
+        [
+          0.029880166053771973,
+          0.03988312929868698,
+          -0.007288344670087099
+        ]
+      ],
+      "centroid": [
+        0.029880166053771973,
+        0.03988312929868698,
+        -0.007288344670087099
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 97,
+      "review": "pending"
+    },
+    {
+      "muscle": "quadratus-lumborum.r",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          -0.0467819906771183,
+          -0.07192259281873703,
+          -0.031922534108161926
+        ]
+      ],
+      "centroid": [
+        -0.0467819906771183,
+        -0.07192259281873703,
+        -0.031922534108161926
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 105,
+      "review": "pending"
+    },
+    {
+      "muscle": "quadratus-lumborum.r",
+      "kind": "insertion",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.04823927581310272,
+          0.07221215963363647,
+          -0.02875949814915657
+        ]
+      ],
+      "centroid": [
+        -0.04823927581310272,
+        0.07221215963363647,
+        -0.02875949814915657
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 90,
+      "review": "pending"
+    },
+    {
+      "muscle": "quadratus-lumborum.r",
+      "kind": "insertion",
+      "bone": "lumbar-spine",
+      "points": [
+        [
+          -0.029880188405513763,
+          0.03988312929868698,
+          -0.007288343273103237
+        ]
+      ],
+      "centroid": [
+        -0.029880188405513763,
+        0.03988312929868698,
+        -0.007288343273103237
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 97,
+      "review": "pending"
+    },
+    {
+      "muscle": "multifidus-lumborum.l",
+      "kind": "origin",
+      "bone": "lumbar-spine",
+      "points": [
+        [
+          0.02178853005170822,
+          0.011930710636079311,
+          -0.009497256018221378
+        ]
+      ],
+      "centroid": [
+        0.02178853005170822,
+        0.011930710636079311,
+        -0.009497256018221378
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 589,
+      "review": "pending"
+    },
+    {
+      "muscle": "multifidus-lumborum.l",
+      "kind": "insertion",
+      "bone": "lumbar-spine",
+      "points": [
+        [
+          0.02178853005170822,
+          0.011930710636079311,
+          -0.009497256018221378
+        ]
+      ],
+      "centroid": [
+        0.02178853005170822,
+        0.011930710636079311,
+        -0.009497256018221378
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 589,
+      "review": "pending"
+    },
+    {
+      "muscle": "multifidus-lumborum.l",
+      "kind": "insertion",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          0.007969752885401249,
+          0.09165818989276886,
+          -0.02649100497364998
+        ]
+      ],
+      "centroid": [
+        0.007969752885401249,
+        0.09165818989276886,
+        -0.02649100497364998
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 73,
+      "review": "pending"
+    },
+    {
+      "muscle": "multifidus-lumborum.r",
+      "kind": "origin",
+      "bone": "lumbar-spine",
+      "points": [
+        [
+          -0.021784132346510887,
+          0.01191572193056345,
+          -0.009503254666924477
+        ]
+      ],
+      "centroid": [
+        -0.021784132346510887,
+        0.01191572193056345,
+        -0.009503254666924477
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 588,
+      "review": "pending"
+    },
+    {
+      "muscle": "multifidus-lumborum.r",
+      "kind": "insertion",
+      "bone": "lumbar-spine",
+      "points": [
+        [
+          -0.021784132346510887,
+          0.01191572193056345,
+          -0.009503254666924477
+        ]
+      ],
+      "centroid": [
+        -0.021784132346510887,
+        0.01191572193056345,
+        -0.009503254666924477
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 588,
+      "review": "pending"
+    },
+    {
+      "muscle": "multifidus-lumborum.r",
+      "kind": "insertion",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          -0.007969729602336884,
+          0.09165820479393005,
+          -0.026490965858101845
+        ]
+      ],
+      "centroid": [
+        -0.007969729602336884,
+        0.09165820479393005,
+        -0.026490965858101845
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 73,
+      "review": "pending"
+    },
+    {
+      "muscle": "psoas-major.l",
+      "kind": "origin",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          0.016579078510403633,
+          0.10175419598817825,
+          0.022177550941705704
+        ]
+      ],
+      "centroid": [
+        0.016579078510403633,
+        0.10175419598817825,
+        0.022177550941705704
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 54,
+      "review": "pending"
+    },
+    {
+      "muscle": "psoas-major.l",
+      "kind": "origin",
+      "bone": "lumbar-spine",
+      "points": [
+        [
+          0.025386542081832886,
+          0.019234081730246544,
+          0.022241486236453056
+        ]
+      ],
+      "centroid": [
+        0.025386542081832886,
+        0.019234081730246544,
+        0.022241486236453056
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 369,
+      "review": "pending"
+    },
+    {
+      "muscle": "psoas-major.l",
+      "kind": "insertion",
+      "bone": "femur",
+      "points": [
+        [
+          0.09408408403396606,
+          -0.24923184514045715,
+          0.006082854699343443
+        ]
+      ],
+      "centroid": [
+        0.09408408403396606,
+        -0.24923184514045715,
+        0.006082854699343443
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 91,
+      "review": "pending"
+    },
+    {
+      "muscle": "psoas-major.r",
+      "kind": "origin",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          -0.016576042398810387,
+          0.10176050662994385,
+          0.02217107079923153
+        ]
+      ],
+      "centroid": [
+        -0.016576042398810387,
+        0.10176050662994385,
+        0.02217107079923153
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 54,
+      "review": "pending"
+    },
+    {
+      "muscle": "psoas-major.r",
+      "kind": "origin",
+      "bone": "lumbar-spine",
+      "points": [
+        [
+          -0.025290347635746002,
+          0.019759437069296837,
+          0.022349610924720764
+        ]
+      ],
+      "centroid": [
+        -0.025290347635746002,
+        0.019759437069296837,
+        0.022349610924720764
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 370,
+      "review": "pending"
+    },
+    {
+      "muscle": "psoas-major.r",
+      "kind": "insertion",
+      "bone": "femur",
+      "points": [
+        [
+          -0.09408735483884811,
+          -0.2492319494485855,
+          0.006083217449486256
+        ]
+      ],
+      "centroid": [
+        -0.09408735483884811,
+        -0.2492319494485855,
+        0.006083217449486256
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 91,
+      "review": "pending"
+    },
+    {
+      "muscle": "iliacus.l",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.10843559354543686,
+          -0.11444120854139328,
+          0.06690028309822083
+        ],
+        [
+          0.10335041582584381,
+          -0.09560453146696091,
+          0.054437898099422455
+        ],
+        [
+          0.09417343139648438,
+          -0.05726209655404091,
+          0.02023005113005638
+        ]
+      ],
+      "centroid": [
+        0.10197317600250244,
+        -0.08904820680618286,
+        0.047143395990133286
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Iliacus muscle.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00571254501119256,
+      "muscleDistanceM": 0.008614681661128998,
+      "review": "REQUIRED: attachment away from named surface"
+    },
+    {
+      "muscle": "iliacus.l",
+      "kind": "insertion",
+      "bone": "femur",
+      "points": [
+        [
+          0.09168540686368942,
+          -0.23252765834331512,
+          0.026865100488066673
+        ]
+      ],
+      "centroid": [
+        0.09168540686368942,
+        -0.23252765834331512,
+        0.026865100488066673
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 145,
+      "review": "pending"
+    },
+    {
+      "muscle": "iliacus.r",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          -0.10843560844659805,
+          -0.11444120854139328,
+          0.06690028309822083
+        ],
+        [
+          -0.10335041582584381,
+          -0.09560453146696091,
+          0.054437898099422455
+        ],
+        [
+          -0.09417343884706497,
+          -0.05726209655404091,
+          0.02023005299270153
+        ]
+      ],
+      "centroid": [
+        -0.10197317600250244,
+        -0.08904820680618286,
+        0.047143395990133286
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Iliacus muscle.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00571254501119256,
+      "muscleDistanceM": 0.008616282604634762,
+      "review": "REQUIRED: attachment away from named surface"
+    },
+    {
+      "muscle": "iliacus.r",
+      "kind": "insertion",
+      "bone": "femur",
+      "points": [
+        [
+          -0.09168537706136703,
+          -0.23252762854099274,
+          0.026865074411034584
+        ]
+      ],
+      "centroid": [
+        -0.09168537706136703,
+        -0.23252762854099274,
+        0.026865074411034584
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 145,
+      "review": "pending"
+    },
+    {
+      "muscle": "gluteus-maximus.l",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.04574396088719368,
+          -0.10061702132225037,
+          -0.04257260635495186
+        ],
+        [
+          0.04544176533818245,
+          -0.09597200900316238,
+          -0.04105375334620476
+        ],
+        [
+          0.06303243339061737,
+          -0.0807526484131813,
+          -0.03990350291132927
+        ]
+      ],
+      "centroid": [
+        0.0514240600168705,
+        -0.09242908656597137,
+        -0.04117463529109955
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Gluteus maximus muscle.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.005349962040781975,
+      "muscleDistanceM": 0.00611963402479887,
+      "review": "REQUIRED: attachment away from named surface"
+    },
+    {
+      "muscle": "gluteus-maximus.l",
+      "kind": "insertion",
+      "bone": "femur",
+      "points": [
+        [
+          0.11108723282814026,
+          -0.31621354818344116,
+          0.014433220028877258
+        ],
+        [
+          0.11792444437742233,
+          -0.271990031003952,
+          0.008403084240853786
+        ],
+        [
+          0.1172424703836441,
+          -0.25732430815696716,
+          0.0036220974288880825
+        ]
+      ],
+      "centroid": [
+        0.11542175710201263,
+        -0.281792551279068,
+        0.00880886148661375
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Gluteus maximus muscle.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.001834962284192443,
+      "muscleDistanceM": 0.0035774088464677334,
+      "review": "pending"
+    },
+    {
+      "muscle": "gluteus-maximus.r",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          -0.04574396833777428,
+          -0.10061702132225037,
+          -0.04257260635495186
+        ],
+        [
+          -0.04544176906347275,
+          -0.09597200900316238,
+          -0.04105375334620476
+        ],
+        [
+          -0.06303244084119797,
+          -0.0807526484131813,
+          -0.03990350291132927
+        ]
+      ],
+      "centroid": [
+        -0.051424071192741394,
+        -0.09242908656597137,
+        -0.04117463529109955
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Gluteus maximus muscle.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.005349960643798113,
+      "muscleDistanceM": 0.006119766738265753,
+      "review": "REQUIRED: attachment away from named surface"
+    },
+    {
+      "muscle": "gluteus-maximus.r",
+      "kind": "insertion",
+      "bone": "femur",
+      "points": [
+        [
+          -0.11108718812465668,
+          -0.31621354818344116,
+          0.014433225616812706
+        ],
+        [
+          -0.11792441457509995,
+          -0.271990031003952,
+          0.00840308703482151
+        ],
+        [
+          -0.11724242568016052,
+          -0.25732430815696716,
+          0.003622101852670312
+        ]
+      ],
+      "centroid": [
+        -0.11542171984910965,
+        -0.281792551279068,
+        0.008808864280581474
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Gluteus maximus muscle.er"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.001834964263252914,
+      "muscleDistanceM": 0.003577359253540635,
+      "review": "pending"
+    },
+    {
+      "muscle": "tensor-fasciae-latae.l",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.11887049674987793,
+          -0.10946919023990631,
+          0.07229690253734589
+        ],
+        [
+          0.12167568504810333,
+          -0.09536758810281754,
+          0.0708499476313591
+        ],
+        [
+          0.12731465697288513,
+          -0.07975341379642487,
+          0.06339998543262482
+        ]
+      ],
+      "centroid": [
+        0.12263908237218857,
+        -0.09479039162397385,
+        0.06883170455694199
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Tensor fasciae latae.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0018981988541781902,
+      "muscleDistanceM": 0.0021902290172874928,
+      "review": "pending"
+    },
+    {
+      "muscle": "tensor-fasciae-latae.l",
+      "kind": "insertion",
+      "bone": "iliotibial-tract",
+      "points": [
+        [
+          0.1432817578315735,
+          -0.17410165071487427,
+          0.051160331815481186
+        ]
+      ],
+      "centroid": [
+        0.1432817578315735,
+        -0.17410165071487427,
+        0.051160331815481186
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 161,
+      "review": "pending"
+    },
+    {
+      "muscle": "tensor-fasciae-latae.r",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          -0.11887049674987793,
+          -0.10946919023990631,
+          0.07229690253734589
+        ],
+        [
+          -0.12167569994926453,
+          -0.09536758810281754,
+          0.0708499476313591
+        ],
+        [
+          -0.12731467187404633,
+          -0.07975341379642487,
+          0.06339998543262482
+        ]
+      ],
+      "centroid": [
+        -0.12263908237218857,
+        -0.09479039162397385,
+        0.06883170455694199
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Tensor fasciae latae.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0018981988541781902,
+      "muscleDistanceM": 0.002190423896536231,
+      "review": "pending"
+    },
+    {
+      "muscle": "tensor-fasciae-latae.r",
+      "kind": "insertion",
+      "bone": "iliotibial-tract",
+      "points": [
+        [
+          -0.14328311383724213,
+          -0.1740892380475998,
+          0.051156461238861084
+        ]
+      ],
+      "centroid": [
+        -0.14328311383724213,
+        -0.1740892380475998,
+        0.051156461238861084
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 161,
+      "review": "pending"
+    },
+    {
+      "muscle": "latissimus-dorsi.l",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          0.0956307128071785,
+          0.21666905283927917,
+          -0.07187037169933319
+        ],
+        [
+          0.09432287514209747,
+          0.22121384739875793,
+          -0.07439544796943665
+        ],
+        [
+          0.08672621846199036,
+          0.230119526386261,
+          -0.07987955212593079
+        ]
+      ],
+      "centroid": [
+        0.09222665429115295,
+        0.2226673811674118,
+        -0.07538171112537384
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Latissimus dorsi muscle.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.01542735192924738,
+      "muscleDistanceM": 0.00441165454685688,
+      "review": "REQUIRED: attachment away from named surface"
+    },
+    {
+      "muscle": "latissimus-dorsi.l",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.038912784308195114,
+          -0.08183164894580841,
+          -0.047084178775548935
+        ],
+        [
+          0.05308084189891815,
+          -0.061892539262771606,
+          -0.04095332324504852
+        ],
+        [
+          0.070421002805233,
+          -0.04479321837425232,
+          -0.02284521982073784
+        ]
+      ],
+      "centroid": [
+        0.05417026951909065,
+        -0.06280363351106644,
+        -0.036933135241270065
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Latissimus dorsi muscle.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0037131747230887413,
+      "muscleDistanceM": 0.003939290996640921,
+      "review": "pending"
+    },
+    {
+      "muscle": "latissimus-dorsi.l",
+      "kind": "insertion",
+      "bone": "humerus",
+      "points": [
+        [
+          0.17763656377792358,
+          0.2847086191177368,
+          0.007449425756931305
+        ]
+      ],
+      "centroid": [
+        0.17763656377792358,
+        0.2847086191177368,
+        0.007449425756931305
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 25,
+      "review": "pending"
+    },
+    {
+      "muscle": "latissimus-dorsi.r",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.09563066065311432,
+          0.21666905283927917,
+          -0.07187038660049438
+        ],
+        [
+          -0.09432284533977509,
+          0.22121384739875793,
+          -0.07439545542001724
+        ],
+        [
+          -0.08672617375850677,
+          0.230119526386261,
+          -0.07987955212593079
+        ]
+      ],
+      "centroid": [
+        -0.09222662448883057,
+        0.2226673811674118,
+        -0.07538171857595444
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Latissimus dorsi muscle.er"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.015427330508828163,
+      "muscleDistanceM": 0.004411759786307812,
+      "review": "REQUIRED: attachment away from named surface"
+    },
+    {
+      "muscle": "latissimus-dorsi.r",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          -0.03891279548406601,
+          -0.08183164894580841,
+          -0.04708416759967804
+        ],
+        [
+          -0.05308084562420845,
+          -0.061892539262771606,
+          -0.040953319519758224
+        ],
+        [
+          -0.0704210177063942,
+          -0.04479321837425232,
+          -0.02284521423280239
+        ]
+      ],
+      "centroid": [
+        -0.05417028069496155,
+        -0.06280363351106644,
+        -0.03693313151597977
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Latissimus dorsi muscle.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.003713174257427454,
+      "muscleDistanceM": 0.003939441405236721,
+      "review": "pending"
+    },
+    {
+      "muscle": "latissimus-dorsi.r",
+      "kind": "insertion",
+      "bone": "humerus",
+      "points": [
+        [
+          -0.17766812443733215,
+          0.284853458404541,
+          0.00761520816013217
+        ]
+      ],
+      "centroid": [
+        -0.17766812443733215,
+        0.284853458404541,
+        0.00761520816013217
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 26,
+      "review": "pending"
+    },
+    {
+      "muscle": "serratus-anterior.l",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          0.10937163233757019,
+          0.31421107053756714,
+          0.04170936718583107
+        ],
+        [
+          0.11106114089488983,
+          0.3181805908679962,
+          0.0348690003156662
+        ],
+        [
+          0.11228786408901215,
+          0.3229959309101105,
+          0.022441955283284187
+        ]
+      ],
+      "centroid": [
+        0.11090805381536484,
+        0.3184657692909241,
+        0.03300013393163681
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Serratus anterior muscle.e2r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0008113254443742335,
+      "muscleDistanceM": 0.004619673825800419,
+      "review": "pending"
+    },
+    {
+      "muscle": "serratus-anterior.l",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          0.1206342801451683,
+          0.2813436985015869,
+          0.055029578506946564
+        ],
+        [
+          0.12420424073934555,
+          0.28510376811027527,
+          0.040780529379844666
+        ],
+        [
+          0.1247861459851265,
+          0.28898003697395325,
+          0.0251946821808815
+        ]
+      ],
+      "centroid": [
+        0.12320895493030548,
+        0.2851441204547882,
+        0.04032761976122856
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Serratus anterior muscle.e3l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.001495243632234633,
+      "muscleDistanceM": 0.0052138036116957664,
+      "review": "pending"
+    },
+    {
+      "muscle": "serratus-anterior.l",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          0.12279511988162994,
+          0.23753497004508972,
+          0.07779815047979355
+        ],
+        [
+          0.1263127624988556,
+          0.2430783212184906,
+          0.06843514740467072
+        ],
+        [
+          0.12873490154743195,
+          0.24668939411640167,
+          0.057879600673913956
+        ]
+      ],
+      "centroid": [
+        0.12595079839229584,
+        0.2424391359090805,
+        0.06802590191364288
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Serratus anterior muscle.e4l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0006292692269198596,
+      "muscleDistanceM": 0.005950874648988247,
+      "review": "pending"
+    },
+    {
+      "muscle": "serratus-anterior.l",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          0.13233418762683868,
+          0.20559553802013397,
+          0.06774511188268661
+        ],
+        [
+          0.1363091617822647,
+          0.2098465859889984,
+          0.053865667432546616
+        ],
+        [
+          0.1378357708454132,
+          0.21344351768493652,
+          0.04525594785809517
+        ]
+      ],
+      "centroid": [
+        0.13549618422985077,
+        0.20963244140148163,
+        0.05561016872525215
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Serratus anterior muscle.e5l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0005332000437192619,
+      "muscleDistanceM": 0.00499704061076045,
+      "review": "pending"
+    },
+    {
+      "muscle": "serratus-anterior.l",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          0.13983330130577087,
+          0.17741736769676208,
+          0.05330711975693703
+        ],
+        [
+          0.14091889560222626,
+          0.18403306603431702,
+          0.03795432299375534
+        ],
+        [
+          0.13954831659793854,
+          0.1886187344789505,
+          0.02707778476178646
+        ]
+      ],
+      "centroid": [
+        0.14010034501552582,
+        0.18336060643196106,
+        0.039436522871255875
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Serratus anterior muscle.e6l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0011448892764747143,
+      "muscleDistanceM": 0.005472137127071619,
+      "review": "pending"
+    },
+    {
+      "muscle": "serratus-anterior.l",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          0.13441266119480133,
+          0.1394011527299881,
+          0.04138508066534996
+        ],
+        [
+          0.13456927239894867,
+          0.14483579993247986,
+          0.030935538932681084
+        ],
+        [
+          0.13333268463611603,
+          0.14979180693626404,
+          0.022366756573319435
+        ]
+      ],
+      "centroid": [
+        0.1341048926115036,
+        0.14467614889144897,
+        0.0315624363720417
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Serratus anterior muscle.e7l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0004307027847971767,
+      "muscleDistanceM": 0.007607261650264263,
+      "review": "pending"
+    },
+    {
+      "muscle": "serratus-anterior.l",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          0.06951916217803955,
+          0.36585021018981934,
+          0.04137124493718147
+        ],
+        [
+          0.06897536665201187,
+          0.37206023931503296,
+          0.034058429300785065
+        ],
+        [
+          0.06825637817382812,
+          0.3771671652793884,
+          0.02867892198264599
+        ]
+      ],
+      "centroid": [
+        0.06891627609729767,
+        0.3716985583305359,
+        0.034695472568273544
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Serratus anterior muscle.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 5.216017598286271e-05,
+      "muscleDistanceM": 0.0033972731325775385,
+      "review": "pending"
+    },
+    {
+      "muscle": "serratus-anterior.l",
+      "kind": "insertion",
+      "bone": "scapula",
+      "points": [
+        [
+          0.08511664718389511,
+          0.2329341620206833,
+          -0.07184649258852005
+        ],
+        [
+          0.06842304766178131,
+          0.29328620433807373,
+          -0.06968805938959122
+        ],
+        [
+          0.06793326884508133,
+          0.33767473697662354,
+          -0.05992546305060387
+        ]
+      ],
+      "centroid": [
+        0.0738220065832138,
+        0.28798502683639526,
+        -0.06715044379234314
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Serratus anterior muscle.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0012381692649796605,
+      "muscleDistanceM": 0.002773151034489274,
+      "review": "pending"
+    },
+    {
+      "muscle": "serratus-anterior.r",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.09829790890216827,
+          0.3481973707675934,
+          0.030420323833823204
+        ],
+        [
+          -0.09904693812131882,
+          0.3518509864807129,
+          0.024626407772302628
+        ],
+        [
+          -0.09801256656646729,
+          0.35532647371292114,
+          0.020931297913193703
+        ]
+      ],
+      "centroid": [
+        -0.0984526127576828,
+        0.3517955243587494,
+        0.025320932269096375
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Serratus anterior muscle.e1l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0006684376858174801,
+      "muscleDistanceM": 0.002642404055222869,
+      "review": "pending"
+    },
+    {
+      "muscle": "serratus-anterior.r",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.10937169939279556,
+          0.3142111003398895,
+          0.04170938953757286
+        ],
+        [
+          -0.11106118559837341,
+          0.3181805908679962,
+          0.03486901894211769
+        ],
+        [
+          -0.11228789389133453,
+          0.3229959309101105,
+          0.02244197204709053
+        ]
+      ],
+      "centroid": [
+        -0.11090809106826782,
+        0.3184657692909241,
+        0.0330001525580883
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Serratus anterior muscle.e2l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0008113307412713766,
+      "muscleDistanceM": 0.004206331912428141,
+      "review": "pending"
+    },
+    {
+      "muscle": "serratus-anterior.r",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.12063433229923248,
+          0.28134381771087646,
+          0.055029623210430145
+        ],
+        [
+          -0.12420430034399033,
+          0.28510382771492004,
+          0.040780555456876755
+        ],
+        [
+          -0.12478617578744888,
+          0.2889801263809204,
+          0.025194702669978142
+        ]
+      ],
+      "centroid": [
+        -0.12320901453495026,
+        0.28514423966407776,
+        0.04032764956355095
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Serratus anterior muscle.e3r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.001495221396908164,
+      "muscleDistanceM": 0.00495793716982007,
+      "review": "pending"
+    },
+    {
+      "muscle": "serratus-anterior.r",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.1227952241897583,
+          0.23753507435321808,
+          0.07779820263385773
+        ],
+        [
+          -0.12631282210350037,
+          0.24307841062545776,
+          0.0684351697564125
+        ],
+        [
+          -0.1287350356578827,
+          0.24668949842453003,
+          0.05787963047623634
+        ]
+      ],
+      "centroid": [
+        -0.1259509027004242,
+        0.24243928492069244,
+        0.06802592426538467
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Serratus anterior muscle.e4r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0006292226607911289,
+      "muscleDistanceM": 0.006087759975343943,
+      "review": "pending"
+    },
+    {
+      "muscle": "serratus-anterior.r",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.13233426213264465,
+          0.20559562742710114,
+          0.0677451342344284
+        ],
+        [
+          -0.13630923628807068,
+          0.20984670519828796,
+          0.0538657009601593
+        ],
+        [
+          -0.13783586025238037,
+          0.2134435921907425,
+          0.04525598883628845
+        ]
+      ],
+      "centroid": [
+        -0.13549625873565674,
+        0.20963254570960999,
+        0.055610205978155136
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Serratus anterior muscle.e5r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0005331705906428397,
+      "muscleDistanceM": 0.004985812585800886,
+      "review": "pending"
+    },
+    {
+      "muscle": "serratus-anterior.r",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.13983337581157684,
+          0.17741747200489044,
+          0.05330715700984001
+        ],
+        [
+          -0.14091894030570984,
+          0.18403315544128418,
+          0.037954363971948624
+        ],
+        [
+          -0.13954834640026093,
+          0.18861882388591766,
+          0.027077818289399147
+        ]
+      ],
+      "centroid": [
+        -0.1401004195213318,
+        0.1833607256412506,
+        0.03943655639886856
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Serratus anterior muscle.e6r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0011448595905676484,
+      "muscleDistanceM": 0.006689534522593021,
+      "review": "pending"
+    },
+    {
+      "muscle": "serratus-anterior.r",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.13441267609596252,
+          0.1394013911485672,
+          0.04138508811593056
+        ],
+        [
+          -0.13456927239894867,
+          0.14483603835105896,
+          0.030935540795326233
+        ],
+        [
+          -0.1333327293395996,
+          0.14979210495948792,
+          0.022366756573319435
+        ]
+      ],
+      "centroid": [
+        -0.1341049075126648,
+        0.14467641711235046,
+        0.031562440097332
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Serratus anterior muscle.e7r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0004306882619857788,
+      "muscleDistanceM": 0.006858890410512686,
+      "review": "pending"
+    },
+    {
+      "muscle": "serratus-anterior.r",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.129604771733284,
+          0.1194305494427681,
+          0.009743208065629005
+        ],
+        [
+          -0.12645180523395538,
+          0.12804913520812988,
+          -0.0010757209965959191
+        ],
+        [
+          -0.12428370118141174,
+          0.1326826810836792,
+          -0.007951444946229458
+        ]
+      ],
+      "centroid": [
+        -0.126776322722435,
+        0.12672965228557587,
+        0.0002264548820676282
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Serratus anterior muscle.e8l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 9.239533392246813e-05,
+      "muscleDistanceM": 0.00500303553417325,
+      "review": "pending"
+    },
+    {
+      "muscle": "serratus-anterior.r",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.06951923668384552,
+          0.36585021018981934,
+          0.041371263563632965
+        ],
+        [
+          -0.06897542625665665,
+          0.37206023931503296,
+          0.03405844420194626
+        ],
+        [
+          -0.0682564377784729,
+          0.3771671652793884,
+          0.028678931295871735
+        ]
+      ],
+      "centroid": [
+        -0.06891634315252304,
+        0.3716985583305359,
+        0.03469549119472504
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Serratus anterior muscle.er"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 5.215562487137504e-05,
+      "muscleDistanceM": 0.001381573500111699,
+      "review": "pending"
+    },
+    {
+      "muscle": "serratus-anterior.r",
+      "kind": "insertion",
+      "bone": "scapula",
+      "points": [
+        [
+          -0.08511660993099213,
+          0.23293432593345642,
+          -0.07184649258852005
+        ],
+        [
+          -0.06842301785945892,
+          0.29328638315200806,
+          -0.06968805938959122
+        ],
+        [
+          -0.06793322414159775,
+          0.3376748263835907,
+          -0.05992546305060387
+        ]
+      ],
+      "centroid": [
+        -0.07382196187973022,
+        0.2879851162433624,
+        -0.06715044379234314
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Serratus anterior muscle.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.001238144002854824,
+      "muscleDistanceM": 0.00348100159317255,
+      "review": "pending"
+    }
+  ],
+  "warnings": []
+}

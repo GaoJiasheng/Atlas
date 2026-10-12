@@ -1,0 +1,3687 @@
+{
+  "license": "CC BY-SA 4.0",
+  "status": "candidates \u2014 human review required",
+  "units": "m",
+  "sites": [
+    {
+      "muscle": "gluteus-maximus.l",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.04574396088719368,
+          0.028648262843489647,
+          -0.031347859650850296
+        ],
+        [
+          0.04544176533818245,
+          0.03329329937696457,
+          -0.029829028993844986
+        ],
+        [
+          0.06303243339061737,
+          0.048512671142816544,
+          -0.028678763657808304
+        ]
+      ],
+      "centroid": [
+        0.0514240600168705,
+        0.03683618828654289,
+        -0.029949922114610672
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Gluteus maximus muscle.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0053499252535402775,
+      "muscleDistanceM": 0.0061195772141218185,
+      "review": "REQUIRED: attachment away from named surface"
+    },
+    {
+      "muscle": "gluteus-maximus.l",
+      "kind": "insertion",
+      "bone": "femur",
+      "points": [
+        [
+          0.11108723282814026,
+          -0.18694829940795898,
+          0.025657953694462776
+        ],
+        [
+          0.11792444437742233,
+          -0.142724871635437,
+          0.019627820700407028
+        ],
+        [
+          0.1172424703836441,
+          -0.12805907428264618,
+          0.01484683621674776
+        ]
+      ],
+      "centroid": [
+        0.11542175710201263,
+        -0.1525273472070694,
+        0.02003359980881214
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Gluteus maximus muscle.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0018349899910390377,
+      "muscleDistanceM": 0.0035774866119027138,
+      "review": "pending"
+    },
+    {
+      "muscle": "gluteus-maximus.r",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          -0.04574396833777428,
+          0.028648262843489647,
+          -0.031347859650850296
+        ],
+        [
+          -0.04544176906347275,
+          0.03329329937696457,
+          -0.029829028993844986
+        ],
+        [
+          -0.06303244084119797,
+          0.048512671142816544,
+          -0.028678763657808304
+        ]
+      ],
+      "centroid": [
+        -0.051424071192741394,
+        0.03683618828654289,
+        -0.029949922114610672
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Gluteus maximus muscle.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.005349923390895128,
+      "muscleDistanceM": 0.006119670812040567,
+      "review": "REQUIRED: attachment away from named surface"
+    },
+    {
+      "muscle": "gluteus-maximus.r",
+      "kind": "insertion",
+      "bone": "femur",
+      "points": [
+        [
+          -0.11108718812465668,
+          -0.18694829940795898,
+          0.025657957419753075
+        ],
+        [
+          -0.11792441457509995,
+          -0.142724871635437,
+          0.019627824425697327
+        ],
+        [
+          -0.11724242568016052,
+          -0.12805907428264618,
+          0.014846843667328358
+        ]
+      ],
+      "centroid": [
+        -0.11542171984910965,
+        -0.1525273472070694,
+        0.02003360353410244
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Gluteus maximus muscle.er"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0018349980236962438,
+      "muscleDistanceM": 0.003577426541596651,
+      "review": "pending"
+    },
+    {
+      "muscle": "tensor-fasciae-latae.l",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.11887049674987793,
+          0.01979612372815609,
+          0.08352164179086685
+        ],
+        [
+          0.12167568504810333,
+          0.03389771655201912,
+          0.08207469433546066
+        ],
+        [
+          0.12731465697288513,
+          0.04951190948486328,
+          0.07462473213672638
+        ]
+      ],
+      "centroid": [
+        0.12263908237218857,
+        0.0344749391078949,
+        0.08005643635988235
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Tensor fasciae latae.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0018981912871822715,
+      "muscleDistanceM": 0.002190301427617669,
+      "review": "pending"
+    },
+    {
+      "muscle": "tensor-fasciae-latae.l",
+      "kind": "insertion",
+      "bone": "iliotibial-tract",
+      "points": [
+        [
+          0.1429508477449417,
+          -0.044072140008211136,
+          0.06258092075586319
+        ]
+      ],
+      "centroid": [
+        0.1429508477449417,
+        -0.044072140008211136,
+        0.06258092075586319
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 210,
+      "review": "pending"
+    },
+    {
+      "muscle": "tensor-fasciae-latae.r",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          -0.11887049674987793,
+          0.01979612372815609,
+          0.08352164179086685
+        ],
+        [
+          -0.12167569994926453,
+          0.03389771655201912,
+          0.08207469433546066
+        ],
+        [
+          -0.12731467187404633,
+          0.04951190948486328,
+          0.07462473213672638
+        ]
+      ],
+      "centroid": [
+        -0.12263908237218857,
+        0.0344749391078949,
+        0.08005643635988235
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Tensor fasciae latae.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0018981972243636847,
+      "muscleDistanceM": 0.0021903961896896362,
+      "review": "pending"
+    },
+    {
+      "muscle": "tensor-fasciae-latae.r",
+      "kind": "insertion",
+      "bone": "iliotibial-tract",
+      "points": [
+        [
+          -0.14295069873332977,
+          -0.04407236725091934,
+          0.06258094310760498
+        ]
+      ],
+      "centroid": [
+        -0.14295069873332977,
+        -0.04407236725091934,
+        0.06258094310760498
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 210,
+      "review": "pending"
+    },
+    {
+      "muscle": "iliotibial-tract.l",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.1294107288122177,
+          0.06738030165433884,
+          0.05018870532512665
+        ]
+      ],
+      "centroid": [
+        0.1294107288122177,
+        0.06738030165433884,
+        0.05018870532512665
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 42,
+      "review": "pending"
+    },
+    {
+      "muscle": "iliotibial-tract.l",
+      "kind": "origin",
+      "bone": "tensor-fasciae-latae",
+      "points": [
+        [
+          0.14072349667549133,
+          -0.013200704008340836,
+          0.062052398920059204
+        ]
+      ],
+      "centroid": [
+        0.14072349667549133,
+        -0.013200704008340836,
+        0.062052398920059204
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 63,
+      "review": "pending"
+    },
+    {
+      "muscle": "iliotibial-tract.l",
+      "kind": "origin",
+      "bone": "gluteus-maximus",
+      "points": [
+        [
+          0.1334262639284134,
+          -0.08483108878135681,
+          -0.0010950934374704957
+        ]
+      ],
+      "centroid": [
+        0.1334262639284134,
+        -0.08483108878135681,
+        -0.0010950934374704957
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 101,
+      "review": "pending"
+    },
+    {
+      "muscle": "iliotibial-tract.l",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          0.09886159002780914,
+          -0.5095722079277039,
+          0.03527383878827095
+        ]
+      ],
+      "centroid": [
+        0.09886159002780914,
+        -0.5095722079277039,
+        0.03527383878827095
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 79,
+      "review": "pending"
+    },
+    {
+      "muscle": "iliotibial-tract.r",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          -0.1293458193540573,
+          0.06507430970668793,
+          0.053029485046863556
+        ]
+      ],
+      "centroid": [
+        -0.1293458193540573,
+        0.06507430970668793,
+        0.053029485046863556
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 36,
+      "review": "pending"
+    },
+    {
+      "muscle": "iliotibial-tract.r",
+      "kind": "origin",
+      "bone": "tensor-fasciae-latae",
+      "points": [
+        [
+          -0.14007212221622467,
+          -0.010351105593144894,
+          0.062340252101421356
+        ]
+      ],
+      "centroid": [
+        -0.14007212221622467,
+        -0.010351105593144894,
+        0.062340252101421356
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 69,
+      "review": "pending"
+    },
+    {
+      "muscle": "iliotibial-tract.r",
+      "kind": "origin",
+      "bone": "gluteus-maximus",
+      "points": [
+        [
+          -0.13301101326942444,
+          -0.08633825927972794,
+          -0.001208934118039906
+        ]
+      ],
+      "centroid": [
+        -0.13301101326942444,
+        -0.08633825927972794,
+        -0.001208934118039906
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 104,
+      "review": "pending"
+    },
+    {
+      "muscle": "iliotibial-tract.r",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          -0.09871932864189148,
+          -0.5103825926780701,
+          0.034962307661771774
+        ]
+      ],
+      "centroid": [
+        -0.09871932864189148,
+        -0.5103825926780701,
+        0.034962307661771774
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 76,
+      "review": "pending"
+    },
+    {
+      "muscle": "sartorius.l",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.11850671470165253,
+          0.01840624399483204,
+          0.08800332993268967
+        ],
+        [
+          0.1192917674779892,
+          0.02353850193321705,
+          0.0931178480386734
+        ],
+        [
+          0.11816057562828064,
+          0.030500881373882294,
+          0.09571797400712967
+        ]
+      ],
+      "centroid": [
+        0.11865320056676865,
+        0.024157293140888214,
+        0.09228626638650894
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Sartorius muscle.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0025583135429769754,
+      "muscleDistanceM": 0.0029697732534259558,
+      "review": "pending"
+    },
+    {
+      "muscle": "sartorius.l",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          0.06687266379594803,
+          -0.5541946291923523,
+          0.02951464056968689
+        ],
+        [
+          0.06727757304906845,
+          -0.5283754467964172,
+          0.03487268090248108
+        ],
+        [
+          0.06500010937452316,
+          -0.5176552534103394,
+          0.03343484550714493
+        ]
+      ],
+      "centroid": [
+        0.06638345122337341,
+        -0.5334082841873169,
+        0.03260738402605057
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Sartorius muscle.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00021153751004021615,
+      "muscleDistanceM": 0.00490260636433959,
+      "review": "pending"
+    },
+    {
+      "muscle": "sartorius.r",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          -0.11850672960281372,
+          0.01840607076883316,
+          0.08800332993268967
+        ],
+        [
+          -0.11929178982973099,
+          0.02353832684457302,
+          0.09311783313751221
+        ],
+        [
+          -0.11816057562828064,
+          0.03050070069730282,
+          0.09571795910596848
+        ]
+      ],
+      "centroid": [
+        -0.11865320801734924,
+        0.024157125502824783,
+        0.09228625893592834
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Sartorius muscle.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0025582194793969393,
+      "muscleDistanceM": 0.0027937141712754965,
+      "review": "pending"
+    },
+    {
+      "muscle": "sartorius.r",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          -0.06687264144420624,
+          -0.5541946291923523,
+          0.02951464243233204
+        ],
+        [
+          -0.06727755069732666,
+          -0.5283754467964172,
+          0.03487268462777138
+        ],
+        [
+          -0.06500010192394257,
+          -0.5176552534103394,
+          0.03343484550714493
+        ]
+      ],
+      "centroid": [
+        -0.06638342887163162,
+        -0.5334082841873169,
+        0.032607387751340866
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Sartorius muscle.er"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00021154557180125266,
+      "muscleDistanceM": 0.004900953732430935,
+      "review": "pending"
+    },
+    {
+      "muscle": "rectus-femoris.l",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.10398933291435242,
+          -0.009352348744869232,
+          0.06409743428230286
+        ],
+        [
+          0.10412976145744324,
+          -0.004500494338572025,
+          0.053317125886678696
+        ],
+        [
+          0.09994138777256012,
+          -0.016466233879327774,
+          0.03782208636403084
+        ]
+      ],
+      "centroid": [
+        0.10268682986497879,
+        -0.010106358677148819,
+        0.05174550414085388
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Rectus femoris muscle.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0011555994860827923,
+      "muscleDistanceM": 0.002215971704572439,
+      "review": "pending"
+    },
+    {
+      "muscle": "rectus-femoris.l",
+      "kind": "insertion",
+      "bone": "patella",
+      "points": [
+        [
+          0.08507200330495834,
+          -0.4637921154499054,
+          0.04754560440778732
+        ]
+      ],
+      "centroid": [
+        0.08507200330495834,
+        -0.4637921154499054,
+        0.04754560440778732
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 237,
+      "review": "pending"
+    },
+    {
+      "muscle": "rectus-femoris.l",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          0.08292148262262344,
+          -0.5269954204559326,
+          0.04677986353635788
+        ]
+      ],
+      "centroid": [
+        0.08292148262262344,
+        -0.5269954204559326,
+        0.04677986353635788
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 34,
+      "review": "pending"
+    },
+    {
+      "muscle": "rectus-femoris.r",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          -0.10398934781551361,
+          -0.009352526627480984,
+          0.06409743428230286
+        ],
+        [
+          -0.10412977635860443,
+          -0.004500673618167639,
+          0.053317125886678696
+        ],
+        [
+          -0.09994138777256012,
+          -0.0164664126932621,
+          0.03782208636403084
+        ]
+      ],
+      "centroid": [
+        -0.10268684476613998,
+        -0.010106531903147697,
+        0.05174550041556358
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Rectus femoris muscle.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.001155654201284051,
+      "muscleDistanceM": 0.0031102567445486784,
+      "review": "pending"
+    },
+    {
+      "muscle": "rectus-femoris.r",
+      "kind": "insertion",
+      "bone": "patella",
+      "points": [
+        [
+          -0.08461934328079224,
+          -0.4641870856285095,
+          0.04734340310096741
+        ]
+      ],
+      "centroid": [
+        -0.08461934328079224,
+        -0.4641870856285095,
+        0.04734340310096741
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 165,
+      "review": "pending"
+    },
+    {
+      "muscle": "rectus-femoris.r",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          -0.08307531476020813,
+          -0.5257011651992798,
+          0.04682027921080589
+        ]
+      ],
+      "centroid": [
+        -0.08307531476020813,
+        -0.5257011651992798,
+        0.04682027921080589
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 24,
+      "review": "pending"
+    },
+    {
+      "muscle": "vastus-lateralis.l",
+      "kind": "origin",
+      "bone": "femur",
+      "points": [
+        [
+          0.1043417677283287,
+          -0.3040962517261505,
+          0.02618470974266529
+        ],
+        [
+          0.12609322369098663,
+          -0.14274698495864868,
+          0.02527850680053234
+        ],
+        [
+          0.12815989553928375,
+          -0.09601769596338272,
+          0.04039027541875839
+        ]
+      ],
+      "centroid": [
+        0.11954019218683243,
+        -0.18086890876293182,
+        0.030627604573965073
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Vastus lateralis muscle.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.002400472527369857,
+      "muscleDistanceM": 0.004624017979949713,
+      "review": "pending"
+    },
+    {
+      "muscle": "vastus-lateralis.l",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          0.0896708220243454,
+          -0.5180003046989441,
+          0.044896919280290604
+        ]
+      ],
+      "centroid": [
+        0.0896708220243454,
+        -0.5180003046989441,
+        0.044896919280290604
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 53,
+      "review": "pending"
+    },
+    {
+      "muscle": "vastus-lateralis.r",
+      "kind": "origin",
+      "bone": "femur",
+      "points": [
+        [
+          -0.10434170812368393,
+          -0.3040962517261505,
+          0.02618470974266529
+        ],
+        [
+          -0.12609316408634186,
+          -0.14274698495864868,
+          0.02527850680053234
+        ],
+        [
+          -0.12815983593463898,
+          -0.09601769596338272,
+          0.04039028286933899
+        ]
+      ],
+      "centroid": [
+        -0.11954015493392944,
+        -0.18086890876293182,
+        0.03062760829925537
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Vastus lateralis muscle.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.002400459721684456,
+      "muscleDistanceM": 0.004624008666723967,
+      "review": "pending"
+    },
+    {
+      "muscle": "vastus-lateralis.r",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          -0.08967072516679764,
+          -0.5180001854896545,
+          0.044896941632032394
+        ]
+      ],
+      "centroid": [
+        -0.08967072516679764,
+        -0.5180001854896545,
+        0.044896941632032394
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 53,
+      "review": "pending"
+    },
+    {
+      "muscle": "vastus-medialis.l",
+      "kind": "origin",
+      "bone": "femur",
+      "points": [
+        [
+          0.05573233589529991,
+          -0.41731923818588257,
+          0.03139105066657066
+        ],
+        [
+          0.08063481003046036,
+          -0.297451376914978,
+          0.044675908982753754
+        ],
+        [
+          0.09750598669052124,
+          -0.15890085697174072,
+          0.04457618296146393
+        ]
+      ],
+      "centroid": [
+        0.07795768976211548,
+        -0.2912237346172333,
+        0.04021435230970383
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Vastus medialis muscle.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.003607135033234954,
+      "muscleDistanceM": 0.005061122588813305,
+      "review": "pending"
+    },
+    {
+      "muscle": "vastus-medialis.l",
+      "kind": "insertion",
+      "bone": "patella",
+      "points": [
+        [
+          0.07864564657211304,
+          -0.46781179308891296,
+          0.04228844866156578
+        ]
+      ],
+      "centroid": [
+        0.07864564657211304,
+        -0.46781179308891296,
+        0.04228844866156578
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 59,
+      "review": "pending"
+    },
+    {
+      "muscle": "vastus-medialis.l",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          0.08348646014928818,
+          -0.5134122967720032,
+          0.04587819054722786
+        ]
+      ],
+      "centroid": [
+        0.08348646014928818,
+        -0.5134122967720032,
+        0.04587819054722786
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 52,
+      "review": "pending"
+    },
+    {
+      "muscle": "vastus-medialis.r",
+      "kind": "origin",
+      "bone": "femur",
+      "points": [
+        [
+          -0.055732306092977524,
+          -0.41731923818588257,
+          0.031391046941280365
+        ],
+        [
+          -0.08063475042581558,
+          -0.297451376914978,
+          0.044675905257463455
+        ],
+        [
+          -0.09750594198703766,
+          -0.15890085697174072,
+          0.044576190412044525
+        ]
+      ],
+      "centroid": [
+        -0.07795760780572891,
+        -0.2912237346172333,
+        0.04021434858441353
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Vastus medialis muscle.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0036071690265089273,
+      "muscleDistanceM": 0.005061120726168156,
+      "review": "pending"
+    },
+    {
+      "muscle": "vastus-medialis.r",
+      "kind": "insertion",
+      "bone": "patella",
+      "points": [
+        [
+          -0.07865168899297714,
+          -0.46783602237701416,
+          0.04227849468588829
+        ]
+      ],
+      "centroid": [
+        -0.07865168899297714,
+        -0.46783602237701416,
+        0.04227849468588829
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 59,
+      "review": "pending"
+    },
+    {
+      "muscle": "vastus-medialis.r",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          -0.08348635584115982,
+          -0.5134119391441345,
+          0.04587818682193756
+        ]
+      ],
+      "centroid": [
+        -0.08348635584115982,
+        -0.5134119391441345,
+        0.04587818682193756
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 52,
+      "review": "pending"
+    },
+    {
+      "muscle": "biceps-femoris-long.l",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.05536888167262077,
+          -0.09688811749219894,
+          -0.012025710195302963
+        ],
+        [
+          0.06194939836859703,
+          -0.09764500707387924,
+          -0.009632352739572525
+        ],
+        [
+          0.06532994657754898,
+          -0.09850212186574936,
+          -0.006510354112833738
+        ]
+      ],
+      "centroid": [
+        0.06090414151549339,
+        -0.09768237918615341,
+        -0.009375630877912045
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Long head of biceps femoris.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0010185145074501634,
+      "muscleDistanceM": 0.0025276688393205404,
+      "review": "pending"
+    },
+    {
+      "muscle": "biceps-femoris-long.l",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          0.12254632264375687,
+          -0.5087780356407166,
+          0.0027276980690658092
+        ]
+      ],
+      "centroid": [
+        0.12254632264375687,
+        -0.5087780356407166,
+        0.0027276980690658092
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 76,
+      "review": "pending"
+    },
+    {
+      "muscle": "biceps-femoris-long.l",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          0.12254632264375687,
+          -0.5087780356407166,
+          0.0027276980690658092
+        ]
+      ],
+      "centroid": [
+        0.12254632264375687,
+        -0.5087780356407166,
+        0.0027276980690658092
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 76,
+      "review": "pending"
+    },
+    {
+      "muscle": "biceps-femoris-long.r",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          -0.06534978002309799,
+          -0.09858907759189606,
+          -0.006427876651287079
+        ],
+        [
+          -0.06200576201081276,
+          -0.09756410121917725,
+          -0.009649401530623436
+        ],
+        [
+          -0.05543610826134682,
+          -0.09690513461828232,
+          -0.012011430226266384
+        ]
+      ],
+      "centroid": [
+        -0.06090415269136429,
+        -0.09768237918615341,
+        -0.009375634603202343
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Long head of biceps femoris.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00101851811632514,
+      "muscleDistanceM": 0.002523972187191248,
+      "review": "pending"
+    },
+    {
+      "muscle": "biceps-femoris-long.r",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          -0.12254628539085388,
+          -0.5087779760360718,
+          0.0027276906184852123
+        ]
+      ],
+      "centroid": [
+        -0.12254628539085388,
+        -0.5087779760360718,
+        0.0027276906184852123
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 76,
+      "review": "pending"
+    },
+    {
+      "muscle": "biceps-femoris-long.r",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          -0.12254628539085388,
+          -0.5087779760360718,
+          0.0027276906184852123
+        ]
+      ],
+      "centroid": [
+        -0.12254628539085388,
+        -0.5087779760360718,
+        0.0027276906184852123
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 76,
+      "review": "pending"
+    },
+    {
+      "muscle": "semitendinosus.l",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.04408067837357521,
+          -0.10750114917755127,
+          -0.0024017891846597195
+        ],
+        [
+          0.052506156265735626,
+          -0.10350805521011353,
+          -0.007648488041013479
+        ],
+        [
+          0.057446327060461044,
+          -0.10625840723514557,
+          -0.004626649431884289
+        ]
+      ],
+      "centroid": [
+        0.0513596385717392,
+        -0.10575714707374573,
+        -0.004891646560281515
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Semitendinosus muscle.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0011260247556492686,
+      "muscleDistanceM": 0.0029224019963294268,
+      "review": "pending"
+    },
+    {
+      "muscle": "semitendinosus.l",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          0.0610414519906044,
+          -0.5486477017402649,
+          0.015357951633632183
+        ],
+        [
+          0.05529817193746567,
+          -0.5288968682289124,
+          0.009697675704956055
+        ],
+        [
+          0.048334307968616486,
+          -0.5153694748878479,
+          0.004433622118085623
+        ]
+      ],
+      "centroid": [
+        0.05489131063222885,
+        -0.530971348285675,
+        0.009829744696617126
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Semitendinosus muscle.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0007815787685103714,
+      "muscleDistanceM": 0.0031200889497995377,
+      "review": "pending"
+    },
+    {
+      "muscle": "semitendinosus.r",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          -0.057461466640233994,
+          -0.10627903044223785,
+          -0.004590561147779226
+        ],
+        [
+          -0.052552852779626846,
+          -0.10353405773639679,
+          -0.007643674034625292
+        ],
+        [
+          -0.044119056314229965,
+          -0.10744594782590866,
+          -0.002458988456055522
+        ]
+      ],
+      "centroid": [
+        -0.0513596385717392,
+        -0.10575723648071289,
+        -0.004891646560281515
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Semitendinosus muscle.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0011259439634159207,
+      "muscleDistanceM": 0.0029221579898148775,
+      "review": "pending"
+    },
+    {
+      "muscle": "semitendinosus.r",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          -0.06104143708944321,
+          -0.5486476421356201,
+          0.01535795908421278
+        ],
+        [
+          -0.055298153311014175,
+          -0.5288968086242676,
+          0.009697682224214077
+        ],
+        [
+          -0.0483342744410038,
+          -0.5153694152832031,
+          0.00443362956866622
+        ]
+      ],
+      "centroid": [
+        -0.054891280829906464,
+        -0.5309712886810303,
+        0.009829752147197723
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Semitendinosus muscle.er"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0007815539138391614,
+      "muscleDistanceM": 0.003120078705251217,
+      "review": "pending"
+    },
+    {
+      "muscle": "gastrocnemius-medial.l",
+      "kind": "origin",
+      "bone": "femur",
+      "points": [
+        [
+          0.05450474098324776,
+          -0.42669597268104553,
+          0.011909469962120056
+        ],
+        [
+          0.0556008480489254,
+          -0.4187029004096985,
+          0.017431462183594704
+        ],
+        [
+          0.05995657667517662,
+          -0.4097485840320587,
+          0.01966557465493679
+        ]
+      ],
+      "centroid": [
+        0.056687407195568085,
+        -0.4183826744556427,
+        0.016335494816303253
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Medial head of gastrocnemius.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0012580840848386288,
+      "muscleDistanceM": 0.0005399334477260709,
+      "review": "pending"
+    },
+    {
+      "muscle": "gastrocnemius-medial.l",
+      "kind": "insertion",
+      "bone": "foot",
+      "points": [
+        [
+          0.07313431799411774,
+          -0.7043336629867554,
+          -0.032826121896505356
+        ]
+      ],
+      "centroid": [
+        0.07313431799411774,
+        -0.7043336629867554,
+        -0.032826121896505356
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "withinThreshold": false,
+      "nearestDistanceM": 0.12558528780937195,
+      "review": "REQUIRED: no vertices within 2 mm"
+    },
+    {
+      "muscle": "gastrocnemius-medial.r",
+      "kind": "origin",
+      "bone": "femur",
+      "points": [
+        [
+          -0.05450468137860298,
+          -0.42669597268104553,
+          0.011909464374184608
+        ],
+        [
+          -0.05560079589486122,
+          -0.4187029004096985,
+          0.017431454733014107
+        ],
+        [
+          -0.059956539422273636,
+          -0.4097485840320587,
+          0.019665567204356194
+        ]
+      ],
+      "centroid": [
+        -0.0566873662173748,
+        -0.4183826744556427,
+        0.016335491091012955
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Medial head of gastrocnemius.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0012580868788063526,
+      "muscleDistanceM": 0.0005401603993959725,
+      "review": "pending"
+    },
+    {
+      "muscle": "gastrocnemius-medial.r",
+      "kind": "insertion",
+      "bone": "foot",
+      "points": [
+        [
+          -0.07313420623540878,
+          -0.7043336033821106,
+          -0.03282606229186058
+        ]
+      ],
+      "centroid": [
+        -0.07313420623540878,
+        -0.7043336033821106,
+        -0.03282606229186058
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "withinThreshold": false,
+      "nearestDistanceM": 0.12558534741401672,
+      "review": "REQUIRED: no vertices within 2 mm"
+    },
+    {
+      "muscle": "gastrocnemius-lateral.l",
+      "kind": "origin",
+      "bone": "femur",
+      "points": [
+        [
+          0.11130434274673462,
+          -0.4392147958278656,
+          0.004167935345321894
+        ],
+        [
+          0.10611452162265778,
+          -0.4317503571510315,
+          0.008700504899024963
+        ],
+        [
+          0.10291902720928192,
+          -0.42512047290802,
+          0.010806301608681679
+        ]
+      ],
+      "centroid": [
+        0.10675273090600967,
+        -0.4319862127304077,
+        0.00791348610073328
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Lateral head of gastrocnemius.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.000133132838527672,
+      "muscleDistanceM": 0.0032275456469506025,
+      "review": "pending"
+    },
+    {
+      "muscle": "gastrocnemius-lateral.l",
+      "kind": "insertion",
+      "bone": "foot",
+      "points": [
+        [
+          0.09943178296089172,
+          -0.6906610727310181,
+          -0.036154747009277344
+        ]
+      ],
+      "centroid": [
+        0.09943178296089172,
+        -0.6906610727310181,
+        -0.036154747009277344
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "withinThreshold": false,
+      "nearestDistanceM": 0.13934388756752014,
+      "review": "REQUIRED: no vertices within 2 mm"
+    },
+    {
+      "muscle": "gastrocnemius-lateral.r",
+      "kind": "origin",
+      "bone": "femur",
+      "points": [
+        [
+          -0.11130429804325104,
+          -0.4392147958278656,
+          0.004167930688709021
+        ],
+        [
+          -0.1061144769191742,
+          -0.4317503571510315,
+          0.008700501173734665
+        ],
+        [
+          -0.10291898250579834,
+          -0.42512047290802,
+          0.01080629788339138
+        ]
+      ],
+      "centroid": [
+        -0.1067526564002037,
+        -0.4319862127304077,
+        0.007913480512797832
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Lateral head of gastrocnemius.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0001331213570665568,
+      "muscleDistanceM": 0.003230890491977334,
+      "review": "pending"
+    },
+    {
+      "muscle": "gastrocnemius-lateral.r",
+      "kind": "insertion",
+      "bone": "foot",
+      "points": [
+        [
+          -0.09943173825740814,
+          -0.6906610131263733,
+          -0.03615471348166466
+        ]
+      ],
+      "centroid": [
+        -0.09943173825740814,
+        -0.6906610131263733,
+        -0.03615471348166466
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "withinThreshold": false,
+      "nearestDistanceM": 0.13934388756752014,
+      "review": "REQUIRED: no vertices within 2 mm"
+    },
+    {
+      "muscle": "tibialis-anterior.l",
+      "kind": "origin",
+      "bone": "lower-leg",
+      "points": [
+        [
+          0.09055058658123016,
+          -0.7044042944908142,
+          0.012402608059346676
+        ],
+        [
+          0.09258004277944565,
+          -0.6424521207809448,
+          0.018152618780732155
+        ],
+        [
+          0.09574125707149506,
+          -0.5658758878707886,
+          0.02474028989672661
+        ]
+      ],
+      "centroid": [
+        0.09295738488435745,
+        -0.6375775933265686,
+        0.01843186281621456
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Tibialis anterior muscle.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.001096821972168982,
+      "muscleDistanceM": 0.003882208140566945,
+      "review": "pending"
+    },
+    {
+      "muscle": "tibialis-anterior.l",
+      "kind": "insertion",
+      "bone": "foot",
+      "points": [
+        [
+          0.06185292452573776,
+          -0.86504727602005,
+          0.07338474690914154
+        ],
+        [
+          0.06168254464864731,
+          -0.8597307205200195,
+          0.0744112953543663
+        ],
+        [
+          0.06277552992105484,
+          -0.8562437891960144,
+          0.0727093368768692
+        ]
+      ],
+      "centroid": [
+        0.062104545533657074,
+        -0.8603242635726929,
+        0.07350219041109085
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Tibialis anterior muscle.e1l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0006890796357765794,
+      "muscleDistanceM": 0.0018791246693581343,
+      "review": "pending"
+    },
+    {
+      "muscle": "tibialis-anterior.l",
+      "kind": "insertion",
+      "bone": "foot",
+      "points": [
+        [
+          0.06057141721248627,
+          -0.8639613389968872,
+          0.06335879117250443
+        ],
+        [
+          0.062119580805301666,
+          -0.8593952655792236,
+          0.06405416876077652
+        ],
+        [
+          0.06327138841152191,
+          -0.8566387295722961,
+          0.0649687871336937
+        ]
+      ],
+      "centroid": [
+        0.061987485736608505,
+        -0.8599979877471924,
+        0.06412726640701294
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Tibialis anterior muscle.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0006107563385739923,
+      "muscleDistanceM": 0.0012498049763962626,
+      "review": "pending"
+    },
+    {
+      "muscle": "tibialis-anterior.r",
+      "kind": "origin",
+      "bone": "lower-leg",
+      "points": [
+        [
+          -0.09055056422948837,
+          -0.7044042944908142,
+          0.012402606196701527
+        ],
+        [
+          -0.09258000552654266,
+          -0.6424521207809448,
+          0.018152618780732155
+        ],
+        [
+          -0.09574121981859207,
+          -0.5658758878707886,
+          0.024740293622016907
+        ]
+      ],
+      "centroid": [
+        -0.09295736253261566,
+        -0.6375775933265686,
+        0.018431859090924263
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Tibialis anterior muscle.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.001096832798793912,
+      "muscleDistanceM": 0.003882279386743903,
+      "review": "pending"
+    },
+    {
+      "muscle": "tibialis-anterior.r",
+      "kind": "insertion",
+      "bone": "foot",
+      "points": [
+        [
+          -0.061852890998125076,
+          -0.86504727602005,
+          0.07338474690914154
+        ],
+        [
+          -0.06168249249458313,
+          -0.8597307205200195,
+          0.0744112953543663
+        ],
+        [
+          -0.06277549266815186,
+          -0.8562437891960144,
+          0.0727093368768692
+        ]
+      ],
+      "centroid": [
+        -0.06210450083017349,
+        -0.8603242635726929,
+        0.07350219041109085
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Tibialis anterior muscle.e1r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0006890796357765794,
+      "muscleDistanceM": 0.0018790358444675803,
+      "review": "pending"
+    },
+    {
+      "muscle": "tibialis-anterior.r",
+      "kind": "insertion",
+      "bone": "foot",
+      "points": [
+        [
+          -0.06057135388255119,
+          -0.8639613389968872,
+          0.06335879117250443
+        ],
+        [
+          -0.06211952492594719,
+          -0.8593952655792236,
+          0.06405416876077652
+        ],
+        [
+          -0.06327130645513535,
+          -0.8566387295722961,
+          0.0649687871336937
+        ]
+      ],
+      "centroid": [
+        -0.06198742613196373,
+        -0.8599979877471924,
+        0.06412726640701294
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Tibialis anterior muscle.er"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00061075045960024,
+      "muscleDistanceM": 0.001249633147381246,
+      "review": "pending"
+    },
+    {
+      "muscle": "gluteus-medius.l",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.12434612214565277,
+          0.05468344688415527,
+          0.052547700703144073
+        ],
+        [
+          0.10666082054376602,
+          0.06989871710538864,
+          0.02584143728017807
+        ],
+        [
+          0.07264966517686844,
+          0.05426890030503273,
+          -0.005963806062936783
+        ]
+      ],
+      "centroid": [
+        0.10121892392635345,
+        0.0596170574426651,
+        0.02414177730679512
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Gluteus medius muscle.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0020172514487057924,
+      "muscleDistanceM": 0.002155710943043232,
+      "review": "pending"
+    },
+    {
+      "muscle": "gluteus-medius.l",
+      "kind": "insertion",
+      "bone": "femur",
+      "points": [
+        [
+          0.14392265677452087,
+          -0.07598374038934708,
+          0.017942607402801514
+        ],
+        [
+          0.1338384449481964,
+          -0.06657501310110092,
+          0.009355955757200718
+        ],
+        [
+          0.13153932988643646,
+          -0.06000996381044388,
+          0.011264062486588955
+        ]
+      ],
+      "centroid": [
+        0.13641566038131714,
+        -0.06749545782804489,
+        0.012848405167460442
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Gluteus medius muscle.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0025045000948011875,
+      "muscleDistanceM": 0.003505985252559185,
+      "review": "pending"
+    },
+    {
+      "muscle": "gluteus-medius.r",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          -0.12434612214565277,
+          0.05468344688415527,
+          0.052547700703144073
+        ],
+        [
+          -0.10666083544492722,
+          0.06989871710538864,
+          0.02584144100546837
+        ],
+        [
+          -0.07264966517686844,
+          0.05426890030503273,
+          -0.005963804665952921
+        ]
+      ],
+      "centroid": [
+        -0.10121893137693405,
+        0.0596170537173748,
+        0.02414177730679512
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Gluteus medius muscle.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.002017259830608964,
+      "muscleDistanceM": 0.002154471119865775,
+      "review": "pending"
+    },
+    {
+      "muscle": "gluteus-medius.r",
+      "kind": "insertion",
+      "bone": "femur",
+      "points": [
+        [
+          -0.14406314492225647,
+          -0.07610462605953217,
+          0.018121570348739624
+        ],
+        [
+          -0.13380804657936096,
+          -0.06654854118824005,
+          0.009380126371979713
+        ],
+        [
+          -0.13140547275543213,
+          -0.05999225750565529,
+          0.01118116732686758
+        ]
+      ],
+      "centroid": [
+        -0.13641001284122467,
+        -0.06752501428127289,
+        0.012888975441455841
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Gluteus medius muscle.er"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.002542024478316307,
+      "muscleDistanceM": 0.0035237448755651712,
+      "review": "pending"
+    },
+    {
+      "muscle": "adductor-longus.l",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.019385110586881638,
+          -0.0708940178155899,
+          0.09341440349817276
+        ],
+        [
+          0.01860225386917591,
+          -0.07306921482086182,
+          0.08913559466600418
+        ],
+        [
+          0.015022181905806065,
+          -0.0765858143568039,
+          0.08487100899219513
+        ]
+      ],
+      "centroid": [
+        0.01765330135822296,
+        -0.07353553175926208,
+        0.08911366760730743
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Adductor longus.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 9.692180901765823e-05,
+      "muscleDistanceM": 0.0032483255490660667,
+      "review": "pending"
+    },
+    {
+      "muscle": "adductor-longus.l",
+      "kind": "insertion",
+      "bone": "femur",
+      "points": [
+        [
+          0.08819863200187683,
+          -0.23240497708320618,
+          0.03853552043437958
+        ],
+        [
+          0.09134601056575775,
+          -0.19844745099544525,
+          0.03632181137800217
+        ],
+        [
+          0.09311887621879578,
+          -0.1732570379972458,
+          0.03922193869948387
+        ]
+      ],
+      "centroid": [
+        0.09089694917201996,
+        -0.20126502215862274,
+        0.038024693727493286
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Adductor longus.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0002018531522480771,
+      "muscleDistanceM": 0.012637194246053696,
+      "review": "pending"
+    },
+    {
+      "muscle": "adductor-longus.r",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          -0.019385118037462234,
+          -0.0708940178155899,
+          0.09341440349817276
+        ],
+        [
+          -0.01860225945711136,
+          -0.07306921482086182,
+          0.08913558721542358
+        ],
+        [
+          -0.015022194012999535,
+          -0.0765858143568039,
+          0.08487100154161453
+        ]
+      ],
+      "centroid": [
+        -0.017653312534093857,
+        -0.07353553175926208,
+        0.08911366760730743
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Adductor longus.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 9.691882587503642e-05,
+      "muscleDistanceM": 0.003248213091865182,
+      "review": "pending"
+    },
+    {
+      "muscle": "adductor-longus.r",
+      "kind": "insertion",
+      "bone": "femur",
+      "points": [
+        [
+          -0.08819857239723206,
+          -0.23240497708320618,
+          0.03853552043437958
+        ],
+        [
+          -0.09134594351053238,
+          -0.19844745099544525,
+          0.03632181137800217
+        ],
+        [
+          -0.09311883896589279,
+          -0.1732570379972458,
+          0.03922193869948387
+        ]
+      ],
+      "centroid": [
+        -0.09089688956737518,
+        -0.20126502215862274,
+        0.038024697452783585
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Adductor longus.er"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00020186793699394912,
+      "muscleDistanceM": 0.012637177482247353,
+      "review": "pending"
+    },
+    {
+      "muscle": "gracilis.l",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.013606569729745388,
+          -0.08242078125476837,
+          0.0773177295923233
+        ],
+        [
+          0.01549664605408907,
+          -0.09457825869321823,
+          0.0595259889960289
+        ],
+        [
+          0.020350495353341103,
+          -0.1021885871887207,
+          0.04762009158730507
+        ]
+      ],
+      "centroid": [
+        0.016484569758176804,
+        -0.09306252002716064,
+        0.06148795783519745
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Gracilis muscle.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0002959851117338985,
+      "muscleDistanceM": 0.0017566017340868711,
+      "review": "pending"
+    },
+    {
+      "muscle": "gracilis.l",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          0.06474433839321136,
+          -0.5613725185394287,
+          0.023112649098038673
+        ],
+        [
+          0.06150127574801445,
+          -0.5464117527008057,
+          0.021226076409220695
+        ],
+        [
+          0.05844155699014664,
+          -0.5282846093177795,
+          0.023731831461191177
+        ]
+      ],
+      "centroid": [
+        0.061538659036159515,
+        -0.5452368259429932,
+        0.022687027230858803
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Gracilis muscle.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 1.0479620868864004e-05,
+      "muscleDistanceM": 0.004586183000355959,
+      "review": "pending"
+    },
+    {
+      "muscle": "gracilis.r",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          -0.013606577180325985,
+          -0.08242078125476837,
+          0.0773177295923233
+        ],
+        [
+          -0.015496651642024517,
+          -0.09457825869321823,
+          0.0595259852707386
+        ],
+        [
+          -0.02035050094127655,
+          -0.1021885871887207,
+          0.04762009158730507
+        ]
+      ],
+      "centroid": [
+        -0.0164845772087574,
+        -0.09306252002716064,
+        0.06148795410990715
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Gracilis muscle.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00029598214314319193,
+      "muscleDistanceM": 0.0017574196681380272,
+      "review": "pending"
+    },
+    {
+      "muscle": "gracilis.r",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          -0.06474430859088898,
+          -0.5613725185394287,
+          0.02311265468597412
+        ],
+        [
+          -0.06150125712156296,
+          -0.5464117527008057,
+          0.021226081997156143
+        ],
+        [
+          -0.05844153091311455,
+          -0.5282846093177795,
+          0.023731837049126625
+        ]
+      ],
+      "centroid": [
+        -0.061538610607385635,
+        -0.5452368259429932,
+        0.0226870309561491
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Gracilis muscle.er"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 1.0490598469914403e-05,
+      "muscleDistanceM": 0.004586192779242992,
+      "review": "pending"
+    },
+    {
+      "muscle": "pectineus.l",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.02068791352212429,
+          -0.06335017085075378,
+          0.0953064113855362
+        ],
+        [
+          0.03016698732972145,
+          -0.0609910823404789,
+          0.08585882186889648
+        ],
+        [
+          0.04501315578818321,
+          -0.05356687679886818,
+          0.07653039693832397
+        ]
+      ],
+      "centroid": [
+        0.03198516368865967,
+        -0.05928988382220268,
+        0.08587764203548431
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Pectineus muscle.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00015417049871757627,
+      "muscleDistanceM": 0.002345968736335635,
+      "review": "pending"
+    },
+    {
+      "muscle": "pectineus.l",
+      "kind": "insertion",
+      "bone": "femur",
+      "points": [
+        [
+          0.09613918513059616,
+          -0.15898175537586212,
+          0.042683739215135574
+        ]
+      ],
+      "centroid": [
+        0.09613918513059616,
+        -0.15898175537586212,
+        0.042683739215135574
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 77,
+      "review": "pending"
+    },
+    {
+      "muscle": "pectineus.r",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          -0.045069094747304916,
+          -0.05348906293511391,
+          0.07649695873260498
+        ],
+        [
+          -0.03024468570947647,
+          -0.060968685895204544,
+          0.0857781171798706
+        ],
+        [
+          -0.020717337727546692,
+          -0.063385009765625,
+          0.09529465436935425
+        ]
+      ],
+      "centroid": [
+        -0.031985171139240265,
+        -0.0592900849878788,
+        0.08587763458490372
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Pectineus muscle.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00015408359467983246,
+      "muscleDistanceM": 0.0023458178620785475,
+      "review": "pending"
+    },
+    {
+      "muscle": "pectineus.r",
+      "kind": "insertion",
+      "bone": "femur",
+      "points": [
+        [
+          -0.09548907727003098,
+          -0.16278991103172302,
+          0.04276837408542633
+        ],
+        [
+          -0.09615081548690796,
+          -0.14904963970184326,
+          0.040905170142650604
+        ],
+        [
+          -0.09612497687339783,
+          -0.1436118185520172,
+          0.040114276111125946
+        ]
+      ],
+      "centroid": [
+        -0.09592447429895401,
+        -0.15174497663974762,
+        0.041252706199884415
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Pectineus muscle.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00018078347784467041,
+      "muscleDistanceM": 0.001875640475191176,
+      "review": "pending"
+    },
+    {
+      "muscle": "semimembranosus.l",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.03823254629969597,
+          -0.11210451275110245,
+          0.009824682027101517
+        ],
+        [
+          0.045320313423871994,
+          -0.11250696331262589,
+          0.00559703353792429
+        ],
+        [
+          0.05273851752281189,
+          -0.1113370805978775,
+          0.005986808333545923
+        ]
+      ],
+      "centroid": [
+        0.0454571358859539,
+        -0.11198044568300247,
+        0.007131977938115597
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Semimembranosus muscle.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0014156725956127048,
+      "muscleDistanceM": 0.002879365812987089,
+      "review": "pending"
+    },
+    {
+      "muscle": "semimembranosus.l",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          0.04012230411171913,
+          -0.5003840327262878,
+          0.0018364561256021261
+        ],
+        [
+          0.047220636159181595,
+          -0.502532958984375,
+          -0.008653087541460991
+        ],
+        [
+          0.05497640371322632,
+          -0.5034762024879456,
+          -0.012993359006941319
+        ]
+      ],
+      "centroid": [
+        0.04743976891040802,
+        -0.5021311640739441,
+        -0.006603328976780176
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Semimembranosus muscle.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0013320670695975423,
+      "muscleDistanceM": 0.010797349736094475,
+      "review": "pending"
+    },
+    {
+      "muscle": "semimembranosus.r",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          -0.05277681350708008,
+          -0.11134088039398193,
+          0.005943035241216421
+        ],
+        [
+          -0.045402564108371735,
+          -0.11248151957988739,
+          0.005595401395112276
+        ],
+        [
+          -0.038270995020866394,
+          -0.11211827397346497,
+          0.009827864356338978
+        ]
+      ],
+      "centroid": [
+        -0.0454571396112442,
+        -0.11198069155216217,
+        0.007131973747164011
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Semimembranosus muscle.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.001415443723089993,
+      "muscleDistanceM": 0.0028793879318982363,
+      "review": "pending"
+    },
+    {
+      "muscle": "semimembranosus.r",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          -0.04012227803468704,
+          -0.5003839731216431,
+          0.0018364661373198032
+        ],
+        [
+          -0.04722060635685921,
+          -0.502532958984375,
+          -0.008653075434267521
+        ],
+        [
+          -0.05497638136148453,
+          -0.5034761428833008,
+          -0.0129933450371027
+        ]
+      ],
+      "centroid": [
+        -0.04743973910808563,
+        -0.5021310448646545,
+        -0.006603318266570568
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Semimembranosus muscle.er"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0013320889556780457,
+      "muscleDistanceM": 0.010797398164868355,
+      "review": "pending"
+    },
+    {
+      "muscle": "biceps-femoris-short.l",
+      "kind": "origin",
+      "bone": "femur",
+      "points": [
+        [
+          0.09777840226888657,
+          -0.32720211148262024,
+          0.020651444792747498
+        ]
+      ],
+      "centroid": [
+        0.09777840226888657,
+        -0.32720211148262024,
+        0.020651444792747498
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 167,
+      "review": "pending"
+    },
+    {
+      "muscle": "biceps-femoris-short.l",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          0.12042681127786636,
+          -0.5030044913291931,
+          -0.004139304626733065
+        ]
+      ],
+      "centroid": [
+        0.12042681127786636,
+        -0.5030044913291931,
+        -0.004139304626733065
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 66,
+      "review": "pending"
+    },
+    {
+      "muscle": "biceps-femoris-short.l",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          0.12042681127786636,
+          -0.5030044913291931,
+          -0.004139304626733065
+        ]
+      ],
+      "centroid": [
+        0.12042681127786636,
+        -0.5030044913291931,
+        -0.004139304626733065
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 66,
+      "review": "pending"
+    },
+    {
+      "muscle": "biceps-femoris-short.r",
+      "kind": "origin",
+      "bone": "femur",
+      "points": [
+        [
+          -0.09959055483341217,
+          -0.4070330858230591,
+          0.015752432867884636
+        ],
+        [
+          -0.09242747724056244,
+          -0.3437536358833313,
+          0.020747380331158638
+        ],
+        [
+          -0.09653082489967346,
+          -0.24903170764446259,
+          0.025461282581090927
+        ]
+      ],
+      "centroid": [
+        -0.0961829125881195,
+        -0.33327290415763855,
+        0.020653696730732918
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Short head of biceps femoris.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0017088099848479033,
+      "muscleDistanceM": 0.003755589947104454,
+      "review": "pending"
+    },
+    {
+      "muscle": "biceps-femoris-short.r",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          -0.12042676657438278,
+          -0.5030043721199036,
+          -0.004139322321861982
+        ]
+      ],
+      "centroid": [
+        -0.12042676657438278,
+        -0.5030043721199036,
+        -0.004139322321861982
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 66,
+      "review": "pending"
+    },
+    {
+      "muscle": "biceps-femoris-short.r",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          -0.12042676657438278,
+          -0.5030043721199036,
+          -0.004139322321861982
+        ]
+      ],
+      "centroid": [
+        -0.12042676657438278,
+        -0.5030043721199036,
+        -0.004139322321861982
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 66,
+      "review": "pending"
+    },
+    {
+      "muscle": "soleus.l",
+      "kind": "origin",
+      "bone": "lower-leg",
+      "points": [
+        [
+          0.06929110735654831,
+          -0.62629234790802,
+          0.013934864662587643
+        ],
+        [
+          0.07115443795919418,
+          -0.5665742754936218,
+          0.009075085632503033
+        ],
+        [
+          0.08475887030363083,
+          -0.542315661907196,
+          0.006484478246420622
+        ]
+      ],
+      "centroid": [
+        0.07506809383630753,
+        -0.5783942341804504,
+        0.009831476025283337
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Soleus muscle.o1l"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0017035085475072265,
+      "muscleDistanceM": 0.004790945444256067,
+      "review": "pending"
+    },
+    {
+      "muscle": "soleus.l",
+      "kind": "origin",
+      "bone": "lower-leg",
+      "points": [
+        [
+          0.10659856349229813,
+          -0.5421767234802246,
+          -0.00859961286187172
+        ],
+        [
+          0.10258855670690536,
+          -0.5217862129211426,
+          -0.005483509041368961
+        ],
+        [
+          0.10373743623495102,
+          -0.5062354207038879,
+          -0.00800399575382471
+        ]
+      ],
+      "centroid": [
+        0.10430675745010376,
+        -0.5233572125434875,
+        -0.007363956421613693
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Soleus muscle.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0013007987290620804,
+      "muscleDistanceM": 0.0026551198679953814,
+      "review": "pending"
+    },
+    {
+      "muscle": "soleus.l",
+      "kind": "insertion",
+      "bone": "foot",
+      "points": [
+        [
+          0.07143900543451309,
+          -0.7767034769058228,
+          -0.030621210113167763
+        ]
+      ],
+      "centroid": [
+        0.07143900543451309,
+        -0.7767034769058228,
+        -0.030621210113167763
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "withinThreshold": false,
+      "nearestDistanceM": 0.056373778730630875,
+      "review": "REQUIRED: no vertices within 2 mm"
+    },
+    {
+      "muscle": "soleus.r",
+      "kind": "origin",
+      "bone": "lower-leg",
+      "points": [
+        [
+          -0.06929107755422592,
+          -0.62629234790802,
+          0.013934862799942493
+        ],
+        [
+          -0.07115438580513,
+          -0.5665742754936218,
+          0.009075085632503033
+        ],
+        [
+          -0.08475884050130844,
+          -0.542315661907196,
+          0.0064844791777431965
+        ]
+      ],
+      "centroid": [
+        -0.07506807148456573,
+        -0.5783942341804504,
+        0.009831476025283337
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Soleus muscle.o1r"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0017035085475072265,
+      "muscleDistanceM": 0.0047909882850945,
+      "review": "pending"
+    },
+    {
+      "muscle": "soleus.r",
+      "kind": "origin",
+      "bone": "lower-leg",
+      "points": [
+        [
+          -0.10659851878881454,
+          -0.5421767234802246,
+          -0.008599610067903996
+        ],
+        [
+          -0.1025884747505188,
+          -0.5217862129211426,
+          -0.005483505316078663
+        ],
+        [
+          -0.10373738408088684,
+          -0.5062354207038879,
+          -0.008003991097211838
+        ]
+      ],
+      "centroid": [
+        -0.10430671274662018,
+        -0.5233572125434875,
+        -0.007363952696323395
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Soleus muscle.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0013008033856749535,
+      "muscleDistanceM": 0.002655185293406248,
+      "review": "pending"
+    },
+    {
+      "muscle": "soleus.r",
+      "kind": "insertion",
+      "bone": "foot",
+      "points": [
+        [
+          -0.07143896818161011,
+          -0.776703417301178,
+          -0.030621204525232315
+        ]
+      ],
+      "centroid": [
+        -0.07143896818161011,
+        -0.776703417301178,
+        -0.030621204525232315
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "withinThreshold": false,
+      "nearestDistanceM": 0.056373853236436844,
+      "review": "REQUIRED: no vertices within 2 mm"
+    },
+    {
+      "muscle": "gluteus-minimus.l",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.08784238249063492,
+          -0.012400987558066845,
+          0.021318119019269943
+        ],
+        [
+          0.08446856588125229,
+          0.006144717335700989,
+          0.022840796038508415
+        ],
+        [
+          0.10971327871084213,
+          0.0413658581674099,
+          0.042596105486154556
+        ]
+      ],
+      "centroid": [
+        0.09401678293943405,
+        0.011737426742911339,
+        0.028929123654961586
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Gluteus minimus muscle.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0017874635523185134,
+      "muscleDistanceM": 0.006517905276268721,
+      "review": "pending"
+    },
+    {
+      "muscle": "gluteus-minimus.l",
+      "kind": "insertion",
+      "bone": "femur",
+      "points": [
+        [
+          0.14000439643859863,
+          -0.05995083972811699,
+          0.02642221748828888
+        ]
+      ],
+      "centroid": [
+        0.14000439643859863,
+        -0.05995083972811699,
+        0.02642221748828888
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 142,
+      "review": "pending"
+    },
+    {
+      "muscle": "gluteus-minimus.r",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          -0.08784239739179611,
+          -0.012400987558066845,
+          0.021318119019269943
+        ],
+        [
+          -0.08446856588125229,
+          0.006144717335700989,
+          0.022840796038508415
+        ],
+        [
+          -0.10971327871084213,
+          0.0413658581674099,
+          0.042596105486154556
+        ]
+      ],
+      "centroid": [
+        -0.09401680529117584,
+        0.011737426742911339,
+        0.028929123654961586
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Gluteus minimus muscle.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0017874755430966616,
+      "muscleDistanceM": 0.006518309935927391,
+      "review": "pending"
+    },
+    {
+      "muscle": "gluteus-minimus.r",
+      "kind": "insertion",
+      "bone": "femur",
+      "points": [
+        [
+          -0.1400156170129776,
+          -0.059960223734378815,
+          0.026423851028084755
+        ]
+      ],
+      "centroid": [
+        -0.1400156170129776,
+        -0.059960223734378815,
+        0.026423851028084755
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 142,
+      "review": "pending"
+    },
+    {
+      "muscle": "vastus-intermedius.l",
+      "kind": "origin",
+      "bone": "femur",
+      "points": [
+        [
+          0.09597159922122955,
+          -0.3525303602218628,
+          0.04664640128612518
+        ],
+        [
+          0.10772916674613953,
+          -0.23574788868427277,
+          0.047467347234487534
+        ],
+        [
+          0.11867957562208176,
+          -0.13114188611507416,
+          0.042667947709560394
+        ]
+      ],
+      "centroid": [
+        0.10746016353368759,
+        -0.23980672657489777,
+        0.04559386521577835
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Vastus intermedius muscle.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.005818246863782406,
+      "muscleDistanceM": 0.008573866449296474,
+      "review": "REQUIRED: attachment away from named surface"
+    },
+    {
+      "muscle": "vastus-intermedius.l",
+      "kind": "insertion",
+      "bone": "patella",
+      "points": [
+        [
+          0.0833028256893158,
+          -0.4680831730365753,
+          0.04250842705368996
+        ]
+      ],
+      "centroid": [
+        0.0833028256893158,
+        -0.4680831730365753,
+        0.04250842705368996
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 58,
+      "review": "pending"
+    },
+    {
+      "muscle": "vastus-intermedius.l",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          0.08595126867294312,
+          -0.5090444684028625,
+          0.0473296120762825
+        ]
+      ],
+      "centroid": [
+        0.08595126867294312,
+        -0.5090444684028625,
+        0.0473296120762825
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 30,
+      "review": "pending"
+    },
+    {
+      "muscle": "vastus-intermedius.r",
+      "kind": "origin",
+      "bone": "femur",
+      "points": [
+        [
+          -0.09597155451774597,
+          -0.3525303602218628,
+          0.046646393835544586
+        ],
+        [
+          -0.10772912204265594,
+          -0.23574788868427277,
+          0.04746735468506813
+        ],
+        [
+          -0.11867951601743698,
+          -0.13114188611507416,
+          0.042667947709560394
+        ]
+      ],
+      "centroid": [
+        -0.10746008157730103,
+        -0.23980672657489777,
+        0.04559386521577835
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Vastus intermedius muscle.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.005818267352879047,
+      "muscleDistanceM": 0.008574064821004868,
+      "review": "REQUIRED: attachment away from named surface"
+    },
+    {
+      "muscle": "vastus-intermedius.r",
+      "kind": "insertion",
+      "bone": "patella",
+      "points": [
+        [
+          -0.08330589532852173,
+          -0.4680604636669159,
+          0.042504142969846725
+        ]
+      ],
+      "centroid": [
+        -0.08330589532852173,
+        -0.4680604636669159,
+        0.042504142969846725
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 58,
+      "review": "pending"
+    },
+    {
+      "muscle": "vastus-intermedius.r",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          -0.08568106591701508,
+          -0.5090234875679016,
+          0.047339096665382385
+        ]
+      ],
+      "centroid": [
+        -0.08568106591701508,
+        -0.5090234875679016,
+        0.047339096665382385
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 31,
+      "review": "pending"
+    },
+    {
+      "muscle": "adductor-brevis.l",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.025586267933249474,
+          -0.07359922677278519,
+          0.07706321030855179
+        ]
+      ],
+      "centroid": [
+        0.025586267933249474,
+        -0.07359922677278519,
+        0.07706321030855179
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 33,
+      "review": "pending"
+    },
+    {
+      "muscle": "adductor-brevis.l",
+      "kind": "insertion",
+      "bone": "femur",
+      "points": [
+        [
+          0.09323043376207352,
+          -0.1913784146308899,
+          0.041382793337106705
+        ]
+      ],
+      "centroid": [
+        0.09323043376207352,
+        -0.1913784146308899,
+        0.041382793337106705
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 342,
+      "review": "pending"
+    },
+    {
+      "muscle": "adductor-brevis.r",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          -0.025586212053894997,
+          -0.07359933853149414,
+          0.07706318795681
+        ]
+      ],
+      "centroid": [
+        -0.025586212053894997,
+        -0.07359933853149414,
+        0.07706318795681
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 33,
+      "review": "pending"
+    },
+    {
+      "muscle": "adductor-brevis.r",
+      "kind": "insertion",
+      "bone": "femur",
+      "points": [
+        [
+          -0.09323037415742874,
+          -0.1913784295320511,
+          0.04138278216123581
+        ]
+      ],
+      "centroid": [
+        -0.09323037415742874,
+        -0.1913784295320511,
+        0.04138278216123581
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 342,
+      "review": "pending"
+    },
+    {
+      "muscle": "adductor-magnus.l",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.02392095886170864,
+          -0.09841461479663849,
+          0.051006294786930084
+        ],
+        [
+          0.02767333947122097,
+          -0.10429421812295914,
+          0.03894386813044548
+        ],
+        [
+          0.036673180758953094,
+          -0.10871357470750809,
+          0.021135784685611725
+        ]
+      ],
+      "centroid": [
+        0.02942247875034809,
+        -0.1038074716925621,
+        0.03702862933278084
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Adductor magnus.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0017509129829704762,
+      "muscleDistanceM": 0.0021597477607429028,
+      "review": "pending"
+    },
+    {
+      "muscle": "adductor-magnus.l",
+      "kind": "insertion",
+      "bone": "femur",
+      "points": [
+        [
+          0.04440901800990105,
+          -0.4303126633167267,
+          0.016869502142071724
+        ],
+        [
+          0.0850444957613945,
+          -0.30057191848754883,
+          0.027150798588991165
+        ],
+        [
+          0.101629838347435,
+          -0.1536109447479248,
+          0.02077152580022812
+        ]
+      ],
+      "centroid": [
+        0.07705144584178925,
+        -0.2946964204311371,
+        0.021596476435661316
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Adductor magnus.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.01174917258322239,
+      "muscleDistanceM": 0.008433756418526173,
+      "review": "REQUIRED: attachment away from named surface"
+    },
+    {
+      "muscle": "adductor-magnus.r",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          -0.023920966312289238,
+          -0.09841461479663849,
+          0.05100628361105919
+        ],
+        [
+          -0.027673348784446716,
+          -0.10429421812295914,
+          0.038943856954574585
+        ],
+        [
+          -0.03667318448424339,
+          -0.10871357470750809,
+          0.021135780960321426
+        ]
+      ],
+      "centroid": [
+        -0.029422486200928688,
+        -0.1038074716925621,
+        0.03702862560749054
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Adductor magnus.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0017509185709059238,
+      "muscleDistanceM": 0.0021595326252281666,
+      "review": "pending"
+    },
+    {
+      "muscle": "adductor-magnus.r",
+      "kind": "insertion",
+      "bone": "femur",
+      "points": [
+        [
+          -0.04440898075699806,
+          -0.4303126633167267,
+          0.016869494691491127
+        ],
+        [
+          -0.08504446595907211,
+          -0.30057191848754883,
+          0.027150798588991165
+        ],
+        [
+          -0.10162980854511261,
+          -0.1536109447479248,
+          0.020771529525518417
+        ]
+      ],
+      "centroid": [
+        -0.07705138623714447,
+        -0.2946964204311371,
+        0.021596470847725868
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Adductor magnus.er"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.011749183759093285,
+      "muscleDistanceM": 0.00843379832804203,
+      "review": "REQUIRED: attachment away from named surface"
+    },
+    {
+      "muscle": "psoas-major.l",
+      "kind": "origin",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          0.01620594598352909,
+          0.23108595609664917,
+          0.03284528851509094
+        ]
+      ],
+      "centroid": [
+        0.01620594598352909,
+        0.23108595609664917,
+        0.03284528851509094
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 22,
+      "review": "pending"
+    },
+    {
+      "muscle": "psoas-major.l",
+      "kind": "origin",
+      "bone": "lumbar-spine",
+      "points": [
+        [
+          0.024405503645539284,
+          0.15244214236736298,
+          0.03486748784780502
+        ]
+      ],
+      "centroid": [
+        0.024405503645539284,
+        0.15244214236736298,
+        0.03486748784780502
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 159,
+      "review": "pending"
+    },
+    {
+      "muscle": "psoas-major.l",
+      "kind": "insertion",
+      "bone": "femur",
+      "points": [
+        [
+          0.09424778074026108,
+          -0.11984379589557648,
+          0.018514445051550865
+        ]
+      ],
+      "centroid": [
+        0.09424778074026108,
+        -0.11984379589557648,
+        0.018514445051550865
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 31,
+      "review": "pending"
+    },
+    {
+      "muscle": "psoas-major.r",
+      "kind": "origin",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          -0.01623508706688881,
+          0.23109078407287598,
+          0.03285885602235794
+        ]
+      ],
+      "centroid": [
+        -0.01623508706688881,
+        0.23109078407287598,
+        0.03285885602235794
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 22,
+      "review": "pending"
+    },
+    {
+      "muscle": "psoas-major.r",
+      "kind": "origin",
+      "bone": "lumbar-spine",
+      "points": [
+        [
+          -0.024439437314867973,
+          0.15206333994865417,
+          0.035011790692806244
+        ]
+      ],
+      "centroid": [
+        -0.024439437314867973,
+        0.15206333994865417,
+        0.035011790692806244
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 156,
+      "review": "pending"
+    },
+    {
+      "muscle": "psoas-major.r",
+      "kind": "insertion",
+      "bone": "femur",
+      "points": [
+        [
+          -0.09386061131954193,
+          -0.11947834491729736,
+          0.01822851598262787
+        ]
+      ],
+      "centroid": [
+        -0.09386061131954193,
+        -0.11947834491729736,
+        0.01822851598262787
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 33,
+      "review": "pending"
+    },
+    {
+      "muscle": "iliacus.l",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.10843559354543686,
+          0.014824136160314083,
+          0.0781250074505806
+        ],
+        [
+          0.10335041582584381,
+          0.03366076201200485,
+          0.06566262990236282
+        ],
+        [
+          0.09417343139648438,
+          0.07200323790311813,
+          0.03145477920770645
+        ]
+      ],
+      "centroid": [
+        0.10197317600250244,
+        0.040217041969299316,
+        0.05836810916662216
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Iliacus muscle.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.005712520331144333,
+      "muscleDistanceM": 0.008934695273637772,
+      "review": "REQUIRED: attachment away from named surface"
+    },
+    {
+      "muscle": "iliacus.l",
+      "kind": "insertion",
+      "bone": "femur",
+      "points": [
+        [
+          0.0914933979511261,
+          -0.10197373479604721,
+          0.03859720006585121
+        ]
+      ],
+      "centroid": [
+        0.0914933979511261,
+        -0.10197373479604721,
+        0.03859720006585121
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 45,
+      "review": "pending"
+    },
+    {
+      "muscle": "iliacus.r",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          -0.10843560844659805,
+          0.014824136160314083,
+          0.0781250149011612
+        ],
+        [
+          -0.10335041582584381,
+          0.03366076201200485,
+          0.06566262990236282
+        ],
+        [
+          -0.09417343884706497,
+          0.07200323790311813,
+          0.03145478293299675
+        ]
+      ],
+      "centroid": [
+        -0.10197317600250244,
+        0.040217041969299316,
+        0.05836810916662216
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Iliacus muscle.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0057125212624669075,
+      "muscleDistanceM": 0.008934691548347473,
+      "review": "REQUIRED: attachment away from named surface"
+    },
+    {
+      "muscle": "iliacus.r",
+      "kind": "insertion",
+      "bone": "femur",
+      "points": [
+        [
+          -0.09152239561080933,
+          -0.10134335607290268,
+          0.03904551640152931
+        ]
+      ],
+      "centroid": [
+        -0.09152239561080933,
+        -0.10134335607290268,
+        0.03904551640152931
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 43,
+      "review": "pending"
+    },
+    {
+      "muscle": "fibularis-longus.l",
+      "kind": "origin",
+      "bone": "lower-leg",
+      "points": [
+        [
+          0.11297313123941422,
+          -0.6213553547859192,
+          -0.006574565544724464
+        ],
+        [
+          0.11403992027044296,
+          -0.5451394319534302,
+          -0.003004541387781501
+        ],
+        [
+          0.1161055937409401,
+          -0.5167627334594727,
+          -0.004074226599186659
+        ]
+      ],
+      "centroid": [
+        0.11437289416790009,
+        -0.5610857605934143,
+        -0.00455110939219594
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Fibularis longus muscle.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0009872104274109006,
+      "muscleDistanceM": 0.003860533470287919,
+      "review": "pending"
+    },
+    {
+      "muscle": "fibularis-longus.l",
+      "kind": "insertion",
+      "bone": "foot",
+      "points": [
+        [
+          0.08946849405765533,
+          -0.8732055425643921,
+          0.04522428289055824
+        ]
+      ],
+      "centroid": [
+        0.08946849405765533,
+        -0.8732055425643921,
+        0.04522428289055824
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 69,
+      "review": "pending"
+    },
+    {
+      "muscle": "fibularis-longus.l",
+      "kind": "insertion",
+      "bone": "foot",
+      "points": [
+        [
+          0.08946849405765533,
+          -0.8732055425643921,
+          0.04522428289055824
+        ]
+      ],
+      "centroid": [
+        0.08946849405765533,
+        -0.8732055425643921,
+        0.04522428289055824
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 69,
+      "review": "pending"
+    },
+    {
+      "muscle": "fibularis-longus.r",
+      "kind": "origin",
+      "bone": "lower-leg",
+      "points": [
+        [
+          -0.11297307163476944,
+          -0.6213553547859192,
+          -0.00657456461340189
+        ],
+        [
+          -0.11403988301753998,
+          -0.5451394319534302,
+          -0.0030045367311686277
+        ],
+        [
+          -0.1161055713891983,
+          -0.5167627334594727,
+          -0.004074221011251211
+        ]
+      ],
+      "centroid": [
+        -0.1143728718161583,
+        -0.5610857605934143,
+        -0.004551106598228216
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Fibularis longus muscle.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0009871915681287646,
+      "muscleDistanceM": 0.00383365829475224,
+      "review": "pending"
+    },
+    {
+      "muscle": "fibularis-longus.r",
+      "kind": "insertion",
+      "bone": "foot",
+      "points": [
+        [
+          -0.0893523246049881,
+          -0.8731711506843567,
+          0.045095473527908325
+        ]
+      ],
+      "centroid": [
+        -0.0893523246049881,
+        -0.8731711506843567,
+        0.045095473527908325
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 68,
+      "review": "pending"
+    },
+    {
+      "muscle": "fibularis-longus.r",
+      "kind": "insertion",
+      "bone": "foot",
+      "points": [
+        [
+          -0.0893523246049881,
+          -0.8731711506843567,
+          0.045095473527908325
+        ]
+      ],
+      "centroid": [
+        -0.0893523246049881,
+        -0.8731711506843567,
+        0.045095473527908325
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 68,
+      "review": "pending"
+    }
+  ],
+  "warnings": [
+    "gastrocnemius-medial.l insertion: no 2 mm contact; nearest 125.59 mm",
+    "gastrocnemius-medial.r insertion: no 2 mm contact; nearest 125.59 mm",
+    "gastrocnemius-lateral.l insertion: no 2 mm contact; nearest 139.34 mm",
+    "gastrocnemius-lateral.r insertion: no 2 mm contact; nearest 139.34 mm",
+    "soleus.l insertion: no 2 mm contact; nearest 56.37 mm",
+    "soleus.r insertion: no 2 mm contact; nearest 56.37 mm"
+  ]
+}

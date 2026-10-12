@@ -41,19 +41,22 @@ const extensionPath = require.resolve('@gltf-transform/extensions', {
 const { ALL_EXTENSIONS, EXTMeshoptCompression } = await import(pathToFileURL(extensionPath).href) as typeof import('@gltf-transform/extensions');
 const root = dirname(fileURLToPath(import.meta.url));
 const cache = resolve(root, 'cache');
-const output = resolve(root, '../../public/models/muscles-chest.glb');
-const manifest: Manifest = JSON.parse(await readFile(resolve(root, 'chest/manifest.json'), 'utf8'));
+const topicIndex = process.argv.indexOf('--topic');
+const topic = topicIndex < 0 ? 'chest' : process.argv[topicIndex + 1];
+if (!topic || !['chest','back','shoulders','arms','legs','core'].includes(topic)) throw new Error('Invalid --topic');
+const output = resolve(root, `../../public/models/muscles-${topic}.glb`);
+const manifest: Manifest = JSON.parse(await readFile(resolve(root, `${topic}/manifest.json`), 'utf8'));
 await Promise.all([MeshoptEncoder.ready, MeshoptDecoder.ready]);
 const io = new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({
   'meshopt.encoder': MeshoptEncoder, 'meshopt.decoder': MeshoptDecoder,
 });
-const document = await io.read(resolve(cache, 'chest.raw.glb'));
+const document = await io.read(resolve(cache, `${topic}-raw.glb`));
 const expected = manifest.parts.flatMap((p) =>
   p.exportGroup ? [p.exportGroup] : p.sides === 'bilateral' ? [p.id + '.l', p.id + '.r'] : [p.id]);
 const uniqueExpected = new Set<string>(expected);
-const rig: Rig = JSON.parse(await readFile(resolve(root, 'chest/rig.json'), 'utf8'));
+const rig: Rig = JSON.parse(await readFile(resolve(root, `${topic}/rig.json`), 'utf8'));
 const expectedNodes = new Set<string>(manifest.expectedNodes);
-for (const name of [...uniqueExpected, 'chest-rig', ...rig.joints.map((j) => j.node)]) {
+for (const name of [...uniqueExpected, `${topic}-rig`, ...rig.joints.map((j) => j.node)]) {
   if (!expectedNodes.has(name)) throw new Error(`Manifest node allowlist incomplete: ${name}`);
 }
 function verifyNodes(doc: typeof document) {
@@ -125,6 +128,22 @@ for (const joint of rig.joints) {
     if (Math.abs(Math.hypot(...vector)-1) > .001) throw new Error(`Invalid axis: ${joint.name}`);
   }
 }
+// New regions carry more named muscles than chest. Keep custom accessors float32,
+// but remove sub-display precision before lossless meshopt encoding. Binary-grid
+// rounding avoids wasting bytes on noisy mantissas; directions remain unit within
+// 0.0003 and fibre endpoints stay exactly 0/1. Chest retains its original bytes.
+if (topic !== 'chest') {
+  const rounded = new Set<unknown>();
+  for (const node of meshNodes) for (const primitive of required(node.getMesh(), 'mesh').listPrimitives()) {
+    for (const [semantic, grid] of [['_U',32768],['_FIBRE',4096],['TEXCOORD_0',8192]] as const) {
+      const attribute = primitive.getAttribute(semantic);
+      if (!attribute || rounded.has(attribute)) continue;
+      const values = required(attribute.getArray(), semantic);
+      attribute.setArray(new Float32Array(Array.from(values, (v) => Math.round(v*grid)/grid)));
+      rounded.add(attribute);
+    }
+  }
+}
 await document.transform(
   weld(),
   reorder({ encoder: MeshoptEncoder }),
@@ -140,7 +159,7 @@ document.getRoot().getAsset().copyright = `Muscle and bone meshes: Z-Anatomy —
 for Life Science (CC BY-SA 2.1 Japan as stated by Z-Anatomy; BodyParts3D is now
 CC BY 4.0, https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html).
 Changes for Atlas: structures selected per body region, simplified, re-rigged,
-fibre and attachment data added. This model (muscles-chest.glb) is licensed
+fibre and attachment data added. This model (muscles-${topic}.glb) is licensed
 CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).`;
 const bytes = await io.writeBinary(document);
 // Read the compressed bytes back with the same offline decoder used by the viewer.
@@ -153,6 +172,18 @@ for (const node of decoded.getRoot().listNodes().filter((n) => n.getMesh())) {
     for (const semantic of ['_U', '_FIBRE', 'TEXCOORD_0', 'JOINTS_0', 'WEIGHTS_0']) {
       if (!primitive.getAttribute(semantic)) throw new Error(`${node.getName()}: decoded output lost ${semantic}`);
     }
+    if (topic !== 'chest') {
+      const u = required(primitive.getAttribute('_U'), '_U');
+      const fibre = required(primitive.getAttribute('_FIBRE'), '_FIBRE');
+      const weights = required(primitive.getAttribute('WEIGHTS_0'), 'WEIGHTS_0');
+      const f: number[] = [], w: number[] = [];
+      for (let i=0;i<u.getCount();i++) {
+        fibre.getElement(i,f); weights.getElement(i,w);
+        if (!Number.isFinite(u.getScalar(i)) || u.getScalar(i)<0 || u.getScalar(i)>1 || Math.abs(Math.hypot(...f)-1)>.0003 ||
+            Math.abs(w.reduce((sum,value)=>sum+value,0)-1)>.002) throw new Error(`${node.getName()}: decoded fibre/weight precision failed`);
+      }
+    }
+
   }
 }
 const table = decoded.getRoot().listNodes().filter((n) => n.getMesh()).map((node) => {
@@ -196,7 +227,7 @@ for (const accessor of decoded.getRoot().listAccessors()) accessor.setBuffer(aud
 for (const buffer of decoded.getRoot().listBuffers()) {
   if (buffer !== auditBuffer) buffer.dispose();
 }
-const auditPath = resolve(cache, 'chest.audit.glb');
+const auditPath = resolve(cache, `${topic}-audit.glb`);
 await io.write(auditPath, decoded);
 const audit = await io.read(auditPath);
 for (const node of audit.getRoot().listNodes().filter((n) => n.getMesh())) {
@@ -204,8 +235,8 @@ for (const node of audit.getRoot().listNodes().filter((n) => n.getMesh())) {
     if (!primitive.getAttribute('POSITION')?.getArray()) throw new Error(`Audit copy lost geometry: ${node.getName()}`);
   }
 }
-const summary = { output, bytes: bytes.byteLength, triangles, nodes: table, extensions: ['KHR_mesh_quantization','EXT_meshopt_compression'] };
-await writeFile(resolve(cache, 'chest-optimize-stats.json'), JSON.stringify(summary,null,2)+'\n');
+const summary = { output, bytes: bytes.byteLength, triangles, nodeCount: decoded.getRoot().listNodes().length, drawCalls: table.reduce((sum, r) => sum + r.primitives, 0), nodes: table, extensions: ['KHR_mesh_quantization','EXT_meshopt_compression'] };
+await writeFile(resolve(cache, `${topic}-optimize-stats.json`), JSON.stringify(summary,null,2)+'\n');
 console.table(table);
 console.log(`FINAL ${output}: ${bytes.byteLength.toLocaleString()} bytes (${(bytes.byteLength / 1e6).toFixed(3)} MB), ${triangles.toLocaleString()} triangles`);
 
@@ -250,6 +281,16 @@ function coordinateCheck(doc: typeof document) {
   };
   const skin = required(clouds.get('skin-outline'), 'skin-outline cloud');
   const minY=Math.min(...skin.map((p) => p[1])), maxY=Math.max(...skin.map((p) => p[1]));
+  if (topic !== 'chest') {
+    if (rig.units !== 'm' || rig.coordinates.up !== '+Y' || rig.coordinates.front !== '+Z' || rig.coordinates.left !== '+X' ||
+        !(maxY-minY>1.4 && maxY-minY<2.2) || Math.abs(minY-rig.floorY)>.003) throw new Error('Decoded regional coordinate/scale/floor check failed');
+    for (const [name, points] of clouds) {
+      if (name.endsWith('.l') && mean(points)[0] <= 0) throw new Error(`Left side misplaced: ${name}`);
+      if (name.endsWith('.r') && mean(points)[0] >= 0) throw new Error(`Right side misplaced: ${name}`);
+    }
+    console.log('DECODED REGIONAL COORDINATE CHECK', topic, maxY-minY, minY);
+    return;
+  }
   const clavicle=mean(required(clouds.get('clavicle.l'), 'clavicle.l cloud'));
   const spine=mean(required(clouds.get('thoracic-spine'), 'thoracic-spine cloud'));
   // Sternum is merged into thorax. The midline anterior thorax patch must still

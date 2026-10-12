@@ -1,0 +1,1299 @@
+{
+  "topic": "core",
+  "license": "CC BY-SA 4.0",
+  "coordinates": {
+    "unit": "m",
+    "up": "+Y",
+    "front": "+Z",
+    "left": "+X",
+    "centre": "sternal angle; source floor recorded in rig.json"
+  },
+  "budgets": {
+    "region": {
+      "maxDeviationM": 0.0005,
+      "triangleTargetRange": [
+        4000,
+        8000
+      ]
+    },
+    "neighbour": {
+      "maxDeviationM": 0.0015,
+      "triangleTargetRange": [
+        1000,
+        2000
+      ]
+    },
+    "bone": {
+      "maxDeviationM": 0.001,
+      "triangleTargetRange": [
+        2000,
+        6000
+      ]
+    },
+    "skin": {
+      "maxDeviationM": 0.003,
+      "triangleTargetRange": [
+        15000,
+        20000
+      ]
+    },
+    "total": {
+      "targetBytes": 4000000,
+      "maxBytes": 4000000,
+      "targetTriangles": 350000,
+      "maxTriangles": 350000
+    }
+  },
+  "parts": [
+    {
+      "id": "rectus-abdominis",
+      "objects": [
+        "Rectus abdominis muscle"
+      ],
+      "system": "muscles",
+      "role": "region",
+      "layer": "superficial",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "origin": [
+        "pelvis"
+      ],
+      "insertion": [
+        "ribs"
+      ],
+      "attachmentOwners": [
+        "Rectus abdominis muscle",
+        "Rectus abdominis muscle"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "Rectus abdominis muscle.l",
+        "Rectus abdominis muscle.r"
+      ],
+      "minimumObjects": 1
+    },
+    {
+      "id": "external-oblique",
+      "objects": [
+        "External abdominal oblique muscle"
+      ],
+      "system": "muscles",
+      "role": "region",
+      "layer": "superficial",
+      "sides": "bilateral",
+      "triangleBudget": 8000,
+      "origin": [
+        "ribs"
+      ],
+      "insertion": [
+        "pelvis",
+        "linea-alba"
+      ],
+      "attachmentOwners": [
+        "External abdominal oblique muscle",
+        "External abdominal oblique muscle"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "External abdominal oblique muscle.l",
+        "External abdominal oblique muscle.r"
+      ],
+      "minimumObjects": 1
+    },
+    {
+      "id": "internal-oblique",
+      "objects": [
+        "Internal abdominal oblique muscle"
+      ],
+      "system": "muscles",
+      "role": "region",
+      "layer": "intermediate",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "origin": [
+        "lumbar-spine",
+        "pelvis"
+      ],
+      "insertion": [
+        "ribs",
+        "linea-alba",
+        "pelvis"
+      ],
+      "attachmentOwners": [
+        "Internal abdominal oblique muscle",
+        "Internal abdominal oblique muscle"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "Internal abdominal oblique muscle.l",
+        "Internal abdominal oblique muscle.r"
+      ],
+      "minimumObjects": 1
+    },
+    {
+      "id": "erector-spinae-lumbar",
+      "objects": [
+        "Iliocostalis lumborum muscle",
+        "Longissimus thoracis muscle"
+      ],
+      "system": "muscles",
+      "role": "region",
+      "layer": "intermediate",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "origin": [
+        "pelvis",
+        "pelvis",
+        "lumbar-spine",
+        "thoracic-spine"
+      ],
+      "insertion": [
+        "ribs",
+        "lumbar-spine",
+        "thoracic-spine"
+      ],
+      "attachmentOwners": [
+        "Iliocostalis lumborum muscle",
+        "Longissimus thoracis muscle",
+        "Iliocostalis lumborum muscle",
+        "Longissimus thoracis muscle"
+      ],
+      "protectFolds": true,
+      "scope": "Full iliocostalis-lumborum and longissimus-thoracis sources; lumbar crop pending.",
+      "sourceNames": [
+        "Iliocostalis lumborum muscle.l",
+        "Iliocostalis lumborum muscle.r",
+        "Longissimus thoracis muscle.l",
+        "Longissimus thoracis muscle.r"
+      ],
+      "minimumObjects": 2
+    },
+    {
+      "id": "transversus-abdominis",
+      "objects": [
+        "Transversus abdominis muscle"
+      ],
+      "system": "muscles",
+      "role": "region",
+      "layer": "deep",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "origin": [
+        "ribs",
+        "lumbar-spine",
+        "pelvis"
+      ],
+      "insertion": [
+        "linea-alba",
+        "pelvis"
+      ],
+      "attachmentOwners": [
+        "Transversus abdominis muscle",
+        "Transversus abdominis muscle"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "Transversus abdominis muscle.l",
+        "Transversus abdominis muscle.r"
+      ],
+      "minimumObjects": 1
+    },
+    {
+      "id": "quadratus-lumborum",
+      "objects": [
+        "Quadratus lumborum muscle"
+      ],
+      "system": "muscles",
+      "role": "region",
+      "layer": "deep",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "origin": [
+        "pelvis"
+      ],
+      "insertion": [
+        "ribs",
+        "lumbar-spine"
+      ],
+      "attachmentOwners": [
+        "Quadratus lumborum muscle",
+        "Quadratus lumborum muscle"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "Quadratus lumborum muscle.l",
+        "Quadratus lumborum muscle.r"
+      ],
+      "minimumObjects": 1
+    },
+    {
+      "id": "multifidus-lumborum",
+      "objects": [
+        "Multifidus lumborum muscle"
+      ],
+      "system": "muscles",
+      "role": "region",
+      "layer": "deep",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "origin": [
+        "pelvis",
+        "pelvis",
+        "lumbar-spine"
+      ],
+      "insertion": [
+        "lumbar-spine",
+        "thoracic-spine"
+      ],
+      "attachmentOwners": [
+        "Multifidus lumborum muscle",
+        "Multifidus lumborum muscle"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "Multifidus lumborum muscle.l",
+        "Multifidus lumborum muscle.r"
+      ],
+      "minimumObjects": 1
+    },
+    {
+      "id": "psoas-major",
+      "objects": [
+        "Psoas major"
+      ],
+      "system": "muscles",
+      "role": "region",
+      "layer": "deep",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "origin": [
+        "thoracic-spine",
+        "lumbar-spine"
+      ],
+      "insertion": [
+        "femur"
+      ],
+      "attachmentOwners": [
+        "Psoas major",
+        "Psoas major"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "Psoas major.l",
+        "Psoas major.r"
+      ],
+      "minimumObjects": 1
+    },
+    {
+      "id": "iliacus",
+      "objects": [
+        "Iliacus muscle"
+      ],
+      "system": "muscles",
+      "role": "region",
+      "layer": "deep",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "origin": [
+        "pelvis",
+        "pelvis"
+      ],
+      "insertion": [
+        "femur"
+      ],
+      "attachmentOwners": [
+        "Iliacus muscle",
+        "Iliacus muscle"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "Iliacus muscle.l",
+        "Iliacus muscle.r"
+      ],
+      "minimumObjects": 1
+    },
+    {
+      "id": "gluteus-maximus",
+      "objects": [
+        "Gluteus maximus muscle"
+      ],
+      "system": "muscles",
+      "role": "neighbour",
+      "layer": "neighbours",
+      "sides": "bilateral",
+      "triangleBudget": 2000,
+      "origin": [
+        "pelvis",
+        "pelvis",
+        "pelvis"
+      ],
+      "insertion": [
+        "iliotibial-tract",
+        "femur"
+      ],
+      "attachmentOwners": [
+        "Gluteus maximus muscle",
+        "Gluteus maximus muscle"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "Gluteus maximus muscle.l",
+        "Gluteus maximus muscle.r"
+      ],
+      "minimumObjects": 1
+    },
+    {
+      "id": "tensor-fasciae-latae",
+      "objects": [
+        "Tensor fasciae latae"
+      ],
+      "system": "muscles",
+      "role": "neighbour",
+      "layer": "neighbours",
+      "sides": "bilateral",
+      "triangleBudget": 1500,
+      "origin": [
+        "pelvis"
+      ],
+      "insertion": [
+        "iliotibial-tract"
+      ],
+      "attachmentOwners": [
+        "Tensor fasciae latae",
+        "Tensor fasciae latae"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "Tensor fasciae latae.l",
+        "Tensor fasciae latae.r"
+      ],
+      "minimumObjects": 1
+    },
+    {
+      "id": "latissimus-dorsi",
+      "objects": [
+        "Latissimus dorsi muscle"
+      ],
+      "system": "muscles",
+      "role": "neighbour",
+      "layer": "neighbours",
+      "sides": "bilateral",
+      "triangleBudget": 2000,
+      "origin": [
+        "thoracic-spine",
+        "lumbar-spine",
+        "pelvis",
+        "ribs"
+      ],
+      "insertion": [
+        "humerus"
+      ],
+      "attachmentOwners": [
+        "Latissimus dorsi muscle",
+        "Latissimus dorsi muscle"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "Latissimus dorsi muscle.l",
+        "Latissimus dorsi muscle.r"
+      ],
+      "minimumObjects": 1
+    },
+    {
+      "id": "serratus-anterior",
+      "objects": [
+        "Serratus anterior muscle"
+      ],
+      "system": "muscles",
+      "role": "neighbour",
+      "layer": "neighbours",
+      "sides": "bilateral",
+      "triangleBudget": 1500,
+      "origin": [
+        "ribs"
+      ],
+      "insertion": [
+        "scapula"
+      ],
+      "attachmentOwners": [
+        "Serratus anterior muscle",
+        "Serratus anterior muscle"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "Serratus anterior muscle.l",
+        "Serratus anterior muscle.r"
+      ],
+      "minimumObjects": 1
+    },
+    {
+      "id": "sternum",
+      "objects": [
+        "Manubrium of sternum",
+        "Body of sternum",
+        "Xiphoid process"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "unsided",
+      "triangleBudget": 3000,
+      "moving": false,
+      "exportGroup": "thorax",
+      "exportTriangleCap": 25000,
+      "sourceNames": [
+        "Body of sternum",
+        "Manubrium of sternum",
+        "Xiphoid process"
+      ]
+    },
+    {
+      "id": "ribs",
+      "objects": [],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "unsided",
+      "triangleBudget": 22000,
+      "moving": false,
+      "exportGroup": "thorax",
+      "patterns": [
+        "(?:First|Second|Third|Fourth|Fifth|Sixth|Seventh|Eighth|Ninth|Tenth|Eleventh|Twelfth) rib",
+        "Costal cartilage of (?:first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth) rib"
+      ],
+      "exportTriangleCap": 25000,
+      "sourceNames": [
+        "Costal cartilage of eighth rib.l",
+        "Costal cartilage of eighth rib.r",
+        "Costal cartilage of fifth rib.l",
+        "Costal cartilage of fifth rib.r",
+        "Costal cartilage of first rib.l",
+        "Costal cartilage of first rib.r",
+        "Costal cartilage of fourth rib.l",
+        "Costal cartilage of fourth rib.r",
+        "Costal cartilage of ninth rib.l",
+        "Costal cartilage of ninth rib.r",
+        "Costal cartilage of second rib.l",
+        "Costal cartilage of second rib.r",
+        "Costal cartilage of seventh rib.l",
+        "Costal cartilage of seventh rib.r",
+        "Costal cartilage of sixth rib.l",
+        "Costal cartilage of sixth rib.r",
+        "Costal cartilage of tenth rib.l",
+        "Costal cartilage of tenth rib.r",
+        "Costal cartilage of third rib.l",
+        "Costal cartilage of third rib.r",
+        "Eighth rib.l",
+        "Eighth rib.r",
+        "Eleventh rib.l",
+        "Eleventh rib.r",
+        "Fifth rib.l",
+        "Fifth rib.r",
+        "First rib.l",
+        "First rib.r",
+        "Fourth rib.l",
+        "Fourth rib.r",
+        "Ninth rib.l",
+        "Ninth rib.r",
+        "Second rib.l",
+        "Second rib.r",
+        "Seventh rib.l",
+        "Seventh rib.r",
+        "Sixth rib.l",
+        "Sixth rib.r",
+        "Tenth rib.l",
+        "Tenth rib.r",
+        "Third rib.l",
+        "Third rib.r",
+        "Twelfth rib.l",
+        "Twelfth rib.r"
+      ]
+    },
+    {
+      "id": "thoracic-spine",
+      "objects": [],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "unsided",
+      "triangleBudget": 15000,
+      "moving": false,
+      "patterns": [
+        "Vertebra T(?:[1-9]|1[0-2])"
+      ],
+      "sourceNames": [
+        "Vertebra T1",
+        "Vertebra T10",
+        "Vertebra T11",
+        "Vertebra T12",
+        "Vertebra T2",
+        "Vertebra T3",
+        "Vertebra T4",
+        "Vertebra T5",
+        "Vertebra T6",
+        "Vertebra T7",
+        "Vertebra T8",
+        "Vertebra T9"
+      ]
+    },
+    {
+      "id": "lumbar-spine",
+      "objects": [],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "unsided",
+      "triangleBudget": 6000,
+      "moving": false,
+      "patterns": [
+        "Vertebra L[1-5]"
+      ],
+      "sourceNames": [
+        "Vertebra L1",
+        "Vertebra L2",
+        "Vertebra L3",
+        "Vertebra L4",
+        "Vertebra L5"
+      ]
+    },
+    {
+      "id": "pelvis",
+      "objects": [
+        "Hip bone",
+        "Sacrum",
+        "Coccyx"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "unsided",
+      "triangleBudget": 12000,
+      "moving": false,
+      "sourceNames": [
+        "Coccyx",
+        "Hip bone.l",
+        "Hip bone.r",
+        "Sacrum"
+      ]
+    },
+    {
+      "id": "femur",
+      "objects": [
+        "Femur"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 6000,
+      "moving": true,
+      "sourceNames": [
+        "Femur.l",
+        "Femur.r"
+      ]
+    },
+    {
+      "id": "skin-outline",
+      "objects": [
+        "Anal region",
+        "Angle of mouth",
+        "Anterior notch of auricle",
+        "Anterior region of ankle",
+        "Anterior region of arm",
+        "Anterior region of elbow",
+        "Anterior region of forearm",
+        "Anterior region of knee",
+        "Anterior region of leg",
+        "Anterior region of thigh",
+        "Anterior region of wrist",
+        "Antihelix",
+        "Antitragus",
+        "Apex of auricle",
+        "Auricular region",
+        "Auricular tubercle",
+        "Buccal region",
+        "Carotid triangle",
+        "Cavity of concha",
+        "Concha of auricle",
+        "Crura of antihelix",
+        "Cubital fossa",
+        "Cymba conchae",
+        "Deltoid region",
+        "Deltopectoral triangle",
+        "Distal transverse arch of foot",
+        "Dorsal surfaces of digits of foot",
+        "Dorsal surfaces of digits of hand",
+        "Dorsum of foot",
+        "Dorsum of hand",
+        "Eminentia conchae",
+        "Eminentia fossae triangularis",
+        "Eminentia scaphae",
+        "Epigastric region",
+        "Eyebrow",
+        "Femoral triangle",
+        "Fossa antihelica",
+        "Frontal region",
+        "Gluteal fold",
+        "Gluteal region",
+        "Greater supraclavicular fossa",
+        "Hallucial eminence",
+        "Heel region",
+        "Helix",
+        "Hip region",
+        "Hypochondriac region",
+        "Hypogastric region",
+        "Infra-orbital region",
+        "Infraclavicular fossa",
+        "Inframammary region",
+        "Infrascapular region",
+        "Inguinal region",
+        "Interscapular region",
+        "Intertragic incisure",
+        "Labial commissure",
+        "Lateral bicipital groove",
+        "Lateral border of foot",
+        "Lateral border of forearm",
+        "Lateral malleolus",
+        "Lateral part of longitudinal arch of foot",
+        "Lateral region of abdomen",
+        "Lateral region of neck",
+        "Lateral region of thorax",
+        "Lateral retromalleolar region",
+        "Lesser supraclavicular fossa",
+        "Lobule of auricle",
+        "Lumbar region",
+        "Mammary region",
+        "Mastoid region",
+        "Medial bicipital groove",
+        "Medial border of foot",
+        "Medial border of forearm",
+        "Medial malleolus",
+        "Medial part of longitudinal arch of foot",
+        "Medial retromalleolar region",
+        "Mental region",
+        "Mentolabial sulcus",
+        "Metatarsal region",
+        "Muscular triangle",
+        "Nasal region",
+        "Nasolabial sulcus",
+        "Occipital region",
+        "Oral region",
+        "Orbital region",
+        "Palm",
+        "Palmar surfaces of digits of hand",
+        "Parietal region",
+        "Parotideomasseteric region",
+        "Pectoral region",
+        "Philtrum",
+        "Plantar surfaces of digits of foot",
+        "Popliteal fossa",
+        "Posterior auricular groove",
+        "Posterior region of arm",
+        "Posterior region of elbow",
+        "Posterior region of forearm",
+        "Posterior region of knee",
+        "Posterior region of leg",
+        "Posterior region of neck",
+        "Posterior region of thigh",
+        "Posterior region of wrist",
+        "Presternal region",
+        "Proximal transverse arch of foot",
+        "Radial foveola",
+        "Sacral region",
+        "Scapha",
+        "Scapular region",
+        "Sole",
+        "Sternocleidomastoid region",
+        "Submandibular triangle",
+        "Submental triangle",
+        "Temporal region",
+        "Tragus",
+        "Triangle of auscultation",
+        "Triangular fossa",
+        "Tubercle of upper lip",
+        "Umbilical region",
+        "Umbilicus",
+        "Urogenital region",
+        "Vertebral region",
+        "Zygomatic region"
+      ],
+      "system": "regions",
+      "role": "skin",
+      "layer": "context",
+      "sides": "unsided",
+      "triangleBudget": 30000,
+      "minimumObjects": 180,
+      "triangleCap": 30000,
+      "sourceNames": [
+        "Anal region.l",
+        "Anal region.r",
+        "Angle of mouth.l",
+        "Angle of mouth.r",
+        "Anterior notch of auricle.l",
+        "Anterior notch of auricle.r",
+        "Anterior region of ankle.l",
+        "Anterior region of ankle.r",
+        "Anterior region of arm.l",
+        "Anterior region of arm.r",
+        "Anterior region of elbow.l",
+        "Anterior region of elbow.r",
+        "Anterior region of forearm.l",
+        "Anterior region of forearm.r",
+        "Anterior region of knee.l",
+        "Anterior region of knee.r",
+        "Anterior region of leg.l",
+        "Anterior region of leg.r",
+        "Anterior region of thigh.l",
+        "Anterior region of thigh.r",
+        "Anterior region of wrist.l",
+        "Anterior region of wrist.r",
+        "Antihelix.l",
+        "Antihelix.r",
+        "Antitragus.l",
+        "Antitragus.r",
+        "Apex of auricle.l",
+        "Apex of auricle.r",
+        "Auricular region.l",
+        "Auricular region.r",
+        "Auricular tubercle.l",
+        "Auricular tubercle.r",
+        "Buccal region.l",
+        "Buccal region.r",
+        "Carotid triangle.l",
+        "Carotid triangle.r",
+        "Cavity of concha.l",
+        "Cavity of concha.r",
+        "Concha of auricle.l",
+        "Concha of auricle.r",
+        "Crura of antihelix.l",
+        "Crura of antihelix.r",
+        "Cubital fossa.l",
+        "Cubital fossa.r",
+        "Cymba conchae.l",
+        "Cymba conchae.r",
+        "Deltoid region.l",
+        "Deltoid region.r",
+        "Deltopectoral triangle.l",
+        "Deltopectoral triangle.r",
+        "Distal transverse arch of foot.l",
+        "Distal transverse arch of foot.r",
+        "Dorsal surfaces of digits of foot.l",
+        "Dorsal surfaces of digits of foot.r",
+        "Dorsal surfaces of digits of hand.l",
+        "Dorsal surfaces of digits of hand.r",
+        "Dorsum of foot.l",
+        "Dorsum of foot.r",
+        "Dorsum of hand.l",
+        "Dorsum of hand.r",
+        "Eminentia conchae.l",
+        "Eminentia conchae.r",
+        "Eminentia fossae triangularis.l",
+        "Eminentia fossae triangularis.r",
+        "Eminentia scaphae.l",
+        "Eminentia scaphae.r",
+        "Epigastric region.l",
+        "Epigastric region.r",
+        "Eyebrow.l",
+        "Eyebrow.r",
+        "Femoral triangle.l",
+        "Femoral triangle.r",
+        "Fossa antihelica.l",
+        "Fossa antihelica.r",
+        "Frontal region.l",
+        "Frontal region.r",
+        "Gluteal fold.l",
+        "Gluteal fold.r",
+        "Gluteal region.l",
+        "Gluteal region.r",
+        "Greater supraclavicular fossa.l",
+        "Greater supraclavicular fossa.r",
+        "Hallucial eminence.l",
+        "Hallucial eminence.r",
+        "Heel region.l",
+        "Heel region.r",
+        "Helix.l",
+        "Helix.r",
+        "Hip region.l",
+        "Hip region.r",
+        "Hypochondriac region.l",
+        "Hypochondriac region.r",
+        "Hypogastric region.l",
+        "Hypogastric region.r",
+        "Infra-orbital region.l",
+        "Infra-orbital region.r",
+        "Infraclavicular fossa.l",
+        "Infraclavicular fossa.r",
+        "Inframammary region.l",
+        "Inframammary region.r",
+        "Infrascapular region.l",
+        "Infrascapular region.r",
+        "Inguinal region.l",
+        "Inguinal region.r",
+        "Interscapular region.l",
+        "Interscapular region.r",
+        "Intertragic incisure.l",
+        "Intertragic incisure.r",
+        "Labial commissure.l",
+        "Labial commissure.r",
+        "Lateral bicipital groove.l",
+        "Lateral bicipital groove.r",
+        "Lateral border of foot.l",
+        "Lateral border of foot.r",
+        "Lateral border of forearm.l",
+        "Lateral border of forearm.r",
+        "Lateral malleolus.l",
+        "Lateral malleolus.r",
+        "Lateral part of longitudinal arch of foot.l",
+        "Lateral part of longitudinal arch of foot.r",
+        "Lateral region of abdomen.l",
+        "Lateral region of abdomen.r",
+        "Lateral region of neck.l",
+        "Lateral region of neck.r",
+        "Lateral region of thorax.l",
+        "Lateral region of thorax.r",
+        "Lateral retromalleolar region.l",
+        "Lateral retromalleolar region.r",
+        "Lesser supraclavicular fossa.l",
+        "Lesser supraclavicular fossa.r",
+        "Lobule of auricle.l",
+        "Lobule of auricle.r",
+        "Lumbar region.l",
+        "Lumbar region.r",
+        "Mammary region.l",
+        "Mammary region.r",
+        "Mastoid region.l",
+        "Mastoid region.r",
+        "Medial bicipital groove.l",
+        "Medial bicipital groove.r",
+        "Medial border of foot.l",
+        "Medial border of foot.r",
+        "Medial border of forearm.l",
+        "Medial border of forearm.r",
+        "Medial malleolus.l",
+        "Medial malleolus.r",
+        "Medial part of longitudinal arch of foot.l",
+        "Medial part of longitudinal arch of foot.r",
+        "Medial retromalleolar region.l",
+        "Medial retromalleolar region.r",
+        "Mental region.l",
+        "Mental region.r",
+        "Mentolabial sulcus.l",
+        "Mentolabial sulcus.r",
+        "Metatarsal region.l",
+        "Metatarsal region.r",
+        "Muscular triangle.l",
+        "Muscular triangle.r",
+        "Nasal region.l",
+        "Nasal region.r",
+        "Nasolabial sulcus.l",
+        "Nasolabial sulcus.r",
+        "Occipital region.l",
+        "Occipital region.r",
+        "Oral region.l",
+        "Oral region.r",
+        "Orbital region.l",
+        "Orbital region.r",
+        "Palm.l",
+        "Palm.r",
+        "Palmar surfaces of digits of hand.l",
+        "Palmar surfaces of digits of hand.r",
+        "Parietal region.l",
+        "Parietal region.r",
+        "Parotideomasseteric region.l",
+        "Parotideomasseteric region.r",
+        "Pectoral region.l",
+        "Pectoral region.r",
+        "Philtrum.l",
+        "Philtrum.r",
+        "Plantar surfaces of digits of foot.l",
+        "Plantar surfaces of digits of foot.r",
+        "Popliteal fossa.l",
+        "Popliteal fossa.r",
+        "Posterior auricular groove.l",
+        "Posterior auricular groove.r",
+        "Posterior region of arm.l",
+        "Posterior region of arm.r",
+        "Posterior region of elbow.l",
+        "Posterior region of elbow.r",
+        "Posterior region of forearm.l",
+        "Posterior region of forearm.r",
+        "Posterior region of knee.l",
+        "Posterior region of knee.r",
+        "Posterior region of leg.l",
+        "Posterior region of leg.r",
+        "Posterior region of neck.l",
+        "Posterior region of neck.r",
+        "Posterior region of thigh.l",
+        "Posterior region of thigh.r",
+        "Posterior region of wrist.l",
+        "Posterior region of wrist.r",
+        "Presternal region.l",
+        "Presternal region.r",
+        "Proximal transverse arch of foot.l",
+        "Proximal transverse arch of foot.r",
+        "Radial foveola.l",
+        "Radial foveola.r",
+        "Sacral region.l",
+        "Sacral region.r",
+        "Scapha.l",
+        "Scapha.r",
+        "Scapular region.l",
+        "Scapular region.r",
+        "Sole.l",
+        "Sole.r",
+        "Sternocleidomastoid region.l",
+        "Sternocleidomastoid region.r",
+        "Submandibular triangle.l",
+        "Submandibular triangle.r",
+        "Submental triangle.l",
+        "Submental triangle.r",
+        "Temporal region.l",
+        "Temporal region.r",
+        "Tragus.l",
+        "Tragus.r",
+        "Triangle of auscultation.l",
+        "Triangle of auscultation.r",
+        "Triangular fossa.l",
+        "Triangular fossa.r",
+        "Tubercle of upper lip.l",
+        "Tubercle of upper lip.r",
+        "Umbilical region.l",
+        "Umbilical region.r",
+        "Umbilicus.l",
+        "Umbilicus.r",
+        "Urogenital region.l",
+        "Urogenital region.r",
+        "Vertebral region.l",
+        "Vertebral region.r",
+        "Zygomatic region.l",
+        "Zygomatic region.r"
+      ]
+    }
+  ],
+  "referenceParts": [
+    {
+      "id": "clavicle",
+      "objects": [
+        "Clavicle"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 1500,
+      "moving": true
+    },
+    {
+      "id": "scapula",
+      "objects": [
+        "Scapula"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "moving": true
+    },
+    {
+      "id": "humerus",
+      "objects": [
+        "Humerus"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "moving": true
+    },
+    {
+      "id": "forearm",
+      "objects": [
+        "Radius",
+        "Ulna"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "moving": true,
+      "specId": "forearm-bones"
+    },
+    {
+      "id": "sternum",
+      "objects": [
+        "Manubrium of sternum",
+        "Body of sternum",
+        "Xiphoid process"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "unsided",
+      "triangleBudget": 3000,
+      "moving": false,
+      "exportGroup": "thorax",
+      "exportTriangleCap": 25000
+    },
+    {
+      "id": "ribs",
+      "objects": [],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "unsided",
+      "triangleBudget": 22000,
+      "moving": false,
+      "exportGroup": "thorax",
+      "patterns": [
+        "(?:First|Second|Third|Fourth|Fifth|Sixth|Seventh|Eighth|Ninth|Tenth|Eleventh|Twelfth) rib",
+        "Costal cartilage of (?:first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth) rib"
+      ],
+      "exportTriangleCap": 25000
+    },
+    {
+      "id": "thoracic-spine",
+      "objects": [],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "unsided",
+      "triangleBudget": 15000,
+      "moving": false,
+      "patterns": [
+        "Vertebra T(?:[1-9]|1[0-2])"
+      ]
+    },
+    {
+      "id": "lumbar-spine",
+      "objects": [],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "unsided",
+      "triangleBudget": 6000,
+      "moving": false,
+      "patterns": [
+        "Vertebra L[1-5]"
+      ]
+    },
+    {
+      "id": "cervical-spine",
+      "objects": [
+        "Atlas (C1)",
+        "Axis (C2)"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "unsided",
+      "triangleBudget": 6000,
+      "moving": false,
+      "patterns": [
+        "Vertebra C[3-7]"
+      ]
+    },
+    {
+      "id": "pelvis",
+      "objects": [
+        "Hip bone",
+        "Sacrum",
+        "Coccyx"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "unsided",
+      "triangleBudget": 12000,
+      "moving": false
+    },
+    {
+      "id": "femur",
+      "objects": [
+        "Femur"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 6000,
+      "moving": true
+    },
+    {
+      "id": "patella",
+      "objects": [
+        "Patella"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 1500,
+      "moving": true
+    },
+    {
+      "id": "lower-leg",
+      "objects": [
+        "Tibia",
+        "Fibula"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 6000,
+      "moving": true
+    },
+    {
+      "id": "radius",
+      "objects": [
+        "Radius"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 2500,
+      "moving": true
+    },
+    {
+      "id": "ulna",
+      "objects": [
+        "Ulna"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 2500,
+      "moving": true
+    },
+    {
+      "id": "hand",
+      "objects": [
+        "Scaphoid bone",
+        "Lunate bone",
+        "Triquetrum bone",
+        "Pisiform bone",
+        "Trapezium bone",
+        "Trapezoid bone",
+        "Capitate bone",
+        "Hamate bone"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 6000,
+      "moving": true,
+      "patterns": [
+        "(?:First|Second|Third|Fourth|Fifth) metacarpal bone",
+        "(?:Proximal|Middle|Distal) phalanx of (?:first|second|third|fourth|fifth) finger of hand"
+      ]
+    },
+    {
+      "id": "foot",
+      "objects": [
+        "Calcaneus",
+        "Talus",
+        "Navicular bone",
+        "Cuboid bone",
+        "Medial cuneiform bone",
+        "Intermediate cuneiform bone",
+        "Lateral cuneiform bone",
+        "Sesamoid bones of foot"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 6000,
+      "moving": true,
+      "patterns": [
+        "(?:First|Second|Third|Fourth|Fifth) metatarsal bone",
+        "(?:Proximal|Middle|Distal) phalanx of (?:first|second|third|fourth|fifth) finger of foot"
+      ]
+    },
+    {
+      "id": "skull",
+      "objects": [
+        "Occipital bone"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "unsided",
+      "triangleBudget": 2000,
+      "moving": false
+    },
+    {
+      "id": "linea-alba",
+      "objects": [
+        "Linea alba"
+      ],
+      "system": "muscles"
+    },
+    {
+      "id": "iliotibial-tract",
+      "objects": [
+        "Iliotibial tract"
+      ],
+      "system": "muscles"
+    }
+  ],
+  "jointNames": [
+    "trunk",
+    "hip.l",
+    "hip.r"
+  ],
+  "expectedNodes": [
+    "erector-spinae-lumbar.l",
+    "erector-spinae-lumbar.r",
+    "external-oblique.l",
+    "external-oblique.r",
+    "femur.l",
+    "femur.r",
+    "gluteus-maximus.l",
+    "gluteus-maximus.r",
+    "iliacus.l",
+    "iliacus.r",
+    "internal-oblique.l",
+    "internal-oblique.r",
+    "latissimus-dorsi.l",
+    "latissimus-dorsi.r",
+    "lumbar-spine",
+    "multifidus-lumborum.l",
+    "multifidus-lumborum.r",
+    "pelvis",
+    "psoas-major.l",
+    "psoas-major.r",
+    "quadratus-lumborum.l",
+    "quadratus-lumborum.r",
+    "rectus-abdominis.l",
+    "rectus-abdominis.r",
+    "serratus-anterior.l",
+    "serratus-anterior.r",
+    "skin-outline",
+    "tensor-fasciae-latae.l",
+    "tensor-fasciae-latae.r",
+    "thoracic-spine",
+    "thorax",
+    "transversus-abdominis.l",
+    "transversus-abdominis.r",
+    "core-rig",
+    "joint.trunk",
+    "joint.hip.l",
+    "joint.hip.r"
+  ],
+  "notes": [
+    "Selected from docs/16 \u00a75.3, region reviews and exact cached FBX inventory; no mirrored geometry.",
+    "Parent/group cards are not duplicated as meshes. Neighbours include adjacent exercise secondary/stabiliser muscles; distant whole-body stabilisers excluded.",
+    "Reference surfaces outside the exported bone list are used only for attachment and joint evidence.",
+    "Whole neighbour muscle extents retained at low budget; educational crops remain [\u5f85\u6838].",
+    "Intrinsic hand/foot muscles and deep forearm flexors excluded by v1 scope; hand/foot bones are merged per side.",
+    "Optional thoracolumbar fascia, linea alba and diaphragm omitted. Linea-alba attachment evidence uses the unexported named source surface.",
+    "No named region muscle is missing in Z-Anatomy; multifidus uses the actual paired lumbar meshes, not rotatores or invented geometry."
+  ]
+}

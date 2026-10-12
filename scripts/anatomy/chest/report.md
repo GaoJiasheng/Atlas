@@ -56,7 +56,7 @@ Renderer: Blender Workbench studio; flat paper #EDE7D6, orthographic non-skin fr
 The five review images are front, back, body-left, exploded-by-layer and opaque full-body skin. The pose image uses the decoded final GLB skin, with shoulder.l and elbow.l flexion inputs of 90°.
 Measured left humerus forward displacement (+Z): 0.145641 m; resulting upper-arm/forearm bend: 103.00° (includes the source rest angle). All sampled muscle edges remain finite.
 The midline column is thoracic spine: source sternum centroid z=0.02616 m, spine centroid z=-0.11519 m. Spine is posterior and its transform agrees with the source audit.
-Visual inspection confirmed both sides, three pec-major parts per side, pec minor beneath, serratus slips along ribs, intercostals between ribs, midline sternum, posterior scapulae, hanging arm bones and a connected posed axilla. An additional cache/preview-deep-check.png exposes the intermediate/deep structures with superficial muscles hidden.
+Visual inspection confirmed both sides, three pec-major parts per side, pec minor beneath, serratus slips along ribs, intercostals between ribs, midline sternum, posterior scapulae, hanging arm bones and a connected posed axilla. The exploded-by-layer preview lifts superficial and intermediate structures to inspect underlying anatomy.
 The opaque skin and translucent same-camera shell passes place the selected anatomy inside the source body outline; source regional skin seams remain visible. Anatomical attachment approval remains separate.
 
 
@@ -84,7 +84,7 @@ Chest source centre: [-1.6483021681779064e-05, -0.055000342428684235, 1.34993600
 | elbow.r | -0.22317, -0.23922, -0.09501 | midpoint of epicondyle .j landmarks | passed |
 | wrist.r | -0.24351, -0.50444, -0.04325 | styloid landmark / distal forearm | passed |
 
-Shoulder and elbow flexion axes point toward −X: a downward left arm rotates toward +Z. Preview check poses the decoded final skin at shoulder.l flexion 90° and elbow.l flexion 90°; see cache/preview-pose.png.
+Shoulder and elbow flexion axes point toward −X: a downward left arm rotates toward +Z. Preview check poses the decoded final skin at shoulder.l flexion 90° and elbow.l flexion 90°; see cache/chest-preview-pose.png.
 
 ## Attachment candidates against spec §1.3
 

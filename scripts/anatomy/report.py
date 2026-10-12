@@ -9,12 +9,13 @@ from mathutils import Vector
 from mathutils.bvhtree import BVHTree
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import CACHE, ROOT, clear_scene, save_json, topology, world_vertices
+from common import CACHE, ROOT, clear_scene, save_json, topology, world_vertices, topic_argument
 
-TOPIC = ROOT/'chest'
+TOPIC_NAME = topic_argument()
+TOPIC = ROOT/TOPIC_NAME
 manifest = json.loads((TOPIC/'manifest.json').read_text())
-stats = {r['name']:r for r in json.loads((CACHE/'chest-build-stats.json').read_text())}
-summary = json.loads((CACHE/'chest-optimize-stats.json').read_text())
+stats = {r['name']:r for r in json.loads((CACHE/f'{TOPIC_NAME}-build-stats.json').read_text())}
+summary = json.loads((CACHE/f'{TOPIC_NAME}-optimize-stats.json').read_text())
 rig = json.loads((TOPIC/'rig.json').read_text())
 sites = json.loads((TOPIC/'attachments.json').read_text())
 
@@ -60,12 +61,13 @@ def directed(geometry_a,geometry_b):
     return max(tree.find_nearest(p)[3] for p in samples(*geometry_a))
 
 
-bpy.ops.wm.open_mainfile(filepath=str(CACHE/'chest-review.blend'))
+bpy.ops.wm.open_mainfile(filepath=str(CACHE/f'{TOPIC_NAME}-review.blend'))
 original={ob.name.removesuffix('-before'):geometry(ob) for ob in bpy.data.objects
           if ob.type=='MESH' and ob.name.endswith('-before')}
-original['thorax']=merge(original.pop('sternum'),original.pop('ribs'))
+if 'sternum' in original and 'ribs' in original:
+    original['thorax']=merge(original.pop('sternum'),original.pop('ribs'))
 clear_scene()
-bpy.ops.import_scene.gltf(filepath=str(CACHE/'chest.audit.glb'), disable_bone_shape=True)
+bpy.ops.import_scene.gltf(filepath=str(CACHE/f'{TOPIC_NAME}-audit.glb'), disable_bone_shape=True)
 rows=[]
 failures=[]
 for ob in sorted(bpy.context.scene.objects,key=lambda o:o.name):
@@ -97,6 +99,13 @@ for ob in sorted(bpy.context.scene.objects,key=lambda o:o.name):
     print(f'REPORT {name}: {deviation*1000:.3f} mm',flush=True)
 if set(original)!=set(r['name'] for r in rows):
     raise RuntimeError('Final output lost a source mesh')
+if TOPIC_NAME != 'chest':
+    from regional import write_report
+    write_report(TOPIC_NAME, manifest, summary, rig, sites, rows, failures)
+    save_json(CACHE/f'{TOPIC_NAME}-report-stats.json',rows)
+    if failures:
+        raise RuntimeError('; '.join(failures))
+    raise SystemExit(0)
 lines=['# Chest mesh review', '',
        f"Final GLB: **{summary['bytes']:,} bytes** ({summary['bytes']/1e6:.3f} MB), **{summary['triangles']:,} triangles**.",
        '', 'Geometry and attachments: CC BY-SA 4.0.', '',
@@ -110,8 +119,8 @@ for r in rows:
     lines.append(f"| {r['name']} | {r['role']} | {r['beforeTriangles']:,} | {r['afterTriangles']:,} | "
                  f"{r['sampledHausdorffM']*1000:.3f} | {r['budgetM']*1000:.1f} | "
                  f"{r['closedBefore']} → {r['closedAfter']} | {r['boundaryEdges']} |")
-pose_stats = json.loads((CACHE/'chest-pose-stats.json').read_text())
-preview_stats = json.loads((CACHE/'chest-preview-backend.json').read_text())
+pose_stats = json.loads((CACHE/f'{TOPIC_NAME}-pose-stats.json').read_text())
+preview_stats = json.loads((CACHE/f'{TOPIC_NAME}-preview-backend.json').read_text())
 lines += ['', '## Native preview and motion checks', '',
           f"Renderer: {preview_stats['backend']}; flat paper #EDE7D6, orthographic non-skin framing with 5% margin per edge.",
           'The five review images are front, back, body-left, exploded-by-layer and opaque full-body skin. '
@@ -122,7 +131,7 @@ lines += ['', '## Native preview and motion checks', '',
           f"spine centroid z={rig['coordinateCheck']['thoracicSpine'][2]:.5f} m. Spine is posterior and its transform agrees with the source audit.",
           'Visual inspection confirmed both sides, three pec-major parts per side, pec minor beneath, serratus slips along ribs, '
           'intercostals between ribs, midline sternum, posterior scapulae, hanging arm bones and a connected posed axilla. '
-          'An additional cache/preview-deep-check.png exposes the intermediate/deep structures with superficial muscles hidden.',
+          'The exploded-by-layer preview lifts superficial and intermediate structures to inspect underlying anatomy.',
           'The opaque skin and translucent same-camera shell passes place the selected anatomy inside the source body outline; '
           'source regional skin seams remain visible. Anatomical attachment approval remains separate.', '']
 lines += ['', '## Budgets and coordinate gates', '',
@@ -137,7 +146,7 @@ lines += ['', '## Budgets and coordinate gates', '',
 for joint in rig['joints']:
     lines.append(f"| {joint['name']} | {', '.join(f'{v:.5f}' for v in joint['position'])} | {joint['source']} | passed |")
 lines += ['', 'Shoulder and elbow flexion axes point toward −X: a downward left arm rotates toward +Z. '
-          'Preview check poses the decoded final skin at shoulder.l flexion 90° and elbow.l flexion 90°; see cache/preview-pose.png.',
+          'Preview check poses the decoded final skin at shoulder.l flexion 90° and elbow.l flexion 90°; see cache/chest-preview-pose.png.',
           '', '## Attachment candidates against spec §1.3', '',
           'Every box is a human review gate. Geometry proximity does not verify anatomy. '
           'The spec itself leaves rib counts and tendon wording pending; no external references were fetched.', '']
@@ -175,7 +184,7 @@ lines += [f'- {warning}' for warning in sites['warnings'] + topology_warnings] o
 lines += ['', '## Automatic result', '']
 lines += [f'- FAIL: {failure}' for failure in failures] or ['Geometry error budgets and topology checks passed. Anatomical review remains pending.']
 (TOPIC/'report.md').write_text('\n'.join(lines)+'\n')
-save_json(CACHE/'chest-report-stats.json',rows)
+save_json(CACHE/f'{TOPIC_NAME}-report-stats.json',rows)
 if failures:
     raise RuntimeError('; '.join(failures))
 print(TOPIC/'report.md',flush=True)

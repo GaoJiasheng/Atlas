@@ -1,0 +1,1651 @@
+{
+  "topic": "arms",
+  "license": "CC BY-SA 4.0",
+  "coordinates": {
+    "unit": "m",
+    "up": "+Y",
+    "front": "+Z",
+    "left": "+X",
+    "centre": "sternal angle; source floor recorded in rig.json"
+  },
+  "budgets": {
+    "region": {
+      "maxDeviationM": 0.0005,
+      "triangleTargetRange": [
+        4000,
+        8000
+      ]
+    },
+    "neighbour": {
+      "maxDeviationM": 0.0015,
+      "triangleTargetRange": [
+        1000,
+        2000
+      ]
+    },
+    "bone": {
+      "maxDeviationM": 0.001,
+      "triangleTargetRange": [
+        2000,
+        6000
+      ]
+    },
+    "skin": {
+      "maxDeviationM": 0.003,
+      "triangleTargetRange": [
+        15000,
+        20000
+      ]
+    },
+    "total": {
+      "targetBytes": 4000000,
+      "maxBytes": 4000000,
+      "targetTriangles": 350000,
+      "maxTriangles": 350000
+    }
+  },
+  "parts": [
+    {
+      "id": "biceps-brachii-long",
+      "objects": [
+        "Long head of biceps brachii"
+      ],
+      "system": "muscles",
+      "role": "region",
+      "layer": "superficial",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "origin": [
+        "scapula"
+      ],
+      "insertion": [
+        "radius"
+      ],
+      "attachmentOwners": [
+        "Long head of biceps brachii",
+        "Long biceps brachii",
+        "Biceps brachii muscle"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "Long head of biceps brachii.l",
+        "Long head of biceps brachii.r"
+      ],
+      "minimumObjects": 1
+    },
+    {
+      "id": "biceps-brachii-short",
+      "objects": [
+        "Short head of biceps brachii"
+      ],
+      "system": "muscles",
+      "role": "region",
+      "layer": "superficial",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "origin": [
+        "scapula"
+      ],
+      "insertion": [
+        "radius"
+      ],
+      "attachmentOwners": [
+        "Short head of biceps brachii",
+        "Short biceps brachii",
+        "Biceps brachii muscle"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "Short head of biceps brachii.l",
+        "Short head of biceps brachii.r"
+      ],
+      "minimumObjects": 1
+    },
+    {
+      "id": "triceps-brachii-long",
+      "objects": [
+        "Long head of triceps brachii"
+      ],
+      "system": "muscles",
+      "role": "region",
+      "layer": "superficial",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "origin": [
+        "scapula"
+      ],
+      "insertion": [
+        "ulna"
+      ],
+      "attachmentOwners": [
+        "Long head of triceps brachii",
+        "Long triceps brachii",
+        "Triceps brachii muscle"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "Long head of triceps brachii.l",
+        "Long head of triceps brachii.r"
+      ],
+      "minimumObjects": 1
+    },
+    {
+      "id": "triceps-brachii-lateral",
+      "objects": [
+        "Lateral head of triceps brachii"
+      ],
+      "system": "muscles",
+      "role": "region",
+      "layer": "superficial",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "origin": [
+        "humerus"
+      ],
+      "insertion": [
+        "ulna"
+      ],
+      "attachmentOwners": [
+        "Lateral head of triceps brachii",
+        "Lateral triceps brachii",
+        "Triceps brachii muscle"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "Lateral head of triceps brachii.l",
+        "Lateral head of triceps brachii.r"
+      ],
+      "minimumObjects": 1
+    },
+    {
+      "id": "brachioradialis",
+      "objects": [
+        "Brachioradialis muscle"
+      ],
+      "system": "muscles",
+      "role": "region",
+      "layer": "superficial",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "origin": [
+        "humerus"
+      ],
+      "insertion": [
+        "radius"
+      ],
+      "attachmentOwners": [
+        "Brachioradialis muscle",
+        "Brachioradialis muscle"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "Brachioradialis muscle.l",
+        "Brachioradialis muscle.r"
+      ],
+      "minimumObjects": 1
+    },
+    {
+      "id": "pronator-teres",
+      "objects": [
+        "Superficial head of pronator teres",
+        "Deep head of pronator teres"
+      ],
+      "system": "muscles",
+      "role": "region",
+      "layer": "superficial",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "origin": [
+        "humerus",
+        "ulna"
+      ],
+      "insertion": [
+        "radius"
+      ],
+      "attachmentOwners": [
+        "Superficial head of pronator teres",
+        "Deep head of pronator teres",
+        "Superficial pronator teres",
+        "Deep pronator teres"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "Deep head of pronator teres.l",
+        "Deep head of pronator teres.r",
+        "Superficial head of pronator teres.l",
+        "Superficial head of pronator teres.r"
+      ],
+      "minimumObjects": 2
+    },
+    {
+      "id": "flexor-carpi-radialis",
+      "objects": [
+        "Flexor carpi radialis"
+      ],
+      "system": "muscles",
+      "role": "region",
+      "layer": "superficial",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "origin": [
+        "humerus"
+      ],
+      "insertion": [
+        "hand"
+      ],
+      "attachmentOwners": [
+        "Flexor carpi radialis",
+        "Flexor carpi radialis"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "Flexor carpi radialis.l",
+        "Flexor carpi radialis.r"
+      ],
+      "minimumObjects": 1
+    },
+    {
+      "id": "palmaris-longus",
+      "objects": [
+        "Palmaris longus muscle"
+      ],
+      "system": "muscles",
+      "role": "region",
+      "layer": "superficial",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "origin": [
+        "humerus"
+      ],
+      "insertion": [
+        "hand"
+      ],
+      "attachmentOwners": [
+        "Palmaris longus muscle",
+        "Palmaris longus muscle"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "Palmaris longus muscle.l",
+        "Palmaris longus muscle.r"
+      ],
+      "minimumObjects": 1
+    },
+    {
+      "id": "flexor-carpi-ulnaris",
+      "objects": [
+        "Humeral head of flexor carpi ulnaris",
+        "Ulnar head of flexor carpi ulnaris"
+      ],
+      "system": "muscles",
+      "role": "region",
+      "layer": "superficial",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "origin": [
+        "humerus",
+        "ulna"
+      ],
+      "insertion": [
+        "hand"
+      ],
+      "attachmentOwners": [
+        "Humeral head of flexor carpi ulnaris",
+        "Ulnar head of flexor carpi ulnaris",
+        "Humeral flexor carpi ulnaris",
+        "Ulnar flexor carpi ulnaris"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "Humeral head of flexor carpi ulnaris.l",
+        "Humeral head of flexor carpi ulnaris.r",
+        "Ulnar head of flexor carpi ulnaris.l",
+        "Ulnar head of flexor carpi ulnaris.r"
+      ],
+      "minimumObjects": 2
+    },
+    {
+      "id": "extensor-carpi-radialis-longus",
+      "objects": [
+        "Extensor carpi radialis longus"
+      ],
+      "system": "muscles",
+      "role": "region",
+      "layer": "superficial",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "origin": [
+        "humerus"
+      ],
+      "insertion": [
+        "hand"
+      ],
+      "attachmentOwners": [
+        "Extensor carpi radialis longus",
+        "Extensor carpi radialis longus"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "Extensor carpi radialis longus.l",
+        "Extensor carpi radialis longus.r"
+      ],
+      "minimumObjects": 1
+    },
+    {
+      "id": "extensor-digitorum",
+      "objects": [
+        "Extensor digitorum"
+      ],
+      "system": "muscles",
+      "role": "region",
+      "layer": "superficial",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "origin": [
+        "humerus"
+      ],
+      "insertion": [
+        "hand"
+      ],
+      "attachmentOwners": [
+        "Extensor digitorum",
+        "Extensor digitorum"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "Extensor digitorum.l",
+        "Extensor digitorum.r"
+      ],
+      "minimumObjects": 1
+    },
+    {
+      "id": "extensor-carpi-ulnaris",
+      "objects": [
+        "Humeral head of extensor carpi ulnaris",
+        "Ulnar head of extensor carpi ulnaris"
+      ],
+      "system": "muscles",
+      "role": "region",
+      "layer": "superficial",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "origin": [
+        "humerus",
+        "ulna"
+      ],
+      "insertion": [
+        "hand"
+      ],
+      "attachmentOwners": [
+        "Humeral head of extensor carpi ulnaris",
+        "Ulnar head of extensor carpi ulnaris",
+        "Humeral extensor carpi ulnaris",
+        "Ulnar extensor carpi ulnaris"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "Humeral head of extensor carpi ulnaris.l",
+        "Humeral head of extensor carpi ulnaris.r",
+        "Ulnar head of extensor carpi ulnaris.l",
+        "Ulnar head of extensor carpi ulnaris.r"
+      ],
+      "minimumObjects": 2
+    },
+    {
+      "id": "brachialis",
+      "objects": [
+        "Brachialis muscle"
+      ],
+      "system": "muscles",
+      "role": "region",
+      "layer": "intermediate",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "origin": [
+        "humerus"
+      ],
+      "insertion": [
+        "ulna"
+      ],
+      "attachmentOwners": [
+        "Brachialis muscle",
+        "Brachialis muscle"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "Brachialis muscle.l",
+        "Brachialis muscle.r"
+      ],
+      "minimumObjects": 1
+    },
+    {
+      "id": "triceps-brachii-medial",
+      "objects": [
+        "Medial head of triceps brachii"
+      ],
+      "system": "muscles",
+      "role": "region",
+      "layer": "intermediate",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "origin": [
+        "humerus"
+      ],
+      "insertion": [
+        "ulna"
+      ],
+      "attachmentOwners": [
+        "Medial head of triceps brachii",
+        "Medial triceps brachii",
+        "Triceps brachii muscle"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "Medial head of triceps brachii.l",
+        "Medial head of triceps brachii.r"
+      ],
+      "minimumObjects": 1
+    },
+    {
+      "id": "coracobrachialis",
+      "objects": [
+        "Coracobrachialis muscle"
+      ],
+      "system": "muscles",
+      "role": "region",
+      "layer": "intermediate",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "origin": [
+        "scapula"
+      ],
+      "insertion": [
+        "humerus"
+      ],
+      "attachmentOwners": [
+        "Coracobrachialis muscle",
+        "Coracobrachialis muscle"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "Coracobrachialis muscle.l",
+        "Coracobrachialis muscle.r"
+      ],
+      "minimumObjects": 1
+    },
+    {
+      "id": "anconeus",
+      "objects": [
+        "Anconeus muscle"
+      ],
+      "system": "muscles",
+      "role": "region",
+      "layer": "intermediate",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "origin": [
+        "humerus"
+      ],
+      "insertion": [
+        "ulna"
+      ],
+      "attachmentOwners": [
+        "Anconeus muscle",
+        "Anconeus muscle"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "Anconeus muscle.l",
+        "Anconeus muscle.r"
+      ],
+      "minimumObjects": 1
+    },
+    {
+      "id": "extensor-carpi-radialis-brevis",
+      "objects": [
+        "Extensor carpi radialis brevis"
+      ],
+      "system": "muscles",
+      "role": "region",
+      "layer": "intermediate",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "origin": [
+        "humerus"
+      ],
+      "insertion": [
+        "hand"
+      ],
+      "attachmentOwners": [
+        "Extensor carpi radialis brevis",
+        "Extensor carpi radialis brevis"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "Extensor carpi radialis brevis.l",
+        "Extensor carpi radialis brevis.r"
+      ],
+      "minimumObjects": 1
+    },
+    {
+      "id": "flexor-digitorum-superficialis",
+      "objects": [
+        "Humero-ulnar head of flexor digitorum superficialis",
+        "Radial head of flexor digitorum superficialis"
+      ],
+      "system": "muscles",
+      "role": "region",
+      "layer": "intermediate",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "origin": [
+        "humerus",
+        "ulna",
+        "radius"
+      ],
+      "insertion": [
+        "hand"
+      ],
+      "attachmentOwners": [
+        "Humero-ulnar head of flexor digitorum superficialis",
+        "Radial head of flexor digitorum superficialis",
+        "Humero-ulnar flexor digitorum superficialis",
+        "Radial flexor digitorum superficialis"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "Humero-ulnar head of flexor digitorum superficialis.l",
+        "Humero-ulnar head of flexor digitorum superficialis.r",
+        "Radial head of flexor digitorum superficialis.l",
+        "Radial head of flexor digitorum superficialis.r"
+      ],
+      "minimumObjects": 2
+    },
+    {
+      "id": "deltoid-anterior",
+      "objects": [
+        "Clavicular part of deltoid muscle"
+      ],
+      "system": "muscles",
+      "role": "neighbour",
+      "layer": "neighbours",
+      "sides": "bilateral",
+      "triangleBudget": 1500,
+      "origin": [
+        "clavicle"
+      ],
+      "insertion": [
+        "humerus"
+      ],
+      "attachmentOwners": [
+        "Clavicular part of deltoid muscle",
+        "Clavicular part of deltoid muscle",
+        "Deltoid muscle"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "Clavicular part of deltoid muscle.l",
+        "Clavicular part of deltoid muscle.r"
+      ],
+      "minimumObjects": 1
+    },
+    {
+      "id": "deltoid-lateral",
+      "objects": [
+        "Acromial part of deltoid muscle"
+      ],
+      "system": "muscles",
+      "role": "neighbour",
+      "layer": "neighbours",
+      "sides": "bilateral",
+      "triangleBudget": 1500,
+      "origin": [
+        "scapula"
+      ],
+      "insertion": [
+        "humerus"
+      ],
+      "attachmentOwners": [
+        "Acromial part of deltoid muscle",
+        "Acromial part of deltoid muscle",
+        "Deltoid muscle"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "Acromial part of deltoid muscle.l",
+        "Acromial part of deltoid muscle.r"
+      ],
+      "minimumObjects": 1
+    },
+    {
+      "id": "deltoid-posterior",
+      "objects": [
+        "Scapular spinal part of deltoid muscle"
+      ],
+      "system": "muscles",
+      "role": "neighbour",
+      "layer": "neighbours",
+      "sides": "bilateral",
+      "triangleBudget": 1500,
+      "origin": [
+        "scapula"
+      ],
+      "insertion": [
+        "humerus"
+      ],
+      "attachmentOwners": [
+        "Scapular spinal part of deltoid muscle",
+        "Scapular spinal part of deltoid muscle",
+        "Deltoid muscle"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "Scapular spinal part of deltoid muscle.l",
+        "Scapular spinal part of deltoid muscle.r"
+      ],
+      "minimumObjects": 1
+    },
+    {
+      "id": "pectoralis-major-clavicular",
+      "objects": [
+        "Clavicular head of pectoralis major muscle"
+      ],
+      "system": "muscles",
+      "role": "neighbour",
+      "layer": "neighbours",
+      "sides": "bilateral",
+      "triangleBudget": 1500,
+      "origin": [
+        "clavicle"
+      ],
+      "insertion": [
+        "humerus"
+      ],
+      "attachmentOwners": [
+        "Clavicular head of pectoralis major muscle",
+        "Clavicular pectoralis major muscle",
+        "Pectoralis major muscle"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "Clavicular head of pectoralis major muscle.l",
+        "Clavicular head of pectoralis major muscle.r"
+      ],
+      "minimumObjects": 1
+    },
+    {
+      "id": "pectoralis-major-sternocostal",
+      "objects": [
+        "Sternocostal head of pectoralis major muscle"
+      ],
+      "system": "muscles",
+      "role": "neighbour",
+      "layer": "neighbours",
+      "sides": "bilateral",
+      "triangleBudget": 1500,
+      "origin": [
+        "ribs"
+      ],
+      "insertion": [
+        "humerus"
+      ],
+      "attachmentOwners": [
+        "Sternocostal head of pectoralis major muscle",
+        "Sternocostal pectoralis major muscle",
+        "Pectoralis major muscle"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "Sternocostal head of pectoralis major muscle.l",
+        "Sternocostal head of pectoralis major muscle.r"
+      ],
+      "minimumObjects": 1
+    },
+    {
+      "id": "pectoralis-major-abdominal",
+      "objects": [
+        "(Abdominal part of pectoralis major muscle)"
+      ],
+      "system": "muscles",
+      "role": "neighbour",
+      "layer": "neighbours",
+      "sides": "bilateral",
+      "triangleBudget": 1500,
+      "origin": [
+        "ribs"
+      ],
+      "insertion": [
+        "humerus"
+      ],
+      "attachmentOwners": [
+        "(Abdominal part of pectoralis major muscle)",
+        "(Abdominal part of pectoralis major muscle)",
+        "Pectoralis major muscle"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "(Abdominal part of pectoralis major muscle).l",
+        "(Abdominal part of pectoralis major muscle).r"
+      ],
+      "minimumObjects": 1
+    },
+    {
+      "id": "latissimus-dorsi",
+      "objects": [
+        "Latissimus dorsi muscle"
+      ],
+      "system": "muscles",
+      "role": "neighbour",
+      "layer": "neighbours",
+      "sides": "bilateral",
+      "triangleBudget": 2000,
+      "origin": [
+        "thoracic-spine",
+        "lumbar-spine",
+        "pelvis",
+        "pelvis",
+        "ribs"
+      ],
+      "insertion": [
+        "humerus"
+      ],
+      "attachmentOwners": [
+        "Latissimus dorsi muscle",
+        "Latissimus dorsi muscle"
+      ],
+      "protectFolds": true,
+      "sourceNames": [
+        "Latissimus dorsi muscle.l",
+        "Latissimus dorsi muscle.r"
+      ],
+      "minimumObjects": 1
+    },
+    {
+      "id": "humerus",
+      "objects": [
+        "Humerus"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "moving": true,
+      "sourceNames": [
+        "Humerus.l",
+        "Humerus.r"
+      ]
+    },
+    {
+      "id": "radius",
+      "objects": [
+        "Radius"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 2500,
+      "moving": true,
+      "sourceNames": [
+        "Radius.l",
+        "Radius.r"
+      ]
+    },
+    {
+      "id": "ulna",
+      "objects": [
+        "Ulna"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 2500,
+      "moving": true,
+      "sourceNames": [
+        "Ulna.l",
+        "Ulna.r"
+      ]
+    },
+    {
+      "id": "hand",
+      "objects": [
+        "Scaphoid bone",
+        "Lunate bone",
+        "Triquetrum bone",
+        "Pisiform bone",
+        "Trapezium bone",
+        "Trapezoid bone",
+        "Capitate bone",
+        "Hamate bone"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 6000,
+      "moving": true,
+      "patterns": [
+        "(?:First|Second|Third|Fourth|Fifth) metacarpal bone",
+        "(?:Proximal|Middle|Distal) phalanx of (?:first|second|third|fourth|fifth) finger of hand"
+      ],
+      "sourceNames": [
+        "Capitate bone.l",
+        "Capitate bone.r",
+        "Distal phalanx of fifth finger of hand.l",
+        "Distal phalanx of fifth finger of hand.r",
+        "Distal phalanx of first finger of hand.l",
+        "Distal phalanx of first finger of hand.r",
+        "Distal phalanx of fourth finger of hand.l",
+        "Distal phalanx of fourth finger of hand.r",
+        "Distal phalanx of second finger of hand.l",
+        "Distal phalanx of second finger of hand.r",
+        "Distal phalanx of third finger of hand.l",
+        "Distal phalanx of third finger of hand.r",
+        "Fifth metacarpal bone.l",
+        "Fifth metacarpal bone.r",
+        "First metacarpal bone.l",
+        "First metacarpal bone.r",
+        "Fourth metacarpal bone.l",
+        "Fourth metacarpal bone.r",
+        "Hamate bone.l",
+        "Hamate bone.r",
+        "Lunate bone.l",
+        "Lunate bone.r",
+        "Middle phalanx of fifth finger of hand.l",
+        "Middle phalanx of fifth finger of hand.r",
+        "Middle phalanx of fourth finger of hand.l",
+        "Middle phalanx of fourth finger of hand.r",
+        "Middle phalanx of second finger of hand.l",
+        "Middle phalanx of second finger of hand.r",
+        "Middle phalanx of third finger of hand.l",
+        "Middle phalanx of third finger of hand.r",
+        "Pisiform bone.l",
+        "Pisiform bone.r",
+        "Proximal phalanx of fifth finger of hand.l",
+        "Proximal phalanx of fifth finger of hand.r",
+        "Proximal phalanx of first finger of hand.l",
+        "Proximal phalanx of first finger of hand.r",
+        "Proximal phalanx of fourth finger of hand.l",
+        "Proximal phalanx of fourth finger of hand.r",
+        "Proximal phalanx of second finger of hand.l",
+        "Proximal phalanx of second finger of hand.r",
+        "Proximal phalanx of third finger of hand.l",
+        "Proximal phalanx of third finger of hand.r",
+        "Scaphoid bone.l",
+        "Scaphoid bone.r",
+        "Second metacarpal bone.l",
+        "Second metacarpal bone.r",
+        "Third metacarpal bone.l",
+        "Third metacarpal bone.r",
+        "Trapezium bone.l",
+        "Trapezium bone.r",
+        "Trapezoid bone.l",
+        "Trapezoid bone.r",
+        "Triquetrum bone.l",
+        "Triquetrum bone.r"
+      ]
+    },
+    {
+      "id": "scapula",
+      "objects": [
+        "Scapula"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "moving": true,
+      "sourceNames": [
+        "Scapula.l",
+        "Scapula.r"
+      ]
+    },
+    {
+      "id": "skin-outline",
+      "objects": [
+        "Anal region",
+        "Angle of mouth",
+        "Anterior notch of auricle",
+        "Anterior region of ankle",
+        "Anterior region of arm",
+        "Anterior region of elbow",
+        "Anterior region of forearm",
+        "Anterior region of knee",
+        "Anterior region of leg",
+        "Anterior region of thigh",
+        "Anterior region of wrist",
+        "Antihelix",
+        "Antitragus",
+        "Apex of auricle",
+        "Auricular region",
+        "Auricular tubercle",
+        "Buccal region",
+        "Carotid triangle",
+        "Cavity of concha",
+        "Concha of auricle",
+        "Crura of antihelix",
+        "Cubital fossa",
+        "Cymba conchae",
+        "Deltoid region",
+        "Deltopectoral triangle",
+        "Distal transverse arch of foot",
+        "Dorsal surfaces of digits of foot",
+        "Dorsal surfaces of digits of hand",
+        "Dorsum of foot",
+        "Dorsum of hand",
+        "Eminentia conchae",
+        "Eminentia fossae triangularis",
+        "Eminentia scaphae",
+        "Epigastric region",
+        "Eyebrow",
+        "Femoral triangle",
+        "Fossa antihelica",
+        "Frontal region",
+        "Gluteal fold",
+        "Gluteal region",
+        "Greater supraclavicular fossa",
+        "Hallucial eminence",
+        "Heel region",
+        "Helix",
+        "Hip region",
+        "Hypochondriac region",
+        "Hypogastric region",
+        "Infra-orbital region",
+        "Infraclavicular fossa",
+        "Inframammary region",
+        "Infrascapular region",
+        "Inguinal region",
+        "Interscapular region",
+        "Intertragic incisure",
+        "Labial commissure",
+        "Lateral bicipital groove",
+        "Lateral border of foot",
+        "Lateral border of forearm",
+        "Lateral malleolus",
+        "Lateral part of longitudinal arch of foot",
+        "Lateral region of abdomen",
+        "Lateral region of neck",
+        "Lateral region of thorax",
+        "Lateral retromalleolar region",
+        "Lesser supraclavicular fossa",
+        "Lobule of auricle",
+        "Lumbar region",
+        "Mammary region",
+        "Mastoid region",
+        "Medial bicipital groove",
+        "Medial border of foot",
+        "Medial border of forearm",
+        "Medial malleolus",
+        "Medial part of longitudinal arch of foot",
+        "Medial retromalleolar region",
+        "Mental region",
+        "Mentolabial sulcus",
+        "Metatarsal region",
+        "Muscular triangle",
+        "Nasal region",
+        "Nasolabial sulcus",
+        "Occipital region",
+        "Oral region",
+        "Orbital region",
+        "Palm",
+        "Palmar surfaces of digits of hand",
+        "Parietal region",
+        "Parotideomasseteric region",
+        "Pectoral region",
+        "Philtrum",
+        "Plantar surfaces of digits of foot",
+        "Popliteal fossa",
+        "Posterior auricular groove",
+        "Posterior region of arm",
+        "Posterior region of elbow",
+        "Posterior region of forearm",
+        "Posterior region of knee",
+        "Posterior region of leg",
+        "Posterior region of neck",
+        "Posterior region of thigh",
+        "Posterior region of wrist",
+        "Presternal region",
+        "Proximal transverse arch of foot",
+        "Radial foveola",
+        "Sacral region",
+        "Scapha",
+        "Scapular region",
+        "Sole",
+        "Sternocleidomastoid region",
+        "Submandibular triangle",
+        "Submental triangle",
+        "Temporal region",
+        "Tragus",
+        "Triangle of auscultation",
+        "Triangular fossa",
+        "Tubercle of upper lip",
+        "Umbilical region",
+        "Umbilicus",
+        "Urogenital region",
+        "Vertebral region",
+        "Zygomatic region"
+      ],
+      "system": "regions",
+      "role": "skin",
+      "layer": "context",
+      "sides": "unsided",
+      "triangleBudget": 30000,
+      "minimumObjects": 180,
+      "triangleCap": 30000,
+      "sourceNames": [
+        "Anal region.l",
+        "Anal region.r",
+        "Angle of mouth.l",
+        "Angle of mouth.r",
+        "Anterior notch of auricle.l",
+        "Anterior notch of auricle.r",
+        "Anterior region of ankle.l",
+        "Anterior region of ankle.r",
+        "Anterior region of arm.l",
+        "Anterior region of arm.r",
+        "Anterior region of elbow.l",
+        "Anterior region of elbow.r",
+        "Anterior region of forearm.l",
+        "Anterior region of forearm.r",
+        "Anterior region of knee.l",
+        "Anterior region of knee.r",
+        "Anterior region of leg.l",
+        "Anterior region of leg.r",
+        "Anterior region of thigh.l",
+        "Anterior region of thigh.r",
+        "Anterior region of wrist.l",
+        "Anterior region of wrist.r",
+        "Antihelix.l",
+        "Antihelix.r",
+        "Antitragus.l",
+        "Antitragus.r",
+        "Apex of auricle.l",
+        "Apex of auricle.r",
+        "Auricular region.l",
+        "Auricular region.r",
+        "Auricular tubercle.l",
+        "Auricular tubercle.r",
+        "Buccal region.l",
+        "Buccal region.r",
+        "Carotid triangle.l",
+        "Carotid triangle.r",
+        "Cavity of concha.l",
+        "Cavity of concha.r",
+        "Concha of auricle.l",
+        "Concha of auricle.r",
+        "Crura of antihelix.l",
+        "Crura of antihelix.r",
+        "Cubital fossa.l",
+        "Cubital fossa.r",
+        "Cymba conchae.l",
+        "Cymba conchae.r",
+        "Deltoid region.l",
+        "Deltoid region.r",
+        "Deltopectoral triangle.l",
+        "Deltopectoral triangle.r",
+        "Distal transverse arch of foot.l",
+        "Distal transverse arch of foot.r",
+        "Dorsal surfaces of digits of foot.l",
+        "Dorsal surfaces of digits of foot.r",
+        "Dorsal surfaces of digits of hand.l",
+        "Dorsal surfaces of digits of hand.r",
+        "Dorsum of foot.l",
+        "Dorsum of foot.r",
+        "Dorsum of hand.l",
+        "Dorsum of hand.r",
+        "Eminentia conchae.l",
+        "Eminentia conchae.r",
+        "Eminentia fossae triangularis.l",
+        "Eminentia fossae triangularis.r",
+        "Eminentia scaphae.l",
+        "Eminentia scaphae.r",
+        "Epigastric region.l",
+        "Epigastric region.r",
+        "Eyebrow.l",
+        "Eyebrow.r",
+        "Femoral triangle.l",
+        "Femoral triangle.r",
+        "Fossa antihelica.l",
+        "Fossa antihelica.r",
+        "Frontal region.l",
+        "Frontal region.r",
+        "Gluteal fold.l",
+        "Gluteal fold.r",
+        "Gluteal region.l",
+        "Gluteal region.r",
+        "Greater supraclavicular fossa.l",
+        "Greater supraclavicular fossa.r",
+        "Hallucial eminence.l",
+        "Hallucial eminence.r",
+        "Heel region.l",
+        "Heel region.r",
+        "Helix.l",
+        "Helix.r",
+        "Hip region.l",
+        "Hip region.r",
+        "Hypochondriac region.l",
+        "Hypochondriac region.r",
+        "Hypogastric region.l",
+        "Hypogastric region.r",
+        "Infra-orbital region.l",
+        "Infra-orbital region.r",
+        "Infraclavicular fossa.l",
+        "Infraclavicular fossa.r",
+        "Inframammary region.l",
+        "Inframammary region.r",
+        "Infrascapular region.l",
+        "Infrascapular region.r",
+        "Inguinal region.l",
+        "Inguinal region.r",
+        "Interscapular region.l",
+        "Interscapular region.r",
+        "Intertragic incisure.l",
+        "Intertragic incisure.r",
+        "Labial commissure.l",
+        "Labial commissure.r",
+        "Lateral bicipital groove.l",
+        "Lateral bicipital groove.r",
+        "Lateral border of foot.l",
+        "Lateral border of foot.r",
+        "Lateral border of forearm.l",
+        "Lateral border of forearm.r",
+        "Lateral malleolus.l",
+        "Lateral malleolus.r",
+        "Lateral part of longitudinal arch of foot.l",
+        "Lateral part of longitudinal arch of foot.r",
+        "Lateral region of abdomen.l",
+        "Lateral region of abdomen.r",
+        "Lateral region of neck.l",
+        "Lateral region of neck.r",
+        "Lateral region of thorax.l",
+        "Lateral region of thorax.r",
+        "Lateral retromalleolar region.l",
+        "Lateral retromalleolar region.r",
+        "Lesser supraclavicular fossa.l",
+        "Lesser supraclavicular fossa.r",
+        "Lobule of auricle.l",
+        "Lobule of auricle.r",
+        "Lumbar region.l",
+        "Lumbar region.r",
+        "Mammary region.l",
+        "Mammary region.r",
+        "Mastoid region.l",
+        "Mastoid region.r",
+        "Medial bicipital groove.l",
+        "Medial bicipital groove.r",
+        "Medial border of foot.l",
+        "Medial border of foot.r",
+        "Medial border of forearm.l",
+        "Medial border of forearm.r",
+        "Medial malleolus.l",
+        "Medial malleolus.r",
+        "Medial part of longitudinal arch of foot.l",
+        "Medial part of longitudinal arch of foot.r",
+        "Medial retromalleolar region.l",
+        "Medial retromalleolar region.r",
+        "Mental region.l",
+        "Mental region.r",
+        "Mentolabial sulcus.l",
+        "Mentolabial sulcus.r",
+        "Metatarsal region.l",
+        "Metatarsal region.r",
+        "Muscular triangle.l",
+        "Muscular triangle.r",
+        "Nasal region.l",
+        "Nasal region.r",
+        "Nasolabial sulcus.l",
+        "Nasolabial sulcus.r",
+        "Occipital region.l",
+        "Occipital region.r",
+        "Oral region.l",
+        "Oral region.r",
+        "Orbital region.l",
+        "Orbital region.r",
+        "Palm.l",
+        "Palm.r",
+        "Palmar surfaces of digits of hand.l",
+        "Palmar surfaces of digits of hand.r",
+        "Parietal region.l",
+        "Parietal region.r",
+        "Parotideomasseteric region.l",
+        "Parotideomasseteric region.r",
+        "Pectoral region.l",
+        "Pectoral region.r",
+        "Philtrum.l",
+        "Philtrum.r",
+        "Plantar surfaces of digits of foot.l",
+        "Plantar surfaces of digits of foot.r",
+        "Popliteal fossa.l",
+        "Popliteal fossa.r",
+        "Posterior auricular groove.l",
+        "Posterior auricular groove.r",
+        "Posterior region of arm.l",
+        "Posterior region of arm.r",
+        "Posterior region of elbow.l",
+        "Posterior region of elbow.r",
+        "Posterior region of forearm.l",
+        "Posterior region of forearm.r",
+        "Posterior region of knee.l",
+        "Posterior region of knee.r",
+        "Posterior region of leg.l",
+        "Posterior region of leg.r",
+        "Posterior region of neck.l",
+        "Posterior region of neck.r",
+        "Posterior region of thigh.l",
+        "Posterior region of thigh.r",
+        "Posterior region of wrist.l",
+        "Posterior region of wrist.r",
+        "Presternal region.l",
+        "Presternal region.r",
+        "Proximal transverse arch of foot.l",
+        "Proximal transverse arch of foot.r",
+        "Radial foveola.l",
+        "Radial foveola.r",
+        "Sacral region.l",
+        "Sacral region.r",
+        "Scapha.l",
+        "Scapha.r",
+        "Scapular region.l",
+        "Scapular region.r",
+        "Sole.l",
+        "Sole.r",
+        "Sternocleidomastoid region.l",
+        "Sternocleidomastoid region.r",
+        "Submandibular triangle.l",
+        "Submandibular triangle.r",
+        "Submental triangle.l",
+        "Submental triangle.r",
+        "Temporal region.l",
+        "Temporal region.r",
+        "Tragus.l",
+        "Tragus.r",
+        "Triangle of auscultation.l",
+        "Triangle of auscultation.r",
+        "Triangular fossa.l",
+        "Triangular fossa.r",
+        "Tubercle of upper lip.l",
+        "Tubercle of upper lip.r",
+        "Umbilical region.l",
+        "Umbilical region.r",
+        "Umbilicus.l",
+        "Umbilicus.r",
+        "Urogenital region.l",
+        "Urogenital region.r",
+        "Vertebral region.l",
+        "Vertebral region.r",
+        "Zygomatic region.l",
+        "Zygomatic region.r"
+      ]
+    }
+  ],
+  "referenceParts": [
+    {
+      "id": "clavicle",
+      "objects": [
+        "Clavicle"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 1500,
+      "moving": true
+    },
+    {
+      "id": "scapula",
+      "objects": [
+        "Scapula"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "moving": true
+    },
+    {
+      "id": "humerus",
+      "objects": [
+        "Humerus"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "moving": true
+    },
+    {
+      "id": "forearm",
+      "objects": [
+        "Radius",
+        "Ulna"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "moving": true,
+      "specId": "forearm-bones"
+    },
+    {
+      "id": "sternum",
+      "objects": [
+        "Manubrium of sternum",
+        "Body of sternum",
+        "Xiphoid process"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "unsided",
+      "triangleBudget": 3000,
+      "moving": false,
+      "exportGroup": "thorax",
+      "exportTriangleCap": 25000
+    },
+    {
+      "id": "ribs",
+      "objects": [],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "unsided",
+      "triangleBudget": 22000,
+      "moving": false,
+      "exportGroup": "thorax",
+      "patterns": [
+        "(?:First|Second|Third|Fourth|Fifth|Sixth|Seventh|Eighth|Ninth|Tenth|Eleventh|Twelfth) rib",
+        "Costal cartilage of (?:first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth) rib"
+      ],
+      "exportTriangleCap": 25000
+    },
+    {
+      "id": "thoracic-spine",
+      "objects": [],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "unsided",
+      "triangleBudget": 15000,
+      "moving": false,
+      "patterns": [
+        "Vertebra T(?:[1-9]|1[0-2])"
+      ]
+    },
+    {
+      "id": "lumbar-spine",
+      "objects": [],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "unsided",
+      "triangleBudget": 6000,
+      "moving": false,
+      "patterns": [
+        "Vertebra L[1-5]"
+      ]
+    },
+    {
+      "id": "cervical-spine",
+      "objects": [
+        "Atlas (C1)",
+        "Axis (C2)"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "unsided",
+      "triangleBudget": 6000,
+      "moving": false,
+      "patterns": [
+        "Vertebra C[3-7]"
+      ]
+    },
+    {
+      "id": "pelvis",
+      "objects": [
+        "Hip bone",
+        "Sacrum",
+        "Coccyx"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "unsided",
+      "triangleBudget": 12000,
+      "moving": false
+    },
+    {
+      "id": "femur",
+      "objects": [
+        "Femur"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 6000,
+      "moving": true
+    },
+    {
+      "id": "patella",
+      "objects": [
+        "Patella"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 1500,
+      "moving": true
+    },
+    {
+      "id": "lower-leg",
+      "objects": [
+        "Tibia",
+        "Fibula"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 6000,
+      "moving": true
+    },
+    {
+      "id": "radius",
+      "objects": [
+        "Radius"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 2500,
+      "moving": true
+    },
+    {
+      "id": "ulna",
+      "objects": [
+        "Ulna"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 2500,
+      "moving": true
+    },
+    {
+      "id": "hand",
+      "objects": [
+        "Scaphoid bone",
+        "Lunate bone",
+        "Triquetrum bone",
+        "Pisiform bone",
+        "Trapezium bone",
+        "Trapezoid bone",
+        "Capitate bone",
+        "Hamate bone"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 6000,
+      "moving": true,
+      "patterns": [
+        "(?:First|Second|Third|Fourth|Fifth) metacarpal bone",
+        "(?:Proximal|Middle|Distal) phalanx of (?:first|second|third|fourth|fifth) finger of hand"
+      ]
+    },
+    {
+      "id": "foot",
+      "objects": [
+        "Calcaneus",
+        "Talus",
+        "Navicular bone",
+        "Cuboid bone",
+        "Medial cuneiform bone",
+        "Intermediate cuneiform bone",
+        "Lateral cuneiform bone",
+        "Sesamoid bones of foot"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 6000,
+      "moving": true,
+      "patterns": [
+        "(?:First|Second|Third|Fourth|Fifth) metatarsal bone",
+        "(?:Proximal|Middle|Distal) phalanx of (?:first|second|third|fourth|fifth) finger of foot"
+      ]
+    },
+    {
+      "id": "skull",
+      "objects": [
+        "Occipital bone"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "unsided",
+      "triangleBudget": 2000,
+      "moving": false
+    },
+    {
+      "id": "linea-alba",
+      "objects": [
+        "Linea alba"
+      ],
+      "system": "muscles"
+    }
+  ],
+  "jointNames": [
+    "trunk",
+    "clavicle.l",
+    "scapula.l",
+    "shoulder.l",
+    "elbow.l",
+    "forearm.l",
+    "hand.l",
+    "clavicle.r",
+    "scapula.r",
+    "shoulder.r",
+    "elbow.r",
+    "forearm.r",
+    "hand.r"
+  ],
+  "expectedNodes": [
+    "anconeus.l",
+    "anconeus.r",
+    "biceps-brachii-long.l",
+    "biceps-brachii-long.r",
+    "biceps-brachii-short.l",
+    "biceps-brachii-short.r",
+    "brachialis.l",
+    "brachialis.r",
+    "brachioradialis.l",
+    "brachioradialis.r",
+    "coracobrachialis.l",
+    "coracobrachialis.r",
+    "deltoid-anterior.l",
+    "deltoid-anterior.r",
+    "deltoid-lateral.l",
+    "deltoid-lateral.r",
+    "deltoid-posterior.l",
+    "deltoid-posterior.r",
+    "extensor-carpi-radialis-brevis.l",
+    "extensor-carpi-radialis-brevis.r",
+    "extensor-carpi-radialis-longus.l",
+    "extensor-carpi-radialis-longus.r",
+    "extensor-carpi-ulnaris.l",
+    "extensor-carpi-ulnaris.r",
+    "extensor-digitorum.l",
+    "extensor-digitorum.r",
+    "flexor-carpi-radialis.l",
+    "flexor-carpi-radialis.r",
+    "flexor-carpi-ulnaris.l",
+    "flexor-carpi-ulnaris.r",
+    "flexor-digitorum-superficialis.l",
+    "flexor-digitorum-superficialis.r",
+    "hand.l",
+    "hand.r",
+    "humerus.l",
+    "humerus.r",
+    "latissimus-dorsi.l",
+    "latissimus-dorsi.r",
+    "palmaris-longus.l",
+    "palmaris-longus.r",
+    "pectoralis-major-abdominal.l",
+    "pectoralis-major-abdominal.r",
+    "pectoralis-major-clavicular.l",
+    "pectoralis-major-clavicular.r",
+    "pectoralis-major-sternocostal.l",
+    "pectoralis-major-sternocostal.r",
+    "pronator-teres.l",
+    "pronator-teres.r",
+    "radius.l",
+    "radius.r",
+    "scapula.l",
+    "scapula.r",
+    "skin-outline",
+    "triceps-brachii-lateral.l",
+    "triceps-brachii-lateral.r",
+    "triceps-brachii-long.l",
+    "triceps-brachii-long.r",
+    "triceps-brachii-medial.l",
+    "triceps-brachii-medial.r",
+    "ulna.l",
+    "ulna.r",
+    "arms-rig",
+    "joint.trunk",
+    "joint.clavicle.l",
+    "joint.scapula.l",
+    "joint.shoulder.l",
+    "joint.elbow.l",
+    "joint.forearm.l",
+    "joint.hand.l",
+    "joint.clavicle.r",
+    "joint.scapula.r",
+    "joint.shoulder.r",
+    "joint.elbow.r",
+    "joint.forearm.r",
+    "joint.hand.r"
+  ],
+  "notes": [
+    "Selected from docs/16 \u00a75.3, region reviews and exact cached FBX inventory; no mirrored geometry.",
+    "Parent/group cards are not duplicated as meshes. Neighbours include adjacent exercise secondary/stabiliser muscles; distant whole-body stabilisers excluded.",
+    "Reference surfaces outside the exported bone list are used only for attachment and joint evidence.",
+    "Whole neighbour muscle extents retained at low budget; educational crops remain [\u5f85\u6838].",
+    "Intrinsic hand/foot muscles and deep forearm flexors excluded by v1 scope; hand/foot bones are merged per side.",
+    "Optional thoracolumbar fascia, linea alba and diaphragm omitted. Linea-alba attachment evidence uses the unexported named source surface.",
+    "No named region muscle is missing in Z-Anatomy; multifidus uses the actual paired lumbar meshes, not rotatores or invented geometry."
+  ]
+}

@@ -365,5 +365,10 @@
       "source": "styloid landmark / distal forearm",
       "review": "pending"
     }
-  ]
+  ],
+  "motionAliases": {
+    "hand.l": "wrist.l",
+    "hand.r": "wrist.r"
+  },
+  "handGripOffsetM": 0.08
 }

@@ -1,4 +1,4 @@
-"""Select, simplify, bake, rig and export the cached chest sources."""
+"""Select, simplify, bake, rig and export the cached regional sources."""
 import heapq
 import json
 import math
@@ -14,9 +14,10 @@ from mathutils.kdtree import KDTree
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import (CACHE, ROOT, mobile_skin_region, base_name, centroid, clear_scene, import_system,
-                    matches, object_info, save_json, surface_deviation, topology, world_vertices)
+                    matches, object_info, save_json, surface_deviation, topology, world_vertices, topic_argument)
 
-TOPIC = ROOT / 'chest'
+TOPIC_NAME = topic_argument()
+TOPIC = ROOT / TOPIC_NAME
 MANIFEST = json.loads((TOPIC / 'manifest.json').read_text())
 SOURCE = {}
 SELECTED = {}
@@ -74,7 +75,7 @@ def load_sources():
             if ob.type != 'MESH':
                 continue
             info = object_info(ob, system)
-            needed = any(matches(p, info) for p in MANIFEST['parts'])
+            needed = any(matches(p, info) for p in MANIFEST['parts'] + MANIFEST.get('referenceParts', []))
             # Pelvis is needed for neighbour attachments, but is not exported.
             needed |= system == 'skeleton' and base_name(ob.name) in ['Hip bone', 'Sacrum']
             needed |= system == 'skeleton' and 'attachment' in info and bool(ob.data.polygons)
@@ -85,6 +86,9 @@ def load_sources():
 
 
 def select_and_transform():
+    if TOPIC_NAME != 'chest':
+        from regional import select_and_transform as regional_select
+        return regional_select(sys.modules[__name__])
     sternum = [r for r in SOURCE.values() if r['info']['system'] == 'skeleton' and
                base_name(r['info']['name']) == 'Manubrium of sternum']
     if not sternum:
@@ -110,7 +114,7 @@ def select_and_transform():
             SELECTED[name] = {'part': part, 'side': side, 'points': points, 'faces': faces,
                               'sourceNames': [r['info']['name'] for r in records]}
             if part['role'] == 'skin':
-                SELECTED[name]['sourceSkinSides'] = [r['info']['side'] if mobile_skin_region(r['info']['name']) else None
+                SELECTED[name]['sourceSkinSides'] = [r['info']['side'] if mobile_skin_region(r['info']['name'], TOPIC_NAME) else None
                     for r in records for _ in r['points']]
     clavicle = centroid(SELECTED['clavicle.l']['points'])
     sternum_c = centroid(SELECTED['sternum']['points'])
@@ -141,12 +145,13 @@ def simplify_selection():
                      'error': MANIFEST['budgets'][part['role']]['maxDeviationM']})
     results = {}
     pending = jobs
-    for attempt in range(10):
-        save_json(CACHE / 'chest-simplify-input.json', pending)
+    attempts = 10 if TOPIC_NAME == 'chest' else 20
+    for attempt in range(attempts):
+        save_json(CACHE / f'{TOPIC_NAME}-simplify-input.json', pending)
         subprocess.run(['pnpm', 'exec', 'node', '--import', 'tsx', str(ROOT / 'simplify.ts'),
-                        str(CACHE / 'chest-simplify-input.json'), str(CACHE / 'chest-simplify-output.json')],
+                        str(CACHE / f'{TOPIC_NAME}-simplify-input.json'), str(CACHE / f'{TOPIC_NAME}-simplify-output.json')],
                        cwd=str(ROOT.parents[1]), check=True)
-        outputs = json.loads((CACHE / 'chest-simplify-output.json').read_text())
+        outputs = json.loads((CACHE / f'{TOPIC_NAME}-simplify-output.json').read_text())
         retry = []
         for job, result in zip(pending, outputs):
             record = SELECTED[job['name']]
@@ -156,11 +161,12 @@ def simplify_selection():
             deviation = surface_deviation(record['points'], record['faces'], simplified_points, faces)
             budget = MANIFEST['budgets'][record['part']['role']]['maxDeviationM']
             result['sampleDeviationM'] = deviation
-            safety = .93 if record['part'].get('triangleCap') or record['part'].get('exportTriangleCap') else .85
+            safety = .93 if record['part'].get('triangleCap') or record['part'].get('exportTriangleCap') or record['part'].get('protectFolds') else .85
+            safety = record['part'].get('auditSafety', safety)
             if deviation > budget*safety:
-                if attempt < 9:
+                if attempt < attempts-1:
                     next_job = dict(job)
-                    if record['part'].get('triangleCap') or record['part'].get('exportTriangleCap'):
+                    if record['part'].get('triangleCap') or record['part'].get('exportTriangleCap') or record['part'].get('protectFolds'):
                         # Protect the few thin folds responsible for actual surface
                         # error, instead of freezing an entire context mesh.
                         tree = bvh(simplified_points, faces)
@@ -175,6 +181,10 @@ def simplify_selection():
                                 locks.update(face)
                                 locks.update(record['faces'][nearest[2]])
                         next_job['locks'] = sorted(locks)
+                        if TOPIC_NAME != 'chest' and attempt >= 2:
+                            # Locking fixes thin folds; a smaller global tolerance resolves
+                            # residual error when those locks stop changing the result.
+                            next_job['error'] *= min(.8, budget*.8/deviation)
                         print(f'PROTECT {job["name"]}: {len(locks)} thin-fold vertices', flush=True)
                     else:
                         next_job['error'] *= min(.6, budget*.75/deviation)
@@ -191,7 +201,7 @@ def simplify_selection():
         if not retry:
             break
         pending = retry
-    save_json(CACHE / 'chest-simplify-output.json', list(results.values()))
+    save_json(CACHE / f'{TOPIC_NAME}-simplify-output.json', list(results.values()))
     for name, record in SELECTED.items():
         result = results[name]
         original = make_mesh(name + '-before', record['points'], record['faces'])
@@ -212,6 +222,9 @@ def simplify_selection():
 
 
 def bone_records(ids, side):
+    if TOPIC_NAME != 'chest':
+        from regional import bone_records as regional_records
+        return regional_records(sys.modules[__name__], ids, side)
     result = []
     for id in ids:
         if id == 'pelvis':
@@ -430,6 +443,9 @@ def sphere_fit(points):
 
 
 def make_rig(centre, floor, check):
+    if TOPIC_NAME != 'chest':
+        from regional import make_rig as regional_rig
+        return regional_rig(sys.modules[__name__], centre, floor, check)
     joints = [{'name':'trunk', 'position':Vector((0,0,0)), 'parent':None, 'source':'sternal angle frame'}]
     for side in ['l','r']:
         scapula = landmark('Glenoid process of scapula', side) or landmark('Glenoid fossa', side)
@@ -502,7 +518,9 @@ def make_rig(centre, floor, check):
                        'source':joint['source'],'review':'pending'})
     save_json(TOPIC/'rig.json', {'license':'CC BY-SA 4.0','units':'m','coordinates':MANIFEST['coordinates'],
                               'sourceChestCentre':list(centre),'floorY':floor-centre.z,
-                              'coordinateCheck':check,'joints':output})
+                              'coordinateCheck':check,'joints':output,
+                              'motionAliases':{'hand.l':'wrist.l','hand.r':'wrist.r'},
+                              'handGripOffsetM':.08})
     for joint in output:
         assert all(abs(Vector(axis).length-1) < 1e-5 for axis in joint['axes'].values())
         name = joint['name']
@@ -529,6 +547,9 @@ def epicondyle_axis(side):
 
 
 def bone_joint(id, side):
+    if TOPIC_NAME != 'chest':
+        from regional import bone_joint as regional_joint
+        return regional_joint(MANIFEST, id, side)
     return {'clavicle':'clavicle','scapula':'scapula','humerus':'shoulder','forearm':'elbow'}.get(id, 'trunk') + (
         '.'+side if side and id in ['clavicle','scapula','humerus','forearm'] else '')
 
@@ -553,7 +574,11 @@ def skin_selection(rig, joints):
             for i, u in enumerate(record['u']):
                 proximal = proximal_by_vertex[i]
                 w = u*u*(3-2*u)
-                if proximal == 'scapula.'+str(side) and distal == 'elbow.'+str(side):
+                if TOPIC_NAME != 'chest':
+                    from regional import muscle_weights
+                    for joint, weight in muscle_weights(MANIFEST, proximal, distal, u).items():
+                        groups[joint].add([i],weight,'REPLACE')
+                elif proximal == 'scapula.'+str(side) and distal == 'elbow.'+str(side):
                     middle = 'shoulder.'+side
                     blend = min(1., max(0., u*2 if u < .5 else (u-.5)*2))
                     blend = blend*blend*(3-2*blend)
@@ -640,25 +665,26 @@ def export(rig):
                              'closedBefore':topology(record['original'].data, weld_positions=True),
                              'closedAfter':topology(record['ob'].data, weld_positions=True),
                              'originCentroid':record.get('originCentroid'),'insertionCentroid':record.get('insertionCentroid')})
-    # Static thorax sources share one material/draw; spine remains the second static mesh.
-    ribs,sternum=SELECTED['ribs']['ob'],SELECTED['sternum']['ob']
-    bpy.ops.object.select_all(action='DESELECT')
-    ribs.select_set(True)
-    sternum.select_set(True)
-    bpy.context.view_layer.objects.active=sternum
-    bpy.ops.object.join()
-    sternum.name='thorax'
-    sternum.data.name='thorax'
-    sternum['partId']='thorax'
-    sternum['closed']=topology(sternum.data, weld_positions=True)['closed']
-    sternum.data['closed']=sternum['closed']
-    sternum['sourceNodes']=json.dumps(SELECTED['sternum']['sourceNames']+SELECTED['ribs']['sourceNames'])
-    # Blender join can retain duplicate slots even when they reference the same material.
-    sternum.data.materials.clear()
-    sternum.data.materials.append(material('bone','skeleton'))
-    for f in sternum.data.polygons:
-        f.material_index=0
-    save_json(CACHE/'chest-build-stats.json',before_stats)
+    if 'ribs' in SELECTED and 'sternum' in SELECTED:
+        # Static thorax sources share one material/draw; spine remains the second static mesh.
+        ribs,sternum=SELECTED['ribs']['ob'],SELECTED['sternum']['ob']
+        bpy.ops.object.select_all(action='DESELECT')
+        ribs.select_set(True)
+        sternum.select_set(True)
+        bpy.context.view_layer.objects.active=sternum
+        bpy.ops.object.join()
+        sternum.name='thorax'
+        sternum.data.name='thorax'
+        sternum['partId']='thorax'
+        sternum['closed']=topology(sternum.data, weld_positions=True)['closed']
+        sternum.data['closed']=sternum['closed']
+        sternum['sourceNodes']=json.dumps(SELECTED['sternum']['sourceNames']+SELECTED['ribs']['sourceNames'])
+        # Blender join can retain duplicate slots even when they reference the same material.
+        sternum.data.materials.clear()
+        sternum.data.materials.append(material('bone','skeleton'))
+        for f in sternum.data.polygons:
+            f.material_index=0
+    save_json(CACHE/f'{TOPIC_NAME}-build-stats.json',before_stats)
     save_json(TOPIC/'attachments.json',{'license':'CC BY-SA 4.0','status':'candidates — human review required',
                                       'units':'m','sites':ATTACHMENTS,'warnings':WARNINGS})
     bpy.ops.object.select_all(action='DESELECT')
@@ -673,17 +699,17 @@ def export(rig):
         ob.hide_viewport = False
         ob.select_set(True)
     bpy.context.view_layer.objects.active=rig
-    bpy.ops.wm.save_as_mainfile(filepath=str(CACHE/'chest-review.blend'))
+    bpy.ops.wm.save_as_mainfile(filepath=str(CACHE/f'{TOPIC_NAME}-review.blend'))
     # Originals live only in the review blend; the export scene contains no helpers.
     for ob in originals:
         bpy.data.objects.remove(ob, do_unlink=True)
     assert set(bpy.context.scene.objects) == exported
-    bpy.ops.export_scene.gltf(filepath=str(CACHE/'chest.raw.glb'),export_format='GLB',
+    bpy.ops.export_scene.gltf(filepath=str(CACHE/f'{TOPIC_NAME}-raw.glb'),export_format='GLB',
                               use_selection=True,export_yup=True,export_skins=True,
                               export_attributes=True,export_extras=True,export_animations=False,
                               export_apply=False,export_materials='EXPORT',export_texcoords=True,
                               export_normals=True,export_cameras=False,export_lights=False)
-    print(f'EXPORTED {CACHE / "chest.raw.glb"}',flush=True)
+    print(f'EXPORTED {CACHE / f"{TOPIC_NAME}-raw.glb"}',flush=True)
 
 
 load_sources()

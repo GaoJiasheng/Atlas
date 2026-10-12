@@ -1,0 +1,4078 @@
+{
+  "license": "CC BY-SA 4.0",
+  "status": "candidates \u2014 human review required",
+  "units": "m",
+  "sites": [
+    {
+      "muscle": "biceps-brachii-long.l",
+      "kind": "origin",
+      "bone": "scapula",
+      "points": [
+        [
+          0.14425252377986908,
+          0.1477745622396469,
+          -0.0027212738059461117
+        ],
+        [
+          0.14478015899658203,
+          0.14718182384967804,
+          -0.005087611265480518
+        ],
+        [
+          0.14494331181049347,
+          0.1463596671819687,
+          -0.00849843304604292
+        ]
+      ],
+      "centroid": [
+        0.144659161567688,
+        0.1471041440963745,
+        -0.005440788809210062
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Long head of biceps brachii.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00012454541865736246,
+      "muscleDistanceM": 0.0007766698254272342,
+      "review": "pending"
+    },
+    {
+      "muscle": "biceps-brachii-long.l",
+      "kind": "insertion",
+      "bone": "radius",
+      "points": [
+        [
+          0.23355969786643982,
+          -0.19280919432640076,
+          0.012473986484110355
+        ],
+        [
+          0.23478910326957703,
+          -0.18434952199459076,
+          0.011922725476324558
+        ],
+        [
+          0.23454423248767853,
+          -0.17698046565055847,
+          0.009313419461250305
+        ]
+      ],
+      "centroid": [
+        0.2343011051416397,
+        -0.184674933552742,
+        0.011230873875319958
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Biceps brachii muscle.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0001692339137662202,
+      "muscleDistanceM": 0.001759977894835174,
+      "review": "pending"
+    },
+    {
+      "muscle": "biceps-brachii-long.r",
+      "kind": "origin",
+      "bone": "scapula",
+      "points": [
+        [
+          -0.1442524492740631,
+          0.1477745622396469,
+          -0.0027212738059461117
+        ],
+        [
+          -0.14478008449077606,
+          0.14718182384967804,
+          -0.005087611265480518
+        ],
+        [
+          -0.1449432224035263,
+          0.1463596671819687,
+          -0.00849843304604292
+        ]
+      ],
+      "centroid": [
+        -0.1446591168642044,
+        0.1471041440963745,
+        -0.005440788809210062
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Long head of biceps brachii.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00012455382966436446,
+      "muscleDistanceM": 0.0007768168579787016,
+      "review": "pending"
+    },
+    {
+      "muscle": "biceps-brachii-long.r",
+      "kind": "insertion",
+      "bone": "radius",
+      "points": [
+        [
+          -0.23355969786643982,
+          -0.19280919432640076,
+          0.01247398927807808
+        ],
+        [
+          -0.23478910326957703,
+          -0.18434952199459076,
+          0.011922731064260006
+        ],
+        [
+          -0.23454423248767853,
+          -0.17698046565055847,
+          0.009313423186540604
+        ]
+      ],
+      "centroid": [
+        -0.2343011051416397,
+        -0.184674933552742,
+        0.01123087853193283
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Biceps brachii muscle.er"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00016922387294471264,
+      "muscleDistanceM": 0.0017602831358090043,
+      "review": "pending"
+    },
+    {
+      "muscle": "biceps-brachii-short.l",
+      "kind": "origin",
+      "bone": "scapula",
+      "points": [
+        [
+          0.14080975949764252,
+          0.14567293226718903,
+          0.025468703359365463
+        ]
+      ],
+      "centroid": [
+        0.14080975949764252,
+        0.14567293226718903,
+        0.025468703359365463
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 38,
+      "review": "pending"
+    },
+    {
+      "muscle": "biceps-brachii-short.l",
+      "kind": "insertion",
+      "bone": "radius",
+      "points": [
+        [
+          0.2151343822479248,
+          -0.12371170520782471,
+          0.012649270705878735
+        ]
+      ],
+      "centroid": [
+        0.2151343822479248,
+        -0.12371170520782471,
+        0.012649270705878735
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "withinThreshold": false,
+      "nearestDistanceM": 0.03726053237915039,
+      "review": "REQUIRED: no vertices within 2 mm"
+    },
+    {
+      "muscle": "biceps-brachii-short.r",
+      "kind": "origin",
+      "bone": "scapula",
+      "points": [
+        [
+          -0.14162547886371613,
+          0.14499320089817047,
+          0.029172291979193687
+        ],
+        [
+          -0.1417100429534912,
+          0.14618341624736786,
+          0.026730135083198547
+        ],
+        [
+          -0.14002442359924316,
+          0.1473136991262436,
+          0.023112652823328972
+        ]
+      ],
+      "centroid": [
+        -0.14111922681331635,
+        0.146164208650589,
+        0.02633601240813732
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Short head of biceps brachii.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0003605260862968862,
+      "muscleDistanceM": 0.001416944433003664,
+      "review": "pending"
+    },
+    {
+      "muscle": "biceps-brachii-short.r",
+      "kind": "insertion",
+      "bone": "radius",
+      "points": [
+        [
+          -0.21513445675373077,
+          -0.12371134757995605,
+          0.012649263255298138
+        ]
+      ],
+      "centroid": [
+        -0.21513445675373077,
+        -0.12371134757995605,
+        0.012649263255298138
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "withinThreshold": false,
+      "nearestDistanceM": 0.03726081922650337,
+      "review": "REQUIRED: no vertices within 2 mm"
+    },
+    {
+      "muscle": "triceps-brachii-long.l",
+      "kind": "origin",
+      "bone": "scapula",
+      "points": [
+        [
+          0.1524142026901245,
+          0.11157488822937012,
+          -0.009566890075802803
+        ],
+        [
+          0.15190580487251282,
+          0.11077453941106796,
+          -0.012157159857451916
+        ],
+        [
+          0.15146879851818085,
+          0.1104462742805481,
+          -0.014683655463159084
+        ]
+      ],
+      "centroid": [
+        0.15192900598049164,
+        0.11093126237392426,
+        -0.012139308266341686
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Long head of triceps brachii.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00015983529738150537,
+      "muscleDistanceM": 0.0025865575298666954,
+      "review": "pending"
+    },
+    {
+      "muscle": "triceps-brachii-long.l",
+      "kind": "insertion",
+      "bone": "ulna",
+      "points": [
+        [
+          0.20398148894309998,
+          -0.1495414823293686,
+          -0.020011669024825096
+        ],
+        [
+          0.20688582956790924,
+          -0.1456276774406433,
+          -0.023085689172148705
+        ],
+        [
+          0.22015130519866943,
+          -0.14631162583827972,
+          -0.026181655004620552
+        ]
+      ],
+      "centroid": [
+        0.2103610336780548,
+        -0.1471584588289261,
+        -0.02309981733560562
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Triceps brachii muscle.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0026111353654414415,
+      "muscleDistanceM": 0.002490674378350377,
+      "review": "pending"
+    },
+    {
+      "muscle": "triceps-brachii-long.r",
+      "kind": "origin",
+      "bone": "scapula",
+      "points": [
+        [
+          -0.15241417288780212,
+          0.11157488822937012,
+          -0.009566890075802803
+        ],
+        [
+          -0.15190577507019043,
+          0.11077453941106796,
+          -0.012157159857451916
+        ],
+        [
+          -0.15146875381469727,
+          0.1104462742805481,
+          -0.014683655463159084
+        ]
+      ],
+      "centroid": [
+        -0.15192897617816925,
+        0.11093126237392426,
+        -0.012139308266341686
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Long head of triceps brachii.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00015985596110112965,
+      "muscleDistanceM": 0.002586649963632226,
+      "review": "pending"
+    },
+    {
+      "muscle": "triceps-brachii-long.r",
+      "kind": "insertion",
+      "bone": "ulna",
+      "points": [
+        [
+          -0.22020241618156433,
+          -0.14629009366035461,
+          -0.02616129256784916
+        ],
+        [
+          -0.2069372534751892,
+          -0.14566467702388763,
+          -0.02315717563033104
+        ],
+        [
+          -0.20398575067520142,
+          -0.1495048999786377,
+          -0.020001474767923355
+        ]
+      ],
+      "centroid": [
+        -0.2103610336780548,
+        -0.1471584588289261,
+        -0.02309981733560562
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Triceps brachii muscle.er"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0026111872866749763,
+      "muscleDistanceM": 0.0024906438775360584,
+      "review": "pending"
+    },
+    {
+      "muscle": "triceps-brachii-lateral.l",
+      "kind": "origin",
+      "bone": "humerus",
+      "points": [
+        [
+          0.20476645231246948,
+          0.009276754222810268,
+          -0.012087455950677395
+        ],
+        [
+          0.19704383611679077,
+          0.050471190363168716,
+          -0.008715424686670303
+        ],
+        [
+          0.1881052404642105,
+          0.09767559915781021,
+          -0.005382766015827656
+        ]
+      ],
+      "centroid": [
+        0.19662439823150635,
+        0.05254923924803734,
+        -0.008722735568881035
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Lateral head of triceps brachii.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.000646082975436002,
+      "muscleDistanceM": 0.0012758048251271248,
+      "review": "pending"
+    },
+    {
+      "muscle": "triceps-brachii-lateral.l",
+      "kind": "insertion",
+      "bone": "ulna",
+      "points": [
+        [
+          0.20398148894309998,
+          -0.1495414823293686,
+          -0.020011669024825096
+        ],
+        [
+          0.20688582956790924,
+          -0.1456276774406433,
+          -0.023085689172148705
+        ],
+        [
+          0.22015130519866943,
+          -0.14631162583827972,
+          -0.026181655004620552
+        ]
+      ],
+      "centroid": [
+        0.2103610336780548,
+        -0.1471584588289261,
+        -0.02309981733560562
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Triceps brachii muscle.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0026111353654414415,
+      "muscleDistanceM": 0.006339338608086109,
+      "review": "pending"
+    },
+    {
+      "muscle": "triceps-brachii-lateral.r",
+      "kind": "origin",
+      "bone": "humerus",
+      "points": [
+        [
+          -0.20476648211479187,
+          0.009276754222810268,
+          -0.01208745501935482
+        ],
+        [
+          -0.19704383611679077,
+          0.050471190363168716,
+          -0.00871542003005743
+        ],
+        [
+          -0.1881052702665329,
+          0.09767559915781021,
+          -0.005382760893553495
+        ]
+      ],
+      "centroid": [
+        -0.19662442803382874,
+        0.05254923924803734,
+        -0.008722731843590736
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Lateral head of triceps brachii.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0006460848380811512,
+      "muscleDistanceM": 0.0012757418444380164,
+      "review": "pending"
+    },
+    {
+      "muscle": "triceps-brachii-lateral.r",
+      "kind": "insertion",
+      "bone": "ulna",
+      "points": [
+        [
+          -0.22020241618156433,
+          -0.14629009366035461,
+          -0.02616129256784916
+        ],
+        [
+          -0.2069372534751892,
+          -0.14566467702388763,
+          -0.02315717563033104
+        ],
+        [
+          -0.20398575067520142,
+          -0.1495048999786377,
+          -0.020001474767923355
+        ]
+      ],
+      "centroid": [
+        -0.2103610336780548,
+        -0.1471584588289261,
+        -0.02309981733560562
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Triceps brachii muscle.er"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0026111872866749763,
+      "muscleDistanceM": 0.006339371670037508,
+      "review": "pending"
+    },
+    {
+      "muscle": "brachioradialis.l",
+      "kind": "origin",
+      "bone": "humerus",
+      "points": [
+        [
+          0.2234271913766861,
+          -0.07555048167705536,
+          -0.015070939436554909
+        ],
+        [
+          0.21976998448371887,
+          -0.06039169803261757,
+          -0.013948418200016022
+        ],
+        [
+          0.21621933579444885,
+          -0.042404480278491974,
+          -0.013464882969856262
+        ]
+      ],
+      "centroid": [
+        0.21979118883609772,
+        -0.05938549339771271,
+        -0.014157837256789207
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Brachioradialis muscle.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0001522437814855948,
+      "muscleDistanceM": 0.0009608989348635077,
+      "review": "pending"
+    },
+    {
+      "muscle": "brachioradialis.l",
+      "kind": "insertion",
+      "bone": "radius",
+      "points": [
+        [
+          0.2865818738937378,
+          -0.38538533449172974,
+          0.049821607768535614
+        ],
+        [
+          0.28688564896583557,
+          -0.3819851577281952,
+          0.04833122715353966
+        ],
+        [
+          0.28650009632110596,
+          -0.378567099571228,
+          0.04935061186552048
+        ]
+      ],
+      "centroid": [
+        0.2866559326648712,
+        -0.3819792568683624,
+        0.04916780814528465
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Brachioradialis muscle.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00036251929122954607,
+      "muscleDistanceM": 0.0015723149990662932,
+      "review": "pending"
+    },
+    {
+      "muscle": "brachioradialis.r",
+      "kind": "origin",
+      "bone": "humerus",
+      "points": [
+        [
+          -0.2234272062778473,
+          -0.07555048167705536,
+          -0.015070942230522633
+        ],
+        [
+          -0.21976998448371887,
+          -0.06039169803261757,
+          -0.013948418200016022
+        ],
+        [
+          -0.21621935069561005,
+          -0.042404480278491974,
+          -0.013464882969856262
+        ]
+      ],
+      "centroid": [
+        -0.2197912335395813,
+        -0.05938549339771271,
+        -0.014157837256789207
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Brachioradialis muscle.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00015226037066895515,
+      "muscleDistanceM": 0.00096082006348297,
+      "review": "pending"
+    },
+    {
+      "muscle": "brachioradialis.r",
+      "kind": "insertion",
+      "bone": "radius",
+      "points": [
+        [
+          -0.2865818738937378,
+          -0.38538533449172974,
+          0.049821607768535614
+        ],
+        [
+          -0.28688564896583557,
+          -0.3819851577281952,
+          0.04833122715353966
+        ],
+        [
+          -0.28650009632110596,
+          -0.378567099571228,
+          0.04935061186552048
+        ]
+      ],
+      "centroid": [
+        -0.2866559326648712,
+        -0.3819792568683624,
+        0.04916780814528465
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Brachioradialis muscle.er"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0003624863747972995,
+      "muscleDistanceM": 0.0015722981188446283,
+      "review": "pending"
+    },
+    {
+      "muscle": "pronator-teres.l",
+      "kind": "origin",
+      "bone": "humerus",
+      "points": [
+        [
+          0.20137983560562134,
+          -0.13896538317203522,
+          0.00552562577649951
+        ]
+      ],
+      "centroid": [
+        0.20137983560562134,
+        -0.13896538317203522,
+        0.00552562577649951
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 72,
+      "review": "pending"
+    },
+    {
+      "muscle": "pronator-teres.l",
+      "kind": "origin",
+      "bone": "ulna",
+      "points": [
+        [
+          0.21419337391853333,
+          -0.17021647095680237,
+          0.0043301768600940704
+        ]
+      ],
+      "centroid": [
+        0.21419337391853333,
+        -0.17021647095680237,
+        0.0043301768600940704
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 24,
+      "review": "pending"
+    },
+    {
+      "muscle": "pronator-teres.l",
+      "kind": "insertion",
+      "bone": "radius",
+      "points": [
+        [
+          0.25568974018096924,
+          -0.23676246404647827,
+          0.016205839812755585
+        ]
+      ],
+      "centroid": [
+        0.25568974018096924,
+        -0.23676246404647827,
+        0.016205839812755585
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 200,
+      "review": "pending"
+    },
+    {
+      "muscle": "pronator-teres.r",
+      "kind": "origin",
+      "bone": "humerus",
+      "points": [
+        [
+          -0.2013798952102661,
+          -0.13896532356739044,
+          0.005525621585547924
+        ]
+      ],
+      "centroid": [
+        -0.2013798952102661,
+        -0.13896532356739044,
+        0.005525621585547924
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 72,
+      "review": "pending"
+    },
+    {
+      "muscle": "pronator-teres.r",
+      "kind": "origin",
+      "bone": "ulna",
+      "points": [
+        [
+          -0.2141934633255005,
+          -0.17021647095680237,
+          0.004330173134803772
+        ]
+      ],
+      "centroid": [
+        -0.2141934633255005,
+        -0.17021647095680237,
+        0.004330173134803772
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 24,
+      "review": "pending"
+    },
+    {
+      "muscle": "pronator-teres.r",
+      "kind": "insertion",
+      "bone": "radius",
+      "points": [
+        [
+          -0.2556898295879364,
+          -0.23676244914531708,
+          0.016205837950110435
+        ]
+      ],
+      "centroid": [
+        -0.2556898295879364,
+        -0.23676244914531708,
+        0.016205837950110435
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 200,
+      "review": "pending"
+    },
+    {
+      "muscle": "flexor-carpi-radialis.l",
+      "kind": "origin",
+      "bone": "humerus",
+      "points": [
+        [
+          0.1931525021791458,
+          -0.13709476590156555,
+          0.0020267830695956945
+        ]
+      ],
+      "centroid": [
+        0.1931525021791458,
+        -0.13709476590156555,
+        0.0020267830695956945
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 18,
+      "review": "pending"
+    },
+    {
+      "muscle": "flexor-carpi-radialis.l",
+      "kind": "insertion",
+      "bone": "hand",
+      "points": [
+        [
+          0.27722418308258057,
+          -0.4154738485813141,
+          0.061488691717386246
+        ]
+      ],
+      "centroid": [
+        0.27722418308258057,
+        -0.4154738485813141,
+        0.061488691717386246
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 28,
+      "review": "pending"
+    },
+    {
+      "muscle": "flexor-carpi-radialis.r",
+      "kind": "origin",
+      "bone": "humerus",
+      "points": [
+        [
+          -0.19315262138843536,
+          -0.13709476590156555,
+          0.002026781439781189
+        ]
+      ],
+      "centroid": [
+        -0.19315262138843536,
+        -0.13709476590156555,
+        0.002026781439781189
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 18,
+      "review": "pending"
+    },
+    {
+      "muscle": "flexor-carpi-radialis.r",
+      "kind": "insertion",
+      "bone": "hand",
+      "points": [
+        [
+          -0.27722427248954773,
+          -0.4154738485813141,
+          0.06148868799209595
+        ]
+      ],
+      "centroid": [
+        -0.27722427248954773,
+        -0.4154738485813141,
+        0.06148868799209595
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 28,
+      "review": "pending"
+    },
+    {
+      "muscle": "palmaris-longus.l",
+      "kind": "origin",
+      "bone": "humerus",
+      "points": [
+        [
+          0.18771976232528687,
+          -0.1380685269832611,
+          0.0011423402465879917
+        ]
+      ],
+      "centroid": [
+        0.18771976232528687,
+        -0.1380685269832611,
+        0.0011423402465879917
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 32,
+      "review": "pending"
+    },
+    {
+      "muscle": "palmaris-longus.l",
+      "kind": "insertion",
+      "bone": "hand",
+      "points": [
+        [
+          0.23738357424736023,
+          -0.4647825062274933,
+          0.07877431064844131
+        ]
+      ],
+      "centroid": [
+        0.23738357424736023,
+        -0.4647825062274933,
+        0.07877431064844131
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 9,
+      "review": "pending"
+    },
+    {
+      "muscle": "palmaris-longus.r",
+      "kind": "origin",
+      "bone": "humerus",
+      "points": [
+        [
+          -0.18766841292381287,
+          -0.13807739317417145,
+          0.0011147407349199057
+        ]
+      ],
+      "centroid": [
+        -0.18766841292381287,
+        -0.13807739317417145,
+        0.0011147407349199057
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 33,
+      "review": "pending"
+    },
+    {
+      "muscle": "palmaris-longus.r",
+      "kind": "insertion",
+      "bone": "hand",
+      "points": [
+        [
+          -0.2369079738855362,
+          -0.4646175503730774,
+          0.07872572541236877
+        ]
+      ],
+      "centroid": [
+        -0.2369079738855362,
+        -0.4646175503730774,
+        0.07872572541236877
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 8,
+      "review": "pending"
+    },
+    {
+      "muscle": "flexor-carpi-ulnaris.l",
+      "kind": "origin",
+      "bone": "ulna",
+      "points": [
+        [
+          0.2413138747215271,
+          -0.2998121678829193,
+          0.024987956508994102
+        ],
+        [
+          0.2383197844028473,
+          -0.2518470287322998,
+          0.013289671391248703
+        ],
+        [
+          0.2240457385778427,
+          -0.20193663239479065,
+          0.000980250770226121
+        ]
+      ],
+      "centroid": [
+        0.2345561534166336,
+        -0.25117021799087524,
+        0.013079018332064152
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Ulnar head of flexor carpi ulnaris.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0004155202768743038,
+      "muscleDistanceM": 0.010755996219813824,
+      "review": "pending"
+    },
+    {
+      "muscle": "flexor-carpi-ulnaris.l",
+      "kind": "insertion",
+      "bone": "hand",
+      "points": [
+        [
+          0.24480998516082764,
+          -0.40354034304618835,
+          0.06145303323864937
+        ]
+      ],
+      "centroid": [
+        0.24480998516082764,
+        -0.40354034304618835,
+        0.06145303323864937
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 154,
+      "review": "pending"
+    },
+    {
+      "muscle": "flexor-carpi-ulnaris.r",
+      "kind": "origin",
+      "bone": "ulna",
+      "points": [
+        [
+          -0.24131377041339874,
+          -0.2998121678829193,
+          0.024987952783703804
+        ],
+        [
+          -0.2383197396993637,
+          -0.2518470287322998,
+          0.013289671391248703
+        ],
+        [
+          -0.22404563426971436,
+          -0.20193663239479065,
+          0.0009802529821172357
+        ]
+      ],
+      "centroid": [
+        -0.23455610871315002,
+        -0.25117021799087524,
+        0.013079018332064152
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Ulnar head of flexor carpi ulnaris.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00041552912443876266,
+      "muscleDistanceM": 0.01075588446110487,
+      "review": "pending"
+    },
+    {
+      "muscle": "flexor-carpi-ulnaris.r",
+      "kind": "insertion",
+      "bone": "hand",
+      "points": [
+        [
+          -0.2448367029428482,
+          -0.40357506275177,
+          0.061471253633499146
+        ]
+      ],
+      "centroid": [
+        -0.2448367029428482,
+        -0.40357506275177,
+        0.061471253633499146
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 153,
+      "review": "pending"
+    },
+    {
+      "muscle": "extensor-carpi-radialis-longus.l",
+      "kind": "origin",
+      "bone": "humerus",
+      "points": [
+        [
+          0.24604950845241547,
+          -0.12912003695964813,
+          -0.014738315716385841
+        ],
+        [
+          0.2390311360359192,
+          -0.11313256621360779,
+          -0.017881950363516808
+        ],
+        [
+          0.2302357405424118,
+          -0.09236827492713928,
+          -0.0184739138931036
+        ]
+      ],
+      "centroid": [
+        0.23842377960681915,
+        -0.11150595545768738,
+        -0.017035873606801033
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Extensor carpi radialis longus.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0003895942645613104,
+      "muscleDistanceM": 0.0006858602282591164,
+      "review": "pending"
+    },
+    {
+      "muscle": "extensor-carpi-radialis-longus.l",
+      "kind": "insertion",
+      "bone": "hand",
+      "points": [
+        [
+          0.2846347987651825,
+          -0.418567955493927,
+          0.04843698441982269
+        ],
+        [
+          0.28459835052490234,
+          -0.41686564683914185,
+          0.04868176952004433
+        ],
+        [
+          0.28517279028892517,
+          -0.41491231322288513,
+          0.04961436614394188
+        ]
+      ],
+      "centroid": [
+        0.28480497002601624,
+        -0.4167669117450714,
+        0.04891670495271683
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Extensor carpi radialis longus.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00021127608488313854,
+      "muscleDistanceM": 0.0005360646755434573,
+      "review": "pending"
+    },
+    {
+      "muscle": "extensor-carpi-radialis-longus.r",
+      "kind": "origin",
+      "bone": "humerus",
+      "points": [
+        [
+          -0.24604950845241547,
+          -0.12912003695964813,
+          -0.014738321304321289
+        ],
+        [
+          -0.2390311360359192,
+          -0.11313256621360779,
+          -0.017881950363516808
+        ],
+        [
+          -0.2302357703447342,
+          -0.09236827492713928,
+          -0.018473917618393898
+        ]
+      ],
+      "centroid": [
+        -0.23842377960681915,
+        -0.11150595545768738,
+        -0.017035875469446182
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Extensor carpi radialis longus.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0003895888803526759,
+      "muscleDistanceM": 0.0006858414271846414,
+      "review": "pending"
+    },
+    {
+      "muscle": "extensor-carpi-radialis-longus.r",
+      "kind": "insertion",
+      "bone": "hand",
+      "points": [
+        [
+          -0.2846347689628601,
+          -0.418567955493927,
+          0.04843698441982269
+        ],
+        [
+          -0.28459829092025757,
+          -0.41686564683914185,
+          0.04868176952004433
+        ],
+        [
+          -0.28517264127731323,
+          -0.41491231322288513,
+          0.04961436614394188
+        ]
+      ],
+      "centroid": [
+        -0.2848048508167267,
+        -0.4167669117450714,
+        0.04891670495271683
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Extensor carpi radialis longus.er"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00021128841035533696,
+      "muscleDistanceM": 0.0005360296345315874,
+      "review": "pending"
+    },
+    {
+      "muscle": "extensor-digitorum.l",
+      "kind": "origin",
+      "bone": "humerus",
+      "points": [
+        [
+          0.23894938826560974,
+          -0.13632197678089142,
+          -0.018665645271539688
+        ]
+      ],
+      "centroid": [
+        0.23894938826560974,
+        -0.13632197678089142,
+        -0.018665645271539688
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 34,
+      "review": "pending"
+    },
+    {
+      "muscle": "extensor-digitorum.l",
+      "kind": "insertion",
+      "bone": "hand",
+      "points": [
+        [
+          0.254220187664032,
+          -0.484258234500885,
+          0.06872276961803436
+        ],
+        [
+          0.2540779709815979,
+          -0.4821523427963257,
+          0.06820861250162125
+        ],
+        [
+          0.25370603799819946,
+          -0.4800696074962616,
+          0.06736526638269424
+        ]
+      ],
+      "centroid": [
+        0.2539992928504944,
+        -0.4821453392505646,
+        0.06809371709823608
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Extensor digitorum.e1l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 3.791616836679168e-05,
+      "muscleDistanceM": 0.0011542261345312,
+      "review": "pending"
+    },
+    {
+      "muscle": "extensor-digitorum.l",
+      "kind": "insertion",
+      "bone": "hand",
+      "points": [
+        [
+          0.2728227376937866,
+          -0.48554134368896484,
+          0.06743453443050385
+        ],
+        [
+          0.2743645906448364,
+          -0.4865351915359497,
+          0.0675172209739685
+        ],
+        [
+          0.2767133116722107,
+          -0.4860571026802063,
+          0.06695207208395004
+        ]
+      ],
+      "centroid": [
+        0.2746416926383972,
+        -0.4860467314720154,
+        0.06730068475008011
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Extensor digitorum.e2l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 1.9325916582602076e-05,
+      "muscleDistanceM": 0.002242457354441285,
+      "review": "pending"
+    },
+    {
+      "muscle": "extensor-digitorum.l",
+      "kind": "insertion",
+      "bone": "hand",
+      "points": [
+        [
+          0.2982158064842224,
+          -0.48974332213401794,
+          0.06677194684743881
+        ],
+        [
+          0.29687151312828064,
+          -0.4870871305465698,
+          0.06589354574680328
+        ],
+        [
+          0.2973479926586151,
+          -0.48585090041160583,
+          0.06508996337652206
+        ]
+      ],
+      "centroid": [
+        0.29747769236564636,
+        -0.4875504970550537,
+        0.06591364741325378
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Extensor digitorum.e3l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 3.1680303891334916e-07,
+      "muscleDistanceM": 0.0031684390269219875,
+      "review": "pending"
+    },
+    {
+      "muscle": "extensor-digitorum.l",
+      "kind": "insertion",
+      "bone": "hand",
+      "points": [
+        [
+          0.23183424770832062,
+          -0.5041247606277466,
+          0.08995930105447769
+        ],
+        [
+          0.2314511239528656,
+          -0.5024186968803406,
+          0.08881685137748718
+        ],
+        [
+          0.2315511852502823,
+          -0.5007470846176147,
+          0.0875496119260788
+        ]
+      ],
+      "centroid": [
+        0.2316121906042099,
+        -0.5024301409721375,
+        0.08877523988485336
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Extensor digitorum.e4l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 8.501168485963717e-05,
+      "muscleDistanceM": 0.0005853881593793631,
+      "review": "pending"
+    },
+    {
+      "muscle": "extensor-digitorum.l",
+      "kind": "insertion",
+      "bone": "hand",
+      "points": [
+        [
+          0.25603964924812317,
+          -0.5184826850891113,
+          0.09284024685621262
+        ],
+        [
+          0.2559434175491333,
+          -0.5167320966720581,
+          0.09117832034826279
+        ],
+        [
+          0.25606468319892883,
+          -0.5150675773620605,
+          0.08927237242460251
+        ]
+      ],
+      "centroid": [
+        0.2560163736343384,
+        -0.5167456865310669,
+        0.09108070284128189
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Extensor digitorum.e5l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00021642704086843878,
+      "muscleDistanceM": 0.0011765370145440102,
+      "review": "pending"
+    },
+    {
+      "muscle": "extensor-digitorum.l",
+      "kind": "insertion",
+      "bone": "hand",
+      "points": [
+        [
+          0.2818603813648224,
+          -0.5232213735580444,
+          0.09236272424459457
+        ],
+        [
+          0.28083592653274536,
+          -0.5216431021690369,
+          0.09106242656707764
+        ],
+        [
+          0.2810632288455963,
+          -0.5199533700942993,
+          0.08940242230892181
+        ]
+      ],
+      "centroid": [
+        0.2812504768371582,
+        -0.5215823650360107,
+        0.09092053771018982
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Extensor digitorum.e6l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00021102729078847915,
+      "muscleDistanceM": 0.0013214093632996082,
+      "review": "pending"
+    },
+    {
+      "muscle": "extensor-digitorum.l",
+      "kind": "insertion",
+      "bone": "hand",
+      "points": [
+        [
+          0.31369075179100037,
+          -0.5200486183166504,
+          0.0880432277917862
+        ],
+        [
+          0.3133029639720917,
+          -0.5183608531951904,
+          0.08627393841743469
+        ],
+        [
+          0.3124547302722931,
+          -0.5170865058898926,
+          0.08407614380121231
+        ]
+      ],
+      "centroid": [
+        0.31314581632614136,
+        -0.5184879899024963,
+        0.08611802756786346
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Extensor digitorum.e7l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00019996901392005384,
+      "muscleDistanceM": 0.000616512552369386,
+      "review": "pending"
+    },
+    {
+      "muscle": "extensor-digitorum.l",
+      "kind": "insertion",
+      "bone": "hand",
+      "points": [
+        [
+          0.23638248443603516,
+          -0.47680097818374634,
+          0.07180768251419067
+        ],
+        [
+          0.23697105050086975,
+          -0.4743918478488922,
+          0.07080374658107758
+        ],
+        [
+          0.23644088208675385,
+          -0.47261843085289,
+          0.06976292282342911
+        ]
+      ],
+      "centroid": [
+        0.23659932613372803,
+        -0.47459185123443604,
+        0.07078588008880615
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Extensor digitorum.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00018304945842828602,
+      "muscleDistanceM": 0.0015179518377408385,
+      "review": "pending"
+    },
+    {
+      "muscle": "extensor-digitorum.r",
+      "kind": "origin",
+      "bone": "humerus",
+      "points": [
+        [
+          -0.23889389634132385,
+          -0.1359839141368866,
+          -0.018735095858573914
+        ]
+      ],
+      "centroid": [
+        -0.23889389634132385,
+        -0.1359839141368866,
+        -0.018735095858573914
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 34,
+      "review": "pending"
+    },
+    {
+      "muscle": "extensor-digitorum.r",
+      "kind": "insertion",
+      "bone": "hand",
+      "points": [
+        [
+          -0.2542201280593872,
+          -0.484258234500885,
+          0.06872276961803436
+        ],
+        [
+          -0.2540779113769531,
+          -0.4821523427963257,
+          0.06820861250162125
+        ],
+        [
+          -0.2537059485912323,
+          -0.4800696074962616,
+          0.06736526638269424
+        ]
+      ],
+      "centroid": [
+        -0.253999263048172,
+        -0.4821453392505646,
+        0.06809371709823608
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Extensor digitorum.e1r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 3.793334690271877e-05,
+      "muscleDistanceM": 0.0011534553486853838,
+      "review": "pending"
+    },
+    {
+      "muscle": "extensor-digitorum.r",
+      "kind": "insertion",
+      "bone": "hand",
+      "points": [
+        [
+          -0.27673089504241943,
+          -0.48601430654525757,
+          0.06692858040332794
+        ],
+        [
+          -0.27439165115356445,
+          -0.4865618646144867,
+          0.06752727180719376
+        ],
+        [
+          -0.272830069065094,
+          -0.4855636656284332,
+          0.06744121760129929
+        ]
+      ],
+      "centroid": [
+        -0.27464160323143005,
+        -0.4860467314720154,
+        0.06730068475008011
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Extensor digitorum.e2r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 1.9346081899129786e-05,
+      "muscleDistanceM": 0.0022423500195145607,
+      "review": "pending"
+    },
+    {
+      "muscle": "extensor-digitorum.r",
+      "kind": "insertion",
+      "bone": "hand",
+      "points": [
+        [
+          -0.29821574687957764,
+          -0.48974332213401794,
+          0.06677194684743881
+        ],
+        [
+          -0.29687145352363586,
+          -0.4870871305465698,
+          0.06589354574680328
+        ],
+        [
+          -0.2973479628562927,
+          -0.48585090041160583,
+          0.06508996337652206
+        ]
+      ],
+      "centroid": [
+        -0.297477662563324,
+        -0.4875504970550537,
+        0.06591364741325378
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Extensor digitorum.e3r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 3.2313539577444317e-07,
+      "muscleDistanceM": 0.003168522845953703,
+      "review": "pending"
+    },
+    {
+      "muscle": "extensor-digitorum.r",
+      "kind": "insertion",
+      "bone": "hand",
+      "points": [
+        [
+          -0.23183415830135345,
+          -0.5041247606277466,
+          0.08995930105447769
+        ],
+        [
+          -0.23145100474357605,
+          -0.5024186968803406,
+          0.08881685137748718
+        ],
+        [
+          -0.23155105113983154,
+          -0.5007470846176147,
+          0.0875496119260788
+        ]
+      ],
+      "centroid": [
+        -0.23161204159259796,
+        -0.5024301409721375,
+        0.08877523988485336
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Extensor digitorum.e4r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 8.501730917487293e-05,
+      "muscleDistanceM": 0.000585403642617166,
+      "review": "pending"
+    },
+    {
+      "muscle": "extensor-digitorum.r",
+      "kind": "insertion",
+      "bone": "hand",
+      "points": [
+        [
+          -0.256039559841156,
+          -0.5184826850891113,
+          0.09284024685621262
+        ],
+        [
+          -0.25594329833984375,
+          -0.5167320966720581,
+          0.09117832034826279
+        ],
+        [
+          -0.25606462359428406,
+          -0.5150675773620605,
+          0.08927237242460251
+        ]
+      ],
+      "centroid": [
+        -0.25601625442504883,
+        -0.5167456865310669,
+        0.09108070284128189
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Extensor digitorum.e5r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00021638628095388412,
+      "muscleDistanceM": 0.001176882185973227,
+      "review": "pending"
+    },
+    {
+      "muscle": "extensor-digitorum.r",
+      "kind": "insertion",
+      "bone": "hand",
+      "points": [
+        [
+          -0.2818603515625,
+          -0.5232213735580444,
+          0.09236272424459457
+        ],
+        [
+          -0.2808358669281006,
+          -0.5216431021690369,
+          0.09106242656707764
+        ],
+        [
+          -0.28106316924095154,
+          -0.5199533700942993,
+          0.08940242230892181
+        ]
+      ],
+      "centroid": [
+        -0.28125035762786865,
+        -0.5215823650360107,
+        0.09092053771018982
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Extensor digitorum.e6r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00021102145547047257,
+      "muscleDistanceM": 0.0013211738551035523,
+      "review": "pending"
+    },
+    {
+      "muscle": "extensor-digitorum.r",
+      "kind": "insertion",
+      "bone": "hand",
+      "points": [
+        [
+          -0.3136906623840332,
+          -0.5200486183166504,
+          0.0880432277917862
+        ],
+        [
+          -0.3133029341697693,
+          -0.5183608531951904,
+          0.08627393841743469
+        ],
+        [
+          -0.3124546706676483,
+          -0.5170865058898926,
+          0.08407614380121231
+        ]
+      ],
+      "centroid": [
+        -0.3131457567214966,
+        -0.5184879899024963,
+        0.08611802756786346
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Extensor digitorum.e7r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00019996901392005384,
+      "muscleDistanceM": 0.000616254867054522,
+      "review": "pending"
+    },
+    {
+      "muscle": "extensor-digitorum.r",
+      "kind": "insertion",
+      "bone": "hand",
+      "points": [
+        [
+          -0.2363823652267456,
+          -0.47680097818374634,
+          0.07180768251419067
+        ],
+        [
+          -0.2369709610939026,
+          -0.4743918478488922,
+          0.07080374658107758
+        ],
+        [
+          -0.2364407330751419,
+          -0.47261843085289,
+          0.06976292282342911
+        ]
+      ],
+      "centroid": [
+        -0.23659928143024445,
+        -0.47459185123443604,
+        0.07078588008880615
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Extensor digitorum.er"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00018307538994122297,
+      "muscleDistanceM": 0.001518374658189714,
+      "review": "pending"
+    },
+    {
+      "muscle": "extensor-carpi-ulnaris.l",
+      "kind": "origin",
+      "bone": "humerus",
+      "points": [
+        [
+          0.23288612067699432,
+          -0.12444721162319183,
+          -0.021725259721279144
+        ]
+      ],
+      "centroid": [
+        0.23288612067699432,
+        -0.12444721162319183,
+        -0.021725259721279144
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 24,
+      "review": "pending"
+    },
+    {
+      "muscle": "extensor-carpi-ulnaris.l",
+      "kind": "origin",
+      "bone": "ulna",
+      "points": [
+        [
+          0.2324562966823578,
+          -0.3037322461605072,
+          0.02059302292764187
+        ]
+      ],
+      "centroid": [
+        0.2324562966823578,
+        -0.3037322461605072,
+        0.02059302292764187
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 181,
+      "review": "pending"
+    },
+    {
+      "muscle": "extensor-carpi-ulnaris.l",
+      "kind": "insertion",
+      "bone": "hand",
+      "points": [
+        [
+          0.24204939603805542,
+          -0.4082155227661133,
+          0.04944630712270737
+        ]
+      ],
+      "centroid": [
+        0.24204939603805542,
+        -0.4082155227661133,
+        0.04944630712270737
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 44,
+      "review": "pending"
+    },
+    {
+      "muscle": "extensor-carpi-ulnaris.r",
+      "kind": "origin",
+      "bone": "humerus",
+      "points": [
+        [
+          -0.23288623988628387,
+          -0.12444709241390228,
+          -0.021725259721279144
+        ]
+      ],
+      "centroid": [
+        -0.23288623988628387,
+        -0.12444709241390228,
+        -0.021725259721279144
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 24,
+      "review": "pending"
+    },
+    {
+      "muscle": "extensor-carpi-ulnaris.r",
+      "kind": "origin",
+      "bone": "ulna",
+      "points": [
+        [
+          -0.23245640099048615,
+          -0.30373209714889526,
+          0.02059301733970642
+        ]
+      ],
+      "centroid": [
+        -0.23245640099048615,
+        -0.30373209714889526,
+        0.02059301733970642
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 181,
+      "review": "pending"
+    },
+    {
+      "muscle": "extensor-carpi-ulnaris.r",
+      "kind": "insertion",
+      "bone": "hand",
+      "points": [
+        [
+          -0.24204953014850616,
+          -0.40821540355682373,
+          0.04944629594683647
+        ]
+      ],
+      "centroid": [
+        -0.24204953014850616,
+        -0.40821540355682373,
+        0.04944629594683647
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 44,
+      "review": "pending"
+    },
+    {
+      "muscle": "brachialis.l",
+      "kind": "origin",
+      "bone": "humerus",
+      "points": [
+        [
+          0.21154652535915375,
+          -0.10283336788415909,
+          -0.005984137300401926
+        ],
+        [
+          0.20778650045394897,
+          -0.03884441405534744,
+          -0.003991172183305025
+        ],
+        [
+          0.20727664232254028,
+          0.015249604359269142,
+          0.0044412994757294655
+        ]
+      ],
+      "centroid": [
+        0.20886872708797455,
+        -0.04210318252444267,
+        -0.0018403356662020087
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Brachialis muscle.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00437482725828886,
+      "muscleDistanceM": 0.006459629628807306,
+      "review": "pending"
+    },
+    {
+      "muscle": "brachialis.l",
+      "kind": "insertion",
+      "bone": "ulna",
+      "points": [
+        [
+          0.22309640049934387,
+          -0.18979501724243164,
+          -0.0004744171747006476
+        ],
+        [
+          0.22274358570575714,
+          -0.18458391726016998,
+          -8.338073530467227e-05
+        ],
+        [
+          0.22284841537475586,
+          -0.17978577315807343,
+          0.00034951759153045714
+        ]
+      ],
+      "centroid": [
+        0.22289590537548065,
+        -0.18471165001392365,
+        -6.863573071314022e-05
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Brachialis muscle.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0006694865878671408,
+      "muscleDistanceM": 0.002095883945003152,
+      "review": "pending"
+    },
+    {
+      "muscle": "brachialis.r",
+      "kind": "origin",
+      "bone": "humerus",
+      "points": [
+        [
+          -0.21154654026031494,
+          -0.10283336788415909,
+          -0.005984141957014799
+        ],
+        [
+          -0.20778653025627136,
+          -0.03884441405534744,
+          -0.003991176374256611
+        ],
+        [
+          -0.20727665722370148,
+          0.015249604359269142,
+          0.004441297613084316
+        ]
+      ],
+      "centroid": [
+        -0.20886877179145813,
+        -0.04210318252444267,
+        -0.0018403392750769854
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Brachialis muscle.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0043748049065470695,
+      "muscleDistanceM": 0.0064596133306622505,
+      "review": "pending"
+    },
+    {
+      "muscle": "brachialis.r",
+      "kind": "insertion",
+      "bone": "ulna",
+      "points": [
+        [
+          -0.2230963408946991,
+          -0.18979501724243164,
+          -0.0004744153702631593
+        ],
+        [
+          -0.22274352610111237,
+          -0.18458391726016998,
+          -8.33788508316502e-05
+        ],
+        [
+          -0.22284838557243347,
+          -0.17978577315807343,
+          0.00034951959969475865
+        ]
+      ],
+      "centroid": [
+        -0.22289584577083588,
+        -0.18471165001392365,
+        -6.863386079203337e-05
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Brachialis muscle.er"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0006694865878671408,
+      "muscleDistanceM": 0.002095772884786129,
+      "review": "pending"
+    },
+    {
+      "muscle": "triceps-brachii-medial.l",
+      "kind": "origin",
+      "bone": "humerus",
+      "points": [
+        [
+          0.21852098405361176,
+          -0.10387104749679565,
+          -0.01866755448281765
+        ],
+        [
+          0.20654091238975525,
+          -0.04906799644231796,
+          -0.016113055869936943
+        ],
+        [
+          0.18960921466350555,
+          0.03265674039721489,
+          -0.00701345456764102
+        ]
+      ],
+      "centroid": [
+        0.2048705667257309,
+        -0.039999887347221375,
+        -0.013922389596700668
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Medial head of triceps brachii.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0025747488252818584,
+      "muscleDistanceM": 0.0021443485748022795,
+      "review": "pending"
+    },
+    {
+      "muscle": "triceps-brachii-medial.l",
+      "kind": "insertion",
+      "bone": "ulna",
+      "points": [
+        [
+          0.20398148894309998,
+          -0.1495414823293686,
+          -0.020011669024825096
+        ],
+        [
+          0.20688582956790924,
+          -0.1456276774406433,
+          -0.023085689172148705
+        ],
+        [
+          0.22015130519866943,
+          -0.14631162583827972,
+          -0.026181655004620552
+        ]
+      ],
+      "centroid": [
+        0.2103610336780548,
+        -0.1471584588289261,
+        -0.02309981733560562
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Triceps brachii muscle.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0026111353654414415,
+      "muscleDistanceM": 0.0014059258392080665,
+      "review": "pending"
+    },
+    {
+      "muscle": "triceps-brachii-medial.r",
+      "kind": "origin",
+      "bone": "humerus",
+      "points": [
+        [
+          -0.21852099895477295,
+          -0.10387104749679565,
+          -0.01866755820810795
+        ],
+        [
+          -0.20654092729091644,
+          -0.04906799644231796,
+          -0.016113055869936943
+        ],
+        [
+          -0.18960922956466675,
+          0.03265674039721489,
+          -0.007013452239334583
+        ]
+      ],
+      "centroid": [
+        -0.2048705667257309,
+        -0.039999887347221375,
+        -0.013922389596700668
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Medial head of triceps brachii.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0025747427716851234,
+      "muscleDistanceM": 0.002144263591617346,
+      "review": "pending"
+    },
+    {
+      "muscle": "triceps-brachii-medial.r",
+      "kind": "insertion",
+      "bone": "ulna",
+      "points": [
+        [
+          -0.22020241618156433,
+          -0.14629009366035461,
+          -0.02616129256784916
+        ],
+        [
+          -0.2069372534751892,
+          -0.14566467702388763,
+          -0.02315717563033104
+        ],
+        [
+          -0.20398575067520142,
+          -0.1495048999786377,
+          -0.020001474767923355
+        ]
+      ],
+      "centroid": [
+        -0.2103610336780548,
+        -0.1471584588289261,
+        -0.02309981733560562
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Triceps brachii muscle.er"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0026111872866749763,
+      "muscleDistanceM": 0.0014058303786441684,
+      "review": "pending"
+    },
+    {
+      "muscle": "coracobrachialis.l",
+      "kind": "origin",
+      "bone": "scapula",
+      "points": [
+        [
+          0.13738320767879486,
+          0.1399042308330536,
+          0.02619899995625019
+        ],
+        [
+          0.13977675139904022,
+          0.14080765843391418,
+          0.02647855132818222
+        ],
+        [
+          0.14141695201396942,
+          0.14217984676361084,
+          0.027694320306181908
+        ]
+      ],
+      "centroid": [
+        0.13952575623989105,
+        0.1409638524055481,
+        0.026790624484419823
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Coracobrachialis muscle.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.000507272663526237,
+      "muscleDistanceM": 0.0009808499598875642,
+      "review": "pending"
+    },
+    {
+      "muscle": "coracobrachialis.l",
+      "kind": "insertion",
+      "bone": "humerus",
+      "points": [
+        [
+          0.1918717473745346,
+          0.00418569752946496,
+          -0.0008804367971606553
+        ]
+      ],
+      "centroid": [
+        0.1918717473745346,
+        0.00418569752946496,
+        -0.0008804367971606553
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 75,
+      "review": "pending"
+    },
+    {
+      "muscle": "coracobrachialis.r",
+      "kind": "origin",
+      "bone": "scapula",
+      "points": [
+        [
+          -0.14141692221164703,
+          0.14217989146709442,
+          0.0276943426579237
+        ],
+        [
+          -0.13977670669555664,
+          0.14080773293972015,
+          0.026478532701730728
+        ],
+        [
+          -0.13738320767879486,
+          0.1399042159318924,
+          0.026199012994766235
+        ]
+      ],
+      "centroid": [
+        -0.13952568173408508,
+        0.1409638524055481,
+        0.026790624484419823
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Coracobrachialis muscle.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0005072857020422816,
+      "muscleDistanceM": 0.000980979879386723,
+      "review": "pending"
+    },
+    {
+      "muscle": "coracobrachialis.r",
+      "kind": "insertion",
+      "bone": "humerus",
+      "points": [
+        [
+          -0.19187180697917938,
+          0.004185695666819811,
+          -0.0008804426761344075
+        ]
+      ],
+      "centroid": [
+        -0.19187180697917938,
+        0.004185695666819811,
+        -0.0008804426761344075
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 75,
+      "review": "pending"
+    },
+    {
+      "muscle": "anconeus.l",
+      "kind": "origin",
+      "bone": "humerus",
+      "points": [
+        [
+          0.23542183637619019,
+          -0.14492781460285187,
+          -0.01740594580769539
+        ],
+        [
+          0.2341250777244568,
+          -0.13880467414855957,
+          -0.020305374637246132
+        ],
+        [
+          0.23458947241306305,
+          -0.13060002028942108,
+          -0.02202483080327511
+        ]
+      ],
+      "centroid": [
+        0.2347121387720108,
+        -0.13811083137989044,
+        -0.019912047311663628
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Anconeus muscle.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 9.17103243409656e-05,
+      "muscleDistanceM": 0.0020164325833320618,
+      "review": "pending"
+    },
+    {
+      "muscle": "anconeus.l",
+      "kind": "insertion",
+      "bone": "ulna",
+      "points": [
+        [
+          0.22753643989562988,
+          -0.22191081941127777,
+          -0.01110875140875578
+        ],
+        [
+          0.22337695956230164,
+          -0.19370204210281372,
+          -0.018851779401302338
+        ],
+        [
+          0.21862150728702545,
+          -0.16637665033340454,
+          -0.026542773470282555
+        ]
+      ],
+      "centroid": [
+        0.22315829992294312,
+        -0.19386838376522064,
+        -0.01886986941099167
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Anconeus muscle.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0010509450221434236,
+      "muscleDistanceM": 0.0021688013803213835,
+      "review": "pending"
+    },
+    {
+      "muscle": "anconeus.r",
+      "kind": "origin",
+      "bone": "humerus",
+      "points": [
+        [
+          -0.23542183637619019,
+          -0.14492781460285187,
+          -0.017405953258275986
+        ],
+        [
+          -0.2341250777244568,
+          -0.13880467414855957,
+          -0.02030538022518158
+        ],
+        [
+          -0.23458947241306305,
+          -0.13060002028942108,
+          -0.022024838253855705
+        ]
+      ],
+      "centroid": [
+        -0.234712153673172,
+        -0.13811083137989044,
+        -0.019912056624889374
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Anconeus muscle.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 9.17103243409656e-05,
+      "muscleDistanceM": 0.0020164090674370527,
+      "review": "pending"
+    },
+    {
+      "muscle": "anconeus.r",
+      "kind": "insertion",
+      "bone": "ulna",
+      "points": [
+        [
+          -0.2275363653898239,
+          -0.22191081941127777,
+          -0.01110874768346548
+        ],
+        [
+          -0.22337694466114044,
+          -0.19370204210281372,
+          -0.01885177567601204
+        ],
+        [
+          -0.21862143278121948,
+          -0.16637665033340454,
+          -0.02654276229441166
+        ]
+      ],
+      "centroid": [
+        -0.22315821051597595,
+        -0.19386838376522064,
+        -0.01886986382305622
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Anconeus muscle.er"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.001050940714776516,
+      "muscleDistanceM": 0.0021689541172236204,
+      "review": "pending"
+    },
+    {
+      "muscle": "extensor-carpi-radialis-brevis.l",
+      "kind": "origin",
+      "bone": "humerus",
+      "points": [
+        [
+          0.24096816778182983,
+          -0.12261934578418732,
+          -0.01788656786084175
+        ]
+      ],
+      "centroid": [
+        0.24096816778182983,
+        -0.12261934578418732,
+        -0.01788656786084175
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 136,
+      "review": "pending"
+    },
+    {
+      "muscle": "extensor-carpi-radialis-brevis.l",
+      "kind": "insertion",
+      "bone": "hand",
+      "points": [
+        [
+          0.2726108133792877,
+          -0.42140311002731323,
+          0.04447243735194206
+        ],
+        [
+          0.27128517627716064,
+          -0.4186088442802429,
+          0.04327606037259102
+        ],
+        [
+          0.27161073684692383,
+          -0.4161094129085541,
+          0.04227561876177788
+        ]
+      ],
+      "centroid": [
+        0.2718355655670166,
+        -0.418707013130188,
+        0.04334137216210365
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Extensor carpi radialis brevis.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 1.0056584869744256e-05,
+      "muscleDistanceM": 0.0012620610650628805,
+      "review": "pending"
+    },
+    {
+      "muscle": "extensor-carpi-radialis-brevis.r",
+      "kind": "origin",
+      "bone": "humerus",
+      "points": [
+        [
+          -0.24096834659576416,
+          -0.12261927872896194,
+          -0.017886575311422348
+        ]
+      ],
+      "centroid": [
+        -0.24096834659576416,
+        -0.12261927872896194,
+        -0.017886575311422348
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 136,
+      "review": "pending"
+    },
+    {
+      "muscle": "extensor-carpi-radialis-brevis.r",
+      "kind": "insertion",
+      "bone": "hand",
+      "points": [
+        [
+          -0.27261072397232056,
+          -0.42140311002731323,
+          0.04447243735194206
+        ],
+        [
+          -0.27128511667251587,
+          -0.4186088442802429,
+          0.04327606037259102
+        ],
+        [
+          -0.27161067724227905,
+          -0.4161094129085541,
+          0.04227561876177788
+        ]
+      ],
+      "centroid": [
+        -0.2718355059623718,
+        -0.418707013130188,
+        0.04334137216210365
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Extensor carpi radialis brevis.er"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 1.0044594091596082e-05,
+      "muscleDistanceM": 0.0012619406916201115,
+      "review": "pending"
+    },
+    {
+      "muscle": "flexor-digitorum-superficialis.l",
+      "kind": "origin",
+      "bone": "humerus",
+      "points": [
+        [
+          0.1902780383825302,
+          -0.14587950706481934,
+          -0.00031266629230231047
+        ]
+      ],
+      "centroid": [
+        0.1902780383825302,
+        -0.14587950706481934,
+        -0.00031266629230231047
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 53,
+      "review": "pending"
+    },
+    {
+      "muscle": "flexor-digitorum-superficialis.l",
+      "kind": "origin",
+      "bone": "ulna",
+      "points": [
+        [
+          0.20872941613197327,
+          -0.1696455031633377,
+          0.003418335225433111
+        ]
+      ],
+      "centroid": [
+        0.20872941613197327,
+        -0.1696455031633377,
+        0.003418335225433111
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 23,
+      "review": "pending"
+    },
+    {
+      "muscle": "flexor-digitorum-superficialis.l",
+      "kind": "origin",
+      "bone": "radius",
+      "points": [
+        [
+          0.24519018828868866,
+          -0.21953707933425903,
+          0.015769392251968384
+        ]
+      ],
+      "centroid": [
+        0.24519018828868866,
+        -0.21953707933425903,
+        0.015769392251968384
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 41,
+      "review": "pending"
+    },
+    {
+      "muscle": "flexor-digitorum-superficialis.l",
+      "kind": "insertion",
+      "bone": "hand",
+      "points": [
+        [
+          0.2716257870197296,
+          -0.5041913986206055,
+          0.09112263470888138
+        ]
+      ],
+      "centroid": [
+        0.2716257870197296,
+        -0.5041913986206055,
+        0.09112263470888138
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 195,
+      "review": "pending"
+    },
+    {
+      "muscle": "flexor-digitorum-superficialis.r",
+      "kind": "origin",
+      "bone": "humerus",
+      "points": [
+        [
+          -0.1913093775510788,
+          -0.14639396965503693,
+          -0.00015735991473775357
+        ]
+      ],
+      "centroid": [
+        -0.1913093775510788,
+        -0.14639396965503693,
+        -0.00015735991473775357
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 46,
+      "review": "pending"
+    },
+    {
+      "muscle": "flexor-digitorum-superficialis.r",
+      "kind": "origin",
+      "bone": "ulna",
+      "points": [
+        [
+          -0.208871990442276,
+          -0.16989018023014069,
+          0.003215666627511382
+        ]
+      ],
+      "centroid": [
+        -0.208871990442276,
+        -0.16989018023014069,
+        0.003215666627511382
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 19,
+      "review": "pending"
+    },
+    {
+      "muscle": "flexor-digitorum-superficialis.r",
+      "kind": "origin",
+      "bone": "radius",
+      "points": [
+        [
+          -0.2454816848039627,
+          -0.2200309783220291,
+          0.015844052657485008
+        ]
+      ],
+      "centroid": [
+        -0.2454816848039627,
+        -0.2200309783220291,
+        0.015844052657485008
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 40,
+      "review": "pending"
+    },
+    {
+      "muscle": "flexor-digitorum-superficialis.r",
+      "kind": "insertion",
+      "bone": "hand",
+      "points": [
+        [
+          -0.2707751989364624,
+          -0.5040056705474854,
+          0.09118674695491791
+        ]
+      ],
+      "centroid": [
+        -0.2707751989364624,
+        -0.5040056705474854,
+        0.09118674695491791
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 197,
+      "review": "pending"
+    },
+    {
+      "muscle": "deltoid-anterior.l",
+      "kind": "origin",
+      "bone": "clavicle",
+      "points": [
+        [
+          0.09822256118059158,
+          0.163481205701828,
+          0.03137316182255745
+        ],
+        [
+          0.11631477624177933,
+          0.16795320808887482,
+          0.011217289604246616
+        ],
+        [
+          0.13828513026237488,
+          0.1695878505706787,
+          0.00424116849899292
+        ]
+      ],
+      "centroid": [
+        0.11762896180152893,
+        0.16701020300388336,
+        0.015598755329847336
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Clavicular part of deltoid muscle.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0037461621686816216,
+      "muscleDistanceM": 0.0017470528837293386,
+      "review": "pending"
+    },
+    {
+      "muscle": "deltoid-anterior.l",
+      "kind": "insertion",
+      "bone": "humerus",
+      "points": [
+        [
+          0.20999275147914886,
+          0.024620989337563515,
+          0.002800157992169261
+        ],
+        [
+          0.20642846822738647,
+          0.036615483462810516,
+          0.0058487593196332455
+        ],
+        [
+          0.20428188145160675,
+          0.05144629627466202,
+          0.006975156255066395
+        ]
+      ],
+      "centroid": [
+        0.20689064264297485,
+        0.03760461509227753,
+        0.005216159857809544
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Deltoid muscle.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0012054088292643428,
+      "muscleDistanceM": 0.005501264706254005,
+      "review": "pending"
+    },
+    {
+      "muscle": "deltoid-anterior.r",
+      "kind": "origin",
+      "bone": "clavicle",
+      "points": [
+        [
+          -0.13831663131713867,
+          0.16959498822689056,
+          0.004247672855854034
+        ],
+        [
+          -0.1163889616727829,
+          0.16795092821121216,
+          0.011150481179356575
+        ],
+        [
+          -0.09824167191982269,
+          0.1634952276945114,
+          0.03134901449084282
+        ]
+      ],
+      "centroid": [
+        -0.11762899160385132,
+        0.16701020300388336,
+        0.015598755329847336
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Clavicular part of deltoid muscle.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0037461735773831606,
+      "muscleDistanceM": 0.0017468297155573964,
+      "review": "pending"
+    },
+    {
+      "muscle": "deltoid-anterior.r",
+      "kind": "insertion",
+      "bone": "humerus",
+      "points": [
+        [
+          -0.20999275147914886,
+          0.024620989337563515,
+          0.0028001591563224792
+        ],
+        [
+          -0.20642846822738647,
+          0.036615483462810516,
+          0.005848761182278395
+        ],
+        [
+          -0.20428191125392914,
+          0.05144629627466202,
+          0.006975159514695406
+        ]
+      ],
+      "centroid": [
+        -0.20689067244529724,
+        0.03760461509227753,
+        0.005216161720454693
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Deltoid muscle.er"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0012053796090185642,
+      "muscleDistanceM": 0.005501256324350834,
+      "review": "pending"
+    },
+    {
+      "muscle": "deltoid-lateral.l",
+      "kind": "origin",
+      "bone": "scapula",
+      "points": [
+        [
+          0.16563116014003754,
+          0.16402725875377655,
+          0.0041162255220115185
+        ],
+        [
+          0.17145046591758728,
+          0.16406705975532532,
+          -0.006165509112179279
+        ],
+        [
+          0.17289836704730988,
+          0.16301555931568146,
+          -0.02009744755923748
+        ]
+      ],
+      "centroid": [
+        0.16999417543411255,
+        0.16370300948619843,
+        -0.007385918404906988
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Acromial part of deltoid muscle.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0018904488533735275,
+      "muscleDistanceM": 0.002522120252251625,
+      "review": "pending"
+    },
+    {
+      "muscle": "deltoid-lateral.l",
+      "kind": "insertion",
+      "bone": "humerus",
+      "points": [
+        [
+          0.20999275147914886,
+          0.024620989337563515,
+          0.002800157992169261
+        ],
+        [
+          0.20642846822738647,
+          0.036615483462810516,
+          0.0058487593196332455
+        ],
+        [
+          0.20428188145160675,
+          0.05144629627466202,
+          0.006975156255066395
+        ]
+      ],
+      "centroid": [
+        0.20689064264297485,
+        0.03760461509227753,
+        0.005216159857809544
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Deltoid muscle.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0012054088292643428,
+      "muscleDistanceM": 0.002637667814269662,
+      "review": "pending"
+    },
+    {
+      "muscle": "deltoid-lateral.r",
+      "kind": "origin",
+      "bone": "scapula",
+      "points": [
+        [
+          -0.16563108563423157,
+          0.16402725875377655,
+          0.0041162255220115185
+        ],
+        [
+          -0.1714504212141037,
+          0.16406705975532532,
+          -0.006165509112179279
+        ],
+        [
+          -0.1728983223438263,
+          0.16301555931568146,
+          -0.02009744755923748
+        ]
+      ],
+      "centroid": [
+        -0.16999411582946777,
+        0.16370300948619843,
+        -0.007385918404906988
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Acromial part of deltoid muscle.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0018904346507042646,
+      "muscleDistanceM": 0.002522128401324153,
+      "review": "pending"
+    },
+    {
+      "muscle": "deltoid-lateral.r",
+      "kind": "insertion",
+      "bone": "humerus",
+      "points": [
+        [
+          -0.20999275147914886,
+          0.024620989337563515,
+          0.0028001591563224792
+        ],
+        [
+          -0.20642846822738647,
+          0.036615483462810516,
+          0.005848761182278395
+        ],
+        [
+          -0.20428191125392914,
+          0.05144629627466202,
+          0.006975159514695406
+        ]
+      ],
+      "centroid": [
+        -0.20689067244529724,
+        0.03760461509227753,
+        0.005216161720454693
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Deltoid muscle.er"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0012053796090185642,
+      "muscleDistanceM": 0.0026384475640952587,
+      "review": "pending"
+    },
+    {
+      "muscle": "deltoid-posterior.l",
+      "kind": "origin",
+      "bone": "scapula",
+      "points": [
+        [
+          0.1056334525346756,
+          0.13077688217163086,
+          -0.06494328379631042
+        ],
+        [
+          0.14094609022140503,
+          0.14857162535190582,
+          -0.046946704387664795
+        ],
+        [
+          0.16991300880908966,
+          0.15284907817840576,
+          -0.03353210166096687
+        ]
+      ],
+      "centroid": [
+        0.13883651793003082,
+        0.14406728744506836,
+        -0.048471469432115555
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Scapular spinal part of deltoid muscle.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.004060700070112944,
+      "muscleDistanceM": 0.0034977130126208067,
+      "review": "pending"
+    },
+    {
+      "muscle": "deltoid-posterior.l",
+      "kind": "insertion",
+      "bone": "humerus",
+      "points": [
+        [
+          0.20999275147914886,
+          0.024620989337563515,
+          0.002800157992169261
+        ],
+        [
+          0.20642846822738647,
+          0.036615483462810516,
+          0.0058487593196332455
+        ],
+        [
+          0.20428188145160675,
+          0.05144629627466202,
+          0.006975156255066395
+        ]
+      ],
+      "centroid": [
+        0.20689064264297485,
+        0.03760461509227753,
+        0.005216159857809544
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Deltoid muscle.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0012054088292643428,
+      "muscleDistanceM": 0.004879317246377468,
+      "review": "pending"
+    },
+    {
+      "muscle": "deltoid-posterior.r",
+      "kind": "origin",
+      "bone": "scapula",
+      "points": [
+        [
+          -0.16991548240184784,
+          0.15285129845142365,
+          -0.033530350774526596
+        ],
+        [
+          -0.14097130298614502,
+          0.14857801795005798,
+          -0.04693537577986717
+        ],
+        [
+          -0.10563869774341583,
+          0.13077972829341888,
+          -0.06494025141000748
+        ]
+      ],
+      "centroid": [
+        -0.13883645832538605,
+        0.1440674364566803,
+        -0.048471469432115555
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Scapular spinal part of deltoid muscle.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0040606120601296425,
+      "muscleDistanceM": 0.0034978114999830723,
+      "review": "pending"
+    },
+    {
+      "muscle": "deltoid-posterior.r",
+      "kind": "insertion",
+      "bone": "humerus",
+      "points": [
+        [
+          -0.20999275147914886,
+          0.024620989337563515,
+          0.0028001591563224792
+        ],
+        [
+          -0.20642846822738647,
+          0.036615483462810516,
+          0.005848761182278395
+        ],
+        [
+          -0.20428191125392914,
+          0.05144629627466202,
+          0.006975159514695406
+        ]
+      ],
+      "centroid": [
+        -0.20689067244529724,
+        0.03760461509227753,
+        0.005216161720454693
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Deltoid muscle.er"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0012053796090185642,
+      "muscleDistanceM": 0.004879307933151722,
+      "review": "pending"
+    },
+    {
+      "muscle": "pectoralis-major-clavicular.l",
+      "kind": "origin",
+      "bone": "clavicle",
+      "points": [
+        [
+          0.033423762768507004,
+          0.1505661904811859,
+          0.0751427635550499
+        ],
+        [
+          0.06142871081829071,
+          0.1542281061410904,
+          0.06697175651788712
+        ],
+        [
+          0.08573750406503677,
+          0.15707334876060486,
+          0.04789312183856964
+        ]
+      ],
+      "centroid": [
+        0.06019666790962219,
+        0.15395599603652954,
+        0.0633358582854271
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Pectoralis major muscle.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0031867502257227898,
+      "muscleDistanceM": 0.005620533600449562,
+      "review": "pending"
+    },
+    {
+      "muscle": "pectoralis-major-clavicular.l",
+      "kind": "insertion",
+      "bone": "humerus",
+      "points": [
+        [
+          0.19792525470256805,
+          0.05662742257118225,
+          0.014654447324573994
+        ],
+        [
+          0.19428980350494385,
+          0.06646405905485153,
+          0.01496198121458292
+        ],
+        [
+          0.1834210902452469,
+          0.08981198072433472,
+          0.01493198424577713
+        ]
+      ],
+      "centroid": [
+        0.1918623000383377,
+        0.07100681960582733,
+        0.014850000850856304
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Pectoralis major muscle.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00022837831056676805,
+      "muscleDistanceM": 0.001181421335786581,
+      "review": "pending"
+    },
+    {
+      "muscle": "pectoralis-major-clavicular.r",
+      "kind": "origin",
+      "bone": "clavicle",
+      "points": [
+        [
+          -0.08573751151561737,
+          0.15707330405712128,
+          0.047893114387989044
+        ],
+        [
+          -0.06142869591712952,
+          0.154228076338768,
+          0.06697172671556473
+        ],
+        [
+          -0.0334237664937973,
+          0.1505662202835083,
+          0.0751427561044693
+        ]
+      ],
+      "centroid": [
+        -0.060196660459041595,
+        0.15395599603652954,
+        0.0633358582854271
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Pectoralis major muscle.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0031867509242147207,
+      "muscleDistanceM": 0.005620548035949469,
+      "review": "pending"
+    },
+    {
+      "muscle": "pectoralis-major-clavicular.r",
+      "kind": "insertion",
+      "bone": "humerus",
+      "points": [
+        [
+          -0.19792534410953522,
+          0.056627560406923294,
+          0.014654447324573994
+        ],
+        [
+          -0.19428986310958862,
+          0.06646417081356049,
+          0.014961980283260345
+        ],
+        [
+          -0.18342120945453644,
+          0.08981214463710785,
+          0.01493198424577713
+        ]
+      ],
+      "centroid": [
+        -0.19186240434646606,
+        0.07100693136453629,
+        0.014850002713501453
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Pectoralis major muscle.er"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00022838667791802436,
+      "muscleDistanceM": 0.0011814768658950925,
+      "review": "pending"
+    },
+    {
+      "muscle": "pectoralis-major-sternocostal.l",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          0.033423762768507004,
+          0.1505661904811859,
+          0.0751427635550499
+        ],
+        [
+          0.06142871081829071,
+          0.1542281061410904,
+          0.06697175651788712
+        ],
+        [
+          0.08573750406503677,
+          0.15707334876060486,
+          0.04789312183856964
+        ]
+      ],
+      "centroid": [
+        0.06019666790962219,
+        0.15395599603652954,
+        0.0633358582854271
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Pectoralis major muscle.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00727084232494235,
+      "muscleDistanceM": 0.02293272316455841,
+      "review": "REQUIRED: attachment away from named surface"
+    },
+    {
+      "muscle": "pectoralis-major-sternocostal.l",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          0.016920730471611023,
+          0.024288509041070938,
+          0.1363242268562317
+        ],
+        [
+          0.01551313977688551,
+          0.062205720692873,
+          0.12579220533370972
+        ],
+        [
+          0.013370029628276825,
+          0.09324456006288528,
+          0.11655106395483017
+        ]
+      ],
+      "centroid": [
+        0.015267180278897285,
+        0.05992686003446579,
+        0.12621845304965973
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Sternocostal head of pectoralis major muscle.e1l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.005313242319971323,
+      "muscleDistanceM": 0.003572307527065277,
+      "review": "REQUIRED: attachment away from named surface"
+    },
+    {
+      "muscle": "pectoralis-major-sternocostal.l",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          0.01426384411752224,
+          0.10871045291423798,
+          0.11007525771856308
+        ],
+        [
+          0.02227167598903179,
+          0.12461555004119873,
+          0.09249331802129745
+        ],
+        [
+          0.02552035078406334,
+          0.13594646751880646,
+          0.08326207101345062
+        ]
+      ],
+      "centroid": [
+        0.020690793171525,
+        0.12310313433408737,
+        0.09526421129703522
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Sternocostal head of pectoralis major muscle.e2l"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.014338316395878792,
+      "muscleDistanceM": 0.005470115225762129,
+      "review": "REQUIRED: attachment away from named surface"
+    },
+    {
+      "muscle": "pectoralis-major-sternocostal.l",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          0.03816070407629013,
+          -0.00789276510477066,
+          0.1408788412809372
+        ],
+        [
+          0.07639061659574509,
+          -0.025027316063642502,
+          0.1339762806892395
+        ],
+        [
+          0.09156286716461182,
+          -0.022880839183926582,
+          0.12736794352531433
+        ]
+      ],
+      "centroid": [
+        0.06871224194765091,
+        -0.018601741641759872,
+        0.13407228887081146
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Sternocostal head of pectoralis major muscle.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0039272489957511425,
+      "muscleDistanceM": 0.005194427445530891,
+      "review": "pending"
+    },
+    {
+      "muscle": "pectoralis-major-sternocostal.l",
+      "kind": "insertion",
+      "bone": "humerus",
+      "points": [
+        [
+          0.19792525470256805,
+          0.05662742257118225,
+          0.014654447324573994
+        ],
+        [
+          0.19428980350494385,
+          0.06646405905485153,
+          0.01496198121458292
+        ],
+        [
+          0.1834210902452469,
+          0.08981198072433472,
+          0.01493198424577713
+        ]
+      ],
+      "centroid": [
+        0.1918623000383377,
+        0.07100681960582733,
+        0.014850000850856304
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Pectoralis major muscle.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00022837831056676805,
+      "muscleDistanceM": 0.00585981784388423,
+      "review": "pending"
+    },
+    {
+      "muscle": "pectoralis-major-sternocostal.r",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.08573751151561737,
+          0.15707330405712128,
+          0.047893114387989044
+        ],
+        [
+          -0.06142869591712952,
+          0.154228076338768,
+          0.06697172671556473
+        ],
+        [
+          -0.0334237664937973,
+          0.1505662202835083,
+          0.0751427561044693
+        ]
+      ],
+      "centroid": [
+        -0.060196660459041595,
+        0.15395599603652954,
+        0.0633358582854271
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Pectoralis major muscle.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0072708167135715485,
+      "muscleDistanceM": 0.022932715713977814,
+      "review": "REQUIRED: attachment away from named surface"
+    },
+    {
+      "muscle": "pectoralis-major-sternocostal.r",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.016920732334256172,
+          0.024288514629006386,
+          0.1363242268562317
+        ],
+        [
+          -0.015513140708208084,
+          0.062205720692873,
+          0.12579220533370972
+        ],
+        [
+          -0.013370029628276825,
+          0.09324456006288528,
+          0.11655106395483017
+        ]
+      ],
+      "centroid": [
+        -0.015267184004187584,
+        0.05992686003446579,
+        0.12621845304965973
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Sternocostal head of pectoralis major muscle.e1r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00531323766335845,
+      "muscleDistanceM": 0.0035723852925002575,
+      "review": "REQUIRED: attachment away from named surface"
+    },
+    {
+      "muscle": "pectoralis-major-sternocostal.r",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.01426384411752224,
+          0.10871045291423798,
+          0.11007525771856308
+        ],
+        [
+          -0.022271674126386642,
+          0.12461555004119873,
+          0.09249331802129745
+        ],
+        [
+          -0.02552034892141819,
+          0.13594643771648407,
+          0.08326207101345062
+        ]
+      ],
+      "centroid": [
+        -0.020690791308879852,
+        0.12310313433408737,
+        0.09526419639587402
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Sternocostal head of pectoralis major muscle.e2r"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.014338319189846516,
+      "muscleDistanceM": 0.005470125004649162,
+      "review": "REQUIRED: attachment away from named surface"
+    },
+    {
+      "muscle": "pectoralis-major-sternocostal.r",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.09156619012355804,
+          -0.022870823740959167,
+          0.1273617446422577
+        ],
+        [
+          -0.07641810923814774,
+          -0.025038180872797966,
+          0.13396671414375305
+        ],
+        [
+          -0.038182973861694336,
+          -0.007906774058938026,
+          0.14088110625743866
+        ]
+      ],
+      "centroid": [
+        -0.06871222704648972,
+        -0.018601741641759872,
+        0.13407228887081146
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Sternocostal head of pectoralis major muscle.er"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0039272489957511425,
+      "muscleDistanceM": 0.005092808045446873,
+      "review": "pending"
+    },
+    {
+      "muscle": "pectoralis-major-sternocostal.r",
+      "kind": "insertion",
+      "bone": "humerus",
+      "points": [
+        [
+          -0.19792534410953522,
+          0.056627560406923294,
+          0.014654447324573994
+        ],
+        [
+          -0.19428986310958862,
+          0.06646417081356049,
+          0.014961980283260345
+        ],
+        [
+          -0.18342120945453644,
+          0.08981214463710785,
+          0.01493198424577713
+        ]
+      ],
+      "centroid": [
+        -0.19186240434646606,
+        0.07100693136453629,
+        0.014850002713501453
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Pectoralis major muscle.er"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00022838667791802436,
+      "muscleDistanceM": 0.005859829485416412,
+      "review": "pending"
+    },
+    {
+      "muscle": "pectoralis-major-abdominal.l",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          0.057419560849666595,
+          -0.055591266602277756,
+          0.13981716334819794
+        ],
+        [
+          0.06563656777143478,
+          -0.0629274994134903,
+          0.13835671544075012
+        ],
+        [
+          0.07988003641366959,
+          -0.0684928372502327,
+          0.13380423188209534
+        ]
+      ],
+      "centroid": [
+        0.06766381859779358,
+        -0.062346450984478,
+        0.13732077181339264
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "(Abdominal part of pectoralis major muscle).ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00022800623264629394,
+      "muscleDistanceM": 0.002291126176714897,
+      "review": "pending"
+    },
+    {
+      "muscle": "pectoralis-major-abdominal.l",
+      "kind": "insertion",
+      "bone": "humerus",
+      "points": [
+        [
+          0.19792525470256805,
+          0.05662742257118225,
+          0.014654447324573994
+        ],
+        [
+          0.19428980350494385,
+          0.06646405905485153,
+          0.01496198121458292
+        ],
+        [
+          0.1834210902452469,
+          0.08981198072433472,
+          0.01493198424577713
+        ]
+      ],
+      "centroid": [
+        0.1918623000383377,
+        0.07100681960582733,
+        0.014850000850856304
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Pectoralis major muscle.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00022837831056676805,
+      "muscleDistanceM": 0.012996292673051357,
+      "review": "pending"
+    },
+    {
+      "muscle": "pectoralis-major-abdominal.r",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.0799214243888855,
+          -0.06852633506059647,
+          0.1337883472442627
+        ],
+        [
+          -0.06568083167076111,
+          -0.06295321136713028,
+          0.13835032284259796
+        ],
+        [
+          -0.057435519993305206,
+          -0.05559047684073448,
+          0.13981229066848755
+        ]
+      ],
+      "centroid": [
+        -0.06766381859779358,
+        -0.062346450984478,
+        0.13732077181339264
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "(Abdominal part of pectoralis major muscle).or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00022800623264629394,
+      "muscleDistanceM": 0.002291156444698572,
+      "review": "pending"
+    },
+    {
+      "muscle": "pectoralis-major-abdominal.r",
+      "kind": "insertion",
+      "bone": "humerus",
+      "points": [
+        [
+          -0.19792534410953522,
+          0.056627560406923294,
+          0.014654447324573994
+        ],
+        [
+          -0.19428986310958862,
+          0.06646417081356049,
+          0.014961980283260345
+        ],
+        [
+          -0.18342120945453644,
+          0.08981214463710785,
+          0.01493198424577713
+        ]
+      ],
+      "centroid": [
+        -0.19186240434646606,
+        0.07100693136453629,
+        0.014850002713501453
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Pectoralis major muscle.er"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.00022838667791802436,
+      "muscleDistanceM": 0.012996264733374119,
+      "review": "pending"
+    },
+    {
+      "muscle": "latissimus-dorsi.l",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          0.0956307128071785,
+          0.008791757747530937,
+          -0.07255370914936066
+        ],
+        [
+          0.09432287514209747,
+          0.0133366072550416,
+          -0.07507878541946411
+        ],
+        [
+          0.08672621846199036,
+          0.022242175415158272,
+          -0.08056295663118362
+        ]
+      ],
+      "centroid": [
+        0.09222665429115295,
+        0.014790184795856476,
+        -0.07606518268585205
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Latissimus dorsi muscle.el"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.015427405945956707,
+      "muscleDistanceM": 0.004411675501614809,
+      "review": "REQUIRED: attachment away from named surface"
+    },
+    {
+      "muscle": "latissimus-dorsi.l",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.038912784308195114,
+          -0.28970882296562195,
+          -0.047767531126737595
+        ],
+        [
+          0.05308084189891815,
+          -0.2697698175907135,
+          -0.041636668145656586
+        ],
+        [
+          0.070421002805233,
+          -0.252670556306839,
+          -0.023528587073087692
+        ]
+      ],
+      "centroid": [
+        0.05417026951909065,
+        -0.27068081498146057,
+        -0.03761647641658783
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Latissimus dorsi muscle.ol"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.003713097656145692,
+      "muscleDistanceM": 0.00393922021612525,
+      "review": "pending"
+    },
+    {
+      "muscle": "latissimus-dorsi.l",
+      "kind": "insertion",
+      "bone": "humerus",
+      "points": [
+        [
+          0.17761613428592682,
+          0.07693955302238464,
+          0.006765915546566248
+        ]
+      ],
+      "centroid": [
+        0.17761613428592682,
+        0.07693955302238464,
+        0.006765915546566248
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 25,
+      "review": "pending"
+    },
+    {
+      "muscle": "latissimus-dorsi.r",
+      "kind": "origin",
+      "bone": "ribs",
+      "points": [
+        [
+          -0.09563066065311432,
+          0.008791757747530937,
+          -0.07255373150110245
+        ],
+        [
+          -0.09432284533977509,
+          0.0133366072550416,
+          -0.07507879287004471
+        ],
+        [
+          -0.08672617375850677,
+          0.022242175415158272,
+          -0.08056296408176422
+        ]
+      ],
+      "centroid": [
+        -0.09222662448883057,
+        0.014790184795856476,
+        -0.07606519013643265
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Latissimus dorsi muscle.er"
+      ],
+      "rawMarkerKind": "insertion",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.015427390113472939,
+      "muscleDistanceM": 0.004411716945469379,
+      "review": "REQUIRED: attachment away from named surface"
+    },
+    {
+      "muscle": "latissimus-dorsi.r",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          -0.03891279548406601,
+          -0.28970882296562195,
+          -0.0477675199508667
+        ],
+        [
+          -0.05308084562420845,
+          -0.2697698175907135,
+          -0.04163666442036629
+        ],
+        [
+          -0.0704210177063942,
+          -0.252670556306839,
+          -0.023528581485152245
+        ]
+      ],
+      "centroid": [
+        -0.05417028069496155,
+        -0.27068081498146057,
+        -0.03761647269129753
+      ],
+      "source": ".o/.e mesh",
+      "sourceNodes": [
+        "Latissimus dorsi muscle.or"
+      ],
+      "rawMarkerKind": "origin",
+      "classification": "named-surface distance",
+      "boneDistanceM": 0.0037131083663553,
+      "muscleDistanceM": 0.003939370159059763,
+      "review": "pending"
+    },
+    {
+      "muscle": "latissimus-dorsi.r",
+      "kind": "insertion",
+      "bone": "humerus",
+      "points": [
+        [
+          -0.1775892823934555,
+          0.07725407928228378,
+          0.006928822956979275
+        ]
+      ],
+      "centroid": [
+        -0.1775892823934555,
+        0.07725407928228378,
+        0.006928822956979275
+      ],
+      "source": "proximity",
+      "thresholdM": 0.002,
+      "vertexCount": 26,
+      "review": "pending"
+    }
+  ],
+  "warnings": [
+    "biceps-brachii-short.l insertion: no 2 mm contact; nearest 37.26 mm",
+    "biceps-brachii-short.r insertion: no 2 mm contact; nearest 37.26 mm"
+  ]
+}
