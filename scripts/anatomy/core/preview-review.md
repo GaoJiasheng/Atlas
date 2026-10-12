@@ -1,18 +1,29 @@
-# Core round 6 pose inspection
+# Core round 8 preview inspection
 
-Re-rendered with native Blender Workbench from the decoded final published GLB and inspected at full resolution.
+Native Blender Workbench previews were generated from the decoded final published GLB. Inspected rest front/back/left, exploded, opaque skin, posed oblique/front/back/left views, and posed anatomy.
 
-[core-preview-pose.png](/Users/gavin/work/atlas/scripts/anatomy/cache/core-preview-pose.png)
+Pose: left shoulder flexion 90°, right elbow flexion 90°, left hip flexion 60°, right knee flexion 90°, both ankles dorsiflexion 15°. Right inputs use the same axis signing as the current engine; metadata keeps exact X-negated right axes.
 
-Trunk/hip pose has no new isolated weight streaks at the serratus, abdomen or pelvis. The complete hip/knee/ankle and arm rig chains are unchanged.
+The neck remains attached to the torso. Raised shoulder and axilla remain connected; groin and both upper legs remain connected. Source skin panel borders and shading creases are still visible, including stretched panels near the raised axilla and hip. No newly detached shell, isolated weight spike or open gap was observed at the neck/shoulder/groin in these views. This is a visual inspection of this test pose, not anatomical approval.
 
-Published weight audit: **clean**, **0 remaining**, **10 fixed** unique welded vertices. Per-mesh counts are in `report.md` and `cache/core-weights-audit.json`.
+Published weight/fibre/outlier audit: **clean**; **0 remaining**, **11 native fixed**. All 19 joints have mannequin weights and the decoded shell-vector mismatch count is zero.
 
-- Published GLB SHA-256: `8be266415b4a40777f7a920f0a1127243381548992b317ac42ecd491ad2a282c`
-- Pose PNG SHA-256: `48a52cbe22a7a6e488ea3000779ca2855aec6a5f6e5ba0b812b9562051b8bf89`
+Published GLB SHA-256: `3c099f3bb5edd3be4b6be61d2812b57a5ef50dd598685723170ddd7de646229b`.
+Pose PNG SHA-256: `c021d2e3b88c5a4305970d1afc027af7e1cfce3f79802bd1d9b550e09fc5d873`.
 
-## [待核] attachments and extent
+## Preview files
 
-All attachment candidates retain pending human review. Source-marker labels and bone proximity do not independently verify the anatomical endpoint or tendon identity.
-Whole neighbouring muscle extents are intentionally retained at low budget; approve teaching crops separately.
-Full longissimus-thoracis geometry is retained in the merged lumbar erector part. Approve or define the lumbar teaching crop.
+- [core-preview-front.png](/Users/gavin/work/atlas/scripts/anatomy/cache/core-preview-front.png)
+- [core-preview-back.png](/Users/gavin/work/atlas/scripts/anatomy/cache/core-preview-back.png)
+- [core-preview-left.png](/Users/gavin/work/atlas/scripts/anatomy/cache/core-preview-left.png)
+- [core-preview-exploded-by-layer.png](/Users/gavin/work/atlas/scripts/anatomy/cache/core-preview-exploded-by-layer.png)
+- [core-preview-skin.png](/Users/gavin/work/atlas/scripts/anatomy/cache/core-preview-skin.png)
+- [core-preview-pose.png](/Users/gavin/work/atlas/scripts/anatomy/cache/core-preview-pose.png)
+- [core-preview-pose-front.png](/Users/gavin/work/atlas/scripts/anatomy/cache/core-preview-pose-front.png)
+- [core-preview-pose-back.png](/Users/gavin/work/atlas/scripts/anatomy/cache/core-preview-pose-back.png)
+- [core-preview-pose-left.png](/Users/gavin/work/atlas/scripts/anatomy/cache/core-preview-pose-left.png)
+- [core-preview-pose-anatomy.png](/Users/gavin/work/atlas/scripts/anatomy/cache/core-preview-pose-anatomy.png)
+
+## [待核] anatomy
+
+All attachment/tendon wording and educational crop choices remain pending human review. Source geometry panel seams are retained.

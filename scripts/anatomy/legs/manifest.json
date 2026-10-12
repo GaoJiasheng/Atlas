@@ -1066,7 +1066,7 @@
       "role": "skin",
       "layer": "context",
       "sides": "unsided",
-      "triangleBudget": 18000,
+      "triangleBudget": 15000,
       "minimumObjects": 180,
       "triangleCap": 30000,
       "sourceNames": [
@@ -1312,7 +1312,8 @@
         "Vertebral region.r",
         "Zygomatic region.l",
         "Zygomatic region.r"
-      ]
+      ],
+      "auditSafety": 0.85
     }
   ],
   "referenceParts": [
@@ -1604,9 +1605,21 @@
   ],
   "jointNames": [
     "trunk",
+    "clavicle.l",
+    "scapula.l",
+    "shoulder.l",
+    "elbow.l",
+    "forearm.l",
+    "hand.l",
     "hip.l",
     "knee.l",
     "ankle.l",
+    "clavicle.r",
+    "scapula.r",
+    "shoulder.r",
+    "elbow.r",
+    "forearm.r",
+    "hand.r",
     "hip.r",
     "knee.r",
     "ankle.r"
@@ -1677,9 +1690,21 @@
     "vastus-medialis.r",
     "legs-rig",
     "joint.trunk",
+    "joint.clavicle.l",
+    "joint.scapula.l",
+    "joint.shoulder.l",
+    "joint.elbow.l",
+    "joint.forearm.l",
+    "joint.hand.l",
     "joint.hip.l",
     "joint.knee.l",
     "joint.ankle.l",
+    "joint.clavicle.r",
+    "joint.scapula.r",
+    "joint.shoulder.r",
+    "joint.elbow.r",
+    "joint.forearm.r",
+    "joint.hand.r",
     "joint.hip.r",
     "joint.knee.r",
     "joint.ankle.r"
@@ -1692,5 +1717,6 @@
     "Intrinsic hand/foot muscles and deep forearm flexors excluded by v1 scope; hand/foot bones are merged per side.",
     "Optional thoracolumbar fascia, linea alba and diaphragm omitted. Linea-alba attachment evidence uses the unexported named source surface.",
     "No named region muscle is missing in Z-Anatomy; multifidus uses the actual paired lumbar meshes, not rotatores or invented geometry."
-  ]
+  ],
+  "handGripOffsetM": 0.08
 }

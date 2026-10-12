@@ -8,6 +8,11 @@
     "left": "+X",
     "centre": "sternal angle; source floor recorded in rig.json"
   },
+  "sourceCentre": [
+    -1.6483021681779064e-05,
+    -0.055000342428684235,
+    1.3499360084533691
+  ],
   "sourceChestCentre": [
     -1.6483021681779064e-05,
     -0.055000342428684235,
@@ -61,18 +66,113 @@
           0.0,
           0.0
         ],
+        "extension": [
+          1.0,
+          -0.0,
+          -0.0
+        ],
         "abduction": [
-          0.0,
-          0.0,
-          1.0
+          0,
+          0,
+          1
+        ],
+        "adduction": [
+          0,
+          0,
+          -1
         ],
         "rotation": [
           0.0,
           1.0,
           0.0
+        ],
+        "internal-rotation": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "external-rotation": [
+          -0.0,
+          -1.0,
+          -0.0
+        ],
+        "horizontal-abduction": [
+          0,
+          1,
+          0
+        ],
+        "horizontal-adduction": [
+          0,
+          -1,
+          0
+        ],
+        "elevation": [
+          0,
+          0,
+          1
+        ],
+        "depression": [
+          0,
+          0,
+          -1
+        ],
+        "protraction": [
+          0,
+          -1,
+          0
+        ],
+        "retraction": [
+          0,
+          1,
+          0
+        ],
+        "upward-rotation": [
+          0,
+          0,
+          1
+        ],
+        "downward-rotation": [
+          0,
+          0,
+          -1
+        ],
+        "lateral-flexion": [
+          0,
+          0,
+          1
+        ],
+        "pronation": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "supination": [
+          -0.0,
+          -1.0,
+          -0.0
+        ],
+        "dorsiflexion": [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        "plantarflexion": [
+          1.0,
+          -0.0,
+          -0.0
+        ],
+        "inversion": [
+          0,
+          0,
+          1
+        ],
+        "eversion": [
+          0,
+          0,
+          -1
         ]
       },
-      "source": "sternal angle frame",
+      "source": "region frame",
       "review": "pending"
     },
     {
@@ -90,18 +190,113 @@
           0.0,
           0.0
         ],
+        "extension": [
+          1.0,
+          -0.0,
+          -0.0
+        ],
         "abduction": [
-          0.0,
-          0.0,
-          1.0
+          0,
+          0,
+          1
+        ],
+        "adduction": [
+          0,
+          0,
+          -1
         ],
         "rotation": [
           0.0,
           1.0,
           0.0
+        ],
+        "internal-rotation": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "external-rotation": [
+          -0.0,
+          -1.0,
+          -0.0
+        ],
+        "horizontal-abduction": [
+          0,
+          1,
+          0
+        ],
+        "horizontal-adduction": [
+          0,
+          -1,
+          0
+        ],
+        "elevation": [
+          0,
+          0,
+          1
+        ],
+        "depression": [
+          0,
+          0,
+          -1
+        ],
+        "protraction": [
+          0,
+          -1,
+          0
+        ],
+        "retraction": [
+          0,
+          1,
+          0
+        ],
+        "upward-rotation": [
+          0,
+          0,
+          1
+        ],
+        "downward-rotation": [
+          0,
+          0,
+          -1
+        ],
+        "lateral-flexion": [
+          0,
+          0,
+          1
+        ],
+        "pronation": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "supination": [
+          -0.0,
+          -1.0,
+          -0.0
+        ],
+        "dorsiflexion": [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        "plantarflexion": [
+          1.0,
+          -0.0,
+          -0.0
+        ],
+        "inversion": [
+          0,
+          0,
+          1
+        ],
+        "eversion": [
+          0,
+          0,
+          -1
         ]
       },
-      "source": "medial end of clavicle (sternoclavicular joint)",
+      "source": "medial clavicle / sternoclavicular joint",
       "review": "pending"
     },
     {
@@ -119,19 +314,119 @@
           0.0,
           0.0
         ],
+        "extension": [
+          1.0,
+          -0.0,
+          -0.0
+        ],
         "abduction": [
-          0.0,
-          0.0,
-          1.0
+          0,
+          0,
+          1
+        ],
+        "adduction": [
+          0,
+          0,
+          -1
         ],
         "rotation": [
           0.0,
           1.0,
           0.0
+        ],
+        "internal-rotation": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "external-rotation": [
+          -0.0,
+          -1.0,
+          -0.0
+        ],
+        "horizontal-abduction": [
+          0,
+          1,
+          0
+        ],
+        "horizontal-adduction": [
+          0,
+          -1,
+          0
+        ],
+        "elevation": [
+          0,
+          0,
+          1
+        ],
+        "depression": [
+          0,
+          0,
+          -1
+        ],
+        "protraction": [
+          0,
+          -1,
+          0
+        ],
+        "retraction": [
+          0,
+          1,
+          0
+        ],
+        "upward-rotation": [
+          0,
+          0,
+          1
+        ],
+        "downward-rotation": [
+          0,
+          0,
+          -1
+        ],
+        "lateral-flexion": [
+          0,
+          0,
+          1
+        ],
+        "pronation": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "supination": [
+          -0.0,
+          -1.0,
+          -0.0
+        ],
+        "dorsiflexion": [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        "plantarflexion": [
+          1.0,
+          -0.0,
+          -0.0
+        ],
+        "inversion": [
+          0,
+          0,
+          1
+        ],
+        "eversion": [
+          0,
+          0,
+          -1
         ]
       },
-      "source": "lateral end of clavicle (acromioclavicular joint); glenoid: glenoid .j landmark",
-      "review": "pending"
+      "source": "lateral clavicle / acromioclavicular joint; glenoid landmark retained",
+      "review": "pending",
+      "glenoid": [
+        0.15733617544174194,
+        0.027984201908111572,
+        -0.09173981100320816
+      ]
     },
     {
       "name": "shoulder.l",
@@ -148,18 +443,113 @@
           0.0,
           0.0
         ],
+        "extension": [
+          1.0,
+          -0.0,
+          -0.0
+        ],
         "abduction": [
-          0.0,
-          0.0,
-          1.0
+          0,
+          0,
+          1
+        ],
+        "adduction": [
+          0,
+          0,
+          -1
         ],
         "rotation": [
           0.1801227480173111,
           -0.9823485612869263,
           -0.0504680871963501
+        ],
+        "internal-rotation": [
+          0.1801227480173111,
+          -0.9823485612869263,
+          -0.0504680871963501
+        ],
+        "external-rotation": [
+          -0.1801227480173111,
+          0.9823485612869263,
+          0.0504680871963501
+        ],
+        "horizontal-abduction": [
+          0,
+          1,
+          0
+        ],
+        "horizontal-adduction": [
+          0,
+          -1,
+          0
+        ],
+        "elevation": [
+          0,
+          0,
+          1
+        ],
+        "depression": [
+          0,
+          0,
+          -1
+        ],
+        "protraction": [
+          0,
+          -1,
+          0
+        ],
+        "retraction": [
+          0,
+          1,
+          0
+        ],
+        "upward-rotation": [
+          0,
+          0,
+          1
+        ],
+        "downward-rotation": [
+          0,
+          0,
+          -1
+        ],
+        "lateral-flexion": [
+          0,
+          0,
+          1
+        ],
+        "pronation": [
+          0.1801227480173111,
+          -0.9823485612869263,
+          -0.0504680871963501
+        ],
+        "supination": [
+          -0.1801227480173111,
+          0.9823485612869263,
+          0.0504680871963501
+        ],
+        "dorsiflexion": [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        "plantarflexion": [
+          1.0,
+          -0.0,
+          -0.0
+        ],
+        "inversion": [
+          0,
+          0,
+          1
+        ],
+        "eversion": [
+          0,
+          0,
+          -1
         ]
       },
-      "source": "humeral head sphere fit",
+      "source": "humeral head sphere fit; .i/.j landmark patch",
       "review": "pending"
     },
     {
@@ -173,31 +563,126 @@
       "parent": "shoulder.l",
       "axes": {
         "flexion": [
-          -0.9966964721679688,
-          -0.030239436775445938,
-          0.07537702471017838
+          -1.0,
+          0.0,
+          0.0
+        ],
+        "extension": [
+          1.0,
+          -0.0,
+          -0.0
         ],
         "abduction": [
-          0.0,
-          0.0,
-          1.0
+          0,
+          0,
+          1
+        ],
+        "adduction": [
+          0,
+          0,
+          -1
         ],
         "rotation": [
-          0.07507092505693436,
-          -0.9787099361419678,
-          0.19102655351161957
+          0.15129590034484863,
+          -0.9684582948684692,
+          0.19798506796360016
+        ],
+        "internal-rotation": [
+          0.15129590034484863,
+          -0.9684582948684692,
+          0.19798506796360016
+        ],
+        "external-rotation": [
+          -0.15129590034484863,
+          0.9684582948684692,
+          -0.19798506796360016
+        ],
+        "horizontal-abduction": [
+          0,
+          1,
+          0
+        ],
+        "horizontal-adduction": [
+          0,
+          -1,
+          0
+        ],
+        "elevation": [
+          0,
+          0,
+          1
+        ],
+        "depression": [
+          0,
+          0,
+          -1
+        ],
+        "protraction": [
+          0,
+          -1,
+          0
+        ],
+        "retraction": [
+          0,
+          1,
+          0
+        ],
+        "upward-rotation": [
+          0,
+          0,
+          1
+        ],
+        "downward-rotation": [
+          0,
+          0,
+          -1
+        ],
+        "lateral-flexion": [
+          0,
+          0,
+          1
+        ],
+        "pronation": [
+          0.15129590034484863,
+          -0.9684582948684692,
+          0.19798506796360016
+        ],
+        "supination": [
+          -0.15129590034484863,
+          0.9684582948684692,
+          -0.19798506796360016
+        ],
+        "dorsiflexion": [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        "plantarflexion": [
+          1.0,
+          -0.0,
+          -0.0
+        ],
+        "inversion": [
+          0,
+          0,
+          1
+        ],
+        "eversion": [
+          0,
+          0,
+          -1
         ]
       },
-      "source": "midpoint of epicondyle .j landmarks",
+      "source": "midpoint of humeral epicondyle .i/.j cubes",
       "review": "pending"
     },
     {
-      "name": "wrist.l",
-      "node": "joint.wrist.l",
+      "name": "forearm.l",
+      "node": "joint.forearm.l",
       "position": [
-        0.24354533851146698,
-        -0.5044358968734741,
-        -0.04324507340788841
+        0.22320204973220825,
+        -0.2392176389694214,
+        -0.0950108990073204
       ],
       "parent": "elbow.l",
       "axes": {
@@ -206,18 +691,611 @@
           0.0,
           0.0
         ],
+        "extension": [
+          1.0,
+          -0.0,
+          -0.0
+        ],
         "abduction": [
+          0,
+          0,
+          1
+        ],
+        "adduction": [
+          0,
+          0,
+          -1
+        ],
+        "rotation": [
+          0.07507092505693436,
+          -0.9787099361419678,
+          0.19102655351161957
+        ],
+        "internal-rotation": [
+          0.07507092505693436,
+          -0.9787099361419678,
+          0.19102655351161957
+        ],
+        "external-rotation": [
+          -0.07507092505693436,
+          0.9787099361419678,
+          -0.19102655351161957
+        ],
+        "horizontal-abduction": [
+          0,
+          1,
+          0
+        ],
+        "horizontal-adduction": [
+          0,
+          -1,
+          0
+        ],
+        "elevation": [
+          0,
+          0,
+          1
+        ],
+        "depression": [
+          0,
+          0,
+          -1
+        ],
+        "protraction": [
+          0,
+          -1,
+          0
+        ],
+        "retraction": [
+          0,
+          1,
+          0
+        ],
+        "upward-rotation": [
+          0,
+          0,
+          1
+        ],
+        "downward-rotation": [
+          0,
+          0,
+          -1
+        ],
+        "lateral-flexion": [
+          0,
+          0,
+          1
+        ],
+        "pronation": [
+          0.07507092505693436,
+          -0.9787099361419678,
+          0.19102655351161957
+        ],
+        "supination": [
+          -0.07507092505693436,
+          0.9787099361419678,
+          -0.19102655351161957
+        ],
+        "dorsiflexion": [
+          -1.0,
           0.0,
+          0.0
+        ],
+        "plantarflexion": [
+          1.0,
+          -0.0,
+          -0.0
+        ],
+        "inversion": [
+          0,
+          0,
+          1
+        ],
+        "eversion": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "source": "elbow centre to ulnar styloid rotation axis; ulna stays on elbow",
+      "review": "pending"
+    },
+    {
+      "name": "hand.l",
+      "node": "joint.hand.l",
+      "position": [
+        0.26463714241981506,
+        -0.5044472813606262,
+        -0.04078914225101471
+      ],
+      "parent": "forearm.l",
+      "axes": {
+        "flexion": [
+          -1.0,
           0.0,
-          1.0
+          0.0
+        ],
+        "extension": [
+          1.0,
+          -0.0,
+          -0.0
+        ],
+        "abduction": [
+          0,
+          0,
+          1
+        ],
+        "adduction": [
+          0,
+          0,
+          -1
         ],
         "rotation": [
           0.0,
           1.0,
           0.0
+        ],
+        "internal-rotation": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "external-rotation": [
+          -0.0,
+          -1.0,
+          -0.0
+        ],
+        "horizontal-abduction": [
+          0,
+          1,
+          0
+        ],
+        "horizontal-adduction": [
+          0,
+          -1,
+          0
+        ],
+        "elevation": [
+          0,
+          0,
+          1
+        ],
+        "depression": [
+          0,
+          0,
+          -1
+        ],
+        "protraction": [
+          0,
+          -1,
+          0
+        ],
+        "retraction": [
+          0,
+          1,
+          0
+        ],
+        "upward-rotation": [
+          0,
+          0,
+          1
+        ],
+        "downward-rotation": [
+          0,
+          0,
+          -1
+        ],
+        "lateral-flexion": [
+          0,
+          0,
+          1
+        ],
+        "pronation": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "supination": [
+          -0.0,
+          -1.0,
+          -0.0
+        ],
+        "dorsiflexion": [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        "plantarflexion": [
+          1.0,
+          -0.0,
+          -0.0
+        ],
+        "inversion": [
+          0,
+          0,
+          1
+        ],
+        "eversion": [
+          0,
+          0,
+          -1
         ]
       },
-      "source": "styloid landmark / distal forearm",
+      "source": "midpoint of radial/ulnar styloid cubes",
+      "review": "pending",
+      "offset": 0.08,
+      "gripOffsetM": 0.08
+    },
+    {
+      "name": "hip.l",
+      "node": "joint.hip.l",
+      "position": [
+        0.08530742675065994,
+        -0.47890692949295044,
+        -0.06997288763523102
+      ],
+      "parent": "trunk",
+      "axes": {
+        "flexion": [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        "extension": [
+          1.0,
+          -0.0,
+          -0.0
+        ],
+        "abduction": [
+          0,
+          0,
+          1
+        ],
+        "adduction": [
+          0,
+          0,
+          -1
+        ],
+        "rotation": [
+          -0.021861668676137924,
+          -0.9988096952438354,
+          -0.0436030775308609
+        ],
+        "internal-rotation": [
+          -0.021861668676137924,
+          -0.9988096952438354,
+          -0.0436030775308609
+        ],
+        "external-rotation": [
+          0.021861668676137924,
+          0.9988096952438354,
+          0.0436030775308609
+        ],
+        "horizontal-abduction": [
+          0,
+          1,
+          0
+        ],
+        "horizontal-adduction": [
+          0,
+          -1,
+          0
+        ],
+        "elevation": [
+          0,
+          0,
+          1
+        ],
+        "depression": [
+          0,
+          0,
+          -1
+        ],
+        "protraction": [
+          0,
+          -1,
+          0
+        ],
+        "retraction": [
+          0,
+          1,
+          0
+        ],
+        "upward-rotation": [
+          0,
+          0,
+          1
+        ],
+        "downward-rotation": [
+          0,
+          0,
+          -1
+        ],
+        "lateral-flexion": [
+          0,
+          0,
+          1
+        ],
+        "pronation": [
+          -0.021861668676137924,
+          -0.9988096952438354,
+          -0.0436030775308609
+        ],
+        "supination": [
+          0.021861668676137924,
+          0.9988096952438354,
+          0.0436030775308609
+        ],
+        "dorsiflexion": [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        "plantarflexion": [
+          1.0,
+          -0.0,
+          -0.0
+        ],
+        "inversion": [
+          0,
+          0,
+          1
+        ],
+        "eversion": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "source": "acetabulum .i/.j cube cross-checked against femoral head sphere fit",
+      "review": "pending"
+    },
+    {
+      "name": "knee.l",
+      "node": "joint.knee.l",
+      "position": [
+        0.07622214406728745,
+        -0.8939927220344543,
+        -0.08809347450733185
+      ],
+      "parent": "hip.l",
+      "axes": {
+        "flexion": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "extension": [
+          -1.0,
+          -0.0,
+          -0.0
+        ],
+        "abduction": [
+          0,
+          0,
+          1
+        ],
+        "adduction": [
+          0,
+          0,
+          -1
+        ],
+        "rotation": [
+          0.014895699918270111,
+          -0.9995107054710388,
+          -0.027505015954375267
+        ],
+        "internal-rotation": [
+          0.014895699918270111,
+          -0.9995107054710388,
+          -0.027505015954375267
+        ],
+        "external-rotation": [
+          -0.014895699918270111,
+          0.9995107054710388,
+          0.027505015954375267
+        ],
+        "horizontal-abduction": [
+          0,
+          1,
+          0
+        ],
+        "horizontal-adduction": [
+          0,
+          -1,
+          0
+        ],
+        "elevation": [
+          0,
+          0,
+          1
+        ],
+        "depression": [
+          0,
+          0,
+          -1
+        ],
+        "protraction": [
+          0,
+          -1,
+          0
+        ],
+        "retraction": [
+          0,
+          1,
+          0
+        ],
+        "upward-rotation": [
+          0,
+          0,
+          1
+        ],
+        "downward-rotation": [
+          0,
+          0,
+          -1
+        ],
+        "lateral-flexion": [
+          0,
+          0,
+          1
+        ],
+        "pronation": [
+          0.014895699918270111,
+          -0.9995107054710388,
+          -0.027505015954375267
+        ],
+        "supination": [
+          -0.014895699918270111,
+          0.9995107054710388,
+          0.027505015954375267
+        ],
+        "dorsiflexion": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "plantarflexion": [
+          -1.0,
+          -0.0,
+          -0.0
+        ],
+        "inversion": [
+          0,
+          0,
+          1
+        ],
+        "eversion": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "source": "midpoint of femoral epicondyle .i/.j cubes",
+      "review": "pending"
+    },
+    {
+      "name": "ankle.l",
+      "node": "joint.ankle.l",
+      "position": [
+        0.08183514326810837,
+        -1.2706284523010254,
+        -0.09845791757106781
+      ],
+      "parent": "knee.l",
+      "axes": {
+        "flexion": [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        "extension": [
+          1.0,
+          -0.0,
+          -0.0
+        ],
+        "abduction": [
+          0,
+          0,
+          1
+        ],
+        "adduction": [
+          0,
+          0,
+          -1
+        ],
+        "rotation": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "internal-rotation": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "external-rotation": [
+          -0.0,
+          -1.0,
+          -0.0
+        ],
+        "horizontal-abduction": [
+          0,
+          1,
+          0
+        ],
+        "horizontal-adduction": [
+          0,
+          -1,
+          0
+        ],
+        "elevation": [
+          0,
+          0,
+          1
+        ],
+        "depression": [
+          0,
+          0,
+          -1
+        ],
+        "protraction": [
+          0,
+          -1,
+          0
+        ],
+        "retraction": [
+          0,
+          1,
+          0
+        ],
+        "upward-rotation": [
+          0,
+          0,
+          1
+        ],
+        "downward-rotation": [
+          0,
+          0,
+          -1
+        ],
+        "lateral-flexion": [
+          0,
+          0,
+          1
+        ],
+        "pronation": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "supination": [
+          -0.0,
+          -1.0,
+          -0.0
+        ],
+        "dorsiflexion": [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        "plantarflexion": [
+          1.0,
+          -0.0,
+          -0.0
+        ],
+        "inversion": [
+          0,
+          0,
+          1
+        ],
+        "eversion": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "source": "midpoint of medial/lateral malleolar landmarks",
       "review": "pending"
     },
     {
@@ -231,22 +1309,117 @@
       "parent": "trunk",
       "axes": {
         "flexion": [
-          -1.0,
+          1.0,
           0.0,
           0.0
+        ],
+        "extension": [
+          -1.0,
+          -0.0,
+          -0.0
         ],
         "abduction": [
-          0.0,
-          0.0,
-          -1.0
+          0,
+          0,
+          1
+        ],
+        "adduction": [
+          0,
+          0,
+          -1
         ],
         "rotation": [
-          0.0,
+          -0.0,
           1.0,
           0.0
+        ],
+        "internal-rotation": [
+          -0.0,
+          1.0,
+          0.0
+        ],
+        "external-rotation": [
+          0.0,
+          -1.0,
+          -0.0
+        ],
+        "horizontal-abduction": [
+          0,
+          1,
+          0
+        ],
+        "horizontal-adduction": [
+          0,
+          -1,
+          0
+        ],
+        "elevation": [
+          0,
+          0,
+          1
+        ],
+        "depression": [
+          0,
+          0,
+          -1
+        ],
+        "protraction": [
+          0,
+          -1,
+          0
+        ],
+        "retraction": [
+          0,
+          1,
+          0
+        ],
+        "upward-rotation": [
+          0,
+          0,
+          1
+        ],
+        "downward-rotation": [
+          0,
+          0,
+          -1
+        ],
+        "lateral-flexion": [
+          0,
+          0,
+          1
+        ],
+        "pronation": [
+          -0.0,
+          1.0,
+          0.0
+        ],
+        "supination": [
+          0.0,
+          -1.0,
+          -0.0
+        ],
+        "dorsiflexion": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "plantarflexion": [
+          -1.0,
+          -0.0,
+          -0.0
+        ],
+        "inversion": [
+          0,
+          0,
+          1
+        ],
+        "eversion": [
+          0,
+          0,
+          -1
         ]
       },
-      "source": "medial end of clavicle (sternoclavicular joint)",
+      "source": "medial clavicle / sternoclavicular joint",
       "review": "pending"
     },
     {
@@ -260,23 +1433,123 @@
       "parent": "clavicle.r",
       "axes": {
         "flexion": [
-          -1.0,
+          1.0,
           0.0,
           0.0
+        ],
+        "extension": [
+          -1.0,
+          -0.0,
+          -0.0
         ],
         "abduction": [
-          0.0,
-          0.0,
-          -1.0
+          0,
+          0,
+          1
+        ],
+        "adduction": [
+          0,
+          0,
+          -1
         ],
         "rotation": [
-          0.0,
+          -0.0,
           1.0,
           0.0
+        ],
+        "internal-rotation": [
+          -0.0,
+          1.0,
+          0.0
+        ],
+        "external-rotation": [
+          0.0,
+          -1.0,
+          -0.0
+        ],
+        "horizontal-abduction": [
+          0,
+          1,
+          0
+        ],
+        "horizontal-adduction": [
+          0,
+          -1,
+          0
+        ],
+        "elevation": [
+          0,
+          0,
+          1
+        ],
+        "depression": [
+          0,
+          0,
+          -1
+        ],
+        "protraction": [
+          0,
+          -1,
+          0
+        ],
+        "retraction": [
+          0,
+          1,
+          0
+        ],
+        "upward-rotation": [
+          0,
+          0,
+          1
+        ],
+        "downward-rotation": [
+          0,
+          0,
+          -1
+        ],
+        "lateral-flexion": [
+          0,
+          0,
+          1
+        ],
+        "pronation": [
+          -0.0,
+          1.0,
+          0.0
+        ],
+        "supination": [
+          0.0,
+          -1.0,
+          -0.0
+        ],
+        "dorsiflexion": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "plantarflexion": [
+          -1.0,
+          -0.0,
+          -0.0
+        ],
+        "inversion": [
+          0,
+          0,
+          1
+        ],
+        "eversion": [
+          0,
+          0,
+          -1
         ]
       },
-      "source": "lateral end of clavicle (acromioclavicular joint); glenoid: glenoid .j landmark",
-      "review": "pending"
+      "source": "lateral clavicle / acromioclavicular joint; glenoid landmark retained",
+      "review": "pending",
+      "glenoid": [
+        -0.15730315446853638,
+        0.02798408269882202,
+        -0.09173980355262756
+      ]
     },
     {
       "name": "shoulder.r",
@@ -289,22 +1562,117 @@
       "parent": "scapula.r",
       "axes": {
         "flexion": [
-          -1.0,
+          1.0,
           0.0,
           0.0
         ],
+        "extension": [
+          -1.0,
+          -0.0,
+          -0.0
+        ],
         "abduction": [
-          0.0,
-          0.0,
-          -1.0
+          0,
+          0,
+          1
+        ],
+        "adduction": [
+          0,
+          0,
+          -1
         ],
         "rotation": [
-          -0.18012265861034393,
-          -0.9823486804962158,
-          -0.05046815797686577
+          -0.1801227480173111,
+          -0.9823485612869263,
+          -0.0504680871963501
+        ],
+        "internal-rotation": [
+          -0.1801227480173111,
+          -0.9823485612869263,
+          -0.0504680871963501
+        ],
+        "external-rotation": [
+          0.1801227480173111,
+          0.9823485612869263,
+          0.0504680871963501
+        ],
+        "horizontal-abduction": [
+          0,
+          1,
+          0
+        ],
+        "horizontal-adduction": [
+          0,
+          -1,
+          0
+        ],
+        "elevation": [
+          0,
+          0,
+          1
+        ],
+        "depression": [
+          0,
+          0,
+          -1
+        ],
+        "protraction": [
+          0,
+          -1,
+          0
+        ],
+        "retraction": [
+          0,
+          1,
+          0
+        ],
+        "upward-rotation": [
+          0,
+          0,
+          1
+        ],
+        "downward-rotation": [
+          0,
+          0,
+          -1
+        ],
+        "lateral-flexion": [
+          0,
+          0,
+          1
+        ],
+        "pronation": [
+          -0.1801227480173111,
+          -0.9823485612869263,
+          -0.0504680871963501
+        ],
+        "supination": [
+          0.1801227480173111,
+          0.9823485612869263,
+          0.0504680871963501
+        ],
+        "dorsiflexion": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "plantarflexion": [
+          -1.0,
+          -0.0,
+          -0.0
+        ],
+        "inversion": [
+          0,
+          0,
+          1
+        ],
+        "eversion": [
+          0,
+          0,
+          -1
         ]
       },
-      "source": "humeral head sphere fit",
+      "source": "humeral head sphere fit; .i/.j landmark patch",
       "review": "pending"
     },
     {
@@ -318,57 +1686,1764 @@
       "parent": "shoulder.r",
       "axes": {
         "flexion": [
-          -0.9966965317726135,
-          0.030239010229706764,
-          -0.07537703961133957
+          1.0,
+          0.0,
+          0.0
+        ],
+        "extension": [
+          -1.0,
+          -0.0,
+          -0.0
         ],
         "abduction": [
-          0.0,
-          0.0,
-          -1.0
+          0,
+          0,
+          1
+        ],
+        "adduction": [
+          0,
+          0,
+          -1
         ],
         "rotation": [
-          -0.07507108896970749,
-          -0.9787099361419678,
-          0.19102652370929718
+          -0.15129590034484863,
+          -0.9684582948684692,
+          0.19798506796360016
+        ],
+        "internal-rotation": [
+          -0.15129590034484863,
+          -0.9684582948684692,
+          0.19798506796360016
+        ],
+        "external-rotation": [
+          0.15129590034484863,
+          0.9684582948684692,
+          -0.19798506796360016
+        ],
+        "horizontal-abduction": [
+          0,
+          1,
+          0
+        ],
+        "horizontal-adduction": [
+          0,
+          -1,
+          0
+        ],
+        "elevation": [
+          0,
+          0,
+          1
+        ],
+        "depression": [
+          0,
+          0,
+          -1
+        ],
+        "protraction": [
+          0,
+          -1,
+          0
+        ],
+        "retraction": [
+          0,
+          1,
+          0
+        ],
+        "upward-rotation": [
+          0,
+          0,
+          1
+        ],
+        "downward-rotation": [
+          0,
+          0,
+          -1
+        ],
+        "lateral-flexion": [
+          0,
+          0,
+          1
+        ],
+        "pronation": [
+          -0.15129590034484863,
+          -0.9684582948684692,
+          0.19798506796360016
+        ],
+        "supination": [
+          0.15129590034484863,
+          0.9684582948684692,
+          -0.19798506796360016
+        ],
+        "dorsiflexion": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "plantarflexion": [
+          -1.0,
+          -0.0,
+          -0.0
+        ],
+        "inversion": [
+          0,
+          0,
+          1
+        ],
+        "eversion": [
+          0,
+          0,
+          -1
         ]
       },
-      "source": "midpoint of epicondyle .j landmarks",
+      "source": "midpoint of humeral epicondyle .i/.j cubes",
       "review": "pending"
     },
     {
-      "name": "wrist.r",
-      "node": "joint.wrist.r",
+      "name": "forearm.r",
+      "node": "joint.forearm.r",
       "position": [
-        -0.24351242184638977,
-        -0.5044359564781189,
-        -0.04324508085846901
+        -0.22316908836364746,
+        -0.23921768367290497,
+        -0.0950108990073204
       ],
       "parent": "elbow.r",
+      "axes": {
+        "flexion": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "extension": [
+          -1.0,
+          -0.0,
+          -0.0
+        ],
+        "abduction": [
+          0,
+          0,
+          1
+        ],
+        "adduction": [
+          0,
+          0,
+          -1
+        ],
+        "rotation": [
+          -0.07507092505693436,
+          -0.9787099361419678,
+          0.19102655351161957
+        ],
+        "internal-rotation": [
+          -0.07507092505693436,
+          -0.9787099361419678,
+          0.19102655351161957
+        ],
+        "external-rotation": [
+          0.07507092505693436,
+          0.9787099361419678,
+          -0.19102655351161957
+        ],
+        "horizontal-abduction": [
+          0,
+          1,
+          0
+        ],
+        "horizontal-adduction": [
+          0,
+          -1,
+          0
+        ],
+        "elevation": [
+          0,
+          0,
+          1
+        ],
+        "depression": [
+          0,
+          0,
+          -1
+        ],
+        "protraction": [
+          0,
+          -1,
+          0
+        ],
+        "retraction": [
+          0,
+          1,
+          0
+        ],
+        "upward-rotation": [
+          0,
+          0,
+          1
+        ],
+        "downward-rotation": [
+          0,
+          0,
+          -1
+        ],
+        "lateral-flexion": [
+          0,
+          0,
+          1
+        ],
+        "pronation": [
+          -0.07507092505693436,
+          -0.9787099361419678,
+          0.19102655351161957
+        ],
+        "supination": [
+          0.07507092505693436,
+          0.9787099361419678,
+          -0.19102655351161957
+        ],
+        "dorsiflexion": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "plantarflexion": [
+          -1.0,
+          -0.0,
+          -0.0
+        ],
+        "inversion": [
+          0,
+          0,
+          1
+        ],
+        "eversion": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "source": "elbow centre to ulnar styloid rotation axis; ulna stays on elbow",
+      "review": "pending"
+    },
+    {
+      "name": "hand.r",
+      "node": "joint.hand.r",
+      "position": [
+        -0.2646195888519287,
+        -0.504447340965271,
+        -0.04078914225101471
+      ],
+      "parent": "forearm.r",
+      "axes": {
+        "flexion": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "extension": [
+          -1.0,
+          -0.0,
+          -0.0
+        ],
+        "abduction": [
+          0,
+          0,
+          1
+        ],
+        "adduction": [
+          0,
+          0,
+          -1
+        ],
+        "rotation": [
+          -0.0,
+          1.0,
+          0.0
+        ],
+        "internal-rotation": [
+          -0.0,
+          1.0,
+          0.0
+        ],
+        "external-rotation": [
+          0.0,
+          -1.0,
+          -0.0
+        ],
+        "horizontal-abduction": [
+          0,
+          1,
+          0
+        ],
+        "horizontal-adduction": [
+          0,
+          -1,
+          0
+        ],
+        "elevation": [
+          0,
+          0,
+          1
+        ],
+        "depression": [
+          0,
+          0,
+          -1
+        ],
+        "protraction": [
+          0,
+          -1,
+          0
+        ],
+        "retraction": [
+          0,
+          1,
+          0
+        ],
+        "upward-rotation": [
+          0,
+          0,
+          1
+        ],
+        "downward-rotation": [
+          0,
+          0,
+          -1
+        ],
+        "lateral-flexion": [
+          0,
+          0,
+          1
+        ],
+        "pronation": [
+          -0.0,
+          1.0,
+          0.0
+        ],
+        "supination": [
+          0.0,
+          -1.0,
+          -0.0
+        ],
+        "dorsiflexion": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "plantarflexion": [
+          -1.0,
+          -0.0,
+          -0.0
+        ],
+        "inversion": [
+          0,
+          0,
+          1
+        ],
+        "eversion": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "source": "midpoint of radial/ulnar styloid cubes",
+      "review": "pending",
+      "offset": 0.08,
+      "gripOffsetM": 0.08
+    },
+    {
+      "name": "hip.r",
+      "node": "joint.hip.r",
+      "position": [
+        -0.08527445793151855,
+        -0.4789067804813385,
+        -0.06997288763523102
+      ],
+      "parent": "trunk",
+      "axes": {
+        "flexion": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "extension": [
+          -1.0,
+          -0.0,
+          -0.0
+        ],
+        "abduction": [
+          0,
+          0,
+          1
+        ],
+        "adduction": [
+          0,
+          0,
+          -1
+        ],
+        "rotation": [
+          0.021861668676137924,
+          -0.9988096952438354,
+          -0.0436030775308609
+        ],
+        "internal-rotation": [
+          0.021861668676137924,
+          -0.9988096952438354,
+          -0.0436030775308609
+        ],
+        "external-rotation": [
+          -0.021861668676137924,
+          0.9988096952438354,
+          0.0436030775308609
+        ],
+        "horizontal-abduction": [
+          0,
+          1,
+          0
+        ],
+        "horizontal-adduction": [
+          0,
+          -1,
+          0
+        ],
+        "elevation": [
+          0,
+          0,
+          1
+        ],
+        "depression": [
+          0,
+          0,
+          -1
+        ],
+        "protraction": [
+          0,
+          -1,
+          0
+        ],
+        "retraction": [
+          0,
+          1,
+          0
+        ],
+        "upward-rotation": [
+          0,
+          0,
+          1
+        ],
+        "downward-rotation": [
+          0,
+          0,
+          -1
+        ],
+        "lateral-flexion": [
+          0,
+          0,
+          1
+        ],
+        "pronation": [
+          0.021861668676137924,
+          -0.9988096952438354,
+          -0.0436030775308609
+        ],
+        "supination": [
+          -0.021861668676137924,
+          0.9988096952438354,
+          0.0436030775308609
+        ],
+        "dorsiflexion": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "plantarflexion": [
+          -1.0,
+          -0.0,
+          -0.0
+        ],
+        "inversion": [
+          0,
+          0,
+          1
+        ],
+        "eversion": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "source": "acetabulum .i/.j cube cross-checked against femoral head sphere fit",
+      "review": "pending"
+    },
+    {
+      "name": "knee.r",
+      "node": "joint.knee.r",
+      "position": [
+        -0.07618916034698486,
+        -0.8939927220344543,
+        -0.08809348940849304
+      ],
+      "parent": "hip.r",
       "axes": {
         "flexion": [
           -1.0,
           0.0,
           0.0
         ],
+        "extension": [
+          1.0,
+          -0.0,
+          -0.0
+        ],
         "abduction": [
-          0.0,
-          0.0,
-          -1.0
+          0,
+          0,
+          1
+        ],
+        "adduction": [
+          0,
+          0,
+          -1
         ],
         "rotation": [
+          -0.014895699918270111,
+          -0.9995107054710388,
+          -0.027505015954375267
+        ],
+        "internal-rotation": [
+          -0.014895699918270111,
+          -0.9995107054710388,
+          -0.027505015954375267
+        ],
+        "external-rotation": [
+          0.014895699918270111,
+          0.9995107054710388,
+          0.027505015954375267
+        ],
+        "horizontal-abduction": [
+          0,
+          1,
+          0
+        ],
+        "horizontal-adduction": [
+          0,
+          -1,
+          0
+        ],
+        "elevation": [
+          0,
+          0,
+          1
+        ],
+        "depression": [
+          0,
+          0,
+          -1
+        ],
+        "protraction": [
+          0,
+          -1,
+          0
+        ],
+        "retraction": [
+          0,
+          1,
+          0
+        ],
+        "upward-rotation": [
+          0,
+          0,
+          1
+        ],
+        "downward-rotation": [
+          0,
+          0,
+          -1
+        ],
+        "lateral-flexion": [
+          0,
+          0,
+          1
+        ],
+        "pronation": [
+          -0.014895699918270111,
+          -0.9995107054710388,
+          -0.027505015954375267
+        ],
+        "supination": [
+          0.014895699918270111,
+          0.9995107054710388,
+          0.027505015954375267
+        ],
+        "dorsiflexion": [
+          -1.0,
           0.0,
-          1.0,
           0.0
+        ],
+        "plantarflexion": [
+          1.0,
+          -0.0,
+          -0.0
+        ],
+        "inversion": [
+          0,
+          0,
+          1
+        ],
+        "eversion": [
+          0,
+          0,
+          -1
         ]
       },
-      "source": "styloid landmark / distal forearm",
+      "source": "midpoint of femoral epicondyle .i/.j cubes",
+      "review": "pending"
+    },
+    {
+      "name": "ankle.r",
+      "node": "joint.ankle.r",
+      "position": [
+        -0.07859372347593307,
+        -1.270732045173645,
+        -0.09840376675128937
+      ],
+      "parent": "knee.r",
+      "axes": {
+        "flexion": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "extension": [
+          -1.0,
+          -0.0,
+          -0.0
+        ],
+        "abduction": [
+          0,
+          0,
+          1
+        ],
+        "adduction": [
+          0,
+          0,
+          -1
+        ],
+        "rotation": [
+          -0.0,
+          1.0,
+          0.0
+        ],
+        "internal-rotation": [
+          -0.0,
+          1.0,
+          0.0
+        ],
+        "external-rotation": [
+          0.0,
+          -1.0,
+          -0.0
+        ],
+        "horizontal-abduction": [
+          0,
+          1,
+          0
+        ],
+        "horizontal-adduction": [
+          0,
+          -1,
+          0
+        ],
+        "elevation": [
+          0,
+          0,
+          1
+        ],
+        "depression": [
+          0,
+          0,
+          -1
+        ],
+        "protraction": [
+          0,
+          -1,
+          0
+        ],
+        "retraction": [
+          0,
+          1,
+          0
+        ],
+        "upward-rotation": [
+          0,
+          0,
+          1
+        ],
+        "downward-rotation": [
+          0,
+          0,
+          -1
+        ],
+        "lateral-flexion": [
+          0,
+          0,
+          1
+        ],
+        "pronation": [
+          -0.0,
+          1.0,
+          0.0
+        ],
+        "supination": [
+          0.0,
+          -1.0,
+          -0.0
+        ],
+        "dorsiflexion": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "plantarflexion": [
+          -1.0,
+          -0.0,
+          -0.0
+        ],
+        "inversion": [
+          0,
+          0,
+          1
+        ],
+        "eversion": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "source": "midpoint of medial/lateral malleolar landmarks",
       "review": "pending"
     }
   ],
-  "motionAliases": {
-    "hand.l": "wrist.l",
-    "hand.r": "wrist.r"
+  "axisMirrorChecks": [
+    {
+      "joint": "clavicle",
+      "action": "flexion",
+      "dot": 1.0
+    },
+    {
+      "joint": "clavicle",
+      "action": "extension",
+      "dot": 1.0
+    },
+    {
+      "joint": "clavicle",
+      "action": "abduction",
+      "dot": 1.0
+    },
+    {
+      "joint": "clavicle",
+      "action": "adduction",
+      "dot": 1.0
+    },
+    {
+      "joint": "clavicle",
+      "action": "rotation",
+      "dot": 1.0
+    },
+    {
+      "joint": "clavicle",
+      "action": "internal-rotation",
+      "dot": 1.0
+    },
+    {
+      "joint": "clavicle",
+      "action": "external-rotation",
+      "dot": 1.0
+    },
+    {
+      "joint": "clavicle",
+      "action": "horizontal-abduction",
+      "dot": 1.0
+    },
+    {
+      "joint": "clavicle",
+      "action": "horizontal-adduction",
+      "dot": 1.0
+    },
+    {
+      "joint": "clavicle",
+      "action": "elevation",
+      "dot": 1.0
+    },
+    {
+      "joint": "clavicle",
+      "action": "depression",
+      "dot": 1.0
+    },
+    {
+      "joint": "clavicle",
+      "action": "protraction",
+      "dot": 1.0
+    },
+    {
+      "joint": "clavicle",
+      "action": "retraction",
+      "dot": 1.0
+    },
+    {
+      "joint": "clavicle",
+      "action": "upward-rotation",
+      "dot": 1.0
+    },
+    {
+      "joint": "clavicle",
+      "action": "downward-rotation",
+      "dot": 1.0
+    },
+    {
+      "joint": "clavicle",
+      "action": "lateral-flexion",
+      "dot": 1.0
+    },
+    {
+      "joint": "clavicle",
+      "action": "pronation",
+      "dot": 1.0
+    },
+    {
+      "joint": "clavicle",
+      "action": "supination",
+      "dot": 1.0
+    },
+    {
+      "joint": "clavicle",
+      "action": "dorsiflexion",
+      "dot": 1.0
+    },
+    {
+      "joint": "clavicle",
+      "action": "plantarflexion",
+      "dot": 1.0
+    },
+    {
+      "joint": "clavicle",
+      "action": "inversion",
+      "dot": 1.0
+    },
+    {
+      "joint": "clavicle",
+      "action": "eversion",
+      "dot": 1.0
+    },
+    {
+      "joint": "scapula",
+      "action": "flexion",
+      "dot": 1.0
+    },
+    {
+      "joint": "scapula",
+      "action": "extension",
+      "dot": 1.0
+    },
+    {
+      "joint": "scapula",
+      "action": "abduction",
+      "dot": 1.0
+    },
+    {
+      "joint": "scapula",
+      "action": "adduction",
+      "dot": 1.0
+    },
+    {
+      "joint": "scapula",
+      "action": "rotation",
+      "dot": 1.0
+    },
+    {
+      "joint": "scapula",
+      "action": "internal-rotation",
+      "dot": 1.0
+    },
+    {
+      "joint": "scapula",
+      "action": "external-rotation",
+      "dot": 1.0
+    },
+    {
+      "joint": "scapula",
+      "action": "horizontal-abduction",
+      "dot": 1.0
+    },
+    {
+      "joint": "scapula",
+      "action": "horizontal-adduction",
+      "dot": 1.0
+    },
+    {
+      "joint": "scapula",
+      "action": "elevation",
+      "dot": 1.0
+    },
+    {
+      "joint": "scapula",
+      "action": "depression",
+      "dot": 1.0
+    },
+    {
+      "joint": "scapula",
+      "action": "protraction",
+      "dot": 1.0
+    },
+    {
+      "joint": "scapula",
+      "action": "retraction",
+      "dot": 1.0
+    },
+    {
+      "joint": "scapula",
+      "action": "upward-rotation",
+      "dot": 1.0
+    },
+    {
+      "joint": "scapula",
+      "action": "downward-rotation",
+      "dot": 1.0
+    },
+    {
+      "joint": "scapula",
+      "action": "lateral-flexion",
+      "dot": 1.0
+    },
+    {
+      "joint": "scapula",
+      "action": "pronation",
+      "dot": 1.0
+    },
+    {
+      "joint": "scapula",
+      "action": "supination",
+      "dot": 1.0
+    },
+    {
+      "joint": "scapula",
+      "action": "dorsiflexion",
+      "dot": 1.0
+    },
+    {
+      "joint": "scapula",
+      "action": "plantarflexion",
+      "dot": 1.0
+    },
+    {
+      "joint": "scapula",
+      "action": "inversion",
+      "dot": 1.0
+    },
+    {
+      "joint": "scapula",
+      "action": "eversion",
+      "dot": 1.0
+    },
+    {
+      "joint": "shoulder",
+      "action": "flexion",
+      "dot": 1.0
+    },
+    {
+      "joint": "shoulder",
+      "action": "extension",
+      "dot": 1.0
+    },
+    {
+      "joint": "shoulder",
+      "action": "abduction",
+      "dot": 1.0
+    },
+    {
+      "joint": "shoulder",
+      "action": "adduction",
+      "dot": 1.0
+    },
+    {
+      "joint": "shoulder",
+      "action": "rotation",
+      "dot": 0.9999999280410601
+    },
+    {
+      "joint": "shoulder",
+      "action": "internal-rotation",
+      "dot": 0.9999999280410601
+    },
+    {
+      "joint": "shoulder",
+      "action": "external-rotation",
+      "dot": 0.9999999280410601
+    },
+    {
+      "joint": "shoulder",
+      "action": "horizontal-abduction",
+      "dot": 1.0
+    },
+    {
+      "joint": "shoulder",
+      "action": "horizontal-adduction",
+      "dot": 1.0
+    },
+    {
+      "joint": "shoulder",
+      "action": "elevation",
+      "dot": 1.0
+    },
+    {
+      "joint": "shoulder",
+      "action": "depression",
+      "dot": 1.0
+    },
+    {
+      "joint": "shoulder",
+      "action": "protraction",
+      "dot": 1.0
+    },
+    {
+      "joint": "shoulder",
+      "action": "retraction",
+      "dot": 1.0
+    },
+    {
+      "joint": "shoulder",
+      "action": "upward-rotation",
+      "dot": 1.0
+    },
+    {
+      "joint": "shoulder",
+      "action": "downward-rotation",
+      "dot": 1.0
+    },
+    {
+      "joint": "shoulder",
+      "action": "lateral-flexion",
+      "dot": 1.0
+    },
+    {
+      "joint": "shoulder",
+      "action": "pronation",
+      "dot": 0.9999999280410601
+    },
+    {
+      "joint": "shoulder",
+      "action": "supination",
+      "dot": 0.9999999280410601
+    },
+    {
+      "joint": "shoulder",
+      "action": "dorsiflexion",
+      "dot": 1.0
+    },
+    {
+      "joint": "shoulder",
+      "action": "plantarflexion",
+      "dot": 1.0
+    },
+    {
+      "joint": "shoulder",
+      "action": "inversion",
+      "dot": 1.0
+    },
+    {
+      "joint": "shoulder",
+      "action": "eversion",
+      "dot": 1.0
+    },
+    {
+      "joint": "elbow",
+      "action": "flexion",
+      "dot": 1.0
+    },
+    {
+      "joint": "elbow",
+      "action": "extension",
+      "dot": 1.0
+    },
+    {
+      "joint": "elbow",
+      "action": "abduction",
+      "dot": 1.0
+    },
+    {
+      "joint": "elbow",
+      "action": "adduction",
+      "dot": 1.0
+    },
+    {
+      "joint": "elbow",
+      "action": "rotation",
+      "dot": 1.0000000054972527
+    },
+    {
+      "joint": "elbow",
+      "action": "internal-rotation",
+      "dot": 1.0000000054972527
+    },
+    {
+      "joint": "elbow",
+      "action": "external-rotation",
+      "dot": 1.0000000054972527
+    },
+    {
+      "joint": "elbow",
+      "action": "horizontal-abduction",
+      "dot": 1.0
+    },
+    {
+      "joint": "elbow",
+      "action": "horizontal-adduction",
+      "dot": 1.0
+    },
+    {
+      "joint": "elbow",
+      "action": "elevation",
+      "dot": 1.0
+    },
+    {
+      "joint": "elbow",
+      "action": "depression",
+      "dot": 1.0
+    },
+    {
+      "joint": "elbow",
+      "action": "protraction",
+      "dot": 1.0
+    },
+    {
+      "joint": "elbow",
+      "action": "retraction",
+      "dot": 1.0
+    },
+    {
+      "joint": "elbow",
+      "action": "upward-rotation",
+      "dot": 1.0
+    },
+    {
+      "joint": "elbow",
+      "action": "downward-rotation",
+      "dot": 1.0
+    },
+    {
+      "joint": "elbow",
+      "action": "lateral-flexion",
+      "dot": 1.0
+    },
+    {
+      "joint": "elbow",
+      "action": "pronation",
+      "dot": 1.0000000054972527
+    },
+    {
+      "joint": "elbow",
+      "action": "supination",
+      "dot": 1.0000000054972527
+    },
+    {
+      "joint": "elbow",
+      "action": "dorsiflexion",
+      "dot": 1.0
+    },
+    {
+      "joint": "elbow",
+      "action": "plantarflexion",
+      "dot": 1.0
+    },
+    {
+      "joint": "elbow",
+      "action": "inversion",
+      "dot": 1.0
+    },
+    {
+      "joint": "elbow",
+      "action": "eversion",
+      "dot": 1.0
+    },
+    {
+      "joint": "forearm",
+      "action": "flexion",
+      "dot": 1.0
+    },
+    {
+      "joint": "forearm",
+      "action": "extension",
+      "dot": 1.0
+    },
+    {
+      "joint": "forearm",
+      "action": "abduction",
+      "dot": 1.0
+    },
+    {
+      "joint": "forearm",
+      "action": "adduction",
+      "dot": 1.0
+    },
+    {
+      "joint": "forearm",
+      "action": "rotation",
+      "dot": 0.9999999270384461
+    },
+    {
+      "joint": "forearm",
+      "action": "internal-rotation",
+      "dot": 0.9999999270384461
+    },
+    {
+      "joint": "forearm",
+      "action": "external-rotation",
+      "dot": 0.9999999270384461
+    },
+    {
+      "joint": "forearm",
+      "action": "horizontal-abduction",
+      "dot": 1.0
+    },
+    {
+      "joint": "forearm",
+      "action": "horizontal-adduction",
+      "dot": 1.0
+    },
+    {
+      "joint": "forearm",
+      "action": "elevation",
+      "dot": 1.0
+    },
+    {
+      "joint": "forearm",
+      "action": "depression",
+      "dot": 1.0
+    },
+    {
+      "joint": "forearm",
+      "action": "protraction",
+      "dot": 1.0
+    },
+    {
+      "joint": "forearm",
+      "action": "retraction",
+      "dot": 1.0
+    },
+    {
+      "joint": "forearm",
+      "action": "upward-rotation",
+      "dot": 1.0
+    },
+    {
+      "joint": "forearm",
+      "action": "downward-rotation",
+      "dot": 1.0
+    },
+    {
+      "joint": "forearm",
+      "action": "lateral-flexion",
+      "dot": 1.0
+    },
+    {
+      "joint": "forearm",
+      "action": "pronation",
+      "dot": 0.9999999270384461
+    },
+    {
+      "joint": "forearm",
+      "action": "supination",
+      "dot": 0.9999999270384461
+    },
+    {
+      "joint": "forearm",
+      "action": "dorsiflexion",
+      "dot": 1.0
+    },
+    {
+      "joint": "forearm",
+      "action": "plantarflexion",
+      "dot": 1.0
+    },
+    {
+      "joint": "forearm",
+      "action": "inversion",
+      "dot": 1.0
+    },
+    {
+      "joint": "forearm",
+      "action": "eversion",
+      "dot": 1.0
+    },
+    {
+      "joint": "hand",
+      "action": "flexion",
+      "dot": 1.0
+    },
+    {
+      "joint": "hand",
+      "action": "extension",
+      "dot": 1.0
+    },
+    {
+      "joint": "hand",
+      "action": "abduction",
+      "dot": 1.0
+    },
+    {
+      "joint": "hand",
+      "action": "adduction",
+      "dot": 1.0
+    },
+    {
+      "joint": "hand",
+      "action": "rotation",
+      "dot": 1.0
+    },
+    {
+      "joint": "hand",
+      "action": "internal-rotation",
+      "dot": 1.0
+    },
+    {
+      "joint": "hand",
+      "action": "external-rotation",
+      "dot": 1.0
+    },
+    {
+      "joint": "hand",
+      "action": "horizontal-abduction",
+      "dot": 1.0
+    },
+    {
+      "joint": "hand",
+      "action": "horizontal-adduction",
+      "dot": 1.0
+    },
+    {
+      "joint": "hand",
+      "action": "elevation",
+      "dot": 1.0
+    },
+    {
+      "joint": "hand",
+      "action": "depression",
+      "dot": 1.0
+    },
+    {
+      "joint": "hand",
+      "action": "protraction",
+      "dot": 1.0
+    },
+    {
+      "joint": "hand",
+      "action": "retraction",
+      "dot": 1.0
+    },
+    {
+      "joint": "hand",
+      "action": "upward-rotation",
+      "dot": 1.0
+    },
+    {
+      "joint": "hand",
+      "action": "downward-rotation",
+      "dot": 1.0
+    },
+    {
+      "joint": "hand",
+      "action": "lateral-flexion",
+      "dot": 1.0
+    },
+    {
+      "joint": "hand",
+      "action": "pronation",
+      "dot": 1.0
+    },
+    {
+      "joint": "hand",
+      "action": "supination",
+      "dot": 1.0
+    },
+    {
+      "joint": "hand",
+      "action": "dorsiflexion",
+      "dot": 1.0
+    },
+    {
+      "joint": "hand",
+      "action": "plantarflexion",
+      "dot": 1.0
+    },
+    {
+      "joint": "hand",
+      "action": "inversion",
+      "dot": 1.0
+    },
+    {
+      "joint": "hand",
+      "action": "eversion",
+      "dot": 1.0
+    },
+    {
+      "joint": "hip",
+      "action": "flexion",
+      "dot": 1.0
+    },
+    {
+      "joint": "hip",
+      "action": "extension",
+      "dot": 1.0
+    },
+    {
+      "joint": "hip",
+      "action": "abduction",
+      "dot": 1.0
+    },
+    {
+      "joint": "hip",
+      "action": "adduction",
+      "dot": 1.0
+    },
+    {
+      "joint": "hip",
+      "action": "rotation",
+      "dot": 0.9999999682405509
+    },
+    {
+      "joint": "hip",
+      "action": "internal-rotation",
+      "dot": 0.9999999682405509
+    },
+    {
+      "joint": "hip",
+      "action": "external-rotation",
+      "dot": 0.9999999682405509
+    },
+    {
+      "joint": "hip",
+      "action": "horizontal-abduction",
+      "dot": 1.0
+    },
+    {
+      "joint": "hip",
+      "action": "horizontal-adduction",
+      "dot": 1.0
+    },
+    {
+      "joint": "hip",
+      "action": "elevation",
+      "dot": 1.0
+    },
+    {
+      "joint": "hip",
+      "action": "depression",
+      "dot": 1.0
+    },
+    {
+      "joint": "hip",
+      "action": "protraction",
+      "dot": 1.0
+    },
+    {
+      "joint": "hip",
+      "action": "retraction",
+      "dot": 1.0
+    },
+    {
+      "joint": "hip",
+      "action": "upward-rotation",
+      "dot": 1.0
+    },
+    {
+      "joint": "hip",
+      "action": "downward-rotation",
+      "dot": 1.0
+    },
+    {
+      "joint": "hip",
+      "action": "lateral-flexion",
+      "dot": 1.0
+    },
+    {
+      "joint": "hip",
+      "action": "pronation",
+      "dot": 0.9999999682405509
+    },
+    {
+      "joint": "hip",
+      "action": "supination",
+      "dot": 0.9999999682405509
+    },
+    {
+      "joint": "hip",
+      "action": "dorsiflexion",
+      "dot": 1.0
+    },
+    {
+      "joint": "hip",
+      "action": "plantarflexion",
+      "dot": 1.0
+    },
+    {
+      "joint": "hip",
+      "action": "inversion",
+      "dot": 1.0
+    },
+    {
+      "joint": "hip",
+      "action": "eversion",
+      "dot": 1.0
+    },
+    {
+      "joint": "knee",
+      "action": "flexion",
+      "dot": 1.0
+    },
+    {
+      "joint": "knee",
+      "action": "extension",
+      "dot": 1.0
+    },
+    {
+      "joint": "knee",
+      "action": "abduction",
+      "dot": 1.0
+    },
+    {
+      "joint": "knee",
+      "action": "adduction",
+      "dot": 1.0
+    },
+    {
+      "joint": "knee",
+      "action": "rotation",
+      "dot": 1.0000000581299193
+    },
+    {
+      "joint": "knee",
+      "action": "internal-rotation",
+      "dot": 1.0000000581299193
+    },
+    {
+      "joint": "knee",
+      "action": "external-rotation",
+      "dot": 1.0000000581299193
+    },
+    {
+      "joint": "knee",
+      "action": "horizontal-abduction",
+      "dot": 1.0
+    },
+    {
+      "joint": "knee",
+      "action": "horizontal-adduction",
+      "dot": 1.0
+    },
+    {
+      "joint": "knee",
+      "action": "elevation",
+      "dot": 1.0
+    },
+    {
+      "joint": "knee",
+      "action": "depression",
+      "dot": 1.0
+    },
+    {
+      "joint": "knee",
+      "action": "protraction",
+      "dot": 1.0
+    },
+    {
+      "joint": "knee",
+      "action": "retraction",
+      "dot": 1.0
+    },
+    {
+      "joint": "knee",
+      "action": "upward-rotation",
+      "dot": 1.0
+    },
+    {
+      "joint": "knee",
+      "action": "downward-rotation",
+      "dot": 1.0
+    },
+    {
+      "joint": "knee",
+      "action": "lateral-flexion",
+      "dot": 1.0
+    },
+    {
+      "joint": "knee",
+      "action": "pronation",
+      "dot": 1.0000000581299193
+    },
+    {
+      "joint": "knee",
+      "action": "supination",
+      "dot": 1.0000000581299193
+    },
+    {
+      "joint": "knee",
+      "action": "dorsiflexion",
+      "dot": 1.0
+    },
+    {
+      "joint": "knee",
+      "action": "plantarflexion",
+      "dot": 1.0
+    },
+    {
+      "joint": "knee",
+      "action": "inversion",
+      "dot": 1.0
+    },
+    {
+      "joint": "knee",
+      "action": "eversion",
+      "dot": 1.0
+    },
+    {
+      "joint": "ankle",
+      "action": "flexion",
+      "dot": 1.0
+    },
+    {
+      "joint": "ankle",
+      "action": "extension",
+      "dot": 1.0
+    },
+    {
+      "joint": "ankle",
+      "action": "abduction",
+      "dot": 1.0
+    },
+    {
+      "joint": "ankle",
+      "action": "adduction",
+      "dot": 1.0
+    },
+    {
+      "joint": "ankle",
+      "action": "rotation",
+      "dot": 1.0
+    },
+    {
+      "joint": "ankle",
+      "action": "internal-rotation",
+      "dot": 1.0
+    },
+    {
+      "joint": "ankle",
+      "action": "external-rotation",
+      "dot": 1.0
+    },
+    {
+      "joint": "ankle",
+      "action": "horizontal-abduction",
+      "dot": 1.0
+    },
+    {
+      "joint": "ankle",
+      "action": "horizontal-adduction",
+      "dot": 1.0
+    },
+    {
+      "joint": "ankle",
+      "action": "elevation",
+      "dot": 1.0
+    },
+    {
+      "joint": "ankle",
+      "action": "depression",
+      "dot": 1.0
+    },
+    {
+      "joint": "ankle",
+      "action": "protraction",
+      "dot": 1.0
+    },
+    {
+      "joint": "ankle",
+      "action": "retraction",
+      "dot": 1.0
+    },
+    {
+      "joint": "ankle",
+      "action": "upward-rotation",
+      "dot": 1.0
+    },
+    {
+      "joint": "ankle",
+      "action": "downward-rotation",
+      "dot": 1.0
+    },
+    {
+      "joint": "ankle",
+      "action": "lateral-flexion",
+      "dot": 1.0
+    },
+    {
+      "joint": "ankle",
+      "action": "pronation",
+      "dot": 1.0
+    },
+    {
+      "joint": "ankle",
+      "action": "supination",
+      "dot": 1.0
+    },
+    {
+      "joint": "ankle",
+      "action": "dorsiflexion",
+      "dot": 1.0
+    },
+    {
+      "joint": "ankle",
+      "action": "plantarflexion",
+      "dot": 1.0
+    },
+    {
+      "joint": "ankle",
+      "action": "inversion",
+      "dot": 1.0
+    },
+    {
+      "joint": "ankle",
+      "action": "eversion",
+      "dot": 1.0
+    }
+  ],
+  "hipFitEvidence": {
+    "l": {
+      "femoralHeadFit": [
+        0.08361014723777771,
+        -0.4877498745918274,
+        -0.059610407799482346
+      ],
+      "acetabulum": [
+        0.08530742675065994,
+        -0.47890692949295044,
+        -0.06997288763523102
+      ],
+      "distanceM": 0.013728052536825694,
+      "patchVertices": 76
+    },
+    "r": {
+      "femoralHeadFit": [
+        -0.08357714116573334,
+        -0.4877498745918274,
+        -0.059610411524772644
+      ],
+      "acetabulum": [
+        -0.08527445793151855,
+        -0.4789067804813385,
+        -0.06997288763523102
+      ],
+      "distanceM": 0.013728150157058033,
+      "patchVertices": 76
+    }
   },
-  "handGripOffsetM": 0.08
+  "motionAliases": {},
+  "excludedDraftMotionKeys": []
 }

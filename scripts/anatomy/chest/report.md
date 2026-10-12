@@ -1,14 +1,24 @@
 # Chest mesh review
 
-Final GLB: **3,685,024 bytes** (3.685 MB), **231,986 triangles**.
+Final GLB: **3,739,748 bytes**, **231,986 triangles**, **59 total nodes** (39 meshes, 19 joints, rig root).
+Draw-call estimate: **39** opaque primitives; skin overlay adds its shell pass. Both 4 MB and 350,000 triangle ceilings enforced.
 
-Geometry and attachments: CC BY-SA 4.0.
+Native Blender, cached FBX only. Geometry and derived rig/attachment data: CC BY-SA 4.0.
 
-## Surface audit
+## Source coverage and scope
 
-Symmetric sample-based Hausdorff: approximately 3,000 vertices and 6,000 area-weighted interior samples per direction. Distances are to triangles, in metres, after final quantization and compression decode. This is a sampled estimate, not a certified global maximum. Positional seams are compacted and source boundaries stay locked during simplification. Unreferenced vertices are excluded from the surface samples. Final topology welds coincident UV/normal seam vertices at 0.1 µm for geometric closedness.
+- Intercostal and forearm ids follow the task spelling; specId records §5.2 aliases.
+- Sternum and ribs merge as thorax; thoracic-spine is the second static material group.
+- Absolute surface errors are audited after simplification and final decode; specified context caps are mandatory.
+- No source surfaces are mirrored; bilateral intercostals are merged as unsided parts.
 
-| Mesh | Role | Before | Final | Max sample deviation (mm) | Budget (mm) | Closed before → final | Boundary edges |
+Display muscle and bone selections retain their reviewed topic scope. The mannequin uses full-body joints even where corresponding display bones are absent. No hand/foot intrinsic muscle geometry is fabricated.
+
+## Final decoded surface audit
+
+Symmetric sampled Hausdorff: referenced vertices (approximately 3,000) plus 6,000 area-weighted interior points in each direction. This estimates surface error rather than certifying a global maximum. Source boundaries are preserved; nonmanifold/open sources retain disabled section filling.
+
+| Mesh | Role | Source triangles | Final triangles | Deviation mm | Budget mm | Closed before → after | Boundary edges |
 |---|---|---:|---:|---:|---:|---|---:|
 | biceps-brachii-short.l | neighbour | 2,696 | 1,484 | 1.265 | 1.5 | True → True | 0 |
 | biceps-brachii-short.r | neighbour | 2,696 | 1,484 | 1.265 | 1.5 | True → True | 0 |
@@ -50,194 +60,391 @@ Symmetric sample-based Hausdorff: approximately 3,000 vertices and 6,000 area-we
 | triceps-brachii.l | neighbour | 10,264 | 2,996 | 0.658 | 1.5 | True → True | 0 |
 | triceps-brachii.r | neighbour | 10,264 | 2,996 | 0.746 | 1.5 | True → True | 0 |
 
-## Native preview and motion checks
+## Workbench previews
 
-Renderer: Blender Workbench studio; flat paper #EDE7D6, orthographic non-skin framing with 5% margin per edge.
-The five review images are front, back, body-left, exploded-by-layer and opaque full-body skin. The pose image uses the decoded final GLB skin, with shoulder.l and elbow.l flexion inputs of 90°.
-Measured left humerus forward displacement (+Z): 0.145641 m; resulting upper-arm/forearm bend: 103.00° (includes the source rest angle). All sampled muscle edges remain finite.
-The midline column is thoracic spine: source sternum centroid z=0.02616 m, spine centroid z=-0.11519 m. Spine is posterior and its transform agrees with the source audit.
-Visual inspection confirmed both sides, three pec-major parts per side, pec minor beneath, serratus slips along ribs, intercostals between ribs, midline sternum, posterior scapulae, hanging arm bones and a connected posed axilla. The exploded-by-layer preview lifts superficial and intermediate structures to inspect underlying anatomy.
-The opaque skin and translucent same-camera shell passes place the selected anatomy inside the source body outline; source regional skin seams remain visible. Anatomical attachment approval remains separate.
+Studio lighting, paper #EDE7D6, orthographic evaluated non-skin bounds with 5% margin; shell composite at 30%. Superficial/intermediate layers move out 0.12/0.06 m; bones and neighbours remain fixed.
 
+- `/Users/gavin/work/atlas/scripts/anatomy/cache/chest-preview-front.png`
+- `/Users/gavin/work/atlas/scripts/anatomy/cache/chest-preview-back.png`
+- `/Users/gavin/work/atlas/scripts/anatomy/cache/chest-preview-left.png`
+- `/Users/gavin/work/atlas/scripts/anatomy/cache/chest-preview-exploded-by-layer.png`
+- `/Users/gavin/work/atlas/scripts/anatomy/cache/chest-preview-skin.png`
+- `/Users/gavin/work/atlas/scripts/anatomy/cache/chest-preview-pose.png`
+- `/Users/gavin/work/atlas/scripts/anatomy/cache/chest-preview-pose-front.png`
+- `/Users/gavin/work/atlas/scripts/anatomy/cache/chest-preview-pose-back.png`
+- `/Users/gavin/work/atlas/scripts/anatomy/cache/chest-preview-pose-left.png`
+- `/Users/gavin/work/atlas/scripts/anatomy/cache/chest-preview-pose-anatomy.png`
 
-## Budgets and coordinate gates
+Right angle convention: positive inputs; right axes signed by the engine mirrorSignedAxes rule. Positive inputs use the current engine’s mirrorSignedAxes rule with the real left/right joint midline normal; stored metadata remains the exact X-only axis reflection.
+Pose inputs: {'shoulder.l.flexion': 90, 'elbow.r.flexion': 90, 'hip.l.flexion': 60, 'knee.r.flexion': 90, 'ankle.l.dorsiflexion': 15, 'ankle.r.dorsiflexion': 15}; humerus.l centroid displacement 0.198882 m. All evaluated coordinates and muscle-edge stretches are finite.
+Visual inspection results are recorded in `preview-review.md` after viewing every PNG.
 
-Native Blender FBX → glTF pipeline; 39 mesh nodes, 11 joints and 1 rig root.
-Soft targets: 3,685,024 / 4,000,000 bytes; 231,986 / 350,000 triangles.
-Mandatory caps: intercostals external/internal 20,000 each; external oblique 8,000 per side; skin 30,000; thorax 25,000.
-Coordinates: metres, Y up, front +Z, own left +X. Chest centre is the inferior manubrium / sternal angle.
-Chest source centre: [-1.6483021681779064e-05, -0.055000342428684235, 1.3499360084533691]; centred floorY = -1.350318 m (add chest-centre height to recover source floor).
+## Frame and rig
 
-## Rig sanity
+Metres; Y up; front +Z; own left +X. Source region centre [-1.6483021681779064e-05, -0.055000342428684235, 1.3499360084533691]; floorY -1.350318 m. Add −floorY for grounded full-body display.
+Unexported reference bones locate joints and attachment candidates without adding out-of-region display bones. Hand joints pivot at wrist styloid midpoints; grip offsets are 0.08 m along the distal hand direction.
 
-| Joint | Position (m; X, Y, Z) | Source | Unit axes |
+| Joint | Position X/Y/Z m | Parent | Evidence |
 |---|---|---|---|
-| trunk | 0.00000, 0.00000, -0.00000 | sternal angle frame | passed |
-| clavicle.l | 0.01670, 0.05116, -0.02025 | medial end of clavicle (sternoclavicular joint) | passed |
-| scapula.l | 0.14958, 0.06725, -0.09072 | lateral end of clavicle (acromioclavicular joint); glenoid: glenoid .j landmark | passed |
-| shoulder.l | 0.17264, 0.03656, -0.08084 | humeral head sphere fit | passed |
-| elbow.l | 0.22320, -0.23922, -0.09501 | midpoint of epicondyle .j landmarks | passed |
-| wrist.l | 0.24355, -0.50444, -0.04325 | styloid landmark / distal forearm | passed |
-| clavicle.r | -0.01667, 0.05116, -0.02025 | medial end of clavicle (sternoclavicular joint) | passed |
-| scapula.r | -0.14955, 0.06725, -0.09072 | lateral end of clavicle (acromioclavicular joint); glenoid: glenoid .j landmark | passed |
-| shoulder.r | -0.17260, 0.03656, -0.08084 | humeral head sphere fit | passed |
-| elbow.r | -0.22317, -0.23922, -0.09501 | midpoint of epicondyle .j landmarks | passed |
-| wrist.r | -0.24351, -0.50444, -0.04325 | styloid landmark / distal forearm | passed |
+| trunk | 0.00000, 0.00000, -0.00000 | None | region frame |
+| clavicle.l | 0.01670, 0.05116, -0.02025 | trunk | medial clavicle / sternoclavicular joint |
+| scapula.l | 0.14958, 0.06725, -0.09072 | clavicle.l | lateral clavicle / acromioclavicular joint; glenoid landmark retained |
+| shoulder.l | 0.17264, 0.03656, -0.08084 | scapula.l | humeral head sphere fit; .i/.j landmark patch |
+| elbow.l | 0.22320, -0.23922, -0.09501 | shoulder.l | midpoint of humeral epicondyle .i/.j cubes |
+| forearm.l | 0.22320, -0.23922, -0.09501 | elbow.l | elbow centre to ulnar styloid rotation axis; ulna stays on elbow |
+| hand.l | 0.26464, -0.50445, -0.04079 | forearm.l | midpoint of radial/ulnar styloid cubes |
+| hip.l | 0.08531, -0.47891, -0.06997 | trunk | acetabulum .i/.j cube cross-checked against femoral head sphere fit |
+| knee.l | 0.07622, -0.89399, -0.08809 | hip.l | midpoint of femoral epicondyle .i/.j cubes |
+| ankle.l | 0.08184, -1.27063, -0.09846 | knee.l | midpoint of medial/lateral malleolar landmarks |
+| clavicle.r | -0.01667, 0.05116, -0.02025 | trunk | medial clavicle / sternoclavicular joint |
+| scapula.r | -0.14955, 0.06725, -0.09072 | clavicle.r | lateral clavicle / acromioclavicular joint; glenoid landmark retained |
+| shoulder.r | -0.17260, 0.03656, -0.08084 | scapula.r | humeral head sphere fit; .i/.j landmark patch |
+| elbow.r | -0.22317, -0.23922, -0.09501 | shoulder.r | midpoint of humeral epicondyle .i/.j cubes |
+| forearm.r | -0.22317, -0.23922, -0.09501 | elbow.r | elbow centre to ulnar styloid rotation axis; ulna stays on elbow |
+| hand.r | -0.26462, -0.50445, -0.04079 | forearm.r | midpoint of radial/ulnar styloid cubes |
+| hip.r | -0.08527, -0.47891, -0.06997 | trunk | acetabulum .i/.j cube cross-checked against femoral head sphere fit |
+| knee.r | -0.07619, -0.89399, -0.08809 | hip.r | midpoint of femoral epicondyle .i/.j cubes |
+| ankle.r | -0.07859, -1.27073, -0.09840 | knee.r | midpoint of medial/lateral malleolar landmarks |
 
-Shoulder and elbow flexion axes point toward −X: a downward left arm rotates toward +Z. Preview check poses the decoded final skin at shoulder.l flexion 90° and elbow.l flexion 90°; see cache/chest-preview-pose.png.
+## Bilateral axis checks
 
-## Attachment candidates against spec §1.3
+| Joint | Action | dot(right, X-mirror(left)) |
+|---|---|---:|
+| clavicle | flexion | 1.000000000 |
+| clavicle | extension | 1.000000000 |
+| clavicle | abduction | 1.000000000 |
+| clavicle | adduction | 1.000000000 |
+| clavicle | rotation | 1.000000000 |
+| clavicle | internal-rotation | 1.000000000 |
+| clavicle | external-rotation | 1.000000000 |
+| clavicle | horizontal-abduction | 1.000000000 |
+| clavicle | horizontal-adduction | 1.000000000 |
+| clavicle | elevation | 1.000000000 |
+| clavicle | depression | 1.000000000 |
+| clavicle | protraction | 1.000000000 |
+| clavicle | retraction | 1.000000000 |
+| clavicle | upward-rotation | 1.000000000 |
+| clavicle | downward-rotation | 1.000000000 |
+| clavicle | lateral-flexion | 1.000000000 |
+| clavicle | pronation | 1.000000000 |
+| clavicle | supination | 1.000000000 |
+| clavicle | dorsiflexion | 1.000000000 |
+| clavicle | plantarflexion | 1.000000000 |
+| clavicle | inversion | 1.000000000 |
+| clavicle | eversion | 1.000000000 |
+| scapula | flexion | 1.000000000 |
+| scapula | extension | 1.000000000 |
+| scapula | abduction | 1.000000000 |
+| scapula | adduction | 1.000000000 |
+| scapula | rotation | 1.000000000 |
+| scapula | internal-rotation | 1.000000000 |
+| scapula | external-rotation | 1.000000000 |
+| scapula | horizontal-abduction | 1.000000000 |
+| scapula | horizontal-adduction | 1.000000000 |
+| scapula | elevation | 1.000000000 |
+| scapula | depression | 1.000000000 |
+| scapula | protraction | 1.000000000 |
+| scapula | retraction | 1.000000000 |
+| scapula | upward-rotation | 1.000000000 |
+| scapula | downward-rotation | 1.000000000 |
+| scapula | lateral-flexion | 1.000000000 |
+| scapula | pronation | 1.000000000 |
+| scapula | supination | 1.000000000 |
+| scapula | dorsiflexion | 1.000000000 |
+| scapula | plantarflexion | 1.000000000 |
+| scapula | inversion | 1.000000000 |
+| scapula | eversion | 1.000000000 |
+| shoulder | flexion | 1.000000000 |
+| shoulder | extension | 1.000000000 |
+| shoulder | abduction | 1.000000000 |
+| shoulder | adduction | 1.000000000 |
+| shoulder | rotation | 0.999999928 |
+| shoulder | internal-rotation | 0.999999928 |
+| shoulder | external-rotation | 0.999999928 |
+| shoulder | horizontal-abduction | 1.000000000 |
+| shoulder | horizontal-adduction | 1.000000000 |
+| shoulder | elevation | 1.000000000 |
+| shoulder | depression | 1.000000000 |
+| shoulder | protraction | 1.000000000 |
+| shoulder | retraction | 1.000000000 |
+| shoulder | upward-rotation | 1.000000000 |
+| shoulder | downward-rotation | 1.000000000 |
+| shoulder | lateral-flexion | 1.000000000 |
+| shoulder | pronation | 0.999999928 |
+| shoulder | supination | 0.999999928 |
+| shoulder | dorsiflexion | 1.000000000 |
+| shoulder | plantarflexion | 1.000000000 |
+| shoulder | inversion | 1.000000000 |
+| shoulder | eversion | 1.000000000 |
+| elbow | flexion | 1.000000000 |
+| elbow | extension | 1.000000000 |
+| elbow | abduction | 1.000000000 |
+| elbow | adduction | 1.000000000 |
+| elbow | rotation | 1.000000005 |
+| elbow | internal-rotation | 1.000000005 |
+| elbow | external-rotation | 1.000000005 |
+| elbow | horizontal-abduction | 1.000000000 |
+| elbow | horizontal-adduction | 1.000000000 |
+| elbow | elevation | 1.000000000 |
+| elbow | depression | 1.000000000 |
+| elbow | protraction | 1.000000000 |
+| elbow | retraction | 1.000000000 |
+| elbow | upward-rotation | 1.000000000 |
+| elbow | downward-rotation | 1.000000000 |
+| elbow | lateral-flexion | 1.000000000 |
+| elbow | pronation | 1.000000005 |
+| elbow | supination | 1.000000005 |
+| elbow | dorsiflexion | 1.000000000 |
+| elbow | plantarflexion | 1.000000000 |
+| elbow | inversion | 1.000000000 |
+| elbow | eversion | 1.000000000 |
+| forearm | flexion | 1.000000000 |
+| forearm | extension | 1.000000000 |
+| forearm | abduction | 1.000000000 |
+| forearm | adduction | 1.000000000 |
+| forearm | rotation | 0.999999927 |
+| forearm | internal-rotation | 0.999999927 |
+| forearm | external-rotation | 0.999999927 |
+| forearm | horizontal-abduction | 1.000000000 |
+| forearm | horizontal-adduction | 1.000000000 |
+| forearm | elevation | 1.000000000 |
+| forearm | depression | 1.000000000 |
+| forearm | protraction | 1.000000000 |
+| forearm | retraction | 1.000000000 |
+| forearm | upward-rotation | 1.000000000 |
+| forearm | downward-rotation | 1.000000000 |
+| forearm | lateral-flexion | 1.000000000 |
+| forearm | pronation | 0.999999927 |
+| forearm | supination | 0.999999927 |
+| forearm | dorsiflexion | 1.000000000 |
+| forearm | plantarflexion | 1.000000000 |
+| forearm | inversion | 1.000000000 |
+| forearm | eversion | 1.000000000 |
+| hand | flexion | 1.000000000 |
+| hand | extension | 1.000000000 |
+| hand | abduction | 1.000000000 |
+| hand | adduction | 1.000000000 |
+| hand | rotation | 1.000000000 |
+| hand | internal-rotation | 1.000000000 |
+| hand | external-rotation | 1.000000000 |
+| hand | horizontal-abduction | 1.000000000 |
+| hand | horizontal-adduction | 1.000000000 |
+| hand | elevation | 1.000000000 |
+| hand | depression | 1.000000000 |
+| hand | protraction | 1.000000000 |
+| hand | retraction | 1.000000000 |
+| hand | upward-rotation | 1.000000000 |
+| hand | downward-rotation | 1.000000000 |
+| hand | lateral-flexion | 1.000000000 |
+| hand | pronation | 1.000000000 |
+| hand | supination | 1.000000000 |
+| hand | dorsiflexion | 1.000000000 |
+| hand | plantarflexion | 1.000000000 |
+| hand | inversion | 1.000000000 |
+| hand | eversion | 1.000000000 |
+| hip | flexion | 1.000000000 |
+| hip | extension | 1.000000000 |
+| hip | abduction | 1.000000000 |
+| hip | adduction | 1.000000000 |
+| hip | rotation | 0.999999968 |
+| hip | internal-rotation | 0.999999968 |
+| hip | external-rotation | 0.999999968 |
+| hip | horizontal-abduction | 1.000000000 |
+| hip | horizontal-adduction | 1.000000000 |
+| hip | elevation | 1.000000000 |
+| hip | depression | 1.000000000 |
+| hip | protraction | 1.000000000 |
+| hip | retraction | 1.000000000 |
+| hip | upward-rotation | 1.000000000 |
+| hip | downward-rotation | 1.000000000 |
+| hip | lateral-flexion | 1.000000000 |
+| hip | pronation | 0.999999968 |
+| hip | supination | 0.999999968 |
+| hip | dorsiflexion | 1.000000000 |
+| hip | plantarflexion | 1.000000000 |
+| hip | inversion | 1.000000000 |
+| hip | eversion | 1.000000000 |
+| knee | flexion | 1.000000000 |
+| knee | extension | 1.000000000 |
+| knee | abduction | 1.000000000 |
+| knee | adduction | 1.000000000 |
+| knee | rotation | 1.000000058 |
+| knee | internal-rotation | 1.000000058 |
+| knee | external-rotation | 1.000000058 |
+| knee | horizontal-abduction | 1.000000000 |
+| knee | horizontal-adduction | 1.000000000 |
+| knee | elevation | 1.000000000 |
+| knee | depression | 1.000000000 |
+| knee | protraction | 1.000000000 |
+| knee | retraction | 1.000000000 |
+| knee | upward-rotation | 1.000000000 |
+| knee | downward-rotation | 1.000000000 |
+| knee | lateral-flexion | 1.000000000 |
+| knee | pronation | 1.000000058 |
+| knee | supination | 1.000000058 |
+| knee | dorsiflexion | 1.000000000 |
+| knee | plantarflexion | 1.000000000 |
+| knee | inversion | 1.000000000 |
+| knee | eversion | 1.000000000 |
+| ankle | flexion | 1.000000000 |
+| ankle | extension | 1.000000000 |
+| ankle | abduction | 1.000000000 |
+| ankle | adduction | 1.000000000 |
+| ankle | rotation | 1.000000000 |
+| ankle | internal-rotation | 1.000000000 |
+| ankle | external-rotation | 1.000000000 |
+| ankle | horizontal-abduction | 1.000000000 |
+| ankle | horizontal-adduction | 1.000000000 |
+| ankle | elevation | 1.000000000 |
+| ankle | depression | 1.000000000 |
+| ankle | protraction | 1.000000000 |
+| ankle | retraction | 1.000000000 |
+| ankle | upward-rotation | 1.000000000 |
+| ankle | downward-rotation | 1.000000000 |
+| ankle | lateral-flexion | 1.000000000 |
+| ankle | pronation | 1.000000000 |
+| ankle | supination | 1.000000000 |
+| ankle | dorsiflexion | 1.000000000 |
+| ankle | plantarflexion | 1.000000000 |
+| ankle | inversion | 1.000000000 |
+| ankle | eversion | 1.000000000 |
 
-Every box is a human review gate. Geometry proximity does not verify anatomy. The spec itself leaves rib counts and tendon wording pending; no external references were fetched.
+Full-body draft motion keys outside this regional rig: none. All topics provide the complete 19-joint body rig.
+Motion aliases: {}. Arms keep ulna on elbow and radius/hand on forearm, with pronation along the forearm rather than the elbow flexion axis.
 
-- [ ] **pectoralis-major-clavicular · F-1/F-2**: origin on medial half of anterior clavicle; insertion at lateral lip of intertubercular groove.
-  - [ ] pectoralis-major-clavicular.l origin → clavicle: [0.0334, 0.0490, -0.0106]; [0.0614, 0.0527, -0.0188]; [0.0858, 0.0555, -0.0379]; .o/.e mesh Pectoralis major muscle.ol; pending.
-  - [ ] pectoralis-major-clavicular.l insertion → humerus: [0.1979, -0.0449, -0.0711]; [0.1943, -0.0351, -0.0708]; [0.1834, -0.0118, -0.0709]; .o/.e mesh Pectoralis major muscle.el; pending.
-  - [ ] pectoralis-major-clavicular.r origin → clavicle: [-0.0857, 0.0555, -0.0379]; [-0.0614, 0.0527, -0.0188]; [-0.0334, 0.0490, -0.0106]; .o/.e mesh Pectoralis major muscle.or; pending.
-  - [ ] pectoralis-major-clavicular.r insertion → humerus: [-0.1979, -0.0449, -0.0711]; [-0.1943, -0.0351, -0.0708]; [-0.1834, -0.0118, -0.0709]; .o/.e mesh Pectoralis major muscle.er; pending.
-- [ ] **pectoralis-major-sternocostal · F-1/F-2**: origin at anterior sternum and upper six costal cartilages; insertion at lateral lip; review 1–6 versus 2–6.
-  - [ ] pectoralis-major-sternocostal.l origin → ribs: [0.0334, 0.0490, -0.0106]; [0.0614, 0.0527, -0.0188]; [0.0858, 0.0555, -0.0379]; .o/.e mesh Pectoralis major muscle.ol; REQUIRED: attachment away from named surface.
-  - [ ] pectoralis-major-sternocostal.l origin → sternum: [0.0169, -0.0773, 0.0505]; [0.0155, -0.0394, 0.0400]; [0.0134, -0.0083, 0.0308]; .o/.e mesh Sternocostal head of pectoralis major muscle.e1l; pending.
-  - [ ] pectoralis-major-sternocostal.l origin → sternum: [0.0143, 0.0071, 0.0243]; [0.0223, 0.0230, 0.0067]; [0.0255, 0.0344, -0.0025]; .o/.e mesh Sternocostal head of pectoralis major muscle.e2l; pending.
-  - [ ] pectoralis-major-sternocostal.l origin → ribs: [0.0382, -0.1095, 0.0551]; [0.0764, -0.1266, 0.0482]; [0.0916, -0.1245, 0.0416]; .o/.e mesh Sternocostal head of pectoralis major muscle.el; pending.
-  - [ ] pectoralis-major-sternocostal.l insertion → humerus: [0.1979, -0.0449, -0.0711]; [0.1943, -0.0351, -0.0708]; [0.1834, -0.0118, -0.0709]; .o/.e mesh Pectoralis major muscle.el; pending.
-  - [ ] pectoralis-major-sternocostal.r origin → ribs: [-0.0857, 0.0555, -0.0379]; [-0.0614, 0.0527, -0.0188]; [-0.0334, 0.0490, -0.0106]; .o/.e mesh Pectoralis major muscle.or; REQUIRED: attachment away from named surface.
-  - [ ] pectoralis-major-sternocostal.r origin → sternum: [-0.0169, -0.0773, 0.0505]; [-0.0155, -0.0394, 0.0400]; [-0.0134, -0.0083, 0.0308]; .o/.e mesh Sternocostal head of pectoralis major muscle.e1r; pending.
-  - [ ] pectoralis-major-sternocostal.r origin → sternum: [-0.0142, 0.0071, 0.0243]; [-0.0223, 0.0230, 0.0067]; [-0.0255, 0.0344, -0.0025]; .o/.e mesh Sternocostal head of pectoralis major muscle.e2r; pending.
-  - [ ] pectoralis-major-sternocostal.r origin → ribs: [-0.0915, -0.1244, 0.0416]; [-0.0764, -0.1266, 0.0482]; [-0.0382, -0.1095, 0.0551]; .o/.e mesh Sternocostal head of pectoralis major muscle.er; pending.
-  - [ ] pectoralis-major-sternocostal.r insertion → humerus: [-0.1979, -0.0449, -0.0711]; [-0.1943, -0.0351, -0.0708]; [-0.1834, -0.0118, -0.0709]; .o/.e mesh Pectoralis major muscle.er; pending.
-- [ ] **pectoralis-major-abdominal · F-1/F-2**: origin in external-oblique aponeurosis; insertion on humerus; shared/twisted tendon needs visual review.
-  - [ ] pectoralis-major-abdominal.l origin → external-oblique: [0.0574, -0.1572, 0.0540]; [0.0657, -0.1645, 0.0526]; [0.0799, -0.1701, 0.0480]; .o/.e mesh (Abdominal part of pectoralis major muscle).ol; REQUIRED: attachment away from named surface.
-  - [ ] pectoralis-major-abdominal.l insertion → humerus: [0.1979, -0.0449, -0.0711]; [0.1943, -0.0351, -0.0708]; [0.1834, -0.0118, -0.0709]; .o/.e mesh Pectoralis major muscle.el; pending.
-  - [ ] pectoralis-major-abdominal.r origin → external-oblique: [-0.0799, -0.1701, 0.0480]; [-0.0657, -0.1645, 0.0526]; [-0.0574, -0.1572, 0.0540]; .o/.e mesh (Abdominal part of pectoralis major muscle).or; REQUIRED: attachment away from named surface.
-  - [ ] pectoralis-major-abdominal.r insertion → humerus: [-0.1979, -0.0449, -0.0711]; [-0.1943, -0.0351, -0.0708]; [-0.1834, -0.0118, -0.0709]; .o/.e mesh Pectoralis major muscle.er; pending.
-- [ ] **pectoralis-minor · F-4**: ribs 3–5 to coracoid process; spec leaves 2–5 versus 3–5 pending.
-  - [ ] pectoralis-minor.l origin → ribs: [0.1001, -0.0535, 0.0098]; [0.1086, -0.0449, -0.0042]; [0.1132, -0.0391, -0.0131]; .o/.e mesh Pectoralis minor muscle.e1l; pending.
-  - [ ] pectoralis-minor.l origin → ribs: [0.1066, -0.0823, 0.0192]; [0.1103, -0.0812, 0.0143]; [0.1157, -0.0767, 0.0046]; .o/.e mesh Pectoralis minor muscle.e2l; pending.
-  - [ ] pectoralis-minor.l origin → ribs: [0.0807, -0.0212, 0.0005]; [0.0891, -0.0118, -0.0105]; [0.1000, -0.0053, -0.0271]; .o/.e mesh Pectoralis minor muscle.el; pending.
-  - [ ] pectoralis-minor.l insertion → scapula: [0.1319, 0.0420, -0.0555]; [0.1296, 0.0441, -0.0579]; [0.1269, 0.0449, -0.0633]; .o/.e mesh Pectoralis minor muscle.ol; pending.
-  - [ ] pectoralis-minor.r origin → ribs: [-0.1001, -0.0535, 0.0098]; [-0.1086, -0.0449, -0.0042]; [-0.1132, -0.0391, -0.0131]; .o/.e mesh Pectoralis minor muscle.e1r; pending.
-  - [ ] pectoralis-minor.r origin → ribs: [-0.1065, -0.0823, 0.0192]; [-0.1102, -0.0812, 0.0143]; [-0.1157, -0.0767, 0.0046]; .o/.e mesh Pectoralis minor muscle.e2r; pending.
-  - [ ] pectoralis-minor.r origin → ribs: [-0.0807, -0.0212, 0.0005]; [-0.0891, -0.0118, -0.0105]; [-0.1000, -0.0053, -0.0271]; .o/.e mesh Pectoralis minor muscle.er; pending.
-  - [ ] pectoralis-minor.r insertion → scapula: [-0.1319, 0.0420, -0.0555]; [-0.1296, 0.0441, -0.0579]; [-0.1268, 0.0449, -0.0633]; .o/.e mesh Pectoralis minor muscle.or; pending.
-- [ ] **serratus-anterior · F-5**: outer upper 8–9 ribs to costal surface of medial scapular border; review each slip.
-  - [ ] serratus-anterior.l origin → ribs: [0.1094, 0.0048, -0.0448]; [0.1111, 0.0087, -0.0516]; [0.1123, 0.0135, -0.0640]; .o/.e mesh Serratus anterior muscle.e2r; pending.
-  - [ ] serratus-anterior.l origin → ribs: [0.1207, -0.0281, -0.0314]; [0.1242, -0.0243, -0.0457]; [0.1248, -0.0205, -0.0613]; .o/.e mesh Serratus anterior muscle.e3l; pending.
-  - [ ] serratus-anterior.l origin → ribs: [0.1228, -0.0719, -0.0087]; [0.1263, -0.0664, -0.0180]; [0.1288, -0.0628, -0.0286]; .o/.e mesh Serratus anterior muscle.e4l; pending.
-  - [ ] serratus-anterior.l origin → ribs: [0.1324, -0.1039, -0.0187]; [0.1363, -0.0996, -0.0326]; [0.1379, -0.0960, -0.0412]; .o/.e mesh Serratus anterior muscle.e5l; pending.
-  - [ ] serratus-anterior.l origin → ribs: [0.1398, -0.1320, -0.0332]; [0.1409, -0.1254, -0.0485]; [0.1396, -0.1208, -0.0594]; .o/.e mesh Serratus anterior muscle.e6l; pending.
-  - [ ] serratus-anterior.l origin → ribs: [0.1344, -0.1700, -0.0451]; [0.1346, -0.1646, -0.0555]; [0.1333, -0.1597, -0.0641]; .o/.e mesh Serratus anterior muscle.e7l; pending.
-  - [ ] serratus-anterior.l origin → ribs: [0.0695, 0.0564, -0.0451]; [0.0690, 0.0626, -0.0524]; [0.0683, 0.0677, -0.0578]; .o/.e mesh Serratus anterior muscle.el; pending.
-  - [ ] serratus-anterior.l insertion → scapula: [0.0851, -0.0765, -0.1583]; [0.0684, -0.0162, -0.1562]; [0.0679, 0.0282, -0.1464]; .o/.e mesh Serratus anterior muscle.ol; pending.
-  - [ ] serratus-anterior.r origin → ribs: [-0.0983, 0.0387, -0.0561]; [-0.0990, 0.0424, -0.0618]; [-0.0980, 0.0459, -0.0655]; .o/.e mesh Serratus anterior muscle.e1l; pending.
-  - [ ] serratus-anterior.r origin → ribs: [-0.1094, 0.0048, -0.0448]; [-0.1110, 0.0087, -0.0516]; [-0.1123, 0.0135, -0.0640]; .o/.e mesh Serratus anterior muscle.e2l; pending.
-  - [ ] serratus-anterior.r origin → ribs: [-0.1206, -0.0281, -0.0314]; [-0.1242, -0.0243, -0.0457]; [-0.1248, -0.0205, -0.0613]; .o/.e mesh Serratus anterior muscle.e3r; pending.
-  - [ ] serratus-anterior.r origin → ribs: [-0.1228, -0.0719, -0.0087]; [-0.1263, -0.0664, -0.0180]; [-0.1287, -0.0628, -0.0286]; .o/.e mesh Serratus anterior muscle.e4r; pending.
-  - [ ] serratus-anterior.r origin → ribs: [-0.1323, -0.1039, -0.0187]; [-0.1363, -0.0996, -0.0326]; [-0.1378, -0.0960, -0.0412]; .o/.e mesh Serratus anterior muscle.e5r; pending.
-  - [ ] serratus-anterior.r origin → ribs: [-0.1398, -0.1320, -0.0332]; [-0.1409, -0.1254, -0.0485]; [-0.1395, -0.1208, -0.0594]; .o/.e mesh Serratus anterior muscle.e6r; pending.
-  - [ ] serratus-anterior.r origin → ribs: [-0.1344, -0.1700, -0.0451]; [-0.1346, -0.1646, -0.0555]; [-0.1333, -0.1597, -0.0641]; .o/.e mesh Serratus anterior muscle.e7r; pending.
-  - [ ] serratus-anterior.r origin → ribs: [-0.1296, -0.1900, -0.0767]; [-0.1264, -0.1814, -0.0875]; [-0.1243, -0.1768, -0.0944]; .o/.e mesh Serratus anterior muscle.e8l; pending.
-  - [ ] serratus-anterior.r origin → ribs: [-0.0695, 0.0564, -0.0451]; [-0.0690, 0.0626, -0.0524]; [-0.0682, 0.0677, -0.0578]; .o/.e mesh Serratus anterior muscle.er; pending.
-  - [ ] serratus-anterior.r insertion → scapula: [-0.0851, -0.0765, -0.1583]; [-0.0684, -0.0162, -0.1562]; [-0.0679, 0.0282, -0.1464]; .o/.e mesh Serratus anterior muscle.or; pending.
-- [ ] **subclavius · F-6**: first rib/costal-cartilage junction to inferior clavicle.
-  - [ ] subclavius.l origin → ribs: [0.0441, 0.0410, -0.0159]; proximity ; pending.
-  - [ ] subclavius.l insertion → clavicle: [0.0753, 0.0522, -0.0338]; [0.0852, 0.0576, -0.0485]; [0.0943, 0.0608, -0.0610]; .o/.e mesh Subclavius muscle.ol; pending.
-  - [ ] subclavius.r origin → ribs: [-0.0440, 0.0410, -0.0159]; proximity ; pending.
-  - [ ] subclavius.r insertion → clavicle: [-0.0752, 0.0522, -0.0338]; [-0.0851, 0.0576, -0.0485]; [-0.0942, 0.0608, -0.0610]; .o/.e mesh Subclavius muscle.or; pending.
-- [ ] **intercostals-external · F-7**: adjacent rib surfaces; review each disconnected intercostal sheet and fibre slope.
-  - [ ] intercostals-external origin → ribs: [-0.0009, -0.0820, -0.0843]; proximity ; pending.
-  - [ ] intercostals-external insertion → ribs: [-0.0009, -0.0820, -0.0843]; proximity ; pending.
-- [ ] **intercostals-internal · F-7**: adjacent rib surfaces; review each sheet; separate interosseous/interchondral functions.
-  - [ ] intercostals-internal origin → ribs: [-0.0008, -0.1142, -0.0506]; proximity ; pending.
-  - [ ] intercostals-internal insertion → ribs: [-0.0008, -0.1142, -0.0506]; proximity ; pending.
-- [ ] **deltoid-anterior · neighbour**: review attachment bone and blended motion weights against anatomical references.
-  - [ ] deltoid-anterior.l origin → clavicle: [0.0982, 0.0619, -0.0544]; [0.1163, 0.0664, -0.0746]; [0.1383, 0.0680, -0.0815]; .o/.e mesh Clavicular part of deltoid muscle.ol; pending.
-  - [ ] deltoid-anterior.l insertion → humerus: [0.2100, -0.0770, -0.0830]; [0.2064, -0.0650, -0.0799]; [0.2043, -0.0501, -0.0788]; .o/.e mesh Deltoid muscle.el; pending.
-  - [ ] deltoid-anterior.r origin → clavicle: [-0.1383, 0.0680, -0.0815]; [-0.1164, 0.0664, -0.0746]; [-0.0982, 0.0619, -0.0544]; .o/.e mesh Clavicular part of deltoid muscle.or; pending.
-  - [ ] deltoid-anterior.r insertion → humerus: [-0.2100, -0.0770, -0.0830]; [-0.2064, -0.0650, -0.0799]; [-0.2043, -0.0501, -0.0788]; .o/.e mesh Deltoid muscle.er; pending.
-- [ ] **biceps-brachii-short · neighbour**: review attachment bone and blended motion weights against anatomical references.
-  - [ ] biceps-brachii-short.l origin → scapula: [0.1407, 0.0443, -0.0605]; proximity ; pending.
-  - [ ] biceps-brachii-short.l insertion → forearm: [0.2151, -0.2251, -0.0731]; proximity ; REQUIRED: no vertices within 2 mm.
-  - [ ] biceps-brachii-short.r origin → scapula: [-0.1416, 0.0434, -0.0566]; [-0.1417, 0.0446, -0.0591]; [-0.1400, 0.0457, -0.0627]; .o/.e mesh Short head of biceps brachii.ol; pending.
-  - [ ] biceps-brachii-short.r insertion → forearm: [-0.2151, -0.2251, -0.0731]; proximity ; REQUIRED: no vertices within 2 mm.
-- [ ] **coracobrachialis · neighbour**: review attachment bone and blended motion weights against anatomical references.
-  - [ ] coracobrachialis.l origin → scapula: [0.1374, 0.0383, -0.0596]; [0.1398, 0.0392, -0.0593]; [0.1414, 0.0406, -0.0581]; .o/.e mesh Coracobrachialis muscle.ol; pending.
-  - [ ] coracobrachialis.l insertion → humerus: [0.1918, -0.0964, -0.0864]; proximity ; pending.
-  - [ ] coracobrachialis.r origin → scapula: [-0.1414, 0.0406, -0.0581]; [-0.1398, 0.0392, -0.0593]; [-0.1374, 0.0383, -0.0596]; .o/.e mesh Coracobrachialis muscle.or; pending.
-  - [ ] coracobrachialis.r insertion → humerus: [-0.1917, -0.0965, -0.0863]; proximity ; pending.
-- [ ] **triceps-brachii · neighbour**: review attachment bone and blended motion weights against anatomical references.
-  - [ ] triceps-brachii.l origin → humerus: [0.2048, -0.0923, -0.0979]; [0.1971, -0.0511, -0.0945]; [0.1881, -0.0039, -0.0912]; .o/.e mesh Lateral head of triceps brachii.ol; pending.
-  - [ ] triceps-brachii.l origin → scapula: [0.1524, 0.0100, -0.0954]; [0.1519, 0.0092, -0.0979]; [0.1515, 0.0089, -0.1005]; .o/.e mesh Long head of triceps brachii.ol; pending.
-  - [ ] triceps-brachii.l origin → humerus: [0.2185, -0.2054, -0.1045]; [0.2066, -0.1506, -0.1019]; [0.1896, -0.0689, -0.0928]; .o/.e mesh Medial head of triceps brachii.ol; pending.
-  - [ ] triceps-brachii.l insertion → forearm: [0.2040, -0.2511, -0.1058]; [0.2069, -0.2472, -0.1089]; [0.2202, -0.2479, -0.1120]; .o/.e mesh Triceps brachii muscle.el; pending.
-  - [ ] triceps-brachii.r origin → humerus: [-0.2047, -0.0923, -0.0979]; [-0.1970, -0.0511, -0.0945]; [-0.1881, -0.0039, -0.0912]; .o/.e mesh Lateral head of triceps brachii.or; pending.
-  - [ ] triceps-brachii.r origin → scapula: [-0.1524, 0.0100, -0.0954]; [-0.1519, 0.0092, -0.0979]; [-0.1515, 0.0089, -0.1005]; .o/.e mesh Long head of triceps brachii.or; pending.
-  - [ ] triceps-brachii.r origin → humerus: [-0.2185, -0.2054, -0.1045]; [-0.2065, -0.1506, -0.1019]; [-0.1896, -0.0689, -0.0928]; .o/.e mesh Medial head of triceps brachii.or; pending.
-  - [ ] triceps-brachii.r insertion → forearm: [-0.2202, -0.2479, -0.1120]; [-0.2069, -0.2472, -0.1089]; [-0.2040, -0.2511, -0.1058]; .o/.e mesh Triceps brachii muscle.er; pending.
-- [ ] **latissimus-dorsi · neighbour**: review attachment bone and blended motion weights against anatomical references.
-  - [ ] latissimus-dorsi.l origin → ribs: [0.0956, -0.0928, -0.1583]; [0.0943, -0.0882, -0.1609]; [0.0867, -0.0793, -0.1664]; .o/.e mesh Latissimus dorsi muscle.el; REQUIRED: attachment away from named surface.
-  - [ ] latissimus-dorsi.l origin → ribs: [0.0389, -0.3913, -0.1336]; [0.0531, -0.3713, -0.1274]; [0.0704, -0.3542, -0.1093]; .o/.e mesh Latissimus dorsi muscle.ol; REQUIRED: attachment away from named surface.
-  - [ ] latissimus-dorsi.l insertion → humerus: [0.1772, -0.0253, -0.0795]; proximity ; pending.
-  - [ ] latissimus-dorsi.r origin → ribs: [-0.0956, -0.0928, -0.1583]; [-0.0943, -0.0882, -0.1609]; [-0.0867, -0.0793, -0.1664]; .o/.e mesh Latissimus dorsi muscle.er; REQUIRED: attachment away from named surface.
-  - [ ] latissimus-dorsi.r origin → ribs: [-0.0389, -0.3913, -0.1336]; [-0.0531, -0.3713, -0.1274]; [-0.0704, -0.3542, -0.1093]; .o/.e mesh Latissimus dorsi muscle.or; REQUIRED: attachment away from named surface.
-  - [ ] latissimus-dorsi.r insertion → humerus: [-0.1773, -0.0255, -0.0796]; proximity ; pending.
-- [ ] **external-oblique · neighbour**: review attachment bone and blended motion weights against anatomical references.
-  - [ ] external-oblique.l origin → ribs: [0.1306, -0.1133, -0.0107]; [0.1332, -0.1121, -0.0185]; [0.1357, -0.1099, -0.0285]; .o/.e mesh External abdominal oblique muscle.o1l; pending.
-  - [ ] external-oblique.l origin → ribs: [0.1396, -0.1460, -0.0258]; [0.1407, -0.1389, -0.0402]; [0.1396, -0.1334, -0.0518]; .o/.e mesh External abdominal oblique muscle.o2l; pending.
-  - [ ] external-oblique.l origin → ribs: [0.1349, -0.1787, -0.0442]; [0.1340, -0.1696, -0.0620]; [0.1298, -0.1624, -0.0728]; .o/.e mesh External abdominal oblique muscle.o3l; pending.
-  - [ ] external-oblique.l origin → ribs: [0.1144, -0.0890, 0.0080]; [0.1254, -0.0778, -0.0144]; [0.1285, -0.0734, -0.0256]; .o/.e mesh External abdominal oblique muscle.ol; pending.
-  - [ ] external-oblique.l insertion → pelvis: [0.1267, -0.3748, -0.0231]; [0.1205, -0.3482, -0.0563]; [0.1055, -0.3406, -0.0775]; .o/.e mesh External abdominal oblique muscle.o4l; pending.
-  - [ ] external-oblique.l insertion → pelvis: [0.0722, -0.4579, -0.0016]; [0.1020, -0.4243, -0.0007]; [0.1134, -0.4091, 0.0007]; .o/.e mesh External abdominal oblique muscle.o5l; REQUIRED: attachment away from named surface.
-  - [ ] external-oblique.r origin → ribs: [-0.1305, -0.1133, -0.0107]; [-0.1331, -0.1121, -0.0185]; [-0.1357, -0.1099, -0.0285]; .o/.e mesh External abdominal oblique muscle.o1r; pending.
-  - [ ] external-oblique.r origin → ribs: [-0.1395, -0.1460, -0.0258]; [-0.1406, -0.1389, -0.0402]; [-0.1396, -0.1334, -0.0518]; .o/.e mesh External abdominal oblique muscle.o2r; pending.
-  - [ ] external-oblique.r origin → ribs: [-0.1348, -0.1787, -0.0442]; [-0.1339, -0.1696, -0.0620]; [-0.1297, -0.1624, -0.0728]; .o/.e mesh External abdominal oblique muscle.o3r; pending.
-  - [ ] external-oblique.r origin → ribs: [-0.1144, -0.0890, 0.0080]; [-0.1254, -0.0778, -0.0144]; [-0.1285, -0.0734, -0.0256]; .o/.e mesh External abdominal oblique muscle.or; pending.
-  - [ ] external-oblique.r insertion → pelvis: [-0.1266, -0.3748, -0.0231]; [-0.1204, -0.3482, -0.0563]; [-0.1054, -0.3406, -0.0775]; .o/.e mesh External abdominal oblique muscle.o4r; pending.
-  - [ ] external-oblique.r insertion → pelvis: [-0.0722, -0.4579, -0.0016]; [-0.1020, -0.4243, -0.0007]; [-0.1133, -0.4091, 0.0007]; .o/.e mesh External abdominal oblique muscle.o5r; REQUIRED: attachment away from named surface.
-- [ ] **rectus-abdominis · neighbour**: review attachment bone and blended motion weights against anatomical references.
-  - [ ] rectus-abdominis.l origin → pelvis: [0.0123, -0.4973, -0.0061]; proximity ; pending.
-  - [ ] rectus-abdominis.l insertion → ribs: [0.0037, -0.4823, -0.0001]; [0.0072, -0.3130, 0.0376]; [0.0071, -0.1455, 0.0507]; .o/.e mesh Rectus abdominis muscle.el; REQUIRED: attachment away from named surface.
-  - [ ] rectus-abdominis.l insertion → ribs: [0.0166, -0.1209, 0.0526]; [0.0428, -0.1091, 0.0542]; [0.0711, -0.1060, 0.0508]; .o/.e mesh Rectus abdominis muscle.ol; pending.
-  - [ ] rectus-abdominis.r origin → pelvis: [-0.0131, -0.4971, -0.0060]; proximity ; pending.
-  - [ ] rectus-abdominis.r insertion → ribs: [-0.0037, -0.4823, -0.0001]; [-0.0071, -0.3130, 0.0376]; [-0.0071, -0.1455, 0.0507]; .o/.e mesh Rectus abdominis muscle.er; REQUIRED: attachment away from named surface.
-  - [ ] rectus-abdominis.r insertion → ribs: [-0.0710, -0.1060, 0.0508]; [-0.0428, -0.1091, 0.0542]; [-0.0166, -0.1208, 0.0526]; .o/.e mesh Rectus abdominis muscle.or; pending.
+## [待核] attachment candidates
 
-- [ ] F-2: three pectoralis components and two twisted insertion layers agree with the reference plate.
-- [ ] F-3: verify shoulder flexion/abduction/rotation axis signs in viewer movement demos.
-- [ ] F-15: male source figure, source orientation and metre scale agree with inventory.
-- [ ] Whole external-oblique and rectus-abdominis neighbour sources: approve extent or crop upper region.
-- [ ] Shoulder abduction 90° and elbow flexion 120°: human review of skin collapse and muscle intersections.
+All candidates remain unapproved. `.o/.e` markers are classified by named-surface distance, with raw labels retained. Proximity fallback is explicit; no anatomical wording is approved by geometry alone.
+
+- [待核] pectoralis-major-clavicular.l origin → clavicle: .o/.e mesh; pending; nodes Pectoralis major muscle.ol.
+- [待核] pectoralis-major-clavicular.l insertion → humerus: .o/.e mesh; pending; nodes Pectoralis major muscle.el.
+- [待核] pectoralis-major-clavicular.r origin → clavicle: .o/.e mesh; pending; nodes Pectoralis major muscle.or.
+- [待核] pectoralis-major-clavicular.r insertion → humerus: .o/.e mesh; pending; nodes Pectoralis major muscle.er.
+- [待核] pectoralis-major-sternocostal.l origin → ribs: .o/.e mesh; REQUIRED: attachment away from named surface; nodes Pectoralis major muscle.ol.
+- [待核] pectoralis-major-sternocostal.l origin → sternum: .o/.e mesh; pending; nodes Sternocostal head of pectoralis major muscle.e1l.
+- [待核] pectoralis-major-sternocostal.l origin → sternum: .o/.e mesh; pending; nodes Sternocostal head of pectoralis major muscle.e2l.
+- [待核] pectoralis-major-sternocostal.l origin → ribs: .o/.e mesh; pending; nodes Sternocostal head of pectoralis major muscle.el.
+- [待核] pectoralis-major-sternocostal.l insertion → humerus: .o/.e mesh; pending; nodes Pectoralis major muscle.el.
+- [待核] pectoralis-major-sternocostal.r origin → ribs: .o/.e mesh; REQUIRED: attachment away from named surface; nodes Pectoralis major muscle.or.
+- [待核] pectoralis-major-sternocostal.r origin → sternum: .o/.e mesh; pending; nodes Sternocostal head of pectoralis major muscle.e1r.
+- [待核] pectoralis-major-sternocostal.r origin → sternum: .o/.e mesh; pending; nodes Sternocostal head of pectoralis major muscle.e2r.
+- [待核] pectoralis-major-sternocostal.r origin → ribs: .o/.e mesh; pending; nodes Sternocostal head of pectoralis major muscle.er.
+- [待核] pectoralis-major-sternocostal.r insertion → humerus: .o/.e mesh; pending; nodes Pectoralis major muscle.er.
+- [待核] pectoralis-major-abdominal.l origin → external-oblique: .o/.e mesh; REQUIRED: attachment away from named surface; nodes (Abdominal part of pectoralis major muscle).ol.
+- [待核] pectoralis-major-abdominal.l insertion → humerus: .o/.e mesh; pending; nodes Pectoralis major muscle.el.
+- [待核] pectoralis-major-abdominal.r origin → external-oblique: .o/.e mesh; REQUIRED: attachment away from named surface; nodes (Abdominal part of pectoralis major muscle).or.
+- [待核] pectoralis-major-abdominal.r insertion → humerus: .o/.e mesh; pending; nodes Pectoralis major muscle.er.
+- [待核] pectoralis-minor.l origin → ribs: .o/.e mesh; pending; nodes Pectoralis minor muscle.e1l.
+- [待核] pectoralis-minor.l origin → ribs: .o/.e mesh; pending; nodes Pectoralis minor muscle.e2l.
+- [待核] pectoralis-minor.l origin → ribs: .o/.e mesh; pending; nodes Pectoralis minor muscle.el.
+- [待核] pectoralis-minor.l insertion → scapula: .o/.e mesh; pending; nodes Pectoralis minor muscle.ol.
+- [待核] pectoralis-minor.r origin → ribs: .o/.e mesh; pending; nodes Pectoralis minor muscle.e1r.
+- [待核] pectoralis-minor.r origin → ribs: .o/.e mesh; pending; nodes Pectoralis minor muscle.e2r.
+- [待核] pectoralis-minor.r origin → ribs: .o/.e mesh; pending; nodes Pectoralis minor muscle.er.
+- [待核] pectoralis-minor.r insertion → scapula: .o/.e mesh; pending; nodes Pectoralis minor muscle.or.
+- [待核] serratus-anterior.l origin → ribs: .o/.e mesh; pending; nodes Serratus anterior muscle.e2r.
+- [待核] serratus-anterior.l origin → ribs: .o/.e mesh; pending; nodes Serratus anterior muscle.e3l.
+- [待核] serratus-anterior.l origin → ribs: .o/.e mesh; pending; nodes Serratus anterior muscle.e4l.
+- [待核] serratus-anterior.l origin → ribs: .o/.e mesh; pending; nodes Serratus anterior muscle.e5l.
+- [待核] serratus-anterior.l origin → ribs: .o/.e mesh; pending; nodes Serratus anterior muscle.e6l.
+- [待核] serratus-anterior.l origin → ribs: .o/.e mesh; pending; nodes Serratus anterior muscle.e7l.
+- [待核] serratus-anterior.l origin → ribs: .o/.e mesh; pending; nodes Serratus anterior muscle.el.
+- [待核] serratus-anterior.l insertion → scapula: .o/.e mesh; pending; nodes Serratus anterior muscle.ol.
+- [待核] serratus-anterior.r origin → ribs: .o/.e mesh; pending; nodes Serratus anterior muscle.e1l.
+- [待核] serratus-anterior.r origin → ribs: .o/.e mesh; pending; nodes Serratus anterior muscle.e2l.
+- [待核] serratus-anterior.r origin → ribs: .o/.e mesh; pending; nodes Serratus anterior muscle.e3r.
+- [待核] serratus-anterior.r origin → ribs: .o/.e mesh; pending; nodes Serratus anterior muscle.e4r.
+- [待核] serratus-anterior.r origin → ribs: .o/.e mesh; pending; nodes Serratus anterior muscle.e5r.
+- [待核] serratus-anterior.r origin → ribs: .o/.e mesh; pending; nodes Serratus anterior muscle.e6r.
+- [待核] serratus-anterior.r origin → ribs: .o/.e mesh; pending; nodes Serratus anterior muscle.e7r.
+- [待核] serratus-anterior.r origin → ribs: .o/.e mesh; pending; nodes Serratus anterior muscle.e8l.
+- [待核] serratus-anterior.r origin → ribs: .o/.e mesh; pending; nodes Serratus anterior muscle.er.
+- [待核] serratus-anterior.r insertion → scapula: .o/.e mesh; pending; nodes Serratus anterior muscle.or.
+- [待核] subclavius.l origin → ribs: proximity; pending; nodes none.
+- [待核] subclavius.l insertion → clavicle: .o/.e mesh; pending; nodes Subclavius muscle.ol.
+- [待核] subclavius.r origin → ribs: proximity; pending; nodes none.
+- [待核] subclavius.r insertion → clavicle: .o/.e mesh; pending; nodes Subclavius muscle.or.
+- [待核] intercostals-external origin → ribs: proximity; pending; nodes none.
+- [待核] intercostals-external insertion → ribs: proximity; pending; nodes none.
+- [待核] intercostals-internal origin → ribs: proximity; pending; nodes none.
+- [待核] intercostals-internal insertion → ribs: proximity; pending; nodes none.
+- [待核] deltoid-anterior.l origin → clavicle: .o/.e mesh; pending; nodes Clavicular part of deltoid muscle.ol.
+- [待核] deltoid-anterior.l insertion → humerus: .o/.e mesh; pending; nodes Deltoid muscle.el.
+- [待核] deltoid-anterior.r origin → clavicle: .o/.e mesh; pending; nodes Clavicular part of deltoid muscle.or.
+- [待核] deltoid-anterior.r insertion → humerus: .o/.e mesh; pending; nodes Deltoid muscle.er.
+- [待核] biceps-brachii-short.l origin → scapula: proximity; pending; nodes none.
+- [待核] biceps-brachii-short.l insertion → forearm: proximity; REQUIRED: no vertices within 2 mm; nodes none.
+- [待核] biceps-brachii-short.r origin → scapula: .o/.e mesh; pending; nodes Short head of biceps brachii.ol.
+- [待核] biceps-brachii-short.r insertion → forearm: proximity; REQUIRED: no vertices within 2 mm; nodes none.
+- [待核] coracobrachialis.l origin → scapula: .o/.e mesh; pending; nodes Coracobrachialis muscle.ol.
+- [待核] coracobrachialis.l insertion → humerus: proximity; pending; nodes none.
+- [待核] coracobrachialis.r origin → scapula: .o/.e mesh; pending; nodes Coracobrachialis muscle.or.
+- [待核] coracobrachialis.r insertion → humerus: proximity; pending; nodes none.
+- [待核] triceps-brachii.l origin → humerus: .o/.e mesh; pending; nodes Lateral head of triceps brachii.ol.
+- [待核] triceps-brachii.l origin → scapula: .o/.e mesh; pending; nodes Long head of triceps brachii.ol.
+- [待核] triceps-brachii.l origin → humerus: .o/.e mesh; pending; nodes Medial head of triceps brachii.ol.
+- [待核] triceps-brachii.l insertion → forearm: .o/.e mesh; pending; nodes Triceps brachii muscle.el.
+- [待核] triceps-brachii.r origin → humerus: .o/.e mesh; pending; nodes Lateral head of triceps brachii.or.
+- [待核] triceps-brachii.r origin → scapula: .o/.e mesh; pending; nodes Long head of triceps brachii.or.
+- [待核] triceps-brachii.r origin → humerus: .o/.e mesh; pending; nodes Medial head of triceps brachii.or.
+- [待核] triceps-brachii.r insertion → forearm: .o/.e mesh; pending; nodes Triceps brachii muscle.er.
+- [待核] latissimus-dorsi.l origin → ribs: .o/.e mesh; REQUIRED: attachment away from named surface; nodes Latissimus dorsi muscle.el.
+- [待核] latissimus-dorsi.l origin → ribs: .o/.e mesh; REQUIRED: attachment away from named surface; nodes Latissimus dorsi muscle.ol.
+- [待核] latissimus-dorsi.l insertion → humerus: proximity; pending; nodes none.
+- [待核] latissimus-dorsi.r origin → ribs: .o/.e mesh; REQUIRED: attachment away from named surface; nodes Latissimus dorsi muscle.er.
+- [待核] latissimus-dorsi.r origin → ribs: .o/.e mesh; REQUIRED: attachment away from named surface; nodes Latissimus dorsi muscle.or.
+- [待核] latissimus-dorsi.r insertion → humerus: proximity; pending; nodes none.
+- [待核] external-oblique.l origin → ribs: .o/.e mesh; pending; nodes External abdominal oblique muscle.o1l.
+- [待核] external-oblique.l origin → ribs: .o/.e mesh; pending; nodes External abdominal oblique muscle.o2l.
+- [待核] external-oblique.l origin → ribs: .o/.e mesh; pending; nodes External abdominal oblique muscle.o3l.
+- [待核] external-oblique.l origin → ribs: .o/.e mesh; pending; nodes External abdominal oblique muscle.ol.
+- [待核] external-oblique.l insertion → pelvis: .o/.e mesh; pending; nodes External abdominal oblique muscle.o4l.
+- [待核] external-oblique.l insertion → pelvis: .o/.e mesh; REQUIRED: attachment away from named surface; nodes External abdominal oblique muscle.o5l.
+- [待核] external-oblique.r origin → ribs: .o/.e mesh; pending; nodes External abdominal oblique muscle.o1r.
+- [待核] external-oblique.r origin → ribs: .o/.e mesh; pending; nodes External abdominal oblique muscle.o2r.
+- [待核] external-oblique.r origin → ribs: .o/.e mesh; pending; nodes External abdominal oblique muscle.o3r.
+- [待核] external-oblique.r origin → ribs: .o/.e mesh; pending; nodes External abdominal oblique muscle.or.
+- [待核] external-oblique.r insertion → pelvis: .o/.e mesh; pending; nodes External abdominal oblique muscle.o4r.
+- [待核] external-oblique.r insertion → pelvis: .o/.e mesh; REQUIRED: attachment away from named surface; nodes External abdominal oblique muscle.o5r.
+- [待核] rectus-abdominis.l origin → pelvis: proximity; pending; nodes none.
+- [待核] rectus-abdominis.l insertion → ribs: .o/.e mesh; REQUIRED: attachment away from named surface; nodes Rectus abdominis muscle.el.
+- [待核] rectus-abdominis.l insertion → ribs: .o/.e mesh; pending; nodes Rectus abdominis muscle.ol.
+- [待核] rectus-abdominis.r origin → pelvis: proximity; pending; nodes none.
+- [待核] rectus-abdominis.r insertion → ribs: .o/.e mesh; REQUIRED: attachment away from named surface; nodes Rectus abdominis muscle.er.
+- [待核] rectus-abdominis.r insertion → ribs: .o/.e mesh; pending; nodes Rectus abdominis muscle.or.
 
 ## Automatic warnings
 
 - biceps-brachii-short.l insertion: no 2 mm contact; nearest 28.28 mm
 - biceps-brachii-short.r insertion: no 2 mm contact; nearest 28.28 mm
-- intercostals-external: closedness changed; cap disabled. Review nonmanifold topology.
-- pectoralis-minor.l: closedness changed; cap disabled. Review nonmanifold topology.
-- pectoralis-minor.r: closedness changed; cap disabled. Review nonmanifold topology.
-- serratus-anterior.l: closedness changed; cap disabled. Review nonmanifold topology.
-- serratus-anterior.r: closedness changed; cap disabled. Review nonmanifold topology.
+- intercostals-external: closedness changed, section filling disabled; nonmanifold source/simplification needs review.
+- pectoralis-minor.l: closedness changed, section filling disabled; nonmanifold source/simplification needs review.
+- pectoralis-minor.r: closedness changed, section filling disabled; nonmanifold source/simplification needs review.
+- serratus-anterior.l: closedness changed, section filling disabled; nonmanifold source/simplification needs review.
+- serratus-anterior.r: closedness changed, section filling disabled; nonmanifold source/simplification needs review.
 
 ## Automatic result
 
-Geometry error budgets and topology checks passed. Anatomical review remains pending.
+All decoded surface error, topology, attribute, joint, coordinate and output budget gates passed. Anatomical attachment review remains pending.
 
 ## Published skin-weight audit
 
-Decoded published GLB SHA-256: `4ddd10ce16131977074cb4ba0a1bbf223a7dbee928b8b84c369553e9362a6687`.
+Decoded published GLB SHA-256: `7d46091cad408a65e7a952f2843c9e83957b571a7d1ba4b4dca0ecc07a083ee7`.
 
 Shares sum decoded weights over referenced vertices, including UV/normal seams. Required alternatives are joints bordering the manifest attachment bones; allowed joints include intervening joints in the rig parent chain (e.g. shoulder between scapula and elbow). Radius uses elbow unless the rig provides a separate pronation joint. Missing attachment weights, unrelated joints above 30%, reversed fibre fields and violated persistent endpoint overrides and local weight outliers fail this gate. Outliers compare welded 1–2-ring dominant joints and area-weighted vectors; a discrepant vector must be over twice the neighbours’ median dominant-joint distance. Sub-edge detached scraps use nearby substantial surface rings because their component-local endpoint seeds are artificial; >1% discrepant weight mass on those scraps also fails. Smooth joint crossovers are excluded. Fixed counts refer to unique welded bind vertices.
 
+Mannequin: all 19 full-body joints weighted; 0 shell mismatch flags. Right-axis exact mirror checks passed.
+
 | Muscle | Joint shares | Required attachment joints | Fibre endpoints | Outliers remaining / fixed | Result |
 |---|---|---|---|---|---|
-| biceps-brachii-short.l | shoulder.l 54.75%, elbow.l 24.32%, scapula.l 20.93% | elbow.l / hand.l / wrist.l, scapula.l / shoulder.l | origin → insertion | 0 / 0 | clean |
-| biceps-brachii-short.r | shoulder.r 53.77%, elbow.r 25.21%, scapula.r 21.02% | elbow.r / hand.r / wrist.r, scapula.r / shoulder.r | origin → insertion | 0 / 0 | clean |
+| biceps-brachii-short.l | shoulder.l 54.75%, elbow.l 24.32%, scapula.l 20.93% | elbow.l / forearm.l, scapula.l / shoulder.l | origin → insertion | 0 / 0 | clean |
+| biceps-brachii-short.r | shoulder.r 53.77%, elbow.r 25.21%, scapula.r 21.02% | elbow.r / forearm.r, scapula.r / shoulder.r | origin → insertion | 0 / 0 | clean |
 | coracobrachialis.l | shoulder.l 58.63%, scapula.l 41.37% | scapula.l / shoulder.l, elbow.l / shoulder.l | origin → insertion | 0 / 0 | clean |
 | coracobrachialis.r | shoulder.r 58.55%, scapula.r 41.45% | scapula.r / shoulder.r, elbow.r / shoulder.r | origin → insertion | 0 / 0 | clean |
 | deltoid-anterior.l | clavicle.l 65.70%, shoulder.l 34.30% | clavicle.l / scapula.l, elbow.l / shoulder.l | origin → insertion | 0 / 0 | clean |
 | deltoid-anterior.r | clavicle.r 65.46%, shoulder.r 34.54% | clavicle.r / scapula.r, elbow.r / shoulder.r | origin → insertion | 0 / 0 | clean |
-| external-oblique.l | trunk 100.00% | hip.l / trunk | named surfaces: ambiguous/shared | 0 / 0 | clean |
-| external-oblique.r | trunk 100.00% | hip.r / trunk | named surfaces: ambiguous/shared | 0 / 0 | clean |
+| external-oblique.l | trunk 100.00% | hip.l / trunk | origin → insertion | 0 / 0 | clean |
+| external-oblique.r | trunk 100.00% | hip.r / trunk | origin → insertion | 0 / 0 | clean |
 | intercostals-external | trunk 100.00% | trunk | named surfaces: ambiguous/shared | 0 / 0 | clean |
 | intercostals-internal | trunk 100.00% | trunk | named surfaces: ambiguous/shared | 0 / 0 | clean |
 | latissimus-dorsi.l | trunk 65.97%, shoulder.l 34.03% | elbow.l / shoulder.l, trunk | origin → insertion | 0 / 0 | clean |
@@ -250,14 +457,14 @@ Shares sum decoded weights over referenced vertices, including UV/normal seams. 
 | pectoralis-major-sternocostal.r | trunk 72.12%, shoulder.r 27.88% | elbow.r / shoulder.r, trunk | origin → insertion | 0 / 0 | clean |
 | pectoralis-minor.l | trunk 71.91%, scapula.l 28.09% | scapula.l / shoulder.l, trunk | origin → insertion | 0 / 0 | clean |
 | pectoralis-minor.r | trunk 72.17%, scapula.r 27.83% | scapula.r / shoulder.r, trunk | origin → insertion | 0 / 0 | clean |
-| rectus-abdominis.l | trunk 100.00% | hip.l / trunk | named surfaces: ambiguous/shared | 0 / 0 | clean |
-| rectus-abdominis.r | trunk 100.00% | hip.r / trunk | named surfaces: ambiguous/shared | 0 / 0 | clean |
+| rectus-abdominis.l | trunk 100.00% | hip.l / trunk | origin → insertion | 0 / 0 | clean |
+| rectus-abdominis.r | trunk 100.00% | hip.r / trunk | origin → insertion | 0 / 0 | clean |
 | serratus-anterior.l | trunk 63.44%, scapula.l 36.56% | scapula.l / shoulder.l, trunk | origin → insertion | 0 / 0 | clean |
 | serratus-anterior.r | trunk 67.74%, scapula.r 32.26% | scapula.r / shoulder.r, trunk | origin → insertion | 0 / 0 | clean |
 | subclavius.l | trunk 61.49%, clavicle.l 38.51% | clavicle.l / scapula.l, trunk | origin → insertion | 0 / 0 | clean |
 | subclavius.r | trunk 61.49%, clavicle.r 38.51% | clavicle.r / scapula.r, trunk | origin → insertion | 0 / 0 | clean |
-| triceps-brachii.l | shoulder.l 72.02%, elbow.l 27.98% | elbow.l / hand.l / wrist.l, scapula.l / shoulder.l, elbow.l / shoulder.l | origin → insertion | 0 / 0 | clean |
-| triceps-brachii.r | shoulder.r 71.46%, elbow.r 28.54% | elbow.r / hand.r / wrist.r, scapula.r / shoulder.r, elbow.r / shoulder.r | origin → insertion | 0 / 0 | clean |
+| triceps-brachii.l | shoulder.l 72.02%, elbow.l 27.98% | elbow.l / forearm.l, scapula.l / shoulder.l, elbow.l / shoulder.l | origin → insertion | 0 / 0 | clean |
+| triceps-brachii.r | shoulder.r 71.46%, elbow.r 28.54% | elbow.r / forearm.r, scapula.r / shoulder.r, elbow.r / shoulder.r | origin → insertion | 0 / 0 | clean |
 
 | Other mesh | Outliers remaining / fixed |
 |---|---|
@@ -269,8 +476,8 @@ Shares sum decoded weights over referenced vertices, including UV/normal seams. 
 | humerus.r | 0 / 0 |
 | scapula.l | 0 / 0 |
 | scapula.r | 0 / 0 |
-| skin-outline | 0 / 0 |
+| skin-outline | 0 / 1 |
 | thoracic-spine | 0 / 0 |
 | thorax | 0 / 0 |
 
-Audit result: **clean** (28 muscle nodes; 0 outliers remaining, 0 fixed).
+Audit result: **clean** (28 muscle nodes; 0 outliers remaining, 1 fixed).

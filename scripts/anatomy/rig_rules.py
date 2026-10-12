@@ -50,7 +50,9 @@ def joint_path(a, b, parent):
 
 def complete_manifest(manifest):
     """Close all attachment joints over their parents; leave display parts alone."""
-    declared = list(manifest['jointNames'])
+    from full_body import JOINT_NAMES
+    declared = list(JOINT_NAMES)
+    manifest['handGripOffsetM'] = .08
     names = set(declared)
     for part in manifest['parts']:
         if part['role'] not in ('region', 'neighbour'):

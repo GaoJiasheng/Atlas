@@ -86,9 +86,17 @@ def exact_sources(p):
             (base(e['name']) in p['objects'] or any(re.fullmatch(x,base(e['name'])) for x in p.get('patterns',[])))]
 
 parser = argparse.ArgumentParser(description=__doc__)
-parser.add_argument('--topic',choices=('all',)+TOPICS,default='all')
+parser.add_argument('--topic',choices=('all','chest')+TOPICS,default='all')
 args=parser.parse_args()
-for topic in TOPICS if args.topic=='all' else (args.topic,):
+if args.topic in ('all','chest'):
+    chest['referenceParts'] = list(bones.values())
+    chest['budgets']['total'].update(maxBytes=4000000,maxTriangles=350000)
+    complete_manifest(chest)
+    encoded=json.dumps(chest,indent=2)+'\n'
+    (ROOT/'chest/manifest.json').write_text(encoded)
+    (ROOT/'chest/MANIFEST-READY').write_text('sha256 '+hashlib.sha256(encoded.encode()).hexdigest()+'\n')
+    print('MANIFEST-READY chest: full-body joints',flush=True)
+for topic in TOPICS if args.topic=='all' else (() if args.topic=='chest' else (args.topic,)):
     parts = []
     local = {m['id']:m for m in json.loads((ROOT/f'drafts/{topic}/muscles-{topic}.json').read_text())['muscles']}
     for role, ids in [('region',region_ids[topic]),('neighbour',neighbour_ids[topic])]:
@@ -128,7 +136,8 @@ for topic in TOPICS if args.topic=='all' else (args.topic,):
     if topic=='legs':
         for p in parts:
             if p['id'] in ['pelvis','foot','lumbar-spine','skin-outline']:
-                p['triangleBudget']={'pelvis':6000,'foot':3000,'lumbar-spine':4000,'skin-outline':18000}[p['id']]
+                p['triangleBudget']={'pelvis':6000,'foot':3000,'lumbar-spine':4000,'skin-outline':15000}[p['id']]
+                if p['id']=='skin-outline': p['auditSafety']=.85
     for p in parts:
         sources=exact_sources(p)
         if not sources: raise RuntimeError((topic,p['id']))
@@ -149,8 +158,7 @@ for topic in TOPICS if args.topic=='all' else (args.topic,):
     manifest=dict(topic=topic,license=chest['license'],coordinates=chest['coordinates'],budgets=copy.deepcopy(chest['budgets']),
                   parts=parts,referenceParts=references,
                   jointNames=joints,expectedNodes=nodes+[topic+'-rig']+['joint.'+j for j in joints],notes=notes)
-    if 'hand' in rig_joint_types[topic]:
-        manifest['handGripOffsetM'] = .08
+    manifest['handGripOffsetM'] = .08
     manifest['budgets']['total'].update(maxBytes=4000000,maxTriangles=350000)
     for part in parts:
         if part['id'] in FIBRE_OVERRIDES:

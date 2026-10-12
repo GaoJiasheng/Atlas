@@ -39,9 +39,9 @@
     },
     "total": {
       "targetBytes": 4000000,
-      "maxBytes": 8000000,
+      "maxBytes": 4000000,
       "targetTriangles": 350000,
-      "maxTriangles": 500000
+      "maxTriangles": 350000
     }
   },
   "parts": [
@@ -638,12 +638,20 @@
     "joint.scapula.l",
     "joint.shoulder.l",
     "joint.elbow.l",
-    "joint.wrist.l",
+    "joint.forearm.l",
+    "joint.hand.l",
+    "joint.hip.l",
+    "joint.knee.l",
+    "joint.ankle.l",
     "joint.clavicle.r",
     "joint.scapula.r",
     "joint.shoulder.r",
     "joint.elbow.r",
-    "joint.wrist.r"
+    "joint.forearm.r",
+    "joint.hand.r",
+    "joint.hip.r",
+    "joint.knee.r",
+    "joint.ankle.r"
   ],
   "jointNames": [
     "trunk",
@@ -651,12 +659,279 @@
     "scapula.l",
     "shoulder.l",
     "elbow.l",
-    "wrist.l",
+    "forearm.l",
+    "hand.l",
+    "hip.l",
+    "knee.l",
+    "ankle.l",
     "clavicle.r",
     "scapula.r",
     "shoulder.r",
     "elbow.r",
-    "wrist.r"
+    "forearm.r",
+    "hand.r",
+    "hip.r",
+    "knee.r",
+    "ankle.r"
   ],
-  "handGripOffsetM": 0.08
+  "handGripOffsetM": 0.08,
+  "referenceParts": [
+    {
+      "id": "clavicle",
+      "objects": [
+        "Clavicle"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 1500,
+      "moving": true
+    },
+    {
+      "id": "scapula",
+      "objects": [
+        "Scapula"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "moving": true
+    },
+    {
+      "id": "humerus",
+      "objects": [
+        "Humerus"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "moving": true
+    },
+    {
+      "id": "forearm",
+      "objects": [
+        "Radius",
+        "Ulna"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 4000,
+      "moving": true,
+      "specId": "forearm-bones"
+    },
+    {
+      "id": "sternum",
+      "objects": [
+        "Manubrium of sternum",
+        "Body of sternum",
+        "Xiphoid process"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "unsided",
+      "triangleBudget": 3000,
+      "moving": false,
+      "exportGroup": "thorax",
+      "exportTriangleCap": 25000
+    },
+    {
+      "id": "ribs",
+      "objects": [],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "unsided",
+      "triangleBudget": 22000,
+      "moving": false,
+      "exportGroup": "thorax",
+      "patterns": [
+        "(?:First|Second|Third|Fourth|Fifth|Sixth|Seventh|Eighth|Ninth|Tenth|Eleventh|Twelfth) rib",
+        "Costal cartilage of (?:first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth) rib"
+      ],
+      "exportTriangleCap": 25000
+    },
+    {
+      "id": "thoracic-spine",
+      "objects": [],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "unsided",
+      "triangleBudget": 15000,
+      "moving": false,
+      "patterns": [
+        "Vertebra T(?:[1-9]|1[0-2])"
+      ]
+    },
+    {
+      "id": "lumbar-spine",
+      "objects": [],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "unsided",
+      "triangleBudget": 6000,
+      "moving": false,
+      "patterns": [
+        "Vertebra L[1-5]"
+      ]
+    },
+    {
+      "id": "cervical-spine",
+      "objects": [
+        "Atlas (C1)",
+        "Axis (C2)"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "unsided",
+      "triangleBudget": 6000,
+      "moving": false,
+      "patterns": [
+        "Vertebra C[3-7]"
+      ]
+    },
+    {
+      "id": "pelvis",
+      "objects": [
+        "Hip bone",
+        "Sacrum",
+        "Coccyx"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "unsided",
+      "triangleBudget": 12000,
+      "moving": false
+    },
+    {
+      "id": "femur",
+      "objects": [
+        "Femur"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 6000,
+      "moving": true
+    },
+    {
+      "id": "patella",
+      "objects": [
+        "Patella"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 1500,
+      "moving": true
+    },
+    {
+      "id": "lower-leg",
+      "objects": [
+        "Tibia",
+        "Fibula"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 6000,
+      "moving": true
+    },
+    {
+      "id": "radius",
+      "objects": [
+        "Radius"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 2500,
+      "moving": true
+    },
+    {
+      "id": "ulna",
+      "objects": [
+        "Ulna"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 2500,
+      "moving": true
+    },
+    {
+      "id": "hand",
+      "objects": [
+        "Scaphoid bone",
+        "Lunate bone",
+        "Triquetrum bone",
+        "Pisiform bone",
+        "Trapezium bone",
+        "Trapezoid bone",
+        "Capitate bone",
+        "Hamate bone"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 6000,
+      "moving": true,
+      "patterns": [
+        "(?:First|Second|Third|Fourth|Fifth) metacarpal bone",
+        "(?:Proximal|Middle|Distal) phalanx of (?:first|second|third|fourth|fifth) finger of hand"
+      ]
+    },
+    {
+      "id": "foot",
+      "objects": [
+        "Calcaneus",
+        "Talus",
+        "Navicular bone",
+        "Cuboid bone",
+        "Medial cuneiform bone",
+        "Intermediate cuneiform bone",
+        "Lateral cuneiform bone",
+        "Sesamoid bones of foot"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "bilateral",
+      "triangleBudget": 6000,
+      "moving": true,
+      "patterns": [
+        "(?:First|Second|Third|Fourth|Fifth) metatarsal bone",
+        "(?:Proximal|Middle|Distal) phalanx of (?:first|second|third|fourth|fifth) finger of foot"
+      ]
+    },
+    {
+      "id": "skull",
+      "objects": [
+        "Occipital bone"
+      ],
+      "system": "skeleton",
+      "role": "bone",
+      "layer": "skeleton",
+      "sides": "unsided",
+      "triangleBudget": 2000,
+      "moving": false
+    }
+  ]
 }

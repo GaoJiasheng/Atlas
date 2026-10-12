@@ -1,6 +1,6 @@
 # Shoulders mesh review
 
-Final GLB: **2,113,460 bytes**, **150,985 triangles**, **57 total nodes** (45 meshes, 11 joints, rig root).
+Final GLB: **2,169,056 bytes**, **150,985 triangles**, **65 total nodes** (45 meshes, 19 joints, rig root).
 Draw-call estimate: **45** opaque primitives; skin overlay adds its shell pass. Both 4 MB and 350,000 triangle ceilings enforced.
 
 Native Blender, cached FBX only. Geometry and derived rig/attachment data: CC BY-SA 4.0.
@@ -15,7 +15,7 @@ Native Blender, cached FBX only. Geometry and derived rig/attachment data: CC BY
 - Optional thoracolumbar fascia, linea alba and diaphragm omitted. Linea-alba attachment evidence uses the unexported named source surface.
 - No named region muscle is missing in Z-Anatomy; multifidus uses the actual paired lumbar meshes, not rotatores or invented geometry.
 
-The core erector-spinae-lumbar part merges full lumbar iliocostalis and thoracic longissimus sources; extent remains [待核]. No multifidus substitute was necessary. Intercostal meshes are not region parts for these five topics; thorax includes actual ribs, cartilages and sternum. No hand/foot intrinsic muscle geometry is fabricated.
+Display muscle and bone selections retain their reviewed topic scope. The mannequin uses full-body joints even where corresponding display bones are absent. No hand/foot intrinsic muscle geometry is fabricated.
 
 ## Final decoded surface audit
 
@@ -79,8 +79,13 @@ Studio lighting, paper #EDE7D6, orthographic evaluated non-skin bounds with 5% m
 - `/Users/gavin/work/atlas/scripts/anatomy/cache/shoulders-preview-exploded-by-layer.png`
 - `/Users/gavin/work/atlas/scripts/anatomy/cache/shoulders-preview-skin.png`
 - `/Users/gavin/work/atlas/scripts/anatomy/cache/shoulders-preview-pose.png`
+- `/Users/gavin/work/atlas/scripts/anatomy/cache/shoulders-preview-pose-front.png`
+- `/Users/gavin/work/atlas/scripts/anatomy/cache/shoulders-preview-pose-back.png`
+- `/Users/gavin/work/atlas/scripts/anatomy/cache/shoulders-preview-pose-left.png`
+- `/Users/gavin/work/atlas/scripts/anatomy/cache/shoulders-preview-pose-anatomy.png`
 
-Pose inputs: {'shoulder.l.flexion': 55, 'elbow.l.flexion': 75}; humerus.l centroid displacement 0.129863 m. All evaluated coordinates and muscle-edge stretches are finite.
+Right angle convention: positive inputs; right axes signed by the engine mirrorSignedAxes rule. Positive inputs use the current engine’s mirrorSignedAxes rule with the real left/right joint midline normal; stored metadata remains the exact X-only axis reflection.
+Pose inputs: {'shoulder.l.flexion': 90, 'elbow.r.flexion': 90, 'hip.l.flexion': 60, 'knee.r.flexion': 90, 'ankle.l.dorsiflexion': 15, 'ankle.r.dorsiflexion': 15}; humerus.l centroid displacement 0.198868 m. All evaluated coordinates and muscle-edge stretches are finite.
 Visual inspection results are recorded in `preview-review.md` after viewing every PNG.
 
 ## Frame and rig
@@ -95,14 +100,225 @@ Unexported reference bones locate joints and attachment candidates without addin
 | scapula.l | 0.14956, 0.00710, -0.03700 | clavicle.l | lateral clavicle / acromioclavicular joint; glenoid landmark retained |
 | shoulder.l | 0.17262, -0.02359, -0.02712 | scapula.l | humeral head sphere fit; .i/.j landmark patch |
 | elbow.l | 0.22319, -0.29937, -0.04129 | shoulder.l | midpoint of humeral epicondyle .i/.j cubes |
-| hand.l | 0.26462, -0.56460, 0.01293 | elbow.l | midpoint of radial/ulnar styloid cubes |
+| forearm.l | 0.22319, -0.29937, -0.04129 | elbow.l | elbow centre to ulnar styloid rotation axis; ulna stays on elbow |
+| hand.l | 0.26462, -0.56460, 0.01293 | forearm.l | midpoint of radial/ulnar styloid cubes |
+| hip.l | 0.08529, -0.53906, -0.01625 | trunk | acetabulum .i/.j cube cross-checked against femoral head sphere fit |
+| knee.l | 0.07621, -0.95414, -0.03437 | hip.l | midpoint of femoral epicondyle .i/.j cubes |
+| ankle.l | 0.08182, -1.33078, -0.04474 | knee.l | midpoint of medial/lateral malleolar landmarks |
 | clavicle.r | -0.01669, -0.00899, 0.03347 | trunk | medial clavicle / sternoclavicular joint |
 | scapula.r | -0.14956, 0.00710, -0.03700 | clavicle.r | lateral clavicle / acromioclavicular joint; glenoid landmark retained |
 | shoulder.r | -0.17262, -0.02359, -0.02712 | scapula.r | humeral head sphere fit; .i/.j landmark patch |
 | elbow.r | -0.22319, -0.29937, -0.04129 | shoulder.r | midpoint of humeral epicondyle .i/.j cubes |
-| hand.r | -0.26464, -0.56460, 0.01293 | elbow.r | midpoint of radial/ulnar styloid cubes |
+| forearm.r | -0.22319, -0.29937, -0.04129 | elbow.r | elbow centre to ulnar styloid rotation axis; ulna stays on elbow |
+| hand.r | -0.26464, -0.56460, 0.01293 | forearm.r | midpoint of radial/ulnar styloid cubes |
+| hip.r | -0.08529, -0.53906, -0.01625 | trunk | acetabulum .i/.j cube cross-checked against femoral head sphere fit |
+| knee.r | -0.07621, -0.95414, -0.03437 | hip.r | midpoint of femoral epicondyle .i/.j cubes |
+| ankle.r | -0.07861, -1.33088, -0.04468 | knee.r | midpoint of medial/lateral malleolar landmarks |
 
-Full-body draft motion keys outside this regional rig: ankle.l, ankle.r, hip.l, hip.r, knee.l, knee.r. They need a whole-body motion driver; this export provides the relevant regional joints only.
+## Bilateral axis checks
+
+| Joint | Action | dot(right, X-mirror(left)) |
+|---|---|---:|
+| clavicle | flexion | 1.000000000 |
+| clavicle | extension | 1.000000000 |
+| clavicle | abduction | 1.000000000 |
+| clavicle | adduction | 1.000000000 |
+| clavicle | rotation | 1.000000000 |
+| clavicle | internal-rotation | 1.000000000 |
+| clavicle | external-rotation | 1.000000000 |
+| clavicle | horizontal-abduction | 1.000000000 |
+| clavicle | horizontal-adduction | 1.000000000 |
+| clavicle | elevation | 1.000000000 |
+| clavicle | depression | 1.000000000 |
+| clavicle | protraction | 1.000000000 |
+| clavicle | retraction | 1.000000000 |
+| clavicle | upward-rotation | 1.000000000 |
+| clavicle | downward-rotation | 1.000000000 |
+| clavicle | lateral-flexion | 1.000000000 |
+| clavicle | pronation | 1.000000000 |
+| clavicle | supination | 1.000000000 |
+| clavicle | dorsiflexion | 1.000000000 |
+| clavicle | plantarflexion | 1.000000000 |
+| clavicle | inversion | 1.000000000 |
+| clavicle | eversion | 1.000000000 |
+| scapula | flexion | 1.000000000 |
+| scapula | extension | 1.000000000 |
+| scapula | abduction | 1.000000000 |
+| scapula | adduction | 1.000000000 |
+| scapula | rotation | 1.000000000 |
+| scapula | internal-rotation | 1.000000000 |
+| scapula | external-rotation | 1.000000000 |
+| scapula | horizontal-abduction | 1.000000000 |
+| scapula | horizontal-adduction | 1.000000000 |
+| scapula | elevation | 1.000000000 |
+| scapula | depression | 1.000000000 |
+| scapula | protraction | 1.000000000 |
+| scapula | retraction | 1.000000000 |
+| scapula | upward-rotation | 1.000000000 |
+| scapula | downward-rotation | 1.000000000 |
+| scapula | lateral-flexion | 1.000000000 |
+| scapula | pronation | 1.000000000 |
+| scapula | supination | 1.000000000 |
+| scapula | dorsiflexion | 1.000000000 |
+| scapula | plantarflexion | 1.000000000 |
+| scapula | inversion | 1.000000000 |
+| scapula | eversion | 1.000000000 |
+| shoulder | flexion | 1.000000000 |
+| shoulder | extension | 1.000000000 |
+| shoulder | abduction | 1.000000000 |
+| shoulder | adduction | 1.000000000 |
+| shoulder | rotation | 0.999999928 |
+| shoulder | internal-rotation | 0.999999928 |
+| shoulder | external-rotation | 0.999999928 |
+| shoulder | horizontal-abduction | 1.000000000 |
+| shoulder | horizontal-adduction | 1.000000000 |
+| shoulder | elevation | 1.000000000 |
+| shoulder | depression | 1.000000000 |
+| shoulder | protraction | 1.000000000 |
+| shoulder | retraction | 1.000000000 |
+| shoulder | upward-rotation | 1.000000000 |
+| shoulder | downward-rotation | 1.000000000 |
+| shoulder | lateral-flexion | 1.000000000 |
+| shoulder | pronation | 0.999999928 |
+| shoulder | supination | 0.999999928 |
+| shoulder | dorsiflexion | 1.000000000 |
+| shoulder | plantarflexion | 1.000000000 |
+| shoulder | inversion | 1.000000000 |
+| shoulder | eversion | 1.000000000 |
+| elbow | flexion | 1.000000000 |
+| elbow | extension | 1.000000000 |
+| elbow | abduction | 1.000000000 |
+| elbow | adduction | 1.000000000 |
+| elbow | rotation | 1.000000005 |
+| elbow | internal-rotation | 1.000000005 |
+| elbow | external-rotation | 1.000000005 |
+| elbow | horizontal-abduction | 1.000000000 |
+| elbow | horizontal-adduction | 1.000000000 |
+| elbow | elevation | 1.000000000 |
+| elbow | depression | 1.000000000 |
+| elbow | protraction | 1.000000000 |
+| elbow | retraction | 1.000000000 |
+| elbow | upward-rotation | 1.000000000 |
+| elbow | downward-rotation | 1.000000000 |
+| elbow | lateral-flexion | 1.000000000 |
+| elbow | pronation | 1.000000005 |
+| elbow | supination | 1.000000005 |
+| elbow | dorsiflexion | 1.000000000 |
+| elbow | plantarflexion | 1.000000000 |
+| elbow | inversion | 1.000000000 |
+| elbow | eversion | 1.000000000 |
+| forearm | flexion | 1.000000000 |
+| forearm | extension | 1.000000000 |
+| forearm | abduction | 1.000000000 |
+| forearm | adduction | 1.000000000 |
+| forearm | rotation | 0.999999927 |
+| forearm | internal-rotation | 0.999999927 |
+| forearm | external-rotation | 0.999999927 |
+| forearm | horizontal-abduction | 1.000000000 |
+| forearm | horizontal-adduction | 1.000000000 |
+| forearm | elevation | 1.000000000 |
+| forearm | depression | 1.000000000 |
+| forearm | protraction | 1.000000000 |
+| forearm | retraction | 1.000000000 |
+| forearm | upward-rotation | 1.000000000 |
+| forearm | downward-rotation | 1.000000000 |
+| forearm | lateral-flexion | 1.000000000 |
+| forearm | pronation | 0.999999927 |
+| forearm | supination | 0.999999927 |
+| forearm | dorsiflexion | 1.000000000 |
+| forearm | plantarflexion | 1.000000000 |
+| forearm | inversion | 1.000000000 |
+| forearm | eversion | 1.000000000 |
+| hand | flexion | 1.000000000 |
+| hand | extension | 1.000000000 |
+| hand | abduction | 1.000000000 |
+| hand | adduction | 1.000000000 |
+| hand | rotation | 1.000000000 |
+| hand | internal-rotation | 1.000000000 |
+| hand | external-rotation | 1.000000000 |
+| hand | horizontal-abduction | 1.000000000 |
+| hand | horizontal-adduction | 1.000000000 |
+| hand | elevation | 1.000000000 |
+| hand | depression | 1.000000000 |
+| hand | protraction | 1.000000000 |
+| hand | retraction | 1.000000000 |
+| hand | upward-rotation | 1.000000000 |
+| hand | downward-rotation | 1.000000000 |
+| hand | lateral-flexion | 1.000000000 |
+| hand | pronation | 1.000000000 |
+| hand | supination | 1.000000000 |
+| hand | dorsiflexion | 1.000000000 |
+| hand | plantarflexion | 1.000000000 |
+| hand | inversion | 1.000000000 |
+| hand | eversion | 1.000000000 |
+| hip | flexion | 1.000000000 |
+| hip | extension | 1.000000000 |
+| hip | abduction | 1.000000000 |
+| hip | adduction | 1.000000000 |
+| hip | rotation | 0.999999968 |
+| hip | internal-rotation | 0.999999968 |
+| hip | external-rotation | 0.999999968 |
+| hip | horizontal-abduction | 1.000000000 |
+| hip | horizontal-adduction | 1.000000000 |
+| hip | elevation | 1.000000000 |
+| hip | depression | 1.000000000 |
+| hip | protraction | 1.000000000 |
+| hip | retraction | 1.000000000 |
+| hip | upward-rotation | 1.000000000 |
+| hip | downward-rotation | 1.000000000 |
+| hip | lateral-flexion | 1.000000000 |
+| hip | pronation | 0.999999968 |
+| hip | supination | 0.999999968 |
+| hip | dorsiflexion | 1.000000000 |
+| hip | plantarflexion | 1.000000000 |
+| hip | inversion | 1.000000000 |
+| hip | eversion | 1.000000000 |
+| knee | flexion | 1.000000000 |
+| knee | extension | 1.000000000 |
+| knee | abduction | 1.000000000 |
+| knee | adduction | 1.000000000 |
+| knee | rotation | 0.999999928 |
+| knee | internal-rotation | 0.999999928 |
+| knee | external-rotation | 0.999999928 |
+| knee | horizontal-abduction | 1.000000000 |
+| knee | horizontal-adduction | 1.000000000 |
+| knee | elevation | 1.000000000 |
+| knee | depression | 1.000000000 |
+| knee | protraction | 1.000000000 |
+| knee | retraction | 1.000000000 |
+| knee | upward-rotation | 1.000000000 |
+| knee | downward-rotation | 1.000000000 |
+| knee | lateral-flexion | 1.000000000 |
+| knee | pronation | 0.999999928 |
+| knee | supination | 0.999999928 |
+| knee | dorsiflexion | 1.000000000 |
+| knee | plantarflexion | 1.000000000 |
+| knee | inversion | 1.000000000 |
+| knee | eversion | 1.000000000 |
+| ankle | flexion | 1.000000000 |
+| ankle | extension | 1.000000000 |
+| ankle | abduction | 1.000000000 |
+| ankle | adduction | 1.000000000 |
+| ankle | rotation | 1.000000000 |
+| ankle | internal-rotation | 1.000000000 |
+| ankle | external-rotation | 1.000000000 |
+| ankle | horizontal-abduction | 1.000000000 |
+| ankle | horizontal-adduction | 1.000000000 |
+| ankle | elevation | 1.000000000 |
+| ankle | depression | 1.000000000 |
+| ankle | protraction | 1.000000000 |
+| ankle | retraction | 1.000000000 |
+| ankle | upward-rotation | 1.000000000 |
+| ankle | downward-rotation | 1.000000000 |
+| ankle | lateral-flexion | 1.000000000 |
+| ankle | pronation | 1.000000000 |
+| ankle | supination | 1.000000000 |
+| ankle | dorsiflexion | 1.000000000 |
+| ankle | plantarflexion | 1.000000000 |
+| ankle | inversion | 1.000000000 |
+| ankle | eversion | 1.000000000 |
+
+Full-body draft motion keys outside this regional rig: none. All topics provide the complete 19-joint body rig.
 Motion aliases: {}. Arms keep ulna on elbow and radius/hand on forearm, with pronation along the forearm rather than the elbow flexion axis.
 
 ## [待核] attachment candidates
@@ -231,14 +447,16 @@ All decoded surface error, topology, attribute, joint, coordinate and output bud
 
 ## Published skin-weight audit
 
-Decoded published GLB SHA-256: `af72a83504d441c6c336b9435e9d12fcc4f1a580fa776c8e9825f04ecd8d9347`.
+Decoded published GLB SHA-256: `fa122f0617bd1f7ca00f6b715144bbbb24bab12346403a667a72bd6e2fb50f60`.
 
 Shares sum decoded weights over referenced vertices, including UV/normal seams. Required alternatives are joints bordering the manifest attachment bones; allowed joints include intervening joints in the rig parent chain (e.g. shoulder between scapula and elbow). Radius uses elbow unless the rig provides a separate pronation joint. Missing attachment weights, unrelated joints above 30%, reversed fibre fields and violated persistent endpoint overrides and local weight outliers fail this gate. Outliers compare welded 1–2-ring dominant joints and area-weighted vectors; a discrepant vector must be over twice the neighbours’ median dominant-joint distance. Sub-edge detached scraps use nearby substantial surface rings because their component-local endpoint seeds are artificial; >1% discrepant weight mass on those scraps also fails. Smooth joint crossovers are excluded. Fixed counts refer to unique welded bind vertices.
 
+Mannequin: all 19 full-body joints weighted; 0 shell mismatch flags. Right-axis exact mirror checks passed.
+
 | Muscle | Joint shares | Required attachment joints | Fibre endpoints | Outliers remaining / fixed | Result |
 |---|---|---|---|---|---|
-| biceps-brachii-long.l | shoulder.l 55.19%, elbow.l 27.20%, scapula.l 17.61% | elbow.l / hand.l, scapula.l / shoulder.l | origin → insertion | 0 / 0 | clean |
-| biceps-brachii-long.r | shoulder.r 53.97%, elbow.r 29.15%, scapula.r 16.88% | elbow.r / hand.r, scapula.r / shoulder.r | origin → insertion | 0 / 0 | clean |
+| biceps-brachii-long.l | shoulder.l 55.19%, elbow.l 27.20%, scapula.l 17.61% | elbow.l / forearm.l, scapula.l / shoulder.l | origin → insertion | 0 / 0 | clean |
+| biceps-brachii-long.r | shoulder.r 53.97%, elbow.r 29.15%, scapula.r 16.88% | elbow.r / forearm.r, scapula.r / shoulder.r | origin → insertion | 0 / 0 | clean |
 | deltoid-anterior.l | scapula.l 43.25%, clavicle.l 42.12%, shoulder.l 14.63% | clavicle.l / scapula.l, elbow.l / shoulder.l | origin → insertion | 0 / 0 | clean |
 | deltoid-anterior.r | scapula.r 43.26%, clavicle.r 41.92%, shoulder.r 14.82% | clavicle.r / scapula.r, elbow.r / shoulder.r | origin → insertion | 0 / 0 | clean |
 | deltoid-lateral.l | scapula.l 57.50%, shoulder.l 42.50% | scapula.l / shoulder.l, elbow.l / shoulder.l | origin → insertion | 0 / 0 | clean |
@@ -269,8 +487,8 @@ Shares sum decoded weights over referenced vertices, including UV/normal seams. 
 | trapezius-descending.r | trunk 75.35%, clavicle.r 24.65% | clavicle.r / scapula.r, trunk | persistent bounds endpoints | 0 / 0 | clean |
 | trapezius-transverse.l | trunk 52.44%, clavicle.l 27.64%, scapula.l 19.92% | scapula.l / shoulder.l, trunk | origin → insertion | 0 / 0 | clean |
 | trapezius-transverse.r | trunk 53.38%, clavicle.r 27.31%, scapula.r 19.30% | scapula.r / shoulder.r, trunk | origin → insertion | 0 / 0 | clean |
-| triceps-brachii.l | shoulder.l 66.54%, elbow.l 23.10%, scapula.l 10.36% | elbow.l / hand.l, scapula.l / shoulder.l, elbow.l / shoulder.l | origin → insertion | 0 / 0 | clean |
-| triceps-brachii.r | shoulder.r 65.23%, elbow.r 24.55%, scapula.r 10.22% | elbow.r / hand.r, scapula.r / shoulder.r, elbow.r / shoulder.r | origin → insertion | 0 / 0 | clean |
+| triceps-brachii.l | shoulder.l 66.54%, elbow.l 23.10%, scapula.l 10.36% | elbow.l / forearm.l, scapula.l / shoulder.l, elbow.l / shoulder.l | origin → insertion | 0 / 0 | clean |
+| triceps-brachii.r | shoulder.r 65.23%, elbow.r 24.55%, scapula.r 10.22% | elbow.r / forearm.r, scapula.r / shoulder.r, elbow.r / shoulder.r | origin → insertion | 0 / 0 | clean |
 
 | Other mesh | Outliers remaining / fixed |
 |---|---|
@@ -283,7 +501,7 @@ Shares sum decoded weights over referenced vertices, including UV/normal seams. 
 | humerus.r | 0 / 0 |
 | scapula.l | 0 / 0 |
 | scapula.r | 0 / 0 |
-| skin-outline | 0 / 1 |
+| skin-outline | 0 / 0 |
 | thorax | 0 / 0 |
 
-Audit result: **clean** (34 muscle nodes; 0 outliers remaining, 5 fixed).
+Audit result: **clean** (34 muscle nodes; 0 outliers remaining, 4 fixed).

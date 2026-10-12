@@ -19,7 +19,7 @@ def quantized_bind_points(points):
     return np.sign(normalized)*np.floor(np.abs(normalized)*32767+.5)/32767*scale+centre
 
 
-def neighbourhoods(points, faces):
+def neighbourhoods(points, faces, shell_aliases=None):
     points = np.asarray(points, dtype=float)
     adjacency = [set() for _ in points]
     areas = np.zeros(len(points))
@@ -27,7 +27,7 @@ def neighbourhoods(points, faces):
     aliases = []
     for i, p in enumerate(points):
         key = tuple(np.round(p, 6))
-        root = welded.setdefault(key, i)
+        root = shell_aliases[i] if shell_aliases is not None else welded.setdefault(key, i)
         aliases.append(root)
     for face in faces:
         a, b, c = face
@@ -99,9 +99,9 @@ def candidates(points, values, joint_positions, rings, areas, fragments):
     return result
 
 
-def inspect(points, faces, weights, joints):
+def inspect(points, faces, weights, joints, shell_aliases=None):
     points = np.asarray(points, dtype=float)
-    aliases, rings, areas, fragments = neighbourhoods(points, faces)
+    aliases, rings, areas, fragments = neighbourhoods(points, faces, shell_aliases)
     names, values = vectors(weights, joints)
     positions = np.array([joints[j] for j in names])
     found = candidates(points, values, positions, rings, areas, fragments)
@@ -109,9 +109,9 @@ def inspect(points, faces, weights, joints):
     return {'outlierCount': len(roots), 'outlierVertices': [i for i, root in enumerate(aliases) if root in roots]}
 
 
-def repair(points, faces, weights, joints, u=None):
+def repair(points, faces, weights, joints, u=None, shell_aliases=None, equivalence_aliases=None):
     points = np.asarray(points, dtype=float)
-    aliases, rings, areas, fragments = neighbourhoods(points, faces)
+    aliases, rings, areas, fragments = neighbourhoods(points, faces, shell_aliases)
     names, values = vectors(weights, joints)
     positions = np.array([joints[j] for j in names])
     u = np.array(u, dtype=float) if u is not None else None
@@ -136,6 +136,18 @@ def repair(points, faces, weights, joints, u=None):
                 # Carry the local fibre station with the replacement weight vector.
                 next_u[i] = np.average(u[neighbours], weights=np.maximum(areas[neighbours], 1e-20))
             fixed.add(i)
+        if equivalence_aliases is not None:
+            replacements = {}
+            for i, _, average in found:
+                replacements.setdefault(equivalence_aliases[i], []).append(average)
+            for root, averages in replacements.items():
+                average = np.mean(averages, axis=0)
+                best = np.argsort(-average, kind='stable')[:4]
+                next_values[root] = 0
+                next_values[root, best] = average[best]/average[best].sum()
+            for i, root in enumerate(equivalence_aliases):
+                if root in replacements:
+                    next_values[i] = next_values[root]
         for i, root in enumerate(aliases):
             next_values[i] = next_values[root]
             if u is not None:

@@ -80,7 +80,8 @@ def render(scene, meshes, name, overlay=True):
     path = CACHE/f'{TOPIC_NAME}-preview-{name}.png'
     skin = next(o for o in meshes if o.name == 'skin-outline')
     for ob in meshes:
-        ob.hide_render = (name == 'skin' and ob != skin) or (name != 'skin' and ob == skin)
+        shell_only = name == 'skin' or (name.startswith('pose') and name != 'pose-anatomy')
+        ob.hide_render = (shell_only and ob != skin) or (not shell_only and ob == skin)
     scene.render.film_transparent = False
     scene.render.filepath = str(path)
     bpy.ops.render.render(write_still=True)
@@ -109,47 +110,8 @@ def render(scene, meshes, name, overlay=True):
 
 
 def pose(scene, meshes, camera):
-    if TOPIC_NAME != 'chest':
-        from regional import pose as regional_pose
-        return regional_pose(sys.modules[__name__], scene, meshes, camera)
-    rig_data = json.loads((ROOT/f'{TOPIC_NAME}/rig.json').read_text())
-    rig = next(o for o in scene.objects if o.type == 'ARMATURE')
-    rest = {o.name:geometry(o) for o in meshes}
-    checks = []
-    for name in ('shoulder.l','elbow.l'):
-        joint = next(j for j in rig_data['joints'] if j['name'] == name)
-        bone = rig.pose.bones[joint['node']]
-        axis = Vector(joint['axes']['flexion'])
-        source_axis = Vector((axis.x,-axis.z,axis.y))
-        local_axis = bone.bone.matrix_local.to_3x3().inverted() @ (rig.matrix_world.to_3x3().inverted() @ source_axis)
-        bone.rotation_mode = 'QUATERNION'
-        bone.rotation_quaternion = Quaternion(local_axis.normalized(),math.pi/2)
-    bpy.context.view_layer.update()
-    final = {o.name:geometry(o) for o in meshes}
-    shoulder, elbow, wrist = [rig.matrix_world @ rig.pose.bones['joint.'+name+'.l'].head for name in ('shoulder','elbow','wrist')]
-    elbow_angle = math.degrees((elbow-shoulder).angle(wrist-elbow))
-    assert 75 < elbow_angle < 110, f'Elbow did not bend: {elbow_angle}'
-    print(f'POSE CHECK elbow bend {elbow_angle:.2f} degrees',flush=True)
-    humerus = next(o for o in meshes if o.name == 'humerus.l')
-    # +Z in glTF is -Y in Blender. Humerus must move anteriorly.
-    before = sum(rest[humerus.name],Vector())/len(rest[humerus.name])
-    after = sum(final[humerus.name],Vector())/len(final[humerus.name])
-    assert after.y < before.y-.08, 'Shoulder flexion did not move arm forward (+Z)'
-    for ob in meshes:
-        if ob.get('role') not in ('region','neighbour'):
-            continue
-        ratios = [(final[ob.name][a]-final[ob.name][b]).length/max(1e-8,(rest[ob.name][a]-rest[ob.name][b]).length)
-                  for a,b in (e.vertices for e in ob.data.edges)]
-        assert all(math.isfinite(r) for r in ratios), ob.name
-        checks.append({'mesh':ob.name,'maxEdgeStretch':max(ratios,default=1)})
-    print(f'POSE CHECK left humerus forward +Z: {before.y-after.y:.6f} m; finite muscle deformation passed',flush=True)
-    points = [p for o in meshes if o.name != 'skin-outline' for p in final[o.name]]
-    frame(scene,camera,points,(1,-2,.25))
-    path = render(scene,meshes,'pose',overlay=False)
-    save_json(CACHE/f'{TOPIC_NAME}-pose-stats.json',{'backend':'Blender Workbench / decoded final skin',
-        'angles':{'shoulder.l.flexion':90,'elbow.l.flexion':90},
-        'humerusForwardM':before.y-after.y,'elbowBendDegrees':elbow_angle,'edgeChecks':checks,'path':path})
-    return path
+    from regional import pose as regional_pose
+    return regional_pose(sys.modules[__name__], scene, meshes, camera)
 
 
 def main():

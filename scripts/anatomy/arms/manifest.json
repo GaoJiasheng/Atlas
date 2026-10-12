@@ -1555,12 +1555,18 @@
     "elbow.l",
     "forearm.l",
     "hand.l",
+    "hip.l",
+    "knee.l",
+    "ankle.l",
     "clavicle.r",
     "scapula.r",
     "shoulder.r",
     "elbow.r",
     "forearm.r",
-    "hand.r"
+    "hand.r",
+    "hip.r",
+    "knee.r",
+    "ankle.r"
   ],
   "expectedNodes": [
     "anconeus.l",
@@ -1632,12 +1638,18 @@
     "joint.elbow.l",
     "joint.forearm.l",
     "joint.hand.l",
+    "joint.hip.l",
+    "joint.knee.l",
+    "joint.ankle.l",
     "joint.clavicle.r",
     "joint.scapula.r",
     "joint.shoulder.r",
     "joint.elbow.r",
     "joint.forearm.r",
-    "joint.hand.r"
+    "joint.hand.r",
+    "joint.hip.r",
+    "joint.knee.r",
+    "joint.ankle.r"
   ],
   "notes": [
     "Selected from docs/16 \u00a75.3, region reviews and exact cached FBX inventory; no mirrored geometry.",

@@ -1,5 +1,6 @@
 /** Optimize the Blender GLB and verify engine-facing geometry and skin data. */
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { execFileSync } from 'node:child_process';
 import { createRequire } from 'node:module';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -135,7 +136,7 @@ for (const joint of rig.joints) {
 if (topic !== 'chest') {
   const rounded = new Set<unknown>();
   for (const node of meshNodes) for (const primitive of required(node.getMesh(), 'mesh').listPrimitives()) {
-    for (const [semantic, grid] of [['_U',32768],['_FIBRE',4096],['TEXCOORD_0',8192]] as const) {
+    for (const [semantic, grid] of [['_U',topic === 'legs' ? 8192 : 32768],['_FIBRE',4096],['TEXCOORD_0',topic === 'legs' ? 1024 : 8192]] as const) {
       const attribute = primitive.getAttribute(semantic);
       if (!attribute || rounded.has(attribute)) continue;
       const values = required(attribute.getArray(), semantic);
@@ -151,6 +152,58 @@ await document.transform(
     quantizePosition: 16, quantizeNormal: 12, quantizeTexcoord: 16, quantizeWeight: 16 }),
   prune({ keepLeaves: true, keepAttributes: true }),
 );
+// Final quantization and exported normal seams can add thin-shell pairs.
+// Synchronize on the final bind geometry, without modifying region muscles.
+for (const node of meshNodes.filter((n) => n.getExtras().role === 'skin')) {
+  const skin=required(node.getSkin(), 'mannequin skin');
+  const jointNames=skin.listJoints().map((j) => j.getName().replace(/^joint\./, ''));
+  const worlds=skin.listJoints().map((j) => j.getWorldMatrix());
+  const binds=required(skin.getInverseBindMatrices(), 'skin binds');
+  const transform=(m:number[], p:vec3):vec3 => [0,1,2].map((i) =>
+    required(m[i], 'matrix')*p[0]+required(m[i+4], 'matrix')*p[1]+required(m[i+8], 'matrix')*p[2]+required(m[i+12], 'matrix')) as vec3;
+  for (const primitive of required(node.getMesh(), 'mannequin mesh').listPrimitives()) {
+    const pos=required(primitive.getAttribute('POSITION'), 'skin positions');
+    const wa=required(primitive.getAttribute('WEIGHTS_0'), 'skin weights');
+    const ja=required(primitive.getAttribute('JOINTS_0'), 'skin indices');
+    const encodeWeights=(values:number[]):number[] => {
+      const rounded=values.map((v) => Math.round(v*65535));
+      const largest=rounded.indexOf(Math.max(...rounded));
+      rounded[largest]=required(rounded[largest], 'largest influence')+65535-rounded.reduce((a,b) => a+b,0);
+      return rounded.map((v) => v/65535);
+    };
+    // Exact unit sums keep bind points independent of later weight changes.
+    for (let i=0;i<wa.getCount();i++) {const w:number[]=[];wa.getElement(i,w);wa.setElement(i,encodeWeights(w));}
+    const points:vec3[]=[],weights:Record<string,number>[]=[];
+    for (let i=0;i<pos.getCount();i++) {
+      const p:vec3=[0,0,0],w:number[]=[],j:number[]=[];pos.getElement(i,p);wa.getElement(i,w);ja.getElement(i,j);
+      for (const a of [0,1,2] as const) p[a]=Math.fround(p[a]);
+      for (let k=0;k<4;k++) w[k]=Math.fround(required(w[k], 'dequantized weight'));
+      const out:vec3=[0,0,0],vector:Record<string,number>={};
+      for (let k=0;k<4;k++) {
+        const weight=required(w[k], 'weight'),joint=required(j[k], 'joint');
+        if (!weight) continue;
+        const bind:number[]=[];binds.getElement(joint,bind);
+        const v=transform(required(worlds[joint], 'joint world'),transform(bind,p));
+        for (const a of [0,1,2] as const) out[a]+=v[a]*weight;
+        vector[required(jointNames[joint], 'joint name')]=weight;
+      }
+      points.push(out);weights.push(vector);
+    }
+    const indices=Array.from(required(primitive.getIndices()?.getArray(), 'skin triangles'));
+    const faces:number[][]=[];for (let i=0;i<indices.length;i+=3) faces.push(indices.slice(i,i+3));
+    const file=resolve(cache, `${topic}-shell-finalize.json`);
+    await writeFile(file,JSON.stringify({points,faces,weights,joints:Object.fromEntries(rig.joints.map((j) => [j.name,j.position]))}));
+    execFileSync('python3',[resolve(root,'finalize_shell.py'),file],{stdio:'inherit'});
+    const repaired: {weights:Record<string,number>[]; stats:unknown}=JSON.parse(await readFile(file,'utf8'));
+    for (let i=0;i<repaired.weights.length;i++) {
+      const vector=required(repaired.weights[i], 'repaired weights');
+      const entries=Object.entries(vector).sort(([a],[b]) => jointNames.indexOf(a)-jointNames.indexOf(b));
+      wa.setElement(i,encodeWeights([0,1,2,3].map((k) => entries[k]?.[1] ?? 0)));
+      ja.setElement(i,[0,1,2,3].map((k) => entries[k] ? jointNames.indexOf(required(entries[k], 'entry')[0]) : 0));
+    }
+    await writeFile(resolve(cache,`${topic}-shell-finalize-stats.json`),JSON.stringify(repaired.stats,null,2)+'\n');
+  }
+}
 // Keep _U and _FIBRE float32: their engine units must survive quantization.
 document.createExtension(EXTMeshoptCompression).setRequired(true)
   .setEncoderOptions({ method: EXTMeshoptCompression.EncoderMethod.QUANTIZE });

@@ -1,17 +1,29 @@
-# Back round 6 pose inspection
+# Back round 8 preview inspection
 
-Re-rendered with native Blender Workbench from the decoded final published GLB and inspected at full resolution.
+Native Blender Workbench previews were generated from the decoded final published GLB. Inspected rest front/back/left, exploded, opaque skin, posed oblique/front/back/left views, and posed anatomy.
 
-[back-preview-pose.png](/Users/gavin/work/atlas/scripts/anatomy/cache/back-preview-pose.png)
+Pose: left shoulder flexion 90°, right elbow flexion 90°, left hip flexion 60°, right knee flexion 90°, both ankles dorsiflexion 15°. Right inputs use the same axis signing as the current engine; metadata keeps exact X-negated right axes.
 
-Raised-arm pose has no new isolated weight streaks across the torso or shoulder. The thin static neck-border slip also appears in the prior rest/exploded views; it is retained source geometry. Full rig metadata is unchanged.
+The neck remains attached to the torso. Raised shoulder and axilla remain connected; groin and both upper legs remain connected. Source skin panel borders and shading creases are still visible, including stretched panels near the raised axilla and hip. No newly detached shell, isolated weight spike or open gap was observed at the neck/shoulder/groin in these views. This is a visual inspection of this test pose, not anatomical approval.
 
-Published weight audit: **clean**, **0 remaining**, **6 fixed** unique welded vertices. Per-mesh counts are in `report.md` and `cache/back-weights-audit.json`.
+Published weight/fibre/outlier audit: **clean**; **0 remaining**, **8 native fixed**. All 19 joints have mannequin weights and the decoded shell-vector mismatch count is zero.
 
-- Published GLB SHA-256: `c5cde813fce48e70c41a95b57ee40191ad83547aee9a83ade7f51b706b22b6c2`
-- Pose PNG SHA-256: `e08884309e23583bbd13b2bf3b865c2cfef71c03f032693cd964171c9e26675f`
+Published GLB SHA-256: `e7e881d12905e19ede46fb60f1998968e936d1eaec4794925d5e12cb6ad4396d`.
+Pose PNG SHA-256: `6bb5165678119f58ba0d932c101429125e31b5dcb605a2ada3839cdb785190f0`.
 
-## [待核] attachments and extent
+## Preview files
 
-All attachment candidates retain pending human review. Source-marker labels and bone proximity do not independently verify the anatomical endpoint or tendon identity.
-Whole neighbouring muscle extents are intentionally retained at low budget; approve teaching crops separately.
+- [back-preview-front.png](/Users/gavin/work/atlas/scripts/anatomy/cache/back-preview-front.png)
+- [back-preview-back.png](/Users/gavin/work/atlas/scripts/anatomy/cache/back-preview-back.png)
+- [back-preview-left.png](/Users/gavin/work/atlas/scripts/anatomy/cache/back-preview-left.png)
+- [back-preview-exploded-by-layer.png](/Users/gavin/work/atlas/scripts/anatomy/cache/back-preview-exploded-by-layer.png)
+- [back-preview-skin.png](/Users/gavin/work/atlas/scripts/anatomy/cache/back-preview-skin.png)
+- [back-preview-pose.png](/Users/gavin/work/atlas/scripts/anatomy/cache/back-preview-pose.png)
+- [back-preview-pose-front.png](/Users/gavin/work/atlas/scripts/anatomy/cache/back-preview-pose-front.png)
+- [back-preview-pose-back.png](/Users/gavin/work/atlas/scripts/anatomy/cache/back-preview-pose-back.png)
+- [back-preview-pose-left.png](/Users/gavin/work/atlas/scripts/anatomy/cache/back-preview-pose-left.png)
+- [back-preview-pose-anatomy.png](/Users/gavin/work/atlas/scripts/anatomy/cache/back-preview-pose-anatomy.png)
+
+## [待核] anatomy
+
+All attachment/tendon wording and educational crop choices remain pending human review. Source geometry panel seams are retained.

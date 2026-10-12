@@ -26,6 +26,7 @@ def markdown(result):
              'Sub-edge detached scraps use nearby substantial surface rings because their component-local '
              'endpoint seeds are artificial; >1% discrepant weight mass on those scraps also fails. '
              'Smooth joint crossovers are excluded. Fixed counts refer to unique welded bind vertices.', '',
+             f"Mannequin: all {len(result['skinJointShares'])} full-body joints weighted; {result['shellWeightMismatches']} shell mismatch flags. Right-axis exact mirror checks passed.", '',
              '| Muscle | Joint shares | Required attachment joints | Fibre endpoints | Outliers remaining / fixed | Result |',
              '|---|---|---|---|---|---|']
     for row in result['rows']:
@@ -57,17 +58,33 @@ def audit(topic):
     repair_path=ROOT/f'cache/{topic}-weight-repair.json'
     repairs=json.loads(repair_path.read_text()) if repair_path.exists() else {}
     result['meshes']=[]
+    shell_flags=[]
     for name, mesh in weight_meshes.items():
-        check=inspect(mesh['points'],mesh['faces'],mesh['weights'],mesh['joints'])
+        aliases = None
+        if mesh['role']=='skin':
+            from full_body import shell_aliases
+            aliases=shell_aliases(mesh['points'],mesh['faces'])
+        if aliases is not None:
+            mismatches=[]
+            for i,root in enumerate(aliases):
+                if any(abs(mesh['weights'][i].get(n,0)-mesh['weights'][root].get(n,0))>1e-6 for n in mesh['joints']):
+                    mismatches.append(i)
+            shell_flags += [f"{name}: {len(mismatches)} thin-shell weight mismatches"] if mismatches else []
+        check=inspect(mesh['points'],mesh['faces'],mesh['weights'],mesh['joints'],aliases)
         result['meshes'].append({'name':name,'role':mesh['role'],**check,
                                 'outliersFixed':repairs.get(name,{}).get('outliersFixed',0)})
     mesh_checks={m['name']:m for m in result['meshes']}
     actual=result['parents']
     canonical=parents(actual)
     canonical.update(actual)
-    if topic=='chest':
-        for side in ('l','r'): canonical['wrist.'+side]='elbow.'+side
-    result['flags']=[]
+    result['flags']=shell_flags
+    from full_body import axis_checks
+    rig=json.loads((ROOT/topic/'rig.json').read_text())
+    result['axisMirrorChecks']=axis_checks(rig['joints'])
+    shell=weight_meshes['skin-outline']
+    result['skinJointShares']={n:sum(w.get(n,0) for w in shell['weights'])/len(shell['weights']) for n in manifest['jointNames']}
+    result['flags'] += ['mannequin has no weight on '+n for n,v in result['skinJointShares'].items() if v<1e-6]
+    result['shellWeightMismatches']=sum('shell weight mismatch' in flag for flag in shell_flags)
     result['flags'] += ['missing declared rig joint '+n for n in
                         sorted(set(manifest['jointNames'])-set(actual))]
     for index, skin in enumerate(result['skins']):
@@ -84,8 +101,8 @@ def audit(topic):
     for row in result['rows']:
         name=row['name'];side=name[-1] if name.endswith(('.l','.r')) else None
         part=next(p for p in manifest['parts'] if name in (p['id'],p['id']+'.l',p['id']+'.r'))
-        origins={attachment_joint(b,side,f'forearm.{side}' in actual,topic=='chest') for b in part['origin']}
-        insertions={attachment_joint(b,side,f'forearm.{side}' in actual,topic=='chest') for b in part['insertion']}
+        origins={attachment_joint(b,side,f'forearm.{side}' in actual) for b in part['origin']}
+        insertions={attachment_joint(b,side,f'forearm.{side}' in actual) for b in part['insertion']}
         required=origins|insertions
         allowed=set().union(*(set(joint_path(a,b,canonical)) for a in origins for b in insertions))
         flags=[]

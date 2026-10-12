@@ -1,6 +1,6 @@
 """Region-specific frames, landmark rigs, widened skin blends and review text.
 
-Chest retains its original geometry branch to protect its byte-level baseline.
+Every topic uses these landmark joint paths, including unexported bones.
 All reference surfaces are real cached structures, never mirrored or exported as helpers.
 """
 import json
@@ -42,9 +42,6 @@ def select_and_transform(build):
             points,faces=build.merge_records(records)
             name=p['id']+('.'+side if side else '')
             build.SELECTED[name]=dict(part=p,side=side,points=points,faces=faces,sourceNames=[r['info']['name'] for r in records])
-            if p['role']=='skin':
-                from common import mobile_skin_region
-                build.SELECTED[name]['sourceSkinSides']=[r['info']['side'] if mobile_skin_region(r['info']['name'],build.TOPIC_NAME) else None for r in records for _ in r['points']]
     clavicle=centroid([p for r in bone_records(build,['clavicle'],'l') for p in r['points']])
     sternum=centroid([p for r in bone_records(build,['sternum'],None) for p in r['points']])
     spine=centroid([p for r in bone_records(build,['thoracic-spine'],None) for p in r['points']])
@@ -129,6 +126,9 @@ def make_rig(build, centre, floor, check):
         out=dict(name=n,node='joint.'+n,position=list(positions[n]),parent=j['parent'],axes=axes,source=j['source'],review='pending')
         for key in ['offset','gripOffsetM','glenoid']:
             if key in j: out[key]=j[key]
+        if side == 'r':
+            left = next(v for v in output if v['name'] == kind+'.l')
+            out['axes'] = {action:[-axis[0],axis[1],axis[2]] for action,axis in left['axes'].items()}
         output.append(out)
         assert all(abs(Vector(a).length-1)<1e-5 for a in axes.values()),n
         if kind!='trunk':
@@ -136,14 +136,21 @@ def make_rig(build, centre, floor, check):
             cloud=points(id,side);lower=[min(v[a] for v in cloud) for a in range(3)];upper=[max(v[a] for v in cloud) for a in range(3)]
             assert all(lower[a]-.035<=j['position'][a]<=upper[a]+.035 for a in range(3)),(n,lower,upper,j['position'])
         print('RIG CHECK '+json.dumps(out),flush=True)
+    from full_body import axis_checks
+    axis_rows = axis_checks(output)
+    print(f'AXIS MIRROR {build.TOPIC_NAME}: joint | action | dot(R, mirrorX(L))', flush=True)
+    for row in axis_rows:
+        print(f"{row['joint']} | {row['action']} | {row['dot']:.9f}",flush=True)
     # Drafts currently encode pronation on elbow; alias it to the actual forearm joint.
     aliases={f'elbow.{s}.pronation':f'forearm.{s}.pronation' for s in ['l','r']} if build.TOPIC_NAME=='arms' else {}
     aliases.update({f'elbow.{s}.supination':f'forearm.{s}.supination' for s in ['l','r']} if build.TOPIC_NAME=='arms' else {})
-    draft=json.loads((ROOT/f'drafts/{build.TOPIC_NAME}/exercises-{build.TOPIC_NAME}.json').read_text())['exercises']
+    draft_path=ROOT/f'drafts/{build.TOPIC_NAME}/exercises-{build.TOPIC_NAME}.json'
+    if build.TOPIC_NAME=='chest': draft_path=ROOT/'drafts/exercises-chest.json'
+    draft=json.loads(draft_path.read_text())['exercises']
     used={n for e in draft for f in e.get('motion',{}).get('keys',[]) for n in f.get('joints',{})}
     save_json(build.TOPIC/'rig.json',dict(license='CC BY-SA 4.0',units='m',coordinates=build.MANIFEST['coordinates'],
               sourceCentre=list(centre),sourceChestCentre=list(centre),floorY=floor-centre.z,coordinateCheck=check,joints=output,
-              hipFitEvidence=fits,motionAliases=aliases,excludedDraftMotionKeys=sorted(used-requested)))
+              axisMirrorChecks=axis_rows,hipFitEvidence=fits,motionAliases=aliases,excludedDraftMotionKeys=sorted(used-requested)))
     return rig,joints
 
 
@@ -169,30 +176,34 @@ def pose(preview,scene,meshes,camera):
     data=json.loads((ROOT/preview.TOPIC_NAME/'rig.json').read_text())
     rig=next(o for o in scene.objects if o.type=='ARMATURE')
     rest={o.name:preview.geometry(o) for o in meshes}
-    angles={'shoulder.l.flexion':55,'elbow.l.flexion':75} if preview.TOPIC_NAME in ['back','shoulders','arms'] else {'hip.l.flexion':35,'knee.l.flexion':55,'ankle.l.dorsiflexion':10} if preview.TOPIC_NAME=='legs' else {'trunk.rotation':12,'hip.l.flexion':25}
-    if preview.TOPIC_NAME=='arms': angles.update({'forearm.l.pronation':65,'hand.l.flexion':15})
-    if preview.TOPIC_NAME=='core' and any(j['name']=='shoulder.l' for j in data['joints']):
-        angles['shoulder.l.flexion']=55
+    from full_body import POSE, movement_axis
+    angles = POSE.copy()
     for key,degrees in angles.items():
         name,action=key.rsplit('.',1);joint=next(j for j in data['joints'] if j['name']==name);bone=rig.pose.bones[joint['node']]
-        axis=Vector(joint['axes'][action]);source_axis=Vector((axis.x,-axis.z,axis.y))
+        axis=Vector(movement_axis(data['joints'],name,action));source_axis=Vector((axis.x,-axis.z,axis.y))
         axis=bone.bone.matrix_local.to_3x3().inverted() @ (rig.matrix_world.to_3x3().inverted() @ source_axis)
         bone.rotation_mode='QUATERNION';bone.rotation_quaternion=Quaternion(axis.normalized(),math.radians(degrees))
     bpy.context.view_layer.update();final={o.name:preview.geometry(o) for o in meshes}
     checks=[]
     for ob in meshes:
         assert all(math.isfinite(c) for v in final[ob.name] for c in v),ob.name
-        if ob.get('role') in ['region','neighbour']:
+        if ob.get('role') in ['region','neighbour','skin']:
             ratios=[(final[ob.name][a]-final[ob.name][b]).length/max(1e-8,(rest[ob.name][a]-rest[ob.name][b]).length) for a,b in (e.vertices for e in ob.data.edges)]
             checks.append(dict(mesh=ob.name,maxEdgeStretch=max(ratios,default=1),
                                centroidDisplacementM=(centroid(final[ob.name])-centroid(rest[ob.name])).length))
     moving='humerus.l' if 'humerus.l' in final else 'femur.l'
     before=centroid(rest[moving]);after=centroid(final[moving]);displacement=(after-before).length
     assert displacement>.03,(moving,displacement)
-    if preview.TOPIC_NAME in ['back','shoulders','arms','legs']: assert after.y<before.y-.02,'Flexion must move anteriorly'
-    preview.frame(scene,camera,[p for o in meshes if o.name!='skin-outline' for p in final[o.name]],(1,-2,.25))
+    if moving=='humerus.l' or moving=='femur.l': assert after.y<before.y-.02,'Flexion must move anteriorly'
+    preview.frame(scene,camera,final['skin-outline'],(1,-2,.25))
     path=preview.render(scene,meshes,'pose',overlay=False)
-    output=dict(backend='Blender Workbench / decoded final skin',angles=angles,edgeChecks=checks,path=path,movingMesh=moving,displacementM=displacement)
+    pose_paths=[path]
+    for view,direction in [('front',(0,-1,0)),('back',(0,1,0)),('left',(1,0,0))]:
+        preview.frame(scene,camera,final['skin-outline'],direction)
+        pose_paths.append(preview.render(scene,meshes,'pose-'+view,overlay=False))
+    preview.frame(scene,camera,[p for o in meshes if o.name!='skin-outline' for p in final[o.name]],(1,-2,.25))
+    pose_paths.append(preview.render(scene,meshes,'pose-anatomy',overlay=False))
+    output=dict(backend='Blender Workbench / decoded final skin',angles=angles,rightAngleConvention='positive inputs; right axes signed by the engine mirrorSignedAxes rule',edgeChecks=checks,path=path,paths=pose_paths,movingMesh=moving,displacementM=displacement)
     if preview.TOPIC_NAME=='arms':
         # Ulna does not rotate with radius around the pronation joint.
         output['pronationAxis']=next(j for j in data['joints'] if j['name']=='forearm.l')['axes']['pronation']
@@ -207,7 +218,7 @@ def write_report(topic,manifest,summary,rig,sites,rows,failures):
            f"Draw-call estimate: **{summary['drawCalls']}** opaque primitives; skin overlay adds its shell pass. Both 4 MB and 350,000 triangle ceilings enforced.",'',
            'Native Blender, cached FBX only. Geometry and derived rig/attachment data: CC BY-SA 4.0.','',
            '## Source coverage and scope','']+[f'- {n}' for n in manifest['notes']]
-    lines+=['', 'The core erector-spinae-lumbar part merges full lumbar iliocostalis and thoracic longissimus sources; extent remains [待核]. No multifidus substitute was necessary. Intercostal meshes are not region parts for these five topics; thorax includes actual ribs, cartilages and sternum. No hand/foot intrinsic muscle geometry is fabricated.',
+    lines+=['', 'Display muscle and bone selections retain their reviewed topic scope. The mannequin uses full-body joints even where corresponding display bones are absent. No hand/foot intrinsic muscle geometry is fabricated.',
             '', '## Final decoded surface audit','',
             'Symmetric sampled Hausdorff: referenced vertices (approximately 3,000) plus 6,000 area-weighted interior points in each direction. This estimates surface error rather than certifying a global maximum. Source boundaries are preserved; nonmanifold/open sources retain disabled section filling.', '',
             '| Mesh | Role | Source triangles | Final triangles | Deviation mm | Budget mm | Closed before → after | Boundary edges |',
@@ -215,14 +226,16 @@ def write_report(topic,manifest,summary,rig,sites,rows,failures):
     for r in rows:
         lines.append(f"| {r['name']} | {r['role']} | {r['beforeTriangles']:,} | {r['afterTriangles']:,} | {r['sampledHausdorffM']*1000:.3f} | {r['budgetM']*1000:.1f} | {r['closedBefore']} → {r['closedAfter']} | {r['boundaryEdges']} |")
     lines+=['', '## Workbench previews','', 'Studio lighting, paper #EDE7D6, orthographic evaluated non-skin bounds with 5% margin; shell composite at 30%. Superficial/intermediate layers move out 0.12/0.06 m; bones and neighbours remain fixed.','']
-    lines += [f'- `{p}`' for p in previews['paths']+[previews['pose']]]
-    lines += ['',f"Pose inputs: {pose['angles']}; {pose['movingMesh']} centroid displacement {pose['displacementM']:.6f} m. All evaluated coordinates and muscle-edge stretches are finite.",
+    lines += [f'- `{p}`' for p in previews['paths']+pose['paths']]
+    lines += ['', f"Right angle convention: {pose['rightAngleConvention']}. Positive inputs use the current engine’s mirrorSignedAxes rule with the real left/right joint midline normal; stored metadata remains the exact X-only axis reflection.", f"Pose inputs: {pose['angles']}; {pose['movingMesh']} centroid displacement {pose['displacementM']:.6f} m. All evaluated coordinates and muscle-edge stretches are finite.",
               'Visual inspection results are recorded in `preview-review.md` after viewing every PNG.','', '## Frame and rig','',
               f"Metres; Y up; front +Z; own left +X. Source region centre {rig['sourceCentre']}; floorY {rig['floorY']:.6f} m. Add −floorY for grounded full-body display.",
               'Unexported reference bones locate joints and attachment candidates without adding out-of-region display bones. Hand joints pivot at wrist styloid midpoints; grip offsets are 0.08 m along the distal hand direction.', '',
               '| Joint | Position X/Y/Z m | Parent | Evidence |','|---|---|---|---|']
     for j in rig['joints']: lines.append(f"| {j['name']} | {', '.join(f'{v:.5f}' for v in j['position'])} | {j['parent']} | {j['source']} |")
-    lines+=['',f"Full-body draft motion keys outside this regional rig: {', '.join(rig['excludedDraftMotionKeys']) or 'none'}. They need a whole-body motion driver; this export provides the relevant regional joints only.",
+    lines+=['', '## Bilateral axis checks', '', '| Joint | Action | dot(right, X-mirror(left)) |', '|---|---|---:|']
+    lines += [f"| {r['joint']} | {r['action']} | {r['dot']:.9f} |" for r in rig['axisMirrorChecks']]
+    lines+=['',f"Full-body draft motion keys outside this regional rig: {', '.join(rig['excludedDraftMotionKeys']) or 'none'}. All topics provide the complete 19-joint body rig.",
             f"Motion aliases: {rig['motionAliases']}. Arms keep ulna on elbow and radius/hand on forearm, with pronation along the forearm rather than the elbow flexion axis.",
             '', '## [待核] attachment candidates','',
             'All candidates remain unapproved. `.o/.e` markers are classified by named-surface distance, with raw labels retained. Proximity fallback is explicit; no anatomical wording is approved by geometry alone.','']

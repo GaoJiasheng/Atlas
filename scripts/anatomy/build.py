@@ -13,25 +13,24 @@ from mathutils.bvhtree import BVHTree
 from mathutils.kdtree import KDTree
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import (CACHE, ROOT, mobile_skin_region, base_name, centroid, clear_scene, import_system,
+from common import (CACHE, ROOT, base_name, centroid, clear_scene, import_system,
                     matches, object_info, save_json, surface_deviation, topology, world_vertices, topic_argument)
 
 TOPIC_NAME = topic_argument()
 TOPIC = ROOT / TOPIC_NAME
 MANIFEST = json.loads((TOPIC / 'manifest.json').read_text())
-if TOPIC_NAME != 'chest':
-    # Attachment ownership is independent of the region's display bone set.
-    # Close the rig/allowlist before source selection and never silently bind
-    # an unexported limb attachment to the trunk.
-    import hashlib
-    from rig_rules import complete_manifest
-    declared_joints = set(MANIFEST['jointNames'])
-    complete_manifest(MANIFEST)
-    if not declared_joints <= set(MANIFEST['jointNames']):
-        raise RuntimeError('Manifest completion dropped declared rig joints')
-    encoded = json.dumps(MANIFEST, indent=2)+'\n'
-    (TOPIC/'manifest.json').write_text(encoded)
-    (TOPIC/'MANIFEST-READY').write_text('sha256 '+hashlib.sha256(encoded.encode()).hexdigest()+'\n')
+# Attachment ownership is independent of the region's display bone set.
+# Close the rig/allowlist before source selection and never silently bind
+# an unexported limb attachment to the trunk.
+import hashlib
+from rig_rules import complete_manifest
+declared_joints = set(MANIFEST['jointNames'])
+complete_manifest(MANIFEST)
+if not declared_joints <= set(MANIFEST['jointNames']):
+    raise RuntimeError('Manifest completion dropped declared rig joints')
+encoded = json.dumps(MANIFEST, indent=2)+'\n'
+(TOPIC/'manifest.json').write_text(encoded)
+(TOPIC/'MANIFEST-READY').write_text('sha256 '+hashlib.sha256(encoded.encode()).hexdigest()+'\n')
 SOURCE = {}
 SELECTED = {}
 ATTACHMENTS = []
@@ -126,9 +125,6 @@ def select_and_transform():
             name = part['id'] + ('.' + side if side else '')
             SELECTED[name] = {'part': part, 'side': side, 'points': points, 'faces': faces,
                               'sourceNames': [r['info']['name'] for r in records]}
-            if part['role'] == 'skin':
-                SELECTED[name]['sourceSkinSides'] = [r['info']['side'] if mobile_skin_region(r['info']['name'], TOPIC_NAME) else None
-                    for r in records for _ in r['points']]
     clavicle = centroid(SELECTED['clavicle.l']['points'])
     sternum_c = centroid(SELECTED['sternum']['points'])
     spine = centroid(SELECTED['thoracic-spine']['points'])
@@ -227,8 +223,6 @@ def simplify_selection():
         points = [result_points[i] for i in used]
         faces = [tuple(remap[i] for i in indices[start:start + 3]) for start in range(0, len(indices), 3)]
         record['ob'] = make_mesh(name, points, faces)
-        if 'sourceSkinSides' in record:
-            record['skinSides'] = [record['sourceSkinSides'][i] for i in used]
         record['simplifierErrorM'] = result['error']
         record['sampleDeviationM'] = result['sampleDeviationM']
         print(f'SIMPLIFY {name}: {len(record["faces"]):,} → {len(faces):,} ({result["error"] * 1000:.3f} mm)', flush=True)
@@ -506,115 +500,13 @@ def sphere_fit(points):
 
 
 def make_rig(centre, floor, check):
-    if TOPIC_NAME != 'chest':
-        from regional import make_rig as regional_rig
-        return regional_rig(sys.modules[__name__], centre, floor, check)
-    joints = [{'name':'trunk', 'position':Vector((0,0,0)), 'parent':None, 'source':'sternal angle frame'}]
-    for side in ['l','r']:
-        scapula = landmark('Glenoid process of scapula', side) or landmark('Glenoid fossa', side)
-        if scapula is None:
-            scapula = centroid(SELECTED['scapula.'+side]['points'])
-            scapula_source = 'scapula centroid fallback'
-        else:
-            scapula_source = 'glenoid .j landmark'
-        humerus = SELECTED['humerus.'+side]['points']
-        head = landmark('Head of humerus', side)
-        if head is not None:
-            patch = [p for p in humerus if (p-head).length < .022]
-        else:
-            ymax = max(p.z for p in humerus)
-            patch = [p for p in humerus if p.z > ymax - .025]
-        shoulder = sphere_fit(patch) if len(patch) >= 8 else head or scapula
-        epicondyles = [landmark(n, side) for n in ['Medial epicondyle of humerus','Lateral epicondyle of humerus']]
-        if all(p is not None for p in epicondyles):
-            elbow = (epicondyles[0]+epicondyles[1])/2
-            elbow_source = 'midpoint of epicondyle .j landmarks'
-        else:
-            elbow = centroid([p for p in humerus if p.z < min(v.z for v in humerus)+.018])
-            elbow_source = 'distal humerus fallback'
-        forearm = SELECTED['forearm.'+side]['points']
-        wrist = landmark('Ulnar styloid process', side)
-        wrist = wrist if wrist is not None else centroid([p for p in forearm if p.z < min(v.z for v in forearm)+.015])
-        # Shoulder girdle chain: the clavicle turns at the sternoclavicular joint (its medial end), the
-        # scapula at the acromioclavicular joint (the clavicle's lateral end), so protraction and elevation
-        # swing the collarbone about the sternum and carry the blade around the ribs.
-        clavicle = SELECTED['clavicle.'+side]['points']
-        inner = min(abs(p.x) for p in clavicle)
-        outer = max(abs(p.x) for p in clavicle)
-        sternoclavicular = centroid([p for p in clavicle if abs(p.x) < inner+.012])
-        acromioclavicular = centroid([p for p in clavicle if abs(p.x) > outer-.012])
-        joints += [{'name':'clavicle.'+side,'position':sternoclavicular,'parent':'trunk','source':'medial end of clavicle (sternoclavicular joint)'},
-                   {'name':'scapula.'+side,'position':acromioclavicular,'parent':'clavicle.'+side,'source':'lateral end of clavicle (acromioclavicular joint); glenoid: '+scapula_source},
-                   {'name':'shoulder.'+side,'position':shoulder,'parent':'scapula.'+side,'source':'humeral head sphere fit'},
-                   {'name':'elbow.'+side,'position':elbow,'parent':'shoulder.'+side,'source':elbow_source},
-                   {'name':'wrist.'+side,'position':wrist,'parent':'elbow.'+side,'source':'styloid landmark / distal forearm'}]
-    armature = bpy.data.armatures.new('chest-rig')
-    rig = bpy.data.objects.new('chest-rig', armature)
-    bpy.context.collection.objects.link(rig)
-    bpy.context.view_layer.objects.active = rig
-    rig.select_set(True)
-    bpy.ops.object.mode_set(mode='EDIT')
-    for joint in joints:
-        bone = armature.edit_bones.new('joint.'+joint['name'])
-        bone.head = joint['position']
-        bone.tail = bone.head + Vector((0, 0, .035))
-        if joint['parent']:
-            bone.parent = armature.edit_bones['joint.'+joint['parent']]
-        bone.use_connect = False
-    bpy.ops.object.mode_set(mode='OBJECT')
-    positions = {j['name']: target(j['position']) for j in joints}
-    output = []
-    for joint in joints:
-        name, side = joint['name'], joint['name'].split('.')[-1]
-        sign = 1 if side != 'r' else -1
-        rotation = (positions.get('elbow.'+side, Vector((0,-1,0))) - positions[name]).normalized() if name.startswith('shoulder.') else Vector((0,1,0))
-        flexion = Vector((-1,0,0))
-        abduction = Vector((0,0,sign))
-        if name.startswith('elbow.'):
-            med, lat = epicondyle_axis(side)
-            flexion = target(lat-med).normalized() if med is not None and lat is not None else flexion
-            if flexion.x > 0:
-                flexion.negate()
-            rotation = (positions['wrist.'+side]-positions[name]).normalized()
-        output.append({'name':name,'node':'joint.'+name,'position':list(positions[name]),'parent':joint['parent'],
-                       'axes':{'flexion':list(flexion),'abduction':list(abduction),'rotation':list(rotation)},
-                       'source':joint['source'],'review':'pending'})
-    save_json(TOPIC/'rig.json', {'license':'CC BY-SA 4.0','units':'m','coordinates':MANIFEST['coordinates'],
-                              'sourceChestCentre':list(centre),'floorY':floor-centre.z,
-                              'coordinateCheck':check,'joints':output,
-                              'motionAliases':{'hand.l':'wrist.l','hand.r':'wrist.r'},
-                              'handGripOffsetM':.08})
-    for joint in output:
-        assert all(abs(Vector(axis).length-1) < 1e-5 for axis in joint['axes'].values())
-        name = joint['name']
-        mesh_name = ('humerus.'+name[-1] if name.startswith(('shoulder.','elbow.')) else
-                     'scapula.'+name[-1] if name.startswith('scapula.') else
-                     'clavicle.'+name[-1] if name.startswith('clavicle.') else
-                     'forearm.'+name[-1] if name.startswith('wrist.') else 'sternum')
-        points = [target(p) for p in SELECTED[mesh_name]['points']]
-        lower = [min(p[i] for p in points) for i in range(3)]
-        upper = [max(p[i] for p in points) for i in range(3)]
-        assert all(lower[i]-.03 <= joint['position'][i] <= upper[i]+.03 for i in range(3)), name
-        if name.startswith('shoulder.'):
-            assert abs(joint['position'][1]-upper[1]) < .035, 'Shoulder below humeral head'
-        if name.startswith('elbow.'):
-            assert abs(joint['position'][1]-lower[1]) < .04, 'Elbow above distal humerus'
-        print('RIG CHECK '+json.dumps({'joint':name,'position':joint['position'],'mesh':mesh_name,'bounds':[lower,upper]}),flush=True)
-    shoulder_l = next(j for j in output if j['name'] == 'shoulder.l')
-    assert Vector(shoulder_l['axes']['flexion']).cross(positions['elbow.l']-positions['shoulder.l']).z > 0
-    return rig, joints
-
-
-def epicondyle_axis(side):
-    return landmark('Medial epicondyle of humerus',side), landmark('Lateral epicondyle of humerus',side)
+    from regional import make_rig as regional_rig
+    return regional_rig(sys.modules[__name__], centre, floor, check)
 
 
 def bone_joint(id, side):
-    if TOPIC_NAME != 'chest':
-        from regional import bone_joint as regional_joint
-        return regional_joint(MANIFEST, id, side)
-    return {'clavicle':'clavicle','scapula':'scapula','humerus':'shoulder','forearm':'elbow'}.get(id, 'trunk') + (
-        '.'+side if side and id in ['clavicle','scapula','humerus','forearm'] else '')
+    from regional import bone_joint as regional_joint
+    return regional_joint(MANIFEST, id, side)
 
 
 def skin_selection(rig, joints):
@@ -660,70 +552,55 @@ def skin_selection(rig, joints):
         elif part['role'] == 'bone':
             groups[bone_joint(part['id'],side)].add(list(range(len(ob.data.vertices))),1,'REPLACE')
         else:
-            weights = []
-            for index, v in enumerate(ob.data.vertices):
-                skin_side = record['skinSides'][index]
-                candidates = ['trunk'] if skin_side is None else [j for j in joint_positions if j == 'trunk' or j.endswith('.'+skin_side)]
-                nearest = sorted(candidates, key=lambda j:(v.co-joint_positions[j]).length)[:3]
-                w = {j: 1/max(.025,(v.co-joint_positions[j]).length)**4 for j in nearest}
-                total = sum(w.values())
-                weights.append({j:value/total for j,value in w.items()})
-            adjacency = [set() for _ in weights]
-            for e in ob.data.edges:
-                a,b=e.vertices
-                adjacency[a].add(b)
-                adjacency[b].add(a)
-            for _ in range(3):
-                smooth=[]
-                for i,w in enumerate(weights):
-                    merged={j:.5*value for j,value in w.items()}
-                    for n in adjacency[i]:
-                        for j,value in weights[n].items():
-                            merged[j]=merged.get(j,0)+.5*value/max(1,len(adjacency[i]))
-                    best=sorted(merged,key=merged.get,reverse=True)[:4]
-                    total=sum(merged[j] for j in best)
-                    smooth.append({j:merged[j]/total for j in best})
-                weights=smooth
-            for i,w in enumerate(weights):
-                for j,value in w.items():
-                    groups[j].add([i],value,'REPLACE')
-        if TOPIC_NAME != 'chest':
-            from skin_weights import repair, monotonic_proximal, neighbourhoods, inspect, quantized_bind_points
-            points = [list(v.co) for v in ob.data.vertices]
-            faces = [list(f.vertices) for f in ob.data.polygons]
-            index_joint = {group.index: joint for joint, group in groups.items()}
-            weights = [{index_joint[g.group]: g.weight for g in v.groups
-                        if g.group in index_joint and g.weight > 0} for v in ob.data.vertices]
-            # Quantization can join near-coincident body-region seams. Vote on
-            # that same grid so a clean native skin stays clean after export.
-            if part['role'] == 'skin':
-                points = quantized_bind_points(points)
-            original_u = record.get('u')
-            weights, repaired_u, stats = repair(points, faces, weights, joint_positions, original_u)
-            stats['monotonicVerticesFixed'] = 0
-            if original_u is not None:
-                _, rings, areas, _ = neighbourhoods(points, faces)
-                stats['monotonicVerticesFixed'] = monotonic_proximal(weights, repaired_u, proximal_by_vertex, areas)
-                if any(abs(a-b) > 1e-10 for a, b in zip(original_u, repaired_u)):
-                    adjacency = [set() for _ in points]
-                    for i, neighbours in rings:
-                        adjacency[i].update(neighbours)
-                    origin = {i for i, u in enumerate(repaired_u) if u <= 1e-8}
-                    insertion = {i for i, u in enumerate(repaired_u) if u >= 1-1e-8}
-                    if not origin or not insertion:
-                        raise RuntimeError(f'{name}: repair removed all fibre endpoints')
-                    write_fibre(record, [Vector(p) for p in points], adjacency, origin, insertion, list(repaired_u))
-            remaining = inspect(points, faces, weights, joint_positions)
-            if remaining['outlierCount']:
-                raise RuntimeError(f'{name}: monotonic projection left weight outliers: {remaining}')
-            for group in groups.values():
-                group.remove(list(range(len(points))))
+            from full_body import skin_weights as body_weights
+            weights = body_weights([list(v.co) for v in ob.data.vertices], joint_positions)
             for i, vector in enumerate(weights):
                 for joint, weight in vector.items():
                     groups[joint].add([i], weight, 'REPLACE')
-            record['weightRepair'] = stats
-            weight_stats[name] = stats
-            print(f'WEIGHT REPAIR {name}: {stats}', flush=True)
+        from skin_weights import repair, monotonic_proximal, neighbourhoods, inspect, quantized_bind_points
+        points = [list(v.co) for v in ob.data.vertices]
+        faces = [list(f.vertices) for f in ob.data.polygons]
+        index_joint = {group.index: joint for joint, group in groups.items()}
+        weights = [{index_joint[g.group]: g.weight for g in v.groups
+                    if g.group in index_joint and g.weight > 0} for v in ob.data.vertices]
+        # Quantization can join near-coincident body-region seams. Vote on
+        # that same grid so a clean native skin stays clean after export.
+        if part['role'] == 'skin':
+            points = quantized_bind_points(points)
+        aliases = None
+        if part['role'] == 'skin':
+            from full_body import shell_aliases, match_shell_weights
+            aliases = shell_aliases(points, faces, normal_dot=-.5)
+            shell_groups = match_shell_weights(weights, aliases)
+        original_u = record.get('u')
+        weights, repaired_u, stats = repair(points, faces, weights, joint_positions, original_u, aliases)
+        stats['monotonicVerticesFixed'] = 0
+        if original_u is not None:
+            _, rings, areas, _ = neighbourhoods(points, faces)
+            stats['monotonicVerticesFixed'] = monotonic_proximal(weights, repaired_u, proximal_by_vertex, areas)
+            if any(abs(a-b) > 1e-10 for a, b in zip(original_u, repaired_u)):
+                adjacency = [set() for _ in points]
+                for i, neighbours in rings:
+                    adjacency[i].update(neighbours)
+                origin = {i for i, u in enumerate(repaired_u) if u <= 1e-8}
+                insertion = {i for i, u in enumerate(repaired_u) if u >= 1-1e-8}
+                if not origin or not insertion:
+                    raise RuntimeError(f'{name}: repair removed all fibre endpoints')
+                write_fibre(record, [Vector(p) for p in points], adjacency, origin, insertion, list(repaired_u))
+        remaining = inspect(points, faces, weights, joint_positions, aliases)
+        if aliases is not None:
+            stats['shellPairedGroups'] = shell_groups
+            assert all(weights[i] == weights[root] for i, root in enumerate(aliases))
+        if remaining['outlierCount']:
+            raise RuntimeError(f'{name}: monotonic projection left weight outliers: {remaining}')
+        for group in groups.values():
+            group.remove(list(range(len(points))))
+        for i, vector in enumerate(weights):
+            for joint, weight in vector.items():
+                groups[joint].add([i], weight, 'REPLACE')
+        record['weightRepair'] = stats
+        weight_stats[name] = stats
+        print(f'WEIGHT REPAIR {name}: {stats}', flush=True)
         ob.parent=rig
         modifier=ob.modifiers.new('Skin','ARMATURE')
         modifier.object=rig
@@ -736,8 +613,7 @@ def skin_selection(rig, joints):
         for polygon in ob.data.polygons:
             polygon.use_smooth=True
 
-    if TOPIC_NAME != 'chest':
-        save_json(CACHE/f'{TOPIC_NAME}-weight-repair.json', weight_stats)
+    save_json(CACHE/f'{TOPIC_NAME}-weight-repair.json', weight_stats)
 
 
 def material(role, layer):
