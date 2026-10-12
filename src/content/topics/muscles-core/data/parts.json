@@ -1097,101 +1097,139 @@
       "trunk": {
         "node": "joint.trunk",
         "axes": {
-          "flexion": [
-            1,
-            0,
-            0
-          ],
-          "lateral-flexion": [
-            0,
-            0,
-            1
-          ],
-          "rotation": [
-            0,
-            1,
-            0
-          ]
+          "flexion": [1, 0, 0],
+          "lateral-flexion": [0, 0, 1],
+          "rotation": [0, 1, 0]
         }
+      },
+      "clavicle.l": {
+        "node": "joint.clavicle.l",
+        "axes": {
+          "elevation": [0, 0, 1],
+          "protraction": [0, -1, 0]
+        }
+      },
+      "scapula.l": {
+        "node": "joint.scapula.l",
+        "axes": {
+          "elevation": [0, 0, 1],
+          "protraction": [0, -1, 0],
+          "upward-rotation": [0, 0, 1]
+        }
+      },
+      "shoulder.l": {
+        "node": "joint.shoulder.l",
+        "axes": {
+          "flexion": [-1, 0, 0],
+          "abduction": [0, 0, 1],
+          "horizontal-adduction": [0, -1, 0],
+          "internal-rotation": [0.1801, -0.9823, -0.0505]
+        }
+      },
+      "elbow.l": {
+        "node": "joint.elbow.l",
+        "axes": {
+          "flexion": [-1, 0, 0]
+        }
+      },
+      "forearm.l": {
+        "node": "joint.forearm.l",
+        "axes": {
+          "pronation": [0.0751, -0.9787, 0.191]
+        }
+      },
+      "hand.l": {
+        "node": "joint.hand.l",
+        "axes": {
+          "flexion": [-1, 0, 0],
+          "abduction": [0, 0, 1]
+        },
+        "offset": [0.013, -0.074, 0.039]
       },
       "hip.l": {
         "node": "joint.hip.l",
         "axes": {
-          "flexion": [
-            -1,
-            0,
-            0
-          ],
-          "abduction": [
-            0,
-            0,
-            1
-          ],
-          "internal-rotation": [
-            0,
-            1,
-            0
-          ]
-        }
-      },
-      "hip.r": {
-        "node": "joint.hip.r",
-        "axes": {
-          "flexion": [
-            -1,
-            0,
-            0
-          ],
-          "abduction": [
-            0,
-            0,
-            -1
-          ],
-          "internal-rotation": [
-            0,
-            1,
-            0
-          ]
+          "flexion": [-1, 0, 0],
+          "abduction": [0, 0, 1],
+          "internal-rotation": [-0.0219, -0.9988, -0.0436]
         }
       },
       "knee.l": {
         "node": "joint.knee.l",
         "axes": {
-          "flexion": [
-            1,
-            0,
-            0
-          ]
+          "flexion": [1, 0, 0]
         }
       },
       "ankle.l": {
         "node": "joint.ankle.l",
         "axes": {
-          "dorsiflexion": [
-            -1,
-            0,
-            0
-          ]
+          "dorsiflexion": [-1, 0, 0],
+          "inversion": [0, 0, 1]
+        }
+      },
+      "clavicle.r": {
+        "node": "joint.clavicle.r",
+        "axes": {
+          "elevation": [0, 0, 1],
+          "protraction": [0, -1, 0]
+        }
+      },
+      "scapula.r": {
+        "node": "joint.scapula.r",
+        "axes": {
+          "elevation": [0, 0, 1],
+          "protraction": [0, -1, 0],
+          "upward-rotation": [0, 0, 1]
+        }
+      },
+      "shoulder.r": {
+        "node": "joint.shoulder.r",
+        "axes": {
+          "flexion": [1, 0, 0],
+          "abduction": [0, 0, 1],
+          "horizontal-adduction": [0, -1, 0],
+          "internal-rotation": [-0.1801, -0.9823, -0.0505]
+        }
+      },
+      "elbow.r": {
+        "node": "joint.elbow.r",
+        "axes": {
+          "flexion": [1, 0, 0]
+        }
+      },
+      "forearm.r": {
+        "node": "joint.forearm.r",
+        "axes": {
+          "pronation": [-0.0751, -0.9787, 0.191]
+        }
+      },
+      "hand.r": {
+        "node": "joint.hand.r",
+        "axes": {
+          "flexion": [1, 0, 0],
+          "abduction": [0, 0, 1]
+        },
+        "offset": [-0.012, -0.075, 0.037]
+      },
+      "hip.r": {
+        "node": "joint.hip.r",
+        "axes": {
+          "flexion": [1, 0, 0],
+          "abduction": [0, 0, 1],
+          "internal-rotation": [0.0219, -0.9988, -0.0436]
         }
       },
       "knee.r": {
         "node": "joint.knee.r",
         "axes": {
-          "flexion": [
-            1,
-            0,
-            0
-          ]
+          "flexion": [-1, 0, 0]
         }
       },
       "ankle.r": {
         "node": "joint.ankle.r",
         "axes": {
-          "dorsiflexion": [
-            -1,
-            0,
-            0
-          ]
+          "dorsiflexion": [1, 0, 0],
+          "inversion": [0, 0, 1]
         }
       }
     },

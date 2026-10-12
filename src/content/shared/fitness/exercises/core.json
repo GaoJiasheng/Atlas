@@ -20,8 +20,8 @@
         "transversus-abdominis"
       ],
       "setup": {
-        "en": "Use a mat on a firm floor. This is a small trunk curl, not a full sit-up; keep the feet unanchored. The model lies in the exercise position with its arms at its sides; the drawing shows what the arms do.",
-        "zh": "在结实地面铺垫子。这是小幅卷腹，双脚不固定，不需要坐起来。模型摆出动作体位，手臂仍放在身体两侧；手臂怎么做看示意图。"
+        "en": "Use a mat on a firm floor. This is a small trunk curl, not a full sit-up; keep the feet unanchored.",
+        "zh": "在结实地面铺垫子。这是小幅卷腹，双脚不固定，不需要坐起来。"
       },
       "steps": [
         {
@@ -124,10 +124,13 @@
           "kind": "floor",
           "at": [
             0,
-            -0.135,
+            -0.1,
             0
           ]
         },
+        "contacts": [
+          "feet"
+        ],
         "keys": [
           {
             "phase": "start",
@@ -135,55 +138,59 @@
               "trunk": {
                 "flexion": 0
               },
+              "shoulder.l": {
+                "flexion": 6,
+                "abduction": -8
+              },
+              "elbow.l": {
+                "flexion": 5
+              },
               "hip.l": {
                 "flexion": 45
               },
-              "hip.r": {
-                "flexion": 45
-              },
               "knee.l": {
-                "flexion": 112
+                "flexion": 100
               },
-              "knee.r": {
-                "flexion": 112
+              "ankle.l": {
+                "dorsiflexion": -30
               }
-            },
-            "contract": {
-              "rectus-abdominis": 0
             }
           },
           {
             "phase": "end",
             "joints": {
               "trunk": {
-                "flexion": 6
+                "flexion": 20
+              },
+              "shoulder.l": {
+                "flexion": 18,
+                "abduction": -8
+              },
+              "elbow.l": {
+                "flexion": 5
               },
               "hip.l": {
-                "flexion": 51
-              },
-              "hip.r": {
-                "flexion": 51
+                "flexion": 65
               },
               "knee.l": {
-                "flexion": 112
+                "flexion": 100
               },
-              "knee.r": {
-                "flexion": 112
+              "ankle.l": {
+                "dorsiflexion": -30
               }
-            },
-            "contract": {
-              "rectus-abdominis": 0.45,
-              "internal-oblique": 0.2,
-              "external-oblique": 0.2
             }
           }
         ],
         "tempo": [
-          2,
-          0.5,
-          2,
+          1.5,
+          1,
+          1.5,
           0.5
-        ]
+        ],
+        "camera": {
+          "azimuth": 90,
+          "elevation": 14
+        }
       },
       "sources": [
         "M1",
@@ -217,8 +224,8 @@
         "multifidus-lumborum"
       ],
       "setup": {
-        "en": "Lie on a mat with space to reach an arm and the opposite leg. Start with a short reach; a heel slide is an easier learning version. The model lies in the exercise position with its arms at its sides; the drawing shows what the arms do.",
-        "zh": "仰卧在垫上，留出伸手和伸对侧腿的空间。先伸短一点；脚跟沿地面滑动是更容易的学习版本。模型摆出动作体位，手臂仍放在身体两侧；手臂怎么做看示意图。"
+        "en": "Lie on a mat with space to reach an arm and the opposite leg. Start with a short reach; a heel slide is an easier learning version.",
+        "zh": "仰卧在垫上，留出伸手和伸对侧腿的空间。先伸短一点；脚跟沿地面滑动是更容易的学习版本。"
       },
       "steps": [
         {
@@ -311,62 +318,92 @@
           "kind": "floor",
           "at": [
             0,
-            -0.12,
+            -0.1,
             0
           ]
         },
+        "contacts": [
+          "seat"
+        ],
         "keys": [
           {
             "phase": "start",
             "joints": {
-              "trunk": {
+              "shoulder.l": {
+                "flexion": 90
+              },
+              "elbow.l": {
                 "flexion": 0
               },
               "hip.l": {
                 "flexion": 90
               },
-              "hip.r": {
+              "knee.l": {
                 "flexion": 90
               },
-              "knee.l": {
+              "ankle.l": {
+                "dorsiflexion": -10
+              },
+              "shoulder.r": {
+                "flexion": 90
+              },
+              "elbow.r": {
+                "flexion": 0
+              },
+              "hip.r": {
                 "flexion": 90
               },
               "knee.r": {
                 "flexion": 90
+              },
+              "ankle.r": {
+                "dorsiflexion": -10
               }
             },
             "contract": {
-              "rectus-abdominis": 0,
-              "external-oblique": 0,
-              "internal-oblique": 0,
-              "transversus-abdominis": 0
+              "rectus-abdominis": 0.4,
+              "external-oblique": 0.4,
+              "internal-oblique": 0.4
             }
           },
           {
             "phase": "end",
             "joints": {
-              "trunk": {
+              "shoulder.l": {
+                "flexion": 165
+              },
+              "elbow.l": {
                 "flexion": 0
               },
               "hip.l": {
                 "flexion": 90
               },
-              "hip.r": {
-                "flexion": 20
-              },
               "knee.l": {
                 "flexion": 90
               },
+              "ankle.l": {
+                "dorsiflexion": -10
+              },
+              "shoulder.r": {
+                "flexion": 90
+              },
+              "elbow.r": {
+                "flexion": 0
+              },
+              "hip.r": {
+                "flexion": 20
+              },
               "knee.r": {
-                "flexion": 10
+                "flexion": 5
+              },
+              "ankle.r": {
+                "dorsiflexion": -10
               }
             },
             "contract": {
-              "rectus-abdominis": 0,
-              "external-oblique": 0,
-              "internal-oblique": 0,
-              "transversus-abdominis": 0,
-              "psoas-major": 0.2
+              "rectus-abdominis": 0.8,
+              "external-oblique": 0.8,
+              "internal-oblique": 0.8
             }
           }
         ],
@@ -375,7 +412,11 @@
           0.5,
           2,
           0.5
-        ]
+        ],
+        "camera": {
+          "azimuth": 90,
+          "elevation": 14
+        }
       },
       "sources": [
         "M1",
@@ -410,8 +451,8 @@
         "erector-spinae-lumbar"
       ],
       "setup": {
-        "en": "Use a non-slip mat. Learn with the knees supported if the full position is difficult. The model lies in the exercise position with its arms at its sides; the drawing shows what the arms do.",
-        "zh": "用防滑垫。完整姿势较难时，先让膝盖着地。模型摆出动作体位，手臂仍放在身体两侧；手臂怎么做看示意图。"
+        "en": "Use a non-slip mat. Learn with the knees supported if the full position is difficult.",
+        "zh": "用防滑垫。完整姿势较难时，先让膝盖着地。"
       },
       "steps": [
         {
@@ -499,7 +540,7 @@
       "motion": {
         "root": {
           "rotation": [
-            80,
+            84,
             0,
             0
           ]
@@ -508,69 +549,71 @@
           "kind": "floor",
           "at": [
             0,
-            -0.355,
-            0
+            0,
+            -0.45
           ]
         },
+        "contacts": [
+          "hands",
+          "feet"
+        ],
         "keys": [
           {
             "phase": "start",
             "joints": {
-              "trunk": {
-                "flexion": 0
+              "shoulder.l": {
+                "flexion": 84,
+                "abduction": 5,
+                "internal-rotation": 10
+              },
+              "elbow.l": {
+                "flexion": 80
+              },
+              "hand.l": {
+                "flexion": -30
+              },
+              "ankle.l": {
+                "dorsiflexion": -15
               },
               "hip.l": {
                 "flexion": 0
               },
-              "hip.r": {
-                "flexion": 0
-              },
               "knee.l": {
                 "flexion": 0
-              },
-              "knee.r": {
-                "flexion": 0
               }
-            },
-            "contract": {
-              "rectus-abdominis": 0,
-              "external-oblique": 0,
-              "internal-oblique": 0,
-              "transversus-abdominis": 0
             }
           },
           {
             "phase": "end",
             "joints": {
-              "trunk": {
-                "flexion": 0
+              "shoulder.l": {
+                "flexion": 84,
+                "abduction": 5,
+                "internal-rotation": 10
+              },
+              "elbow.l": {
+                "flexion": 80
+              },
+              "hand.l": {
+                "flexion": -30
+              },
+              "ankle.l": {
+                "dorsiflexion": -15
               },
               "hip.l": {
                 "flexion": 0
               },
-              "hip.r": {
-                "flexion": 0
-              },
               "knee.l": {
                 "flexion": 0
-              },
-              "knee.r": {
-                "flexion": 0
               }
-            },
-            "contract": {
-              "rectus-abdominis": 0,
-              "external-oblique": 0,
-              "internal-oblique": 0,
-              "transversus-abdominis": 0
             }
           }
         ],
         "tempo": [
           2,
-          0.5,
+          1,
           2,
-          0.5
+          1
         ]
       },
       "sources": [
@@ -605,8 +648,8 @@
         "multifidus-lumborum"
       ],
       "setup": {
-        "en": "Lie on the right side on a non-slip mat. Resist side bending and rolling; begin with bent-knee support if the straight-leg version is too demanding. The model lies in the exercise position with its arms at its sides; the drawing shows what the arms do.",
-        "zh": "在防滑垫上右侧卧，抵抗侧弯和翻转；双腿伸直较难时，先用屈膝支撑。模型摆出动作体位，手臂仍放在身体两侧；手臂怎么做看示意图。"
+        "en": "Lie on the right side on a non-slip mat. Resist side bending and rolling; begin with bent-knee support if the straight-leg version is too demanding.",
+        "zh": "在防滑垫上右侧卧，抵抗侧弯和翻转；双腿伸直较难时，先用屈膝支撑。"
       },
       "steps": [
         {
@@ -698,71 +741,115 @@
         "equipment": {
           "kind": "floor",
           "at": [
-            0.15,
-            -0.4,
+            0,
+            -0.38,
             0
           ],
           "turn": 90
         },
+        "contacts": [
+          "hands",
+          "feet"
+        ],
         "keys": [
           {
             "phase": "start",
             "joints": {
-              "trunk": {
+              "shoulder.r": {
+                "abduction": 72,
                 "flexion": 0
+              },
+              "elbow.r": {
+                "flexion": 80
+              },
+              "forearm.r": {
+                "pronation": 0
+              },
+              "hand.r": {
+                "flexion": -35,
+                "abduction": 0
+              },
+              "shoulder.l": {
+                "abduction": 50,
+                "extension": 20,
+                "internal-rotation": 90
+              },
+              "elbow.l": {
+                "flexion": 87
               },
               "hip.l": {
-                "flexion": 0
-              },
-              "hip.r": {
-                "flexion": 0
+                "flexion": 8,
+                "adduction": 4
               },
               "knee.l": {
                 "flexion": 0
               },
+              "ankle.l": {
+                "dorsiflexion": 0
+              },
+              "hip.r": {
+                "flexion": 0
+              },
               "knee.r": {
                 "flexion": 0
+              },
+              "ankle.r": {
+                "dorsiflexion": 0
               }
-            },
-            "contract": {
-              "external-oblique": 0,
-              "internal-oblique": 0,
-              "quadratus-lumborum": 0,
-              "transversus-abdominis": 0
             }
           },
           {
             "phase": "end",
             "joints": {
-              "trunk": {
+              "shoulder.r": {
+                "abduction": 72,
                 "flexion": 0
+              },
+              "elbow.r": {
+                "flexion": 80
+              },
+              "forearm.r": {
+                "pronation": 0
+              },
+              "hand.r": {
+                "flexion": -35,
+                "abduction": 0
+              },
+              "shoulder.l": {
+                "abduction": 50,
+                "extension": 20,
+                "internal-rotation": 90
+              },
+              "elbow.l": {
+                "flexion": 87
               },
               "hip.l": {
-                "flexion": 0
-              },
-              "hip.r": {
-                "flexion": 0
+                "flexion": 8,
+                "adduction": 4
               },
               "knee.l": {
                 "flexion": 0
               },
+              "ankle.l": {
+                "dorsiflexion": 0
+              },
+              "hip.r": {
+                "flexion": 0
+              },
               "knee.r": {
                 "flexion": 0
+              },
+              "ankle.r": {
+                "dorsiflexion": 0
               }
-            },
-            "contract": {
-              "external-oblique": 0,
-              "internal-oblique": 0,
-              "quadratus-lumborum": 0,
-              "transversus-abdominis": 0
             }
           }
         ],
         "tempo": [
           2,
-          0.5,
+          1,
           2,
-          0.5
+          1
         ]
       },
       "sources": [
@@ -798,8 +885,8 @@
         "quadratus-lumborum"
       ],
       "setup": {
-        "en": "Use a mat with space to reach forwards and backwards. Practise moving a hand or a leg alone before lifting an opposite pair if balance is difficult. The model lies in the exercise position with its arms at its sides; the drawing shows what the arms do.",
-        "zh": "在垫上留出前后伸展空间。平衡较难时，先只动一只手或一条腿，再尝试对侧肢体一起抬起。模型摆出动作体位，手臂仍放在身体两侧；手臂怎么做看示意图。"
+        "en": "Use a mat with space to reach forwards and backwards. Practise moving a hand or a leg alone before lifting an opposite pair if balance is difficult.",
+        "zh": "在垫上留出前后伸展空间。平衡较难时，先只动一只手或一条腿，再尝试对侧肢体一起抬起。"
       },
       "steps": [
         {
@@ -883,7 +970,7 @@
       "motion": {
         "root": {
           "rotation": [
-            90,
+            78,
             0,
             0
           ]
@@ -892,78 +979,114 @@
           "kind": "floor",
           "at": [
             0,
-            -0.52,
+            -0.545,
             0
           ]
         },
+        "contacts": [
+          "feet",
+          "hands"
+        ],
+        "feet": "left",
         "keys": [
           {
             "phase": "start",
             "joints": {
-              "trunk": {
+              "shoulder.l": {
+                "flexion": 78
+              },
+              "elbow.l": {
                 "flexion": 0
               },
-              "hip.l": {
-                "flexion": 90
+              "hand.l": {
+                "extension": 85
               },
-              "hip.r": {
-                "flexion": 90
+              "forearm.l": {
+                "pronation": 0
+              },
+              "hip.l": {
+                "flexion": 78
               },
               "knee.l": {
                 "flexion": 90
               },
+              "ankle.l": {
+                "dorsiflexion": -40
+              },
+              "shoulder.r": {
+                "flexion": 78
+              },
+              "elbow.r": {
+                "flexion": 0
+              },
+              "hand.r": {
+                "extension": 85
+              },
+              "forearm.r": {
+                "pronation": 0
+              },
+              "hip.r": {
+                "flexion": 78
+              },
               "knee.r": {
                 "flexion": 90
               },
-              "ankle.l": {
-                "dorsiflexion": -60
-              },
               "ankle.r": {
-                "dorsiflexion": -60
+                "dorsiflexion": -40
               }
-            },
-            "contract": {
-              "multifidus-lumborum": 0,
-              "erector-spinae-lumbar": 0,
-              "transversus-abdominis": 0
             }
           },
           {
             "phase": "end",
             "joints": {
-              "trunk": {
+              "shoulder.l": {
+                "flexion": 168
+              },
+              "elbow.l": {
                 "flexion": 0
+              },
+              "hand.l": {
+                "flexion": 0
+              },
+              "forearm.l": {
+                "pronation": 0
               },
               "hip.l": {
-                "flexion": 90
-              },
-              "hip.r": {
-                "flexion": 0
+                "flexion": 78
               },
               "knee.l": {
                 "flexion": 90
               },
+              "ankle.l": {
+                "dorsiflexion": -40
+              },
+              "shoulder.r": {
+                "flexion": 78
+              },
+              "elbow.r": {
+                "flexion": 0
+              },
+              "hand.r": {
+                "extension": 85
+              },
+              "forearm.r": {
+                "pronation": 0
+              },
+              "hip.r": {
+                "extension": 12
+              },
               "knee.r": {
                 "flexion": 0
               },
-              "ankle.l": {
-                "dorsiflexion": -60
-              },
               "ankle.r": {
-                "dorsiflexion": -60
+                "dorsiflexion": -30
               }
-            },
-            "contract": {
-              "multifidus-lumborum": 0,
-              "erector-spinae-lumbar": 0,
-              "transversus-abdominis": 0,
-              "gluteus-maximus": 0.3
             }
           }
         ],
         "tempo": [
           2,
-          0.5,
+          1,
           2,
           0.5
         ]
@@ -1003,8 +1126,8 @@
         "serratus-anterior"
       ],
       "setup": {
-        "en": "Use a secure overhead bar and a stable step for getting on and off. Learn supported standing knee raises first; do not start here if an overhead hang is painful or unstable. The model hangs without the bar or arms overhead; the drawing shows the complete exercise.",
-        "zh": "用牢固的单杠和稳固的上下台阶。先学扶稳站姿抬膝；悬垂会痛或撑不稳时，不从这个动作开始。模型不画单杠，手臂也没有举过头；完整动作看示意图。"
+        "en": "Use a secure overhead bar and a stable step for getting on and off. Learn supported standing knee raises first; do not start here if an overhead hang is painful or unstable.",
+        "zh": "用牢固的单杠和稳固的上下台阶。先学扶稳站姿抬膝；悬垂会痛或撑不稳时，不从这个动作开始。"
       },
       "steps": [
         {
@@ -1086,55 +1209,62 @@
       "evidence": [],
       "sketch": "hanging-knee-raise",
       "motion": {
-        "root": {
-          "rotation": [
-            0,
-            0,
-            0
-          ]
+        "equipment": {
+          "kind": "pull-up-bar",
+          "grip": "pronated",
+          "width": 0.45
         },
+        "contacts": [
+          "hands"
+        ],
         "feet": "free",
         "keys": [
           {
             "phase": "start",
             "joints": {
-              "trunk": {
-                "flexion": 0,
-                "lateral-flexion": 0,
-                "rotation": 0
+              "shoulder.l": {
+                "flexion": 172,
+                "abduction": -4
+              },
+              "elbow.l": {
+                "flexion": 0
               },
               "hip.l": {
                 "flexion": 0
               },
-              "hip.r": {
+              "knee.l": {
+                "flexion": 5
+              },
+              "ankle.l": {
+                "dorsiflexion": -25
+              },
+              "trunk": {
                 "flexion": 0
               }
-            },
-            "contract": {
-              "psoas-major": 0,
-              "iliacus": 0,
-              "rectus-abdominis": 0
             }
           },
           {
             "phase": "end",
             "joints": {
-              "trunk": {
-                "flexion": 10,
-                "lateral-flexion": 0,
-                "rotation": 0
+              "shoulder.l": {
+                "flexion": 172,
+                "abduction": -4
+              },
+              "elbow.l": {
+                "flexion": 0
               },
               "hip.l": {
-                "flexion": 100
+                "flexion": 95
               },
-              "hip.r": {
-                "flexion": 100
+              "knee.l": {
+                "flexion": 95
+              },
+              "ankle.l": {
+                "dorsiflexion": -20
+              },
+              "trunk": {
+                "flexion": 8
               }
-            },
-            "contract": {
-              "rectus-abdominis": 0.4,
-              "psoas-major": 0.5,
-              "iliacus": 0.5
             }
           }
         ],
@@ -1177,8 +1307,8 @@
         "quadratus-lumborum"
       ],
       "setup": {
-        "en": "Stand beside a fixed support on a non-slip floor. Use a light fingertip touch for balance, with room in front of the knee. The model stands without the equipment; the drawing shows the complete exercise.",
-        "zh": "在防滑地面站到固定支撑物旁，用指尖轻扶保持平衡，膝前留出空间。模型直立、不画器械；完整动作看示意图。"
+        "en": "Stand beside a fixed support on a non-slip floor. Use a light fingertip touch for balance, with room in front of the knee. The model rests both hands on two low rails.",
+        "zh": "在防滑地面站到固定支撑物旁，用指尖轻扶保持平衡，膝前留出空间。模型双手扶在两根低横杆上。"
       },
       "steps": [
         {
@@ -1260,60 +1390,77 @@
       "evidence": [],
       "sketch": "standing-knee-raise",
       "motion": {
-        "root": {
-          "rotation": [
-            0,
-            0,
-            0
-          ]
+        "equipment": {
+          "kind": "dip-bars",
+          "height": 0.83
         },
+        "contacts": [
+          "feet"
+        ],
         "feet": "right",
         "keys": [
           {
             "phase": "start",
             "joints": {
-              "trunk": {
-                "flexion": 0,
-                "lateral-flexion": 0,
-                "rotation": 0
+              "shoulder.l": {
+                "flexion": 8,
+                "abduction": 8
+              },
+              "elbow.l": {
+                "flexion": 10
+              },
+              "hand.l": {
+                "extension": 40
               },
               "hip.l": {
                 "flexion": 0
               },
+              "knee.l": {
+                "flexion": 3
+              },
               "hip.r": {
                 "flexion": 0
+              },
+              "knee.r": {
+                "flexion": 5
               }
-            },
-            "contract": {
-              "psoas-major": 0,
-              "iliacus": 0
             }
           },
           {
             "phase": "end",
             "joints": {
-              "trunk": {
-                "flexion": 0,
-                "lateral-flexion": 0,
-                "rotation": 0
+              "shoulder.l": {
+                "flexion": 8,
+                "abduction": 8
+              },
+              "elbow.l": {
+                "flexion": 10
+              },
+              "hand.l": {
+                "extension": 40
               },
               "hip.l": {
-                "flexion": 80
+                "flexion": 90
+              },
+              "knee.l": {
+                "flexion": 95
               },
               "hip.r": {
                 "flexion": 0
+              },
+              "knee.r": {
+                "flexion": 5
+              },
+              "ankle.l": {
+                "dorsiflexion": -10
               }
-            },
-            "contract": {
-              "psoas-major": 0.6,
-              "iliacus": 0.6
             }
           }
         ],
         "tempo": [
-          2,
-          0.5,
-          2,
+          1.5,
+          1,
+          1.5,
           0.5
         ]
       },
@@ -1348,8 +1495,8 @@
         "quadratus-lumborum"
       ],
       "setup": {
-        "en": "Set a single pulley and handle at chest height with a light load. Stand with your right side facing the column; the cable should pull sideways rather than up or down. The model stands without the equipment; the drawing shows the complete exercise.",
-        "zh": "单侧滑轮和把手调到胸高，选轻重量。右侧朝向绳索柱，绳索应横向拉，不往上或往下拉。模型直立、不画器械；完整动作看示意图。"
+        "en": "Set a single pulley and handle at chest height with a light load. Stand with your right side facing the column; the cable should pull sideways rather than up or down.",
+        "zh": "单侧滑轮和把手调到胸高，选轻重量。右侧朝向绳索柱，绳索应横向拉，不往上或往下拉。"
       },
       "steps": [
         {
@@ -1435,61 +1582,77 @@
       "evidence": [],
       "sketch": "cable-pallof-press",
       "motion": {
-        "root": {
-          "rotation": [
-            0,
-            0,
-            0
+        "equipment": {
+          "kind": "cable",
+          "hand": "both",
+          "grip": "neutral",
+          "at": [
+            -0.8,
+            0.35,
+            0.45
           ]
         },
+        "contacts": [
+          "feet"
+        ],
         "keys": [
           {
             "phase": "start",
             "joints": {
-              "trunk": {
-                "flexion": 0,
-                "rotation": 0,
-                "lateral-flexion": 0
+              "shoulder.l": {
+                "flexion": 25,
+                "abduction": 15,
+                "internal-rotation": 45
+              },
+              "elbow.l": {
+                "flexion": 115
               },
               "hip.l": {
-                "flexion": 0
+                "abduction": 10
               },
-              "hip.r": {
-                "flexion": 0
+              "knee.l": {
+                "flexion": 10
+              },
+              "ankle.l": {
+                "dorsiflexion": 5
               }
             },
             "contract": {
-              "external-oblique": 0,
-              "internal-oblique": 0,
-              "transversus-abdominis": 0
+              "external-oblique": 0.4,
+              "internal-oblique": 0.4
             }
           },
           {
             "phase": "end",
             "joints": {
-              "trunk": {
-                "flexion": 0,
-                "rotation": 0,
-                "lateral-flexion": 0
+              "shoulder.l": {
+                "flexion": 85,
+                "abduction": -20,
+                "internal-rotation": 5
+              },
+              "elbow.l": {
+                "flexion": 5
               },
               "hip.l": {
-                "flexion": 0
+                "abduction": 10
               },
-              "hip.r": {
-                "flexion": 0
+              "knee.l": {
+                "flexion": 10
+              },
+              "ankle.l": {
+                "dorsiflexion": 5
               }
             },
             "contract": {
-              "external-oblique": 0,
-              "internal-oblique": 0,
-              "transversus-abdominis": 0
+              "external-oblique": 0.8,
+              "internal-oblique": 0.8
             }
           }
         ],
         "tempo": [
-          2,
-          0.5,
-          2,
+          1.5,
+          1.5,
+          1.5,
           0.5
         ]
       },
@@ -1526,8 +1689,8 @@
         "multifidus-lumborum"
       ],
       "setup": {
-        "en": "Clear a level walking path. Set a light dumbbell on a stable raised support so you can pick it up and put it down without rushing or twisting. The model stands without the equipment; the drawing shows the complete exercise.",
-        "zh": "清出平坦行走路线。轻哑铃放在稳固高台上，取放时不用急着弯身或扭腰。模型直立、不画器械；完整动作看示意图。"
+        "en": "Clear a level walking path. Set a light dumbbell on a stable raised support so you can pick it up and put it down without rushing or twisting.",
+        "zh": "清出平坦行走路线。轻哑铃放在稳固高台上，取放时不用急着弯身或扭腰。"
       },
       "steps": [
         {
@@ -1609,64 +1772,97 @@
       "evidence": [],
       "sketch": "dumbbell-suitcase-carry",
       "motion": {
-        "root": {
-          "rotation": [
-            0,
-            0,
-            0
-          ]
+        "equipment": {
+          "kind": "dumbbell",
+          "grip": "neutral",
+          "hand": "right"
         },
+        "contacts": [
+          "seat"
+        ],
         "keys": [
           {
             "phase": "start",
             "joints": {
-              "trunk": {
-                "flexion": 0,
-                "rotation": 0,
-                "lateral-flexion": 0
-              },
               "hip.l": {
-                "flexion": 0
+                "flexion": 24
+              },
+              "knee.l": {
+                "flexion": 4
+              },
+              "ankle.l": {
+                "dorsiflexion": 4
               },
               "hip.r": {
-                "flexion": 0
+                "extension": 14
+              },
+              "knee.r": {
+                "flexion": 10
+              },
+              "ankle.r": {
+                "plantarflexion": 12
+              },
+              "shoulder.r": {
+                "abduction": 6
+              },
+              "elbow.r": {
+                "flexion": 3
+              },
+              "shoulder.l": {
+                "extension": 14
+              },
+              "elbow.l": {
+                "flexion": 10
               }
             },
             "contract": {
-              "external-oblique": 0,
-              "internal-oblique": 0,
-              "quadratus-lumborum": 0,
-              "erector-spinae-lumbar": 0
+              "latissimus-dorsi": 0.4
             }
           },
           {
             "phase": "end",
             "joints": {
-              "trunk": {
-                "flexion": 0,
-                "rotation": 0,
-                "lateral-flexion": 0
+              "hip.r": {
+                "flexion": 24
+              },
+              "knee.r": {
+                "flexion": 4
+              },
+              "ankle.r": {
+                "dorsiflexion": 4
               },
               "hip.l": {
-                "flexion": 0
+                "extension": 14
               },
-              "hip.r": {
-                "flexion": 0
+              "knee.l": {
+                "flexion": 10
+              },
+              "ankle.l": {
+                "plantarflexion": 12
+              },
+              "shoulder.r": {
+                "abduction": 6
+              },
+              "elbow.r": {
+                "flexion": 3
+              },
+              "shoulder.l": {
+                "flexion": 14
+              },
+              "elbow.l": {
+                "flexion": 15
               }
             },
             "contract": {
-              "external-oblique": 0,
-              "internal-oblique": 0,
-              "quadratus-lumborum": 0,
-              "erector-spinae-lumbar": 0
+              "latissimus-dorsi": 0.4
             }
           }
         ],
         "tempo": [
-          2,
-          0.5,
-          2,
-          0.5
+          0.6,
+          0,
+          0.6,
+          0
         ]
       },
       "sources": [

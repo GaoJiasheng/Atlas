@@ -154,9 +154,12 @@
             "at": [
               0,
               -0.205,
-              0.2
+              0.02
             ]
           }
+        ],
+        "contacts": [
+          "seat"
         ],
         "keys": [
           {
@@ -168,12 +171,21 @@
               },
               "elbow.l": {
                 "flexion": 5
+              },
+              "hip.l": {
+                "extension": 16,
+                "abduction": 18
+              },
+              "knee.l": {
+                "flexion": 80
+              },
+              "ankle.l": {
+                "dorsiflexion": 6
               }
             },
             "contract": {
-              "pectoralis-major": 0.65,
-              "deltoid-anterior": 0.5,
-              "triceps-brachii": 0.6
+              "pectoralis-major-sternocostal": 1,
+              "triceps-brachii": 1
             }
           },
           {
@@ -186,12 +198,21 @@
               },
               "elbow.l": {
                 "flexion": 110
+              },
+              "hip.l": {
+                "extension": 16,
+                "abduction": 18
+              },
+              "knee.l": {
+                "flexion": 80
+              },
+              "ankle.l": {
+                "dorsiflexion": 6
               }
             },
             "contract": {
-              "pectoralis-major": 0.1,
-              "deltoid-anterior": 0.2,
-              "triceps-brachii": 0.1
+              "pectoralis-major-sternocostal": 0,
+              "triceps-brachii": 0
             }
           }
         ],
@@ -358,14 +379,17 @@
             "grip": "pronated"
           },
           {
-            "kind": "bench",
-            "incline": 30,
+            "kind": "incline-bench",
+            "angle": 30,
             "at": [
               0,
               -0.45,
               0.22
             ]
           }
+        ],
+        "contacts": [
+          "seat"
         ],
         "keys": [
           {
@@ -377,11 +401,21 @@
               },
               "elbow.l": {
                 "flexion": 95
+              },
+              "hip.l": {
+                "flexion": 10,
+                "abduction": 12
+              },
+              "knee.l": {
+                "flexion": 72
+              },
+              "ankle.l": {
+                "dorsiflexion": 2
               }
             },
             "contract": {
-              "pectoralis-major-clavicular": 0.15,
-              "pectoralis-major-sternocostal": 0.1
+              "pectoralis-major-sternocostal": 0,
+              "triceps-brachii": 0
             }
           },
           {
@@ -393,13 +427,21 @@
               },
               "elbow.l": {
                 "flexion": 5
+              },
+              "hip.l": {
+                "flexion": 10,
+                "abduction": 12
+              },
+              "knee.l": {
+                "flexion": 72
+              },
+              "ankle.l": {
+                "dorsiflexion": 2
               }
             },
             "contract": {
-              "pectoralis-major-clavicular": 0.8,
-              "pectoralis-major-sternocostal": 0.6,
-              "deltoid-anterior": 0.7,
-              "triceps-brachii": 0.6
+              "pectoralis-major-sternocostal": 0.8,
+              "triceps-brachii": 1
             }
           }
         ],
@@ -547,54 +589,11 @@
       "motion": {
         "root": {
           "rotation": [
-            70,
+            73,
             0,
             0
           ]
         },
-        "keys": [
-          {
-            "phase": "start",
-            "joints": {
-              "shoulder.l": {
-                "flexion": 70,
-                "abduction": 12
-              },
-              "elbow.l": {
-                "flexion": 5
-              }
-            },
-            "contract": {
-              "pectoralis-major": 0.6,
-              "triceps-brachii": 0.6,
-              "serratus-anterior": 0.4
-            }
-          },
-          {
-            "phase": "end",
-            "joints": {
-              "shoulder.l": {
-                "extension": 20,
-                "abduction": 55,
-                "horizontal-abduction": 15
-              },
-              "elbow.l": {
-                "flexion": 105
-              }
-            },
-            "contract": {
-              "pectoralis-major": 0.1,
-              "triceps-brachii": 0.1,
-              "serratus-anterior": 0.1
-            }
-          }
-        ],
-        "tempo": [
-          2,
-          0.3,
-          1.2,
-          0.5
-        ],
         "equipment": [
           {
             "kind": "floor",
@@ -605,7 +604,64 @@
             ]
           }
         ],
-        "contacts": ["hands", "feet"]
+        "contacts": [
+          "hands",
+          "feet"
+        ],
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "shoulder.l": {
+                "flexion": 70,
+                "abduction": 12
+              },
+              "elbow.l": {
+                "flexion": 5
+              },
+              "ankle.l": {
+                "dorsiflexion": -10
+              },
+              "hand.l": {
+                "extension": 85
+              }
+            },
+            "contract": {
+              "pectoralis-major-sternocostal": 1,
+              "pectoralis-major-abdominal": 0.5,
+              "triceps-brachii": 1
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "shoulder.l": {
+                "extension": 12,
+                "abduction": 50
+              },
+              "elbow.l": {
+                "flexion": 95
+              },
+              "ankle.l": {
+                "dorsiflexion": -10
+              },
+              "hand.l": {
+                "extension": 85
+              }
+            },
+            "contract": {
+              "pectoralis-major-sternocostal": 0,
+              "pectoralis-major-abdominal": 0,
+              "triceps-brachii": 0
+            }
+          }
+        ],
+        "tempo": [
+          2,
+          0.3,
+          1.2,
+          0.5
+        ]
       },
       "sources": [
         "M17",
@@ -735,20 +791,57 @@
       ],
       "sketch": "machine-chest-press",
       "motion": {
+        "root": {
+          "rotation": [
+            -8,
+            0,
+            0
+          ]
+        },
+        "equipment": [
+          {
+            "kind": "machine-seat",
+            "at": [
+              0,
+              -0.585,
+              0
+            ],
+            "height": 0.35
+          },
+          {
+            "kind": "cable-handle",
+            "grip": "neutral"
+          }
+        ],
+        "contacts": [
+          "seat"
+        ],
         "keys": [
           {
             "phase": "start",
             "joints": {
               "shoulder.l": {
-                "abduction": 60,
-                "horizontal-abduction": 10
+                "extension": 15,
+                "abduction": 40
               },
               "elbow.l": {
-                "flexion": 95
+                "flexion": 110
+              },
+              "hip.l": {
+                "flexion": 86,
+                "abduction": 8
+              },
+              "knee.l": {
+                "flexion": 86
+              },
+              "ankle.l": {
+                "dorsiflexion": -4
               }
             },
             "contract": {
-              "pectoralis-major": 0.1
+              "pectoralis-major-sternocostal": 0,
+              "pectoralis-major-abdominal": 0,
+              "triceps-brachii": 0
             }
           },
           {
@@ -756,16 +849,26 @@
             "joints": {
               "shoulder.l": {
                 "flexion": 80,
-                "abduction": 18
+                "abduction": 15
               },
               "elbow.l": {
                 "flexion": 8
+              },
+              "hip.l": {
+                "flexion": 86,
+                "abduction": 8
+              },
+              "knee.l": {
+                "flexion": 86
+              },
+              "ankle.l": {
+                "dorsiflexion": -4
               }
             },
             "contract": {
-              "pectoralis-major": 0.7,
-              "deltoid-anterior": 0.6,
-              "triceps-brachii": 0.6
+              "pectoralis-major-sternocostal": 1,
+              "pectoralis-major-abdominal": 0.5,
+              "triceps-brachii": 1
             }
           }
         ],
@@ -903,57 +1006,11 @@
       "motion": {
         "root": {
           "rotation": [
-            70,
+            73,
             0,
             0
           ]
         },
-        "keys": [
-          {
-            "phase": "start",
-            "joints": {
-              "shoulder.l": {
-                "flexion": 70,
-                "abduction": 10
-              },
-              "elbow.l": {
-                "flexion": 5
-              },
-              "scapula.l": {
-                "retraction": 4
-              }
-            },
-            "contract": {
-              "serratus-anterior": 0.15,
-              "pectoralis-minor": 0.1
-            }
-          },
-          {
-            "phase": "end",
-            "joints": {
-              "shoulder.l": {
-                "flexion": 72,
-                "abduction": 10
-              },
-              "elbow.l": {
-                "flexion": 3
-              },
-              "scapula.l": {
-                "protraction": 12
-              }
-            },
-            "contract": {
-              "serratus-anterior": 0.95,
-              "pectoralis-minor": 0.6
-            }
-          }
-        ],
-        "tempo": [
-          1,
-          0.8,
-          1.2,
-          0.5
-        ],
         "equipment": [
           {
             "kind": "floor",
@@ -963,6 +1020,68 @@
               -0.45
             ]
           }
+        ],
+        "contacts": [
+          "hands",
+          "feet"
+        ],
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "shoulder.l": {
+                "flexion": 70,
+                "abduction": 12
+              },
+              "elbow.l": {
+                "flexion": 5
+              },
+              "scapula.l": {
+                "protraction": -4
+              },
+              "ankle.l": {
+                "dorsiflexion": -10
+              },
+              "hand.l": {
+                "extension": 85
+              }
+            },
+            "contract": {
+              "pectoralis-major": 0.3,
+              "triceps-brachii": 0.3
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "shoulder.l": {
+                "flexion": 70,
+                "abduction": 33
+              },
+              "elbow.l": {
+                "flexion": 5
+              },
+              "scapula.l": {
+                "protraction": 18
+              },
+              "ankle.l": {
+                "dorsiflexion": -10
+              },
+              "hand.l": {
+                "extension": 85
+              }
+            },
+            "contract": {
+              "pectoralis-major": 0.3,
+              "triceps-brachii": 0.3
+            }
+          }
+        ],
+        "tempo": [
+          1,
+          0.8,
+          1.2,
+          0.5
         ]
       },
       "sources": [

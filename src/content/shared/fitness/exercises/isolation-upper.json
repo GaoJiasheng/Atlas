@@ -127,9 +127,12 @@
             "at": [
               0,
               -0.205,
-              0.2
+              0.02
             ]
           }
+        ],
+        "contacts": [
+          "seat"
         ],
         "keys": [
           {
@@ -141,10 +144,21 @@
               },
               "elbow.l": {
                 "flexion": 20
+              },
+              "hip.l": {
+                "extension": 16,
+                "abduction": 18
+              },
+              "knee.l": {
+                "flexion": 80
+              },
+              "ankle.l": {
+                "dorsiflexion": 6
               }
             },
             "contract": {
-              "pectoralis-major": 0.1
+              "pectoralis-major-sternocostal": 0,
+              "pectoralis-major-abdominal": 0
             }
           },
           {
@@ -156,11 +170,21 @@
               },
               "elbow.l": {
                 "flexion": 20
+              },
+              "hip.l": {
+                "extension": 16,
+                "abduction": 18
+              },
+              "knee.l": {
+                "flexion": 80
+              },
+              "ankle.l": {
+                "dorsiflexion": 6
               }
             },
             "contract": {
-              "pectoralis-major": 0.8,
-              "deltoid-anterior": 0.4
+              "pectoralis-major-sternocostal": 1,
+              "pectoralis-major-abdominal": 0.5
             }
           }
         ],
@@ -289,10 +313,30 @@
       "sketch": "cable-fly",
       "motion": {
         "equipment": [
-          { "kind": "cable", "hand": "left", "grip": "neutral", "at": [0.85, 0.55, -0.35] },
-          { "kind": "cable", "hand": "right", "grip": "neutral", "at": [-0.85, 0.55, -0.35] }
+          {
+            "kind": "cable",
+            "hand": "left",
+            "grip": "neutral",
+            "at": [
+              0.85,
+              0.55,
+              -0.35
+            ]
+          },
+          {
+            "kind": "cable",
+            "hand": "right",
+            "grip": "neutral",
+            "at": [
+              -0.85,
+              0.55,
+              -0.35
+            ]
+          }
         ],
-        "contacts": ["feet"],
+        "contacts": [
+          "feet"
+        ],
         "keys": [
           {
             "phase": "start",
@@ -303,10 +347,32 @@
               },
               "elbow.l": {
                 "flexion": 15
+              },
+              "trunk": {
+                "flexion": 10
+              },
+              "hip.l": {
+                "flexion": 32
+              },
+              "knee.l": {
+                "flexion": 22
+              },
+              "ankle.l": {
+                "dorsiflexion": 10
+              },
+              "hip.r": {
+                "flexion": 2
+              },
+              "knee.r": {
+                "flexion": 6
+              },
+              "ankle.r": {
+                "dorsiflexion": 0
               }
             },
             "contract": {
-              "pectoralis-major": 0.1
+              "pectoralis-major-sternocostal": 0,
+              "pectoralis-major-abdominal": 0
             }
           },
           {
@@ -318,12 +384,32 @@
               },
               "elbow.l": {
                 "flexion": 15
+              },
+              "trunk": {
+                "flexion": 10
+              },
+              "hip.l": {
+                "flexion": 32
+              },
+              "knee.l": {
+                "flexion": 22
+              },
+              "ankle.l": {
+                "dorsiflexion": 10
+              },
+              "hip.r": {
+                "flexion": 2
+              },
+              "knee.r": {
+                "flexion": 6
+              },
+              "ankle.r": {
+                "dorsiflexion": 0
               }
             },
             "contract": {
-              "pectoralis-major-sternocostal": 0.85,
-              "pectoralis-major-abdominal": 0.85,
-              "pectoralis-major-clavicular": 0.4
+              "pectoralis-major-sternocostal": 1,
+              "pectoralis-major-abdominal": 0.9
             }
           }
         ],

@@ -130,6 +130,16 @@
             0
           ]
         },
+        "equipment": [
+          {
+            "kind": "dip-bars",
+            "height": 1.25
+          }
+        ],
+        "contacts": [
+          "hands"
+        ],
+        "feet": "free",
         "keys": [
           {
             "phase": "start",
@@ -140,12 +150,24 @@
               },
               "elbow.l": {
                 "flexion": 8
+              },
+              "hip.l": {
+                "flexion": 20
+              },
+              "knee.l": {
+                "flexion": 75
+              },
+              "ankle.l": {
+                "dorsiflexion": -20
+              },
+              "trunk": {
+                "flexion": 0
               }
             },
             "contract": {
-              "pectoralis-major-sternocostal": 0.6,
-              "pectoralis-major-abdominal": 0.6,
-              "triceps-brachii": 0.6
+              "pectoralis-major-sternocostal": 1,
+              "pectoralis-major-abdominal": 0.9,
+              "triceps-brachii": 1
             }
           },
           {
@@ -157,12 +179,24 @@
               },
               "elbow.l": {
                 "flexion": 80
+              },
+              "hip.l": {
+                "flexion": 35
+              },
+              "knee.l": {
+                "flexion": 75
+              },
+              "ankle.l": {
+                "dorsiflexion": -20
+              },
+              "trunk": {
+                "flexion": 15
               }
             },
             "contract": {
-              "pectoralis-major-sternocostal": 0.1,
-              "pectoralis-major-abdominal": 0.1,
-              "triceps-brachii": 0.1
+              "pectoralis-major-sternocostal": 0,
+              "pectoralis-major-abdominal": 0,
+              "triceps-brachii": 0
             }
           }
         ],
@@ -171,13 +205,7 @@
           0.3,
           1.2,
           0.5
-        ],
-        "equipment": [
-          {
-            "kind": "dip-bars"
-          }
-        ],
-        "contacts": ["hands"]
+        ]
       },
       "sources": [
         "M5",
