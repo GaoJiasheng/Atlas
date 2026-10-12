@@ -31,7 +31,11 @@ import {
 } from '../../lib/anatomy';
 
 /** Shared source refs (`M#`). */
-const refs = z.array(sharedSourceId).default([]);
+/** Source ids, each once (they key the source chips). */
+const refs = z
+  .array(sharedSourceId)
+  .default([])
+  .refine((ids) => new Set(ids).size === ids.length, { message: 'a source is cited twice in one list' });
 
 /* ------------------------------------------------------------------ */
 /* Muscles                                                             */
@@ -150,7 +154,10 @@ const EQUIPMENT_FIELDS: Record<EquipmentKind, readonly string[]> = {
   step: ['at', 'turn', 'height'],
   floor: ['at', 'turn'],
   wall: ['at', 'turn', 'height'],
-  post: ['at', 'height'],
+  post: ['at', 'height', 'hand'],
+  'back-extension': ['at', 'turn'],
+  rack: [],
+  'machine-frame': ['at', 'turn', 'height'],
 };
 
 export const equipmentSchema = z
@@ -159,7 +166,7 @@ export const equipmentSchema = z
     grip: z.enum(['pronated', 'supinated', 'neutral']).optional(),
     /** Grip width between the hands, metres (barbell, bars); for the record, the engine follows the hands. */
     width: z.number().positive().max(2).optional(),
-    /** Held pieces, `cable` and `band`: the hand that holds it (default both: one in each palm). */
+    /** Held pieces, `cable` and `band`: the hand that holds it (default both: one in each palm); a cable to an ankle: the hand on the column; `post`: the hand resting on its rail (it stands under that palm). */
     hand: z.enum(EQUIPMENT_HANDS).optional(),
     /** barbell: in the palms (default) or across the upper back (`back`: it rides on the trunk joint, `at` metres in the trunk's rest frame). */
     on: z.enum(['hands', 'back']).optional(),
@@ -174,10 +181,10 @@ export const equipmentSchema = z
     incline: z.number().min(0).max(90).optional(),
     /** incline-bench: back angle above the horizontal (default 30°); machine-seat: back pad recline from vertical (default 10°). */
     angle: z.number().min(0).max(90).optional(),
-    /** pull-up-bar: bar above the floor (default 2.3 m); dip-bars: bar tops (1.45 m); step: box height (0.2 m); machine-seat: seat top (0.45 m); wall: 2 m; post: 1.1 m. */
+    /** pull-up-bar: bar above the floor (default 2.3 m); dip-bars: bar tops (1.45 m); step: box height (0.2 m); machine-seat: seat top (0.45 m); wall: 2 m; post: 1.1 m; machine-frame: top beam (2.2 m). */
     height: z.number().positive().max(3).optional(),
-    /** cable: a D-handle in each holding hand (default) or a straight bar between the palms. */
-    handle: z.enum(['d-handle', 'bar']).optional(),
+    /** cable: a D-handle in each holding hand (default), a straight bar between the palms, or a `rope` (a grip in each palm, two strands to the cable's end). */
+    handle: z.enum(['d-handle', 'bar', 'rope']).optional(),
     /** band: what it pulls on (default the hands; `feet`: the balls of the feet); cable: an ankle cuff (`ankle.l` / `ankle.r`) instead of handles. */
     to: z.enum(['hands', 'feet', 'ankle.l', 'ankle.r']).optional(),
     /**
@@ -200,6 +207,8 @@ export const equipmentSchema = z
       ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['at'], message: `${e.kind} needs \`at\` (${e.kind === 'cable' ? 'the pulley' : 'the anchor'}, metres from the trunk joint)` });
     if (e.to !== undefined && (e.kind === 'band' ? e.to.startsWith('ankle') : e.kind === 'cable' && e.to === 'feet'))
       ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['to'], message: e.kind === 'band' ? 'band: `to` is hands or feet' : 'cable: `to` is hands or an ankle cuff (ankle.l / ankle.r)' });
+    if (e.kind === 'back-extension' && e.at === undefined)
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['at'], message: 'back-extension needs `at` (the top of the hip pad, metres from the trunk joint)' });
     if (e.kind === 'barbell' && e.on === 'back' && e.at === undefined)
       ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['at'], message: 'a barbell on the back needs `at` (metres from the trunk joint, in its rest frame)' });
   });
@@ -271,6 +280,9 @@ export const exerciseMotion = z
     const order = m.keys.map((k) => EXERCISE_KEY_PHASES.indexOf(k.phase));
     if (m.keys[0]?.phase !== 'start' || m.keys[m.keys.length - 1]?.phase !== 'end' || order.some((o, i) => i > 0 && o <= order[i - 1]!))
       ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['keys'], message: 'keys run start, (mid,) end' });
+    const kinds = equipmentList(m.equipment).map((e) => e.kind);
+    if (kinds.includes('rack') && !kinds.includes('barbell'))
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['equipment'], message: 'a rack holds a barbell: add the barbell (its J-hooks go where the first key holds the bar)' });
   });
 export type ExerciseMotion = z.output<typeof exerciseMotion>;
 

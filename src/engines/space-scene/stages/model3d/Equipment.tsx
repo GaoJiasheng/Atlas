@@ -12,23 +12,31 @@
  *    cable) run from a fixed point in the scene to the palms (or the feet),
  *    stretched every frame.
  *  - Free-standing pieces (bench, seat, step, floor, pull-up bar, dip bars,
- *    cable column and pulley) stand where the MotionDriver's placement puts
- *    them (`runtime.exercise`: the trunk joint, the held palms, the feet,
- *    the floor).
+ *    cable column and pulley, back-extension bench, rack, machine frame) stand
+ *    where the MotionDriver's placement puts them (`runtime.exercise`: the
+ *    trunk joint, the palms, the knees, the feet, the bar, the floor). Some
+ *    are shaped by that placement too (`Fit`: a rack's J-hooks at the bar, a
+ *    back-extension bench along the leg line, a seat's thigh pad behind the
+ *    knees, a post's rail under the resting palm): their geometry is rebuilt
+ *    when it changes (once per exercise).
+ *  - A cable's `rope` handle: a grip in each palm, two strands from the
+ *    cable's end (`ROPE.reach` from the palms toward the pulley) to the palms.
  *
  * Every piece is drawn in one neutral matte grey (soft highlights only on the
- * chamfers); with the mannequin they are solid (the floor half see-through) and
+ * chamfers); with the mannequin they are solid (the floor and the scenery —
+ * rack, machine frame — half see-through) and
  * drawn just before it; with the ghost outline the free-standing ones are
  * see-through. None casts a shadow. One draw call per piece, never picked or
  * labelled.
  */
 import { useEffect, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Matrix4, Quaternion, Vector3, type BufferGeometry, type Group, type Object3D } from 'three';
+import { Matrix4, Quaternion, Vector3, type BufferGeometry, type Group, type Mesh, type Object3D } from 'three';
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import type { EquipmentSpec } from '../../../../content/schema/fitness';
 import {
   BAND,
+  backExtensionShape,
   barbellShape,
   barYaw,
   benchShape,
@@ -42,10 +50,17 @@ import {
   kettlebellShape,
   LAT_BAR,
   lineShape,
+  machineFrameShape,
   machineSeatShape,
   placeFixed,
+  POST,
   postShape,
   pullUpBarShape,
+  rackShape,
+  rackYaw,
+  ROPE,
+  THIGH_PAD,
+  ropeGripShape,
   stepShape,
   straightBarShape,
   wallShape,
@@ -75,6 +90,9 @@ const _q = new Quaternion();
 /** See-through free-standing pieces with the ghost outline (the body reads through them). */
 const GHOST_OPACITY = 0.6;
 const FLOOR_OPACITY = { ghost: 0.25, solid: 0.5 } as const;
+/** Scenery (a rack, a machine's frame: nothing holds the body) stays see-through, so it never hides the muscles. */
+const SCENERY_OPACITY = { ghost: 0.3, solid: 0.45 } as const;
+const SCENERY: ReadonlySet<EquipmentSpec['kind']> = new Set(['rack', 'machine-frame']);
 /** Draw order with the mannequin: before it (Mannequin.tsx −1), so a bar in front of the body covers it. */
 const EQUIPMENT_RENDER_ORDER = -2;
 /** Cable diameter beside the wire figure (metres; LAT_BAR.cable otherwise). */
@@ -93,10 +111,15 @@ type Place =
   | { kind: 'fixed'; side: number }
   /** A cable's pulley wheel, at the trunk + `at`. */
   | { kind: 'pulley' }
-  /** A line from the pulley / anchor to a palm, the palms' midpoint, a foot's ball or an ankle (a cuff). */
-  | { kind: 'line'; to: 'l' | 'r' | 'mid' | 'foot-l' | 'foot-r' | 'ankle-l' | 'ankle-r' }
+  /** A line from the pulley / anchor to a palm, the palms' midpoint, a foot's ball, an ankle (a cuff) or a rope's end (`hook`). */
+  | { kind: 'line'; to: 'l' | 'r' | 'mid' | 'foot-l' | 'foot-r' | 'ankle-l' | 'ankle-r' | 'hook' }
+  /** A rope strand from the rope's end to a palm. */
+  | { kind: 'strand'; side: 'l' | 'r' }
   /** One held between both palms: on end (`vertical`) or along the arms (`both`: a pullover, a goblet). */
   | { kind: 'cupped' };
+
+/** A free-standing piece shaped by its placement (the rack's hook height, the back-extension bench's leg line): a key and the shape, or null (keep the current one). */
+type Fit = (ctx: PlaceContext, at: readonly number[], yaw: number, floor: number | null) => { key: string; shape: () => EquipmentShape } | null;
 
 interface Piece {
   place: Place;
@@ -104,7 +127,48 @@ interface Piece {
   geometry: BufferGeometry;
   /** Free-standing pieces only: opacity with the ghost outline / the mannequin. */
   see: boolean;
+  fit?: Fit;
+  /** The `fit` key the geometry was built for. */
+  key?: string;
 }
+
+/** The rack's J-hooks at the bar's height above the floor it stands on. */
+const rackFit: Fit = (ctx, at) => {
+  if (!ctx.bar) return null;
+  const hook = ctx.bar.at[1] - at[1]!;
+  return { key: hook.toFixed(3), shape: () => rackShape(hook) };
+};
+
+/** A machine seat's thigh pad over the thighs just behind the knees (the knees at the first key, in the seat's frame turned `yaw`°). */
+const seatFit = (spec: EquipmentSpec): Fit => (ctx, at, yaw) => {
+  const k = ctx.knees;
+  if (!k) return null;
+  const a = (-yaw * Math.PI) / 180;
+  const dx = k[0] - at[0]!;
+  const dz = k[2] - at[2]!;
+  const pad: [number, number] = [k[1] - at[1]! + THIGH_PAD.up, -Math.sin(a) * dx + Math.cos(a) * dz - THIGH_PAD.back];
+  return { key: `${pad[0].toFixed(3)},${pad[1].toFixed(3)}`, shape: () => machineSeatShape(spec.angle, heightOf(spec), pad) };
+};
+
+/** A post under a resting hand: its rail's top just under the palm at the first key. */
+const postFit = (hand: 'left' | 'right'): Fit => (ctx, at) => {
+  const p = ctx.hands?.[hand === 'left' ? 0 : 1];
+  if (!p) return null;
+  const h = p[1] - at[1]! + 0.3 * POST.rail;
+  return { key: h.toFixed(3), shape: () => postShape(h, true) };
+};
+
+/** The back-extension bench along the leg line: the feet (scene) in the bench's own frame (turned `yaw`° about +Y), the floor below its pad. */
+const backExtensionFit: Fit = (ctx, at, yaw, fl) => {
+  const f = ctx.feet;
+  if (!f || fl === null) return null;
+  const a = (-yaw * Math.PI) / 180;
+  const dx = f[0] - at[0]!;
+  const dz = f[2] - at[2]!;
+  const local: [number, number, number] = [0, f[1] - at[1]!, -Math.sin(a) * dx + Math.cos(a) * dz];
+  const low = fl - at[1]!;
+  return { key: `${local[1].toFixed(3)},${local[2].toFixed(3)},${low.toFixed(3)}`, shape: () => backExtensionShape(local, low) };
+};
 
 /**
  * A shape as one geometry in its own frame (one draw call: every primitive has
@@ -128,11 +192,10 @@ const sides = (hand: EquipmentSpec['hand']): ('l' | 'r')[] => (hand === 'left' ?
 /** The pieces one spec draws, held (in the body's frame) or not. */
 function piecesOf(spec: EquipmentSpec, held: boolean, cable: number): Piece[] {
   const out: Piece[] = [];
-  const add = (place: Place, shape: EquipmentShape, see = false) => out.push({ place, spec, geometry: oneGeometry(shape), see });
   const isHeld = (p: Place) => p.kind === 'hands' || p.kind === 'palm' || p.kind === 'back' || p.kind === 'cupped';
   const want = (p: Place) => isHeld(p) === held;
-  const each = (place: Place, shape: () => EquipmentShape, see = false) => {
-    if (want(place)) add(place, shape(), see);
+  const each = (place: Place, shape: () => EquipmentShape, see = false, fit?: Fit) => {
+    if (want(place)) out.push({ place, spec, geometry: oneGeometry(shape()), see, ...(fit ? { fit } : {}) });
   };
   switch (spec.kind) {
     case 'barbell':
@@ -157,6 +220,12 @@ function piecesOf(spec: EquipmentSpec, held: boolean, cable: number): Piece[] {
       else if (spec.handle === 'bar') {
         each({ kind: 'hands' }, () => straightBarShape(0.5));
         each({ kind: 'line', to: 'mid' }, () => lineShape(cable));
+      } else if (spec.handle === 'rope') {
+        each({ kind: 'line', to: 'hook' }, () => lineShape(cable));
+        for (const side of sides(spec.hand)) {
+          each({ kind: 'palm', side }, ropeGripShape);
+          each({ kind: 'strand', side }, () => lineShape(ROPE.strand));
+        }
       } else
         for (const side of sides(spec.hand)) {
           each({ kind: 'palm', side }, cableHandleShape);
@@ -175,7 +244,7 @@ function piecesOf(spec: EquipmentSpec, held: boolean, cable: number): Piece[] {
       each({ kind: 'fixed', side: 0 }, () => benchShape(spec.angle ?? INCLINE_DEFAULT), true);
       break;
     case 'machine-seat':
-      each({ kind: 'fixed', side: 0 }, () => machineSeatShape(spec.angle, heightOf(spec), spec.thighPad ?? false), true);
+      each({ kind: 'fixed', side: 0 }, () => machineSeatShape(spec.angle, heightOf(spec), spec.thighPad ?? false), true, spec.thighPad ? seatFit(spec) : undefined);
       break;
     case 'pull-up-bar':
       each({ kind: 'fixed', side: 0 }, () => pullUpBarShape(heightOf(spec)), true);
@@ -194,7 +263,17 @@ function piecesOf(spec: EquipmentSpec, held: boolean, cable: number): Piece[] {
       each({ kind: 'fixed', side: 0 }, () => wallShape(heightOf(spec)), true);
       break;
     case 'post':
-      each({ kind: 'fixed', side: 0 }, () => postShape(heightOf(spec)), true);
+      if (spec.hand && spec.hand !== 'both') each({ kind: 'fixed', side: 0 }, () => postShape(heightOf(spec), true), true, postFit(spec.hand));
+      else each({ kind: 'fixed', side: 0 }, () => postShape(heightOf(spec)), true);
+      break;
+    case 'machine-frame':
+      each({ kind: 'fixed', side: 0 }, () => machineFrameShape(heightOf(spec)), true);
+      break;
+    case 'rack':
+      each({ kind: 'fixed', side: 0 }, () => rackShape(1), true, rackFit);
+      break;
+    case 'back-extension':
+      each({ kind: 'fixed', side: 0 }, () => backExtensionShape([0, -0.55, -0.55], -0.85), true, backExtensionFit);
       break;
   }
   return out;
@@ -263,21 +342,36 @@ export function Equipment({
   const runtime = useRuntime();
   const pieces = useMemo(() => specs.flatMap((spec) => piecesOf(spec, held, thin ? THIN_CABLE : LAT_BAR.cable)), [specs, held, thin]);
   useEffect(() => () => pieces.forEach((p) => p.geometry.dispose()), [pieces]);
+  const meshes = useRef<(Mesh | null)[]>([]);
 
   const materials = useMemo<PartMaterial[]>(() => pieces.map(() => createPartMaterial()), [pieces]);
   useEffect(() => {
-    for (const m of materials) {
+    materials.forEach((m, i) => {
       stylePartMaterial(m, style);
+      // The floor slab's top is the ground shadow's plane: its depth is pushed back so the shadow never z-fights it.
+      const floor = pieces[i]!.spec.kind === 'floor';
+      m.material.polygonOffset = floor;
+      m.material.polygonOffsetFactor = floor ? 2 : 0;
+      m.material.polygonOffsetUnits = floor ? 4 : 0;
       // Matte, a soft sheen on the chamfers, no rim.
       m.material.metalness = 0;
       m.material.roughness = 0.68;
       m.material.envMapIntensity = 0.5;
       m.material.emissive.setScalar(0);
       m.material.depthWrite = true;
-    }
-  }, [materials, style]);
+    });
+  }, [materials, pieces, style]);
   useEffect(() => () => materials.forEach((m) => m.material.dispose()), [materials]);
-  const opacity = (p: Piece) => (!p.see ? 1 : p.spec.kind === 'floor' ? FLOOR_OPACITY[solid ? 'solid' : 'ghost'] : solid ? 1 : GHOST_OPACITY);
+  const opacity = (p: Piece) =>
+    !p.see
+      ? 1
+      : p.spec.kind === 'floor'
+        ? FLOOR_OPACITY[solid ? 'solid' : 'ghost']
+        : SCENERY.has(p.spec.kind)
+          ? SCENERY_OPACITY[solid ? 'solid' : 'ghost']
+          : solid
+            ? 1
+            : GHOST_OPACITY;
 
   const groups = useRef<(Group | null)[]>([]);
   const fade = useRef(0);
@@ -308,9 +402,25 @@ export function Equipment({
           palms: ex.palms ? [ex.palms[0].toArray() as [number, number, number], ex.palms[1].toArray() as [number, number, number]] : null,
           feet: ex.feet ? (ex.feet.toArray() as [number, number, number]) : null,
           modelFloor: ex.modelFloor,
+          knees: ex.knees ? (ex.knees.toArray() as [number, number, number]) : null,
+          hands: ex.hands ? [ex.hands[0].toArray() as [number, number, number], ex.hands[1].toArray() as [number, number, number]] : null,
+          bar: ex.bar
+            ? { at: ex.bar.at.toArray() as [number, number, number], axis: ex.bar.axis.toArray() as [number, number, number], side: ex.bar.side.toArray() as [number, number, number] }
+            : null,
         }
       : null;
     const { l, r } = grips;
+    /** A rope's end (scene): `ROPE.reach` from the palms' midpoint toward the pulley. */
+    const hook = (spec: EquipmentSpec, out: Vector3): boolean => {
+      if (!l || !r || !anchor(spec, _y)) return false;
+      gripPoint(l, out, _f);
+      gripPoint(r, _f2, _f);
+      out.add(_f2).multiplyScalar(0.5).applyMatrix4(runtime.root);
+      _z.subVectors(_y, out);
+      const d = _z.length();
+      if (d > 1e-6) out.addScaledVector(_z, Math.min(ROPE.reach, d * 0.5) / d);
+      return true;
+    };
     /** The pulley / anchor of a line or pulley piece (scene). */
     const anchor = (spec: EquipmentSpec, out: Vector3): boolean => {
       if (!ex) return false;
@@ -337,7 +447,16 @@ export function Equipment({
           let yaw = p.spec.turn ?? 0;
           if (p.spec.kind === 'pull-up-bar') yaw += barYaw(ctx.palms);
           if (p.spec.kind === 'cable') yaw += (Math.atan2(ctx.trunk[0] - at[0], ctx.trunk[2] - at[2]) * 180) / Math.PI;
+          if (p.spec.kind === 'rack' && ctx.bar) yaw = rackYaw(ctx.bar);
           g.rotation.set(0, (yaw * Math.PI) / 180, 0);
+          const fitted = p.fit?.(ctx, at, yaw, ex!.floor ?? ex!.modelFloor);
+          const mesh = meshes.current[i];
+          if (fitted && fitted.key !== p.key && mesh) {
+            p.geometry.dispose();
+            p.geometry = oneGeometry(fitted.shape());
+            p.key = fitted.key;
+            mesh.geometry = p.geometry;
+          }
           break;
         }
         case 'pulley': {
@@ -345,10 +464,17 @@ export function Equipment({
           if (ex) g.rotation.set(0, Math.atan2(ex.trunk.x - g.position.x, ex.trunk.z - g.position.z), 0);
           break;
         }
-        case 'line': {
-          if (!anchor(p.spec, _a)) return;
-          // The body end: a palm, the palms' midpoint or a foot, in the scene (the root turn applied).
-          if (place.to === 'foot-l' || place.to === 'foot-r') {
+        case 'line':
+        case 'strand': {
+          if (place.kind === 'strand' ? !hook(p.spec, _a) : !anchor(p.spec, _a)) return;
+          // The body end: a palm, the palms' midpoint, a foot or the rope's end, in the scene (the root turn applied).
+          if (place.kind === 'strand') {
+            const grip = place.side === 'l' ? l : r;
+            if (!grip) return;
+            gripPoint(grip, _b, _f);
+          } else if (place.to === 'hook') {
+            if (!hook(p.spec, _b)) return;
+          } else if (place.to === 'foot-l' || place.to === 'foot-r') {
             const foot = place.to === 'foot-l' ? footing.l : footing.r;
             if (!foot) return;
             footPoints(foot, _f, _b);
@@ -366,7 +492,8 @@ export function Equipment({
             if (!grip) return;
             gripPoint(grip, _b, _f);
           }
-          _b.applyMatrix4(runtime.root);
+          // (The rope's end is in the scene already.)
+          if (place.kind === 'strand' || place.to !== 'hook') _b.applyMatrix4(runtime.root);
           _x.subVectors(_b, _a);
           const len = _x.length();
           if (len < 1e-4) return;
@@ -418,7 +545,14 @@ export function Equipment({
     <>
       {pieces.map((p, i) => (
         <group key={i} ref={(g) => void (groups.current[i] = g)} visible={false}>
-          <mesh geometry={p.geometry} material={materials[i]!.material} raycast={() => {}} renderOrder={solid ? EQUIPMENT_RENDER_ORDER : 0} dispose={null} />
+          <mesh
+            ref={(m) => void (meshes.current[i] = m)}
+            geometry={p.geometry}
+            material={materials[i]!.material}
+            raycast={() => {}}
+            renderOrder={solid ? EQUIPMENT_RENDER_ORDER : 0}
+            dispose={null}
+          />
         </group>
       ))}
     </>

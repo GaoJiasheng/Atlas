@@ -15,7 +15,8 @@
  *    exercise chip), the exercise camera frames it: from the posture's
  *    direction (or `motion.camera`), backed off until the mannequin's sweep
  *    over the keys and the held equipment (`bridge.exerciseFrame`, measured
- *    by the MotionDriver a frame later) fills ~70 % of the frame height or
+ *    by the MotionDriver a frame later) fills ~72 % of the frame height (less
+ *    when presenting: the band above the caption card) or
  *    the width between the HUD side panels (`fitExerciseCamera`); a beat's
  *    own camera wins. Under an authored camera a standing lift with a long
  *    bar (`span`) backs off until the bar's ends stay off the side panels
@@ -53,7 +54,7 @@ import {
   DEFAULT_FOV,
   fitCameraToAspect,
   fitSphereCamera,
-  exerciseLift,
+  exerciseFraming,
   fitExerciseCamera,
   fitSpan,
   ORBIT_PERIOD_S,
@@ -260,8 +261,7 @@ export function CameraRig({
     const aspect = width > 0 && height > 0 ? width / height : camera.aspect;
     // Presenting: the caption card covers the bottom of the stage, so the figure goes up by its height.
     const card = ui.getState().presenting ? document.querySelector('[data-hud-panel="present"]')?.getBoundingClientRect().height ?? 0 : 0;
-    const lift = exerciseLift(card, height);
-    return fitExerciseCamera(sweep.points, viewDirection(view.azimuth, view.elevation, view.yaw), aspect, view.fill !== undefined ? { fill: view.fill, lift } : { lift });
+    return fitExerciseCamera(sweep.points, viewDirection(view.azimuth, view.elevation, view.yaw), aspect, exerciseFraming(card, height, view.fill));
   };
 
   /** Where the cover camera is for the current stage. */

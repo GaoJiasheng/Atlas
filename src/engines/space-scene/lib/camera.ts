@@ -251,24 +251,29 @@ export const EXERCISE_VIEWS: Readonly<Record<ExercisePosture, { azimuth: number;
 };
 /** Long lens of the exercise camera (degrees). */
 export const EXERCISE_FOV = 24;
-/** Share of the frame height the figure may fill (the tall side), and of the half width (the HUD side panels take the rest). */
-export const EXERCISE_FILL = 0.7;
+/** Share of the frame height the figure fills (the tall side), and of the half width (the HUD side panels take the rest). */
+export const EXERCISE_FILL = 0.72;
 export const EXERCISE_FILL_WIDTH = 0.56;
-/** The figure sits this share of the half height above the frame centre (the caption takes the bottom). */
+/** The figure's centre sits this share of the half height above the frame centre (the bottom HUD panels take the bottom). */
 export const EXERCISE_LIFT = 0.08;
-/** Most the figure is lifted (share of the half height). */
-export const EXERCISE_LIFT_MAX = 0.32;
+/** Highest the figure reaches (share of the half height above the centre): the topic title sits above it. */
+export const EXERCISE_TOP = 0.9;
+/** Gap kept between the figure and the caption card (share of the half height). */
+export const EXERCISE_CARD_GAP = 0.08;
+/** The band between the card and the top edge never shrinks below this (share of the half height). */
+export const EXERCISE_BAND_MIN = 1.2;
 
 /**
- * The lift with a presentation caption card `cardPx` tall over the bottom of
- * a stage `stageH` px tall: the figure's frame is centred in what the card
- * leaves (the card's height as a share of the half height, halved, on top of
- * the usual lift), so a hinge's low start or a pike push-up's bottom stays
- * above the caption.
+ * Fill and lift of the exercise camera with a presentation caption card
+ * `cardPx` tall over the bottom of a stage `stageH` px tall: the figure
+ * fills `fill` of the frame height, capped by the band the card leaves
+ * (between the card's top edge, less a gap, and `EXERCISE_TOP`), and is
+ * centred in that band. Without a card: `fill`, lifted `EXERCISE_LIFT`.
  */
-export function exerciseLift(cardPx: number, stageH: number): number {
-  if (!(cardPx > 0) || !(stageH > 0)) return EXERCISE_LIFT;
-  return Math.min(EXERCISE_LIFT_MAX, EXERCISE_LIFT + cardPx / stageH);
+export function exerciseFraming(cardPx: number, stageH: number, fill = EXERCISE_FILL): { fill: number; lift: number } {
+  if (!(cardPx > 0) || !(stageH > 0)) return { fill, lift: EXERCISE_LIFT };
+  const bottom = Math.min(EXERCISE_TOP - EXERCISE_BAND_MIN, -1 + (2 * cardPx) / stageH + EXERCISE_CARD_GAP);
+  return { fill: Math.min(fill, (EXERCISE_TOP - bottom) / 2), lift: (EXERCISE_TOP + bottom) / 2 };
 }
 
 /** Trunk flexion (degrees, any key) that makes a standing exercise a hinge. */
@@ -295,10 +300,10 @@ export function viewDirection(azimuth: number, elevation: number, yaw = 0): Vec3
 
 /**
  * The exercise camera: looking along `dir` (target → camera), centred on the
- * points' box and backed off until every point (x, y, z triples: the
- * mannequin over the keys, the held equipment) stays within `fill` of the
- * frame height (less the lift) and `fillWidth` of the half width, then the
- * figure lifted `lift` of the half height above the centre.
+ * points' extent across the view (x, y, z triples: the mannequin over the
+ * keys, the held palms) and backed off until every point stays within `fill`
+ * of the frame height and `fillWidth` of the half width, then the figure's
+ * centre lifted `lift` of the half height above the frame centre.
  */
 export function fitExerciseCamera(
   points: ArrayLike<number>,
@@ -310,7 +315,7 @@ export function fitExerciseCamera(
   if (n === 0) return null;
   const fov = opts.fov ?? EXERCISE_FOV;
   const lift = opts.lift ?? EXERCISE_LIFT;
-  const fillH = (opts.fill ?? EXERCISE_FILL) - lift;
+  const fillH = opts.fill ?? EXERCISE_FILL;
   const fillW = aspect < SPAN_MIN_ASPECT ? 0.9 : (opts.fillWidth ?? EXERCISE_FILL_WIDTH);
   const min = [Infinity, Infinity, Infinity];
   const max = [-Infinity, -Infinity, -Infinity];
@@ -320,12 +325,26 @@ export function fitExerciseCamera(
       if (v < min[a]!) min[a] = v;
       if (v > max[a]!) max[a] = v;
     }
-  const c: Vec3 = [(min[0]! + max[0]!) / 2, (min[1]! + max[1]!) / 2, (min[2]! + max[2]!) / 2];
+  const box: Vec3 = [(min[0]! + max[0]!) / 2, (min[1]! + max[1]!) / 2, (min[2]! + max[2]!) / 2];
   const len = Math.hypot(dir[0] ?? 0, dir[1] ?? 0, dir[2] ?? 0) || 1;
   const d0: Vec3 = [(dir[0] ?? 0) / len, (dir[1] ?? 0) / len, (dir[2] ?? 1) / len];
   const rl = Math.hypot(d0[2], d0[0]);
   const right: Vec3 = rl > 1e-9 ? [d0[2] / rl, 0, -d0[0] / rl] : [1, 0, 0];
   const up: Vec3 = [d0[1] * right[2] - d0[2] * right[1], d0[2] * right[0] - d0[0] * right[2], d0[0] * right[1] - d0[1] * right[0]];
+  // Centre on the middle of the points' extent across the view (a hanging figure's arms do not push its legs down the frame).
+  let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
+  for (let i = 0; i < n; i++) {
+    const q = [points[i * 3]! - box[0], points[i * 3 + 1]! - box[1], points[i * 3 + 2]! - box[2]];
+    const x = q[0]! * right[0] + q[1]! * right[1] + q[2]! * right[2];
+    const y = q[0]! * up[0] + q[1]! * up[1] + q[2]! * up[2];
+    x0 = Math.min(x0, x);
+    x1 = Math.max(x1, x);
+    y0 = Math.min(y0, y);
+    y1 = Math.max(y1, y);
+  }
+  const mx = (x0 + x1) / 2;
+  const my = (y0 + y1) / 2;
+  const c: Vec3 = [box[0] + right[0] * mx + up[0] * my, box[1] + right[1] * mx + up[1] * my, box[2] + right[2] * mx + up[2] * my];
   const tanV = Math.tan((fov * Math.PI) / 360);
   const tanH = tanV * Math.max(aspect, 0.1);
   let d = 0;

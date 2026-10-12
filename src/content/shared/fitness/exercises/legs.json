@@ -136,6 +136,9 @@
               0.5,
               -0.075
             ]
+          },
+          {
+            "kind": "rack"
           }
         ],
         "keys": [
@@ -1120,6 +1123,13 @@
       "evidence": [],
       "sketch": "seated-leg-curl",
       "motion": {
+        "root": {
+          "rotation": [
+            -12,
+            0,
+            0
+          ]
+        },
         "equipment": [
           {
             "kind": "machine-seat",
@@ -1131,15 +1141,20 @@
               -0.133,
               0.056
             ]
+          },
+          {
+            "kind": "machine-frame",
+            "at": [
+              0,
+              0,
+              -0.45
+            ]
           }
         ],
         "keys": [
           {
             "phase": "start",
             "joints": {
-              "trunk": {
-                "extension": 12
-              },
               "hip.l": {
                 "flexion": 78
               },
@@ -1160,9 +1175,6 @@
           {
             "phase": "end",
             "joints": {
-              "trunk": {
-                "extension": 12
-              },
               "hip.l": {
                 "flexion": 78
               },
@@ -1314,22 +1326,12 @@
         "equipment": [
           {
             "kind": "cable",
+            "to": "ankle.l",
             "hand": "right",
-            "grip": "neutral",
             "at": [
-              -0.751,
-              0.343,
-              0.165
-            ]
-          },
-          {
-            "kind": "band",
-            "to": "feet",
-            "hand": "left",
-            "at": [
-              -0.751,
+              -0.622,
               -0.762,
-              0.165
+              0.198
             ]
           }
         ],
@@ -1342,13 +1344,11 @@
                 "abduction": 4
               },
               "shoulder.r": {
-                "abduction": 70
+                "abduction": 45,
+                "flexion": 8
               },
               "elbow.r": {
-                "flexion": 12
-              },
-              "forearm.r": {
-                "pronation": 90
+                "flexion": 15
               },
               "hip.l": {
                 "abduction": 2
@@ -1368,13 +1368,11 @@
                 "abduction": 4
               },
               "shoulder.r": {
-                "abduction": 70
+                "abduction": 45,
+                "flexion": 8
               },
               "elbow.r": {
-                "flexion": 12
-              },
-              "forearm.r": {
-                "pronation": 90
+                "flexion": 15
               },
               "hip.l": {
                 "abduction": 32
@@ -1512,22 +1510,12 @@
         "equipment": [
           {
             "kind": "cable",
-            "hand": "left",
-            "grip": "neutral",
-            "at": [
-              0.752,
-              0.343,
-              0.165
-            ]
-          },
-          {
-            "kind": "band",
-            "to": "feet",
+            "to": "ankle.l",
             "hand": "left",
             "at": [
-              0.752,
+              0.622,
               -0.762,
-              0.165
+              0.198
             ]
           }
         ],
@@ -1537,13 +1525,11 @@
             "phase": "start",
             "joints": {
               "shoulder.l": {
-                "abduction": 70
+                "abduction": 45,
+                "flexion": 8
               },
               "elbow.l": {
-                "flexion": 12
-              },
-              "forearm.l": {
-                "pronation": 90
+                "flexion": 15
               },
               "shoulder.r": {
                 "abduction": 4
@@ -1563,13 +1549,11 @@
             "phase": "end",
             "joints": {
               "shoulder.l": {
-                "abduction": 70
+                "abduction": 45,
+                "flexion": 8
               },
               "elbow.l": {
-                "flexion": 12
-              },
-              "forearm.l": {
-                "pronation": 90
+                "flexion": 15
               },
               "shoulder.r": {
                 "abduction": 4

@@ -8,10 +8,22 @@ import { Bone, Quaternion, Vector3 } from 'three';
 import { contractionAt, contractionPlan } from '../../src/engines/space-scene/lib/contraction';
 import { contactPlan, NO_CONTACT } from '../../src/engines/space-scene/lib/contact';
 import { handFrame, handPlan, PALM, RELAXED, surfaceHeights, surfaceUnder } from '../../src/engines/space-scene/lib/hands';
-import { equipmentJoints, heightOf, PALM_LIFT, placeFixed } from '../../src/engines/space-scene/lib/equipment';
+import {
+  backExtensionShape,
+  equipmentFloor,
+  equipmentJoints,
+  heightOf,
+  heldReach,
+  machineSeatShape,
+  PALM_LIFT,
+  placeFixed,
+  rackShape,
+  rackYaw,
+  RACK,
+} from '../../src/engines/space-scene/lib/equipment';
 import { isStanding, standCorrection, type FootPair } from '../../src/engines/space-scene/lib/stance';
 import { anglesQuat, jointCandidates, type Angles } from '../../src/engines/space-scene/lib/rig';
-import { EXERCISE_LIFT, EXERCISE_LIFT_MAX, exerciseLift, fitExerciseCamera } from '../../src/engines/space-scene/lib/camera';
+import { EXERCISE_FILL, EXERCISE_LIFT, EXERCISE_TOP, exerciseFraming, fitExerciseCamera } from '../../src/engines/space-scene/lib/camera';
 import { gripPoint, makeGrip } from '../../src/engines/space-scene/stages/model3d/grip';
 import { exerciseMotion } from '../../src/content/schema/fitness';
 
@@ -201,6 +213,66 @@ describe('equipment additions', () => {
     expect(isStanding([0, 0, 0], [{ kind: 'wall' }, { kind: 'post' }])).toBe(true);
   });
 
+  it('takes the scenery kinds: a rack with a barbell, a machine frame, a back-extension bench with its pad', () => {
+    expect(ok([{ kind: 'barbell' }, { kind: 'rack' }])).toBe(true);
+    expect(ok({ kind: 'rack' })).toBe(false);
+    expect(ok([{ kind: 'barbell' }, { kind: 'rack', at: [0, 0, 0] }])).toBe(false);
+    expect(ok([{ kind: 'machine-seat' }, { kind: 'machine-frame', at: [0, 0, -0.45], height: 2.1 }])).toBe(true);
+    expect(ok({ kind: 'back-extension', at: [0, -0.16, -0.36] })).toBe(true);
+    expect(ok({ kind: 'back-extension' })).toBe(false);
+    expect(isStanding([45, 0, 0], [{ kind: 'back-extension' }])).toBe(false);
+    expect(isStanding([0, 0, 0], [{ kind: 'barbell' }, { kind: 'rack' }])).toBe(true);
+  });
+
+  it('stands a rack under the bar with its hooks at the bar, its uprights toward the given side', () => {
+    const bar = { at: [0.1, 0.4, 0.3] as const, axis: [1, 0, 0] as const, side: [0, 0, -1] as const };
+    const ctx = { trunk: [0, 0, 0] as const, palms: null, modelFloor: -0.9, bar };
+    expect(placeFixed({ kind: 'rack' }, ctx, null)).toEqual([0.1, -0.9, 0.3]);
+    // Local −Z must point along `side` after the turn.
+    const yaw = (rackYaw(bar) * Math.PI) / 180;
+    expect(-Math.sin(yaw) * bar.side[0] - Math.cos(yaw) * bar.side[2]).toBeCloseTo(1);
+    expect(Math.abs(Math.cos(yaw))).toBeCloseTo(1);
+    // The cradles' tops sit a shaft radius under the bar's axis (y = hook), the uprights behind it.
+    const shape = rackShape(1.3);
+    const parts = [shape.primitive, ...(shape.extra ?? [])].map((p) => p as { at: number[]; size: number[] });
+    const cradle = parts.find((p) => p.size[2] === RACK.cradle)!;
+    expect(cradle.at[1]! + cradle.size[1]! / 2).toBeCloseTo(1.3 - 0.014, 3);
+    expect(shape.primitive.at[2]).toBeCloseTo(-RACK.offset);
+  });
+
+  it('lays a back-extension bench along the leg line, the floor under the footplate', () => {
+    const ctx = { trunk: [0, 0, 0] as const, palms: null, feet: [0, -0.68, -0.86] as const, modelFloor: -1.2 };
+    expect(equipmentFloor([{ kind: 'back-extension', at: [0, -0.16, -0.36] }], ctx)).toBeCloseTo(-0.98);
+    const shape = backExtensionShape([0, -0.52, -0.5], -0.82);
+    const parts = [shape.primitive, ...(shape.extra ?? [])];
+    // The pad's Y runs up the 45° leg line (its face across it); every piece stays above the floor.
+    expect(shape.primitive.rotation![0]).toBeCloseTo(44, 0);
+    for (const p of parts) expect(p.at[1]).toBeGreaterThan(-0.82);
+  });
+
+  it('rests a hand on a post’s rail, grips a cable column with the other hand when the cable pulls an ankle', () => {
+    expect(ok({ kind: 'post', hand: 'right' })).toBe(true);
+    const ctx = { trunk: [0, 0, 0] as const, palms: null, modelFloor: -0.9, hands: [[0.3, 0, 0.1], [-0.42, -0.05, 0.05]] as const };
+    expect(placeFixed({ kind: 'post', hand: 'right' }, ctx, null)).toEqual([-0.42, -0.9, 0.05]);
+    const rail = handPlan({ equipment: { kind: 'post', hand: 'right' } }, 'r');
+    expect(rail.kind).toBe('fist');
+    expect(rail.axis).toBe('scene-z');
+    expect(handPlan({ equipment: { kind: 'post', hand: 'right' } }, 'l')).toBe(RELAXED);
+    const column = handPlan({ equipment: { kind: 'cable', to: 'ankle.l', hand: 'right', at: [-0.6, -0.76, 0.2] } } as never, 'r');
+    expect(column.axis).toBe('scene-y');
+    // Thumb up the column (as far as the forearm, reaching down and out, lets it).
+    expect(handFrame('r', column, { forearm: [-0.7, -0.7, 0], sceneUp: [0, 1, 0] }).x[1]).toBeCloseTo(Math.SQRT1_2);
+  });
+
+  it('pulls a rope with two grips, puts the thigh pad over the knees, keeps a held weight in the camera’s sweep', () => {
+    expect(ok({ kind: 'cable', handle: 'rope', at: [0, 0.4, 1.2] })).toBe(true);
+    expect(handPlan({ equipment: { kind: 'cable', handle: 'rope' } }, 'l').kind).toBe('fist');
+    const seat = machineSeatShape(10, 0.45, [0.2, 0.3]);
+    expect(seat.extra!.at(-1)!.at).toEqual([0, 0.2, 0.3]);
+    expect(heldReach([{ kind: 'dumbbell' }])).toBeCloseTo(0.165);
+    expect(heldReach([{ kind: 'barbell' }])).toBe(0);
+  });
+
   it('anchors the balls of the feet on a step and lets the heels drop (a calf raise with heel drop)', () => {
     const foot = (heelY: number, ballY: number): FootPair => ({ heel: [0.1, heelY, -0.05], ball: [0.1, ballY, 0.14] });
     const ref = [foot(0, 0)];
@@ -213,17 +285,27 @@ describe('equipment additions', () => {
 });
 
 describe('exercise camera under the caption card', () => {
-  it('lifts the figure by the card’s share of the stage while presenting, within a cap', () => {
-    expect(exerciseLift(0, 900)).toBe(EXERCISE_LIFT);
-    expect(exerciseLift(150, 900)).toBeCloseTo(EXERCISE_LIFT + 150 / 900);
-    expect(exerciseLift(800, 900)).toBe(EXERCISE_LIFT_MAX);
-    // The lifted frame still holds the figure: a point at the bottom of the sweep stays above the card.
-    const pts = [0, 0, 0, 0, 1.8, 0, 0.3, 0.9, 0];
-    const cam = fitExerciseCamera(pts, [0, 0, 1], 16 / 9, { lift: exerciseLift(150, 900) })!;
-    const d = cam.position[2] - 0;
-    const tanV = Math.tan((cam.fov! * Math.PI) / 360);
-    const bottom = (0 - cam.target[1]) / (tanV * d); // share of the half height, −1 = the frame's bottom edge
-    expect(bottom).toBeGreaterThan(-1 + (2 * 150) / 900);
+  it('centres the figure in the band the card leaves, filling as much of the frame as fits', () => {
+    expect(exerciseFraming(0, 900)).toEqual({ fill: EXERCISE_FILL, lift: EXERCISE_LIFT });
+    // A card a sixth of the stage: the band above it still holds the full fill.
+    const small = exerciseFraming(150, 900);
+    expect(small.fill).toBe(EXERCISE_FILL);
+    // A tall card: less fill, never below 60 % of the frame.
+    const tall = exerciseFraming(300, 900);
+    expect(tall.fill).toBeLessThan(EXERCISE_FILL);
+    expect(tall.fill).toBeGreaterThanOrEqual(0.6);
+    for (const [card, f] of [[150, small], [300, tall]] as const) {
+      const pts = [0, 0, 0, 0, 1.8, 0, 0.3, 0.9, 0];
+      const cam = fitExerciseCamera(pts, [0, 0, 1], 16 / 9, f)!;
+      const d = cam.position[2] - 0;
+      const tanV = Math.tan((cam.fov! * Math.PI) / 360);
+      // Shares of the half height, −1 = the frame's bottom edge: the figure stays between the card and the top edge.
+      const bottom = (0 - cam.target[1]) / (tanV * d);
+      const top = (1.8 - cam.target[1]) / (tanV * d);
+      expect(bottom).toBeGreaterThan(-1 + (2 * card) / 900);
+      expect(top).toBeLessThanOrEqual(EXERCISE_TOP + 1e-6);
+      expect(top - bottom).toBeGreaterThan(1.2 - 1e-6);
+    }
   });
 });
 

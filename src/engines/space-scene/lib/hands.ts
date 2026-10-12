@@ -24,7 +24,7 @@
  * handle (hammer curl, dips; toward the head when the forearm points forward).
  */
 import { equipmentList, type ContactKind, type EquipmentKind } from '../../../lib/anatomy';
-import { BAND, BAR, DIP_BAR, DUMBBELL, KETTLEBELL, LAT_BAR, PALM_LIFT, PRESS_SURFACES, PULL_UP, defaultContacts } from './equipment';
+import { BAND, BAR, COLUMN, DIP_BAR, DUMBBELL, KETTLEBELL, LAT_BAR, PALM_LIFT, POST, PRESS_SURFACES, PULL_UP, ROPE, defaultContacts } from './equipment';
 
 export type HandKind = 'fist' | 'palm' | 'relaxed';
 export type HandGrip = 'pronated' | 'supinated' | 'neutral';
@@ -32,9 +32,10 @@ export type HandGrip = 'pronated' | 'supinated' | 'neutral';
  * Where a closed hand's grip axis comes from: `between` = palm to palm (a bar
  * in both hands); `across` = across the forearm, side to side (front to back
  * for a neutral grip), as a held handle sits (Equipment.tsx); `scene-z` = the
- * scene's Z (dip bars run front to back under the palms).
+ * scene's Z (dip bars and a post's rail run front to back under the palms);
+ * `scene-y` = the scene's up (a hand round a cable column's upright, thumb up).
  */
-export type GripAxis = 'between' | 'across' | 'scene-z';
+export type GripAxis = 'between' | 'across' | 'scene-z' | 'scene-y';
 
 export interface HandPlan {
   kind: HandKind;
@@ -58,7 +59,7 @@ interface HandSpec {
   hand?: 'left' | 'right' | 'both' | undefined;
   on?: 'hands' | 'back' | undefined;
   to?: 'hands' | 'feet' | 'ankle.l' | 'ankle.r' | undefined;
-  handle?: 'd-handle' | 'bar' | undefined;
+  handle?: 'd-handle' | 'bar' | 'rope' | undefined;
   hold?: 'across' | 'along' | 'vertical' | 'both' | undefined;
 }
 
@@ -98,9 +99,18 @@ export function handPlan(motion: HandMotion | undefined, side: 'l' | 'r', near =
         if (holds(s)) return fist(s.grip ?? 'pronated', 'across', HANDLE_RADIUS);
         break;
       case 'cable':
-        if (s.to === 'ankle.l' || s.to === 'ankle.r') break;
+        // An ankle cuff: the hand named holds the column's upright (a standing hip abduction).
+        if (s.to === 'ankle.l' || s.to === 'ankle.r') {
+          if (s.hand !== undefined && s.hand !== 'both' && holds(s)) return fist('neutral', 'scene-y', COLUMN.width / 2);
+          break;
+        }
         if (s.handle === 'bar') return fist(s.grip ?? 'pronated', 'between', LAT_BAR.bar / 2);
+        if (s.handle === 'rope' && holds(s)) return fist(s.grip ?? 'neutral', 'across', ROPE.grip / 2);
         if (holds(s)) return fist(s.grip ?? 'pronated', 'across', HANDLE_RADIUS);
+        break;
+      case 'post':
+        // A hand resting on the post's rail.
+        if (s.hand !== undefined && holds(s)) return fist('neutral', 'scene-z', POST.rail / 2);
         break;
       case 'band':
         if (s.to !== 'feet' && holds(s)) return fist(s.grip ?? 'neutral', 'across', BAND.thick / 2);
@@ -186,6 +196,9 @@ export function handFrame(side: 'l' | 'r', plan: HandPlan, input: HandInput): Ha
     medial = a;
   } else if (plan.axis === 'scene-z') {
     a = across(y, input.sceneZ ?? BODY_Z, BODY_Y);
+    medial = across(y, sideways);
+  } else if (plan.axis === 'scene-y') {
+    a = across(y, input.sceneUp ?? BODY_Y, BODY_Z);
     medial = across(y, sideways);
   } else {
     a = plan.grip === 'neutral' ? across(y, BODY_Z, BODY_Y) : across(y, BODY_X, BODY_Y);

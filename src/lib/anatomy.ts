@@ -99,7 +99,9 @@ export function otherSideJoint(name: string): string {
  * `lat-bar`), a cable from a column or overhead pulley (`cable`), a band
  * from an anchor (`band`), or free-standing (`bench`, `incline-bench`,
  * `machine-seat`, `pull-up-bar`, `dip-bars`, `step`, `floor`, a `wall` to lean
- * on, a `post` to steady a hand).
+ * on, a `post` to steady a hand, a `back-extension` bench), or scenery that
+ * frames the lift (a `rack` with J-hooks at the bar, a `machine-frame` around
+ * a machine seat).
  */
 export const EQUIPMENT_KINDS = [
   'barbell',
@@ -118,6 +120,9 @@ export const EQUIPMENT_KINDS = [
   'floor',
   'wall',
   'post',
+  'back-extension',
+  'rack',
+  'machine-frame',
 ] as const;
 export type EquipmentKind = (typeof EQUIPMENT_KINDS)[number];
 

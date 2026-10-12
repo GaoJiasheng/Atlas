@@ -1016,6 +1016,9 @@
               -0.19,
               0.02
             ]
+          },
+          {
+            "kind": "rack"
           }
         ],
         "keys": [
@@ -1081,7 +1084,11 @@
           0.4,
           2,
           0.4
-        ]
+        ],
+        "camera": {
+          "azimuth": 32,
+          "elevation": 40
+        }
       },
       "sources": [
         "M87",
@@ -1409,7 +1416,8 @@
           {
             "kind": "dumbbell",
             "grip": "neutral",
-            "hand": "right"
+            "hand": "right",
+            "hold": "vertical"
           },
           {
             "kind": "incline-bench",
@@ -1496,7 +1504,11 @@
           0.4,
           2,
           0.4
-        ]
+        ],
+        "camera": {
+          "azimuth": -112,
+          "elevation": 18
+        }
       },
       "sources": [
         "M87",

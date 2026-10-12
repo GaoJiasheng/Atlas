@@ -44,7 +44,7 @@ export function footWeight(low: number, lowest: number): number {
 }
 
 /** Equipment the body rests on or hangs from (not standing): benches, a seat, the floor, bars. */
-const SUPPORTS: ReadonlySet<string> = new Set(['bench', 'incline-bench', 'machine-seat', 'floor', 'dip-bars', 'pull-up-bar']);
+const SUPPORTS: ReadonlySet<string> = new Set(['bench', 'incline-bench', 'machine-seat', 'floor', 'dip-bars', 'pull-up-bar', 'back-extension']);
 
 /** A standing exercise: the body upright (root turned ≤ 30° about X and Z) and nothing under it but the floor (or a step) it stands on. */
 export function isStanding(rotation: readonly number[] | undefined, equipment: readonly { kind: string }[]): boolean {

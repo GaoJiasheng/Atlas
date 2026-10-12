@@ -156,6 +156,9 @@
               -0.205,
               0.02
             ]
+          },
+          {
+            "kind": "rack"
           }
         ],
         "contacts": [
@@ -221,7 +224,11 @@
           0.3,
           1.2,
           0.5
-        ]
+        ],
+        "camera": {
+          "azimuth": 32,
+          "elevation": 40
+        }
       },
       "sources": [
         "M1",
@@ -811,6 +818,14 @@
           {
             "kind": "cable-handle",
             "grip": "neutral"
+          },
+          {
+            "kind": "machine-frame",
+            "at": [
+              0,
+              0,
+              -0.48
+            ]
           }
         ],
         "contacts": [

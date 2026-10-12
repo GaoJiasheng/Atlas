@@ -31,7 +31,23 @@
  *   wall           a 1.2 m wide, 40 mm thick panel, `height` 2 m, on the floor at
  *                  the trunk + `at` (a wall to lean the back or heels on)
  *   post           a 40 mm upright rail, `height` 1.1 m, on the floor at the
- *                  trunk + `at` (a hand on it for balance)
+ *                  trunk + `at`; with `hand`, it stands under that palm (at
+ *                  the first key) with a short rail along Z on top for the
+ *                  hand to rest on (a standing knee raise)
+ *   back-extension a 45° hyperextension bench: the hip pad's top at the trunk
+ *                  + `at`, the footplate under the balls of the feet and the
+ *                  ankle rollers behind the heels (the leg line between them
+ *                  sets its angle), a beam and two legs to the floor
+ * Scenery (free-standing, nothing holds the body):
+ *   rack           two uprights on the floor with J-hooks where the first key
+ *                  holds the barbell (bench press, squat: the bar starts in the
+ *                  hooks), offset from the bar toward the head (lying) or the
+ *                  front (standing)
+ *   machine-frame  a machine's outline at the trunk + `at` on the floor: two
+ *                  posts 1.5 m apart, a top beam `height` 2.2 m up, the weight
+ *                  stack on two guide rods behind (−Z)
+ * The cable's `rope` handle: a short grip in each palm, two strands to the
+ * cable's end 0.2 m toward the pulley.
  */
 import type { ContactKind, EquipmentKind } from '../../../lib/anatomy';
 import type { Primitive } from '../schema';
@@ -66,6 +82,9 @@ export const EQUIPMENT_INFO: Readonly<Record<EquipmentKind, EquipmentInfo>> = {
   floor: { place: 'fixed', hands: 'none', feet: 'floor' },
   wall: { place: 'fixed', hands: 'none', feet: 'floor' },
   post: { place: 'fixed', hands: 'none', feet: 'floor' },
+  'back-extension': { place: 'fixed', hands: 'none', feet: 'floor' },
+  rack: { place: 'fixed', hands: 'none', feet: 'floor' },
+  'machine-frame': { place: 'fixed', hands: 'none', feet: 'floor' },
 };
 
 /** Surfaces a palm can press flat on (the floor, a bench, a step, a seat): a hand contact there can hinge, and a free hand near one lies flat. */
@@ -87,13 +106,23 @@ export const STEP = { width: 0.4, depth: 0.35, height: 0.2 } as const;
 export const BAND = { thick: 0.012 } as const;
 export const FLOOR = { width: 0.8, length: 2.2, thick: 0.004 } as const;
 export const WALL = { width: 1.2, thick: 0.04, height: 2 } as const;
-export const POST = { diameter: 0.04, height: 1.1, base: 0.25 } as const;
+export const POST = { diameter: 0.04, height: 1.1, base: 0.25, rail: 0.035, railLength: 0.4 } as const;
+/** Rack: uprights `half` either side of the bar's centre, `offset` behind the bar, the tops `above` the hooks. */
+export const RACK = { half: 0.6, upright: 0.05, offset: 0.075, above: 0.3, foot: 0.55, cradle: 0.11 } as const;
+/** Machine frame: posts `half` either side, the stack `stack` behind them. */
+export const MACHINE_FRAME = { half: 0.75, post: 0.06, height: 2.2, stack: 0.45, plates: [0.3, 0.7, 0.1] } as const;
+/** Back-extension bench: hip pad, ankle rollers, the footplate this far above the floor. */
+export const BACK_EXT = { pad: [0.38, 0.3, 0.08], roller: 0.09, rollerLength: 0.32, plate: [0.4, 0.025, 0.3], beam: 0.06, below: 0.2, rise: 0.3 } as const;
+/** Rope attachment: grip diameter and length, strand thickness, the cable's end this far from the palms toward the pulley. */
+export const ROPE = { grip: 0.032, length: 0.11, knob: 0.05, strand: 0.014, reach: 0.2 } as const;
 /** How far the palm's grip point sits above the floor it pushes on (hand thickness), metres. */
 export const PALM_LIFT = 0.015;
 /** Dip bars: bar tops this far above the floor. */
 export const DIP_HEIGHT = 1.45;
 /** Default incline-bench back angle (degrees). */
 export const INCLINE_DEFAULT = 30;
+/** A machine seat's thigh pad sits this far behind the knees and above the knee joints (metres). */
+export const THIGH_PAD = { back: 0.13, up: 0.13 } as const;
 /** Machine seat back recline from vertical by default (degrees). */
 export const SEAT_RECLINE = 10;
 
@@ -238,9 +267,10 @@ export function benchShape(incline = 0): EquipmentShape {
 /**
  * A machine seat: the pad's top at the origin (`height` above the floor), the
  * back pad behind it (−Z) reclined `angle`° from vertical, a post and base to
- * the floor, an optional thigh pad above the knees' side of the seat.
+ * the floor, an optional thigh pad above the knees' side of the seat (or at
+ * `[y, z]` in the seat's frame: over the thighs just behind the knees).
  */
-export function machineSeatShape(angle = SEAT_RECLINE, height: number = MACHINE_SEAT.height, thighPad = false): EquipmentShape {
+export function machineSeatShape(angle = SEAT_RECLINE, height: number = MACHINE_SEAT.height, thighPad: boolean | readonly [number, number] = false): EquipmentShape {
   const S = MACHINE_SEAT;
   const a = (angle * Math.PI) / 180;
   const backZ = -S.depth / 2 - S.pad / 2;
@@ -250,7 +280,7 @@ export function machineSeatShape(angle = SEAT_RECLINE, height: number = MACHINE_
     upright(0.06, post, [0, -S.pad - post / 2, 0]),
     box([0.5, 0.03, 0.5], [0, -height + 0.015, 0]),
   ];
-  if (thighPad) extra.push(alongX(S.thigh, S.width + 0.04, [0, S.thigh / 2 + 0.17, S.depth / 2 - 0.08]));
+  if (thighPad) extra.push(alongX(S.thigh, S.width + 0.04, thighPad === true ? [0, S.thigh / 2 + 0.17, S.depth / 2 - 0.08] : [0, thighPad[0], thighPad[1]]));
   return { primitive: box([S.width, S.pad, S.depth], [0, -S.pad / 2, 0]), extra };
 }
 
@@ -298,9 +328,111 @@ export function wallShape(height: number = WALL.height): EquipmentShape {
   return { primitive: box([WALL.width, height, WALL.thick], [0, height / 2, -WALL.thick / 2]) };
 }
 
-/** An upright rail standing on the floor at the origin on a flat base, `height` tall. */
-export function postShape(height: number = POST.height): EquipmentShape {
-  return { primitive: upright(POST.diameter, height, [0, height / 2, 0]), extra: [box([POST.base, 0.02, POST.base], [0, 0.01, 0])] };
+/** An upright rail standing on the floor at the origin on a flat base, `height` tall; with `rail`, a short bar along Z on top (its top at `height`). */
+export function postShape(height: number = POST.height, rail = false): EquipmentShape {
+  const extra: Prim[] = [box([POST.base, 0.02, POST.base], [0, 0.01, 0])];
+  if (rail) extra.push(alongZ(POST.rail, POST.railLength, [0, height - POST.rail / 2, 0]));
+  const h = rail ? height - POST.rail / 2 : height;
+  return { primitive: upright(POST.diameter, h, [0, h / 2, 0]), extra };
+}
+
+/**
+ * A rack on the floor at the origin: two uprights at x = ±`RACK.half`, `RACK.offset`
+ * behind the bar (−Z), each with a J-hook whose cradle sits under the bar's
+ * shaft `hook` metres up (the bar's axis at y = `hook`, z = 0) and a lip in front.
+ */
+export function rackShape(hook: number): EquipmentShape {
+  const R = RACK;
+  const top = Math.max(0.4, hook + R.above);
+  const z = -R.offset;
+  const cradleTop = hook - BAR.shaft / 2;
+  const parts: Prim[] = [];
+  for (const x of [-R.half, R.half]) {
+    parts.push(
+      box([R.upright, top, R.upright], [x, top / 2, z]),
+      box([0.07, 0.03, R.foot], [x, 0.015, z]),
+      // The cradle runs from the upright's face to just past the bar, the lip rises in front of it.
+      box([R.upright, 0.025, R.cradle], [x, cradleTop - 0.0125, z + R.upright / 2 + R.cradle / 2 - 0.01]),
+      box([R.upright, 0.05, 0.02], [x, cradleTop + 0.0125, z + R.upright / 2 + R.cradle - 0.02]),
+    );
+  }
+  return { primitive: parts[0]!, extra: parts.slice(1) };
+}
+
+/**
+ * A machine's frame on the floor at the origin: two posts at x = ±`half`, a top
+ * beam `height` up, and behind them (−Z) the weight stack — plates on two guide
+ * rods under a cap — tied to the beam; floor rails between the feet.
+ */
+export function machineFrameShape(height: number = MACHINE_FRAME.height): EquipmentShape {
+  const F = MACHINE_FRAME;
+  const p = F.post;
+  const [pw, ph, pd] = F.plates;
+  const sz = -F.stack;
+  const parts: Prim[] = [
+    box([2 * F.half + p, p, p], [0, height - p / 2, 0]),
+    box([p, height - p, p], [F.half, (height - p) / 2, 0]),
+    box([p, height - p, p], [-F.half, (height - p) / 2, 0]),
+    box([2 * F.half + p, 0.025, 0.07], [0, 0.0125, 0]),
+    // The stack: base, plates, guide rods, cap, and the beam back to it.
+    box([pw + 0.12, 0.025, pd + 0.1], [0, 0.0125, sz]),
+    box([pw, ph, pd], [0, 0.06 + ph / 2, sz]),
+    upright(0.02, height - 0.08, [pw / 2 + 0.03, (height - 0.08) / 2, sz]),
+    upright(0.02, height - 0.08, [-pw / 2 - 0.03, (height - 0.08) / 2, sz]),
+    box([pw + 0.12, p, pd + 0.04], [0, height - p / 2, sz]),
+    box([p, p, F.stack], [0, height - p / 2, sz / 2]),
+    box([0.07, 0.025, F.stack], [0, 0.0125, sz / 2]),
+  ];
+  return { primitive: parts[0]!, extra: parts.slice(1) };
+}
+
+/**
+ * A 45° back-extension bench in its own frame (body facing +Z): the hip pad's
+ * top at the origin, the balls of the feet at `feet` (so the leg line runs
+ * from the origin to there), the floor `floor` (local y). The pad and the
+ * footplate lie across the leg line on the front of the legs, the ankle
+ * rollers behind the heels; a beam under the legs and two legs to the floor.
+ */
+export function backExtensionShape(feet: V3, floor: number): EquipmentShape {
+  const B = BACK_EXT;
+  const L = Math.hypot(feet[1], feet[2]) || 1;
+  // d: along the legs (pad → feet); f: the legs' front, across d (both in the YZ plane).
+  const d: V3 = [0, feet[1] / L, feet[2] / L];
+  const f: V3 = [0, d[2], -d[1]];
+  const at = (k: number, j: number): V3 => [0, d[1] * k + f[1] * j, d[2] * k + f[2] * j];
+  // The box turn that lays its Y along −d (up the legs) and its Z along f.
+  const tilt = (Math.atan2(-d[2], -d[1]) * 180) / Math.PI;
+  const rot: V3 = [tilt, 0, 0];
+  const beam = B.below;
+  const top = at(0, beam);
+  const low = at(L, beam);
+  const parts: Prim[] = [
+    box([B.pad[0], B.pad[1], B.pad[2]], at(0, B.pad[2] / 2), rot),
+    // Footplate just past the balls of the feet, across the legs.
+    box([B.plate[0], B.plate[1], B.plate[2]], at(L + B.plate[1] / 2 + 0.01, -0.05), rot),
+    // Ankle rollers behind the lower shins.
+    alongX(B.roller, B.rollerLength, at(L - 0.13, -0.15 - B.roller / 2)),
+    // The beam under the legs, the posts up to the pad and the plate and roller.
+    box([B.beam, L, B.beam], at(L / 2, beam), rot),
+    box([0.05, 0.05, beam - B.pad[2]], at(0, (beam + B.pad[2]) / 2), rot),
+    box([0.05, 0.05, beam + 0.2], at(L - 0.04, beam / 2 - 0.1), rot),
+  ];
+  // Two legs straight down to the floor, a rail along the floor between them.
+  for (const q of [top, low]) {
+    const h = q[1] - floor;
+    if (h > 0.02) parts.push(box([B.beam, h, B.beam], [0, floor + h / 2, q[2]]), box([0.5, 0.03, 0.07], [0, floor + 0.015, q[2]]));
+  }
+  const span = Math.abs(top[2] - low[2]);
+  if (span > 0.05) parts.push(box([0.07, 0.03, span], [0, floor + 0.015, (top[2] + low[2]) / 2]));
+  return { primitive: parts[0]!, extra: parts.slice(1) };
+}
+
+/** A rope grip in the palm: a short thick rope along X ending in a knob (−X, below the little finger in a neutral grip). */
+export function ropeGripShape(): EquipmentShape {
+  return {
+    primitive: alongX(ROPE.grip, ROPE.length, [0, 0, 0]),
+    extra: [{ kind: 'sphere', size: [ROPE.knob / 2], at: [-ROPE.length / 2, 0, 0], color: grey } as Prim],
+  };
 }
 
 /** A unit line (cable, band): an upright cylinder from y 0 to 1 (the stage stretches it between its ends). */
@@ -316,6 +448,7 @@ interface Placed {
   kind: EquipmentKind;
   at?: readonly number[] | undefined;
   height?: number | undefined;
+  hand?: 'left' | 'right' | 'both' | undefined;
 }
 
 /** Where the exercise puts the body (scene coordinates), what free-standing equipment stands on. */
@@ -328,6 +461,12 @@ export interface PlaceContext {
   feet?: V3 | null;
   /** The model's own floor (scene y). */
   modelFloor?: number | null;
+  /** The knees at the first key (midpoint), else null. */
+  knees?: V3 | null;
+  /** The palms at the first key (left, right), held or not, else null. */
+  hands?: readonly [V3, V3] | null;
+  /** The barbell at the first key: its centre, its axis (unit) and the side a rack's uprights go (unit, horizontal), else null. */
+  bar?: { at: V3; axis: V3; side: V3 } | null;
 }
 
 /** Default height of a kind that has one (metres). */
@@ -340,6 +479,7 @@ export function heightOf(e: Placed): number {
   if (e.kind === 'bench' || e.kind === 'incline-bench') return BENCH.height;
   if (e.kind === 'wall') return WALL.height;
   if (e.kind === 'post') return POST.height;
+  if (e.kind === 'machine-frame') return MACHINE_FRAME.height;
   return 0;
 }
 
@@ -365,6 +505,8 @@ export function equipmentFloor(specs: readonly Placed[], ctx: PlaceContext): num
         return (low !== null ? low : trunk[1] + (e.at?.[1] ?? 0)) - heightOf(e);
       case 'step':
         return ctx.modelFloor != null ? ctx.modelFloor - heightOf(e) : null;
+      case 'back-extension':
+        return (ctx.feet ? ctx.feet[1] : trunk[1] + (e.at?.[1] ?? 0) - 0.6) - BACK_EXT.rise;
       default:
         break;
     }
@@ -403,10 +545,22 @@ export function placeFixed(e: Placed, ctx: PlaceContext, floor: number | null, s
       const top = ctx.modelFloor ?? rel[1];
       return f ? [f[0] + (at[0] ?? 0), top, f[2] + (at[2] ?? 0)] : [rel[0], top, rel[2]];
     }
+    case 'post':
+      // A hand on it: under that palm at the first key.
+      if (e.hand && e.hand !== 'both' && ctx.hands) {
+        const p = ctx.hands[e.hand === 'left' ? 0 : 1];
+        return [p[0], floor ?? ctx.modelFloor ?? rel[1] - 1, p[2]];
+      }
+      return [rel[0], floor ?? ctx.modelFloor ?? rel[1] - 1, rel[2]];
     case 'cable':
     case 'wall':
-    case 'post':
+    case 'machine-frame':
       return [rel[0], floor ?? ctx.modelFloor ?? rel[1] - 1, rel[2]];
+    case 'rack': {
+      // On the floor under the bar's centre, its uprights behind the bar (`rackYaw` turns them).
+      const b = ctx.bar;
+      return b ? [b.at[0], floor ?? ctx.modelFloor ?? b.at[1] - 1, b.at[2]] : [rel[0], floor ?? ctx.modelFloor ?? rel[1] - 1, rel[2]];
+    }
     default:
       return rel;
   }
@@ -419,6 +573,14 @@ export function barYaw(palms: readonly [V3, V3] | null, fallback = 0): number {
   const dz = palms[0][2] - palms[1][2];
   if (Math.hypot(dx, dz) < 1e-6) return fallback;
   return (Math.atan2(-dz, dx) * 180) / Math.PI;
+}
+
+/** A rack's turn about +Y (degrees): its X along the bar, its uprights (−Z) toward `side`. */
+export function rackYaw(bar: { axis: V3; side: V3 }): number {
+  let yaw = Math.atan2(-bar.axis[2], bar.axis[0]);
+  // Local −Z after the turn: (−sin ψ, 0, −cos ψ); flip when it points away from `side`.
+  if (-Math.sin(yaw) * bar.side[0] - Math.cos(yaw) * bar.side[2] < 0) yaw += Math.PI;
+  return (yaw * 180) / Math.PI;
 }
 
 /** The joints of the topic's rig a piece needs (validate: the rig must have them). */
@@ -435,6 +597,16 @@ export function equipmentJoints(e: {
   if (info.hands === 'none') return [];
   const hand = info.hands === 'bar' ? 'both' : (e.hand ?? 'both');
   return hand === 'left' ? ['hand.l'] : hand === 'right' ? ['hand.r'] : ['hand.l', 'hand.r'];
+}
+
+/** How far a held dumbbell or kettlebell reaches from the palm (metres; the exercise camera keeps it in frame), 0 for none. */
+export function heldReach(list: readonly Placed[]): number {
+  let r = 0;
+  for (const e of list) {
+    if (e.kind === 'dumbbell') r = Math.max(r, DUMBBELL.length / 2);
+    else if (e.kind === 'kettlebell') r = Math.max(r, KETTLEBELL.handle / 2 + KETTLEBELL.bell);
+  }
+  return r;
 }
 
 /**

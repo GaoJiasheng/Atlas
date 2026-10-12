@@ -61,7 +61,7 @@ import { contactPlan, handsCorrection, hingeAngle, NO_CONTACT, type ContactPlan 
 import { keepAnimating, useRuntime } from './runtime';
 import type { GltfRig } from './GltfSource';
 import { gripPoint, type Grip } from './grip';
-import { defaultContacts, equipmentFloor, EQUIPMENT_INFO, PRESS_SURFACES } from '../../lib/equipment';
+import { defaultContacts, equipmentFloor, EQUIPMENT_INFO, heldReach, PRESS_SURFACES } from '../../lib/equipment';
 import { footSlip, standCorrection, type FootPair } from '../../lib/stance';
 import { footPoints, type Foot } from './foot';
 import type { StageBridge } from '../../bridge';
@@ -112,6 +112,8 @@ interface ExercisePrep {
 /** Skinned-mesh vertices sampled per pose when measuring an exercise's sweep. */
 const EXTENT_SAMPLES = 600;
 
+/** The six directions a held weight's reach is sampled in (the exercise camera's sweep). */
+const REACH_DIRS: readonly (readonly [number, number, number])[] = [[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]];
 const _q = new Quaternion();
 const _qa = new Quaternion();
 const _m = new Matrix4();
@@ -351,6 +353,8 @@ export function MotionDriver({
     palmStart: null as [Vector3, Vector3] | null,
     ballStart: null as Vector3 | null,
     kneeStart: null as Vector3 | null,
+    /** The barbell at the first key (skeleton frame): its centre and axis (a rack's J-hooks go there). */
+    barStart: null as { at: Vector3; axis: Vector3 } | null,
     /** The first key's root matrix (M0): with per-key root turns, the contacts and the equipment stay where it put them. */
     rootStart: new Matrix4(),
     rootVaries: false,
@@ -540,6 +544,20 @@ export function MotionDriver({
         return { heel: v3(_h), ball: v3(_b) };
       });
       s.ballStart = refs.length > 0 ? new Vector3(...refs.reduce<V3>((a, f) => [a[0] + f.ball[0] / refs.length, a[1] + f.ball[1] / refs.length, a[2] + f.ball[2] / refs.length], [0, 0, 0])) : null;
+      // The barbell: across the upper back (the trunk joint's frame), else palm to palm.
+      const barbell = equipment.find((e) => e.kind === 'barbell');
+      const trunkBone = joints.get('trunk')?.bone;
+      if (barbell?.on === 'back' && barbell.at && trunkBone) {
+        const bar = s.barStart ?? { at: new Vector3(), axis: new Vector3() };
+        bar.at.set(barbell.at[0], barbell.at[1], barbell.at[2]).applyMatrix4(trunkBone.matrixWorld);
+        bar.axis.setFromMatrixColumn(trunkBone.matrixWorld, 0).normalize();
+        s.barStart = bar;
+      } else if (barbell && barbell.on !== 'back' && s.palmStart) {
+        const bar = s.barStart ?? { at: new Vector3(), axis: new Vector3() };
+        bar.at.addVectors(s.palmStart[0], s.palmStart[1]).multiplyScalar(0.5);
+        bar.axis.subVectors(s.palmStart[0], s.palmStart[1]).normalize();
+        s.barStart = bar;
+      } else s.barStart = null;
       s.kneeStart = kneeBones.length === 2 ? (s.kneeStart ?? new Vector3()).copy(kneeBones[0]!.getWorldPosition(_pl)).add(kneeBones[1]!.getWorldPosition(_pr)).multiplyScalar(0.5) : null;
       s.rootVaries = exSheet.motion.keys.some((key) => key.root !== undefined);
       rootMatrix(keyFrame(exSheet, 0).root, s.rootStart);
@@ -584,12 +602,14 @@ export function MotionDriver({
               pts.push(_v.x, _v.y, _v.z);
             }
           }
-          // Held equipment: the palms.
+          // Held equipment: the palms, and a dumbbell's or kettlebell's reach round them (a bar's ends may leave the frame).
           if (grips.l && grips.r && equipment.some((e) => EQUIPMENT_INFO[e.kind].place !== 'fixed')) {
+            const reach = heldReach(equipment);
             for (const grip of [grips.l, grips.r]) {
               gripPoint(grip, _v, _ax);
               _v.applyMatrix4(_m);
               pts.push(_v.x, _v.y, _v.z);
+              if (reach > 0) for (const [a, b, c] of REACH_DIRS) pts.push(_v.x + a * reach, _v.y + b * reach, _v.z + c * reach);
             }
           }
         }
@@ -619,7 +639,7 @@ export function MotionDriver({
       }
       // Where the free-standing equipment and the ground go (from M0: they do not ride on the correction).
       if (exSheet?.motion && equipment.length > 0) {
-        const ex = runtime.exercise ?? { trunk: new Vector3(), palms: null, hands: null, feet: null, floor: null, modelFloor };
+        const ex = runtime.exercise ?? { trunk: new Vector3(), palms: null, hands: null, feet: null, knees: null, bar: null, floor: null, modelFloor };
         // With per-key turns the equipment stays where the first key's turn puts it.
         if (s.rootVaries && s.startId === exSheet.id) _m0.copy(s.rootStart);
         ex.trunk.copy(pivot).applyMatrix4(_m0);
@@ -637,6 +657,17 @@ export function MotionDriver({
         } else ex.palms = null;
         if (s.ballStart) ex.feet = (ex.feet ?? new Vector3()).copy(s.ballStart).applyMatrix4(_m0);
         else ex.feet = null;
+        ex.knees = s.kneeStart ? (ex.knees ?? new Vector3()).copy(s.kneeStart).applyMatrix4(_m0) : null;
+        if (s.barStart) {
+          const bar = ex.bar ?? { at: new Vector3(), axis: new Vector3(), side: new Vector3() };
+          bar.at.copy(s.barStart.at).applyMatrix4(_m0);
+          bar.axis.copy(s.barStart.axis).transformDirection(_m0);
+          // A rack's uprights: toward the head when it lies (bench press), else toward the front (squat).
+          bar.side.set(0, 1, 0).transformDirection(_m0).setY(0);
+          if (bar.side.lengthSq() < 0.25) bar.side.set(0, 0, 1).transformDirection(_m0).setY(0);
+          bar.side.normalize();
+          ex.bar = bar;
+        } else ex.bar = null;
         ex.modelFloor = modelFloor;
         ex.floor = equipmentFloor(equipment, {
           trunk: v3(ex.trunk),

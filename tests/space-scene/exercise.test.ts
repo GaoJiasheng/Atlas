@@ -157,7 +157,7 @@ describe('exercise camera', () => {
     expect(viewDirection(0, 90)[1]).toBeCloseTo(1);
   });
 
-  it('frames a standing figure at least 60 % of the frame height, lifted above the caption', () => {
+  it('frames a standing figure at least 70 % of the frame height, lifted above the caption', () => {
     // A 1.8 m figure as a column of points, seen from the front.
     const pts: number[] = [];
     for (let i = 0; i <= 20; i++) pts.push(0.2 * Math.sin(i), -0.9 + (1.8 * i) / 20, 0.1 * Math.cos(i));
@@ -168,9 +168,9 @@ describe('exercise camera', () => {
     // The top and bottom of the figure on screen (fractions of the half height).
     const top = (0.9 - cam.target[1]) / ((d - 0) * tanV);
     const bottom = (-0.9 - cam.target[1]) / (d * tanV);
-    expect(top - bottom).toBeGreaterThan(1.2);
-    expect(top).toBeLessThanOrEqual(0.71);
-    expect(bottom).toBeGreaterThanOrEqual(-0.71);
+    expect(top - bottom).toBeGreaterThan(1.4);
+    expect(top).toBeLessThanOrEqual(0.81);
+    expect(bottom).toBeGreaterThanOrEqual(-0.81);
     expect(top + bottom).toBeGreaterThan(0);
     expect(fitExerciseCamera([], [0, 0, 1], aspect)).toBeNull();
   });

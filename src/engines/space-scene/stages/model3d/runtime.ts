@@ -23,6 +23,10 @@ export interface ExercisePlacement {
   hands: [Vector3, Vector3] | null;
   /** The balls of the feet at the first key (midpoint), or null (no feet in the rig). */
   feet: Vector3 | null;
+  /** The knees at the first key (midpoint), or null (no knees in the rig). */
+  knees: Vector3 | null;
+  /** The barbell at the first key — its centre, its axis and the side a rack's uprights go (horizontal: toward the head, else the front) — or null. */
+  bar: { at: Vector3; axis: Vector3; side: Vector3 } | null;
   /** Floor height the ground shadow moves to, or null (the model's own floor). */
   floor: number | null;
   /** The model's own floor (scene y). */

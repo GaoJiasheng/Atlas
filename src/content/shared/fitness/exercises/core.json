@@ -621,8 +621,7 @@
         "M100",
         "M23",
         "M24",
-        "M25",
-        "M100"
+        "M25"
       ]
     },
     {
@@ -857,8 +856,7 @@
         "M101",
         "M23",
         "M24",
-        "M25",
-        "M101"
+        "M25"
       ]
     },
     {
@@ -1097,8 +1095,7 @@
         "M99",
         "M23",
         "M24",
-        "M25",
-        "M99"
+        "M25"
       ]
     },
     {
@@ -1390,10 +1387,12 @@
       "evidence": [],
       "sketch": "standing-knee-raise",
       "motion": {
-        "equipment": {
-          "kind": "dip-bars",
-          "height": 0.83
-        },
+        "equipment": [
+          {
+            "kind": "post",
+            "hand": "right"
+          }
+        ],
         "contacts": [
           "feet"
         ],
@@ -1402,16 +1401,6 @@
           {
             "phase": "start",
             "joints": {
-              "shoulder.l": {
-                "flexion": 8,
-                "abduction": 8
-              },
-              "elbow.l": {
-                "flexion": 10
-              },
-              "hand.l": {
-                "extension": 40
-              },
               "hip.l": {
                 "flexion": 0
               },
@@ -1423,22 +1412,28 @@
               },
               "knee.r": {
                 "flexion": 5
+              },
+              "shoulder.l": {
+                "abduction": 4
+              },
+              "elbow.l": {
+                "flexion": 8
+              },
+              "shoulder.r": {
+                "abduction": 28,
+                "flexion": 6
+              },
+              "elbow.r": {
+                "flexion": 12
+              },
+              "hand.r": {
+                "extension": 35
               }
             }
           },
           {
             "phase": "end",
             "joints": {
-              "shoulder.l": {
-                "flexion": 8,
-                "abduction": 8
-              },
-              "elbow.l": {
-                "flexion": 10
-              },
-              "hand.l": {
-                "extension": 40
-              },
               "hip.l": {
                 "flexion": 90
               },
@@ -1453,6 +1448,22 @@
               },
               "ankle.l": {
                 "dorsiflexion": -10
+              },
+              "shoulder.l": {
+                "abduction": 4
+              },
+              "elbow.l": {
+                "flexion": 8
+              },
+              "shoulder.r": {
+                "abduction": 28,
+                "flexion": 6
+              },
+              "elbow.r": {
+                "flexion": 12
+              },
+              "hand.r": {
+                "extension": 35
               }
             }
           }
