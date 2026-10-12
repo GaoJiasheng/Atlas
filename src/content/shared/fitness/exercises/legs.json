@@ -127,96 +127,77 @@
       ],
       "sketch": "barbell-back-squat",
       "motion": {
-        "root": {
-          "rotation": [
-            0,
-            0,
-            0
-          ]
-        },
+        "equipment": [
+          {
+            "kind": "barbell",
+            "on": "back",
+            "at": [
+              0,
+              0.5,
+              -0.075
+            ]
+          }
+        ],
         "keys": [
           {
             "phase": "start",
             "joints": {
-              "trunk": {
-                "flexion": 0
+              "shoulder.l": {
+                "horizontal-adduction": -70,
+                "abduction": 20,
+                "external-rotation": 27
+              },
+              "elbow.l": {
+                "flexion": 121
+              },
+              "forearm.l": {
+                "pronation": 170
               },
               "hip.l": {
-                "flexion": 0,
-                "abduction": 8,
-                "external-rotation": 10
-              },
-              "hip.r": {
-                "flexion": 0,
-                "abduction": 8,
-                "external-rotation": 10
+                "abduction": 10,
+                "external-rotation": 15
               },
               "knee.l": {
-                "flexion": 3
-              },
-              "knee.r": {
-                "flexion": 3
-              },
-              "ankle.l": {
-                "dorsiflexion": 0
-              },
-              "ankle.r": {
-                "dorsiflexion": 0
+                "flexion": 2
               }
-            },
-            "contract": {
-              "rectus-femoris": 0.4,
-              "vastus-lateralis": 0.7,
-              "vastus-medialis": 0.7,
-              "vastus-intermedius": 0.7,
-              "gluteus-maximus": 0.7
             }
           },
           {
             "phase": "end",
             "joints": {
+              "shoulder.l": {
+                "horizontal-adduction": -70,
+                "abduction": 20,
+                "external-rotation": 27
+              },
+              "elbow.l": {
+                "flexion": 121
+              },
+              "forearm.l": {
+                "pronation": 170
+              },
               "trunk": {
-                "flexion": 25
+                "flexion": 28
               },
               "hip.l": {
-                "flexion": 73,
-                "abduction": 8,
-                "external-rotation": 10
-              },
-              "hip.r": {
-                "flexion": 73,
-                "abduction": 8,
-                "external-rotation": 10
+                "flexion": 114,
+                "abduction": 19,
+                "internal-rotation": 10
               },
               "knee.l": {
-                "flexion": 70,
-                "internal-rotation": 10
-              },
-              "knee.r": {
-                "flexion": 70,
-                "internal-rotation": 10
+                "flexion": 118
               },
               "ankle.l": {
-                "dorsiflexion": 22
-              },
-              "ankle.r": {
-                "dorsiflexion": 22
+                "dorsiflexion": 32
               }
-            },
-            "contract": {
-              "rectus-femoris": 0.4,
-              "vastus-lateralis": 0.2,
-              "vastus-medialis": 0.2,
-              "vastus-intermedius": 0.2,
-              "gluteus-maximus": 0.2
             }
           }
         ],
         "tempo": [
           2,
-          0.5,
-          2,
-          0.5
+          0.4,
+          1.6,
+          0.6
         ]
       },
       "sources": [
@@ -341,90 +322,91 @@
       "evidence": [],
       "sketch": "dumbbell-goblet-squat",
       "motion": {
-        "root": {
-          "rotation": [
-            0,
-            0,
-            0
-          ]
-        },
+        "equipment": [
+          {
+            "kind": "dumbbell",
+            "grip": "pronated",
+            "hand": "left"
+          }
+        ],
         "keys": [
           {
             "phase": "start",
             "joints": {
-              "trunk": {
-                "flexion": 0
+              "shoulder.l": {
+                "horizontal-abduction": 10,
+                "internal-rotation": 45
+              },
+              "elbow.l": {
+                "flexion": 110
+              },
+              "forearm.l": {
+                "pronation": 40
+              },
+              "shoulder.r": {
+                "horizontal-adduction": 10,
+                "internal-rotation": 30
+              },
+              "elbow.r": {
+                "flexion": 110
+              },
+              "forearm.r": {
+                "pronation": 40
               },
               "hip.l": {
-                "flexion": 0,
-                "abduction": 8
-              },
-              "hip.r": {
-                "flexion": 0,
-                "abduction": 8
+                "abduction": 10,
+                "external-rotation": 15
               },
               "knee.l": {
-                "flexion": 3
-              },
-              "knee.r": {
-                "flexion": 3
-              },
-              "ankle.l": {
-                "dorsiflexion": 0
-              },
-              "ankle.r": {
-                "dorsiflexion": 0
+                "flexion": 2
               }
-            },
-            "contract": {
-              "rectus-femoris": 0.4,
-              "vastus-lateralis": 0.7,
-              "vastus-medialis": 0.7,
-              "vastus-intermedius": 0.7,
-              "gluteus-maximus": 0.7
             }
           },
           {
             "phase": "end",
             "joints": {
+              "shoulder.l": {
+                "horizontal-abduction": 10,
+                "internal-rotation": 45
+              },
+              "elbow.l": {
+                "flexion": 110
+              },
+              "forearm.l": {
+                "pronation": 40
+              },
+              "shoulder.r": {
+                "horizontal-adduction": 10,
+                "internal-rotation": 30
+              },
+              "elbow.r": {
+                "flexion": 110
+              },
+              "forearm.r": {
+                "pronation": 40
+              },
               "trunk": {
-                "flexion": 15
+                "flexion": 20
               },
               "hip.l": {
-                "flexion": 65,
-                "abduction": 8
-              },
-              "hip.r": {
-                "flexion": 65,
-                "abduction": 8
+                "flexion": 106,
+                "abduction": 19,
+                "internal-rotation": 10
               },
               "knee.l": {
-                "flexion": 72
-              },
-              "knee.r": {
-                "flexion": 72
+                "flexion": 118
               },
               "ankle.l": {
-                "dorsiflexion": 22
-              },
-              "ankle.r": {
-                "dorsiflexion": 22
+                "dorsiflexion": 32
               }
-            },
-            "contract": {
-              "rectus-femoris": 0.4,
-              "vastus-lateralis": 0.2,
-              "vastus-medialis": 0.2,
-              "vastus-intermedius": 0.2,
-              "gluteus-maximus": 0.2
             }
           }
         ],
         "tempo": [
           2,
-          0.5,
-          2,
-          0.5
+          0.4,
+          1.6,
+          0.6
         ]
       },
       "sources": [
@@ -555,88 +537,70 @@
       "evidence": [],
       "sketch": "bodyweight-reverse-lunge",
       "motion": {
-        "root": {
-          "rotation": [
-            0,
-            0,
-            0
-          ]
-        },
         "feet": "left",
         "keys": [
           {
             "phase": "start",
             "joints": {
-              "trunk": {
-                "flexion": 0
+              "shoulder.l": {
+                "abduction": 35,
+                "internal-rotation": 75
               },
-              "hip.l": {
-                "flexion": 0
+              "elbow.l": {
+                "flexion": 65
               },
-              "hip.r": {
-                "flexion": 0
-              },
-              "knee.l": {
-                "flexion": 3
-              },
-              "knee.r": {
-                "flexion": 3
-              },
-              "ankle.l": {
-                "dorsiflexion": 0
-              },
-              "ankle.r": {
-                "dorsiflexion": 0
+              "forearm.l": {
+                "pronation": 150
               }
-            },
-            "contract": {
-              "rectus-femoris": 0.4,
-              "vastus-lateralis": 0.7,
-              "vastus-medialis": 0.7,
-              "vastus-intermedius": 0.7,
-              "gluteus-maximus": 0.7
             }
           },
           {
             "phase": "end",
             "joints": {
+              "shoulder.l": {
+                "abduction": 35,
+                "internal-rotation": 75
+              },
+              "elbow.l": {
+                "flexion": 65
+              },
+              "forearm.l": {
+                "pronation": 150
+              },
               "trunk": {
-                "flexion": 5
+                "flexion": 4
               },
               "hip.l": {
-                "flexion": 67
-              },
-              "hip.r": {
-                "extension": 5
+                "flexion": 88
               },
               "knee.l": {
-                "flexion": 72
-              },
-              "knee.r": {
-                "flexion": 60
+                "flexion": 96
               },
               "ankle.l": {
-                "dorsiflexion": 10
+                "dorsiflexion": 12
+              },
+              "hip.r": {
+                "extension": 0
+              },
+              "knee.r": {
+                "flexion": 92
               },
               "ankle.r": {
-                "plantarflexion": 30
+                "dorsiflexion": 22
               }
-            },
-            "contract": {
-              "rectus-femoris": 0.4,
-              "vastus-lateralis": 0.2,
-              "vastus-medialis": 0.2,
-              "vastus-intermedius": 0.2,
-              "gluteus-maximus": 0.2
             }
           }
         ],
         "tempo": [
-          2,
-          0.5,
-          2,
-          0.5
-        ]
+          1.6,
+          0.4,
+          1.6,
+          0.6
+        ],
+        "camera": {
+          "azimuth": 75,
+          "elevation": 8
+        }
       },
       "sources": [
         "M109",
@@ -764,91 +728,101 @@
       "evidence": [],
       "sketch": "dumbbell-lateral-lunge",
       "motion": {
-        "root": {
-          "rotation": [
-            0,
-            0,
-            0
-          ]
-        },
+        "equipment": [
+          {
+            "kind": "dumbbell",
+            "grip": "pronated",
+            "hand": "left"
+          }
+        ],
+        "feet": "right",
         "keys": [
           {
             "phase": "start",
             "joints": {
-              "trunk": {
-                "flexion": 0
+              "shoulder.l": {
+                "horizontal-abduction": 10,
+                "internal-rotation": 45
               },
-              "hip.l": {
-                "flexion": 0
+              "elbow.l": {
+                "flexion": 110
               },
-              "hip.r": {
-                "flexion": 0
+              "forearm.l": {
+                "pronation": 40
               },
-              "knee.l": {
-                "flexion": 3
+              "shoulder.r": {
+                "horizontal-adduction": 10,
+                "internal-rotation": 30
               },
-              "knee.r": {
-                "flexion": 3
+              "elbow.r": {
+                "flexion": 110
               },
-              "ankle.l": {
-                "dorsiflexion": 0
-              },
-              "ankle.r": {
-                "dorsiflexion": 0
+              "forearm.r": {
+                "pronation": 40
               }
-            },
-            "contract": {
-              "rectus-femoris": 0.4,
-              "vastus-lateralis": 0.7,
-              "vastus-medialis": 0.7,
-              "vastus-intermedius": 0.7,
-              "gluteus-maximus": 0.7,
-              "adductor-magnus": 0.7
             }
           },
           {
             "phase": "end",
             "joints": {
+              "shoulder.l": {
+                "horizontal-abduction": 10,
+                "internal-rotation": 45
+              },
+              "elbow.l": {
+                "flexion": 110
+              },
+              "forearm.l": {
+                "pronation": 40
+              },
+              "shoulder.r": {
+                "horizontal-adduction": 10,
+                "internal-rotation": 30
+              },
+              "elbow.r": {
+                "flexion": 110
+              },
+              "forearm.r": {
+                "pronation": 40
+              },
               "trunk": {
-                "flexion": 18
+                "flexion": 22
               },
               "hip.l": {
-                "flexion": 73,
-                "abduction": 10
-              },
-              "hip.r": {
-                "flexion": 18,
-                "abduction": 38
+                "flexion": 64,
+                "abduction": 54,
+                "external-rotation": 37
               },
               "knee.l": {
-                "flexion": 70
-              },
-              "knee.r": {
-                "flexion": 4
+                "flexion": 80
               },
               "ankle.l": {
-                "dorsiflexion": 15
+                "dorsiflexion": 16
+              },
+              "hip.r": {
+                "flexion": 36,
+                "abduction": 45
+              },
+              "knee.r": {
+                "flexion": 3
               },
               "ankle.r": {
-                "dorsiflexion": 0
+                "plantarflexion": 17,
+                "inversion": 20
               }
-            },
-            "contract": {
-              "rectus-femoris": 0.4,
-              "vastus-lateralis": 0.2,
-              "vastus-medialis": 0.2,
-              "vastus-intermedius": 0.2,
-              "gluteus-maximus": 0.2,
-              "adductor-magnus": 0.2
             }
           }
         ],
         "tempo": [
-          2,
-          0.5,
-          2,
-          0.5
-        ]
+          1.6,
+          0.4,
+          1.6,
+          0.6
+        ],
+        "camera": {
+          "azimuth": 15,
+          "elevation": 10
+        }
       },
       "sources": [
         "M109",
@@ -972,84 +946,60 @@
       "evidence": [],
       "sketch": "barbell-romanian-deadlift",
       "motion": {
-        "root": {
-          "rotation": [
-            0,
-            0,
-            0
-          ]
-        },
+        "equipment": [
+          {
+            "kind": "barbell",
+            "grip": "pronated",
+            "width": 0.5
+          }
+        ],
         "keys": [
           {
             "phase": "start",
             "joints": {
-              "trunk": {
-                "flexion": 0
-              },
               "hip.l": {
-                "flexion": 4
-              },
-              "hip.r": {
-                "flexion": 4
+                "flexion": 3
               },
               "knee.l": {
                 "flexion": 8
               },
-              "knee.r": {
-                "flexion": 8
-              },
               "ankle.l": {
-                "dorsiflexion": 4
+                "dorsiflexion": 5
               },
-              "ankle.r": {
-                "dorsiflexion": 4
+              "shoulder.l": {
+                "flexion": 10
+              },
+              "forearm.l": {
+                "pronation": 165
               }
-            },
-            "contract": {
-              "gluteus-maximus": 0.7,
-              "biceps-femoris-long": 0.7,
-              "semitendinosus": 0.7,
-              "semimembranosus": 0.7
             }
           },
           {
             "phase": "end",
             "joints": {
               "trunk": {
-                "flexion": 60
+                "flexion": 52
               },
               "hip.l": {
-                "flexion": 65
-              },
-              "hip.r": {
-                "flexion": 65
+                "flexion": 70
               },
               "knee.l": {
-                "flexion": 12
+                "flexion": 18
               },
-              "knee.r": {
-                "flexion": 12
+              "shoulder.l": {
+                "flexion": 34
               },
-              "ankle.l": {
-                "dorsiflexion": 7
-              },
-              "ankle.r": {
-                "dorsiflexion": 7
+              "forearm.l": {
+                "pronation": 165
               }
-            },
-            "contract": {
-              "gluteus-maximus": 0.2,
-              "biceps-femoris-long": 0.2,
-              "semitendinosus": 0.2,
-              "semimembranosus": 0.2
             }
           }
         ],
         "tempo": [
           2,
-          0.5,
-          2,
-          0.5
+          0.4,
+          1.6,
+          0.6
         ]
       },
       "sources": [
@@ -1166,96 +1116,77 @@
       "evidence": [],
       "sketch": "seated-leg-curl",
       "motion": {
-        "root": {
-          "rotation": [
-            0,
-            0,
-            0
-          ]
-        },
+        "equipment": [
+          {
+            "kind": "machine-seat",
+            "angle": 12,
+            "height": 0.5,
+            "thighPad": true,
+            "at": [
+              0,
+              -0.133,
+              0.056
+            ]
+          }
+        ],
         "keys": [
           {
             "phase": "start",
             "joints": {
               "trunk": {
-                "flexion": -20
+                "extension": 12
               },
               "hip.l": {
-                "flexion": 62
+                "flexion": 78
               },
-              "hip.r": {
-                "flexion": 62
+              "shoulder.l": {
+                "extension": 25
+              },
+              "elbow.l": {
+                "flexion": 42
+              },
+              "forearm.l": {
+                "pronation": 105
               },
               "knee.l": {
-                "flexion": 15
-              },
-              "knee.r": {
-                "flexion": 15
-              },
-              "ankle.l": {
-                "dorsiflexion": 0
-              },
-              "ankle.r": {
-                "dorsiflexion": 0
+                "flexion": 5
               }
-            },
-            "contract": {
-              "biceps-femoris-long": 0.15,
-              "biceps-femoris-short": 0.15,
-              "semitendinosus": 0.15,
-              "semimembranosus": 0.15
             }
           },
           {
             "phase": "end",
             "joints": {
               "trunk": {
-                "flexion": -20
+                "extension": 12
               },
               "hip.l": {
-                "flexion": 62
+                "flexion": 78
               },
-              "hip.r": {
-                "flexion": 62
+              "shoulder.l": {
+                "extension": 25
+              },
+              "elbow.l": {
+                "flexion": 42
+              },
+              "forearm.l": {
+                "pronation": 105
               },
               "knee.l": {
-                "flexion": 85
-              },
-              "knee.r": {
-                "flexion": 85
-              },
-              "ankle.l": {
-                "dorsiflexion": 0
-              },
-              "ankle.r": {
-                "dorsiflexion": 0
+                "flexion": 95
               }
-            },
-            "contract": {
-              "biceps-femoris-long": 0.8,
-              "biceps-femoris-short": 0.8,
-              "semitendinosus": 0.8,
-              "semimembranosus": 0.8
             }
           }
         ],
         "tempo": [
+          1.4,
+          0.4,
           2,
-          0.5,
-          2,
-          0.5
+          0.4
         ],
-        "equipment": [
-          {
-            "kind": "bench",
-            "incline": 70,
-            "at": [
-              0,
-              -0.12,
-              -0.3
-            ]
-          }
-        ]
+        "camera": {
+          "azimuth": 80,
+          "elevation": 10
+        }
       },
       "sources": [
         "M109",
@@ -1376,83 +1307,88 @@
       "evidence": [],
       "sketch": "cable-hip-abduction",
       "motion": {
-        "root": {
-          "rotation": [
-            0,
-            0,
-            0
-          ]
-        },
+        "equipment": [
+          {
+            "kind": "cable",
+            "hand": "right",
+            "grip": "neutral",
+            "at": [
+              -0.751,
+              0.343,
+              0.165
+            ]
+          },
+          {
+            "kind": "band",
+            "to": "feet",
+            "hand": "left",
+            "at": [
+              -0.751,
+              -0.762,
+              0.165
+            ]
+          }
+        ],
         "feet": "right",
         "keys": [
           {
             "phase": "start",
             "joints": {
-              "trunk": {
-                "flexion": 0
+              "shoulder.l": {
+                "abduction": 4
+              },
+              "shoulder.r": {
+                "abduction": 70
+              },
+              "elbow.r": {
+                "flexion": 12
+              },
+              "forearm.r": {
+                "pronation": 90
               },
               "hip.l": {
-                "abduction": 0
+                "abduction": 2
               },
               "hip.r": {
-                "abduction": 0
-              },
-              "knee.l": {
-                "flexion": 5
+                "abduction": 2
               },
               "knee.r": {
-                "flexion": 10
-              },
-              "ankle.l": {
-                "dorsiflexion": 0
-              },
-              "ankle.r": {
-                "dorsiflexion": 0
+                "flexion": 3
               }
-            },
-            "contract": {
-              "gluteus-medius": 0.15,
-              "gluteus-minimus": 0.15,
-              "tensor-fasciae-latae": 0.15
             }
           },
           {
             "phase": "end",
             "joints": {
-              "trunk": {
-                "flexion": 0
+              "shoulder.l": {
+                "abduction": 4
+              },
+              "shoulder.r": {
+                "abduction": 70
+              },
+              "elbow.r": {
+                "flexion": 12
+              },
+              "forearm.r": {
+                "pronation": 90
               },
               "hip.l": {
-                "abduction": 25
+                "abduction": 32
               },
               "hip.r": {
-                "abduction": 0
-              },
-              "knee.l": {
-                "flexion": 5
+                "abduction": 2
               },
               "knee.r": {
-                "flexion": 10
-              },
-              "ankle.l": {
-                "dorsiflexion": 0
-              },
-              "ankle.r": {
-                "dorsiflexion": 0
+                "flexion": 3
               }
-            },
-            "contract": {
-              "gluteus-medius": 0.8,
-              "gluteus-minimus": 0.8,
-              "tensor-fasciae-latae": 0.8
             }
           }
         ],
         "tempo": [
+          1.4,
+          0.4,
           2,
-          0.5,
-          2,
-          0.5
+          0.4
         ]
       },
       "sources": [
@@ -1569,87 +1505,89 @@
       "evidence": [],
       "sketch": "cable-hip-adduction",
       "motion": {
-        "root": {
-          "rotation": [
-            0,
-            0,
-            0
-          ]
-        },
+        "equipment": [
+          {
+            "kind": "cable",
+            "hand": "left",
+            "grip": "neutral",
+            "at": [
+              0.752,
+              0.343,
+              0.165
+            ]
+          },
+          {
+            "kind": "band",
+            "to": "feet",
+            "hand": "left",
+            "at": [
+              0.752,
+              -0.762,
+              0.165
+            ]
+          }
+        ],
         "feet": "right",
         "keys": [
           {
             "phase": "start",
             "joints": {
-              "trunk": {
-                "flexion": 0
+              "shoulder.l": {
+                "abduction": 70
+              },
+              "elbow.l": {
+                "flexion": 12
+              },
+              "forearm.l": {
+                "pronation": 90
+              },
+              "shoulder.r": {
+                "abduction": 4
               },
               "hip.l": {
-                "abduction": 20
+                "abduction": 26
               },
               "hip.r": {
-                "abduction": 0
-              },
-              "knee.l": {
-                "flexion": 5
+                "abduction": 4
               },
               "knee.r": {
-                "flexion": 10
-              },
-              "ankle.l": {
-                "dorsiflexion": 0
-              },
-              "ankle.r": {
-                "dorsiflexion": 0
+                "flexion": 3
               }
-            },
-            "contract": {
-              "adductor-longus": 0.15,
-              "adductor-brevis": 0.15,
-              "adductor-magnus": 0.15,
-              "gracilis": 0.15,
-              "pectineus": 0.15
             }
           },
           {
             "phase": "end",
             "joints": {
-              "trunk": {
-                "flexion": 0
+              "shoulder.l": {
+                "abduction": 70
+              },
+              "elbow.l": {
+                "flexion": 12
+              },
+              "forearm.l": {
+                "pronation": 90
+              },
+              "shoulder.r": {
+                "abduction": 4
               },
               "hip.l": {
-                "abduction": 0
+                "adduction": 4,
+                "flexion": 4
               },
               "hip.r": {
-                "abduction": 0
-              },
-              "knee.l": {
-                "flexion": 5
+                "abduction": 4
               },
               "knee.r": {
-                "flexion": 10
-              },
-              "ankle.l": {
-                "dorsiflexion": 0
-              },
-              "ankle.r": {
-                "dorsiflexion": 0
+                "flexion": 3
               }
-            },
-            "contract": {
-              "adductor-longus": 0.8,
-              "adductor-brevis": 0.8,
-              "adductor-magnus": 0.8,
-              "gracilis": 0.8,
-              "pectineus": 0.8
             }
           }
         ],
         "tempo": [
+          1.4,
+          0.4,
           2,
-          0.5,
-          2,
-          0.5
+          0.4
         ]
       },
       "sources": [
@@ -1762,83 +1700,56 @@
       "evidence": [],
       "sketch": "dumbbell-standing-calf-raise",
       "motion": {
-        "root": {
-          "rotation": [
-            0,
-            0,
-            0
-          ]
-        },
+        "equipment": [
+          {
+            "kind": "dumbbell",
+            "grip": "neutral",
+            "hand": "right"
+          }
+        ],
         "keys": [
           {
             "phase": "start",
             "joints": {
-              "trunk": {
-                "flexion": 0
+              "shoulder.l": {
+                "abduction": 5
               },
-              "hip.l": {
-                "flexion": 0
-              },
-              "hip.r": {
-                "flexion": 0
+              "forearm.l": {
+                "pronation": 85
               },
               "knee.l": {
-                "flexion": 5
-              },
-              "knee.r": {
-                "flexion": 5
-              },
-              "ankle.l": {
-                "plantarflexion": 0
-              },
-              "ankle.r": {
-                "plantarflexion": 0
+                "flexion": 2
               }
-            },
-            "contract": {
-              "gastrocnemius-medial": 0.15,
-              "gastrocnemius-lateral": 0.15,
-              "soleus": 0.15
             }
           },
           {
             "phase": "end",
             "joints": {
-              "trunk": {
-                "flexion": 0
+              "shoulder.l": {
+                "abduction": 5
               },
-              "hip.l": {
-                "flexion": 0
-              },
-              "hip.r": {
-                "flexion": 0
+              "forearm.l": {
+                "pronation": 85
               },
               "knee.l": {
-                "flexion": 5
-              },
-              "knee.r": {
-                "flexion": 5
+                "flexion": 2
               },
               "ankle.l": {
-                "plantarflexion": 25
-              },
-              "ankle.r": {
-                "plantarflexion": 25
+                "plantarflexion": 35
               }
-            },
-            "contract": {
-              "gastrocnemius-medial": 0.8,
-              "gastrocnemius-lateral": 0.8,
-              "soleus": 0.8
             }
           }
         ],
         "tempo": [
-          2,
-          0.5,
-          2,
-          0.5
-        ]
+          1.2,
+          0.6,
+          1.6,
+          0.4
+        ],
+        "camera": {
+          "azimuth": 75,
+          "elevation": 8
+        }
       },
       "sources": [
         "M109",
@@ -1950,94 +1861,98 @@
       "evidence": [],
       "sketch": "seated-dumbbell-calf-raise",
       "motion": {
-        "root": {
-          "rotation": [
-            0,
-            0,
-            0
-          ]
-        },
+        "equipment": [
+          {
+            "kind": "dumbbell",
+            "grip": "pronated",
+            "hand": "left"
+          },
+          {
+            "kind": "bench",
+            "at": [
+              0,
+              -0.135,
+              -0.382
+            ]
+          }
+        ],
         "keys": [
           {
             "phase": "start",
             "joints": {
-              "trunk": {
-                "flexion": -20
-              },
               "hip.l": {
-                "flexion": 60
-              },
-              "hip.r": {
-                "flexion": 60
+                "flexion": 80
               },
               "knee.l": {
-                "flexion": 82
+                "flexion": 80
               },
-              "knee.r": {
-                "flexion": 82
+              "shoulder.l": {
+                "flexion": 14,
+                "abduction": -20
               },
-              "ankle.l": {
-                "dorsiflexion": 10
+              "elbow.l": {
+                "flexion": 25
               },
-              "ankle.r": {
-                "dorsiflexion": 10
+              "forearm.l": {
+                "pronation": 170
+              },
+              "shoulder.r": {
+                "flexion": 10,
+                "abduction": -10
+              },
+              "elbow.r": {
+                "flexion": 33
+              },
+              "forearm.r": {
+                "pronation": 170
               }
-            },
-            "contract": {
-              "soleus": 0.15,
-              "gastrocnemius-medial": 0.15,
-              "gastrocnemius-lateral": 0.15
             }
           },
           {
             "phase": "end",
             "joints": {
-              "trunk": {
-                "flexion": -20
-              },
               "hip.l": {
-                "flexion": 60
-              },
-              "hip.r": {
-                "flexion": 60
+                "flexion": 87
               },
               "knee.l": {
-                "flexion": 82
-              },
-              "knee.r": {
-                "flexion": 82
+                "flexion": 80
               },
               "ankle.l": {
-                "plantarflexion": 20
+                "plantarflexion": 32
               },
-              "ankle.r": {
-                "plantarflexion": 20
+              "shoulder.l": {
+                "flexion": 7,
+                "abduction": -23
+              },
+              "elbow.l": {
+                "flexion": 41
+              },
+              "forearm.l": {
+                "pronation": 170
+              },
+              "shoulder.r": {
+                "flexion": 5,
+                "abduction": -11
+              },
+              "elbow.r": {
+                "flexion": 47
+              },
+              "forearm.r": {
+                "pronation": 170
               }
-            },
-            "contract": {
-              "soleus": 0.8,
-              "gastrocnemius-medial": 0.45,
-              "gastrocnemius-lateral": 0.45
             }
           }
         ],
         "tempo": [
-          2,
-          0.5,
-          2,
-          0.5
+          1.2,
+          0.6,
+          1.6,
+          0.4
         ],
-        "equipment": [
-          {
-            "kind": "bench",
-            "incline": 70,
-            "at": [
-              0,
-              -0.12,
-              -0.3
-            ]
-          }
-        ]
+        "camera": {
+          "azimuth": 80,
+          "elevation": 12
+        }
       },
       "sources": [
         "M109",
@@ -2145,79 +2060,50 @@
       "evidence": [],
       "sketch": "wall-tibialis-raise",
       "motion": {
-        "root": {
-          "rotation": [
-            -10,
-            0,
-            0
-          ]
-        },
+        "equipment": [
+          {
+            "kind": "floor",
+            "at": [
+              0,
+              -0.912,
+              0.1
+            ]
+          }
+        ],
+        "contacts": [
+          "feet"
+        ],
         "keys": [
           {
             "phase": "start",
             "joints": {
-              "trunk": {
-                "flexion": 0
-              },
-              "hip.l": {
-                "flexion": 0
-              },
-              "hip.r": {
-                "flexion": 0
-              },
               "knee.l": {
-                "flexion": 5
-              },
-              "knee.r": {
-                "flexion": 5
-              },
-              "ankle.l": {
-                "dorsiflexion": 0
-              },
-              "ankle.r": {
-                "dorsiflexion": 0
+                "flexion": 3
               }
-            },
-            "contract": {
-              "tibialis-anterior": 0.15
             }
           },
           {
             "phase": "end",
             "joints": {
-              "trunk": {
-                "flexion": 0
-              },
-              "hip.l": {
-                "flexion": 0
-              },
-              "hip.r": {
-                "flexion": 0
-              },
               "knee.l": {
-                "flexion": 5
-              },
-              "knee.r": {
-                "flexion": 5
+                "flexion": 3
               },
               "ankle.l": {
-                "dorsiflexion": 15
-              },
-              "ankle.r": {
-                "dorsiflexion": 15
+                "dorsiflexion": 24
               }
-            },
-            "contract": {
-              "tibialis-anterior": 0.8
             }
           }
         ],
         "tempo": [
-          2,
-          0.5,
-          2,
-          0.5
-        ]
+          1,
+          0.6,
+          1.4,
+          0.4
+        ],
+        "camera": {
+          "azimuth": 75,
+          "elevation": 8
+        }
       },
       "sources": [
         "M109",
@@ -2332,80 +2218,84 @@
       "evidence": [],
       "sketch": "heel-walk",
       "motion": {
-        "root": {
-          "rotation": [
-            0,
-            0,
-            0
-          ]
-        },
+        "equipment": [
+          {
+            "kind": "floor",
+            "at": [
+              0,
+              -0.919,
+              0.15
+            ]
+          }
+        ],
+        "contacts": [
+          "feet"
+        ],
         "feet": "right",
         "keys": [
           {
             "phase": "start",
             "joints": {
-              "trunk": {
-                "flexion": 0
-              },
-              "hip.l": {
-                "flexion": 0
-              },
-              "hip.r": {
-                "flexion": 0
-              },
               "knee.l": {
-                "flexion": 5
-              },
-              "knee.r": {
-                "flexion": 5
+                "flexion": 3
               },
               "ankle.l": {
                 "dorsiflexion": 15
               },
-              "ankle.r": {
-                "dorsiflexion": 15
+              "shoulder.l": {
+                "flexion": 0
+              },
+              "elbow.l": {
+                "flexion": 10
               }
-            },
-            "contract": {
-              "tibialis-anterior": 0.6
             }
           },
           {
             "phase": "end",
             "joints": {
-              "trunk": {
-                "flexion": 0
-              },
               "hip.l": {
-                "flexion": 15
-              },
-              "hip.r": {
-                "extension": 5
+                "flexion": 22
               },
               "knee.l": {
-                "flexion": 10
-              },
-              "knee.r": {
                 "flexion": 5
               },
               "ankle.l": {
-                "dorsiflexion": 15
+                "dorsiflexion": 24
+              },
+              "hip.r": {
+                "extension": 12
+              },
+              "knee.r": {
+                "flexion": 6
               },
               "ankle.r": {
-                "dorsiflexion": 15
+                "dorsiflexion": 29
+              },
+              "shoulder.l": {
+                "extension": 12
+              },
+              "shoulder.r": {
+                "flexion": 12
+              },
+              "elbow.l": {
+                "flexion": 12
+              },
+              "elbow.r": {
+                "flexion": 18
               }
-            },
-            "contract": {
-              "tibialis-anterior": 0.6
             }
           }
         ],
         "tempo": [
-          2,
-          0.5,
-          2,
-          0.5
-        ]
+          1,
+          0.3,
+          1,
+          0.3
+        ],
+        "camera": {
+          "azimuth": 75,
+          "elevation": 8
+        }
       },
       "sources": [
         "M109",
@@ -2513,89 +2403,113 @@
       "evidence": [],
       "sketch": "band-ankle-dorsiflexion",
       "motion": {
-        "root": {
-          "rotation": [
-            0,
-            0,
-            0
-          ]
-        },
+        "equipment": [
+          {
+            "kind": "band",
+            "to": "feet",
+            "hand": "left",
+            "at": [
+              0.082,
+              -0.081,
+              1.309
+            ]
+          },
+          {
+            "kind": "floor",
+            "at": [
+              0,
+              -0.131,
+              0.433
+            ]
+          }
+        ],
+        "contacts": [
+          "seat"
+        ],
         "keys": [
           {
             "phase": "start",
             "joints": {
               "trunk": {
-                "flexion": -20
+                "extension": 15
               },
               "hip.l": {
-                "flexion": 68
+                "flexion": 75
               },
               "hip.r": {
-                "flexion": 55
-              },
-              "knee.l": {
-                "flexion": 8
+                "flexion": 133
               },
               "knee.r": {
-                "flexion": 85
-              },
-              "ankle.l": {
-                "plantarflexion": 10
+                "flexion": 130
               },
               "ankle.r": {
-                "dorsiflexion": 0
+                "dorsiflexion": -18
+              },
+              "hand.l": {
+                "extension": 60
+              },
+              "shoulder.l": {
+                "flexion": -44,
+                "abduction": 0
+              },
+              "elbow.l": {
+                "flexion": 25
+              },
+              "forearm.l": {
+                "pronation": 90
+              },
+              "ankle.l": {
+                "plantarflexion": 20
               }
-            },
-            "contract": {
-              "tibialis-anterior": 0.15
             }
           },
           {
             "phase": "end",
             "joints": {
               "trunk": {
-                "flexion": -20
+                "extension": 15
               },
               "hip.l": {
-                "flexion": 68
+                "flexion": 75
               },
               "hip.r": {
-                "flexion": 55
-              },
-              "knee.l": {
-                "flexion": 8
+                "flexion": 133
               },
               "knee.r": {
-                "flexion": 85
+                "flexion": 130
+              },
+              "ankle.r": {
+                "dorsiflexion": -18
+              },
+              "hand.l": {
+                "extension": 60
+              },
+              "shoulder.l": {
+                "flexion": -44,
+                "abduction": 0
+              },
+              "elbow.l": {
+                "flexion": 25
+              },
+              "forearm.l": {
+                "pronation": 90
               },
               "ankle.l": {
                 "dorsiflexion": 15
-              },
-              "ankle.r": {
-                "dorsiflexion": 0
               }
-            },
-            "contract": {
-              "tibialis-anterior": 0.8
             }
           }
         ],
         "tempo": [
-          2,
-          0.5,
-          2,
-          0.5
+          1.2,
+          0.6,
+          1.6,
+          0.4
         ],
-        "equipment": [
-          {
-            "kind": "floor",
-            "at": [
-              0,
-              -0.15,
-              0.35
-            ]
-          }
-        ]
+        "camera": {
+          "azimuth": 80,
+          "elevation": 12
+        }
       },
       "sources": [
         "M109",

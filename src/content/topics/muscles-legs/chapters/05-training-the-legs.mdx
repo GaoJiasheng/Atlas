@@ -21,54 +21,70 @@ state:
     zh: "十三个动作，用杠铃、哑铃、自重、绳索、器械和弹力带：蹲、髋铰链、迈步、侧向移动和练踝。"
   beats:
     - exercise: {"id": "barbell-back-squat", "phase": "loop"}
-      camera: {"position": [3.3, 0.35, 2.2], "target": [0, -0.42, 0], "fov": 22}
       labels: ["gluteus-maximus", "vastus-lateralis", "rectus-femoris", "adductor-magnus"]
       caption:
-        en: "Barbell back squat: hips, knees and ankles bend together, and the quadriceps and gluteus maximus straighten them again. The model keeps the feet flat on the floor while the hips travel down and back, at a partial depth."
-        zh: "杠铃背蹲：髋、膝、踝一起弯曲，再由股四头肌和臀大肌把它们伸直。模型让双脚平踩地面，臀部向下、向后移动，深度取较浅的一档。"
+        en: "Barbell back squat. The bar rests across the upper back, the feet stay flat, and hips, knees and ankles bend together until the thighs are about level with the floor. The quadriceps and gluteus maximus straighten them again."
+        zh: "杠铃背蹲。杠铃横放在上背，双脚平踩，髋、膝、踝一起弯曲，蹲到大腿约与地面平行，再由股四头肌和臀大肌把它们伸直。"
     - exercise: {"id": "barbell-romanian-deadlift", "phase": "loop"}
-      camera: {"position": [3.3, 0.35, 2.2], "target": [0, -0.42, 0], "fov": 22}
       labels: ["gluteus-maximus", "biceps-femoris-long", "semitendinosus", "semimembranosus"]
       caption:
-        en: "Romanian deadlift: the trunk tips forward at the hips while the knees stay softly bent. The hamstrings lengthen on the way down and pull the trunk back up."
-        zh: "罗马尼亚硬拉：躯干以髋为轴向前倾，膝保持微屈。下放时腘绳肌被拉长，起身时由它们把躯干拉回。"
-    - exercise: {"id": "bodyweight-reverse-lunge", "phase": "loop"}
-      camera: {"position": [3.3, 0.35, 2.2], "target": [0, -0.42, 0], "fov": 22}
-      labels: ["vastus-lateralis", "gluteus-maximus", "rectus-femoris", "biceps-femoris-long"]
+        en: "Romanian deadlift. The knees stay softly bent while the trunk tips forward at the hips and the bar slides down to just above the knees. The hamstrings lengthen on the way down and pull the trunk back up."
+        zh: "罗马尼亚硬拉。膝保持微屈，躯干以髋为轴向前倾，杠铃顺着大腿下滑到膝上方。下放时腘绳肌被拉长，起身时由它们把躯干拉回。"
+    - exercise: {"id": "dumbbell-goblet-squat", "phase": "loop"}
+      labels: ["vastus-lateralis", "rectus-femoris", "gluteus-maximus", "adductor-magnus"]
       caption:
-        en: "Reverse lunge: one foot steps back and both knees bend; the front leg does most of the work on the way up. In the model the front foot stays flat and planted on the floor."
-        zh: "后撤弓步：一只脚向后迈，两膝一起弯；起身时主要靠前腿。模型里前脚平踩在地面上，保持不动。"
+        en: "Goblet squat. A dumbbell held at the chest keeps the trunk more upright, so the squat can go deep with the heels down. The quadriceps and gluteus maximus do the work."
+        zh: "高脚杯深蹲。哑铃抱在胸前，躯干更容易保持直立，脚跟着地也能蹲得深。主要靠股四头肌和臀大肌。"
+    - exercise: {"id": "dumbbell-lateral-lunge", "phase": "loop"}
+      labels: ["adductor-magnus", "adductor-longus", "gluteus-maximus", "vastus-lateralis"]
+      caption:
+        en: "Lateral lunge. The left foot steps out to the side and that knee bends while the right leg stays nearly straight. The bent leg's quadriceps and gluteus maximus push back; the straight leg's adductors are stretched."
+        zh: "侧弓步。左脚向侧面迈出、左膝弯曲，右腿几乎伸直。弯曲那条腿的股四头肌和臀大肌把身体推回，伸直那条腿的内收肌被拉长。"
     - exercise: {"id": "dumbbell-standing-calf-raise", "phase": "loop"}
-      camera: "calf"
       labels: ["gastrocnemius-medial", "gastrocnemius-lateral", "soleus"]
       caption:
-        en: "Standing calf raise: the heels rise as gastrocnemius and soleus pull on the Achilles tendon. The knees stay straight, so gastrocnemius works at full length."
-        zh: "站姿提踵：腓肠肌和比目鱼肌拉动跟腱，脚跟抬起。膝保持伸直，腓肠肌在完整长度下工作。"
+        en: "Standing calf raise. With the knees straight, gastrocnemius and soleus pull on the Achilles tendon and the heels rise onto the balls of the feet."
+        zh: "站姿提踵。膝伸直，腓肠肌和比目鱼肌拉动跟腱，脚跟抬起，用前脚掌撑地。"
     - exercise: {"id": "seated-dumbbell-calf-raise", "phase": "loop"}
-      camera: {"position": [2.6, 0.2, 1.6], "target": [0, -0.35, 0.1], "fov": 22}
       labels: ["soleus", "gastrocnemius-medial", "gastrocnemius-lateral"]
       caption:
-        en: "Seated calf raise: with the knees bent, gastrocnemius starts out shorter, while soleus, which starts below the knee, is unaffected. Both still lift the heels."
-        zh: "坐姿提踵：膝弯着，腓肠肌一开始就比较短；比目鱼肌起于膝下方，不受影响。两块肌肉仍然都在抬脚跟。"
-    - exercise: {"id": "seated-leg-curl", "phase": "loop"}
-      camera: {"position": [2.6, 0.2, 1.6], "target": [0, -0.35, 0.1], "fov": 22}
-      labels: ["biceps-femoris-long", "biceps-femoris-short", "semitendinosus", "semimembranosus"]
+        en: "Seated calf raise, a dumbbell resting across the thighs. With the knees bent, gastrocnemius starts out shorter, so soleus, which starts below the knee, does more of the lifting."
+        zh: "坐姿提踵，哑铃横放在大腿上。膝弯着，腓肠肌一开始就比较短，所以起于膝下方的比目鱼肌承担更多抬脚跟的工作。"
+    - exercise: {"id": "bodyweight-reverse-lunge", "phase": "loop"}
+      labels: ["vastus-lateralis", "gluteus-maximus", "rectus-femoris", "biceps-femoris-long"]
       caption:
-        en: "Seated leg curl: the knees bend against the machine pad. Both heads of biceps femoris work, including the short head, which a hip hinge cannot load."
-        zh: "坐姿腿弯举：膝对着器械的垫子弯曲。股二头肌两个头都在用力，包括髋铰链练不到的短头。"
-    - exercise: {"id": "cable-hip-abduction", "phase": "loop"}
-      camera: "front"
-      ghost: ["gluteus-maximus", "body", "neighbours"]
-      labels: ["gluteus-medius", "gluteus-minimus", "tensor-fasciae-latae"]
-      caption:
-        en: "Cable hip abduction: the working leg swings out against the cable while the pelvis stays level. Hip adduction is the same movement in the opposite direction."
-        zh: "绳索髋外展：练习腿对着绳索向外摆，骨盆保持水平。髋内收是同一个动作，方向相反。"
+        en: "Reverse lunge, hands on the hips. The right foot steps back and both knees bend until the back knee is just above the floor; the front foot stays flat and does most of the work on the way up."
+        zh: "后撤弓步，双手叉腰。右脚向后迈，两膝一起弯，直到后膝接近地面；前脚平踩不动，起身时主要靠前腿。"
     - exercise: {"id": "wall-tibialis-raise", "phase": "loop"}
-      camera: {"position": [1.6, -0.45, 1.9], "target": [0.05, -0.7, 0.03], "fov": 22}
       labels: ["tibialis-anterior"]
       caption:
-        en: "Wall tibialis raise: with the back against a wall and the heels down, tibialis anterior lifts the forefeet. Heel walking and band dorsiflexion train the same muscle."
-        zh: "靠墙提脚：背靠墙、脚跟着地，胫骨前肌把前脚掌抬起。脚跟行走和弹力带背屈练的是同一块肌肉。"
+        en: "Tibialis raise. Standing tall with the heels down, tibialis anterior lifts the forefeet toward the shins. In the real exercise the upper back leans on a wall; the model stands free."
+        zh: "提脚尖。身体站直、脚跟着地，胫骨前肌把前脚掌拉向小腿。实际练习时上背靠墙；模型没有画墙。"
+    - exercise: {"id": "heel-walk", "phase": "loop"}
+      labels: ["tibialis-anterior"]
+      caption:
+        en: "Heel walk. The forefeet stay lifted on every step, so tibialis anterior works the whole time while the legs walk forward on the heels."
+        zh: "脚跟行走。每一步前脚掌都保持抬起，腿用脚跟向前走，胫骨前肌一直在用力。"
+    - exercise: {"id": "cable-hip-abduction", "phase": "loop"}
+      labels: ["gluteus-medius", "gluteus-minimus", "tensor-fasciae-latae"]
+      caption:
+        en: "Cable hip abduction. One hand holds the column; the cable runs from the low pulley to the left ankle, and the left leg swings out against it while the pelvis stays level."
+        zh: "绳索髋外展。一只手扶住立柱；绳索从低位滑轮连到左脚踝，左腿对着绳索向外摆，骨盆保持水平。"
+    - exercise: {"id": "cable-hip-adduction", "phase": "loop"}
+      labels: ["adductor-longus", "adductor-magnus", "gracilis", "pectineus"]
+      caption:
+        en: "Cable hip adduction. The same set-up with the column on the other side: the cable pulls the left leg out, and the adductors draw it back in toward the standing leg."
+        zh: "绳索髋内收。同样的装置，立柱换到另一侧：绳索把左腿拉向外侧，内收肌再把它拉回到支撑腿旁。"
+    - exercise: {"id": "seated-leg-curl", "phase": "loop"}
+      labels: ["biceps-femoris-long", "biceps-femoris-short", "semitendinosus", "semimembranosus"]
+      caption:
+        en: "Seated leg curl. A pad holds the thighs down while the knees bend from straight to a right angle against the machine. Both heads of biceps femoris work, including the short head, which a hip hinge cannot load."
+        zh: "坐姿腿弯举。垫子压住大腿，膝对着器械从伸直弯到直角。股二头肌两个头都在用力，包括髋铰链练不到的短头。"
+    - exercise: {"id": "band-ankle-dorsiflexion", "phase": "loop"}
+      labels: ["tibialis-anterior"]
+      caption:
+        en: "Band dorsiflexion. Sitting on the floor with the leg straight, the band pulls the forefoot away and tibialis anterior pulls it back toward the shin."
+        zh: "弹力带背屈。坐在地上、腿伸直，弹力带把前脚掌往前拉，胫骨前肌再把它拉回小腿方向。"
   index:
     exercises: ["barbell-back-squat", "barbell-romanian-deadlift", "dumbbell-goblet-squat", "dumbbell-lateral-lunge", "dumbbell-standing-calf-raise", "seated-dumbbell-calf-raise", "bodyweight-reverse-lunge", "wall-tibialis-raise", "heel-walk", "cable-hip-abduction", "cable-hip-adduction", "seated-leg-curl", "band-ankle-dorsiflexion"]
 ---
@@ -91,7 +107,7 @@ One way to arrange a leg session, not a prescription: a light goblet squat to wa
 
 <More title={{ en: "What the model cannot show", zh: "模型演示不了的部分" }}>
 
-This model moves the hips, knees and ankles and keeps the planted foot on the floor, so in the squat and lunge the hips travel down as they should; it has no arms, and the depth is partial. The barbell, dumbbells, cable and band are not drawn, and the Romanian deadlift is shown by tipping the whole body forward at the hips. Each card's sketch shows the real movement.
+The model moves the whole body, keeps the planted feet on the floor and draws the barbell, dumbbells, bench, cable column and band at their real size. A few things are simplified. In the goblet squat and lateral lunge the dumbbell is held across the chest rather than standing on end. The wall in the tibialis raise and the hand support in the standing calf raise are not drawn. The ankle cuff of the cable exercises is shown as a cable running to the ankle, and the leg-curl machine as a seat, a back pad and a thigh pad. Each card's sketch shows the real set-up.
 
 </More>
 
@@ -121,7 +137,7 @@ How much to do depends on the person, their goal and their training so far. Thes
 
 <More title={{ en: "What the model cannot show", zh: "模型演示不了的部分" }}>
 
-这个模型能动髋、膝、踝，支撑脚始终踩在地面上，所以深蹲和弓步里臀部是往下沉的；但它没有手臂，下蹲深度也只是示意。杠铃、哑铃、绳索和弹力带都没有画出来；罗马尼亚硬拉是把整个身体以髋为轴向前倾来表示的。每张卡上的示意图画的是真实动作。
+模型能动全身，支撑脚始终踩在地面上，杠铃、哑铃、凳子、绳索立柱和弹力带都按真实尺寸画出。有几处做了简化：高脚杯深蹲和侧弓步里，哑铃横着抱在胸前，而不是竖着拿；靠墙提脚的墙和站姿提踵时扶的支架没有画；绳索练习的脚踝绑带画成一根连到脚踝的绳索；腿弯举器械只画了座椅、靠背和压腿垫。每张卡上的示意图画的是真实的装置。
 
 </More>
 

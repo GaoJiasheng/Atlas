@@ -16,60 +16,67 @@ state:
   layers: [superficial, intermediate, skeleton, neighbours, body]
   ghost: [body]
   sites: []
-  labels: [triceps-brachii-long, triceps-brachii-medial]
+  labels: [triceps-brachii-long, triceps-brachii-lateral]
   camera: { position: [1.6, 2.1, 4.1], target: [0.0, 0.02, 0.05], fov: 22 }
   summary:
     en: "Eleven exercises with barbell, dumbbells, body weight and cable: what each one asks of the elbow, forearm and wrist."
     zh: "十一个动作，用杠铃、哑铃、自重和绳索：每个动作要肘、前臂和腕做什么。"
   beats:
     - exercise: { id: close-grip-bench-press, phase: loop }
-      camera: { position: [1.6, 2.1, 4.1], target: [0.0, 0.02, 0.05], fov: 22 }
       labels: [triceps-brachii-long, triceps-brachii-lateral, triceps-brachii-medial, pectoralis-major-sternocostal]
       caption:
-        en: "Close-grip bench press. Triceps straightens the elbows while the chest and front shoulder help press. Hands about shoulder-width apart are close enough."
-        zh: "窄握卧推。肱三头肌伸直肘关节，胸肌和三角肌前部帮着推。两手约与肩同宽就够窄了。"
+        en: "Close-grip bench press. The bar starts at the lower chest with the elbows close to the ribs, and triceps straightens the elbows to press it up over the shoulders. The chest and front shoulder help."
+        zh: "窄握卧推。杠铃从下胸开始，手肘贴近肋骨，肱三头肌把肘伸直，把杠铃推到肩膀上方。胸肌和三角肌前部帮忙。"
     - exercise: { id: barbell-curl, phase: loop }
-      camera: exercise-view
       labels: [biceps-brachii-long, biceps-brachii-short, brachialis, brachioradialis]
       caption:
-        en: "Barbell curl. With the palms up, biceps, brachialis and brachioradialis bend the elbows. The upper arms stay by the sides and the trunk stays still."
-        zh: "杠铃弯举。掌心朝上，肱二头肌、肱肌和肱桡肌一起屈肘。上臂贴在身体两侧，躯干不晃。"
+        en: "Barbell curl. With the palms up, the bar rises from the thighs to the shoulders. Biceps, brachialis and brachioradialis bend the elbows while the upper arms stay by the sides."
+        zh: "杠铃弯举。掌心朝上，杠铃从大腿前举到肩前。肱二头肌、肱肌和肱桡肌屈肘，上臂一直贴在身体两侧。"
     - exercise: { id: barbell-reverse-curl, phase: loop }
-      camera: exercise-view
       labels: [brachialis, brachioradialis, biceps-brachii-long, extensor-carpi-radialis-longus]
       caption:
-        en: "Reverse curl. The palms face down, and brachialis and brachioradialis do most of the bending. The wrist extensors hold the wrists straight."
-        zh: "正握弯举。掌心朝下，屈肘主要靠肱肌和肱桡肌，伸腕肌负责把手腕撑直。"
+        en: "Reverse curl. The same curl with the palms facing down. Brachialis and brachioradialis do more of the bending, and the wrist extensors hold the wrists straight."
+        zh: "正握弯举。同样的弯举，掌心朝下。屈肘更多靠肱肌和肱桡肌，伸腕肌把手腕撑直。"
     - exercise: { id: dumbbell-supinating-curl, phase: loop }
-      camera: exercise-view
       labels: [biceps-brachii-long, biceps-brachii-short, brachialis, brachioradialis]
       caption:
-        en: "Supinating dumbbell curl. The palms start facing in and turn up as the elbows bend, so biceps does both of its jobs at once."
-        zh: "哑铃旋后弯举。掌心从朝内开始，屈肘的同时转向上，肱二头肌的两项任务一起完成。"
+        en: "Supinating dumbbell curl. The palms start facing the thighs and turn up as the elbows bend, so biceps does both of its jobs at once: bending the elbow and turning the palm up."
+        zh: "哑铃旋后弯举。掌心从朝向大腿开始，屈肘的同时转向上，肱二头肌的两项任务一起完成：屈肘和让掌心朝上。"
+    - exercise: { id: dumbbell-hammer-curl, phase: loop }
+      labels: [brachialis, brachioradialis, biceps-brachii-long, biceps-brachii-short]
+      caption:
+        en: "Hammer curl. The thumbs stay up the whole way. With the forearm half-turned, brachioradialis and brachialis take a larger share of the work."
+        zh: "锤式弯举。拇指始终朝上。前臂处在半转的位置，肱桡肌和肱肌分担更多的力。"
     - exercise: { id: overhead-dumbbell-triceps-extension, phase: loop }
-      camera: exercise-view
       labels: [triceps-brachii-long, triceps-brachii-lateral, triceps-brachii-medial]
       caption:
-        en: "Overhead triceps extension. With the arm raised, the long head starts out stretched across the shoulder. The model raises the arm less than the sketch."
-        zh: "过顶臂屈伸。手臂举起时，跨肩的长头一开始就被拉长。模型里手臂举得比示意图低。"
+        en: "Overhead triceps extension, one arm, seated against a backrest. The dumbbell starts behind the head and triceps straightens the elbow. With the arm raised, the long head works from a stretched position, because it also crosses the shoulder."
+        zh: "坐姿单臂过顶臂屈伸，背靠靠垫。哑铃从脑后开始，肱三头肌把肘伸直。手臂举起时，跨过肩关节的长头从被拉长的位置开始用力。"
     - exercise: { id: dumbbell-wrist-curl, phase: loop }
-      camera: exercise-view
       labels: [flexor-carpi-radialis, flexor-carpi-ulnaris, palmaris-longus, flexor-digitorum-superficialis]
       caption:
-        en: "Supported wrist curl. The forearm rests on a bench and only the hand moves, bending the wrist. The wrist-extension card is the same movement facing down."
-        zh: "支撑式腕弯举。前臂放在凳上，只有手在动，屈腕。伸腕的卡片是同一个动作，只是掌心朝下。"
+        en: "Supported wrist curl. Seated, the forearms rest on the thighs palm up and only the hands move: the wrist flexors on the palm side of the forearm curl the dumbbells up."
+        zh: "支撑式腕弯举。坐着，前臂掌心朝上搭在大腿上，只有手在动：前臂掌侧的屈腕肌把哑铃向上卷起。"
+    - exercise: { id: dumbbell-wrist-extension, phase: loop }
+      labels: [extensor-carpi-radialis-longus, extensor-carpi-radialis-brevis, extensor-carpi-ulnaris, extensor-digitorum]
+      caption:
+        en: "Supported wrist extension. The forearms rest palm down on a support at elbow height, and the wrist extensors on the back of the forearm lift the backs of the hands."
+        zh: "支撑式伸腕。前臂掌心朝下搭在与肘同高的支撑上，前臂背侧的伸腕肌把手背抬起。"
     - exercise: { id: chin-up, phase: loop }
-      camera: exercise-view
       labels: [latissimus-dorsi, biceps-brachii-long, brachialis, brachioradialis]
       caption:
-        en: "Chin-up. The back muscles pull the arms down while the elbow flexors bend the elbows. The model moves only the arms; the sketch shows the whole body rising to the bar."
-        zh: "反握引体向上。背肌把手臂往下拉，屈肘肌把肘弯起来。模型只动手臂，身体升到杠前的全过程看示意图。"
+        en: "Chin-up. With the palms facing you, the hands stay on the bar and the body rises: latissimus dorsi pulls the upper arms down while the elbow flexors bend the elbows."
+        zh: "反握引体向上。掌心朝向自己，双手固定在杠上，身体向上升：背阔肌把上臂往下拉，屈肘肌把肘弯起来。"
+    - exercise: { id: self-resisted-pronation, phase: loop }
+      labels: [pronator-teres, brachioradialis, biceps-brachii-short]
+      caption:
+        en: "Self-resisted pronation. The working forearm turns from thumb up to palm down while the other hand gently resists. Pronator teres, just below the elbow crease, does the turning."
+        zh: "自我抗阻旋前。练习侧前臂从拇指朝上转到掌心朝下，另一只手轻轻阻挡。转动靠肘窝下方的旋前圆肌。"
     - exercise: { id: cable-triceps-pushdown, phase: loop }
-      camera: exercise-view
       labels: [triceps-brachii-long, triceps-brachii-lateral, triceps-brachii-medial, anconeus]
       caption:
-        en: "Cable pushdown. The upper arms stay by the sides and only the forearms move as triceps straightens the elbows."
-        zh: "绳索下压。上臂贴住身体，只有前臂在动，由肱三头肌把肘伸直。"
+        en: "Cable pushdown, facing a high pulley. The upper arms stay by the sides and only the forearms move as triceps straightens the elbows and presses the bar down to the thighs."
+        zh: "绳索下压，面对高位滑轮。上臂贴住身体，只有前臂在动：肱三头肌把肘伸直，把横杆压到大腿前。"
   index:
     exercises: [close-grip-bench-press, barbell-curl, barbell-reverse-curl, dumbbell-supinating-curl, dumbbell-hammer-curl, overhead-dumbbell-triceps-extension, dumbbell-wrist-curl, dumbbell-wrist-extension, chin-up, self-resisted-pronation, cable-triceps-pushdown]
 ---
@@ -92,7 +99,7 @@ One way to arrange an arm session, not a prescription: an easy forearm warm-up w
 
 <More title={{ en: "What the model leaves out", zh: "模型省略了什么" }}>
 
-This model has no legs and no moving trunk, so whole-body movements are shown as the arm part only. In the chin-up the arms move but the body does not rise to the bar; in the overhead extension the arm is raised less than in real life, to keep the shoulder mesh from tearing. The sketch on each card shows the full movement.
+The model moves the whole body and draws the equipment at its real size, but it keeps a few things simple. The dumbbells keep the direction they are gripped in, so in the supinating curl the dumbbells do not turn with the palms at the top. In the wrist extension a pair of rails stands in for the padded arm rest. The fingers do not open and close around the handles. The sketch on each card shows the full movement.
 
 </More>
 
@@ -122,7 +129,7 @@ How much to do depends on the person, their goal and their training so far. Thes
 
 <More title={{ en: "What the model leaves out", zh: "模型省略了什么" }}>
 
-这个模型没有腿，躯干也不动，所以全身动作只演示手臂那部分。引体向上里手臂在动，身体却不会升到杠前；过顶臂屈伸里手臂举得比实际低，以免肩部网格被拉裂。每张卡上的示意图画的是完整动作。
+模型能动全身，器械按真实尺寸画出，但有几处做了简化。哑铃始终保持握住时的方向，所以旋后弯举到顶端时，哑铃不会跟着掌心一起转。伸腕练习里，用两根横杆代替带软垫的手臂托。手指不会在把手上张开、握紧。每张卡上的示意图画的是完整动作。
 
 </More>
 
