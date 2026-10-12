@@ -1,6 +1,6 @@
 # Core mesh review
 
-Final GLB: **3,711,460 bytes**, **274,634 triangles**, **51 total nodes** (33 meshes, 17 joints, rig root).
+Final GLB: **3,711,480 bytes**, **274,634 triangles**, **51 total nodes** (33 meshes, 17 joints, rig root).
 Draw-call estimate: **33** opaque primitives; skin overlay adds its shell pass. Both 4 MB and 350,000 triangle ceilings enforced.
 
 Native Blender, cached FBX only. Geometry and derived rig/attachment data: CC BY-SA 4.0.
@@ -270,37 +270,47 @@ All decoded surface error, topology, attribute, joint, coordinate and output bud
 
 ## Published skin-weight audit
 
-Decoded published GLB SHA-256: `62ffc035fff0c70db7404dd622460db90c20ea4a35574237111f43d51e2fc137`.
+Decoded published GLB SHA-256: `8be266415b4a40777f7a920f0a1127243381548992b317ac42ecd491ad2a282c`.
 
-Shares sum decoded weights over referenced vertices, including UV/normal seams. Required alternatives are joints bordering the manifest attachment bones; allowed joints include intervening joints in the rig parent chain (e.g. shoulder between scapula and elbow). Radius uses elbow unless the rig provides a separate pronation joint. Missing attachment weights, unrelated joints above 30%, reversed fibre fields and violated persistent endpoint overrides fail this gate.
+Shares sum decoded weights over referenced vertices, including UV/normal seams. Required alternatives are joints bordering the manifest attachment bones; allowed joints include intervening joints in the rig parent chain (e.g. shoulder between scapula and elbow). Radius uses elbow unless the rig provides a separate pronation joint. Missing attachment weights, unrelated joints above 30%, reversed fibre fields and violated persistent endpoint overrides and local weight outliers fail this gate. Outliers compare welded 1–2-ring dominant joints and area-weighted vectors; a discrepant vector must be over twice the neighbours’ median dominant-joint distance. Sub-edge detached scraps use nearby substantial surface rings because their component-local endpoint seeds are artificial; >1% discrepant weight mass on those scraps also fails. Smooth joint crossovers are excluded. Fixed counts refer to unique welded bind vertices.
 
-| Muscle | Joint shares | Required attachment joints | Fibre endpoints | Result |
-|---|---|---|---|---|
-| erector-spinae-lumbar.l | trunk 100.00% | hip.l / trunk | origin → insertion | clean |
-| erector-spinae-lumbar.r | trunk 100.00% | hip.r / trunk | origin → insertion | clean |
-| external-oblique.l | trunk 100.00% | hip.l / trunk | origin → insertion | clean |
-| external-oblique.r | trunk 100.00% | hip.r / trunk | origin → insertion | clean |
-| gluteus-maximus.l | trunk 51.72%, hip.l 48.28% | hip.l / knee.l, hip.l / trunk | origin → insertion | clean |
-| gluteus-maximus.r | trunk 51.86%, hip.r 48.14% | hip.r / knee.r, hip.r / trunk | origin → insertion | clean |
-| iliacus.l | trunk 63.47%, hip.l 36.53% | hip.l / knee.l, hip.l / trunk | origin → insertion | clean |
-| iliacus.r | trunk 63.39%, hip.r 36.61% | hip.r / knee.r, hip.r / trunk | origin → insertion | clean |
-| internal-oblique.l | trunk 100.00% | hip.l / trunk | origin → insertion | clean |
-| internal-oblique.r | trunk 100.00% | hip.r / trunk | origin → insertion | clean |
-| latissimus-dorsi.l | trunk 66.05%, shoulder.l 33.95% | elbow.l / shoulder.l, hip.l / trunk | origin → insertion | clean |
-| latissimus-dorsi.r | trunk 67.64%, shoulder.r 32.36% | elbow.r / shoulder.r, hip.r / trunk | origin → insertion | clean |
-| multifidus-lumborum.l | trunk 100.00% | hip.l / trunk | named surfaces: ambiguous/shared | clean |
-| multifidus-lumborum.r | trunk 100.00% | hip.r / trunk | named surfaces: ambiguous/shared | clean |
-| psoas-major.l | trunk 77.92%, hip.l 22.08% | hip.l / knee.l, trunk | origin → insertion | clean |
-| psoas-major.r | trunk 77.60%, hip.r 22.40% | hip.r / knee.r, trunk | origin → insertion | clean |
-| quadratus-lumborum.l | trunk 100.00% | hip.l / trunk | origin → insertion | clean |
-| quadratus-lumborum.r | trunk 100.00% | hip.r / trunk | origin → insertion | clean |
-| rectus-abdominis.l | trunk 100.00% | hip.l / trunk | origin → insertion | clean |
-| rectus-abdominis.r | trunk 100.00% | hip.r / trunk | origin → insertion | clean |
-| serratus-anterior.l | clavicle.l 41.71%, trunk 39.20%, scapula.l 19.09% | scapula.l / shoulder.l, trunk | origin → insertion | clean |
-| serratus-anterior.r | trunk 44.69%, clavicle.r 36.67%, scapula.r 18.65% | scapula.r / shoulder.r, trunk | origin → insertion | clean |
-| tensor-fasciae-latae.l | hip.l 67.79%, trunk 32.21% | hip.l / knee.l, hip.l / trunk | origin → insertion | clean |
-| tensor-fasciae-latae.r | hip.r 67.43%, trunk 32.57% | hip.r / knee.r, hip.r / trunk | origin → insertion | clean |
-| transversus-abdominis.l | trunk 100.00% | hip.l / trunk | named surfaces: ambiguous/shared | clean |
-| transversus-abdominis.r | trunk 100.00% | hip.r / trunk | named surfaces: ambiguous/shared | clean |
+| Muscle | Joint shares | Required attachment joints | Fibre endpoints | Outliers remaining / fixed | Result |
+|---|---|---|---|---|---|
+| erector-spinae-lumbar.l | trunk 100.00% | hip.l / trunk | origin → insertion | 0 / 0 | clean |
+| erector-spinae-lumbar.r | trunk 100.00% | hip.r / trunk | origin → insertion | 0 / 0 | clean |
+| external-oblique.l | trunk 100.00% | hip.l / trunk | origin → insertion | 0 / 0 | clean |
+| external-oblique.r | trunk 100.00% | hip.r / trunk | origin → insertion | 0 / 0 | clean |
+| gluteus-maximus.l | trunk 51.72%, hip.l 48.28% | hip.l / knee.l, hip.l / trunk | origin → insertion | 0 / 0 | clean |
+| gluteus-maximus.r | trunk 51.86%, hip.r 48.14% | hip.r / knee.r, hip.r / trunk | origin → insertion | 0 / 0 | clean |
+| iliacus.l | trunk 63.47%, hip.l 36.53% | hip.l / knee.l, hip.l / trunk | origin → insertion | 0 / 0 | clean |
+| iliacus.r | trunk 63.39%, hip.r 36.61% | hip.r / knee.r, hip.r / trunk | origin → insertion | 0 / 0 | clean |
+| internal-oblique.l | trunk 100.00% | hip.l / trunk | origin → insertion | 0 / 0 | clean |
+| internal-oblique.r | trunk 100.00% | hip.r / trunk | origin → insertion | 0 / 0 | clean |
+| latissimus-dorsi.l | trunk 66.05%, shoulder.l 33.95% | elbow.l / shoulder.l, hip.l / trunk | origin → insertion | 0 / 0 | clean |
+| latissimus-dorsi.r | trunk 67.64%, shoulder.r 32.36% | elbow.r / shoulder.r, hip.r / trunk | origin → insertion | 0 / 0 | clean |
+| multifidus-lumborum.l | trunk 100.00% | hip.l / trunk | named surfaces: ambiguous/shared | 0 / 0 | clean |
+| multifidus-lumborum.r | trunk 100.00% | hip.r / trunk | named surfaces: ambiguous/shared | 0 / 0 | clean |
+| psoas-major.l | trunk 77.92%, hip.l 22.08% | hip.l / knee.l, trunk | origin → insertion | 0 / 0 | clean |
+| psoas-major.r | trunk 77.60%, hip.r 22.40% | hip.r / knee.r, trunk | origin → insertion | 0 / 0 | clean |
+| quadratus-lumborum.l | trunk 100.00% | hip.l / trunk | origin → insertion | 0 / 0 | clean |
+| quadratus-lumborum.r | trunk 100.00% | hip.r / trunk | origin → insertion | 0 / 0 | clean |
+| rectus-abdominis.l | trunk 100.00% | hip.l / trunk | origin → insertion | 0 / 0 | clean |
+| rectus-abdominis.r | trunk 100.00% | hip.r / trunk | origin → insertion | 0 / 0 | clean |
+| serratus-anterior.l | clavicle.l 41.71%, trunk 39.07%, scapula.l 19.22% | scapula.l / shoulder.l, trunk | origin → insertion | 0 / 5 | clean |
+| serratus-anterior.r | trunk 44.55%, clavicle.r 36.78%, scapula.r 18.66% | scapula.r / shoulder.r, trunk | origin → insertion | 0 / 5 | clean |
+| tensor-fasciae-latae.l | hip.l 67.79%, trunk 32.21% | hip.l / knee.l, hip.l / trunk | origin → insertion | 0 / 0 | clean |
+| tensor-fasciae-latae.r | hip.r 67.43%, trunk 32.57% | hip.r / knee.r, hip.r / trunk | origin → insertion | 0 / 0 | clean |
+| transversus-abdominis.l | trunk 100.00% | hip.l / trunk | named surfaces: ambiguous/shared | 0 / 0 | clean |
+| transversus-abdominis.r | trunk 100.00% | hip.r / trunk | named surfaces: ambiguous/shared | 0 / 0 | clean |
 
-Audit result: **clean** (26 muscle nodes).
+| Other mesh | Outliers remaining / fixed |
+|---|---|
+| femur.l | 0 / 0 |
+| femur.r | 0 / 0 |
+| lumbar-spine | 0 / 0 |
+| pelvis | 0 / 0 |
+| skin-outline | 0 / 0 |
+| thoracic-spine | 0 / 0 |
+| thorax | 0 / 0 |
+
+Audit result: **clean** (26 muscle nodes; 0 outliers remaining, 10 fixed).

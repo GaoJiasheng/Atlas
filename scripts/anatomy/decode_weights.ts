@@ -48,18 +48,21 @@ const doc = await new NodeIO().registerExtensions(ALL_EXTENSIONS)
   .registerDependencies({ 'meshopt.decoder': MeshoptDecoder }).readBinary(bytes);
 await doc.transform(dequantize());
 const rows = [];
+const weightMeshes = [];
 let triangles = 0;
 for (const node of doc.getRoot().listNodes()) {
   const mesh = node.getMesh();
   if (!mesh) continue;
   triangles += mesh.listPrimitives().reduce((sum, prim) => sum + (prim.getIndices()?.getCount()
     ?? required(prim.getAttribute('POSITION'), `${node.getName()}: POSITION`).getCount()) / 3, 0);
-  if (!['region', 'neighbour'].includes(String(node.getExtras().role ?? mesh.getExtras().role))) continue;
+  const role = String(node.getExtras().role ?? mesh.getExtras().role);
+  const muscle = ['region', 'neighbour'].includes(role);
   const skin = required(node.getSkin(), `${node.getName()}: skin`);
   const binds = required(skin.getInverseBindMatrices(), `${node.getName()}: inverse bind matrices`);
   const jointNodes = skin.listJoints(), names = jointNodes.map(j => j.getName().replace(/^joint\./, ''));
   const shares: Shares = {}, endpoints: Endpoints = [[], []];
   const vertices: Vertex[] = [];
+  const weights: Shares[] = [], faces: number[][] = [];
   const welded = new Map<string, number>();
   function find(index: number): number {
     let vertex = required(vertices[index], `vertex ${index}`);
@@ -80,7 +83,8 @@ for (const node of doc.getRoot().listNodes()) {
   for (const prim of mesh.listPrimitives()) {
     const J = required(prim.getAttribute('JOINTS_0'), `${node.getName()}: JOINTS_0`);
     const W = required(prim.getAttribute('WEIGHTS_0'), `${node.getName()}: WEIGHTS_0`);
-    const U = required(prim.getAttribute('_U'), `${node.getName()}: _U`);
+    const U = prim.getAttribute('_U');
+    if (muscle) required(U, `${node.getName()}: _U`);
     const P = required(prim.getAttribute('POSITION'), `${node.getName()}: POSITION`);
     const indices = prim.getIndices();
     const idx = indices ? Array.from(required(indices.getArray(), 'index array'))
@@ -90,7 +94,7 @@ for (const node of doc.getRoot().listNodes()) {
     for (const i of used) {
       const j: number[] = [], w: number[] = [], p: number[] = [];
       J.getElement(i, j); W.getElement(i, w); P.getElement(i, p);
-      const u = U.getScalar(i), v: Vec3 = [0, 0, 0];
+      const u = U?.getScalar(i) ?? .5, v: Vec3 = [0, 0, 0], vector: Shares = {};
       if (Math.abs(w.reduce((sum, x) => sum + x, 0) - 1) > .002 || w.some(x => !Number.isFinite(x) || x < 0)) {
         throw new Error(`${node.getName()}: invalid weights`);
       }
@@ -103,12 +107,14 @@ for (const node of doc.getRoot().listNodes()) {
         binds.getElement(jointIndex, bind);
         const pos = transform(joint.getWorldMatrix(), transform(bind, p));
         for (const a of axes) v[a] += pos[a] * weight;
+        vector[jointName] = (vector[jointName] ?? 0) + weight;
         shares[jointName] = (shares[jointName] ?? 0) + weight;
         const bin = bins[u < .1 ? 0 : u > .9 ? 2 : 1];
         bin[jointName] = (bin[jointName] ?? 0) + weight;
       }
       count++;
       const id = vertices.length;
+      weights.push(vector);
       vertices.push({ p: v, u, parent: id }); remap.set(i, id);
       const key = v.map(x => Math.round(x * 1e6)).join(',');
       const previous = welded.get(key);
@@ -121,6 +127,7 @@ for (const node of doc.getRoot().listNodes()) {
     for (let i = 0; i < idx.length; i += 3) {
       const a = vertexId(i);
       union(a, vertexId(i + 1)); union(a, vertexId(i + 2));
+      faces.push([a, vertexId(i + 1), vertexId(i + 2)]);
     }
   }
   for (const [key, value] of Object.entries(shares)) shares[key] = value / count;
@@ -141,7 +148,9 @@ for (const node of doc.getRoot().listNodes()) {
     if (v.u <= .0001) component.endpoints[0].push(v.p);
     if (v.u >= .9999) component.endpoints[1].push(v.p);
   });
-  rows.push({ name: node.getName(), count, shares, endpoints, bounds, bins, components: [...components.values()] });
+  weightMeshes.push({ name: node.getName(), role, points: vertices.map(v => v.p), u: vertices.map(v => v.u), weights, faces,
+    joints: Object.fromEntries(jointNodes.map((j, i) => [names[i], transform(j.getWorldMatrix(), [0, 0, 0])])) });
+  if (muscle) rows.push({ name: node.getName(), count, shares, endpoints, bounds, bins, components: [...components.values()] });
 }
 const parents = Object.fromEntries(doc.getRoot().listNodes().filter(n => n.getName().startsWith('joint.')).map(n => {
   const parentName = n.getParentNode()?.getName();
@@ -151,3 +160,5 @@ const skins = doc.getRoot().listSkins().map(skin => skin.listJoints().map(j => j
 await writeFile(resolve(root, `cache/${topic}-weights-decoded.json`), JSON.stringify({
   topic, bytes: bytes.length, triangles, sha256: createHash('sha256').update(bytes).digest('hex'), parents, skins, rows,
 }));
+
+await writeFile(resolve(root, `cache/${topic}-weight-meshes.json`), JSON.stringify(weightMeshes));

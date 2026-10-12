@@ -1,6 +1,6 @@
 # Arms mesh review
 
-Final GLB: **3,078,272 bytes**, **193,602 triangles**, **75 total nodes** (61 meshes, 13 joints, rig root).
+Final GLB: **3,079,348 bytes**, **193,602 triangles**, **75 total nodes** (61 meshes, 13 joints, rig root).
 Draw-call estimate: **61** opaque primitives; skin overlay adds its shell pass. Both 4 MB and 350,000 triangle ceilings enforced.
 
 Native Blender, cached FBX only. Geometry and derived rig/attachment data: CC BY-SA 4.0.
@@ -278,61 +278,75 @@ All decoded surface error, topology, attribute, joint, coordinate and output bud
 
 ## Published skin-weight audit
 
-Decoded published GLB SHA-256: `d07360096ff86b2cf5d5cc49c2d61d7039572ad096ef124d3fd9d635a46d8e73`.
+Decoded published GLB SHA-256: `f00c57237c2edef88df976de5e477fee7c8219d4ffdec209a5244e11f5574ca3`.
 
-Shares sum decoded weights over referenced vertices, including UV/normal seams. Required alternatives are joints bordering the manifest attachment bones; allowed joints include intervening joints in the rig parent chain (e.g. shoulder between scapula and elbow). Radius uses elbow unless the rig provides a separate pronation joint. Missing attachment weights, unrelated joints above 30%, reversed fibre fields and violated persistent endpoint overrides fail this gate.
+Shares sum decoded weights over referenced vertices, including UV/normal seams. Required alternatives are joints bordering the manifest attachment bones; allowed joints include intervening joints in the rig parent chain (e.g. shoulder between scapula and elbow). Radius uses elbow unless the rig provides a separate pronation joint. Missing attachment weights, unrelated joints above 30%, reversed fibre fields and violated persistent endpoint overrides and local weight outliers fail this gate. Outliers compare welded 1–2-ring dominant joints and area-weighted vectors; a discrepant vector must be over twice the neighbours’ median dominant-joint distance. Sub-edge detached scraps use nearby substantial surface rings because their component-local endpoint seeds are artificial; >1% discrepant weight mass on those scraps also fails. Smooth joint crossovers are excluded. Fixed counts refer to unique welded bind vertices.
 
-| Muscle | Joint shares | Required attachment joints | Fibre endpoints | Result |
-|---|---|---|---|---|
-| anconeus.l | elbow.l 70.45%, shoulder.l 29.55% | elbow.l / forearm.l, elbow.l / shoulder.l | origin → insertion | clean |
-| anconeus.r | elbow.r 70.62%, shoulder.r 29.38% | elbow.r / forearm.r, elbow.r / shoulder.r | origin → insertion | clean |
-| biceps-brachii-long.l | elbow.l 40.99%, shoulder.l 27.57%, forearm.l 20.51%, scapula.l 10.93% | forearm.l / hand.l, scapula.l / shoulder.l | origin → insertion | clean |
-| biceps-brachii-long.r | elbow.r 40.89%, shoulder.r 26.76%, forearm.r 21.44%, scapula.r 10.91% | forearm.r / hand.r, scapula.r / shoulder.r | origin → insertion | clean |
-| biceps-brachii-short.l | elbow.l 42.35%, shoulder.l 27.62%, forearm.l 15.43%, scapula.l 14.60% | forearm.l / hand.l, scapula.l / shoulder.l | origin → insertion | clean |
-| biceps-brachii-short.r | elbow.r 42.17%, shoulder.r 27.30%, forearm.r 15.91%, scapula.r 14.61% | forearm.r / hand.r, scapula.r / shoulder.r | origin → insertion | clean |
-| brachialis.l | shoulder.l 73.67%, elbow.l 26.33% | elbow.l / forearm.l, elbow.l / shoulder.l | origin → insertion | clean |
-| brachialis.r | shoulder.r 72.83%, elbow.r 27.17% | elbow.r / forearm.r, elbow.r / shoulder.r | origin → insertion | clean |
-| brachioradialis.l | elbow.l 51.33%, shoulder.l 32.72%, forearm.l 15.95% | forearm.l / hand.l, elbow.l / shoulder.l | origin → insertion | clean |
-| brachioradialis.r | elbow.r 51.85%, shoulder.r 32.55%, forearm.r 15.60% | forearm.r / hand.r, elbow.r / shoulder.r | origin → insertion | clean |
-| coracobrachialis.l | shoulder.l 59.09%, scapula.l 40.91% | scapula.l / shoulder.l, elbow.l / shoulder.l | origin → insertion | clean |
-| coracobrachialis.r | shoulder.r 58.86%, scapula.r 41.14% | scapula.r / shoulder.r, elbow.r / shoulder.r | origin → insertion | clean |
-| deltoid-anterior.l | scapula.l 42.80%, clavicle.l 42.53%, shoulder.l 14.67% | clavicle.l / scapula.l, elbow.l / shoulder.l | origin → insertion | clean |
-| deltoid-anterior.r | scapula.r 43.11%, clavicle.r 41.61%, shoulder.r 15.28% | clavicle.r / scapula.r, elbow.r / shoulder.r | origin → insertion | clean |
-| deltoid-lateral.l | scapula.l 56.58%, shoulder.l 43.42% | scapula.l / shoulder.l, elbow.l / shoulder.l | origin → insertion | clean |
-| deltoid-lateral.r | scapula.r 55.94%, shoulder.r 44.06% | scapula.r / shoulder.r, elbow.r / shoulder.r | origin → insertion | clean |
-| deltoid-posterior.l | scapula.l 55.24%, shoulder.l 44.76% | scapula.l / shoulder.l, elbow.l / shoulder.l | origin → insertion | clean |
-| deltoid-posterior.r | scapula.r 55.85%, shoulder.r 44.15% | scapula.r / shoulder.r, elbow.r / shoulder.r | origin → insertion | clean |
-| extensor-carpi-radialis-brevis.l | elbow.l 38.14%, forearm.l 25.94%, shoulder.l 23.47%, hand.l 12.45% | hand.l, elbow.l / shoulder.l | origin → insertion | clean |
-| extensor-carpi-radialis-brevis.r | elbow.r 38.71%, forearm.r 25.99%, shoulder.r 22.85%, hand.r 12.45% | hand.r, elbow.r / shoulder.r | origin → insertion | clean |
-| extensor-carpi-radialis-longus.l | shoulder.l 34.75%, elbow.l 33.34%, forearm.l 20.92%, hand.l 10.99% | hand.l, elbow.l / shoulder.l | origin → insertion | clean |
-| extensor-carpi-radialis-longus.r | shoulder.r 35.64%, elbow.r 34.00%, forearm.r 19.76%, hand.r 10.60% | hand.r, elbow.r / shoulder.r | origin → insertion | clean |
-| extensor-carpi-ulnaris.l | elbow.l 71.31%, forearm.l 18.78%, hand.l 9.90% | elbow.l / forearm.l, hand.l, elbow.l / shoulder.l | origin → insertion | clean |
-| extensor-carpi-ulnaris.r | elbow.r 71.51%, forearm.r 18.58%, hand.r 9.91% | elbow.r / forearm.r, hand.r, elbow.r / shoulder.r | origin → insertion | clean |
-| extensor-digitorum.l | hand.l 37.68%, forearm.l 29.90%, elbow.l 21.27%, shoulder.l 11.15% | hand.l, elbow.l / shoulder.l | origin → insertion | clean |
-| extensor-digitorum.r | hand.r 37.38%, forearm.r 30.20%, elbow.r 21.46%, shoulder.r 10.97% | hand.r, elbow.r / shoulder.r | origin → insertion | clean |
-| flexor-carpi-radialis.l | elbow.l 36.11%, forearm.l 29.15%, shoulder.l 22.55%, hand.l 12.19% | hand.l, elbow.l / shoulder.l | origin → insertion | clean |
-| flexor-carpi-radialis.r | elbow.r 34.83%, forearm.r 28.87%, shoulder.r 23.33%, hand.r 12.97% | hand.r, elbow.r / shoulder.r | origin → insertion | clean |
-| flexor-carpi-ulnaris.l | forearm.l 44.25%, elbow.l 42.60%, hand.l 13.16% | elbow.l / forearm.l, hand.l, elbow.l / shoulder.l | origin → insertion | clean |
-| flexor-carpi-ulnaris.r | forearm.r 44.49%, elbow.r 42.58%, hand.r 12.93% | elbow.r / forearm.r, hand.r, elbow.r / shoulder.r | origin → insertion | clean |
-| flexor-digitorum-superficialis.l | hand.l 42.80%, forearm.l 25.14%, elbow.l 16.35%, shoulder.l 15.71% | elbow.l / forearm.l, forearm.l / hand.l, hand.l, elbow.l / shoulder.l | origin → insertion | clean |
-| flexor-digitorum-superficialis.r | hand.r 40.81%, forearm.r 25.19%, elbow.r 17.42%, shoulder.r 16.58% | elbow.r / forearm.r, forearm.r / hand.r, hand.r, elbow.r / shoulder.r | origin → insertion | clean |
-| latissimus-dorsi.l | trunk 65.65%, shoulder.l 34.35% | elbow.l / shoulder.l, hip.l / trunk | origin → insertion | clean |
-| latissimus-dorsi.r | trunk 67.61%, shoulder.r 32.39% | elbow.r / shoulder.r, hip.r / trunk | origin → insertion | clean |
-| palmaris-longus.l | hand.l 35.70%, forearm.l 30.35%, elbow.l 18.98%, shoulder.l 14.96% | hand.l, elbow.l / shoulder.l | origin → insertion | clean |
-| palmaris-longus.r | hand.r 34.53%, forearm.r 30.54%, elbow.r 18.96%, shoulder.r 15.97% | hand.r, elbow.r / shoulder.r | origin → insertion | clean |
-| pectoralis-major-abdominal.l | trunk 62.49%, shoulder.l 37.51% | elbow.l / shoulder.l, trunk | origin → insertion | clean |
-| pectoralis-major-abdominal.r | trunk 62.48%, shoulder.r 37.52% | elbow.r / shoulder.r, trunk | origin → insertion | clean |
-| pectoralis-major-clavicular.l | clavicle.l 48.53%, scapula.l 27.84%, shoulder.l 23.63% | clavicle.l / scapula.l, elbow.l / shoulder.l | origin → insertion | clean |
-| pectoralis-major-clavicular.r | clavicle.r 47.31%, scapula.r 28.75%, shoulder.r 23.94% | clavicle.r / scapula.r, elbow.r / shoulder.r | origin → insertion | clean |
-| pectoralis-major-sternocostal.l | trunk 74.15%, shoulder.l 25.85% | elbow.l / shoulder.l, trunk | origin → insertion | clean |
-| pectoralis-major-sternocostal.r | trunk 72.83%, shoulder.r 27.17% | elbow.r / shoulder.r, trunk | origin → insertion | clean |
-| pronator-teres.l | forearm.l 58.09%, elbow.l 30.00%, shoulder.l 11.91% | elbow.l / forearm.l, forearm.l / hand.l, elbow.l / shoulder.l | origin → insertion | clean |
-| pronator-teres.r | forearm.r 57.61%, elbow.r 30.36%, shoulder.r 12.03% | elbow.r / forearm.r, forearm.r / hand.r, elbow.r / shoulder.r | origin → insertion | clean |
-| triceps-brachii-lateral.l | shoulder.l 66.64%, elbow.l 33.36% | elbow.l / forearm.l, elbow.l / shoulder.l | origin → insertion | clean |
-| triceps-brachii-lateral.r | shoulder.r 66.15%, elbow.r 33.85% | elbow.r / forearm.r, elbow.r / shoulder.r | origin → insertion | clean |
-| triceps-brachii-long.l | shoulder.l 44.46%, scapula.l 29.88%, elbow.l 25.66% | elbow.l / forearm.l, scapula.l / shoulder.l | origin → insertion | clean |
-| triceps-brachii-long.r | shoulder.r 44.01%, scapula.r 29.91%, elbow.r 26.08% | elbow.r / forearm.r, scapula.r / shoulder.r | origin → insertion | clean |
-| triceps-brachii-medial.l | shoulder.l 69.11%, elbow.l 30.89% | elbow.l / forearm.l, elbow.l / shoulder.l | origin → insertion | clean |
-| triceps-brachii-medial.r | shoulder.r 69.03%, elbow.r 30.97% | elbow.r / forearm.r, elbow.r / shoulder.r | origin → insertion | clean |
+| Muscle | Joint shares | Required attachment joints | Fibre endpoints | Outliers remaining / fixed | Result |
+|---|---|---|---|---|---|
+| anconeus.l | elbow.l 70.49%, shoulder.l 29.51% | elbow.l / forearm.l, elbow.l / shoulder.l | origin → insertion | 0 / 1 | clean |
+| anconeus.r | elbow.r 70.66%, shoulder.r 29.34% | elbow.r / forearm.r, elbow.r / shoulder.r | origin → insertion | 0 / 1 | clean |
+| biceps-brachii-long.l | elbow.l 40.99%, shoulder.l 27.57%, forearm.l 20.51%, scapula.l 10.93% | forearm.l / hand.l, scapula.l / shoulder.l | origin → insertion | 0 / 0 | clean |
+| biceps-brachii-long.r | elbow.r 40.89%, shoulder.r 26.76%, forearm.r 21.44%, scapula.r 10.91% | forearm.r / hand.r, scapula.r / shoulder.r | origin → insertion | 0 / 0 | clean |
+| biceps-brachii-short.l | elbow.l 42.35%, shoulder.l 27.62%, forearm.l 15.43%, scapula.l 14.60% | forearm.l / hand.l, scapula.l / shoulder.l | origin → insertion | 0 / 0 | clean |
+| biceps-brachii-short.r | elbow.r 42.17%, shoulder.r 27.30%, forearm.r 15.91%, scapula.r 14.61% | forearm.r / hand.r, scapula.r / shoulder.r | origin → insertion | 0 / 0 | clean |
+| brachialis.l | shoulder.l 73.67%, elbow.l 26.33% | elbow.l / forearm.l, elbow.l / shoulder.l | origin → insertion | 0 / 0 | clean |
+| brachialis.r | shoulder.r 72.83%, elbow.r 27.17% | elbow.r / forearm.r, elbow.r / shoulder.r | origin → insertion | 0 / 0 | clean |
+| brachioradialis.l | elbow.l 51.33%, shoulder.l 32.72%, forearm.l 15.95% | forearm.l / hand.l, elbow.l / shoulder.l | origin → insertion | 0 / 0 | clean |
+| brachioradialis.r | elbow.r 51.85%, shoulder.r 32.55%, forearm.r 15.60% | forearm.r / hand.r, elbow.r / shoulder.r | origin → insertion | 0 / 0 | clean |
+| coracobrachialis.l | shoulder.l 59.09%, scapula.l 40.91% | scapula.l / shoulder.l, elbow.l / shoulder.l | origin → insertion | 0 / 0 | clean |
+| coracobrachialis.r | shoulder.r 58.86%, scapula.r 41.14% | scapula.r / shoulder.r, elbow.r / shoulder.r | origin → insertion | 0 / 0 | clean |
+| deltoid-anterior.l | scapula.l 42.80%, clavicle.l 42.53%, shoulder.l 14.67% | clavicle.l / scapula.l, elbow.l / shoulder.l | origin → insertion | 0 / 0 | clean |
+| deltoid-anterior.r | scapula.r 43.11%, clavicle.r 41.61%, shoulder.r 15.28% | clavicle.r / scapula.r, elbow.r / shoulder.r | origin → insertion | 0 / 0 | clean |
+| deltoid-lateral.l | scapula.l 56.58%, shoulder.l 43.42% | scapula.l / shoulder.l, elbow.l / shoulder.l | origin → insertion | 0 / 0 | clean |
+| deltoid-lateral.r | scapula.r 55.94%, shoulder.r 44.06% | scapula.r / shoulder.r, elbow.r / shoulder.r | origin → insertion | 0 / 0 | clean |
+| deltoid-posterior.l | scapula.l 55.24%, shoulder.l 44.76% | scapula.l / shoulder.l, elbow.l / shoulder.l | origin → insertion | 0 / 0 | clean |
+| deltoid-posterior.r | scapula.r 55.85%, shoulder.r 44.15% | scapula.r / shoulder.r, elbow.r / shoulder.r | origin → insertion | 0 / 0 | clean |
+| extensor-carpi-radialis-brevis.l | elbow.l 38.14%, forearm.l 25.94%, shoulder.l 23.47%, hand.l 12.45% | hand.l, elbow.l / shoulder.l | origin → insertion | 0 / 0 | clean |
+| extensor-carpi-radialis-brevis.r | elbow.r 38.71%, forearm.r 25.99%, shoulder.r 22.85%, hand.r 12.45% | hand.r, elbow.r / shoulder.r | origin → insertion | 0 / 0 | clean |
+| extensor-carpi-radialis-longus.l | shoulder.l 34.63%, elbow.l 33.24%, forearm.l 20.77%, hand.l 11.36% | hand.l, elbow.l / shoulder.l | origin → insertion | 0 / 3 | clean |
+| extensor-carpi-radialis-longus.r | shoulder.r 35.61%, elbow.r 33.96%, forearm.r 19.71%, hand.r 10.72% | hand.r, elbow.r / shoulder.r | origin → insertion | 0 / 3 | clean |
+| extensor-carpi-ulnaris.l | elbow.l 71.31%, forearm.l 18.69%, hand.l 10.00% | elbow.l / forearm.l, hand.l, elbow.l / shoulder.l | origin → insertion | 0 / 1 | clean |
+| extensor-carpi-ulnaris.r | elbow.r 71.51%, forearm.r 18.49%, hand.r 10.00% | elbow.r / forearm.r, hand.r, elbow.r / shoulder.r | origin → insertion | 0 / 1 | clean |
+| extensor-digitorum.l | hand.l 37.68%, forearm.l 29.90%, elbow.l 21.27%, shoulder.l 11.15% | hand.l, elbow.l / shoulder.l | origin → insertion | 0 / 0 | clean |
+| extensor-digitorum.r | hand.r 37.38%, forearm.r 30.20%, elbow.r 21.46%, shoulder.r 10.97% | hand.r, elbow.r / shoulder.r | origin → insertion | 0 / 0 | clean |
+| flexor-carpi-radialis.l | elbow.l 36.11%, forearm.l 29.15%, shoulder.l 22.55%, hand.l 12.19% | hand.l, elbow.l / shoulder.l | origin → insertion | 0 / 0 | clean |
+| flexor-carpi-radialis.r | elbow.r 34.83%, forearm.r 28.87%, shoulder.r 23.33%, hand.r 12.97% | hand.r, elbow.r / shoulder.r | origin → insertion | 0 / 0 | clean |
+| flexor-carpi-ulnaris.l | forearm.l 44.25%, elbow.l 42.60%, hand.l 13.16% | elbow.l / forearm.l, hand.l, elbow.l / shoulder.l | origin → insertion | 0 / 0 | clean |
+| flexor-carpi-ulnaris.r | forearm.r 44.49%, elbow.r 42.58%, hand.r 12.93% | elbow.r / forearm.r, hand.r, elbow.r / shoulder.r | origin → insertion | 0 / 0 | clean |
+| flexor-digitorum-superficialis.l | hand.l 42.80%, forearm.l 25.14%, elbow.l 16.36%, shoulder.l 15.69% | elbow.l / forearm.l, forearm.l / hand.l, hand.l, elbow.l / shoulder.l | origin → insertion | 0 / 1 | clean |
+| flexor-digitorum-superficialis.r | hand.r 40.81%, forearm.r 25.19%, elbow.r 17.44%, shoulder.r 16.56% | elbow.r / forearm.r, forearm.r / hand.r, hand.r, elbow.r / shoulder.r | origin → insertion | 0 / 2 | clean |
+| latissimus-dorsi.l | trunk 65.65%, shoulder.l 34.35% | elbow.l / shoulder.l, hip.l / trunk | origin → insertion | 0 / 0 | clean |
+| latissimus-dorsi.r | trunk 67.61%, shoulder.r 32.39% | elbow.r / shoulder.r, hip.r / trunk | origin → insertion | 0 / 0 | clean |
+| palmaris-longus.l | hand.l 35.70%, forearm.l 30.35%, elbow.l 18.98%, shoulder.l 14.96% | hand.l, elbow.l / shoulder.l | origin → insertion | 0 / 0 | clean |
+| palmaris-longus.r | hand.r 34.53%, forearm.r 30.54%, elbow.r 18.96%, shoulder.r 15.97% | hand.r, elbow.r / shoulder.r | origin → insertion | 0 / 0 | clean |
+| pectoralis-major-abdominal.l | trunk 62.49%, shoulder.l 37.51% | elbow.l / shoulder.l, trunk | origin → insertion | 0 / 0 | clean |
+| pectoralis-major-abdominal.r | trunk 62.48%, shoulder.r 37.52% | elbow.r / shoulder.r, trunk | origin → insertion | 0 / 0 | clean |
+| pectoralis-major-clavicular.l | clavicle.l 48.53%, scapula.l 27.84%, shoulder.l 23.63% | clavicle.l / scapula.l, elbow.l / shoulder.l | origin → insertion | 0 / 0 | clean |
+| pectoralis-major-clavicular.r | clavicle.r 47.31%, scapula.r 28.75%, shoulder.r 23.94% | clavicle.r / scapula.r, elbow.r / shoulder.r | origin → insertion | 0 / 0 | clean |
+| pectoralis-major-sternocostal.l | trunk 74.15%, shoulder.l 25.85% | elbow.l / shoulder.l, trunk | origin → insertion | 0 / 0 | clean |
+| pectoralis-major-sternocostal.r | trunk 72.83%, shoulder.r 27.17% | elbow.r / shoulder.r, trunk | origin → insertion | 0 / 0 | clean |
+| pronator-teres.l | forearm.l 58.09%, elbow.l 30.03%, shoulder.l 11.88% | elbow.l / forearm.l, forearm.l / hand.l, elbow.l / shoulder.l | origin → insertion | 0 / 2 | clean |
+| pronator-teres.r | forearm.r 57.61%, elbow.r 30.39%, shoulder.r 12.00% | elbow.r / forearm.r, forearm.r / hand.r, elbow.r / shoulder.r | origin → insertion | 0 / 2 | clean |
+| triceps-brachii-lateral.l | shoulder.l 66.64%, elbow.l 33.36% | elbow.l / forearm.l, elbow.l / shoulder.l | origin → insertion | 0 / 0 | clean |
+| triceps-brachii-lateral.r | shoulder.r 66.15%, elbow.r 33.85% | elbow.r / forearm.r, elbow.r / shoulder.r | origin → insertion | 0 / 0 | clean |
+| triceps-brachii-long.l | shoulder.l 44.46%, scapula.l 29.88%, elbow.l 25.66% | elbow.l / forearm.l, scapula.l / shoulder.l | origin → insertion | 0 / 0 | clean |
+| triceps-brachii-long.r | shoulder.r 44.01%, scapula.r 29.91%, elbow.r 26.08% | elbow.r / forearm.r, scapula.r / shoulder.r | origin → insertion | 0 / 0 | clean |
+| triceps-brachii-medial.l | shoulder.l 69.11%, elbow.l 30.89% | elbow.l / forearm.l, elbow.l / shoulder.l | origin → insertion | 0 / 0 | clean |
+| triceps-brachii-medial.r | shoulder.r 69.03%, elbow.r 30.97% | elbow.r / forearm.r, elbow.r / shoulder.r | origin → insertion | 0 / 0 | clean |
 
-Audit result: **clean** (50 muscle nodes).
+| Other mesh | Outliers remaining / fixed |
+|---|---|
+| hand.l | 0 / 0 |
+| hand.r | 0 / 0 |
+| humerus.l | 0 / 0 |
+| humerus.r | 0 / 0 |
+| radius.l | 0 / 0 |
+| radius.r | 0 / 0 |
+| scapula.l | 0 / 0 |
+| scapula.r | 0 / 0 |
+| skin-outline | 0 / 1 |
+| ulna.l | 0 / 0 |
+| ulna.r | 0 / 0 |
+
+Audit result: **clean** (50 muscle nodes; 0 outliers remaining, 18 fixed).

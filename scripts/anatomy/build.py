@@ -429,6 +429,14 @@ def bake_muscle(record):
     u = [0. if i in origin else 1. if i in insertion else
          do[i]/(do[i]+di[i]) if math.isfinite(do[i]+di[i]) and do[i]+di[i] > 1e-12 else .5
          for i in range(len(points))]
+    write_fibre(record, points, adjacency, origin, insertion, u)
+    record['components'] = len(components)
+    record['componentVertices'] = components
+    record['originRegion'] = origin
+
+
+def write_fibre(record, points, adjacency, origin, insertion, u):
+    ob = record['ob']
     gradients = [Vector() for _ in points]
     for face in ob.data.polygons:
         a, b, c = face.vertices
@@ -451,12 +459,12 @@ def bake_muscle(record):
                 endpoint = min(origin, key=lambda j: (points[j]-points[i]).length)
                 g = points[i]-points[endpoint]
         gradients[i] = g.normalized() if g.length > 1e-10 else Vector((0, 0, 1))
-    attr_u = ob.data.attributes.new('_U', 'FLOAT', 'POINT')
-    attr_fibre = ob.data.attributes.new('_FIBRE', 'FLOAT_VECTOR', 'POINT')
+    attr_u = ob.data.attributes.get('_U') or ob.data.attributes.new('_U', 'FLOAT', 'POINT')
+    attr_fibre = ob.data.attributes.get('_FIBRE') or ob.data.attributes.new('_FIBRE', 'FLOAT_VECTOR', 'POINT')
     attr_u.data.foreach_set('value', u)
     # Custom glTF vectors are not swizzled by Blender's exporter.
     attr_fibre.data.foreach_set('vector', [c for g in gradients for c in target(g)])
-    uv = ob.data.uv_layers.new(name='Fibres')
+    uv = ob.data.uv_layers.get('Fibres') or ob.data.uv_layers.new(name='Fibres')
     start, end = centroid([points[i] for i in origin]), centroid([points[i] for i in insertion])
     axis = (end-start).normalized()
     radial_a = axis.cross(Vector((0,0,1)))
@@ -478,9 +486,6 @@ def bake_muscle(record):
     record['u'] = u
     record['originCentroid'] = list(target(start))
     record['insertionCentroid'] = list(target(end))
-    record['components'] = len(components)
-    record['componentVertices'] = components
-    record['originRegion'] = origin
 
 
 def landmark(owner, side):
@@ -614,6 +619,7 @@ def bone_joint(id, side):
 
 def skin_selection(rig, joints):
     joint_positions = {j['name']: j['position'] for j in joints}
+    weight_stats = {}
     for name, record in SELECTED.items():
         ob, part, side = record['ob'], record['part'], record['side']
         groups = {j['name']: ob.vertex_groups.new(name='joint.'+j['name']) for j in joints}
@@ -681,6 +687,43 @@ def skin_selection(rig, joints):
             for i,w in enumerate(weights):
                 for j,value in w.items():
                     groups[j].add([i],value,'REPLACE')
+        if TOPIC_NAME != 'chest':
+            from skin_weights import repair, monotonic_proximal, neighbourhoods, inspect, quantized_bind_points
+            points = [list(v.co) for v in ob.data.vertices]
+            faces = [list(f.vertices) for f in ob.data.polygons]
+            index_joint = {group.index: joint for joint, group in groups.items()}
+            weights = [{index_joint[g.group]: g.weight for g in v.groups
+                        if g.group in index_joint and g.weight > 0} for v in ob.data.vertices]
+            # Quantization can join near-coincident body-region seams. Vote on
+            # that same grid so a clean native skin stays clean after export.
+            if part['role'] == 'skin':
+                points = quantized_bind_points(points)
+            original_u = record.get('u')
+            weights, repaired_u, stats = repair(points, faces, weights, joint_positions, original_u)
+            stats['monotonicVerticesFixed'] = 0
+            if original_u is not None:
+                _, rings, areas, _ = neighbourhoods(points, faces)
+                stats['monotonicVerticesFixed'] = monotonic_proximal(weights, repaired_u, proximal_by_vertex, areas)
+                if any(abs(a-b) > 1e-10 for a, b in zip(original_u, repaired_u)):
+                    adjacency = [set() for _ in points]
+                    for i, neighbours in rings:
+                        adjacency[i].update(neighbours)
+                    origin = {i for i, u in enumerate(repaired_u) if u <= 1e-8}
+                    insertion = {i for i, u in enumerate(repaired_u) if u >= 1-1e-8}
+                    if not origin or not insertion:
+                        raise RuntimeError(f'{name}: repair removed all fibre endpoints')
+                    write_fibre(record, [Vector(p) for p in points], adjacency, origin, insertion, list(repaired_u))
+            remaining = inspect(points, faces, weights, joint_positions)
+            if remaining['outlierCount']:
+                raise RuntimeError(f'{name}: monotonic projection left weight outliers: {remaining}')
+            for group in groups.values():
+                group.remove(list(range(len(points))))
+            for i, vector in enumerate(weights):
+                for joint, weight in vector.items():
+                    groups[joint].add([i], weight, 'REPLACE')
+            record['weightRepair'] = stats
+            weight_stats[name] = stats
+            print(f'WEIGHT REPAIR {name}: {stats}', flush=True)
         ob.parent=rig
         modifier=ob.modifiers.new('Skin','ARMATURE')
         modifier.object=rig
@@ -692,6 +735,9 @@ def skin_selection(rig, joints):
         ob['sourceNodes']=json.dumps(record['sourceNames'])
         for polygon in ob.data.polygons:
             polygon.use_smooth=True
+
+    if TOPIC_NAME != 'chest':
+        save_json(CACHE/f'{TOPIC_NAME}-weight-repair.json', weight_stats)
 
 
 def material(role, layer):
