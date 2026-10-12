@@ -35,6 +35,8 @@ import { MotionDriver } from './MotionDriver';
 import { Equipment } from './Equipment';
 import type { GltfRig } from './GltfSource';
 import { makeGrip } from './grip';
+import { makeFoot } from './foot';
+import { heldSpan } from '../../lib/equipment';
 import { partBounds, partMaterialSlots } from '../../lib/parts';
 import { anchorHalf, anchorOffset, anchorPoint, anchorRadius, primitiveShape, stageBounds } from './shapes';
 import { createTextureKit } from './textures';
@@ -331,6 +333,19 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
   }, [rig, data.rig]);
   // The toe tips at rest (the model's floor, its front-most point: a standing body's toes): a push-up hinges there.
   const feet = useMemo<Vec3>(() => [0, bounds.min[1] + TOE_LIFT, bounds.max[2]], [bounds]);
+  // The rig's feet on the model's floor (heel and ball under each ankle): standing exercises keep them planted.
+  const footing = useMemo(() => {
+    const foot = (name: string) => {
+      const j = data.rig?.joints[name];
+      return makeFoot((j && rig?.node(j.node)) ?? null, bounds.min[1]);
+    };
+    return { l: foot('ankle.l'), r: foot('ankle.r') };
+  }, [rig, data.rig, bounds]);
+  // Standing lifts with a long bar: the camera keeps its ends off the HUD side panels.
+  const exerciseSpan = useCallback(
+    (id: string) => (playable.has(id) ? heldSpan(fitness?.exercises.find((e) => e.id === id)?.motion) : null),
+    [fitness, playable],
+  );
   // Equipment: one neutral matte dark grey, so the muscles stay the subject (docs/16 decision 13).
   const equipmentStyle = useMemo(() => styles.styleFor({ color: 'rubber', tint: 'token:neutral' }), [styles]);
   const rootRef = useRef<Group>(null);
@@ -411,6 +426,8 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
           center={bounds.fit.center}
           grips={grips}
           feet={feet}
+          footing={footing}
+          bridge={bridge}
           snapKey={snap.current.key}
         />
       )}
@@ -454,7 +471,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
       </group>
       {/* Flow paths do not follow the parts apart: no particles while exploded (docs/12 §7.5, G16). */}
       <Flows flows={data.flows} layers={s.view === 'exploded' ? NO_LAYERS : s.layers} look={look} clipping={clipping} />
-      <CameraRig store={store} ui={ui} bridge={bridge} chapters={chapters} views={data.views} sphere={sphere} minDistance={bounds.fit.radius * 0.9} />
+      <CameraRig store={store} ui={ui} bridge={bridge} chapters={chapters} views={data.views} sphere={sphere} minDistance={bounds.fit.radius * 0.9} span={exerciseSpan} />
       {hasModel && (
         <GltfBoundary ui={ui}>
           <Suspense fallback={null}>

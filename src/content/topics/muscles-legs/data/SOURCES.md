@@ -12,7 +12,7 @@ OpenStax figure alt text incorrectly calls gluteus minimus an adductor and pecti
 
 | Item | Value |
 |---|---|
-| File | `public/models/muscles-legs.glb`: 3,983,156 bytes, 244,638 triangles, 63 mesh nodes, 7 joints and one rig root (71 nodes total), from the regional pipeline's decoded-output report |
+| File | `public/models/muscles-legs.glb`: 3,983,116 bytes, 244,638 triangles, 63 mesh nodes, 7 joints and one rig root (71 nodes total); SHA-256 `243af0ad…` (pipeline round 6 skin-weight repair, 12 October 2026) |
 | Meshes | Z-Anatomy, the open source atlas of anatomy, CC BY-SA 4.0 [M3], derived from BodyParts3D, © The Database Center for Life Science [M4] (CC BY-SA 2.1 Japan as stated by Z-Anatomy; BodyParts3D is now CC BY 4.0) |
 | Required Z-Anatomy attribution | "BodyParts3D - The Database Center for Life Science - CC-BY-SA 2.1 Japan" and "Z-Anatomy - The open source atlas of anatomy - CC-BY-SA 4.0" |
 | Source body | Adult male reference anatomy; individual anatomical variation is expected, not a standard for the reader's body |
@@ -174,7 +174,7 @@ The calf insertions (gastrocnemius heads, soleus) sit on the posterior calcaneus
 
 Display and motion
 - Single-leg poses now pin the right hip, knee and ankle at zero (the engine otherwise mirrors left angles to the right, which lifted both legs off the ground). Presets: `deep-view` replaced by a `side` preset (fov 24); knee flexion is shown from the side so the shank does not hide the hamstrings.
-- Exercise keys rewritten for this rig. The trunk joint is the root of both legs, so trunk flexion tips the whole body about the pelvis: the Romanian deadlift is trunk 60° with hip −55° (thighs back near vertical, feet on the floor). Squats and lunges cannot be shown with planted feet (no per-key pelvis travel in the engine): their depth was reduced (hip ≤ 68°, to stay below mesh tearing) and the captions and cards say the feet lift because the pelvis is held still. Seated exercises sit on an inclined bench (`bench`, incline 70°, seat under the thighs, trunk reclined 20°); band dorsiflexion sits on a floor slab. All angles are DESIGN values.
+- Exercise keys rewritten for this rig. The trunk joint is the root of both legs, so trunk flexion tips the whole body about the pelvis: the Romanian deadlift is trunk 60° with hip −55° (thighs back near vertical, feet on the floor). Squats and lunges keep planted feet through the engine's stance solver (the whole body travels so the weight-bearing feet stay put); their depth is partial (hip ≤ 73°, to stay below mesh tearing) and the captions and cards say so. Seated exercises sit on an inclined bench (`bench`, incline 70°, seat under the thighs, trunk reclined 20°); band dorsiflexion sits on a floor slab. All angles are DESIGN values.
 - Known artefacts (reported to the pipeline owner): in the current glb, `semimembranosus.l/.r` has one vertex at the ischium skinned to the knee (spike when the knee flexes), `gastrocnemius-medial.l/.r` three origin vertices skinned to the ankle, and `iliotibial-tract.l` four vertices near the knee skinned to the hip.
 
 ## Numbered sources

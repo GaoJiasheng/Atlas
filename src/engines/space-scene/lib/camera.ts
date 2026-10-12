@@ -188,3 +188,43 @@ export function fitCameraToAspect(cam: OrbitCamera, aspect: number, inverse = fa
   const [tx, ty, tz] = cam.target;
   return { ...cam, position: [tx + (px - tx) * s, ty + (py - ty) * s, tz + (pz - tz) * s] };
 }
+
+/** Share of the half stage width a held bar may reach in exercise mode (the HUD side panels cover the rest). */
+export const SPAN_FILL = 0.56;
+/** Stages narrower than this (aspect) stack the HUD: the bar may leave the frame rather than shrink the body. */
+export const SPAN_MIN_ASPECT = 1.2;
+
+/**
+ * Exercise mode with a long held bar (docs/16 §6.5): pull the camera back
+ * along its view direction until a bar `half` metres either side of the
+ * camera target (turned `yaw`° about +Y with the body, along X at 0°) stays
+ * within `fill` of the half stage width, so its ends do not run behind the
+ * HUD side panels. Never moves closer; a bar seen end-on needs no move.
+ */
+export function fitSpan(cam: OrbitCamera, span: { half: number; yaw: number }, aspect: number, fill = SPAN_FILL): OrbitCamera {
+  if (aspect < SPAN_MIN_ASPECT || span.half <= 0) return cam;
+  const [px, py, pz] = cam.position;
+  const [tx, ty, tz] = cam.target;
+  const dx = px - tx;
+  const dy = py - ty;
+  const dz = pz - tz;
+  const d = Math.hypot(dx, dy, dz);
+  if (d < 1e-9) return cam;
+  const dir: Vec3 = [dx / d, dy / d, dz / d];
+  // Screen right: horizontal, perpendicular to the view direction.
+  const rl = Math.hypot(dir[2], dir[0]);
+  const right: Vec3 = rl > 1e-9 ? [dir[2] / rl, 0, -dir[0] / rl] : [1, 0, 0];
+  const tanH = Math.tan(((cam.fov ?? DEFAULT_FOV) * Math.PI) / 360) * aspect;
+  const yaw = (span.yaw * Math.PI) / 180;
+  const bar: Vec3 = [Math.cos(yaw) * span.half, 0, -Math.sin(yaw) * span.half];
+  let need = d;
+  for (const s of [1, -1]) {
+    const rel: Vec3 = [bar[0] * s, bar[1] * s, bar[2] * s];
+    const lateral = Math.abs(rel[0] * right[0] + rel[2] * right[2]);
+    const along = rel[0] * dir[0] + rel[1] * dir[1] + rel[2] * dir[2];
+    need = Math.max(need, along + lateral / (fill * tanH));
+  }
+  if (need <= d + 1e-6) return cam;
+  const k = need / d;
+  return { ...cam, position: [tx + dx * k, ty + dy * k, tz + dz * k] };
+}

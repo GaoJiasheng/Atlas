@@ -10,6 +10,7 @@
 | 第一次世界大战 | history | time | TimeScene/Geo | 课外（未找到对应 MOE 条目）；见 docs/11 | 2026 第二个历史主题 | 已完成 10 章（待审） |
 | 空调是怎么把房间变冷的 | science | space | SpaceScene/Model3D | Sci P5 热；课外 | 2026 第二个（验证 SpaceScene） | 已完成 5 章（待审） |
 | 一只蝗虫的身体（黑角瓦兰蝗解剖） | biology | space | SpaceScene/Model3D | Sci P3 Diversity、Cycles；与人体系统对照；详见 docs/14 | 2026 第三个（验证生物解剖模板） | 已完成 6 章（待审） |
+| 人体肌肉系列（胸 / 背 / 肩 / 臂 / 腿 / 腰腹） | biology | space | SpaceScene/Model3D | 人体系统与课外健身知识；详见 docs/16 §16 | 2026 | published ×6（2026-10-12） |
 | 新加坡 1819–1965 | history | time | TimeScene/Geo | SS P4 新加坡故事 | 2027 |
 | 植物的身体（根茎叶花） | biology | space | SpaceScene/Layer2D | Sci P3/P4 植物系统 | 2027 |
 | 生物分类与多样性 | biology | space（树状） | Layer2D | Sci P3 Diversity | 2027 |
@@ -28,6 +29,8 @@
 | 二进制与像素 | computer | 待定 | 待定 | 待定 | 待定 |
 
 数学类走 MathScene（分步课 + 练习，第三个引擎，分数已做，docs/15），比例、面积、速度随年级补；Simulation 留给科学类参数模拟；computer 类待定。
+
+肌肉系列若增第七个主题：先定范围与事实 spec，补该区 manifest / glb / rig、共享肌肉与动作卡及六章节拍，再过许可、附着点人审、网格 audits、previews 与 shoot；流程见 `atlas-space-topic/references/anatomy-mesh-runbook.md`。
 
 ## 二战主题大纲（一期 10 章）
 

@@ -6,7 +6,7 @@ Rules: `atlas-space-topic` writing rules and docs/16 decisions 11–15. Anatomy 
 
 | Item | Value |
 |---|---|
-| File | `public/models/muscles-core.glb`, BY-SA 4.0; final bytes 2,977,084; 274,634 triangles, 33 mesh nodes, 7 joints and rig root |
+| File | `public/models/muscles-core.glb`, BY-SA 4.0; final bytes 3,711,480; 274,634 triangles, 33 mesh nodes, 17 skin joints of which the topic rig uses 7, and rig root; SHA-256 `8be26641…` (pipeline round 6 skin-weight repair, 12 October 2026) |
 | Parts | 19 logical parts: 9 region muscle parts, 4 neighbouring muscles, 5 skeleton parts and 1 whole-body skin outline; bilateral meshes are real `.l` / `.r` source nodes |
 | Export mapping | Manifest `sternum` and `ribs` both have `exportGroup: thorax`, therefore one `thorax` mesh part. Every other manifest part is used under its original id. No invented `sternum` or `ribs` mesh nodes |
 | Meshes | Z-Anatomy — The open source atlas of anatomy, CC BY-SA 4.0 [M3], derived from BodyParts3D, © The Database Center for Life Science [M4] |

@@ -44,6 +44,8 @@ const HARDWARE_GL = ['--enable-gpu', '--ignore-gpu-blocklist', ...(process.platf
 
 const LOCALES = ['en', 'zh'] as const;
 const THEMES = ['paper', 'cinema'] as const;
+/** Planted feet may slide this far (cm) in a standing exercise still before `--beats` notes it. */
+const FOOT_SLIP_CM = 3;
 
 interface ShotSpec {
   chapter?: string;
@@ -65,6 +67,8 @@ interface Stats {
   buffer?: [number, number];
   pixelRatio?: number;
   gpu?: string;
+  /** SpaceScene standing exercise: how far the planted feet still slide (cm). */
+  footSlip?: number;
 }
 
 interface KeyResult {
@@ -390,7 +394,10 @@ async function runBeats(s: Session, o: Options, out: string, report: RunReport):
         }
         await s.page.waitForTimeout(o.perf ? 2400 : 1500);
         await s.page.screenshot({ path: join(out, `${name}-${phase}${o.suffix}.png`) });
-        console.log(`  ${`${name}-${phase}`.padEnd(36)} OK  (exercise ${exercise.id})`);
+        // A standing exercise keeps its feet planted: how far they still slide (cm), noted past FOOT_SLIP_CM.
+        const slip = (await s.stats()).footSlip;
+        if (slip !== undefined && slip > FOOT_SLIP_CM) report.beatNotes.push(`${name}-${phase}: feet slide ${slip} cm (${exercise.id})`);
+        console.log(`  ${`${name}-${phase}`.padEnd(36)} OK  (exercise ${exercise.id}${slip !== undefined ? `, feet slide ${slip} cm` : ''})`);
       }
     }
   }
@@ -520,6 +527,15 @@ async function runKeys(s: Session, o: Options, report: RunReport): Promise<void>
   const press = (k: string) => page.keyboard.press(k === ' ' ? 'Space' : k);
   const pressed = (attr: 'preset' | 'mode', name: string) =>
     page.evaluate(([a, n]) => document.querySelector(`[data-${a}="${n}"]`)?.getAttribute('aria-pressed') ?? null, [attr, name] as const);
+  // Poll instead of a fixed delay: under SwiftShader a heavy stage (268 k triangles) can hold the main thread for seconds.
+  const until = async (ok: () => Promise<boolean>, ms = 8000): Promise<boolean> => {
+    const end = Date.now() + ms;
+    for (;;) {
+      if (await ok()) return true;
+      if (Date.now() > end) return false;
+      await page.waitForTimeout(200);
+    }
+  };
   const record = (r: KeyResult) => {
     report.keys.push(r);
     console.log(`  key ${JSON.stringify(r.key).padEnd(13)} ${r.type.padEnd(8)} ${r.name.padEnd(14)} ${r.ok ? 'OK' : 'FAIL'}${r.note ? '  ' + r.note : ''}`);
@@ -544,11 +560,8 @@ async function runKeys(s: Session, o: Options, report: RunReport): Promise<void>
     }
     if (k.type === 'preset') {
       await press(k.key);
-      await page.waitForTimeout(250);
-      const st = await s.state();
-      const btn = await pressed('preset', k.name);
-      ok = st.preset === k.name && btn === 'true';
-      if (!ok) note = `state.preset=${st.preset} button=${btn}`;
+      ok = await until(async () => (await s.state()).preset === k.name && (await pressed('preset', k.name)) === 'true');
+      if (!ok) note = `state.preset=${(await s.state()).preset} button=${await pressed('preset', k.name)}`;
       await page.waitForTimeout(1800); // camera flight
     } else if (k.type === 'mode') {
       const disabled = await page.evaluate((n) => (document.querySelector(`[data-mode="${n}"]`) as HTMLButtonElement | null)?.disabled ?? null, k.name);
@@ -558,14 +571,11 @@ async function runKeys(s: Session, o: Options, report: RunReport): Promise<void>
       }
       const before = (await s.state()).modes[k.name]!;
       await press(k.key);
-      await page.waitForTimeout(300);
-      const st = await s.state();
-      const btn = await pressed('mode', k.name);
-      ok = st.modes[k.name] === !before && btn === String(!before);
-      if (!ok) note = `state.modes=${st.modes[k.name]} (was ${before}) button=${btn}`;
+      ok = await until(async () => (await s.state()).modes[k.name] === !before && (await pressed('mode', k.name)) === String(!before));
+      if (!ok) note = `state.modes=${(await s.state()).modes[k.name]} (was ${before}) button=${await pressed('mode', k.name)}`;
       await page.waitForTimeout(k.name === 'reference' || k.name === 'exploded' ? 1800 : 200);
       await press(k.key);
-      await page.waitForTimeout(k.name === 'reference' || k.name === 'exploded' ? 2400 : 400);
+      await until(async () => (await s.state()).modes[k.name] === before);
       const back = (await s.state()).modes[k.name];
       if (back !== before) {
         ok = false;
@@ -610,11 +620,10 @@ async function runKeys(s: Session, o: Options, report: RunReport): Promise<void>
     } else if (k.type === 'pause') {
       const before = (await s.state()).paused;
       await press(k.key);
-      await page.waitForTimeout(250);
-      ok = (await s.state()).paused === !before;
+      ok = await until(async () => (await s.state()).paused === !before);
       if (!ok) note = 'SPACE did not toggle paused';
       await press(k.key);
-      await page.waitForTimeout(250);
+      await until(async () => (await s.state()).paused === before);
     } else if (k.type === 'hud') {
       await press(k.key);
       await page.waitForTimeout(900);
@@ -642,8 +651,7 @@ async function runKeys(s: Session, o: Options, report: RunReport): Promise<void>
       await s.ev(() => window.__atlas!.setHud(false));
       await page.waitForTimeout(300);
       await press(k.key);
-      await page.waitForTimeout(500);
-      ok = (await s.state()).hud;
+      ok = await until(async () => (await s.state()).hud);
       if (!ok) note = 'ESC did not restore the HUD';
     } else if (k.type === 'beat') {
       // `,` / `.` outside the presentation (SpaceScene's chapter axis): the beat on show moves one step in the flat list and its tick fills.
@@ -659,17 +667,17 @@ async function runKeys(s: Session, o: Options, report: RunReport): Promise<void>
         continue;
       }
       await press('.');
-      await page.waitForTimeout(500);
+      await until(async () => (await at()).i >= 0 && (await at()).st.beat !== null);
       const first = (await at()).i;
       await press('.');
-      await page.waitForTimeout(600);
+      await until(async () => (await at()).i === first + 1);
       const a = await at();
       if (k.name === 'next') {
-        ok = first >= 0 && a.i === first + 1 && a.st.beat !== null && a.st.presentation === null && a.st.hud && (await filled(a.st.chapter, a.st.beat));
+        ok = first >= 0 && a.i === first + 1 && a.st.beat !== null && a.st.presentation === null && a.st.hud && (await until(() => filled(a.st.chapter, a.st.beat), 2000));
         if (!ok) note = `'.' went from flat ${first} to ${a.i} (chapter=${a.st.chapter} beat=${a.st.beat})`;
       } else {
         await press(',');
-        await page.waitForTimeout(600);
+        await until(async () => (await at()).i === a.i - 1);
         const b = await at();
         ok = b.i === a.i - 1 && (await filled(b.st.chapter, b.st.beat));
         if (!ok) note = `',' went from flat ${a.i} to ${b.i}`;
@@ -685,13 +693,10 @@ async function runKeys(s: Session, o: Options, report: RunReport): Promise<void>
         continue;
       }
       await press(k.key);
-      await page.waitForTimeout(400);
-      const now = (await s.state()).chapter;
-      ok = now === target;
-      if (!ok) note = `chapter=${now}, expected ${target}`;
+      ok = await until(async () => (await s.state()).chapter === target);
+      if (!ok) note = `chapter=${(await s.state()).chapter}, expected ${target}`;
       await press(forward ? 'ArrowLeft' : 'ArrowRight');
-      await page.waitForTimeout(600);
-      if ((await s.state()).chapter !== chapters[here]) {
+      if (!(await until(async () => (await s.state()).chapter === chapters[here]))) {
         ok = false;
         note += ' not restored';
       }
@@ -722,9 +727,12 @@ async function runKeys(s: Session, o: Options, report: RunReport): Promise<void>
     const lit = await page.evaluate(() => document.querySelectorAll('[data-preset][aria-pressed="true"]').length);
     record({ key: 'drag', type: 'camera', name: 'free-camera', ok: free && lit === 0, note: free && lit === 0 ? '' : `preset=${(await s.state()).preset} lit=${lit}` });
     await page.keyboard.press(first.key);
-    await page.waitForTimeout(2000);
+    // Wait for the preset to be applied (state and lit button), not a fixed delay: the heaviest models stall software GL.
+    const back = await until(
+      async () => (await s.state()).preset === first.name && (await page.evaluate((n) => document.querySelector(`[data-preset="${n}"]`)?.getAttribute('aria-pressed'), first.name)) === 'true',
+    );
     const st = await s.state();
-    record({ key: first.key, type: 'camera', name: 'preset-after-free', ok: st.preset === first.name, note: st.preset === first.name ? '' : `preset=${st.preset}` });
+    record({ key: first.key, type: 'camera', name: 'preset-after-free', ok: back, note: back ? '' : `preset=${st.preset}` });
   }
 }
 

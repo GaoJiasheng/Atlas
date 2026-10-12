@@ -16,6 +16,9 @@
  *    (`runtime.root`). With equipment the hands push against (`floor`,
  *    `parallel-bars`) the palms stay where the first key puts them and the
  *    body moves instead (a push-up lowers the chest, a dip the whole body);
+ *    standing (upright, no bench, floor or bars) the feet stay planted
+ *    instead: the body drops and shifts so the lowest heel / ball stays on
+ *    the floor and the weight-bearing feet where they stood (lib/stance.ts);
  *  - where that leaves the trunk, the planted palms and the floor
  *    (`runtime.exercise`), for the free-standing equipment and the ground.
  *
@@ -39,6 +42,7 @@ import {
   contractLevel,
   DEFAULT_DEMO_ANGLE,
   DEMO_PERIOD,
+  demoAngles,
   exerciseLoop,
   foldAngles,
   jointOf,
@@ -52,6 +56,9 @@ import { keepAnimating, useRuntime } from './runtime';
 import type { GltfRig } from './GltfSource';
 import { gripPoint, type Grip } from './grip';
 import { equipmentFloor, PLANTED_EQUIPMENT } from '../../lib/equipment';
+import { footSlip, isStanding, standCorrection, type FootPair } from '../../lib/stance';
+import { footPoints, type Foot } from './foot';
+import type { StageBridge } from '../../bridge';
 
 interface Joint {
   bone: Object3D;
@@ -102,6 +109,11 @@ const _pl = new Vector3();
 const _pr = new Vector3();
 const _ax = new Vector3();
 const _corr = new Vector3();
+const _h = new Vector3();
+const _b = new Vector3();
+
+type V3 = [number, number, number];
+const v3 = (v: Vector3): V3 => [v.x, v.y, v.z];
 
 /** The exercise's equipment as a list. */
 function equipmentOf(e: ExerciseSheet | undefined) {
@@ -119,6 +131,8 @@ export function MotionDriver({
   center,
   grips,
   feet,
+  footing,
+  bridge,
   snapKey,
 }: {
   data: PartsFile;
@@ -134,6 +148,10 @@ export function MotionDriver({
   grips: { l: Grip | null; r: Grip | null };
   /** Where the toes meet the floor at rest (scene y, z; x is the trunk's): a push-up hinges there. */
   feet: Vec3;
+  /** The rig's feet (ankle bones with heel and ball contacts): planted in standing exercises. */
+  footing: { l: Foot | null; r: Foot | null };
+  /** Where the planted feet slipped (QA readout). */
+  bridge: StageBridge;
   snapKey: number;
 }) {
   const runtime = useRuntime();
@@ -234,7 +252,7 @@ export function MotionDriver({
       for (const name of [`${inp.demo.joint}${side}`, inp.demo.joint]) {
         const j = joints.get(name);
         if (!j || !canMove(j.sceneAxes, movement)) continue;
-        frame.joints.set(name, { ...(frame.joints.get(name) ?? {}), [movement]: amount * swing });
+        frame.joints.set(name, { ...(frame.joints.get(name) ?? {}), ...demoAngles(inp.demo.joint, movement, amount, swing) });
         break;
       }
       frame.contract.set(inp.demo.part, swing * 0.8);
@@ -256,6 +274,11 @@ export function MotionDriver({
     palmRef: [new Vector3(), new Vector3()] as [Vector3, Vector3],
     plantFrom: 0,
     plant: 0,
+    /** Standing: the exercise whose start-key feet are cached, the feet there (skeleton frame), and how planted they are now (eased). */
+    standId: '',
+    footRef: [] as FootPair[],
+    standFrom: 0,
+    stand: 0,
   });
   useEffect(() => {
     st.current.snap = true;
@@ -268,8 +291,14 @@ export function MotionDriver({
     const exSheet = input.exercise && playable.has(input.exercise.id) ? exercises.get(input.exercise.id) : undefined;
     const equipment = equipmentOf(exSheet);
     const planted = exSheet?.motion !== undefined && grips.l !== null && grips.r !== null && equipment.some((e) => PLANTED_EQUIPMENT.includes(e.kind));
+    const soles = [footing.l, footing.r].filter((f): f is Foot => f !== null);
+    // Which of them hold the body (`motion.feet`: both, or the standing one of a single-leg move).
+    const side = exSheet?.motion?.feet;
+    const holds = [footing.l, footing.r].filter((f) => f !== null).map((f) => (side === 'left' ? f === footing.l : side === 'right' ? f === footing.r : true));
+    const standing = exSheet?.motion !== undefined && soles.length > 0 && exSheet.motion.feet !== 'free' && isStanding(exSheet.motion.root?.rotation, equipment);
     if (key !== s.key) {
       s.plantFrom = s.plant;
+      s.standFrom = s.stand;
       s.key = key;
       s.from = s.now;
       s.t0 = nowMs;
@@ -317,8 +346,8 @@ export function MotionDriver({
       }
     }
 
-    // Closed chain: where the palms are at the exercise's first key (skeleton frame), once per exercise.
-    if (planted && s.plantedId !== exSheet!.id) {
+    // Closed chain / standing: where the palms or the feet are at the exercise's first key (skeleton frame), once per exercise.
+    if ((planted && s.plantedId !== exSheet!.id) || (standing && s.standId !== exSheet!.id)) {
       const first = keyFrame(exSheet!, 0);
       for (const [name, j] of joints) {
         const angles = first.joints.get(name);
@@ -327,11 +356,21 @@ export function MotionDriver({
         if (q) j.bone.quaternion.premultiply(_qa.set(q[0], q[1], q[2], q[3]));
       }
       rig?.root.updateMatrixWorld(true);
-      gripPoint(grips.l!, s.palmRef[0], _ax);
-      gripPoint(grips.r!, s.palmRef[1], _ax);
-      s.plantedId = exSheet!.id;
+      if (planted) {
+        gripPoint(grips.l!, s.palmRef[0], _ax);
+        gripPoint(grips.r!, s.palmRef[1], _ax);
+        s.plantedId = exSheet!.id;
+      }
+      if (standing) {
+        s.footRef = soles.map((f) => {
+          footPoints(f, _h, _b);
+          return { heel: v3(_h), ball: v3(_b) };
+        });
+        s.standId = exSheet!.id;
+      }
     }
     s.plant = s.plantFrom + ((planted ? 1 : 0) - s.plantFrom) * k;
+    s.stand = s.standFrom + ((standing ? 1 : 0) - s.standFrom) * k;
 
     // Bones.
     let moved = false;
@@ -363,6 +402,23 @@ export function MotionDriver({
         .multiply(_t.makeRotationFromEuler(_e))
         .multiply(_t.makeTranslation(-pivot.x, -pivot.y, -pivot.z));
       _m.copy(_m0);
+      let slip: number | null = null;
+      if (s.stand > 0 && s.standId !== '' && s.footRef.length === soles.length) {
+        // Standing: the feet now and at the first key, in the scene under M0; the body moves so they stay planted.
+        const now = soles.map((f): FootPair => {
+          footPoints(f, _h, _b);
+          return { heel: v3(_h.applyMatrix4(_m0)), ball: v3(_b.applyMatrix4(_m0)) };
+        });
+        const ref = s.footRef.map((f): FootPair => ({
+          heel: v3(_h.set(...f.heel).applyMatrix4(_m0)),
+          ball: v3(_b.set(...f.ball).applyMatrix4(_m0)),
+        }));
+        const c = standCorrection(now, ref, holds);
+        _m.premultiply(_t.makeTranslation(c[0] * s.stand, c[1] * s.stand, c[2] * s.stand));
+        // QA: how far the weight-bearing feet still slide once moved (two feet share one correction).
+        if (s.stand === 1) slip = footSlip(now, ref, c, holds);
+      }
+      bridge.footSlip = slip;
       if (s.plant > 0 && grips.l && grips.r && s.plantedId !== '') {
         // Palms now and at the first key, in the scene under M0.
         gripPoint(grips.l, _pl, _ax);

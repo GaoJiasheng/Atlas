@@ -98,8 +98,8 @@
       ],
       "cautions": [
         {
-          "en": "The 3D model keeps the pelvis fixed, so its feet lift instead of the hips sinking. In the real exercise the feet stay flat and the hips travel down and back; follow the sketch and the steps.",
-          "zh": "3D 模型把骨盆固定住了，所以是脚抬起来，而不是臀部往下沉。真实动作里双脚平踩地面，臀部向下、向后移动；请按示意图和步骤来做。"
+          "en": "The 3D model keeps the feet flat on the floor and shows a partial-depth version so the muscle shapes stay clean. Go as deep as your mobility and a coach allow; follow the sketch and the steps.",
+          "zh": "3D 模型让双脚平踩地面，只做到较浅的深度，这样肌肉形状不会被拉变形。真实动作请按你的活动度和教练的指导决定深度，并按示意图和步骤来做。"
         },
         {
           "en": "Practise the rack exit with a coach and use correctly set catches; stop for sharp knee, hip or back pain.",
@@ -179,20 +179,22 @@
                 "flexion": 25
               },
               "hip.l": {
-                "flexion": 68,
+                "flexion": 73,
                 "abduction": 8,
                 "external-rotation": 10
               },
               "hip.r": {
-                "flexion": 68,
+                "flexion": 73,
                 "abduction": 8,
                 "external-rotation": 10
               },
               "knee.l": {
-                "flexion": 70
+                "flexion": 70,
+                "internal-rotation": 10
               },
               "knee.r": {
-                "flexion": 70
+                "flexion": 70,
+                "internal-rotation": 10
               },
               "ankle.l": {
                 "dorsiflexion": 22
@@ -320,8 +322,8 @@
       ],
       "cautions": [
         {
-          "en": "The 3D model keeps the pelvis fixed, so its feet lift instead of the hips sinking. In the real exercise the feet stay flat and the hips travel down and back; follow the sketch and the steps.",
-          "zh": "3D 模型把骨盆固定住了，所以是脚抬起来，而不是臀部往下沉。真实动作里双脚平踩地面，臀部向下、向后移动；请按示意图和步骤来做。"
+          "en": "The 3D model keeps the feet flat on the floor and shows a partial-depth version so the muscle shapes stay clean. Go as deep as your mobility and a coach allow; follow the sketch and the steps.",
+          "zh": "3D 模型让双脚平踩地面，只做到较浅的深度，这样肌肉形状不会被拉变形。真实动作请按你的活动度和教练的指导决定深度，并按示意图和步骤来做。"
         },
         {
           "en": "Put the dumbbell down before it slips; do not trap fingers between its head and the floor.",
@@ -534,8 +536,8 @@
       ],
       "cautions": [
         {
-          "en": "The 3D model keeps the pelvis fixed, so its feet lift instead of the hips sinking. In the real exercise the feet stay flat and the hips travel down and back; follow the sketch and the steps.",
-          "zh": "3D 模型把骨盆固定住了，所以是脚抬起来，而不是臀部往下沉。真实动作里双脚平踩地面，臀部向下、向后移动；请按示意图和步骤来做。"
+          "en": "The 3D model keeps the feet flat on the floor and shows a partial-depth version so the muscle shapes stay clean. Go as deep as your mobility and a coach allow; follow the sketch and the steps.",
+          "zh": "3D 模型让双脚平踩地面，只做到较浅的深度，这样肌肉形状不会被拉变形。真实动作请按你的活动度和教练的指导决定深度，并按示意图和步骤来做。"
         },
         {
           "en": "Use a support and shorter depth if balance is uncertain; stop if knee or hip pain appears.",
@@ -560,6 +562,7 @@
             0
           ]
         },
+        "feet": "left",
         "keys": [
           {
             "phase": "start",
@@ -601,22 +604,22 @@
                 "flexion": 5
               },
               "hip.l": {
-                "flexion": 62
+                "flexion": 67
               },
               "hip.r": {
-                "extension": 12
+                "extension": 5
               },
               "knee.l": {
                 "flexion": 72
               },
               "knee.r": {
-                "flexion": 65
+                "flexion": 60
               },
               "ankle.l": {
                 "dorsiflexion": 10
               },
               "ankle.r": {
-                "plantarflexion": 20
+                "plantarflexion": 30
               }
             },
             "contract": {
@@ -742,8 +745,8 @@
       ],
       "cautions": [
         {
-          "en": "The 3D model keeps the pelvis fixed, so its feet lift instead of the hips sinking. In the real exercise the feet stay flat and the hips travel down and back; follow the sketch and the steps.",
-          "zh": "3D 模型把骨盆固定住了，所以是脚抬起来，而不是臀部往下沉。真实动作里双脚平踩地面，臀部向下、向后移动；请按示意图和步骤来做。"
+          "en": "The 3D model keeps the feet flat on the floor and shows a partial-depth version so the muscle shapes stay clean. Go as deep as your mobility and a coach allow; follow the sketch and the steps.",
+          "zh": "3D 模型让双脚平踩地面，只做到较浅的深度，这样肌肉形状不会被拉变形。真实动作请按你的活动度和教练的指导决定深度，并按示意图和步骤来做。"
         },
         {
           "en": "Stop for sharp groin pain; reduce step width rather than forcing the inner thigh.",
@@ -810,12 +813,12 @@
                 "flexion": 18
               },
               "hip.l": {
-                "flexion": 55,
-                "abduction": 20
+                "flexion": 73,
+                "abduction": 10
               },
               "hip.r": {
                 "flexion": 18,
-                "abduction": 20
+                "abduction": 38
               },
               "knee.l": {
                 "flexion": 70
@@ -1016,10 +1019,10 @@
                 "flexion": 60
               },
               "hip.l": {
-                "flexion": -55
+                "flexion": 65
               },
               "hip.r": {
-                "flexion": -55
+                "flexion": 65
               },
               "knee.l": {
                 "flexion": 12
@@ -1380,6 +1383,7 @@
             0
           ]
         },
+        "feet": "right",
         "keys": [
           {
             "phase": "start",
@@ -1572,6 +1576,7 @@
             0
           ]
         },
+        "feet": "right",
         "keys": [
           {
             "phase": "start",
@@ -2334,6 +2339,7 @@
             0
           ]
         },
+        "feet": "right",
         "keys": [
           {
             "phase": "start",

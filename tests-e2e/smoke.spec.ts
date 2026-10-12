@@ -28,9 +28,10 @@ for (const locale of LOCALES) {
     const errors = collectConsoleErrors(page);
     await page.goto(`/${locale}/`);
     // Draft sample topics are reachable by URL but not listed.
-    await expect(page.locator('[data-topic]')).toHaveCount(6);
+    await expect(page.locator('[data-topic]')).toHaveCount(11);
     await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/ww1/"]`)).toHaveCount(1);
-    await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/muscles-chest/"]`)).toHaveCount(1);
+    for (const region of ['chest', 'back', 'shoulders', 'arms', 'legs', 'core'])
+      await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/muscles-${region}/"]`)).toHaveCount(1);
     await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/ww2/"]`)).toHaveCount(1);
     await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/aircon/"]`)).toHaveCount(1);
     await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/grasshopper/"]`)).toHaveCount(1);
@@ -40,19 +41,24 @@ for (const locale of LOCALES) {
     await expect(page.locator('[data-filter="subject"][data-value="biology"]')).toBeEnabled();
     await expect(page.locator('[data-filter="subject"][data-value="math"]')).toBeEnabled();
     await expect(page.locator('[data-filter="subject"][data-value="computer"]')).toBeDisabled();
-    // Card tags: subject, then the stage type (ww1 and ww2 are Time, aircon, grasshopper and muscles-chest are Space, fractions is a Lesson). No status or sensitivity tags.
-    await expect(page.locator('[data-topic] .atlas-badge')).toHaveCount(12);
+    // Past nine topics the catalogue is one section per subject (SUBJECTS order, empty ones left out).
+    await expect(page.locator('[data-catalogue="sections"]')).toHaveCount(1);
+    await expect(page.locator('[data-section]')).toHaveCount(4);
+    await expect(page.locator('[data-section="biology"] [data-topic]')).toHaveCount(7);
+    // Card tags: subject, then the stage type (ww1 and ww2 are Time, aircon, grasshopper and the six muscle topics are Space, fractions is a Lesson). No status or sensitivity tags.
+    await expect(page.locator('[data-topic] .atlas-badge')).toHaveCount(22);
     await page.locator('[data-filter="subject"][data-value="history"]').click();
     await expect(page.locator('[data-topic]:visible')).toHaveCount(2);
     await expect(page.locator('[data-catalogue-end]')).toBeHidden();
     await page.locator('[data-filter="subject"][data-value="science"]').click();
     await expect(page.locator('[data-topic]:visible')).toHaveCount(1);
     await page.locator('[data-filter="subject"][data-value="biology"]').click();
-    await expect(page.locator('[data-topic]:visible')).toHaveCount(2);
+    await expect(page.locator('[data-topic]:visible')).toHaveCount(7);
+    await expect(page.locator('[data-section="history"]')).toBeHidden();
     await page.locator('[data-filter="subject"][data-value="math"]').click();
     await expect(page.locator('[data-topic]:visible')).toHaveCount(1);
     await page.locator('[data-filter="subject"][data-value=""]').click();
-    await expect(page.locator('[data-topic]:visible')).toHaveCount(6);
+    await expect(page.locator('[data-topic]:visible')).toHaveCount(11);
     await page.screenshot({ path: `tests-e2e/__screenshots__/index-${locale}.png` });
     expect(errors).toEqual([]);
   });
@@ -60,7 +66,7 @@ for (const locale of LOCALES) {
   test(`index (${locale}) frontispiece, category icons and plate cards`, async ({ page }) => {
     const errors = collectConsoleErrors(page);
     await page.goto(`/${locale}/`);
-    // Frontispiece: the five featured topics are drawn (the sixth published topic, muscles-chest, is not featured); each drawing opens its topic and has a leader label.
+    // Frontispiece: the five featured topics are drawn (the six muscle topics are published but not featured); each drawing opens its topic and has a leader label.
     const front = page.locator('[data-frontispiece] .fp__box--wide');
     await expect(front).toBeVisible();
     await expect(front.locator('.fp__item')).toHaveCount(5);
@@ -77,11 +83,11 @@ for (const locale of LOCALES) {
     await expect(page.locator('[data-filter="subject"][data-soon]')).toHaveCount(2);
     await expect(page.locator('[data-filter="subject"][data-soon] svg[stroke-dasharray]')).toHaveCount(2);
     // Plate cards: one link each, numbered, with a drawing and a stats line counted from the topic data.
-    await expect(page.locator('[data-topic] [data-plate]')).toHaveCount(6);
-    await expect(page.locator('[data-topic] [data-figure="drawing"] img')).toHaveCount(6);
+    await expect(page.locator('[data-topic] [data-plate]')).toHaveCount(11);
+    await expect(page.locator('[data-topic] [data-figure="drawing"] img')).toHaveCount(11);
     const ww2 = page.locator('[data-topic]', { has: page.locator(`a[href$="/${locale}/topics/ww2/"]`) });
     await expect(ww2.locator('[data-stats]')).toHaveText(WW2_STATS[locale]);
-    await expect(ww2.locator('.plate__no')).toHaveText(locale === 'en' ? 'Plate 06' : '图版 06');
+    await expect(ww2.locator('.plate__no')).toHaveText(locale === 'en' ? 'Plate 11' : '图版 11');
     await expect(page.locator('[data-topic] [data-stats]:empty')).toHaveCount(0);
     // Reserved image boxes: no layout shift while drawings load.
     const box = await page.locator('[data-topic] [data-figure] img').first().boundingBox();

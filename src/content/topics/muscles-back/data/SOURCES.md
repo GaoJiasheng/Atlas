@@ -8,7 +8,7 @@ The two facts this topic must get right (docs/16 §1.2) are explicit in chapter 
 
 | Item | Value |
 |---|---|
-| File | `public/models/muscles-back.glb` (3,837,484 bytes, 267,885 triangles, 59 mesh nodes, 13 skin joints of which the topic rig uses 11; SHA-256 `8cddd44f…`) |
+| File | `public/models/muscles-back.glb` (3,837,476 bytes, 267,885 triangles, 59 mesh nodes, 13 skin joints of which the topic rig uses 11; SHA-256 `c5cde813…`; pipeline round 6 skin-weight repair, 12 October 2026) |
 | Meshes | Z-Anatomy, the open source atlas of anatomy, CC BY-SA 4.0 [M3], derived from BodyParts3D, © The Database Center for Life Science [M4] (CC BY-SA 2.1 Japan as stated by Z-Anatomy; BodyParts3D is now CC BY 4.0) |
 | Attribution lines required by Z-Anatomy (also in the glb `asset.copyright` and the title-block `note`; docs/16 §3) | "BodyParts3D - The Database Center for Life Science - CC-BY-SA 2.1 Japan" and "Z-Anatomy - The open source atlas of anatomy - CC-BY-SA 4.0" |
 | Source body | One adult male volunteer (MRI at 2 mm intervals, BodyParts3D [M4]); stature measured on the model 1.71 m |

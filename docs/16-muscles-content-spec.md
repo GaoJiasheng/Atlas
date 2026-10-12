@@ -640,3 +640,99 @@ Gray 1918 的肌肉插图（Wikimedia Commons "Gray's Anatomy plates" 分类，�
 5. 引线：章级 `labels` ≤ 3（近景）；拍里列出每个高亮零件（主动 + 协同），被盖住的用 `ghost` 逐件淡显；用 `pnpm shoot --beats` 看"无标注"清单。
 6. cinema：新主题的肌肉 token 已拉开，只需确认邻近肌肉与骨骼分得开；新增颜色一律走 token。
 7. 共享来源 `M#` 追加在 `shared/fitness/sources.json` 末尾，不改已有编号；各主题只在自己的 `training.json` 引用。
+
+## 16. 系列记录（2026-10-12）
+
+六个 SpaceScene / Model3DStage 主题均已建成，`topic.yaml` 均为 `status: published`，各 6 章，paper 默认、cinema 可切。§15 保留胸部首次发布的快照；本节按 2026-10-12 工作区的内容数据、anatomy reports 与现有 `public/models/muscles-*.glb` 记录系列状态，不把旧施工计划当作实际流程。
+
+### 16.1 各主题计数
+
+`parts` = `parts.json` 条目数（包括邻区、骨骼、context，双侧不重复计）；区内肌肉 = `superficial` / `intermediate` / `deep` 中链接肌肉卡的零件条目，按部 / 头计，腿部含 `iliotibial-tract` 这块结缔组织教学零件。`sites` = 站点记录数，不是坐标点数；beats 从六章 `state.beats` 实数，按章序列出；glossary 从 `glossary.json` 计。动作数以本主题 `training.json.exercises` 为准。
+
+共享来源 used = 章节、`parts.json`、`training.json`，以及零件直接链接的肌肉卡（含父级卡、邻区卡）与训练清单动作卡所引用的去重 `M#`；不把 `SOURCES.md` 自动附带的完整共享目录或肌肉卡另链的动作卡算成已使用。共享目录现有 `M1`–`M110`；core 另有主题来源 `S1`、`S2`，不计进 shared used。MB 用十进制（1 MB = 1,000,000 bytes），SHA 为 SHA-256 前 12 位；三角形含骨与皮肤。
+
+**胸部 `muscles-chest`**
+
+| 项 | 当前值 |
+|---|---|
+| parts / 区内肌肉 / sites | 22 / 8 / 16 |
+| exercises / beats / glossary terms | 8 / 36（6 / 5 / 5 / 7 / 8 / 5）/ 12 |
+| shared sources used | 35：`M1`–`M18`、`M20`–`M32`、`M48`、`M63`、`M86`–`M87` |
+| glb MB / triangles / SHA prefix | 3.685024 / 231,986 / `4ddd10ce1613` |
+
+**背部 `muscles-back`**
+
+| 项 | 当前值 |
+|---|---|
+| parts / 区内肌肉 / sites | 32 / 15 / 42 |
+| exercises / beats / glossary terms | 11 / 39（6 / 6 / 6 / 8 / 8 / 5）/ 14 |
+| shared sources used | 41：`M1`–`M6`、`M8`–`M11`、`M20`–`M26`、`M29`、`M31`–`M32`、`M47`–`M63`、`M86`–`M87`、`M91`、`M109` |
+| glb MB / triangles / SHA prefix | 3.837476 / 267,885 / `c5cde813fce4` |
+
+**肩部 `muscles-shoulders`**
+
+| 项 | 当前值 |
+|---|---|
+| parts / 区内肌肉 / sites | 24 / 8 / 16 |
+| exercises / beats / glossary terms | 8 / 37（6 / 5 / 5 / 8 / 8 / 5）/ 14 |
+| shared sources used | 37：`M1`–`M11`、`M14`–`M15`、`M20`–`M26`、`M29`、`M31`–`M32`、`M48`、`M51`、`M53`、`M63`、`M78`–`M87` |
+| glb MB / triangles / SHA prefix | 2.113460 / 150,985 / `af72a83504d4` |
+
+**手臂 `muscles-arms`**
+
+| 项 | 当前值 |
+|---|---|
+| parts / 区内肌肉 / sites | 31 / 18 / 41 |
+| exercises / beats / glossary terms | 11 / 37（6 / 5 / 5 / 8 / 8 / 5）/ 13 |
+| shared sources used | 37：`M1`–`M9`、`M14`–`M15`、`M22`–`M23`、`M25`–`M26`、`M31`–`M32`、`M48`、`M51`、`M63`–`M74`、`M86`–`M91` |
+| glb MB / triangles / SHA prefix | 3.079348 / 193,602 / `f00c57237c2e` |
+
+**腿部 `muscles-legs`**
+
+| 项 | 当前值 |
+|---|---|
+| parts / 区内肌肉 / sites | 33 / 23 / 51 |
+| exercises / beats / glossary terms | 13 / 41（6 / 7 / 7 / 8 / 8 / 5）/ 14 |
+| shared sources used | 30：`M1`–`M4`、`M9`、`M22`–`M26`、`M33`–`M46`、`M59`、`M75`–`M77`、`M92`、`M109` |
+| glb MB / triangles / SHA prefix | 3.983116 / 244,638 / `243af0ad87d0` |
+
+**腰腹 `muscles-core`**
+
+| 项 | 当前值 |
+|---|---|
+| parts / 区内肌肉 / sites | 19 / 9 / 54 |
+| exercises / beats / glossary terms | 10 / 40（6 / 5 / 8 / 8 / 8 / 5）/ 13 |
+| shared sources used | 37：`M1`–`M4`、`M6`、`M10`–`M11`、`M23`–`M25`、`M29`、`M39`、`M47`–`M48`、`M51`、`M55`、`M57`–`M59`、`M92`–`M109` |
+| glb MB / triangles / SHA prefix | 3.711480 / 274,634 / `8be266415b4a` |
+
+合计 36 章、230 拍；六份训练清单共 61 次动作引用、60 个独立动作（`barbell-romanian-deadlift` 在 legs / core 共用）。胸部第 05 章已从首次发布的 5 拍补成全部 8 个动作，与 `state.index.exercises` 对齐；因此本节胸部拍数不同于 §15。
+
+### 16.2 实际施工流程
+
+1. **Codex drafts → Codex topic build → Opus review**：先准备五区肌肉 / 动作初稿与石墨两格动作图，再做五个主题的 `parts`、rig、sites、共享卡片、六章正文 / beats、glossary 和来源。内容施工见 `de1e231`；审查按 back / shoulders、arms / legs 两对进行，core 单独收口（`224e0b4`、`a20035b`）。审查核 Gray / OpenStax 与动作来源、移除未支持说法、独立重写中文、把 sites 投到正确骨面，并修镜头与标注。
+2. **Pipeline rounds 4–7**：`scripts/anatomy/` 从胸部扩为 `--topic`，各主题独立 `manifest.json`，使用已缓存 FBX、native Blender、meshoptimizer 与 meshopt。Round 4 六主题 decoded surface / topology / 坐标 / 预算 gates 通过，30 张新增 previews 人工看过，胸部作为 byte baseline；候选附着仍需单独人审。Round 5 增加 published GLB 的 weights / fibre audit，修正 radius 附着误回退 `trunk`、back 的 biceps / brachioradialis / gluteus 与 core 的 latissimus / serratus 所属关节，并持久化斜方肌与竖脊肌 fibre selectors。Round 6 用 welded 邻域与面积权重修 stray vertices、微小 detached scraps 的 `_U` / fibre，并约束近端权重沿纤维单调；五个新 GLB 共修 70 个顶点，六主题 remaining outliers = 0（`420e636`）。Round 7 显式声明每主题 `jointNames` 与父链，保留未输出显示骨骼所需的 exercise joints，core 的 hip / knee / ankle 及上肢链由 native pipeline 原生生成，取消事后扩 rig。Rounds 5 / 7 合入 `1e86484`；仓库有 `ROUND-4/5/6-REPORT.md`，没有独立 `ROUND-7-REPORT.md`，Round 7 依据 README、manifest / rig 和该提交记录。
+3. **Engine 收口**：standing exercise 加 `planted-feet` stance solver，以第一关键帧的 heel / ball 为参照平移身体，支撑脚留在地面；`motion.feet` 指定弓步支撑侧，提踵与抬前脚掌按接触滚动，统计暴露 `footSlip`。`shoot --keys` 等状态 / 按钮落定，`H` 的恢复芯片与拖拽后的 Orbit damping 用轮询等候，减少 SwiftShader 时序误判。动作取景加入 equipment-aware framing：`exerciseSpan` / `fitSpan` 按 standing barbell 的跨度与 yaw 后退镜头，为两端与 HUD 留空；读者主动选 preset 时保留该视角。这里记录现有引擎实现，不据此宣称全部动作接触或取景已验收。
+
+当前六份 `report.md` 与上表 GLB 的体积、三角形和 SHA 一致；胸部 SHA 全程保持 `4ddd10ce…`。自动网格 audit clean 不等于完整动作或解剖审查完成：pipeline 候选仍保留 `[待核]`，页面采用的修正 sites 与审查依据记录在各主题 `data/SOURCES.md`。本次文档整理没有重跑 builds、pipeline 或 shoot。
+
+### 16.3 铺开时落定的取舍
+
+- **动作按 region 分文件**：新主题用 `exercises/back.json`、`shoulders.json`、`arms.json`、`legs.json`、`core.json`，没有按早期计划拆成 pull / hinge / squat-lunge。胸部保留 `horizontal-push.json`、`isolation-upper.json`、`vertical-push.json`；id 全局唯一，跨主题复用同一张卡，core 引用 legs 的 RDL。
+- **来源只追加，不重编号**：共享表扩到 `M110`。`M109` 是 Gray 的髂区 / 下肢章（pp. 466–496），`M110` 是整个上肢章（pp. 434–466）；区分于胸部 `M1`、肩带 `M48`、上臂 / 前臂 `M87` 的较窄页码。腿部解剖引用改用 `M109`，`M110` 保留在共享目录，不把目录收录当作每主题都已引用。
+- **腹外斜肌只写一张共享卡**：canonical `external-oblique` 在 `muscles/back.json`，back 邻区与 core 区内都引用它，core 不再复制；胸部邻区也复用。共享文件里的条目数不是主题的区内肌肉数。
+- **back 不增加 skull / cervical display nodes**：一次手加颅骨、颈椎的 GLB 不在 manifest 内且缺 normals；`b27f28e` 重新走 pipeline 移除。未输出的颈骨仍可作 attachment / joint reference，页面不画那些颈部起点标记，文字保留解剖说明。
+- **rig 以 manifest 为准**：mesh rig 与页面暴露的动作关节区分；例如 back GLB 有 13 个 joints、页面用 11，core GLB 有 17、页面当前用 trunk + 双侧 hip / knee / ankle 共 7。arms 的 `forearm.*` 负责旋前 / 旋后，`wrist.*` 是页面指向 `hand.*` 的 alias；胸部保留 legacy `wrist.*` 节点以守住 byte baseline。
+- **HUD 按 docs/08 §2 铁律**：底部只有章节轴，次级读数进左列 PLATE；阅读面板依次为章头 → 节拍行 → 选中详情 / 当前动作卡 → 正文 → 本章索引。肌肉卡和动作卡沿用此契约，早期 §8 的底部三面板设想不再是当前布局。
+
+### 16.4 已知差距
+
+- **Pose caps 约 80–100°**：肩 / 肘演示受腋窝蒙皮拉伸限制，不能表现真实 overhead 与深下放的全幅度；解剖轴和动作角是教学示意，非个人活动度测量。
+- **没有 hand / foot intrinsic muscles**：手、足骨按侧合并，前臂深屈肌及手足内在肌不在 v1 范围；不能据握持示意推断完整手指动作。
+- **`chin-up` / `overhead-dumbbell-triceps-extension` 只演一部分**：反握引体只演缩短的肩肘动作，不解算悬垂身体与固定单杠握点；过顶伸肘为保护网格降低上臂抬举角，不画完整的头顶哑铃接触。完整设置与幅度看 sketch / steps。
+- **Overhead bar extent**：standing barbell 已有横向跨度取景修正，但高举后的竖向器械包络、字幕 / HUD 避让仍需逐拍检查；尚无全关键帧动态 equipment bounds 的保证。
+- **Pullover sketch 肘弯过多**：`dumbbell-pullover` 下放格的屈肘幅度大于卡片“保持微屈”的技术要求，动作图待修；模型仍是每手一只 dumbbell，而非双手共持一只。
+- **SwiftShader label-list 偶发波动**：动作循环遮挡、锚点刷新时机可让 shoot 的无标注清单变化；需看 start / end 与重复采样，不能把偶发漏标清单当成已经消除的视觉问题。
+- **Plank 缺手臂支撑而身体悬浮**：core 页面尚不暴露肩肘手链，`forearm-plank` / `side-plank` 没有支撑手臂的完整网格；即使有 floor slab，身体也会读成浮在地面上。GLB 保留上肢 joints 并未自动补齐页面的显示与闭链动作。
+- **Achilles 没有独立 tendon mesh**：legs 用腓肠肌 / 比目鱼肌与跟骨止点说明跟腱，不画单独的跟腱网格；原始 muscle candidate 离跟骨很远时，不能拿肌腹末端替代真实止点。投影和取舍见 legs `SOURCES.md`。
+
+可复用流程已收进 [anatomy-mesh-runbook.md](../.claude/skills/atlas-space-topic/references/anatomy-mesh-runbook.md)；后续主题沿用 native pipeline、明确 rig 和三道人审闸门。

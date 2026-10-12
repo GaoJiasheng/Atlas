@@ -90,7 +90,7 @@ describe('pickFeatured', () => {
     expect(pickFeatured(many).map((p) => p.id)).toEqual(['t0', 't2', 't3', 't4', 't5']);
   });
 
-  it('features all five published topics, the grasshopper in the largest slot', () => {
+  it('features the five featured published topics (the muscle series is not featured), the grasshopper in the largest slot', () => {
     const published = topics
       .filter((x) => x.data.status === 'published')
       .map((x) => ({ id: x.slug, featured: x.data.featured, hasIllustration: !!x.data.illustration }));

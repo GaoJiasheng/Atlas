@@ -156,6 +156,14 @@ export const exerciseMotion = z
     /** Whole-body turn into the exercise position (bench press: lying on the back), XYZ degrees about the trunk joint, then `offset` metres. */
     root: z.object({ rotation: vec3, offset: vec3.optional() }).strict().optional(),
     equipment: z.union([equipmentSchema, z.array(equipmentSchema).min(1).max(4)]).optional(),
+    /**
+     * Standing exercises keep the feet planted (the body drops and shifts so the
+     * lowest heel / ball stays on the floor): `both` (default), or the one foot
+     * that stays (`left` / `right`: a reverse lunge steps the other back, a cable
+     * abduction swings it out); `free` for a body that hangs (a hanging knee
+     * raise: the feet leave the floor).
+     */
+    feet: z.enum(['both', 'left', 'right', 'free']).optional(),
     /** Two or three keys (`start`, optional `mid`, `end`), in that order. */
     keys: z.array(motionKey).min(2).max(3),
     /** Seconds for start → end, hold at end, end → start, hold at start (loop). */

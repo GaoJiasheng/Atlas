@@ -6,7 +6,7 @@ Rules: `.claude/skills/atlas-space-topic/references/writing-rules.md`, docs/16 d
 
 | Item | Value |
 |---|---|
-| File | `public/models/muscles-arms.glb`: 3,499,152 bytes, 193,602 triangles, 61 mesh nodes, 13 actual joints (pipeline report) |
+| File | `public/models/muscles-arms.glb`: 3,079,348 bytes, 193,602 triangles, 61 mesh nodes, 13 actual joints; SHA-256 `f00c5723…` (pipeline round 6 skin-weight repair, 12 October 2026) |
 | Content | 31 manifest parts: 18 regional muscle parts, 7 neighbours, 5 bone parts and 1 skin outline; 30 paired parts use original `.l` / `.r` meshes |
 | Mesh source | Z-Anatomy — The open source atlas of anatomy, CC BY-SA 4.0 [M3], derived from BodyParts3D, © The Database Center for Life Science [M4] |
 | Required licence lines | "BodyParts3D - The Database Center for Life Science - CC-BY-SA 2.1 Japan" and "Z-Anatomy - The open source atlas of anatomy - CC-BY-SA 4.0" |

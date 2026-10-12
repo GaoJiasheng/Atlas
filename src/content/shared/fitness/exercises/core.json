@@ -159,10 +159,10 @@
                 "flexion": 6
               },
               "hip.l": {
-                "flexion": 39
+                "flexion": 51
               },
               "hip.r": {
-                "flexion": 39
+                "flexion": 51
               },
               "knee.l": {
                 "flexion": 112
@@ -1093,6 +1093,7 @@
             0
           ]
         },
+        "feet": "free",
         "keys": [
           {
             "phase": "start",
@@ -1124,10 +1125,10 @@
                 "rotation": 0
               },
               "hip.l": {
-                "flexion": 90
+                "flexion": 100
               },
               "hip.r": {
-                "flexion": 90
+                "flexion": 100
               }
             },
             "contract": {
@@ -1266,6 +1267,7 @@
             0
           ]
         },
+        "feet": "right",
         "keys": [
           {
             "phase": "start",

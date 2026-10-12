@@ -18,6 +18,7 @@ description: Atlas 项目"对象解剖"主题（SpaceScene：3D 拆解 + 工作�
 |---|---|
 | 立项、写内容 spec、选原型 | `spec-template.md` |
 | 找参考图、建模、写实轮次、性能 | `modelling-runbook.md` |
+| 真实解剖网格、许可、anatomy pipeline、rig 与附着点人审 | `anatomy-mesh-runbook.md` |
 | 写 `parts.json`、章节 frontmatter、镜头 | `data-cookbook.md` |
 | 写正文、零件说明、字幕、名词、来源 | `writing-rules.md` |
 | 排工期、分子代理、文件归属 | `build-order.md` |
@@ -34,11 +35,15 @@ description: Atlas 项目"对象解剖"主题（SpaceScene：3D 拆解 + 工作�
 7. **B 节拍**：每章 3–5 拍，字幕说"这一拍模型上显示什么"；`pnpm shoot <slug> --beats` 0 失败、无漏标。
 8. **P 打磨与审计**：HUD 排版 → 镜头与模式组合 → 事实审计、代码审计。`references/acceptance.md` 全部打勾，门槛全绿，再改 `status: published`。
 
+## Real meshes (anatomy)
+
+程序化几何优先；人体肌肉、器官等无法用 primitive 如实表达的复杂有机体，可以例外使用有可核实来源与许可的本地 glb（docs/08 §0）。按 [anatomy-mesh-runbook.md](references/anatomy-mesh-runbook.md) 做 manifest、native Blender 管线、预算与 weights / fibre / outlier audit，并经过 previews、附着点人审和 shoot 验收；来源、改动和许可必须齐全。这条例外不扩展到普通机器、品牌模型或照片贴图。
+
 ## 不可违反
 
 - **技术图版语法**：暖象牙纸底、hairline HUD、两列引线标注、克制配色；颜色只用 token（产品本色用材质族 + `tint`）；paper 与 cinema 两套主题都要能看。禁止霓虹、科技蓝、暗色科幻风。
 - **写实**：参考先行，**Tier-1 一眼能认**（`archetypes.md` 每种原型的 Tier-1 清单）；每个零件有功能理由，`summary` 第一句说它干什么；禁止随机 greeble。示意性的地方（缩短的管线、放宽的鳍片片距、并排摆放）在标题块 `note`、细看和 spec 已知差距里写明。
-- **只用程序化几何**：用引擎的 primitive 拼，不加载外部模型、不贴照片、不加依赖；不画品牌、型号、商标、铭牌。
+- **只用程序化几何**：默认用引擎的 primitive 拼；真实解剖网格只按上面的 Real meshes (anatomy) 例外处理。不贴照片、不加依赖；不画品牌、型号、商标、铭牌。
 - **事实纪律**：规格行写 DESIGN（落在有来源的 TYPICAL 范围内），PLATE 块的模拟读数是 SIM 且内部自洽（能量守恒、单位换算）；设计值和模拟运行点写成一条**自描述的设计研究来源**（S1），正文数字一律 `<Num s>`；来源冲突并列，不偷偷选一个。
 - **不儿童化**：通俗不幼稚；不拟人、不喊"小朋友"、不用感叹号和问句标题；默认不做测验。
 - **客观**：不推荐产品、不比较品牌；能效、用电、安全只讲原理和官方建议。生物主题：解剖如实、用词克制，不渲染血腥，也不回避；动物不拟人；"为了什么而进化"一类目的论说法不写。

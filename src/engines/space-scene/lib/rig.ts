@@ -243,7 +243,23 @@ export function bothSides(joints: Readonly<Record<string, Angles>>, rigJoints: R
   return out;
 }
 
+/** Hinges that stand straight at rest: their extension demo swings back from flexion, never past straight. */
+export const STRAIGHT_AT_REST: ReadonlySet<string> = new Set(['knee', 'elbow']);
+
+/**
+ * The demo's angle on a joint at `swing` (0 → 1 → 0 over `DEMO_PERIOD`):
+ * the movement through `amount` degrees from rest, or for the extension of a
+ * hinge straight at rest (knee, elbow), from `amount` degrees of flexion back
+ * to straight (the muscle shortens as the joint straightens).
+ */
+export function demoAngles(joint: string, movement: Movement, amount: number, swing: number): Angles {
+  if (movement === 'extension' && STRAIGHT_AT_REST.has(joint)) return { flexion: amount * (1 - swing) };
+  return { [movement]: amount * swing };
+}
+
 /** Default demo swing of a movement (degrees) when the rig gives none. */
 export const DEFAULT_DEMO_ANGLE = 60;
+/** Smallest demo swing (degrees) a muscle sheet's demo button may have (validate). */
+export const MIN_DEMO_ANGLE = 5;
 /** One demo swing there and back (s). */
 export const DEMO_PERIOD = 3;

@@ -473,7 +473,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       stats: () => {
         const st = bridge.stats;
         const live = bridge.liveCamera();
-        const out: Partial<SceneStats> & { geometries: number; textures: number; camera?: OrbitCamera } = {
+        const out: Partial<SceneStats> & { geometries: number; textures: number; camera?: OrbitCamera; footSlip?: number } = {
           calls: st.calls,
           triangles: st.triangles,
           geometries: st.geometries,
@@ -482,6 +482,8 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
           gpu: st.gpu,
           // The live camera (tests: where the stage really is, not the stored target).
           ...(live ? { camera: { ...roundCamera(live), fov: Math.round((live.fov ?? 0) * 100) / 100 } } : {}),
+          // A standing exercise: how far the planted feet still slide (cm).
+          ...(bridge.footSlip !== null ? { footSlip: Math.round(bridge.footSlip * 1000) / 10 } : {}),
         };
         return out;
       },

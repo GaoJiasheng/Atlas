@@ -1504,11 +1504,7 @@
       "trunk": {
         "node": "joint.trunk",
         "axes": {
-          "flexion": [
-            -1,
-            0,
-            0
-          ],
+          "flexion": [1, 0, 0],
           "lateral-flexion": [
             0,
             0,

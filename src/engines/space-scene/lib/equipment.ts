@@ -19,6 +19,7 @@
  */
 import type { EquipmentKind } from '../../../lib/anatomy';
 import type { Primitive } from '../schema';
+import { isStanding } from './stance';
 
 export const HELD_EQUIPMENT: readonly EquipmentKind[] = ['barbell', 'dumbbell', 'cable-handle'];
 
@@ -173,4 +174,17 @@ export function placeFixed(e: Placed, trunk: V3, palms: readonly [V3, V3] | null
     return [rel[0] + (side === 0 ? 0.25 : -0.25), rel[1], rel[2]];
   }
   return rel;
+}
+
+/**
+ * How far a held bar reaches either side of the body in a standing exercise
+ * (metres; the camera keeps its ends off the HUD side panels), and the body's
+ * turn about +Y; null when nothing long is held or the body is lying or sitting.
+ */
+export function heldSpan(motion: { root?: { rotation: readonly number[] } | undefined; equipment?: Placed | readonly Placed[] | undefined } | undefined): { half: number; yaw: number } | null {
+  if (!motion) return null;
+  const list = motion.equipment === undefined ? [] : Array.isArray(motion.equipment) ? (motion.equipment as readonly Placed[]) : [motion.equipment as Placed];
+  if (!list.some((e) => e.kind === 'barbell')) return null;
+  if (!isStanding(motion.root?.rotation, list)) return null;
+  return { half: BAR.length / 2, yaw: motion.root?.rotation[1] ?? 0 };
 }

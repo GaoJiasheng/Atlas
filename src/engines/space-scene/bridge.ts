@@ -74,6 +74,8 @@ export interface StageBridge {
   settledTransition: number;
   /** Called when `settledTransition` changes. */
   settleListeners: Set<() => void>;
+  /** Standing exercise on show: how far the weight-bearing feet still slide from where they stood (metres), else null (QA). */
+  footSlip: number | null;
 }
 
 /** Resolves once the stage has finished the camera move of transition `id` (or after `timeoutMs`, e.g. before the stage has loaded). */
@@ -109,5 +111,6 @@ export function createBridge(): StageBridge {
     liveCamera: () => null,
     settledTransition: -1,
     settleListeners: new Set(),
+    footSlip: null,
   };
 }

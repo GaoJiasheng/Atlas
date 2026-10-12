@@ -10,6 +10,9 @@
  *  - snap: finish any move now
  *  - moves take 1.6 s (REFERENCE 2 s, see `ui.nextTweenMs`), easeInOut, with
  *    the offset from the target interpolated spherically (never through the model)
+ *  - exercise mode, a standing lift with a long bar (`span`): the move backs
+ *    off until the bar's ends stay off the HUD side panels (`fitSpan`; not
+ *    for presets, the reader's own choice of view)
  *  - ORBIT: slow turntable (one turn / 40 s) around the target until the user drags
  *  - dragging cancels any move and writes the camera back (`setCamera`, debounced),
  *    which the host shows as FREE CAMERA; a transition (e.g. the next
@@ -43,6 +46,7 @@ import {
   DEFAULT_FOV,
   fitCameraToAspect,
   fitSphereCamera,
+  fitSpan,
   ORBIT_PERIOD_S,
   roundCamera,
   transitionCamera,
@@ -68,6 +72,7 @@ export function CameraRig({
   views,
   sphere,
   minDistance,
+  span,
 }: {
   store: SceneStore<SpaceSceneExt>;
   ui: SpaceUiStore;
@@ -77,6 +82,8 @@ export function CameraRig({
   /** The assembled model's bounding sphere (default cover camera). */
   sphere: { center: readonly number[]; radius: number };
   minDistance: number;
+  /** The held bar's reach in the exercise with this id (standing lifts), or null. */
+  span: (exercise: string) => { half: number; yaw: number } | null;
 }) {
   const controls = useRef<Controls>(null);
   const camera = useThree((s) => s.camera) as unknown as PerspectiveCamera;
@@ -84,8 +91,8 @@ export function CameraRig({
   const size = useThree((s) => s.size);
   const orbit = useStore(ui, (s) => s.orbit);
   // Latest props for the store subscriptions.
-  const props = useRef({ chapters, views, sphere });
-  props.current = { chapters, views, sphere };
+  const props = useRef({ chapters, views, sphere, span });
+  props.current = { chapters, views, sphere, span };
 
   const tween = useRef<{ from: OrbitCamera; to: OrbitCamera; start: number; ms: number; id: number; cover?: boolean } | null>(null);
   const last = useRef<number | null>(null);
@@ -181,8 +188,11 @@ export function CameraRig({
       view: state.view,
       views: presets,
     });
-    if (target) moveTo(fitCameraToAspect(withFov(target), camera.aspect), first || instant, transitionId);
-    else settle(transitionId);
+    if (target) {
+      const fitted = fitCameraToAspect(withFov(target), camera.aspect);
+      const bar = reason !== 'preset' && state.exercise ? props.current.span(state.exercise.id) : null;
+      moveTo(bar ? fitSpan(fitted, bar, camera.aspect) : fitted, first || instant, transitionId);
+    } else settle(transitionId);
   };
 
   /** Where the cover camera is for the current stage. */

@@ -969,7 +969,7 @@
         "flexion": 15
       },
       "joint:hip.l": {
-        "flexion": -15
+        "flexion": 15
       },
       "contract": {
         "rectus-abdominis": 0.35,
@@ -983,7 +983,7 @@
         "extension": 12
       },
       "joint:hip.l": {
-        "flexion": 12
+        "flexion": -12
       },
       "contract": {
         "erector-spinae-lumbar": 0.25,
@@ -1076,7 +1076,7 @@
         "flexion": 30
       },
       "joint:hip.l": {
-        "flexion": -30
+        "flexion": 30
       },
       "contract": {},
       "duration": 1.2
@@ -1098,7 +1098,7 @@
         "node": "joint.trunk",
         "axes": {
           "flexion": [
-            -1,
+            1,
             0,
             0
           ],

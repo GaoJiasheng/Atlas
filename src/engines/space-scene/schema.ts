@@ -38,7 +38,7 @@ import {
   type Side,
 } from './lib/bilateral';
 import { MAX_POSES, POSE_DURATION } from './lib/pose';
-import { DEFAULT_BULGE, JOINT_PREFIX, jointOf, musclePartIds } from './lib/rig';
+import { canMove, DEFAULT_BULGE, DEFAULT_DEMO_ANGLE, JOINT_PREFIX, jointOf, MIN_DEMO_ANGLE, musclePartIds } from './lib/rig';
 import { MAX_EXPLODE_STAGE } from './lib/explode';
 
 /* ------------------------------------------------------------------ */
@@ -1260,6 +1260,15 @@ export const spaceSceneData = z
       }
       if (p.muscle !== undefined && !muscles.has(p.muscle))
         issue(['parts', 'parts', i, 'muscle'], data.fitness ? `unknown muscle "${p.muscle}" (not in src/content/shared/fitness/muscles)` : `muscle "${p.muscle}": no shared fitness data was merged`);
+      // Every ACTIONS demo button the muscle sheet shows must visibly move its joint.
+      const side = p.id.endsWith('-r') ? '.r' : '.l';
+      for (const a of (p.muscle !== undefined ? muscles.get(p.muscle)?.actions : undefined) ?? []) {
+        const joint = data.parts.rig?.joints[`${a.joint}${side}`] ?? data.parts.rig?.joints[a.joint];
+        if (!joint || !canMove(joint.axes, a.movement as Movement)) continue;
+        const amount = data.parts.rig?.demo?.[a.joint as keyof NonNullable<Rig['demo']>]?.[a.movement as Movement] ?? DEFAULT_DEMO_ANGLE;
+        if (Math.abs(amount) < MIN_DEMO_ANGLE)
+          issue(['parts', 'rig', 'demo', a.joint, a.movement], `${amount}°: the ${p.id} demo button (${a.joint} ${a.movement}) would not visibly move; give at least ${MIN_DEMO_ANGLE}°`);
+      }
     });
     if (data.training && !data.fitness) issue(['training'], 'training.json needs the shared fitness data (src/content/shared/fitness)');
     const rig = data.parts.rig?.joints ?? {};
