@@ -1516,25 +1516,24 @@
       }
     },
     {
-      "id": "deep-view",
+      "id": "side",
       "label": {
-        "en": "Deep",
-        "zh": "深层"
+        "en": "Side",
+        "zh": "侧面"
       },
       "camera": {
         "position": [
-          1.2,
-          -0.05,
-          2.4
+          3.4,
+          0.05,
+          0.9
         ],
         "target": [
-          0.07,
-          -0.24,
-          -0.02
+          0.05,
+          -0.42,
+          0.02
         ],
-        "fov": 30
-      },
-      "view": "xray"
+        "fov": 24
+      }
     },
     {
       "id": "on-my-body",
@@ -1610,7 +1609,10 @@
         "semimembranosus": 0.5,
         "adductor-magnus": 0.4
       },
-      "duration": 1.2
+      "duration": 1.2,
+      "joint:hip.r": {
+        "extension": 0
+      }
     },
     "hip-flexion": {
       "joint:hip.l": {
@@ -1622,7 +1624,10 @@
         "psoas-major": 0.7,
         "iliacus": 0.7
       },
-      "duration": 1.2
+      "duration": 1.2,
+      "joint:hip.r": {
+        "flexion": 0
+      }
     },
     "hip-abduction": {
       "joint:hip.l": {
@@ -1633,7 +1638,10 @@
         "gluteus-minimus": 0.65,
         "tensor-fasciae-latae": 0.45
       },
-      "duration": 1.2
+      "duration": 1.2,
+      "joint:hip.r": {
+        "abduction": 0
+      }
     },
     "hip-adduction": {
       "joint:hip.l": {
@@ -1646,7 +1654,10 @@
         "gracilis": 0.4,
         "pectineus": 0.4
       },
-      "duration": 1.2
+      "duration": 1.2,
+      "joint:hip.r": {
+        "adduction": 0
+      }
     },
     "hip-internal-rotation": {
       "joint:hip.l": {
@@ -1657,7 +1668,10 @@
         "gluteus-minimus": 0.5,
         "tensor-fasciae-latae": 0.5
       },
-      "duration": 1.2
+      "duration": 1.2,
+      "joint:hip.r": {
+        "internal-rotation": 0
+      }
     },
     "hip-external-rotation": {
       "joint:hip.l": {
@@ -1667,7 +1681,10 @@
         "gluteus-maximus": 0.5,
         "sartorius": 0.4
       },
-      "duration": 1.2
+      "duration": 1.2,
+      "joint:hip.r": {
+        "external-rotation": 0
+      }
     },
     "knee-extension": {
       "joint:hip.l": {
@@ -1682,7 +1699,13 @@
         "vastus-medialis": 0.75,
         "vastus-intermedius": 0.75
       },
-      "duration": 1.2
+      "duration": 1.2,
+      "joint:hip.r": {
+        "flexion": 0
+      },
+      "joint:knee.r": {
+        "flexion": 0
+      }
     },
     "knee-flexion": {
       "joint:knee.l": {
@@ -1694,7 +1717,10 @@
         "semitendinosus": 0.65,
         "semimembranosus": 0.65
       },
-      "duration": 1.2
+      "duration": 1.2,
+      "joint:knee.r": {
+        "flexion": 0
+      }
     },
     "knee-flexed-hip-extension": {
       "joint:hip.l": {
@@ -1706,7 +1732,13 @@
       "contract": {
         "gluteus-maximus": 0.7
       },
-      "duration": 1.2
+      "duration": 1.2,
+      "joint:hip.r": {
+        "extension": 0
+      },
+      "joint:knee.r": {
+        "flexion": 0
+      }
     },
     "ankle-plantarflexion": {
       "joint:ankle.l": {
@@ -1717,7 +1749,10 @@
         "gastrocnemius-lateral": 0.7,
         "soleus": 0.7
       },
-      "duration": 1.2
+      "duration": 1.2,
+      "joint:ankle.r": {
+        "plantarflexion": 0
+      }
     },
     "ankle-dorsiflexion": {
       "joint:ankle.l": {
@@ -1726,7 +1761,10 @@
       "contract": {
         "tibialis-anterior": 0.7
       },
-      "duration": 1.2
+      "duration": 1.2,
+      "joint:ankle.r": {
+        "dorsiflexion": 0
+      }
     },
     "ankle-inversion": {
       "joint:ankle.l": {
@@ -1735,7 +1773,10 @@
       "contract": {
         "tibialis-anterior": 0.45
       },
-      "duration": 1.2
+      "duration": 1.2,
+      "joint:ankle.r": {
+        "inversion": 0
+      }
     },
     "ankle-eversion": {
       "joint:ankle.l": {
@@ -1744,7 +1785,10 @@
       "contract": {
         "fibularis-longus": 0.5
       },
-      "duration": 1.2
+      "duration": 1.2,
+      "joint:ankle.r": {
+        "eversion": 0
+      }
     },
     "hip-stability": {
       "contract": {
@@ -2044,30 +2088,6 @@
     },
     {
       "muscle": "iliotibial-tract",
-      "kind": "origin",
-      "bone": "tensor-fasciae-latae",
-      "points": [
-        [
-          0.13887,
-          -0.01311,
-          0.05879
-        ]
-      ]
-    },
-    {
-      "muscle": "iliotibial-tract",
-      "kind": "origin",
-      "bone": "gluteus-maximus",
-      "points": [
-        [
-          0.13303,
-          -0.08468,
-          -0.00049
-        ]
-      ]
-    },
-    {
-      "muscle": "iliotibial-tract",
       "kind": "insertion",
       "bone": "lower-leg",
       "points": [
@@ -2169,9 +2189,9 @@
       "bone": "femur",
       "points": [
         [
-          0.10217,
-          -0.3041,
-          0.02854
+          0.1289,
+          -0.09645,
+          0.04191
         ],
         [
           0.12706,
@@ -2179,9 +2199,9 @@
           0.02497
         ],
         [
-          0.1289,
-          -0.09645,
-          0.04191
+          0.10553,
+          -0.23525,
+          0.02832
         ]
       ]
     },
@@ -2625,9 +2645,14 @@
       "bone": "femur",
       "points": [
         [
-          0.09621,
-          -0.159,
-          0.0426
+          0.08897,
+          -0.1165,
+          0.01454
+        ],
+        [
+          0.09083,
+          -0.1251,
+          0.01631
         ]
       ]
     },
@@ -2781,9 +2806,9 @@
       "bone": "femur",
       "points": [
         [
-          0.14172,
-          -0.0586,
-          0.02629
+          0.10592,
+          -0.0546,
+          0.04941
         ]
       ]
     },
@@ -2793,9 +2818,9 @@
       "bone": "femur",
       "points": [
         [
-          0.09751,
-          -0.35284,
-          0.04994
+          0.11921,
+          -0.13106,
+          0.04367
         ],
         [
           0.10951,
@@ -2803,9 +2828,9 @@
           0.05166
         ],
         [
-          0.11921,
-          -0.13106,
-          0.04367
+          0.10281,
+          -0.30266,
+          0.05124
         ]
       ]
     },
@@ -2851,9 +2876,14 @@
       "bone": "femur",
       "points": [
         [
-          0.09185,
-          -0.19124,
-          0.04182
+          0.09584,
+          -0.15563,
+          0.03062
+        ],
+        [
+          0.09337,
+          -0.1936,
+          0.03237
         ]
       ]
     },

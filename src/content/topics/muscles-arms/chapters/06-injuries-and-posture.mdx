@@ -12,135 +12,78 @@ state:
   run: false
   cutaway: none
   pose: neutral-stand
-  layers:
-  - superficial
-  - intermediate
-  - deep
-  - skeleton
-  - neighbours
-  - body
-  ghost:
-  - neighbours
-  - body
+  layers: [superficial, intermediate, skeleton, neighbours, body]
+  ghost: [neighbours, body]
   sites: []
-  labels:
-  - extensor-carpi-radialis-brevis
-  - humerus
-  camera:
-    position:
-    - 0.55
-    - -0.08
-    - 0.7
-    target:
-    - 0.22
-    - -0.18
-    - 0.01
-    fov: 28
+  labels: ["group:superficial", "group:intermediate"]
+  camera: { position: [0.45, 0.04, 2.2], target: [0, -0.15, 0.02], fov: 30 }
   summary:
-    en: Understand tendon loading without trying to diagnose pain from the model.
-    zh: 理解肌腱负荷，不用模型给疼痛下诊断。
+    en: "Two common elbow problems, what they have to do with the muscles, and why the model cannot diagnose pain."
+    zh: "肘部两种常见问题、它们和哪些肌肉有关，以及为什么模型不能用来诊断疼痛。"
   beats:
-  - camera: close-arm
-    ghost:
-    - superficial
-    - neighbours
-    - body
-    sites:
-    - extensor-carpi-radialis-brevis
-    labels:
-    - extensor-carpi-radialis-brevis
-    - humerus
-    caption:
-      en: At the outer elbow, the short radial wrist extensor starts near the humeral epicondyle. This is a commonly involved tendon
-        in tennis elbow.
-      zh: 肘外侧的桡侧腕短伸肌起于肱骨上髁附近，是网球肘常涉及的肌腱。
-  - camera: close-arm
-    ghost:
-    - neighbours
-    - body
-    sites:
-    - biceps-brachii-long
-    - biceps-brachii-short
-    labels:
-    - biceps-brachii-long
-    - biceps-brachii-short
-    - radius
-    caption:
-      en: The biceps tendon ends on the radius. Turning weakness can matter even when other muscles still bend the elbow.
-      zh: 二头肌腱止于桡骨。即使其他肌肉仍能屈肘，转掌无力也可能有意义。
-  - exercise:
-      id: barbell-curl
-      phase: start
-    camera: exercise-view
-    sites: []
-    labels:
-    - biceps-brachii-long
-    - biceps-brachii-short
-    - brachialis
-    caption:
-      en: At the lowered curl position, the elbow flexors are lengthened. Lower smoothly; this pose is not a test for tendon injury.
-      zh: 弯举下放时，屈肘肌变长。平稳下放；这个姿势不是肌腱损伤测试。
-  - pose: shoulder-forward
-    camera: left-side
-    ghost:
-    - neighbours
-    - body
-    sites:
-    - triceps-brachii-long
-    labels:
-    - triceps-brachii-long
-    - scapula
-    - ulna
-    caption:
-      en: The long triceps head bridges shoulder and elbow. Moving the upper arm changes its length before elbow extension begins.
-      zh: 三头肌长头连接肩与肘，移动上臂在伸肘之前就改变它的长度。
-  - camera: front
-    ghost:
-    - body
-    sites: []
-    pose: null
-    labels:
-    - group:superficial
-    - group:intermediate
-    caption:
-      en: 'Return to the complete arm. This is general information, not medical advice: pain or injury needs a doctor or physiotherapist.'
-      zh: 回到完整手臂。本页是一般性知识，不是医疗建议：疼痛或受伤请咨询医生或物理治疗师。
+    - camera: close-arm
+      ghost: [extensor-carpi-radialis-longus, extensor-digitorum, brachioradialis, neighbours, body]
+      sites: [extensor-carpi-radialis-brevis]
+      labels: [extensor-carpi-radialis-brevis, humerus]
+      caption:
+        en: "On the outer elbow, the short radial wrist extensor starts on the bony bump of the humerus. Its tendon is the one most often involved in tennis elbow."
+        zh: "肘外侧，桡侧腕短伸肌起于肱骨的外上髁。网球肘最常涉及的就是它的肌腱。"
+    - camera: close-arm
+      ghost: [neighbours, body]
+      sites: [biceps-brachii-long, biceps-brachii-short]
+      labels: [biceps-brachii-long, biceps-brachii-short, radius]
+      caption:
+        en: "Both heads of biceps end in one tendon on the radius, just below the elbow. A tear here weakens turning the palm up more than bending the elbow."
+        zh: "肱二头肌两个头在肘下方合成一条肌腱，止于桡骨。这里撕裂后，转掌朝上会比屈肘更没力。"
+    - exercise: { id: barbell-curl, phase: start }
+      camera: exercise-view
+      sites: []
+      labels: [biceps-brachii-long, biceps-brachii-short, brachialis]
+      caption:
+        en: "At the bottom of a curl the elbow flexors are at their longest. Lower the bar slowly to here; do not let a heavy load drop the elbow straight."
+        zh: "弯举放到最低点时，屈肘肌被拉得最长。慢慢放到这里，别让重物把肘猛地拽直。"
+    - pose: shoulder-forward
+      camera: { position: [2.0, 0.1, 1.2], target: [0.2, -0.1, 0.25], fov: 30 }
+      ghost: [neighbours, body]
+      sites: [triceps-brachii-long]
+      labels: [triceps-brachii-long, scapula, ulna]
+      caption:
+        en: "The long head of triceps runs from the shoulder blade to the elbow. Raising the arm stretches it before the elbow even moves."
+        zh: "肱三头肌长头从肩胛骨长到肘。手臂一抬起，肘还没动，它就已经被拉长。"
+    - camera: front
+      ghost: [neighbours, body]
+      sites: []
+      pose: null
+      labels: ["group:superficial", "group:intermediate"]
+      caption:
+        en: "This is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist."
+        zh: "本页是一般性知识，不是医疗建议。疼痛或受伤，请咨询医生或物理治疗师。"
   index:
-    parts:
-    - extensor-carpi-radialis-brevis
-    - biceps-brachii-long
-    - biceps-brachii-short
-    - brachialis
-    - triceps-brachii-long
-    - humerus
-    - radius
-    - ulna
-    - scapula
-    exercises:
-    - barbell-curl
+    parts: [extensor-carpi-radialis-brevis, biceps-brachii-long, biceps-brachii-short, brachialis, triceps-brachii-long, humerus, radius, ulna, scapula]
+    exercises: [barbell-curl]
 ---
 
 <Lang en>
 
-The long forearm muscles transmit force through tendons near the elbow. “Tennis elbow” usually concerns the wrist-extensor tendons on the outer side, especially extensor carpi radialis brevis. Repeated wrist extension and gripping can be involved; playing tennis is not required. The tendon changes include degeneration, so the familiar name does not mean that inflammation alone explains every case [M73]. <FlyTo preset="close-arm">See the elbow attachments</FlyTo>
+The wrist extensors start together on the bony bump on the outside of the elbow. In "tennis elbow" the tendon at that attachment, most often that of **extensor carpi radialis brevis**, becomes painful. Despite the name, it is not limited to tennis players: repeated gripping and wrist extension at work, at home or in sport can all be involved [M73]. <FlyTo preset="close-arm">See the outer elbow</FlyTo>
 
-A different injury involves the distal biceps tendon on the radius. A sudden load can force a bent elbow straight while the biceps is trying to hold it. A pop, new bruising or weakness when turning the palm upward calls for prompt professional assessment [M74]. Other muscles may still bend the elbow, so being able to bend it does not rule out a biceps tendon injury.
+A different injury affects the **distal biceps tendon** on the radius. It usually happens when a bent elbow is suddenly forced straight while biceps is pulling against a heavy load. Warning signs are a pop, new bruising at the front of the elbow and weakness when turning the palm up [M74]. Brachialis can still bend the elbow, so being able to bend it does not rule this injury out.
 
-The lowering part of a curl is an <Term id="eccentric-phase">eccentric phase</Term>: the muscle develops force while lengthening. Use a manageable load, lower smoothly and avoid trying to catch an unexpectedly heavy falling object [M23] [M74].
+The lowering half of a curl is the <Term id="eccentric-phase">eccentric phase</Term>: the elbow flexors work while they lengthen. Lower under control with a load you can manage, and do not try to catch a falling weight [M23] [M74].
 
-Posture changes which joint positions the muscles work through. Let the shoulder and wrist take comfortable positions, and avoid forcing a fixed grip that hurts. The long triceps head spans the shoulder, so raising the arm changes its length even before the elbow moves [M87]. A pose or an uneven-looking muscle alone cannot diagnose an injury.
+Posture changes the length a muscle works at. The long head of triceps crosses the shoulder, so lifting the arm overhead stretches it before the elbow moves [M87]. Let the shoulders and wrists take comfortable positions, and do not force a grip that hurts. A photograph of someone's arms, or one muscle that looks bigger than the other, cannot diagnose a problem.
 
-This chapter is general information, not medical advice. For pain or an injury, consult a doctor or physiotherapist. Stop the exercise when sudden pain or new weakness appears; do not use the cards as a rehabilitation prescription.
+This is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist. Stop an exercise if sudden pain or new weakness appears.
 
-<More title={{ en: "Pain is not a muscle-location test", zh: "疼痛不是定位肌肉的测试" }}>
+<More title={{ en: "Why the model cannot diagnose", zh: "为什么模型不能诊断" }}>
 
-The outside of the elbow contains several structures. A clinician considers the history and examines strength, movement and other possible causes; the coloured muscle and its attachment marker cannot establish a diagnosis [M73].
+Pain on the outer elbow can come from more than one structure. A clinician uses the history of the pain, an examination of strength and movement, and sometimes imaging. A coloured muscle and its attachment marker show where a tendon runs, not what is wrong with it [M73].
 
 </More>
 
-<More title={{ en: "Gentle location, not forceful probing", zh: "轻轻定位，不用力按压" }}>
+<More title={{ en: "Feel gently", zh: "轻轻地找" }}>
 
-Finding a muscle means noticing where its belly lies during an easy movement. Do not dig into the elbow crease or repeatedly provoke pain to prove a tendon is involved. An acute pop with bruising or lost turning strength deserves medical assessment even if pain later eases [M74].
+To find a muscle on yourself, move the joint gently and notice where the arm changes shape. Do not dig into the elbow crease or keep pressing a sore spot to prove which tendon it is. A sudden pop with bruising or lost strength deserves a medical check even if the pain fades [M74].
 
 </More>
 
@@ -148,27 +91,25 @@ Finding a muscle means noticing where its belly lies during an easy movement. Do
 
 <Lang zh>
 
-前臂长肌经肘旁的肌腱传力。“网球肘”通常涉及肘外侧的腕伸肌腱，尤其桡侧腕短伸肌。反复伸腕和握持可能参与其发生，不打网球也会有。肌腱可出现退变，不能只凭名字把每一例都解释为单纯发炎 [M73]。<FlyTo preset="close-arm">看肘旁附着</FlyTo>
+几块伸腕肌一起起于肘外侧的骨突。所谓“网球肘”，是这个附着处的肌腱疼痛，最常见的是**桡侧腕短伸肌**的肌腱。名字虽然叫网球肘，得的人并不限于打网球的：工作、家务或运动中反复抓握和伸腕，都可能与它有关 [M73]。<FlyTo preset="close-arm">看肘外侧</FlyTo>
 
-另一种伤在桡骨上的二头肌远端腱。二头肌试图维持屈肘时，突然的负荷可能把肘强行拉直。出现响声、新淤青或转掌向上无力，应尽快请专业人员评估 [M74]。其他肌肉仍可能屈肘，所以能弯手臂并不能排除这条腱受伤。
+另一种伤发生在桡骨上的**肱二头肌远端腱**。常见情形是：肱二头肌正对着重物用力，弯着的肘被突然拉直。警示信号是“啪”的一声、肘前方新出现的淤青，以及转掌朝上时没力 [M74]。肱肌照样能屈肘，所以手臂还能弯，并不能排除这种损伤。
 
-弯举的下放叫<Term id="eccentric-phase">离心阶段</Term>：肌肉一边用力一边变长。选能控制的重量，平稳下放，不突然接住超出预期的重物 [M23] [M74]。
+弯举往下放的那一半叫<Term id="eccentric-phase">离心阶段</Term>：屈肘肌一边用力一边被拉长。用自己能控制的重量慢慢放，掉下来的重物不要去硬接 [M23] [M74]。
 
-姿态会改变肌肉工作的关节位置。肩和腕取舒服姿势，不硬扭进会痛的固定握法。三头肌长头跨肩，抬臂在屈伸肘之前就已改变它的长度 [M87]。单凭姿势或两侧外观差别，不能诊断损伤。
+体态会改变肌肉工作时的长度。肱三头肌长头跨过肩关节，手臂举过头顶时，肘还没动它就已经被拉长 [M87]。肩和腕摆在舒服的位置，会痛的握法不要硬撑。一张手臂照片，或者一侧肌肉看起来比另一侧大，都不能用来诊断问题。
 
-本章是一般性知识，不是医疗建议。疼痛或受伤请咨询医生或物理治疗师。突然痛或出现新的无力时应停下，不把动作卡当成康复处方。
+本页是一般性知识，不是医疗建议。疼痛或受伤，请咨询医生或物理治疗师。练习中出现突然的疼痛或新的无力，就停下来。
 
-练习后若功能发生新的变化，也要把具体经过告诉专业人员。模型只提供结构关系，不能替代病史询问与检查 [M74]。
+<More title={{ en: "Why the model cannot diagnose", zh: "为什么模型不能诊断" }}>
 
-<More title={{ en: "Pain is not a muscle-location test", zh: "疼痛不是定位肌肉的测试" }}>
-
-肘外侧有多种结构。临床评估要结合病史、力量、活动和其他可能原因；彩色肌肉及附着标记不能直接确诊 [M73]。
+肘外侧的疼痛可能来自不止一种结构。医生要结合疼痛的经过、力量和活动的检查，有时还要做影像检查。彩色的肌肉和附着标记只说明肌腱走在哪里，说明不了它出了什么问题 [M73]。
 
 </More>
 
-<More title={{ en: "Gentle location, not forceful probing", zh: "轻轻定位，不用力按压" }}>
+<More title={{ en: "Feel gently", zh: "轻轻地找" }}>
 
-找肌肉是轻松活动时观察肌腹的位置。不要深压肘窝，也不反复诱发疼痛来证明某条腱有问题。突然响声伴淤青或转掌无力，即使后来痛减轻，也应接受医疗评估 [M74]。
+在自己身上找肌肉，轻轻活动关节，留意手臂哪里在变形就行。不要用力按肘窝，也不要反复按压痛点来确认是哪条肌腱。突然“啪”的一声并伴随淤青或无力，即使后来不痛了，也应该去检查 [M74]。
 
 </More>
 

@@ -269,7 +269,8 @@
         "zh": "掌长肌"
       },
       "connects": [
-        "humerus"
+        "humerus",
+        "hand"
       ],
       "explode": {
         "dir": [
@@ -335,7 +336,7 @@
       },
       "muscle": "extensor-carpi-radialis-longus",
       "short": {
-        "en": "EC radialis longus",
+        "en": "ECR longus",
         "zh": "桡侧腕长伸肌"
       },
       "connects": [
@@ -581,7 +582,7 @@
       },
       "muscle": "extensor-carpi-radialis-brevis",
       "short": {
-        "en": "EC radialis brevis",
+        "en": "ECR brevis",
         "zh": "桡侧腕短伸肌"
       },
       "connects": [
@@ -616,7 +617,7 @@
       },
       "muscle": "flexor-digitorum-superficialis",
       "short": {
-        "en": "Flexor digitorum superficialis",
+        "en": "FD superficialis",
         "zh": "指浅屈肌"
       },
       "connects": [
@@ -653,7 +654,7 @@
       },
       "muscle": "deltoid-anterior",
       "short": {
-        "en": "Front deltoid",
+        "en": "Deltoid · ant",
         "zh": "三角肌前部"
       },
       "connects": [
@@ -678,8 +679,8 @@
       },
       "muscle": "deltoid-lateral",
       "short": {
-        "en": "Deltoid, acromial (lateral) part",
-        "zh": "三角肌肩峰部"
+        "en": "Deltoid · mid",
+        "zh": "三角肌中部"
       },
       "connects": [
         "humerus"
@@ -703,8 +704,8 @@
       },
       "muscle": "deltoid-posterior",
       "short": {
-        "en": "Deltoid, spinal (posterior) part",
-        "zh": "三角肌肩胛冈部"
+        "en": "Deltoid · post",
+        "zh": "三角肌后部"
       },
       "connects": [
         "humerus"
@@ -1002,14 +1003,6 @@
       "color": "token:muscle-2"
     },
     {
-      "id": "deep",
-      "name": {
-        "en": "Deep layer",
-        "zh": "深层"
-      },
-      "color": "token:muscle-3"
-    },
-    {
       "id": "skeleton",
       "name": {
         "en": "Bones",
@@ -1186,13 +1179,13 @@
     "assembled": {
       "camera": {
         "position": [
-          0.55,
-          0.02,
-          2.0
+          0.45,
+          0.04,
+          2.2
         ],
         "target": [
           0,
-          -0.19,
+          -0.15,
           0.02
         ],
         "fov": 30
@@ -1275,8 +1268,8 @@
         "zh": "肌肉"
       },
       "value": {
-        "en": "18 parts · 2 displayed layers",
-        "zh": "18 个 · 2 层展示"
+        "en": "18 parts · 2 layers",
+        "zh": "18 个 · 2 层"
       },
       "tag": "design"
     },
@@ -1320,13 +1313,13 @@
       },
       "camera": {
         "position": [
-          0.55,
-          0.02,
-          2.0
+          0.45,
+          0.04,
+          2.2
         ],
         "target": [
           0,
-          -0.19,
+          -0.15,
           0.02
         ],
         "fov": 30
@@ -1380,14 +1373,14 @@
       },
       "camera": {
         "position": [
-          0.55,
+          0.78,
           -0.08,
-          0.7
+          0.98
         ],
         "target": [
           0.22,
-          -0.18,
-          0.01
+          -0.17,
+          0.03
         ],
         "fov": 28
       }
@@ -1421,14 +1414,14 @@
       },
       "camera": {
         "position": [
-          1.6,
-          0.55,
-          4.1
+          1.2,
+          0.6,
+          4.0
         ],
         "target": [
-          0,
-          -0.14,
-          0.02
+          0.03,
+          -0.17,
+          0.05
         ],
         "fov": 22
       }
@@ -2154,13 +2147,18 @@
       "muscle": "palmaris-longus"
     },
     {
-      "bone": "palmaris-longus",
+      "bone": "hand",
       "kind": "insertion",
       "points": [
         [
-          0.23736076,
-          -0.46480618,
-          0.07886253
+          0.26827,
+          -0.40949,
+          0.07302
+        ],
+        [
+          0.26926,
+          -0.45035,
+          0.07412
         ]
       ],
       "muscle": "palmaris-longus"
@@ -2170,24 +2168,29 @@
       "kind": "origin",
       "points": [
         [
-          0.21016585,
-          -0.14417311,
-          -0.02404124
+          0.21017,
+          -0.14417,
+          -0.02404
         ],
         [
-          0.24019238,
-          -0.29983419,
-          0.02496036
+          0.2257,
+          -0.20789,
+          -0.01612
         ],
         [
-          0.23860026,
-          -0.25159171,
-          0.01404842
+          0.23073,
+          -0.24233,
+          -0.00406
         ],
         [
-          0.22398604,
-          -0.20196999,
-          0.00036312
+          0.23209,
+          -0.26498,
+          0.00396
+        ],
+        [
+          0.23189,
+          -0.29317,
+          0.01289
         ]
       ],
       "muscle": "flexor-carpi-ulnaris"
@@ -2336,9 +2339,9 @@
       "kind": "origin",
       "points": [
         [
-          0.22970559,
-          -0.30413994,
-          0.0198494
+          0.23189,
+          -0.29317,
+          0.01289
         ]
       ],
       "muscle": "extensor-carpi-ulnaris"
@@ -2584,19 +2587,19 @@
       "kind": "origin",
       "points": [
         [
-          0.23601076,
-          -0.19438264,
-          0.01473976
+          0.24462,
+          -0.19886,
+          0.01979
         ],
         [
-          0.24476087,
-          -0.21973295,
-          0.0176776
+          0.25009,
+          -0.21545,
+          0.01812
         ],
         [
-          0.25102485,
-          -0.23410894,
-          0.01720733
+          0.2537,
+          -0.23175,
+          0.01728
         ]
       ],
       "muscle": "flexor-digitorum-superficialis"

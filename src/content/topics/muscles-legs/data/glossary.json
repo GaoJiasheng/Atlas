@@ -7,8 +7,8 @@
         "zh": "起点"
       },
       "definition": {
-        "en": "The attachment conventionally described as the more fixed end of a muscle; which end moves can change when a foot is planted.",
-        "zh": "习惯上称为较固定端的肌肉附着；脚踩地时，实际活动的一端可能改变。"
+        "en": "The attachment of a muscle that usually stays still. With a foot planted on the ground, the end that actually moves can swap.",
+        "zh": "肌肉通常不动的那一端附着。脚踩在地上时，实际在动的一端可能对调。"
       },
       "see": [
         "insertion"
@@ -21,8 +21,8 @@
         "zh": "止点"
       },
       "definition": {
-        "en": "The attachment conventionally described as the end drawn towards the origin; muscle pull acts on both attachments.",
-        "zh": "习惯上称为被拉向起点的一端；肌肉拉力实际作用于两端附着。"
+        "en": "The attachment of a muscle that is usually pulled towards the other end when the muscle shortens.",
+        "zh": "肌肉收缩时通常被拉向另一端的那一端附着。"
       },
       "see": [
         "origin"
@@ -35,8 +35,8 @@
         "zh": "筋膜"
       },
       "definition": {
-        "en": "Sheets and bands of connective tissue around muscles; the iliotibial tract is a thickened band, not a contracting muscle.",
-        "zh": "包绕肌肉的结缔组织薄膜或长带；髂胫束是增厚的筋膜，不是主动收缩的肌肉。"
+        "en": "Sheets and bands of connective tissue around muscles. The iliotibial tract is a thickened band of fascia; it cannot contract.",
+        "zh": "包在肌肉外面的结缔组织膜或带。髂胫束就是一条增厚的筋膜，它不会收缩。"
       }
     },
     {
@@ -85,8 +85,8 @@
         "zh": "髌韧带"
       },
       "definition": {
-        "en": "The strong band from the patella to the tibial tuberosity carrying the pull of the quadriceps.",
-        "zh": "从髌骨到胫骨粗隆的坚韧长带，传递股四头肌拉力。"
+        "en": "The strong band from the kneecap to the front of the tibia that carries the pull of the quadriceps.",
+        "zh": "从髌骨到胫骨前面的一条坚韧的带，传递股四头肌的拉力。"
       },
       "see": [
         "quadriceps"
@@ -99,8 +99,8 @@
         "zh": "鹅足"
       },
       "definition": {
-        "en": "The spreading attachment of sartorius, gracilis and semitendinosus tendons on the upper inner tibia.",
-        "zh": "缝匠肌、股薄肌和半腱肌的腱在胫骨上端内侧展开形成的附着。"
+        "en": "Latin for \"goose foot\": where the tendons of sartorius, gracilis and semitendinosus spread out on the upper inner tibia.",
+        "zh": "意思是“鹅的脚”：缝匠肌、股薄肌和半腱肌的肌腱在胫骨上端内侧散开附着的地方。"
       },
       "see": [
         "tendon"
@@ -141,8 +141,8 @@
         "zh": "离心阶段"
       },
       "definition": {
-        "en": "The part of a movement in which an active muscle lengthens under tension.",
-        "zh": "动作中肌肉保持张力，同时被拉长的阶段。"
+        "en": "The part of a movement in which a muscle keeps working while it lengthens, such as slowly lowering the forefoot.",
+        "zh": "动作中肌肉一边用力一边被拉长的阶段，例如慢慢放下前脚掌。"
       }
     },
     {
@@ -152,8 +152,8 @@
         "zh": "肌腱"
       },
       "definition": {
-        "en": "Strong connective tissue transmitting a muscle’s pull to its attachment, commonly on bone.",
-        "zh": "把肌肉拉力传到附着处的坚韧结缔组织，通常连接骨骼。"
+        "en": "A strong cord of connective tissue that carries a muscle's pull to a bone.",
+        "zh": "把肌肉的拉力传到骨上的一束坚韧结缔组织。"
       }
     },
     {
@@ -163,8 +163,19 @@
         "zh": "髋铰链"
       },
       "definition": {
-        "en": "Bending and straightening mainly at the hips while the spine stays steady, as in a Romanian deadlift.",
-        "zh": "主要从髋关节弯曲、伸展，同时稳住脊柱的动作模式，例如罗马尼亚硬拉。"
+        "en": "Bending and straightening mainly at the hips while the back stays steady, as in a Romanian deadlift.",
+        "zh": "主要在髋部弯曲和伸直、背部保持稳定的动作方式，例如罗马尼亚硬拉。"
+      }
+    },
+    {
+      "id": "emg",
+      "term": {
+        "en": "EMG (electromyography)",
+        "zh": "肌电（肌电图）"
+      },
+      "definition": {
+        "en": "Electromyography: recording the electrical activity of a muscle. A higher reading does not show that the muscle is producing more force or will grow more.",
+        "zh": "肌电图：记录肌肉的电活动。读数更高，并不说明肌肉出力更大，也不说明它会长得更多。"
       }
     }
   ]

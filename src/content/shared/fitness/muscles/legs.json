@@ -25,7 +25,7 @@
           "lumbar-spine"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "insertion": {
@@ -38,8 +38,8 @@
           "femur"
         ],
         "s": [
-          "M1",
-          "M2"
+          "M109",
+          "M59"
         ]
       },
       "fibres": {
@@ -55,8 +55,8 @@
           "movement": "extension",
           "role": "prime",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -64,8 +64,8 @@
           "movement": "external-rotation",
           "role": "prime",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -73,8 +73,8 @@
           "movement": "abduction",
           "role": "assist",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         }
       ],
@@ -103,8 +103,8 @@
         "zh": "伸髋，并使大腿外旋。"
       },
       "detail": {
-        "en": "The broad outer layer of the buttock pulls the thigh back, or lifts the pelvis over a planted thigh [M1]. Upper fibres can assist abduction; not every bundle has the same line of pull. Squats, lunges and hinges use it with other hip extensors. Finish tall, with the ribs over the pelvis. Fibre arrangement is a simplified description of the overall bundles; it does not measure pennation within every part.",
-        "zh": "臀大肌位于臀部最浅层。收缩时把大腿向后拉；脚踩稳时，也能把骨盆带回大腿上方 [M1]。上部纤维可协助外展，各肌束的拉力方向并不完全相同。深蹲、弓步和髋铰链动作会同时用到其他伸髋肌。起身后站稳即可，不必继续后仰。 纤维排列是整体肌束的简化描述，不是每一部分羽状结构的测量值。"
+        "en": "The broad outer layer of the buttock pulls the thigh back, or lifts the pelvis over a planted thigh [M109]. Upper fibres can assist abduction; not every bundle has the same line of pull. Squats, lunges and hinges use it with other hip extensors. Finish tall, with the ribs over the pelvis.",
+        "zh": "臀大肌位于臀部最浅层。收缩时把大腿向后拉；脚踩稳时，也能把骨盆带回大腿上方 [M109]。上部纤维可协助外展，各肌束的拉力方向并不完全相同。深蹲、弓步和髋铰链动作会同时用到其他伸髋肌。起身后站稳即可，不必继续后仰。"
       },
       "common": {
         "en": "glutes",
@@ -135,7 +135,7 @@
           "pelvis"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "insertion": {
@@ -147,8 +147,8 @@
           "femur"
         ],
         "s": [
-          "M1",
-          "M2"
+          "M109",
+          "M59"
         ]
       },
       "fibres": {
@@ -164,8 +164,8 @@
           "movement": "abduction",
           "role": "prime",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -173,8 +173,8 @@
           "movement": "internal-rotation",
           "role": "assist",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -182,8 +182,8 @@
           "movement": "stabilisation",
           "role": "stabilise",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         }
       ],
@@ -211,8 +211,8 @@
         "zh": "外展髋关节，并稳住骨盆。"
       },
       "detail": {
-        "en": "This fan lies partly under gluteus maximus [M1]. On a support leg it helps resist the opposite side of the pelvis dropping. Rotation varies with the fibre region and hip position; the action list does not assign one fixed role to every fibre. Lunge links show support-leg control, not isolated abductor training. Fibre arrangement is a simplified description of the overall bundles; it does not measure pennation within every part.",
-        "zh": "这块扇形肌部分被臀大肌盖住 [M1]。单脚支撑时，它帮助抵抗对侧骨盆下落。旋转作用随纤维位置和髋姿势而变，作用表不代表所有纤维方向一致。弓步主要让它参与支撑侧控制，并不能把它单独练出来。 纤维排列是整体肌束的简化描述，不是每一部分羽状结构的测量值。"
+        "en": "This fan lies partly under gluteus maximus [M109]. On a support leg it helps resist the opposite side of the pelvis dropping. Rotation varies with the fibre region and hip position; the action list does not assign one fixed role to every fibre. Lunge links show support-leg control, not isolated abductor training.",
+        "zh": "这块扇形肌部分被臀大肌盖住 [M109]。单脚支撑时，它帮助抵抗对侧骨盆下落。旋转作用随纤维位置和髋姿势而变，作用表不代表所有纤维方向一致。弓步主要让它参与支撑侧控制，并不能把它单独练出来。"
       },
       "common": {
         "en": "side glutes",
@@ -243,7 +243,7 @@
           "pelvis"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "insertion": {
@@ -255,8 +255,8 @@
           "femur"
         ],
         "s": [
-          "M1",
-          "M2"
+          "M109",
+          "M59"
         ]
       },
       "fibres": {
@@ -272,8 +272,8 @@
           "movement": "abduction",
           "role": "prime",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -281,8 +281,8 @@
           "movement": "internal-rotation",
           "role": "assist",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -290,8 +290,8 @@
           "movement": "stabilisation",
           "role": "stabilise",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         }
       ],
@@ -319,8 +319,8 @@
         "zh": "外展髋关节，并稳住骨盆。"
       },
       "detail": {
-        "en": "This fan lies under gluteus medius [M1]. On a support leg it helps resist the opposite side of the pelvis dropping. Rotation varies with the fibre region and hip position; the action list does not assign one fixed role to every fibre. Lunge links show support-leg control, not isolated abductor training. Fibre arrangement is a simplified description of the overall bundles; it does not measure pennation within every part.",
-        "zh": "这块扇形肌位于臀中肌深面 [M1]。单脚支撑时，它帮助抵抗对侧骨盆下落。旋转作用随纤维位置和髋姿势而变，作用表不代表所有纤维方向一致。弓步主要让它参与支撑侧控制，并不能把它单独练出来。 纤维排列是整体肌束的简化描述，不是每一部分羽状结构的测量值。"
+        "en": "This fan lies under gluteus medius [M109]. On a support leg it helps resist the opposite side of the pelvis dropping. Rotation varies with the fibre region and hip position; the action list does not assign one fixed role to every fibre. Lunge links show support-leg control, not isolated abductor training.",
+        "zh": "这块扇形肌位于臀中肌深面 [M109]。单脚支撑时，它帮助抵抗对侧骨盆下落。旋转作用随纤维位置和髋姿势而变，作用表不代表所有纤维方向一致。弓步主要让它参与支撑侧控制，并不能把它单独练出来。"
       },
       "common": {
         "en": "side glutes",
@@ -352,7 +352,7 @@
           "femur"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "insertion": {
@@ -365,8 +365,8 @@
           "lower-leg"
         ],
         "s": [
-          "M1",
-          "M2"
+          "M109",
+          "M59"
         ]
       },
       "fibres": {
@@ -382,8 +382,8 @@
           "movement": "extension",
           "role": "prime",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -391,8 +391,8 @@
           "movement": "flexion",
           "role": "assist",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         }
       ],
@@ -421,8 +421,8 @@
         "zh": "伸膝，其中股直肌还参与屈髋。"
       },
       "detail": {
-        "en": "Four heads share the knee-extensor tendon [M1] [M2]. Rectus femoris crosses hip and knee; the vasti cross only the knee. In a squat the joints move together, so the length change of rectus femoris differs from that of the vasti. These exercise links train the group, not independent switches for its heads. Fibre arrangement is a simplified description of the overall bundles; it does not measure pennation within every part.",
-        "zh": "股四头肌四个头共用伸膝肌腱 [M1] [M2]。股直肌跨髋、膝，其余三块股肌只跨膝。深蹲时两个关节一起动，股直肌的长度变化因此不同于其余三头。动作链接练的是肌群，不能把各头当作独立开关。 纤维排列是整体肌束的简化描述，不是每一部分羽状结构的测量值。"
+        "en": "Four heads share the knee-extensor tendon [M109] [M59]. Rectus femoris crosses hip and knee; the vasti cross only the knee. In a squat the joints move together, so the length change of rectus femoris differs from that of the vasti. These exercise links train the group, not independent switches for its heads.",
+        "zh": "股四头肌四个头共用伸膝肌腱 [M109] [M59]。股直肌跨髋、膝，其余三块股肌只跨膝。深蹲时两个关节一起动，股直肌的长度变化因此不同于其余三头。动作链接练的是肌群，不能把各头当作独立开关。"
       },
       "common": {
         "en": "quads",
@@ -453,7 +453,7 @@
           "pelvis"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "insertion": {
@@ -466,8 +466,8 @@
           "lower-leg"
         ],
         "s": [
-          "M1",
-          "M2"
+          "M109",
+          "M59"
         ]
       },
       "fibres": {
@@ -483,8 +483,8 @@
           "movement": "extension",
           "role": "prime",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -492,8 +492,8 @@
           "movement": "flexion",
           "role": "assist",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         }
       ],
@@ -522,8 +522,8 @@
         "zh": "伸膝，并协助抬大腿。"
       },
       "detail": {
-        "en": "Rectus femoris crosses hip and knee. Hip extension and knee flexion lengthen it; the opposite motions shorten it [M1]. Squats change both joints together, so knee bending alone does not show its stretch. The linked squats train the knee-extensor group, rather than isolating this head. Fibre arrangement is a simplified description of the overall bundles; it does not measure pennation within every part. Gray describes bipennate superficial fibres and deeper fibres running straight to an aponeurosis [M1].",
-        "zh": "股直肌跨髋、膝。伸髋和屈膝会把它拉长，反向运动会使它缩短 [M1]。深蹲时两个关节一起变化，不能只看屈膝就判断它被拉长多少。链接练的是整个伸膝肌群，并不单独练股直肌。 纤维排列是整体肌束的简化描述，不是每一部分羽状结构的测量值。 Gray 描述浅层纤维呈双羽状，深层纤维直行至腱膜 [M1]。"
+        "en": "Rectus femoris crosses hip and knee. Hip extension and knee flexion lengthen it; the opposite motions shorten it [M109]. Squats change both joints together, so knee bending alone does not show its stretch. The linked squats train the knee-extensor group, rather than isolating this head. Gray describes bipennate superficial fibres and deeper fibres running straight to an aponeurosis [M109].",
+        "zh": "股直肌跨髋、膝。伸髋和屈膝会把它拉长，反向运动会使它缩短 [M109]。深蹲时两个关节一起变化，不能只看屈膝就判断它被拉长多少。链接练的是整个伸膝肌群，并不单独练股直肌。Gray 描述浅层纤维呈双羽状，深层纤维直行至腱膜 [M109]。"
       },
       "common": {
         "en": "front thigh",
@@ -555,7 +555,7 @@
           "femur"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "insertion": {
@@ -568,8 +568,8 @@
           "lower-leg"
         ],
         "s": [
-          "M1",
-          "M2"
+          "M109",
+          "M59"
         ]
       },
       "fibres": {
@@ -585,8 +585,8 @@
           "movement": "extension",
           "role": "prime",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         }
       ],
@@ -615,8 +615,8 @@
         "zh": "通过共同肌腱伸膝。"
       },
       "detail": {
-        "en": "This head crosses only the knee and joins the common quadriceps tendon [M1]. It makes up much of the outer thigh. Squats and lunges load it with the other knee extensors. Fibre arrangement is a simplified description of the overall bundles; it does not measure pennation within every part.",
-        "zh": "这块肌肉只跨膝，并汇入共同股四头肌腱 [M1]。它构成大腿外侧的较大部分。深蹲和弓步中，它与其余伸膝肌共同受力。 纤维排列是整体肌束的简化描述，不是每一部分羽状结构的测量值。"
+        "en": "This head crosses only the knee and joins the common quadriceps tendon [M109]. It makes up much of the outer thigh. Squats and lunges load it with the other knee extensors.",
+        "zh": "这块肌肉只跨膝，并汇入共同股四头肌腱 [M109]。它构成大腿外侧的较大部分。深蹲和弓步中，它与其余伸膝肌共同受力。"
       },
       "common": {
         "en": "outer quad",
@@ -648,7 +648,7 @@
           "femur"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "insertion": {
@@ -661,8 +661,8 @@
           "lower-leg"
         ],
         "s": [
-          "M1",
-          "M2"
+          "M109",
+          "M59"
         ]
       },
       "fibres": {
@@ -678,8 +678,8 @@
           "movement": "extension",
           "role": "prime",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         }
       ],
@@ -708,8 +708,8 @@
         "zh": "通过共同肌腱伸膝。"
       },
       "detail": {
-        "en": "This head crosses only the knee and joins the common quadriceps tendon [M1]. Its lower oblique fibres are often called VMO; this is not an independent muscle, and foot angle does not guarantee isolation. Squats and lunges load it with the other knee extensors. Fibre arrangement is a simplified description of the overall bundles; it does not measure pennation within every part.",
-        "zh": "这块肌肉只跨膝，并汇入共同股四头肌腱 [M1]。健身里常把下部斜行纤维叫作 VMO；这个称呼不代表独立肌肉，也不能保证改变脚尖方向就能单独练它。深蹲和弓步中，它与其余伸膝肌共同受力。 纤维排列是整体肌束的简化描述，不是每一部分羽状结构的测量值。"
+        "en": "This head crosses only the knee and joins the common quadriceps tendon [M109]. Its lower oblique fibres are often called VMO; this is not an independent muscle, and foot angle does not guarantee isolation. Squats and lunges load it with the other knee extensors.",
+        "zh": "这块肌肉只跨膝，并汇入共同股四头肌腱 [M109]。健身里常把下部斜行纤维叫作 VMO；这个称呼不代表独立肌肉，也不能保证改变脚尖方向就能单独练它。深蹲和弓步中，它与其余伸膝肌共同受力。"
       },
       "common": {
         "en": "inner quad",
@@ -741,7 +741,7 @@
           "femur"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "insertion": {
@@ -754,8 +754,8 @@
           "lower-leg"
         ],
         "s": [
-          "M1",
-          "M2"
+          "M109",
+          "M59"
         ]
       },
       "fibres": {
@@ -771,8 +771,8 @@
           "movement": "extension",
           "role": "prime",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         }
       ],
@@ -801,8 +801,8 @@
         "zh": "通过共同肌腱伸膝。"
       },
       "detail": {
-        "en": "This head crosses only the knee and joins the common quadriceps tendon [M1]. It lies under rectus femoris and cannot be distinguished by touch. Squats and lunges load it with the other knee extensors. Fibre arrangement is a simplified description of the overall bundles; it does not measure pennation within every part.",
-        "zh": "这块肌肉只跨膝，并汇入共同股四头肌腱 [M1]。它在股直肌深面，无法靠触摸单独辨认。深蹲和弓步中，它与其余伸膝肌共同受力。 纤维排列是整体肌束的简化描述，不是每一部分羽状结构的测量值。"
+        "en": "This head crosses only the knee and joins the common quadriceps tendon [M109]. It lies under rectus femoris and cannot be distinguished by touch. Squats and lunges load it with the other knee extensors.",
+        "zh": "这块肌肉只跨膝，并汇入共同股四头肌腱 [M109]。它在股直肌深面，无法靠触摸单独辨认。深蹲和弓步中，它与其余伸膝肌共同受力。"
       },
       "common": {
         "en": "deep quad",
@@ -835,7 +835,7 @@
           "femur"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "insertion": {
@@ -847,7 +847,7 @@
           "lower-leg"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "fibres": {
@@ -863,8 +863,8 @@
           "movement": "flexion",
           "role": "prime",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -872,8 +872,8 @@
           "movement": "external-rotation",
           "role": "assist",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -881,8 +881,8 @@
           "movement": "extension",
           "role": "assist",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         }
       ],
@@ -910,8 +910,8 @@
         "zh": "屈膝；长头还伸髋。"
       },
       "detail": {
-        "en": "Two heads share the lateral hamstring tendon [M1]. The long head spans hip and knee; the short head starts on the femur and spans only the knee. Outward rotation of the lower leg is described with the knee bent. A hinge trains hip extension by the long head; it is not a direct short-head exercise. Fibre arrangement is a simplified description of the overall bundles; it does not measure pennation within every part. The arrangement entry is a composite of the two heads, not a claim that every fascicle follows one geometry [M75] [M77].",
-        "zh": "股二头肌两个头共用外侧止腱 [M1]。长头跨髋、膝；短头从股骨开始，只跨膝。使小腿外旋的作用是在屈膝时描述的。髋铰链动作通过伸髋让长头受力，不能据此说它直接练到了短头。 纤维排列是整体肌束的简化描述，不是每一部分羽状结构的测量值。 排列栏概括两个头，并不表示每根肌束都遵循一种几何结构 [M75] [M77]。"
+        "en": "Two heads share the lateral hamstring tendon [M109]. The long head spans hip and knee; the short head starts on the femur and spans only the knee. Outward rotation of the lower leg is described with the knee bent. A hinge trains hip extension by the long head; it is not a direct short-head exercise. The arrangement entry is a composite of the two heads, not a claim that every fascicle follows one geometry [M75] [M77].",
+        "zh": "股二头肌两个头共用外侧止腱 [M109]。长头跨髋、膝；短头从股骨开始，只跨膝。使小腿外旋的作用是在屈膝时描述的。髋铰链动作通过伸髋让长头受力，不能据此说它直接练到了短头。排列栏概括两个头，并不表示每根肌束都遵循一种几何结构 [M75] [M77]。"
       },
       "common": {
         "en": "outer hamstring",
@@ -942,7 +942,7 @@
           "pelvis"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "insertion": {
@@ -954,7 +954,7 @@
           "lower-leg"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "fibres": {
@@ -970,8 +970,8 @@
           "movement": "flexion",
           "role": "prime",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -979,8 +979,8 @@
           "movement": "external-rotation",
           "role": "assist",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -988,8 +988,8 @@
           "movement": "extension",
           "role": "prime",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         }
       ],
@@ -1017,8 +1017,8 @@
         "zh": "跨髋、膝，能把大腿往后拉。"
       },
       "detail": {
-        "en": "The long head begins on the pelvis and crosses hip and knee. Hip flexion with a straighter knee lengthens it, as in a Romanian deadlift [M1]. A seated curl fixes the hip in flexion while the knee moves, giving a different starting length. The lunge link includes assistance and stabilisation. Fibre arrangement is a simplified description of the overall bundles; it does not measure pennation within every part. The belly is spindle-shaped; a cadaver study describes its fascicle arrangement as unipennate [M75]. Shape and fibre arrangement describe different features [M77].",
-        "zh": "长头从骨盆开始，跨髋、膝。屈髋且膝较直时会被拉长，例如罗马尼亚硬拉 [M1]。坐姿腿弯举固定髋在屈位，让膝运动，起始长度因此不同。弓步中它参与协同与稳定。 纤维排列是整体肌束的简化描述，不是每一部分羽状结构的测量值。 肌腹外形似梭；尸体研究将其肌束排列描述为单羽状 [M75]。外形与纤维排列描述的是不同特征 [M77]。"
+        "en": "The long head begins on the pelvis and crosses hip and knee. Hip flexion with a straighter knee lengthens it, as in a Romanian deadlift [M109]. A seated curl fixes the hip in flexion while the knee moves, giving a different starting length. The lunge link includes assistance and stabilisation. The belly is spindle-shaped; a cadaver study describes its fascicle arrangement as unipennate [M75]. Shape and fibre arrangement describe different features [M77].",
+        "zh": "长头从骨盆开始，跨髋、膝。屈髋且膝较直时会被拉长，例如罗马尼亚硬拉 [M109]。坐姿腿弯举固定髋在屈位，让膝运动，起始长度因此不同。弓步中它参与协同与稳定。肌腹外形似梭；尸体研究将其肌束排列描述为单羽状 [M75]。外形与纤维排列描述的是不同特征 [M77]。"
       },
       "common": {
         "en": "outer hamstring",
@@ -1050,7 +1050,7 @@
           "femur"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "insertion": {
@@ -1062,7 +1062,7 @@
           "lower-leg"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "fibres": {
@@ -1078,8 +1078,8 @@
           "movement": "flexion",
           "role": "prime",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -1087,8 +1087,8 @@
           "movement": "external-rotation",
           "role": "assist",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         }
       ],
@@ -1116,8 +1116,8 @@
         "zh": "只跨膝关节，使膝弯曲。"
       },
       "detail": {
-        "en": "The short head starts on the thigh bone, not the pelvis. It bends the knee but cannot extend the hip [M1]. The seated curl directly loads knee flexion. Squat and lunge links show joint control and co-contraction, not equivalent short-head growth exercises. Fibre arrangement is a simplified description of the overall bundles; it does not measure pennation within every part. A cadaver study describes the short head as converging onto the long head’s distal tendon, rather than a separate spindle-shaped belly [M75].",
-        "zh": "短头从股骨开始，不从骨盆开始。因此它能屈膝，不能伸髋 [M1]。坐姿腿弯举直接练屈膝；深蹲和弓步链接展示关节控制与共同收缩，不能视为同等的短头增肌动作。 纤维排列是整体肌束的简化描述，不是每一部分羽状结构的测量值。 尸体研究描述短头向长头的远端肌腱汇聚，不能把它当成另一块独立梭形肌腹 [M75]。"
+        "en": "The short head starts on the thigh bone, not the pelvis. It bends the knee but cannot extend the hip [M109]. The seated curl directly loads knee flexion. Squat and lunge links show joint control and co-contraction, not equivalent short-head growth exercises. A cadaver study describes the short head as converging onto the long head’s distal tendon, rather than a separate spindle-shaped belly [M75].",
+        "zh": "短头从股骨开始，不从骨盆开始。因此它能屈膝，不能伸髋 [M109]。坐姿腿弯举直接练屈膝；深蹲和弓步链接展示关节控制与共同收缩，不能视为同等的短头增肌动作。尸体研究描述短头向长头的远端肌腱汇聚，不能把它当成另一块独立梭形肌腹 [M75]。"
       },
       "common": {
         "en": "outer hamstring",
@@ -1149,7 +1149,7 @@
           "pelvis"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "insertion": {
@@ -1161,7 +1161,7 @@
           "lower-leg"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "fibres": {
@@ -1177,8 +1177,8 @@
           "movement": "extension",
           "role": "prime",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -1186,8 +1186,8 @@
           "movement": "flexion",
           "role": "prime",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -1195,8 +1195,8 @@
           "movement": "internal-rotation",
           "role": "assist",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         }
       ],
@@ -1224,8 +1224,8 @@
         "zh": "伸髋、屈膝；屈膝时使小腿内旋。"
       },
       "detail": {
-        "en": "An inner hamstring spanning hip and knee [M1]. Its long tendon joins sartorius and gracilis at the pes anserinus. It rotates the lower leg inward when the knee is bent. Hinges and curls alter its length differently; a stretch is not a reason to force the range. Fibre arrangement is a simplified description of the overall bundles; it does not measure pennation within every part. Here “fusiform” describes the spindle-like outline, not a claim that every fibre is parallel; dissected specimens show oblique pennate fibres entering the aponeuroses [M77].",
-        "zh": "大腿后内侧的腘绳肌，跨髋、膝 [M1]。长腱与缝匠肌、股薄肌腱共同构成鹅足。屈膝时能使小腿内旋。髋铰链和腿弯举改变肌长的方式不同；有牵拉感不意味着应该继续加深幅度。 纤维排列是整体肌束的简化描述，不是每一部分羽状结构的测量值。 这里“梭形”描述肌腹轮廓，不表示每根纤维都平行；离体标本可见斜行的羽状纤维汇入腱膜 [M77]。"
+        "en": "An inner hamstring spanning hip and knee [M109]. Its long tendon joins sartorius and gracilis at the pes anserinus. It rotates the lower leg inward when the knee is bent. Hinges and curls alter its length differently; a stretch is not a reason to force the range. Here “fusiform” describes the spindle-like outline, not a claim that every fibre is parallel; dissected specimens show oblique pennate fibres entering the aponeuroses [M77].",
+        "zh": "大腿后内侧的腘绳肌，跨髋、膝 [M109]。长腱与缝匠肌、股薄肌腱共同构成鹅足。屈膝时能使小腿内旋。髋铰链和腿弯举改变肌长的方式不同；有牵拉感不意味着应该继续加深幅度。这里“梭形”描述肌腹轮廓，不表示每根纤维都平行；离体标本可见斜行的羽状纤维汇入腱膜 [M77]。"
       },
       "common": {
         "en": "inner hamstring",
@@ -1256,7 +1256,7 @@
           "pelvis"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "insertion": {
@@ -1268,7 +1268,7 @@
           "lower-leg"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "fibres": {
@@ -1284,8 +1284,8 @@
           "movement": "extension",
           "role": "prime",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -1293,8 +1293,8 @@
           "movement": "flexion",
           "role": "prime",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -1302,8 +1302,8 @@
           "movement": "internal-rotation",
           "role": "assist",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         }
       ],
@@ -1331,8 +1331,8 @@
         "zh": "伸髋、屈膝；屈膝时使小腿内旋。"
       },
       "detail": {
-        "en": "An inner hamstring spanning hip and knee [M1]. Its name refers to its broad proximal tendon; it lies deep to semitendinosus. It rotates the lower leg inward when the knee is bent. Hinges and curls alter its length differently; a stretch is not a reason to force the range. Fibre arrangement is a simplified description of the overall bundles; it does not measure pennation within every part. Its pennate architecture varies by region: proximal unipennate regions and a distal bipennate region make one simple feather label incomplete [M76].",
-        "zh": "大腿后内侧的腘绳肌，跨髋、膝 [M1]。名称来自宽扁的近端腱；肌腹位于半腱肌深面。屈膝时能使小腿内旋。髋铰链和腿弯举改变肌长的方式不同；有牵拉感不意味着应该继续加深幅度。 纤维排列是整体肌束的简化描述，不是每一部分羽状结构的测量值。 羽状结构随部位变化：近端有单羽状区，远端有双羽状区；一种简单羽形标签无法概括全肌 [M76]。"
+        "en": "An inner hamstring spanning hip and knee [M109]. Its name refers to its broad proximal tendon; it lies deep to semitendinosus. It rotates the lower leg inward when the knee is bent. Hinges and curls alter its length differently; a stretch is not a reason to force the range. Its pennate architecture varies by region: proximal unipennate regions and a distal bipennate region make one simple feather label incomplete [M76].",
+        "zh": "大腿后内侧的腘绳肌，跨髋、膝 [M109]。名称来自宽扁的近端腱；肌腹位于半腱肌深面。屈膝时能使小腿内旋。髋铰链和腿弯举改变肌长的方式不同；有牵拉感不意味着应该继续加深幅度。羽状结构随部位变化：近端有单羽状区，远端有双羽状区；一种简单羽形标签无法概括全肌 [M76]。"
       },
       "common": {
         "en": "inner hamstring",
@@ -1363,7 +1363,7 @@
           "pelvis"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "insertion": {
@@ -1375,7 +1375,7 @@
           "femur"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "fibres": {
@@ -1391,8 +1391,8 @@
           "movement": "adduction",
           "role": "prime",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -1400,8 +1400,8 @@
           "movement": "flexion",
           "role": "assist",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         }
       ],
@@ -1429,8 +1429,8 @@
         "zh": "内收大腿，并协助屈髋。"
       },
       "detail": {
-        "en": "Adductor longus lies at the front of the inner thigh [M1]. Cable adduction directly practises the inward pull. Squats and lateral lunges use it within a larger movement; they do not isolate this muscle. Fibre arrangement is a simplified description of the overall bundles; it does not measure pennation within every part.",
-        "zh": "长收肌位于大腿内侧的前部 [M1]。绳索内收直接练向内拉；深蹲和侧弓步中，它参与整个动作，并不会被单独练出来。 纤维排列是整体肌束的简化描述，不是每一部分羽状结构的测量值。"
+        "en": "Adductor longus lies at the front of the inner thigh [M109]. Cable adduction directly practises the inward pull. Squats and lateral lunges use it within a larger movement; they do not isolate this muscle.",
+        "zh": "长收肌位于大腿内侧的前部 [M109]。绳索内收直接练向内拉；深蹲和侧弓步中，它参与整个动作，并不会被单独练出来。"
       },
       "common": {
         "en": "adductors",
@@ -1461,7 +1461,7 @@
           "pelvis"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "insertion": {
@@ -1473,7 +1473,7 @@
           "femur"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "fibres": {
@@ -1489,8 +1489,8 @@
           "movement": "adduction",
           "role": "prime",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -1498,8 +1498,8 @@
           "movement": "flexion",
           "role": "assist",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         }
       ],
@@ -1527,8 +1527,8 @@
         "zh": "内收大腿，并协助屈髋。"
       },
       "detail": {
-        "en": "Adductor brevis lies behind adductor longus [M1]. Cable adduction directly practises the inward pull. Squats and lateral lunges use it within a larger movement; they do not isolate this muscle. Fibre arrangement is a simplified description of the overall bundles; it does not measure pennation within every part. The origin uses the modern body/inferior-ramus description; Gray’s older wording names both pubic rami [M1] [M2].",
-        "zh": "短收肌位于长收肌后方 [M1]。绳索内收直接练向内拉；深蹲和侧弓步中，它参与整个动作，并不会被单独练出来。 纤维排列是整体肌束的简化描述，不是每一部分羽状结构的测量值。 起点采用现代教材的耻骨体及下支描述；Gray 的旧版措辞提到耻骨上下支 [M1] [M2]。"
+        "en": "Adductor brevis lies behind adductor longus [M109]. Cable adduction directly practises the inward pull. Squats and lateral lunges use it within a larger movement; they do not isolate this muscle. The origin uses the modern body/inferior-ramus description; Gray’s older wording names both pubic rami [M109] [M59].",
+        "zh": "短收肌位于长收肌后方 [M109]。绳索内收直接练向内拉；深蹲和侧弓步中，它参与整个动作，并不会被单独练出来。起点采用现代教材的耻骨体及下支描述；Gray 的旧版措辞提到耻骨上下支 [M109] [M59]。"
       },
       "common": {
         "en": "adductors",
@@ -1559,7 +1559,7 @@
           "pelvis"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "insertion": {
@@ -1571,7 +1571,7 @@
           "femur"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "fibres": {
@@ -1587,8 +1587,8 @@
           "movement": "adduction",
           "role": "prime",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -1596,8 +1596,8 @@
           "movement": "flexion",
           "role": "assist",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -1605,8 +1605,8 @@
           "movement": "extension",
           "role": "assist",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         }
       ],
@@ -1634,8 +1634,8 @@
         "zh": "内收大腿；不同部分还参与屈髋或伸髋。"
       },
       "detail": {
-        "en": "A large deep sheet with adductor and hamstring parts [M1]. The adductor part can assist flexion; the more vertical ischial fibres assist extension. Despite its hamstring part, the muscle does not cross the knee. In squats it can assist hip extension as well as control the thigh. Fibre arrangement is a simplified description of the overall bundles; it does not measure pennation within every part.",
-        "zh": "大收肌是一片深层大肌，分内收部和腘绳肌部 [M1]。内收部可协助屈髋，来自坐骨的较纵向纤维协助伸髋。虽然有“腘绳肌部”，它并不跨膝。深蹲中，它可协助伸髋，也参与控制大腿。 纤维排列是整体肌束的简化描述，不是每一部分羽状结构的测量值。"
+        "en": "A large deep sheet with adductor and hamstring parts [M109]. The adductor part can assist flexion; the more vertical ischial fibres assist extension. Despite its hamstring part, the muscle does not cross the knee. In squats it can assist hip extension as well as control the thigh.",
+        "zh": "大收肌是一片深层大肌，分内收部和腘绳肌部 [M109]。内收部可协助屈髋，来自坐骨的较纵向纤维协助伸髋。虽然有“腘绳肌部”，它并不跨膝。深蹲中，它可协助伸髋，也参与控制大腿。"
       },
       "common": {
         "en": "adductors",
@@ -1666,7 +1666,7 @@
           "pelvis"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "insertion": {
@@ -1678,7 +1678,7 @@
           "femur"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "fibres": {
@@ -1694,8 +1694,8 @@
           "movement": "adduction",
           "role": "prime",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -1703,8 +1703,8 @@
           "movement": "flexion",
           "role": "assist",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         }
       ],
@@ -1732,8 +1732,8 @@
         "zh": "内收大腿，并协助屈髋。"
       },
       "detail": {
-        "en": "Pectineus lies at the front of the upper inner thigh [M1]. Cable adduction directly practises the inward pull. Squats and lateral lunges use it within a larger movement; they do not isolate this muscle. Fibre arrangement is a simplified description of the overall bundles; it does not measure pennation within every part.",
-        "zh": "耻骨肌位于大腿根前内侧 [M1]。绳索内收直接练向内拉；深蹲和侧弓步中，它参与整个动作，并不会被单独练出来。 纤维排列是整体肌束的简化描述，不是每一部分羽状结构的测量值。"
+        "en": "Pectineus lies at the front of the upper inner thigh [M109]. Cable adduction directly practises the inward pull. Squats and lateral lunges use it within a larger movement; they do not isolate this muscle.",
+        "zh": "耻骨肌位于大腿根前内侧 [M109]。绳索内收直接练向内拉；深蹲和侧弓步中，它参与整个动作，并不会被单独练出来。"
       },
       "common": {
         "en": "adductors",
@@ -1764,7 +1764,7 @@
           "pelvis"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "insertion": {
@@ -1776,7 +1776,7 @@
           "lower-leg"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "fibres": {
@@ -1792,8 +1792,8 @@
           "movement": "adduction",
           "role": "prime",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -1801,8 +1801,8 @@
           "movement": "flexion",
           "role": "assist",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -1810,8 +1810,8 @@
           "movement": "internal-rotation",
           "role": "assist",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         }
       ],
@@ -1839,8 +1839,8 @@
         "zh": "内收髋关节，并协助屈膝。"
       },
       "detail": {
-        "en": "This strap spans hip and knee and joins sartorius and semitendinosus at the pes anserinus [M1]. It is an adductor and assistant knee flexor, not one of the usual three hamstrings. Changing knee position also changes its length during hip adduction. Fibre arrangement is a simplified description of the overall bundles; it does not measure pennation within every part. It is superficial on the inner thigh; the intermediate layer here is a viewing group, not a claim that it lies deep everywhere.",
-        "zh": "股薄肌跨髋、膝，与缝匠肌、半腱肌共同构成鹅足 [M1]。它是内收肌，也协助屈膝，但不属于通常所说的三块腘绳肌。练髋内收时，膝的姿势也会改变它的长度。 纤维排列是整体肌束的简化描述，不是每一部分羽状结构的测量值。 它位于大腿内侧浅表；本图的中层是观察分组，不表示它处处都在深面。"
+        "en": "This strap spans hip and knee and joins sartorius and semitendinosus at the pes anserinus [M109]. It is an adductor and assistant knee flexor, not one of the usual three hamstrings. Changing knee position also changes its length during hip adduction. It is superficial on the inner thigh; the intermediate layer here is a viewing group, not a claim that it lies deep everywhere.",
+        "zh": "股薄肌跨髋、膝，与缝匠肌、半腱肌共同构成鹅足 [M109]。它是内收肌，也协助屈膝，但不属于通常所说的三块腘绳肌。练髋内收时，膝的姿势也会改变它的长度。它位于大腿内侧浅表；本图的中层是观察分组，不表示它处处都在深面。"
       },
       "common": {
         "en": "inner thigh",
@@ -1871,7 +1871,7 @@
           "pelvis"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "insertion": {
@@ -1883,7 +1883,7 @@
           "lower-leg"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "fibres": {
@@ -1899,8 +1899,8 @@
           "movement": "flexion",
           "role": "assist",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -1908,8 +1908,8 @@
           "movement": "abduction",
           "role": "assist",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -1917,8 +1917,8 @@
           "movement": "external-rotation",
           "role": "assist",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -1926,8 +1926,8 @@
           "movement": "flexion",
           "role": "assist",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -1935,8 +1935,8 @@
           "movement": "internal-rotation",
           "role": "assist",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         }
       ],
@@ -1964,8 +1964,8 @@
         "zh": "协助抬腿、外展外旋大腿和屈膝。"
       },
       "detail": {
-        "en": "The long diagonal strap crosses hip and knee [M1]. Hip flexion, abduction and external rotation combined with knee flexion produce a cross-legged position. Exercise links show assistance during leg return, abduction or knee bending; they are not isolation exercises. Fibre arrangement is a simplified description of the overall bundles; it does not measure pennation within every part.",
-        "zh": "缝匠肌斜跨大腿前面，同时跨髋、膝 [M1]。屈髋、外展、外旋再加屈膝，可形成盘腿姿势。列出的动作中，它在腿回位、外展或屈膝时协助工作，并不是专门孤立练缝匠肌的动作。 纤维排列是整体肌束的简化描述，不是每一部分羽状结构的测量值。"
+        "en": "The long diagonal strap crosses hip and knee [M109]. Hip flexion, abduction and external rotation combined with knee flexion produce a cross-legged position. Exercise links show assistance during leg return, abduction or knee bending; they are not isolation exercises.",
+        "zh": "缝匠肌斜跨大腿前面，同时跨髋、膝 [M109]。屈髋、外展、外旋再加屈膝，可形成盘腿姿势。列出的动作中，它在腿回位、外展或屈膝时协助工作，并不是专门孤立练缝匠肌的动作。"
       }
     },
     {
@@ -1992,7 +1992,7 @@
           "pelvis"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "insertion": {
@@ -2004,7 +2004,7 @@
           "iliotibial-tract"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "fibres": {
@@ -2020,8 +2020,8 @@
           "movement": "flexion",
           "role": "assist",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -2029,8 +2029,8 @@
           "movement": "abduction",
           "role": "assist",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -2038,8 +2038,8 @@
           "movement": "internal-rotation",
           "role": "assist",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -2047,8 +2047,8 @@
           "movement": "stabilisation",
           "role": "stabilise",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         }
       ],
@@ -2076,8 +2076,8 @@
         "zh": "张紧外侧筋膜，并协助髋运动。"
       },
       "detail": {
-        "en": "A small muscle at the front outer hip that tensions the iliotibial tract [M1]. Its hip actions differ from gluteus maximus even though both connect to that tract. Lunges involve pelvic and thigh control. The tract transmits tension; it does not actively contract. Fibre arrangement is a simplified description of the overall bundles; it does not measure pennation within every part.",
-        "zh": "阔筋膜张肌位于髋前外侧，收缩时拉紧髂胫束 [M1]。虽然它与臀大肌都连到髂胫束，髋部作用却不同。弓步中，它参与控制骨盆和大腿。髂胫束传递张力，自身不会主动收缩。 纤维排列是整体肌束的简化描述，不是每一部分羽状结构的测量值。"
+        "en": "A small muscle at the front outer hip that tensions the iliotibial tract [M109]. Its hip actions differ from gluteus maximus even though both connect to that tract. Lunges involve pelvic and thigh control. The tract transmits tension; it does not actively contract.",
+        "zh": "阔筋膜张肌位于髋前外侧，收缩时拉紧髂胫束 [M109]。虽然它与臀大肌都连到髂胫束，髋部作用却不同。弓步中，它参与控制骨盆和大腿。髂胫束传递张力，自身不会主动收缩。"
       },
       "common": {
         "en": "front outer hip",
@@ -2105,12 +2105,10 @@
           "zh": "阔筋膜外侧增厚部，上端连于髂嵴外侧，接受阔筋膜张肌及臀大肌纤维；这是筋膜附着，不是肌肉起点。"
         },
         "bones": [
-          "pelvis",
-          "tensor-fasciae-latae",
-          "gluteus-maximus"
+          "pelvis"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "insertion": {
@@ -2122,7 +2120,7 @@
           "lower-leg"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "fibres": {
@@ -2157,8 +2155,8 @@
         "zh": "大腿外侧传递张力的筋膜束。"
       },
       "detail": {
-        "en": "The iliotibial tract is the thick lateral part of the fascia lata, receiving tensor fasciae latae and much of gluteus maximus [M1]. It transmits their tension to the outer tibia and contributes to support around the knee; it cannot actively shorten like a muscle. Its long parallel bundles are collagen, not muscle fibres. Exercise links involve the connected muscles and support-leg control.",
-        "zh": "髂胫束是阔筋膜外侧增厚的部分，接受阔筋膜张肌及大部分臀大肌的止腱 [M1]。它把这些肌肉的张力传至胫骨外侧，参与膝周支撑；自身不能像肌肉一样主动缩短。纵向平行束是胶原束，并非肌纤维。动作链接展示相连肌肉和支撑腿控制。"
+        "en": "The iliotibial tract is the thick lateral part of the fascia lata, receiving tensor fasciae latae and much of gluteus maximus [M109]. It transmits their tension to the outer tibia and contributes to support around the knee; it cannot actively shorten like a muscle. Its long parallel bundles are collagen, not muscle fibres. Exercise links involve the connected muscles and support-leg control.",
+        "zh": "髂胫束是阔筋膜外侧增厚的部分，接受阔筋膜张肌及大部分臀大肌的止腱 [M109]。它把这些肌肉的张力传至胫骨外侧，参与膝周支撑；自身不能像肌肉一样主动缩短。纵向平行束是胶原束，并非肌纤维。动作链接展示相连肌肉和支撑腿控制。"
       },
       "common": {
         "en": "IT band",
@@ -2189,7 +2187,7 @@
           "femur"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "insertion": {
@@ -2201,7 +2199,7 @@
           "foot"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "fibres": {
@@ -2217,8 +2215,8 @@
           "movement": "plantarflexion",
           "role": "prime",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -2226,8 +2224,8 @@
           "movement": "flexion",
           "role": "assist",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         }
       ],
@@ -2255,8 +2253,8 @@
         "zh": "跨膝、踝，提起脚跟。"
       },
       "detail": {
-        "en": "Both heads cross knee and ankle [M1]. Bending the knee shortens the muscle at its upper end, changing its working length in a seated heel raise. Soleus crosses only the ankle. The seated curl link shows assistance in knee flexion, not a substitute for calf raises. Fibre arrangement is a simplified description of the overall bundles; it does not measure pennation within every part.",
-        "zh": "腓肠肌两头都跨膝、踝 [M1]。屈膝会让上端缩短，坐姿提踵时的工作长度因此改变。比目鱼肌只跨踝。腿弯举链接展示它协助屈膝，不能替代提踵。 纤维排列是整体肌束的简化描述，不是每一部分羽状结构的测量值。"
+        "en": "Both heads cross knee and ankle [M109]. Bending the knee shortens the muscle at its upper end, changing its working length in a seated heel raise. Soleus crosses only the ankle. The seated curl link shows assistance in knee flexion, not a substitute for calf raises.",
+        "zh": "腓肠肌两头都跨膝、踝 [M109]。屈膝会让上端缩短，坐姿提踵时的工作长度因此改变。比目鱼肌只跨踝。腿弯举链接展示它协助屈膝，不能替代提踵。"
       },
       "common": {
         "en": "calf",
@@ -2287,7 +2285,7 @@
           "femur"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "insertion": {
@@ -2299,7 +2297,7 @@
           "foot"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "fibres": {
@@ -2315,8 +2313,8 @@
           "movement": "plantarflexion",
           "role": "prime",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -2324,8 +2322,8 @@
           "movement": "flexion",
           "role": "assist",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         }
       ],
@@ -2353,8 +2351,8 @@
         "zh": "提踵，并协助屈膝。"
       },
       "detail": {
-        "en": "This head forms the inner bulge of the upper calf and joins the common calcaneal tendon [M1]. It crosses knee and ankle; bent-knee raises start it shorter. Turning the toes is not a reliable way to isolate a head. The curl link is an assisting role, and seated raises also involve soleus. Fibre arrangement is a simplified description of the overall bundles; it does not measure pennation within every part.",
-        "zh": "这一头形成小腿肚上方的内侧隆起，并进入共同跟腱 [M1]。它跨膝、踝，屈膝提踵的起始长度较短。转动脚尖不能可靠地孤立练某一个头。腿弯举中它是协同肌；坐姿提踵也会用到比目鱼肌。 纤维排列是整体肌束的简化描述，不是每一部分羽状结构的测量值。"
+        "en": "This head forms the inner bulge of the upper calf and joins the common calcaneal tendon [M109]. It crosses knee and ankle; bent-knee raises start it shorter. Turning the toes is not a reliable way to isolate a head. The curl link is an assisting role, and seated raises also involve soleus.",
+        "zh": "这一头形成小腿肚上方的内侧隆起，并进入共同跟腱 [M109]。它跨膝、踝，屈膝提踵的起始长度较短。转动脚尖不能可靠地孤立练某一个头。腿弯举中它是协同肌；坐姿提踵也会用到比目鱼肌。"
       },
       "common": {
         "en": "inner calf",
@@ -2386,7 +2384,7 @@
           "femur"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "insertion": {
@@ -2398,7 +2396,7 @@
           "foot"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "fibres": {
@@ -2414,8 +2412,8 @@
           "movement": "plantarflexion",
           "role": "prime",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -2423,8 +2421,8 @@
           "movement": "flexion",
           "role": "assist",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         }
       ],
@@ -2452,8 +2450,8 @@
         "zh": "提踵，并协助屈膝。"
       },
       "detail": {
-        "en": "This head forms the outer bulge of the upper calf and joins the common calcaneal tendon [M1]. It crosses knee and ankle; bent-knee raises start it shorter. Turning the toes is not a reliable way to isolate a head. The curl link is an assisting role, and seated raises also involve soleus. Fibre arrangement is a simplified description of the overall bundles; it does not measure pennation within every part.",
-        "zh": "这一头形成小腿肚上方的外侧隆起，并进入共同跟腱 [M1]。它跨膝、踝，屈膝提踵的起始长度较短。转动脚尖不能可靠地孤立练某一个头。腿弯举中它是协同肌；坐姿提踵也会用到比目鱼肌。 纤维排列是整体肌束的简化描述，不是每一部分羽状结构的测量值。"
+        "en": "This head forms the outer bulge of the upper calf and joins the common calcaneal tendon [M109]. It crosses knee and ankle; bent-knee raises start it shorter. Turning the toes is not a reliable way to isolate a head. The curl link is an assisting role, and seated raises also involve soleus.",
+        "zh": "这一头形成小腿肚上方的外侧隆起，并进入共同跟腱 [M109]。它跨膝、踝，屈膝提踵的起始长度较短。转动脚尖不能可靠地孤立练某一个头。腿弯举中它是协同肌；坐姿提踵也会用到比目鱼肌。"
       },
       "common": {
         "en": "outer calf",
@@ -2485,7 +2483,7 @@
           "lower-leg"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "insertion": {
@@ -2497,7 +2495,7 @@
           "foot"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "fibres": {
@@ -2513,8 +2511,8 @@
           "movement": "plantarflexion",
           "role": "prime",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -2522,8 +2520,8 @@
           "movement": "stabilisation",
           "role": "stabilise",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         }
       ],
@@ -2551,8 +2549,8 @@
         "zh": "提踵，但不跨膝关节。"
       },
       "detail": {
-        "en": "This broad flat muscle lies under gastrocnemius and crosses only the ankle [M1]. Knee bending does not shorten it across the knee as it does gastrocnemius. It works in standing and seated heel raises. The squat link shows control of forward shin movement, not an isolated soleus exercise. Fibre arrangement is a simplified description of the overall bundles; it does not measure pennation within every part.",
-        "zh": "比目鱼肌宽而扁，位于腓肠肌深面，只跨踝 [M1]。屈膝不会像腓肠肌那样从膝端使它缩短。站姿和坐姿提踵都会用到它。深蹲链接展示它控制小腿前倾，不能把深蹲当作单独练比目鱼肌的动作。 纤维排列是整体肌束的简化描述，不是每一部分羽状结构的测量值。"
+        "en": "This broad flat muscle lies under gastrocnemius and crosses only the ankle [M109]. Knee bending does not shorten it across the knee as it does gastrocnemius. It works in standing and seated heel raises. The squat link shows control of forward shin movement, not an isolated soleus exercise.",
+        "zh": "比目鱼肌宽而扁，位于腓肠肌深面，只跨踝 [M109]。屈膝不会像腓肠肌那样从膝端使它缩短。站姿和坐姿提踵都会用到它。深蹲链接展示它控制小腿前倾，不能把深蹲当作单独练比目鱼肌的动作。"
       },
       "common": {
         "en": "deep calf",
@@ -2583,7 +2581,7 @@
           "lower-leg"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "insertion": {
@@ -2595,7 +2593,7 @@
           "foot"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "fibres": {
@@ -2611,8 +2609,8 @@
           "movement": "dorsiflexion",
           "role": "prime",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -2620,8 +2618,8 @@
           "movement": "inversion",
           "role": "assist",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         }
       ],
@@ -2649,8 +2647,8 @@
         "zh": "抬起前脚掌，并协助足内翻。"
       },
       "detail": {
-        "en": "The shin muscle pulls the forefoot towards the leg and reaches the inner midfoot [M1]. Its route differs from the long toe-extensor tendons. During walking it helps control forefoot lowering after heel contact. The three linked drills practise dorsiflexion or holding it; none promises to prevent all causes of shin pain. Fibre arrangement is a simplified description of the overall bundles; it does not measure pennation within every part.",
-        "zh": "胫骨前肌把前脚掌拉向小腿，肌腱到足内侧中部 [M1]。路线与长伸趾肌腱不同。走路脚跟着地后，它也参与控制前脚掌落下。三个动作练背屈或保持背屈，不能据此承诺预防所有小腿前侧疼痛。 纤维排列是整体肌束的简化描述，不是每一部分羽状结构的测量值。"
+        "en": "The shin muscle pulls the forefoot towards the leg and reaches the inner midfoot [M109]. Its route differs from the long toe-extensor tendons. During walking it helps control forefoot lowering after heel contact. The three linked drills practise dorsiflexion or holding it; none promises to prevent all causes of shin pain.",
+        "zh": "胫骨前肌把前脚掌拉向小腿，肌腱到足内侧中部 [M109]。路线与长伸趾肌腱不同。走路脚跟着地后，它也参与控制前脚掌落下。三个动作练背屈或保持背屈，不能据此承诺预防所有小腿前侧疼痛。"
       },
       "common": {
         "en": "shin muscle",
@@ -2682,7 +2680,8 @@
           "lumbar-spine"
         ],
         "s": [
-          "M1"
+          "M109",
+          "M92"
         ]
       },
       "insertion": {
@@ -2694,7 +2693,8 @@
           "femur"
         ],
         "s": [
-          "M1"
+          "M109",
+          "M92"
         ]
       },
       "fibres": {
@@ -2710,8 +2710,8 @@
           "movement": "flexion",
           "role": "prime",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -2719,8 +2719,8 @@
           "movement": "stabilisation",
           "role": "stabilise",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         }
       ],
@@ -2748,8 +2748,8 @@
         "zh": "从腰椎两侧深处牵拉，使髋屈曲。"
       },
       "detail": {
-        "en": "Shown as a neighbour, with iliacus forming iliopsoas [M1]. The links involve the returning or stepping leg, not a loaded hip-flexor programme. Lumbar attachments make its role more complex than lifting the knee; posture alone cannot diagnose its length or strength. Fibre arrangement is a simplified description of the overall bundles; it does not measure pennation within every part.",
-        "zh": "作为邻区显示，与髂肌共同构成髂腰肌 [M1]。链接展示回位腿或迈步腿的参与，不是负重练髋屈肌的计划。它附着腰椎，作用不只是抬膝；不能只看姿势就判断它的长度或力量。 纤维排列是整体肌束的简化描述，不是每一部分羽状结构的测量值。"
+        "en": "Shown as a neighbour, with iliacus forming iliopsoas [M109]. The links involve the returning or stepping leg, not a loaded hip-flexor programme. Lumbar attachments make its role more complex than lifting the knee; posture alone cannot diagnose its length or strength.",
+        "zh": "作为邻区显示，与髂肌共同构成髂腰肌 [M109]。链接展示回位腿或迈步腿的参与，不是负重练髋屈肌的计划。它附着腰椎，作用不只是抬膝；不能只看姿势就判断它的长度或力量。"
       }
     },
     {
@@ -2777,7 +2777,8 @@
           "pelvis"
         ],
         "s": [
-          "M1"
+          "M109",
+          "M92"
         ]
       },
       "insertion": {
@@ -2789,7 +2790,8 @@
           "femur"
         ],
         "s": [
-          "M1"
+          "M109",
+          "M92"
         ]
       },
       "fibres": {
@@ -2805,8 +2807,8 @@
           "movement": "flexion",
           "role": "prime",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         }
       ],
@@ -2834,8 +2836,8 @@
         "zh": "骨盆内的扇形肌，协助抬大腿。"
       },
       "detail": {
-        "en": "Iliacus fills the iliac fossa and joins psoas major towards the lesser trochanter [M1]. It flexes the hip without starting on the lumbar spine. The links involve swing-leg motion; they do not isolate iliacus or establish a treatment for hip pain. Fibre arrangement is a simplified description of the overall bundles; it does not measure pennation within every part.",
-        "zh": "髂肌填在髂窝内，与腰大肌一起走向小转子 [M1]。它能屈髋，但不起于腰椎。链接展示摆动腿的参与，并不能孤立练髂肌，也不能据此治疗髋痛。 纤维排列是整体肌束的简化描述，不是每一部分羽状结构的测量值。"
+        "en": "Iliacus fills the iliac fossa and joins psoas major towards the lesser trochanter [M109]. It flexes the hip without starting on the lumbar spine. The links involve swing-leg motion; they do not isolate iliacus or establish a treatment for hip pain.",
+        "zh": "髂肌填在髂窝内，与腰大肌一起走向小转子 [M109]。它能屈髋，但不起于腰椎。链接展示摆动腿的参与，并不能孤立练髂肌，也不能据此治疗髋痛。"
       }
     },
     {
@@ -2862,7 +2864,7 @@
           "lower-leg"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "insertion": {
@@ -2874,7 +2876,7 @@
           "foot"
         ],
         "s": [
-          "M1"
+          "M109"
         ]
       },
       "fibres": {
@@ -2890,8 +2892,8 @@
           "movement": "eversion",
           "role": "prime",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -2899,8 +2901,8 @@
           "movement": "plantarflexion",
           "role": "assist",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         },
         {
@@ -2908,8 +2910,8 @@
           "movement": "stabilisation",
           "role": "stabilise",
           "s": [
-            "M1",
-            "M2"
+            "M109",
+            "M59"
           ]
         }
       ],
@@ -2937,12 +2939,8 @@
         "zh": "使足外翻，并协助稳定提踵。"
       },
       "detail": {
-        "en": "A lateral-leg neighbour whose tendon crosses under the sole [M1]. Its outward pull differs from tibialis anterior even though both reach the inner midfoot. Calf raises involve plantarflexion assistance and foot control; they do not isolate this muscle or replace ankle rehabilitation. Fibre arrangement is a simplified description of the overall bundles; it does not measure pennation within every part.",
-        "zh": "邻区的小腿外侧肌，肌腱横过足底 [M1]。虽然也到足内侧中部，它的外翻拉力与胫骨前肌的内翻拉力不同。提踵中它协助跖屈和控制足部，不是孤立练腓骨长肌，也不能代替踝康复。 纤维排列是整体肌束的简化描述，不是每一部分羽状结构的测量值。"
-      },
-      "common": {
-        "en": "peroneus longus",
-        "zh": "腓长肌（旧称）"
+        "en": "A lateral-leg neighbour whose tendon crosses under the sole [M109]. Its outward pull differs from tibialis anterior even though both reach the inner midfoot. Calf raises involve plantarflexion assistance and foot control; they do not isolate this muscle or replace ankle rehabilitation.",
+        "zh": "邻区的小腿外侧肌，肌腱横过足底 [M109]。虽然也到足内侧中部，它的外翻拉力与胫骨前肌的内翻拉力不同。提踵中它协助跖屈和控制足部，不是孤立练腓骨长肌，也不能代替踝康复。"
       }
     }
   ]

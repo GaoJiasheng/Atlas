@@ -23,16 +23,16 @@
       "layer": "superficial",
       "origin": {
         "text": {
-          "en": "Three heads: the long head from just below the shoulder socket on the scapula; the lateral and medial heads from the back of the humerus.",
-          "zh": "三个头：长头起于肩胛骨关节盂下方；外侧头和内侧头起于肱骨后面。"
+          "en": "Three heads: the long head from the infraglenoid tubercle just below the shoulder socket on the scapula; the lateral and medial heads from the back of the humerus, above and below the radial groove.",
+          "zh": "三个头：长头起于肩胛骨关节盂下方的盂下结节；外侧头和内侧头起于肱骨后面，分别在桡神经沟上方和下方。"
         },
         "bones": [
           "scapula",
           "humerus"
         ],
         "s": [
-          "M1",
-          "M32"
+          "M87",
+          "M63"
         ]
       },
       "insertion": {
@@ -44,8 +44,8 @@
           "forearm"
         ],
         "s": [
-          "M1",
-          "M32"
+          "M87",
+          "M63"
         ]
       },
       "fibres": {
@@ -61,8 +61,24 @@
           "movement": "extension",
           "role": "prime",
           "s": [
-            "M1",
-            "M32"
+            "M87",
+            "M63"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "extension",
+          "role": "assist",
+          "s": [
+            "M87"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "adduction",
+          "role": "assist",
+          "s": [
+            "M87"
           ]
         }
       ],
@@ -91,8 +107,8 @@
         "zh": "每一次推起时把肘伸直。"
       },
       "detail": {
-        "en": "The muscle on the back of the upper arm, three heads joined in one tendon on the point of the elbow [M1]. In every press and push-up it straightens the elbow while the chest muscles move the upper arm [M32].\n\nThe model draws the three heads as one part; the arm topic separates them.",
-        "zh": "上臂后面的肌肉，三个头在肘尖汇成一条肌腱 [M1]。每一次推和俯卧撑，胸肌移动上臂的同时，它把肘伸直 [M32]。\n\n模型把三个头画成一个零件；手臂主题会把它们分开讲。"
+        "en": "The muscle on the back of the upper arm: three heads joined in one tendon on the point of the elbow [M87]. All three straighten the elbow; only the long head also crosses the shoulder, where it helps draw the upper arm back and in [M87]. In every press and push-up it straightens the elbow while the chest muscles move the upper arm [M32].\n\nThe chest model draws the three heads as one part; the arm topic separates them.",
+        "zh": "上臂后面的肌肉，三个头在肘尖汇成一条肌腱 [M87]。三个头都伸肘；只有长头还跨过肩关节，帮助把上臂向后、向内拉 [M87]。每一次推和俯卧撑，胸肌移动上臂的同时，它把肘伸直 [M32]。\n\n胸部模型把三个头画成一个零件；手臂主题把它们分开讲。"
       }
     },
     {
@@ -304,12 +320,12 @@
         "chin-up"
       ],
       "summary": {
-        "en": "An outer head that bends and supinates.",
-        "zh": "前面偏外侧的头，屈肘并使前臂旋后。"
+        "en": "The outer head: bends the elbow, turns the palm up.",
+        "zh": "偏外侧的一头：屈肘，并使前臂旋后。"
       },
       "detail": {
         "en": "Its long proximal tendon reaches the scapula through the shoulder joint before entering the groove on the humerus [M87]. This head crosses the shoulder as well as the elbow.\n\nIt joins the short head near the elbow. Both contribute to flexion and supination; none of the listed exercises isolates this head [M63]. The tendon is inside the joint capsule but outside the synovial cavity [M87].",
-        "zh": "长头的近端肌腱经过肩关节内，到达肩胛骨；向下则进入肱骨结节间沟 [M87]。所以它既跨肩关节，也跨肘关节。\n\n它在肘附近与短头合并。两头都参与屈肘和旋后，这里列出的动作都不能把长头单独隔离出来 [M63]。 肌腱位于关节囊内、滑膜腔外 [M87]。"
+        "zh": "长头的近端肌腱经过肩关节内，到达肩胛骨；向下则进入肱骨结节间沟 [M87]。所以它既跨肩关节，也跨肘关节。\n\n它在肘附近与短头合并。两头都参与屈肘和旋后，这里列出的动作都不能把长头单独隔离出来 [M63]。肌腱位于关节囊内、滑膜腔外 [M87]。"
       },
       "fma": "FMA37683",
       "parent": "biceps-brachii"
@@ -411,8 +427,8 @@
         "chin-up"
       ],
       "summary": {
-        "en": "An inner head sharing the biceps tendon.",
-        "zh": "前面偏内侧的头，与长头共用止腱。"
+        "en": "The inner head, sharing the biceps tendon.",
+        "zh": "偏内侧的一头，与长头共用止腱。"
       },
       "detail": {
         "en": "The short head starts beside coracobrachialis at the coracoid process [M87]. Like the long head, it crosses the shoulder and reaches the radius through the common biceps tendon.\n\nA wider grip does not create a separate short-head exercise. The useful task is still a controlled elbow bend and, where the implement allows it, forearm supination [M63].",
@@ -708,8 +724,8 @@
         "zh": "跨过肩关节，并使肘伸直。"
       },
       "detail": {
-        "en": "Unlike the other heads it crosses the shoulder [M87]. Raising the upper arm changes its length before the elbow even moves. Overhead extensions illustrate this relationship; they still use the other heads.\n\nUse a controlled elbow motion; do not chase a special grip to switch the other heads off. The fibre label summarises the main direction described by Gray; it does not map every internal tendon [M87].",
-        "zh": "与其余两头不同，长头跨过肩关节 [M87]。即使肘还没动，抬起上臂也会改变它的长度。过顶臂屈伸方便观察这种关系，但其余两头仍参与。\n\n练习时控制好伸肘，不要指望某种握法能让其他头停止工作。 纤维标签概括 Gray 描述的主要走向，不画出每一条肌内腱 [M87]。"
+        "en": "Unlike the other heads it crosses the shoulder [M87]. Raising the upper arm changes its length before the elbow even moves. Overhead extensions illustrate this relationship; they still use the other heads.\n\nUse a controlled elbow motion; no grip switches the other heads off.",
+        "zh": "与其余两头不同，长头跨过肩关节 [M87]。即使肘还没动，抬起上臂也会改变它的长度。过顶臂屈伸方便观察这种关系，但其余两头仍参与。\n\n练习时把伸肘做稳；没有哪种握法能让其余两头停工。"
       },
       "fma": "FMA37692",
       "parent": "triceps-brachii",
@@ -797,12 +813,12 @@
         "overhead-dumbbell-triceps-extension"
       ],
       "summary": {
-        "en": "An outer head that straightens the elbow.",
-        "zh": "上臂后面偏外侧的头，负责伸肘。"
+        "en": "The outer head; straightens the elbow.",
+        "zh": "上臂后面偏外侧的一头，伸肘。"
       },
       "detail": {
-        "en": "The lateral head begins on the humerus and does not cross the shoulder [M87]. Its visible outer contour is not a separate training target: presses and pushdowns also involve the long and medial heads.\n\nUse a controlled elbow motion; do not chase a special grip to switch the other heads off. The fibre label summarises the main direction described by Gray; it does not map every internal tendon [M87].",
-        "zh": "外侧头起于肱骨，不跨肩关节 [M87]。外侧的轮廓并不等于能单独训练的一块；卧推和下压也会用到长头与内侧头。\n\n练习时控制好伸肘，不要指望某种握法能让其他头停止工作。 纤维标签概括 Gray 描述的主要走向，不画出每一条肌内腱 [M87]。"
+        "en": "The lateral head begins on the humerus and does not cross the shoulder [M87]. Its visible outer contour is not a separate training target: presses and pushdowns also involve the long and medial heads.\n\nUse a controlled elbow motion; no grip switches the other heads off.",
+        "zh": "外侧头起于肱骨，不跨肩关节 [M87]。外侧的轮廓并不等于能单独训练的一块；卧推和下压也会用到长头与内侧头。\n\n练习时把伸肘做稳；没有哪种握法能让其余两头停工。"
       },
       "fma": "FMA37694",
       "parent": "triceps-brachii",
@@ -890,12 +906,12 @@
         "overhead-dumbbell-triceps-extension"
       ],
       "summary": {
-        "en": "A deeper head helping every elbow extension.",
-        "zh": "较深的一头，参与伸肘。"
+        "en": "The deepest head; works in every elbow extension.",
+        "zh": "最深的一头，每次伸肘都参与。"
       },
       "detail": {
-        "en": "Much of the medial head lies beneath the long and lateral heads, with a distal portion visible near the elbow [M87]. A small visible area does not imply a small role. It shares the elbow-extension task [M63].\n\nUse a controlled elbow motion; do not chase a special grip to switch the other heads off. The fibre label summarises the main direction described by Gray; it does not map every internal tendon [M87].",
-        "zh": "内侧头大部分在长头和外侧头下面，靠肘的远端部分可露出 [M87]。露在表面的面积小，不等于作用小；它同样承担伸肘任务 [M63]。\n\n练习时控制好伸肘，不要指望某种握法能让其他头停止工作。 纤维标签概括 Gray 描述的主要走向，不画出每一条肌内腱 [M87]。"
+        "en": "Much of the medial head lies beneath the long and lateral heads, with a distal portion visible near the elbow [M87]. A small visible area does not imply a small role. It shares the elbow-extension task [M63].\n\nUse a controlled elbow motion; no grip switches the other heads off.",
+        "zh": "内侧头大部分在长头和外侧头下面，靠肘的远端部分可露出 [M87]。露在表面的面积小，不等于作用小；它同样承担伸肘任务 [M63]。\n\n练习时把伸肘做稳；没有哪种握法能让其余两头停工。"
       },
       "fma": "FMA37693",
       "parent": "triceps-brachii",
@@ -983,8 +999,8 @@
         "overhead-dumbbell-triceps-extension"
       ],
       "summary": {
-        "en": "A small assistant at the back of the elbow.",
-        "zh": "肘后的小助手，协助伸肘。"
+        "en": "A small muscle behind the elbow that assists extension.",
+        "zh": "肘后外侧的小肌，协助伸肘。"
       },
       "detail": {
         "en": "Anconeus is a small triangular muscle between the lateral humeral epicondyle and the upper ulna [M87]. It assists elbow extension [M63].\n\nThe exercises listed involve it within the extension chain. They are not isolation exercises, and a sensation at the joint cannot identify its contribution.",
@@ -1071,8 +1087,8 @@
         "chin-up"
       ],
       "summary": {
-        "en": "Bends the elbow from the thumb side.",
-        "zh": "在前臂拇指侧协助屈肘。"
+        "en": "Bends the elbow from the thumb side of the forearm.",
+        "zh": "位于前臂拇指侧，协助屈肘。"
       },
       "detail": {
         "en": "This muscle begins above the elbow and ends near the radial styloid, so it crosses the elbow but not the wrist [M87]. Although it sits with the lateral forearm muscles, its main action is elbow flexion [M63].\n\nHammer and reverse curls let you observe the lateral forearm working. They still use other elbow flexors; do not force the wrist to bend.",
@@ -1309,7 +1325,7 @@
           "zh": "屈肌支持带及掌腱膜。"
         },
         "bones": [
-          "palmaris-longus"
+          "hand"
         ],
         "s": [
           "M87"
@@ -1540,12 +1556,12 @@
         "dumbbell-wrist-curl"
       ],
       "summary": {
-        "en": "Bends the finger middle joints to help the grip.",
-        "zh": "屈指间关节，帮助握持。"
+        "en": "Bends the middle finger joints; helps the grip.",
+        "zh": "屈手指中间的关节，帮助握持。"
       },
       "detail": {
         "en": "The tendons split so the deeper flexor tendons can pass through, then attach to the middle phalanges. The main action is flexion of the proximal interphalangeal joints; it also assists wrist flexion [M87].\n\nThe model has no finger joints. Its wrist action is only part of its function. Chin-ups and curls involve gripping; wrist curls also require a secure grip. These are shared hand tasks, not finger-flexor isolation.",
-        "zh": "肌腱分叉，让更深的屈肌腱穿过，再附到中节指骨。主要作用是屈近侧指间关节，也协助屈腕 [M87]。\n\n模型没有手指关节，腕动作只展示它的部分功能。引体与弯举需要握持，腕弯举也必须握牢。它们是共同完成的手部任务，不是孤立的屈指训练。"
+        "zh": "肌腱分叉，让更深的屈肌腱穿过，再附到中节指骨。主要作用是屈近侧指间关节（手指中间那一节关节），也协助屈腕 [M87]。\n\n模型没有手指关节，腕动作只展示它的部分功能。引体与弯举需要握持，腕弯举也必须握牢。它们是共同完成的手部任务，不是孤立的屈指训练。"
       },
       "fma": "FMA38469"
     },

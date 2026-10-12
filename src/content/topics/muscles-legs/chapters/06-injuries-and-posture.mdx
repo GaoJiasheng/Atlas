@@ -14,73 +14,71 @@ state:
   pose: null
   layers: ["superficial", "intermediate", "deep", "skeleton", "neighbours", "body"]
   ghost: ["body", "neighbours"]
-  labels: ["group:superficial", "group:intermediate", "group:deep"]
-  camera: {"position": [0, -0.36, 3.0], "target": [0, -0.35, -0.03], "fov": 30}
+  labels: ["rectus-femoris", "biceps-femoris-long", "gastrocnemius-medial"]
+  camera: {"position": [3.4, 0.05, 0.9], "target": [0.05, -0.42, 0.02], "fov": 24}
   summary:
-    en: "Knee travel, muscle strain and tendon loading: general knowledge with the limits of the evidence made clear."
-    zh: "膝前移、肌肉拉伤和肌腱负荷：一般知识，同时交代证据的边界。"
+    en: "Knees past the toes, hamstring strains and Achilles pain: what is known, what the evidence does not show, and when to get help."
+    zh: "膝盖过脚尖、腘绳肌拉伤和跟腱痛：知道些什么、证据没有说明什么，以及什么时候该求助。"
   beats:
-    - exercise:
-        id: "barbell-back-squat"
-        phase: "end"
-      camera:
-        position: [2.8, 1.3, 4.9]
-        target: [0, -0.3, 0]
-        fov: 22
-      labels: ["vastus-lateralis", "gluteus-maximus", "lower-leg"]
+    - pose: "knee-extension"
+      camera: "side"
+      sites: ["rectus-femoris", "vastus-lateralis"]
+      labels: ["rectus-femoris", "vastus-lateralis", "patella", "lower-leg"]
       caption:
-        en: "The knee can move forward as the hip and ankle bend in a squat. Crossing the toe line is not by itself evidence of injury; the load and the person still matter."
-        zh: "深蹲时髋和踝弯曲，膝可以前移。超过脚尖本身不是受伤证据，仍要看负荷和个人情况。"
+        en: "The quadriceps pull on the shin through the kneecap. In a squat the knees may travel past the toes; that alone is not evidence of harm."
+        zh: "股四头肌经髌骨拉动小腿。深蹲时膝盖可能超过脚尖，单凭这一点并不能说明有害。"
     - camera: "back"
       sites: ["biceps-femoris-long", "semitendinosus"]
-      labels: ["biceps-femoris-long", "semitendinosus", "semimembranosus"]
+      labels: ["biceps-femoris-long", "semitendinosus", "semimembranosus", "pelvis"]
       caption:
-        en: "The long hamstrings span hip and knee. Hip flexion with knee extension lengthens them at both ends; sudden high loading or overstretching can strain the tissues."
-        zh: "长腘绳肌跨髋和膝。屈髋加伸膝从两端拉长它们，突然的高负荷或过度牵拉可能造成拉伤。"
+        en: "The long hamstrings cross hip and knee. Bending the hip with a straight knee stretches them from both ends, the position in which sprinting and overstretching strains happen."
+        zh: "长的腘绳肌跨髋和膝。直着膝屈髋，会从两端同时拉长它们；冲刺跑和过度拉伸造成的拉伤就发生在这种姿势里。"
     - camera: "calf"
       sites: ["gastrocnemius-medial", "soleus"]
       labels: ["gastrocnemius-medial", "soleus", "foot"]
       caption:
-        en: "The calf muscles share the Achilles tendon at the heel. Persistent tendon pain with activity needs assessment, not a diagnosis from the model or a self-chosen rehabilitation card."
-        zh: "小腿肌经共同跟腱到达脚跟。活动时持续的跟腱痛需要评估，不能靠模型或自行选卡片诊断、康复。"
-    - camera: "hip"
+        en: "Gastrocnemius and soleus share the Achilles tendon. Ongoing pain in the tendon during activity needs a professional assessment, not a diagnosis from the model."
+        zh: "腓肠肌和比目鱼肌共用跟腱。活动时跟腱持续疼痛，需要专业评估，不能靠模型自己下诊断。"
+    - camera: "front"
       ghost: ["body", "neighbours", "gluteus-maximus"]
+      pose: "hip-abduction"
       labels: ["gluteus-medius", "gluteus-minimus", "pelvis"]
       caption:
-        en: "Gluteus medius helps steady the pelvis over the supporting leg. A single standing picture cannot establish muscle weakness or explain a painful knee."
-        zh: "臀中肌帮助稳定支撑腿上方的骨盆。一张站姿照片不能判定肌肉无力，也不能解释膝痛。"
+        en: "Gluteus medius keeps the pelvis level on one leg. A single photo of someone standing cannot show that it is weak, or explain a sore knee."
+        zh: "单腿站立时，臀中肌让骨盆保持水平。一张站姿照片既不能说明它没力，也解释不了膝痛。"
     - camera: "on-my-body"
       sites: []
+      pose: null
       labels: ["group:superficial", "group:intermediate"]
       caption:
-        en: "Return to the whole region. Learn with light loads and supervision, progress gradually, and seek professional help for pain or injury. This is general information, not medical advice."
-        zh: "回到整个区域。轻负荷学习，有人监督，逐步进阶；疼痛或受伤请寻求专业帮助。这是一般知识，不是医疗建议。"
+        en: "This is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist."
+        zh: "本页是一般性知识，不是医疗建议。疼痛或受伤，请咨询医生或物理治疗师。"
   index:
-    parts: ["gluteus-maximus", "gluteus-medius", "gluteus-minimus", "rectus-femoris", "biceps-femoris-long", "semitendinosus", "semimembranosus", "gastrocnemius-medial", "gastrocnemius-lateral", "soleus", "pelvis", "lower-leg", "foot"]
-    exercises: ["barbell-back-squat"]
+    parts: ["rectus-femoris", "vastus-lateralis", "patella", "biceps-femoris-long", "semitendinosus", "semimembranosus", "gastrocnemius-medial", "soleus", "gluteus-medius", "pelvis"]
+    exercises: ["barbell-back-squat", "barbell-romanian-deadlift", "dumbbell-standing-calf-raise"]
 ---
 
 <Lang en>
 
-The knee travelling beyond the toes in a squat is **not inherently harmful**. The hip, knee and ankle share the movement. Restricting knee travel can shift more demand towards the hip and trunk. The relevant experiment measured joint torques, not injuries; it does not establish that every depth or load is safe for every person [M33]. Use a controlled, comfortable range and get individual advice for a painful or previously injured joint.
+**Letting the knees travel past the toes in a squat is not harmful in itself.** Hips, knees and ankles share the movement. In one study, <Num s="M33">seven</Num> trained men squatted with and without a board stopping their knees at the toes. Blocking the knees lowered the estimated load on the knee but raised the load on the hip [M33]. That study measured joint loads, not injuries, so it does not prove every depth or load is safe for everyone. Squat to a depth you can control, and get individual advice if a knee is painful or was injured before.
 
-The long hamstrings span hip and knee. Hip flexion with knee extension lengthens them from both ends. Sudden overload or overstretching can injure muscle and its junction with the <Term id="tendon">tendon</Term>, the strong connective tissue carrying force to the bone [M1] [M34]. A sudden painful pull, bruising or lost function deserves professional assessment rather than stronger stretching.
+The long hamstrings cross both hip and knee, so bending the hip with a straight knee stretches them from both ends. Strains happen most often in fast running and in movements that overstretch the muscle; the injury often involves the region where muscle fibres join the <Term id="tendon">tendon</Term> [M34]. A sudden sharp pain at the back of the thigh, bruising or difficulty walking needs a professional assessment, not harder stretching.
 
-Gastrocnemius and soleus pull through the Achilles tendon. Persistent activity-related pain near the tendon is not explained by a muscle highlight alone. Achilles problems require assessment of symptoms, function and the response to loading; a general calf-raise card is not an individual treatment plan [M35].
+Gastrocnemius and soleus pull on the heel through the Achilles tendon. Pain in the middle of the tendon that keeps returning with activity needs an assessment of symptoms and function. Clinical guidelines describe loading the tendon gradually, adjusted to each person's pain and ability, under a clinician's guidance [M35]. A general calf-raise card is not an individual treatment plan.
 
-Posture also needs context. Gluteus medius helps steady the pelvis when one leg supports the body [M1]. A standing picture or one uneven movement cannot establish that it is weak or that it caused pain. Avoid assigning a diagnosis to the direction a knee points.
+Posture needs context too. Gluteus medius keeps the pelvis level when you stand on one leg [M109] [M59]. A photo of someone standing, or one uneven step, cannot show that the muscle is weak or that it caused pain. Do not diagnose a problem from the direction a knee points.
 
-Learn movements with a qualified coach and light loads; young people need adult supervision [M25]. Progress gradually [M23]. This chapter is general information, not medical advice. For pain or an injury, consult a doctor or physiotherapist.
+This is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist. Learn new movements with light loads and a qualified coach; anyone under eighteen should train with an adult supervising [M25] [M23].
 
-<More title={{ en: "What the knee-travel study tested", zh: "膝前移研究测了什么" }}>
+<More title={{ en: "What the knee-travel study measured", zh: "膝前移研究测了什么" }}>
 
-Fry and colleagues studied <Num s="M33">seven</Num> trained men performing parallel barbell squats with a barbell load equal to body weight. A wooden barrier prevented the knees moving beyond the toes in one condition. Knee torque decreased and hip torque increased when travel was restricted. The study did not count injuries [M33].
+The men squatted to parallel with a barbell as heavy as their own body. With the board in place the estimated knee load fell and the hip load rose. The study did not follow the men to see who was injured, so it says nothing directly about injury risk [M33].
 
 </More>
 
-<More title={{ en: "The boundary of this page", zh: "本页的边界" }}>
+<More title={{ en: "Signs that need a professional", zh: "需要找专业人员的信号" }}>
 
-The model helps explain attachment routes, not diagnose strains, tendon disease or alignment problems. Sharp or persistent pain, swelling, bruising, sudden weakness or difficulty bearing weight are reasons to seek clinical advice. Exercise choices during recovery belong in an individual assessment.
+Sharp or lasting pain, swelling, bruising, sudden weakness or trouble putting weight on the leg are reasons to see a doctor or physiotherapist. What exercises to do while recovering belongs in an individual assessment [M34] [M35].
 
 </More>
 
@@ -88,23 +86,25 @@ The model helps explain attachment routes, not diagnose strains, tendon disease 
 
 <Lang zh>
 
-深蹲时膝超过脚尖，**并不必然有害**。髋、膝、踝一起分担动作，限制膝前移可能把更多要求转向髋和躯干。相关实验测的是关节力矩，不是伤害发生率，不能证明每个人在任何深度和重量下都安全 [M33]。选择能控制、舒服的幅度，关节疼痛或有旧伤时应获得个别建议。
+**深蹲时膝盖超过脚尖，本身并不有害。**髋、膝、踝一起分担这个动作。一项研究让<Num s="M33">七名</Num>有训练经验的男性分别在有、无木板挡住膝盖的情况下深蹲。挡住膝盖后，估算的膝负荷降低了，髋的负荷却上升了 [M33]。这项研究测的是关节负荷，不是受伤，所以不能证明任何深度、任何重量对每个人都安全。蹲到自己能控制的深度；膝盖疼痛或受过伤，要找专业人员个别评估。
 
-长腘绳肌跨髋和膝。屈髋加伸膝从两端拉长它们。突然超负荷或过度牵拉，可能伤到肌肉及其与<Term id="tendon">肌腱</Term>的交界；肌腱是把力传向骨骼的坚韧结缔组织 [M1] [M34]。突然的疼痛、淤青或功能下降，应找专业人员评估，不要更用力拉伸。
+长的腘绳肌同时跨髋和膝，直着膝屈髋会从两端拉长它们。拉伤最常发生在快速奔跑和过度拉伸的动作里，受伤处常常在肌纤维与<Term id="tendon">肌腱</Term>相接的一带 [M34]。大腿后面突然剧痛、出现淤青或走路困难，应找专业人员评估，而不是更用力地拉伸。
 
-腓肠肌和比目鱼肌经跟腱发力。活动时持续的跟腱附近疼痛，不能仅靠肌肉高亮解释。评估需要结合症状、功能和负荷反应，普通提踵卡不是个人治疗计划 [M35]。
+腓肠肌和比目鱼肌通过跟腱拉动脚跟。跟腱中段在活动时反复疼痛，需要评估症状和功能。临床指南描述的做法，是在专业人员指导下，按个人的疼痛和能力逐步给跟腱加负荷 [M35]。一张普通的提踵卡片不是个人的治疗方案。
 
-体态也要看情境。臀中肌帮助稳定单腿支撑时的骨盆 [M1]，但一张站姿照片或一次不对称动作，不能证明它无力或造成疼痛。初学请教练指导、用轻负荷，未成年人要有成人监督 [M25]，逐步进阶 [M23]。本章是一般性知识，不是医疗建议；疼痛或受伤请咨询医生或物理治疗师。
+看体态也要看情境。单腿站立时，臀中肌让骨盆保持水平 [M109] [M59]。一张站姿照片或一次步子不对称，都不能说明这块肌肉没力，也不能说明疼痛是它造成的。不要凭膝盖朝向哪里来判断问题。
 
-<More title={{ en: "What the knee-travel study tested", zh: "膝前移研究测了什么" }}>
+本页是一般性知识，不是医疗建议。疼痛或受伤，请咨询医生或物理治疗师。学新动作时用轻重量，跟合格的教练学；未满十八岁的人应在成人监督下练习 [M25] [M23]。
 
-Fry 等研究了<Num s="M33">七名</Num>有训练经验的男性，用等于体重的杠铃负荷做平行深蹲。一种条件用木板挡住膝，不让它超过脚尖。受限时膝力矩下降，髋力矩上升；研究没有统计受伤 [M33]。
+<More title={{ en: "What the knee-travel study measured", zh: "膝前移研究测了什么" }}>
+
+受试者用和自己体重一样重的杠铃蹲到大腿与地面平行。放上木板后，估算的膝负荷下降，髋负荷上升。研究没有追踪谁受了伤，所以它并不能直接说明受伤风险 [M33]。
 
 </More>
 
-<More title={{ en: "The boundary of this page", zh: "本页的边界" }}>
+<More title={{ en: "Signs that need a professional", zh: "需要找专业人员的信号" }}>
 
-模型解释附着路线，不诊断拉伤、肌腱疾病或排列问题。刺痛或持续疼痛、肿胀、淤青、突然无力或承重困难，都需要临床建议。恢复期如何选动作，应基于个别评估。
+剧烈或持续的疼痛、肿胀、淤青、突然无力，或者腿不敢承重，都应该去看医生或物理治疗师。恢复期间做哪些练习，应根据个人评估来定 [M34] [M35]。
 
 </More>
 

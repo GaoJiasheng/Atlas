@@ -3,7 +3,7 @@ id: "the-surface-layer"
 order: 2
 title:
   en: "The surface layer"
-  zh: "浅层肌肉"
+  zh: "浅层"
 sensitive: false
 state:
   view: "assembled"
@@ -13,77 +13,78 @@ state:
   cutaway: "none"
   pose: null
   layers: ["superficial", "intermediate", "deep", "skeleton", "neighbours", "body"]
-  ghost: ["body", "neighbours"]
-  labels: ["group:superficial", "group:intermediate", "group:deep"]
+  ghost: ["intermediate", "deep", "body", "neighbours"]
+  labels: ["rectus-femoris", "gluteus-maximus", "gastrocnemius-medial"]
   camera: {"position": [0, -0.36, 3.0], "target": [0, -0.35, -0.03], "fov": 30}
   summary:
-    en: "The visible muscles of the buttock, thigh and shin, and the tendons that carry their pull to the bones."
-    zh: "臀、大腿和胫前可见的肌肉，以及把拉力传到骨骼的肌腱。"
+    en: "The buttock, the front and back of the thigh, the calf and the shin: the muscles you can see and feel, and the tendons that carry their pull."
+    zh: "臀部、大腿前后、小腿肚和胫前：看得见、摸得到的肌肉，以及传递它们拉力的肌腱。"
   beats:
     - camera: "front"
       layers: ["superficial", "skeleton", "body"]
-      labels: ["rectus-femoris", "vastus-lateralis", "vastus-medialis"]
+      labels: ["rectus-femoris", "vastus-lateralis", "vastus-medialis", "patella"]
       caption:
-        en: "The front of the thigh: rectus femoris in the centre, vastus lateralis outside and vastus medialis inside. Their pull meets at the kneecap."
-        zh: "大腿前面：股直肌在中央，股外侧肌在外侧，股内侧肌在内侧。它们的拉力汇聚到髌骨。"
+        en: "The front of the thigh: rectus femoris in the middle, vastus lateralis outside and vastus medialis inside. Their pull meets at the kneecap."
+        zh: "大腿前面：股直肌在中间，股外侧肌在外侧，股内侧肌在内侧。它们的拉力汇聚到髌骨。"
     - camera: "hip"
       sites: ["rectus-femoris", "vastus-lateralis"]
-      labels: ["rectus-femoris", "pelvis", "femur"]
+      labels: ["rectus-femoris", "vastus-lateralis", "pelvis", "femur"]
       caption:
-        en: "Attachment marks show rectus femoris starting on the pelvis. The other quadriceps heads start on the femur, so only rectus femoris crosses the hip as well as the knee."
-        zh: "附着标记显示股直肌起于骨盆。其余股四头肌头起于股骨，因此只有股直肌同时跨髋和膝。"
+        en: "Rectus femoris starts on the pelvis; vastus lateralis starts on the femur. So rectus femoris crosses the hip as well as the knee, and the vasti cross only the knee."
+        zh: "股直肌起于骨盆，股外侧肌起于股骨。所以股直肌既跨髋也跨膝，三块股肌只跨膝。"
     - camera: "back"
       sites: ["gluteus-maximus"]
-      labels: ["gluteus-maximus", "iliotibial-tract", "femur"]
+      labels: ["gluteus-maximus", "iliotibial-tract", "femur", "pelvis"]
       caption:
-        en: "At the back of the hip, gluteus maximus pulls towards the femur and the iliotibial tract. Its broad fibres help extend the hip."
-        zh: "髋后方的臀大肌拉向股骨和髂胫束，宽大的纤维帮助伸髋。"
+        en: "Gluteus maximus runs from the back of the pelvis down and out. Most of its fibres join the iliotibial tract; the deepest reach the femur."
+        zh: "臀大肌从骨盆后面向外下方走。大部分纤维汇入髂胫束，最深的一部分止于股骨。"
     - camera: "back"
       sites: ["biceps-femoris-long", "semitendinosus"]
-      labels: ["biceps-femoris-long", "semitendinosus", "lower-leg"]
+      labels: ["biceps-femoris-long", "semitendinosus", "pelvis", "lower-leg"]
       caption:
-        en: "The long head of biceps femoris and semitendinosus descend from the sitting bone. Their tendons pass on different sides of the knee."
-        zh: "股二头肌长头和半腱肌从坐骨结节向下，肌腱分别从膝的外侧和内侧经过。"
+        en: "Two hamstrings start together on the sitting bone. Biceps femoris passes the outer side of the knee to the fibula; semitendinosus passes the inner side to the tibia."
+        zh: "两块腘绳肌一起起于坐骨结节。股二头肌经膝外侧到腓骨，半腱肌经膝内侧到胫骨。"
     - camera: "hip"
+      sites: ["sartorius", "tensor-fasciae-latae"]
       labels: ["sartorius", "tensor-fasciae-latae", "iliotibial-tract"]
       caption:
-        en: "Sartorius crosses the front diagonally. Tensor fasciae latae is a short muscle at the outer hip feeding the long iliotibial tract."
-        zh: "缝匠肌斜过大腿前面。阔筋膜张肌是髋外侧的短肌，把拉力传入长长的髂胫束。"
+        en: "Sartorius, the longest muscle in the body, crosses the thigh from the front of the pelvis to the inner knee. Tensor fasciae latae feeds the iliotibial tract."
+        zh: "缝匠肌是全身最长的肌肉，从骨盆前面斜跨大腿到膝内侧。阔筋膜张肌把拉力送进髂胫束。"
     - camera: "calf"
-      sites: ["gastrocnemius-medial"]
-      labels: ["gastrocnemius-medial", "gastrocnemius-lateral", "foot"]
+      sites: ["gastrocnemius-medial", "gastrocnemius-lateral"]
+      labels: ["gastrocnemius-medial", "gastrocnemius-lateral", "femur", "foot"]
       caption:
-        en: "Behind the shin, gastrocnemius has two heads. Its tendon continues behind the ankle to the heel, carrying the pull beyond the muscle belly."
-        zh: "胫后的腓肠肌分两头，肌腱经过踝后方到脚跟，把拉力传到肌腹以外。"
+        en: "Gastrocnemius has two heads that start on the femur, above the knee. Its tendon, the Achilles tendon, reaches the heel, so it crosses both knee and ankle."
+        zh: "腓肠肌的两个头起于膝上方的股骨，它的肌腱就是跟腱，一直到脚跟，所以它同时跨膝和踝。"
     - camera: {"position": [0.65, -0.58, 1.75], "target": [0.08, -0.63, 0], "fov": 30}
       sites: ["tibialis-anterior"]
       labels: ["tibialis-anterior", "lower-leg", "foot"]
       caption:
-        en: "From the front, tibialis anterior runs beside the shin. Its tendon crosses in front of the ankle to the inner midfoot, so its pull raises the forefoot."
-        zh: "从正面看，胫骨前肌沿胫旁向下，肌腱经过踝前方到足内侧，因此拉动时抬起前脚掌。"
+        en: "Tibialis anterior lies just outside the shin bone. Its tendon crosses the front of the ankle to the inner side of the foot, so it lifts the forefoot."
+        zh: "胫骨前肌紧贴在胫骨外侧。它的肌腱经过踝前方，到足内侧，所以它能抬起前脚掌。"
   index:
-    parts: ["gluteus-maximus", "tensor-fasciae-latae", "iliotibial-tract", "sartorius", "rectus-femoris", "vastus-lateralis", "vastus-medialis", "vastus-intermedius", "biceps-femoris-long", "semitendinosus", "gastrocnemius-medial", "gastrocnemius-lateral", "tibialis-anterior", "pelvis", "femur", "patella", "lower-leg", "foot"]
+    parts: ["gluteus-maximus", "rectus-femoris", "vastus-lateralis", "vastus-medialis", "biceps-femoris-long", "semitendinosus", "sartorius", "tensor-fasciae-latae", "iliotibial-tract", "gastrocnemius-medial", "gastrocnemius-lateral", "tibialis-anterior", "pelvis", "femur", "patella", "lower-leg", "foot"]
 ---
 
 <Lang en>
 
-Start at the front of the thigh. The <Term id="quadriceps">quadriceps</Term> has <Num s="M1">four</Num> heads: rectus femoris down the middle, vastus lateralis outside, vastus medialis inside and vastus intermedius hidden underneath. They converge on the quadriceps tendon at the **patella**, or kneecap. The <Term id="patellar-ligament">patellar ligament</Term> continues the pull to the tibia. Together they straighten the knee [M1].
+Start at the front of the thigh. The quadriceps has <Num s="M109">four</Num> heads: **rectus femoris** in the middle, **vastus lateralis** on the outside, **vastus medialis** on the inside and vastus intermedius hidden underneath. They join in one tendon on the **patella**, or kneecap, and the <Term id="patellar-ligament">patellar ligament</Term> carries the pull on to the tibia. Together they straighten the knee [M109] [M59]. Rectus femoris starts on the pelvis, the vasti on the femur, so only rectus femoris also crosses the hip.
 
-Rectus femoris starts on the pelvis; the other heads start on the femur. That distinction will matter when both hip and knee bend. With a relaxed knee, gently tightening the thigh lets you feel the broad front muscles without pressing on the kneecap.
+Behind the hip, **gluteus maximus** runs from the back of the pelvis and sacrum down and outward. Most of its fibres join the iliotibial tract; the deepest lower fibres reach the femur. It extends the hip, the movement that brings you upright from a bend [M109] [M59]. Put a hand on your buttock and push the leg back gently: the broad muscle firms up.
 
-Behind the hip, **gluteus maximus** has broad fibres running down and outward. Most join the iliotibial tract; deeper lower fibres reach the femur. Its pull helps you rise from a bent hip [M1]. Behind the thigh, the long head of biceps femoris ends mainly on the fibular head, whereas semitendinosus sends a long tendon to the inner tibia [M1].
+The back of the thigh holds the **hamstrings**. The long head of **biceps femoris** and **semitendinosus** start together on the sitting bone of the pelvis. Biceps femoris passes the outer side of the knee to the head of the fibula; semitendinosus sends a long, cord-like tendon to the inner side of the tibia [M109]. Bend your knee against resistance and you can feel both tendons behind it.
 
-**Sartorius** is the diagonal strap from the front of the pelvis to the inner upper tibia. **Tensor fasciae latae** is the short outer-hip muscle that enters the iliotibial tract. Below the knee, the gastrocnemius heads start on the femur and reach the heel through the Achilles tendon. Tibialis anterior starts beside the shin and reaches the inner midfoot [M1]. Follow those routes on the model: a tendon can carry a muscle's pull far beyond its visible belly. <FlyTo preset="calf">See the calf and shin</FlyTo>
+**Sartorius**, which Gray calls the longest muscle in the body, is a strap from the front of the pelvis to the inner side of the tibia; it helps lift and turn the thigh and bend the knee. **Tensor fasciae latae** is a short muscle at the outer front of the hip that pulls on the iliotibial tract [M109] [M59]. Below the knee, the two heads of **gastrocnemius** start on the femur and reach the heel through the Achilles tendon, and **tibialis anterior** lifts the forefoot [M109] [M59]. <FlyTo preset="calf">See the calf</FlyTo>
 
-<More title={{ en: "The diagonal strap", zh: "斜着走的长带" }}>
+<More title={{ en: "Why the long strap", zh: "为什么是一条长带" }}>
 
-Sartorius assists hip flexion, abduction and outward rotation, and knee flexion. With the knee bent it can help turn the lower leg inward. This combination resembles bringing the foot towards the opposite thigh, but do not force a cross-legged position [M1].
+Sartorius crosses the front of the hip and the inner side of the knee. Pulling on both at once, it helps flex, abduct and turn the thigh outward at the hip and bend the knee, the combination you use to bring one foot up onto the opposite knee [M109] [M59].
 
 </More>
 
-<More title={{ en: "A muscle belly is only part of the route", zh: "肌腹不是整条路线" }}>
+<More title={{ en: "A belly is only part of a muscle", zh: "肌腹只是肌肉的一部分" }}>
 
-The gastrocnemius heads begin above the knee and their tendon reaches behind the ankle. Tibialis anterior crosses in front of the ankle. Finding the fleshy part tells you where a muscle is; following its tendon explains which joint it can move [M1].
+The bulge of the calf is high up the leg, but gastrocnemius acts on the ankle through a tendon that runs all the way to the heel. Tibialis anterior's belly lies beside the shin; its tendon crosses the front of the ankle. Finding the belly tells you where a muscle is; following its tendon tells you which joint it moves.
 
 </More>
 
@@ -91,23 +92,23 @@ The gastrocnemius heads begin above the knee and their tendon reaches behind the
 
 <Lang zh>
 
-先看大腿前面。<Term id="quadriceps">股四头肌</Term>有<Num s="M1">四个</Num>头：股直肌在中央，股外侧肌在外侧，股内侧肌在内侧，股中间肌藏在下面。它们汇入股四头肌腱，到达膝盖前方的**髌骨**；<Term id="patellar-ligament">髌韧带</Term>再把拉力传到胫骨，让膝伸直 [M1]。
+先看大腿前面。股四头肌有<Num s="M109">四个</Num>头：中间是**股直肌**，外侧是**股外侧肌**，内侧是**股内侧肌**，股中间肌藏在它们下面。四个头合成一条肌腱止于**髌骨**，<Term id="patellar-ligament">髌韧带</Term>再把拉力传到胫骨，一起把膝伸直 [M109] [M59]。股直肌起于骨盆，三块股肌起于股骨，所以只有股直肌还跨过髋关节。
 
-股直肌起于骨盆，其余头起于股骨。同时屈髋和屈膝时，这个区别就很重要。膝放松后轻轻绷紧大腿，能感觉前方大片肌肉变硬，不必按压髌骨。
+髋后面是**臀大肌**，从骨盆和骶骨后面向外下方走。大部分纤维汇入髂胫束，最深的下部纤维止于股骨。它伸髋，也就是把弯着的身体带回直立的那个动作 [M109] [M59]。手放在臀部，轻轻把腿往后推，掌下这一大片肌肉就会变硬。
 
-髋后面的**臀大肌**纤维向外下行，大部分接入髂胫束，深层下部到达股骨，帮助身体从屈髋位站起。大腿后面的**股二头肌长头**主要止于腓骨头，**半腱肌**则以长腱到达胫骨内侧 [M1]。
+大腿后面是**腘绳肌**。**股二头肌**长头和**半腱肌**一起起于骨盆的坐骨结节。股二头肌从膝外侧经过，止于腓骨头；半腱肌发出一条细长如绳的肌腱，从膝内侧经过，止于胫骨 [M109]。对着阻力屈膝，能在膝后摸到这两条肌腱。
 
-**缝匠肌**像斜带，从骨盆前方到胫骨上端内侧。**阔筋膜张肌**在髋外侧，向下进入髂胫束。膝下方，腓肠肌两头从股骨出发，经跟腱到脚跟；胫骨前肌从胫旁走到足内侧 [M1]。空心圆标起点，实心圆标止点。它们只代表宽附着中的位置，不是整块肌肉仅有的小点。沿模型追踪这些路线，就能看到肌腱把拉力带到肌腹以外多远，也能分清肌腹和连接骨头的细长部分。<FlyTo preset="calf">看小腿肚和胫前</FlyTo>
+**缝匠肌**被格雷称为全身最长的肌肉，它是一条长带，从骨盆前面斜跨到胫骨内侧，帮助抬腿、转动大腿和屈膝。**阔筋膜张肌**是髋前外侧的一块短肌，拉着髂胫束 [M109] [M59]。膝以下，**腓肠肌**的两个头起于股骨，经跟腱到达脚跟；**胫骨前肌**负责抬起前脚掌 [M109] [M59]。<FlyTo preset="calf">看小腿肚</FlyTo>
 
-<More title={{ en: "The diagonal strap", zh: "斜着走的长带" }}>
+<More title={{ en: "Why the long strap", zh: "为什么是一条长带" }}>
 
-缝匠肌协助屈髋、外展、外旋和屈膝；屈膝时还能帮助小腿内旋。这种组合像把脚移向对侧大腿，但不要强压盘腿的位置 [M1]。
+缝匠肌横过髋的前面和膝的内侧，同时拉动两个关节：在髋部帮助屈髋、外展和外旋，在膝部帮助屈膝。把一只脚搭到另一侧膝上，用的就是这一组动作 [M109] [M59]。
 
 </More>
 
-<More title={{ en: "A muscle belly is only part of the route", zh: "肌腹不是整条路线" }}>
+<More title={{ en: "A belly is only part of a muscle", zh: "肌腹只是肌肉的一部分" }}>
 
-腓肠肌两头从膝上方开始，肌腱经过踝后方；胫骨前肌的腱则经过踝前方。找到有肉的肌腹能认识位置，追踪肌腱才知道它能拉动哪个关节 [M1]。
+小腿肚的隆起位置很高，但腓肠肌是通过一条一直通到脚跟的肌腱来拉动踝关节的。胫骨前肌的肌腹在胫骨旁，肌腱则经过踝的前面。找到肌腹，知道肌肉在哪里；顺着肌腱，才知道它拉动哪个关节。
 
 </More>
 

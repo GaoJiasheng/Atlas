@@ -41,7 +41,7 @@
         },
         {
           "en": "Keep the whole foot planted and bend hips and knees together. Let the knees travel in the direction of the toes as the hips descend.",
-          "zh": "全脚掌踩稳，同时屈髋屈膝。髋下降时，膝沿脚尖方向移动。"
+          "zh": "全脚掌踩稳，同时屈髋屈膝；髋往下走时，膝顺着脚尖方向移动。"
         },
         {
           "en": "Lower only while you can keep a steady spine and balanced feet. The knees may pass the toes; do not force them back by folding the trunk.",
@@ -98,6 +98,10 @@
       ],
       "cautions": [
         {
+          "en": "The 3D model keeps the pelvis fixed, so its feet lift instead of the hips sinking. In the real exercise the feet stay flat and the hips travel down and back; follow the sketch and the steps.",
+          "zh": "3D 模型把骨盆固定住了，所以是脚抬起来，而不是臀部往下沉。真实动作里双脚平踩地面，臀部向下、向后移动；请按示意图和步骤来做。"
+        },
+        {
           "en": "Practise the rack exit with a coach and use correctly set catches; stop for sharp knee, hip or back pain.",
           "zh": "请教练指导出杠并调好保护杠；膝、髋或背出现刺痛就停下。"
         },
@@ -139,19 +143,19 @@
               },
               "hip.l": {
                 "flexion": 0,
-                "abduction": 10,
+                "abduction": 8,
                 "external-rotation": 10
               },
               "hip.r": {
                 "flexion": 0,
-                "abduction": 10,
+                "abduction": 8,
                 "external-rotation": 10
               },
               "knee.l": {
-                "flexion": 5
+                "flexion": 3
               },
               "knee.r": {
-                "flexion": 5
+                "flexion": 3
               },
               "ankle.l": {
                 "dorsiflexion": 0
@@ -172,29 +176,29 @@
             "phase": "end",
             "joints": {
               "trunk": {
-                "flexion": 0
+                "flexion": 25
               },
               "hip.l": {
-                "flexion": 90,
-                "abduction": 10,
+                "flexion": 68,
+                "abduction": 8,
                 "external-rotation": 10
               },
               "hip.r": {
-                "flexion": 90,
-                "abduction": 10,
+                "flexion": 68,
+                "abduction": 8,
                 "external-rotation": 10
               },
               "knee.l": {
-                "flexion": 90
+                "flexion": 70
               },
               "knee.r": {
-                "flexion": 90
+                "flexion": 70
               },
               "ankle.l": {
-                "dorsiflexion": 15
+                "dorsiflexion": 22
               },
               "ankle.r": {
-                "dorsiflexion": 15
+                "dorsiflexion": 22
               }
             },
             "contract": {
@@ -214,8 +218,8 @@
         ]
       },
       "sources": [
-        "M1",
-        "M2",
+        "M109",
+        "M59",
         "M33",
         "M36",
         "M23",
@@ -316,6 +320,10 @@
       ],
       "cautions": [
         {
+          "en": "The 3D model keeps the pelvis fixed, so its feet lift instead of the hips sinking. In the real exercise the feet stay flat and the hips travel down and back; follow the sketch and the steps.",
+          "zh": "3D 模型把骨盆固定住了，所以是脚抬起来，而不是臀部往下沉。真实动作里双脚平踩地面，臀部向下、向后移动；请按示意图和步骤来做。"
+        },
+        {
           "en": "Put the dumbbell down before it slips; do not trap fingers between its head and the floor.",
           "zh": "哑铃快滑脱时先放下，别让手指夹在哑铃头和地面之间。"
         },
@@ -347,17 +355,17 @@
               },
               "hip.l": {
                 "flexion": 0,
-                "abduction": 10
+                "abduction": 8
               },
               "hip.r": {
                 "flexion": 0,
-                "abduction": 10
+                "abduction": 8
               },
               "knee.l": {
-                "flexion": 5
+                "flexion": 3
               },
               "knee.r": {
-                "flexion": 5
+                "flexion": 3
               },
               "ankle.l": {
                 "dorsiflexion": 0
@@ -378,27 +386,27 @@
             "phase": "end",
             "joints": {
               "trunk": {
-                "flexion": 0
+                "flexion": 15
               },
               "hip.l": {
-                "flexion": 80,
-                "abduction": 10
+                "flexion": 65,
+                "abduction": 8
               },
               "hip.r": {
-                "flexion": 80,
-                "abduction": 10
+                "flexion": 65,
+                "abduction": 8
               },
               "knee.l": {
-                "flexion": 90
+                "flexion": 72
               },
               "knee.r": {
-                "flexion": 90
+                "flexion": 72
               },
               "ankle.l": {
-                "dorsiflexion": 15
+                "dorsiflexion": 22
               },
               "ankle.r": {
-                "dorsiflexion": 15
+                "dorsiflexion": 22
               }
             },
             "contract": {
@@ -418,8 +426,8 @@
         ]
       },
       "sources": [
-        "M1",
-        "M2",
+        "M109",
+        "M59",
         "M37",
         "M23",
         "M24",
@@ -526,6 +534,10 @@
       ],
       "cautions": [
         {
+          "en": "The 3D model keeps the pelvis fixed, so its feet lift instead of the hips sinking. In the real exercise the feet stay flat and the hips travel down and back; follow the sketch and the steps.",
+          "zh": "3D 模型把骨盆固定住了，所以是脚抬起来，而不是臀部往下沉。真实动作里双脚平踩地面，臀部向下、向后移动；请按示意图和步骤来做。"
+        },
+        {
           "en": "Use a support and shorter depth if balance is uncertain; stop if knee or hip pain appears.",
           "zh": "平衡不稳就扶稳、减小深度；膝或髋疼就停下。"
         },
@@ -562,10 +574,10 @@
                 "flexion": 0
               },
               "knee.l": {
-                "flexion": 5
+                "flexion": 3
               },
               "knee.r": {
-                "flexion": 5
+                "flexion": 3
               },
               "ankle.l": {
                 "dorsiflexion": 0
@@ -586,25 +598,25 @@
             "phase": "end",
             "joints": {
               "trunk": {
-                "flexion": 0
+                "flexion": 5
               },
               "hip.l": {
-                "flexion": 70
+                "flexion": 62
               },
               "hip.r": {
-                "extension": 10
+                "extension": 12
               },
               "knee.l": {
-                "flexion": 85
+                "flexion": 72
               },
               "knee.r": {
-                "flexion": 85
+                "flexion": 65
               },
               "ankle.l": {
                 "dorsiflexion": 10
               },
               "ankle.r": {
-                "plantarflexion": 15
+                "plantarflexion": 20
               }
             },
             "contract": {
@@ -624,8 +636,8 @@
         ]
       },
       "sources": [
-        "M1",
-        "M2",
+        "M109",
+        "M59",
         "M45",
         "M23",
         "M24",
@@ -695,7 +707,7 @@
         },
         {
           "en": "The long leg stays quiet while the bent leg controls the return.",
-          "zh": "较直的腿保持稳定，由弯曲腿控制回位。"
+          "zh": "伸直的那条腿保持稳定，由弯曲的腿控制回位。"
         }
       ],
       "mistakes": [
@@ -729,6 +741,10 @@
         }
       ],
       "cautions": [
+        {
+          "en": "The 3D model keeps the pelvis fixed, so its feet lift instead of the hips sinking. In the real exercise the feet stay flat and the hips travel down and back; follow the sketch and the steps.",
+          "zh": "3D 模型把骨盆固定住了，所以是脚抬起来，而不是臀部往下沉。真实动作里双脚平踩地面，臀部向下、向后移动；请按示意图和步骤来做。"
+        },
         {
           "en": "Stop for sharp groin pain; reduce step width rather than forcing the inner thigh.",
           "zh": "腹股沟刺痛就停；缩小步幅，不要硬拉大腿内侧。"
@@ -766,10 +782,10 @@
                 "flexion": 0
               },
               "knee.l": {
-                "flexion": 5
+                "flexion": 3
               },
               "knee.r": {
-                "flexion": 5
+                "flexion": 3
               },
               "ankle.l": {
                 "dorsiflexion": 0
@@ -791,24 +807,24 @@
             "phase": "end",
             "joints": {
               "trunk": {
-                "flexion": 0
+                "flexion": 18
               },
               "hip.l": {
-                "flexion": 65,
-                "abduction": 25
+                "flexion": 55,
+                "abduction": 20
               },
               "hip.r": {
-                "flexion": 10,
-                "abduction": 25
+                "flexion": 18,
+                "abduction": 20
               },
               "knee.l": {
-                "flexion": 80
+                "flexion": 70
               },
               "knee.r": {
-                "flexion": 5
+                "flexion": 4
               },
               "ankle.l": {
-                "dorsiflexion": 10
+                "dorsiflexion": 15
               },
               "ankle.r": {
                 "dorsiflexion": 0
@@ -832,8 +848,8 @@
         ]
       },
       "sources": [
-        "M1",
-        "M2",
+        "M109",
+        "M59",
         "M38",
         "M23",
         "M24",
@@ -934,6 +950,10 @@
       ],
       "cautions": [
         {
+          "en": "The 3D model shows the hinge by tipping the whole body forward at the hips; it has no arms or bar. Follow the sketch and the steps for the real exercise.",
+          "zh": "3D 模型以髋为轴把整个身体向前倾来表示髋铰链，没有手臂，也没有杠铃。真实动作请按示意图和步骤来做。"
+        },
+        {
           "en": "Stop for back pain, numbness or a sharp pull in the posterior thigh. Have a coach check the hinge before adding load.",
           "zh": "背痛、麻木或大腿后侧突然锐痛就停；加重前请教练检查髋铰链。"
         },
@@ -964,22 +984,22 @@
                 "flexion": 0
               },
               "hip.l": {
-                "flexion": 0
+                "flexion": 4
               },
               "hip.r": {
-                "flexion": 0
+                "flexion": 4
               },
               "knee.l": {
-                "flexion": 15
+                "flexion": 8
               },
               "knee.r": {
-                "flexion": 15
+                "flexion": 8
               },
               "ankle.l": {
-                "dorsiflexion": 0
+                "dorsiflexion": 4
               },
               "ankle.r": {
-                "dorsiflexion": 0
+                "dorsiflexion": 4
               }
             },
             "contract": {
@@ -993,25 +1013,25 @@
             "phase": "end",
             "joints": {
               "trunk": {
-                "flexion": 0
+                "flexion": 60
               },
               "hip.l": {
-                "flexion": 70
+                "flexion": -55
               },
               "hip.r": {
-                "flexion": 70
+                "flexion": -55
               },
               "knee.l": {
-                "flexion": 15
+                "flexion": 12
               },
               "knee.r": {
-                "flexion": 15
+                "flexion": 12
               },
               "ankle.l": {
-                "dorsiflexion": 5
+                "dorsiflexion": 7
               },
               "ankle.r": {
-                "dorsiflexion": 5
+                "dorsiflexion": 7
               }
             },
             "contract": {
@@ -1030,8 +1050,8 @@
         ]
       },
       "sources": [
-        "M1",
-        "M2",
+        "M109",
+        "M59",
         "M39",
         "M23",
         "M24",
@@ -1155,19 +1175,19 @@
             "phase": "start",
             "joints": {
               "trunk": {
-                "flexion": 0
+                "flexion": -20
               },
               "hip.l": {
-                "flexion": 85
+                "flexion": 62
               },
               "hip.r": {
-                "flexion": 85
+                "flexion": 62
               },
               "knee.l": {
-                "flexion": 10
+                "flexion": 15
               },
               "knee.r": {
-                "flexion": 10
+                "flexion": 15
               },
               "ankle.l": {
                 "dorsiflexion": 0
@@ -1187,19 +1207,19 @@
             "phase": "end",
             "joints": {
               "trunk": {
-                "flexion": 0
+                "flexion": -20
               },
               "hip.l": {
-                "flexion": 85
+                "flexion": 62
               },
               "hip.r": {
-                "flexion": 85
+                "flexion": 62
               },
               "knee.l": {
-                "flexion": 90
+                "flexion": 85
               },
               "knee.r": {
-                "flexion": 90
+                "flexion": 85
               },
               "ankle.l": {
                 "dorsiflexion": 0
@@ -1221,11 +1241,22 @@
           0.5,
           2,
           0.5
+        ],
+        "equipment": [
+          {
+            "kind": "bench",
+            "incline": 70,
+            "at": [
+              0,
+              -0.12,
+              -0.3
+            ]
+          }
         ]
       },
       "sources": [
-        "M1",
-        "M2",
+        "M109",
+        "M59",
         "M40",
         "M44",
         "M23",
@@ -1421,8 +1452,8 @@
         ]
       },
       "sources": [
-        "M1",
-        "M2",
+        "M109",
+        "M59",
         "M46",
         "M23",
         "M24",
@@ -1617,8 +1648,8 @@
         ]
       },
       "sources": [
-        "M1",
-        "M2",
+        "M109",
+        "M59",
         "M44",
         "M23",
         "M24",
@@ -1672,7 +1703,7 @@
       "cues": [
         {
           "en": "Rise straight up, not onto the outer toes.",
-          "zh": "直向上提，不滚到外侧脚趾。"
+          "zh": "笔直向上提，不要滚到外侧脚趾上。"
         },
         {
           "en": "Let the ankles move while the knees stay quiet.",
@@ -1805,8 +1836,8 @@
         ]
       },
       "sources": [
-        "M1",
-        "M2",
+        "M109",
+        "M59",
         "M41",
         "M23",
         "M24",
@@ -1926,25 +1957,25 @@
             "phase": "start",
             "joints": {
               "trunk": {
-                "flexion": 0
+                "flexion": -20
               },
               "hip.l": {
-                "flexion": 90
+                "flexion": 60
               },
               "hip.r": {
-                "flexion": 90
+                "flexion": 60
               },
               "knee.l": {
-                "flexion": 90
+                "flexion": 82
               },
               "knee.r": {
-                "flexion": 90
+                "flexion": 82
               },
               "ankle.l": {
-                "plantarflexion": 0
+                "dorsiflexion": 10
               },
               "ankle.r": {
-                "plantarflexion": 0
+                "dorsiflexion": 10
               }
             },
             "contract": {
@@ -1957,25 +1988,25 @@
             "phase": "end",
             "joints": {
               "trunk": {
-                "flexion": 0
+                "flexion": -20
               },
               "hip.l": {
-                "flexion": 90
+                "flexion": 60
               },
               "hip.r": {
-                "flexion": 90
+                "flexion": 60
               },
               "knee.l": {
-                "flexion": 90
+                "flexion": 82
               },
               "knee.r": {
-                "flexion": 90
+                "flexion": 82
               },
               "ankle.l": {
-                "plantarflexion": 25
+                "plantarflexion": 20
               },
               "ankle.r": {
-                "plantarflexion": 25
+                "plantarflexion": 20
               }
             },
             "contract": {
@@ -1990,11 +2021,22 @@
           0.5,
           2,
           0.5
+        ],
+        "equipment": [
+          {
+            "kind": "bench",
+            "incline": 70,
+            "at": [
+              0,
+              -0.12,
+              -0.3
+            ]
+          }
         ]
       },
       "sources": [
-        "M1",
-        "M2",
+        "M109",
+        "M59",
         "M41",
         "M23",
         "M24",
@@ -2173,8 +2215,8 @@
         ]
       },
       "sources": [
-        "M1",
-        "M2",
+        "M109",
+        "M59",
         "M43",
         "M23",
         "M24",
@@ -2225,7 +2267,7 @@
         },
         {
           "en": "Finish before the forefeet begin to drop or balance becomes rushed. Put the whole feet down before turning around.",
-          "zh": "前脚掌开始下掉或平衡变急前结束；先全脚掌落地，再转身。"
+          "zh": "前脚掌开始往下掉、或者要急着找平衡之前就结束；先全脚掌落地，再转身。"
         }
       ],
       "cues": [
@@ -2235,7 +2277,7 @@
         },
         {
           "en": "Small steps make control easier to notice.",
-          "zh": "小步更容易留意控制。"
+          "zh": "步子小，更容易控制。"
         }
       ],
       "mistakes": [
@@ -2360,8 +2402,8 @@
         ]
       },
       "sources": [
-        "M1",
-        "M2",
+        "M109",
+        "M59",
         "M42",
         "M23",
         "M24",
@@ -2477,19 +2519,19 @@
             "phase": "start",
             "joints": {
               "trunk": {
-                "flexion": 0
+                "flexion": -20
               },
               "hip.l": {
-                "flexion": 90
+                "flexion": 68
               },
               "hip.r": {
-                "flexion": 70
+                "flexion": 55
               },
               "knee.l": {
-                "flexion": 10
+                "flexion": 8
               },
               "knee.r": {
-                "flexion": 90
+                "flexion": 85
               },
               "ankle.l": {
                 "plantarflexion": 10
@@ -2506,19 +2548,19 @@
             "phase": "end",
             "joints": {
               "trunk": {
-                "flexion": 0
+                "flexion": -20
               },
               "hip.l": {
-                "flexion": 90
+                "flexion": 68
               },
               "hip.r": {
-                "flexion": 70
+                "flexion": 55
               },
               "knee.l": {
-                "flexion": 10
+                "flexion": 8
               },
               "knee.r": {
-                "flexion": 90
+                "flexion": 85
               },
               "ankle.l": {
                 "dorsiflexion": 15
@@ -2537,11 +2579,21 @@
           0.5,
           2,
           0.5
+        ],
+        "equipment": [
+          {
+            "kind": "floor",
+            "at": [
+              0,
+              -0.15,
+              0.35
+            ]
+          }
         ]
       },
       "sources": [
-        "M1",
-        "M2",
+        "M109",
+        "M59",
         "M41",
         "M23",
         "M24",

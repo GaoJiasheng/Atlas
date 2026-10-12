@@ -14,85 +14,86 @@ state:
   pose: null
   layers: ["superficial", "intermediate", "deep", "skeleton", "neighbours", "body"]
   ghost: ["body", "neighbours"]
-  labels: ["group:superficial", "group:intermediate", "group:deep"]
-  camera: {"position": [0.35, -0.25, -2.95], "target": [0, -0.35, -0.05], "fov": 30}
+  labels: ["rectus-femoris", "biceps-femoris-long", "gastrocnemius-medial"]
+  camera: {"position": [3.4, 0.05, 0.9], "target": [0.05, -0.42, 0.02], "fov": 24}
   summary:
-    en: "Hip, knee and ankle positions interact: a muscle crossing two joints responds to both of them."
-    zh: "髋、膝和踝的位置相互影响：跨两个关节的肌肉同时受两端位置影响。"
+    en: "Hip, knee and ankle movements, and the muscles that cross two joints at once: the hamstrings, rectus femoris and gastrocnemius."
+    zh: "髋、膝、踝的动作，以及同时跨两个关节的肌肉：腘绳肌、股直肌和腓肠肌。"
   beats:
-    - run: false
-      pose: "hip-extension"
-      labels: ["gluteus-maximus", "biceps-femoris-long"]
+    - pose: "hip-flexion"
+      camera: "side"
+      ghost: ["body"]
+      labels: ["rectus-femoris", "sartorius", "psoas-major", "iliacus"]
       caption:
-        en: "The hip-extension pose shortens gluteus maximus and the long hamstrings along their fibres. This is a teaching illustration of contraction, not a measurement of force or effort."
-        zh: "伸髋姿态让臀大肌和长腘绳肌沿纤维方向短缩。这是收缩的教学示意，不是力量或用力程度的测量。"
+        en: "Hip flexion: the thigh comes forward. Iliopsoas, in grey, flexes the hip, helped by rectus femoris and sartorius, which cross its front."
+        zh: "屈髋：大腿向前抬。灰色的髂腰肌负责屈髋，跨过髋前面的股直肌和缝匠肌也来帮忙。"
     - pose: "hip-extension"
-      labels: ["gluteus-maximus", "biceps-femoris-long", "semitendinosus"]
+      camera: "side"
+      labels: ["gluteus-maximus", "biceps-femoris-long", "semitendinosus", "adductor-magnus"]
       caption:
-        en: "Hip extension: gluteus maximus and the long hamstrings pull the thigh back. The short head of biceps femoris cannot extend the hip because it never crosses it."
-        zh: "伸髋：臀大肌和长腘绳肌把大腿往后拉。股二头肌短头不跨髋，不能伸髋。"
+        en: "Hip extension: the thigh goes back. Gluteus maximus and the hamstrings pull from behind the hip; the back part of adductor magnus helps."
+        zh: "伸髋：大腿向后摆。臀大肌和腘绳肌从髋后方拉，大收肌后部也帮忙。"
     - pose: "hip-abduction"
-      camera: "hip"
-      ghost: ["gluteus-maximus", "body", "neighbours"]
-      labels: ["gluteus-medius", "gluteus-minimus", "pelvis"]
-      caption:
-        en: "Hip abduction: gluteus medius and minimus pull the thigh sideways. With a planted foot, their pull helps steady the pelvis instead."
-        zh: "髋外展：臀中肌和臀小肌把大腿拉向侧面。脚踩地时，同样的拉力帮助稳住骨盆。"
-    - pose: "hip-adduction"
-      camera: "deep-view"
-      ghost: ["superficial", "body", "neighbours"]
-      labels: ["adductor-longus", "adductor-brevis", "adductor-magnus"]
-      caption:
-        en: "Hip adduction: the inner-thigh muscles pull the thigh back towards the middle. The large adductor also has fibres that help extend the hip."
-        zh: "髋内收：大腿内侧肌把大腿拉回中线。大收肌还有帮助伸髋的纤维。"
-    - pose: "knee-extension"
       camera: "front"
-      labels: ["rectus-femoris", "vastus-lateralis", "vastus-medialis"]
+      ghost: ["gluteus-maximus", "body", "neighbours"]
+      labels: ["gluteus-medius", "gluteus-minimus", "tensor-fasciae-latae"]
       caption:
-        en: "Knee extension: the quadriceps pull through the kneecap. Rectus femoris also crosses the hip; the three vasti do not."
-        zh: "伸膝：股四头肌经髌骨传递拉力。股直肌还跨髋，其余三块股肌不跨髋。"
+        en: "Hip abduction: the thigh swings out. Gluteus medius and minimus pull from above the hip. Standing on one leg, the same pull keeps the pelvis level."
+        zh: "髋外展：大腿向外摆。臀中肌和臀小肌从髋上方拉。单腿站立时，同样的拉力让骨盆保持水平。"
+    - pose: "knee-extension"
+      camera: "side"
+      labels: ["rectus-femoris", "vastus-lateralis", "vastus-medialis", "patella"]
+      caption:
+        en: "Knee extension: the quadriceps pull through the kneecap and straighten the knee. Rectus femoris crosses the hip too, so it also helps lift the thigh."
+        zh: "伸膝：股四头肌经髌骨拉动，把膝伸直。股直肌还跨过髋，所以也帮着抬大腿。"
     - pose: "knee-flexion"
-      camera: "back"
+      camera: "side"
       ghost: ["body", "neighbours", "gluteus-maximus"]
       labels: ["biceps-femoris-long", "biceps-femoris-short", "semitendinosus", "semimembranosus"]
       caption:
-        en: "Knee flexion: both biceps heads and the medial hamstrings pull the heel back. Bending the hip at the same time changes the length of the long hamstrings."
-        zh: "屈膝：股二头肌两头和内侧腘绳肌把脚跟往后拉。同时屈髋会改变长腘绳肌的长度。"
+        en: "Knee flexion: the hamstrings pull the heel up behind. All four parts bend the knee, but only the short head of biceps femoris acts on the knee alone."
+        zh: "屈膝：腘绳肌把脚跟往后上方拉。四个部分都屈膝，但只有股二头肌短头只作用于膝。"
+    - pose: "knee-flexed-hip-extension"
+      camera: "side"
+      labels: ["gluteus-maximus", "biceps-femoris-long", "semitendinosus"]
+      caption:
+        en: "The thigh goes back with the knee bent. The hamstrings are now shortened at the knee end as well as the hip end; gluteus maximus crosses only the hip, so the knee makes no difference to it."
+        zh: "屈着膝把大腿往后摆。这时腘绳肌在髋端和膝端都已缩短；臀大肌只跨髋，膝弯不弯对它没有影响。"
     - pose: "ankle-plantarflexion"
       camera: "calf"
-      labels: ["gastrocnemius-medial", "gastrocnemius-lateral", "soleus"]
+      labels: ["gastrocnemius-medial", "gastrocnemius-lateral", "soleus", "foot"]
       caption:
-        en: "Ankle plantarflexion: gastrocnemius and soleus pull through the Achilles tendon. Bending the knee shortens gastrocnemius at its upper end; soleus does not cross the knee."
-        zh: "踝跖屈：腓肠肌和比目鱼肌经跟腱拉动。屈膝让腓肠肌上端缩短，比目鱼肌却不跨膝。"
+        en: "Plantarflexion: the foot points down and the heel rises. Gastrocnemius and soleus pull together through the Achilles tendon."
+        zh: "跖屈：脚尖向下，脚跟抬起。腓肠肌和比目鱼肌经跟腱一起拉。"
     - pose: "ankle-dorsiflexion"
       camera: {"position": [0.65, -0.58, 1.75], "target": [0.08, -0.63, 0], "fov": 30}
       labels: ["tibialis-anterior", "lower-leg", "foot"]
       caption:
-        en: "Ankle dorsiflexion: tibialis anterior pulls the forefoot up. Slowly lowering it uses the same muscle while it lengthens."
-        zh: "踝背屈：胫骨前肌把前脚掌往上拉。慢慢放下时，同一块肌肉一边用力一边被拉长。"
+        en: "Dorsiflexion: tibialis anterior pulls the forefoot up towards the shin. Lowering it slowly, the same muscle keeps working while it lengthens."
+        zh: "背屈：胫骨前肌把前脚掌拉向小腿。慢慢放下时，同一块肌肉一边被拉长一边继续用力。"
   index:
-    parts: ["gluteus-maximus", "gluteus-medius", "gluteus-minimus", "adductor-longus", "adductor-brevis", "adductor-magnus", "rectus-femoris", "vastus-lateralis", "vastus-medialis", "vastus-intermedius", "biceps-femoris-long", "biceps-femoris-short", "semitendinosus", "semimembranosus", "gastrocnemius-medial", "gastrocnemius-lateral", "soleus", "tibialis-anterior", "pelvis", "patella", "foot", "lower-leg"]
+    parts: ["psoas-major", "iliacus", "rectus-femoris", "sartorius", "gluteus-maximus", "biceps-femoris-long", "biceps-femoris-short", "semitendinosus", "semimembranosus", "adductor-magnus", "gluteus-medius", "gluteus-minimus", "vastus-lateralis", "vastus-medialis", "gastrocnemius-medial", "gastrocnemius-lateral", "soleus", "tibialis-anterior"]
 ---
 
 <Lang en>
 
-Watch the hip extend and the thigh move back. Gluteus maximus and the long hamstrings pull behind the joint. At the side, gluteus medius and minimus draw the thigh outward; the inner-thigh adductors draw it inward. With the foot planted, these muscles also help control the pelvis over the leg [M1].
+At the hip, the thigh can swing forward, back, out and in. Iliopsoas, rectus femoris and sartorius cross the front of the hip and bring the thigh forward. Gluteus maximus and the hamstrings cross the back and take it back. Gluteus medius and minimus sit above the hip and swing it out; the adductors pull it in [M109] [M59]. With the foot on the ground, the same muscles move or steady the pelvis over the leg instead.
 
-The important distinction is a <Term id="biarticular-muscle">biarticular muscle</Term>: one crossing <Num s="M1">two</Num> joints. Biceps femoris long head, semitendinosus and semimembranosus cross both hip and knee. **Biceps femoris short head crosses only the knee**, so a hip hinge cannot directly train its hip-extension action: it has none. Rectus femoris crosses hip and knee; gastrocnemius crosses knee and ankle [M1].
+The key idea in this chapter is the <Term id="biarticular-muscle">biarticular muscle</Term>, one that crosses <Num s="M109">two</Num> joints. **The hamstrings, rectus femoris and gastrocnemius each cross two joints.** The long head of biceps femoris, semitendinosus and semimembranosus cross the back of both hip and knee. Rectus femoris crosses the front of both hip and knee. Gastrocnemius crosses the back of both knee and ankle [M109] [M59]. The short head of biceps femoris, the three vasti and soleus each cross only one joint.
 
-Hip flexion lengthens the long hamstrings at their upper end; knee flexion shortens them at their lower end. The two changes can partly offset each other. For rectus femoris, hip flexion tends to shorten it while knee flexion tends to lengthen it. Muscle length therefore cannot be read from a knee angle alone [M1].
+This matters because the length of a two-joint muscle depends on both joints. Bending the hip stretches the hamstrings at the top; bending the knee slackens them at the bottom. In a Romanian deadlift the hip bends while the knee stays almost straight, so the hamstrings end up long; in a seated leg curl the knee bends, so they end up short [M109]. Rectus femoris is the mirror image: bending the knee stretches it, bending the hip slackens it.
 
-At the ankle, gastrocnemius and soleus point the foot down, called <Term id="plantarflexion">plantarflexion</Term>. Bending the knee shortens gastrocnemius but does not shorten soleus across that joint. Tibialis anterior lifts the forefoot in <Term id="dorsiflexion">dorsiflexion</Term> [M1]. A working muscle can also lengthen under tension, the <Term id="eccentric-phase">eccentric phase</Term>, as you lower the forefoot slowly. The stripes indicate contraction, not a force reading. <FlyTo preset="calf">Compare the ankle muscles</FlyTo>
+At the ankle, gastrocnemius and soleus point the foot down and lift the heel, called <Term id="plantarflexion">plantarflexion</Term>. Bending the knee slackens gastrocnemius at its upper end but not soleus, which starts below the knee. Tibialis anterior lifts the forefoot, called <Term id="dorsiflexion">dorsiflexion</Term> [M109] [M59]. When you lower the forefoot slowly, it keeps working while it lengthens: the <Term id="eccentric-phase">eccentric phase</Term> of the movement. <FlyTo preset="calf">See the ankle muscles</FlyTo>
 
-<More title={{ en: "Same muscle, different starting positions", zh: "同一块肌肉，不同起始位置" }}>
+<More title={{ en: "Same calf, two positions", zh: "同一个小腿，两种姿势" }}>
 
-A straight-knee calf raise and a bent-knee calf raise change gastrocnemius length before the ankle moves. Bending the knee does not switch gastrocnemius off, and soleus still works in both positions. Think about the whole attachment route [M1].
+A calf raise with straight knees and one with bent knees both use gastrocnemius and soleus. Bending the knee shortens gastrocnemius before the ankle even moves, which changes how much it can contribute; it does not switch the muscle off [M109].
 
 </More>
 
-<More title={{ en: "What the model measures", zh: "模型显示的量" }}>
+<More title={{ en: "What the poses show", zh: "姿态说明了什么" }}>
 
-Joint angles, contraction amounts and tempo are design choices for a restrained demonstration. They are not a recommended range, a training dose, measured muscle length or EMG. The model does not reproduce every tendon sheet, fibre bundle or foot-ground constraint.
+The angles in these poses are chosen to show the direction of each movement; they are not targets or a measure of how far your joints should go. The stripes on a contracting muscle show that it is working, not how hard. Open any muscle's card and use the Demo button on its Actions page to replay one movement.
 
 </More>
 
@@ -100,23 +101,23 @@ Joint angles, contraction amounts and tempo are design choices for a restrained 
 
 <Lang zh>
 
-看髋伸展，大腿向后移动。臀大肌和长腘绳肌从关节后方拉动。臀中肌、臀小肌把大腿拉向外侧，内收肌群把它拉回中线。脚踩地时，这些肌肉也帮助控制骨盆在腿上方的位置 [M1]。
+在髋部，大腿可以向前、向后、向外、向内摆。髂腰肌、股直肌和缝匠肌跨过髋的前面，把大腿往前抬；臀大肌和腘绳肌跨过后面，把它往后带；臀中肌和臀小肌在髋的上方，把它往外摆；内收肌群把它往里拉 [M109] [M59]。脚踩在地上时，同样这些肌肉转而移动或稳住腿上方的骨盆。
 
-关键是<Term id="biarticular-muscle">双关节肌</Term>：一块肌肉跨过<Num s="M1">两个</Num>关节。股二头肌长头、半腱肌和半膜肌跨髋与膝；**股二头肌短头只跨膝**，没有伸髋作用。股直肌跨髋与膝，腓肠肌跨膝与踝 [M1]。
+本章的关键是<Term id="biarticular-muscle">双关节肌</Term>，也就是跨过<Num s="M109">两个</Num>关节的肌肉。**腘绳肌、股直肌和腓肠肌都各跨两个关节。**股二头肌长头、半腱肌和半膜肌跨过髋和膝的后面；股直肌跨过髋和膝的前面；腓肠肌跨过膝和踝的后面 [M109] [M59]。股二头肌短头、三块股肌和比目鱼肌都只跨一个关节。
 
-屈髋把长腘绳肌的上端拉长，屈膝让下端缩短，两种改变能部分抵消。股直肌正好相反：屈髋倾向于让它缩短，屈膝倾向于让它拉长。所以只看膝角度，不能判断整块肌肉的长度，更不能认为每个动作都让它同样短缩 [M1]。
+这一点很重要，因为双关节肌的长度由两个关节一起决定。屈髋从上端拉长腘绳肌，屈膝从下端放松腘绳肌。罗马尼亚硬拉时髋在弯、膝几乎是直的，腘绳肌最后被拉得很长；坐姿腿弯举时弯的是膝，腘绳肌最后变得很短 [M109]。股直肌正好相反：屈膝拉长它，屈髋放松它。
 
-踝部的腓肠肌和比目鱼肌让脚向下指，叫<Term id="plantarflexion">跖屈</Term>。屈膝缩短腓肠肌，却不会从膝端缩短比目鱼肌。胫骨前肌抬起前脚掌，叫<Term id="dorsiflexion">背屈</Term> [M1]。慢慢放下时，肌肉仍用力却变长，这是<Term id="eccentric-phase">离心阶段</Term>。伸膝时，股四头肌经髌骨把拉力传到胫骨；屈膝时，后方肌群反向拉动。跨关节的路线决定作用 [M1]。画面上的条纹表示收缩示意，不是力的读数。<FlyTo preset="calf">比较踝部肌肉</FlyTo>
+在踝部，腓肠肌和比目鱼肌让脚尖朝下、脚跟抬起，叫<Term id="plantarflexion">跖屈</Term>。屈膝会从上端放松腓肠肌，却放松不了起于膝下方的比目鱼肌。胫骨前肌抬起前脚掌，叫<Term id="dorsiflexion">背屈</Term> [M109] [M59]。慢慢放下前脚掌时，它一边被拉长一边继续用力，这是动作的<Term id="eccentric-phase">离心阶段</Term>。<FlyTo preset="calf">看踝部肌肉</FlyTo>
 
-<More title={{ en: "Same muscle, different starting positions", zh: "同一块肌肉，不同起始位置" }}>
+<More title={{ en: "Same calf, two positions", zh: "同一个小腿，两种姿势" }}>
 
-直膝提踵和屈膝提踵，在踝开始动之前就改变了腓肠肌长度。屈膝不是关闭腓肠肌，比目鱼肌在两种位置也都工作。要沿整条附着路线理解动作 [M1]。
+直膝提踵和屈膝提踵都会用到腓肠肌和比目鱼肌。屈膝在踝还没动之前就让腓肠肌变短，改变了它能出多少力，但并没有把它“关掉” [M109]。
 
 </More>
 
-<More title={{ en: "What the model measures", zh: "模型显示的量" }}>
+<More title={{ en: "What the poses show", zh: "姿态说明了什么" }}>
 
-关节角、短缩程度和节奏是克制演示的设计值，不是推荐幅度、训练剂量、实测肌长或肌电。模型没有逐一还原所有腱膜、纤维束或足底与地面的约束。
+这些姿态里的角度，只为把动作方向看清楚，不是目标，也不代表你的关节应该动到多远。肌肉上的条纹表示它在用力，不表示用了多大力。打开任何一块肌肉的卡片，在“作用”页点“演示”，可以单独重放一个动作。
 
 </More>
 
