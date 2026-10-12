@@ -9,7 +9,8 @@
  * where lo / hi are the lowest / highest `along` over the exercise's keys
  * (the muscle is shortest where the joint has gone furthest in the direction
  * of its action), weight 1 for a `prime` action, 0.5 `assist`, 0.2
- * `stabilise`; a muscle takes the largest of its actions. A listed muscle
+ * `stabilise`; a muscle takes the largest of its actions, counting only one
+ * member of an opposite pair on a joint (`outweighed`). A listed muscle
  * none of whose actions moves (by at least `MIN_RANGE`°) holds still:
  * isometric, a constant `ISOMETRIC`. A hand-typed key `contract` overrides
  * the computed value for that muscle (MotionDriver).
@@ -21,7 +22,7 @@
  * way (its sign depends on the muscle, not the side).
  */
 import { OPPOSITE_MOVEMENTS, type ActionRole, type Movement } from '../../../lib/anatomy';
-import { musclePartIds, type Angles } from './rig';
+import { jointCandidates, musclePartIds, type Angles } from './rig';
 
 export const ROLE_WEIGHT: Readonly<Record<ActionRole, number>> = { prime: 1, assist: 0.5, stabilise: 0.2 };
 /** A listed muscle whose joints do not move holds at this level while the exercise runs. */
@@ -70,10 +71,7 @@ export function along(angles: Angles | undefined, movement: Movement, sign = 1):
 
 /** The rig joint an action of a part turns (null: the rig has none). */
 export function actionJoint(joint: string, movement: Movement, side: 'l' | 'r', rigJoints: ReadonlySet<string>): string | null {
-  const names = [`${joint}.${side}`, joint];
-  if (joint === 'wrist') names.push(`hand.${side}`);
-  if (joint === 'forearm' && (movement === 'pronation' || movement === 'supination')) names.push(`elbow.${side}`);
-  return names.find((n) => rigJoints.has(n)) ?? null;
+  return jointCandidates(joint, movement, side).find((n) => rigJoints.has(n)) ?? null;
 }
 
 /**
@@ -106,7 +104,7 @@ export function contractionPlan(input: {
       seen.add(partId);
       const part = parts.find((p) => p.id === partId)!;
       const side = partId.endsWith('-r') ? 'r' : 'l';
-      let moving = false;
+      const own: ContractionTerm[] = [];
       for (const a of actionsOf(part.muscle ?? listed)) {
         if (a.movement === 'stabilisation') continue;
         const joint = actionJoint(a.joint, a.movement, side, rigJoints);
@@ -117,13 +115,30 @@ export function contractionPlan(input: {
         const lo = Math.min(...values);
         const hi = Math.max(...values);
         if (!(hi - lo >= MIN_RANGE)) continue;
-        moving = true;
-        terms.push({ part: partId, joint, movement: a.movement, sign, weight: ROLE_WEIGHT[a.role], lo, hi });
+        own.push({ part: partId, joint, movement: a.movement, sign, weight: ROLE_WEIGHT[a.role], lo, hi });
       }
-      if (!moving) isometric.push(partId);
+      const kept = own.filter((t) => !outweighed(t, own));
+      if (kept.length === 0) isometric.push(partId);
+      terms.push(...kept);
     }
   }
   return { terms, isometric, parts: [...seen] };
+}
+
+/**
+ * A sheet may list both members of a pair on one joint (pectoralis major:
+ * flexion and extension of the shoulder). Taking the larger of the two would
+ * read the muscle short at both ends of a press, so only the member the
+ * motion goes along counts: the stronger role, else the one toward whose side
+ * of neutral the joint's range reaches further (a bench press spends its
+ * range on the flexion side: flexion counts, extension does not).
+ */
+function outweighed(t: ContractionTerm, all: readonly ContractionTerm[]): boolean {
+  const other = all.find((o) => o.joint === t.joint && OPPOSITE_MOVEMENTS[t.movement] === o.movement);
+  if (!other) return false;
+  if (other.weight !== t.weight) return other.weight > t.weight;
+  // `along` of the opposite member is the negative of this one's: this one's side reaches hi, the other's −lo.
+  return t.hi < -t.lo || (t.hi === -t.lo && t.movement > other.movement);
 }
 
 const clamp01 = (x: number) => (x < 0 ? 0 : x > 1 ? 1 : x);

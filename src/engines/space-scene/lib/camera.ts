@@ -256,6 +256,21 @@ export const EXERCISE_FILL = 0.7;
 export const EXERCISE_FILL_WIDTH = 0.56;
 /** The figure sits this share of the half height above the frame centre (the caption takes the bottom). */
 export const EXERCISE_LIFT = 0.08;
+/** Most the figure is lifted (share of the half height). */
+export const EXERCISE_LIFT_MAX = 0.32;
+
+/**
+ * The lift with a presentation caption card `cardPx` tall over the bottom of
+ * a stage `stageH` px tall: the figure's frame is centred in what the card
+ * leaves (the card's height as a share of the half height, halved, on top of
+ * the usual lift), so a hinge's low start or a pike push-up's bottom stays
+ * above the caption.
+ */
+export function exerciseLift(cardPx: number, stageH: number): number {
+  if (!(cardPx > 0) || !(stageH > 0)) return EXERCISE_LIFT;
+  return Math.min(EXERCISE_LIFT_MAX, EXERCISE_LIFT + cardPx / stageH);
+}
+
 /** Trunk flexion (degrees, any key) that makes a standing exercise a hinge. */
 export const HINGE_FLEXION = 30;
 

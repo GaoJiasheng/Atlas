@@ -37,16 +37,16 @@ describe('contact solver', () => {
 
   it('meets the first contact the rig can show, in priority order', () => {
     const rig = { hands: true, feet: true };
-    expect(contactPlan(['hands'], rig, false, true)).toEqual({ hands: 'translate', feet: false });
-    expect(contactPlan(['hands', 'feet'], rig, true, true)).toEqual({ hands: 'hinge', feet: false });
-    expect(contactPlan(['hands', 'feet'], rig, false, true)).toEqual({ hands: 'translate', feet: false });
-    expect(contactPlan(['feet', 'hands'], rig, true, true)).toEqual({ hands: null, feet: true });
-    expect(contactPlan(['seat'], rig, false, true)).toEqual({ hands: null, feet: false });
+    expect(contactPlan(['hands'], rig, false, true)).toMatchObject({ hands: 'translate', feet: false });
+    expect(contactPlan(['hands', 'feet'], rig, true, true)).toMatchObject({ hands: 'hinge', feet: false });
+    expect(contactPlan(['hands', 'feet'], rig, false, true)).toMatchObject({ hands: 'translate', feet: false });
+    expect(contactPlan(['feet', 'hands'], rig, true, true)).toMatchObject({ hands: null, feet: true });
+    expect(contactPlan(['seat'], rig, false, true)).toMatchObject({ hands: null, feet: false });
     // Written contacts fall through to the next the rig has; a default pair without hands is dropped whole.
-    expect(contactPlan(['hands', 'feet'], { hands: false, feet: true }, false, true)).toEqual({ hands: null, feet: true });
-    expect(contactPlan(['hands', 'feet'], { hands: false, feet: true }, true, false)).toEqual({ hands: null, feet: false });
+    expect(contactPlan(['hands', 'feet'], { hands: false, feet: true }, false, true)).toMatchObject({ hands: null, feet: true });
+    expect(contactPlan(['hands', 'feet'], { hands: false, feet: true }, true, false)).toMatchObject({ hands: null, feet: false });
     // A push-up hinge needs no ankles (it pivots about the toe tips).
-    expect(contactPlan(['hands', 'feet'], { hands: true, feet: false }, true, false)).toEqual({ hands: 'hinge', feet: false });
+    expect(contactPlan(['hands', 'feet'], { hands: true, feet: false }, true, false)).toMatchObject({ hands: 'hinge', feet: false });
   });
 
   it('takes the contacts from the equipment when the data names none', () => {

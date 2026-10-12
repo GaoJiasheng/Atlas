@@ -20,7 +20,7 @@ import { SourceRefs } from '../../widgets/SourcePopover';
 import type { FitnessBundle, MuscleSheet as Sheet, TrainingFile } from '../../../content/schema/fitness';
 import type { Movement } from '../../../lib/anatomy';
 import { detailParagraphs } from '../lib/detail';
-import { canMove } from '../lib/rig';
+import { canMove, jointCandidates } from '../lib/rig';
 import type { SpaceSceneExt } from '../index';
 import type { Part, PartsFile } from '../schema';
 
@@ -156,7 +156,9 @@ export function MuscleSheet({
           ) : (
             <ul className="space-sheet__actions">
               {sheet.actions.map((a, i) => {
-                const joint = file.rig?.joints[`${a.joint}${side}`] ?? file.rig?.joints[a.joint];
+                const joint = jointCandidates(a.joint, a.movement, side === '.r' ? 'r' : 'l')
+                  .map((n) => file.rig?.joints[n])
+                  .find((j) => j !== undefined && canMove(j.axes, a.movement as Movement));
                 const can = joint !== undefined && canMove(joint.axes, a.movement as Movement);
                 const on = demo?.part === part.id && demo.joint === a.joint && demo.movement === a.movement;
                 const movement = t(`anatomy.movement.${a.movement}` as UiKey);

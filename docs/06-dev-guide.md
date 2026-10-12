@@ -818,7 +818,7 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
     "shoulder.l": { "node": "shoulder.l",       // glb 骨骼节点名
                     "axes": { "flexion": [-1, 0, 0], "abduction": [0, 0, 1], "internal-rotation": [0, 1, 0] } },
     "elbow.l":    { "node": "elbow.l", "axes": { "flexion": [-1, 0, 0] } },
-    "hand.l":     { "node": "hand.l", "axes": { "flexion": [-1, 0, 0] }, "offset": 0.08 },   // 握点 = hand.l / hand.r 骨原点 + offset：数字 = 沿父骨→本骨（前臂）方向的米数（掌心在腕关节远端约 8 cm），或静止时场景坐标的向量（随骨转）
+    "hand.l":     { "node": "hand.l", "axes": { "flexion": [-1, 0, 0] }, "offset": 0.08 },   // 握点 = hand.l / hand.r 骨原点 + offset：数字 = 沿前臂（父骨→本骨）到掌心的米数（约 8 cm），或静止时场景坐标的向量 `[x, y, z]`；两种都随手关节转（屈腕时掌心跟着走）
     "trunk":      { "node": "joint.trunk", "axes": { "flexion": [-1, 0, 0] } }    // 可选：动作模式整体转体的支点（没有时用非 context 零件的中心）
   },
   "demo": { "elbow": { "flexion": 110 } }       // 肌肉卡 ACTIONS 页"演示"摆到的角度（按动作关节 × 动作；默认 60°）
@@ -865,17 +865,21 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
 
 **动作模式（M8）**：章 / 拍 `exercise: { id, phase: start | end | loop, bones?: true }`（默认 loop；必须在 training.json 里）或肌肉卡 EXERCISES 页的芯片进入。引擎读共享动作的 `motion`（写法见下面的**动作模式数据手册**）：整体转到动作体位（`root`）、按关键帧摆关节（`keys`、`tempo`）、画器械（`equipment`）、用**接触求解**让手 / 脚停在器械或地面上而身体去动（`contacts`，`lib/contact.ts`）、**由关节角算出收缩**（`lib/contraction.ts`）、用**动作镜头**取景（`lib/camera.ts`）。
 
-- **人体模特（`views.exerciseBody`，默认 `mannequin`）**：主题有蒙皮的 `context` 皮肤零件时，动作播放期间皮肤画成实心哑光模特（`token:mannequin`：paper 暖浅灰，cinema 中灰；roughness .85、环境光很轻，投主光阴影），淡入淡出 0.4 s；`stages/model3d/Mannequin.tsx`。模特只写**往后推 6 cm 的深度**（颜色和轮廓不动）：皮下 6 cm 以内的肌肉（近侧）通过深度测试画在模特上面，远侧肌肉、身体后面的东西（背下的凳、地面、远处的立柱）被挡住；在身体前面的杠会挡住身体。骨骼（既不是肌肉也不是 context 的零件）在模特模式下隐藏，拍写 `exercise.bones: true` 时保留。`exerciseBody: ghost` = 旧的淡显轮廓（器械半透明）。
+- **身体样式（`views.exerciseBody`：`wire` | `mannequin` | `ghost`）**：主题有蒙皮的 `context` 皮肤零件时，动作播放期间身体换成示意人形，淡入淡出 0.4 s。默认：glb 有 `skin-wire` 节点 → `wire`，否则 `mannequin`。
+  - `wire`（`stages/model3d/WireBody.tsx`）：管线的 `skin-wire` 低模（~3.4 k 三角形，全身蒙皮）画成技术图版式线框——只画**特征边**（相邻面折角 > 20° 的棱与开口边，`lib/hands.ts` `featureEdges`，GPU 蒙皮的线段），`token:ink` 55 %，底下一层 8 % 墨色平涂剪影；三次绘制都用**往后推的深度**（`pushDepth.ts`）：先只写深度（不透明、在肌肉之前），剪影只有最前一层通过（均匀一层，不叠色），边线比深度层近 8 mm，所以被背面挡住（消隐线，不是一团网）、在皮下肌肉后面。不投影。glb 没有 `skin-wire` 时，写了 `wire` 的主题在加载时把皮肤轮廓边折叠减面到 ~4 k 三角形代用（`bodyGeometry.ts` `decimateSkinned`，较慢较糙，`pnpm validate` 警告）。
+  - `mannequin`（`Mannequin.tsx`）：皮肤画成实心哑光模特（`token:mannequin`：paper 暖浅灰，cinema 中灰；roughness .85、环境光很轻，投主光阴影）。模特只写**往后推 6 cm 的深度**（颜色和轮廓不动）：皮下 6 cm 以内的肌肉（近侧）通过深度测试画在模特上面，远侧肌肉、身体后面的东西（背下的凳、地面、远处的立柱）被挡住；在身体前面的杠会挡住身体。
+  - 两种样式都：骨骼（既不是肌肉也不是 context 的零件）隐藏（拍写 `exercise.bones: true` 时保留）；器械实心（地面 50 %），`wire` 下钢索细到 3 mm；**手是程序化的**（见下）——皮肤自己的手（管线的 `skin-hand.l/.r`，以及皮肤 / 线框里腕关节以远、由手臂骨带动的三角形）不画，脚用皮肤自己的。`ghost` = 旧的淡显轮廓（器械半透明、皮肤的手原样）。
+  - **手（`lib/hands.ts` 选型与朝向，`handShapes.ts` 几何，`Hands.tsx` 摆放）**：每只手按动作的器械选一种——`fist` 握拳：手里有杠铃 / 高位下拉杆 / 绳索直杆 / 单杠（掌到掌的杠）、哑铃 / 壶铃 / 绳索 D 形把手 / 弹力带（这只手拿的那件，`hand` 决定哪只手）、双杠（沿场景 Z），四指成短管绕握持轴一圈、掌在轴后、拇指反向扣在四指上，半径 = 握的东西（≥ 12 mm）；`palm` 张掌：没拿东西，且掌是接触点（`contacts` 含 `hands` 或这一侧的 `hand.*`、器械里有地面 / 凳 / 台阶 / 座椅），或掌离地面 / 凳面在 2 cm 以内（每帧判断）——掌面平贴在那个面上、掌根在腕关节下、手指顺前臂方向（前臂立着时朝头，如俯卧撑；平放时顺前臂，如肘撑平板）；否则 `relaxed` 微屈。拳的坐标系：y = 前臂方向（肘 → 腕），拇指按 `grip`：`pronated` 指向另一只手（卧推、引体），`supinated` 背向另一只手（弯举、反握引体），`neutral` 沿把手朝前（锤式弯举、双杠；前臂朝前时朝头，如仰卧飞鸟顶端）；左手是右手的镜像。拳心在握点（rig `hand.*` + `offset`，器械也在这），掌在腕下的地面上，放松的手在腕关节；腕关节一个球 + 一段腕连接到掌根。`mannequin` 下实心（模特色、投影），`wire` 下是**描边形**：不透明的 8 % 墨平涂 + 背面外扩 3 mm 的 70 % 墨轮廓。QA：`__atlas.engine.exerciseBody('wire' | 'mannequin' | 'ghost' | null)` 临时换样式（不进 URL）。
 - **着色**：`primary` signal、`secondary` cold、`stabilisers` 原色、其余链接了肌肉的零件淡显（.12）；动作中着色强度随收缩变：放松时 45 %，最短时 100 %（`PartNode` `tintLive`）。
-- **收缩 = 关节角算出来的**：对动作 `primary` / `secondary` / `stabilisers` 列出的每块肌肉（显示它或它的头的零件），读它肌肉卡 `actions` 里每条（关节、动作、角色）：`along = 角(动作) − 角(反向动作)`（该侧关节、当前帧），`c = 权重 × clamp01((along − lo) / (hi − lo))`，lo / hi = 这个动作所有关键帧里 along 的最小 / 最大值（关节往肌肉动作方向走得最远处肌肉最短，与 start / end 谁在前无关）；权重 prime 1、assist 0.5、stabilise 0.2，一块肌肉取各动作最大值；所有动作都不动（关键帧间 < 5°）的列出肌肉 = 等长，整段 0.3。关节：零件 `-r` = 右侧，取 `<关节>.l/.r`，否则无侧的 `trunk`；`wrist` 退到 `hand`，`forearm` 的旋前 / 旋后退到 `elbow`；无侧关节上右侧肌肉的侧屈取反、旋转取绝对值。关键帧手写的 `contract` 只作**覆盖**（该肌肉用手写值，其余照算）。
-- **接触求解**：`contacts` 第一项精确满足——`hands`：两掌中点停在第一键的位置，身体平移（引体向上屈肘时身体上升、双杠下沉、悬垂举腿吊着）；`[hands, feet]` 且手撑地面：身体绕脚（有踝关节时用前脚掌，否则模型脚尖）转，让掌心保持高度（俯卧撑）；`feet`：站姿脚掌钉地（`lib/stance.ts`）；`seat`：不修正。不写时按器械推：引体杠 / 双杠 → `[hands]`，地面且 root 绕 X ≥ 30°（俯身）→ `[hands, feet]`（rig 没有手时整对丢弃），凳 / 座椅 → `[seat]`，站立 → `[feet]`，其它不修正。数据写了但 rig 做不到的接触往后顺延。
-- **动作镜头**：出现新动作时（没有自己 `camera` 的拍、章节、深链、动作芯片），MotionDriver 下一帧把模特在各关键帧（及两键中点）的蒙皮顶点和握点算一遍（`bridge.exerciseFrame`），CameraRig 沿体位方向退到这些点占画高 ~70 %（减去 8 % 上抬，让人物在说明卡上方）或两侧 HUD 之间宽度 56 %（窄屏 90 %），fov 24°：仰卧 = 侧上方（方位 55°、仰角 36°，从脚的一侧看，杠不正对镜头）、俯身 = 侧面稍高（82° / 16°）、侧卧 = 正前（12° / 22°）、髋铰链（root 绕 X ≥ 25° 或躯干屈 + root ≥ 30°）= 侧面（88° / 10°）、站 / 坐 / 悬垂 = 前 3/4（35° / 12°）。方位从身体正前（+Z，随 root 的 Y 转）往身体左侧量。`motion.camera` 改方向，拍自己的 `camera`（轨道相机或预设名）优先。同一动作换 start / end、选零件时镜头不动；拖动后自由镜头不被拉回。
-- 器械统一中性哑光灰（倒角处有柔和高光），模特模式下实心（地面 50 %），淡显模式下立式器械 60 %、地面 25 %；不投影；每件一次绘制，不可点、不标注。
+- **收缩 = 关节角算出来的**：对动作 `primary` / `secondary` / `stabilisers` 列出的每块肌肉（显示它或它的头的零件），读它肌肉卡 `actions` 里每条（关节、动作、角色）：`along = 角(动作) − 角(反向动作)`（该侧关节、当前帧），`c = 权重 × clamp01((along − lo) / (hi − lo))`，lo / hi = 这个动作所有关键帧里 along 的最小 / 最大值（关节往肌肉动作方向走得最远处肌肉最短，与 start / end 谁在前无关）；权重 prime 1、assist 0.5、stabilise 0.2，一块肌肉取各动作最大值（同一关节上一对相反动作都列了时只算一个：角色强的那个，同级时取关节活动范围偏向的那一侧——卧推范围在屈的一侧，胸大肌只按"屈"算，不会两端都显示收缩）；所有动作都不动（关键帧间 < 5°）的列出肌肉 = 等长，整段 0.3。关节：零件 `-r` = 右侧，取 `<关节>.l/.r`，否则无侧的 `trunk`；`wrist` 退到 `hand`，`forearm` 的旋前 / 旋后退到 `elbow`（`lib/rig.ts` `jointCandidates`，肌肉卡 ACTIONS 演示按钮、MotionDriver 演示、validate 共用）；无侧关节上右侧肌肉的侧屈取反、旋转取绝对值。关键帧手写的 `contract` 只作**覆盖**（该肌肉用手写值，其余照算）。
+- **接触求解**：`contacts` 第一项精确满足——`hands`：两掌中点停在第一键的位置，身体平移（引体向上屈肘时身体上升、双杠下沉、悬垂举腿吊着）；`hand.l` / `hand.r`：只钉这一只掌（单臂划船撑凳的手）；手（双手或单手）在前、`feet` 或 `knees` 在后且手撑地面 / 凳：身体绕脚（有踝关节时用前脚掌，否则模型脚尖）或绕双膝中点转，让掌心保持高度（俯卧撑；鸟狗式 `['hand.l', 'knees']`）；`knees`：双膝中点停住（跪姿）；`feet`：站姿脚掌钉地（`lib/stance.ts`；器械有 `step` 时钉前脚掌、脚跟可以落到台阶下）；`seat`：不修正。关键帧可以写自己的 `root`（同 `motion.root` 写法，卷腹抬起躯干）：身体在键之间转，接触点与器械按第一键的转向固定。不写时按器械推：引体杠 / 双杠 → `[hands]`，地面且 root 绕 X ≥ 30°（俯身）→ `[hands, feet]`（rig 没有手时整对丢弃），凳 / 座椅 → `[seat]`，站立 → `[feet]`，其它不修正。数据写了但 rig 做不到的接触往后顺延。
+- **动作镜头**：出现新动作时（没有自己 `camera` 的拍、章节、深链、动作芯片），MotionDriver 下一帧把模特在各关键帧（及两键中点）的蒙皮顶点和握点算一遍（`bridge.exerciseFrame`），CameraRig 沿体位方向退到这些点占画高 ~70 %（减去 8 % 上抬，让人物在说明卡上方；演示时再加上字幕卡高度占舞台的比例，最多 32 %，`lib/camera.ts` `exerciseLift`）或两侧 HUD 之间宽度 56 %（窄屏 90 %），fov 24°：仰卧 = 侧上方（方位 55°、仰角 36°，从脚的一侧看，杠不正对镜头）、俯身 = 侧面稍高（82° / 16°）、侧卧 = 正前（12° / 22°）、髋铰链（root 绕 X ≥ 25° 或躯干屈 + root ≥ 30°）= 侧面（88° / 10°）、站 / 坐 / 悬垂 = 前 3/4（35° / 12°）。方位从身体正前（+Z，随 root 的 Y 转）往身体左侧量。`motion.camera` 改方向，拍自己的 `camera`（轨道相机或预设名）优先。同一动作换 start / end、选零件时镜头不动；拖动后自由镜头不被拉回。
+- 器械统一中性哑光灰（倒角处有柔和高光），线框 / 模特样式下实心（地面 50 %），淡显样式下立式器械 60 %、地面 25 %；不投影；每件一次绘制，不可点、不标注。
 - 阅读面板的检视器先出**动作卡**：示意图（`sketch`，两格石墨图；cinema 下反相）、器械与级别、START / END / LOOP（能播放时）、主动 / 协同 / 稳定肌芯片（点 = 选中显示该肌肉的零件）、准备、步骤、提示、错误、练多少（带来源）、注意事项、研究显示、固定的安全行（UI 文案）。`pnpm shoot --beats` 对 loop 的动作拍再各拍一张起始键与结束键（`beat-<章>-<n>-start.png` / `-end.png`，测试钩子 `__atlas.engine.exercisePhase(phase)`；两张同一个镜头）。
 
 **肌肉卡（M9）**：零件链接了 `muscle` 时，检视器（手机上是同一个底部抽屉）出 SOLO 按钮与四页：FEATURES（层、起点 / 止点文字 + 骨芯片、纤维排列与走向、在自己身上找到它、"Tell me more" = detail）、ACTIONS（关节 · 动作 · 角色，每行"演示"按钮：该侧关节按 `rig.demo` 角来回摆、这块肌肉同步收缩；rig 没有那根轴时不出按钮）、TRAINING（常见错误、training.json 的 `note`、伤病）、EXERCISES（动作芯片 → 动作模式 + 动作卡）。标签页是 WAI-ARIA tablist（← → 切换，44 px）。
 
-**token**：`token:muscle-1` / `muscle-2` / `muscle-3`（浅层最暖 → 深层最暗，低饱和，不是血红）、`token:bone`（象牙）、`token:mannequin`（动作模式的模特），两套主题都有。
+**token**：`token:muscle-1` / `muscle-2` / `muscle-3`（浅层最暖 → 深层最暗，低饱和，不是血红）、`token:bone`（象牙）、`token:mannequin`（动作模式的模特；线框人形用 `token:ink`），两套主题都有。
 
 #### 动作模式数据手册
 
@@ -886,9 +890,9 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
    | kind | 手 / 脚 | 字段 | 放在哪 |
    |---|---|---|---|
    | `barbell` | 杠 / 地 | `grip` `width` `on: hands \| back` `at` | 两掌之间；`on: back` 骑在 trunk 关节上，`at` 是 trunk 静止坐标系里的米数 |
-   | `dumbbell` `kettlebell` `cable-handle` | 把手 / 地 | `grip` `hand: left \| right \| both` | 每只持握的手一个（`neutral` = 前后向） |
+   | `dumbbell` `kettlebell` `cable-handle` | 把手 / 地 | `grip` `hand: left \| right \| both`，哑铃 / 壶铃 `hold: across \| along \| vertical \| both` | 每只持握的手一个（`neutral` = 前后向）；`hold: along` 顺前臂，`vertical` 竖立（`hand: both` 时一只竖在两掌之间：高脚杯深蹲），`both` 一只在两掌之间、顺两前臂（仰卧上拉、高脚杯）；两手托一只时手张开 |
    | `lat-bar` | 杠 / 地 | `grip` `width` `at` | 1.2 m 直杠在两掌之间，钢索到 `at`（缺省：第一键杠的上方 0.85 m） |
-   | `cable` | 把手或杠 / 地 | `hand` `handle: d-handle \| bar` `grip` `at` `turn` | 2.2 m 立柱立在 `at` 的 x / z、地面上，滑轮在 `at`，钢索到每只持握手的 D 形把手（`bar` = 两掌之间 0.5 m 直杠）；两侧绳索夹胸写两个 `cable`，各 `hand` 一侧 |
+   | `cable` | 把手、杠或踝套 / 地 | `hand` `handle: d-handle \| bar` `grip` `at` `turn` `to: ankle.l \| ankle.r` | 2.2 m 立柱立在 `at` 的 x / z、地面上，滑轮在 `at`，钢索到每只持握手的 D 形把手（`bar` = 两掌之间 0.5 m 直杠）；两侧绳索夹胸写两个 `cable`，各 `hand` 一侧 |
    | `band` | 把手 / 地 | `hand` `to: hands \| feet` `at` | 从锚点 `at` 到手（或前脚掌） |
    | `bench` / `incline-bench` | — / 地 | `at` `turn`，`incline` / `angle`（默认 30°） | 凳面顶在 `at`，长轴 Z、头端 −Z |
    | `machine-seat` | — / 地 | `at` `turn` `angle`（靠背后仰，默认 10°）`height`（0.45）`thighPad` | 座面顶在 `at`，靠背在 −Z |
@@ -896,8 +900,10 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
    | `dip-bars` | 把手 / 悬空 | `at` `height`（1.45） | 两根杠各在一只掌下 |
    | `step` | — / 台阶 | `at` `turn` `height`（0.2） | 前脚掌下方（+ `at`），台面 = 模型地面，地面降一个台阶 |
    | `floor` | — / 地 | `at` `turn` | 掌撑地时顶面 = 掌高，否则 trunk + `at` |
+   | `wall` | — / 地 | `at` `turn` `height`（2） | 1.2 m 宽墙板立在 trunk + `at` 的 x / z、地面上，正面朝 +Z（靠背、靠脚跟） |
+   | `post` | — / 地 | `at` `height`（1.1） | 40 mm 立杆立在 trunk + `at` 的 x / z、地面上（扶一只手保持平衡） |
 3. **接触 `contacts`**：见上，按优先级写；`feet: left | right | free` 选哪只脚钉地（`free` = 悬空）。
-4. **关键帧 `keys`**：start、可选 mid、end；`joints` 用解剖角（左关节自动驱动右关节）。先写 start 姿势（手在杠上、脚在地上），再写 end；身体位移交给接触求解，**不要**用关节角去"抬身体"。`contract` 只在算出来的不对时写。
+4. **关键帧 `keys`**：start、可选 mid、end；`joints` 用解剖角（左关节自动驱动右关节；肩 / 髋的水平内收 / 外展最后转——先由屈 / 外展把肢体抬起，再绕躯干竖轴扫，所以低位手臂加水平内收是手往前、往内走，不是原地扭）；可选 `root`（这一键的整体转向）。先写 start 姿势（手在杠上、脚在地上），再写 end；身体位移交给接触求解，**不要**用关节角去"抬身体"。`contract` 只在算出来的不对时写。
 5. **节奏 `tempo`** [start→end 秒, 停, end→start 秒, 停]（默认 [2, 0, 1, 0]）；`camera: { azimuth, elevation, fill? }` 只在默认方向看不清时写。
 
 ```jsonc

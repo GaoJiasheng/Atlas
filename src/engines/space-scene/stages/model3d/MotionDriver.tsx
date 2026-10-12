@@ -46,6 +46,7 @@ import {
   demoAngles,
   exerciseLoop,
   foldAngles,
+  jointCandidates,
   jointOf,
   lerpAngles,
   midlineNormal,
@@ -60,7 +61,7 @@ import { contactPlan, handsCorrection, hingeAngle, NO_CONTACT, type ContactPlan 
 import { keepAnimating, useRuntime } from './runtime';
 import type { GltfRig } from './GltfSource';
 import { gripPoint, type Grip } from './grip';
-import { defaultContacts, equipmentFloor, EQUIPMENT_INFO } from '../../lib/equipment';
+import { defaultContacts, equipmentFloor, EQUIPMENT_INFO, PRESS_SURFACES } from '../../lib/equipment';
 import { footSlip, standCorrection, type FootPair } from '../../lib/stance';
 import { footPoints, type Foot } from './foot';
 import type { StageBridge } from '../../bridge';
@@ -230,6 +231,8 @@ export function MotionDriver({
     };
   }, [data.parts, parentOf]);
   const hasHands = grips.l !== null && grips.r !== null;
+  // The knees (kneeling contacts, a hinge about them).
+  const kneeBones = useMemo(() => ['knee.l', 'knee.r'].flatMap((n) => joints.get(n)?.bone ?? []), [joints]);
   const soles = useMemo(() => [footing.l, footing.r].filter((f): f is Foot => f !== null), [footing]);
   // Per exercise: the contraction plan from the muscle sheets' actions and the contacts the rig can keep.
   const preps = useMemo(() => {
@@ -242,13 +245,18 @@ export function MotionDriver({
       const plan = contractionPlan({ exercise: sheet, muscles: muscleSheets, parts: data.parts, rigJoints, keys });
       const keyed = new Set(motion.keys.flatMap((k) => Object.keys(k.contract ?? {})).flatMap((m) => muscleParts(m)));
       const equipment = equipmentList(motion.equipment);
-      const onFloor = equipment.some((e) => e.kind === 'floor');
-      const contacts = contactPlan(defaultContacts(motion), { hands: hasHands, feet: soles.length > 0 && motion.feet !== 'free' }, onFloor, motion.contacts !== undefined);
+      const onFloor = equipment.some((e) => PRESS_SURFACES.has(e.kind));
+      const contacts = contactPlan(
+        defaultContacts(motion),
+        { hands: hasHands, handL: grips.l !== null, handR: grips.r !== null, feet: soles.length > 0 && motion.feet !== 'free', knees: kneeBones.length === 2 },
+        onFloor,
+        motion.contacts !== undefined,
+      );
       p = { sheet, plan, keyed, contacts };
       cache.set(sheet.id, p);
       return p;
     };
-  }, [rigJoints, muscleSheets, data.parts, muscleParts, hasHands, soles]);
+  }, [rigJoints, muscleSheets, data.parts, muscleParts, hasHands, grips, soles, kneeBones]);
 
   const clips = useMemo(() => data.animations.filter((a) => a.kind === 'sequence' && (jointOf(a.target) !== null || a.keys.some((k) => k.contract !== undefined))), [data.animations]);
   const pulses = useMemo(() => data.animations.filter((a) => a.kind === 'contract'), [data.animations]);
@@ -265,7 +273,8 @@ export function MotionDriver({
     const contract = new Map<string, number>();
     for (const k of e.motion!.keys) for (const m of Object.keys(k.contract ?? {})) for (const id of muscleParts(m)) contract.set(id, 0);
     for (const [m, c] of Object.entries(key.contract ?? {})) for (const id of muscleParts(m)) contract.set(id, c);
-    const root = e.motion!.root;
+    // The key's own body turn (a curl-up tilts between keys), else the motion's.
+    const root = key.root ?? e.motion!.root;
     return {
       joints: new Map(Object.entries(bothSides(key.joints, rigJoints))),
       contract,
@@ -303,7 +312,7 @@ export function MotionDriver({
       const side = inp.demo.part.endsWith('-r') ? '.r' : '.l';
       const movement = inp.demo.movement as Movement;
       const amount = data.rig?.demo?.[inp.demo.joint as keyof NonNullable<NonNullable<PartsFile['rig']>['demo']>]?.[movement] ?? DEFAULT_DEMO_ANGLE;
-      for (const name of [`${inp.demo.joint}${side}`, inp.demo.joint]) {
+      for (const name of jointCandidates(inp.demo.joint, movement, side === '.r' ? 'r' : 'l')) {
         const j = joints.get(name);
         if (!j || !canMove(j.sceneAxes, movement)) continue;
         frame.joints.set(name, { ...(frame.joints.get(name) ?? {}), ...demoAngles(inp.demo.joint, movement, amount, swing) });
@@ -325,7 +334,10 @@ export function MotionDriver({
     wrote: false,
     /** Hands held still: the exercise whose start-key palms are cached, the palms (skeleton frame), translate or hinge, and how held the body is now (eased). */
     plantedId: '',
-    palmRef: [new Vector3(), new Vector3()] as [Vector3, Vector3],
+    /** The held point at the first key (skeleton frame): the palms' midpoint, one palm, or the knees' midpoint. */
+    heldRef: new Vector3(),
+    held: 'both' as 'both' | 'l' | 'r' | 'knees',
+    pivotKnees: false,
     hinge: false,
     plantFrom: 0,
     plant: 0,
@@ -338,6 +350,10 @@ export function MotionDriver({
     startId: '',
     palmStart: null as [Vector3, Vector3] | null,
     ballStart: null as Vector3 | null,
+    kneeStart: null as Vector3 | null,
+    /** The first key's root matrix (M0): with per-key root turns, the contacts and the equipment stay where it put them. */
+    rootStart: new Matrix4(),
+    rootVaries: false,
     /** The exercise whose sweep the camera has (`bridge.exerciseFrame`). */
     sweepId: '',
   });
@@ -371,6 +387,26 @@ export function MotionDriver({
       .multiply(_t.makeTranslation(-pivot.x, -pivot.y, -pivot.z));
   };
 
+  /** The held point now (skeleton frame; world matrices current): the palms' midpoint, one palm or the knees' midpoint; false when the rig lacks it. */
+  const heldPoint = (held: 'both' | 'l' | 'r' | 'knees', out: Vector3): boolean => {
+    if (held === 'knees') {
+      if (kneeBones.length < 2) return false;
+      kneeBones[0]!.getWorldPosition(out);
+      out.add(kneeBones[1]!.getWorldPosition(_pr)).multiplyScalar(0.5);
+      return true;
+    }
+    const one = held === 'l' ? grips.l : held === 'r' ? grips.r : null;
+    if (one) {
+      gripPoint(one, out, _ax);
+      return true;
+    }
+    if (held !== 'both' || !grips.l || !grips.r) return false;
+    gripPoint(grips.l, _pl, _ax);
+    gripPoint(grips.r, _pr, _ax);
+    out.addVectors(_pl, _pr).multiplyScalar(0.5);
+    return true;
+  };
+
   /**
    * The contact solver on the bones as they are now (world matrices current):
    * `out` = the correction (planted feet: weight `stand`; held palms: weight
@@ -387,23 +423,26 @@ export function MotionDriver({
         footPoints(f, _h, _b);
         return { heel: v3(_h.applyMatrix4(m0)), ball: v3(_b.applyMatrix4(m0)) };
       });
-      const ref = s.footRef.map((f): FootPair => ({ heel: v3(_h.set(...f.heel).applyMatrix4(m0)), ball: v3(_b.set(...f.ball).applyMatrix4(m0)) }));
+      const fixed = s.rootVaries ? s.rootStart : m0;
+      const ref = s.footRef.map((f): FootPair => ({ heel: v3(_h.set(...f.heel).applyMatrix4(fixed)), ball: v3(_b.set(...f.ball).applyMatrix4(fixed)) }));
       const holds = holdsOf(s.standId);
-      const c = standCorrection(now, ref, holds);
+      // On a step the balls of the feet hold and the heels may drop below it.
+      const onStep = equipmentList(exercises.get(s.standId)?.motion?.equipment).some((e) => e.kind === 'step');
+      const c = standCorrection(now, ref, holds, onStep);
       out.premultiply(_t.makeTranslation(c[0] * stand, c[1] * stand, c[2] * stand));
       // QA: how far the weight-bearing feet still slide once moved (two feet share one correction).
-      if (wantSlip && stand === 1) slip = footSlip(now, ref, c, holds);
+      if (wantSlip && stand === 1) slip = footSlip(now, ref, c, holds, onStep);
     }
-    if (plant > 0 && grips.l && grips.r && s.plantedId !== '') {
-      // Palms now and at the first key, in the scene under M0.
-      gripPoint(grips.l, _pl, _ax);
-      gripPoint(grips.r, _pr, _ax);
-      _now.addVectors(_pl, _pr).multiplyScalar(0.5).applyMatrix4(m0);
-      _ref.addVectors(s.palmRef[0], s.palmRef[1]).multiplyScalar(0.5).applyMatrix4(m0);
+    if (plant > 0 && s.plantedId !== '' && heldPoint(s.held, _now)) {
+      // The held point now and at the first key, in the scene (the reference under the first key's turn when the turn varies).
+      _now.applyMatrix4(m0);
+      const fixed = s.rootVaries ? s.rootStart : m0;
+      _ref.copy(s.heldRef).applyMatrix4(fixed);
       if (s.hinge) {
-        // On the floor the body pivots about its feet (a push-up lowers the chest toward the hands).
-        if (s.ballStart) _feet.copy(s.ballStart).applyMatrix4(m0);
-        else _feet.set(pivot.x, feet[1], feet[2]).applyMatrix4(m0);
+        // On the floor the body pivots about its feet or knees (a push-up lowers the chest toward the hands).
+        if (s.pivotKnees && s.kneeStart) _feet.copy(s.kneeStart).applyMatrix4(fixed);
+        else if (s.ballStart) _feet.copy(s.ballStart).applyMatrix4(fixed);
+        else _feet.set(pivot.x, feet[1], feet[2]).applyMatrix4(fixed);
         const delta = hingeAngle(v3(_now), v3(_ref), v3(_feet)) * plant;
         out
           .makeTranslation(_feet.x, _feet.y, _feet.z)
@@ -411,7 +450,7 @@ export function MotionDriver({
           .multiply(_t2.makeTranslation(-_feet.x, -_feet.y, -_feet.z))
           .multiply(m0);
       } else {
-        // On a bar the body hangs from its hands: it moves, they stay.
+        // On a bar the body hangs from its hands (kneeling: rests on its knees): it moves, they stay.
         const c = handsCorrection(v3(_now), v3(_ref));
         _corr.set(c[0], c[1], c[2]).multiplyScalar(plant);
         out.premultiply(_t.makeTranslation(_corr.x, _corr.y, _corr.z));
@@ -434,7 +473,7 @@ export function MotionDriver({
     const prep = exSheet?.motion ? preps(exSheet) : null;
     const equipment = equipmentList(exSheet?.motion?.equipment);
     const contacts = prep?.contacts ?? NO_CONTACT;
-    const planted = contacts.hands !== null;
+    const planted = contacts.hands !== null || contacts.knees;
     const standing = contacts.feet;
     if (key !== s.key) {
       s.plantFrom = s.plant;
@@ -501,10 +540,14 @@ export function MotionDriver({
         return { heel: v3(_h), ball: v3(_b) };
       });
       s.ballStart = refs.length > 0 ? new Vector3(...refs.reduce<V3>((a, f) => [a[0] + f.ball[0] / refs.length, a[1] + f.ball[1] / refs.length, a[2] + f.ball[2] / refs.length], [0, 0, 0])) : null;
-      if (planted && s.palmStart) {
-        s.palmRef[0].copy(s.palmStart[0]);
-        s.palmRef[1].copy(s.palmStart[1]);
+      s.kneeStart = kneeBones.length === 2 ? (s.kneeStart ?? new Vector3()).copy(kneeBones[0]!.getWorldPosition(_pl)).add(kneeBones[1]!.getWorldPosition(_pr)).multiplyScalar(0.5) : null;
+      s.rootVaries = exSheet.motion.keys.some((key) => key.root !== undefined);
+      rootMatrix(keyFrame(exSheet, 0).root, s.rootStart);
+      const held = contacts.knees ? 'knees' : contacts.grip;
+      if (planted && heldPoint(held, s.heldRef)) {
+        s.held = held;
         s.hinge = contacts.hands === 'hinge';
+        s.pivotKnees = contacts.pivot === 'knees';
         s.plantedId = exSheet.id;
       }
       if (standing) {
@@ -577,6 +620,8 @@ export function MotionDriver({
       // Where the free-standing equipment and the ground go (from M0: they do not ride on the correction).
       if (exSheet?.motion && equipment.length > 0) {
         const ex = runtime.exercise ?? { trunk: new Vector3(), palms: null, hands: null, feet: null, floor: null, modelFloor };
+        // With per-key turns the equipment stays where the first key's turn puts it.
+        if (s.rootVaries && s.startId === exSheet.id) _m0.copy(s.rootStart);
         ex.trunk.copy(pivot).applyMatrix4(_m0);
         if (s.palmStart) {
           const hands = ex.hands ?? [new Vector3(), new Vector3()];

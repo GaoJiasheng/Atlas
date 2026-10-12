@@ -44,9 +44,11 @@ import {
   lineShape,
   machineSeatShape,
   placeFixed,
+  postShape,
   pullUpBarShape,
   stepShape,
   straightBarShape,
+  wallShape,
   type EquipmentShape,
   type PlaceContext,
 } from '../../lib/equipment';
@@ -75,6 +77,8 @@ const GHOST_OPACITY = 0.6;
 const FLOOR_OPACITY = { ghost: 0.25, solid: 0.5 } as const;
 /** Draw order with the mannequin: before it (Mannequin.tsx −1), so a bar in front of the body covers it. */
 const EQUIPMENT_RENDER_ORDER = -2;
+/** Cable diameter beside the wire figure (metres; LAT_BAR.cable otherwise). */
+const THIN_CABLE = 0.003;
 /** The lat bar's pulley sits this far above the bar at the first key when the data gives no `at` (metres). */
 const LAT_PULLEY_RISE = 0.85;
 
@@ -89,8 +93,10 @@ type Place =
   | { kind: 'fixed'; side: number }
   /** A cable's pulley wheel, at the trunk + `at`. */
   | { kind: 'pulley' }
-  /** A line from the pulley / anchor to a palm, the palms' midpoint or a foot. */
-  | { kind: 'line'; to: 'l' | 'r' | 'mid' | 'foot-l' | 'foot-r' };
+  /** A line from the pulley / anchor to a palm, the palms' midpoint, a foot's ball or an ankle (a cuff). */
+  | { kind: 'line'; to: 'l' | 'r' | 'mid' | 'foot-l' | 'foot-r' | 'ankle-l' | 'ankle-r' }
+  /** One held between both palms: on end (`vertical`) or along the arms (`both`: a pullover, a goblet). */
+  | { kind: 'cupped' };
 
 interface Piece {
   place: Place;
@@ -120,10 +126,10 @@ function oneGeometry(shape: EquipmentShape): BufferGeometry {
 const sides = (hand: EquipmentSpec['hand']): ('l' | 'r')[] => (hand === 'left' ? ['l'] : hand === 'right' ? ['r'] : ['l', 'r']);
 
 /** The pieces one spec draws, held (in the body's frame) or not. */
-function piecesOf(spec: EquipmentSpec, held: boolean): Piece[] {
+function piecesOf(spec: EquipmentSpec, held: boolean, cable: number): Piece[] {
   const out: Piece[] = [];
   const add = (place: Place, shape: EquipmentShape, see = false) => out.push({ place, spec, geometry: oneGeometry(shape), see });
-  const isHeld = (p: Place) => p.kind === 'hands' || p.kind === 'palm' || p.kind === 'back';
+  const isHeld = (p: Place) => p.kind === 'hands' || p.kind === 'palm' || p.kind === 'back' || p.kind === 'cupped';
   const want = (p: Place) => isHeld(p) === held;
   const each = (place: Place, shape: () => EquipmentShape, see = false) => {
     if (want(place)) add(place, shape(), see);
@@ -134,22 +140,27 @@ function piecesOf(spec: EquipmentSpec, held: boolean): Piece[] {
       break;
     case 'dumbbell':
     case 'kettlebell':
-    case 'cable-handle':
-      for (const side of sides(spec.hand)) each({ kind: 'palm', side }, spec.kind === 'dumbbell' ? dumbbellShape : spec.kind === 'kettlebell' ? kettlebellShape : cableHandleShape);
+    case 'cable-handle': {
+      const shape = spec.kind === 'dumbbell' ? dumbbellShape : spec.kind === 'kettlebell' ? kettlebellShape : cableHandleShape;
+      // On end in both hands: one, between the palms.
+      if (spec.hold === 'both' || (spec.hold === 'vertical' && (spec.hand ?? 'both') === 'both')) each({ kind: 'cupped' }, shape);
+      else for (const side of sides(spec.hand)) each({ kind: 'palm', side }, shape);
       break;
+    }
     case 'lat-bar':
       each({ kind: 'hands' }, () => straightBarShape(LAT_BAR.length));
-      each({ kind: 'line', to: 'mid' }, () => lineShape(LAT_BAR.cable));
+      each({ kind: 'line', to: 'mid' }, () => lineShape(cable));
       each({ kind: 'pulley' }, () => columnPulley());
       break;
     case 'cable':
-      if (spec.handle === 'bar') {
+      if (spec.to === 'ankle.l' || spec.to === 'ankle.r') each({ kind: 'line', to: spec.to === 'ankle.l' ? 'ankle-l' : 'ankle-r' }, () => lineShape(cable));
+      else if (spec.handle === 'bar') {
         each({ kind: 'hands' }, () => straightBarShape(0.5));
-        each({ kind: 'line', to: 'mid' }, () => lineShape(LAT_BAR.cable));
+        each({ kind: 'line', to: 'mid' }, () => lineShape(cable));
       } else
         for (const side of sides(spec.hand)) {
           each({ kind: 'palm', side }, cableHandleShape);
-          each({ kind: 'line', to: side }, () => lineShape(LAT_BAR.cable));
+          each({ kind: 'line', to: side }, () => lineShape(cable));
         }
       each({ kind: 'fixed', side: 0 }, () => columnShape(0), true);
       each({ kind: 'pulley' }, () => columnPulley());
@@ -179,8 +190,41 @@ function piecesOf(spec: EquipmentSpec, held: boolean): Piece[] {
     case 'floor':
       each({ kind: 'fixed', side: 0 }, floorShape, true);
       break;
+    case 'wall':
+      each({ kind: 'fixed', side: 0 }, () => wallShape(heightOf(spec)), true);
+      break;
+    case 'post':
+      each({ kind: 'fixed', side: 0 }, () => postShape(heightOf(spec)), true);
+      break;
   }
   return out;
+}
+
+const _up = new Vector3();
+const _qr = new Quaternion();
+/**
+ * The turn of a piece held in a palm (its handle along X, the ring or bell
+ * along −Y toward the fingers): `across` the forearm (side to side, front to
+ * back for a neutral grip; default), `along` it, or `vertical` (on end: the
+ * handle along the scene's up). `forearm` is the elbow → wrist direction.
+ */
+function heldTurn(hold: EquipmentSpec['hold'], grip: EquipmentSpec['grip'], forearm: Vector3, root: Matrix4): Quaternion {
+  if (hold === 'along' || hold === 'vertical') {
+    if (hold === 'along') _x.copy(forearm);
+    else _x.copy(_up.set(0, 1, 0).applyQuaternion(_qr.setFromRotationMatrix(root).invert()));
+    // The ring / bell hangs across the handle, toward the body's front where it can.
+    _y.set(0, 0, -1).addScaledVector(_x, _x.z);
+    if (_y.lengthSq() < 1e-6) _y.set(0, -1, 0).addScaledVector(_x, _x.y);
+    _y.normalize();
+  } else {
+    _x.set(grip === 'neutral' ? 0 : 1, 0, grip === 'neutral' ? 1 : 0);
+    _x.addScaledVector(forearm, -_x.dot(forearm));
+    if (_x.lengthSq() < 1e-6) _x.set(0, 1, 0).addScaledVector(forearm, -forearm.y);
+    _x.normalize();
+    _y.copy(forearm).negate();
+  }
+  _z.crossVectors(_x, _y);
+  return _q.setFromRotationMatrix(_m.makeBasis(_x, _y, _z));
 }
 
 /** The pulley wheel (a short disc along X) on its own, at the pulley point. */
@@ -198,6 +242,7 @@ export function Equipment({
   trunk,
   style,
   solid,
+  thin = false,
 }: {
   specs: readonly EquipmentSpec[];
   /** Held pieces (inside the root group) or the rest (scene). */
@@ -210,11 +255,13 @@ export function Equipment({
   trunk: Object3D | null;
   /** The equipment's neutral look. */
   style: PartStyle;
-  /** With the mannequin: solid, drawn before the body's colour. */
+  /** With the mannequin or the wire figure: solid, drawn before the body. */
   solid: boolean;
+  /** Beside the wire figure: the cables thinner. */
+  thin?: boolean;
 }) {
   const runtime = useRuntime();
-  const pieces = useMemo(() => specs.flatMap((spec) => piecesOf(spec, held)), [specs, held]);
+  const pieces = useMemo(() => specs.flatMap((spec) => piecesOf(spec, held, thin ? THIN_CABLE : LAT_BAR.cable)), [specs, held, thin]);
   useEffect(() => () => pieces.forEach((p) => p.geometry.dispose()), [pieces]);
 
   const materials = useMemo<PartMaterial[]>(() => pieces.map(() => createPartMaterial()), [pieces]);
@@ -305,6 +352,10 @@ export function Equipment({
             const foot = place.to === 'foot-l' ? footing.l : footing.r;
             if (!foot) return;
             footPoints(foot, _f, _b);
+          } else if (place.to === 'ankle-l' || place.to === 'ankle-r') {
+            const foot = place.to === 'ankle-l' ? footing.l : footing.r;
+            if (!foot) return;
+            foot.bone.getWorldPosition(_b);
           } else if (place.to === 'mid') {
             if (!l || !r) return;
             gripPoint(l, _b, _f);
@@ -344,14 +395,16 @@ export function Equipment({
           const grip = place.side === 'l' ? l : r;
           if (!grip) return;
           gripPoint(grip, g.position, _f);
-          // Across the forearm: side to side, or front to back for a neutral grip; the handle's ring / the bell toward the fingers.
-          _x.set(p.spec.grip === 'neutral' ? 0 : 1, 0, p.spec.grip === 'neutral' ? 1 : 0);
-          _x.addScaledVector(_f, -_x.dot(_f));
-          if (_x.lengthSq() < 1e-6) _x.set(0, 1, 0).addScaledVector(_f, -_f.y);
-          _x.normalize();
-          _y.copy(_f).negate();
-          _z.crossVectors(_x, _y);
-          g.quaternion.setFromRotationMatrix(_m.makeBasis(_x, _y, _z));
+          g.quaternion.copy(heldTurn(p.spec.hold, p.spec.grip, _f, runtime.root));
+          break;
+        }
+        case 'cupped': {
+          if (!l || !r) return;
+          gripPoint(l, _a, _f);
+          gripPoint(r, _b, _f2);
+          g.position.copy(_a).add(_b).multiplyScalar(0.5);
+          _f.add(_f2).normalize();
+          g.quaternion.copy(heldTurn(p.spec.hold === 'both' ? 'along' : 'vertical', p.spec.grip, _f, runtime.root));
           break;
         }
       }

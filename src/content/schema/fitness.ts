@@ -136,10 +136,10 @@ export const EQUIPMENT_HANDS = ['left', 'right', 'both'] as const;
 /** Fields each equipment kind may use besides `kind` (docs/06 动作模式数据手册; the rest are refused). */
 const EQUIPMENT_FIELDS: Record<EquipmentKind, readonly string[]> = {
   barbell: ['grip', 'width', 'on', 'at'],
-  dumbbell: ['grip', 'hand'],
-  kettlebell: ['grip', 'hand'],
+  dumbbell: ['grip', 'hand', 'hold'],
+  kettlebell: ['grip', 'hand', 'hold'],
   'cable-handle': ['grip', 'width', 'hand'],
-  cable: ['grip', 'hand', 'handle', 'at', 'turn'],
+  cable: ['grip', 'hand', 'handle', 'at', 'turn', 'to'],
   'lat-bar': ['grip', 'width', 'at'],
   band: ['hand', 'to', 'at'],
   bench: ['at', 'turn', 'incline'],
@@ -149,6 +149,8 @@ const EQUIPMENT_FIELDS: Record<EquipmentKind, readonly string[]> = {
   'dip-bars': ['at', 'height'],
   step: ['at', 'turn', 'height'],
   floor: ['at', 'turn'],
+  wall: ['at', 'turn', 'height'],
+  post: ['at', 'height'],
 };
 
 export const equipmentSchema = z
@@ -172,12 +174,19 @@ export const equipmentSchema = z
     incline: z.number().min(0).max(90).optional(),
     /** incline-bench: back angle above the horizontal (default 30°); machine-seat: back pad recline from vertical (default 10°). */
     angle: z.number().min(0).max(90).optional(),
-    /** pull-up-bar: bar above the floor (default 2.3 m); dip-bars: bar tops (1.45 m); step: box height (0.2 m); machine-seat: seat top (0.45 m). */
+    /** pull-up-bar: bar above the floor (default 2.3 m); dip-bars: bar tops (1.45 m); step: box height (0.2 m); machine-seat: seat top (0.45 m); wall: 2 m; post: 1.1 m. */
     height: z.number().positive().max(3).optional(),
     /** cable: a D-handle in each holding hand (default) or a straight bar between the palms. */
     handle: z.enum(['d-handle', 'bar']).optional(),
-    /** band: what it pulls on (default the hands). */
-    to: z.enum(['hands', 'feet']).optional(),
+    /** band: what it pulls on (default the hands; `feet`: the balls of the feet); cable: an ankle cuff (`ankle.l` / `ankle.r`) instead of handles. */
+    to: z.enum(['hands', 'feet', 'ankle.l', 'ankle.r']).optional(),
+    /**
+     * dumbbell / kettlebell: how it sits in the palm — `across` the forearm
+     * (default), `along` it, `vertical` (on end; with both hands, one held
+     * between the palms: a goblet squat), or `both`: one held between the
+     * palms, along the arms (a pullover; a goblet with the forearms upright).
+     */
+    hold: z.enum(['across', 'along', 'vertical', 'both']).optional(),
     /** machine-seat: a pad over the thighs (lat pulldown). */
     thighPad: z.boolean().optional(),
   })
@@ -189,6 +198,8 @@ export const equipmentSchema = z
         ctx.addIssue({ code: z.ZodIssueCode.custom, path: [key], message: `\`${key}\` does not apply to ${e.kind} (it takes ${allowed.join(', ') || 'no fields'})` });
     if ((e.kind === 'cable' || e.kind === 'band') && e.at === undefined)
       ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['at'], message: `${e.kind} needs \`at\` (${e.kind === 'cable' ? 'the pulley' : 'the anchor'}, metres from the trunk joint)` });
+    if (e.to !== undefined && (e.kind === 'band' ? e.to.startsWith('ankle') : e.kind === 'cable' && e.to === 'feet'))
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['to'], message: e.kind === 'band' ? 'band: `to` is hands or feet' : 'cable: `to` is hands or an ankle cuff (ankle.l / ankle.r)' });
     if (e.kind === 'barbell' && e.on === 'back' && e.at === undefined)
       ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['at'], message: 'a barbell on the back needs `at` (metres from the trunk joint, in its rest frame)' });
   });
@@ -197,6 +208,8 @@ export type EquipmentSpec = z.output<typeof equipmentSchema>;
 export const motionKey = z
   .object({
     phase: z.enum(EXERCISE_KEY_PHASES),
+    /** This key's whole-body turn (`motion.root` form), when the body tilts between keys (a curl-up); the motion's `root` otherwise. */
+    root: z.object({ rotation: vec3, offset: vec3.optional() }).strict().optional(),
     joints: z.record(jointName, jointAngles).default({}),
     /** Optional override: contraction per muscle (else computed from the joints and the muscle sheets' actions, lib/contraction.ts). */
     contract: contractMap.optional(),
@@ -224,10 +237,12 @@ export const exerciseMotion = z
     /**
      * What holds the body, in priority order (lib/contact.ts): `hands` (the
      * palms stay where the first key puts them — on a pull-up bar, dip bars or
-     * the floor — and the body moves), `feet` (planted on the floor), `seat`
-     * (the body stays where the root turn puts it). The first is met exactly;
-     * with `[hands, feet]` on the floor the body pivots about the feet so the
-     * palms stay on it (push-up, plank). Default from the equipment: hands for
+     * the floor — and the body moves), `hand.l` / `hand.r` (one palm: a
+     * one-arm row's hand on the bench), `feet` (planted on the floor),
+     * `knees` (kneeling: their midpoint stays), `seat` (the body stays where
+     * the root turn puts it). The first is met exactly; with a hand (or both)
+     * first and the feet or knees second on the floor or a bench the body
+     * pivots about them so the palm stays on it (push-up, plank; bird dog). Default from the equipment: hands for
      * a pull-up bar / dip bars, `[hands, feet]` for the floor with the palms
      * on it, feet when standing, else none.
      */

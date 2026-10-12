@@ -53,6 +53,7 @@ import {
   DEFAULT_FOV,
   fitCameraToAspect,
   fitSphereCamera,
+  exerciseLift,
   fitExerciseCamera,
   fitSpan,
   ORBIT_PERIOD_S,
@@ -257,7 +258,10 @@ export function CameraRig({
     // The stage's own aspect (the camera's may lag a resize by a frame).
     const { width, height } = stageSize.current;
     const aspect = width > 0 && height > 0 ? width / height : camera.aspect;
-    return fitExerciseCamera(sweep.points, viewDirection(view.azimuth, view.elevation, view.yaw), aspect, view.fill !== undefined ? { fill: view.fill } : {});
+    // Presenting: the caption card covers the bottom of the stage, so the figure goes up by its height.
+    const card = ui.getState().presenting ? document.querySelector('[data-hud-panel="present"]')?.getBoundingClientRect().height ?? 0 : 0;
+    const lift = exerciseLift(card, height);
+    return fitExerciseCamera(sweep.points, viewDirection(view.azimuth, view.elevation, view.yaw), aspect, view.fill !== undefined ? { fill: view.fill, lift } : { lift });
   };
 
   /** Where the cover camera is for the current stage. */

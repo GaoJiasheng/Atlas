@@ -22,7 +22,7 @@ import {
   type JointAngles,
   type MuscleSheet,
 } from '../../content/schema/fitness';
-import { ACTION_JOINTS, equipmentList, EXERCISE_PHASES, MOVEMENTS, OPPOSITE_MOVEMENTS, otherSideJoint, type Movement } from '../../lib/anatomy';
+import { ACTION_JOINTS, equipmentList, EXERCISE_BODIES, EXERCISE_PHASES, MOVEMENTS, OPPOSITE_MOVEMENTS, otherSideJoint, type Movement } from '../../lib/anatomy';
 import { equipmentJoints } from './lib/equipment';
 import { detailSourceIds } from './lib/detail';
 import { GROUP_LABEL_PREFIX } from './lib/labels';
@@ -39,7 +39,7 @@ import {
   type Side,
 } from './lib/bilateral';
 import { MAX_POSES, POSE_DURATION } from './lib/pose';
-import { canMove, DEFAULT_BULGE, DEFAULT_DEMO_ANGLE, JOINT_PREFIX, jointOf, MIN_DEMO_ANGLE, musclePartIds } from './lib/rig';
+import { canMove, jointCandidates, DEFAULT_BULGE, DEFAULT_DEMO_ANGLE, JOINT_PREFIX, jointOf, MIN_DEMO_ANGLE, musclePartIds } from './lib/rig';
 import { MAX_EXPLODE_STAGE } from './lib/explode';
 
 /* ------------------------------------------------------------------ */
@@ -807,12 +807,15 @@ export const viewsSchema = z
      */
     cover: orbitCamera.optional(),
     /**
-     * How the body reads while an exercise plays (topics with a `context`
-     * skin part): `mannequin` (default) draws the skin as a solid matte
-     * figure with the muscles over it x-ray style and the bones hidden;
-     * `ghost` keeps the faint skin outline of the other modes.
+     * How the body reads while an exercise plays (topics with a skinned
+     * `context` skin part): `wire` (default when the glb has a `skin-wire`
+     * node) draws the low-poly figure as ink hairlines over a faint
+     * silhouette; `mannequin` (the default otherwise) draws the skin as a
+     * solid matte figure; both put the muscles over it x-ray style, hide the
+     * bones and draw procedural hands that match the grip; `ghost` keeps the
+     * faint skin outline of the other modes.
      */
-    exerciseBody: z.enum(['mannequin', 'ghost']).optional(),
+    exerciseBody: z.enum(EXERCISE_BODIES).optional(),
   })
   .strict();
 export type ViewPresets = z.output<typeof viewsSchema>;
@@ -1271,8 +1274,10 @@ export const spaceSceneData = z
       // Every ACTIONS demo button the muscle sheet shows must visibly move its joint.
       const side = p.id.endsWith('-r') ? '.r' : '.l';
       for (const a of (p.muscle !== undefined ? muscles.get(p.muscle)?.actions : undefined) ?? []) {
-        const joint = data.parts.rig?.joints[`${a.joint}${side}`] ?? data.parts.rig?.joints[a.joint];
-        if (!joint || !canMove(joint.axes, a.movement as Movement)) continue;
+        const joint = jointCandidates(a.joint, a.movement, side === '.r' ? 'r' : 'l')
+          .map((n) => data.parts.rig?.joints[n])
+          .find((j) => j !== undefined && canMove(j.axes, a.movement as Movement));
+        if (!joint) continue;
         const amount = data.parts.rig?.demo?.[a.joint as keyof NonNullable<Rig['demo']>]?.[a.movement as Movement] ?? DEFAULT_DEMO_ANGLE;
         if (Math.abs(amount) < MIN_DEMO_ANGLE)
           issue(['parts', 'rig', 'demo', a.joint, a.movement], `${amount}°: the ${p.id} demo button (${a.joint} ${a.movement}) would not visibly move; give at least ${MIN_DEMO_ANGLE}°`);
@@ -1296,8 +1301,11 @@ export const spaceSceneData = z
       for (const eq of equipmentList(e.motion?.equipment))
         for (const joint of equipmentJoints(eq))
           if (!(joint in rig)) issue(['training', 'exercises', i], `"${id}" motion.equipment ${eq.kind}: needs the rig joint "${joint}" (not in this topic's rig)`);
-      if (e.motion?.contacts?.includes('hands') && !('hand.l' in rig && 'hand.r' in rig))
-        issue(['training', 'exercises', i], `"${id}" motion.contacts: hands needs the rig joints hand.l and hand.r`);
+      const contactJoints = { hands: ['hand.l', 'hand.r'], 'hand.l': ['hand.l'], 'hand.r': ['hand.r'], knees: ['knee.l', 'knee.r'] } as const;
+      for (const c of e.motion?.contacts ?? []) {
+        const need: readonly string[] = c in contactJoints ? contactJoints[c as keyof typeof contactJoints] : [];
+        if (need.some((j) => !(j in rig))) issue(['training', 'exercises', i], `"${id}" motion.contacts: ${c} needs the rig joints ${need.join(' and ')}`);
+      }
     });
     data.training?.session?.blocks.forEach((b, i) => {
       if (!data.training!.exercises.includes(b.exercise)) issue(['training', 'session', 'blocks', i, 'exercise'], `"${b.exercise}" is not in training.exercises`);

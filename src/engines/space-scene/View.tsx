@@ -50,6 +50,7 @@ import type { SceneControls, SceneMode, ScenePreset, SceneStats } from '../core/
 import { isOrbitCamera, normalizeCamera } from '../core/camera';
 import { usePresentation, type Beat, type SpaceBeatSpec, type SpacePresentationAdapter, type SpaceSavedState } from '../core/presentation';
 import { t as tl, tx, type BilingualText, type UiKey } from '../../i18n';
+import { EXERCISE_BODIES, type ExerciseBody } from '../../lib/anatomy';
 import { DEFAULT_CAMERA, fitCameraToAspect, REFERENCE_TWEEN_MS, referenceCamera, roundCamera } from './lib/camera';
 import { modelBounds } from './lib/parts';
 import { POSE_DURATION } from './lib/pose';
@@ -504,6 +505,12 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
         pose: (name: string | null) => {
           if (name !== null && !(file.poses && name in file.poses)) return false;
           store.getState().applyState({ pose: name, exercise: null }, { instant: true });
+          return true;
+        },
+        // QA: draw exercise mode's body as `wire`, `mannequin` or `ghost` (null = the data's `views.exerciseBody`).
+        exerciseBody: (style: ExerciseBody | null) => {
+          if (style !== null && !(EXERCISE_BODIES as readonly string[]).includes(style)) return false;
+          ui.setState({ exerciseBody: style });
           return true;
         },
       },

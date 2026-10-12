@@ -14,7 +14,9 @@
  * fixed, and a two-footed one (a squat) both, on average. An exercise can name
  * the feet that hold (`motion.feet`: a reverse lunge steps one foot back while
  * the front one stays): only those anchor the body, and the lowest of them
- * stays on the floor.
+ * stays on the floor. On a step (`ball`: a calf raise with heel drop) the
+ * balls of the feet hold: they stay on the step's edge, and the heels are free
+ * to drop below it.
  */
 type V3 = readonly [number, number, number];
 
@@ -52,6 +54,8 @@ export function isStanding(rotation: readonly number[] | undefined, equipment: r
 }
 
 const low = (f: FootPair) => Math.min(f.heel[1], f.ball[1]);
+/** The contact that holds: the lower of heel and ball, or the ball alone on a step. */
+const contactY = (f: FootPair, ball: boolean) => (ball ? f.ball[1] : low(f));
 const mix = (a: V3, b: V3, k: number): V3 => [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k, a[2] + (b[2] - a[2]) * k];
 
 /**
@@ -59,21 +63,21 @@ const mix = (a: V3, b: V3, k: number): V3 => [a[0] + (b[0] - a[0]) * k, a[1] + (
  * them, `ref` where they stood at the first key (same frame, same order).
  * Returns the translation [x, y, z] (metres) to add to the body.
  */
-export function standCorrection(now: readonly FootPair[], ref: readonly FootPair[], holds?: readonly boolean[]): [number, number, number] {
+export function standCorrection(now: readonly FootPair[], ref: readonly FootPair[], holds?: readonly boolean[], ball = false): [number, number, number] {
   if (now.length === 0 || now.length !== ref.length) return [0, 0, 0];
   const held = (i: number) => holds?.[i] ?? true;
   if (!now.some((_, i) => held(i))) return [0, 0, 0];
-  const lowest = Math.min(...now.filter((_, i) => held(i)).map(low));
-  const floor = Math.min(...ref.filter((_, i) => held(i)).map(low));
+  const lowest = Math.min(...now.filter((_, i) => held(i)).map((f) => contactY(f, ball)));
+  const floor = Math.min(...ref.filter((_, i) => held(i)).map((f) => contactY(f, ball)));
   let wx = 0;
   let wz = 0;
   let w = 0;
   for (let i = 0; i < now.length; i++) {
     const f = now[i]!;
     const r = ref[i]!;
-    const weight = held(i) ? footWeight(low(f), lowest) : 0;
+    const weight = held(i) ? footWeight(contactY(f, ball), lowest) : 0;
     if (weight === 0) continue;
-    const roll = footRoll(f.heel[1], f.ball[1]);
+    const roll = ball ? 1 : footRoll(f.heel[1], f.ball[1]);
     const a = mix(f.heel, f.ball, roll);
     const b = mix(r.heel, r.ball, roll);
     wx += (b[0] - a[0]) * weight;
@@ -88,16 +92,16 @@ export function standCorrection(now: readonly FootPair[], ref: readonly FootPair
  * where they stood once the body has moved by `shift`: two feet share one
  * correction, so a squat that turns the legs out leaves a small residue.
  */
-export function footSlip(now: readonly FootPair[], ref: readonly FootPair[], shift: readonly [number, number, number], holds?: readonly boolean[]): number {
+export function footSlip(now: readonly FootPair[], ref: readonly FootPair[], shift: readonly [number, number, number], holds?: readonly boolean[], ball = false): number {
   const held = (i: number) => holds?.[i] ?? true;
   if (now.length === 0 || now.length !== ref.length || !now.some((_, i) => held(i))) return 0;
-  const lowest = Math.min(...now.filter((_, i) => held(i)).map(low));
+  const lowest = Math.min(...now.filter((_, i) => held(i)).map((f) => contactY(f, ball)));
   let slip = 0;
   for (let i = 0; i < now.length; i++) {
     const f = now[i]!;
     const r = ref[i]!;
-    if (!held(i) || footWeight(low(f), lowest) < 1) continue;
-    const roll = footRoll(f.heel[1], f.ball[1]);
+    if (!held(i) || footWeight(contactY(f, ball), lowest) < 1) continue;
+    const roll = ball ? 1 : footRoll(f.heel[1], f.ball[1]);
     const a = mix(f.heel, f.ball, roll);
     const b = mix(r.heel, r.ball, roll);
     slip = Math.max(slip, Math.hypot(a[0] + shift[0] - b[0], a[2] + shift[2] - b[2]));

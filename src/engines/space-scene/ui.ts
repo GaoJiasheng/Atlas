@@ -8,6 +8,7 @@
 import { createStore, type StoreApi } from 'zustand/vanilla';
 import type { OrbitCamera } from '../core/types';
 import type { SpaceSceneExt } from './index';
+import type { ExerciseBody } from '../../lib/anatomy';
 
 /** What REFERENCE saved on entry, restored when it is switched off. */
 export interface ReferenceSave {
@@ -40,6 +41,8 @@ export interface SpaceUiState {
   model: { state: 'none' | 'loading' | 'ready' | 'failed'; progress: number };
   /** Rest bounds of the glb parts once loaded (the ARCHITECTURE elevation draws them; primitives come from the data). */
   meshBounds: ReadonlyMap<string, { min: readonly number[]; max: readonly number[] }> | null;
+  /** QA (`__atlas.engine.test.exerciseBody`): the exercise body style instead of the data's (null = the data's). */
+  exerciseBody: ExerciseBody | null;
 }
 
 export type SpaceUiStore = StoreApi<SpaceUiState>;
@@ -54,5 +57,6 @@ export function createSpaceUi(): SpaceUiStore {
     cover: false,
     model: { state: 'none', progress: 0 },
     meshBounds: null,
+    exerciseBody: null,
   }));
 }

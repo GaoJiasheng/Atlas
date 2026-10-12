@@ -34,7 +34,16 @@ import type { PartShape } from './PartNode';
 export interface GltfRig {
   root: Object3D;
   node(name: string): Object3D | null;
+  /** Meshes the engine draws itself, not as parts (`BODY_NODES`), by node name. */
+  body: ReadonlyMap<string, PartShape>;
 }
+
+/**
+ * Skinned meshes the engine reads by name when the glb has them: the wire
+ * figure of exercise mode (WireBody.tsx) and the skin's hands, split from the
+ * skin outline (drawn with it outside exercise mode, SceneRoot.tsx).
+ */
+export const BODY_NODES = ['skin-wire', 'skin-hand.l', 'skin-hand.r'] as const;
 
 /** three's GLTFLoader strips `.`, `:`, `/`, `[`, `]` from node names (`pec.l` → `pecl`): look names up the same way. */
 const loaded = (name: string) => PropertyBinding.sanitizeNodeName(name);
@@ -175,9 +184,7 @@ export default function GltfSource({
     root.updateMatrixWorld(true);
     const out = new Map<string, PartShape>();
     const skeletons: Skeleton[] = [];
-    for (const [partId, name] of meshes) {
-      const mesh = findMesh(root.getObjectByName(loaded(name)));
-      if (!mesh) continue; // `pnpm validate` checks every node exists.
+    const shapeOf = (mesh: Mesh): PartShape => {
       const geometry = mesh.geometry;
       adoptFibreAttributes(geometry);
       const position = new Vector3();
@@ -200,7 +207,7 @@ export default function GltfSource({
         const raw = geometry.boundingBox!.getSize(new Vector3()).length();
         fibre.metres = raw > 0 ? size.length() / raw : 1;
       }
-      out.set(partId, {
+      return {
         pieces: [
           {
             geometry,
@@ -217,7 +224,16 @@ export default function GltfSource({
         restFan: 1,
         box: { min: [box.min.x, box.min.y, box.min.z], max: [box.max.x, box.max.y, box.max.z] },
         ...(fibre ? { fibre } : {}),
-      });
+      };
+    };
+    for (const [partId, name] of meshes) {
+      const mesh = findMesh(root.getObjectByName(loaded(name)));
+      if (mesh) out.set(partId, shapeOf(mesh)); // `pnpm validate` checks every node exists.
+    }
+    const body = new Map<string, PartShape>();
+    for (const name of BODY_NODES) {
+      const mesh = findMesh(root.getObjectByName(loaded(name)));
+      if (mesh) body.set(name, shapeOf(mesh));
     }
     // Every mesh comes out of the copy (PartNode draws the parts); the bones stay.
     const all: Object3D[] = [];
@@ -230,7 +246,7 @@ export default function GltfSource({
       if (o.name && !nodes.has(o.name)) nodes.set(o.name, o);
     });
     ui.setState({ model: { state: 'ready', progress: 1 } });
-    onShapes(out, { root, node: (name) => nodes.get(loaded(name)) ?? null });
+    onShapes(out, { root, node: (name) => nodes.get(loaded(name)) ?? null, body });
   }, [gltf, meshes, url, onShapes, ui]);
   return null;
 }

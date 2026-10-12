@@ -60,7 +60,7 @@ import {
   type SharedFitnessRaw,
 } from '../src/content/schema/fitness';
 import { sharedSourcesFile } from '../src/content/schema/sources';
-import { glbIssues } from './lib/glb-check';
+import { glbIssues, glbNodeNames } from './lib/glb-check';
 import { readSharedFitness } from './lib/shared-data';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -366,6 +366,10 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
       ...Object.entries(file.rig?.joints ?? {}).map(([name, j]) => ({ node: j.node, what: `rig joint "${name}"` })),
     ];
     for (const message of await glbIssues(join(PUBLIC_DIR, model), nodes)) error(join(dataDir, 'parts.json'), `model ${model}: ${message}`);
+    // The wire figure of exercise mode (docs/06 动作模式数据手册): asked for on a skinned skin part, its low-poly node should be in the glb.
+    const skin = file.parts.some((p) => p.context === true && p.mesh !== undefined && !p.mesh.startsWith('skin-hand'));
+    if (file.views?.exerciseBody === 'wire' && skin && !(await glbNodeNames(join(PUBLIC_DIR, model))).has('skin-wire'))
+      warn(join(dataDir, 'parts.json'), `views.exerciseBody "wire": model ${model} has no "skin-wire" node, so the engine decimates the skin outline at load (slower, rougher)`);
   }
   const presets = new Set(data !== undefined ? schemas.presetIds(data) : []);
   const glossaryFile = data !== undefined ? (data as { glossary?: GlossaryFile }).glossary : undefined;
@@ -446,8 +450,9 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
 /* ------------------------------------------------------------------ */
 
 interface PartsLike {
-  parts: { id: string; mesh?: string }[];
+  parts: { id: string; mesh?: string; context?: boolean }[];
   rig?: { joints: Record<string, { node: string }> };
+  views?: { exerciseBody?: string };
 }
 
 function validateUiStrings(): void {

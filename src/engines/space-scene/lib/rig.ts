@@ -89,15 +89,40 @@ export function foldAngles(axes: Readonly<Partial<Record<Movement, readonly numb
   return out;
 }
 
-/** Rotation of a joint for angles already folded onto its axes (degrees), axes applied in the rig's order. */
+/**
+ * The rig joints a muscle sheet's joint can mean, in order (side `l` / `r`):
+ * the sided joint, the unsided one; `wrist` falls back to the `hand` joint
+ * (the rigs pivot the hand at the wrist), pronation / supination on `forearm`
+ * to the `elbow`. The ACTIONS demo, the contraction plan and validate share it.
+ */
+export function jointCandidates(joint: string, movement: string, side: 'l' | 'r'): string[] {
+  const names = [`${joint}.${side}`, joint];
+  if (joint === 'wrist') names.push(`hand.${side}`);
+  if (joint === 'forearm' && (movement === 'pronation' || movement === 'supination')) names.push(`elbow.${side}`);
+  return names;
+}
+
+/** Movements turned about the parent's fixed axis after the others: a horizontal sweep carries the arm (or thigh) wherever flexion and abduction have lifted it. */
+const SWEEPS: ReadonlySet<Movement> = new Set(['horizontal-adduction', 'horizontal-abduction']);
+
+/**
+ * Rotation of a joint for angles already folded onto its axes (degrees),
+ * about the parent's rest axes. The rig's order applies, except that a
+ * horizontal ab/adduction comes last: flexion and abduction lift the limb,
+ * then the sweep turns it about the trunk's vertical, so it moves the hand
+ * forward and across instead of twisting the arm about itself.
+ */
 export function anglesQuat(axes: Readonly<Partial<Record<Movement, readonly number[]>>>, folded: Angles): Quat {
   let q: Quat = IDENTITY_QUAT;
+  let sweep: Quat = IDENTITY_QUAT;
   for (const [movement, axis] of Object.entries(axes) as [Movement, readonly number[]][]) {
     const deg = folded[movement];
     if (!deg) continue;
-    q = quatMul(q, quatFromAxisAngle(axis, (deg * Math.PI) / 180));
+    const r = quatFromAxisAngle(axis, (deg * Math.PI) / 180);
+    if (SWEEPS.has(movement)) sweep = quatMul(sweep, r);
+    else q = quatMul(q, r);
   }
-  return q;
+  return quatMul(sweep, q);
 }
 
 /** Angles `k` of the way from `a` to `b` (missing movements are 0). */

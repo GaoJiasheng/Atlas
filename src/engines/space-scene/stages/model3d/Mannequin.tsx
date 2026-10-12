@@ -15,32 +15,25 @@
  *
  * Matte (roughness .85, a quiet environment), one colour token
  * (`token:mannequin`: warm light grey on paper, mid grey on the dark plate),
- * eased in and out with the exercise; it casts the key light's shadow.
+ * eased in and out with the exercise; it casts the key light's shadow. The
+ * skin's hands are left out (Hands.tsx draws the hands to match the grip).
  */
 import { useEffect, useLayoutEffect, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { DetachedBindMode, FrontSide, MeshStandardMaterial, SkinnedMesh, type Group, type Mesh } from 'three';
+import { DetachedBindMode, FrontSide, MeshStandardMaterial, SkinnedMesh, type Group, type Mesh, type Object3D } from 'three';
 import type { PartShape } from './PartNode';
 import type { ShapePiece } from './geometry';
 import { keepAnimating, MAX_DT, useRuntime } from './runtime';
 import { damp } from '../../lib/math';
+import { pushDepth } from './pushDepth';
+import { withoutHands } from './bodyGeometry';
 
 /** Draw order: after the solid equipment (Equipment.tsx −2), before the muscles (0). */
-const MANNEQUIN_ORDER = -1;
-/** How far the figure's depth is pushed back (metres): deeper than the region's muscles lie under the skin, shallower than a limb. */
-const PUSH = 0.06;
-
-const PUSH_DEPTH = /* glsl */ `
-#include <project_vertex>
-{
-  vec4 atlasPushed = projectionMatrix * vec4(mvPosition.xy, mvPosition.z - ${PUSH.toFixed(3)}, 1.0);
-  gl_Position.z = atlasPushed.z / atlasPushed.w * gl_Position.w;
-}
-`;
+export const MANNEQUIN_ORDER = -1;
 /** Fade rate (~0.4 s). */
-const FADE_RATE = 9;
+export const FADE_RATE = 9;
 
-function bindSkin(mesh: Mesh | null, piece: ShapePiece) {
+export function bindSkin(mesh: Mesh | null, piece: ShapePiece) {
   if (!(mesh instanceof SkinnedMesh) || !piece.skin) return;
   // Detached: the bind matrix stays the rest one (as the part's own skinned mesh, PartNode).
   mesh.bindMode = DetachedBindMode;
@@ -58,21 +51,25 @@ function Pass({ piece, material, order, castShadow }: { piece: ShapePiece; mater
   );
 }
 
-export function Mannequin({ shape, color, on }: { shape: PartShape; color: string; on: boolean }) {
+export function Mannequin({ shape, color, on, hands }: { shape: PartShape; color: string; on: boolean; hands: readonly (Object3D | null)[] }) {
   const runtime = useRuntime();
-  const paint = useMemo(() => {
-    const m = new MeshStandardMaterial({ roughness: 0.85, metalness: 0, envMapIntensity: 0.35, side: FrontSide });
-    m.onBeforeCompile = (shader) => {
-      shader.vertexShader = shader.vertexShader.replace('#include <project_vertex>', PUSH_DEPTH);
-    };
-    m.customProgramCacheKey = () => 'atlas-mannequin-1';
-    return m;
-  }, []);
+  const paint = useMemo(() => pushDepth(new MeshStandardMaterial({ roughness: 0.85, metalness: 0, envMapIntensity: 0.35, side: FrontSide })), []);
   useEffect(() => () => paint.dispose(), [paint]);
   useEffect(() => {
     paint.color.set(color);
   }, [paint, color]);
-  const pieces = useMemo(() => shape.pieces.filter((p) => !p.lines), [shape]);
+  // The skin's own hands give way to the procedural ones (Hands.tsx).
+  const pieces = useMemo(
+    () =>
+      shape.pieces
+        .filter((p) => !p.lines)
+        .map((p) => {
+          const geometry = p.skin ? withoutHands(p.geometry, p.skin, hands) : p.geometry;
+          return { piece: geometry === p.geometry ? p : { ...p, geometry }, derived: geometry !== p.geometry };
+        }),
+    [shape, hands],
+  );
+  useEffect(() => () => pieces.forEach((p) => p.derived && p.piece.geometry.dispose()), [pieces]);
   const group = useRef<Group>(null);
   const fade = useRef(0);
   useFrame((state, delta) => {
@@ -94,7 +91,7 @@ export function Mannequin({ shape, color, on }: { shape: PartShape; color: strin
   return (
     <group ref={group} position={shape.position} visible={false}>
       <group quaternion={shape.quaternion} scale={shape.scale}>
-        {pieces.map((piece, i) => (
+        {pieces.map(({ piece }, i) => (
           <Pass key={i} piece={piece} material={paint} order={MANNEQUIN_ORDER} castShadow />
         ))}
       </group>

@@ -5,7 +5,7 @@
  */
 import { Component, lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
-import { Plane, Vector3, type Group, type SkinnedMesh } from 'three';
+import { Color, Plane, Vector3, type Group, type SkinnedMesh } from 'three';
 import { useStore } from 'zustand';
 import { useShallow } from 'zustand/react/shallow';
 import type { SceneStore } from '../../../core/store';
@@ -34,6 +34,10 @@ import { LabelProbe, ResolutionGovernor, ShadowUpdater, SitesProbe, StatsProbe, 
 import { MotionDriver } from './MotionDriver';
 import { Equipment } from './Equipment';
 import { Mannequin } from './Mannequin';
+import { WireBody, WIRE_FILL_OPACITY } from './WireBody';
+import { Hands, type HandColors } from './Hands';
+import { handPlan, RELAXED } from '../../lib/hands';
+import type { ExerciseBody } from '../../../../lib/anatomy';
 import type { GltfRig } from './GltfSource';
 import { makeGrip } from './grip';
 import { makeFoot } from './foot';
@@ -63,6 +67,8 @@ export interface SceneRootProps {
 }
 
 const NO_IDS: readonly string[] = [];
+/** The pipeline's separate skin hands (`skin-hand.l` / `.r`): the exercise body draws procedural hands instead. */
+const isSkinHand = (mesh: string | undefined) => mesh !== undefined && mesh.startsWith('skin-hand');
 const NO_EQUIPMENT: readonly never[] = [];
 
 /** Label anchor fields from a glb part's measured rest bounds (relative to its centre). */
@@ -84,6 +90,8 @@ const NO_HALF: Vec3 = [0, 0, 0];
 const CINEMA_INK = '#1f2124';
 /** The toes' contact point above the model's floor (metres). */
 const TOE_LIFT = 0.015;
+/** Ink share of the outlined hands' edge: a single hull line, so a little darker than the figure's 55 % hairlines, which cross and double up. */
+const HAND_LINE_INK = 0.7;
 /** Parts at least this fraction of the model radius cast the key light's shadow. */
 const SHADOW_CASTER_RATIO = 0.28;
 
@@ -211,12 +219,19 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
     if (hasModel && ui.getState().model.state === 'none') ui.setState({ model: { state: 'loading', progress: 0 } });
   }, [hasModel, ui]);
 
-  // A glb mesh wins over a primitive stand-in once loaded.
+  // A glb mesh wins over a primitive stand-in once loaded. The skin's hands, split from the skin outline in the glb
+  // (`skin-hand.l` / `.r`) and not parts of their own, are drawn with it — except in exercise mode, where every
+  // body style shows the procedural hands (Hands.tsx) instead.
+  const exerciseOn = s.exercise !== null && playable.has(s.exercise.id) && fitness?.exercises.some((e) => e.id === s.exercise!.id && e.motion) === true;
   const shapes = useMemo(() => {
     const out = new Map(primitiveShapes);
     meshShapes?.forEach((shape, id) => out.set(id, shape));
+    const skin = data.parts.find((p) => p.context && p.mesh !== undefined && !p.twinOf && !isSkinHand(p.mesh));
+    const outline = skin ? out.get(skin.id) : undefined;
+    const hands = ['skin-hand.l', 'skin-hand.r'].filter((n) => !data.parts.some((p) => p.mesh === n)).flatMap((n) => rig?.body.get(n)?.pieces ?? []);
+    if (skin && outline && hands.length > 0 && !exerciseOn) out.set(skin.id, { ...outline, pieces: [...outline.pieces, ...hands] });
     return out;
-  }, [primitiveShapes, meshShapes]);
+  }, [primitiveShapes, meshShapes, rig, data.parts, exerciseOn]);
   const bounds = useMemo(() => stageBounds(data.parts, shapes), [data.parts, shapes]);
   // Label anchors: from the primitives, or a glb part's measured bounds once it has loaded.
   const glbAnchors = useMemo(() => {
@@ -316,15 +331,22 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
     [exerciseLook, s.tints],
   );
   const ghosted = useMemo(() => (exerciseLook ? [...s.ghosted, ...exerciseLook.faint] : s.ghosted), [exerciseLook, s.ghosted]);
-  // The skin outline (the topic's skinned context part): the exercise mannequin (docs/06 动作模式数据手册).
-  const skinPart = useMemo(() => data.parts.find((p) => p.context && p.mesh !== undefined && !p.twinOf) ?? null, [data.parts]);
+  // The skin outline (the topic's skinned context part): the exercise body (docs/06 动作模式数据手册 · body styles).
+  const skinPart = useMemo(() => data.parts.find((p) => p.context && p.mesh !== undefined && !p.twinOf && !isSkinHand(p.mesh)) ?? null, [data.parts]);
   const skinShape = skinPart ? shapes.get(skinPart.id) : undefined;
-  const mannequin =
-    exerciseLook !== null &&
-    exerciseSheet?.motion !== undefined &&
-    playable.has(exerciseSheet.id) &&
-    (data.views.exerciseBody ?? 'mannequin') === 'mannequin' &&
-    skinShape?.pieces.some((p) => p.skin) === true;
+  const skinned = skinShape?.pieces.some((p) => p.skin) === true;
+  // The glb's low-poly wire figure (else the wire style decimates the skin outline).
+  const wireShape = rig?.body.get('skin-wire') ?? null;
+  const uiBody = useStore(ui, (u) => u.exerciseBody);
+  const bodyStyle: ExerciseBody = uiBody ?? data.views.exerciseBody ?? (wireShape ? 'wire' : 'mannequin');
+  const exercising = exerciseLook !== null && exerciseSheet?.motion !== undefined && playable.has(exerciseSheet.id);
+  // The body drawn over the skin while an exercise plays: the wire figure or the mannequin (null: the ghost outline).
+  const body = exercising && skinned && bodyStyle !== 'ghost' ? bodyStyle : null;
+  const mannequin = body !== null;
+  // The hands' look: the body's style (the ghost outline takes the wire's outlined hands).
+  const lastBody = useRef<'wire' | 'mannequin'>('wire');
+  if (body) lastBody.current = body;
+  else if (exercising && bodyStyle === 'ghost') lastBody.current = 'wire';
   const bonesOn = s.exercise?.bones === true;
   const displays = useMemo(() => {
     const out = resolveAllPartDisplays(data.parts, { view: s.view, part: s.part, layers: s.layers, hidden: s.hidden, ghosted, solo: s.solo, highlight });
@@ -333,7 +355,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
     for (const p of data.parts) {
       const d = out.get(p.id);
       if (!d) continue;
-      if (p.id === skinPart?.id || (!bonesOn && p.muscle === undefined && !p.context)) out.set(p.id, { ...d, visible: false, hidden: false, selectable: false });
+      if (p.id === skinPart?.id || isSkinHand(p.mesh) || (!bonesOn && p.muscle === undefined && !p.context)) out.set(p.id, { ...d, visible: false, hidden: false, selectable: false });
     }
     return out;
   }, [data.parts, s.view, s.part, s.layers, s.hidden, ghosted, s.solo, highlight, mannequin, bonesOn, skinPart]);
@@ -381,11 +403,32 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
     if (skin) return [skin];
     return data.parts.filter((p) => !p.context).flatMap((p) => handles.get(p.id)?.skinned ?? []);
   }, [skinPart, handles, data.parts]);
+  // The hand joints' bones: the skin's hands give way to the procedural ones.
+  const handBones = useMemo(() => {
+    const bone = (name: string) => {
+      const j = data.rig?.joints[name];
+      return (j && rig?.node(j.node)) ?? null;
+    };
+    return [bone('hand.l'), bone('hand.r')];
+  }, [rig, data.rig]);
+  // The hands of the exercise on show (kept while the body fades out after it).
+  const lastPlans = useRef({ l: RELAXED, r: RELAXED });
+  const handPlans = useMemo(() => {
+    if (exercising && exerciseSheet?.motion) lastPlans.current = { l: handPlan(exerciseSheet.motion, 'l'), r: handPlan(exerciseSheet.motion, 'r') };
+    return lastPlans.current;
+  }, [exercising, exerciseSheet]);
   const trunkBone = useMemo(() => {
     const j = data.rig?.joints.trunk;
     return (j && rig?.node(j.node)) ?? null;
   }, [rig, data.rig]);
   const mannequinColor = useMemo(() => resolveDataColor('token:mannequin', look.tokens, look.theme, look.theme === 'cinema' ? '#6f7174' : '#bfb8ac'), [look]);
+  // The wire figure's ink, and the outlined hands' fill (the figure's 8 %) and line mixed over the stage.
+  const wireInk = useMemo(() => resolveDataColor('token:ink', look.tokens, look.theme, look.theme === 'cinema' ? '#e8e4dc' : '#2a2824'), [look]);
+  const handColors = useMemo<HandColors>(() => {
+    const stage = new Color(resolveDataColor('token:stage-bg', look.tokens, look.theme, look.theme === 'cinema' ? '#16181b' : '#efe9dc'));
+    const over = (k: number) => '#' + stage.clone().lerp(new Color(wireInk), k).getHexString();
+    return { solid: mannequinColor, fill: over(WIRE_FILL_OPACITY), line: over(HAND_LINE_INK) };
+  }, [look, wireInk, mannequinColor]);
   // Equipment: one neutral matte dark grey, so the muscles stay the subject (docs/16 decision 13).
   const equipmentStyle = useMemo(() => styles.styleFor({ color: 'rubber', tint: 'token:neutral' }), [styles]);
   const rootRef = useRef<Group>(null);
@@ -475,11 +518,17 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
       )}
       {rig && <primitive object={rig.root} />}
       {equipment.length > 0 && (
-        <Equipment specs={equipment} held={false} grips={grips} footing={footing} trunk={trunkBone} style={equipmentStyle} solid={mannequin} />
+        <Equipment specs={equipment} held={false} grips={grips} footing={footing} trunk={trunkBone} style={equipmentStyle} solid={mannequin} thin={body === 'wire'} />
       )}
       <group ref={rootRef} matrixAutoUpdate={false}>
-      {equipment.length > 0 && <Equipment specs={equipment} held grips={grips} footing={footing} trunk={trunkBone} style={equipmentStyle} solid={mannequin} />}
-      {skinShape && skinShape.pieces.some((p) => p.skin) && <Mannequin shape={skinShape} color={mannequinColor} on={mannequin} />}
+      {equipment.length > 0 && <Equipment specs={equipment} held grips={grips} footing={footing} trunk={trunkBone} style={equipmentStyle} solid={mannequin} thin={body === 'wire'} />}
+      {skinShape && skinned && <Mannequin shape={skinShape} color={mannequinColor} on={body === 'mannequin'} hands={handBones} />}
+      {skinShape && skinned && (wireShape !== null || bodyStyle === 'wire') && (
+        <WireBody shape={wireShape ?? skinShape} standIn={wireShape === null} color={wireInk} on={body === 'wire'} hands={handBones} />
+      )}
+      {skinned && (grips.l || grips.r) && (
+        <Hands plans={handPlans} equipment={equipment} grips={grips} style={body ?? lastBody.current} colors={handColors} on={exercising && skinned} />
+      )}
       {data.parts.map((part) => {
         const shape = shapes.get(part.id);
         const display = displays.get(part.id);

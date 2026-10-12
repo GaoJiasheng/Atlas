@@ -28,6 +28,10 @@
  *   dip-bars       two bars along Z under the planted palms (`height` 1.45 m)
  *   step           a 0.4 × 0.35 m box, `height` 0.2 m, under the balls of the feet
  *   floor          a thin floor slab, its top at the origin
+ *   wall           a 1.2 m wide, 40 mm thick panel, `height` 2 m, on the floor at
+ *                  the trunk + `at` (a wall to lean the back or heels on)
+ *   post           a 40 mm upright rail, `height` 1.1 m, on the floor at the
+ *                  trunk + `at` (a hand on it for balance)
  */
 import type { ContactKind, EquipmentKind } from '../../../lib/anatomy';
 import type { Primitive } from '../schema';
@@ -60,7 +64,12 @@ export const EQUIPMENT_INFO: Readonly<Record<EquipmentKind, EquipmentInfo>> = {
   'dip-bars': { place: 'fixed', hands: 'handles', feet: 'hanging', holdsHands: true },
   step: { place: 'fixed', hands: 'none', feet: 'step' },
   floor: { place: 'fixed', hands: 'none', feet: 'floor' },
+  wall: { place: 'fixed', hands: 'none', feet: 'floor' },
+  post: { place: 'fixed', hands: 'none', feet: 'floor' },
 };
+
+/** Surfaces a palm can press flat on (the floor, a bench, a step, a seat): a hand contact there can hinge, and a free hand near one lies flat. */
+export const PRESS_SURFACES: ReadonlySet<EquipmentKind> = new Set(['floor', 'bench', 'incline-bench', 'step', 'machine-seat']);
 
 /** Real sizes (metres). */
 export const BAR = { length: 2.2, shaft: 0.028, sleeve: 0.05, sleeveLength: 0.415, plate: 0.3, plateThick: 0.025 } as const;
@@ -77,6 +86,8 @@ export const MACHINE_SEAT = { width: 0.38, depth: 0.38, pad: 0.07, back: 0.6, he
 export const STEP = { width: 0.4, depth: 0.35, height: 0.2 } as const;
 export const BAND = { thick: 0.012 } as const;
 export const FLOOR = { width: 0.8, length: 2.2, thick: 0.004 } as const;
+export const WALL = { width: 1.2, thick: 0.04, height: 2 } as const;
+export const POST = { diameter: 0.04, height: 1.1, base: 0.25 } as const;
 /** How far the palm's grip point sits above the floor it pushes on (hand thickness), metres. */
 export const PALM_LIFT = 0.015;
 /** Dip bars: bar tops this far above the floor. */
@@ -282,6 +293,16 @@ export function floorShape(): EquipmentShape {
   return { primitive: { kind: 'box', size: [FLOOR.width, FLOOR.thick, FLOOR.length], at: [0, -FLOOR.thick / 2, 0], color: grey } as Prim };
 }
 
+/** A wall panel standing on the floor at the origin, its face toward +Z (the body), `height` tall. */
+export function wallShape(height: number = WALL.height): EquipmentShape {
+  return { primitive: box([WALL.width, height, WALL.thick], [0, height / 2, -WALL.thick / 2]) };
+}
+
+/** An upright rail standing on the floor at the origin on a flat base, `height` tall. */
+export function postShape(height: number = POST.height): EquipmentShape {
+  return { primitive: upright(POST.diameter, height, [0, height / 2, 0]), extra: [box([POST.base, 0.02, POST.base], [0, 0.01, 0])] };
+}
+
 /** A unit line (cable, band): an upright cylinder from y 0 to 1 (the stage stretches it between its ends). */
 export function lineShape(thick: number): EquipmentShape {
   return { primitive: upright(thick, 1, [0, 0.5, 0]) };
@@ -317,6 +338,8 @@ export function heightOf(e: Placed): number {
   if (e.kind === 'step') return STEP.height;
   if (e.kind === 'machine-seat') return MACHINE_SEAT.height;
   if (e.kind === 'bench' || e.kind === 'incline-bench') return BENCH.height;
+  if (e.kind === 'wall') return WALL.height;
+  if (e.kind === 'post') return POST.height;
   return 0;
 }
 
@@ -381,6 +404,8 @@ export function placeFixed(e: Placed, ctx: PlaceContext, floor: number | null, s
       return f ? [f[0] + (at[0] ?? 0), top, f[2] + (at[2] ?? 0)] : [rel[0], top, rel[2]];
     }
     case 'cable':
+    case 'wall':
+    case 'post':
       return [rel[0], floor ?? ctx.modelFloor ?? rel[1] - 1, rel[2]];
     default:
       return rel;
@@ -397,10 +422,16 @@ export function barYaw(palms: readonly [V3, V3] | null, fallback = 0): number {
 }
 
 /** The joints of the topic's rig a piece needs (validate: the rig must have them). */
-export function equipmentJoints(e: { kind: EquipmentKind; hand?: 'left' | 'right' | 'both' | undefined; on?: 'hands' | 'back' | undefined; to?: 'hands' | 'feet' | undefined }): string[] {
+export function equipmentJoints(e: {
+  kind: EquipmentKind;
+  hand?: 'left' | 'right' | 'both' | undefined;
+  on?: 'hands' | 'back' | undefined;
+  to?: 'hands' | 'feet' | 'ankle.l' | 'ankle.r' | undefined;
+}): string[] {
   const info = EQUIPMENT_INFO[e.kind];
   if (e.kind === 'barbell' && e.on === 'back') return ['trunk'];
   if (e.kind === 'band' && e.to === 'feet') return ['ankle.l', 'ankle.r'];
+  if (e.kind === 'cable' && (e.to === 'ankle.l' || e.to === 'ankle.r')) return [e.to];
   if (info.hands === 'none') return [];
   const hand = info.hands === 'bar' ? 'both' : (e.hand ?? 'both');
   return hand === 'left' ? ['hand.l'] : hand === 'right' ? ['hand.r'] : ['hand.l', 'hand.r'];

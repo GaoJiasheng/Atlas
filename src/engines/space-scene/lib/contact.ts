@@ -11,6 +11,10 @@
  *    the feet so the palms keep their height (a push-up lowers the chest);
  *  - `feet`: the weight-bearing feet stay planted (lib/stance.ts: the lowest
  *    heel / ball on the floor, the feet that bear weight where they stood);
+ *  - `hand.l` / `hand.r`: one palm held the same way (a one-arm row's free
+ *    hand on the bench); with the knees second the body pivots about them
+ *    (bird dog);
+ *  - `knees`: the knees' midpoint stays put (kneeling);
  *  - `seat`: nothing moves the body (a bench or a machine seat holds it where
  *    the root turn puts it).
  *
@@ -23,27 +27,65 @@ type V3 = readonly [number, number, number];
 
 /** What the solver does this exercise. */
 export interface ContactPlan {
-  /** Palms: held still by moving the body, by pivoting it about the feet, or free. */
+  /** Palms: held still by moving the body, by pivoting it about the feet or knees, or free. */
   hands: 'translate' | 'hinge' | null;
+  /** The palms held: both (their midpoint) or one. */
+  grip: 'both' | 'l' | 'r';
+  /** What a hinge pivots about. */
+  pivot: 'feet' | 'knees';
   /** The feet stay planted (stance.ts). */
   feet: boolean;
+  /** The knees' midpoint stays where the first key put it (the body moves: kneeling on the floor or a bench). */
+  knees: boolean;
 }
 
-export const NO_CONTACT: ContactPlan = { hands: null, feet: false };
+export const NO_CONTACT: ContactPlan = { hands: null, grip: 'both', pivot: 'feet', feet: false, knees: false };
+
+/** What the rig can show: both hand joints, either one, the ankles, the knees. */
+export interface ContactRig {
+  hands: boolean;
+  handL?: boolean;
+  handR?: boolean;
+  feet: boolean;
+  knees?: boolean;
+}
+
+const HAND_CONTACTS: Readonly<Partial<Record<ContactKind, ContactPlan['grip']>>> = { hands: 'both', 'hand.l': 'l', 'hand.r': 'r' };
 
 /**
- * The plan for a contact order. `hands` / `feet`: the rig has the hands' grip
- * points / the ankles' heel and ball; `handsOnFloor`: the palms push on the
- * floor (a hinge is possible). A default pair `[hands, feet]` (not written
- * in the data) whose hands the rig lacks is dropped whole; written contacts
- * fall through to the next one the rig has.
+ * The plan for a contact order. `rig`: the hand joints' grip points, the
+ * ankles' heel and ball, the knees the rig has; `handsOnFloor`: the palms
+ * push on the floor or a bench (a hinge is possible). A default pair
+ * `[hands, feet]` (not written in the data) whose hands the rig lacks is
+ * dropped whole; written contacts fall through to the next one the rig has.
+ * A hand (or both) first, then the feet or the knees on the floor: the body
+ * pivots about them (push-up about the feet, bird dog or a one-arm row about
+ * the knees); a hand first otherwise: the body translates.
  */
-export function contactPlan(order: readonly ContactKind[], rig: { hands: boolean; feet: boolean }, handsOnFloor: boolean, explicit: boolean): ContactPlan {
+export function contactPlan(order: readonly ContactKind[], rig: ContactRig, handsOnFloor: boolean, explicit: boolean): ContactPlan {
   if (!explicit && order[0] === 'hands' && !rig.hands) return NO_CONTACT;
-  const usable = order.filter((k) => (k === 'hands' ? rig.hands : k === 'feet' ? rig.feet || order[0] === 'hands' : true));
+  const has = (k: ContactKind): boolean =>
+    k === 'hands'
+      ? rig.hands
+      : k === 'hand.l'
+        ? (rig.handL ?? rig.hands)
+        : k === 'hand.r'
+          ? (rig.handR ?? rig.hands)
+          : k === 'feet'
+            ? rig.feet || HAND_CONTACTS[order[0]!] !== undefined
+            : k === 'knees'
+              ? rig.knees === true
+              : true;
+  const usable = order.filter(has);
   const first = usable[0];
-  if (first === 'hands') return { hands: usable[1] === 'feet' && handsOnFloor ? 'hinge' : 'translate', feet: false };
-  if (first === 'feet' && rig.feet) return { hands: null, feet: true };
+  const grip = first !== undefined ? HAND_CONTACTS[first] : undefined;
+  if (grip) {
+    const second = usable[1];
+    const hinge = (second === 'feet' || second === 'knees') && handsOnFloor;
+    return { ...NO_CONTACT, hands: hinge ? 'hinge' : 'translate', grip, pivot: hinge && second === 'knees' ? 'knees' : 'feet' };
+  }
+  if (first === 'feet' && rig.feet) return { ...NO_CONTACT, feet: true };
+  if (first === 'knees') return { ...NO_CONTACT, knees: true };
   return NO_CONTACT;
 }
 

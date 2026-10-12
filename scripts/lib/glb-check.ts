@@ -22,6 +22,17 @@ export interface GlbNodeRef {
   what: string;
 }
 
+/** The node names of the glb at `path` (empty when it cannot be read). */
+export async function glbNodeNames(path: string): Promise<Set<string>> {
+  if (!existsSync(path)) return new Set();
+  try {
+    const json = (await new NodeIO().readAsJSON(path)).json as { nodes?: { name?: string }[] };
+    return new Set((json.nodes ?? []).map((n) => n.name).filter((n): n is string => typeof n === 'string'));
+  } catch {
+    return new Set();
+  }
+}
+
 /** Problems with the glb at `path` (empty when it is fine). */
 export async function glbIssues(path: string, nodes: readonly GlbNodeRef[]): Promise<string[]> {
   if (!existsSync(path)) return ['file not found under public/'];

@@ -98,7 +98,8 @@ export function otherSideJoint(name: string): string {
  * held in the palms (`barbell`, `dumbbell`, `kettlebell`, `cable-handle`,
  * `lat-bar`), a cable from a column or overhead pulley (`cable`), a band
  * from an anchor (`band`), or free-standing (`bench`, `incline-bench`,
- * `machine-seat`, `pull-up-bar`, `dip-bars`, `step`, `floor`).
+ * `machine-seat`, `pull-up-bar`, `dip-bars`, `step`, `floor`, a `wall` to lean
+ * on, a `post` to steady a hand).
  */
 export const EQUIPMENT_KINDS = [
   'barbell',
@@ -115,6 +116,8 @@ export const EQUIPMENT_KINDS = [
   'dip-bars',
   'step',
   'floor',
+  'wall',
+  'post',
 ] as const;
 export type EquipmentKind = (typeof EQUIPMENT_KINDS)[number];
 
@@ -123,9 +126,17 @@ export function equipmentList<T>(equipment: T | readonly T[] | undefined): T[] {
   return equipment === undefined ? [] : Array.isArray(equipment) ? [...(equipment as readonly T[])] : [equipment as T];
 }
 
-/** What holds the body still in an exercise (docs/06 动作模式数据手册): the palms on a bar or the floor, the feet on the floor, the seat on a bench. */
-export const CONTACT_KINDS = ['hands', 'feet', 'seat'] as const;
+/**
+ * What holds the body still in an exercise (docs/06 动作模式数据手册): the
+ * palms on a bar or the floor (`hands`, or one palm: `hand.l` / `hand.r`), the
+ * feet on the floor, the knees on the floor or a bench, the seat on a bench.
+ */
+export const CONTACT_KINDS = ['hands', 'hand.l', 'hand.r', 'feet', 'knees', 'seat'] as const;
 export type ContactKind = (typeof CONTACT_KINDS)[number];
+
+/** How the body reads in exercise mode (SpaceScene `views.exerciseBody`; docs/06 动作模式数据手册): ink wire figure, solid mannequin, or the faint skin outline. */
+export const EXERCISE_BODIES = ['wire', 'mannequin', 'ghost'] as const;
+export type ExerciseBody = (typeof EXERCISE_BODIES)[number];
 
 /** Phases of an exercise key: a beat shows one, or loops through them (`loop`). */
 export const EXERCISE_KEY_PHASES = ['start', 'mid', 'end'] as const;
