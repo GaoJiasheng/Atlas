@@ -26,12 +26,13 @@ def markdown(result):
              'Sub-edge detached scraps use nearby substantial surface rings because their component-local '
              'endpoint seeds are artificial; >1% discrepant weight mass on those scraps also fails. '
              'Smooth joint crossovers are excluded. Fixed counts refer to unique welded bind vertices.', '',
-             f"Mannequin: all {len(result['skinJointShares'])} full-body joints weighted; {result['shellWeightMismatches']} shell mismatch flags. Right-axis exact mirror checks passed.", '',
+             f"skin-wire: all {len(result['skinJointShares'])} full-body joints weighted; {result['shellWeightMismatches']} shell mismatch flags. Right-axis exact mirror checks passed.", '',
              '| Muscle | Joint shares | Required attachment joints | Fibre endpoints | Outliers remaining / fixed | Result |',
              '|---|---|---|---|---|---|']
     for row in result['rows']:
         shares = ', '.join(f'{n} {100*w:.2f}%' for n,w in sorted(row['shares'].items(),key=lambda x:-x[1]))
         lines.append(f"| {row['name']} | {shares} | {', '.join(row['required'])} | {row.get('fibreStatus','unchecked')} | {row['outlierCount']} / {row['outliersFixed']} | {'; '.join(row['flags']) or 'clean'} |")
+    lines += ['', 'Skin nodes: `'+', '.join(result['skinNodes'])+'`. Both hand nodes are rigidly bound to their named hand joint. Wrist half-space checks pass at 5 mm distal to the styloid midpoint; wrist openings are intentionally open.', '']
     lines += ['', '| Other mesh | Outliers remaining / fixed |', '|---|---|']
     for mesh in result['meshes']:
         if mesh['role'] not in ('region','neighbour'):
@@ -81,8 +82,22 @@ def audit(topic):
     from full_body import axis_checks
     rig=json.loads((ROOT/topic/'rig.json').read_text())
     result['axisMirrorChecks']=axis_checks(rig['joints'])
-    shell=weight_meshes['skin-outline']
+    shell=weight_meshes['skin-wire']
     result['skinJointShares']={n:sum(w.get(n,0) for w in shell['weights'])/len(shell['weights']) for n in manifest['jointNames']}
+    result['skinNodes']=manifest['skinNodes']
+    result['flags'] += ['skin node contract mismatch'] if set(manifest['skinNodes']) != {n for n,m in weight_meshes.items() if m['role']=='skin'} else []
+    import numpy as np
+    centres={j['name']:np.array(j['position']) for j in rig['joints']}
+    result['wristCutChecks']=[]
+    for side in ('l','r'):
+        hand=weight_meshes['skin-hand.'+side]
+        axis=centres['hand.'+side]-centres['elbow.'+side]; axis/=np.linalg.norm(axis)
+        plane=centres['hand.'+side]+axis*.005
+        distal_min=float(np.min((np.array(hand['points'])-plane) @ axis))
+        result['wristCutChecks'].append(dict(side=side,distalOffsetM=.005,minHandPlaneDistanceM=distal_min,opening='open'))
+        if distal_min<-.0001: result['flags'].append('hand extends proximal to wrist cut: '+side)
+        result['flags'] += ['hand is not rigidly bound: '+side] if any(abs(w.get('hand.'+side,0)-1)>1e-6 or any(v>1e-6 for n,v in w.items() if n!='hand.'+side) for w in hand['weights']) else []
+    result['flags'] += ['skin-wire triangle range failed'] if not 3000<=len(shell['faces'])<=5000 else []
     result['flags'] += ['mannequin has no weight on '+n for n,v in result['skinJointShares'].items() if v<1e-6]
     result['shellWeightMismatches']=sum('shell weight mismatch' in flag for flag in shell_flags)
     result['flags'] += ['missing declared rig joint '+n for n in

@@ -1,15 +1,18 @@
-# Back round 8 preview inspection
+# Back round 9 preview inspection
 
-Native Blender Workbench previews were generated from the decoded final published GLB. Inspected rest front/back/left, exploded, opaque skin, posed oblique/front/back/left views, and posed anatomy.
+Viewed the Blender Workbench rest and pose contact sheets, covering front/back/left, exploded anatomy, opaque full-body skin, posed oblique/front/back/left, posed anatomy, and edge-only wire rest/pose. The previews use the decoded final published GLB.
 
-Pose: left shoulder flexion 90°, right elbow flexion 90°, left hip flexion 60°, right knee flexion 90°, both ankles dorsiflexion 15°. Right inputs use the same axis signing as the current engine; metadata keeps exact X-negated right axes.
+Pose: left shoulder flexion 90°, right elbow flexion 90°, left hip flexion 60°, right knee flexion 90°, both ankles dorsiflexion 15°. Right inputs use the existing engine axis-sign convention; stored right axes remain exact X-negated copies of the left axes.
 
-The neck remains attached to the torso. Raised shoulder and axilla remain connected; groin and both upper legs remain connected. Source skin panel borders and shading creases are still visible, including stretched panels near the raised axilla and hip. No newly detached shell, isolated weight spike or open gap was observed at the neck/shoulder/groin in these views. This is a visual inspection of this test pose, not anatomical approval.
+Both palms and splayed thumbs remain complete after the wrist split. The separate hands follow their named hand joints. Wrist cuts are intentionally open, 5 mm distal to the existing hand pivots; their small seams are visible in the posed side view. Neck, shoulders and groin remain attached in the common pose. Original panel borders, stretched axilla/hip panels and shading creases remain visible. No new detached neck/shoulder/groin shell or isolated weight spike was observed.
 
-Published weight/fibre/outlier audit: **clean**; **0 remaining**, **8 native fixed**. All 19 joints have mannequin weights and the decoded shell-vector mismatch count is zero.
+The wire preview contains only the decoded skin-wire triangle edges, represented by thin Blender curves with all mesh faces hidden. Body and bent limb silhouettes remain readable, including both hands and feet. Backside/overlapping edges make the shoulder, wrist and pelvis intersections denser; simplified fingers and feet are angular at this triangle budget.
 
-Published GLB SHA-256: `e7e881d12905e19ede46fb60f1998968e936d1eaec4794925d5e12cb6ad4396d`.
-Pose PNG SHA-256: `6bb5165678119f58ba0d932c101429125e31b5dcb605a2ada3839cdb785190f0`.
+Weights/fibre/outlier/shell gates: **clean**; **0 outliers remaining**, **34 native fixed**, **0 shell mismatches**. All 19 joints have nonzero wire weights. Independent wrist plane and rigid-hand gates pass.
+
+Published GLB SHA-256: `7c087f4f9575bc74ff5f4562b3a00083e0b6155aaffa90711a9da05029421963`.
+Pose PNG SHA-256: `4cbe87a285a45636a0c899a18b345d7921a89259169115950ddac526d5dc319c`.
+Wire pose PNG SHA-256: `e315408c6e2df9681700ba9f603cc03999649bfb113009f266adcf4edcff8f09`.
 
 ## Preview files
 
@@ -18,12 +21,14 @@ Pose PNG SHA-256: `6bb5165678119f58ba0d932c101429125e31b5dcb605a2ada3839cdb78519
 - [back-preview-left.png](/Users/gavin/work/atlas/scripts/anatomy/cache/back-preview-left.png)
 - [back-preview-exploded-by-layer.png](/Users/gavin/work/atlas/scripts/anatomy/cache/back-preview-exploded-by-layer.png)
 - [back-preview-skin.png](/Users/gavin/work/atlas/scripts/anatomy/cache/back-preview-skin.png)
+- [back-preview-wire-rest.png](/Users/gavin/work/atlas/scripts/anatomy/cache/back-preview-wire-rest.png)
 - [back-preview-pose.png](/Users/gavin/work/atlas/scripts/anatomy/cache/back-preview-pose.png)
 - [back-preview-pose-front.png](/Users/gavin/work/atlas/scripts/anatomy/cache/back-preview-pose-front.png)
 - [back-preview-pose-back.png](/Users/gavin/work/atlas/scripts/anatomy/cache/back-preview-pose-back.png)
 - [back-preview-pose-left.png](/Users/gavin/work/atlas/scripts/anatomy/cache/back-preview-pose-left.png)
 - [back-preview-pose-anatomy.png](/Users/gavin/work/atlas/scripts/anatomy/cache/back-preview-pose-anatomy.png)
+- [back-preview-wire-pose.png](/Users/gavin/work/atlas/scripts/anatomy/cache/back-preview-wire-pose.png)
 
 ## [待核] anatomy
 
-All attachment/tendon wording and educational crop choices remain pending human review. Source geometry panel seams are retained.
+This visual review covers the common test pose. Attachment/tendon wording, educational crops and exercise-specific motion approval remain pending. Geometry and derived data: CC BY-SA 4.0.

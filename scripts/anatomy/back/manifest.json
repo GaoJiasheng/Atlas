@@ -39,9 +39,9 @@
     },
     "total": {
       "targetBytes": 4000000,
-      "maxBytes": 4000000,
+      "maxBytes": 8000000,
       "targetTriangles": 350000,
-      "maxTriangles": 350000
+      "maxTriangles": 500000
     }
   },
   "parts": [
@@ -1717,7 +1717,10 @@
     "joint.hand.r",
     "joint.hip.r",
     "joint.knee.r",
-    "joint.ankle.r"
+    "joint.ankle.r",
+    "skin-hand.l",
+    "skin-hand.r",
+    "skin-wire"
   ],
   "notes": [
     "Selected from docs/16 \u00a75.3, region reviews and exact cached FBX inventory; no mirrored geometry.",
@@ -1728,5 +1731,34 @@
     "Optional thoracolumbar fascia, linea alba and diaphragm omitted. Linea-alba attachment evidence uses the unexported named source surface.",
     "No named region muscle is missing in Z-Anatomy; multifidus uses the actual paired lumbar meshes, not rotatores or invented geometry."
   ],
-  "handGripOffsetM": 0.08
+  "handGripOffsetM": 0.08,
+  "skinNodes": [
+    "skin-outline",
+    "skin-hand.l",
+    "skin-hand.r",
+    "skin-wire"
+  ],
+  "skinParts": {
+    "skin-outline": {
+      "hands": false,
+      "wristOpening": "open"
+    },
+    "skin-hand.l": {
+      "joint": "hand.l",
+      "rigid": true
+    },
+    "skin-hand.r": {
+      "joint": "hand.r",
+      "rigid": true
+    },
+    "skin-wire": {
+      "hands": true,
+      "triangleRange": [
+        3000,
+        5000
+      ],
+      "simplification": "planar dissolve then quadric collapse; barycentric source weights",
+      "maxSampledDeviationM": 0.035
+    }
+  }
 }

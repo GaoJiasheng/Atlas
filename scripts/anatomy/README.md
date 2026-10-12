@@ -2,7 +2,23 @@
 
 Offline native Blender pipeline for all six topics in `docs/16-muscles-content-spec.md` §5. Cached FBX inputs only; no downloads or application build/test/check commands. Generated files stay under `scripts/anatomy/` and `public/models/muscles-*.glb`.
 
-Round 8 acceptance, hashes, axis tables and pose links: [report.md](report.md).
+Round 9 acceptance, hashes, axis tables and pose links: [report.md](report.md).
+
+## Round 9 hands and schematic
+
+Every topic exports `skin-outline`, `skin-hand.l`, `skin-hand.r`, and `skin-wire`. The outline excludes both hands. Wrist cuts are **open**, 5 mm distal to the same radial/ulnar styloid midpoint used by the hand joint, perpendicular to the real elbow-to-wrist axis. Connected distal hand surfaces are selected so splayed thumbs stay intact. The separate hands have rigid `hand.l/r` weights; hide them when procedural fists/palms are displayed.
+
+`skin-wire` keeps the whole body including hands, with **3,000–5,000 decoded triangles** and the full 19-joint rig. Native Blender planar dissolve (3°) and the installed meshoptimizer quadric simplifier preserve flat panels and limb shapes. Source weights are sampled on nearest original triangles with barycentric interpolation, retaining the strongest four normalized influences, then shell-synchronized and repaired. It has a separate 35 mm sampled schematic surface ceiling; the opaque split skin union keeps the existing 3 mm ceiling. No new body coordinates or muscle fibre fields are generated. Skin UVs and wire normals are omitted as unused attributes. Derived nodes reference the full source-label list on `skin-outline`, avoiding repeated provenance payloads. Legs rounds `_U` to 1/4096 and UVs to 1/512 to meet the soft byte limit; other muscle attribute precision remains unchanged from Round 8.
+
+Blender previews include `preview-wire-rest.png` and `preview-wire-pose.png`: curves trace only the actual decoded triangle edges, with all body faces hidden. Pose previews use the unchanged Round 8 full-body test pose and include both separate hand nodes. The wrist seam is intentionally open and is visible when skin nodes are separated or hidden.
+
+To repeat this round directly from cached native Round 8 scenes, preserving native muscle custom attributes:
+
+```sh
+python3 scripts/anatomy/run_round9.py
+```
+
+`round9.py` saves a `<topic>-round8-native.blend` baseline before deriving skin parts. The regular `build.py` path also derives these parts before native export. Manifest completion records `skinNodes` and the `skinParts` contracts; `expectedNodes` includes all four skin nodes. Soft output limits are 4,000,000 bytes / 350,000 triangles; hard limits are 8,000,000 bytes / 500,000 triangles. Optimization enforces both soft and hard budgets before publishing.
 
 ## Run
 
@@ -41,12 +57,12 @@ python3 scripts/anatomy/contact.py --topic back
 - `<topic>/manifest.json`, `rig.json`, `attachments.json`, `report.md`, `preview-review.md`.
 - `cache/<topic>-raw.glb`, `cache/<topic>-audit.glb`, `<topic>-review.blend`.
 - `cache/<topic>-{build,optimize,report,pose}-stats.json`, preview metadata, simplification jobs and logs.
-- `cache/<topic>-preview-{front,back,left,exploded-by-layer,skin,pose}.png`, plus `pose-{front,back,left,anatomy}`; optional contact sheets.
+- `cache/<topic>-preview-{front,back,left,exploded-by-layer,skin,pose,wire-rest,wire-pose}.png`, plus `pose-{front,back,left,anatomy}`; optional contact sheets.
 - `public/models/muscles-<topic>.glb`.
 
 The audit GLB is decoded from the actual compressed output, dequantized and stripped only of scalar custom attributes that Blender cannot import. The published GLB retains `_U`, `_FIBRE`, UVs, joints, normalized weights and required `EXT_meshopt_compression` / `KHR_mesh_quantization`.
 
-The skin-weight gate runs between optimization and previews in `run.py`. To audit all published topics and append their share tables to existing reports without rebuilding:
+Optimization also inspects the exact codec-roundtripped candidate through `decode_weights.ts --input`. `repair_exported_skin.ts` synchronizes any remaining shell vectors or outliers on that actual decoded bind geometry, re-encodes and repeats until clean before publishing. Only dirty skin meshes are updated; muscle data is unchanged. `cache/<topic>-codec-shell-repair.json` records these repairs. The skin-weight gate then runs between optimization and previews in `run.py`. To audit all published topics and append their share tables to existing reports without rebuilding:
 
 ```sh
 python3 scripts/anatomy/audit.py --topic all --write-report
@@ -94,7 +110,7 @@ Core external oblique is a **region** muscle: its stricter 0.5 mm tolerance take
 
 Simplification welds coincident positions into compact buffers, preserves source borders/folds, protects vertices responsible for thin-fold error and retries conservatively. New topics also reduce the global simplifier tolerance when protection alone stops improving an error; unresolved pieces retain original geometry. Opposite coincident collapsed-fold triangles are cancelled in pairs to avoid introducing artificial boundaries. The independent final decoded audit samples referenced vertices plus 6,000 area-weighted triangle-interior points in both directions. These are sampled Hausdorff estimates, not certified global maxima. New boundaries on boundary-free sources fail; open/nonmanifold sources keep section filling disabled.
 
-Positions/normals/weights retain the chest quantization settings. Legs use `_U` 1/8192 and UV 1/1024 (maximum per-component UV rounding error 1/2048) to leave room for full-body skin weights under 4 MB; exact 0/1 fibre endpoints and direction precision are retained. New topics keep custom accessors **float32** while rounding excess mantissa precision on binary grids: `_U` 1/32768, `_FIBRE` 1/4096, UV 1/8192. Fibre direction changes are below 0.013°, endpoint parameters stay exactly 0/1, and decoded fibre length stays within 0.0003 of unity. All decoded weights/attributes/joint references are validated. Chest retains its existing muscle attribute precision.
+Positions/normals/weights retain the chest quantization settings. Legs use `_U` 1/4096 and UV 1/512 (maximum per-component UV rounding error 1/1024) to leave room for full-body skin weights under 4 MB; exact 0/1 fibre endpoints and direction precision are retained. Other new topics keep custom accessors **float32** while rounding excess mantissa precision on binary grids: `_U` 1/32768, `_FIBRE` 1/4096, UV 1/8192. Fibre direction changes are below 0.013°, endpoint parameters stay exactly 0/1, and decoded fibre length stays within 0.0003 of unity. All decoded weights/attributes/joint references are validated. Chest retains its existing muscle attribute precision.
 
 ## Workbench review
 
@@ -102,6 +118,6 @@ Workbench studio `paint.sl`, flat paper `#EDE7D6`, warm clay region muscles, gre
 
 Exploded previews move superficial/intermediate muscles out 0.12/0.06 m radially; deep, neighbours and bones stay fixed. Back uses a posterior exploded camera so its deeper structures can be reviewed. All six topics use the same decoded full-body pose: **left shoulder flexion 90°, right elbow flexion 90°, left hip flexion 60°, right knee flexion 90°, both ankles dorsiflexion 15°**. `preview-pose.png` shows the opaque posed mannequin; additional `pose-front`, `pose-back`, `pose-left` and `pose-anatomy` views inspect neck/shoulder/groin continuity and retained muscle motion. The pose gate checks finite coordinates and mesh-edge stretches. This verifies the full-body rig and test pose, not complete exercise/contact kinematics.
 
-`preview-review.md` records actual inspection of all six PNGs. Attachment candidates preserve `.o/.e` nodes, raw labels, classification, named surface distance and explicit proximity fallbacks. Every candidate remains **[待核]**: geometry success does not approve anatomical wording, tendon identity, source-label disagreements or exercise-specific motion quality.
+`preview-review.md` records inspection of the rest, full-body posed, anatomy and wire PNGs. Attachment candidates preserve `.o/.e` nodes, raw labels, classification, named surface distance and explicit proximity fallbacks. Every candidate remains **[待核]**: geometry success does not approve anatomical wording, tendon identity, source-label disagreements or exercise-specific motion quality.
 
 Geometry, GLB and derived data: CC BY-SA 4.0. GLB attribution is embedded. Original license/provenance/checksums remain in `cache/License.txt`, `FETCHED.txt` and `SHA256SUMS.txt`.

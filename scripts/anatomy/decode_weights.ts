@@ -42,7 +42,9 @@ const topicIndex = process.argv.indexOf('--topic');
 if (topicIndex < 0) throw new Error('Missing --topic argument');
 const topic = required(process.argv[topicIndex + 1], 'topic');
 if (!['chest', 'back', 'shoulders', 'arms', 'legs', 'core'].includes(topic)) throw new Error(`Unknown topic: ${topic}`);
-const bytes = await readFile(resolve(root, `../../public/models/muscles-${topic}.glb`));
+const inputIndex=process.argv.indexOf('--input');
+const inputPath=inputIndex<0?resolve(root, `../../public/models/muscles-${topic}.glb`):required(process.argv[inputIndex+1],'--input');
+const bytes = await readFile(inputPath);
 await MeshoptDecoder.ready;
 const doc = await new NodeIO().registerExtensions(ALL_EXTENSIONS)
   .registerDependencies({ 'meshopt.decoder': MeshoptDecoder }).readBinary(bytes);
@@ -62,6 +64,7 @@ for (const node of doc.getRoot().listNodes()) {
   const jointNodes = skin.listJoints(), names = jointNodes.map(j => j.getName().replace(/^joint\./, ''));
   const shares: Shares = {}, endpoints: Endpoints = [[], []];
   const vertices: Vertex[] = [];
+  const sourceVertices: number[] = [];
   const weights: Shares[] = [], faces: number[][] = [];
   const welded = new Map<string, number>();
   function find(index: number): number {
@@ -113,6 +116,7 @@ for (const node of doc.getRoot().listNodes()) {
         bin[jointName] = (bin[jointName] ?? 0) + weight;
       }
       count++;
+      sourceVertices.push(i);
       const id = vertices.length;
       weights.push(vector);
       vertices.push({ p: v, u, parent: id }); remap.set(i, id);
@@ -148,7 +152,7 @@ for (const node of doc.getRoot().listNodes()) {
     if (v.u <= .0001) component.endpoints[0].push(v.p);
     if (v.u >= .9999) component.endpoints[1].push(v.p);
   });
-  weightMeshes.push({ name: node.getName(), role, points: vertices.map(v => v.p), u: vertices.map(v => v.u), weights, faces,
+  weightMeshes.push({ name: node.getName(), role, sourceVertices, points: vertices.map(v => v.p), u: vertices.map(v => v.u), weights, faces,
     joints: Object.fromEntries(jointNodes.map((j, i) => [names[i], transform(j.getWorldMatrix(), [0, 0, 0])])) });
   if (muscle) rows.push({ name: node.getName(), count, shares, endpoints, bounds, bins, components: [...components.values()] });
 }

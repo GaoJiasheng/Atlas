@@ -7,6 +7,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { NodeIO, type vec3 } from '@gltf-transform/core';
 import { weld, quantize, reorder, prune } from '@gltf-transform/functions';
 import { MeshoptEncoder, MeshoptDecoder } from 'meshoptimizer';
+import { repairExportedSkin } from './repair_exported_skin.ts';
 
 function required<T>(value: T | null | undefined, label: string): T {
   if (value === null || value === undefined) throw new Error(`Missing ${label}`);
@@ -23,6 +24,7 @@ interface Part {
 interface Manifest {
   parts: Part[];
   expectedNodes: string[];
+  skinNodes: string[];
   budgets: { total: { maxBytes: number; maxTriangles: number; targetBytes: number; targetTriangles: number } };
 }
 interface Rig {
@@ -54,7 +56,7 @@ const io = new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies(
 const document = await io.read(resolve(cache, `${topic}-raw.glb`));
 const expected = manifest.parts.flatMap((p) =>
   p.exportGroup ? [p.exportGroup] : p.sides === 'bilateral' ? [p.id + '.l', p.id + '.r'] : [p.id]);
-const uniqueExpected = new Set<string>(expected);
+const uniqueExpected = new Set<string>([...expected, ...manifest.skinNodes]);
 const rig: Rig = JSON.parse(await readFile(resolve(root, `${topic}/rig.json`), 'utf8'));
 const expectedNodes = new Set<string>(manifest.expectedNodes);
 for (const name of [...uniqueExpected, `${topic}-rig`, ...rig.joints.map((j) => j.node)]) {
@@ -77,7 +79,18 @@ for (const node of meshNodes) {
   // Engine reads mesh extras; Blender object properties can initially be node extras.
   const closed = node.getExtras().closed ?? mesh.getExtras().closed;
   if (typeof closed !== 'boolean') throw new Error(`Missing closedness: ${node.getName()}`);
-  mesh.setExtras({ ...mesh.getExtras(), closed, role: node.getExtras().role, layer: node.getExtras().layer });
+  const extras = node.getExtras();
+  if (manifest.skinNodes.includes(node.getName()) && node.getName() !== 'skin-outline') {
+    delete extras.sourceNodes; extras.sourceNode = 'skin-outline'; node.setExtras(extras);
+  }
+  const context = Object.fromEntries(['includesHands','wristOpening','renderIntent','rigidJoint','sourceNode']
+    .filter((key) => extras[key] !== undefined).map((key) => [key, extras[key]]));
+  mesh.setExtras({ ...mesh.getExtras(), closed, role: extras.role, layer: extras.layer, ...context });
+  // Schematic edges and opaque context do not consume source UVs.
+  if (node.getExtras().role === 'skin') for (const primitive of mesh.listPrimitives()) {
+    primitive.setAttribute('TEXCOORD_0', null);
+    if (node.getName() === 'skin-wire') primitive.setAttribute('NORMAL', null);
+  }
   const skin = node.getSkin();
   if (!skin) throw new Error(`Unskinned mesh: ${node.getName()}`);
   for (const primitive of mesh.listPrimitives()) {
@@ -136,7 +149,7 @@ for (const joint of rig.joints) {
 if (topic !== 'chest') {
   const rounded = new Set<unknown>();
   for (const node of meshNodes) for (const primitive of required(node.getMesh(), 'mesh').listPrimitives()) {
-    for (const [semantic, grid] of [['_U',topic === 'legs' ? 8192 : 32768],['_FIBRE',4096],['TEXCOORD_0',topic === 'legs' ? 1024 : 8192]] as const) {
+    for (const [semantic, grid] of [['_U',topic === 'legs' ? 4096 : 32768],['_FIBRE',4096],['TEXCOORD_0',topic === 'legs' ? 512 : 8192]] as const) {
       const attribute = primitive.getAttribute(semantic);
       if (!attribute || rounded.has(attribute)) continue;
       const values = required(attribute.getArray(), semantic);
@@ -191,7 +204,7 @@ for (const node of meshNodes.filter((n) => n.getExtras().role === 'skin')) {
     }
     const indices=Array.from(required(primitive.getIndices()?.getArray(), 'skin triangles'));
     const faces:number[][]=[];for (let i=0;i<indices.length;i+=3) faces.push(indices.slice(i,i+3));
-    const file=resolve(cache, `${topic}-shell-finalize.json`);
+    const file=resolve(cache, `${topic}-${node.getName()}-shell-finalize.json`);
     await writeFile(file,JSON.stringify({points,faces,weights,joints:Object.fromEntries(rig.joints.map((j) => [j.name,j.position]))}));
     execFileSync('python3',[resolve(root,'finalize_shell.py'),file],{stdio:'inherit'});
     const repaired: {weights:Record<string,number>[]; stats:unknown}=JSON.parse(await readFile(file,'utf8'));
@@ -201,7 +214,7 @@ for (const node of meshNodes.filter((n) => n.getExtras().role === 'skin')) {
       wa.setElement(i,encodeWeights([0,1,2,3].map((k) => entries[k]?.[1] ?? 0)));
       ja.setElement(i,[0,1,2,3].map((k) => entries[k] ? jointNames.indexOf(required(entries[k], 'entry')[0]) : 0));
     }
-    await writeFile(resolve(cache,`${topic}-shell-finalize-stats.json`),JSON.stringify(repaired.stats,null,2)+'\n');
+    await writeFile(resolve(cache,`${topic}-${node.getName()}-shell-finalize-stats.json`),JSON.stringify(repaired.stats,null,2)+'\n');
   }
 }
 // Keep _U and _FIBRE float32: their engine units must survive quantization.
@@ -214,7 +227,7 @@ CC BY 4.0, https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html).
 Changes for Atlas: structures selected per body region, simplified, re-rigged,
 fibre and attachment data added. This model (muscles-${topic}.glb) is licensed
 CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).`;
-const bytes = await io.writeBinary(document);
+const bytes = await repairExportedSkin(io, await io.writeBinary(document), root, topic);
 // Read the compressed bytes back with the same offline decoder used by the viewer.
 const decoded = await io.readBinary(bytes);
 verifyNodes(decoded);
@@ -246,6 +259,10 @@ const table = decoded.getRoot().listNodes().filter((n) => n.getMesh()).map((node
     closed: mesh.getExtras().closed, skinned: Boolean(node.getSkin()) };
 });
 for (const row of table) {
+  if (manifest.skinNodes.includes(row.node) && row.node !== 'skin-outline') {
+    if (row.node === 'skin-wire' && (row.triangles < 3000 || row.triangles > 5000)) throw new Error('skin-wire triangle range failed');
+    continue;
+  }
   const part = required(manifest.parts.find((p) => p.exportGroup === row.node || row.node === p.id || row.node === p.id+'.l' || row.node === p.id+'.r'), `${row.node}: manifest part`);
   const cap = part.exportTriangleCap ?? part.triangleCap;
   if (cap && row.triangles > cap) throw new Error(`${row.node}: ${row.triangles} triangles > cap ${cap}`);

@@ -43,7 +43,7 @@ summary=json.loads((CACHE/f'{topic}-optimize-stats.json').read_text())
 print(f"FINAL {topic}: {summary['bytes']:,} bytes, {summary['triangles']:,} triangles, {summary['nodeCount']} nodes, {summary['drawCalls']} draw calls",flush=True)
 for path in json.loads((CACHE/f'{topic}-preview-backend.json').read_text())['paths']+[str(CACHE/f'{topic}-preview-pose.png')]: print('PREVIEW: '+path)
 after=hashlib.sha256(chest.read_bytes()).hexdigest() if chest.exists() else None
-# Chest deliberately changes in round 8 to carry the full-body rig.
+# Chest deliberately changes in round 9 to carry the full-body rig.
 if before:
     print('CHEST SHA256 before/after: '+before+' / '+after,flush=True)
     (CACHE/f'{topic}-chest-sha256.json').write_text(json.dumps(dict(before=before,after=after,identical=before==after),indent=2)+'\n')

@@ -66,10 +66,16 @@ original={ob.name.removesuffix('-before'):geometry(ob) for ob in bpy.data.object
           if ob.type=='MESH' and ob.name.endswith('-before')}
 if 'sternum' in original and 'ribs' in original:
     original['thorax']=merge(original.pop('sternum'),original.pop('ribs'))
+# Each split surface is checked against the whole cached original skin. The
+# union of all three split meshes separately verifies full source coverage.
+from skin_manifest import SKIN_NODES
+whole=original['skin-outline']
+for name in SKIN_NODES: original[name]=whole
 clear_scene()
 bpy.ops.import_scene.gltf(filepath=str(CACHE/f'{TOPIC_NAME}-audit.glb'), disable_bone_shape=True)
 rows=[]
 failures=[]
+skin_union=([],[])
 for ob in sorted(bpy.context.scene.objects,key=lambda o:o.name):
     if ob.type!='MESH':
         continue
@@ -78,14 +84,16 @@ for ob in sorted(bpy.context.scene.objects,key=lambda o:o.name):
         raise RuntimeError(f'Unexpected final mesh {name}')
     final=geometry(ob)
     before=original[name]
-    deviation=max(directed(before,final),directed(final,before))
-    role=ob.get('role', 'bone' if name=='thorax' else stats[name]['role'])
-    allowance=manifest['budgets'][role]['maxDeviationM']
+    deviation=(directed(final,whole) if name in SKIN_NODES and name!='skin-wire'
+               else max(directed(before,final),directed(final,before)))
+    if name in SKIN_NODES and name!='skin-wire': skin_union=merge(skin_union,final)
+    role=ob.get('role', 'bone' if name=='thorax' else stats.get(name,stats['skin-outline'])['role'])
+    allowance=manifest['skinParts']['skin-wire']['maxSampledDeviationM'] if name=='skin-wire' else manifest['budgets'][role]['maxDeviationM']
     audit_mesh=bpy.data.meshes.new('rest-topology')
     audit_mesh.from_pydata(final[0],[],final[1])
     closed=topology(audit_mesh, weld_positions=True)
     bpy.data.meshes.remove(audit_mesh)
-    before_stats=[stats['sternum'],stats['ribs']] if name=='thorax' else [stats[name]]
+    before_stats=[stats['sternum'],stats['ribs']] if name=='thorax' else [stats.get(name,stats['skin-outline'])]
     before_closed=all(s['closedBefore']['closed'] for s in before_stats)
     row={'name':name,'role':role,'beforeTriangles':len(before[1]),'afterTriangles':len(final[1]),
          'sampledHausdorffM':deviation,'budgetM':allowance,'closedBefore':before_closed,
@@ -94,11 +102,16 @@ for ob in sorted(bpy.context.scene.objects,key=lambda o:o.name):
     rows.append(row)
     if deviation>allowance+1e-6:
         failures.append(f'{name}: sampled deviation {deviation*1000:.3f} mm > {allowance*1000:.3f} mm')
-    if all(s['closedBefore']['boundaryEdges'] == 0 for s in before_stats) and closed['boundaryEdges'] > 0:
+    if name not in SKIN_NODES and all(s['closedBefore']['boundaryEdges'] == 0 for s in before_stats) and closed['boundaryEdges'] > 0:
         failures.append(f'{name}: simplification/export introduced boundary edges')
     print(f'REPORT {name}: {deviation*1000:.3f} mm',flush=True)
 if set(original)!=set(r['name'] for r in rows):
     raise RuntimeError('Final output lost a source mesh')
+coverage=max(directed(whole,skin_union),directed(skin_union,whole))
+if coverage>manifest['budgets']['skin']['maxDeviationM']+1e-6:
+    failures.append(f'Split skin union deviation: {coverage*1000:.3f} mm')
+print(f'SPLIT SKIN UNION: {coverage*1000:.3f} mm',flush=True)
+save_json(CACHE/f'{TOPIC_NAME}-skin-coverage.json',dict(sampledUnionDeviationM=coverage,maxDeviationM=manifest['budgets']['skin']['maxDeviationM'],intentionalOpenWrists=True))
 from regional import write_report
 write_report(TOPIC_NAME, manifest, summary, rig, sites, rows, failures)
 save_json(CACHE/f'{TOPIC_NAME}-report-stats.json',rows)

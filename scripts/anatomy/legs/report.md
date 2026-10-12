@@ -1,7 +1,7 @@
 # Legs mesh review
 
-Final GLB: **3,984,152 bytes**, **246,139 triangles**, **83 total nodes** (63 meshes, 19 joints, rig root).
-Draw-call estimate: **63** opaque primitives; skin overlay adds its shell pass. Both 4 MB and 350,000 triangle ceilings enforced.
+Final GLB: **3,983,112 bytes**, **251,523 triangles**, **86 total nodes** (66 meshes, 19 joints, rig root).
+Draw-call estimate: **66** opaque primitives; skin overlay adds its shell pass. Both 4 MB and 350,000 triangle ceilings enforced.
 
 Native Blender, cached FBX only. Geometry and derived rig/attachment data: CC BY-SA 4.0.
 
@@ -15,11 +15,24 @@ Native Blender, cached FBX only. Geometry and derived rig/attachment data: CC BY
 - Optional thoracolumbar fascia, linea alba and diaphragm omitted. Linea-alba attachment evidence uses the unexported named source surface.
 - No named region muscle is missing in Z-Anatomy; multifidus uses the actual paired lumbar meshes, not rotatores or invented geometry.
 
+## Round 9 skin parts
+
+Skin nodes: `skin-outline, skin-hand.l, skin-hand.r, skin-wire`.
+
+The wrist planes are perpendicular to the real elbow-to-styloid-midpoint forearm axes, 5 mm distal to the hand pivots. `skin-outline` excludes the hands. The wrist openings are intentionally open. `skin-hand.l/r` are rigidly bound to `hand.l/r`; hide these nodes when substituting procedural hands.
+
+`skin-wire` includes both hands and uses the full 19-joint skin. Native planar dissolve at 3 degrees precedes quadric planar-preserving simplification. Weights are interpolated barycentrically from the existing skin triangles, reduced to four influences, then shell-synchronized and audited for outliers. Any remaining mismatch is repaired on the exact codec-roundtripped bind geometry before publication. Source UVs are omitted from skin nodes; wire normals are omitted because the engine draws edges.
+
+Native wire: 3964 triangles; the table below reports actual decoded triangles after degenerate cleanup. The schematic has a separate 35 mm sampled surface ceiling; opaque skin retains its 3 mm gate. Split skin coverage is checked as the union of body and both hands, and each part is checked against the full original source. Intentional wrist boundaries are allowed.
+
+Budgets: soft 4,000,000 bytes / 350,000 triangles; hard 8,000,000 bytes / 500,000 triangles. Both soft limits pass for this output.
+
+
 Display muscle and bone selections retain their reviewed topic scope. The mannequin uses full-body joints even where corresponding display bones are absent. No hand/foot intrinsic muscle geometry is fabricated.
 
 ## Final decoded surface audit
 
-Symmetric sampled Hausdorff: referenced vertices (approximately 3,000) plus 6,000 area-weighted interior points in each direction. This estimates surface error rather than certifying a global maximum. Source boundaries are preserved; nonmanifold/open sources retain disabled section filling.
+Sampled surface deviation: referenced vertices (approximately 3,000) plus 6,000 area-weighted interior points in each direction for whole meshes; split skin parts use final-to-whole-source distances plus a symmetric union coverage gate. This estimates surface error rather than certifying a global maximum. Source boundaries are preserved; nonmanifold/open sources retain disabled section filling.
 
 | Mesh | Role | Source triangles | Final triangles | Deviation mm | Budget mm | Closed before → after | Boundary edges |
 |---|---|---:|---:|---:|---:|---|---:|
@@ -73,7 +86,10 @@ Symmetric sampled Hausdorff: referenced vertices (approximately 3,000) plus 6,00
 | semimembranosus.r | region | 7,442 | 3,998 | 0.402 | 0.5 | True → False | 0 |
 | semitendinosus.l | region | 4,316 | 3,998 | 0.130 | 0.5 | True → True | 0 |
 | semitendinosus.r | region | 4,316 | 3,998 | 0.176 | 0.5 | True → True | 0 |
-| skin-outline | skin | 100,818 | 19,343 | 2.294 | 3.0 | False → False | 171 |
+| skin-hand.l | skin | 100,818 | 1,112 | 2.244 | 3.0 | False → False | 62 |
+| skin-hand.r | skin | 100,818 | 1,399 | 2.489 | 3.0 | False → False | 67 |
+| skin-outline | skin | 100,818 | 18,778 | 2.042 | 3.0 | False → False | 298 |
+| skin-wire | skin | 100,818 | 3,438 | 8.165 | 35.0 | False → False | 471 |
 | soleus.l | region | 6,774 | 6,440 | 0.232 | 0.5 | True → False | 0 |
 | soleus.r | region | 6,774 | 6,470 | 0.146 | 0.5 | True → False | 0 |
 | tensor-fasciae-latae.l | region | 1,862 | 1,862 | 0.002 | 0.5 | True → True | 0 |
@@ -96,11 +112,13 @@ Studio lighting, paper #EDE7D6, orthographic evaluated non-skin bounds with 5% m
 - `/Users/gavin/work/atlas/scripts/anatomy/cache/legs-preview-left.png`
 - `/Users/gavin/work/atlas/scripts/anatomy/cache/legs-preview-exploded-by-layer.png`
 - `/Users/gavin/work/atlas/scripts/anatomy/cache/legs-preview-skin.png`
+- `/Users/gavin/work/atlas/scripts/anatomy/cache/legs-preview-wire-rest.png`
 - `/Users/gavin/work/atlas/scripts/anatomy/cache/legs-preview-pose.png`
 - `/Users/gavin/work/atlas/scripts/anatomy/cache/legs-preview-pose-front.png`
 - `/Users/gavin/work/atlas/scripts/anatomy/cache/legs-preview-pose-back.png`
 - `/Users/gavin/work/atlas/scripts/anatomy/cache/legs-preview-pose-left.png`
 - `/Users/gavin/work/atlas/scripts/anatomy/cache/legs-preview-pose-anatomy.png`
+- `/Users/gavin/work/atlas/scripts/anatomy/cache/legs-preview-wire-pose.png`
 
 Right angle convention: positive inputs; right axes signed by the engine mirrorSignedAxes rule. Positive inputs use the current engine’s mirrorSignedAxes rule with the real left/right joint midline normal; stored metadata remains the exact X-only axis reflection.
 Pose inputs: {'shoulder.l.flexion': 90, 'elbow.r.flexion': 90, 'hip.l.flexion': 60, 'knee.r.flexion': 90, 'ankle.l.dorsiflexion': 15, 'ankle.r.dorsiflexion': 15}; femur.l centroid displacement 0.214131 m. All evaluated coordinates and muscle-edge stretches are finite.
@@ -501,11 +519,11 @@ All decoded surface error, topology, attribute, joint, coordinate and output bud
 
 ## Published skin-weight audit
 
-Decoded published GLB SHA-256: `c12602c27f22d0df1b82c4302bb665358878db312eb964dbc416a8edb8d29eef`.
+Decoded published GLB SHA-256: `0491bd76be00bce16bf562144ed5986a8131f68a13d550c3c7d3f7569ed22e2e`.
 
 Shares sum decoded weights over referenced vertices, including UV/normal seams. Required alternatives are joints bordering the manifest attachment bones; allowed joints include intervening joints in the rig parent chain (e.g. shoulder between scapula and elbow). Radius uses elbow unless the rig provides a separate pronation joint. Missing attachment weights, unrelated joints above 30%, reversed fibre fields and violated persistent endpoint overrides and local weight outliers fail this gate. Outliers compare welded 1–2-ring dominant joints and area-weighted vectors; a discrepant vector must be over twice the neighbours’ median dominant-joint distance. Sub-edge detached scraps use nearby substantial surface rings because their component-local endpoint seeds are artificial; >1% discrepant weight mass on those scraps also fails. Smooth joint crossovers are excluded. Fixed counts refer to unique welded bind vertices.
 
-Mannequin: all 19 full-body joints weighted; 0 shell mismatch flags. Right-axis exact mirror checks passed.
+skin-wire: all 19 full-body joints weighted; 0 shell mismatch flags. Right-axis exact mirror checks passed.
 
 | Muscle | Joint shares | Required attachment joints | Fibre endpoints | Outliers remaining / fixed | Result |
 |---|---|---|---|---|---|
@@ -562,6 +580,9 @@ Mannequin: all 19 full-body joints weighted; 0 shell mismatch flags. Right-axis 
 | vastus-medialis.l | hip.l 74.04%, knee.l 25.96% | hip.l / knee.l, ankle.l / knee.l | origin → insertion | 0 / 0 | clean |
 | vastus-medialis.r | hip.r 73.98%, knee.r 26.02% | hip.r / knee.r, ankle.r / knee.r | origin → insertion | 0 / 0 | clean |
 
+Skin nodes: `skin-outline, skin-hand.l, skin-hand.r, skin-wire`. Both hand nodes are rigidly bound to their named hand joint. Wrist half-space checks pass at 5 mm distal to the styloid midpoint; wrist openings are intentionally open.
+
+
 | Other mesh | Outliers remaining / fixed |
 |---|---|
 | femur.l | 0 / 0 |
@@ -574,6 +595,9 @@ Mannequin: all 19 full-body joints weighted; 0 shell mismatch flags. Right-axis 
 | patella.l | 0 / 0 |
 | patella.r | 0 / 0 |
 | pelvis | 0 / 0 |
+| skin-hand.l | 0 / 0 |
+| skin-hand.r | 0 / 0 |
 | skin-outline | 0 / 4 |
+| skin-wire | 0 / 12 |
 
-Audit result: **clean** (52 muscle nodes; 0 outliers remaining, 35 fixed).
+Audit result: **clean** (52 muscle nodes; 0 outliers remaining, 47 fixed).

@@ -1,0 +1,182 @@
+[
+  {
+    "topic": "chest",
+    "skinNodes": [
+      "skin-outline",
+      "skin-hand.l",
+      "skin-hand.r",
+      "skin-wire"
+    ],
+    "skinTriangles": {
+      "skin-hand.l": 1859,
+      "skin-hand.r": 2153,
+      "skin-outline": 28221,
+      "skin-wire": 3413
+    },
+    "bytes": 3802480,
+    "triangles": 237847,
+    "sha256": "6f44edb5b63f8d242bc6fd9abfbe1d3b53bc92842abc87c7c8358fc325647963",
+    "previewPaths": {
+      "pose": "/Users/gavin/work/atlas/scripts/anatomy/cache/chest-preview-pose.png",
+      "pose-front": "/Users/gavin/work/atlas/scripts/anatomy/cache/chest-preview-pose-front.png",
+      "pose-back": "/Users/gavin/work/atlas/scripts/anatomy/cache/chest-preview-pose-back.png",
+      "pose-left": "/Users/gavin/work/atlas/scripts/anatomy/cache/chest-preview-pose-left.png",
+      "pose-anatomy": "/Users/gavin/work/atlas/scripts/anatomy/cache/chest-preview-pose-anatomy.png",
+      "wire-rest": "/Users/gavin/work/atlas/scripts/anatomy/cache/chest-preview-wire-rest.png",
+      "wire-pose": "/Users/gavin/work/atlas/scripts/anatomy/cache/chest-preview-wire-pose.png"
+    },
+    "outliersRemaining": 0,
+    "shellWeightMismatches": 0,
+    "splitSkinDeviationM": 0.0013201042311266065
+  },
+  {
+    "topic": "back",
+    "skinNodes": [
+      "skin-outline",
+      "skin-hand.l",
+      "skin-hand.r",
+      "skin-wire"
+    ],
+    "skinTriangles": {
+      "skin-hand.l": 1871,
+      "skin-hand.r": 2199,
+      "skin-outline": 28117,
+      "skin-wire": 3407
+    },
+    "bytes": 3954616,
+    "triangles": 273682,
+    "sha256": "7c087f4f9575bc74ff5f4562b3a00083e0b6155aaffa90711a9da05029421963",
+    "previewPaths": {
+      "pose": "/Users/gavin/work/atlas/scripts/anatomy/cache/back-preview-pose.png",
+      "pose-front": "/Users/gavin/work/atlas/scripts/anatomy/cache/back-preview-pose-front.png",
+      "pose-back": "/Users/gavin/work/atlas/scripts/anatomy/cache/back-preview-pose-back.png",
+      "pose-left": "/Users/gavin/work/atlas/scripts/anatomy/cache/back-preview-pose-left.png",
+      "pose-anatomy": "/Users/gavin/work/atlas/scripts/anatomy/cache/back-preview-pose-anatomy.png",
+      "wire-rest": "/Users/gavin/work/atlas/scripts/anatomy/cache/back-preview-wire-rest.png",
+      "wire-pose": "/Users/gavin/work/atlas/scripts/anatomy/cache/back-preview-wire-pose.png"
+    },
+    "outliersRemaining": 0,
+    "shellWeightMismatches": 0,
+    "splitSkinDeviationM": 0.0013841590844094753
+  },
+  {
+    "topic": "shoulders",
+    "skinNodes": [
+      "skin-outline",
+      "skin-hand.l",
+      "skin-hand.r",
+      "skin-wire"
+    ],
+    "skinTriangles": {
+      "skin-hand.l": 1845,
+      "skin-hand.r": 2138,
+      "skin-outline": 28182,
+      "skin-wire": 3444
+    },
+    "bytes": 2231780,
+    "triangles": 156803,
+    "sha256": "2c94d1643a38bd73a7ad011821bd8007e9a8730ffe8dac1b6956b2c5aff1feb7",
+    "previewPaths": {
+      "pose": "/Users/gavin/work/atlas/scripts/anatomy/cache/shoulders-preview-pose.png",
+      "pose-front": "/Users/gavin/work/atlas/scripts/anatomy/cache/shoulders-preview-pose-front.png",
+      "pose-back": "/Users/gavin/work/atlas/scripts/anatomy/cache/shoulders-preview-pose-back.png",
+      "pose-left": "/Users/gavin/work/atlas/scripts/anatomy/cache/shoulders-preview-pose-left.png",
+      "pose-anatomy": "/Users/gavin/work/atlas/scripts/anatomy/cache/shoulders-preview-pose-anatomy.png",
+      "wire-rest": "/Users/gavin/work/atlas/scripts/anatomy/cache/shoulders-preview-wire-rest.png",
+      "wire-pose": "/Users/gavin/work/atlas/scripts/anatomy/cache/shoulders-preview-wire-pose.png"
+    },
+    "outliersRemaining": 0,
+    "shellWeightMismatches": 0,
+    "splitSkinDeviationM": 0.0014825051184743643
+  },
+  {
+    "topic": "arms",
+    "skinNodes": [
+      "skin-outline",
+      "skin-hand.l",
+      "skin-hand.r",
+      "skin-wire"
+    ],
+    "skinTriangles": {
+      "skin-hand.l": 1853,
+      "skin-hand.r": 2188,
+      "skin-outline": 28151,
+      "skin-wire": 3441
+    },
+    "bytes": 3196088,
+    "triangles": 199435,
+    "sha256": "8ef56fe14883515996e2325547f08a45e94c8e68f74da947376661aca75a27f1",
+    "previewPaths": {
+      "pose": "/Users/gavin/work/atlas/scripts/anatomy/cache/arms-preview-pose.png",
+      "pose-front": "/Users/gavin/work/atlas/scripts/anatomy/cache/arms-preview-pose-front.png",
+      "pose-back": "/Users/gavin/work/atlas/scripts/anatomy/cache/arms-preview-pose-back.png",
+      "pose-left": "/Users/gavin/work/atlas/scripts/anatomy/cache/arms-preview-pose-left.png",
+      "pose-anatomy": "/Users/gavin/work/atlas/scripts/anatomy/cache/arms-preview-pose-anatomy.png",
+      "wire-rest": "/Users/gavin/work/atlas/scripts/anatomy/cache/arms-preview-wire-rest.png",
+      "wire-pose": "/Users/gavin/work/atlas/scripts/anatomy/cache/arms-preview-wire-pose.png"
+    },
+    "outliersRemaining": 0,
+    "shellWeightMismatches": 0,
+    "splitSkinDeviationM": 0.0015544205671176314
+  },
+  {
+    "topic": "legs",
+    "skinNodes": [
+      "skin-outline",
+      "skin-hand.l",
+      "skin-hand.r",
+      "skin-wire"
+    ],
+    "skinTriangles": {
+      "skin-hand.l": 1112,
+      "skin-hand.r": 1399,
+      "skin-outline": 18778,
+      "skin-wire": 3438
+    },
+    "bytes": 3983112,
+    "triangles": 251523,
+    "sha256": "0491bd76be00bce16bf562144ed5986a8131f68a13d550c3c7d3f7569ed22e2e",
+    "previewPaths": {
+      "pose": "/Users/gavin/work/atlas/scripts/anatomy/cache/legs-preview-pose.png",
+      "pose-front": "/Users/gavin/work/atlas/scripts/anatomy/cache/legs-preview-pose-front.png",
+      "pose-back": "/Users/gavin/work/atlas/scripts/anatomy/cache/legs-preview-pose-back.png",
+      "pose-left": "/Users/gavin/work/atlas/scripts/anatomy/cache/legs-preview-pose-left.png",
+      "pose-anatomy": "/Users/gavin/work/atlas/scripts/anatomy/cache/legs-preview-pose-anatomy.png",
+      "wire-rest": "/Users/gavin/work/atlas/scripts/anatomy/cache/legs-preview-wire-rest.png",
+      "wire-pose": "/Users/gavin/work/atlas/scripts/anatomy/cache/legs-preview-wire-pose.png"
+    },
+    "outliersRemaining": 0,
+    "shellWeightMismatches": 0,
+    "splitSkinDeviationM": 0.002125551924109459
+  },
+  {
+    "topic": "core",
+    "skinNodes": [
+      "skin-outline",
+      "skin-hand.l",
+      "skin-hand.r",
+      "skin-wire"
+    ],
+    "skinTriangles": {
+      "skin-hand.l": 1869,
+      "skin-hand.r": 2153,
+      "skin-outline": 28182,
+      "skin-wire": 3426
+    },
+    "bytes": 3828212,
+    "triangles": 280452,
+    "sha256": "18aa3fa529eb7ff90b226c45fc1504d6ef8533b049f90a54adeb824637409573",
+    "previewPaths": {
+      "pose": "/Users/gavin/work/atlas/scripts/anatomy/cache/core-preview-pose.png",
+      "pose-front": "/Users/gavin/work/atlas/scripts/anatomy/cache/core-preview-pose-front.png",
+      "pose-back": "/Users/gavin/work/atlas/scripts/anatomy/cache/core-preview-pose-back.png",
+      "pose-left": "/Users/gavin/work/atlas/scripts/anatomy/cache/core-preview-pose-left.png",
+      "pose-anatomy": "/Users/gavin/work/atlas/scripts/anatomy/cache/core-preview-pose-anatomy.png",
+      "wire-rest": "/Users/gavin/work/atlas/scripts/anatomy/cache/core-preview-wire-rest.png",
+      "wire-pose": "/Users/gavin/work/atlas/scripts/anatomy/cache/core-preview-wire-pose.png"
+    },
+    "outliersRemaining": 0,
+    "shellWeightMismatches": 0,
+    "splitSkinDeviationM": 0.0013512230943888426
+  }
+]

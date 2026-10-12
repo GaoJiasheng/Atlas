@@ -78,10 +78,10 @@ def frame(scene, camera, points, direction):
 
 def render(scene, meshes, name, overlay=True):
     path = CACHE/f'{TOPIC_NAME}-preview-{name}.png'
-    skin = next(o for o in meshes if o.name == 'skin-outline')
+    skins = [o for o in meshes if o.name.startswith('skin-') and o.name != 'skin-wire']
     for ob in meshes:
         shell_only = name == 'skin' or (name.startswith('pose') and name != 'pose-anatomy')
-        ob.hide_render = (shell_only and ob != skin) or (not shell_only and ob == skin)
+        ob.hide_render = (shell_only and ob not in skins) or (not shell_only and ob.get('role') == 'skin')
     scene.render.film_transparent = False
     scene.render.filepath = str(path)
     bpy.ops.render.render(write_still=True)
@@ -90,7 +90,7 @@ def render(scene, meshes, name, overlay=True):
         # same-camera opaque shell at 30% opacity; all anatomy stays solid.
         base = bpy.data.images.load(str(path),check_existing=False)
         for ob in meshes:
-            ob.hide_render = ob != skin
+            ob.hide_render = ob not in skins
         scene.render.film_transparent = True
         bpy.ops.render.render()
         result = bpy.data.images['Render Result']
@@ -106,6 +106,27 @@ def render(scene, meshes, name, overlay=True):
         base.pixels.foreach_set(a.ravel()); base.filepath_raw = str(path); base.save()
         bpy.data.images.remove(base); bpy.data.images.remove(shell)
     print(f'PREVIEW {path}',flush=True)
+    return str(path)
+
+
+def wireframe(scene, meshes, camera, name):
+    """Render only the actual decoded wire edges as thin curves; no body faces."""
+    ob = next(o for o in meshes if o.name == 'skin-wire')
+    points = geometry(ob)
+    curves = bpy.data.curves.new('skin-wire-edges', 'CURVE')
+    curves.dimensions = '3D'; curves.bevel_depth = .00065; curves.bevel_resolution = 0
+    curves.resolution_u = 1
+    for edge in ob.data.edges:
+        spline = curves.splines.new('POLY'); spline.points.add(1)
+        for p, index in zip(spline.points, edge.vertices): p.co = (*points[index], 1)
+    edges = bpy.data.objects.new('skin-wire-edges', curves); scene.collection.objects.link(edges)
+    edges.color = (*linear('4D645C'), 1)
+    for mesh in meshes: mesh.hide_render = True
+    frame(scene,camera,points,(1,-2,.25))
+    path = CACHE/f'{TOPIC_NAME}-preview-{name}.png'
+    scene.render.film_transparent = False; scene.render.filepath = str(path)
+    bpy.ops.render.render(write_still=True)
+    bpy.data.objects.remove(edges,do_unlink=True); bpy.data.curves.remove(curves)
     return str(path)
 
 
@@ -131,12 +152,13 @@ def main():
                 outward = Vector((centre.x-torso_centre.x,centre.y-torso_centre.y,0)).normalized()
                 ob.location += outward*amount
         bpy.context.view_layer.update()
-        points = [p for ob in meshes if (ob.name == 'skin-outline' if name == 'skin' else ob.name != 'skin-outline') for p in geometry(ob)]
+        points = [p for ob in meshes if (ob.name.startswith('skin-') and ob.name != 'skin-wire' if name == 'skin' else ob.get('role') != 'skin') for p in geometry(ob)]
         frame(scene,camera,points,direction)
         paths.append(render(scene,meshes,name))
     for ob in meshes:
         ob.location = transforms[ob.name]
     bpy.context.view_layer.update()
+    paths.append(wireframe(scene,meshes,camera,'wire-rest'))
     pose_path = pose(scene,meshes,camera)
     save_json(CACHE/f'{TOPIC_NAME}-preview-paths.json',paths)
     save_json(CACHE/f'{TOPIC_NAME}-preview-backend.json',{'backend':'Blender Workbench studio','skinOpacity':.3,'margin':.05,'paths':paths,'pose':pose_path})

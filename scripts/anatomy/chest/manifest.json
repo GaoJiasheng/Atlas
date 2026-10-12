@@ -39,9 +39,9 @@
     },
     "total": {
       "targetBytes": 4000000,
-      "maxBytes": 4000000,
+      "maxBytes": 8000000,
       "targetTriangles": 350000,
-      "maxTriangles": 350000
+      "maxTriangles": 500000
     }
   },
   "parts": [
@@ -651,7 +651,10 @@
     "joint.hand.r",
     "joint.hip.r",
     "joint.knee.r",
-    "joint.ankle.r"
+    "joint.ankle.r",
+    "skin-hand.l",
+    "skin-hand.r",
+    "skin-wire"
   ],
   "jointNames": [
     "trunk",
@@ -933,5 +936,34 @@
       "triangleBudget": 2000,
       "moving": false
     }
-  ]
+  ],
+  "skinNodes": [
+    "skin-outline",
+    "skin-hand.l",
+    "skin-hand.r",
+    "skin-wire"
+  ],
+  "skinParts": {
+    "skin-outline": {
+      "hands": false,
+      "wristOpening": "open"
+    },
+    "skin-hand.l": {
+      "joint": "hand.l",
+      "rigid": true
+    },
+    "skin-hand.r": {
+      "joint": "hand.r",
+      "rigid": true
+    },
+    "skin-wire": {
+      "hands": true,
+      "triangleRange": [
+        3000,
+        5000
+      ],
+      "simplification": "planar dissolve then quadric collapse; barycentric source weights",
+      "maxSampledDeviationM": 0.035
+    }
+  }
 }

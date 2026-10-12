@@ -670,8 +670,11 @@ def export(rig):
     save_json(CACHE/f'{TOPIC_NAME}-build-stats.json',before_stats)
     save_json(TOPIC/'attachments.json',{'license':'CC BY-SA 4.0','status':'candidates — human review required',
                                       'units':'m','sites':ATTACHMENTS,'warnings':WARNINGS})
+    from skin_parts import derive
+    skin_parts = derive(SELECTED['skin-outline']['ob'], json.loads((TOPIC/'rig.json').read_text()), TOPIC_NAME)
+    SELECTED['skin-outline']['ob'] = skin_parts[0]
     bpy.ops.object.select_all(action='DESELECT')
-    exported = {record['ob'] for name, record in SELECTED.items() if name != 'ribs'} | {rig}
+    exported = {record['ob'] for name, record in SELECTED.items() if name != 'ribs'} | {rig} | set(skin_parts)
     originals = {record['original'] for record in SELECTED.values()}
     for ob in list(bpy.data.objects):
         if ob not in exported | originals:

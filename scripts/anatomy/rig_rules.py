@@ -51,6 +51,8 @@ def joint_path(a, b, parent):
 def complete_manifest(manifest):
     """Close all attachment joints over their parents; leave display parts alone."""
     from full_body import JOINT_NAMES
+    from skin_manifest import complete_skin_manifest
+    complete_skin_manifest(manifest)
     declared = list(JOINT_NAMES)
     manifest['handGripOffsetM'] = .08
     names = set(declared)

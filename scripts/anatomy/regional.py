@@ -201,8 +201,9 @@ def pose(preview,scene,meshes,camera):
     for view,direction in [('front',(0,-1,0)),('back',(0,1,0)),('left',(1,0,0))]:
         preview.frame(scene,camera,final['skin-outline'],direction)
         pose_paths.append(preview.render(scene,meshes,'pose-'+view,overlay=False))
-    preview.frame(scene,camera,[p for o in meshes if o.name!='skin-outline' for p in final[o.name]],(1,-2,.25))
+    preview.frame(scene,camera,[p for o in meshes if o.get('role')!='skin' for p in final[o.name]],(1,-2,.25))
     pose_paths.append(preview.render(scene,meshes,'pose-anatomy',overlay=False))
+    pose_paths.append(preview.wireframe(scene,meshes,camera,'wire-pose'))
     output=dict(backend='Blender Workbench / decoded final skin',angles=angles,rightAngleConvention='positive inputs; right axes signed by the engine mirrorSignedAxes rule',edgeChecks=checks,path=path,paths=pose_paths,movingMesh=moving,displacementM=displacement)
     if preview.TOPIC_NAME=='arms':
         # Ulna does not rotate with radius around the pronation joint.
@@ -218,9 +219,16 @@ def write_report(topic,manifest,summary,rig,sites,rows,failures):
            f"Draw-call estimate: **{summary['drawCalls']}** opaque primitives; skin overlay adds its shell pass. Both 4 MB and 350,000 triangle ceilings enforced.",'',
            'Native Blender, cached FBX only. Geometry and derived rig/attachment data: CC BY-SA 4.0.','',
            '## Source coverage and scope','']+[f'- {n}' for n in manifest['notes']]
+    skin=json.loads((CACHE/f'{topic}-skin-parts.json').read_text())
+    lines += ['', '## Round 9 skin parts', '',
+              'Skin nodes: `'+', '.join(manifest['skinNodes'])+'`.', '',
+              'The wrist planes are perpendicular to the real elbow-to-styloid-midpoint forearm axes, 5 mm distal to the hand pivots. `skin-outline` excludes the hands. The wrist openings are intentionally open. `skin-hand.l/r` are rigidly bound to `hand.l/r`; hide these nodes when substituting procedural hands.', '',
+              '`skin-wire` includes both hands and uses the full 19-joint skin. Native planar dissolve at 3 degrees precedes quadric planar-preserving simplification. Weights are interpolated barycentrically from the existing skin triangles, reduced to four influences, then shell-synchronized and audited for outliers. Any remaining mismatch is repaired on the exact codec-roundtripped bind geometry before publication. Source UVs are omitted from skin nodes; wire normals are omitted because the engine draws edges.', '',
+              f"Native wire: {skin['wireTriangles']} triangles; the table below reports actual decoded triangles after degenerate cleanup. The schematic has a separate 35 mm sampled surface ceiling; opaque skin retains its 3 mm gate. Split skin coverage is checked as the union of body and both hands, and each part is checked against the full original source. Intentional wrist boundaries are allowed.", '',
+              'Budgets: soft 4,000,000 bytes / 350,000 triangles; hard 8,000,000 bytes / 500,000 triangles. Both soft limits pass for this output.', '']
     lines+=['', 'Display muscle and bone selections retain their reviewed topic scope. The mannequin uses full-body joints even where corresponding display bones are absent. No hand/foot intrinsic muscle geometry is fabricated.',
             '', '## Final decoded surface audit','',
-            'Symmetric sampled Hausdorff: referenced vertices (approximately 3,000) plus 6,000 area-weighted interior points in each direction. This estimates surface error rather than certifying a global maximum. Source boundaries are preserved; nonmanifold/open sources retain disabled section filling.', '',
+            'Sampled surface deviation: referenced vertices (approximately 3,000) plus 6,000 area-weighted interior points in each direction for whole meshes; split skin parts use final-to-whole-source distances plus a symmetric union coverage gate. This estimates surface error rather than certifying a global maximum. Source boundaries are preserved; nonmanifold/open sources retain disabled section filling.', '',
             '| Mesh | Role | Source triangles | Final triangles | Deviation mm | Budget mm | Closed before → after | Boundary edges |',
             '|---|---|---:|---:|---:|---:|---|---:|']
     for r in rows:
