@@ -116,110 +116,94 @@
       ],
       "sketch": "pull-up",
       "motion": {
-        "root": {
-          "rotation": [
-            0,
-            0,
-            0
-          ]
-        },
+        "equipment": [
+          {
+            "kind": "pull-up-bar",
+            "grip": "pronated"
+          }
+        ],
+        "contacts": [
+          "hands"
+        ],
+        "feet": "free",
         "keys": [
           {
             "phase": "start",
             "joints": {
-              "trunk": {
-                "flexion": 0,
-                "rotation": 0
+              "hip.l": {
+                "flexion": 4
               },
-              "shoulder.l": {
-                "flexion": 90,
-                "abduction": 15
+              "knee.l": {
+                "flexion": 6
               },
-              "elbow.l": {
-                "flexion": 5
-              },
-              "hand.l": {
-                "extension": 0
+              "ankle.l": {
+                "plantarflexion": 25
               },
               "scapula.l": {
-                "upward-rotation": 40
+                "upward-rotation": 25,
+                "elevation": 6
               },
               "clavicle.l": {
-                "elevation": 10
+                "elevation": 6
               },
-              "shoulder.r": {
-                "flexion": 90,
-                "abduction": 15
+              "shoulder.l": {
+                "abduction": 112,
+                "flexion": 10,
+                "external-rotation": 20
               },
-              "elbow.r": {
-                "flexion": 5
-              },
-              "hand.r": {
-                "extension": 0
-              },
-              "scapula.r": {
-                "upward-rotation": 40
-              },
-              "clavicle.r": {
-                "elevation": 10
+              "elbow.l": {
+                "flexion": 4
               }
+            },
+            "contract": {
+              "erector-spinae": 0.3,
+              "external-oblique": 0.3
             }
           },
           {
             "phase": "end",
             "joints": {
               "trunk": {
-                "flexion": 0,
-                "rotation": 0
+                "flexion": -10
               },
-              "shoulder.l": {
-                "flexion": 25,
-                "abduction": 15
+              "hip.l": {
+                "flexion": 12
               },
-              "elbow.l": {
-                "flexion": 100
+              "knee.l": {
+                "flexion": 6
               },
-              "hand.l": {
-                "extension": 0
+              "ankle.l": {
+                "plantarflexion": 25
               },
               "scapula.l": {
-                "upward-rotation": 5,
-                "retraction": 8
+                "retraction": 8,
+                "elevation": -4
               },
-              "clavicle.l": {
-                "elevation": 2
+              "shoulder.l": {
+                "abduction": 40,
+                "flexion": 16,
+                "external-rotation": 30
               },
-              "shoulder.r": {
-                "flexion": 25,
-                "abduction": 15
-              },
-              "elbow.r": {
-                "flexion": 100
-              },
-              "hand.r": {
-                "extension": 0
-              },
-              "scapula.r": {
-                "upward-rotation": 5,
-                "retraction": 8
-              },
-              "clavicle.r": {
-                "elevation": 2
+              "elbow.l": {
+                "flexion": 112
               }
             },
             "contract": {
-              "latissimus-dorsi": 0.8,
-              "teres-major": 0.65,
-              "trapezius-ascending": 0.4
+              "erector-spinae": 0.3,
+              "external-oblique": 0.3
             }
           }
         ],
         "tempo": [
-          1.5,
-          0.4,
-          2.5,
-          0.4
-        ]
+          1.4,
+          0.5,
+          2.2,
+          0.5
+        ],
+        "camera": {
+          "azimuth": 155,
+          "elevation": 10
+        }
       },
       "sources": [
         "M47",
@@ -372,52 +356,54 @@
       ],
       "sketch": "lat-pulldown",
       "motion": {
-        "root": {
-          "rotation": [
-            -5,
-            0,
-            0
-          ]
-        },
+        "equipment": [
+          {
+            "kind": "lat-bar",
+            "grip": "pronated",
+            "width": 0.75
+          },
+          {
+            "kind": "machine-seat",
+            "at": [
+              0,
+              -0.413,
+              0.162
+            ],
+            "height": 0.344,
+            "angle": 0,
+            "thighPad": true
+          }
+        ],
         "keys": [
           {
             "phase": "start",
             "joints": {
               "trunk": {
-                "flexion": 0,
-                "rotation": 0
+                "flexion": -12
               },
-              "shoulder.l": {
-                "flexion": 90,
-                "abduction": 20
+              "hip.l": {
+                "flexion": 82
               },
-              "elbow.l": {
-                "flexion": 5
+              "knee.l": {
+                "flexion": 88
               },
-              "hand.l": {
-                "extension": 0
+              "ankle.l": {
+                "plantarflexion": 6
               },
               "scapula.l": {
-                "upward-rotation": 40
+                "upward-rotation": 25,
+                "elevation": 6
               },
               "clavicle.l": {
-                "elevation": 10
+                "elevation": 6
               },
-              "shoulder.r": {
-                "flexion": 90,
-                "abduction": 20
+              "shoulder.l": {
+                "abduction": 112,
+                "flexion": 18,
+                "external-rotation": 20
               },
-              "elbow.r": {
-                "flexion": 5
-              },
-              "hand.r": {
-                "extension": 0
-              },
-              "scapula.r": {
-                "upward-rotation": 40
-              },
-              "clavicle.r": {
-                "elevation": 10
+              "elbow.l": {
+                "flexion": 4
               }
             }
           },
@@ -425,54 +411,36 @@
             "phase": "end",
             "joints": {
               "trunk": {
-                "flexion": 0,
-                "rotation": 0
+                "flexion": -12
               },
-              "shoulder.l": {
-                "flexion": 25,
-                "abduction": 20
+              "hip.l": {
+                "flexion": 82
               },
-              "elbow.l": {
-                "flexion": 100
+              "knee.l": {
+                "flexion": 88
               },
-              "hand.l": {
-                "extension": 0
+              "ankle.l": {
+                "plantarflexion": 6
               },
               "scapula.l": {
-                "upward-rotation": 5,
-                "retraction": 8
+                "retraction": 8,
+                "elevation": -4
               },
-              "clavicle.l": {
-                "elevation": 2
+              "shoulder.l": {
+                "abduction": 15,
+                "flexion": 6,
+                "external-rotation": 12
               },
-              "shoulder.r": {
-                "flexion": 25,
-                "abduction": 20
-              },
-              "elbow.r": {
-                "flexion": 100
-              },
-              "hand.r": {
-                "extension": 0
-              },
-              "scapula.r": {
-                "upward-rotation": 5,
-                "retraction": 8
-              },
-              "clavicle.r": {
-                "elevation": 2
+              "elbow.l": {
+                "flexion": 120
               }
-            },
-            "contract": {
-              "latissimus-dorsi": 0.8,
-              "teres-major": 0.65
             }
           }
         ],
         "tempo": [
-          1.5,
-          0.4,
-          2.5,
+          1.2,
+          0.5,
+          2,
           0.4
         ]
       },
@@ -632,50 +600,54 @@
       "motion": {
         "root": {
           "rotation": [
-            55,
+            0,
             0,
             0
+          ],
+          "offset": [
+            0.0,
+            -0.15,
+            0.243
           ]
         },
+        "equipment": [
+          {
+            "kind": "barbell",
+            "grip": "pronated",
+            "width": 0.5
+          }
+        ],
+        "contacts": [
+          "feet"
+        ],
         "keys": [
           {
             "phase": "start",
             "joints": {
               "trunk": {
-                "flexion": 0,
-                "rotation": 0
+                "flexion": 58
               },
-              "shoulder.l": {
-                "flexion": 55,
-                "abduction": 10
+              "hip.l": {
+                "flexion": 76
               },
-              "elbow.l": {
-                "flexion": 5
+              "knee.l": {
+                "flexion": 30
               },
-              "hand.l": {
-                "extension": 0
+              "ankle.l": {
+                "dorsiflexion": 12
+              },
+              "clavicle.l": {
+                "protraction": 6
               },
               "scapula.l": {
                 "protraction": 8
               },
-              "clavicle.l": {
-                "elevation": 0
-              },
-              "shoulder.r": {
-                "flexion": 55,
+              "shoulder.l": {
+                "flexion": 54,
                 "abduction": 10
               },
-              "elbow.r": {
-                "flexion": 5
-              },
-              "hand.r": {
-                "extension": 0
-              },
-              "scapula.r": {
-                "protraction": 8
-              },
-              "clavicle.r": {
-                "elevation": 0
+              "elbow.l": {
+                "flexion": 3
               }
             }
           },
@@ -683,65 +655,43 @@
             "phase": "end",
             "joints": {
               "trunk": {
-                "flexion": 0,
-                "rotation": 0
+                "flexion": 58
               },
-              "shoulder.l": {
-                "extension": 15,
-                "abduction": 15,
-                "flexion": 0
+              "hip.l": {
+                "flexion": 76
               },
-              "elbow.l": {
-                "flexion": 100
+              "knee.l": {
+                "flexion": 30
               },
-              "hand.l": {
-                "extension": 0
-              },
-              "scapula.l": {
-                "retraction": 12
+              "ankle.l": {
+                "dorsiflexion": 12
               },
               "clavicle.l": {
-                "elevation": 0
+                "retraction": 8
               },
-              "shoulder.r": {
-                "extension": 15,
-                "abduction": 15,
-                "flexion": 0
+              "scapula.l": {
+                "retraction": 14
               },
-              "elbow.r": {
-                "flexion": 100
+              "shoulder.l": {
+                "extension": 30,
+                "abduction": 6
               },
-              "hand.r": {
-                "extension": 0
-              },
-              "scapula.r": {
-                "retraction": 12
-              },
-              "clavicle.r": {
-                "elevation": 0
+              "elbow.l": {
+                "flexion": 95
               }
-            },
-            "contract": {
-              "latissimus-dorsi": 0.7,
-              "trapezius-transverse": 0.7,
-              "rhomboid-major": 0.7,
-              "rhomboid-minor": 0.6
             }
           }
         ],
         "tempo": [
-          1.5,
-          0.4,
-          2.5,
+          1.2,
+          0.5,
+          2,
           0.4
         ],
-        "equipment": [
-          {
-            "kind": "barbell",
-            "grip": "pronated",
-            "width": 0.5
-          }
-        ]
+        "camera": {
+          "azimuth": 120,
+          "elevation": 18
+        }
       },
       "sources": [
         "M47",
@@ -876,107 +826,122 @@
       "motion": {
         "root": {
           "rotation": [
-            65,
+            66,
             0,
-            0
+            -5
           ]
         },
+        "equipment": [
+          {
+            "kind": "dumbbell",
+            "grip": "neutral",
+            "hand": "left"
+          },
+          {
+            "kind": "bench",
+            "at": [
+              -0.156,
+              -0.585,
+              0.092
+            ]
+          }
+        ],
         "keys": [
           {
             "phase": "start",
             "joints": {
-              "trunk": {
-                "flexion": 0,
-                "rotation": 0
+              "hip.r": {
+                "flexion": 96
               },
+              "knee.r": {
+                "flexion": 122
+              },
+              "ankle.r": {
+                "plantarflexion": 30
+              },
+              "hip.l": {
+                "flexion": 72,
+                "abduction": 12
+              },
+              "knee.l": {
+                "flexion": 6
+              },
+              "ankle.l": {
+                "dorsiflexion": 6
+              },
+              "shoulder.r": {
+                "flexion": 66,
+                "abduction": 6
+              },
+              "elbow.r": {},
               "shoulder.l": {
-                "flexion": 65,
-                "abduction": 5
+                "flexion": 64,
+                "abduction": 4
               },
               "elbow.l": {
-                "flexion": 5
-              },
-              "hand.l": {
-                "extension": 0
+                "flexion": 2
               },
               "scapula.l": {
                 "protraction": 8
               },
               "clavicle.l": {
-                "elevation": 0
-              },
-              "shoulder.r": {
-                "flexion": 65,
-                "abduction": 10
-              },
-              "elbow.r": {
-                "flexion": 5
-              },
-              "hand.r": {
-                "extension": 65
-              },
-              "scapula.r": {
                 "protraction": 5
-              },
-              "clavicle.r": {
-                "elevation": 0
               }
             }
           },
           {
             "phase": "end",
             "joints": {
-              "trunk": {
-                "flexion": 0,
-                "rotation": 0
+              "hip.r": {
+                "flexion": 96
               },
-              "shoulder.l": {
-                "extension": 10,
-                "abduction": 10,
-                "flexion": 0
+              "knee.r": {
+                "flexion": 122
               },
-              "elbow.l": {
-                "flexion": 100
+              "ankle.r": {
+                "plantarflexion": 30
               },
-              "hand.l": {
-                "extension": 0
+              "hip.l": {
+                "flexion": 72,
+                "abduction": 12
               },
-              "scapula.l": {
-                "retraction": 10
+              "knee.l": {
+                "flexion": 6
               },
-              "clavicle.l": {
-                "elevation": 0
+              "ankle.l": {
+                "dorsiflexion": 6
               },
               "shoulder.r": {
-                "flexion": 65,
-                "abduction": 10
+                "flexion": 66,
+                "abduction": 6
               },
-              "elbow.r": {
-                "flexion": 5
+              "elbow.r": {},
+              "shoulder.l": {
+                "extension": 28,
+                "abduction": 8
               },
-              "hand.r": {
-                "extension": 65
+              "elbow.l": {
+                "flexion": 95
               },
-              "scapula.r": {
-                "protraction": 5
+              "scapula.l": {
+                "retraction": 14
               },
-              "clavicle.r": {
-                "elevation": 0
+              "clavicle.l": {
+                "retraction": 8
               }
-            },
-            "contract": {
-              "latissimus-dorsi": 0.7,
-              "trapezius-transverse": 0.6,
-              "rhomboid-major": 0.6
             }
           }
         ],
         "tempo": [
-          1.5,
-          0.4,
-          2.5,
+          1.2,
+          0.5,
+          2,
           0.4
-        ]
+        ],
+        "camera": {
+          "azimuth": 140,
+          "elevation": 24
+        }
       },
       "sources": [
         "M47",
@@ -1110,103 +1075,92 @@
       "motion": {
         "root": {
           "rotation": [
-            -60,
+            -66,
             0,
             0
           ]
         },
+        "equipment": [
+          {
+            "kind": "pull-up-bar",
+            "grip": "pronated",
+            "height": 1.246
+          }
+        ],
+        "contacts": [
+          "hands"
+        ],
         "keys": [
           {
             "phase": "start",
             "joints": {
-              "trunk": {
-                "flexion": 0,
-                "rotation": 0
+              "knee.l": {
+                "flexion": 4
+              },
+              "ankle.l": {
+                "plantarflexion": 8
               },
               "shoulder.l": {
-                "flexion": 70,
-                "abduction": 15
+                "flexion": 85,
+                "abduction": 12
               },
               "elbow.l": {
-                "flexion": 5
-              },
-              "hand.l": {
-                "extension": 0
+                "flexion": 2
               },
               "scapula.l": {
                 "protraction": 8
               },
               "clavicle.l": {
-                "elevation": 0
-              },
-              "shoulder.r": {
-                "flexion": 70,
-                "abduction": 15
-              },
-              "elbow.r": {
-                "flexion": 5
-              },
-              "hand.r": {
-                "extension": 0
-              },
-              "scapula.r": {
-                "protraction": 8
-              },
-              "clavicle.r": {
-                "elevation": 0
+                "protraction": 5
               }
+            },
+            "contract": {
+              "erector-spinae": 0.3,
+              "external-oblique": 0.3
             }
           },
           {
             "phase": "end",
             "joints": {
               "trunk": {
-                "flexion": 0,
-                "rotation": 0
+                "flexion": 23
+              },
+              "knee.l": {
+                "flexion": 4
+              },
+              "ankle.l": {
+                "plantarflexion": 8
               },
               "shoulder.l": {
-                "extension": 5,
-                "abduction": 25,
-                "flexion": 0
+                "flexion": 58,
+                "abduction": 16
               },
               "elbow.l": {
-                "flexion": 100
-              },
-              "hand.l": {
-                "extension": 0
+                "flexion": 125
               },
               "scapula.l": {
-                "retraction": 12
+                "retraction": 14
               },
               "clavicle.l": {
-                "elevation": 0
-              },
-              "shoulder.r": {
-                "extension": 5,
-                "abduction": 25,
-                "flexion": 0
-              },
-              "elbow.r": {
-                "flexion": 100
-              },
-              "hand.r": {
-                "extension": 0
-              },
-              "scapula.r": {
-                "retraction": 12
-              },
-              "clavicle.r": {
-                "elevation": 0
+                "retraction": 8
               }
+            },
+            "contract": {
+              "erector-spinae": 0.3,
+              "external-oblique": 0.3
             }
           }
         ],
         "tempo": [
-          1.5,
-          0.4,
-          2.5,
+          1.2,
+          0.5,
+          2,
           0.4
-        ]
+        ],
+        "camera": {
+          "azimuth": 75,
+          "elevation": 14
+        }
       },
       "sources": [
         "M47",
@@ -1343,104 +1297,85 @@
             0,
             0,
             0
+          ],
+          "offset": [
+            0.0,
+            0.01,
+            0.048
           ]
         },
+        "equipment": [
+          {
+            "kind": "cable",
+            "hand": "both",
+            "handle": "d-handle",
+            "grip": "neutral",
+            "at": [
+              0,
+              0.42,
+              1.25
+            ]
+          }
+        ],
+        "contacts": [
+          "feet"
+        ],
         "keys": [
           {
             "phase": "start",
             "joints": {
-              "trunk": {
-                "flexion": 0,
-                "rotation": 0
-              },
-              "shoulder.l": {
-                "flexion": 80,
-                "abduction": 15,
-                "external-rotation": 0
-              },
-              "elbow.l": {
-                "flexion": 10
-              },
-              "hand.l": {
-                "extension": 0
+              "knee.l": {
+                "flexion": 6
               },
               "scapula.l": {
                 "protraction": 8
               },
               "clavicle.l": {
-                "elevation": 0
+                "protraction": 4
               },
-              "shoulder.r": {
-                "flexion": 80,
-                "abduction": 15,
-                "external-rotation": 0
+              "shoulder.l": {
+                "horizontal-adduction": 80,
+                "abduction": 92,
+                "internal-rotation": 10
               },
-              "elbow.r": {
-                "flexion": 10
-              },
-              "hand.r": {
-                "extension": 0
-              },
-              "scapula.r": {
-                "protraction": 8
-              },
-              "clavicle.r": {
-                "elevation": 0
+              "elbow.l": {
+                "flexion": 6
               }
             }
           },
           {
             "phase": "end",
             "joints": {
-              "trunk": {
-                "flexion": 0,
-                "rotation": 0
-              },
-              "shoulder.l": {
-                "flexion": 20,
-                "abduction": 75,
-                "external-rotation": 65
-              },
-              "elbow.l": {
-                "flexion": 90
-              },
-              "hand.l": {
-                "extension": 0
+              "knee.l": {
+                "flexion": 6
               },
               "scapula.l": {
-                "retraction": 12,
-                "upward-rotation": 15
+                "retraction": 14,
+                "upward-rotation": 10
               },
               "clavicle.l": {
-                "elevation": 5
+                "retraction": 8
               },
-              "shoulder.r": {
-                "flexion": 20,
-                "abduction": 75,
-                "external-rotation": 65
+              "shoulder.l": {
+                "abduction": 55,
+                "external-rotation": 45
               },
-              "elbow.r": {
-                "flexion": 90
-              },
-              "hand.r": {
-                "extension": 0
-              },
-              "scapula.r": {
-                "retraction": 12,
-                "upward-rotation": 15
-              },
-              "clavicle.r": {
-                "elevation": 5
+              "elbow.l": {
+                "flexion": 138
               }
             }
           }
         ],
         "tempo": [
-          1.5,
-          0.4,
-          2.5,
+          1.2,
+          0.8,
+          2,
           0.4
-        ]
+        ],
+        "camera": {
+          "azimuth": 125,
+          "elevation": 12
+        }
       },
       "sources": [
         "M47",
@@ -1566,103 +1501,65 @@
             0,
             0,
             0
+          ],
+          "offset": [
+            0.0,
+            0.007,
+            0.032
           ]
         },
+        "equipment": [
+          {
+            "kind": "dumbbell",
+            "grip": "neutral"
+          }
+        ],
+        "contacts": [
+          "feet"
+        ],
         "keys": [
           {
             "phase": "start",
             "joints": {
-              "trunk": {
-                "flexion": 0,
-                "rotation": 0
+              "knee.l": {
+                "flexion": 4
               },
               "shoulder.l": {
-                "flexion": 0,
-                "abduction": 5
+                "abduction": 2,
+                "extension": 6
               },
               "elbow.l": {
-                "flexion": 5
-              },
-              "hand.l": {
-                "extension": 0
-              },
-              "scapula.l": {
-                "elevation": 0
-              },
-              "clavicle.l": {
-                "elevation": 0
-              },
-              "shoulder.r": {
-                "flexion": 0,
-                "abduction": 5
-              },
-              "elbow.r": {
-                "flexion": 5
-              },
-              "hand.r": {
-                "extension": 0
-              },
-              "scapula.r": {
-                "elevation": 0
-              },
-              "clavicle.r": {
-                "elevation": 0
+                "flexion": 3
               }
             }
           },
           {
             "phase": "end",
             "joints": {
-              "trunk": {
-                "flexion": 0,
-                "rotation": 0
-              },
-              "shoulder.l": {
-                "flexion": 0,
-                "abduction": 5
-              },
-              "elbow.l": {
-                "flexion": 5
-              },
-              "hand.l": {
-                "extension": 0
-              },
-              "scapula.l": {
-                "elevation": 12
+              "knee.l": {
+                "flexion": 4
               },
               "clavicle.l": {
+                "elevation": 20
+              },
+              "scapula.l": {
                 "elevation": 8
               },
-              "shoulder.r": {
-                "flexion": 0,
-                "abduction": 5
+              "shoulder.l": {
+                "abduction": -26,
+                "extension": 6
               },
-              "elbow.r": {
-                "flexion": 5
-              },
-              "hand.r": {
-                "extension": 0
-              },
-              "scapula.r": {
-                "elevation": 12
-              },
-              "clavicle.r": {
-                "elevation": 8
+              "elbow.l": {
+                "flexion": 3
               }
             }
           }
         ],
         "tempo": [
-          1.5,
-          0.4,
-          2.5,
+          1,
+          0.6,
+          1.6,
           0.4
-        ],
-        "equipment": [
-          {
-            "kind": "dumbbell",
-            "grip": "neutral"
-          }
         ]
       },
       "sources": [
@@ -1785,100 +1682,65 @@
             0
           ]
         },
+        "equipment": [
+          {
+            "kind": "incline-bench",
+            "angle": 30,
+            "turn": 180,
+            "at": [
+              0.0,
+              -0.265,
+              -0.019
+            ]
+          }
+        ],
         "keys": [
           {
             "phase": "start",
             "joints": {
-              "trunk": {
-                "flexion": 0,
-                "rotation": 0
-              },
               "shoulder.l": {
                 "flexion": 60,
-                "abduction": 20,
-                "external-rotation": 20
+                "abduction": 4
               },
               "elbow.l": {
-                "flexion": 5
-              },
-              "hand.l": {
-                "extension": 0
-              },
-              "scapula.l": {
-                "upward-rotation": 5
-              },
-              "clavicle.l": {
-                "elevation": 0
-              },
-              "shoulder.r": {
-                "flexion": 60,
-                "abduction": 20,
-                "external-rotation": 20
-              },
-              "elbow.r": {
-                "flexion": 5
-              },
-              "hand.r": {
-                "extension": 0
-              },
-              "scapula.r": {
-                "upward-rotation": 5
-              },
-              "clavicle.r": {
-                "elevation": 0
+                "flexion": 4
               }
+            },
+            "contract": {
+              "trapezius-descending": 0.1
             }
           },
           {
             "phase": "end",
             "joints": {
-              "trunk": {
-                "flexion": 0,
-                "rotation": 0
-              },
               "shoulder.l": {
-                "flexion": 90,
-                "abduction": 30,
-                "external-rotation": 35
+                "flexion": 165,
+                "abduction": 50,
+                "external-rotation": 30
               },
               "elbow.l": {
-                "flexion": 5
-              },
-              "hand.l": {
-                "extension": 0
+                "flexion": 4
               },
               "scapula.l": {
-                "upward-rotation": 30
-              },
-              "clavicle.l": {
-                "elevation": 8
-              },
-              "shoulder.r": {
-                "flexion": 90,
-                "abduction": 30,
-                "external-rotation": 35
-              },
-              "elbow.r": {
-                "flexion": 5
-              },
-              "hand.r": {
-                "extension": 0
-              },
-              "scapula.r": {
-                "upward-rotation": 30
-              },
-              "clavicle.r": {
-                "elevation": 8
+                "upward-rotation": 30,
+                "elevation": -6
               }
+            },
+            "contract": {
+              "trapezius-descending": 0.5
             }
           }
         ],
         "tempo": [
           1.5,
-          0.4,
-          2.5,
+          0.8,
+          2,
           0.4
-        ]
+        ],
+        "camera": {
+          "azimuth": 70,
+          "elevation": 30
+        }
       },
       "sources": [
         "M47",
@@ -2030,7 +1892,108 @@
         "M55",
         "M59",
         "M49"
-      ]
+      ],
+      "motion": {
+        "root": {
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0.0,
+            -0.463,
+            0.01
+          ]
+        },
+        "equipment": [
+          {
+            "kind": "barbell",
+            "grip": "pronated",
+            "width": 0.55
+          }
+        ],
+        "contacts": [
+          "feet"
+        ],
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "trunk": {
+                "flexion": 57
+              },
+              "hip.l": {
+                "flexion": 135
+              },
+              "knee.l": {
+                "flexion": 100
+              },
+              "ankle.l": {
+                "dorsiflexion": 22
+              },
+              "shoulder.l": {
+                "flexion": 47,
+                "abduction": 8
+              }
+            },
+            "contract": {
+              "erector-spinae": 0.35,
+              "external-oblique": 0.3
+            }
+          },
+          {
+            "phase": "mid",
+            "joints": {
+              "trunk": {
+                "flexion": 45
+              },
+              "hip.l": {
+                "flexion": 80
+              },
+              "knee.l": {
+                "flexion": 38
+              },
+              "ankle.l": {
+                "dorsiflexion": 3
+              },
+              "shoulder.l": {
+                "flexion": 40,
+                "abduction": 8
+              }
+            },
+            "contract": {
+              "erector-spinae": 0.35,
+              "external-oblique": 0.3
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "knee.l": {
+                "flexion": 3
+              },
+              "ankle.l": {
+                "dorsiflexion": 1
+              },
+              "shoulder.l": {
+                "flexion": 4,
+                "abduction": 6
+              }
+            },
+            "contract": {
+              "erector-spinae": 0.35,
+              "external-oblique": 0.3
+            }
+          }
+        ],
+        "tempo": [
+          2,
+          0.6,
+          2.4,
+          0.6
+        ]
+      }
     },
     {
       "id": "back-extension",
@@ -2147,7 +2110,107 @@
         "M61",
         "M59",
         "M49"
-      ]
+      ],
+      "motion": {
+        "root": {
+          "rotation": [
+            45,
+            0,
+            0
+          ]
+        },
+        "equipment": [
+          {
+            "kind": "incline-bench",
+            "angle": 45,
+            "turn": 180,
+            "at": [
+              0.0,
+              -0.625,
+              -0.615
+            ]
+          }
+        ],
+        "contacts": [
+          "feet"
+        ],
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "trunk": {
+                "flexion": 48
+              },
+              "hip.l": {
+                "flexion": 48
+              },
+              "knee.l": {
+                "flexion": 3
+              },
+              "ankle.l": {
+                "dorsiflexion": 15
+              },
+              "shoulder.l": {
+                "flexion": 25,
+                "abduction": -5,
+                "internal-rotation": 80
+              },
+              "elbow.l": {
+                "flexion": 110
+              },
+              "shoulder.r": {
+                "flexion": 38,
+                "abduction": -5,
+                "internal-rotation": 80
+              },
+              "elbow.r": {
+                "flexion": 110
+              }
+            },
+            "contract": {
+              "erector-spinae": 0.35,
+              "external-oblique": 0.3
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "knee.l": {
+                "flexion": 3
+              },
+              "ankle.l": {
+                "dorsiflexion": 15
+              },
+              "shoulder.l": {
+                "flexion": 25,
+                "abduction": -5,
+                "internal-rotation": 80
+              },
+              "elbow.l": {
+                "flexion": 110
+              },
+              "shoulder.r": {
+                "flexion": 38,
+                "abduction": -5,
+                "internal-rotation": 80
+              },
+              "elbow.r": {
+                "flexion": 110
+              }
+            },
+            "contract": {
+              "erector-spinae": 0.35,
+              "external-oblique": 0.3
+            }
+          }
+        ],
+        "tempo": [
+          1.5,
+          0.6,
+          2,
+          0.4
+        ]
+      }
     },
     {
       "id": "side-lying-dumbbell-external-rotation",
@@ -2255,98 +2318,96 @@
             90
           ]
         },
+        "equipment": [
+          {
+            "kind": "dumbbell",
+            "grip": "neutral",
+            "hand": "left"
+          },
+          {
+            "kind": "floor",
+            "at": [
+              -0.25,
+              -0.243,
+              0.1
+            ],
+            "turn": 90
+          }
+        ],
         "keys": [
           {
             "phase": "start",
             "joints": {
-              "trunk": {
-                "flexion": 0,
-                "rotation": 0
+              "hip.l": {
+                "flexion": 35,
+                "adduction": 6
               },
-              "shoulder.l": {
-                "flexion": 0,
-                "abduction": 5,
-                "external-rotation": 0
+              "knee.l": {
+                "flexion": 60
               },
-              "elbow.l": {
-                "flexion": 90
+              "hip.r": {
+                "flexion": 35
               },
-              "hand.l": {
-                "extension": 0
-              },
-              "scapula.l": {
-                "retraction": 0
-              },
-              "clavicle.l": {
-                "elevation": 0
+              "knee.r": {
+                "flexion": 60
               },
               "shoulder.r": {
-                "flexion": 30,
-                "abduction": 10
+                "flexion": 85
               },
               "elbow.r": {
-                "flexion": 90
+                "flexion": 10
               },
-              "hand.r": {
-                "extension": 0
+              "shoulder.l": {
+                "abduction": 8,
+                "internal-rotation": 45
               },
-              "scapula.r": {
-                "retraction": 0
-              },
-              "clavicle.r": {
-                "elevation": 0
+              "elbow.l": {
+                "flexion": 88
               }
             }
           },
           {
             "phase": "end",
             "joints": {
-              "trunk": {
-                "flexion": 0,
-                "rotation": 0
+              "hip.l": {
+                "flexion": 35,
+                "adduction": 6
               },
-              "shoulder.l": {
-                "flexion": 0,
-                "abduction": 5,
-                "external-rotation": 60
+              "knee.l": {
+                "flexion": 60
               },
-              "elbow.l": {
-                "flexion": 90
+              "hip.r": {
+                "flexion": 35
               },
-              "hand.l": {
-                "extension": 0
-              },
-              "scapula.l": {
-                "retraction": 0
-              },
-              "clavicle.l": {
-                "elevation": 0
+              "knee.r": {
+                "flexion": 60
               },
               "shoulder.r": {
-                "flexion": 30,
-                "abduction": 10
+                "flexion": 85
               },
               "elbow.r": {
-                "flexion": 90
+                "flexion": 10
               },
-              "hand.r": {
-                "extension": 0
+              "shoulder.l": {
+                "abduction": 8,
+                "external-rotation": 55
               },
-              "scapula.r": {
-                "retraction": 0
-              },
-              "clavicle.r": {
-                "elevation": 0
+              "elbow.l": {
+                "flexion": 88
               }
             }
           }
         ],
         "tempo": [
           1.5,
-          0.4,
-          2.5,
+          0.5,
+          2,
           0.4
-        ]
+        ],
+        "camera": {
+          "azimuth": 150,
+          "elevation": 20
+        }
       },
       "sources": [
         "M47",

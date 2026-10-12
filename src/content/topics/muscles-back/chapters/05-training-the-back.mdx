@@ -50,23 +50,13 @@ state:
     - trapezius-transverse
     - rhomboid-major
     - deltoid-posterior
-    camera:
-      position:
-      - 2.8
-      - 1.2
-      - -3.4
-      target:
-      - 0
-      - -0.12
-      - 0
-      fov: 22
     caption:
       en: 'Barbell row: the arms pull back and the blades draw inward. Latissimus and the scapular retractors work while the
         erectors hold the trunk steady.'
       zh: 杠铃划船：上臂往后拉，肩胛骨往中间收。背阔肌和收肩胛的肌肉在出力，竖脊肌把躯干稳住。
   - exercise:
       id: barbell-deadlift
-      phase: end
+      phase: loop
     labels:
     - gluteus-maximus
     - iliocostalis-lumborum
@@ -75,11 +65,25 @@ state:
     - superficial
     - intermediate
     - body
-    camera: exercise
     caption:
-      en: 'Deadlift: the model holds still here because it has no hip or knee joints; the sketch shows the lift. The erectors
-        hold the spine rather than repeatedly shortening to raise the bar.'
-      zh: 硬拉：模型没有髋、膝关节，所以这里静止不动，完整动作请看示意图。竖脊肌负责稳住脊柱，并不是一次次缩短把杠拉起来。
+      en: 'Deadlift: from the floor to standing, the hips and knees straighten together and the bar slides up close to the
+        legs. The buttocks and thighs do the lifting; the erector spinae hold the spine still rather than repeatedly shortening.'
+      zh: 硬拉：从地面到站直，髋和膝一起伸直，杠贴着腿往上走。臀部和大腿负责抬起；竖脊肌把脊柱稳住，并不是一次次缩短把杠拉起来。
+  - exercise:
+      id: back-extension
+      phase: loop
+    ghost:
+    - superficial
+    - intermediate
+    - body
+    labels:
+    - gluteus-maximus
+    - iliocostalis-lumborum
+    - longissimus-thoracis
+    caption:
+      en: 'Back extension on a 45° bench: bend forward at the hips over the pad, then straighten the hips until the body is
+        in one line again. The buttocks and the backs of the thighs lift you; the erector spinae hold the spine.'
+      zh: 45° 背伸展：在垫子上方从髋部向前弯，再伸直髋关节，直到身体重新成一条直线。臀部和大腿后侧把你抬起来，竖脊肌把脊柱稳住。
   - exercise:
       id: single-arm-dumbbell-row
       phase: loop
@@ -88,22 +92,43 @@ state:
     - rhomboid-major
     - trapezius-transverse
     - deltoid-posterior
-    camera: exercise
     caption:
       en: 'One-arm dumbbell row: one hand and knee rest on the bench while the other arm pulls back. Keep the trunk square
         rather than twisting for extra range.'
       zh: 单臂哑铃划船：一只手和一侧膝盖撑在凳上，另一侧上臂往后拉。躯干摆正，别靠转身凑幅度。
+  - exercise:
+      id: inverted-row
+      phase: loop
+    labels:
+    - latissimus-dorsi
+    - trapezius-transverse
+    - rhomboid-major
+    - deltoid-posterior
+    caption:
+      en: 'Inverted row: hang under a fixed bar with your heels on the floor and pull your chest up to it, the body straight
+        as a plank. The same muscles as a row, loaded by part of your body weight.'
+      zh: 反向划船：在固定横杆下方悬挂，脚跟着地，身体像平板一样挺直，把胸口拉向横杆。练的肌肉和划船相同，负荷是自身的一部分体重。
   - exercise:
       id: dumbbell-shrug
       phase: loop
     labels:
     - trapezius-descending
     - levator-scapulae
-    camera: exercise
     caption:
       en: 'Dumbbell shrug: lift the shoulder girdle and lower it smoothly. Descending trapezius and levator scapulae lead;
         rolling the shoulders is a different movement.'
       zh: 哑铃耸肩：把肩带提起来，再平稳放下。主要靠斜方肌降部和肩胛提肌；转肩画圈是另一个动作。
+  - exercise:
+      id: prone-y-raise
+      phase: loop
+    labels:
+    - trapezius-ascending
+    - trapezius-descending
+    - trapezius-transverse
+    caption:
+      en: 'Prone Y raise on an incline bench: the arms rise from hanging to a wide Y in line with the body, thumbs up. The
+        ascending trapezius turns the shoulder blades upward and draws them down.'
+      zh: 上斜凳俯卧 Y 字上举：手臂从下垂抬到与身体成一线的宽 Y 字，拇指朝上。斜方肌升部让肩胛骨向上旋转并往下拉。
   - exercise:
       id: side-lying-dumbbell-external-rotation
       phase: loop
@@ -114,16 +139,6 @@ state:
     labels:
     - infraspinatus
     - teres-minor
-    camera:
-      position:
-      - -2.0
-      - 1.2
-      - -2.2
-      target:
-      - -0.2
-      - 0.1
-      - 0.0
-      fov: 22
     caption:
       en: 'Side-lying external rotation: the upper arm stays near the side while the forearm swings outward. Infraspinatus
         and teres minor turn and steady the shoulder.'
@@ -135,7 +150,6 @@ state:
     - latissimus-dorsi
     - teres-major
     - biceps-brachii
-    camera: exercise
     caption:
       en: 'Pull-up: the hands hold the bar and the body rises. Latissimus moves the shoulder; the elbow flexors bend the elbow.
         Use assistance while you learn.'
@@ -151,9 +165,8 @@ state:
     - deltoid-posterior
     - trapezius-transverse
     - rhomboid-major
-    - infraspinatus-r
-    - teres-minor-r
-    camera: exercise
+    - infraspinatus
+    - teres-minor
     caption:
       en: 'Rope face pull: draw the hands towards the face as the upper arms open and rotate outward. The rear shoulder and
         scapular muscles work with the cuff.'
@@ -165,7 +178,6 @@ state:
     - latissimus-dorsi
     - teres-major
     - biceps-brachii
-    camera: exercise
     caption:
       en: 'Front lat pulldown: the bar comes towards the upper chest while the trunk stays controlled. Latissimus remains
         a shoulder prime mover; grip changes do not turn this into an arm-only exercise.'

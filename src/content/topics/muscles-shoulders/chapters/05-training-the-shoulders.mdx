@@ -28,7 +28,7 @@ state:
   - deltoid-anterior
   - deltoid-lateral
   - triceps-brachii
-  camera: &id001
+  camera:
     position:
     - 1.2
     - 0.6
@@ -53,12 +53,11 @@ state:
     - serratus-anterior
     - trapezius-descending
     caption:
-      en: 'Barbell overhead press: the deltoid raises the arms while triceps straightens the elbows. The model shows only
-        part of the press; the sketch shows the full overhead position.'
-      zh: 杠铃推举：三角肌把手臂举起，肱三头肌伸直手肘。模型只演示推举的一段，完整的头顶姿势请看示意图。
+      en: 'Barbell overhead press: from the upper chest the bar goes straight up until the arms are straight over the shoulders.
+        The deltoid raises the arms, triceps straightens the elbows, and the shoulder blades turn upward.'
+      zh: 杠铃推举：杠从上胸笔直往上推，直到手臂在肩膀正上方伸直。三角肌把手臂举起，肱三头肌伸直手肘，肩胛骨随之向上旋转。
     ghost:
     - skin-outline
-    camera: *id001
   - exercise:
       id: dumbbell-lateral-raise
       phase: loop
@@ -82,16 +81,6 @@ state:
       en: 'Dumbbell lateral raise: lift the arms sideways and slightly forward, without swinging the trunk. The lateral deltoid
         drives the raise; supraspinatus helps lift and steady the joint.'
       zh: 哑铃侧平举：手臂向侧面、略偏前方抬起，躯干不晃。三角肌中部负责抬，冈上肌帮着抬并稳住关节。
-    camera: &id002
-      position:
-      - 1.5
-      - 0.7
-      - 4.2
-      target:
-      - 0.0
-      - 0.04
-      - 0.0
-      fov: 22
   - exercise:
       id: chest-supported-dumbbell-row
       phase: loop
@@ -102,16 +91,6 @@ state:
     - biceps-brachii-long
     - trapezius-transverse
     - rhomboid-major
-    camera:
-      position:
-      - 1.8
-      - 1.1
-      - -3.8
-      target:
-      - 0
-      - 0
-      - 0
-      fov: 22
     caption:
       en: 'Chest-supported dumbbell row: the chest stays supported while the elbows travel back. Posterior deltoid moves the
         upper arm; middle trapezius and rhomboids move the shoulder blades.'
@@ -126,20 +105,11 @@ state:
     - latissimus-dorsi
     - pectoralis-major-sternocostal
     - triceps-brachii
-    camera:
-      position:
-      - 4.3
-      - 0.9
-      - -0.3
-      target:
-      - 0.0
-      - 0.05
-      - -0.25
-      fov: 22
     caption:
-      en: 'Dumbbell pullover: a raised arm comes back toward the chest under control. Teres major helps the chest and back
-        muscles extend the shoulder. The sketch shows the single dumbbell and the bench.'
-      zh: 哑铃仰卧上拉：举起的手臂受控地拉回胸前。大圆肌和胸、背肌肉一起完成肩伸。双手共握一只哑铃、躺在凳上的姿势请看示意图。
+      en: 'Dumbbell pullover: lying along a flat bench with one dumbbell held in both hands, the arms travel from above the
+        chest to behind the head and back with a fixed elbow bend. Teres major helps the chest and back muscles extend the
+        shoulder.'
+      zh: 哑铃仰卧上拉：顺着平凳躺好，双手共握一只哑铃，手肘弯曲角度不变，手臂从胸口上方走到头后，再拉回来。大圆肌和胸、背肌肉一起完成肩伸。
     ghost:
     - skin-outline
   - exercise:
@@ -152,20 +122,10 @@ state:
     - serratus-anterior
     - trapezius-descending
     - pectoralis-major-clavicular
-    camera:
-      position:
-      - 4.2
-      - 0.5
-      - 0.6
-      target:
-      - 0.0
-      - -0.2
-      - 0.2
-      fov: 22
     caption:
-      en: 'Pike push-up: body weight loads the press; the head never touches down as a support. The model shows the arms only;
-        the sketch shows the folded hips.'
-      zh: 折髋俯卧撑：用自身体重给推的动作加负荷，头不能着地当支点。模型只演示手臂，折髋的姿势请看示意图。
+      en: 'Pike push-up: hands and feet on the floor, hips high in an upside-down V. The elbows bend to lower the head towards
+        the floor and straighten to press back up; the head never touches down as a support.'
+      zh: 折髋俯卧撑：手脚撑地，臀部高高抬起，身体呈倒 V 字。弯肘让头部往地面降，再伸肘推回去；头不能着地当支点。
     ghost:
     - skin-outline
   - exercise:
@@ -192,16 +152,6 @@ state:
       en: 'Cable external rotation: with the elbow kept near the side, turn the upper arm outward against light resistance.
         Infraspinatus and teres minor pull; twisting the trunk changes the exercise.'
       zh: 绳索外旋：手肘贴住身体，上臂对抗轻阻力向外转。冈下肌和小圆肌负责拉；一扭躯干就成了别的动作。
-    camera:
-      position:
-      - 1.3
-      - 0.8
-      - 2.6
-      target:
-      - 0.08
-      - -0.02
-      - 0.05
-      fov: 22
   - exercise:
       id: cable-internal-rotation
       phase: loop
@@ -228,16 +178,6 @@ state:
       en: 'Cable internal rotation: the humerus turns inward and the forearm crosses towards the belly. Subscapularis is the
         cuff muscle producing this direction; keep the wrist and trunk quiet.'
       zh: 绳索内旋：肱骨向内转，前臂转向腹前。肩胛下肌是负责这个方向的肩袖肌；手腕和躯干都保持不动。
-    camera:
-      position:
-      - 1.3
-      - 0.8
-      - 2.6
-      target:
-      - 0.08
-      - -0.02
-      - 0.05
-      fov: 22
   - exercise:
       id: straight-arm-cable-pulldown
       phase: loop
@@ -248,12 +188,11 @@ state:
     - pectoralis-major-sternocostal
     - triceps-brachii
     caption:
-      en: 'Straight-arm cable pulldown: draw the upper arms from in front towards the sides, with little elbow movement. Teres
-        major assists latissimus dorsi; the sketch shows the bar and cable path.'
-      zh: 绳索直臂下拉：手肘几乎不动，把上臂从身前拉回身体两侧。大圆肌帮背阔肌出力；横杆和绳索的路线请看示意图。
+      en: 'Straight-arm cable pulldown: leaning slightly forward from the hips, sweep the bar from face height down to the
+        thighs with the elbows almost still. Teres major assists latissimus dorsi.'
+      zh: 绳索直臂下拉：身体从髋部微微前倾，手肘几乎不动，把横杆从面前高度扫到大腿前。大圆肌帮背阔肌出力。
     ghost:
     - skin-outline
-    camera: *id002
   index:
     exercises:
     - barbell-overhead-press

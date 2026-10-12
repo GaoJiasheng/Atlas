@@ -1504,16 +1504,20 @@
       "trunk": {
         "node": "joint.trunk",
         "axes": {
-          "flexion": [1, 0, 0],
+          "flexion": [
+            1.0,
+            0.0,
+            0.0
+          ],
           "lateral-flexion": [
-            0,
-            0,
-            1
+            0.0,
+            0.0,
+            1.0
           ],
           "rotation": [
-            0,
-            1,
-            0
+            0.0,
+            1.0,
+            0.0
           ]
         }
       },
@@ -1521,14 +1525,14 @@
         "node": "joint.clavicle.l",
         "axes": {
           "elevation": [
-            0,
-            0,
-            1
+            0.0,
+            0.0,
+            1.0
           ],
           "protraction": [
-            0,
-            -1,
-            0
+            0.0,
+            -1.0,
+            0.0
           ]
         }
       },
@@ -1536,44 +1540,44 @@
         "node": "joint.scapula.l",
         "axes": {
           "elevation": [
-            0,
-            0,
-            1
+            0.0,
+            0.0,
+            1.0
           ],
           "protraction": [
-            0,
-            -1,
-            0
+            0.0,
+            -1.0,
+            0.0
           ],
           "upward-rotation": [
-            0,
-            0,
-            1
+            0.0,
+            0.0,
+            1.0
           ]
         }
       },
       "shoulder.l": {
         "node": "joint.shoulder.l",
         "axes": {
+          "horizontal-adduction": [
+            0.0,
+            -1.0,
+            0.0
+          ],
           "flexion": [
-            -1,
-            0,
-            0
+            -1.0,
+            0.0,
+            0.0
           ],
           "abduction": [
-            0,
-            0,
-            1
-          ],
-          "horizontal-adduction": [
-            0,
-            -1,
-            0
+            0.0,
+            0.0,
+            1.0
           ],
           "internal-rotation": [
-            0.1801227480173111,
-            -0.9823485612869263,
-            -0.0504680871963501
+            0.1801,
+            -0.9823,
+            -0.0505
           ]
         }
       },
@@ -1581,9 +1585,19 @@
         "node": "joint.elbow.l",
         "axes": {
           "flexion": [
-            -1,
-            0,
-            0
+            -1.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "forearm.l": {
+        "node": "joint.forearm.l",
+        "axes": {
+          "pronation": [
+            0.0751,
+            -0.9787,
+            0.191
           ]
         }
       },
@@ -1591,25 +1605,75 @@
         "node": "joint.hand.l",
         "axes": {
           "flexion": [
-            -1,
-            0,
-            0
+            -1.0,
+            0.0,
+            0.0
           ]
         },
         "offset": 0.08
+      },
+      "hip.l": {
+        "node": "joint.hip.l",
+        "axes": {
+          "flexion": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "abduction": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "internal-rotation": [
+            -0.0219,
+            -0.9988,
+            -0.0436
+          ]
+        }
+      },
+      "knee.l": {
+        "node": "joint.knee.l",
+        "axes": {
+          "flexion": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "internal-rotation": [
+            0.0149,
+            -0.9995,
+            -0.0275
+          ]
+        }
+      },
+      "ankle.l": {
+        "node": "joint.ankle.l",
+        "axes": {
+          "dorsiflexion": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "inversion": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
       },
       "clavicle.r": {
         "node": "joint.clavicle.r",
         "axes": {
           "elevation": [
-            0,
-            0,
-            -1
+            0.0,
+            0.0,
+            -1.0
           ],
           "protraction": [
-            0,
-            1,
-            0
+            0.0,
+            1.0,
+            0.0
           ]
         }
       },
@@ -1617,44 +1681,44 @@
         "node": "joint.scapula.r",
         "axes": {
           "elevation": [
-            0,
-            0,
-            -1
+            0.0,
+            0.0,
+            -1.0
           ],
           "protraction": [
-            0,
-            1,
-            0
+            0.0,
+            1.0,
+            0.0
           ],
           "upward-rotation": [
-            0,
-            0,
-            -1
+            0.0,
+            0.0,
+            -1.0
           ]
         }
       },
       "shoulder.r": {
         "node": "joint.shoulder.r",
         "axes": {
+          "horizontal-adduction": [
+            0.0,
+            1.0,
+            0.0
+          ],
           "flexion": [
-            -1,
-            0,
-            0
+            -1.0,
+            0.0,
+            0.0
           ],
           "abduction": [
-            0,
-            0,
-            -1
-          ],
-          "horizontal-adduction": [
-            0,
-            -1,
-            0
+            0.0,
+            0.0,
+            -1.0
           ],
           "internal-rotation": [
-            -0.18012265861034393,
-            -0.9823486804962158,
-            -0.05046815797686577
+            0.1801,
+            0.9823,
+            0.0505
           ]
         }
       },
@@ -1662,9 +1726,19 @@
         "node": "joint.elbow.r",
         "axes": {
           "flexion": [
-            -1,
-            0,
-            0
+            -1.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "forearm.r": {
+        "node": "joint.forearm.r",
+        "axes": {
+          "pronation": [
+            0.0751,
+            0.9787,
+            -0.191
           ]
         }
       },
@@ -1672,56 +1746,120 @@
         "node": "joint.hand.r",
         "axes": {
           "flexion": [
-            -1,
-            0,
-            0
+            -1.0,
+            0.0,
+            0.0
           ]
         },
         "offset": 0.08
+      },
+      "hip.r": {
+        "node": "joint.hip.r",
+        "axes": {
+          "flexion": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "abduction": [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          "internal-rotation": [
+            -0.0219,
+            0.9988,
+            0.0436
+          ]
+        }
+      },
+      "knee.r": {
+        "node": "joint.knee.r",
+        "axes": {
+          "flexion": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "internal-rotation": [
+            0.0149,
+            0.9995,
+            0.0275
+          ]
+        }
+      },
+      "ankle.r": {
+        "node": "joint.ankle.r",
+        "axes": {
+          "dorsiflexion": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "inversion": [
+            0.0,
+            0.0,
+            -1.0
+          ]
+        }
       }
     },
     "demo": {
       "scapula": {
-        "elevation": 10,
+        "elevation": 12,
         "depression": 8,
-        "retraction": 10,
-        "protraction": 10,
-        "upward-rotation": 15,
+        "protraction": 12,
+        "retraction": 12,
+        "upward-rotation": 20,
         "downward-rotation": 10
       },
       "shoulder": {
-        "flexion": 75,
-        "extension": 25,
-        "adduction": 20,
+        "flexion": 80,
+        "extension": 30,
         "abduction": 80,
+        "adduction": 20,
         "horizontal-abduction": 35,
-        "horizontal-adduction": 35,
-        "internal-rotation": 35,
-        "external-rotation": 35
-      },
-      "trunk": {
-        "flexion": 8,
-        "extension": 8,
-        "lateral-flexion": 8,
-        "rotation": 8
+        "horizontal-adduction": 40,
+        "internal-rotation": 40,
+        "external-rotation": 40
       },
       "elbow": {
         "flexion": 90,
-        "extension": 10
-      },
-      "neck": {
-        "lateral-flexion": 0
-      },
-      "hip": {
-        "extension": 0,
-        "external-rotation": 0,
-        "abduction": 0
-      },
-      "ribs": {
-        "depression": 0
+        "extension": 60
       },
       "forearm": {
-        "supination": 0
+        "supination": 60,
+        "pronation": 60
+      },
+      "wrist": {
+        "flexion": 40,
+        "extension": 40
+      },
+      "trunk": {
+        "flexion": 25,
+        "extension": 15,
+        "lateral-flexion": 15,
+        "rotation": 20
+      },
+      "hip": {
+        "flexion": 60,
+        "extension": 20,
+        "abduction": 25,
+        "adduction": 15,
+        "external-rotation": 30,
+        "internal-rotation": 25
+      },
+      "knee": {
+        "flexion": 70,
+        "extension": 60,
+        "internal-rotation": 10,
+        "external-rotation": 10
+      },
+      "ankle": {
+        "dorsiflexion": 15,
+        "plantarflexion": 30,
+        "inversion": 15,
+        "eversion": 10
       }
     }
   },
@@ -1793,7 +1931,7 @@
           -0.0516495
         ],
         [
-          1e-7,
+          1e-07,
           0.1276687,
           -0.0500708
         ],
@@ -1808,7 +1946,7 @@
           -0.0509976
         ],
         [
-          1e-7,
+          1e-07,
           0.0128991,
           -0.0471639
         ],
@@ -1879,7 +2017,7 @@
           -0.0509976
         ],
         [
-          1e-7,
+          1e-07,
           0.0128991,
           -0.0471639
         ],
@@ -1911,17 +2049,17 @@
           -0.0215018
         ],
         [
-          1e-7,
+          1e-07,
           -0.141873,
           -0.0163833
         ],
         [
-          0.0000104,
+          1.04e-05,
           -0.168302,
           -0.0163703
         ],
         [
-          1e-7,
+          1e-07,
           -0.1942444,
           -0.016947
         ],
@@ -2019,7 +2157,7 @@
           -0.0516495
         ],
         [
-          1e-7,
+          1e-07,
           0.1276687,
           -0.0500708
         ]
@@ -2253,7 +2391,7 @@
           -0.0215018
         ],
         [
-          1e-7,
+          1e-07,
           -0.141873,
           -0.0163833
         ]
@@ -2314,7 +2452,7 @@
           -0.0215018
         ],
         [
-          0.0000104,
+          1.04e-05,
           -0.168302,
           -0.0163703
         ],
@@ -2353,7 +2491,7 @@
           -0.0215018
         ],
         [
-          0.0000104,
+          1.04e-05,
           -0.168302,
           -0.0163703
         ],
@@ -2668,7 +2806,7 @@
           -0.0215018
         ],
         [
-          1e-7,
+          1e-07,
           -0.141873,
           -0.0163833
         ]
@@ -2695,7 +2833,7 @@
           -0.0516495
         ],
         [
-          1e-7,
+          1e-07,
           0.1276687,
           -0.0500708
         ],

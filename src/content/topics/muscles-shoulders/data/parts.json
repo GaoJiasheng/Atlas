@@ -1306,19 +1306,19 @@
         "node": "joint.trunk",
         "axes": {
           "flexion": [
-            1,
-            0,
-            0
+            1.0,
+            0.0,
+            0.0
           ],
           "lateral-flexion": [
-            0,
-            0,
-            1
+            0.0,
+            0.0,
+            1.0
           ],
           "rotation": [
-            0,
-            1,
-            0
+            0.0,
+            1.0,
+            0.0
           ]
         }
       },
@@ -1326,39 +1326,34 @@
         "node": "joint.clavicle.l",
         "axes": {
           "elevation": [
-            0,
-            0,
-            1
+            0.0,
+            0.0,
+            1.0
           ],
           "protraction": [
-            0,
-            -1,
-            0
-          ],
-          "rotation": [
-            0,
-            1,
-            0
+            0.0,
+            -1.0,
+            0.0
           ]
         }
       },
       "scapula.l": {
         "node": "joint.scapula.l",
         "axes": {
-          "upward-rotation": [
-            0,
-            0,
-            1
+          "elevation": [
+            0.0,
+            0.0,
+            1.0
           ],
           "protraction": [
-            0,
-            -1,
-            0
+            0.0,
+            -1.0,
+            0.0
           ],
-          "elevation": [
-            0,
-            0,
-            1
+          "upward-rotation": [
+            0.0,
+            0.0,
+            1.0
           ]
         }
       },
@@ -1366,24 +1361,24 @@
         "node": "joint.shoulder.l",
         "axes": {
           "horizontal-adduction": [
-            0,
-            -1,
-            0
+            0.0,
+            -1.0,
+            0.0
           ],
           "flexion": [
-            -1,
-            0,
-            0
+            -1.0,
+            0.0,
+            0.0
           ],
           "abduction": [
-            0,
-            0,
-            1
+            0.0,
+            0.0,
+            1.0
           ],
           "internal-rotation": [
-            0.1801227480173111,
-            -0.9823485612869263,
-            -0.0504680871963501
+            0.1801,
+            -0.9823,
+            -0.0505
           ]
         }
       },
@@ -1391,9 +1386,19 @@
         "node": "joint.elbow.l",
         "axes": {
           "flexion": [
-            -1,
-            0,
-            0
+            -1.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "forearm.l": {
+        "node": "joint.forearm.l",
+        "axes": {
+          "pronation": [
+            0.0751,
+            -0.9787,
+            0.191
           ]
         }
       },
@@ -1401,50 +1406,95 @@
         "node": "joint.hand.l",
         "axes": {
           "flexion": [
-            -1,
-            0,
-            0
+            -1.0,
+            0.0,
+            0.0
           ]
         },
         "offset": 0.08
+      },
+      "hip.l": {
+        "node": "joint.hip.l",
+        "axes": {
+          "flexion": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "abduction": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "internal-rotation": [
+            -0.0219,
+            -0.9988,
+            -0.0436
+          ]
+        }
+      },
+      "knee.l": {
+        "node": "joint.knee.l",
+        "axes": {
+          "flexion": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "internal-rotation": [
+            0.0149,
+            -0.9995,
+            -0.0275
+          ]
+        }
+      },
+      "ankle.l": {
+        "node": "joint.ankle.l",
+        "axes": {
+          "dorsiflexion": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "inversion": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
       },
       "clavicle.r": {
         "node": "joint.clavicle.r",
         "axes": {
           "elevation": [
-            0,
-            0,
-            -1
+            0.0,
+            0.0,
+            -1.0
           ],
           "protraction": [
-            0,
-            1,
-            0
-          ],
-          "rotation": [
-            0,
-            1,
-            0
+            0.0,
+            1.0,
+            0.0
           ]
         }
       },
       "scapula.r": {
         "node": "joint.scapula.r",
         "axes": {
-          "upward-rotation": [
-            0,
-            0,
-            -1
+          "elevation": [
+            0.0,
+            0.0,
+            -1.0
           ],
           "protraction": [
-            0,
-            1,
-            0
+            0.0,
+            1.0,
+            0.0
           ],
-          "elevation": [
-            0,
-            0,
-            -1
+          "upward-rotation": [
+            0.0,
+            0.0,
+            -1.0
           ]
         }
       },
@@ -1452,24 +1502,24 @@
         "node": "joint.shoulder.r",
         "axes": {
           "horizontal-adduction": [
-            0,
-            1,
-            0
+            0.0,
+            1.0,
+            0.0
           ],
           "flexion": [
-            -1,
-            0,
-            0
+            -1.0,
+            0.0,
+            0.0
           ],
           "abduction": [
-            0,
-            0,
-            -1
+            0.0,
+            0.0,
+            -1.0
           ],
           "internal-rotation": [
-            0.1801227480173111,
-            0.9823485612869263,
-            0.0504680871963501
+            0.1801,
+            0.9823,
+            0.0505
           ]
         }
       },
@@ -1477,9 +1527,19 @@
         "node": "joint.elbow.r",
         "axes": {
           "flexion": [
-            -1,
-            0,
-            0
+            -1.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "forearm.r": {
+        "node": "joint.forearm.r",
+        "axes": {
+          "pronation": [
+            0.0751,
+            0.9787,
+            -0.191
           ]
         }
       },
@@ -1487,39 +1547,120 @@
         "node": "joint.hand.r",
         "axes": {
           "flexion": [
-            -1,
-            0,
-            0
+            -1.0,
+            0.0,
+            0.0
           ]
         },
         "offset": 0.08
+      },
+      "hip.r": {
+        "node": "joint.hip.r",
+        "axes": {
+          "flexion": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "abduction": [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          "internal-rotation": [
+            -0.0219,
+            0.9988,
+            0.0436
+          ]
+        }
+      },
+      "knee.r": {
+        "node": "joint.knee.r",
+        "axes": {
+          "flexion": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "internal-rotation": [
+            0.0149,
+            0.9995,
+            0.0275
+          ]
+        }
+      },
+      "ankle.r": {
+        "node": "joint.ankle.r",
+        "axes": {
+          "dorsiflexion": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "inversion": [
+            0.0,
+            0.0,
+            -1.0
+          ]
+        }
       }
     },
     "demo": {
-      "shoulder": {
-        "flexion": 80,
-        "extension": 25,
-        "abduction": 75,
-        "adduction": 20,
-        "horizontal-adduction": 40,
-        "horizontal-abduction": 30,
-        "internal-rotation": 40,
-        "external-rotation": 40
-      },
       "scapula": {
-        "elevation": 10,
-        "depression": 10,
+        "elevation": 12,
+        "depression": 8,
         "protraction": 12,
         "retraction": 12,
         "upward-rotation": 20,
-        "downward-rotation": 15
+        "downward-rotation": 10
+      },
+      "shoulder": {
+        "flexion": 80,
+        "extension": 30,
+        "abduction": 80,
+        "adduction": 20,
+        "horizontal-abduction": 35,
+        "horizontal-adduction": 40,
+        "internal-rotation": 40,
+        "external-rotation": 40
       },
       "elbow": {
         "flexion": 90,
-        "extension": 20
+        "extension": 60
       },
       "forearm": {
-        "supination": 60
+        "supination": 60,
+        "pronation": 60
+      },
+      "wrist": {
+        "flexion": 40,
+        "extension": 40
+      },
+      "trunk": {
+        "flexion": 25,
+        "extension": 15,
+        "lateral-flexion": 15,
+        "rotation": 20
+      },
+      "hip": {
+        "flexion": 60,
+        "extension": 20,
+        "abduction": 25,
+        "adduction": 15,
+        "external-rotation": 30,
+        "internal-rotation": 25
+      },
+      "knee": {
+        "flexion": 70,
+        "extension": 60,
+        "internal-rotation": 10,
+        "external-rotation": 10
+      },
+      "ankle": {
+        "dorsiflexion": 15,
+        "plantarflexion": 30,
+        "inversion": 15,
+        "eversion": 10
       }
     }
   },
