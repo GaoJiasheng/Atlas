@@ -25,7 +25,6 @@ state:
   labels:
   - internal-oblique
   - transversus-abdominis
-  - quadratus-lumborum
   camera:
     position:
     - 0
@@ -93,8 +92,8 @@ state:
     - pelvis
     - thorax
     caption:
-      en: Quadratus spans the posterior pelvic rim, lumbar transverse processes and the last rib. These are separate
-        attachment areas.
+      en: Quadratus spans the posterior pelvic rim, lumbar transverse processes and the last rib. These are separate attachment
+        areas.
       zh: 腰方肌连到骨盆后上缘、腰椎横突和末肋，是不同的附着区。
   - camera: back
     ghost:
@@ -118,14 +117,15 @@ state:
     - neighbours
     - body
     - femur
+    - transversus-abdominis
     sites:
     - psoas-major
     labels:
     - psoas-major
     - lumbar-spine
     caption:
-      en: Psoas starts beside the lower spine and passes in front of the hip to the lesser trochanter. The femur has
-        been faded to reveal the tendon route.
+      en: Psoas starts beside the lower spine and passes in front of the hip to the lesser trochanter. The femur has been
+        faded to reveal the tendon route.
       zh: 腰大肌从下位脊柱旁经过髋前方连到小转子；股骨调淡，便于观察腱的路线。
   - ghost:
     - superficial
@@ -133,6 +133,7 @@ state:
     - neighbours
     - body
     - pelvis
+    - transversus-abdominis
     sites:
     - iliacus
     labels:
@@ -142,16 +143,26 @@ state:
       en: Iliacus fans out inside the pelvic bowl. It joins psoas near the hip and reaches the femur at and just below
         the lesser trochanter.
       zh: 髂肌在骨盆内呈扇形展开，在髋附近与腰大肌汇合，连到股骨小转子及其下方。
-  - cutaway: transverse-l3
     camera:
       position:
-      - 0.75
-      - 0.72
-      - 0.92
+      - 0.25
+      - -0.1
+      - 1.95
       target:
       - 0
-      - 0.016
-      - 0.025
+      - -0.13
+      - 0.02
+      fov: 30
+  - cutaway: transverse-lumbar
+    camera:
+      position:
+      - 0.42
+      - 0.95
+      - 0.62
+      target:
+      - 0
+      - -0.02
+      - 0.0
       fov: 30
     ghost:
     - neighbours
@@ -162,9 +173,9 @@ state:
     - internal-oblique
     - quadratus-lumborum
     caption:
-      en: A transverse view through the lumbar region reveals side-wall layers and posterior muscles together. The cut
-        is a teaching view, with the body outline faded.
-      zh: 腰部横切视角把侧腹各层和后方肌肉放在一起看；这是教学剖视，体表轮廓已调淡。
+      en: A horizontal cut through the lumbar region shows the side-wall layers and the posterior muscles together. The
+        cut is a teaching view; the body outline is faded.
+      zh: 水平切过腰部，侧腹各层和后方肌肉同时可见。这是教学剖视，体表轮廓已调淡。
   index:
     parts:
     - internal-oblique
@@ -211,11 +222,9 @@ The diaphragm above and pelvic floor below cooperate with the abdominal wall. Th
 
 这些肌肉部分经<Term id="thoracolumbar-fascia">胸腰筋膜</Term>联系起来。筋膜是连接背部和腹壁的结缔组织；网格主要显示肌肉，宽阔筋膜连接在卡片说明。轻触体表，不能把某一深层肌从邻近结构中独立认出。
 
-腹腔后方的**腰方肌**从髂嵴、髂腰韧带伸向末肋与上位腰椎横突，参与侧屈并固定末肋。**竖脊肌腰段**零件合并髂肋肌腰部和胸最长肌，长肌柱让背部后伸或稳定。其下方的**多裂肌**短束层叠，连到起点上方的棘突 [M92] [M97]。
+腹腔后方的**腰方肌**从髂嵴、髂腰韧带伸向末肋与上位腰椎横突，参与侧屈并固定末肋。**竖脊肌腰段**零件合并腰髂肋肌和胸最长肌，长肌柱让背部后伸或稳定。其下方的**多裂肌**短束层叠，连到起点上方的棘突 [M92] [M97]。
 
 髋前方，**腰大肌**沿脊柱向下，**髂肌**从骨盆内面汇聚，两者合称髂腰肌。共同腱到股骨<Term id="lesser-trochanter">小转子</Term>，部分髂肌纤维延到其下方。因为跨过髋关节，抬大腿是本章重点作用；不要深按腹股沟寻找它们。<FlyTo preset="back">看腰部后方</FlyTo>
-
-先看本区肌肉与骨骼的关系，再沿纤维方向读附着，能分清抬腿和弯腰为何不同。宽附着不一定全部可见，模型省略的腱膜和韧带也应结合卡片理解，不能仅凭网格接触猜测起止。
 
 <More title={{ en: "Broad attachments, representative markers", zh: "宽附着与代表标记" }}>
 

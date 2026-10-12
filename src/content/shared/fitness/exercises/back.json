@@ -26,93 +26,88 @@
         "erector-spinae"
       ],
       "setup": {
-        "en": "Use a fixed overhead bar that supports your bodyweight. Put a stable step underneath so you can take and release the grip without jumping; use foot assistance for learning.",
-        "zh": "用能承受体重的固定单杠，下方放稳固踏台，方便握杠和下杠，不用跳起抓杠；学习时可用脚辅助。"
+        "en": "Use a fixed overhead bar that can hold your body weight, with a sturdy step underneath so you can reach the bar without jumping. While you learn, keep one foot on the step to take some of your weight.",
+        "zh": "用能承受体重的固定单杠，下面放一个稳固的踏台，不用跳就能抓到杠。刚开始学时，可以一只脚踩着踏台，分担一部分体重。"
       },
       "steps": [
         {
-          "en": "Step up and take an overhand grip a little wider than shoulder width, thumbs wrapped around the bar. Start with arms long in a comfortable overhead position.",
-          "zh": "站上踏台，正握单杠，握距比肩稍宽，拇指扣住。手臂伸长，从舒服的举臂位置开始。"
+          "en": "Stand on the step and grip the bar overhand, a little wider than your shoulders, thumbs wrapped round it. Hang with your arms straight but not forced.",
+          "zh": "站上踏台，正握单杠，握距比肩稍宽，拇指扣住杠。手臂伸直悬垂，但不要硬锁。"
         },
         {
-          "en": "Keep your head aligned with the trunk and gently brace the abdomen. Let the shoulder blades follow the overhead arm position rather than pinning them down.",
-          "zh": "头与躯干保持一线，腹部轻轻收紧。肩胛骨顺着举臂位置移动，不要先把它们死压住。"
+          "en": "Keep your head in line with your body and tighten your stomach a little. Let your shoulder blades ride up with your arms; do not pin them down.",
+          "zh": "头和身体保持一条线，腹部稍微收紧。肩胛骨随手臂自然上提，不要刻意往下死压。"
         },
         {
-          "en": "Breathe out as you pull your upper arms down towards your sides and bend the elbows. Lift the body without kicking or swinging.",
-          "zh": "呼气，上臂向身体两侧下拉，同时屈肘，把身体拉起，不踢腿、不摆荡。"
+          "en": "Breathe out and drive your elbows down towards your sides. The latissimus dorsi pulls the upper arms down and lifts your body; the elbow flexors help by bending the elbows.",
+          "zh": "呼气，两肘向下、向身体两侧拉。背阔肌把上臂往下拉，把身体带起来；屈肘肌帮忙弯肘。"
         },
         {
-          "en": "Rise only as far as you can keep the neck quiet; bring the chin near the bar without reaching it forward. Back and elbow flexors work together.",
-          "zh": "只拉到颈部还能保持自然的高度；下巴靠近单杠，不要往前探。背部和屈肘肌共同用力。"
+          "en": "Rise until your chin is near the bar, without poking it forward. No kicking or swinging.",
+          "zh": "拉到下巴接近单杠就行，下巴不往前探。不踢腿，不摆荡。"
         },
         {
-          "en": "Breathe in and lower slowly until the arms are long again, allowing the shoulder blades to rotate with them. Keep assistance if you cannot control the return.",
-          "zh": "吸气，慢慢下降到手臂再次伸长，让肩胛骨随之回旋。下放控制不了时，继续用脚辅助。"
+          "en": "Breathe in and lower slowly until your arms are straight again, letting your shoulder blades move back up with them.",
+          "zh": "吸气，慢慢下放到手臂重新伸直，肩胛骨跟着回到上方。"
         },
         {
-          "en": "Return your feet to the step before releasing your grip. Move back to an easier pull-down if hanging or lowering is not comfortable.",
-          "zh": "先把脚放回踏台，再松手；悬垂或下放不舒服时，改用较容易的高位下拉。"
+          "en": "Put your feet back on the step before you let go.",
+          "zh": "先把脚踩回踏台，再松手。"
         }
       ],
       "cues": [
         {
-          "en": "Pull the upper arms down; the elbows bend as part of the same movement.",
-          "zh": "上臂向下拉；屈肘是同一个动作的一部分。"
+          "en": "Think of putting your elbows into your back pockets: the upper arms pull down and the elbows bend along the way.",
+          "zh": "想着把手肘塞进后裤兜：上臂往下拉，肘顺势弯曲。"
         },
         {
-          "en": "Let the shoulder blades move with the arms.",
-          "zh": "让肩胛骨跟着手臂移动。"
-        },
-        {
-          "en": "Back and arms may both feel effort; no particular burn is required.",
-          "zh": "背和手臂都可能有用力感，不必追求某一处特别酸。"
+          "en": "You should feel the work along the sides of your back below the armpits, as well as in the arms.",
+          "zh": "用力感应该在腋下到背部两侧，手臂也会出力。"
         }
       ],
       "mistakes": [
         {
-          "en": "Kicking and swinging to get over the bar. Why: momentum replaces part of the pull and makes the return harder to control.",
-          "zh": "踢腿摆荡，借力过杠。为什么：惯性代替了部分拉力，也让下放更难控制。"
+          "en": "Kicking and swinging to get up. Why: momentum does part of the pull, and the way down becomes hard to control.",
+          "zh": "踢腿、摆荡借力往上冲。为什么：惯性替你完成了一部分拉的动作，下放也更难控制。"
         },
         {
-          "en": "Reaching the chin forward at the top. Why: neck movement changes the apparent height without completing the shoulder movement.",
-          "zh": "顶端把下巴往前伸。为什么：脖子改变了看起来的高度，肩关节却没有完成相应运动。"
+          "en": "Poking the chin forward to reach the bar. Why: the neck moves instead of the shoulders, so the top of the pull is never reached.",
+          "zh": "伸下巴去够杠。为什么：动的是脖子，不是肩关节，真正的顶端其实没拉到。"
         }
       ],
       "dose": [
         {
           "text": {
-            "en": "Choose a load or assistance level that lets you control the whole movement, and progress gradually when the same technique feels easy.",
-            "zh": "选择能控制整个动作的重量或辅助程度；同样的动作变得轻松后，再逐步加难。"
+            "en": "Make it harder in small steps: less help from the foot, then full body weight, then more repetitions, keeping the same smooth path.",
+            "zh": "分小步加难：脚上借的力越来越少，再到完全自重，再增加次数，动作路线始终平稳一致。"
           },
           "s": [
-            "M23",
+            "M23"
+          ]
+        },
+        {
+          "text": {
+            "en": "Sets do not have to go to failure; end a set when the movement starts to change.",
+            "zh": "每组不必做到力竭；动作开始变形，就结束这一组。"
+          },
+          "s": [
             "M24"
           ]
         },
         {
           "text": {
-            "en": "Rest until you can repeat the movement smoothly, and end the effort when control begins to fade.",
-            "zh": "休息到能重新平稳完成动作；控制开始变差时，就结束这一轮。"
+            "en": "Spreading back work over more than one day a week tends to work better than one big session.",
+            "zh": "把背部训练分散到一周里不止一天，通常比一次练完效果好。"
           },
           "s": [
-            "M24",
-            "M25"
+            "M21"
           ]
         }
       ],
       "cautions": [
         {
-          "en": "The 3D view traces the shoulder and elbow paths with a shortened range; use the two-panel drawing for the full body position and apparatus.",
-          "zh": "三维视图以缩小幅度描出肩、肘的运动；完整体位和器械请看两格示意图。"
-        },
-        {
-          "en": "Stop if hanging brings sharp shoulder pain, tingling or a loss of grip; step down with assistance.",
-          "zh": "悬垂时出现肩部刺痛、麻感或握力突然下降，就在辅助下踩回踏台、停止动作。"
-        },
-        {
-          "en": "First learn with bodyweight, assistance or a light load under a qualified coach; anyone under 18 should practise under adult supervision.",
-          "zh": "第一次做先用自重、辅助或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+          "en": "Stop if hanging brings sharp shoulder pain, tingling or a sudden loss of grip, and step back onto the support.",
+          "zh": "悬垂时肩部刺痛、手发麻或握力突然下降，就踩回踏台，停下来。"
         },
         {
           "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
@@ -234,17 +229,28 @@
         "M54",
         "M23",
         "M24",
-        "M25"
+        "M25",
+        "M48",
+        "M63"
       ],
       "evidence": [
         {
           "text": {
-            "en": "Youdas et al. (2010) measured surface EMG during pull-up variations in 21 men and 4 women; latissimus dorsi and biceps brachii were active in the conventional pull-up. This measures activity, not a ranking of muscle growth.",
-            "zh": "Youdas 等（2010）在 21 名男性和 4 名女性的不同引体动作中记录表面肌电；普通引体向上有背阔肌和肱二头肌参与。这测的是肌肉活动，不能用来给增肌效果排名。"
+            "en": "Research shows: in 21 men and 4 women doing pull-ups, chin-ups and a pull-up with rotating handles, latissimus dorsi had the highest surface EMG of the seven muscles measured (117–130 % of a maximal isometric contraction), followed by biceps brachii (78–96 %). EMG shows how active a muscle is, not how much it will grow.",
+            "zh": "研究显示：21 名男性和 4 名女性做正握引体、反握引体和转把引体，在测量的 7 块肌肉里，背阔肌的表面肌电最高（为最大等长收缩的 117–130 %），其次是肱二头肌（78–96 %）。肌电反映肌肉有多活跃，不代表它会长多少。"
           },
           "s": [
             "M51",
             "M9"
+          ]
+        },
+        {
+          "text": {
+            "en": "In the same study, the lower trapezius was more active in the pull-up, while biceps brachii and pectoralis major were more active in the chin-up.",
+            "zh": "同一研究中，斜方肌升部（下斜方）在正握引体里更活跃，肱二头肌和胸大肌在反握引体里更活跃。"
+          },
+          "s": [
+            "M51"
           ]
         }
       ]
@@ -275,60 +281,60 @@
         "external-oblique"
       ],
       "setup": {
-        "en": "Use a cable lat-pulldown station with a long bar. Set the seat and thigh pad so the feet are flat and the thighs stay in place; begin with a light stack.",
-        "zh": "用带长拉杆的高位下拉器械。调好座椅和压腿垫，双脚踩平，大腿能稳住；先选较轻的配重。"
+        "en": "Use a lat pull-down machine with a long bar. Set the thigh pad so it holds your thighs firmly with your feet flat on the floor. Start with a light weight.",
+        "zh": "用带长拉杆的高位下拉器械。调好压腿垫，让它稳稳压住大腿，双脚平踩地面。先选轻的配重。"
       },
       "steps": [
         {
-          "en": "Stand to take an overhand grip a little wider than the shoulders, thumbs around the bar, then sit with thighs securely under the pad.",
-          "zh": "站起正握拉杆，握距比肩稍宽，拇指扣住；坐下，把大腿放稳在压腿垫下面。"
+          "en": "Stand and take an overhand grip a little wider than your shoulders, thumbs wrapped round the bar, then sit down with your thighs under the pad.",
+          "zh": "站着正握拉杆，握距比肩稍宽，拇指扣住；然后坐下，把大腿放到压腿垫下面。"
         },
         {
-          "en": "Let the arms reach overhead in a comfortable range. Sit tall with a small, fixed backward lean and keep the ribs over the pelvis.",
-          "zh": "手臂在舒服的范围里向上伸长。坐稳，保持小幅度、固定的后倾，肋骨不往前顶。"
+          "en": "Let your arms reach straight up. Sit tall, lean back only slightly, and keep that angle throughout.",
+          "zh": "手臂向上伸直。坐直，上身只稍微后仰，整组都保持这个角度。"
         },
         {
-          "en": "Breathe out and draw the upper arms down towards the ribs while bending the elbows. Bring the bar in front of the face towards the upper chest.",
-          "zh": "呼气，上臂向肋骨两侧下拉，同时屈肘；拉杆从面前走向上胸。"
+          "en": "Breathe out and pull your elbows down towards your ribs. The latissimus dorsi brings the upper arms down to your sides; the elbow flexors help by bending the elbows.",
+          "zh": "呼气，两肘往下、往肋骨两侧拉。背阔肌把上臂拉向身体两侧，屈肘肌帮忙弯肘。"
         },
         {
-          "en": "Stop when the elbows are near the sides and the bar is close to the upper chest; touching the chest is not required. Keep the torso still.",
-          "zh": "手肘接近身体两侧、拉杆靠近上胸时就停，不必强求碰到胸。躯干保持不动。"
+          "en": "Bring the bar down in front of your face to just above your upper chest; it does not have to touch. Keep your upper body still.",
+          "zh": "拉杆从面前拉到上胸稍上方，不必碰到胸口。上身保持不动。"
         },
         {
-          "en": "Breathe in and let the bar rise slowly as the elbows straighten and the shoulder blades turn upward. Keep the weights from crashing.",
-          "zh": "吸气，让拉杆慢慢上升，手肘伸长，肩胛骨向上回旋，不让配重砸落。"
+          "en": "Breathe in and let the bar rise slowly until your arms are straight, without letting the weight stack crash.",
+          "zh": "吸气，让拉杆慢慢回升到手臂伸直，别让配重片砸下去。"
         },
         {
-          "en": "Let the stack settle gently after the last return. Stand with the bar under control and release it without letting it snap overhead.",
-          "zh": "最后回放后让配重轻轻落稳；控制着拉杆站起，再松手，不让它猛地弹向上方。"
+          "en": "After the last repetition, let the bar rise all the way until the weights rest, then let go.",
+          "zh": "最后一次做完，让拉杆一直回升到配重片落稳，再松手。"
         }
       ],
       "cues": [
         {
-          "en": "Move the upper arms towards the ribs, rather than curling the bar to the chin.",
-          "zh": "上臂向肋骨靠近，不是把拉杆弯举到下巴。"
+          "en": "Pull your elbows to your ribs; do not curl the bar to your chin.",
+          "zh": "把手肘拉向肋骨，不是把拉杆弯举到下巴。"
         },
         {
-          "en": "Keep the backward lean small and unchanged.",
-          "zh": "后倾幅度小，整个动作保持不变。"
+          "en": "Keep the same small backward lean on every repetition.",
+          "zh": "只稍微后仰，每一次的角度都一样。"
         }
       ],
       "mistakes": [
         {
-          "en": "Pulling behind the neck. Why: it requires a different shoulder position and often encourages the head to jut forward.",
-          "zh": "拉到颈后。为什么：这需要不同的肩部位置，也常让头向前探。"
+          "en": "Pulling the bar behind the neck. Why: the shoulders have to turn outwards to the end of their range, and the head has to duck forward to clear the bar.",
+          "zh": "把拉杆拉到颈后。为什么：肩关节要外旋到尽头，头还得往前低才能让开拉杆。"
         },
         {
-          "en": "Rocking the torso to pull a heavy stack. Why: the moving trunk supplies momentum and changes the exercise into a row.",
-          "zh": "晃动躯干拉大重量。为什么：躯干产生惯性，动作也逐渐变成划船。"
+          "en": "Rocking back to move a heavy stack. Why: the swinging trunk does part of the work, and the exercise turns into a row.",
+          "zh": "上身前后晃，靠后仰拉大重量。为什么：晃动的躯干替你出了一部分力，动作也变成了划船。"
         }
       ],
       "dose": [
         {
           "text": {
-            "en": "Choose a load or assistance level that lets you control the whole movement, and progress gradually when the same technique feels easy.",
-            "zh": "选择能控制整个动作的重量或辅助程度；同样的动作变得轻松后，再逐步加难。"
+            "en": "Start light enough that every repetition follows the same smooth path; add load or repetitions in small steps only once that feels easy.",
+            "zh": "起始重量要轻到每一次都能走同一条平稳的路线；等它变得轻松了，再小步增加重量或次数。"
           },
           "s": [
             "M23",
@@ -337,27 +343,27 @@
         },
         {
           "text": {
-            "en": "Rest until you can repeat the movement smoothly, and end the effort when control begins to fade.",
-            "zh": "休息到能重新平稳完成动作；控制开始变差时，就结束这一轮。"
+            "en": "Light and heavy loads both build muscle when the sets are hard; heavier loads build more maximal strength.",
+            "zh": "只要每组都练得够吃力，轻重量和大重量都能增肌；大重量更能提高最大力量。"
           },
           "s": [
-            "M24",
-            "M25"
+            "M20"
+          ]
+        },
+        {
+          "text": {
+            "en": "Sets do not have to go to failure; end a set when the movement starts to change.",
+            "zh": "每组不必做到力竭；动作开始变形，就结束这一组。"
+          },
+          "s": [
+            "M24"
           ]
         }
       ],
       "cautions": [
         {
-          "en": "The 3D view traces the shoulder and elbow paths with a shortened range; use the two-panel drawing for the full body position and apparatus.",
-          "zh": "三维视图以缩小幅度描出肩、肘的运动；完整体位和器械请看两格示意图。"
-        },
-        {
-          "en": "Use a smaller range or lighter load if the overhead position is uncomfortable; stop for sharp pain.",
-          "zh": "举臂位置不舒服时，减小幅度或减轻重量；出现刺痛就停。"
-        },
-        {
-          "en": "First learn with bodyweight, assistance or a light load under a qualified coach; anyone under 18 should practise under adult supervision.",
-          "zh": "第一次做先用自重、辅助或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+          "en": "Use a smaller range or a lighter weight if reaching overhead is uncomfortable, and stop at sharp pain.",
+          "zh": "手臂举过头不舒服，就减小幅度或减轻重量；出现刺痛就停下。"
         },
         {
           "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
@@ -478,13 +484,15 @@
         "M54",
         "M23",
         "M24",
-        "M25"
+        "M25",
+        "M48",
+        "M63"
       ],
       "evidence": [
         {
           "text": {
-            "en": "Lusk, Hale and Russell (2010) studied 12 healthy men doing front pull-downs at 70% of their maximum. A pronated grip produced higher latissimus EMG than a supinated grip; grip width did not explain the difference. EMG does not establish greater muscle growth.",
-            "zh": "Lusk、Hale 和 Russell（2010）研究了 12 名健康男性用最大重量的 70% 做颈前下拉。正握的背阔肌肌电高于反握；握距不能解释这一差异。肌电高并不能证明肌肉长得更多。"
+            "en": "Research shows: in 12 healthy men doing pull-downs in front of the face at 70 % of their one-repetition maximum, an overhand grip gave higher latissimus dorsi EMG than an underhand grip, whether the grip was wide or narrow. Grip had no effect on middle trapezius or biceps EMG. Higher EMG does not show that a muscle grows more.",
+            "zh": "研究显示：12 名健康男性用一次最大重量的 70 % 做面前下拉，正握时背阔肌的肌电比反握高，宽握、窄握都是这样；握法对斜方肌横部（中斜方）和肱二头肌的肌电没有影响。肌电高不等于肌肉长得更多。"
           },
           "s": [
             "M52",
@@ -523,64 +531,64 @@
         "levator-scapulae"
       ],
       "setup": {
-        "en": "Use a barbell with collars and a clear floor space. Start light; you must be able to hold a hip hinge without the back shape changing.",
-        "zh": "用装好卡扣的杠铃，周围地面留出空间。先用轻重量；你需要能稳住髋折叠姿势，让脊柱形态不变。"
+        "en": "Use a barbell with collars on and clear floor around you. Start light: you need to hold a bent-forward hip hinge without your back changing shape.",
+        "zh": "用装好卡扣的杠铃，周围地面清空。先用轻重量：你得能在屈髋俯身的姿势里稳住，背部形状不变。"
       },
       "steps": [
         {
-          "en": "Stand with feet about hip width and take an overhand grip just outside the legs. Lift the light bar to standing using the hip-hinge technique before setting up the row.",
-          "zh": "双脚约与髋同宽，正握杠铃，握距略宽于双腿。先按髋折叠的提杠方法把轻杠提到站姿，再准备划船。"
+          "en": "Stand with your feet about hip-width apart and grip the bar overhand, just outside your legs. Lift it from the floor to standing the same way as a deadlift.",
+          "zh": "双脚约与髋同宽，正握杠铃，握距略宽于双腿。先用硬拉的方式把杠从地上提到站姿。"
         },
         {
-          "en": "Soften the knees and send the hips back until the torso slopes forward. Keep the spine long and the abdomen gently braced, with the bar hanging below the shoulders.",
-          "zh": "膝盖微屈，髋向后移，让躯干前倾。脊柱保持自然延长，腹部轻轻收紧，杠垂在肩下。"
+          "en": "Bend your knees slightly and push your hips back until your upper body leans well forward. Keep your back long and your stomach lightly braced; the bar hangs below your shoulders.",
+          "zh": "膝盖微屈，臀部向后推，让上身明显前倾。背部伸展，腹部稍收紧；杠铃垂在肩膀正下方。"
         },
         {
-          "en": "Breathe out and pull the bar towards the lower ribs or upper abdomen, elbows travelling back near the sides. Keep the torso at the same angle.",
-          "zh": "呼气，把杠拉向下胸或上腹，手肘在身体两侧向后走，躯干倾角不变。"
+          "en": "Breathe out and pull the bar towards your lower ribs, elbows travelling back close to your sides. Keep your upper body at the same angle.",
+          "zh": "呼气，把杠拉向下胸，两肘贴着身体两侧往后走。上身角度保持不变。"
         },
         {
-          "en": "Let the shoulder blades come towards the spine without forcing the shoulders or elbows far behind the body. Stop at a controlled, comfortable top position.",
-          "zh": "让肩胛骨向脊柱靠近，不要强行把肩膀或手肘拉到身后很远；在能控制、舒服的位置停下。"
+          "en": "At the top, let your shoulder blades move towards your spine without forcing the elbows far behind you.",
+          "zh": "到顶端时，让肩胛骨向脊柱靠拢，不要硬把手肘拉到身后很远。"
         },
         {
-          "en": "Breathe in and lower the bar slowly until the arms are long. Allow a small natural forward glide of the shoulder blades without rounding the whole back.",
-          "zh": "吸气，慢慢下放到手臂伸长；允许肩胛骨自然向前滑一点，但不要把整个背弓起来。"
+          "en": "Breathe in and lower the bar slowly until your arms are straight, letting the shoulder blades slide forward while your back keeps its shape.",
+          "zh": "吸气，慢慢放下杠铃到手臂伸直，肩胛骨顺势向前滑开，背部形状不变。"
         },
         {
-          "en": "To finish, straighten the hips to stand, then return the bar to the floor with a controlled hip hinge.",
-          "zh": "结束时先伸髋站起，再用有控制的髋折叠把杠放回地面。"
+          "en": "To finish, stand up first, then lower the bar to the floor with the same hip hinge.",
+          "zh": "结束时先起身站直，再用同样的屈髋动作把杠放回地面。"
         }
       ],
       "cues": [
         {
-          "en": "Hold the hinge; move the arms and shoulder blades.",
-          "zh": "髋折叠姿势稳住，移动手臂和肩胛骨。"
+          "en": "Hold the bent-forward position still; only the arms and shoulder blades move.",
+          "zh": "俯身姿势定住，只有手臂和肩胛骨在动。"
         },
         {
-          "en": "Let the bar travel close to the legs.",
-          "zh": "杠的路线靠近双腿。"
+          "en": "The erector spinae beside your spine hold steady; they do not bend and straighten the back.",
+          "zh": "脊柱两旁的竖脊肌只管稳住，不跟着来回屈伸。"
         },
         {
-          "en": "The back columns hold steady rather than pumping the spine.",
-          "zh": "脊柱两旁的肌柱稳住，不反复屈伸脊柱。"
+          "en": "Keep the bar close to your legs.",
+          "zh": "杠铃贴近双腿走。"
         }
       ],
       "mistakes": [
         {
-          "en": "Standing up with each pull. Why: hip movement gives the bar momentum instead of keeping the row controlled.",
-          "zh": "每拉一下就把身体挺起来。为什么：髋部运动给杠铃加了惯性，划船不再受控。"
+          "en": "Standing up a little on every pull. Why: the hips swing the bar up, so the back muscles that should pull it do less.",
+          "zh": "每拉一次上身就抬起一点。为什么：髋部把杠甩了上去，本该拉杠的背部肌肉反而出力少了。"
         },
         {
-          "en": "Rounding the lower back as the bar descends. Why: the spinal position changes under load instead of the arms reaching forward.",
-          "zh": "下放时弓起下背。为什么：变化的是负重下的脊柱位置，不是手臂和肩胛骨正常回放。"
+          "en": "Letting the lower back round as the bar goes down. Why: the spine starts to bend under the load instead of being held still while the arms move.",
+          "zh": "下放时下背弓起。为什么：脊柱在负重下开始弯曲，而不是在手臂动的时候保持稳定。"
         }
       ],
       "dose": [
         {
           "text": {
-            "en": "Choose a load or assistance level that lets you control the whole movement, and progress gradually when the same technique feels easy.",
-            "zh": "选择能控制整个动作的重量或辅助程度；同样的动作变得轻松后，再逐步加难。"
+            "en": "Start light enough that every repetition follows the same smooth path; add load or repetitions in small steps only once that feels easy.",
+            "zh": "起始重量要轻到每一次都能走同一条平稳的路线；等它变得轻松了，再小步增加重量或次数。"
           },
           "s": [
             "M23",
@@ -589,27 +597,31 @@
         },
         {
           "text": {
-            "en": "Rest until you can repeat the movement smoothly, and end the effort when control begins to fade.",
-            "zh": "休息到能重新平稳完成动作；控制开始变差时，就结束这一轮。"
+            "en": "Light and heavy loads both build muscle when the sets are hard; heavier loads build more maximal strength.",
+            "zh": "只要每组都练得够吃力，轻重量和大重量都能增肌；大重量更能提高最大力量。"
           },
           "s": [
-            "M24",
-            "M25"
+            "M20"
+          ]
+        },
+        {
+          "text": {
+            "en": "Sets do not have to go to failure; end a set when the movement starts to change.",
+            "zh": "每组不必做到力竭；动作开始变形，就结束这一组。"
+          },
+          "s": [
+            "M24"
           ]
         }
       ],
       "cautions": [
         {
-          "en": "The 3D view traces the shoulder and elbow paths with a shortened range; use the two-panel drawing for the full body position and apparatus.",
-          "zh": "三维视图以缩小幅度描出肩、肘的运动；完整体位和器械请看两格示意图。"
+          "en": "Do the supported single-arm dumbbell row instead if you cannot hold the bent-forward position comfortably.",
+          "zh": "俯身姿势撑不住或不舒服，就改做支撑式单臂哑铃划船。"
         },
         {
-          "en": "Use a supported dumbbell row if holding the hinge is uncomfortable or cannot be controlled.",
-          "zh": "维持俯身不舒服或控制不了时，可改用有支撑的哑铃划船。"
-        },
-        {
-          "en": "First learn with bodyweight, assistance or a light load under a qualified coach; anyone under 18 should practise under adult supervision.",
-          "zh": "第一次做先用自重、辅助或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+          "en": "Stop at sharp back pain or pain spreading into a leg.",
+          "zh": "下背刺痛，或疼痛向腿部放射，立刻停下。"
         },
         {
           "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
@@ -737,7 +749,8 @@
         "M54",
         "M23",
         "M24",
-        "M25"
+        "M25",
+        "M49"
       ]
     },
     {
@@ -770,60 +783,60 @@
         "levator-scapulae"
       ],
       "setup": {
-        "en": "Use a stable flat bench and a light dumbbell. The drawing shows the left arm rowing, with the right hand and right knee supported; reverse the sides afterwards.",
-        "zh": "用稳固平板凳和轻哑铃。图中左臂划船，右手、右膝支撑；随后换边。"
+        "en": "Use a stable flat bench and a light dumbbell. The drawing shows the left arm working, with the right hand and right knee on the bench; swap sides afterwards.",
+        "zh": "用稳固的平板凳和轻哑铃。图中是左臂在练，右手和右膝撑在凳上；练完换边。"
       },
       "steps": [
         {
-          "en": "Place the right knee and right hand on the bench. Plant the left foot wide enough to balance; keep the torso nearly horizontal and the pelvis square.",
-          "zh": "右膝、右手撑在凳上，左脚踩地，站到能稳住的位置；躯干接近水平，骨盆不扭转。"
+          "en": "Put your right knee and right hand on the bench and your left foot on the floor, wide enough to balance. Your back is close to level and your hips face the floor.",
+          "zh": "右膝、右手撑在凳上，左脚踩地，站开到能稳住。背部接近水平，髋部正对地面。"
         },
         {
-          "en": "Take the dumbbell in the left hand with the palm facing in. Let the arm hang under the shoulder and keep the wrist straight.",
-          "zh": "左手握哑铃，掌心向内；手臂垂在肩下，手腕平直。"
+          "en": "Hold the dumbbell in your left hand, palm facing in. Let the arm hang straight below the shoulder, wrist straight.",
+          "zh": "左手握哑铃，掌心朝内。手臂垂在肩膀正下方，手腕平直。"
         },
         {
-          "en": "Breathe out and draw the left elbow towards the hip, bringing the dumbbell towards the lower ribs. Keep the chest facing the floor.",
-          "zh": "呼气，左肘朝髋部方向拉，让哑铃靠近下位肋骨；胸口始终朝地面。"
+          "en": "Breathe out and pull your left elbow towards your hip, bringing the dumbbell to your lower ribs. Keep your chest facing the floor.",
+          "zh": "呼气，左肘朝髋部方向拉，把哑铃拉到下胸肋骨旁。胸口始终朝向地面。"
         },
         {
-          "en": "Stop when the upper arm is near the torso. Let the shoulder blade move back without twisting the trunk to lift the weight higher.",
-          "zh": "上臂接近躯干就停；肩胛骨向后移，不扭转躯干把哑铃拉得更高。"
+          "en": "Stop when your upper arm is beside your body. Let the shoulder blade move back, but do not twist your trunk to lift higher.",
+          "zh": "上臂到身体旁边就停。肩胛骨可以往后收，但不要转身把哑铃拉得更高。"
         },
         {
-          "en": "Breathe in and lower slowly to a long arm, allowing the shoulder blade to glide forward while keeping the back shape steady.",
-          "zh": "吸气，慢慢放回手臂伸长的位置；肩胛骨向前滑，脊柱形态保持不变。"
+          "en": "Breathe in and lower slowly until the arm is straight, letting the shoulder blade slide forward while your back stays still.",
+          "zh": "吸气，慢慢放下到手臂伸直，肩胛骨顺势向前滑开，背部保持不动。"
         },
         {
-          "en": "Put the dumbbell on the floor under control, step away from the bench, and reset the same support on the other side.",
-          "zh": "把哑铃有控制地放回地面，离开凳子，再按同样的支撑方式换边。"
+          "en": "Put the dumbbell down on the floor, step off the bench and set up the same way on the other side.",
+          "zh": "把哑铃放回地面，离开凳子，按同样的方式换另一边。"
         }
       ],
       "cues": [
         {
-          "en": "Keep the belt line facing the floor.",
-          "zh": "腰带线保持朝向地面。"
+          "en": "Keep both hips facing the floor.",
+          "zh": "两侧髋部始终正对地面。"
         },
         {
-          "en": "Move the elbow towards the hip; keep the wrist quiet.",
-          "zh": "手肘朝髋部拉，手腕不乱弯。"
+          "en": "Elbow towards the hip; the wrist stays straight.",
+          "zh": "手肘往髋部拉，手腕保持平直。"
         }
       ],
       "mistakes": [
         {
-          "en": "Opening the chest to the side as the weight rises. Why: trunk rotation supplies movement that should come from the shoulder and scapula.",
-          "zh": "拉起时胸口转向一侧。为什么：躯干旋转代替了应由肩关节和肩胛骨完成的运动。"
+          "en": "Turning the chest to the side as the weight comes up. Why: twisting the trunk lifts the dumbbell, so the shoulder and shoulder blade do less.",
+          "zh": "拉起时胸口转向一边。为什么：靠转身把哑铃抬高，肩关节和肩胛骨反而做得少了。"
         },
         {
-          "en": "Pulling the shoulder towards the ear. Why: the movement becomes shoulder elevation rather than the intended backward arm pull.",
-          "zh": "肩膀拉向耳朵。为什么：动作变成提肩，而不是预期的上臂后拉。"
+          "en": "Shrugging the shoulder up towards the ear. Why: the movement becomes a shrug instead of pulling the upper arm back.",
+          "zh": "肩膀往耳朵方向耸。为什么：动作变成了耸肩，而不是把上臂往后拉。"
         }
       ],
       "dose": [
         {
           "text": {
-            "en": "Choose a load or assistance level that lets you control the whole movement, and progress gradually when the same technique feels easy.",
-            "zh": "选择能控制整个动作的重量或辅助程度；同样的动作变得轻松后，再逐步加难。"
+            "en": "Start light enough that every repetition follows the same smooth path; add load or repetitions in small steps only once that feels easy.",
+            "zh": "起始重量要轻到每一次都能走同一条平稳的路线；等它变得轻松了，再小步增加重量或次数。"
           },
           "s": [
             "M23",
@@ -832,27 +845,27 @@
         },
         {
           "text": {
-            "en": "Rest until you can repeat the movement smoothly, and end the effort when control begins to fade.",
-            "zh": "休息到能重新平稳完成动作；控制开始变差时，就结束这一轮。"
+            "en": "Light and heavy loads both build muscle when the sets are hard; heavier loads build more maximal strength.",
+            "zh": "只要每组都练得够吃力，轻重量和大重量都能增肌；大重量更能提高最大力量。"
           },
           "s": [
-            "M24",
-            "M25"
+            "M20"
+          ]
+        },
+        {
+          "text": {
+            "en": "Spreading back work over more than one day a week tends to work better than one big session.",
+            "zh": "把背部训练分散到一周里不止一天，通常比一次练完效果好。"
+          },
+          "s": [
+            "M21"
           ]
         }
       ],
       "cautions": [
         {
-          "en": "The 3D view traces the shoulder and elbow paths with a shortened range; use the two-panel drawing for the full body position and apparatus.",
-          "zh": "三维视图以缩小幅度描出肩、肘的运动；完整体位和器械请看两格示意图。"
-        },
-        {
-          "en": "Keep the bench stable and the supporting wrist comfortable; change the support or stop if pain persists.",
-          "zh": "凳子必须稳固，支撑腕保持舒服；疼痛持续时调整支撑或停止。"
-        },
-        {
-          "en": "First learn with bodyweight, assistance or a light load under a qualified coach; anyone under 18 should practise under adult supervision.",
-          "zh": "第一次做先用自重、辅助或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+          "en": "Make sure the bench is stable. If the supporting wrist hurts, change how you place the hand, or stop.",
+          "zh": "凳子要稳。撑凳的手腕疼，就换个撑法，或者停下。"
         },
         {
           "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
@@ -971,7 +984,8 @@
         "M54",
         "M23",
         "M24",
-        "M25"
+        "M25",
+        "M49"
       ]
     },
     {
@@ -1004,89 +1018,88 @@
         "gluteus-maximus"
       ],
       "setup": {
-        "en": "Fix a horizontal bar securely in a rack and check it cannot roll or lift free. Begin with the bar high enough for an easy body angle; clear the floor beneath it.",
-        "zh": "把横杆牢固固定在架上，确认不会转动或脱出。开始时把杆放得高一些，让身体倾角容易控制；清空下方地面。"
+        "en": "Set a bar securely in a rack and check that it cannot roll or lift out. Start with the bar fairly high: the more upright your body, the easier the pull.",
+        "zh": "把横杆牢牢固定在架子上，确认它不会滚动或脱出。开始时把杆放高一些：身体越直立，拉起来越轻松。"
       },
       "steps": [
         {
-          "en": "Take an overhand grip just wider than the shoulders and walk the feet forward under the bar. Begin with arms long and the heels on a non-slip floor.",
-          "zh": "正握横杆，握距比肩稍宽，双脚向前迈到杆下。手臂伸长，脚跟踩在不打滑的地面上。"
+          "en": "Grip the bar overhand, a little wider than your shoulders, and walk your feet forward under it until you hang with straight arms, heels on a non-slip floor.",
+          "zh": "正握横杆，握距比肩稍宽，双脚往前走到杆下，直臂挂住，脚跟踩在不打滑的地面上。"
         },
         {
-          "en": "Keep the head, trunk and pelvis in line. Gently tighten the abdomen and buttocks; bend the knees for an easier version if needed.",
-          "zh": "头、躯干和骨盆保持一线，腹部和臀部轻轻收紧；需要时屈膝，改成更容易的版本。"
+          "en": "Keep your head, trunk and hips in one line. Tighten your stomach and buttocks a little; bend your knees to make it easier.",
+          "zh": "头、躯干、髋部成一条直线，腹部和臀部稍微收紧。想容易一些，就屈膝。"
         },
         {
-          "en": "Breathe out and pull the chest towards the bar, bending the elbows and bringing the shoulder blades back. Move the whole body together.",
-          "zh": "呼气，胸口向杆靠近，同时屈肘、肩胛骨后缩；身体作为一个整体移动。"
+          "en": "Breathe out and pull your chest towards the bar, bending your elbows and drawing your shoulder blades back. Your whole body moves as one.",
+          "zh": "呼气，把胸口拉向横杆，同时屈肘、肩胛骨后收。全身作为一个整体移动。"
         },
         {
-          "en": "Stop when the chest is close to the bar without reaching with the chin or thrusting the hips. Keep the upper arms at a comfortable angle.",
-          "zh": "胸口靠近杆就停，不伸下巴、不挺髋借力；上臂保持舒服的角度。"
+          "en": "Stop when your chest is close to the bar, without reaching with your chin or pushing your hips up.",
+          "zh": "胸口靠近横杆就停，不伸下巴去够，也不往上顶髋。"
         },
         {
-          "en": "Breathe in and lower the whole body slowly to long arms, letting the shoulder blades glide forward without losing the body line.",
-          "zh": "吸气，整个人慢慢下放到手臂伸长，让肩胛骨向前滑，身体仍保持一线。"
+          "en": "Breathe in and lower slowly to straight arms, keeping your body straight.",
+          "zh": "吸气，慢慢下放到手臂伸直，身体始终笔直。"
         },
         {
-          "en": "Walk the feet back and stand before letting go. Change the bar height or knee position before the next attempt if control was difficult.",
-          "zh": "双脚向后走，站稳再松手；控制困难时，下一轮开始前调整横杆高度或屈膝程度。"
+          "en": "Walk your feet back and stand up before you let go.",
+          "zh": "双脚往回走、站稳之后再松手。"
         }
       ],
       "cues": [
         {
-          "en": "Bring the chest to the bar, not the chin.",
-          "zh": "胸口靠近杆，不是下巴凑过去。"
+          "en": "Bring your chest to the bar, not your chin.",
+          "zh": "用胸口去靠杆，不是下巴。"
         },
         {
-          "en": "Keep chest and hips moving together.",
-          "zh": "胸口和髋部一起移动。"
+          "en": "Move as one plank: chest and hips together.",
+          "zh": "整个人像一块板：胸口和髋部一起动。"
         }
       ],
       "mistakes": [
         {
-          "en": "Letting the pelvis sag. Why: the trunk bends instead of remaining a steady link between shoulders and feet.",
-          "zh": "骨盆下塌。为什么：躯干发生弯折，不能作为肩膀与脚之间的稳定连接。"
+          "en": "Letting the hips sag. Why: the trunk bends in the middle and no longer holds a straight line from shoulders to feet.",
+          "zh": "髋部下塌。为什么：躯干从中间塌下去，肩到脚不再连成一条直线。"
         },
         {
-          "en": "Thrusting the hips to start the pull. Why: momentum replaces controlled shoulder and elbow movement.",
-          "zh": "先挺髋再拉。为什么：惯性代替了受控的肩、肘运动。"
+          "en": "Throwing the hips up to start the pull. Why: the bounce does part of the work that the shoulders and elbows should do.",
+          "zh": "先挺髋往上弹再拉。为什么：弹起的惯性替代了肩、肘的发力。"
         }
       ],
       "dose": [
         {
           "text": {
-            "en": "Choose a load or assistance level that lets you control the whole movement, and progress gradually when the same technique feels easy.",
-            "zh": "选择能控制整个动作的重量或辅助程度；同样的动作变得轻松后，再逐步加难。"
+            "en": "Make it harder in small steps: lower the bar, then straighten your legs, then add repetitions, keeping the same straight body.",
+            "zh": "分小步加难：先降低横杆，再把腿伸直，再增加次数，身体始终保持笔直。"
           },
           "s": [
-            "M23",
+            "M23"
+          ]
+        },
+        {
+          "text": {
+            "en": "Sets do not have to go to failure; end a set when the movement starts to change.",
+            "zh": "每组不必做到力竭；动作开始变形，就结束这一组。"
+          },
+          "s": [
             "M24"
           ]
         },
         {
           "text": {
-            "en": "Rest until you can repeat the movement smoothly, and end the effort when control begins to fade.",
-            "zh": "休息到能重新平稳完成动作；控制开始变差时，就结束这一轮。"
+            "en": "Spreading back work over more than one day a week tends to work better than one big session.",
+            "zh": "把背部训练分散到一周里不止一天，通常比一次练完效果好。"
           },
           "s": [
-            "M24",
-            "M25"
+            "M21"
           ]
         }
       ],
       "cautions": [
         {
-          "en": "The 3D view traces the shoulder and elbow paths with a shortened range; use the two-panel drawing for the full body position and apparatus.",
-          "zh": "三维视图以缩小幅度描出肩、肘的运动；完整体位和器械请看两格示意图。"
-        },
-        {
-          "en": "Use a securely fixed bar; a loose broomstick or an unsecured table is not a suitable support.",
-          "zh": "用可靠固定的横杆；松动的棍子或未固定的桌子不适合作支撑。"
-        },
-        {
-          "en": "First learn with bodyweight, assistance or a light load under a qualified coach; anyone under 18 should practise under adult supervision.",
-          "zh": "第一次做先用自重、辅助或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+          "en": "Only use a bar that is securely fixed; a loose pole or an unfixed table can slip.",
+          "zh": "只用牢固固定的横杆；松动的杆子或没固定的桌子可能滑脱。"
         },
         {
           "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
@@ -1230,64 +1243,64 @@
         "external-oblique"
       ],
       "setup": {
-        "en": "Attach a rope to a cable pulley around eye height. Select a light load and leave room to step back; the drawing shows the version that finishes with gentle external rotation.",
-        "zh": "把绳索装在约眼高的滑轮上，选轻配重，留出后退空间；图示版本在拉回时配合轻柔外旋。"
+        "en": "Attach a rope to a cable pulley at about eye height and choose a light weight, with room to step back. The drawing shows the version that finishes with the upper arms turned outward.",
+        "zh": "把绳索把手挂在约与眼睛同高的滑轮上，选轻配重，身后留出后退的空间。图中是最后上臂外旋收尾的版本。"
       },
       "steps": [
         {
-          "en": "Hold a rope end in each hand with palms facing in. Step back until the arms are long and the stack is just lifted; feet are about hip width, knees soft.",
-          "zh": "两手各握绳端，掌心相对。后退到手臂伸长、配重刚离开底座；双脚约与髋同宽，膝盖微屈。"
+          "en": "Hold one end of the rope in each hand, palms facing in. Step back until your arms are straight and the weights just lift; feet about hip-width apart, knees soft.",
+          "zh": "两手各握绳索一端，掌心相对。往后退，直到手臂伸直、配重刚好离开底座；双脚约与髋同宽，膝盖微屈。"
         },
         {
-          "en": "Keep the ribs over the pelvis and the head still. Start with the hands at eye height and shoulders relaxed in their natural position.",
-          "zh": "肋骨位于骨盆上方，头保持自然。双手从眼高处开始，肩膀放在自然位置。"
+          "en": "Stand tall with your ribs over your hips and your head still. Start with your hands at eye height and your shoulders relaxed.",
+          "zh": "站直，肋骨在骨盆正上方，头保持不动。双手从眼睛高度开始，肩膀放松。"
         },
         {
-          "en": "Breathe out and pull the rope towards the forehead while spreading the hands apart. Elbows travel out and back around shoulder height.",
-          "zh": "呼气，把绳索拉向额前，两手逐渐分开；手肘在约肩高处向外、向后走。"
+          "en": "Breathe out and pull the rope towards your forehead, spreading your hands apart. Your elbows travel out and back at about shoulder height.",
+          "zh": "呼气，把绳索拉向额头，两手往外分开。手肘在大约肩膀高度向外、向后走。"
         },
         {
-          "en": "Turn the upper arms outward so the hands finish beside the temples and the forearms are close to upright. Stop before you have to arch the back or force the shoulders.",
-          "zh": "上臂向外旋，让双手停在太阳穴旁，前臂接近竖直；需要弓腰或强拧肩膀之前就停。"
+          "en": "Turn your upper arms outward so your hands finish beside your temples with the forearms nearly upright. Stop before you would have to arch your back.",
+          "zh": "上臂向外旋，让双手停在太阳穴两侧，前臂接近竖直。在需要弓腰之前就停。"
         },
         {
-          "en": "Breathe in and reverse the rotation, then let the arms extend slowly towards the pulley. Let the shoulder blades glide forward and keep the stack quiet.",
-          "zh": "吸气，沿原路线回转，再慢慢向滑轮方向伸长手臂；肩胛骨向前滑，配重不砸落。"
+          "en": "Breathe in, turn back the same way and let your arms straighten slowly towards the pulley, without letting the weights crash.",
+          "zh": "吸气，沿原路转回，再让手臂慢慢向滑轮伸直，别让配重片砸下去。"
         },
         {
-          "en": "Step forward under control until the stack rests before releasing the rope.",
-          "zh": "有控制地向前走，让配重落稳后再松开绳索。"
+          "en": "Step forward until the weights rest, then let go of the rope.",
+          "zh": "往前走，等配重落稳后再松开绳索。"
         }
       ],
       "cues": [
         {
-          "en": "Separate the rope ends; turn the upper arms, not the wrists.",
-          "zh": "两端绳索分开；转上臂，不是翻手腕。"
+          "en": "Pull the rope apart; turn the upper arms, not the wrists.",
+          "zh": "把绳索往两边拉开；转的是上臂，不是手腕。"
         },
         {
-          "en": "Keep the ribs and head quiet as the elbows move.",
-          "zh": "手肘移动时，肋骨和头保持稳定。"
+          "en": "Ribs and head stay still while the elbows move.",
+          "zh": "手肘在动，肋骨和头不动。"
         },
         {
-          "en": "Use a comfortable shoulder range rather than forcing a pose.",
-          "zh": "在肩部舒服的范围里做，不强凑姿势。"
+          "en": "You should feel it at the back of the shoulders and between the shoulder blades.",
+          "zh": "用力感应该在肩膀后侧和两块肩胛骨之间。"
         }
       ],
       "mistakes": [
         {
-          "en": "Leaning back to move a heavy stack. Why: trunk movement replaces part of the shoulder work.",
-          "zh": "靠后仰拉动大配重。为什么：躯干运动代替了部分肩部工作。"
+          "en": "Leaning back to move a heavy weight. Why: the lean does part of the work that the back of the shoulders should do.",
+          "zh": "身体后仰去拉大重量。为什么：后仰替肩膀后侧做了一部分功。"
         },
         {
-          "en": "Bending the wrists to fake the final rotation. Why: the handles move but the upper arms hardly rotate.",
-          "zh": "靠折腕假装完成最后的外旋。为什么：把手移动了，上臂却几乎没有旋转。"
+          "en": "Bending the wrists to fake the final turn. Why: the hands move but the upper arms hardly rotate, so the outward rotators barely work.",
+          "zh": "最后靠折手腕假装外旋。为什么：手是动了，上臂却几乎没转，外旋肌几乎没出力。"
         }
       ],
       "dose": [
         {
           "text": {
-            "en": "Choose a load or assistance level that lets you control the whole movement, and progress gradually when the same technique feels easy.",
-            "zh": "选择能控制整个动作的重量或辅助程度；同样的动作变得轻松后，再逐步加难。"
+            "en": "Start light enough that every repetition follows the same smooth path; add load or repetitions in small steps only once that feels easy.",
+            "zh": "起始重量要轻到每一次都能走同一条平稳的路线；等它变得轻松了，再小步增加重量或次数。"
           },
           "s": [
             "M23",
@@ -1296,27 +1309,27 @@
         },
         {
           "text": {
-            "en": "Rest until you can repeat the movement smoothly, and end the effort when control begins to fade.",
-            "zh": "休息到能重新平稳完成动作；控制开始变差时，就结束这一轮。"
+            "en": "Sets do not have to go to failure; end a set when the movement starts to change.",
+            "zh": "每组不必做到力竭；动作开始变形，就结束这一组。"
           },
           "s": [
-            "M24",
-            "M25"
+            "M24"
+          ]
+        },
+        {
+          "text": {
+            "en": "Spreading back work over more than one day a week tends to work better than one big session.",
+            "zh": "把背部训练分散到一周里不止一天，通常比一次练完效果好。"
+          },
+          "s": [
+            "M21"
           ]
         }
       ],
       "cautions": [
         {
-          "en": "The 3D view traces the shoulder and elbow paths with a shortened range; use the two-panel drawing for the full body position and apparatus.",
-          "zh": "三维视图以缩小幅度描出肩、肘的运动；完整体位和器械请看两格示意图。"
-        },
-        {
-          "en": "Do not force the hands behind the head. Reduce the rotation or stop if the shoulder pinches.",
-          "zh": "不要强行把手拉到脑后；肩部有夹痛时，减少外旋幅度或停止。"
-        },
-        {
-          "en": "First learn with bodyweight, assistance or a light load under a qualified coach; anyone under 18 should practise under adult supervision.",
-          "zh": "第一次做先用自重、辅助或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+          "en": "Do not force your hands behind your head. Turn less, or stop, if the shoulder feels pinched.",
+          "zh": "别硬把手拉到脑后。肩膀有夹痛感，就减小外旋幅度或停下。"
         },
         {
           "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
@@ -1435,7 +1448,8 @@
         "M23",
         "M24",
         "M25",
-        "M56"
+        "M56",
+        "M48"
       ]
     },
     {
@@ -1460,56 +1474,56 @@
         "teres-minor"
       ],
       "setup": {
-        "en": "Choose dumbbells light enough to hold without leaning or bending the wrists. Stand in a clear space with room to put them down safely.",
-        "zh": "选择拿着时不用歪身、折腕的轻哑铃；在空旷处站好，留出安全放回哑铃的空间。"
+        "en": "Choose dumbbells light enough to hold without leaning or bending your wrists, and stand where you can put them down safely.",
+        "zh": "选拿着时不用歪身子、不用折手腕的轻哑铃，站在能安全放下哑铃的地方。"
       },
       "steps": [
         {
-          "en": "Stand with feet about hip width, knees soft and arms by the sides. Hold the dumbbells with palms facing in and thumbs wrapped around the handles.",
-          "zh": "双脚约与髋同宽，膝盖微屈，手臂在身体两侧；对握哑铃，拇指扣住把手。"
+          "en": "Stand with your feet about hip-width apart and knees soft, a dumbbell in each hand by your sides, palms facing in and thumbs wrapped round the handles.",
+          "zh": "双脚约与髋同宽，膝盖微屈，两手各握一只哑铃垂在身体两侧，掌心朝内，拇指扣住把手。"
         },
         {
-          "en": "Keep the head over the trunk, elbows long and wrists straight. Let the shoulder girdle settle naturally without forcing it down.",
-          "zh": "头位于躯干上方，手肘伸长、手腕平直；肩带自然放稳，不强行下压。"
+          "en": "Stand tall with your head over your body, elbows and wrists straight. Let your shoulders rest where they naturally sit.",
+          "zh": "站直，头在身体正上方，手肘、手腕伸直。肩膀放在自然的位置。"
         },
         {
-          "en": "Breathe out and lift the shoulders smoothly towards the ears. The arms stay long; let the shoulder girdle provide the movement.",
-          "zh": "呼气，肩膀平稳朝耳朵方向上提；手臂保持伸长，由肩带产生运动。"
+          "en": "Breathe out and lift your shoulders straight up towards your ears. Your arms stay straight and simply hang from the shoulders.",
+          "zh": "呼气，肩膀笔直地往耳朵方向提。手臂伸直，只是挂在肩膀上。"
         },
         {
-          "en": "Pause briefly at a comfortable top position without pushing the chin forward or rolling the shoulders.",
-          "zh": "在舒服的顶端稍停，不伸下巴、不绕肩。"
+          "en": "Pause briefly at the top without poking your chin forward or rolling your shoulders.",
+          "zh": "在顶端稍停，下巴不前伸，肩膀不绕圈。"
         },
         {
-          "en": "Breathe in and lower the shoulders slowly back to their natural resting height. Put the weights down under control when finished.",
-          "zh": "吸气，肩膀慢慢回到自然高度；结束时有控制地放回哑铃。"
+          "en": "Breathe in and lower your shoulders slowly to where they started. Put the dumbbells down carefully when you finish.",
+          "zh": "吸气，慢慢把肩膀放回原来的位置。做完后小心放下哑铃。"
         }
       ],
       "cues": [
         {
-          "en": "Lift and lower the shoulder girdle; keep the elbows quiet.",
-          "zh": "上提、放下肩带，手肘不乱动。"
+          "en": "Shoulders go straight up and straight down; the elbows stay straight.",
+          "zh": "肩膀直上直下，手肘始终伸直。"
         },
         {
-          "en": "Keep the neck long and the head centred.",
-          "zh": "脖子自然延长，头不歪。"
+          "en": "You should feel it on top of the shoulders and up the sides of the neck, where the descending trapezius and levator scapulae lie.",
+          "zh": "用力感应该在肩膀上方和脖子两侧，也就是斜方肌降部（上斜方）和肩胛提肌的位置。"
         }
       ],
       "mistakes": [
         {
-          "en": "Rolling the shoulders in a circle. Why: it adds movement that is not needed for controlled elevation.",
-          "zh": "肩膀绕圈。为什么：这增加了受控上提不需要的运动。"
+          "en": "Rolling the shoulders in circles. Why: the shoulder-raising muscles only lift the shoulder blades; circling just adds extra movement under the load.",
+          "zh": "肩膀绕圈。为什么：提肩的肌肉只负责把肩胛骨往上提，绕圈只是在负重下多出来的动作。"
         },
         {
-          "en": "Bending the elbows or bouncing the knees. Why: the arms and legs move the weights instead of the shoulder elevators.",
-          "zh": "屈肘或弹膝借力。为什么：重量被手臂和腿带动，而不是由提肩肌控制。"
+          "en": "Bending the elbows or bouncing with the knees. Why: the arms and legs lift the weight instead of the muscles that raise the shoulders.",
+          "zh": "屈肘或用膝盖弹。为什么：重量被手臂和腿带上去了，而不是靠提肩的肌肉。"
         }
       ],
       "dose": [
         {
           "text": {
-            "en": "Choose a load or assistance level that lets you control the whole movement, and progress gradually when the same technique feels easy.",
-            "zh": "选择能控制整个动作的重量或辅助程度；同样的动作变得轻松后，再逐步加难。"
+            "en": "Start light enough that every repetition follows the same smooth path; add load or repetitions in small steps only once that feels easy.",
+            "zh": "起始重量要轻到每一次都能走同一条平稳的路线；等它变得轻松了，再小步增加重量或次数。"
           },
           "s": [
             "M23",
@@ -1518,27 +1532,27 @@
         },
         {
           "text": {
-            "en": "Rest until you can repeat the movement smoothly, and end the effort when control begins to fade.",
-            "zh": "休息到能重新平稳完成动作；控制开始变差时，就结束这一轮。"
+            "en": "Light and heavy loads both build muscle when the sets are hard; heavier loads build more maximal strength.",
+            "zh": "只要每组都练得够吃力，轻重量和大重量都能增肌；大重量更能提高最大力量。"
           },
           "s": [
-            "M24",
-            "M25"
+            "M20"
+          ]
+        },
+        {
+          "text": {
+            "en": "Sets do not have to go to failure; end a set when the movement starts to change.",
+            "zh": "每组不必做到力竭；动作开始变形，就结束这一组。"
+          },
+          "s": [
+            "M24"
           ]
         }
       ],
       "cautions": [
         {
-          "en": "The 3D view traces the shoulder and elbow paths with a shortened range; use the two-panel drawing for the full body position and apparatus.",
-          "zh": "三维视图以缩小幅度描出肩、肘的运动；完整体位和器械请看两格示意图。"
-        },
-        {
-          "en": "Stop if the movement causes neck pain, headache or symptoms spreading into the arm.",
-          "zh": "出现颈痛、头痛或向手臂放射的不适时停止。"
-        },
-        {
-          "en": "First learn with bodyweight, assistance or a light load under a qualified coach; anyone under 18 should practise under adult supervision.",
-          "zh": "第一次做先用自重、辅助或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+          "en": "Stop if you get neck pain, a headache, or pain or tingling spreading into an arm.",
+          "zh": "出现颈痛、头痛，或疼痛、麻感向手臂放射，就停下。"
         },
         {
           "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
@@ -1683,85 +1697,79 @@
         "teres-minor"
       ],
       "setup": {
-        "en": "Use a stable incline bench with a low slope. Lie chest down, feet on the floor. Begin without weights; lift only through a small, comfortable range.",
-        "zh": "用稳固、低倾角的上斜凳，胸朝下、双脚踩地。先不加重量，只在舒服的小幅度里举臂。"
+        "en": "Set a stable incline bench to a low angle and lie on it chest down, feet on the floor. Start with no weights.",
+        "zh": "把稳固的上斜凳调到较低的角度，胸口朝下趴在上面，双脚踩地。先不拿重量。"
       },
       "steps": [
         {
-          "en": "Rest the chest against the pad and keep the head in line with the spine. Let the arms hang towards the floor with elbows almost straight.",
-          "zh": "胸部贴住靠垫，头与脊柱保持一线；手臂朝地面垂下，手肘接近伸直。"
+          "en": "Rest your chest on the pad with your head in line with your spine. Let your arms hang towards the floor, elbows almost straight.",
+          "zh": "胸口贴着靠垫，头和脊柱成一条线。手臂朝地面垂下，手肘接近伸直。"
         },
         {
-          "en": "Turn the thumbs forward and upward, and aim the arms into a broad Y shape rather than straight out sideways. Keep the abdomen gently braced.",
-          "zh": "拇指朝前上方，把手臂对准较宽的 Y 字方向，不是平伸向两侧；腹部轻轻收紧。"
+          "en": "Turn your thumbs up and aim your arms out into a wide Y, not straight out to the sides. Tighten your stomach a little.",
+          "zh": "大拇指朝上，手臂对准一个张开的 Y 字方向，不是平着向两侧伸。腹部稍微收紧。"
         },
         {
-          "en": "Breathe out and raise the arms along that Y line. Let the shoulder blades turn upward with the arms; keep the chest on the pad.",
-          "zh": "呼气，沿 Y 字方向举臂；肩胛骨跟随手臂向上回旋，胸部不离开靠垫。"
+          "en": "Breathe out and raise your arms along the Y. Let your shoulder blades turn upward with the arms; keep your chest on the pad.",
+          "zh": "呼气，顺着 Y 字方向举起手臂。肩胛骨跟着手臂向上回旋，胸口不离开靠垫。"
         },
         {
-          "en": "Stop near the line of the torso, or sooner if you need to arch the back. Pause without forcing a shoulder-blade squeeze.",
-          "zh": "接近躯干延长线就停；若需要弓腰才能继续，就更早停。稍停，不强行夹肩胛骨。"
+          "en": "Stop when your arms are about level with your body, or sooner if you would have to arch your back. Pause for a moment.",
+          "zh": "手臂举到大约和身体平齐就停；要弓腰才能再高，就提前停。稍停一下。"
         },
         {
-          "en": "Breathe in and lower slowly to the hanging position. Sit or step off the bench carefully after finishing.",
-          "zh": "吸气，慢慢回到垂臂位置；结束后小心坐起或离开凳子。"
+          "en": "Breathe in and lower your arms slowly. When you finish, get off the bench carefully.",
+          "zh": "吸气，慢慢放下手臂。做完后小心从凳子上起来。"
         }
       ],
       "cues": [
         {
-          "en": "Reach along the Y line while keeping the chest on the pad.",
-          "zh": "沿 Y 字线伸长手臂，胸部贴垫。"
+          "en": "Reach long along the Y; your chest stays on the pad.",
+          "zh": "顺着 Y 字往远处伸，胸口贴住靠垫。"
         },
         {
-          "en": "Let the blades turn upward; keep the neck relaxed.",
-          "zh": "肩胛骨向上回旋，颈部放松。"
+          "en": "Let the shoulder blades turn upward; keep your neck relaxed.",
+          "zh": "肩胛骨向上转，脖子放松。"
+        },
+        {
+          "en": "You should feel it low between the shoulder blades, where the ascending trapezius runs.",
+          "zh": "用力感应该在两块肩胛骨之间偏下，斜方肌升部（下斜方）的位置。"
         }
       ],
       "mistakes": [
         {
-          "en": "Lifting the chest and arching the back to raise the hands. Why: trunk extension adds height without the intended shoulder movement.",
-          "zh": "抬胸、弓腰把手举高。为什么：躯干后伸增加了高度，肩部却没有完成预期运动。"
+          "en": "Lifting the chest and arching the back to get the hands higher. Why: the extra height comes from bending the back, and the shoulders do less.",
+          "zh": "抬胸、弓腰，把手举得更高。为什么：多出来的高度来自弯腰，肩部反而做得少了。"
         },
         {
-          "en": "Forcing the shoulders down throughout the raise. Why: it restricts the scapular upward rotation needed as the arms rise.",
-          "zh": "整个上举过程都把肩膀死压下去。为什么：这限制了抬臂需要的肩胛骨上回旋。"
+          "en": "Pressing the shoulders down hard the whole time. Why: raising the arms needs the shoulder blades to turn upward, and pressing them down blocks that.",
+          "zh": "全程用力把肩膀往下压。为什么：举臂需要肩胛骨向上回旋，死压会把这个动作卡住。"
         }
       ],
       "dose": [
         {
           "text": {
-            "en": "Learn the arm path without added weight and keep the chest supported before making the movement harder.",
-            "zh": "先不加重量学会举臂路线，胸部能稳定贴垫后再加难。"
+            "en": "Learn the arm path without weights first; add a light weight in small steps only once your chest stays on the pad throughout.",
+            "zh": "先不拿重量学会举臂路线；胸口能全程贴住靠垫后，再小步加上轻重量。"
           },
           "s": [
-            "M23",
-            "M25"
+            "M23"
           ]
         },
         {
           "text": {
-            "en": "Use a range you can control, and stop when the lift requires the back or neck to compensate.",
-            "zh": "用能控制的幅度；需要腰背或颈部代偿时，就停止这一轮。"
+            "en": "Use a range you can control, and end the set when your back or neck starts to help.",
+            "zh": "在能控制的幅度里做；腰背或脖子开始帮忙，就结束这一组。"
           },
           "s": [
-            "M24",
-            "M25"
+            "M24"
           ]
         }
       ],
       "cautions": [
         {
-          "en": "The 3D view traces the shoulder and elbow paths with a shortened range; use the two-panel drawing for the full body position and apparatus.",
-          "zh": "三维视图以缩小幅度描出肩、肘的运动；完整体位和器械请看两格示意图。"
-        },
-        {
-          "en": "Use a shorter range if overhead arm movement is uncomfortable; do not add weights just to feel a stronger burn.",
-          "zh": "举臂不舒服时减小幅度；不要只为追求更强酸胀就加重量。"
-        },
-        {
-          "en": "First learn with bodyweight, assistance or a light load under a qualified coach; anyone under 18 should practise under adult supervision.",
-          "zh": "第一次做先用自重、辅助或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+          "en": "Shorten the range if raising your arms overhead is uncomfortable, and stop at sharp pain.",
+          "zh": "手臂往上举不舒服就减小幅度，出现刺痛就停下。"
         },
         {
           "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
@@ -1915,64 +1923,64 @@
         "teres-minor"
       ],
       "setup": {
-        "en": "Use a barbell with collars on a level floor. For learning, use light technique plates or sturdy blocks to place the bar at a reachable height; have a qualified coach teach the hip hinge first. Hip extensors, including gluteus maximus and the hamstrings, supply movement; spinal erectors mainly brace. The muscle chips show the muscles included in this back view. Knee extensors also help lift a conventional deadlift.",
-        "zh": "在平整地面上用装好卡扣的杠铃。学习时用轻的技术杠片或稳固垫块，把杠放到容易够到的高度；先请合格教练指导髋折叠。 臀大肌和腘绳肌等伸髋肌产生运动，竖脊肌主要稳定；肌肉标签只列出背部视图所收录的肌肉。 常规硬拉还需要伸膝肌群参与。"
+        "en": "Use a barbell with collars on a level floor. While you learn, raise the bar on sturdy blocks or use light training plates so that you can reach it without rounding your back.",
+        "zh": "在平整地面上用装好卡扣的杠铃。学的时候，把杠放在稳固的垫块上，或者用轻的技术杠片，让你不弓背也能够到杠。"
       },
       "steps": [
         {
-          "en": "Stand with feet about hip width and the bar over the middle of the feet. Hinge at the hips, then bend the knees enough to reach an overhand grip just outside the legs.",
-          "zh": "双脚约与髋同宽，杠在脚的中部上方。先屈髋向后坐，再屈膝到能正握杠铃，握距略宽于双腿。"
+          "en": "Stand with your feet about hip-width apart and the bar over the middle of your feet. Push your hips back, then bend your knees until you can grip the bar overhand, just outside your legs.",
+          "zh": "双脚约与髋同宽，杠铃在脚掌中部正上方。臀部向后推，再屈膝，直到能正握杠铃，握距略宽于双腿。"
         },
         {
-          "en": "Bring the shins close to the bar and keep the arms long. Find a comfortable neutral spinal shape, with the head following the trunk and the abdomen braced.",
-          "zh": "小腿靠近杠，手臂伸长。找到舒服的脊柱中立形态，头跟随躯干，腹部收紧。"
+          "en": "Bring your shins to the bar and keep your arms straight. Set your back in its natural, neutral shape, head in line with it, stomach braced.",
+          "zh": "小腿贴近杠铃，手臂伸直。背部摆成自然的中立位，头和背在一条线上，腹部收紧。"
         },
         {
-          "en": "Take the slack out of the bar gently before lifting. Keep it close to the legs; the lats help hold its position while the spinal erectors resist bending.",
-          "zh": "起拉前轻轻收紧身体与杠之间的松弛。杠靠近双腿；背阔肌帮助稳住杠的位置，竖脊肌抵抗脊柱前屈。"
+          "en": "Gently take up the slack before the bar leaves the floor. The latissimus dorsi keeps the bar close; the erector spinae hold the spine still, working hard without changing length.",
+          "zh": "杠离地之前，先轻轻把身体和杠之间的松动拉紧。背阔肌让杠贴近身体；竖脊肌稳住脊柱，用力但长度基本不变（等长收缩）。"
         },
         {
-          "en": "Push through the floor and extend the knees and hips together, letting the bar rise close to the shins and thighs. Keep the back shape steady rather than rounding and straightening it.",
-          "zh": "向地面施力，髋和膝一起伸展，杠沿小腿、大腿附近上升。脊柱形态保持稳定，不反复弓起再挺直。"
+          "en": "Push the floor away and straighten your hips and knees together, sliding the bar up close to your shins and thighs. The buttocks and thighs do the lifting; your back keeps the same shape.",
+          "zh": "脚向下蹬地，髋和膝一起伸直，杠贴着小腿、大腿往上走。发力的是臀部和大腿，背的形状保持不变。"
         },
         {
-          "en": "Finish standing tall with the hips and knees extended, arms long and shoulders relaxed. Do not lean backwards or shrug to add height.",
-          "zh": "站直，髋和膝伸展，手臂伸长，肩膀自然放稳；不后仰、不耸肩增加高度。"
+          "en": "Finish standing tall with your hips and knees straight and your shoulders relaxed. Do not lean back or shrug.",
+          "zh": "最后站直，髋、膝伸直，肩膀放松。不要后仰，也不要耸肩。"
         },
         {
-          "en": "Send the hips back and lower the bar close to the thighs, bending the knees further once the bar passes them. Rest it on the floor, breathe and reset before lifting again.",
-          "zh": "髋向后移，让杠贴近大腿下降；杠经过膝盖后再进一步屈膝。杠落地，呼吸、重新站稳后再起拉。"
+          "en": "Push your hips back and lower the bar close to your thighs, bending your knees once it passes them. Set it on the floor and reset before the next lift.",
+          "zh": "臀部向后推，杠贴着大腿往下放，过了膝盖再屈膝。杠放回地面，重新摆好姿势再拉下一次。"
         }
       ],
       "cues": [
         {
-          "en": "Keep the bar close and move at the hips and knees.",
-          "zh": "杠靠近身体，髋和膝产生运动。"
+          "en": "Keep the bar close; move at the hips and knees.",
+          "zh": "杠贴近身体，动的是髋和膝。"
         },
         {
-          "en": "Hold the spinal shape while the trunk changes its angle.",
-          "zh": "躯干倾角变化时，脊柱形态保持稳定。"
+          "en": "Your body's angle changes, but your back keeps its shape.",
+          "zh": "身体的倾斜角度在变，背的形状不变。"
         },
         {
           "en": "Stand tall at the top; do not lean back.",
-          "zh": "顶端站直即可，不后仰。"
+          "zh": "顶端站直就好，不后仰。"
         }
       ],
       "mistakes": [
         {
-          "en": "Jerking the bar from the floor. Why: a sudden pull removes the controlled setup and makes it harder to keep the bar close.",
-          "zh": "猛地把杠从地面拽起。为什么：突然发力破坏了稳定的准备位置，杠也更难靠近身体。"
+          "en": "Jerking the bar off the floor. Why: the sudden pull throws away your set position, and the bar drifts away from your legs.",
+          "zh": "猛地把杠从地上拽起来。为什么：突然发力打乱了准备好的姿势，杠也容易离开双腿。"
         },
         {
-          "en": "Rounding and then extending the spine to finish. Why: the motion shifts from hip and knee extension to spinal movement under load.",
-          "zh": "先弓背、再挺背完成起拉。为什么：运动从髋、膝伸展转移成负重下的脊柱运动。"
+          "en": "Rounding the back and then straightening it to finish. Why: the spine bends and straightens under the load instead of staying still while the hips and knees do the work.",
+          "zh": "先弓背、再挺背把杠拉起来。为什么：本该由髋和膝完成的动作，变成了脊柱在负重下屈伸。"
         }
       ],
       "dose": [
         {
           "text": {
-            "en": "Choose a load or assistance level that lets you control the whole movement, and progress gradually when the same technique feels easy.",
-            "zh": "选择能控制整个动作的重量或辅助程度；同样的动作变得轻松后，再逐步加难。"
+            "en": "Learn the movement with a light bar first; add weight in small steps only when every repetition looks the same.",
+            "zh": "先用轻杠学会动作；每一次都做得一模一样了，再小步加重。"
           },
           "s": [
             "M23",
@@ -1981,31 +1989,31 @@
         },
         {
           "text": {
-            "en": "Rest until you can repeat the movement smoothly, and end the effort when control begins to fade.",
-            "zh": "休息到能重新平稳完成动作；控制开始变差时，就结束这一轮。"
+            "en": "Light and heavy loads both build muscle when the sets are hard; heavier loads build more maximal strength.",
+            "zh": "只要每组都练得够吃力，轻重量和大重量都能增肌；大重量更能提高最大力量。"
           },
           "s": [
-            "M24",
-            "M25"
+            "M20"
+          ]
+        },
+        {
+          "text": {
+            "en": "Sets do not have to go to failure; end a set when your back starts to lose its shape.",
+            "zh": "每组不必做到力竭；背部开始保持不住形状，就结束这一组。"
+          },
+          "s": [
+            "M24"
           ]
         }
       ],
       "cautions": [
         {
-          "en": "The hip hinge is shown in the two-panel drawing; this model shows the back muscles holding the spine steady.",
-          "zh": "髋折叠见两格示意图；本模型用于观察背肌稳住脊柱的工作。"
+          "en": "If you cannot reach the bar on the floor without your back rounding, raise it on blocks and use a lighter weight.",
+          "zh": "杠在地上时不弓背就够不到，就用垫块把杠垫高，并减轻重量。"
         },
         {
-          "en": "If you cannot reach the floor while controlling the spinal position, raise the bar on suitable blocks and learn with lighter loading.",
-          "zh": "控制好脊柱时够不到地面，就用合适的垫块抬高杠，从更轻的负重开始学。"
-        },
-        {
-          "en": "Stop for sharp back pain, tingling, unusual weakness or pain spreading into a leg.",
-          "zh": "下背刺痛、麻感、异常无力或疼痛向腿部放射时停止。"
-        },
-        {
-          "en": "First learn with bodyweight, assistance or a light load under a qualified coach; anyone under 18 should practise under adult supervision.",
-          "zh": "第一次做先用自重、辅助或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+          "en": "Stop at sharp back pain, tingling, unusual weakness or pain spreading into a leg.",
+          "zh": "下背刺痛、发麻、异常无力，或疼痛向腿部放射，立刻停下。"
         },
         {
           "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
@@ -2020,7 +2028,8 @@
         "M24",
         "M25",
         "M55",
-        "M59"
+        "M59",
+        "M49"
       ]
     },
     {
@@ -2049,89 +2058,79 @@
         "external-oblique"
       ],
       "setup": {
-        "en": "Use a stable back-extension station with a sloping support around 45°. Set the upper edge of the pad just below the hip crease so the hips can hinge; secure the ankles as designed. Hip extensors, including gluteus maximus and the hamstrings, supply movement; spinal erectors mainly brace. The muscle chips show the muscles included in this back view.",
-        "zh": "用稳固的背伸展凳，支撑面约倾斜 45°。垫子上缘调到髋折痕稍下方，让髋能折叠；按器械设计固定脚踝。 臀大肌和腘绳肌等伸髋肌产生运动，竖脊肌主要稳定；肌肉标签只列出背部视图所收录的肌肉。"
+        "en": "Use a stable back-extension bench with a support sloping at about 45°. Set the top edge of the pad just below the crease of your hips so you can bend at the hips, and fix your ankles under the foot pads.",
+        "zh": "用稳固的背伸展凳（山羊挺身凳），支撑面约倾斜 45°。把垫子上缘调到髋部折痕稍下方，让髋能弯下去；脚踝固定在脚垫下。"
       },
       "steps": [
         {
-          "en": "Step into the support carefully, feet secure and knees softly extended. Cross the hands over the chest or keep them close to the body.",
-          "zh": "小心进入支撑位置，脚固定好，膝接近伸直但不硬顶；双手交叉放胸前或靠近身体。"
+          "en": "Step onto the bench carefully with your ankles secure and your knees almost straight. Cross your arms over your chest.",
+          "zh": "小心站上凳子，脚踝固定好，膝盖接近伸直。双臂交叉放在胸前。"
         },
         {
-          "en": "Start with the head, trunk and legs in a comfortable line along the sloping support. Gently brace the abdomen and keep the back’s natural shape.",
-          "zh": "从头、躯干与双腿沿斜面成自然直线的位置开始；腹部轻轻收紧，脊柱保持自然形态。"
+          "en": "Start with your head, body and legs in one straight line along the slope. Tighten your stomach a little and keep your back in its natural shape.",
+          "zh": "从头、身体到腿沿着斜面成一条直线开始。腹部稍收紧，背部保持自然形状。"
         },
         {
-          "en": "Breathe in and send the hips back over the pad, folding at the hip crease until the torso slopes down in a range you can control. Keep the spine steady.",
-          "zh": "吸气，在垫子上屈髋，沿髋折痕向前折叠，躯干下降到能控制的幅度；脊柱保持稳定。"
+          "en": "Breathe in and bend forward at the hips over the pad, lowering your upper body as far as you can control. Your back keeps its shape.",
+          "zh": "吸气，以髋为轴在垫子上向前弯，上身下降到你还能控制的位置。背的形状不变。"
         },
         {
-          "en": "Breathe out and press the hips into the support as you extend them, raising the torso back into line with the legs. The buttocks and thighs move you while the back columns brace.",
-          "zh": "呼气，髋部贴着支撑伸展，让躯干回到与腿成一线的位置。臀部和大腿推动运动，背部肌柱负责稳定。"
+          "en": "Breathe out and press your hips into the pad as you straighten them, raising your upper body back into line with your legs. The buttocks and the backs of the thighs lift you; the erector spinae hold the spine steady.",
+          "zh": "呼气，髋部顶住垫子伸直，把上身抬回到和腿成一条线。抬起你的是臀部和大腿后侧，竖脊肌负责稳住脊柱。"
         },
         {
-          "en": "Stop at that line without lifting the chest further or throwing the head back. Lower smoothly for the next movement, then use the hand supports to step out.",
-          "zh": "回到一线就停，不继续挺胸、不甩头后仰；下一次平稳下放，结束后借扶手小心离开。"
+          "en": "Stop at that line; do not lift your chest higher or throw your head back. When you finish, hold the handles and step off carefully.",
+          "zh": "到一条线就停，不要再挺胸，也不要甩头后仰。做完后扶着把手小心下来。"
         }
       ],
       "cues": [
         {
-          "en": "Fold at the hips rather than curling the spine.",
-          "zh": "在髋部折叠，不卷曲脊柱。"
+          "en": "Bend at the hips, not by curling the spine.",
+          "zh": "从髋部弯，不是卷脊柱。"
         },
         {
-          "en": "Rise only to the line of the legs.",
-          "zh": "只起到与双腿成一线。"
+          "en": "Rise only until you are in line with your legs.",
+          "zh": "只起到和腿成一条线。"
         }
       ],
       "mistakes": [
         {
-          "en": "Throwing the torso upward beyond the leg line. Why: it adds spinal extension instead of the intended hip movement.",
-          "zh": "猛甩躯干，起到超过双腿延长线。为什么：这增加的是脊柱后伸，不是预期的伸髋。"
+          "en": "Swinging up past the line of the legs. Why: the extra height comes from arching the back, not from the hips.",
+          "zh": "猛地甩起，超过和腿成一线的位置。为什么：多出来的高度来自弓腰，不是来自伸髋。"
         },
         {
-          "en": "Setting the pad over the abdomen. Why: it blocks the hip crease and encourages movement to come from the spine.",
-          "zh": "垫子上缘压在腹部。为什么：它挡住髋折痕，容易让动作改由脊柱完成。"
+          "en": "Setting the pad over the stomach. Why: the hips cannot bend, so the spine has to do the movement.",
+          "zh": "垫子顶在肚子上。为什么：髋弯不下去，动作只能靠脊柱来完成。"
         }
       ],
       "dose": [
         {
           "text": {
-            "en": "Choose a load or assistance level that lets you control the whole movement, and progress gradually when the same technique feels easy.",
-            "zh": "选择能控制整个动作的重量或辅助程度；同样的动作变得轻松后，再逐步加难。"
+            "en": "Learn it with body weight only; make it harder in small steps once every repetition looks the same.",
+            "zh": "先只用自重学会；每一次都做得一样了，再小步加难。"
           },
           "s": [
-            "M23",
-            "M24"
+            "M23"
           ]
         },
         {
           "text": {
-            "en": "Rest until you can repeat the movement smoothly, and end the effort when control begins to fade.",
-            "zh": "休息到能重新平稳完成动作；控制开始变差时，就结束这一轮。"
+            "en": "Sets do not have to go to failure; end a set when the movement starts to change.",
+            "zh": "每组不必做到力竭；动作开始变形，就结束这一组。"
           },
           "s": [
-            "M24",
-            "M25"
+            "M24"
           ]
         }
       ],
       "cautions": [
         {
-          "en": "The hip hinge is shown in the two-panel drawing; this model shows the back muscles holding the spine steady.",
-          "zh": "髋折叠见两格示意图；本模型用于观察背肌稳住脊柱的工作。"
+          "en": "Check that the bench and ankle pads fit your body size before you start.",
+          "zh": "开始前确认凳子和脚垫适合你的身材。"
         },
         {
-          "en": "Learn without added load and check that the station and ankle supports suit your body size.",
-          "zh": "先不加负重，确认凳子和脚踝固定装置适合你的体型。"
-        },
-        {
-          "en": "Stop if the pad causes abdominal discomfort or the movement brings sharp back pain.",
-          "zh": "垫子压得腹部不适，或动作引起下背刺痛时停止。"
-        },
-        {
-          "en": "First learn with bodyweight, assistance or a light load under a qualified coach; anyone under 18 should practise under adult supervision.",
-          "zh": "第一次做先用自重、辅助或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+          "en": "Stop if the pad presses uncomfortably on your stomach or you feel sharp back pain.",
+          "zh": "垫子压得肚子不舒服，或下背刺痛，就停下。"
         },
         {
           "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
@@ -2146,7 +2145,8 @@
         "M24",
         "M25",
         "M61",
-        "M59"
+        "M59",
+        "M49"
       ]
     },
     {
@@ -2171,85 +2171,75 @@
         "rhomboid-minor"
       ],
       "setup": {
-        "en": "Lie on the right side on a firm mat and support the head comfortably. Use a very light dumbbell in the left hand; the drawing shows the left arm working, then reverse the sides.",
-        "zh": "在结实垫面上向右侧卧，头部垫到舒服高度；左手用很轻的哑铃。图中练左臂，随后换边。"
+        "en": "Lie on your right side on a firm mat with your head supported. Use a very light dumbbell in your left hand. The drawing shows the left arm working; swap sides afterwards.",
+        "zh": "在结实的垫子上向右侧躺，头下垫好。左手拿一只很轻的哑铃。图中是左臂在练，练完换边。"
       },
       "steps": [
         {
-          "en": "Stack the shoulders and hips rather than rolling backwards. Bend the knees slightly for balance and let the right arm rest comfortably.",
-          "zh": "两肩、两髋上下叠放，不向后滚；膝盖略屈帮助稳定，右臂自然放好。"
+          "en": "Stack your shoulders and hips on top of each other; do not roll backwards. Bend your knees a little for balance.",
+          "zh": "两肩、两髋上下对齐，不要往后倒。膝盖稍屈，帮助稳住身体。"
         },
         {
-          "en": "Keep the left upper arm beside the ribs, with a small towel under it if comfortable. Bend the elbow to a right angle and rest the forearm across the front of the abdomen.",
-          "zh": "左上臂靠近肋骨，舒服时可在腋下垫小毛巾；肘屈成直角，前臂横放在腹部前方。"
+          "en": "Keep your left upper arm against your side, with a small rolled towel between arm and ribs if that is comfortable. Bend the elbow to a right angle so the forearm rests across your stomach.",
+          "zh": "左上臂贴着身体侧面，觉得舒服可以在上臂和肋骨之间夹一条卷起的小毛巾。屈肘成直角，前臂横放在腹前。"
         },
         {
-          "en": "Breathe out and rotate the left upper arm outward, lifting the dumbbell in an arc towards the ceiling. The elbow stays beside the body and the wrist stays straight.",
-          "zh": "呼气，左上臂向外旋，哑铃沿弧线朝天花板方向抬起；手肘留在身体旁，手腕平直。"
+          "en": "Breathe out and turn your upper arm outward, lifting the dumbbell in an arc towards the ceiling. Your elbow stays at your side and your wrist stays straight.",
+          "zh": "呼气，上臂向外旋，哑铃沿弧线朝天花板抬起。手肘贴在身侧不动，手腕平直。"
         },
         {
-          "en": "Stop before the elbow lifts away or the torso rolls back. Use a comfortable range rather than trying to reach the farthest possible rotation.",
-          "zh": "手肘要离开身体、或躯干要向后滚之前就停；用舒服的幅度，不追求最大外旋。"
+          "en": "Stop before the elbow lifts off or your body starts to roll back. A comfortable range is enough.",
+          "zh": "在手肘离开身体、或身体开始往后倒之前就停。做到舒服的幅度就够了。"
         },
         {
-          "en": "Breathe in and lower slowly along the same arc towards the abdomen. Set the dumbbell down under control before rolling over to change sides.",
-          "zh": "吸气，沿同一条弧线慢慢放回腹部前方；先有控制地放好哑铃，再翻身换边。"
+          "en": "Breathe in and lower slowly along the same arc. Put the dumbbell down before you roll over to change sides.",
+          "zh": "吸气，沿同一条弧线慢慢放下。先放下哑铃，再翻身换边。"
         }
       ],
       "cues": [
         {
-          "en": "Turn the upper arm while the elbow stays in place.",
-          "zh": "上臂旋转，手肘位置不变。"
+          "en": "Turn the upper arm like a door on its hinge; the elbow stays put.",
+          "zh": "上臂像门绕着门轴转，手肘不离原位。"
         },
         {
-          "en": "Keep the shoulders stacked and the wrist straight.",
-          "zh": "两肩上下叠放，手腕平直。"
+          "en": "You should feel it on the back of the shoulder blade, where the infraspinatus and teres minor lie.",
+          "zh": "用力感应该在肩胛骨背面，冈下肌和小圆肌的位置。"
         }
       ],
       "mistakes": [
         {
-          "en": "Rolling the chest towards the ceiling. Why: the whole body carries the dumbbell instead of the shoulder rotating it.",
-          "zh": "胸口转向天花板。为什么：整个身体把哑铃带起来，代替了肩关节外旋。"
+          "en": "Rolling the chest towards the ceiling. Why: the whole body lifts the dumbbell instead of the shoulder rotating it.",
+          "zh": "胸口转向天花板。为什么：哑铃是被整个身体带起来的，不是靠肩关节外旋。"
         },
         {
-          "en": "Lifting the elbow away from the side. Why: the action becomes arm elevation and changes which muscles move the load.",
-          "zh": "手肘抬离身体。为什么：动作变成举臂，带动重量的肌肉也发生变化。"
+          "en": "Lifting the elbow away from your side. Why: the movement becomes an arm raise, and different muscles take the load.",
+          "zh": "手肘抬离身体。为什么：动作变成了举臂，承担重量的肌肉也换了。"
         }
       ],
       "dose": [
         {
           "text": {
-            "en": "Choose a load or assistance level that lets you control the whole movement, and progress gradually when the same technique feels easy.",
-            "zh": "选择能控制整个动作的重量或辅助程度；同样的动作变得轻松后，再逐步加难。"
+            "en": "Start with a very light dumbbell or none; add weight in small steps only when the elbow stays at your side throughout.",
+            "zh": "从很轻的哑铃或空手开始；手肘能全程贴住身体了，再小步加重。"
           },
           "s": [
-            "M23",
-            "M24"
+            "M23"
           ]
         },
         {
           "text": {
-            "en": "Rest until you can repeat the movement smoothly, and end the effort when control begins to fade.",
-            "zh": "休息到能重新平稳完成动作；控制开始变差时，就结束这一轮。"
+            "en": "Sets do not have to go to failure; end a set when the movement starts to change.",
+            "zh": "每组不必做到力竭；动作开始变形，就结束这一组。"
           },
           "s": [
-            "M24",
-            "M25"
+            "M24"
           ]
         }
       ],
       "cautions": [
         {
-          "en": "The 3D view traces the shoulder and elbow paths with a shortened range; use the two-panel drawing for the full body position and apparatus.",
-          "zh": "三维视图以缩小幅度描出肩、肘的运动；完整体位和器械请看两格示意图。"
-        },
-        {
-          "en": "Use a smaller range or no weight if the shoulder pinches; this card is not a rehabilitation prescription.",
-          "zh": "肩部有夹痛时减小幅度或不加重量；本卡不是康复处方。"
-        },
-        {
-          "en": "First learn with bodyweight, assistance or a light load under a qualified coach; anyone under 18 should practise under adult supervision.",
-          "zh": "第一次做先用自重、辅助或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+          "en": "Use a smaller range or no weight if the shoulder feels pinched. This card is not a rehabilitation plan.",
+          "zh": "肩膀有夹痛感，就减小幅度或不拿哑铃。本卡片不是康复方案。"
         },
         {
           "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
@@ -2366,13 +2356,14 @@
         "M25",
         "M53",
         "M9",
-        "M60"
+        "M60",
+        "M48"
       ],
       "evidence": [
         {
           "text": {
-            "en": "Reinold et al. (2004) used intramuscular EMG in 10 healthy participants performing shoulder exercises. Side-lying external rotation produced the highest infraspinatus and teres-minor activity among the tested exercises. This small study did not measure long-term strength or growth.",
-            "zh": "Reinold 等（2004）用肌内电极记录了 10 名健康受试者做肩部动作时的肌电。在受测动作中，侧卧外旋的冈下肌和小圆肌活动最高。这项小研究没有测量长期力量或肌肉增长。"
+            "en": "Research shows: with electrodes placed inside the muscles of 10 healthy people, side-lying external rotation gave the highest infraspinatus (62 %) and teres minor (67 %) EMG of the seven external-rotation exercises tested, as a share of a maximal isometric contraction. The study measured muscle activity, not strength or growth over time.",
+            "zh": "研究显示：在 10 名健康受试者的肌肉内放置电极记录，测试的 7 个外旋动作里，侧卧外旋的冈下肌（62 %）和小圆肌（67 %）肌电最高（以最大等长收缩的百分比计）。这项研究测的是肌肉活动，不是一段时间后的力量或肌肉增长。"
           },
           "s": [
             "M53",

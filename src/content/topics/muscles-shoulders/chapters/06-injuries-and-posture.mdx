@@ -13,13 +13,55 @@ state:
   cutaway: none
   pose: neutral-stand
   layers:
-    - superficial
-    - intermediate
-    - deep
-    - skeleton
-    - neighbours
-    - body
+  - superficial
+  - intermediate
+  - deep
+  - skeleton
+  - neighbours
+  - body
   ghost:
+  - deltoid-anterior
+  - deltoid-lateral
+  - deltoid-posterior
+  - trapezius-descending
+  - pectoralis-major-clavicular
+  - serratus-anterior
+  - biceps-brachii-long
+  - latissimus-dorsi
+  - pectoralis-major-sternocostal
+  - rhomboid-major
+  - trapezius-transverse
+  - triceps-brachii
+  - skin-outline
+  sites:
+  - supraspinatus
+  labels:
+  - supraspinatus
+  - humerus
+  - scapula
+  camera:
+    position:
+    - 0.62
+    - 0.3
+    - 1.3
+    target:
+    - 0.16
+    - 0.12
+    - -0.04
+    fov: 28
+  summary:
+    en: Shoulder pain has several possible causes. Posture and a model cannot diagnose it.
+    zh: 肩痛有多种可能原因；姿势和模型都不能用来诊断。
+  beats:
+  - camera: close-shoulder
+    labels:
+    - supraspinatus
+    - scapula
+    caption:
+      en: The supraspinatus tendon runs below the acromion. It is commonly involved in cuff tears, but pain around this area
+        alone does not tell you which tissue is responsible.
+      zh: 冈上肌腱从肩峰下经过，肩袖撕裂常涉及它。但只凭这里疼，不能确定是哪种组织出了问题。
+    ghost:
     - deltoid-anterior
     - deltoid-lateral
     - deltoid-posterior
@@ -33,142 +75,104 @@ state:
     - trapezius-transverse
     - triceps-brachii
     - skin-outline
-  sites:
-    - supraspinatus
-  labels:
-    - supraspinatus
+  - camera: back
+    sites:
+    - infraspinatus
+    - teres-minor
+    labels:
+    - infraspinatus
+    - teres-minor
     - humerus
+    caption:
+      en: A cuff tear may follow a fall or sudden force, or develop gradually with tendon wear. Some tears cause weakness
+        or pain; others have few or no symptoms.
+      zh: 肩袖撕裂可能发生在跌倒或突然用力之后，也可能随着肌腱磨损慢慢出现。有的会无力或疼痛，有的几乎没有症状。
+    ghost:
+    - deltoid-anterior
+    - deltoid-lateral
+    - deltoid-posterior
+    - trapezius-descending
+    - pectoralis-major-clavicular
+    - serratus-anterior
+    - biceps-brachii-long
+    - latissimus-dorsi
+    - pectoralis-major-sternocostal
+    - rhomboid-major
+    - trapezius-transverse
+    - triceps-brachii
+    - skin-outline
+  - camera: left-side
+    pose: reach
+    sites: []
+    labels:
     - scapula
-  camera:
-    position:
-      - 0.62
-      - 0.3
-      - 1.3
-    target:
-      - 0.16
-      - 0.12
-      - -0.04
-    fov: 28
-  summary:
-    en: Shoulder pain has several possible causes. Posture and a model cannot diagnose it.
-    zh: 肩痛有多种可能原因；姿势和模型都不能用来诊断。
-  beats:
-    - camera: close-shoulder
-      labels:
-        - supraspinatus
-        - humerus
-        - scapula
-      caption:
-        en: The supraspinatus tendon runs below the acromion. It is commonly involved in cuff tears, but pain around this area alone does not tell you which tissue is responsible.
-        zh: 冈上肌腱从肩峰下经过，肩袖撕裂常涉及它。但只凭这里疼，不能确定是哪种组织出了问题。
-      ghost:
-        - deltoid-anterior
-        - deltoid-lateral
-        - deltoid-posterior
-        - trapezius-descending
-        - pectoralis-major-clavicular
-        - serratus-anterior
-        - biceps-brachii-long
-        - latissimus-dorsi
-        - pectoralis-major-sternocostal
-        - rhomboid-major
-        - trapezius-transverse
-        - triceps-brachii
-        - skin-outline
-    - camera: back
-      sites:
-        - infraspinatus
-        - teres-minor
-      labels:
-        - infraspinatus
-        - teres-minor
-        - humerus
-      caption:
-        en: A cuff tear may follow a fall or sudden force, or develop gradually with tendon wear. Some tears cause weakness or pain; others have few or no symptoms.
-        zh: 肩袖撕裂可能来自跌倒或突发拉力，也可能随肌腱退变逐渐出现。有的引起无力或疼痛，有的症状很少或没有。
-      ghost:
-        - deltoid-anterior
-        - deltoid-lateral
-        - deltoid-posterior
-        - trapezius-descending
-        - pectoralis-major-clavicular
-        - serratus-anterior
-        - biceps-brachii-long
-        - latissimus-dorsi
-        - pectoralis-major-sternocostal
-        - rhomboid-major
-        - trapezius-transverse
-        - triceps-brachii
-        - skin-outline
-    - camera: left-side
-      pose: reach
-      sites: []
-      labels:
-        - scapula
-        - thorax
-        - serratus-anterior
-        - trapezius-descending
-      caption:
-        en: Posture changes how the shoulder can move, but a slouched appearance is not a diagnosis. A review did not find a clear difference in thoracic curvature between people with and without shoulder pain.
-        zh: 姿势会改变肩的活动方式，但含胸外观不是诊断。综述没有发现有肩痛和无肩痛的人之间胸椎弯曲程度存在明确差别。
-      ghost:
-        - deltoid-anterior
-        - deltoid-lateral
-        - deltoid-posterior
-        - pectoralis-major-clavicular
-        - biceps-brachii-long
-        - latissimus-dorsi
-        - pectoralis-major-sternocostal
-        - rhomboid-major
-        - trapezius-transverse
-        - triceps-brachii
-        - skin-outline
-    - pose: elbow-bent
-      camera: front
-      sites: []
-      labels:
-        - deltoid-anterior
-        - deltoid-lateral
-        - subscapularis
-      caption:
-        en: Control the load and lowering phase rather than forcing a painful range. Training principles for healthy people do not replace an assessment or an individual rehabilitation plan.
-        zh: 控制负荷和下放，不要硬挤疼痛的幅度。健康人的训练原则，不能替代评估或个人康复计划。
-      ghost:
-        - deltoid-posterior
-        - trapezius-descending
-        - pectoralis-major-clavicular
-        - serratus-anterior
-        - biceps-brachii-long
-        - latissimus-dorsi
-        - pectoralis-major-sternocostal
-        - rhomboid-major
-        - trapezius-transverse
-        - triceps-brachii
-        - skin-outline
-    - pose: neutral-stand
-      camera: on-my-body
-      view: xray
-      ghost: []
-      sites: []
-      labels:
-        - group:superficial
-        - group:deep
-      caption:
-        en: General information, not medical advice. Pain, an injury or new weakness deserves a doctor's or physiotherapist's assessment; the cards do not diagnose or prescribe treatment.
-        zh: 本页是一般性知识，不是医疗建议。有疼痛、受伤或新出现的无力，请咨询医生或物理治疗师；动作卡不做诊断或治疗处方。
+    - thorax
+    - serratus-anterior
+    - trapezius-descending
+    caption:
+      en: Posture changes how the shoulder can move, but a slouched appearance is not a diagnosis. A review did not find a
+        clear difference in thoracic curvature between people with and without shoulder pain.
+      zh: 姿势会改变肩的活动方式，但含胸外观不是诊断。综述没有发现有肩痛和无肩痛的人之间胸椎弯曲程度存在明确差别。
+    ghost:
+    - deltoid-anterior
+    - deltoid-lateral
+    - deltoid-posterior
+    - pectoralis-major-clavicular
+    - biceps-brachii-long
+    - latissimus-dorsi
+    - pectoralis-major-sternocostal
+    - rhomboid-major
+    - trapezius-transverse
+    - triceps-brachii
+    - skin-outline
+  - pose: elbow-bent
+    camera: front
+    sites: []
+    labels:
+    - deltoid-anterior
+    - deltoid-lateral
+    - subscapularis
+    caption:
+      en: Control the load and lowering phase rather than forcing a painful range. Training principles for healthy people
+        do not replace an assessment or an individual rehabilitation plan.
+      zh: 控制好重量和下放的过程，不要硬往会疼的角度上压。健康人的训练原则，代替不了专业评估或个人康复计划。
+    ghost:
+    - deltoid-posterior
+    - trapezius-descending
+    - pectoralis-major-clavicular
+    - serratus-anterior
+    - biceps-brachii-long
+    - latissimus-dorsi
+    - pectoralis-major-sternocostal
+    - rhomboid-major
+    - trapezius-transverse
+    - triceps-brachii
+    - skin-outline
+  - pose: neutral-stand
+    camera: on-my-body
+    view: xray
+    ghost: []
+    sites: []
+    labels:
+    - group:superficial
+    - group:deep
+    caption:
+      en: General information, not medical advice. Pain, an injury or new weakness deserves a doctor's or physiotherapist's
+        assessment; the cards do not diagnose or prescribe treatment.
+      zh: 本页是一般性知识，不是医疗建议。有疼痛、受伤或新出现的无力，请咨询医生或物理治疗师；动作卡不做诊断或治疗处方。
   index:
     parts:
-      - supraspinatus
-      - infraspinatus
-      - teres-minor
-      - subscapularis
-      - deltoid-anterior
-      - deltoid-lateral
-      - scapula
-      - humerus
-      - thorax
-      - serratus-anterior
-      - trapezius-descending
+    - supraspinatus
+    - infraspinatus
+    - teres-minor
+    - subscapularis
+    - deltoid-anterior
+    - deltoid-lateral
+    - scapula
+    - humerus
+    - thorax
+    - serratus-anterior
+    - trapezius-descending
 ---
 
 <Lang en>
@@ -205,7 +209,7 @@ The review's arm-range experiments measured immediate effects of changing postur
 
 看体态也要谨慎。一篇综述纳入<Num s="M84">十项</Num>胸椎姿势与肩部症状研究，中等强度证据显示：有肩痛和无肩痛的人，胸椎弯曲程度没有显著差别。短时实验里坐直能增加最大抬臂范围，但长期临床意义尚不明确 [M84]。含胸或肩向前，不是诊断，也不能证明某块肌肉无力。
 
-健康训练中，要学会控制动作，使用可掌握的负荷，再逐渐进阶 [M23] [M25]。下放时正在用力的肌肉可以变长，这叫<Term id="eccentric-phase">离心阶段</Term>，也需要控制。遇到刺痛应停下，不要硬挤幅度。
+健康训练中，要学会控制动作，使用可掌握的负荷，再逐渐进阶 [M23] [M25]。下放时正在用力的肌肉可以变长，这叫<Term id="eccentric-phase">离心阶段</Term>，也需要控制。出现刺痛就停下，不要硬往下做。
 
 **本页是一般性知识，不是医疗建议；疼痛或受伤请咨询医生或物理治疗师。**动作卡说明技术，康复计划则需要个人评估 [M83]。
 

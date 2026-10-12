@@ -59,11 +59,23 @@ state:
       - multifidus-lumborum
     labels:
     - erector-spinae-lumbar
-    - multifidus-lumborum
     caption:
-      en: The stable hinge reference highlights spinal support. A demanding load and fatigue change the task; the model
-        does not test a person’s capacity.
-      zh: 稳定的髋铰链参照高亮脊柱支撑；较大负荷和疲劳会改变任务，模型不能测试个人承受能力。
+      en: In this schematic hip hinge the trunk tips forward over the hips and the spinal muscles are highlighted for
+        holding the back's shape. Load and fatigue change the task; the model does not test anyone's capacity.
+      zh: 在这个示意性的髋铰链里，躯干在髋上方前倾，高亮的脊柱肌负责维持背部形状。负荷和疲劳会改变任务；模型不能测试个人承受能力。
+    camera:
+      position:
+      - 1.5
+      - 0.25
+      - -1.25
+      target:
+      - 0
+      - -0.03
+      - 0
+      fov: 30
+    ghost:
+    - neighbours
+    - body
   - camera: front
     sites:
     - rectus-abdominis
@@ -79,6 +91,7 @@ state:
     - intermediate
     - neighbours
     - body
+    - transversus-abdominis
     sites:
     - psoas-major
     labels:
@@ -86,8 +99,8 @@ state:
     - lumbar-spine
     - pelvis
     caption:
-      en: The pelvis and lumbar spine are attachment landmarks. Their appearance in one pose cannot prove that psoas
-        is short or that a posture causes pain.
+      en: The pelvis and lumbar spine are attachment landmarks. Their appearance in one pose cannot prove that psoas is
+        short or that a posture causes pain.
       zh: 骨盆和腰椎是附着地标；一次姿态的外观不能证明腰大肌短，也不能证明某种姿势引起疼痛。
   - pose: neutral-stand
     sites: []
@@ -143,9 +156,9 @@ WHO discusses rehabilitation as a way to support return to valued activities. Th
 
 <Term id="non-specific-pain">原因未能明确的疼痛</Term>不代表痛是想象出来的，只说明位置和外观不足以解释。负重动作突然引起疼痛，不应当作继续加力的信号。先停下疼痛任务并寻求评估，不要在模型点一块肌肉，就称它拉伤；本图不能作损伤诊断。
 
-体态也要结合情况。照片里弯曲的背或倾斜的骨盆，不能测出肌肉长度、力量或疼痛贡献。综述的综述未发现脊柱姿势、身体负荷与腰痛因果关系的共识 [M58]。这不说明所有负荷和久坐位置同样舒适，只是不能把单次姿态当成诊断。
+体态也要结合情况。照片里弯曲的背或倾斜的骨盆，不能测出肌肉长度、力量或疼痛贡献。一篇系统综述的综述发现，脊柱姿势或身体负荷是否导致腰痛，目前没有共识 [M58]。这并不是说所有负荷和久坐姿势都一样舒适，只是不能把一次看到的姿态当成诊断。
 
-学习时采用可控制的重量、舒适幅度和较容易支撑，在疲劳改变任务前结束 [M23] [M25]。日常活动与恢复属于训练原则，持续症状需要个人评估。不要深按腹部或腹股沟测试髂腰肌，也不把单练深肌当成通用疗法。本页是一般性知识，不是医疗建议；疼痛或受伤请咨询医生或物理治疗师。
+学习时采用可控制的重量、舒适幅度和较容易支撑，在疲劳改变任务前结束 [M23] [M25]。活动与恢复都是一般训练的一部分；症状持续不退，需要个人评估。不要深按腹部或腹股沟测试髂腰肌，也不把单练深肌当成通用疗法。本页是一般性知识，不是医疗建议；疼痛或受伤请咨询医生或物理治疗师。
 
 <More title={{ en: "Appearance cannot identify the cause", zh: "外观不能确定原因" }}>
 
@@ -155,7 +168,7 @@ WHO discusses rehabilitation as a way to support return to valued activities. Th
 
 <More title={{ en: "What the evidence supports", zh: "证据支持到哪里" }}>
 
-WHO 把康复讨论为帮助人们回到重视的日常活动的一种支持，具体方法取决于个人和疼痛情况 [M57]。动作卡讲一般动作，不是康复处方，也不保证不会受伤。
+世界卫生组织把康复看作帮助人回到自己看重的日常活动的一种支持，具体方法取决于个人和疼痛情况 [M57]。动作卡讲一般动作，不是康复处方，也不保证不会受伤。
 
 </More>
 

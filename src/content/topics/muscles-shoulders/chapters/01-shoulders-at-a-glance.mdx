@@ -13,161 +13,166 @@ state:
   cutaway: none
   pose: neutral-stand
   layers:
-    - superficial
-    - intermediate
-    - deep
-    - skeleton
-    - neighbours
-    - body
+  - superficial
+  - intermediate
+  - deep
+  - skeleton
+  - neighbours
+  - body
   ghost:
-    - skin-outline
+  - skin-outline
   labels:
-    - deltoid-anterior
-    - deltoid-lateral
-    - clavicle
+  - deltoid-anterior
+  - deltoid-lateral
+  - clavicle
   camera:
     position:
-      - 0.57
-      - 0.19
-      - 1.39
+    - 0.57
+    - 0.19
+    - 1.39
     target:
-      - 0
-      - 0.06
-      - -0.04
+    - 0
+    - 0.06
+    - -0.04
     fov: 30
   summary:
     en: The deltoid moves the arm; the deeper cuff steadies its head in the shoulder socket.
     zh: 三角肌移动手臂；深处的肩袖把肱骨头稳在肩关节盂里。
   beats:
-    - camera: on-my-body
-      view: xray
-      ghost: []
-      highlight:
-        signal:
-          - superficial
-          - intermediate
-          - deep
-      labels:
-        - group:superficial
-      caption:
-        en: The shoulder muscles surround the top of the upper arm. The faint whole-body outline helps you find the region on yourself; left and right mean the body's own sides.
-        zh: 肩部肌肉包在上臂顶端周围。淡淡的全身轮廓帮你在自己身上找到这个区域；左右都指身体自己的两侧。
-    - camera: front
-      labels:
-        - group:superficial
-        - group:intermediate
-        - group:deep
-      caption:
-        en: "Three display layers: the deltoid on the surface, the back-of-scapula muscles underneath, and supraspinatus and subscapularis deeper inside. The layers help uncover the anatomy."
-        zh: 分三层显示：表面的三角肌、下面位于肩胛骨后方的肌肉，以及更深处的冈上肌和肩胛下肌。分层是为了逐步露出解剖结构。
-      ghost:
-        - skin-outline
-    - view: exploded
-      explode: 0.8
-      labels:
-        - group:superficial
-        - group:intermediate
-        - group:deep
-      caption:
-        en: PEEL lifts the surface layer away first, then the middle and deep layers. This separation is a teaching view; the muscles normally stay attached to their bones.
-        zh: 剥层先移开浅层，再是中层和深层。这是教学视图；真实肌肉始终附着在骨头上。
-      ghost:
-        - skin-outline
-    - layers:
-        - skeleton
-        - body
-      labels:
-        - clavicle
-        - scapula
-        - humerus
-        - thorax
-        - cervical-spine
-        - forearm
-      caption:
-        en: "The frame: clavicle, scapula and humerus, with the rib cage, neck vertebrae and forearm as context. The humeral head meets a shallow socket on the scapula."
-        zh: 骨架包括锁骨、肩胛骨和肱骨，胸廓、颈椎与前臂骨提供方位参照。肱骨头与肩胛骨上的浅关节盂相接。
-      ghost:
-        - skin-outline
-    - camera: back
-      ghost:
-        - deltoid-anterior
-        - deltoid-lateral
-        - deltoid-posterior
-        - trapezius-descending
-        - pectoralis-major-clavicular
-        - serratus-anterior
-        - biceps-brachii-long
-        - latissimus-dorsi
-        - pectoralis-major-sternocostal
-        - rhomboid-major
-        - trapezius-transverse
-        - triceps-brachii
-        - skin-outline
-      labels:
-        - supraspinatus
-        - infraspinatus
-        - teres-minor
-        - subscapularis
-      caption:
-        en: "The four cuff muscles: supraspinatus, infraspinatus, teres minor and subscapularis. Together they help hold the humeral head in the glenoid while the arm moves."
-        zh: 肩袖四肌：冈上肌、冈下肌、小圆肌和肩胛下肌。手臂活动时，它们共同把肱骨头稳在关节盂里。
-    - camera: back
-      ghost:
-        - pectoralis-major-clavicular
-        - biceps-brachii-long
-        - latissimus-dorsi
-        - pectoralis-major-sternocostal
-        - rhomboid-major
-        - trapezius-transverse
-        - triceps-brachii
-        - skin-outline
-      labels:
-        - deltoid-posterior
-        - teres-major
-        - trapezius-descending
-        - serratus-anterior
-      caption:
-        en: Teres major pulls the arm down and inward but is not a cuff muscle. Neighbours such as trapezius and serratus anterior move the shoulder blade, the base for the arm.
-        zh: 大圆肌把手臂向下、向内拉，但不属于肩袖。斜方肌、前锯肌等邻区肌肉移动肩胛骨，为手臂提供活动的底座。
+  - camera: on-my-body
+    view: xray
+    ghost: []
+    highlight:
+      signal:
+      - superficial
+      - intermediate
+      - deep
+    labels:
+    - group:superficial
+    caption:
+      en: The shoulder muscles surround the top of the upper arm. The faint whole-body outline helps you find the region on
+        yourself; left and right mean the body's own sides.
+      zh: 肩部肌肉包在上臂顶端四周。淡淡的全身轮廓帮你在自己身上找到这个部位；左右指身体自己的左右。
+  - camera: front
+    labels:
+    - group:superficial
+    - group:intermediate
+    - group:deep
+    caption:
+      en: 'Three layers: the deltoid on the surface, the muscles on the back of the shoulder blade underneath, and supraspinatus
+        and subscapularis deepest.'
+      zh: 分三层：表面是三角肌，下面是肩胛骨背面的肌肉，最深处是冈上肌和肩胛下肌。
+    ghost:
+    - skin-outline
+  - view: exploded
+    explode: 0.8
+    labels:
+    - group:superficial
+    - group:intermediate
+    - group:deep
+    caption:
+      en: 'PEEL lifts the surface layer first, then the middle and deep layers. The gap is only for teaching: in the body
+        the muscles stay attached to their bones.'
+      zh: 剥层先移开浅层，再是中层和深层。拉开只是为了讲解，身体里的肌肉始终附着在骨头上。
+    ghost:
+    - skin-outline
+  - layers:
+    - skeleton
+    - body
+    labels:
+    - clavicle
+    - scapula
+    - humerus
+    - thorax
+    - cervical-spine
+    caption:
+      en: 'The frame: collarbone, shoulder blade and humerus, with the rib cage, neck vertebrae and forearm for reference.
+        The head of the humerus sits in a shallow socket on the shoulder blade.'
+      zh: 骨架：锁骨、肩胛骨和肱骨，胸廓、颈椎和前臂骨作为参照。肱骨头坐在肩胛骨上一个浅浅的窝里。
+    ghost:
+    - skin-outline
+  - camera: back
+    ghost:
+    - deltoid-anterior
+    - deltoid-lateral
+    - deltoid-posterior
+    - trapezius-descending
+    - pectoralis-major-clavicular
+    - serratus-anterior
+    - biceps-brachii-long
+    - latissimus-dorsi
+    - pectoralis-major-sternocostal
+    - rhomboid-major
+    - trapezius-transverse
+    - triceps-brachii
+    - skin-outline
+    labels:
+    - supraspinatus
+    - infraspinatus
+    - teres-minor
+    - subscapularis
+    caption:
+      en: 'The four cuff muscles: supraspinatus, infraspinatus, teres minor and subscapularis. Together they help hold the
+        humeral head in the glenoid while the arm moves.'
+      zh: 肩袖四肌：冈上肌、冈下肌、小圆肌和肩胛下肌。手臂活动时，它们一起把肱骨头稳在关节盂里。
+  - camera: back
+    ghost:
+    - pectoralis-major-clavicular
+    - biceps-brachii-long
+    - latissimus-dorsi
+    - pectoralis-major-sternocostal
+    - rhomboid-major
+    - trapezius-transverse
+    - triceps-brachii
+    - skin-outline
+    labels:
+    - deltoid-posterior
+    - teres-major
+    - trapezius-descending
+    - serratus-anterior
+    caption:
+      en: Teres major pulls the arm down and inward but is not a cuff muscle. Neighbours such as trapezius and serratus anterior
+        move the shoulder blade, the base for the arm.
+      zh: 大圆肌把手臂往下、往里拉，但不属于肩袖。斜方肌、前锯肌等邻近肌肉负责移动肩胛骨，给手臂一个会动的底座。
   index:
     parts:
-      - deltoid-anterior
-      - deltoid-lateral
-      - deltoid-posterior
-      - supraspinatus
-      - infraspinatus
-      - teres-minor
-      - subscapularis
-      - teres-major
-      - trapezius-descending
-      - serratus-anterior
-      - clavicle
-      - scapula
-      - humerus
-      - thorax
-      - cervical-spine
-      - forearm
+    - deltoid-anterior
+    - deltoid-lateral
+    - deltoid-posterior
+    - supraspinatus
+    - infraspinatus
+    - teres-minor
+    - subscapularis
+    - teres-major
+    - trapezius-descending
+    - serratus-anterior
+    - clavicle
+    - scapula
+    - humerus
+    - thorax
+    - cervical-spine
+    - forearm
 ---
 
 <Lang en>
 
-Put a hand over the rounded top of your other arm. The muscle just under the skin is **deltoid**. Beneath it are smaller muscles running from the shoulder blade to the upper arm. This shoulder region lets you reach a shelf, raise an arm sideways and pull something towards you [M1] [M2].
+The model on the stage is a man's upper body, built from a real anatomical scan. The shoulder muscles are drawn in warm colours, the bones in ivory, the neighbouring muscles of the chest, back and arm in grey, and the skin as a faint outline. Left and right always mean the body's own left and right.
 
-The model separates the region into surface, middle and deep display layers. The surface holds deltoid's anterior, lateral and posterior parts. The middle holds **infraspinatus**, **teres minor** and **teres major** behind the shoulder blade. Deep inside are **supraspinatus**, above the scapular spine, and **subscapularis**, on the blade's rib-facing surface. These are teaching groups, rather than uniform sheets covering the whole shoulder.
+Put a hand over the rounded top of your other arm: the muscle just under the skin is the **deltoid**, the surface layer, with a front, a middle and a rear part. Under it, on the back of the shoulder blade, the middle layer holds **infraspinatus**, **teres minor** and **teres major**. The deep layer holds **supraspinatus**, above the bony ridge of the shoulder blade, and **subscapularis**, on the side of the blade that faces the ribs [M1] [M48].
 
-The bones explain the arrangement. The collarbone links the shoulder to the chest. The scapula carries the <Term id="glenoid">glenoid</Term>, a shallow socket receiving the head of the humerus. Muscles pull across this joint from an <Term id="origin">origin</Term> to an <Term id="insertion">insertion</Term>; the socket and the shoulder blade can move too [M1] [M2].
+The bones explain how they work. The collarbone joins the shoulder to the chest. The shoulder blade carries the <Term id="glenoid">glenoid</Term>, a shallow socket for the ball-shaped head of the humerus. Every muscle has an <Term id="origin">origin</Term>, the end that usually stays still, and an <Term id="insertion">insertion</Term>, the end it pulls. Here most of them start on the shoulder blade or the collarbone and pull across the joint on the humerus [M1] [M2].
 
-Remember the central distinction. Deltoid's front part helps raise the arm forward, its lateral part raises it sideways, and its rear part pulls it back. The <Term id="rotator-cuff">rotator cuff</Term> has <Num s="M2">four</Num> muscles: supraspinatus, infraspinatus, teres minor and subscapularis. Their shared task is stabilising the humeral head in the glenoid during movement [M86]. **Teres major is not part of the cuff** [M1] [M2]. <FlyTo preset="front">See the front</FlyTo>
+Remember one distinction. The deltoid moves the arm: its front part raises it forward, its middle part sideways and its rear part pulls it back. The <Term id="rotator-cuff">rotator cuff</Term> is <Num s="M2">four</Num> muscles, supraspinatus, infraspinatus, teres minor and subscapularis, whose main job is to hold the head of the humerus in its socket while the arm moves [M86]. **Teres major is not part of the cuff** [M48] [M2]. <FlyTo preset="front">See the front</FlyTo>
 
 <More title={{ en: "Where this model comes from", zh: "这个模型从哪里来" }}>
 
-Z-Anatomy supplies the meshes, developed from BodyParts3D. The reference body is an adult male, not a template for every person's proportions [M3] [M4]. Atlas selected the shoulder structures, simplified their meshes and added teaching layers, attachment markers and fibre directions. The model and derived geometry use CC BY-SA 4.0.
+The meshes come from Z-Anatomy, an open atlas built on BodyParts3D, which was made from MRI scans of one adult male volunteer <Num s="M4">at 2 mm intervals</Num>. The model stands <Num s="M4">1.71 m</Num> tall. Atlas selected the shoulder structures, simplified them and added fibre directions and attachment points [M3]. The model and its geometry are shared under CC BY-SA 4.0.
 
 </More>
 
-<More title={{ en: "Use the layers and the index", zh: "使用分层与索引" }}>
+<More title={{ en: "Peel, not explode", zh: "剥层，而不是拆开" }}>
 
-PEEL separates the layers so you can look behind deltoid. X-RAY fades the skin; SOLO on a muscle sheet keeps that muscle and its attachment bones visible. The index below reaches every structure named in this chapter. Left and right always refer to the body's own sides, as if you were inside the model.
+In this topic the explode slider is called PEEL. It lifts the deltoid first, then the middle layer, then the deep layer, the order in which an anatomist would uncover them. The layers are a teaching order: the cuff muscles do not form three neat sheets in the body.
 
 </More>
 
@@ -175,23 +180,23 @@ PEEL separates the layers so you can look behind deltoid. X-RAY fades the skin; 
 
 <Lang zh>
 
-把手放在另一侧上臂顶端圆圆的地方。皮肤下面的肌肉就是**三角肌**。它里面还有从肩胛骨长到肱骨的较小肌肉。这个区域让你够到架子、向侧面抬臂，也能把东西拉向自己 [M1] [M2]。
+舞台上的模型是一名男性的上半身，根据真实的解剖扫描数据建成。肩部肌肉画成暖色，骨骼是象牙色，胸、背和上臂的邻近肌肉画成灰色，皮肤是一层淡淡的轮廓。文中说的左和右，一律指身体自己的左右。
 
-模型把本区分成浅、中、深层显示。浅层是三角肌的前、中、后三部分。中层有肩胛骨后方的**冈下肌**、**小圆肌**和**大圆肌**。深层有肩胛冈上方的**冈上肌**，以及贴在肩胛骨朝向肋骨那一面的**肩胛下肌**。这些是教学分组，并不是覆盖整个肩部的整齐薄片。
+把手放在另一侧上臂顶端圆鼓鼓的地方：皮肤下面那块肌肉就是**三角肌**，也就是浅层，它分前部、中部和后部。三角肌下面、肩胛骨背面是中层：**冈下肌**、**小圆肌**和**大圆肌**。深层有肩胛骨那条骨嵴上方的**冈上肌**，以及铺在肩胛骨贴着肋骨那一面的**肩胛下肌** [M1] [M48]。
 
-看骨头就能理解这个安排。锁骨把肩部连到胸前。肩胛骨上的<Term id="glenoid">关节盂</Term>是一个浅窝，承接肱骨头。肌肉从<Term id="origin">起点</Term>长到<Term id="insertion">止点</Term>，跨过关节拉动骨头；关节盂所在的肩胛骨也会活动 [M1] [M2]。因此抬臂不只是上臂骨在一个固定窝里转，肩带周围的邻区肌肉也要配合。淡显的骨架与肌肉帮助你看清这种相互关系。
+看骨头就明白它们怎么工作。锁骨把肩连到胸前。肩胛骨上有<Term id="glenoid">关节盂</Term>，一个浅浅的窝，接住肱骨球形的头。每块肌肉都有<Term id="origin">起点</Term>，通常是不动的那一端；还有<Term id="insertion">止点</Term>，是它拉动的那一端。这里的肌肉大多起于肩胛骨或锁骨，跨过关节去拉肱骨 [M1] [M2]。
 
-记住关键区别：三角肌前部帮助前举，中部帮助侧举，后部帮助后拉。<Term id="rotator-cuff">肩袖</Term>有<Num s="M2">四块</Num>肌肉：冈上肌、冈下肌、小圆肌和肩胛下肌。它们共同的重要任务，是在活动时把肱骨头稳在关节盂里 [M86]。**大圆肌不属于肩袖** [M1] [M2]。<FlyTo preset="front">看正面</FlyTo>
+记住一个区别。三角肌负责移动手臂：前部把手臂向前抬，中部向侧面抬，后部向后拉。<Term id="rotator-cuff">肩袖</Term>是<Num s="M2">四块</Num>肌肉，冈上肌、冈下肌、小圆肌和肩胛下肌，它们最主要的任务，是在手臂活动时把肱骨头稳在关节盂里 [M86]。**大圆肌不属于肩袖** [M48] [M2]。<FlyTo preset="front">看正面</FlyTo>
 
 <More title={{ en: "Where this model comes from", zh: "这个模型从哪里来" }}>
 
-网格来自以 BodyParts3D 为基础发展的 Z-Anatomy。参考人体是成年男性，并不代表每个人的身体比例 [M3] [M4]。Atlas 选取肩部结构，简化网格，并加上教学分层、附着标记和纤维方向。模型及派生几何数据采用 CC BY-SA 4.0 许可。
+网格来自 Z-Anatomy，一个以 BodyParts3D 为基础的开源解剖图谱；BodyParts3D 则来自一名成年男性志愿者的核磁共振扫描，<Num s="M4">每隔 2 毫米一层</Num>。模型身高 <Num s="M4">1.71 米</Num>。Atlas 选取了肩部结构，做了简化，并加上纤维方向和附着点 [M3]。模型及其几何数据按 CC BY-SA 4.0 许可共享。
 
 </More>
 
-<More title={{ en: "Use the layers and the index", zh: "使用分层与索引" }}>
+<More title={{ en: "Peel, not explode", zh: "剥层，而不是拆开" }}>
 
-剥层把各层移开，让你看到三角肌后面。透视调淡皮肤；肌肉卡上的单显保留该肌肉和它附着的骨头。本章索引能点到文中提及的每个结构。左右始终指身体自己的两侧，就像你站在模型里面。
+在这个主题里，拆开滑块叫“剥层”。它先抬起三角肌，再是中层，最后是深层，就像解剖时一层层揭开的顺序。分层是讲解用的顺序：肩袖的几块肌肉在身体里并不是整整齐齐的三层。
 
 </More>
 

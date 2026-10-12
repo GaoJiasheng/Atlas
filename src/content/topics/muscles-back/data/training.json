@@ -13,8 +13,8 @@
     "lat-pulldown"
   ],
   "note": {
-    "en": "Include a vertical pull, a row and controlled hip-hinge work across your training; choose manageable variations, progress gradually and allow recovery.",
-    "zh": "训练中安排垂直拉、划船和受控的髋折叠；选择能驾驭的版本，逐步进阶，并留出恢复时间。"
+    "en": "Across your week, include a vertical pull, a row and a controlled hip hinge; choose versions you can control, progress gradually and leave time to recover.",
+    "zh": "一周的训练里，安排一个垂直拉、一个划船和一个受控的髋铰链动作；选自己控制得住的做法，循序渐进，并留出恢复时间。"
   },
   "session": {
     "title": {
@@ -25,49 +25,49 @@
       {
         "exercise": "inverted-row",
         "note": {
-          "en": "Warm up with a high bar and an easy body angle; check the support and learn the shoulder-blade motion.",
-          "zh": "用较高横杆、较容易的身体倾角热身；检查支撑，熟悉肩胛骨运动。"
+          "en": "Warm up with a high bar and an easy body angle; check the bar is secure and get used to moving the shoulder blades.",
+          "zh": "用较高的横杆和较容易的身体角度热身；先确认横杆稳固，再熟悉肩胛骨的动作。"
         }
       },
       {
         "exercise": "barbell-deadlift",
         "note": {
-          "en": "Practise the main hip hinge while fresh, building from a light load; the spine holds steady as the hips and knees move.",
-          "zh": "精力充足时练主项髋折叠，从轻负重逐步准备；髋、膝移动，脊柱稳住。"
+          "en": "Do the main hip hinge while you are fresh, building up from a light load; the hips and knees move while the spine holds still.",
+          "zh": "趁精力充足做主项髋铰链，从轻重量逐步加上去；动的是髋和膝，脊柱保持不动。"
         }
       },
       {
         "exercise": "lat-pulldown",
         "note": {
-          "en": "Use a comfortable grip and keep the torso still; assistance and load should preserve a smooth return.",
-          "zh": "握法舒服，躯干稳住；辅助程度和重量要让回放仍然平稳。"
+          "en": "Use a comfortable grip and keep the trunk still; pick a load that still lets the bar return smoothly.",
+          "zh": "握法要舒服，躯干保持不动；选一个能让横杆平稳回去的重量。"
         }
       },
       {
         "exercise": "single-arm-dumbbell-row",
         "note": {
-          "en": "Use the bench for support and give each side the same careful attention.",
-          "zh": "用凳子支撑，两边都认真控制动作。"
+          "en": "Support yourself on the bench and give each side the same careful attention.",
+          "zh": "撑在凳子上，两边都一样认真地做。"
         }
       },
       {
         "exercise": "prone-y-raise",
         "note": {
-          "en": "Finish with an easy shoulder-control movement without added weight.",
-          "zh": "最后做容易的肩带控制动作，先不加重量。"
+          "en": "Finish with an easy shoulder-blade control movement, without added weight at first.",
+          "zh": "最后做一个简单的肩胛控制动作，一开始先不加重量。"
         }
       },
       {
         "exercise": "side-lying-dumbbell-external-rotation",
         "note": {
-          "en": "Use very light loading for controlled rotation; stop before the torso or elbow compensates.",
-          "zh": "用很轻的负重控制外旋；躯干或手肘开始代偿前就停。"
+          "en": "Use a very light dumbbell and turn under control; stop before the trunk or elbow starts to help.",
+          "zh": "用很轻的哑铃，有控制地转；躯干或手肘开始代偿之前就停。"
         }
       }
     ],
     "note": {
-      "en": "This order illustrates technique practice before fatigue and lighter shoulder work afterwards; not every exercise in the catalogue belongs in the same session. Rest enough to recover control, and adapt the selection with a qualified coach. First learn under supervision; minors practise with adult supervision. This is general information, not medical advice; seek a doctor or physiotherapist for pain or injury.",
-      "zh": "这个顺序示范了先在疲劳前练技术，再做较轻的肩部动作；动作目录中的所有动作不必塞进同一节课。休息到控制恢复，再由合格教练帮助调整选择。第一次学动作要有人指导；未成年人在成人监督下练习。本页是一般性知识，不是医疗建议；疼痛或受伤请咨询医生或物理治疗师。"
+      "en": "This order practises technique before you tire and puts lighter shoulder work at the end; not every exercise in the list belongs in one session. Rest until you can control the movement again, and adapt the choice with a qualified coach. This is general information, not medical advice; for pain or an injury, see a doctor or physiotherapist.",
+      "zh": "这个顺序是在疲劳之前先练技术，较轻的肩部动作放在最后；动作列表里的动作不必全塞进同一节课。休息到能重新控制动作再继续，并请合格的教练帮你调整选择。本页是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
     },
     "s": [
       "M23",

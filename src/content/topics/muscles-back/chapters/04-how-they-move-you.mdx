@@ -36,17 +36,17 @@ state:
     - -0.03
     fov: 30
   summary:
-    en: Moving the arm, moving the shoulder blade and resisting spinal movement are separate jobs.
-    zh: 移动手臂、移动肩胛骨和抵抗脊柱移动，是不同的工作。
+    en: Moving the shoulder blade, moving the arm and holding the spine are three different jobs.
+    zh: 移动肩胛骨、移动上臂、稳住脊柱，是三件不同的事。
   beats:
   - pose: shrug
     labels:
     - trapezius-descending
     - levator-scapulae
     caption:
-      en: 'Shrug: descending trapezius and levator scapulae raise the shoulder girdle. The highlighted fibres pull towards
-        their neck attachments.'
-      zh: 耸肩：斜方肌降部和肩胛提肌抬高肩带，高亮纤维向颈部附着端拉。
+      en: 'Shrug: the upper trapezius and levator scapulae lift the shoulder girdle, pulling toward their attachments in the
+        neck.'
+      zh: 耸肩：斜方肌降部和肩胛提肌上提肩带，朝它们在颈部的附着处拉。
   - pose: retract
     ghost:
     - body
@@ -61,7 +61,7 @@ state:
     caption:
       en: 'Retraction: transverse trapezius and the rhomboids draw the shoulder blades towards the spine. The arms need not
         swing behind the body for this to happen.'
-      zh: 后缩：斜方肌横部和菱形肌把肩胛骨拉向脊柱；这个动作不需要上臂大幅甩到身体后面。
+      zh: 后缩：斜方肌横部和菱形肌把肩胛骨拉向脊柱；上臂不用甩到身体后面，这个动作也能完成。
   - pose: upward-rotate
     camera: left-side
     labels:
@@ -71,7 +71,7 @@ state:
     caption:
       en: 'Upward rotation: upper and lower trapezius cooperate with serratus anterior so the socket turns upward. Rhomboids
         and levator can help the opposite rotation.'
-      zh: 上回旋：斜方肌上、下部与前锯肌配合，让关节盂朝上；菱形肌和肩胛提肌能帮助相反的回旋。
+      zh: 上回旋：斜方肌上部、下部与前锯肌配合，让关节盂朝上；菱形肌和肩胛提肌负责反方向的旋转。
   - pose: pull-down
     camera: back
     ghost:
@@ -87,7 +87,7 @@ state:
     caption:
       en: 'Pulling the raised arm down: latissimus dorsi and teres major act at the shoulder. In pull-ups and pulldowns, elbow
         flexors help; they do not replace these shoulder prime movers.'
-      zh: 把抬起的上臂下拉：背阔肌和大圆肌作用于肩关节。引体向上和高位下拉时，屈肘肌帮助它们，并不取代肩关节的主动肌。
+      zh: 把抬起的上臂拉下来：背阔肌和大圆肌在肩关节上用力。做引体向上和高位下拉时，屈肘肌只是帮忙，取代不了这两块肩关节的主动肌。
   - pose: turn-in
     camera: left-side
     labels:
@@ -97,7 +97,7 @@ state:
     caption:
       en: 'Internal rotation: latissimus and teres major pull at the front of the humerus and turn the arm inward. The elbow
         is bent so the rotation is easier to see.'
-      zh: 内旋：背阔肌和大圆肌拉肱骨前方，让上臂向内转。屈肘只是为了看清这次旋转。
+      zh: 内旋：背阔肌和大圆肌拉着肱骨前面，让上臂向内转。手肘弯着，是为了看清这个旋转。
   - pose: turn-out
     camera: back
     ghost:
@@ -111,7 +111,7 @@ state:
     caption:
       en: 'External rotation: infraspinatus and teres minor turn the humerus outward while helping steady its head in the
         socket. Teres major has a different job.'
-      zh: 外旋：冈下肌和小圆肌让肱骨向外转，也帮助把肱骨头稳在关节盂中；大圆肌的工作不同。
+      zh: 外旋：冈下肌和小圆肌让肱骨向外转，同时帮着把肱骨头稳在关节盂里。大圆肌干的是另一件事。
   - pose: spine-extend
     ghost:
     - superficial
@@ -126,7 +126,7 @@ state:
     caption:
       en: 'Spinal extension: the erector columns pull the trunk back. One side also helps side bending. Here the model bends
         around a simplified trunk joint, not each vertebra separately.'
-      zh: 脊柱伸展：竖脊肌柱把躯干向后拉，单侧也帮助侧弯。模型通过倾斜刚性躯干表示方向，脊柱各节并没有活动。
+      zh: 伸脊柱：竖脊肌柱把躯干往后拉，单侧收缩还帮着侧屈。模型把躯干当成一整块来倾斜，没有逐节活动脊柱。
   - pose: brace
     highlight:
       signal:
@@ -143,9 +143,9 @@ state:
     - longissimus-thoracis
     - spinalis-thoracis
     caption:
-      en: 'Brace: the spine stays still and the erectors resist bending. During a neutral-spine deadlift they work mainly
-        isometrically; no shortening animation is shown here.'
-      zh: 支撑：脊柱保持不动，竖脊肌抵抗弯曲。中立位硬拉时它们主要等长用力，这里没有缩短动画。
+      en: 'Brace: the spine stays still while the erectors resist bending. In a neutral-spine deadlift they work mainly isometrically,
+        so this beat shows no shortening.'
+      zh: 支撑：脊柱不动，竖脊肌抵抗弯曲。中立位硬拉时它们主要做等长收缩，所以这一拍没有缩短动画。
   index:
     parts:
     - trapezius-descending
@@ -176,25 +176,23 @@ state:
 
 <Lang en>
 
-Watch the attachments before the hand. Shrugging raises the shoulder girdle with descending trapezius and levator scapulae. Drawing the blades towards the spine uses transverse trapezius and the rhomboids. Upper and lower trapezius work with serratus anterior during <Term id="upward-rotation">upward rotation</Term>, turning the shoulder socket upward as the arm rises. Rhomboids and levator help downward rotation [M47] [M2].
+Each beat of this chapter moves one joint so you can watch which muscles shorten. Start with the shoulder blade. A shrug lifts the shoulder girdle with the upper trapezius and levator scapulae. Drawing the blades toward the spine uses the middle trapezius and the rhomboids. When the arm rises, the upper and lower trapezius work with serratus anterior to turn the blade so that its socket faces up, a movement called <Term id="upward-rotation">upward rotation</Term>; the rhomboids and levator scapulae turn it back down [M47] [M2].
 
-Latissimus dorsi and teres major pull the upper arm towards the side and backwards. That backward movement at a joint is <Term id="extension">extension</Term>. Their attachments at the front of the humerus also produce internal rotation. Infraspinatus and teres minor pull in the opposite rotational direction while helping steady the shoulder [M47] [M48].
+Now the arm. Latissimus dorsi and teres major pull a raised arm down to the side and back; moving the arm backward at the shoulder is called <Term id="extension">extension</Term>. Because both end on the front of the humerus, they also turn the arm inward. Infraspinatus and teres minor turn it the other way, outward, and help keep the head of the humerus in its socket [M47] [M48].
 
-**In pull-ups and lat pulldowns, latissimus dorsi is a prime mover at the shoulder, not merely a helper to the arms.** The elbow flexors bend the elbow and contribute substantially; the shoulder and elbow are doing different jobs [M47] [M51] [M52]. Feeling the forearms work does not show that the back is inactive.
+**This is why latissimus dorsi, not the arms, is the prime mover in pull-ups and lat pulldowns.** The main work happens at the shoulder, where latissimus and teres major pull the upper arm down. The biceps and the other elbow flexors bend the elbow at the same time and work hard too, but they move a different joint [M47] [M51] [M52]. Tired forearms do not mean the back did nothing.
 
-The spinal erectors can extend the spine, and one side can help lateral bending. They also resist movement [M47] [M49]. **During a deadlift performed with a <Term id="neutral-spine">neutral spine</Term>, they work mainly <Term id="isometric">isometrically</Term> to hold that position.** The lift comes chiefly from the hips and legs, rather than repeatedly bending and straightening the lower back [M55].
+Last, the spine. The erector spinae can bend it backward, and one side helps bend it sideways [M47] [M49]. **In a deadlift with a <Term id="neutral-spine">neutral spine</Term>, though, they hardly change length: they work <Term id="isometric">isometrically</Term> to stop the back rounding while the hips and knees do the lifting** [M55]. The last beat shows this brace: nothing moves, yet the columns are working hard. <FlyTo preset="left-side">See it from the side</FlyTo>
 
-The contraction poses show moving actions. The brace pose holds still, with no artificial erector shortening. Muscle effort and visible joint movement are different things.
+<More title={{ en: "What the model can and cannot move", zh: "模型能动什么、不能动什么" }}>
 
-<More title={{ en: "The model\u2019s movement limits", zh: "模型的动作限制" }}>
-
-The shoulder girdle moves through a simplified clavicle–scapula chain. The trunk pose rotates the body as a rigid assembly; it does not reproduce extension or side bending at the spinal segments. These are illustrations of direction, not measured normal ranges. The back rig has no hip or knee articulation; full deadlift and back-extension sequences remain in the sketches and cards.
+The shoulder blade moves on a simplified chain through the collarbone: it turns a little rather than sliding over the ribs. The trunk tilts as one rigid piece, so spinal extension and side bending are shown as a direction, not vertebra by vertebra. There are no hip or knee joints, which is why the deadlift and the back extension are shown by their sketches rather than in full motion. The angles are chosen to make the direction clear; they are not measured ranges of movement.
 
 </More>
 
-<More title={{ en: "The hand can be the fixed end", zh: "手也能成为固定端" }}>
+<More title={{ en: "The hand can be the fixed end", zh: "手也可以是固定端" }}>
 
-During a pulldown the trunk is relatively fixed and the arm moves. During a pull-up the hands hold a fixed bar and the body rises towards them. Latissimus still generates force between the same trunk and arm attachments [M47]. The small model poses show the shoulder action; the sketch gives the full exercise.
+In a lat pulldown the trunk is held still and the arms move. In a pull-up the hands hold a fixed bar and the body rises toward them. Either way latissimus dorsi pulls between the same attachments on the trunk and the arm [M47] [M91].
 
 </More>
 
@@ -202,25 +200,23 @@ During a pulldown the trunk is relatively fixed and the arm moves. During a pull
 
 <Lang zh>
 
-先看附着点，再看手。耸肩时，斜方肌降部与肩胛提肌抬高肩带；把肩胛骨拉向脊柱时，斜方肌横部与菱形肌工作。上、下斜方肌配合前锯肌，使肩胛骨<Term id="upward-rotation">上回旋</Term>，抬臂时让关节盂朝上。菱形肌与肩胛提肌帮助下回旋 [M47] [M2]。
+这一章每一拍只动一个关节，方便你看清是哪些肌肉在缩短。先看肩胛骨。耸肩时，斜方肌降部和肩胛提肌把肩带提起来。把两块肩胛骨拉向脊柱，靠的是斜方肌横部和菱形肌。手臂抬起时，斜方肌上部、下部和前锯肌一起把肩胛骨转一下，让关节盂朝上，这叫<Term id="upward-rotation">上回旋</Term>；菱形肌和肩胛提肌则把它转回来 [M47] [M2]。
 
-背阔肌和大圆肌把上臂拉向身体侧面、向后。关节向后的动作叫<Term id="extension">伸展</Term>；它们在肱骨前方的附着也产生内旋。冈下肌与小圆肌产生相反方向的旋转，并帮助稳定肩关节 [M47] [M48]。
+再看手臂。背阔肌和大圆肌把抬起的手臂往身体侧面、往后拉；手臂在肩关节处往后走，叫<Term id="extension">伸</Term>。两块肌肉都止在肱骨前面，所以还会让上臂内旋。冈下肌和小圆肌让上臂往反方向转，也就是外旋，并帮着把肱骨头稳在关节盂里 [M47] [M48]。
 
-**引体向上和高位下拉时，背阔肌是肩关节的主动肌，并不是给手臂打下手。**屈肘肌也出力很大，但肩和肘做的是不同工作。感觉前臂疲劳，并不证明背肌没参与 [M51] [M52]。
+**所以，引体向上和高位下拉的主动肌是背阔肌，而不是手臂。**主要的工作发生在肩关节：背阔肌和大圆肌把上臂往下拉。肱二头肌等屈肘肌同时把手肘弯起来，也出了很大力，但它们动的是另一个关节 [M47] [M51] [M52]。前臂累了，不代表背没干活。
 
-每拍先看哪块骨头移动，再看高亮肌肉。肩胛骨后缩不等于上臂后伸，肩关节旋转也不等于手腕旋转；把相邻关节的任务分开，才能读懂动作。
+最后看脊柱。竖脊肌能让脊柱向后伸，单侧收缩还帮着侧屈 [M47] [M49]。**但在<Term id="neutral-spine">脊柱中立位</Term>的硬拉里，它们的长度几乎不变：它们做<Term id="isometric">等长收缩</Term>，不让背弓起来，把杠举起来的是髋和膝** [M55]。最后一拍就是这种支撑：什么都没动，肌柱却在用力。<FlyTo preset="left-side">从侧面看</FlyTo>
 
-竖脊肌能伸展脊柱，单侧能帮助侧弯，也能抵抗移动 [M47] [M49]。**保持<Term id="neutral-spine">脊柱中立位</Term>的硬拉中，它们主要<Term id="isometric">等长</Term>用力稳住脊柱。**举起重量主要靠髋和腿，并不是反复弯曲、伸直腰背 [M55]。收缩姿态展示移动；支撑姿态保持静止，没有人为的缩短。用力与看得见的关节移动，是两回事。
+<More title={{ en: "What the model can and cannot move", zh: "模型能动什么、不能动什么" }}>
 
-<More title={{ en: "The model\u2019s movement limits", zh: "模型的动作限制" }}>
-
-肩带通过简化的锁骨—肩胛骨关节链移动。躯干姿态把身体作为刚性整体旋转，没有再现各节脊柱的伸展或侧弯。这些是方向示意，不是测得的正常幅度。背部骨架没有髋、膝关节；完整硬拉和背伸展过程由示意图与动作卡说明。
+肩胛骨通过锁骨上的一条简化关节链活动：它只能稍微转动，不会真的在肋骨上滑。躯干作为一整块倾斜，所以脊柱后伸和侧屈只表示方向，不是一节一节地动。模型没有髋关节和膝关节，所以硬拉和背伸展靠示意图来演示，没有完整的动作。演示的角度是为了把方向看清楚，不是测量出来的活动范围。
 
 </More>
 
-<More title={{ en: "The hand can be the fixed end", zh: "手也能成为固定端" }}>
+<More title={{ en: "The hand can be the fixed end", zh: "手也可以是固定端" }}>
 
-高位下拉时，躯干相对固定，手臂移动；引体向上时，双手握住固定杆，身体向手靠近。背阔肌仍在相同的躯干、上臂附着点之间产生拉力 [M47]。模型的小姿态展示肩关节作用，示意图给出完整动作。
+做高位下拉时，躯干不动，手臂在动。做引体向上时，双手抓住固定的单杠，是身体往手的方向升上去。不管哪种，背阔肌都是在躯干和上臂的同一对附着点之间拉 [M47] [M91]。
 
 </More>
 

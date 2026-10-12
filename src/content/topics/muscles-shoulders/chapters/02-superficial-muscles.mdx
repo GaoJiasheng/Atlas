@@ -2,7 +2,7 @@
 id: superficial-muscles
 order: 2
 title:
-  en: "The surface layer: deltoid"
+  en: 'The surface layer: deltoid'
   zh: 浅层：三角肌
 sensitive: false
 state:
@@ -13,11 +13,53 @@ state:
   cutaway: none
   pose: neutral-stand
   layers:
-    - superficial
-    - skeleton
-    - neighbours
-    - body
+  - superficial
+  - skeleton
+  - neighbours
+  - body
   ghost:
+  - trapezius-descending
+  - pectoralis-major-clavicular
+  - serratus-anterior
+  - biceps-brachii-long
+  - latissimus-dorsi
+  - pectoralis-major-sternocostal
+  - rhomboid-major
+  - trapezius-transverse
+  - triceps-brachii
+  - skin-outline
+  sites:
+  - deltoid-anterior
+  - deltoid-lateral
+  - deltoid-posterior
+  labels:
+  - deltoid-anterior
+  - deltoid-lateral
+  - humerus
+  camera:
+    position:
+    - 0.57
+    - 0.19
+    - 1.39
+    target:
+    - 0
+    - 0.06
+    - -0.04
+    fov: 30
+  summary:
+    en: 'One muscle, three parts: from the collarbone, acromion and scapular spine to one attachment on the humerus.'
+    zh: 一块肌肉，三个部分：从锁骨、肩峰和肩胛冈出发，止于肱骨上的同一处。
+  beats:
+  - camera: front
+    labels:
+    - deltoid-anterior
+    - deltoid-lateral
+    - clavicle
+    caption:
+      en: The front part starts on the outer third of the collarbone, the middle part on the acromion, the bony roof of the
+        shoulder. Both run down to the upper arm.
+      zh: 前部起于锁骨外侧三分之一，中部起于肩峰，也就是肩膀顶上的骨性屋顶。两部分都向下走到上臂。
+    ghost:
     - trapezius-descending
     - pectoralis-major-clavicular
     - serratus-anterior
@@ -28,146 +70,108 @@ state:
     - trapezius-transverse
     - triceps-brachii
     - skin-outline
-  sites:
+  - camera: back
+    labels:
+    - deltoid-posterior
+    - scapula
+    - humerus
+    caption:
+      en: The posterior part starts on the scapular spine. Its fibres run down and forward towards the same deltoid tuberosity
+        on the humerus.
+      zh: 后部起于肩胛冈，纤维向前下方走，也汇到肱骨上同一个三角肌粗隆。
+    ghost:
+    - trapezius-descending
+    - pectoralis-major-clavicular
+    - serratus-anterior
+    - biceps-brachii-long
+    - latissimus-dorsi
+    - pectoralis-major-sternocostal
+    - rhomboid-major
+    - trapezius-transverse
+    - triceps-brachii
+    - skin-outline
+  - camera: close-shoulder
+    sites:
+    - deltoid-lateral
+    labels:
+    - deltoid-lateral
+    run: true
+    caption:
+      en: Hollow circles mark origins, solid circles insertions. Inside the middle part, short fibres are packed at an angle
+        between tendon sheets; the moving stripe shows only the general fibre direction.
+      zh: 空心圆是起点，实心圆是止点。中部肌肉里，短纤维斜着排在几片腱膜之间；移动的条纹只表示大致的纤维方向。
+    ghost:
+    - trapezius-descending
+    - pectoralis-major-clavicular
+    - serratus-anterior
+    - biceps-brachii-long
+    - latissimus-dorsi
+    - pectoralis-major-sternocostal
+    - rhomboid-major
+    - trapezius-transverse
+    - triceps-brachii
+    - skin-outline
+  - camera: on-my-body
+    view: xray
+    ghost: []
+    sites: []
+    labels:
     - deltoid-anterior
     - deltoid-lateral
     - deltoid-posterior
-  labels:
+    caption:
+      en: Touch the rounded muscle gently while you lift the other arm forward, sideways or back without a weight. A different
+        part firms up each time.
+      zh: 不拿重量，把一只手臂分别向前、向侧面、向后抬，用另一只手轻轻摸那块圆鼓鼓的三角肌：每次变硬的部位都不一样。
+  - pose: arm-forward
+    sites: []
+    labels:
     - deltoid-anterior
     - deltoid-lateral
-    - humerus
-  camera:
-    position:
-      - 0.57
-      - 0.19
-      - 1.39
-    target:
-      - 0
-      - 0.06
-      - -0.04
-    fov: 30
-  summary:
-    en: "One muscle, three parts: from collarbone, acromion and scapular spine to a shared attachment on the humerus."
-    zh: 一块肌肉，三个部分：从锁骨、肩峰和肩胛冈长到肱骨上的共同附着区。
-  beats:
-    - camera: front
-      labels:
-        - deltoid-anterior
-        - deltoid-lateral
-        - clavicle
-      caption:
-        en: The anterior part starts on the outer third of the clavicle. The lateral part starts on the acromion, the bony roof of the shoulder. Both run down towards the upper arm.
-        zh: 前部起于锁骨外侧三分之一；中部起于肩峰，也就是肩部上方的骨性屋顶。两部分都向下走到上臂。
-      ghost:
-        - trapezius-descending
-        - pectoralis-major-clavicular
-        - serratus-anterior
-        - biceps-brachii-long
-        - latissimus-dorsi
-        - pectoralis-major-sternocostal
-        - rhomboid-major
-        - trapezius-transverse
-        - triceps-brachii
-        - skin-outline
-    - camera: back
-      labels:
-        - deltoid-posterior
-        - scapula
-        - humerus
-      caption:
-        en: The posterior part starts on the scapular spine. Its fibres run down and forward towards the same deltoid tuberosity on the humerus.
-        zh: 后部起于肩胛冈。它的纤维向前下方走，也汇到肱骨上的三角肌粗隆。
-      ghost:
-        - trapezius-descending
-        - pectoralis-major-clavicular
-        - serratus-anterior
-        - biceps-brachii-long
-        - latissimus-dorsi
-        - pectoralis-major-sternocostal
-        - rhomboid-major
-        - trapezius-transverse
-        - triceps-brachii
-        - skin-outline
-    - camera: close-shoulder
-      sites:
-        - deltoid-lateral
-      labels:
-        - deltoid-lateral
-        - humerus
-      run: true
-      caption:
-        en: Hollow markers show origins, solid markers insertions. The lateral part has fibres arranged around internal tendon slips; the moving stripe is a simplified fibre-direction cue.
-        zh: 空心圆表示起点，实心圆表示止点。中部的纤维围绕内部腱束排列；移动条纹只是纤维方向的简化提示。
-      ghost:
-        - trapezius-descending
-        - pectoralis-major-clavicular
-        - serratus-anterior
-        - biceps-brachii-long
-        - latissimus-dorsi
-        - pectoralis-major-sternocostal
-        - rhomboid-major
-        - trapezius-transverse
-        - triceps-brachii
-        - skin-outline
-    - camera: on-my-body
-      view: xray
-      ghost: []
-      sites: []
-      labels:
-        - deltoid-anterior
-        - deltoid-lateral
-        - deltoid-posterior
-      caption:
-        en: Feel the rounded muscle gently while you lift the other arm forward, sideways or backwards without a weight. Its front, side and rear become firmer in different movements.
-        zh: 不拿重量，分别向前、侧面和后方抬起另一侧手臂，轻轻摸圆圆的三角肌。不同方向时，前面、侧面和后面会分别变硬。
-    - pose: arm-forward
-      sites: []
-      labels:
-        - deltoid-anterior
-        - deltoid-lateral
-      caption:
-        en: The front fibres help with a forward raise; the lateral fibres with a side raise; the rear fibres with a backward pull. These jobs overlap, rather than switching one part off completely.
-        zh: 前部帮助前举，中部帮助侧举，后部帮助后拉。各部分的工作会重叠，并不是其他部分完全关掉。
-      ghost:
-        - trapezius-descending
-        - pectoralis-major-clavicular
-        - serratus-anterior
-        - biceps-brachii-long
-        - latissimus-dorsi
-        - pectoralis-major-sternocostal
-        - rhomboid-major
-        - trapezius-transverse
-        - triceps-brachii
-        - skin-outline
+    caption:
+      en: The front fibres raise the arm forward, the middle fibres lift it sideways and the rear fibres pull it back. Their
+        jobs overlap; no part switches off completely.
+      zh: 前部负责前举，中部负责侧举，后部负责后拉。它们的工作有重叠，没有哪一部分会完全不出力。
+    ghost:
+    - trapezius-descending
+    - pectoralis-major-clavicular
+    - serratus-anterior
+    - biceps-brachii-long
+    - latissimus-dorsi
+    - pectoralis-major-sternocostal
+    - rhomboid-major
+    - trapezius-transverse
+    - triceps-brachii
+    - skin-outline
   index:
     parts:
-      - deltoid-anterior
-      - deltoid-lateral
-      - deltoid-posterior
-      - clavicle
-      - scapula
-      - humerus
+    - deltoid-anterior
+    - deltoid-lateral
+    - deltoid-posterior
+    - clavicle
+    - scapula
+    - humerus
 ---
 
 <Lang en>
 
-Deltoid wraps the front, side and back of the shoulder. It is one muscle with <Num s="M1">three</Num> anatomical parts, often called the front, side and rear delts in a gym. Their different starting points explain their different pulls [M1] [M48] [M31].
+The deltoid wraps the front, side and back of the shoulder. It is one muscle with <Num s="M1">three</Num> parts, which gyms call the front, side and rear delts. Each part starts on a different bone, and that is why each pulls the arm a different way [M1] [M48] [M31]. On the stage, hollow circles mark origins and solid circles insertions.
 
-The **clavicular part (anterior deltoid)** begins on the front edge and upper surface of the outer <Num s="M1">third</Num> of the clavicle. Its fibres descend towards the arm. The **acromial part (lateral deltoid)** begins on the outer edge and upper surface of the <Term id="acromion">acromion</Term>, the scapula's roof-like projection. The **scapular spinal part (posterior deltoid)** begins on the lower lip of the scapular spine behind the shoulder [M1] [M48].
+The **clavicular part** (front deltoid) starts on the front edge and upper surface of the outer <Num s="M1">third</Num> of the collarbone. The **acromial part** (side deltoid) starts on the outer edge and upper surface of the <Term id="acromion">acromion</Term>, the flat roof of bone at the top of the shoulder. The **spinal part** (rear deltoid) starts on the lower lip of the scapular spine, the ridge across the back of the shoulder blade [M1] [M48].
 
-All meet on the <Term id="deltoid-tuberosity">deltoid tuberosity</Term>, a rough area on the outer humeral shaft. The middle part has a <Term id="multipennate">multipennate</Term> arrangement: fibres run obliquely between internal tendon slips. The front and rear parts have a different internal arrangement; the model's straight stripe is a teaching simplification, not a drawing of every bundle [M1] [M48]. <FlyTo preset="back">See the rear part</FlyTo>
+All three meet on the <Term id="deltoid-tuberosity">deltoid tuberosity</Term>, a rough patch halfway down the outer side of the humerus. Inside the middle part, short fibres run at an angle between several tendon sheets, an arrangement called <Term id="multipennate">multipennate</Term>; the front and rear parts are built more simply. The moving stripes on the model show only the general fibre direction, not every bundle [M1] [M48]. <FlyTo preset="back">See the rear part</FlyTo>
 
-The front part helps with shoulder flexion, bringing the arm forward. The lateral part is prominent in abduction, lifting it sideways. The rear part helps with extension and horizontal abduction, pulling it back or opening a raised arm backwards [M2] [M31]. Feel the surface gently during unloaded movements. Feeling a muscle firm up tells you that it is working; it cannot measure its force or prove that only that part is active.
+The front part raises the arm forward, which is shoulder flexion. The middle part lifts it out to the side. The rear part pulls the arm back and opens a raised arm out and backward [M2] [M31]. Try it on yourself without a weight: lift your arm forward, sideways and back, and feel a different part of the shoulder cap harden each time.
 
-<More title={{ en: "Names describe the attachment", zh: "名字描述附着位置" }}>
+<More title={{ en: "Two sets of names", zh: "两套名字" }}>
 
-Clavicular, acromial and scapular spinal name the bones or projections from which the parts arise. Anterior, lateral and posterior describe their positions on the body. They refer to the same parts, not extra muscles. A whole deltoid sheet groups them, while each mesh and index entry selects one part.
+Clavicular, acromial and spinal name the bones the parts start from; front, side and rear (anterior, lateral, posterior) describe where they sit. Both name the same three parts of one muscle, not extra muscles. The deltoid's own sheet describes the whole muscle; the stage and the index let you pick each part.
 
 </More>
 
 <More title={{ en: "Touch lightly", zh: "轻轻摸就好" }}>
 
-Use the opposite hand and a comfortable unloaded lift. You need no hard resistance to recognise the rounded superficial muscle. Deep cuff muscles cannot be identified reliably by poking through deltoid. The diagram and attachment markers are more useful for locating them.
+Use the other hand and an easy lift without a weight; you do not need resistance to feel the deltoid. The cuff muscles lie under it and cannot be told apart by pressing through it. Their attachment markers on the stage are a better guide.
 
 </More>
 
@@ -175,23 +179,23 @@ Use the opposite hand and a comfortable unloaded lift. You need no hard resistan
 
 <Lang zh>
 
-三角肌包住肩部前面、侧面和后面。看模型时，可以从锁骨沿纤维追到上臂，再从肩后方比较另一条拉力线。骨头上的附着标记，比只看肩外形更能说明肌肉走向。它是一块肌肉，分<Num s="M1">三个</Num>解剖部分，健身时常叫前束、中束、后束。各部分的起点不同，所以拉力方向不同 [M1] [M48] [M31]。
+三角肌包住肩部的前面、侧面和后面。它是一块肌肉，分<Num s="M1">三个</Num>部分，健身房里叫前束、中束和后束。三个部分起于不同的骨头，所以各自把手臂往不同方向拉 [M1] [M48] [M31]。舞台上，空心圆表示起点，实心圆表示止点。
 
-**锁骨部（三角肌前部）**起于锁骨外侧<Num s="M1">三分之一</Num>的前缘和上面，纤维向下走向上臂。**肩峰部（三角肌中部）**起于<Term id="acromion">肩峰</Term>的外侧缘和上面，肩峰是肩胛骨向外伸出的屋顶状突起。**肩胛冈部（三角肌后部）**起于肩后方的肩胛冈下唇 [M1] [M48]。
+**锁骨部**（三角肌前部）起于锁骨外侧<Num s="M1">三分之一</Num>的前缘和上面。**肩峰部**（三角肌中部）起于<Term id="acromion">肩峰</Term>的外侧缘和上面，肩峰就是肩膀顶上那块扁平的“骨头屋顶”。**肩胛冈部**（三角肌后部）起于肩胛冈的下唇，肩胛冈是横过肩胛骨背面的那条骨嵴 [M1] [M48]。
 
-各部分都汇到<Term id="deltoid-tuberosity">三角肌粗隆</Term>，也就是肱骨干外侧的粗糙附着区。中部呈<Term id="multipennate">多羽状排列</Term>：纤维斜接在内部腱束之间。前后部的内部排列有所不同；模型的直条纹只是教学简化，并没有画出每一束 [M1] [M48]。<FlyTo preset="back">看后部</FlyTo>
+三个部分都止于<Term id="deltoid-tuberosity">三角肌粗隆</Term>，那是肱骨外侧中段一块粗糙的地方。中部肌肉内部有几片腱膜，短短的肌纤维斜着接在它们之间，叫<Term id="multipennate">多羽状排列</Term>；前部和后部的结构简单一些。模型上移动的条纹只表示大致的纤维方向，并没有画出每一束 [M1] [M48]。<FlyTo preset="back">看后部</FlyTo>
 
-前部帮助肩屈，把手臂前举；中部在侧举的肩外展中发挥重要作用；后部帮助肩伸与水平外展，把手臂后拉，或把抬起的手臂向后打开 [M2] [M31]。不负重时轻摸表面即可辨认三角肌。摸到变硬只能说明肌肉在工作，不能测出力量，也不能证明只有这一部分在活动。
+前部把手臂向前抬，也就是肩屈。中部把手臂向侧面抬起。后部把手臂往后拉，也能把抬起的手臂向外、向后打开 [M2] [M31]。不拿重量在自己身上试试：手臂分别向前、向侧面、向后抬，每次肩头变硬的地方都不一样。
 
-<More title={{ en: "Names describe the attachment", zh: "名字描述附着位置" }}>
+<More title={{ en: "Two sets of names", zh: "两套名字" }}>
 
-锁骨部、肩峰部和肩胛冈部按起点所在的骨或骨突命名。前部、中部和后部描述身体上的位置。两套名字说的是同样的部分，并不是额外的肌肉。整体三角肌卡把它们归在一起，每个网格和索引条目则选中其中一部。
+锁骨部、肩峰部、肩胛冈部，是按起点所在的骨头命名的；前部、中部、后部，说的是它们在身上的位置。两套名字说的都是同一块肌肉的三个部分，不是另外几块肌肉。三角肌整体的肌肉卡讲整块肌肉，舞台和索引则可以单独选中每一部分。
 
 </More>
 
 <More title={{ en: "Touch lightly", zh: "轻轻摸就好" }}>
 
-用另一只手，在舒服、不负重的抬臂动作中轻摸。辨认表面的圆形肌肉，不需要很大的阻力。隔着三角肌用力戳，不能可靠地区分深处的肩袖肌。定位这些肌肉时，图谱和附着点标记更有帮助。
+用另一只手，在不负重、轻松的抬臂动作中摸。要摸到三角肌，不需要任何阻力。肩袖肌肉在它下面，隔着三角肌按是分不出来的；舞台上的附着点标记更能帮你找到它们。
 
 </More>
 

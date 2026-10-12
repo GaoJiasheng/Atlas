@@ -58,9 +58,9 @@ state:
     - rectus-abdominis
     - external-oblique
     caption:
-      en: Rectus lies near the midline. External oblique covers the sides, with internal oblique and transversus beneath
-        it. Four muscle groups are not four uniform sheets.
-      zh: 腹直肌靠近正中线，腹外斜肌铺在两侧，腹内斜肌和腹横肌在其下方。四组腹肌并非四张处处重叠的薄片。
+      en: 'Rectus lies near the midline. External oblique covers the sides, with internal oblique and transversus beneath
+        it: four muscles in layers.'
+      zh: 腹直肌在正中线两旁，腹外斜肌铺在两侧，其下依次是腹内斜肌和腹横肌：四块肌肉分层排列。
   - view: exploded
     explode: 0.8
     labels:
@@ -68,8 +68,8 @@ state:
     - group:intermediate
     - group:deep
     caption:
-      en: PEEL lifts the surface, middle and deep groups in order. This separates their positions for reading; bones
-        and neighbours stay put.
+      en: PEEL lifts the surface, middle and deep groups in order. This separates their positions for reading; bones and
+        neighbours stay put.
       zh: 剥层按浅、中、深的顺序移开肌肉，便于看清各层位置；骨骼与邻区留在原处。
   - layers:
     - skeleton
@@ -83,6 +83,16 @@ state:
       en: The ivory frame shows the lower rib cage, lumbar spine and pelvis. The iliopsoas continues across the hip to
         the femur.
       zh: 象牙色支架显示下胸廓、腰椎与骨盆；髂腰肌跨过髋关节连到股骨。
+    camera:
+      position:
+      - 0.2
+      - -0.06
+      - 2.35
+      target:
+      - 0
+      - -0.11
+      - 0.02
+      fov: 30
   - camera: back
     ghost:
     - superficial
@@ -101,6 +111,7 @@ state:
     - intermediate
     - neighbours
     - body
+    - transversus-abdominis
     labels:
     - psoas-major
     - iliacus
@@ -134,11 +145,11 @@ state:
 
 A curl-up, a quiet breath and carrying a bag all involve the waist, but they ask different things of it. The **core** includes the abdominal wall, muscles beside the spine and the deep hip flexors. The ivory ribs, vertebrae and pelvis are their frame. Warm colours mark the region; grey marks neighbouring muscles. Left and right always mean the body's own sides.
 
-The abdominal wall has <Num s="M93">four</Num> main muscle groups. **Rectus abdominis** is a paired vertical strap near the midline. Along the sides, **external oblique**, **internal oblique** and **transversus abdominis** form successive sheets. Rectus sits in a tendon sheath; it is not another sheet covering the whole flank. The model's shallow, middle and deep display groups help you uncover these relationships [M92].
+The abdominal wall is built from <Num s="M93">four</Num> muscles in layers. **Rectus abdominis** (the gym's "six-pack") is a paired vertical strap near the midline. Along the sides, **external oblique**, **internal oblique** and **transversus abdominis** lie one under another, outermost to deepest. Rectus sits in a tendon sheath at the front; it is not a fourth sheet covering the whole flank. The model's shallow, middle and deep display groups help you uncover these relationships [M92].
 
-At the back, the **lumbar erectors** extend or steady the spine. **Multifidus** provides overlapping deep bundles, while **quadratus lumborum** connects the pelvic rim, lumbar processes and last rib. **Psoas major** and **iliacus** pass in front of the hip and lift the thigh. Gluteus maximus, tensor fasciae latae, latissimus and serratus are neighbours, rather than extra abdominal layers [M92].
+At the back, the **lumbar erectors** ("lower-back muscles" in the gym) extend or steady the spine. **Multifidus** provides overlapping deep bundles, while **quadratus lumborum** connects the pelvic rim, lumbar processes and last rib. **Psoas major** and **iliacus** pass in front of the hip and lift the thigh. Gluteus maximus, tensor fasciae latae, latissimus and serratus are neighbours, rather than extra abdominal layers [M92].
 
-An <Term id="origin">origin</Term> and an <Term id="insertion">insertion</Term> name a muscle's attachments. Which end moves depends on the task. Muscles pull; they can also develop tension while holding almost the same length. Resisting unwanted bending, arching and twisting is one of the core's major jobs. <FlyTo preset="front">Find the abdominal wall</FlyTo>
+An <Term id="origin">origin</Term> and an <Term id="insertion">insertion</Term> name a muscle's attachments. Which end moves depends on the task. Muscles pull; they can also develop tension while holding almost the same length. One of the core's main jobs is to resist bending, arching and twisting of the trunk: in many everyday tasks these muscles stiffen the torso rather than move it [S2]. <FlyTo preset="front">Find the abdominal wall</FlyTo>
 
 <More title={{ en: "Where the model comes from", zh: "这个模型从哪里来" }}>
 
@@ -158,13 +169,11 @@ PEEL moves tissues apart for visibility. It does not show an actual dissection d
 
 卷腹、平缓呼吸和提包都用到腰腹，却要求它完成不同任务。核心包括腹壁、脊柱旁的背肌以及深处的髋屈肌。象牙色肋骨、椎骨与骨盆构成支架；暖色是本区重点，灰色是邻近肌肉。文中的左右一律指身体自己的左右。
 
-腹壁有 <Num s="M93">四组</Num>主要肌肉：**腹直肌**在正中线两旁纵行；侧腹由浅到深依次为**腹外斜肌、腹内斜肌、腹横肌**。腹直肌住在腱性鞘内，并不是覆盖整个侧腹的第四张薄片。模型把结构归入浅、中、深三个展示组，方便逐层看清位置 [M92]。
+腹壁由<Num s="M93">四</Num>块肌肉分层构成：**腹直肌**（俗称六块腹肌）在正中线两旁纵行；侧腹由浅到深依次是**腹外斜肌、腹内斜肌、腹横肌**。腹直肌包在前方的腱性鞘里，并不是盖住整个侧腹的第四张薄片。模型把结构归入浅、中、深三个展示组，方便逐层看清位置 [M92]。
 
-后方的**竖脊肌腰段**让脊柱后伸或保持稳定；**多裂肌**的短肌束层层重叠；**腰方肌**连接骨盆上缘、腰椎横突和末肋。**腰大肌、髂肌**经过髋前方，帮助抬起大腿。臀大肌、阔筋膜张肌、背阔肌和前锯肌提供邻区背景，不属于额外的腹肌层 [M92]。
+后方的**竖脊肌腰段**（俗称下背肌）让脊柱后伸或保持稳定；**多裂肌**的短肌束层层重叠；**腰方肌**连接骨盆上缘、腰椎横突和末肋。**腰大肌、髂肌**（合称髂腰肌，俗称髋屈肌）经过髋前方，帮助抬起大腿。臀大肌、阔筋膜张肌、背阔肌和前锯肌提供邻区背景，不属于额外的腹肌层 [M92]。
 
-<Term id="origin">起点</Term>与<Term id="insertion">止点</Term>是附着端的名称，哪端移动取决于任务。肌肉只能牵拉，也能在长度基本不变时产生张力。抵抗不需要的弯曲、后仰和扭转，是核心的重要工作之一。<FlyTo preset="front">找到腹壁</FlyTo>
-
-骨架提供地标，肌肉与腱膜把地标联系起来。读图时先分清前后和深浅，再看每个端点，能避免把邻区误当成腹壁的一层；不同人的外形也会有差异。
+<Term id="origin">起点</Term>与<Term id="insertion">止点</Term>是附着端的名称，哪端移动取决于任务。肌肉只能牵拉，也能在长度基本不变时产生张力。核心的主要任务之一，是抵抗躯干的弯曲、后仰和扭转：日常许多动作里，这些肌肉让躯干变得稳固，而不是让它动起来 [S2]。<FlyTo preset="front">找到腹壁</FlyTo>
 
 <More title={{ en: "Where the model comes from", zh: "这个模型从哪里来" }}>
 

@@ -7,8 +7,8 @@
         "zh": "肩胛骨"
       },
       "definition": {
-        "en": "The flat triangular bone at the back of the shoulder; it moves on the rib cage and carries the shoulder socket.",
-        "zh": "肩后方的扁平三角骨，在胸廓上活动，外侧有肩关节的关节盂。"
+        "en": "The flat triangular bone at the back of the shoulder. It glides over the ribs and carries the socket of the shoulder joint.",
+        "zh": "肩后面那块扁平的三角形骨。它贴着肋骨滑动，外侧有肩关节的关节盂。"
       }
     },
     {
@@ -18,9 +18,12 @@
         "zh": "起点"
       },
       "definition": {
-        "en": "The usually more fixed attachment of a muscle; the moving end can change when an exercise fixes the limb.",
-        "zh": "肌肉通常较固定的附着端；肢体固定时，活动端可以改变。"
-      }
+        "en": "The end of a muscle that usually stays still when it contracts.",
+        "zh": "肌肉收缩时通常不动的那一端。"
+      },
+      "see": [
+        "insertion"
+      ]
     },
     {
       "id": "insertion",
@@ -29,9 +32,12 @@
         "zh": "止点"
       },
       "definition": {
-        "en": "The usually more mobile attachment of a muscle; force acts between this attachment and the origin.",
-        "zh": "肌肉通常较容易移动的附着端；肌肉在它与起点之间产生拉力。"
-      }
+        "en": "The end of a muscle that it pulls toward the origin when it contracts.",
+        "zh": "肌肉收缩时被拉向起点的那一端。"
+      },
+      "see": [
+        "origin"
+      ]
     },
     {
       "id": "thoracolumbar-fascia",
@@ -40,8 +46,8 @@
         "zh": "胸腰筋膜"
       },
       "definition": {
-        "en": "The connective-tissue sheets of the thoracic and lumbar back that surround muscles and provide attachments.",
-        "zh": "胸背与腰背的结缔组织膜，包围肌肉并提供附着。"
+        "en": "Tough sheets of connective tissue over the back of the trunk, from the ribs to the pelvis; latissimus dorsi starts on them.",
+        "zh": "覆盖躯干背面、从肋骨一直到骨盆的强韧结缔组织膜；背阔肌就起于这里。"
       }
     },
     {
@@ -51,8 +57,8 @@
         "zh": "肌腱"
       },
       "definition": {
-        "en": "Strong connective tissue that transmits muscle force to an attachment, commonly a bone.",
-        "zh": "把肌肉力量传到附着处的强韧结缔组织，通常连接骨骼。"
+        "en": "A tough cord or sheet that joins a muscle to a bone and carries its pull.",
+        "zh": "把肌肉连到骨头上、传递拉力的强韧条索或薄片。"
       }
     },
     {
@@ -62,9 +68,12 @@
         "zh": "后缩"
       },
       "definition": {
-        "en": "Movement of the shoulder blade towards the spine.",
-        "zh": "肩胛骨向脊柱靠近的移动。"
-      }
+        "en": "Drawing the shoulder blade back toward the spine.",
+        "zh": "把肩胛骨往后拉向脊柱。"
+      },
+      "see": [
+        "upward-rotation"
+      ]
     },
     {
       "id": "rotator-cuff",
@@ -73,9 +82,12 @@
         "zh": "肩袖"
       },
       "definition": {
-        "en": "Supraspinatus, infraspinatus, teres minor and subscapularis, whose tendons surround and help steady the shoulder joint.",
-        "zh": "冈上肌、冈下肌、小圆肌、肩胛下肌及其肌腱，围绕并帮助稳定肩关节。"
-      }
+        "en": "Four muscles, supraspinatus, infraspinatus, teres minor and subscapularis, whose tendons wrap the shoulder joint and hold the head of the humerus in its socket.",
+        "zh": "冈上肌、冈下肌、小圆肌和肩胛下肌四块肌肉。它们的腱包住肩关节，把肱骨头稳在关节盂里。"
+      },
+      "see": [
+        "external-rotation"
+      ]
     },
     {
       "id": "external-rotation",
@@ -84,9 +96,12 @@
         "zh": "外旋"
       },
       "definition": {
-        "en": "Turning a limb outward around its long axis; at the shoulder this turns the humerus, not just the forearm.",
-        "zh": "肢体沿长轴向外转；肩关节外旋转动的是肱骨，不只是前臂。"
-      }
+        "en": "Turning the upper arm outward about its own long axis.",
+        "zh": "上臂绕着自己的长轴向外转。"
+      },
+      "see": [
+        "rotator-cuff"
+      ]
     },
     {
       "id": "upward-rotation",
@@ -95,19 +110,22 @@
         "zh": "上回旋"
       },
       "definition": {
-        "en": "Rotation of the shoulder blade that turns its socket upward as the arm rises.",
-        "zh": "肩胛骨回旋使关节盂朝上，配合手臂抬高。"
-      }
+        "en": "Turning the shoulder blade so that its socket faces up, which lets the arm rise overhead.",
+        "zh": "把肩胛骨转一下，让关节盂朝上，手臂才能举过头顶。"
+      },
+      "see": [
+        "retraction"
+      ]
     },
     {
       "id": "extension",
       "term": {
         "en": "Extension",
-        "zh": "伸展"
+        "zh": "伸"
       },
       "definition": {
-        "en": "A joint movement that generally increases its angle; at the shoulder it moves the arm backwards, and at the spine it bends the trunk back.",
-        "zh": "通常增大关节角的动作；肩关节伸展让手臂向后，脊柱伸展让躯干向后。"
+        "en": "Straightening a joint or moving it backward: at the shoulder the arm moves back, at the spine the trunk straightens or bends back.",
+        "zh": "把关节伸直或往后动：肩关节伸是手臂往后，脊柱伸是躯干伸直或往后仰。"
       }
     },
     {
@@ -117,9 +135,12 @@
         "zh": "脊柱中立位"
       },
       "definition": {
-        "en": "A controlled spinal position retaining the usual curves, rather than forcing maximal rounding or arching.",
-        "zh": "保留通常曲线的受控脊柱位置，不刻意做到最大弓背或挺腰。"
-      }
+        "en": "Holding the back in its natural curves, neither rounded forward nor arched back.",
+        "zh": "让背保持自然的弧度，既不往前弓，也不往后挺。"
+      },
+      "see": [
+        "isometric"
+      ]
     },
     {
       "id": "isometric",
@@ -128,9 +149,12 @@
         "zh": "等长收缩"
       },
       "definition": {
-        "en": "Generating muscle force while muscle length and the related joint position remain approximately steady.",
-        "zh": "肌肉产生力量，长度与相关关节位置大致保持不变。"
-      }
+        "en": "A contraction in which the muscle works hard but stays the same length, so the joint does not move.",
+        "zh": "肌肉用力但长度不变的收缩，所以关节不动。"
+      },
+      "see": [
+        "neutral-spine"
+      ]
     },
     {
       "id": "emg",
@@ -139,8 +163,8 @@
         "zh": "肌电（肌电图）"
       },
       "definition": {
-        "en": "Recording a muscle’s electrical activity; exercise comparisons do not by themselves predict muscle growth.",
-        "zh": "记录肌肉电活动；动作间的肌电比较本身不能预测增肌效果。"
+        "en": "Electromyography: recording the electrical activity of a muscle. Higher EMG does not by itself mean more strength or growth.",
+        "zh": "肌电图：记录肌肉的电活动。肌电高本身不等于更有力或长得更多。"
       }
     },
     {
@@ -150,8 +174,8 @@
         "zh": "离心阶段"
       },
       "definition": {
-        "en": "The part of a movement during which an active muscle lengthens under load.",
-        "zh": "正在用力的肌肉在负荷下被拉长的动作阶段。"
+        "en": "The part of a movement in which a working muscle lengthens under load, such as lowering a weight under control.",
+        "zh": "动作中正在用力的肌肉在负荷下被拉长的阶段，例如有控制地放下重量。"
       }
     }
   ]

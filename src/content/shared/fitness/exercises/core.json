@@ -20,8 +20,8 @@
         "transversus-abdominis"
       ],
       "setup": {
-        "en": "Use a mat on a firm floor. This is a small trunk curl, not a full sit-up; keep the feet unanchored. The drawing shows the complete exercise; the upright anatomy model shows only trunk and hip relationships.",
-        "zh": "在结实地面铺垫子。这是小幅卷腹，双脚不固定，不需要坐起来。 示意图给出完整动作；直立解剖模型只展示躯干与髋的关系。"
+        "en": "Use a mat on a firm floor. This is a small trunk curl, not a full sit-up; keep the feet unanchored. The model lies in the exercise position with its arms at its sides; the drawing shows what the arms do.",
+        "zh": "在结实地面铺垫子。这是小幅卷腹，双脚不固定，不需要坐起来。模型摆出动作体位，手臂仍放在身体两侧；手臂怎么做看示意图。"
       },
       "steps": [
         {
@@ -115,8 +115,16 @@
       "motion": {
         "root": {
           "rotation": [
+            -90,
             0,
+            0
+          ]
+        },
+        "equipment": {
+          "kind": "floor",
+          "at": [
             0,
+            -0.135,
             0
           ]
         },
@@ -125,15 +133,19 @@
             "phase": "start",
             "joints": {
               "trunk": {
-                "flexion": 0,
-                "lateral-flexion": 0,
-                "rotation": 0
+                "flexion": 0
               },
               "hip.l": {
                 "flexion": 45
               },
               "hip.r": {
                 "flexion": 45
+              },
+              "knee.l": {
+                "flexion": 112
+              },
+              "knee.r": {
+                "flexion": 112
               }
             },
             "contract": {
@@ -144,20 +156,25 @@
             "phase": "end",
             "joints": {
               "trunk": {
-                "flexion": 15,
-                "rotation": 0,
-                "lateral-flexion": 0
+                "flexion": 6
               },
               "hip.l": {
-                "flexion": 45
+                "flexion": 39
               },
               "hip.r": {
-                "flexion": 45
+                "flexion": 39
+              },
+              "knee.l": {
+                "flexion": 112
+              },
+              "knee.r": {
+                "flexion": 112
               }
             },
             "contract": {
-              "rectus-abdominis": 0.55,
-              "internal-oblique": 0.25
+              "rectus-abdominis": 0.45,
+              "internal-oblique": 0.2,
+              "external-oblique": 0.2
             }
           }
         ],
@@ -200,8 +217,8 @@
         "multifidus-lumborum"
       ],
       "setup": {
-        "en": "Lie on a mat with space to reach an arm and the opposite leg. Start with a short reach; a heel slide is an easier learning version. The drawing shows the complete exercise; the upright anatomy model shows only trunk and hip relationships.",
-        "zh": "仰卧在垫上，留出伸手和伸对侧腿的空间。先伸短一点；脚跟沿地面滑动是更容易的学习版本。 示意图给出完整动作；直立解剖模型只展示躯干与髋的关系。"
+        "en": "Lie on a mat with space to reach an arm and the opposite leg. Start with a short reach; a heel slide is an easier learning version. The model lies in the exercise position with its arms at its sides; the drawing shows what the arms do.",
+        "zh": "仰卧在垫上，留出伸手和伸对侧腿的空间。先伸短一点；脚跟沿地面滑动是更容易的学习版本。模型摆出动作体位，手臂仍放在身体两侧；手臂怎么做看示意图。"
       },
       "steps": [
         {
@@ -285,8 +302,16 @@
       "motion": {
         "root": {
           "rotation": [
+            -90,
             0,
+            0
+          ]
+        },
+        "equipment": {
+          "kind": "floor",
+          "at": [
             0,
+            -0.12,
             0
           ]
         },
@@ -295,14 +320,18 @@
             "phase": "start",
             "joints": {
               "trunk": {
-                "flexion": 0,
-                "lateral-flexion": 0,
-                "rotation": 0
+                "flexion": 0
               },
               "hip.l": {
                 "flexion": 90
               },
               "hip.r": {
+                "flexion": 90
+              },
+              "knee.l": {
+                "flexion": 90
+              },
+              "knee.r": {
                 "flexion": 90
               }
             },
@@ -317,22 +346,27 @@
             "phase": "end",
             "joints": {
               "trunk": {
-                "flexion": 0,
-                "lateral-flexion": 0,
-                "rotation": 0
+                "flexion": 0
               },
               "hip.l": {
                 "flexion": 90
               },
               "hip.r": {
-                "flexion": 25
+                "flexion": 20
+              },
+              "knee.l": {
+                "flexion": 90
+              },
+              "knee.r": {
+                "flexion": 10
               }
             },
             "contract": {
               "rectus-abdominis": 0,
               "external-oblique": 0,
               "internal-oblique": 0,
-              "transversus-abdominis": 0
+              "transversus-abdominis": 0,
+              "psoas-major": 0.2
             }
           }
         ],
@@ -376,8 +410,8 @@
         "erector-spinae-lumbar"
       ],
       "setup": {
-        "en": "Use a non-slip mat. Learn with the knees supported if the full position is difficult. The sketch shows the full position, already set up in both panels. The drawing shows the complete exercise; the upright anatomy model shows only trunk and hip relationships.",
-        "zh": "用防滑垫。完整姿势较难时，先让膝盖着地。示意图两格都画已经撑起的完整姿势。 示意图给出完整动作；直立解剖模型只展示躯干与髋的关系。"
+        "en": "Use a non-slip mat. Learn with the knees supported if the full position is difficult. The model lies in the exercise position with its arms at its sides; the drawing shows what the arms do.",
+        "zh": "用防滑垫。完整姿势较难时，先让膝盖着地。模型摆出动作体位，手臂仍放在身体两侧；手臂怎么做看示意图。"
       },
       "steps": [
         {
@@ -465,8 +499,16 @@
       "motion": {
         "root": {
           "rotation": [
+            80,
             0,
+            0
+          ]
+        },
+        "equipment": {
+          "kind": "floor",
+          "at": [
             0,
+            -0.355,
             0
           ]
         },
@@ -475,14 +517,18 @@
             "phase": "start",
             "joints": {
               "trunk": {
-                "flexion": 0,
-                "rotation": 0,
-                "lateral-flexion": 0
+                "flexion": 0
               },
               "hip.l": {
                 "flexion": 0
               },
               "hip.r": {
+                "flexion": 0
+              },
+              "knee.l": {
+                "flexion": 0
+              },
+              "knee.r": {
                 "flexion": 0
               }
             },
@@ -490,22 +536,25 @@
               "rectus-abdominis": 0,
               "external-oblique": 0,
               "internal-oblique": 0,
-              "transversus-abdominis": 0,
-              "serratus-anterior": 0
+              "transversus-abdominis": 0
             }
           },
           {
             "phase": "end",
             "joints": {
               "trunk": {
-                "flexion": 0,
-                "rotation": 0,
-                "lateral-flexion": 0
+                "flexion": 0
               },
               "hip.l": {
                 "flexion": 0
               },
               "hip.r": {
+                "flexion": 0
+              },
+              "knee.l": {
+                "flexion": 0
+              },
+              "knee.r": {
                 "flexion": 0
               }
             },
@@ -513,16 +562,15 @@
               "rectus-abdominis": 0,
               "external-oblique": 0,
               "internal-oblique": 0,
-              "transversus-abdominis": 0,
-              "serratus-anterior": 0
+              "transversus-abdominis": 0
             }
           }
         ],
         "tempo": [
           2,
-          1,
+          0.5,
           2,
-          1
+          0.5
         ]
       },
       "sources": [
@@ -557,8 +605,8 @@
         "multifidus-lumborum"
       ],
       "setup": {
-        "en": "Lie on the right side on a non-slip mat. Resist side bending and rolling; begin with bent-knee support if the straight-leg version is too demanding. The drawing shows the complete exercise; the upright anatomy model shows only trunk and hip relationships.",
-        "zh": "在防滑垫上右侧卧，抵抗侧弯和翻转；双腿伸直较难时，先用屈膝支撑。 示意图给出完整动作；直立解剖模型只展示躯干与髋的关系。"
+        "en": "Lie on the right side on a non-slip mat. Resist side bending and rolling; begin with bent-knee support if the straight-leg version is too demanding. The model lies in the exercise position with its arms at its sides; the drawing shows what the arms do.",
+        "zh": "在防滑垫上右侧卧，抵抗侧弯和翻转；双腿伸直较难时，先用屈膝支撑。模型摆出动作体位，手臂仍放在身体两侧；手臂怎么做看示意图。"
       },
       "steps": [
         {
@@ -644,22 +692,35 @@
           "rotation": [
             0,
             0,
-            0
+            75
           ]
+        },
+        "equipment": {
+          "kind": "floor",
+          "at": [
+            0.15,
+            -0.4,
+            0
+          ],
+          "turn": 90
         },
         "keys": [
           {
             "phase": "start",
             "joints": {
               "trunk": {
-                "flexion": 0,
-                "rotation": 0,
-                "lateral-flexion": 0
+                "flexion": 0
               },
               "hip.l": {
                 "flexion": 0
               },
               "hip.r": {
+                "flexion": 0
+              },
+              "knee.l": {
+                "flexion": 0
+              },
+              "knee.r": {
                 "flexion": 0
               }
             },
@@ -674,14 +735,18 @@
             "phase": "end",
             "joints": {
               "trunk": {
-                "flexion": 0,
-                "rotation": 0,
-                "lateral-flexion": 0
+                "flexion": 0
               },
               "hip.l": {
                 "flexion": 0
               },
               "hip.r": {
+                "flexion": 0
+              },
+              "knee.l": {
+                "flexion": 0
+              },
+              "knee.r": {
                 "flexion": 0
               }
             },
@@ -733,8 +798,8 @@
         "quadratus-lumborum"
       ],
       "setup": {
-        "en": "Use a mat with space to reach forwards and backwards. Practise moving a hand or a leg alone before lifting an opposite pair if balance is difficult. The drawing shows the complete exercise; the upright anatomy model shows only trunk and hip relationships.",
-        "zh": "在垫上留出前后伸展空间。平衡较难时，先只动一只手或一条腿，再尝试对侧肢体一起抬起。 示意图给出完整动作；直立解剖模型只展示躯干与髋的关系。"
+        "en": "Use a mat with space to reach forwards and backwards. Practise moving a hand or a leg alone before lifting an opposite pair if balance is difficult. The model lies in the exercise position with its arms at its sides; the drawing shows what the arms do.",
+        "zh": "在垫上留出前后伸展空间。平衡较难时，先只动一只手或一条腿，再尝试对侧肢体一起抬起。模型摆出动作体位，手臂仍放在身体两侧；手臂怎么做看示意图。"
       },
       "steps": [
         {
@@ -818,8 +883,16 @@
       "motion": {
         "root": {
           "rotation": [
+            90,
             0,
+            0
+          ]
+        },
+        "equipment": {
+          "kind": "floor",
+          "at": [
             0,
+            -0.52,
             0
           ]
         },
@@ -828,15 +901,25 @@
             "phase": "start",
             "joints": {
               "trunk": {
-                "flexion": 0,
-                "lateral-flexion": 0,
-                "rotation": 0
+                "flexion": 0
               },
               "hip.l": {
                 "flexion": 90
               },
               "hip.r": {
                 "flexion": 90
+              },
+              "knee.l": {
+                "flexion": 90
+              },
+              "knee.r": {
+                "flexion": 90
+              },
+              "ankle.l": {
+                "dorsiflexion": -60
+              },
+              "ankle.r": {
+                "dorsiflexion": -60
               }
             },
             "contract": {
@@ -849,21 +932,32 @@
             "phase": "end",
             "joints": {
               "trunk": {
-                "flexion": 0,
-                "lateral-flexion": 0,
-                "rotation": 0
+                "flexion": 0
               },
               "hip.l": {
                 "flexion": 90
               },
               "hip.r": {
                 "flexion": 0
+              },
+              "knee.l": {
+                "flexion": 90
+              },
+              "knee.r": {
+                "flexion": 0
+              },
+              "ankle.l": {
+                "dorsiflexion": -60
+              },
+              "ankle.r": {
+                "dorsiflexion": -60
               }
             },
             "contract": {
               "multifidus-lumborum": 0,
               "erector-spinae-lumbar": 0,
-              "transversus-abdominis": 0
+              "transversus-abdominis": 0,
+              "gluteus-maximus": 0.3
             }
           }
         ],
@@ -909,8 +1003,8 @@
         "serratus-anterior"
       ],
       "setup": {
-        "en": "Use a secure overhead bar and a stable step for getting on and off. Learn supported standing knee raises first; do not start here if an overhead hang is painful or unstable. The drawing shows the complete exercise; the upright anatomy model shows only trunk and hip relationships.",
-        "zh": "用牢固的单杠和稳固的上下台阶。先学扶稳站姿抬膝；悬垂会痛或撑不稳时，不从这个动作开始。 示意图给出完整动作；直立解剖模型只展示躯干与髋的关系。"
+        "en": "Use a secure overhead bar and a stable step for getting on and off. Learn supported standing knee raises first; do not start here if an overhead hang is painful or unstable. The model hangs without the bar or arms overhead; the drawing shows the complete exercise.",
+        "zh": "用牢固的单杠和稳固的上下台阶。先学扶稳站姿抬膝；悬垂会痛或撑不稳时，不从这个动作开始。模型不画单杠，手臂也没有举过头；完整动作看示意图。"
       },
       "steps": [
         {
@@ -1082,8 +1176,8 @@
         "quadratus-lumborum"
       ],
       "setup": {
-        "en": "Stand beside a fixed support on a non-slip floor. Use a light fingertip touch for balance, with room in front of the knee. The drawing shows the complete exercise; the upright anatomy model shows only trunk and hip relationships.",
-        "zh": "在防滑地面站到固定支撑物旁，用指尖轻扶保持平衡，膝前留出空间。 示意图给出完整动作；直立解剖模型只展示躯干与髋的关系。"
+        "en": "Stand beside a fixed support on a non-slip floor. Use a light fingertip touch for balance, with room in front of the knee. The model stands without the equipment; the drawing shows the complete exercise.",
+        "zh": "在防滑地面站到固定支撑物旁，用指尖轻扶保持平衡，膝前留出空间。模型直立、不画器械；完整动作看示意图。"
       },
       "steps": [
         {
@@ -1252,8 +1346,8 @@
         "quadratus-lumborum"
       ],
       "setup": {
-        "en": "Set a single pulley and handle at chest height with a light load. Stand with your right side facing the column; the cable should pull sideways rather than up or down. The drawing shows the complete exercise; the upright anatomy model shows only trunk and hip relationships.",
-        "zh": "单侧滑轮和把手调到胸高，选轻重量。右侧朝向绳索柱，绳索应横向拉，不往上或往下拉。 示意图给出完整动作；直立解剖模型只展示躯干与髋的关系。"
+        "en": "Set a single pulley and handle at chest height with a light load. Stand with your right side facing the column; the cable should pull sideways rather than up or down. The model stands without the equipment; the drawing shows the complete exercise.",
+        "zh": "单侧滑轮和把手调到胸高，选轻重量。右侧朝向绳索柱，绳索应横向拉，不往上或往下拉。模型直立、不画器械；完整动作看示意图。"
       },
       "steps": [
         {
@@ -1430,8 +1524,8 @@
         "multifidus-lumborum"
       ],
       "setup": {
-        "en": "Clear a level walking path. Set a light dumbbell on a stable raised support so you can pick it up and put it down without rushing or twisting. The drawing shows the complete exercise; the upright anatomy model shows only trunk and hip relationships.",
-        "zh": "清出平坦行走路线。轻哑铃放在稳固高台上，取放时不用急着弯身或扭腰。 示意图给出完整动作；直立解剖模型只展示躯干与髋的关系。"
+        "en": "Clear a level walking path. Set a light dumbbell on a stable raised support so you can pick it up and put it down without rushing or twisting. The model stands without the equipment; the drawing shows the complete exercise.",
+        "zh": "清出平坦行走路线。轻哑铃放在稳固高台上，取放时不用急着弯身或扭腰。模型直立、不画器械；完整动作看示意图。"
       },
       "steps": [
         {

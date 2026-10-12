@@ -10,6 +10,18 @@
         "en": "Geometry and attachment review derive from scripts/anatomy/core. Trunk motion uses one teaching pivot, not individual lumbar vertebrae; muscle signals do not measure force or EMG.",
         "zh": "几何及附着审查来自 scripts/anatomy/core；躯干用一个教学支点，不逐节活动腰椎；肌肉信号不是力量或肌电测量。"
       }
+    },
+    {
+      "id": "S2",
+      "text": {
+        "en": "McGill S. M. Core training: evidence translating to better performance and injury prevention. Strength and Conditioning Journal 32(3): 33–46, 2010. doi:10.1519/SSC.0b013e3181df4521.",
+        "zh": "McGill S. M.《核心训练：转化为更好表现与伤害预防的证据》，Strength and Conditioning Journal 32(3): 33–46，2010 年。doi:10.1519/SSC.0b013e3181df4521。"
+      },
+      "url": "https://doi.org/10.1519/SSC.0b013e3181df4521",
+      "note": {
+        "en": "Abstract read (publisher page paywalled; abstract text read in an indexed reproduction, 12 October 2026). The abstract states that in many real-life activities the core muscles stiffen the torso and function primarily to prevent motion, unlike limb muscles that create motion. Used only for that role of the core; the review's exercise progressions, performance and injury-prevention claims are not adopted. Some reference lists give the pages as 33–47.",
+        "zh": "只读到摘要（出版社页面需付费；2026 年 10 月 12 日在索引转载中读到摘要原文）。摘要指出：在许多日常活动中，核心肌肉让躯干变得稳固，主要作用是阻止运动，这与产生运动的四肢肌肉不同。本主题只引用这一点；文中的训练进阶、运动表现与伤害预防主张未采用。部分文献目录把页码写作 33–47。"
+      }
     }
   ]
 }

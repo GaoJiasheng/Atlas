@@ -95,12 +95,12 @@
         "zh": "让躯干前屈，也帮助抵抗腰背后仰。"
       },
       "detail": {
-        "en": "This paired strap runs from the pubis to the front of the lower rib cage. Its tendon bands make the familiar segmented outline; the upper and lower regions are parts of the same muscle [M92].\n\nThe abdominal wall has four main muscle groups: rectus abdominis and the external oblique, internal oblique and transversus abdominis. The three lateral sheets are stacked; rectus sits nearer the midline inside its sheath, rather than forming a fourth sheet over the whole side [M92] [M93]. It can shorten in a curl-up or hold nearly the same length to resist extension in a plank.\n\nTraining abdominal muscles cannot be relied on to selectively remove abdominal fat. Vispute and colleagues (2011) found improved curl-up endurance without a significant reduction in abdominal-fat measures after their abdominal-exercise programme [M98].",
-        "zh": "这对长条肌从耻骨延伸到前下胸廓。横向腱划形成大家熟悉的分段轮廓；“上腹”和“下腹”仍是同一块肌肉的不同区域 [M92]。\n\n腹壁有四组主要肌肉：腹直肌、腹外斜肌、腹内斜肌和腹横肌。侧腹的后三组由浅到深叠放；腹直肌在靠近正中线的腹直肌鞘里，并不是盖在整个侧腹上方的第四层薄片 [M92] [M93]。卷腹时它缩短；平板支撑时它可以主要保持长度，抵抗躯干过度后伸。\n\n练腹肌不能专门减掉腹部脂肪。Vispute 等（2011）的腹部训练研究发现，卷腹耐力提高了，但腹部脂肪相关测量没有显著下降 [M98]。"
+        "en": "This paired strap runs from the pubis to the front of the lower rib cage. Its tendon bands make the familiar segmented outline; the upper and lower regions are parts of the same muscle [M92].\n\nThe abdominal wall is four muscles in layers: rectus abdominis in front, and the external oblique, internal oblique and transversus abdominis at the sides. The three lateral sheets are stacked; rectus sits nearer the midline inside its sheath, rather than forming a fourth sheet over the whole side [M92] [M93]. It can shorten in a curl-up or hold nearly the same length to resist extension in a plank.\n\nTraining the abdominal muscles does not remove the fat over them; fat cannot be reduced in one spot by exercising the muscle beneath. Vispute and colleagues (2011) found improved curl-up endurance without a significant reduction in abdominal-fat measures after their abdominal-exercise programme [M98].",
+        "zh": "这对长条肌从耻骨延伸到前下胸廓。横向腱划形成大家熟悉的分段轮廓；“上腹”和“下腹”仍是同一块肌肉的不同区域 [M92]。\n\n腹壁由四块肌肉分层构成：前方的腹直肌，以及侧面的腹外斜肌、腹内斜肌和腹横肌。侧腹的后三组由浅到深叠放；腹直肌在靠近正中线的腹直肌鞘里，并不是盖在整个侧腹上方的第四层薄片 [M92] [M93]。卷腹时它缩短；平板支撑时它可以主要保持长度，抵抗躯干过度后伸。\n\n练腹肌并不能把覆盖在腹肌上的脂肪“局部”减掉。Vispute 等（2011）的腹部训练研究发现，卷腹耐力提高了，但腹部脂肪相关测量没有显著下降 [M98]。"
       },
       "common": {
         "en": "abs, six-pack",
-        "zh": "腹肌、六块腹肌"
+        "zh": "六块腹肌"
       },
       "injury": {
         "en": "A location of pain does not identify a damaged muscle. Stop a painful movement and seek assessment rather than using this card as a diagnosis. [M57]",
@@ -220,8 +220,8 @@
         "zh": "侧腹的中间层，纤维像扇子一样朝多个方向展开，不是整块都沿同一条斜线 [M92]。左腹内斜肌帮助胸口向左转，与右腹外斜肌配合；两侧一起作用时，帮助躯干前屈并压缩腹部 [M92]。\n\n这里列的是抵抗旋转和侧弯的动作。这些任务由多块肌肉共同完成，不能单独练到中间这一层。"
       },
       "common": {
-        "en": "deep obliques",
-        "zh": "深层侧腹肌"
+        "en": "obliques",
+        "zh": "侧腹"
       },
       "injury": {
         "en": "A location of pain does not identify a damaged muscle. Stop a painful movement and seek assessment rather than using this card as a diagnosis. [M57]",
@@ -316,10 +316,6 @@
       "detail": {
         "en": "The deepest lateral abdominal sheet draws its wall inward and helps generate abdominal pressure. It cooperates with the other abdominal and back muscles; it does not produce a large visible trunk bend [M92].\n\nGently firm the wall while continuing to breathe. These exercises involve shared stabilising work and cannot isolate one abdominal layer. Fibre arrangement is a broad teaching description, not a measurement.",
         "zh": "侧腹最深的肌片向内牵拉腹壁，参与产生腹内压。它与其他腹肌、背肌协作，不会造成很大的躯干弯曲 [M92]。\n\n轻轻绷紧腹壁，同时保持呼吸。所列动作练的是多块肌肉共同稳定，不能孤立训练某一层。纤维排列是整体教学概括，不是测量值。"
-      },
-      "common": {
-        "en": "deep abdominal wall",
-        "zh": "深层腹肌"
       },
       "injury": {
         "en": "A location of pain does not identify a damaged muscle. Stop a painful movement and seek assessment rather than using this card as a diagnosis. [M57]",
@@ -459,7 +455,7 @@
       "insertion": {
         "text": {
           "en": "Iliocostalis lumborum reaches the angles of the lower ribs; longissimus thoracis reaches lumbar accessory/transverse processes, thoracic transverse processes and ribs between their tubercles and angles. These full muscles continue above the lumbar display region.",
-          "zh": "髂肋肌腰部止于下位肋的肋角；胸最长肌连到腰椎副突和横突、胸椎横突，以及肋结节与肋角之间的肋骨。完整肌肉延伸到本主题展示的腰段以外。"
+          "zh": "腰髂肋肌止于下位肋的肋角；胸最长肌连到腰椎副突和横突、胸椎横突，以及肋结节与肋角之间的肋骨。完整肌肉延伸到本主题展示的腰段以外。"
         },
         "bones": [
           "thorax",
@@ -506,7 +502,7 @@
       ],
       "feel": {
         "en": "Place fingertips beside, not on, the bony midline of the low back. During a shallow unloaded hip hinge, the long bands may firm up as they hold the back steady.",
-        "zh": "手指轻放在下背正中骨性突起的两旁，不要直接按脊柱。做小幅徒手髋折叠时，两条长肌带可能变硬，帮你稳住腰背。"
+        "zh": "手指轻放在下背正中骨性突起的两旁，不要直接按脊柱。做小幅徒手髋铰链时，两条长肌带可能变硬，帮你稳住腰背。"
       },
       "mistakes": [
         {
@@ -526,11 +522,11 @@
       ],
       "summary": {
         "en": "Extends the spine or holds it steady during a hinge.",
-        "zh": "让脊柱后伸，也在髋折叠时稳住脊柱。"
+        "zh": "让脊柱后伸，也在髋铰链时稳住脊柱。"
       },
       "detail": {
-        "en": "This display merges iliocostalis lumborum and longissimus thoracis. Their full source meshes are retained; the name identifies the lumbar teaching focus, not a cropped new muscle. Spinalis belongs to the erector group but is absent from this part [M92].\n\nIn the Romanian deadlift, hip extensors drive the lift while these spinal muscles mainly hold the back shape isometrically. A still spine does not mean resting muscles. The exercise links include shared stabilising tasks.",
-        "zh": "本零件合并髂肋肌腰部与胸最长肌，保留完整源网格。“腰段”指讲解重点，不是裁切后新造的肌肉。竖脊肌群还包括棘肌，本零件没有它 [M92]。\n\n罗马尼亚硬拉由伸髋肌驱动，这些脊柱肌主要等长出力，维持腰背形状。脊柱不动不等于肌肉休息。动作链接包括多块肌肉共同稳定的任务。"
+        "en": "This display merges iliocostalis lumborum and longissimus thoracis. Their full source meshes are retained; the name identifies the lumbar teaching focus, not a cropped new muscle. Spinalis belongs to the erector group but is absent from this part [M92].\n\nIn the Romanian deadlift, hip extensors drive the lift while these spinal muscles mainly hold the back shape isometrically [M55]. A still spine does not mean resting muscles. The exercise links include shared stabilising tasks.",
+        "zh": "本零件合并腰髂肋肌与胸最长肌，保留完整源网格。“腰段”指讲解重点，不是裁切后新造的肌肉。竖脊肌群还包括棘肌，本零件没有它 [M92]。\n\n罗马尼亚硬拉由伸髋肌驱动，这些脊柱肌主要等长出力，维持腰背形状 [M55]。脊柱不动不等于肌肉休息。动作链接包括多块肌肉共同稳定的任务。"
       },
       "common": {
         "en": "lower-back erectors",
@@ -545,11 +541,11 @@
       "id": "multifidus-lumborum",
       "name": {
         "en": "Multifidus, lumbar region",
-        "zh": "多裂肌腰部"
+        "zh": "多裂肌腰段"
       },
       "short": {
         "en": "Lumbar multifidus",
-        "zh": "多裂肌腰部"
+        "zh": "多裂肌腰段"
       },
       "zAnatomy": "Multifidus lumborum muscle",
       "regions": [

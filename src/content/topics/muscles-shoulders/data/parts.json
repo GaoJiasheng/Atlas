@@ -10,8 +10,8 @@
         "mesh": "deltoid-anterior.r"
       },
       "name": {
-        "en": "Deltoid, clavicular (anterior) part",
-        "zh": "三角肌锁骨部（前部）"
+        "en": "Deltoid, clavicular part",
+        "zh": "三角肌锁骨部（前束）"
       },
       "short": {
         "en": "Front deltoid",
@@ -45,8 +45,8 @@
         "mesh": "deltoid-lateral.r"
       },
       "name": {
-        "en": "Deltoid, acromial (lateral) part",
-        "zh": "三角肌肩峰部"
+        "en": "Deltoid, acromial part",
+        "zh": "三角肌肩峰部（中束）"
       },
       "short": {
         "en": "Side deltoid",
@@ -80,11 +80,11 @@
         "mesh": "deltoid-posterior.r"
       },
       "name": {
-        "en": "Deltoid, spinal (posterior) part",
-        "zh": "三角肌肩胛冈部"
+        "en": "Deltoid, spinal part",
+        "zh": "三角肌肩胛冈部（后束）"
       },
       "short": {
-        "en": "Back deltoid",
+        "en": "Rear deltoid",
         "zh": "三角肌后部"
       },
       "muscle": "deltoid-posterior",
@@ -291,11 +291,11 @@
       },
       "name": {
         "en": "Trapezius, descending part",
-        "zh": "斜方肌降部"
+        "zh": "斜方肌降部（上斜方肌）"
       },
       "short": {
         "en": "Upper trapezius",
-        "zh": "斜方肌上部"
+        "zh": "斜方肌降部"
       },
       "muscle": "trapezius-descending",
       "material": {
@@ -535,11 +535,11 @@
       },
       "name": {
         "en": "Trapezius, transverse part",
-        "zh": "斜方肌横部"
+        "zh": "斜方肌横部（中斜方肌）"
       },
       "short": {
-        "en": "Mid trapezius",
-        "zh": "斜方肌中部"
+        "en": "Middle trapezius",
+        "zh": "斜方肌横部"
       },
       "muscle": "trapezius-transverse",
       "material": {
@@ -573,8 +573,8 @@
         "zh": "肱三头肌（合并参考网格）"
       },
       "short": {
-        "en": "Triceps · grouped",
-        "zh": "肱三头肌（合并）"
+        "en": "Triceps",
+        "zh": "肱三头肌"
       },
       "muscle": "triceps-brachii-long",
       "material": {
@@ -600,8 +600,8 @@
         "zh": "只有长头跨肩关节；各头都能伸肘。"
       },
       "detail": {
-        "en": "This neighbour mesh groups all three heads, as in the chest topic. Its muscle sheet describes the long head so shoulder extension is not attributed to the other heads. Highlighting marks the group, not an isolated long-head surface [M48].",
-        "zh": "这个邻区网格像胸部主题一样合并三个头。肌肉卡讲长头，避免把肩伸归到其他头。高亮表示合并网格，不是单独长头的表面 [M48]。"
+        "en": "All three heads of triceps are drawn as one mesh here. Only the long head starts on the shoulder blade and crosses the shoulder, where it helps pull the arm back; all three straighten the elbow [M48].",
+        "zh": "这里把肱三头肌三个头画成一个网格。只有长头起于肩胛骨、跨过肩关节，在那里帮着把手臂往后拉；三个头都能伸肘 [M48]。"
       }
     },
     {
@@ -711,12 +711,12 @@
         "zh": "桡骨与尺骨"
       },
       "summary": {
-        "en": "The forearm completes the elbow chain used in pressing.",
-        "zh": "前臂补全推举时使用的肘部关节链。"
+        "en": "Completes the elbow for presses and rows.",
+        "zh": "补全推举和划船时用到的肘部。"
       },
       "detail": {
-        "en": "Shown together as one mesh per side. Biceps ends on the radius and triceps on the ulna; elbow flexion changes where the hand sits in rotations and rows. Separate forearm pronation and supination are not animated [M2] [M48].",
-        "zh": "每侧合成一个网格。肱二头肌止于桡骨，肱三头肌止于尺骨；屈肘会改变旋转和划船时手的位置。此模型不单独演示前臂旋前、旋后 [M2] [M48]。"
+        "en": "The radius and ulna, drawn as one mesh on each side. Biceps ends on the radius and triceps on the ulna; bending the elbow changes where the hand sits in rotations and rows. The forearm does not twist in this model [M2] [M48].",
+        "zh": "每侧把桡骨和尺骨合成一个网格。肱二头肌止于桡骨，肱三头肌止于尺骨；屈肘会改变旋转和划船时手的位置。模型里前臂不能单独旋转 [M2] [M48]。"
       },
       "material": {
         "color": "tissue",
@@ -741,8 +741,8 @@
         "zh": "胸壁承托肩胛骨与前锯肌。"
       },
       "detail": {
-        "en": "The manifest’s sternum and ribs selections are exported together as thorax, following the chest topic. Serratus anterior wraps the ribs to the costal surface of the scapula [M1] [M2].",
-        "zh": "按胸部模板，清单中的胸骨与肋骨合并导出为胸廓。前锯肌从肋骨绕到肩胛骨肋面 [M1] [M2]。"
+        "en": "The sternum, ribs and costal cartilages, drawn as one mesh. Serratus anterior wraps round the ribs to the rib-facing side of the shoulder blade [M1] [M2].",
+        "zh": "胸骨、肋骨和肋软骨合成一个网格。前锯肌从肋骨绕到肩胛骨贴着肋骨的那一面 [M1] [M2]。"
       },
       "material": {
         "color": "tissue",
@@ -763,12 +763,12 @@
         "zh": "颈椎"
       },
       "summary": {
-        "en": "The neck bones locate the upper trapezius beside the shoulder.",
-        "zh": "颈椎帮助辨认肩旁的上斜方肌位置。"
+        "en": "The neck vertebrae, for orientation above the shoulders.",
+        "zh": "颈椎，帮你在肩上方找准位置。"
       },
       "detail": {
-        "en": "The upper trapezius arises partly from the nuchal ligament above the neck. Its cranial attachment extends outside this topic’s exported bone set; no invented skull attachment marker is drawn [M48].",
-        "zh": "上斜方肌的部分起点来自颈部后方的项韧带。颅骨附着处超出本主题骨骼范围，因此不画虚构的颅骨标记 [M48]。"
+        "en": "The seven neck vertebrae. The upper trapezius starts on the back of the skull and on the nuchal ligament behind them; the skull is not in this model, so that origin has no marker [M48].",
+        "zh": "七节颈椎。斜方肌降部起于后脑和颈后的项韧带；模型里没有颅骨，所以这个起点没有标记 [M48]。"
       },
       "material": {
         "color": "tissue",
@@ -785,8 +785,8 @@
         "zh": "体表轮廓"
       },
       "short": {
-        "en": "Body",
-        "zh": "全身"
+        "en": "Body outline",
+        "zh": "体表轮廓"
       },
       "context": true,
       "shell": true,
@@ -1552,19 +1552,19 @@
       "bone": "humerus",
       "points": [
         [
-          0.210536,
-          -0.137027,
-          -0.029198
+          0.2098767,
+          -0.1343913,
+          -0.0269223
         ],
         [
-          0.20794,
-          -0.124927,
-          -0.025414
+          0.207192,
+          -0.1200421,
+          -0.0251051
         ],
         [
-          0.205158,
-          -0.110108,
-          -0.024782
+          0.2041923,
+          -0.1123708,
+          -0.0213445
         ]
       ]
     },
@@ -1596,19 +1596,19 @@
       "bone": "humerus",
       "points": [
         [
-          0.210536,
-          -0.137027,
-          -0.029198
+          0.2098767,
+          -0.1343913,
+          -0.0269223
         ],
         [
-          0.20794,
-          -0.124927,
-          -0.025414
+          0.207192,
+          -0.1200421,
+          -0.0251051
         ],
         [
-          0.205158,
-          -0.110108,
-          -0.024782
+          0.2041923,
+          -0.1123708,
+          -0.0213445
         ]
       ]
     },
@@ -1640,19 +1640,19 @@
       "bone": "humerus",
       "points": [
         [
-          0.210536,
-          -0.137027,
-          -0.029198
+          0.2098767,
+          -0.1343913,
+          -0.0269223
         ],
         [
-          0.20794,
-          -0.124927,
-          -0.025414
+          0.207192,
+          -0.1200421,
+          -0.0251051
         ],
         [
-          0.205158,
-          -0.110108,
-          -0.024782
+          0.2041923,
+          -0.1123708,
+          -0.0213445
         ]
       ]
     },
@@ -1662,19 +1662,19 @@
       "bone": "scapula",
       "points": [
         [
-          0.089017,
-          -0.085964,
-          -0.099065
+          0.08776,
+          -0.0921456,
+          -0.1011479
         ],
         [
-          0.0859,
-          -0.04401,
-          -0.088805
+          0.081532,
+          -0.0458239,
+          -0.090961
         ],
         [
-          0.116133,
-          -0.027192,
-          -0.07826
+          0.1173023,
+          -0.0299207,
+          -0.0743663
         ]
       ]
     },
@@ -1750,19 +1750,19 @@
       "bone": "scapula",
       "points": [
         [
-          0.101591,
-          -0.15133,
-          -0.098851
+          0.1023901,
+          -0.1494107,
+          -0.0999472
         ],
         [
-          0.10742,
-          -0.142835,
-          -0.094666
+          0.105735,
+          -0.1435347,
+          -0.097129
         ],
         [
-          0.112603,
-          -0.128092,
-          -0.090743
+          0.1101807,
+          -0.1323642,
+          -0.0928805
         ]
       ]
     },
@@ -1828,19 +1828,19 @@
       "bone": "scapula",
       "points": [
         [
-          0.099421,
-          -0.108598,
-          -0.093317
+          0.0975176,
+          -0.1114761,
+          -0.0951745
         ],
         [
-          0.107662,
-          -0.058687,
-          -0.07728
+          0.1034185,
+          -0.0544432,
+          -0.0797506
         ],
         [
-          0.099628,
-          -0.032309,
-          -0.074624
+          0.0991625,
+          -0.0325142,
+          -0.0752624
         ]
       ]
     },

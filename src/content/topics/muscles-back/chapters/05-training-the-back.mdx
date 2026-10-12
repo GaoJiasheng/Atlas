@@ -12,6 +12,9 @@ state:
   run: false
   cutaway: none
   pose: null
+  exercise:
+    id: barbell-row
+    phase: loop
   layers:
   - superficial
   - intermediate
@@ -36,8 +39,8 @@ state:
     - 0
     fov: 22
   summary:
-    en: Rows, vertical pulls, scapular work and spinal bracing share a region but train different actions.
-    zh: 划船、垂直拉、肩胛骨动作与脊柱支撑，同在背部却练不同作用。
+    en: Rows, vertical pulls, shoulder-blade work and hip hinges all train the back, each in a different way.
+    zh: 划船、垂直拉、肩胛骨的小动作和髋铰链都练背，但练法各不相同。
   beats:
   - exercise:
       id: barbell-row
@@ -60,7 +63,7 @@ state:
     caption:
       en: 'Barbell row: the arms pull back and the blades draw inward. Latissimus and the scapular retractors work while the
         erectors hold the trunk steady.'
-      zh: 杠铃划船：上臂向后拉，肩胛骨向内靠。背阔肌与肩胛后缩肌工作，竖脊肌保持躯干稳定。
+      zh: 杠铃划船：上臂往后拉，肩胛骨往中间收。背阔肌和收肩胛的肌肉在出力，竖脊肌把躯干稳住。
   - exercise:
       id: barbell-deadlift
       phase: end
@@ -74,9 +77,9 @@ state:
     - body
     camera: exercise
     caption:
-      en: 'Deadlift: this static model marks the back’s bracing role. The sketch and card show the hip-and-knee sequence;
-        the erectors resist spinal bending rather than repeatedly shorten to lift the bar.'
-      zh: 硬拉：静止模型标出背部的支撑作用。示意图与卡片展示髋、膝的过程；竖脊肌抵抗脊柱弯曲，并不是反复缩短来提杠铃。
+      en: 'Deadlift: the model holds still here because it has no hip or knee joints; the sketch shows the lift. The erectors
+        hold the spine rather than repeatedly shortening to raise the bar.'
+      zh: 硬拉：模型没有髋、膝关节，所以这里静止不动，完整动作请看示意图。竖脊肌负责稳住脊柱，并不是一次次缩短把杠拉起来。
   - exercise:
       id: single-arm-dumbbell-row
       phase: loop
@@ -87,9 +90,9 @@ state:
     - deltoid-posterior
     camera: exercise
     caption:
-      en: 'Supported single-arm dumbbell row: the working arm pulls back while the other side rests on the support. Keep the
-        trunk from twisting to manufacture extra range.'
-      zh: 支撑式单臂哑铃划船：一侧上臂向后拉，另一侧支撑。保持躯干稳定，不靠扭身凑出更大幅度。
+      en: 'One-arm dumbbell row: one hand and knee rest on the bench while the other arm pulls back. Keep the trunk square
+        rather than twisting for extra range.'
+      zh: 单臂哑铃划船：一只手和一侧膝盖撑在凳上，另一侧上臂往后拉。躯干摆正，别靠转身凑幅度。
   - exercise:
       id: dumbbell-shrug
       phase: loop
@@ -100,7 +103,7 @@ state:
     caption:
       en: 'Dumbbell shrug: lift the shoulder girdle and lower it smoothly. Descending trapezius and levator scapulae lead;
         rolling the shoulders is a different movement.'
-      zh: 哑铃耸肩：抬高肩带，再平稳放下。斜方肌降部与肩胛提肌主导；绕肩画圈是另一个动作。
+      zh: 哑铃耸肩：把肩带提起来，再平稳放下。主要靠斜方肌降部和肩胛提肌；转肩画圈是另一个动作。
   - exercise:
       id: side-lying-dumbbell-external-rotation
       phase: loop
@@ -111,11 +114,20 @@ state:
     labels:
     - infraspinatus
     - teres-minor
-    camera: exercise
+    camera:
+      position:
+      - -2.0
+      - 1.2
+      - -2.2
+      target:
+      - -0.2
+      - 0.1
+      - 0.0
+      fov: 22
     caption:
       en: 'Side-lying external rotation: the upper arm stays near the side while the forearm swings outward. Infraspinatus
         and teres minor turn and steady the shoulder.'
-      zh: 侧卧哑铃外旋：上臂靠近身体，前臂向外摆。冈下肌与小圆肌旋转、稳定肩关节。
+      zh: 侧卧哑铃外旋：上臂贴住身体，前臂向外转起。冈下肌和小圆肌负责转动，也把肩关节稳住。
   - exercise:
       id: pull-up
       phase: loop
@@ -125,9 +137,9 @@ state:
     - biceps-brachii
     camera: exercise
     caption:
-      en: 'Pull-up: the hands hold the bar while the body rises. Latissimus moves the shoulder and elbow flexors help bend
-        the elbow. Use assistance while learning the full movement.'
-      zh: 引体向上：手握固定杆，身体向上。背阔肌驱动肩关节，屈肘肌帮助弯肘；学习完整动作时可以用辅助。
+      en: 'Pull-up: the hands hold the bar and the body rises. Latissimus moves the shoulder; the elbow flexors bend the elbow.
+        Use assistance while you learn.'
+      zh: 引体向上：双手抓住单杠，身体往上升。背阔肌带动肩关节，屈肘肌负责弯肘；刚学时可以用辅助。
   - exercise:
       id: face-pull
       phase: loop
@@ -139,13 +151,13 @@ state:
     - deltoid-posterior
     - trapezius-transverse
     - rhomboid-major
-    - infraspinatus
-    - teres-minor
+    - infraspinatus-r
+    - teres-minor-r
     camera: exercise
     caption:
       en: 'Rope face pull: draw the hands towards the face as the upper arms open and rotate outward. The rear shoulder and
         scapular muscles work with the cuff.'
-      zh: 绳索面拉：双手拉向面部，上臂向外打开并外旋。肩后部与肩胛肌配合肩袖工作。
+      zh: 绳索面拉：双手拉向面部，上臂向外打开并外旋。三角肌后部和肩胛周围的肌肉与肩袖一起工作。
   - exercise:
       id: lat-pulldown
       phase: loop
@@ -157,7 +169,7 @@ state:
     caption:
       en: 'Front lat pulldown: the bar comes towards the upper chest while the trunk stays controlled. Latissimus remains
         a shoulder prime mover; grip changes do not turn this into an arm-only exercise.'
-      zh: 胸前高位下拉：横杆拉向上胸，躯干保持受控。背阔肌仍是肩关节主动肌；改变握法不会把它变成只练手臂的动作。
+      zh: 高位下拉：横杆拉向上胸，躯干保持稳定。背阔肌仍是肩关节的主动肌，换握法也不会把它变成只练手臂的动作。
   index:
     exercises:
     - barbell-row
@@ -194,31 +206,29 @@ state:
 
 <Lang en>
 
-The index collects every exercise in this region, grouped by barbell, dumbbell, body weight, cable and machine. Select a card for its sketch, steps, cues, mistakes and evidence. Orange marks prime movers and blue-grey their helpers. Stabilising effort is recorded separately: a muscle can work hard without producing the visible movement.
+The list of exercises at the end of this chapter has all eleven, grouped by equipment: barbell, dumbbell, body weight, cable and machine. Press one and the model takes up the exercise, the prime movers turn orange and the helpers blue-grey, and its card opens at the top of this panel with the muscles that drive the movement, the steps, cues, common mistakes and what research shows. The first time, start with body weight or a light load and learn the movement from a qualified coach; children and teenagers should train with an adult supervising [M25].
 
-**Rows** draw the upper arm backwards and the shoulder blade inward. Barbell rows add a demand on the trunk; a supported single-arm dumbbell row reduces that demand. Inverted rows use body weight with fixed hands. **Vertical pulls**, the pull-up and front lat pulldown, draw the upper arm towards the side. Latissimus dorsi is a shoulder prime mover, while the elbow flexors assist at the elbow [M47] [M51] [M52].
+The eleven exercises load the back in four ways. **Rows** (barbell row, one-arm dumbbell row, inverted row) pull the upper arm back while the shoulder blades draw together. **Vertical pulls** (pull-up, lat pulldown) pull a raised arm down to the side: latissimus dorsi does the main work at the shoulder, and the elbow flexors help at the elbow [M47] [M51] [M52]. **Shoulder-blade and cuff movements** (dumbbell shrug, prone Y raise, face pull, side-lying external rotation) each train one direction. **Hip hinges** (deadlift, back extension) straighten the hips while the erector spinae hold the back steady [M55] [M61].
 
-The smaller actions are different: a dumbbell shrug raises the shoulder girdle; a prone Y raise involves scapular control; face pulls combine a backward pull and outward rotation; side-lying dumbbell rotation directly practises the cuff's outward rotation [M53]. Deadlifts and the hip-dominant back extension use the spinal erectors mainly to hold the back steady [M55] [M61].
+Is one of them the right choice for everyone? No. Research measures muscle activity with surface <Term id="emg">EMG</Term>, and higher EMG is not proof that a muscle grows more [M9]. Choose exercises you can do with good form and the equipment you have; a row and a vertical pull between them cover the main jobs of the back muscles.
 
-Choose movements you can control. Begin with body weight or a light load and learn from a qualified coach; children and teenagers need adult supervision [M25]. Increase difficulty gradually rather than making the path faster or less stable [M23] [M24]. The cards give principles, not set-and-repetition prescriptions.
+A few principles hold for all of them. Adults are advised to do muscle-strengthening activities on <Num s="M22">two or more days a week</Num>; Singapore's guidelines say the same [M26]. Light and heavy loads both build muscle when the sets are hard, though heavy loads build more maximal strength [M20]. Add load in small steps, only once the movement is easy [M23]. This chapter is general information, not medical advice; for pain or an injury, see a doctor or physiotherapist.
 
-Research uses <Term id="emg">EMG</Term> to record electrical activity. Higher activity during one exercise does not prove greater future muscle growth [M9]. This chapter is general information, not medical advice; consult a doctor or physiotherapist for pain or injury.
+<More title={{ en: "What the pull studies measured", zh: "引体与下拉的研究测了什么" }}>
 
-<More title={{ en: "Other body-weight cards", zh: "其他徒手动作卡" }}>
-
-Open the index for inverted row, prone Y raise and back extension. Their names do not make them interchangeable: one is a pull, one emphasises shoulder-blade control, and the hip-dominant extension keeps the spinal position relatively steady. The cards and sketches explain the complete setups.
+<Num s="M51">Twenty-five</Num> adults, <Num s="M51">21</Num> men and <Num s="M51">4</Num> women, did pull-ups and chin-ups with electrodes on <Num s="M51">seven</Num> muscles. Latissimus dorsi was the most active muscle in every version, followed by the biceps [M51]. In a pulldown study, <Num s="M52">12</Num> healthy men pulled a bar to the front of the chest with <Num s="M52">70 %</Num> of the heaviest load they could lift once. An overhand grip gave higher latissimus EMG than an underhand grip, and grip width made no difference [M52]. These are laboratory comparisons, not a ranking for every person.
 
 </More>
 
-<More title={{ en: "What the studies actually measured", zh: "研究实际测了什么" }}>
+<More title={{ en: "A sample session", zh: "一节训练课示例" }}>
 
-A pull-up study examined <Num s="M51">25</Num> adults and recorded latissimus as well as arm and scapular muscle activity [M51]. A pulldown study used <Num s="M52">12</Num> healthy men at <Num s="M52">70 %</Num> of their maximum single-lift load. Pronated grip produced higher latissimus EMG than supinated grip under those conditions; grip width did not change it [M52]. These are specific laboratory comparisons, not universal exercise rankings.
+One common way to arrange a back session, not a prescription: an easy inverted row to warm up; the deadlift as the main lift while you are fresh, built up from a light load; a lat pulldown or an assisted pull-up; a one-arm dumbbell row; and a light prone Y raise or side-lying external rotation to finish. Big multi-joint lifts come first, lighter single-joint work later [M23] [M24].
 
 </More>
 
-<More title={{ en: "A sample sequence, not a prescription", zh: "示例顺序，不是处方" }}>
+<More title={{ en: "Why the cards have no sets and repetitions", zh: "卡片上为什么没有组数和次数" }}>
 
-One possible learning session is an easy assisted row, a main row or assisted vertical pull, then a light shrug or cuff exercise. A demanding deadlift needs its own coaching and a fresh enough trunk to control it. Adapt the selection to experience and equipment; the training data give principles rather than numerical doses [M23] [M24] [M25].
+How much to do depends on the person, their goal and their training so far. These cards give principles only. A coach can turn them into a plan; for children and teenagers that plan should be designed and supervised by a qualified professional [M25].
 
 </More>
 
@@ -226,33 +236,29 @@ One possible learning session is an easy assisted row, a main row or assisted ve
 
 <Lang zh>
 
-本章索引收齐本区动作，按杠铃、哑铃、徒手、绳索和器械分组。点卡片看示意图、步骤、要点、错误和证据。橙色是主动肌，蓝灰色是协同肌；稳定作用另列，因为肌肉能很用力，却不产生看得见的移动。
+本章末尾的动作列表收了全部十一个动作，按器械分组：杠铃、哑铃、徒手、绳索和器械。点其中一个，模型就做出这个动作，主动肌变成橙色，协同肌变成蓝灰色；这个动作的卡片会在本面板顶部打开，列出驱动动作的肌肉、步骤、要点、常见错误和研究发现。第一次做时，先用自重或轻重量，在合格教练指导下学动作；儿童和青少年要在成人监督下练习 [M25]。
 
-**划船**把上臂向后拉、肩胛骨向内拉。杠铃划船还要求稳住躯干，支撑式单臂哑铃划船减少这项要求；反向划船用自重，手保持固定。**垂直拉**包括引体向上和胸前高位下拉，背阔肌驱动肩关节，屈肘肌帮助弯肘 [M47] [M51] [M52]。
+这十一个动作从四个方向给背部加负荷。**划船**（杠铃划船、单臂哑铃划船、反向划船）把上臂往后拉，同时把两块肩胛骨往中间收。**垂直拉**（引体向上、高位下拉）把举起的手臂拉回身体两侧：主要的力气由背阔肌在肩关节上出，屈肘肌在肘关节上帮忙 [M47] [M51] [M52]。**肩胛骨和肩袖的小动作**（哑铃耸肩、俯卧 Y 字上举、面拉、侧卧外旋）各练一个方向。**髋铰链**（硬拉、背伸展）伸直的是髋，竖脊肌负责把背稳住 [M55] [M61]。
 
-小动作的作用不同：哑铃耸肩抬肩带，俯卧Ｙ举练肩胛控制，面拉结合后拉与外旋，侧卧哑铃外旋练肩袖外旋 [M53]。硬拉和髋主导的背伸展，主要让竖脊肌稳住背部 [M55] [M61]。
+该选哪一个？没有适合所有人的唯一答案。研究用表面<Term id="emg">肌电</Term>测量肌肉活动，而肌电高并不能证明肌肉长得更多 [M9]。选你能做得标准、手边有器械的动作就好；一个划船加一个垂直拉，就涵盖了背部肌肉的主要工作。
 
-选择能控制的动作。先用自重或轻重量，在合格教练指导下学习，儿童和青少年要有成人监督 [M25]。难度逐步增加，不靠加速或失稳完成 [M23] [M24]。卡片只给原则，不规定组数次数。
+有几条原则对所有动作都适用。建议成年人<Num s="M22">每周两天或以上</Num>做肌肉强化活动；新加坡的指南也这样建议 [M26]。只要每组都练得够吃力，轻重量和大重量都能增肌，不过大重量更能提高最大力量 [M20]。等动作变轻松了，再小步加重 [M23]。本章是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。
 
-详细步骤要配合两格示意图阅读，先核对起始姿势，再确认结束姿势与下放路径，不要只照着某一帧摆造型。
+<More title={{ en: "What the pull studies measured", zh: "引体与下拉的研究测了什么" }}>
 
-研究用<Term id="emg">肌电</Term>记录电活动；某动作肌电更高，并不证明未来增肌更多 [M9]。本章是一般知识，不是医疗建议；疼痛或受伤请咨询医生或物理治疗师。
-
-<More title={{ en: "Other body-weight cards", zh: "其他徒手动作卡" }}>
-
-索引里还有反向划船、俯卧Ｙ举和背伸展。它们不能互相替代：一个是拉，一个侧重肩胛控制，髋主导背伸展则相对保持脊柱位置。完整准备姿势由卡片与示意图说明。
+<Num s="M51">25 名</Num>成年人（<Num s="M51">21</Num> 名男性、<Num s="M51">4</Num> 名女性）做正握和反握引体向上，<Num s="M51">七块</Num>肌肉上贴了电极。每一种做法里，背阔肌都是最活跃的肌肉，其次是肱二头肌 [M51]。在一项高位下拉研究里，<Num s="M52">12 名</Num>健康男性用自己一次能拉起的最大重量的 <Num s="M52">70 %</Num>，把横杆拉到胸前。正握时背阔肌的肌电比反握高，握距宽窄则没有影响 [M52]。这些是实验室里的比较，不是适用于每个人的排名。
 
 </More>
 
-<More title={{ en: "What the studies actually measured", zh: "研究实际测了什么" }}>
+<More title={{ en: "A sample session", zh: "一节训练课示例" }}>
 
-一项引体研究观察 <Num s="M51">25 名</Num>成年人，记录背阔肌以及手臂、肩胛周围肌肉的活动 [M51]。一项下拉研究让 <Num s="M52">12 名</Num>健康男性用最大单次重量的 <Num s="M52">70 %</Num>练习。该条件下正握的背阔肌肌电高于反握，握距则没有改变它 [M52]。这些是特定实验比较，不是通用动作排名。
+一种常见的背部训练安排，不是处方：先用简单的反向划船热身；趁精力充足做主项硬拉，从轻重量逐步加上去；接着做高位下拉或辅助引体向上；再做单臂哑铃划船；最后用较轻的俯卧 Y 字上举或侧卧外旋收尾。多关节的大动作放在前面，较轻的单关节动作放在后面 [M23] [M24]。
 
 </More>
 
-<More title={{ en: "A sample sequence, not a prescription", zh: "示例顺序，不是处方" }}>
+<More title={{ en: "Why the cards have no sets and repetitions", zh: "卡片上为什么没有组数和次数" }}>
 
-一种学习安排是：先做容易的辅助划船，主项选划船或辅助垂直拉，再做较轻的耸肩或肩袖练习。要求较高的硬拉需要单独指导，以及足够清醒、能控制动作的躯干。根据经验和器械调整选择；训练数据给原则，不给数字剂量 [M23] [M24] [M25]。
+练多少，要看这个人、他的目标和他之前的训练。这些卡片只写原则。教练可以把它们变成计划；儿童和青少年的计划，应由合格的专业人员设计并监督 [M25]。
 
 </More>
 

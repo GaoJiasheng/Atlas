@@ -27,13 +27,13 @@
     {
       "id": "M3",
       "text": {
-        "en": "Z-Anatomy: the open source atlas of anatomy (Kervyn G. et al.), 3D models, CC BY-SA 4.0. Source of every muscle, bone and skin mesh in the chest model.",
-        "zh": "Z-Anatomy：开源解剖图谱（Kervyn G. 等），三维模型，CC BY-SA 4.0。胸部模型里所有肌肉、骨骼和皮肤网格都来自这里。"
+        "en": "Z-Anatomy: the open source atlas of anatomy (Kervyn G. et al.), 3D models, CC BY-SA 4.0. Source of every muscle, bone and skin mesh in the models of the muscle series (chest, back, shoulders, arms, legs, core).",
+        "zh": "Z-Anatomy：开源解剖图谱（Kervyn G. 等），三维模型，CC BY-SA 4.0。肌肉系列各个模型（胸、背、肩、手臂、腿、腰腹）里所有肌肉、骨骼和皮肤网格都来自这里。"
       },
       "url": "https://github.com/LluisV/Z-Anatomy",
       "note": {
-        "en": "Changes for Atlas: structures selected for the chest, simplified, re-rigged, fibre and attachment data added. The resulting glb is CC BY-SA 4.0.",
-        "zh": "Atlas 的改动：选取胸部结构、简化、重新绑定骨架、加上纤维与附着点数据。得到的 glb 文件同样采用 CC BY-SA 4.0。"
+        "en": "Changes for Atlas: structures selected for each body region, simplified, re-rigged, fibre and attachment data added. The resulting glb files are CC BY-SA 4.0.",
+        "zh": "Atlas 的改动：按身体分区选取结构、简化、重新绑定骨架、加上纤维与附着点数据。得到的 glb 文件同样采用 CC BY-SA 4.0。"
       }
     },
     {
@@ -535,44 +535,44 @@
     {
       "id": "M47",
       "text": {
-        "en": "Gray H. Anatomy of the Human Body, 20th ed., ed. Lewis W. H. Philadelphia and New York: Lea & Febiger, 1918 (public domain). Myology: deep back (pp.397–401); thorax including serratus posterior inferior (pp.403–407); muscles connecting upper extremity to vertebral column (pp.432–435); external abdominal oblique (pp.409–410); gluteus maximus (pp.474–475).",
-        "zh": "Gray H.《人体解剖学》第20版，Lewis W. H.编，Lea & Febiger，1918年（公有领域）。肌学：背深肌397–401页；胸部与下后锯肌403–407页；上肢与脊柱之间的肌肉432–435页；腹外斜肌409–410页；臀大肌474–475页。"
+        "en": "Gray H. Anatomy of the Human Body, 20th ed., ed. W. H. Lewis. Philadelphia and New York: Lea & Febiger, 1918 (public domain). Myology: the deep muscles of the back (pp. 397–401); the thorax, including serratus posterior inferior (pp. 403–407); the external oblique (pp. 409–410); the muscles connecting the upper extremity to the vertebral column (pp. 432–435); gluteus maximus (pp. 474–475).",
+        "zh": "格雷（Gray H.）《人体解剖学》第 20 版，W. H. Lewis 编，费城与纽约 Lea & Febiger 出版社，1918 年（公有领域）。肌学：背深肌（第 397–401 页）；胸部肌肉，含下后锯肌（第 403–407 页）；腹外斜肌（第 409–410 页）；上肢与脊柱之间的肌肉（第 432–435 页）；臀大肌（第 474–475 页）。"
       },
       "url": "https://archive.org/details/anatomyofhumanbo1918gray",
       "note": {
         "en": "Original public-domain text reviewed through Gray reproductions, including https://www.wikimd.org/wiki/The_Deep_Muscles_of_the_Back and https://wikimd.com/wiki/The_Muscles_Connecting_the_Upper_Extremity_to_the_Vertebral_Column; original scan text indexed at https://resources.saylor.org/wwwresources/archived/site/wp-content/uploads/2014/06/BIO302-Anatomy_of_the_Human_Body-Chapter-IV-Fasciae-of-Trunk.pdf. Archive/Bartleby direct access unavailable in this session. Historical terms Sacrospinalis, Iliocostalis dorsi, Longissimus dorsi and Spinalis dorsi mapped to modern erector-spinae names. Gray gives lower six or seven ribs for iliocostalis lumborum and three or four for latissimus; variable attachments retained. Detailed muscle-part borders and fascicle architecture are simplified teaching descriptions.",
-        "zh": "通过格雷公有领域原文转载核对背深肌及上肢与脊柱之间的肌肉，并核对 Saylor 原扫描的索引文字。本次无法直接访问 Archive/Bartleby。历史名称 Sacrospinalis、Iliocostalis dorsi、Longissimus dorsi、Spinalis dorsi 对照现代竖脊肌名称。腰髂肋肌下六或七肋、背阔肌下三或四肋按格雷保留变异范围。肌肉分部界线与纤维类别为简化教学描述。"
+        "zh": "通过格雷原文的转载核对了背深肌和上肢与脊柱之间的肌肉，并核对了 Saylor 存档的原扫描文字；本次无法直接访问 Archive 和 Bartleby。历史名称 Sacrospinalis、Iliocostalis dorsi、Longissimus dorsi、Spinalis dorsi 对应现代的竖脊肌各部分。腰髂肋肌止于最下面六或七根肋骨、背阔肌起于最下面三或四根肋骨，这类变异范围按格雷原文保留。肌肉分部的界线和纤维排列类别是简化的教学描述。"
       }
     },
     {
       "id": "M48",
       "text": {
-        "en": "Gray H. Anatomy of the Human Body, 20th ed., ed. Lewis W. H. Philadelphia and New York: Lea & Febiger, 1918 (public domain). Myology: muscles connecting upper extremity to vertebral column (pp.432–435); shoulder (pp.439–443); arm (pp.443–446); superficial radial forearm muscles including brachioradialis (pp.452–453).",
-        "zh": "Gray H.《人体解剖学》第20版，Lewis W. H.编，Lea & Febiger，1918年（公有领域）。肌学：上肢与脊柱之间的肌肉432–435页；肩部439–443页；上臂443–446页；含肱桡肌的前臂桡侧浅肌452–453页。"
+        "en": "Gray H. Anatomy of the Human Body, 20th ed., ed. W. H. Lewis. Philadelphia and New York: Lea & Febiger, 1918 (public domain). Myology: the muscles connecting the upper extremity to the vertebral column (pp. 432–435); the shoulder (pp. 439–443); the arm (pp. 443–446); the superficial radial forearm muscles, including brachioradialis (pp. 452–453).",
+        "zh": "格雷（Gray H.）《人体解剖学》第 20 版，W. H. Lewis 编，费城与纽约 Lea & Febiger 出版社，1918 年（公有领域）。肌学：上肢与脊柱之间的肌肉（第 432–435 页）；肩部肌肉（第 439–443 页）；上臂肌肉（第 443–446 页）；前臂桡侧浅层肌，含肱桡肌（第 452–453 页）。"
       },
       "url": "https://archive.org/details/anatomyofhumanbo1918gray",
       "note": {
-        "en": "Original Gray shoulder text reproduced at https://www.wikimd.org/wiki/The_Muscles_and_Fasciae_of_the_Shoulder; cross-checked against OpenStax11.5. Teres major ends at the medial lip of the intertubercular groove and is outside the cuff; infraspinatus uses the middle greater-tubercle facet and teres minor its lowest facet. Only anatomical facts are paraphrased. Superficial-back attachments also checked in the original Gray text reproduction linked by M47.",
-        "zh": "通过格雷肩肌原文转载并与 OpenStax11.5交叉核对。大圆肌止于结节间沟内侧唇，不属于肩袖；冈下肌止于大结节中部小面，小圆肌止于最下部小面。只转述解剖事实。 浅层背肌附着同时按M47所列格雷原文转载核对。"
+        "en": "Gray's shoulder text read in the reproduction at https://www.wikimd.org/wiki/The_Muscles_and_Fasciae_of_the_Shoulder and cross-checked against OpenStax §11.5. Teres major ends on the medial lip of the intertubercular groove and is outside the cuff; infraspinatus uses the middle facet of the greater tubercle and teres minor its lowest facet. Superficial back attachments were also checked in the reproduction listed under M47. Only anatomical facts are paraphrased.",
+        "zh": "通过格雷肩部肌肉原文的转载阅读，并与 OpenStax 第 11.5 节交叉核对。大圆肌止于结节间沟内侧唇，不属于肩袖；冈下肌止于大结节中间的小面，小圆肌止于最下面的小面。背部浅层肌的附着也按 M47 所列的格雷原文转载核对过。只转述解剖事实。"
       }
     },
     {
       "id": "M49",
       "text": {
-        "en": "Betts J. G., Young K. A., Wise J. A., Johnson E., Poe B., Kruse D. H., Korol O., Johnson J. E., Womble M., DeSaix P. Anatomy and Physiology 2e. Houston: OpenStax, 2022. §11.3, Muscles of the Posterior Neck and the Back, Figure11.15; §11.4, abdominal wall; §11.6, pelvic girdle.",
-        "zh": "Betts J. G.等《解剖学与生理学》第2版，OpenStax，2022年。11.3节后颈与背肌、图11.15；11.4节腹壁；11.6节骨盆带。"
+        "en": "Betts J. G., Young K. A., Wise J. A., Johnson E., Poe B., Kruse D. H., Korol O., Johnson J. E., Womble M., DeSaix P. Anatomy and Physiology 2e. Houston: OpenStax, 2022. §11.3, Muscles of the Posterior Neck and the Back (Figure 11.15); §11.4, the abdominal wall; §11.6, the pelvic girdle.",
+        "zh": "Betts J. G. 等《解剖学与生理学》第 2 版，休斯敦 OpenStax，2022 年。第 11.3 节，颈后部与背部的肌肉（图 11.15）；第 11.4 节，腹壁；第 11.6 节，骨盆带。"
       },
       "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/11-3-axial-muscles-of-the-head-neck-and-back",
       "note": {
-        "en": "§11.3 text read: iliocostalis lateral, longissimus intermediate, spinalis medial; back muscles stabilise and move the vertebral column. Atlas shows a lumbar/thoracic subset, not every deep-back muscle. Detailed attachment text is sourced to Gray, not inferred from image alt text. CC BY-NC-SA4.0; facts only, no figures reproduced.",
-        "zh": "阅读11.3节原文：髂肋肌在外侧，最长肌居中，棘肌在内侧；背肌稳定并移动脊柱。模型仅展示腰胸段的一部分，未包含全部背深肌。详细附着以格雷为据，不据图片替代文字推断。CC BY-NC-SA4.0；只引用事实，没有复制插图。"
+        "en": "§11.3 text read: iliocostalis lies laterally, longissimus in between and spinalis medially; the back muscles stabilise and move the vertebral column. The Atlas model shows a lumbar and thoracic subset, not every deep back muscle; detailed attachments are sourced to Gray. Textbook licensed CC BY-NC-SA 4.0; only facts are cited, no figures reproduced.",
+        "zh": "读了第 11.3 节原文：髂肋肌在外侧，最长肌居中，棘肌在内侧；背肌稳定并移动脊柱。Atlas 模型只展示腰段和胸段的一部分，不是全部背深肌；详细的附着以格雷为据。教材采用 CC BY-NC-SA 4.0 许可；只引用事实，没有复制插图。"
       }
     },
     {
       "id": "M50",
       "text": {
-        "en": "Vilensky J. A., Baltes M., Weikel L., Fortin J. D., Fourie L. J. Serratus posterior muscles: anatomy, clinical relevance, and function. Clinical Anatomy14(4):237–241,2001. doi:10.1002/ca.1039. PMID11424195.",
-        "zh": "Vilensky J. A.等《后锯肌：解剖、临床意义与功能》，Clinical Anatomy14(4):237–241，2001年。doi:10.1002/ca.1039。"
+        "en": "Vilensky J. A., Baltes M., Weikel L., Fortin J. D., Fourie L. J. Serratus posterior muscles: anatomy, clinical relevance, and function. Clinical Anatomy 14(4): 237–241, 2001. doi:10.1002/ca.1039. PMID 11424195.",
+        "zh": "Vilensky J. A. 等，《后锯肌：解剖、临床意义与功能》，Clinical Anatomy 第 14 卷第 4 期 237–241 页，2001 年。doi:10.1002/ca.1039。"
       },
       "url": "https://pubmed.ncbi.nlm.nih.gov/11424195/",
       "note": {
@@ -583,37 +583,37 @@
     {
       "id": "M51",
       "text": {
-        "en": "Youdas J. W., Amundson C. L., Cicero K. S., Hahn J. J., Harezlak D. T., Hollman J. H. Surface electromyographic activation patterns and elbow joint motion during a pull-up, chin-up, or perfect-pullup™ rotational exercise. Journal of Strength and Conditioning Research24(12):3404–3414,2010. doi:10.1519/JSC.0b013e3181f1598c. PMID21068680.",
-        "zh": "Youdas J. W.等《引体向上、反握引体向上及旋转握把引体动作的表面肌电激活模式与肘关节运动》，JSCR24(12):3404–3414，2010年。"
+        "en": "Youdas J. W., Amundson C. L., Cicero K. S., Hahn J. J., Harezlak D. T., Hollman J. H. Surface electromyographic activation patterns and elbow joint motion during a pull-up, chin-up, or perfect-pullup rotational exercise. Journal of Strength and Conditioning Research 24(12): 3404–3414, 2010. doi:10.1519/JSC.0b013e3181f1598c. PMID 21068680.",
+        "zh": "Youdas J. W. 等，《正握引体向上、反握引体向上和旋转握把引体时的表面肌电激活模式与肘关节运动》，JSCR 第 24 卷第 12 期 3404–3414 页，2010 年。"
       },
       "url": "https://pubmed.ncbi.nlm.nih.gov/21068680/",
       "note": {
-        "en": "Abstract read:21 men and4 women; muscle activity and elbow movement across tested pull-up variants. Used for co-activity of latissimus and arm muscles, not isolation or hypertrophy. Training status and unreported electrode/protocol details are not inferred.",
-        "zh": "阅读摘要：21名男性与4名女性，比较引体动作的肌肉活动与肘运动。用于背阔肌和手臂同时出力的说明，不用于孤立训练或增肌结论；未推断未报告的训练经历、电极及实验细节。"
+        "en": "Abstract read: 21 men and 4 women; surface EMG of seven muscles and elbow motion in three pull-up variants. Latissimus dorsi had the highest activity in every variant, followed by biceps; lower trapezius was higher in the pull-up. Used for which muscles work together, not for isolation or growth. Training status and unreported protocol details are not inferred.",
+        "zh": "只读到摘要：21 名男性和 4 名女性，三种引体动作，记录七块肌肉的表面肌电和肘关节运动。每一种做法里背阔肌的活动都最高，其次是肱二头肌；下斜方肌在正握引体向上时更高。这里只用来说明哪些肌肉一起工作，不用于孤立训练或增肌的结论；没有推断摘要未报告的训练经历和实验细节。"
       }
     },
     {
       "id": "M52",
       "text": {
-        "en": "Lusk S. J., Hale B. D., Russell D. M. Grip width and forearm orientation effects on muscle activity during the lat pull-down. Journal of Strength and Conditioning Research24(7):1895–1900,2010. doi:10.1519/JSC.0b013e3181ddb0ab. PMID20543740.",
-        "zh": "Lusk S. J.、Hale B. D.、Russell D. M.《高位下拉时握距与前臂姿势对肌肉活动的影响》，JSCR24(7):1895–1900，2010年。"
+        "en": "Lusk S. J., Hale B. D., Russell D. M. Grip width and forearm orientation effects on muscle activity during the lat pull-down. Journal of Strength and Conditioning Research 24(7): 1895–1900, 2010. doi:10.1519/JSC.0b013e3181ddb0ab. PMID 20543740.",
+        "zh": "Lusk S. J.、Hale B. D.、Russell D. M.，《高位下拉时握距与前臂朝向对肌肉活动的影响》，JSCR 第 24 卷第 7 期 1895–1900 页，2010 年。"
       },
       "url": "https://pubmed.ncbi.nlm.nih.gov/20543740/",
       "note": {
-        "en": "Abstract read:12 healthy men, front pull-downs at70%1RM, narrow/wide and pronated/supinated grips. Pronated elicited greater latissimus EMG than supinated; tested widths did not affect that result. No universal grip or growth recommendation follows.",
-        "zh": "阅读摘要：12名健康男性，以70%1RM做前方高位下拉，比较窄/宽、正/反握。正握的背阔肌肌电较高；所测握距未影响该结果。不据此提出适合所有人的握法或增肌建议。"
+        "en": "Abstract read: 12 healthy men, pull-downs to the front at 70 % of one-repetition maximum with narrow and wide, pronated and supinated grips. The pronated grip gave greater latissimus EMG than the supinated grip; grip width did not change that result. No universal grip or growth recommendation follows.",
+        "zh": "只读到摘要：12 名健康男性，用一次最大重量的 70 % 做胸前高位下拉，比较窄握与宽握、正握与反握。正握时背阔肌的肌电比反握高；握距宽窄没有改变这一结果。不据此给出适合所有人的握法或增肌建议。"
       }
     },
     {
       "id": "M53",
       "text": {
-        "en": "Reinold M. M., Wilk K. E., Fleisig G. S., Zheng N., Barrentine S. W., Chmielewski T., Cody R. C., Jameson G. G., Andrews J. R. Electromyographic analysis of the rotator cuff and deltoid musculature during common shoulder external rotation exercises. Journal of Orthopaedic & Sports Physical Therapy34(7):385–394,2004. doi:10.2519/jospt.2004.34.7.385. PMID15296366.",
-        "zh": "Reinold M. M.等《常用肩关节外旋动作中肩袖及三角肌的肌电分析》，JOSPT34(7):385–394，2004年。"
+        "en": "Reinold M. M., Wilk K. E., Fleisig G. S., Zheng N., Barrentine S. W., Chmielewski T., Cody R. C., Jameson G. G., Andrews J. R. Electromyographic analysis of the rotator cuff and deltoid musculature during common shoulder external rotation exercises. Journal of Orthopaedic & Sports Physical Therapy 34(7): 385–394, 2004. doi:10.2519/jospt.2004.34.7.385. PMID 15296366.",
+        "zh": "Reinold M. M. 等，《常见肩外旋练习中肩袖肌与三角肌的肌电分析》，JOSPT 第 34 卷第 7 期 385–394 页，2004 年。"
       },
       "url": "https://pubmed.ncbi.nlm.nih.gov/15296366/",
       "note": {
-        "en": "Abstract read:intramuscular EMG in10 healthy subjects across7 exercises. Side-lying external rotation had the highest measured infraspinatus and teres-minor EMG among those conditions. The sketch does not claim to reproduce the experiment or prescribe rehabilitation.",
-        "zh": "阅读摘要：10名健康受试者，7种动作，使用肌内电极。侧卧外旋在所测条件中冈下肌和小圆肌肌电最高。草图不声称复现实验，也不作为康复处方。"
+        "en": "Abstract read: intramuscular (fine-wire) EMG in 10 healthy subjects across 7 exercises. Side-lying external rotation gave the highest measured infraspinatus and teres minor activity of those conditions. The card does not reproduce the experiment or prescribe rehabilitation.",
+        "zh": "只读到摘要：10 名健康受试者，7 个动作，用肌肉内的细线电极记录肌电。在测试的条件中，侧卧外旋时冈下肌和小圆肌的肌电最高。动作卡没有照搬实验，也不是康复处方。"
       }
     },
     {
@@ -1274,6 +1274,30 @@
       "note": {
         "en": "Attachment table: posterior iliac crest and iliolumbar ligament; inferior rib twelve and transverse processes L1–L4. Confirms the detailed range rather than the abbreviated Physiopedia L1–L5 introductory sentence.",
         "zh": "附着表：髂嵴后部与髂腰韧带；第 12 肋下缘和第 1–4 腰椎横突。确认细部范围，不采用 Physiopedia 开头简述的第 1–5 腰椎。"
+      }
+    },
+    {
+      "id": "M109",
+      "text": {
+        "en": "Gray H. Anatomy of the Human Body, 20th ed., ed. W. H. Lewis. Philadelphia: Lea & Febiger, 1918 (public domain). IV. Myology, §8: The Muscles and Fasciae of the Iliac Region, Thigh, Leg and Foot (pp. 466–496).",
+        "zh": "格雷（Gray H.）《人体解剖学》第 20 版，W. H. Lewis 编，费城 Lea & Febiger 出版社，1918 年（公有领域）。第四部分肌学第 8 节：髂区、大腿、小腿和足的肌肉与筋膜（第 466–496 页）。"
+      },
+      "url": "https://archive.org/details/anatomyofhumanbo1918gray",
+      "note": {
+        "en": "Public-domain text, read in the archive.org scan or the Bartleby / theodora.com transcriptions of the same edition. Historical terms are modernised; only anatomical facts are paraphrased.",
+        "zh": "公有领域原文，读的是 archive.org 扫描本，或 Bartleby / theodora.com 对同一版本的转录。历史术语改用现代名称；只转述解剖事实。"
+      }
+    },
+    {
+      "id": "M110",
+      "text": {
+        "en": "Gray H. Anatomy of the Human Body, 20th ed., ed. W. H. Lewis. Philadelphia: Lea & Febiger, 1918 (public domain). IV. Myology, §7: The Muscles and Fasciae of the Upper Extremity (pp. 434–466).",
+        "zh": "格雷（Gray H.）《人体解剖学》第 20 版，W. H. Lewis 编，费城 Lea & Febiger 出版社，1918 年（公有领域）。第四部分肌学第 7 节：上肢的肌肉与筋膜（第 434–466 页）。"
+      },
+      "url": "https://archive.org/details/anatomyofhumanbo1918gray",
+      "note": {
+        "en": "Whole upper-limb section of the public-domain text, read in the archive.org scan or the Bartleby / theodora.com transcriptions of the same edition. Narrower page ranges for single regions are in M1, M48 and M87. Historical terms are modernised; only anatomical facts are paraphrased.",
+        "zh": "公有领域原文的整个上肢一节，读的是 archive.org 扫描本，或 Bartleby / theodora.com 对同一版本的转录。单个部位的较窄页码见 M1、M48 和 M87。历史术语改用现代名称；只转述解剖事实。"
       }
     }
   ]

@@ -23,8 +23,6 @@
         "tint": "token:muscle-1"
       },
       "connects": [
-        "skull",
-        "cervical-spine",
         "clavicle"
       ],
       "explode": {
@@ -202,7 +200,6 @@
         "tint": "token:muscle-2"
       },
       "connects": [
-        "cervical-spine",
         "thoracic-spine",
         "scapula"
       ],
@@ -238,7 +235,6 @@
         "tint": "token:muscle-2"
       },
       "connects": [
-        "cervical-spine",
         "scapula"
       ],
       "explode": {
@@ -450,8 +446,7 @@
         "tint": "token:muscle-3"
       },
       "connects": [
-        "thorax",
-        "cervical-spine"
+        "thorax"
       ],
       "explode": {
         "dir": [
@@ -542,8 +537,8 @@
         "zh": "三角肌肩胛冈部（后束）"
       },
       "short": {
-        "en": "Deltoid · posterior",
-        "zh": "三角肌肩胛冈部"
+        "en": "Rear deltoid",
+        "zh": "三角肌后部"
       },
       "group": "neighbours",
       "mesh": "deltoid-posterior.l",
@@ -720,8 +715,8 @@
         "zh": "三角肌锁骨部（前束）"
       },
       "short": {
-        "en": "Deltoid · anterior",
-        "zh": "三角肌锁骨部"
+        "en": "Front deltoid",
+        "zh": "三角肌前部"
       },
       "group": "neighbours",
       "mesh": "deltoid-anterior.l",
@@ -782,12 +777,12 @@
         "tint": "token:bone"
       },
       "summary": {
-        "en": "Supports the ribs and anchors back muscles.",
-        "zh": "支撑肋骨，也是背部肌肉的附着支架。"
+        "en": "Carries the ribs; anchors trapezius, rhomboids and erectors.",
+        "zh": "连接肋骨，是斜方肌、菱形肌和竖脊肌的附着处。"
       },
       "detail": {
-        "en": "The thoracic vertebrae carry ribs and provide spinous and transverse attachment processes. The model merges them into one mesh, so individual spinal segments do not bend [M47] [M49].",
-        "zh": "胸椎连接肋骨，棘突与横突供肌肉附着。模型将它们合并成一个网格，不能逐节弯曲 [M47] [M49]。"
+        "en": "Twelve thoracic vertebrae, each with a rib on either side. Their spinous processes, the bumps you can feel down the middle of the back, anchor trapezius, the rhomboids, latissimus dorsi and spinalis; their transverse processes anchor longissimus [M47]. In this model they are one mesh, so the spine does not bend segment by segment.",
+        "zh": "十二节胸椎，每一节两侧各连一根肋骨。它们的棘突，就是背中线上摸得到的那排骨性突起，是斜方肌、菱形肌、背阔肌和棘肌的附着处；横突则供最长肌附着 [M47]。模型里它们是一整块网格，所以脊柱不能一节一节地弯。"
       }
     },
     {
@@ -807,12 +802,12 @@
         "tint": "token:bone"
       },
       "summary": {
-        "en": "Supports the lower trunk and anchors the erectors.",
-        "zh": "支撑腰部，供竖脊肌与筋膜附着。"
+        "en": "Five large vertebrae of the low back; anchor the erectors.",
+        "zh": "下背的五节大椎骨，竖脊肌附着在这里。"
       },
       "detail": {
-        "en": "Lumbar vertebrae lie between the thoracic spine and sacrum. Attachments shown here include representative tendinous/fascial connections rather than complete footprints [M47] [M49].",
-        "zh": "腰椎位于胸椎与骶骨之间。这里标出的包括代表性的腱性或筋膜连接，不是全部附着面积 [M47] [M49]。"
+        "en": "The five lumbar vertebrae sit between the thoracic spine and the sacrum. The thoracolumbar fascia links their spinous processes to latissimus dorsi, and the erector spinae attach along them [M47]. The markers here stand for attachments through tendon and fascia, not bare muscle on bone.",
+        "zh": "五节腰椎位于胸椎和骶骨之间。胸腰筋膜把它们的棘突和背阔肌连在一起，竖脊肌也沿着它们附着 [M47]。这里的标记代表经由肌腱和筋膜的附着，不是肌肉直接贴在骨头上。"
       }
     },
     {
@@ -823,7 +818,7 @@
       },
       "short": {
         "en": "Rib cage",
-        "zh": "胸骨、肋骨与肋软骨"
+        "zh": "胸廓"
       },
       "group": "skeleton",
       "mesh": "thorax",
@@ -832,12 +827,12 @@
         "tint": "token:bone"
       },
       "summary": {
-        "en": "Supports rib attachments of the back muscles.",
-        "zh": "支撑背部肌肉的肋骨附着点。"
+        "en": "Rib angles anchor the erectors and serratus posterior.",
+        "zh": "肋角是竖脊肌和下后锯肌的附着处。"
       },
       "detail": {
-        "en": "The manifest exports sternum, ribs and costal cartilages together as thorax. Back attachment markers use the posterior rib surfaces; no separate sternum or rib mesh is duplicated [M47].",
-        "zh": "清单将胸骨、肋骨与肋软骨合并导出为 thorax。背部附着点用肋骨后面；没有重复绘制胸廓网格 [M47]。"
+        "en": "The sternum, twelve pairs of ribs and their cartilages, drawn as one mesh. On the back, the angles of the ribs anchor iliocostalis and longissimus, the lowest four ribs take serratus posterior inferior, and the lowest three or four ribs give slips to latissimus dorsi [M47].",
+        "zh": "胸骨、十二对肋骨和肋软骨，在模型里合成一个网格。背面的肋角供髂肋肌和最长肌附着，最下面四根肋骨连着下后锯肌，最下面三四根肋骨还给背阔肌发出肌齿 [M47]。"
       }
     },
     {
@@ -861,12 +856,12 @@
         "tint": "token:bone"
       },
       "summary": {
-        "en": "Receives pulls that position the shoulder blade.",
-        "zh": "接受拉力，改变肩胛骨的位置。"
+        "en": "The moving base of the arm; most back muscles pull on it.",
+        "zh": "手臂的活动底座，大多数背肌都拉着它。"
       },
       "detail": {
-        "en": "The scapular spine, medial border, inferior angle and infraspinous fossa give different muscles different pulling directions [M47] [M48].",
-        "zh": "肩胛冈、内侧缘、下角和冈下窝，让不同肌肉产生不同方向的拉力 [M47] [M48]。"
+        "en": "A flat triangle of bone that glides over the back of the ribs. Its spine and acromion take trapezius, its inner border the rhomboids and levator scapulae, its back surface infraspinatus and teres minor, and its lower corner teres major [M47] [M48]. Because these muscles pull from different sides, they can lift, lower, draw back and rotate it.",
+        "zh": "一块扁平的三角形骨，贴着肋骨背面滑动。肩胛冈和肩峰是斜方肌的止点，内侧缘连着菱形肌和肩胛提肌，背面是冈下肌和小圆肌的起点，下角是大圆肌的起点 [M47] [M48]。这些肌肉从不同方向拉它，所以它能上提、下降、后缩和旋转。"
       }
     },
     {
@@ -890,12 +885,12 @@
         "tint": "token:bone"
       },
       "summary": {
-        "en": "Connects the shoulder girdle to the sternum.",
-        "zh": "把肩带连到胸骨，接受上斜方肌的拉力。"
+        "en": "Links the shoulder girdle to the breastbone.",
+        "zh": "把肩带连到胸骨上。"
       },
       "detail": {
-        "en": "Upper trapezius inserts along the posterior border of the lateral clavicle. The sternoclavicular and acromioclavicular joints are simplified pivots in this model [M47].",
-        "zh": "斜方肌降部止于锁骨外侧段后缘。模型的胸锁和肩锁关节是简化转轴 [M47]。"
+        "en": "Upper trapezius inserts along the back of its outer third [M47]. In this model the joints at both ends of the collarbone are simplified pivots.",
+        "zh": "斜方肌降部止于它外侧三分之一的后缘 [M47]。模型里锁骨两端的关节都简化成了转轴。"
       }
     },
     {
@@ -919,12 +914,12 @@
         "tint": "token:bone"
       },
       "summary": {
-        "en": "Receives the latissimus, teres and cuff tendons.",
-        "zh": "接受背阔肌、圆肌和肩袖的止腱。"
+        "en": "Takes the tendons of latissimus, the teres and the cuff.",
+        "zh": "背阔肌、大小圆肌和肩袖的肌腱都止在这里。"
       },
       "detail": {
-        "en": "Latissimus inserts in the intertubercular groove floor, teres major on its medial lip, and the cuff on facets of the greater tubercle. These are distinct attachments [M47] [M48].",
-        "zh": "背阔肌止于结节间沟底，大圆肌止于内侧唇，肩袖止于大结节的不同小面。这些不是同一个止点 [M47] [M48]。"
+        "en": "Latissimus dorsi ends in the floor of the intertubercular groove, teres major on its inner lip, and infraspinatus and teres minor on the back of the greater tubercle [M47] [M48]. These are separate attachments only millimetres apart.",
+        "zh": "背阔肌止于结节间沟的沟底，大圆肌止于沟的内侧唇，冈下肌和小圆肌止于大结节的后面 [M47] [M48]。这些止点彼此只隔几毫米，却各不相同。"
       }
     },
     {
@@ -935,7 +930,7 @@
       },
       "short": {
         "en": "Pelvis",
-        "zh": "骨盆、骶骨与尾骨"
+        "zh": "骨盆"
       },
       "group": "skeleton",
       "mesh": "pelvis",
@@ -944,62 +939,12 @@
         "tint": "token:bone"
       },
       "summary": {
-        "en": "Anchors lower-back fascia and muscle tendons.",
-        "zh": "为腰背筋膜与肌腱提供固定支架。"
+        "en": "Anchors latissimus and the common erector tendon.",
+        "zh": "背阔肌和竖脊肌共同腱的附着处。"
       },
       "detail": {
-        "en": "The merged pelvis includes hip bones, sacrum and coccyx. Latissimus and the spinal erectors attach to the iliac crest and associated fascia/tendons; these markers are representative [M47].",
-        "zh": "合并骨盆包含髋骨、骶骨和尾骨。背阔肌与竖脊肌连到髂嵴及相关筋膜、肌腱；标记仅代表附着区 [M47]。"
-      }
-    },
-    {
-      "id": "skull",
-      "name": {
-        "en": "Occipital bone",
-        "zh": "枕骨"
-      },
-      "short": {
-        "en": "Occipital bone",
-        "zh": "枕骨"
-      },
-      "group": "skeleton",
-      "mesh": "skull",
-      "material": {
-        "color": "tissue",
-        "tint": "token:bone"
-      },
-      "summary": {
-        "en": "Anchors the upper trapezius on the back of the skull.",
-        "zh": "在头骨后面供斜方肌降部附着。"
-      },
-      "detail": {
-        "en": "The true Z-Anatomy occipital bone is added from the pipeline reference skeleton because upper trapezius attaches to its external occipital protuberance and superior nuchal line. It is not the whole skull [M47].",
-        "zh": "从管线参考骨骼补入真实 Z-Anatomy 枕骨：斜方肌降部连到枕外隆凸和上项线。它不是完整头骨 [M47]。"
-      }
-    },
-    {
-      "id": "cervical-spine",
-      "name": {
-        "en": "Cervical vertebrae",
-        "zh": "颈椎"
-      },
-      "short": {
-        "en": "Cervical vertebrae",
-        "zh": "颈椎"
-      },
-      "group": "skeleton",
-      "mesh": "cervical-spine",
-      "material": {
-        "color": "tissue",
-        "tint": "token:bone"
-      },
-      "summary": {
-        "en": "Anchors levator scapulae and upper-back muscles.",
-        "zh": "供肩胛提肌与上背肌肉附着。"
-      },
-      "detail": {
-        "en": "True Z-Anatomy C1–C7 reference meshes are merged into a selectable bone part. Levator attaches to C1–C4 transverse processes; rhomboid minor to the C7 spinous region, distinct from the levator attachment [M47].",
-        "zh": "将真实 Z-Anatomy C1–C7 参考网格合成可选骨骼零件。肩胛提肌连到 C1–C4 横突，小菱形肌连到 C7 棘突区，两者位置不同 [M47]。"
+        "en": "The hip bones, sacrum and coccyx, drawn as one mesh. The back of the iliac crest and the sacrum anchor the common tendon of the erector spinae; latissimus dorsi reaches the crest through the thoracolumbar fascia [M47].",
+        "zh": "髋骨、骶骨和尾骨合成一个网格。髂嵴后部和骶骨是竖脊肌共同腱的附着处；背阔肌借胸腰筋膜连到髂嵴 [M47]。"
       }
     },
     {
@@ -1021,12 +966,12 @@
         "tint": "token:bone"
       },
       "summary": {
-        "en": "Locates the back muscles on the whole reference body.",
-        "zh": "在全身参考模型上定位背部肌肉。"
+        "en": "Places the back muscles on the whole body.",
+        "zh": "在全身上标出背部肌肉的位置。"
       },
       "detail": {
-        "en": "The low-detail skin surface comes from the same Z-Anatomy reference body. X-ray fades this shell; left and right mean the body’s own sides [S2].",
-        "zh": "简化皮肤来自同一具 Z-Anatomy 参考人体。透视将轮廓调淡；左右指身体自身的左右 [S2]。"
+        "en": "A simplified skin surface from the same reference body. X-RAY fades it so that you can see the muscles underneath [M3].",
+        "zh": "同一具参考人体的简化皮肤。透视模式会把它调淡，让你看到下面的肌肉 [M3]。"
       }
     }
   ],
@@ -1214,7 +1159,7 @@
         ],
         "target": [
           0,
-          0.0,
+          0,
           -0.04
         ],
         "fov": 30
@@ -1305,7 +1250,7 @@
         ],
         "target": [
           0,
-          0.0,
+          0,
           -0.04
         ],
         "fov": 30
@@ -1345,7 +1290,7 @@
         ],
         "target": [
           0.04,
-          0.0,
+          0,
           -0.02
         ],
         "fov": 30
@@ -1560,9 +1505,9 @@
         "node": "joint.trunk",
         "axes": {
           "flexion": [
-            -1.0,
-            0.0,
-            0.0
+            -1,
+            0,
+            0
           ],
           "lateral-flexion": [
             0,
@@ -1570,9 +1515,9 @@
             1
           ],
           "rotation": [
-            0.0,
-            1.0,
-            0.0
+            0,
+            1,
+            0
           ]
         }
       },
@@ -1615,9 +1560,9 @@
         "node": "joint.shoulder.l",
         "axes": {
           "flexion": [
-            -1.0,
-            0.0,
-            0.0
+            -1,
+            0,
+            0
           ],
           "abduction": [
             0,
@@ -1640,9 +1585,9 @@
         "node": "joint.elbow.l",
         "axes": {
           "flexion": [
-            -1.0,
-            0.0,
-            0.0
+            -1,
+            0,
+            0
           ]
         }
       },
@@ -1650,9 +1595,9 @@
         "node": "joint.hand.l",
         "axes": {
           "flexion": [
-            -1.0,
-            0.0,
-            0.0
+            -1,
+            0,
+            0
           ]
         },
         "offset": 0.08
@@ -1696,9 +1641,9 @@
         "node": "joint.shoulder.r",
         "axes": {
           "flexion": [
-            -1.0,
-            0.0,
-            0.0
+            -1,
+            0,
+            0
           ],
           "abduction": [
             0,
@@ -1721,9 +1666,9 @@
         "node": "joint.elbow.r",
         "axes": {
           "flexion": [
-            -1.0,
-            0.0,
-            0.0
+            -1,
+            0,
+            0
           ]
         }
       },
@@ -1731,9 +1676,9 @@
         "node": "joint.hand.r",
         "axes": {
           "flexion": [
-            -1.0,
-            0.0,
-            0.0
+            -1,
+            0,
+            0
           ]
         },
         "offset": 0.08
@@ -1787,40 +1732,6 @@
   "sites": [
     {
       "muscle": "trapezius-descending",
-      "kind": "origin",
-      "bone": "skull",
-      "points": [
-        [
-          0.0067829,
-          0.3739053,
-          -0.0315362
-        ],
-        [
-          0.0169175,
-          0.3754061,
-          -0.0311492
-        ],
-        [
-          0.021092,
-          0.3747739,
-          -0.0289397
-        ]
-      ]
-    },
-    {
-      "muscle": "trapezius-descending",
-      "kind": "origin",
-      "bone": "cervical-spine",
-      "points": [
-        [
-          1e-07,
-          0.2451222,
-          -0.0279547
-        ]
-      ]
-    },
-    {
-      "muscle": "trapezius-descending",
       "kind": "insertion",
       "bone": "clavicle",
       "points": [
@@ -1828,18 +1739,6 @@
           0.1129613,
           0.2207526,
           0.0062508
-        ]
-      ]
-    },
-    {
-      "muscle": "trapezius-transverse",
-      "kind": "origin",
-      "bone": "cervical-spine",
-      "points": [
-        [
-          1e-07,
-          0.2451222,
-          -0.0279547
         ]
       ]
     },
@@ -1898,7 +1797,7 @@
           -0.0516495
         ],
         [
-          1e-07,
+          1e-7,
           0.1276687,
           -0.0500708
         ],
@@ -1908,12 +1807,12 @@
           -0.0508629
         ],
         [
-          0.0,
+          0,
           0.0370948,
           -0.0509976
         ],
         [
-          1e-07,
+          1e-7,
           0.0128991,
           -0.0471639
         ],
@@ -1923,12 +1822,12 @@
           -0.0427559
         ],
         [
-          0.0,
+          0,
           -0.0443088,
           -0.035129
         ],
         [
-          0.0,
+          0,
           -0.0782428,
           -0.0278126
         ]
@@ -1979,12 +1878,12 @@
           -0.0489797
         ],
         [
-          0.0,
+          0,
           0.0370948,
           -0.0509976
         ],
         [
-          1e-07,
+          1e-7,
           0.0128991,
           -0.0471639
         ],
@@ -1994,12 +1893,12 @@
           -0.0427559
         ],
         [
-          0.0,
+          0,
           -0.0443088,
           -0.035129
         ],
         [
-          0.0,
+          0,
           -0.0782428,
           -0.0278126
         ]
@@ -2016,22 +1915,22 @@
           -0.0215018
         ],
         [
-          1e-07,
+          1e-7,
           -0.141873,
           -0.0163833
         ],
         [
-          1.04e-05,
+          0.0000104,
           -0.168302,
           -0.0163703
         ],
         [
-          1e-07,
+          1e-7,
           -0.1942444,
           -0.016947
         ],
         [
-          0.0,
+          0,
           -0.2156335,
           -0.0212125
         ]
@@ -2053,9 +1952,9 @@
           -0.0238347
         ],
         [
-          0.0704295,
-          -0.202533,
-          -0.0050628
+          0.0701128,
+          -0.1974647,
+          -0.0018449
         ],
         [
           0.0012769,
@@ -2097,9 +1996,9 @@
       "bone": "humerus",
       "points": [
         [
-          0.1771222,
-          0.1248156,
-          0.0250787
+          0.1799523,
+          0.1217276,
+          0.0297863
         ]
       ]
     },
@@ -2124,7 +2023,7 @@
           -0.0516495
         ],
         [
-          1e-07,
+          1e-7,
           0.1276687,
           -0.0500708
         ]
@@ -2177,51 +2076,12 @@
     {
       "muscle": "rhomboid-minor",
       "kind": "origin",
-      "bone": "cervical-spine",
-      "points": [
-        [
-          1e-07,
-          0.2451222,
-          -0.0279547
-        ]
-      ]
-    },
-    {
-      "muscle": "rhomboid-minor",
-      "kind": "origin",
       "bone": "thoracic-spine",
       "points": [
         [
           0.0022981,
           0.2277489,
           -0.0341725
-        ]
-      ]
-    },
-    {
-      "muscle": "levator-scapulae",
-      "kind": "origin",
-      "bone": "cervical-spine",
-      "points": [
-        [
-          0.0403926,
-          0.3395053,
-          0.0356488
-        ],
-        [
-          0.0256808,
-          0.3221585,
-          0.0350571
-        ],
-        [
-          0.0278529,
-          0.3071236,
-          0.0375822
-        ],
-        [
-          0.0280935,
-          0.294058,
-          0.0382323
         ]
       ]
     },
@@ -2253,19 +2113,19 @@
       "bone": "scapula",
       "points": [
         [
-          0.101628,
-          0.0604785,
-          -0.0482906
+          0.1023898,
+          0.0624395,
+          -0.0493965
         ],
         [
-          0.1074204,
-          0.0690149,
-          -0.0441167
+          0.1057347,
+          0.0683155,
+          -0.0465808
         ],
         [
-          0.1126034,
-          0.0837587,
-          -0.0401934
+          0.1101805,
+          0.0794859,
+          -0.0423298
         ]
       ]
     },
@@ -2287,19 +2147,19 @@
       "bone": "scapula",
       "points": [
         [
-          0.0890171,
-          0.1258865,
-          -0.048516
+          0.0877597,
+          0.1197045,
+          -0.0505997
         ],
         [
-          0.0858998,
-          0.16784,
-          -0.0382561
+          0.0815317,
+          0.1660263,
+          -0.0404127
         ],
         [
-          0.1161332,
-          0.1846584,
-          -0.0277108
+          0.1173021,
+          0.1819295,
+          -0.0238156
         ]
       ]
     },
@@ -2375,12 +2235,12 @@
       "bone": "thoracic-spine",
       "points": [
         [
-          0.0,
+          0,
           -0.0443088,
           -0.035129
         ],
         [
-          0.0,
+          0,
           -0.0782428,
           -0.0278126
         ]
@@ -2397,7 +2257,7 @@
           -0.0215018
         ],
         [
-          1e-07,
+          1e-7,
           -0.141873,
           -0.0163833
         ]
@@ -2419,9 +2279,9 @@
           -0.019279
         ],
         [
-          0.0903198,
-          -0.087284,
-          -0.0100354
+          0.0905562,
+          -0.0883245,
+          -0.0049854
         ],
         [
           0.0703398,
@@ -2458,12 +2318,12 @@
           -0.0215018
         ],
         [
-          1.04e-05,
+          0.0000104,
           -0.168302,
           -0.0163703
         ],
         [
-          0.0,
+          0,
           -0.2156335,
           -0.0212125
         ]
@@ -2497,12 +2357,12 @@
           -0.0215018
         ],
         [
-          1.04e-05,
+          0.0000104,
           -0.168302,
           -0.0163703
         ],
         [
-          0.0,
+          0,
           -0.2156335,
           -0.0212125
         ]
@@ -2625,18 +2485,6 @@
       ]
     },
     {
-      "muscle": "iliocostalis-thoracis",
-      "kind": "insertion",
-      "bone": "cervical-spine",
-      "points": [
-        [
-          0.0337068,
-          0.2531293,
-          0.0235761
-        ]
-      ]
-    },
-    {
       "muscle": "longissimus-thoracis",
       "kind": "insertion",
       "bone": "thoracic-spine",
@@ -2731,9 +2579,9 @@
           -0.0330052
         ],
         [
-          0.0669098,
-          0.1211568,
-          -0.0460978
+          0.0631096,
+          0.118156,
+          -0.0459767
         ],
         [
           0.0667576,
@@ -2802,12 +2650,12 @@
       "bone": "thoracic-spine",
       "points": [
         [
-          0.0,
+          0,
           -0.0443088,
           -0.035129
         ],
         [
-          0.0,
+          0,
           -0.0782428,
           -0.0278126
         ]
@@ -2824,7 +2672,7 @@
           -0.0215018
         ],
         [
-          1e-07,
+          1e-7,
           -0.141873,
           -0.0163833
         ]
@@ -2851,7 +2699,7 @@
           -0.0516495
         ],
         [
-          1e-07,
+          1e-7,
           0.1276687,
           -0.0500708
         ],
@@ -2866,7 +2714,7 @@
           -0.0489797
         ],
         [
-          0.0,
+          0,
           0.0370948,
           -0.0509976
         ]
@@ -2878,12 +2726,12 @@
       "bone": "thoracic-spine",
       "points": [
         [
-          0.0,
+          0,
           -0.0443088,
           -0.035129
         ],
         [
-          0.0,
+          0,
           -0.0782428,
           -0.0278126
         ]
@@ -2895,12 +2743,12 @@
       "bone": "thoracic-spine",
       "points": [
         [
-          0.0,
+          0,
           -0.0443088,
           -0.035129
         ],
         [
-          0.0,
+          0,
           -0.0782428,
           -0.0278126
         ]

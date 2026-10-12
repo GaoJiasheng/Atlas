@@ -2,7 +2,7 @@
 id: deep-muscles
 order: 3
 title:
-  en: "Underneath: the cuff and teres major"
+  en: 'Underneath: the cuff and teres major'
   zh: 深层：肩袖与大圆肌
 sensitive: false
 state:
@@ -13,13 +13,59 @@ state:
   cutaway: none
   pose: neutral-stand
   layers:
-    - superficial
-    - intermediate
-    - deep
-    - skeleton
-    - neighbours
-    - body
+  - superficial
+  - intermediate
+  - deep
+  - skeleton
+  - neighbours
+  - body
   ghost:
+  - deltoid-anterior
+  - deltoid-lateral
+  - deltoid-posterior
+  - trapezius-descending
+  - pectoralis-major-clavicular
+  - serratus-anterior
+  - biceps-brachii-long
+  - latissimus-dorsi
+  - pectoralis-major-sternocostal
+  - rhomboid-major
+  - trapezius-transverse
+  - triceps-brachii
+  - skin-outline
+  sites:
+  - infraspinatus
+  - teres-minor
+  labels:
+  - infraspinatus
+  - teres-minor
+  - teres-major
+  camera:
+    position:
+    - 0.55
+    - 0.3
+    - -1.45
+    target:
+    - 0
+    - 0.06
+    - -0.04
+    fov: 30
+  summary:
+    en: Four cuff muscles grip the top of the humerus; teres major attaches lower down and has a different job.
+    zh: 四块肩袖肌包住肱骨上端；大圆肌止得更低，工作也不一样。
+  beats:
+  - camera: back
+    labels:
+    - infraspinatus
+    - scapula
+    - humerus
+    sites:
+    - infraspinatus
+    caption:
+      en: Infraspinatus fills the hollow below the scapular spine. Its fibres converge outwards to a tendon on the middle
+        facet of the humeral greater tubercle.
+      zh: 冈下肌填满肩胛冈下方的窝，纤维向外汇聚，腱止于肱骨大结节中间的小面。
+    ghost:
     - deltoid-anterior
     - deltoid-lateral
     - deltoid-posterior
@@ -33,180 +79,148 @@ state:
     - trapezius-transverse
     - triceps-brachii
     - skin-outline
-  sites:
-    - infraspinatus
+  - camera: back
+    labels:
     - teres-minor
-  labels:
+    - teres-major
+    - scapula
+    sites:
+    - teres-minor
+    - teres-major
+    caption:
+      en: Teres minor runs from the upper lateral border to the lower facet of the greater tubercle. Teres major starts near
+        the inferior angle and ends on the medial lip of the humeral groove.
+      zh: 小圆肌从肩胛骨外侧缘上段走到大结节最下面的小面。大圆肌从下角附近走到肱骨结节间沟的内侧唇。
+    ghost:
+    - deltoid-anterior
+    - deltoid-lateral
+    - deltoid-posterior
+    - trapezius-descending
+    - pectoralis-major-clavicular
+    - serratus-anterior
+    - biceps-brachii-long
+    - latissimus-dorsi
+    - pectoralis-major-sternocostal
+    - rhomboid-major
+    - trapezius-transverse
+    - triceps-brachii
+    - skin-outline
+  - camera: back
+    ghost:
+    - deltoid-anterior
+    - deltoid-lateral
+    - deltoid-posterior
+    - trapezius-descending
+    - pectoralis-major-clavicular
+    - serratus-anterior
+    - biceps-brachii-long
+    - latissimus-dorsi
+    - pectoralis-major-sternocostal
+    - rhomboid-major
+    - trapezius-transverse
+    - triceps-brachii
+    - skin-outline
+    labels:
+    - supraspinatus
+    - scapula
+    - humerus
+    sites:
+    - supraspinatus
+    caption:
+      en: Supraspinatus occupies the hollow above the scapular spine. Its tendon passes beneath the acromion and reaches the
+        upper facet of the greater tubercle. It helps abduct and stabilise the arm.
+      zh: 冈上肌在肩胛冈上方的窝里。它的腱从肩峰下面穿过，止于大结节最上面的小面，帮着外展手臂并稳住关节。
+  - camera: front
+    ghost:
+    - deltoid-anterior
+    - deltoid-lateral
+    - deltoid-posterior
+    - trapezius-descending
+    - pectoralis-major-clavicular
+    - serratus-anterior
+    - biceps-brachii-long
+    - latissimus-dorsi
+    - pectoralis-major-sternocostal
+    - rhomboid-major
+    - trapezius-transverse
+    - triceps-brachii
+    - skin-outline
+    - thorax
+    - scapula
+    labels:
+    - subscapularis
+    - humerus
+    sites:
+    - subscapularis
+    caption:
+      en: Subscapularis lies on the rib-facing side of the shoulder blade, not below the bone. Its tendon reaches the lesser
+        tubercle at the front of the humerus.
+      zh: 肩胛下肌在肩胛骨贴着肋骨的那一面，不是在骨头下方。它的腱止于肱骨前面的小结节。
+  - camera:
+      position:
+      - 0.42
+      - 0.85
+      - 0.5
+      target:
+      - 0.14
+      - -0.03
+      - -0.04
+      fov: 26
+    cutaway: transverse-shoulder
+    ghost:
+    - trapezius-descending
+    - pectoralis-major-clavicular
+    - serratus-anterior
+    - biceps-brachii-long
+    - latissimus-dorsi
+    - pectoralis-major-sternocostal
+    - rhomboid-major
+    - trapezius-transverse
+    - triceps-brachii
+    - skin-outline
+    sites: []
+    labels:
+    - deltoid-lateral
+    - subscapularis
+    - infraspinatus
+    - humerus
+    caption:
+      en: A slice through the shoulder shows the deltoid outside and the cuff around the head of the humerus. Cuff tendons
+        blend with the joint capsule; teres major does not.
+      zh: 横切肩部：外面一圈是三角肌，肱骨头四周是肩袖。肩袖的腱和关节囊融合在一起；大圆肌不加入。
+  index:
+    parts:
     - infraspinatus
     - teres-minor
     - teres-major
-  camera:
-    position:
-      - 0.55
-      - 0.3
-      - -1.45
-    target:
-      - 0
-      - 0.06
-      - -0.04
-    fov: 30
-  summary:
-    en: Four cuff muscles meet the upper humerus; teres major attaches further down and has a different role.
-    zh: 肩袖四肌连到肱骨上端；大圆肌的附着位置更低，作用也不同。
-  beats:
-    - camera: back
-      labels:
-        - infraspinatus
-        - scapula
-        - humerus
-      sites:
-        - infraspinatus
-      caption:
-        en: Infraspinatus fills the hollow below the scapular spine. Its fibres converge outwards to a tendon on the middle facet of the humeral greater tubercle.
-        zh: 冈下肌占据肩胛冈下方的窝，纤维向外汇聚，腱止于肱骨大结节的中部附着面。
-      ghost:
-        - deltoid-anterior
-        - deltoid-lateral
-        - deltoid-posterior
-        - trapezius-descending
-        - pectoralis-major-clavicular
-        - serratus-anterior
-        - biceps-brachii-long
-        - latissimus-dorsi
-        - pectoralis-major-sternocostal
-        - rhomboid-major
-        - trapezius-transverse
-        - triceps-brachii
-        - skin-outline
-    - camera: back
-      labels:
-        - teres-minor
-        - teres-major
-        - scapula
-      sites:
-        - teres-minor
-        - teres-major
-      caption:
-        en: Teres minor runs from the upper lateral border to the lower facet of the greater tubercle. Teres major starts near the inferior angle and ends on the medial lip of the humeral groove.
-        zh: 小圆肌从肩胛骨外侧缘上部长到大结节的下部附着面。大圆肌从下角附近长到肱骨结节间沟的内侧唇。
-      ghost:
-        - deltoid-anterior
-        - deltoid-lateral
-        - deltoid-posterior
-        - trapezius-descending
-        - pectoralis-major-clavicular
-        - serratus-anterior
-        - biceps-brachii-long
-        - latissimus-dorsi
-        - pectoralis-major-sternocostal
-        - rhomboid-major
-        - trapezius-transverse
-        - triceps-brachii
-        - skin-outline
-    - camera: back
-      ghost:
-        - deltoid-anterior
-        - deltoid-lateral
-        - deltoid-posterior
-        - trapezius-descending
-        - pectoralis-major-clavicular
-        - serratus-anterior
-        - biceps-brachii-long
-        - latissimus-dorsi
-        - pectoralis-major-sternocostal
-        - rhomboid-major
-        - trapezius-transverse
-        - triceps-brachii
-        - skin-outline
-      labels:
-        - supraspinatus
-        - scapula
-        - humerus
-      sites:
-        - supraspinatus
-      caption:
-        en: Supraspinatus occupies the hollow above the scapular spine. Its tendon passes beneath the acromion and reaches the upper facet of the greater tubercle. It helps abduct and stabilise the arm.
-        zh: 冈上肌位于肩胛冈上方的窝。腱从肩峰下方经过，连到大结节上部附着面，帮助手臂外展并稳住关节。
-    - camera: front
-      ghost:
-        - deltoid-anterior
-        - deltoid-lateral
-        - deltoid-posterior
-        - trapezius-descending
-        - pectoralis-major-clavicular
-        - serratus-anterior
-        - biceps-brachii-long
-        - latissimus-dorsi
-        - pectoralis-major-sternocostal
-        - rhomboid-major
-        - trapezius-transverse
-        - triceps-brachii
-        - skin-outline
-        - thorax
-        - scapula
-      labels:
-        - subscapularis
-        - humerus
-      sites:
-        - subscapularis
-      caption:
-        en: Subscapularis lies on the rib-facing surface of the scapula, not below the bone. Its tendon reaches the lesser tubercle at the front of the humerus.
-        zh: 肩胛下肌在肩胛骨朝向肋骨的表面，不是在骨头下方。它的腱连到肱骨前方的小结节。
-    - camera: close-shoulder
-      cutaway: transverse-shoulder
-      ghost:
-        - trapezius-descending
-        - pectoralis-major-clavicular
-        - serratus-anterior
-        - biceps-brachii-long
-        - latissimus-dorsi
-        - pectoralis-major-sternocostal
-        - rhomboid-major
-        - trapezius-transverse
-        - triceps-brachii
-        - skin-outline
-      sites: []
-      labels:
-        - deltoid-lateral
-        - subscapularis
-        - infraspinatus
-        - humerus
-      caption:
-        en: A teaching slice through the shoulder shows the deltoid outside and deeper muscles around the humerus. Cuff tendons blend with the joint capsule; teres major does not join this cuff.
-        zh: 肩部教学横切面显示外面的三角肌，以及肱骨周围更深的肌肉。肩袖肌腱与关节囊融合；大圆肌不加入这个袖套。
-  index:
-    parts:
-      - infraspinatus
-      - teres-minor
-      - teres-major
-      - supraspinatus
-      - subscapularis
-      - deltoid-lateral
-      - scapula
-      - humerus
-      - thorax
-      - trapezius-descending
+    - supraspinatus
+    - subscapularis
+    - deltoid-lateral
+    - scapula
+    - humerus
+    - thorax
+    - trapezius-descending
 ---
 
 <Lang en>
 
-Fade deltoid and look at the back of the scapula. **Infraspinatus** occupies the broad hollow below the scapular spine. Its fibres converge towards the middle facet of the <Term id="greater-tubercle">greater tubercle</Term>, a prominence on the humerus. **Teres minor** follows the upper part of the scapula's lateral border and ends on the lower facet. Both pull behind the joint and help turn the upper arm outward [M1] [M48].
+Fade the deltoid and look at the back of the shoulder blade. **Infraspinatus** fills the broad hollow below the scapular spine; its fibres converge on the middle facet of the <Term id="greater-tubercle">greater tubercle</Term>, a bump on the upper humerus. **Teres minor** follows the upper part of the blade's outer border and ends on the lowest facet of the same tubercle. Both pull from behind the joint and turn the upper arm outward [M1] [M48].
 
-Above the spine, **supraspinatus** narrows to a tendon that passes under the acromion and attaches to the upper facet of the same tubercle. It helps lift the arm sideways and supports the humeral head throughout movement. Do not imagine an abrupt handover in which it stops working as soon as deltoid starts [M1] [M48] [M2].
+Above the spine, **supraspinatus** narrows into a tendon that passes under the acromion and ends on the top facet of the greater tubercle. It helps lift the arm out to the side and holds the head of the humerus in place as the arm moves. It does not simply start the lift and then switch off when the deltoid takes over [M48] [M2].
 
-Turn the scapula around. **Subscapularis** fills its rib-facing hollow, with fibres running towards the <Term id="lesser-tubercle">lesser tubercle</Term> on the front of the humerus. It turns the arm inward. These <Num s="M2">four</Num> muscles form the cuff: their tendons reinforce the joint capsule and help keep the humeral head in the socket [M86] [M1] [M48] [M2].
+Now turn the shoulder blade round. **Subscapularis** fills its rib-facing side, and its fibres run to the <Term id="lesser-tubercle">lesser tubercle</Term> on the front of the humerus; it turns the arm inward. These <Num s="M2">four</Num> muscles form the rotator cuff: their tendons blend with the joint capsule and hold the head of the humerus in its socket from above, in front and behind [M86] [M48] [M2].
 
-**Teres major** starts near the scapula's inferior angle, below teres minor. Its fibres run up and outward to the inner lip of the groove between the humeral tubercles. It helps extend, adduct and internally rotate the arm. **It is not a rotator cuff muscle** [M1] [M48] [M2]. <FlyTo preset="back">Look behind the shoulder</FlyTo>
+**Teres major** starts near the lower corner of the shoulder blade, below teres minor, and runs up and out to the inner lip of the groove between the two tubercles of the humerus. It helps pull the arm back, down to the side and inward. **It is not a rotator-cuff muscle**: its tendon ends lower on the humerus, away from the capsule [M48] [M2]. <FlyTo preset="back">Look behind the shoulder</FlyTo>
 
-<More title={{ en: "A sleeve, not a circular muscle", zh: "袖套，不是一块环形肌肉" }}>
+<More title={{ en: "A cuff of tendons", zh: "一圈肌腱组成的“袖口”" }}>
 
-The cuff is a group of separate muscles whose tendons blend with the capsule above, in front and behind the joint [M1] [M48]. Their combined pull is important for stability. Saying the head stays in the socket does not mean its geometric centre never moves.
+The cuff is not one round muscle but four separate ones whose flat tendons merge with the joint capsule over the top, front and back of the joint [M48] [M86]. Their combined pull keeps the ball of the humerus centred on the shallow socket, much as several hands holding a ball steady on a saucer.
 
 </More>
 
-<More title={{ en: "Deep muscles are hard to feel separately", zh: "深层肌肉难以单独摸到" }}>
+<More title={{ en: "Deep muscles are hard to feel", zh: "深层肌肉不好摸" }}>
 
-Subscapularis lies between scapula and ribs; supraspinatus sits beneath the shoulder's roof. Even where the posterior muscles are closer to the surface, a feeling of effort cannot distinguish neighbouring muscles reliably. Use their bone attachments to understand their lines of pull.
+Subscapularis lies between the shoulder blade and the ribs, and supraspinatus sits under the shoulder's bony roof. Even infraspinatus and teres minor, closer to the surface, cannot be told apart by touch. Their attachments on the stage show their lines of pull more clearly than your fingers can.
 
 </More>
 
@@ -214,23 +228,23 @@ Subscapularis lies between scapula and ribs; supraspinatus sits beneath the shou
 
 <Lang zh>
 
-把三角肌调淡，从后面看肩胛骨。**冈下肌**占据肩胛冈下方的宽窝，纤维汇向肱骨<Term id="greater-tubercle">大结节</Term>的中部附着面。**小圆肌**沿肩胛骨外侧缘上部走，止于大结节的下部附着面。它们从关节后方拉动肱骨，帮助上臂外旋 [M1] [M48]。
+把三角肌调淡，从后面看肩胛骨。**冈下肌**填满肩胛冈下方那片宽宽的窝，纤维汇聚到<Term id="greater-tubercle">大结节</Term>中间的小面上，大结节是肱骨上端的一个骨性突起。**小圆肌**沿着肩胛骨外侧缘的上段走，止于同一个大结节最下面的小面。两块肌肉都从关节后方拉，让上臂外旋 [M1] [M48]。
 
-肩胛冈上方的**冈上肌**收拢成腱，从肩峰下面经过，连到同一大结节的上部附着面。它帮助侧举，也在活动时支持肱骨头。不要想成三角肌开始用力后，冈上肌就突然停止的“接班”关系 [M1] [M48] [M2]。
+肩胛冈上方的**冈上肌**收成一条腱，从肩峰下面穿过，止于大结节最上面的小面。它帮着把手臂向侧面抬起，也在手臂活动时把肱骨头稳住。并不是它先把手臂抬起来，等三角肌接手后就不干了 [M48] [M2]。
 
-再看肩胛骨朝向肋骨的一面。**肩胛下肌**填在这里的窝内，纤维走向肱骨前方的<Term id="lesser-tubercle">小结节</Term>，帮助上臂内旋。这<Num s="M2">四块</Num>肌肉组成肩袖；它们的腱加强关节囊，共同把肱骨头稳在关节盂里 [M86] [M1] [M48] [M2]。
+再把肩胛骨翻过来看。**肩胛下肌**铺满肩胛骨贴着肋骨的那一面，纤维走到肱骨前面的<Term id="lesser-tubercle">小结节</Term>，负责让上臂内旋。这<Num s="M2">四块</Num>肌肉组成肩袖：它们的腱和关节囊融合在一起，从上面、前面和后面把肱骨头稳在关节盂里 [M86] [M48] [M2]。
 
-**大圆肌**在小圆肌下方，起于肩胛骨下角附近。纤维向外上方走，止于肱骨两结节之间沟的内侧唇，帮助肩伸、内收和内旋。**它不属于肩袖** [M1] [M48] [M2]。大、小圆肌虽然名字相似，附着位置和旋转方向却不同。看起止点之间的连线，可以追踪肌肉从肩胛骨向外走到肱骨的路线。不要把肩胛下肌的“下”理解成它位于骨头下方，它实际藏在骨头前面、靠近胸廓。<FlyTo preset="back">看肩部后方</FlyTo>
+**大圆肌**起于肩胛骨下角附近，在小圆肌下方，向外上方走，止于肱骨两个结节之间那条沟的内侧唇。它帮着把手臂往后、往身体侧面拉，并让它内旋。**它不属于肩袖**：它的腱止在肱骨较低的地方，离关节囊很远 [M48] [M2]。<FlyTo preset="back">看肩后方</FlyTo>
 
-<More title={{ en: "A sleeve, not a circular muscle", zh: "袖套，不是一块环形肌肉" }}>
+<More title={{ en: "A cuff of tendons", zh: "一圈肌腱组成的“袖口”" }}>
 
-肩袖是数块独立肌肉的集合，肌腱在关节上方、前方和后方与关节囊融合 [M1] [M48]。共同拉力对稳定很重要。说肱骨头稳在关节盂里，不表示它的几何中心永远不移动。
+肩袖不是一块环形的肌肉，而是四块独立的肌肉，扁平的腱在关节的上面、前面和后面和关节囊融合在一起 [M48] [M86]。它们一起拉，让肱骨的球形头保持在浅浅的关节盂中央，就像几只手一起把一个球稳在碟子上。
 
 </More>
 
-<More title={{ en: "Deep muscles are hard to feel separately", zh: "深层肌肉难以单独摸到" }}>
+<More title={{ en: "Deep muscles are hard to feel", zh: "深层肌肉不好摸" }}>
 
-肩胛下肌位于肩胛骨与肋骨之间，冈上肌藏在肩部的骨性屋顶下面。即使后方某些肌肉靠近表面，用力的感觉也不能可靠地区分邻近肌肉。看骨上附着位置，更能理解拉力方向。
+肩胛下肌夹在肩胛骨和肋骨之间，冈上肌藏在肩部骨性屋顶的下面。就连离表面近一些的冈下肌和小圆肌，用手摸也分不开。舞台上的附着点，比手指更能看清它们的拉力方向。
 
 </More>
 

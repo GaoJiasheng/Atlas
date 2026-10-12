@@ -1,18 +1,182 @@
 {
   "terms": [
-    { "id": "origin", "term": { "en": "Origin", "zh": "起点" }, "definition": { "en": "A muscle attachment conventionally described as the more fixed end; which end moves depends on the task.", "zh": "按解剖惯例称为较固定端的肌肉附着位置；哪端实际移动，取决于动作。" }, "see": ["insertion"] },
-    { "id": "insertion", "term": { "en": "Insertion", "zh": "止点" }, "definition": { "en": "The attachment conventionally described as the more mobile end of a muscle.", "zh": "按解剖惯例称为较活动端的肌肉附着位置。" }, "see": ["origin"] },
-    { "id": "glenoid", "term": { "en": "Glenoid", "zh": "关节盂" }, "definition": { "en": "The shallow socket on the lateral scapula that receives the head of the humerus.", "zh": "肩胛骨外侧承接肱骨头的浅窝。" }, "see": ["rotator-cuff"] },
-    { "id": "rotator-cuff", "term": { "en": "Rotator cuff", "zh": "肩袖" }, "definition": { "en": "Supraspinatus, infraspinatus, teres minor and subscapularis, whose tendons reinforce the shoulder capsule and help support the humeral head.", "zh": "冈上肌、冈下肌、小圆肌和肩胛下肌的集合，肌腱加强肩关节囊并帮助稳定肱骨头。" }, "see": ["glenoid"] },
-    { "id": "acromion", "term": { "en": "Acromion", "zh": "肩峰" }, "definition": { "en": "The outer extension of the scapular spine that forms a bony roof above the shoulder joint.", "zh": "肩胛冈向外延伸的骨突，在肩关节上方形成骨性屋顶。" } },
-    { "id": "deltoid-tuberosity", "term": { "en": "Deltoid tuberosity", "zh": "三角肌粗隆" }, "definition": { "en": "The rough area on the lateral humeral shaft where the deltoid attaches.", "zh": "肱骨干外侧供三角肌附着的粗糙区域。" } },
-    { "id": "multipennate", "term": { "en": "Multipennate", "zh": "多羽状排列" }, "definition": { "en": "An arrangement in which muscle fibres attach obliquely to several internal tendon slips.", "zh": "肌纤维斜接在多条内部腱束上的排列方式。" } },
-    { "id": "greater-tubercle", "term": { "en": "Greater tubercle", "zh": "大结节" }, "definition": { "en": "A prominence near the head of the humerus receiving the supraspinatus, infraspinatus and teres minor tendons.", "zh": "肱骨头旁的骨突，供冈上肌、冈下肌和小圆肌的腱附着。" }, "see": ["lesser-tubercle"] },
-    { "id": "lesser-tubercle", "term": { "en": "Lesser tubercle", "zh": "小结节" }, "definition": { "en": "The smaller anterior prominence near the humeral head, where subscapularis attaches.", "zh": "肱骨头前方较小的骨突，是肩胛下肌的附着位置。" }, "see": ["greater-tubercle"] },
-    { "id": "abduction", "term": { "en": "Abduction", "zh": "外展" }, "definition": { "en": "Moving a limb away from the body's midline, such as raising the arm sideways.", "zh": "肢体离开身体中线的动作，例如向侧面抬臂。" } },
-    { "id": "horizontal-abduction", "term": { "en": "Horizontal abduction", "zh": "水平外展" }, "definition": { "en": "Moving a raised upper arm backwards in a horizontal plane, away from the front of the body.", "zh": "把抬起的上臂在水平面内从身体前方向后打开。" } },
-    { "id": "external-rotation", "term": { "en": "External rotation", "zh": "外旋" }, "definition": { "en": "Turning the humerus outward around its long axis; with the elbow bent near the side, the forearm swings away from the belly.", "zh": "肱骨绕长轴向外转；肘弯曲并靠近身体时，前臂会从腹前向外摆。" } },
-    { "id": "emg", "term": { "en": "EMG (electromyography)", "zh": "肌电（肌电图）" }, "definition": { "en": "A recording of muscle electrical activity. Signal amplitude is not a direct measure of force or future muscle growth.", "zh": "记录肌肉的电活动。信号幅度不是力量或未来肌肉增长的直接量度。" } },
-    { "id": "eccentric-phase", "term": { "en": "Eccentric phase", "zh": "离心阶段" }, "definition": { "en": "The phase in which a muscle produces force while lengthening, as when controlling a weight's descent.", "zh": "肌肉一边产生力、一边变长的阶段，例如控制重量下落时。" } }
+    {
+      "id": "origin",
+      "term": {
+        "en": "Origin",
+        "zh": "起点"
+      },
+      "definition": {
+        "en": "The end of a muscle that usually stays still when it contracts.",
+        "zh": "肌肉收缩时通常不动的那一端。"
+      },
+      "see": [
+        "insertion"
+      ]
+    },
+    {
+      "id": "insertion",
+      "term": {
+        "en": "Insertion",
+        "zh": "止点"
+      },
+      "definition": {
+        "en": "The end of a muscle that it pulls toward the origin when it contracts.",
+        "zh": "肌肉收缩时被拉向起点的那一端。"
+      },
+      "see": [
+        "origin"
+      ]
+    },
+    {
+      "id": "glenoid",
+      "term": {
+        "en": "Glenoid",
+        "zh": "关节盂"
+      },
+      "definition": {
+        "en": "The shallow socket on the shoulder blade that holds the head of the humerus.",
+        "zh": "肩胛骨上承接肱骨头的浅窝。"
+      },
+      "see": [
+        "rotator-cuff"
+      ]
+    },
+    {
+      "id": "rotator-cuff",
+      "term": {
+        "en": "Rotator cuff",
+        "zh": "肩袖"
+      },
+      "definition": {
+        "en": "Four muscles, supraspinatus, infraspinatus, teres minor and subscapularis, whose tendons wrap the shoulder joint and hold the head of the humerus in its socket.",
+        "zh": "冈上肌、冈下肌、小圆肌和肩胛下肌四块肌肉。它们的腱包住肩关节，把肱骨头稳在关节盂里。"
+      },
+      "see": [
+        "glenoid"
+      ]
+    },
+    {
+      "id": "acromion",
+      "term": {
+        "en": "Acromion",
+        "zh": "肩峰"
+      },
+      "definition": {
+        "en": "The flat end of the scapular spine that forms the bony roof of the shoulder.",
+        "zh": "肩胛冈外端扁平的骨突，构成肩部的骨性屋顶。"
+      }
+    },
+    {
+      "id": "deltoid-tuberosity",
+      "term": {
+        "en": "Deltoid tuberosity",
+        "zh": "三角肌粗隆"
+      },
+      "definition": {
+        "en": "A rough patch halfway down the outer side of the humerus where all three parts of the deltoid attach.",
+        "zh": "肱骨外侧中段的一块粗糙骨面，三角肌三个部分都止在这里。"
+      }
+    },
+    {
+      "id": "multipennate",
+      "term": {
+        "en": "Multipennate",
+        "zh": "多羽状排列"
+      },
+      "definition": {
+        "en": "A muscle build in which short fibres join several tendon sheets inside the muscle at an angle, like several feathers side by side.",
+        "zh": "肌肉内部有几片腱膜，短纤维斜着接在上面，像几根羽毛并排在一起。"
+      }
+    },
+    {
+      "id": "greater-tubercle",
+      "term": {
+        "en": "Greater tubercle",
+        "zh": "大结节"
+      },
+      "definition": {
+        "en": "The larger bump at the top of the humerus; supraspinatus, infraspinatus and teres minor attach to its three facets.",
+        "zh": "肱骨上端较大的骨性突起；冈上肌、冈下肌和小圆肌分别止于它的三个小面。"
+      },
+      "see": [
+        "lesser-tubercle"
+      ]
+    },
+    {
+      "id": "lesser-tubercle",
+      "term": {
+        "en": "Lesser tubercle",
+        "zh": "小结节"
+      },
+      "definition": {
+        "en": "The smaller bump on the front of the top of the humerus, where subscapularis attaches.",
+        "zh": "肱骨上端前面较小的骨性突起，肩胛下肌止于这里。"
+      },
+      "see": [
+        "greater-tubercle"
+      ]
+    },
+    {
+      "id": "abduction",
+      "term": {
+        "en": "Abduction",
+        "zh": "外展"
+      },
+      "definition": {
+        "en": "Moving a limb away from the midline of the body, such as lifting the arm out to the side.",
+        "zh": "让肢体离开身体中线的动作，例如把手臂向侧面抬起。"
+      }
+    },
+    {
+      "id": "horizontal-abduction",
+      "term": {
+        "en": "Horizontal abduction",
+        "zh": "水平外展"
+      },
+      "definition": {
+        "en": "Opening a raised arm out and back, in a level plane.",
+        "zh": "把抬到前面的手臂在水平面上向外、向后打开。"
+      },
+      "see": [
+        "abduction"
+      ]
+    },
+    {
+      "id": "external-rotation",
+      "term": {
+        "en": "External rotation",
+        "zh": "外旋"
+      },
+      "definition": {
+        "en": "Turning the upper arm outward about its own long axis; with the elbow bent at your side, the forearm swings away from the belly.",
+        "zh": "上臂绕着自己的长轴向外转；手肘弯着贴在身体旁边时，前臂会从肚子前面向外摆开。"
+      },
+      "see": [
+        "rotator-cuff"
+      ]
+    },
+    {
+      "id": "emg",
+      "term": {
+        "en": "EMG (electromyography)",
+        "zh": "肌电（肌电图）"
+      },
+      "definition": {
+        "en": "Electromyography: recording the electrical activity of a muscle. Higher EMG does not by itself mean more strength or growth.",
+        "zh": "肌电图：记录肌肉的电活动。肌电高本身不等于更有力或长得更多。"
+      }
+    },
+    {
+      "id": "eccentric-phase",
+      "term": {
+        "en": "Eccentric phase",
+        "zh": "离心阶段"
+      },
+      "definition": {
+        "en": "The part of a movement in which a working muscle lengthens under load, such as lowering a weight under control.",
+        "zh": "动作中正在用力的肌肉在负荷下被拉长的阶段，例如有控制地放下重量。"
+      }
+    }
   ]
 }

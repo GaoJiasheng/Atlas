@@ -97,32 +97,32 @@
         }
       ],
       "feel": {
-        "en": "Touch the slope between your neck and shoulder while gently shrugging. The lower parts lie across and below the shoulder blades; feeling a region does not identify a single part.",
-        "zh": "指尖放在颈部到肩部的斜坡上，轻轻耸肩，就能感到它绷紧。中部和下部铺在肩胛骨之间及其下方；摸到一片用力感，并不等于认出了某一个部分。"
+        "en": "Rest your fingers on the slope between neck and shoulder and shrug gently: the muscle there firms up. Squeeze your shoulder blades together and the area between them tightens too.",
+        "zh": "手指放在脖子和肩膀之间的斜坡上，轻轻耸肩，那里的肌肉会变硬。再把两块肩胛骨往中间夹，它们之间也会绷紧。"
       },
       "mistakes": [
         {
-          "en": "Treating every trapezius exercise as a shrug: different fibres pull the shoulder blade in different directions.",
-          "zh": "把练斜方肌都理解成耸肩：不同部分把肩胛骨拉向不同方向。"
+          "en": "Treating every trapezius exercise as a shrug: the three parts pull the shoulder blade in different directions.",
+          "zh": "以为练斜方肌就是耸肩：三个部分把肩胛骨拉向不同方向。"
         },
         {
-          "en": "Holding the shoulder blades rigidly down during all overhead movement.",
-          "zh": "一举手就把肩胛骨死压住，不让它向上回旋。"
+          "en": "Pinning the shoulder blades down while lifting the arms overhead, so they cannot turn upward.",
+          "zh": "举手过头时硬把肩胛骨压住，让它没法向上旋转。"
         }
       ],
       "exercises": [
         "dumbbell-shrug",
-        "barbell-row",
         "face-pull",
-        "prone-y-raise"
+        "prone-y-raise",
+        "barbell-row"
       ],
       "summary": {
-        "en": "Positions and turns the shoulder blade.",
-        "zh": "调整肩胛骨的位置，帮助它回旋。"
+        "en": "Lifts, pulls back and turns the shoulder blade.",
+        "zh": "上提、后缩并旋转肩胛骨。"
       },
       "detail": {
-        "en": "A broad superficial muscle with descending, transverse and ascending parts, not separate upper, middle and lower muscles. Their pulls work together to position the scapula [M47] [M2]. The upper and lower regions help upward rotation with serratus anterior when the arm rises; retraction is not the only job of the trapezius [M47].\n\nExercise links include both moving and steadying roles. No single cue fixes posture, and a shoulder that rests forward does not diagnose weakness.\n\nThe fibre label describes the broad visible course; smaller fascicles and tendon arrangements vary within the muscle.",
-        "zh": "斜方肌是一块宽大的浅层肌，分降部、横部和升部，并不是三块独立的“上、中、下斜方肌”。各部分合力，调整肩胛骨的位置 [M47] [M2]。抬臂时，上下部分与前锯肌配合，帮助肩胛骨向上回旋；它的任务不只是把两块肩胛骨夹在一起 [M47]。\n\n所列动作既有移动肩胛骨的，也有需要稳住肩胛骨的。一个动作提示不能保证改变体态；肩膀静止时向前，也不能据此判断肌肉无力。\n\n纤维排列标签概括可见的大方向；肌内的小束和肌腱排列并不处处相同。"
+        "en": "A large, flat, diamond-shaped sheet over the upper back and the back of the neck. It is one muscle in three parts named by fibre direction: the descending (upper) part slopes down to the collarbone, the transverse (middle) part runs across to the acromion and scapular spine, and the ascending (lower) part climbs to the inner end of the spine [M47].\n\nThe parts can pull on their own or together. When the arm rises overhead, the upper and lower parts work with serratus anterior to turn the shoulder blade upward, so the socket faces up [M47] [M2]. That is why trapezius is more than a shrugging muscle.",
+        "zh": "背上部和颈后一大片扁平的菱形肌肉。它是一块肌肉，按纤维方向分三部：降部（上斜方）向外下斜到锁骨，横部（中斜方）横着走到肩峰和肩胛冈，升部（下斜方）向外上斜到肩胛冈内侧端 [M47]。\n\n三个部分可以各自用力，也可以一起用力。手臂举过头顶时，上部和下部与前锯肌配合，把肩胛骨向上旋转，让关节盂朝上 [M47] [M2]。所以斜方肌不只是“耸肩肌”。"
       }
     },
     {
@@ -132,7 +132,7 @@
         "zh": "斜方肌升部"
       },
       "short": {
-        "en": "Trapezius, ascending part",
+        "en": "Lower trapezius",
         "zh": "斜方肌升部"
       },
       "latin": "Pars ascendens musculi trapezii",
@@ -210,31 +210,32 @@
         }
       ],
       "feel": {
-        "en": "During a small prone Y raise, notice work below and between the shoulder blades. This is a shared region, not a precise test of the lower trapezius.",
-        "zh": "俯卧做小幅度 Y 字上举时，留意肩胛骨之间偏下方的用力感。这是多个肌肉共同工作的区域，不是检查下斜方肌的精确方法。"
+        "en": "Lie face down and lift your arms into a Y, thumbs up: the area below and between the shoulder blades works. The middle trapezius and rhomboids work right next to it, so the feeling is shared.",
+        "zh": "俯卧，双臂举成 Y 字、拇指朝上抬离地面：肩胛骨之间偏下的地方会用力。斜方肌横部和菱形肌就在旁边一起工作，所以这种感觉是几块肌肉共有的。"
       },
       "mistakes": [
         {
-          "en": "Lifting the arms by flaring the ribs and arching the back.",
-          "zh": "靠肋骨外翻、腰背反弓把手臂抬高。"
+          "en": "Lifting the arms by arching the low back and flaring the ribs.",
+          "zh": "靠腰背反弓、肋骨外翻把手臂抬高。"
         },
         {
-          "en": "Pulling the shoulders down so hard that upward rotation is blocked.",
-          "zh": "把肩膀使劲压低，反而阻止肩胛骨向上回旋。"
+          "en": "Pressing the shoulders down so hard that the shoulder blade cannot turn upward.",
+          "zh": "把肩膀使劲往下压，肩胛骨反而转不上去。"
         }
       ],
       "exercises": [
         "prone-y-raise",
         "face-pull",
-        "pull-up"
+        "pull-up",
+        "lat-pulldown"
       ],
       "summary": {
-        "en": "Lowers and helps turn the shoulder blade upward.",
-        "zh": "下拉肩胛骨，并协助它向上回旋。"
+        "en": "Pulls the shoulder blade down; helps turn it up.",
+        "zh": "把肩胛骨往下拉，并帮它向上旋转。"
       },
       "detail": {
-        "en": "The lower fibres climb from the thoracic spine towards the scapular spine [M47]. Depression and upward rotation can be parts of the same coordinated shoulder movement; “down” does not mean the blade stays fixed.\n\nY raises and face pulls require shoulder-girdle control. Youdas et al. (2010) also recorded lower-trapezius activity during pull-ups; EMG does not establish isolation or growth [M51] [M9].",
-        "zh": "下部纤维从胸椎向上汇到肩胛冈 [M47]。下拉和上回旋可以同时参与肩带的协调动作；“向下”并不表示把肩胛骨固定不动。\n\nY 字上举和面拉需要控制肩带。Youdas 等（2010）也在引体向上中记录到了下斜方肌活动；肌电不能证明某块肌肉被单独训练，也不能直接预测增长 [M51] [M9]。"
+        "en": "The lower fibres climb from the spines of the lower thoracic vertebrae, down to T12, and end in a flat tendon on a small tubercle at the inner end of the scapular spine [M47]. They pull the shoulder blade down and, because they tug on the inner end of the spine, help turn it upward as the arm rises.\n\nResearch shows: in 25 adults doing pull-ups and chin-ups, lower-trapezius EMG was higher in the overhand pull-up [M51]. Higher EMG is not by itself proof of more growth [M9].",
+        "zh": "下部纤维从下位胸椎的棘突向上（最低到第 12 胸椎），以一片扁腱止于肩胛冈内侧端的一个小结节 [M47]。它把肩胛骨往下拉；因为拉的是肩胛冈的内端，抬臂时还能帮肩胛骨向上旋转。\n\n研究显示：25 名成年人做正握引体向上和反握引体向上，下斜方的肌电在正握时更高 [M51]。肌电高本身不等于长得更多 [M9]。"
       },
       "parent": "trapezius",
       "common": {
@@ -322,31 +323,32 @@
         }
       ],
       "feel": {
-        "en": "Notice the area between the spine and the inner edge of the shoulder blade during a light row. It lies under trapezius and cannot be identified by touch alone.",
-        "zh": "轻重量划船时，留意脊柱与肩胛骨内侧缘之间的用力感。它在斜方肌深面，不能只靠触摸把它辨认出来。"
+        "en": "It lies under trapezius, so you cannot feel it on its own. Squeeze your shoulder blades together: the firm band beside the spine, level with the top of the blades, includes it.",
+        "zh": "它在斜方肌下面，单独摸不到。把两块肩胛骨往中间夹：脊柱旁、与肩胛骨上端同高的那条绷紧的肌肉里就有它。"
       },
       "mistakes": [
         {
-          "en": "Forcing the shoulders back by pushing the ribs forward.",
-          "zh": "靠把肋骨往前顶来强行收肩。"
+          "en": "Pinching the shoulder blades by pushing the chest and ribs forward.",
+          "zh": "靠挺胸、把肋骨往前顶来夹肩胛骨。"
         },
         {
-          "en": "Expecting a row to isolate this muscle from trapezius.",
-          "zh": "指望划船能把它与斜方肌完全分开练。"
+          "en": "Rowing with the shoulders shrugged up toward the ears.",
+          "zh": "划船时耸着肩，肩膀往耳朵方向提。"
         }
       ],
       "exercises": [
         "barbell-row",
         "single-arm-dumbbell-row",
-        "inverted-row"
+        "inverted-row",
+        "face-pull"
       ],
       "summary": {
-        "en": "A small upper band that draws the blade inward.",
-        "zh": "较小的上方肌束，把肩胛骨向内拉。"
+        "en": "Draws the top of the shoulder blade toward the spine.",
+        "zh": "把肩胛骨上部拉向脊柱。"
       },
       "detail": {
-        "en": "The smaller upper rhomboid lies beneath trapezius and links the spine to the medial scapular border [M47] [M2]. Retraction brings that border towards the spine; downward rotation turns the socket more downward.\n\nThe listed rows train coordinated shoulder movement. You cannot tell whether the major or minor muscle is working simply by the location of a burn.",
-        "zh": "小菱形肌是较小的上方部分，位于斜方肌深面，把脊柱连到肩胛骨内侧缘 [M47] [M2]。后缩让内侧缘靠近脊柱；下回旋让关节盂更朝向下方。\n\n所列划船动作练的是肩带的协调运动。不能单凭酸胀的位置，判断是大菱形肌还是小菱形肌在工作。"
+        "en": "A narrow strap from the lower end of the neck ligament and the spines of C7 and T1 to the inner border of the shoulder blade, level with the root of the scapular spine [M47] [M2]. It sits just above rhomboid major and works with it: both pull the blade toward the spine (retraction) and help turn its socket downward.\n\nRows train it together with rhomboid major and the middle trapezius. No exercise separates the two rhomboids.",
+        "zh": "一条窄窄的肌肉，从项韧带下端和第 7 颈椎、第 1 胸椎的棘突，走到肩胛骨内侧缘、与肩胛冈根部同高的地方 [M47] [M2]。它紧挨在大菱形肌上方，和大菱形肌一起工作：把肩胛骨拉向脊柱（后缩），并让关节盂向下转。\n\n划船时它和大菱形肌、斜方肌横部一起出力。没有哪个动作能把大、小菱形肌分开练。"
       }
     },
     {
@@ -423,17 +425,17 @@
         }
       ],
       "feel": {
-        "en": "Its lower end lies near the upper inner corner of the shoulder blade, partly under trapezius. Notice gentle shoulder elevation; do not press hard into the side of the neck.",
-        "zh": "它的下端靠近肩胛骨内上角，部分被斜方肌盖住。可以留意轻轻提肩时的感觉，不要用力按压颈侧。"
+        "en": "Its lower end lies under trapezius near the top inner corner of the shoulder blade. Shrug gently and the side of the neck firms up; do not press hard there.",
+        "zh": "它的下端藏在斜方肌下面，靠近肩胛骨内上角。轻轻耸肩，颈侧会变紧；不要用力按压那里。"
       },
       "mistakes": [
         {
-          "en": "Tilting the head to make a shrug look higher.",
-          "zh": "耸肩时歪头，假装肩膀提得更高。"
+          "en": "Tilting or poking the head forward to make a shrug look higher.",
+          "zh": "耸肩时歪头或往前探头，假装提得更高。"
         },
         {
-          "en": "Trying to keep it completely relaxed during every row.",
-          "zh": "认为所有划船动作都必须让它完全放松。"
+          "en": "Rolling the shoulders in circles: it adds nothing to the lift.",
+          "zh": "耸肩时绕圈转肩：对上提没有帮助。"
         }
       ],
       "exercises": [
@@ -443,11 +445,11 @@
       ],
       "summary": {
         "en": "Lifts the upper inner corner of the shoulder blade.",
-        "zh": "提起肩胛骨内上角。"
+        "zh": "上提肩胛骨的内上角。"
       },
       "detail": {
-        "en": "A strap from the upper cervical spine to the superior medial scapula. It elevates the scapula and contributes to downward rotation; with the scapula fixed it can assist same-side neck bending [M47].\n\nShrugs load its elevation role. The row links concern steadying the shoulder girdle rather than isolating it. Soreness here does not prove that this muscle caused a neck problem.",
-        "zh": "从上位颈椎走向肩胛骨内上方的一条肌肉。它上提肩胛骨、协助下回旋；肩胛骨固定时，还可协助颈部向同侧侧屈 [M47]。\n\n耸肩给它的上提作用加负荷。划船链接侧重肩带稳定，并非单独练它。这里酸痛，也不能证明颈部问题就是这块肌肉造成的。"
+        "en": "A strap from the transverse processes of the top four neck vertebrae (C1–C4) down to the inner border of the shoulder blade, between its top corner and the root of the spine [M47]. It lifts the shoulder blade and helps turn its socket downward; with the shoulder blade held still, it helps bend the neck to its own side [M47].\n\nShrugs load its lifting action together with the upper trapezius.",
+        "zh": "一条带状肌肉，从上面四节颈椎（第 1–4 颈椎）的横突向下，止于肩胛骨内侧缘、在上角与肩胛冈根部之间 [M47]。它上提肩胛骨，并帮关节盂向下转；肩胛骨固定时，还能帮颈部向同侧屈 [M47]。\n\n耸肩时它和斜方肌降部一起承担上提的工作。"
       }
     },
     {
@@ -509,17 +511,17 @@
         }
       ],
       "feel": {
-        "en": "It lies under latissimus dorsi near the lower ribs and is not reliably felt by itself. Lightly touch the lower back ribs to locate the region, without pressing beneath them.",
-        "zh": "它在背阔肌深面、下位肋骨附近，不能可靠地单独摸到。可轻触背部下方的肋骨辨认区域，不要向肋骨下面深压。"
+        "en": "It lies under latissimus dorsi over the lowest ribs and cannot be felt on its own.",
+        "zh": "它在背阔肌下面，盖在最下面几根肋骨上，单独摸不到。"
       },
       "mistakes": [
         {
-          "en": "Claiming that a row isolates this small muscle.",
-          "zh": "声称划船能单独练这块小肌肉。"
+          "en": "Claiming that a row or deadlift isolates this small muscle.",
+          "zh": "声称某个划船或硬拉动作能单独练到这块小肌肉。"
         },
         {
-          "en": "Treating pain at a lower rib as proof that this muscle is strained.",
-          "zh": "把下位肋骨处的疼痛直接判断为下后锯肌拉伤。"
+          "en": "Taking pain over a lower rib as proof that this muscle is strained.",
+          "zh": "把下位肋骨处的疼痛当成这块肌肉拉伤的证据。"
         }
       ],
       "exercises": [
@@ -528,12 +530,12 @@
         "barbell-row"
       ],
       "summary": {
-        "en": "A lower-rib sheet with a disputed breathing role.",
-        "zh": "连至下位肋骨的薄肌片，呼吸作用仍有争议。"
+        "en": "A thin sheet to the lower ribs; its role is debated.",
+        "zh": "连到下位肋骨的薄肌片，作用仍有争议。"
       },
       "detail": {
-        "en": "Gray describes a thin sheet linking the lower spine to the lowest ribs and assigns it a rib-lowering action [M47]. The action entry records that historical description, not a settled respiratory function. Vilensky et al. (2001) questioned a respiratory role and proposed a proprioceptive role; that proposal is not proof [M50].\n\nThe exercise links are context for lower-rib position and ordinary breathing. None is presented as a verified way to isolate or strengthen this muscle, and it is not assigned as a prime mover in the exercise cards.",
-        "zh": "格氏解剖学把它描述为连接下位脊柱与最下方肋骨的薄片，并赋予它降肋作用 [M47]。作用栏记录的是这一传统描述，并不表示它的呼吸功能已被证实。Vilensky 等（2001）质疑其呼吸作用，提出它可能参与本体感觉；这个解释也不是定论 [M50]。\n\n所列动作只是观察下位肋骨位置和平稳呼吸的情境，没有哪个被当作已验证的孤立训练方法；动作卡也不把它列为主动肌。"
+        "en": "A thin sheet from the spines of the last two thoracic and first two or three lumbar vertebrae to the lower borders of the lowest four ribs, just beyond their angles [M47]. Gray describes it as drawing the lower ribs down and back.\n\nWhether it really helps breathing is uncertain. Vilensky and colleagues questioned a breathing role and suggested it may help sense body position instead; that idea is not proven either [M50]. No exercise is known to train it on its own.",
+        "zh": "一片薄肌，从最后两个胸椎和最上面两三个腰椎的棘突，走到最下面四根肋骨的下缘、肋角稍外侧 [M47]。格雷把它描述为把下位肋骨往后下方拉。\n\n它是否真的参与呼吸并不确定。Vilensky 等人质疑它的呼吸作用，提出它可能参与感知身体的位置，但这个说法也没有得到证明 [M50]。目前没有已知能单独练它的动作。"
       }
     },
     {
@@ -619,17 +621,17 @@
         }
       ],
       "feel": {
-        "en": "Place flat fingertips beside the low-back midline and make a small unloaded hip hinge. The columns firm as they hold the spine; avoid pressing directly on the vertebrae.",
-        "zh": "指腹轻放在下背中线两旁，空手做小幅度髋折叠，就能感到两侧肌柱绷紧、稳住脊柱。不要直接按压椎骨。"
+        "en": "Put your fingertips beside the middle of your lower back and hinge forward a little at the hips: the two columns firm up as they hold the spine.",
+        "zh": "指尖放在下背中线两旁，从髋部稍微向前俯身：两条肌柱会绷紧，把脊柱稳住。"
       },
       "mistakes": [
         {
-          "en": "Lifting a deadlift by repeatedly rounding and straightening the spine.",
-          "zh": "硬拉时反复弓背、挺背，靠脊柱屈伸提起重量。"
+          "en": "Lifting a deadlift by rounding the back and then straightening it.",
+          "zh": "硬拉时先弓背、再靠挺背把杠拉起来。"
         },
         {
-          "en": "Leaning backwards beyond standing at the top.",
-          "zh": "站起后继续向后仰。"
+          "en": "Leaning back past upright at the top of a deadlift or back extension.",
+          "zh": "硬拉或背伸展到顶后继续往后仰。"
         }
       ],
       "exercises": [
@@ -638,16 +640,16 @@
         "barbell-row"
       ],
       "summary": {
-        "en": "Extends the spine and helps hold it steady.",
-        "zh": "伸展脊柱，也帮助它保持稳定。"
+        "en": "Straightens the spine and holds it steady.",
+        "zh": "伸直脊柱，并把它稳住。"
       },
       "detail": {
-        "en": "A group, not a single narrow muscle: iliocostalis, longissimus and spinalis form longitudinal columns [M49]. They can extend the spine, but movement and muscular effort are different things.\n\nIn the deadlift taught here, the hips and knees extend while the spinal erectors work mainly isometrically to resist trunk bending and preserve the chosen neutral spinal shape. They are stabilisers, not the muscles that straighten the hip. Hip-dominant back extensions use the same principle [M55].\n\nThe fibre label describes the broad visible course; smaller fascicles and tendon arrangements vary within the muscle.",
-        "zh": "竖脊肌是一个肌群，不是一条细长肌肉：髂肋肌、最长肌和棘肌组成纵向肌柱 [M49]。它们能伸展脊柱，但肌肉用力并不一定伴随明显运动。\n\n本卡所教的硬拉，靠髋和膝伸展站起；竖脊肌主要等长用力，抵抗躯干向前弯曲，让脊柱维持所选的中立形态。它们是稳定肌，不是伸髋的主动肌。以髋为主的背伸展也遵循这个原则 [M55]。\n\n纤维排列标签概括可见的大方向；肌内的小束和肌腱排列并不处处相同。"
+        "en": "Not one muscle but three long columns on each side of the spine: iliocostalis on the outside, longissimus in the middle and spinalis next to the spinous processes. They share a broad tendon from the back of the iliac crest, the sacrum and the lower lumbar spines, and climb in overlapping slips to the ribs, the vertebrae, the neck and the skull [M47] [M49].\n\nThey can bend the spine backward, and one side helps bend it sideways. In lifting they mostly do something else: in a deadlift the hips and knees straighten while the erectors work isometrically, staying the same length to hold the back in a neutral position [M55].",
+        "zh": "竖脊肌不是一块肌肉，而是脊柱两侧各三条长肌柱：外侧是髂肋肌，中间是最长肌，紧贴棘突的是棘肌。它们共用一条宽腱，起于髂嵴后部、骶骨和下位腰椎的棘突，再一段压一段地向上，止于肋骨、椎骨，一直到颈部和颅骨 [M47] [M49]。\n\n它们能让脊柱向后伸，单侧收缩还帮躯干侧屈。可在举起重物时，它们主要做的是另一件事：硬拉时伸直的是髋和膝，竖脊肌做等长收缩，长度不变，把背稳在中立位 [M55]。"
       },
       "common": {
         "en": "spinal erectors",
-        "zh": "下背肌群"
+        "zh": "“下背肌”"
       }
     },
     {
@@ -729,17 +731,17 @@
         }
       ],
       "feel": {
-        "en": "Notice the muscular column beside the spine during an unloaded hip hinge. This deep part cannot be separated from its neighbours by touch or by a feeling of effort.",
-        "zh": "空手做髋折叠时，留意脊柱旁肌柱的用力感。这部分较深，不能靠触摸或用力感把它与邻近肌肉分开。"
+        "en": "The outer edge of the column beside your lower spine firms up when you hinge forward a little; by touch it cannot be told apart from longissimus.",
+        "zh": "稍微向前俯身时，下背脊柱旁肌柱的外缘会绷紧；但用手摸分不清它和最长肌。"
       },
       "mistakes": [
         {
-          "en": "Trying to target this part by rounding the back under load.",
-          "zh": "为了专练这一部分，在负重时故意弓背。"
+          "en": "Rounding the back under load to “feel the lower back more”.",
+          "zh": "负重时故意弓背，想让下背“更有感觉”。"
         },
         {
-          "en": "Treating a stronger low-back burn as evidence of better technique.",
-          "zh": "把更强的下背酸胀当成动作更正确的证据。"
+          "en": "Taking a stronger low-back burn as a sign of better technique.",
+          "zh": "把下背更酸当成动作更标准的证据。"
         }
       ],
       "exercises": [
@@ -748,12 +750,12 @@
         "barbell-row"
       ],
       "summary": {
-        "en": "Outer spinal column linking pelvis to lower ribs.",
-        "zh": "外侧肌柱，把骨盆连到下位肋骨。"
+        "en": "Outer column: from the pelvis to the lower ribs.",
+        "zh": "外侧肌柱，从骨盆到下位肋骨。"
       },
       "detail": {
-        "en": "Iliocostalis lumborum is one portion of the erector-spinae columns, rather than an independently isolatable “lower back” [M47] [M49]. Its attachment pattern explains how it can resist or produce spinal extension.\n\nThe listed deadlift, row and hip-dominant back extension mainly require it to hold the spine steady. The trunk angle changes at the hip; the spine does not need to repeatedly bend and straighten. The model’s four displayed portions do not represent every cervical and cranial part of the whole group.",
-        "zh": "腰髂肋肌是竖脊肌纵向肌柱的一部分，不是一块能随意单独练的“下背肌” [M47] [M49]。它的附着方式让它能产生伸脊柱的力，也能抵抗脊柱前屈。\n\n所列硬拉、划船和以髋为主的背伸展，主要需要它稳住脊柱。躯干倾角在髋关节处改变，不需要让脊柱反复弯曲、伸直。模型展示的四个部分，并不包括整个肌群的所有颈部和头部部分。"
+        "en": "The lumbar part of the outer column. It rises from the common erector tendon on the iliac crest and sacrum and inserts by six or seven flat tendons on the lower borders of the angles of the lowest six or seven ribs [M47].\n\nLying furthest from the midline, it helps bend the trunk to its own side as well as backward [M47] [M49]. In the exercises listed it mostly holds the low back still.",
+        "zh": "外侧肌柱的腰段。它从髂嵴和骶骨上的竖脊肌共同腱向上，以六七条扁腱止于最下面六或七根肋骨的肋角下缘 [M47]。\n\n它离中线最远，除了伸脊柱，还帮躯干向同侧侧屈 [M47] [M49]。在所列的动作里，它主要负责把下背稳住。"
       },
       "parent": "erector-spinae"
     },
@@ -834,31 +836,31 @@
         }
       ],
       "feel": {
-        "en": "Notice the muscular column beside the spine during an unloaded hip hinge. This deep part cannot be separated from its neighbours by touch or by a feeling of effort.",
-        "zh": "空手做髋折叠时，留意脊柱旁肌柱的用力感。这部分较深，不能靠触摸或用力感把它与邻近肌肉分开。"
+        "en": "It lies on the back of the ribs under the shoulder-blade muscles and cannot be felt on its own.",
+        "zh": "它贴在肋骨背面、肩胛周围肌肉的下面，单独摸不到。"
       },
       "mistakes": [
         {
-          "en": "Trying to target this part by rounding the back under load.",
-          "zh": "为了专练这一部分，在负重时故意弓背。"
+          "en": "Letting the upper back round as the weight pulls the arms down in a row.",
+          "zh": "俯身划船时让重量把上背拉弯。"
         },
         {
-          "en": "Treating a stronger low-back burn as evidence of better technique.",
-          "zh": "把更强的下背酸胀当成动作更正确的证据。"
+          "en": "Over-arching the upper back at the top of a row to look “proud”.",
+          "zh": "划船到顶时过度挺胸、弓起上背。"
         }
       ],
       "exercises": [
+        "barbell-row",
         "barbell-deadlift",
-        "back-extension",
-        "barbell-row"
+        "back-extension"
       ],
       "summary": {
-        "en": "Continues the outer column up the rib cage.",
-        "zh": "沿胸廓向上延续外侧肌柱。"
+        "en": "Outer column, continued up the back of the ribs.",
+        "zh": "外侧肌柱在胸廓背面向上延续。"
       },
       "detail": {
-        "en": "Iliocostalis thoracis is one portion of the erector-spinae columns, rather than an independently isolatable “lower back” [M47] [M49]. Its attachment pattern explains how it can resist or produce spinal extension.\n\nThe listed deadlift, row and hip-dominant back extension mainly require it to hold the spine steady. The trunk angle changes at the hip; the spine does not need to repeatedly bend and straighten. The model’s four displayed portions do not represent every cervical and cranial part of the whole group.",
-        "zh": "胸髂肋肌是竖脊肌纵向肌柱的一部分，不是一块能随意单独练的“下背肌” [M47] [M49]。它的附着方式让它能产生伸脊柱的力，也能抵抗脊柱前屈。\n\n所列硬拉、划船和以髋为主的背伸展，主要需要它稳住脊柱。躯干倾角在髋关节处改变，不需要让脊柱反复弯曲、伸直。模型展示的四个部分，并不包括整个肌群的所有颈部和头部部分。"
+        "en": "The middle stretch of the outer column. It starts on the upper borders of the angles of the lowest six ribs, just inside where the lumbar part ends, and reaches the angles of the upper six ribs and the back of the transverse process of C7 [M47]. Overlapping like runners in a relay, the segments make one long column from the pelvis to the neck.\n\nIt helps keep the upper back straight, for example while you hold a bent-over row position.",
+        "zh": "外侧肌柱的中段。它起于最下面六根肋骨的肋角上缘，就在腰髂肋肌止点的内侧，向上止于上面六根肋骨的肋角和第 7 颈椎横突的后面 [M47]。像接力一样一段接一段，一条长肌柱才能从骨盆一直延续到颈部。\n\n它帮上背保持挺直，例如俯身划船时稳住躯干。"
       },
       "parent": "erector-spinae"
     },
@@ -880,8 +882,8 @@
       "layer": "deep",
       "origin": {
         "text": {
-          "en": "Common erector-spinae tendon and lumbar transverse and accessory processes.",
-          "zh": "竖脊肌共同腱及腰椎横突、副突。"
+          "en": "The common erector-spinae tendon on the back of the iliac crest, the sacrum and the lumbar spinous processes.",
+          "zh": "竖脊肌共同腱：髂嵴后部、骶骨和腰椎棘突。"
         },
         "bones": [
           "pelvis",
@@ -894,13 +896,13 @@
       },
       "insertion": {
         "text": {
-          "en": "Thoracic transverse processes and most ribs between their tubercles and angles; lumbar slips also attach to lumbar processes.",
-          "zh": "胸椎横突及大多数肋骨肋结节与肋角之间；腰段肌束还附着于腰椎突起。"
+          "en": "Transverse and accessory processes of the lumbar vertebrae; tips of the transverse processes of all thoracic vertebrae; the lower nine or ten ribs between their tubercles and angles.",
+          "zh": "腰椎横突和副突；全部胸椎横突的尖端；下面九或十根肋骨的肋结节与肋角之间。"
         },
         "bones": [
+          "lumbar-spine",
           "thoracic-spine",
-          "ribs",
-          "lumbar-spine"
+          "ribs"
         ],
         "s": [
           "M47"
@@ -942,17 +944,17 @@
         }
       ],
       "feel": {
-        "en": "Notice the muscular column beside the spine during an unloaded hip hinge. This deep part cannot be separated from its neighbours by touch or by a feeling of effort.",
-        "zh": "空手做髋折叠时，留意脊柱旁肌柱的用力感。这部分较深，不能靠触摸或用力感把它与邻近肌肉分开。"
+        "en": "The thick columns either side of your lower spine are mostly longissimus. Hinge forward a little and they firm up under your fingers.",
+        "zh": "下背脊柱两侧那两条粗粗的肌柱，大部分是最长肌。稍微向前俯身，手指下面就会绷紧。"
       },
       "mistakes": [
         {
-          "en": "Trying to target this part by rounding the back under load.",
-          "zh": "为了专练这一部分，在负重时故意弓背。"
+          "en": "Rounding the back under load to “feel the lower back more”.",
+          "zh": "负重时故意弓背，想让下背“更有感觉”。"
         },
         {
-          "en": "Treating a stronger low-back burn as evidence of better technique.",
-          "zh": "把更强的下背酸胀当成动作更正确的证据。"
+          "en": "Taking a stronger low-back burn as a sign of better technique.",
+          "zh": "把下背更酸当成动作更标准的证据。"
         }
       ],
       "exercises": [
@@ -961,12 +963,12 @@
         "barbell-row"
       ],
       "summary": {
-        "en": "Middle spinal column; extends and steadies the back.",
-        "zh": "中间肌柱，伸展并稳住背部。"
+        "en": "Middle column: the largest part of the erectors.",
+        "zh": "中间肌柱，竖脊肌里最大的一条。"
       },
       "detail": {
-        "en": "Longissimus thoracis is one portion of the erector-spinae columns, rather than an independently isolatable “lower back” [M47] [M49]. Its attachment pattern explains how it can resist or produce spinal extension.\n\nThe listed deadlift, row and hip-dominant back extension mainly require it to hold the spine steady. The trunk angle changes at the hip; the spine does not need to repeatedly bend and straighten. The model’s four displayed portions do not represent every cervical and cranial part of the whole group.",
-        "zh": "胸最长肌是竖脊肌纵向肌柱的一部分，不是一块能随意单独练的“下背肌” [M47] [M49]。它的附着方式让它能产生伸脊柱的力，也能抵抗脊柱前屈。\n\n所列硬拉、划船和以髋为主的背伸展，主要需要它稳住脊柱。躯干倾角在髋关节处改变，不需要让脊柱反复弯曲、伸直。模型展示的四个部分，并不包括整个肌群的所有颈部和头部部分。"
+        "en": "The largest of the erector columns. It rises from the common tendon and inserts all the way up: on the lumbar transverse and accessory processes, by rounded tendons on the tips of the transverse processes of every thoracic vertebra, and by fleshy slips on the lower nine or ten ribs between their tubercles and angles [M47].\n\nIt is the main extensor of the spine in this region and, on one side, helps bend the trunk sideways [M49]. In a deadlift it mostly works isometrically to keep the back from rounding [M55].",
+        "zh": "竖脊肌中最大的一条。它起于共同腱，一路向上附着：腰椎的横突和副突，以圆形的腱止于每一节胸椎横突的尖端，再以肉质肌齿止于下面九或十根肋骨的肋结节与肋角之间 [M47]。\n\n它是这一段脊柱主要的伸肌，单侧收缩还帮躯干侧屈 [M49]。硬拉时它主要做等长收缩，不让背弓起来 [M55]。"
       },
       "parent": "erector-spinae"
     },
@@ -1038,17 +1040,17 @@
         }
       ],
       "feel": {
-        "en": "Notice the muscular column beside the spine during an unloaded hip hinge. This deep part cannot be separated from its neighbours by touch or by a feeling of effort.",
-        "zh": "空手做髋折叠时，留意脊柱旁肌柱的用力感。这部分较深，不能靠触摸或用力感把它与邻近肌肉分开。"
+        "en": "It lies right beside the bony bumps down the middle of the back, under other muscles; you cannot feel it on its own.",
+        "zh": "它紧贴背中线那排骨性突起，被其他肌肉盖住，单独摸不到。"
       },
       "mistakes": [
         {
-          "en": "Trying to target this part by rounding the back under load.",
-          "zh": "为了专练这一部分，在负重时故意弓背。"
+          "en": "Rounding the back under load to “feel the lower back more”.",
+          "zh": "负重时故意弓背，想让下背“更有感觉”。"
         },
         {
-          "en": "Treating a stronger low-back burn as evidence of better technique.",
-          "zh": "把更强的下背酸胀当成动作更正确的证据。"
+          "en": "Taking a stronger low-back burn as a sign of better technique.",
+          "zh": "把下背更酸当成动作更标准的证据。"
         }
       ],
       "exercises": [
@@ -1057,12 +1059,12 @@
         "barbell-row"
       ],
       "summary": {
-        "en": "Inner spinal column connecting spinous processes.",
-        "zh": "内侧肌柱，连接不同节段的棘突。"
+        "en": "Inner column linking the spinous processes.",
+        "zh": "内侧肌柱，连接各节棘突。"
       },
       "detail": {
-        "en": "Spinalis thoracis is one portion of the erector-spinae columns, rather than an independently isolatable “lower back” [M47] [M49]. Its attachment pattern explains how it can resist or produce spinal extension.\n\nThe listed deadlift, row and hip-dominant back extension mainly require it to hold the spine steady. The trunk angle changes at the hip; the spine does not need to repeatedly bend and straighten. The model’s four displayed portions do not represent every cervical and cranial part of the whole group.",
-        "zh": "胸棘肌是竖脊肌纵向肌柱的一部分，不是一块能随意单独练的“下背肌” [M47] [M49]。它的附着方式让它能产生伸脊柱的力，也能抵抗脊柱前屈。\n\n所列硬拉、划船和以髋为主的背伸展，主要需要它稳住脊柱。躯干倾角在髋关节处改变，不需要让脊柱反复弯曲、伸直。模型展示的四个部分，并不包括整个肌群的所有颈部和头部部分。"
+        "en": "The smallest and innermost column. It arises by three or four tendons from the spinous processes of T11, T12, L1 and L2 and inserts on the spinous processes of the upper thoracic vertebrae, anywhere from four to eight of them [M47]. It is often blended with longissimus.\n\nIts fibres run almost straight up beside the midline, so its job is to extend the spine rather than bend it sideways [M47] [M49].",
+        "zh": "最小、最靠内的一条肌柱。它以三四条腱起于第 11、12 胸椎和第 1、2 腰椎的棘突，止于上位胸椎的棘突，数目从四个到八个不等 [M47]。它常与最长肌融合在一起。\n\n它的纤维几乎贴着中线竖直向上，所以作用是伸脊柱，而不是侧屈 [M47] [M49]。"
       },
       "parent": "erector-spinae"
     },
@@ -1149,32 +1151,32 @@
         }
       ],
       "feel": {
-        "en": "Rest a palm on the side of the abdomen below the ribs and gently brace while breathing. Several abdominal layers firm together; touch cannot isolate the outer layer.",
-        "zh": "手掌放在肋骨下方的侧腹，平稳呼吸并轻轻收紧躯干。几层腹肌会一起绷紧，不能靠触摸单独认出外层。"
+        "en": "Rest a palm on the side of your belly below the ribs and breathe out firmly, as if blowing out candles: the side wall tightens. Several abdominal layers firm together, so touch cannot single out this outer one.",
+        "zh": "手掌放在肋骨下方的侧腹，像吹蜡烛那样用力呼气：侧腹壁会绷紧。几层腹肌会一起变紧，所以用手摸分不出最外面这一层。"
       },
       "mistakes": [
         {
-          "en": "Twisting the trunk to help finish a single-arm row.",
-          "zh": "单臂划船时扭转躯干借力。"
+          "en": "Twisting the trunk to help finish a one-arm row or carry.",
+          "zh": "单臂划船或单侧负重行走时扭转躯干借力。"
         },
         {
-          "en": "Flaring the ribs and losing the trunk position in a pull-up.",
-          "zh": "引体向上时肋骨外翻，躯干位置失去控制。"
+          "en": "Letting the ribs flare and the low back arch during a pull-up.",
+          "zh": "引体向上时肋骨外翻、腰往后弓。"
         }
       ],
       "exercises": [
-        "single-arm-dumbbell-row",
-        "inverted-row",
-        "barbell-deadlift",
-        "pull-up"
+        "side-plank",
+        "cable-pallof-press",
+        "dumbbell-suitcase-carry",
+        "single-arm-dumbbell-row"
       ],
       "summary": {
-        "en": "Bends or turns the trunk and resists unwanted motion.",
-        "zh": "协助躯干弯曲、转动，也抵抗不需要的运动。"
+        "en": "Bends and turns the trunk; resists unwanted twisting.",
+        "zh": "弯曲、转动躯干，也抵抗多余的扭转。"
       },
       "detail": {
-        "en": "A superficial abdominal sheet; its posterior margin is the neighbouring structure shown in this topic [M47]. With the pelvis fixed, unilateral contraction contributes to rotation towards the opposite side, while bilateral action helps trunk flexion.\n\nIn the listed back exercises it mainly works with the other abdominal muscles to resist unwanted extension or rotation. Feeling it brace is not a measure of how much a single layer is working.",
-        "zh": "腹外斜肌是腹壁浅层肌片，本主题显示其后缘作为邻区 [M47]。骨盆固定时，单侧收缩协助躯干转向对侧；双侧一起收缩，协助躯干前屈。\n\n所列背部动作中，它主要与其他腹肌一起抵抗不需要的伸展或旋转。感觉到侧腹绷紧，不能衡量某一层肌肉究竟出了多少力。"
+        "en": "The outermost of the three flat side-wall muscles. Eight fleshy slips from the outer surfaces of the lower eight ribs run down and forward, then turn into a broad tendon sheet (aponeurosis) that reaches the front half of the iliac crest, the pubis and the linea alba down the middle of the belly [M47].\n\nBoth sides together bend the trunk forward; one side turns the trunk toward the opposite side and helps bend it sideways [M47]. In carries, planks and one-arm rows it mostly stops the trunk from twisting or arching.",
+        "zh": "侧腹壁三层扁肌里最外面的一层。它以八个肉质肌齿起于下面八根肋骨的外面，纤维向前下方走，再变成一片宽阔的腱膜，止于髂嵴前半、耻骨和腹部正中的白线 [M47]。\n\n两侧一起收缩让躯干前屈；单侧收缩让躯干转向对侧，并帮着侧屈 [M47]。负重行走、平板支撑和单臂划船时，它主要负责不让躯干扭转或向后弓。"
       },
       "common": {
         "en": "obliques",

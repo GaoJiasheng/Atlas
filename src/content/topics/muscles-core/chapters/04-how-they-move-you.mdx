@@ -46,18 +46,28 @@ state:
     - external-oblique
     - internal-oblique
     caption:
-      en: In this schematic flexion pose, rectus and both oblique layers shorten to bring the lower chest towards the
-        pelvis.
-      zh: 在前屈示意姿态中，腹直肌和两层腹斜肌缩短，把下胸部带向骨盆。
-  - camera: back
+      en: From the side, the trunk tips forward over the hips in a schematic flexion. Rectus and both oblique layers shorten
+        to bring the lower chest towards the pelvis.
+      zh: 从侧面看，躯干在髋上方示意性前屈；腹直肌和两层腹斜肌缩短，把下胸部带向骨盆。
+    camera: left-side
+  - camera:
+      position:
+      - 1.45
+      - 0.18
+      - -1.15
+      target:
+      - 0
+      - 0.01
+      - 0
+      fov: 30
     pose: trunk-extension
     labels:
     - erector-spinae-lumbar
     - multifidus-lumborum
     caption:
-      en: From behind, the erectors and multifidus are highlighted for extension. The single trunk pivot illustrates
-        direction, not motion at each vertebra.
-      zh: 背面高亮竖脊肌与多裂肌示意后伸；单一躯干支点说明方向，不逐节模拟椎骨。
+      en: From behind and to the side, the erectors and multifidus are highlighted as the trunk leans back. The single
+        trunk pivot shows the direction, not motion at each vertebra.
+      zh: 从侧后方看，躯干后仰，竖脊肌与多裂肌高亮；单一躯干支点只表示方向，不逐节模拟椎骨。
   - camera: back
     pose: bend-left
     labels:
@@ -97,6 +107,7 @@ state:
     - intermediate
     - neighbours
     - body
+    - transversus-abdominis
     labels:
     - psoas-major
     - iliacus
@@ -131,8 +142,8 @@ state:
     - external-oblique
     - internal-oblique
     caption:
-      en: The neutral brace stays still. Highlight marks muscles sharing the stabilising task; they are not animated
-        shortening in this hold.
+      en: The neutral brace stays still. Highlight marks muscles sharing the stabilising task; they are not animated shortening
+        in this hold.
       zh: 中立支撑保持不动；高亮表示共同稳定的肌肉，这一保持动作不画成反复缩短。
   index:
     parts:
@@ -159,7 +170,7 @@ Rotation uses a diagonal partnership. With the pelvis fixed, **left internal obl
 
 During <Term id="hip-flexion">hip flexion</Term>, psoas and iliacus bring the thigh towards the trunk. This differs from curling the rib cage towards the pelvis. A knee raise can contain both actions; calling it an isolated lower-abdominal exercise misses the hip-flexor work. Watch the femur attachment as the thigh rises, rather than treating every forward movement as a spinal bend [M92].
 
-A core muscle need not visibly shorten to work. An <Term id="isometric">isometric</Term> effort develops tension with little change in length. In <Term id="anti-extension">anti-extension</Term> work, the abdominal wall opposes a backward arch; in <Term id="anti-rotation">anti-rotation</Term> work, it opposes twisting. Side holds and carries also resist lateral bending. The still brace at the end is therefore a working position, not a rest. Highlight shows participation, not measured force or a ranking of muscles [S1].
+A core muscle need not visibly shorten to work. An <Term id="isometric">isometric</Term> effort develops tension with little change in length. In <Term id="anti-extension">anti-extension</Term> work, the abdominal wall opposes a backward arch; in <Term id="anti-rotation">anti-rotation</Term> work, it opposes twisting. Side holds and carries also resist lateral bending [S2]. The still brace at the end is therefore a working position, not a rest. Highlight shows participation, not measured force or a ranking of muscles [S1].
 
 <More title={{ en: "A schematic trunk pivot", zh: "躯干支点是示意" }}>
 
@@ -169,7 +180,7 @@ This rig uses a single trunk pivot, so a flexion or turn is a schematic directio
 
 <More title={{ en: "Quiet does not mean relaxed", zh: "不动不等于放松" }}>
 
-In the Romanian deadlift the hips perform the large motion while the back muscles mainly resist a change in spinal shape. A plank similarly asks abdominal muscles to resist extension. The hold is highlighted without repeated shortening; a steady breathing rhythm does not require repeated spinal bending.
+In a deadlift the hips and knees perform the large motion while the erector spinae work mainly isometrically: they hold the spine in a neutral shape instead of bending and straightening it [M55]. A plank similarly asks the abdominal wall to resist extension [S2]. The hold is highlighted without repeated shortening.
 
 </More>
 
@@ -183,9 +194,7 @@ In the Romanian deadlift the hips perform the large motion while the back muscle
 
 <Term id="hip-flexion">屈髋</Term>时，腰大肌与髂肌把大腿带向躯干；这与把胸廓卷向骨盆不同。抬膝可以同时包含两种运动，不能笼统叫作孤立练下腹。观察大腿抬起时的股骨附着，不要把所有向前运动都当成腰椎弯曲 [M92]。
 
-肌肉不必明显缩短才算工作。<Term id="isometric">等长</Term>用力让长度基本不变、张力仍存在。<Term id="anti-extension">抗伸展</Term>抵抗后仰，<Term id="anti-rotation">抗旋转</Term>抵抗扭转；侧撑和提重还抵抗侧弯。最后的稳定姿态仍在用力，高亮只表示参与，不是力量测量或肌肉排名 [S1]。
-
-同一种关节方向，在不同起始姿态与外力条件下，参与肌肉会改变。静止保持时，应观察有没有多余的腰背运动；用力感不等于隔离成功，也不必用更大位移来证明肌肉在工作。
+肌肉不必明显缩短才算工作。<Term id="isometric">等长</Term>用力让长度基本不变、张力仍存在。<Term id="anti-extension">抗伸展</Term>抵抗后仰，<Term id="anti-rotation">抗旋转</Term>抵抗扭转；侧撑和提重还抵抗侧弯 [S2]。最后的稳定姿态仍在用力，高亮只表示参与，不是力量测量或肌肉排名 [S1]。
 
 <More title={{ en: "A schematic trunk pivot", zh: "躯干支点是示意" }}>
 
@@ -195,7 +204,7 @@ In the Romanian deadlift the hips perform the large motion while the back muscle
 
 <More title={{ en: "Quiet does not mean relaxed", zh: "不动不等于放松" }}>
 
-罗马尼亚硬拉的主要位移动作发生在髋，背肌主要抵抗脊柱形状改变；平板支撑也要求腹肌抵抗后伸。保持姿态用高亮表示，不画反复缩短；持续呼吸不要求腰椎来回弯曲。
+硬拉时大幅度的运动发生在髋和膝，竖脊肌主要做等长收缩：保持脊柱中立，而不是让它来回弯伸 [M55]。平板支撑同样要求腹壁抵抗后伸 [S2]。保持姿态用高亮表示，不画反复缩短。
 
 </More>
 
