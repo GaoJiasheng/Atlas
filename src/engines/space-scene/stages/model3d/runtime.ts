@@ -17,10 +17,16 @@ import { Matrix4, Vector3 } from 'three';
 export interface ExercisePlacement {
   /** The trunk joint (the root turn's pivot) after the turn and offset. */
   trunk: Vector3;
-  /** Palms held still on the floor or bars (closed chain), or null. */
+  /** Palms held still on the floor or bars (closed chain), or hanging from a bar, at the first key; else null. */
   palms: [Vector3, Vector3] | null;
+  /** The palms at the first key (the lat bar's pulley goes above them), or null (no hands in the rig). */
+  hands: [Vector3, Vector3] | null;
+  /** The balls of the feet at the first key (midpoint), or null (no feet in the rig). */
+  feet: Vector3 | null;
   /** Floor height the ground shadow moves to, or null (the model's own floor). */
   floor: number | null;
+  /** The model's own floor (scene y). */
+  modelFloor: number;
 }
 
 export interface StageRuntime {

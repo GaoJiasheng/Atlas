@@ -228,3 +228,100 @@ export function fitSpan(cam: OrbitCamera, span: { half: number; yaw: number }, a
   const k = need / d;
   return { ...cam, position: [tx + dx * k, ty + dy * k, tz + dz * k] };
 }
+
+/* ------------------------------------------------------------------ */
+/* Exercise framing (docs/06 动作模式数据手册)                          */
+/* ------------------------------------------------------------------ */
+
+/** How the body lies in an exercise (from its root turn and keys): picks the default camera direction. */
+export type ExercisePosture = 'supine' | 'prone' | 'side-lying' | 'hinge' | 'upright';
+
+/** Default camera direction per posture: degrees about +Y from in front of the body toward its left, and above the horizontal. */
+export const EXERCISE_VIEWS: Readonly<Record<ExercisePosture, { azimuth: number; elevation: number }>> = {
+  // Lying on the back: side-above, from the feet's quarter (the bar reads across the chest, not end-on).
+  supine: { azimuth: 55, elevation: 36 },
+  // Face down (push-up, plank): from the side, a little above.
+  prone: { azimuth: 82, elevation: 16 },
+  // On one side (side plank): from in front, a little above.
+  'side-lying': { azimuth: 12, elevation: 22 },
+  // Bent at the hips (row, deadlift): from the side.
+  hinge: { azimuth: 88, elevation: 10 },
+  // Standing, sitting or hanging: front three-quarter.
+  upright: { azimuth: 35, elevation: 12 },
+};
+/** Long lens of the exercise camera (degrees). */
+export const EXERCISE_FOV = 24;
+/** Share of the frame height the figure may fill (the tall side), and of the half width (the HUD side panels take the rest). */
+export const EXERCISE_FILL = 0.7;
+export const EXERCISE_FILL_WIDTH = 0.56;
+/** The figure sits this share of the half height above the frame centre (the caption takes the bottom). */
+export const EXERCISE_LIFT = 0.08;
+/** Trunk flexion (degrees, any key) that makes a standing exercise a hinge. */
+export const HINGE_FLEXION = 30;
+
+/** The posture of an exercise motion. */
+export function exercisePosture(motion: { root?: { rotation: readonly number[] } | undefined; keys: readonly { joints: Readonly<Record<string, Partial<Record<string, number>> | undefined>> }[] }): ExercisePosture {
+  const r = motion.root?.rotation ?? [0, 0, 0];
+  const rx = r[0] ?? 0;
+  const rz = r[2] ?? 0;
+  if (rx <= -50) return 'supine';
+  if (rx >= 50) return 'prone';
+  if (Math.abs(rz) >= 50) return 'side-lying';
+  const flex = Math.max(0, ...motion.keys.map((k) => (k.joints.trunk?.flexion ?? 0) - (k.joints.trunk?.extension ?? 0)));
+  return rx >= 25 || rx + flex >= HINGE_FLEXION ? 'hinge' : 'upright';
+}
+
+/** Unit vector from the camera target to the camera: `azimuth`° about +Y from +Z (the body's front at yaw 0) toward +X, `elevation`° up. */
+export function viewDirection(azimuth: number, elevation: number, yaw = 0): Vec3 {
+  const a = ((azimuth + yaw) * Math.PI) / 180;
+  const e = (elevation * Math.PI) / 180;
+  return [Math.sin(a) * Math.cos(e), Math.sin(e), Math.cos(a) * Math.cos(e)];
+}
+
+/**
+ * The exercise camera: looking along `dir` (target → camera), centred on the
+ * points' box and backed off until every point (x, y, z triples: the
+ * mannequin over the keys, the held equipment) stays within `fill` of the
+ * frame height (less the lift) and `fillWidth` of the half width, then the
+ * figure lifted `lift` of the half height above the centre.
+ */
+export function fitExerciseCamera(
+  points: ArrayLike<number>,
+  dir: readonly number[],
+  aspect: number,
+  opts: { fov?: number; fill?: number; fillWidth?: number; lift?: number } = {},
+): OrbitCamera | null {
+  const n = Math.floor(points.length / 3);
+  if (n === 0) return null;
+  const fov = opts.fov ?? EXERCISE_FOV;
+  const lift = opts.lift ?? EXERCISE_LIFT;
+  const fillH = (opts.fill ?? EXERCISE_FILL) - lift;
+  const fillW = aspect < SPAN_MIN_ASPECT ? 0.9 : (opts.fillWidth ?? EXERCISE_FILL_WIDTH);
+  const min = [Infinity, Infinity, Infinity];
+  const max = [-Infinity, -Infinity, -Infinity];
+  for (let i = 0; i < n; i++)
+    for (let a = 0; a < 3; a++) {
+      const v = points[i * 3 + a]!;
+      if (v < min[a]!) min[a] = v;
+      if (v > max[a]!) max[a] = v;
+    }
+  const c: Vec3 = [(min[0]! + max[0]!) / 2, (min[1]! + max[1]!) / 2, (min[2]! + max[2]!) / 2];
+  const len = Math.hypot(dir[0] ?? 0, dir[1] ?? 0, dir[2] ?? 0) || 1;
+  const d0: Vec3 = [(dir[0] ?? 0) / len, (dir[1] ?? 0) / len, (dir[2] ?? 1) / len];
+  const rl = Math.hypot(d0[2], d0[0]);
+  const right: Vec3 = rl > 1e-9 ? [d0[2] / rl, 0, -d0[0] / rl] : [1, 0, 0];
+  const up: Vec3 = [d0[1] * right[2] - d0[2] * right[1], d0[2] * right[0] - d0[0] * right[2], d0[0] * right[1] - d0[1] * right[0]];
+  const tanV = Math.tan((fov * Math.PI) / 360);
+  const tanH = tanV * Math.max(aspect, 0.1);
+  let d = 0;
+  for (let i = 0; i < n; i++) {
+    const q = [points[i * 3]! - c[0], points[i * 3 + 1]! - c[1], points[i * 3 + 2]! - c[2]];
+    const x = q[0]! * right[0] + q[1]! * right[1] + q[2]! * right[2];
+    const y = q[0]! * up[0] + q[1]! * up[1] + q[2]! * up[2];
+    const z = q[0]! * d0[0] + q[1]! * d0[1] + q[2]! * d0[2];
+    d = Math.max(d, z + Math.abs(x) / (tanH * fillW), z + Math.abs(y) / (tanV * fillH));
+  }
+  const shift = lift * tanV * d;
+  const target: Vec3 = [c[0] - up[0] * shift, c[1] - up[1] * shift, c[2] - up[2] * shift];
+  return { position: [target[0] + d0[0] * d, target[1] + d0[1] * d, target[2] + d0[2] * d], target, fov };
+}

@@ -22,7 +22,8 @@ import {
   type JointAngles,
   type MuscleSheet,
 } from '../../content/schema/fitness';
-import { ACTION_JOINTS, EXERCISE_PHASES, MOVEMENTS, OPPOSITE_MOVEMENTS, otherSideJoint, type Movement } from '../../lib/anatomy';
+import { ACTION_JOINTS, equipmentList, EXERCISE_PHASES, MOVEMENTS, OPPOSITE_MOVEMENTS, otherSideJoint, type Movement } from '../../lib/anatomy';
+import { equipmentJoints } from './lib/equipment';
 import { detailSourceIds } from './lib/detail';
 import { GROUP_LABEL_PREFIX } from './lib/labels';
 import {
@@ -805,6 +806,13 @@ export const viewsSchema = z
      * camera re-fitted so the model's bounding sphere fills ~75 % of the stage width.
      */
     cover: orbitCamera.optional(),
+    /**
+     * How the body reads while an exercise plays (topics with a `context`
+     * skin part): `mannequin` (default) draws the skin as a solid matte
+     * figure with the muscles over it x-ray style and the bones hidden;
+     * `ghost` keeps the faint skin outline of the other modes.
+     */
+    exerciseBody: z.enum(['mannequin', 'ghost']).optional(),
   })
   .strict();
 export type ViewPresets = z.output<typeof viewsSchema>;
@@ -1284,6 +1292,12 @@ export const spaceSceneData = z
         for (const joint of Object.keys(k.joints))
           if (!(joint in rig)) issue(['training', 'exercises', i], `"${id}" motion.keys.${j}: joint "${joint}" is not in this topic's rig`);
       });
+      // Equipment the rig can hold (the palms, the trunk, the feet), and contacts it can keep.
+      for (const eq of equipmentList(e.motion?.equipment))
+        for (const joint of equipmentJoints(eq))
+          if (!(joint in rig)) issue(['training', 'exercises', i], `"${id}" motion.equipment ${eq.kind}: needs the rig joint "${joint}" (not in this topic's rig)`);
+      if (e.motion?.contacts?.includes('hands') && !('hand.l' in rig && 'hand.r' in rig))
+        issue(['training', 'exercises', i], `"${id}" motion.contacts: hands needs the rig joints hand.l and hand.r`);
     });
     data.training?.session?.blocks.forEach((b, i) => {
       if (!data.training!.exercises.includes(b.exercise)) issue(['training', 'session', 'blocks', i, 'exercise'], `"${b.exercise}" is not in training.exercises`);
@@ -1332,9 +1346,17 @@ export const cutawayRef = kebabId;
 /**
  * Exercise mode (docs/16 §6.5): a shared exercise of the topic's
  * training.json; `phase` holds its `start` or `end` key, or `loop`s through
- * them at its tempo (default `loop`). `null`: none.
+ * them at its tempo (default `loop`); `bones: true` keeps the skeleton on
+ * show over the mannequin. `null`: none.
  */
-export const exerciseRef = z.object({ id: kebabId, phase: z.enum(EXERCISE_PHASES).default('loop') }).strict();
+export const exerciseRef = z
+  .object({
+    id: kebabId,
+    phase: z.enum(EXERCISE_PHASES).default('loop'),
+    /** Keep the skeleton on show over the mannequin (`views.exerciseBody`; default: bones hidden while an exercise plays). */
+    bones: z.boolean().optional(),
+  })
+  .strict();
 export type ExerciseRef = z.output<typeof exerciseRef>;
 
 /** Parts (or groups) tinted in the signal colour (prime movers) and the cold colour (synergists). */

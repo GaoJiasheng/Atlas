@@ -121,6 +121,8 @@ export interface PartNodeProps {
   snapKey: number;
   /** Peel stages of the topic (0: no part has `explode.stage`). */
   stages: number;
+  /** Exercise mode: the highlight tint follows the part's contraction (stronger as it shortens). */
+  tintLive?: boolean;
   onSelect(id: string): void;
   onHover(id: string | null): void;
 }
@@ -145,6 +147,8 @@ const SKIN_ANCHOR_EVERY = 6;
 const SKIN_ANCHOR_SAMPLES = 256;
 /** Highlight tint strength (mix toward the signal / cold colour). */
 const TINT = 0.55;
+/** In an exercise, the share of that tint a relaxed (lengthened) muscle keeps. */
+const TINT_REST = 0.45;
 const tmpQ = new Quaternion();
 const tmpBox = new Box3();
 const tmpInv = new Matrix4();
@@ -445,8 +449,9 @@ export function PartNode(props: PartNodeProps) {
     if (Math.abs(m.sel - selTarget) < 0.003) m.sel = selTarget;
     for (const pm of pms) pm.uniforms.uSel.value = m.sel;
 
-    // Highlight tint (exercise mode, `highlight`): eased like the selection.
-    const tintTarget = display.tint ? TINT : 0;
+    // Highlight tint (exercise mode, `highlight`): eased like the selection; in an exercise it follows the contraction.
+    const c = runtime.contract.get(part.id) ?? 0;
+    const tintTarget = display.tint ? TINT * (props.tintLive ? TINT_REST + (1 - TINT_REST) * c : 1) : 0;
     m.tint = snap ? tintTarget : damp(m.tint, tintTarget, 8, dt);
     if (Math.abs(m.tint - tintTarget) < 0.003) m.tint = tintTarget;
     for (const pm of pms) {
@@ -455,7 +460,6 @@ export function PartNode(props: PartNodeProps) {
     }
 
     // Contraction (MotionDriver): along the fibres in the shader, else a scale below.
-    const c = runtime.contract.get(part.id) ?? 0;
     const contractChanged = c !== m.contract;
     m.contract = c;
     if (shape.fibre) {

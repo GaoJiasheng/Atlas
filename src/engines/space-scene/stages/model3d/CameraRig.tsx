@@ -10,9 +10,16 @@
  *  - snap: finish any move now
  *  - moves take 1.6 s (REFERENCE 2 s, see `ui.nextTweenMs`), easeInOut, with
  *    the offset from the target interpolated spherically (never through the model)
- *  - exercise mode, a standing lift with a long bar (`span`): the move backs
- *    off until the bar's ends stay off the HUD side panels (`fitSpan`; not
- *    for presets, the reader's own choice of view)
+ *  - exercise mode (docs/06 动作模式数据手册): when an exercise comes on
+ *    show (a beat without its own camera, a chapter, a deep link, an
+ *    exercise chip), the exercise camera frames it: from the posture's
+ *    direction (or `motion.camera`), backed off until the mannequin's sweep
+ *    over the keys and the held equipment (`bridge.exerciseFrame`, measured
+ *    by the MotionDriver a frame later) fills ~70 % of the frame height or
+ *    the width between the HUD side panels (`fitExerciseCamera`); a beat's
+ *    own camera wins. Under an authored camera a standing lift with a long
+ *    bar (`span`) backs off until the bar's ends stay off the side panels
+ *    (`fitSpan`; not for presets, the reader's own choice of view)
  *  - ORBIT: slow turntable (one turn / 40 s) around the target until the user drags
  *  - dragging cancels any move and writes the camera back (`setCamera`, debounced),
  *    which the host shows as FREE CAMERA; a transition (e.g. the next
@@ -46,11 +53,13 @@ import {
   DEFAULT_FOV,
   fitCameraToAspect,
   fitSphereCamera,
+  fitExerciseCamera,
   fitSpan,
   ORBIT_PERIOD_S,
   roundCamera,
   transitionCamera,
   tweenCamera,
+  viewDirection,
 } from '../../lib/camera';
 import { keepAnimating, MAX_DT, prefersReducedMotion } from './runtime';
 
@@ -60,6 +69,9 @@ function asOrbit(cam: unknown): OrbitCamera | null {
   const n = normalizeCamera(cam);
   return n && isOrbitCamera(n) ? n : null;
 }
+
+/** How long an exercise camera waits for the exercise's sweep (the glb may still be loading) before it takes the transition's own camera. */
+const EXERCISE_SWEEP_WAIT_MS = 4000;
 
 /** Every move ends on a defined field of view (REFERENCE narrows it). */
 const withFov = (cam: OrbitCamera): OrbitCamera => ({ ...cam, fov: cam.fov ?? DEFAULT_FOV });
@@ -73,6 +85,7 @@ export function CameraRig({
   sphere,
   minDistance,
   span,
+  exerciseView,
 }: {
   store: SceneStore<SpaceSceneExt>;
   ui: SpaceUiStore;
@@ -84,15 +97,25 @@ export function CameraRig({
   minDistance: number;
   /** The held bar's reach in the exercise with this id (standing lifts), or null. */
   span: (exercise: string) => { half: number; yaw: number } | null;
+  /** The exercise camera's direction for this exercise (degrees; `yaw` the body's turn), or null (it cannot play). */
+  exerciseView: (exercise: string) => { azimuth: number; elevation: number; fill: number | undefined; yaw: number } | null;
 }) {
   const controls = useRef<Controls>(null);
   const camera = useThree((s) => s.camera) as unknown as PerspectiveCamera;
   const invalidate = useThree((s) => s.invalidate);
   const size = useThree((s) => s.size);
+  const stageSize = useRef(size);
+  stageSize.current = size;
   const orbit = useStore(ui, (s) => s.orbit);
   // Latest props for the store subscriptions.
-  const props = useRef({ chapters, views, sphere, span });
-  props.current = { chapters, views, sphere, span };
+  const props = useRef({ chapters, views, sphere, span, exerciseView });
+  props.current = { chapters, views, sphere, span, exerciseView };
+  /** An exercise camera waiting for the exercise's sweep: the transition, the exercise, jump or fly, where to go if no sweep comes. */
+  const pending = useRef<{ id: number; exercise: string; instant: boolean; fallback: OrbitCamera | null; t0: number } | null>(null);
+  /** The exercise on show at the last transition. */
+  const shownExercise = useRef<string | null>(null);
+  /** The exercise the exercise camera framed last, and the stored camera then (unchanged since: keep framing it). */
+  const framed = useRef<{ exercise: string; stored: unknown } | null>(null);
 
   const tween = useRef<{ from: OrbitCamera; to: OrbitCamera; start: number; ms: number; id: number; cover?: boolean } | null>(null);
   const last = useRef<number | null>(null);
@@ -157,6 +180,21 @@ export function CameraRig({
     if (last.current === transitionId) return;
     last.current = transitionId;
     const { reason, instant } = state.transition;
+    // A snap makes an exercise camera still waiting for its sweep jump; any other transition replaces it.
+    if (pending.current) {
+      if (reason === 'snap') {
+        pending.current.instant = true;
+        settle(transitionId);
+        return;
+      }
+      settle(pending.current.id);
+      pending.current = null;
+    }
+    const beat = ui.getState().beatCamera;
+    if (beat !== null) ui.setState({ beatCamera: null });
+    const exercise = state.exercise?.id ?? null;
+    const exerciseChanged = exercise !== shownExercise.current;
+    shownExercise.current = exercise;
 
     if (reason === 'snap') {
       if (tween.current) {
@@ -188,11 +226,38 @@ export function CameraRig({
       view: state.view,
       views: presets,
     });
-    if (target) {
-      const fitted = fitCameraToAspect(withFov(target), camera.aspect);
+    const fitted = target ? fitCameraToAspect(withFov(target), camera.aspect) : null;
+    // The exercise camera: an exercise came on show, or a beat without its own camera shows one.
+    // (Also when the exercise camera framed this exercise and the stored camera has not changed since: a phase change, a selection.)
+    const kept = exercise !== null && framed.current?.exercise === exercise && framed.current.stored === state.camera;
+    if (exercise && reason !== 'preset' && beat !== 'authored' && (exerciseChanged || beat === 'auto' || kept)) {
+      if (frameExercise(exercise, transitionId, first || instant, fitted, state.camera)) return;
+    }
+    framed.current = null;
+    if (fitted) {
       const bar = reason !== 'preset' && state.exercise ? props.current.span(state.exercise.id) : null;
       moveTo(bar ? fitSpan(fitted, bar, camera.aspect) : fitted, first || instant, transitionId);
     } else settle(transitionId);
+  };
+
+  /** Wait for the exercise's sweep, then frame it (false: the exercise cannot play here). */
+  const frameExercise = (exercise: string, id: number, instant: boolean, fallback: OrbitCamera | null, stored: unknown): boolean => {
+    if (!props.current.exerciseView(exercise)) return false;
+    pending.current = { id, exercise, instant, fallback, t0: performance.now() };
+    framed.current = { exercise, stored };
+    invalidate();
+    return true;
+  };
+
+  /** The exercise camera for `exercise` once its sweep is measured, else null. */
+  const exerciseCamera = (exercise: string): OrbitCamera | null => {
+    const sweep = bridge.exerciseFrame;
+    const view = props.current.exerciseView(exercise);
+    if (!sweep || sweep.id !== exercise || !view) return null;
+    // The stage's own aspect (the camera's may lag a resize by a frame).
+    const { width, height } = stageSize.current;
+    const aspect = width > 0 && height > 0 ? width / height : camera.aspect;
+    return fitExerciseCamera(sweep.points, viewDirection(view.azimuth, view.elevation, view.yaw), aspect, view.fill !== undefined ? { fill: view.fill } : {});
   };
 
   /** Where the cover camera is for the current stage. */
@@ -232,6 +297,11 @@ export function CameraRig({
     onTransition();
     const offStore = store.subscribe((s, prev) => {
       if (s.transition.id !== prev.transition.id) onTransition();
+      else if (s.exercise?.id !== prev.exercise?.id) {
+        // An exercise chip (a patch, no transition): frame the new exercise.
+        shownExercise.current = s.exercise?.id ?? null;
+        if (s.exercise && !pending.current) frameExercise(s.exercise.id, s.transition.id, false, null, s.camera);
+      }
     });
     if (ui.getState().cover) onCover(true);
     const offUi = ui.subscribe((s, prev) => {
@@ -255,6 +325,21 @@ export function CameraRig({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [size.width, size.height]);
 
+  // The stage changes size (the HUD hides for the presentation): re-fit an exercise camera that is still on show.
+  useEffect(() => {
+    const f = framed.current;
+    if (!f || pending.current || user.current.active || ui.getState().cover || ui.getState().orbit || f.stored !== store.getState().camera || store.getState().exercise?.id !== f.exercise) return;
+    const to = exerciseCamera(f.exercise);
+    if (!to) return;
+    const tw = tween.current;
+    if (tw && !tw.cover) tw.to = to;
+    else if (!tw) {
+      apply(to);
+      invalidate();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [size.width, size.height]);
+
   useEffect(() => {
     if (orbit) {
       spin.current = 0;
@@ -263,6 +348,16 @@ export function CameraRig({
   }, [orbit, invalidate]);
 
   useFrame((state, delta) => {
+    const wait = pending.current;
+    if (wait) {
+      const cam = exerciseCamera(wait.exercise);
+      if (cam || performance.now() - wait.t0 > EXERCISE_SWEEP_WAIT_MS) {
+        pending.current = null;
+        const to = cam ?? wait.fallback;
+        if (to) moveTo(to, wait.instant, wait.id);
+        else settle(wait.id);
+      } else keepAnimating(state.invalidate);
+    }
     const tw = tween.current;
     if (tw) {
       const k = Math.min(1, (performance.now() - tw.start) / tw.ms);

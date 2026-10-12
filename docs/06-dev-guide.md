@@ -863,11 +863,74 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
 
 **共享肌肉 / 动作数据（M10）**：`src/content/shared/fitness/muscles/<区>.json`（`{ muscles: [...] }`）、`exercises/<模式>.json`（`{ exercises: [...] }`）、`sources.json`（`{ sources: [{ id: "M1", … }] }`），schema 在 `src/content/schema/fitness.ts`（字段见 docs/16 §4.2 / §4.3；`dose` 按决定 11 改为 `[{ text: {en, zh}, s: ["M#"] }]` 只写原则）。主题写 `data/training.json`：`{ "exercises": [动作 id…], "note"?: {en, zh}（肌肉卡 TRAINING 页的一句原则）, "session"?: { title, blocks: [{ exercise, note? }], note?, s? } }`。构建（`src/lib/content.ts`）与 `pnpm validate`（`scripts/lib/shared-data.ts`）都用 `withSharedFitness` 把主题用到的条目合并进 data.json 的 `fitness`：零件 `muscle` 链到的肌肉（及其 parent），training 与这些肌肉列出的动作，这些动作提到的肌肉，加全部共享来源。共享来源编号 `M#`：正文 `<Num s="M3">`、详情 `[M3]`、来源浮层都认；`pnpm tsx scripts/sources-md.ts --shared fitness` 写 `shared/fitness/SOURCES.md`，有 training.json 的主题跑 `sources-md.ts <slug>` 时 SOURCES.md 多一块共享来源。许可字段：glb 的 `asset.copyright`（validate 查非空）、主题 `SOURCES.md` 的 S# 条目、`topic.yaml` 的 `note`（docs/16 §3.2）。
 
-**动作模式（M8）**：章 / 拍 `exercise: { id, phase: start | end | loop }`（默认 loop；必须在 training.json 里）或肌肉卡 EXERCISES 页的芯片进入。引擎读共享动作的 `motion`：`root.rotation`（整个模型绕 **trunk 关节**（rig 的 `trunk`；没有时用非 context 零件的中心）转到动作体位，例如卧推 [-90, 0, 0]；可加 `offset` 米，转完再平移；胸部始终在原点附近，章节镜头取景胸部而不是器械）、`keys`（start / mid? / end，`joints` 关节角 + `contract` 肌肉 id → 0..1，本主题里显示该肌肉或其头的零件都收缩）、`tempo` [start→end 秒, 停, end→start 秒, 停]（默认 [2, 0, 1, 0]）。`primary` 的零件 signal 色、`secondary` cold 色、`stabilisers` 原色、其余链接了肌肉的零件淡显。器械 `equipment: { kind, grip?, width?, at?, turn?, incline? }`（一个或 ≤ 4 个；`lib/equipment.ts`，引擎基本体拼成，**真实尺寸、米**：奥林匹克杠 2.2 m、杠身 28 mm、套筒 50 mm、杠片 300 mm × 25 mm（标准 10 kg 铁片，克制，不抢画面）；哑铃 350 mm 长、头 170 mm；凳 1.2 × 0.3 m、面高 0.45 m）：barbell（杠从一只掌心到另一只，正握时横在两前臂上）、dumbbell / cable-handle（每只手一个，垂直前臂；`grip: neutral` 时前后向）握在**掌心**（rig `hand.*` 的 `offset`），随身体转；bench（面顶在 trunk 关节 + `at` 米处，长轴沿 Z、头端 −Z，`incline` 抬起靠背，`turn` 绕 Y）、parallel-bars（两根双杠各在一只掌心下，柱子落到地面）、floor（俯卧撑的地面薄板，顶面 = 掌心高度，水平位置 = trunk + `at`）站在场景里。有 floor / parallel-bars 时是**闭链**：掌心停在第一键的位置，身体去动（俯卧撑绕脚尖转、胸口落向地面；双杠臂屈伸整个身体下沉）；地面阴影移到器械的地面上。器械统一中性哑光深灰、无高光、不投影；凳与双杠 60 % 不透明度、地面 25 %；每件一次绘制，不可点、不标注。阅读面板的检视器先出**动作卡**：示意图（`sketch`，两格石墨图；cinema 下反相）、器械与级别、START / END / LOOP（能播放时）、主动 / 协同 / 稳定肌芯片（点 = 选中显示该肌肉的零件）、准备、步骤、提示、错误、练多少（带来源）、注意事项、研究显示、固定的安全行（UI 文案）。`pnpm shoot --beats` 对 loop 的动作拍再各拍一张起始键与结束键（`beat-<章>-<n>-start.png` / `-end.png`，测试钩子 `__atlas.engine.exercisePhase(phase)`）。
+**动作模式（M8）**：章 / 拍 `exercise: { id, phase: start | end | loop, bones?: true }`（默认 loop；必须在 training.json 里）或肌肉卡 EXERCISES 页的芯片进入。引擎读共享动作的 `motion`（写法见下面的**动作模式数据手册**）：整体转到动作体位（`root`）、按关键帧摆关节（`keys`、`tempo`）、画器械（`equipment`）、用**接触求解**让手 / 脚停在器械或地面上而身体去动（`contacts`，`lib/contact.ts`）、**由关节角算出收缩**（`lib/contraction.ts`）、用**动作镜头**取景（`lib/camera.ts`）。
+
+- **人体模特（`views.exerciseBody`，默认 `mannequin`）**：主题有蒙皮的 `context` 皮肤零件时，动作播放期间皮肤画成实心哑光模特（`token:mannequin`：paper 暖浅灰，cinema 中灰；roughness .85、环境光很轻，投主光阴影），淡入淡出 0.4 s；`stages/model3d/Mannequin.tsx`。模特只写**往后推 6 cm 的深度**（颜色和轮廓不动）：皮下 6 cm 以内的肌肉（近侧）通过深度测试画在模特上面，远侧肌肉、身体后面的东西（背下的凳、地面、远处的立柱）被挡住；在身体前面的杠会挡住身体。骨骼（既不是肌肉也不是 context 的零件）在模特模式下隐藏，拍写 `exercise.bones: true` 时保留。`exerciseBody: ghost` = 旧的淡显轮廓（器械半透明）。
+- **着色**：`primary` signal、`secondary` cold、`stabilisers` 原色、其余链接了肌肉的零件淡显（.12）；动作中着色强度随收缩变：放松时 45 %，最短时 100 %（`PartNode` `tintLive`）。
+- **收缩 = 关节角算出来的**：对动作 `primary` / `secondary` / `stabilisers` 列出的每块肌肉（显示它或它的头的零件），读它肌肉卡 `actions` 里每条（关节、动作、角色）：`along = 角(动作) − 角(反向动作)`（该侧关节、当前帧），`c = 权重 × clamp01((along − lo) / (hi − lo))`，lo / hi = 这个动作所有关键帧里 along 的最小 / 最大值（关节往肌肉动作方向走得最远处肌肉最短，与 start / end 谁在前无关）；权重 prime 1、assist 0.5、stabilise 0.2，一块肌肉取各动作最大值；所有动作都不动（关键帧间 < 5°）的列出肌肉 = 等长，整段 0.3。关节：零件 `-r` = 右侧，取 `<关节>.l/.r`，否则无侧的 `trunk`；`wrist` 退到 `hand`，`forearm` 的旋前 / 旋后退到 `elbow`；无侧关节上右侧肌肉的侧屈取反、旋转取绝对值。关键帧手写的 `contract` 只作**覆盖**（该肌肉用手写值，其余照算）。
+- **接触求解**：`contacts` 第一项精确满足——`hands`：两掌中点停在第一键的位置，身体平移（引体向上屈肘时身体上升、双杠下沉、悬垂举腿吊着）；`[hands, feet]` 且手撑地面：身体绕脚（有踝关节时用前脚掌，否则模型脚尖）转，让掌心保持高度（俯卧撑）；`feet`：站姿脚掌钉地（`lib/stance.ts`）；`seat`：不修正。不写时按器械推：引体杠 / 双杠 → `[hands]`，地面且 root 绕 X ≥ 30°（俯身）→ `[hands, feet]`（rig 没有手时整对丢弃），凳 / 座椅 → `[seat]`，站立 → `[feet]`，其它不修正。数据写了但 rig 做不到的接触往后顺延。
+- **动作镜头**：出现新动作时（没有自己 `camera` 的拍、章节、深链、动作芯片），MotionDriver 下一帧把模特在各关键帧（及两键中点）的蒙皮顶点和握点算一遍（`bridge.exerciseFrame`），CameraRig 沿体位方向退到这些点占画高 ~70 %（减去 8 % 上抬，让人物在说明卡上方）或两侧 HUD 之间宽度 56 %（窄屏 90 %），fov 24°：仰卧 = 侧上方（方位 55°、仰角 36°，从脚的一侧看，杠不正对镜头）、俯身 = 侧面稍高（82° / 16°）、侧卧 = 正前（12° / 22°）、髋铰链（root 绕 X ≥ 25° 或躯干屈 + root ≥ 30°）= 侧面（88° / 10°）、站 / 坐 / 悬垂 = 前 3/4（35° / 12°）。方位从身体正前（+Z，随 root 的 Y 转）往身体左侧量。`motion.camera` 改方向，拍自己的 `camera`（轨道相机或预设名）优先。同一动作换 start / end、选零件时镜头不动；拖动后自由镜头不被拉回。
+- 器械统一中性哑光灰（倒角处有柔和高光），模特模式下实心（地面 50 %），淡显模式下立式器械 60 %、地面 25 %；不投影；每件一次绘制，不可点、不标注。
+- 阅读面板的检视器先出**动作卡**：示意图（`sketch`，两格石墨图；cinema 下反相）、器械与级别、START / END / LOOP（能播放时）、主动 / 协同 / 稳定肌芯片（点 = 选中显示该肌肉的零件）、准备、步骤、提示、错误、练多少（带来源）、注意事项、研究显示、固定的安全行（UI 文案）。`pnpm shoot --beats` 对 loop 的动作拍再各拍一张起始键与结束键（`beat-<章>-<n>-start.png` / `-end.png`，测试钩子 `__atlas.engine.exercisePhase(phase)`；两张同一个镜头）。
 
 **肌肉卡（M9）**：零件链接了 `muscle` 时，检视器（手机上是同一个底部抽屉）出 SOLO 按钮与四页：FEATURES（层、起点 / 止点文字 + 骨芯片、纤维排列与走向、在自己身上找到它、"Tell me more" = detail）、ACTIONS（关节 · 动作 · 角色，每行"演示"按钮：该侧关节按 `rig.demo` 角来回摆、这块肌肉同步收缩；rig 没有那根轴时不出按钮）、TRAINING（常见错误、training.json 的 `note`、伤病）、EXERCISES（动作芯片 → 动作模式 + 动作卡）。标签页是 WAI-ARIA tablist（← → 切换，44 px）。
 
-**token**：`token:muscle-1` / `muscle-2` / `muscle-3`（浅层最暖 → 深层最暗，低饱和，不是血红）、`token:bone`（象牙），两套主题都有。
+**token**：`token:muscle-1` / `muscle-2` / `muscle-3`（浅层最暖 → 深层最暗，低饱和，不是血红）、`token:bone`（象牙）、`token:mannequin`（动作模式的模特），两套主题都有。
+
+#### 动作模式数据手册
+
+一个动作的 `motion` 依次回答五个问题。全部字段在 `src/content/schema/fitness.ts`，`pnpm validate` 检查：器械种类与字段（每种器械只收自己的字段）、`cable` / `band` 必须给 `at`、杠铃 `on: back` 必须给 `at`、关键帧关节和器械要的关节（手持 → `hand.l/.r`，背杠 → `trunk`，弹力带拉脚 → `ankle.l/.r`）都在主题 rig 里、`contacts: [hands]` 要有双手；卡片 `equipment`（barbell / dumbbell / cable …）而动作没画对应器械时给警告。
+
+1. **体位 `root`**：`rotation` = 整个身体绕 trunk 关节的 XYZ 度（站 [0,0,0]；仰卧 [-90,0,0]，头朝 −Z、脸朝上；俯卧 [70–90,0,0]；侧卧 [0,0,±75]；转向 [0,yaw,0]），`offset` 米。中立站姿下所有关节角 0。
+2. **器械 `equipment`**（一个或 ≤ 4 个；`at` 都是相对 trunk 关节、root 转完后的场景米数，`turn` 绕 Y 度）：
+   | kind | 手 / 脚 | 字段 | 放在哪 |
+   |---|---|---|---|
+   | `barbell` | 杠 / 地 | `grip` `width` `on: hands \| back` `at` | 两掌之间；`on: back` 骑在 trunk 关节上，`at` 是 trunk 静止坐标系里的米数 |
+   | `dumbbell` `kettlebell` `cable-handle` | 把手 / 地 | `grip` `hand: left \| right \| both` | 每只持握的手一个（`neutral` = 前后向） |
+   | `lat-bar` | 杠 / 地 | `grip` `width` `at` | 1.2 m 直杠在两掌之间，钢索到 `at`（缺省：第一键杠的上方 0.85 m） |
+   | `cable` | 把手或杠 / 地 | `hand` `handle: d-handle \| bar` `grip` `at` `turn` | 2.2 m 立柱立在 `at` 的 x / z、地面上，滑轮在 `at`，钢索到每只持握手的 D 形把手（`bar` = 两掌之间 0.5 m 直杠）；两侧绳索夹胸写两个 `cable`，各 `hand` 一侧 |
+   | `band` | 把手 / 地 | `hand` `to: hands \| feet` `at` | 从锚点 `at` 到手（或前脚掌） |
+   | `bench` / `incline-bench` | — / 地 | `at` `turn`，`incline` / `angle`（默认 30°） | 凳面顶在 `at`，长轴 Z、头端 −Z |
+   | `machine-seat` | — / 地 | `at` `turn` `angle`（靠背后仰，默认 10°）`height`（0.45）`thighPad` | 座面顶在 `at`，靠背在 −Z |
+   | `pull-up-bar` | 杠 / 悬空 | `grip` `width` `turn` `height`（2.3） | 杠在第一键两掌处、沿掌到掌方向，立柱落到杠下 `height` 的地面 |
+   | `dip-bars` | 把手 / 悬空 | `at` `height`（1.45） | 两根杠各在一只掌下 |
+   | `step` | — / 台阶 | `at` `turn` `height`（0.2） | 前脚掌下方（+ `at`），台面 = 模型地面，地面降一个台阶 |
+   | `floor` | — / 地 | `at` `turn` | 掌撑地时顶面 = 掌高，否则 trunk + `at` |
+3. **接触 `contacts`**：见上，按优先级写；`feet: left | right | free` 选哪只脚钉地（`free` = 悬空）。
+4. **关键帧 `keys`**：start、可选 mid、end；`joints` 用解剖角（左关节自动驱动右关节）。先写 start 姿势（手在杠上、脚在地上），再写 end；身体位移交给接触求解，**不要**用关节角去"抬身体"。`contract` 只在算出来的不对时写。
+5. **节奏 `tempo`** [start→end 秒, 停, end→start 秒, 停]（默认 [2, 0, 1, 0]）；`camera: { azimuth, elevation, fill? }` 只在默认方向看不清时写。
+
+```jsonc
+// 站姿 + 杠铃（背蹲）：杠在背上，脚钉地，镜头前 3/4
+{ "root": { "rotation": [0, 0, 0] },
+  "equipment": [{ "kind": "barbell", "on": "back", "at": [0, 0.55, -0.12] }],
+  "contacts": ["feet"],
+  "keys": [ { "phase": "start", "joints": { "hip.l": { "abduction": 8 }, "knee.l": { "flexion": 3 } } },
+            { "phase": "end", "joints": { "trunk": { "flexion": 25 }, "hip.l": { "flexion": 75, "abduction": 8 }, "knee.l": { "flexion": 80 }, "ankle.l": { "dorsiflexion": 22 } } } ],
+  "tempo": [2, 0.3, 1.5, 0.5] }
+// 仰卧 + 凳（卧推）：坐在凳上不修正，镜头侧上方
+{ "root": { "rotation": [-90, 0, 0] },
+  "equipment": [{ "kind": "barbell", "grip": "pronated", "width": 0.8 }, { "kind": "bench", "at": [0, -0.205, 0.2] }],
+  "keys": [ { "phase": "start", "joints": { "shoulder.l": { "flexion": 80, "abduction": 10 }, "elbow.l": { "flexion": 5 } } },
+            { "phase": "end", "joints": { "shoulder.l": { "extension": 25, "abduction": 45, "horizontal-abduction": 15 }, "elbow.l": { "flexion": 110 } } } ] }
+// 悬垂 + 单杠（反握引体）：手钉在杠上，屈肘时身体上升，脚悬空
+{ "equipment": [{ "kind": "pull-up-bar", "grip": "supinated" }], "contacts": ["hands"], "feet": "free",
+  "keys": [ { "phase": "start", "joints": { "shoulder.l": { "flexion": 165, "abduction": 10 }, "elbow.l": { "flexion": 5 } } },
+            { "phase": "end", "joints": { "shoulder.l": { "flexion": 45, "abduction": 10 }, "elbow.l": { "flexion": 125 } } } ] }
+// 绳索（高位夹胸）：两侧立柱，每只手一根钢索，脚钉地
+{ "equipment": [ { "kind": "cable", "hand": "left", "grip": "neutral", "at": [0.85, 0.55, -0.35] },
+                 { "kind": "cable", "hand": "right", "grip": "neutral", "at": [-0.85, 0.55, -0.35] } ],
+  "contacts": ["feet"],
+  "keys": [ { "phase": "start", "joints": { "shoulder.l": { "abduction": 85, "horizontal-abduction": 10 }, "elbow.l": { "flexion": 15 } } },
+            { "phase": "end", "joints": { "shoulder.l": { "flexion": 35, "abduction": -12 }, "elbow.l": { "flexion": 15 } } } ] }
+// 地面（俯卧撑）：掌和脚都在地上，身体绕脚转让掌心保持高度，镜头侧面
+{ "root": { "rotation": [70, 0, 0] },
+  "equipment": [{ "kind": "floor", "at": [0, 0, -0.45] }], "contacts": ["hands", "feet"],
+  "keys": [ { "phase": "start", "joints": { "shoulder.l": { "flexion": 70, "abduction": 12 }, "elbow.l": { "flexion": 5 } } },
+            { "phase": "end", "joints": { "shoulder.l": { "extension": 20, "abduction": 55, "horizontal-abduction": 15 }, "elbow.l": { "flexion": 105 } } } ] }
+```
+
+**模型前提**：模特只能按 glb 骨架动。主题 glb 的骨架缺哪条链，模特那部分就跟着躯干僵着（腿主题没有手臂骨、胸部主题没有腿骨、手臂 / 肩 / 背主题没有膝踝）；rig 里没写的骨（腰腹主题 glb 有手臂骨，但 rig 没映射）也不会动。要全身动作，先在管线 manifest 的 `jointNames` 补全全身关节重跑（`scripts/anatomy/README.md`），再在 parts.json 的 `rig.joints` 映射。
 
 ### 章节怎么写（`state`）
 

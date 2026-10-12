@@ -174,9 +174,10 @@
         ],
         "equipment": [
           {
-            "kind": "parallel-bars"
+            "kind": "dip-bars"
           }
-        ]
+        ],
+        "contacts": ["hands"]
       },
       "sources": [
         "M5",

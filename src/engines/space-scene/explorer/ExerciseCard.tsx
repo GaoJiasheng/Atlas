@@ -107,7 +107,10 @@ export function ExerciseCard({ exercise, file, fitness, playable }: { exercise: 
               type="button"
               className="atlas-control space-sheet__tab"
               aria-pressed={phase === p}
-              onClick={() => store.getState().patch({ exercise: { id: exercise.id, phase: p } })}
+              onClick={() => {
+                const cur = store.getState().exercise;
+                store.getState().patch({ exercise: { ...(cur?.id === exercise.id ? cur : {}), id: exercise.id, phase: p } });
+              }}
             >
               {t(`space.exercise.phase.${p}` as UiKey)}
             </button>

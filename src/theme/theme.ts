@@ -50,6 +50,7 @@ export const TOKEN_NAMES = [
   'muscle-2',
   'muscle-3',
   'bone',
+  'mannequin',
   'bg',
   'surface',
   'surface-2',

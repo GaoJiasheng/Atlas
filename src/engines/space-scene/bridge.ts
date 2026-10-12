@@ -76,6 +76,8 @@ export interface StageBridge {
   settleListeners: Set<() => void>;
   /** Standing exercise on show: how far the weight-bearing feet still slide from where they stood (metres), else null (QA). */
   footSlip: number | null;
+  /** The points (x, y, z, scene) the mannequin and the held equipment sweep over an exercise's keys: the exercise camera frames them. */
+  exerciseFrame: { id: string; points: Float32Array } | null;
 }
 
 /** Resolves once the stage has finished the camera move of transition `id` (or after `timeoutMs`, e.g. before the stage has loaded). */
@@ -112,5 +114,6 @@ export function createBridge(): StageBridge {
     settledTransition: -1,
     settleListeners: new Set(),
     footSlip: null,
+    exerciseFrame: null,
   };
 }

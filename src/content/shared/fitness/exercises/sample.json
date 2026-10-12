@@ -35,12 +35,13 @@
       "setup": { "en": "Sample set-up text.", "zh": "示例准备文字。" },
       "steps": [{ "en": "Sample step.", "zh": "示例步骤。" }],
       "motion": {
-        "equipment": { "kind": "cable-handle", "grip": "neutral" },
+        "equipment": { "kind": "cable", "hand": "left", "grip": "neutral", "at": [0.25, -0.55, 0.7] },
         "keys": [
           { "phase": "start", "joints": { "shoulder.l": { "flexion": 0 }, "elbow.l": { "flexion": 10 } } },
-          { "phase": "mid", "joints": { "shoulder.l": { "flexion": 45 }, "elbow.l": { "flexion": 10 } }, "contract": { "sample-flexor": 0.4 } },
-          { "phase": "end", "joints": { "shoulder.l": { "flexion": 85 }, "elbow.l": { "flexion": 10 } }, "contract": { "sample-flexor": 0.5 } }
-        ]
+          { "phase": "mid", "joints": { "shoulder.l": { "flexion": 45 }, "elbow.l": { "flexion": 10 } } },
+          { "phase": "end", "joints": { "shoulder.l": { "flexion": 85 }, "elbow.l": { "flexion": 10 } } }
+        ],
+        "camera": { "azimuth": 90, "elevation": 12 }
       }
     },
     {

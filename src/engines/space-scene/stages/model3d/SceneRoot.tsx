@@ -5,7 +5,7 @@
  */
 import { Component, lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
-import { Plane, Vector3, type Group } from 'three';
+import { Plane, Vector3, type Group, type SkinnedMesh } from 'three';
 import { useStore } from 'zustand';
 import { useShallow } from 'zustand/react/shallow';
 import type { SceneStore } from '../../../core/store';
@@ -33,10 +33,12 @@ import { GroundShadow } from './GroundShadow';
 import { LabelProbe, ResolutionGovernor, ShadowUpdater, SitesProbe, StatsProbe, type GroupMembers } from './probes';
 import { MotionDriver } from './MotionDriver';
 import { Equipment } from './Equipment';
+import { Mannequin } from './Mannequin';
 import type { GltfRig } from './GltfSource';
 import { makeGrip } from './grip';
 import { makeFoot } from './foot';
 import { heldSpan } from '../../lib/equipment';
+import { exercisePosture, EXERCISE_VIEWS } from '../../lib/camera';
 import { partBounds, partMaterialSlots } from '../../lib/parts';
 import { anchorHalf, anchorOffset, anchorPoint, anchorRadius, primitiveShape, stageBounds } from './shapes';
 import { createTextureKit } from './textures';
@@ -314,10 +316,27 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
     [exerciseLook, s.tints],
   );
   const ghosted = useMemo(() => (exerciseLook ? [...s.ghosted, ...exerciseLook.faint] : s.ghosted), [exerciseLook, s.ghosted]);
-  const displays = useMemo(
-    () => resolveAllPartDisplays(data.parts, { view: s.view, part: s.part, layers: s.layers, hidden: s.hidden, ghosted, solo: s.solo, highlight }),
-    [data.parts, s.view, s.part, s.layers, s.hidden, ghosted, s.solo, highlight],
-  );
+  // The skin outline (the topic's skinned context part): the exercise mannequin (docs/06 动作模式数据手册).
+  const skinPart = useMemo(() => data.parts.find((p) => p.context && p.mesh !== undefined && !p.twinOf) ?? null, [data.parts]);
+  const skinShape = skinPart ? shapes.get(skinPart.id) : undefined;
+  const mannequin =
+    exerciseLook !== null &&
+    exerciseSheet?.motion !== undefined &&
+    playable.has(exerciseSheet.id) &&
+    (data.views.exerciseBody ?? 'mannequin') === 'mannequin' &&
+    skinShape?.pieces.some((p) => p.skin) === true;
+  const bonesOn = s.exercise?.bones === true;
+  const displays = useMemo(() => {
+    const out = resolveAllPartDisplays(data.parts, { view: s.view, part: s.part, layers: s.layers, hidden: s.hidden, ghosted, solo: s.solo, highlight });
+    if (!mannequin) return out;
+    // With the mannequin: the skin is drawn by it, the bones (parts that are neither muscle nor context) step aside unless the beat keeps them.
+    for (const p of data.parts) {
+      const d = out.get(p.id);
+      if (!d) continue;
+      if (p.id === skinPart?.id || (!bonesOn && p.muscle === undefined && !p.context)) out.set(p.id, { ...d, visible: false, hidden: false, selectable: false });
+    }
+    return out;
+  }, [data.parts, s.view, s.part, s.layers, s.hidden, ghosted, s.solo, highlight, mannequin, bonesOn, skinPart]);
   const sitesOn = useMemo(() => activeSites(data.sites, s.part, s.sites), [data.sites, s.part, s.sites]);
   const equipment = useMemo(() => {
     const e = exerciseSheet && playable.has(exerciseSheet.id) ? exerciseSheet.motion?.equipment : undefined;
@@ -341,11 +360,32 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
     };
     return { l: foot('ankle.l'), r: foot('ankle.r') };
   }, [rig, data.rig, bounds]);
-  // Standing lifts with a long bar: the camera keeps its ends off the HUD side panels.
+  // Standing lifts with a long bar under an authored camera: the camera keeps its ends off the HUD side panels.
   const exerciseSpan = useCallback(
     (id: string) => (playable.has(id) ? heldSpan(fitness?.exercises.find((e) => e.id === id)?.motion) : null),
     [fitness, playable],
   );
+  // The exercise camera's direction (the posture's default or `motion.camera`) and the body's turn.
+  const exerciseView = useCallback(
+    (id: string) => {
+      const motion = playable.has(id) ? fitness?.exercises.find((e) => e.id === id)?.motion : undefined;
+      if (!motion) return null;
+      const view = motion.camera ?? EXERCISE_VIEWS[exercisePosture(motion)];
+      return { azimuth: view.azimuth, elevation: view.elevation, fill: motion.camera?.fill, yaw: motion.root?.rotation[1] ?? 0 };
+    },
+    [fitness, playable],
+  );
+  // What the exercise camera frames: the skin outline's sweep, else the skinned muscles'.
+  const sweepMeshes = useCallback((): SkinnedMesh[] => {
+    const skin = skinPart ? handles.get(skinPart.id)?.skinned : null;
+    if (skin) return [skin];
+    return data.parts.filter((p) => !p.context).flatMap((p) => handles.get(p.id)?.skinned ?? []);
+  }, [skinPart, handles, data.parts]);
+  const trunkBone = useMemo(() => {
+    const j = data.rig?.joints.trunk;
+    return (j && rig?.node(j.node)) ?? null;
+  }, [rig, data.rig]);
+  const mannequinColor = useMemo(() => resolveDataColor('token:mannequin', look.tokens, look.theme, look.theme === 'cinema' ? '#6f7174' : '#bfb8ac'), [look]);
   // Equipment: one neutral matte dark grey, so the muscles stay the subject (docs/16 decision 13).
   const equipmentStyle = useMemo(() => styles.styleFor({ color: 'rubber', tint: 'token:neutral' }), [styles]);
   const rootRef = useRef<Group>(null);
@@ -427,14 +467,19 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
           grips={grips}
           feet={feet}
           footing={footing}
+          modelFloor={bounds.min[1]}
+          sweepMeshes={sweepMeshes}
           bridge={bridge}
           snapKey={snap.current.key}
         />
       )}
       {rig && <primitive object={rig.root} />}
-      {equipment.length > 0 && <Equipment specs={equipment} held={false} grips={grips} style={equipmentStyle} />}
+      {equipment.length > 0 && (
+        <Equipment specs={equipment} held={false} grips={grips} footing={footing} trunk={trunkBone} style={equipmentStyle} solid={mannequin} />
+      )}
       <group ref={rootRef} matrixAutoUpdate={false}>
-      {equipment.length > 0 && <Equipment specs={equipment} held grips={grips} style={equipmentStyle} />}
+      {equipment.length > 0 && <Equipment specs={equipment} held grips={grips} footing={footing} trunk={trunkBone} style={equipmentStyle} solid={mannequin} />}
+      {skinShape && skinShape.pieces.some((p) => p.skin) && <Mannequin shape={skinShape} color={mannequinColor} on={mannequin} />}
       {data.parts.map((part) => {
         const shape = shapes.get(part.id);
         const display = displays.get(part.id);
@@ -463,6 +508,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
             handles={handles}
             snapKey={snap.current.key}
             stages={stages}
+            tintLive={exerciseLook !== null}
             onSelect={onSelect}
             onHover={onHover}
           />
@@ -471,7 +517,17 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
       </group>
       {/* Flow paths do not follow the parts apart: no particles while exploded (docs/12 §7.5, G16). */}
       <Flows flows={data.flows} layers={s.view === 'exploded' ? NO_LAYERS : s.layers} look={look} clipping={clipping} />
-      <CameraRig store={store} ui={ui} bridge={bridge} chapters={chapters} views={data.views} sphere={sphere} minDistance={bounds.fit.radius * 0.9} span={exerciseSpan} />
+      <CameraRig
+        store={store}
+        ui={ui}
+        bridge={bridge}
+        chapters={chapters}
+        views={data.views}
+        sphere={sphere}
+        minDistance={bounds.fit.radius * 0.9}
+        span={exerciseSpan}
+        exerciseView={exerciseView}
+      />
       {hasModel && (
         <GltfBoundary ui={ui}>
           <Suspense fallback={null}>

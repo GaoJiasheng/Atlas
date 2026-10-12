@@ -26,6 +26,12 @@ export interface SpaceUiState {
   reference: ReferenceSave | null;
   /** Duration (ms) of the next camera move; CameraRig consumes and clears it. */
   nextTweenMs: number | null;
+  /**
+   * The next transition applies a beat: `authored` when the beat names its
+   * own camera (or a preset), else `auto` (an exercise on show is framed by
+   * the exercise camera); CameraRig consumes and clears it.
+   */
+  beatCamera: 'authored' | 'auto' | null;
   /** PRESENTATION on (leader labels stay with the HUD hidden). */
   presenting: boolean;
   /** HUD hidden outside the presentation: the stage frames the cover camera (and goes back when the HUD returns). */
@@ -43,6 +49,7 @@ export function createSpaceUi(): SpaceUiStore {
     orbit: false,
     reference: null,
     nextTweenMs: null,
+    beatCamera: null,
     presenting: false,
     cover: false,
     model: { state: 'none', progress: 0 },

@@ -604,7 +604,8 @@
               -0.45
             ]
           }
-        ]
+        ],
+        "contacts": ["hands", "feet"]
       },
       "sources": [
         "M17",

@@ -29,8 +29,8 @@ export interface SpaceSceneExt {
    * drawn faint); reset by a chapter change, never in the URL.
    */
   solo: string | null;
-  /** Exercise mode (chapter / beat `exercise`, or an exercise chip; not cumulative, never in the URL). */
-  exercise: { id: string; phase: ExercisePhase } | null;
+  /** Exercise mode (chapter / beat `exercise`, or an exercise chip; not cumulative, never in the URL); `bones`: the skeleton stays on show over the mannequin. */
+  exercise: { id: string; phase: ExercisePhase; bones?: true } | null;
   /**
    * Signal / cold tints (chapter / beat `highlight`; exercise mode adds its own; not cumulative, never
    * in the URL: the store's `highlight` is TimeScene's URL field, hence the other name).
@@ -62,9 +62,9 @@ const clamp01 = (n: number) => Math.min(1, Math.max(0, n));
 /** A chapter / beat `exercise` (`{ id, phase? }`), or null. */
 export function exerciseOf(value: unknown): SpaceSceneExt['exercise'] {
   if (!value || typeof value !== 'object') return null;
-  const { id, phase } = value as { id?: unknown; phase?: unknown };
+  const { id, phase, bones } = value as { id?: unknown; phase?: unknown; bones?: unknown };
   if (!isId(id)) return null;
-  return { id, phase: (EXERCISE_PHASES as readonly unknown[]).includes(phase) ? (phase as ExercisePhase) : 'loop' };
+  return { id, phase: (EXERCISE_PHASES as readonly unknown[]).includes(phase) ? (phase as ExercisePhase) : 'loop', ...(bones === true ? { bones: true as const } : {}) };
 }
 
 /** A chapter / beat `highlight` (`{ signal?, cold? }`), or null. */

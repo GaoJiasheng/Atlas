@@ -220,7 +220,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
   const applyBeatState = (b: Beat<SpaceBeatSpec>, instant: boolean): Promise<void> | undefined => {
     const st = store.getState();
     const before = st.snapshot();
-    ui.setState({ orbit: false, nextTweenMs: instant ? null : BEAT_TWEEN_MS });
+    ui.setState({ orbit: false, nextTweenMs: instant ? null : BEAT_TWEEN_MS, beatCamera: b.spec?.camera !== undefined ? 'authored' : 'auto' });
     st.applyState(beatScene(b), { instant });
     if (instant) return;
     const id = store.getState().transition.id;
@@ -497,7 +497,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
         exercisePhase: (phase: 'start' | 'end' | 'loop') => {
           const ex = store.getState().exercise;
           if (!ex) return false;
-          store.getState().applyState({ exercise: { id: ex.id, phase } }, { instant: true });
+          store.getState().applyState({ exercise: { ...ex, phase } }, { instant: true });
           return true;
         },
         // QA: hold a pose of parts.json (null = rest).

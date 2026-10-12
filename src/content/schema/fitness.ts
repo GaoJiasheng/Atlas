@@ -20,11 +20,14 @@ import { sharedSourceEntry, sharedSourceId } from './sources';
 import {
   ACTION_JOINTS,
   ACTION_ROLES,
+  CONTACT_KINDS,
   EQUIPMENT_KINDS,
+  equipmentList,
   EXERCISE_KEY_PHASES,
   JOINT_NAME,
   MOVEMENTS,
   MUSCLE_LAYERS,
+  type EquipmentKind,
 } from '../../lib/anatomy';
 
 /** Shared source refs (`M#`). */
@@ -127,35 +130,112 @@ export const jointName = z.string().regex(JOINT_NAME, 'a joint name such as shou
 /** Contraction per muscle (shared muscle id) or part: 0 = lengthened / at rest, 1 = shortest. */
 export const contractMap = z.record(kebabId, z.number().min(0).max(1));
 
+/** Which hand holds a piece (held equipment, a cable, a band): both by default. */
+export const EQUIPMENT_HANDS = ['left', 'right', 'both'] as const;
+
+/** Fields each equipment kind may use besides `kind` (docs/06 动作模式数据手册; the rest are refused). */
+const EQUIPMENT_FIELDS: Record<EquipmentKind, readonly string[]> = {
+  barbell: ['grip', 'width', 'on', 'at'],
+  dumbbell: ['grip', 'hand'],
+  kettlebell: ['grip', 'hand'],
+  'cable-handle': ['grip', 'width', 'hand'],
+  cable: ['grip', 'hand', 'handle', 'at', 'turn'],
+  'lat-bar': ['grip', 'width', 'at'],
+  band: ['hand', 'to', 'at'],
+  bench: ['at', 'turn', 'incline'],
+  'incline-bench': ['at', 'turn', 'angle'],
+  'machine-seat': ['at', 'turn', 'angle', 'height', 'thighPad'],
+  'pull-up-bar': ['grip', 'width', 'turn', 'height'],
+  'dip-bars': ['at', 'height'],
+  step: ['at', 'turn', 'height'],
+  floor: ['at', 'turn'],
+};
+
 export const equipmentSchema = z
   .object({
     kind: z.enum(EQUIPMENT_KINDS),
     grip: z.enum(['pronated', 'supinated', 'neutral']).optional(),
-    /** Grip width between the hands, metres (barbell); for the record, the engine follows the hands. */
+    /** Grip width between the hands, metres (barbell, bars); for the record, the engine follows the hands. */
     width: z.number().positive().max(2).optional(),
-    /** Free-standing equipment (bench, floor, bars): position relative to the trunk joint after the root turn (metres). */
+    /** Held pieces, `cable` and `band`: the hand that holds it (default both: one in each palm). */
+    hand: z.enum(EQUIPMENT_HANDS).optional(),
+    /** barbell: in the palms (default) or across the upper back (`back`: it rides on the trunk joint, `at` metres in the trunk's rest frame). */
+    on: z.enum(['hands', 'back']).optional(),
+    /**
+     * Free-standing equipment (bench, seat, step, floor, bars): position relative to the trunk joint after the root turn (metres).
+     * `cable`: the pulley; `band`: its anchor; `lat-bar`: the overhead pulley (default 0.9 m above the bar); barbell `on: back`: see `on`.
+     */
     at: vec3.optional(),
-    /** Turn about Y, degrees (bench, bars). */
+    /** Turn about Y, degrees (bench, seat, step, floor, column). */
     turn: z.number().min(-180).max(180).optional(),
-    /** Bench back incline, degrees (0 = flat). */
+    /** bench: back incline, degrees (0 = flat; `incline-bench` with `angle` says the same). */
     incline: z.number().min(0).max(90).optional(),
+    /** incline-bench: back angle above the horizontal (default 30°); machine-seat: back pad recline from vertical (default 10°). */
+    angle: z.number().min(0).max(90).optional(),
+    /** pull-up-bar: bar above the floor (default 2.3 m); dip-bars: bar tops (1.45 m); step: box height (0.2 m); machine-seat: seat top (0.45 m). */
+    height: z.number().positive().max(3).optional(),
+    /** cable: a D-handle in each holding hand (default) or a straight bar between the palms. */
+    handle: z.enum(['d-handle', 'bar']).optional(),
+    /** band: what it pulls on (default the hands). */
+    to: z.enum(['hands', 'feet']).optional(),
+    /** machine-seat: a pad over the thighs (lat pulldown). */
+    thighPad: z.boolean().optional(),
   })
-  .strict();
+  .strict()
+  .superRefine((e, ctx) => {
+    const allowed = EQUIPMENT_FIELDS[e.kind];
+    for (const key of Object.keys(e))
+      if (key !== 'kind' && !allowed.includes(key))
+        ctx.addIssue({ code: z.ZodIssueCode.custom, path: [key], message: `\`${key}\` does not apply to ${e.kind} (it takes ${allowed.join(', ') || 'no fields'})` });
+    if ((e.kind === 'cable' || e.kind === 'band') && e.at === undefined)
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['at'], message: `${e.kind} needs \`at\` (${e.kind === 'cable' ? 'the pulley' : 'the anchor'}, metres from the trunk joint)` });
+    if (e.kind === 'barbell' && e.on === 'back' && e.at === undefined)
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['at'], message: 'a barbell on the back needs `at` (metres from the trunk joint, in its rest frame)' });
+  });
 export type EquipmentSpec = z.output<typeof equipmentSchema>;
 
 export const motionKey = z
   .object({
     phase: z.enum(EXERCISE_KEY_PHASES),
     joints: z.record(jointName, jointAngles).default({}),
+    /** Optional override: contraction per muscle (else computed from the joints and the muscle sheets' actions, lib/contraction.ts). */
     contract: contractMap.optional(),
   })
   .strict();
+
+/** Exercise camera override: the direction the camera looks from, relative to the body (the engine still fits the distance). */
+export const exerciseCamera = z
+  .object({
+    /** Degrees about the vertical from in front of the body (0) toward its left side (90); 180 = behind. */
+    azimuth: z.number().min(-180).max(180),
+    /** Degrees above the horizontal. */
+    elevation: z.number().min(-20).max(80),
+    /** Share of the frame height the figure fills when it is the tall side (default 0.68, at least 0.6). */
+    fill: z.number().min(0.6).max(0.9).optional(),
+  })
+  .strict();
+export type ExerciseCameraSpec = z.output<typeof exerciseCamera>;
 
 export const exerciseMotion = z
   .object({
     /** Whole-body turn into the exercise position (bench press: lying on the back), XYZ degrees about the trunk joint, then `offset` metres. */
     root: z.object({ rotation: vec3, offset: vec3.optional() }).strict().optional(),
     equipment: z.union([equipmentSchema, z.array(equipmentSchema).min(1).max(4)]).optional(),
+    /**
+     * What holds the body, in priority order (lib/contact.ts): `hands` (the
+     * palms stay where the first key puts them — on a pull-up bar, dip bars or
+     * the floor — and the body moves), `feet` (planted on the floor), `seat`
+     * (the body stays where the root turn puts it). The first is met exactly;
+     * with `[hands, feet]` on the floor the body pivots about the feet so the
+     * palms stay on it (push-up, plank). Default from the equipment: hands for
+     * a pull-up bar / dip bars, `[hands, feet]` for the floor with the palms
+     * on it, feet when standing, else none.
+     */
+    contacts: z
+      .array(z.enum(CONTACT_KINDS))
+      .max(2)
+      .refine((c) => new Set(c).size === c.length, { message: 'a contact is listed once' })
+      .optional(),
     /**
      * Standing exercises keep the feet planted (the body drops and shifts so the
      * lowest heel / ball stays on the floor): `both` (default), or the one foot
@@ -168,6 +248,8 @@ export const exerciseMotion = z
     keys: z.array(motionKey).min(2).max(3),
     /** Seconds for start → end, hold at end, end → start, hold at start (loop). */
     tempo: z.tuple([z.number().positive(), z.number().nonnegative(), z.number().positive(), z.number().nonnegative()]).optional(),
+    /** Camera direction override (default from the posture: side-above lying, side for a hinge, front three-quarter standing). */
+    camera: exerciseCamera.optional(),
   })
   .strict()
   .superRefine((m, ctx) => {
@@ -209,6 +291,18 @@ export const exerciseSheet = z
 export type ExerciseSheet = z.output<typeof exerciseSheet>;
 
 export const exercisesFile = z.object({ exercises: z.array(exerciseSheet) }).strict();
+
+
+/** What a card's `equipment` should show in exercise mode (validate warns when the motion draws none of it). */
+export const CARD_EQUIPMENT_DRAWN: Record<(typeof EXERCISE_EQUIPMENT)[number], readonly EquipmentKind[]> = {
+  barbell: ['barbell'],
+  dumbbell: ['dumbbell'],
+  kettlebell: ['kettlebell'],
+  cable: ['cable', 'cable-handle', 'lat-bar'],
+  band: ['band'],
+  machine: ['machine-seat', 'lat-bar', 'cable', 'cable-handle', 'bench', 'incline-bench'],
+  bodyweight: [],
+};
 
 /* ------------------------------------------------------------------ */
 /* A topic's training.json and the merged bundle                       */
@@ -379,6 +473,10 @@ export function sharedFitnessIssues(tree: SharedFitnessParsed): FitnessIssue[] {
         for (const id of ids) if (!muscleAt.has(id)) err(where, `${field}: unknown muscle "${id}"`);
       for (const id of Object.keys(e.motion?.keys.reduce((acc, k) => ({ ...acc, ...k.contract }), {}) ?? {}))
         if (!muscleAt.has(id)) err(where, `motion contract: unknown muscle "${id}"`);
+      const drawn = equipmentList(e.motion?.equipment).map((q) => q.kind);
+      const shows = CARD_EQUIPMENT_DRAWN[e.equipment];
+      if (e.motion && shows.length > 0 && !drawn.some((k) => shows.includes(k)))
+        warn(where, `card equipment "${e.equipment}" but motion.equipment draws none of ${shows.join(' / ')}`);
       e.dose.forEach((d, j) => {
         if (/\d/.test(d.text.en) || /\d/.test(d.text.zh)) warn(`${where} dose.${j}`, 'dose is principles in words, no numbers (docs/16 decision 11)');
       });

@@ -1,32 +1,65 @@
 /**
  * Exercise-mode equipment on the stage (lib/equipment.ts; docs/16 §6.5,
- * decision 13: restrained — the muscles are the subject). Held pieces
- * (barbell, dumbbells, cable handles) sit in the palms — the rig's `hand.l` /
- * `hand.r` bone plus its `offset` along the forearm (grip.ts) — inside the
- * body's root group, so they turn with it; the barbell runs palm to palm, a
- * dumbbell or handle across the forearm (side to side, front to back for a
- * neutral grip). Free-standing pieces (bench, floor, dip bars) stand in the
- * scene where the MotionDriver's placement puts them (`runtime.exercise`:
- * relative to the trunk joint, the planted palms, the floor).
+ * decision 13: restrained — the muscles are the subject; docs/06 动作模式数据手册).
  *
- * Every piece is drawn in one neutral matte dark grey (no highlights); the
- * free-standing ones are see-through (bench and bars 60 %, floor 25 %), and
- * none casts a shadow. One draw call per piece, never picked or labelled.
+ *  - Held pieces (barbell, dumbbells, kettlebells, cable handles, a lat bar)
+ *    sit in the palms — the rig's `hand.l` / `hand.r` bone plus its `offset`
+ *    along the forearm (grip.ts) — inside the body's root group, so they turn
+ *    with it; a bar runs palm to palm, a dumbbell or handle across the forearm
+ *    (side to side, front to back for a neutral grip); a barbell `on: back`
+ *    rides on the trunk joint.
+ *  - Lines (a cable from its pulley, a band from its anchor, the lat bar's
+ *    cable) run from a fixed point in the scene to the palms (or the feet),
+ *    stretched every frame.
+ *  - Free-standing pieces (bench, seat, step, floor, pull-up bar, dip bars,
+ *    cable column and pulley) stand where the MotionDriver's placement puts
+ *    them (`runtime.exercise`: the trunk joint, the held palms, the feet,
+ *    the floor).
+ *
+ * Every piece is drawn in one neutral matte grey (soft highlights only on the
+ * chamfers); with the mannequin they are solid (the floor half see-through) and
+ * drawn just before it; with the ghost outline the free-standing ones are
+ * see-through. None casts a shadow. One draw call per piece, never picked or
+ * labelled.
  */
 import { useEffect, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Matrix4, Quaternion, Vector3, type BufferGeometry, type Group } from 'three';
+import { Matrix4, Quaternion, Vector3, type BufferGeometry, type Group, type Object3D } from 'three';
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import type { EquipmentSpec } from '../../../../content/schema/fitness';
-import { barbellShape, benchShape, cableHandleShape, dipBarShape, dumbbellShape, floorShape, HELD_EQUIPMENT, placeFixed, type EquipmentShape } from '../../lib/equipment';
+import {
+  BAND,
+  barbellShape,
+  barYaw,
+  benchShape,
+  cableHandleShape,
+  columnShape,
+  dipBarShape,
+  dumbbellShape,
+  floorShape,
+  heightOf,
+  INCLINE_DEFAULT,
+  kettlebellShape,
+  LAT_BAR,
+  lineShape,
+  machineSeatShape,
+  placeFixed,
+  pullUpBarShape,
+  stepShape,
+  straightBarShape,
+  type EquipmentShape,
+  type PlaceContext,
+} from '../../lib/equipment';
 import type { Part } from '../../schema';
 import { partPieces } from './geometry';
 import { createPartMaterial, stylePartMaterial, type PartMaterial, type PartStyle } from './materials';
 import { keepAnimating, MAX_DT, useRuntime } from './runtime';
 import { damp } from '../../lib/math';
 import { gripPoint, type Grip } from './grip';
+import { footPoints, type Foot } from './foot';
 
 const X = new Vector3(1, 0, 0);
+const Y = new Vector3(0, 1, 0);
 const _a = new Vector3();
 const _b = new Vector3();
 const _f = new Vector3();
@@ -37,33 +70,34 @@ const _z = new Vector3();
 const _m = new Matrix4();
 const _q = new Quaternion();
 
-/** See-through free-standing pieces (the body reads through them). */
-const OPACITY: Partial<Record<EquipmentSpec['kind'], number>> = { bench: 0.6, 'parallel-bars': 0.6, floor: 0.25 };
+/** See-through free-standing pieces with the ghost outline (the body reads through them). */
+const GHOST_OPACITY = 0.6;
+const FLOOR_OPACITY = { ghost: 0.25, solid: 0.5 } as const;
+/** Draw order with the mannequin: before it (Mannequin.tsx −1), so a bar in front of the body covers it. */
+const EQUIPMENT_RENDER_ORDER = -2;
+/** The lat bar's pulley sits this far above the bar at the first key when the data gives no `at` (metres). */
+const LAT_PULLEY_RISE = 0.85;
 
-function shapeOf(spec: EquipmentSpec): EquipmentShape {
-  switch (spec.kind) {
-    case 'barbell':
-      return barbellShape();
-    case 'dumbbell':
-      return dumbbellShape();
-    case 'cable-handle':
-      return cableHandleShape();
-    case 'bench':
-      return benchShape(spec.incline ?? 0);
-    case 'parallel-bars':
-      return dipBarShape();
-    case 'floor':
-      return floorShape();
-  }
-}
+type Place =
+  /** Between the palms (a bar). */
+  | { kind: 'hands' }
+  /** In one palm. */
+  | { kind: 'palm'; side: 'l' | 'r' }
+  /** On the trunk joint (a barbell on the back), `at` in its rest frame. */
+  | { kind: 'back' }
+  /** Free-standing; `side` picks a dip bar. */
+  | { kind: 'fixed'; side: number }
+  /** A cable's pulley wheel, at the trunk + `at`. */
+  | { kind: 'pulley' }
+  /** A line from the pulley / anchor to a palm, the palms' midpoint or a foot. */
+  | { kind: 'line'; to: 'l' | 'r' | 'mid' | 'foot-l' | 'foot-r' };
 
 interface Piece {
-  /** Placement: between the palms, one palm, or free-standing (`side` picks a dip bar). */
-  at: 'hands' | 'l' | 'r' | 'fixed';
-  side: number;
+  place: Place;
   spec: EquipmentSpec;
   geometry: BufferGeometry;
-  opacity: number;
+  /** Free-standing pieces only: opacity with the ghost outline / the mannequin. */
+  see: boolean;
 }
 
 /**
@@ -83,57 +117,127 @@ function oneGeometry(shape: EquipmentShape): BufferGeometry {
   return geometry;
 }
 
+const sides = (hand: EquipmentSpec['hand']): ('l' | 'r')[] => (hand === 'left' ? ['l'] : hand === 'right' ? ['r'] : ['l', 'r']);
+
+/** The pieces one spec draws, held (in the body's frame) or not. */
+function piecesOf(spec: EquipmentSpec, held: boolean): Piece[] {
+  const out: Piece[] = [];
+  const add = (place: Place, shape: EquipmentShape, see = false) => out.push({ place, spec, geometry: oneGeometry(shape), see });
+  const isHeld = (p: Place) => p.kind === 'hands' || p.kind === 'palm' || p.kind === 'back';
+  const want = (p: Place) => isHeld(p) === held;
+  const each = (place: Place, shape: () => EquipmentShape, see = false) => {
+    if (want(place)) add(place, shape(), see);
+  };
+  switch (spec.kind) {
+    case 'barbell':
+      each(spec.on === 'back' ? { kind: 'back' } : { kind: 'hands' }, barbellShape);
+      break;
+    case 'dumbbell':
+    case 'kettlebell':
+    case 'cable-handle':
+      for (const side of sides(spec.hand)) each({ kind: 'palm', side }, spec.kind === 'dumbbell' ? dumbbellShape : spec.kind === 'kettlebell' ? kettlebellShape : cableHandleShape);
+      break;
+    case 'lat-bar':
+      each({ kind: 'hands' }, () => straightBarShape(LAT_BAR.length));
+      each({ kind: 'line', to: 'mid' }, () => lineShape(LAT_BAR.cable));
+      each({ kind: 'pulley' }, () => columnPulley());
+      break;
+    case 'cable':
+      if (spec.handle === 'bar') {
+        each({ kind: 'hands' }, () => straightBarShape(0.5));
+        each({ kind: 'line', to: 'mid' }, () => lineShape(LAT_BAR.cable));
+      } else
+        for (const side of sides(spec.hand)) {
+          each({ kind: 'palm', side }, cableHandleShape);
+          each({ kind: 'line', to: side }, () => lineShape(LAT_BAR.cable));
+        }
+      each({ kind: 'fixed', side: 0 }, () => columnShape(0), true);
+      each({ kind: 'pulley' }, () => columnPulley());
+      break;
+    case 'band':
+      for (const side of sides(spec.hand)) each({ kind: 'line', to: spec.to === 'feet' ? (side === 'l' ? 'foot-l' : 'foot-r') : side }, () => lineShape(BAND.thick));
+      break;
+    case 'bench':
+      each({ kind: 'fixed', side: 0 }, () => benchShape(spec.incline ?? 0), true);
+      break;
+    case 'incline-bench':
+      each({ kind: 'fixed', side: 0 }, () => benchShape(spec.angle ?? INCLINE_DEFAULT), true);
+      break;
+    case 'machine-seat':
+      each({ kind: 'fixed', side: 0 }, () => machineSeatShape(spec.angle, heightOf(spec), spec.thighPad ?? false), true);
+      break;
+    case 'pull-up-bar':
+      each({ kind: 'fixed', side: 0 }, () => pullUpBarShape(heightOf(spec)), true);
+      break;
+    case 'dip-bars':
+      each({ kind: 'fixed', side: 0 }, () => dipBarShape(heightOf(spec)), true);
+      each({ kind: 'fixed', side: 1 }, () => dipBarShape(heightOf(spec)), true);
+      break;
+    case 'step':
+      each({ kind: 'fixed', side: 0 }, () => stepShape(heightOf(spec)), true);
+      break;
+    case 'floor':
+      each({ kind: 'fixed', side: 0 }, floorShape, true);
+      break;
+  }
+  return out;
+}
+
+/** The pulley wheel (a short disc along X) on its own, at the pulley point. */
+function columnPulley(): EquipmentShape {
+  const shape = columnShape(0);
+  const wheel = shape.extra![0]!;
+  return { primitive: { ...wheel, at: [0, 0, 0] } };
+}
+
 export function Equipment({
   specs,
   held,
   grips,
+  footing,
+  trunk,
   style,
+  solid,
 }: {
   specs: readonly EquipmentSpec[];
-  /** Held pieces (inside the root group) or free-standing ones. */
+  /** Held pieces (inside the root group) or the rest (scene). */
   held: boolean;
   /** The palms' grip points (`hand.l`, `hand.r` + offset), when the rig has them. */
   grips: { l: Grip | null; r: Grip | null };
+  /** The rig's feet (a band to the feet). */
+  footing: { l: Foot | null; r: Foot | null };
+  /** The trunk joint's bone (a barbell on the back). */
+  trunk: Object3D | null;
   /** The equipment's neutral look. */
   style: PartStyle;
+  /** With the mannequin: solid, drawn before the body's colour. */
+  solid: boolean;
 }) {
   const runtime = useRuntime();
-  const pieces = useMemo(() => {
-    const out: Piece[] = [];
-    for (const spec of specs) {
-      const isHeld = HELD_EQUIPMENT.includes(spec.kind);
-      if (isHeld !== held) continue;
-      const geometry = oneGeometry(shapeOf(spec));
-      const opacity = OPACITY[spec.kind] ?? 1;
-      if (!isHeld) {
-        out.push({ at: 'fixed', side: 0, spec, geometry, opacity });
-        if (spec.kind === 'parallel-bars') out.push({ at: 'fixed', side: 1, spec, geometry: geometry.clone(), opacity });
-      } else if (spec.kind === 'barbell') out.push({ at: 'hands', side: 0, spec, geometry, opacity });
-      else
-        for (const side of ['l', 'r'] as const)
-          out.push({ at: side, side: side === 'l' ? 0 : 1, spec, geometry: side === 'l' ? geometry : geometry.clone(), opacity });
-    }
-    return out;
-  }, [specs, held]);
+  const pieces = useMemo(() => specs.flatMap((spec) => piecesOf(spec, held)), [specs, held]);
   useEffect(() => () => pieces.forEach((p) => p.geometry.dispose()), [pieces]);
 
   const materials = useMemo<PartMaterial[]>(() => pieces.map(() => createPartMaterial()), [pieces]);
   useEffect(() => {
     for (const m of materials) {
       stylePartMaterial(m, style);
-      // Matte, no highlights, no rim.
+      // Matte, a soft sheen on the chamfers, no rim.
       m.material.metalness = 0;
-      m.material.roughness = 0.92;
-      m.material.envMapIntensity = 0.25;
+      m.material.roughness = 0.68;
+      m.material.envMapIntensity = 0.5;
       m.material.emissive.setScalar(0);
       m.material.depthWrite = true;
     }
   }, [materials, style]);
   useEffect(() => () => materials.forEach((m) => m.material.dispose()), [materials]);
+  const opacity = (p: Piece) => (!p.see ? 1 : p.spec.kind === 'floor' ? FLOOR_OPACITY[solid ? 'solid' : 'ghost'] : solid ? 1 : GHOST_OPACITY);
 
   const groups = useRef<(Group | null)[]>([]);
   const fade = useRef(0);
   const placedAt = useRef(-1);
+  useEffect(() => {
+    placedAt.current = -1;
+  }, [pieces, solid]);
   useFrame((state, delta) => {
     if (pieces.length === 0) return;
     // Nothing moved since the last placement: no work, no shadow update.
@@ -143,7 +247,7 @@ export function Equipment({
     if (fade.current > 0.995) fade.current = 1;
     pieces.forEach((p, i) => {
       const { material } = materials[i]!;
-      material.opacity = fade.current * p.opacity;
+      material.opacity = fade.current * opacity(p);
       const transparent = material.opacity < 0.999;
       if (material.transparent !== transparent) {
         material.transparent = transparent;
@@ -151,48 +255,105 @@ export function Equipment({
       }
     });
     const ex = runtime.exercise;
+    const ctx: PlaceContext | null = ex
+      ? {
+          trunk: ex.trunk.toArray() as [number, number, number],
+          palms: ex.palms ? [ex.palms[0].toArray() as [number, number, number], ex.palms[1].toArray() as [number, number, number]] : null,
+          feet: ex.feet ? (ex.feet.toArray() as [number, number, number]) : null,
+          modelFloor: ex.modelFloor,
+        }
+      : null;
+    const { l, r } = grips;
+    /** The pulley / anchor of a line or pulley piece (scene). */
+    const anchor = (spec: EquipmentSpec, out: Vector3): boolean => {
+      if (!ex) return false;
+      if (spec.at) {
+        out.set(ex.trunk.x + spec.at[0], ex.trunk.y + spec.at[1], ex.trunk.z + spec.at[2]);
+        return true;
+      }
+      // A lat bar without `at`: straight above the bar where the first key holds it.
+      if (!ex.hands) return false;
+      out.addVectors(ex.hands[0], ex.hands[1]).multiplyScalar(0.5);
+      out.y += LAT_PULLEY_RISE;
+      return true;
+    };
     pieces.forEach((p, i) => {
       const g = groups.current[i];
       if (!g) return;
-      if (p.at === 'fixed') {
-        if (!ex) {
-          g.visible = false;
-          return;
+      const place = p.place;
+      g.visible = false;
+      switch (place.kind) {
+        case 'fixed': {
+          if (!ctx) return;
+          const at = placeFixed(p.spec, ctx, ex!.floor, place.side);
+          g.position.set(at[0], at[1], at[2]);
+          let yaw = p.spec.turn ?? 0;
+          if (p.spec.kind === 'pull-up-bar') yaw += barYaw(ctx.palms);
+          if (p.spec.kind === 'cable') yaw += (Math.atan2(ctx.trunk[0] - at[0], ctx.trunk[2] - at[2]) * 180) / Math.PI;
+          g.rotation.set(0, (yaw * Math.PI) / 180, 0);
+          break;
         }
-        const palms = ex.palms ? ([ex.palms[0].toArray(), ex.palms[1].toArray()] as [[number, number, number], [number, number, number]]) : null;
-        const at = placeFixed(p.spec, ex.trunk.toArray() as [number, number, number], palms, ex.floor, p.side);
-        g.position.set(at[0], at[1], at[2]);
-        g.rotation.set(0, ((p.spec.turn ?? 0) * Math.PI) / 180, 0);
-        g.visible = true;
-        return;
-      }
-      const { l, r } = grips;
-      if (p.at === 'hands') {
-        if (!l || !r) {
-          g.visible = false;
-          return;
+        case 'pulley': {
+          if (!anchor(p.spec, g.position)) return;
+          if (ex) g.rotation.set(0, Math.atan2(ex.trunk.x - g.position.x, ex.trunk.z - g.position.z), 0);
+          break;
         }
-        gripPoint(l, _a, _f);
-        gripPoint(r, _b, _f2);
-        g.position.copy(_a).add(_b).multiplyScalar(0.5);
-        // Palm to palm (the bar lies across both forearms in a pronated grip).
-        _x.subVectors(_a, _b);
-        g.quaternion.copy(_x.lengthSq() > 1e-8 ? _q.setFromUnitVectors(X, _x.normalize()) : _q.identity());
-      } else {
-        const grip = p.at === 'l' ? l : r;
-        if (!grip) {
-          g.visible = false;
-          return;
+        case 'line': {
+          if (!anchor(p.spec, _a)) return;
+          // The body end: a palm, the palms' midpoint or a foot, in the scene (the root turn applied).
+          if (place.to === 'foot-l' || place.to === 'foot-r') {
+            const foot = place.to === 'foot-l' ? footing.l : footing.r;
+            if (!foot) return;
+            footPoints(foot, _f, _b);
+          } else if (place.to === 'mid') {
+            if (!l || !r) return;
+            gripPoint(l, _b, _f);
+            gripPoint(r, _f2, _f);
+            _b.add(_f2).multiplyScalar(0.5);
+          } else {
+            const grip = place.to === 'l' ? l : r;
+            if (!grip) return;
+            gripPoint(grip, _b, _f);
+          }
+          _b.applyMatrix4(runtime.root);
+          _x.subVectors(_b, _a);
+          const len = _x.length();
+          if (len < 1e-4) return;
+          g.position.copy(_a);
+          g.quaternion.setFromUnitVectors(Y, _x.multiplyScalar(1 / len));
+          g.scale.set(1, len, 1);
+          break;
         }
-        gripPoint(grip, g.position, _f);
-        // Across the forearm: side to side, or front to back for a neutral grip; the handle's ring toward the fingers.
-        _x.set(p.spec.grip === 'neutral' ? 0 : 1, 0, p.spec.grip === 'neutral' ? 1 : 0);
-        _x.addScaledVector(_f, -_x.dot(_f));
-        if (_x.lengthSq() < 1e-6) _x.set(0, 1, 0).addScaledVector(_f, -_f.y);
-        _x.normalize();
-        _y.copy(_f).negate();
-        _z.crossVectors(_x, _y);
-        g.quaternion.setFromRotationMatrix(_m.makeBasis(_x, _y, _z));
+        case 'back': {
+          if (!trunk || !p.spec.at) return;
+          g.position.set(p.spec.at[0], p.spec.at[1], p.spec.at[2]).applyMatrix4(trunk.matrixWorld);
+          trunk.getWorldQuaternion(g.quaternion);
+          break;
+        }
+        case 'hands': {
+          if (!l || !r) return;
+          gripPoint(l, _a, _f);
+          gripPoint(r, _b, _f2);
+          g.position.copy(_a).add(_b).multiplyScalar(0.5);
+          // Palm to palm (the bar lies across both forearms in a pronated grip).
+          _x.subVectors(_a, _b);
+          g.quaternion.copy(_x.lengthSq() > 1e-8 ? _q.setFromUnitVectors(X, _x.normalize()) : _q.identity());
+          break;
+        }
+        case 'palm': {
+          const grip = place.side === 'l' ? l : r;
+          if (!grip) return;
+          gripPoint(grip, g.position, _f);
+          // Across the forearm: side to side, or front to back for a neutral grip; the handle's ring / the bell toward the fingers.
+          _x.set(p.spec.grip === 'neutral' ? 0 : 1, 0, p.spec.grip === 'neutral' ? 1 : 0);
+          _x.addScaledVector(_f, -_x.dot(_f));
+          if (_x.lengthSq() < 1e-6) _x.set(0, 1, 0).addScaledVector(_f, -_f.y);
+          _x.normalize();
+          _y.copy(_f).negate();
+          _z.crossVectors(_x, _y);
+          g.quaternion.setFromRotationMatrix(_m.makeBasis(_x, _y, _z));
+          break;
+        }
       }
       g.visible = true;
     });
@@ -204,7 +365,7 @@ export function Equipment({
     <>
       {pieces.map((p, i) => (
         <group key={i} ref={(g) => void (groups.current[i] = g)} visible={false}>
-          <mesh geometry={p.geometry} material={materials[i]!.material} raycast={() => {}} dispose={null} />
+          <mesh geometry={p.geometry} material={materials[i]!.material} raycast={() => {}} renderOrder={solid ? EQUIPMENT_RENDER_ORDER : 0} dispose={null} />
         </group>
       ))}
     </>

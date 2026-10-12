@@ -41,11 +41,14 @@ export function footWeight(low: number, lowest: number): number {
   return clamp01(1 - (low - lowest) / LIFT_BAND);
 }
 
-/** A standing exercise: the body upright (root turned ≤ 30° about X and Z) and nothing under it but the floor it stands on. */
+/** Equipment the body rests on or hangs from (not standing): benches, a seat, the floor, bars. */
+const SUPPORTS: ReadonlySet<string> = new Set(['bench', 'incline-bench', 'machine-seat', 'floor', 'dip-bars', 'pull-up-bar']);
+
+/** A standing exercise: the body upright (root turned ≤ 30° about X and Z) and nothing under it but the floor (or a step) it stands on. */
 export function isStanding(rotation: readonly number[] | undefined, equipment: readonly { kind: string }[]): boolean {
   const r = rotation ?? [0, 0, 0];
   if (Math.abs(r[0] ?? 0) > 30 || Math.abs(r[2] ?? 0) > 30) return false;
-  return !equipment.some((e) => e.kind === 'bench' || e.kind === 'floor' || e.kind === 'parallel-bars');
+  return !equipment.some((e) => SUPPORTS.has(e.kind));
 }
 
 const low = (f: FootPair) => Math.min(f.heel[1], f.ball[1]);

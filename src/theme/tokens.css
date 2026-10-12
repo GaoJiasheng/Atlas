@@ -12,6 +12,7 @@
  *   --xray    X-RAY state                         --cut   cutaway face (ochre)
  *   --food    food in a gut (ochre-green)         --haemolymph  insect blood (teal-grey)
  *   --muscle-1/2/3  human muscle layers (surface → deep)   --bone  bone (ivory)
+ *   --mannequin  the exercise-mode figure (matte, quieter than the muscles)
  * Older names (`--accent-*`, `--bg`, `--surface`, `--border` ...) are mapped
  * onto these so engines and data refs (`token:accent-1`) keep working.
  *
@@ -103,6 +104,8 @@
   --muscle-2: #ad7b6c;
   --muscle-3: #8f6a62;
   --bone: #e0d6bf;
+  /* Exercise mode (docs/06 动作模式数据手册): the solid figure under the muscles, warm light grey. */
+  --mannequin: #bfb8ac;
 
   /* Legacy names mapped onto the plate palette. */
   --bg: var(--paper);
@@ -183,6 +186,7 @@
   --muscle-2: #9d5b53;
   --muscle-3: #70443f;
   --bone: #cfc5af;
+  --mannequin: #6f7174;
 
   --bg: var(--paper);
   --surface: var(--panel-solid);

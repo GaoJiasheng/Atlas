@@ -288,10 +288,11 @@
       "evidence": [],
       "sketch": "cable-fly",
       "motion": {
-        "equipment": {
-          "kind": "cable-handle",
-          "grip": "neutral"
-        },
+        "equipment": [
+          { "kind": "cable", "hand": "left", "grip": "neutral", "at": [0.85, 0.55, -0.35] },
+          { "kind": "cable", "hand": "right", "grip": "neutral", "at": [-0.85, 0.55, -0.35] }
+        ],
+        "contacts": ["feet"],
         "keys": [
           {
             "phase": "start",
