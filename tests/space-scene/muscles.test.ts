@@ -18,6 +18,8 @@ import {
   contractScale,
   exerciseLoop,
   foldAngles,
+  midlineNormal,
+  mirrorSignedAxes,
   movementAxis,
   musclePartIds,
   quatApply,
@@ -90,6 +92,32 @@ describe('rig: joint angles about anatomical axes', () => {
       'shoulder.l': { flexion: 10 },
     });
     expect(bothSides({ 'elbow.l': { flexion: 90 }, 'elbow.r': { flexion: 30 } }, rig)['elbow.r']).toEqual({ flexion: 30 });
+  });
+  it('the same angles on both sides give a mirror pose, whichever way the right axes were exported', () => {
+    // Left shoulder (+X side), as the chest pipeline writes it; the axes are listed in the order they apply.
+    const left = { 'horizontal-adduction': [0, -1, 0], flexion: [-1, 0, 0], abduction: [0, 0, 1], 'internal-rotation': [0.18, -0.982, -0.05] } as const;
+    // Right shoulder as an axial mirror (x kept, y and z negated) and as a plain mirrored direction (x negated).
+    const axial = { 'horizontal-adduction': [0, 1, 0], flexion: [-1, 0, 0], abduction: [0, 0, -1], 'internal-rotation': [0.18, 0.982, 0.05] } as const;
+    const plain = { 'horizontal-adduction': [0, -1, 0], flexion: [1, 0, 0], abduction: [0, 0, 1], 'internal-rotation': [-0.18, -0.982, -0.05] } as const;
+    const n = midlineNormal([0.17, 0.04, -0.08], [-0.17, 0.04, -0.08]);
+    close(n, [1, 0, 0]);
+    const angles = { extension: 25, abduction: 45, 'horizontal-abduction': 15, 'internal-rotation': 30 };
+    // A point on the left upper arm, and its mirror image on the right.
+    const arm = [0.05, -0.28, 0.02];
+    const pose = (axes: Readonly<Record<string, readonly number[]>>, p: readonly number[]) => quatApply(anglesQuat(axes, foldAngles(axes, angles)), p);
+    const l = pose(left, arm);
+    for (const right of [axial, plain]) {
+      const signed = mirrorSignedAxes(left, right, n);
+      close(pose(signed, [-arm[0]!, arm[1]!, arm[2]!]), [-l[0], l[1], l[2]]);
+    }
+    // Already-mirrored axes are kept as they are; the plain ones flip.
+    expect(mirrorSignedAxes(left, axial, n)).toEqual(axial);
+    close(mirrorSignedAxes(left, plain, n)['internal-rotation']!, [0.18, 0.982, 0.05]);
+    // The right joint may name the opposite movement (extension for flexion): signed against the left's flexion negated.
+    close(mirrorSignedAxes({ flexion: [-1, 0, 0] }, { extension: [-1, 0, 0] }, n).extension!, [1, 0, 0]);
+    // Without that mirror flipping the plain export would not be symmetric (the case this guards).
+    const raw = pose(plain, [-arm[0]!, arm[1]!, arm[2]!]);
+    expect(Math.hypot(raw[0] + l[0], raw[1] - l[1], raw[2] - l[2])).toBeGreaterThan(0.05);
   });
   it('samples joint clips and contraction keys', () => {
     const keys = [

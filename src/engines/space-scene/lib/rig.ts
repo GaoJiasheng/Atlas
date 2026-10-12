@@ -7,7 +7,9 @@
  *    = that movement on that side of the body); the opposite movement uses
  *    the same axis negated (extension 20° = flexion −20°). Angles turn the bone
  *    about its own origin, in the order the rig lists the axes, relative to
- *    its parent (so the elbow's axes travel with the upper arm).
+ *    its parent (so the elbow's axes travel with the upper arm). A right
+ *    joint's axes are signed against its left counterpart's mirror
+ *    (`mirrorSignedAxes`), whichever way the rig exported them.
  *  - Poses, keyframe clips, the action demo and exercises name joints as
  *    `joint:<name>` / by name with `{ movement: degrees }`.
  *  - Contraction 0..1 (0 = lengthened or at rest, 1 = shortest): the part
@@ -231,7 +233,9 @@ export function sampleContract(keys: readonly AngleKey[], time: number, loop: bo
 
 /**
  * Joint angles of one exercise key for the rig: a left joint's angles also
- * drive its right counterpart (when the rig has it and the key does not name it).
+ * drive its right counterpart (when the rig has it and the key does not name
+ * it); the stage signs the right axes with `mirrorSignedAxes`, so the same
+ * angles give the mirror pose.
  */
 export function bothSides(joints: Readonly<Record<string, Angles>>, rigJoints: ReadonlySet<string>): Record<string, Angles> {
   const out: Record<string, Angles> = { ...joints };
@@ -239,6 +243,57 @@ export function bothSides(joints: Readonly<Record<string, Angles>>, rigJoints: R
     if (!name.endsWith('.l')) continue;
     const right = `${name.slice(0, -2)}.r`;
     if (rigJoints.has(right) && out[right] === undefined) out[right] = angles;
+  }
+  return out;
+}
+
+/**
+ * Unit normal of the body's midline plane from a left / right joint pair at
+ * rest (scene coordinates): left minus right, else +X.
+ */
+export function midlineNormal(left: readonly number[], right: readonly number[]): Vec3 {
+  const d: Vec3 = [(left[0] ?? 0) - (right[0] ?? 0), (left[1] ?? 0) - (right[1] ?? 0), (left[2] ?? 0) - (right[2] ?? 0)];
+  const len = Math.hypot(...d);
+  return len > 1e-9 ? [d[0] / len, d[1] / len, d[2] / len] : [1, 0, 0];
+}
+
+/**
+ * A left joint's rotation axis reflected in the midline plane (unit normal
+ * `n`) as an axial vector: −M·a = 2(n·a)n − a. A rotation about `a` by θ
+ * mirrors to one about this axis by the same θ, so it is the right-side axis
+ * whose positive angle makes the mirror image of the left movement.
+ */
+export function mirrorRigAxis(axis: readonly number[], n: readonly number[]): Vec3 {
+  const d = 2 * ((axis[0] ?? 0) * (n[0] ?? 0) + (axis[1] ?? 0) * (n[1] ?? 0) + (axis[2] ?? 0) * (n[2] ?? 0));
+  return [d * (n[0] ?? 0) - (axis[0] ?? 0), d * (n[1] ?? 0) - (axis[1] ?? 0), d * (n[2] ?? 0) - (axis[2] ?? 0)];
+}
+
+/**
+ * A right joint's axes signed so that the same angles as on its left
+ * counterpart make the mirror-image movement (`bothSides`; docs/06 ".l joint
+ * angles also drive .r"). A rig may export a right axis as the left one's
+ * axial mirror (x kept, y and z negated: already right) or as a plain mirrored
+ * direction (x negated: the opposite way round for every axis not normal to
+ * the midline, e.g. rotation or horizontal adduction): each right axis keeps
+ * its own direction (the two sides need not be exactly symmetric) and flips
+ * when it points away from the left axis's mirror. Movements the left joint
+ * cannot show stay as written.
+ */
+export function mirrorSignedAxes(
+  left: Readonly<Partial<Record<Movement, readonly number[]>>>,
+  right: Readonly<Partial<Record<Movement, readonly number[]>>>,
+  n: readonly number[],
+): Partial<Record<Movement, readonly number[]>> {
+  const out: Partial<Record<Movement, readonly number[]>> = {};
+  for (const [movement, axis] of Object.entries(right) as [Movement, readonly number[]][]) {
+    const hit = movementAxis(left, movement);
+    if (!hit) {
+      out[movement] = axis;
+      continue;
+    }
+    const want = mirrorRigAxis(hit.axis, n);
+    const dot = hit.sign * ((axis[0] ?? 0) * want[0] + (axis[1] ?? 0) * want[1] + (axis[2] ?? 0) * want[2]);
+    out[movement] = dot < 0 ? [-(axis[0] ?? 0), -(axis[1] ?? 0), -(axis[2] ?? 0)] : axis;
   }
   return out;
 }

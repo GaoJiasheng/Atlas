@@ -30,7 +30,7 @@
 import { useEffect, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Euler, Matrix4, Quaternion, Vector3, type Group, type Object3D, type SkinnedMesh } from 'three';
-import { equipmentList, type ExercisePhase, type Movement } from '../../../../lib/anatomy';
+import { equipmentList, otherSideJoint, type ExercisePhase, type Movement } from '../../../../lib/anatomy';
 import type { ExerciseSheet, FitnessBundle } from '../../../../content/schema/fitness';
 import type { PartsFile } from '../../schema';
 import type { SpaceSceneExt } from '../../index';
@@ -48,6 +48,8 @@ import {
   foldAngles,
   jointOf,
   lerpAngles,
+  midlineNormal,
+  mirrorSignedAxes,
   musclePartIds,
   sampleAngles,
   sampleContract,
@@ -68,7 +70,7 @@ interface Joint {
   rest: Quaternion;
   /** Axes in the parent bone's rest frame, in the rig's order. */
   axes: Partial<Record<Movement, Vec3>>;
-  /** Axes as written (scene frame): what the angles fold onto. */
+  /** Axes in the scene frame (a right joint's signed against its left one's mirror): what the angles fold onto. */
   sceneAxes: Partial<Record<Movement, readonly number[]>>;
 }
 
@@ -183,12 +185,19 @@ export function MotionDriver({
       const bone = rig.node(spec.node);
       if (!bone) continue;
       const parentRest = bone.parent ? bone.parent.getWorldQuaternion(new Quaternion()).invert() : new Quaternion();
+      // A right joint: its axes signed so its left counterpart's angles make the mirror movement.
+      const left = name.endsWith('.r') ? data.rig.joints[otherSideJoint(name)] : undefined;
+      const leftBone = left ? rig.node(left.node) : null;
+      const sceneAxes =
+        left && leftBone
+          ? mirrorSignedAxes(left.axes, spec.axes, midlineNormal(v3(leftBone.getWorldPosition(_pl)), v3(bone.getWorldPosition(_pr))))
+          : spec.axes;
       const axes: Partial<Record<Movement, Vec3>> = {};
-      for (const [movement, axis] of Object.entries(spec.axes) as [Movement, Vec3][]) {
-        _v.set(axis[0], axis[1], axis[2]).normalize().applyQuaternion(parentRest);
+      for (const [movement, axis] of Object.entries(sceneAxes) as [Movement, readonly number[]][]) {
+        _v.set(axis[0]!, axis[1]!, axis[2]!).normalize().applyQuaternion(parentRest);
         axes[movement] = [_v.x, _v.y, _v.z];
       }
-      out.set(name, { bone, rest: bone.quaternion.clone(), axes, sceneAxes: spec.axes });
+      out.set(name, { bone, rest: bone.quaternion.clone(), axes, sceneAxes });
     }
     return out;
   }, [rig, data.rig]);
