@@ -644,5 +644,19 @@
     "joint.shoulder.r",
     "joint.elbow.r",
     "joint.wrist.r"
-  ]
+  ],
+  "jointNames": [
+    "trunk",
+    "clavicle.l",
+    "scapula.l",
+    "shoulder.l",
+    "elbow.l",
+    "wrist.l",
+    "clavicle.r",
+    "scapula.r",
+    "shoulder.r",
+    "elbow.r",
+    "wrist.r"
+  ],
+  "handGripOffsetM": 0.08
 }

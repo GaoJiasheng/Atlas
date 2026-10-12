@@ -221,3 +221,42 @@ Every box is a human review gate. Geometry proximity does not verify anatomy. Th
 ## Automatic result
 
 Geometry error budgets and topology checks passed. Anatomical review remains pending.
+
+## Published skin-weight audit
+
+Decoded published GLB SHA-256: `4ddd10ce16131977074cb4ba0a1bbf223a7dbee928b8b84c369553e9362a6687`.
+
+Shares sum decoded weights over referenced vertices, including UV/normal seams. Required alternatives are joints bordering the manifest attachment bones; allowed joints include intervening joints in the rig parent chain (e.g. shoulder between scapula and elbow). Radius uses elbow unless the rig provides a separate pronation joint. Missing attachment weights, unrelated joints above 30%, reversed fibre fields and violated persistent endpoint overrides fail this gate.
+
+| Muscle | Joint shares | Required attachment joints | Fibre endpoints | Result |
+|---|---|---|---|---|
+| biceps-brachii-short.l | shoulder.l 54.75%, elbow.l 24.32%, scapula.l 20.93% | elbow.l / hand.l / wrist.l, scapula.l / shoulder.l | origin → insertion | clean |
+| biceps-brachii-short.r | shoulder.r 53.77%, elbow.r 25.21%, scapula.r 21.02% | elbow.r / hand.r / wrist.r, scapula.r / shoulder.r | origin → insertion | clean |
+| coracobrachialis.l | shoulder.l 58.63%, scapula.l 41.37% | scapula.l / shoulder.l, elbow.l / shoulder.l | origin → insertion | clean |
+| coracobrachialis.r | shoulder.r 58.55%, scapula.r 41.45% | scapula.r / shoulder.r, elbow.r / shoulder.r | origin → insertion | clean |
+| deltoid-anterior.l | clavicle.l 65.70%, shoulder.l 34.30% | clavicle.l / scapula.l, elbow.l / shoulder.l | origin → insertion | clean |
+| deltoid-anterior.r | clavicle.r 65.46%, shoulder.r 34.54% | clavicle.r / scapula.r, elbow.r / shoulder.r | origin → insertion | clean |
+| external-oblique.l | trunk 100.00% | hip.l / trunk | named surfaces: ambiguous/shared | clean |
+| external-oblique.r | trunk 100.00% | hip.r / trunk | named surfaces: ambiguous/shared | clean |
+| intercostals-external | trunk 100.00% | trunk | named surfaces: ambiguous/shared | clean |
+| intercostals-internal | trunk 100.00% | trunk | named surfaces: ambiguous/shared | clean |
+| latissimus-dorsi.l | trunk 65.97%, shoulder.l 34.03% | elbow.l / shoulder.l, trunk | origin → insertion | clean |
+| latissimus-dorsi.r | trunk 67.11%, shoulder.r 32.89% | elbow.r / shoulder.r, trunk | origin → insertion | clean |
+| pectoralis-major-abdominal.l | trunk 62.18%, shoulder.l 37.82% | elbow.l / shoulder.l, trunk | origin → insertion | clean |
+| pectoralis-major-abdominal.r | trunk 62.58%, shoulder.r 37.42% | elbow.r / shoulder.r, trunk | origin → insertion | clean |
+| pectoralis-major-clavicular.l | clavicle.l 62.77%, shoulder.l 37.23% | clavicle.l / scapula.l, elbow.l / shoulder.l | origin → insertion | clean |
+| pectoralis-major-clavicular.r | clavicle.r 61.81%, shoulder.r 38.19% | clavicle.r / scapula.r, elbow.r / shoulder.r | origin → insertion | clean |
+| pectoralis-major-sternocostal.l | trunk 73.35%, shoulder.l 26.65% | elbow.l / shoulder.l, trunk | origin → insertion | clean |
+| pectoralis-major-sternocostal.r | trunk 72.12%, shoulder.r 27.88% | elbow.r / shoulder.r, trunk | origin → insertion | clean |
+| pectoralis-minor.l | trunk 71.91%, scapula.l 28.09% | scapula.l / shoulder.l, trunk | origin → insertion | clean |
+| pectoralis-minor.r | trunk 72.17%, scapula.r 27.83% | scapula.r / shoulder.r, trunk | origin → insertion | clean |
+| rectus-abdominis.l | trunk 100.00% | hip.l / trunk | named surfaces: ambiguous/shared | clean |
+| rectus-abdominis.r | trunk 100.00% | hip.r / trunk | named surfaces: ambiguous/shared | clean |
+| serratus-anterior.l | trunk 63.44%, scapula.l 36.56% | scapula.l / shoulder.l, trunk | origin → insertion | clean |
+| serratus-anterior.r | trunk 67.74%, scapula.r 32.26% | scapula.r / shoulder.r, trunk | origin → insertion | clean |
+| subclavius.l | trunk 61.49%, clavicle.l 38.51% | clavicle.l / scapula.l, trunk | origin → insertion | clean |
+| subclavius.r | trunk 61.49%, clavicle.r 38.51% | clavicle.r / scapula.r, trunk | origin → insertion | clean |
+| triceps-brachii.l | shoulder.l 72.02%, elbow.l 27.98% | elbow.l / hand.l / wrist.l, scapula.l / shoulder.l, elbow.l / shoulder.l | origin → insertion | clean |
+| triceps-brachii.r | shoulder.r 71.46%, elbow.r 28.54% | elbow.r / hand.r / wrist.r, scapula.r / shoulder.r, elbow.r / shoulder.r | origin → insertion | clean |
+
+Audit result: **clean** (28 muscle nodes).

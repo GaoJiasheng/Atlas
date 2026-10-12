@@ -71,7 +71,7 @@ def make_rig(build, centre, floor, check):
         key=name+'.'+side
         if key in requested: joints.append(dict(name=key,position=p,parent=parent,source=source,**extra))
     for side in ['l','r']:
-        if 'shoulder.'+side in requested:
+        if any(kind+'.'+side in requested for kind in ('clavicle','scapula','shoulder','elbow','forearm','hand')):
             clavicle=points('clavicle',side)
             inner=min(abs(p.x) for p in clavicle);outer=max(abs(p.x) for p in clavicle)
             sc=centroid([p for p in clavicle if abs(p.x)<inner+.012])
@@ -87,7 +87,8 @@ def make_rig(build, centre, floor, check):
             add('shoulder',side,shoulder,'scapula.'+side,'humeral head sphere fit; .i/.j landmark patch')
             add('elbow',side,elbow,'shoulder.'+side,'midpoint of humeral epicondyle .i/.j cubes')
             add('forearm',side,elbow,'elbow.'+side,'elbow centre to ulnar styloid rotation axis; ulna stays on elbow',axisEnd=landmark('Ulnar styloid process',side))
-            add('hand',side,wrist,('forearm.' if 'forearm.'+side in requested else 'elbow.')+side,'midpoint of radial/ulnar styloid cubes',offset=.08,gripOffsetM=.08)
+            grip_offset=build.MANIFEST['handGripOffsetM'] if 'hand.'+side in requested else None
+            add('hand',side,wrist,('forearm.' if 'forearm.'+side in requested else 'elbow.')+side,'midpoint of radial/ulnar styloid cubes',offset=grip_offset,gripOffsetM=grip_offset)
         if 'hip.'+side in requested:
             head=landmark('Head of femur',side)
             acetabulum=landmark('Acetabulum',side)
@@ -147,29 +148,21 @@ def make_rig(build, centre, floor, check):
 
 
 def bone_joint(manifest,id,side):
-    kind={'clavicle':'clavicle','scapula':'scapula','humerus':'shoulder','forearm':'elbow','radius':'forearm','ulna':'elbow','hand':'hand',
-          'femur':'hip','patella':'knee','lower-leg':'knee','foot':'ankle','iliotibial-tract':'hip','tensor-fasciae-latae':'hip','gluteus-maximus':'hip'}.get(id,'trunk')
-    name=kind+('.'+side if side and kind!='trunk' else '')
-    return name if name in manifest['jointNames'] else 'trunk'
+    from rig_rules import attachment_joint
+    name=attachment_joint(id,side,'forearm.'+str(side) in manifest['jointNames'])
+    if name not in manifest['jointNames']:
+        raise RuntimeError(f'Attachment {id}.{side} requires missing joint {name}')
+    return name
 
 
 def muscle_weights(manifest,proximal,distal,u):
     if proximal==distal: return {proximal:1}
-    side=distal[-1]
-    path=['trunk','clavicle.'+side,'scapula.'+side,'shoulder.'+side,'elbow.'+side]
-    if 'forearm.'+side in manifest['jointNames']: path+=['forearm.'+side]
-    path+=['hand.'+side]
-    if distal.startswith(('hip.','knee.','ankle.')): path=['trunk','hip.'+side,'knee.'+side,'ankle.'+side]
-    # Long two-joint muscles span intervening joints with broad, continuous blends.
-    if proximal in path and distal in path and path.index(proximal)<path.index(distal):
-        chain=path[path.index(proximal):path.index(distal)+1]
-        # Torso -> upper arm should not drag every fibre through clavicle/scapula pivots.
-        if proximal=='trunk' and distal.startswith(('shoulder.','elbow.','forearm.','hand.')):
-            chain=['trunk']+path[path.index('shoulder.'+side):path.index(distal)+1]
-        x=u*(len(chain)-1);i=min(len(chain)-2,int(x));w=x-i;w=w*w*(3-2*w)
-        return {chain[i]:1-w,chain[i+1]:w}
-    w=u*u*(3-2*u)
-    return {proximal:1-w,distal:w}
+    from rig_rules import joint_path, parents
+    chain=joint_path(proximal,distal,parents(manifest['jointNames']))
+    if any(j not in manifest['jointNames'] for j in chain):
+        raise RuntimeError(f'Incomplete muscle chain: {chain}')
+    x=u*(len(chain)-1);i=min(len(chain)-2,int(x));w=x-i;w=w*w*(3-2*w)
+    return {chain[i]:1-w,chain[i+1]:w}
 
 
 def pose(preview,scene,meshes,camera):
@@ -178,6 +171,8 @@ def pose(preview,scene,meshes,camera):
     rest={o.name:preview.geometry(o) for o in meshes}
     angles={'shoulder.l.flexion':55,'elbow.l.flexion':75} if preview.TOPIC_NAME in ['back','shoulders','arms'] else {'hip.l.flexion':35,'knee.l.flexion':55,'ankle.l.dorsiflexion':10} if preview.TOPIC_NAME=='legs' else {'trunk.rotation':12,'hip.l.flexion':25}
     if preview.TOPIC_NAME=='arms': angles.update({'forearm.l.pronation':65,'hand.l.flexion':15})
+    if preview.TOPIC_NAME=='core' and any(j['name']=='shoulder.l' for j in data['joints']):
+        angles['shoulder.l.flexion']=55
     for key,degrees in angles.items():
         name,action=key.rsplit('.',1);joint=next(j for j in data['joints'] if j['name']==name);bone=rig.pose.bones[joint['node']]
         axis=Vector(joint['axes'][action]);source_axis=Vector((axis.x,-axis.z,axis.y))
@@ -189,7 +184,8 @@ def pose(preview,scene,meshes,camera):
         assert all(math.isfinite(c) for v in final[ob.name] for c in v),ob.name
         if ob.get('role') in ['region','neighbour']:
             ratios=[(final[ob.name][a]-final[ob.name][b]).length/max(1e-8,(rest[ob.name][a]-rest[ob.name][b]).length) for a,b in (e.vertices for e in ob.data.edges)]
-            checks.append(dict(mesh=ob.name,maxEdgeStretch=max(ratios,default=1)))
+            checks.append(dict(mesh=ob.name,maxEdgeStretch=max(ratios,default=1),
+                               centroidDisplacementM=(centroid(final[ob.name])-centroid(rest[ob.name])).length))
     moving='humerus.l' if 'humerus.l' in final else 'femur.l'
     before=centroid(rest[moving]);after=centroid(final[moving]);displacement=(after-before).length
     assert displacement>.03,(moving,displacement)

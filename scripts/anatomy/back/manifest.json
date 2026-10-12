@@ -71,7 +71,18 @@
         "Descending part of trapezius muscle.l",
         "Descending part of trapezius muscle.r"
       ],
-      "minimumObjects": 1
+      "minimumObjects": 1,
+      "fibre": {
+        "origin": {
+          "axis": "absX",
+          "end": "min"
+        },
+        "insertion": {
+          "axis": "absX",
+          "end": "max"
+        },
+        "bandM": 0.003
+      }
     },
     {
       "id": "trapezius-transverse",
@@ -406,7 +417,18 @@
         "Iliocostalis thoracis muscle.l",
         "Iliocostalis thoracis muscle.r"
       ],
-      "minimumObjects": 1
+      "minimumObjects": 1,
+      "fibre": {
+        "origin": {
+          "axis": "z",
+          "end": "min"
+        },
+        "insertion": {
+          "axis": "z",
+          "end": "max"
+        },
+        "bandM": 0.003
+      }
     },
     {
       "id": "longissimus-thoracis",
@@ -465,7 +487,18 @@
         "Spinalis thoracis muscle.l",
         "Spinalis thoracis muscle.r"
       ],
-      "minimumObjects": 1
+      "minimumObjects": 1,
+      "fibre": {
+        "origin": {
+          "axis": "z",
+          "end": "min"
+        },
+        "insertion": {
+          "axis": "z",
+          "end": "max"
+        },
+        "bandM": 0.003
+      }
     },
     {
       "id": "deltoid-posterior",
@@ -1591,11 +1624,13 @@
     "shoulder.l",
     "elbow.l",
     "hand.l",
+    "hip.l",
     "clavicle.r",
     "scapula.r",
     "shoulder.r",
     "elbow.r",
-    "hand.r"
+    "hand.r",
+    "hip.r"
   ],
   "expectedNodes": [
     "biceps-brachii.l",
@@ -1664,11 +1699,13 @@
     "joint.shoulder.l",
     "joint.elbow.l",
     "joint.hand.l",
+    "joint.hip.l",
     "joint.clavicle.r",
     "joint.scapula.r",
     "joint.shoulder.r",
     "joint.elbow.r",
-    "joint.hand.r"
+    "joint.hand.r",
+    "joint.hip.r"
   ],
   "notes": [
     "Selected from docs/16 \u00a75.3, region reviews and exact cached FBX inventory; no mirrored geometry.",
@@ -1678,5 +1715,6 @@
     "Intrinsic hand/foot muscles and deep forearm flexors excluded by v1 scope; hand/foot bones are merged per side.",
     "Optional thoracolumbar fascia, linea alba and diaphragm omitted. Linea-alba attachment evidence uses the unexported named source surface.",
     "No named region muscle is missing in Z-Anatomy; multifidus uses the actual paired lumbar meshes, not rotatores or invented geometry."
-  ]
+  ],
+  "handGripOffsetM": 0.08
 }

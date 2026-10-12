@@ -1246,7 +1246,21 @@
   "jointNames": [
     "trunk",
     "hip.l",
-    "hip.r"
+    "knee.l",
+    "ankle.l",
+    "clavicle.l",
+    "scapula.l",
+    "shoulder.l",
+    "elbow.l",
+    "hand.l",
+    "hip.r",
+    "knee.r",
+    "ankle.r",
+    "clavicle.r",
+    "scapula.r",
+    "shoulder.r",
+    "elbow.r",
+    "hand.r"
   ],
   "expectedNodes": [
     "erector-spinae-lumbar.l",
@@ -1285,7 +1299,21 @@
     "core-rig",
     "joint.trunk",
     "joint.hip.l",
-    "joint.hip.r"
+    "joint.knee.l",
+    "joint.ankle.l",
+    "joint.clavicle.l",
+    "joint.scapula.l",
+    "joint.shoulder.l",
+    "joint.elbow.l",
+    "joint.hand.l",
+    "joint.hip.r",
+    "joint.knee.r",
+    "joint.ankle.r",
+    "joint.clavicle.r",
+    "joint.scapula.r",
+    "joint.shoulder.r",
+    "joint.elbow.r",
+    "joint.hand.r"
   ],
   "notes": [
     "Selected from docs/16 \u00a75.3, region reviews and exact cached FBX inventory; no mirrored geometry.",
@@ -1295,5 +1323,6 @@
     "Intrinsic hand/foot muscles and deep forearm flexors excluded by v1 scope; hand/foot bones are merged per side.",
     "Optional thoracolumbar fascia, linea alba and diaphragm omitted. Linea-alba attachment evidence uses the unexported named source surface.",
     "No named region muscle is missing in Z-Anatomy; multifidus uses the actual paired lumbar meshes, not rotatores or invented geometry."
-  ]
+  ],
+  "handGripOffsetM": 0.08
 }

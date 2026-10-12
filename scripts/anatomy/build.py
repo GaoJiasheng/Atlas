@@ -19,6 +19,19 @@ from common import (CACHE, ROOT, mobile_skin_region, base_name, centroid, clear_
 TOPIC_NAME = topic_argument()
 TOPIC = ROOT / TOPIC_NAME
 MANIFEST = json.loads((TOPIC / 'manifest.json').read_text())
+if TOPIC_NAME != 'chest':
+    # Attachment ownership is independent of the region's display bone set.
+    # Close the rig/allowlist before source selection and never silently bind
+    # an unexported limb attachment to the trunk.
+    import hashlib
+    from rig_rules import complete_manifest
+    declared_joints = set(MANIFEST['jointNames'])
+    complete_manifest(MANIFEST)
+    if not declared_joints <= set(MANIFEST['jointNames']):
+        raise RuntimeError('Manifest completion dropped declared rig joints')
+    encoded = json.dumps(MANIFEST, indent=2)+'\n'
+    (TOPIC/'manifest.json').write_text(encoded)
+    (TOPIC/'MANIFEST-READY').write_text('sha256 '+hashlib.sha256(encoded.encode()).hexdigest()+'\n')
 SOURCE = {}
 SELECTED = {}
 ATTACHMENTS = []
@@ -333,8 +346,29 @@ def bake_muscle(record):
         a, b = edge.vertices
         adjacency[a].add(b)
         adjacency[b].add(a)
+    if record['part'].get('fibre'):
+        # Coincident source seams are one surface for distance-field purposes.
+        welded = {}
+        for i,p in enumerate(points):
+            key = tuple(round(c,7) for c in p)
+            if key in welded:
+                j = welded[key]; adjacency[i].add(j); adjacency[j].add(i)
+            else:
+                welded[key] = i
     origin = site_regions(record, 'origin', points)
     insertion = site_regions(record, 'insertion', points)
+    # Reviewed boundary conditions override unreliable marker/proximity seeds.
+    # Keep those candidates in attachments.json for their separate human gate.
+    fibre = record['part'].get('fibre')
+    if fibre:
+        def seeds(kind):
+            rule = fibre[kind]
+            values = [abs(p.x) if rule['axis']=='absX' else p['xyz'.index(rule['axis'])] for p in points]
+            extreme = (min if rule['end']=='min' else max)(values)
+            return {i for i,v in enumerate(values) if abs(v-extreme)<=fibre.get('bandM',.003)}
+        origin, insertion = seeds('origin'), seeds('insertion')
+    if record['part'].get('flipU'):
+        origin, insertion = insertion, origin
     overlap = origin & insertion
     if overlap:
         origin -= overlap
@@ -366,6 +400,30 @@ def bake_muscle(record):
             available = component - origin
             if available:
                 insertion.add(min(available, key=lambda i: insertion_tree.find(points[i])[2]))
+    if fibre:
+        # Each disconnected slip uses its own reviewed extremes; nearest-point
+        # repairs can otherwise place an endpoint in the middle of another slip.
+        def component_seeds(kind):
+            rule = fibre[kind]
+            values = [abs(p.x) if rule['axis']=='absX' else p['xyz'.index(rule['axis'])] for p in points]
+            result = set()
+            for component in components:
+                extreme = (min if rule['end']=='min' else max)(values[i] for i in component)
+                span = max(values[i] for i in component)-min(values[i] for i in component)
+                band = min(fibre.get('bandM',.003), span*.25)
+                result.update(i for i in component if abs(values[i]-extreme)<=band)
+            return result
+        origin, insertion = component_seeds('origin'), component_seeds('insertion')
+        if record['part'].get('flipU'):
+            origin, insertion = insertion, origin
+        for component in components:
+            if component & origin & insertion:
+                # Tiny transverse fragments have no extent along the reviewed
+                # axis. Pick a separated pair at that same longitudinal station.
+                origin -= component; insertion -= component
+                a = min(component)
+                b = max(component,key=lambda i:(points[i]-points[a]).length)
+                origin.add(a); insertion.add(b)
     do = graph_distances(points, adjacency, origin)
     di = graph_distances(points, adjacency, insertion)
     u = [0. if i in origin else 1. if i in insertion else
@@ -576,7 +634,10 @@ def skin_selection(rig, joints):
                 w = u*u*(3-2*u)
                 if TOPIC_NAME != 'chest':
                     from regional import muscle_weights
-                    for joint, weight in muscle_weights(MANIFEST, proximal, distal, u).items():
+                    weights = muscle_weights(MANIFEST, proximal, distal, u)
+                    if any(j not in groups for j in weights):
+                        raise RuntimeError(f'{name}: missing attachment joint {weights}')
+                    for joint, weight in weights.items():
                         groups[joint].add([i],weight,'REPLACE')
                 elif proximal == 'scapula.'+str(side) and distal == 'elbow.'+str(side):
                     middle = 'shoulder.'+side
@@ -719,5 +780,7 @@ for record in SELECTED.values():
     if record['part']['role'] in ['region','neighbour']:
         bake_muscle(record)
 rig,joints=make_rig(centre,floor,check)
+if 'jointNames' in MANIFEST and set(MANIFEST['jointNames']) != {j['name'] for j in joints}:
+    raise RuntimeError('Native rig does not match the explicit manifest joint list')
 skin_selection(rig,joints)
 export(rig)

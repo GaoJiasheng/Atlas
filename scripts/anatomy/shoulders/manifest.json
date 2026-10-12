@@ -290,7 +290,18 @@
         "Descending part of trapezius muscle.l",
         "Descending part of trapezius muscle.r"
       ],
-      "minimumObjects": 1
+      "minimumObjects": 1,
+      "fibre": {
+        "origin": {
+          "axis": "absX",
+          "end": "min"
+        },
+        "insertion": {
+          "axis": "absX",
+          "end": "max"
+        },
+        "bandM": 0.003
+      }
     },
     {
       "id": "pectoralis-major-clavicular",
@@ -1428,5 +1439,6 @@
     "Intrinsic hand/foot muscles and deep forearm flexors excluded by v1 scope; hand/foot bones are merged per side.",
     "Optional thoracolumbar fascia, linea alba and diaphragm omitted. Linea-alba attachment evidence uses the unexported named source surface.",
     "No named region muscle is missing in Z-Anatomy; multifidus uses the actual paired lumbar meshes, not rotatores or invented geometry."
-  ]
+  ],
+  "handGripOffsetM": 0.08
 }

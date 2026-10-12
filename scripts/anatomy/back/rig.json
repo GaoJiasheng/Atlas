@@ -807,6 +807,130 @@
       "gripOffsetM": 0.08
     },
     {
+      "name": "hip.l",
+      "node": "joint.hip.l",
+      "position": [
+        0.08529095351696014,
+        -0.32720643281936646,
+        0.03429919108748436
+      ],
+      "parent": "trunk",
+      "axes": {
+        "flexion": [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        "extension": [
+          1.0,
+          -0.0,
+          -0.0
+        ],
+        "abduction": [
+          0,
+          0,
+          1
+        ],
+        "adduction": [
+          0,
+          0,
+          -1
+        ],
+        "rotation": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "internal-rotation": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "external-rotation": [
+          -0.0,
+          -1.0,
+          -0.0
+        ],
+        "horizontal-abduction": [
+          0,
+          1,
+          0
+        ],
+        "horizontal-adduction": [
+          0,
+          -1,
+          0
+        ],
+        "elevation": [
+          0,
+          0,
+          1
+        ],
+        "depression": [
+          0,
+          0,
+          -1
+        ],
+        "protraction": [
+          0,
+          -1,
+          0
+        ],
+        "retraction": [
+          0,
+          1,
+          0
+        ],
+        "upward-rotation": [
+          0,
+          0,
+          1
+        ],
+        "downward-rotation": [
+          0,
+          0,
+          -1
+        ],
+        "lateral-flexion": [
+          0,
+          0,
+          1
+        ],
+        "pronation": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "supination": [
+          -0.0,
+          -1.0,
+          -0.0
+        ],
+        "dorsiflexion": [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        "plantarflexion": [
+          1.0,
+          -0.0,
+          -0.0
+        ],
+        "inversion": [
+          0,
+          0,
+          1
+        ],
+        "eversion": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "source": "acetabulum .i/.j cube cross-checked against femoral head sphere fit",
+      "review": "pending"
+    },
+    {
       "name": "clavicle.r",
       "node": "joint.clavicle.r",
       "position": [
@@ -1432,15 +1556,166 @@
       "review": "pending",
       "offset": 0.08,
       "gripOffsetM": 0.08
+    },
+    {
+      "name": "hip.r",
+      "node": "joint.hip.r",
+      "position": [
+        -0.08529093861579895,
+        -0.3272062838077545,
+        0.03429919108748436
+      ],
+      "parent": "trunk",
+      "axes": {
+        "flexion": [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        "extension": [
+          1.0,
+          -0.0,
+          -0.0
+        ],
+        "abduction": [
+          0,
+          0,
+          -1
+        ],
+        "adduction": [
+          0,
+          0,
+          1
+        ],
+        "rotation": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "internal-rotation": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "external-rotation": [
+          -0.0,
+          -1.0,
+          -0.0
+        ],
+        "horizontal-abduction": [
+          0,
+          1,
+          0
+        ],
+        "horizontal-adduction": [
+          0,
+          -1,
+          0
+        ],
+        "elevation": [
+          0,
+          0,
+          -1
+        ],
+        "depression": [
+          0,
+          0,
+          1
+        ],
+        "protraction": [
+          0,
+          1,
+          0
+        ],
+        "retraction": [
+          0,
+          -1,
+          0
+        ],
+        "upward-rotation": [
+          0,
+          0,
+          -1
+        ],
+        "downward-rotation": [
+          0,
+          0,
+          1
+        ],
+        "lateral-flexion": [
+          0,
+          0,
+          1
+        ],
+        "pronation": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "supination": [
+          -0.0,
+          -1.0,
+          -0.0
+        ],
+        "dorsiflexion": [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        "plantarflexion": [
+          1.0,
+          -0.0,
+          -0.0
+        ],
+        "inversion": [
+          0,
+          0,
+          -1
+        ],
+        "eversion": [
+          0,
+          0,
+          1
+        ]
+      },
+      "source": "acetabulum .i/.j cube cross-checked against femoral head sphere fit",
+      "review": "pending"
     }
   ],
-  "hipFitEvidence": {},
+  "hipFitEvidence": {
+    "l": {
+      "femoralHeadFit": [
+        0.08359366655349731,
+        -0.3360493779182434,
+        0.04466167464852333
+      ],
+      "acetabulum": [
+        0.08529095351696014,
+        -0.32720643281936646,
+        0.03429919108748436
+      ],
+      "distanceM": 0.013728056106088017,
+      "patchVertices": 76
+    },
+    "r": {
+      "femoralHeadFit": [
+        -0.08359362185001373,
+        -0.3360493779182434,
+        0.04466167092323303
+      ],
+      "acetabulum": [
+        -0.08529093861579895,
+        -0.3272062838077545,
+        0.03429919108748436
+      ],
+      "distanceM": 0.01372815307207296,
+      "patchVertices": 76
+    }
+  },
   "motionAliases": {},
   "excludedDraftMotionKeys": [
     "ankle.l",
     "ankle.r",
-    "hip.l",
-    "hip.r",
     "knee.l",
     "knee.r"
   ]

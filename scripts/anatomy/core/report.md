@@ -1,6 +1,6 @@
 # Core mesh review
 
-Final GLB: **3,671,156 bytes**, **274,634 triangles**, **37 total nodes** (33 meshes, 3 joints, rig root).
+Final GLB: **3,711,460 bytes**, **274,634 triangles**, **51 total nodes** (33 meshes, 17 joints, rig root).
 Draw-call estimate: **33** opaque primitives; skin overlay adds its shell pass. Both 4 MB and 350,000 triangle ceilings enforced.
 
 Native Blender, cached FBX only. Geometry and derived rig/attachment data: CC BY-SA 4.0.
@@ -28,7 +28,7 @@ Symmetric sampled Hausdorff: referenced vertices (approximately 3,000) plus 6,00
 | external-oblique.l | region | 29,622 | 12,168 | 0.465 | 0.5 | True → False | 0 |
 | external-oblique.r | region | 29,622 | 12,188 | 0.408 | 0.5 | True → False | 0 |
 | femur.l | bone | 3,794 | 3,794 | 0.005 | 1.0 | True → True | 0 |
-| femur.r | bone | 3,794 | 3,794 | 0.010 | 1.0 | True → True | 0 |
+| femur.r | bone | 3,794 | 3,794 | 0.005 | 1.0 | True → True | 0 |
 | gluteus-maximus.l | neighbour | 3,326 | 2,900 | 0.572 | 1.5 | True → True | 0 |
 | gluteus-maximus.r | neighbour | 3,326 | 2,896 | 0.572 | 1.5 | True → True | 0 |
 | iliacus.l | region | 4,354 | 4,264 | 0.167 | 0.5 | True → True | 0 |
@@ -68,7 +68,7 @@ Studio lighting, paper #EDE7D6, orthographic evaluated non-skin bounds with 5% m
 - `/Users/gavin/work/atlas/scripts/anatomy/cache/core-preview-skin.png`
 - `/Users/gavin/work/atlas/scripts/anatomy/cache/core-preview-pose.png`
 
-Pose inputs: {'trunk.rotation': 12, 'hip.l.flexion': 25}; femur.l centroid displacement 0.074396 m. All evaluated coordinates and muscle-edge stretches are finite.
+Pose inputs: {'trunk.rotation': 12, 'hip.l.flexion': 25, 'shoulder.l.flexion': 55}; femur.l centroid displacement 0.074396 m. All evaluated coordinates and muscle-edge stretches are finite.
 Visual inspection results are recorded in `preview-review.md` after viewing every PNG.
 
 ## Frame and rig
@@ -79,10 +79,24 @@ Unexported reference bones locate joints and attachment candidates without addin
 | Joint | Position X/Y/Z m | Parent | Evidence |
 |---|---|---|---|
 | trunk | 0.00000, 0.00000, -0.00000 | None | region frame |
+| clavicle.l | 0.01669, 0.36061, 0.06622 | trunk | medial clavicle / sternoclavicular joint |
+| scapula.l | 0.14956, 0.37670, -0.00425 | clavicle.l | lateral clavicle / acromioclavicular joint; glenoid landmark retained |
+| shoulder.l | 0.17262, 0.34601, 0.00563 | scapula.l | humeral head sphere fit; .i/.j landmark patch |
+| elbow.l | 0.22319, 0.07023, -0.00854 | shoulder.l | midpoint of humeral epicondyle .i/.j cubes |
+| hand.l | 0.26462, -0.19500, 0.04568 | elbow.l | midpoint of radial/ulnar styloid cubes |
 | hip.l | 0.08529, -0.16946, 0.01650 | trunk | acetabulum .i/.j cube cross-checked against femoral head sphere fit |
+| knee.l | 0.07621, -0.58454, -0.00162 | hip.l | midpoint of femoral epicondyle .i/.j cubes |
+| ankle.l | 0.08182, -0.96118, -0.01198 | knee.l | midpoint of medial/lateral malleolar landmarks |
+| clavicle.r | -0.01669, 0.36061, 0.06622 | trunk | medial clavicle / sternoclavicular joint |
+| scapula.r | -0.14956, 0.37670, -0.00425 | clavicle.r | lateral clavicle / acromioclavicular joint; glenoid landmark retained |
+| shoulder.r | -0.17262, 0.34601, 0.00563 | scapula.r | humeral head sphere fit; .i/.j landmark patch |
+| elbow.r | -0.22319, 0.07023, -0.00854 | shoulder.r | midpoint of humeral epicondyle .i/.j cubes |
+| hand.r | -0.26464, -0.19500, 0.04568 | elbow.r | midpoint of radial/ulnar styloid cubes |
 | hip.r | -0.08529, -0.16946, 0.01650 | trunk | acetabulum .i/.j cube cross-checked against femoral head sphere fit |
+| knee.r | -0.07621, -0.58454, -0.00162 | hip.r | midpoint of femoral epicondyle .i/.j cubes |
+| ankle.r | -0.07861, -0.96128, -0.01193 | knee.r | midpoint of medial/lateral malleolar landmarks |
 
-Full-body draft motion keys outside this regional rig: ankle.l, ankle.r, clavicle.l, clavicle.r, elbow.l, elbow.r, hand.l, hand.r, knee.l, knee.r, scapula.l, scapula.r, shoulder.l, shoulder.r. They need a whole-body motion driver; this export provides the relevant regional joints only.
+Full-body draft motion keys outside this regional rig: none. They need a whole-body motion driver; this export provides the relevant regional joints only.
 Motion aliases: {}. Arms keep ulna on elbow and radius/hand on forearm, with pronation along the forearm rather than the elbow flexion axis.
 
 ## [待核] attachment candidates
@@ -253,3 +267,40 @@ All candidates remain unapproved. `.o/.e` markers are classified by named-surfac
 ## Automatic result
 
 All decoded surface error, topology, attribute, joint, coordinate and output budget gates passed. Anatomical attachment review remains pending.
+
+## Published skin-weight audit
+
+Decoded published GLB SHA-256: `62ffc035fff0c70db7404dd622460db90c20ea4a35574237111f43d51e2fc137`.
+
+Shares sum decoded weights over referenced vertices, including UV/normal seams. Required alternatives are joints bordering the manifest attachment bones; allowed joints include intervening joints in the rig parent chain (e.g. shoulder between scapula and elbow). Radius uses elbow unless the rig provides a separate pronation joint. Missing attachment weights, unrelated joints above 30%, reversed fibre fields and violated persistent endpoint overrides fail this gate.
+
+| Muscle | Joint shares | Required attachment joints | Fibre endpoints | Result |
+|---|---|---|---|---|
+| erector-spinae-lumbar.l | trunk 100.00% | hip.l / trunk | origin → insertion | clean |
+| erector-spinae-lumbar.r | trunk 100.00% | hip.r / trunk | origin → insertion | clean |
+| external-oblique.l | trunk 100.00% | hip.l / trunk | origin → insertion | clean |
+| external-oblique.r | trunk 100.00% | hip.r / trunk | origin → insertion | clean |
+| gluteus-maximus.l | trunk 51.72%, hip.l 48.28% | hip.l / knee.l, hip.l / trunk | origin → insertion | clean |
+| gluteus-maximus.r | trunk 51.86%, hip.r 48.14% | hip.r / knee.r, hip.r / trunk | origin → insertion | clean |
+| iliacus.l | trunk 63.47%, hip.l 36.53% | hip.l / knee.l, hip.l / trunk | origin → insertion | clean |
+| iliacus.r | trunk 63.39%, hip.r 36.61% | hip.r / knee.r, hip.r / trunk | origin → insertion | clean |
+| internal-oblique.l | trunk 100.00% | hip.l / trunk | origin → insertion | clean |
+| internal-oblique.r | trunk 100.00% | hip.r / trunk | origin → insertion | clean |
+| latissimus-dorsi.l | trunk 66.05%, shoulder.l 33.95% | elbow.l / shoulder.l, hip.l / trunk | origin → insertion | clean |
+| latissimus-dorsi.r | trunk 67.64%, shoulder.r 32.36% | elbow.r / shoulder.r, hip.r / trunk | origin → insertion | clean |
+| multifidus-lumborum.l | trunk 100.00% | hip.l / trunk | named surfaces: ambiguous/shared | clean |
+| multifidus-lumborum.r | trunk 100.00% | hip.r / trunk | named surfaces: ambiguous/shared | clean |
+| psoas-major.l | trunk 77.92%, hip.l 22.08% | hip.l / knee.l, trunk | origin → insertion | clean |
+| psoas-major.r | trunk 77.60%, hip.r 22.40% | hip.r / knee.r, trunk | origin → insertion | clean |
+| quadratus-lumborum.l | trunk 100.00% | hip.l / trunk | origin → insertion | clean |
+| quadratus-lumborum.r | trunk 100.00% | hip.r / trunk | origin → insertion | clean |
+| rectus-abdominis.l | trunk 100.00% | hip.l / trunk | origin → insertion | clean |
+| rectus-abdominis.r | trunk 100.00% | hip.r / trunk | origin → insertion | clean |
+| serratus-anterior.l | clavicle.l 41.71%, trunk 39.20%, scapula.l 19.09% | scapula.l / shoulder.l, trunk | origin → insertion | clean |
+| serratus-anterior.r | trunk 44.69%, clavicle.r 36.67%, scapula.r 18.65% | scapula.r / shoulder.r, trunk | origin → insertion | clean |
+| tensor-fasciae-latae.l | hip.l 67.79%, trunk 32.21% | hip.l / knee.l, hip.l / trunk | origin → insertion | clean |
+| tensor-fasciae-latae.r | hip.r 67.43%, trunk 32.57% | hip.r / knee.r, hip.r / trunk | origin → insertion | clean |
+| transversus-abdominis.l | trunk 100.00% | hip.l / trunk | named surfaces: ambiguous/shared | clean |
+| transversus-abdominis.r | trunk 100.00% | hip.r / trunk | named surfaces: ambiguous/shared | clean |
+
+Audit result: **clean** (26 muscle nodes).

@@ -34,8 +34,11 @@ before=hashlib.sha256(chest.read_bytes()).hexdigest() if chest.exists() else Non
 if args.refresh_inventory or not (CACHE/'inventory.json').exists(): blender('inventory.py')
 blender('build.py')
 run(['pnpm','exec','node','--import','tsx',str(ROOT/'optimize.ts'),'--topic',topic])
+run([sys.executable,str(ROOT/'audit.py'),'--topic',topic])
 blender('preview.py')
 blender('report.py')
+from audit import append_report
+append_report(topic,json.loads((CACHE/f'{topic}-weights-audit.json').read_text()))
 summary=json.loads((CACHE/f'{topic}-optimize-stats.json').read_text())
 print(f"FINAL {topic}: {summary['bytes']:,} bytes, {summary['triangles']:,} triangles, {summary['nodeCount']} nodes, {summary['drawCalls']} draw calls",flush=True)
 for path in json.loads((CACHE/f'{topic}-preview-backend.json').read_text())['paths']+[str(CACHE/f'{topic}-preview-pose.png')]: print('PREVIEW: '+path)

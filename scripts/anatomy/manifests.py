@@ -5,6 +5,7 @@ import hashlib
 import json
 import re
 from pathlib import Path
+from rig_rules import complete_manifest, FIBRE_OVERRIDES
 
 ROOT = Path(__file__).resolve().parent
 TOPICS = ('back', 'shoulders', 'arms', 'legs', 'core')
@@ -69,6 +70,13 @@ export_bones = {
  'legs':'pelvis femur patella lower-leg foot lumbar-spine',
  'core':'sternum ribs thoracic-spine lumbar-spine pelvis femur',
 }
+rig_joint_types = {
+ 'back': ('clavicle', 'scapula', 'shoulder', 'elbow', 'hand', 'hip'),
+ 'shoulders': ('clavicle', 'scapula', 'shoulder', 'elbow', 'hand'),
+ 'arms': ('clavicle', 'scapula', 'shoulder', 'elbow', 'forearm', 'hand'),
+ 'legs': ('hip', 'knee', 'ankle'),
+ 'core': ('hip', 'knee', 'ankle', 'clavicle', 'scapula', 'shoulder', 'elbow', 'hand'),
+}
 aliases = {'thorax':'ribs','sacrum':'pelvis','coccyx':'pelvis','forearm-bones':'forearm','hand-bones':'hand',
            'tibia':'lower-leg','fibula':'lower-leg','calcaneus':'foot','medial-cuneiform':'foot','metatarsal-1':'foot',
            'thoracolumbar-fascia':'lumbar-spine','diaphragm-central-tendon':'ribs'}
@@ -125,9 +133,7 @@ for topic in TOPICS if args.topic=='all' else (args.topic,):
         sources=exact_sources(p)
         if not sources: raise RuntimeError((topic,p['id']))
         p['sourceNames']=[e['name'] for e in sources]
-    joint_types=['clavicle','scapula','shoulder','elbow','hand'] if topic in ['back','shoulders','arms'] else ['hip','knee','ankle'] if topic=='legs' else ['hip']
-    if topic=='arms': joint_types.insert(4,'forearm')
-    joints=['trunk']+[f'{j}.{s}' for s in ['l','r'] for j in joint_types]
+    joints=['trunk']+[f'{j}.{s}' for s in ['l','r'] for j in rig_joint_types[topic]]
     nodes=sorted({p.get('exportGroup',p['id'] + ('.'+s if s else '')) for p in parts for s in (['l','r'] if p['sides']=='bilateral' else [None])})
     notes=['Selected from docs/16 §5.3, region reviews and exact cached FBX inventory; no mirrored geometry.',
            'Parent/group cards are not duplicated as meshes. Neighbours include adjacent exercise secondary/stabiliser muscles; distant whole-body stabilisers excluded.',
@@ -143,7 +149,13 @@ for topic in TOPICS if args.topic=='all' else (args.topic,):
     manifest=dict(topic=topic,license=chest['license'],coordinates=chest['coordinates'],budgets=copy.deepcopy(chest['budgets']),
                   parts=parts,referenceParts=references,
                   jointNames=joints,expectedNodes=nodes+[topic+'-rig']+['joint.'+j for j in joints],notes=notes)
+    if 'hand' in rig_joint_types[topic]:
+        manifest['handGripOffsetM'] = .08
     manifest['budgets']['total'].update(maxBytes=4000000,maxTriangles=350000)
+    for part in parts:
+        if part['id'] in FIBRE_OVERRIDES:
+            part['fibre'] = copy.deepcopy(FIBRE_OVERRIDES[part['id']])
+    complete_manifest(manifest)
     directory=ROOT/topic;directory.mkdir(exist_ok=True)
     encoded=json.dumps(manifest,indent=2)+'\n'
     (directory/'manifest.json').write_text(encoded)

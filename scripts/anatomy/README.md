@@ -25,8 +25,10 @@ Each native step can also run independently:
 ```sh
 blender -b --python-exit-code 1 -P scripts/anatomy/build.py -- --topic back
 pnpm exec node --import tsx scripts/anatomy/optimize.ts --topic back
+python3 scripts/anatomy/audit.py --topic back
 blender -b --python-exit-code 1 -P scripts/anatomy/preview.py -- --topic back
 blender -b --python-exit-code 1 -P scripts/anatomy/report.py -- --topic back
+python3 scripts/anatomy/audit.py --topic back --write-report
 python3 scripts/anatomy/contact.py --topic back
 ```
 
@@ -42,6 +44,14 @@ python3 scripts/anatomy/contact.py --topic back
 
 The audit GLB is decoded from the actual compressed output, dequantized and stripped only of scalar custom attributes that Blender cannot import. The published GLB retains `_U`, `_FIBRE`, UVs, joints, normalized weights and required `EXT_meshopt_compression` / `KHR_mesh_quantization`.
 
+The skin-weight gate runs between optimization and previews in `run.py`. To audit all published topics and append their share tables to existing reports without rebuilding:
+
+```sh
+python3 scripts/anatomy/audit.py --topic all --write-report
+```
+
+`decode_weights.ts` reads the **published compressed GLB**, resolves skin joint indices and normalized weights, and reports vertex-weight shares for every muscle node. `audit_fibres.py` checks the decoded `_U=0/1` endpoint clouds against native cached attachment reference surfaces. Missing weights at the joints adjacent to each manifest attachment bone, missing required rig joints, and >30% on joints outside the attachment parent path are failures. Connecting joints belong to both adjacent bones: shoulder borders scapula/humerus, elbow borders humerus/forearm and hip borders pelvis/femur. Intermediate joints are valid for long muscles. Audit results, endpoint checks, proximal/mid/distal share bins, bytes, triangles and SHA-256 are saved in `cache/<topic>-weights-audit.json`; flags print to stdout and return exit status 1.
+
 ## Selection, frames and rigs
 
 All source sides are real cached geometry. No mirroring, guessed muscle substitutes, marker helpers, hair, nails or section planes are exported. Moving bones are sided. Ribs, cartilage and sternum merge into `thorax`. Arms retain **separate radius and ulna**, with hand bones merged per side; legs merge tibia/fibula and foot bones per side. Pelvis merges both hip bones, sacrum and coccyx. Thoracic/lumbar/cervical columns remain named static meshes when relevant. `referenceParts` supplies actual unexported bones or connective surfaces needed to measure joints and attachments outside the display region.
@@ -50,11 +60,13 @@ Source coordinates are metres, Z up, anterior −Y, own left +X. Export is `(x,y
 
 Upper-body chains: trunk → clavicle → scapula → shoulder → elbow → hand. Arms insert **forearm** between elbow and hand: ulna remains rigid on elbow, radius/hand follow forearm pronation. Hip pivots come from acetabulum landmark cubes, checked against numerical femoral-head sphere fits. Knee centres are femoral epicondyle midpoints; ankles are medial/lateral malleolar midpoints. Upper joint centres use medial/lateral clavicle endpoints, glenoid/epicondyle landmarks, humeral-head sphere fits and wrist styloid midpoints. Hand metadata provides a **0.08 m grip offset** distal to its wrist pivot.
 
-Only region-relevant joints are exported. Drafts currently list full-body exercise keyframes even for regional topics; excluded keys are recorded in each rig/report and require a whole-body motion driver. Arms drafts currently put pronation/supination on `elbow.*`; `motionAliases` redirects those actions to the actual `forearm.*` longitudinal axes. Joint centre/axis evidence remains anatomically unapproved.
+Each topic manifest explicitly declares `jointNames`, including exercise joints whose display bones are not exported. `handGripOffsetM` declares the 0.08 m grip offset. Every muscle attachment adds its owning joint and the required parent chain, even when the attachment bone is only an unexported reference; completion preserves every declared joint and fails on unsupported names. `build.py` closes `jointNames` and `expectedNodes` before selecting sources and persists the manifest checksum. Missing or unknown limb owners fail rather than falling back to trunk. Radius binds to elbow in rigs without a separate pronation joint; arms retain radius on forearm. Back adds hips for its gluteus neighbours; core retains trunk, both hip/knee/ankle chains and both clavicle/scapula/shoulder/elbow/hand chains. The native pipeline is the source of truth; the former core post-export rig extension and its metadata are removed. Drafts currently list full-body exercise keyframes; excluded keys are recorded in each rig/report and require a whole-body motion driver. Arms drafts put pronation/supination on `elbow.*`; `motionAliases` redirects those actions to the actual `forearm.*` longitudinal axes. Joint centre/axis evidence remains anatomically unapproved.
 
 **Chest byte compatibility:** its existing eleven joint nodes include `wrist.l/.r`; those names and its geometry/encoding remain unchanged. Renaming them to `hand` would violate the required byte baseline. The chest-only legacy rig branch is isolated in `build.py`; new rigs use `hand`. Chest rig metadata maps `hand.*` to legacy `wrist.*` and records the same 0.08 m grip offset. Every successful run prints chest SHA-256 before/after and rejects a regression. The full native chest rerun reproduced SHA-256 `4ddd10ce16131977074cb4ba0a1bbf223a7dbee928b8b84c369553e9362a6687` byte-for-byte.
 
 Muscle `_U` comes from two mesh-edge distance fields seeded by attachment candidates; disconnected components receive both endpoints. `_FIBRE` is the normalized surface gradient rotated to glTF; UV u follows `_U`, radial v unwraps across seams. Muscle weights blend across the entire fibre length with smoothstep; long multi-joint muscles include intervening joints. Skin uses sided nearby joints and widened neighbour smoothing, with up to four weights. Bones are rigidly bound.
+
+Reviewed per-muscle `fibre` overrides persist in `manifest.json` and in the manifest generator. Their `origin`/`insertion` selectors specify source axes (`x`, `y`, `z`, or `absX`) and `min`/`max` ends, with a metre-valued `bandM`. Bounds are evaluated within each connected surface component, welding coincident seams for the distance field. Bands shrink for short fragments so the endpoints remain disjoint. Trapezius descending runs from its fixed medial border (`absX min`) toward its lateral clavicular end (`absX max`); iliocostalis thoracis and spinalis thoracis run inferior (`z min`) to superior (`z max`). The decoded audit checks all endpoint seeds against those rules, catching scattered or reversed seeds even when both attachments share a static bone surface. Optional `flipU: true` swaps the boundary conditions before baking `_U`, `_FIBRE`, UVs and weights together. Original attachment candidates remain in the human review record.
 
 ## Simplification and output gates
 

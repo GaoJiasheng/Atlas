@@ -278,3 +278,66 @@ All candidates remain unapproved. `.o/.e` markers are classified by named-surfac
 ## Automatic result
 
 All decoded surface error, topology, attribute, joint, coordinate and output budget gates passed. Anatomical attachment review remains pending.
+
+## Published skin-weight audit
+
+Decoded published GLB SHA-256: `2a9cce186f8e7215fb242ff01b3b6034559aaeb5dd518ba7aa8657dbf51ece95`.
+
+Shares sum decoded weights over referenced vertices, including UV/normal seams. Required alternatives are joints bordering the manifest attachment bones; allowed joints include intervening joints in the rig parent chain (e.g. shoulder between scapula and elbow). Radius uses elbow unless the rig provides a separate pronation joint. Missing attachment weights, unrelated joints above 30%, reversed fibre fields and violated persistent endpoint overrides fail this gate.
+
+| Muscle | Joint shares | Required attachment joints | Fibre endpoints | Result |
+|---|---|---|---|---|
+| adductor-brevis.l | hip.l 74.70%, trunk 25.30% | hip.l / knee.l, hip.l / trunk | origin → insertion | clean |
+| adductor-brevis.r | hip.r 74.67%, trunk 25.33% | hip.r / knee.r, hip.r / trunk | origin → insertion | clean |
+| adductor-longus.l | hip.l 68.68%, trunk 31.32% | hip.l / knee.l, hip.l / trunk | origin → insertion | clean |
+| adductor-longus.r | hip.r 68.83%, trunk 31.17% | hip.r / knee.r, hip.r / trunk | origin → insertion | clean |
+| adductor-magnus.l | hip.l 75.45%, trunk 24.55% | hip.l / knee.l, hip.l / trunk | origin → insertion | clean |
+| adductor-magnus.r | hip.r 75.46%, trunk 24.54% | hip.r / knee.r, hip.r / trunk | origin → insertion | clean |
+| biceps-femoris-long.l | hip.l 54.12%, trunk 22.99%, knee.l 22.89% | ankle.l / knee.l, hip.l / trunk | origin → insertion | clean |
+| biceps-femoris-long.r | hip.r 54.53%, trunk 23.33%, knee.r 22.14% | ankle.r / knee.r, hip.r / trunk | origin → insertion | clean |
+| biceps-femoris-short.l | hip.l 81.18%, knee.l 18.82% | hip.l / knee.l, ankle.l / knee.l | origin → insertion | clean |
+| biceps-femoris-short.r | hip.r 77.32%, knee.r 22.68% | hip.r / knee.r, ankle.r / knee.r | origin → insertion | clean |
+| fibularis-longus.l | knee.l 65.51%, ankle.l 34.49% | ankle.l, ankle.l / knee.l | origin → insertion | clean |
+| fibularis-longus.r | knee.r 66.85%, ankle.r 33.15% | ankle.r, ankle.r / knee.r | origin → insertion | clean |
+| gastrocnemius-lateral.l | knee.l 52.16%, hip.l 29.58%, ankle.l 18.26% | ankle.l, hip.l / knee.l | origin → insertion | clean |
+| gastrocnemius-lateral.r | knee.r 52.12%, hip.r 29.03%, ankle.r 18.85% | ankle.r, hip.r / knee.r | origin → insertion | clean |
+| gastrocnemius-medial.l | knee.l 49.37%, hip.l 31.24%, ankle.l 19.40% | ankle.l, hip.l / knee.l | origin → insertion | clean |
+| gastrocnemius-medial.r | knee.r 49.37%, hip.r 31.80%, ankle.r 18.83% | ankle.r, hip.r / knee.r | origin → insertion | clean |
+| gluteus-maximus.l | trunk 51.36%, hip.l 48.64% | hip.l / knee.l, hip.l / trunk | origin → insertion | clean |
+| gluteus-maximus.r | trunk 51.70%, hip.r 48.30% | hip.r / knee.r, hip.r / trunk | origin → insertion | clean |
+| gluteus-medius.l | trunk 58.83%, hip.l 41.17% | hip.l / knee.l, hip.l / trunk | origin → insertion | clean |
+| gluteus-medius.r | trunk 59.27%, hip.r 40.73% | hip.r / knee.r, hip.r / trunk | origin → insertion | clean |
+| gluteus-minimus.l | trunk 58.35%, hip.l 41.65% | hip.l / knee.l, hip.l / trunk | origin → insertion | clean |
+| gluteus-minimus.r | trunk 58.31%, hip.r 41.69% | hip.r / knee.r, hip.r / trunk | origin → insertion | clean |
+| gracilis.l | hip.l 47.50%, trunk 34.67%, knee.l 17.83% | ankle.l / knee.l, hip.l / trunk | origin → insertion | clean |
+| gracilis.r | hip.r 47.10%, trunk 35.73%, knee.r 17.17% | ankle.r / knee.r, hip.r / trunk | origin → insertion | clean |
+| iliacus.l | trunk 64.41%, hip.l 35.59% | hip.l / knee.l, hip.l / trunk | origin → insertion | clean |
+| iliacus.r | trunk 65.01%, hip.r 34.99% | hip.r / knee.r, hip.r / trunk | origin → insertion | clean |
+| iliotibial-tract.l | hip.l 72.67%, knee.l 27.33% | hip.l / knee.l, ankle.l / knee.l, hip.l / trunk | origin → insertion | clean |
+| iliotibial-tract.r | hip.r 73.30%, knee.r 26.70% | hip.r / knee.r, ankle.r / knee.r, hip.r / trunk | origin → insertion | clean |
+| pectineus.l | trunk 64.50%, hip.l 35.50% | hip.l / knee.l, hip.l / trunk | origin → insertion | clean |
+| pectineus.r | trunk 65.03%, hip.r 34.97% | hip.r / knee.r, hip.r / trunk | origin → insertion | clean |
+| psoas-major.l | trunk 78.41%, hip.l 21.59% | hip.l / knee.l, trunk | origin → insertion | clean |
+| psoas-major.r | trunk 77.54%, hip.r 22.46% | hip.r / knee.r, trunk | origin → insertion | clean |
+| rectus-femoris.l | hip.l 39.44%, knee.l 33.60%, trunk 26.96% | ankle.l / knee.l, hip.l / trunk | origin → insertion | clean |
+| rectus-femoris.r | hip.r 38.92%, knee.r 33.32%, trunk 27.77% | ankle.r / knee.r, hip.r / trunk | origin → insertion | clean |
+| sartorius.l | hip.l 48.66%, knee.l 26.61%, trunk 24.74% | ankle.l / knee.l, hip.l / trunk | origin → insertion | clean |
+| sartorius.r | hip.r 49.15%, knee.r 25.65%, trunk 25.20% | ankle.r / knee.r, hip.r / trunk | origin → insertion | clean |
+| semimembranosus.l | hip.l 51.16%, knee.l 31.53%, trunk 17.30% | ankle.l / knee.l, hip.l / trunk | origin → insertion | clean |
+| semimembranosus.r | hip.r 51.09%, knee.r 31.33%, trunk 17.58% | ankle.r / knee.r, hip.r / trunk | origin → insertion | clean |
+| semitendinosus.l | hip.l 36.14%, trunk 34.96%, knee.l 28.90% | ankle.l / knee.l, hip.l / trunk | origin → insertion | clean |
+| semitendinosus.r | hip.r 36.23%, trunk 34.81%, knee.r 28.96% | ankle.r / knee.r, hip.r / trunk | origin → insertion | clean |
+| soleus.l | knee.l 72.72%, ankle.l 27.28% | ankle.l, ankle.l / knee.l | origin → insertion | clean |
+| soleus.r | knee.r 72.18%, ankle.r 27.82% | ankle.r, ankle.r / knee.r | origin → insertion | clean |
+| tensor-fasciae-latae.l | hip.l 67.63%, trunk 32.37% | hip.l / knee.l, hip.l / trunk | origin → insertion | clean |
+| tensor-fasciae-latae.r | hip.r 67.50%, trunk 32.50% | hip.r / knee.r, hip.r / trunk | origin → insertion | clean |
+| tibialis-anterior.l | knee.l 75.40%, ankle.l 24.60% | ankle.l, ankle.l / knee.l | origin → insertion | clean |
+| tibialis-anterior.r | knee.r 74.62%, ankle.r 25.38% | ankle.r, ankle.r / knee.r | origin → insertion | clean |
+| vastus-intermedius.l | hip.l 76.51%, knee.l 23.49% | hip.l / knee.l, ankle.l / knee.l | origin → insertion | clean |
+| vastus-intermedius.r | hip.r 76.34%, knee.r 23.66% | hip.r / knee.r, ankle.r / knee.r | origin → insertion | clean |
+| vastus-lateralis.l | hip.l 80.64%, knee.l 19.36% | hip.l / knee.l, ankle.l / knee.l | origin → insertion | clean |
+| vastus-lateralis.r | hip.r 80.52%, knee.r 19.48% | hip.r / knee.r, ankle.r / knee.r | origin → insertion | clean |
+| vastus-medialis.l | hip.l 74.04%, knee.l 25.96% | hip.l / knee.l, ankle.l / knee.l | origin → insertion | clean |
+| vastus-medialis.r | hip.r 73.98%, knee.r 26.02% | hip.r / knee.r, ankle.r / knee.r | origin → insertion | clean |
+
+Audit result: **clean** (52 muscle nodes).
