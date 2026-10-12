@@ -1,0 +1,293 @@
+---
+id: how-they-move-you
+order: 4
+title:
+  en: How they move you
+  zh: 它们怎样让你动起来
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  pose: arm-forward
+  layers:
+    - superficial
+    - intermediate
+    - deep
+    - skeleton
+    - neighbours
+    - body
+  ghost:
+    - skin-outline
+  labels:
+    - deltoid-anterior
+    - pectoralis-major-clavicular
+    - humerus
+  camera:
+    position:
+      - 1.28
+      - 0.56
+      - 0.64
+    target:
+      - 0.06
+      - 0.06
+      - 0.04
+    fov: 30
+  summary:
+    en: Different lines of pull move the arm forward, sideways, backwards and around its axis; the cuff steadies the joint.
+    zh: 不同拉力方向让手臂前举、侧举、后拉和旋转；肩袖同时稳住关节。
+  beats:
+    - pose: arm-forward
+      highlight:
+        signal:
+          - deltoid-anterior
+        cold:
+          - pectoralis-major-clavicular
+      labels:
+        - deltoid-anterior
+        - pectoralis-major-clavicular
+      caption:
+        en: "Flexion: the anterior deltoid pulls the upper arm forward, assisted by the clavicular pectoralis major. The elbow can stay straight while the shoulder moves."
+        zh: 肩屈：三角肌前部把上臂向前拉，胸大肌锁骨部帮助它。肩在动时，手肘可以保持伸直。
+      ghost:
+        - skin-outline
+    - pose: arm-side
+      highlight:
+        signal:
+          - deltoid-lateral
+          - supraspinatus
+      ghost:
+        - skin-outline
+        - trapezius-descending
+        - pectoralis-major-clavicular
+        - serratus-anterior
+        - biceps-brachii-long
+        - latissimus-dorsi
+        - pectoralis-major-sternocostal
+        - rhomboid-major
+        - trapezius-transverse
+        - triceps-brachii
+        - deltoid-anterior
+        - deltoid-posterior
+      labels:
+        - deltoid-lateral
+        - supraspinatus
+      caption:
+        en: "Abduction: the lateral deltoid and supraspinatus help lift the arm away from the side. Supraspinatus also helps stabilise the humeral head; it does not simply switch off after the lift begins."
+        zh: 肩外展：三角肌中部和冈上肌帮助侧举。冈上肌也稳住肱骨头，并不会在起举以后就简单地关掉。
+    - pose: arm-back
+      camera: back
+      highlight:
+        signal:
+          - deltoid-posterior
+          - teres-major
+      labels:
+        - deltoid-posterior
+        - teres-major
+      caption:
+        en: "Extension: posterior deltoid and teres major draw the upper arm backwards. The movement comes from the shoulder, rather than leaning the whole trunk back."
+        zh: 肩伸：三角肌后部和大圆肌把上臂向后拉。动作来自肩关节，而不是整个躯干往后倒。
+      ghost:
+        - skin-outline
+    - pose: rear-pull
+      camera: back
+      highlight:
+        signal:
+          - deltoid-posterior
+        cold:
+          - trapezius-transverse
+          - rhomboid-major
+      labels:
+        - deltoid-posterior
+        - trapezius-transverse
+        - rhomboid-major
+      caption:
+        en: Horizontal abduction opens a raised arm backwards. Posterior deltoid moves the humerus; the middle trapezius and rhomboids can draw the shoulder blades together. These are different movements.
+        zh: 水平外展把抬起的手臂向后打开。三角肌后部移动肱骨，斜方肌横部和菱形肌可把肩胛骨拉向中线。这是不同的动作。
+      ghost:
+        - skin-outline
+    - pose: turn-out
+      camera: back
+      ghost:
+        - deltoid-anterior
+        - deltoid-lateral
+        - deltoid-posterior
+        - trapezius-descending
+        - pectoralis-major-clavicular
+        - serratus-anterior
+        - biceps-brachii-long
+        - latissimus-dorsi
+        - pectoralis-major-sternocostal
+        - rhomboid-major
+        - trapezius-transverse
+        - triceps-brachii
+        - skin-outline
+      highlight:
+        signal:
+          - infraspinatus
+          - teres-minor
+      labels:
+        - infraspinatus
+        - teres-minor
+        - humerus
+      caption:
+        en: "External rotation: infraspinatus and teres minor turn the humerus outward. With the elbow bent and held near the side, the forearm swings away from the belly."
+        zh: 外旋：冈下肌和小圆肌把肱骨向外转。手肘弯曲并靠近身体时，前臂会从腹前向外摆。
+    - pose: turn-in
+      camera: front
+      ghost:
+        - deltoid-anterior
+        - deltoid-lateral
+        - deltoid-posterior
+        - trapezius-descending
+        - pectoralis-major-clavicular
+        - serratus-anterior
+        - biceps-brachii-long
+        - latissimus-dorsi
+        - pectoralis-major-sternocostal
+        - rhomboid-major
+        - trapezius-transverse
+        - triceps-brachii
+        - skin-outline
+        - scapula
+        - thorax
+      highlight:
+        signal:
+          - subscapularis
+          - teres-major
+      labels:
+        - subscapularis
+        - teres-major
+        - humerus
+      caption:
+        en: "Internal rotation: subscapularis turns the humerus inward. Teres major can assist; it also draws a raised arm towards the side."
+        zh: 内旋：肩胛下肌把肱骨向内转，大圆肌可以协助；大圆肌还帮助把举起的手臂拉向身体侧面。
+    - pose: cuff-steady
+      camera: close-shoulder
+      ghost:
+        - deltoid-anterior
+        - deltoid-lateral
+        - deltoid-posterior
+        - trapezius-descending
+        - pectoralis-major-clavicular
+        - serratus-anterior
+        - biceps-brachii-long
+        - latissimus-dorsi
+        - pectoralis-major-sternocostal
+        - rhomboid-major
+        - trapezius-transverse
+        - triceps-brachii
+        - skin-outline
+      highlight:
+        signal:
+          - supraspinatus
+          - infraspinatus
+          - teres-minor
+          - subscapularis
+      labels:
+        - supraspinatus
+        - infraspinatus
+        - teres-minor
+        - subscapularis
+        - humerus
+      caption:
+        en: "Stabilisation: the cuff works together to keep the humeral head supported in the glenoid. The model's shortening cue shows participation, not a measured activation percentage."
+        zh: 稳定：肩袖共同工作，让肱骨头在关节盂里得到支持。模型的缩短只是表示参与，并不是测出的激活百分比。
+    - pose: reach
+      camera: left-side
+      ghost:
+        - deltoid-anterior
+        - deltoid-lateral
+        - deltoid-posterior
+        - pectoralis-major-clavicular
+        - biceps-brachii-long
+        - latissimus-dorsi
+        - pectoralis-major-sternocostal
+        - rhomboid-major
+        - trapezius-transverse
+        - triceps-brachii
+        - skin-outline
+      highlight:
+        signal:
+          - serratus-anterior
+        cold:
+          - trapezius-descending
+      labels:
+        - serratus-anterior
+        - trapezius-descending
+        - scapula
+      caption:
+        en: The shoulder blade is a moving base. Serratus anterior and trapezius help reposition it as you reach and raise the arm; this simplified joint shows only a small part of that motion.
+        zh: 肩胛骨是会活动的底座。够物和抬臂时，前锯肌与斜方肌帮助调整它的位置；简化关节只演示其中一小部分。
+  index:
+    parts:
+      - deltoid-anterior
+      - deltoid-lateral
+      - deltoid-posterior
+      - supraspinatus
+      - infraspinatus
+      - teres-minor
+      - subscapularis
+      - teres-major
+      - pectoralis-major-clavicular
+      - trapezius-transverse
+      - rhomboid-major
+      - trapezius-descending
+      - serratus-anterior
+      - humerus
+      - scapula
+---
+
+<Lang en>
+
+Watch the upper arm rather than the hand. A muscle pulls its insertion towards its origin; where its tendon passes around the joint helps decide the direction. The same muscle can contribute differently as the arm changes position [M1].
+
+**Anterior deltoid** helps with shoulder flexion: the arm rises forward. **Lateral deltoid** helps with <Term id="abduction">abduction</Term>, lifting the arm away from the body's side. **Posterior deltoid** helps with extension, pulling it backwards, and <Term id="horizontal-abduction">horizontal abduction</Term>, opening a raised arm backwards. These are the useful front, side and rear distinctions, with overlapping roles [M2] [M31].
+
+**Supraspinatus** assists abduction and stabilisation. **Infraspinatus** and **teres minor** produce <Term id="external-rotation">external rotation</Term>, turning the humerus outward. **Subscapularis** produces internal rotation. Bend the elbow comfortably near the side to see rotation clearly: the forearm swings as the upper arm turns, without the torso twisting [M1].
+
+Together the cuff's <Num s="M2">four</Num> muscles support the humeral head in the glenoid. That stabilising work accompanies lifting and turning [M86]. **Teres major**, outside the cuff, helps draw the arm back, inward and towards the side [M1] [M2].
+
+Finally, the scapula is not a fixed wall. Serratus anterior and trapezius help move it when you reach or lift overhead. Pulling the shoulder blade towards the spine is different from pulling the humerus backwards; both can happen during a row [M2] [M29]. <FlyTo preset="left-side">See the moving base</FlyTo>
+
+<More title={{ en: "Demonstration angles are design values", zh: "演示角度是设计值" }}>
+
+Poses and contraction stripes illustrate direction, not a clinical range of motion or a measured percentage of muscle activity. The shoulder and elbow turn on a simplified rig. The scapula turns a little around the clavicle chain rather than truly sliding across the ribs. Stabilisation is especially schematic: real opposing muscle forces are not simulated.
+
+</More>
+
+<More title={{ en: "The model shows partial movements", zh: "模型显示局部动作" }}>
+
+Large overhead ranges stretch this rig's shoulder skinning, so the demonstration stays within a limited range. The exercise cards and their two-panel sketches describe the full technique. A small model movement is not a rule for how far a real person should move.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+观察上臂，而不是只看手。肌肉把止点拉向起点，腱从关节哪一侧经过，有助于决定拉动方向。手臂位置变化时，同一块肌肉也可能以不同方式参与 [M1]。
+
+**三角肌前部**帮助肩屈，让手臂前举；**中部**帮助<Term id="abduction">外展</Term>，让手臂离开身体侧面；**后部**帮助肩伸，把手臂后拉，也帮助<Term id="horizontal-abduction">水平外展</Term>，把抬起的手臂向后打开。前、中、后的区别很有用，但工作仍会重叠 [M2] [M31]。
+
+**冈上肌**协助外展与稳定。**冈下肌**和**小圆肌**让肱骨<Term id="external-rotation">外旋</Term>；**肩胛下肌**让它内旋。把手肘舒服地弯曲、靠近身体，就能看清旋转：上臂转动时前臂摆动，躯干不用跟着扭 [M1]。这种观察方法把肩部旋转与弯肘区分开，也把上臂骨移动与肩胛骨移动区分开。模型里的收缩条纹让拉力方向更容易看清，但颜色深浅不能比较肌肉的实际用力大小。
+
+肩袖的<Num s="M2">四块</Num>肌肉一起支持关节盂里的肱骨头，稳定工作伴随抬臂和旋转 [M86]。袖外的**大圆肌**帮助把手臂往后、往内、往身体侧面拉 [M1] [M2]。
+
+肩胛骨也不是固定墙壁。伸手或高举时，前锯肌和斜方肌帮助移动它。肩胛骨向脊柱靠拢，与肱骨向后移动是不同动作；划船时两者可以同时发生 [M2] [M29]。<FlyTo preset="left-side">看活动的底座</FlyTo>
+
+<More title={{ en: "Demonstration angles are design values", zh: "演示角度是设计值" }}>
+
+姿态和收缩条纹表示方向，不是临床活动范围，也不是测出的肌肉活动百分比。肩和肘在简化骨架上转动。肩胛骨只随锁骨关节链稍微转动，没有真的沿肋骨滑动。稳定尤其是示意：模型没有模拟真实肌肉之间的对抗力。
+
+</More>
+
+<More title={{ en: "The model shows partial movements", zh: "模型显示局部动作" }}>
+
+大幅高举会拉伸这套骨架的肩部蒙皮，所以演示保持有限幅度。动作卡与两格示意图描述完整技术。模型动作较小，不表示真实的人也必须限制在同样的幅度。
+
+</More>
+
+</Lang>

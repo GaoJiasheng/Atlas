@@ -1,0 +1,74 @@
+{
+  "exercises": [
+    "barbell-overhead-press",
+    "dumbbell-lateral-raise",
+    "chest-supported-dumbbell-row",
+    "dumbbell-pullover",
+    "pike-push-up",
+    "cable-external-rotation",
+    "cable-internal-rotation",
+    "straight-arm-cable-pulldown"
+  ],
+  "note": {
+    "en": "Practise pressing, raising, pulling and rotation across your training, accounting for shoulder work in chest and back sessions and allowing recovery before hard shoulder work again.",
+    "zh": "训练中兼顾推举、抬臂、后拉和旋转；把胸部、背部训练中肩部承担的工作算进去，再安排恢复后进行下一次较吃力的肩部训练。"
+  },
+  "session": {
+    "title": {
+      "en": "One way to arrange a shoulder session (an example, not a prescription)",
+      "zh": "一种肩部训练课的安排（示例，不是处方）"
+    },
+    "blocks": [
+      {
+        "exercise": "dumbbell-lateral-raise",
+        "note": {
+          "en": "Rehearse the arm path without a load or with very light dumbbells before the main lift; this is preparation, not tiring work.",
+          "zh": "主项前先空手或用很轻的哑铃熟悉抬臂路线，作为准备，不要练到疲劳。"
+        }
+      },
+      {
+        "exercise": "barbell-overhead-press",
+        "note": {
+          "en": "Choose this as the main press only after learning how to lift and return the bar safely; build from a manageable training bar.",
+          "zh": "学会安全取杠、回架后再用它作主推举，从能控制的训练杠开始。"
+        }
+      },
+      {
+        "exercise": "chest-supported-dumbbell-row",
+        "note": {
+          "en": "Add a controlled backward pull while the chest remains supported and the shoulders feel comfortable.",
+          "zh": "胸部保持支撑，在肩部舒服的范围内加入受控的后拉。"
+        }
+      },
+      {
+        "exercise": "dumbbell-lateral-raise",
+        "note": {
+          "en": "Use lighter arm raises after the main movements, without swinging or chasing height.",
+          "zh": "主项后用较轻的重量抬臂，不借摆动，也不追求高度。"
+        }
+      },
+      {
+        "exercise": "cable-external-rotation",
+        "note": {
+          "en": "Finish with light, controlled rotation only while you can keep the elbow and trunk steady.",
+          "zh": "末段用轻重量练受控旋转，始终能稳住肘和躯干。"
+        }
+      },
+      {
+        "exercise": "cable-internal-rotation",
+        "note": {
+          "en": "Practise the opposite rotation with the same attention to control, treating it as fitness practice rather than rehabilitation.",
+          "zh": "反向旋转同样重视控制，把它作为健身练习，不作为康复处方。"
+        }
+      }
+    ],
+    "note": {
+      "en": "This is an example selection, not a checklist to complete the whole exercise catalogue. Pike push-ups are an alternative press once learned; pulldowns and pullovers can be placed with back work instead. Keep demanding multi-joint work before tiring isolation work, rest until movement is controlled again, and progress only when the current version feels easy.",
+      "zh": "这是一种选法，不是要求把全部动作清单都做完。折髋俯卧撑学会后可作为替代推举；直臂下拉和上拉可放进背部训练。较吃力的多关节动作安排在疲劳前，单关节动作随后；休息到动作重新可控，同样的版本变轻松后再加难。"
+    },
+    "s": [
+      "M23",
+      "M24"
+    ]
+  }
+}

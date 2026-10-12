@@ -1,0 +1,162 @@
+---
+id: "training-the-legs"
+order: 5
+title:
+  en: "Training the legs"
+  zh: "训练腿部"
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: false
+  cutaway: "none"
+  pose: null
+  layers: ["superficial", "intermediate", "deep", "skeleton", "neighbours", "body"]
+  ghost: ["body", "neighbours"]
+  labels: ["group:superficial", "group:intermediate", "group:deep"]
+  camera: {"position": [0.65, 0.1, 4.3], "target": [0, -0.05, 0], "fov": 30}
+  summary:
+    en: "Squat, hinge, step, move sideways and work the ankle: exercise cards organised by equipment, with principles rather than prescriptions."
+    zh: "深蹲、髋铰链、迈步、侧向移动和踝动作：按器械排列卡片，只写原则，不给处方。"
+  beats:
+    - exercise:
+        id: "barbell-back-squat"
+        phase: "loop"
+      labels: ["gluteus-maximus", "vastus-lateralis", "vastus-medialis"]
+      caption:
+        en: "Barbell back squat: the hip and knee bend together. The index also opens the Romanian deadlift, where the main change is at the hip while the knees stay slightly bent."
+        zh: "杠铃背蹲让髋、膝一起弯曲。索引还可打开罗马尼亚硬拉：主要改变在髋，膝保持微屈。"
+      camera:
+        position: [2.8, 1.3, 4.9]
+        target: [0, -0.3, 0]
+        fov: 22
+    - exercise:
+        id: "dumbbell-goblet-squat"
+        phase: "loop"
+      labels: ["gluteus-maximus", "vastus-lateralis", "vastus-medialis"]
+      caption:
+        en: "Dumbbell goblet squat: hold the weight securely near the chest and rise under control. The dumbbell lateral lunge adds a sideways step; both cards are in the index."
+        zh: "哑铃高脚杯深蹲把重量稳在胸前，控制站起。哑铃侧弓步加入侧向迈步，两张卡都在索引中。"
+      camera:
+        position: [2.8, 1.3, 4.9]
+        target: [0, -0.3, 0]
+        fov: 22
+    - exercise:
+        id: "dumbbell-standing-calf-raise"
+        phase: "loop"
+      labels: ["gastrocnemius-medial", "gastrocnemius-lateral", "soleus"]
+      caption:
+        en: "Standing calf raise: gastrocnemius and soleus lift the heels. The seated dumbbell version bends the knees, changing gastrocnemius length; it does not switch that muscle off."
+        zh: "站姿提踵由腓肠肌和比目鱼肌抬起脚跟。哑铃坐姿版本屈膝，改变腓肠肌长度，却不是关闭它。"
+      camera:
+        position: [2.8, 1.3, 4.9]
+        target: [0, -0.3, 0]
+        fov: 22
+    - exercise:
+        id: "bodyweight-reverse-lunge"
+        phase: "loop"
+      labels: ["gluteus-maximus", "vastus-lateralis", "vastus-medialis"]
+      caption:
+        en: "Bodyweight reverse lunge: one foot steps back while the front leg bends and controls the return. Learn a stable, comfortable step before adding a load."
+        zh: "徒手后撤弓步，一脚后撤，前腿弯曲并控制回位。先学会稳定、舒服的步幅，再增加负荷。"
+      camera:
+        position: [2.8, 1.3, 4.9]
+        target: [0, -0.3, 0]
+        fov: 22
+    - exercise:
+        id: "wall-tibialis-raise"
+        phase: "loop"
+      labels: ["tibialis-anterior"]
+      caption:
+        en: "Wall-supported tibialis raise lifts the forefeet while the heels stay down. Heel walking keeps the forefeet raised; its separate card is in the index."
+        zh: "靠墙提脚让脚跟留地，抬起前脚掌。脚跟行走则持续保持前脚掌抬起，独立卡片在索引中。"
+      camera:
+        position: [2.8, 1.3, 4.9]
+        target: [0, -0.3, 0]
+        fov: 22
+    - exercise:
+        id: "cable-hip-abduction"
+        phase: "loop"
+      ghost: ["gluteus-maximus", "body", "neighbours"]
+      labels: ["gluteus-medius", "gluteus-minimus", "tensor-fasciae-latae"]
+      caption:
+        en: "Cable hip abduction pulls the working leg sideways. Hip adduction reverses the direction; use its card to compare the inner-thigh muscles with the outer-hip muscles."
+        zh: "绳索髋外展把活动腿拉向侧面。内收方向相反，可打开它的卡片，比较大腿内侧和髋外侧肌肉。"
+      camera:
+        position: [2.8, 1.3, 4.9]
+        target: [0, -0.3, 0]
+        fov: 22
+    - exercise:
+        id: "seated-leg-curl"
+        phase: "loop"
+      labels: ["biceps-femoris-long", "biceps-femoris-short", "semitendinosus", "semimembranosus"]
+      caption:
+        en: "Seated leg curl bends the knee against a machine. Both biceps heads take part, including the short head that cannot produce hip extension."
+        zh: "坐姿腿弯举对抗器械屈膝。股二头肌两头都参与，包含不能伸髋的短头。"
+      camera:
+        position: [2.8, 1.3, 4.9]
+        target: [0, -0.3, 0]
+        fov: 22
+    - exercise:
+        id: "band-ankle-dorsiflexion"
+        phase: "loop"
+      labels: ["tibialis-anterior"]
+      caption:
+        en: "Band ankle dorsiflexion pulls the forefoot up against elastic resistance. The equipment order ends here; open any indexed card for its sketch, detailed steps, cautions and sources."
+        zh: "弹力带踝背屈对抗弹性阻力抬起前脚掌。器械顺序到这里结束；点索引可查看示意图、详细步骤、注意事项和来源。"
+      camera:
+        position: [2.8, 1.3, 4.9]
+        target: [0, -0.3, 0]
+        fov: 22
+  index:
+    exercises: ["barbell-back-squat", "barbell-romanian-deadlift", "dumbbell-goblet-squat", "dumbbell-lateral-lunge", "dumbbell-standing-calf-raise", "seated-dumbbell-calf-raise", "bodyweight-reverse-lunge", "wall-tibialis-raise", "heel-walk", "cable-hip-abduction", "cable-hip-adduction", "seated-leg-curl", "band-ankle-dorsiflexion"]
+---
+
+<Lang en>
+
+Open an exercise in the index below. Its sketch and detailed steps appear above the prose; the model highlights the main muscles and helpers. The cards follow equipment order: barbell, dumbbell, body weight, cable, machine and band. Each card explains setup, movement, cues, mistakes and cautions, so use the whole card before trying a movement.
+
+The barbell back squat and dumbbell goblet squat combine hip and knee movement. The Romanian deadlift is a <Term id="hip-hinge">hip hinge</Term>: send the hips back with a steady trunk and slightly bent knees. The seated leg curl adds direct knee flexion, including work for biceps femoris short head. Reverse and lateral lunges practise stepping and returning under control. Cable abduction and adduction use opposing sideways hip pulls. Calf raises train pushing through the forefoot; tibialis raises, heel walking and band dorsiflexion train lifting or holding it up [M1].
+
+Choose a variation and load that let you control the whole path. Learn with body weight or a light load and a qualified coach; anyone under <Num s="M25">eighteen</Num> needs adult supervision [M25]. Feelings in a region can help locate the work, but soreness does not prove that one muscle was isolated or that an exercise was successful.
+
+Progress gradually once the movement is dependable, and allow recovery after demanding sessions [M23] [M24]. There is no required checklist to finish and no universal sets-and-repetitions plan here. These cards teach movements, not rehabilitation. This is general information, not medical advice; for pain or injury, consult a doctor or physiotherapist.
+
+<More title={{ en: "A sequence, not a prescription", zh: "顺序示例，不是处方" }}>
+
+An easy goblet squat can rehearse the movement. A familiar squat and hinge can come before lighter knee-flexion, hip-control and ankle work. Choose only the movements that suit your skills and available equipment; the session notes describe an example of ordering, not compulsory homework [M23] [M24].
+
+</More>
+
+<More title={{ en: "Evidence has limits", zh: "证据有边界" }}>
+
+The highlights are anatomical teaching roles, not measured percentages of effort. Higher surface muscle activity does not establish greater future muscle growth [M9]. A card linked from a small muscle may describe a helper or stabilising role rather than a way to isolate that muscle.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+点开下面索引里的动作，示意图和详细步骤会出现在正文上方，模型高亮主动肌与协同肌。卡片按器械排序：杠铃、哑铃、徒手、绳索、器械和弹力带。每张都写准备、步骤、提示、错误和注意事项，尝试前要读完整张。
+
+杠铃背蹲和高脚杯深蹲同时移动髋、膝；罗马尼亚硬拉练<Term id="hip-hinge">髋铰链</Term>，臀向后移，躯干稳住，膝微屈。坐姿腿弯举直接练屈膝，也包括股二头肌短头。后撤和侧弓步练迈步与回位；绳索外展、内收练相反的侧向拉力。提踵练前脚掌推地，胫骨前肌提脚、脚跟行走和弹力带背屈练抬起或保持前脚掌 [M1]。
+
+选择能控制全程的版本和负荷。初学先用自重或轻重量，请合格教练指导；未满<Num s="M25">十八岁</Num>要有成人监督 [M25]。某个区域有感觉能帮助认识位置，但酸痛不能证明单独练到某块肌肉，也不能判定训练成功。
+
+动作稳定后再逐步加难，吃力的训练后要恢复 [M23] [M24]。这里没有人人必须做完的清单，也没有统一组数次数。这些卡片教动作，不是康复方案。本页是一般性知识，不是医疗建议；疼痛或受伤请咨询医生或物理治疗师。
+
+<More title={{ en: "A sequence, not a prescription", zh: "顺序示例，不是处方" }}>
+
+可以用轻松的高脚杯深蹲熟悉动作，再做已掌握的深蹲和髋铰链，较轻的屈膝、髋控制与踝训练放后面。按能力和器械选择，训练课说明展示安排顺序，不是必须完成的作业 [M23] [M24]。
+
+</More>
+
+<More title={{ en: "Evidence has limits", zh: "证据有边界" }}>
+
+高亮是解剖教学中的角色，不是实测出力比例。表面肌电更高，不能证明以后肌肉长得更多 [M9]。小肌肉链接的卡片可能体现协同或稳定作用，不代表可以单独训练它。
+
+</More>
+
+</Lang>

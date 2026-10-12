@@ -1,0 +1,297 @@
+---
+id: training-the-shoulders
+order: 5
+title:
+  en: Training the shoulders
+  zh: 怎么练肩部
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  pose: null
+  layers:
+    - superficial
+    - intermediate
+    - deep
+    - skeleton
+    - neighbours
+    - body
+  ghost:
+    - skin-outline
+  exercise:
+    id: barbell-overhead-press
+    phase: loop
+  labels:
+    - deltoid-anterior
+    - deltoid-lateral
+    - triceps-brachii
+  camera:
+    position:
+      - 1.5
+      - 0.7
+      - 4.2
+    target:
+      - 0
+      - 0.04
+      - 0
+    fov: 22
+  summary:
+    en: "Press, raise, row, rotate and pull: use the cards and sketches to learn controlled movements."
+    zh: 推、举、划、旋、拉：用动作卡和示意图学习受控的动作。
+  beats:
+    - exercise:
+        id: barbell-overhead-press
+        phase: loop
+      labels:
+        - deltoid-anterior
+        - deltoid-lateral
+        - triceps-brachii
+        - pectoralis-major-clavicular
+        - serratus-anterior
+        - trapezius-descending
+      caption:
+        en: "Barbell overhead press: deltoid helps raise the arm while triceps straightens the elbow. The model shows part of the press; use the card's sketch for the full overhead position."
+        zh: 杠铃推举：三角肌帮助抬臂，肱三头肌伸肘。模型显示推举的一部分；完整头顶姿态请看动作卡示意图。
+      ghost:
+        - skin-outline
+    - exercise:
+        id: dumbbell-lateral-raise
+        phase: loop
+      labels:
+        - deltoid-lateral
+        - supraspinatus
+        - deltoid-anterior
+        - serratus-anterior
+        - trapezius-descending
+      ghost:
+        - skin-outline
+        - pectoralis-major-clavicular
+        - biceps-brachii-long
+        - latissimus-dorsi
+        - pectoralis-major-sternocostal
+        - rhomboid-major
+        - trapezius-transverse
+        - triceps-brachii
+        - deltoid-posterior
+      caption:
+        en: "Dumbbell lateral raise: lift the arms sideways and slightly forward, without swinging the trunk. The lateral deltoid drives the raise; supraspinatus helps lift and steady the joint."
+        zh: 哑铃侧平举：手臂向侧面稍靠前抬起，不靠躯干摇摆。三角肌中部驱动侧举，冈上肌帮助抬臂并稳定关节。
+    - exercise:
+        id: chest-supported-dumbbell-row
+        phase: loop
+      labels:
+        - deltoid-posterior
+        - teres-major
+        - latissimus-dorsi
+        - biceps-brachii-long
+        - trapezius-transverse
+        - rhomboid-major
+      camera:
+        position:
+          - 1.8
+          - 1.1
+          - -3.8
+        target:
+          - 0
+          - 0
+          - 0
+        fov: 22
+      caption:
+        en: "Chest-supported dumbbell row: the chest stays supported while the elbows travel back. Posterior deltoid moves the upper arm; middle trapezius and rhomboids move the shoulder blades."
+        zh: 胸托哑铃划船：胸部保持支撑，肘向后走。三角肌后部移动上臂，斜方肌横部和菱形肌移动肩胛骨。
+      ghost:
+        - skin-outline
+    - exercise:
+        id: dumbbell-pullover
+        phase: loop
+      labels:
+        - teres-major
+        - latissimus-dorsi
+        - pectoralis-major-sternocostal
+        - triceps-brachii
+      camera:
+        position:
+          - 1.8
+          - 2
+          - 3.5
+        target:
+          - 0
+          - -0.06
+          - 0
+        fov: 22
+      caption:
+        en: "Dumbbell pullover: a raised arm returns towards the chest under control. Teres major helps shoulder extension with chest and back muscles. The sketch shows the shared dumbbell and leg position."
+        zh: 哑铃仰卧上拉：举起的手臂受控地回向胸前。大圆肌与胸背肌肉协助肩伸。共握哑铃与下肢位置请看示意图。
+      ghost:
+        - skin-outline
+    - exercise:
+        id: pike-push-up
+        phase: loop
+      labels:
+        - deltoid-anterior
+        - deltoid-lateral
+        - triceps-brachii
+        - serratus-anterior
+        - trapezius-descending
+        - pectoralis-major-clavicular
+      camera:
+        position:
+          - 1.8
+          - 1.1
+          - 3.8
+        target:
+          - 0
+          - -0.06
+          - 0
+        fov: 22
+      caption:
+        en: "Pike push-up: body weight loads the press, and the head is never a support point. This rig shows the arm action only; the sketch supplies the folded-hip body position."
+        zh: 折髋俯卧撑：用体重给推的动作加负荷，头不能当支撑点。这套骨架只显示手臂动作；折髋体位请看示意图。
+      ghost:
+        - skin-outline
+    - exercise:
+        id: cable-external-rotation
+        phase: loop
+      ghost:
+        - deltoid-anterior
+        - deltoid-lateral
+        - trapezius-descending
+        - pectoralis-major-clavicular
+        - serratus-anterior
+        - biceps-brachii-long
+        - latissimus-dorsi
+        - pectoralis-major-sternocostal
+        - rhomboid-major
+        - trapezius-transverse
+        - triceps-brachii
+        - skin-outline
+      labels:
+        - infraspinatus
+        - teres-minor
+        - deltoid-posterior
+      caption:
+        en: "Cable external rotation: with the elbow kept near the side, turn the upper arm outward against light resistance. Infraspinatus and teres minor pull; twisting the trunk changes the exercise."
+        zh: 绳索肩外旋：肘靠近身体，上臂对抗轻阻力向外转。冈下肌和小圆肌拉动；扭躯干就变成了别的动作。
+    - exercise:
+        id: cable-internal-rotation
+        phase: loop
+      ghost:
+        - deltoid-anterior
+        - deltoid-lateral
+        - deltoid-posterior
+        - trapezius-descending
+        - serratus-anterior
+        - biceps-brachii-long
+        - latissimus-dorsi
+        - pectoralis-major-sternocostal
+        - rhomboid-major
+        - trapezius-transverse
+        - triceps-brachii
+        - skin-outline
+        - scapula
+        - thorax
+      labels:
+        - subscapularis
+        - teres-major
+        - pectoralis-major-clavicular
+      caption:
+        en: "Cable internal rotation: the humerus turns inward and the forearm crosses towards the belly. Subscapularis is the cuff muscle producing this direction; keep the wrist and trunk quiet."
+        zh: 绳索肩内旋：肱骨向内转，前臂转向腹前。肩胛下肌是产生这个方向的肩袖肌；手腕和躯干保持稳定。
+    - exercise:
+        id: straight-arm-cable-pulldown
+        phase: loop
+      labels:
+        - teres-major
+        - latissimus-dorsi
+        - deltoid-posterior
+        - pectoralis-major-sternocostal
+        - triceps-brachii
+      caption:
+        en: "Straight-arm cable pulldown: draw the upper arms from in front towards the sides, with little elbow movement. Teres major assists latissimus dorsi; the sketch shows the bar and cable path."
+        zh: 绳索直臂下拉：肘几乎不动，把上臂从前方拉向身体侧面。大圆肌帮助背阔肌；短杆和绳索轨迹请看示意图。
+      ghost:
+        - skin-outline
+  index:
+    exercises:
+      - barbell-overhead-press
+      - dumbbell-lateral-raise
+      - chest-supported-dumbbell-row
+      - dumbbell-pullover
+      - pike-push-up
+      - cable-external-rotation
+      - cable-internal-rotation
+      - straight-arm-cable-pulldown
+    parts:
+      - deltoid-anterior
+      - deltoid-lateral
+      - deltoid-posterior
+      - supraspinatus
+      - infraspinatus
+      - teres-minor
+      - subscapularis
+      - teres-major
+      - triceps-brachii
+      - pectoralis-major-clavicular
+      - pectoralis-major-sternocostal
+      - trapezius-transverse
+      - rhomboid-major
+      - latissimus-dorsi
+      - biceps-brachii-long
+      - serratus-anterior
+      - trapezius-descending
+---
+
+<Lang en>
+
+The index groups the exercises by equipment: barbell, dumbbell, body weight and cable. Open a card to see its sketch, preparation, steps, cues and mistakes. Orange shows the prime movers, blue-grey the helpers. These colours describe roles; they are not measured muscle activity.
+
+The movements ask different questions of the shoulder. **Overhead presses** and **pike push-ups** combine raising the upper arm with straightening the elbow. A **lateral raise** emphasises lifting sideways. The **chest-supported row** combines moving the upper arm backwards with drawing the scapula towards the spine. **Cable rotations** turn the humerus with the elbow near the side. The **pulldown** and **pullover** bring a raised arm back towards the body. Shoulder muscles also stabilise the joint during movements driven by the chest and back [M1] [M2].
+
+Learn the movement with body weight or a light load and a qualified coach. Anyone <Num s="M25">under 18</Num> should practise with adult supervision. Body weight can still be demanding: use an easier variation when you cannot control the lowering phase [M25].
+
+Choose a comfortable range you can reverse smoothly. Increase load gradually once the movement is controlled, and allow recovery between demanding sessions [M23] [M24]. Shoulder training also includes the work done during chest presses and back pulls.
+
+Research may report <Term id="emg">EMG</Term>, an electrical activity measurement. Higher EMG does not establish greater muscle growth or prove that an exercise suits every person [M9]. These cards offer principles, not an individual training plan. They are general information, not medical advice; for pain or injury, consult a doctor or physiotherapist.
+
+<More title={{ en: "A sample session, not a prescription", zh: "训练课示例，不是处方" }}>
+
+A coach might begin with easy movement practice, then a suitable press, a supported row, a light lateral raise and controlled rotation work. Multi-joint work can come before simpler single-joint movements [M23]. The session in the exercise index is an example; it does not require completing every exercise or prescribe sets and repetitions.
+
+</More>
+
+<More title={{ en: "Sketches complete the demonstration", zh: "示意图补全演示" }}>
+
+The rig has shoulder, shoulder-girdle, elbow and hand joints, but no moving hips or knees. It cannot reproduce the full pike position or pullover leg support. Cable attachments and the shared pullover dumbbell are also simplified. Read the two-panel sketch and steps together, then learn the technique with qualified instruction.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+索引按杠铃、哑铃、徒手和绳索分组。打开动作卡，可以看示意图、准备、步骤、要点和错误。橙色表示主动肌，蓝灰色表示协同肌；这些颜色说明分工，不是测出的肌肉活动。
+
+各动作给肩部不同任务。**推举**和**折髋俯卧撑**把抬臂与伸肘结合；**侧平举**侧重侧举；**胸托划船**同时让上臂后移、肩胛骨靠向脊柱；**绳索旋转**让肱骨转动，肘靠近身体；**下拉**和**上拉**把举起的手臂拉回。胸背肌肉主导的动作里，肩部也要稳定关节 [M1] [M2]。
+
+第一次用自重或轻重量，在合格教练指导下学。<Num s="M25">未满十八岁</Num>应在成人监督下练习。徒手也可能很吃力；下放不能控制时，选择更简单的变化 [M25]。
+
+选择舒服、能平稳返回的幅度。动作受控后才小步加重，较累的训练之间留出恢复 [M23] [M24]。练胸的推和练背的拉，也计入肩部负荷。
+
+研究可能报告<Term id="emg">肌电</Term>，即肌肉电活动测量。肌电较高不能证明长得更多，也不能证明动作适合每个人 [M9]。卡片只给原则，不是个人计划。可掌握的技术比盲目模仿重量更重要。本页是一般性知识，不是医疗建议；疼痛或受伤请咨询医生或物理治疗师。
+
+<More title={{ en: "A sample session, not a prescription", zh: "训练课示例，不是处方" }}>
+
+教练可能先安排简单动作练习，再选适合的推举、支撑划船、轻侧平举和受控旋转。多关节练习可放在较简单的单关节动作前面 [M23]。动作索引里的训练课是示例，并不要求做完全部动作，也没有规定组数次数。
+
+</More>
+
+<More title={{ en: "Sketches complete the demonstration", zh: "示意图补全演示" }}>
+
+骨架有肩、肩带、肘和手关节，没有会动的髋和膝，所以无法完整重现折髋姿势与上拉时的腿部支撑。绳索连接和共同握持的上拉哑铃也有简化。把两格示意图与步骤一起读，再在合格人员指导下学动作。
+
+</More>
+
+</Lang>

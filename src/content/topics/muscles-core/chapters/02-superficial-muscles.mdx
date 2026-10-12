@@ -1,0 +1,156 @@
+---
+id: superficial-muscles
+order: 2
+title:
+  en: The surface layer
+  zh: 浅层
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  pose: null
+  layers:
+  - superficial
+  - intermediate
+  - deep
+  - skeleton
+  - neighbours
+  - body
+  ghost:
+  - neighbours
+  - body
+  labels:
+  - rectus-abdominis
+  - external-oblique
+  - pelvis
+  camera:
+    position:
+    - 0
+    - 0.08
+    - 1.85
+    target:
+    - 0
+    - 0.005
+    - 0.02
+    fov: 30
+  summary:
+    en: Rectus runs lengthwise at the front; external oblique slopes across the sides.
+    zh: 腹直肌沿腹前纵行，腹外斜肌斜跨两侧。
+  beats:
+  - ghost:
+    - intermediate
+    - deep
+    - neighbours
+    - body
+    labels:
+    - rectus-abdominis
+    - external-oblique
+    caption:
+      en: 'Two superficial muscle shapes: rectus as a vertical strap and external oblique as a broad side sheet. The
+        deeper tissues are faded.'
+      zh: 浅层有两种形状：腹直肌是纵向长带，腹外斜肌是宽阔侧腹肌片，深处结构已调淡。
+  - part: rectus-abdominis
+    sites:
+    - rectus-abdominis
+    labels:
+    - rectus-abdominis
+    - pelvis
+    - thorax
+    caption:
+      en: Rectus starts at the pubis and reaches the costal cartilages above. Hollow markers show origins; solid markers
+        show insertions.
+      zh: 腹直肌起于耻骨，向上连到肋软骨；空心标记表示起点，实心标记表示止点。
+  - pose: trunk-flexion
+    highlight:
+      signal:
+      - rectus-abdominis
+    sites: []
+    labels:
+    - rectus-abdominis
+    caption:
+      en: The highlighted rectus shows a schematic shortening along its length. Its tendon bands divide the outline without
+        creating separate upper and lower muscles.
+      zh: 高亮腹直肌沿纵向示意缩短；腱划分开外形，并没有制造独立的上腹肌和下腹肌。
+  - camera: left-side
+    part: external-oblique
+    sites:
+    - external-oblique
+    labels:
+    - external-oblique
+    - thorax
+    - pelvis
+    caption:
+      en: External oblique reaches from the ribs towards the pelvic rim and broad tendon sheet. Its dominant fibres run
+        down and inward.
+      zh: 腹外斜肌从肋骨伸向骨盆上缘和宽阔腱膜，主要纤维向内下方走行。
+  - camera: on-my-body
+    view: xray
+    ghost: []
+    sites: []
+    labels:
+    - rectus-abdominis
+    - external-oblique
+    caption:
+      en: On the whole body, the midline strap and side wall can be located with light touch. Surface tension cannot
+        identify a single muscle working alone.
+      zh: 回到全身，轻触可以定位正中肌带和侧腹壁；表面变硬不能证明某一块肌肉在单独工作。
+  index:
+    parts:
+    - rectus-abdominis
+    - external-oblique
+    - pelvis
+    - thorax
+---
+
+<Lang en>
+
+Near the midline, **rectus abdominis** rises from the pubic crest and symphysis at the front of the pelvis to costal cartilages <Num s="M92">five to seven</Num>. Its fibres run mostly lengthwise. Tendon bands interrupt the visible muscle belly, producing a segmented outline, but the upper and lower regions belong to the same muscle [M92].
+
+A small curl draws the lower chest towards the pelvis. Rest fingertips lightly beside the abdominal midline and notice the strap firming. Do not dig into the belly or pull on the head. When the trunk stays still, rectus can instead help oppose the backward arch that an external load would produce [M92].
+
+**External oblique** starts on the outer surfaces of ribs <Num s="M92">five through twelve</Num>. Most fibres slope down and inward; the posterior fibres are more vertical. The muscle reaches the iliac crest and continues into an <Term id="aponeurosis">aponeurosis</Term>, a broad tendon sheet, towards the pubic region and the <Term id="linea-alba">linea alba</Term>, the midline tendon seam [M92].
+
+The lateral sheets help form the <Term id="rectus-sheath">rectus sheath</Term> around rectus. Their tendon connections transmit tension across the wall. With the pelvis held still, the left external oblique helps turn the chest right; both sides can help flex the trunk. A gently braced side wall can be felt beneath a flat hand, but touch cannot separate every working layer. <FlyTo preset="left-side">Follow the outer sheet</FlyTo>
+
+<More title={{ en: "A seam is not a muscle", zh: "白线不是肌肉" }}>
+
+The linea alba joins the tendon sheets of both sides. It transmits tension but does not actively shorten like a muscle. It is explained here without a separate mesh; the point markers show representative attachments, not every fibre of the aponeurosis [M92].
+
+</More>
+
+<More title={{ en: "Muscle exercise and abdominal fat", zh: "练腹肌与腹部脂肪" }}>
+
+Training the abdominal muscles cannot be relied on to selectively remove fat over them. In a trial with <Num s="M98">24</Num> sedentary adults over <Num s="M98">six weeks</Num>, an abdominal programme improved endurance without significant changes in abdominal-fat measurements. This tested a programme, not this curl-up alone [M98].
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+正中线两旁的**腹直肌**起于骨盆前方的耻骨嵴与耻骨联合，向上连到第 <Num s="M92">5–7</Num> 肋软骨。纤维大体纵行，横向腱划把肌腹轮廓分成几段。“上腹”和“下腹”仍是同一块肌肉的不同区域，不是两块独立肌肉 [M92]。
+
+小幅卷腹把下胸部带向骨盆。手指轻放在腹部正中线旁，可体会长肌带变硬；不用往腹部深按，也不拉头。躯干保持不动时，腹直肌也能帮助抵抗外力造成的后仰，不是只有卷起身体才会出力 [M92]。
+
+**腹外斜肌**起于第 <Num s="M92">5–12</Num> 肋外面，大多数纤维向内下斜行，后部更接近纵向。它连到髂嵴，并延续为宽阔的<Term id="aponeurosis">腱膜</Term>，走向耻骨区与正中线的<Term id="linea-alba">白线</Term> [M92]。
+
+侧腹肌的腱性薄片参与构成包住腹直肌的<Term id="rectus-sheath">腹直肌鞘</Term>，让张力能在腹壁传递。骨盆固定时，左腹外斜肌帮助胸口转向右侧；两侧一起可以帮助前屈。手掌轻触侧腹可感觉绷紧，却不能把共同工作的各层分别认出来。<FlyTo preset="left-side">沿着外层看</FlyTo>
+
+两端之间的张力可以经腱膜传到正中线，所以图上看到的肌腹并不是全部连接结构。训练时先辨认胸廓和骨盆的相对位置，比追求表面某个小区域的酸感更有帮助。
+
+<More title={{ en: "A seam is not a muscle", zh: "白线不是肌肉" }}>
+
+白线把两侧腱膜连在一起，传递张力，但不会像肌肉一样主动缩短。这里用文字说明，不另造网格；标记只画代表性附着，并不画出腱膜的每一束纤维 [M92]。
+
+</More>
+
+<More title={{ en: "Muscle exercise and abdominal fat", zh: "练腹肌与腹部脂肪" }}>
+
+不能指望练腹肌专门减去其上方的腹部脂肪。一项研究观察 <Num s="M98">24</Num> 名久坐成年人 <Num s="M98">6 周</Num>：腹部训练提高了耐力，腹部脂肪测量却未显著改变。它测试整套方案，不是单独测试本卡卷腹 [M98]。
+
+</More>
+
+</Lang>

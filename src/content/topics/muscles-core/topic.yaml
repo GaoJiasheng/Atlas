@@ -1,0 +1,14 @@
+id: muscles-core
+title: { en: "Core muscles", zh: "腰腹肌肉" }
+subtitle: { en: "Layer by layer: attachments, movement, control and training", zh: "一层一层看：附着、运动、稳定与训练" }
+subject: biology
+tags: [health, fitness, space]
+moe: []
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: draft
+shortTitle: { en: "Core muscles", zh: "腰腹肌肉" }
+note: { en: "Male reference anatomy · meshes Z-Anatomy / BodyParts3D, CC BY-SA 4.0", zh: "男性参考解剖 · 网格 Z-Anatomy / BodyParts3D，CC BY-SA 4.0" }

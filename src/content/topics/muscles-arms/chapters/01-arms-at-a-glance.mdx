@@ -1,0 +1,189 @@
+---
+id: arms-at-a-glance
+order: 1
+title:
+  en: The arms at a glance
+  zh: 一眼看手臂
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  pose: neutral-stand
+  layers:
+  - superficial
+  - intermediate
+  - deep
+  - skeleton
+  - neighbours
+  - body
+  ghost:
+  - neighbours
+  - body
+  sites: []
+  labels:
+  - group:superficial
+  - group:intermediate
+  camera:
+    position:
+    - 0.55
+    - 0.02
+    - 2.0
+    target:
+    - 0
+    - -0.19
+    - 0.02
+    fov: 30
+  summary:
+    en: Follow the muscles from shoulder to fingertips, then peel the surface away.
+    zh: 沿肩膀到指尖找肌肉，再剥开浅层。
+  beats:
+  - camera: on-my-body
+    labels:
+    - group:superficial
+    - group:intermediate
+    caption:
+      en: The arm region stands out against the muted body outline. Shoulder, elbow, forearm and wrist movements link it to the rest
+        of the body.
+      zh: 手臂肌肉在淡显的体表轮廓上突出。肩、肘、前臂和腕的动作把它与全身连接起来。
+  - camera: front
+    labels:
+    - biceps-brachii-long
+    - biceps-brachii-short
+    - flexor-carpi-radialis
+    caption:
+      en: 'From the front: biceps lies on the upper arm and the flexors continue towards the palm. The colours distinguish teaching
+        layers, not stronger and weaker muscles.'
+      zh: 从前面看：二头肌在上臂，屈肌沿前臂通向掌侧。颜色区分教学层次，不表示肌肉强弱。
+  - camera: back
+    labels:
+    - triceps-brachii-long
+    - triceps-brachii-lateral
+    - extensor-digitorum
+    caption:
+      en: 'From behind: triceps straightens the elbow, while the long forearm extensors lead towards the back of the hand.'
+      zh: 从后面看：三头肌伸肘，长条前臂伸肌通向手背。
+  - camera: left-side
+    view: exploded
+    explode: 0.7
+    labels:
+    - group:superficial
+    - group:intermediate
+    caption:
+      en: Peel moves the superficial muscles first, then the intermediate layer. The empty deep group records the muscles omitted from
+        this edition.
+      zh: 剥层先移开浅层，再移开中层。空的深层组记录本版未收入的肌肉。
+  - camera: front
+    ghost:
+    - superficial
+    - intermediate
+    - neighbours
+    - body
+    labels:
+    - scapula
+    - humerus
+    - radius
+    - ulna
+    - hand
+    caption:
+      en: 'Only the bones remain solid: scapula, humerus, radius, ulna and hand. Muscles pull across the joints between them.'
+      zh: 只让骨骼实显：肩胛骨、肱骨、桡骨、尺骨和手骨。肌肉跨过它们之间的关节施加拉力。
+  - camera: close-arm
+    ghost:
+    - biceps-brachii-long
+    - biceps-brachii-short
+    - neighbours
+    - body
+    labels:
+    - brachialis
+    - brachioradialis
+    - humerus
+    caption:
+      en: At the elbow, compare biceps with the deeper brachialis and the thumb-side brachioradialis. They share elbow bending but have
+        different attachments.
+      zh: 在肘部比较二头肌、较深的肱肌和拇指侧的肱桡肌。它们都屈肘，附着却不同。
+  index:
+    parts:
+    - biceps-brachii-long
+    - biceps-brachii-short
+    - triceps-brachii-long
+    - triceps-brachii-lateral
+    - brachioradialis
+    - pronator-teres
+    - flexor-carpi-radialis
+    - palmaris-longus
+    - flexor-carpi-ulnaris
+    - extensor-carpi-radialis-longus
+    - extensor-digitorum
+    - extensor-carpi-ulnaris
+    - brachialis
+    - triceps-brachii-medial
+    - coracobrachialis
+    - anconeus
+    - extensor-carpi-radialis-brevis
+    - flexor-digitorum-superficialis
+    - deltoid-anterior
+    - deltoid-lateral
+    - deltoid-posterior
+    - pectoralis-major-clavicular
+    - pectoralis-major-sternocostal
+    - pectoralis-major-abdominal
+    - latissimus-dorsi
+    - humerus
+    - radius
+    - ulna
+    - hand
+    - scapula
+---
+
+<Lang en>
+
+Bend your elbow, turn your palm upward, then open your hand. These small movements involve different muscles along the same limb. In front of the upper arm, **biceps brachii** has <Num s="M87">two</Num> heads. Behind it, **triceps brachii** has <Num s="M87">three</Num>. Much of the muscle that moves your fingers sits in the forearm, with long tendons carrying its pull into the hand [M87]. <FlyTo preset="on-my-body">Find the region on the body</FlyTo>
+
+The skeleton explains the arrangement. The scapula provides shoulder attachments; the humerus supports the upper arm. Below the elbow, the radius lies on the thumb side and the ulna on the little-finger side. They meet the wrist and hand bones. The radius can turn around the ulna, taking the palm with it [M87].
+
+An attachment closer to the body is usually called the <Term id="origin">origin</Term>; the other is the <Term id="insertion">insertion</Term>. A <Term id="tendon">tendon</Term> carries force from muscle to bone or other connective tissue. The fleshy, contractile region is the <Term id="muscle-belly">muscle belly</Term>. Hollow markers show origins, solid markers insertions, and a dashed line sketches the pull.
+
+The warm surface layer includes the biceps heads, outer triceps heads and long forearm muscles. Peel it back to see brachialis, the medial triceps head and other covered structures. The empty deep group means deeper forearm muscles are omitted from this model. Nearby deltoid, chest and back muscles are muted context for the shoulder's shared work.
+
+<More title={{ en: "Left and right belong to the body", zh: "左右以身体为准" }}>
+
+Left and right always mean the subject’s own sides. With palms facing forward, radius means the thumb-side forearm bone. Turning the palm does not change which bone it is. The model begins with softly bent elbows and palms turned partly inward. Attachment descriptions still use anatomical position.
+
+</More>
+
+<More title={{ en: "Where the mesh comes from", zh: "网格从哪里来" }}>
+
+Every mesh is selected from Z-Anatomy, an open atlas based on BodyParts3D. This is a male reference body, not a measurement of the reader. The mesh and derived geometry use CC BY-SA 4.0; the text has the site’s separate licence. Layer groups are teaching selections rather than complete anatomical compartments [M3] [M4].
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+先屈肘，再把掌心转向上，最后张开手指。同一条手臂上，这些动作由不同肌肉合作完成。上臂前面的**肱二头肌**有<Num s="M87">两个</Num>头，后面的**肱三头肌**有<Num s="M87">三个</Num>头。许多控制手指的肌腹其实在前臂，靠长长的肌腱把拉力传到手里 [M87]。<FlyTo preset="on-my-body">在全身上找到手臂</FlyTo>
+
+骨骼是理解它们的支架。肩胛骨提供肩部附着，肱骨撑起上臂；肘以下，桡骨在拇指侧，尺骨在小指侧，远端接着腕骨和手骨。桡骨能绕尺骨转动，带着掌心改变方向 [M87]。
+
+通常把靠近身体的一端叫<Term id="origin">起点</Term>，另一端叫<Term id="insertion">止点</Term>。<Term id="tendon">肌腱</Term>把肌肉的力传给骨或其他结缔组织，能收缩的肉质部分叫<Term id="muscle-belly">肌腹</Term>。空心圆表示起点，实心圆表示止点，虚线概括拉力方向。
+
+暖色浅层包括二头肌两头、三头肌外侧部分和长条前臂肌。剥开后，能看到肱肌、三头肌内侧头等被盖住的结构。深层组为空，表示本模型省略了前臂深层肌。淡显的三角肌、胸肌和背肌提醒你：肩部动作由邻区一起完成。
+
+沿一块肌肉点开卡片，就能把体表位置、骨性附着和作用连起来看。先认肱骨与前臂双骨，再追踪长腱通向手的路线，能减少把前臂肌误当成只负责屈肘的混淆。
+
+<More title={{ en: "Left and right belong to the body", zh: "左右以身体为准" }}>
+
+左右一律指身体自己的左右。解剖学姿势掌心朝前，桡骨在拇指侧；转动掌心，并不会让桡骨变成尺骨。 模型从肘轻屈、掌心部分朝内开始。附着说明仍按解剖学姿势描述。
+
+</More>
+
+<More title={{ en: "Where the mesh comes from", zh: "网格从哪里来" }}>
+
+所有网格选自基于 BodyParts3D 的开源图谱 Z-Anatomy。这是男性参考人体，不是读者身体的测量。网格与派生几何按 CC BY-SA 4.0 共享；文字遵循本站的独立许可。分层是教学选择，并不等于完整解剖间室 [M3] [M4]。
+
+</More>
+
+</Lang>

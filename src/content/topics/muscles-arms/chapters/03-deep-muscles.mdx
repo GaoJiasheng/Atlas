@@ -1,0 +1,204 @@
+---
+id: deep-muscles
+order: 3
+title:
+  en: Underneath
+  zh: 浅层下面
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  pose: neutral-stand
+  layers:
+  - superficial
+  - intermediate
+  - deep
+  - skeleton
+  - neighbours
+  - body
+  ghost:
+  - superficial
+  - neighbours
+  - body
+  sites: []
+  labels:
+  - brachialis
+  - humerus
+  - ulna
+  camera:
+    position:
+    - 0.55
+    - 0.02
+    - 2.0
+    target:
+    - 0
+    - -0.19
+    - 0.02
+    fov: 30
+  summary:
+    en: Fade the surface to find the elbow flexor beneath biceps and the covered forearm muscles.
+    zh: 淡显浅层，找到二头肌下面的屈肘肌和被盖住的前臂肌。
+  beats:
+  - camera: close-arm
+    ghost:
+    - biceps-brachii-long
+    - biceps-brachii-short
+    - neighbours
+    - body
+    sites:
+    - brachialis
+    labels:
+    - brachialis
+    - humerus
+    - ulna
+    caption:
+      en: With biceps faded, brachialis runs from the lower humerus to the ulna. Its insertion stays on the ulna when the palm turns.
+      zh: 淡显二头肌后，肱肌从肱骨下部走向尺骨。掌心转动时，它的止点仍在尺骨上。
+  - camera: left-side
+    ghost:
+    - superficial
+    - neighbours
+    - body
+    sites:
+    - coracobrachialis
+    labels:
+    - coracobrachialis
+    - scapula
+    - humerus
+    caption:
+      en: Coracobrachialis stops on the upper-arm bone. Its line of pull crosses the shoulder, not the elbow.
+      zh: 喙肱肌止于上臂骨，拉力线跨过肩，没有跨肘。
+  - camera: back
+    ghost:
+    - superficial
+    - neighbours
+    - body
+    sites:
+    - triceps-brachii-medial
+    - anconeus
+    labels:
+    - triceps-brachii-medial
+    - anconeus
+    - ulna
+    caption:
+      en: Behind the arm, fade the outer triceps heads to expose the medial head and small anconeus beside the elbow.
+      zh: 从后面淡显三头肌外侧部分，露出内侧头和肘旁小小的肘肌。
+  - camera: left-side
+    ghost:
+    - superficial
+    - neighbours
+    - body
+    sites:
+    - extensor-carpi-radialis-brevis
+    - flexor-digitorum-superficialis
+    labels:
+    - extensor-carpi-radialis-brevis
+    - flexor-digitorum-superficialis
+    - hand
+    caption:
+      en: The short radial wrist extensor leads to the third metacarpal. Beside the flexors, superficialis sends split tendons towards
+        the fingers.
+      zh: 桡侧腕短伸肌走向第三掌骨。屈肌旁的指浅屈肌把分叉肌腱送向手指。
+  - camera: close-arm
+    cutaway: transverse-arm
+    ghost:
+    - neighbours
+    - body
+    sites: []
+    labels:
+    - brachialis
+    - triceps-brachii-medial
+    - humerus
+    caption:
+      en: A transverse slice through the upper arm places brachialis in front of the humerus and the medial triceps head behind it.
+        Cut surfaces are a teaching view.
+      zh: 上臂横切面显示肱肌位于肱骨前方，三头肌内侧头位于后方。切面是教学视图。
+  - camera: left-side
+    cutaway: sagittal-arm
+    ghost:
+    - neighbours
+    - body
+    sites: []
+    labels:
+    - group:intermediate
+    - group:skeleton
+    caption:
+      en: The sagittal cut opens a second view through the arm. Follow bone and muscle together rather than treating the exposed pieces
+        as separate systems.
+      zh: 矢状切面从另一个方向打开手臂。一起追踪骨和肌肉，不把露出的部件看成互不相干的系统。
+  index:
+    parts:
+    - brachialis
+    - coracobrachialis
+    - triceps-brachii-medial
+    - anconeus
+    - extensor-carpi-radialis-brevis
+    - extensor-carpi-radialis-longus
+    - flexor-digitorum-superficialis
+    - biceps-brachii-long
+    - biceps-brachii-short
+    - triceps-brachii-long
+    - triceps-brachii-lateral
+    - humerus
+    - ulna
+    - radius
+    - hand
+    - scapula
+---
+
+<Lang en>
+
+Fade both biceps heads and **brachialis** appears against the lower front of the humerus. It attaches to the ulna at the coronoid process and nearby tuberosity. Because that attachment is on the ulna, turning the radius does not change its basic task: brachialis is a main elbow flexor whether your palm faces up, down or inward [M87]. It is not a smaller version of biceps.
+
+Higher up, **coracobrachialis** runs from the coracoid process to the medial humeral shaft. Its fibres pull the upper arm forward and towards the body. It stops on the humerus, so it does not bend the elbow [M87]. <FlyTo preset="left-side">Look beneath the surface</FlyTo>
+
+Behind the humerus, the **medial triceps head** is largely covered by the other heads. It joins their elbow-extending tendon. **Anconeus**, a small triangular muscle beside the elbow, runs from the humerus to the upper ulna and assists extension [M87].
+
+In the forearm, **extensor carpi radialis brevis** lies beside the long radial extensor, reaching the back of the third metacarpal. **Flexor digitorum superficialis** has <Num s="M87">four</Num> tendons that split before attaching to the middle finger bones. Its principal finger action bends the middle joint of each finger [M87].
+
+The transverse slice shows these muscles around their bones. Here, “intermediate” describes what this teaching view exposes after peeling. It is not a claim that the whole forearm has just these layers. Deeper finger and thumb flexors, the deep pronator and supinator are outside this model's selection.
+
+<More title={{ en: "Finger tendons pass through one another", zh: "手指肌腱相互穿过" }}>
+
+Each superficialis tendon splits around the tendon of flexor digitorum profundus. The superficial tendon ends on the middle phalanx; the deeper tendon continues to the distal phalanx. The deeper muscle is omitted here, not shown as a selectable mesh [M87].
+
+</More>
+
+<More title={{ en: "A teaching layer is not a compartment", zh: "教学层不等于解剖间室" }}>
+
+Some muscles move between visible and covered positions along their length. The medial triceps head is covered proximally but appears beside the tendon distally. Flexor digitorum superficialis is called superficial in relation to the deeper finger flexor, even though other forearm muscles partly cover it [M87].
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+淡显二头肌两头，贴在肱骨下部前面的**肱肌**就露出来了。它接到尺骨冠突和附近的尺骨粗隆。止点在尺骨上，所以桡骨转动不改变它的基本任务：无论掌心朝上、朝下还是朝内，肱肌都是屈肘的主力 [M87]，不是小号二头肌。
+
+靠近肩膀的**喙肱肌**从喙突走到肱骨体内侧，纤维把上臂向前、向身体拉。它止于肱骨，不跨肘，因此不负责屈肘 [M87]。<FlyTo preset="left-side">看浅层下面</FlyTo>
+
+肱骨后面的**三头肌内侧头**大多被其他头遮住，共同参与伸肘。肘旁的小三角肌叫**肘肌**，从肱骨走到尺骨近端，帮助伸肘 [M87]。
+
+前臂的**桡侧腕短伸肌**位于长伸肌旁，止于第三掌骨底背侧。**指浅屈肌**有<Num s="M87">四条</Num>腱，各自分叉后接到中节指骨，主要屈各指的近侧指间关节 [M87]。
+
+横切面能看出这些肌肉怎样围着骨骼排列。这里的“中层”，指教学视图剥开后露出的结构，并不表示真实前臂只有这些层。深层指屈肌、拇指屈肌、旋前方肌和旋后肌不在本模型的选择范围内。
+
+这些附着也解释了外观为什么不等于功能：二头肌鼓起明显，不代表只有它屈肘；肱肌被遮住，仍能持续发力。浅层和中层的差别主要在观察深度，不是重要程度的排名。
+
+<More title={{ en: "Finger tendons pass through one another", zh: "手指肌腱相互穿过" }}>
+
+每条指浅屈肌腱分叉，让指深屈肌腱从中间穿过。浅腱止于中节指骨，深腱继续到远节指骨。这里省略了指深屈肌，没有可选网格 [M87]。
+
+</More>
+
+<More title={{ en: "A teaching layer is not a compartment", zh: "教学层不等于解剖间室" }}>
+
+一块肌肉沿途可能时而露出、时而被盖住。三头肌内侧头近端被遮挡，远端在止腱旁露出。指浅屈肌相对指深屈肌称“浅”，却仍有部分被其他前臂肌盖住 [M87]。
+
+</More>
+
+</Lang>

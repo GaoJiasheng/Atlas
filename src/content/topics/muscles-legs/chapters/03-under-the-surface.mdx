@@ -1,0 +1,120 @@
+---
+id: "under-the-surface"
+order: 3
+title:
+  en: "Under the surface"
+  zh: "浅层下面"
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: false
+  cutaway: "none"
+  pose: null
+  layers: ["superficial", "intermediate", "deep", "skeleton", "neighbours", "body"]
+  ghost: ["body", "neighbours"]
+  labels: ["group:superficial", "group:intermediate", "group:deep"]
+  camera: {"position": [1.2, -0.05, 2.4], "target": [0.07, -0.24, -0.02], "fov": 30}
+  summary:
+    en: "The deeper gluteal, thigh and calf muscles: smaller layers share the same joints with the surface muscles."
+    zh: "深处的臀肌、大腿肌和小腿肌，与浅层共同拉动同样的关节。"
+  beats:
+    - camera: "hip"
+      ghost: ["gluteus-maximus", "body", "neighbours"]
+      labels: ["gluteus-medius", "gluteus-minimus", "femur"]
+      sites: ["gluteus-medius", "gluteus-minimus"]
+      caption:
+        en: "Fade gluteus maximus: gluteus medius spreads from the outer pelvis to the greater trochanter. Deeper still lies gluteus minimus."
+        zh: "把臀大肌调淡：臀中肌从骨盆外面展开，止于股骨大转子。它更深处是臀小肌。"
+    - camera: "front"
+      ghost: ["rectus-femoris", "body", "neighbours"]
+      labels: ["vastus-intermedius", "femur", "patella"]
+      sites: ["vastus-intermedius"]
+      caption:
+        en: "With rectus femoris faded, vastus intermedius appears directly against the front of the femoral shaft. It also joins the knee-extending tendon."
+        zh: "把股直肌调淡，股中间肌就露在股骨干前方。它也汇入伸膝的共同肌腱。"
+    - camera: "deep-view"
+      ghost: ["superficial", "body", "neighbours"]
+      labels: ["pectineus", "adductor-longus", "adductor-brevis", "adductor-magnus"]
+      caption:
+        en: "The inner thigh: pectineus and the long and short adductors run from the pubis to the femur. Adductor magnus spreads much farther down the bone."
+        zh: "大腿内侧：耻骨肌、长收肌和短收肌从耻骨到股骨，大收肌铺得更广、更向下。"
+    - camera: "front"
+      ghost: ["body", "neighbours", "rectus-femoris", "vastus-medialis"]
+      labels: ["gracilis", "sartorius", "semitendinosus", "lower-leg"]
+      caption:
+        en: "Gracilis reaches beyond the knee to the inner tibia. Sartorius and semitendinosus end nearby: these three tendons form the pes anserinus."
+        zh: "股薄肌跨膝到达胫骨内侧，缝匠肌和半腱肌也止在附近。这三条腱构成鹅足。"
+    - camera: "back"
+      ghost: ["body", "neighbours", "semitendinosus", "biceps-femoris-long", "gluteus-maximus"]
+      labels: ["semimembranosus", "biceps-femoris-short", "femur"]
+      caption:
+        en: "Behind the thigh, semimembranosus lies beneath semitendinosus. The short head of biceps femoris begins on the femur, so it crosses only the knee."
+        zh: "大腿后面，半膜肌在半腱肌深处。股二头肌短头起于股骨，只跨膝，不跨髋。"
+    - camera: "calf"
+      ghost: ["body", "neighbours", "gastrocnemius-medial", "gastrocnemius-lateral"]
+      labels: ["soleus", "lower-leg", "foot"]
+      sites: ["soleus"]
+      caption:
+        en: "Fade gastrocnemius to uncover soleus. Soleus starts below the knee on the lower-leg bones but joins gastrocnemius at the heel through the Achilles tendon."
+        zh: "把腓肠肌调淡，露出比目鱼肌。它起于膝下的小腿骨，却与腓肠肌一起经跟腱到达脚跟。"
+    - cutaway: "transverse-thigh"
+      camera: {"position": [0.55, 0.8, 1.15], "target": [0.08, -0.25, -0.02], "fov": 30}
+      ghost: ["body", "neighbours"]
+      labels: ["group:superficial", "group:intermediate", "group:deep", "femur"]
+      sites: []
+      caption:
+        en: "A transverse cut at the middle of the thigh. The quadriceps lie in front of the femur, the hamstrings behind, and the adductors along the inner side. The display layers are not concentric rings."
+        zh: "横切大腿中段：股四头肌在股骨前面，腘绳肌在后面，内收肌群在内侧。展示层并不是一圈圈同心环。"
+  index:
+    parts: ["gluteus-maximus", "gluteus-medius", "gluteus-minimus", "rectus-femoris", "vastus-intermedius", "pectineus", "adductor-longus", "adductor-brevis", "adductor-magnus", "gracilis", "sartorius", "semitendinosus", "semimembranosus", "biceps-femoris-long", "biceps-femoris-short", "gastrocnemius-medial", "gastrocnemius-lateral", "soleus", "psoas-major", "iliacus", "fibularis-longus", "pelvis", "femur", "patella", "lower-leg", "foot"]
+---
+
+<Lang en>
+
+Fade the surface muscles and the deeper routes appear. **Gluteus medius** and **gluteus minimus** spread from the outer ilium to the greater trochanter, the large projection near the top of the femur. Their pull carries the thigh sideways; when a foot is planted, they help keep the pelvis level. You cannot reliably identify gluteus minimus by touching the skin because other muscles cover it [M1].
+
+On the front of the femur, **vastus intermedius** hides under rectus femoris and joins the same knee-extending tendon. On the inner thigh, **pectineus**, **adductor longus** and **adductor brevis** run from the pubis towards the femur. **Adductor magnus** spreads broadly down its back and inner side. Its posterior portion also helps extend the hip [M1].
+
+**Gracilis** is different: its long strap continues past the knee to the inner tibia. The <Num s="M1">three</Num> tendons of gracilis, sartorius and semitendinosus form the <Term id="pes-anserinus">pes anserinus</Term>, a shared attachment area named for its spreading shape [M1]. Do not press deeply into the groin or the hollow behind the knee to find these structures.
+
+Behind the thigh, **semimembranosus** reaches the posterior inner tibia; the **short head of biceps femoris** starts on the femur and ends mainly on the fibular head. Below, **soleus** starts on the tibia and fibula and reaches the heel through the Achilles tendon. Unlike gastrocnemius, it does not cross the knee [M1]. Depth changes what you can see, not how much a muscle matters. <FlyTo preset="deep-view">Look beneath the surface</FlyTo>
+
+<More title={{ en: "The neighbouring hip flexors", zh: "邻近的屈髋肌" }}>
+
+Psoas major and iliacus appear in grey. They join near the front of the hip and pull towards the lesser trochanter of the femur. Fibularis longus, another neighbour, passes behind the outer ankle and underneath the foot [M1].
+
+</More>
+
+<More title={{ en: "One name, different fibre routes", zh: "一个名字，不同纤维路线" }}>
+
+Adductor magnus has an adductor portion and a posterior, hamstring portion with different attachments. The latter reaches the adductor tubercle of the femur. Despite that name, it ends above the knee and does not act as a knee flexor [M1].
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+把浅层肌肉调淡，深处的路线就露出来。**臀中肌**和**臀小肌**从髂骨外面展开，止于股骨上端的大转子。它们把大腿拉向侧面；脚踩地时，帮助保持骨盆水平。臀小肌上面盖着其他肌肉，不能可靠地隔着皮肤摸出来 [M1]。
+
+**股中间肌**藏在股直肌下面，贴着股骨前方，汇入同一条伸膝肌腱。大腿内侧的**耻骨肌、长收肌、短收肌**从耻骨走向股骨。**大收肌**广泛铺在股骨后内侧，后部也帮助伸髋 [M1]。
+
+**股薄肌**不同，它像长带越过膝，止于胫骨内侧；它和缝匠肌、半腱肌一起构成<Term id="pes-anserinus">鹅足</Term>，名字来自<Num s="M1">三条</Num>肌腱展开的形状 [M1]。认识位置不等于做深部触诊，不要往腹股沟或膝后凹处深按。
+
+大腿后面的**半膜肌**到达胫骨后内侧；**股二头肌短头**起于股骨，主要止于腓骨头。下面的**比目鱼肌**起于胫骨和腓骨，经跟腱到脚跟。它不像腓肠肌那样跨膝 [M1]。这些内侧肌肉大多不跨膝，股薄肌是例外。它的长腱让它也能协助屈膝 [M1]。从索引比较附着点，便能理解为什么外形相近的肌肉会做不同工作。藏得深，只是比较难看见，不代表作用更小。<FlyTo preset="deep-view">看浅层下面</FlyTo>
+
+<More title={{ en: "The neighbouring hip flexors", zh: "邻近的屈髋肌" }}>
+
+灰色的腰大肌和髂肌在髋前方汇合，拉向股骨小转子。另一块邻区肌腓骨长肌从外踝后方经过，再绕到足底 [M1]。
+
+</More>
+
+<More title={{ en: "One name, different fibre routes", zh: "一个名字，不同纤维路线" }}>
+
+大收肌的内收部和后方的腘绳肌部附着不同，后者到达股骨收肌结节。虽然名字里有“腘绳肌”，它止于膝上方，不是屈膝肌 [M1]。
+
+</More>
+
+</Lang>

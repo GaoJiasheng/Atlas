@@ -1,0 +1,749 @@
+{
+  "muscles": [
+    {
+      "id": "rectus-abdominis",
+      "name": {
+        "en": "Rectus abdominis",
+        "zh": "腹直肌"
+      },
+      "short": {
+        "en": "Rectus abd.",
+        "zh": "腹直肌"
+      },
+      "zAnatomy": "Rectus abdominis muscle",
+      "regions": [
+        "core"
+      ],
+      "layer": "superficial",
+      "origin": {
+        "text": {
+          "en": "Pubic crest and pubic symphysis, at the front of the pelvis.",
+          "zh": "骨盆前方的耻骨嵴和耻骨联合。"
+        },
+        "bones": [
+          "pelvis"
+        ],
+        "s": [
+          "M92",
+          "M93"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Costal cartilages five to seven, with variable upper fibres towards the xiphoid region.",
+          "zh": "第 5–7 肋软骨；上部纤维向剑突区的附着存在变异。"
+        },
+        "bones": [
+          "thorax"
+        ],
+        "s": [
+          "M92",
+          "M93"
+        ]
+      },
+      "fibres": {
+        "arrangement": "parallel",
+        "direction": {
+          "en": "Longitudinal fibres run up the front of the abdomen; tendon bands cross the muscle.",
+          "zh": "纤维沿腹前壁纵行，横向的腱划把肌腹分成几段。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "trunk",
+          "movement": "flexion",
+          "role": "prime",
+          "s": [
+            "M92"
+          ]
+        },
+        {
+          "joint": "trunk",
+          "movement": "stabilisation",
+          "role": "stabilise",
+          "s": [
+            "M93"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "Rest your fingers beside the midline of your abdomen and make a small curl-up. The long band that firms up is rectus abdominis; do not press into the belly.",
+        "zh": "手指轻放在腹部正中线旁，做一个小幅卷腹。变硬的纵向肌带就是腹直肌；不用往肚子里深按。"
+      },
+      "mistakes": [
+        {
+          "en": "Pulling on the head during a curl-up.",
+          "zh": "卷腹时用手拉头。"
+        },
+        {
+          "en": "Treating upper and lower abs as separate muscles.",
+          "zh": "把“上腹肌”和“下腹肌”当成两块独立的肌肉。"
+        },
+        {
+          "en": "Expecting abdominal exercise to remove fat just over this muscle.",
+          "zh": "以为练腹肌就能减掉覆盖在它上面的腹部脂肪。"
+        }
+      ],
+      "exercises": [
+        "curl-up",
+        "dead-bug",
+        "forearm-plank",
+        "hanging-knee-raise"
+      ],
+      "summary": {
+        "en": "Bends the trunk and helps resist a backward arch.",
+        "zh": "让躯干前屈，也帮助抵抗腰背后仰。"
+      },
+      "detail": {
+        "en": "This paired strap runs from the pubis to the front of the lower rib cage. Its tendon bands make the familiar segmented outline; the upper and lower regions are parts of the same muscle [M92].\n\nThe abdominal wall has four main muscle groups: rectus abdominis and the external oblique, internal oblique and transversus abdominis. The three lateral sheets are stacked; rectus sits nearer the midline inside its sheath, rather than forming a fourth sheet over the whole side [M92] [M93]. It can shorten in a curl-up or hold nearly the same length to resist extension in a plank.\n\nTraining abdominal muscles cannot be relied on to selectively remove abdominal fat. Vispute and colleagues (2011) found improved curl-up endurance without a significant reduction in abdominal-fat measures after their abdominal-exercise programme [M98].",
+        "zh": "这对长条肌从耻骨延伸到前下胸廓。横向腱划形成大家熟悉的分段轮廓；“上腹”和“下腹”仍是同一块肌肉的不同区域 [M92]。\n\n腹壁有四组主要肌肉：腹直肌、腹外斜肌、腹内斜肌和腹横肌。侧腹的后三组由浅到深叠放；腹直肌在靠近正中线的腹直肌鞘里，并不是盖在整个侧腹上方的第四层薄片 [M92] [M93]。卷腹时它缩短；平板支撑时它可以主要保持长度，抵抗躯干过度后伸。\n\n练腹肌不能专门减掉腹部脂肪。Vispute 等（2011）的腹部训练研究发现，卷腹耐力提高了，但腹部脂肪相关测量没有显著下降 [M98]。"
+      },
+      "common": {
+        "en": "abs, six-pack",
+        "zh": "腹肌、六块腹肌"
+      },
+      "injury": {
+        "en": "A location of pain does not identify a damaged muscle. Stop a painful movement and seek assessment rather than using this card as a diagnosis. [M57]",
+        "zh": "疼痛位置不能确定是哪块肌肉受损。引起疼痛时停下并寻求评估，不用本卡自行诊断。[M57]"
+      }
+    },
+    {
+      "id": "internal-oblique",
+      "name": {
+        "en": "Internal oblique",
+        "zh": "腹内斜肌"
+      },
+      "short": {
+        "en": "Int. oblique",
+        "zh": "腹内斜肌"
+      },
+      "zAnatomy": "Internal abdominal oblique muscle",
+      "regions": [
+        "core"
+      ],
+      "layer": "intermediate",
+      "origin": {
+        "text": {
+          "en": "Thoracolumbar fascia, anterior iliac crest and lateral inguinal ligament.",
+          "zh": "胸腰筋膜、髂嵴前部和腹股沟韧带外侧部。"
+        },
+        "bones": [
+          "thoracolumbar-fascia",
+          "pelvis"
+        ],
+        "s": [
+          "M92"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Lower rib margin and linea alba through the aponeurosis; lower fibres reach the pubic crest and pecten through the conjoint tendon. Accounts differ in the number of lower ribs and extent of the aponeurosis.",
+          "zh": "下位肋缘；经腱膜连到白线，下部经联合腱连到耻骨嵴和耻骨梳。不同教材对下位肋数及腱膜范围的描述有差异。"
+        },
+        "bones": [
+          "thorax",
+          "linea-alba",
+          "pelvis"
+        ],
+        "s": [
+          "M92",
+          "M94"
+        ]
+      },
+      "fibres": {
+        "arrangement": "parallel",
+        "direction": {
+          "en": "Upper fibres fan up and forward; middle fibres cross forward; the lowest arch down towards the pubis.",
+          "zh": "上部向前上方展开，中部向前横行，最下部呈弓形向耻骨走行。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "trunk",
+          "movement": "flexion",
+          "role": "prime",
+          "s": [
+            "M92"
+          ]
+        },
+        {
+          "joint": "trunk",
+          "movement": "lateral-flexion",
+          "role": "prime",
+          "s": [
+            "M92"
+          ]
+        },
+        {
+          "joint": "trunk",
+          "movement": "rotation",
+          "role": "prime",
+          "s": [
+            "M92"
+          ]
+        },
+        {
+          "joint": "trunk",
+          "movement": "stabilisation",
+          "role": "stabilise",
+          "s": [
+            "M93"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "It lies under external oblique. A gentle brace firms the side wall, but you cannot reliably separate the two layers with your fingers.",
+        "zh": "它在腹外斜肌下面。稍微收紧腹部能摸到侧腹壁变硬，但手指无法可靠地区分这两层。"
+      },
+      "mistakes": [
+        {
+          "en": "Assuming all oblique fibres run in the same direction.",
+          "zh": "以为所有腹斜肌纤维都朝同一方向。"
+        },
+        {
+          "en": "Letting the pelvis follow the cable in an anti-rotation press.",
+          "zh": "抗旋转推时骨盆跟着绳索转走。"
+        }
+      ],
+      "exercises": [
+        "cable-pallof-press",
+        "side-plank",
+        "dead-bug",
+        "dumbbell-suitcase-carry"
+      ],
+      "summary": {
+        "en": "Turns the trunk to its own side and steadies the waist.",
+        "zh": "让躯干转向同侧，并帮助稳住腰腹。"
+      },
+      "detail": {
+        "en": "The middle lateral layer fans in several directions rather than following one diagonal [M92]. The left internal oblique helps rotate the chest left, working with the right external oblique; both sides together help flex and compress the trunk [M92].\n\nThe exercise list includes ways to resist rotation and side bending. These are shared tasks, not exercises that isolate the middle layer.",
+        "zh": "侧腹的中间层，纤维像扇子一样朝多个方向展开，不是整块都沿同一条斜线 [M92]。左腹内斜肌帮助胸口向左转，与右腹外斜肌配合；两侧一起作用时，帮助躯干前屈并压缩腹部 [M92]。\n\n这里列的是抵抗旋转和侧弯的动作。这些任务由多块肌肉共同完成，不能单独练到中间这一层。"
+      },
+      "common": {
+        "en": "deep obliques",
+        "zh": "深层侧腹肌"
+      },
+      "injury": {
+        "en": "A location of pain does not identify a damaged muscle. Stop a painful movement and seek assessment rather than using this card as a diagnosis. [M57]",
+        "zh": "疼痛位置不能确定是哪块肌肉受损。引起疼痛时停下并寻求评估，不用本卡自行诊断。[M57]"
+      }
+    },
+    {
+      "id": "transversus-abdominis",
+      "name": {
+        "en": "Transversus abdominis",
+        "zh": "腹横肌"
+      },
+      "short": {
+        "en": "Transversus",
+        "zh": "腹横肌"
+      },
+      "zAnatomy": "Transversus abdominis muscle",
+      "regions": [
+        "core"
+      ],
+      "layer": "deep",
+      "origin": {
+        "text": {
+          "en": "Inner lower costal margin, thoracolumbar fascia, anterior inner iliac crest and lateral inguinal ligament.",
+          "zh": "下位肋缘内面、胸腰筋膜、髂嵴内唇前部和腹股沟韧带外侧部。"
+        },
+        "bones": [
+          "thorax",
+          "thoracolumbar-fascia",
+          "pelvis"
+        ],
+        "s": [
+          "M92",
+          "M95"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Linea alba through a broad aponeurosis; the lower fibres reach the pubic crest and pecten by the conjoint tendon.",
+          "zh": "经宽阔腱膜连到白线；下部纤维经联合腱连到耻骨嵴和耻骨梳。"
+        },
+        "bones": [
+          "linea-alba",
+          "pelvis"
+        ],
+        "s": [
+          "M92"
+        ]
+      },
+      "fibres": {
+        "arrangement": "parallel",
+        "direction": {
+          "en": "Mostly across the abdominal wall, like a belt; the lowest fibres curve down and inward.",
+          "zh": "大部分横向绕过腹壁，像一条腰带；最下部纤维向内下方弯行。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "trunk",
+          "movement": "stabilisation",
+          "role": "stabilise",
+          "s": [
+            "M93"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "It is beneath both obliques. Put fingertips lightly just inside the front hip points and gently firm the lower abdomen while breathing. The tension is shared by several muscles, not proof that this one is isolated.",
+        "zh": "它在两层腹斜肌下面。指尖轻放在髂前上棘内侧，保持呼吸、轻轻收紧下腹。摸到的张力来自多块肌肉，不能据此说只练到了腹横肌。"
+      },
+      "mistakes": [
+        {
+          "en": "Sucking the belly in so hard that breathing stops.",
+          "zh": "使劲吸肚子，连呼吸也停了。"
+        },
+        {
+          "en": "Calling it the only muscle that stabilises the spine.",
+          "zh": "把它说成唯一能稳定脊柱的肌肉。"
+        }
+      ],
+      "exercises": [
+        "dead-bug",
+        "forearm-plank",
+        "cable-pallof-press",
+        "bird-dog",
+        "dumbbell-suitcase-carry"
+      ],
+      "summary": {
+        "en": "Compresses the abdomen and helps steady the trunk.",
+        "zh": "压缩腹部，并帮助稳定躯干。"
+      },
+      "detail": {
+        "en": "The deepest lateral abdominal sheet draws its wall inward and helps generate abdominal pressure. It cooperates with the other abdominal and back muscles; it does not produce a large visible trunk bend [M92].\n\nGently firm the wall while continuing to breathe. These exercises involve shared stabilising work and cannot isolate one abdominal layer. Fibre arrangement is a broad teaching description, not a measurement.",
+        "zh": "侧腹最深的肌片向内牵拉腹壁，参与产生腹内压。它与其他腹肌、背肌协作，不会造成很大的躯干弯曲 [M92]。\n\n轻轻绷紧腹壁，同时保持呼吸。所列动作练的是多块肌肉共同稳定，不能孤立训练某一层。纤维排列是整体教学概括，不是测量值。"
+      },
+      "common": {
+        "en": "deep abdominal wall",
+        "zh": "深层腹肌"
+      },
+      "injury": {
+        "en": "A location of pain does not identify a damaged muscle. Stop a painful movement and seek assessment rather than using this card as a diagnosis. [M57]",
+        "zh": "疼痛位置不能确定是哪块肌肉受损。引起疼痛时停下并寻求评估，不用本卡自行诊断。[M57]"
+      }
+    },
+    {
+      "id": "quadratus-lumborum",
+      "name": {
+        "en": "Quadratus lumborum",
+        "zh": "腰方肌"
+      },
+      "short": {
+        "en": "Quadratus",
+        "zh": "腰方肌"
+      },
+      "zAnatomy": "Quadratus lumborum muscle",
+      "regions": [
+        "core"
+      ],
+      "layer": "deep",
+      "origin": {
+        "text": {
+          "en": "Iliolumbar ligament and the adjacent inner lip of the iliac crest.",
+          "zh": "髂腰韧带及邻近的髂嵴内唇。"
+        },
+        "bones": [
+          "pelvis"
+        ],
+        "s": [
+          "M92",
+          "M96"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Lower border of rib twelve and the transverse processes of the upper four lumbar vertebrae.",
+          "zh": "第 12 肋下缘和第 1～4 腰椎横突。"
+        },
+        "bones": [
+          "thorax",
+          "lumbar-spine"
+        ],
+        "s": [
+          "M92",
+          "M96",
+          "M108"
+        ]
+      },
+      "fibres": {
+        "arrangement": "parallel",
+        "direction": {
+          "en": "Mostly up from the pelvic rim, with oblique bundles linking the pelvis, lumbar transverse processes and last rib.",
+          "zh": "大体从骨盆上缘向上，斜行肌束连接骨盆、腰椎横突和末肋。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "trunk",
+          "movement": "lateral-flexion",
+          "role": "prime",
+          "s": [
+            "M92"
+          ]
+        },
+        {
+          "joint": "trunk",
+          "movement": "stabilisation",
+          "role": "stabilise",
+          "s": [
+            "M92"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "It sits deep between the last rib and the pelvic rim, beside the lumbar spine. A side plank may give effort in this region, but pressing into the flank cannot identify it safely or reliably.",
+        "zh": "它在末肋和骨盆上缘之间、腰椎旁的深处。侧平板支撑时这里可能有用力感，但往腰侧深按，既不能可靠地找到它，也没有必要。"
+      },
+      "mistakes": [
+        {
+          "en": "Tilting the pelvis to help a knee rise.",
+          "zh": "抬膝时靠提起一侧骨盆凑高度。"
+        },
+        {
+          "en": "Leaning away from a carried dumbbell instead of staying tall.",
+          "zh": "提哑铃行走时向另一边歪，靠偏身抵消重量。"
+        }
+      ],
+      "exercises": [
+        "side-plank",
+        "dumbbell-suitcase-carry",
+        "bird-dog"
+      ],
+      "summary": {
+        "en": "Side-bends the trunk and steadies the last rib.",
+        "zh": "让躯干侧屈，并稳住末肋。"
+      },
+      "detail": {
+        "en": "A deep posterior abdominal-wall muscle, not part of the erector spinae. One side can bring the rib cage towards the pelvic rim; when the rib cage is fixed it can lift that side of the pelvis [M92].\n\nIt can hold the last rib steady during breathing. In a suitcase carry, the side-wall muscles help oppose the sideways pull; do not read that as an isolated quadratus exercise.",
+        "zh": "它属于腹后壁深层肌，不属于竖脊肌。单侧作用可以把胸廓拉向同侧骨盆；胸廓固定时，也能提起同侧骨盆 [M92]。\n\n呼吸时它可以稳住末肋。单手提重物行走时，腰侧多块肌肉共同抵抗侧向牵拉，不是腰方肌在单独工作。"
+      },
+      "injury": {
+        "en": "A location of pain does not identify a damaged muscle. Stop a painful movement and seek assessment rather than using this card as a diagnosis. [M57]",
+        "zh": "疼痛位置不能确定是哪块肌肉受损。引起疼痛时停下并寻求评估，不用本卡自行诊断。[M57]"
+      }
+    },
+    {
+      "id": "erector-spinae-lumbar",
+      "name": {
+        "en": "Erector spinae, lumbar region",
+        "zh": "竖脊肌腰段"
+      },
+      "short": {
+        "en": "Lumbar erectors",
+        "zh": "竖脊肌腰段"
+      },
+      "zAnatomy": "Iliocostalis lumborum muscle + Longissimus thoracis muscle",
+      "regions": [
+        "core",
+        "back"
+      ],
+      "layer": "intermediate",
+      "origin": {
+        "text": {
+          "en": "Common tendon on the back of the sacrum, posterior iliac crest, lumbar and lower thoracic spinous processes, and supraspinous ligament; longissimus also takes lumbar transverse-process attachments.",
+          "zh": "共同腱起于骶骨后面、髂嵴后部、腰椎和下位胸椎棘突及棘上韧带；最长肌还附着于腰椎横突。"
+        },
+        "bones": [
+          "pelvis",
+          "lumbar-spine",
+          "thoracic-spine"
+        ],
+        "s": [
+          "M92"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Iliocostalis lumborum reaches the angles of the lower ribs; longissimus thoracis reaches lumbar accessory/transverse processes, thoracic transverse processes and ribs between their tubercles and angles. These full muscles continue above the lumbar display region.",
+          "zh": "髂肋肌腰部止于下位肋的肋角；胸最长肌连到腰椎副突和横突、胸椎横突，以及肋结节与肋角之间的肋骨。完整肌肉延伸到本主题展示的腰段以外。"
+        },
+        "bones": [
+          "thorax",
+          "lumbar-spine",
+          "thoracic-spine"
+        ],
+        "s": [
+          "M92"
+        ]
+      },
+      "fibres": {
+        "arrangement": "parallel",
+        "direction": {
+          "en": "Long columns ascend beside the spine; lateral bundles slope towards the ribs.",
+          "zh": "长柱状肌束沿脊柱两侧上行，外侧肌束斜向肋骨。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "trunk",
+          "movement": "extension",
+          "role": "prime",
+          "s": [
+            "M92",
+            "M93"
+          ]
+        },
+        {
+          "joint": "trunk",
+          "movement": "lateral-flexion",
+          "role": "prime",
+          "s": [
+            "M92"
+          ]
+        },
+        {
+          "joint": "trunk",
+          "movement": "stabilisation",
+          "role": "stabilise",
+          "s": [
+            "M93"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "Place fingertips beside, not on, the bony midline of the low back. During a shallow unloaded hip hinge, the long bands may firm up as they hold the back steady.",
+        "zh": "手指轻放在下背正中骨性突起的两旁，不要直接按脊柱。做小幅徒手髋折叠时，两条长肌带可能变硬，帮你稳住腰背。"
+      },
+      "mistakes": [
+        {
+          "en": "Rounding the back to reach the bar lower.",
+          "zh": "为了把杠放得更低而弓背。"
+        },
+        {
+          "en": "Leaning backwards at the top of a deadlift.",
+          "zh": "硬拉站起后继续往后仰。"
+        }
+      ],
+      "exercises": [
+        "barbell-romanian-deadlift",
+        "bird-dog",
+        "dumbbell-suitcase-carry",
+        "side-plank"
+      ],
+      "summary": {
+        "en": "Extends the spine or holds it steady during a hinge.",
+        "zh": "让脊柱后伸，也在髋折叠时稳住脊柱。"
+      },
+      "detail": {
+        "en": "This display merges iliocostalis lumborum and longissimus thoracis. Their full source meshes are retained; the name identifies the lumbar teaching focus, not a cropped new muscle. Spinalis belongs to the erector group but is absent from this part [M92].\n\nIn the Romanian deadlift, hip extensors drive the lift while these spinal muscles mainly hold the back shape isometrically. A still spine does not mean resting muscles. The exercise links include shared stabilising tasks.",
+        "zh": "本零件合并髂肋肌腰部与胸最长肌，保留完整源网格。“腰段”指讲解重点，不是裁切后新造的肌肉。竖脊肌群还包括棘肌，本零件没有它 [M92]。\n\n罗马尼亚硬拉由伸髋肌驱动，这些脊柱肌主要等长出力，维持腰背形状。脊柱不动不等于肌肉休息。动作链接包括多块肌肉共同稳定的任务。"
+      },
+      "common": {
+        "en": "lower-back erectors",
+        "zh": "下背肌"
+      },
+      "injury": {
+        "en": "A location of pain does not identify a damaged muscle. Stop a painful movement and seek assessment rather than using this card as a diagnosis. [M57]",
+        "zh": "疼痛位置不能确定是哪块肌肉受损。引起疼痛时停下并寻求评估，不用本卡自行诊断。[M57]"
+      }
+    },
+    {
+      "id": "multifidus-lumborum",
+      "name": {
+        "en": "Multifidus, lumbar region",
+        "zh": "多裂肌腰部"
+      },
+      "short": {
+        "en": "Lumbar multifidus",
+        "zh": "多裂肌腰部"
+      },
+      "zAnatomy": "Multifidus lumborum muscle",
+      "regions": [
+        "core",
+        "back"
+      ],
+      "layer": "deep",
+      "origin": {
+        "text": {
+          "en": "Back of the sacrum, posterior superior iliac spine and nearby ligaments/aponeurosis; mammillary processes of the lumbar vertebrae.",
+          "zh": "骶骨后面、髂后上棘及附近韧带和腱膜；腰椎乳突。"
+        },
+        "bones": [
+          "pelvis",
+          "lumbar-spine"
+        ],
+        "s": [
+          "M92"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Spinous processes above the origins, reached by overlapping bundles of different lengths.",
+          "zh": "长短不一、层层重叠的肌束连到起点上方椎骨的棘突。"
+        },
+        "bones": [
+          "lumbar-spine",
+          "thoracic-spine"
+        ],
+        "s": [
+          "M92"
+        ]
+      },
+      "fibres": {
+        "arrangement": "parallel",
+        "direction": {
+          "en": "Short overlapping bundles run up and inward towards the spinous processes.",
+          "zh": "短肌束层层重叠，向内上方走到棘突。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "trunk",
+          "movement": "extension",
+          "role": "assist",
+          "s": [
+            "M92",
+            "M93"
+          ]
+        },
+        {
+          "joint": "trunk",
+          "movement": "rotation",
+          "role": "assist",
+          "s": [
+            "M92"
+          ]
+        },
+        {
+          "joint": "trunk",
+          "movement": "stabilisation",
+          "role": "stabilise",
+          "s": [
+            "M97"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "It lies beneath the long back muscles, close to the vertebrae. You cannot reliably feel it alone; in a bird-dog look for a steady pelvis and comfortable back effort instead.",
+        "zh": "它在长条背肌下面、紧贴椎骨，不能可靠地单独摸到。做鸟狗式时，留意骨盆稳定和舒适的背部用力感就好。"
+      },
+      "mistakes": [
+        {
+          "en": "Kicking the leg high and arching the back in a bird-dog.",
+          "zh": "鸟狗式把腿踢得很高，腰也跟着塌。"
+        },
+        {
+          "en": "Claiming a surface sensation proves this deep muscle is isolated.",
+          "zh": "把表面的酸胀感当成“单独练到多裂肌”的证明。"
+        }
+      ],
+      "exercises": [
+        "bird-dog",
+        "barbell-romanian-deadlift",
+        "cable-pallof-press"
+      ],
+      "summary": {
+        "en": "Short deep bundles help control the spinal segments.",
+        "zh": "短而深的肌束帮助控制脊柱节段。"
+      },
+      "detail": {
+        "en": "A layered set of short bundles beneath erector spinae, thick in the lumbar region [M92]. Both sides help extend the spine; one side can assist rotation towards the opposite side [M92].\n\nThe exercise list gives shared stabilising tasks. It does not diagnose a weak multifidus or prescribe treatment for back pain.",
+        "zh": "一组位于竖脊肌下面的短肌束，在腰部较厚 [M92]。两侧一起作用可以协助脊柱后伸；单侧作用可协助躯干转向对侧 [M92]。\n\n这里列的是多块肌肉共同稳定躯干的任务，不能用来判断多裂肌是否无力，也不是腰痛治疗处方。"
+      },
+      "injury": {
+        "en": "A location of pain does not identify a damaged muscle. Stop a painful movement and seek assessment rather than using this card as a diagnosis. [M57]",
+        "zh": "疼痛位置不能确定是哪块肌肉受损。引起疼痛时停下并寻求评估，不用本卡自行诊断。[M57]"
+      }
+    },
+    {
+      "id": "iliopsoas",
+      "name": {
+        "en": "Iliopsoas",
+        "zh": "髂腰肌"
+      },
+      "short": {
+        "en": "Iliopsoas",
+        "zh": "髂腰肌"
+      },
+      "zAnatomy": "Psoas major + Iliacus muscle",
+      "regions": [
+        "core",
+        "legs"
+      ],
+      "layer": "deep",
+      "origin": {
+        "text": {
+          "en": "Psoas major starts on the lower thoracic/lumbar vertebrae and discs; iliacus starts mainly in the iliac fossa.",
+          "zh": "腰大肌起于下位胸椎、腰椎及椎间盘；髂肌主要起于髂窝。"
+        },
+        "bones": [
+          "thoracic-spine",
+          "lumbar-spine",
+          "pelvis"
+        ],
+        "s": [
+          "M92"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Lesser trochanter of the femur through the combined tendon; some iliacus fibres attach just below it.",
+          "zh": "经共同腱止于股骨小转子；部分髂肌纤维止于小转子下方。"
+        },
+        "bones": [
+          "femur"
+        ],
+        "s": [
+          "M92"
+        ]
+      },
+      "fibres": {
+        "arrangement": "convergent",
+        "direction": {
+          "en": "Psoas descends from the spine and iliacus converges from the pelvic bowl; they pass in front of the hip.",
+          "zh": "腰大肌从脊柱向下，髂肌从骨盆内面汇聚，两者经过髋关节前方。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "hip",
+          "movement": "flexion",
+          "role": "prime",
+          "s": [
+            "M92",
+            "M93"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "Feel effort at the front of the hip as you raise a bent knee with the pelvis still. The muscles are deep; do not dig into the abdomen or groin to find them.",
+        "zh": "骨盆不动、抬起屈膝的腿时，髋前方可能有用力感。肌肉位置深，不要往腹部或腹股沟里深按寻找。"
+      },
+      "mistakes": [
+        {
+          "en": "Leaning back to lift the knee higher.",
+          "zh": "为了把膝盖抬高而后仰。"
+        },
+        {
+          "en": "Calling every leg raise an isolated lower-ab exercise.",
+          "zh": "把所有举腿都叫作“单独练下腹”。"
+        }
+      ],
+      "exercises": [
+        "standing-knee-raise",
+        "hanging-knee-raise",
+        "dead-bug"
+      ],
+      "summary": {
+        "en": "Brings the thigh towards the trunk.",
+        "zh": "把大腿带向躯干。"
+      },
+      "detail": {
+        "en": "Iliopsoas is the combined name for psoas major and iliacus, which have different origins and join near the hip [M92] [M93]. Raising the thigh is hip flexion; curling the pelvis towards the rib cage is trunk/pelvic movement. A knee raise can contain both, but they are not the same task.\n\nThe dead-bug uses the hip flexors while the abdominal wall controls the pelvis. It is not an isolation exercise for iliopsoas.",
+        "zh": "髂腰肌是腰大肌与髂肌的合称，两者起点不同，在髋附近汇合 [M92] [M93]。把大腿抬向躯干是屈髋；把骨盆卷向胸廓则涉及躯干与骨盆运动。抬膝动作可以包含这两件事，但它们不是同一种运动。\n\n死虫式中，髋屈肌参与腿的位置控制，腹壁负责稳住骨盆。它不是孤立训练髂腰肌的动作。"
+      },
+      "common": {
+        "en": "hip flexors",
+        "zh": "髋屈肌"
+      },
+      "injury": {
+        "en": "A location of pain does not identify a damaged muscle. Stop a painful movement and seek assessment rather than using this card as a diagnosis. [M57]",
+        "zh": "疼痛位置不能确定是哪块肌肉受损。引起疼痛时停下并寻求评估，不用本卡自行诊断。[M57]"
+      }
+    }
+  ]
+}

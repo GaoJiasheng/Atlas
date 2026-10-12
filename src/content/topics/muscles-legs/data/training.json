@@ -1,0 +1,88 @@
+{
+  "exercises": [
+    "barbell-back-squat",
+    "barbell-romanian-deadlift",
+    "dumbbell-goblet-squat",
+    "dumbbell-lateral-lunge",
+    "dumbbell-standing-calf-raise",
+    "seated-dumbbell-calf-raise",
+    "bodyweight-reverse-lunge",
+    "wall-tibialis-raise",
+    "heel-walk",
+    "cable-hip-abduction",
+    "cable-hip-adduction",
+    "seated-leg-curl",
+    "band-ankle-dorsiflexion"
+  ],
+  "note": {
+    "en": "Practise controlled knee bending, hip hinging and ankle movement across the week. Increase the challenge gradually and allow recovery before another demanding leg session.",
+    "zh": "一周里兼顾可控制的屈膝、髋铰链和踝运动。逐步加难，充分恢复后再进行吃力的腿部训练。"
+  },
+  "session": {
+    "title": {
+      "en": "One way to arrange a leg session (an example, not a prescription)",
+      "zh": "一种腿部训练课的安排（示例，不是处方）"
+    },
+    "blocks": [
+      {
+        "exercise": "dumbbell-goblet-squat",
+        "note": {
+          "en": "Warm up with a very light version, checking foot contact and a comfortable depth.",
+          "zh": "用很轻的版本热身，检查全脚掌接触和舒服的深度。"
+        }
+      },
+      {
+        "exercise": "barbell-back-squat",
+        "note": {
+          "en": "Use as the main knee-dominant lift after learning the rack routine with a coach; keep the catches set.",
+          "zh": "学会出入架后作为屈膝主项；请教练指导，调好保护杠。"
+        }
+      },
+      {
+        "exercise": "barbell-romanian-deadlift",
+        "note": {
+          "en": "Practise the hip hinge while fresh enough to keep the bar close and the spine steady.",
+          "zh": "精神仍集中时练髋铰链，杠靠近腿，脊柱稳住。"
+        }
+      },
+      {
+        "exercise": "seated-leg-curl",
+        "note": {
+          "en": "Add controlled knee flexion, including the short head; hip hinging is not a direct dynamic exercise for that head.",
+          "zh": "补上有控制的屈膝，包含股二头肌短头；髋铰链不能直接动态训练这个头。"
+        }
+      },
+      {
+        "exercise": "cable-hip-abduction",
+        "note": {
+          "en": "Use light supported work to practise the sideways hip pull; practise both sides.",
+          "zh": "扶稳、用轻负荷练髋向侧面拉，两侧都练。"
+        }
+      },
+      {
+        "exercise": "seated-dumbbell-calf-raise",
+        "note": {
+          "en": "Finish ankle plantarflexion with the knees bent and the weight held securely.",
+          "zh": "用屈膝提踵练踝跖屈，始终固定住重量。"
+        }
+      },
+      {
+        "exercise": "wall-tibialis-raise",
+        "note": {
+          "en": "Practise lifting and slowly lowering the whole forefoot while the heels stay down.",
+          "zh": "脚跟不动，练整个前脚掌抬起和慢慢放下。"
+        }
+      }
+    ],
+    "note": {
+      "en": "This illustrates exercise order, not a list everyone must complete. Choose familiar variations, do the demanding multi-joint work while fresh, and leave lighter isolation work for later. Stop when technique or comfort changes; rest until you can move steadily again. First learn with a qualified coach and a light load; anyone under eighteen needs adult supervision. This is general information, not medical advice; seek a doctor or physiotherapist for pain or injury.",
+      "zh": "这里展示安排顺序，不要求每个人做完清单。选熟悉的版本，精力好时做较费力的多关节动作，较轻的单关节动作放后面。动作质量或舒适度改变就停，休息到能重新稳稳移动。初学请合格教练指导，用轻负荷；未满 18 岁须有成人监督。本页是一般性知识，不是医疗建议；疼痛或受伤请咨询医生或物理治疗师。"
+    },
+    "s": [
+      "M23",
+      "M24",
+      "M25",
+      "M44"
+    ]
+  }
+}

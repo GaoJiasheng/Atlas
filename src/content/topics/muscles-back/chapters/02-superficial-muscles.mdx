@@ -1,0 +1,173 @@
+---
+id: superficial-muscles
+order: 2
+title:
+  en: The surface layer
+  zh: 浅层：斜方肌与背阔肌
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  pose: null
+  layers:
+  - superficial
+  - skeleton
+  - neighbours
+  - body
+  ghost:
+  - body
+  - neighbours
+  labels:
+  - trapezius-transverse
+  - trapezius-ascending
+  - latissimus-dorsi
+  camera:
+    position:
+    - 0.7
+    - 0.35
+    - -2.0
+    target:
+    - 0
+    - 0.02
+    - -0.03
+    fov: 30
+  sites:
+  - trapezius-descending
+  - trapezius-transverse
+  - trapezius-ascending
+  - latissimus-dorsi
+  summary:
+    en: Different fibre directions let trapezius move the shoulder blade while latissimus dorsi pulls on the arm.
+    zh: 不同方向的纤维让斜方肌移动肩胛骨，让背阔肌拉动上臂。
+  beats:
+  - sites: []
+    labels:
+    - trapezius-descending
+    - trapezius-transverse
+    - trapezius-ascending
+    - latissimus-dorsi
+    caption:
+      en: 'The surface layer alone: trapezius covers the upper back and latissimus dorsi the lower back. Their tendons finish
+        on different bones.'
+      zh: 单看浅层：斜方肌覆盖上背，背阔肌覆盖下背。它们的止腱长到不同的骨头上。
+  - pose: shrug
+    sites:
+    - trapezius-descending
+    labels:
+    - trapezius-descending
+    - clavicle
+    caption:
+      en: The descending trapezius fibres run down towards the outer collarbone. They help raise the shoulder girdle in a
+        shrug.
+      zh: 斜方肌降部的纤维向下走到锁骨外端，在耸肩时帮助抬高肩带。
+  - pose: retract
+    sites:
+    - trapezius-transverse
+    labels:
+    - trapezius-transverse
+    - scapula
+    caption:
+      en: The transverse fibres run across to the shoulder blade’s spine. They draw the blade towards the backbone.
+      zh: 横部的纤维横向走到肩胛冈，把肩胛骨拉向脊柱。
+  - pose: upward-rotate
+    sites:
+    - trapezius-ascending
+    labels:
+    - trapezius-ascending
+    - scapula
+    caption:
+      en: The ascending fibres run up to the inner end of the shoulder-blade spine. With the upper fibres they help turn the
+        socket upward as the arm rises.
+      zh: 升部的纤维向上走到肩胛冈内端，与上部纤维一起，帮助手臂抬起时让关节盂朝上。
+  - camera: close-back
+    pose: null
+    sites:
+    - latissimus-dorsi
+    labels:
+    - latissimus-dorsi
+    - humerus
+    caption:
+      en: Latissimus fibres converge from the lower trunk to the upper arm. The solid insertion marker sits in the groove
+        on the front of the humerus, not on the shoulder blade.
+      zh: 背阔肌纤维从下部躯干汇聚到上臂。实心止点在肱骨前面的骨沟里，不在肩胛骨上。
+  - camera: on-my-body
+    view: xray
+    ghost: []
+    pose: pull-down
+    sites: []
+    labels:
+    - trapezius-descending
+    - latissimus-dorsi
+    caption:
+      en: 'Find the surface muscles without force: a small shrug firms the upper trapezius; gently drawing the upper arm towards
+        the side firms the back of the armpit.'
+      zh: 轻轻找浅层肌肉：小幅耸肩让上斜方肌变硬；把上臂轻拉向身体侧面，腋窝后缘会变紧。
+  index:
+    parts:
+    - trapezius-descending
+    - trapezius-transverse
+    - trapezius-ascending
+    - latissimus-dorsi
+    - clavicle
+    - scapula
+    - humerus
+    - thoracic-spine
+    - pelvis
+    - skull
+    - cervical-spine
+    - thorax
+    - lumbar-spine
+---
+
+<Lang en>
+
+The surface layer has two broad muscles with different destinations. **Trapezius** runs from the back of the skull, the neck ligament and the upper-back midline to the outer collarbone, acromion and spine of the shoulder blade. It does not attach to the upper-arm bone. **Latissimus dorsi** starts widely on the lower trunk and finishes on the humerus [M47].
+
+Trapezius has descending, transverse and ascending parts, commonly called upper, middle and lower trapezius. The upper fibres slope down and outward; the middle fibres run across; the lower fibres rise outward. The upper part helps lift the shoulder girdle, the middle part draws the blade inward, and the lower part helps draw it down. Upper and lower fibres also cooperate in rotating the blade upward [M47] [M2]. A shrug makes the upper part firm under a hand resting beside the neck; gently drawing the blades together makes the middle region firm.
+
+Latissimus fibres converge from the lower thoracic spine, <Term id="thoracolumbar-fascia">thoracolumbar fascia</Term>, iliac crest and lower ribs into a flat <Term id="tendon">tendon</Term>. It wraps towards the front of the upper arm and ends in the floor of the humerus's intertubercular groove [M47].
+
+Its broad origin can make it look like a muscle that mainly bends the back. Its key moving attachment is the arm: it draws the upper arm towards the side, backwards and inward. Gently pressing the upper arm against the side firms the posterior armpit fold, shared with teres major. <FlyTo preset="close-back">Follow the arm attachment</FlyTo>
+
+<More title={{ en: "One trapezius, different pulls", zh: "同一块斜方肌，不同的拉力" }}>
+
+The part names follow the fibre directions. A contraction pulls along those directions, but the final movement also depends on the other muscles, the arm position and which attachment is fixed. Upper trapezius is not simply a muscle that must always stay relaxed: it has a normal role during arm elevation [M47] [M2].
+
+</More>
+
+<More title={{ en: "The back muscle that reaches the front", zh: "从背后长到前面的肌肉" }}>
+
+Latissimus dorsi inserts in the groove floor; teres major ends on its medial lip; pectoralis major ends on its lateral lip [M47] [M48]. They are close together but anatomically distinct. A dashed force line is a simplified direction between attachment regions, not a single real fibre.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+浅层有两块宽阔肌肉，但止点不同。**斜方肌**从后脑、项韧带和上背中线，长到锁骨外端、肩峰与肩胛冈，并不附着在肱骨上。**背阔肌**从下部躯干广泛起始，最后长到肱骨 [M47]。
+
+斜方肌分降部、横部和升部，俗称上、中、下斜方肌。上部纤维向外下方斜行，中部横行，下部向外上方斜行。降部帮助抬高肩带，横部把肩胛骨向内拉，升部帮助向下拉；上、下部还配合，让肩胛骨向上回旋 [M47] [M2]。一手放在颈旁，轻轻耸肩，就能感觉上部变硬；轻轻合拢肩胛骨，中部区域会变紧。
+
+背阔肌纤维从下部胸椎、<Term id="thoracolumbar-fascia">胸腰筋膜</Term>、髂嵴和下位肋骨汇聚，形成扁平的<Term id="tendon">肌腱</Term>，绕到上臂前面，止在肱骨结节间沟的沟底 [M47]。
+
+空心圆表示起始附着，实心圆表示终止附着；选中圆点还能找到相关骨骼。不要把虚线当成整块肌肉的所有纤维，也不要因为一处变硬就以为只用了这一块。
+
+它的起点很宽，看起来像是主要弯腰的肌肉，但重要的活动附着端在手臂：它把上臂拉向身体侧面、向后，并向内旋。轻轻把上臂压向身体侧面，能感觉腋窝后襞变紧；这里由背阔肌与大圆肌共同构成。<FlyTo preset="close-back">沿着它找到上臂止点</FlyTo>
+
+<More title={{ en: "One trapezius, different pulls", zh: "同一块斜方肌，不同的拉力" }}>
+
+分部名称跟着纤维方向走。收缩沿着这些方向产生拉力，但最终动作还取决于其他肌肉、手臂位置和哪一端固定。上斜方肌并不需要始终放松；它在抬臂时有正常的作用 [M47] [M2]。
+
+</More>
+
+<More title={{ en: "The back muscle that reaches the front", zh: "从背后长到前面的肌肉" }}>
+
+背阔肌止在沟底，大圆肌止在内侧唇，胸大肌止在外侧唇 [M47] [M48]。它们很靠近，却是不同的附着。虚线是附着区之间的简化拉力方向，并不是一根真实纤维。
+
+</More>
+
+</Lang>

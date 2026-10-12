@@ -1,0 +1,2652 @@
+{
+  "model": "/models/muscles-arms.glb",
+  "parts": [
+    {
+      "id": "biceps-brachii-long",
+      "name": {
+        "en": "Biceps brachii, long head",
+        "zh": "肱二头肌长头"
+      },
+      "group": "superficial",
+      "mesh": "biceps-brachii-long.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-1"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "biceps-brachii-long.r"
+      },
+      "muscle": "biceps-brachii-long",
+      "short": {
+        "en": "Biceps, long head",
+        "zh": "肱二头肌长头"
+      },
+      "connects": [
+        "scapula",
+        "radius"
+      ],
+      "explode": {
+        "dir": [
+          1,
+          0,
+          0.6
+        ],
+        "dist": 0.065,
+        "stage": 0
+      }
+    },
+    {
+      "id": "biceps-brachii-short",
+      "name": {
+        "en": "Biceps brachii, short head",
+        "zh": "肱二头肌短头"
+      },
+      "group": "superficial",
+      "mesh": "biceps-brachii-short.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-1"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "biceps-brachii-short.r"
+      },
+      "muscle": "biceps-brachii-short",
+      "short": {
+        "en": "Biceps, short head",
+        "zh": "肱二头肌短头"
+      },
+      "connects": [
+        "scapula",
+        "radius"
+      ],
+      "explode": {
+        "dir": [
+          1,
+          0,
+          0.6
+        ],
+        "dist": 0.065,
+        "stage": 0
+      }
+    },
+    {
+      "id": "triceps-brachii-long",
+      "name": {
+        "en": "Triceps brachii, long head",
+        "zh": "肱三头肌长头"
+      },
+      "group": "superficial",
+      "mesh": "triceps-brachii-long.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-1"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "triceps-brachii-long.r"
+      },
+      "muscle": "triceps-brachii-long",
+      "short": {
+        "en": "Triceps, long head",
+        "zh": "肱三头肌长头"
+      },
+      "connects": [
+        "scapula",
+        "ulna"
+      ],
+      "explode": {
+        "dir": [
+          1,
+          0,
+          -0.6
+        ],
+        "dist": 0.065,
+        "stage": 0
+      }
+    },
+    {
+      "id": "triceps-brachii-lateral",
+      "name": {
+        "en": "Triceps brachii, lateral head",
+        "zh": "肱三头肌外侧头"
+      },
+      "group": "superficial",
+      "mesh": "triceps-brachii-lateral.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-1"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "triceps-brachii-lateral.r"
+      },
+      "muscle": "triceps-brachii-lateral",
+      "short": {
+        "en": "Triceps, lateral head",
+        "zh": "肱三头肌外侧头"
+      },
+      "connects": [
+        "humerus",
+        "ulna"
+      ],
+      "explode": {
+        "dir": [
+          1,
+          0,
+          -0.6
+        ],
+        "dist": 0.065,
+        "stage": 0
+      }
+    },
+    {
+      "id": "brachioradialis",
+      "name": {
+        "en": "Brachioradialis",
+        "zh": "肱桡肌"
+      },
+      "group": "superficial",
+      "mesh": "brachioradialis.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-1"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "brachioradialis.r"
+      },
+      "muscle": "brachioradialis",
+      "short": {
+        "en": "Brachioradialis",
+        "zh": "肱桡肌"
+      },
+      "connects": [
+        "humerus",
+        "radius"
+      ],
+      "explode": {
+        "dir": [
+          1,
+          0,
+          0.6
+        ],
+        "dist": 0.065,
+        "stage": 0
+      }
+    },
+    {
+      "id": "pronator-teres",
+      "name": {
+        "en": "Pronator teres",
+        "zh": "旋前圆肌"
+      },
+      "group": "superficial",
+      "mesh": "pronator-teres.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-1"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "pronator-teres.r"
+      },
+      "muscle": "pronator-teres",
+      "short": {
+        "en": "Pronator teres",
+        "zh": "旋前圆肌"
+      },
+      "connects": [
+        "humerus",
+        "ulna",
+        "radius"
+      ],
+      "explode": {
+        "dir": [
+          1,
+          0,
+          0.6
+        ],
+        "dist": 0.065,
+        "stage": 0
+      }
+    },
+    {
+      "id": "flexor-carpi-radialis",
+      "name": {
+        "en": "Flexor carpi radialis",
+        "zh": "桡侧腕屈肌"
+      },
+      "group": "superficial",
+      "mesh": "flexor-carpi-radialis.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-1"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "flexor-carpi-radialis.r"
+      },
+      "muscle": "flexor-carpi-radialis",
+      "short": {
+        "en": "FC radialis",
+        "zh": "桡侧腕屈肌"
+      },
+      "connects": [
+        "humerus",
+        "hand"
+      ],
+      "explode": {
+        "dir": [
+          1,
+          0,
+          0.6
+        ],
+        "dist": 0.065,
+        "stage": 0
+      }
+    },
+    {
+      "id": "palmaris-longus",
+      "name": {
+        "en": "Palmaris longus",
+        "zh": "掌长肌"
+      },
+      "group": "superficial",
+      "mesh": "palmaris-longus.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-1"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "palmaris-longus.r"
+      },
+      "muscle": "palmaris-longus",
+      "short": {
+        "en": "Palmaris longus",
+        "zh": "掌长肌"
+      },
+      "connects": [
+        "humerus"
+      ],
+      "explode": {
+        "dir": [
+          1,
+          0,
+          0.6
+        ],
+        "dist": 0.065,
+        "stage": 0
+      }
+    },
+    {
+      "id": "flexor-carpi-ulnaris",
+      "name": {
+        "en": "Flexor carpi ulnaris",
+        "zh": "尺侧腕屈肌"
+      },
+      "group": "superficial",
+      "mesh": "flexor-carpi-ulnaris.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-1"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "flexor-carpi-ulnaris.r"
+      },
+      "muscle": "flexor-carpi-ulnaris",
+      "short": {
+        "en": "FC ulnaris",
+        "zh": "尺侧腕屈肌"
+      },
+      "connects": [
+        "humerus",
+        "ulna",
+        "hand"
+      ],
+      "explode": {
+        "dir": [
+          1,
+          0,
+          0.6
+        ],
+        "dist": 0.065,
+        "stage": 0
+      }
+    },
+    {
+      "id": "extensor-carpi-radialis-longus",
+      "name": {
+        "en": "Extensor carpi radialis longus",
+        "zh": "桡侧腕长伸肌"
+      },
+      "group": "superficial",
+      "mesh": "extensor-carpi-radialis-longus.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-1"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "extensor-carpi-radialis-longus.r"
+      },
+      "muscle": "extensor-carpi-radialis-longus",
+      "short": {
+        "en": "EC radialis longus",
+        "zh": "桡侧腕长伸肌"
+      },
+      "connects": [
+        "humerus",
+        "hand"
+      ],
+      "explode": {
+        "dir": [
+          1,
+          0,
+          -0.6
+        ],
+        "dist": 0.065,
+        "stage": 0
+      }
+    },
+    {
+      "id": "extensor-digitorum",
+      "name": {
+        "en": "Extensor digitorum",
+        "zh": "指伸肌"
+      },
+      "group": "superficial",
+      "mesh": "extensor-digitorum.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-1"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "extensor-digitorum.r"
+      },
+      "muscle": "extensor-digitorum",
+      "short": {
+        "en": "Extensor digitorum",
+        "zh": "指伸肌"
+      },
+      "connects": [
+        "humerus",
+        "hand"
+      ],
+      "explode": {
+        "dir": [
+          1,
+          0,
+          -0.6
+        ],
+        "dist": 0.065,
+        "stage": 0
+      }
+    },
+    {
+      "id": "extensor-carpi-ulnaris",
+      "name": {
+        "en": "Extensor carpi ulnaris",
+        "zh": "尺侧腕伸肌"
+      },
+      "group": "superficial",
+      "mesh": "extensor-carpi-ulnaris.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-1"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "extensor-carpi-ulnaris.r"
+      },
+      "muscle": "extensor-carpi-ulnaris",
+      "short": {
+        "en": "EC ulnaris",
+        "zh": "尺侧腕伸肌"
+      },
+      "connects": [
+        "humerus",
+        "ulna",
+        "hand"
+      ],
+      "explode": {
+        "dir": [
+          1,
+          0,
+          -0.6
+        ],
+        "dist": 0.065,
+        "stage": 0
+      }
+    },
+    {
+      "id": "brachialis",
+      "name": {
+        "en": "Brachialis",
+        "zh": "肱肌"
+      },
+      "group": "intermediate",
+      "mesh": "brachialis.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-2"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "brachialis.r"
+      },
+      "muscle": "brachialis",
+      "short": {
+        "en": "Brachialis",
+        "zh": "肱肌"
+      },
+      "connects": [
+        "humerus",
+        "ulna"
+      ],
+      "explode": {
+        "dir": [
+          1,
+          0,
+          0.6
+        ],
+        "dist": 0.045,
+        "stage": 1
+      }
+    },
+    {
+      "id": "triceps-brachii-medial",
+      "name": {
+        "en": "Triceps brachii, medial head",
+        "zh": "肱三头肌内侧头"
+      },
+      "group": "intermediate",
+      "mesh": "triceps-brachii-medial.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-2"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "triceps-brachii-medial.r"
+      },
+      "muscle": "triceps-brachii-medial",
+      "short": {
+        "en": "Triceps, medial head",
+        "zh": "肱三头肌内侧头"
+      },
+      "connects": [
+        "humerus",
+        "ulna"
+      ],
+      "explode": {
+        "dir": [
+          1,
+          0,
+          -0.6
+        ],
+        "dist": 0.045,
+        "stage": 1
+      }
+    },
+    {
+      "id": "coracobrachialis",
+      "name": {
+        "en": "Coracobrachialis",
+        "zh": "喙肱肌"
+      },
+      "group": "intermediate",
+      "mesh": "coracobrachialis.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-2"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "coracobrachialis.r"
+      },
+      "muscle": "coracobrachialis",
+      "short": {
+        "en": "Coracobrachialis",
+        "zh": "喙肱肌"
+      },
+      "connects": [
+        "scapula",
+        "humerus"
+      ],
+      "explode": {
+        "dir": [
+          1,
+          0,
+          0.6
+        ],
+        "dist": 0.045,
+        "stage": 1
+      }
+    },
+    {
+      "id": "anconeus",
+      "name": {
+        "en": "Anconeus",
+        "zh": "肘肌"
+      },
+      "group": "intermediate",
+      "mesh": "anconeus.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-2"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "anconeus.r"
+      },
+      "muscle": "anconeus",
+      "short": {
+        "en": "Anconeus",
+        "zh": "肘肌"
+      },
+      "connects": [
+        "humerus",
+        "ulna"
+      ],
+      "explode": {
+        "dir": [
+          1,
+          0,
+          -0.6
+        ],
+        "dist": 0.045,
+        "stage": 1
+      }
+    },
+    {
+      "id": "extensor-carpi-radialis-brevis",
+      "name": {
+        "en": "Extensor carpi radialis brevis",
+        "zh": "桡侧腕短伸肌"
+      },
+      "group": "intermediate",
+      "mesh": "extensor-carpi-radialis-brevis.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-2"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "extensor-carpi-radialis-brevis.r"
+      },
+      "muscle": "extensor-carpi-radialis-brevis",
+      "short": {
+        "en": "EC radialis brevis",
+        "zh": "桡侧腕短伸肌"
+      },
+      "connects": [
+        "humerus",
+        "hand"
+      ],
+      "explode": {
+        "dir": [
+          1,
+          0,
+          -0.6
+        ],
+        "dist": 0.045,
+        "stage": 1
+      }
+    },
+    {
+      "id": "flexor-digitorum-superficialis",
+      "name": {
+        "en": "Flexor digitorum superficialis",
+        "zh": "指浅屈肌"
+      },
+      "group": "intermediate",
+      "mesh": "flexor-digitorum-superficialis.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-2"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "flexor-digitorum-superficialis.r"
+      },
+      "muscle": "flexor-digitorum-superficialis",
+      "short": {
+        "en": "Flexor digitorum superficialis",
+        "zh": "指浅屈肌"
+      },
+      "connects": [
+        "humerus",
+        "ulna",
+        "radius",
+        "hand"
+      ],
+      "explode": {
+        "dir": [
+          1,
+          0,
+          0.6
+        ],
+        "dist": 0.045,
+        "stage": 1
+      }
+    },
+    {
+      "id": "deltoid-anterior",
+      "name": {
+        "en": "Deltoid, clavicular (anterior) part",
+        "zh": "三角肌锁骨部（前部）"
+      },
+      "group": "neighbours",
+      "mesh": "deltoid-anterior.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:ink-3"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "deltoid-anterior.r"
+      },
+      "muscle": "deltoid-anterior",
+      "short": {
+        "en": "Front deltoid",
+        "zh": "三角肌前部"
+      },
+      "connects": [
+        "humerus"
+      ]
+    },
+    {
+      "id": "deltoid-lateral",
+      "name": {
+        "en": "Deltoid, acromial (lateral) part",
+        "zh": "三角肌肩峰部"
+      },
+      "group": "neighbours",
+      "mesh": "deltoid-lateral.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:ink-3"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "deltoid-lateral.r"
+      },
+      "muscle": "deltoid-lateral",
+      "short": {
+        "en": "Deltoid, acromial (lateral) part",
+        "zh": "三角肌肩峰部"
+      },
+      "connects": [
+        "humerus"
+      ]
+    },
+    {
+      "id": "deltoid-posterior",
+      "name": {
+        "en": "Deltoid, spinal (posterior) part",
+        "zh": "三角肌肩胛冈部"
+      },
+      "group": "neighbours",
+      "mesh": "deltoid-posterior.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:ink-3"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "deltoid-posterior.r"
+      },
+      "muscle": "deltoid-posterior",
+      "short": {
+        "en": "Deltoid, spinal (posterior) part",
+        "zh": "三角肌肩胛冈部"
+      },
+      "connects": [
+        "humerus"
+      ]
+    },
+    {
+      "id": "pectoralis-major-clavicular",
+      "name": {
+        "en": "Pectoralis major, clavicular part",
+        "zh": "胸大肌锁骨部"
+      },
+      "group": "neighbours",
+      "mesh": "pectoralis-major-clavicular.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:ink-3"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "pectoralis-major-clavicular.r"
+      },
+      "muscle": "pectoralis-major-clavicular",
+      "short": {
+        "en": "Pec maj · clav",
+        "zh": "胸大肌锁骨部"
+      },
+      "connects": [
+        "humerus"
+      ]
+    },
+    {
+      "id": "pectoralis-major-sternocostal",
+      "name": {
+        "en": "Pectoralis major, sternocostal part",
+        "zh": "胸大肌胸肋部"
+      },
+      "group": "neighbours",
+      "mesh": "pectoralis-major-sternocostal.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:ink-3"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "pectoralis-major-sternocostal.r"
+      },
+      "muscle": "pectoralis-major-sternocostal",
+      "short": {
+        "en": "Pec maj · sternocostal",
+        "zh": "胸大肌胸肋部"
+      },
+      "connects": [
+        "humerus"
+      ]
+    },
+    {
+      "id": "pectoralis-major-abdominal",
+      "name": {
+        "en": "Pectoralis major, abdominal part",
+        "zh": "胸大肌腹部"
+      },
+      "group": "neighbours",
+      "mesh": "pectoralis-major-abdominal.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:ink-3"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "pectoralis-major-abdominal.r"
+      },
+      "muscle": "pectoralis-major-abdominal",
+      "short": {
+        "en": "Pec maj · abd",
+        "zh": "胸大肌腹部"
+      },
+      "connects": [
+        "humerus"
+      ]
+    },
+    {
+      "id": "latissimus-dorsi",
+      "name": {
+        "en": "Latissimus dorsi",
+        "zh": "背阔肌"
+      },
+      "group": "neighbours",
+      "mesh": "latissimus-dorsi.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:ink-3"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "latissimus-dorsi.r"
+      },
+      "muscle": "latissimus-dorsi",
+      "short": {
+        "en": "Latissimus dorsi",
+        "zh": "背阔肌"
+      },
+      "connects": [
+        "humerus"
+      ]
+    },
+    {
+      "id": "humerus",
+      "name": {
+        "en": "Humerus",
+        "zh": "肱骨"
+      },
+      "group": "skeleton",
+      "mesh": "humerus.l",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "humerus.r"
+      },
+      "summary": {
+        "en": "Links the shoulder and elbow.",
+        "zh": "连接肩与肘。"
+      },
+      "detail": {
+        "en": "The upper-arm bone receives coracobrachialis and gives origins to brachialis and the lateral and medial heads of triceps. Its epicondyles anchor several forearm muscles [M2].",
+        "zh": "肱骨是上臂的骨，承接喙肱肌止点，也是肱肌及肱三头肌外侧头、内侧头的起点。两侧上髁是多块前臂肌肉的起点 [M2]。"
+      },
+      "short": {
+        "en": "Humerus",
+        "zh": "肱骨"
+      },
+      "connects": []
+    },
+    {
+      "id": "radius",
+      "name": {
+        "en": "Radius",
+        "zh": "桡骨"
+      },
+      "group": "skeleton",
+      "mesh": "radius.l",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "radius.r"
+      },
+      "short": {
+        "en": "Radius",
+        "zh": "桡骨"
+      },
+      "summary": {
+        "en": "Turns with the hand during forearm rotation.",
+        "zh": "前臂旋转时随手一起转动。"
+      },
+      "detail": {
+        "en": "The thumb-side forearm bone receives biceps at its tuberosity, pronator teres along its shaft, and brachioradialis near its styloid. It crosses the ulna in pronation [M2].",
+        "zh": "拇指侧前臂骨。肱二头肌止于桡骨粗隆，旋前圆肌止于骨干，肱桡肌止于茎突附近。旋前时桡骨交叉到尺骨前面 [M2]。"
+      },
+      "connects": []
+    },
+    {
+      "id": "ulna",
+      "name": {
+        "en": "Ulna",
+        "zh": "尺骨"
+      },
+      "group": "skeleton",
+      "mesh": "ulna.l",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "ulna.r"
+      },
+      "short": {
+        "en": "Ulna",
+        "zh": "尺骨"
+      },
+      "summary": {
+        "en": "Receives the elbow flexor and extensor tendons.",
+        "zh": "承接屈肘与伸肘肌腱。"
+      },
+      "detail": {
+        "en": "The little-finger-side forearm bone receives brachialis anteriorly and triceps at the olecranon behind the elbow. It remains with the elbow segment while the separate radius turns in the rig [M2].",
+        "zh": "小指侧前臂骨。肱肌止于近端前面，肱三头肌止于肘后鹰嘴。骨架中尺骨随肘段活动，而独立的桡骨围绕它转动 [M2]。"
+      },
+      "connects": []
+    },
+    {
+      "id": "hand",
+      "name": {
+        "en": "Hand bones",
+        "zh": "手骨"
+      },
+      "group": "skeleton",
+      "mesh": "hand.l",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "hand.r"
+      },
+      "short": {
+        "en": "Hand",
+        "zh": "手骨"
+      },
+      "summary": {
+        "en": "Shows the wrist and finger attachment landmarks.",
+        "zh": "显示腕与手指的附着标志。"
+      },
+      "detail": {
+        "en": "Carpals, metacarpals and phalanges are merged per side. Wrist tendons reach particular carpals or metacarpal bases; finger tendons reach phalanges or tendon expansions. Palmaris longus reaches soft tissue, so its insertion marker is anchored to its own distal soft-tissue mesh rather than a bone [M2]. No individual finger joint is animated.",
+        "zh": "每侧腕骨、掌骨与指骨合为一个网格。腕肌腱止于特定腕骨或掌骨底，指肌腱止于指骨或指背腱膜。掌长肌止于软组织，因此它的止点标记锚定在自身远端软组织网格，而不是骨面 [M2]。模型不驱动单独的指关节。"
+      },
+      "connects": []
+    },
+    {
+      "id": "scapula",
+      "name": {
+        "en": "Scapula",
+        "zh": "肩胛骨"
+      },
+      "group": "skeleton",
+      "mesh": "scapula.l",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "scapula.r"
+      },
+      "short": {
+        "en": "Scapula",
+        "zh": "肩胛骨"
+      },
+      "summary": {
+        "en": "Anchors muscle heads that cross the shoulder.",
+        "zh": "承接跨肩关节的肌头。"
+      },
+      "detail": {
+        "en": "Biceps long head starts above the glenoid, triceps long head below it. Biceps short head and coracobrachialis start at the coracoid process [M2]. The mesh shows these landmarks; the simplified clavicle–scapula chain does not model a full gliding shoulder girdle.",
+        "zh": "肱二头肌长头起于关节盂上方，肱三头肌长头起于下方。肱二头肌短头和喙肱肌起于喙突 [M2]。网格保留这些标志；简化的锁骨—肩胛骨链不模拟完整的肩带滑动。"
+      },
+      "connects": []
+    },
+    {
+      "id": "skin-outline",
+      "name": {
+        "en": "Body outline",
+        "zh": "体表轮廓"
+      },
+      "group": "body",
+      "mesh": "skin-outline",
+      "material": {
+        "color": "membrane",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Locates the arm muscles on the reference body.",
+        "zh": "在参考人体上定位手臂肌肉。"
+      },
+      "detail": {
+        "en": "The low-detail skin surface comes from the same male reference body as the muscles [M3]. X-RAY reveals the muscles through it.",
+        "zh": "低细节皮肤轮廓与肌肉来自同一具男性参考人体 [M3]。透视模式让肌肉从轮廓中显露。"
+      },
+      "context": true,
+      "shell": true
+    }
+  ],
+  "groups": [
+    {
+      "id": "superficial",
+      "name": {
+        "en": "Surface layer",
+        "zh": "浅层"
+      },
+      "color": "token:muscle-1"
+    },
+    {
+      "id": "intermediate",
+      "name": {
+        "en": "Middle layer",
+        "zh": "中层"
+      },
+      "color": "token:muscle-2"
+    },
+    {
+      "id": "deep",
+      "name": {
+        "en": "Deep layer",
+        "zh": "深层"
+      },
+      "color": "token:muscle-3"
+    },
+    {
+      "id": "skeleton",
+      "name": {
+        "en": "Bones",
+        "zh": "骨骼"
+      },
+      "color": "token:bone"
+    },
+    {
+      "id": "neighbours",
+      "name": {
+        "en": "Neighbouring muscles",
+        "zh": "邻近肌肉"
+      },
+      "color": "token:ink-3",
+      "card": false
+    },
+    {
+      "id": "body",
+      "name": {
+        "en": "Body outline",
+        "zh": "体表轮廓"
+      },
+      "color": "token:ink-3",
+      "card": false
+    }
+  ],
+  "animations": [
+    {
+      "id": "biceps-brachii-long-contract",
+      "target": "biceps-brachii-long",
+      "kind": "contract",
+      "amount": 0.7,
+      "bulge": 0.06,
+      "hz": 0.45
+    },
+    {
+      "id": "biceps-brachii-short-contract",
+      "target": "biceps-brachii-short",
+      "kind": "contract",
+      "amount": 0.7,
+      "bulge": 0.06,
+      "hz": 0.45
+    },
+    {
+      "id": "triceps-brachii-long-contract",
+      "target": "triceps-brachii-long",
+      "kind": "contract",
+      "amount": 0.7,
+      "bulge": 0.06,
+      "hz": 0.45
+    },
+    {
+      "id": "triceps-brachii-lateral-contract",
+      "target": "triceps-brachii-lateral",
+      "kind": "contract",
+      "amount": 0.7,
+      "bulge": 0.06,
+      "hz": 0.45
+    },
+    {
+      "id": "brachioradialis-contract",
+      "target": "brachioradialis",
+      "kind": "contract",
+      "amount": 0.7,
+      "bulge": 0.06,
+      "hz": 0.45
+    },
+    {
+      "id": "pronator-teres-contract",
+      "target": "pronator-teres",
+      "kind": "contract",
+      "amount": 0.7,
+      "bulge": 0.06,
+      "hz": 0.45
+    },
+    {
+      "id": "flexor-carpi-radialis-contract",
+      "target": "flexor-carpi-radialis",
+      "kind": "contract",
+      "amount": 0.7,
+      "bulge": 0.06,
+      "hz": 0.45
+    },
+    {
+      "id": "palmaris-longus-contract",
+      "target": "palmaris-longus",
+      "kind": "contract",
+      "amount": 0.7,
+      "bulge": 0.06,
+      "hz": 0.45
+    },
+    {
+      "id": "flexor-carpi-ulnaris-contract",
+      "target": "flexor-carpi-ulnaris",
+      "kind": "contract",
+      "amount": 0.7,
+      "bulge": 0.06,
+      "hz": 0.45
+    },
+    {
+      "id": "extensor-carpi-radialis-longus-contract",
+      "target": "extensor-carpi-radialis-longus",
+      "kind": "contract",
+      "amount": 0.7,
+      "bulge": 0.06,
+      "hz": 0.45
+    },
+    {
+      "id": "extensor-digitorum-contract",
+      "target": "extensor-digitorum",
+      "kind": "contract",
+      "amount": 0.7,
+      "bulge": 0.06,
+      "hz": 0.45
+    },
+    {
+      "id": "extensor-carpi-ulnaris-contract",
+      "target": "extensor-carpi-ulnaris",
+      "kind": "contract",
+      "amount": 0.7,
+      "bulge": 0.06,
+      "hz": 0.45
+    },
+    {
+      "id": "brachialis-contract",
+      "target": "brachialis",
+      "kind": "contract",
+      "amount": 0.7,
+      "bulge": 0.06,
+      "hz": 0.45
+    },
+    {
+      "id": "triceps-brachii-medial-contract",
+      "target": "triceps-brachii-medial",
+      "kind": "contract",
+      "amount": 0.7,
+      "bulge": 0.06,
+      "hz": 0.45
+    },
+    {
+      "id": "coracobrachialis-contract",
+      "target": "coracobrachialis",
+      "kind": "contract",
+      "amount": 0.7,
+      "bulge": 0.06,
+      "hz": 0.45
+    },
+    {
+      "id": "anconeus-contract",
+      "target": "anconeus",
+      "kind": "contract",
+      "amount": 0.7,
+      "bulge": 0.06,
+      "hz": 0.45
+    },
+    {
+      "id": "extensor-carpi-radialis-brevis-contract",
+      "target": "extensor-carpi-radialis-brevis",
+      "kind": "contract",
+      "amount": 0.7,
+      "bulge": 0.06,
+      "hz": 0.45
+    },
+    {
+      "id": "flexor-digitorum-superficialis-contract",
+      "target": "flexor-digitorum-superficialis",
+      "kind": "contract",
+      "amount": 0.7,
+      "bulge": 0.06,
+      "hz": 0.45
+    }
+  ],
+  "views": {
+    "assembled": {
+      "camera": {
+        "position": [
+          0.55,
+          0.02,
+          2.0
+        ],
+        "target": [
+          0,
+          -0.19,
+          0.02
+        ],
+        "fov": 30
+      }
+    },
+    "exploded": {
+      "camera": {
+        "position": [
+          0.7,
+          0.12,
+          2.2
+        ],
+        "target": [
+          0,
+          -0.18,
+          0
+        ],
+        "fov": 30
+      }
+    },
+    "cover": {
+      "position": [
+        0.58,
+        0.08,
+        1.9
+      ],
+      "target": [
+        0,
+        -0.18,
+        0.015
+      ],
+      "fov": 30
+    },
+    "section": {
+      "plane": "xy"
+    },
+    "cutaway": {
+      "normal": [
+        -1,
+        0,
+        0
+      ],
+      "offset": 0.22
+    },
+    "cuts": {
+      "sagittal-arm": {
+        "normal": [
+          -1,
+          0,
+          0
+        ],
+        "offset": 0.22,
+        "label": {
+          "en": "Sagittal · left arm",
+          "zh": "矢状 · 左臂"
+        }
+      },
+      "transverse-arm": {
+        "normal": [
+          0,
+          -1,
+          0
+        ],
+        "offset": -0.04,
+        "label": {
+          "en": "Transverse · upper arm",
+          "zh": "横切 · 上臂"
+        }
+      }
+    },
+    "explodeLabel": {
+      "en": "Peel",
+      "zh": "剥层"
+    }
+  },
+  "spec": [
+    {
+      "key": {
+        "en": "Muscles",
+        "zh": "肌肉"
+      },
+      "value": {
+        "en": "18 parts · 2 displayed layers",
+        "zh": "18 个 · 2 层展示"
+      },
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Exercises",
+        "zh": "动作"
+      },
+      "value": "11",
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Model",
+        "zh": "模型"
+      },
+      "value": {
+        "en": "Z-Anatomy · male reference",
+        "zh": "Z-Anatomy · 男性参考"
+      },
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Scope",
+        "zh": "范围"
+      },
+      "value": {
+        "en": "Deep forearm omitted",
+        "zh": "未纳入前臂深层"
+      },
+      "tag": "design"
+    }
+  ],
+  "presets": [
+    {
+      "id": "front",
+      "label": {
+        "en": "Front",
+        "zh": "正面"
+      },
+      "camera": {
+        "position": [
+          0.55,
+          0.02,
+          2.0
+        ],
+        "target": [
+          0,
+          -0.19,
+          0.02
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "back",
+      "label": {
+        "en": "Back",
+        "zh": "背面"
+      },
+      "camera": {
+        "position": [
+          0.4,
+          0.04,
+          -1.9
+        ],
+        "target": [
+          0,
+          -0.19,
+          0
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "left-side",
+      "label": {
+        "en": "Left side",
+        "zh": "左侧"
+      },
+      "camera": {
+        "position": [
+          1.7,
+          0.06,
+          0.3
+        ],
+        "target": [
+          0.2,
+          -0.2,
+          0.02
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "close-arm",
+      "label": {
+        "en": "Close",
+        "zh": "近景"
+      },
+      "camera": {
+        "position": [
+          0.55,
+          -0.08,
+          0.7
+        ],
+        "target": [
+          0.22,
+          -0.18,
+          0.01
+        ],
+        "fov": 28
+      }
+    },
+    {
+      "id": "on-my-body",
+      "label": {
+        "en": "On my body",
+        "zh": "在身上"
+      },
+      "camera": {
+        "position": [
+          0.9,
+          -0.06,
+          3.2
+        ],
+        "target": [
+          0,
+          -0.43,
+          0
+        ],
+        "fov": 30
+      },
+      "view": "xray"
+    },
+    {
+      "id": "exercise-view",
+      "label": {
+        "en": "Exercise",
+        "zh": "动作"
+      },
+      "camera": {
+        "position": [
+          1.6,
+          0.55,
+          4.1
+        ],
+        "target": [
+          0,
+          -0.14,
+          0.02
+        ],
+        "fov": 22
+      }
+    }
+  ],
+  "poses": {
+    "neutral-stand": {
+      "joint:forearm.l": {
+        "pronation": 80
+      },
+      "contract": {},
+      "duration": 1.2,
+      "joint:elbow.l": {
+        "flexion": 35
+      }
+    },
+    "elbow-flexed": {
+      "joint:elbow.l": {
+        "flexion": 85
+      },
+      "contract": {
+        "biceps-brachii-long": 0.75,
+        "biceps-brachii-short": 0.75,
+        "brachialis": 0.75,
+        "brachioradialis": 0.75
+      },
+      "duration": 1.2
+    },
+    "elbow-extended": {
+      "joint:elbow.l": {
+        "flexion": 5
+      },
+      "contract": {
+        "triceps-brachii-long": 0.75,
+        "triceps-brachii-lateral": 0.75,
+        "triceps-brachii-medial": 0.75,
+        "anconeus": 0.75
+      },
+      "duration": 1.2
+    },
+    "palm-up": {
+      "joint:elbow.l": {
+        "flexion": 75
+      },
+      "joint:forearm.l": {
+        "pronation": 0
+      },
+      "contract": {
+        "biceps-brachii-long": 0.75,
+        "biceps-brachii-short": 0.75
+      },
+      "duration": 1.2
+    },
+    "palm-down": {
+      "joint:elbow.l": {
+        "flexion": 75
+      },
+      "joint:forearm.l": {
+        "pronation": 150
+      },
+      "contract": {
+        "pronator-teres": 0.75
+      },
+      "duration": 1.2
+    },
+    "shoulder-forward": {
+      "joint:shoulder.l": {
+        "flexion": 65
+      },
+      "contract": {
+        "coracobrachialis": 0.75,
+        "biceps-brachii-long": 0.45,
+        "biceps-brachii-short": 0.45
+      },
+      "duration": 1.2
+    },
+    "shoulder-back": {
+      "joint:shoulder.l": {
+        "extension": 25
+      },
+      "contract": {
+        "triceps-brachii-long": 0.75
+      },
+      "duration": 1.2
+    },
+    "shoulder-in": {
+      "joint:shoulder.l": {
+        "adduction": 15,
+        "flexion": 30
+      },
+      "contract": {
+        "coracobrachialis": 0.65,
+        "triceps-brachii-long": 0.45
+      },
+      "duration": 1.2
+    },
+    "wrist-flexed": {
+      "joint:elbow.l": {
+        "flexion": 75
+      },
+      "joint:wrist.l": {
+        "flexion": 25
+      },
+      "contract": {
+        "flexor-carpi-radialis": 0.65,
+        "flexor-carpi-ulnaris": 0.65,
+        "palmaris-longus": 0.65,
+        "flexor-digitorum-superficialis": 0.65
+      },
+      "duration": 1.2
+    },
+    "wrist-extended": {
+      "joint:elbow.l": {
+        "flexion": 75
+      },
+      "joint:wrist.l": {
+        "extension": 25
+      },
+      "contract": {
+        "extensor-carpi-radialis-longus": 0.65,
+        "extensor-carpi-radialis-brevis": 0.65,
+        "extensor-carpi-ulnaris": 0.65,
+        "extensor-digitorum": 0.65
+      },
+      "duration": 1.2
+    },
+    "wrist-radial": {
+      "joint:elbow.l": {
+        "flexion": 75
+      },
+      "joint:wrist.l": {
+        "abduction": 15
+      },
+      "contract": {
+        "flexor-carpi-radialis": 0.65,
+        "extensor-carpi-radialis-longus": 0.65,
+        "extensor-carpi-radialis-brevis": 0.65
+      },
+      "duration": 1.2
+    },
+    "wrist-ulnar": {
+      "joint:elbow.l": {
+        "flexion": 75
+      },
+      "joint:wrist.l": {
+        "adduction": 15
+      },
+      "contract": {
+        "flexor-carpi-ulnaris": 0.65,
+        "extensor-carpi-ulnaris": 0.65
+      },
+      "duration": 1.2
+    }
+  },
+  "units": {
+    "modelUnit": "m",
+    "scale": 1
+  },
+  "rig": {
+    "joints": {
+      "trunk": {
+        "node": "joint.trunk",
+        "axes": {
+          "flexion": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "lateral-flexion": [
+            0,
+            0,
+            1
+          ],
+          "rotation": [
+            0.0,
+            1.0,
+            0.0
+          ]
+        }
+      },
+      "clavicle.l": {
+        "node": "joint.clavicle.l",
+        "axes": {
+          "protraction": [
+            0,
+            -1,
+            0
+          ],
+          "elevation": [
+            0,
+            0,
+            1
+          ]
+        }
+      },
+      "scapula.l": {
+        "node": "joint.scapula.l",
+        "axes": {
+          "protraction": [
+            0,
+            -1,
+            0
+          ],
+          "upward-rotation": [
+            0,
+            0,
+            1
+          ],
+          "elevation": [
+            0,
+            0,
+            1
+          ]
+        }
+      },
+      "shoulder.l": {
+        "node": "joint.shoulder.l",
+        "axes": {
+          "horizontal-adduction": [
+            0,
+            -1,
+            0
+          ],
+          "flexion": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "abduction": [
+            0,
+            0,
+            1
+          ],
+          "internal-rotation": [
+            0.1801227480173111,
+            -0.9823485612869263,
+            -0.0504680797457695
+          ]
+        }
+      },
+      "elbow.l": {
+        "node": "joint.elbow.l",
+        "axes": {
+          "flexion": [
+            -1.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "forearm.l": {
+        "node": "joint.forearm.l",
+        "axes": {
+          "pronation": [
+            0.07507091015577316,
+            -0.9787099361419678,
+            0.191026508808136
+          ]
+        }
+      },
+      "hand.l": {
+        "node": "joint.hand.l",
+        "axes": {
+          "flexion": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "abduction": [
+            0,
+            0,
+            1
+          ]
+        },
+        "offset": 0.08
+      },
+      "clavicle.r": {
+        "node": "joint.clavicle.r",
+        "axes": {
+          "protraction": [
+            0,
+            1,
+            0
+          ],
+          "elevation": [
+            0,
+            0,
+            -1
+          ]
+        }
+      },
+      "scapula.r": {
+        "node": "joint.scapula.r",
+        "axes": {
+          "protraction": [
+            0,
+            1,
+            0
+          ],
+          "upward-rotation": [
+            0,
+            0,
+            -1
+          ],
+          "elevation": [
+            0,
+            0,
+            -1
+          ]
+        }
+      },
+      "shoulder.r": {
+        "node": "joint.shoulder.r",
+        "axes": {
+          "horizontal-adduction": [
+            0,
+            -1,
+            0
+          ],
+          "flexion": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "abduction": [
+            0,
+            0,
+            -1
+          ],
+          "internal-rotation": [
+            -0.18012265861034393,
+            -0.9823486804962158,
+            -0.050468165427446365
+          ]
+        }
+      },
+      "elbow.r": {
+        "node": "joint.elbow.r",
+        "axes": {
+          "flexion": [
+            -1.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "forearm.r": {
+        "node": "joint.forearm.r",
+        "axes": {
+          "pronation": [
+            -0.0750710666179657,
+            -0.9787099361419678,
+            0.1910264939069748
+          ]
+        }
+      },
+      "hand.r": {
+        "node": "joint.hand.r",
+        "axes": {
+          "flexion": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "abduction": [
+            0,
+            0,
+            -1
+          ]
+        },
+        "offset": 0.08
+      },
+      "wrist.l": {
+        "node": "joint.hand.l",
+        "axes": {
+          "flexion": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "abduction": [
+            0,
+            0,
+            1
+          ]
+        }
+      },
+      "wrist.r": {
+        "node": "joint.hand.r",
+        "axes": {
+          "flexion": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "abduction": [
+            0,
+            0,
+            -1
+          ]
+        }
+      }
+    },
+    "demo": {
+      "shoulder": {
+        "flexion": 65,
+        "extension": 25,
+        "adduction": 15,
+        "abduction": 65,
+        "horizontal-adduction": 35,
+        "internal-rotation": 40,
+        "horizontal-abduction": 35,
+        "external-rotation": 40
+      },
+      "elbow": {
+        "flexion": 85,
+        "extension": 35
+      },
+      "forearm": {
+        "pronation": 150,
+        "supination": 80
+      },
+      "wrist": {
+        "flexion": 25,
+        "extension": 25,
+        "abduction": 15,
+        "adduction": 15
+      },
+      "scapula": {
+        "protraction": 12,
+        "retraction": 12,
+        "upward-rotation": 20,
+        "elevation": 8
+      }
+    }
+  },
+  "sites": [
+    {
+      "bone": "scapula",
+      "kind": "origin",
+      "points": [
+        [
+          0.14416378,
+          0.14767289,
+          -0.00274404
+        ],
+        [
+          0.14477136,
+          0.14717015,
+          -0.0050859
+        ],
+        [
+          0.14491757,
+          0.14632653,
+          -0.00849099
+        ]
+      ],
+      "muscle": "biceps-brachii-long"
+    },
+    {
+      "bone": "radius",
+      "kind": "insertion",
+      "points": [
+        [
+          0.23365433,
+          -0.19279118,
+          0.01239134
+        ],
+        [
+          0.23480703,
+          -0.18435544,
+          0.01190654
+        ],
+        [
+          0.23450051,
+          -0.17696611,
+          0.00936009
+        ]
+      ],
+      "muscle": "biceps-brachii-long"
+    },
+    {
+      "bone": "scapula",
+      "kind": "origin",
+      "points": [
+        [
+          0.1409519,
+          0.14565791,
+          0.02538059
+        ]
+      ],
+      "muscle": "biceps-brachii-short"
+    },
+    {
+      "bone": "radius",
+      "kind": "insertion",
+      "points": [
+        [
+          0.23365433,
+          -0.19279118,
+          0.01239134
+        ],
+        [
+          0.23480703,
+          -0.18435544,
+          0.01190654
+        ],
+        [
+          0.23450051,
+          -0.17696611,
+          0.00936009
+        ]
+      ],
+      "muscle": "biceps-brachii-short"
+    },
+    {
+      "bone": "scapula",
+      "kind": "origin",
+      "points": [
+        [
+          0.15231843,
+          0.11172603,
+          -0.00959336
+        ],
+        [
+          0.15178259,
+          0.11097637,
+          -0.01218889
+        ],
+        [
+          0.15117934,
+          0.11084167,
+          -0.01457944
+        ]
+      ],
+      "muscle": "triceps-brachii-long"
+    },
+    {
+      "bone": "ulna",
+      "kind": "insertion",
+      "points": [
+        [
+          0.20355006,
+          -0.14949366,
+          -0.01992376
+        ],
+        [
+          0.20674274,
+          -0.14549282,
+          -0.02331699
+        ],
+        [
+          0.2201722,
+          -0.14620959,
+          -0.02639832
+        ]
+      ],
+      "muscle": "triceps-brachii-long"
+    },
+    {
+      "bone": "humerus",
+      "kind": "origin",
+      "points": [
+        [
+          0.20537833,
+          0.00939227,
+          -0.01281099
+        ],
+        [
+          0.19707623,
+          0.05055653,
+          -0.00955676
+        ],
+        [
+          0.18828972,
+          0.09770176,
+          -0.00578493
+        ]
+      ],
+      "muscle": "triceps-brachii-lateral"
+    },
+    {
+      "bone": "ulna",
+      "kind": "insertion",
+      "points": [
+        [
+          0.20355006,
+          -0.14949366,
+          -0.01992376
+        ],
+        [
+          0.20674274,
+          -0.14549282,
+          -0.02331699
+        ],
+        [
+          0.2201722,
+          -0.14620959,
+          -0.02639832
+        ]
+      ],
+      "muscle": "triceps-brachii-lateral"
+    },
+    {
+      "bone": "humerus",
+      "kind": "origin",
+      "points": [
+        [
+          0.22331361,
+          -0.07557392,
+          -0.01521322
+        ],
+        [
+          0.21964031,
+          -0.06040441,
+          -0.0140219
+        ],
+        [
+          0.216132,
+          -0.04240991,
+          -0.0134782
+        ]
+      ],
+      "muscle": "brachioradialis"
+    },
+    {
+      "bone": "radius",
+      "kind": "insertion",
+      "points": [
+        [
+          0.28662826,
+          -0.38537089,
+          0.04988345
+        ],
+        [
+          0.2871578,
+          -0.38195641,
+          0.04837729
+        ],
+        [
+          0.28677235,
+          -0.37852941,
+          0.04934022
+        ]
+      ],
+      "muscle": "brachioradialis"
+    },
+    {
+      "bone": "humerus",
+      "kind": "origin",
+      "points": [
+        [
+          0.20175778,
+          -0.13927221,
+          0.00468068
+        ]
+      ],
+      "muscle": "pronator-teres"
+    },
+    {
+      "bone": "ulna",
+      "kind": "origin",
+      "points": [
+        [
+          0.21421534,
+          -0.1696728,
+          0.00336659
+        ]
+      ],
+      "muscle": "pronator-teres"
+    },
+    {
+      "bone": "radius",
+      "kind": "insertion",
+      "points": [
+        [
+          0.25589742,
+          -0.23672628,
+          0.01651864
+        ]
+      ],
+      "muscle": "pronator-teres"
+    },
+    {
+      "bone": "humerus",
+      "kind": "origin",
+      "points": [
+        [
+          0.1934441,
+          -0.13750028,
+          0.00110741
+        ]
+      ],
+      "muscle": "flexor-carpi-radialis"
+    },
+    {
+      "bone": "hand",
+      "kind": "insertion",
+      "points": [
+        [
+          0.27726039,
+          -0.41574013,
+          0.0610895
+        ],
+        [
+          0.26987611,
+          -0.41991014,
+          0.05655757
+        ]
+      ],
+      "muscle": "flexor-carpi-radialis"
+    },
+    {
+      "bone": "humerus",
+      "kind": "origin",
+      "points": [
+        [
+          0.18827184,
+          -0.13846525,
+          0.00020412
+        ]
+      ],
+      "muscle": "palmaris-longus"
+    },
+    {
+      "bone": "palmaris-longus",
+      "kind": "insertion",
+      "points": [
+        [
+          0.23736076,
+          -0.46480618,
+          0.07886253
+        ]
+      ],
+      "muscle": "palmaris-longus"
+    },
+    {
+      "bone": "ulna",
+      "kind": "origin",
+      "points": [
+        [
+          0.21016585,
+          -0.14417311,
+          -0.02404124
+        ],
+        [
+          0.24019238,
+          -0.29983419,
+          0.02496036
+        ],
+        [
+          0.23860026,
+          -0.25159171,
+          0.01404842
+        ],
+        [
+          0.22398604,
+          -0.20196999,
+          0.00036312
+        ]
+      ],
+      "muscle": "flexor-carpi-ulnaris"
+    },
+    {
+      "bone": "humerus",
+      "kind": "origin",
+      "points": [
+        [
+          0.1934441,
+          -0.13750028,
+          0.00110741
+        ]
+      ],
+      "muscle": "flexor-carpi-ulnaris"
+    },
+    {
+      "bone": "hand",
+      "kind": "insertion",
+      "points": [
+        [
+          0.24509363,
+          -0.40412053,
+          0.05937674
+        ]
+      ],
+      "muscle": "flexor-carpi-ulnaris"
+    },
+    {
+      "bone": "humerus",
+      "kind": "origin",
+      "points": [
+        [
+          0.24596792,
+          -0.12915136,
+          -0.01468923
+        ],
+        [
+          0.2391328,
+          -0.11308541,
+          -0.01782167
+        ],
+        [
+          0.2305966,
+          -0.09224724,
+          -0.01841474
+        ]
+      ],
+      "muscle": "extensor-carpi-radialis-longus"
+    },
+    {
+      "bone": "hand",
+      "kind": "insertion",
+      "points": [
+        [
+          0.28460448,
+          -0.41855914,
+          0.04851035
+        ],
+        [
+          0.28467165,
+          -0.41683293,
+          0.04856364
+        ],
+        [
+          0.28509589,
+          -0.41496764,
+          0.0496993
+        ]
+      ],
+      "muscle": "extensor-carpi-radialis-longus"
+    },
+    {
+      "bone": "humerus",
+      "kind": "origin",
+      "points": [
+        [
+          0.23893387,
+          -0.13631052,
+          -0.01862435
+        ]
+      ],
+      "muscle": "extensor-digitorum"
+    },
+    {
+      "bone": "hand",
+      "kind": "insertion",
+      "points": [
+        [
+          0.31099728,
+          -0.51420518,
+          0.08378073
+        ],
+        [
+          0.31662601,
+          -0.52974123,
+          0.10205672
+        ],
+        [
+          0.28112007,
+          -0.51722578,
+          0.08942774
+        ],
+        [
+          0.28570304,
+          -0.53864844,
+          0.11122391
+        ],
+        [
+          0.25605778,
+          -0.51176053,
+          0.08825354
+        ],
+        [
+          0.25755832,
+          -0.53055507,
+          0.11166111
+        ],
+        [
+          0.23241968,
+          -0.49695948,
+          0.08655705
+        ],
+        [
+          0.23062967,
+          -0.51460633,
+          0.09984282
+        ]
+      ],
+      "muscle": "extensor-digitorum"
+    },
+    {
+      "bone": "humerus",
+      "kind": "origin",
+      "points": [
+        [
+          0.23893387,
+          -0.13631052,
+          -0.01862435
+        ]
+      ],
+      "muscle": "extensor-carpi-ulnaris"
+    },
+    {
+      "bone": "ulna",
+      "kind": "origin",
+      "points": [
+        [
+          0.22970559,
+          -0.30413994,
+          0.0198494
+        ]
+      ],
+      "muscle": "extensor-carpi-ulnaris"
+    },
+    {
+      "bone": "hand",
+      "kind": "insertion",
+      "points": [
+        [
+          0.24454993,
+          -0.41309752,
+          0.05256897
+        ]
+      ],
+      "muscle": "extensor-carpi-ulnaris"
+    },
+    {
+      "bone": "humerus",
+      "kind": "origin",
+      "points": [
+        [
+          0.21029121,
+          -0.10261392,
+          -0.00391927
+        ],
+        [
+          0.21427665,
+          -0.03844523,
+          -0.00299288
+        ],
+        [
+          0.20968499,
+          0.01531777,
+          0.00734453
+        ]
+      ],
+      "muscle": "brachialis"
+    },
+    {
+      "bone": "ulna",
+      "kind": "insertion",
+      "points": [
+        [
+          0.22309162,
+          -0.18979201,
+          -0.00043009
+        ],
+        [
+          0.22232373,
+          -0.18471986,
+          0.00032547
+        ],
+        [
+          0.22283213,
+          -0.17977985,
+          0.00037516
+        ]
+      ],
+      "muscle": "brachialis"
+    },
+    {
+      "bone": "humerus",
+      "kind": "origin",
+      "points": [
+        [
+          0.21838276,
+          -0.10390085,
+          -0.01955602
+        ],
+        [
+          0.20601595,
+          -0.04903127,
+          -0.0174822
+        ],
+        [
+          0.18977673,
+          0.03267994,
+          -0.00686067
+        ]
+      ],
+      "muscle": "triceps-brachii-medial"
+    },
+    {
+      "bone": "ulna",
+      "kind": "insertion",
+      "points": [
+        [
+          0.20355006,
+          -0.14949366,
+          -0.01992376
+        ],
+        [
+          0.20674274,
+          -0.14549282,
+          -0.02331699
+        ],
+        [
+          0.2201722,
+          -0.14620959,
+          -0.02639832
+        ]
+      ],
+      "muscle": "triceps-brachii-medial"
+    },
+    {
+      "bone": "scapula",
+      "kind": "origin",
+      "points": [
+        [
+          0.13739108,
+          0.1398073,
+          0.0261791
+        ],
+        [
+          0.13987385,
+          0.14068353,
+          0.02646701
+        ],
+        [
+          0.14142915,
+          0.14217253,
+          0.02769636
+        ]
+      ],
+      "muscle": "coracobrachialis"
+    },
+    {
+      "bone": "humerus",
+      "kind": "insertion",
+      "points": [
+        [
+          0.19158134,
+          0.00416081,
+          -0.00085378
+        ]
+      ],
+      "muscle": "coracobrachialis"
+    },
+    {
+      "bone": "humerus",
+      "kind": "origin",
+      "points": [
+        [
+          0.23542121,
+          -0.1449186,
+          -0.017392
+        ],
+        [
+          0.23395465,
+          -0.13869499,
+          -0.02003944
+        ],
+        [
+          0.23457292,
+          -0.1305901,
+          -0.02198266
+        ]
+      ],
+      "muscle": "anconeus"
+    },
+    {
+      "bone": "ulna",
+      "kind": "insertion",
+      "points": [
+        [
+          0.22737033,
+          -0.22202176,
+          -0.01137022
+        ],
+        [
+          0.22392288,
+          -0.19380951,
+          -0.01970182
+        ],
+        [
+          0.21869833,
+          -0.16645786,
+          -0.02695265
+        ]
+      ],
+      "muscle": "anconeus"
+    },
+    {
+      "bone": "humerus",
+      "kind": "origin",
+      "points": [
+        [
+          0.23893387,
+          -0.13631052,
+          -0.01862435
+        ]
+      ],
+      "muscle": "extensor-carpi-radialis-brevis"
+    },
+    {
+      "bone": "hand",
+      "kind": "insertion",
+      "points": [
+        [
+          0.27254522,
+          -0.42137994,
+          0.0445605
+        ],
+        [
+          0.2714609,
+          -0.41867093,
+          0.04304012
+        ],
+        [
+          0.27157437,
+          -0.4160811,
+          0.04232993
+        ]
+      ],
+      "muscle": "extensor-carpi-radialis-brevis"
+    },
+    {
+      "bone": "humerus",
+      "kind": "origin",
+      "points": [
+        [
+          0.19031414,
+          -0.1457336,
+          -0.00061928
+        ]
+      ],
+      "muscle": "flexor-digitorum-superficialis"
+    },
+    {
+      "bone": "ulna",
+      "kind": "origin",
+      "points": [
+        [
+          0.20914071,
+          -0.16919276,
+          0.00301845
+        ]
+      ],
+      "muscle": "flexor-digitorum-superficialis"
+    },
+    {
+      "bone": "radius",
+      "kind": "origin",
+      "points": [
+        [
+          0.23601076,
+          -0.19438264,
+          0.01473976
+        ],
+        [
+          0.24476087,
+          -0.21973295,
+          0.0176776
+        ],
+        [
+          0.25102485,
+          -0.23410894,
+          0.01720733
+        ]
+      ],
+      "muscle": "flexor-digitorum-superficialis"
+    },
+    {
+      "bone": "hand",
+      "kind": "insertion",
+      "points": [
+        [
+          0.30879177,
+          -0.52147392,
+          0.09348083
+        ],
+        [
+          0.31648704,
+          -0.52241722,
+          0.09624616
+        ],
+        [
+          0.27889586,
+          -0.52719103,
+          0.10105952
+        ],
+        [
+          0.28670337,
+          -0.52764132,
+          0.10074662
+        ],
+        [
+          0.25346146,
+          -0.52077536,
+          0.10030742
+        ],
+        [
+          0.26071639,
+          -0.52130774,
+          0.09952605
+        ],
+        [
+          0.22816962,
+          -0.50556093,
+          0.09618376
+        ],
+        [
+          0.23419518,
+          -0.50501027,
+          0.09517393
+        ]
+      ],
+      "muscle": "flexor-digitorum-superficialis"
+    }
+  ]
+}

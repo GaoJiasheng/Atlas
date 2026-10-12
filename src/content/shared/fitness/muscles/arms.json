@@ -94,6 +94,1840 @@
         "en": "The muscle on the back of the upper arm, three heads joined in one tendon on the point of the elbow [M1]. In every press and push-up it straightens the elbow while the chest muscles move the upper arm [M32].\n\nThe model draws the three heads as one part; the arm topic separates them.",
         "zh": "上臂后面的肌肉，三个头在肘尖汇成一条肌腱 [M1]。每一次推和俯卧撑，胸肌移动上臂的同时，它把肘伸直 [M32]。\n\n模型把三个头画成一个零件；手臂主题会把它们分开讲。"
       }
+    },
+    {
+      "id": "biceps-brachii",
+      "name": {
+        "en": "Biceps brachii",
+        "zh": "肱二头肌"
+      },
+      "short": {
+        "en": "Biceps",
+        "zh": "肱二头肌"
+      },
+      "latin": "Musculus biceps brachii",
+      "zAnatomy": "Biceps brachii muscle.g",
+      "regions": [
+        "arms"
+      ],
+      "layer": "superficial",
+      "origin": {
+        "text": {
+          "en": "Long head: supraglenoid tubercle of the scapula; short head: tip of its coracoid process.",
+          "zh": "长头起于肩胛骨盂上结节，短头起于喙突尖端。"
+        },
+        "bones": [
+          "scapula"
+        ],
+        "s": [
+          "M87",
+          "M63"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Radial tuberosity, with a bicipital aponeurosis spreading into the fascia on the inner side of the forearm.",
+          "zh": "桡骨粗隆；另有肱二头肌腱膜向前臂内侧的深筋膜展开。"
+        },
+        "bones": [
+          "radius"
+        ],
+        "s": [
+          "M87"
+        ]
+      },
+      "fibres": {
+        "arrangement": "fusiform",
+        "direction": {
+          "en": "Both bellies run down the front of the upper arm and join near the elbow.",
+          "zh": "两个肌腹沿上臂前面向下，在肘上方合并。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "elbow",
+          "movement": "flexion",
+          "role": "prime",
+          "s": [
+            "M87",
+            "M63"
+          ]
+        },
+        {
+          "joint": "forearm",
+          "movement": "supination",
+          "role": "prime",
+          "s": [
+            "M87",
+            "M63"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "flexion",
+          "role": "assist",
+          "s": [
+            "M87",
+            "M63"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "Bend an elbow and gently turn the palm upward against the other hand; feel the front of the upper arm tighten.",
+        "zh": "屈肘，用另一只手轻轻阻挡掌心向上转；上臂前面会绷紧。"
+      },
+      "mistakes": [
+        {
+          "en": "Swinging the trunk to raise the load rather than bending the elbow.",
+          "zh": "靠摆动躯干把重量甩起来，没有靠屈肘抬起。"
+        },
+        {
+          "en": "Calling a grip change an isolation of a single head. Both heads share the distal tendon.",
+          "zh": "把换握法说成能单独练某一个头；两个头共用远端肌腱。"
+        }
+      ],
+      "exercises": [
+        "barbell-curl",
+        "dumbbell-supinating-curl",
+        "dumbbell-hammer-curl",
+        "barbell-reverse-curl",
+        "chin-up"
+      ],
+      "summary": {
+        "en": "Bends the elbow and turns the palm upward.",
+        "zh": "屈肘，也让前臂旋后。"
+      },
+      "detail": {
+        "en": "The familiar front-of-arm muscle has long and short heads that begin on the scapula and share a tendon on the radius [M87]. It bends the elbow and supinates the forearm: the radius turns so the palm faces forward or upward [M63].\n\nA curl is not a biceps-only movement. Brachialis keeps flexing the elbow with any grip, and brachioradialis helps too. Grip changes do not switch those muscles off.",
+        "zh": "上臂前面常说的“二头肌”有长头和短头，都从肩胛骨起始，在桡骨上共用一条止腱 [M87]。它不只屈肘，还使前臂旋后，让桡骨转动、掌心转向前方或上方 [M63]。\n\n弯举并不是肱二头肌独自完成的。无论正握还是反握，肱肌都参与屈肘，肱桡肌也会协助；换握法不会把这些肌肉关掉。"
+      },
+      "fma": "FMA37670",
+      "common": {
+        "en": "biceps",
+        "zh": "二头肌"
+      }
+    },
+    {
+      "id": "biceps-brachii-long",
+      "name": {
+        "en": "Biceps brachii, long head",
+        "zh": "肱二头肌长头"
+      },
+      "short": {
+        "en": "Biceps, long head",
+        "zh": "肱二头肌长头"
+      },
+      "latin": "Caput longum musculi bicipitis brachii",
+      "zAnatomy": "Long head of biceps brachii",
+      "regions": [
+        "arms"
+      ],
+      "layer": "superficial",
+      "origin": {
+        "text": {
+          "en": "Supraglenoid tubercle and adjoining glenoid labrum of the scapula; the tendon crosses inside the shoulder capsule and then descends in the intertubercular groove.",
+          "zh": "肩胛骨盂上结节及相邻关节盂唇；肌腱经过肩关节囊内，再沿肱骨结节间沟下降。"
+        },
+        "bones": [
+          "scapula"
+        ],
+        "s": [
+          "M87",
+          "M63"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Radial tuberosity, with a bicipital aponeurosis spreading into the fascia on the inner side of the forearm.",
+          "zh": "桡骨粗隆；另有肱二头肌腱膜向前臂内侧的深筋膜展开。"
+        },
+        "bones": [
+          "radius"
+        ],
+        "s": [
+          "M87"
+        ]
+      },
+      "fibres": {
+        "arrangement": "fusiform",
+        "direction": {
+          "en": "From the shoulder tendon down the lateral part of the anterior upper arm.",
+          "zh": "由肩部肌腱沿上臂前面偏外侧向下。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "elbow",
+          "movement": "flexion",
+          "role": "prime",
+          "s": [
+            "M87",
+            "M63"
+          ]
+        },
+        {
+          "joint": "forearm",
+          "movement": "supination",
+          "role": "prime",
+          "s": [
+            "M87",
+            "M63"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "flexion",
+          "role": "assist",
+          "s": [
+            "M87",
+            "M63"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "With the elbow bent, lightly touch the outer part of the front arm. You cannot separate its effort from the short head by touch.",
+        "zh": "屈肘后轻触上臂前面偏外侧；靠触摸不能分辨它与短头各出了多少力。"
+      },
+      "mistakes": [
+        {
+          "en": "Swinging the trunk to raise the load rather than bending the elbow.",
+          "zh": "靠摆动躯干把重量甩起来，没有靠屈肘抬起。"
+        },
+        {
+          "en": "Calling a grip change an isolation of a single head. Both heads share the distal tendon.",
+          "zh": "把换握法说成能单独练某一个头；两个头共用远端肌腱。"
+        }
+      ],
+      "exercises": [
+        "dumbbell-supinating-curl",
+        "barbell-curl",
+        "chin-up"
+      ],
+      "summary": {
+        "en": "An outer head that bends and supinates.",
+        "zh": "前面偏外侧的头，屈肘并使前臂旋后。"
+      },
+      "detail": {
+        "en": "Its long proximal tendon reaches the scapula through the shoulder joint before entering the groove on the humerus [M87]. This head crosses the shoulder as well as the elbow.\n\nIt joins the short head near the elbow. Both contribute to flexion and supination; none of the listed exercises isolates this head [M63]. The tendon is inside the joint capsule but outside the synovial cavity [M87].",
+        "zh": "长头的近端肌腱经过肩关节内，到达肩胛骨；向下则进入肱骨结节间沟 [M87]。所以它既跨肩关节，也跨肘关节。\n\n它在肘附近与短头合并。两头都参与屈肘和旋后，这里列出的动作都不能把长头单独隔离出来 [M63]。 肌腱位于关节囊内、滑膜腔外 [M87]。"
+      },
+      "fma": "FMA37683",
+      "parent": "biceps-brachii"
+    },
+    {
+      "id": "biceps-brachii-short",
+      "name": {
+        "en": "Biceps brachii, short head",
+        "zh": "肱二头肌短头"
+      },
+      "short": {
+        "en": "Biceps, short head",
+        "zh": "肱二头肌短头"
+      },
+      "latin": "Caput breve musculi bicipitis brachii",
+      "zAnatomy": "Short head of biceps brachii",
+      "regions": [
+        "arms"
+      ],
+      "layer": "superficial",
+      "origin": {
+        "text": {
+          "en": "Tip of the coracoid process of the scapula, with coracobrachialis.",
+          "zh": "肩胛骨喙突尖端，与喙肱肌共同起始。"
+        },
+        "bones": [
+          "scapula"
+        ],
+        "s": [
+          "M87",
+          "M63"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Radial tuberosity, with a bicipital aponeurosis spreading into the fascia on the inner side of the forearm.",
+          "zh": "桡骨粗隆；另有肱二头肌腱膜向前臂内侧的深筋膜展开。"
+        },
+        "bones": [
+          "radius"
+        ],
+        "s": [
+          "M87"
+        ]
+      },
+      "fibres": {
+        "arrangement": "fusiform",
+        "direction": {
+          "en": "Down the medial part of the front upper arm into the common distal tendon.",
+          "zh": "沿上臂前面偏内侧向下，汇入共同的远端肌腱。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "elbow",
+          "movement": "flexion",
+          "role": "prime",
+          "s": [
+            "M87",
+            "M63"
+          ]
+        },
+        {
+          "joint": "forearm",
+          "movement": "supination",
+          "role": "prime",
+          "s": [
+            "M87",
+            "M63"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "flexion",
+          "role": "assist",
+          "s": [
+            "M87",
+            "M63"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "Lightly feel the inner part of the front upper arm during a palm-up curl; this is a location cue, not proof that the short head works alone.",
+        "zh": "反握弯举时轻触上臂前面偏内侧；这只能帮助定位，不能证明短头独自用力。"
+      },
+      "mistakes": [
+        {
+          "en": "Swinging the trunk to raise the load rather than bending the elbow.",
+          "zh": "靠摆动躯干把重量甩起来，没有靠屈肘抬起。"
+        },
+        {
+          "en": "Calling a grip change an isolation of a single head. Both heads share the distal tendon.",
+          "zh": "把换握法说成能单独练某一个头；两个头共用远端肌腱。"
+        }
+      ],
+      "exercises": [
+        "barbell-curl",
+        "dumbbell-supinating-curl",
+        "chin-up"
+      ],
+      "summary": {
+        "en": "An inner head sharing the biceps tendon.",
+        "zh": "前面偏内侧的头，与长头共用止腱。"
+      },
+      "detail": {
+        "en": "The short head starts beside coracobrachialis at the coracoid process [M87]. Like the long head, it crosses the shoulder and reaches the radius through the common biceps tendon.\n\nA wider grip does not create a separate short-head exercise. The useful task is still a controlled elbow bend and, where the implement allows it, forearm supination [M63].",
+        "zh": "短头在喙突处与喙肱肌相邻起始 [M87]。它也跨过肩关节，经肱二头肌共同止腱到达桡骨。\n\n宽握不等于能单独练短头。真正需要完成的仍是有控制地屈肘，以及器械允许时的前臂旋后 [M63]。"
+      },
+      "fma": "FMA37682",
+      "parent": "biceps-brachii"
+    },
+    {
+      "id": "brachialis",
+      "name": {
+        "en": "Brachialis",
+        "zh": "肱肌"
+      },
+      "short": {
+        "en": "Brachialis",
+        "zh": "肱肌"
+      },
+      "latin": "Musculus brachialis",
+      "zAnatomy": "Brachialis muscle",
+      "regions": [
+        "arms"
+      ],
+      "layer": "intermediate",
+      "origin": {
+        "text": {
+          "en": "Distal half of the anterior humerus and adjacent intermuscular septa.",
+          "zh": "肱骨下半部前面及相邻肌间隔。"
+        },
+        "bones": [
+          "humerus"
+        ],
+        "s": [
+          "M87",
+          "M63"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Coronoid process and tuberosity of the ulna.",
+          "zh": "尺骨冠突及尺骨粗隆。"
+        },
+        "bones": [
+          "ulna"
+        ],
+        "s": [
+          "M87"
+        ]
+      },
+      "fibres": {
+        "arrangement": "fusiform",
+        "direction": {
+          "en": "Down the front of the distal humerus, deep to biceps, to the ulna.",
+          "zh": "在肱二头肌深面，沿肱骨远端前面向下到尺骨。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "elbow",
+          "movement": "flexion",
+          "role": "prime",
+          "s": [
+            "M87",
+            "M63"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "Bend the elbow gently against resistance and feel beside the lower biceps, just above the elbow; most of this muscle is covered.",
+        "zh": "轻轻对抗阻力屈肘，触摸肱二头肌下部两旁、肘上方；这块肌肉大部分被盖住。"
+      },
+      "mistakes": [
+        {
+          "en": "Assuming an overhand grip turns off all elbow flexors.",
+          "zh": "以为正握就能让屈肘肌都停止工作。"
+        },
+        {
+          "en": "Stopping the lowering early to keep lifting a heavier load.",
+          "zh": "为了继续拿大重量，下放不到自己能控制的幅度。"
+        }
+      ],
+      "exercises": [
+        "dumbbell-hammer-curl",
+        "barbell-reverse-curl",
+        "barbell-curl",
+        "chin-up"
+      ],
+      "summary": {
+        "en": "Flexes the elbow with every grip.",
+        "zh": "无论哪种握法，都参与屈肘。"
+      },
+      "detail": {
+        "en": "Brachialis lies under biceps and attaches to the ulna rather than the radius [M87]. Forearm rotation therefore does not remove its elbow-flexing job: it remains a major flexor with palm-up, palm-down or neutral grips.\n\nA hammer curl is a convenient example, not an isolation. Biceps and brachioradialis still contribute [M63].",
+        "zh": "肱肌在肱二头肌下面，止于尺骨而不是桡骨 [M87]。前臂转动不会取消它的屈肘任务：反握、正握、对握时，它都是屈肘的主力之一。\n\n锤式弯举方便用来观察这项作用，但不是孤立动作；肱二头肌和肱桡肌仍会参与 [M63]。"
+      },
+      "fma": "FMA37667"
+    },
+    {
+      "id": "coracobrachialis",
+      "name": {
+        "en": "Coracobrachialis",
+        "zh": "喙肱肌"
+      },
+      "short": {
+        "en": "Coracobrachialis",
+        "zh": "喙肱肌"
+      },
+      "latin": "Musculus coracobrachialis",
+      "zAnatomy": "Coracobrachialis muscle",
+      "regions": [
+        "arms"
+      ],
+      "layer": "intermediate",
+      "origin": {
+        "text": {
+          "en": "Tip of the scapular coracoid process, sharing a proximal attachment with the short head of biceps.",
+          "zh": "肩胛骨喙突尖端，与肱二头肌短头共同起始。"
+        },
+        "bones": [
+          "scapula"
+        ],
+        "s": [
+          "M87",
+          "M63"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "An impression at the middle of the medial surface and border of the humeral shaft.",
+          "zh": "肱骨体中部内侧面和内侧缘的印迹。"
+        },
+        "bones": [
+          "humerus"
+        ],
+        "s": [
+          "M87"
+        ]
+      },
+      "fibres": {
+        "arrangement": "fusiform",
+        "direction": {
+          "en": "Down and laterally from the coracoid into the inner upper arm.",
+          "zh": "从喙突向外下方进入上臂内侧。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "shoulder",
+          "movement": "flexion",
+          "role": "assist",
+          "s": [
+            "M87",
+            "M63"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "adduction",
+          "role": "assist",
+          "s": [
+            "M87",
+            "M63"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "Find its position on the model beneath the inner upper arm. Do not press deeply into the armpit to try to isolate it.",
+        "zh": "在模型上找上臂内侧深处的位置；不要伸进腋窝深按，试图单独摸到它。"
+      },
+      "mistakes": [
+        {
+          "en": "Treating it as an elbow flexor even though it ends on the humerus.",
+          "zh": "把它当作屈肘肌，忘了它止在肱骨上。"
+        },
+        {
+          "en": "Digging into the armpit to look for a training sensation.",
+          "zh": "为了找训练感觉，在腋窝深处用力按。"
+        }
+      ],
+      "exercises": [
+        "chin-up",
+        "close-grip-bench-press",
+        "dumbbell-supinating-curl"
+      ],
+      "summary": {
+        "en": "Helps bring the upper arm forward and inward.",
+        "zh": "协助上臂前举和内收。"
+      },
+      "detail": {
+        "en": "This small muscle connects the coracoid process to the humerus and does not cross the elbow. It draws the upper arm forward and inward [M87] [M63].\n\nThe links are shoulder-chain examples. A press moves the upper arm forward; a chin-up changes its shoulder position; a curl can involve this muscle only if the upper arm also moves forward. A fixed-upper-arm curl supplies no dynamic shoulder-flexion task. These links do not establish an isolated training stimulus.",
+        "zh": "这块小肌肉连接喙突和肱骨，不跨肘关节。它把上臂向前、向内带 [M87] [M63]。\n\n动作链接是肩部动作链的例子：卧推使上臂向前，引体改变肩位；弯举只有上臂也向前移时，才包含这段肩屈任务。严格固定上臂的弯举没有动态肩屈。链接不代表已证实能单独刺激喙肱肌。"
+      },
+      "fma": "FMA37664"
+    },
+    {
+      "id": "triceps-brachii-long",
+      "name": {
+        "en": "Triceps brachii, long head",
+        "zh": "肱三头肌长头"
+      },
+      "short": {
+        "en": "Triceps, long head",
+        "zh": "肱三头肌长头"
+      },
+      "latin": "Caput longum musculi tricipitis brachii",
+      "zAnatomy": "Long head of triceps brachii",
+      "regions": [
+        "arms"
+      ],
+      "layer": "superficial",
+      "origin": {
+        "text": {
+          "en": "Infraglenoid tubercle of the scapula, just below the shoulder socket.",
+          "zh": "肩胛骨盂下结节，即关节盂下方。"
+        },
+        "bones": [
+          "scapula"
+        ],
+        "s": [
+          "M87",
+          "M63"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Olecranon of the ulna through the common triceps tendon, with an expansion into forearm fascia.",
+          "zh": "经肱三头肌共同止腱止于尺骨鹰嘴，并延伸到前臂筋膜。"
+        },
+        "bones": [
+          "ulna"
+        ],
+        "s": [
+          "M87"
+        ]
+      },
+      "fibres": {
+        "arrangement": "parallel",
+        "direction": {
+          "en": "Down from the scapula along the medial back of the arm.",
+          "zh": "从肩胛骨沿上臂后面偏内侧向下。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "elbow",
+          "movement": "extension",
+          "role": "prime",
+          "s": [
+            "M87",
+            "M63"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "extension",
+          "role": "assist",
+          "s": [
+            "M87",
+            "M63"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "adduction",
+          "role": "assist",
+          "s": [
+            "M87",
+            "M63"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "Gently touch the back of the upper arm while extending the elbow; touch cannot measure this head separately.",
+        "zh": "伸肘时轻触上臂后面；触摸不能量出这一头单独出了多少力。"
+      },
+      "mistakes": [
+        {
+          "en": "Snapping the elbow into lockout rather than finishing smoothly.",
+          "zh": "猛地把肘顶直，而不是平稳完成伸肘。"
+        },
+        {
+          "en": "Choosing a load that makes the shoulder or trunk move to finish the repetition.",
+          "zh": "重量太大，最后只能靠肩膀或躯干代偿。"
+        }
+      ],
+      "exercises": [
+        "close-grip-bench-press",
+        "cable-triceps-pushdown",
+        "overhead-dumbbell-triceps-extension"
+      ],
+      "summary": {
+        "en": "Crosses the shoulder and straightens the elbow.",
+        "zh": "跨过肩关节，并使肘伸直。"
+      },
+      "detail": {
+        "en": "Unlike the other heads it crosses the shoulder [M87]. Raising the upper arm changes its length before the elbow even moves. Overhead extensions illustrate this relationship; they still use the other heads.\n\nUse a controlled elbow motion; do not chase a special grip to switch the other heads off. The fibre label summarises the main direction described by Gray; it does not map every internal tendon [M87].",
+        "zh": "与其余两头不同，长头跨过肩关节 [M87]。即使肘还没动，抬起上臂也会改变它的长度。过顶臂屈伸方便观察这种关系，但其余两头仍参与。\n\n练习时控制好伸肘，不要指望某种握法能让其他头停止工作。 纤维标签概括 Gray 描述的主要走向，不画出每一条肌内腱 [M87]。"
+      },
+      "fma": "FMA37692",
+      "parent": "triceps-brachii",
+      "common": {
+        "en": "triceps long head",
+        "zh": "三头肌长头"
+      }
+    },
+    {
+      "id": "triceps-brachii-lateral",
+      "name": {
+        "en": "Triceps brachii, lateral head",
+        "zh": "肱三头肌外侧头"
+      },
+      "short": {
+        "en": "Triceps, lateral head",
+        "zh": "肱三头肌外侧头"
+      },
+      "latin": "Caput laterale musculi tricipitis brachii",
+      "zAnatomy": "Lateral head of triceps brachii",
+      "regions": [
+        "arms"
+      ],
+      "layer": "superficial",
+      "origin": {
+        "text": {
+          "en": "Posterior humerus above the radial groove, with fibres from the lateral intermuscular septum.",
+          "zh": "桡神经沟上方的肱骨后面，以及外侧肌间隔。"
+        },
+        "bones": [
+          "humerus"
+        ],
+        "s": [
+          "M87",
+          "M63"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Olecranon of the ulna through the common triceps tendon, with an expansion into forearm fascia.",
+          "zh": "经肱三头肌共同止腱止于尺骨鹰嘴，并延伸到前臂筋膜。"
+        },
+        "bones": [
+          "ulna"
+        ],
+        "s": [
+          "M87"
+        ]
+      },
+      "fibres": {
+        "arrangement": "convergent",
+        "direction": {
+          "en": "Fibres converge downward from the outer back of the humerus towards the shared tendon.",
+          "zh": "纤维从肱骨后面偏外侧向下汇聚，进入共同肌腱。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "elbow",
+          "movement": "extension",
+          "role": "prime",
+          "s": [
+            "M87",
+            "M63"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "Gently touch the back of the upper arm while extending the elbow; touch cannot measure this head separately.",
+        "zh": "伸肘时轻触上臂后面；触摸不能量出这一头单独出了多少力。"
+      },
+      "mistakes": [
+        {
+          "en": "Snapping the elbow into lockout rather than finishing smoothly.",
+          "zh": "猛地把肘顶直，而不是平稳完成伸肘。"
+        },
+        {
+          "en": "Choosing a load that makes the shoulder or trunk move to finish the repetition.",
+          "zh": "重量太大，最后只能靠肩膀或躯干代偿。"
+        }
+      ],
+      "exercises": [
+        "close-grip-bench-press",
+        "cable-triceps-pushdown",
+        "overhead-dumbbell-triceps-extension"
+      ],
+      "summary": {
+        "en": "An outer head that straightens the elbow.",
+        "zh": "上臂后面偏外侧的头，负责伸肘。"
+      },
+      "detail": {
+        "en": "The lateral head begins on the humerus and does not cross the shoulder [M87]. Its visible outer contour is not a separate training target: presses and pushdowns also involve the long and medial heads.\n\nUse a controlled elbow motion; do not chase a special grip to switch the other heads off. The fibre label summarises the main direction described by Gray; it does not map every internal tendon [M87].",
+        "zh": "外侧头起于肱骨，不跨肩关节 [M87]。外侧的轮廓并不等于能单独训练的一块；卧推和下压也会用到长头与内侧头。\n\n练习时控制好伸肘，不要指望某种握法能让其他头停止工作。 纤维标签概括 Gray 描述的主要走向，不画出每一条肌内腱 [M87]。"
+      },
+      "fma": "FMA37694",
+      "parent": "triceps-brachii",
+      "common": {
+        "en": "triceps lateral head",
+        "zh": "三头肌外侧头"
+      }
+    },
+    {
+      "id": "triceps-brachii-medial",
+      "name": {
+        "en": "Triceps brachii, medial head",
+        "zh": "肱三头肌内侧头"
+      },
+      "short": {
+        "en": "Triceps, medial head",
+        "zh": "肱三头肌内侧头"
+      },
+      "latin": "Caput mediale musculi tricipitis brachii",
+      "zAnatomy": "Medial head of triceps brachii",
+      "regions": [
+        "arms"
+      ],
+      "layer": "intermediate",
+      "origin": {
+        "text": {
+          "en": "Posterior humerus below the radial groove and adjoining medial and lateral intermuscular septa.",
+          "zh": "桡神经沟下方的肱骨后面，以及相邻的内、外侧肌间隔。"
+        },
+        "bones": [
+          "humerus"
+        ],
+        "s": [
+          "M87",
+          "M63"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Olecranon of the ulna through the common triceps tendon, with an expansion into forearm fascia.",
+          "zh": "经肱三头肌共同止腱止于尺骨鹰嘴，并延伸到前臂筋膜。"
+        },
+        "bones": [
+          "ulna"
+        ],
+        "s": [
+          "M87"
+        ]
+      },
+      "fibres": {
+        "arrangement": "convergent",
+        "direction": {
+          "en": "From a broad deep humeral attachment down into the elbow tendon.",
+          "zh": "从肱骨后面较宽的深层起点向下，汇入肘部肌腱。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "elbow",
+          "movement": "extension",
+          "role": "prime",
+          "s": [
+            "M87",
+            "M63"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "Gently touch the back of the upper arm while extending the elbow; touch cannot measure this head separately.",
+        "zh": "伸肘时轻触上臂后面；触摸不能量出这一头单独出了多少力。"
+      },
+      "mistakes": [
+        {
+          "en": "Snapping the elbow into lockout rather than finishing smoothly.",
+          "zh": "猛地把肘顶直，而不是平稳完成伸肘。"
+        },
+        {
+          "en": "Choosing a load that makes the shoulder or trunk move to finish the repetition.",
+          "zh": "重量太大，最后只能靠肩膀或躯干代偿。"
+        }
+      ],
+      "exercises": [
+        "close-grip-bench-press",
+        "cable-triceps-pushdown",
+        "overhead-dumbbell-triceps-extension"
+      ],
+      "summary": {
+        "en": "A deeper head helping every elbow extension.",
+        "zh": "较深的一头，参与伸肘。"
+      },
+      "detail": {
+        "en": "Much of the medial head lies beneath the long and lateral heads, with a distal portion visible near the elbow [M87]. A small visible area does not imply a small role. It shares the elbow-extension task [M63].\n\nUse a controlled elbow motion; do not chase a special grip to switch the other heads off. The fibre label summarises the main direction described by Gray; it does not map every internal tendon [M87].",
+        "zh": "内侧头大部分在长头和外侧头下面，靠肘的远端部分可露出 [M87]。露在表面的面积小，不等于作用小；它同样承担伸肘任务 [M63]。\n\n练习时控制好伸肘，不要指望某种握法能让其他头停止工作。 纤维标签概括 Gray 描述的主要走向，不画出每一条肌内腱 [M87]。"
+      },
+      "fma": "FMA37693",
+      "parent": "triceps-brachii",
+      "common": {
+        "en": "triceps medial head",
+        "zh": "三头肌内侧头"
+      }
+    },
+    {
+      "id": "anconeus",
+      "name": {
+        "en": "Anconeus",
+        "zh": "肘肌"
+      },
+      "short": {
+        "en": "Anconeus",
+        "zh": "肘肌"
+      },
+      "latin": "Musculus anconeus",
+      "zAnatomy": "Anconeus muscle",
+      "regions": [
+        "arms"
+      ],
+      "layer": "intermediate",
+      "origin": {
+        "text": {
+          "en": "Posterior surface of the lateral epicondyle of the humerus.",
+          "zh": "肱骨外上髁后面。"
+        },
+        "bones": [
+          "humerus"
+        ],
+        "s": [
+          "M87",
+          "M63"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Lateral surface of the olecranon and proximal posterior ulna.",
+          "zh": "尺骨鹰嘴外侧面及尺骨近端后面。"
+        },
+        "bones": [
+          "ulna"
+        ],
+        "s": [
+          "M87"
+        ]
+      },
+      "fibres": {
+        "arrangement": "convergent",
+        "direction": {
+          "en": "Fans down and medially from the lateral elbow onto the ulna.",
+          "zh": "从肘外侧向内下方扇形展开，止于尺骨。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "elbow",
+          "movement": "extension",
+          "role": "assist",
+          "s": [
+            "M87",
+            "M63"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "Locate the small triangle just outside the elbow tip on the model. In gentle extension it works beside the triceps; do not jab the joint.",
+        "zh": "在模型上找肘尖外侧的小三角；轻轻伸肘时它和肱三头肌一起工作，不要戳按关节。"
+      },
+      "mistakes": [
+        {
+          "en": "Trying to isolate it by repeatedly forcing the elbow straight.",
+          "zh": "反复硬顶直肘，想把肘肌单独练出来。"
+        },
+        {
+          "en": "Reading tenderness at the elbow as proof of a good workout.",
+          "zh": "把肘部压痛当成练得有效的证据。"
+        }
+      ],
+      "exercises": [
+        "close-grip-bench-press",
+        "cable-triceps-pushdown",
+        "overhead-dumbbell-triceps-extension"
+      ],
+      "summary": {
+        "en": "A small assistant at the back of the elbow.",
+        "zh": "肘后的小助手，协助伸肘。"
+      },
+      "detail": {
+        "en": "Anconeus is a small triangular muscle between the lateral humeral epicondyle and the upper ulna [M87]. It assists elbow extension [M63].\n\nThe exercises listed involve it within the extension chain. They are not isolation exercises, and a sensation at the joint cannot identify its contribution.",
+        "zh": "肘肌是一块小三角形肌，位于肱骨外上髁与尺骨上端之间 [M87]，协助伸肘 [M63]。\n\n列出的动作让它在伸肘动作链中参与，并非孤立训练；关节附近有感觉，也不能证明就是肘肌在出力。"
+      },
+      "fma": "FMA37704"
+    },
+    {
+      "id": "brachioradialis",
+      "name": {
+        "en": "Brachioradialis",
+        "zh": "肱桡肌"
+      },
+      "short": {
+        "en": "Brachioradialis",
+        "zh": "肱桡肌"
+      },
+      "latin": "Musculus brachioradialis",
+      "zAnatomy": "Brachioradialis muscle",
+      "regions": [
+        "arms"
+      ],
+      "layer": "superficial",
+      "origin": {
+        "text": {
+          "en": "Proximal two-thirds of the lateral supracondylar ridge of the humerus and lateral intermuscular septum.",
+          "zh": "肱骨外侧髁上嵴近侧约三分之二及外侧肌间隔。"
+        },
+        "bones": [
+          "humerus"
+        ],
+        "s": [
+          "M87",
+          "M63"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Lateral distal radius, just proximal to the styloid process.",
+          "zh": "桡骨远端外侧面，位于茎突近侧。"
+        },
+        "bones": [
+          "radius"
+        ],
+        "s": [
+          "M87"
+        ]
+      },
+      "fibres": {
+        "arrangement": "fusiform",
+        "direction": {
+          "en": "Down the thumb side of the forearm, becoming a long tendon near the wrist.",
+          "zh": "沿前臂拇指侧向下，靠近腕部转为长腱。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "elbow",
+          "movement": "flexion",
+          "role": "assist",
+          "s": [
+            "M87",
+            "M63"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "With the thumb pointing upward, bend the elbow gently against resistance and touch the outer forearm near the elbow.",
+        "zh": "拇指朝上，轻轻对抗阻力屈肘，触摸靠肘的前臂外侧。"
+      },
+      "mistakes": [
+        {
+          "en": "Turning a hammer curl into a wrist curl.",
+          "zh": "锤式弯举时弯手腕代替屈肘。"
+        },
+        {
+          "en": "Assuming a neutral grip makes biceps stop working.",
+          "zh": "以为对握就能让肱二头肌停止工作。"
+        }
+      ],
+      "exercises": [
+        "dumbbell-hammer-curl",
+        "barbell-reverse-curl",
+        "chin-up"
+      ],
+      "summary": {
+        "en": "Bends the elbow from the thumb side.",
+        "zh": "在前臂拇指侧协助屈肘。"
+      },
+      "detail": {
+        "en": "This muscle begins above the elbow and ends near the radial styloid, so it crosses the elbow but not the wrist [M87]. Although it sits with the lateral forearm muscles, its main action is elbow flexion [M63].\n\nHammer and reverse curls let you observe the lateral forearm working. They still use other elbow flexors; do not force the wrist to bend.",
+        "zh": "肱桡肌从肘上方起始，止于桡骨茎突附近，因此跨肘而不跨腕 [M87]。它位于前臂外侧，主要作用却是屈肘 [M63]。\n\n锤式弯举和正握弯举方便观察前臂外侧的用力；其他屈肘肌仍会参与，不需要刻意弯腕。"
+      },
+      "fma": "FMA38485"
+    },
+    {
+      "id": "pronator-teres",
+      "name": {
+        "en": "Pronator teres",
+        "zh": "旋前圆肌"
+      },
+      "short": {
+        "en": "Pronator teres",
+        "zh": "旋前圆肌"
+      },
+      "latin": "Musculus pronator teres",
+      "zAnatomy": "Superficial head of pronator teres + Deep head of pronator teres",
+      "regions": [
+        "arms"
+      ],
+      "layer": "superficial",
+      "origin": {
+        "text": {
+          "en": "Humeral head: medial epicondyle and adjacent ridge of the humerus; ulnar head: medial side of the coronoid process.",
+          "zh": "肱头起于肱骨内上髁及附近骨嵴；尺头起于尺骨冠突内侧。"
+        },
+        "bones": [
+          "humerus",
+          "ulna"
+        ],
+        "s": [
+          "M87",
+          "M63"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Middle of the lateral surface of the radius.",
+          "zh": "桡骨中部外侧面。"
+        },
+        "bones": [
+          "radius"
+        ],
+        "s": [
+          "M87"
+        ]
+      },
+      "fibres": {
+        "arrangement": "fusiform",
+        "direction": {
+          "en": "Obliquely down and laterally across the proximal anterior forearm.",
+          "zh": "斜穿前臂近端前面，走向外下方。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "forearm",
+          "movement": "pronation",
+          "role": "prime",
+          "s": [
+            "M87",
+            "M63"
+          ]
+        },
+        {
+          "joint": "elbow",
+          "movement": "flexion",
+          "role": "assist",
+          "s": [
+            "M87",
+            "M63"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "Bend the elbow, gently resist a palm-down turn with the other hand, and lightly touch the upper inner forearm; do not press deeply.",
+        "zh": "屈肘，用另一只手轻轻阻挡掌心向下转，轻触前臂近端内侧，不要深按。"
+      },
+      "mistakes": [
+        {
+          "en": "Rotating the whole shoulder instead of turning the forearm.",
+          "zh": "用整个肩膀转动代替前臂旋前。"
+        },
+        {
+          "en": "Forcing the end of a palm-down turn against strong resistance.",
+          "zh": "用很大阻力硬拧到旋前尽头。"
+        }
+      ],
+      "exercises": [
+        "self-resisted-pronation",
+        "barbell-reverse-curl",
+        "dumbbell-wrist-extension"
+      ],
+      "summary": {
+        "en": "Turns the forearm so the palm faces down.",
+        "zh": "使前臂旋前，让掌心转向下方。"
+      },
+      "detail": {
+        "en": "The larger superficial humeral head and smaller deep ulnar head meet and cross obliquely to the radius. The pull turns the radius around the ulna, pronating the forearm; it can also assist elbow flexion [M87] [M71].\n\nSelf-resistance directly opposes pronation. In a reverse curl or palm-down wrist extension the forearm position is held rather than repeatedly turned. Their links illustrate possible positional support; a pronated grip alone does not establish enough pronator-teres loading for strengthening.",
+        "zh": "较大而浅的肱头与较小而深的尺头汇合，斜行到桡骨；牵拉使桡骨绕尺骨转动，完成前臂旋前，也可协助屈肘 [M87] [M71]。\n\n自我抗阻直接阻挡旋前。正握弯举和掌心向下伸腕时，前臂维持姿势，而非反复转动。链接说明可能的姿势支持作用；仅仅正握，不能证明旋前圆肌承受了足够的强化负荷。"
+      }
+    },
+    {
+      "id": "flexor-carpi-radialis",
+      "name": {
+        "en": "Flexor carpi radialis",
+        "zh": "桡侧腕屈肌"
+      },
+      "short": {
+        "en": "FC radialis",
+        "zh": "桡侧腕屈肌"
+      },
+      "latin": "Musculus flexor carpi radialis",
+      "zAnatomy": "Flexor carpi radialis",
+      "regions": [
+        "arms"
+      ],
+      "layer": "superficial",
+      "origin": {
+        "text": {
+          "en": "Medial epicondyle of the humerus through the common flexor tendon.",
+          "zh": "经共同屈肌腱起于肱骨内上髁。"
+        },
+        "bones": [
+          "humerus"
+        ],
+        "s": [
+          "M87",
+          "M63"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Palmar base of the second metacarpal, with a slip to the third.",
+          "zh": "第二掌骨底掌侧，并有腱束到第三掌骨底。"
+        },
+        "bones": [
+          "hand"
+        ],
+        "s": [
+          "M87"
+        ]
+      },
+      "fibres": {
+        "arrangement": "fusiform",
+        "direction": {
+          "en": "Down the front of the forearm towards the thumb-side base of the hand.",
+          "zh": "沿前臂前面向下，走向手掌拇指侧的掌骨底。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "wrist",
+          "movement": "flexion",
+          "role": "prime",
+          "s": [
+            "M87",
+            "M63"
+          ]
+        },
+        {
+          "joint": "wrist",
+          "movement": "abduction",
+          "role": "assist",
+          "s": [
+            "M87",
+            "M63"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "Support the forearm palm up and gently bend the wrist; touch the front forearm towards the thumb side.",
+        "zh": "掌心向上托住前臂，轻轻屈腕，触摸前臂前面偏拇指侧。"
+      },
+      "mistakes": [
+        {
+          "en": "Rolling the weight into the fingertips to chase a bigger wrist range.",
+          "zh": "为了弯得更多，把重量滚到指尖。"
+        },
+        {
+          "en": "Increasing load while the wrist starts jerking or drifting sideways.",
+          "zh": "手腕已经抖动或偏向一边，仍继续加重。"
+        }
+      ],
+      "exercises": [
+        "dumbbell-wrist-curl",
+        "barbell-curl",
+        "chin-up"
+      ],
+      "summary": {
+        "en": "Bends the wrist and draws it toward the thumb.",
+        "zh": "屈腕，并把手拉向拇指侧。"
+      },
+      "detail": {
+        "en": "Its tendon reaches the radial side of the hand, so its pull combines wrist flexion with radial deviation [M87]. Wrist abduction is movement towards the thumb.\n\nWrist curls show movement directly; barbell curls and chin-ups are gripping and wrist-position examples, not isolation of this muscle.",
+        "zh": "肌腱到达手的桡侧，牵拉时可屈腕并使腕桡偏 [M87]。腕外展就是向拇指侧的桡偏。\n\n腕弯举直接展示屈腕；杠铃弯举与反握引体体现握持和维持腕位，并不单独练这块肌肉。"
+      },
+      "fma": "FMA38459"
+    },
+    {
+      "id": "palmaris-longus",
+      "name": {
+        "en": "Palmaris longus",
+        "zh": "掌长肌"
+      },
+      "short": {
+        "en": "Palmaris longus",
+        "zh": "掌长肌"
+      },
+      "latin": "Musculus palmaris longus",
+      "zAnatomy": "Palmaris longus muscle",
+      "regions": [
+        "arms"
+      ],
+      "layer": "superficial",
+      "origin": {
+        "text": {
+          "en": "Medial epicondyle of the humerus through the common flexor tendon.",
+          "zh": "经共同屈肌腱起于肱骨内上髁。"
+        },
+        "bones": [
+          "humerus"
+        ],
+        "s": [
+          "M87",
+          "M63"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Flexor retinaculum and palmar aponeurosis.",
+          "zh": "屈肌支持带及掌腱膜。"
+        },
+        "bones": [
+          "palmaris-longus"
+        ],
+        "s": [
+          "M87"
+        ]
+      },
+      "fibres": {
+        "arrangement": "fusiform",
+        "direction": {
+          "en": "A short proximal belly becomes a long central tendon towards the palm.",
+          "zh": "近端较短的肌腹转为中央的长腱，走向手掌。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "wrist",
+          "movement": "flexion",
+          "role": "assist",
+          "s": [
+            "M87",
+            "M63"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "Gently bring thumb and little finger together and bend the wrist. A central tendon may appear; not everyone has this muscle.",
+        "zh": "拇指与小指轻轻相对，再屈腕；腕前中央可能出现一条腱，但不是人人都有掌长肌。"
+      },
+      "mistakes": [
+        {
+          "en": "Rolling the weight into the fingertips to chase a bigger wrist range.",
+          "zh": "为了弯得更多，把重量滚到指尖。"
+        },
+        {
+          "en": "Increasing load while the wrist starts jerking or drifting sideways.",
+          "zh": "手腕已经抖动或偏向一边，仍继续加重。"
+        }
+      ],
+      "exercises": [
+        "dumbbell-wrist-curl",
+        "barbell-curl",
+        "chin-up"
+      ],
+      "summary": {
+        "en": "Tenses the palm sheet and helps bend the wrist.",
+        "zh": "张紧掌腱膜，协助屈腕。"
+      },
+      "detail": {
+        "en": "Its long tendon spreads into the flexor retinaculum and palmar aponeurosis, a sheet of soft tissue rather than a hand bone [M87]. It may be absent as a normal anatomical variation.\n\nWrist curls show its assisting wrist-flexion task if present. Barbell curls and chin-ups link to hand-position control, not isolated palmaris-longus training; a missing visible tendon is not a diagnosis.",
+        "zh": "长腱展开到屈肌支持带和掌腱膜，止点是软组织片，不是手骨 [M87]。正常解剖变异中，这块肌肉可以缺如。\n\n有这块肌肉时，腕弯举展示它协助屈腕的任务；杠铃弯举与引体的链接说明手部姿势控制，并非单独训练掌长肌。看不到一条腱不能用来诊断。"
+      },
+      "fma": "FMA38462"
+    },
+    {
+      "id": "flexor-carpi-ulnaris",
+      "name": {
+        "en": "Flexor carpi ulnaris",
+        "zh": "尺侧腕屈肌"
+      },
+      "short": {
+        "en": "FC ulnaris",
+        "zh": "尺侧腕屈肌"
+      },
+      "latin": "Musculus flexor carpi ulnaris",
+      "zAnatomy": "Humeral head of flexor carpi ulnaris + Ulnar head of flexor carpi ulnaris",
+      "regions": [
+        "arms"
+      ],
+      "layer": "superficial",
+      "origin": {
+        "text": {
+          "en": "Humeral head: medial epicondyle through the common flexor tendon; ulnar head: medial olecranon and proximal two-thirds of the posterior border of the ulna by an aponeurosis.",
+          "zh": "肱头经共同屈肌腱起于肱骨内上髁；尺头起于鹰嘴内侧，并经腱膜起于尺骨后缘近侧三分之二。"
+        },
+        "bones": [
+          "humerus",
+          "ulna"
+        ],
+        "s": [
+          "M87",
+          "M63"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Pisiform; continued through the pisohamate and pisometacarpal ligaments to the hook of hamate and base of the fifth metacarpal.",
+          "zh": "止于豌豆骨，再经豌豆钩骨韧带及豌豆掌骨韧带连到钩骨钩与第五掌骨底。"
+        },
+        "bones": [
+          "hand"
+        ],
+        "s": [
+          "M87"
+        ]
+      },
+      "fibres": {
+        "arrangement": "fusiform",
+        "direction": {
+          "en": "Down the little-finger side of the front forearm to the pisiform.",
+          "zh": "沿前臂前面的小指侧向下，到豌豆骨。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "wrist",
+          "movement": "flexion",
+          "role": "prime",
+          "s": [
+            "M87",
+            "M63"
+          ]
+        },
+        {
+          "joint": "wrist",
+          "movement": "adduction",
+          "role": "assist",
+          "s": [
+            "M87",
+            "M63"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "With the forearm supported palm up, gently bend the wrist and touch the little-finger side of the forearm.",
+        "zh": "掌心向上托住前臂，轻轻屈腕，触摸前臂小指侧。"
+      },
+      "mistakes": [
+        {
+          "en": "Rolling the weight into the fingertips to chase a bigger wrist range.",
+          "zh": "为了弯得更多，把重量滚到指尖。"
+        },
+        {
+          "en": "Increasing load while the wrist starts jerking or drifting sideways.",
+          "zh": "手腕已经抖动或偏向一边，仍继续加重。"
+        }
+      ],
+      "exercises": [
+        "dumbbell-wrist-curl",
+        "barbell-curl",
+        "chin-up"
+      ],
+      "summary": {
+        "en": "Bends the wrist and draws it toward the little finger.",
+        "zh": "屈腕，并把手拉向小指侧。"
+      },
+      "detail": {
+        "en": "The two proximal heads join a muscle whose tendon ends at the pisiform [M87]. Its pull flexes the wrist and produces ulnar deviation, called wrist adduction in the movement label.\n\nWrist curls show movement directly; barbell curls and chin-ups are gripping and wrist-position examples, not isolation of this muscle.",
+        "zh": "近端两头汇成一块肌肉，肌腱止在豌豆骨 [M87]。牵拉时既屈腕，也使腕尺偏；标签里的腕内收，就是向小指侧的尺偏。\n\n腕弯举直接展示屈腕；杠铃弯举与反握引体体现握持和维持腕位，并不单独练这块肌肉。"
+      }
+    },
+    {
+      "id": "flexor-digitorum-superficialis",
+      "name": {
+        "en": "Flexor digitorum superficialis",
+        "zh": "指浅屈肌"
+      },
+      "short": {
+        "en": "Flexor digitorum superficialis",
+        "zh": "指浅屈肌"
+      },
+      "latin": "Musculus flexor digitorum superficialis",
+      "zAnatomy": "Humero-ulnar head of flexor digitorum superficialis + Radial head of flexor digitorum superficialis",
+      "regions": [
+        "arms"
+      ],
+      "layer": "intermediate",
+      "origin": {
+        "text": {
+          "en": "Humero-ulnar attachment: medial epicondyle, ulnar collateral ligament and coronoid process; radial attachment: the anterior oblique line of the radius, from below the tuberosity towards the pronator-teres insertion.",
+          "zh": "肱尺部起于内上髁、尺侧副韧带和冠突；桡部起于桡骨前面的斜线，从粗隆下方延向旋前圆肌止点。"
+        },
+        "bones": [
+          "humerus",
+          "ulna",
+          "radius"
+        ],
+        "s": [
+          "M87",
+          "M63"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Sides of the middle phalanges of fingers two to five, around their middle, through split tendons.",
+          "zh": "第二至第五指中节指骨中段的两侧，经分叉肌腱附着。"
+        },
+        "bones": [
+          "hand"
+        ],
+        "s": [
+          "M87"
+        ]
+      },
+      "fibres": {
+        "arrangement": "fusiform",
+        "direction": {
+          "en": "Down the anterior forearm into four tendons that split before reaching the middle phalanges.",
+          "zh": "沿前臂前面向下，分成四条腱，到中节指骨前各自分叉。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "wrist",
+          "movement": "flexion",
+          "role": "assist",
+          "s": [
+            "M87",
+            "M63"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "Gently close the fingers around a handle and feel the front forearm tighten. This is shared with deep finger flexors, not a way to identify this muscle alone.",
+        "zh": "轻轻把手指合拢握住把手，前臂前面会绷紧；指深屈肌也参与，不能据此单独辨认指浅屈肌。"
+      },
+      "mistakes": [
+        {
+          "en": "Letting the handle slip into the fingertips under load.",
+          "zh": "受力时让把手滑到指尖。"
+        },
+        {
+          "en": "Mistaking finger flexion for wrist flexion: they occur at different joints.",
+          "zh": "把屈指与屈腕混为一谈；它们发生在不同关节。"
+        }
+      ],
+      "exercises": [
+        "chin-up",
+        "barbell-curl",
+        "dumbbell-wrist-curl"
+      ],
+      "summary": {
+        "en": "Bends the finger middle joints to help the grip.",
+        "zh": "屈指间关节，帮助握持。"
+      },
+      "detail": {
+        "en": "The tendons split so the deeper flexor tendons can pass through, then attach to the middle phalanges. The main action is flexion of the proximal interphalangeal joints; it also assists wrist flexion [M87].\n\nThe model has no finger joints. Its wrist action is only part of its function. Chin-ups and curls involve gripping; wrist curls also require a secure grip. These are shared hand tasks, not finger-flexor isolation.",
+        "zh": "肌腱分叉，让更深的屈肌腱穿过，再附到中节指骨。主要作用是屈近侧指间关节，也协助屈腕 [M87]。\n\n模型没有手指关节，腕动作只展示它的部分功能。引体与弯举需要握持，腕弯举也必须握牢。它们是共同完成的手部任务，不是孤立的屈指训练。"
+      },
+      "fma": "FMA38469"
+    },
+    {
+      "id": "extensor-carpi-radialis-longus",
+      "name": {
+        "en": "Extensor carpi radialis longus",
+        "zh": "桡侧腕长伸肌"
+      },
+      "short": {
+        "en": "EC radialis longus",
+        "zh": "桡侧腕长伸肌"
+      },
+      "latin": "Musculus extensor carpi radialis longus",
+      "zAnatomy": "Extensor carpi radialis longus",
+      "regions": [
+        "arms"
+      ],
+      "layer": "superficial",
+      "origin": {
+        "text": {
+          "en": "Distal third of the lateral supracondylar ridge of the humerus and lateral intermuscular septum.",
+          "zh": "肱骨外侧髁上嵴远侧约三分之一及外侧肌间隔。"
+        },
+        "bones": [
+          "humerus"
+        ],
+        "s": [
+          "M87",
+          "M63"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Dorsal base of the second metacarpal.",
+          "zh": "第二掌骨底背侧。"
+        },
+        "bones": [
+          "hand"
+        ],
+        "s": [
+          "M87"
+        ]
+      },
+      "fibres": {
+        "arrangement": "fusiform",
+        "direction": {
+          "en": "Down the outer forearm towards the back of the hand on the thumb side.",
+          "zh": "沿前臂外侧向下，走向手背拇指侧。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "wrist",
+          "movement": "extension",
+          "role": "prime",
+          "s": [
+            "M87",
+            "M63"
+          ]
+        },
+        {
+          "joint": "wrist",
+          "movement": "abduction",
+          "role": "assist",
+          "s": [
+            "M87",
+            "M63"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "Support the forearm palm down and gently raise the back of the hand. Feel the posterior forearm, without pressing on the elbow joint.",
+        "zh": "掌心向下托住前臂，轻轻抬起手背，感受前臂后面的用力，不要按压肘关节。"
+      },
+      "mistakes": [
+        {
+          "en": "Lifting the elbow or forearm off its support to move the weight.",
+          "zh": "抬起肘或前臂，离开支撑面来带动重量。"
+        },
+        {
+          "en": "Forcing a high wrist angle instead of using a comfortable range.",
+          "zh": "硬把手腕抬到很高，而不是在舒服的幅度里练。"
+        }
+      ],
+      "exercises": [
+        "dumbbell-wrist-extension",
+        "barbell-reverse-curl",
+        "dumbbell-hammer-curl"
+      ],
+      "summary": {
+        "en": "Extends the wrist and draws it toward the thumb.",
+        "zh": "伸腕，并把手拉向拇指侧。"
+      },
+      "detail": {
+        "en": "Its longer proximal attachment is on the supracondylar ridge, above the elbow [M87]. It extends the wrist and can draw the hand radially. During a curl it may steady the wrist rather than move it.\n\nWrist extension is the direct movement example. Reverse and hammer curls use a steady wrist, so these are supporting-role links rather than isolation.",
+        "zh": "较长的近端起点位于肘上方的髁上嵴 [M87]。它伸腕，也可使手向桡侧偏移。弯举时，它可能主要稳住腕位而不让腕运动。\n\n伸腕是直接展示其作用的动作。正握弯举和锤式弯举要求腕位稳定，因此这里列的是辅助参与，不是孤立训练。"
+      },
+      "fma": "FMA38494"
+    },
+    {
+      "id": "extensor-carpi-radialis-brevis",
+      "name": {
+        "en": "Extensor carpi radialis brevis",
+        "zh": "桡侧腕短伸肌"
+      },
+      "short": {
+        "en": "EC radialis brevis",
+        "zh": "桡侧腕短伸肌"
+      },
+      "latin": "Musculus extensor carpi radialis brevis",
+      "zAnatomy": "Extensor carpi radialis brevis",
+      "regions": [
+        "arms"
+      ],
+      "layer": "intermediate",
+      "origin": {
+        "text": {
+          "en": "Lateral epicondyle of the humerus through the common extensor tendon.",
+          "zh": "经共同伸肌腱起于肱骨外上髁。"
+        },
+        "bones": [
+          "humerus"
+        ],
+        "s": [
+          "M87",
+          "M63"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Dorsal base of the third metacarpal.",
+          "zh": "第三掌骨底背侧。"
+        },
+        "bones": [
+          "hand"
+        ],
+        "s": [
+          "M87"
+        ]
+      },
+      "fibres": {
+        "arrangement": "fusiform",
+        "direction": {
+          "en": "Down beneath the long radial extensor to the central dorsal hand.",
+          "zh": "在桡侧腕长伸肌下面向下，到手背中央。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "wrist",
+          "movement": "extension",
+          "role": "prime",
+          "s": [
+            "M87",
+            "M63"
+          ]
+        },
+        {
+          "joint": "wrist",
+          "movement": "abduction",
+          "role": "assist",
+          "s": [
+            "M87",
+            "M63"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "Support the forearm palm down and gently raise the back of the hand. Feel the posterior forearm, without pressing on the elbow joint.",
+        "zh": "掌心向下托住前臂，轻轻抬起手背，感受前臂后面的用力，不要按压肘关节。"
+      },
+      "mistakes": [
+        {
+          "en": "Lifting the elbow or forearm off its support to move the weight.",
+          "zh": "抬起肘或前臂，离开支撑面来带动重量。"
+        },
+        {
+          "en": "Forcing a high wrist angle instead of using a comfortable range.",
+          "zh": "硬把手腕抬到很高，而不是在舒服的幅度里练。"
+        }
+      ],
+      "exercises": [
+        "dumbbell-wrist-extension",
+        "barbell-reverse-curl",
+        "dumbbell-hammer-curl"
+      ],
+      "summary": {
+        "en": "Extends the wrist and helps steady a grip.",
+        "zh": "伸腕，也帮助握持时稳住手腕。"
+      },
+      "detail": {
+        "en": "The short radial extensor starts at the lateral epicondyle and reaches the third metacarpal [M87]. It shares wrist extension with the long radial extensor and the ulnar extensor [M63]. Do not use pain at the lateral elbow as a training target.\n\nWrist extension is the direct movement example. Reverse and hammer curls use a steady wrist, so these are supporting-role links rather than isolation.",
+        "zh": "桡侧腕短伸肌起于外上髁，止于第三掌骨 [M87]，与桡侧腕长伸肌、尺侧腕伸肌共同伸腕 [M63]。肘外侧疼痛不应当成为追求的训练感觉。\n\n伸腕是直接展示其作用的动作。正握弯举和锤式弯举要求腕位稳定，因此这里列的是辅助参与，不是孤立训练。"
+      },
+      "fma": "FMA38497"
+    },
+    {
+      "id": "extensor-carpi-ulnaris",
+      "name": {
+        "en": "Extensor carpi ulnaris",
+        "zh": "尺侧腕伸肌"
+      },
+      "short": {
+        "en": "EC ulnaris",
+        "zh": "尺侧腕伸肌"
+      },
+      "latin": "Musculus extensor carpi ulnaris",
+      "zAnatomy": "Humeral head of extensor carpi ulnaris + Ulnar head of extensor carpi ulnaris",
+      "regions": [
+        "arms"
+      ],
+      "layer": "superficial",
+      "origin": {
+        "text": {
+          "en": "Lateral epicondyle through the common extensor tendon and posterior border of the ulna.",
+          "zh": "经共同伸肌腱起于肱骨外上髁，并起于尺骨后缘。"
+        },
+        "bones": [
+          "humerus",
+          "ulna"
+        ],
+        "s": [
+          "M87",
+          "M63"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Dorsal base of the fifth metacarpal.",
+          "zh": "第五掌骨底背侧。"
+        },
+        "bones": [
+          "hand"
+        ],
+        "s": [
+          "M87"
+        ]
+      },
+      "fibres": {
+        "arrangement": "fusiform",
+        "direction": {
+          "en": "Down the posterior little-finger side of the forearm to the fifth metacarpal.",
+          "zh": "沿前臂后面的小指侧向下，到第五掌骨。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "wrist",
+          "movement": "extension",
+          "role": "prime",
+          "s": [
+            "M87",
+            "M63"
+          ]
+        },
+        {
+          "joint": "wrist",
+          "movement": "adduction",
+          "role": "assist",
+          "s": [
+            "M87",
+            "M63"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "Support the forearm palm down and gently raise the back of the hand. Feel the posterior forearm, without pressing on the elbow joint.",
+        "zh": "掌心向下托住前臂，轻轻抬起手背，感受前臂后面的用力，不要按压肘关节。"
+      },
+      "mistakes": [
+        {
+          "en": "Lifting the elbow or forearm off its support to move the weight.",
+          "zh": "抬起肘或前臂，离开支撑面来带动重量。"
+        },
+        {
+          "en": "Forcing a high wrist angle instead of using a comfortable range.",
+          "zh": "硬把手腕抬到很高，而不是在舒服的幅度里练。"
+        }
+      ],
+      "exercises": [
+        "dumbbell-wrist-extension",
+        "barbell-reverse-curl",
+        "dumbbell-hammer-curl"
+      ],
+      "summary": {
+        "en": "Extends the wrist and draws it toward the little finger.",
+        "zh": "伸腕，并把手拉向小指侧。"
+      },
+      "detail": {
+        "en": "Its tendon passes along the ulnar side of the wrist to the fifth metacarpal [M87]. It extends the wrist and produces ulnar deviation. With the radial extensors it can balance sideways pulls while holding the wrist steady.\n\nWrist extension is the direct movement example. Reverse and hammer curls use a steady wrist, so these are supporting-role links rather than isolation.",
+        "zh": "肌腱沿腕尺侧到达第五掌骨 [M87]，可伸腕并使腕尺偏。它与桡侧伸腕肌一起工作时，可平衡两侧牵拉、维持腕位。\n\n伸腕是直接展示其作用的动作。正握弯举和锤式弯举要求腕位稳定，因此这里列的是辅助参与，不是孤立训练。"
+      },
+      "fma": "FMA38506"
+    },
+    {
+      "id": "extensor-digitorum",
+      "name": {
+        "en": "Extensor digitorum",
+        "zh": "指伸肌"
+      },
+      "short": {
+        "en": "Extensor digitorum",
+        "zh": "指伸肌"
+      },
+      "latin": "Musculus extensor digitorum",
+      "zAnatomy": "Extensor digitorum",
+      "regions": [
+        "arms"
+      ],
+      "layer": "superficial",
+      "origin": {
+        "text": {
+          "en": "Lateral epicondyle of the humerus through the common extensor tendon.",
+          "zh": "经共同伸肌腱起于肱骨外上髁。"
+        },
+        "bones": [
+          "humerus"
+        ],
+        "s": [
+          "M87",
+          "M63"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Extensor expansions of fingers two to five: central slips reach the bases of the middle phalanges; paired lateral slips unite and continue to the distal phalanges.",
+          "zh": "第二至第五指的指背腱膜：中央束到中节指骨底，两侧束合并后续至远节指骨。"
+        },
+        "bones": [
+          "hand"
+        ],
+        "s": [
+          "M87"
+        ]
+      },
+      "fibres": {
+        "arrangement": "unipennate",
+        "direction": {
+          "en": "Down the back of the forearm into four tendons that fan across the hand.",
+          "zh": "沿前臂后面向下，分成四条腱，在手背扇形散开。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "wrist",
+          "movement": "extension",
+          "role": "assist",
+          "s": [
+            "M87",
+            "M63"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "Open the fingers gently with the wrist steady and feel the back of the forearm tighten. The tendons can be seen on the back of the hand.",
+        "zh": "稳住手腕，轻轻伸开手指，前臂后面会绷紧；手背可看到肌腱。"
+      },
+      "mistakes": [
+        {
+          "en": "Assuming that squeezing a handle directly trains finger extension.",
+          "zh": "以为用力握把手就是直接练伸指。"
+        },
+        {
+          "en": "Forcing the fingers back with the other hand to create a stronger sensation.",
+          "zh": "用另一只手硬掰手指向后，追求更强感觉。"
+        }
+      ],
+      "exercises": [
+        "dumbbell-wrist-extension",
+        "barbell-reverse-curl",
+        "dumbbell-hammer-curl"
+      ],
+      "summary": {
+        "en": "Opens the fingers and assists wrist extension.",
+        "zh": "伸开手指，也协助伸腕。"
+      },
+      "detail": {
+        "en": "Its tendons join the extensor expansions. It chiefly straightens the knuckles and contributes to finger-joint extension through these expansions; wrist extension is an additional task [M87]. OpenStax describes its fascicles as unipennate [M91].\n\nWrist extension is the direct linked movement. In a study of 16 volunteers maximally gripping cylindrical handles, finger extensors were active along with finger flexors and wrist muscles [M72]. The hammer- and reverse-curl links apply this coordination principle to holding a handle; they are anatomical examples, not measurements of those curls or proof of finger-extensor growth. The model has no finger joints.",
+        "zh": "肌腱进入指背腱膜，主要伸掌指关节，并经腱膜参与指间关节伸展；伸腕是附加任务 [M87]。OpenStax 将其肌束排列归为单羽状 [M91]。\n\n伸腕是直接关联的动作。16 名志愿者用最大力握持圆柱柄的研究中，指伸肌与屈指肌、腕肌共同活动 [M72]。锤式和正握弯举的链接把这种协调原则用于握柄，是解剖学例子，并非对这些弯举的实测，更不证明能促进指伸肌增长。模型没有手指关节。"
+      },
+      "fma": "FMA38500"
     }
   ]
 }

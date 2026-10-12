@@ -1,0 +1,15 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": {
+        "en": "Atlas core-muscle design study, 12 October 2026. Metres, Y up, body left +X, body front +Z. Nine region muscle parts; PEEL displacement 0.065 m; source stature 1.7095 m. Cameras, illustrative trunk/hip angles and contraction signals are teaching design values.",
+        "zh": "Atlas 腰腹肌肉设计研究，2026 年 10 月 12 日。单位米，Y 向上，身体左侧 +X、正面 +Z；9 个区内肌肉零件，剥层位移 0.065 米，源模型身高 1.7095 米。镜头、示意关节角和收缩信号均为教学设计值。"
+      },
+      "note": {
+        "en": "Geometry and attachment review derive from scripts/anatomy/core. Trunk motion uses one teaching pivot, not individual lumbar vertebrae; muscle signals do not measure force or EMG.",
+        "zh": "几何及附着审查来自 scripts/anatomy/core；躯干用一个教学支点，不逐节活动腰椎；肌肉信号不是力量或肌电测量。"
+      }
+    }
+  ]
+}

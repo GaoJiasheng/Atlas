@@ -1,0 +1,1870 @@
+{
+  "model": "/models/muscles-shoulders.glb",
+  "parts": [
+    {
+      "id": "deltoid-anterior",
+      "group": "superficial",
+      "mesh": "deltoid-anterior.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "deltoid-anterior.r"
+      },
+      "name": {
+        "en": "Deltoid, clavicular (anterior) part",
+        "zh": "三角肌锁骨部（前部）"
+      },
+      "short": {
+        "en": "Front deltoid",
+        "zh": "三角肌前部"
+      },
+      "muscle": "deltoid-anterior",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-1"
+      },
+      "connects": [
+        "clavicle",
+        "humerus"
+      ],
+      "explode": {
+        "dir": [
+          0.6,
+          0,
+          1
+        ],
+        "dist": 0.07,
+        "stage": 0
+      }
+    },
+    {
+      "id": "deltoid-lateral",
+      "group": "superficial",
+      "mesh": "deltoid-lateral.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "deltoid-lateral.r"
+      },
+      "name": {
+        "en": "Deltoid, acromial (lateral) part",
+        "zh": "三角肌肩峰部"
+      },
+      "short": {
+        "en": "Side deltoid",
+        "zh": "三角肌中部"
+      },
+      "muscle": "deltoid-lateral",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-1"
+      },
+      "connects": [
+        "scapula",
+        "humerus"
+      ],
+      "explode": {
+        "dir": [
+          1,
+          0.1,
+          0
+        ],
+        "dist": 0.07,
+        "stage": 0
+      }
+    },
+    {
+      "id": "deltoid-posterior",
+      "group": "superficial",
+      "mesh": "deltoid-posterior.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "deltoid-posterior.r"
+      },
+      "name": {
+        "en": "Deltoid, spinal (posterior) part",
+        "zh": "三角肌肩胛冈部"
+      },
+      "short": {
+        "en": "Back deltoid",
+        "zh": "三角肌后部"
+      },
+      "muscle": "deltoid-posterior",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-1"
+      },
+      "connects": [
+        "scapula",
+        "humerus"
+      ],
+      "explode": {
+        "dir": [
+          0.6,
+          0,
+          -1
+        ],
+        "dist": 0.07,
+        "stage": 0
+      }
+    },
+    {
+      "id": "infraspinatus",
+      "group": "intermediate",
+      "mesh": "infraspinatus.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "infraspinatus.r"
+      },
+      "name": {
+        "en": "Infraspinatus",
+        "zh": "冈下肌"
+      },
+      "short": {
+        "en": "Infraspinatus",
+        "zh": "冈下肌"
+      },
+      "muscle": "infraspinatus",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-2"
+      },
+      "connects": [
+        "scapula",
+        "humerus"
+      ],
+      "explode": {
+        "dir": [
+          0.2,
+          0,
+          -1
+        ],
+        "dist": 0.05,
+        "stage": 1
+      }
+    },
+    {
+      "id": "teres-minor",
+      "group": "intermediate",
+      "mesh": "teres-minor.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "teres-minor.r"
+      },
+      "name": {
+        "en": "Teres minor",
+        "zh": "小圆肌"
+      },
+      "short": {
+        "en": "Teres minor",
+        "zh": "小圆肌"
+      },
+      "muscle": "teres-minor",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-2"
+      },
+      "connects": [
+        "scapula",
+        "humerus"
+      ],
+      "explode": {
+        "dir": [
+          0.8,
+          0,
+          -1
+        ],
+        "dist": 0.05,
+        "stage": 1
+      }
+    },
+    {
+      "id": "teres-major",
+      "group": "intermediate",
+      "mesh": "teres-major.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "teres-major.r"
+      },
+      "name": {
+        "en": "Teres major",
+        "zh": "大圆肌"
+      },
+      "short": {
+        "en": "Teres major",
+        "zh": "大圆肌"
+      },
+      "muscle": "teres-major",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-2"
+      },
+      "connects": [
+        "scapula",
+        "humerus"
+      ],
+      "explode": {
+        "dir": [
+          0.8,
+          -0.1,
+          -1
+        ],
+        "dist": 0.05,
+        "stage": 1
+      }
+    },
+    {
+      "id": "supraspinatus",
+      "group": "deep",
+      "mesh": "supraspinatus.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "supraspinatus.r"
+      },
+      "name": {
+        "en": "Supraspinatus",
+        "zh": "冈上肌"
+      },
+      "short": {
+        "en": "Supraspinatus",
+        "zh": "冈上肌"
+      },
+      "muscle": "supraspinatus",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-3"
+      },
+      "connects": [
+        "scapula",
+        "humerus"
+      ],
+      "explode": {
+        "dir": [
+          0.2,
+          1,
+          -0.3
+        ],
+        "dist": 0.04,
+        "stage": 2
+      }
+    },
+    {
+      "id": "subscapularis",
+      "group": "deep",
+      "mesh": "subscapularis.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "subscapularis.r"
+      },
+      "name": {
+        "en": "Subscapularis",
+        "zh": "肩胛下肌"
+      },
+      "short": {
+        "en": "Subscapularis",
+        "zh": "肩胛下肌"
+      },
+      "muscle": "subscapularis",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-3"
+      },
+      "connects": [
+        "scapula",
+        "humerus"
+      ],
+      "explode": {
+        "dir": [
+          0.1,
+          0,
+          1
+        ],
+        "dist": 0.04,
+        "stage": 2
+      }
+    },
+    {
+      "id": "trapezius-descending",
+      "group": "neighbours",
+      "mesh": "trapezius-descending.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "trapezius-descending.r"
+      },
+      "name": {
+        "en": "Trapezius, descending part",
+        "zh": "斜方肌降部"
+      },
+      "short": {
+        "en": "Upper trapezius",
+        "zh": "斜方肌上部"
+      },
+      "muscle": "trapezius-descending",
+      "material": {
+        "color": "muscle",
+        "tint": "token:ink-3"
+      },
+      "connects": [
+        "cervical-spine",
+        "clavicle"
+      ],
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0,
+        "stage": 0
+      }
+    },
+    {
+      "id": "pectoralis-major-clavicular",
+      "group": "neighbours",
+      "mesh": "pectoralis-major-clavicular.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "pectoralis-major-clavicular.r"
+      },
+      "name": {
+        "en": "Pectoralis major, clavicular part",
+        "zh": "胸大肌锁骨部"
+      },
+      "short": {
+        "en": "Pec · clavicular",
+        "zh": "胸大肌锁骨部"
+      },
+      "muscle": "pectoralis-major-clavicular",
+      "material": {
+        "color": "muscle",
+        "tint": "token:ink-3"
+      },
+      "connects": [
+        "clavicle",
+        "humerus"
+      ],
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0,
+        "stage": 0
+      }
+    },
+    {
+      "id": "serratus-anterior",
+      "group": "neighbours",
+      "mesh": "serratus-anterior.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "serratus-anterior.r"
+      },
+      "name": {
+        "en": "Serratus anterior",
+        "zh": "前锯肌"
+      },
+      "short": {
+        "en": "Serratus ant.",
+        "zh": "前锯肌"
+      },
+      "muscle": "serratus-anterior",
+      "material": {
+        "color": "muscle",
+        "tint": "token:ink-3"
+      },
+      "connects": [
+        "thorax",
+        "scapula"
+      ],
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0,
+        "stage": 0
+      }
+    },
+    {
+      "id": "biceps-brachii-long",
+      "group": "neighbours",
+      "mesh": "biceps-brachii-long.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "biceps-brachii-long.r"
+      },
+      "name": {
+        "en": "Biceps brachii, long head",
+        "zh": "肱二头肌长头"
+      },
+      "short": {
+        "en": "Biceps · long head",
+        "zh": "肱二头肌长头"
+      },
+      "muscle": "biceps-brachii-long",
+      "material": {
+        "color": "muscle",
+        "tint": "token:ink-3"
+      },
+      "connects": [
+        "scapula",
+        "forearm"
+      ],
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0,
+        "stage": 0
+      }
+    },
+    {
+      "id": "latissimus-dorsi",
+      "group": "neighbours",
+      "mesh": "latissimus-dorsi.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "latissimus-dorsi.r"
+      },
+      "name": {
+        "en": "Latissimus dorsi",
+        "zh": "背阔肌"
+      },
+      "short": {
+        "en": "Latissimus dorsi",
+        "zh": "背阔肌"
+      },
+      "muscle": "latissimus-dorsi",
+      "material": {
+        "color": "muscle",
+        "tint": "token:ink-3"
+      },
+      "connects": [
+        "thorax",
+        "humerus"
+      ],
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0,
+        "stage": 0
+      }
+    },
+    {
+      "id": "pectoralis-major-sternocostal",
+      "group": "neighbours",
+      "mesh": "pectoralis-major-sternocostal.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "pectoralis-major-sternocostal.r"
+      },
+      "name": {
+        "en": "Pectoralis major, sternocostal part",
+        "zh": "胸大肌胸肋部"
+      },
+      "short": {
+        "en": "Pec · sternocostal",
+        "zh": "胸大肌胸肋部"
+      },
+      "muscle": "pectoralis-major-sternocostal",
+      "material": {
+        "color": "muscle",
+        "tint": "token:ink-3"
+      },
+      "connects": [
+        "thorax",
+        "humerus"
+      ],
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0,
+        "stage": 0
+      }
+    },
+    {
+      "id": "rhomboid-major",
+      "group": "neighbours",
+      "mesh": "rhomboid-major.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "rhomboid-major.r"
+      },
+      "name": {
+        "en": "Rhomboid major",
+        "zh": "大菱形肌"
+      },
+      "short": {
+        "en": "Rhomboid major",
+        "zh": "大菱形肌"
+      },
+      "muscle": "rhomboid-major",
+      "material": {
+        "color": "muscle",
+        "tint": "token:ink-3"
+      },
+      "connects": [
+        "scapula"
+      ],
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0,
+        "stage": 0
+      }
+    },
+    {
+      "id": "trapezius-transverse",
+      "group": "neighbours",
+      "mesh": "trapezius-transverse.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "trapezius-transverse.r"
+      },
+      "name": {
+        "en": "Trapezius, transverse part",
+        "zh": "斜方肌横部"
+      },
+      "short": {
+        "en": "Mid trapezius",
+        "zh": "斜方肌中部"
+      },
+      "muscle": "trapezius-transverse",
+      "material": {
+        "color": "muscle",
+        "tint": "token:ink-3"
+      },
+      "connects": [
+        "cervical-spine",
+        "scapula"
+      ],
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0,
+        "stage": 0
+      }
+    },
+    {
+      "id": "triceps-brachii",
+      "group": "neighbours",
+      "mesh": "triceps-brachii.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "triceps-brachii.r"
+      },
+      "name": {
+        "en": "Triceps brachii (grouped reference mesh)",
+        "zh": "肱三头肌（合并参考网格）"
+      },
+      "short": {
+        "en": "Triceps · grouped",
+        "zh": "肱三头肌（合并）"
+      },
+      "muscle": "triceps-brachii-long",
+      "material": {
+        "color": "muscle",
+        "tint": "token:ink-3"
+      },
+      "connects": [
+        "scapula",
+        "humerus",
+        "forearm"
+      ],
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0,
+        "stage": 0
+      },
+      "summary": {
+        "en": "Only the long head crosses the shoulder; all heads extend the elbow.",
+        "zh": "只有长头跨肩关节；各头都能伸肘。"
+      },
+      "detail": {
+        "en": "This neighbour mesh groups all three heads, as in the chest topic. Its muscle sheet describes the long head so shoulder extension is not attributed to the other heads. Highlighting marks the group, not an isolated long-head surface [M48].",
+        "zh": "这个邻区网格像胸部主题一样合并三个头。肌肉卡讲长头，避免把肩伸归到其他头。高亮表示合并网格，不是单独长头的表面 [M48]。"
+      }
+    },
+    {
+      "id": "clavicle",
+      "group": "skeleton",
+      "mesh": "clavicle.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "clavicle.r"
+      },
+      "name": {
+        "en": "Clavicle",
+        "zh": "锁骨"
+      },
+      "short": {
+        "en": "Clavicle",
+        "zh": "锁骨"
+      },
+      "summary": {
+        "en": "The collarbone supports the shoulder away from the chest.",
+        "zh": "锁骨把肩部撑离胸廓。"
+      },
+      "detail": {
+        "en": "Its lateral third gives the front deltoid its origin; the upper trapezius attaches along its posterior border. The medial end meets the sternum [M1] [M48].",
+        "zh": "外侧三分之一是三角肌前部的起点；上斜方肌止于它的后缘。内侧端连胸骨 [M1] [M48]。"
+      },
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "connects": []
+    },
+    {
+      "id": "scapula",
+      "group": "skeleton",
+      "mesh": "scapula.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "scapula.r"
+      },
+      "name": {
+        "en": "Scapula",
+        "zh": "肩胛骨"
+      },
+      "short": {
+        "en": "Scapula",
+        "zh": "肩胛骨"
+      },
+      "summary": {
+        "en": "The shoulder blade carries the arm socket and cuff origins.",
+        "zh": "肩胛骨承载关节盂，也是肩袖的起始骨。"
+      },
+      "detail": {
+        "en": "The spine separates the supraspinous and infraspinous fossae; the subscapular fossa faces the ribs. The acromion and spine start the middle and back deltoid, and the lateral border starts the teres muscles [M48].",
+        "zh": "肩胛冈分开冈上窝和冈下窝，肩胛下窝朝向肋骨。肩峰和肩胛冈是三角肌中、后部的起点；外侧缘是圆肌的起点 [M48]。"
+      },
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "connects": []
+    },
+    {
+      "id": "humerus",
+      "group": "skeleton",
+      "mesh": "humerus.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "humerus.r"
+      },
+      "name": {
+        "en": "Humerus",
+        "zh": "肱骨"
+      },
+      "short": {
+        "en": "Humerus",
+        "zh": "肱骨"
+      },
+      "summary": {
+        "en": "The upper-arm bone receives the shoulder muscles’ pull.",
+        "zh": "肱骨承接肩部肌肉的拉力。"
+      },
+      "detail": {
+        "en": "The head sits in the glenoid. The three posterior cuff tendons meet the greater tubercle; subscapularis meets the lesser. Deltoid ends at its lateral tuberosity, while teres major ends on the medial lip of the intertubercular groove [M48] [M86].",
+        "zh": "肱骨头位于关节盂。肩袖后方三条肌腱止于大结节，肩胛下肌止于小结节。三角肌止于外侧的三角肌粗隆，大圆肌止于结节间沟内侧唇 [M48] [M86]。"
+      },
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "connects": []
+    },
+    {
+      "id": "forearm",
+      "group": "skeleton",
+      "mesh": "forearm.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "forearm.r"
+      },
+      "name": {
+        "en": "Radius and ulna",
+        "zh": "桡骨与尺骨"
+      },
+      "short": {
+        "en": "Radius & ulna",
+        "zh": "桡骨与尺骨"
+      },
+      "summary": {
+        "en": "The forearm completes the elbow chain used in pressing.",
+        "zh": "前臂补全推举时使用的肘部关节链。"
+      },
+      "detail": {
+        "en": "Shown together as one mesh per side. Biceps ends on the radius and triceps on the ulna; elbow flexion changes where the hand sits in rotations and rows. Separate forearm pronation and supination are not animated [M2] [M48].",
+        "zh": "每侧合成一个网格。肱二头肌止于桡骨，肱三头肌止于尺骨；屈肘会改变旋转和划船时手的位置。此模型不单独演示前臂旋前、旋后 [M2] [M48]。"
+      },
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "connects": []
+    },
+    {
+      "id": "thorax",
+      "group": "skeleton",
+      "mesh": "thorax",
+      "name": {
+        "en": "Sternum, ribs and costal cartilages",
+        "zh": "胸骨、肋骨与肋软骨"
+      },
+      "short": {
+        "en": "Rib cage",
+        "zh": "胸廓"
+      },
+      "summary": {
+        "en": "The chest wall supports the shoulder blades and serratus.",
+        "zh": "胸壁承托肩胛骨与前锯肌。"
+      },
+      "detail": {
+        "en": "The manifest’s sternum and ribs selections are exported together as thorax, following the chest topic. Serratus anterior wraps the ribs to the costal surface of the scapula [M1] [M2].",
+        "zh": "按胸部模板，清单中的胸骨与肋骨合并导出为胸廓。前锯肌从肋骨绕到肩胛骨肋面 [M1] [M2]。"
+      },
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "connects": []
+    },
+    {
+      "id": "cervical-spine",
+      "group": "skeleton",
+      "mesh": "cervical-spine",
+      "name": {
+        "en": "Cervical vertebrae",
+        "zh": "颈椎"
+      },
+      "short": {
+        "en": "Cervical vertebrae",
+        "zh": "颈椎"
+      },
+      "summary": {
+        "en": "The neck bones locate the upper trapezius beside the shoulder.",
+        "zh": "颈椎帮助辨认肩旁的上斜方肌位置。"
+      },
+      "detail": {
+        "en": "The upper trapezius arises partly from the nuchal ligament above the neck. Its cranial attachment extends outside this topic’s exported bone set; no invented skull attachment marker is drawn [M48].",
+        "zh": "上斜方肌的部分起点来自颈部后方的项韧带。颅骨附着处超出本主题骨骼范围，因此不画虚构的颅骨标记 [M48]。"
+      },
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "connects": []
+    },
+    {
+      "id": "skin-outline",
+      "group": "body",
+      "mesh": "skin-outline",
+      "name": {
+        "en": "Body outline",
+        "zh": "体表轮廓"
+      },
+      "short": {
+        "en": "Body",
+        "zh": "全身"
+      },
+      "context": true,
+      "shell": true,
+      "material": {
+        "color": "membrane",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "The skin outline locates the shoulders on the whole body.",
+        "zh": "全身皮肤轮廓显示肩部所在的位置。"
+      },
+      "detail": {
+        "en": "The same male reference body as the muscles; simplified for orientation [M3].",
+        "zh": "与肌肉同一具男性参考人体，经过简化，用于定位 [M3]。"
+      }
+    }
+  ],
+  "groups": [
+    {
+      "id": "superficial",
+      "name": {
+        "en": "Surface layer",
+        "zh": "浅层"
+      },
+      "color": "token:muscle-1"
+    },
+    {
+      "id": "intermediate",
+      "name": {
+        "en": "Middle layer",
+        "zh": "中层"
+      },
+      "color": "token:muscle-2"
+    },
+    {
+      "id": "deep",
+      "name": {
+        "en": "Deep layer",
+        "zh": "深层"
+      },
+      "color": "token:muscle-3"
+    },
+    {
+      "id": "skeleton",
+      "name": {
+        "en": "Bones",
+        "zh": "骨骼"
+      },
+      "color": "token:bone"
+    },
+    {
+      "id": "neighbours",
+      "name": {
+        "en": "Neighbouring muscles",
+        "zh": "邻近肌肉"
+      },
+      "color": "token:ink-3",
+      "card": false
+    },
+    {
+      "id": "body",
+      "name": {
+        "en": "Body outline",
+        "zh": "体表轮廓"
+      },
+      "color": "token:ink-3",
+      "card": false
+    }
+  ],
+  "animations": [
+    {
+      "id": "deltoid-anterior-contract",
+      "target": "deltoid-anterior",
+      "kind": "contract",
+      "amount": 0.7,
+      "hz": 0.45
+    },
+    {
+      "id": "deltoid-lateral-contract",
+      "target": "deltoid-lateral",
+      "kind": "contract",
+      "amount": 0.7,
+      "hz": 0.45
+    },
+    {
+      "id": "deltoid-posterior-contract",
+      "target": "deltoid-posterior",
+      "kind": "contract",
+      "amount": 0.7,
+      "hz": 0.45
+    },
+    {
+      "id": "infraspinatus-contract",
+      "target": "infraspinatus",
+      "kind": "contract",
+      "amount": 0.7,
+      "hz": 0.45
+    },
+    {
+      "id": "teres-minor-contract",
+      "target": "teres-minor",
+      "kind": "contract",
+      "amount": 0.7,
+      "hz": 0.45
+    },
+    {
+      "id": "teres-major-contract",
+      "target": "teres-major",
+      "kind": "contract",
+      "amount": 0.7,
+      "hz": 0.45
+    },
+    {
+      "id": "supraspinatus-contract",
+      "target": "supraspinatus",
+      "kind": "contract",
+      "amount": 0.7,
+      "hz": 0.45
+    },
+    {
+      "id": "subscapularis-contract",
+      "target": "subscapularis",
+      "kind": "contract",
+      "amount": 0.7,
+      "hz": 0.45
+    }
+  ],
+  "views": {
+    "assembled": {
+      "camera": {
+        "position": [
+          0.55,
+          0.18,
+          1.6
+        ],
+        "target": [
+          0,
+          -0.045,
+          -0.03
+        ],
+        "fov": 30
+      }
+    },
+    "exploded": {
+      "camera": {
+        "position": [
+          0.65,
+          0.23,
+          1.85
+        ],
+        "target": [
+          0,
+          -0.04,
+          -0.025
+        ],
+        "fov": 30
+      }
+    },
+    "cover": {
+      "position": [
+        0.38,
+        0.12,
+        1.13
+      ],
+      "target": [
+        0,
+        -0.035,
+        -0.03
+      ],
+      "fov": 30
+    },
+    "section": {
+      "plane": "xy"
+    },
+    "cutaway": {
+      "normal": [
+        -1,
+        0,
+        0
+      ],
+      "offset": 0.13
+    },
+    "cuts": {
+      "sagittal-shoulder": {
+        "normal": [
+          -1,
+          0,
+          0
+        ],
+        "offset": 0.13,
+        "label": {
+          "en": "Sagittal · left shoulder",
+          "zh": "矢状 · 左肩"
+        }
+      },
+      "transverse-shoulder": {
+        "normal": [
+          0,
+          -1,
+          0
+        ],
+        "offset": -0.02,
+        "label": {
+          "en": "Transverse · humeral head",
+          "zh": "横切 · 肱骨头"
+        }
+      }
+    },
+    "explodeLabel": {
+      "en": "Peel",
+      "zh": "剥层"
+    }
+  },
+  "spec": [
+    {
+      "key": {
+        "en": "Muscles",
+        "zh": "肌肉"
+      },
+      "value": {
+        "en": "8 parts · 3 layers",
+        "zh": "8 个 · 3 层"
+      },
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Exercises",
+        "zh": "动作"
+      },
+      "value": "8",
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Model",
+        "zh": "模型"
+      },
+      "value": {
+        "en": "Z-Anatomy · male reference",
+        "zh": "Z-Anatomy · 男性参考"
+      },
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Stature",
+        "zh": "身高"
+      },
+      "value": "1.71 m",
+      "tag": "design"
+    }
+  ],
+  "presets": [
+    {
+      "id": "front",
+      "label": {
+        "en": "Front",
+        "zh": "正面"
+      },
+      "camera": {
+        "position": [
+          0,
+          0.06,
+          1.6
+        ],
+        "target": [
+          0,
+          -0.055,
+          -0.03
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "back",
+      "label": {
+        "en": "Back",
+        "zh": "背面"
+      },
+      "camera": {
+        "position": [
+          0.45,
+          0.16,
+          -1.35
+        ],
+        "target": [
+          0.03,
+          -0.06,
+          -0.035
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "left-side",
+      "label": {
+        "en": "Left side",
+        "zh": "左侧"
+      },
+      "camera": {
+        "position": [
+          1.3,
+          0.12,
+          0.2
+        ],
+        "target": [
+          0.13,
+          -0.05,
+          -0.035
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "close-shoulder",
+      "label": {
+        "en": "Close",
+        "zh": "近景"
+      },
+      "camera": {
+        "position": [
+          0.62,
+          0.14,
+          0.64
+        ],
+        "target": [
+          0.15,
+          -0.02,
+          -0.035
+        ],
+        "fov": 28
+      }
+    },
+    {
+      "id": "on-my-body",
+      "label": {
+        "en": "On my body",
+        "zh": "在身上"
+      },
+      "camera": {
+        "position": [
+          0.9,
+          0,
+          3.1
+        ],
+        "target": [
+          0,
+          -0.5,
+          0
+        ],
+        "fov": 30
+      },
+      "view": "xray"
+    },
+    {
+      "id": "exercise-view",
+      "label": {
+        "en": "Exercise",
+        "zh": "动作"
+      },
+      "camera": {
+        "position": [
+          1.6,
+          0.8,
+          4.1
+        ],
+        "target": [
+          0,
+          0.05,
+          0.03
+        ],
+        "fov": 22
+      }
+    }
+  ],
+  "poses": {
+    "neutral-stand": {
+      "joint:shoulder.l": {
+        "internal-rotation": 20
+      },
+      "contract": {},
+      "duration": 1.2
+    },
+    "arm-forward": {
+      "joint:shoulder.l": {
+        "flexion": 75
+      },
+      "joint:elbow.l": {
+        "flexion": 10
+      },
+      "contract": {
+        "deltoid-anterior": 0.8
+      },
+      "duration": 1.2
+    },
+    "arm-side": {
+      "joint:shoulder.l": {
+        "abduction": 70
+      },
+      "joint:scapula.l": {
+        "upward-rotation": 15
+      },
+      "contract": {
+        "deltoid-lateral": 0.8,
+        "supraspinatus": 0.65
+      },
+      "duration": 1.2
+    },
+    "arm-back": {
+      "joint:shoulder.l": {
+        "extension": 25
+      },
+      "contract": {
+        "deltoid-posterior": 0.8,
+        "teres-major": 0.6
+      },
+      "duration": 1.2
+    },
+    "rear-pull": {
+      "joint:shoulder.l": {
+        "abduction": 55,
+        "horizontal-abduction": 30
+      },
+      "joint:elbow.l": {
+        "flexion": 75
+      },
+      "contract": {
+        "deltoid-posterior": 0.8
+      },
+      "duration": 1.2
+    },
+    "elbow-bent": {
+      "joint:elbow.l": {
+        "flexion": 90
+      },
+      "contract": {},
+      "duration": 1.2
+    },
+    "turn-out": {
+      "joint:shoulder.l": {
+        "external-rotation": 40
+      },
+      "joint:elbow.l": {
+        "flexion": 90
+      },
+      "contract": {
+        "infraspinatus": 0.8,
+        "teres-minor": 0.8
+      },
+      "duration": 1.2
+    },
+    "turn-in": {
+      "joint:shoulder.l": {
+        "internal-rotation": 40
+      },
+      "joint:elbow.l": {
+        "flexion": 90
+      },
+      "contract": {
+        "subscapularis": 0.8,
+        "teres-major": 0.45
+      },
+      "duration": 1.2
+    },
+    "arm-high": {
+      "joint:shoulder.l": {
+        "flexion": 85
+      },
+      "joint:scapula.l": {
+        "upward-rotation": 20
+      },
+      "contract": {},
+      "duration": 1.2
+    },
+    "pull-down": {
+      "joint:shoulder.l": {
+        "flexion": 30
+      },
+      "contract": {
+        "teres-major": 0.8
+      },
+      "duration": 1.2
+    },
+    "cuff-steady": {
+      "joint:shoulder.l": {
+        "abduction": 25
+      },
+      "contract": {
+        "supraspinatus": 0.45,
+        "infraspinatus": 0.45,
+        "teres-minor": 0.45,
+        "subscapularis": 0.45
+      },
+      "duration": 1.2
+    },
+    "reach": {
+      "joint:shoulder.l": {
+        "flexion": 75
+      },
+      "joint:scapula.l": {
+        "protraction": 12
+      },
+      "contract": {
+        "serratus-anterior": 0.7
+      },
+      "duration": 1.2
+    }
+  },
+  "units": {
+    "modelUnit": "m",
+    "scale": 1
+  },
+  "rig": {
+    "joints": {
+      "trunk": {
+        "node": "joint.trunk",
+        "axes": {
+          "flexion": [
+            -1,
+            0,
+            0
+          ],
+          "lateral-flexion": [
+            0,
+            0,
+            1
+          ],
+          "rotation": [
+            0,
+            1,
+            0
+          ]
+        }
+      },
+      "clavicle.l": {
+        "node": "joint.clavicle.l",
+        "axes": {
+          "elevation": [
+            0,
+            0,
+            1
+          ],
+          "protraction": [
+            0,
+            -1,
+            0
+          ],
+          "rotation": [
+            0,
+            1,
+            0
+          ]
+        }
+      },
+      "scapula.l": {
+        "node": "joint.scapula.l",
+        "axes": {
+          "upward-rotation": [
+            0,
+            0,
+            1
+          ],
+          "protraction": [
+            0,
+            -1,
+            0
+          ],
+          "elevation": [
+            0,
+            0,
+            1
+          ]
+        }
+      },
+      "shoulder.l": {
+        "node": "joint.shoulder.l",
+        "axes": {
+          "horizontal-adduction": [
+            0,
+            -1,
+            0
+          ],
+          "flexion": [
+            -1,
+            0,
+            0
+          ],
+          "abduction": [
+            0,
+            0,
+            1
+          ],
+          "internal-rotation": [
+            0.1801227480173111,
+            -0.9823485612869263,
+            -0.0504680871963501
+          ]
+        }
+      },
+      "elbow.l": {
+        "node": "joint.elbow.l",
+        "axes": {
+          "flexion": [
+            -1,
+            0,
+            0
+          ]
+        }
+      },
+      "hand.l": {
+        "node": "joint.hand.l",
+        "axes": {
+          "flexion": [
+            -1,
+            0,
+            0
+          ]
+        },
+        "offset": 0.08
+      },
+      "clavicle.r": {
+        "node": "joint.clavicle.r",
+        "axes": {
+          "elevation": [
+            0,
+            0,
+            -1
+          ],
+          "protraction": [
+            0,
+            1,
+            0
+          ],
+          "rotation": [
+            0,
+            1,
+            0
+          ]
+        }
+      },
+      "scapula.r": {
+        "node": "joint.scapula.r",
+        "axes": {
+          "upward-rotation": [
+            0,
+            0,
+            -1
+          ],
+          "protraction": [
+            0,
+            1,
+            0
+          ],
+          "elevation": [
+            0,
+            0,
+            -1
+          ]
+        }
+      },
+      "shoulder.r": {
+        "node": "joint.shoulder.r",
+        "axes": {
+          "horizontal-adduction": [
+            0,
+            1,
+            0
+          ],
+          "flexion": [
+            -1,
+            0,
+            0
+          ],
+          "abduction": [
+            0,
+            0,
+            -1
+          ],
+          "internal-rotation": [
+            0.1801227480173111,
+            0.9823485612869263,
+            0.0504680871963501
+          ]
+        }
+      },
+      "elbow.r": {
+        "node": "joint.elbow.r",
+        "axes": {
+          "flexion": [
+            -1,
+            0,
+            0
+          ]
+        }
+      },
+      "hand.r": {
+        "node": "joint.hand.r",
+        "axes": {
+          "flexion": [
+            -1,
+            0,
+            0
+          ]
+        },
+        "offset": 0.08
+      }
+    },
+    "demo": {
+      "shoulder": {
+        "flexion": 80,
+        "extension": 25,
+        "abduction": 75,
+        "adduction": 20,
+        "horizontal-adduction": 40,
+        "horizontal-abduction": 30,
+        "internal-rotation": 40,
+        "external-rotation": 40
+      },
+      "scapula": {
+        "elevation": 10,
+        "depression": 10,
+        "protraction": 12,
+        "retraction": 12,
+        "upward-rotation": 20,
+        "downward-rotation": 15
+      },
+      "elbow": {
+        "flexion": 90,
+        "extension": 20
+      },
+      "forearm": {
+        "supination": 60
+      }
+    }
+  },
+  "sites": [
+    {
+      "muscle": "deltoid-anterior",
+      "kind": "origin",
+      "bone": "clavicle",
+      "points": [
+        [
+          0.098484,
+          0.001729,
+          -0.000484
+        ],
+        [
+          0.116315,
+          0.006229,
+          -0.02085
+        ],
+        [
+          0.138276,
+          0.007034,
+          -0.027405
+        ]
+      ]
+    },
+    {
+      "muscle": "deltoid-anterior",
+      "kind": "insertion",
+      "bone": "humerus",
+      "points": [
+        [
+          0.210536,
+          -0.137027,
+          -0.029198
+        ],
+        [
+          0.20794,
+          -0.124927,
+          -0.025414
+        ],
+        [
+          0.205158,
+          -0.110108,
+          -0.024782
+        ]
+      ]
+    },
+    {
+      "muscle": "deltoid-lateral",
+      "kind": "origin",
+      "bone": "scapula",
+      "points": [
+        [
+          0.165683,
+          0.002158,
+          -0.027899
+        ],
+        [
+          0.171691,
+          0.002289,
+          -0.038171
+        ],
+        [
+          0.173073,
+          0.001352,
+          -0.052183
+        ]
+      ]
+    },
+    {
+      "muscle": "deltoid-lateral",
+      "kind": "insertion",
+      "bone": "humerus",
+      "points": [
+        [
+          0.210536,
+          -0.137027,
+          -0.029198
+        ],
+        [
+          0.20794,
+          -0.124927,
+          -0.025414
+        ],
+        [
+          0.205158,
+          -0.110108,
+          -0.024782
+        ]
+      ]
+    },
+    {
+      "muscle": "deltoid-posterior",
+      "kind": "origin",
+      "bone": "scapula",
+      "points": [
+        [
+          0.105843,
+          -0.030982,
+          -0.097389
+        ],
+        [
+          0.140332,
+          -0.012522,
+          -0.077861
+        ],
+        [
+          0.170721,
+          -0.009077,
+          -0.065828
+        ]
+      ]
+    },
+    {
+      "muscle": "deltoid-posterior",
+      "kind": "insertion",
+      "bone": "humerus",
+      "points": [
+        [
+          0.210536,
+          -0.137027,
+          -0.029198
+        ],
+        [
+          0.20794,
+          -0.124927,
+          -0.025414
+        ],
+        [
+          0.205158,
+          -0.110108,
+          -0.024782
+        ]
+      ]
+    },
+    {
+      "muscle": "infraspinatus",
+      "kind": "origin",
+      "bone": "scapula",
+      "points": [
+        [
+          0.089017,
+          -0.085964,
+          -0.099065
+        ],
+        [
+          0.0859,
+          -0.04401,
+          -0.088805
+        ],
+        [
+          0.116133,
+          -0.027192,
+          -0.07826
+        ]
+      ]
+    },
+    {
+      "muscle": "infraspinatus",
+      "kind": "insertion",
+      "bone": "humerus",
+      "points": [
+        [
+          0.193974,
+          -0.018802,
+          -0.030567
+        ],
+        [
+          0.191361,
+          -0.02041,
+          -0.037696
+        ],
+        [
+          0.187649,
+          -0.021795,
+          -0.042335
+        ]
+      ]
+    },
+    {
+      "muscle": "teres-minor",
+      "kind": "origin",
+      "bone": "scapula",
+      "points": [
+        [
+          0.109829,
+          -0.10557,
+          -0.089933
+        ],
+        [
+          0.124747,
+          -0.082049,
+          -0.073623
+        ],
+        [
+          0.129635,
+          -0.06879,
+          -0.064368
+        ]
+      ]
+    },
+    {
+      "muscle": "teres-minor",
+      "kind": "insertion",
+      "bone": "humerus",
+      "points": [
+        [
+          0.194196,
+          -0.029084,
+          -0.025278
+        ],
+        [
+          0.194058,
+          -0.03047,
+          -0.031536
+        ],
+        [
+          0.188574,
+          -0.030766,
+          -0.040104
+        ]
+      ]
+    },
+    {
+      "muscle": "teres-major",
+      "kind": "origin",
+      "bone": "scapula",
+      "points": [
+        [
+          0.101591,
+          -0.15133,
+          -0.098851
+        ],
+        [
+          0.10742,
+          -0.142835,
+          -0.094666
+        ],
+        [
+          0.112603,
+          -0.128092,
+          -0.090743
+        ]
+      ]
+    },
+    {
+      "muscle": "teres-major",
+      "kind": "insertion",
+      "bone": "humerus",
+      "points": [
+        [
+          0.177986,
+          -0.084129,
+          -0.0207
+        ]
+      ]
+    },
+    {
+      "muscle": "supraspinatus",
+      "kind": "origin",
+      "bone": "scapula",
+      "points": [
+        [
+          0.080719,
+          -0.025852,
+          -0.088468
+        ],
+        [
+          0.1013,
+          -0.02961,
+          -0.07782
+        ],
+        [
+          0.122117,
+          -0.02622,
+          -0.070881
+        ]
+      ]
+    },
+    {
+      "muscle": "supraspinatus",
+      "kind": "insertion",
+      "bone": "humerus",
+      "points": [
+        [
+          0.186485,
+          -0.015259,
+          -0.012964
+        ],
+        [
+          0.189048,
+          -0.011969,
+          -0.01872
+        ],
+        [
+          0.191582,
+          -0.01089,
+          -0.026421
+        ]
+      ]
+    },
+    {
+      "muscle": "subscapularis",
+      "kind": "origin",
+      "bone": "scapula",
+      "points": [
+        [
+          0.099421,
+          -0.108598,
+          -0.093317
+        ],
+        [
+          0.107662,
+          -0.058687,
+          -0.07728
+        ],
+        [
+          0.099628,
+          -0.032309,
+          -0.074624
+        ]
+      ]
+    },
+    {
+      "muscle": "subscapularis",
+      "kind": "insertion",
+      "bone": "humerus",
+      "points": [
+        [
+          0.164842,
+          -0.031945,
+          -0.005545
+        ],
+        [
+          0.165022,
+          -0.025535,
+          -0.005318
+        ],
+        [
+          0.167366,
+          -0.020212,
+          -0.00739
+        ]
+      ]
+    }
+  ]
+}

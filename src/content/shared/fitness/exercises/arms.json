@@ -1,0 +1,2746 @@
+{
+  "exercises": [
+    {
+      "id": "barbell-curl",
+      "name": {
+        "en": "Barbell curl",
+        "zh": "杠铃弯举"
+      },
+      "equipment": "barbell",
+      "pattern": "isolation",
+      "level": "beginner",
+      "primary": [
+        "biceps-brachii-long",
+        "biceps-brachii-short",
+        "brachialis"
+      ],
+      "secondary": [
+        "brachioradialis"
+      ],
+      "stabilisers": [
+        "flexor-carpi-radialis",
+        "flexor-carpi-ulnaris",
+        "palmaris-longus",
+        "flexor-digitorum-superficialis",
+        "extensor-carpi-radialis-longus",
+        "extensor-carpi-radialis-brevis",
+        "extensor-carpi-ulnaris"
+      ],
+      "setup": {
+        "en": "Use a light straight bar with collars if plates are fitted. Choose a shoulder-width underhand grip; if the straight bar forces an uncomfortable wrist position, choose the dumbbell version.",
+        "zh": "用较轻的直杠，装杠片时上好卡扣。采用与肩大致同宽的反握；直杠让手腕不舒服时，改用哑铃版本。"
+      },
+      "steps": [
+        {
+          "en": "Stand with feet comfortably apart and knees soft. Hold the bar in front of the thighs, palms forward, thumbs wrapped around it.",
+          "zh": "双脚自然分开站稳，膝盖不硬锁。杠在大腿前，掌心向前，拇指扣住杠。"
+        },
+        {
+          "en": "Set the upper arms beside the ribs and keep the wrists in line with the forearms. Let the elbows approach straight without forcing them backward.",
+          "zh": "上臂放在肋骨旁，腕与前臂成一线。肘接近伸直，但不要往后硬顶。"
+        },
+        {
+          "en": "Breathe out and bend the elbows to raise the bar towards the front of the shoulders, without lifting the elbows forward.",
+          "zh": "呼气，屈肘把杠抬向肩前，上臂不要明显向前抬。"
+        },
+        {
+          "en": "Stop while the forearms can still support the bar and the shoulders stay quiet; do not press the bar into the chest.",
+          "zh": "在前臂仍能承托杠、肩部保持安静的位置停下，不要把杠压进胸口。"
+        },
+        {
+          "en": "Breathe in and lower along the same path until the arms are nearly straight. After finishing, put the bar down under control.",
+          "zh": "吸气，沿原路慢慢下放到手臂接近伸直。结束后有控制地放好杠。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Keep the elbows near your sides.",
+          "zh": "肘留在身体两侧。"
+        },
+        {
+          "en": "Feel the front upper arms work while the wrists stay quiet.",
+          "zh": "上臂前面用力，手腕保持稳定。"
+        },
+        {
+          "en": "Expect muscular effort at the front of the upper arm and forearm, not joint pain.",
+          "zh": "应感到上臂前面和前臂肌肉用力，不是关节疼痛。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Rocking backward to start the curl. Why: trunk momentum moves the bar before the elbow flexors can control it.",
+          "zh": "起杠时后仰。为什么：躯干的惯性先带动杠，屈肘肌难以控制动作。"
+        },
+        {
+          "en": "Bending the wrists under the bar. Why: it adds wrist motion instead of completing elbow flexion.",
+          "zh": "杠下弯腕。为什么：多出来的是腕部动作，不是完成屈肘。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Choose resistance that lets the working joint move smoothly without borrowing motion from the trunk.",
+            "zh": "选择能让目标关节平稳运动的阻力，避免借躯干动作代偿。"
+          },
+          "s": [
+            "M23",
+            "M25"
+          ]
+        },
+        {
+          "text": {
+            "en": "Progress gradually when the movement is comfortable and repeatable, and rest enough to keep the same control.",
+            "zh": "动作舒服、每次都能稳定重复后，再逐步进阶；休息到能维持同样的控制。"
+          },
+          "s": [
+            "M23"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "Stop for sharp pain at the elbow or wrist; do not force a fixed grip.",
+          "zh": "肘或腕出现刺痛就停下，不要硬迁就固定握法。"
+        },
+        {
+          "en": "Learn the movement with bodyweight or a light load under a qualified coach; anyone under eighteen should practise under adult supervision.",
+          "zh": "第一次做先用自重或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [],
+      "sketch": "barbell-curl",
+      "motion": {
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "rotation": 0
+              },
+              "shoulder.l": {
+                "flexion": 0
+              },
+              "elbow.l": {
+                "flexion": 10
+              },
+              "hand.l": {
+                "flexion": 0
+              },
+              "scapula.l": {
+                "elevation": 0
+              },
+              "clavicle.l": {
+                "elevation": 0
+              },
+              "shoulder.r": {
+                "flexion": 0
+              },
+              "elbow.r": {
+                "flexion": 10
+              },
+              "hand.r": {
+                "flexion": 0
+              },
+              "scapula.r": {
+                "elevation": 0
+              },
+              "clavicle.r": {
+                "elevation": 0
+              },
+              "forearm.l": {
+                "pronation": 0
+              },
+              "forearm.r": {
+                "pronation": 0
+              },
+              "wrist.l": {
+                "flexion": 0
+              },
+              "wrist.r": {
+                "flexion": 0
+              }
+            },
+            "contract": {
+              "biceps-brachii-long": 0.2,
+              "biceps-brachii-short": 0.2,
+              "brachialis": 0.2
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "rotation": 0
+              },
+              "shoulder.l": {
+                "flexion": 0
+              },
+              "elbow.l": {
+                "flexion": 90
+              },
+              "hand.l": {
+                "flexion": 0
+              },
+              "scapula.l": {
+                "elevation": 0
+              },
+              "clavicle.l": {
+                "elevation": 0
+              },
+              "shoulder.r": {
+                "flexion": 0
+              },
+              "elbow.r": {
+                "flexion": 90
+              },
+              "hand.r": {
+                "flexion": 0
+              },
+              "scapula.r": {
+                "elevation": 0
+              },
+              "clavicle.r": {
+                "elevation": 0
+              },
+              "forearm.l": {
+                "pronation": 0
+              },
+              "forearm.r": {
+                "pronation": 0
+              },
+              "wrist.l": {
+                "flexion": 0
+              },
+              "wrist.r": {
+                "flexion": 0
+              }
+            },
+            "contract": {
+              "biceps-brachii-long": 0.75,
+              "biceps-brachii-short": 0.75,
+              "brachialis": 0.75
+            }
+          }
+        ],
+        "tempo": [
+          1.5,
+          0.5,
+          2.5,
+          0.5
+        ],
+        "equipment": [
+          {
+            "kind": "barbell",
+            "grip": "supinated",
+            "width": 0.42
+          }
+        ]
+      },
+      "sources": [
+        "M87",
+        "M63",
+        "M23",
+        "M25",
+        "M64"
+      ]
+    },
+    {
+      "id": "dumbbell-supinating-curl",
+      "name": {
+        "en": "Dumbbell supinating curl",
+        "zh": "哑铃旋后弯举"
+      },
+      "equipment": "dumbbell",
+      "pattern": "isolation",
+      "level": "beginner",
+      "primary": [
+        "biceps-brachii-long",
+        "biceps-brachii-short",
+        "brachialis"
+      ],
+      "secondary": [
+        "brachioradialis",
+        "coracobrachialis"
+      ],
+      "stabilisers": [
+        "flexor-carpi-radialis",
+        "flexor-carpi-ulnaris",
+        "palmaris-longus",
+        "flexor-digitorum-superficialis",
+        "extensor-carpi-radialis-longus",
+        "extensor-carpi-radialis-brevis",
+        "extensor-carpi-ulnaris"
+      ],
+      "setup": {
+        "en": "Stand in a clear space with light dumbbells. This version starts palms inward and turns them upward as the elbows bend.",
+        "zh": "在有余地的地方站立，用轻哑铃。这个版本从掌心相对开始，屈肘时逐渐把掌心转向上。"
+      },
+      "steps": [
+        {
+          "en": "Stand tall, feet planted, dumbbells beside the thighs, thumbs pointing forward and wrists straight.",
+          "zh": "站直踩稳，哑铃在大腿两旁，拇指朝前，腕保持平直。"
+        },
+        {
+          "en": "Keep the upper arms close to the body and begin bending the elbows without swinging the weights.",
+          "zh": "上臂靠近身体，开始屈肘，不甩动哑铃。"
+        },
+        {
+          "en": "As the weights rise, turn the forearms so the palms face upward. Keep the shoulder from rotating to fake the turn.",
+          "zh": "重量上升时让前臂旋后，掌心转向上；不要转肩来假装完成这段转动。"
+        },
+        {
+          "en": "Finish with the dumbbells near the front of the shoulders. A small natural forward movement of the upper arm is acceptable; do not make it a front raise.",
+          "zh": "哑铃到肩前附近时停下。上臂可自然稍向前移，但不要变成前平举。"
+        },
+        {
+          "en": "Lower slowly, reversing the forearm turn to return to palms inward. Put the dumbbells down without twisting the trunk.",
+          "zh": "慢慢下放，同时反向转回掌心相对。放好哑铃，不扭转躯干。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Turn the forearm, not the whole shoulder.",
+          "zh": "转前臂，不是转整个肩。"
+        },
+        {
+          "en": "Let the wrist follow the forearm as a straight unit.",
+          "zh": "腕与前臂保持一线，一起转动。"
+        },
+        {
+          "en": "Expect muscular effort at the front of the upper arm and forearm, not joint pain.",
+          "zh": "应感到上臂前面和前臂肌肉用力，不是关节疼痛。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Twisting only at the wrist. Why: supination is rotation of the radius relative to the ulna, not a wrist twist.",
+          "zh": "只在手腕上拧。为什么：旋后是桡骨相对尺骨的转动，不是拧腕。"
+        },
+        {
+          "en": "Raising the elbows high to finish. Why: shoulder flexion replaces the last part of the curl.",
+          "zh": "最后把肘抬得很高。为什么：肩前举替代了弯举的最后一段。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Choose resistance that lets the working joint move smoothly without borrowing motion from the trunk.",
+            "zh": "选择能让目标关节平稳运动的阻力，避免借躯干动作代偿。"
+          },
+          "s": [
+            "M23",
+            "M25"
+          ]
+        },
+        {
+          "text": {
+            "en": "Progress gradually when the movement is comfortable and repeatable, and rest enough to keep the same control.",
+            "zh": "动作舒服、每次都能稳定重复后，再逐步进阶；休息到能维持同样的控制。"
+          },
+          "s": [
+            "M23"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "Use a comfortable forearm turn; stop if the front of the elbow or shoulder hurts.",
+          "zh": "前臂只转到舒服的位置；肘前或肩前疼痛就停下。"
+        },
+        {
+          "en": "Learn the movement with bodyweight or a light load under a qualified coach; anyone under eighteen should practise under adult supervision.",
+          "zh": "第一次做先用自重或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [],
+      "sketch": "dumbbell-supinating-curl",
+      "motion": {
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "rotation": 0
+              },
+              "shoulder.l": {
+                "flexion": 0
+              },
+              "elbow.l": {
+                "flexion": 10
+              },
+              "hand.l": {
+                "flexion": 0
+              },
+              "scapula.l": {
+                "elevation": 0
+              },
+              "clavicle.l": {
+                "elevation": 0
+              },
+              "shoulder.r": {
+                "flexion": 0
+              },
+              "elbow.r": {
+                "flexion": 10
+              },
+              "hand.r": {
+                "flexion": 0
+              },
+              "scapula.r": {
+                "elevation": 0
+              },
+              "clavicle.r": {
+                "elevation": 0
+              },
+              "forearm.l": {
+                "pronation": 80
+              },
+              "forearm.r": {
+                "pronation": 80
+              },
+              "wrist.l": {
+                "flexion": 0
+              },
+              "wrist.r": {
+                "flexion": 0
+              }
+            },
+            "contract": {
+              "biceps-brachii-long": 0.2,
+              "biceps-brachii-short": 0.2,
+              "brachialis": 0.2
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "rotation": 0
+              },
+              "shoulder.l": {
+                "flexion": 10
+              },
+              "elbow.l": {
+                "flexion": 90
+              },
+              "hand.l": {
+                "flexion": 0
+              },
+              "scapula.l": {
+                "elevation": 0
+              },
+              "clavicle.l": {
+                "elevation": 0
+              },
+              "shoulder.r": {
+                "flexion": 10
+              },
+              "elbow.r": {
+                "flexion": 90
+              },
+              "hand.r": {
+                "flexion": 0
+              },
+              "scapula.r": {
+                "elevation": 0
+              },
+              "clavicle.r": {
+                "elevation": 0
+              },
+              "forearm.l": {
+                "pronation": 0
+              },
+              "forearm.r": {
+                "pronation": 0
+              },
+              "wrist.l": {
+                "flexion": 0
+              },
+              "wrist.r": {
+                "flexion": 0
+              }
+            },
+            "contract": {
+              "biceps-brachii-long": 0.75,
+              "biceps-brachii-short": 0.75,
+              "brachialis": 0.75
+            }
+          }
+        ],
+        "tempo": [
+          1.5,
+          0.5,
+          2.5,
+          0.5
+        ],
+        "equipment": [
+          {
+            "kind": "dumbbell",
+            "grip": "neutral"
+          }
+        ]
+      },
+      "sources": [
+        "M87",
+        "M63",
+        "M23",
+        "M25",
+        "M88"
+      ]
+    },
+    {
+      "id": "dumbbell-hammer-curl",
+      "name": {
+        "en": "Dumbbell hammer curl",
+        "zh": "哑铃锤式弯举"
+      },
+      "equipment": "dumbbell",
+      "pattern": "isolation",
+      "level": "beginner",
+      "primary": [
+        "brachialis",
+        "brachioradialis"
+      ],
+      "secondary": [
+        "biceps-brachii-long",
+        "biceps-brachii-short"
+      ],
+      "stabilisers": [
+        "flexor-carpi-radialis",
+        "flexor-carpi-ulnaris",
+        "palmaris-longus",
+        "flexor-digitorum-superficialis",
+        "extensor-carpi-radialis-longus",
+        "extensor-carpi-radialis-brevis",
+        "extensor-carpi-ulnaris"
+      ],
+      "setup": {
+        "en": "Choose light dumbbells and a standing position. Keep the palms facing each other throughout.",
+        "zh": "选轻哑铃，采用站姿，全程保持掌心相对。"
+      },
+      "steps": [
+        {
+          "en": "Stand with feet planted and dumbbells beside the thighs, thumbs pointing forward.",
+          "zh": "站稳，哑铃在大腿两侧，拇指朝前。"
+        },
+        {
+          "en": "Bring the elbows beside the ribs and keep the wrists straight, like holding hammer handles.",
+          "zh": "肘放在肋骨旁，腕保持平直，像握着锤柄。"
+        },
+        {
+          "en": "Breathe out and bend the elbows to raise the dumbbells towards the front of the shoulders, maintaining the neutral grip.",
+          "zh": "呼气，屈肘把哑铃抬向肩前，维持对握。"
+        },
+        {
+          "en": "Pause before the elbows move forward or the weights touch the shoulders. Keep the chest and pelvis still.",
+          "zh": "在肘开始前移、哑铃碰到肩之前停下，胸廓和骨盆保持稳定。"
+        },
+        {
+          "en": "Breathe in and lower slowly to nearly straight elbows. Set the dumbbells down carefully when finished.",
+          "zh": "吸气，慢慢下放到肘接近伸直；结束时平稳放好哑铃。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Keep the thumbs up as the weights rise.",
+          "zh": "上升时拇指朝上。"
+        },
+        {
+          "en": "Feel the front upper arm and outer forearm share the work.",
+          "zh": "感受上臂前面和前臂外侧共同用力。"
+        },
+        {
+          "en": "Expect muscular effort at the front of the upper arm and forearm, not joint pain.",
+          "zh": "应感到上臂前面和前臂肌肉用力，不是关节疼痛。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Turning the palms up midway. Why: it changes this neutral-grip version into a supinating curl.",
+          "zh": "做到一半把掌心转向上。为什么：这会把对握版本变成旋后弯举。"
+        },
+        {
+          "en": "Swinging the weights across the body. Why: momentum and shoulder motion replace controlled elbow flexion.",
+          "zh": "把哑铃甩过身体中线。为什么：惯性和肩部动作替代了受控屈肘。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Choose resistance that lets the working joint move smoothly without borrowing motion from the trunk.",
+            "zh": "选择能让目标关节平稳运动的阻力，避免借躯干动作代偿。"
+          },
+          "s": [
+            "M23",
+            "M25"
+          ]
+        },
+        {
+          "text": {
+            "en": "Progress gradually when the movement is comfortable and repeatable, and rest enough to keep the same control.",
+            "zh": "动作舒服、每次都能稳定重复后，再逐步进阶；休息到能维持同样的控制。"
+          },
+          "s": [
+            "M23"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "Reduce the load if the wrist bends or grip becomes insecure.",
+          "zh": "腕开始弯曲或握不稳时，减轻重量。"
+        },
+        {
+          "en": "Learn the movement with bodyweight or a light load under a qualified coach; anyone under eighteen should practise under adult supervision.",
+          "zh": "第一次做先用自重或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [],
+      "sketch": "dumbbell-hammer-curl",
+      "motion": {
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "rotation": 0
+              },
+              "shoulder.l": {
+                "flexion": 0
+              },
+              "elbow.l": {
+                "flexion": 10
+              },
+              "hand.l": {
+                "flexion": 0
+              },
+              "scapula.l": {
+                "elevation": 0
+              },
+              "clavicle.l": {
+                "elevation": 0
+              },
+              "shoulder.r": {
+                "flexion": 0
+              },
+              "elbow.r": {
+                "flexion": 10
+              },
+              "hand.r": {
+                "flexion": 0
+              },
+              "scapula.r": {
+                "elevation": 0
+              },
+              "clavicle.r": {
+                "elevation": 0
+              },
+              "forearm.l": {
+                "pronation": 80
+              },
+              "forearm.r": {
+                "pronation": 80
+              },
+              "wrist.l": {
+                "flexion": 0
+              },
+              "wrist.r": {
+                "flexion": 0
+              }
+            },
+            "contract": {
+              "brachialis": 0.2,
+              "brachioradialis": 0.2
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "rotation": 0
+              },
+              "shoulder.l": {
+                "flexion": 0
+              },
+              "elbow.l": {
+                "flexion": 90
+              },
+              "hand.l": {
+                "flexion": 0
+              },
+              "scapula.l": {
+                "elevation": 0
+              },
+              "clavicle.l": {
+                "elevation": 0
+              },
+              "shoulder.r": {
+                "flexion": 0
+              },
+              "elbow.r": {
+                "flexion": 90
+              },
+              "hand.r": {
+                "flexion": 0
+              },
+              "scapula.r": {
+                "elevation": 0
+              },
+              "clavicle.r": {
+                "elevation": 0
+              },
+              "forearm.l": {
+                "pronation": 80
+              },
+              "forearm.r": {
+                "pronation": 80
+              },
+              "wrist.l": {
+                "flexion": 0
+              },
+              "wrist.r": {
+                "flexion": 0
+              }
+            },
+            "contract": {
+              "brachialis": 0.75,
+              "brachioradialis": 0.75
+            }
+          }
+        ],
+        "tempo": [
+          1.5,
+          0.5,
+          2.5,
+          0.5
+        ],
+        "equipment": [
+          {
+            "kind": "dumbbell",
+            "grip": "neutral"
+          }
+        ]
+      },
+      "sources": [
+        "M87",
+        "M63",
+        "M23",
+        "M25",
+        "M65"
+      ]
+    },
+    {
+      "id": "barbell-reverse-curl",
+      "name": {
+        "en": "Barbell reverse curl",
+        "zh": "杠铃正握弯举"
+      },
+      "equipment": "barbell",
+      "pattern": "isolation",
+      "level": "beginner",
+      "primary": [
+        "brachialis",
+        "brachioradialis"
+      ],
+      "secondary": [
+        "biceps-brachii-long",
+        "biceps-brachii-short"
+      ],
+      "stabilisers": [
+        "flexor-carpi-radialis",
+        "flexor-carpi-ulnaris",
+        "palmaris-longus",
+        "flexor-digitorum-superficialis",
+        "extensor-carpi-radialis-longus",
+        "extensor-carpi-radialis-brevis",
+        "extensor-carpi-ulnaris",
+        "pronator-teres"
+      ],
+      "setup": {
+        "en": "Use a light bar and a comfortable overhand grip. Select a load you can move without bending the wrists or swinging.",
+        "zh": "用轻杠和舒服的正握。选择能保持腕平直、不甩动身体的重量。"
+      },
+      "steps": [
+        {
+          "en": "Stand with the bar in front of the thighs, palms facing the thighs and thumbs wrapped around the bar.",
+          "zh": "杠放在大腿前，掌心朝大腿，拇指扣住杠。"
+        },
+        {
+          "en": "Keep the upper arms beside the body, shoulders relaxed and wrists aligned with the forearms.",
+          "zh": "上臂靠近身体，肩放松，腕与前臂成一线。"
+        },
+        {
+          "en": "Breathe out and bend the elbows to lift the bar, keeping the palms down as the forearms rise.",
+          "zh": "呼气，屈肘抬杠，前臂上升时保持掌心向下。"
+        },
+        {
+          "en": "Stop at a height where the wrists remain straight and the elbows have not moved forward.",
+          "zh": "在腕仍平直、肘没有前移的高度停下。"
+        },
+        {
+          "en": "Breathe in and lower slowly to nearly straight arms; place the bar securely down after finishing.",
+          "zh": "吸气，慢慢下放到手臂接近伸直；结束后稳妥放好杠。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Lift with the elbow bend, not with a wrist flick.",
+          "zh": "靠屈肘抬，不靠甩腕。"
+        },
+        {
+          "en": "Keep the bar secure in the whole hand.",
+          "zh": "用整个手稳稳握住杠。"
+        },
+        {
+          "en": "Expect muscular effort at the front of the upper arm and forearm, not joint pain.",
+          "zh": "应感到上臂前面和前臂肌肉用力，不是关节疼痛。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Letting the wrists fold down. Why: the wrist support fails while the elbow movement continues.",
+          "zh": "腕向下折。为什么：肘还在动，腕却已经失去支撑。"
+        },
+        {
+          "en": "Using the same load as a comfortable palm-up curl. Why: a grip change can exceed the control available in this version.",
+          "zh": "照搬反握弯举的重量。为什么：换握法后，这个重量可能超过你当前能控制的范围。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Choose resistance that lets the working joint move smoothly without borrowing motion from the trunk.",
+            "zh": "选择能让目标关节平稳运动的阻力，避免借躯干动作代偿。"
+          },
+          "s": [
+            "M23",
+            "M25"
+          ]
+        },
+        {
+          "text": {
+            "en": "Progress gradually when the movement is comfortable and repeatable, and rest enough to keep the same control.",
+            "zh": "动作舒服、每次都能稳定重复后，再逐步进阶；休息到能维持同样的控制。"
+          },
+          "s": [
+            "M23"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "Choose a dumbbell neutral grip if the fixed overhand grip is uncomfortable.",
+          "zh": "固定正握不舒服时，改用哑铃对握。"
+        },
+        {
+          "en": "Learn the movement with bodyweight or a light load under a qualified coach; anyone under eighteen should practise under adult supervision.",
+          "zh": "第一次做先用自重或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [],
+      "sketch": "barbell-reverse-curl",
+      "motion": {
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "rotation": 0
+              },
+              "shoulder.l": {
+                "flexion": 0
+              },
+              "elbow.l": {
+                "flexion": 10
+              },
+              "hand.l": {
+                "flexion": 0
+              },
+              "scapula.l": {
+                "elevation": 0
+              },
+              "clavicle.l": {
+                "elevation": 0
+              },
+              "shoulder.r": {
+                "flexion": 0
+              },
+              "elbow.r": {
+                "flexion": 10
+              },
+              "hand.r": {
+                "flexion": 0
+              },
+              "scapula.r": {
+                "elevation": 0
+              },
+              "clavicle.r": {
+                "elevation": 0
+              },
+              "forearm.l": {
+                "pronation": 160
+              },
+              "forearm.r": {
+                "pronation": 160
+              },
+              "wrist.l": {
+                "flexion": 0
+              },
+              "wrist.r": {
+                "flexion": 0
+              }
+            },
+            "contract": {
+              "brachialis": 0.2,
+              "brachioradialis": 0.2
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "rotation": 0
+              },
+              "shoulder.l": {
+                "flexion": 0
+              },
+              "elbow.l": {
+                "flexion": 90
+              },
+              "hand.l": {
+                "flexion": 0
+              },
+              "scapula.l": {
+                "elevation": 0
+              },
+              "clavicle.l": {
+                "elevation": 0
+              },
+              "shoulder.r": {
+                "flexion": 0
+              },
+              "elbow.r": {
+                "flexion": 90
+              },
+              "hand.r": {
+                "flexion": 0
+              },
+              "scapula.r": {
+                "elevation": 0
+              },
+              "clavicle.r": {
+                "elevation": 0
+              },
+              "forearm.l": {
+                "pronation": 160
+              },
+              "forearm.r": {
+                "pronation": 160
+              },
+              "wrist.l": {
+                "flexion": 0
+              },
+              "wrist.r": {
+                "flexion": 0
+              }
+            },
+            "contract": {
+              "brachialis": 0.75,
+              "brachioradialis": 0.75
+            }
+          }
+        ],
+        "tempo": [
+          1.5,
+          0.5,
+          2.5,
+          0.5
+        ],
+        "equipment": [
+          {
+            "kind": "barbell",
+            "grip": "pronated",
+            "width": 0.42
+          }
+        ]
+      },
+      "sources": [
+        "M87",
+        "M63",
+        "M23",
+        "M25",
+        "M66"
+      ]
+    },
+    {
+      "id": "chin-up",
+      "name": {
+        "en": "Chin-up",
+        "zh": "反握引体向上"
+      },
+      "equipment": "bodyweight",
+      "pattern": "vertical-pull",
+      "level": "intermediate",
+      "primary": [
+        "latissimus-dorsi",
+        "biceps-brachii-long",
+        "biceps-brachii-short",
+        "brachialis"
+      ],
+      "secondary": [
+        "brachioradialis",
+        "coracobrachialis"
+      ],
+      "stabilisers": [
+        "flexor-carpi-radialis",
+        "flexor-carpi-ulnaris",
+        "palmaris-longus",
+        "flexor-digitorum-superficialis",
+        "extensor-carpi-radialis-longus",
+        "extensor-carpi-radialis-brevis",
+        "extensor-carpi-ulnaris"
+      ],
+      "setup": {
+        "en": "Use a secure overhead bar and a stable step for getting on and off. Begin with foot support or suitable assistance if you cannot control both the rise and lowering.",
+        "zh": "用安装牢固的单杠，并准备稳固踏台上下。无法控制上拉和下放时，先用脚部支撑或合适的辅助。"
+      },
+      "steps": [
+        {
+          "en": "From the step, grasp the bar shoulder-width with palms facing you and thumbs wrapped around it.",
+          "zh": "从踏台握杠，反握、掌心朝向自己，握距与肩大致同宽，拇指扣杠。"
+        },
+        {
+          "en": "Take your weight gradually, arms nearly straight overhead, shoulders comfortable and trunk steady; do not drop suddenly into a hang.",
+          "zh": "逐渐把体重交给双手，手臂在头顶接近伸直，肩部舒服、躯干稳定，不要突然落入悬垂。"
+        },
+        {
+          "en": "Breathe out and draw the upper arms down while bending the elbows. Let the shoulder blades move naturally without kicking the legs.",
+          "zh": "呼气，一边把上臂往下带，一边屈肘；肩胛骨自然运动，不踢腿借力。"
+        },
+        {
+          "en": "Rise as far as you can without craning the neck; aim for the chin to clear the bar only if you can keep the same control.",
+          "zh": "上升到不用仰头探下巴的高度；只有仍能稳定控制时，才让下巴超过杠。"
+        },
+        {
+          "en": "Breathe in and lower slowly to the comfortable starting reach. Use the step to unload the hands before releasing the bar.",
+          "zh": "吸气，慢慢下放回舒服的起始伸展位置。脚踩踏台卸掉手上的重量，再松手。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Bring the elbows down, rather than reaching with the chin.",
+          "zh": "把肘往下拉，不用下巴去够杠。"
+        },
+        {
+          "en": "Feel the back and front arms working together.",
+          "zh": "感受背部和上臂前面共同用力。"
+        },
+        {
+          "en": "Expect muscular effort at the front of the upper arm and forearm, not joint pain.",
+          "zh": "应感到上臂前面和前臂肌肉用力，不是关节疼痛。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Kicking or swinging to get above the bar. Why: momentum hides whether you can control the pulling range.",
+          "zh": "踢腿或摆荡上杠。为什么：惯性掩盖了你是否能控制这段上拉。"
+        },
+        {
+          "en": "Dropping from the top. Why: you lose control as the shoulder and elbow return to a lengthened position.",
+          "zh": "到顶后直接掉下来。为什么：肩和肘回到伸展位置时，你已经失去控制。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Choose resistance that lets the working joint move smoothly without borrowing motion from the trunk.",
+            "zh": "选择能让目标关节平稳运动的阻力，避免借躯干动作代偿。"
+          },
+          "s": [
+            "M23",
+            "M25"
+          ]
+        },
+        {
+          "text": {
+            "en": "Progress gradually when the movement is comfortable and repeatable, and rest enough to keep the same control.",
+            "zh": "动作舒服、每次都能稳定重复后，再逐步进阶；休息到能维持同样的控制。"
+          },
+          "s": [
+            "M23"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "The moving model shows a shortened shoulder-and-elbow sequence. It does not depict a suspended body or contact with a fixed bar; use the sketch and steps for the real exercise.",
+          "zh": "动态模型只展示缩小幅度的肩肘动作，不表现身体悬垂或握住固定单杠；真实动作请参照示意图和步骤。"
+        },
+        {
+          "en": "Use assistance rather than forcing a painful hang; stop for shoulder pain, elbow pain or hand numbness.",
+          "zh": "不要硬撑疼痛的悬垂，改用辅助；肩痛、肘痛或手麻就停下。"
+        },
+        {
+          "en": "This is a back-and-arm compound pull; latissimus dorsi is a prime mover, not an arm-only exercise.",
+          "zh": "这是背部与手臂共同完成的复合拉；背阔肌是主动肌之一，不是只靠手臂。"
+        },
+        {
+          "en": "Learn the movement with bodyweight or a light load under a qualified coach; anyone under eighteen should practise under adult supervision.",
+          "zh": "第一次做先用自重或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [],
+      "sketch": "chin-up",
+      "motion": {
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "rotation": 0
+              },
+              "shoulder.l": {
+                "flexion": 90,
+                "abduction": 15
+              },
+              "elbow.l": {
+                "flexion": 10
+              },
+              "hand.l": {
+                "flexion": 0
+              },
+              "scapula.l": {
+                "upward-rotation": 30,
+                "elevation": 8
+              },
+              "clavicle.l": {
+                "elevation": 0
+              },
+              "shoulder.r": {
+                "flexion": 90,
+                "abduction": 15
+              },
+              "elbow.r": {
+                "flexion": 10
+              },
+              "hand.r": {
+                "flexion": 0
+              },
+              "scapula.r": {
+                "upward-rotation": 30,
+                "elevation": 8
+              },
+              "clavicle.r": {
+                "elevation": 0
+              },
+              "forearm.l": {
+                "pronation": 0
+              },
+              "forearm.r": {
+                "pronation": 0
+              },
+              "wrist.l": {
+                "flexion": 0
+              },
+              "wrist.r": {
+                "flexion": 0
+              }
+            },
+            "contract": {
+              "biceps-brachii-long": 0.2,
+              "biceps-brachii-short": 0.2,
+              "brachialis": 0.2
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "rotation": 0
+              },
+              "shoulder.l": {
+                "flexion": 30,
+                "abduction": 15
+              },
+              "elbow.l": {
+                "flexion": 90
+              },
+              "hand.l": {
+                "flexion": 0
+              },
+              "scapula.l": {
+                "upward-rotation": 5,
+                "elevation": 0
+              },
+              "clavicle.l": {
+                "elevation": 0
+              },
+              "shoulder.r": {
+                "flexion": 30,
+                "abduction": 15
+              },
+              "elbow.r": {
+                "flexion": 90
+              },
+              "hand.r": {
+                "flexion": 0
+              },
+              "scapula.r": {
+                "upward-rotation": 5,
+                "elevation": 0
+              },
+              "clavicle.r": {
+                "elevation": 0
+              },
+              "forearm.l": {
+                "pronation": 0
+              },
+              "forearm.r": {
+                "pronation": 0
+              },
+              "wrist.l": {
+                "flexion": 0
+              },
+              "wrist.r": {
+                "flexion": 0
+              }
+            },
+            "contract": {
+              "biceps-brachii-long": 0.75,
+              "biceps-brachii-short": 0.75,
+              "brachialis": 0.75
+            }
+          }
+        ],
+        "tempo": [
+          1.5,
+          0.5,
+          2.5,
+          0.5
+        ]
+      },
+      "sources": [
+        "M87",
+        "M63",
+        "M23",
+        "M25",
+        "M67"
+      ]
+    },
+    {
+      "id": "close-grip-bench-press",
+      "name": {
+        "en": "Close-grip bench press",
+        "zh": "窄握杠铃卧推"
+      },
+      "equipment": "barbell",
+      "pattern": "horizontal-push",
+      "level": "beginner",
+      "primary": [
+        "triceps-brachii-long",
+        "triceps-brachii-lateral",
+        "triceps-brachii-medial"
+      ],
+      "secondary": [
+        "pectoralis-major",
+        "deltoid-anterior",
+        "coracobrachialis",
+        "anconeus"
+      ],
+      "stabilisers": [
+        "flexor-carpi-radialis",
+        "flexor-carpi-ulnaris",
+        "palmaris-longus",
+        "flexor-digitorum-superficialis",
+        "extensor-carpi-radialis-longus",
+        "extensor-carpi-radialis-brevis",
+        "extensor-carpi-ulnaris"
+      ],
+      "setup": {
+        "en": "Use a flat bench in a rack with safety bars just below the intended bottom position, or a trained spotter. Use a roughly shoulder-width grip, not hands touching.",
+        "zh": "用架内平板凳，保护杠略低于预定最低点，或请懂得保护的人协助。握距约与肩同宽，不把两手挤在一起。"
+      },
+      "steps": [
+        {
+          "en": "Lie with head, upper back and buttocks supported and feet flat. Gently draw the shoulder blades back.",
+          "zh": "躺下，头、上背和臀部有支撑，双脚踩平，肩胛骨轻轻后收。"
+        },
+        {
+          "en": "Take a shoulder-width overhand grip with thumbs around the bar. Keep the bar over the heel of the palm and wrists nearly straight.",
+          "zh": "正握，握距与肩大致同宽，拇指扣杠；杠压在掌根上，腕尽量平直。"
+        },
+        {
+          "en": "Unrack and settle the bar above the shoulders with arms nearly straight.",
+          "zh": "取杠，稳稳停在肩上方，手臂接近伸直。"
+        },
+        {
+          "en": "Breathe in and lower slowly towards the lower chest, keeping the elbows closer to the ribs than in a wider-grip press and the forearms near vertical.",
+          "zh": "吸气，慢慢放向胸部下方；与宽握相比，肘更靠近肋骨，前臂尽量竖直。"
+        },
+        {
+          "en": "Breathe out and press up and slightly back. Finish smoothly without lifting the hips or snapping the elbows.",
+          "zh": "呼气，向上、稍向后推；平稳结束，不抬臀、不猛顶肘。"
+        },
+        {
+          "en": "Move the bar back against the uprights and settle it onto both hooks before opening the hands.",
+          "zh": "把杠移回并贴住立柱，确认落在两边挂钩上再松手。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Keep the wrists over the elbows under the load.",
+          "zh": "受力时腕叠在肘上方。"
+        },
+        {
+          "en": "The chest still helps; feel the backs of the arms extend the elbows.",
+          "zh": "胸肌仍参与；感受上臂后面使肘伸直。"
+        },
+        {
+          "en": "Expect effort in the back of the upper arm, not joint pain.",
+          "zh": "应感到上臂后面用力，不是关节疼痛。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Putting the hands almost together. Why: an extremely narrow grip can force the wrists out of line.",
+          "zh": "两手几乎挤在一起。为什么：过窄会让腕偏离受力方向。"
+        },
+        {
+          "en": "Bouncing off the chest. Why: the rebound replaces control at the bottom of the press.",
+          "zh": "砸胸反弹。为什么：最低点的控制被反弹替代。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Choose resistance that lets the working joint move smoothly without borrowing motion from the trunk.",
+            "zh": "选择能让目标关节平稳运动的阻力，避免借躯干动作代偿。"
+          },
+          "s": [
+            "M23",
+            "M25"
+          ]
+        },
+        {
+          "text": {
+            "en": "Progress gradually when the movement is comfortable and repeatable, and rest enough to keep the same control.",
+            "zh": "动作舒服、每次都能稳定重复后，再逐步进阶；休息到能维持同样的控制。"
+          },
+          "s": [
+            "M23"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "Use safety bars or a competent spotter; stop for sharp shoulder, chest or elbow pain.",
+          "zh": "用保护杠或合格保护者；肩、胸或肘刺痛就停下。"
+        },
+        {
+          "en": "Learn the movement with bodyweight or a light load under a qualified coach; anyone under eighteen should practise under adult supervision.",
+          "zh": "第一次做先用自重或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [],
+      "sketch": "close-grip-bench-press",
+      "motion": {
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "rotation": 0
+              },
+              "shoulder.l": {
+                "flexion": 15,
+                "abduction": 25
+              },
+              "elbow.l": {
+                "flexion": 90
+              },
+              "hand.l": {
+                "flexion": 0
+              },
+              "scapula.l": {
+                "retraction": 8
+              },
+              "clavicle.l": {
+                "elevation": 0
+              },
+              "shoulder.r": {
+                "flexion": 15,
+                "abduction": 25
+              },
+              "elbow.r": {
+                "flexion": 90
+              },
+              "hand.r": {
+                "flexion": 0
+              },
+              "scapula.r": {
+                "retraction": 8
+              },
+              "clavicle.r": {
+                "elevation": 0
+              },
+              "forearm.l": {
+                "pronation": 160
+              },
+              "forearm.r": {
+                "pronation": 160
+              },
+              "wrist.l": {
+                "flexion": 0
+              },
+              "wrist.r": {
+                "flexion": 0
+              }
+            },
+            "contract": {
+              "triceps-brachii-long": 0.2,
+              "triceps-brachii-lateral": 0.2,
+              "triceps-brachii-medial": 0.2
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "rotation": 0
+              },
+              "shoulder.l": {
+                "flexion": 85,
+                "abduction": 8
+              },
+              "elbow.l": {
+                "flexion": 5
+              },
+              "hand.l": {
+                "flexion": 0
+              },
+              "scapula.l": {
+                "retraction": 8
+              },
+              "clavicle.l": {
+                "elevation": 0
+              },
+              "shoulder.r": {
+                "flexion": 85,
+                "abduction": 8
+              },
+              "elbow.r": {
+                "flexion": 5
+              },
+              "hand.r": {
+                "flexion": 0
+              },
+              "scapula.r": {
+                "retraction": 8
+              },
+              "clavicle.r": {
+                "elevation": 0
+              },
+              "forearm.l": {
+                "pronation": 160
+              },
+              "forearm.r": {
+                "pronation": 160
+              },
+              "wrist.l": {
+                "flexion": 0
+              },
+              "wrist.r": {
+                "flexion": 0
+              }
+            },
+            "contract": {
+              "triceps-brachii-long": 0.75,
+              "triceps-brachii-lateral": 0.75,
+              "triceps-brachii-medial": 0.75
+            }
+          }
+        ],
+        "tempo": [
+          1.5,
+          0.5,
+          2.5,
+          0.5
+        ],
+        "equipment": [
+          {
+            "kind": "barbell",
+            "grip": "pronated",
+            "width": 0.42
+          },
+          {
+            "kind": "bench",
+            "incline": 0,
+            "at": [
+              0,
+              -0.205,
+              0.2
+            ]
+          }
+        ],
+        "root": {
+          "rotation": [
+            -90,
+            0,
+            0
+          ]
+        }
+      },
+      "sources": [
+        "M87",
+        "M63",
+        "M23",
+        "M25",
+        "M89"
+      ]
+    },
+    {
+      "id": "cable-triceps-pushdown",
+      "name": {
+        "en": "Cable triceps pushdown",
+        "zh": "绳索肱三头肌下压"
+      },
+      "equipment": "cable",
+      "pattern": "isolation",
+      "level": "beginner",
+      "primary": [
+        "triceps-brachii-long",
+        "triceps-brachii-lateral",
+        "triceps-brachii-medial"
+      ],
+      "secondary": [
+        "anconeus"
+      ],
+      "stabilisers": [
+        "flexor-carpi-radialis",
+        "flexor-carpi-ulnaris",
+        "palmaris-longus",
+        "flexor-digitorum-superficialis",
+        "extensor-carpi-radialis-longus",
+        "extensor-carpi-radialis-brevis",
+        "extensor-carpi-ulnaris"
+      ],
+      "setup": {
+        "en": "Attach a straight handle to a high pulley and select a light load. Check the pin and connector before starting.",
+        "zh": "高位滑轮装直杆，选轻配重；开始前检查插销和连接扣。"
+      },
+      "steps": [
+        {
+          "en": "Face the station, stand steadily and take a closed overhand grip that keeps the forearms parallel.",
+          "zh": "面对器械站稳，正握扣住把手，握距让两侧前臂大致平行。"
+        },
+        {
+          "en": "Bring the elbows beside the ribs. Keep the torso upright, shoulders quiet and wrists straight.",
+          "zh": "肘留在肋骨旁，躯干直立，肩安静，腕平直。"
+        },
+        {
+          "en": "Exhale and extend the elbows, pressing the handle down without moving the upper arms.",
+          "zh": "呼气，伸肘压下把手，上臂不移动。"
+        },
+        {
+          "en": "Finish smoothly near straight elbows. Do not snap them or lean onto the handle.",
+          "zh": "肘接近伸直时平稳停下，不猛顶，不把体重压在把手上。"
+        },
+        {
+          "en": "Inhale and return slowly to the starting bend. Let the stack settle before releasing the handle.",
+          "zh": "吸气，慢慢回到起始屈肘位置；结束时让配重回位再松手。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Only the forearms swing; the upper arms stay quiet.",
+          "zh": "前臂转动，上臂保持稳定。"
+        },
+        {
+          "en": "Let the weights return quietly.",
+          "zh": "配重轻轻回落。"
+        },
+        {
+          "en": "Expect effort in the back of the upper arm, not joint pain.",
+          "zh": "应感到上臂后面用力，不是关节疼痛。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Leaning the whole body onto the handle. Why: bodyweight replaces elbow-extension effort.",
+          "zh": "整个人压在把手上。为什么：体重替代了伸肘用力。"
+        },
+        {
+          "en": "Letting the elbows travel backward during the push. Why: shoulder extension adds a different movement.",
+          "zh": "下压时肘向后跑。为什么：加入了肩后伸，动作不再只是伸肘。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Choose resistance that lets the working joint move smoothly without borrowing motion from the trunk.",
+            "zh": "选择能让目标关节平稳运动的阻力，避免借躯干动作代偿。"
+          },
+          "s": [
+            "M23",
+            "M25"
+          ]
+        },
+        {
+          "text": {
+            "en": "Progress gradually when the movement is comfortable and repeatable, and rest enough to keep the same control.",
+            "zh": "动作舒服、每次都能稳定重复后，再逐步进阶；休息到能维持同样的控制。"
+          },
+          "s": [
+            "M23"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "Keep fingers away from the stack and pulley; stop for elbow pain or tingling.",
+          "zh": "手指远离配重与滑轮；肘痛或麻刺就停下。"
+        },
+        {
+          "en": "Learn the movement with bodyweight or a light load under a qualified coach; anyone under eighteen should practise under adult supervision.",
+          "zh": "第一次做先用自重或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [],
+      "sketch": "cable-triceps-pushdown",
+      "motion": {
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "rotation": 0
+              },
+              "shoulder.l": {
+                "flexion": 0
+              },
+              "elbow.l": {
+                "flexion": 90
+              },
+              "hand.l": {
+                "flexion": 0
+              },
+              "scapula.l": {
+                "elevation": 0
+              },
+              "clavicle.l": {
+                "elevation": 0
+              },
+              "shoulder.r": {
+                "flexion": 0
+              },
+              "elbow.r": {
+                "flexion": 90
+              },
+              "hand.r": {
+                "flexion": 0
+              },
+              "scapula.r": {
+                "elevation": 0
+              },
+              "clavicle.r": {
+                "elevation": 0
+              },
+              "forearm.l": {
+                "pronation": 160
+              },
+              "forearm.r": {
+                "pronation": 160
+              },
+              "wrist.l": {
+                "flexion": 0
+              },
+              "wrist.r": {
+                "flexion": 0
+              }
+            },
+            "contract": {
+              "triceps-brachii-long": 0.2,
+              "triceps-brachii-lateral": 0.2,
+              "triceps-brachii-medial": 0.2
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "rotation": 0
+              },
+              "shoulder.l": {
+                "flexion": 0
+              },
+              "elbow.l": {
+                "flexion": 5
+              },
+              "hand.l": {
+                "flexion": 0
+              },
+              "scapula.l": {
+                "elevation": 0
+              },
+              "clavicle.l": {
+                "elevation": 0
+              },
+              "shoulder.r": {
+                "flexion": 0
+              },
+              "elbow.r": {
+                "flexion": 5
+              },
+              "hand.r": {
+                "flexion": 0
+              },
+              "scapula.r": {
+                "elevation": 0
+              },
+              "clavicle.r": {
+                "elevation": 0
+              },
+              "forearm.l": {
+                "pronation": 160
+              },
+              "forearm.r": {
+                "pronation": 160
+              },
+              "wrist.l": {
+                "flexion": 0
+              },
+              "wrist.r": {
+                "flexion": 0
+              }
+            },
+            "contract": {
+              "triceps-brachii-long": 0.75,
+              "triceps-brachii-lateral": 0.75,
+              "triceps-brachii-medial": 0.75
+            }
+          }
+        ],
+        "tempo": [
+          1.5,
+          0.5,
+          2.5,
+          0.5
+        ],
+        "equipment": [
+          {
+            "kind": "cable-handle",
+            "grip": "pronated",
+            "width": 0.42
+          }
+        ]
+      },
+      "sources": [
+        "M87",
+        "M63",
+        "M23",
+        "M25",
+        "M90"
+      ]
+    },
+    {
+      "id": "overhead-dumbbell-triceps-extension",
+      "name": {
+        "en": "Overhead dumbbell triceps extension",
+        "zh": "哑铃过顶臂屈伸"
+      },
+      "equipment": "dumbbell",
+      "pattern": "isolation",
+      "level": "intermediate",
+      "primary": [
+        "triceps-brachii-long",
+        "triceps-brachii-lateral",
+        "triceps-brachii-medial"
+      ],
+      "secondary": [
+        "anconeus"
+      ],
+      "stabilisers": [
+        "flexor-carpi-radialis",
+        "flexor-carpi-ulnaris",
+        "palmaris-longus",
+        "flexor-digitorum-superficialis",
+        "extensor-carpi-radialis-longus",
+        "extensor-carpi-radialis-brevis",
+        "extensor-carpi-ulnaris",
+        "deltoid-anterior"
+      ],
+      "setup": {
+        "en": "Sit on a stable bench with a near-upright backrest. Use a light dumbbell for a single-arm version; lift it to the shoulder with help from the other hand before raising it overhead.",
+        "zh": "坐在靠背接近直立的稳固凳上。用轻哑铃做单臂版本，另一只手帮助把哑铃送到肩部，再举过头顶。"
+      },
+      "steps": [
+        {
+          "en": "Plant the feet, sit against the backrest, and hold the dumbbell overhead with a neutral grip and elbow nearly straight.",
+          "zh": "双脚踩稳，背靠凳面，对握把哑铃举到头顶，肘接近伸直。"
+        },
+        {
+          "en": "Set the upper arm in a comfortable overhead position. Keep the ribs over the pelvis rather than arching the low back.",
+          "zh": "上臂放在舒服的过顶位置，肋骨叠在骨盆上方，不弓起下背。"
+        },
+        {
+          "en": "Breathe in and bend the elbow, lowering the dumbbell behind the head only as far as you can reverse smoothly. Keep it clear of the head.",
+          "zh": "吸气，屈肘把哑铃放到头后；只下到能平稳推回的深度，哑铃与头保持距离。"
+        },
+        {
+          "en": "Breathe out and straighten the elbow while keeping the upper arm in place; do not force the last part of extension.",
+          "zh": "呼气，伸肘，保持上臂位置，不硬顶最后一段。"
+        },
+        {
+          "en": "To finish, use the other hand to help bring the dumbbell to the shoulder and lap. Repeat on the other side with the same comfortable control.",
+          "zh": "结束时用另一只手协助，把哑铃带回肩部和腿上；另一侧也保持同样舒服、受控的动作。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Move at the elbow; keep the upper arm comfortably raised.",
+          "zh": "肘动，上臂舒服地举着。"
+        },
+        {
+          "en": "Keep the ribs from lifting away from the pelvis.",
+          "zh": "不要挺起肋骨、让它远离骨盆。"
+        },
+        {
+          "en": "Expect effort in the back of the upper arm, not joint pain.",
+          "zh": "应感到上臂后面用力，不是关节疼痛。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Arching the low back to reach overhead. Why: trunk extension substitutes for a shoulder position you cannot hold.",
+          "zh": "为了举过头顶弓腰。为什么：躯干后伸代替了你不能维持的肩位。"
+        },
+        {
+          "en": "Dropping the dumbbell deeply behind the head. Why: momentum carries the elbow past a range you can control.",
+          "zh": "把哑铃猛落到头后很深。为什么：惯性会把肘带过你能控制的幅度。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Choose resistance that lets the working joint move smoothly without borrowing motion from the trunk.",
+            "zh": "选择能让目标关节平稳运动的阻力，避免借躯干动作代偿。"
+          },
+          "s": [
+            "M23",
+            "M25"
+          ]
+        },
+        {
+          "text": {
+            "en": "Progress gradually when the movement is comfortable and repeatable, and rest enough to keep the same control.",
+            "zh": "动作舒服、每次都能稳定重复后，再逐步进阶；休息到能维持同样的控制。"
+          },
+          "s": [
+            "M23"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "The model demonstrates the working joint only; support and single-hand equipment contact are shown by the sketch and described in the steps.",
+          "zh": "模型只演示练习侧关节；支撑和单手器械接触由示意图与步骤说明。"
+        },
+        {
+          "en": "The model uses a lower arm elevation to protect the mesh. The sketch shows the overhead position; do not copy the model angle as a required range.",
+          "zh": "为保护网格，模型上臂抬得较低；示意图展示过顶位置，不要把模型角度当成规定幅度。"
+        },
+        {
+          "en": "Use the pushdown instead if overhead positioning is painful or requires back arching.",
+          "zh": "过顶位置疼痛或必须弓腰才能维持时，改用下压。"
+        },
+        {
+          "en": "Keep a secure grip and avoid contact with the head; use help to position the dumbbell.",
+          "zh": "握牢，避免碰头；就位时用另一只手协助。"
+        },
+        {
+          "en": "Learn the movement with bodyweight or a light load under a qualified coach; anyone under eighteen should practise under adult supervision.",
+          "zh": "第一次做先用自重或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [],
+      "sketch": "overhead-dumbbell-triceps-extension",
+      "motion": {
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "rotation": 0
+              },
+              "shoulder.l": {
+                "flexion": 90,
+                "abduction": 10
+              },
+              "elbow.l": {
+                "flexion": 90
+              },
+              "hand.l": {
+                "flexion": 0
+              },
+              "scapula.l": {
+                "upward-rotation": 30
+              },
+              "clavicle.l": {
+                "elevation": 0
+              },
+              "shoulder.r": {
+                "flexion": 0
+              },
+              "elbow.r": {
+                "flexion": 15
+              },
+              "hand.r": {
+                "flexion": 0
+              },
+              "scapula.r": {
+                "upward-rotation": 0
+              },
+              "clavicle.r": {
+                "elevation": 0
+              },
+              "forearm.l": {
+                "pronation": 80
+              },
+              "wrist.l": {
+                "flexion": 0
+              },
+              "wrist.r": {
+                "flexion": 0
+              }
+            },
+            "contract": {
+              "triceps-brachii-long": 0.2,
+              "triceps-brachii-lateral": 0.2,
+              "triceps-brachii-medial": 0.2
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "rotation": 0
+              },
+              "shoulder.l": {
+                "flexion": 90,
+                "abduction": 10
+              },
+              "elbow.l": {
+                "flexion": 10
+              },
+              "hand.l": {
+                "flexion": 0
+              },
+              "scapula.l": {
+                "upward-rotation": 30
+              },
+              "clavicle.l": {
+                "elevation": 0
+              },
+              "shoulder.r": {
+                "flexion": 0
+              },
+              "elbow.r": {
+                "flexion": 15
+              },
+              "hand.r": {
+                "flexion": 0
+              },
+              "scapula.r": {
+                "upward-rotation": 0
+              },
+              "clavicle.r": {
+                "elevation": 0
+              },
+              "forearm.l": {
+                "pronation": 80
+              },
+              "wrist.l": {
+                "flexion": 0
+              },
+              "wrist.r": {
+                "flexion": 0
+              }
+            },
+            "contract": {
+              "triceps-brachii-long": 0.75,
+              "triceps-brachii-lateral": 0.75,
+              "triceps-brachii-medial": 0.75
+            }
+          }
+        ],
+        "tempo": [
+          1.5,
+          0.5,
+          2.5,
+          0.5
+        ]
+      },
+      "sources": [
+        "M87",
+        "M63",
+        "M23",
+        "M25",
+        "M68"
+      ]
+    },
+    {
+      "id": "dumbbell-wrist-curl",
+      "name": {
+        "en": "Supported dumbbell wrist curl",
+        "zh": "支撑式哑铃腕弯举"
+      },
+      "equipment": "dumbbell",
+      "pattern": "isolation",
+      "level": "beginner",
+      "primary": [
+        "flexor-carpi-radialis",
+        "flexor-carpi-ulnaris"
+      ],
+      "secondary": [
+        "palmaris-longus",
+        "flexor-digitorum-superficialis"
+      ],
+      "stabilisers": [
+        "brachioradialis"
+      ],
+      "setup": {
+        "en": "Sit beside a flat bench. Rest a forearm on the padded surface palm up, hand just beyond the edge, and use a very light dumbbell.",
+        "zh": "坐在平板凳旁，前臂掌心向上放在软垫上，手刚好伸出边缘，用很轻的哑铃。"
+      },
+      "steps": [
+        {
+          "en": "Plant the feet and support the full forearm with the elbow comfortably bent; the other hand can help steady it.",
+          "zh": "双脚踩稳，整个前臂有支撑，肘舒服地弯着；另一只手可帮助稳住。"
+        },
+        {
+          "en": "Close the fingers around the handle, keeping the thumb wrapped and the dumbbell in the palm.",
+          "zh": "手指合拢握柄，拇指扣住，让哑铃留在掌中。"
+        },
+        {
+          "en": "Let the wrist lower gently into a small comfortable extension without rolling the handle into the fingertips.",
+          "zh": "腕轻轻下放到小幅、舒服的伸展位置，不把把手滚到指尖。"
+        },
+        {
+          "en": "Breathe out and bend the wrist to bring the palm towards the forearm. Keep the elbow and forearm on the support.",
+          "zh": "呼气，屈腕，让掌心靠向前臂；肘和前臂始终贴住支撑面。"
+        },
+        {
+          "en": "Breathe in and lower slowly to the start. Use the free hand to take the dumbbell before changing sides.",
+          "zh": "吸气，慢慢下放回起点；换边前用空闲手接住哑铃。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Keep the movement small and centred at the wrist.",
+          "zh": "幅度小一些，动作集中在腕部。"
+        },
+        {
+          "en": "Feel the front forearm, not a pinch in the wrist.",
+          "zh": "用力感在前臂前面，不是腕部夹痛。"
+        },
+        {
+          "en": "Expect effort on the palm side of the forearm, not wrist pain.",
+          "zh": "应感到前臂掌侧用力，不是腕痛。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Lifting the forearm off the bench. Why: elbow movement replaces wrist flexion.",
+          "zh": "前臂离开凳面。为什么：屈肘替代了屈腕。"
+        },
+        {
+          "en": "Letting the handle roll to the fingertips. Why: it changes the grip and increases the chance of losing the dumbbell.",
+          "zh": "把手滚到指尖。为什么：握持方式改变，也更容易脱手。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Choose resistance that lets the working joint move smoothly without borrowing motion from the trunk.",
+            "zh": "选择能让目标关节平稳运动的阻力，避免借躯干动作代偿。"
+          },
+          "s": [
+            "M23",
+            "M25"
+          ]
+        },
+        {
+          "text": {
+            "en": "Progress gradually when the movement is comfortable and repeatable, and rest enough to keep the same control.",
+            "zh": "动作舒服、每次都能稳定重复后，再逐步进阶；休息到能维持同样的控制。"
+          },
+          "s": [
+            "M23"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "The model demonstrates the working joint only; support and single-hand equipment contact are shown by the sketch and described in the steps.",
+          "zh": "模型只演示练习侧关节；支撑和单手器械接触由示意图与步骤说明。"
+        },
+        {
+          "en": "Use a light load and stop for wrist pain, numbness or tingling; do not treat it as a rehabilitation prescription.",
+          "zh": "用轻重量，腕痛、麻木或麻刺就停下；不要把它当作康复处方。"
+        },
+        {
+          "en": "Learn the movement with bodyweight or a light load under a qualified coach; anyone under eighteen should practise under adult supervision.",
+          "zh": "第一次做先用自重或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [],
+      "sketch": "dumbbell-wrist-curl",
+      "motion": {
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "rotation": 0
+              },
+              "shoulder.l": {
+                "flexion": 25
+              },
+              "elbow.l": {
+                "flexion": 90
+              },
+              "hand.l": {
+                "extension": 15
+              },
+              "scapula.l": {
+                "elevation": 0
+              },
+              "clavicle.l": {
+                "elevation": 0
+              },
+              "shoulder.r": {
+                "flexion": 0
+              },
+              "elbow.r": {
+                "flexion": 90
+              },
+              "hand.r": {
+                "flexion": 0
+              },
+              "scapula.r": {
+                "elevation": 0
+              },
+              "clavicle.r": {
+                "elevation": 0
+              },
+              "forearm.l": {
+                "pronation": 0
+              },
+              "wrist.l": {
+                "extension": 15
+              },
+              "wrist.r": {
+                "flexion": 0
+              }
+            },
+            "contract": {
+              "flexor-carpi-radialis": 0.2,
+              "flexor-carpi-ulnaris": 0.2
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "rotation": 0
+              },
+              "shoulder.l": {
+                "flexion": 25
+              },
+              "elbow.l": {
+                "flexion": 90
+              },
+              "hand.l": {
+                "flexion": 25
+              },
+              "scapula.l": {
+                "elevation": 0
+              },
+              "clavicle.l": {
+                "elevation": 0
+              },
+              "shoulder.r": {
+                "flexion": 0
+              },
+              "elbow.r": {
+                "flexion": 90
+              },
+              "hand.r": {
+                "flexion": 0
+              },
+              "scapula.r": {
+                "elevation": 0
+              },
+              "clavicle.r": {
+                "elevation": 0
+              },
+              "forearm.l": {
+                "pronation": 0
+              },
+              "wrist.l": {
+                "flexion": 25
+              },
+              "wrist.r": {
+                "flexion": 0
+              }
+            },
+            "contract": {
+              "flexor-carpi-radialis": 0.75,
+              "flexor-carpi-ulnaris": 0.75
+            }
+          }
+        ],
+        "tempo": [
+          1.5,
+          0.5,
+          2.5,
+          0.5
+        ]
+      },
+      "sources": [
+        "M87",
+        "M63",
+        "M23",
+        "M25",
+        "M70"
+      ]
+    },
+    {
+      "id": "dumbbell-wrist-extension",
+      "name": {
+        "en": "Supported dumbbell wrist extension",
+        "zh": "支撑式哑铃伸腕"
+      },
+      "equipment": "dumbbell",
+      "pattern": "isolation",
+      "level": "beginner",
+      "primary": [
+        "extensor-carpi-radialis-longus",
+        "extensor-carpi-radialis-brevis",
+        "extensor-carpi-ulnaris"
+      ],
+      "secondary": [
+        "extensor-digitorum"
+      ],
+      "stabilisers": [
+        "pronator-teres",
+        "flexor-digitorum-superficialis"
+      ],
+      "setup": {
+        "en": "Sit beside a flat bench with a forearm supported palm down and the hand beyond the edge. Choose a very light dumbbell and keep its handle securely in the palm.",
+        "zh": "坐在平板凳旁，前臂掌心向下有支撑，手伸出边缘。选很轻的哑铃，把手始终握在掌中。"
+      },
+      "steps": [
+        {
+          "en": "Plant the feet and rest the elbow and forearm on the pad, without pressing the edge into the wrist.",
+          "zh": "双脚踩稳，肘和前臂放在软垫上，边缘不要压着腕。"
+        },
+        {
+          "en": "Grip the dumbbell palm down with the thumb wrapped. Let the hand lower into a small comfortable wrist bend.",
+          "zh": "掌心向下握哑铃，拇指扣住；手轻轻下垂到小幅、舒服的屈腕位置。"
+        },
+        {
+          "en": "Breathe out and lift the back of the hand towards the forearm while keeping the forearm still.",
+          "zh": "呼气，把手背抬向前臂，前臂保持不动。"
+        },
+        {
+          "en": "Stop before the wrist strains or moves towards the thumb or little-finger side. Keep the fingers securely closed.",
+          "zh": "在腕出现吃力或偏向拇指、小指侧之前停下，手指始终握牢。"
+        },
+        {
+          "en": "Breathe in and lower slowly. Use the free hand to take the dumbbell before changing sides.",
+          "zh": "吸气，慢慢下放；换边前用空闲手接住哑铃。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Raise the hand, not the whole forearm.",
+          "zh": "抬手，不抬整个前臂。"
+        },
+        {
+          "en": "Use a comfortable arc without forcing the top.",
+          "zh": "走舒服的弧线，顶端不硬抬。"
+        },
+        {
+          "en": "Expect effort on the back of the forearm, not elbow pain.",
+          "zh": "应感到前臂背侧用力，不是肘痛。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Lifting the elbow to finish. Why: the weight moves without the intended wrist extension.",
+          "zh": "最后抬肘帮忙。为什么：重量虽然上去了，却没有完成预定的伸腕。"
+        },
+        {
+          "en": "Opening the grip while the dumbbell hangs. Why: the weight can slip before the wrist muscles control it.",
+          "zh": "哑铃悬着时松开手指。为什么：腕部还没控制好，重量就可能滑落。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Choose resistance that lets the working joint move smoothly without borrowing motion from the trunk.",
+            "zh": "选择能让目标关节平稳运动的阻力，避免借躯干动作代偿。"
+          },
+          "s": [
+            "M23",
+            "M25"
+          ]
+        },
+        {
+          "text": {
+            "en": "Progress gradually when the movement is comfortable and repeatable, and rest enough to keep the same control.",
+            "zh": "动作舒服、每次都能稳定重复后，再逐步进阶；休息到能维持同样的控制。"
+          },
+          "s": [
+            "M23"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "The model demonstrates the working joint only; support and single-hand equipment contact are shown by the sketch and described in the steps.",
+          "zh": "模型只演示练习侧关节；支撑和单手器械接触由示意图与步骤说明。"
+        },
+        {
+          "en": "Stop for wrist or lateral elbow pain; this card does not diagnose or treat tendon problems.",
+          "zh": "腕或肘外侧疼痛就停下；本卡片不诊断或治疗肌腱问题。"
+        },
+        {
+          "en": "Learn the movement with bodyweight or a light load under a qualified coach; anyone under eighteen should practise under adult supervision.",
+          "zh": "第一次做先用自重或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [],
+      "sketch": "dumbbell-wrist-extension",
+      "motion": {
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "rotation": 0
+              },
+              "shoulder.l": {
+                "flexion": 25
+              },
+              "elbow.l": {
+                "flexion": 90
+              },
+              "hand.l": {
+                "flexion": 15
+              },
+              "scapula.l": {
+                "elevation": 0
+              },
+              "clavicle.l": {
+                "elevation": 0
+              },
+              "shoulder.r": {
+                "flexion": 0
+              },
+              "elbow.r": {
+                "flexion": 90
+              },
+              "hand.r": {
+                "flexion": 0
+              },
+              "scapula.r": {
+                "elevation": 0
+              },
+              "clavicle.r": {
+                "elevation": 0
+              },
+              "forearm.l": {
+                "pronation": 160
+              },
+              "wrist.l": {
+                "flexion": 15
+              },
+              "wrist.r": {
+                "flexion": 0
+              }
+            },
+            "contract": {
+              "extensor-carpi-radialis-longus": 0.2,
+              "extensor-carpi-radialis-brevis": 0.2,
+              "extensor-carpi-ulnaris": 0.2
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "rotation": 0
+              },
+              "shoulder.l": {
+                "flexion": 25
+              },
+              "elbow.l": {
+                "flexion": 90
+              },
+              "hand.l": {
+                "extension": 25
+              },
+              "scapula.l": {
+                "elevation": 0
+              },
+              "clavicle.l": {
+                "elevation": 0
+              },
+              "shoulder.r": {
+                "flexion": 0
+              },
+              "elbow.r": {
+                "flexion": 90
+              },
+              "hand.r": {
+                "flexion": 0
+              },
+              "scapula.r": {
+                "elevation": 0
+              },
+              "clavicle.r": {
+                "elevation": 0
+              },
+              "forearm.l": {
+                "pronation": 160
+              },
+              "wrist.l": {
+                "extension": 25
+              },
+              "wrist.r": {
+                "flexion": 0
+              }
+            },
+            "contract": {
+              "extensor-carpi-radialis-longus": 0.75,
+              "extensor-carpi-radialis-brevis": 0.75,
+              "extensor-carpi-ulnaris": 0.75
+            }
+          }
+        ],
+        "tempo": [
+          1.5,
+          0.5,
+          2.5,
+          0.5
+        ]
+      },
+      "sources": [
+        "M87",
+        "M63",
+        "M23",
+        "M25",
+        "M69"
+      ]
+    },
+    {
+      "id": "self-resisted-pronation",
+      "name": {
+        "en": "Self-resisted forearm pronation",
+        "zh": "自我抗阻前臂旋前"
+      },
+      "equipment": "bodyweight",
+      "pattern": "isolation",
+      "level": "beginner",
+      "primary": [
+        "pronator-teres"
+      ],
+      "secondary": [],
+      "stabilisers": [
+        "brachialis",
+        "biceps-brachii-long",
+        "biceps-brachii-short"
+      ],
+      "setup": {
+        "en": "Stand or sit comfortably without equipment. One hand supplies gentle resistance to the other forearm turning; this is a movement-learning drill, not a maximal-strength test.",
+        "zh": "舒服地站或坐，无需器械。用一只手轻轻阻挡另一侧前臂转动；这是学习动作的练习，不是最大力量测试。"
+      },
+      "steps": [
+        {
+          "en": "Bend the working elbow beside the ribs with the forearm horizontal and thumb pointing up. Keep the wrist straight and fingers relaxed.",
+          "zh": "练习侧肘在肋骨旁弯曲，前臂水平，拇指朝上；腕平直，手指放松。"
+        },
+        {
+          "en": "Cup the lower working forearm just above the wrist with the other hand. Use broad gentle contact; do not grip the wrist or pull the fingers.",
+          "zh": "另一只手轻托练习侧前臂下端、腕关节上方。接触面要宽、力度轻，不抓腕关节，不拉手指。"
+        },
+        {
+          "en": "Turn the working forearm towards palm down while the other hand applies only enough opposing pressure to make the turn slow.",
+          "zh": "练习侧前臂转向掌心朝下，另一只手只给足以让转动变慢的反向阻力。"
+        },
+        {
+          "en": "Stop at a comfortable partial turn, keeping the elbow in place and the shoulder facing forward. Continue breathing normally.",
+          "zh": "转到舒服的部分幅度就停，肘不移位，肩仍朝前，保持正常呼吸。"
+        },
+        {
+          "en": "Release the resistance and return slowly to thumb up. Change sides and keep the same gentle control.",
+          "zh": "撤去阻力，慢慢转回拇指朝上；换边时同样轻柔、受控。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Turn the forearm while the wrist stays straight.",
+          "zh": "前臂转，腕始终平直。"
+        },
+        {
+          "en": "Resist above the wrist and let the other hand follow the turn.",
+          "zh": "在腕上方施阻力，另一只手跟随转动。"
+        },
+        {
+          "en": "Feel gentle effort near the upper inner forearm, not twisting at the wrist.",
+          "zh": "前臂近端内侧轻轻用力，不是在腕部硬拧。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Turning the whole arm at the shoulder. Why: the palm changes direction without demonstrating forearm pronation.",
+          "zh": "在肩部转整个手臂。为什么：掌心方向变了，却没有展示前臂旋前。"
+        },
+        {
+          "en": "Twisting at the wrist or fingers. This loads small joints rather than opposing the forearm turn.",
+          "zh": "在腕或手指上硬拧。这会加载小关节，不能正确阻挡前臂转动。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Choose resistance that lets the working joint move smoothly without borrowing motion from the trunk.",
+            "zh": "选择能让目标关节平稳运动的阻力，避免借躯干动作代偿。"
+          },
+          "s": [
+            "M23",
+            "M25"
+          ]
+        },
+        {
+          "text": {
+            "en": "Progress gradually when the movement is comfortable and repeatable, and rest enough to keep the same control.",
+            "zh": "动作舒服、每次都能稳定重复后，再逐步进阶；休息到能维持同样的控制。"
+          },
+          "s": [
+            "M23"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "The model shows forearm rotation; it does not constrain the assisting hand to remain in contact. Follow the sketch and steps for gentle resistance above the wrist.",
+          "zh": "模型展示前臂旋转，未约束辅助手保持接触；请按示意图与步骤，在腕上方轻轻施阻力。"
+        },
+        {
+          "en": "Stop for elbow or wrist pain, tingling or numbness; keep resistance gentle.",
+          "zh": "肘痛、腕痛、麻刺或麻木就停下，阻力保持轻柔。"
+        },
+        {
+          "en": "Learn the movement with bodyweight or a light load under a qualified coach; anyone under eighteen should practise under adult supervision.",
+          "zh": "第一次做先用自重或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [],
+      "sketch": "self-resisted-pronation",
+      "motion": {
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "rotation": 0
+              },
+              "shoulder.l": {
+                "flexion": 0
+              },
+              "elbow.l": {
+                "flexion": 90
+              },
+              "hand.l": {
+                "flexion": 0
+              },
+              "scapula.l": {
+                "elevation": 0
+              },
+              "clavicle.l": {
+                "elevation": 0
+              },
+              "shoulder.r": {
+                "flexion": 30,
+                "horizontal-adduction": 40
+              },
+              "elbow.r": {
+                "flexion": 90
+              },
+              "hand.r": {
+                "flexion": 0
+              },
+              "scapula.r": {
+                "elevation": 0
+              },
+              "clavicle.r": {
+                "elevation": 0
+              },
+              "forearm.l": {
+                "pronation": 80
+              },
+              "forearm.r": {
+                "pronation": 80
+              },
+              "wrist.l": {
+                "flexion": 0
+              },
+              "wrist.r": {
+                "flexion": 0
+              }
+            },
+            "contract": {
+              "pronator-teres": 0.2
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "rotation": 0
+              },
+              "shoulder.l": {
+                "flexion": 0
+              },
+              "elbow.l": {
+                "flexion": 90
+              },
+              "hand.l": {
+                "flexion": 0
+              },
+              "scapula.l": {
+                "elevation": 0
+              },
+              "clavicle.l": {
+                "elevation": 0
+              },
+              "shoulder.r": {
+                "flexion": 30,
+                "horizontal-adduction": 40
+              },
+              "elbow.r": {
+                "flexion": 90
+              },
+              "hand.r": {
+                "flexion": 0
+              },
+              "scapula.r": {
+                "elevation": 0
+              },
+              "clavicle.r": {
+                "elevation": 0
+              },
+              "forearm.l": {
+                "pronation": 140
+              },
+              "forearm.r": {
+                "pronation": 80
+              },
+              "wrist.l": {
+                "flexion": 0
+              },
+              "wrist.r": {
+                "flexion": 0
+              }
+            },
+            "contract": {
+              "pronator-teres": 0.75
+            }
+          }
+        ],
+        "tempo": [
+          1.5,
+          0.5,
+          2.5,
+          0.5
+        ]
+      },
+      "sources": [
+        "M87",
+        "M63",
+        "M23",
+        "M25",
+        "M71"
+      ]
+    }
+  ]
+}

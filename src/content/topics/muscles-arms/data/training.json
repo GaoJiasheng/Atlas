@@ -1,0 +1,84 @@
+{
+  "exercises": [
+    "close-grip-bench-press",
+    "barbell-curl",
+    "barbell-reverse-curl",
+    "dumbbell-supinating-curl",
+    "dumbbell-hammer-curl",
+    "overhead-dumbbell-triceps-extension",
+    "dumbbell-wrist-curl",
+    "dumbbell-wrist-extension",
+    "chin-up",
+    "self-resisted-pronation",
+    "cable-triceps-pushdown"
+  ],
+  "note": {
+    "en": "Fit arm work around the rest of your training: presses and pulls already load the arms, so choose additional work you can recover from and keep the joints comfortable.",
+    "zh": "结合整体训练安排手臂练习：推和拉已经会用到手臂，额外训练应以能恢复、关节舒服为前提。"
+  },
+  "session": {
+    "title": {
+      "en": "One way to arrange an arm session (an example, not a prescription)",
+      "zh": "一种手臂训练课的安排（示例，不是处方）"
+    },
+    "blocks": [
+      {
+        "exercise": "self-resisted-pronation",
+        "note": {
+          "en": "Begin gently to learn the forearm turn without shoulder or wrist compensation.",
+          "zh": "先轻轻练前臂转动，避免肩和腕代偿。"
+        }
+      },
+      {
+        "exercise": "chin-up",
+        "note": {
+          "en": "Use assistance if needed; practise the compound pull while fresh, with the back and arms working together.",
+          "zh": "需要时用辅助；精神充足时练复合拉，让背和手臂共同工作。"
+        }
+      },
+      {
+        "exercise": "close-grip-bench-press",
+        "note": {
+          "en": "Use safety bars or a spotter, starting with an easy load and a comfortable grip.",
+          "zh": "用保护杠或请人保护，从轻重量和舒服握距开始。"
+        }
+      },
+      {
+        "exercise": "dumbbell-supinating-curl",
+        "note": {
+          "en": "Follow with controlled elbow flexion and a comfortable forearm turn.",
+          "zh": "接着做受控屈肘，前臂转到舒服的位置。"
+        }
+      },
+      {
+        "exercise": "cable-triceps-pushdown",
+        "note": {
+          "en": "Practise lighter elbow extension without moving the upper arms.",
+          "zh": "用较轻阻力练伸肘，上臂保持稳定。"
+        }
+      },
+      {
+        "exercise": "dumbbell-wrist-curl",
+        "note": {
+          "en": "Finish with gentle supported wrist work if the grip is still secure.",
+          "zh": "握持仍稳固时，再做轻柔的支撑式屈腕。"
+        }
+      },
+      {
+        "exercise": "dumbbell-wrist-extension",
+        "note": {
+          "en": "Use similarly controlled wrist extension; stop before discomfort or loss of grip.",
+          "zh": "同样有控制地练伸腕，出现不适或握不稳之前结束。"
+        }
+      }
+    ],
+    "note": {
+      "en": "This is a menu to adapt, not a requirement to perform every block. Practise compound movements before tiring the grip, choose curl and extension variations that feel comfortable, and allow recovery before loading the arms hard again. Learn under qualified guidance; younger readers need adult supervision.",
+      "zh": "这是一份可调整的菜单，不要求把每一项都做完。握力疲劳前先练复合动作，弯举和伸肘选择舒服的版本，手臂恢复后再做吃力训练。在合格指导下学习；未成年读者需成人监督。"
+    },
+    "s": [
+      "M23",
+      "M25"
+    ]
+  }
+}

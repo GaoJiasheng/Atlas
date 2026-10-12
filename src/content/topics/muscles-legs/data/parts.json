@@ -1,0 +1,2915 @@
+{
+  "model": "/models/muscles-legs.glb",
+  "parts": [
+    {
+      "id": "gluteus-maximus",
+      "name": {
+        "en": "Gluteus maximus",
+        "zh": "臀大肌"
+      },
+      "short": {
+        "en": "Gluteus maximus",
+        "zh": "臀大肌"
+      },
+      "group": "superficial",
+      "mesh": "gluteus-maximus.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-1"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "gluteus-maximus.r"
+      },
+      "muscle": "gluteus-maximus",
+      "connects": [
+        "pelvis",
+        "femur",
+        "iliotibial-tract"
+      ],
+      "explode": {
+        "dir": [
+          0.35,
+          0,
+          -1
+        ],
+        "dist": 0.06,
+        "stage": 0
+      }
+    },
+    {
+      "id": "tensor-fasciae-latae",
+      "name": {
+        "en": "Tensor fasciae latae",
+        "zh": "阔筋膜张肌"
+      },
+      "short": {
+        "en": "Tensor fasciae latae",
+        "zh": "阔筋膜张肌"
+      },
+      "group": "superficial",
+      "mesh": "tensor-fasciae-latae.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-1"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "tensor-fasciae-latae.r"
+      },
+      "muscle": "tensor-fasciae-latae",
+      "connects": [
+        "pelvis",
+        "iliotibial-tract"
+      ],
+      "explode": {
+        "dir": [
+          1,
+          0,
+          0.3
+        ],
+        "dist": 0.06,
+        "stage": 0
+      }
+    },
+    {
+      "id": "iliotibial-tract",
+      "name": {
+        "en": "Iliotibial tract",
+        "zh": "髂胫束"
+      },
+      "short": {
+        "en": "Iliotibial tract",
+        "zh": "髂胫束"
+      },
+      "group": "superficial",
+      "mesh": "iliotibial-tract.l",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "iliotibial-tract.r"
+      },
+      "summary": {
+        "en": "Transmits muscle tension along the outer thigh.",
+        "zh": "沿大腿外侧传递肌肉拉力。"
+      },
+      "detail": {
+        "en": "The iliotibial tract is thickened fascia lata, not a muscle. Tensor fasciae latae and gluteus maximus tension it; its distal attachment is on the lateral tibia. It has no active contraction animation [M1] [M2].",
+        "zh": "髂胫束是阔筋膜的增厚部分，不是肌肉。阔筋膜张肌和臀大肌使它受张力；远端附着胫骨外侧。不为它设置主动收缩动画 [M1] [M2]。"
+      },
+      "connects": [
+        "pelvis",
+        "tensor-fasciae-latae",
+        "gluteus-maximus",
+        "lower-leg"
+      ],
+      "explode": {
+        "dir": [
+          1,
+          0,
+          0.3
+        ],
+        "dist": 0.06,
+        "stage": 0
+      },
+      "muscle": "iliotibial-tract"
+    },
+    {
+      "id": "sartorius",
+      "name": {
+        "en": "Sartorius",
+        "zh": "缝匠肌"
+      },
+      "short": {
+        "en": "Sartorius",
+        "zh": "缝匠肌"
+      },
+      "group": "superficial",
+      "mesh": "sartorius.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-1"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "sartorius.r"
+      },
+      "muscle": "sartorius",
+      "connects": [
+        "pelvis",
+        "lower-leg"
+      ],
+      "explode": {
+        "dir": [
+          0.35,
+          0,
+          1
+        ],
+        "dist": 0.06,
+        "stage": 0
+      }
+    },
+    {
+      "id": "rectus-femoris",
+      "name": {
+        "en": "Rectus femoris",
+        "zh": "股直肌"
+      },
+      "short": {
+        "en": "Rectus femoris",
+        "zh": "股直肌"
+      },
+      "group": "superficial",
+      "mesh": "rectus-femoris.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-1"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "rectus-femoris.r"
+      },
+      "muscle": "rectus-femoris",
+      "connects": [
+        "pelvis",
+        "patella",
+        "lower-leg"
+      ],
+      "explode": {
+        "dir": [
+          0.35,
+          0,
+          1
+        ],
+        "dist": 0.06,
+        "stage": 0
+      }
+    },
+    {
+      "id": "vastus-lateralis",
+      "name": {
+        "en": "Vastus lateralis",
+        "zh": "股外侧肌"
+      },
+      "short": {
+        "en": "Vastus lateralis",
+        "zh": "股外侧肌"
+      },
+      "group": "superficial",
+      "mesh": "vastus-lateralis.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-1"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "vastus-lateralis.r"
+      },
+      "muscle": "vastus-lateralis",
+      "connects": [
+        "femur",
+        "lower-leg",
+        "patella"
+      ],
+      "explode": {
+        "dir": [
+          1,
+          0,
+          0.3
+        ],
+        "dist": 0.06,
+        "stage": 0
+      }
+    },
+    {
+      "id": "vastus-medialis",
+      "name": {
+        "en": "Vastus medialis",
+        "zh": "股内侧肌"
+      },
+      "short": {
+        "en": "Vastus medialis",
+        "zh": "股内侧肌"
+      },
+      "group": "superficial",
+      "mesh": "vastus-medialis.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-1"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "vastus-medialis.r"
+      },
+      "muscle": "vastus-medialis",
+      "connects": [
+        "femur",
+        "patella",
+        "lower-leg"
+      ],
+      "explode": {
+        "dir": [
+          0.35,
+          0,
+          1
+        ],
+        "dist": 0.06,
+        "stage": 0
+      }
+    },
+    {
+      "id": "biceps-femoris-long",
+      "name": {
+        "en": "Biceps femoris, long head",
+        "zh": "股二头肌长头"
+      },
+      "short": {
+        "en": "Biceps femoris, long head",
+        "zh": "股二头肌长头"
+      },
+      "group": "superficial",
+      "mesh": "biceps-femoris-long.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-1"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "biceps-femoris-long.r"
+      },
+      "muscle": "biceps-femoris-long",
+      "connects": [
+        "pelvis",
+        "lower-leg"
+      ],
+      "explode": {
+        "dir": [
+          0.35,
+          0,
+          -1
+        ],
+        "dist": 0.06,
+        "stage": 0
+      }
+    },
+    {
+      "id": "semitendinosus",
+      "name": {
+        "en": "Semitendinosus",
+        "zh": "半腱肌"
+      },
+      "short": {
+        "en": "Semitendinosus",
+        "zh": "半腱肌"
+      },
+      "group": "superficial",
+      "mesh": "semitendinosus.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-1"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "semitendinosus.r"
+      },
+      "muscle": "semitendinosus",
+      "connects": [
+        "pelvis",
+        "lower-leg"
+      ],
+      "explode": {
+        "dir": [
+          0.35,
+          0,
+          -1
+        ],
+        "dist": 0.06,
+        "stage": 0
+      }
+    },
+    {
+      "id": "gastrocnemius-medial",
+      "name": {
+        "en": "Gastrocnemius, medial head",
+        "zh": "腓肠肌内侧头"
+      },
+      "short": {
+        "en": "Gastrocnemius, medial head",
+        "zh": "腓肠肌内侧头"
+      },
+      "group": "superficial",
+      "mesh": "gastrocnemius-medial.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-1"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "gastrocnemius-medial.r"
+      },
+      "muscle": "gastrocnemius-medial",
+      "connects": [
+        "femur",
+        "foot"
+      ],
+      "explode": {
+        "dir": [
+          0.35,
+          0,
+          -1
+        ],
+        "dist": 0.06,
+        "stage": 0
+      }
+    },
+    {
+      "id": "gastrocnemius-lateral",
+      "name": {
+        "en": "Gastrocnemius, lateral head",
+        "zh": "腓肠肌外侧头"
+      },
+      "short": {
+        "en": "Gastrocnemius, lateral head",
+        "zh": "腓肠肌外侧头"
+      },
+      "group": "superficial",
+      "mesh": "gastrocnemius-lateral.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-1"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "gastrocnemius-lateral.r"
+      },
+      "muscle": "gastrocnemius-lateral",
+      "connects": [
+        "femur",
+        "foot"
+      ],
+      "explode": {
+        "dir": [
+          0.35,
+          0,
+          -1
+        ],
+        "dist": 0.06,
+        "stage": 0
+      }
+    },
+    {
+      "id": "tibialis-anterior",
+      "name": {
+        "en": "Tibialis anterior",
+        "zh": "胫骨前肌"
+      },
+      "short": {
+        "en": "Tibialis anterior",
+        "zh": "胫骨前肌"
+      },
+      "group": "superficial",
+      "mesh": "tibialis-anterior.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-1"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "tibialis-anterior.r"
+      },
+      "muscle": "tibialis-anterior",
+      "connects": [
+        "lower-leg",
+        "foot"
+      ],
+      "explode": {
+        "dir": [
+          0.35,
+          0,
+          1
+        ],
+        "dist": 0.06,
+        "stage": 0
+      }
+    },
+    {
+      "id": "gluteus-medius",
+      "name": {
+        "en": "Gluteus medius",
+        "zh": "臀中肌"
+      },
+      "short": {
+        "en": "Gluteus medius",
+        "zh": "臀中肌"
+      },
+      "group": "intermediate",
+      "mesh": "gluteus-medius.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-2"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "gluteus-medius.r"
+      },
+      "muscle": "gluteus-medius",
+      "connects": [
+        "pelvis",
+        "femur"
+      ],
+      "explode": {
+        "dir": [
+          1,
+          0,
+          0.3
+        ],
+        "dist": 0.06,
+        "stage": 1
+      }
+    },
+    {
+      "id": "adductor-longus",
+      "name": {
+        "en": "Adductor longus",
+        "zh": "长收肌"
+      },
+      "short": {
+        "en": "Adductor longus",
+        "zh": "长收肌"
+      },
+      "group": "intermediate",
+      "mesh": "adductor-longus.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-2"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "adductor-longus.r"
+      },
+      "muscle": "adductor-longus",
+      "connects": [
+        "pelvis",
+        "femur"
+      ],
+      "explode": {
+        "dir": [
+          0.35,
+          0,
+          1
+        ],
+        "dist": 0.06,
+        "stage": 1
+      }
+    },
+    {
+      "id": "gracilis",
+      "name": {
+        "en": "Gracilis",
+        "zh": "股薄肌"
+      },
+      "short": {
+        "en": "Gracilis",
+        "zh": "股薄肌"
+      },
+      "group": "intermediate",
+      "mesh": "gracilis.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-2"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "gracilis.r"
+      },
+      "muscle": "gracilis",
+      "connects": [
+        "pelvis",
+        "lower-leg"
+      ],
+      "explode": {
+        "dir": [
+          0.35,
+          0,
+          1
+        ],
+        "dist": 0.06,
+        "stage": 1
+      }
+    },
+    {
+      "id": "pectineus",
+      "name": {
+        "en": "Pectineus",
+        "zh": "耻骨肌"
+      },
+      "short": {
+        "en": "Pectineus",
+        "zh": "耻骨肌"
+      },
+      "group": "intermediate",
+      "mesh": "pectineus.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-2"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "pectineus.r"
+      },
+      "muscle": "pectineus",
+      "connects": [
+        "pelvis",
+        "femur"
+      ],
+      "explode": {
+        "dir": [
+          0.35,
+          0,
+          1
+        ],
+        "dist": 0.06,
+        "stage": 1
+      }
+    },
+    {
+      "id": "semimembranosus",
+      "name": {
+        "en": "Semimembranosus",
+        "zh": "半膜肌"
+      },
+      "short": {
+        "en": "Semimembranosus",
+        "zh": "半膜肌"
+      },
+      "group": "intermediate",
+      "mesh": "semimembranosus.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-2"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "semimembranosus.r"
+      },
+      "muscle": "semimembranosus",
+      "connects": [
+        "pelvis",
+        "lower-leg"
+      ],
+      "explode": {
+        "dir": [
+          0.35,
+          0,
+          -1
+        ],
+        "dist": 0.06,
+        "stage": 1
+      }
+    },
+    {
+      "id": "biceps-femoris-short",
+      "name": {
+        "en": "Biceps femoris, short head",
+        "zh": "股二头肌短头"
+      },
+      "short": {
+        "en": "Biceps femoris, short head",
+        "zh": "股二头肌短头"
+      },
+      "group": "intermediate",
+      "mesh": "biceps-femoris-short.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-2"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "biceps-femoris-short.r"
+      },
+      "muscle": "biceps-femoris-short",
+      "connects": [
+        "femur",
+        "lower-leg"
+      ],
+      "explode": {
+        "dir": [
+          0.35,
+          0,
+          -1
+        ],
+        "dist": 0.06,
+        "stage": 1
+      }
+    },
+    {
+      "id": "soleus",
+      "name": {
+        "en": "Soleus",
+        "zh": "比目鱼肌"
+      },
+      "short": {
+        "en": "Soleus",
+        "zh": "比目鱼肌"
+      },
+      "group": "intermediate",
+      "mesh": "soleus.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-2"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "soleus.r"
+      },
+      "muscle": "soleus",
+      "connects": [
+        "lower-leg",
+        "foot"
+      ],
+      "explode": {
+        "dir": [
+          0.35,
+          0,
+          -1
+        ],
+        "dist": 0.06,
+        "stage": 1
+      }
+    },
+    {
+      "id": "gluteus-minimus",
+      "name": {
+        "en": "Gluteus minimus",
+        "zh": "臀小肌"
+      },
+      "short": {
+        "en": "Gluteus minimus",
+        "zh": "臀小肌"
+      },
+      "group": "deep",
+      "mesh": "gluteus-minimus.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-3"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "gluteus-minimus.r"
+      },
+      "muscle": "gluteus-minimus",
+      "connects": [
+        "pelvis",
+        "femur"
+      ],
+      "explode": {
+        "dir": [
+          1,
+          0,
+          0.3
+        ],
+        "dist": 0.06,
+        "stage": 2
+      }
+    },
+    {
+      "id": "vastus-intermedius",
+      "name": {
+        "en": "Vastus intermedius",
+        "zh": "股中间肌"
+      },
+      "short": {
+        "en": "Vastus intermedius",
+        "zh": "股中间肌"
+      },
+      "group": "deep",
+      "mesh": "vastus-intermedius.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-3"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "vastus-intermedius.r"
+      },
+      "muscle": "vastus-intermedius",
+      "connects": [
+        "femur",
+        "patella",
+        "lower-leg"
+      ],
+      "explode": {
+        "dir": [
+          0.35,
+          0,
+          1
+        ],
+        "dist": 0.06,
+        "stage": 2
+      }
+    },
+    {
+      "id": "adductor-brevis",
+      "name": {
+        "en": "Adductor brevis",
+        "zh": "短收肌"
+      },
+      "short": {
+        "en": "Adductor brevis",
+        "zh": "短收肌"
+      },
+      "group": "deep",
+      "mesh": "adductor-brevis.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-3"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "adductor-brevis.r"
+      },
+      "muscle": "adductor-brevis",
+      "connects": [
+        "pelvis",
+        "femur"
+      ],
+      "explode": {
+        "dir": [
+          0.35,
+          0,
+          1
+        ],
+        "dist": 0.06,
+        "stage": 2
+      }
+    },
+    {
+      "id": "adductor-magnus",
+      "name": {
+        "en": "Adductor magnus",
+        "zh": "大收肌"
+      },
+      "short": {
+        "en": "Adductor magnus",
+        "zh": "大收肌"
+      },
+      "group": "deep",
+      "mesh": "adductor-magnus.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-3"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "adductor-magnus.r"
+      },
+      "muscle": "adductor-magnus",
+      "connects": [
+        "pelvis",
+        "femur"
+      ],
+      "explode": {
+        "dir": [
+          0.35,
+          0,
+          1
+        ],
+        "dist": 0.06,
+        "stage": 2
+      }
+    },
+    {
+      "id": "psoas-major",
+      "name": {
+        "en": "Psoas major",
+        "zh": "腰大肌"
+      },
+      "short": {
+        "en": "Psoas major",
+        "zh": "腰大肌"
+      },
+      "group": "neighbours",
+      "mesh": "psoas-major.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:ink-3"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "psoas-major.r"
+      },
+      "muscle": "psoas-major",
+      "connects": [
+        "lumbar-spine",
+        "femur"
+      ]
+    },
+    {
+      "id": "iliacus",
+      "name": {
+        "en": "Iliacus",
+        "zh": "髂肌"
+      },
+      "short": {
+        "en": "Iliacus",
+        "zh": "髂肌"
+      },
+      "group": "neighbours",
+      "mesh": "iliacus.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:ink-3"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "iliacus.r"
+      },
+      "muscle": "iliacus",
+      "connects": [
+        "pelvis",
+        "femur"
+      ]
+    },
+    {
+      "id": "fibularis-longus",
+      "name": {
+        "en": "Fibularis longus",
+        "zh": "腓骨长肌"
+      },
+      "short": {
+        "en": "Fibularis longus",
+        "zh": "腓骨长肌"
+      },
+      "group": "neighbours",
+      "mesh": "fibularis-longus.l",
+      "material": {
+        "color": "muscle",
+        "tint": "token:ink-3"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "fibularis-longus.r"
+      },
+      "muscle": "fibularis-longus",
+      "connects": [
+        "lower-leg",
+        "foot"
+      ]
+    },
+    {
+      "id": "pelvis",
+      "name": {
+        "en": "Pelvis and sacrum",
+        "zh": "骨盆与骶骨"
+      },
+      "short": {
+        "en": "Pelvis and sacrum",
+        "zh": "骨盆与骶骨"
+      },
+      "group": "skeleton",
+      "mesh": "pelvis",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Supports the muscle attachment chain.",
+        "zh": "支撑肌肉附着的骨骼链。"
+      },
+      "detail": {
+        "en": "Supports the trunk and provides the hip sockets. The merged mesh includes both hip bones, sacrum and coccyx; attachment markers distinguish the relevant surfaces [M1].",
+        "zh": "支撑躯干，提供髋臼。合并网格包含两侧髋骨、骶骨及尾骨；附着点分别落在相应骨面 [M1]。"
+      }
+    },
+    {
+      "id": "femur",
+      "name": {
+        "en": "Femur",
+        "zh": "股骨"
+      },
+      "short": {
+        "en": "Femur",
+        "zh": "股骨"
+      },
+      "group": "skeleton",
+      "mesh": "femur.l",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "femur.r"
+      },
+      "summary": {
+        "en": "Supports the muscle attachment chain.",
+        "zh": "支撑肌肉附着的骨骼链。"
+      },
+      "detail": {
+        "en": "Links the hip to the knee. Its greater and lesser trochanters and posterior linea aspera provide distinct muscle attachments [M1].",
+        "zh": "连接髋与膝。大、小转子及后方粗线提供不同的肌肉附着面 [M1]。"
+      }
+    },
+    {
+      "id": "patella",
+      "name": {
+        "en": "Patella",
+        "zh": "髌骨"
+      },
+      "short": {
+        "en": "Patella",
+        "zh": "髌骨"
+      },
+      "group": "skeleton",
+      "mesh": "patella.l",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "patella.r"
+      },
+      "summary": {
+        "en": "Supports the muscle attachment chain.",
+        "zh": "支撑肌肉附着的骨骼链。"
+      },
+      "detail": {
+        "en": "Redirects the quadriceps tendon in front of the knee. The patellar ligament continues to the tibial tuberosity [M1] [M2].",
+        "zh": "位于膝前，使股四头肌腱转向。髌韧带继续连接胫骨粗隆 [M1] [M2]。"
+      }
+    },
+    {
+      "id": "lower-leg",
+      "name": {
+        "en": "Tibia and fibula",
+        "zh": "胫骨与腓骨"
+      },
+      "short": {
+        "en": "Tibia and fibula",
+        "zh": "胫骨与腓骨"
+      },
+      "group": "skeleton",
+      "mesh": "lower-leg.l",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "lower-leg.r"
+      },
+      "summary": {
+        "en": "Supports the muscle attachment chain.",
+        "zh": "支撑肌肉附着的骨骼链。"
+      },
+      "detail": {
+        "en": "Carries the knee-to-ankle chain. Tibia and fibula are merged for display; biceps femoris inserts mainly on the fibular head, while the pes anserinus reaches medial tibia [M1].",
+        "zh": "承接膝到踝的运动链。显示时合并胫腓骨；股二头肌主要止于腓骨头，鹅足则到胫骨内侧 [M1]。"
+      }
+    },
+    {
+      "id": "foot",
+      "name": {
+        "en": "Foot bones",
+        "zh": "足骨"
+      },
+      "short": {
+        "en": "Foot bones",
+        "zh": "足骨"
+      },
+      "group": "skeleton",
+      "mesh": "foot.l",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "bilateral": {
+        "axis": "x",
+        "mesh": "foot.r"
+      },
+      "summary": {
+        "en": "Supports the muscle attachment chain.",
+        "zh": "支撑肌肉附着的骨骼链。"
+      },
+      "detail": {
+        "en": "Provides the ankle and foot attachment surfaces. Heel-raise tendons reach the posterior calcaneus; tibialis anterior reaches the medial cuneiform and first metatarsal base [M1].",
+        "zh": "提供踝足的附着面。提踵肌的跟腱到跟骨后面；胫骨前肌到内侧楔骨及第一跖骨底 [M1]。"
+      }
+    },
+    {
+      "id": "lumbar-spine",
+      "name": {
+        "en": "Lumbar vertebrae",
+        "zh": "腰椎"
+      },
+      "short": {
+        "en": "Lumbar vertebrae",
+        "zh": "腰椎"
+      },
+      "group": "skeleton",
+      "mesh": "lumbar-spine",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Supports the muscle attachment chain.",
+        "zh": "支撑肌肉附着的骨骼链。"
+      },
+      "detail": {
+        "en": "Provides context for the neighbouring psoas major. Only lumbar vertebrae are displayed; its thoracic attachment is described in the muscle sheet [M1].",
+        "zh": "作为邻区腰大肌的背景。这里只显示腰椎；胸椎端的附着在肌肉卡中说明 [M1]。"
+      }
+    },
+    {
+      "id": "skin-outline",
+      "name": {
+        "en": "Body outline",
+        "zh": "体表轮廓"
+      },
+      "short": {
+        "en": "Body outline",
+        "zh": "体表轮廓"
+      },
+      "group": "body",
+      "mesh": "skin-outline",
+      "material": {
+        "color": "membrane",
+        "tint": "token:ink-3"
+      },
+      "summary": {
+        "en": "Shows the region on the reference body.",
+        "zh": "显示参考人体上的本区位置。"
+      },
+      "detail": {
+        "en": "Locates the region on a male reference body. This low-detail shell is faded in anatomy views. Motion shows a regional joint chain, with illustrative skin weights rather than an individual body measurement.",
+        "zh": "帮助在男性参考人体上找到本区。解剖视图中淡显低精度皮肤轮廓。动作只演示本区关节链，皮肤权重是示意，不能当作个人身体测量。"
+      },
+      "context": true,
+      "shell": true,
+      "castShadow": false
+    }
+  ],
+  "groups": [
+    {
+      "id": "superficial",
+      "name": {
+        "en": "Surface layer",
+        "zh": "浅层"
+      },
+      "color": "token:muscle-1"
+    },
+    {
+      "id": "intermediate",
+      "name": {
+        "en": "Middle layer",
+        "zh": "中层"
+      },
+      "color": "token:muscle-2"
+    },
+    {
+      "id": "deep",
+      "name": {
+        "en": "Deep layer",
+        "zh": "深层"
+      },
+      "color": "token:muscle-3"
+    },
+    {
+      "id": "skeleton",
+      "name": {
+        "en": "Bones",
+        "zh": "骨骼"
+      },
+      "color": "token:bone"
+    },
+    {
+      "id": "neighbours",
+      "name": {
+        "en": "Neighbouring muscles",
+        "zh": "邻近肌肉"
+      },
+      "color": "token:ink-3",
+      "card": false
+    },
+    {
+      "id": "body",
+      "name": {
+        "en": "Body outline",
+        "zh": "体表轮廓"
+      },
+      "color": "token:ink-3",
+      "card": false
+    }
+  ],
+  "animations": [
+    {
+      "id": "gluteus-maximus-contract",
+      "target": "gluteus-maximus",
+      "kind": "contract",
+      "amount": 0.65,
+      "bulge": 0.06,
+      "hz": 0.4
+    },
+    {
+      "id": "tensor-fasciae-latae-contract",
+      "target": "tensor-fasciae-latae",
+      "kind": "contract",
+      "amount": 0.65,
+      "bulge": 0.06,
+      "hz": 0.4
+    },
+    {
+      "id": "sartorius-contract",
+      "target": "sartorius",
+      "kind": "contract",
+      "amount": 0.65,
+      "bulge": 0.06,
+      "hz": 0.4
+    },
+    {
+      "id": "rectus-femoris-contract",
+      "target": "rectus-femoris",
+      "kind": "contract",
+      "amount": 0.65,
+      "bulge": 0.06,
+      "hz": 0.4
+    },
+    {
+      "id": "vastus-lateralis-contract",
+      "target": "vastus-lateralis",
+      "kind": "contract",
+      "amount": 0.65,
+      "bulge": 0.06,
+      "hz": 0.4
+    },
+    {
+      "id": "vastus-medialis-contract",
+      "target": "vastus-medialis",
+      "kind": "contract",
+      "amount": 0.65,
+      "bulge": 0.06,
+      "hz": 0.4
+    },
+    {
+      "id": "biceps-femoris-long-contract",
+      "target": "biceps-femoris-long",
+      "kind": "contract",
+      "amount": 0.65,
+      "bulge": 0.06,
+      "hz": 0.4
+    },
+    {
+      "id": "semitendinosus-contract",
+      "target": "semitendinosus",
+      "kind": "contract",
+      "amount": 0.65,
+      "bulge": 0.06,
+      "hz": 0.4
+    },
+    {
+      "id": "gastrocnemius-medial-contract",
+      "target": "gastrocnemius-medial",
+      "kind": "contract",
+      "amount": 0.65,
+      "bulge": 0.06,
+      "hz": 0.4
+    },
+    {
+      "id": "gastrocnemius-lateral-contract",
+      "target": "gastrocnemius-lateral",
+      "kind": "contract",
+      "amount": 0.65,
+      "bulge": 0.06,
+      "hz": 0.4
+    },
+    {
+      "id": "tibialis-anterior-contract",
+      "target": "tibialis-anterior",
+      "kind": "contract",
+      "amount": 0.65,
+      "bulge": 0.06,
+      "hz": 0.4
+    },
+    {
+      "id": "gluteus-medius-contract",
+      "target": "gluteus-medius",
+      "kind": "contract",
+      "amount": 0.65,
+      "bulge": 0.06,
+      "hz": 0.4
+    },
+    {
+      "id": "adductor-longus-contract",
+      "target": "adductor-longus",
+      "kind": "contract",
+      "amount": 0.65,
+      "bulge": 0.06,
+      "hz": 0.4
+    },
+    {
+      "id": "gracilis-contract",
+      "target": "gracilis",
+      "kind": "contract",
+      "amount": 0.65,
+      "bulge": 0.06,
+      "hz": 0.4
+    },
+    {
+      "id": "pectineus-contract",
+      "target": "pectineus",
+      "kind": "contract",
+      "amount": 0.65,
+      "bulge": 0.06,
+      "hz": 0.4
+    },
+    {
+      "id": "semimembranosus-contract",
+      "target": "semimembranosus",
+      "kind": "contract",
+      "amount": 0.65,
+      "bulge": 0.06,
+      "hz": 0.4
+    },
+    {
+      "id": "biceps-femoris-short-contract",
+      "target": "biceps-femoris-short",
+      "kind": "contract",
+      "amount": 0.65,
+      "bulge": 0.06,
+      "hz": 0.4
+    },
+    {
+      "id": "soleus-contract",
+      "target": "soleus",
+      "kind": "contract",
+      "amount": 0.65,
+      "bulge": 0.06,
+      "hz": 0.4
+    },
+    {
+      "id": "gluteus-minimus-contract",
+      "target": "gluteus-minimus",
+      "kind": "contract",
+      "amount": 0.65,
+      "bulge": 0.06,
+      "hz": 0.4
+    },
+    {
+      "id": "vastus-intermedius-contract",
+      "target": "vastus-intermedius",
+      "kind": "contract",
+      "amount": 0.65,
+      "bulge": 0.06,
+      "hz": 0.4
+    },
+    {
+      "id": "adductor-brevis-contract",
+      "target": "adductor-brevis",
+      "kind": "contract",
+      "amount": 0.65,
+      "bulge": 0.06,
+      "hz": 0.4
+    },
+    {
+      "id": "adductor-magnus-contract",
+      "target": "adductor-magnus",
+      "kind": "contract",
+      "amount": 0.65,
+      "bulge": 0.06,
+      "hz": 0.4
+    },
+    {
+      "id": "psoas-major-contract",
+      "target": "psoas-major",
+      "kind": "contract",
+      "amount": 0.65,
+      "bulge": 0.06,
+      "hz": 0.4
+    },
+    {
+      "id": "iliacus-contract",
+      "target": "iliacus",
+      "kind": "contract",
+      "amount": 0.65,
+      "bulge": 0.06,
+      "hz": 0.4
+    },
+    {
+      "id": "fibularis-longus-contract",
+      "target": "fibularis-longus",
+      "kind": "contract",
+      "amount": 0.65,
+      "bulge": 0.06,
+      "hz": 0.4
+    }
+  ],
+  "views": {
+    "assembled": {
+      "camera": {
+        "position": [
+          0,
+          -0.36,
+          3.0
+        ],
+        "target": [
+          0,
+          -0.35,
+          -0.03
+        ],
+        "fov": 30
+      }
+    },
+    "exploded": {
+      "camera": {
+        "position": [
+          1.2,
+          -0.05,
+          2.4
+        ],
+        "target": [
+          0.07,
+          -0.24,
+          -0.02
+        ],
+        "fov": 30
+      }
+    },
+    "cover": {
+      "position": [
+        0.85,
+        -0.15,
+        2.5
+      ],
+      "target": [
+        0,
+        -0.36,
+        -0.03
+      ],
+      "fov": 30
+    },
+    "section": {
+      "plane": "xy"
+    },
+    "cutaway": {
+      "normal": [
+        -1,
+        0,
+        0
+      ],
+      "offset": 0.09
+    },
+    "cuts": {
+      "transverse-thigh": {
+        "normal": [
+          0,
+          -1,
+          0
+        ],
+        "offset": -0.25,
+        "label": {
+          "en": "Transverse · mid-thigh",
+          "zh": "横切 · 大腿中段"
+        }
+      },
+      "sagittal-leg": {
+        "normal": [
+          -1,
+          0,
+          0
+        ],
+        "offset": 0.09,
+        "label": {
+          "en": "Sagittal · left leg",
+          "zh": "矢状 · 左腿"
+        }
+      }
+    },
+    "explodeLabel": {
+      "en": "Peel",
+      "zh": "剥层"
+    }
+  },
+  "spec": [
+    {
+      "key": {
+        "en": "Region",
+        "zh": "本区"
+      },
+      "value": {
+        "en": "22 muscle parts · 1 fascial tract",
+        "zh": "22 个肌肉部件 · 1 条筋膜束"
+      },
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Layers",
+        "zh": "层"
+      },
+      "value": "3",
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Exercises",
+        "zh": "动作"
+      },
+      "value": "13",
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Model",
+        "zh": "模型"
+      },
+      "value": {
+        "en": "Z-Anatomy · male reference",
+        "zh": "Z-Anatomy · 男性参考"
+      },
+      "tag": "design"
+    }
+  ],
+  "presets": [
+    {
+      "id": "front",
+      "label": {
+        "en": "Front",
+        "zh": "正面"
+      },
+      "camera": {
+        "position": [
+          0,
+          -0.36,
+          3.0
+        ],
+        "target": [
+          0,
+          -0.35,
+          -0.03
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "back",
+      "label": {
+        "en": "Back",
+        "zh": "背面"
+      },
+      "camera": {
+        "position": [
+          0.35,
+          -0.25,
+          -2.95
+        ],
+        "target": [
+          0,
+          -0.35,
+          -0.05
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "deep-view",
+      "label": {
+        "en": "Deep",
+        "zh": "深层"
+      },
+      "camera": {
+        "position": [
+          1.2,
+          -0.05,
+          2.4
+        ],
+        "target": [
+          0.07,
+          -0.24,
+          -0.02
+        ],
+        "fov": 30
+      },
+      "view": "xray"
+    },
+    {
+      "id": "on-my-body",
+      "label": {
+        "en": "On my body",
+        "zh": "在身上"
+      },
+      "camera": {
+        "position": [
+          0.65,
+          0.1,
+          4.3
+        ],
+        "target": [
+          0,
+          -0.05,
+          0
+        ],
+        "fov": 30
+      },
+      "view": "xray"
+    },
+    {
+      "id": "hip",
+      "label": {
+        "en": "Hip",
+        "zh": "髋部"
+      },
+      "camera": {
+        "position": [
+          1.3,
+          0.3,
+          1.7
+        ],
+        "target": [
+          0.06,
+          -0.05,
+          -0.02
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "calf",
+      "label": {
+        "en": "Calf",
+        "zh": "小腿"
+      },
+      "camera": {
+        "position": [
+          0.9,
+          -0.56,
+          -1.65
+        ],
+        "target": [
+          0.09,
+          -0.6,
+          -0.02
+        ],
+        "fov": 30
+      }
+    }
+  ],
+  "poses": {
+    "hip-extension": {
+      "joint:hip.l": {
+        "extension": 20
+      },
+      "contract": {
+        "gluteus-maximus": 0.75,
+        "biceps-femoris-long": 0.5,
+        "semitendinosus": 0.5,
+        "semimembranosus": 0.5,
+        "adductor-magnus": 0.4
+      },
+      "duration": 1.2
+    },
+    "hip-flexion": {
+      "joint:hip.l": {
+        "flexion": 45
+      },
+      "contract": {
+        "rectus-femoris": 0.5,
+        "sartorius": 0.4,
+        "psoas-major": 0.7,
+        "iliacus": 0.7
+      },
+      "duration": 1.2
+    },
+    "hip-abduction": {
+      "joint:hip.l": {
+        "abduction": 25
+      },
+      "contract": {
+        "gluteus-medius": 0.75,
+        "gluteus-minimus": 0.65,
+        "tensor-fasciae-latae": 0.45
+      },
+      "duration": 1.2
+    },
+    "hip-adduction": {
+      "joint:hip.l": {
+        "adduction": 12
+      },
+      "contract": {
+        "adductor-longus": 0.65,
+        "adductor-brevis": 0.6,
+        "adductor-magnus": 0.65,
+        "gracilis": 0.4,
+        "pectineus": 0.4
+      },
+      "duration": 1.2
+    },
+    "hip-internal-rotation": {
+      "joint:hip.l": {
+        "internal-rotation": 20
+      },
+      "contract": {
+        "gluteus-medius": 0.5,
+        "gluteus-minimus": 0.5,
+        "tensor-fasciae-latae": 0.5
+      },
+      "duration": 1.2
+    },
+    "hip-external-rotation": {
+      "joint:hip.l": {
+        "external-rotation": 20
+      },
+      "contract": {
+        "gluteus-maximus": 0.5,
+        "sartorius": 0.4
+      },
+      "duration": 1.2
+    },
+    "knee-extension": {
+      "joint:hip.l": {
+        "flexion": 45
+      },
+      "joint:knee.l": {
+        "flexion": 5
+      },
+      "contract": {
+        "rectus-femoris": 0.7,
+        "vastus-lateralis": 0.75,
+        "vastus-medialis": 0.75,
+        "vastus-intermedius": 0.75
+      },
+      "duration": 1.2
+    },
+    "knee-flexion": {
+      "joint:knee.l": {
+        "flexion": 55
+      },
+      "contract": {
+        "biceps-femoris-long": 0.65,
+        "biceps-femoris-short": 0.65,
+        "semitendinosus": 0.65,
+        "semimembranosus": 0.65
+      },
+      "duration": 1.2
+    },
+    "knee-flexed-hip-extension": {
+      "joint:hip.l": {
+        "extension": 15
+      },
+      "joint:knee.l": {
+        "flexion": 55
+      },
+      "contract": {
+        "gluteus-maximus": 0.7
+      },
+      "duration": 1.2
+    },
+    "ankle-plantarflexion": {
+      "joint:ankle.l": {
+        "plantarflexion": 20
+      },
+      "contract": {
+        "gastrocnemius-medial": 0.7,
+        "gastrocnemius-lateral": 0.7,
+        "soleus": 0.7
+      },
+      "duration": 1.2
+    },
+    "ankle-dorsiflexion": {
+      "joint:ankle.l": {
+        "dorsiflexion": 12
+      },
+      "contract": {
+        "tibialis-anterior": 0.7
+      },
+      "duration": 1.2
+    },
+    "ankle-inversion": {
+      "joint:ankle.l": {
+        "inversion": 12
+      },
+      "contract": {
+        "tibialis-anterior": 0.45
+      },
+      "duration": 1.2
+    },
+    "ankle-eversion": {
+      "joint:ankle.l": {
+        "eversion": 12
+      },
+      "contract": {
+        "fibularis-longus": 0.5
+      },
+      "duration": 1.2
+    },
+    "hip-stability": {
+      "contract": {
+        "gluteus-medius": 0.45,
+        "gluteus-minimus": 0.4
+      },
+      "duration": 1.2
+    },
+    "knee-stability": {
+      "contract": {
+        "tensor-fasciae-latae": 0.35
+      },
+      "duration": 1.2
+    },
+    "ankle-stability": {
+      "contract": {
+        "soleus": 0.35,
+        "fibularis-longus": 0.25
+      },
+      "duration": 1.2
+    },
+    "trunk-stability": {
+      "contract": {
+        "psoas-major": 0.25
+      },
+      "duration": 1.2
+    }
+  },
+  "units": {
+    "modelUnit": "m",
+    "scale": 1
+  },
+  "rig": {
+    "joints": {
+      "trunk": {
+        "node": "joint.trunk",
+        "axes": {
+          "flexion": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "lateral-flexion": [
+            0,
+            0,
+            1
+          ],
+          "rotation": [
+            0.0,
+            1.0,
+            0.0
+          ]
+        }
+      },
+      "hip.l": {
+        "node": "joint.hip.l",
+        "axes": {
+          "flexion": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "abduction": [
+            0,
+            0,
+            1
+          ],
+          "internal-rotation": [
+            -0.021861663088202477,
+            -0.9988096952438354,
+            -0.0436030738055706
+          ]
+        }
+      },
+      "knee.l": {
+        "node": "joint.knee.l",
+        "axes": {
+          "flexion": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "internal-rotation": [
+            0.014895671978592873,
+            -0.999510645866394,
+            -0.027504874393343925
+          ]
+        }
+      },
+      "ankle.l": {
+        "node": "joint.ankle.l",
+        "axes": {
+          "dorsiflexion": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "inversion": [
+            0,
+            0,
+            1
+          ]
+        }
+      },
+      "hip.r": {
+        "node": "joint.hip.r",
+        "axes": {
+          "flexion": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "abduction": [
+            0,
+            0,
+            -1
+          ],
+          "internal-rotation": [
+            -0.021861663088202477,
+            0.9988096952438354,
+            0.0436030738055706
+          ]
+        }
+      },
+      "knee.r": {
+        "node": "joint.knee.r",
+        "axes": {
+          "flexion": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "internal-rotation": [
+            0.014895671978592873,
+            0.999510645866394,
+            0.027504874393343925
+          ]
+        }
+      },
+      "ankle.r": {
+        "node": "joint.ankle.r",
+        "axes": {
+          "dorsiflexion": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "inversion": [
+            0,
+            0,
+            -1
+          ]
+        }
+      }
+    },
+    "demo": {
+      "hip": {
+        "flexion": 45,
+        "extension": 20,
+        "abduction": 25,
+        "adduction": 12,
+        "internal-rotation": 20,
+        "external-rotation": 20
+      },
+      "knee": {
+        "flexion": 55,
+        "extension": 0,
+        "internal-rotation": 12,
+        "external-rotation": 12
+      },
+      "ankle": {
+        "dorsiflexion": 12,
+        "plantarflexion": 20,
+        "inversion": 12,
+        "eversion": 12
+      },
+      "trunk": {
+        "flexion": 12,
+        "extension": 10,
+        "lateral-flexion": 10,
+        "rotation": 12
+      }
+    }
+  },
+  "sites": [
+    {
+      "muscle": "gluteus-maximus",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.04542,
+          0.02807,
+          -0.03173
+        ],
+        [
+          0.04226,
+          0.03112,
+          -0.02889
+        ],
+        [
+          0.06508,
+          0.04791,
+          -0.03039
+        ],
+        [
+          0.01215,
+          -0.01559,
+          -0.0519
+        ],
+        [
+          0.00911,
+          -0.05651,
+          -0.04358
+        ]
+      ]
+    },
+    {
+      "muscle": "gluteus-maximus",
+      "kind": "insertion",
+      "bone": "femur",
+      "points": [
+        [
+          0.11077,
+          -0.18685,
+          0.0264
+        ],
+        [
+          0.1178,
+          -0.14265,
+          0.01988
+        ],
+        [
+          0.11724,
+          -0.12814,
+          0.0145
+        ]
+      ]
+    },
+    {
+      "muscle": "gluteus-maximus",
+      "kind": "insertion",
+      "bone": "iliotibial-tract",
+      "points": [
+        [
+          0.14077,
+          -0.0996,
+          0.01065
+        ]
+      ]
+    },
+    {
+      "muscle": "tensor-fasciae-latae",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.11887,
+          0.0198,
+          0.08352
+        ],
+        [
+          0.12132,
+          0.03398,
+          0.08222
+        ],
+        [
+          0.12705,
+          0.0497,
+          0.07466
+        ]
+      ]
+    },
+    {
+      "muscle": "tensor-fasciae-latae",
+      "kind": "insertion",
+      "bone": "iliotibial-tract",
+      "points": [
+        [
+          0.14783,
+          -0.04524,
+          0.0582
+        ]
+      ]
+    },
+    {
+      "muscle": "iliotibial-tract",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.13001,
+          0.06677,
+          0.04953
+        ]
+      ]
+    },
+    {
+      "muscle": "iliotibial-tract",
+      "kind": "origin",
+      "bone": "tensor-fasciae-latae",
+      "points": [
+        [
+          0.13887,
+          -0.01311,
+          0.05879
+        ]
+      ]
+    },
+    {
+      "muscle": "iliotibial-tract",
+      "kind": "origin",
+      "bone": "gluteus-maximus",
+      "points": [
+        [
+          0.13303,
+          -0.08468,
+          -0.00049
+        ]
+      ]
+    },
+    {
+      "muscle": "iliotibial-tract",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          0.0977,
+          -0.51425,
+          0.03778
+        ]
+      ]
+    },
+    {
+      "muscle": "sartorius",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.11858,
+          0.01817,
+          0.08808
+        ],
+        [
+          0.11895,
+          0.02219,
+          0.09432
+        ],
+        [
+          0.11739,
+          0.03014,
+          0.09798
+        ]
+      ]
+    },
+    {
+      "muscle": "sartorius",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          0.06682,
+          -0.55421,
+          0.02954
+        ],
+        [
+          0.06725,
+          -0.52838,
+          0.03489
+        ],
+        [
+          0.06517,
+          -0.51765,
+          0.03328
+        ]
+      ]
+    },
+    {
+      "muscle": "rectus-femoris",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.0974,
+          -0.01707,
+          0.07026
+        ],
+        [
+          0.10119,
+          -0.02191,
+          0.04346
+        ]
+      ]
+    },
+    {
+      "muscle": "rectus-femoris",
+      "kind": "insertion",
+      "bone": "patella",
+      "points": [
+        [
+          0.086,
+          -0.46324,
+          0.04651
+        ]
+      ]
+    },
+    {
+      "muscle": "rectus-femoris",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          0.08682,
+          -0.51328,
+          0.04741
+        ]
+      ]
+    },
+    {
+      "muscle": "vastus-lateralis",
+      "kind": "origin",
+      "bone": "femur",
+      "points": [
+        [
+          0.10217,
+          -0.3041,
+          0.02854
+        ],
+        [
+          0.12706,
+          -0.14295,
+          0.02497
+        ],
+        [
+          0.1289,
+          -0.09645,
+          0.04191
+        ]
+      ]
+    },
+    {
+      "muscle": "vastus-lateralis",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          0.08682,
+          -0.51328,
+          0.04741
+        ]
+      ]
+    },
+    {
+      "muscle": "vastus-lateralis",
+      "kind": "insertion",
+      "bone": "patella",
+      "points": [
+        [
+          0.09488,
+          -0.46618,
+          0.04965
+        ]
+      ]
+    },
+    {
+      "muscle": "vastus-medialis",
+      "kind": "origin",
+      "bone": "femur",
+      "points": [
+        [
+          0.05584,
+          -0.41736,
+          0.03134
+        ],
+        [
+          0.08053,
+          -0.29743,
+          0.04465
+        ],
+        [
+          0.09788,
+          -0.15897,
+          0.04419
+        ]
+      ]
+    },
+    {
+      "muscle": "vastus-medialis",
+      "kind": "insertion",
+      "bone": "patella",
+      "points": [
+        [
+          0.07834,
+          -0.46745,
+          0.04115
+        ]
+      ]
+    },
+    {
+      "muscle": "vastus-medialis",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          0.08682,
+          -0.51328,
+          0.04741
+        ]
+      ]
+    },
+    {
+      "muscle": "biceps-femoris-long",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.05537,
+          -0.09688,
+          -0.01201
+        ],
+        [
+          0.06213,
+          -0.09787,
+          -0.00989
+        ],
+        [
+          0.06531,
+          -0.09849,
+          -0.00649
+        ]
+      ]
+    },
+    {
+      "muscle": "biceps-femoris-long",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          0.12485,
+          -0.51081,
+          0.00318
+        ],
+        [
+          0.11579,
+          -0.49497,
+          0.00529
+        ]
+      ]
+    },
+    {
+      "muscle": "semitendinosus",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.04392,
+          -0.10777,
+          -0.00275
+        ],
+        [
+          0.05244,
+          -0.10387,
+          -0.00809
+        ],
+        [
+          0.05747,
+          -0.10629,
+          -0.00465
+        ]
+      ]
+    },
+    {
+      "muscle": "semitendinosus",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          0.06142,
+          -0.54851,
+          0.01543
+        ],
+        [
+          0.05504,
+          -0.52905,
+          0.00962
+        ],
+        [
+          0.04783,
+          -0.5157,
+          0.00437
+        ]
+      ]
+    },
+    {
+      "muscle": "gastrocnemius-medial",
+      "kind": "origin",
+      "bone": "femur",
+      "points": [
+        [
+          0.05429,
+          -0.42635,
+          0.01167
+        ],
+        [
+          0.05475,
+          -0.41793,
+          0.01661
+        ],
+        [
+          0.0597,
+          -0.40946,
+          0.01934
+        ]
+      ]
+    },
+    {
+      "muscle": "gastrocnemius-medial",
+      "kind": "insertion",
+      "bone": "foot",
+      "points": [
+        [
+          0.07181,
+          -0.87381,
+          -0.04709
+        ]
+      ]
+    },
+    {
+      "muscle": "gastrocnemius-lateral",
+      "kind": "origin",
+      "bone": "femur",
+      "points": [
+        [
+          0.11128,
+          -0.43925,
+          0.00419
+        ],
+        [
+          0.10639,
+          -0.43151,
+          0.00861
+        ],
+        [
+          0.10308,
+          -0.42497,
+          0.01054
+        ]
+      ]
+    },
+    {
+      "muscle": "gastrocnemius-lateral",
+      "kind": "insertion",
+      "bone": "foot",
+      "points": [
+        [
+          0.07181,
+          -0.87381,
+          -0.04709
+        ]
+      ]
+    },
+    {
+      "muscle": "tibialis-anterior",
+      "kind": "origin",
+      "bone": "lower-leg",
+      "points": [
+        [
+          0.08946,
+          -0.70442,
+          0.01236
+        ],
+        [
+          0.09173,
+          -0.64242,
+          0.01804
+        ],
+        [
+          0.09408,
+          -0.56586,
+          0.02444
+        ]
+      ]
+    },
+    {
+      "muscle": "tibialis-anterior",
+      "kind": "insertion",
+      "bone": "foot",
+      "points": [
+        [
+          0.06195,
+          -0.86502,
+          0.07341
+        ],
+        [
+          0.06144,
+          -0.85968,
+          0.07439
+        ],
+        [
+          0.06308,
+          -0.85628,
+          0.07271
+        ],
+        [
+          0.06045,
+          -0.86394,
+          0.06345
+        ],
+        [
+          0.0627,
+          -0.85971,
+          0.06373
+        ],
+        [
+          0.06398,
+          -0.85686,
+          0.0651
+        ]
+      ]
+    },
+    {
+      "muscle": "gluteus-medius",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.1252,
+          0.05424,
+          0.05195
+        ],
+        [
+          0.10623,
+          0.07012,
+          0.02645
+        ],
+        [
+          0.07083,
+          0.05431,
+          -0.00514
+        ]
+      ]
+    },
+    {
+      "muscle": "gluteus-medius",
+      "kind": "insertion",
+      "bone": "femur",
+      "points": [
+        [
+          0.14449,
+          -0.07604,
+          0.01759
+        ],
+        [
+          0.13431,
+          -0.06651,
+          0.00844
+        ],
+        [
+          0.13175,
+          -0.05964,
+          0.01094
+        ]
+      ]
+    },
+    {
+      "muscle": "adductor-longus",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.01939,
+          -0.07082,
+          0.09337
+        ],
+        [
+          0.01867,
+          -0.07325,
+          0.0892
+        ],
+        [
+          0.01474,
+          -0.07596,
+          0.08478
+        ]
+      ]
+    },
+    {
+      "muscle": "adductor-longus",
+      "kind": "insertion",
+      "bone": "femur",
+      "points": [
+        [
+          0.08849,
+          -0.23243,
+          0.03859
+        ],
+        [
+          0.09147,
+          -0.19846,
+          0.03633
+        ],
+        [
+          0.09306,
+          -0.17325,
+          0.03922
+        ]
+      ]
+    },
+    {
+      "muscle": "gracilis",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.01399,
+          -0.08275,
+          0.07758
+        ],
+        [
+          0.01586,
+          -0.09476,
+          0.05992
+        ],
+        [
+          0.02025,
+          -0.10242,
+          0.04768
+        ]
+      ]
+    },
+    {
+      "muscle": "gracilis",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          0.06494,
+          -0.56134,
+          0.02308
+        ],
+        [
+          0.06154,
+          -0.5464,
+          0.02122
+        ],
+        [
+          0.05832,
+          -0.52831,
+          0.0238
+        ]
+      ]
+    },
+    {
+      "muscle": "pectineus",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.0213,
+          -0.06319,
+          0.09657
+        ],
+        [
+          0.03082,
+          -0.06025,
+          0.087
+        ],
+        [
+          0.04532,
+          -0.0533,
+          0.07736
+        ]
+      ]
+    },
+    {
+      "muscle": "pectineus",
+      "kind": "insertion",
+      "bone": "femur",
+      "points": [
+        [
+          0.09621,
+          -0.159,
+          0.0426
+        ]
+      ]
+    },
+    {
+      "muscle": "semimembranosus",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.03818,
+          -0.11219,
+          0.00979
+        ],
+        [
+          0.04553,
+          -0.11347,
+          0.00563
+        ],
+        [
+          0.05283,
+          -0.11145,
+          0.00622
+        ]
+      ]
+    },
+    {
+      "muscle": "semimembranosus",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          0.0397,
+          -0.50053,
+          0.00178
+        ],
+        [
+          0.04744,
+          -0.50238,
+          -0.0084
+        ],
+        [
+          0.0556,
+          -0.50324,
+          -0.01238
+        ]
+      ]
+    },
+    {
+      "muscle": "biceps-femoris-short",
+      "kind": "origin",
+      "bone": "femur",
+      "points": [
+        [
+          0.09588,
+          -0.3272,
+          0.02271
+        ]
+      ]
+    },
+    {
+      "muscle": "biceps-femoris-short",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          0.12485,
+          -0.51081,
+          0.00318
+        ],
+        [
+          0.11579,
+          -0.49497,
+          0.00529
+        ]
+      ]
+    },
+    {
+      "muscle": "soleus",
+      "kind": "origin",
+      "bone": "lower-leg",
+      "points": [
+        [
+          0.06951,
+          -0.6263,
+          0.01405
+        ],
+        [
+          0.07123,
+          -0.56656,
+          0.00922
+        ],
+        [
+          0.08484,
+          -0.54234,
+          0.00602
+        ],
+        [
+          0.10624,
+          -0.54213,
+          -0.00909
+        ],
+        [
+          0.10122,
+          -0.52181,
+          -0.00676
+        ],
+        [
+          0.10354,
+          -0.50599,
+          -0.00919
+        ]
+      ]
+    },
+    {
+      "muscle": "soleus",
+      "kind": "insertion",
+      "bone": "foot",
+      "points": [
+        [
+          0.07181,
+          -0.87381,
+          -0.04709
+        ]
+      ]
+    },
+    {
+      "muscle": "gluteus-minimus",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.08846,
+          -0.01214,
+          0.02093
+        ],
+        [
+          0.08426,
+          0.00615,
+          0.02308
+        ],
+        [
+          0.11157,
+          0.04072,
+          0.04123
+        ]
+      ]
+    },
+    {
+      "muscle": "gluteus-minimus",
+      "kind": "insertion",
+      "bone": "femur",
+      "points": [
+        [
+          0.14172,
+          -0.0586,
+          0.02629
+        ]
+      ]
+    },
+    {
+      "muscle": "vastus-intermedius",
+      "kind": "origin",
+      "bone": "femur",
+      "points": [
+        [
+          0.09751,
+          -0.35284,
+          0.04994
+        ],
+        [
+          0.10951,
+          -0.23595,
+          0.05166
+        ],
+        [
+          0.11921,
+          -0.13106,
+          0.04367
+        ]
+      ]
+    },
+    {
+      "muscle": "vastus-intermedius",
+      "kind": "insertion",
+      "bone": "patella",
+      "points": [
+        [
+          0.08349,
+          -0.46787,
+          0.04198
+        ]
+      ]
+    },
+    {
+      "muscle": "vastus-intermedius",
+      "kind": "insertion",
+      "bone": "lower-leg",
+      "points": [
+        [
+          0.08682,
+          -0.51328,
+          0.04741
+        ]
+      ]
+    },
+    {
+      "muscle": "adductor-brevis",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.02511,
+          -0.07252,
+          0.0769
+        ]
+      ]
+    },
+    {
+      "muscle": "adductor-brevis",
+      "kind": "insertion",
+      "bone": "femur",
+      "points": [
+        [
+          0.09185,
+          -0.19124,
+          0.04182
+        ]
+      ]
+    },
+    {
+      "muscle": "adductor-magnus",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.02408,
+          -0.09848,
+          0.05119
+        ],
+        [
+          0.02806,
+          -0.10607,
+          0.03937
+        ],
+        [
+          0.03662,
+          -0.10866,
+          0.0211
+        ],
+        [
+          0.06923,
+          -0.08935,
+          -0.00902
+        ]
+      ]
+    },
+    {
+      "muscle": "adductor-magnus",
+      "kind": "insertion",
+      "bone": "femur",
+      "points": [
+        [
+          0.04428,
+          -0.4302,
+          0.01691
+        ],
+        [
+          0.08638,
+          -0.30069,
+          0.02802
+        ],
+        [
+          0.10289,
+          -0.15325,
+          0.02293
+        ],
+        [
+          0.03268,
+          -0.44233,
+          0.00921
+        ]
+      ]
+    }
+  ]
+}

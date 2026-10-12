@@ -1,0 +1,14 @@
+id: muscles-arms
+title: { en: "Arm muscles", zh: "手臂肌肉" }
+subtitle: { en: "Layer by layer: elbow, forearm and wrist actions, with a training menu", zh: "一层一层看：屈伸肘、转前臂、动手腕，以及训练动作" }
+subject: biology
+tags: [health, fitness, space]
+moe: []
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: draft
+shortTitle: { en: "Arm muscles", zh: "手臂肌肉" }
+note: { en: "Male reference anatomy · meshes Z-Anatomy / BodyParts3D, CC BY-SA 4.0", zh: "男性参考解剖 · 网格 Z-Anatomy / BodyParts3D，CC BY-SA 4.0" }

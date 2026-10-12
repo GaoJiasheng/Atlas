@@ -1,0 +1,158 @@
+{
+  "terms": [
+    {
+      "id": "scapula",
+      "term": {
+        "en": "Scapula",
+        "zh": "肩胛骨"
+      },
+      "definition": {
+        "en": "The flat triangular bone at the back of the shoulder; it moves on the rib cage and carries the shoulder socket.",
+        "zh": "肩后方的扁平三角骨，在胸廓上活动，外侧有肩关节的关节盂。"
+      }
+    },
+    {
+      "id": "origin",
+      "term": {
+        "en": "Origin",
+        "zh": "起点"
+      },
+      "definition": {
+        "en": "The usually more fixed attachment of a muscle; the moving end can change when an exercise fixes the limb.",
+        "zh": "肌肉通常较固定的附着端；肢体固定时，活动端可以改变。"
+      }
+    },
+    {
+      "id": "insertion",
+      "term": {
+        "en": "Insertion",
+        "zh": "止点"
+      },
+      "definition": {
+        "en": "The usually more mobile attachment of a muscle; force acts between this attachment and the origin.",
+        "zh": "肌肉通常较容易移动的附着端；肌肉在它与起点之间产生拉力。"
+      }
+    },
+    {
+      "id": "thoracolumbar-fascia",
+      "term": {
+        "en": "Thoracolumbar fascia",
+        "zh": "胸腰筋膜"
+      },
+      "definition": {
+        "en": "The connective-tissue sheets of the thoracic and lumbar back that surround muscles and provide attachments.",
+        "zh": "胸背与腰背的结缔组织膜，包围肌肉并提供附着。"
+      }
+    },
+    {
+      "id": "tendon",
+      "term": {
+        "en": "Tendon",
+        "zh": "肌腱"
+      },
+      "definition": {
+        "en": "Strong connective tissue that transmits muscle force to an attachment, commonly a bone.",
+        "zh": "把肌肉力量传到附着处的强韧结缔组织，通常连接骨骼。"
+      }
+    },
+    {
+      "id": "retraction",
+      "term": {
+        "en": "Retraction",
+        "zh": "后缩"
+      },
+      "definition": {
+        "en": "Movement of the shoulder blade towards the spine.",
+        "zh": "肩胛骨向脊柱靠近的移动。"
+      }
+    },
+    {
+      "id": "rotator-cuff",
+      "term": {
+        "en": "Rotator cuff",
+        "zh": "肩袖"
+      },
+      "definition": {
+        "en": "Supraspinatus, infraspinatus, teres minor and subscapularis, whose tendons surround and help steady the shoulder joint.",
+        "zh": "冈上肌、冈下肌、小圆肌、肩胛下肌及其肌腱，围绕并帮助稳定肩关节。"
+      }
+    },
+    {
+      "id": "external-rotation",
+      "term": {
+        "en": "External rotation",
+        "zh": "外旋"
+      },
+      "definition": {
+        "en": "Turning a limb outward around its long axis; at the shoulder this turns the humerus, not just the forearm.",
+        "zh": "肢体沿长轴向外转；肩关节外旋转动的是肱骨，不只是前臂。"
+      }
+    },
+    {
+      "id": "upward-rotation",
+      "term": {
+        "en": "Upward rotation",
+        "zh": "上回旋"
+      },
+      "definition": {
+        "en": "Rotation of the shoulder blade that turns its socket upward as the arm rises.",
+        "zh": "肩胛骨回旋使关节盂朝上，配合手臂抬高。"
+      }
+    },
+    {
+      "id": "extension",
+      "term": {
+        "en": "Extension",
+        "zh": "伸展"
+      },
+      "definition": {
+        "en": "A joint movement that generally increases its angle; at the shoulder it moves the arm backwards, and at the spine it bends the trunk back.",
+        "zh": "通常增大关节角的动作；肩关节伸展让手臂向后，脊柱伸展让躯干向后。"
+      }
+    },
+    {
+      "id": "neutral-spine",
+      "term": {
+        "en": "Neutral spine",
+        "zh": "脊柱中立位"
+      },
+      "definition": {
+        "en": "A controlled spinal position retaining the usual curves, rather than forcing maximal rounding or arching.",
+        "zh": "保留通常曲线的受控脊柱位置，不刻意做到最大弓背或挺腰。"
+      }
+    },
+    {
+      "id": "isometric",
+      "term": {
+        "en": "Isometric contraction",
+        "zh": "等长收缩"
+      },
+      "definition": {
+        "en": "Generating muscle force while muscle length and the related joint position remain approximately steady.",
+        "zh": "肌肉产生力量，长度与相关关节位置大致保持不变。"
+      }
+    },
+    {
+      "id": "emg",
+      "term": {
+        "en": "EMG (electromyography)",
+        "zh": "肌电（肌电图）"
+      },
+      "definition": {
+        "en": "Recording a muscle’s electrical activity; exercise comparisons do not by themselves predict muscle growth.",
+        "zh": "记录肌肉电活动；动作间的肌电比较本身不能预测增肌效果。"
+      }
+    },
+    {
+      "id": "eccentric-phase",
+      "term": {
+        "en": "Eccentric phase",
+        "zh": "离心阶段"
+      },
+      "definition": {
+        "en": "The part of a movement during which an active muscle lengthens under load.",
+        "zh": "正在用力的肌肉在负荷下被拉长的动作阶段。"
+      }
+    }
+  ]
+}

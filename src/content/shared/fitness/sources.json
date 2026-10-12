@@ -363,6 +363,918 @@
         "zh": "TeachMeAnatomy《上臂肌》（肱二头肌、喙肱肌、肱三头肌）。"
       },
       "url": "https://teachmeanatomy.info/upper-limb/muscles/upper-arm/"
+    },
+    {
+      "id": "M33",
+      "text": {
+        "en": "Fry A. C., Smith J. C., Schilling B. K. Effect of knee position on hip and knee torques during the barbell squat. Journal of Strength and Conditioning Research 17(4): 629–633, 2003. doi:10.1519/1533-4287(2003)017<0629:EOKPOH>2.0.CO;2.",
+        "zh": "Fry A. C.、Smith J. C.、Schilling B. K.《杠铃深蹲中膝位置对髋与膝力矩的影响》，Journal of Strength and Conditioning Research 17(4): 629–633，2003 年。"
+      },
+      "url": "https://pubmed.ncbi.nlm.nih.gov/14636100/",
+      "note": {
+        "en": "Abstract and university repository record checked; publisher PDF direct retrieval failed. Seven weight-trained men performed parallel squats with a barbell load equal to body weight. A wooden barrier restricted knee travel in one condition. Restriction decreased estimated static knee torque and increased hip torque. This experiment did not measure injury incidence or prove every depth/load safe. Anatomy explanations are from M1; do not turn torque redistribution into an injury-risk percentage.",
+        "zh": "核对了摘要和大学存档书目；直接请求出版社 PDF 失败。七名有力量训练经验的男性，用等于体重的杠铃负荷做平行深蹲，一种条件用木板限制膝前移。受限时估计的静态膝力矩下降、髋力矩上升。实验没有测伤害发生率，也未证明任何深度、负荷都安全。解剖解释另据 M1；不得把力矩转移写成受伤概率。"
+      }
+    },
+    {
+      "id": "M34",
+      "text": {
+        "en": "Martin R. L., Cibulka M. T., Bolgla L. A., Koc T. A. Jr., Loudon J. K., Manske R. C., Weiss L., Christoforetti J. J., Heiderscheit B. C. Hamstring strain injury in athletes. Journal of Orthopaedic & Sports Physical Therapy 52(3): CPG1–CPG44, 2022. doi:10.2519/jospt.2022.0301.",
+        "zh": "Martin R. L.、Cibulka M. T.、Bolgla L. A.、Koc T. A. Jr.、Loudon J. K.、Manske R. C.、Weiss L.、Christoforetti J. J.、Heiderscheit B. C.《运动员腘绳肌拉伤》，Journal of Orthopaedic & Sports Physical Therapy 52(3): CPG1–CPG44，2022 年。"
+      },
+      "url": "https://www.orthopt.org/uploads/content_files/files/Hamstring_Strain_Injury_in_Athletes.pdf",
+      "note": {
+        "en": "PubMed abstract and search-indexed primary PDF Summary of Recommendations and Diagnosis/Classification (CPG11) checked; direct PDF open returned 403. The guideline covers sports-related overload/overstretch injury of hamstring myofascial or musculotendinous tissues; sudden posterior-thigh pain and lost function warrant clinical assessment. No rehabilitation protocol, diagnostic test or return-to-sport threshold is reproduced in this topic.",
+        "zh": "核对了 PubMed 摘要及搜索索引返回的原始 PDF“建议摘要”和“诊断/分类”（CPG11）；直接打开 PDF 返回 403。指南范围是运动相关超负荷、过度牵拉造成的腘绳肌肌筋膜或肌腱交界组织损伤；突然的大腿后方疼痛和功能下降需要临床评估。本主题不转载康复方案、诊断测试或重返运动阈值。"
+      }
+    },
+    {
+      "id": "M35",
+      "text": {
+        "en": "Chimenti R. L., Neville C., Houck J., Cuddeford T., Carreira D., Martin R. L. Achilles pain, stiffness, and muscle power deficits: midportion Achilles tendinopathy revision – 2024. Journal of Orthopaedic & Sports Physical Therapy 54(12): CPG1–CPG32, 2024. doi:10.2519/jospt.2024.0302.",
+        "zh": "Chimenti R. L.、Neville C.、Houck J.、Cuddeford T.、Carreira D.、Martin R. L.《跟腱疼痛、僵硬与肌力缺陷：跟腱中段腱病指南 2024 年修订》，Journal of Orthopaedic & Sports Physical Therapy 54(12): CPG1–CPG32，2024 年。"
+      },
+      "url": "https://www.orthopt.org/uploads/content_files/files/Achilles_Pain_revision_2024.pdf",
+      "note": {
+        "en": "PubMed citation/abstract and search-indexed primary PDF Imaging/Interventions (CPG10) checked; direct PDF open returned 403. Assessment requires clinical context, and progressive tendon loading is adjusted to individual pain tolerance and functional capacity. Guidance is specific to midportion Achilles tendinopathy and does not automatically apply to insertional pain or rupture. The topic gives no loading dose or treatment plan.",
+        "zh": "核对了 PubMed 书目/摘要及搜索索引返回的原始 PDF“影像/干预”（CPG10）；直接打开 PDF 返回 403。评估要结合临床情境，渐进肌腱负荷按个人疼痛耐受和功能调整。指南针对跟腱中段腱病，不能自动外推到止点痛或断裂。本主题不提供负荷剂量或治疗计划。"
+      }
+    },
+    {
+      "id": "M36",
+      "text": {
+        "en": "American Council on Exercise. Back Squat. ACE Exercise Library, undated; accessed 12 October 2026.",
+        "zh": "美国运动委员会《杠铃背蹲》，ACE 动作资料库，无日期；2026 年 10 月 12 日查阅。"
+      },
+      "url": "https://www.acefitness.org/resources/everyone/exercise-library/11/back-squat/",
+      "note": {
+        "en": "Full technique text read. Supports rack setup, upper-back placement and hip/knee movement. Atlas uses a controllable comfortable depth, not the page’s below-knee example as a universal requirement; catches and reracking cues are editorial safety guidance.",
+        "zh": "读了完整动作文字。支持架内准备、上背放杠及髋膝运动；Atlas 使用可控制的舒服深度，不把页面的低于膝示例当普遍要求。保护杠及回架提示是编辑安全指导。"
+      }
+    },
+    {
+      "id": "M37",
+      "text": {
+        "en": "American Council on Exercise. Goblet Squat. ACE Exercise Library, undated; accessed 12 October 2026.",
+        "zh": "美国运动委员会《高脚杯深蹲》，ACE 动作资料库，无日期；2026 年 10 月 12 日查阅。"
+      },
+      "url": "https://www.acefitness.org/resources/everyone/exercise-library/362/goblet-squat/",
+      "note": {
+        "en": "Full technique text read. Supports one vertical dumbbell close to the chest and hip/knee bending; Atlas does not prescribe one depth for every reader.",
+        "zh": "读了完整动作文字。支持胸前竖持一只哑铃及髋膝屈曲；不规定人人相同的下蹲深度。"
+      }
+    },
+    {
+      "id": "M38",
+      "text": {
+        "en": "American Council on Exercise. Lateral Lunge. ACE Exercise Library, undated; accessed 12 October 2026.",
+        "zh": "美国运动委员会《侧弓步》，ACE 动作资料库，无日期；2026 年 10 月 12 日查阅。"
+      },
+      "url": "https://www.acefitness.org/resources/everyone/exercise-library/364/lateral-lunge/",
+      "note": {
+        "en": "Full technique text read. Atlas describes a supported learning range and a chest-held dumbbell variation; no claim of isolating an adductor.",
+        "zh": "读了完整动作文字。Atlas 描述可控制的学习幅度及胸前持哑铃变式；不声称能孤立某块内收肌。"
+      }
+    },
+    {
+      "id": "M39",
+      "text": {
+        "en": "McCall P. What is the difference between Romanian Deadlift vs Deadlift? American Council on Exercise, 5 October 2021.",
+        "zh": "McCall P.《罗马尼亚硬拉与传统硬拉有什么区别？》，美国运动委员会，2021 年 10 月 5 日。"
+      },
+      "url": "https://www.acefitness.org/resources/pros/expert-articles/7963/what-is-the-difference-between-romanian-deadlift-vs-deadlift/",
+      "note": {
+        "en": "RDL technique section read: start upright, small knee bend, hinge at the hips, keep the spine steady. Anatomical inaccuracies elsewhere (gastrocnemius as knee extensor) and comparative injury claims are not adopted.",
+        "zh": "读了罗马尼亚硬拉技术段：站姿开始、膝微屈、髋铰链、脊柱稳定。未采用页面其他段落的解剖错误（把腓肠肌当伸膝肌）及伤害比较主张。"
+      }
+    },
+    {
+      "id": "M40",
+      "text": {
+        "en": "National Academy of Sports Medicine. Seated Leg Curl. NASM Exercise Library, undated; accessed 12 October 2026.",
+        "zh": "美国国家运动医学学会《坐姿腿弯举》，NASM 动作资料库，无日期；2026 年 10 月 12 日查阅。"
+      },
+      "url": "https://www.nasm.org/resource-center/exercise-library/seated-leg-curl",
+      "note": {
+        "en": "Full page read. Supports seated knee flexion, back support and controlled return. The page’s setup knee angle is inconsistent with its return description; Atlas uses a comfortable near-extended start and does not adopt injury-prevention promises or dose numbers.",
+        "zh": "读了全文。支持坐姿屈膝、背部支撑及控制回程。页面准备时的膝角与回程描述不一致；Atlas 使用舒服的接近伸膝起点，不采用预防受伤承诺或剂量数字。"
+      }
+    },
+    {
+      "id": "M41",
+      "text": {
+        "en": "American Academy of Orthopaedic Surgeons. Foot and Ankle Conditioning Program. OrthoInfo; contributed/updated by Jordan J. Moen, DPT, peer reviewed by Taylor Beahrs, MD. Undated; accessed 12 October 2026.",
+        "zh": "美国骨科医师学会《足与踝训练指南》，OrthoInfo；Jordan J. Moen（物理治疗师）编写/更新，Taylor Beahrs（医师）同行审阅。无日期；2026 年 10 月 12 日查阅。"
+      },
+      "url": "https://www.orthoinfo.org/recovery/foot-and-ankle-conditioning-program",
+      "note": {
+        "en": "Exercises 5 and 9 read: supported heel raises and band dorsiflexion with heel support. This rehabilitation source informs movement mechanics only; its schedule and treatment promises are not general fitness prescriptions. The seated dumbbell load is Atlas’s described variation.",
+        "zh": "读了动作 5 与 9：扶稳提踵、脚跟有支撑的弹力带背屈。康复资料只用来核动作机制，不把其时间表或治疗承诺当通用健身处方。坐姿加哑铃是 Atlas 描述的变式。"
+      }
+    },
+    {
+      "id": "M42",
+      "text": {
+        "en": "NHS inform. Strength and balance exercises. NHS Scotland, last updated 18 June 2024; accessed 12 October 2026.",
+        "zh": "NHS inform《力量与平衡练习》，苏格兰国家卫生服务，2024 年 6 月 18 日更新；2026 年 10 月 12 日查阅。"
+      },
+      "url": "https://www.nhsinform.scot/healthy-living/preventing-falls/keeping-well/strength-and-balance-exercises/",
+      "note": {
+        "en": "Heel-walking instructions read: firm support, lifted forefeet and small controlled steps. Atlas omits the numerical dose and does not present it as an individual falls-treatment plan.",
+        "zh": "读了脚跟行走说明：稳固支撑、前脚掌抬起、小步有控制。未采用剂量数字，也不把它当个体化防跌治疗方案。"
+      }
+    },
+    {
+      "id": "M43",
+      "text": {
+        "en": "East Lancashire Hospitals NHS Trust, Paediatric Physiotherapy. Flat Feet. Patient information and exercise instructions, undated; accessed 12 October 2026.",
+        "zh": "英国东兰开夏医院 NHS 信托儿科物理治疗部《扁平足》，患者资料及动作说明，无日期；2026 年 10 月 12 日查阅。"
+      },
+      "url": "https://elht.nhs.uk/services/paediatric-physiotherapy/information-patients/flat-feet",
+      "note": {
+        "en": "The wall-supported forefoot-lift instruction read. The page calls this a heel raise, but the stated movement is dorsiflexion; Atlas names the movement explicitly. Used for mechanics, not treatment claims or a paediatric dose.",
+        "zh": "读了背靠墙抬前脚掌说明。页面称它为 heel raise，但所述运动是背屈；Atlas 明确命名该运动。只核机制，不采用治疗主张或儿童剂量。"
+      }
+    },
+    {
+      "id": "M44",
+      "text": {
+        "en": "Vigotsky A., Tumminello N. Are the Seated Leg Extension, Leg Curl, and Adduction Machine Exercises Non-Functional or Risky? NSCA Personal Training Quarterly 4(4), June 2017.",
+        "zh": "Vigotsky A., Tumminello N.《坐姿腿屈伸、腿弯举及内收器械训练没有功能或有风险吗？》，NSCA Personal Training Quarterly 4(4)，2017 年 6 月。"
+      },
+      "url": "https://www.nsca.com/education/articles/ptq/are-the-seated-leg-extension-leg-curl-and-adduction-machine-exercises-non-functional-or-risky/",
+      "note": {
+        "en": "Adduction and specificity sections read. Supports distinguishing direct standing cable/band adduction from squat/lunge participation; Atlas adopts no EMG-to-growth or comparative injury claims. Cable-cuff placement and support cues are editorial technique guidance.",
+        "zh": "读了内收及专项性段落。支持区分直接站姿绳索/弹力带内收与深蹲/弓步中的参与；不把肌电转成增肌结论，也不采用伤害比较主张。踝带安装及支撑提示是编辑技术指导。"
+      }
+    },
+    {
+      "id": "M45",
+      "text": {
+        "en": "Catalyst Athletics. Reverse Lunge. Olympic Weightlifting Exercise Library, undated; accessed 12 October 2026.",
+        "zh": "Catalyst Athletics《后撤弓步》，奥林匹克举重动作资料库，无日期；2026 年 10 月 12 日查阅。"
+      },
+      "url": "https://www.catalystathletics.com/exercise/735/Reverse-Lunge/",
+      "note": {
+        "en": "Full technique text read: step back, controlled descent and stable balance. Atlas’s bodyweight variation allows a comfortable depth and small neutral-trunk lean; it does not require everyone to keep the shin vertical or use external load.",
+        "zh": "读了完整技术文字：后撤、控制下降、稳定平衡。Atlas 的徒手变式允许舒服深度及脊柱稳定时的小幅躯干前倾，不要求人人胫骨竖直或加重量。"
+      }
+    },
+    {
+      "id": "M46",
+      "text": {
+        "en": "OPAL Trial Team, in association with South Tees Hospitals NHS Foundation Trust. Standing hip abduction. Published 9 February 2023, updated 3 March 2023; accessed 12 October 2026.",
+        "zh": "OPAL 试验团队（与英国 South Tees 医院 NHS 基金会合作）《站姿髋外展》，2023 年 2 月 9 日发布、3 月 3 日更新；2026 年 10 月 12 日查阅。"
+      },
+      "url": "https://www.opalreturntowork.nhs.uk/exercises/standing-hip-abduction/",
+      "note": {
+        "en": "Full movement text read: support, leg facing forward, sideways lift and slow return; it also describes resistance at the ankle. Atlas’s cable is a resistance variation; this clinical source does not prescribe cable loading or post-operative exercise for the reader.",
+        "zh": "读了完整动作说明：扶稳、腿朝前、向侧面抬及慢回，并描述踝部阻力。Atlas 的绳索是阻力变式；此临床资料不为读者规定绳索负荷或术后训练。"
+      }
+    },
+    {
+      "id": "M47",
+      "text": {
+        "en": "Gray H. Anatomy of the Human Body, 20th ed., ed. Lewis W. H. Philadelphia and New York: Lea & Febiger, 1918 (public domain). Myology: deep back (pp.397–401); thorax including serratus posterior inferior (pp.403–407); muscles connecting upper extremity to vertebral column (pp.432–435); external abdominal oblique (pp.409–410); gluteus maximus (pp.474–475).",
+        "zh": "Gray H.《人体解剖学》第20版，Lewis W. H.编，Lea & Febiger，1918年（公有领域）。肌学：背深肌397–401页；胸部与下后锯肌403–407页；上肢与脊柱之间的肌肉432–435页；腹外斜肌409–410页；臀大肌474–475页。"
+      },
+      "url": "https://archive.org/details/anatomyofhumanbo1918gray",
+      "note": {
+        "en": "Original public-domain text reviewed through Gray reproductions, including https://www.wikimd.org/wiki/The_Deep_Muscles_of_the_Back and https://wikimd.com/wiki/The_Muscles_Connecting_the_Upper_Extremity_to_the_Vertebral_Column; original scan text indexed at https://resources.saylor.org/wwwresources/archived/site/wp-content/uploads/2014/06/BIO302-Anatomy_of_the_Human_Body-Chapter-IV-Fasciae-of-Trunk.pdf. Archive/Bartleby direct access unavailable in this session. Historical terms Sacrospinalis, Iliocostalis dorsi, Longissimus dorsi and Spinalis dorsi mapped to modern erector-spinae names. Gray gives lower six or seven ribs for iliocostalis lumborum and three or four for latissimus; variable attachments retained. Detailed muscle-part borders and fascicle architecture are simplified teaching descriptions.",
+        "zh": "通过格雷公有领域原文转载核对背深肌及上肢与脊柱之间的肌肉，并核对 Saylor 原扫描的索引文字。本次无法直接访问 Archive/Bartleby。历史名称 Sacrospinalis、Iliocostalis dorsi、Longissimus dorsi、Spinalis dorsi 对照现代竖脊肌名称。腰髂肋肌下六或七肋、背阔肌下三或四肋按格雷保留变异范围。肌肉分部界线与纤维类别为简化教学描述。"
+      }
+    },
+    {
+      "id": "M48",
+      "text": {
+        "en": "Gray H. Anatomy of the Human Body, 20th ed., ed. Lewis W. H. Philadelphia and New York: Lea & Febiger, 1918 (public domain). Myology: muscles connecting upper extremity to vertebral column (pp.432–435); shoulder (pp.439–443); arm (pp.443–446); superficial radial forearm muscles including brachioradialis (pp.452–453).",
+        "zh": "Gray H.《人体解剖学》第20版，Lewis W. H.编，Lea & Febiger，1918年（公有领域）。肌学：上肢与脊柱之间的肌肉432–435页；肩部439–443页；上臂443–446页；含肱桡肌的前臂桡侧浅肌452–453页。"
+      },
+      "url": "https://archive.org/details/anatomyofhumanbo1918gray",
+      "note": {
+        "en": "Original Gray shoulder text reproduced at https://www.wikimd.org/wiki/The_Muscles_and_Fasciae_of_the_Shoulder; cross-checked against OpenStax11.5. Teres major ends at the medial lip of the intertubercular groove and is outside the cuff; infraspinatus uses the middle greater-tubercle facet and teres minor its lowest facet. Only anatomical facts are paraphrased. Superficial-back attachments also checked in the original Gray text reproduction linked by M47.",
+        "zh": "通过格雷肩肌原文转载并与 OpenStax11.5交叉核对。大圆肌止于结节间沟内侧唇，不属于肩袖；冈下肌止于大结节中部小面，小圆肌止于最下部小面。只转述解剖事实。 浅层背肌附着同时按M47所列格雷原文转载核对。"
+      }
+    },
+    {
+      "id": "M49",
+      "text": {
+        "en": "Betts J. G., Young K. A., Wise J. A., Johnson E., Poe B., Kruse D. H., Korol O., Johnson J. E., Womble M., DeSaix P. Anatomy and Physiology 2e. Houston: OpenStax, 2022. §11.3, Muscles of the Posterior Neck and the Back, Figure11.15; §11.4, abdominal wall; §11.6, pelvic girdle.",
+        "zh": "Betts J. G.等《解剖学与生理学》第2版，OpenStax，2022年。11.3节后颈与背肌、图11.15；11.4节腹壁；11.6节骨盆带。"
+      },
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/11-3-axial-muscles-of-the-head-neck-and-back",
+      "note": {
+        "en": "§11.3 text read: iliocostalis lateral, longissimus intermediate, spinalis medial; back muscles stabilise and move the vertebral column. Atlas shows a lumbar/thoracic subset, not every deep-back muscle. Detailed attachment text is sourced to Gray, not inferred from image alt text. CC BY-NC-SA4.0; facts only, no figures reproduced.",
+        "zh": "阅读11.3节原文：髂肋肌在外侧，最长肌居中，棘肌在内侧；背肌稳定并移动脊柱。模型仅展示腰胸段的一部分，未包含全部背深肌。详细附着以格雷为据，不据图片替代文字推断。CC BY-NC-SA4.0；只引用事实，没有复制插图。"
+      }
+    },
+    {
+      "id": "M50",
+      "text": {
+        "en": "Vilensky J. A., Baltes M., Weikel L., Fortin J. D., Fourie L. J. Serratus posterior muscles: anatomy, clinical relevance, and function. Clinical Anatomy14(4):237–241,2001. doi:10.1002/ca.1039. PMID11424195.",
+        "zh": "Vilensky J. A.等《后锯肌：解剖、临床意义与功能》，Clinical Anatomy14(4):237–241，2001年。doi:10.1002/ca.1039。"
+      },
+      "url": "https://pubmed.ncbi.nlm.nih.gov/11424195/",
+      "note": {
+        "en": "Abstract read. Challenges the conventional respiratory explanation and proposes proprioception. Neither mechanism is presented as established; no isolated training benefit is claimed.",
+        "zh": "阅读摘要。质疑传统呼吸作用解释，并提出本体感觉假说。两者均不当作定论，也不声称可以单独训练下后锯肌。"
+      }
+    },
+    {
+      "id": "M51",
+      "text": {
+        "en": "Youdas J. W., Amundson C. L., Cicero K. S., Hahn J. J., Harezlak D. T., Hollman J. H. Surface electromyographic activation patterns and elbow joint motion during a pull-up, chin-up, or perfect-pullup™ rotational exercise. Journal of Strength and Conditioning Research24(12):3404–3414,2010. doi:10.1519/JSC.0b013e3181f1598c. PMID21068680.",
+        "zh": "Youdas J. W.等《引体向上、反握引体向上及旋转握把引体动作的表面肌电激活模式与肘关节运动》，JSCR24(12):3404–3414，2010年。"
+      },
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21068680/",
+      "note": {
+        "en": "Abstract read:21 men and4 women; muscle activity and elbow movement across tested pull-up variants. Used for co-activity of latissimus and arm muscles, not isolation or hypertrophy. Training status and unreported electrode/protocol details are not inferred.",
+        "zh": "阅读摘要：21名男性与4名女性，比较引体动作的肌肉活动与肘运动。用于背阔肌和手臂同时出力的说明，不用于孤立训练或增肌结论；未推断未报告的训练经历、电极及实验细节。"
+      }
+    },
+    {
+      "id": "M52",
+      "text": {
+        "en": "Lusk S. J., Hale B. D., Russell D. M. Grip width and forearm orientation effects on muscle activity during the lat pull-down. Journal of Strength and Conditioning Research24(7):1895–1900,2010. doi:10.1519/JSC.0b013e3181ddb0ab. PMID20543740.",
+        "zh": "Lusk S. J.、Hale B. D.、Russell D. M.《高位下拉时握距与前臂姿势对肌肉活动的影响》，JSCR24(7):1895–1900，2010年。"
+      },
+      "url": "https://pubmed.ncbi.nlm.nih.gov/20543740/",
+      "note": {
+        "en": "Abstract read:12 healthy men, front pull-downs at70%1RM, narrow/wide and pronated/supinated grips. Pronated elicited greater latissimus EMG than supinated; tested widths did not affect that result. No universal grip or growth recommendation follows.",
+        "zh": "阅读摘要：12名健康男性，以70%1RM做前方高位下拉，比较窄/宽、正/反握。正握的背阔肌肌电较高；所测握距未影响该结果。不据此提出适合所有人的握法或增肌建议。"
+      }
+    },
+    {
+      "id": "M53",
+      "text": {
+        "en": "Reinold M. M., Wilk K. E., Fleisig G. S., Zheng N., Barrentine S. W., Chmielewski T., Cody R. C., Jameson G. G., Andrews J. R. Electromyographic analysis of the rotator cuff and deltoid musculature during common shoulder external rotation exercises. Journal of Orthopaedic & Sports Physical Therapy34(7):385–394,2004. doi:10.2519/jospt.2004.34.7.385. PMID15296366.",
+        "zh": "Reinold M. M.等《常用肩关节外旋动作中肩袖及三角肌的肌电分析》，JOSPT34(7):385–394，2004年。"
+      },
+      "url": "https://pubmed.ncbi.nlm.nih.gov/15296366/",
+      "note": {
+        "en": "Abstract read:intramuscular EMG in10 healthy subjects across7 exercises. Side-lying external rotation had the highest measured infraspinatus and teres-minor EMG among those conditions. The sketch does not claim to reproduce the experiment or prescribe rehabilitation.",
+        "zh": "阅读摘要：10名健康受试者，7种动作，使用肌内电极。侧卧外旋在所测条件中冈下肌和小圆肌肌电最高。草图不声称复现实验，也不作为康复处方。"
+      }
+    },
+    {
+      "id": "M54",
+      "text": {
+        "en": "American Council on Exercise. Exercise Library: Bent-Over Row (entry 12), Single-arm Row (126), Pull-ups (191), Seated Lat Pulldown (158), Standing Shrug (75), and Prone Scapular Stabilization Series—Y formation (249). Undated; accessed 12 October 2026.",
+        "zh": "美国运动委员会（ACE）动作资料库：《俯身划船》（条目 12）、《单臂划船》（126）、《引体向上》（191）、《坐姿高位下拉》（158）、《站姿耸肩》（75）、《俯卧肩胛稳定系列——Y 字形》（249）。未署日期，2026 年 10 月 12 日查阅。"
+      },
+      "url": "https://www.acefitness.org/resources/everyone/exercise-library/",
+      "note": {
+        "en": "Read individual technique pages: https://www.acefitness.org/resources/everyone/exercise-library/12/bent-over-row/ ; /126/single-arm-row/ ; /191/pull-ups/ ; /158/seated-lat-pulldown/ ; /75/standing-shrug/ ; /249/prone-scapular-shoulder-stabilization-series-i-y-t-w-o-formation/ . Atlas steps are original short teaching instructions, with assisted entry/exit and comfortable ranges. The Y card adapts the arm path to chest support on a low incline; it does not reproduce ACE's floor protocol or dose. Scapular motion follows anatomy; no permanent down-and-back fixation is claimed. No ACE images or quoted text are reused.",
+        "zh": "已读各条目技术页（英文备注列出路径）。Atlas 步骤为自行编写的简短教学说明，补充辅助上下器械和舒服幅度。Y 字上举改为低角度凳上胸部支撑，并非复制 ACE 的地面方案或剂量；肩胛骨按解剖规律活动，不要求一直下压后夹。未使用 ACE 图片或原文。"
+      }
+    },
+    {
+      "id": "M55",
+      "text": {
+        "en": "Huey M. and Physiopedia contributors. Deadlift Exercise. Physiopedia, undated; sections Mechanics, Muscles Used, and Conventional Deadlift; accessed 12 October 2026.",
+        "zh": "Huey M. 及 Physiopedia 编者，《硬拉练习》，未署日期；“运动机制”“参与肌肉”“常规硬拉”节，2026 年 10 月 12 日查阅。"
+      },
+      "url": "https://www.physio-pedia.com/Deadlift_Exercise",
+      "note": {
+        "en": "Page retrieved through indexed text at https://www.physio-pedia.com/index.php?section=8&title=Deadlift_Exercise&veaction=edit . Technique supports hip and knee extension with the spine held neutral, bar over midfoot, arms outside the legs, and the reverse path on lowering. Atlas does not teach the Valsalva manoeuvre or reuse the page's rehabilitation recommendations or EMG rankings. Main hip/knee movers are distinguished from mainly isometric erector stabilisation; the back view is a partial muscle map.",
+        "zh": "通过英文备注所列索引页面读取。核对了屈髋屈膝起始、杠在脚中部上方、双臂在腿外、髋膝伸展、脊柱保持中立及逆向下放。Atlas 不教授瓦尔萨尔瓦动作，也不沿用该页康复建议或肌电排名；区分髋膝主动肌与主要等长稳定的竖脊肌，背部视图只列部分肌肉。"
+      }
+    },
+    {
+      "id": "M56",
+      "text": {
+        "en": "Ruth W., Gourley B. Strength Training Practices for Rowing—Part 1—Reducing Injuries. NSCA Coach 6(4): 6–15, 2019. Figure descriptions, pp. 11–12, especially Figure 5 (face pull).",
+        "zh": "Ruth W.、Gourley B.《赛艇力量训练实践——第一部分：减少伤害》，NSCA Coach 6(4): 6–15，2019 年；第 11–12 页图示说明，尤其图 5（面拉）。"
+      },
+      "url": "https://rowingstronger.com/wp-content/uploads/2020/11/Part-1-Issue-6.4.11110753.pdf",
+      "note": {
+        "en": "Read the original NSCA article PDF hosted by author Will Ruth. Figure 5 describes a standing face-height rope/band pull with elbow flexion and scapular control. Atlas uses a light cable version with a comfortable external-rotation finish as an anatomy teaching variant; it is not a rehabilitation prescription. The article's rowing-specific injury statistics are not generalised to ordinary strength training.",
+        "zh": "已读作者 Will Ruth 托管的 NSCA 原文 PDF。图 5 描述站姿、面高绳索或弹力带拉动、屈肘与肩胛控制。Atlas 使用轻负重绳索、舒服外旋收尾的解剖教学版本，不作为康复处方；未把赛艇伤害数据推广到普通力量训练。"
+      }
+    },
+    {
+      "id": "M57",
+      "text": {
+        "en": "World Health Organization. Low back pain. Fact sheet, 19 June 2023.",
+        "zh": "世界卫生组织《腰痛》，事实清单，2023 年 6 月 19 日。"
+      },
+      "url": "https://www.who.int/news-room/fact-sheets/detail/low-back-pain",
+      "note": {
+        "en": "Fact sheet read on 12 October 2026. Supports the location and nonspecific presentation of low back pain and person-centred rehabilitation; no treatment dose or diagnosis is taken from it.",
+        "zh": "2026 年 10 月 12 日阅读事实清单。支持腰痛位置、非特异性表现及以个人为中心的康复说明；没有据此给出治疗剂量或诊断。"
+      }
+    },
+    {
+      "id": "M58",
+      "text": {
+        "en": "Swain C. T. V., Pan F., Owen P. J., Schmidt H., Belavy D. L. No consensus on causality of spine postures or physical exposure and low back pain: A systematic review of systematic reviews. Journal of Biomechanics 102:109312, 2020. doi:10.1016/j.jbiomech.2019.08.006. PMID:31451200.",
+        "zh": "Swain C. T. V.、Pan F.、Owen P. J.、Schmidt H.、Belavy D. L.《脊柱姿势或身体负荷与腰痛之间尚无因果共识：系统综述的系统综述》，Journal of Biomechanics 102:109312，2020 年。doi:10.1016/j.jbiomech.2019.08.006，PMID:31451200。"
+      },
+      "url": "https://pubmed.ncbi.nlm.nih.gov/31451200/",
+      "note": {
+        "en": "Abstract read. Included 41 systematic reviews; positive and null associations were reported, and causality was not established. Used to distinguish association from cause, not to declare all physical exposures harmless.",
+        "zh": "阅读摘要。纳入 41 篇系统综述，既有正关联，也有无关联结果，未建立因果关系。用于区分关联与原因，不表示所有身体负荷都无害。"
+      }
+    },
+    {
+      "id": "M59",
+      "text": {
+        "en": "Betts J. G., Young K. A., Wise J. A., Johnson E., Poe B., Kruse D. H., Korol O., Johnson J. E., Womble M., DeSaix P. Anatomy and Physiology 2e. Houston: OpenStax, 2022. Section 11.6, Muscles of the Pelvic Girdle and Lower Limbs, Figures 11.29–11.31.",
+        "zh": "Betts J. G. 等，《解剖学与生理学》第 2 版，休斯敦 OpenStax，2022 年；第 11.6 节“骨盆带与下肢肌肉”，图 11.29–11.31。"
+      },
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/11-6-appendicular-muscles-of-the-pelvic-girdle-and-lower-limbs",
+      "note": {
+        "en": "Read section text: gluteus maximus extends and laterally rotates the femur; the posterior thigh muscles contribute hip extension, while quadriceps extend the knee. Used to explain why conventional deadlift and the hip-dominant back-extension variant have lower-limb movers although the back view shows their spinal stabilisers. CC BY-NC-SA 4.0; facts only, no text or figures copied.",
+        "zh": "已读正文：臀大肌伸髋并使股骨外旋；大腿后群参与伸髋，股四头肌伸膝。用于解释常规硬拉与髋主导背伸展为何由下肢肌产生运动，而背部视图显示脊柱稳定肌。CC BY-NC-SA 4.0；仅引用事实，未复制文字或图。"
+      }
+    },
+    {
+      "id": "M60",
+      "text": {
+        "en": "The StayWell Company. Shoulder External Rotation, Side-Lying (Strength). Northwestern Medicine Health Library. Reviewed by Wojcik S., Joseph T. N., Bellendir T.; last reviewed 1 January 2025; accessed 12 October 2026.",
+        "zh": "StayWell Company《侧卧肩关节外旋（力量）》，Northwestern Medicine 健康资料库；Wojcik S.、Joseph T. N.、Bellendir T. 审校，2025 年 1 月 1 日复核；2026 年 10 月 12 日查阅。"
+      },
+      "url": "https://encyclopedia.nm.org/Library/HealthSheets/3,S,90811",
+      "note": {
+        "en": "Read the technique text: side support, elbow on a towel, bent elbow, controlled external rotation, and no backward torso roll. Atlas mirrors the working side to the left and writes an original general exercise card with principles only. The source's numerical rehabilitation dose is not used. The card is not a treatment plan.",
+        "zh": "已读技术说明，核对侧卧支撑、肘下垫毛巾、屈肘、受控外旋及避免躯干后滚。Atlas 改为左臂示范，自行编写一般练习卡，只写原则；未采用来源的数字康复剂量，也不作为治疗计划。"
+      }
+    },
+    {
+      "id": "M61",
+      "text": {
+        "en": "Schellenberg F., Schmid N., Häberle R., Hörterer N., Taylor W. R., Lorenzetti S. Loading conditions in the spine, hip and knee during different executions of back extension exercises. BMC Sports Science, Medicine and Rehabilitation 9:10, 2017. doi:10.1186/s13102-017-0074-0. Background and Methods (Figure 1; Table 1).",
+        "zh": "Schellenberg F. 等，《不同背伸展方式中脊柱、髋和膝的负荷条件》，BMC Sports Science, Medicine and Rehabilitation 9:10，2017 年，doi:10.1186/s13102-017-0074-0；背景、方法、图 1 与表 1。"
+      },
+      "url": "https://link.springer.com/article/10.1186/s13102-017-0074-0",
+      "note": {
+        "en": "Read full text. The study distinguished hip-dynamic/spine-stabilised and spine-dynamic/hip-stabilised back extension, using a sloping support with hip centre above its edge. Atlas explicitly teaches the hip-dominant variant. Actual measured spine motion was not zero even when subjects tried to stabilise it; steady is a teaching goal, not a claim of perfectly rigid anatomy. No superiority, therapy or numerical training prescription is derived from its results.",
+        "zh": "已读全文。研究区分髋运动而脊柱稳定、脊柱运动而髋稳定两种背伸展，斜面支撑边缘在髋关节中心下方。Atlas 明确教授髋主导版本；受试者尝试稳定时实际脊柱运动也不为零，因此“稳住”是教学目标，不表示人体绝对刚性。未由结果推出最好动作、治疗方法或数字训练处方。"
+      }
+    },
+    {
+      "id": "M62",
+      "text": {
+        "en": "Baylor University. Inverted Row. Strength and conditioning exercise handout, undated; accessed 12 October 2026.",
+        "zh": "贝勒大学《反向划船》，力量训练动作说明单，未署日期；2026 年 10 月 12 日查阅。"
+      },
+      "url": "https://www.baylor.edu/content/services/document.php/86948.pdf",
+      "note": {
+        "en": "University handout indexed text describes the overhand grip and back/biceps pulling exercise. Used with anatomical shoulder/elbow actions to write original steps; no article or image copied. The 3D view illustrates arm paths only, without solving fixed-bar body translation.",
+        "zh": "大学说明单的索引文本描述正握及背部、肱二头肌共同拉动，结合肩肘解剖作用编写步骤；未复制原文或图片。三维视图仅示意手臂路径，不模拟固定横杆下的全身位移。"
+      }
+    },
+    {
+      "text": {
+        "en": "Betts J. G., Young K. A., Wise J. A., Johnson E., Poe B., Kruse D. H., Korol O., Johnson J. E., Womble M., DeSaix P. Anatomy and Physiology 2e. Houston: OpenStax, 2022. §11.5, Muscles That Move the Forearm and Muscles That Move the Wrist, Hand, and Fingers; Figures 11.25–11.27 and Table 11.9.",
+        "zh": "Betts J. G. 等《解剖学与生理学》第 2 版，OpenStax，2022 年。第 11.5 节：带动前臂及腕、手、手指的肌肉；图 11.25–11.27、表 11.9。"
+      },
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/11-5-muscles-of-the-pectoral-girdle-and-upper-limbs",
+      "note": {
+        "en": "Section text and tables reviewed 12 October 2026. Biceps flexes and supinates; brachialis and brachioradialis flex the elbow. Detailed attachments cross-checked against Gray. The image alt text incorrectly says supinator turns palm down; that sentence is rejected. The deep anterior and posterior forearm muscles are outside this model. CC BY-NC-SA 4.0; only facts paraphrased.",
+        "zh": "2026 年 10 月 12 日核读正文、表格。肱二头肌屈肘并旋后，肱肌和肱桡肌屈肘。精确附着另与格雷核对。图片替代文字把旋后肌误写为掌心向下，该句不采用。模型未纳入前臂前后深层肌。CC BY-NC-SA 4.0，仅转述事实。"
+      },
+      "id": "M63"
+    },
+    {
+      "text": {
+        "en": "American Council on Exercise. Bicep Curl. ACE Exercise Library, undated; accessed 12 October 2026.",
+        "zh": "美国运动委员会（ACE）动作资料库《肱二头肌弯举》，未标日期；2026 年 10 月 12 日核读。"
+      },
+      "url": "https://www.acefitness.org/resources/everyone/exercise-library/70/bicep-curl/",
+      "note": {
+        "en": "Full technique text read. Used for setup, controlled movement and wrist/upper-arm positioning. Atlas variations are described in the cards; no numerical dose, isolation ranking or growth claim is adopted. Keyframe angles are Atlas display choices, not prescribed ranges of motion.",
+        "zh": "阅读了完整动作文字，用于准备、控制及腕与上臂位置。Atlas 变式在卡片中说明；不采用剂量数字、孤立程度排名或增肌主张。关键帧角度为展示选择，不是活动度处方。"
+      },
+      "id": "M64"
+    },
+    {
+      "text": {
+        "en": "American Council on Exercise. Hammer Curl. ACE Exercise Library, undated; accessed 12 October 2026.",
+        "zh": "美国运动委员会（ACE）动作资料库《锤式弯举》，未标日期；2026 年 10 月 12 日核读。"
+      },
+      "url": "https://www.acefitness.org/resources/everyone/exercise-library/10/hammer-curl/",
+      "note": {
+        "en": "Full technique text read. Used for setup, controlled movement and wrist/upper-arm positioning. Atlas variations are described in the cards; no numerical dose, isolation ranking or growth claim is adopted. Keyframe angles are Atlas display choices, not prescribed ranges of motion.",
+        "zh": "阅读了完整动作文字，用于准备、控制及腕与上臂位置。Atlas 变式在卡片中说明；不采用剂量数字、孤立程度排名或增肌主张。关键帧角度为展示选择，不是活动度处方。"
+      },
+      "id": "M65"
+    },
+    {
+      "text": {
+        "en": "American Council on Exercise. Reverse Bicep Curl. ACE Exercise Library, undated; accessed 12 October 2026.",
+        "zh": "美国运动委员会（ACE）动作资料库《正握弯举》，未标日期；2026 年 10 月 12 日核读。"
+      },
+      "url": "https://www.acefitness.org/resources/everyone/exercise-library/310/reverse-bicep-curl/",
+      "note": {
+        "en": "Full technique text read. Used for setup, controlled movement and wrist/upper-arm positioning. Atlas variations are described in the cards; no numerical dose, isolation ranking or growth claim is adopted. Keyframe angles are Atlas display choices, not prescribed ranges of motion.",
+        "zh": "阅读了完整动作文字，用于准备、控制及腕与上臂位置。Atlas 变式在卡片中说明；不采用剂量数字、孤立程度排名或增肌主张。关键帧角度为展示选择，不是活动度处方。"
+      },
+      "id": "M66"
+    },
+    {
+      "text": {
+        "en": "American Council on Exercise. Chin-ups. ACE Exercise Library, undated; accessed 12 October 2026.",
+        "zh": "美国运动委员会（ACE）动作资料库《反握引体向上》，未标日期；2026 年 10 月 12 日核读。"
+      },
+      "url": "https://www.acefitness.org/resources/everyone/exercise-library/190/chin-ups/",
+      "note": {
+        "en": "Full technique text read. Used for setup, controlled movement and wrist/upper-arm positioning. Atlas variations are described in the cards; no numerical dose, isolation ranking or growth claim is adopted. Keyframe angles are Atlas display choices, not prescribed ranges of motion.",
+        "zh": "阅读了完整动作文字，用于准备、控制及腕与上臂位置。Atlas 变式在卡片中说明；不采用剂量数字、孤立程度排名或增肌主张。关键帧角度为展示选择，不是活动度处方。"
+      },
+      "id": "M67"
+    },
+    {
+      "text": {
+        "en": "American Council on Exercise. Triceps Extension. ACE Exercise Library, undated; accessed 12 October 2026.",
+        "zh": "美国运动委员会（ACE）动作资料库《肱三头肌伸肘》，未标日期；2026 年 10 月 12 日核读。"
+      },
+      "url": "https://www.acefitness.org/resources/everyone/exercise-library/74/triceps-extension/",
+      "note": {
+        "en": "Full technique text read. Used for setup, controlled movement and wrist/upper-arm positioning. Atlas variations are described in the cards; no numerical dose, isolation ranking or growth claim is adopted. Keyframe angles are Atlas display choices, not prescribed ranges of motion.",
+        "zh": "阅读了完整动作文字，用于准备、控制及腕与上臂位置。Atlas 变式在卡片中说明；不采用剂量数字、孤立程度排名或增肌主张。关键帧角度为展示选择，不是活动度处方。"
+      },
+      "id": "M68"
+    },
+    {
+      "text": {
+        "en": "American Council on Exercise. Wrist Curl — Extension. ACE Exercise Library, undated; accessed 12 October 2026.",
+        "zh": "美国运动委员会（ACE）动作资料库《伸腕》，未标日期；2026 年 10 月 12 日核读。"
+      },
+      "url": "https://www.acefitness.org/resources/everyone/exercise-library/29/wrist-curl-extension/",
+      "note": {
+        "en": "Full technique text read. Used for setup, controlled movement and wrist/upper-arm positioning. Atlas variations are described in the cards; no numerical dose, isolation ranking or growth claim is adopted. Keyframe angles are Atlas display choices, not prescribed ranges of motion.",
+        "zh": "阅读了完整动作文字，用于准备、控制及腕与上臂位置。Atlas 变式在卡片中说明；不采用剂量数字、孤立程度排名或增肌主张。关键帧角度为展示选择，不是活动度处方。"
+      },
+      "id": "M69"
+    },
+    {
+      "text": {
+        "en": "American Council on Exercise. Wrist Curl — Flexion. ACE Exercise Library, undated; accessed 12 October 2026.",
+        "zh": "美国运动委员会（ACE）动作资料库《屈腕》，未标日期；2026 年 10 月 12 日核读。"
+      },
+      "url": "https://www.acefitness.org/resources/everyone/exercise-library/30/wrist-curl-flexion/",
+      "note": {
+        "en": "Full technique text read. Used for setup, controlled movement and wrist/upper-arm positioning. Atlas variations are described in the cards; no numerical dose, isolation ranking or growth claim is adopted. Keyframe angles are Atlas display choices, not prescribed ranges of motion.",
+        "zh": "阅读了完整动作文字，用于准备、控制及腕与上臂位置。Atlas 变式在卡片中说明；不采用剂量数字、孤立程度排名或增肌主张。关键帧角度为展示选择，不是活动度处方。"
+      },
+      "id": "M70"
+    },
+    {
+      "text": {
+        "en": "Physiopedia contributors. Pronator Teres. Physiopedia, continuously edited; anatomy, palpation and strength-assessment sections, accessed 12 October 2026.",
+        "zh": "Physiopedia 编者《旋前圆肌》，持续更新；2026 年 10 月 12 日核读解剖、触诊及力量评估段。"
+      },
+      "url": "https://www.physio-pedia.com/Pronator_Teres",
+      "note": {
+        "en": "Cross-checks humeral/ulnar origins, midshaft lateral radial insertion and pronation with assisted elbow flexion. Resistance is applied to the distal forearm above the wrist. Atlas adapts this as gentle self-resistance for movement learning, not a diagnostic test or treatment.",
+        "zh": "核对肱头、尺头起点，桡骨中段外侧止点及旋前、协助屈肘作用。阻力加在腕上方的远端前臂。Atlas 改为轻柔自我抗阻来学习动作，不作为诊断测试或治疗。"
+      },
+      "id": "M71"
+    },
+    {
+      "text": {
+        "en": "Caumes M., Goislard de Monsabert B., Hauraix H., Berton E., Vigouroux L. Complex couplings between joints, muscles and performance: the role of the wrist in grasping. Scientific Reports 9: 19314, 2019. doi:10.1038/s41598-019-55443-w.",
+        "zh": "Caumes M. 等《关节、肌肉与表现之间的复杂耦合：腕在抓握中的作用》，Scientific Reports 9:19314，2019 年。doi:10.1038/s41598-019-55443-w。"
+      },
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6920170/",
+      "note": {
+        "en": "Full text read. Sixteen volunteers performed maximal cylindrical-handle grips with three diameters and four wrist postures; FDS, EDC, FCR and ECR activity was measured. Supports grip coordination only. This was not a curl-training or hypertrophy study; muscle-card exercise links for extensor digitorum indicate an indirect wrist/grip task, not proved growth.",
+        "zh": "阅读全文。16 名志愿者以三种直径及四种腕姿做最大圆柱柄抓握，测指浅屈肌、指伸肌、桡侧腕屈肌和桡侧腕伸肌活动。只支持握持协调。这不是弯举训练或增肌研究；指伸肌动作链接表示间接腕部与握持任务，不是已证实的增肌。"
+      },
+      "id": "M72"
+    },
+    {
+      "text": {
+        "en": "American Academy of Orthopaedic Surgeons. Tennis Elbow (Lateral Epicondylitis). OrthoInfo, written and/or reviewed by a member of American Shoulder and Elbow Surgeons; undated, accessed 12 October 2026.",
+        "zh": "美国骨科医师学会（AAOS）OrthoInfo《网球肘（肱骨外上髁炎）》，美国肩肘外科医师学会成员撰写或审校；未标日期，2026 年 10 月 12 日核读。"
+      },
+      "url": "https://www.orthoinfo.org/diseases--conditions/tennis-elbow-lateral-epicondylitis/",
+      "note": {
+        "en": "Full patient-information text read. ECRB/common extensor tendon is commonly involved; repetitive gripping or wrist extension can load it, including work unrelated to tennis. The chapter gives general anatomy and reasons for assessment, not a diagnosis, rehabilitation dose or treatment.",
+        "zh": "阅读完整患者资料。常涉及桡侧腕短伸肌及共同伸肌腱，重复握持或伸腕可增加负荷，工作也可涉及。本章只讲一般解剖和求诊理由，不提供诊断、康复剂量或治疗。"
+      },
+      "id": "M73"
+    },
+    {
+      "text": {
+        "en": "American Academy of Orthopaedic Surgeons. Biceps Tendon Tear at the Elbow. OrthoInfo, written and/or reviewed by a member of American Shoulder and Elbow Surgeons; undated, accessed 12 October 2026.",
+        "zh": "美国骨科医师学会（AAOS）OrthoInfo《肘部肱二头肌腱撕裂》，美国肩肘外科医师学会成员撰写或审校；未标日期，2026 年 10 月 12 日核读。"
+      },
+      "url": "https://www.orthoinfo.org/diseases--conditions/biceps-tendon-tear-at-the-elbow/",
+      "note": {
+        "en": "Full patient-information text read. A resisting flexed elbow forced toward extension may tear the distal tendon; a pop, bruising and weakness in palm-up turning warrant assessment. No treatment recommendations or numerical prognosis is reproduced.",
+        "zh": "阅读完整患者资料。抗阻屈肘被外力拉直可能撕裂远端肌腱；弹响、淤青及旋后无力需要评估。未转载治疗建议或数字预后。"
+      },
+      "id": "M74"
+    },
+    {
+      "id": "M75",
+      "text": {
+        "en": "Park J. H., Rhyu I. J., Lim H. K., Cha J. H., Shin G. J., Rhim H. C., Kim D. H. Which Approach Is Most Optimal for Needle Electromyographic Examination of the Biceps Femoris Short Head: Medial or Lateral? Annals of Rehabilitation Medicine 45(1):42–48, 2021. doi:10.5535/arm.20092.",
+        "zh": "Park J. H. 等，《股二头肌短头针肌电检查的最佳进针位置：内侧还是外侧？》，Annals of Rehabilitation Medicine 45(1):42–48，2021 年。doi:10.5535/arm.20092。"
+      },
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7960956/",
+      "note": {
+        "en": "Indexed original results and PubMed methods/citation read; direct publisher/PMC access challenged. Twenty-one dissected lower limbs. The result describes long-head unipennate arrangement and a convergent short head; used for morphology only, with no needle-placement instructions or universal pennation measurements.",
+        "zh": "读了索引提供的原论文结果及 PubMed 方法、书目；直接出版社/PMC 访问受限。解剖了 21 条下肢。结果描述长头单羽状排列与短头汇聚形态；只用于形态，不提供进针说明或普遍羽状角测量值。"
+      }
+    },
+    {
+      "id": "M76",
+      "text": {
+        "en": "Watura C., De La Hoz Polo M., Amiras D. Popeye sign of the semimembranosus. BJR Case Reports 4(3):20170122, 2018. doi:10.1259/bjrcr.20170122.",
+        "zh": "Watura C., De La Hoz Polo M., Amiras D.《半膜肌的 Popeye 征》，BJR Case Reports 4(3):20170122，2018 年。doi:10.1259/bjrcr.20170122。"
+      },
+      "url": "https://academic.oup.com/bjrcr/article/4/3/20170122/7243903",
+      "note": {
+        "en": "Full original article read; discussion and Figure 5 describe proximal unipennate regions and a distal bipennate region. Atlas uses this only to qualify the regional architecture, not to infer incidence, treatment or diagnosis from this single case.",
+        "zh": "读了原论文全文；讨论及图 5 描述近端单羽状区、远端双羽状区。Atlas 只用于限定分区纤维排列，不从单个病例推断发病率、治疗或诊断。"
+      }
+    },
+    {
+      "id": "M77",
+      "text": {
+        "en": "Takeda K., Kato K., Ichimura K., Sakai T. Unique morphological architecture of the hamstring muscles and its functional relevance revealed by analysis of isolated muscle specimens and quantification of structural parameters. Journal of Anatomy 243:284–296, 2023. doi:10.1111/joa.13860.",
+        "zh": "Takeda K., Kato K., Ichimura K., Sakai T.《腘绳肌的形态结构及功能意义：离体肌肉标本与结构参数分析》，Journal of Anatomy 243:284–296，2023 年。doi:10.1111/joa.13860。"
+      },
+      "url": "https://doi.org/10.1111/joa.13860",
+      "note": {
+        "en": "Original paper PDF read from Juntendo institutional repository (https://jair.repo.nii.ac.jp/record/2002936/files/MDK2621-zenbunpu.pdf), especially Results 3.2 and Discussion 4.1. Distinguishes spindle-shaped bellies from pennate fibre arrangement; a single schema class is an educational simplification.",
+        "zh": "从顺天堂大学机构库读了原论文 PDF（https://jair.repo.nii.ac.jp/record/2002936/files/MDK2621-zenbunpu.pdf），重点为结果 3.2 与讨论 4.1。区分梭形肌腹外形和羽状纤维排列；数据中的单一分类是教学简化。"
+      }
+    },
+    {
+      "id": "M78",
+      "text": {
+        "en": "American Council on Exercise. Lateral raise. ACE Exercise Library, undated. Accessed 12 October 2026.",
+        "zh": "美国运动委员会（ACE）《侧平举》，ACE 动作资料库，未标出版日期；2026 年 10 月 12 日访问。"
+      },
+      "url": "https://www.acefitness.org/resources/everyone/exercise-library/26/lateral-raise/",
+      "note": {
+        "en": "Technique page read. Supports light dumbbells, steady trunk, slightly bent elbows, controlled lifting and lowering. The card uses a slightly forward arm path and allows natural scapular motion; this is a stated teaching variation, not the page's instruction to hold the shoulder blades down and back or a universal medical safety angle.",
+        "zh": "核读动作技术页，用于轻哑铃、稳定躯干、肘微屈及受控抬起和放下。本卡选略靠前的抬臂路线，允许肩胛骨自然活动；这是明确的教学版本，不沿用原页始终压住并后缩肩胛骨的提示，也不宣称某个角度对所有人都具有医疗安全性。"
+      }
+    },
+    {
+      "id": "M79",
+      "text": {
+        "en": "Saeterbakken A. H., Fimland M. S. Effects of body position and loading modality on muscle activity and strength in shoulder presses. Journal of Strength and Conditioning Research 27(7): 1824–1831, 2013. doi:10.1519/JSC.0b013e318276b873.",
+        "zh": "Saeterbakken A. H., Fimland M. S.《推举体位与负重器械对肌肉活动及力量的影响》，JSCR 27(7): 1824–1831，2013 年。doi:10.1519/JSC.0b013e318276b873。"
+      },
+      "url": "https://pubmed.ncbi.nlm.nih.gov/23096062/",
+      "note": {
+        "en": "Abstract read. 15 healthy men; seated and standing barbell and dumbbell presses at 80 % of the maximum for each condition. EMG and maximum strength changed with stability requirements; no muscle-growth outcome was measured.",
+        "zh": "核读摘要。15 名健康男性比较坐姿、站姿的杠铃与哑铃推举，负荷为各条件自身最大重量的 80 %。肌电与最大力量随稳定要求而变化；研究没有测量增肌结果。"
+      }
+    },
+    {
+      "id": "M80",
+      "text": {
+        "en": "American Academy of Orthopaedic Surgeons. Rotator cuff and shoulder conditioning program. OrthoInfo / American Shoulder and Elbow Surgeons patient education, undated. Accessed 12 October 2026.",
+        "zh": "美国骨科医师学会（AAOS）《肩袖与肩部调理训练计划》，OrthoInfo／美国肩肘外科医师学会患者教育资料，未标出版日期；2026 年 10 月 12 日访问。"
+      },
+      "url": "https://www.orthoinfo.org/recovery/rotator-cuff-and-shoulder-conditioning-program/",
+      "note": {
+        "en": "Technique and precautions read, especially internal/external rotation with the elbow by the side and controlled return. General fitness cards adapt the movement to cables; they do not reproduce the rehabilitation dosage or replace professional assessment.",
+        "zh": "核读动作技术及注意事项，重点为肘贴体侧的内旋、外旋与受控回程。健身卡把动作改为绳索版本，不复制康复剂量，也不替代专业评估。"
+      }
+    },
+    {
+      "id": "M81",
+      "text": {
+        "en": "National Academy of Sports Medicine. Pike push-up. NASM Exercise Library, undated. Accessed 12 October 2026.",
+        "zh": "美国国家运动医学学会（NASM）《折髋俯卧撑》，NASM 动作资料库，未标出版日期；2026 年 10 月 12 日访问。"
+      },
+      "url": "https://www.nasm.org/resource-center/exercise-library/pike-push-up",
+      "note": {
+        "en": "Full technique page read. Inverted V, controlled elbow bend and press, anterior-deltoid emphasis, no sagging hips. NASM calls it advanced and advises prior push-up control; the card keeps that caution and does not import its sets and repetitions.",
+        "zh": "核读完整动作页：倒 V 体位、受控屈肘与推回、三角肌前部为重点、髋部不塌。NASM 将其列为较高级动作，并要求先学会控制俯卧撑；本卡保留这项提醒，不引入原页组次。"
+      }
+    },
+    {
+      "id": "M82",
+      "text": {
+        "en": "Linkul R. Resistance training progressions for the older adult—pulls and rows. NSCA Personal Training Quarterly 9(4): 14–20, 2022; website posted February 2023.",
+        "zh": "Linkul R.《老年人力量训练进阶：下拉与划船》，NSCA Personal Training Quarterly 9(4): 14–20，2022 年；网页发布于 2023 年 2 月。"
+      },
+      "url": "https://www.nsca.com/education/articles/ptq/resistance-training-progressions-older-adult/",
+      "note": {
+        "en": "Article PDF read. Used for pulling mechanics, fixed soft elbows in the pullover, supported neutral neck, secure two-hand grip, and controlled return. Shoulder cards use conservative chest-supported rowing and straight-arm cable pulling variants; no claim that this exact catalogue was tested, or that an older-adult clinical programme applies to children.",
+        "zh": "核读论文式技术文章 PDF，用于拉的动作机制、上拉时固定轻微屈肘、颈部自然有支撑、安全双手握法及受控回程。肩部卡采用克制的胸托划船和直臂绳索版本；不声称这套具体动作名录经过研究，也不把老年人方案套用于儿童。"
+      }
+    },
+    {
+      "id": "M83",
+      "text": {
+        "en": "American Academy of Orthopaedic Surgeons. Rotator cuff tears. OrthoInfo patient education; contributed/updated by William R. Aibinder, MD, FAAOS, peer reviewed by Mary K. Mulcahey, MD, FAAOS. Accessed 12 October 2026.",
+        "zh": "美国骨科医师学会（AAOS）《肩袖撕裂》，OrthoInfo 患者教育资料；William R. Aibinder 医师撰写／更新，Mary K. Mulcahey 医师同行审校。2026 年 10 月 12 日访问。"
+      },
+      "url": "https://www.orthoinfo.org/diseases--conditions/rotator-cuff-tears/",
+      "note": {
+        "en": "Page read. Supports cuff stability, acute and degenerative tears, and symptoms that need clinical assessment. Used for general knowledge, not diagnosis or a treatment programme.",
+        "zh": "核读网页。用于肩袖稳定、急性与退变性撕裂，以及需要临床评估的症状。只作一般知识，不用于诊断或治疗方案。"
+      }
+    },
+    {
+      "id": "M84",
+      "text": {
+        "en": "Barrett E., O’Keeffe M., O’Sullivan K., Lewis J., McCreesh K. Is thoracic spine posture associated with shoulder pain, range of motion and function? A systematic review. Manual Therapy 26: 38–46, 2016. doi:10.1016/j.math.2016.07.008.",
+        "zh": "Barrett E. 等，《胸椎姿势与肩痛、活动范围及功能是否有关：系统综述》，Manual Therapy 26: 38–46，2016 年。doi:10.1016/j.math.2016.07.008。"
+      },
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27475532/",
+      "note": {
+        "en": "Abstract read. Ten studies; moderate evidence of no significant thoracic-kyphosis difference between groups with and without shoulder pain. Erect posture increased maximum shoulder range in single-session studies; long-term relevance is uncertain. No posture-based diagnosis or promised correction is offered.",
+        "zh": "核读摘要。10 项研究；中等证据显示有无肩痛两组的胸椎后凸没有显著差别。单次实验中直立姿势增加最大肩部活动范围，长期意义不明确。不据姿势诊断，也不承诺矫正效果。"
+      }
+    },
+    {
+      "id": "M85",
+      "text": {
+        "en": "Linkul R. Resistance training for the older adult—progressions to achieve an overhead press. NSCA Personal Training Quarterly 8(4): 10–15, 2021; website posted February 2022.",
+        "zh": "Linkul R.《老年人力量训练：头顶推举的进阶》，NSCA Personal Training Quarterly 8(4): 10–15，2021 年；网页发布于 2022 年 2 月。"
+      },
+      "url": "https://www.nsca.com/education/articles/ptq/resistance-training-for-the-older-adult/",
+      "note": {
+        "en": "Article PDF read. Supports gradual learning, a stable base, overhead reaching and controlled return. Its final exercise uses a single dumbbell; the barbell card is an anatomical/technical adaptation, not a copy of that exact exercise or its clinical programme.",
+        "zh": "核读文章 PDF，用于逐步学习、稳定支撑、头顶抬举及受控回程。原文最终动作用单只哑铃；杠铃卡是依据解剖和技术的版本调整，不复制其具体动作或临床方案。"
+      }
+    },
+    {
+      "id": "M86",
+      "text": {
+        "en": "Brachotte F. (original editor), Van Haver E., Ager A. and Physiopedia contributors. Rotator Cuff. Physiopedia, revision 347355; accessed 12 October 2026. Anatomy attachment table and Function section.",
+        "zh": "Brachotte F.（原始编辑）、Van Haver E.、Ager A. 及 Physiopedia 编辑者，《肩袖》，Physiopedia，修订版本 347355；2026 年 10 月 12 日访问。解剖附着表与功能部分。"
+      },
+      "url": "https://www.physio-pedia.com/index.php?title=Rotator_Cuff&oldid=347355",
+      "note": {
+        "en": "Cross-check only: greater-tubercle superior/middle/inferior facets for supraspinatus/infraspinatus/teres minor, lesser tubercle for subscapularis, and cuff stabilization of the humeral head. Its table cites Gray 1918. Read through the accessible index.php article view; no clinical tests, rehabilitation dosages or treatment claims are copied.",
+        "zh": "仅作交叉核对：冈上肌、冈下肌、小圆肌分别止于大结节的上、中、下腱附着面，肩胛下肌止于小结节；肩袖稳定肱骨头。附着表引用 Gray 1918。通过可访问的 index.php 文章视图核读；不复制临床测试、康复剂量或治疗主张。"
+      }
+    },
+    {
+      "id": "M87",
+      "text": {
+        "en": "Gray H. Anatomy of the Human Body, 20th ed., ed. W. H. Lewis. Philadelphia: Lea & Febiger, 1918 (public domain). Myology: The Muscles and Fasciae of the Arm (pp. 443–446) and The Muscles and Fasciae of the Forearm (pp. 446–454).",
+        "zh": "格雷（Gray H.）《人体解剖学》第 20 版，W. H. Lewis 编，费城 Lea & Febiger 出版社，1918 年（公有领域）。肌学：上臂的肌肉与筋膜（第 443–446 页）、前臂的肌肉与筋膜（第 446–454 页）。"
+      },
+      "url": "https://archive.org/details/anatomyofhumanbo1918gray",
+      "note": {
+        "en": "Arm and forearm passages read through the search-indexed public-domain transcription at https://www.theodora.com/anatomy/the_muscles_and_fasciae_of_the_arm.html and https://www.theodora.com/anatomy/the_muscles_and_fasciae_of_the_forearm.html; direct site requests returned 403. Attachments and actions cross-checked against OpenStax and Physiopedia. Palmaris longus inserts into flexor retinaculum and palmar aponeurosis, not hand bone; FDS tendons split to the sides of the middle phalanges, and extensor digitorum reaches the extensor expansions. Historical terminology is modernised; fascia and joint-capsule attachments are described in text rather than fabricated as bone meshes.",
+        "zh": "通过 Theodora 的公有领域格雷原文搜索索引核读上臂、前臂段落；直接访问返回 403。附着与作用另与 OpenStax 和 Physiopedia 交叉核对。掌长肌止于屈肌支持带和掌腱膜，不是手骨；指浅屈肌腱分叉到中节指骨两侧，指伸肌止于指背腱膜。历史术语改用现代名称；筋膜和关节囊附着用文字说明，不虚构骨网格。"
+      }
+    },
+    {
+      "id": "M88",
+      "text": {
+        "en": "American Council on Exercise. Seated Biceps Curl. ACE Exercise Library, undated; accessed 12 October 2026.",
+        "zh": "美国运动委员会（ACE）动作资料库《坐姿肱二头肌弯举》，未标日期；2026 年 10 月 12 日核读。"
+      },
+      "url": "https://www.acefitness.org/resources/everyone/exercise-library/44/seated-biceps-curl/",
+      "note": {
+        "en": "Full technique text read, including a neutral-to-supinated dumbbell variation. Atlas uses the same elbow/forearm mechanics standing. No EMG ranking or growth superiority is inferred.",
+        "zh": "阅读完整动作文字，包括从对握转为旋后的哑铃变式。Atlas 站姿版采用相同的肘、前臂机制。不推断肌电排名或增肌优势。"
+      }
+    },
+    {
+      "id": "M89",
+      "text": {
+        "en": "Lockie R. G., Moreno M. R. The Close-Grip Bench Press. Strength and Conditioning Journal 39(4): 30–35, 2017. doi:10.1519/SSC.0000000000000307.",
+        "zh": "Lockie R. G.、Moreno M. R.《窄握卧推》，Strength and Conditioning Journal 39(4):30–35，2017 年。doi:10.1519/SSC.0000000000000307。"
+      },
+      "url": "https://doi.org/10.1519/SSC.0000000000000307",
+      "note": {
+        "en": "Author article execution text read in the reproduction at https://studylib.net/doc/25523306/the-close-grip-bench-press-.99497 : start, descent and ascent. A comfortable shoulder-width grip does not mean touching hands. Chest remains involved. Atlas describes safe setup and controlled movement without importing unverified muscle-growth comparisons or numerical dose.",
+        "zh": "通过 Studylib 上原作者文章的转载核读准备、下放、推起段。舒服的肩宽握距并不是双手相碰，胸肌仍参与。Atlas 描述安全准备及控制，不采用未核实的肌肉增长比较或剂量数字。"
+      }
+    },
+    {
+      "id": "M90",
+      "text": {
+        "en": "National Strength and Conditioning Association. Exercise Technique Manual for Resistance Training, 3rd ed. Champaign, IL: Human Kinetics, 2016. ISBN 9781492506928. Part III, Video 3.24, Triceps Pushdown (Machine).",
+        "zh": "美国体能协会（NSCA）《抗阻训练动作技术手册》第 3 版，Human Kinetics，2016 年，ISBN 9781492506928。第三部分，视频条目 3.24：器械肱三头肌下压。"
+      },
+      "url": "https://studylib.net/doc/28040414/exercise-technique-manual-for-resistance-training--3rd-ed...",
+      "note": {
+        "en": "Primary manual starting/downward/upward phase paragraphs read in this book reproduction; publisher original is Human Kinetics. Used only to verify stationary upper arms, elbow extension and controlled return. A cable handle is a display simplification of the high-pulley attachment. This is not the unverified Haff/Triplett textbook proposed in the draft.",
+        "zh": "通过该书转载核读准备、下压、回程段；原出版社是 Human Kinetics。只用于核上臂稳定、伸肘及控制回程。模型绳索把手是高滑轮附件的展示简化。这不是初稿拟引但未核读的 Haff/Triplett 教材。"
+      }
+    },
+    {
+      "id": "M91",
+      "text": {
+        "en": "Betts J. G., Young K. A., Wise J. A., Johnson E., Poe B., Kruse D. H., Korol O., Johnson J. E., Womble M., DeSaix P. Anatomy and Physiology 2e. Houston: OpenStax, 2022. §11.1, Interactions of Skeletal Muscles, Their Fascicle Arrangement, and Their Lever Systems; Patterns of Fascicle Organization.",
+        "zh": "Betts J. G. 等《解剖学与生理学》第 2 版，OpenStax，2022 年。第 11.1 节：骨骼肌之间的相互作用、肌束排列及杠杆系统；肌束排列模式段。"
+      },
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/11-1-interactions-of-skeletal-muscles-their-fascicle-arrangement-and-their-lever-systems",
+      "note": {
+        "en": "Full section read 12 October 2026. Explicitly identifies forearm extensor digitorum as unipennate, correcting the draft multipennate label. Biceps is the illustrated spindle-shaped belly example. Atlas fibre arrangement labels are broad educational descriptions, not measured pennation angles or a complete account of internal architecture. CC BY-NC-SA 4.0; only anatomical facts paraphrased.",
+        "zh": "2026 年 10 月 12 日核读完整章节。正文明确将前臂指伸肌列为单羽状，纠正初稿的多羽状标签；肱二头肌是所示梭形肌腹例。Atlas 的纤维排列标签只作粗略教学描述，不是测得的羽状角或完整肌内结构。CC BY-NC-SA 4.0，只转述解剖事实。"
+      }
+    },
+    {
+      "id": "M92",
+      "text": {
+        "en": "Gray H. Anatomy of the Human Body, 20th ed., edited by Lewis W. H. Philadelphia: Lea & Febiger, 1918. IV. Myology: §6a The Deep Muscles of the Back; §6d The Muscles and Fasciae of the Abdomen; §8a The Muscles and Fasciae of the Iliac Region.",
+        "zh": "Gray H.《人体解剖学》，Lewis W. H. 编，第 20 版，Philadelphia: Lea & Febiger，1918 年。第四部分肌学：6a 深背肌、6d 腹肌与筋膜、8a 髂区肌肉与筋膜。"
+      },
+      "url": "https://archive.org/details/anatomyofhumanbo1918gray",
+      "note": {
+        "en": "Public-domain anatomy text. Iliac passage read in its online transcription; abdominal/back passages cross-checked with OpenStax and Physiopedia. Detailed fractions that differ between editions are omitted from the teaching cards.",
+        "zh": "公有领域解剖原文。髂区段落读取在线转录；腹壁、深背肌与 OpenStax、Physiopedia 交叉核对。教学卡删去不同版本不一致的精确比例。"
+      }
+    },
+    {
+      "id": "M93",
+      "text": {
+        "en": "Betts J. G., Young K. A., Wise J. A., Johnson E., Poe B., Kruse D. H., Korol O., Johnson J. E., Womble M., DeSaix P. Anatomy and Physiology 2e. Houston: OpenStax, 2022. §11.4, Axial Muscles of the Abdominal Wall and Thorax, Figure 11.16 and abdominal-wall description.",
+        "zh": "Betts J. G. 等《解剖学与生理学》第 2 版，OpenStax，2022 年；11.4 节腹壁与胸部轴肌，图 11.16 及腹壁正文。"
+      },
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/11-4-axial-muscles-of-the-abdominal-wall-and-thorax",
+      "note": {
+        "en": "Description and figure read. Do not copy Table 11.6 literally: trunk twisting is rotation, not supination; quadratus originates at the iliac crest, not ribs 5–10. Gray/modern anatomy used for detailed endpoints. Facts paraphrased; no images reproduced.",
+        "zh": "已读正文与图。表 11.6 的躯干转动应是旋转而非旋后；腰方肌起于髂嵴，并非第 5–10 肋。细部附着按 Gray 与现代解剖核对；仅转述事实，不转载图。"
+      }
+    },
+    {
+      "id": "M94",
+      "text": {
+        "en": "Physiopedia contributors. Internal Abdominal Oblique. Physiopedia, continuously edited; anatomy and function sections, accessed 12 October 2026.",
+        "zh": "Physiopedia 编者《Internal Abdominal Oblique》，持续修订；解剖与功能段，2026 年 10 月 12 日查阅。"
+      },
+      "url": "https://www.physio-pedia.com/Internal_Abdominal_Oblique",
+      "note": {
+        "en": "Indexed anatomy text inspected where direct pages blocked automated access. Used to cross-check anatomical targets, not as evidence of treatment effects or exercise superiority.",
+        "zh": "直接页面阻止自动访问时，核对已索引的解剖段落。用于附着与作用交叉核查，不据此宣称疗效或动作优越性。"
+      }
+    },
+    {
+      "id": "M95",
+      "text": {
+        "en": "Physiopedia contributors. Transversus Abdominis. Physiopedia, continuously edited; anatomy and function sections, accessed 12 October 2026.",
+        "zh": "Physiopedia 编者《Transversus Abdominis》，持续修订；解剖与功能段，2026 年 10 月 12 日查阅。"
+      },
+      "url": "https://www.physio-pedia.com/Transversus_Abdominis",
+      "note": {
+        "en": "Indexed anatomy text inspected where direct pages blocked automated access. Used to cross-check anatomical targets, not as evidence of treatment effects or exercise superiority.",
+        "zh": "直接页面阻止自动访问时，核对已索引的解剖段落。用于附着与作用交叉核查，不据此宣称疗效或动作优越性。"
+      }
+    },
+    {
+      "id": "M96",
+      "text": {
+        "en": "Physiopedia contributors. Quadratus Lumborum. Physiopedia, continuously edited; anatomy and function sections, accessed 12 October 2026.",
+        "zh": "Physiopedia 编者《Quadratus Lumborum》，持续修订；解剖与功能段，2026 年 10 月 12 日查阅。"
+      },
+      "url": "https://www.physio-pedia.com/Quadratus_Lumborum",
+      "note": {
+        "en": "Indexed anatomy text inspected where direct pages blocked automated access. Used to cross-check anatomical targets, not as evidence of treatment effects or exercise superiority.",
+        "zh": "直接页面阻止自动访问时，核对已索引的解剖段落。用于附着与作用交叉核查，不据此宣称疗效或动作优越性。"
+      }
+    },
+    {
+      "id": "M97",
+      "text": {
+        "en": "Physiopedia contributors. Lumbar Multifidus. Physiopedia, continuously edited; anatomy and function sections, accessed 12 October 2026.",
+        "zh": "Physiopedia 编者《Lumbar Multifidus》，持续修订；解剖与功能段，2026 年 10 月 12 日查阅。"
+      },
+      "url": "https://www.physio-pedia.com/Lumbar_Multifidus",
+      "note": {
+        "en": "Indexed anatomy text inspected where direct pages blocked automated access. Used to cross-check anatomical targets, not as evidence of treatment effects or exercise superiority.",
+        "zh": "直接页面阻止自动访问时，核对已索引的解剖段落。用于附着与作用交叉核查，不据此宣称疗效或动作优越性。"
+      }
+    },
+    {
+      "id": "M98",
+      "text": {
+        "en": "Vispute S. S., Smith J. D., LeCheminant J. D., Hurley K. S. The effect of abdominal exercise on abdominal fat. Journal of Strength and Conditioning Research 25(9): 2559–2564, 2011. doi:10.1519/JSC.0b013e3181fb4a46. PMID:21804427.",
+        "zh": "Vispute S. S. 等《腹部练习对腹部脂肪的影响》，JSCR 25(9):2559–2564，2011 年；doi:10.1519/JSC.0b013e3181fb4a46。"
+      },
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21804427/",
+      "note": {
+        "en": "Abstract read: 24 sedentary adults, 6 weeks, abdominal programme versus control. Endurance improved without significant abdominal-fat changes. Not a trial of this curl-up alone or every possible protocol.",
+        "zh": "已读摘要：24 名久坐成年人，6 周，腹部训练方案与对照组比较。耐力提高，但腹部脂肪未显著改变；不是单独测试本卡卷腹或所有方案。"
+      }
+    },
+    {
+      "id": "M99",
+      "text": {
+        "en": "American Council on Exercise. Bird-dog. Exercise Library, undated; accessed 12 October 2026.",
+        "zh": "American Council on Exercise《Bird-dog》，动作资料库，无标注日期；2026 年 10 月 12 日查阅。"
+      },
+      "url": "https://www.acefitness.org/resources/everyone/exercise-library/14/bird-dog/",
+      "note": {
+        "en": "Technique text read. Card paraphrases the movement with a controlled learning variant; numerical dose and broad injury-prevention claims not adopted.",
+        "zh": "已读动作说明；卡片独立改写，采用有控制的学习版本；不采用数字剂量或宽泛的伤害预防宣称。"
+      }
+    },
+    {
+      "id": "M100",
+      "text": {
+        "en": "American Council on Exercise. Front Plank. Exercise Library, undated; accessed 12 October 2026.",
+        "zh": "American Council on Exercise《Front Plank》，动作资料库，无标注日期；2026 年 10 月 12 日查阅。"
+      },
+      "url": "https://www.acefitness.org/resources/everyone/exercise-library/32/front-plank/",
+      "note": {
+        "en": "Technique text read. Card paraphrases the movement with a controlled learning variant; numerical dose and broad injury-prevention claims not adopted.",
+        "zh": "已读动作说明；卡片独立改写，采用有控制的学习版本；不采用数字剂量或宽泛的伤害预防宣称。"
+      }
+    },
+    {
+      "id": "M101",
+      "text": {
+        "en": "National Academy of Sports Medicine. Side Plank. Exercise Library, undated; accessed 12 October 2026.",
+        "zh": "National Academy of Sports Medicine《Side Plank》，动作资料库，无标注日期；2026 年 10 月 12 日查阅。"
+      },
+      "url": "https://www.nasm.org/resource-center/exercise-library/side-plank",
+      "note": {
+        "en": "Technique text read. Card paraphrases the movement with a controlled learning variant; numerical dose and broad injury-prevention claims not adopted.",
+        "zh": "已读动作说明；卡片独立改写，采用有控制的学习版本；不采用数字剂量或宽泛的伤害预防宣称。"
+      }
+    },
+    {
+      "id": "M102",
+      "text": {
+        "en": "National Academy of Sports Medicine. Dead Bug. Exercise Library, undated; accessed 12 October 2026.",
+        "zh": "National Academy of Sports Medicine《Dead Bug》，动作资料库，无标注日期；2026 年 10 月 12 日查阅。"
+      },
+      "url": "https://www.nasm.org/resource-center/exercise-library/dead-bug",
+      "note": {
+        "en": "Technique text read. Card paraphrases the movement with a controlled learning variant; numerical dose and broad injury-prevention claims not adopted.",
+        "zh": "已读动作说明；卡片独立改写，采用有控制的学习版本；不采用数字剂量或宽泛的伤害预防宣称。"
+      }
+    },
+    {
+      "id": "M103",
+      "text": {
+        "en": "American Council on Exercise. Suitcase Carry. Exercise Library, undated; accessed 12 October 2026.",
+        "zh": "American Council on Exercise《Suitcase Carry》，动作资料库，无标注日期；2026 年 10 月 12 日查阅。"
+      },
+      "url": "https://www.acefitness.org/resources/everyone/exercise-library/358/suitcase-carry/",
+      "note": {
+        "en": "Technique text read. Card paraphrases the movement with a controlled learning variant; numerical dose and broad injury-prevention claims not adopted.",
+        "zh": "已读动作说明；卡片独立改写，采用有控制的学习版本；不采用数字剂量或宽泛的伤害预防宣称。"
+      }
+    },
+    {
+      "id": "M104",
+      "text": {
+        "en": "American Council on Exercise. Crunch. Exercise Library, undated; accessed 12 October 2026.",
+        "zh": "American Council on Exercise《Crunch》，动作资料库，无标注日期；2026 年 10 月 12 日查阅。"
+      },
+      "url": "https://www.acefitness.org/resources/everyone/exercise-library/52/crunch/",
+      "note": {
+        "en": "Technique text read. Card paraphrases the movement with a controlled learning variant; numerical dose and broad injury-prevention claims not adopted.",
+        "zh": "已读动作说明；卡片独立改写，采用有控制的学习版本；不采用数字剂量或宽泛的伤害预防宣称。"
+      }
+    },
+    {
+      "id": "M105",
+      "text": {
+        "en": "Catalyst Athletics. Hanging Leg Raise. Exercise Library, undated; accessed 12 October 2026.",
+        "zh": "Catalyst Athletics《Hanging Leg Raise》，动作资料库，无标注日期；2026 年 10 月 12 日查阅。"
+      },
+      "url": "https://www.catalystathletics.com/exercise/45/Hanging-Leg-Raise/",
+      "note": {
+        "en": "Technique text read. Card paraphrases the movement with a controlled learning variant; numerical dose and broad injury-prevention claims not adopted.",
+        "zh": "已读动作说明；卡片独立改写，采用有控制的学习版本；不采用数字剂量或宽泛的伤害预防宣称。"
+      }
+    },
+    {
+      "id": "M106",
+      "text": {
+        "en": "YMCA of Greater Seattle. How To: the Pallof Press. Originally published 23 January 2017, updated 8 September 2026.",
+        "zh": "大西雅图 YMCA《抗旋转推的做法》，2017 年 1 月 23 日发布，2026 年 9 月 8 日更新。"
+      },
+      "url": "https://www.seattleymca.org/blog/how-pallof-press",
+      "note": {
+        "en": "Technique read: stand side-on, soft knees, press and return under control, exhale on exertion. Chest-height handle is the Atlas comfortable learning variant; numerical dose omitted.",
+        "zh": "已读动作：侧对器械、膝微屈、有控制地推回、推出时呼气。本卡采用舒适的胸高把手版本；删去数字剂量。"
+      }
+    },
+    {
+      "id": "M107",
+      "text": {
+        "en": "NHS inform. Strength and balance exercises. NHS Scotland, last updated 18 June 2024. Standing hip march instructions; accessed 12 October 2026.",
+        "zh": "NHS Scotland《力量与平衡练习》，2024 年 6 月 18 日更新；站姿屈髋踏步说明，2026 年 10 月 12 日查阅。"
+      },
+      "url": "https://www.nhsinform.scot/healthy-living/preventing-falls/keeping-well/strength-and-balance-exercises/",
+      "note": {
+        "en": "Supported marching used as a technique reference only, not as a personal rehabilitation prescription; no numerical dose copied.",
+        "zh": "扶稳踏步仅作动作参考，不作为个人康复处方；不复制数字剂量。"
+      }
+    },
+    {
+      "id": "M108",
+      "text": {
+        "en": "Elsevier. Complete Anatomy: Quadratus Lumborum Muscle. Digital anatomy atlas, undated; accessed 12 October 2026. Origin, insertion and fibre direction description.",
+        "zh": "Elsevier《Complete Anatomy：腰方肌》，数字解剖图谱，无日期；2026 年 10 月 12 日查阅。起止点及纤维方向说明。"
+      },
+      "url": "https://www.elsevier.com/resources/anatomy/muscular-system/muscles-of-abdomen/quadratus-lumborum-muscle/22760",
+      "note": {
+        "en": "Attachment table: posterior iliac crest and iliolumbar ligament; inferior rib twelve and transverse processes L1–L4. Confirms the detailed range rather than the abbreviated Physiopedia L1–L5 introductory sentence.",
+        "zh": "附着表：髂嵴后部与髂腰韧带；第 12 肋下缘和第 1–4 腰椎横突。确认细部范围，不采用 Physiopedia 开头简述的第 1–5 腰椎。"
+      }
     }
   ]
 }

@@ -1,0 +1,241 @@
+---
+id: how-they-move-you
+order: 4
+title:
+  en: How they move you
+  zh: 它们怎样让你动起来
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  pose: neutral-stand
+  layers:
+  - superficial
+  - intermediate
+  - deep
+  - skeleton
+  - neighbours
+  - body
+  ghost:
+  - neighbours
+  - body
+  sites: []
+  labels:
+  - brachialis
+  - brachioradialis
+  - ulna
+  camera:
+    position:
+    - 0.55
+    - 0.02
+    - 2.0
+    target:
+    - 0
+    - -0.19
+    - 0.02
+    fov: 30
+  summary:
+    en: Elbow bending, palm turning and wrist movement follow different attachment lines.
+    zh: 屈肘、转掌和腕部动作，沿不同附着线发生。
+  beats:
+  - pose: elbow-flexed
+    camera: close-arm
+    ghost:
+    - biceps-brachii-long
+    - biceps-brachii-short
+    - neighbours
+    - body
+    labels:
+    - brachialis
+    - brachioradialis
+    - ulna
+    caption:
+      en: 'Elbow flexion: biceps, brachialis and brachioradialis shorten as the forearm comes up. Brachialis works regardless of palm
+        direction.'
+      zh: 屈肘：二头肌、肱肌和肱桡肌缩短，前臂抬起。肱肌的屈肘任务不随掌心方向改变。
+  - pose: palm-up
+    camera: close-arm
+    ghost:
+    - neighbours
+    - body
+    sites:
+    - biceps-brachii-long
+    labels:
+    - biceps-brachii-long
+    - biceps-brachii-short
+    - radius
+    caption:
+      en: 'Supination: biceps pulls on the radius to turn the palm upward. The elbow stays bent so forearm rotation is easy to compare.'
+      zh: 旋后：二头肌拉动桡骨，让掌心转向上。保持屈肘，便于比较前臂转动。
+  - pose: elbow-extended
+    camera: back
+    ghost:
+    - triceps-brachii-long
+    - triceps-brachii-lateral
+    - neighbours
+    - body
+    labels:
+    - triceps-brachii-medial
+    - anconeus
+    - ulna
+    caption:
+      en: 'Extension: all triceps heads pull towards the olecranon, with anconeus assisting. The long head also spans the shoulder.'
+      zh: 伸肘：三头肌各头拉向鹰嘴，肘肌帮助。长头还跨过肩。
+  - pose: shoulder-forward
+    camera: left-side
+    ghost:
+    - superficial
+    - neighbours
+    - body
+    sites:
+    - coracobrachialis
+    labels:
+    - coracobrachialis
+    - humerus
+    - scapula
+    caption:
+      en: The upper arm moves forward. Coracobrachialis pulls on the humerus and can also draw it towards the body; biceps helps shoulder
+        flexion.
+      zh: 上臂向前移动。喙肱肌拉动肱骨，也能把它拉向身体；二头肌帮助肩屈。
+  - pose: shoulder-back
+    camera: back
+    ghost:
+    - body
+    sites:
+    - triceps-brachii-long
+    labels:
+    - triceps-brachii-long
+    - latissimus-dorsi
+    - humerus
+    caption:
+      en: The upper arm moves backward. The long triceps head pulls across the shoulder as well as the elbow, helped here by the back
+        muscle.
+      zh: 上臂向后移动。三头肌长头跨肩也跨肘，这里还有背肌帮忙。
+  - pose: wrist-flexed
+    camera: front
+    ghost:
+    - neighbours
+    - body
+    labels:
+    - flexor-carpi-radialis
+    - flexor-carpi-ulnaris
+    - palmaris-longus
+    - flexor-digitorum-superficialis
+    - hand
+    caption:
+      en: 'Wrist flexion: the wrist flexors pull the palm towards the forearm. Superficialis assists the wrist but its main finger action
+        is not animated here.'
+      zh: 屈腕：腕屈肌把掌侧拉向前臂。指浅屈肌协助腕动，但主要的屈指作用在这里不作动画。
+  - pose: wrist-extended
+    camera: back
+    ghost:
+    - neighbours
+    - body
+    labels:
+    - extensor-carpi-radialis-longus
+    - extensor-carpi-radialis-brevis
+    - extensor-carpi-ulnaris
+    - extensor-digitorum
+    - hand
+    caption:
+      en: 'Wrist extension: the radial and ulnar extensors lift the hand backward. Extensor digitorum helps, though its principal job
+        is opening the fingers.'
+      zh: 伸腕：桡侧和尺侧伸肌把手向背侧抬起。指伸肌协助，但主要任务是伸指。
+  - pose: palm-down
+    camera: close-arm
+    ghost:
+    - neighbours
+    - body
+    sites:
+    - pronator-teres
+    labels:
+    - pronator-teres
+    - radius
+    - ulna
+    caption:
+      en: 'Pronation: pronator teres pulls diagonally on the radius, turning the palm down while the upper arm stays still.'
+      zh: 旋前：旋前圆肌斜拉桡骨，掌心向下转，上臂保持不动。
+  index:
+    parts:
+    - biceps-brachii-long
+    - biceps-brachii-short
+    - triceps-brachii-long
+    - triceps-brachii-lateral
+    - brachioradialis
+    - pronator-teres
+    - flexor-carpi-radialis
+    - palmaris-longus
+    - flexor-carpi-ulnaris
+    - extensor-carpi-radialis-longus
+    - extensor-digitorum
+    - extensor-carpi-ulnaris
+    - brachialis
+    - triceps-brachii-medial
+    - coracobrachialis
+    - anconeus
+    - extensor-carpi-radialis-brevis
+    - flexor-digitorum-superficialis
+    - radius
+    - ulna
+    - humerus
+    - hand
+    - scapula
+    - latissimus-dorsi
+---
+
+<Lang en>
+
+A muscle pulls along its fibres; it cannot push a bone away. At the elbow, <Term id="flexion">flexion</Term> brings the forearm towards the upper arm. Biceps, brachialis and brachioradialis share this task. **Brachialis remains a main elbow flexor with any grip** because it pulls on the ulna [M87].
+
+Biceps has another job: <Term id="supination">supination</Term>, turning the forearm so the palm faces upward when the elbow is bent. Its tendon pulls on the radius. This is different from simply turning the whole upper arm at the shoulder. The opposing movement, <Term id="pronation">pronation</Term>, turns the palm downward; pronator teres helps rotate the radius [M87].
+
+Triceps produces elbow <Term id="extension">extension</Term>, with anconeus assisting. **The long triceps head crosses the shoulder as well as the elbow**. It can pull the upper arm backward and towards the body. Coracobrachialis pulls the upper arm forward and inward, while biceps can assist shoulder flexion [M87].
+
+At the wrist, the radial and ulnar flexors and palmaris longus bend the palm towards the forearm. The radial extensors, ulnar extensor and extensor digitorum help lift the hand backward. Thumb-side movement is <Term id="radial-deviation">radial deviation</Term>; the ulnar-side movement is its opposite [M87].
+
+Finger muscles also assist wrist movement, but that is not their whole job. Superficialis mainly bends finger joints; extensor digitorum mainly opens the fingers. The model demonstrates elbow, shoulder, forearm and wrist motion. Its rig has no moving finger joints, so the long finger tendons are visible without a finger-bending animation.
+
+<More title={{ en: "Holding still still takes force", zh: "保持不动也要用力" }}>
+
+During a grip, the wrist extensors help oppose the finger flexors’ tendency to bend the wrist. A joint can stay still while muscles on both sides develop force. Highlighting marks the chosen movement roles; it does not measure the force of every participating muscle [M72].
+
+</More>
+
+<More title={{ en: "Demonstration angles are design values", zh: "演示角度是设计值" }}>
+
+The poses use modest design angles to show directions, not normal-range targets or instructions to force a joint. The muscle shortening and bulging are illustrative. Every supported action can also be selected from the muscle sheet’s DEMO button; finger actions remain written descriptions.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+肌肉沿纤维施加拉力，不能把骨头推开。肘关节的<Term id="flexion">屈</Term>让前臂靠近上臂，二头肌、肱肌和肱桡肌共同参与。**无论握法如何，肱肌都是屈肘的主力**，因为它拉的是尺骨 [M87]。
+
+二头肌还负责<Term id="supination">旋后</Term>：屈肘时让掌心转向上。止腱拉动桡骨，这与在肩部转动整个上臂不同。相反方向叫<Term id="pronation">旋前</Term>，掌心转向下，旋前圆肌帮助桡骨转动 [M87]。
+
+三头肌负责肘关节的<Term id="extension">伸</Term>，肘肌协助。**三头肌长头同时跨肩和肘**，还能把上臂向后、向身体拉。喙肱肌把上臂向前、向内拉，二头肌也能帮助肩屈 [M87]。
+
+腕部的桡侧、尺侧屈肌及掌长肌把掌侧拉向前臂。桡侧伸肌、尺侧伸肌和指伸肌帮助向手背方向抬手。向拇指侧偏叫<Term id="radial-deviation">桡偏</Term>，向小指侧偏则相反 [M87]。
+
+指肌还能协助腕动，却不只做这件事：指浅屈肌主要屈手指关节，指伸肌主要伸指。模型演示肩、肘、前臂和腕的运动；骨架没有可动指关节，因此看得见长腱，却不演示手指弯曲。
+
+比较动作时，先看哪处关节在动，再找跨过它的肌腱。握持时腕可能不动，屈肌与伸肌却仍合作维持姿势；没有看见关节移动，并不表示肌肉没有产生拉力 [M87]。
+
+<More title={{ en: "Holding still still takes force", zh: "保持不动也要用力" }}>
+
+握持时，腕伸肌帮助抵消指屈肌把腕拉弯的趋势。关节保持不动，两侧肌肉仍可用力。高亮表示选定的动作角色，不是每块参与肌的受力测量 [M72]。
+
+</More>
+
+<More title={{ en: "Demonstration angles are design values", zh: "演示角度是设计值" }}>
+
+姿态以克制的设计角度说明方向，不是正常活动范围目标，也不要求用力把关节扳到该处。肌肉缩短和鼓起是示意。支持的动作还可从肌肉卡“演示”按钮查看；手指作用保留文字说明。
+
+</More>
+
+</Lang>

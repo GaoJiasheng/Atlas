@@ -1,0 +1,39 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": {
+        "en": "Atlas back-muscle model and teaching design study, 12 October 2026. Anatomy content follows Gray1918, OpenStax A&P2e and named exercise references. Design inventory:15 regional muscle parts in three layers;11 exercise cards;34 selectable/context parts after the declared thorax merge and addition of true reference bones; six cameras; two cuts. Measured reference stature rounds to1.71m.",
+        "zh": "Atlas背部肌肉模型与教学设计研究，2026年10月12日。解剖事实依据格雷1918、OpenStax第2版及逐项动作来源。设计清单：15个区内肌肉分部，三层；11张动作卡；胸廓按清单合并并补入真实参考骨后共34个零件；六个镜头；两个剖面。模型实测身高取整为1.71米。"
+      },
+      "note": {
+        "en": "DESIGN: all camera positions, peel distances, contraction amounts, demo angles and loop timing are illustrative, not measured normal ranges or a training prescription. Back sourceCentre=[0,0.0492717400,1.1982355118]; Y-up metres, front+Z, own left+X. In this actual export the centre is a back-region frame, despite stale manifest wording saying sternal angle. The rigid trunk pose does not articulate individual vertebrae; hips and knees are absent. Isometric deadlift bracing has no shortening animation. Stabilisation is not an angle in the schema and unavailable joints are not fabricated.",
+        "zh": "DESIGN：镜头、剥层距离、收缩量、演示角度与循环时长均为教学设计值，不是正常关节范围实测或训练处方。背部源中心=[0,0.0492717400,1.1982355118]；米制、Y向上、前+Z、自身左+X。实际采用背部区域坐标框架，清单“胸骨角”措辞未更新。躯干姿态是整体转动，不逐节活动；没有髋膝关节。硬拉等长支撑不模拟肌肉缩短；稳定作用不是角度，也不虚构缺失关节。"
+      }
+    },
+    {
+      "id": "S2",
+      "text": {
+        "en": "Kervyn G. and Z-Anatomy contributors; application by Vinent Juanico L. Z-Anatomy: The open source atlas of anatomy. MuscularSystem100.fbx, SkeletalSystem100.fbx, Regions of human body100.fbx. Mesh source for this back model, CC BY-SA4.0.",
+        "zh": "Kervyn G.与Z-Anatomy贡献者，Vinent Juanico L.开发应用。Z-Anatomy开放解剖图谱，MuscularSystem100.fbx、SkeletalSystem100.fbx及Regions of human body100.fbx；本背部模型的网格来源，CC BY-SA4.0。"
+      },
+      "url": "https://github.com/LluisV/Z-Anatomy",
+      "note": {
+        "en": "Required attribution: BodyParts3D - The Database Center for Life Science; Z-Anatomy - The open source atlas of anatomy. Selected, simplified, rigged and meshopt-compressed for Atlas. True source occipital and cervical bones added for reviewed origins. Source upper/lower trapezius aliases reversed: topic mesh links correct their anatomy. Geometry and derived attachment data CC BY-SA4.0.",
+        "zh": "要求署名：BodyParts3D - The Database Center for Life Science；Z-Anatomy - The open source atlas of anatomy。Atlas选取、简化、绑定及meshopt压缩；为附着点补入真实源枕骨和颈椎。源上/下斜方肌别名反置，主题网格链接纠正其解剖对应。几何和派生附着数据CC BY-SA4.0。"
+      }
+    },
+    {
+      "id": "S3",
+      "text": {
+        "en": "Mitsuhashi N., Fujieda K., Tamura T., Kawamoto S., Takagi T., Okubo K. BodyParts3D:3D structure database for anatomical concepts. Nucleic Acids Research37(Database issue):D782–D785,2009. doi:10.1093/nar/gkn613. DBCLS BodyParts3D licence page, CC BY4.0.",
+        "zh": "Mitsuhashi N.等《BodyParts3D：解剖概念的三维结构数据库》，Nucleic Acids Research37数据库专刊D782–D785，2009年，doi:10.1093/nar/gkn613；DBCLS许可页为CC BY4.0。"
+      },
+      "url": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html",
+      "note": {
+        "en": "Upstream provenance/cross-reference only. All meshes exported for this topic are Z-Anatomy derivatives and remain CC BY-SA4.0. No BodyParts3D replacement mesh is used.",
+        "zh": "仅作上游来源及交叉参照。本主题全部导出网格来自Z-Anatomy并保持CC BY-SA4.0，没有使用BodyParts3D替换件。"
+      }
+    }
+  ]
+}

@@ -1,0 +1,201 @@
+---
+id: back-at-a-glance
+order: 1
+title:
+  en: The back at a glance
+  zh: 一眼看背部
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  pose: null
+  layers:
+  - superficial
+  - intermediate
+  - deep
+  - skeleton
+  - neighbours
+  - body
+  ghost:
+  - body
+  labels:
+  - group:superficial
+  - group:intermediate
+  - group:deep
+  camera:
+    position:
+    - 0.7
+    - 0.35
+    - -2.0
+    target:
+    - 0
+    - 0.02
+    - -0.03
+    fov: 30
+  summary:
+    en: Three display layers connect the shoulder blades, arms, ribs and pelvis; the deepest columns support the spine.
+    zh: 三个展示层连接肩胛骨、手臂、肋骨和骨盆，最深的肌柱支撑脊柱。
+  beats:
+  - camera: on-my-body
+    view: xray
+    ghost: []
+    highlight:
+      signal:
+      - trapezius-descending
+      - trapezius-transverse
+      - trapezius-ascending
+      - latissimus-dorsi
+      - rhomboid-major
+      - rhomboid-minor
+      - levator-scapulae
+      - teres-major
+      - infraspinatus
+      - teres-minor
+      - serratus-posterior-inferior
+      - iliocostalis-lumborum
+      - iliocostalis-thoracis
+      - longissimus-thoracis
+      - spinalis-thoracis
+    labels:
+    - group:superficial
+    caption:
+      en: The back muscles run from the neck to the pelvis. The faint outline places them on the whole body; left and right
+        mean the body’s own sides.
+      zh: 背部肌肉从颈部延伸到骨盆。淡轮廓让你找到它们在全身的位置；左右指身体自己的左右。
+  - camera: back
+    labels:
+    - trapezius-transverse
+    - latissimus-dorsi
+    caption:
+      en: The broad surface is trapezius above and latissimus dorsi below. The deeper muscles sit between and beneath these
+        sheets. Grey marks neighbouring muscles, ivory marks bones.
+      zh: 宽阔的浅层，上方是斜方肌，下方是背阔肌。其他肌肉藏在它们之间和下面。灰色是邻区肌肉，象牙色是骨骼。
+  - view: exploded
+    explode: 0.8
+    labels:
+    - group:superficial
+    - group:intermediate
+    - group:deep
+    caption:
+      en: 'PEEL lifts the surface first, then the intermediate and deep layers. This is an explanatory separation: the living
+        muscles remain connected.'
+      zh: 剥层先抬起浅层，再抬起中层和深层。这是为了讲解而拉开的距离，活体肌肉一直相连。
+  - layers:
+    - skeleton
+    - body
+    labels:
+    - thoracic-spine
+    - scapula
+    - humerus
+    - pelvis
+    caption:
+      en: 'The skeleton anchors the pull: spine, ribs, shoulder blade, collarbone, upper arm and pelvis. Shoulder-blade movement
+        and upper-arm movement are different jobs.'
+      zh: 拉力固定在骨架上：脊柱、肋骨、肩胛骨、锁骨、肱骨和骨盆。移动肩胛骨与移动上臂，是不同的工作。
+  - ghost:
+    - superficial
+    - body
+    - neighbours
+    labels:
+    - rhomboid-major
+    - levator-scapulae
+    - teres-major
+    - infraspinatus
+    - teres-minor
+    caption:
+      en: Under trapezius, rhomboids and levator scapulae move the shoulder blade. At its outer edge, teres major moves the
+        arm; infraspinatus and teres minor help turn and steady it.
+      zh: 斜方肌下面，菱形肌和肩胛提肌移动肩胛骨。外侧的大圆肌移动上臂；冈下肌和小圆肌帮助旋转、稳定上臂。
+  - ghost:
+    - superficial
+    - body
+    - neighbours
+    labels:
+    - iliocostalis-lumborum
+    - longissimus-thoracis
+    - spinalis-thoracis
+    - serratus-posterior-inferior
+    caption:
+      en: The spinal erectors are long columns beside the spine. The thin serratus posterior inferior lies over their lower
+        rib attachments; its exact function remains debated.
+      zh: 竖脊肌是脊柱旁的长肌柱。薄薄的下后锯肌覆盖其下部肋骨附着区；它的确切功能仍有争议。
+  index:
+    parts:
+    - trapezius-descending
+    - trapezius-transverse
+    - trapezius-ascending
+    - latissimus-dorsi
+    - rhomboid-major
+    - rhomboid-minor
+    - levator-scapulae
+    - teres-major
+    - infraspinatus
+    - teres-minor
+    - serratus-posterior-inferior
+    - iliocostalis-lumborum
+    - iliocostalis-thoracis
+    - longissimus-thoracis
+    - spinalis-thoracis
+    - thoracic-spine
+    - lumbar-spine
+    - thorax
+    - scapula
+    - clavicle
+    - humerus
+    - pelvis
+    - skull
+    - cervical-spine
+---
+
+<Lang en>
+
+Look at the model from behind. The warm-coloured muscles stretch from the neck to the pelvis and around the shoulder blades. Ivory marks the bones, grey the neighbouring muscles, and the faint outline the skin. This is an adult male reference anatomy, not a standard that every body must match. Left and right always mean the body's own sides.
+
+The display uses three layers. **Trapezius**, divided by fibre direction, covers the upper back; **latissimus dorsi** spreads across the lower back and narrows towards the upper arm. Beneath them, **rhomboids** and **levator scapulae** connect the spine and neck to the <Term id="scapula">scapula</Term>, or shoulder blade. **Teres major** pulls on the upper arm. **Infraspinatus** and **teres minor** rotate and steady it. The thin **serratus posterior inferior** attaches to the lower ribs. Deepest are the long **spinal erector** columns beside the spine [M47] [M48].
+
+An <Term id="origin">origin</Term> and an <Term id="insertion">insertion</Term> name a muscle's attachments. The origin is usually the more fixed end; the insertion is usually the more mobile end. Those roles can reverse when the hand is fixed, as during a pull-up. Muscles pull between attachments; they can also resist movement without visibly shortening [M49].
+
+Separate the jobs before memorising names: some back muscles move the shoulder blade, others move the arm, and others support or move the spine. Follow a muscle's dots and dashed line to see which bones it connects. <FlyTo preset="back">Start from behind</FlyTo>
+
+<More title={{ en: "Where this model comes from", zh: "模型从哪里来" }}>
+
+The meshes come from Z-Anatomy, built on BodyParts3D [S2] [S3]. Atlas selects the back structures, simplifies the meshes and adds rigging, fibre directions and reviewed attachment markers. Meshes and derived geometry are CC BY-SA 4.0. Text has a separate content licence. Real attachment sizes and shapes vary between people.
+
+</More>
+
+<More title={{ en: "Display layers and anatomical layers", zh: "展示层与解剖层" }}>
+
+The three switches organise this lesson. The shoulder-blade muscles and the serratus posterior inferior share the intermediate display group, but do not form one uninterrupted anatomical sheet. PEEL separates them for viewing; it does not show a space that exists in the body.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+从背后看模型，暖色肌肉从颈部延伸到骨盆，包围着肩胛骨。象牙色是骨骼，灰色是邻区肌肉，淡轮廓是皮肤。这是成年男性的参考解剖，并不是所有身体都必须符合的标准。文中的左右，一律指身体自己的左右。
+
+展示分三个层次。**斜方肌**按纤维方向分部，覆盖上背；**背阔肌**铺在下背，向上臂收窄。它们下面，**菱形肌**和**肩胛提肌**把脊柱、颈部连到<Term id="scapula">肩胛骨</Term>。**大圆肌**拉动上臂；**冈下肌**和**小圆肌**帮助旋转并稳定上臂。薄薄的**下后锯肌**附着在下位肋骨。最深的是脊柱两侧纵行的**竖脊肌**肌柱 [M47] [M48]。
+
+<Term id="origin">起点</Term>和<Term id="insertion">止点</Term>是肌肉附着端的名称。起点通常较固定，止点通常更容易移动。但手固定时，例如引体向上，活动端可以反过来。肌肉在附着点之间产生拉力，也能不明显缩短而抵抗移动 [M49]。
+
+剥层时骨骼留在原位，方便比较每块肌肉的深浅。恢复完整视图后，再沿骨架追踪拉力。
+
+先分清工作，再记名字：有些背肌移动肩胛骨，有些移动手臂，还有些支撑或移动脊柱。沿着圆点与虚线看，就知道它连着哪些骨头。点选肌肉能打开它的卡片，本章索引也收齐了这些结构。<FlyTo preset="back">从背后看起</FlyTo>
+
+<More title={{ en: "Where this model comes from", zh: "模型从哪里来" }}>
+
+网格来自以 BodyParts3D 为基础的 Z-Anatomy [S2] [S3]。Atlas 选取背部结构，简化网格，再加上骨架绑定、纤维方向和经过审查的附着标记。网格与派生几何采用 CC BY-SA 4.0 许可，正文另有内容许可。真实人体的附着面积和形状因人而异。
+
+</More>
+
+<More title={{ en: "Display layers and anatomical layers", zh: "展示层与解剖层" }}>
+
+三个开关是本课的组织方式。肩胛骨周围的肌肉与下后锯肌同属中层展示组，却不是一张连续的解剖肌片。剥层为了看清而分开它们，并不表示人体里原本有这样的空隙。
+
+</More>
+
+</Lang>

@@ -1,0 +1,2954 @@
+{
+  "model": "/models/muscles-back.glb",
+  "parts": [
+    {
+      "id": "trapezius-descending",
+      "name": {
+        "en": "Trapezius, descending part",
+        "zh": "斜方肌降部（上斜方肌）"
+      },
+      "short": {
+        "en": "Trap · upper",
+        "zh": "斜方肌降部"
+      },
+      "group": "superficial",
+      "mesh": "trapezius-ascending.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "trapezius-ascending.r"
+      },
+      "muscle": "trapezius-descending",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-1"
+      },
+      "connects": [
+        "skull",
+        "cervical-spine",
+        "clavicle"
+      ],
+      "explode": {
+        "dir": [
+          0.15,
+          0,
+          -1
+        ],
+        "dist": 0.06,
+        "stage": 0
+      }
+    },
+    {
+      "id": "trapezius-transverse",
+      "name": {
+        "en": "Trapezius, transverse part",
+        "zh": "斜方肌横部（中斜方肌）"
+      },
+      "short": {
+        "en": "Trap · middle",
+        "zh": "斜方肌横部"
+      },
+      "group": "superficial",
+      "mesh": "trapezius-transverse.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "trapezius-transverse.r"
+      },
+      "muscle": "trapezius-transverse",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-1"
+      },
+      "connects": [
+        "thoracic-spine",
+        "scapula"
+      ],
+      "explode": {
+        "dir": [
+          0.15,
+          0,
+          -1
+        ],
+        "dist": 0.06,
+        "stage": 0
+      }
+    },
+    {
+      "id": "trapezius-ascending",
+      "name": {
+        "en": "Trapezius, ascending part",
+        "zh": "斜方肌升部（下斜方肌）"
+      },
+      "short": {
+        "en": "Trap · lower",
+        "zh": "斜方肌升部"
+      },
+      "group": "superficial",
+      "mesh": "trapezius-descending.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "trapezius-descending.r"
+      },
+      "muscle": "trapezius-ascending",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-1"
+      },
+      "connects": [
+        "thoracic-spine",
+        "scapula"
+      ],
+      "explode": {
+        "dir": [
+          0.15,
+          0,
+          -1
+        ],
+        "dist": 0.06,
+        "stage": 0
+      }
+    },
+    {
+      "id": "latissimus-dorsi",
+      "name": {
+        "en": "Latissimus dorsi",
+        "zh": "背阔肌"
+      },
+      "short": {
+        "en": "Latissimus",
+        "zh": "背阔肌"
+      },
+      "group": "superficial",
+      "mesh": "latissimus-dorsi.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "latissimus-dorsi.r"
+      },
+      "muscle": "latissimus-dorsi",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-1"
+      },
+      "connects": [
+        "thoracic-spine",
+        "lumbar-spine",
+        "pelvis",
+        "thorax",
+        "humerus"
+      ],
+      "explode": {
+        "dir": [
+          0.15,
+          0,
+          -1
+        ],
+        "dist": 0.06,
+        "stage": 0
+      }
+    },
+    {
+      "id": "rhomboid-major",
+      "name": {
+        "en": "Rhomboid major",
+        "zh": "大菱形肌"
+      },
+      "short": {
+        "en": "Rhomboid · major",
+        "zh": "大菱形肌"
+      },
+      "group": "intermediate",
+      "mesh": "rhomboid-major.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "rhomboid-major.r"
+      },
+      "muscle": "rhomboid-major",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-2"
+      },
+      "connects": [
+        "thoracic-spine",
+        "scapula"
+      ],
+      "explode": {
+        "dir": [
+          0.15,
+          0,
+          -1
+        ],
+        "dist": 0.06,
+        "stage": 1
+      }
+    },
+    {
+      "id": "rhomboid-minor",
+      "name": {
+        "en": "Rhomboid minor",
+        "zh": "小菱形肌"
+      },
+      "short": {
+        "en": "Rhomboid · minor",
+        "zh": "小菱形肌"
+      },
+      "group": "intermediate",
+      "mesh": "rhomboid-minor.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "rhomboid-minor.r"
+      },
+      "muscle": "rhomboid-minor",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-2"
+      },
+      "connects": [
+        "cervical-spine",
+        "thoracic-spine",
+        "scapula"
+      ],
+      "explode": {
+        "dir": [
+          0.15,
+          0,
+          -1
+        ],
+        "dist": 0.06,
+        "stage": 1
+      }
+    },
+    {
+      "id": "levator-scapulae",
+      "name": {
+        "en": "Levator scapulae",
+        "zh": "肩胛提肌"
+      },
+      "short": {
+        "en": "Levator",
+        "zh": "肩胛提肌"
+      },
+      "group": "intermediate",
+      "mesh": "levator-scapulae.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "levator-scapulae.r"
+      },
+      "muscle": "levator-scapulae",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-2"
+      },
+      "connects": [
+        "cervical-spine",
+        "scapula"
+      ],
+      "explode": {
+        "dir": [
+          0.15,
+          0,
+          -1
+        ],
+        "dist": 0.06,
+        "stage": 1
+      }
+    },
+    {
+      "id": "teres-major",
+      "name": {
+        "en": "Teres major",
+        "zh": "大圆肌"
+      },
+      "short": {
+        "en": "Teres · major",
+        "zh": "大圆肌"
+      },
+      "group": "intermediate",
+      "mesh": "teres-major.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "teres-major.r"
+      },
+      "muscle": "teres-major",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-2"
+      },
+      "connects": [
+        "scapula",
+        "humerus"
+      ],
+      "explode": {
+        "dir": [
+          0.15,
+          0,
+          -1
+        ],
+        "dist": 0.06,
+        "stage": 1
+      }
+    },
+    {
+      "id": "infraspinatus",
+      "name": {
+        "en": "Infraspinatus",
+        "zh": "冈下肌"
+      },
+      "short": {
+        "en": "Infraspinatus",
+        "zh": "冈下肌"
+      },
+      "group": "intermediate",
+      "mesh": "infraspinatus.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "infraspinatus.r"
+      },
+      "muscle": "infraspinatus",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-2"
+      },
+      "connects": [
+        "scapula",
+        "humerus"
+      ],
+      "explode": {
+        "dir": [
+          0.15,
+          0,
+          -1
+        ],
+        "dist": 0.06,
+        "stage": 1
+      }
+    },
+    {
+      "id": "teres-minor",
+      "name": {
+        "en": "Teres minor",
+        "zh": "小圆肌"
+      },
+      "short": {
+        "en": "Teres · minor",
+        "zh": "小圆肌"
+      },
+      "group": "intermediate",
+      "mesh": "teres-minor.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "teres-minor.r"
+      },
+      "muscle": "teres-minor",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-2"
+      },
+      "connects": [
+        "scapula",
+        "humerus"
+      ],
+      "explode": {
+        "dir": [
+          0.15,
+          0,
+          -1
+        ],
+        "dist": 0.06,
+        "stage": 1
+      }
+    },
+    {
+      "id": "serratus-posterior-inferior",
+      "name": {
+        "en": "Serratus posterior inferior",
+        "zh": "下后锯肌"
+      },
+      "short": {
+        "en": "Serratus · post inf",
+        "zh": "下后锯肌"
+      },
+      "group": "intermediate",
+      "mesh": "serratus-posterior-inferior.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "serratus-posterior-inferior.r"
+      },
+      "muscle": "serratus-posterior-inferior",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-2"
+      },
+      "connects": [
+        "thoracic-spine",
+        "lumbar-spine",
+        "thorax"
+      ],
+      "explode": {
+        "dir": [
+          0.15,
+          0,
+          -1
+        ],
+        "dist": 0.06,
+        "stage": 1
+      }
+    },
+    {
+      "id": "iliocostalis-lumborum",
+      "name": {
+        "en": "Iliocostalis lumborum",
+        "zh": "腰髂肋肌"
+      },
+      "short": {
+        "en": "Iliocostalis · lumbar",
+        "zh": "腰髂肋肌"
+      },
+      "group": "deep",
+      "mesh": "iliocostalis-lumborum.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "iliocostalis-lumborum.r"
+      },
+      "muscle": "iliocostalis-lumborum",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-3"
+      },
+      "connects": [
+        "pelvis",
+        "lumbar-spine",
+        "thorax"
+      ],
+      "explode": {
+        "dir": [
+          0.15,
+          0,
+          -1
+        ],
+        "dist": 0.06,
+        "stage": 2
+      }
+    },
+    {
+      "id": "iliocostalis-thoracis",
+      "name": {
+        "en": "Iliocostalis thoracis",
+        "zh": "胸髂肋肌"
+      },
+      "short": {
+        "en": "Iliocostalis · thoracic",
+        "zh": "胸髂肋肌"
+      },
+      "group": "deep",
+      "mesh": "iliocostalis-thoracis.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "iliocostalis-thoracis.r"
+      },
+      "muscle": "iliocostalis-thoracis",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-3"
+      },
+      "connects": [
+        "thorax",
+        "cervical-spine"
+      ],
+      "explode": {
+        "dir": [
+          0.15,
+          0,
+          -1
+        ],
+        "dist": 0.06,
+        "stage": 2
+      }
+    },
+    {
+      "id": "longissimus-thoracis",
+      "name": {
+        "en": "Longissimus thoracis",
+        "zh": "胸最长肌"
+      },
+      "short": {
+        "en": "Longissimus",
+        "zh": "胸最长肌"
+      },
+      "group": "deep",
+      "mesh": "longissimus-thoracis.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "longissimus-thoracis.r"
+      },
+      "muscle": "longissimus-thoracis",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-3"
+      },
+      "connects": [
+        "pelvis",
+        "lumbar-spine",
+        "thoracic-spine",
+        "thorax"
+      ],
+      "explode": {
+        "dir": [
+          0.15,
+          0,
+          -1
+        ],
+        "dist": 0.06,
+        "stage": 2
+      }
+    },
+    {
+      "id": "spinalis-thoracis",
+      "name": {
+        "en": "Spinalis thoracis",
+        "zh": "胸棘肌"
+      },
+      "short": {
+        "en": "Spinalis",
+        "zh": "胸棘肌"
+      },
+      "group": "deep",
+      "mesh": "spinalis-thoracis.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "spinalis-thoracis.r"
+      },
+      "muscle": "spinalis-thoracis",
+      "material": {
+        "color": "muscle",
+        "tint": "token:muscle-3"
+      },
+      "connects": [
+        "thoracic-spine",
+        "lumbar-spine"
+      ],
+      "explode": {
+        "dir": [
+          0.15,
+          0,
+          -1
+        ],
+        "dist": 0.06,
+        "stage": 2
+      }
+    },
+    {
+      "id": "deltoid-posterior",
+      "name": {
+        "en": "Deltoid, spinal part",
+        "zh": "三角肌肩胛冈部（后束）"
+      },
+      "short": {
+        "en": "Deltoid · posterior",
+        "zh": "三角肌肩胛冈部"
+      },
+      "group": "neighbours",
+      "mesh": "deltoid-posterior.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "deltoid-posterior.r"
+      },
+      "muscle": "deltoid-posterior",
+      "material": {
+        "color": "muscle",
+        "tint": "token:ink-3"
+      },
+      "connects": [
+        "scapula",
+        "humerus"
+      ]
+    },
+    {
+      "id": "triceps-brachii",
+      "name": {
+        "en": "Triceps brachii",
+        "zh": "肱三头肌"
+      },
+      "short": {
+        "en": "Triceps",
+        "zh": "肱三头肌"
+      },
+      "group": "neighbours",
+      "mesh": "triceps-brachii.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "triceps-brachii.r"
+      },
+      "muscle": "triceps-brachii",
+      "material": {
+        "color": "muscle",
+        "tint": "token:ink-3"
+      },
+      "connects": [
+        "scapula",
+        "humerus"
+      ]
+    },
+    {
+      "id": "gluteus-maximus",
+      "name": {
+        "en": "Gluteus maximus",
+        "zh": "臀大肌"
+      },
+      "short": {
+        "en": "Gluteus",
+        "zh": "臀大肌"
+      },
+      "group": "neighbours",
+      "mesh": "gluteus-maximus.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "gluteus-maximus.r"
+      },
+      "muscle": "gluteus-maximus",
+      "material": {
+        "color": "muscle",
+        "tint": "token:ink-3"
+      },
+      "connects": [
+        "pelvis"
+      ]
+    },
+    {
+      "id": "external-oblique",
+      "name": {
+        "en": "External abdominal oblique",
+        "zh": "腹外斜肌"
+      },
+      "short": {
+        "en": "External oblique",
+        "zh": "腹外斜肌"
+      },
+      "group": "neighbours",
+      "mesh": "external-oblique.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "external-oblique.r"
+      },
+      "muscle": "external-oblique",
+      "material": {
+        "color": "muscle",
+        "tint": "token:ink-3"
+      },
+      "connects": [
+        "thorax",
+        "pelvis"
+      ]
+    },
+    {
+      "id": "biceps-brachii",
+      "name": {
+        "en": "Biceps brachii",
+        "zh": "肱二头肌"
+      },
+      "short": {
+        "en": "Biceps",
+        "zh": "肱二头肌"
+      },
+      "group": "neighbours",
+      "mesh": "biceps-brachii.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "biceps-brachii.r"
+      },
+      "muscle": "biceps-brachii",
+      "material": {
+        "color": "muscle",
+        "tint": "token:ink-3"
+      },
+      "connects": [
+        "scapula"
+      ]
+    },
+    {
+      "id": "brachialis",
+      "name": {
+        "en": "Brachialis",
+        "zh": "肱肌"
+      },
+      "short": {
+        "en": "Brachialis",
+        "zh": "肱肌"
+      },
+      "group": "neighbours",
+      "mesh": "brachialis.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "brachialis.r"
+      },
+      "muscle": "brachialis",
+      "material": {
+        "color": "muscle",
+        "tint": "token:ink-3"
+      },
+      "connects": [
+        "humerus"
+      ]
+    },
+    {
+      "id": "brachioradialis",
+      "name": {
+        "en": "Brachioradialis",
+        "zh": "肱桡肌"
+      },
+      "short": {
+        "en": "Brachioradialis",
+        "zh": "肱桡肌"
+      },
+      "group": "neighbours",
+      "mesh": "brachioradialis.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "brachioradialis.r"
+      },
+      "muscle": "brachioradialis",
+      "material": {
+        "color": "muscle",
+        "tint": "token:ink-3"
+      },
+      "connects": [
+        "humerus"
+      ]
+    },
+    {
+      "id": "deltoid-anterior",
+      "name": {
+        "en": "Deltoid, clavicular part",
+        "zh": "三角肌锁骨部（前束）"
+      },
+      "short": {
+        "en": "Deltoid · anterior",
+        "zh": "三角肌锁骨部"
+      },
+      "group": "neighbours",
+      "mesh": "deltoid-anterior.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "deltoid-anterior.r"
+      },
+      "muscle": "deltoid-anterior",
+      "material": {
+        "color": "muscle",
+        "tint": "token:ink-3"
+      },
+      "connects": [
+        "clavicle",
+        "humerus"
+      ]
+    },
+    {
+      "id": "serratus-anterior",
+      "name": {
+        "en": "Serratus anterior",
+        "zh": "前锯肌"
+      },
+      "short": {
+        "en": "Serratus · anterior",
+        "zh": "前锯肌"
+      },
+      "group": "neighbours",
+      "mesh": "serratus-anterior.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "serratus-anterior.r"
+      },
+      "muscle": "serratus-anterior",
+      "material": {
+        "color": "muscle",
+        "tint": "token:ink-3"
+      },
+      "connects": [
+        "thorax",
+        "scapula"
+      ]
+    },
+    {
+      "id": "thoracic-spine",
+      "name": {
+        "en": "Thoracic vertebrae",
+        "zh": "胸椎"
+      },
+      "short": {
+        "en": "Thoracic spine",
+        "zh": "胸椎"
+      },
+      "group": "skeleton",
+      "mesh": "thoracic-spine",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Supports the ribs and anchors back muscles.",
+        "zh": "支撑肋骨，也是背部肌肉的附着支架。"
+      },
+      "detail": {
+        "en": "The thoracic vertebrae carry ribs and provide spinous and transverse attachment processes. The model merges them into one mesh, so individual spinal segments do not bend [M47] [M49].",
+        "zh": "胸椎连接肋骨，棘突与横突供肌肉附着。模型将它们合并成一个网格，不能逐节弯曲 [M47] [M49]。"
+      }
+    },
+    {
+      "id": "lumbar-spine",
+      "name": {
+        "en": "Lumbar vertebrae",
+        "zh": "腰椎"
+      },
+      "short": {
+        "en": "Lumbar spine",
+        "zh": "腰椎"
+      },
+      "group": "skeleton",
+      "mesh": "lumbar-spine",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Supports the lower trunk and anchors the erectors.",
+        "zh": "支撑腰部，供竖脊肌与筋膜附着。"
+      },
+      "detail": {
+        "en": "Lumbar vertebrae lie between the thoracic spine and sacrum. Attachments shown here include representative tendinous/fascial connections rather than complete footprints [M47] [M49].",
+        "zh": "腰椎位于胸椎与骶骨之间。这里标出的包括代表性的腱性或筋膜连接，不是全部附着面积 [M47] [M49]。"
+      }
+    },
+    {
+      "id": "thorax",
+      "name": {
+        "en": "Sternum, ribs and costal cartilages",
+        "zh": "胸骨、肋骨与肋软骨"
+      },
+      "short": {
+        "en": "Rib cage",
+        "zh": "胸骨、肋骨与肋软骨"
+      },
+      "group": "skeleton",
+      "mesh": "thorax",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Supports rib attachments of the back muscles.",
+        "zh": "支撑背部肌肉的肋骨附着点。"
+      },
+      "detail": {
+        "en": "The manifest exports sternum, ribs and costal cartilages together as thorax. Back attachment markers use the posterior rib surfaces; no separate sternum or rib mesh is duplicated [M47].",
+        "zh": "清单将胸骨、肋骨与肋软骨合并导出为 thorax。背部附着点用肋骨后面；没有重复绘制胸廓网格 [M47]。"
+      }
+    },
+    {
+      "id": "scapula",
+      "name": {
+        "en": "Scapula",
+        "zh": "肩胛骨"
+      },
+      "short": {
+        "en": "Scapula",
+        "zh": "肩胛骨"
+      },
+      "group": "skeleton",
+      "mesh": "scapula.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "scapula.r"
+      },
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Receives pulls that position the shoulder blade.",
+        "zh": "接受拉力，改变肩胛骨的位置。"
+      },
+      "detail": {
+        "en": "The scapular spine, medial border, inferior angle and infraspinous fossa give different muscles different pulling directions [M47] [M48].",
+        "zh": "肩胛冈、内侧缘、下角和冈下窝，让不同肌肉产生不同方向的拉力 [M47] [M48]。"
+      }
+    },
+    {
+      "id": "clavicle",
+      "name": {
+        "en": "Clavicle",
+        "zh": "锁骨"
+      },
+      "short": {
+        "en": "Clavicle",
+        "zh": "锁骨"
+      },
+      "group": "skeleton",
+      "mesh": "clavicle.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "clavicle.r"
+      },
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Connects the shoulder girdle to the sternum.",
+        "zh": "把肩带连到胸骨，接受上斜方肌的拉力。"
+      },
+      "detail": {
+        "en": "Upper trapezius inserts along the posterior border of the lateral clavicle. The sternoclavicular and acromioclavicular joints are simplified pivots in this model [M47].",
+        "zh": "斜方肌降部止于锁骨外侧段后缘。模型的胸锁和肩锁关节是简化转轴 [M47]。"
+      }
+    },
+    {
+      "id": "humerus",
+      "name": {
+        "en": "Humerus",
+        "zh": "肱骨"
+      },
+      "short": {
+        "en": "Humerus",
+        "zh": "肱骨"
+      },
+      "group": "skeleton",
+      "mesh": "humerus.l",
+      "bilateral": {
+        "axis": "x",
+        "mesh": "humerus.r"
+      },
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Receives the latissimus, teres and cuff tendons.",
+        "zh": "接受背阔肌、圆肌和肩袖的止腱。"
+      },
+      "detail": {
+        "en": "Latissimus inserts in the intertubercular groove floor, teres major on its medial lip, and the cuff on facets of the greater tubercle. These are distinct attachments [M47] [M48].",
+        "zh": "背阔肌止于结节间沟底，大圆肌止于内侧唇，肩袖止于大结节的不同小面。这些不是同一个止点 [M47] [M48]。"
+      }
+    },
+    {
+      "id": "pelvis",
+      "name": {
+        "en": "Pelvis, sacrum and coccyx",
+        "zh": "骨盆、骶骨与尾骨"
+      },
+      "short": {
+        "en": "Pelvis",
+        "zh": "骨盆、骶骨与尾骨"
+      },
+      "group": "skeleton",
+      "mesh": "pelvis",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Anchors lower-back fascia and muscle tendons.",
+        "zh": "为腰背筋膜与肌腱提供固定支架。"
+      },
+      "detail": {
+        "en": "The merged pelvis includes hip bones, sacrum and coccyx. Latissimus and the spinal erectors attach to the iliac crest and associated fascia/tendons; these markers are representative [M47].",
+        "zh": "合并骨盆包含髋骨、骶骨和尾骨。背阔肌与竖脊肌连到髂嵴及相关筋膜、肌腱；标记仅代表附着区 [M47]。"
+      }
+    },
+    {
+      "id": "skull",
+      "name": {
+        "en": "Occipital bone",
+        "zh": "枕骨"
+      },
+      "short": {
+        "en": "Occipital bone",
+        "zh": "枕骨"
+      },
+      "group": "skeleton",
+      "mesh": "skull",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Anchors the upper trapezius on the back of the skull.",
+        "zh": "在头骨后面供斜方肌降部附着。"
+      },
+      "detail": {
+        "en": "The true Z-Anatomy occipital bone is added from the pipeline reference skeleton because upper trapezius attaches to its external occipital protuberance and superior nuchal line. It is not the whole skull [M47].",
+        "zh": "从管线参考骨骼补入真实 Z-Anatomy 枕骨：斜方肌降部连到枕外隆凸和上项线。它不是完整头骨 [M47]。"
+      }
+    },
+    {
+      "id": "cervical-spine",
+      "name": {
+        "en": "Cervical vertebrae",
+        "zh": "颈椎"
+      },
+      "short": {
+        "en": "Cervical vertebrae",
+        "zh": "颈椎"
+      },
+      "group": "skeleton",
+      "mesh": "cervical-spine",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Anchors levator scapulae and upper-back muscles.",
+        "zh": "供肩胛提肌与上背肌肉附着。"
+      },
+      "detail": {
+        "en": "True Z-Anatomy C1–C7 reference meshes are merged into a selectable bone part. Levator attaches to C1–C4 transverse processes; rhomboid minor to the C7 spinous region, distinct from the levator attachment [M47].",
+        "zh": "将真实 Z-Anatomy C1–C7 参考网格合成可选骨骼零件。肩胛提肌连到 C1–C4 横突，小菱形肌连到 C7 棘突区，两者位置不同 [M47]。"
+      }
+    },
+    {
+      "id": "skin-outline",
+      "name": {
+        "en": "Body outline",
+        "zh": "体表轮廓"
+      },
+      "short": {
+        "en": "Body outline",
+        "zh": "体表轮廓"
+      },
+      "group": "body",
+      "mesh": "skin-outline",
+      "context": true,
+      "shell": true,
+      "material": {
+        "color": "membrane",
+        "tint": "token:bone"
+      },
+      "summary": {
+        "en": "Locates the back muscles on the whole reference body.",
+        "zh": "在全身参考模型上定位背部肌肉。"
+      },
+      "detail": {
+        "en": "The low-detail skin surface comes from the same Z-Anatomy reference body. X-ray fades this shell; left and right mean the body’s own sides [S2].",
+        "zh": "简化皮肤来自同一具 Z-Anatomy 参考人体。透视将轮廓调淡；左右指身体自身的左右 [S2]。"
+      }
+    }
+  ],
+  "groups": [
+    {
+      "id": "superficial",
+      "name": {
+        "en": "Surface layer",
+        "zh": "浅层"
+      },
+      "color": "token:muscle-1"
+    },
+    {
+      "id": "intermediate",
+      "name": {
+        "en": "Middle layer",
+        "zh": "中层"
+      },
+      "color": "token:muscle-2"
+    },
+    {
+      "id": "deep",
+      "name": {
+        "en": "Deep layer",
+        "zh": "深层"
+      },
+      "color": "token:muscle-3"
+    },
+    {
+      "id": "skeleton",
+      "name": {
+        "en": "Bones",
+        "zh": "骨骼"
+      },
+      "color": "token:bone"
+    },
+    {
+      "id": "neighbours",
+      "name": {
+        "en": "Neighbouring muscles",
+        "zh": "邻近肌肉"
+      },
+      "color": "token:ink-3",
+      "card": false
+    },
+    {
+      "id": "body",
+      "name": {
+        "en": "Body outline",
+        "zh": "体表轮廓"
+      },
+      "color": "token:ink-3",
+      "card": false
+    }
+  ],
+  "animations": [
+    {
+      "id": "trapezius-descending-contract",
+      "target": "trapezius-descending",
+      "kind": "contract",
+      "amount": 0.55,
+      "bulge": 0.04,
+      "hz": 0.4
+    },
+    {
+      "id": "trapezius-transverse-contract",
+      "target": "trapezius-transverse",
+      "kind": "contract",
+      "amount": 0.55,
+      "bulge": 0.04,
+      "hz": 0.4
+    },
+    {
+      "id": "trapezius-ascending-contract",
+      "target": "trapezius-ascending",
+      "kind": "contract",
+      "amount": 0.55,
+      "bulge": 0.04,
+      "hz": 0.4
+    },
+    {
+      "id": "latissimus-dorsi-contract",
+      "target": "latissimus-dorsi",
+      "kind": "contract",
+      "amount": 0.55,
+      "bulge": 0.04,
+      "hz": 0.4
+    },
+    {
+      "id": "rhomboid-major-contract",
+      "target": "rhomboid-major",
+      "kind": "contract",
+      "amount": 0.4,
+      "bulge": 0.04,
+      "hz": 0.4
+    },
+    {
+      "id": "rhomboid-minor-contract",
+      "target": "rhomboid-minor",
+      "kind": "contract",
+      "amount": 0.4,
+      "bulge": 0.04,
+      "hz": 0.4
+    },
+    {
+      "id": "levator-scapulae-contract",
+      "target": "levator-scapulae",
+      "kind": "contract",
+      "amount": 0.4,
+      "bulge": 0.04,
+      "hz": 0.4
+    },
+    {
+      "id": "teres-major-contract",
+      "target": "teres-major",
+      "kind": "contract",
+      "amount": 0.4,
+      "bulge": 0.04,
+      "hz": 0.4
+    },
+    {
+      "id": "infraspinatus-contract",
+      "target": "infraspinatus",
+      "kind": "contract",
+      "amount": 0.4,
+      "bulge": 0.04,
+      "hz": 0.4
+    },
+    {
+      "id": "teres-minor-contract",
+      "target": "teres-minor",
+      "kind": "contract",
+      "amount": 0.4,
+      "bulge": 0.04,
+      "hz": 0.4
+    },
+    {
+      "id": "serratus-posterior-inferior-contract",
+      "target": "serratus-posterior-inferior",
+      "kind": "contract",
+      "amount": 0.4,
+      "bulge": 0.04,
+      "hz": 0.4
+    },
+    {
+      "id": "iliocostalis-lumborum-contract",
+      "target": "iliocostalis-lumborum",
+      "kind": "contract",
+      "amount": 0.4,
+      "bulge": 0.04,
+      "hz": 0.4
+    },
+    {
+      "id": "iliocostalis-thoracis-contract",
+      "target": "iliocostalis-thoracis",
+      "kind": "contract",
+      "amount": 0.4,
+      "bulge": 0.04,
+      "hz": 0.4
+    },
+    {
+      "id": "longissimus-thoracis-contract",
+      "target": "longissimus-thoracis",
+      "kind": "contract",
+      "amount": 0.4,
+      "bulge": 0.04,
+      "hz": 0.4
+    },
+    {
+      "id": "spinalis-thoracis-contract",
+      "target": "spinalis-thoracis",
+      "kind": "contract",
+      "amount": 0.4,
+      "bulge": 0.04,
+      "hz": 0.4
+    }
+  ],
+  "views": {
+    "assembled": {
+      "camera": {
+        "position": [
+          0.65,
+          0.3,
+          -2.1
+        ],
+        "target": [
+          0,
+          0.0,
+          -0.04
+        ],
+        "fov": 30
+      }
+    },
+    "exploded": {
+      "camera": {
+        "position": [
+          0.8,
+          0.4,
+          -2.3
+        ],
+        "target": [
+          0,
+          0.02,
+          -0.02
+        ],
+        "fov": 30
+      }
+    },
+    "cover": {
+      "position": [
+        0.45,
+        0.25,
+        -1.85
+      ],
+      "target": [
+        0,
+        0.06,
+        -0.02
+      ],
+      "fov": 30
+    },
+    "section": {
+      "plane": "xy"
+    },
+    "cutaway": {
+      "normal": [
+        -1,
+        0,
+        0
+      ],
+      "offset": 0.035
+    },
+    "cuts": {
+      "sagittal-back": {
+        "normal": [
+          -1,
+          0,
+          0
+        ],
+        "offset": 0.035,
+        "label": {
+          "en": "Sagittal · left back",
+          "zh": "矢状 · 左背"
+        }
+      },
+      "transverse-t8": {
+        "normal": [
+          0,
+          -1,
+          0
+        ],
+        "offset": 0.069,
+        "label": {
+          "en": "Transverse · T8",
+          "zh": "横切 · T8"
+        }
+      }
+    },
+    "explodeLabel": {
+      "en": "Peel",
+      "zh": "剥层"
+    }
+  },
+  "presets": [
+    {
+      "id": "back",
+      "label": {
+        "en": "Back",
+        "zh": "背面"
+      },
+      "camera": {
+        "position": [
+          0.65,
+          0.3,
+          -2.1
+        ],
+        "target": [
+          0,
+          0.0,
+          -0.04
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "front",
+      "label": {
+        "en": "Front",
+        "zh": "正面"
+      },
+      "camera": {
+        "position": [
+          0.4,
+          0.25,
+          2.1
+        ],
+        "target": [
+          0,
+          0.02,
+          -0.02
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "left-side",
+      "label": {
+        "en": "Left side",
+        "zh": "左侧"
+      },
+      "camera": {
+        "position": [
+          1.85,
+          0.2,
+          -0.15
+        ],
+        "target": [
+          0.04,
+          0.0,
+          -0.02
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "close-back",
+      "label": {
+        "en": "Close",
+        "zh": "近景"
+      },
+      "camera": {
+        "position": [
+          0.55,
+          0.24,
+          -0.85
+        ],
+        "target": [
+          0.09,
+          0.15,
+          -0.04
+        ],
+        "fov": 28
+      }
+    },
+    {
+      "id": "on-my-body",
+      "label": {
+        "en": "On my body",
+        "zh": "在身上"
+      },
+      "camera": {
+        "position": [
+          1.05,
+          0.05,
+          -3.65
+        ],
+        "target": [
+          0,
+          -0.34,
+          0
+        ],
+        "fov": 30
+      },
+      "view": "xray"
+    },
+    {
+      "id": "exercise",
+      "label": {
+        "en": "Exercise",
+        "zh": "动作"
+      },
+      "camera": {
+        "position": [
+          2.7,
+          1.2,
+          -3.4
+        ],
+        "target": [
+          0,
+          -0.16,
+          0
+        ],
+        "fov": 22
+      }
+    }
+  ],
+  "poses": {
+    "shrug": {
+      "joint:clavicle.l": {
+        "elevation": 10
+      },
+      "contract": {
+        "trapezius-descending": 0.7,
+        "levator-scapulae": 0.55
+      },
+      "duration": 1.2
+    },
+    "retract": {
+      "joint:clavicle.l": {
+        "retraction": 10
+      },
+      "contract": {
+        "trapezius-transverse": 0.65,
+        "rhomboid-major": 0.6,
+        "rhomboid-minor": 0.6
+      },
+      "duration": 1.2
+    },
+    "arm-high": {
+      "joint:shoulder.l": {
+        "abduction": 90
+      },
+      "joint:elbow.l": {
+        "flexion": 10
+      },
+      "joint:scapula.l": {
+        "upward-rotation": 12
+      },
+      "contract": {},
+      "duration": 1.2
+    },
+    "pull-down": {
+      "joint:shoulder.l": {
+        "abduction": 25,
+        "extension": 15
+      },
+      "joint:elbow.l": {
+        "flexion": 85
+      },
+      "contract": {
+        "latissimus-dorsi": 0.65,
+        "teres-major": 0.5
+      },
+      "duration": 1.2
+    },
+    "turn-in": {
+      "joint:shoulder.l": {
+        "internal-rotation": 35
+      },
+      "joint:elbow.l": {
+        "flexion": 90
+      },
+      "contract": {
+        "latissimus-dorsi": 0.45,
+        "teres-major": 0.55
+      },
+      "duration": 1.2
+    },
+    "turn-out": {
+      "joint:shoulder.l": {
+        "external-rotation": 35
+      },
+      "joint:elbow.l": {
+        "flexion": 90
+      },
+      "contract": {
+        "infraspinatus": 0.6,
+        "teres-minor": 0.55
+      },
+      "duration": 1.2
+    },
+    "spine-extend": {
+      "joint:trunk": {
+        "extension": 8
+      },
+      "contract": {
+        "iliocostalis-lumborum": 0.45,
+        "iliocostalis-thoracis": 0.45,
+        "longissimus-thoracis": 0.45,
+        "spinalis-thoracis": 0.45
+      },
+      "duration": 1.2
+    },
+    "side-bend": {
+      "joint:trunk": {
+        "lateral-flexion": 8
+      },
+      "contract": {
+        "iliocostalis-lumborum": 0.35,
+        "iliocostalis-thoracis": 0.35,
+        "longissimus-thoracis": 0.35,
+        "spinalis-thoracis": 0.35
+      },
+      "duration": 1.2
+    },
+    "brace": {
+      "joint:trunk": {
+        "flexion": 0
+      },
+      "contract": {},
+      "duration": 1.2
+    },
+    "upward-rotate": {
+      "joint:scapula.l": {
+        "upward-rotation": 15
+      },
+      "joint:shoulder.l": {
+        "abduction": 70
+      },
+      "contract": {
+        "trapezius-descending": 0.45,
+        "trapezius-ascending": 0.65,
+        "serratus-anterior": 0.55
+      },
+      "duration": 1.2
+    },
+    "downward-rotate": {
+      "joint:scapula.l": {
+        "downward-rotation": 10
+      },
+      "contract": {
+        "rhomboid-major": 0.55,
+        "rhomboid-minor": 0.5,
+        "levator-scapulae": 0.5
+      },
+      "duration": 1.2
+    },
+    "depress": {
+      "joint:clavicle.l": {
+        "depression": 8
+      },
+      "contract": {
+        "trapezius-ascending": 0.55
+      },
+      "duration": 1.2
+    }
+  },
+  "rig": {
+    "joints": {
+      "trunk": {
+        "node": "joint.trunk",
+        "axes": {
+          "flexion": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "lateral-flexion": [
+            0,
+            0,
+            1
+          ],
+          "rotation": [
+            0.0,
+            1.0,
+            0.0
+          ]
+        }
+      },
+      "clavicle.l": {
+        "node": "joint.clavicle.l",
+        "axes": {
+          "elevation": [
+            0,
+            0,
+            1
+          ],
+          "protraction": [
+            0,
+            -1,
+            0
+          ]
+        }
+      },
+      "scapula.l": {
+        "node": "joint.scapula.l",
+        "axes": {
+          "elevation": [
+            0,
+            0,
+            1
+          ],
+          "protraction": [
+            0,
+            -1,
+            0
+          ],
+          "upward-rotation": [
+            0,
+            0,
+            1
+          ]
+        }
+      },
+      "shoulder.l": {
+        "node": "joint.shoulder.l",
+        "axes": {
+          "flexion": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "abduction": [
+            0,
+            0,
+            1
+          ],
+          "horizontal-adduction": [
+            0,
+            -1,
+            0
+          ],
+          "internal-rotation": [
+            0.1801227480173111,
+            -0.9823485612869263,
+            -0.0504680871963501
+          ]
+        }
+      },
+      "elbow.l": {
+        "node": "joint.elbow.l",
+        "axes": {
+          "flexion": [
+            -1.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "hand.l": {
+        "node": "joint.hand.l",
+        "axes": {
+          "flexion": [
+            -1.0,
+            0.0,
+            0.0
+          ]
+        },
+        "offset": 0.08
+      },
+      "clavicle.r": {
+        "node": "joint.clavicle.r",
+        "axes": {
+          "elevation": [
+            0,
+            0,
+            -1
+          ],
+          "protraction": [
+            0,
+            1,
+            0
+          ]
+        }
+      },
+      "scapula.r": {
+        "node": "joint.scapula.r",
+        "axes": {
+          "elevation": [
+            0,
+            0,
+            -1
+          ],
+          "protraction": [
+            0,
+            1,
+            0
+          ],
+          "upward-rotation": [
+            0,
+            0,
+            -1
+          ]
+        }
+      },
+      "shoulder.r": {
+        "node": "joint.shoulder.r",
+        "axes": {
+          "flexion": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "abduction": [
+            0,
+            0,
+            -1
+          ],
+          "horizontal-adduction": [
+            0,
+            -1,
+            0
+          ],
+          "internal-rotation": [
+            -0.18012265861034393,
+            -0.9823486804962158,
+            -0.05046815797686577
+          ]
+        }
+      },
+      "elbow.r": {
+        "node": "joint.elbow.r",
+        "axes": {
+          "flexion": [
+            -1.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "hand.r": {
+        "node": "joint.hand.r",
+        "axes": {
+          "flexion": [
+            -1.0,
+            0.0,
+            0.0
+          ]
+        },
+        "offset": 0.08
+      }
+    },
+    "demo": {
+      "scapula": {
+        "elevation": 10,
+        "depression": 8,
+        "retraction": 10,
+        "protraction": 10,
+        "upward-rotation": 15,
+        "downward-rotation": 10
+      },
+      "shoulder": {
+        "flexion": 75,
+        "extension": 25,
+        "adduction": 20,
+        "abduction": 80,
+        "horizontal-abduction": 35,
+        "horizontal-adduction": 35,
+        "internal-rotation": 35,
+        "external-rotation": 35
+      },
+      "trunk": {
+        "flexion": 8,
+        "extension": 8,
+        "lateral-flexion": 8,
+        "rotation": 8
+      },
+      "elbow": {
+        "flexion": 90,
+        "extension": 10
+      },
+      "neck": {
+        "lateral-flexion": 0
+      },
+      "hip": {
+        "extension": 0,
+        "external-rotation": 0,
+        "abduction": 0
+      },
+      "ribs": {
+        "depression": 0
+      },
+      "forearm": {
+        "supination": 0
+      }
+    }
+  },
+  "sites": [
+    {
+      "muscle": "trapezius-descending",
+      "kind": "origin",
+      "bone": "skull",
+      "points": [
+        [
+          0.0067829,
+          0.3739053,
+          -0.0315362
+        ],
+        [
+          0.0169175,
+          0.3754061,
+          -0.0311492
+        ],
+        [
+          0.021092,
+          0.3747739,
+          -0.0289397
+        ]
+      ]
+    },
+    {
+      "muscle": "trapezius-descending",
+      "kind": "origin",
+      "bone": "cervical-spine",
+      "points": [
+        [
+          1e-07,
+          0.2451222,
+          -0.0279547
+        ]
+      ]
+    },
+    {
+      "muscle": "trapezius-descending",
+      "kind": "insertion",
+      "bone": "clavicle",
+      "points": [
+        [
+          0.1129613,
+          0.2207526,
+          0.0062508
+        ]
+      ]
+    },
+    {
+      "muscle": "trapezius-transverse",
+      "kind": "origin",
+      "bone": "cervical-spine",
+      "points": [
+        [
+          1e-07,
+          0.2451222,
+          -0.0279547
+        ]
+      ]
+    },
+    {
+      "muscle": "trapezius-transverse",
+      "kind": "origin",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          0.0022981,
+          0.2277489,
+          -0.0341725
+        ],
+        [
+          0.0014726,
+          0.2069111,
+          -0.0399764
+        ],
+        [
+          0.0004174,
+          0.1818844,
+          -0.0511297
+        ]
+      ]
+    },
+    {
+      "muscle": "trapezius-transverse",
+      "kind": "insertion",
+      "bone": "scapula",
+      "points": [
+        [
+          0.1615573,
+          0.217327,
+          0.0078179
+        ],
+        [
+          0.1608692,
+          0.2149833,
+          -0.0042419
+        ],
+        [
+          0.1621327,
+          0.2090922,
+          -0.0145373
+        ]
+      ]
+    },
+    {
+      "muscle": "trapezius-ascending",
+      "kind": "origin",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          0.0003639,
+          0.1629071,
+          -0.0516495
+        ],
+        [
+          1e-07,
+          0.1276687,
+          -0.0500708
+        ],
+        [
+          0.000688,
+          0.0896323,
+          -0.0508629
+        ],
+        [
+          0.0,
+          0.0370948,
+          -0.0509976
+        ],
+        [
+          1e-07,
+          0.0128991,
+          -0.0471639
+        ],
+        [
+          0.0012736,
+          -0.0245736,
+          -0.0427559
+        ],
+        [
+          0.0,
+          -0.0443088,
+          -0.035129
+        ],
+        [
+          0.0,
+          -0.0782428,
+          -0.0278126
+        ]
+      ]
+    },
+    {
+      "muscle": "trapezius-ascending",
+      "kind": "insertion",
+      "bone": "scapula",
+      "points": [
+        [
+          0.0802763,
+          0.1753633,
+          -0.0500714
+        ]
+      ]
+    },
+    {
+      "muscle": "latissimus-dorsi",
+      "kind": "origin",
+      "bone": "scapula",
+      "points": [
+        [
+          0.0956309,
+          0.0589184,
+          -0.0540723
+        ],
+        [
+          0.0944262,
+          0.0634142,
+          -0.0567646
+        ],
+        [
+          0.0867601,
+          0.0723704,
+          -0.0621593
+        ]
+      ]
+    },
+    {
+      "muscle": "latissimus-dorsi",
+      "kind": "origin",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          0.0003157,
+          0.0675739,
+          -0.0489797
+        ],
+        [
+          0.0,
+          0.0370948,
+          -0.0509976
+        ],
+        [
+          1e-07,
+          0.0128991,
+          -0.0471639
+        ],
+        [
+          0.0012736,
+          -0.0245736,
+          -0.0427559
+        ],
+        [
+          0.0,
+          -0.0443088,
+          -0.035129
+        ],
+        [
+          0.0,
+          -0.0782428,
+          -0.0278126
+        ]
+      ]
+    },
+    {
+      "muscle": "latissimus-dorsi",
+      "kind": "origin",
+      "bone": "lumbar-spine",
+      "points": [
+        [
+          0.0001512,
+          -0.1099668,
+          -0.0215018
+        ],
+        [
+          1e-07,
+          -0.141873,
+          -0.0163833
+        ],
+        [
+          1.04e-05,
+          -0.168302,
+          -0.0163703
+        ],
+        [
+          1e-07,
+          -0.1942444,
+          -0.016947
+        ],
+        [
+          0.0,
+          -0.2156335,
+          -0.0212125
+        ]
+      ]
+    },
+    {
+      "muscle": "latissimus-dorsi",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.0386487,
+          -0.2394761,
+          -0.0293515
+        ],
+        [
+          0.0526306,
+          -0.2187746,
+          -0.0238347
+        ],
+        [
+          0.0704295,
+          -0.202533,
+          -0.0050628
+        ],
+        [
+          0.0012769,
+          -0.2629901,
+          -0.0285783
+        ]
+      ]
+    },
+    {
+      "muscle": "latissimus-dorsi",
+      "kind": "origin",
+      "bone": "thorax",
+      "points": [
+        [
+          0.1196221,
+          -0.0312075,
+          0.0022979
+        ],
+        [
+          0.1188548,
+          -0.0607115,
+          0.0083401
+        ],
+        [
+          0.0953138,
+          -0.0881105,
+          -0.0058479
+        ],
+        [
+          0.0734978,
+          -0.1040543,
+          -0.0089109
+        ]
+      ]
+    },
+    {
+      "muscle": "latissimus-dorsi",
+      "kind": "insertion",
+      "bone": "humerus",
+      "points": [
+        [
+          0.1771222,
+          0.1248156,
+          0.0250787
+        ]
+      ]
+    },
+    {
+      "muscle": "rhomboid-major",
+      "kind": "origin",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          0.0014726,
+          0.2069111,
+          -0.0399764
+        ],
+        [
+          0.0004174,
+          0.1818844,
+          -0.0511297
+        ],
+        [
+          0.0003639,
+          0.1629071,
+          -0.0516495
+        ],
+        [
+          1e-07,
+          0.1276687,
+          -0.0500708
+        ]
+      ]
+    },
+    {
+      "muscle": "rhomboid-major",
+      "kind": "insertion",
+      "bone": "scapula",
+      "points": [
+        [
+          0.079814,
+          0.0744569,
+          -0.0608254
+        ],
+        [
+          0.0680745,
+          0.107868,
+          -0.0612107
+        ],
+        [
+          0.0621237,
+          0.1419008,
+          -0.0543872
+        ]
+      ]
+    },
+    {
+      "muscle": "rhomboid-minor",
+      "kind": "insertion",
+      "bone": "scapula",
+      "points": [
+        [
+          0.0610301,
+          0.1651496,
+          -0.0516632
+        ],
+        [
+          0.0616922,
+          0.1764586,
+          -0.0501156
+        ],
+        [
+          0.0637143,
+          0.1863216,
+          -0.0467253
+        ]
+      ]
+    },
+    {
+      "muscle": "rhomboid-minor",
+      "kind": "origin",
+      "bone": "cervical-spine",
+      "points": [
+        [
+          1e-07,
+          0.2451222,
+          -0.0279547
+        ]
+      ]
+    },
+    {
+      "muscle": "rhomboid-minor",
+      "kind": "origin",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          0.0022981,
+          0.2277489,
+          -0.0341725
+        ]
+      ]
+    },
+    {
+      "muscle": "levator-scapulae",
+      "kind": "origin",
+      "bone": "cervical-spine",
+      "points": [
+        [
+          0.0403926,
+          0.3395053,
+          0.0356488
+        ],
+        [
+          0.0256808,
+          0.3221585,
+          0.0350571
+        ],
+        [
+          0.0278529,
+          0.3071236,
+          0.0375822
+        ],
+        [
+          0.0280935,
+          0.294058,
+          0.0382323
+        ]
+      ]
+    },
+    {
+      "muscle": "levator-scapulae",
+      "kind": "insertion",
+      "bone": "scapula",
+      "points": [
+        [
+          0.0676752,
+          0.1949641,
+          -0.0412111
+        ],
+        [
+          0.0779147,
+          0.2079018,
+          -0.0299235
+        ],
+        [
+          0.0823258,
+          0.211465,
+          -0.0286456
+        ]
+      ]
+    },
+    {
+      "muscle": "teres-major",
+      "kind": "origin",
+      "bone": "scapula",
+      "points": [
+        [
+          0.101628,
+          0.0604785,
+          -0.0482906
+        ],
+        [
+          0.1074204,
+          0.0690149,
+          -0.0441167
+        ],
+        [
+          0.1126034,
+          0.0837587,
+          -0.0401934
+        ]
+      ]
+    },
+    {
+      "muscle": "teres-major",
+      "kind": "insertion",
+      "bone": "humerus",
+      "points": [
+        [
+          0.1779857,
+          0.1277214,
+          0.0298493
+        ]
+      ]
+    },
+    {
+      "muscle": "infraspinatus",
+      "kind": "origin",
+      "bone": "scapula",
+      "points": [
+        [
+          0.0890171,
+          0.1258865,
+          -0.048516
+        ],
+        [
+          0.0858998,
+          0.16784,
+          -0.0382561
+        ],
+        [
+          0.1161332,
+          0.1846584,
+          -0.0277108
+        ]
+      ]
+    },
+    {
+      "muscle": "infraspinatus",
+      "kind": "insertion",
+      "bone": "humerus",
+      "points": [
+        [
+          0.1939742,
+          0.1930478,
+          0.0199824
+        ],
+        [
+          0.1913611,
+          0.1914402,
+          0.0128537
+        ],
+        [
+          0.1876493,
+          0.190055,
+          0.0082145
+        ]
+      ]
+    },
+    {
+      "muscle": "teres-minor",
+      "kind": "origin",
+      "bone": "scapula",
+      "points": [
+        [
+          0.1098046,
+          0.1063098,
+          -0.0394408
+        ],
+        [
+          0.1247466,
+          0.1298014,
+          -0.023074
+        ],
+        [
+          0.1296368,
+          0.1430416,
+          -0.0137909
+        ]
+      ]
+    },
+    {
+      "muscle": "teres-minor",
+      "kind": "insertion",
+      "bone": "humerus",
+      "points": [
+        [
+          0.1941797,
+          0.1827675,
+          0.025272
+        ],
+        [
+          0.1940576,
+          0.1813803,
+          0.0190137
+        ],
+        [
+          0.1885741,
+          0.1810839,
+          0.0104457
+        ]
+      ]
+    },
+    {
+      "muscle": "serratus-posterior-inferior",
+      "kind": "origin",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          0.0,
+          -0.0443088,
+          -0.035129
+        ],
+        [
+          0.0,
+          -0.0782428,
+          -0.0278126
+        ]
+      ]
+    },
+    {
+      "muscle": "serratus-posterior-inferior",
+      "kind": "origin",
+      "bone": "lumbar-spine",
+      "points": [
+        [
+          0.0001512,
+          -0.1099668,
+          -0.0215018
+        ],
+        [
+          1e-07,
+          -0.141873,
+          -0.0163833
+        ]
+      ]
+    },
+    {
+      "muscle": "serratus-posterior-inferior",
+      "kind": "insertion",
+      "bone": "thorax",
+      "points": [
+        [
+          0.1099883,
+          -0.0189769,
+          -0.0145012
+        ],
+        [
+          0.0957708,
+          -0.0486668,
+          -0.019279
+        ],
+        [
+          0.0903198,
+          -0.087284,
+          -0.0100354
+        ],
+        [
+          0.0703398,
+          -0.1178966,
+          -0.0098083
+        ]
+      ]
+    },
+    {
+      "muscle": "iliocostalis-lumborum",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.0173047,
+          -0.3112928,
+          -0.028912
+        ],
+        [
+          0.0354755,
+          -0.2493909,
+          -0.0259756
+        ]
+      ]
+    },
+    {
+      "muscle": "iliocostalis-lumborum",
+      "kind": "origin",
+      "bone": "lumbar-spine",
+      "points": [
+        [
+          0.0001512,
+          -0.1099668,
+          -0.0215018
+        ],
+        [
+          1.04e-05,
+          -0.168302,
+          -0.0163703
+        ],
+        [
+          0.0,
+          -0.2156335,
+          -0.0212125
+        ]
+      ]
+    },
+    {
+      "muscle": "longissimus-thoracis",
+      "kind": "origin",
+      "bone": "pelvis",
+      "points": [
+        [
+          0.0019088,
+          -0.276089,
+          -0.0319998
+        ],
+        [
+          0.0354755,
+          -0.2493909,
+          -0.0259756
+        ]
+      ]
+    },
+    {
+      "muscle": "longissimus-thoracis",
+      "kind": "origin",
+      "bone": "lumbar-spine",
+      "points": [
+        [
+          0.0001512,
+          -0.1099668,
+          -0.0215018
+        ],
+        [
+          1.04e-05,
+          -0.168302,
+          -0.0163703
+        ],
+        [
+          0.0,
+          -0.2156335,
+          -0.0212125
+        ]
+      ]
+    },
+    {
+      "muscle": "iliocostalis-lumborum",
+      "kind": "insertion",
+      "bone": "thorax",
+      "points": [
+        [
+          0.1026377,
+          0.1000847,
+          -0.0294471
+        ],
+        [
+          0.0965278,
+          0.0662966,
+          -0.0376032
+        ],
+        [
+          0.0891291,
+          0.0360241,
+          -0.0397734
+        ],
+        [
+          0.096894,
+          -0.0097211,
+          -0.027268
+        ],
+        [
+          0.0896034,
+          -0.0446691,
+          -0.0225152
+        ],
+        [
+          0.0663936,
+          -0.0604157,
+          -0.024145
+        ],
+        [
+          0.0529285,
+          -0.0924021,
+          -0.0172475
+        ]
+      ]
+    },
+    {
+      "muscle": "iliocostalis-thoracis",
+      "kind": "origin",
+      "bone": "thorax",
+      "points": [
+        [
+          0.0782739,
+          0.0919666,
+          -0.0428873
+        ],
+        [
+          0.0676761,
+          0.0624585,
+          -0.043658
+        ],
+        [
+          0.0700448,
+          0.0284999,
+          -0.0402914
+        ],
+        [
+          0.0652208,
+          -0.0008079,
+          -0.0332493
+        ],
+        [
+          0.0558209,
+          -0.0334648,
+          -0.0262626
+        ],
+        [
+          0.0445805,
+          -0.0691595,
+          -0.0135022
+        ]
+      ]
+    },
+    {
+      "muscle": "iliocostalis-thoracis",
+      "kind": "insertion",
+      "bone": "thorax",
+      "points": [
+        [
+          0.0451297,
+          0.2424586,
+          0.0232241
+        ],
+        [
+          0.0543081,
+          0.2323268,
+          0.009886
+        ],
+        [
+          0.0596624,
+          0.2114728,
+          -0.0102491
+        ],
+        [
+          0.0796829,
+          0.1824067,
+          -0.021519
+        ],
+        [
+          0.0812155,
+          0.1554664,
+          -0.0304998
+        ],
+        [
+          0.0750792,
+          0.1222839,
+          -0.0450546
+        ]
+      ]
+    },
+    {
+      "muscle": "iliocostalis-thoracis",
+      "kind": "insertion",
+      "bone": "cervical-spine",
+      "points": [
+        [
+          0.0337068,
+          0.2531293,
+          0.0235761
+        ]
+      ]
+    },
+    {
+      "muscle": "longissimus-thoracis",
+      "kind": "insertion",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          0.0386361,
+          0.2491678,
+          0.011958
+        ],
+        [
+          0.036851,
+          0.2327156,
+          -0.000654
+        ],
+        [
+          0.0339754,
+          0.2088818,
+          -0.0146367
+        ],
+        [
+          0.0351357,
+          0.1851656,
+          -0.0245411
+        ],
+        [
+          0.0368143,
+          0.1566915,
+          -0.0315353
+        ],
+        [
+          0.035755,
+          0.1292723,
+          -0.0407545
+        ],
+        [
+          0.0356222,
+          0.0972942,
+          -0.0379124
+        ],
+        [
+          0.0336793,
+          0.0635322,
+          -0.035241
+        ]
+      ]
+    },
+    {
+      "muscle": "longissimus-thoracis",
+      "kind": "insertion",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          0.0316782,
+          0.0335481,
+          -0.0347251
+        ],
+        [
+          0.0321687,
+          0.0042563,
+          -0.0270504
+        ],
+        [
+          0.0249435,
+          -0.0206197,
+          -0.0157958
+        ],
+        [
+          0.0212493,
+          -0.0504276,
+          -0.0123073
+        ]
+      ]
+    },
+    {
+      "muscle": "longissimus-thoracis",
+      "kind": "insertion",
+      "bone": "thorax",
+      "points": [
+        [
+          0.0533745,
+          0.2099244,
+          -0.0111508
+        ],
+        [
+          0.0575335,
+          0.1859979,
+          -0.024756
+        ],
+        [
+          0.0629796,
+          0.1529285,
+          -0.0330052
+        ],
+        [
+          0.0669098,
+          0.1211568,
+          -0.0460978
+        ],
+        [
+          0.0667576,
+          0.0862713,
+          -0.0446607
+        ],
+        [
+          0.0613753,
+          0.0550049,
+          -0.0436518
+        ],
+        [
+          0.0586819,
+          0.0240989,
+          -0.0408615
+        ],
+        [
+          0.0550293,
+          -0.0097439,
+          -0.0322184
+        ]
+      ]
+    },
+    {
+      "muscle": "longissimus-thoracis",
+      "kind": "insertion",
+      "bone": "thorax",
+      "points": [
+        [
+          0.0444091,
+          -0.0368763,
+          -0.0262364
+        ],
+        [
+          0.0374145,
+          -0.0659932,
+          -0.008754
+        ]
+      ]
+    },
+    {
+      "muscle": "longissimus-thoracis",
+      "kind": "insertion",
+      "bone": "lumbar-spine",
+      "points": [
+        [
+          0.0226907,
+          -0.0819519,
+          -0.0042588
+        ],
+        [
+          0.0228652,
+          -0.1141739,
+          0.0054777
+        ],
+        [
+          0.0209708,
+          -0.141264,
+          0.004986
+        ]
+      ]
+    },
+    {
+      "muscle": "spinalis-thoracis",
+      "kind": "origin",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          0.0,
+          -0.0443088,
+          -0.035129
+        ],
+        [
+          0.0,
+          -0.0782428,
+          -0.0278126
+        ]
+      ]
+    },
+    {
+      "muscle": "spinalis-thoracis",
+      "kind": "origin",
+      "bone": "lumbar-spine",
+      "points": [
+        [
+          0.0001512,
+          -0.1099668,
+          -0.0215018
+        ],
+        [
+          1e-07,
+          -0.141873,
+          -0.0163833
+        ]
+      ]
+    },
+    {
+      "muscle": "spinalis-thoracis",
+      "kind": "insertion",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          0.0014726,
+          0.2069111,
+          -0.0399764
+        ],
+        [
+          0.0004174,
+          0.1818844,
+          -0.0511297
+        ],
+        [
+          0.0003639,
+          0.1629071,
+          -0.0516495
+        ],
+        [
+          1e-07,
+          0.1276687,
+          -0.0500708
+        ],
+        [
+          0.000688,
+          0.0896323,
+          -0.0508629
+        ],
+        [
+          0.0003157,
+          0.0675739,
+          -0.0489797
+        ],
+        [
+          0.0,
+          0.0370948,
+          -0.0509976
+        ]
+      ]
+    },
+    {
+      "muscle": "iliocostalis-lumborum",
+      "kind": "origin",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          0.0,
+          -0.0443088,
+          -0.035129
+        ],
+        [
+          0.0,
+          -0.0782428,
+          -0.0278126
+        ]
+      ]
+    },
+    {
+      "muscle": "longissimus-thoracis",
+      "kind": "origin",
+      "bone": "thoracic-spine",
+      "points": [
+        [
+          0.0,
+          -0.0443088,
+          -0.035129
+        ],
+        [
+          0.0,
+          -0.0782428,
+          -0.0278126
+        ]
+      ]
+    }
+  ],
+  "units": {
+    "modelUnit": "m",
+    "scale": 1
+  },
+  "spec": [
+    {
+      "key": {
+        "en": "Muscles",
+        "zh": "肌肉"
+      },
+      "value": {
+        "en": "15 parts · 3 layers",
+        "zh": "15 个 · 3 层"
+      },
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Exercises",
+        "zh": "动作"
+      },
+      "value": "11",
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Model",
+        "zh": "模型"
+      },
+      "value": {
+        "en": "Z-Anatomy · male reference",
+        "zh": "Z-Anatomy · 男性参考"
+      },
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Stature",
+        "zh": "身高"
+      },
+      "value": "1.71 m",
+      "tag": "design"
+    }
+  ]
+}

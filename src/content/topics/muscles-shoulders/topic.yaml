@@ -1,0 +1,14 @@
+id: muscles-shoulders
+title: { en: "Shoulder muscles", zh: "肩部肌肉" }
+subtitle: { en: "Layer by layer: the deltoid, the rotator cuff and the movements they share", zh: "一层一层看：三角肌、肩袖，以及它们共同完成的动作" }
+subject: biology
+tags: [health, fitness, space]
+moe: []
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: draft
+shortTitle: { en: "Shoulder muscles", zh: "肩部肌肉" }
+note: { en: "Male reference anatomy · meshes Z-Anatomy / BodyParts3D, CC BY-SA 4.0", zh: "男性参考解剖 · 网格 Z-Anatomy / BodyParts3D，CC BY-SA 4.0" }

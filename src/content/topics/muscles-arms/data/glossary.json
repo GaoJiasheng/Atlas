@@ -1,0 +1,147 @@
+{
+  "terms": [
+    {
+      "id": "origin",
+      "term": {
+        "en": "Origin",
+        "zh": "起点"
+      },
+      "definition": {
+        "en": "A muscle attachment conventionally considered the more fixed end, often nearer the trunk. Which end actually moves depends on the task.",
+        "zh": "通常认为较固定、往往更靠近躯干的肌肉附着端；实际哪端移动取决于动作。"
+      }
+    },
+    {
+      "id": "insertion",
+      "term": {
+        "en": "Insertion",
+        "zh": "止点"
+      },
+      "definition": {
+        "en": "The other principal muscle attachment, usually the end moved during an open-chain action.",
+        "zh": "肌肉另一主要附着端，通常在开放运动链动作中被拉动。"
+      }
+    },
+    {
+      "id": "tendon",
+      "term": {
+        "en": "Tendon",
+        "zh": "肌腱"
+      },
+      "definition": {
+        "en": "Strong connective tissue that transmits muscle force to bone or another connective structure.",
+        "zh": "把肌肉的力传给骨或其他结缔组织结构的坚韧结缔组织。"
+      }
+    },
+    {
+      "id": "muscle-belly",
+      "term": {
+        "en": "Muscle belly",
+        "zh": "肌腹"
+      },
+      "definition": {
+        "en": "The fleshy part of a muscle containing the fibres that develop force.",
+        "zh": "肌肉中含有发力纤维的肉质部分。"
+      }
+    },
+    {
+      "id": "coracoid-process",
+      "term": {
+        "en": "Coracoid process",
+        "zh": "喙突"
+      },
+      "definition": {
+        "en": "The forward-projecting hook on the scapula where short-head biceps and coracobrachialis begin.",
+        "zh": "肩胛骨上向前伸出的钩状突起，肱二头肌短头和喙肱肌起于此处。"
+      }
+    },
+    {
+      "id": "olecranon",
+      "term": {
+        "en": "Olecranon",
+        "zh": "鹰嘴"
+      },
+      "definition": {
+        "en": "The upper rear projection of the ulna forming the elbow tip and receiving the triceps tendon.",
+        "zh": "尺骨近端后方的突起，形成肘尖，接受肱三头肌止腱。"
+      }
+    },
+    {
+      "id": "flexion",
+      "term": {
+        "en": "Flexion",
+        "zh": "屈"
+      },
+      "definition": {
+        "en": "A bending movement that reduces the angle between adjoining segments, such as bringing the forearm towards the upper arm.",
+        "zh": "减小相邻肢段夹角的弯曲运动，如前臂靠近上臂。"
+      }
+    },
+    {
+      "id": "extension",
+      "term": {
+        "en": "Extension",
+        "zh": "伸"
+      },
+      "definition": {
+        "en": "A straightening movement that increases the angle between adjoining segments.",
+        "zh": "增大相邻肢段夹角的伸直运动。"
+      }
+    },
+    {
+      "id": "supination",
+      "term": {
+        "en": "Supination",
+        "zh": "旋后"
+      },
+      "definition": {
+        "en": "Forearm rotation that turns the palm upward with a bent elbow, or forward in anatomical position.",
+        "zh": "屈肘时使掌心向上，或在解剖学姿势下使掌心向前的前臂旋转。"
+      }
+    },
+    {
+      "id": "pronation",
+      "term": {
+        "en": "Pronation",
+        "zh": "旋前"
+      },
+      "definition": {
+        "en": "Forearm rotation that turns the palm downward with a bent elbow; the radius crosses over the ulna.",
+        "zh": "屈肘时使掌心向下的前臂旋转，桡骨跨过尺骨。"
+      }
+    },
+    {
+      "id": "radial-deviation",
+      "term": {
+        "en": "Radial deviation",
+        "zh": "桡偏"
+      },
+      "definition": {
+        "en": "Wrist movement towards the thumb side, also called wrist abduction.",
+        "zh": "腕向拇指侧偏的运动，也称腕外展。"
+      }
+    },
+    {
+      "id": "emg",
+      "term": {
+        "en": "EMG (electromyography)",
+        "zh": "肌电（肌电图）"
+      },
+      "definition": {
+        "en": "Recording muscle electrical activity. Surface EMG amplitude alone does not establish force or future muscle growth.",
+        "zh": "记录肌肉电活动；仅凭表面肌电幅度不能确定受力或未来肌肉增长。"
+      }
+    },
+    {
+      "id": "eccentric-phase",
+      "term": {
+        "en": "Eccentric phase",
+        "zh": "离心阶段"
+      },
+      "definition": {
+        "en": "The part of a movement in which a muscle develops force while lengthening, such as controlled lowering in a curl.",
+        "zh": "肌肉一边发力一边变长的动作阶段，例如有控制地下放弯举。"
+      }
+    }
+  ]
+}

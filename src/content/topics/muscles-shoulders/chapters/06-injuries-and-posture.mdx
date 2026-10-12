@@ -1,0 +1,224 @@
+---
+id: injuries-and-posture
+order: 6
+title:
+  en: Injuries and posture
+  zh: 伤病与体态
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  pose: neutral-stand
+  layers:
+    - superficial
+    - intermediate
+    - deep
+    - skeleton
+    - neighbours
+    - body
+  ghost:
+    - deltoid-anterior
+    - deltoid-lateral
+    - deltoid-posterior
+    - trapezius-descending
+    - pectoralis-major-clavicular
+    - serratus-anterior
+    - biceps-brachii-long
+    - latissimus-dorsi
+    - pectoralis-major-sternocostal
+    - rhomboid-major
+    - trapezius-transverse
+    - triceps-brachii
+    - skin-outline
+  sites:
+    - supraspinatus
+  labels:
+    - supraspinatus
+    - humerus
+    - scapula
+  camera:
+    position:
+      - 0.62
+      - 0.3
+      - 1.3
+    target:
+      - 0.16
+      - 0.12
+      - -0.04
+    fov: 28
+  summary:
+    en: Shoulder pain has several possible causes. Posture and a model cannot diagnose it.
+    zh: 肩痛有多种可能原因；姿势和模型都不能用来诊断。
+  beats:
+    - camera: close-shoulder
+      labels:
+        - supraspinatus
+        - humerus
+        - scapula
+      caption:
+        en: The supraspinatus tendon runs below the acromion. It is commonly involved in cuff tears, but pain around this area alone does not tell you which tissue is responsible.
+        zh: 冈上肌腱从肩峰下经过，肩袖撕裂常涉及它。但只凭这里疼，不能确定是哪种组织出了问题。
+      ghost:
+        - deltoid-anterior
+        - deltoid-lateral
+        - deltoid-posterior
+        - trapezius-descending
+        - pectoralis-major-clavicular
+        - serratus-anterior
+        - biceps-brachii-long
+        - latissimus-dorsi
+        - pectoralis-major-sternocostal
+        - rhomboid-major
+        - trapezius-transverse
+        - triceps-brachii
+        - skin-outline
+    - camera: back
+      sites:
+        - infraspinatus
+        - teres-minor
+      labels:
+        - infraspinatus
+        - teres-minor
+        - humerus
+      caption:
+        en: A cuff tear may follow a fall or sudden force, or develop gradually with tendon wear. Some tears cause weakness or pain; others have few or no symptoms.
+        zh: 肩袖撕裂可能来自跌倒或突发拉力，也可能随肌腱退变逐渐出现。有的引起无力或疼痛，有的症状很少或没有。
+      ghost:
+        - deltoid-anterior
+        - deltoid-lateral
+        - deltoid-posterior
+        - trapezius-descending
+        - pectoralis-major-clavicular
+        - serratus-anterior
+        - biceps-brachii-long
+        - latissimus-dorsi
+        - pectoralis-major-sternocostal
+        - rhomboid-major
+        - trapezius-transverse
+        - triceps-brachii
+        - skin-outline
+    - camera: left-side
+      pose: reach
+      sites: []
+      labels:
+        - scapula
+        - thorax
+        - serratus-anterior
+        - trapezius-descending
+      caption:
+        en: Posture changes how the shoulder can move, but a slouched appearance is not a diagnosis. A review did not find a clear difference in thoracic curvature between people with and without shoulder pain.
+        zh: 姿势会改变肩的活动方式，但含胸外观不是诊断。综述没有发现有肩痛和无肩痛的人之间胸椎弯曲程度存在明确差别。
+      ghost:
+        - deltoid-anterior
+        - deltoid-lateral
+        - deltoid-posterior
+        - pectoralis-major-clavicular
+        - biceps-brachii-long
+        - latissimus-dorsi
+        - pectoralis-major-sternocostal
+        - rhomboid-major
+        - trapezius-transverse
+        - triceps-brachii
+        - skin-outline
+    - pose: elbow-bent
+      camera: front
+      sites: []
+      labels:
+        - deltoid-anterior
+        - deltoid-lateral
+        - subscapularis
+      caption:
+        en: Control the load and lowering phase rather than forcing a painful range. Training principles for healthy people do not replace an assessment or an individual rehabilitation plan.
+        zh: 控制负荷和下放，不要硬挤疼痛的幅度。健康人的训练原则，不能替代评估或个人康复计划。
+      ghost:
+        - deltoid-posterior
+        - trapezius-descending
+        - pectoralis-major-clavicular
+        - serratus-anterior
+        - biceps-brachii-long
+        - latissimus-dorsi
+        - pectoralis-major-sternocostal
+        - rhomboid-major
+        - trapezius-transverse
+        - triceps-brachii
+        - skin-outline
+    - pose: neutral-stand
+      camera: on-my-body
+      view: xray
+      ghost: []
+      sites: []
+      labels:
+        - group:superficial
+        - group:deep
+      caption:
+        en: General information, not medical advice. Pain, an injury or new weakness deserves a doctor's or physiotherapist's assessment; the cards do not diagnose or prescribe treatment.
+        zh: 本页是一般性知识，不是医疗建议。有疼痛、受伤或新出现的无力，请咨询医生或物理治疗师；动作卡不做诊断或治疗处方。
+  index:
+    parts:
+      - supraspinatus
+      - infraspinatus
+      - teres-minor
+      - subscapularis
+      - deltoid-anterior
+      - deltoid-lateral
+      - scapula
+      - humerus
+      - thorax
+      - serratus-anterior
+      - trapezius-descending
+---
+
+<Lang en>
+
+Pain near the top or front of the shoulder does not identify a single muscle. The cuff tendons, joint, bursa and other nearby structures can be involved. The model shows their general relationships, but it cannot reproduce a person's injury [M83].
+
+The tendon of **supraspinatus**, passing beneath the acromion, is commonly involved in rotator cuff tears. A tear may follow a fall or sudden heavy pull, or develop gradually as the tendon wears. Some tears cause pain or weakness, while others have little or no pain. Symptoms and appearance alone are not enough to identify the damaged tissue [M83].
+
+Posture needs similar care. A systematic review included <Num s="M84">ten</Num> studies of thoracic posture and shoulder symptoms. It found moderate evidence that thoracic curvature did not differ significantly between groups with and without shoulder pain. Sitting more upright allowed greater maximum arm elevation in short experiments, but the long-term clinical meaning was uncertain [M84]. A rounded back or forward shoulder is not a diagnosis, and posture does not prove that a particular muscle is weak.
+
+For healthy training, learn a controlled movement, use manageable loads and progress gradually [M23] [M25]. During lowering, the working muscle can lengthen: this is the <Term id="eccentric-phase">eccentric phase</Term>. Control matters here as well as during lifting. Stop a movement that produces sharp pain instead of forcing through it.
+
+**This page is general information, not medical advice. For pain or an injury, consult a doctor or physiotherapist.** The exercise cards describe technique; a rehabilitation programme needs an individual assessment [M83].
+
+<More title={{ en: "When to seek assessment", zh: "什么时候需要评估" }}>
+
+New weakness after a fall or sudden painful lift, persistent pain, or difficulty with ordinary activities are reasons to consult a professional. A clinician may examine both the shoulder and neck and decide whether imaging is useful [M83]. Do not use a model pose or a self-test to name a tear.
+
+</More>
+
+<More title={{ en: "A posture result has limits", zh: "体态研究的边界" }}>
+
+The review's arm-range experiments measured immediate effects of changing posture, not whether adopting that posture prevented or cured pain over time [M84]. Comfortable movement and the ability to change positions matter more than treating a single frozen pose as proof of healthy or unhealthy shoulders.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+肩顶或肩前疼痛，不能直接指向某一块肌肉。肩袖肌腱、关节、滑囊和其他邻近结构都可能有关。模型只能显示大致位置关系，无法重现个人的伤病 [M83]。
+
+**冈上肌**的腱从肩峰下方经过，肩袖撕裂常涉及它。撕裂可能发生在跌倒、突发重拉之后，也可能随肌腱退变逐渐出现。有些撕裂引起疼痛或无力，有些很少疼甚至不疼。仅凭症状和外观，不能确定哪种组织受损 [M83]。
+
+看体态也要谨慎。一篇综述纳入<Num s="M84">十项</Num>胸椎姿势与肩部症状研究，中等强度证据显示：有肩痛和无肩痛的人，胸椎弯曲程度没有显著差别。短时实验里坐直能增加最大抬臂范围，但长期临床意义尚不明确 [M84]。含胸或肩向前，不是诊断，也不能证明某块肌肉无力。
+
+健康训练中，要学会控制动作，使用可掌握的负荷，再逐渐进阶 [M23] [M25]。下放时正在用力的肌肉可以变长，这叫<Term id="eccentric-phase">离心阶段</Term>，也需要控制。遇到刺痛应停下，不要硬挤幅度。
+
+**本页是一般性知识，不是医疗建议；疼痛或受伤请咨询医生或物理治疗师。**动作卡说明技术，康复计划则需要个人评估 [M83]。
+
+<More title={{ en: "When to seek assessment", zh: "什么时候需要评估" }}>
+
+跌倒或突然疼痛的负重后出现新无力、持续疼痛，或日常活动困难，都应咨询专业人员。医生可能同时检查肩和颈部，再决定是否需要影像检查 [M83]。不要用模型姿态或自测给撕裂命名。
+
+</More>
+
+<More title={{ en: "A posture result has limits", zh: "体态研究的边界" }}>
+
+综述中的抬臂实验测的是改变姿势后立即出现的效果，并没有证明长期保持这个姿势能预防或治愈疼痛 [M84]。能够舒服活动、变换姿势，比把某个固定姿态当成肩部健康或不健康的证据更有意义。
+
+</More>
+
+</Lang>

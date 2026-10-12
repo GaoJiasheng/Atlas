@@ -1,0 +1,209 @@
+---
+id: deep-muscles
+order: 3
+title:
+  en: Underneath the surface
+  zh: 浅层下面
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  pose: null
+  layers:
+  - superficial
+  - intermediate
+  - deep
+  - skeleton
+  - neighbours
+  - body
+  ghost:
+  - superficial
+  - body
+  - neighbours
+  labels:
+  - rhomboid-major
+  - infraspinatus
+  - longissimus-thoracis
+  camera:
+    position:
+    - 0.7
+    - 0.35
+    - -2.0
+    target:
+    - 0
+    - 0.02
+    - -0.03
+    fov: 30
+  sites:
+  - rhomboid-major
+  summary:
+    en: Small scapular muscles, cuff muscles and the long erector columns have different attachments and jobs.
+    zh: 肩胛骨周围的小肌肉、肩袖与纵行的竖脊肌，有不同的附着和工作。
+  beats:
+  - sites:
+    - rhomboid-major
+    - rhomboid-minor
+    labels:
+    - rhomboid-major
+    - rhomboid-minor
+    - scapula
+    caption:
+      en: 'Fade the surface: the larger rhomboid lies below the smaller one. Both run from the spine to the inner edge of
+        the shoulder blade.'
+      zh: 把浅层调淡：大菱形肌在小菱形肌下方，两者都从脊柱长到肩胛骨内侧缘。
+  - sites:
+    - levator-scapulae
+    labels:
+    - levator-scapulae
+    - scapula
+    caption:
+      en: Levator scapulae runs from the upper neck to the shoulder blade’s upper inner corner. It helps raise the blade and
+        turn its socket downward.
+      zh: 肩胛提肌从上颈部走到肩胛骨内上角，帮助抬高肩胛骨，并让关节盂朝下转。
+  - camera: close-back
+    sites:
+    - teres-major
+    - infraspinatus
+    - teres-minor
+    labels:
+    - teres-major
+    - infraspinatus
+    - teres-minor
+    - humerus
+    caption:
+      en: Teres major goes from the lower shoulder blade to the front of the humerus. Infraspinatus and teres minor finish
+        on the greater tubercle and help rotate the arm outward.
+      zh: 大圆肌从肩胛骨下部走到肱骨前面。冈下肌与小圆肌止在大结节，帮助上臂外旋。
+  - camera: back
+    sites:
+    - serratus-posterior-inferior
+    labels:
+    - serratus-posterior-inferior
+    - thorax
+    caption:
+      en: Serratus posterior inferior spreads from the lower spine to the lower ribs. Its traditional breathing role is disputed;
+        the model shows its attachments, not a proven isolated exercise.
+      zh: 下后锯肌从下部脊柱散开到下位肋骨。传统的呼吸作用有争议；模型展示附着，不表示有已证实的孤立训练动作。
+  - ghost:
+    - superficial
+    - intermediate
+    - body
+    - neighbours
+    sites: []
+    labels:
+    - iliocostalis-lumborum
+    - iliocostalis-thoracis
+    - longissimus-thoracis
+    - spinalis-thoracis
+    caption:
+      en: 'With both covering layers faded, the erectors form columns: iliocostalis laterally, longissimus between, and spinalis
+        closest to the spine.'
+      zh: 把覆盖的两层调淡，竖脊肌形成纵柱：外侧是髂肋肌，中间是最长肌，最靠脊柱的是棘肌。
+  - cutaway: transverse-t8
+    camera:
+      position:
+      - 0.35
+      - 0.8
+      - -1.2
+      target:
+      - 0
+      - 0
+      - -0.04
+      fov: 30
+    ghost:
+    - body
+    - neighbours
+    sites: []
+    labels:
+    - group:deep
+    - group:skeleton
+    caption:
+      en: A transverse slice through the mid-thoracic back shows the erector columns behind the ribs and spine. The section
+        is a viewing aid; it cannot show every attachment along a long muscle.
+      zh: 横切胸背中部，看肋骨和脊柱后方的竖脊肌柱。切面帮助观察，不能同时显示长肌肉沿途的全部附着。
+  index:
+    parts:
+    - rhomboid-major
+    - rhomboid-minor
+    - levator-scapulae
+    - teres-major
+    - infraspinatus
+    - teres-minor
+    - serratus-posterior-inferior
+    - iliocostalis-lumborum
+    - iliocostalis-thoracis
+    - longissimus-thoracis
+    - spinalis-thoracis
+    - scapula
+    - humerus
+    - thorax
+    - thoracic-spine
+    - lumbar-spine
+    - pelvis
+    - cervical-spine
+---
+
+<Lang en>
+
+Fade the surface and a different set of connections appears. **Rhomboid minor** lies above **rhomboid major**; their fibres descend outward from the spinal midline to the inner border of the shoulder blade. They draw the blade inward, called <Term id="retraction">retraction</Term>, and help rotate its socket downward. **Levator scapulae** descends from the upper neck to the blade's upper inner corner and helps lift it [M47].
+
+At the outer edge, **teres major** starts near the lower scapular angle and reaches the medial lip of the humeral groove. It helps latissimus draw the arm back, in and inward. Above it, **infraspinatus** covers the hollow below the scapular spine; **teres minor** runs along the blade's outer border. Their tendons reach the greater tubercle of the humerus. They belong to the <Term id="rotator-cuff">rotator cuff</Term>, which helps hold the humeral head against its socket, and produce <Term id="external-rotation">external rotation</Term> [M48].
+
+**Serratus posterior inferior** is a thin sheet from the lower thoracic and upper lumbar midline to the lower ribs. Its traditional description as a rib depressor is not a settled functional finding [M47] [M50].
+
+Deep alongside the spine, **iliocostalis**, **longissimus** and **spinalis** form the erector-spinae columns, from outside inward. This model includes lumbar and thoracic iliocostalis, thoracic longissimus and thoracic spinalis. Their longitudinal fibres extend or steady the back; one side also helps bend it sideways [M47] [M49]. The section shows their position behind the rib cage. <FlyTo preset="back">Look beneath the sheets</FlyTo>
+
+<More title={{ en: "Teres major is outside the cuff", zh: "大圆肌不属于肩袖" }}>
+
+Despite the similar names, teres major is not a rotator-cuff muscle. The cuff consists of supraspinatus, infraspinatus, teres minor and subscapularis [M48]. This back model includes the posterior pair; it is not a complete shoulder lesson.
+
+</More>
+
+<More title={{ en: "A function with uncertain evidence", zh: "证据仍不确定的功能" }}>
+
+Gray described serratus posterior inferior as drawing the lower ribs down and backward [M47]. Vilensky and colleagues questioned a respiratory role and proposed a sensory role in position awareness [M50]. A proposed alternative is also not proof. Its exercise links are context, not evidence that it can be isolated.
+
+</More>
+
+<More title={{ en: "Deep does not mean directly palpable", zh: "深层不等于能直接摸到" }}>
+
+The rhomboids lie beneath trapezius, and the erector columns have covering fascia and muscles [M47]. A firm area felt through the skin can involve several structures. Do not press deeply around the neck or ribs to identify a single muscle.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+调淡浅层，就能看见另一组连接。**小菱形肌**在**大菱形肌**上方，纤维从脊柱中线向外下方走到肩胛骨内侧缘。它们把肩胛骨向内拉，叫<Term id="retraction">后缩</Term>，也帮助关节盂向下回旋。**肩胛提肌**从上颈部下降到肩胛骨内上角，帮助抬高它 [M47]。
+
+外侧的**大圆肌**起于肩胛骨下角附近，止于肱骨骨沟的内侧唇，帮助背阔肌把上臂向后、向内拉并内旋。上方的**冈下肌**覆盖肩胛冈下的凹面，**小圆肌**沿肩胛骨外侧缘走行。它们的肌腱长到肱骨大结节，属于<Term id="rotator-cuff">肩袖</Term>，帮助肱骨头贴稳关节盂，也让上臂<Term id="external-rotation">外旋</Term> [M48]。
+
+**下后锯肌**是下部胸椎、上部腰椎中线到下位肋骨的一片薄肌。传统上说它降肋，但这并不是已经确定的功能结论 [M47] [M50]。
+
+这些深层结构不容易隔着皮肤单独辨认。先用骨骼上的位置定位，再比较纤维走向，会比只凭触感猜名字更清楚。
+
+最深处，**髂肋肌、最长肌、棘肌**从外向内组成竖脊肌柱。模型包含髂肋肌腰部和胸部、最长肌胸部及棘肌胸部。纵行纤维帮助伸展、稳定背部，单侧也帮助侧弯 [M47] [M49]。切面显示它们在胸廓后方的位置。<FlyTo preset="back">看肌片下面</FlyTo>
+
+<More title={{ en: "Teres major is outside the cuff", zh: "大圆肌不属于肩袖" }}>
+
+名字相似，大圆肌却不是肩袖肌。肩袖由冈上肌、冈下肌、小圆肌、肩胛下肌组成 [M48]。背部模型展示的是后方两块，不是完整的肩部课程。
+
+</More>
+
+<More title={{ en: "A function with uncertain evidence", zh: "证据仍不确定的功能" }}>
+
+格雷描述下后锯肌把下位肋骨向后下方拉 [M47]。Vilensky 等质疑其呼吸作用，并提出它可能参与位置感觉 [M50]。替代假说同样不等于证明；动作链接只是背景联系，不是能孤立训练它的证据。
+
+</More>
+
+<More title={{ en: "Deep does not mean directly palpable", zh: "深层不等于能直接摸到" }}>
+
+菱形肌藏在斜方肌下，竖脊肌柱也有筋膜和肌肉覆盖 [M47]。隔着皮肤摸到的紧实区域可能包含多个结构，不要为辨认单块肌肉而深压颈部或肋骨周围。
+
+</More>
+
+</Lang>

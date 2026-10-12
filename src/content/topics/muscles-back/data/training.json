@@ -1,0 +1,79 @@
+{
+  "exercises": [
+    "barbell-row",
+    "barbell-deadlift",
+    "single-arm-dumbbell-row",
+    "dumbbell-shrug",
+    "side-lying-dumbbell-external-rotation",
+    "pull-up",
+    "inverted-row",
+    "prone-y-raise",
+    "back-extension",
+    "face-pull",
+    "lat-pulldown"
+  ],
+  "note": {
+    "en": "Include a vertical pull, a row and controlled hip-hinge work across your training; choose manageable variations, progress gradually and allow recovery.",
+    "zh": "训练中安排垂直拉、划船和受控的髋折叠；选择能驾驭的版本，逐步进阶，并留出恢复时间。"
+  },
+  "session": {
+    "title": {
+      "en": "A way to arrange a back session (an example, not a prescription)",
+      "zh": "一种背部训练课的安排（示例，不是处方）"
+    },
+    "blocks": [
+      {
+        "exercise": "inverted-row",
+        "note": {
+          "en": "Warm up with a high bar and an easy body angle; check the support and learn the shoulder-blade motion.",
+          "zh": "用较高横杆、较容易的身体倾角热身；检查支撑，熟悉肩胛骨运动。"
+        }
+      },
+      {
+        "exercise": "barbell-deadlift",
+        "note": {
+          "en": "Practise the main hip hinge while fresh, building from a light load; the spine holds steady as the hips and knees move.",
+          "zh": "精力充足时练主项髋折叠，从轻负重逐步准备；髋、膝移动，脊柱稳住。"
+        }
+      },
+      {
+        "exercise": "lat-pulldown",
+        "note": {
+          "en": "Use a comfortable grip and keep the torso still; assistance and load should preserve a smooth return.",
+          "zh": "握法舒服，躯干稳住；辅助程度和重量要让回放仍然平稳。"
+        }
+      },
+      {
+        "exercise": "single-arm-dumbbell-row",
+        "note": {
+          "en": "Use the bench for support and give each side the same careful attention.",
+          "zh": "用凳子支撑，两边都认真控制动作。"
+        }
+      },
+      {
+        "exercise": "prone-y-raise",
+        "note": {
+          "en": "Finish with an easy shoulder-control movement without added weight.",
+          "zh": "最后做容易的肩带控制动作，先不加重量。"
+        }
+      },
+      {
+        "exercise": "side-lying-dumbbell-external-rotation",
+        "note": {
+          "en": "Use very light loading for controlled rotation; stop before the torso or elbow compensates.",
+          "zh": "用很轻的负重控制外旋；躯干或手肘开始代偿前就停。"
+        }
+      }
+    ],
+    "note": {
+      "en": "This order illustrates technique practice before fatigue and lighter shoulder work afterwards; not every exercise in the catalogue belongs in the same session. Rest enough to recover control, and adapt the selection with a qualified coach. First learn under supervision; minors practise with adult supervision. This is general information, not medical advice; seek a doctor or physiotherapist for pain or injury.",
+      "zh": "这个顺序示范了先在疲劳前练技术，再做较轻的肩部动作；动作目录中的所有动作不必塞进同一节课。休息到控制恢复，再由合格教练帮助调整选择。第一次学动作要有人指导；未成年人在成人监督下练习。本页是一般性知识，不是医疗建议；疼痛或受伤请咨询医生或物理治疗师。"
+    },
+    "s": [
+      "M23",
+      "M24",
+      "M25",
+      "M54"
+    ]
+  }
+}

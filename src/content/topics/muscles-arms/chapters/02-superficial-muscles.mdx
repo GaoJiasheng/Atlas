@@ -1,0 +1,176 @@
+---
+id: superficial-muscles
+order: 2
+title:
+  en: The surface layer
+  zh: 浅层
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  pose: neutral-stand
+  layers:
+  - superficial
+  - intermediate
+  - deep
+  - skeleton
+  - neighbours
+  - body
+  ghost:
+  - neighbours
+  - body
+  sites: []
+  labels:
+  - biceps-brachii-long
+  - biceps-brachii-short
+  - scapula
+  camera:
+    position:
+    - 0.55
+    - 0.02
+    - 2.0
+    target:
+    - 0
+    - -0.19
+    - 0.02
+    fov: 30
+  summary:
+    en: Trace the visible muscles from their attachments to the hand.
+    zh: 从附着点追踪浅层肌肉，一直看到手。
+  beats:
+  - camera: front
+    sites:
+    - biceps-brachii-long
+    - biceps-brachii-short
+    labels:
+    - biceps-brachii-long
+    - biceps-brachii-short
+    - scapula
+    - radius
+    caption:
+      en: Two biceps heads start at different scapular landmarks and meet at the radius. Their markers show attachments, not two independently
+        working muscles.
+      zh: 二头肌两头起于肩胛骨不同位置，汇到桡骨。标记显示附着，并不代表两块独立工作的肌肉。
+  - camera: back
+    sites:
+    - triceps-brachii-long
+    - triceps-brachii-lateral
+    labels:
+    - triceps-brachii-long
+    - triceps-brachii-lateral
+    - ulna
+    caption:
+      en: The long triceps head starts on the scapula, while the lateral head starts on the humerus. Both pull towards the elbow tip.
+      zh: 三头肌长头起于肩胛骨，外侧头起于肱骨，两者都拉向肘尖。
+  - camera: close-arm
+    sites:
+    - brachioradialis
+    - pronator-teres
+    labels:
+    - brachioradialis
+    - pronator-teres
+    - radius
+    caption:
+      en: Brachioradialis follows the thumb side of the forearm. Pronator teres crosses diagonally towards the radius.
+      zh: 肱桡肌沿前臂拇指侧下行，旋前圆肌斜跨向桡骨。
+  - camera: front
+    sites:
+    - flexor-carpi-radialis
+    - palmaris-longus
+    - flexor-carpi-ulnaris
+    labels:
+    - flexor-carpi-radialis
+    - palmaris-longus
+    - flexor-carpi-ulnaris
+    - hand
+    caption:
+      en: On the palm side, the radial and ulnar wrist flexors flank palmaris longus. Their tendons continue beyond the wrist.
+      zh: 掌侧的桡侧腕屈肌与尺侧腕屈肌位于掌长肌两旁，肌腱延伸过腕部。
+  - camera: back
+    sites:
+    - extensor-carpi-radialis-longus
+    - extensor-digitorum
+    - extensor-carpi-ulnaris
+    labels:
+    - extensor-carpi-radialis-longus
+    - extensor-digitorum
+    - extensor-carpi-ulnaris
+    - hand
+    caption:
+      en: On the back, the wrist extensors lead towards the metacarpals; extensor digitorum continues to the fingers.
+      zh: 背侧的腕伸肌走向掌骨，指伸肌继续通向手指。
+  index:
+    parts:
+    - biceps-brachii-long
+    - biceps-brachii-short
+    - triceps-brachii-long
+    - triceps-brachii-lateral
+    - triceps-brachii-medial
+    - brachioradialis
+    - pronator-teres
+    - flexor-carpi-radialis
+    - palmaris-longus
+    - flexor-carpi-ulnaris
+    - extensor-carpi-radialis-longus
+    - extensor-carpi-radialis-brevis
+    - extensor-digitorum
+    - extensor-carpi-ulnaris
+    - scapula
+    - humerus
+    - radius
+    - ulna
+    - hand
+---
+
+<Lang en>
+
+The biceps heads run down the front of the upper arm and join a tendon on the radius. The long head starts above the scapula's shoulder socket; the short head starts on its <Term id="coracoid-process">coracoid process</Term>, the forward-pointing hook. Their fibres run mainly along the arm into the shared lower tendon [M87]. Bend gently and you can feel the belly tighten, without pressing into the elbow crease.
+
+Behind the arm, the long and lateral triceps heads lie near the surface. The long head begins below the shoulder socket and crosses the shoulder; the lateral head begins on the back of the humerus. They join the medial head in the tendon attached to the <Term id="olecranon">olecranon</Term>, the bony elbow tip. All heads straighten the elbow, but only the long head also acts at the shoulder [M87]. <FlyTo preset="back">Trace the back of the arm</FlyTo>
+
+On the thumb side, brachioradialis runs from the humerus to the distal radius and helps bend the elbow. Pronator teres runs diagonally to the middle radius and turns the palm downward [M87].
+
+On the palm side, flexor carpi radialis and flexor carpi ulnaris bend the wrist. Palmaris longus pulls on the palm's broad connective sheet. On the back, extensor carpi radialis longus and extensor carpi ulnaris extend the wrist; extensor digitorum sends tendons towards the fingers. Following their long tendons is more useful than memorising every surface bump. Gentle wrist movement helps locate them; touch cannot tell how much force each contributes [M87].
+
+<More title={{ en: "Palmaris longus varies normally", zh: "掌长肌存在正常变异" }}>
+
+Palmaris longus can be absent without an injury. Its insertion is the flexor retinaculum and palmar aponeurosis, not a hand bone. The model’s insertion marker follows the muscle surface at that soft-tissue attachment [M87].
+
+</More>
+
+<More title={{ en: "Different wrist attachments", zh: "腕肌止点各有不同" }}>
+
+The radial wrist flexor mainly reaches the palm side of the second metacarpal. The long radial extensor reaches its back, while the short radial extensor reaches the third. The ulnar extensor ends at the fifth metacarpal; the ulnar flexor first reaches the pisiform and continues through ligaments [M87].
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+肱二头肌两头沿上臂前面下行，共同止腱接到桡骨。长头起于肩胛骨关节盂上方，短头起于向前伸出的钩状<Term id="coracoid-process">喙突</Term>。纤维主要沿上臂纵行，向下汇入止腱 [M87]。轻轻屈肘，可以摸到肌腹变紧，不必用力压肘窝。
+
+上臂后面，三头肌长头和外侧头较靠近表面。长头起于关节盂下方，跨过肩关节；外侧头起于肱骨后面。它们与内侧头共同接到尺骨<Term id="olecranon">鹰嘴</Term>，也就是肘尖。三头都能伸肘，只有长头还作用于肩 [M87]。<FlyTo preset="back">追踪上臂后面</FlyTo>
+
+拇指侧的肱桡肌从肱骨走到桡骨远端，帮助屈肘。旋前圆肌斜行到桡骨中部，拉动前臂，让掌心朝下 [M87]。
+
+掌侧的桡侧腕屈肌和尺侧腕屈肌屈腕，掌长肌牵拉掌部宽阔的结缔组织薄膜。背侧的桡侧腕长伸肌和尺侧腕伸肌伸腕，指伸肌的长腱通向手指。与其记住表面的每个隆起，不如沿肌腱追踪它们。轻轻活动腕部能帮助定位；仅凭触摸，不能分辨每块肌肉贡献了多少力 [M87]。
+
+前臂前后两面的肌腹大多靠近肘，远端逐渐变成细长肌腱。因此手腕附近看见的绳状轮廓不全是肌腹。先把手轻放在前臂，再缓慢活动腕，比用力抓捏更容易辨认路线 [M87]。
+
+<More title={{ en: "Palmaris longus varies normally", zh: "掌长肌存在正常变异" }}>
+
+掌长肌可以正常缺如，不表示受伤。它止于屈肌支持带和掌腱膜，并不止于手骨。模型止点标记随肌肉表面移动，表示这处软组织附着 [M87]。
+
+</More>
+
+<More title={{ en: "Different wrist attachments", zh: "腕肌止点各有不同" }}>
+
+桡侧腕屈肌主要接到第二掌骨底掌侧；桡侧腕长伸肌接到它的背侧，桡侧腕短伸肌接到第三掌骨底。尺侧腕伸肌止于第五掌骨底；尺侧腕屈肌先到豌豆骨，再经韧带向远端延续 [M87]。
+
+</More>
+
+</Lang>

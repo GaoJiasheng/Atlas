@@ -1,0 +1,70 @@
+{
+  "exercises": [
+    "barbell-romanian-deadlift",
+    "dumbbell-suitcase-carry",
+    "cable-pallof-press",
+    "curl-up",
+    "dead-bug",
+    "forearm-plank",
+    "side-plank",
+    "bird-dog",
+    "hanging-knee-raise",
+    "standing-knee-raise"
+  ],
+  "note": {
+    "en": "Practise controlled trunk movement as well as resisting extension, rotation and side bending. Use the hip flexors to move the thighs while the abdominal wall controls the pelvis; add difficulty gradually and allow recovery.",
+    "zh": "既练受控的躯干运动，也练抵抗后伸、旋转和侧弯。髋屈肌移动大腿时，腹壁配合控制骨盆；逐渐加难，并留出恢复。"
+  },
+  "session": {
+    "title": {
+      "en": "One way to arrange a core session (an example, not a prescription)",
+      "zh": "一种核心训练课的安排（示例，不是处方）"
+    },
+    "blocks": [
+      {
+        "exercise": "dead-bug",
+        "note": {
+          "en": "Prepare with a short comfortable reach and quiet breathing; keep this easy.",
+          "zh": "先用短而舒适的伸展热身，呼吸平缓，不做到很累。"
+        }
+      },
+      {
+        "exercise": "barbell-romanian-deadlift",
+        "note": {
+          "en": "An optional main lift for someone who has learned the hip hinge; use a light bar first. Skip it while still learning the hinge.",
+          "zh": "已学会髋折叠的人可以把它作为主项，先用轻杠；还在学髋折叠时可以跳过。"
+        }
+      },
+      {
+        "exercise": "curl-up",
+        "note": {
+          "en": "Practise a small controlled trunk curl without pulling on the head.",
+          "zh": "练小幅、有控制的躯干前屈，不拉头。"
+        }
+      },
+      {
+        "exercise": "cable-pallof-press",
+        "note": {
+          "en": "Resist the sideways cable pull on both sides; use a light load.",
+          "zh": "两侧都练抵抗绳索横向牵拉，选轻重量。"
+        }
+      },
+      {
+        "exercise": "side-plank",
+        "note": {
+          "en": "Choose a comfortable support and keep the waist lifted on each side.",
+          "zh": "选舒适的支撑版本，两侧都保持腰侧撑起。"
+        }
+      }
+    ],
+    "note": {
+      "en": "This is a menu example, not a requirement to perform every card. Keep preparation easy, place a demanding lift before tiring trunk holds, and rest enough to regain control. Stop when position or breathing deteriorates; allow recovery before another hard session.",
+      "zh": "这是安排示例，不要求把全部卡片都做完。热身保持轻松；吃力的主项放在容易使躯干疲劳的支撑动作之前；休息到重新能控制动作。姿势或呼吸变差就结束，充分恢复后再进行吃力的训练。"
+    },
+    "s": [
+      "M23",
+      "M24",
+      "M25"
+    ]
+  }
+}

@@ -1,0 +1,1586 @@
+{
+  "exercises": [
+    {
+      "id": "curl-up",
+      "name": {
+        "en": "Curl-up",
+        "zh": "卷腹"
+      },
+      "equipment": "bodyweight",
+      "pattern": "flexion",
+      "level": "beginner",
+      "primary": [
+        "rectus-abdominis"
+      ],
+      "secondary": [
+        "external-oblique",
+        "internal-oblique"
+      ],
+      "stabilisers": [
+        "transversus-abdominis"
+      ],
+      "setup": {
+        "en": "Use a mat on a firm floor. This is a small trunk curl, not a full sit-up; keep the feet unanchored. The drawing shows the complete exercise; the upright anatomy model shows only trunk and hip relationships.",
+        "zh": "在结实地面铺垫子。这是小幅卷腹，双脚不固定，不需要坐起来。 示意图给出完整动作；直立解剖模型只展示躯干与髋的关系。"
+      },
+      "steps": [
+        {
+          "en": "Lie on your back with knees bent, feet flat about hip-width apart, and arms reaching towards your thighs. Let the low back keep a comfortable small curve.",
+          "zh": "仰卧，屈膝，双脚与髋大致同宽踩地，双臂伸向大腿。腰背保留舒适的小弧度。"
+        },
+        {
+          "en": "Look upwards and leave space between chin and chest. Gently firm the abdominal wall without holding your breath.",
+          "zh": "眼睛看上方，下巴与胸口之间留出空间。腹壁稍收紧，保持呼吸。"
+        },
+        {
+          "en": "Breathe out and bring the lower ribs towards the pelvis, lifting the head and upper shoulder blades a small distance together.",
+          "zh": "呼气，把下位肋骨带向骨盆，头和上部肩胛骨一起稍稍离地。"
+        },
+        {
+          "en": "Stop while the feet and pelvis stay still. The hands slide towards the knees; do not turn it into a sit-up.",
+          "zh": "在双脚和骨盆仍稳定的位置停下。手向膝盖方向滑，不要继续坐起。"
+        },
+        {
+          "en": "Breathe in and lower the upper back and head gently onto the mat. Reset the neck before the next movement.",
+          "zh": "吸气，把上背和头轻轻放回垫上，再检查颈部是否放松。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Curl the ribs towards the belt line.",
+          "zh": "把肋骨卷向腰带的位置。"
+        },
+        {
+          "en": "Feel the front abdominal wall working; keep the neck comfortable.",
+          "zh": "体会腹前壁用力，颈部保持舒适。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Pulling the chin into the chest. Why: neck movement replaces part of the trunk curl and can make the neck uncomfortable.",
+          "zh": "把下巴猛收向胸口。为什么：颈部运动替代了部分卷腹，也可能让颈部不适。"
+        },
+        {
+          "en": "Rising all the way to sitting. Why: the task changes and the hip flexors contribute more, rather than staying with a small trunk curl.",
+          "zh": "一直卷到坐起。为什么：任务改变，髋屈肌参与更多，不再是小幅躯干前屈。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Choose a small range that you can reverse smoothly without pulling on the head.",
+            "zh": "选能平稳返回的小幅度，不靠拉头完成。"
+          },
+          "s": [
+            "M23"
+          ]
+        },
+        {
+          "text": {
+            "en": "Build control before adding more work, and recover before another hard abdominal session.",
+            "zh": "先练会控制，再增加训练量；腹部练得很累后，充分恢复再练。"
+          },
+          "s": [
+            "M23",
+            "M24"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "Stop if the movement brings on neck or back pain; do not force a bigger curl.",
+          "zh": "动作引起颈部或背部疼痛就停下，不要勉强卷得更高。"
+        },
+        {
+          "en": "First learn with bodyweight or a light load and guidance from a qualified coach; anyone under eighteen should practise under adult supervision.",
+          "zh": "第一次做先用自重或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [
+        {
+          "text": {
+            "en": "Vispute, Smith, LeCheminant and Hurley (2011) studied twenty-four sedentary adults in an abdominal-training or control group over six weeks. Curl-up endurance improved, but abdominal-fat measures did not fall significantly; this was a programme of several exercises, not a test of this curl-up alone.",
+            "zh": "Vispute、Smith、LeCheminant 和 Hurley（2011）将 24 名久坐成年人分到腹部训练组或对照组，观察 6 周。卷腹耐力提高了，腹部脂肪相关测量却没有显著下降。研究用的是多个动作组成的方案，不是单独测试这里的卷腹。"
+          },
+          "s": [
+            "M98"
+          ]
+        }
+      ],
+      "sketch": "curl-up",
+      "motion": {
+        "root": {
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "lateral-flexion": 0,
+                "rotation": 0
+              },
+              "hip.l": {
+                "flexion": 45
+              },
+              "hip.r": {
+                "flexion": 45
+              }
+            },
+            "contract": {
+              "rectus-abdominis": 0
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "trunk": {
+                "flexion": 15,
+                "rotation": 0,
+                "lateral-flexion": 0
+              },
+              "hip.l": {
+                "flexion": 45
+              },
+              "hip.r": {
+                "flexion": 45
+              }
+            },
+            "contract": {
+              "rectus-abdominis": 0.55,
+              "internal-oblique": 0.25
+            }
+          }
+        ],
+        "tempo": [
+          2,
+          0.5,
+          2,
+          0.5
+        ]
+      },
+      "sources": [
+        "M1",
+        "M98",
+        "M23",
+        "M24",
+        "M25",
+        "M104"
+      ]
+    },
+    {
+      "id": "dead-bug",
+      "name": {
+        "en": "Dead bug",
+        "zh": "死虫式"
+      },
+      "equipment": "bodyweight",
+      "pattern": "anti-extension",
+      "level": "beginner",
+      "primary": [
+        "rectus-abdominis",
+        "external-oblique",
+        "internal-oblique"
+      ],
+      "secondary": [
+        "psoas-major",
+        "iliacus"
+      ],
+      "stabilisers": [
+        "transversus-abdominis",
+        "multifidus-lumborum"
+      ],
+      "setup": {
+        "en": "Lie on a mat with space to reach an arm and the opposite leg. Start with a short reach; a heel slide is an easier learning version. The drawing shows the complete exercise; the upright anatomy model shows only trunk and hip relationships.",
+        "zh": "仰卧在垫上，留出伸手和伸对侧腿的空间。先伸短一点；脚跟沿地面滑动是更容易的学习版本。 示意图给出完整动作；直立解剖模型只展示躯干与髋的关系。"
+      },
+      "steps": [
+        {
+          "en": "Raise the arms over the chest and lift the thighs so hips and knees are bent about a right angle. Keep the head resting.",
+          "zh": "双臂举到胸口上方，抬起大腿，髋和膝大致屈成直角，头留在垫上。"
+        },
+        {
+          "en": "Gently brace and breathe out. Keep the pelvis still and the low back in a comfortable position close to the mat.",
+          "zh": "腹部稍收紧并呼气。骨盆不动，下背在贴近垫面的舒适位置。"
+        },
+        {
+          "en": "Slowly reach the left arm towards the floor behind the head while extending the right leg forwards and down. The other limbs stay still.",
+          "zh": "左臂慢慢向头后方地面伸，右腿同时向前下方伸直，另外两肢不动。"
+        },
+        {
+          "en": "Stop before the ribs lift or the low back arches further. The hand and heel need not touch the floor. Continue a quiet breath.",
+          "zh": "在肋骨翘起、下背进一步弓起之前停下。手和脚跟不必碰地，仍能平缓呼吸。"
+        },
+        {
+          "en": "Return the left arm and right leg to the start under control, then practise the opposite pair with the same still pelvis.",
+          "zh": "有控制地收回左臂和右腿，再换另一组对侧肢体，骨盆同样保持稳定。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Reach only as far as the pelvis stays quiet.",
+          "zh": "只伸到骨盆还能不动的位置。"
+        },
+        {
+          "en": "Feel a broad abdominal effort rather than a pinch in the low back.",
+          "zh": "腹壁整体用力，下背不应有夹痛。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Dropping the heel low after the back starts arching. Why: the longer lever is exceeding the control of the trunk.",
+          "zh": "腰开始弓起后，还继续把脚跟放低。为什么：力臂已经超过了躯干能控制的程度。"
+        },
+        {
+          "en": "Moving both legs quickly. Why: momentum makes it harder to control the pelvis and hides the loss of position.",
+          "zh": "双腿一起快速甩动。为什么：惯性让骨盆更难控制，也掩盖了姿势变化。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Shorten the reach until the pelvis stays still and breathing remains comfortable.",
+            "zh": "先缩短伸展距离，让骨盆不动、呼吸舒适。"
+          },
+          "s": [
+            "M23"
+          ]
+        },
+        {
+          "text": {
+            "en": "Increase the reach gradually before adding resistance or more work.",
+            "zh": "先逐渐延长伸展距离，再考虑加阻力或训练量。"
+          },
+          "s": [
+            "M23",
+            "M24"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "Stop for back pain or a pinching feeling at the front of the hip.",
+          "zh": "下背痛或髋前方有夹痛感时停下。"
+        },
+        {
+          "en": "First learn with bodyweight or a light load and guidance from a qualified coach; anyone under eighteen should practise under adult supervision.",
+          "zh": "第一次做先用自重或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [],
+      "sketch": "dead-bug",
+      "motion": {
+        "root": {
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "lateral-flexion": 0,
+                "rotation": 0
+              },
+              "hip.l": {
+                "flexion": 90
+              },
+              "hip.r": {
+                "flexion": 90
+              }
+            },
+            "contract": {
+              "rectus-abdominis": 0,
+              "external-oblique": 0,
+              "internal-oblique": 0,
+              "transversus-abdominis": 0
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "lateral-flexion": 0,
+                "rotation": 0
+              },
+              "hip.l": {
+                "flexion": 90
+              },
+              "hip.r": {
+                "flexion": 25
+              }
+            },
+            "contract": {
+              "rectus-abdominis": 0,
+              "external-oblique": 0,
+              "internal-oblique": 0,
+              "transversus-abdominis": 0
+            }
+          }
+        ],
+        "tempo": [
+          2,
+          0.5,
+          2,
+          0.5
+        ]
+      },
+      "sources": [
+        "M1",
+        "M2",
+        "M23",
+        "M24",
+        "M25",
+        "M102"
+      ]
+    },
+    {
+      "id": "forearm-plank",
+      "name": {
+        "en": "Forearm plank",
+        "zh": "前臂平板支撑"
+      },
+      "equipment": "bodyweight",
+      "pattern": "anti-extension",
+      "level": "beginner",
+      "primary": [
+        "rectus-abdominis",
+        "external-oblique",
+        "internal-oblique"
+      ],
+      "secondary": [
+        "serratus-anterior",
+        "gluteus-maximus"
+      ],
+      "stabilisers": [
+        "transversus-abdominis",
+        "multifidus-lumborum",
+        "erector-spinae-lumbar"
+      ],
+      "setup": {
+        "en": "Use a non-slip mat. Learn with the knees supported if the full position is difficult. The sketch shows the full position, already set up in both panels. The drawing shows the complete exercise; the upright anatomy model shows only trunk and hip relationships.",
+        "zh": "用防滑垫。完整姿势较难时，先让膝盖着地。示意图两格都画已经撑起的完整姿势。 示意图给出完整动作；直立解剖模型只展示躯干与髋的关系。"
+      },
+      "steps": [
+        {
+          "en": "Set the forearms on the mat, elbows below the shoulders and bent about a right angle. Keep hands relaxed and parallel.",
+          "zh": "前臂放在垫上，两肘在肩下，大致屈成直角；双手放松，前臂平行。"
+        },
+        {
+          "en": "Extend the legs and place the toes on the floor, with feet about hip-width apart. Push gently through the forearms.",
+          "zh": "伸直双腿，脚趾撑地，双脚与髋大致同宽，前臂轻轻推地。"
+        },
+        {
+          "en": "Lift the knees and set a long line through head, trunk and heels. Gently firm the abdomen and buttocks without lifting the hips high.",
+          "zh": "膝盖离地，从头、躯干到脚跟保持长直线。腹部和臀部稍收紧，不要把臀部抬很高。"
+        },
+        {
+          "en": "Hold the same shape while taking quiet breaths. Keep the ribs above the pelvis rather than letting the waist sag.",
+          "zh": "平缓呼吸，维持同样形状。肋骨与骨盆保持对齐，不让腰腹下塌。"
+        },
+        {
+          "en": "Finish before the shape changes: lower the knees gently, then rest the abdomen and forearms.",
+          "zh": "姿势开始改变前结束：先轻放膝盖，再放松腹部和前臂。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Keep the belt line from dropping towards the mat.",
+          "zh": "腰带的位置不要往垫子方向掉。"
+        },
+        {
+          "en": "Press the mat away without bringing the shoulders to the ears.",
+          "zh": "把垫子推开，但肩膀不要往耳朵靠。"
+        },
+        {
+          "en": "Keep breathing; a still body is still working.",
+          "zh": "保持呼吸；身体不动，肌肉仍在工作。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Sagging through the waist. Why: the lumbar spine extends while the task is to resist that extension.",
+          "zh": "腰腹下塌。为什么：腰椎开始后伸，而本动作要练的是抵抗这种后伸。"
+        },
+        {
+          "en": "Piking the hips to keep going. Why: it shortens the lever and changes the exercise instead of maintaining the original line.",
+          "zh": "撑不住时把臀部高高抬起。为什么：这缩短了力臂，改变了任务，已没有维持原来的直线。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Use a supported version that allows steady breathing and a consistent body line.",
+            "zh": "选能平稳呼吸、保持身体直线的支撑版本。"
+          },
+          "s": [
+            "M23"
+          ]
+        },
+        {
+          "text": {
+            "en": "End the hold when control fades, then progress gradually with practice and recovery.",
+            "zh": "控制开始减弱就结束，随练习和恢复逐步进阶。"
+          },
+          "s": [
+            "M23",
+            "M24"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "Stop for shoulder, elbow or back pain; use the knee-supported version only if it is comfortable.",
+          "zh": "肩、肘或背部疼痛就停下；膝盖着地的版本也要以舒适为前提。"
+        },
+        {
+          "en": "First learn with bodyweight or a light load and guidance from a qualified coach; anyone under eighteen should practise under adult supervision.",
+          "zh": "第一次做先用自重或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [],
+      "sketch": "forearm-plank",
+      "motion": {
+        "root": {
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "rotation": 0,
+                "lateral-flexion": 0
+              },
+              "hip.l": {
+                "flexion": 0
+              },
+              "hip.r": {
+                "flexion": 0
+              }
+            },
+            "contract": {
+              "rectus-abdominis": 0,
+              "external-oblique": 0,
+              "internal-oblique": 0,
+              "transversus-abdominis": 0,
+              "serratus-anterior": 0
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "rotation": 0,
+                "lateral-flexion": 0
+              },
+              "hip.l": {
+                "flexion": 0
+              },
+              "hip.r": {
+                "flexion": 0
+              }
+            },
+            "contract": {
+              "rectus-abdominis": 0,
+              "external-oblique": 0,
+              "internal-oblique": 0,
+              "transversus-abdominis": 0,
+              "serratus-anterior": 0
+            }
+          }
+        ],
+        "tempo": [
+          2,
+          1,
+          2,
+          1
+        ]
+      },
+      "sources": [
+        "M2",
+        "M100",
+        "M23",
+        "M24",
+        "M25",
+        "M100"
+      ]
+    },
+    {
+      "id": "side-plank",
+      "name": {
+        "en": "Side plank",
+        "zh": "侧平板支撑"
+      },
+      "equipment": "bodyweight",
+      "pattern": "anti-rotation",
+      "level": "beginner",
+      "primary": [
+        "external-oblique",
+        "internal-oblique",
+        "quadratus-lumborum"
+      ],
+      "secondary": [
+        "serratus-anterior"
+      ],
+      "stabilisers": [
+        "transversus-abdominis",
+        "erector-spinae-lumbar",
+        "multifidus-lumborum"
+      ],
+      "setup": {
+        "en": "Lie on the right side on a non-slip mat. Resist side bending and rolling; begin with bent-knee support if the straight-leg version is too demanding. The drawing shows the complete exercise; the upright anatomy model shows only trunk and hip relationships.",
+        "zh": "在防滑垫上右侧卧，抵抗侧弯和翻转；双腿伸直较难时，先用屈膝支撑。 示意图给出完整动作；直立解剖模型只展示躯干与髋的关系。"
+      },
+      "steps": [
+        {
+          "en": "Set the right elbow directly below the shoulder, forearm pointing forwards, and place the left hand on the hip.",
+          "zh": "右肘放在右肩正下方，前臂向前，左手放在髋上。"
+        },
+        {
+          "en": "Straighten the legs with the left foot just in front of the right for a wider base. Keep the hips facing forwards.",
+          "zh": "伸直双腿，左脚稍放在右脚前方，扩大支撑。骨盆面向前，不要翻转。"
+        },
+        {
+          "en": "Gently brace and press the right forearm and edges of the feet into the mat to raise the pelvis.",
+          "zh": "腹部稍收紧，右前臂和双脚边缘推垫，把骨盆抬起。"
+        },
+        {
+          "en": "Stop at a straight line through the head, trunk and legs. Keep the waist lifted and take quiet breaths without twisting the chest.",
+          "zh": "从头、躯干到腿排成直线后停住。腰侧撑住，平缓呼吸，胸口不扭转。"
+        },
+        {
+          "en": "Lower the pelvis gently, rest, then practise on the left side with the same setup.",
+          "zh": "骨盆轻轻落下，休息后换左侧，按同样方式就位。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Lift the underside of the waist away from the mat.",
+          "zh": "把下面那一侧腰带离垫子。"
+        },
+        {
+          "en": "Keep the shoulder away from the ear.",
+          "zh": "肩膀远离耳朵。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Letting the pelvis sag. Why: the trunk bends sideways instead of resisting the pull of gravity.",
+          "zh": "骨盆下沉。为什么：躯干开始侧弯，没有继续抵抗重力。"
+        },
+        {
+          "en": "Rolling the top shoulder forwards. Why: rotation changes the support and makes it harder to keep the pelvis aligned.",
+          "zh": "上侧肩膀往前翻。为什么：旋转改变了支撑，也更难维持骨盆对齐。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Choose a knee-supported or straight-leg version that you can hold with comfortable breathing.",
+            "zh": "选能舒适呼吸的屈膝或直腿版本。"
+          },
+          "s": [
+            "M23"
+          ]
+        },
+        {
+          "text": {
+            "en": "Practise both sides and add difficulty gradually instead of extending a hold after the waist drops.",
+            "zh": "两侧都练，逐步加难；腰侧已经塌下时，不要继续硬撑。"
+          },
+          "s": [
+            "M23",
+            "M24"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "Stop for shoulder or back pain; change the support only if the new version is comfortable.",
+          "zh": "肩或背部疼痛就停下；改变支撑方式后，也要以舒适为前提。"
+        },
+        {
+          "en": "First learn with bodyweight or a light load and guidance from a qualified coach; anyone under eighteen should practise under adult supervision.",
+          "zh": "第一次做先用自重或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [],
+      "sketch": "side-plank",
+      "motion": {
+        "root": {
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "rotation": 0,
+                "lateral-flexion": 0
+              },
+              "hip.l": {
+                "flexion": 0
+              },
+              "hip.r": {
+                "flexion": 0
+              }
+            },
+            "contract": {
+              "external-oblique": 0,
+              "internal-oblique": 0,
+              "quadratus-lumborum": 0,
+              "transversus-abdominis": 0
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "rotation": 0,
+                "lateral-flexion": 0
+              },
+              "hip.l": {
+                "flexion": 0
+              },
+              "hip.r": {
+                "flexion": 0
+              }
+            },
+            "contract": {
+              "external-oblique": 0,
+              "internal-oblique": 0,
+              "quadratus-lumborum": 0,
+              "transversus-abdominis": 0
+            }
+          }
+        ],
+        "tempo": [
+          2,
+          0.5,
+          2,
+          0.5
+        ]
+      },
+      "sources": [
+        "M1",
+        "M101",
+        "M23",
+        "M24",
+        "M25",
+        "M101"
+      ]
+    },
+    {
+      "id": "bird-dog",
+      "name": {
+        "en": "Bird dog",
+        "zh": "鸟狗式"
+      },
+      "equipment": "bodyweight",
+      "pattern": "anti-rotation",
+      "level": "intermediate",
+      "primary": [
+        "multifidus-lumborum",
+        "erector-spinae-lumbar"
+      ],
+      "secondary": [
+        "gluteus-maximus",
+        "serratus-anterior"
+      ],
+      "stabilisers": [
+        "external-oblique",
+        "internal-oblique",
+        "transversus-abdominis",
+        "quadratus-lumborum"
+      ],
+      "setup": {
+        "en": "Use a mat with space to reach forwards and backwards. Practise moving a hand or a leg alone before lifting an opposite pair if balance is difficult. The drawing shows the complete exercise; the upright anatomy model shows only trunk and hip relationships.",
+        "zh": "在垫上留出前后伸展空间。平衡较难时，先只动一只手或一条腿，再尝试对侧肢体一起抬起。 示意图给出完整动作；直立解剖模型只展示躯干与髋的关系。"
+      },
+      "steps": [
+        {
+          "en": "Start on hands and knees, hands under shoulders and knees under hips. Spread the fingers and look between the hands.",
+          "zh": "四点跪撑，手在肩下、膝在髋下。手指张开，目光看两手之间。"
+        },
+        {
+          "en": "Keep a comfortable neutral back and gently firm the abdomen. Keep both sides of the pelvis level.",
+          "zh": "腰背保持舒适的中立形状，腹部稍收紧，骨盆两侧同高。"
+        },
+        {
+          "en": "Reach the left hand forwards while sliding the right foot backwards, then lift them gradually. Keep weight through the right hand and left knee.",
+          "zh": "左手向前伸，右脚向后滑，再慢慢把它们抬起。重量由右手和左膝支撑。"
+        },
+        {
+          "en": "Stop when the arm and leg are near the line of the trunk, or earlier if the back begins to arch. Breathe without turning the hips.",
+          "zh": "手臂和腿接近躯干延长线就停；腰开始弓起时要更早停。保持呼吸，髋不转。"
+        },
+        {
+          "en": "Return the left hand and right knee softly to the mat. Reset, then change to the right hand and left leg.",
+          "zh": "左手和右膝轻轻回垫，重新站稳，再换右手和左腿。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Reach long rather than high.",
+          "zh": "往远处伸，不是往高处抬。"
+        },
+        {
+          "en": "Imagine a cup on the back of the pelvis staying level.",
+          "zh": "想象骨盆后面放着一杯水，不让它晃倒。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Kicking the leg high. Why: lumbar extension substitutes for the intended hip movement.",
+          "zh": "把腿踢得很高。为什么：腰椎后伸替代了本应发生在髋的运动。"
+        },
+        {
+          "en": "Opening the hips towards the lifted leg. Why: the trunk rotates instead of resisting rotation as the limbs move.",
+          "zh": "骨盆翻向抬起的腿。为什么：肢体移动时躯干跟着旋转，没有抵抗旋转。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Begin with short reaches or a limb kept on the floor until you can keep the pelvis steady.",
+            "zh": "先短距离伸展，或让一肢留在地面，练到骨盆稳定。"
+          },
+          "s": [
+            "M23"
+          ]
+        },
+        {
+          "text": {
+            "en": "Progress the reach slowly and stop before you need to twist or arch to keep going.",
+            "zh": "逐渐伸远；需要扭身或弓腰才能继续时就结束。"
+          },
+          "s": [
+            "M23",
+            "M24"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "Stop for wrist, knee or back pain; a folded mat may improve kneeling comfort, but do not work through pain.",
+          "zh": "手腕、膝或背部疼痛就停下；垫子折厚些可能让跪撑更舒适，但不要忍痛继续。"
+        },
+        {
+          "en": "First learn with bodyweight or a light load and guidance from a qualified coach; anyone under eighteen should practise under adult supervision.",
+          "zh": "第一次做先用自重或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [],
+      "sketch": "bird-dog",
+      "motion": {
+        "root": {
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "lateral-flexion": 0,
+                "rotation": 0
+              },
+              "hip.l": {
+                "flexion": 90
+              },
+              "hip.r": {
+                "flexion": 90
+              }
+            },
+            "contract": {
+              "multifidus-lumborum": 0,
+              "erector-spinae-lumbar": 0,
+              "transversus-abdominis": 0
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "lateral-flexion": 0,
+                "rotation": 0
+              },
+              "hip.l": {
+                "flexion": 90
+              },
+              "hip.r": {
+                "flexion": 0
+              }
+            },
+            "contract": {
+              "multifidus-lumborum": 0,
+              "erector-spinae-lumbar": 0,
+              "transversus-abdominis": 0
+            }
+          }
+        ],
+        "tempo": [
+          2,
+          0.5,
+          2,
+          0.5
+        ]
+      },
+      "sources": [
+        "M1",
+        "M2",
+        "M99",
+        "M23",
+        "M24",
+        "M25",
+        "M99"
+      ]
+    },
+    {
+      "id": "hanging-knee-raise",
+      "name": {
+        "en": "Hanging knee raise",
+        "zh": "悬垂举膝"
+      },
+      "equipment": "bodyweight",
+      "pattern": "flexion",
+      "level": "intermediate",
+      "primary": [
+        "psoas-major",
+        "iliacus",
+        "rectus-abdominis"
+      ],
+      "secondary": [
+        "tensor-fasciae-latae",
+        "latissimus-dorsi"
+      ],
+      "stabilisers": [
+        "external-oblique",
+        "internal-oblique",
+        "transversus-abdominis",
+        "serratus-anterior"
+      ],
+      "setup": {
+        "en": "Use a secure overhead bar and a stable step for getting on and off. Learn supported standing knee raises first; do not start here if an overhead hang is painful or unstable. The drawing shows the complete exercise; the upright anatomy model shows only trunk and hip relationships.",
+        "zh": "用牢固的单杠和稳固的上下台阶。先学扶稳站姿抬膝；悬垂会痛或撑不稳时，不从这个动作开始。 示意图给出完整动作；直立解剖模型只展示躯干与髋的关系。"
+      },
+      "steps": [
+        {
+          "en": "Stand on the step and take a closed overhand grip about shoulder-width apart, thumbs around the bar.",
+          "zh": "站在台阶上，以与肩大致同宽的正握握杠，拇指扣住杠。"
+        },
+        {
+          "en": "Lift the feet from the step into a quiet hang, elbows straight and shoulders controlled without forcing them down. Let the legs settle.",
+          "zh": "双脚离开台阶，进入不摇晃的悬垂。肘伸直，肩部保持控制，不要强行压肩；先让腿停稳。"
+        },
+        {
+          "en": "Breathe out and bend the knees as you bring the thighs towards the trunk. Avoid swinging the feet forwards to begin.",
+          "zh": "呼气，屈膝，把大腿带向躯干。起步时不要先向前甩脚。"
+        },
+        {
+          "en": "Near the top, gently curl the pelvis towards the ribs if you can do so without swinging. This adds abdominal work beyond hip flexion.",
+          "zh": "接近顶端时，如果不摇晃，可以把骨盆轻轻卷向肋骨。除了屈髋，这会增加腹部控制骨盆的工作。"
+        },
+        {
+          "en": "Lower the pelvis and thighs slowly to a quiet hang. Finish by placing the feet back on the step before releasing the bar.",
+          "zh": "骨盆和大腿慢慢放回，重新停稳。结束时先把脚放回台阶，再松杠。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Lift the thighs, then make a small controlled pelvic curl.",
+          "zh": "先抬大腿，再小幅、有控制地卷骨盆。"
+        },
+        {
+          "en": "Keep the bar and body quiet.",
+          "zh": "杠和身体都不要晃。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Kipping to raise the knees. Why: momentum replaces controlled hip flexion and pelvic movement.",
+          "zh": "摆荡借力抬膝。为什么：惯性替代了受控的屈髋和骨盆运动。"
+        },
+        {
+          "en": "Calling every knee lift a lower-ab curl. Why: raising the thigh alone is hip flexion; rectus abdominis contributes differently when the pelvis curls.",
+          "zh": "把每次抬膝都当成下腹卷动。为什么：只抬大腿是屈髋，骨盆真正卷起时，腹直肌才承担不同的任务。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Use a smaller knee lift that leaves the hang quiet, and stop before the grip or shoulder position fails.",
+            "zh": "先小幅抬膝，保持悬垂安静；握力或肩部控制开始失效就结束。"
+          },
+          "s": [
+            "M23"
+          ]
+        },
+        {
+          "text": {
+            "en": "Add range gradually after you can lower without swinging; supported practice can come first.",
+            "zh": "能不摇晃地放下之后，再逐渐扩大幅度；可以先做有支撑的练习。"
+          },
+          "s": [
+            "M23",
+            "M24"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "Stop for shoulder pain, numbness, grip slipping or hip/back pain, and use the step to dismount.",
+          "zh": "肩痛、麻木、握不住，或髋背疼痛时停下，用台阶下杠。"
+        },
+        {
+          "en": "First learn with bodyweight or a light load and guidance from a qualified coach; anyone under eighteen should practise under adult supervision.",
+          "zh": "第一次做先用自重或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [],
+      "sketch": "hanging-knee-raise",
+      "motion": {
+        "root": {
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "lateral-flexion": 0,
+                "rotation": 0
+              },
+              "hip.l": {
+                "flexion": 0
+              },
+              "hip.r": {
+                "flexion": 0
+              }
+            },
+            "contract": {
+              "psoas-major": 0,
+              "iliacus": 0,
+              "rectus-abdominis": 0
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "trunk": {
+                "flexion": 10,
+                "lateral-flexion": 0,
+                "rotation": 0
+              },
+              "hip.l": {
+                "flexion": 90
+              },
+              "hip.r": {
+                "flexion": 90
+              }
+            },
+            "contract": {
+              "rectus-abdominis": 0.4,
+              "psoas-major": 0.5,
+              "iliacus": 0.5
+            }
+          }
+        ],
+        "tempo": [
+          2,
+          0.5,
+          2,
+          0.5
+        ]
+      },
+      "sources": [
+        "M1",
+        "M2",
+        "M23",
+        "M24",
+        "M25",
+        "M105"
+      ]
+    },
+    {
+      "id": "standing-knee-raise",
+      "name": {
+        "en": "Supported standing knee raise",
+        "zh": "扶稳站姿抬膝"
+      },
+      "equipment": "bodyweight",
+      "pattern": "flexion",
+      "level": "beginner",
+      "primary": [
+        "psoas-major",
+        "iliacus"
+      ],
+      "secondary": [
+        "tensor-fasciae-latae"
+      ],
+      "stabilisers": [
+        "external-oblique",
+        "internal-oblique",
+        "transversus-abdominis",
+        "quadratus-lumborum"
+      ],
+      "setup": {
+        "en": "Stand beside a fixed support on a non-slip floor. Use a light fingertip touch for balance, with room in front of the knee. The drawing shows the complete exercise; the upright anatomy model shows only trunk and hip relationships.",
+        "zh": "在防滑地面站到固定支撑物旁，用指尖轻扶保持平衡，膝前留出空间。 示意图给出完整动作；直立解剖模型只展示躯干与髋的关系。"
+      },
+      "steps": [
+        {
+          "en": "Stand tall with feet about hip-width apart and the right hand lightly on the support. Keep the ribs over the pelvis.",
+          "zh": "双脚与髋大致同宽站直，右手轻扶支撑物，肋骨在骨盆上方。"
+        },
+        {
+          "en": "Shift weight gently onto the right foot without lifting the right hip towards the ribs. Keep the supporting knee soft.",
+          "zh": "重量轻移到右脚，不把右侧髋提向肋骨，支撑膝不要硬锁。"
+        },
+        {
+          "en": "Breathe out and raise the left thigh with the knee bent. Stop around hip height, or earlier if the pelvis starts to tilt.",
+          "zh": "呼气，屈左膝并抬左大腿。大约抬到髋高即可；骨盆开始歪时要更早停。"
+        },
+        {
+          "en": "Pause with the chest still upright and the pelvic rim level. Keep the foot relaxed rather than kicking forwards.",
+          "zh": "短暂停住，胸口仍直立，骨盆上缘平稳。脚放松，不向前踢。"
+        },
+        {
+          "en": "Lower the left foot quietly to the start. Change sides and move the support to the other hand.",
+          "zh": "左脚轻轻回到起点；换侧练习时，也换另一只手扶稳。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Bring the thigh to the trunk while the trunk stays tall.",
+          "zh": "大腿靠近躯干，躯干仍站直。"
+        },
+        {
+          "en": "Keep the two front hip points level.",
+          "zh": "两侧髂前上棘保持同高。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Leaning backwards to raise the knee. Why: changing the trunk angle hides the actual hip range and can arch the low back.",
+          "zh": "为了抬膝而后仰。为什么：躯干角度变化掩盖了实际屈髋幅度，也可能让腰背弓起。"
+        },
+        {
+          "en": "Hiking the left side of the pelvis. Why: pelvic elevation substitutes for lifting the thigh at the hip.",
+          "zh": "把左侧骨盆提起来。为什么：骨盆上提替代了大腿在髋关节处抬起。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Start with a comfortable height and enough support to keep the pelvis still.",
+            "zh": "先用舒适的高度和足够的支撑，让骨盆不动。"
+          },
+          "s": [
+            "M23"
+          ]
+        },
+        {
+          "text": {
+            "en": "Improve smoothness and balance before adding resistance or more work.",
+            "zh": "先提高动作平稳度和平衡，再加阻力或训练量。"
+          },
+          "s": [
+            "M23",
+            "M24"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "Stop for front-of-hip pinching or back pain. Use a fixed support that cannot roll or tip.",
+          "zh": "髋前方夹痛或背痛就停；支撑物必须固定，不会滚动或翻倒。"
+        },
+        {
+          "en": "First learn with bodyweight or a light load and guidance from a qualified coach; anyone under eighteen should practise under adult supervision.",
+          "zh": "第一次做先用自重或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [],
+      "sketch": "standing-knee-raise",
+      "motion": {
+        "root": {
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "lateral-flexion": 0,
+                "rotation": 0
+              },
+              "hip.l": {
+                "flexion": 0
+              },
+              "hip.r": {
+                "flexion": 0
+              }
+            },
+            "contract": {
+              "psoas-major": 0,
+              "iliacus": 0
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "lateral-flexion": 0,
+                "rotation": 0
+              },
+              "hip.l": {
+                "flexion": 80
+              },
+              "hip.r": {
+                "flexion": 0
+              }
+            },
+            "contract": {
+              "psoas-major": 0.6,
+              "iliacus": 0.6
+            }
+          }
+        ],
+        "tempo": [
+          2,
+          0.5,
+          2,
+          0.5
+        ]
+      },
+      "sources": [
+        "M1",
+        "M2",
+        "M23",
+        "M24",
+        "M25",
+        "M107"
+      ]
+    },
+    {
+      "id": "cable-pallof-press",
+      "name": {
+        "en": "Cable Pallof press",
+        "zh": "绳索抗旋转推（帕洛夫推）"
+      },
+      "equipment": "cable",
+      "pattern": "anti-rotation",
+      "level": "beginner",
+      "primary": [
+        "external-oblique",
+        "internal-oblique"
+      ],
+      "secondary": [
+        "rectus-abdominis"
+      ],
+      "stabilisers": [
+        "transversus-abdominis",
+        "multifidus-lumborum",
+        "quadratus-lumborum"
+      ],
+      "setup": {
+        "en": "Set a single pulley and handle at chest height with a light load. Stand with your right side facing the column; the cable should pull sideways rather than up or down. The drawing shows the complete exercise; the upright anatomy model shows only trunk and hip relationships.",
+        "zh": "单侧滑轮和把手调到胸高，选轻重量。右侧朝向绳索柱，绳索应横向拉，不往上或往下拉。 示意图给出完整动作；直立解剖模型只展示躯干与髋的关系。"
+      },
+      "steps": [
+        {
+          "en": "Hold the handle with both hands together, thumbs closed around the grip, and bring it to the centre of the chest.",
+          "zh": "双手一起握住把手，拇指扣住握把，把手放到胸口中央。"
+        },
+        {
+          "en": "Step sideways away from the pulley until the cable is gently taut. Stand with feet about shoulder-width apart and knees soft.",
+          "zh": "向侧面离开滑轮，直到绳索轻轻拉紧。双脚与肩大致同宽，膝盖稍松。"
+        },
+        {
+          "en": "Set the ribs over the pelvis and gently brace. Keep chest and pelvic front facing the same direction, at a right angle to the cable.",
+          "zh": "肋骨在骨盆上方，腹部稍收紧。胸口和骨盆前面朝同一方向，与绳索拉力大致成直角。"
+        },
+        {
+          "en": "Breathe out and press the handle straight forwards to near-straight elbows, resisting the sideways pull without rotating.",
+          "zh": "呼气，把把手直向前推到两肘接近伸直，同时抵抗横向拉力，不转身。"
+        },
+        {
+          "en": "Take a quiet breath, then bring the handle back to the chest slowly. To finish, move closer to the column until the stack settles; practise the other side.",
+          "zh": "平缓呼吸，再慢慢把把手收回胸前。结束时走近绳索柱，让配重落稳，再换另一侧练习。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Point the chest and belt buckle straight ahead.",
+          "zh": "胸口和腰带扣始终朝正前方。"
+        },
+        {
+          "en": "Let the hands move; keep the torso still.",
+          "zh": "手可以动，躯干不动。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Following the cable with the torso. Why: the exercise becomes a rotation instead of resisting rotation.",
+          "zh": "躯干跟着绳索转。为什么：动作变成了旋转，没有继续抵抗旋转。"
+        },
+        {
+          "en": "Leaning sideways to counter the load. Why: the body uses a changed position rather than holding the intended upright trunk.",
+          "zh": "向一侧歪身抵消重量。为什么：靠改变身体位置完成，没有维持原来的直立躯干。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Use a light pull that allows a smooth press with a quiet pelvis and comfortable breathing.",
+            "zh": "选轻到能平稳推出、骨盆不动且呼吸舒适的拉力。"
+          },
+          "s": [
+            "M23"
+          ]
+        },
+        {
+          "text": {
+            "en": "Build control on both sides before moving farther from the pulley or adding load.",
+            "zh": "两侧都练会控制，再离滑轮更远或增加重量。"
+          },
+          "s": [
+            "M23",
+            "M24"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "Keep fingers away from the pulley and stack, and return the handle under control before releasing it.",
+          "zh": "手指远离滑轮和配重，先有控制地把把手送回再松手。"
+        },
+        {
+          "en": "Stop if the press causes shoulder or back pain.",
+          "zh": "推出时肩或背部疼痛就停下。"
+        },
+        {
+          "en": "First learn with bodyweight or a light load and guidance from a qualified coach; anyone under eighteen should practise under adult supervision.",
+          "zh": "第一次做先用自重或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [],
+      "sketch": "cable-pallof-press",
+      "motion": {
+        "root": {
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "rotation": 0,
+                "lateral-flexion": 0
+              },
+              "hip.l": {
+                "flexion": 0
+              },
+              "hip.r": {
+                "flexion": 0
+              }
+            },
+            "contract": {
+              "external-oblique": 0,
+              "internal-oblique": 0,
+              "transversus-abdominis": 0
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "rotation": 0,
+                "lateral-flexion": 0
+              },
+              "hip.l": {
+                "flexion": 0
+              },
+              "hip.r": {
+                "flexion": 0
+              }
+            },
+            "contract": {
+              "external-oblique": 0,
+              "internal-oblique": 0,
+              "transversus-abdominis": 0
+            }
+          }
+        ],
+        "tempo": [
+          2,
+          0.5,
+          2,
+          0.5
+        ]
+      },
+      "sources": [
+        "M1",
+        "M2",
+        "M23",
+        "M24",
+        "M25",
+        "M106"
+      ]
+    },
+    {
+      "id": "dumbbell-suitcase-carry",
+      "name": {
+        "en": "Dumbbell suitcase carry",
+        "zh": "哑铃单手提重行走"
+      },
+      "equipment": "dumbbell",
+      "pattern": "carry",
+      "level": "intermediate",
+      "primary": [
+        "external-oblique",
+        "internal-oblique",
+        "quadratus-lumborum"
+      ],
+      "secondary": [
+        "erector-spinae-lumbar",
+        "latissimus-dorsi"
+      ],
+      "stabilisers": [
+        "rectus-abdominis",
+        "transversus-abdominis",
+        "multifidus-lumborum"
+      ],
+      "setup": {
+        "en": "Clear a level walking path. Set a light dumbbell on a stable raised support so you can pick it up and put it down without rushing or twisting. The drawing shows the complete exercise; the upright anatomy model shows only trunk and hip relationships.",
+        "zh": "清出平坦行走路线。轻哑铃放在稳固高台上，取放时不用急着弯身或扭腰。 示意图给出完整动作；直立解剖模型只展示躯干与髋的关系。"
+      },
+      "steps": [
+        {
+          "en": "Stand beside the support and take the dumbbell in the right hand with a closed neutral grip. Stand tall before leaving the support.",
+          "zh": "站到高台旁，右手以对握方向握哑铃，拇指扣住握柄。离开高台前先站直。"
+        },
+        {
+          "en": "Let the right arm hang by the thigh, elbow almost straight. Keep the left arm relaxed and shoulders at their natural height.",
+          "zh": "右臂垂在大腿旁，肘接近伸直。左臂放松，两肩保持自然高度。"
+        },
+        {
+          "en": "Gently brace with the ribs over the pelvis. Begin walking with short quiet steps while looking ahead.",
+          "zh": "腹部稍收紧，肋骨在骨盆上方。目光向前，用小而平稳的步伐开始走。"
+        },
+        {
+          "en": "Keep the trunk tall as each foot takes weight; do not lean towards or away from the dumbbell. Keep breathing normally.",
+          "zh": "每次换脚承重，躯干仍保持直立，不向哑铃那侧或另一侧歪；保持自然呼吸。"
+        },
+        {
+          "en": "Stop before grip or posture fades, return the dumbbell to its support, and practise with the left hand on a clear path.",
+          "zh": "握力或姿势开始变差前停下，把哑铃放回高台，再换左手走同样清楚的路线。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Keep the belt buckle above the middle of the feet.",
+          "zh": "腰带扣保持在双脚中间的上方。"
+        },
+        {
+          "en": "Carry the weight quietly beside the thigh.",
+          "zh": "让重量安静地跟在大腿旁。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Leaning away from the dumbbell. Why: the trunk bends sideways rather than maintaining the intended upright position.",
+          "zh": "向哑铃另一侧歪身。为什么：躯干侧弯，没有维持原来的直立姿势。"
+        },
+        {
+          "en": "Rushing with a swinging dumbbell. Why: the changing pull makes balance and trunk control harder.",
+          "zh": "走得太快，哑铃来回摆。为什么：拉力不断改变，平衡和躯干控制都更困难。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Choose a load that permits an upright walk and a secure grip on either side.",
+            "zh": "选两侧都能握稳、直立行走的重量。"
+          },
+          "s": [
+            "M23"
+          ]
+        },
+        {
+          "text": {
+            "en": "Increase load or walking work gradually after the steps stay quiet, and recover between demanding efforts.",
+            "zh": "步伐稳定后，再逐渐增加重量或行走量；吃力的练习之间充分恢复。"
+          },
+          "s": [
+            "M23",
+            "M24"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "Stop for back or shoulder pain, loss of balance, or grip slipping; put the weight down under control.",
+          "zh": "背痛、肩痛、失去平衡或握不住时停下，有控制地放下重量。"
+        },
+        {
+          "en": "First learn with bodyweight or a light load and guidance from a qualified coach; anyone under eighteen should practise under adult supervision.",
+          "zh": "第一次做先用自重或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [],
+      "sketch": "dumbbell-suitcase-carry",
+      "motion": {
+        "root": {
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "rotation": 0,
+                "lateral-flexion": 0
+              },
+              "hip.l": {
+                "flexion": 0
+              },
+              "hip.r": {
+                "flexion": 0
+              }
+            },
+            "contract": {
+              "external-oblique": 0,
+              "internal-oblique": 0,
+              "quadratus-lumborum": 0,
+              "erector-spinae-lumbar": 0
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "trunk": {
+                "flexion": 0,
+                "rotation": 0,
+                "lateral-flexion": 0
+              },
+              "hip.l": {
+                "flexion": 0
+              },
+              "hip.r": {
+                "flexion": 0
+              }
+            },
+            "contract": {
+              "external-oblique": 0,
+              "internal-oblique": 0,
+              "quadratus-lumborum": 0,
+              "erector-spinae-lumbar": 0
+            }
+          }
+        ],
+        "tempo": [
+          2,
+          0.5,
+          2,
+          0.5
+        ]
+      },
+      "sources": [
+        "M1",
+        "M2",
+        "M23",
+        "M24",
+        "M25",
+        "M103"
+      ]
+    }
+  ]
+}

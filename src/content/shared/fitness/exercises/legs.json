@@ -1,0 +1,2552 @@
+{
+  "exercises": [
+    {
+      "id": "barbell-back-squat",
+      "name": {
+        "en": "Barbell back squat",
+        "zh": "杠铃背蹲"
+      },
+      "equipment": "barbell",
+      "pattern": "squat",
+      "level": "intermediate",
+      "primary": [
+        "rectus-femoris",
+        "vastus-lateralis",
+        "vastus-medialis",
+        "vastus-intermedius",
+        "gluteus-maximus"
+      ],
+      "secondary": [
+        "adductor-magnus"
+      ],
+      "stabilisers": [
+        "gluteus-medius",
+        "gluteus-minimus",
+        "tensor-fasciae-latae",
+        "soleus",
+        "biceps-femoris-short"
+      ],
+      "setup": {
+        "en": "Use a rack with catches just below your controlled squat depth. Set the hooks below shoulder height, secure the plates with collars and learn with an unloaded bar.",
+        "zh": "在深蹲架里练，保护杠略低于你能控制的最低点。挂钩低于肩，上好杠片卡扣，先用空杠学动作。"
+      },
+      "steps": [
+        {
+          "en": "Stand under the bar and rest it on the muscular shelf of the upper back, not the neck. Use a closed overhand grip wider than the shoulders.",
+          "zh": "站到杠下，把杠放在上背肌肉形成的平台上，不压颈部。正握，拇指扣住，握距比肩宽。"
+        },
+        {
+          "en": "Brace the trunk, stand to clear the hooks and take small steps back. Set feet at a comfortable width with toes turned out slightly.",
+          "zh": "躯干收紧，站起取杠，小步退开。双脚取舒服站距，脚尖略朝外。"
+        },
+        {
+          "en": "Keep the whole foot planted and bend hips and knees together. Let the knees travel in the direction of the toes as the hips descend.",
+          "zh": "全脚掌踩稳，同时屈髋屈膝。髋下降时，膝沿脚尖方向移动。"
+        },
+        {
+          "en": "Lower only while you can keep a steady spine and balanced feet. The knees may pass the toes; do not force them back by folding the trunk.",
+          "zh": "只下到脊柱和双脚仍能稳住的深度。膝可以超过脚尖，不要为了往后收膝而过度折叠躯干。"
+        },
+        {
+          "en": "Push the floor away and straighten hips and knees together. Stop at a tall stance without leaning backwards.",
+          "zh": "把地面推开，髋和膝一起伸直。站稳就停，不向后仰。"
+        },
+        {
+          "en": "Walk forward until the bar contacts the uprights, then lower onto both hooks before releasing your grip.",
+          "zh": "往前走到杠碰立柱，确认落在两边挂钩上，再松手。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Keep heel, base of the big toe and base of the little toe in contact.",
+          "zh": "脚跟、大脚趾根和小脚趾根都贴地。"
+        },
+        {
+          "en": "Let knees follow toes and keep the load over the midfoot.",
+          "zh": "膝沿脚尖方向走，负荷保持在脚掌中部上方。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Forcing the knees to remain behind the toes. Why: this can shift the demand towards the hips and increase forward trunk lean.",
+          "zh": "硬把膝限制在脚尖后。为什么：这可能把更多负荷转向髋，让躯干更前倾。"
+        },
+        {
+          "en": "Dropping into a depth where the feet or trunk lose control. Why: the load then changes position abruptly and is harder to reverse smoothly.",
+          "zh": "蹲到双脚或躯干失控的深度。为什么：负荷位置突然改变，难以平稳起身。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Begin with a load and range you can control; increase the challenge gradually as the same movement becomes easier.",
+            "zh": "先用能控制的负荷与幅度；同样的动作变得轻松后，再逐步加难。"
+          },
+          "s": [
+            "M23"
+          ]
+        },
+        {
+          "text": {
+            "en": "Practise with an effort you can control; a repetition need not reach failure to be useful. Allow recovery before another demanding session.",
+            "zh": "采用能控制的用力程度；每次不必做到力竭才有用。吃力的训练之间留出恢复。"
+          },
+          "s": [
+            "M24"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "Practise the rack exit with a coach and use correctly set catches; stop for sharp knee, hip or back pain.",
+          "zh": "请教练指导出杠并调好保护杠；膝、髋或背出现刺痛就停下。"
+        },
+        {
+          "en": "First learn the movement with bodyweight or a light load under a qualified coach; anyone under eighteen should practise with adult supervision.",
+          "zh": "第一次做先用自重或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [
+        {
+          "text": {
+            "en": "Fry, Smith and Schilling (2003) compared parallel squats with and without a barrier restricting knee travel in seven weight-trained men, using a barbell load equal to body mass. Restriction reduced estimated knee torque but increased hip torque. This was a biomechanics study, not an injury trial; knee travel past the toes alone does not establish harm.",
+            "zh": "Fry、Smith 和 Schilling（2003）让七名有训练男性用与体重相当的杠铃做平行深蹲，比较挡板限制膝前移与不限制的情况。限制后，估算的膝力矩下降，髋力矩上升。这是生物力学研究，不是损伤试验；不能单凭膝超过脚尖就认定有害。"
+          },
+          "s": [
+            "M33"
+          ]
+        }
+      ],
+      "sketch": "barbell-back-squat",
+      "motion": {
+        "root": {
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "trunk": {
+                "flexion": 0
+              },
+              "hip.l": {
+                "flexion": 0,
+                "abduction": 10,
+                "external-rotation": 10
+              },
+              "hip.r": {
+                "flexion": 0,
+                "abduction": 10,
+                "external-rotation": 10
+              },
+              "knee.l": {
+                "flexion": 5
+              },
+              "knee.r": {
+                "flexion": 5
+              },
+              "ankle.l": {
+                "dorsiflexion": 0
+              },
+              "ankle.r": {
+                "dorsiflexion": 0
+              }
+            },
+            "contract": {
+              "rectus-femoris": 0.4,
+              "vastus-lateralis": 0.7,
+              "vastus-medialis": 0.7,
+              "vastus-intermedius": 0.7,
+              "gluteus-maximus": 0.7
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "trunk": {
+                "flexion": 0
+              },
+              "hip.l": {
+                "flexion": 90,
+                "abduction": 10,
+                "external-rotation": 10
+              },
+              "hip.r": {
+                "flexion": 90,
+                "abduction": 10,
+                "external-rotation": 10
+              },
+              "knee.l": {
+                "flexion": 90
+              },
+              "knee.r": {
+                "flexion": 90
+              },
+              "ankle.l": {
+                "dorsiflexion": 15
+              },
+              "ankle.r": {
+                "dorsiflexion": 15
+              }
+            },
+            "contract": {
+              "rectus-femoris": 0.4,
+              "vastus-lateralis": 0.2,
+              "vastus-medialis": 0.2,
+              "vastus-intermedius": 0.2,
+              "gluteus-maximus": 0.2
+            }
+          }
+        ],
+        "tempo": [
+          2,
+          0.5,
+          2,
+          0.5
+        ]
+      },
+      "sources": [
+        "M1",
+        "M2",
+        "M33",
+        "M36",
+        "M23",
+        "M24",
+        "M25"
+      ]
+    },
+    {
+      "id": "dumbbell-goblet-squat",
+      "name": {
+        "en": "Dumbbell goblet squat",
+        "zh": "哑铃高脚杯深蹲"
+      },
+      "equipment": "dumbbell",
+      "pattern": "squat",
+      "level": "beginner",
+      "primary": [
+        "rectus-femoris",
+        "vastus-lateralis",
+        "vastus-medialis",
+        "vastus-intermedius",
+        "gluteus-maximus"
+      ],
+      "secondary": [
+        "adductor-magnus"
+      ],
+      "stabilisers": [
+        "gluteus-medius",
+        "gluteus-minimus",
+        "tensor-fasciae-latae",
+        "biceps-femoris-short"
+      ],
+      "setup": {
+        "en": "Choose a light dumbbell you can hold securely at the chest. Clear a non-slip floor; a coach can help you find a comfortable stance.",
+        "zh": "用能稳稳抱在胸前的轻哑铃。在防滑地面留出空间，请教练帮你找舒服的站距。"
+      },
+      "steps": [
+        {
+          "en": "Hold the upper dumbbell head with both palms, the handle pointing down, and keep the weight close to the chest.",
+          "zh": "双手托住哑铃上端，握杆朝下，哑铃贴近胸前。"
+        },
+        {
+          "en": "Set feet at a comfortable width and angle. Stand tall with elbows below the weight and wrists close to straight.",
+          "zh": "双脚取舒服站距和脚尖角度。站稳，肘在重量下方，手腕尽量平直。"
+        },
+        {
+          "en": "Breathe in and bend hips and knees together. Keep the whole foot down while the knees follow the toes.",
+          "zh": "吸气，同时屈髋屈膝。全脚掌贴地，膝沿脚尖方向走。"
+        },
+        {
+          "en": "Lower to a depth you can reverse without the heels rising or the trunk folding. Keep the dumbbell near the chest.",
+          "zh": "下到脚跟不抬、躯干不折叠且能平稳起身的深度，哑铃始终靠近胸口。"
+        },
+        {
+          "en": "Breathe out and push through the feet to stand tall. Finish before the back arches or the knees snap backwards.",
+          "zh": "呼气，用双脚推地站起。站稳即停，不塌腰，也不猛顶膝。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Sit between your feet, not onto your toes.",
+          "zh": "往双脚之间坐，不把重量压到脚尖上。"
+        },
+        {
+          "en": "Keep the dumbbell close and feel the front thighs and buttocks work.",
+          "zh": "哑铃靠近身体，留意大腿前侧和臀部用力。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Holding the weight far from the chest. Why: this increases the pull on the arms and trunk and can disturb balance.",
+          "zh": "哑铃离胸口太远。为什么：手臂和躯干的负担变大，也更难平衡。"
+        },
+        {
+          "en": "Lifting the heels to reach a lower position. Why: the support base changes and depth replaces foot control.",
+          "zh": "为了蹲深而抬脚跟。为什么：支撑位置改变，只顾深度却失去足部控制。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Begin with a load and range you can control; increase the challenge gradually as the same movement becomes easier.",
+            "zh": "先用能控制的负荷与幅度；同样的动作变得轻松后，再逐步加难。"
+          },
+          "s": [
+            "M23"
+          ]
+        },
+        {
+          "text": {
+            "en": "Practise with an effort you can control; a repetition need not reach failure to be useful. Allow recovery before another demanding session.",
+            "zh": "采用能控制的用力程度；每次不必做到力竭才有用。吃力的训练之间留出恢复。"
+          },
+          "s": [
+            "M24"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "Put the dumbbell down before it slips; do not trap fingers between its head and the floor.",
+          "zh": "哑铃快滑脱时先放下，别让手指夹在哑铃头和地面之间。"
+        },
+        {
+          "en": "First learn the movement with bodyweight or a light load under a qualified coach; anyone under eighteen should practise with adult supervision.",
+          "zh": "第一次做先用自重或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [],
+      "sketch": "dumbbell-goblet-squat",
+      "motion": {
+        "root": {
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "trunk": {
+                "flexion": 0
+              },
+              "hip.l": {
+                "flexion": 0,
+                "abduction": 10
+              },
+              "hip.r": {
+                "flexion": 0,
+                "abduction": 10
+              },
+              "knee.l": {
+                "flexion": 5
+              },
+              "knee.r": {
+                "flexion": 5
+              },
+              "ankle.l": {
+                "dorsiflexion": 0
+              },
+              "ankle.r": {
+                "dorsiflexion": 0
+              }
+            },
+            "contract": {
+              "rectus-femoris": 0.4,
+              "vastus-lateralis": 0.7,
+              "vastus-medialis": 0.7,
+              "vastus-intermedius": 0.7,
+              "gluteus-maximus": 0.7
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "trunk": {
+                "flexion": 0
+              },
+              "hip.l": {
+                "flexion": 80,
+                "abduction": 10
+              },
+              "hip.r": {
+                "flexion": 80,
+                "abduction": 10
+              },
+              "knee.l": {
+                "flexion": 90
+              },
+              "knee.r": {
+                "flexion": 90
+              },
+              "ankle.l": {
+                "dorsiflexion": 15
+              },
+              "ankle.r": {
+                "dorsiflexion": 15
+              }
+            },
+            "contract": {
+              "rectus-femoris": 0.4,
+              "vastus-lateralis": 0.2,
+              "vastus-medialis": 0.2,
+              "vastus-intermedius": 0.2,
+              "gluteus-maximus": 0.2
+            }
+          }
+        ],
+        "tempo": [
+          2,
+          0.5,
+          2,
+          0.5
+        ]
+      },
+      "sources": [
+        "M1",
+        "M2",
+        "M37",
+        "M23",
+        "M24",
+        "M25"
+      ]
+    },
+    {
+      "id": "bodyweight-reverse-lunge",
+      "name": {
+        "en": "Bodyweight reverse lunge",
+        "zh": "徒手后撤弓步"
+      },
+      "equipment": "bodyweight",
+      "pattern": "lunge",
+      "level": "beginner",
+      "primary": [
+        "rectus-femoris",
+        "vastus-lateralis",
+        "vastus-medialis",
+        "vastus-intermedius",
+        "gluteus-maximus"
+      ],
+      "secondary": [
+        "adductor-magnus",
+        "biceps-femoris-long",
+        "semitendinosus",
+        "semimembranosus",
+        "sartorius",
+        "psoas-major",
+        "iliacus"
+      ],
+      "stabilisers": [
+        "gluteus-medius",
+        "gluteus-minimus",
+        "tensor-fasciae-latae",
+        "biceps-femoris-short",
+        "fibularis-longus"
+      ],
+      "setup": {
+        "en": "Clear a non-slip floor. Stand near a stable support if balance is unfamiliar; begin without added weight.",
+        "zh": "在防滑地面留出空间。不熟悉平衡时靠近稳固扶手，先不加重量。"
+      },
+      "steps": [
+        {
+          "en": "Stand with feet hip-width apart and lightly brace the trunk. Use a fingertip on a support if needed.",
+          "zh": "双脚与髋同宽，躯干稍收紧；需要时用指尖轻扶。"
+        },
+        {
+          "en": "Leave the left foot planted and step the right foot back onto its ball. Keep some sideways space between the feet.",
+          "zh": "左脚踩稳，右脚向后迈，前脚掌着地；两脚之间保留横向间距。"
+        },
+        {
+          "en": "Bend both knees and lower the pelvis between the feet. Keep the front foot flat and the front knee following its toes.",
+          "zh": "屈双膝，骨盆在两脚之间下降；前脚踩平，前膝沿脚尖方向走。"
+        },
+        {
+          "en": "Stop before the back knee hits the floor or you lose balance. A small whole-trunk lean is acceptable with the spine steady.",
+          "zh": "后膝碰地或失去平衡前停下。躯干可以整体略前倾，脊柱保持稳定。"
+        },
+        {
+          "en": "Press through the front foot, rise and bring the back foot forward under control. Practise the opposite side with the same care.",
+          "zh": "用前脚推地，站起，后脚有控制地收回；另一侧同样认真练。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Use railway tracks rather than a tightrope for foot placement.",
+          "zh": "两脚像踩两条轨道，不走独木桥。"
+        },
+        {
+          "en": "Feel the front thigh and buttock work while the pelvis stays level.",
+          "zh": "留意前腿大腿和臀部用力，骨盆别向一侧掉。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Stepping directly behind the front foot. Why: the narrow base makes balance harder and encourages sideways drift.",
+          "zh": "后脚踩到前脚正后方。为什么：支撑面太窄，更难平衡，也容易向侧面歪。"
+        },
+        {
+          "en": "Dropping the back knee onto the floor. Why: impact replaces a controlled change of direction.",
+          "zh": "后膝砸地。为什么：冲击代替了有控制的换向。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Use hand support or a shallower range until balance is steady; increase the range before adding an external load.",
+            "zh": "先扶稳或减小幅度；平衡稳定后先逐步加大幅度，再考虑外加重量。"
+          },
+          "s": [
+            "M23"
+          ]
+        },
+        {
+          "text": {
+            "en": "Practise with an effort you can control; a repetition need not reach failure to be useful. Allow recovery before another demanding session.",
+            "zh": "采用能控制的用力程度；每次不必做到力竭才有用。吃力的训练之间留出恢复。"
+          },
+          "s": [
+            "M24"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "Use a support and shorter depth if balance is uncertain; stop if knee or hip pain appears.",
+          "zh": "平衡不稳就扶稳、减小深度；膝或髋疼就停下。"
+        },
+        {
+          "en": "First learn the movement with bodyweight or a light load under a qualified coach; anyone under eighteen should practise with adult supervision.",
+          "zh": "第一次做先用自重或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [],
+      "sketch": "bodyweight-reverse-lunge",
+      "motion": {
+        "root": {
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "trunk": {
+                "flexion": 0
+              },
+              "hip.l": {
+                "flexion": 0
+              },
+              "hip.r": {
+                "flexion": 0
+              },
+              "knee.l": {
+                "flexion": 5
+              },
+              "knee.r": {
+                "flexion": 5
+              },
+              "ankle.l": {
+                "dorsiflexion": 0
+              },
+              "ankle.r": {
+                "dorsiflexion": 0
+              }
+            },
+            "contract": {
+              "rectus-femoris": 0.4,
+              "vastus-lateralis": 0.7,
+              "vastus-medialis": 0.7,
+              "vastus-intermedius": 0.7,
+              "gluteus-maximus": 0.7
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "trunk": {
+                "flexion": 0
+              },
+              "hip.l": {
+                "flexion": 70
+              },
+              "hip.r": {
+                "extension": 10
+              },
+              "knee.l": {
+                "flexion": 85
+              },
+              "knee.r": {
+                "flexion": 85
+              },
+              "ankle.l": {
+                "dorsiflexion": 10
+              },
+              "ankle.r": {
+                "plantarflexion": 15
+              }
+            },
+            "contract": {
+              "rectus-femoris": 0.4,
+              "vastus-lateralis": 0.2,
+              "vastus-medialis": 0.2,
+              "vastus-intermedius": 0.2,
+              "gluteus-maximus": 0.2
+            }
+          }
+        ],
+        "tempo": [
+          2,
+          0.5,
+          2,
+          0.5
+        ]
+      },
+      "sources": [
+        "M1",
+        "M2",
+        "M45",
+        "M23",
+        "M24",
+        "M25"
+      ]
+    },
+    {
+      "id": "dumbbell-lateral-lunge",
+      "name": {
+        "en": "Dumbbell lateral lunge",
+        "zh": "哑铃侧弓步"
+      },
+      "equipment": "dumbbell",
+      "pattern": "lunge",
+      "level": "intermediate",
+      "primary": [
+        "rectus-femoris",
+        "vastus-lateralis",
+        "vastus-medialis",
+        "vastus-intermedius",
+        "gluteus-maximus",
+        "adductor-magnus"
+      ],
+      "secondary": [
+        "adductor-longus",
+        "adductor-brevis",
+        "gracilis",
+        "pectineus",
+        "psoas-major",
+        "iliacus"
+      ],
+      "stabilisers": [
+        "gluteus-medius",
+        "gluteus-minimus",
+        "tensor-fasciae-latae"
+      ],
+      "setup": {
+        "en": "Learn the sideways step without load first. Use a light dumbbell held at the chest and clear space on both sides.",
+        "zh": "先徒手学横向迈步，再用轻哑铃抱在胸前；身体两侧留出空间。"
+      },
+      "steps": [
+        {
+          "en": "Stand tall, holding a vertical dumbbell close to the chest with both hands under its upper head.",
+          "zh": "站稳，双手托住哑铃上端，竖着抱在胸前。"
+        },
+        {
+          "en": "Step the left foot sideways and place the whole foot down. Keep the right foot facing mostly forwards.",
+          "zh": "左脚向侧面迈，全脚掌落地；右脚大致朝前。"
+        },
+        {
+          "en": "Bend the left hip and knee and send the hips back over that leg. Let the right knee remain nearly straight without locking it.",
+          "zh": "屈左髋左膝，髋往后坐向左腿；右膝保持较直，但别硬锁。"
+        },
+        {
+          "en": "Lower only while the left knee follows the toes and both feet stay planted. Do not force a deep inner-thigh stretch.",
+          "zh": "只下到左膝仍沿脚尖走、双脚仍踩稳的位置；不要强追大腿内侧拉伸。"
+        },
+        {
+          "en": "Push through the left foot and bring it back beneath the pelvis. Return slowly and practise the other side.",
+          "zh": "用左脚推地，把脚收回骨盆下方；慢慢回位，再练另一侧。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Sit back over the stepping leg; keep the weight close.",
+          "zh": "髋往迈步腿后方坐，哑铃靠近身体。"
+        },
+        {
+          "en": "The long leg stays quiet while the bent leg controls the return.",
+          "zh": "较直的腿保持稳定，由弯曲腿控制回位。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Turning the planted foot while the knee is loaded. Why: rotation is passed into the knee instead of being a controlled hip movement.",
+          "zh": "膝负重时扭动踩地脚。为什么：旋转传到膝，而不是有控制地在髋发生。"
+        },
+        {
+          "en": "Taking an excessively wide step. Why: the groin can be pulled beyond a range you can reverse smoothly.",
+          "zh": "步子跨得过宽。为什么：腹股沟可能被拉到无法平稳回位的范围。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Begin with a load and range you can control; increase the challenge gradually as the same movement becomes easier.",
+            "zh": "先用能控制的负荷与幅度；同样的动作变得轻松后，再逐步加难。"
+          },
+          "s": [
+            "M23"
+          ]
+        },
+        {
+          "text": {
+            "en": "Practise with an effort you can control; a repetition need not reach failure to be useful. Allow recovery before another demanding session.",
+            "zh": "采用能控制的用力程度；每次不必做到力竭才有用。吃力的训练之间留出恢复。"
+          },
+          "s": [
+            "M24"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "Stop for sharp groin pain; reduce step width rather than forcing the inner thigh.",
+          "zh": "腹股沟刺痛就停；缩小步幅，不要硬拉大腿内侧。"
+        },
+        {
+          "en": "First learn the movement with bodyweight or a light load under a qualified coach; anyone under eighteen should practise with adult supervision.",
+          "zh": "第一次做先用自重或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [],
+      "sketch": "dumbbell-lateral-lunge",
+      "motion": {
+        "root": {
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "trunk": {
+                "flexion": 0
+              },
+              "hip.l": {
+                "flexion": 0
+              },
+              "hip.r": {
+                "flexion": 0
+              },
+              "knee.l": {
+                "flexion": 5
+              },
+              "knee.r": {
+                "flexion": 5
+              },
+              "ankle.l": {
+                "dorsiflexion": 0
+              },
+              "ankle.r": {
+                "dorsiflexion": 0
+              }
+            },
+            "contract": {
+              "rectus-femoris": 0.4,
+              "vastus-lateralis": 0.7,
+              "vastus-medialis": 0.7,
+              "vastus-intermedius": 0.7,
+              "gluteus-maximus": 0.7,
+              "adductor-magnus": 0.7
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "trunk": {
+                "flexion": 0
+              },
+              "hip.l": {
+                "flexion": 65,
+                "abduction": 25
+              },
+              "hip.r": {
+                "flexion": 10,
+                "abduction": 25
+              },
+              "knee.l": {
+                "flexion": 80
+              },
+              "knee.r": {
+                "flexion": 5
+              },
+              "ankle.l": {
+                "dorsiflexion": 10
+              },
+              "ankle.r": {
+                "dorsiflexion": 0
+              }
+            },
+            "contract": {
+              "rectus-femoris": 0.4,
+              "vastus-lateralis": 0.2,
+              "vastus-medialis": 0.2,
+              "vastus-intermedius": 0.2,
+              "gluteus-maximus": 0.2,
+              "adductor-magnus": 0.2
+            }
+          }
+        ],
+        "tempo": [
+          2,
+          0.5,
+          2,
+          0.5
+        ]
+      },
+      "sources": [
+        "M1",
+        "M2",
+        "M38",
+        "M23",
+        "M24",
+        "M25"
+      ]
+    },
+    {
+      "id": "barbell-romanian-deadlift",
+      "name": {
+        "en": "Barbell Romanian deadlift",
+        "zh": "杠铃罗马尼亚硬拉"
+      },
+      "equipment": "barbell",
+      "pattern": "hinge",
+      "level": "intermediate",
+      "primary": [
+        "gluteus-maximus",
+        "biceps-femoris-long",
+        "semitendinosus",
+        "semimembranosus"
+      ],
+      "secondary": [
+        "adductor-magnus"
+      ],
+      "stabilisers": [
+        "gluteus-medius",
+        "gluteus-minimus"
+      ],
+      "setup": {
+        "en": "Use a light bar with collars and a clear landing area. Lift it into the standing start from rack hooks around thigh height; learn the hip hinge before loading it.",
+        "zh": "用轻杠，上卡扣，留出放杠空间。挂钩约在大腿高度，从架上取到站姿起点；加重前先学髋铰链。"
+      },
+      "steps": [
+        {
+          "en": "Stand with feet about hip-width apart. Take a closed overhand grip just outside the thighs and hold the bar in front of them.",
+          "zh": "双脚约与髋同宽，正握，拇指扣住，双手在大腿外侧，杠放在腿前。"
+        },
+        {
+          "en": "Soften the knees and keep that small bend. Brace the trunk and let the arms hang long.",
+          "zh": "膝稍屈，之后基本保持这个弯曲；躯干收紧，手臂自然垂长。"
+        },
+        {
+          "en": "Send the hips backwards while the trunk tips forward as a unit. Keep the bar close to the legs.",
+          "zh": "髋向后送，躯干作为整体前倾，杠始终靠近腿。"
+        },
+        {
+          "en": "Stop when the back thighs feel tension and you can still keep the spine steady. The bar need not reach the floor.",
+          "zh": "大腿后侧有牵拉感、脊柱仍稳住时停；杠不必碰地。"
+        },
+        {
+          "en": "Push the feet into the floor and bring the hips forwards to stand. Keep the arms long and finish without leaning back.",
+          "zh": "双脚推地，把髋带回前方站起；手臂保持垂长，不向后仰。"
+        },
+        {
+          "en": "After the last movement, return the bar to the hooks or lower it using a controlled hip and knee bend.",
+          "zh": "结束后把杠放回挂钩，或有控制地屈髋屈膝把它放下。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Move the hips backwards as if closing a door behind you.",
+          "zh": "像用臀部关上身后的门，让髋往后走。"
+        },
+        {
+          "en": "Keep the bar near the thighs and shins; feel the back thighs and buttocks.",
+          "zh": "杠贴近大腿和小腿，留意大腿后侧、臀部用力。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Reaching for the floor by rounding the back. Why: spinal motion replaces the controlled hip range.",
+          "zh": "弓背去够地面。为什么：脊柱运动代替了有控制的髋运动。"
+        },
+        {
+          "en": "Turning the hinge into a squat by bending the knees further. Why: this changes the hamstrings starting length and the movement pattern.",
+          "zh": "越下越屈膝，把髋铰链变成深蹲。为什么：腘绳肌起始长度和动作模式都改变了。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Begin with a load and range you can control; increase the challenge gradually as the same movement becomes easier.",
+            "zh": "先用能控制的负荷与幅度；同样的动作变得轻松后，再逐步加难。"
+          },
+          "s": [
+            "M23"
+          ]
+        },
+        {
+          "text": {
+            "en": "Practise with an effort you can control; a repetition need not reach failure to be useful. Allow recovery before another demanding session.",
+            "zh": "采用能控制的用力程度；每次不必做到力竭才有用。吃力的训练之间留出恢复。"
+          },
+          "s": [
+            "M24"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "Stop for back pain, numbness or a sharp pull in the posterior thigh. Have a coach check the hinge before adding load.",
+          "zh": "背痛、麻木或大腿后侧突然锐痛就停；加重前请教练检查髋铰链。"
+        },
+        {
+          "en": "First learn the movement with bodyweight or a light load under a qualified coach; anyone under eighteen should practise with adult supervision.",
+          "zh": "第一次做先用自重或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [],
+      "sketch": "barbell-romanian-deadlift",
+      "motion": {
+        "root": {
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "trunk": {
+                "flexion": 0
+              },
+              "hip.l": {
+                "flexion": 0
+              },
+              "hip.r": {
+                "flexion": 0
+              },
+              "knee.l": {
+                "flexion": 15
+              },
+              "knee.r": {
+                "flexion": 15
+              },
+              "ankle.l": {
+                "dorsiflexion": 0
+              },
+              "ankle.r": {
+                "dorsiflexion": 0
+              }
+            },
+            "contract": {
+              "gluteus-maximus": 0.7,
+              "biceps-femoris-long": 0.7,
+              "semitendinosus": 0.7,
+              "semimembranosus": 0.7
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "trunk": {
+                "flexion": 0
+              },
+              "hip.l": {
+                "flexion": 70
+              },
+              "hip.r": {
+                "flexion": 70
+              },
+              "knee.l": {
+                "flexion": 15
+              },
+              "knee.r": {
+                "flexion": 15
+              },
+              "ankle.l": {
+                "dorsiflexion": 5
+              },
+              "ankle.r": {
+                "dorsiflexion": 5
+              }
+            },
+            "contract": {
+              "gluteus-maximus": 0.2,
+              "biceps-femoris-long": 0.2,
+              "semitendinosus": 0.2,
+              "semimembranosus": 0.2
+            }
+          }
+        ],
+        "tempo": [
+          2,
+          0.5,
+          2,
+          0.5
+        ]
+      },
+      "sources": [
+        "M1",
+        "M2",
+        "M39",
+        "M23",
+        "M24",
+        "M25"
+      ]
+    },
+    {
+      "id": "seated-leg-curl",
+      "name": {
+        "en": "Seated leg curl",
+        "zh": "坐姿腿弯举"
+      },
+      "equipment": "machine",
+      "pattern": "isolation",
+      "level": "beginner",
+      "primary": [
+        "biceps-femoris-long",
+        "biceps-femoris-short",
+        "semitendinosus",
+        "semimembranosus"
+      ],
+      "secondary": [
+        "gracilis",
+        "sartorius",
+        "gastrocnemius-medial",
+        "gastrocnemius-lateral"
+      ],
+      "stabilisers": [],
+      "setup": {
+        "en": "Adjust a seated leg-curl machine so its pivot lines up with the side of the knee. Set the lower roller above the heel and the thigh pad above the knees; begin with a light selection.",
+        "zh": "调坐姿腿弯举机，使转轴对准膝侧。下方滚垫放在脚跟上方，大腿压垫位于膝上；先选轻配重。"
+      },
+      "steps": [
+        {
+          "en": "Sit against the back pad with the hips flexed and hold the handles with a closed neutral grip.",
+          "zh": "坐稳，背靠垫，髋保持屈曲，用对握握住把手，拇指扣住。"
+        },
+        {
+          "en": "Secure the thigh pad without squeezing the kneecaps. Set the starting knee extension to a comfortable range.",
+          "zh": "固定大腿压垫，不压髌骨；起始伸膝幅度以舒服为准。"
+        },
+        {
+          "en": "Keep the pelvis still and pull the lower roller down and back by bending the knees. Keep ankles relaxed near neutral.",
+          "zh": "骨盆不动，屈膝把下方滚垫往下、往后拉；踝放松在近中立位。"
+        },
+        {
+          "en": "Pause at the bend you can reach without lifting the thighs or arching the back.",
+          "zh": "屈到大腿不抬、背不后仰且能控制的位置，稍停。"
+        },
+        {
+          "en": "Let the knees straighten slowly to the chosen start. Return the lever fully before releasing the pad and leaving the seat.",
+          "zh": "慢慢伸膝回到设定起点；结束时先把杠杆完全送回，再松压垫离座。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Move the knees, not the pelvis.",
+          "zh": "动膝，不动骨盆。"
+        },
+        {
+          "en": "Feel the posterior thigh work and let the stack return quietly.",
+          "zh": "留意大腿后侧用力，配重轻轻回落。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Using a machine pivot far from the knee. Why: the pad can slide and push the leg along an uncomfortable path.",
+          "zh": "器械转轴离膝太远。为什么：滚垫容易滑动，把腿带上不舒服的路线。"
+        },
+        {
+          "en": "Lifting the hips to finish the curl. Why: the hip position changes and momentum replaces knee-flexor work.",
+          "zh": "为了弯到底而抬髋。为什么：髋姿势改变，惯性代替了屈膝肌用力。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Begin with a load and range you can control; increase the challenge gradually as the same movement becomes easier.",
+            "zh": "先用能控制的负荷与幅度；同样的动作变得轻松后，再逐步加难。"
+          },
+          "s": [
+            "M23"
+          ]
+        },
+        {
+          "text": {
+            "en": "Practise with an effort you can control; a repetition need not reach failure to be useful. Allow recovery before another demanding session.",
+            "zh": "采用能控制的用力程度；每次不必做到力竭才有用。吃力的训练之间留出恢复。"
+          },
+          "s": [
+            "M24"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "Keep fingers clear of levers and the stack; do not force full knee extension if it produces pain.",
+          "zh": "手指远离杠杆和配重；伸膝到头会痛时不要硬顶。"
+        },
+        {
+          "en": "First learn the movement with bodyweight or a light load under a qualified coach; anyone under eighteen should practise with adult supervision.",
+          "zh": "第一次做先用自重或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [],
+      "sketch": "seated-leg-curl",
+      "motion": {
+        "root": {
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "trunk": {
+                "flexion": 0
+              },
+              "hip.l": {
+                "flexion": 85
+              },
+              "hip.r": {
+                "flexion": 85
+              },
+              "knee.l": {
+                "flexion": 10
+              },
+              "knee.r": {
+                "flexion": 10
+              },
+              "ankle.l": {
+                "dorsiflexion": 0
+              },
+              "ankle.r": {
+                "dorsiflexion": 0
+              }
+            },
+            "contract": {
+              "biceps-femoris-long": 0.15,
+              "biceps-femoris-short": 0.15,
+              "semitendinosus": 0.15,
+              "semimembranosus": 0.15
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "trunk": {
+                "flexion": 0
+              },
+              "hip.l": {
+                "flexion": 85
+              },
+              "hip.r": {
+                "flexion": 85
+              },
+              "knee.l": {
+                "flexion": 90
+              },
+              "knee.r": {
+                "flexion": 90
+              },
+              "ankle.l": {
+                "dorsiflexion": 0
+              },
+              "ankle.r": {
+                "dorsiflexion": 0
+              }
+            },
+            "contract": {
+              "biceps-femoris-long": 0.8,
+              "biceps-femoris-short": 0.8,
+              "semitendinosus": 0.8,
+              "semimembranosus": 0.8
+            }
+          }
+        ],
+        "tempo": [
+          2,
+          0.5,
+          2,
+          0.5
+        ]
+      },
+      "sources": [
+        "M1",
+        "M2",
+        "M40",
+        "M44",
+        "M23",
+        "M24",
+        "M25"
+      ]
+    },
+    {
+      "id": "cable-hip-abduction",
+      "name": {
+        "en": "Cable hip abduction",
+        "zh": "绳索髋外展"
+      },
+      "equipment": "cable",
+      "pattern": "isolation",
+      "level": "beginner",
+      "primary": [
+        "gluteus-medius",
+        "gluteus-minimus",
+        "tensor-fasciae-latae"
+      ],
+      "secondary": [
+        "tensor-fasciae-latae",
+        "gluteus-maximus"
+      ],
+      "stabilisers": [
+        "fibularis-longus",
+        "soleus"
+      ],
+      "setup": {
+        "en": "Fit an ankle cuff to a low pulley. Stand with the right side towards the column so the left leg moves away from it; hold a fixed support. Select a light load.",
+        "zh": "低滑轮接踝带。右侧朝向器械，让左腿向远离滑轮方向抬；扶稳，选轻配重。"
+      },
+      "steps": [
+        {
+          "en": "Secure the cuff above the left ankle and check that the clip is closed. Stand on the right leg with that knee slightly soft.",
+          "zh": "踝带固定在左踝上方，确认挂扣闭合。右腿支撑，膝稍放松。"
+        },
+        {
+          "en": "Keep the pelvis level and the left toes facing forwards. Hold the support with a comfortable closed grip.",
+          "zh": "骨盆摆平，左脚尖朝前，用舒服的闭合握法扶稳。"
+        },
+        {
+          "en": "Move the left thigh sideways away from the column without turning the foot or leaning the trunk.",
+          "zh": "左大腿向侧面离开滑轮，不转脚，也不侧倾躯干。"
+        },
+        {
+          "en": "Stop while the pelvis still stays level. Pause briefly and notice effort at the upper outer hip.",
+          "zh": "骨盆仍能摆平时停，稍停一下，留意髋外上方用力。"
+        },
+        {
+          "en": "Bring the leg back slowly without allowing the stack to crash. Rest the stack before removing the cuff and changing sides.",
+          "zh": "慢慢收回，不让配重砸下；配重停稳后再解踝带换侧。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Move the thigh; keep your belt line quiet.",
+          "zh": "动大腿，裤腰保持平稳。"
+        },
+        {
+          "en": "A small controlled arc is enough.",
+          "zh": "小幅度、可控制的弧线就够了。"
+        },
+        {
+          "en": "The moving hip pulls outward; the supporting hip also works to keep the pelvis steady.",
+          "zh": "移动侧髋向外拉，支撑侧髋也在用力稳住骨盆。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Leaning away from the column. Why: trunk movement makes the leg look higher without more hip abduction.",
+          "zh": "向远离器械方向侧倾。为什么：躯干运动让腿看起来抬高了，髋外展却没增加。"
+        },
+        {
+          "en": "Turning the toes strongly inward or outward. Why: it changes the task rather than keeping a repeatable sideways pull.",
+          "zh": "脚尖使劲朝内或朝外拧。为什么：动作任务改变，侧向拉不再稳定一致。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Begin with a load and range you can control; increase the challenge gradually as the same movement becomes easier.",
+            "zh": "先用能控制的负荷与幅度；同样的动作变得轻松后，再逐步加难。"
+          },
+          "s": [
+            "M23"
+          ]
+        },
+        {
+          "text": {
+            "en": "Practise with an effort you can control; a repetition need not reach failure to be useful. Allow recovery before another demanding session.",
+            "zh": "采用能控制的用力程度；每次不必做到力竭才有用。吃力的训练之间留出恢复。"
+          },
+          "s": [
+            "M24"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "Check the cuff and use fixed hand support. Stop if the cuff causes numbness or the hip pinches.",
+          "zh": "检查踝带，手扶固定支撑；踝带压出麻木或髋夹痛就停。"
+        },
+        {
+          "en": "First learn the movement with bodyweight or a light load under a qualified coach; anyone under eighteen should practise with adult supervision.",
+          "zh": "第一次做先用自重或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [],
+      "sketch": "cable-hip-abduction",
+      "motion": {
+        "root": {
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "trunk": {
+                "flexion": 0
+              },
+              "hip.l": {
+                "abduction": 0
+              },
+              "hip.r": {
+                "abduction": 0
+              },
+              "knee.l": {
+                "flexion": 5
+              },
+              "knee.r": {
+                "flexion": 10
+              },
+              "ankle.l": {
+                "dorsiflexion": 0
+              },
+              "ankle.r": {
+                "dorsiflexion": 0
+              }
+            },
+            "contract": {
+              "gluteus-medius": 0.15,
+              "gluteus-minimus": 0.15,
+              "tensor-fasciae-latae": 0.15
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "trunk": {
+                "flexion": 0
+              },
+              "hip.l": {
+                "abduction": 25
+              },
+              "hip.r": {
+                "abduction": 0
+              },
+              "knee.l": {
+                "flexion": 5
+              },
+              "knee.r": {
+                "flexion": 10
+              },
+              "ankle.l": {
+                "dorsiflexion": 0
+              },
+              "ankle.r": {
+                "dorsiflexion": 0
+              }
+            },
+            "contract": {
+              "gluteus-medius": 0.8,
+              "gluteus-minimus": 0.8,
+              "tensor-fasciae-latae": 0.8
+            }
+          }
+        ],
+        "tempo": [
+          2,
+          0.5,
+          2,
+          0.5
+        ]
+      },
+      "sources": [
+        "M1",
+        "M2",
+        "M46",
+        "M23",
+        "M24",
+        "M25"
+      ]
+    },
+    {
+      "id": "cable-hip-adduction",
+      "name": {
+        "en": "Cable hip adduction",
+        "zh": "绳索髋内收"
+      },
+      "equipment": "cable",
+      "pattern": "isolation",
+      "level": "beginner",
+      "primary": [
+        "adductor-longus",
+        "adductor-brevis",
+        "adductor-magnus",
+        "gracilis",
+        "pectineus"
+      ],
+      "secondary": [],
+      "stabilisers": [
+        "gluteus-medius",
+        "gluteus-minimus",
+        "tensor-fasciae-latae"
+      ],
+      "setup": {
+        "en": "Attach an ankle cuff to the low pulley. Stand with the left side near the column and support your weight on the right foot. Hold a fixed support and use a light selection.",
+        "zh": "低滑轮接踝带，左侧靠近器械，右脚支撑；扶固定支撑，选轻配重。"
+      },
+      "steps": [
+        {
+          "en": "Fasten the cuff above the left ankle and take enough sideways space for the cable to stay lightly taut.",
+          "zh": "踝带扣在左踝上方，站开一些，让绳索轻轻绷紧。"
+        },
+        {
+          "en": "Let the left leg start a little out to the side, knee softly extended. Keep the pelvis facing forwards.",
+          "zh": "左腿从略外展位开始，膝自然较直；骨盆朝前。"
+        },
+        {
+          "en": "Draw the left thigh inward towards the support leg. Keep toes facing forwards and avoid swinging.",
+          "zh": "左大腿向支撑腿靠拢，脚尖朝前，不甩腿。"
+        },
+        {
+          "en": "Stop near the midline before the legs collide or the pelvis turns. Notice effort in the inner thigh.",
+          "zh": "靠近中线就停，别撞腿，也别转骨盆；留意大腿内侧用力。"
+        },
+        {
+          "en": "Let the cable draw the leg back out slowly. Set the stack down before removing the cuff and changing sides.",
+          "zh": "慢慢让绳索把腿拉回外侧；配重停稳后再解踝带换侧。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Pull the thigh inward while keeping the belt line square.",
+          "zh": "大腿向内拉，裤腰仍朝前。"
+        },
+        {
+          "en": "Keep the return as quiet as the inward pull.",
+          "zh": "向外回位也和向内拉一样平稳。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Crossing far past the support leg. Why: the pelvis often turns and replaces the intended hip motion.",
+          "zh": "跨过支撑腿很远。为什么：骨盆常会跟着转，代替原本的髋运动。"
+        },
+        {
+          "en": "Starting with a very wide spread. Why: the groin may be pulled beyond a controlled range.",
+          "zh": "起点张腿过宽。为什么：腹股沟可能被拉到无法控制的范围。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Begin with a load and range you can control; increase the challenge gradually as the same movement becomes easier.",
+            "zh": "先用能控制的负荷与幅度；同样的动作变得轻松后，再逐步加难。"
+          },
+          "s": [
+            "M23"
+          ]
+        },
+        {
+          "text": {
+            "en": "Practise with an effort you can control; a repetition need not reach failure to be useful. Allow recovery before another demanding session.",
+            "zh": "采用能控制的用力程度；每次不必做到力竭才有用。吃力的训练之间留出恢复。"
+          },
+          "s": [
+            "M24"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "Avoid forcing a groin stretch or using a loose support. Stop for sharp inner-thigh pain.",
+          "zh": "别强拉腹股沟，也别扶会移动的物体；大腿内侧刺痛就停。"
+        },
+        {
+          "en": "First learn the movement with bodyweight or a light load under a qualified coach; anyone under eighteen should practise with adult supervision.",
+          "zh": "第一次做先用自重或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [],
+      "sketch": "cable-hip-adduction",
+      "motion": {
+        "root": {
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "trunk": {
+                "flexion": 0
+              },
+              "hip.l": {
+                "abduction": 20
+              },
+              "hip.r": {
+                "abduction": 0
+              },
+              "knee.l": {
+                "flexion": 5
+              },
+              "knee.r": {
+                "flexion": 10
+              },
+              "ankle.l": {
+                "dorsiflexion": 0
+              },
+              "ankle.r": {
+                "dorsiflexion": 0
+              }
+            },
+            "contract": {
+              "adductor-longus": 0.15,
+              "adductor-brevis": 0.15,
+              "adductor-magnus": 0.15,
+              "gracilis": 0.15,
+              "pectineus": 0.15
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "trunk": {
+                "flexion": 0
+              },
+              "hip.l": {
+                "abduction": 0
+              },
+              "hip.r": {
+                "abduction": 0
+              },
+              "knee.l": {
+                "flexion": 5
+              },
+              "knee.r": {
+                "flexion": 10
+              },
+              "ankle.l": {
+                "dorsiflexion": 0
+              },
+              "ankle.r": {
+                "dorsiflexion": 0
+              }
+            },
+            "contract": {
+              "adductor-longus": 0.8,
+              "adductor-brevis": 0.8,
+              "adductor-magnus": 0.8,
+              "gracilis": 0.8,
+              "pectineus": 0.8
+            }
+          }
+        ],
+        "tempo": [
+          2,
+          0.5,
+          2,
+          0.5
+        ]
+      },
+      "sources": [
+        "M1",
+        "M2",
+        "M44",
+        "M23",
+        "M24",
+        "M25"
+      ]
+    },
+    {
+      "id": "dumbbell-standing-calf-raise",
+      "name": {
+        "en": "Supported dumbbell standing calf raise",
+        "zh": "扶稳哑铃站姿提踵"
+      },
+      "equipment": "dumbbell",
+      "pattern": "isolation",
+      "level": "beginner",
+      "primary": [
+        "gastrocnemius-medial",
+        "gastrocnemius-lateral",
+        "soleus"
+      ],
+      "secondary": [
+        "fibularis-longus"
+      ],
+      "stabilisers": [],
+      "setup": {
+        "en": "Stand on a level non-slip floor beside a fixed support. Hold a light dumbbell in one hand and use the other for balance; begin with both feet carrying your weight.",
+        "zh": "站在平整防滑地面，身旁有固定扶手。一手持轻哑铃，另一手扶稳；先双脚一起承重。"
+      },
+      "steps": [
+        {
+          "en": "Set the feet hip-width apart, toes roughly forwards. Hold the dumbbell at the side with a neutral closed grip.",
+          "zh": "双脚与髋同宽，脚尖大致朝前；哑铃垂在身侧，对握，拇指扣住。"
+        },
+        {
+          "en": "Stand tall with knees comfortably straight but not pushed backwards. Use the support for balance rather than pulling upwards.",
+          "zh": "站稳，膝自然伸直，不向后顶；扶手只帮平衡，不把人拉上去。"
+        },
+        {
+          "en": "Press through the balls of both feet and lift the heels slowly. Keep pressure spread across the forefoot.",
+          "zh": "两脚前脚掌推地，慢慢提脚跟；压力分布在整个前脚掌。"
+        },
+        {
+          "en": "Pause at a height you can hold without rolling the ankles or bending the knees. Notice effort through the calf.",
+          "zh": "提到踝不歪、膝不屈且能停稳的高度，留意小腿用力。"
+        },
+        {
+          "en": "Lower the heels slowly to the floor. Set the dumbbell down under control when finished.",
+          "zh": "脚跟慢慢落回地面，结束后把哑铃稳稳放下。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Rise straight up, not onto the outer toes.",
+          "zh": "直向上提，不滚到外侧脚趾。"
+        },
+        {
+          "en": "Let the ankles move while the knees stay quiet.",
+          "zh": "让踝运动，膝保持稳定。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Bouncing off the floor. Why: rebound hides how well the calf controls the lowering phase.",
+          "zh": "借地面反弹。为什么：反弹掩盖了小腿对下放的控制。"
+        },
+        {
+          "en": "Rolling onto the outside of the feet. Why: this changes support and makes the rise less steady.",
+          "zh": "脚掌滚到外缘。为什么：支撑改变，提起更不稳。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Begin with a load and range you can control; increase the challenge gradually as the same movement becomes easier.",
+            "zh": "先用能控制的负荷与幅度；同样的动作变得轻松后，再逐步加难。"
+          },
+          "s": [
+            "M23"
+          ]
+        },
+        {
+          "text": {
+            "en": "Practise with an effort you can control; a repetition need not reach failure to be useful. Allow recovery before another demanding session.",
+            "zh": "采用能控制的用力程度；每次不必做到力竭才有用。吃力的训练之间留出恢复。"
+          },
+          "s": [
+            "M24"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "Begin on the floor rather than an edge; stop for sharp Achilles or foot pain.",
+          "zh": "先在平地做，不站高台边缘；跟腱或足部刺痛就停。"
+        },
+        {
+          "en": "First learn the movement with bodyweight or a light load under a qualified coach; anyone under eighteen should practise with adult supervision.",
+          "zh": "第一次做先用自重或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [],
+      "sketch": "dumbbell-standing-calf-raise",
+      "motion": {
+        "root": {
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "trunk": {
+                "flexion": 0
+              },
+              "hip.l": {
+                "flexion": 0
+              },
+              "hip.r": {
+                "flexion": 0
+              },
+              "knee.l": {
+                "flexion": 5
+              },
+              "knee.r": {
+                "flexion": 5
+              },
+              "ankle.l": {
+                "plantarflexion": 0
+              },
+              "ankle.r": {
+                "plantarflexion": 0
+              }
+            },
+            "contract": {
+              "gastrocnemius-medial": 0.15,
+              "gastrocnemius-lateral": 0.15,
+              "soleus": 0.15
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "trunk": {
+                "flexion": 0
+              },
+              "hip.l": {
+                "flexion": 0
+              },
+              "hip.r": {
+                "flexion": 0
+              },
+              "knee.l": {
+                "flexion": 5
+              },
+              "knee.r": {
+                "flexion": 5
+              },
+              "ankle.l": {
+                "plantarflexion": 25
+              },
+              "ankle.r": {
+                "plantarflexion": 25
+              }
+            },
+            "contract": {
+              "gastrocnemius-medial": 0.8,
+              "gastrocnemius-lateral": 0.8,
+              "soleus": 0.8
+            }
+          }
+        ],
+        "tempo": [
+          2,
+          0.5,
+          2,
+          0.5
+        ]
+      },
+      "sources": [
+        "M1",
+        "M2",
+        "M41",
+        "M23",
+        "M24",
+        "M25"
+      ]
+    },
+    {
+      "id": "seated-dumbbell-calf-raise",
+      "name": {
+        "en": "Seated dumbbell calf raise",
+        "zh": "哑铃坐姿提踵"
+      },
+      "equipment": "dumbbell",
+      "pattern": "isolation",
+      "level": "beginner",
+      "primary": [
+        "soleus"
+      ],
+      "secondary": [
+        "gastrocnemius-medial",
+        "gastrocnemius-lateral",
+        "fibularis-longus"
+      ],
+      "stabilisers": [],
+      "setup": {
+        "en": "Use a stable flat bench and a light dumbbell. Cushion the lower thighs and rest the weight across them above the knees, holding it securely with both hands.",
+        "zh": "用稳固平板凳和轻哑铃。大腿下端垫软垫，哑铃横放在膝上方的大腿上，双手扶牢。"
+      },
+      "steps": [
+        {
+          "en": "Sit tall with feet hip-width apart and knees bent near a right angle. Put the forefeet flat on the floor.",
+          "zh": "坐稳，双脚与髋同宽，膝约屈成直角，前脚掌平踩地面。"
+        },
+        {
+          "en": "Place the cushioned dumbbell above the knees, not on the kneecaps. Hold it so it cannot roll.",
+          "zh": "带垫的哑铃放在膝上方，不压髌骨；扶牢，不让它滚动。"
+        },
+        {
+          "en": "Keep the knee angle steady and press the forefeet down to lift the heels.",
+          "zh": "膝角度不变，用前脚掌推地，把脚跟提起。"
+        },
+        {
+          "en": "Pause without leaning backwards or lifting the thighs by hand. Notice the lower calf working.",
+          "zh": "停稳，不后仰，也不用手抬大腿，留意小腿下部用力。"
+        },
+        {
+          "en": "Lower the heels slowly to the floor and keep the weight secure. Remove it from the thighs before standing.",
+          "zh": "脚跟慢慢落地，始终扶住重量；先移开哑铃，再站起来。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Keep the bend at the knees while moving the ankles.",
+          "zh": "保持屈膝，让踝运动。"
+        },
+        {
+          "en": "Rise and lower without bouncing the weight.",
+          "zh": "重量平稳升降，不弹。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Putting the weight directly on the kneecaps. Why: pressure falls on a bony surface instead of the supported thigh.",
+          "zh": "哑铃直接压髌骨。为什么：压力落在骨面上，而不是有支撑的大腿上。"
+        },
+        {
+          "en": "Lifting the thighs with the hands. Why: the hands unload the calves instead of stabilising the weight.",
+          "zh": "用手抬大腿。为什么：手把小腿该承担的负荷卸掉了。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Begin with a load and range you can control; increase the challenge gradually as the same movement becomes easier.",
+            "zh": "先用能控制的负荷与幅度；同样的动作变得轻松后，再逐步加难。"
+          },
+          "s": [
+            "M23"
+          ]
+        },
+        {
+          "text": {
+            "en": "Practise with an effort you can control; a repetition need not reach failure to be useful. Allow recovery before another demanding session.",
+            "zh": "采用能控制的用力程度；每次不必做到力竭才有用。吃力的训练之间留出恢复。"
+          },
+          "s": [
+            "M24"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "Use padding and a light secure weight; stop for knee pressure pain or Achilles pain.",
+          "zh": "垫好，重量轻且固定稳；膝受压痛或跟腱痛就停。"
+        },
+        {
+          "en": "First learn the movement with bodyweight or a light load under a qualified coach; anyone under eighteen should practise with adult supervision.",
+          "zh": "第一次做先用自重或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [],
+      "sketch": "seated-dumbbell-calf-raise",
+      "motion": {
+        "root": {
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "trunk": {
+                "flexion": 0
+              },
+              "hip.l": {
+                "flexion": 90
+              },
+              "hip.r": {
+                "flexion": 90
+              },
+              "knee.l": {
+                "flexion": 90
+              },
+              "knee.r": {
+                "flexion": 90
+              },
+              "ankle.l": {
+                "plantarflexion": 0
+              },
+              "ankle.r": {
+                "plantarflexion": 0
+              }
+            },
+            "contract": {
+              "soleus": 0.15,
+              "gastrocnemius-medial": 0.15,
+              "gastrocnemius-lateral": 0.15
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "trunk": {
+                "flexion": 0
+              },
+              "hip.l": {
+                "flexion": 90
+              },
+              "hip.r": {
+                "flexion": 90
+              },
+              "knee.l": {
+                "flexion": 90
+              },
+              "knee.r": {
+                "flexion": 90
+              },
+              "ankle.l": {
+                "plantarflexion": 25
+              },
+              "ankle.r": {
+                "plantarflexion": 25
+              }
+            },
+            "contract": {
+              "soleus": 0.8,
+              "gastrocnemius-medial": 0.45,
+              "gastrocnemius-lateral": 0.45
+            }
+          }
+        ],
+        "tempo": [
+          2,
+          0.5,
+          2,
+          0.5
+        ]
+      },
+      "sources": [
+        "M1",
+        "M2",
+        "M41",
+        "M23",
+        "M24",
+        "M25"
+      ]
+    },
+    {
+      "id": "wall-tibialis-raise",
+      "name": {
+        "en": "Wall-supported tibialis raise",
+        "zh": "靠墙胫骨前肌提脚"
+      },
+      "equipment": "bodyweight",
+      "pattern": "isolation",
+      "level": "beginner",
+      "primary": [
+        "tibialis-anterior"
+      ],
+      "secondary": [],
+      "stabilisers": [],
+      "setup": {
+        "en": "Use a clear non-slip floor and a stable wall. Lean the upper back against it with feet slightly forward; choose a distance that lets the heels stay planted.",
+        "zh": "用防滑地面和稳固墙面。上背靠墙，双脚略向前伸，距离以脚跟能踩稳为准。"
+      },
+      "steps": [
+        {
+          "en": "Place the upper back against the wall and keep the body tall. Set both heels down, feet roughly hip-width apart.",
+          "zh": "上背靠墙，身体保持挺直；双脚约与髋同宽，两脚跟踩地。"
+        },
+        {
+          "en": "Keep knees softly extended and toes pointing forwards. Shift neither the hips nor the heels during the lift.",
+          "zh": "膝自然较直，脚尖朝前；提脚时髋和脚跟不移动。"
+        },
+        {
+          "en": "Pull the whole forefoot towards the shins while the heels remain on the floor. Let the toes stay relaxed.",
+          "zh": "把整个前脚掌拉向小腿，脚跟仍贴地，脚趾自然放松。"
+        },
+        {
+          "en": "Pause at a height you can hold and notice the muscles beside the front of the shin.",
+          "zh": "提到能停稳的高度，留意胫骨前缘旁的肌肉用力。"
+        },
+        {
+          "en": "Lower the forefeet slowly without slapping the floor. Bring the feet closer to the wall if control fades.",
+          "zh": "前脚掌慢慢落下，不拍地；控制变差就把脚收近墙面。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Lift the foot, not just the toes.",
+          "zh": "抬脚，不只翘脚趾。"
+        },
+        {
+          "en": "Keep the heels still and let the ankles do the work.",
+          "zh": "脚跟不动，让踝来完成动作。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Rocking away from the wall. Why: body motion helps fling the forefeet up instead of loading dorsiflexion.",
+          "zh": "身体离墙前后晃。为什么：身体运动把前脚掌甩起来，背屈不再承担同样负荷。"
+        },
+        {
+          "en": "Letting the feet slap down. Why: this removes control from the lowering phase.",
+          "zh": "让脚掌拍地。为什么：下放阶段失去控制。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Begin close enough to the wall for smooth foot lifts; move the feet farther forward only while the heels stay planted and lowering stays controlled.",
+            "zh": "先把脚放在能平稳提起的位置；脚跟不移、下放仍能控制时，再把脚逐步放远。"
+          },
+          "s": [
+            "M23"
+          ]
+        },
+        {
+          "text": {
+            "en": "Practise with an effort you can control; a repetition need not reach failure to be useful. Allow recovery before another demanding session.",
+            "zh": "采用能控制的用力程度；每次不必做到力竭才有用。吃力的训练之间留出恢复。"
+          },
+          "s": [
+            "M24"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "Choose a stable wall and stop for sharp shin pain, tingling or loss of foot control.",
+          "zh": "墙面要稳；小腿刺痛、麻刺或足部失控就停。"
+        },
+        {
+          "en": "First learn the movement with bodyweight or a light load under a qualified coach; anyone under eighteen should practise with adult supervision.",
+          "zh": "第一次做先用自重或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [],
+      "sketch": "wall-tibialis-raise",
+      "motion": {
+        "root": {
+          "rotation": [
+            -10,
+            0,
+            0
+          ]
+        },
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "trunk": {
+                "flexion": 0
+              },
+              "hip.l": {
+                "flexion": 0
+              },
+              "hip.r": {
+                "flexion": 0
+              },
+              "knee.l": {
+                "flexion": 5
+              },
+              "knee.r": {
+                "flexion": 5
+              },
+              "ankle.l": {
+                "dorsiflexion": 0
+              },
+              "ankle.r": {
+                "dorsiflexion": 0
+              }
+            },
+            "contract": {
+              "tibialis-anterior": 0.15
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "trunk": {
+                "flexion": 0
+              },
+              "hip.l": {
+                "flexion": 0
+              },
+              "hip.r": {
+                "flexion": 0
+              },
+              "knee.l": {
+                "flexion": 5
+              },
+              "knee.r": {
+                "flexion": 5
+              },
+              "ankle.l": {
+                "dorsiflexion": 15
+              },
+              "ankle.r": {
+                "dorsiflexion": 15
+              }
+            },
+            "contract": {
+              "tibialis-anterior": 0.8
+            }
+          }
+        ],
+        "tempo": [
+          2,
+          0.5,
+          2,
+          0.5
+        ]
+      },
+      "sources": [
+        "M1",
+        "M2",
+        "M43",
+        "M23",
+        "M24",
+        "M25"
+      ]
+    },
+    {
+      "id": "heel-walk",
+      "name": {
+        "en": "Heel walk",
+        "zh": "脚跟行走"
+      },
+      "equipment": "bodyweight",
+      "pattern": "carry",
+      "level": "beginner",
+      "primary": [
+        "tibialis-anterior"
+      ],
+      "secondary": [
+        "psoas-major",
+        "iliacus"
+      ],
+      "stabilisers": [
+        "gluteus-medius",
+        "gluteus-minimus",
+        "tensor-fasciae-latae"
+      ],
+      "setup": {
+        "en": "Use a short clear path on a firm non-slip floor, near a fixed support if needed. Wear stable shoes and begin with a comfortable forefoot lift.",
+        "zh": "在结实防滑地面找一段无障碍路线，需要时靠近固定扶手。穿稳固鞋，前脚掌抬到舒服高度。"
+      },
+      "steps": [
+        {
+          "en": "Stand tall, then raise the whole forefoot on each side so your weight rests on the heels.",
+          "zh": "站稳，把两侧整个前脚掌抬起，让重量落在脚跟。"
+        },
+        {
+          "en": "Keep the knees softly extended and the toes facing ahead. Use light hand support if balance is uncertain.",
+          "zh": "膝自然较直，脚尖朝前；平衡不稳可轻扶。"
+        },
+        {
+          "en": "Take a small step forwards with the left heel, keeping that forefoot lifted as the heel meets the floor.",
+          "zh": "左脚跟向前迈小步，着地时前脚掌仍抬起。"
+        },
+        {
+          "en": "Transfer weight gently and bring the right heel forwards. Keep the trunk steady and avoid rocking onto the toes.",
+          "zh": "轻轻转移重量，右脚跟再向前；躯干稳定，不滚回脚尖。"
+        },
+        {
+          "en": "Finish before the forefeet begin to drop or balance becomes rushed. Put the whole feet down before turning around.",
+          "zh": "前脚掌开始下掉或平衡变急前结束；先全脚掌落地，再转身。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Keep the forefeet lifted, with quiet heel contacts.",
+          "zh": "前脚掌保持抬起，脚跟轻轻着地。"
+        },
+        {
+          "en": "Small steps make control easier to notice.",
+          "zh": "小步更容易留意控制。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Marching with the toes raised but the forefoot down. Why: toe extension is not the same as ankle dorsiflexion.",
+          "zh": "只翘脚趾，前脚掌仍落地。为什么：伸趾不等于踝背屈。"
+        },
+        {
+          "en": "Taking long stamping steps. Why: impact and hurried balance distract from holding the foot position.",
+          "zh": "大步跺脚。为什么：冲击和急着稳住身体，会干扰足位控制。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Begin with stationary forefoot holds or light hand support; progress to quiet steps only while the lifted foot position and balance remain steady.",
+            "zh": "先原地保持前脚掌抬起，或轻扶；足位与平衡都稳住后，再过渡到轻轻迈步。"
+          },
+          "s": [
+            "M23"
+          ]
+        },
+        {
+          "text": {
+            "en": "Practise with an effort you can control; a repetition need not reach failure to be useful. Allow recovery before another demanding session.",
+            "zh": "采用能控制的用力程度；每次不必做到力竭才有用。吃力的训练之间留出恢复。"
+          },
+          "s": [
+            "M24"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "Use support or return to a stationary foot lift if balance is poor. Stop for heel pain or numbness.",
+          "zh": "平衡差就扶稳，或改为原地提脚；脚跟痛或麻木就停。"
+        },
+        {
+          "en": "First learn the movement with bodyweight or a light load under a qualified coach; anyone under eighteen should practise with adult supervision.",
+          "zh": "第一次做先用自重或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [],
+      "sketch": "heel-walk",
+      "motion": {
+        "root": {
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "trunk": {
+                "flexion": 0
+              },
+              "hip.l": {
+                "flexion": 0
+              },
+              "hip.r": {
+                "flexion": 0
+              },
+              "knee.l": {
+                "flexion": 5
+              },
+              "knee.r": {
+                "flexion": 5
+              },
+              "ankle.l": {
+                "dorsiflexion": 15
+              },
+              "ankle.r": {
+                "dorsiflexion": 15
+              }
+            },
+            "contract": {
+              "tibialis-anterior": 0.6
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "trunk": {
+                "flexion": 0
+              },
+              "hip.l": {
+                "flexion": 15
+              },
+              "hip.r": {
+                "extension": 5
+              },
+              "knee.l": {
+                "flexion": 10
+              },
+              "knee.r": {
+                "flexion": 5
+              },
+              "ankle.l": {
+                "dorsiflexion": 15
+              },
+              "ankle.r": {
+                "dorsiflexion": 15
+              }
+            },
+            "contract": {
+              "tibialis-anterior": 0.6
+            }
+          }
+        ],
+        "tempo": [
+          2,
+          0.5,
+          2,
+          0.5
+        ]
+      },
+      "sources": [
+        "M1",
+        "M2",
+        "M42",
+        "M23",
+        "M24",
+        "M25"
+      ]
+    },
+    {
+      "id": "band-ankle-dorsiflexion",
+      "name": {
+        "en": "Band-resisted ankle dorsiflexion",
+        "zh": "弹力带踝背屈"
+      },
+      "equipment": "band",
+      "pattern": "isolation",
+      "level": "beginner",
+      "primary": [
+        "tibialis-anterior"
+      ],
+      "secondary": [],
+      "stabilisers": [],
+      "setup": {
+        "en": "Sit on a firm floor with a light band looped over the forefoot and attached to a fixed low anchor in front. Inspect the band and anchor before stretching it.",
+        "zh": "坐在结实地面，轻弹力带套前脚掌，固定到正前方低位稳固锚点；拉伸前检查带和固定点。"
+      },
+      "steps": [
+        {
+          "en": "Sit with the left heel supported on the floor and the knee comfortably near straight. Bend the other leg for a relaxed sitting position.",
+          "zh": "坐稳，左脚跟有地面支撑，左膝自然较直；另一腿屈起，让坐姿舒服。"
+        },
+        {
+          "en": "Place the band across the forefoot rather than the toes. Take up light tension with the ankle slightly pointed away.",
+          "zh": "弹力带压在前脚掌，不套脚趾；踝略跖屈，让带轻轻绷紧。"
+        },
+        {
+          "en": "Keep the heel and knee still and pull the whole forefoot towards the shin. Avoid turning the sole in or out.",
+          "zh": "脚跟和膝不动，把整个前脚掌拉向小腿；足底不向内外转。"
+        },
+        {
+          "en": "Pause at a comfortable dorsiflexed position with the toes relaxed. Notice effort beside the shin.",
+          "zh": "在舒服的背屈位稍停，脚趾放松，留意胫骨旁用力。"
+        },
+        {
+          "en": "Let the band draw the forefoot away slowly. Release the tension before removing the band or changing legs.",
+          "zh": "慢慢让带把前脚掌拉回；先卸掉张力，再解带换腿。"
+        }
+      ],
+      "cues": [
+        {
+          "en": "Draw the shoe towards the shin, not just the toes.",
+          "zh": "把鞋面拉向小腿，不只翘脚趾。"
+        },
+        {
+          "en": "Keep the heel supported throughout.",
+          "zh": "脚跟始终有支撑。"
+        }
+      ],
+      "mistakes": [
+        {
+          "en": "Letting the band slip onto the toes. Why: it can slip off and changes the movement into toe lifting.",
+          "zh": "弹力带滑到脚趾上。为什么：容易滑脱，动作也会变成翘脚趾。"
+        },
+        {
+          "en": "Moving the whole leg to stretch the band. Why: hip and knee motion replace the ankle work.",
+          "zh": "整条腿移动去拉带。为什么：髋和膝运动代替了踝用力。"
+        }
+      ],
+      "dose": [
+        {
+          "text": {
+            "en": "Choose a band that allows smooth ankle motion; increase resistance gradually without shortening the controlled range.",
+            "zh": "选能平稳移动踝的带；保持可控制幅度，再逐步加大阻力。"
+          },
+          "s": [
+            "M23"
+          ]
+        },
+        {
+          "text": {
+            "en": "Practise with an effort you can control; a repetition need not reach failure to be useful. Allow recovery before another demanding session.",
+            "zh": "采用能控制的用力程度；每次不必做到力竭才有用。吃力的训练之间留出恢复。"
+          },
+          "s": [
+            "M24"
+          ]
+        }
+      ],
+      "cautions": [
+        {
+          "en": "Do not point a stretched band towards the face; stop if it is frayed or the anchor shifts.",
+          "zh": "拉伸的弹力带不要朝脸；带磨损或固定点移动就停。"
+        },
+        {
+          "en": "First learn the movement with bodyweight or a light load under a qualified coach; anyone under eighteen should practise with adult supervision.",
+          "zh": "第一次做先用自重或轻重量，在合格教练指导下学动作；未满 18 岁在成人监督下练习。"
+        },
+        {
+          "en": "This card is general information, not medical advice. For pain or an injury, see a doctor or physiotherapist.",
+          "zh": "本卡片是一般性知识，不是医疗建议；有疼痛或受伤，请咨询医生或物理治疗师。"
+        }
+      ],
+      "evidence": [],
+      "sketch": "band-ankle-dorsiflexion",
+      "motion": {
+        "root": {
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        "keys": [
+          {
+            "phase": "start",
+            "joints": {
+              "trunk": {
+                "flexion": 0
+              },
+              "hip.l": {
+                "flexion": 90
+              },
+              "hip.r": {
+                "flexion": 70
+              },
+              "knee.l": {
+                "flexion": 10
+              },
+              "knee.r": {
+                "flexion": 90
+              },
+              "ankle.l": {
+                "plantarflexion": 10
+              },
+              "ankle.r": {
+                "dorsiflexion": 0
+              }
+            },
+            "contract": {
+              "tibialis-anterior": 0.15
+            }
+          },
+          {
+            "phase": "end",
+            "joints": {
+              "trunk": {
+                "flexion": 0
+              },
+              "hip.l": {
+                "flexion": 90
+              },
+              "hip.r": {
+                "flexion": 70
+              },
+              "knee.l": {
+                "flexion": 10
+              },
+              "knee.r": {
+                "flexion": 90
+              },
+              "ankle.l": {
+                "dorsiflexion": 15
+              },
+              "ankle.r": {
+                "dorsiflexion": 0
+              }
+            },
+            "contract": {
+              "tibialis-anterior": 0.8
+            }
+          }
+        ],
+        "tempo": [
+          2,
+          0.5,
+          2,
+          0.5
+        ]
+      },
+      "sources": [
+        "M1",
+        "M2",
+        "M41",
+        "M23",
+        "M24",
+        "M25"
+      ]
+    }
+  ]
+}

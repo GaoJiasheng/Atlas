@@ -90,7 +90,8 @@
         "incline-dumbbell-press",
         "barbell-bench-press",
         "push-up",
-        "machine-chest-press"
+        "machine-chest-press",
+        "barbell-overhead-press"
       ],
       "summary": {
         "en": "Raises the arm forward; helps in every chest press.",
@@ -99,7 +100,1326 @@
       "detail": {
         "en": "The front third of the deltoid, from the outer part of the collarbone. It is the main forward lifter of the arm and works alongside the clavicular part of pectoralis major in pressing [M31] [M5].\n\nResearch shows: as the bench gets steeper, its EMG rises, reaching its highest at 60°, while upper-chest EMG peaks at 30° [M8]. The shoulder topic covers the whole deltoid.",
         "zh": "三角肌的前三分之一，起于锁骨外侧。它是把手臂往前抬的主力，推的时候和胸大肌锁骨部一起出力 [M31] [M5]。\n\n研究显示：凳子越陡，它的肌电越高，到 60° 时最高；上胸的肌电则在 30° 时最高 [M8]。肩部主题会完整讲三角肌。"
+      },
+      "parent": "deltoid"
+    },
+    {
+      "id": "deltoid",
+      "name": {
+        "en": "Deltoid",
+        "zh": "三角肌"
+      },
+      "short": {
+        "en": "Deltoid",
+        "zh": "三角肌"
+      },
+      "latin": "Musculus deltoideus",
+      "zAnatomy": "Deltoid muscle.g",
+      "regions": [
+        "shoulders"
+      ],
+      "layer": "superficial",
+      "origin": {
+        "text": {
+          "en": "Lateral third of the clavicle, lateral acromion, and lower lip of the crest of the scapular spine.",
+          "zh": "锁骨外侧三分之一、肩峰外侧缘及肩胛冈嵴下唇。"
+        },
+        "bones": [
+          "clavicle",
+          "scapula"
+        ],
+        "s": [
+          "M48",
+          "M2"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Deltoid tuberosity on the lateral surface of the humeral shaft.",
+          "zh": "肱骨干外侧面的三角肌粗隆。"
+        },
+        "bones": [
+          "humerus"
+        ],
+        "s": [
+          "M48"
+        ]
+      },
+      "fibres": {
+        "arrangement": "multipennate",
+        "direction": {
+          "en": "Front and back bundles slope down towards the arm; middle bundles attach obliquely to internal tendon sheets.",
+          "zh": "前、后部肌束斜向下汇聚到上臂；中部肌束斜接于肌内腱性隔。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "shoulder",
+          "movement": "flexion",
+          "role": "prime",
+          "s": [
+            "M48",
+            "M2"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "abduction",
+          "role": "prime",
+          "s": [
+            "M48",
+            "M2"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "extension",
+          "role": "prime",
+          "s": [
+            "M48",
+            "M2"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "internal-rotation",
+          "role": "assist",
+          "s": [
+            "M48",
+            "M2"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "external-rotation",
+          "role": "assist",
+          "s": [
+            "M48",
+            "M2"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "Rest a hand on the rounded shoulder cap and gently raise that arm forward, sideways, then back. Different areas firm up.",
+        "zh": "一只手轻放在另一侧圆鼓鼓的肩部，手臂依次轻轻前举、侧举、后伸，能感到不同部位绷紧。"
+      },
+      "mistakes": [
+        {
+          "en": "Treating its parts as separate muscles: they share a humeral attachment.",
+          "zh": "把三部分当作三块独立肌肉：它们都止于肱骨上的三角肌粗隆。"
+        },
+        {
+          "en": "Assuming presses train every action equally: backward pulling uses the posterior part differently.",
+          "zh": "以为推举同样照顾所有作用：后拉时，后部的工作方式不同。"
+        }
+      ],
+      "exercises": [
+        "barbell-overhead-press",
+        "dumbbell-lateral-raise",
+        "chest-supported-dumbbell-row",
+        "pike-push-up"
+      ],
+      "summary": {
+        "en": "Front lifts, side lifts, and backward pulls.",
+        "zh": "前部前举、中部侧举、后部后拉。"
+      },
+      "detail": {
+        "en": "The shoulder cap is one muscle with clavicular, acromial and spinal parts (front, side and rear delts). Forward lifting mainly uses the front part, sideways lifting the middle part, and backward pulling the rear part; their roles overlap [M48] [M2].\n\nUnder it, supraspinatus, infraspinatus, teres minor and subscapularis help keep the humeral head centred in the glenoid. These four make up the rotator cuff. Teres major is nearby but is not a cuff muscle [M48] [M2].",
+        "zh": "三角肌是一块包住肩部的肌肉，分锁骨部、肩峰部和肩胛冈部，健身里常叫前束、中束、后束。前举主要用前部，侧举主要用中部，后拉主要用后部，但它们的工作并不是完全分开的 [M48] [M2]。\n\n它下面的冈上肌、冈下肌、小圆肌和肩胛下肌共同帮助肱骨头稳在关节盂里。这四块组成肩袖。大圆肌就在附近，但不属于肩袖 [M48] [M2]。"
+      },
+      "common": {
+        "en": "delts",
+        "zh": "肩肌"
+      },
+      "injury": {
+        "en": "Pain location or a working sensation cannot identify an injured muscle or tendon. This is general information, not medical advice; consult a doctor or physiotherapist for pain or injury. [M80]",
+        "zh": "疼痛位置或用力感觉不能判断哪块肌肉或肌腱受伤。本页是一般性知识，不是医疗建议；疼痛或受伤请咨询医生或物理治疗师。[M80]"
       }
+    },
+    {
+      "id": "deltoid-lateral",
+      "name": {
+        "en": "Deltoid, acromial (lateral) part",
+        "zh": "三角肌肩峰部"
+      },
+      "short": {
+        "en": "Deltoid, acromial (lateral) part",
+        "zh": "三角肌肩峰部"
+      },
+      "latin": "Pars acromialis musculi deltoidei",
+      "zAnatomy": "Acromial part of deltoid muscle",
+      "regions": [
+        "shoulders"
+      ],
+      "layer": "superficial",
+      "origin": {
+        "text": {
+          "en": "Lateral margin and superior surface of the acromion of the scapula.",
+          "zh": "肩胛骨肩峰的外侧缘和上面。"
+        },
+        "bones": [
+          "scapula"
+        ],
+        "s": [
+          "M48",
+          "M2"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Deltoid tuberosity on the lateral surface of the humeral shaft.",
+          "zh": "肱骨干外侧面的三角肌粗隆。"
+        },
+        "bones": [
+          "humerus"
+        ],
+        "s": [
+          "M48"
+        ]
+      },
+      "fibres": {
+        "arrangement": "multipennate",
+        "direction": {
+          "en": "Short oblique bundles meet several internal tendon sheets, descending from the acromion to the lateral humerus.",
+          "zh": "短肌束斜接于多片肌内腱性隔，整体从肩峰向下到肱骨外侧。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "shoulder",
+          "movement": "abduction",
+          "role": "prime",
+          "s": [
+            "M48",
+            "M2"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "Rest fingertips below the bony top of the shoulder and lift the arm sideways. The shoulder cap tightens; a pinch inside the joint is not the intended feeling.",
+        "zh": "指尖放在肩顶骨性突起的下方，手臂向侧面抬起，能摸到肩外侧绷紧；关节里面不应有夹痛。"
+      },
+      "mistakes": [
+        {
+          "en": "Swinging with the hips: momentum replaces controlled shoulder motion.",
+          "zh": "靠髋部摆动甩起哑铃：惯性代替了受控的肩部运动。"
+        },
+        {
+          "en": "Forcing thumbs down: extra inward rotation is not required.",
+          "zh": "刻意把拇指转向下：练中部不需要额外强迫肩关节内旋。"
+        }
+      ],
+      "exercises": [
+        "dumbbell-lateral-raise",
+        "barbell-overhead-press",
+        "pike-push-up"
+      ],
+      "summary": {
+        "en": "Lifts the arm out to the side.",
+        "zh": "把手臂向侧面抬起。"
+      },
+      "detail": {
+        "en": "The acromial part (side or middle delt) starts at the acromion. Its bundles meet internal tendons in a multipennate arrangement [M48]. It is a main shoulder abductor [M2].\n\nA lateral raise also needs supraspinatus and cuff stability. As the arm rises, the scapula rotates upward with help from serratus anterior and trapezius. Do not pin the blade in place [M48] [M2].",
+        "zh": "三角肌肩峰部（中束）起于肩峰。肌束斜接于肌内腱性隔，呈多羽状结构 [M48]；它是肩关节外展的主力之一 [M2]。\n\n侧平举还需要冈上肌参与和肩袖稳定。手臂抬高时，前锯肌和斜方肌协助肩胛骨上回旋，不要把肩胛骨固定得不能动 [M48] [M2]。"
+      },
+      "fma": "FMA34678",
+      "common": {
+        "en": "side delt, middle delt",
+        "zh": "中束"
+      },
+      "parent": "deltoid",
+      "injury": {
+        "en": "Pain location or a working sensation cannot identify an injured muscle or tendon. This is general information, not medical advice; consult a doctor or physiotherapist for pain or injury. [M80]",
+        "zh": "疼痛位置或用力感觉不能判断哪块肌肉或肌腱受伤。本页是一般性知识，不是医疗建议；疼痛或受伤请咨询医生或物理治疗师。[M80]"
+      }
+    },
+    {
+      "id": "deltoid-posterior",
+      "name": {
+        "en": "Deltoid, spinal (posterior) part",
+        "zh": "三角肌肩胛冈部"
+      },
+      "short": {
+        "en": "Deltoid, spinal (posterior) part",
+        "zh": "三角肌肩胛冈部"
+      },
+      "latin": "Pars spinalis musculi deltoidei",
+      "zAnatomy": "Scapular spinal part of deltoid muscle",
+      "regions": [
+        "shoulders",
+        "back"
+      ],
+      "layer": "superficial",
+      "origin": {
+        "text": {
+          "en": "Lower lip of the posterior border of the spine of the scapula.",
+          "zh": "肩胛冈后缘的下唇。"
+        },
+        "bones": [
+          "scapula"
+        ],
+        "s": [
+          "M48",
+          "M2"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Deltoid tuberosity on the lateral surface of the humeral shaft.",
+          "zh": "肱骨干外侧面的三角肌粗隆。"
+        },
+        "bones": [
+          "humerus"
+        ],
+        "s": [
+          "M48"
+        ]
+      },
+      "fibres": {
+        "arrangement": "parallel",
+        "direction": {
+          "en": "Down and forward from the scapular spine across the back of the shoulder to the lateral humerus.",
+          "zh": "从肩胛冈经肩后方向前下斜行到肱骨外侧。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "shoulder",
+          "movement": "extension",
+          "role": "prime",
+          "s": [
+            "M48",
+            "M2"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "horizontal-abduction",
+          "role": "prime",
+          "s": [
+            "M31"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "external-rotation",
+          "role": "assist",
+          "s": [
+            "M48",
+            "M2"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "Touch the back of the shoulder cap and move the upper arm backwards gently. In a supported row, expect work behind the shoulder and between the shoulder blades.",
+        "zh": "摸肩后部，轻轻把上臂往后带。胸托划船时，肩后部和两块肩胛骨之间都会用力。"
+      },
+      "mistakes": [
+        {
+          "en": "Only squeezing the blades: the upper arm must move too.",
+          "zh": "只顾夹肩胛骨：上臂也需要移动。"
+        },
+        {
+          "en": "Throwing the elbows far behind the torso: added range should not replace control.",
+          "zh": "把手肘猛拉到躯干后面很远：不能为了加大幅度而失去控制。"
+        }
+      ],
+      "exercises": [
+        "chest-supported-dumbbell-row",
+        "straight-arm-cable-pulldown",
+        "cable-external-rotation"
+      ],
+      "summary": {
+        "en": "Pulls the upper arm back and out.",
+        "zh": "把上臂向后、向外带。"
+      },
+      "detail": {
+        "en": "The spinal part (rear delt) pulls the arm back, opens it away from the chest in a horizontal plane, and can assist external rotation [M48] [M2] [M31].\n\nThe supported row is the main pulling exercise here. In the straight-arm pulldown it assists extension; in external rotation it assists the cuff. Those roles are not equivalent isolation targets.",
+        "zh": "三角肌肩胛冈部（后束）把上臂向后带，也让上臂在水平面上离开胸前，并可协助外旋 [M48] [M2] [M31]。\n\n这里的胸托划船是主要后拉动作。直臂下拉中，它协助肩关节伸；肩外旋中，它协助肩袖。几个动作里的角色不同，并不表示都能单独练后束。"
+      },
+      "fma": "FMA34679",
+      "common": {
+        "en": "rear delt",
+        "zh": "后束"
+      },
+      "parent": "deltoid",
+      "injury": {
+        "en": "Pain location or a working sensation cannot identify an injured muscle or tendon. This is general information, not medical advice; consult a doctor or physiotherapist for pain or injury. [M80]",
+        "zh": "疼痛位置或用力感觉不能判断哪块肌肉或肌腱受伤。本页是一般性知识，不是医疗建议；疼痛或受伤请咨询医生或物理治疗师。[M80]"
+      }
+    },
+    {
+      "id": "supraspinatus",
+      "name": {
+        "en": "Supraspinatus",
+        "zh": "冈上肌"
+      },
+      "short": {
+        "en": "Supraspinatus",
+        "zh": "冈上肌"
+      },
+      "latin": "Musculus supraspinatus",
+      "fma": "FMA9629",
+      "zAnatomy": "Supraspinatus muscle",
+      "regions": [
+        "shoulders"
+      ],
+      "layer": "deep",
+      "origin": {
+        "text": {
+          "en": "Medial two-thirds of the supraspinous fossa of the scapula and the fascia covering it.",
+          "zh": "肩胛骨冈上窝内侧三分之二及其表面的筋膜。"
+        },
+        "bones": [
+          "scapula"
+        ],
+        "s": [
+          "M48",
+          "M2"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Superior facet of the greater tubercle of the humerus; the tendon blends with the shoulder-joint capsule.",
+          "zh": "肱骨大结节上面；止腱与肩关节囊相融合。"
+        },
+        "bones": [
+          "humerus"
+        ],
+        "s": [
+          "M48"
+        ]
+      },
+      "fibres": {
+        "arrangement": "convergent",
+        "direction": {
+          "en": "Laterally from above the scapular spine, narrowing into a tendon beneath the acromion.",
+          "zh": "从肩胛冈上方向外汇聚，形成从肩峰下通过的肌腱。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "shoulder",
+          "movement": "abduction",
+          "role": "assist",
+          "s": [
+            "M48",
+            "M2"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "stabilisation",
+          "role": "stabilise",
+          "s": [
+            "M48",
+            "M2",
+            "M86"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "It is covered by trapezius and deltoid, so touch or sensation cannot identify it reliably. Find the scapular spine: this muscle lies above it. A light raise may feel like shared effort around the shoulder.",
+        "zh": "它被斜方肌和三角肌覆盖，不能靠触摸或感觉准确辨认。先找到肩胛冈，冈上肌就在它上方。轻重量抬臂时，肩周的用力感往往来自几块肌肉。"
+      },
+      "mistakes": [
+        {
+          "en": "Saying it switches off after the first few degrees: it also supports the shoulder during elevation.",
+          "zh": "说它只在抬臂开头出力：抬臂过程中它也帮助稳定肩关节。"
+        },
+        {
+          "en": "Using pain during a raise to diagnose its tendon: sensation cannot identify an injury.",
+          "zh": "凭抬臂疼痛就判断冈上肌腱受伤：动作中的感觉不能用来诊断。"
+        }
+      ],
+      "exercises": [
+        "dumbbell-lateral-raise",
+        "barbell-overhead-press",
+        "pike-push-up"
+      ],
+      "summary": {
+        "en": "Assists arm elevation and steadies the humeral head.",
+        "zh": "协助抬臂，并稳住肱骨头。"
+      },
+      "detail": {
+        "en": "Above the scapular spine, this muscle narrows to a tendon under the acromion and reaches the superior facet of the greater tubercle [M48]. It assists the deltoid during abduction; there is no switch that makes it stop once the arm starts moving [M2].\n\nIt also helps hold the humeral head against the shallow glenoid. In the lateral raise it assists lifting and stabilisation; in the press and pike push-up it chiefly provides cuff support. These are different roles, and none isolates it. [M86]",
+        "zh": "这块肌肉在肩胛冈上方，向外汇聚成从肩峰下通过的肌腱，止于大结节上小面 [M48]。它协助三角肌完成外展；并没有一个开关让它在手臂开始移动后就停止出力 [M2]。\n\n它还帮助肱骨头贴稳浅浅的关节盂。侧平举时，它协助抬臂并稳定关节；推举和折髋俯卧撑主要让它提供肩袖支持。这些是不同角色，没有哪个动作能把它单独练到。 [M86]"
+      },
+      "injury": {
+        "en": "Pain location or a working sensation cannot identify an injured muscle or tendon. This is general information, not medical advice; consult a doctor or physiotherapist for pain or injury. [M80]",
+        "zh": "疼痛位置或用力感觉不能判断哪块肌肉或肌腱受伤。本页是一般性知识，不是医疗建议；疼痛或受伤请咨询医生或物理治疗师。[M80]"
+      }
+    },
+    {
+      "id": "infraspinatus",
+      "name": {
+        "en": "Infraspinatus",
+        "zh": "冈下肌"
+      },
+      "short": {
+        "en": "Infraspinatus",
+        "zh": "冈下肌"
+      },
+      "latin": "Musculus infraspinatus",
+      "fma": "FMA32546",
+      "zAnatomy": "Infraspinatus muscle",
+      "regions": [
+        "shoulders",
+        "back"
+      ],
+      "layer": "intermediate",
+      "origin": {
+        "text": {
+          "en": "Medial two-thirds of the infraspinous fossa of the scapula and the fascia covering it.",
+          "zh": "肩胛骨冈下窝内侧三分之二及其表面的筋膜。"
+        },
+        "bones": [
+          "scapula"
+        ],
+        "s": [
+          "M48",
+          "M2"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Middle facet of the greater tubercle of the humerus; tendon fibres join the shoulder-joint capsule.",
+          "zh": "肱骨大结节中面；止腱纤维与肩关节囊相连。"
+        },
+        "bones": [
+          "humerus"
+        ],
+        "s": [
+          "M48"
+        ]
+      },
+      "fibres": {
+        "arrangement": "convergent",
+        "direction": {
+          "en": "Fans out below the scapular spine and converges laterally towards the back of the humeral head.",
+          "zh": "在肩胛冈下方呈扇形展开，向外汇聚到肱骨头后方。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "shoulder",
+          "movement": "external-rotation",
+          "role": "prime",
+          "s": [
+            "M48",
+            "M2"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "stabilisation",
+          "role": "stabilise",
+          "s": [
+            "M48",
+            "M2",
+            "M86"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "It lies below the scapular spine, partly under the rear deltoid. Keep the elbow by your side and turn the forearm out gently; effort behind the shoulder is shared with other muscles.",
+        "zh": "它位于肩胛冈下方，外侧一部分被三角肌后部覆盖。肘贴近体侧，轻轻把前臂向外转；肩后部的用力感并不只来自冈下肌。"
+      },
+      "mistakes": [
+        {
+          "en": "Turning the trunk instead of rotating the upper arm.",
+          "zh": "用躯干转动代替上臂外旋。"
+        },
+        {
+          "en": "Pulling the elbow away from the ribs to move a heavier load.",
+          "zh": "为了拉动更重的配重，让手肘离开体侧向外跑。"
+        }
+      ],
+      "exercises": [
+        "cable-external-rotation",
+        "barbell-overhead-press",
+        "chest-supported-dumbbell-row"
+      ],
+      "summary": {
+        "en": "Turns the arm outward and steadies its head.",
+        "zh": "使上臂外旋，并稳住肱骨头。"
+      },
+      "detail": {
+        "en": "The broad muscle below the scapular spine turns the humerus outward. With the elbow bent, the forearm is an easy pointer for that rotation; the turning joint is the shoulder [M48] [M2].\n\nThe four cuff muscles help keep the humeral head centred in the shallow glenoid as the arm moves [M48] [M2] [M86]. Rotation directly loads its turning action; presses, raises and rows involve cuff support rather than isolation.",
+        "zh": "肩胛冈下方这块较宽的肌肉使肱骨外旋。屈肘时，前臂就像指针，能看出上臂转了多少；主要转动的关节在肩部 [M48] [M2]。\n\n手臂活动时，肩袖四肌共同帮助肱骨头稳在较浅的关节盂里 [M48] [M2] [M86]。旋转动作直接负荷其转动作用；推举、抬臂和划船中，它参与肩袖支持，并不是孤立训练。"
+      },
+      "injury": {
+        "en": "Pain location or a working sensation cannot identify an injured muscle or tendon. This is general information, not medical advice; consult a doctor or physiotherapist for pain or injury. [M80]",
+        "zh": "疼痛位置或用力感觉不能判断哪块肌肉或肌腱受伤。本页是一般性知识，不是医疗建议；疼痛或受伤请咨询医生或物理治疗师。[M80]"
+      }
+    },
+    {
+      "id": "teres-minor",
+      "name": {
+        "en": "Teres minor",
+        "zh": "小圆肌"
+      },
+      "short": {
+        "en": "Teres minor",
+        "zh": "小圆肌"
+      },
+      "latin": "Musculus teres minor",
+      "fma": "FMA32550",
+      "zAnatomy": "Teres minor muscle",
+      "regions": [
+        "shoulders",
+        "back"
+      ],
+      "layer": "intermediate",
+      "origin": {
+        "text": {
+          "en": "Upper two-thirds of the posterior surface along the lateral border of the scapula, with adjoining fascial septa.",
+          "zh": "肩胛骨外侧缘后面上三分之二及邻近的肌间隔。"
+        },
+        "bones": [
+          "scapula"
+        ],
+        "s": [
+          "M48",
+          "M2"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Inferior facet of the greater tubercle of the humerus; some lower fibres attach just below it, and the tendon joins the capsule.",
+          "zh": "肱骨大结节下面；部分下方纤维止于其下方，止腱与关节囊相连。"
+        },
+        "bones": [
+          "humerus"
+        ],
+        "s": [
+          "M48"
+        ]
+      },
+      "fibres": {
+        "arrangement": "parallel",
+        "direction": {
+          "en": "Up and laterally along the outer scapula towards the back of the humeral head.",
+          "zh": "沿肩胛骨外侧缘向外上方走，到肱骨头后方。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "shoulder",
+          "movement": "external-rotation",
+          "role": "prime",
+          "s": [
+            "M48",
+            "M2"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "adduction",
+          "role": "assist",
+          "s": [
+            "M48"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "stabilisation",
+          "role": "stabilise",
+          "s": [
+            "M48",
+            "M2",
+            "M86"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "A narrow strip below infraspinatus and above teres major. Do not dig into the back of the armpit to isolate it; outward rotation may feel like shared effort behind the shoulder.",
+        "zh": "它是冈下肌下方、大圆肌上方的一条窄肌。不要在腋后方深按着找；肩外旋时，肩后部的用力感往往来自几块肌肉。"
+      },
+      "mistakes": [
+        {
+          "en": "Confusing it with teres major: teres minor rotates outward; teres major rotates inward.",
+          "zh": "把它和大圆肌混淆：小圆肌外旋，大圆肌内旋。"
+        },
+        {
+          "en": "Forcing the forearm beyond a comfortable endpoint.",
+          "zh": "把前臂硬拉到舒服范围以外。"
+        }
+      ],
+      "exercises": [
+        "cable-external-rotation",
+        "barbell-overhead-press",
+        "pike-push-up"
+      ],
+      "summary": {
+        "en": "Helps outward rotation; belongs to the rotator cuff.",
+        "zh": "协助上臂外旋，是肩袖的一员。"
+      },
+      "detail": {
+        "en": "Teres minor lies along the lateral scapula beside infraspinatus. It externally rotates the arm and can assist adduction [M48] [M2]. Its tendon belongs to the cuff; teres major does not [M2].\n\nThe four cuff muscles help keep the humeral head centred in the shallow glenoid as the arm moves [M48] [M2] [M86]. Rotation directly loads its turning action; presses, raises and rows involve cuff support rather than isolation.",
+        "zh": "小圆肌沿肩胛骨外侧缘走行，紧邻冈下肌。它使上臂外旋，也可协助内收 [M48] [M2]。小圆肌腱属于肩袖，大圆肌不属于 [M2]。\n\n手臂活动时，肩袖四肌共同帮助肱骨头稳在较浅的关节盂里 [M48] [M2] [M86]。旋转动作直接负荷其转动作用；推举、抬臂和划船中，它参与肩袖支持，并不是孤立训练。"
+      },
+      "injury": {
+        "en": "Pain location or a working sensation cannot identify an injured muscle or tendon. This is general information, not medical advice; consult a doctor or physiotherapist for pain or injury. [M80]",
+        "zh": "疼痛位置或用力感觉不能判断哪块肌肉或肌腱受伤。本页是一般性知识，不是医疗建议；疼痛或受伤请咨询医生或物理治疗师。[M80]"
+      }
+    },
+    {
+      "id": "subscapularis",
+      "name": {
+        "en": "Subscapularis",
+        "zh": "肩胛下肌"
+      },
+      "short": {
+        "en": "Subscapularis",
+        "zh": "肩胛下肌"
+      },
+      "latin": "Musculus subscapularis",
+      "fma": "FMA13413",
+      "zAnatomy": "Subscapularis muscle",
+      "regions": [
+        "shoulders"
+      ],
+      "layer": "deep",
+      "origin": {
+        "text": {
+          "en": "Medial two-thirds of the subscapular fossa, the lower part of the groove along the lateral border, and tendinous sheets attached to scapular ridges.",
+          "zh": "肩胛下窝内侧三分之二、外侧缘沟的下部，以及附于骨嵴的腱性隔。"
+        },
+        "bones": [
+          "scapula"
+        ],
+        "s": [
+          "M48",
+          "M2"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Lesser tubercle of the humerus and the anterior shoulder-joint capsule.",
+          "zh": "肱骨小结节及肩关节囊前部。"
+        },
+        "bones": [
+          "humerus"
+        ],
+        "s": [
+          "M48"
+        ]
+      },
+      "fibres": {
+        "arrangement": "multipennate",
+        "direction": {
+          "en": "Oblique bundles meet tendon sheets on the front of the scapula and converge laterally to the lesser tubercle.",
+          "zh": "肩胛骨前面的多束斜行肌束接于腱性隔，向外汇聚到肱骨小结节。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "shoulder",
+          "movement": "internal-rotation",
+          "role": "prime",
+          "s": [
+            "M48",
+            "M2"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "adduction",
+          "role": "assist",
+          "s": [
+            "M48",
+            "M2"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "stabilisation",
+          "role": "stabilise",
+          "s": [
+            "M48",
+            "M2",
+            "M86"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "It sits between scapula and ribs and cannot be felt directly from the back. With the elbow by your side, turn the forearm inward against light resistance; deep effort does not prove that this muscle works alone.",
+        "zh": "它夹在肩胛骨和肋骨之间，从背面不能直接摸到。肘贴近体侧，轻轻把前臂向内带；肩周深处的用力感不能证明只有它在工作。"
+      },
+      "mistakes": [
+        {
+          "en": "Thinking it lies below the scapula: it covers the surface facing the ribs.",
+          "zh": "以为它长在肩胛骨下方：它覆盖的是肩胛骨贴肋骨的那一面。"
+        },
+        {
+          "en": "Moving the elbow across the body instead of rotating the humerus.",
+          "zh": "让手肘横着移过身体，代替肱骨内旋。"
+        }
+      ],
+      "exercises": [
+        "cable-internal-rotation",
+        "barbell-overhead-press",
+        "pike-push-up",
+        "dumbbell-lateral-raise"
+      ],
+      "summary": {
+        "en": "Turns the arm inward and steadies the shoulder.",
+        "zh": "使上臂内旋，并帮助稳定肩关节。"
+      },
+      "detail": {
+        "en": "The large cuff muscle on the front of the scapula inserts on the lesser tubercle; the other three cuff tendons attach at the greater tubercle. It internally rotates the arm and helps hold the humeral head in place [M48] [M2].\n\nThe four cuff muscles help keep the humeral head centred in the shallow glenoid as the arm moves [M48] [M2] [M86]. Rotation directly loads its turning action; presses, raises and rows involve cuff support rather than isolation.",
+        "zh": "肩胛骨前面这块较大的肩袖肌止于肱骨小结节；其他三块肩袖肌的止腱附着于大结节。肩胛下肌使上臂内旋，并帮助肱骨头保持稳定 [M48] [M2]。\n\n手臂活动时，肩袖四肌共同帮助肱骨头稳在较浅的关节盂里 [M48] [M2] [M86]。旋转动作直接负荷其转动作用；推举、抬臂和划船中，它参与肩袖支持，并不是孤立训练。"
+      },
+      "injury": {
+        "en": "Pain location or a working sensation cannot identify an injured muscle or tendon. This is general information, not medical advice; consult a doctor or physiotherapist for pain or injury. [M80]",
+        "zh": "疼痛位置或用力感觉不能判断哪块肌肉或肌腱受伤。本页是一般性知识，不是医疗建议；疼痛或受伤请咨询医生或物理治疗师。[M80]"
+      }
+    },
+    {
+      "id": "teres-major",
+      "name": {
+        "en": "Teres major",
+        "zh": "大圆肌"
+      },
+      "short": {
+        "en": "Teres major",
+        "zh": "大圆肌"
+      },
+      "latin": "Musculus teres major",
+      "fma": "FMA32549",
+      "zAnatomy": "Teres major muscle",
+      "regions": [
+        "shoulders",
+        "back"
+      ],
+      "layer": "intermediate",
+      "origin": {
+        "text": {
+          "en": "Posterior surface of the inferior angle of the scapula and the lower part of its lateral border, with adjoining fascial septa.",
+          "zh": "肩胛骨下角后面及外侧缘下部，还有邻近的肌间隔。"
+        },
+        "bones": [
+          "scapula"
+        ],
+        "s": [
+          "M48",
+          "M2"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Crest of the lesser tubercle of the humerus, the medial lip of the intertubercular groove.",
+          "zh": "肱骨小结节嵴，即结节间沟内侧唇。"
+        },
+        "bones": [
+          "humerus"
+        ],
+        "s": [
+          "M48"
+        ]
+      },
+      "fibres": {
+        "arrangement": "parallel",
+        "direction": {
+          "en": "Up and laterally from the lower outer scapula to the front-medial side of the proximal humerus.",
+          "zh": "从肩胛骨外下方向外上方走，到肱骨上端前内侧。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "shoulder",
+          "movement": "extension",
+          "role": "prime",
+          "s": [
+            "M48",
+            "M2"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "adduction",
+          "role": "assist",
+          "s": [
+            "M48",
+            "M2"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "internal-rotation",
+          "role": "assist",
+          "s": [
+            "M48",
+            "M2"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "It contributes to the back fold of the armpit with latissimus dorsi. Pull a raised arm down gently; effort may be felt there, but touch cannot reliably separate the two muscles.",
+        "zh": "它和背阔肌一起参与形成腋后襞。轻轻把抬高的手臂拉回体侧，腋后方会用力，但用手摸很难分清这两块肌肉。"
+      },
+      "mistakes": [
+        {
+          "en": "Treating it as the fifth cuff muscle: its tendon attachment is different.",
+          "zh": "把它当作第五块肩袖肌：它的止腱附着位置不同。"
+        },
+        {
+          "en": "Turning a straight-arm pull into an elbow pushdown.",
+          "zh": "把直臂下拉做成主要靠伸肘的下压。"
+        }
+      ],
+      "exercises": [
+        "straight-arm-cable-pulldown",
+        "dumbbell-pullover",
+        "cable-internal-rotation",
+        "chest-supported-dumbbell-row"
+      ],
+      "summary": {
+        "en": "Pulls a raised arm down and helps turn it inward.",
+        "zh": "把抬起的手臂往下拉，并协助内旋。"
+      },
+      "detail": {
+        "en": "Teres major lies below teres minor but pulls in a different direction: it extends a raised arm, assists adduction and turns it inward [M48] [M2]. Its tendon reaches the medial lip of the humeral groove, outside the cuff attachment [M48].\n\nStraight-arm pulls and pullovers involve it with latissimus dorsi and other shoulder extensors. Inward rotation is another assisting role. None isolates teres major.",
+        "zh": "大圆肌位于小圆肌下方，拉动方向却不同：它让抬起的手臂向下回落，协助内收和内旋 [M48] [M2]。止腱附着于肱骨结节间沟内侧唇，不属于肩袖附着区 [M48]。\n\n直臂下拉和仰卧上拉时，它和背阔肌等肩关节伸肌一起工作；肩内旋中它也会协助。这里没有哪个动作能单独练大圆肌。"
+      },
+      "injury": {
+        "en": "Pain location or a working sensation cannot identify an injured muscle or tendon. This is general information, not medical advice; consult a doctor or physiotherapist for pain or injury. [M80]",
+        "zh": "疼痛位置或用力感觉不能判断哪块肌肉或肌腱受伤。本页是一般性知识，不是医疗建议；疼痛或受伤请咨询医生或物理治疗师。[M80]"
+      }
+    },
+    {
+      "id": "trapezius-descending",
+      "name": {
+        "en": "Trapezius, descending part",
+        "zh": "斜方肌降部"
+      },
+      "short": {
+        "en": "Upper trapezius",
+        "zh": "斜方肌上部"
+      },
+      "common": {
+        "en": "upper traps",
+        "zh": "上斜方肌"
+      },
+      "latin": "Pars descendens musculi trapezii",
+      "fma": "FMA32557",
+      "zAnatomy": "Descending part of trapezius muscle",
+      "regions": [
+        "back",
+        "shoulders"
+      ],
+      "layer": "superficial",
+      "origin": {
+        "text": {
+          "en": "Medial superior nuchal line and external occipital protuberance, with the nuchal ligament.",
+          "zh": "上项线内侧部、枕外隆凸及项韧带。"
+        },
+        "bones": [
+          "skull",
+          "cervical-spine"
+        ],
+        "s": [
+          "M48",
+          "M2"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Posterior border of the lateral third of the clavicle.",
+          "zh": "锁骨外侧三分之一的后缘。"
+        },
+        "bones": [
+          "clavicle"
+        ],
+        "s": [
+          "M48"
+        ]
+      },
+      "fibres": {
+        "arrangement": "parallel",
+        "direction": {
+          "en": "Down and laterally from the back of the head and neck to the outer clavicle.",
+          "zh": "从后脑和颈后向外下方走，到锁骨外侧。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "scapula",
+          "movement": "elevation",
+          "role": "prime",
+          "s": [
+            "M48",
+            "M2"
+          ]
+        },
+        {
+          "joint": "scapula",
+          "movement": "upward-rotation",
+          "role": "assist",
+          "s": [
+            "M48",
+            "M2"
+          ]
+        },
+        {
+          "joint": "scapula",
+          "movement": "stabilisation",
+          "role": "stabilise",
+          "s": [
+            "M48",
+            "M2"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "Rest fingers on the soft slope between neck and shoulder and gently shrug. During overhead lifting it helps turn the shoulder blade upward with other muscles.",
+        "zh": "指尖轻放在颈部到肩部之间的斜坡上，轻轻耸肩，能摸到绷紧。举臂时，它和其他肌肉一起帮助肩胛骨上回旋。"
+      },
+      "mistakes": [
+        {
+          "en": "Trying to keep it completely relaxed during overhead lifting.",
+          "zh": "举臂时要求它完全不出力。"
+        },
+        {
+          "en": "Leading a lateral raise with a neck-tightening shrug instead of lifting the arm.",
+          "zh": "侧平举一开始就紧着脖子耸肩，却没有把上臂抬起。"
+        }
+      ],
+      "exercises": [
+        "barbell-overhead-press",
+        "dumbbell-lateral-raise",
+        "chest-supported-dumbbell-row"
+      ],
+      "summary": {
+        "en": "Helps lift and upwardly rotate the shoulder blade.",
+        "zh": "协助肩胛骨上提与上回旋。"
+      },
+      "detail": {
+        "en": "The descending part (upper traps) runs from the skull and neck to the outer clavicle [M48]. It helps elevate the shoulder girdle and works with lower trapezius and serratus anterior during upward rotation [M48] [M2].\n\nSome shoulder-girdle elevation during an overhead reach is normal. Avoid a neck-dominant hitch rather than holding the blades down. The row is mainly a stabilising role here.",
+        "zh": "斜方肌降部（上斜方肌）从颅骨和颈后长到锁骨外侧 [M48]。它参与肩带上提，并和斜方肌下部、前锯肌协作完成肩胛骨上回旋 [M48] [M2]。\n\n举过头顶时，肩带适当上提很正常。应避免靠紧脖子猛提肩膀，而不是把肩胛骨一直压住。这里的划船主要让它参与稳定。"
+      },
+      "injury": {
+        "en": "Pain location or a working sensation cannot identify an injured muscle or tendon. This is general information, not medical advice; consult a doctor or physiotherapist for pain or injury. [M80]",
+        "zh": "疼痛位置或用力感觉不能判断哪块肌肉或肌腱受伤。本页是一般性知识，不是医疗建议；疼痛或受伤请咨询医生或物理治疗师。[M80]"
+      }
+    },
+    {
+      "id": "latissimus-dorsi",
+      "name": {
+        "en": "Latissimus dorsi",
+        "zh": "背阔肌"
+      },
+      "short": {
+        "en": "Latissimus dorsi",
+        "zh": "背阔肌"
+      },
+      "latin": "Musculus latissimus dorsi",
+      "zAnatomy": "Latissimus dorsi muscle",
+      "regions": [
+        "back",
+        "shoulders"
+      ],
+      "layer": "superficial",
+      "origin": {
+        "text": {
+          "en": "Lower thoracic spinous processes, thoracolumbar fascia over the lumbar and sacral region, posterior iliac crest, and lower ribs. A slip may also arise from the inferior scapular angle.",
+          "zh": "下位胸椎棘突、覆盖腰骶区的胸腰筋膜、髂嵴后部及下位肋骨；还可有肌束起于肩胛骨下角。"
+        },
+        "bones": [
+          "thoracic-spine",
+          "pelvis",
+          "thorax"
+        ],
+        "s": [
+          "M48",
+          "M2"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Floor of the intertubercular groove on the proximal humerus.",
+          "zh": "肱骨上端结节间沟底。"
+        },
+        "bones": [
+          "humerus"
+        ],
+        "s": [
+          "M48",
+          "M2"
+        ]
+      },
+      "fibres": {
+        "arrangement": "convergent",
+        "direction": {
+          "en": "Broad lower-back fibres sweep upward and outward into a tendon at the arm.",
+          "zh": "广阔的下背部纤维向外上方汇聚，形成连到上臂的肌腱。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "shoulder",
+          "movement": "extension",
+          "role": "prime",
+          "s": [
+            "M48",
+            "M2"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "adduction",
+          "role": "prime",
+          "s": [
+            "M48",
+            "M2"
+          ]
+        },
+        {
+          "joint": "shoulder",
+          "movement": "internal-rotation",
+          "role": "assist",
+          "s": [
+            "M48",
+            "M2"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "A broad band along the side of the back tightens when you pull a raised arm down; the back fold of the armpit is shared with teres major.",
+        "zh": "把抬起的手臂拉回时，背部外侧的一大片会绷紧；腋后襞由它和大圆肌共同参与形成。"
+      },
+      "mistakes": [
+        {
+          "en": "Moving the whole trunk to replace the intended shoulder or shoulder-blade movement.",
+          "zh": "用整个躯干的摆动代替肩关节或肩胛骨的活动。"
+        },
+        {
+          "en": "Treating a supporting role as proof that an exercise isolates this muscle.",
+          "zh": "把支持动作的角色当成该动作能孤立训练这块肌肉的证据。"
+        }
+      ],
+      "exercises": [
+        "straight-arm-cable-pulldown",
+        "dumbbell-pullover",
+        "chest-supported-dumbbell-row"
+      ],
+      "summary": {
+        "en": "Pulls a raised arm down and turns it inward.",
+        "zh": "把抬起的手臂拉下，并使其内旋。"
+      },
+      "detail": {
+        "en": "Latissimus dorsi connects the lower trunk to the humerus and produces shoulder extension, adduction and inward rotation [M48] [M2]. It shares straight-arm pulling with teres major and other shoulder extensors.\n\nIt is an assistant in this elbows-out row, whose regional emphasis is the rear deltoid. Exercise labels describe a shared movement, not an isolated muscle.",
+        "zh": "背阔肌把下部躯干连到肱骨，完成肩关节伸、内收和内旋 [M48] [M2]。直臂后拉时，它和大圆肌等肩关节伸肌共同出力。\n\n本页肘部适度外开的划船以三角肌后部为区域重点，背阔肌担任协同肌。动作标签说明共同完成的活动，并不代表孤立一块肌肉。"
+      }
+    },
+    {
+      "id": "rhomboid-major",
+      "name": {
+        "en": "Rhomboid major",
+        "zh": "大菱形肌"
+      },
+      "short": {
+        "en": "Rhomboid major",
+        "zh": "大菱形肌"
+      },
+      "latin": "Musculus rhomboideus major",
+      "zAnatomy": "Rhomboid major muscle",
+      "regions": [
+        "back",
+        "shoulders"
+      ],
+      "layer": "intermediate",
+      "origin": {
+        "text": {
+          "en": "Spinous processes and supraspinous ligaments of the upper thoracic vertebrae, usually T2–T5.",
+          "zh": "上位胸椎棘突及棘上韧带，通常为第 2–5 胸椎。"
+        },
+        "bones": [
+          "thoracic-spine"
+        ],
+        "s": [
+          "M48",
+          "M2"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Medial border of the scapula below the root of the scapular spine.",
+          "zh": "肩胛冈根部以下的肩胛骨内侧缘。"
+        },
+        "bones": [
+          "scapula"
+        ],
+        "s": [
+          "M48",
+          "M2"
+        ]
+      },
+      "fibres": {
+        "arrangement": "parallel",
+        "direction": {
+          "en": "Down and outward from the upper spine to the medial scapular border.",
+          "zh": "从上位脊柱向外下方走到肩胛骨内侧缘。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "scapula",
+          "movement": "retraction",
+          "role": "prime",
+          "s": [
+            "M48",
+            "M2"
+          ]
+        },
+        {
+          "joint": "scapula",
+          "movement": "downward-rotation",
+          "role": "assist",
+          "s": [
+            "M48",
+            "M2"
+          ]
+        },
+        {
+          "joint": "scapula",
+          "movement": "stabilisation",
+          "role": "stabilise",
+          "s": [
+            "M48",
+            "M2"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "The region between the spine and shoulder blade works during a gentle row; trapezius covers it, so touch cannot isolate it.",
+        "zh": "轻轻划船时，脊柱与肩胛骨之间会用力；斜方肌覆盖其表面，触摸不能把它单独辨认出来。"
+      },
+      "mistakes": [
+        {
+          "en": "Moving the whole trunk to replace the intended shoulder or shoulder-blade movement.",
+          "zh": "用整个躯干的摆动代替肩关节或肩胛骨的活动。"
+        },
+        {
+          "en": "Treating a supporting role as proof that an exercise isolates this muscle.",
+          "zh": "把支持动作的角色当成该动作能孤立训练这块肌肉的证据。"
+        }
+      ],
+      "exercises": [
+        "chest-supported-dumbbell-row",
+        "straight-arm-cable-pulldown",
+        "dumbbell-pullover"
+      ],
+      "summary": {
+        "en": "Draws the shoulder blade toward the spine.",
+        "zh": "把肩胛骨拉向脊柱。"
+      },
+      "detail": {
+        "en": "Rhomboid major retracts the scapula and helps hold its medial border against the chest wall [M48] [M2]. It assists the shoulder-blade return in a row.\n\nIts listing for the pulldown and pullover denotes scapular support as the arm moves, not direct shoulder extension or isolated rhomboid training.",
+        "zh": "大菱形肌让肩胛骨后缩，并帮助内侧缘贴住胸壁 [M48] [M2]。划船时，它协助肩胛骨向脊柱方向回收。\n\n直臂下拉与仰卧上拉中列出它，是指手臂活动时参与肩胛骨的支持，并不是它直接让肩关节伸，也不是单独训练菱形肌。"
+      },
+      "fma": "FMA13379"
+    },
+    {
+      "id": "trapezius-transverse",
+      "name": {
+        "en": "Trapezius, transverse part",
+        "zh": "斜方肌横部"
+      },
+      "short": {
+        "en": "Trapezius, transverse part",
+        "zh": "斜方肌横部"
+      },
+      "latin": "Pars transversa musculi trapezii",
+      "zAnatomy": "Transverse part of trapezius muscle",
+      "regions": [
+        "back",
+        "shoulders"
+      ],
+      "layer": "superficial",
+      "origin": {
+        "text": {
+          "en": "Lower nuchal ligament and spinous processes of the lower cervical and upper thoracic vertebrae.",
+          "zh": "项韧带下部、下位颈椎及上位胸椎棘突。"
+        },
+        "bones": [
+          "cervical-spine",
+          "thoracic-spine"
+        ],
+        "s": [
+          "M48",
+          "M2"
+        ]
+      },
+      "insertion": {
+        "text": {
+          "en": "Medial acromial margin and upper lip of the scapular spine.",
+          "zh": "肩峰内侧缘及肩胛冈上唇。"
+        },
+        "bones": [
+          "scapula"
+        ],
+        "s": [
+          "M48",
+          "M2"
+        ]
+      },
+      "fibres": {
+        "arrangement": "parallel",
+        "direction": {
+          "en": "Across from the spine to the acromion and scapular spine.",
+          "zh": "从脊柱横向走到肩峰与肩胛冈。"
+        }
+      },
+      "actions": [
+        {
+          "joint": "scapula",
+          "movement": "retraction",
+          "role": "prime",
+          "s": [
+            "M48",
+            "M2"
+          ]
+        },
+        {
+          "joint": "scapula",
+          "movement": "stabilisation",
+          "role": "stabilise",
+          "s": [
+            "M48",
+            "M2"
+          ]
+        }
+      ],
+      "feel": {
+        "en": "Gently draw the shoulder blades together and feel the upper back; the neighbouring rhomboids also work beneath it.",
+        "zh": "轻轻把两块肩胛骨向中间收，能感觉上背部用力；下面的菱形肌也会一起工作。"
+      },
+      "mistakes": [
+        {
+          "en": "Moving the whole trunk to replace the intended shoulder or shoulder-blade movement.",
+          "zh": "用整个躯干的摆动代替肩关节或肩胛骨的活动。"
+        },
+        {
+          "en": "Treating a supporting role as proof that an exercise isolates this muscle.",
+          "zh": "把支持动作的角色当成该动作能孤立训练这块肌肉的证据。"
+        }
+      ],
+      "exercises": [
+        "chest-supported-dumbbell-row",
+        "cable-external-rotation",
+        "dumbbell-pullover"
+      ],
+      "summary": {
+        "en": "Retracts and supports the shoulder blade.",
+        "zh": "后缩并支持肩胛骨。"
+      },
+      "detail": {
+        "en": "The transverse fibres of trapezius draw the scapula toward the spine [M48] [M2]. Their direct role in the row differs from the upper trapezius, which mainly supports the shoulder girdle in that exercise.\n\nDuring arm rotation and pullovers, this card lists a supporting role: it helps provide a scapular base for the moving humerus, rather than turning the humerus itself.",
+        "zh": "斜方肌横部把肩胛骨拉向脊柱 [M48] [M2]。划船时它直接协助后缩，与该动作中主要支持肩带的斜方肌上部角色不同。\n\n旋转和上拉中列出它是指支持作用：为活动的肱骨提供肩胛骨基础，并不是它直接旋转肱骨。"
+      },
+      "fma": "FMA32556"
     }
   ]
 }

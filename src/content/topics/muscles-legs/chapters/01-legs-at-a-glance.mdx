@@ -1,0 +1,108 @@
+---
+id: "legs-at-a-glance"
+order: 1
+title:
+  en: "The legs at a glance"
+  zh: "一眼看腿部"
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: false
+  cutaway: "none"
+  pose: null
+  layers: ["superficial", "intermediate", "deep", "skeleton", "neighbours", "body"]
+  ghost: ["body", "neighbours"]
+  labels: ["group:superficial", "group:intermediate", "group:deep"]
+  camera: {"position": [0, -0.36, 3.0], "target": [0, -0.35, -0.03], "fov": 30}
+  summary:
+    en: "From the pelvis to the toes: layers of muscle pull on the hip, knee and ankle, with fascia carrying some of the force."
+    zh: "从骨盆到脚趾，分层的肌肉拉动髋、膝、踝，筋膜也传递一部分拉力。"
+  beats:
+    - camera: "on-my-body"
+      view: "xray"
+      ghost: []
+      labels: ["group:superficial"]
+      caption:
+        en: "The faint outline locates the muscles on the whole body. Warm colours mark this region, ivory marks bones, and grey marks neighbouring muscles. Left and right belong to the body."
+        zh: "淡淡的全身轮廓告诉你肌肉在哪里。暖色是本区结构，象牙色是骨骼，灰色是邻区肌肉。左右都指身体自己的左右。"
+    - camera: "front"
+      labels: ["rectus-femoris", "sartorius", "tibialis-anterior"]
+      caption:
+        en: "From the front: the quadriceps run down the thigh, sartorius crosses it diagonally, and tibialis anterior lies beside the shin."
+        zh: "正面看：股四头肌沿大腿向下，缝匠肌斜着穿过大腿，胫骨前肌在胫骨旁边。"
+    - camera: "back"
+      labels: ["gluteus-maximus", "biceps-femoris-long", "gastrocnemius-medial"]
+      caption:
+        en: "From behind: gluteus maximus covers the buttock, the hamstrings run down the back of the thigh, and gastrocnemius forms the calf bulge."
+        zh: "背面看：臀大肌盖住臀部，腘绳肌沿大腿后面向下，腓肠肌形成小腿肚的隆起。"
+    - camera: "deep-view"
+      view: "exploded"
+      explode: 0.8
+      labels: ["group:superficial", "group:intermediate", "group:deep"]
+      caption:
+        en: "Peel the surface layer away, then the middle layer. The deeper hip and thigh muscles come into view while the bones stay in place."
+        zh: "先剥开浅层，再剥开中层。髋和大腿深处的肌肉露出来，骨骼留在原处。"
+    - layers: ["skeleton", "body"]
+      camera: "front"
+      labels: ["pelvis", "femur", "patella", "lower-leg", "foot"]
+      caption:
+        en: "The scaffold is the pelvis, femur, kneecap, lower-leg bones and foot. Muscles pull across joints rather than pushing bones apart."
+        zh: "支架由骨盆、股骨、髌骨、小腿骨和足骨组成。肌肉跨过关节拉动骨头，不会把骨头推开。"
+    - camera: "hip"
+      labels: ["tensor-fasciae-latae", "iliotibial-tract", "gluteus-maximus"]
+      caption:
+        en: "The iliotibial tract is a thick strip of fascia on the outer thigh. It carries tension from muscles but cannot contract by itself."
+        zh: "髂胫束是大腿外侧一条增厚的筋膜，传递肌肉拉力，本身不会主动收缩。"
+  index:
+    parts: ["gluteus-maximus", "tensor-fasciae-latae", "iliotibial-tract", "sartorius", "rectus-femoris", "vastus-lateralis", "vastus-medialis", "biceps-femoris-long", "semitendinosus", "gastrocnemius-medial", "gastrocnemius-lateral", "tibialis-anterior", "gluteus-medius", "adductor-longus", "gracilis", "pectineus", "semimembranosus", "biceps-femoris-short", "soleus", "gluteus-minimus", "vastus-intermedius", "adductor-brevis", "adductor-magnus", "psoas-major", "iliacus", "fibularis-longus", "pelvis", "femur", "patella", "lower-leg", "foot"]
+---
+
+<Lang en>
+
+Stand up from a chair and your legs do more than straighten. The hip opens, the knee unfolds and the ankle keeps your weight over the foot. This model follows those <Num s="M1">three</Num> main joints from the pelvis down to the toes. Its warm muscles belong to the legs and buttocks; the ivory shapes are bones. Grey muscles are neighbours. Left and right always mean the body's own left and right.
+
+On the surface, **gluteus maximus** covers the buttock. The **quadriceps** cover the front of the thigh, the <Term id="hamstrings">hamstrings</Term> its back, and the **adductors** its inner side. **Gastrocnemius** makes the calf bulge; **tibialis anterior** runs beside the front of the shin. The smaller muscles underneath help move and steady the same joints [M1].
+
+Each muscle has an <Term id="origin">origin</Term> and an <Term id="insertion">insertion</Term>, the attachment names used on its card. Contracting fibres pull the ends towards each other. In a squat with the feet planted, the moving end can change: the legs help lift the pelvis and trunk rather than swinging a free foot [M1].
+
+The outer thigh also contains the **iliotibial tract**, a thickened band of <Term id="fascia">fascia</Term>. It receives fibres from gluteus maximus and tensor fasciae latae. It transmits tension; it is not a muscle and cannot actively shorten [M1]. Use the index to open each structure's card, then compare its attachments with the bones. <FlyTo preset="front">See the front</FlyTo>
+
+<More title={{ en: "The reference body", zh: "参考人体" }}>
+
+The meshes come from Z-Anatomy, built on BodyParts3D. This is one adult male reference body, not a standard that every person must match. Atlas selected and simplified the structures; the meshes and derived geometry are shared under CC BY-SA 4.0 [M3] [M4].
+
+</More>
+
+<More title={{ en: "Layers are a viewing guide", zh: "层是观察顺序" }}>
+
+PEEL lifts the superficial, intermediate and deep display groups in order. Real anatomy is not a stack of flat sheets: gracilis is relatively superficial although this topic places it in the intermediate group to keep the inner-thigh view readable [M1].
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+从椅子上站起来，双腿做的不只是伸直。髋关节打开，膝关节伸展，踝关节让重心留在脚上方。模型沿着这<Num s="M1">三个</Num>主要关节，从骨盆展示到脚趾。暖色是腿和臀部的肌肉，象牙色是骨骼，灰色是邻区肌肉。文中的左右，一律指身体自己的左右。
+
+浅层的**臀大肌**盖住臀部。**股四头肌**在大腿前面，<Term id="hamstrings">腘绳肌</Term>在后面，**内收肌群**在内侧。**腓肠肌**形成小腿肚的隆起，**胫骨前肌**沿胫骨前外侧向下。下面的小肌肉也参与移动和稳定这些关节，并不因为藏得深就不重要 [M1]。
+
+每块肌肉都有<Term id="origin">起点</Term>和<Term id="insertion">止点</Term>，卡片用这两个名字描述附着。收缩的纤维把两端往一起拉。脚踩地深蹲时，活动的一端可能改变：腿帮助抬起骨盆和躯干，而不是把悬空的脚摆出去 [M1]。
+
+大腿外侧还有**髂胫束**，是<Term id="fascia">筋膜</Term>增厚形成的长带，接受臀大肌和阔筋膜张肌的纤维。它传递张力，却不是肌肉，不会主动缩短 [M1]。模型还显示皮肤轮廓，便于把骨内位置对应到自己身上。切换视角时，颜色始终表示同一组结构。从索引打开结构卡，沿起止点看它连接哪些骨，再比较前面、后面和深层。<FlyTo preset="front">看正面</FlyTo>
+
+<More title={{ en: "The reference body", zh: "参考人体" }}>
+
+网格来自以 BodyParts3D 为基础的 Z-Anatomy。这是一具成年男性参考人体，不是每个人都必须符合的标准。Atlas 选取并简化了结构；网格及其几何派生数据按 CC BY-SA 4.0 共享 [M3] [M4]。
+
+</More>
+
+<More title={{ en: "Layers are a viewing guide", zh: "层是观察顺序" }}>
+
+剥层按浅、中、深三个展示组依次外移。真实解剖不是平整的叠片：股薄肌实际较浅，本主题把它放在中层组，让大腿内侧的观察更清楚 [M1]。
+
+</More>
+
+</Lang>

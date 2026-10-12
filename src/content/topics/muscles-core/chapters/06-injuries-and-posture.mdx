@@ -1,0 +1,162 @@
+---
+id: injuries-and-posture
+order: 6
+title:
+  en: Injuries and posture
+  zh: 伤病与体态
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  pose: null
+  layers:
+  - superficial
+  - intermediate
+  - deep
+  - skeleton
+  - neighbours
+  - body
+  ghost:
+  - neighbours
+  - body
+  labels:
+  - rectus-abdominis
+  - external-oblique
+  - internal-oblique
+  camera:
+    position:
+    - 0
+    - 0.08
+    - 1.85
+    target:
+    - 0
+    - 0.005
+    - 0.02
+    fov: 30
+  summary:
+    en: Pain and posture require context; this model cannot diagnose a weak or injured muscle.
+    zh: 疼痛与体态要结合具体情况；模型不能诊断哪块肌肉无力或受伤。
+  beats:
+  - camera: back
+    ghost:
+    - superficial
+    - neighbours
+    - body
+    labels:
+    - erector-spinae-lumbar
+    - multifidus-lumborum
+    - lumbar-spine
+    caption:
+      en: The lower back contains many overlapping structures. A painful location does not identify which one is responsible.
+      zh: 下背有许多重叠结构，疼痛位置不能直接指明是哪一块负责。
+  - pose: hinge-support
+    highlight:
+      signal:
+      - erector-spinae-lumbar
+      - multifidus-lumborum
+    labels:
+    - erector-spinae-lumbar
+    - multifidus-lumborum
+    caption:
+      en: The stable hinge reference highlights spinal support. A demanding load and fatigue change the task; the model
+        does not test a person’s capacity.
+      zh: 稳定的髋铰链参照高亮脊柱支撑；较大负荷和疲劳会改变任务，模型不能测试个人承受能力。
+  - camera: front
+    sites:
+    - rectus-abdominis
+    labels:
+    - rectus-abdominis
+    - external-oblique
+    caption:
+      en: The abdominal wall works as several connected layers. A visible shape cannot reveal the strength of one layer
+        or diagnose a strain.
+      zh: 腹壁由几层相连组织共同工作，外观不能显示某层力量，也不能诊断拉伤。
+  - ghost:
+    - superficial
+    - intermediate
+    - neighbours
+    - body
+    sites:
+    - psoas-major
+    labels:
+    - psoas-major
+    - lumbar-spine
+    - pelvis
+    caption:
+      en: The pelvis and lumbar spine are attachment landmarks. Their appearance in one pose cannot prove that psoas
+        is short or that a posture causes pain.
+      zh: 骨盆和腰椎是附着地标；一次姿态的外观不能证明腰大肌短，也不能证明某种姿势引起疼痛。
+  - pose: neutral-stand
+    sites: []
+    labels:
+    - group:superficial
+    - group:skeleton
+    caption:
+      en: Return to a neutral reference. Learn an easier comfortable task and seek clinical assessment for pain or injury;
+        this is general information, not medical advice.
+      zh: 回到中立参考姿态，先学容易而舒适的任务；疼痛或受伤请寻求临床评估。本页是一般知识，不是医疗建议。
+  index:
+    parts:
+    - rectus-abdominis
+    - external-oblique
+    - internal-oblique
+    - transversus-abdominis
+    - quadratus-lumborum
+    - erector-spinae-lumbar
+    - multifidus-lumborum
+    - psoas-major
+    - iliacus
+    - lumbar-spine
+    - pelvis
+---
+
+<Lang en>
+
+A low-back ache sits in a region containing muscles, joints, nerves and other tissues. It is not a label for one damaged muscle. **Non-specific low back pain** means no specific disease or structural cause can confidently explain the symptoms. WHO reports that this describes about <Num s="M57">nine in ten</Num> cases. The anatomical model cannot determine which category a reader belongs to [M57].
+
+An <Term id="non-specific-pain">unidentified pain source</Term> does not mean the pain is imaginary. It means that location and appearance alone are insufficient explanations. Sudden pain during a loaded movement should not be treated as a cue to push harder. Stop the painful task and seek assessment rather than choosing a muscle on the model and calling it strained. A strain is an injury label, not something this illustration can diagnose.
+
+Posture also needs context. A photograph showing a curved back or tilted pelvis cannot measure a muscle's length, strength or contribution to pain. A review of systematic reviews found no consensus that spinal posture or physical exposure causes low back pain [M58]. This does not make every load or prolonged position equally comfortable; it prevents turning one posture into a diagnosis.
+
+For learning, choose a manageable load, comfortable range and an easier support before fatigue changes the task [M23] [M25]. Movement and recovery are parts of general training, while persistent symptoms need an individual assessment. Do not deeply press the abdomen or groin to test iliopsoas, and do not assume isolated deep-muscle exercise is a universal cure. This page is general information, not medical advice; for pain or injury, consult a doctor or physiotherapist.
+
+<More title={{ en: "Appearance cannot identify the cause", zh: "外观不能确定原因" }}>
+
+A segmented abdominal outline, side-wall tension or a pelvic angle is not a clinical test. Anatomy helps describe the area; it does not replace a clinician's history and examination. The same caution applies to calling a deep muscle weak from a surface sensation [M57].
+
+</More>
+
+<More title={{ en: "What the evidence supports", zh: "证据支持到哪里" }}>
+
+WHO discusses rehabilitation as a way to support return to valued activities. The appropriate approach depends on the person and pain presentation [M57]. The cards teach general movements, not a rehabilitation programme or a guarantee against injury.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+下背痛所在区域包含肌肉、关节、神经等多种组织，不是某块肌肉受损的直接标签。**非特异性腰痛**指不能明确用特定疾病或结构原因解释症状；世界卫生组织报告，这类约占 <Num s="M57">九成</Num>。解剖模型不能判断读者属于哪一类 [M57]。
+
+<Term id="non-specific-pain">原因未能明确的疼痛</Term>不代表痛是想象出来的，只说明位置和外观不足以解释。负重动作突然引起疼痛，不应当作继续加力的信号。先停下疼痛任务并寻求评估，不要在模型点一块肌肉，就称它拉伤；本图不能作损伤诊断。
+
+体态也要结合情况。照片里弯曲的背或倾斜的骨盆，不能测出肌肉长度、力量或疼痛贡献。综述的综述未发现脊柱姿势、身体负荷与腰痛因果关系的共识 [M58]。这不说明所有负荷和久坐位置同样舒适，只是不能把单次姿态当成诊断。
+
+学习时采用可控制的重量、舒适幅度和较容易支撑，在疲劳改变任务前结束 [M23] [M25]。日常活动与恢复属于训练原则，持续症状需要个人评估。不要深按腹部或腹股沟测试髂腰肌，也不把单练深肌当成通用疗法。本页是一般性知识，不是医疗建议；疼痛或受伤请咨询医生或物理治疗师。
+
+<More title={{ en: "Appearance cannot identify the cause", zh: "外观不能确定原因" }}>
+
+腹部的分段轮廓、侧腹张力和骨盆角度都不是临床检验。解剖能帮助描述区域，不能代替问诊与检查；也不能只凭表面感觉，判断深肌是否无力 [M57]。
+
+</More>
+
+<More title={{ en: "What the evidence supports", zh: "证据支持到哪里" }}>
+
+WHO 把康复讨论为帮助人们回到重视的日常活动的一种支持，具体方法取决于个人和疼痛情况 [M57]。动作卡讲一般动作，不是康复处方，也不保证不会受伤。
+
+</More>
+
+</Lang>

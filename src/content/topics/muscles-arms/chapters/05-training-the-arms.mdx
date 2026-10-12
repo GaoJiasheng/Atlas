@@ -1,0 +1,234 @@
+---
+id: training-the-arms
+order: 5
+title:
+  en: Training the arms
+  zh: 怎样练手臂
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  pose: neutral-stand
+  exercise: { id: close-grip-bench-press, phase: loop }
+  layers:
+  - superficial
+  - intermediate
+  - deep
+  - skeleton
+  - neighbours
+  - body
+  ghost:
+  - body
+  sites: []
+  labels:
+  - triceps-brachii-long
+  - triceps-brachii-lateral
+  - triceps-brachii-medial
+  camera: { position: [1.3, 1.9, 3.6], target: [0.0, 0.05, 0.05], fov: 22 }
+  summary:
+    en: Open the exercise cards in equipment order, and use the diagrams alongside the model.
+    zh: 按器械顺序打开动作卡，把示意图与模型一起看。
+  beats:
+  - exercise:
+      id: close-grip-bench-press
+      phase: loop
+    camera: { position: [1.3, 1.9, 3.6], target: [0.0, 0.05, 0.05], fov: 22 }
+    labels:
+    - triceps-brachii-long
+    - triceps-brachii-lateral
+    - triceps-brachii-medial
+    - pectoralis-major-sternocostal
+    caption:
+      en: 'Close-grip bench press: triceps extends the elbows while the chest helps press. The grip is comfortable and controlled, not
+        as narrow as possible.'
+      zh: 窄握卧推：三头肌伸肘，胸肌帮助推。握距要舒服且能控制，不是越窄越好。
+  - exercise:
+      id: barbell-curl
+      phase: loop
+    camera: exercise-view
+    labels:
+    - biceps-brachii-long
+    - biceps-brachii-short
+    - brachialis
+    - brachioradialis
+    caption:
+      en: 'Barbell curl: the elbow flexors lift the forearms with palms up. Keep the trunk steady rather than swinging the bar.'
+      zh: 杠铃弯举：掌心向上，屈肘肌抬起前臂。躯干保持稳定，不甩动杠铃。
+  - exercise:
+      id: barbell-reverse-curl
+      phase: loop
+    camera: exercise-view
+    labels:
+    - brachialis
+    - brachioradialis
+    - biceps-brachii-long
+    - biceps-brachii-short
+    caption:
+      en: Reverse curl keeps the palms down. Brachialis still bends the elbow, and the wrist muscles help keep the grip steady.
+      zh: 正握弯举保持掌心向下。肱肌仍屈肘，腕肌帮助握持稳定。
+  - exercise:
+      id: dumbbell-supinating-curl
+      phase: loop
+    camera: exercise-view
+    labels:
+    - biceps-brachii-long
+    - biceps-brachii-short
+    - brachialis
+    - brachioradialis
+    caption:
+      en: Supinating dumbbell curl turns the palm as the elbow bends. The hammer-curl card uses a steady inward-facing grip instead.
+      zh: 哑铃旋后弯举在屈肘时转掌。锤式弯举卡则保持掌心朝内。
+  - exercise:
+      id: overhead-dumbbell-triceps-extension
+      phase: loop
+    camera: exercise-view
+    labels:
+    - triceps-brachii-long
+    - triceps-brachii-lateral
+    - triceps-brachii-medial
+    caption:
+      en: 'Reduced-range triceps extension: all heads help straighten the elbow. The sketch shows the full overhead position; this model limits shoulder elevation.'
+      zh: 缩小幅度演示伸肘：三头肌各头都帮助伸肘。完整过顶姿势看示意图；模型限制了肩部抬高幅度。
+  - exercise:
+      id: dumbbell-wrist-curl
+      phase: loop
+    camera: exercise-view
+    labels:
+    - flexor-carpi-radialis
+    - flexor-carpi-ulnaris
+    - palmaris-longus
+    - flexor-digitorum-superficialis
+    caption:
+      en: 'Supported wrist curl: keep the forearm still and move the hand. The wrist-extension card reverses the direction to load the
+        back of the forearm.'
+      zh: 支撑屈腕：前臂不动，只活动手。伸腕卡反向运动，给前臂背侧加负荷。
+  - exercise:
+      id: chin-up
+      phase: loop
+    camera: exercise-view
+    labels:
+    - biceps-brachii-long
+    - biceps-brachii-short
+    - brachialis
+    - brachioradialis
+    - latissimus-dorsi
+    caption:
+      en: 'Chin-up joint directions: the elbow flexors assist the back’s pull. This model does not hold a fixed bar or lift the body;
+        use the sketch for the whole movement.'
+      zh: 引体关节方向：屈肘肌协助背部拉。本模型没有固定握杠或身体升降；完整动作看示意图。
+  - exercise:
+      id: cable-triceps-pushdown
+      phase: loop
+    camera: exercise-view
+    labels:
+    - triceps-brachii-long
+    - triceps-brachii-lateral
+    - triceps-brachii-medial
+    - anconeus
+    caption:
+      en: 'Cable pushdown: the elbows extend while the upper arms remain steady. Avoid pressing the handle down with the whole trunk.'
+      zh: 绳索下压：上臂保持稳定，肘伸直。不用整个躯干把手柄压下去。
+  index:
+    exercises:
+    - close-grip-bench-press
+    - barbell-curl
+    - barbell-reverse-curl
+    - dumbbell-supinating-curl
+    - dumbbell-hammer-curl
+    - overhead-dumbbell-triceps-extension
+    - dumbbell-wrist-curl
+    - dumbbell-wrist-extension
+    - chin-up
+    - self-resisted-pronation
+    - cable-triceps-pushdown
+    parts:
+    - biceps-brachii-long
+    - biceps-brachii-short
+    - triceps-brachii-long
+    - triceps-brachii-lateral
+    - brachioradialis
+    - pronator-teres
+    - flexor-carpi-radialis
+    - palmaris-longus
+    - flexor-carpi-ulnaris
+    - extensor-carpi-radialis-longus
+    - extensor-digitorum
+    - extensor-carpi-ulnaris
+    - brachialis
+    - triceps-brachii-medial
+    - coracobrachialis
+    - anconeus
+    - extensor-carpi-radialis-brevis
+    - flexor-digitorum-superficialis
+    - pectoralis-major-sternocostal
+    - latissimus-dorsi
+---
+
+<Lang en>
+
+The index contains the whole arm exercise menu, grouped by equipment: barbell, dumbbell, body weight, then cable. Open a card for its two-panel sketch, setup, detailed steps, cues and common errors. Orange marks prime movers; blue-grey marks helpers. These are anatomical roles rather than measurements of muscle activity.
+
+With a **barbell**, close-grip bench press loads elbow extension alongside the chest's pressing work. Barbell curl bends the elbow with palms up; reverse curl keeps them down. Changing grip changes the contribution of the flexors, but brachialis still bends the elbow [M87].
+
+With **dumbbells**, the supinating curl adds palm turning and the hammer curl keeps the palms facing inward. Overhead triceps extension changes the long head's length at the shoulder while all heads extend the elbow. Supported wrist curl and wrist extension train movement at the wrist. Keep the forearm supported and let the hand move smoothly [M87].
+
+The **body-weight** options are chin-up and self-resisted pronation. A chin-up involves the back and shoulder as well as the elbow flexors; it is not simply a hanging curl. Self-resistance means the other hand supplies gentle opposing force. The **cable pushdown** loads elbow extension with the upper arms kept steady.
+
+Choose movements you can control and increase resistance gradually [M23]. Begin with light loads and learn from a qualified coach; people under <Num s="M25">18</Num> need appropriate adult supervision [M25]. Higher surface <Term id="emg">EMG</Term> measures do not establish superior muscle growth [M9]. This is a menu to learn from, not a requirement to do every exercise.
+
+<More title={{ en: "A learning session", zh: "一节学习课" }}>
+
+One possible sequence is a comfortable compound pull or press, then a light curl and triceps movement, followed by supported wrist work if the grip is still fresh. Choose rather than collect every option. Multi-joint work generally precedes smaller single-joint work; progression depends on control, recovery and previous training [M23] [M25].
+
+</More>
+
+<More title={{ en: "The diagram completes the demonstration", zh: "示意图补足演示" }}>
+
+The chin-up model shows open-chain joint directions. It has no fixed-bar grip or body-lift constraint, so it does not reproduce a complete chin-up. The sketch shows the whole action. Overhead and wrist demonstrations also use limited design angles; follow the card’s comfortable-range instructions rather than copying an exact model angle.
+
+</More>
+
+<More title={{ en: "Holding a grip is not the same as training a finger action", zh: "握住器械不等于直接练手指动作" }}>
+
+A curl requires the fingers to hold the implement, while wrist muscles help keep it steady. This does not make every gripping muscle a prime mover of the curl or prove that the exercise directly trains finger extension. The finger muscles’ links distinguish a wrist contribution or grip demand from their main finger actions [M87] [M72].
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+本章索引收齐手臂动作菜单，按器械排列：杠铃、哑铃、徒手，最后是绳索。点开卡片，可看两格示意图、准备、详细步骤、提示和常见错误。橙色是主动肌，蓝灰色是协同肌，表示解剖分工，不是肌肉活动的实测值。
+
+**杠铃**窄握卧推在胸肌推的同时给伸肘加负荷。弯举掌心向上，正握弯举掌心向下。握法改变屈肌的贡献，但肱肌始终负责屈肘 [M87]。
+
+**哑铃**旋后弯举加入转掌，锤式弯举保持掌心朝内。过顶臂屈伸改变长头在肩部的长度，各头仍一起伸肘。支撑前臂做屈腕和伸腕，让手平稳活动 [M87]。
+
+**徒手**选项是反握引体向上与自我抗阻旋前。引体同时用到背部、肩部和屈肘肌，不是悬挂着做弯举；自我抗阻是另一只手施加温和阻力。**绳索下压**保持上臂稳定，让伸肘承担负荷。
+
+选能控制的动作，逐步增加阻力 [M23]。先用轻负荷，在合格教练指导下学习；未满 <Num s="M25">18 岁</Num>需适当成人监督 [M25]。表面<Term id="emg">肌电</Term>更高，不证明肌肉长得更多 [M9]。这是学习菜单，不要求一次做完。
+
+动作卡上的感觉位置用来帮助理解，不能当作必须酸痛的目标。若握不稳、躯干开始借力或下放失去控制，就应调整负荷。器械分类便于查找，不等于每个人都必须照顺序练。
+
+<More title={{ en: "A learning session", zh: "一节学习课" }}>
+
+一种可选顺序：先做能控制的复合拉或推，再做轻负荷弯举与伸肘；握持仍稳时，才加支撑腕练习。选择合适动作，不把所有选项堆起来。通常先多关节、后单关节；进阶要看动作控制、恢复和已有训练 [M23] [M25]。
+
+</More>
+
+<More title={{ en: "The diagram completes the demonstration", zh: "示意图补足演示" }}>
+
+引体模型只显示开链关节运动方向，没有固定单杠握点和身体升降约束，不能再现完整引体。示意图展示全动作。过顶及腕部演示也采用受限的设计角度；按卡片在舒服范围内练习，不照抄模型角度。
+
+</More>
+
+<More title={{ en: "Holding a grip is not the same as training a finger action", zh: "握住器械不等于直接练手指动作" }}>
+
+弯举需要手指握住器械，腕肌帮助保持稳定。这不表示所有握持肌都是弯举主动肌，也不能证明它直接训练伸指。指肌的动作链接区分腕部贡献、握持需求和主要的手指作用 [M87]。
+
+</More>
+
+</Lang>

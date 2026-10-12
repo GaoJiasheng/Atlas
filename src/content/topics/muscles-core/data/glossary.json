@@ -1,0 +1,147 @@
+{
+  "terms": [
+    {
+      "id": "origin",
+      "term": {
+        "en": "Origin",
+        "zh": "起点"
+      },
+      "definition": {
+        "en": "The attachment traditionally called the starting end; which end stays still depends on the task.",
+        "zh": "传统上称为肌肉起始端的附着；哪一端保持不动取决于任务。"
+      }
+    },
+    {
+      "id": "insertion",
+      "term": {
+        "en": "Insertion",
+        "zh": "止点"
+      },
+      "definition": {
+        "en": "The attachment traditionally called the destination end; it can be fixed while the other end moves.",
+        "zh": "传统上称为肌肉终止端的附着；也可以固定这一端，让另一端移动。"
+      }
+    },
+    {
+      "id": "aponeurosis",
+      "term": {
+        "en": "Aponeurosis",
+        "zh": "腱膜"
+      },
+      "definition": {
+        "en": "A broad, flat tendon sheet transmitting muscle tension to other tissues.",
+        "zh": "把肌肉张力传给其他组织的宽阔、扁平腱性薄片。"
+      }
+    },
+    {
+      "id": "linea-alba",
+      "term": {
+        "en": "Linea alba",
+        "zh": "白线"
+      },
+      "definition": {
+        "en": "The midline connective-tissue seam where abdominal aponeuroses meet; it does not actively contract.",
+        "zh": "两侧腹壁腱膜在前正中线汇合形成的结缔组织带，不会主动收缩。"
+      }
+    },
+    {
+      "id": "rectus-sheath",
+      "term": {
+        "en": "Rectus sheath",
+        "zh": "腹直肌鞘"
+      },
+      "definition": {
+        "en": "The tendon envelope around rectus abdominis, formed by the lateral abdominal aponeuroses; its arrangement varies with height.",
+        "zh": "侧腹肌腱膜形成、包住腹直肌的腱性鞘，其排列随高度变化。"
+      }
+    },
+    {
+      "id": "thoracolumbar-fascia",
+      "term": {
+        "en": "Thoracolumbar fascia",
+        "zh": "胸腰筋膜"
+      },
+      "definition": {
+        "en": "Connective-tissue layers of the back that provide attachments and transmit tension between muscle groups.",
+        "zh": "背部的结缔组织层，为肌群提供附着并在它们之间传递张力。"
+      }
+    },
+    {
+      "id": "lesser-trochanter",
+      "term": {
+        "en": "Lesser trochanter",
+        "zh": "小转子"
+      },
+      "definition": {
+        "en": "A prominence on the proximal medial femur receiving the iliopsoas tendon.",
+        "zh": "股骨近端内侧的骨性突起，接收髂腰肌腱。"
+      }
+    },
+    {
+      "id": "hip-flexion",
+      "term": {
+        "en": "Hip flexion",
+        "zh": "屈髋"
+      },
+      "definition": {
+        "en": "Bringing the thigh towards the trunk at the hip joint; this is distinct from bending the spine.",
+        "zh": "在髋关节处把大腿带向躯干，区别于脊柱弯曲。"
+      }
+    },
+    {
+      "id": "isometric",
+      "term": {
+        "en": "Isometric effort",
+        "zh": "等长用力"
+      },
+      "definition": {
+        "en": "Producing muscle tension with little change in muscle length; a still position can require substantial effort.",
+        "zh": "肌肉长度基本不变时仍产生张力；静止姿态也可能需要较大用力。"
+      }
+    },
+    {
+      "id": "anti-extension",
+      "term": {
+        "en": "Anti-extension",
+        "zh": "抗伸展"
+      },
+      "definition": {
+        "en": "Resisting an external tendency to arch the trunk backwards, as in a controlled plank.",
+        "zh": "抵抗外力造成躯干后仰的趋势，例如有控制的平板支撑。"
+      }
+    },
+    {
+      "id": "anti-rotation",
+      "term": {
+        "en": "Anti-rotation",
+        "zh": "抗旋转"
+      },
+      "definition": {
+        "en": "Resisting an external tendency to twist the trunk, as in a Pallof press.",
+        "zh": "抵抗外力造成躯干扭转的趋势，例如抗旋转推。"
+      }
+    },
+    {
+      "id": "hip-hinge",
+      "term": {
+        "en": "Hip hinge",
+        "zh": "髋铰链"
+      },
+      "definition": {
+        "en": "Tilting the trunk and pelvis through hip motion while keeping the spine close to its intended shape.",
+        "zh": "通过髋运动让躯干与骨盆前倾，脊柱尽量维持原定形状。"
+      }
+    },
+    {
+      "id": "non-specific-pain",
+      "term": {
+        "en": "Non-specific low back pain",
+        "zh": "非特异性腰痛"
+      },
+      "definition": {
+        "en": "Low back pain for which a specific disease or structural cause cannot confidently be identified; the pain is real.",
+        "zh": "不能明确用特定疾病或结构原因解释的腰痛；疼痛本身是真实的。"
+      }
+    }
+  ]
+}

@@ -1,0 +1,202 @@
+---
+id: how-they-move-you
+order: 4
+title:
+  en: How they move you
+  zh: 它们怎么让你动
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  pose: null
+  layers:
+  - superficial
+  - intermediate
+  - deep
+  - skeleton
+  - neighbours
+  - body
+  ghost:
+  - neighbours
+  - body
+  labels:
+  - rectus-abdominis
+  - external-oblique
+  - internal-oblique
+  camera:
+    position:
+    - 0
+    - 0.08
+    - 1.85
+    target:
+    - 0
+    - 0.005
+    - 0.02
+    fov: 30
+  summary:
+    en: The same muscles can produce motion or hold a position against an external pull.
+    zh: 同一组肌肉既能产生运动，也能抵抗外力维持位置。
+  beats:
+  - pose: trunk-flexion
+    labels:
+    - rectus-abdominis
+    - external-oblique
+    - internal-oblique
+    caption:
+      en: In this schematic flexion pose, rectus and both oblique layers shorten to bring the lower chest towards the
+        pelvis.
+      zh: 在前屈示意姿态中，腹直肌和两层腹斜肌缩短，把下胸部带向骨盆。
+  - camera: back
+    pose: trunk-extension
+    labels:
+    - erector-spinae-lumbar
+    - multifidus-lumborum
+    caption:
+      en: From behind, the erectors and multifidus are highlighted for extension. The single trunk pivot illustrates
+        direction, not motion at each vertebra.
+      zh: 背面高亮竖脊肌与多裂肌示意后伸；单一躯干支点说明方向，不逐节模拟椎骨。
+  - camera: back
+    pose: bend-left
+    labels:
+    - quadratus-lumborum
+    - external-oblique
+    - internal-oblique
+    caption:
+      en: A small left side bend brings the left rib cage towards the pelvic rim. Quadratus and the side-wall muscles
+        share the pull.
+      zh: 小幅左侧屈把左胸廓带向骨盆上缘；腰方肌与侧腹肌共同牵拉。
+  - pose: turn-left
+    highlight:
+      signal:
+      - internal-oblique
+      - external-oblique-r
+    labels:
+    - internal-oblique
+    - external-oblique-r
+    caption:
+      en: 'Chest turns left: left internal oblique works with right external oblique. The highlighted sides are the body’s
+        own sides.'
+      zh: 胸口向左转：左腹内斜肌与右腹外斜肌协作；高亮左右指身体自己的左右。
+  - pose: turn-right
+    highlight:
+      signal:
+      - internal-oblique-r
+      - external-oblique
+    labels:
+    - internal-oblique-r
+    - external-oblique
+    caption:
+      en: 'Chest turns right: the active diagonal reverses to right internal oblique and left external oblique.'
+      zh: 胸口向右转：发力的斜向组合换成右腹内斜肌与左腹外斜肌。
+  - pose: hip-flexion
+    ghost:
+    - superficial
+    - intermediate
+    - neighbours
+    - body
+    labels:
+    - psoas-major
+    - iliacus
+    - femur
+    caption:
+      en: The left thigh rises at the hip. Psoas and iliacus pull the femur forward while the abdominal wall helps control
+        the pelvis.
+      zh: 左大腿在髋处抬起；腰大肌与髂肌向前牵拉股骨，腹壁帮助控制骨盆。
+  - pose: abdominal-compression
+    ghost:
+    - superficial
+    - intermediate
+    - neighbours
+    - body
+    labels:
+    - transversus-abdominis
+    caption:
+      en: Transversus shows a gentle contraction signal across its sheet. It draws the wall inward; this is not a measured
+        change in abdominal pressure.
+      zh: 腹横肌片显示轻微收缩信号，向内牵拉腹壁；画面不测量腹内压。
+  - pose: brace-neutral
+    highlight:
+      signal:
+      - rectus-abdominis
+      - external-oblique
+      - internal-oblique
+      cold:
+      - transversus-abdominis
+      - multifidus-lumborum
+    labels:
+    - rectus-abdominis
+    - external-oblique
+    - internal-oblique
+    caption:
+      en: The neutral brace stays still. Highlight marks muscles sharing the stabilising task; they are not animated
+        shortening in this hold.
+      zh: 中立支撑保持不动；高亮表示共同稳定的肌肉，这一保持动作不画成反复缩短。
+  index:
+    parts:
+    - rectus-abdominis
+    - external-oblique
+    - internal-oblique
+    - erector-spinae-lumbar
+    - transversus-abdominis
+    - quadratus-lumborum
+    - multifidus-lumborum
+    - psoas-major
+    - iliacus
+    - thorax
+    - lumbar-spine
+    - pelvis
+    - femur
+---
+
+<Lang en>
+
+Watch the directions before thinking about exercises. In trunk flexion, the lower chest moves towards the pelvis. Rectus and the obliques contribute to this pull. In extension, the spinal muscles help bring the trunk back. Quadratus and the side-wall muscles can bring the rib cage towards the pelvic rim during a side bend [M92]. These are tasks shared by several muscles.
+
+Rotation uses a diagonal partnership. With the pelvis fixed, **left internal oblique** helps turn the chest left, together with **right external oblique**. The opposite pair assists a right turn. The words describe the body's own sides, even when the front view looks reversed to the reader. The deep multifidus also contributes to spinal control [M92].
+
+During <Term id="hip-flexion">hip flexion</Term>, psoas and iliacus bring the thigh towards the trunk. This differs from curling the rib cage towards the pelvis. A knee raise can contain both actions; calling it an isolated lower-abdominal exercise misses the hip-flexor work. Watch the femur attachment as the thigh rises, rather than treating every forward movement as a spinal bend [M92].
+
+A core muscle need not visibly shorten to work. An <Term id="isometric">isometric</Term> effort develops tension with little change in length. In <Term id="anti-extension">anti-extension</Term> work, the abdominal wall opposes a backward arch; in <Term id="anti-rotation">anti-rotation</Term> work, it opposes twisting. Side holds and carries also resist lateral bending. The still brace at the end is therefore a working position, not a rest. Highlight shows participation, not measured force or a ranking of muscles [S1].
+
+<More title={{ en: "A schematic trunk pivot", zh: "躯干支点是示意" }}>
+
+This rig uses a single trunk pivot, so a flexion or turn is a schematic direction cue. It does not reproduce individual lumbar joints or fixed-foot mechanics. The illustrative angles and shortening signals are design values; the anatomical attachments explain the actual pulling relationships [S1].
+
+</More>
+
+<More title={{ en: "Quiet does not mean relaxed", zh: "不动不等于放松" }}>
+
+In the Romanian deadlift the hips perform the large motion while the back muscles mainly resist a change in spinal shape. A plank similarly asks abdominal muscles to resist extension. The hold is highlighted without repeated shortening; a steady breathing rhythm does not require repeated spinal bending.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+先看运动方向，再想训练动作。躯干前屈把下胸部带向骨盆，腹直肌与腹斜肌参与牵拉；后伸时，脊柱旁肌肉帮助躯干返回。侧屈把胸廓带向同侧骨盆上缘，腰方肌与侧腹肌共同参与，不是哪一块独自完成 [M92]。
+
+旋转采用斜向组合。骨盆固定时，**左腹内斜肌**帮助胸口向左转，配合**右腹外斜肌**；向右转则换另一对。左右始终指身体自己的左右，正面看时可能与读者眼前方向相反。深处的多裂肌也参与脊柱控制 [M92]。
+
+<Term id="hip-flexion">屈髋</Term>时，腰大肌与髂肌把大腿带向躯干；这与把胸廓卷向骨盆不同。抬膝可以同时包含两种运动，不能笼统叫作孤立练下腹。观察大腿抬起时的股骨附着，不要把所有向前运动都当成腰椎弯曲 [M92]。
+
+肌肉不必明显缩短才算工作。<Term id="isometric">等长</Term>用力让长度基本不变、张力仍存在。<Term id="anti-extension">抗伸展</Term>抵抗后仰，<Term id="anti-rotation">抗旋转</Term>抵抗扭转；侧撑和提重还抵抗侧弯。最后的稳定姿态仍在用力，高亮只表示参与，不是力量测量或肌肉排名 [S1]。
+
+同一种关节方向，在不同起始姿态与外力条件下，参与肌肉会改变。静止保持时，应观察有没有多余的腰背运动；用力感不等于隔离成功，也不必用更大位移来证明肌肉在工作。
+
+<More title={{ en: "A schematic trunk pivot", zh: "躯干支点是示意" }}>
+
+本模型用单一躯干支点，前屈和旋转只提示方向，不逐节模拟腰椎或解算双脚固定时的运动。关节角和缩短信号是设计值；实际牵拉关系要结合解剖附着阅读 [S1]。
+
+</More>
+
+<More title={{ en: "Quiet does not mean relaxed", zh: "不动不等于放松" }}>
+
+罗马尼亚硬拉的主要位移动作发生在髋，背肌主要抵抗脊柱形状改变；平板支撑也要求腹肌抵抗后伸。保持姿态用高亮表示，不画反复缩短；持续呼吸不要求腰椎来回弯曲。
+
+</More>
+
+</Lang>
