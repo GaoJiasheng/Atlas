@@ -1,0 +1,98 @@
+---
+id: the-machine
+order: 1
+title: { en: "The whole machine", zh: "整台机器" }
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  layers: [chassis, cooling, gpu-tray, host, power, scene]
+  hide: [rack-frame, rack-neighbour]
+  labels: [bezel, rack-ears, top-cover]
+  camera: { position: [1.05, 1.5, 4.0], target: [-0.5, 0.78, 0], fov: 30 }
+  summary: { en: "An AI server is a computer built around eight GPUs. This one is about the size of a large suitcase and weighs as much as two adults.", zh: "AI 服务器是一台围绕 8 块 GPU 搭起来的计算机。这一台大小像个大行李箱，重量和两个成年人差不多。" }
+  beats:
+    - labels: [bezel, top-cover, rails]
+      caption: { en: "This is an AI server built around eight GPUs, the chips that do most of its work. The figure beside it is 1.70 metres tall.", zh: "这是一台围绕 8 块 GPU 搭起来的 AI 服务器，GPU 是承担主要工作的芯片。旁边的人形高 1.70 米。" }
+    - camera: front-view
+      hide: [rack-frame, rack-neighbour, scale-figure]
+      labels: [bezel, front-controls, rack-ears]
+      caption: { en: "The front is one champagne-coloured bezel. On the right-hand rack ear are the power button, an identification light and a fault light.", zh: "前面是一整块香槟金色的面板。右侧挂耳上是电源键、识别灯和故障灯。" }
+    - camera: front-view
+      hide: [rack-frame, rack-neighbour, scale-figure, bezel]
+      labels: [fan-modules, u2-drives, front-controls]
+      caption: { en: "With the bezel off: twenty fan modules in four rows of five, and eight data drives along the bottom.", zh: "拿掉面板：20 个风扇模块，4 排、每排 5 个；最下面一排是 8 块数据盘。" }
+    - camera: rear-view
+      hide: [rack-frame, rack-neighbour, scale-figure]
+      labels: [rear-grille, rear-io, psus]
+      caption: { en: "At the back there are three levels: the exhaust grille of the GPU tray, the ports of the motherboard tray, and six power supplies.", zh: "后面分三层：GPU 托盘的排风面、主板托盘的接口，以及 6 个电源。" }
+    - camera: { position: [1.25, 1.05, 2.25], target: [0, 0.16, 0], fov: 30 }
+      hide: [rack-frame, rack-neighbour, scale-figure]
+      labels: [top-cover, rack-ears, rails]
+      caption: { en: "It is 10 rack units, 444 millimetres, high and about 897 millimetres deep, and weighs up to 142 kilograms, a little more than two adults.", zh: "它高 10 个机架单位，也就是 444 毫米，深约 897 毫米，最重 142 公斤，比两个成年人还重一点。" }
+  index:
+    parts: [bezel, front-controls, fan-modules, u2-drives, rear-grille, rear-io, psus, chassis-body, rack-ears]
+---
+
+<Lang en>
+
+On the stage is an AI server, the kind of computer used for <Term id="training">training</Term> and running large artificial-intelligence models. Most of its work is done by eight <Term id="gpu">GPUs</Term>, graphics processing units: chips that can do an enormous number of simple calculations at the same time. The model shows one real machine, the NVIDIA DGX B200, announced in March 2024, because its maker publishes its size, weight, power and layout. <FlyTo preset="hero">Start with the whole machine</FlyTo>
+
+It is built to slide into a rack, a tall steel frame that holds many machines one above another. Heights in a rack are counted in <Term id="rack-unit">rack units</Term>, and this server takes <Num s="S3">10</Num> of them: it is <Num s="S3">444 mm</Num> tall and about <Num s="S3">897 mm</Num> deep. Fully loaded it weighs up to <Num s="S3">142.4 kg</Num>, a little more than two average adults of about <Num s="S27">62 kg</Num> each.
+
+Air goes in at the front and comes out at the back. Behind the champagne-coloured bezel are <Num s="S3">20</Num> fan modules in four rows of five, with <Num s="S3">eight</Num> data drives along the bottom. <FlyTo preset="rear-view">Turn to the back</FlyTo> and there are three levels: the exhaust grille of the GPU tray at the top, the ports of the motherboard tray in the middle, and <Num s="S3">six</Num> power supplies at the bottom.
+
+Almost everything inside exists to feed the eight GPUs with electricity and data, and to carry their heat away. The next chapters open the box in that order.
+
+<More title={{ en: "Same board, different boxes", zh: "同一块板，不同的机箱" }}>
+
+The eight GPUs sit on a board that NVIDIA sells to other server makers as HGX B200. Those makers build their own boxes around it, and they differ: one air-cooled design reviewed in 2025 is <Num s="S15">8U</Num> tall with a GPU tray of <Num s="S15">6U</Num>, and some put the motherboard under the GPU board, others above it. Every number in this topic is for the DGX B200 alone.
+
+</More>
+
+<More title={{ en: "What 10U means", zh: "10U 是什么意思" }}>
+
+A rack unit is <Num s="S25">1.75 inches</Num>, or <Num s="S25">44.45 mm</Num>, and racks are <Num s="S25">19 inches</Num> wide between their mounting posts. Ten units come to <Num s="S25">444.5 mm</Num>; the DGX B200 is listed at <Num s="S3">444 mm</Num>, leaving a little play. Its front, rack ears included, is given as <Num s="S3">482.3 mm</Num> in the user guide and <Num s="S2">482.2 mm</Num> on the product page; the two sources differ by a tenth of a millimetre.
+
+</More>
+
+<More title={{ en: "Where it lives", zh: "它在哪里工作" }}>
+
+Machines like this run in <Term id="data-centre">data centres</Term>, in long rows of racks, not in offices. The air drawn in at the front must be between <Num s="S3">10 °C</Num> and <Num s="S3">35 °C</Num>, at <Num s="S3">20 to 80 %</Num> relative humidity without condensation, so the room is cooled and controlled all the time. Chapter 6 comes back to the rack and the room.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+舞台上是一台 AI 服务器，就是用来<Term id="training">训练</Term>和运行大型人工智能模型的那种计算机。它的大部分工作由 8 块<Term id="gpu">GPU</Term>完成。GPU 是图形处理器，这种芯片能同时做海量的简单计算。模型画的是一台真实的机器：NVIDIA DGX B200，2024 年 3 月发布。选它，是因为厂商公开了它的尺寸、重量、功率和内部布局。<FlyTo preset="hero">先看整台机器</FlyTo>
+
+它是装进机柜用的。机柜是一个高高的钢架，一台台机器上下叠着放。机柜里的高度用<Term id="rack-unit">机架单位</Term>来计，这台服务器占 <Num s="S3">10</Num> 个：高 <Num s="S3">444 mm</Num>，深约 <Num s="S3">897 mm</Num>。满配时最重 <Num s="S3">142.4 kg</Num>，比两个平均体重约 <Num s="S27">62 kg</Num> 的成年人还重一点。
+
+空气从前面进，从后面出。香槟金色的面板后面是 <Num s="S3">20</Num> 个风扇模块，4 排、每排 5 个，最下面一排是 <Num s="S3">8</Num> 块数据盘。<FlyTo preset="rear-view">转到背面</FlyTo>，可以看到三层：最上面是 GPU 托盘的排风面，中间是主板托盘的各种接口，最下面是 <Num s="S3">6</Num> 个电源。
+
+机箱里几乎所有东西，都是为了给这 8 块 GPU 送电、送数据，再把它们产生的热带走。后面几章就按这个顺序把机箱打开。
+
+<More title={{ en: "Same board, different boxes", zh: "同一块板，不同的机箱" }}>
+
+8 块 GPU 装在一块板上，NVIDIA 把这块板以 HGX B200 的名字卖给其他服务器厂商。这些厂商各自设计机箱，彼此并不一样：2025 年评测过的一款风冷机型高 <Num s="S15">8U</Num>，其中 GPU 托盘占 <Num s="S15">6U</Num>；有的把主板放在 GPU 板下面，有的放在上面。本主题里的数字都只针对 DGX B200。
+
+</More>
+
+<More title={{ en: "What 10U means", zh: "10U 是什么意思" }}>
+
+一个机架单位是 <Num s="S25">1.75 英寸</Num>，也就是 <Num s="S25">44.45 mm</Num>；机柜两根安装立柱之间宽 <Num s="S25">19 英寸</Num>。10 个单位合 <Num s="S25">444.5 mm</Num>，DGX B200 标的是 <Num s="S3">444 mm</Num>，留了一点余量。连挂耳在内的前脸宽度，用户指南写 <Num s="S3">482.3 mm</Num>，产品页写 <Num s="S2">482.2 mm</Num>，两处相差十分之一毫米。
+
+</More>
+
+<More title={{ en: "Where it lives", zh: "它在哪里工作" }}>
+
+这样的机器在<Term id="data-centre">数据中心</Term>里一排排机柜中运行，而不是放在办公室里。前面吸进的空气必须在 <Num s="S3">10℃</Num> 到 <Num s="S3">35℃</Num> 之间，相对湿度 <Num s="S3">20–80 %</Num> 且不结露，所以机房一直要降温、控湿。第 6 章会回到机柜和机房。
+
+</More>
+
+</Lang>

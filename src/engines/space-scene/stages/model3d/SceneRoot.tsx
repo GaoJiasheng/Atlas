@@ -196,12 +196,13 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
   /* ---------------- shapes ---------------- */
   const primitiveShapes = useMemo(() => {
     const out = new Map<string, PartShape>();
+    const each = new Set(data.animations.filter((a) => 'each' in a && a.each).map((a) => a.target));
     for (const part of data.parts) {
-      const shape = primitiveShape(part);
+      const shape = primitiveShape(part, each.has(part.id));
       if (shape) out.set(part.id, shape);
     }
     return out;
-  }, [data.parts]);
+  }, [data.parts, data.animations]);
   useEffect(() => () => primitiveShapes.forEach((sh) => sh.pieces.forEach((p) => p.geometry.dispose())), [primitiveShapes]);
 
   const meshNames = useMemo(

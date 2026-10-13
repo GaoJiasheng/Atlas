@@ -1,0 +1,115 @@
+---
+id: power-and-cooling
+order: 5
+title: { en: "Power in, heat out", zh: "电进来，热出去" }
+sensitive: false
+state:
+  view: assembled
+  run: true
+  cutaway: side
+  layers: [chassis, cooling, gpu-tray, host, power, air, current]
+  hide: [bezel, top-cover, scale-figure, rack-frame, rack-neighbour]
+  labels: [psus, fan-modules, gpu-heatsinks]
+  camera: { position: [1.7, 0.75, 0.5], target: [0, 0.18, -0.02], fov: 30 }
+  summary: { en: "Up to about 14 kilowatts goes in as electricity, and almost all of it comes out as heat, carried away by a wall of fans.", zh: "最多约 14 千瓦的电进来，几乎全部变成热，由一整面风扇墙带走。" }
+  beats:
+    - layers: [chassis, cooling, gpu-tray, host, power, current]
+      labels: [power-cords, psus, power-distribution]
+      caption: { en: "Ochre dots are electricity. It comes in at the back through six power supplies, each rated at 3.3 kilowatts.", zh: "赭金色的点是电。电从后面进来，经过 6 个电源，每个额定 3.3 千瓦。" }
+    - layers: [chassis, cooling, gpu-tray, host, power, current]
+      cutaway: none
+      pose: psu-out
+      camera: { position: [-0.68, 0.55, -1.7], target: [0.08, 0.02, -0.5], fov: 30 }
+      labels: [psu-single, psus, power-cords]
+      caption: { en: "Pull one power supply out and the other five still carry the full load.", zh: "抽出一个电源，另外 5 个照样扛起全部负载。" }
+    - layers: [chassis, cooling, gpu-tray, host, power, current]
+      view: xray
+      camera: { position: [1.25, 0.62, 0.6], target: [0, 0.14, 0.05], fov: 30 }
+      labels: [gpu-modules, gpu-baseboard, midplane]
+      caption: { en: "The power rises through the midplane to the eight GPUs, which may draw up to 1,000 watts each.", zh: "电经中板往上送到 8 块 GPU，每块最多可用 1,000 瓦。" }
+    - layers: [chassis, cooling, gpu-tray, host, power, air]
+      labels: [fan-modules, gpu-heatsinks, rear-grille]
+      caption: { en: "Grey dots are room air, turning orange as it heats up. The fan wall pulls it from front to back through the heat sinks.", zh: "灰色的点是室温的空气，变热后变成橙色。风扇墙把它从前往后抽过散热器。" }
+    - layers: [chassis, cooling, gpu-tray, host, power, air]
+      camera: rear-view
+      labels: [rear-grille, psus, power-cords]
+      caption: { en: "In this simulation, air goes in at 25 °C and comes out at about 43 °C.", zh: "在这个模拟里，空气进去时 25℃，出来时约 43℃。" }
+  index:
+    parts: [power-cords, psus, psu-single, power-distribution, gpu-modules, fan-modules, fan-rotors, gpu-heatsinks, rear-grille, bezel]
+---
+
+<Lang en>
+
+Electricity comes in at the back through <Num s="S3">six</Num> power supplies. Each takes mains power at <Num s="S3">200–240 V</Num> and can deliver up to <Num s="S3">3.3 kW</Num> of direct current to the machine. Any five can carry the full load, so the sixth is <Term id="redundancy">redundancy</Term>: one can fail, or be pulled out and replaced, while the server keeps running. The whole server can draw up to about <Num s="S2,S3">14.3 kW</Num>, and each GPU up to <Num s="S3">1,000 W</Num>.
+
+Every watt the chips use ends up as heat. The calculations do not store the energy; it warms the chips, so <Num s="S3">14.3 kW</Num> of electricity in means <Num s="S3">14.3 kW</Num> of heat out, which NVIDIA lists as <Num s="S3">48,794 BTU/h</Num>. That is about as much heat as <Num s="S3,S1">seven</Num> two-kilowatt kettles left boiling.
+
+The fan wall carries that heat away. Its <Num s="S3">20</Num> modules pull up to <Num s="S3">1,550</Num> cubic feet of room air a minute, about <Num s="S3">2,630 m³</Num> an hour, from front to back. The air passes between the thin fins of the heat sinks; metal is a good conductor of heat, so the heat flows from the chips into the fins and from the fins into the cooler air. <FlyTo preset="rear-view">See where the hot air leaves</FlyTo>
+
+In the simulation on the panel, the server draws <Num s="S1">12.5 kW</Num>, the fans run at <Num s="S1">80 %</Num>, and air that enters at <Num s="S1">25 °C</Num> leaves at about <Num s="S1">43 °C</Num>. The room must keep feeding it air between <Num s="S3">10</Num> and <Num s="S3">35 °C</Num>, so the data centre spends more electricity cooling that air again.
+
+<Figure src="figures/b200-airflow" alt={{ en: "Pencil drawing of the server cut open from the side: fans at the front, arrows of air passing through the GPU level, the CPU level and the power level and out of the back.", zh: "服务器侧面剖开的铅笔画：前面是风扇，箭头表示空气穿过 GPU 层、CPU 层和电源层，从后面出去。" }} caption={{ en: "Air takes three paths through the box, one for each level. Illustration for this topic; the numbers of fans and parts are not exact.", zh: "空气分三层穿过机箱，每层一条通道。为本主题画的示意图；风扇和零件的数量不精确。" }} />
+
+<More title={{ en: "Every watt becomes heat", zh: "每一瓦电都变成热" }}>
+
+Energy is never used up, only changed from one form to another. In a server almost none of it leaves as light, sound or movement, so nearly all the electrical energy becomes heat in the chips, the power supplies and the fans. The maximum heat load NVIDIA gives, <Num s="S3">48,794 BTU/h</Num>, is the maximum power, <Num s="S3">14.3 kW</Num>, written in the British thermal units that cooling engineers often use: <Num s="S3">14.3 × 3,412 ≈ 48,800</Num>.
+
+</More>
+
+<More title={{ en: "Numbers at this simulated operating point", zh: "这个模拟运行点的数字" }}>
+
+The readings on the panel are worked out for this topic, not measured. At full load the eight GPUs are taken to draw <Num s="S1">950 W</Num> each, <Num s="S1">7.6 kW</Num> together; the two CPUs <Num s="S1">300 W</Num> each; memory, switches, network, drives and fans an assumed <Num s="S1">3.55 kW</Num>. That is <Num s="S1">11.75 kW</Num> of direct current; with power supplies <Num s="S1">94 %</Num> efficient, <Num s="S1">12.5 kW</Num> comes from the mains. With the fans at <Num s="S1">80 %</Num>, the air flow is taken as <Num s="S1">80 %</Num> of the maximum, about <Num s="S1">2,107 m³</Num> an hour or <Num s="S1">0.585 m³</Num> a second. Air at <Num s="S26">25 °C</Num> weighs <Num s="S26">1.184 kg</Num> a cubic metre and needs <Num s="S26">1.006 kJ</Num> to warm one kilogram by one degree, so the air warms by <Num s="S1">12.5 ÷ (0.585 × 1.184 × 1.006) ≈ 17.9 °C</Num>, from <Num s="S1">25</Num> to about <Num s="S1">43 °C</Num>. Idle, the server draws about <Num s="S1">1.8 kW</Num> and the air leaves at about <Num s="S1">32 °C</Num>. The GPU temperatures on the panel, <Num s="S1">34</Num> and <Num s="S1">72 °C</Num>, are illustrative: NVIDIA does not publish typical B200 temperatures in this machine. Particle speeds on the stage are for viewing, not real air speeds.
+
+</More>
+
+<More title={{ en: "Five plus one", zh: "五加一" }}>
+
+With five or six supplies working, each GPU may draw up to <Num s="S3">1,000 W</Num>. With three or four the GPUs are held to <Num s="S3">800 W</Num> each, and with fewer than three only the management controller can be switched on. Each supply needs its own cord with a plug that locks in place, rated for <Num s="S3">16 A</Num>.
+
+</More>
+
+<More title={{ en: "Why not liquid", zh: "为什么不用液冷" }}>
+
+The DGX B200 is cooled by air alone, which is why its fans, heat sinks and air paths are so large. Denser designs pipe liquid through cold plates on the chips instead: NVIDIA's GB200 NVL72 rack holds <Num s="S18">72</Num> GPUs and is cooled with liquid. Chapter 6 compares the two.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+电从后面经 <Num s="S3">6</Num> 个电源进来。每个电源接 <Num s="S3">200–240 V</Num> 的市电，最多能给机器输出 <Num s="S3">3.3 kW</Num> 的直流电。任意 5 个就能扛起全部负载，第 6 个是<Term id="redundancy">冗余</Term>：坏一个，或者拔出一个来换，服务器照样运行。整台服务器最多用电约 <Num s="S2,S3">14.3 kW</Num>，每块 GPU 最多 <Num s="S3">1,000 W</Num>。
+
+芯片用掉的每一瓦电，最后都变成热。计算并不会把能量存起来，它让芯片发热，所以进来 <Num s="S3">14.3 kW</Num> 的电，就出去 <Num s="S3">14.3 kW</Num> 的热，NVIDIA 把它写成 <Num s="S3">48,794 BTU/h</Num>。这差不多相当于 <Num s="S3,S1">7</Num> 个 2 千瓦的电水壶一直烧着。
+
+风扇墙负责把这些热带走。<Num s="S3">20</Num> 个风扇模块每分钟最多把 <Num s="S3">1,550</Num> 立方英尺的室内空气从前往后抽，约每小时 <Num s="S3">2,630 m³</Num>。空气从散热器的薄鳍片之间穿过。金属是热的良导体，热从芯片流进鳍片，再从鳍片流进较凉的空气。<FlyTo preset="rear-view">看热空气从哪里出去</FlyTo>
+
+在面板上的模拟里，服务器用电 <Num s="S1">12.5 kW</Num>，风扇转到 <Num s="S1">80 %</Num>，<Num s="S1">25℃</Num> 的空气进去，出来时约 <Num s="S1">43℃</Num>。机房必须一直供给 <Num s="S3">10</Num> 到 <Num s="S3">35℃</Num> 之间的空气，所以数据中心还要再花电把这些空气重新冷却。
+
+<Figure src="figures/b200-airflow" alt={{ en: "Pencil drawing of the server cut open from the side: fans at the front, arrows of air passing through the GPU level, the CPU level and the power level and out of the back.", zh: "服务器侧面剖开的铅笔画：前面是风扇，箭头表示空气穿过 GPU 层、CPU 层和电源层，从后面出去。" }} caption={{ en: "Air takes three paths through the box, one for each level. Illustration for this topic; the numbers of fans and parts are not exact.", zh: "空气分三层穿过机箱，每层一条通道。为本主题画的示意图；风扇和零件的数量不精确。" }} />
+
+<More title={{ en: "Every watt becomes heat", zh: "每一瓦电都变成热" }}>
+
+能量不会用掉，只会从一种形式变成另一种。服务器里几乎没有能量以光、声音或运动的形式离开，所以电能几乎全部在芯片、电源和风扇里变成热。NVIDIA 给的最大发热量 <Num s="S3">48,794 BTU/h</Num>，就是最大功率 <Num s="S3">14.3 kW</Num> 换成制冷工程师常用的英热单位：<Num s="S3">14.3 × 3,412 ≈ 48,800</Num>。
+
+</More>
+
+<More title={{ en: "Numbers at this simulated operating point", zh: "这个模拟运行点的数字" }}>
+
+面板上的读数是为本主题算出来的，不是实测值。满负荷时，假设 8 块 GPU 每块用 <Num s="S1">950 W</Num>，合计 <Num s="S1">7.6 kW</Num>；两颗 CPU 每颗 <Num s="S1">300 W</Num>；内存、交换芯片、网络、硬盘和风扇假设共 <Num s="S1">3.55 kW</Num>。合计直流 <Num s="S1">11.75 kW</Num>；电源效率取 <Num s="S1">94 %</Num>，从市电取 <Num s="S1">12.5 kW</Num>。风扇转到 <Num s="S1">80 %</Num> 时，风量按最大值的 <Num s="S1">80 %</Num> 算，约每小时 <Num s="S1">2,107 m³</Num>，即每秒 <Num s="S1">0.585 m³</Num>。<Num s="S26">25℃</Num> 的空气每立方米重 <Num s="S26">1.184 kg</Num>，每千克升高 1 度要 <Num s="S26">1.006 kJ</Num>，所以空气升温 <Num s="S1">12.5 ÷ (0.585 × 1.184 × 1.006) ≈ 17.9℃</Num>，从 <Num s="S1">25</Num> 升到约 <Num s="S1">43℃</Num>。空闲时服务器用电约 <Num s="S1">1.8 kW</Num>，出风约 <Num s="S1">32℃</Num>。面板上的 GPU 温度 <Num s="S1">34</Num> 和 <Num s="S1">72℃</Num> 只是示意：NVIDIA 没有公布 B200 在这台机器里的典型温度。舞台上粒子的速度是为了看清楚，不是真实风速。
+
+</More>
+
+<More title={{ en: "Five plus one", zh: "五加一" }}>
+
+有 5 或 6 个电源工作时，每块 GPU 最多可用 <Num s="S3">1,000 W</Num>；只有 3–4 个时，每块 GPU 被限制在 <Num s="S3">800 W</Num>；少于 3 个时，只能开管理控制器。每个电源要单独一根电源线，插头插上后会锁住，额定电流 <Num s="S3">16 A</Num>。
+
+</More>
+
+<More title={{ en: "Why not liquid", zh: "为什么不用液冷" }}>
+
+DGX B200 完全靠空气冷却，所以它的风扇、散热器和风道都这么大。更密集的设计改用液体：让冷却液流过贴在芯片上的冷板。NVIDIA 的 GB200 NVL72 机柜装 <Num s="S18">72</Num> 块 GPU，就是液冷的。第 6 章会比较这两种做法。
+
+</More>
+
+</Lang>

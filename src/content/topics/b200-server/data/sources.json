@@ -1,0 +1,435 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": {
+        "en": "Atlas design study for this topic (docs/18-b200-content-spec.md §1.3 and §3): a simulated operating point for an NVIDIA DGX B200 and the reconstructed geometry of the model. Not NVIDIA data. Inputs: inlet air 25 °C (inside the 10–35 °C range, S3); air density 1.184 kg/m³ and specific heat 1.006 kJ/(kg·K) (S26). Full load: GPUs 8 × 0.95 kW = 7.6 kW (below the 1,000 W limit, S3); CPUs 2 × 0.30 kW = 0.6 kW (below the 350 W TDP, S11); memory, switches, network, drives and fans an assumed 3.55 kW; 11.75 kW DC; power supplies assumed 94 % efficient, so 12.5 kW from the mains (below the 14.3 kW maximum, S3). Fans at 80 %, air flow taken as 80 % of 1,550 CFM = 1,240 CFM = 2,107 m³/h = 0.585 m³/s; air warms by 12.5 ÷ (0.585 × 1.184 × 1.006) ≈ 17.9 K, from 25 to about 42.9 °C. Idle: GPUs 8 × 0.14 kW, CPUs 2 × 0.10 kW, other 0.40 kW = 1.72 kW DC ÷ 0.94 ≈ 1.8 kW; fans 30 %, 790 m³/h; exhaust about 32.0 °C. GPU load 0 % idle, 95 % at full load. GPU temperature 34 °C idle, 72 °C at full load: illustrative only. Energy: 12.5 kW × 24 h = 300 kWh a day; 14.3 kW × 8,760 h ≈ 125 MWh a year at maximum.",
+        "zh": "本主题的 Atlas 设计研究（docs/18-b200-content-spec.md §1.3、§3）：为一台 NVIDIA DGX B200 设定的模拟运行点，以及模型的重建几何。不是 NVIDIA 的数据。输入：进风 25 ℃（在 S3 的 10–35 ℃ 范围内）；空气密度 1.184 kg/m³、比热 1.006 kJ/(kg·K)（S26）。满负荷：GPU 8 × 0.95 kW = 7.6 kW（低于 S3 的 1,000 W 上限）；CPU 2 × 0.30 kW = 0.6 kW（低于 S11 的 350 W TDP）；内存、交换芯片、网络、硬盘和风扇假设共 3.55 kW；直流合计 11.75 kW；电源效率假设 94 %，市电输入 12.5 kW（低于 S3 的最大 14.3 kW）。风扇 80 %，风量按 1,550 CFM 的 80 % 计 = 1,240 CFM = 2,107 m³/h = 0.585 m³/s；空气升温 12.5 ÷ (0.585 × 1.184 × 1.006) ≈ 17.9 K，从 25 ℃ 升到约 42.9 ℃。空闲：GPU 8 × 0.14 kW、CPU 2 × 0.10 kW、其余 0.40 kW，直流 1.72 kW ÷ 0.94 ≈ 1.8 kW；风扇 30 %，790 m³/h；出风约 32.0 ℃。GPU 负载空闲 0 %、满负荷 95 %。GPU 温度空闲 34 ℃、满负荷 72 ℃，只是示意。能量：12.5 kW × 24 h = 每天 300 kWh；按最大 14.3 kW 全年运行 × 8,760 h ≈ 125 MWh。"
+      },
+      "note": {
+        "en": "Not a measurement. The power split, the 94 % supply efficiency, the fan-speed-to-air-flow assumption (flow proportional to fan speed, and 1,550 CFM taken as 100 %; NVIDIA does not state the condition for that figure, and if it were at 80 % the full-load rise would be about 14.3 K) and both GPU temperatures are assumptions of this study; NVIDIA publishes no typical B200 temperature for this machine. All of the electricity is counted as heat. Model geometry is measured from the user-guide drawings (S3), the HGX B200 photograph (S16) and standard part sizes (S11, S30, S31); the midplane, power distribution, PCIe switch position and the closed box at the rear of the GPU tray are reconstructions.",
+        "zh": "不是实测值。功率分配、94 % 的电源效率、风扇转速与风量的关系（风量与转速成正比，且把 1,550 CFM 当作 100 %；NVIDIA 没有写明这个数字对应的条件，若它对应 80 %，满负荷温升约为 14.3 K）以及两个 GPU 温度，都是本研究的假设；NVIDIA 没有公布 B200 在这台机器里的典型温度。电能全部按变成热计算。模型几何按用户指南的图（S3）、HGX B200 照片（S16）和标准零件尺寸（S11、S30、S31）量取；中板、配电、PCIe 交换芯片的位置和 GPU 托盘后部的封闭盒是重建的。"
+      }
+    },
+    {
+      "id": "S2",
+      "text": {
+        "en": "NVIDIA, “NVIDIA DGX B200” product page, specifications table (NVIDIA's own figures): 8 × NVIDIA Blackwell GPUs; GPU memory 1,440 GB total, 64 TB/s HBM3e bandwidth; FP4 Tensor Core 144 PFLOPS sparse | 72 PFLOPS dense; FP8 Tensor Core 72 PFLOPS (sparse); 2 × NVIDIA NVSwitch; NVLink 14.4 TB/s aggregate bandwidth; system power about 14.3 kW max; 2 × Intel Xeon Platinum 8570, 112 cores in total, 2.1 GHz base, 4 GHz max boost; system memory 2 TB, configurable to 4 TB; networking 4 × OSFP ports serving 8 × single-port NVIDIA ConnectX-7 VPI (up to 400 Gb/s InfiniBand or Ethernet) and 2 × dual-port QSFP112 BlueField-3 DPU (up to 400 Gb/s); management network 10 Gb/s onboard NIC with RJ45, 100 Gb/s dual-port Ethernet NIC, BMC with RJ45; storage 2 × 1.9 TB NVMe M.2 for the operating system and 8 × 3.84 TB NVMe U.2 internal; 10 RU; height 17.5 in (444 mm), width 19.0 in (482.2 mm), length 35.3 in (897.1 mm); operating temperature 10–35 °C (printed as 50–90 °F).",
+        "zh": "NVIDIA《NVIDIA DGX B200》产品页规格表（厂商自报）：8 块 NVIDIA Blackwell GPU；显存合计 1,440 GB，HBM3e 带宽 64 TB/s；FP4 Tensor Core 稀疏 144 PFLOPS、稠密 72 PFLOPS；FP8 Tensor Core 72 PFLOPS（稀疏）；NVSwitch 2 颗；NVLink 合计带宽 14.4 TB/s；整机功率最大约 14.3 kW；CPU 为 2 颗英特尔至强铂金 8570，共 112 核，基频 2.1 GHz、最高睿频 4 GHz；内存 2 TB，可配到 4 TB；网络：4 个 OSFP 口接 8 块单口 ConnectX-7（InfiniBand 或以太网，最高 400 Gb/s），另有 2 块双口 QSFP112 BlueField-3 DPU（最高 400 Gb/s）；管理网络：板载 10 Gb/s 网口（RJ45）、100 Gb/s 双口以太网卡、带 RJ45 的 BMC；存储：系统盘 2 块 1.9 TB NVMe M.2，内部 8 块 3.84 TB NVMe U.2；10 个机架单位；高 17.5 英寸（444 mm）、宽 19.0 英寸（482.2 mm）、长 35.3 英寸（897.1 mm）；工作温度 10–35 °C（页面写作 50–90 °F）。"
+      },
+      "url": "https://www.nvidia.com/en-us/data-center/dgx-b200/",
+      "note": {
+        "en": "Read 2026-10-13. Performance numbers are NVIDIA's peak claims; the footnotes read “*Shown in sparse | dense” and “**Specification shown in sparse. Dense performance is ½ sparse spec shown”, so FP8 dense = 72 ÷ 2 = 36 PFLOPS. Per GPU (÷ 8): 1,440 ÷ 8 = 180 GB, 64 ÷ 8 = 8 TB/s, FP4 dense 72 ÷ 8 = 9 PFLOPS. Conflicts with the user guide (S3), listed side by side: width 482.2 mm here, 482.3 mm max there; OS drives 1.9 TB here, 1.92 TB there; °F range 50–90 °F here, 50–95 °F there. 35 °C = 95 °F, so “90” here looks like a typo; the text uses °C only.",
+        "zh": "2026-10-13 读取。算力是 NVIDIA 自报的峰值；脚注原文为“*Shown in sparse | dense”和“**Specification shown in sparse. Dense performance is ½ sparse spec shown”，所以 FP8 稠密 = 72 ÷ 2 = 36 PFLOPS。按 8 块平分：1,440 ÷ 8 = 180 GB，64 ÷ 8 = 8 TB/s，FP4 稠密 72 ÷ 8 = 9 PFLOPS。与用户指南（S3）并列的出入：宽度这里 482.2 mm，指南写最大 482.3 mm；系统盘这里 1.9 TB，指南 1.92 TB；华氏范围这里 50–90 °F，指南 50–95 °F。35 °C 等于 95 °F，这里的“90”看来是笔误，正文只写摄氏度。"
+      }
+    },
+    {
+      "id": "S3",
+      "text": {
+        "en": "NVIDIA, DGX B200 User Guide, “Introduction to NVIDIA DGX B200 Systems”. Components: 8 × NVIDIA B200 GPUs, 1,440 GB total GPU memory; 2 × Intel Xeon 8570, 56 cores each, 2.1/4 GHz; 2 × 5th-generation NVLink switches, 14.4 TB/s aggregate; 2 × 1.92 TB NVMe M.2 (RAID 1); 8 × 3.84 TB NVMe U.2 self-encrypting drives (RAID 0); 4 × OSFP ports for 8 × single-port ConnectX-7 (InfiniBand up to 400 Gb/s); 2 × dual-port BlueField-3 (storage and in-band management); 2 TB from 32 DIMMs (upgradable to 4 TB); BMC 1 GbE RJ45; optional dual-port 100 GbE in slot 3 and 10 GbE RJ45; 6 × 3.3 kW power supplies. Mechanical: 10U rackmount; 17.5 in (444 mm) high; 19 in (482.3 mm) max wide; 35.3 in (897.1 mm) max deep; 313.9 lb (142.4 kg) max. Power: 14.3 kW max; each supply 3,300 W at 200–240 V, 16 A, 50–60 Hz; 5+1 redundancy; boots only with at least 3 working supplies, otherwise only the BMC runs; maximum power per GPU 1,000 W with 5 supplies working, 800 W with 4 or 3, system shuts down with 2. Environment: 10–35 °C (50–95 °F); 20–80 % relative humidity, non-condensing; airflow 1,550 CFM; heat output 48,794 BTU/h. Figure labels: front “20 x Fan Modules” above “8 x 3.84 TB U.2 NVMe”; rear (top to bottom) GPU tray, motherboard tray, “6 x 3.3kW Power Supplies”; GPU tray “2 x NVSwitches with 5th generation NVLink”, “8 x NVIDIA B200 Tensor Core GPUs”; both trays “Midplane connectivity Power, PCIe, sensors and signaling communications”; motherboard tray “32 x 64GB or 128GB DIMMs for a total of 2TB - 4TB”, “Networking modules. Each includes 4 x ConnectX-7 network devices”. Network-module table: module/CPU 0 serves GPUs 0–3, module/CPU 1 serves GPUs 4–7, one ConnectX-7 per GPU.",
+        "zh": "NVIDIA《DGX B200 用户指南》“系统介绍”页。部件：8 块 NVIDIA B200，显存合计 1,440 GB；2 颗英特尔至强 8570，每颗 56 核，2.1 / 4 GHz；2 颗第 5 代 NVLink 交换芯片，合计 14.4 TB/s；2 块 1.92 TB NVMe M.2（RAID 1）；8 块 3.84 TB NVMe U.2 自加密盘（RAID 0）；4 个 OSFP 口接 8 块单口 ConnectX-7（InfiniBand 最高 400 Gb/s）；2 块双口 BlueField-3（存储与带内管理）；32 根内存条共 2 TB（可升到 4 TB）；BMC 为 1 GbE RJ45；可选：3 号槽双口 100 GbE、10 GbE RJ45；6 个 3.3 kW 电源。机械：10U 机架式；高 17.5 英寸（444 mm）；宽最大 19 英寸（482.3 mm）；深最大 35.3 英寸（897.1 mm）；重最大 313.9 磅（142.4 kg）。电源：最大 14.3 kW；每个电源 3,300 W（200–240 V、16 A、50–60 Hz）；5+1 冗余；至少 3 个电源正常才能开机，不足 3 个只剩 BMC 能用；5 个电源工作时每块 GPU 最大 1,000 W，4 个或 3 个时 800 W，只剩 2 个时整机关机。环境：10–35 °C（50–95 °F）；相对湿度 20–80 %，不凝露；风量 1,550 CFM；发热 48,794 BTU/h。图注：前视“20 x Fan Modules”，下面是“8 x 3.84 TB U.2 NVMe”；后视自上而下为 GPU 托盘、主板托盘、“6 x 3.3kW Power Supplies”；GPU 托盘图“2 x NVSwitches with 5th generation NVLink”“8 x NVIDIA B200 Tensor Core GPUs”；两个托盘图都标“Midplane connectivity Power, PCIe, sensors and signaling communications”；主板托盘图“32 x 64GB or 128GB DIMMs for a total of 2TB - 4TB”“Networking modules. Each includes 4 x ConnectX-7 network devices”。网络模块表：0 号模块（CPU 0）对应 GPU 0–3，1 号模块（CPU 1）对应 GPU 4–7，每块 GPU 一个 ConnectX-7。"
+      },
+      "url": "https://docs.nvidia.com/dgx/dgxb200-user-guide/introduction-to-dgxb200.html",
+      "note": {
+        "en": "Read 2026-10-13, HTML page and its figures (the PDF of the whole guide was also searched). The airflow row gives no fan-speed condition and no direction; the DGX H100 guide (S32) says “1105 CFM Front-to-Back @ 80% fan PWM”, so whether 1,550 CFM is at full speed is unknown. Arithmetic: 1 ft³/min = 0.0283168 m³ × 60 = 1.699 m³/h, so 1,550 CFM × 1.699 = 2,633 m³/h; 14.3 kW × 3,412.14 BTU/h per kW = 48,794 BTU/h (matches); 142.4 kg ÷ 62 kg (S27) ≈ 2.3 adults. The per-GPU power table lists removing 1 to 4 of the 6 power cords; the all-6 case is not listed, and the footnote says the maximum is as reported by nvidia-smi. Conflicts with the product page (S2): width 482.3 mm max here vs 482.2 mm; 50–95 °F here vs 50–90 °F; 1.92 TB vs 1.9 TB. The fan count, tray order and midplane labels are figure callouts, not body text. No GPU temperature limits appear anywhere in the guide.",
+        "zh": "2026-10-13 读取 HTML 页面和图（也检索了整本指南的 PDF）。风量一行没写对应的风扇转速，也没写方向；DGX H100 指南（S32）写的是“1105 CFM Front-to-Back @ 80% fan PWM”，所以 1,550 CFM 是否对应满转速不得而知。算式：1 立方英尺/分 = 0.0283168 m³ × 60 = 1.699 m³/h，1,550 CFM × 1.699 = 2,633 m³/h；14.3 kW × 3,412.14 BTU/h 每 kW = 48,794 BTU/h（一致）；142.4 kg ÷ 62 kg（S27）≈ 2.3 个成人。每 GPU 功率表只列了拔掉 1–4 根电源线的情况，6 个电源全在的情况没列；脚注说最大值以 nvidia-smi 报告为准。与产品页（S2）的出入：宽度这里最大 482.3 mm、那里 482.2 mm；这里 50–95 °F、那里 50–90 °F；系统盘 1.92 TB 对 1.9 TB。风扇数、托盘顺序和中板说明来自图注，不是正文。整本指南没有写 GPU 温度上限。"
+      }
+    },
+    {
+      "id": "S4",
+      "text": {
+        "en": "NVIDIA, DGX B200 Service Manual. “Front Fan Module Replacement”: the fan module has two fans, identified as SPD_FAN_SYSn_F and SPD_FAN_SYSn_R (n is the module number); if either fails the whole module is replaced; “Replace the old fan with the new one within 30 seconds to prevent overheating.” “U.2 NVMe Cache Drive Replacement”: the drives sit behind the front bezel and are swapped with the system powered off. “Motherboard Tray – Removal and Installation”: after labelling and unplugging the cables, ejection levers disengage the midplane connectors and the tray is pulled out of the chassis; DIMMs and the TPM are serviced this way.",
+        "zh": "NVIDIA《DGX B200 维修手册》。“前部风扇模块更换”：每个风扇模块里有两个风扇，编号 SPD_FAN_SYSn_F 和 SPD_FAN_SYSn_R（n 为模块号）；其中任何一个坏了都要整块换；原文要求“在 30 秒内换上新风扇，以免过热”。“U.2 NVMe 缓存盘更换”：硬盘在前面板后面，关机后更换。“主板托盘拆装”：给线缆贴好标签、拔掉后，扳开顶出杆脱开中板连接器，把托盘从机箱里整个抽出；换内存条、TPM 都要这样做。"
+      },
+      "url": "https://docs.nvidia.com/dgx/dgxb200-service-manual/front-fan-replacement.html",
+      "note": {
+        "en": "Read 2026-10-13, together with …/u2-nvme-cache-replacement.html and …/motherboard-tray-removal-install.html. The fan page's BMC screenshot (“b200-fan-speed.png”) shows example readings for modules 0–7 of 3,248–4,408 rpm, the _F fan always faster than the _R fan (for example 3,654 and 3,248 rpm; 4,408 and 3,886 rpm); the load and fan setting at that moment are not stated, so this is an example, not a rated speed. The module drawing shows two fans one behind the other in one housing; the manual does not say whether they turn in opposite directions, and gives no fan diameter. The motherboard-tray page shows the tray coming out of the rear (images of the rear cabling); there is no GPU-tray removal procedure in the manual (see S35).",
+        "zh": "2026-10-13 读取，同时读了 …/u2-nvme-cache-replacement.html 和 …/motherboard-tray-removal-install.html。风扇页的 BMC 截图（“b200-fan-speed.png”）给出 0–7 号模块的示例读数：每分钟 3,248–4,408 转，_F 总比 _R 快（如 3,654 与 3,248 转，4,408 与 3,886 转）；截图时的负载和风扇设定没写，只是示例，不是额定转速。模块图里两个风扇前后串在一个壳里；手册没说它们是否反向旋转，也没给风扇直径。主板托盘页的图显示托盘从机器后部抽出（配后部接线图）；手册里没有 GPU 托盘的拆装步骤（见 S35）。"
+      }
+    },
+    {
+      "id": "S5",
+      "text": {
+        "en": "NVIDIA, HGX platform page, HGX B200 column (NVIDIA's own figures): form factor 8 × NVIDIA Blackwell SXM; FP4 Tensor Core 144 PFLOPS sparse | 72 PFLOPS dense; FP8/FP6 Tensor Core 72 PFLOPS; INT8 Tensor Core 72 POPS; FP16/BF16 Tensor Core 36 PFLOPS; TF32 Tensor Core 18 PFLOPS; FP32 600 TFLOPS; FP64/FP64 Tensor Core 296 TFLOPS; total memory 1.4 TB; fifth-generation NVLink, NVLink 5 Switch; NVLink GPU-to-GPU bandwidth 1.8 TB/s; total NVLink bandwidth 14.4 TB/s; networking bandwidth 0.8 TB/s.",
+        "zh": "NVIDIA HGX 平台页，HGX B200 一栏（厂商自报）：外形为 8 个 Blackwell SXM 模块；FP4 Tensor Core 稀疏 144 PFLOPS、稠密 72 PFLOPS；FP8/FP6 Tensor Core 72 PFLOPS；INT8 Tensor Core 72 POPS；FP16/BF16 Tensor Core 36 PFLOPS；TF32 Tensor Core 18 PFLOPS；FP32 600 TFLOPS；FP64 296 TFLOPS；显存合计 1.4 TB；第 5 代 NVLink，NVLink 5 交换芯片；每块 GPU 之间 1.8 TB/s；NVLink 合计 14.4 TB/s；网络带宽 0.8 TB/s。"
+      },
+      "url": "https://www.nvidia.com/en-us/data-center/hgx/",
+      "note": {
+        "en": "Read 2026-10-13. Footnotes for this table: “1. Specification in Sparse | Dense”, “2. Specification in Sparse. Dense is ½ sparse spec shown.” — footnote 2 covers FP8, FP16/BF16 and TF32, so 36 PFLOPS FP16/BF16 and 18 PFLOPS TF32 are sparse figures (dense 18 and 9). The 0.8 TB/s networking figure carries no direction footnote in the B200 table; it equals 8 × 400 Gb/s = 3.2 Tb/s = 400 GB/s each way × 2 directions, which is our reading, not NVIDIA's wording. The same page now leads with HGX Rubin; the B200 column was read from the Blackwell table.",
+        "zh": "2026-10-13 读取。表格脚注：“1. Specification in Sparse | Dense”“2. Specification in Sparse. Dense is ½ sparse spec shown.”——脚注 2 适用于 FP8、FP16/BF16、TF32，所以 FP16/BF16 的 36 PFLOPS 和 TF32 的 18 PFLOPS 都是稀疏口径（稠密为 18 和 9）。B200 表里的网络带宽 0.8 TB/s 没有方向脚注；它等于 8 × 400 Gb/s = 3.2 Tb/s = 每个方向 400 GB/s，再乘以 2 个方向——这是我们的读法，不是 NVIDIA 原话。页面现在以 HGX Rubin 开头，B200 数据取自 Blackwell 那张表。"
+      }
+    },
+    {
+      "id": "S6",
+      "text": {
+        "en": "NVIDIA, Blackwell architecture page: “NVIDIA Blackwell-architecture GPUs pack 208 billion transistors and are manufactured using a custom-built TSMC 4NP process. All NVIDIA Blackwell products feature two reticle-limited dies connected by a 10 terabytes per second (TB/s) chip-to-chip interconnect in a unified single GPU.” Fifth-generation NVLink “can scale up to 576 GPUs”; the NVLink Switch chip enables 130 TB/s of GPU bandwidth in one 72-GPU NVLink domain (NVL72).",
+        "zh": "NVIDIA Blackwell 架构页：Blackwell 架构的 GPU 有 2080 亿个晶体管，用台积电为 NVIDIA 定制的 4NP 工艺制造；所有 Blackwell 产品都由两块达到光罩极限尺寸的裸片组成，片间互连 10 TB/s，对外表现为一块 GPU。第 5 代 NVLink 最多可连 576 块 GPU；NVLink 交换芯片让一个 72 GPU 的 NVLink 域（NVL72）获得 130 TB/s 的 GPU 带宽。"
+      },
+      "url": "https://www.nvidia.com/en-us/data-center/technologies/blackwell-architecture/",
+      "note": {
+        "en": "Read 2026-10-13. NVIDIA does not give a per-die transistor count on this page; 104 billion per die is AnandTech's figure (S8), i.e. 208 ÷ 2.",
+        "zh": "2026-10-13 读取。本页没有给每块裸片的晶体管数；每块 1040 亿出自 AnandTech（S8），即 2080 亿 ÷ 2。"
+      }
+    },
+    {
+      "id": "S7",
+      "text": {
+        "en": "NVIDIA, NVLink and NVLink Switch page, specifications table: fifth generation (NVIDIA Blackwell) — NVLink bandwidth per GPU 1,800 GB/s, maximum 18 links per GPU; NVLink 5 Switch — GPU domains of 8 or 72, GPU-to-GPU bandwidth 1,800 GB/s, total aggregate bandwidth 130 TB/s (NVL72). Fourth generation (Hopper): 900 GB/s, 18 links, total aggregate 7.2 TB/s for its 8-GPU domain.",
+        "zh": "NVIDIA NVLink 与 NVLink 交换芯片页规格表：第 5 代（Blackwell）——每块 GPU 的 NVLink 带宽 1,800 GB/s，每块 GPU 最多 18 条链路；NVLink 5 交换芯片——GPU 域为 8 块或 72 块，GPU 之间 1,800 GB/s，合计 130 TB/s（NVL72）。第 4 代（Hopper）：900 GB/s、18 条链路，8 GPU 域合计 7.2 TB/s。"
+      },
+      "url": "https://www.nvidia.com/en-us/data-center/nvlink/",
+      "note": {
+        "en": "Read 2026-10-13; table marked “Preliminary specifications; may be subject to change”. 1,800 GB/s ÷ 18 links = 100 GB/s per link (division; the Hot Chips slides, S34, state “18 NVLinks | 100GB/s each”). 8 × 1.8 TB/s = 14.4 TB/s per DGX B200 (S2, S5). The page no longer mentions 576 GPUs; cite S6 or S10 for that. The 7.2 TB/s in this table is the Hopper-generation switch total, not the per-chip Blackwell figure in S34 — do not mix them up.",
+        "zh": "2026-10-13 读取；表格注明“初步规格，可能变动”。1,800 GB/s ÷ 18 条 = 每条 100 GB/s（除法；Hot Chips 幻灯片 S34 原文就是“18 NVLinks | 100GB/s each”）。8 × 1.8 TB/s = 每台 DGX B200 14.4 TB/s（S2、S5）。本页已不再提 576 块 GPU，这一点引 S6 或 S10。表里的 7.2 TB/s 是 Hopper 一代交换芯片的合计，不是 S34 里 Blackwell 单颗交换芯片的数，不要混用。"
+      }
+    },
+    {
+      "id": "S8",
+      "text": {
+        "en": "Ryan Smith, “NVIDIA Blackwell Architecture and B200/B100 Accelerators Announced: Going Bigger With Smaller Data”, AnandTech, 18 March 2024: transistor count 208 billion, “or 104B transistors per die”; two “reticle-sized” dies, likely over 800 mm² each (NVIDIA did not disclose die size); NV-HBI link between dies 10 TB/s; each die paired with 4 stacks of HBM3E, 8 stacks in total, 8192-bit bus; up to 192 GB (24 GB per stack); 8 TB/s aggregate, 1 TB/s per stack, 8 Gb/s per pin; B200 is a 1,000 W module (H100 700 W); TSMC 4NP; NVLink 5, 18 links, 1,800 GB/s.",
+        "zh": "Ryan Smith，《NVIDIA Blackwell 架构与 B200/B100 加速器发布》，AnandTech，2024-03-18：晶体管 2080 亿，“即每块裸片 1040 亿”；两块“光罩尺寸”的裸片，估计每块超过 800 mm²（NVIDIA 未公布面积）；裸片之间的 NV-HBI 互连 10 TB/s；每块裸片配 4 叠 HBM3E，共 8 叠，总线 8192 位；最多 192 GB（每叠 24 GB）；合计 8 TB/s，每叠 1 TB/s，每针 8 Gb/s；B200 模块功耗 1,000 W（H100 为 700 W）；台积电 4NP；NVLink 5，18 条链路，1,800 GB/s。"
+      },
+      "url": "https://web.archive.org/web/20250107093638/https://www.anandtech.com/show/21310/nvidia-blackwell-architecture-and-b200b100-accelerators-announced-going-bigger-with-smaller-data",
+      "note": {
+        "en": "Read 2026-10-13 via the Internet Archive copy (7 January 2025): the live AnandTech address now shows a bot check and the long URL redirects to an unrelated Tom's Hardware article. Secondary press report of NVIDIA's briefing. 192 GB is the chip's physical memory; the DGX B200 exposes 180 GB per GPU (1,440 ÷ 8, S2/S3) and NVIDIA does not explain the difference — keep both numbers side by side without a reason.",
+        "zh": "2026-10-13 通过互联网档案馆存档（2025-01-07）读取：AnandTech 原址现在弹出机器人检查，长链接还会跳到一篇无关的 Tom's Hardware 文章。属于对 NVIDIA 简报的二手报道。192 GB 是芯片上物理装的显存；DGX B200 每块 GPU 开放 180 GB（1,440 ÷ 8，S2、S3），NVIDIA 没说明差别的原因——两个数并列，不写原因。"
+      }
+    },
+    {
+      "id": "S9",
+      "text": {
+        "en": "Jarred Walton, “Nvidia's next-gen AI GPU is 4X faster than Hopper: Blackwell B200 GPU delivers up to 20 petaflops of compute…”, Tom's Hardware, 18 March 2024: B200 has 208 billion transistors in two tightly coupled dies joined by a 10 TB/s NV-HBI link; “Each die has four HBM3e stacks of 24GB each, with 1 TB/s of bandwidth each on a 1024-bit interface”; 192 GB (8 × 24 GB) and 8 TB/s per GPU; GB200 NVL72 has nine 1U liquid-cooled NVLink switch trays with two switches each.",
+        "zh": "Jarred Walton，《NVIDIA 下一代 AI GPU 比 Hopper 快 4 倍：Blackwell B200……》，Tom's Hardware，2024-03-18：B200 有 2080 亿个晶体管，分在两块紧密相连的裸片上，裸片之间 NV-HBI 互连 10 TB/s；“每块裸片 4 叠 HBM3e，每叠 24 GB、带宽 1 TB/s、接口 1024 位”；每块 GPU 192 GB（8 × 24 GB）、8 TB/s；GB200 NVL72 有 9 个 1U 液冷 NVLink 交换托盘，每个托盘 2 颗交换芯片。"
+      },
+      "url": "https://www.tomshardware.com/pc-components/gpus/nvidias-next-gen-ai-gpu-revealed-blackwell-b200-gpu-delivers-up-to-20-petaflops-of-compute-and-massive-improvements-over-hopper-h100",
+      "note": {
+        "en": "Read 2026-10-13. Secondary press report. The article says how many stacks each die has but not along which edges they sit; the placement (two stacks above and two below each die) is read from NVIDIA's package photo in the Hot Chips 2024 slides (S34).",
+        "zh": "2026-10-13 读取。二手报道。文章写了每块裸片几叠，但没写排在哪条边；排布（每块裸片上下各两叠）读自 NVIDIA 在 Hot Chips 2024 幻灯片里的封装照片（S34）。"
+      }
+    },
+    {
+      "id": "S10",
+      "text": {
+        "en": "NVIDIA press release, “NVIDIA Blackwell Platform Arrives to Power a New Era of Computing”, GTC, 18 March 2024: Blackwell GPUs are “packed with 208 billion transistors”, made on a custom-built TSMC 4NP process, with “two-reticle limit GPU dies connected by 10 TB/second chip-to-chip link into a single, unified GPU”; fifth-generation NVLink gives 1.8 TB/s bidirectional per GPU among up to 576 GPUs; GB200 NVL72 is a liquid-cooled rack system with 72 Blackwell GPUs and 36 Grace CPUs; HGX B200 is a server board linking eight B200 GPUs through NVLink.",
+        "zh": "NVIDIA 新闻稿《NVIDIA Blackwell 平台问世，开启计算新时代》，GTC，2024-03-18：Blackwell GPU 有 2080 亿个晶体管，用台积电定制 4NP 工艺制造，两块光罩极限尺寸的裸片以 10 TB/s 的片间互连组成一块 GPU；第 5 代 NVLink 每块 GPU 双向 1.8 TB/s，最多可连 576 块 GPU；GB200 NVL72 是液冷整柜系统，含 72 块 Blackwell GPU 和 36 颗 Grace CPU；HGX B200 是用 NVLink 连起 8 块 B200 的服务器主板。"
+      },
+      "url": "https://nvidianews.nvidia.com/news/nvidia-blackwell-platform-arrives-to-power-a-new-era-of-computing",
+      "note": {
+        "en": "Read 2026-10-13 on NVIDIA's newsroom; the investor-site copy listed in the spec (investor.nvidia.com/…/NVIDIA-Blackwell-Platform-Arrives-to-Power-a-New-Era-of-Computing/) refused automated access (HTTP 403), same release text. The release does not mention DGX B200 by name.",
+        "zh": "2026-10-13 在 NVIDIA 新闻中心读取；spec 原列的投资者网站版本（investor.nvidia.com/…）拒绝自动访问（HTTP 403），内容相同。新闻稿没有点名 DGX B200。"
+      }
+    },
+    {
+      "id": "S11",
+      "text": {
+        "en": "Intel, ARK product specifications, Intel Xeon Platinum 8570 (5th Gen Xeon Scalable, formerly Emerald Rapids): launched Q4 2023; Intel 7 process; 56 cores, 112 threads; base 2.1 GHz, max turbo 4 GHz; 300 MB cache; TDP 350 W; DDR5 at 5,600 MT/s (1 DIMM per channel), 8 memory channels, up to 4 TB; PCI Express 5.0, 80 lanes; socket FCLGA4677; package 77.5 mm × 56.5 mm; 2-socket scalability.",
+        "zh": "英特尔 ARK 产品规格，至强铂金 8570（第 5 代至强可扩展处理器，代号 Emerald Rapids）：2023 年第 4 季度发布；Intel 7 工艺；56 核 112 线程；基频 2.1 GHz，最高睿频 4 GHz；缓存 300 MB；热设计功耗 350 W；DDR5 5,600 MT/s（每通道 1 根），8 个内存通道，最多 4 TB；PCIe 5.0，80 条通道；插座 FCLGA4677；封装 77.5 mm × 56.5 mm；最多 2 路。"
+      },
+      "url": "https://www.intel.com/content/www/us/en/products/sku/237264/intel-xeon-platinum-8570-processor-300m-cache-2-10-ghz/specifications.html",
+      "note": {
+        "en": "Read 2026-10-13 with a web-reader tool (direct download returned “Access Denied”). The 5,600 MT/s rating is for one DIMM per channel. A DGX B200 has 32 DIMMs on 2 CPUs × 8 channels = 2 DIMMs per channel, and neither ARK nor NVIDIA's DGX B200 pages state the memory speed in that configuration, so the text should not give one.",
+        "zh": "2026-10-13 用网页读取工具读取（直接下载被拒绝）。5,600 MT/s 是每通道插 1 根内存的额定值。DGX B200 有 32 根内存、2 颗 CPU × 8 个通道，即每通道 2 根；ARK 和 NVIDIA 的 DGX B200 页面都没写这种配法下的实际频率，正文不写频率。"
+      }
+    },
+    {
+      "id": "S12",
+      "text": {
+        "en": "NVIDIA, ConnectX-7 InfiniBand and Ethernet adapter cards user manual, ordering table: e.g. MCX75310AAS-NEAT, half-height half-length card (68.90 × 167.65 mm), InfiniBand NDR 400 Gb/s (default) or 400GbE, single-port OSFP, PCIe x16 Gen 4.0/5.0 at 16/32 GT/s.",
+        "zh": "NVIDIA《ConnectX-7 InfiniBand 与以太网网卡用户手册》订货表：例如 MCX75310AAS-NEAT，半高半长卡（68.90 × 167.65 mm），InfiniBand NDR 400 Gb/s（默认）或 400GbE，单口 OSFP，PCIe x16 第 4 / 5 代（16 / 32 GT/s）。"
+      },
+      "url": "https://networking-docs.nvidia.com/connectx7hw",
+      "note": {
+        "en": "Read 2026-10-13. These are stand-alone card SKUs. In the DGX B200 the ConnectX-7 devices sit four to a network module (S3: “Consolidates four ConnectX-7 networking cards into a single device”), so the card dimensions above do not describe the DGX parts; only the 400 Gb/s and PCIe 5.0 x16 figures carry over.",
+        "zh": "2026-10-13 读取。这些是单卡型号。DGX B200 里的 ConnectX-7 是 4 个一组装在网络模块上（S3：“把 4 块 ConnectX-7 网卡合成一个设备”），上面的卡尺寸不适用于 DGX；能沿用的只有 400 Gb/s 和 PCIe 5.0 x16。"
+      }
+    },
+    {
+      "id": "S13",
+      "text": {
+        "en": "NVIDIA, BlueField-3 DPU user manual (networking docs), ordering table and introduction: the dual-port QSFP112 400 Gb/s model (B3240, NDR 400 Gb/s InfiniBand or 400GbE, PCIe Gen 5.0 x16, 32 GB on-board DDR5) is “P-Series / 16 Arm-Cores”; BlueField-3 integrates 8 or 16 Armv8.2+ A78 (Hercules) cores depending on model. NVIDIA's DPU product page: “a 400 Gb/s infrastructure compute platform”.",
+        "zh": "NVIDIA《BlueField-3 DPU 用户手册》订货表与简介：双口 QSFP112、400 Gb/s 的型号（B3240，InfiniBand NDR 400 Gb/s 或 400GbE，PCIe 5.0 x16，板载 32 GB DDR5）标为“P 系列 / 16 个 Arm 核”；BlueField-3 按型号集成 8 个或 16 个 Armv8.2+ A78（Hercules）核。NVIDIA DPU 产品页称它是“400 Gb/s 的基础设施计算平台”。"
+      },
+      "url": "https://networking-docs.nvidia.com/bf3dpu/",
+      "note": {
+        "en": "Read 2026-10-13, together with networking-docs.nvidia.com/bf3dpu/introduction and the product page https://www.nvidia.com/en-us/networking/products/data-processing-unit/. NVIDIA's DGX B200 pages say “2x dual-port QSFP112 BlueField-3 DPU, up to 400 Gb/s” but do not name the part number; in the ordering table every dual-port QSFP112 400 Gb/s DPU is a B3240 with 16 Arm cores, so “16 Arm cores” is an inference. The DGX ships the DPUs in NIC mode by default (S3).",
+        "zh": "2026-10-13 读取，同时读了 networking-docs.nvidia.com/bf3dpu/introduction 和产品页 https://www.nvidia.com/en-us/networking/products/data-processing-unit/。NVIDIA 的 DGX B200 页面只写“2 块双口 QSFP112 BlueField-3 DPU，最高 400 Gb/s”，没写型号；订货表里所有双口 QSFP112、400 Gb/s 的 DPU 都是 B3240、16 个 Arm 核，所以“16 个 Arm 核”是推断。DGX 出厂时 DPU 默认工作在网卡模式（S3）。"
+      }
+    },
+    {
+      "id": "S14",
+      "text": {
+        "en": "PCI-SIG, “The Evolution of the PCI Express Specification: On its Sixth Generation, Third Decade and Still Going Strong” (blog, Figure 1): PCIe 5.0 runs at 32.0 GT/s with 128b/130b encoding, x16 bandwidth per direction 504 Gb/s after encoding overhead (2019); PCIe 4.0 16.0 GT/s, 252 Gb/s; PCIe 6.0 64.0 GT/s, 1,024 Gb/s.",
+        "zh": "PCI-SIG 博客《PCI Express 规范的演进：第六代、第三个十年》图 1：PCIe 5.0 速率 32.0 GT/s，128b/130b 编码，扣除编码开销后 x16 每个方向 504 Gb/s（2019 年）；PCIe 4.0 为 16.0 GT/s、252 Gb/s；PCIe 6.0 为 64.0 GT/s、1,024 Gb/s。"
+      },
+      "url": "https://web.archive.org/web/20220112020744/https://pcisig.com/blog/evolution-pci-express-specification-its-sixth-generation-third-decade-and-still-going-strong",
+      "note": {
+        "en": "Read 2026-10-13 via the Internet Archive copy (12 January 2022); pcisig.com refuses automated access (HTTP 403). The values are in the figure's table (“x16 B/W per dirn”, “bandwidth after encoding overhead”). Arithmetic: 504 Gb/s ÷ 8 = 63 GB/s per direction, about 126 GB/s both ways; the spec's “about 64 / 128 GB/s” is the rate before encoding (32 GT/s × 16 lanes ÷ 8), so use “about 63 GB/s each way”. NVLink 1.8 TB/s ÷ 0.126 TB/s ≈ 14 (÷ 0.128 also ≈ 14), so the “about 14 times” comparison stands. The conversion 1 byte = 8 bits is the standard definition used throughout this topic.",
+        "zh": "2026-10-13 通过互联网档案馆存档（2022-01-12）读取；pcisig.com 拒绝自动访问（HTTP 403）。数值在图中的表格里（“x16 B/W per dirn”“扣除编码开销后的带宽”）。算式：504 Gb/s ÷ 8 = 每个方向 63 GB/s，双向约 126 GB/s；spec 写的“约 64 / 128 GB/s”是编码前的原始速率（32 GT/s × 16 条 ÷ 8），宜改为“每个方向约 63 GB/s”。NVLink 1.8 TB/s ÷ 0.126 TB/s ≈ 14（÷ 0.128 也约为 14），“约 14 倍”的比较不变。 本主题通篇使用 1 字节 = 8 比特这一标准定义。"
+      }
+    },
+    {
+      "id": "S15",
+      "text": {
+        "en": "Patrick Kennedy, “ASRock Rack 8U8X-GNR2 SYN B200 Review: NVIDIA HGX B200 8-GPU Server”, ServeTheHome, 28 October 2025, page 2: the HGX H200 generation used a 4U air-cooled GPU tray, the HGX B200 generation a 6U tray; the GPUs are labelled “NVIDIA HGX B200 SXM6 180GB HBM3e”; the heatsinks made the tray heavy enough that two people were needed to move it; in this ASRock chassis the HGX tray slides out of the front on rails.",
+        "zh": "Patrick Kennedy，《ASRock Rack 8U8X-GNR2 SYN B200 评测：NVIDIA HGX B200 8 卡服务器》，ServeTheHome，2025-10-28，第 2 页：HGX H200 一代的风冷 GPU 托盘高 4U，HGX B200 一代为 6U；GPU 标签写着“NVIDIA HGX B200 SXM6 180GB HBM3e”；散热器很大，托盘重到需要两个人搬；在这台 ASRock 机箱里，HGX 托盘沿导轨从前面抽出。"
+      },
+      "url": "https://www.servethehome.com/asrock-rack-8u8x-gnr2-syn-b200-review-nvidia-hgx-b200-8-gpu-server-intel-xeon/2/",
+      "note": {
+        "en": "Read 2026-10-13. Third-party review of a different (ASRock) server built on the same HGX B200 board. “SXM6” appears only here; NVIDIA's pages say “Blackwell SXM” (S5). The front-pull tray is ASRock's design and must not be transferred to the DGX B200, whose GPU tray is shown on the rear panel (S3, S35).",
+        "zh": "2026-10-13 读取。第三方评测，对象是用同一块 HGX B200 主板的另一台（ASRock）服务器。“SXM6”只见于此处；NVIDIA 页面写的是“Blackwell SXM”（S5）。从前面抽托盘是 ASRock 的设计，不能套到 DGX B200 上——DGX 的 GPU 托盘画在后面板上（S3、S35）。"
+      }
+    },
+    {
+      "id": "S16",
+      "text": {
+        "en": "Wikimedia Commons, “File:Nvidia DGX-B200-HGX.jpg”, “Nvidia DGX B200 8-way GPU Board (HGX)”, own work by Pokiiri, 7 September 2025, 2,977 × 3,021 px, licensed CC BY-SA 4.0.",
+        "zh": "维基共享资源“File:Nvidia DGX-B200-HGX.jpg”，“Nvidia DGX B200 8 路 GPU 主板（HGX）”，Pokiiri 自摄，2025-09-07，2,977 × 3,021 像素，CC BY-SA 4.0 许可。"
+      },
+      "url": "https://commons.wikimedia.org/wiki/File:Nvidia_DGX-B200-HGX.jpg",
+      "note": {
+        "en": "Read 2026-10-13. Used only as a modelling reference (not published in the topic); if a derivative is ever published, attribute Pokiiri and keep CC BY-SA 4.0.",
+        "zh": "2026-10-13 读取。只作建模参考，不在主题里发布；若发布衍生图，须署名 Pokiiri 并沿用 CC BY-SA 4.0。"
+      }
+    },
+    {
+      "id": "S17",
+      "text": {
+        "en": "NVIDIA, “NVIDIA DGX SuperPOD: Next Generation Scalable Infrastructure for AI Leadership — Reference Architecture Featuring NVIDIA DGX B200”, RA-11334-001, 24 April 2025: built from scalable units (SU) of 32 DGX B200 systems; racks are listed as a “Single rack that can support two DGX B200 systems per rack”; in the example single-SU layout (16 racks, two DGX B200 each) “power consumption per rack exceeds 25 kW”; the RA focuses on 4 SUs (128 nodes; 127 in the bill of materials because one DGX is removed for UFM connectivity) and can scale “up to and beyond 64 SU with 2000+ DGX B200 nodes” (table: 64 SU, 2,048 nodes, 16,384 GPUs); compute fabric NVIDIA Quantum QM9700 NDR 400 Gb/s InfiniBand, “Rail-optimized, non-blocking, full fat-tree network with eight NDR400 connections per system”; NDR “has a peak speed of 400 Gbps per direction”; network figure shows “the ports on the back of the DGX B200 CPU tray”.",
+        "zh": "NVIDIA《DGX SuperPOD 参考架构（DGX B200）》RA-11334-001，2025-04-24：以可扩展单元（SU）为积木，每个 SU 含 32 台 DGX B200；机柜一项写明“单个机柜可放两台 DGX B200”；单个 SU 的示例布局（16 个机柜，每柜两台）中“每柜功耗超过 25 kW”；文档以 4 个 SU 为例（128 台；物料表为 127 台，因为要腾出一台的位置接 UFM），可扩展到“64 个 SU 以上、2,000 多台”（表中 64 个 SU = 2,048 台、16,384 块 GPU）；计算网络用 Quantum QM9700 NDR 400 Gb/s InfiniBand 交换机，“按轨优化、无阻塞的完整胖树，每台系统 8 条 NDR400 连接”；NDR“每个方向峰值 400 Gb/s”；网络端口图标题为“DGX B200 CPU 托盘背面的端口”。"
+      },
+      "url": "https://docs.nvidia.com/dgx-superpod/reference-architecture-scalable-infrastructure-b200/latest/dgx-superpod-architecture.html",
+      "note": {
+        "en": "Read 2026-10-13: the architecture page, abstract.html, dgx-superpod-components.html, components.html, network-fabrics.html in the same folder, the single-SU rack figure, and the cover of RA11334001-DSPB200-ReferenceArch.pdf (dated Apr 24, 2025). Note a naming conflict: this RA's component table says “fourth-generation NVIDIA NVSwitch”, as do the Hot Chips slides (S34, “4th Generation NVLink Switch”), while the DGX B200 user guide (S3) says “5th generation NVLink switches” and the NVLink page (S7) “NVLink 5 Switch”; the text should avoid giving the switch a generation number. 8 × 400 Gb/s = 3.2 Tb/s = 400 GB/s per direction per DGX.",
+        "zh": "2026-10-13 读取：架构页及同目录的 abstract.html、dgx-superpod-components.html、components.html、network-fabrics.html，单个 SU 机柜布局图，以及 PDF RA11334001-DSPB200-ReferenceArch.pdf 封面（日期 2025-04-24）。代际叫法有冲突：本文件部件表写“第四代 NVSwitch”，Hot Chips 幻灯片（S34）也写“第 4 代 NVLink Switch”；DGX B200 用户指南（S3）写“第 5 代 NVLink 交换芯片”，NVLink 页（S7）写“NVLink 5 Switch”；正文不要给交换芯片标代数。每台 DGX：8 × 400 Gb/s = 3.2 Tb/s = 每个方向 400 GB/s。"
+      }
+    },
+    {
+      "id": "S18",
+      "text": {
+        "en": "NVIDIA, GB200 NVL72 product page: connects 36 Grace CPUs and 72 Blackwell GPUs in a rack-scale, liquid-cooled design with a 72-GPU NVLink domain; NVLink Switch System provides 130 TB/s of GPU communications; specs table: 13.4 TB HBM3E at 576 TB/s, NVLink bandwidth 130 TB/s, 72 Arm Neoverse V2 cores, 17 TB LPDDR5X; FP4 1,440 PFLOPS sparse (NVIDIA's figure).",
+        "zh": "NVIDIA GB200 NVL72 产品页：一个液冷整柜系统，把 36 颗 Grace CPU 和 72 块 Blackwell GPU 连成一个 72 GPU 的 NVLink 域；NVLink 交换系统提供 130 TB/s 的 GPU 间通信；规格表：HBM3E 13.4 TB、576 TB/s，NVLink 带宽 130 TB/s，72 个 Arm Neoverse V2 核，LPDDR5X 17 TB；FP4 稀疏 1,440 PFLOPS（厂商自报）。"
+      },
+      "url": "https://www.nvidia.com/en-us/data-center/gb200-nvl72/",
+      "note": {
+        "en": "Read 2026-10-13. 13.4 TB ÷ 72 ≈ 186 GB per GPU, which differs from the 180 GB per GPU of the DGX B200 (S2) — do not compare per-GPU memory across the two systems.",
+        "zh": "2026-10-13 读取。13.4 TB ÷ 72 ≈ 每块 186 GB，和 DGX B200 每块 180 GB（S2）不同——两种系统之间不要比每块显存。"
+      }
+    },
+    {
+      "id": "S19",
+      "text": {
+        "en": "NVIDIA Technical Blog, “NVIDIA Contributes NVIDIA GB200 NVL72 Designs to Open Compute Project”, 15 October 2024: the rack holds 18 compute trays, nine switch trays and four NVLink cartridges with over 5,000 copper cables (130 TB/s all-to-all, 260 TB/s AllReduce); 1RU liquid-cooled compute and switch trays; bus bar for 1,400 A; “To efficiently manage the 120 KW cooling capacity required for the rack, we've implemented direct liquid cooling techniques.”",
+        "zh": "NVIDIA 技术博客《NVIDIA 向开放计算项目贡献 GB200 NVL72 设计》，2024-10-15：一个机柜装 18 个计算托盘、9 个交换托盘和 4 个 NVLink 线缆盒，线缆盒里有 5,000 多根铜缆（全互连 130 TB/s，AllReduce 260 TB/s）；计算和交换托盘都是 1U 液冷；母排可承载 1,400 A；“为高效处理整柜所需的 120 kW 散热量，采用了直接液冷”。"
+      },
+      "url": "https://developer.nvidia.com/blog/nvidia-contributes-nvidia-gb200-nvl72-designs-to-open-compute-project",
+      "note": {
+        "en": "Read 2026-10-13. 120 kW is a cooling capacity requirement stated by NVIDIA, not a measured power draw; write “about 120 kW of heat to remove”. 120 ÷ 14.3 ≈ 8 DGX B200 at their maximum.",
+        "zh": "2026-10-13 读取。120 kW 是 NVIDIA 给的整柜散热需求，不是实测功耗；正文写“需要带走约 120 kW 的热”。120 ÷ 14.3 ≈ 8 台满功率的 DGX B200。"
+      }
+    },
+    {
+      "id": "S20",
+      "text": {
+        "en": "NVIDIA, DGX GB Rack Scale Systems User Guide, “Hardware”: an NVL72 rack contains 18 × 1RU compute trays, each with 2 Grace CPUs and 4 Blackwell GPUs, 9 × 1RU NVLink switch trays, 2 top-of-rack management switches and power shelves; GPUs are connected through the NVLink passive copper cable cartridge backplane; compute trays are liquid-cooled through manifolds and cold plates.",
+        "zh": "NVIDIA《DGX GB 整柜系统用户指南》“硬件”：一个 NVL72 机柜有 18 个 1U 计算托盘（每个 2 颗 Grace CPU、4 块 Blackwell GPU）、9 个 1U NVLink 交换托盘、2 台柜顶管理交换机和若干电源架；GPU 经由无源铜缆盒背板互连；计算托盘靠沿机柜上下走的液冷歧管和冷板散热。"
+      },
+      "url": "https://docs.nvidia.com/dgx/dgxgb200-user-guide/hardware.html",
+      "note": {
+        "en": "Read 2026-10-13; the page now covers both GB200 and GB300 racks under the title “DGX GB Rack Scale Systems User Guide”. 18 × 4 = 72 GPUs; 18 × 2 = 36 Grace CPUs.",
+        "zh": "2026-10-13 读取；该页现在以“DGX GB 整柜系统用户指南”为题，同时介绍 GB200 和 GB300 机柜。18 × 4 = 72 块 GPU；18 × 2 = 36 颗 Grace CPU。"
+      }
+    },
+    {
+      "id": "S21",
+      "text": {
+        "en": "IEA (2025), Energy and AI, Executive summary, IEA, Paris, licence CC BY 4.0: data centres used about 1.5 % of the world's electricity in 2024, 415 TWh; their consumption is set to more than double to around 945 TWh by 2030, slightly more than Japan's total electricity use today; “A typical AI-focused data centre consumes as much electricity as 100 000 households, but the largest ones under construction today will consume 20 times as much”; global data-centre electricity use has grown about 12 % a year since 2017.",
+        "zh": "国际能源署（IEA）2025 年报告《能源与人工智能》执行摘要（CC BY 4.0）：2024 年数据中心用电约 415 TWh，约占全球用电的 1.5 %；预计到 2030 年翻一番多，约 945 TWh，略多于日本目前的全国用电；一个典型的以 AI 为主的数据中心，用电相当于 10 万户家庭，在建的最大型数据中心是它的 20 倍；2017 年以来全球数据中心用电每年增长约 12 %。"
+      },
+      "url": "https://www.iea.org/reports/energy-and-ai/executive-summary",
+      "note": {
+        "en": "Read 2026-10-13. Institutional estimate and projection (base case); the 2030 figure is a projection, write “expected”.",
+        "zh": "2026-10-13 读取。机构估算与基准情景预测；2030 年的数是预测，正文写“预计”。"
+      }
+    },
+    {
+      "id": "S22",
+      "text": {
+        "en": "Meta, Llama 3.1 model card (llama-models repository, MODEL_CARD.md): Llama 3.1 405B training used 30.84 M GPU hours on H100-80GB hardware (TDP 700 W); training location-based greenhouse-gas emissions 8,930 t CO₂eq, market-based 0 t; all three Llama 3.1 models together 39.3 M GPU hours and 11,390 t CO₂eq location-based; pretrained on about 15 trillion tokens of publicly available data.",
+        "zh": "Meta《Llama 3.1 模型卡》（llama-models 仓库 MODEL_CARD.md）：Llama 3.1 405B 训练用了 3084 万 GPU 小时，硬件为 H100-80GB（热设计功耗 700 W）；按所在地电网计算的训练温室气体排放 8,930 吨二氧化碳当量，按市场法（购买绿电）为 0；三个 Llama 3.1 模型合计 3930 万 GPU 小时、所在地口径 11,390 吨；预训练数据约 15 万亿个 token。"
+      },
+      "url": "https://github.com/meta-llama/llama-models/blob/main/models/llama3_1/MODEL_CARD.md",
+      "note": {
+        "en": "Read 2026-10-13 (raw file from the same repository). Arithmetic in the topic: 30.84 M GPU hours ÷ 16,384 GPUs ≈ 1,882 h ≈ 78 days, assuming all GPUs ran continuously; S23 says “up to 16K”, and ÷ 16,000 gives ≈ 1,928 h ≈ 80 days, so write “roughly 80 days” with the assumption stated. The paper (S23) gives 15.6 trillion text tokens for pre-training; the model card rounds to about 15 trillion.",
+        "zh": "2026-10-13 读取（同仓库的原始文件）。主题里的算术：3084 万 GPU 小时 ÷ 16,384 块 ≈ 1,882 小时 ≈ 78 天，前提是所有 GPU 一直不停地跑；S23 写的是“最多约 16K 块”，按 16,000 块算 ≈ 1,928 小时 ≈ 80 天，正文写“约 80 天”并说明前提。论文（S23）给的预训练量是 15.6 万亿个文本 token，模型卡取整为约 15 万亿。"
+      }
+    },
+    {
+      "id": "S23",
+      "text": {
+        "en": "Llama Team, AI @ Meta, “The Llama 3 Herd of Models”, arXiv:2407.21783 (v3, 23 November 2024): “Llama 3 405B is trained on up to 16K H100 GPUs, each running at 700W TDP with 80GB HBM3”, on Meta's Grand Teton servers with eight GPUs and two CPUs each, the eight GPUs linked by NVLink; the 405B model was pre-trained on 15.6T text tokens using 3.8 × 10²⁵ FLOPs; 419 unexpected interruptions in a 54-day pre-training period, about 78 % attributed to hardware.",
+        "zh": "Llama 团队（Meta AI），《The Llama 3 Herd of Models》，arXiv:2407.21783（第 3 版，2024-11-23）：Llama 3 405B 最多用约 16K 块 H100 训练，每块热设计功耗 700 W、显存 80 GB HBM3；服务器为 Meta 的 Grand Teton，每台 8 块 GPU、2 颗 CPU，8 块 GPU 之间用 NVLink 相连；405B 模型预训练 15.6 万亿个文本 token，计算量 3.8 × 10²⁵ 次浮点运算；在 54 天的预训练期间发生 419 次意外中断，约 78 % 与硬件有关。"
+      },
+      "url": "https://arxiv.org/abs/2407.21783",
+      "note": {
+        "en": "Read 2026-10-13: abstract page and the full PDF (v3, §3.3.1 “Compute” and Table 5). “16K” is the paper's wording; it does not say 16,384.",
+        "zh": "2026-10-13 读取摘要页和全文 PDF（第 3 版，§3.3.1“Compute”与表 5）。“16K”是论文原词，没写 16,384。"
+      }
+    },
+    {
+      "id": "S24",
+      "text": {
+        "en": "Infocomm Media Development Authority (IMDA), factsheet “Charting green growth pathways at scale for data centres in Singapore”, 30 May 2024: the Green Data Centre Roadmap “aims to provide at least 300 megawatts (MW) of additional capacity in the near term, with much more through green energy deployments”; data centres can save 2 % to 5 % of energy for every 1 °C increase in operating temperature.",
+        "zh": "新加坡资讯通信媒体发展局（IMDA）情况说明《为新加坡数据中心规划大规模绿色增长路径》，2024-05-30：《绿色数据中心路线图》的目标是近期至少再提供 300 MW 的数据中心容量，用绿色能源还可以更多；数据中心运行温度每提高 1 °C，可省 2–5 % 的能源。"
+      },
+      "url": "https://www.imda.gov.sg/resources/press-releases-factsheets-and-speeches/factsheets/2024/charting-green-growth-for-data-centres-in-sg",
+      "note": {
+        "en": "Read 2026-10-13 (first-hand government page; also read IMDA's Green DC Roadmap page, imda.gov.sg/how-we-can-help/green-dc-roadmap, which repeats the 300 MW aim, and the secondary Mayer Brown summary of 22 August 2024 cited in the spec, which agrees). Neither IMDA page gives data centres' share of Singapore's electricity; that share comes from S36 and is a 2020 figure.",
+        "zh": "2026-10-13 读取（政府一手页面；另读了 IMDA 路线图页面 imda.gov.sg/how-we-can-help/green-dc-roadmap，同样写 300 MW，以及 spec 列的二手来源 Mayer Brown 2024-08-22 解读，说法一致）。两个 IMDA 页面都没给数据中心占新加坡用电的比例；比例见 S36，是 2020 年的数。"
+      }
+    },
+    {
+      "id": "S25",
+      "text": {
+        "en": "Wikipedia, “Rack unit” and “19-inch rack”: a rack unit (U) is 1¾ in (44.45 mm), based on the EIA-310 rack standard (adopted internationally as IEC 60297); front panels are 1/32 in (0.79 mm) shorter than the full multiple, so h = 44.45 n − 0.79 mm; a 19-inch rack panel is 482.6 mm wide including the mounting ears.",
+        "zh": "维基百科“机架单位”与“19 英寸机架”条目：1 个机架单位（U）= 1¾ 英寸（44.45 mm），出自 EIA-310 机柜标准（国际上对应 IEC 60297）；设备面板比整数倍略矮 1/32 英寸（0.79 mm），即面板高 = 44.45 × n − 0.79 mm；19 英寸机架的面板连同安装耳宽 482.6 mm。"
+      },
+      "url": "https://en.wikipedia.org/wiki/Rack_unit",
+      "note": {
+        "en": "Read 2026-10-13, with https://en.wikipedia.org/wiki/19-inch_rack. Secondary summary: the EIA-310 standard itself is sold, not free, and was not read. Arithmetic: 10 U = 444.5 mm; 444.5 − 0.79 = 443.7 mm, which rounds to the 444 mm height NVIDIA gives (S2, S3). The DGX B200's 482.2–482.3 mm width is just under the 482.6 mm panel width.",
+        "zh": "2026-10-13 读取，同时读了 https://en.wikipedia.org/wiki/19-inch_rack。属于二手摘要：EIA-310 标准原文需购买，未读。算式：10U = 444.5 mm；444.5 − 0.79 = 443.7 mm，取整即 NVIDIA 给的 444 mm（S2、S3）。DGX B200 宽 482.2–482.3 mm，略小于 482.6 mm 的面板宽。"
+      }
+    },
+    {
+      "id": "S26",
+      "text": {
+        "en": "The Engineering ToolBox, “Air – Density, Specific Weight and Thermal Expansion Coefficient vs. Temperature and Pressure”: density of air at 1 atm and 25 °C 1.184 kg/m³; “Air – Specific Heat vs. Temperature at Constant Pressure”: cp = 1.006 kJ/(kg·K) at 300 K and 1 bar; “Fan Affinity Laws”: at constant wheel diameter the volume flow is proportional to fan speed (q₁/q₂ = n₁/n₂), pressure to speed squared, power to speed cubed.",
+        "zh": "Engineering ToolBox《空气密度、比重与热膨胀系数随温度和压力的变化》：1 个大气压、25 °C 时空气密度 1.184 kg/m³；《空气定压比热随温度的变化》：300 K、1 bar 时 cp = 1.006 kJ/(kg·K)；《风机相似定律》：叶轮直径不变时，风量与转速成正比（q₁/q₂ = n₁/n₂），压力与转速的平方成正比，功率与转速的立方成正比。"
+      },
+      "url": "https://www.engineeringtoolbox.com/air-density-specific-weight-d_600.html",
+      "note": {
+        "en": "Read 2026-10-13, with …/air-specific-heat-capacity-d_705.html and …/fan-affinity-laws-d_196.html. Engineering reference tables (TYPICAL). Simulated running point: 80 % fan speed → 0.8 × 1,550 CFM = 1,240 CFM × 1.699 = 2,107 m³/h = 0.5852 m³/s; × 1.184 kg/m³ = 0.6929 kg/s; temperature rise = 12.5 kW ÷ (0.6929 × 1.006) = 17.9 K → outlet ≈ 42.9 °C at 25 °C inlet. Idle: 30 % → 465 CFM = 790 m³/h = 0.2195 m³/s → 0.2599 kg/s; 1.83 kW ÷ (0.2599 × 1.006) = 7.0 K → about 32.0 °C. Both assume 1,550 CFM is the flow at 100 % fan speed, which NVIDIA does not state (S3); if instead 1,550 CFM were at 80 % (as the DGX H100 rating is, S32), the full-load rise would be 12.5 ÷ (0.7315 × 1.184 × 1.006) ≈ 14.3 K.",
+        "zh": "2026-10-13 读取，同时读了 …/air-specific-heat-capacity-d_705.html 和 …/fan-affinity-laws-d_196.html。工程参考表（TYPICAL）。模拟运行点：风扇 80 % → 0.8 × 1,550 CFM = 1,240 CFM × 1.699 = 2,107 m³/h = 0.5852 m³/s；× 1.184 kg/m³ = 0.6929 kg/s；温升 = 12.5 kW ÷（0.6929 × 1.006）= 17.9 K → 进风 25 °C 时出风约 42.9 °C。空闲：30 % → 465 CFM = 790 m³/h = 0.2195 m³/s → 0.2599 kg/s；1.83 kW ÷（0.2599 × 1.006）= 7.0 K → 约 32.0 °C。两者都假设 1,550 CFM 是风扇 100 % 时的风量，NVIDIA 没这样写（S3）；若 1,550 CFM 像 DGX H100 那样对应 80 % 转速（S32），满负荷温升就是 12.5 ÷（0.7315 × 1.184 × 1.006）≈ 14.3 K。"
+      }
+    },
+    {
+      "id": "S27",
+      "text": {
+        "en": "Walpole S C, Prieto-Merino D, Edwards P, Cleland J, Stevens G, Roberts I. “The weight of nations: an estimation of adult human biomass.” BMC Public Health 2012; 12: 439: in 2005 global adult human biomass was about 287 million tonnes; “Average body mass globally was 62 kg.”",
+        "zh": "Walpole 等，《国家的体重：成年人类生物量估算》，BMC Public Health，2012 年第 12 卷 439 号：2005 年全球成年人的总体重约 2.87 亿吨；全球成年人平均体重 62 kg。"
+      },
+      "url": "https://europepmc.org/article/PMC/PMC3408371",
+      "note": {
+        "en": "Read 2026-10-13: full text via Europe PMC (PMC3408371); the DOI link redirects to the publisher. The 62 kg figure is in the Results section, not the abstract, and refers to adults in 2005. 142.4 kg ÷ 62 kg ≈ 2.3.",
+        "zh": "2026-10-13 通过 Europe PMC 读全文（PMC3408371）；DOI 链接会跳转到出版社。62 kg 在正文“结果”一节，不在摘要里，指 2005 年的成年人。142.4 kg ÷ 62 kg ≈ 2.3。"
+      }
+    },
+    {
+      "id": "S28",
+      "text": {
+        "en": "Energy Market Authority (EMA), Singapore Energy Statistics 2025, Chapter 3 “Energy Consumption”: average monthly household electricity consumption by dwelling type in 2024 — 1-room/2-room HDB 176 kWh, 3-room 276 kWh, 4-room 381 kWh, 5-room and executive 464 kWh, public housing overall 363 kWh, private apartments and condominiums 522 kWh, landed properties 1,208 kWh, all households 442 kWh; Singapore used 58 TWh of electricity in 2024, households 14.6 % (8 TWh).",
+        "zh": "新加坡能源市场管理局（EMA）《新加坡能源统计 2025》第 3 章“能源消费”：2024 年各类住宅的家庭月均用电——一房式 / 二房式组屋 176 kWh，三房式 276 kWh，四房式 381 kWh，五房式及公寓式组屋 464 kWh，组屋整体 363 kWh；私人公寓及共管公寓 522 kWh；有地住宅 1,208 kWh；全体家庭 442 kWh。2024 年新加坡全国用电 58 TWh，其中家庭占 14.6 %（8 TWh）。"
+      },
+      "url": "https://web.archive.org/web/20251204131029/https://www.ema.gov.sg/resources/singapore-energy-statistics/chapter3",
+      "note": {
+        "en": "Read 2026-10-13. ema.gov.sg shows an Imperva human-verification check to automated visitors, which was not bypassed; the chapter page was read from the Internet Archive copy of 4 December 2025, and the chart's data file (…/chapter-3/chart/natavg-elect-3.csv, archived 3 September 2026) gave the dwelling-type figures, in kWh per account per month. 2025 values in that file cover only January–June 2025 (4-room 357 kWh), so use 2024. Arithmetic for the topic: one simulated full-load day of 300 kWh ≈ 0.8 of a 4-room flat's monthly use (300 ÷ 381); a year at the 14.3 kW maximum, 125 MWh, ≈ 27 four-room flats for a year (125,000 ÷ (381 × 12)).",
+        "zh": "2026-10-13 读取。ema.gov.sg 对自动访问弹出 Imperva 人机验证，未绕过；章节页读自互联网档案馆 2025-12-04 的存档，各房型数据取自该图表的数据文件（…/chapter-3/chart/natavg-elect-3.csv，2026-09-03 存档），单位是每户每月 kWh。文件里 2025 年的数只含 1–6 月（四房式 357 kWh），所以用 2024 年。主题里的算术：模拟满负荷一天 300 kWh ≈ 一个四房式组屋家庭一个月用电的 0.8（300 ÷ 381）；按最大 14.3 kW 跑一年 125 MWh ≈ 27 户四房式家庭一年的用电（125,000 ÷（381 × 12））。"
+      }
+    },
+    {
+      "id": "S29",
+      "text": {
+        "en": "Converge Digest, “Think of NVIDIA Blackwell as a Platform with NVLink Switch at its Core”, 25 August 2024 (preview of NVIDIA's Hot Chips 2024 talk): Blackwell NVLink Switch chip — 800 mm² in TSMC 4NP; extends NVLink to 72 GPUs on GB200 NVL72; 7.2 TB/s full all-to-all bidirectional bandwidth over 72 ports; SHARP in-network compute 3.6 TFLOPS; two NVLink switch chips give 14.4 TB/s of total switch capacity.",
+        "zh": "Converge Digest《把 NVIDIA Blackwell 看作以 NVLink 交换芯片为核心的平台》，2024-08-25（NVIDIA Hot Chips 2024 报告的预告）：Blackwell NVLink 交换芯片面积 800 mm²，台积电 4NP；把 NVLink 扩到 GB200 NVL72 的 72 块 GPU；72 个端口全互连双向带宽 7.2 TB/s；SHARP 网内计算 3.6 TFLOPS；两颗交换芯片合计 14.4 TB/s。"
+      },
+      "url": "https://convergedigest.com/think-of-nvidia-blackwell-as-a-platform/",
+      "note": {
+        "en": "Read 2026-10-13. Secondary report; the same bullet list appears in NVIDIA's own Hot Chips 2024 slides (S34), which say “>800 mm2”, so cite S34 and write “more than 800 mm²”.",
+        "zh": "2026-10-13 读取。二手报道；同样的要点见 NVIDIA 自己的 Hot Chips 2024 幻灯片（S34），原文是“>800 mm2”，正文引 S34，写“800 mm² 以上”。"
+      }
+    },
+    {
+      "id": "S30",
+      "text": {
+        "en": "Advantech, SQRAM “RDIMM DDR5 5600 16GB” datasheet (SQR-RD5N16G5K6HZZG), §3 Dimension drawing: 288-pin DDR5 registered DIMM 133.35 (+0.45/−0.15) mm long and 31.25 (+0.55/−0.15) mm high, edge connector 1.27 mm thick.",
+        "zh": "研华（Advantech）SQRAM《RDIMM DDR5 5600 16GB》规格书（SQR-RD5N16G5K6HZZG）第 3 节尺寸图：288 针 DDR5 带寄存器内存条，长 133.35 mm（+0.45 / −0.15），高 31.25 mm（+0.55 / −0.15），金手指处厚 1.27 mm。"
+      },
+      "url": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/7134/SQR-RD5N16G5K6HZZG.pdf",
+      "note": {
+        "en": "Read 2026-10-13 (drawing on page 5). Manufacturer datasheet for one module, used as the typical outline; the JEDEC MO-329 outline itself was not read (JEDEC documents need registration). A Silicon Power DDR5 UDIMM datasheet gives the same 133.35 × 31.25 mm board. Heat spreaders on server modules can make them taller; the DGX B200 module height is not published.",
+        "zh": "2026-10-13 读取（第 5 页尺寸图）。单个型号的厂商规格书，作为典型外形引用；JEDEC MO-329 外形标准本身未读（需注册）。Silicon Power 的 DDR5 UDIMM 规格书给出同样的 133.35 × 31.25 mm 板型。服务器内存若带散热片会更高；DGX B200 所用内存条的高度没有公开。"
+      }
+    },
+    {
+      "id": "S31",
+      "text": {
+        "en": "SNIA SFF TA TWG, SFF-8201 “2.5\" Form Factor Drive Dimensions”, Rev 3.4, 19 January 2018, Table 3-1: width (A4) 69.85 mm; length (A6) 100.45 mm maximum (the older 101.85 mm is obsolete); height (A1) one of 19.05, 17.00, 15.00, 12.70, 10.50, 9.50, 8.47, 7.00 or 5.00 mm.",
+        "zh": "SNIA SFF 技术工作组 SFF-8201《2.5 英寸硬盘外形尺寸》第 3.4 版，2018-01-19，表 3-1：宽（A4）69.85 mm；长（A6）最大 100.45 mm（旧的 101.85 mm 已作废）；高（A1）在 19.05、17.00、15.00、12.70、10.50、9.50、8.47、7.00、5.00 mm 中取一档。"
+      },
+      "url": "https://members.snia.org/document/dl/25851",
+      "note": {
+        "en": "Read 2026-10-13 (PDF; the snia.org listing page refused automated access). The 15 mm height used in the model is one of the allowed heights and is the usual height of U.2 data-centre drives; NVIDIA does not state the height of the DGX B200's U.2 drives.",
+        "zh": "2026-10-13 读取 PDF（snia.org 的列表页拒绝自动访问）。模型取 15 mm 高，是标准允许的一档，也是数据中心 U.2 盘常见的高度；NVIDIA 没写 DGX B200 所用 U.2 盘的厚度。"
+      }
+    },
+    {
+      "id": "S32",
+      "text": {
+        "en": "NVIDIA, DGX H100/H200 User Guide, “Introduction to the NVIDIA DGX H100/H200 System”: 8U rackmount; height 14 in (356 mm); width 19 in (482.3 mm) max; depth 35.3 in (897.1 mm) max; weight 287.6 lb (130.45 kg) max; 6 × 3.3 kW power supplies in 4+2 redundancy, 10.2 kW max; operating temperature 5–30 °C; airflow “1105 CFM Front-to-Back @ 80% fan PWM”; heat output 38,557 BTU/h.",
+        "zh": "NVIDIA《DGX H100/H200 用户指南》“系统介绍”：8U 机架式；高 14 英寸（356 mm）；宽最大 19 英寸（482.3 mm）；深最大 35.3 英寸（897.1 mm）；重最大 287.6 磅（130.45 kg）；6 个 3.3 kW 电源，4+2 冗余，整机最大 10.2 kW；工作温度 5–30 °C；风量“1105 CFM，前进后出，风扇 PWM 80 % 时”；发热 38,557 BTU/h。"
+      },
+      "url": "https://docs.nvidia.com/dgx/dgxh100-user-guide/introduction-to-dgxh100.html",
+      "note": {
+        "en": "Read 2026-10-13. Previous-generation comparison only. Width and depth are the same as the DGX B200 (S3); the B200 is 2U taller, about 12 kg heavier and rated 4.1 kW higher (14.3 − 10.2).",
+        "zh": "2026-10-13 读取。只作前代对照。宽、深与 DGX B200（S3）相同；B200 高出 2U，重约 12 kg，最大功率高 4.1 kW（14.3 − 10.2）。"
+      }
+    },
+    {
+      "id": "S33",
+      "text": {
+        "en": "Patrick Kennedy, “Exploring the NVIDIA HGX B200 Lambda AI Cluster at Cologix with Supermicro”, ServeTheHome, 14 August 2025, page 2: in Supermicro's 10U air-cooled HGX B200 server the top of the chassis holds the 8-GPU baseboard, most of whose height is heatsink; it is better for the motherboard to sit below the GPU baseboard, because taller heatsinks would otherwise push the two boards apart and change PCIe link distances.",
+        "zh": "Patrick Kennedy，《探访 Cologix 机房里的 Lambda HGX B200 集群（Supermicro）》，ServeTheHome，2025-08-14，第 2 页：Supermicro 10U 风冷 HGX B200 服务器的上部放 8 GPU 主板，其高度大部分是散热器；主板放在 GPU 主板下面更好，否则散热器越做越高，两块板之间的距离就要变，PCIe 链路长度也跟着变。"
+      },
+      "url": "https://www.servethehome.com/exploring-the-nvidia-hgx-b200-lambda-ai-cluster-at-cologix-with-supermicro/2/",
+      "note": {
+        "en": "Read 2026-10-13. Third-party reasoning about a Supermicro server, not an NVIDIA statement about the DGX B200; the DGX B200 does put the motherboard tray below the GPU tray (S3 rear view).",
+        "zh": "2026-10-13 读取。第三方对 Supermicro 服务器的分析，不是 NVIDIA 对 DGX B200 的说法；不过 DGX B200 的主板托盘确实在 GPU 托盘下面（S3 后视图）。"
+      }
+    },
+    {
+      "id": "S34",
+      "text": {
+        "en": "Ajay Tirumala and Raymond Wong (NVIDIA), “NVIDIA Blackwell Platform: Advancing Generative AI and Accelerated Computing”, Hot Chips 2024 slides: Blackwell GPU — two reticle-limited GPUs merged into one, 208 B transistors in TSMC 4NP, 8 TB/s memory bandwidth, “8-site HBM3e”, 1.8 TB/s bidirectional NVLink; NVLink 5 = 18 NVLinks at 100 GB/s each, 1,800 GB/s total; NVLink Switch chip — “>800 mm2 in TSMC 4NP”, extends NVLink to 72 GPUs, “7.2 TB/s full all-to-all bidirectional BW over 72 ports”, SHARP 3.6 TFLOPS; NVLink Switch tray = 2 chips, 14.4 TB/s; GB200 NVL72: 18 NVLink5 ports per GPU, 72 per switch, 130 TB/s multi-node bandwidth.",
+        "zh": "Ajay Tirumala、Raymond Wong（NVIDIA），《NVIDIA Blackwell 平台》Hot Chips 2024 幻灯片：Blackwell GPU——两块光罩极限尺寸的 GPU 合为一块，2080 亿个晶体管，台积电 4NP，显存带宽 8 TB/s，“8 个 HBM3e 位置”，NVLink 双向 1.8 TB/s；NVLink 5 = 18 条、每条 100 GB/s，共 1,800 GB/s；NVLink 交换芯片——“台积电 4NP，面积超过 800 mm²”，把 NVLink 扩到 72 块 GPU，“72 个端口全互连双向 7.2 TB/s”，SHARP 3.6 TFLOPS；一个 NVLink 交换托盘 = 2 颗芯片、14.4 TB/s；GB200 NVL72：每块 GPU 18 个 NVLink5 端口，每颗交换芯片 72 个，多节点带宽 130 TB/s。"
+      },
+      "url": "https://www.hc2024.hotchips.org/assets/program/conference/day1/64_HC2024.NVIDIA.TirumalaWong.pdf",
+      "note": {
+        "en": "Read 2026-10-13 (PDF text and slide images). First-hand NVIDIA slides. HBM placement read from the package photo on the “NVIDIA Blackwell GPU” slide: the two dies sit side by side in the middle, each with two HBM stacks along the top edge and two along the bottom edge (four stacks per die, eight sites in a row of four above and four below); the slide gives no dimensions. DGX B200 arithmetic: 8 GPUs × 18 links = 144 = 2 switches × 72 ports, so 9 links from each GPU to each switch (inference; the user-guide topology figure, S3, shows every GPU wired to both switches). Two chips × 7.2 TB/s = 14.4 TB/s, matching S2. The slides call it the “4th Generation NVLink Switch”; see the naming note in S17.",
+        "zh": "2026-10-13 读取（PDF 文字和幻灯片图片）。NVIDIA 一手资料。HBM 排布读自“NVIDIA Blackwell GPU”一页的封装照片：两块裸片左右并排居中，每块裸片上沿两叠、下沿两叠（每块 4 叠；8 个位置排成上四下四）；幻灯片没给尺寸。DGX B200 的算术：8 块 GPU × 18 条 = 144 = 2 颗交换芯片 × 72 个端口，所以每块 GPU 给每颗交换芯片 9 条（推断；用户指南拓扑图 S3 显示每块 GPU 都连到两颗交换芯片）。2 颗 × 7.2 TB/s = 14.4 TB/s，与 S2 一致。幻灯片称其为“第 4 代 NVLink Switch”，代数冲突见 S17。"
+      }
+    },
+    {
+      "id": "S35",
+      "text": {
+        "en": "NVIDIA, DGX B200 Service Manual, “Introduction” and “Rack Mount Kit Replacement”: customer-replaceable units are the bezel, locking power cords, power supply, fan module, front console board, U.2 data drive, M.2 boot drive, riser with 2 M.2 drives, ConnectX-7 PCI card (storage network), 50 Gb Ethernet NIC, DIMMs, rack-mount kit, TPM and battery — the GPU tray is not on the list; “Hearing protection is mandatory when working with or in the vicinity of this equipment”; the rack-mount kit acts as a shelf and “All components are serviceable from the front or rear”; the kit extends for rack posts 29–35 in (0.74–0.9 m) apart.",
+        "zh": "NVIDIA《DGX B200 维修手册》“简介”和“机架安装套件更换”：用户可自行更换的部件有前面板、带锁电源线、电源、风扇模块、前控制板、U.2 数据盘、M.2 系统盘、带 2 块 M.2 的转接卡、ConnectX-7 PCIe 卡（存储网络）、50 Gb 以太网卡、内存条、机架套件、TPM 和电池——GPU 托盘不在其中；“在这台设备上或附近工作必须佩戴听力保护”；机架套件像一块搁板托住机器，“所有部件都可以从前面或后面维修”；套件可伸缩，适用于前后立柱相距 29–35 英寸（0.74–0.9 m）的机柜。"
+      },
+      "url": "https://docs.nvidia.com/dgx/dgxb200-service-manual/introduction.html",
+      "note": {
+        "en": "Read 2026-10-13, with …/rack-mount-kit.html. The manual contains no GPU-tray removal procedure (GPU-tray service is handled by NVIDIA support). That the GPU tray comes out of the rear is an inference from the user-guide rear-panel figure, which labels the upper rear module “GPU tray” (S3), together with “serviceable from the front or rear”; NVIDIA does not say it in words. The hearing-protection line implies the machine is loud but gives no decibel figure.",
+        "zh": "2026-10-13 读取，同时读了 …/rack-mount-kit.html。手册里没有 GPU 托盘的拆装步骤（GPU 托盘由 NVIDIA 支持人员处理）。“GPU 托盘从后部抽出”是推断：用户指南后视图把后部上方的模块标为“GPU tray”（S3），再加上“可从前面或后面维修”这句；NVIDIA 没有用文字说明。听力保护一句说明机器很吵，但没给分贝数。"
+      }
+    },
+    {
+      "id": "S36",
+      "text": {
+        "en": "Ministry of Communications and Information (now MDDI), Singapore, written reply to Parliamentary Question on carbon emissions by data centres, Parliament sitting of 27 July 2021: in 2019 data centres accounted for about 5.3 % (2.75 TWh) of Singapore's total electricity consumption; this rose to about 7 % (3.40 TWh) in 2020, with 2020 figures covering January to July (source: EMA, electricity consumption by sub-sector).",
+        "zh": "新加坡通讯及新闻部（现数码发展及新闻部）对国会关于数据中心碳排放提问的书面答复，2021-07-27 国会：2019 年数据中心约占新加坡总用电的 5.3 %（2.75 TWh）；2020 年升到约 7 %（3.40 TWh），2020 年的数据只含 1–7 月（数据来自 EMA 分行业用电统计）。"
+      },
+      "url": "https://www.mddi.gov.sg/newsroom/mci-response-pq-data-carbon-emissions-data-centres-sg/",
+      "note": {
+        "en": "Read 2026-10-13. First-hand government source for the “7 %” share; it is a 2020 figure based on seven months of data, so write “about 7 % in 2020”, never as a current share. No newer official share was found: the Ministry of Trade and Industry's written reply of 7 January 2025 (meti.gov.sg) repeats the 300 MW aim but gives no percentage.",
+        "zh": "2026-10-13 读取。“7 %”的一手政府来源；它是 2020 年的数，只用了 7 个月的数据，正文写“2020 年约 7 %”，不能当作现在的比例。没找到更新的官方比例：贸工部 2025-01-07 的书面答复（meti.gov.sg）只重申 300 MW 目标，没给百分比。"
+      }
+    }
+  ]
+}

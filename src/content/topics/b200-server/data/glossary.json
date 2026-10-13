@@ -1,0 +1,215 @@
+{
+  "terms": [
+    {
+      "id": "gpu",
+      "term": {
+        "en": "GPU",
+        "zh": "GPU（图形处理器）"
+      },
+      "definition": {
+        "en": "A graphics processing unit: a chip with thousands of simple calculating units that work at the same time. First built to draw pictures on screens, it is now used mostly for the many multiplications and additions of AI.",
+        "zh": "图形处理器：一种有成千上万个简单计算单元、能同时工作的芯片。最早用来在屏幕上画图，现在主要用来做 AI 里海量的乘法和加法。"
+      },
+      "see": [
+        "cpu",
+        "hbm"
+      ]
+    },
+    {
+      "id": "rack-unit",
+      "term": {
+        "en": "Rack unit (U)",
+        "zh": "机架单位（U）"
+      },
+      "definition": {
+        "en": "The unit of height in a server rack: 1U is 1.75 inches, 44.45 mm. A 10U server takes ten of them.",
+        "zh": "服务器机柜里计量高度的单位：1U 是 1.75 英寸，即 44.45 毫米。一台 10U 的服务器占 10 个单位。"
+      },
+      "see": [
+        "data-centre"
+      ]
+    },
+    {
+      "id": "cpu",
+      "term": {
+        "en": "CPU",
+        "zh": "CPU（中央处理器）"
+      },
+      "definition": {
+        "en": "A central processing unit: the general-purpose processor of a computer. It runs the operating system and decides what happens next; it has far fewer cores than a GPU, but each is more flexible.",
+        "zh": "中央处理器：计算机里通用的处理器，运行操作系统、安排接下来做什么。它的核心比 GPU 少得多，但每个核心更灵活。"
+      },
+      "see": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "hbm",
+      "term": {
+        "en": "HBM (high-bandwidth memory)",
+        "zh": "HBM（高带宽显存）"
+      },
+      "definition": {
+        "en": "Memory made of several chips stacked on top of each other and placed right beside a processor, joined to it by a very wide set of short connections, so data moves fast.",
+        "zh": "把几层存储芯片摞在一起、紧挨着处理器放的内存，用很多很短的连线和处理器相连，所以数据传得快。"
+      },
+      "see": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "nvlink",
+      "term": {
+        "en": "NVLink",
+        "zh": "NVLink"
+      },
+      "definition": {
+        "en": "NVIDIA's high-speed connection between GPUs. In this server each GPU has 18 NVLink links, 1.8 TB/s in all, far more than a PCIe link.",
+        "zh": "NVIDIA 在 GPU 之间使用的高速连接。在这台服务器里，每块 GPU 有 18 条 NVLink 链路，合计每秒 1.8 TB，比 PCIe 宽得多。"
+      },
+      "see": [
+        "nvswitch",
+        "pcie"
+      ]
+    },
+    {
+      "id": "nvswitch",
+      "term": {
+        "en": "NVSwitch",
+        "zh": "NVSwitch（NVLink 交换芯片）"
+      },
+      "definition": {
+        "en": "A switch chip that joins the NVLink links of many GPUs, so any GPU can send data to any other at full NVLink speed.",
+        "zh": "把许多块 GPU 的 NVLink 链路汇在一起的交换芯片，让任意一块 GPU 都能以 NVLink 的全速把数据送给任意另一块。"
+      },
+      "see": [
+        "nvlink"
+      ]
+    },
+    {
+      "id": "pcie",
+      "term": {
+        "en": "PCIe (PCI Express)",
+        "zh": "PCIe（PCI Express）"
+      },
+      "definition": {
+        "en": "The standard connection inside a computer between the processor and expansion devices such as GPUs, network cards and drives. A PCIe 5.0 link sixteen lanes wide carries about 63 GB/s each way, about 126 GB/s in both directions together.",
+        "zh": "计算机里连接处理器和各种扩展设备（GPU、网卡、硬盘等）的标准连接。一条 16 通道的 PCIe 5.0 连接，每个方向每秒约 63 GB，两个方向合计约 126 GB。"
+      },
+      "see": [
+        "nvlink"
+      ]
+    },
+    {
+      "id": "flops",
+      "term": {
+        "en": "FLOPS",
+        "zh": "FLOPS（每秒浮点运算次数）"
+      },
+      "definition": {
+        "en": "Floating-point operations per second: how many calculations on numbers with a decimal point a chip can do each second. \"Peta\" means a thousand million million.",
+        "zh": "每秒浮点运算次数：一块芯片每秒能做多少次带小数点的数的运算。\"P\"（peta）表示一千万亿。"
+      },
+      "see": [
+        "precision"
+      ]
+    },
+    {
+      "id": "precision",
+      "term": {
+        "en": "Precision (FP4, FP8)",
+        "zh": "数值精度（FP4、FP8）"
+      },
+      "definition": {
+        "en": "How many bits are used to store each number. Fewer bits, such as 4 or 8, make calculations faster and use less memory, but the numbers are rougher.",
+        "zh": "用多少位来存一个数。位数少（比如 4 位、8 位），算得更快、更省内存，但数更粗略。"
+      },
+      "see": [
+        "flops"
+      ]
+    },
+    {
+      "id": "network-card",
+      "term": {
+        "en": "Network card (NIC, DPU)",
+        "zh": "网卡（NIC、DPU）"
+      },
+      "definition": {
+        "en": "The part that connects a computer to a network. A DPU, data processing unit, is a network card with its own processor cores that can take over some network and storage work.",
+        "zh": "让计算机接入网络的部件。DPU（数据处理器）是带自己处理器核心的网卡，能接手一部分网络和存储工作。"
+      },
+      "see": [
+        "data-centre"
+      ]
+    },
+    {
+      "id": "redundancy",
+      "term": {
+        "en": "Redundancy (N+1)",
+        "zh": "冗余（N+1）"
+      },
+      "definition": {
+        "en": "Fitting one more part than is needed, so the machine keeps working if one fails. Five plus one power supplies means any five can carry the full load.",
+        "zh": "比需要的多装一份部件，坏一个机器也能继续工作。\"5+1\"个电源，就是任意 5 个都能扛起全部负载。"
+      },
+      "see": []
+    },
+    {
+      "id": "data-centre",
+      "term": {
+        "en": "Data centre",
+        "zh": "数据中心"
+      },
+      "definition": {
+        "en": "A building full of servers, with the power supplies, cooling and networks they need.",
+        "zh": "放满服务器的建筑，连同它们所需的供电、冷却和网络。"
+      },
+      "see": [
+        "pue",
+        "rack-unit"
+      ]
+    },
+    {
+      "id": "training",
+      "term": {
+        "en": "Training",
+        "zh": "训练"
+      },
+      "definition": {
+        "en": "Teaching an AI model: showing it data over and over and adjusting its parameters, the numbers it is made of, a little each time. It takes far more computing than using the model.",
+        "zh": "教一个 AI 模型：一遍遍给它看数据，每次都稍微调整它的参数，也就是组成模型的那些数字。训练需要的计算比使用模型多得多。"
+      },
+      "see": [
+        "inference"
+      ]
+    },
+    {
+      "id": "inference",
+      "term": {
+        "en": "Inference",
+        "zh": "推理"
+      },
+      "definition": {
+        "en": "Using a trained model: giving it a question or a picture and letting it produce an answer.",
+        "zh": "使用训练好的模型：给它一个问题或一张图，让它给出回答。"
+      },
+      "see": [
+        "training"
+      ]
+    },
+    {
+      "id": "pue",
+      "term": {
+        "en": "PUE (power usage effectiveness)",
+        "zh": "PUE（电能使用效率）"
+      },
+      "definition": {
+        "en": "A data centre's total electricity divided by the electricity used by its computers. The lower it is, the less is spent on cooling and everything else.",
+        "zh": "数据中心的总用电除以其中计算设备的用电。它越低，花在冷却和其他方面的电就越少。"
+      },
+      "see": [
+        "data-centre"
+      ]
+    }
+  ]
+}

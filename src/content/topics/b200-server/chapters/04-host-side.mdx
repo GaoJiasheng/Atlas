@@ -1,0 +1,93 @@
+---
+id: host-side
+order: 4
+title: { en: "The host: CPUs, memory, storage, network", zh: "主机一侧：CPU、内存、存储、网络" }
+sensitive: false
+state:
+  view: assembled
+  run: true
+  cutaway: host-level
+  layers: [chassis, cooling, gpu-tray, host, power, data]
+  hide: [bezel, top-cover, scale-figure, rack-frame, rack-neighbour]
+  labels: [cpu-heatsinks, dimms, network-modules]
+  camera: { position: [0.72, 0.85, 1.05], target: [0, 0.05, -0.08], fov: 30 }
+  summary: { en: "Below the GPUs, two CPUs run the machine: they fetch data from fast drives and connect the server to the rest of the cluster.", zh: "GPU 下面的两颗 CPU 管着整台机器：它们从高速硬盘取数据，并把服务器接到集群的其他机器上。" }
+  beats:
+    - labels: [cpu-heatsinks, dimms, network-modules]
+      caption: { en: "With the upper floor cut away, this is the motherboard tray: the host side of the machine.", zh: "把上层切掉，这就是主板托盘，也就是机器的主机一侧。" }
+    - labels: [cpu-heatsinks, dimms, pcie-switches]
+      caption: { en: "Two CPUs with 56 cores each sit under low heat sinks, with 32 memory modules beside them: 2 terabytes in all.", zh: "两颗 CPU 各有 56 个核心，盖着矮矮的散热器，旁边是 32 根内存，一共 2 太字节。" }
+    - cutaway: none
+      camera: { position: [0.38, 0.2, 1.45], target: [0, 0.03, 0.38], fov: 30 }
+      labels: [u2-drives, "group:cooling"]
+      caption: { en: "Low down at the front are eight data drives of 3.84 terabytes each, a fast store for training data.", zh: "前面最下面是 8 块数据盘，每块 3.84 太字节，用来快速存取训练数据。" }
+    - labels: [network-modules, densilink-cables, osfp-cages]
+      caption: { en: "Eight network chips, one for each GPU, each send 400 gigabits a second. Flat cables carry their signals to four ports at the back.", zh: "8 颗网络芯片，每块 GPU 一颗，每颗每秒发送 400 吉比特。扁平线缆把信号送到后面的 4 个网口。" }
+    - view: xray
+      cutaway: none
+      camera: { position: [-0.75, 0.5, -1.5], target: [0, 0.06, -0.36], fov: 30 }
+      labels: [osfp-cages, bluefield-dpus, rear-io, boot-drives]
+      caption: { en: "At the back: the four cluster ports, two BlueField-3 cards for storage and management, and the management ports.", zh: "后面：4 个集群网口，两块负责存储和管理的 BlueField-3 卡，还有管理接口。" }
+  index:
+    parts: [cpus, cpu-heatsinks, dimms, pcie-switches, u2-drives, boot-drives, network-modules, densilink-cables, osfp-cages, bluefield-dpus]
+---
+
+<Lang en>
+
+Cut away the GPU floor and the motherboard tray shows. Its two CPUs are Intel Xeon Platinum 8570 processors with <Num s="S11">56</Num> cores each. They do not do the heavy maths; they run the operating system, read training data from the drives, prepare it and hand it to the GPUs. Beside them stand <Num s="S3">32</Num> memory modules, <Num s="S3">2 TB</Num> in all, lined up with the airflow. <FlyTo preset="host-bay">Look at the host tray</FlyTo>
+
+The training data waits on <Num s="S3">eight</Num> drives low down at the front, <Num s="S3">3.84 TB</Num> each. They are set up to read and write all together for speed, so they act as a fast store for the data, while the real copy is kept on separate storage machines elsewhere in the data centre. Two smaller drives on a card at the back hold the operating system.
+
+Near the midplane are two network modules with four <Term id="network-card">network</Term> chips each, so every GPU has its own link to the other servers in the cluster: <Num s="S2">400 Gb/s</Num>, gigabits per second. Flat cables run from the modules along the sides of the tray to <Num s="S3">four</Num> ports at the back, each carrying two links.
+
+Network speeds are counted in bits, memory speeds in bytes. <Num s="S2">400 Gb/s</Num> is about <Num s="S2">50 GB/s</Num>, each way. Over NVLink a GPU reaches the GPUs beside it at <Num s="S7">900 GB/s</Num> each way (<Num s="S7">1.8 TB/s</Num> both ways together), about <Num s="S2,S7">18 times</Num> faster than it can reach another server. That is why work that needs a lot of talking is kept inside one server.
+
+<More title={{ en: "One network card per GPU", zh: "每块 GPU 一张网卡" }}>
+
+The system drawing pairs every GPU with its own network chip: each CPU looks after four GPUs and four network chips, and the PCIe connection between a CPU and its GPUs runs through the network modules and the midplane. In a cluster, GPU number 3 in every server is cabled to the same group of switches, GPU number 4 to another, and so on; NVIDIA calls this a rail-optimised network. Two BlueField-3 cards with <Num s="S2">two</Num> ports of up to <Num s="S2">400 Gb/s</Num> each connect the server to storage and to the management network.
+
+</More>
+
+<More title={{ en: "Bits and bytes", zh: "比特和字节" }}>
+
+A bit is a single 0 or 1; a byte is <Num s="S14">8 bits</Num>. So <Num s="S2">400 Gb/s</Num> ÷ <Num s="S14">8</Num> = <Num s="S2">50 GB/s</Num> in each direction. The server's eight links add up to <Num s="S2">3.2 Tb/s</Num>, or <Num s="S2">400 GB/s</Num> each way. Drive and memory sizes are given in decimal units, as the makers give them: <Num s="S3">8 × 3.84 TB = 30.72 TB</Num> of data drives.
+
+</More>
+
+<More title={{ en: "Why the drives are at the front", zh: "为什么硬盘放在前面" }}>
+
+Drives are the parts most often swapped, so they sit where a technician can reach them: take off the bezel and each one slides out of the front. The eight are joined in a way, called RAID 0, that spreads every file across all of them; it is fast, but if one drive fails the data on all eight is lost, which is acceptable for a cache that can be filled again. The two boot drives use RAID 1 instead: each keeps a full copy, so one can fail without stopping the machine.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+把 GPU 那一层切掉，就看到主板托盘。两颗 CPU 是英特尔至强铂金 8570，每颗 <Num s="S11">56</Num> 个核心。它们不做繁重的数学运算，而是运行操作系统，从硬盘读出训练数据、整理好，再交给 GPU。CPU 两侧立着 <Num s="S3">32</Num> 根内存，共 <Num s="S3">2 TB</Num>，长边顺着气流排列。<FlyTo preset="host-bay">看主机托盘</FlyTo>
+
+训练数据先放在前面最下面的 <Num s="S3">8</Num> 块硬盘里，每块 <Num s="S3">3.84 TB</Num>。它们被设置成一起读写，以求快，所以只当作数据的高速暂存处；真正的数据另外保存在数据中心里专门的存储设备上。后部一块载板上还有两块小硬盘，存操作系统。
+
+靠近中板的地方是两个网络模块，每个有 4 颗<Term id="network-card">网卡</Term>芯片，所以每块 GPU 都有自己的一条链路通往集群里的其他服务器：<Num s="S2">400 Gb/s</Num>，即每秒 400 吉比特。扁平线缆从模块出发，沿托盘两侧走到后面的 <Num s="S3">4</Num> 个网口，每个口传两条链路。
+
+网络速度用比特计，内存速度用字节计。<Num s="S2">400 Gb/s</Num> 约等于每个方向每秒 <Num s="S2">50 GB</Num>。而经 NVLink，一块 GPU 访问旁边的 GPU 每个方向每秒 <Num s="S7">900 GB</Num>（两个方向合计 <Num s="S7">1.8 TB</Num>），比访问另一台服务器快约 <Num s="S2,S7">18 倍</Num>。这就是为什么需要频繁交流的工作要尽量放在同一台服务器里。
+
+<More title={{ en: "One network card per GPU", zh: "每块 GPU 一张网卡" }}>
+
+系统拓扑图给每块 GPU 配了一颗网络芯片：每颗 CPU 管 4 块 GPU 和 4 颗网络芯片，CPU 和 GPU 之间的 PCIe 连接也经过网络模块和中板。在集群里，每台服务器的 3 号 GPU 都接到同一组交换机，4 号 GPU 接到另一组，依此类推；NVIDIA 把这叫作按"轨"优化的网络。两块 BlueField-3 卡各有 <Num s="S2">2</Num> 个口，每口最高 <Num s="S2">400 Gb/s</Num>，把服务器接到存储网络和管理网络。
+
+</More>
+
+<More title={{ en: "Bits and bytes", zh: "比特和字节" }}>
+
+1 比特就是一个 0 或 1；1 字节是 <Num s="S14">8</Num> 比特。所以 <Num s="S2">400 Gb/s</Num> ÷ <Num s="S14">8</Num> = 每个方向每秒 <Num s="S2">50 GB</Num>。整台服务器的 8 条链路加起来是 <Num s="S2">3.2 Tb/s</Num>，即每个方向每秒 <Num s="S2">400 GB</Num>。硬盘和内存的容量按厂商的习惯用十进制单位：数据盘共 <Num s="S3">8 × 3.84 TB = 30.72 TB</Num>。
+
+</More>
+
+<More title={{ en: "Why the drives are at the front", zh: "为什么硬盘放在前面" }}>
+
+硬盘是最常要更换的部件，所以放在技术人员够得着的地方：拿下面板，每块都能从前面抽出来。这 8 块盘用一种叫 RAID 0 的方式连在一起，把每个文件分散存到所有盘上：很快，但只要坏一块，8 块盘上的数据就都没了。对一个随时可以重新装满的缓存来说，这是可以接受的。两块启动盘用的是 RAID 1：每块都存一份完整的副本，坏一块机器照样运行。
+
+</More>
+
+</Lang>

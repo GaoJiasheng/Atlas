@@ -679,6 +679,16 @@ const animationBase = {
 
 const scaleValue = z.union([positive, positiveVec3]);
 
+/**
+ * `each: true` (rotate / oscillate / pulse): every copy of the part — each
+ * `repeat` instance times the main primitive and every `extra` — moves about
+ * its own centre (its primitive's `at`, carried by the repeat) instead of the
+ * whole part moving about the part centre: a wall of fan rotors, a row of
+ * blinking lamps. Drawn instanced (identical primitives share one draw call);
+ * not with `pivot`.
+ */
+const eachField = { each: z.boolean().optional() };
+
 /** One transform: about `pivot` scale, then rotate (XYZ Euler, degrees), then `offset`; `fan` opens (1) / folds (0) a wing. */
 const transformFields = {
   rotation: vec3.optional(),
@@ -698,10 +708,11 @@ export const sequenceKeySchema = z
 export type SequenceKeyData = z.output<typeof sequenceKeySchema>;
 
 export const animationSchema = z.discriminatedUnion('kind', [
-  z.object({ ...animationBase, kind: z.literal('rotate'), axis: vec3, rpm: z.number() }).strict(),
+  z.object({ ...animationBase, ...eachField, kind: z.literal('rotate'), axis: vec3, rpm: z.number() }).strict(),
   z
     .object({
       ...animationBase,
+      ...eachField,
       kind: z.literal('oscillate'),
       axis: vec3,
       /** Peak swing in degrees. */
@@ -712,7 +723,7 @@ export const animationSchema = z.discriminatedUnion('kind', [
     .strict(),
   z
     /** `scale` is the peak scale factor (e.g. 1.15, or [sx, sy, sz] per axis), `hz` breaths per second. */
-    .object({ ...animationBase, kind: z.literal('pulse'), scale: scaleValue, hz: z.number().positive() })
+    .object({ ...animationBase, ...eachField, kind: z.literal('pulse'), scale: scaleValue, hz: z.number().positive() })
     .strict(),
   z
     /**
@@ -1133,6 +1144,15 @@ export const partsFileBase = z
           path: ['animations', i, 'target'],
           message: `unknown part "${a.target}"`,
         });
+      }
+      if ('each' in a && a.each) {
+        const target = file.parts.find((p) => p.id === a.target);
+        if (a.pivot !== undefined)
+          ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['animations', i, 'pivot'], message: '`each` moves every copy about its own centre: no `pivot`' });
+        if (target && (target.primitive === undefined || target.mesh !== undefined))
+          ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['animations', i, 'each'], message: '`each` needs a primitive part (no glb `mesh`)' });
+        else if (target && target.repeat === undefined && (target.extra ?? []).length === 0)
+          ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['animations', i, 'each'], message: '`each` needs a part with `repeat` or `extra` (one copy: leave it out)' });
       }
     });
   });

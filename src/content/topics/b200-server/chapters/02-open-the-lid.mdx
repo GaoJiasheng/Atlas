@@ -1,0 +1,94 @@
+---
+id: open-the-lid
+order: 2
+title: { en: "Open it up: two floors", zh: "打开机箱：上下两层" }
+sensitive: false
+state:
+  view: assembled
+  run: false
+  cutaway: none
+  layers: [chassis, cooling, gpu-tray, host, power, scene]
+  hide: [bezel, top-cover, scale-figure, rack-frame, rack-neighbour]
+  labels: ["group:gpu-tray", "group:host", "group:cooling"]
+  camera: { position: [0.7, 1.35, 0.95], target: [0, 0.2, -0.02], fov: 30 }
+  summary: { en: "Inside are two floors: eight GPUs on top, the CPUs and network cards below, with the power supplies at the very bottom.", zh: "里面分上下两层：上层是 8 块 GPU，下层是 CPU 和网卡，电源在最底下。" }
+  beats:
+    - caption: { en: "With the top cover off there are two floors: the GPU tray on top and the motherboard tray below, with the fan wall in front.", zh: "拿掉顶盖，里面是上下两层：上层是 GPU 托盘，下层是主板托盘，前面是风扇墙。" }
+    - camera: { position: [0.5, 1.5, 0.6], target: [0, 0.2, -0.02], fov: 30 }
+      labels: [gpu-heatsinks, nvswitch-duct]
+      caption: { en: "The upper floor holds eight tall heat-sink towers in two rows of four, with a black air duct between the rows.", zh: "上层是 8 座高高的散热塔，前后两排、每排 4 座，两排之间是一个黑色的导风罩。" }
+    - cutaway: host-level
+      camera: host-bay
+      labels: [cpu-heatsinks, dimms, network-modules]
+      caption: { en: "Cut away the upper floor and the lower one shows: two CPUs, thirty-two memory modules and two network modules.", zh: "把上层切掉，下层就露出来了：两颗 CPU、32 根内存和两个网络模块。" }
+    - view: xray
+      camera: { position: [-0.95, 0.72, 1.1], target: [0, 0.18, 0.28], fov: 30 }
+      labels: [midplane, fan-modules, baseboard-connectors]
+      caption: { en: "Both trays plug into the midplane at their front ends. The fan wall stands just in front of it.", zh: "两个托盘的前端都插在中板上，中板前面紧挨着风扇墙。" }
+    - pose: gpu-tray-out
+      camera: { position: [-1.35, 1.45, -1.7], target: [0, 0.15, -0.6], fov: 30 }
+      labels: [gpu-tray-frame, gpu-baseboard, gpu-heatsinks]
+      caption: { en: "Drawn here sliding out of the back, the GPU tray carries all eight GPUs and their heat sinks. NVIDIA services this tray itself.", zh: "这里把 GPU 托盘画成从后面抽出来，8 块 GPU 和它们的散热器都在上面。这个托盘由 NVIDIA 自己维修。" }
+  index:
+    parts: [gpu-tray-frame, gpu-heatsinks, nvswitch-duct, gpu-baseboard, host-tray-frame, cpu-heatsinks, dimms, network-modules, midplane, fan-modules]
+---
+
+<Lang en>
+
+Lift off the top cover and the inside is not one big circuit board but two floors. On top is the GPU tray, which takes up about two thirds of the height; below it is the motherboard tray, about <Num s="S3">2U</Num> high; the six power supplies fill the bottom layer at the back. <FlyTo preset="gpu-bay">Look down into the GPU tray</FlyTo>
+
+The upper floor is tall because of its heat sinks. Each of the eight GPUs wears a tower of thin metal fins, and the towers stand in two rows of four with a black air duct between the rows. <FlyTo preset="host-bay">The lower floor</FlyTo> holds the parts that run the machine: two <Term id="cpu">CPUs</Term>, central processing units, with rows of memory beside them, and two network modules near the front.
+
+Both trays slide in from the back and plug into a single upright circuit board, the midplane, which carries power, <Term id="pcie">PCIe</Term> data, sensor and control signals between them. In front of the midplane stands the wall of fans.
+
+Splitting the machine this way has two reasons. The motherboard tray can be pulled out of the back on its own, for example to change memory, without touching the GPUs; the GPU tray, drawn here sliding out the same way, is serviced by NVIDIA itself. And the GPUs, which make most of the heat, get the largest and straightest air path through the box.
+
+<More title={{ en: "Why two floors", zh: "为什么分两层" }}>
+
+An air-cooled GPU heat sink has to be tall: a review of another 8-GPU server reports a GPU tray of <Num s="S15">6U</Num>, against <Num s="S15">4U</Num> for the previous generation, and a board so heavy that it takes two people to lift. Some server makers put the motherboard underneath the GPU board, as here, so that the GPUs get the coolest, straightest airflow; others put it on top. The DGX B200 keeps the two on separate trays.
+
+</More>
+
+<More title={{ en: "The midplane", zh: "中板" }}>
+
+The user guide's drawings of both trays mark their front ends with the same words: midplane connectivity for power, PCIe, sensors and signalling. No public drawing shows the midplane itself. Its shape here, a board as wide as the box with large openings for air, is a reconstruction.
+
+</More>
+
+<More title={{ en: "Try it", zh: "试一试" }}>
+
+Press E for the exploded view. The parts move the way they come apart: the bezel forward, the cover up, both trays out of the back, the heat sinks up off their chips, the fan modules out of the front.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+拿掉顶盖，里面并不是一块大电路板，而是上下两层。上层是 GPU 托盘，约占三分之二的高度；下层是主板托盘，高约 <Num s="S3">2U</Num>；最底层后部是 6 个电源。<FlyTo preset="gpu-bay">俯视 GPU 托盘</FlyTo>
+
+上层之所以高，是因为散热器高。8 块 GPU 每块顶着一座由薄金属鳍片叠成的散热塔，散热塔前后两排、每排 4 座，两排之间是一个黑色的导风罩。<FlyTo preset="host-bay">下层</FlyTo>放的是管理整台机器的部件：两颗<Term id="cpu">CPU</Term>（中央处理器），两侧是一排排内存，靠前还有两个网络模块。
+
+两个托盘都从后面推进去，插在同一块竖立的电路板上，这块板叫中板。电源、<Term id="pcie">PCIe</Term> 数据、传感器和控制信号都经过它在两层之间传递。中板前面就是风扇墙。
+
+这样分层有两个好处。主板托盘可以单独从后面抽出来，比如换内存，不用碰 GPU；GPU 托盘在这里也画成从后面抽出，它由 NVIDIA 自己维修。而且发热最多的 GPU 能占到整台机器里最大、最直的风道。
+
+<More title={{ en: "Why two floors", zh: "为什么分两层" }}>
+
+风冷的 GPU 散热器必须很高：另一台 8 GPU 服务器的评测写到，它的 GPU 托盘高 <Num s="S15">6U</Num>，上一代只要 <Num s="S15">4U</Num>，而且整块板重得要两个人才抬得动。有的厂商像这里一样把主板放在 GPU 板下面，好让 GPU 得到最凉、最直的气流；也有的放在上面。DGX B200 把两者分在两个托盘上。
+
+</More>
+
+<More title={{ en: "The midplane", zh: "中板" }}>
+
+用户指南里两个托盘的图，前端都标着同样的字：中板连接，传电源、PCIe、传感器和信号。没有公开图纸画出中板本身。这里的形状，一块和机箱一样宽、开着几个大通风孔的板，是重建的。
+
+</More>
+
+<More title={{ en: "Try it", zh: "试一试" }}>
+
+按 E 看爆炸图。零件按拆装的方向移开：面板向前，顶盖向上，两个托盘从后面出去，散热器从芯片上向上抬起，风扇模块从前面抽出。
+
+</More>
+
+</Lang>

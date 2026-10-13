@@ -1,0 +1,108 @@
+---
+id: gpus-and-nvlink
+order: 3
+title: { en: "Eight GPUs and NVLink", zh: "八块 GPU 与 NVLink" }
+sensitive: false
+state:
+  view: xray
+  run: true
+  cutaway: chips
+  layers: [chassis, cooling, gpu-tray, host, power, data]
+  hide: [bezel, top-cover, scale-figure, rack-frame, rack-neighbour]
+  labels: [gpu-modules, nvswitch-chips, gpu-baseboard]
+  camera: { position: [0.5, 1.1, 0.75], target: [0, 0.12, 0], fov: 30 }
+  summary: { en: "Each GPU is two silicon dies with stacks of memory beside them; NVLink lets all eight share the work as if they were one.", zh: "每块 GPU 是两块硅片加上旁边几叠堆叠的显存；NVLink 让 8 块 GPU 像一块那样分工合作。" }
+  beats:
+    - labels: [gpu-modules, gpu-baseboard, nvswitch-chips]
+      caption: { en: "With the heat-sink towers cut away at their base, the eight GPU modules show: two rows of four on the baseboard.", zh: "把散热塔齐根切掉，8 个 GPU 模块就露出来了：基板上前后两排，每排 4 个。" }
+    - camera: { position: [0.18, 0.4, 0.4], target: [0.0525, 0.145, 0.152], fov: 30 }
+      labels: [gpu-dies, hbm-stacks, gpu-modules]
+      caption: { en: "One GPU: two large silicon dies side by side in the middle, with eight stacks of memory above and below them.", zh: "一块 GPU：中间并排两块大硅片，上下一共 8 叠显存。" }
+    - camera: { position: [0.18, 0.4, 0.4], target: [0.0525, 0.145, 0.152], fov: 30 }
+      labels: [hbm-stacks, gpu-dies]
+      caption: { en: "Each GPU here has 180 gigabytes of this stacked memory, which can deliver 8 terabytes a second.", zh: "在这台机器里，每块 GPU 有 180 吉字节这种堆叠显存，每秒能送出 8 太字节数据。" }
+    - camera: { position: [0.02, 0.85, 0.42], target: [0, 0.13, 0], fov: 30 }
+      hide: [bezel, top-cover, scale-figure, rack-frame, rack-neighbour, nvswitch-duct]
+      labels: [nvswitch-chips, gpu-modules]
+      caption: { en: "Between the rows sit two NVSwitch chips, under the duct. Every GPU is wired to both of them.", zh: "两排之间、导风罩下面是两颗 NVSwitch 芯片。每块 GPU 都连到这两颗芯片上。" }
+    - labels: [gpu-modules, nvswitch-chips, gpu-baseboard]
+      caption: { en: "Teal dots are data: the closer the dots, the more data each second. The dense loop between the GPUs is NVLink, about 14 times as wide as the PCIe link coming up from a CPU.", zh: "青绿色的点是数据，点越密，每秒传的数据越多。GPU 之间那圈很密的是 NVLink，大约是从 CPU 上来的 PCIe 连接的 14 倍宽。" }
+  index:
+    parts: [gpu-modules, gpu-dies, hbm-stacks, gpu-heatsinks, nvswitch-chips, nvswitch-duct, gpu-baseboard]
+---
+
+<Lang en>
+
+Cut the heat-sink towers off at their base and the eight GPU modules show, two rows of four on one large board. A GPU is good at doing huge numbers of simple multiplications and additions at once, and training an AI model is mostly that, repeated many trillions of times.
+
+Each B200 is two silicon dies side by side, joined so tightly, at <Num s="S6">10 TB/s</Num>, that software treats them as one GPU. Together they hold <Num s="S6">208 billion</Num> transistors, according to NVIDIA. Around the dies sit <Num s="S34">eight</Num> stacks of <Term id="hbm">HBM</Term>, high-bandwidth memory. In this server each GPU has <Num s="S2">180 GB</Num> of it, which can deliver <Num s="S2">8 TB/s</Num>: eight terabytes, eight million million bytes, every second. A byte is <Num s="S14">8 bits</Num>. <FlyTo preset="gpu-bay">Back to the whole tray</FlyTo>
+
+A large model does not fit on one GPU, so the work is split across all eight, and after every step they must swap results. That is what <Term id="nvlink">NVLink</Term> is for. Each GPU has <Num s="S7">18</Num> NVLink links, <Num s="S7">1.8 TB/s</Num> in all, wired to two <Term id="nvswitch">NVSwitch</Term> chips between the rows, so any GPU can reach any other. That is about <Num s="S14,S7">14 times</Num> the bandwidth of the PCIe link that connects a GPU to the CPUs.
+
+Speed is counted in <Term id="flops">FLOPS</Term>, calculations per second. NVIDIA claims <Num s="S2">72 petaFLOPS</Num> for the whole server, dense, using 4-bit numbers, a low <Term id="precision">precision</Term>, and twice that for "sparse" work that skips zeros. Real training runs well below such peaks.
+
+<Figure src="figures/b200-gpu-module" alt={{ en: "Pencil drawing of a GPU module: two large dies in the centre surrounded by memory stacks, on a small circuit board with a connector below.", zh: "GPU 模块的铅笔画：小电路板中央两块大裸片，周围是显存堆，下面是连接器。" }} caption={{ en: "A GPU module, drawn for this topic: two dies and their memory stacks on one package. Illustration, not to scale; the memory layout is simplified.", zh: "为本主题画的 GPU 模块：一个封装上的两块裸片和显存堆。示意图，不按比例；显存排布做了简化。" }} />
+
+<More title={{ en: "Two dies, one GPU", zh: "两块裸片，一块 GPU" }}>
+
+Chips are printed through a mask, and a single die cannot be larger than the area one exposure covers, the "reticle limit". To get more transistors NVIDIA joined two dies of that maximum size, each reported at more than <Num s="S8">800 mm²</Num> and about <Num s="S8">104 billion</Num> transistors, with a <Num s="S6">10 TB/s</Num> link, and made them behave as one GPU. They are made on TSMC's 4NP process. The B200 chip carries <Num s="S8">192 GB</Num> of memory in <Num s="S9">eight</Num> stacks of <Num s="S8">24 GB</Num>; in the DGX B200 each GPU uses <Num s="S2">180 GB</Num>, and NVIDIA does not say why.
+
+</More>
+
+<More title={{ en: "How big a model fits", zh: "放得下多大的模型" }}>
+
+A model is a long list of numbers called parameters. A model with <Num s="S22">405 billion</Num> parameters, stored at one byte each, needs about <Num s="S22">405 GB</Num>: more than one GPU's <Num s="S2">180 GB</Num>. At two bytes each it needs about <Num s="S22">810 GB</Num>, which fits in the eight GPUs' <Num s="S2">1,440 GB</Num>. This counts only the parameters; training needs a lot more memory for other data, which is why big models are trained across many servers.
+
+</More>
+
+<More title={{ en: "Reading a peak number", zh: "怎样读峰值" }}>
+
+NVIDIA's figures for the whole DGX B200 are <Num s="S2">144 petaFLOPS</Num> at FP4 and <Num s="S2">72 petaFLOPS</Num> at FP8, both for sparse work; dense figures are half of these, <Num s="S2">72</Num> and <Num s="S2">36 petaFLOPS</Num>. "Peta" means a thousand million million. FP4 and FP8 store each number in 4 or 8 bits: fast, but rough. At the 32-bit precision of ordinary scientific work the eight GPUs are rated at <Num s="S5">600 teraFLOPS</Num>, more than a hundred times less. "Sparse" means the hardware may skip half the multiplications when many numbers in a model are zero. These are ceilings, not what a real training run achieves.
+
+</More>
+
+<More title={{ en: "NVLink by the numbers", zh: "NVLink 的数字" }}>
+
+Each GPU's <Num s="S7">18</Num> links carry <Num s="S7">100 GB/s</Num> each, <Num s="S7">1.8 TB/s</Num> in both directions together; the eight GPUs add up to <Num s="S2">14.4 TB/s</Num>. A PCIe 5.0 link sixteen lanes wide carries about <Num s="S14">63 GB/s</Num> each way, about <Num s="S14">126 GB/s</Num> in both directions together, so NVLink is about <Num s="S14,S7">14 times</Num> as wide. Each switch chip has <Num s="S34">72</Num> ports: <Num s="S34">2 × 72 = 144</Num> ports for <Num s="S7">8 × 18 = 144</Num> links, so each GPU sends <Num s="S34">nine</Num> links to each switch. That last split is worked out from the totals, not published. On the stage the dots only show which link is wider; their spacing is not to scale.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+把散热塔齐根切掉，8 个 GPU 模块就露出来了，在一块大板上排成前后两排、每排 4 个。GPU 擅长同时做海量的简单乘法和加法，而训练一个 AI 模型，主要就是把这类运算重复成千上万亿次。
+
+每颗 B200 由两块并排的硅片组成，两块之间以每秒 <Num s="S6">10 TB</Num> 紧密相连，软件把它们当作一块 GPU。NVIDIA 称两块合计有 <Num s="S6">2080 亿</Num>个晶体管。硅片周围是 <Num s="S34">8</Num> 叠<Term id="hbm">HBM</Term>，也就是高带宽显存。在这台服务器里，每块 GPU 有 <Num s="S2">180 GB</Num> 这种显存，每秒能送出 <Num s="S2">8 TB</Num>，也就是每秒 8 万亿字节。1 字节等于 <Num s="S14">8</Num> 比特。<FlyTo preset="gpu-bay">回到整个托盘</FlyTo>
+
+一块 GPU 放不下一个大模型，所以计算要拆到 8 块 GPU 上，而且每算完一步都要交换结果。<Term id="nvlink">NVLink</Term>就是干这个的。每块 GPU 有 <Num s="S7">18</Num> 条 NVLink 链路，合计每秒 <Num s="S7">1.8 TB</Num>，都连到两排之间的两颗<Term id="nvswitch">NVSwitch</Term>芯片上，所以任意一块 GPU 都能直达任意另一块。这大约是 GPU 和 CPU 之间那条 PCIe 连接带宽的 <Num s="S14,S7">14 倍</Num>。
+
+计算速度用<Term id="flops">FLOPS</Term>（每秒浮点运算次数）来衡量。NVIDIA 称整台服务器在稠密计算、用 4 位数字时可达 <Num s="S2">72 PFLOPS</Num>。4 位是很低的<Term id="precision">数值精度</Term>；对能跳过零的"稀疏"计算，它给的数字再翻一倍。真实的训练远远达不到这样的峰值。
+
+<Figure src="figures/b200-gpu-module" alt={{ en: "Pencil drawing of a GPU module: two large dies in the centre surrounded by memory stacks, on a small circuit board with a connector below.", zh: "GPU 模块的铅笔画：小电路板中央两块大裸片，周围是显存堆，下面是连接器。" }} caption={{ en: "A GPU module, drawn for this topic: two dies and their memory stacks on one package. Illustration, not to scale; the memory layout is simplified.", zh: "为本主题画的 GPU 模块：一个封装上的两块裸片和显存堆。示意图，不按比例；显存排布做了简化。" }} />
+
+<More title={{ en: "Two dies, one GPU", zh: "两块裸片，一块 GPU" }}>
+
+芯片是用光罩一次次曝光"印"出来的，一块裸片不能大过一次曝光覆盖的面积，这叫"光罩极限"。为了放进更多晶体管，NVIDIA 把两块做到这个最大尺寸的裸片连在一起，据报道每块超过 <Num s="S8">800 mm²</Num>、约 <Num s="S8">1040 亿</Num>个晶体管，中间用每秒 <Num s="S6">10 TB</Num> 的连接，让它们像一块 GPU 那样工作。它们用台积电的 4NP 工艺制造。B200 芯片带 <Num s="S8">192 GB</Num> 显存，分成 <Num s="S9">8</Num> 叠、每叠 <Num s="S8">24 GB</Num>；在 DGX B200 里每块 GPU 用 <Num s="S2">180 GB</Num>，NVIDIA 没有说明原因。
+
+</More>
+
+<More title={{ en: "How big a model fits", zh: "放得下多大的模型" }}>
+
+一个模型就是一长串叫"参数"的数字。一个有 <Num s="S22">4050 亿</Num>个参数的模型，每个参数存成 1 个字节，大约要 <Num s="S22">405 GB</Num>，超过一块 GPU 的 <Num s="S2">180 GB</Num>。每个参数存成 2 个字节，就要约 <Num s="S22">810 GB</Num>，8 块 GPU 合计的 <Num s="S2">1,440 GB</Num> 放得下。这里只算了参数本身；训练时还要大量内存存放别的数据，所以大模型要用很多台服务器一起训练。
+
+</More>
+
+<More title={{ en: "Reading a peak number", zh: "怎样读峰值" }}>
+
+NVIDIA 给整台 DGX B200 的数字是：FP4 <Num s="S2">144 PFLOPS</Num>，FP8 <Num s="S2">72 PFLOPS</Num>，两者都是稀疏口径；稠密口径各减半，即 <Num s="S2">72</Num> 和 <Num s="S2">36 PFLOPS</Num>。"P"（peta）表示一千万亿。FP4、FP8 用 4 位或 8 位来存一个数：快，但很粗略。换成普通科学计算常用的 32 位精度，8 块 GPU 的额定值是 <Num s="S5">600 TFLOPS</Num>，少了一百多倍。"稀疏"是说当模型里很多数是零时，硬件可以跳过一半乘法。这些都是上限，不是一次真实训练能达到的速度。
+
+</More>
+
+<More title={{ en: "NVLink by the numbers", zh: "NVLink 的数字" }}>
+
+每块 GPU 的 <Num s="S7">18</Num> 条链路每条每秒 <Num s="S7">100 GB</Num>，两个方向合计每秒 <Num s="S7">1.8 TB</Num>；8 块 GPU 加起来每秒 <Num s="S2">14.4 TB</Num>。一条 16 通道的 PCIe 5.0 连接每个方向每秒约 <Num s="S14">63 GB</Num>，两个方向合计约 <Num s="S14">126 GB</Num>，所以 NVLink 大约宽 <Num s="S14,S7">14 倍</Num>。每颗交换芯片有 <Num s="S34">72</Num> 个端口：<Num s="S34">2 × 72 = 144</Num> 个端口对 <Num s="S7">8 × 18 = 144</Num> 条链路，所以每块 GPU 给每颗交换芯片 <Num s="S34">9</Num> 条。最后这个分法是由总数推算的，并没有公开写明。舞台上的点只表示哪条连接更宽，点的疏密不按比例。
+
+</More>
+
+</Lang>

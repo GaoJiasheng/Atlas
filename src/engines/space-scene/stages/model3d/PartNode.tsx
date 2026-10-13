@@ -158,6 +158,11 @@ const tmpE = new Euler();
 const tmpV = new Vector3();
 const tmpS = new Vector3();
 const tmpS3: Vec3 = [1, 1, 1];
+const tmpEach = new Matrix4();
+const tmpInst = new Matrix4();
+
+/** An animation that moves every copy of its part about the copy's own centre (schema `each`). */
+const isEach = (a: PartAnimation) => (a.kind === 'rotate' || a.kind === 'oscillate' || a.kind === 'pulse') && a.each === true;
 
 /** M ← M · T(pivot) · X · T(−pivot), for X already in `x`. */
 function aboutPivot(m: Matrix4, x: Matrix4, pivot: Vec3): void {
@@ -193,6 +198,8 @@ function Piece({
       piece.matrices.forEach((m, i) => mesh.setMatrixAt(i, m));
       mesh.instanceMatrix.needsUpdate = true;
       mesh.computeBoundingSphere();
+      // Copies that turn about their own centres (`each`) can leave the rest bounds a little: never culled.
+      if (piece.pivots) mesh.frustumCulled = false;
     }
     if (mesh instanceof SkinnedMesh && piece.skin) {
       // Detached: the bind matrix stays the rest one, so the part's own transform (explode, pose) applies on top of the bones.
@@ -254,6 +261,8 @@ export function PartNode(props: PartNodeProps) {
     tint: 0,
     skinMoved: -1,
     frame: 0,
+    /** `each` animations moved the instances last frame (one more write puts them back at rest). */
+    eachMoved: false,
   });
   const press = useRef<{ timer: ReturnType<typeof setTimeout> | null; x: number; y: number }>({ timer: null, x: 0, y: 0 });
 
@@ -265,6 +274,7 @@ export function PartNode(props: PartNodeProps) {
     [hasLines],
   );
   const fans = useMemo(() => shape.pieces.filter((p) => p.fan), [shape]);
+  const eachPieces = useMemo(() => shape.pieces.filter((p) => p.pivots && p.matrices), [shape]);
   // Per-frame maths without allocation: explode vector and unit animation axes, once. Context parts stay put.
   const push = useMemo(() => (part.context ? ([0, 0, 0] as Vec3) : explodeOffset(part.explode, 1)), [part.explode, part.context]);
   const axes = useMemo(
@@ -514,6 +524,7 @@ export function PartNode(props: PartNodeProps) {
       if (running && !m.wasRunning) m.runStart = runtime.phase;
       m.wasRunning = running;
       props.animations.forEach((a, i) => {
+        if (isEach(a)) return; // per copy, below
         const always = !a.whenRun;
         if (!always && runtime.energy === 0) return;
         const t = always ? runtime.elapsed : runtime.phase;
@@ -542,6 +553,42 @@ export function PartNode(props: PartNodeProps) {
       }
       anim.matrixWorldNeedsUpdate = true;
       if (props.castShadow && runtime.energy > 0) runtime.shadowDirty = true;
+    }
+    // `each` animations: every copy about its own centre, written into the instance matrices.
+    if (eachPieces.length > 0) {
+      tmpEach.identity();
+      let active = false;
+      props.animations.forEach((a, i) => {
+        if (!isEach(a)) return;
+        const always = !a.whenRun;
+        if (!always && runtime.energy === 0) return;
+        const t = always ? runtime.elapsed : runtime.phase;
+        const k = always ? 1 : runtime.energy;
+        if (a.kind === 'pulse') {
+          animationScale3(a, t, k, tmpS3);
+          tmpEach.multiply(tmpM.makeScale(tmpS3[0], tmpS3[1], tmpS3[2]));
+          active = true;
+          return;
+        }
+        const angle = animationAngle(a, t, k);
+        if (angle !== 0) tmpEach.multiply(tmpM.makeRotationFromQuaternion(tmpQ.setFromAxisAngle(axes[i]!, angle)));
+        active = true;
+      });
+      if (active || m.eachMoved || snap) {
+        for (const piece of eachPieces) {
+          const mesh = pieces.current.get(piece);
+          if (!(mesh instanceof InstancedMesh)) continue;
+          piece.matrices!.forEach((rest, j) => {
+            const c = piece.pivots![j]!;
+            tmpInst.makeTranslation(c[0], c[1], c[2]).multiply(tmpEach);
+            tmpInst.multiply(tmpT.makeTranslation(-c[0], -c[1], -c[2])).multiply(rest);
+            mesh.setMatrixAt(j, tmpInst);
+          });
+          mesh.instanceMatrix.needsUpdate = true;
+        }
+        if (props.castShadow) runtime.shadowDirty = true;
+      }
+      m.eachMoved = active;
     }
     for (const f of fans) if (f.fan!.apply(fan) && props.castShadow) runtime.shadowDirty = true;
     if (moving) {

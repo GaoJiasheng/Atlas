@@ -177,7 +177,7 @@ function fracAttrs(raw: string): Record<string, number | null> {
   return out;
 }
 
-/** `<Num s>`, `<FlyTo preset>`, `<More title>`, `<Term id>`, `<Task id>`, `<Beat n>` and `<Frac>` in a chapter body. */
+/** `<Num s>`, `<FlyTo preset>`, `<More title>`, `<Term id>`, `<Task id>`, `<Beat n>`, `<Figure src alt caption>` and `<Frac>` in a chapter body. */
 function checkBodyComponents(
   file: string,
   body: string,
@@ -224,6 +224,15 @@ function checkBodyComponents(
     if (k === null) error(file, `<Beat> needs a beat number, e.g. <Beat n={2}>: ${m[0]}`);
     else if (beats === null) error(file, `<Beat n={${k}}>: this chapter has no explanation beats (lesson.json steps[].beats)`);
     else if (k < 1 || k > beats) error(file, `<Beat n={${k}}>: the chapter has beats 1–${beats}`);
+  }
+  for (const { raw, attrs } of tagAttrs(body, 'Figure')) {
+    const stem = attrs.src;
+    if (!stem) error(file, `<Figure> needs src="<stem under public/illustrations/>", e.g. src="figures/b200-rack": ${raw}`);
+    else
+      for (const f of [`${stem}.webp`, `${stem}@2x.webp`])
+        if (!existsSync(join(ROOT, 'public/illustrations', f))) error(file, `<Figure src="${stem}">: public/illustrations/${f} not found`);
+    if (!/\balt=/.test(raw)) error(file, `<Figure> needs alt={{ en: "…", zh: "…" }}: ${raw}`);
+    if (!/\bcaption=/.test(raw)) error(file, `<Figure> needs caption={{ en: "…", zh: "…" }}: ${raw}`);
   }
   for (const m of body.matchAll(/<Frac(?![A-Za-z])([^>]*)>/g)) {
     const a = fracAttrs(m[1] ?? '');

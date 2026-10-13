@@ -1,0 +1,6244 @@
+{
+  "parts": [
+    {
+      "id": "bezel",
+      "name": {
+        "en": "Front bezel",
+        "zh": "前面板"
+      },
+      "short": {
+        "en": "Bezel",
+        "zh": "前面板"
+      },
+      "group": "chassis",
+      "summary": {
+        "en": "Covers the fan wall; air is drawn in through it",
+        "zh": "挡在风扇墙前面，空气从整面透进来"
+      },
+      "detail": {
+        "en": "A removable decorative cover that clips over the whole front between the rack ears. Its real surface is a rough, sponge-like metal that lets air through everywhere; the model shows it as a solid champagne-coloured panel [S3].\n\nThe fan modules and the eight data drives sit behind it, so it has to come off before either can be changed [S4].",
+        "zh": "一块可拆的装饰面罩，卡在两侧挂耳之间，盖住整个前脸。真机表面是一层粗糙、像海绵一样的金属，处处透气；模型把它画成一整块实心的香槟金色板 [S3]。\n\n风扇模块和 8 块数据盘都在它后面，换风扇或换硬盘都要先把它取下 [S4]。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.43,
+          0.425,
+          0.012
+        ],
+        "bevel": 0.005,
+        "at": [
+          0,
+          0.2225,
+          0.4426
+        ],
+        "color": "powder",
+        "tint": "#8c7d63"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.35
+      },
+      "connects": [
+        "front-controls",
+        "fan-modules"
+      ],
+      "shell": true
+    },
+    {
+      "id": "chassis-body",
+      "name": {
+        "en": "Chassis",
+        "zh": "机箱"
+      },
+      "group": "chassis",
+      "summary": {
+        "en": "Steel box that holds the trays and power supplies",
+        "zh": "承托两个托盘和电源的钢制机箱"
+      },
+      "detail": {
+        "en": "A folded steel box, 10U high: 444 mm tall and about 897 mm deep [S3]. The front width is given as 482.3 mm in the user guide and 482.2 mm on the product page, including the rack ears [S2, S3].\n\nFully loaded the whole server weighs up to 142.4 kg [S3], so the box carries a heavy load and is moved with a lift or several people.",
+        "zh": "一个折弯钢板做成的箱体，高 10U：444 mm 高，约 897 mm 深 [S3]。连挂耳在内的宽度，用户指南写 482.3 mm，产品页写 482.2 mm [S2, S3]。\n\n整机满配最重 142.4 kg [S3]，所以箱体承重很大，搬运要用升降机或几个人一起。"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.447,
+          0.003,
+          0.8972
+        ],
+        "at": [
+          0,
+          0.0015,
+          0
+        ],
+        "color": "steel",
+        "tint": "#b9bab5"
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "size": [
+            0.003,
+            0.441,
+            0.8972
+          ],
+          "at": [
+            -0.222,
+            0.2235,
+            0
+          ],
+          "color": "steel",
+          "tint": "#b9bab5"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.003,
+            0.441,
+            0.8972
+          ],
+          "at": [
+            0.222,
+            0.2235,
+            0
+          ],
+          "color": "steel",
+          "tint": "#b9bab5"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.441,
+            0.042,
+            0.003
+          ],
+          "at": [
+            0,
+            0.0715,
+            0.4335
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.096,
+            0.044,
+            0.003
+          ],
+          "at": [
+            0,
+            0.0265,
+            0.4335
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        }
+      ],
+      "connects": [
+        "rails",
+        "midplane",
+        "top-cover"
+      ],
+      "shell": true
+    },
+    {
+      "id": "top-cover",
+      "name": {
+        "en": "Top cover",
+        "zh": "顶盖"
+      },
+      "group": "chassis",
+      "summary": {
+        "en": "Seals the top so air can only go front to back",
+        "zh": "封住顶部，让风只能从前往后走"
+      },
+      "detail": {
+        "en": "A flat steel lid over both trays. With it in place the only way through the box is from the fan wall at the front to the grilles at the back.\n\nWithout it the fans would pull much of their air in through the open top instead of through the heat sinks, so the chips would run hotter. This is the physics of the air path; the model lifts the lid off in later chapters to show the inside.",
+        "zh": "盖在两个托盘上面的一块平钢板。盖上以后，空气只有一条路：从前面的风扇墙进来，从后面的排风口出去。\n\n如果没有顶盖，风扇会从敞开的顶部吸进大量空气，而不是让空气穿过散热器，芯片就会更热。这里讲的是气流的原理；后面几章模型把顶盖拿开，是为了看里面。"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.441,
+          0.003,
+          0.8852
+        ],
+        "at": [
+          0,
+          0.4425,
+          -0.006
+        ],
+        "color": "steel",
+        "tint": "#b9bab5"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.62
+      },
+      "connects": [
+        "chassis-body"
+      ],
+      "shell": true
+    },
+    {
+      "id": "rack-ears",
+      "name": {
+        "en": "Rack ears",
+        "zh": "机架挂耳"
+      },
+      "group": "chassis",
+      "summary": {
+        "en": "Bolt the server to the front posts of the rack",
+        "zh": "用螺丝把机器固定在机柜前立柱上"
+      },
+      "detail": {
+        "en": "Two flanges at the front corners. Eight screws, four on each side, hold the server to the rack posts [S3].\n\nA rack is 19 inches wide between its posts and counts height in rack units: 1U is 44.45 mm, so this 10U machine takes ten of them [S25].",
+        "zh": "机箱前面两角的两条翼板。两侧各 4 颗、共 8 颗螺丝把机器固定在机柜立柱上 [S3]。\n\n机柜立柱之间宽 19 英寸，高度按\"机架单位\"计算：1U 是 44.45 mm，这台 10U 的机器占 10 个单位 [S25]。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.0177,
+          0.44,
+          0.004
+        ],
+        "bevel": 0.0015,
+        "at": [
+          0.2324,
+          0.222,
+          0.4466
+        ],
+        "color": "powder",
+        "tint": "#8c7d63"
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.0177,
+            0.44,
+            0.004
+          ],
+          "bevel": 0.0015,
+          "at": [
+            -0.2324,
+            0.222,
+            0.4466
+          ],
+          "color": "powder",
+          "tint": "#8c7d63"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0035,
+            0.0035,
+            0.002
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "at": [
+            0.2324,
+            0.03,
+            0.4492
+          ],
+          "color": "powder",
+          "tint": "#8c7d63"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0035,
+            0.0035,
+            0.002
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "at": [
+            0.2324,
+            0.17,
+            0.4492
+          ],
+          "color": "powder",
+          "tint": "#8c7d63"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0035,
+            0.0035,
+            0.002
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "at": [
+            0.2324,
+            0.3,
+            0.4492
+          ],
+          "color": "powder",
+          "tint": "#8c7d63"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0035,
+            0.0035,
+            0.002
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "at": [
+            0.2324,
+            0.42,
+            0.4492
+          ],
+          "color": "powder",
+          "tint": "#8c7d63"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0035,
+            0.0035,
+            0.002
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "at": [
+            -0.2324,
+            0.03,
+            0.4492
+          ],
+          "color": "powder",
+          "tint": "#8c7d63"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0035,
+            0.0035,
+            0.002
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "at": [
+            -0.2324,
+            0.17,
+            0.4492
+          ],
+          "color": "powder",
+          "tint": "#8c7d63"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0035,
+            0.0035,
+            0.002
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "at": [
+            -0.2324,
+            0.3,
+            0.4492
+          ],
+          "color": "powder",
+          "tint": "#8c7d63"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0035,
+            0.0035,
+            0.002
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "at": [
+            -0.2324,
+            0.42,
+            0.4492
+          ],
+          "color": "powder",
+          "tint": "#8c7d63"
+        }
+      ],
+      "connects": [
+        "rails",
+        "bezel"
+      ]
+    },
+    {
+      "id": "rails",
+      "name": {
+        "en": "Slide rails",
+        "zh": "导轨"
+      },
+      "group": "chassis",
+      "summary": {
+        "en": "Let the 142 kg machine slide in and out of a rack",
+        "zh": "让 142 公斤的机器沿机柜滑进滑出"
+      },
+      "detail": {
+        "en": "A pair of telescopic steel rails, one on each side, screwed to the rack posts front and back. The server rests on them and slides in from the front.\n\nBecause the server can weigh 142.4 kg [S3], it is lifted onto the rails with a mechanical lift, not by hand.",
+        "zh": "一对可伸缩的钢导轨，左右各一，前后都用螺丝固定在机柜立柱上。服务器放在导轨上，从前面推进去。\n\n整机最重 142.4 kg [S3]，所以要用机械升降机把它抬上导轨，不能徒手搬。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.012,
+          0.035,
+          0.8
+        ],
+        "bevel": 0.002,
+        "at": [
+          0.2295,
+          0.2,
+          -0.02
+        ],
+        "color": "stainless"
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.012,
+            0.035,
+            0.8
+          ],
+          "bevel": 0.002,
+          "at": [
+            -0.2295,
+            0.2,
+            -0.02
+          ],
+          "color": "stainless"
+        }
+      ],
+      "connects": [
+        "rack-ears",
+        "chassis-body"
+      ]
+    },
+    {
+      "id": "midplane",
+      "name": {
+        "en": "Midplane",
+        "zh": "中板"
+      },
+      "group": "chassis",
+      "summary": {
+        "en": "Both trays plug into it for power and signals",
+        "zh": "两个托盘都插在这块板上，取电、通信"
+      },
+      "detail": {
+        "en": "A vertical circuit board between the fan wall and the two trays. The GPU tray and the motherboard tray both slide in from the back and plug into it; the user guide lists power, PCIe, sensors and signalling as passing through it [S3].\n\nIts shape and air openings here are a reconstruction: no public drawing shows them. Without openings it would block the air from the fans, so real midplanes leave room for air to pass.",
+        "zh": "风扇墙和两个托盘之间的一块竖直电路板。GPU 托盘和主板托盘都从后面推进来，插在它上面；用户指南写明电源、PCIe、传感器和信号都经过这里 [S3]。\n\n这里的外形和通风孔是重建的，没有公开图纸。如果不开孔，它会挡住风扇吹来的风，所以真实的中板都会给空气留出通道。"
+      },
+      "primitive": {
+        "kind": "extrude",
+        "shape": [
+          [
+            -0.2185,
+            -0.1965
+          ],
+          [
+            0.2185,
+            -0.1965
+          ],
+          [
+            0.2185,
+            0.1965
+          ],
+          [
+            -0.2185,
+            0.1965
+          ]
+        ],
+        "holes": [
+          [
+            [
+              -0.205,
+              -0.045
+            ],
+            [
+              -0.012,
+              -0.045
+            ],
+            [
+              -0.012,
+              0.175
+            ],
+            [
+              -0.205,
+              0.175
+            ]
+          ],
+          [
+            [
+              0.012,
+              -0.045
+            ],
+            [
+              0.205,
+              -0.045
+            ],
+            [
+              0.205,
+              0.175
+            ],
+            [
+              0.012,
+              0.175
+            ]
+          ],
+          [
+            [
+              -0.205,
+              -0.183
+            ],
+            [
+              0.205,
+              -0.183
+            ],
+            [
+              0.205,
+              -0.128
+            ],
+            [
+              -0.205,
+              -0.128
+            ]
+          ]
+        ],
+        "depth": 0.006,
+        "bevel": 0.001,
+        "at": [
+          0,
+          0.2445,
+          0.336
+        ],
+        "color": "plastic",
+        "tint": "#3f5f3a"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.12
+      },
+      "connects": [
+        "gpu-baseboard",
+        "motherboard",
+        "power-distribution",
+        "fan-modules"
+      ]
+    },
+    {
+      "id": "front-controls",
+      "name": {
+        "en": "Front controls",
+        "zh": "前控制面板"
+      },
+      "short": {
+        "en": "Controls",
+        "zh": "控制面板"
+      },
+      "group": "chassis",
+      "summary": {
+        "en": "Power button, ID light and fault light",
+        "zh": "电源键、识别灯和故障灯"
+      },
+      "detail": {
+        "en": "Three controls stacked on the right-hand rack ear: the power button with its status light, the unit identification (UID) button and light, and a fault light [S3].\n\nIn a hall of identical racks, a technician switches on the UID light remotely to find this exact machine.",
+        "zh": "右侧挂耳上竖排三个控制件：带状态灯的电源键、识别（UID）按钮和灯、故障灯 [S3]。\n\n机房里一排排机柜看起来一模一样，技术人员可以远程点亮 UID 灯，走过去就能认出是哪一台。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.009,
+          0.05,
+          0.002
+        ],
+        "bevel": 0.0008,
+        "at": [
+          0.2324,
+          0.385,
+          0.4495
+        ],
+        "color": "powder"
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0028,
+            0.0028,
+            0.0015
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "at": [
+            0.2324,
+            0.375,
+            0.4505
+          ],
+          "color": "powder"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0022,
+            0.0022,
+            0.0015
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "at": [
+            0.2324,
+            0.36,
+            0.4505
+          ],
+          "color": "powder"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.3
+      },
+      "connects": [
+        "status-led",
+        "bezel"
+      ]
+    },
+    {
+      "id": "status-led",
+      "name": {
+        "en": "Status light",
+        "zh": "状态灯"
+      },
+      "short": {
+        "en": "Status LED",
+        "zh": "状态灯"
+      },
+      "group": "chassis",
+      "summary": {
+        "en": "Shows the machine is switched on",
+        "zh": "亮着表示机器通电运行"
+      },
+      "detail": {
+        "en": "The light in the power button. On the real machine it shows the power state with a steady light; the slow breathing here only marks that the model is running.",
+        "zh": "电源键里的指示灯。真机用常亮表示通电状态；模型里缓慢的明暗变化只是表示\"正在运转\"。"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.0026
+        ],
+        "at": [
+          0.2324,
+          0.398,
+          0.4505
+        ],
+        "color": "token:loop"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.3
+      },
+      "connects": [
+        "front-controls"
+      ]
+    },
+    {
+      "id": "fan-modules",
+      "name": {
+        "en": "Fan modules",
+        "zh": "风扇模块"
+      },
+      "group": "cooling",
+      "summary": {
+        "en": "20 fan units pull room air in at the front",
+        "zh": "20 个风扇模块从前面把机房的冷空气抽进来"
+      },
+      "detail": {
+        "en": "Four rows of five modules fill the front above the drives [S3]. Each module holds two fans one behind the other; if either fails the whole module is swapped, from the front, and the service manual asks for the swap to be done within 30 seconds so the machine does not overheat [S4].\n\nTogether they move up to 1,550 cubic feet of air a minute, about 2,630 cubic metres an hour [S3]. The real modules have a fine mesh guard and a pull handle; the model leaves the mesh out so the rotors show. The machine is loud: the service manual makes hearing protection mandatory near it [S35].",
+        "zh": "前面硬盘上方是 4 排、每排 5 个风扇模块 [S3]。每个模块里前后串着两只风扇，任何一只坏了，就从前面整块换掉；服务手册要求在 30 秒内换好，免得机器过热 [S4]。\n\n全部风扇合起来最多每分钟推动 1,550 立方英尺空气，约每小时 2,630 立方米 [S3]。真机模块前面有细密的护网和拉手；模型省掉护网，好让人看见叶轮。机器很吵：服务手册规定在它附近工作必须戴听力防护 [S35]。"
+      },
+      "primitive": {
+        "kind": "extrude",
+        "shape": [
+          [
+            -0.041,
+            -0.042
+          ],
+          [
+            0.041,
+            -0.042
+          ],
+          [
+            0.041,
+            0.042
+          ],
+          [
+            -0.041,
+            0.042
+          ]
+        ],
+        "holes": [
+          [
+            [
+              0.038,
+              0.0
+            ],
+            [
+              0.0375,
+              0.0059
+            ],
+            [
+              0.0361,
+              0.0117
+            ],
+            [
+              0.0339,
+              0.0173
+            ],
+            [
+              0.0307,
+              0.0223
+            ],
+            [
+              0.0269,
+              0.0269
+            ],
+            [
+              0.0223,
+              0.0307
+            ],
+            [
+              0.0173,
+              0.0339
+            ],
+            [
+              0.0117,
+              0.0361
+            ],
+            [
+              0.0059,
+              0.0375
+            ],
+            [
+              0.0,
+              0.038
+            ],
+            [
+              -0.0059,
+              0.0375
+            ],
+            [
+              -0.0117,
+              0.0361
+            ],
+            [
+              -0.0173,
+              0.0339
+            ],
+            [
+              -0.0223,
+              0.0307
+            ],
+            [
+              -0.0269,
+              0.0269
+            ],
+            [
+              -0.0307,
+              0.0223
+            ],
+            [
+              -0.0339,
+              0.0173
+            ],
+            [
+              -0.0361,
+              0.0117
+            ],
+            [
+              -0.0375,
+              0.0059
+            ],
+            [
+              -0.038,
+              0.0
+            ],
+            [
+              -0.0375,
+              -0.0059
+            ],
+            [
+              -0.0361,
+              -0.0117
+            ],
+            [
+              -0.0339,
+              -0.0173
+            ],
+            [
+              -0.0307,
+              -0.0223
+            ],
+            [
+              -0.0269,
+              -0.0269
+            ],
+            [
+              -0.0223,
+              -0.0307
+            ],
+            [
+              -0.0173,
+              -0.0339
+            ]
+          ]
+        ],
+        "depth": 0.085,
+        "bevel": 0.002,
+        "at": [
+          0,
+          0.3965,
+          0.3885
+        ],
+        "color": "powder",
+        "tint": "#3d3d3b"
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.009,
+            0.07,
+            0.004
+          ],
+          "bevel": 0.0012,
+          "at": [
+            0,
+            0.3965,
+            0.4333
+          ],
+          "color": "powder",
+          "tint": "#3d3d3b"
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              -0.041,
+              -0.042
+            ],
+            [
+              0.041,
+              -0.042
+            ],
+            [
+              0.041,
+              0.042
+            ],
+            [
+              -0.041,
+              0.042
+            ]
+          ],
+          "holes": [
+            [
+              [
+                0.038,
+                0.0
+              ],
+              [
+                0.0375,
+                0.0059
+              ],
+              [
+                0.0361,
+                0.0117
+              ],
+              [
+                0.0339,
+                0.0173
+              ],
+              [
+                0.0307,
+                0.0223
+              ],
+              [
+                0.0269,
+                0.0269
+              ],
+              [
+                0.0223,
+                0.0307
+              ],
+              [
+                0.0173,
+                0.0339
+              ],
+              [
+                0.0117,
+                0.0361
+              ],
+              [
+                0.0059,
+                0.0375
+              ],
+              [
+                0.0,
+                0.038
+              ],
+              [
+                -0.0059,
+                0.0375
+              ],
+              [
+                -0.0117,
+                0.0361
+              ],
+              [
+                -0.0173,
+                0.0339
+              ],
+              [
+                -0.0223,
+                0.0307
+              ],
+              [
+                -0.0269,
+                0.0269
+              ],
+              [
+                -0.0307,
+                0.0223
+              ],
+              [
+                -0.0339,
+                0.0173
+              ],
+              [
+                -0.0361,
+                0.0117
+              ],
+              [
+                -0.0375,
+                0.0059
+              ],
+              [
+                -0.038,
+                0.0
+              ],
+              [
+                -0.0375,
+                -0.0059
+              ],
+              [
+                -0.0361,
+                -0.0117
+              ],
+              [
+                -0.0339,
+                -0.0173
+              ],
+              [
+                -0.0307,
+                -0.0223
+              ],
+              [
+                -0.0269,
+                -0.0269
+              ],
+              [
+                -0.0223,
+                -0.0307
+              ],
+              [
+                -0.0173,
+                -0.0339
+              ]
+            ]
+          ],
+          "depth": 0.085,
+          "bevel": 0.002,
+          "at": [
+            0,
+            0.3095,
+            0.3885
+          ],
+          "color": "powder",
+          "tint": "#3d3d3b"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.009,
+            0.07,
+            0.004
+          ],
+          "bevel": 0.0012,
+          "at": [
+            0,
+            0.3095,
+            0.4333
+          ],
+          "color": "powder",
+          "tint": "#3d3d3b"
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              -0.041,
+              -0.042
+            ],
+            [
+              0.041,
+              -0.042
+            ],
+            [
+              0.041,
+              0.042
+            ],
+            [
+              -0.041,
+              0.042
+            ]
+          ],
+          "holes": [
+            [
+              [
+                0.038,
+                0.0
+              ],
+              [
+                0.0375,
+                0.0059
+              ],
+              [
+                0.0361,
+                0.0117
+              ],
+              [
+                0.0339,
+                0.0173
+              ],
+              [
+                0.0307,
+                0.0223
+              ],
+              [
+                0.0269,
+                0.0269
+              ],
+              [
+                0.0223,
+                0.0307
+              ],
+              [
+                0.0173,
+                0.0339
+              ],
+              [
+                0.0117,
+                0.0361
+              ],
+              [
+                0.0059,
+                0.0375
+              ],
+              [
+                0.0,
+                0.038
+              ],
+              [
+                -0.0059,
+                0.0375
+              ],
+              [
+                -0.0117,
+                0.0361
+              ],
+              [
+                -0.0173,
+                0.0339
+              ],
+              [
+                -0.0223,
+                0.0307
+              ],
+              [
+                -0.0269,
+                0.0269
+              ],
+              [
+                -0.0307,
+                0.0223
+              ],
+              [
+                -0.0339,
+                0.0173
+              ],
+              [
+                -0.0361,
+                0.0117
+              ],
+              [
+                -0.0375,
+                0.0059
+              ],
+              [
+                -0.038,
+                0.0
+              ],
+              [
+                -0.0375,
+                -0.0059
+              ],
+              [
+                -0.0361,
+                -0.0117
+              ],
+              [
+                -0.0339,
+                -0.0173
+              ],
+              [
+                -0.0307,
+                -0.0223
+              ],
+              [
+                -0.0269,
+                -0.0269
+              ],
+              [
+                -0.0223,
+                -0.0307
+              ],
+              [
+                -0.0173,
+                -0.0339
+              ]
+            ]
+          ],
+          "depth": 0.085,
+          "bevel": 0.002,
+          "at": [
+            0,
+            0.2225,
+            0.3885
+          ],
+          "color": "powder",
+          "tint": "#3d3d3b"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.009,
+            0.07,
+            0.004
+          ],
+          "bevel": 0.0012,
+          "at": [
+            0,
+            0.2225,
+            0.4333
+          ],
+          "color": "powder",
+          "tint": "#3d3d3b"
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              -0.041,
+              -0.042
+            ],
+            [
+              0.041,
+              -0.042
+            ],
+            [
+              0.041,
+              0.042
+            ],
+            [
+              -0.041,
+              0.042
+            ]
+          ],
+          "holes": [
+            [
+              [
+                0.038,
+                0.0
+              ],
+              [
+                0.0375,
+                0.0059
+              ],
+              [
+                0.0361,
+                0.0117
+              ],
+              [
+                0.0339,
+                0.0173
+              ],
+              [
+                0.0307,
+                0.0223
+              ],
+              [
+                0.0269,
+                0.0269
+              ],
+              [
+                0.0223,
+                0.0307
+              ],
+              [
+                0.0173,
+                0.0339
+              ],
+              [
+                0.0117,
+                0.0361
+              ],
+              [
+                0.0059,
+                0.0375
+              ],
+              [
+                0.0,
+                0.038
+              ],
+              [
+                -0.0059,
+                0.0375
+              ],
+              [
+                -0.0117,
+                0.0361
+              ],
+              [
+                -0.0173,
+                0.0339
+              ],
+              [
+                -0.0223,
+                0.0307
+              ],
+              [
+                -0.0269,
+                0.0269
+              ],
+              [
+                -0.0307,
+                0.0223
+              ],
+              [
+                -0.0339,
+                0.0173
+              ],
+              [
+                -0.0361,
+                0.0117
+              ],
+              [
+                -0.0375,
+                0.0059
+              ],
+              [
+                -0.038,
+                0.0
+              ],
+              [
+                -0.0375,
+                -0.0059
+              ],
+              [
+                -0.0361,
+                -0.0117
+              ],
+              [
+                -0.0339,
+                -0.0173
+              ],
+              [
+                -0.0307,
+                -0.0223
+              ],
+              [
+                -0.0269,
+                -0.0269
+              ],
+              [
+                -0.0223,
+                -0.0307
+              ],
+              [
+                -0.0173,
+                -0.0339
+              ]
+            ]
+          ],
+          "depth": 0.085,
+          "bevel": 0.002,
+          "at": [
+            0,
+            0.1355,
+            0.3885
+          ],
+          "color": "powder",
+          "tint": "#3d3d3b"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.009,
+            0.07,
+            0.004
+          ],
+          "bevel": 0.0012,
+          "at": [
+            0,
+            0.1355,
+            0.4333
+          ],
+          "color": "powder",
+          "tint": "#3d3d3b"
+        }
+      ],
+      "repeat": {
+        "count": 5,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "spacing": 0.0855
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.3
+      },
+      "connects": [
+        "midplane",
+        "fan-rotors",
+        "bezel"
+      ]
+    },
+    {
+      "id": "fan-rotors",
+      "name": {
+        "en": "Fan rotors",
+        "zh": "风扇叶轮"
+      },
+      "group": "cooling",
+      "summary": {
+        "en": "Two rotors in each unit push air through the box",
+        "zh": "每个模块两只叶轮串联，推着空气穿过整台机器"
+      },
+      "detail": {
+        "en": "Forty rotors, two in line in each of the 20 modules [S4]. Fans in series add their pressure, which is what it takes to push air through the tall, closely spaced fins of the GPU heat sinks.\n\nThe number of blades is drawn for clarity, and the spin is slowed right down on screen. NVIDIA does not publish the fan speed; the panel shows it as a percentage in this simulation [S1].",
+        "zh": "40 只叶轮，20 个模块里每个前后串着两只 [S4]。串联的风扇压力相加，这样才推得动空气穿过 GPU 散热器又高又密的鳍片。\n\n叶片数是为了看清楚画的，转速在画面里大大放慢了。NVIDIA 没有公布风扇转速；面板上用的是这个模拟里的百分比 [S1]。"
+      },
+      "primitive": {
+        "kind": "blades",
+        "layout": "axial",
+        "count": 7,
+        "radius": 0.0355,
+        "hub": 0.0125,
+        "chord": 0.028,
+        "twist": 10,
+        "sweep": 20,
+        "pitch": 32,
+        "thickness": 0.0018,
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "at": [
+          0,
+          0.3965,
+          0.416
+        ],
+        "color": "plastic",
+        "tint": "#1a1a1a"
+      },
+      "extra": [
+        {
+          "kind": "blades",
+          "layout": "axial",
+          "count": 7,
+          "radius": 0.0355,
+          "hub": 0.0125,
+          "chord": 0.028,
+          "twist": 10,
+          "sweep": 20,
+          "pitch": 32,
+          "thickness": 0.0018,
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "at": [
+            0,
+            0.3095,
+            0.416
+          ],
+          "color": "plastic",
+          "tint": "#1a1a1a"
+        },
+        {
+          "kind": "blades",
+          "layout": "axial",
+          "count": 7,
+          "radius": 0.0355,
+          "hub": 0.0125,
+          "chord": 0.028,
+          "twist": 10,
+          "sweep": 20,
+          "pitch": 32,
+          "thickness": 0.0018,
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "at": [
+            0,
+            0.2225,
+            0.416
+          ],
+          "color": "plastic",
+          "tint": "#1a1a1a"
+        },
+        {
+          "kind": "blades",
+          "layout": "axial",
+          "count": 7,
+          "radius": 0.0355,
+          "hub": 0.0125,
+          "chord": 0.028,
+          "twist": 10,
+          "sweep": 20,
+          "pitch": 32,
+          "thickness": 0.0018,
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "at": [
+            0,
+            0.1355,
+            0.416
+          ],
+          "color": "plastic",
+          "tint": "#1a1a1a"
+        },
+        {
+          "kind": "blades",
+          "layout": "axial",
+          "count": 7,
+          "radius": 0.0355,
+          "hub": 0.0125,
+          "chord": 0.028,
+          "twist": 10,
+          "sweep": 20,
+          "pitch": 32,
+          "thickness": 0.0018,
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "at": [
+            0,
+            0.3965,
+            0.366
+          ],
+          "color": "plastic",
+          "tint": "#1a1a1a"
+        },
+        {
+          "kind": "blades",
+          "layout": "axial",
+          "count": 7,
+          "radius": 0.0355,
+          "hub": 0.0125,
+          "chord": 0.028,
+          "twist": 10,
+          "sweep": 20,
+          "pitch": 32,
+          "thickness": 0.0018,
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "at": [
+            0,
+            0.3095,
+            0.366
+          ],
+          "color": "plastic",
+          "tint": "#1a1a1a"
+        },
+        {
+          "kind": "blades",
+          "layout": "axial",
+          "count": 7,
+          "radius": 0.0355,
+          "hub": 0.0125,
+          "chord": 0.028,
+          "twist": 10,
+          "sweep": 20,
+          "pitch": 32,
+          "thickness": 0.0018,
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "at": [
+            0,
+            0.2225,
+            0.366
+          ],
+          "color": "plastic",
+          "tint": "#1a1a1a"
+        },
+        {
+          "kind": "blades",
+          "layout": "axial",
+          "count": 7,
+          "radius": 0.0355,
+          "hub": 0.0125,
+          "chord": 0.028,
+          "twist": 10,
+          "sweep": 20,
+          "pitch": 32,
+          "thickness": 0.0018,
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "at": [
+            0,
+            0.1355,
+            0.366
+          ],
+          "color": "plastic",
+          "tint": "#1a1a1a"
+        }
+      ],
+      "repeat": {
+        "count": 5,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "spacing": 0.0855
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.3
+      },
+      "connects": [
+        "fan-modules"
+      ]
+    },
+    {
+      "id": "gpu-tray-frame",
+      "name": {
+        "en": "GPU tray",
+        "zh": "GPU 托盘"
+      },
+      "group": "gpu-tray",
+      "summary": {
+        "en": "Holds the eight GPUs; slides out at the back",
+        "zh": "托着 8 块 GPU，从机器后面整盘抽出"
+      },
+      "detail": {
+        "en": "A steel tray that takes up about the top two thirds of the box. Measured from the rear view it is close to 300 mm tall, while the motherboard tray below is about 2U [S3]; a review of another air-cooled 8-GPU server gives 6U for this kind of GPU tray [S15].\n\nThe rear-panel drawing labels the upper module \"GPU tray\", so the model slides the whole tray, GPUs and heat sinks, out of the back; NVIDIA does not describe this in words, and the tray is serviced by NVIDIA rather than by customers [S3, S35]. The closed box at its rear end is drawn plain because what is inside it is not shown in public documents.",
+        "zh": "一个钢托盘，约占机箱上部三分之二。从后视图量，它高约 300 mm，下面的主板托盘约 2U [S3]；另一台风冷 8 GPU 服务器的评测给出这类 GPU 托盘高 6U [S15]。\n\n后视图把上层模块标为“GPU 托盘”，所以模型让整个托盘连同 GPU 和散热器从后面抽出；NVIDIA 没有用文字说明这一点，而且这个托盘由 NVIDIA 维修，不由用户自己拆换 [S3, S35]。托盘后端那个封闭的盒子，公开资料没有画出里面是什么，所以模型只画了外壳。"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.437,
+          0.003,
+          0.7806
+        ],
+        "at": [
+          0,
+          0.1455,
+          -0.0583
+        ],
+        "color": "steel",
+        "tint": "#b9bab5"
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "size": [
+            0.003,
+            0.293,
+            0.7806
+          ],
+          "at": [
+            -0.2185,
+            0.2935,
+            -0.0583
+          ],
+          "color": "steel",
+          "tint": "#b9bab5"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.003,
+            0.293,
+            0.7806
+          ],
+          "at": [
+            0.2185,
+            0.2935,
+            -0.0583
+          ],
+          "color": "steel",
+          "tint": "#b9bab5"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.434,
+            0.004,
+            0.18
+          ],
+          "at": [
+            0,
+            0.437,
+            -0.357
+          ],
+          "color": "steel",
+          "tint": "#b9bab5"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          0.6,
+          -1
+        ],
+        "dist": 0.7
+      },
+      "connects": [
+        "midplane",
+        "gpu-baseboard",
+        "rear-grille"
+      ],
+      "shell": true
+    },
+    {
+      "id": "rear-grille",
+      "name": {
+        "en": "Rear grille",
+        "zh": "排风面"
+      },
+      "group": "gpu-tray",
+      "summary": {
+        "en": "Lets the hot air out of the GPU tray",
+        "zh": "让 GPU 托盘里的热空气从后面排出"
+      },
+      "detail": {
+        "en": "The back face of the GPU tray is almost all openings, so the hot air leaving the heat sinks meets little resistance [S3].\n\nOn the real tray the openings are dense hexagonal holes; the model uses fine vertical bars, which let the same light and air through on screen.",
+        "zh": "GPU 托盘的后端几乎全是开孔，散热器出来的热空气走得很顺 [S3]。\n\n真机上是密密的六角形孔；模型用细细的竖条近似，画面上一样透光、透风。"
+      },
+      "primitive": {
+        "kind": "grille",
+        "style": "slats",
+        "size": [
+          0.434,
+          0.29,
+          0.005
+        ],
+        "count": 64,
+        "bar": 0.0035,
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "at": [
+          0,
+          0.2925,
+          -0.4465
+        ],
+        "color": "steel",
+        "tint": "#c9cac6"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0.6,
+          -1
+        ],
+        "dist": 0.7
+      },
+      "connects": [
+        "gpu-tray-frame"
+      ],
+      "shell": true
+    },
+    {
+      "id": "gpu-baseboard",
+      "name": {
+        "en": "HGX baseboard",
+        "zh": "HGX 基板"
+      },
+      "short": {
+        "en": "Baseboard",
+        "zh": "基板"
+      },
+      "group": "gpu-tray",
+      "summary": {
+        "en": "Carries the eight GPUs and wires them to the switches",
+        "zh": "承载 8 块 GPU，并用板内走线把它们连到交换芯片"
+      },
+      "detail": {
+        "en": "A large circuit board, called HGX B200, that holds the eight GPU modules and the two NVSwitch chips [S5]. The NVLink connections between them are copper traces inside the board, so they cannot be seen.\n\nEach GPU has 18 NVLink links; 8 GPUs × 18 = 144 links, which matches 2 switch chips × 72 ports, so each GPU gives 9 links to each switch. That split is worked out from the published numbers, not stated by NVIDIA [S7, S34].",
+        "zh": "一块很大的电路板，叫 HGX B200，上面装着 8 个 GPU 模块和 2 颗 NVSwitch 芯片 [S5]。它们之间的 NVLink 连线是板子里面的铜走线，所以看不见。\n\n每块 GPU 有 18 条 NVLink 链路；8 块 × 18 = 144 条，正好等于 2 颗交换芯片 × 72 个端口，所以每块 GPU 给每颗交换芯片 9 条。这个分法是按公开数字推算的，NVIDIA 没有直接写 [S7, S34]。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.432,
+          0.004,
+          0.58
+        ],
+        "bevel": 0.001,
+        "at": [
+          0,
+          0.149,
+          0.02
+        ],
+        "color": "plastic",
+        "tint": "#3f5f3a"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0.6,
+          -1
+        ],
+        "dist": 0.7
+      },
+      "connects": [
+        "baseboard-connectors",
+        "gpu-modules",
+        "nvswitch-chips"
+      ]
+    },
+    {
+      "id": "baseboard-connectors",
+      "name": {
+        "en": "Midplane connectors",
+        "zh": "中板连接器"
+      },
+      "short": {
+        "en": "Connectors",
+        "zh": "连接器"
+      },
+      "group": "gpu-tray",
+      "summary": {
+        "en": "Plug the GPU board's power and signals into the midplane",
+        "zh": "把 GPU 基板的电和信号插到中板上"
+      },
+      "detail": {
+        "en": "A row of high-density connectors along the front edge of the baseboard. When the tray slides home they mate with the midplane, carrying power, PCIe, sensor and control signals [S3].\n\nThe count and size here are read from the photo of an HGX B200 board and the tray drawing [S16, S3].",
+        "zh": "基板前缘一排高密度连接器。托盘推到底时，它们和中板对插，电源、PCIe、传感器和控制信号都从这里通过 [S3]。\n\n这里的个数和大小是按一块 HGX B200 基板的照片和托盘图估的 [S16, S3]。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.04,
+          0.026,
+          0.022
+        ],
+        "bevel": 0.002,
+        "at": [
+          0,
+          0.164,
+          0.318
+        ],
+        "color": "powder"
+      },
+      "repeat": {
+        "count": 8,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "spacing": 0.052
+      },
+      "explode": {
+        "dir": [
+          0,
+          0.6,
+          -1
+        ],
+        "dist": 0.7
+      },
+      "connects": [
+        "midplane",
+        "gpu-baseboard"
+      ]
+    },
+    {
+      "id": "gpu-modules",
+      "name": {
+        "en": "GPU modules",
+        "zh": "GPU 模块"
+      },
+      "group": "gpu-tray",
+      "summary": {
+        "en": "Each module is one B200 GPU and its power circuits",
+        "zh": "每个模块是一颗 B200 GPU 和它的供电电路"
+      },
+      "detail": {
+        "en": "Eight SXM modules in two rows of four [S3]. Each is a small circuit board carrying one B200 package and the circuits that feed it power; it plugs flat onto the baseboard.\n\nEach GPU may draw up to 1,000 W when five or more power supplies are working, and 800 W with only three or four [S3]. The eight together have 1,440 GB of HBM3e memory [S2].",
+        "zh": "8 个 SXM 模块，前后两排、每排 4 个 [S3]。每个是一块小电路板，上面是一颗 B200 封装和给它供电的电路，平插在基板上。\n\n有 5 个以上电源工作时，每块 GPU 最多可用 1,000 W；只有 3–4 个电源时是 800 W [S3]。8 块合起来有 1,440 GB 的 HBM3e 显存 [S2]。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.1,
+          0.005,
+          0.165
+        ],
+        "bevel": 0.001,
+        "at": [
+          0,
+          0.1535,
+          0.152
+        ],
+        "color": "plastic",
+        "tint": "#2f4a36"
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.1,
+            0.005,
+            0.165
+          ],
+          "bevel": 0.001,
+          "at": [
+            0,
+            0.1535,
+            -0.152
+          ],
+          "color": "plastic",
+          "tint": "#2f4a36"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.07,
+            0.0025,
+            0.07
+          ],
+          "bevel": 0.0005,
+          "at": [
+            0,
+            0.1578,
+            0.152
+          ],
+          "color": "plastic",
+          "tint": "#2f4a36"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.07,
+            0.0025,
+            0.07
+          ],
+          "bevel": 0.0005,
+          "at": [
+            0,
+            0.1578,
+            -0.152
+          ],
+          "color": "plastic",
+          "tint": "#2f4a36"
+        }
+      ],
+      "repeat": {
+        "count": 4,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "spacing": 0.105
+      },
+      "explode": {
+        "dir": [
+          0,
+          0.6,
+          -1
+        ],
+        "dist": 0.7
+      },
+      "connects": [
+        "gpu-baseboard",
+        "gpu-dies",
+        "gpu-heatsinks"
+      ]
+    },
+    {
+      "id": "gpu-dies",
+      "name": {
+        "en": "GPU dies",
+        "zh": "GPU 裸片"
+      },
+      "group": "gpu-tray",
+      "summary": {
+        "en": "Two silicon dies per GPU do the calculating",
+        "zh": "每块 GPU 两块硅片，负责计算"
+      },
+      "detail": {
+        "en": "Each B200 is two dies, each as large as the chip-making process allows, joined by a 10 TB/s link so that software sees one GPU. Together they hold 208 billion transistors, made on TSMC's 4NP process, according to NVIDIA [S6].\n\nMost of the work is huge numbers of multiply-and-add operations on matrices, done by units NVIDIA calls Tensor Cores. NVIDIA has not given the die size; reports put each die at more than 800 mm² [S8]. The model draws each as a plain block of 26 × 33 mm, about 860 mm² [S1].",
+        "zh": "每颗 B200 由两块裸片组成，每块都做到了制造工艺允许的最大尺寸，两块之间用 10 TB/s 的连接合成一个整体，软件看到的是一块 GPU。NVIDIA 称两块合计 2080 亿个晶体管，用台积电 4NP 工艺制造 [S6]。\n\n它做的主要是海量的矩阵乘加运算，由 NVIDIA 称为 Tensor Core 的单元完成。NVIDIA 没有公布裸片尺寸，报道估计每块超过 800 mm² [S8]。模型把每块画成 26 × 33 mm 的平块，约 860 mm² [S1]。"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.026,
+          0.0012,
+          0.033
+        ],
+        "at": [
+          -0.0135,
+          0.1596,
+          0.152
+        ],
+        "color": "steel",
+        "tint": "#4b5160"
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "size": [
+            0.026,
+            0.0012,
+            0.033
+          ],
+          "at": [
+            0.0135,
+            0.1596,
+            0.152
+          ],
+          "color": "steel",
+          "tint": "#4b5160"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.026,
+            0.0012,
+            0.033
+          ],
+          "at": [
+            -0.0135,
+            0.1596,
+            -0.152
+          ],
+          "color": "steel",
+          "tint": "#4b5160"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.026,
+            0.0012,
+            0.033
+          ],
+          "at": [
+            0.0135,
+            0.1596,
+            -0.152
+          ],
+          "color": "steel",
+          "tint": "#4b5160"
+        }
+      ],
+      "repeat": {
+        "count": 4,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "spacing": 0.105
+      },
+      "explode": {
+        "dir": [
+          0,
+          0.75,
+          -1
+        ],
+        "dist": 0.75
+      },
+      "connects": [
+        "gpu-modules",
+        "hbm-stacks"
+      ]
+    },
+    {
+      "id": "hbm-stacks",
+      "name": {
+        "en": "HBM3e memory",
+        "zh": "HBM3e 显存"
+      },
+      "short": {
+        "en": "HBM3e",
+        "zh": "HBM3e"
+      },
+      "group": "gpu-tray",
+      "summary": {
+        "en": "Stacked memory right beside the dies feeds them data",
+        "zh": "紧挨着芯片的堆叠显存，给计算单元送数据"
+      },
+      "detail": {
+        "en": "Eight stacks of HBM3e memory sit on each package beside the two dies, 64 in the whole server. Each stack is several memory chips piled on top of each other, wired with very many short connections, so data moves fast over a short distance [S8, S9].\n\nIn the DGX B200 each GPU has 180 GB at 8 TB/s (1,440 GB and 64 TB/s for eight) [S2]; the B200 chip itself is described with 192 GB, 24 GB per stack [S8]. NVIDIA does not say why the DGX enables 180 GB. The arrangement drawn here, two stacks above and two below each die, is read from NVIDIA's photo of the package [S34].",
+        "zh": "每个封装上、两块裸片旁边有 8 叠 HBM3e 显存，整机 64 叠。每叠是几层存储芯片摞在一起，用非常多很短的连线连接，所以数据走得近、走得快 [S8, S9]。\n\n在 DGX B200 里，每块 GPU 有 180 GB，每秒 8 TB（8 块合计 1,440 GB、每秒 64 TB）[S2]；B200 芯片本身的介绍写的是 192 GB，每叠 24 GB [S8]。NVIDIA 没有说明 DGX 为什么启用 180 GB。这里画的排法，每块裸片上下各两叠，是照 NVIDIA 公开的封装照片画的 [S34]。"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.011,
+          0.0012,
+          0.011
+        ],
+        "at": [
+          -0.02,
+          0.1596,
+          0.1755
+        ],
+        "color": "powder",
+        "tint": "#5b5d60"
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "size": [
+            0.011,
+            0.0012,
+            0.011
+          ],
+          "at": [
+            -0.007,
+            0.1596,
+            0.1755
+          ],
+          "color": "powder",
+          "tint": "#5b5d60"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.011,
+            0.0012,
+            0.011
+          ],
+          "at": [
+            0.007,
+            0.1596,
+            0.1755
+          ],
+          "color": "powder",
+          "tint": "#5b5d60"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.011,
+            0.0012,
+            0.011
+          ],
+          "at": [
+            0.02,
+            0.1596,
+            0.1755
+          ],
+          "color": "powder",
+          "tint": "#5b5d60"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.011,
+            0.0012,
+            0.011
+          ],
+          "at": [
+            -0.02,
+            0.1596,
+            0.1285
+          ],
+          "color": "powder",
+          "tint": "#5b5d60"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.011,
+            0.0012,
+            0.011
+          ],
+          "at": [
+            -0.007,
+            0.1596,
+            0.1285
+          ],
+          "color": "powder",
+          "tint": "#5b5d60"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.011,
+            0.0012,
+            0.011
+          ],
+          "at": [
+            0.007,
+            0.1596,
+            0.1285
+          ],
+          "color": "powder",
+          "tint": "#5b5d60"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.011,
+            0.0012,
+            0.011
+          ],
+          "at": [
+            0.02,
+            0.1596,
+            0.1285
+          ],
+          "color": "powder",
+          "tint": "#5b5d60"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.011,
+            0.0012,
+            0.011
+          ],
+          "at": [
+            -0.02,
+            0.1596,
+            -0.1285
+          ],
+          "color": "powder",
+          "tint": "#5b5d60"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.011,
+            0.0012,
+            0.011
+          ],
+          "at": [
+            -0.007,
+            0.1596,
+            -0.1285
+          ],
+          "color": "powder",
+          "tint": "#5b5d60"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.011,
+            0.0012,
+            0.011
+          ],
+          "at": [
+            0.007,
+            0.1596,
+            -0.1285
+          ],
+          "color": "powder",
+          "tint": "#5b5d60"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.011,
+            0.0012,
+            0.011
+          ],
+          "at": [
+            0.02,
+            0.1596,
+            -0.1285
+          ],
+          "color": "powder",
+          "tint": "#5b5d60"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.011,
+            0.0012,
+            0.011
+          ],
+          "at": [
+            -0.02,
+            0.1596,
+            -0.1755
+          ],
+          "color": "powder",
+          "tint": "#5b5d60"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.011,
+            0.0012,
+            0.011
+          ],
+          "at": [
+            -0.007,
+            0.1596,
+            -0.1755
+          ],
+          "color": "powder",
+          "tint": "#5b5d60"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.011,
+            0.0012,
+            0.011
+          ],
+          "at": [
+            0.007,
+            0.1596,
+            -0.1755
+          ],
+          "color": "powder",
+          "tint": "#5b5d60"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.011,
+            0.0012,
+            0.011
+          ],
+          "at": [
+            0.02,
+            0.1596,
+            -0.1755
+          ],
+          "color": "powder",
+          "tint": "#5b5d60"
+        }
+      ],
+      "repeat": {
+        "count": 4,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "spacing": 0.105
+      },
+      "explode": {
+        "dir": [
+          0,
+          0.75,
+          -1
+        ],
+        "dist": 0.75
+      },
+      "connects": [
+        "gpu-dies"
+      ]
+    },
+    {
+      "id": "gpu-heatsinks",
+      "name": {
+        "en": "GPU heat sinks",
+        "zh": "GPU 散热器"
+      },
+      "short": {
+        "en": "GPU heatsinks",
+        "zh": "GPU 散热器"
+      },
+      "group": "gpu-tray",
+      "summary": {
+        "en": "Carry each GPU's heat up into fins for the air",
+        "zh": "把每块 GPU 的热导到高高的鳍片上，让风带走"
+      },
+      "detail": {
+        "en": "Each GPU wears a tall tower: a copper base pressed on the chip, heat pipes that carry the heat upward, and a stack of thin metal fins that the air flows between. Metals are good conductors of heat, so the heat spreads quickly from the small chip to a large area of fins [S16].\n\nIn photos the towers stand roughly two and a half times as tall as they are wide, with black side covers and a window on top [S16]. Real fins are a millimetre or two apart; the model spaces them wider so they do not shimmer on screen.",
+        "zh": "每块 GPU 上顶着一座高塔：紧贴芯片的铜底座，把热往上送的热管，以及一摞空气从中间流过的薄金属鳍片。金属是热的良导体，所以热量很快从小小的芯片散到一大片鳍片上 [S16]。\n\n照片里这些散热塔的高度约是宽度的两倍半，两侧有黑色护罩，顶上有一个窗口 [S16]。真实鳍片间距只有一两毫米；模型画得宽一些，免得屏幕上闪烁。"
+      },
+      "primitive": {
+        "kind": "fins",
+        "size": [
+          0.094,
+          0.168,
+          0.0005
+        ],
+        "count": 60,
+        "gap": 0.0035,
+        "axis": "y",
+        "at": [
+          0,
+          0.29,
+          0.152
+        ],
+        "color": "casing",
+        "tint": "#6e5c40"
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "size": [
+            0.003,
+            0.253,
+            0.168
+          ],
+          "at": [
+            -0.0485,
+            0.294,
+            0.152
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.003,
+            0.253,
+            0.168
+          ],
+          "at": [
+            0.0485,
+            0.294,
+            0.152
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.1,
+            0.006,
+            0.17
+          ],
+          "bevel": 0.0015,
+          "at": [
+            0,
+            0.4235,
+            0.152
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.03,
+            0.002,
+            0.12
+          ],
+          "bevel": 0.0006,
+          "at": [
+            0,
+            0.4275,
+            0.152
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.09,
+            0.006,
+            0.15
+          ],
+          "bevel": 0.001,
+          "at": [
+            0,
+            0.1645,
+            0.152
+          ],
+          "color": "copper"
+        },
+        {
+          "kind": "fins",
+          "size": [
+            0.094,
+            0.168,
+            0.0005
+          ],
+          "count": 60,
+          "gap": 0.0035,
+          "axis": "y",
+          "at": [
+            0,
+            0.29,
+            -0.152
+          ],
+          "color": "casing",
+          "tint": "#6e5c40"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.003,
+            0.253,
+            0.168
+          ],
+          "at": [
+            -0.0485,
+            0.294,
+            -0.152
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.003,
+            0.253,
+            0.168
+          ],
+          "at": [
+            0.0485,
+            0.294,
+            -0.152
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.1,
+            0.006,
+            0.17
+          ],
+          "bevel": 0.0015,
+          "at": [
+            0,
+            0.4235,
+            -0.152
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.03,
+            0.002,
+            0.12
+          ],
+          "bevel": 0.0006,
+          "at": [
+            0,
+            0.4275,
+            -0.152
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.09,
+            0.006,
+            0.15
+          ],
+          "bevel": 0.001,
+          "at": [
+            0,
+            0.1645,
+            -0.152
+          ],
+          "color": "copper"
+        }
+      ],
+      "repeat": {
+        "count": 4,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "spacing": 0.105
+      },
+      "explode": {
+        "dir": [
+          0,
+          1.1,
+          -1
+        ],
+        "dist": 0.89
+      },
+      "connects": [
+        "gpu-modules"
+      ],
+      "shell": true
+    },
+    {
+      "id": "nvswitch-chips",
+      "name": {
+        "en": "NVSwitch chips",
+        "zh": "NVSwitch 芯片"
+      },
+      "short": {
+        "en": "NVSwitch",
+        "zh": "NVSwitch"
+      },
+      "group": "gpu-tray",
+      "summary": {
+        "en": "Let every GPU talk to the other seven at full speed",
+        "zh": "让每块 GPU 都能同时和其余 7 块高速通信"
+      },
+      "detail": {
+        "en": "Two NVLink switch chips sit on the baseboard between the two rows of GPUs, under the black air duct [S3]. Every GPU is wired to both, so any GPU can send data to any other through a switch at full NVLink speed.\n\nTogether they give the system 14.4 TB/s of NVLink bandwidth [S2]. NVIDIA's Hot Chips 2024 slides give each switch chip 72 ports and a die of more than 800 mm² [S34].",
+        "zh": "两颗 NVLink 交换芯片在两排 GPU 之间的基板上，盖在黑色导风罩下面 [S3]。每块 GPU 都连到这两颗芯片，所以任意一块 GPU 都能经交换芯片，以 NVLink 的全速把数据送给任意另一块。\n\n两颗合计给系统提供 14.4 TB/s 的 NVLink 带宽 [S2]。NVIDIA 在 Hot Chips 2024 会议上的幻灯片写明，每颗交换芯片有 72 个端口，芯片面积超过 800 mm² [S34]。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.05,
+          0.003,
+          0.05
+        ],
+        "bevel": 0.0006,
+        "at": [
+          0,
+          0.1525,
+          0
+        ],
+        "color": "steel",
+        "tint": "#4b5160"
+      },
+      "extra": [
+        {
+          "kind": "fins",
+          "size": [
+            0.06,
+            0.044,
+            0.0006
+          ],
+          "count": 14,
+          "gap": 0.0036,
+          "axis": "x",
+          "at": [
+            0,
+            0.1765,
+            0
+          ],
+          "color": "casing"
+        }
+      ],
+      "repeat": {
+        "count": 2,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "spacing": 0.16
+      },
+      "explode": {
+        "dir": [
+          0,
+          0.75,
+          -1
+        ],
+        "dist": 0.75
+      },
+      "connects": [
+        "gpu-baseboard",
+        "gpu-modules"
+      ]
+    },
+    {
+      "id": "nvswitch-duct",
+      "name": {
+        "en": "Switch air duct",
+        "zh": "导风罩"
+      },
+      "short": {
+        "en": "Switch duct",
+        "zh": "导风罩"
+      },
+      "group": "gpu-tray",
+      "summary": {
+        "en": "Guides air over the switch chips between the rows",
+        "zh": "把风导过两排 GPU 之间的交换芯片"
+      },
+      "detail": {
+        "en": "A black cover as tall as the heat-sink towers, running across the tray between the two rows of GPUs [S16]. It keeps the air from slipping past in the gap, so it goes through the fins and over the switch chips underneath.\n\nThe model shows it as a channel open at the front and back; the inside shape of the real duct is not published.",
+        "zh": "一个和散热塔一样高的黑色罩子，横在两排 GPU 之间 [S16]。它不让空气从空隙里溜走，而是穿过鳍片，并从下面的交换芯片上流过。\n\n模型把它画成前后开口的通道；真实导风罩的内部形状没有公开。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.42,
+          0.2135,
+          0.12
+        ],
+        "bevel": 0.003,
+        "at": [
+          0,
+          0.3167,
+          0
+        ],
+        "color": "powder",
+        "tint": "#262626"
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "size": [
+            0.004,
+            0.056,
+            0.12
+          ],
+          "at": [
+            -0.208,
+            0.182,
+            0
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.004,
+            0.056,
+            0.12
+          ],
+          "at": [
+            0.208,
+            0.182,
+            0
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1.2,
+          -1
+        ],
+        "dist": 0.94
+      },
+      "connects": [
+        "nvswitch-chips"
+      ],
+      "shell": true
+    },
+    {
+      "id": "host-tray-frame",
+      "name": {
+        "en": "Motherboard tray",
+        "zh": "主板托盘"
+      },
+      "short": {
+        "en": "Host tray",
+        "zh": "主机托盘"
+      },
+      "group": "host",
+      "summary": {
+        "en": "Holds CPUs, memory and network cards; slides out",
+        "zh": "托着 CPU、内存和网卡，从后面抽出"
+      },
+      "detail": {
+        "en": "A shallow steel tray, about 2U high, under the GPU tray [S3]. It slides out of the back of the machine on its own; changing a memory module or a CPU means pulling out this whole tray [S4].\n\nIts front end plugs into the midplane like the GPU tray above it [S3].",
+        "zh": "GPU 托盘下面一个浅浅的钢托盘，高约 2U [S3]。它可以单独从机器后面抽出；换内存或 CPU 都要把整个托盘抽出来 [S4]。\n\n它的前端和上面的 GPU 托盘一样，插在中板上 [S3]。"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.437,
+          0.003,
+          0.7806
+        ],
+        "at": [
+          0,
+          0.0515,
+          -0.0583
+        ],
+        "color": "steel",
+        "tint": "#b9bab5"
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "size": [
+            0.003,
+            0.089,
+            0.7806
+          ],
+          "at": [
+            -0.2185,
+            0.0945,
+            -0.0583
+          ],
+          "color": "steel",
+          "tint": "#b9bab5"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.003,
+            0.089,
+            0.7806
+          ],
+          "at": [
+            0.2185,
+            0.0945,
+            -0.0583
+          ],
+          "color": "steel",
+          "tint": "#b9bab5"
+        },
+        {
+          "kind": "grille",
+          "style": "slats",
+          "size": [
+            0.15,
+            0.086,
+            0.003
+          ],
+          "count": 30,
+          "bar": 0.0025,
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "at": [
+            0.135,
+            0.096,
+            -0.4472
+          ],
+          "color": "steel",
+          "tint": "#b9bab5"
+        },
+        {
+          "kind": "grille",
+          "style": "slats",
+          "size": [
+            0.15,
+            0.086,
+            0.003
+          ],
+          "count": 30,
+          "bar": 0.0025,
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "at": [
+            -0.135,
+            0.096,
+            -0.4472
+          ],
+          "color": "steel",
+          "tint": "#b9bab5"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          0,
+          -1
+        ],
+        "dist": 0.5
+      },
+      "connects": [
+        "midplane",
+        "motherboard"
+      ],
+      "shell": true
+    },
+    {
+      "id": "motherboard",
+      "name": {
+        "en": "Motherboard",
+        "zh": "主板"
+      },
+      "group": "host",
+      "summary": {
+        "en": "Connects CPUs, memory, network cards and midplane",
+        "zh": "连接 CPU、内存、网卡和中板"
+      },
+      "detail": {
+        "en": "The green board that fills the tray. It carries the two CPU sockets, 32 memory slots, the PCIe switches and the sockets for the two network modules, and its front edge plugs into the midplane [S3].\n\nCPUs talk to the GPUs above through the network modules and the midplane, over PCIe [S3].",
+        "zh": "铺满托盘的绿色电路板。上面有两个 CPU 插座、32 个内存插槽、PCIe 交换芯片和两个网络模块的插座，前缘插在中板上 [S3]。\n\nCPU 经网络模块和中板，用 PCIe 和上层的 GPU 通信 [S3]。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.432,
+          0.002,
+          0.76
+        ],
+        "bevel": 0.0008,
+        "at": [
+          0,
+          0.054,
+          -0.066
+        ],
+        "color": "plastic",
+        "tint": "#3f5f3a"
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          -1
+        ],
+        "dist": 0.5
+      },
+      "connects": [
+        "cpus",
+        "dimms",
+        "network-modules",
+        "midplane"
+      ]
+    },
+    {
+      "id": "cpus",
+      "name": {
+        "en": "CPUs",
+        "zh": "CPU"
+      },
+      "group": "host",
+      "summary": {
+        "en": "Run the operating system and feed the GPUs data",
+        "zh": "运行操作系统，调度任务，给 GPU 送数据"
+      },
+      "detail": {
+        "en": "Two Intel Xeon Platinum 8570 processors [S2]. Each has 56 cores running 112 threads, at 2.1 GHz base and up to 4.0 GHz, with 300 MB of cache and eight channels of DDR5 memory; each is rated at 350 W [S11].\n\nThey do not do the heavy maths. They run the operating system, read training data from the drives, prepare it, and hand it to the GPUs. The package is about 77.5 × 56.5 mm [S11].",
+        "zh": "两颗英特尔至强铂金 8570 处理器 [S2]。每颗 56 个核心、112 个线程，基频 2.1 GHz、最高 4.0 GHz，300 MB 缓存，8 个 DDR5 内存通道；每颗额定功耗 350 W [S11]。\n\n它们不做繁重的数学运算，而是运行操作系统，从硬盘读出训练数据、整理好，再交给 GPU。封装约 77.5 × 56.5 mm [S11]。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.0565,
+          0.005,
+          0.0775
+        ],
+        "bevel": 0.001,
+        "at": [
+          0,
+          0.0575,
+          -0.13
+        ],
+        "color": "steel",
+        "tint": "#9aa0a6"
+      },
+      "repeat": {
+        "count": 2,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "spacing": 0.214
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          -1
+        ],
+        "dist": 0.5
+      },
+      "connects": [
+        "motherboard",
+        "dimms",
+        "pcie-switches",
+        "network-modules"
+      ]
+    },
+    {
+      "id": "cpu-heatsinks",
+      "name": {
+        "en": "CPU heat sinks",
+        "zh": "CPU 散热器"
+      },
+      "short": {
+        "en": "CPU heatsinks",
+        "zh": "CPU 散热器"
+      },
+      "group": "host",
+      "summary": {
+        "en": "Carry the heat away from the two CPUs",
+        "zh": "带走两颗 CPU 的热"
+      },
+      "detail": {
+        "en": "A metal base with a block of aluminium fins on each CPU, the fins lined up with the air coming from the front [S3].\n\nThe 2U tray leaves only a few centimetres of height, so these sinks are much lower than the GPU towers; each CPU makes far less heat than a GPU (350 W against up to 1,000 W) [S11, S3].",
+        "zh": "每颗 CPU 上一块金属底座加一组铝鳍片，鳍片顺着前面吹来的风排列 [S3]。\n\n2U 的托盘只有几厘米高，所以它们比 GPU 散热塔矮得多；每颗 CPU 的发热也比一块 GPU 少得多（350 W 对最多 1,000 W）[S11, S3]。"
+      },
+      "primitive": {
+        "kind": "fins",
+        "size": [
+          0.12,
+          0.06,
+          0.0005
+        ],
+        "count": 20,
+        "gap": 0.0035,
+        "axis": "x",
+        "at": [
+          0,
+          0.095,
+          -0.13
+        ],
+        "color": "casing"
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.08,
+            0.005,
+            0.12
+          ],
+          "bevel": 0.001,
+          "at": [
+            0,
+            0.0625,
+            -0.13
+          ],
+          "color": "casing"
+        }
+      ],
+      "repeat": {
+        "count": 2,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "spacing": 0.214
+      },
+      "explode": {
+        "dir": [
+          0,
+          0.4,
+          -1
+        ],
+        "dist": 0.54
+      },
+      "connects": [
+        "cpus"
+      ],
+      "shell": true
+    },
+    {
+      "id": "dimms",
+      "name": {
+        "en": "Memory modules",
+        "zh": "内存条"
+      },
+      "short": {
+        "en": "Memory",
+        "zh": "内存"
+      },
+      "group": "host",
+      "summary": {
+        "en": "2 TB of working memory for the CPUs",
+        "zh": "给 CPU 用的 2 TB 内存"
+      },
+      "detail": {
+        "en": "Thirty-two 64 GB DDR5 modules, 2 TB in all; 128 GB modules can double that to 4 TB [S3]. They stand in four banks of eight, one bank on each side of each CPU, their long edges lined up with the airflow [S3].\n\nThis is the CPUs' memory. The GPUs' own memory is the HBM next to each GPU die, and the two are separate. Each module is about 133 × 31 mm [S30].",
+        "zh": "32 根 64 GB 的 DDR5 内存，共 2 TB；换成 128 GB 的可以加倍到 4 TB [S3]。它们分成 4 组、每组 8 根，竖插在每颗 CPU 的两侧，长边顺着气流 [S3]。\n\n这是 CPU 的内存；GPU 自己的显存是每块 GPU 裸片旁边的 HBM，两者是分开的。每根约 133 × 31 mm [S30]。"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.006,
+          0.031,
+          0.133
+        ],
+        "at": [
+          0.0304,
+          0.0735,
+          -0.13
+        ],
+        "color": "powder",
+        "tint": "#2b2b2b"
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "size": [
+            0.006,
+            0.031,
+            0.133
+          ],
+          "at": [
+            0.1801,
+            0.0735,
+            -0.13
+          ],
+          "color": "powder",
+          "tint": "#2b2b2b"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.006,
+            0.031,
+            0.133
+          ],
+          "at": [
+            -0.0304,
+            0.0735,
+            -0.13
+          ],
+          "color": "powder",
+          "tint": "#2b2b2b"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.006,
+            0.031,
+            0.133
+          ],
+          "at": [
+            -0.1801,
+            0.0735,
+            -0.13
+          ],
+          "color": "powder",
+          "tint": "#2b2b2b"
+        }
+      ],
+      "repeat": {
+        "count": 8,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "spacing": 0.0076
+      },
+      "explode": {
+        "dir": [
+          0,
+          0.25,
+          -1
+        ],
+        "dist": 0.515
+      },
+      "connects": [
+        "cpus"
+      ]
+    },
+    {
+      "id": "pcie-switches",
+      "name": {
+        "en": "PCIe switches",
+        "zh": "PCIe 交换芯片"
+      },
+      "group": "host",
+      "summary": {
+        "en": "Link the CPUs to the drives and DPUs (schematic)",
+        "zh": "把 CPU 连到硬盘和 DPU（示意）"
+      },
+      "detail": {
+        "en": "Schematic. The system topology shows PCIe switches between the CPUs and the NVMe drives and BlueField-3 cards [S3]; the model places two small chips under heat sinks in the middle of the board, where the motherboard drawing shows two such sinks [S3]. Their exact type is not published.\n\nA PCIe switch lets one connection from the CPU fan out to several devices.",
+        "zh": "示意。系统拓扑图在 CPU 和 NVMe 硬盘、BlueField-3 卡之间画了 PCIe 交换芯片 [S3]；主板图的中间有两块小散热片，模型就在那里放了两颗带散热片的小芯片 [S3]。具体型号没有公开。\n\nPCIe 交换芯片让 CPU 的一路连接分出去，接多个设备。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.03,
+          0.003,
+          0.03
+        ],
+        "bevel": 0.0005,
+        "at": [
+          0,
+          0.0565,
+          0.024
+        ],
+        "color": "steel",
+        "tint": "#4b5160"
+      },
+      "extra": [
+        {
+          "kind": "fins",
+          "size": [
+            0.035,
+            0.02,
+            0.0005
+          ],
+          "count": 8,
+          "gap": 0.0035,
+          "axis": "x",
+          "at": [
+            0,
+            0.068,
+            0.024
+          ],
+          "color": "casing"
+        }
+      ],
+      "repeat": {
+        "count": 2,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "spacing": 0.07
+      },
+      "explode": {
+        "dir": [
+          0,
+          0.2,
+          -1
+        ],
+        "dist": 0.51
+      },
+      "connects": [
+        "cpus",
+        "u2-drives",
+        "bluefield-dpus"
+      ]
+    },
+    {
+      "id": "network-modules",
+      "name": {
+        "en": "ConnectX-7 network modules",
+        "zh": "ConnectX-7 网络模块"
+      },
+      "short": {
+        "en": "Network cards",
+        "zh": "网卡"
+      },
+      "group": "host",
+      "summary": {
+        "en": "Eight 400 Gb/s network chips, one for each GPU",
+        "zh": "8 颗 400 Gb/s 网络芯片，每块 GPU 一颗"
+      },
+      "detail": {
+        "en": "Two modules near the midplane, each with four ConnectX-7 network chips under a shared heat sink [S3]. Each chip handles one 400 Gb/s link, InfiniBand or Ethernet, so the server has eight, one per GPU [S2, S12].\n\nThey also carry the PCIe connections between the CPUs and the GPUs through the midplane [S3]. 400 Gb/s is about 50 GB/s each way, much less than the 1,800 GB/s each GPU has on NVLink [S2, S7].",
+        "zh": "靠近中板的两个模块，每个模块在一块共用的散热片下有 4 颗 ConnectX-7 网络芯片 [S3]。每颗芯片负责一条 400 Gb/s 的链路（InfiniBand 或以太网），整机 8 条，每块 GPU 一条 [S2, S12]。\n\nCPU 和 GPU 之间的 PCIe 连接也经过它们和中板 [S3]。400 Gb/s 约等于每个方向 50 GB/s，比每块 GPU 的 NVLink 1,800 GB/s 小得多 [S2, S7]。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.17,
+          0.003,
+          0.105
+        ],
+        "bevel": 0.0008,
+        "at": [
+          0,
+          0.06,
+          0.195
+        ],
+        "color": "plastic",
+        "tint": "#3f5f3a"
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.14,
+            0.004,
+            0.09
+          ],
+          "bevel": 0.001,
+          "at": [
+            0,
+            0.0635,
+            0.195
+          ],
+          "color": "casing"
+        },
+        {
+          "kind": "fins",
+          "size": [
+            0.09,
+            0.04,
+            0.0005
+          ],
+          "count": 30,
+          "gap": 0.004,
+          "axis": "x",
+          "at": [
+            0,
+            0.0855,
+            0.195
+          ],
+          "color": "casing"
+        }
+      ],
+      "repeat": {
+        "count": 2,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "spacing": 0.214
+      },
+      "explode": {
+        "dir": [
+          0,
+          0.3,
+          -1
+        ],
+        "dist": 0.52
+      },
+      "connects": [
+        "densilink-cables",
+        "midplane",
+        "cpus"
+      ]
+    },
+    {
+      "id": "densilink-cables",
+      "name": {
+        "en": "Network cables",
+        "zh": "网络线缆"
+      },
+      "short": {
+        "en": "NIC cables",
+        "zh": "网卡线缆"
+      },
+      "group": "host",
+      "summary": {
+        "en": "Carry the network signals to the rear ports",
+        "zh": "把网卡的信号送到后面的网口"
+      },
+      "detail": {
+        "en": "Four flat high-speed cables, which NVIDIA calls DensiLink, run from the two network modules along the sides of the tray to the four OSFP ports at the back [S3]. Each cable carries two of the 400 Gb/s links [S3].\n\nTheir routing here follows the motherboard-tray drawing [S3].",
+        "zh": "4 根扁平的高速线缆，NVIDIA 叫它 DensiLink，从两个网络模块出发，沿托盘两侧走到后面的 4 个 OSFP 网口 [S3]。每根线缆传两条 400 Gb/s 链路 [S3]。\n\n这里的走线照主板托盘的图画 [S3]。"
+      },
+      "primitive": {
+        "kind": "tube",
+        "path": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.02,
+            0.007,
+            -0.03
+          ],
+          [
+            0.1315,
+            0.029,
+            -0.1
+          ],
+          [
+            0.1315,
+            0.029,
+            -0.345
+          ],
+          [
+            0.043,
+            0.032,
+            -0.385
+          ],
+          [
+            -0.0645,
+            0.033,
+            -0.415
+          ],
+          [
+            -0.0645,
+            0.033,
+            -0.475
+          ]
+        ],
+        "radius": 0.0042,
+        "bendRadius": 0.02,
+        "at": [
+          0.077,
+          0.068,
+          0.14
+        ],
+        "color": "rubber",
+        "tint": "#8aa9b4"
+      },
+      "extra": [
+        {
+          "kind": "tube",
+          "path": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.02,
+              0.007,
+              -0.03
+            ],
+            [
+              0.112,
+              0.029,
+              -0.1
+            ],
+            [
+              0.112,
+              0.029,
+              -0.345
+            ],
+            [
+              0.031,
+              0.032,
+              -0.385
+            ],
+            [
+              -0.0515,
+              0.033,
+              -0.415
+            ],
+            [
+              -0.0515,
+              0.033,
+              -0.475
+            ]
+          ],
+          "radius": 0.0042,
+          "bendRadius": 0.02,
+          "at": [
+            0.089,
+            0.068,
+            0.14
+          ],
+          "color": "rubber",
+          "tint": "#8aa9b4"
+        },
+        {
+          "kind": "tube",
+          "path": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              -0.02,
+              0.007,
+              -0.03
+            ],
+            [
+              -0.1315,
+              0.029,
+              -0.1
+            ],
+            [
+              -0.1315,
+              0.029,
+              -0.345
+            ],
+            [
+              -0.043,
+              0.032,
+              -0.385
+            ],
+            [
+              0.0645,
+              0.033,
+              -0.415
+            ],
+            [
+              0.0645,
+              0.033,
+              -0.475
+            ]
+          ],
+          "radius": 0.0042,
+          "bendRadius": 0.02,
+          "at": [
+            -0.077,
+            0.068,
+            0.14
+          ],
+          "color": "rubber",
+          "tint": "#8aa9b4"
+        },
+        {
+          "kind": "tube",
+          "path": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              -0.02,
+              0.007,
+              -0.03
+            ],
+            [
+              -0.112,
+              0.029,
+              -0.1
+            ],
+            [
+              -0.112,
+              0.029,
+              -0.345
+            ],
+            [
+              -0.031,
+              0.032,
+              -0.385
+            ],
+            [
+              0.0515,
+              0.033,
+              -0.415
+            ],
+            [
+              0.0515,
+              0.033,
+              -0.475
+            ]
+          ],
+          "radius": 0.0042,
+          "bendRadius": 0.02,
+          "at": [
+            -0.089,
+            0.068,
+            0.14
+          ],
+          "color": "rubber",
+          "tint": "#8aa9b4"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          0.35,
+          -1
+        ],
+        "dist": 0.53
+      },
+      "connects": [
+        "network-modules",
+        "osfp-cages"
+      ]
+    },
+    {
+      "id": "osfp-cages",
+      "name": {
+        "en": "OSFP ports",
+        "zh": "OSFP 网口"
+      },
+      "group": "host",
+      "summary": {
+        "en": "Four ports that connect the server to the cluster",
+        "zh": "把这台机器接进集群网络的 4 个口"
+      },
+      "detail": {
+        "en": "Four OSFP cages side by side in the middle of the tray's back panel [S3]. Each takes one transceiver that carries two of the eight 400 Gb/s links, 3.2 Tb/s in all each way [S3, S2].\n\nIn a cluster these links go to a separate network of switches used only for GPU-to-GPU traffic between servers [S17].",
+        "zh": "托盘后面板中间并排 4 个 OSFP 网口 [S3]。每个口插一个光模块，传 8 条 400 Gb/s 链路中的两条，整机每个方向共 3.2 Tb/s [S3, S2]。\n\n在集群里，这些链路接到一套单独的交换机网络上，只用来在服务器之间传 GPU 的数据 [S17]。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.022,
+          0.014,
+          0.1
+        ],
+        "bevel": 0.0012,
+        "at": [
+          0,
+          0.101,
+          -0.398
+        ],
+        "color": "steel"
+      },
+      "repeat": {
+        "count": 4,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "spacing": 0.025
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          -1
+        ],
+        "dist": 0.5
+      },
+      "connects": [
+        "densilink-cables"
+      ]
+    },
+    {
+      "id": "bluefield-dpus",
+      "name": {
+        "en": "BlueField-3 DPUs",
+        "zh": "BlueField-3 DPU"
+      },
+      "short": {
+        "en": "DPUs",
+        "zh": "DPU"
+      },
+      "group": "host",
+      "summary": {
+        "en": "Connect storage and management networks",
+        "zh": "连接存储网络和管理网络"
+      },
+      "detail": {
+        "en": "Two cards, each with two ports of up to 400 Gb/s, lying flat at the back of the tray [S2, S3]. They connect the server to the storage network and the network used to manage the cluster.\n\nA DPU is a network card with its own processor cores, so it can handle some network and storage work itself and leave the CPUs free [S13].",
+        "zh": "两块卡平放在托盘后部，每块两个口，最高 400 Gb/s [S2, S3]。它们把服务器接到存储网络和管理集群用的网络上。\n\nDPU 是带自己处理器核心的网卡，能自己处理一部分网络和存储工作，让 CPU 腾出手来 [S13]。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.111,
+          0.002,
+          0.168
+        ],
+        "bevel": 0.0006,
+        "at": [
+          0,
+          0.075,
+          -0.361
+        ],
+        "color": "plastic",
+        "tint": "#3f5f3a"
+      },
+      "repeat": {
+        "count": 2,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "spacing": 0.307
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          -1
+        ],
+        "dist": 0.5
+      },
+      "connects": [
+        "pcie-risers",
+        "pcie-switches"
+      ]
+    },
+    {
+      "id": "pcie-risers",
+      "name": {
+        "en": "PCIe risers",
+        "zh": "PCIe 转接卡"
+      },
+      "short": {
+        "en": "Riser cards",
+        "zh": "转接卡"
+      },
+      "group": "host",
+      "summary": {
+        "en": "Hold the expansion cards flat in the low tray",
+        "zh": "让扩展卡平躺着插在矮托盘里"
+      },
+      "detail": {
+        "en": "Two upright boards along the tray walls, with the cards plugged into them sideways so they lie flat: on one side a 100 Gb/s Ethernet card over a BlueField-3, on the other the boot-drive carrier over the second BlueField-3 [S3].\n\nThe tray is only about 2U high, too low for cards standing upright.",
+        "zh": "沿托盘侧壁立着两块转接板，扩展卡从侧面插进去，平躺着：一侧是 100 Gb/s 以太网卡在上、BlueField-3 在下；另一侧是启动盘载板在上、第二块 BlueField-3 在下 [S3]。\n\n托盘只有约 2U 高，放不下竖插的卡。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.003,
+          0.07,
+          0.17
+        ],
+        "bevel": 0.0008,
+        "at": [
+          0.2105,
+          0.092,
+          -0.361
+        ],
+        "color": "plastic",
+        "tint": "#3f5f3a"
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.003,
+            0.07,
+            0.17
+          ],
+          "bevel": 0.0008,
+          "at": [
+            -0.2105,
+            0.092,
+            -0.361
+          ],
+          "color": "plastic",
+          "tint": "#3f5f3a"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.111,
+            0.002,
+            0.168
+          ],
+          "bevel": 0.0006,
+          "at": [
+            0.1535,
+            0.112,
+            -0.361
+          ],
+          "color": "plastic",
+          "tint": "#3f5f3a"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          0,
+          -1
+        ],
+        "dist": 0.5
+      },
+      "connects": [
+        "motherboard",
+        "bluefield-dpus",
+        "boot-drives"
+      ]
+    },
+    {
+      "id": "boot-drives",
+      "name": {
+        "en": "M.2 boot drives",
+        "zh": "M.2 启动盘"
+      },
+      "short": {
+        "en": "Boot drives",
+        "zh": "启动盘"
+      },
+      "group": "host",
+      "summary": {
+        "en": "Two mirrored drives hold the operating system",
+        "zh": "两块互为备份的盘，存操作系统"
+      },
+      "detail": {
+        "en": "A carrier card with two NVMe M.2 drives of 1.92 TB (the product page rounds this to 1.9 TB) that hold the operating system, set up as RAID 1: each holds the same data, so the machine still starts if one fails [S2, S3].",
+        "zh": "一块载板上装两块 1.92 TB 的 NVMe M.2 盘（产品页取整写 1.9 TB），存操作系统，做成 RAID 1：两块盘存一样的数据，坏一块机器照样能启动 [S2, S3]。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.111,
+          0.002,
+          0.15
+        ],
+        "bevel": 0.0006,
+        "at": [
+          -0.1535,
+          0.112,
+          -0.361
+        ],
+        "color": "plastic",
+        "tint": "#3f5f3a"
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.022,
+            0.003,
+            0.08
+          ],
+          "bevel": 0.0005,
+          "at": [
+            -0.1715,
+            0.1145,
+            -0.361
+          ],
+          "color": "plastic",
+          "tint": "#3f5f3a"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.022,
+            0.003,
+            0.08
+          ],
+          "bevel": 0.0005,
+          "at": [
+            -0.1355,
+            0.1145,
+            -0.361
+          ],
+          "color": "plastic",
+          "tint": "#3f5f3a"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          0,
+          -1
+        ],
+        "dist": 0.5
+      },
+      "connects": [
+        "pcie-risers"
+      ]
+    },
+    {
+      "id": "u2-drives",
+      "name": {
+        "en": "U.2 data drives",
+        "zh": "U.2 数据盘"
+      },
+      "short": {
+        "en": "Data drives",
+        "zh": "数据盘"
+      },
+      "group": "host",
+      "summary": {
+        "en": "Eight fast drives that hold training data",
+        "zh": "训练时缓存数据的 8 块高速盘"
+      },
+      "detail": {
+        "en": "Eight 3.84 TB NVMe U.2 drives, 30.72 TB together, in two blocks of four along the bottom of the front [S3]. They are set up as RAID 0, which spreads data across all eight for speed, so they serve as a fast cache for training data rather than for safe keeping [S3].\n\nThey slide out from the front once the bezel is off [S4]. Each is a 2.5-inch drive, about 70 × 100 × 15 mm [S31].",
+        "zh": "8 块 3.84 TB 的 NVMe U.2 盘，共 30.72 TB，在前面最下面分成左右两组、每组 4 块 [S3]。它们做成 RAID 0，把数据分散到 8 块盘上以求快，所以用作训练数据的高速缓存，而不是用来保存数据 [S3]。\n\n拿掉前面板以后，可以从前面把它们抽出来 [S4]。每块是 2.5 英寸盘，约 70 × 100 × 15 mm [S31]。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.0699,
+          0.015,
+          0.1005
+        ],
+        "bevel": 0.002,
+        "at": [
+          -0.172,
+          0.0145,
+          0.382
+        ],
+        "color": "powder",
+        "tint": "#262626"
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.0699,
+            0.015,
+            0.1005
+          ],
+          "bevel": 0.002,
+          "at": [
+            -0.088,
+            0.0145,
+            0.382
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.0699,
+            0.015,
+            0.1005
+          ],
+          "bevel": 0.002,
+          "at": [
+            0.088,
+            0.0145,
+            0.382
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.0699,
+            0.015,
+            0.1005
+          ],
+          "bevel": 0.002,
+          "at": [
+            0.172,
+            0.0145,
+            0.382
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.0699,
+            0.015,
+            0.1005
+          ],
+          "bevel": 0.002,
+          "at": [
+            -0.172,
+            0.0335,
+            0.382
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.0699,
+            0.015,
+            0.1005
+          ],
+          "bevel": 0.002,
+          "at": [
+            -0.088,
+            0.0335,
+            0.382
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.0699,
+            0.015,
+            0.1005
+          ],
+          "bevel": 0.002,
+          "at": [
+            0.088,
+            0.0335,
+            0.382
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.0699,
+            0.015,
+            0.1005
+          ],
+          "bevel": 0.002,
+          "at": [
+            0.172,
+            0.0335,
+            0.382
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.078,
+            0.017,
+            0.004
+          ],
+          "bevel": 0.001,
+          "at": [
+            -0.172,
+            0.0145,
+            0.4335
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.078,
+            0.017,
+            0.004
+          ],
+          "bevel": 0.001,
+          "at": [
+            -0.088,
+            0.0145,
+            0.4335
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.078,
+            0.017,
+            0.004
+          ],
+          "bevel": 0.001,
+          "at": [
+            0.088,
+            0.0145,
+            0.4335
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.078,
+            0.017,
+            0.004
+          ],
+          "bevel": 0.001,
+          "at": [
+            0.172,
+            0.0145,
+            0.4335
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.078,
+            0.017,
+            0.004
+          ],
+          "bevel": 0.001,
+          "at": [
+            -0.172,
+            0.0335,
+            0.4335
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.078,
+            0.017,
+            0.004
+          ],
+          "bevel": 0.001,
+          "at": [
+            -0.088,
+            0.0335,
+            0.4335
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.078,
+            0.017,
+            0.004
+          ],
+          "bevel": 0.001,
+          "at": [
+            0.088,
+            0.0335,
+            0.4335
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.078,
+            0.017,
+            0.004
+          ],
+          "bevel": 0.001,
+          "at": [
+            0.172,
+            0.0335,
+            0.4335
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.25
+      },
+      "connects": [
+        "pcie-switches"
+      ]
+    },
+    {
+      "id": "rear-io",
+      "name": {
+        "en": "Rear management ports",
+        "zh": "后部管理接口"
+      },
+      "short": {
+        "en": "Rear I/O",
+        "zh": "后部接口"
+      },
+      "group": "host",
+      "summary": {
+        "en": "Ports and buttons for remote management",
+        "zh": "管理员远程管理这台机器的接口和按键"
+      },
+      "detail": {
+        "en": "Below the OSFP ports are the management connections: a 1 GbE port for the baseboard management controller (BMC), a 10 GbE port, USB, VGA and serial ports, the power and identification buttons and a four-digit code display for fault finding [S3].\n\nThe BMC is a small separate computer that lets an administrator watch and control the server over the network, even while the main system is switched off [S3].",
+        "zh": "OSFP 网口下面是管理接口：基板管理控制器（BMC）用的 1 GbE 网口、一个 10 GbE 网口、USB、VGA 和串口、电源键和识别键，还有一个排查故障用的 4 位代码显示屏 [S3]。\n\nBMC 是一台独立的小计算机，管理员可以通过网络监视和控制服务器，即使主系统关着也行 [S3]。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.11,
+          0.032,
+          0.003
+        ],
+        "bevel": 0.0008,
+        "at": [
+          0,
+          0.0715,
+          -0.447
+        ],
+        "color": "steel",
+        "tint": "#c9cac6"
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "size": [
+            0.016,
+            0.013,
+            0.02
+          ],
+          "at": [
+            -0.035,
+            0.065,
+            -0.438
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.016,
+            0.013,
+            0.02
+          ],
+          "at": [
+            -0.016,
+            0.065,
+            -0.438
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.026,
+            0.01,
+            0.006
+          ],
+          "at": [
+            0.03,
+            0.064,
+            -0.4475
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.04,
+            0.012,
+            0.006
+          ],
+          "at": [
+            0.15,
+            0.058,
+            -0.4508
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.022,
+            0.01,
+            0.006
+          ],
+          "at": [
+            -0.15,
+            0.058,
+            -0.4508
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          0,
+          -1
+        ],
+        "dist": 0.5
+      },
+      "connects": [
+        "motherboard"
+      ]
+    },
+    {
+      "id": "psus",
+      "name": {
+        "en": "Power supplies",
+        "zh": "电源"
+      },
+      "short": {
+        "en": "PSUs",
+        "zh": "电源"
+      },
+      "group": "power",
+      "summary": {
+        "en": "Turn mains AC into the DC the machine uses",
+        "zh": "把 200–240 V 交流电变成机器用的直流电"
+      },
+      "detail": {
+        "en": "Five of the six power supplies along the bottom of the back [S3]. Each takes 200–240 V alternating current at up to 16 A and delivers up to 3.3 kW of direct current to the machine [S3].\n\nAll six share the load together. The server can draw up to about 14.3 kW [S2, S3].",
+        "zh": "机器后面最下面一排 6 个电源中的 5 个 [S3]。每个吃进 200–240 V、最大 16 A 的交流电，输出最多 3.3 kW 的直流电 [S3]。\n\n6 个电源平时一起分担负载。整机最大用电约 14.3 kW [S2, S3]。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.068,
+          0.044,
+          0.3
+        ],
+        "bevel": 0.002,
+        "at": [
+          -0.036,
+          0.025,
+          -0.2986
+        ],
+        "color": "steel",
+        "tint": "#c3c4c0"
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "size": [
+            0.024,
+            0.02,
+            0.004
+          ],
+          "at": [
+            -0.036,
+            0.025,
+            -0.4505
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.006,
+            0.02,
+            0.006
+          ],
+          "at": [
+            -0.009,
+            0.025,
+            -0.4505
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        }
+      ],
+      "repeat": {
+        "count": 5,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "spacing": 0.072
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          -1
+        ],
+        "dist": 0.3
+      },
+      "connects": [
+        "power-distribution",
+        "power-cords",
+        "psu-single"
+      ]
+    },
+    {
+      "id": "psu-single",
+      "name": {
+        "en": "Sixth power supply",
+        "zh": "第 6 个电源"
+      },
+      "short": {
+        "en": "PSU 6",
+        "zh": "电源 6"
+      },
+      "group": "power",
+      "summary": {
+        "en": "The sixth supply: if one fails, five are enough",
+        "zh": "第 6 个电源：坏一个，其余五个照样够用"
+      },
+      "detail": {
+        "en": "The supplies are arranged five plus one: any five can carry the full load, so one can fail, or be pulled out and replaced, while the machine keeps running [S3]. There is no fixed spare; all six normally share the work.\n\nWith only three or four supplies the GPUs are held to 800 W each, and with fewer than three only the management controller can be switched on [S3].",
+        "zh": "电源按\"5+1\"配置：任意 5 个就能扛起全部负载，所以坏一个，或者拔出一个来换，机器照样运行 [S3]。并没有哪一个固定当备用，平时 6 个一起分担。\n\n只剩 3–4 个电源时，每块 GPU 被限制在 800 W；少于 3 个时，只能开管理控制器 [S3]。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.068,
+          0.044,
+          0.3
+        ],
+        "bevel": 0.002,
+        "at": [
+          0.18,
+          0.025,
+          -0.2986
+        ],
+        "color": "steel",
+        "tint": "#c3c4c0"
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "size": [
+            0.024,
+            0.02,
+            0.004
+          ],
+          "at": [
+            0.18,
+            0.025,
+            -0.4505
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.006,
+            0.02,
+            0.006
+          ],
+          "at": [
+            0.207,
+            0.025,
+            -0.4505
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          0,
+          -1
+        ],
+        "dist": 0.3
+      },
+      "connects": [
+        "power-distribution",
+        "power-cords",
+        "psus"
+      ]
+    },
+    {
+      "id": "power-distribution",
+      "name": {
+        "en": "Power distribution",
+        "zh": "配电板与母排"
+      },
+      "short": {
+        "en": "Power dist.",
+        "zh": "配电"
+      },
+      "group": "power",
+      "summary": {
+        "en": "Carries power from the supplies to both trays",
+        "zh": "把电源的电分送到两个托盘（示意）"
+      },
+      "detail": {
+        "en": "Schematic. Power from the six supplies has to reach the midplane and from there both trays, but no public drawing shows how. The model uses a board under the motherboard tray with two copper bars and two short risers up to the midplane.\n\nCopper is used for heavy currents because it conducts electricity well and does not heat up much.",
+        "zh": "示意。6 个电源的电要送到中板，再分到两个托盘，但没有公开图纸画出它是怎么走的。模型在主板托盘下面放了一块板、两根铜排和两根通到中板的竖向铜排。\n\n大电流用铜来传，是因为铜导电好、发热少。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.42,
+          0.003,
+          0.46
+        ],
+        "bevel": 0.0008,
+        "at": [
+          0,
+          0.006,
+          0.09
+        ],
+        "color": "plastic",
+        "tint": "#3f5f3a"
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "size": [
+            0.4,
+            0.006,
+            0.012
+          ],
+          "at": [
+            0,
+            0.0105,
+            -0.135
+          ],
+          "color": "copper"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.012,
+            0.006,
+            0.47
+          ],
+          "at": [
+            0.02,
+            0.0105,
+            0.1
+          ],
+          "color": "copper"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.012,
+            0.039,
+            0.006
+          ],
+          "at": [
+            0.02,
+            0.0295,
+            0.336
+          ],
+          "color": "copper"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.012,
+            0.039,
+            0.006
+          ],
+          "at": [
+            -0.02,
+            0.0295,
+            0.336
+          ],
+          "color": "copper"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          -1,
+          0
+        ],
+        "dist": 0.15
+      },
+      "connects": [
+        "psus",
+        "psu-single",
+        "midplane"
+      ]
+    },
+    {
+      "id": "power-cords",
+      "name": {
+        "en": "Power cords",
+        "zh": "电源线"
+      },
+      "group": "power",
+      "summary": {
+        "en": "Bring mains electricity in from the rack",
+        "zh": "从机柜的配电单元接进交流电"
+      },
+      "detail": {
+        "en": "One cord to each supply, from the power distribution units in the rack. The plugs lock into the supplies so that they cannot be pulled out by accident [S3].",
+        "zh": "每个电源一根线，接到机柜里的配电单元。插头插进电源后会锁住，不会被意外拔掉 [S3]。"
+      },
+      "primitive": {
+        "kind": "tube",
+        "path": [
+          [
+            0,
+            0.0,
+            0.0
+          ],
+          [
+            0,
+            0.0,
+            -0.078
+          ],
+          [
+            0,
+            -0.017,
+            -0.128
+          ],
+          [
+            0,
+            -0.017,
+            -0.208
+          ]
+        ],
+        "radius": 0.0055,
+        "bendRadius": 0.02,
+        "at": [
+          0,
+          0.025,
+          -0.452
+        ],
+        "color": "rubber"
+      },
+      "repeat": {
+        "count": 6,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "spacing": 0.072
+      },
+      "connects": [
+        "psus",
+        "psu-single"
+      ],
+      "castShadow": false,
+      "explode": {
+        "dir": [
+          0,
+          0,
+          -1
+        ],
+        "dist": 0.3
+      }
+    },
+    {
+      "id": "scale-figure",
+      "name": {
+        "en": "Person, 1.70 m",
+        "zh": "1.70 米的人"
+      },
+      "group": "scene",
+      "summary": {
+        "en": "A 1.70 m person, for scale",
+        "zh": "一个 1.70 米的人，作比例尺"
+      },
+      "detail": {
+        "en": "A neutral figure 1.70 m tall, standing beside the server so its size can be judged. It is a silhouette, not a model of anyone.",
+        "zh": "一个 1.70 米高的中性人形，站在服务器旁边，用来比较大小。它只是剪影，不代表任何人。"
+      },
+      "primitive": {
+        "kind": "capsule",
+        "size": [
+          0.15,
+          0.36
+        ],
+        "scale": [
+          1,
+          1,
+          0.6
+        ],
+        "at": [
+          -1.2,
+          1.2,
+          -0.25
+        ],
+        "color": "token:mannequin"
+      },
+      "extra": [
+        {
+          "kind": "sphere",
+          "size": [
+            0.1
+          ],
+          "scale": [
+            0.85,
+            1,
+            0.95
+          ],
+          "at": [
+            -1.2,
+            1.6,
+            -0.25
+          ],
+          "color": "token:mannequin"
+        },
+        {
+          "kind": "capsule",
+          "size": [
+            0.065,
+            0.74
+          ],
+          "at": [
+            -1.28,
+            0.45,
+            -0.25
+          ],
+          "color": "token:mannequin"
+        },
+        {
+          "kind": "capsule",
+          "size": [
+            0.065,
+            0.74
+          ],
+          "at": [
+            -1.12,
+            0.45,
+            -0.25
+          ],
+          "color": "token:mannequin"
+        },
+        {
+          "kind": "capsule",
+          "size": [
+            0.042,
+            0.56
+          ],
+          "at": [
+            -1.4,
+            1.08,
+            -0.25
+          ],
+          "color": "token:mannequin"
+        },
+        {
+          "kind": "capsule",
+          "size": [
+            0.042,
+            0.56
+          ],
+          "at": [
+            -1.0,
+            1.08,
+            -0.25
+          ],
+          "color": "token:mannequin"
+        }
+      ],
+      "context": true
+    },
+    {
+      "id": "rack-frame",
+      "name": {
+        "en": "Rack frame",
+        "zh": "机柜框"
+      },
+      "group": "scene",
+      "summary": {
+        "en": "A 42U rack frame",
+        "zh": "一个 42U 机柜框"
+      },
+      "detail": {
+        "en": "Schematic. A standard 19-inch rack 42U high, about 1.87 m of mounting space [S25], drawn as a bare frame without doors or side panels. NVIDIA's reference design puts two DGX B200 servers in one rack [S17].",
+        "zh": "示意。一个标准 19 英寸机柜，高 42U，约 1.87 米的安装空间 [S25]，只画了框架，没有门和侧板。NVIDIA 的参考设计每个机柜放两台 DGX B200 [S17]。"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.04,
+          2.0,
+          0.04
+        ],
+        "at": [
+          -0.263,
+          1.0,
+          0.42
+        ],
+        "color": "powder",
+        "tint": "#3a3a3a"
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "size": [
+            0.04,
+            2.0,
+            0.04
+          ],
+          "at": [
+            -0.263,
+            1.0,
+            -0.58
+          ],
+          "color": "powder",
+          "tint": "#3a3a3a"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.04,
+            2.0,
+            0.04
+          ],
+          "at": [
+            0.263,
+            1.0,
+            0.42
+          ],
+          "color": "powder",
+          "tint": "#3a3a3a"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.04,
+            2.0,
+            0.04
+          ],
+          "at": [
+            0.263,
+            1.0,
+            -0.58
+          ],
+          "color": "powder",
+          "tint": "#3a3a3a"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.556,
+            0.04,
+            1.05
+          ],
+          "at": [
+            0,
+            1.98,
+            -0.075
+          ],
+          "color": "powder",
+          "tint": "#3a3a3a"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.04,
+            0.04,
+            1.05
+          ],
+          "at": [
+            -0.263,
+            0.02,
+            -0.075
+          ],
+          "color": "powder",
+          "tint": "#3a3a3a"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.04,
+            0.04,
+            1.05
+          ],
+          "at": [
+            0.263,
+            0.02,
+            -0.075
+          ],
+          "color": "powder",
+          "tint": "#3a3a3a"
+        }
+      ],
+      "context": true
+    },
+    {
+      "id": "rack-neighbour",
+      "name": {
+        "en": "Rack neighbour",
+        "zh": "同柜第二台"
+      },
+      "group": "scene",
+      "summary": {
+        "en": "A second server and the top-of-rack switches",
+        "zh": "同一机柜里的第二台服务器和柜顶交换机"
+      },
+      "detail": {
+        "en": "Schematic. The second DGX B200 in the same rack, directly above, and two 1U network switches near the top. Only the outlines are drawn.",
+        "zh": "示意。同一机柜里正上方的第二台 DGX B200，以及靠近顶部的两台 1U 网络交换机。只画了外形。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.447,
+          0.443,
+          0.8972
+        ],
+        "bevel": 0.003,
+        "at": [
+          0,
+          0.666,
+          0
+        ],
+        "color": "powder",
+        "tint": "#5e5e5c"
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.43,
+            0.425,
+            0.012
+          ],
+          "bevel": 0.005,
+          "at": [
+            0,
+            0.667,
+            0.4546
+          ],
+          "color": "powder",
+          "tint": "#8c7d63"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.447,
+            0.043,
+            0.6
+          ],
+          "bevel": 0.002,
+          "at": [
+            0,
+            1.8,
+            0.15
+          ],
+          "color": "powder",
+          "tint": "#5e5e5c"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.447,
+            0.043,
+            0.6
+          ],
+          "bevel": 0.002,
+          "at": [
+            0,
+            1.845,
+            0.15
+          ],
+          "color": "powder",
+          "tint": "#5e5e5c"
+        }
+      ],
+      "context": true
+    }
+  ],
+  "groups": [
+    {
+      "id": "chassis",
+      "name": {
+        "en": "Chassis",
+        "zh": "机箱"
+      },
+      "color": "token:ink-3",
+      "card": false
+    },
+    {
+      "id": "cooling",
+      "name": {
+        "en": "Fan wall",
+        "zh": "风扇墙"
+      },
+      "color": "token:neutral"
+    },
+    {
+      "id": "gpu-tray",
+      "name": {
+        "en": "GPU tray",
+        "zh": "GPU 托盘"
+      },
+      "color": "token:ink-2"
+    },
+    {
+      "id": "host",
+      "name": {
+        "en": "Host tray",
+        "zh": "主机托盘"
+      },
+      "color": "token:ink-3"
+    },
+    {
+      "id": "power",
+      "name": {
+        "en": "Power",
+        "zh": "电源"
+      },
+      "color": "token:cut"
+    },
+    {
+      "id": "air",
+      "name": {
+        "en": "Airflow",
+        "zh": "气流"
+      },
+      "color": "token:hot"
+    },
+    {
+      "id": "current",
+      "name": {
+        "en": "Electricity",
+        "zh": "电"
+      },
+      "color": "token:cut"
+    },
+    {
+      "id": "data",
+      "name": {
+        "en": "Data",
+        "zh": "数据"
+      },
+      "color": "token:loop"
+    },
+    {
+      "id": "scene",
+      "name": {
+        "en": "Scene",
+        "zh": "场景"
+      },
+      "color": "token:ink-3",
+      "card": false
+    }
+  ],
+  "flows": [
+    {
+      "id": "air-gpu-left",
+      "group": "air",
+      "path": [
+        [
+          -0.105,
+          0.29,
+          0.62
+        ],
+        [
+          -0.105,
+          0.29,
+          0.44
+        ],
+        [
+          -0.105,
+          0.29,
+          0.3
+        ],
+        [
+          -0.105,
+          0.29,
+          0.1
+        ],
+        [
+          -0.105,
+          0.185,
+          0.04
+        ],
+        [
+          -0.105,
+          0.185,
+          -0.04
+        ],
+        [
+          -0.105,
+          0.29,
+          -0.1
+        ],
+        [
+          -0.105,
+          0.29,
+          -0.3
+        ],
+        [
+          -0.105,
+          0.29,
+          -0.45
+        ],
+        [
+          -0.105,
+          0.29,
+          -0.7
+        ]
+      ],
+      "speed": 0.45,
+      "color": "token:hot",
+      "stops": [
+        {
+          "at": 0,
+          "color": "token:neutral"
+        },
+        {
+          "at": 0.3,
+          "color": "token:neutral"
+        },
+        {
+          "at": 0.55,
+          "color": "token:hot"
+        },
+        {
+          "at": 1,
+          "color": "token:hot"
+        }
+      ],
+      "ends": "fade",
+      "count": 360,
+      "size": 0.35,
+      "spread": [
+        0.1,
+        0.1,
+        0.01
+      ],
+      "clip": false,
+      "parts": [
+        "fan-modules",
+        "midplane",
+        "gpu-heatsinks",
+        "nvswitch-duct",
+        "rear-grille"
+      ]
+    },
+    {
+      "id": "air-gpu-right",
+      "group": "air",
+      "path": [
+        [
+          0.105,
+          0.29,
+          0.62
+        ],
+        [
+          0.105,
+          0.29,
+          0.44
+        ],
+        [
+          0.105,
+          0.29,
+          0.3
+        ],
+        [
+          0.105,
+          0.29,
+          0.1
+        ],
+        [
+          0.105,
+          0.185,
+          0.04
+        ],
+        [
+          0.105,
+          0.185,
+          -0.04
+        ],
+        [
+          0.105,
+          0.29,
+          -0.1
+        ],
+        [
+          0.105,
+          0.29,
+          -0.3
+        ],
+        [
+          0.105,
+          0.29,
+          -0.45
+        ],
+        [
+          0.105,
+          0.29,
+          -0.7
+        ]
+      ],
+      "speed": 0.45,
+      "color": "token:hot",
+      "stops": [
+        {
+          "at": 0,
+          "color": "token:neutral"
+        },
+        {
+          "at": 0.3,
+          "color": "token:neutral"
+        },
+        {
+          "at": 0.55,
+          "color": "token:hot"
+        },
+        {
+          "at": 1,
+          "color": "token:hot"
+        }
+      ],
+      "ends": "fade",
+      "count": 360,
+      "size": 0.35,
+      "spread": [
+        0.1,
+        0.1,
+        0.01
+      ],
+      "clip": false,
+      "parts": [
+        "fan-modules",
+        "midplane",
+        "gpu-heatsinks",
+        "nvswitch-duct",
+        "rear-grille"
+      ]
+    },
+    {
+      "id": "air-host",
+      "group": "air",
+      "path": [
+        [
+          0,
+          0.135,
+          0.62
+        ],
+        [
+          0,
+          0.135,
+          0.42
+        ],
+        [
+          0,
+          0.1,
+          0.34
+        ],
+        [
+          0,
+          0.095,
+          0.25
+        ],
+        [
+          0,
+          0.095,
+          -0.45
+        ],
+        [
+          0,
+          0.095,
+          -0.7
+        ]
+      ],
+      "speed": 0.4,
+      "color": "token:hot",
+      "stops": [
+        {
+          "at": 0,
+          "color": "token:neutral"
+        },
+        {
+          "at": 0.35,
+          "color": "token:neutral"
+        },
+        {
+          "at": 0.65,
+          "color": "token:hot"
+        },
+        {
+          "at": 1,
+          "color": "token:hot"
+        }
+      ],
+      "ends": "fade",
+      "count": 300,
+      "size": 0.32,
+      "spread": [
+        0.19,
+        0.025,
+        0.01
+      ],
+      "clip": false,
+      "parts": [
+        "fan-modules",
+        "network-modules",
+        "cpu-heatsinks",
+        "rear-io"
+      ]
+    },
+    {
+      "id": "power-feed",
+      "group": "current",
+      "path": [
+        [
+          -0.036,
+          0.012,
+          -0.64
+        ],
+        [
+          -0.036,
+          0.012,
+          -0.58
+        ],
+        [
+          -0.036,
+          0.025,
+          -0.53
+        ],
+        [
+          -0.036,
+          0.0485,
+          -0.44
+        ],
+        [
+          -0.036,
+          0.0485,
+          -0.16
+        ],
+        [
+          -0.036,
+          0.016,
+          -0.135
+        ],
+        [
+          0.0,
+          0.016,
+          -0.11
+        ],
+        [
+          0.0,
+          0.016,
+          0.31
+        ],
+        [
+          0.0,
+          0.03,
+          0.3315
+        ],
+        [
+          0.0,
+          0.152,
+          0.3315
+        ],
+        [
+          0.0,
+          0.158,
+          0.3
+        ],
+        [
+          0.19,
+          0.158,
+          0.26
+        ],
+        [
+          0.19,
+          0.158,
+          0.212
+        ],
+        [
+          -0.19,
+          0.158,
+          0.212
+        ],
+        [
+          -0.19,
+          0.158,
+          0.092
+        ],
+        [
+          0.19,
+          0.158,
+          0.092
+        ],
+        [
+          0.19,
+          0.158,
+          -0.092
+        ],
+        [
+          -0.19,
+          0.158,
+          -0.092
+        ],
+        [
+          -0.19,
+          0.158,
+          -0.212
+        ],
+        [
+          0.19,
+          0.158,
+          -0.212
+        ]
+      ],
+      "speed": 0.35,
+      "color": "token:cut",
+      "ends": "fade",
+      "count": 620,
+      "size": 0.3,
+      "spread": 0.005,
+      "clip": true,
+      "parts": [
+        "power-cords",
+        "psus",
+        "power-distribution",
+        "midplane",
+        "gpu-baseboard",
+        "gpu-modules"
+      ]
+    },
+    {
+      "id": "nvlink-mesh",
+      "group": "data",
+      "path": [
+        [
+          -0.1575,
+          0.1608,
+          0.152
+        ],
+        [
+          -0.08,
+          0.1608,
+          0.0
+        ],
+        [
+          -0.1575,
+          0.1608,
+          -0.152
+        ],
+        [
+          0.08,
+          0.1608,
+          0.0
+        ],
+        [
+          -0.0525,
+          0.1608,
+          0.152
+        ],
+        [
+          -0.08,
+          0.1608,
+          0.0
+        ],
+        [
+          -0.0525,
+          0.1608,
+          -0.152
+        ],
+        [
+          0.08,
+          0.1608,
+          0.0
+        ],
+        [
+          0.0525,
+          0.1608,
+          0.152
+        ],
+        [
+          -0.08,
+          0.1608,
+          0.0
+        ],
+        [
+          0.0525,
+          0.1608,
+          -0.152
+        ],
+        [
+          0.08,
+          0.1608,
+          0.0
+        ],
+        [
+          0.1575,
+          0.1608,
+          0.152
+        ],
+        [
+          -0.08,
+          0.1608,
+          0.0
+        ],
+        [
+          0.1575,
+          0.1608,
+          -0.152
+        ],
+        [
+          0.08,
+          0.1608,
+          0.0
+        ],
+        [
+          -0.1575,
+          0.1608,
+          0.152
+        ],
+        [
+          0.08,
+          0.1608,
+          0.0
+        ],
+        [
+          -0.1575,
+          0.1608,
+          -0.152
+        ],
+        [
+          -0.08,
+          0.1608,
+          0.0
+        ],
+        [
+          -0.0525,
+          0.1608,
+          0.152
+        ],
+        [
+          0.08,
+          0.1608,
+          0.0
+        ],
+        [
+          -0.0525,
+          0.1608,
+          -0.152
+        ],
+        [
+          -0.08,
+          0.1608,
+          0.0
+        ],
+        [
+          0.0525,
+          0.1608,
+          0.152
+        ],
+        [
+          0.08,
+          0.1608,
+          0.0
+        ],
+        [
+          0.0525,
+          0.1608,
+          -0.152
+        ],
+        [
+          -0.08,
+          0.1608,
+          0.0
+        ],
+        [
+          0.1575,
+          0.1608,
+          0.152
+        ],
+        [
+          0.08,
+          0.1608,
+          0.0
+        ],
+        [
+          0.1575,
+          0.1608,
+          -0.152
+        ],
+        [
+          -0.08,
+          0.1608,
+          0.0
+        ],
+        [
+          -0.1575,
+          0.1608,
+          0.152
+        ]
+      ],
+      "speed": 0.7,
+      "color": "token:loop",
+      "count": 900,
+      "size": 0.28,
+      "spread": 0.003,
+      "clip": true,
+      "parts": [
+        "gpu-modules",
+        "nvswitch-chips"
+      ]
+    },
+    {
+      "id": "pcie-host",
+      "group": "data",
+      "path": [
+        [
+          -0.107,
+          0.062,
+          -0.13
+        ],
+        [
+          -0.107,
+          0.064,
+          0.05
+        ],
+        [
+          -0.107,
+          0.064,
+          0.195
+        ],
+        [
+          -0.12,
+          0.07,
+          0.31
+        ],
+        [
+          -0.12,
+          0.075,
+          0.3305
+        ],
+        [
+          -0.12,
+          0.152,
+          0.3305
+        ],
+        [
+          -0.12,
+          0.152,
+          0.3
+        ],
+        [
+          -0.1575,
+          0.1608,
+          0.152
+        ]
+      ],
+      "speed": 0.35,
+      "color": "token:loop",
+      "count": 60,
+      "size": 0.28,
+      "spread": 0.003,
+      "clip": true,
+      "parts": [
+        "cpus",
+        "network-modules",
+        "midplane",
+        "baseboard-connectors",
+        "gpu-modules"
+      ]
+    },
+    {
+      "id": "network-out",
+      "group": "data",
+      "path": [
+        [
+          -0.1575,
+          0.1608,
+          0.152
+        ],
+        [
+          -0.13,
+          0.152,
+          0.3
+        ],
+        [
+          -0.13,
+          0.152,
+          0.3305
+        ],
+        [
+          -0.13,
+          0.075,
+          0.3305
+        ],
+        [
+          -0.12,
+          0.068,
+          0.2
+        ],
+        [
+          -0.077,
+          0.074,
+          0.14
+        ],
+        [
+          -0.097,
+          0.081,
+          0.11
+        ],
+        [
+          -0.2085,
+          0.103,
+          0.04
+        ],
+        [
+          -0.2085,
+          0.103,
+          -0.205
+        ],
+        [
+          -0.12,
+          0.106,
+          -0.245
+        ],
+        [
+          -0.0125,
+          0.107,
+          -0.275
+        ],
+        [
+          -0.0125,
+          0.107,
+          -0.335
+        ],
+        [
+          -0.0125,
+          0.101,
+          -0.4
+        ],
+        [
+          -0.0125,
+          0.101,
+          -0.75
+        ]
+      ],
+      "speed": 0.5,
+      "color": "token:loop",
+      "count": 220,
+      "size": 0.28,
+      "spread": 0.003,
+      "clip": false,
+      "parts": [
+        "gpu-modules",
+        "midplane",
+        "network-modules",
+        "densilink-cables",
+        "osfp-cages"
+      ]
+    },
+    {
+      "id": "storage-data",
+      "group": "data",
+      "path": [
+        [
+          -0.13,
+          0.024,
+          0.4
+        ],
+        [
+          -0.13,
+          0.024,
+          0.32
+        ],
+        [
+          -0.06,
+          0.06,
+          0.32
+        ],
+        [
+          -0.035,
+          0.06,
+          0.2
+        ],
+        [
+          -0.035,
+          0.0575,
+          0.024
+        ],
+        [
+          -0.07,
+          0.0595,
+          -0.06
+        ],
+        [
+          -0.107,
+          0.0595,
+          -0.13
+        ]
+      ],
+      "speed": 0.35,
+      "color": "token:loop",
+      "count": 100,
+      "size": 0.28,
+      "spread": 0.003,
+      "clip": true,
+      "parts": [
+        "u2-drives",
+        "pcie-switches",
+        "cpus"
+      ]
+    }
+  ],
+  "animations": [
+    {
+      "id": "fan-spin",
+      "target": "fan-rotors",
+      "kind": "rotate",
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "rpm": 40,
+      "each": true
+    },
+    {
+      "id": "status-led-pulse",
+      "target": "status-led",
+      "kind": "pulse",
+      "scale": 1.4,
+      "hz": 0.5
+    }
+  ],
+  "views": {
+    "assembled": {
+      "camera": {
+        "position": [
+          1.1,
+          0.95,
+          2.0
+        ],
+        "target": [
+          0,
+          0.17,
+          0
+        ],
+        "fov": 30
+      }
+    },
+    "exploded": {
+      "camera": {
+        "position": [
+          1.7,
+          1.45,
+          2.3
+        ],
+        "target": [
+          0,
+          0.36,
+          -0.35
+        ],
+        "fov": 30
+      }
+    },
+    "cutaway": {
+      "normal": [
+        -1,
+        0,
+        0
+      ],
+      "offset": 0.02
+    },
+    "cuts": {
+      "side": {
+        "normal": [
+          -1,
+          0,
+          0
+        ],
+        "offset": 0.02,
+        "label": {
+          "en": "Side",
+          "zh": "侧剖"
+        }
+      },
+      "chips": {
+        "normal": [
+          0,
+          -1,
+          0
+        ],
+        "offset": 0.1612,
+        "label": {
+          "en": "Chips",
+          "zh": "芯片层"
+        }
+      },
+      "host-level": {
+        "normal": [
+          0,
+          -1,
+          0
+        ],
+        "offset": 0.143,
+        "label": {
+          "en": "Host level",
+          "zh": "主机层"
+        }
+      }
+    },
+    "section": {
+      "plane": "zy"
+    },
+    "cover": {
+      "position": [
+        1.3,
+        1.0,
+        1.3
+      ],
+      "target": [
+        0.04,
+        0.17,
+        -0.04
+      ],
+      "fov": 30
+    }
+  },
+  "spec": [
+    {
+      "key": {
+        "en": "GPUs",
+        "zh": "GPU"
+      },
+      "value": "8 × B200 · 1,440 GB HBM3e · NVLink 1.8 TB/s",
+      "tag": "typical"
+    },
+    {
+      "key": {
+        "en": "Host",
+        "zh": "主机"
+      },
+      "value": "2 × Xeon 8570 · 2 TB · 8 × 400 Gb/s",
+      "tag": "typical"
+    },
+    {
+      "key": {
+        "en": "Power",
+        "zh": "功率"
+      },
+      "value": "≈14.3 kW max · 6 × 3.3 kW",
+      "tag": "typical"
+    },
+    {
+      "key": {
+        "en": "Size",
+        "zh": "尺寸"
+      },
+      "value": "10U · 897 mm deep · 142 kg",
+      "tag": "typical"
+    }
+  ],
+  "telemetry": [
+    {
+      "key": {
+        "en": "Power in",
+        "zh": "输入功率"
+      },
+      "unit": "kW",
+      "idle": 1.8,
+      "run": 12.5,
+      "lag": 4,
+      "decimals": 1
+    },
+    {
+      "key": {
+        "en": "GPU load",
+        "zh": "GPU 负载"
+      },
+      "unit": "%",
+      "idle": 0,
+      "run": 95,
+      "lag": 2,
+      "decimals": 0
+    },
+    {
+      "key": {
+        "en": "GPU temp",
+        "zh": "GPU 温度"
+      },
+      "unit": "°C",
+      "idle": 34,
+      "run": 72,
+      "lag": 25,
+      "decimals": 0
+    },
+    {
+      "key": {
+        "en": "Fans",
+        "zh": "风扇"
+      },
+      "unit": "%",
+      "idle": 30,
+      "run": 80,
+      "lag": 6,
+      "decimals": 0
+    },
+    {
+      "key": {
+        "en": "Airflow",
+        "zh": "风量"
+      },
+      "unit": "m³/h",
+      "idle": 790,
+      "run": 2107,
+      "lag": 6,
+      "decimals": 0
+    },
+    {
+      "key": {
+        "en": "Exhaust",
+        "zh": "出风"
+      },
+      "unit": "°C",
+      "idle": 32.0,
+      "run": 42.9,
+      "lag": 20,
+      "decimals": 1
+    }
+  ],
+  "presets": [
+    {
+      "id": "hero",
+      "label": {
+        "en": "Hero",
+        "zh": "全景"
+      },
+      "camera": {
+        "position": [
+          1.1,
+          0.95,
+          2.0
+        ],
+        "target": [
+          0,
+          0.17,
+          0
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "front-view",
+      "label": {
+        "en": "Front",
+        "zh": "正面"
+      },
+      "camera": {
+        "position": [
+          0,
+          0.3,
+          1.85
+        ],
+        "target": [
+          0,
+          0.2,
+          0.4
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "rear-view",
+      "label": {
+        "en": "Rear",
+        "zh": "背面"
+      },
+      "camera": {
+        "position": [
+          -0.75,
+          0.55,
+          -1.85
+        ],
+        "target": [
+          0,
+          0.18,
+          -0.4
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "gpu-bay",
+      "label": {
+        "en": "GPU tray",
+        "zh": "GPU 托盘"
+      },
+      "camera": {
+        "position": [
+          0.7,
+          1.35,
+          0.95
+        ],
+        "target": [
+          0,
+          0.2,
+          -0.02
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "host-bay",
+      "label": {
+        "en": "Host tray",
+        "zh": "主机托盘"
+      },
+      "camera": {
+        "position": [
+          0.72,
+          0.85,
+          1.05
+        ],
+        "target": [
+          0,
+          0.05,
+          -0.08
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "in-rack",
+      "label": {
+        "en": "Rack",
+        "zh": "机柜"
+      },
+      "camera": {
+        "position": [
+          2.2,
+          1.7,
+          4.2
+        ],
+        "target": [
+          0,
+          0.85,
+          0
+        ],
+        "fov": 30
+      }
+    }
+  ],
+  "poses": {
+    "gpu-tray-out": {
+      "gpu-tray-frame": {
+        "offset": [
+          0,
+          0,
+          -0.55
+        ]
+      },
+      "rear-grille": {
+        "offset": [
+          0,
+          0,
+          -0.55
+        ]
+      },
+      "gpu-baseboard": {
+        "offset": [
+          0,
+          0,
+          -0.55
+        ]
+      },
+      "baseboard-connectors": {
+        "offset": [
+          0,
+          0,
+          -0.55
+        ]
+      },
+      "gpu-modules": {
+        "offset": [
+          0,
+          0,
+          -0.55
+        ]
+      },
+      "gpu-dies": {
+        "offset": [
+          0,
+          0,
+          -0.55
+        ]
+      },
+      "hbm-stacks": {
+        "offset": [
+          0,
+          0,
+          -0.55
+        ]
+      },
+      "gpu-heatsinks": {
+        "offset": [
+          0,
+          0,
+          -0.55
+        ]
+      },
+      "nvswitch-chips": {
+        "offset": [
+          0,
+          0,
+          -0.55
+        ]
+      },
+      "nvswitch-duct": {
+        "offset": [
+          0,
+          0,
+          -0.55
+        ]
+      },
+      "duration": 1.6
+    },
+    "host-tray-out": {
+      "host-tray-frame": {
+        "offset": [
+          0,
+          0,
+          -0.5
+        ]
+      },
+      "motherboard": {
+        "offset": [
+          0,
+          0,
+          -0.5
+        ]
+      },
+      "cpus": {
+        "offset": [
+          0,
+          0,
+          -0.5
+        ]
+      },
+      "cpu-heatsinks": {
+        "offset": [
+          0,
+          0,
+          -0.5
+        ]
+      },
+      "dimms": {
+        "offset": [
+          0,
+          0,
+          -0.5
+        ]
+      },
+      "pcie-switches": {
+        "offset": [
+          0,
+          0,
+          -0.5
+        ]
+      },
+      "network-modules": {
+        "offset": [
+          0,
+          0,
+          -0.5
+        ]
+      },
+      "densilink-cables": {
+        "offset": [
+          0,
+          0,
+          -0.5
+        ]
+      },
+      "osfp-cages": {
+        "offset": [
+          0,
+          0,
+          -0.5
+        ]
+      },
+      "bluefield-dpus": {
+        "offset": [
+          0,
+          0,
+          -0.5
+        ]
+      },
+      "pcie-risers": {
+        "offset": [
+          0,
+          0,
+          -0.5
+        ]
+      },
+      "boot-drives": {
+        "offset": [
+          0,
+          0,
+          -0.5
+        ]
+      },
+      "rear-io": {
+        "offset": [
+          0,
+          0,
+          -0.5
+        ]
+      },
+      "duration": 1.6
+    },
+    "psu-out": {
+      "psu-single": {
+        "offset": [
+          0,
+          0,
+          -0.25
+        ]
+      },
+      "duration": 1.2
+    }
+  }
+}

@@ -201,6 +201,47 @@ export function partPrimitives(part: Pick<Part, 'primitive' | 'extra'>): Primiti
   return part.primitive ? [part.primitive, ...(part.extra ?? [])] : [];
 }
 
+/**
+ * The copies an `each` animation moves one by one (schema `each`): every
+ * primitive of the part (main, then `extra`) in every `repeat` instance, with
+ * its centre relative to the main `at` (the repeat carried through). Order:
+ * primitive-major, repeat-minor.
+ */
+export interface PartCopy {
+  /** Index into `partPrimitives(part)`. */
+  primitive: number;
+  /** Index into `repeatTransforms(part.repeat)`. */
+  repeat: number;
+  /** Centre of this copy relative to the main primitive's `at` (part frame). */
+  centre: Vec3;
+}
+
+export function partCopies(part: Pick<Part, 'primitive' | 'extra' | 'repeat'>): PartCopy[] {
+  const prims = partPrimitives(part);
+  const main = prims[0];
+  if (!main) return [];
+  const reps = repeatTransforms(part.repeat);
+  return prims.flatMap((p, primitive) => {
+    const rel: Vec3 = [p.at[0] - main.at[0], p.at[1] - main.at[1], p.at[2] - main.at[2]];
+    return reps.map((t, repeat) => {
+      const c = apply3(t.rotation, rel);
+      return { primitive, repeat, centre: [c[0] + t.offset[0], c[1] + t.offset[1], c[2] + t.offset[2]] as Vec3 };
+    });
+  });
+}
+
+/**
+ * Key of a primitive's shape and material, ignoring where it is (`at`) and
+ * how it is turned (`rotation`): copies with the same key share one geometry
+ * (one instanced draw call per material).
+ */
+export function primitiveShapeKey(p: Primitive): string {
+  const shape: Record<string, unknown> = { ...p };
+  delete shape.at;
+  delete shape.rotation;
+  return JSON.stringify(shape);
+}
+
 function corners(b: Box3Like): Vec3[] {
   const out: Vec3[] = [];
   for (const x of [b.min[0], b.max[0]]) for (const y of [b.min[1], b.max[1]]) for (const z of [b.min[2], b.max[2]]) out.push([x, y, z]);

@@ -8,15 +8,16 @@ import { explodedPosition } from '../../lib/explode';
 import { mainBounds, partBounds, primitiveScale, tubeMidpoint } from '../../lib/parts';
 import { apply3, eulerDeg } from '../../lib/xform';
 import type { Vec3 } from '../../lib/math';
-import { isClosedPrimitive, partPieces } from './geometry';
+import { eachPieces, isClosedPrimitive, partPieces } from './geometry';
 import { partPrimitives } from '../../lib/parts';
 import { restFan } from '../../lib/wing';
 import type { PartShape } from './PartNode';
 
-export function primitiveShape(part: Part): PartShape | null {
+/** `each`: an `each` animation targets the part, so its copies are drawn instanced and move one by one. */
+export function primitiveShape(part: Part, each = false): PartShape | null {
   const p = part.primitive;
   if (!p) return null;
-  const pieces = partPieces(part);
+  const pieces = each ? eachPieces(part) : partPieces(part);
   const b = partBounds(part)!;
   const radius = Math.hypot(b.max[0] - b.min[0], b.max[1] - b.min[1], b.max[2] - b.min[2]) / 2;
   return {

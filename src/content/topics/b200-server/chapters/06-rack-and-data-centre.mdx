@@ -1,0 +1,108 @@
+---
+id: rack-and-data-centre
+order: 6
+title: { en: "In the rack, in the data centre", zh: "在机柜里，在数据中心里" }
+sensitive: false
+state:
+  view: assembled
+  run: true
+  cutaway: none
+  layers: [chassis, cooling, gpu-tray, host, power, scene]
+  hide: [scale-figure, power-cords]
+  labels: [rack-ears, top-cover, bezel]
+  camera: { position: [2.2, 1.7, 4.2], target: [0, 0.85, 0], fov: 30 }
+  summary: { en: "One server is one building block: two fit in a rack, and thousands are wired together to train a single large model.", zh: "一台服务器只是一块积木：一个机柜放两台，上千台连在一起，才训练一个大模型。" }
+  beats:
+    - labels: [rack-ears, top-cover, bezel]
+      caption: { en: "In a rack: this server sits at the bottom, and a second one sits directly above it.", zh: "装进机柜：这一台在最下面，同一个机柜里，正上方还有一台。" }
+    - camera: { position: [-2.0, 1.7, -3.8], target: [0, 0.75, -0.3], fov: 30 }
+      layers: [chassis, cooling, gpu-tray, host, power, data, scene]
+      labels: [osfp-cages, rear-grille]
+      caption: { en: "Eight network links of 400 gigabits a second leave the back of each server and run to the same set of switches.", zh: "每台服务器后面引出 8 条每秒 400 吉比特的网络链路，接到同一套交换机上。" }
+    - camera: { position: [3.1, 2.4, 5.6], target: [0, 0.95, 0], fov: 30 }
+      labels: [rack-ears]
+      caption: { en: "In NVIDIA's reference design, 32 such servers with 256 GPUs form one building block, and many blocks are joined into one cluster.", zh: "在 NVIDIA 的参考设计里，32 台这样的服务器、共 256 块 GPU 组成一个单元，许多单元再连成一个集群。" }
+    - labels: [rack-ears, top-cover]
+      caption: { en: "Another design puts 72 GPUs in a single liquid-cooled rack that needs about 120 kilowatts of cooling.", zh: "另一种做法把 72 块 GPU 装进一个液冷机柜，整柜要带走约 120 千瓦的热。" }
+    - camera: hero
+      labels: [rack-ears, top-cover, bezel]
+      caption: { en: "Data centres around the world used about 415 terawatt-hours of electricity in 2024, about 1.5 per cent of all the electricity used.", zh: "2024 年，全世界的数据中心用电约 415 太瓦时，约占全球用电的 1.5%。" }
+  index:
+    parts: [rack-ears, rails, osfp-cages, network-modules, psus, chassis-body]
+---
+
+<Lang en>
+
+A server like this lives in a rack in a data centre. NVIDIA's reference design puts <Num s="S17">two</Num> DGX B200 servers in each rack, one above the other, and expects each rack to need more than <Num s="S17">25 kW</Num>. <FlyTo preset="in-rack">Step back to the rack</FlyTo>
+
+Training a large model takes far more than one server. In the same design, <Num s="S17">32</Num> servers, <Num s="S17">256</Num> GPUs, form one building block, and the blocks are joined by a separate network in which every server's first GPU is cabled to one group of switches, every second GPU to another, and so on. The design describes clusters of up to <Num s="S17">2,048</Num> servers with <Num s="S17">16,384</Num> GPUs. For a sense of scale, Meta reported that training its Llama 3.1 model with <Num s="S22">405 billion</Num> parameters took about <Num s="S22">30.84 million</Num> GPU-hours on an earlier GPU, the H100, using up to <Num s="S23">16,000</Num> of them. Once trained, answering questions with the model, called <Term id="inference">inference</Term>, takes far less computing per answer.
+
+Another design packs more GPUs closer together. NVIDIA's GB200 NVL72 joins <Num s="S18">72</Num> GPUs in one rack into a single NVLink group, at <Num s="S18">130 TB/s</Num> in all. A rack like that gives off about <Num s="S19">120 kW</Num> of heat, too much for air, so it is cooled by liquid flowing through plates on the chips.
+
+All of this uses a lot of electricity. The International Energy Agency estimates that data centres used about <Num s="S21">415 TWh</Num> in 2024, about <Num s="S21">1.5 %</Num> of the world's electricity, and that this may roughly double to about <Num s="S21">945 TWh</Num> by 2030.
+
+<Figure src="figures/b200-rack" alt={{ en: "Pencil drawing of a person standing next to an open rack holding two servers and network switches.", zh: "铅笔画：一个人站在打开的机柜旁，机柜里有两台服务器和网络交换机。" }} caption={{ en: "Two servers in one rack, with a person for scale. Illustration for this topic, not a specific installation.", zh: "一个机柜里的两台服务器，旁边的人作比例。为本主题画的示意图，不代表某个具体机房。" }} />
+
+<More title={{ en: "What \"training\" means at this scale", zh: "这种规模的\"训练\"是什么意思" }}>
+
+The Llama 3.1 figures are for H100 GPUs, the generation before the B200; there is no published figure for a model trained on DGX B200 servers. If <Num s="S23">16,000</Num> GPUs had run without stopping, <Num s="S22">30.84 million</Num> GPU-hours would take about <Num s="S22,S23">1,930</Num> hours, roughly <Num s="S22,S23">80</Num> days; real schedules differ, and the paper reports <Num s="S23">419</Num> unexpected interruptions in <Num s="S23">54</Num> days of training. Meta estimated the emissions from the electricity used at about <Num s="S22">8,930</Num> tonnes of carbon dioxide equivalent, counted from the electricity grids where the training ran.
+
+</More>
+
+<More title={{ en: "NVL72 in numbers", zh: "NVL72 的数字" }}>
+
+A GB200 NVL72 rack holds <Num s="S18">72</Num> Blackwell GPUs and <Num s="S18">36</Num> Grace CPUs on <Num s="S20">18</Num> compute trays, with <Num s="S20">9</Num> NVLink switch trays between them, and <Num s="S18">13.4 TB</Num> of HBM3e memory in all. Because all 72 GPUs share one NVLink group, a model can be spread over far more GPUs before it has to use the slower network between racks. NVIDIA says liquid cooling lets it pack this much computing into one rack and use less water than some cooling systems; that is the maker's claim.
+
+</More>
+
+<More title={{ en: "One server's electricity", zh: "一台服务器的用电" }}>
+
+At the simulated full-load point of chapter 5, <Num s="S1">12.5 kW</Num>, one server uses <Num s="S1">12.5 × 24 = 300 kWh</Num> in a day. If it ran at its maximum, <Num s="S3">14.3 kW</Num>, for a whole year, it would use about <Num s="S1">125 MWh</Num>. On top of that the data centre spends electricity on cooling the room, on power conversion and on lighting. The ratio of a data centre's total electricity to the electricity its computers use is called <Term id="pue">PUE</Term>; the lower it is, the less is spent on everything else.
+
+</More>
+
+<More title={{ en: "Energy and Singapore", zh: "能源与新加坡" }}>
+
+Singapore hosts many data centres on very little land. In 2019 they used about <Num s="S36">5.3 %</Num> of the country's electricity, and about <Num s="S36">7 %</Num> in 2020, according to a government reply in Parliament based on seven months of 2020 data; no newer official share has been published. In 2024 IMDA's Green Data Centre Roadmap set out to add at least <Num s="S24">300 MW</Num> of new data-centre capacity in the near term, favouring efficient designs and green energy, and noted that running a data centre <Num s="S24">1 °C</Num> warmer can save <Num s="S24">2 to 5 %</Num> of its energy. For comparison, an average four-room HDB flat used about <Num s="S28">381 kWh</Num> a month in 2024, so the simulated server's <Num s="S1">300 kWh</Num> a day is close to a month of such a flat.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+这样的服务器放在数据中心的机柜里。NVIDIA 的参考设计每个机柜放 <Num s="S17">2</Num> 台 DGX B200，上下叠放，并估计每个机柜要用电 <Num s="S17">25 kW</Num> 以上。<FlyTo preset="in-rack">退后看整个机柜</FlyTo>
+
+训练一个大模型，一台服务器远远不够。在同一个设计里，<Num s="S17">32</Num> 台服务器、<Num s="S17">256</Num> 块 GPU 组成一个单元，单元之间用一套单独的网络相连：每台服务器的 1 号 GPU 都接到同一组交换机，2 号 GPU 接到另一组，依此类推。这个设计描述的集群最多有 <Num s="S17">2,048</Num> 台服务器、<Num s="S17">16,384</Num> 块 GPU。举个规模的例子：Meta 报告说，训练它有 <Num s="S22">4050 亿</Num>个参数的 Llama 3.1 模型，用了上一代 H100 GPU 约 <Num s="S22">3084 万</Num> GPU 小时，最多同时用了 <Num s="S23">16,000</Num> 块。模型训练好以后，用它回答问题叫<Term id="inference">推理</Term>，每次回答需要的计算要少得多。
+
+另一种做法把更多 GPU 挤得更近。NVIDIA 的 GB200 NVL72 把一个机柜里的 <Num s="S18">72</Num> 块 GPU 用 NVLink 连成一个整体，合计每秒 <Num s="S18">130 TB</Num>。这样一个机柜要散掉约 <Num s="S19">120 kW</Num> 的热，空气带不走，所以改用液体：冷却液流过贴在芯片上的冷板。
+
+这一切都很费电。国际能源署估计，2024 年全世界数据中心用电约 <Num s="S21">415 太瓦时</Num>，约占全球用电的 <Num s="S21">1.5 %</Num>；到 2030 年可能大约翻一番，达到约 <Num s="S21">945 太瓦时</Num>。
+
+<Figure src="figures/b200-rack" alt={{ en: "Pencil drawing of a person standing next to an open rack holding two servers and network switches.", zh: "铅笔画：一个人站在打开的机柜旁，机柜里有两台服务器和网络交换机。" }} caption={{ en: "Two servers in one rack, with a person for scale. Illustration for this topic, not a specific installation.", zh: "一个机柜里的两台服务器，旁边的人作比例。为本主题画的示意图，不代表某个具体机房。" }} />
+
+<More title={{ en: "What \"training\" means at this scale", zh: "这种规模的\"训练\"是什么意思" }}>
+
+Llama 3.1 的数字来自 H100 GPU，是 B200 的上一代；目前没有公开的、在 DGX B200 上训练模型的数字。如果 <Num s="S23">16,000</Num> 块 GPU 全部不停地运行，<Num s="S22">3084 万</Num> GPU 小时大约要 <Num s="S22,S23">1,930</Num> 小时，约 <Num s="S22,S23">80</Num> 天；真实的排程并不是这样，论文报告在 <Num s="S23">54</Num> 天的训练里出现了 <Num s="S23">419</Num> 次意外中断。Meta 估计，训练用电带来的排放约 <Num s="S22">8,930</Num> 吨二氧化碳当量，按训练所在地电网的排放来算。
+
+</More>
+
+<More title={{ en: "NVL72 in numbers", zh: "NVL72 的数字" }}>
+
+一个 GB200 NVL72 机柜在 <Num s="S20">18</Num> 个计算托盘上装 <Num s="S18">72</Num> 块 Blackwell GPU 和 <Num s="S18">36</Num> 颗 Grace CPU，中间夹着 <Num s="S20">9</Num> 个 NVLink 交换托盘，合计 <Num s="S18">13.4 TB</Num> HBM3e 显存。因为 72 块 GPU 共用一个 NVLink 整体，一个模型可以先分到多得多的 GPU 上，再去用机柜之间较慢的网络。NVIDIA 称，液冷让它能把这么多计算塞进一个机柜，而且比某些冷却系统用水少；这是厂商的说法。
+
+</More>
+
+<More title={{ en: "One server's electricity", zh: "一台服务器的用电" }}>
+
+按第 5 章模拟的满负荷 <Num s="S1">12.5 kW</Num> 算，一台服务器一天用电 <Num s="S1">12.5 × 24 = 300 kWh</Num>。如果它以最大功率 <Num s="S3">14.3 kW</Num> 运行一整年，约用 <Num s="S1">125 MWh</Num>。此外，数据中心还要为机房降温、电力转换和照明用电。数据中心的总用电和其中计算设备用电之比叫<Term id="pue">PUE</Term>；它越低，花在其他方面的电就越少。
+
+</More>
+
+<More title={{ en: "Energy and Singapore", zh: "能源与新加坡" }}>
+
+新加坡土地很少，却有很多数据中心。根据政府在国会的书面答复，2019 年数据中心用电约占全国的 <Num s="S36">5.3 %</Num>，2020 年约 <Num s="S36">7 %</Num>（按 2020 年头 7 个月的数据）；之后没有公布更新的官方比例。2024 年，资讯通信媒体发展局（IMDA）的《绿色数据中心路线图》提出，近期至少再增加 <Num s="S24">300 MW</Num> 的数据中心容量，优先给高能效的设计和绿色能源；它还提到，数据中心的运行温度每提高 <Num s="S24">1℃</Num>，可以省下 <Num s="S24">2–5 %</Num> 的能源。作为对照，2024 年一套四房式组屋平均每月用电约 <Num s="S28">381 kWh</Num>，所以模拟中这台服务器一天的 <Num s="S1">300 kWh</Num>，接近这样一个家庭一个月的用电。
+
+</More>
+
+</Lang>

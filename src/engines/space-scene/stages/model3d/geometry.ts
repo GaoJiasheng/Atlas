@@ -38,8 +38,10 @@ import {
   finPlateSize,
   flangeBore,
   materialSlotKey,
+  partCopies,
   partMaterialSlots,
   partPrimitives,
+  primitiveShapeKey,
   repeatTransforms,
   tubeBendRadius,
 } from '../../lib/parts';
@@ -65,6 +67,12 @@ export interface ShapePiece {
    * on a skinned bone follow it relative to them).
    */
   skin?: { skeleton: Skeleton; bindMatrix: Matrix4; boneRest: Matrix4[] };
+  /**
+   * An `each` animation's piece: per instance, the centre (part frame) its
+   * copy turns / scales about. `matrices` are the rest instance transforms;
+   * the stage writes `T(centre) · motion · T(−centre) · rest` every frame.
+   */
+  pivots?: [number, number, number][];
 }
 
 /** A piece of one primitive before placement: geometry, instances, and a material other than the primitive's own. */
@@ -482,6 +490,55 @@ export function partPieces(part: Pick<Part, 'primitive' | 'repeat'> & { extra?: 
   }
   // Meshes first (slot order), then wing membranes, then lines.
   return [...merged, ...out.filter((p) => !p.lines), ...out.filter((p) => p.lines)];
+}
+
+/**
+ * Pieces of a part whose copies move one by one (an `each` animation): one
+ * instanced piece per distinct primitive shape and material slot, one
+ * instance per copy (`partCopies`) and per the primitive's own instances,
+ * each with the centre it moves about. Identical primitives (same shape key,
+ * any `at` / `rotation`) share the piece: 40 fan rotors = one draw call.
+ * Vein lines and wing membranes are baked static (no fan).
+ */
+export function eachPieces(part: Pick<Part, 'primitive' | 'repeat'> & { extra?: Part['extra'] }): ShapePiece[] {
+  const main = part.primitive;
+  if (!main) return [];
+  const slots = partMaterialSlots(part);
+  const keys = slots.map((s) => materialSlotKey(s.color, s.tint));
+  const reps = repeatMatrices(part);
+  const prims = partPrimitives(part);
+  const copies = partCopies(part);
+  const groups = new Map<string, { prim: Primitive; entries: { matrix: Matrix4; centre: [number, number, number] }[] }>();
+  prims.forEach((p, j) => {
+    const place = new Matrix4()
+      .makeTranslation(p.at[0] - main.at[0], p.at[1] - main.at[1], p.at[2] - main.at[2])
+      .multiply(eulerMatrix(p.rotation));
+    const key = primitiveShapeKey(p);
+    const group = groups.get(key) ?? { prim: p, entries: [] };
+    groups.set(key, group);
+    for (const c of copies) {
+      if (c.primitive !== j) continue;
+      group.entries.push({ matrix: reps[c.repeat]!.clone().multiply(place), centre: c.centre });
+    }
+  });
+  const out: ShapePiece[] = [];
+  for (const { prim, entries } of groups.values()) {
+    for (const piece of basePieces(prim)) {
+      const slot = keys.indexOf(materialSlotKey(piece.color ?? prim.color, piece.color ? undefined : prim.tint));
+      const matrices = entries.flatMap((e) => piece.instances.map((m) => e.matrix.clone().multiply(m)));
+      if (piece.lines) {
+        out.push({ geometry: bakeLines(piece.geometry, matrices), matrices: null, slot, lines: true });
+        continue;
+      }
+      if (piece.wing) {
+        out.push({ geometry: mergeBaked([{ geometry: piece.geometry, matrices }]), matrices: null, slot });
+        continue;
+      }
+      const pivots = entries.flatMap((e) => piece.instances.map(() => e.centre));
+      out.push({ geometry: piece.geometry, matrices, slot, pivots });
+    }
+  }
+  return [...out.filter((p) => !p.lines), ...out.filter((p) => p.lines)];
 }
 
 /** Line segments copied once per placement into one geometry. Disposes the input. */

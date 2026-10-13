@@ -501,6 +501,11 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
           store.getState().applyState({ exercise: { ...ex, phase } }, { instant: true });
           return true;
         },
+        // QA: jump to any scene state (camera, hidden, cutaway, layers, view …), e.g. a realism-round camera next to a reference photo.
+        apply: (patch: Parameters<ReturnType<typeof store.getState>['applyState']>[0]) => {
+          store.getState().applyState(patch, { instant: true });
+          return true;
+        },
         // QA: hold a pose of parts.json (null = rest).
         pose: (name: string | null) => {
           if (name !== null && !(file.poses && name in file.poses)) return false;

@@ -2100,6 +2100,22 @@
 /* Chapter-body controls: <More>, <Num>, <FlyTo>, source popover        */
 /* ------------------------------------------------------------------ */
 
+/* <Figure>: a 4:3 graphite drawing with a hairline caption (paper multiplies, dark plate inverts: .atlas-drawing). */
+.atlas-figure {
+  margin: 1em 0 1.1em;
+  padding-top: 0.5em;
+  border-top: 1px solid var(--hair);
+}
+.atlas-figure__img.atlas-drawing {
+  aspect-ratio: 4 / 3;
+}
+.atlas-figure__caption {
+  margin-top: 0.35em;
+  font: 400 0.75rem / 1.4 var(--font-hud);
+  letter-spacing: 0.02em;
+  color: var(--ink-2);
+}
+
 /* <More>: collapsed "look closer" block, hairline header with a small triangle. */
 .atlas-more {
   margin-top: 0.9em;

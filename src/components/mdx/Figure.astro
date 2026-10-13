@@ -1,0 +1,37 @@
+---
+/**
+ * `<Figure src="figures/b200-rack" alt={{ en, zh }} caption={{ en, zh }} />`:
+ * a drawing in a chapter body (public/illustrations/<src>.webp + @2x, 4:3,
+ * scripts/illustrate.ts `figure`). Paper multiplies the graphite into the
+ * sheet, the dark plate inverts it into chalk (same rule as the home
+ * drawings, `.atlas-drawing`); the box is reserved so nothing shifts on load.
+ * `pnpm validate` checks the files exist and that alt and caption are given.
+ */
+import { tx, withBase, type BilingualText } from '../../i18n';
+import { pageLocale } from './locale';
+
+interface Props {
+  src: string;
+  alt: BilingualText | string;
+  caption: BilingualText | string;
+}
+const { src, alt, caption } = Astro.props;
+const locale = pageLocale(Astro.url, Astro.currentLocale);
+const one = withBase(`/illustrations/${src}.webp`);
+const two = withBase(`/illustrations/${src}@2x.webp`);
+---
+<figure class="atlas-figure">
+  <img
+    class="atlas-drawing atlas-figure__img"
+    src={one}
+    srcset={`${one} 1200w, ${two} 2400w`}
+    sizes="(max-width: 1023px) 92vw, 420px"
+    width="1200"
+    height="900"
+    alt={tx(alt, locale)}
+    loading="lazy"
+    decoding="async"
+    draggable="false"
+  />
+  <figcaption class="atlas-figure__caption">{tx(caption, locale)}</figcaption>
+</figure>

@@ -99,6 +99,7 @@ pnpm tsx scripts/new-topic.ts <slug> --engine space-scene --subject science|biol
      | 组件 | 写法 | 效果 |
      |---|---|---|
      | `<More>` | `<More title={{ en: "The numbers", zh: "数字" }}>`（里面空行再写 Markdown）`</More>` | 细看折叠块：hairline 标题行 + 小三角，默认收起；原生 `<details>`，无 JS 也能用 |
+     | `<Figure>` | `<Figure src="figures/b200-rack" alt={{ en: "…", zh: "…" }} caption={{ en: "…", zh: "…" }} />` | 章节里的一张石墨插图（`public/illustrations/<src>.webp` + `@2x`，4:3，`scripts/illustrate.ts figure`）：paper 下正片叠底，dark plate 反相成粉笔（同首页插图 `.atlas-drawing`）；占位宽高预留；validate 检查文件存在、alt 与 caption 都写了 |
      | `<Num>` | `<Num s="S3">about 70,000</Num>`；多个来源 `s="S3,S7"` | 数字后跟 mono 上标来源号，点开来源弹层（文本、说明、链接，不联网） |
      | `<FlyTo>` | `<FlyTo preset="singapore-island">Singapore island</FlyTo>` | 正文里的 hairline 按钮，镜头飞到命名预设（TimeScene `presets.json`，SpaceScene `parts.json` 的 `presets`；与 VIEW 按钮同一动作；手机上顺便收起阅读面板） |
      | `<Term>` | `<Term id="blitzkrieg">闪电战</Term>` | 名词：点状下划线的 `span`（`role="button"`，Enter / 空格也能开），点开在阅读面板 inspector 区显示 `glossary.json` 里的定义和相关词（见「名词表」）；只包全主题第一次出现处 |
@@ -689,7 +690,8 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
   "animations": [
     { "id": "fan-spin", "target": "fan", "kind": "rotate", "axis": [0,0,1], "rpm": 120 },
     { "id": "flap", "target": "louver", "kind": "oscillate", "axis": [1,0,0], "amplitude": 20, "hz": 0.5 },   // amplitude 单位：度
-    { "id": "beat", "target": "pump", "kind": "pulse", "scale": 1.15, "hz": 1 }                                // scale 是峰值缩放
+    { "id": "beat", "target": "pump", "kind": "pulse", "scale": 1.15, "hz": 1 },                               // scale 是峰值缩放
+    { "id": "fan-spin", "target": "fan-rotors", "kind": "rotate", "axis": [0,0,1], "rpm": 40, "each": true }   // each：每个副本绕自己的中心动（见下）
   ],
   "views": {
     "assembled": { "camera": { "position": [3,2,4], "target": [0,0,0], "fov": 34 } },
@@ -734,6 +736,7 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
   - `grille {style, radius | size, count, spokes, bar}`：`rings` = XZ 平面里 `count` 圈钢丝圈（从 0.2 radius 到 radius）+ `spokes` 根辐条 + 中心圆片（室外机风扇护网）；`slats` = `size:[w,d,h]` 框里 `count` 根宽 `bar` 的格条，沿 d 方向（室内机顶部进风格栅、滤网）
   - 所有 primitive 可选 `mirror: "x" | "y" | "z"`：在自身坐标里沿该轴镜像（先镜像、再 `rotation`），绕序自动翻转
 - **一个零件多个 primitive**（`extra: [primitive…]`，≤ 16）：`at` 同样是场景坐标；随零件一起移动、淡出、拆开、repeat（绕主 `at` 重复）和转动；引线指向主 `primitive`。每个 primitive 可以有自己的 `color` / `tint`：零件按材质分槽（`partMaterialSlots`：主材质在前，再按出现顺序），**同材质的所有块烘焙合并成一个几何体，一个材质一次绘制**（顶点超过 40 万才保留实例化）。压缩机 = 外壳 + 接线盒 + 底板，阀门 = 阀体 + 阀帽 + 接口，等等
+- **逐个副本的动画**（`each: true`，rotate / oscillate / pulse；b200-server 的 40 只风扇转子）：默认动画让整个零件绕零件中心（或 `pivot`）动，`repeat` 的各列和 `extra` 会一起公转。写 `each: true` 后，零件的每个**副本**——主 primitive 和每个 `extra`、乘以每个 `repeat` 实例（`lib/parts.ts partCopies`）——各自绕自己的 `at`（随 repeat 移过去）转 / 摆 / 缩放，轴仍是场景坐标。这样的零件不再烘焙合并：形状相同的 primitive（`primitiveShapeKey`：除 `at`、`rotation` 外参数与材质全同）共用一个 InstancedMesh，每个副本一个实例（`stages/model3d/geometry.ts eachPieces`，片的 `pivots` = 各实例的转心），舞台每帧写 `T(c) · 动作 · T(−c) · 静止矩阵`；所以 5 列 × 8 只转子 = 1 次绘制。限制：不能和 `pivot` 一起写；零件要有 `repeat` 或 `extra`；不能是 glb 零件；翅脉线、折叠翅在这种零件里是静止的。同一零件里不带 `each` 的动画照旧作用于整个零件，二者叠加。
 - **repeat**：`{count, axis, spacing}`（沿轴、以 `at` 为中心等距）或 `{count, axis, radius}`（绕过 `at` 的轴一圈，每个实例朝外转）。轴是场景坐标。重复的是整个零件（含 `extra`）；同材质的副本烘焙合并成一个几何体（一次绘制），顶点很多时才用 InstancedMesh。
 - **材质族**（`color`）：`casing`（拉丝铝，各向异性）、`steel`（机加工钢）、`powder`（缎面黑粉末涂层，轻微橘皮）、`stainless`（轴向拉丝不锈钢）、`copper`、`brass`（黄铜：阀门、喇叭口螺母）、`rubber`（近黑，roughness .78）、`plastic`（哑光暖砂色，不是默认灰）、`enamel`（暖白烤漆，比纸色深一档，低粗糙度 + 细颗粒粗糙度贴图 = 缎面光泽，家电外壳）、`glass`（半透明）；旧名 `metal` = steel、`matte` = plastic。或者 `token:<name>` / `#hex`：缎面漆。`primitive.tint`（token 或 #hex）给材质族换颜色、保留它的金属度 / 粗糙度 / 贴图，例如浅灰 `powder` 外壳：`"color": "powder", "tint": "#c4c6c2"`。程序化 canvas 贴图给拉丝方向、粗糙度变化、橘皮法线（`stages/model3d/textures.ts`，种子固定，截图可复现）。
 - **流场**：`path` 首尾点相同 = 闭环。centripetal Catmull-Rom，按弧长烘焙进 shader：每 8 mm（0.008 场景单位）一个点，64–512 个，存成一行浮点纹理（`texelFetch` 取样，不占 uniform 数组），粒子在弯头处贴着曲线走、不抄近路（4 m 的冷媒段约 500 个点，弯头偏差从 64 点时的 15–20 mm 降到 3 mm 以内；盘管仍只能画 2–3 程，不能逐根追 U 形弯头），默认每条 360 个细粒子（贴着中心线，像 CFD 流线而不是魔法粒子），`speed` 是场景单位/秒。`stops` 在顶点着色器里按粒子位置插值（线性 RGB）；分段流（冷媒四段）用 `ends: "open"`，并让各段 `count / 长度 × speed` 大致相等（粒子通量连续）。`whenRun: false` 的流/动画一直播放（只受图层开关）。每条流一次绘制。

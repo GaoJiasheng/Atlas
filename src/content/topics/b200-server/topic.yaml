@@ -1,0 +1,16 @@
+# AI server (SpaceScene), NVIDIA DGX B200. Spec: docs/18-b200-content-spec.md.
+id: b200-server
+title: { en: "Inside an AI Server", zh: "拆开一台 AI 服务器" }
+subtitle: { en: "An 8-GPU NVIDIA DGX B200, taken apart", zh: "一台 8 GPU 的 NVIDIA DGX B200" }
+subject: computer
+tags: [computing, energy]
+moe: []
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: draft
+illustration: b200-server
+shortTitle: { en: "AI server", zh: "AI 服务器" }
+note: { en: "Independent visualization study · not an NVIDIA publication · geometry reconstructed from public documents", zh: "独立可视化研究 · 非 NVIDIA 官方资料 · 几何按公开文档重建" }
