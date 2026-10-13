@@ -487,6 +487,8 @@ export function PartNode(props: PartNodeProps) {
 
     // Pose: ease from where the part was to the target (instant transitions jump).
     if (snap || m.poseMs <= 0) {
+      // A jump still moves the part: the label probes must re-check what it hides (an instant beat change).
+      if (m.poseNow !== m.poseTo) moving = true;
       m.poseNow = m.poseTo;
       m.poseDone = true;
     } else if (!m.poseDone) {

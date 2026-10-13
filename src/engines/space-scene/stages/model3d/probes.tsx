@@ -151,7 +151,9 @@ export function LabelProbe({
     // Which parts can hide others (shown and mostly opaque): a part put aside or faded in changes what hides what.
     let occluderKey = 0;
     for (const h of handles.values()) occluderKey = (occluderKey * 31 + (h.visible && h.fade > 0.6 ? 1 : 0)) % 2147483647;
-    if (!st.lastCam.equals(camera.matrixWorld) || st.lastExplode !== runtime.explode || st.lastMoved !== runtime.moved || st.lastOccluders !== occluderKey) {
+    const refill =
+      !st.lastCam.equals(camera.matrixWorld) || st.lastExplode !== runtime.explode || st.lastMoved !== runtime.moved || st.lastOccluders !== occluderKey;
+    if (refill) {
       st.lastCam.copy(camera.matrixWorld);
       st.lastExplode = runtime.explode;
       st.lastMoved = runtime.moved;
@@ -212,7 +214,9 @@ export function LabelProbe({
     for (const id of bridge.anchors.keys()) if (!handles.has(id) && !groupKeys.has(id)) bridge.anchors.delete(id);
 
     // Throttled occlusion: a couple of stale labels per frame, only for the parts the HUD may label.
-    let budget = CHECKS_PER_FRAME;
+    // Not in the frame that made them stale: parts moved this frame (a pose, a jump) only get their
+    // world matrices at render, so the rays would still see where they were.
+    let budget = refill ? 0 : CHECKS_PER_FRAME;
     let pending = false;
     for (const id of st.stale) {
       if (bridge.labelled && !bridge.labelled.has(id)) continue;

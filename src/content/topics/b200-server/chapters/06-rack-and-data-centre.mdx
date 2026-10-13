@@ -13,7 +13,8 @@ state:
   camera: { position: [2.2, 1.7, 4.2], target: [0, 0.85, 0], fov: 30 }
   summary: { en: "One server is one building block: two fit in a rack, and thousands are wired together to train a single large model.", zh: "一台服务器只是一块积木：一个机柜放两台，上千台连在一起，才训练一个大模型。" }
   beats:
-    - labels: [rack-ears, top-cover, bezel]
+    - camera: { position: [2.5, 1.8, 4.7], target: [0, 0.78, 0], fov: 30 }
+      labels: [rack-ears, top-cover, bezel]
       caption: { en: "In a rack: this server sits at the bottom, and a second one sits directly above it.", zh: "装进机柜：这一台在最下面，同一个机柜里，正上方还有一台。" }
     - camera: { position: [-2.0, 1.7, -3.8], target: [0, 0.75, -0.3], fov: 30 }
       layers: [chassis, cooling, gpu-tray, host, power, data, scene]
@@ -22,7 +23,8 @@ state:
     - camera: { position: [3.1, 2.4, 5.6], target: [0, 0.95, 0], fov: 30 }
       labels: [rack-ears]
       caption: { en: "In NVIDIA's reference design, 32 such servers with 256 GPUs form one building block, and many blocks are joined into one cluster.", zh: "在 NVIDIA 的参考设计里，32 台这样的服务器、共 256 块 GPU 组成一个单元，许多单元再连成一个集群。" }
-    - labels: [rack-ears, top-cover]
+    - camera: { position: [2.5, 1.8, 4.7], target: [0, 0.78, 0], fov: 30 }
+      labels: [rack-ears, top-cover]
       caption: { en: "Another design puts 72 GPUs in a single liquid-cooled rack that needs about 120 kilowatts of cooling.", zh: "另一种做法把 72 块 GPU 装进一个液冷机柜，整柜要带走约 120 千瓦的热。" }
     - camera: hero
       labels: [rack-ears, top-cover, bezel]

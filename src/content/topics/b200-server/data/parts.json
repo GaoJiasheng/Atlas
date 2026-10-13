@@ -160,8 +160,8 @@
         "zh": "封住顶部，让风只能从前往后走"
       },
       "detail": {
-        "en": "A flat steel lid over both trays. With it in place the only way through the box is from the fan wall at the front to the grilles at the back.\n\nWithout it the fans would pull much of their air in through the open top instead of through the heat sinks, so the chips would run hotter. This is the physics of the air path; the model lifts the lid off in later chapters to show the inside.",
-        "zh": "盖在两个托盘上面的一块平钢板。盖上以后，空气只有一条路：从前面的风扇墙进来，从后面的排风口出去。\n\n如果没有顶盖，风扇会从敞开的顶部吸进大量空气，而不是让空气穿过散热器，芯片就会更热。这里讲的是气流的原理；后面几章模型把顶盖拿开，是为了看里面。"
+        "en": "A flat steel lid over both trays. With it in place the only way through the box is from the fan wall at the front to the grilles at the back.\n\nWithout it the fans would pull much of their air in through the open top instead of through the heat sinks, so the chips would run hotter. This is the physics of the air path; the model lifts the lid in the opening view and takes it off in later chapters to show the inside; the real lid comes off, it does not hover.",
+        "zh": "盖在两个托盘上面的一块平钢板。盖上以后，空气只有一条路：从前面的风扇墙进来，从后面的排风口出去。\n\n如果没有顶盖，风扇会从敞开的顶部吸进大量空气，而不是让空气穿过散热器，芯片就会更热。这里讲的是气流的原理；模型在开篇画面里把顶盖抬起、后面几章把它拿开，是为了看里面；真机的顶盖是取下来，不会悬在上面。"
       },
       "primitive": {
         "kind": "box",
@@ -549,7 +549,6 @@
           ]
         ],
         "depth": 0.006,
-        "bevel": 0.001,
         "at": [
           0,
           0.2445,
@@ -715,8 +714,8 @@
         "zh": "20 个风扇模块从前面把机房的冷空气抽进来"
       },
       "detail": {
-        "en": "Four rows of five modules fill the front above the drives [S3]. Each module holds two fans one behind the other; if either fails the whole module is swapped, from the front, and the service manual asks for the swap to be done within 30 seconds so the machine does not overheat [S4].\n\nTogether they move up to 1,550 cubic feet of air a minute, about 2,630 cubic metres an hour [S3]. The real modules have a fine mesh guard and a pull handle; the model leaves the mesh out so the rotors show. The machine is loud: the service manual makes hearing protection mandatory near it [S35].",
-        "zh": "前面硬盘上方是 4 排、每排 5 个风扇模块 [S3]。每个模块里前后串着两只风扇，任何一只坏了，就从前面整块换掉；服务手册要求在 30 秒内换好，免得机器过热 [S4]。\n\n全部风扇合起来最多每分钟推动 1,550 立方英尺空气，约每小时 2,630 立方米 [S3]。真机模块前面有细密的护网和拉手；模型省掉护网，好让人看见叶轮。机器很吵：服务手册规定在它附近工作必须戴听力防护 [S35]。"
+        "en": "Four rows of five modules fill the front above the drives [S3]. Each module holds two fans one behind the other; if either fails the whole module is swapped, from the front, and the service manual asks for the swap to be done within 30 seconds so the machine does not overheat [S4].\n\nTogether they move up to 1,550 cubic feet of air a minute, about 2,630 cubic metres an hour [S3]. The real modules have a fine mesh guard and a pull handle; the model leaves the mesh out and draws the black housings grey, so the dark rotors show. The machine is loud: the service manual makes hearing protection mandatory near it [S35].",
+        "zh": "前面硬盘上方是 4 排、每排 5 个风扇模块 [S3]。每个模块里前后串着两只风扇，任何一只坏了，就从前面整块换掉；服务手册要求在 30 秒内换好，免得机器过热 [S4]。\n\n全部风扇合起来最多每分钟推动 1,550 立方英尺空气，约每小时 2,630 立方米 [S3]。真机模块前面有细密的护网和拉手；模型省掉护网，并把黑色的外壳画成灰色，好让人看清深色的叶轮。机器很吵：服务手册规定在它附近工作必须戴听力防护 [S35]。"
       },
       "primitive": {
         "kind": "extrude",
@@ -742,127 +741,174 @@
           [
             [
               0.038,
-              0.0
+              0
             ],
             [
-              0.0375,
-              0.0059
+              0.03753,
+              0.00594
             ],
             [
-              0.0361,
-              0.0117
+              0.03614,
+              0.01174
             ],
             [
-              0.0339,
-              0.0173
+              0.03386,
+              0.01725
             ],
             [
-              0.0307,
-              0.0223
+              0.03074,
+              0.02234
             ],
             [
-              0.0269,
-              0.0269
+              0.02687,
+              0.02687
             ],
             [
-              0.0223,
-              0.0307
+              0.02234,
+              0.03074
             ],
             [
-              0.0173,
-              0.0339
+              0.01725,
+              0.03386
             ],
             [
-              0.0117,
-              0.0361
+              0.01174,
+              0.03614
             ],
             [
-              0.0059,
-              0.0375
+              0.00594,
+              0.03753
             ],
             [
-              0.0,
+              0,
               0.038
             ],
             [
-              -0.0059,
-              0.0375
+              -0.00594,
+              0.03753
             ],
             [
-              -0.0117,
-              0.0361
+              -0.01174,
+              0.03614
             ],
             [
-              -0.0173,
-              0.0339
+              -0.01725,
+              0.03386
             ],
             [
-              -0.0223,
-              0.0307
+              -0.02234,
+              0.03074
             ],
             [
-              -0.0269,
-              0.0269
+              -0.02687,
+              0.02687
             ],
             [
-              -0.0307,
-              0.0223
+              -0.03074,
+              0.02234
             ],
             [
-              -0.0339,
-              0.0173
+              -0.03386,
+              0.01725
             ],
             [
-              -0.0361,
-              0.0117
+              -0.03614,
+              0.01174
             ],
             [
-              -0.0375,
-              0.0059
+              -0.03753,
+              0.00594
             ],
             [
               -0.038,
-              0.0
+              0
             ],
             [
-              -0.0375,
-              -0.0059
+              -0.03753,
+              -0.00594
             ],
             [
-              -0.0361,
-              -0.0117
+              -0.03614,
+              -0.01174
             ],
             [
-              -0.0339,
-              -0.0173
+              -0.03386,
+              -0.01725
             ],
             [
-              -0.0307,
-              -0.0223
+              -0.03074,
+              -0.02234
             ],
             [
-              -0.0269,
-              -0.0269
+              -0.02687,
+              -0.02687
             ],
             [
-              -0.0223,
-              -0.0307
+              -0.02234,
+              -0.03074
             ],
             [
-              -0.0173,
-              -0.0339
+              -0.01725,
+              -0.03386
+            ],
+            [
+              -0.01174,
+              -0.03614
+            ],
+            [
+              -0.00594,
+              -0.03753
+            ],
+            [
+              0,
+              -0.038
+            ],
+            [
+              0.00594,
+              -0.03753
+            ],
+            [
+              0.01174,
+              -0.03614
+            ],
+            [
+              0.01725,
+              -0.03386
+            ],
+            [
+              0.02234,
+              -0.03074
+            ],
+            [
+              0.02687,
+              -0.02687
+            ],
+            [
+              0.03074,
+              -0.02234
+            ],
+            [
+              0.03386,
+              -0.01725
+            ],
+            [
+              0.03614,
+              -0.01174
+            ],
+            [
+              0.03753,
+              -0.00594
             ]
           ]
         ],
         "depth": 0.085,
-        "bevel": 0.002,
         "at": [
           0,
           0.3965,
           0.3885
         ],
         "color": "powder",
-        "tint": "#3d3d3b"
+        "tint": "#7c7e7d"
       },
       "extra": [
         {
@@ -879,7 +925,7 @@
             0.4333
           ],
           "color": "powder",
-          "tint": "#3d3d3b"
+          "tint": "#7c7e7d"
         },
         {
           "kind": "extrude",
@@ -905,127 +951,174 @@
             [
               [
                 0.038,
-                0.0
+                0
               ],
               [
-                0.0375,
-                0.0059
+                0.03753,
+                0.00594
               ],
               [
-                0.0361,
-                0.0117
+                0.03614,
+                0.01174
               ],
               [
-                0.0339,
-                0.0173
+                0.03386,
+                0.01725
               ],
               [
-                0.0307,
-                0.0223
+                0.03074,
+                0.02234
               ],
               [
-                0.0269,
-                0.0269
+                0.02687,
+                0.02687
               ],
               [
-                0.0223,
-                0.0307
+                0.02234,
+                0.03074
               ],
               [
-                0.0173,
-                0.0339
+                0.01725,
+                0.03386
               ],
               [
-                0.0117,
-                0.0361
+                0.01174,
+                0.03614
               ],
               [
-                0.0059,
-                0.0375
+                0.00594,
+                0.03753
               ],
               [
-                0.0,
+                0,
                 0.038
               ],
               [
-                -0.0059,
-                0.0375
+                -0.00594,
+                0.03753
               ],
               [
-                -0.0117,
-                0.0361
+                -0.01174,
+                0.03614
               ],
               [
-                -0.0173,
-                0.0339
+                -0.01725,
+                0.03386
               ],
               [
-                -0.0223,
-                0.0307
+                -0.02234,
+                0.03074
               ],
               [
-                -0.0269,
-                0.0269
+                -0.02687,
+                0.02687
               ],
               [
-                -0.0307,
-                0.0223
+                -0.03074,
+                0.02234
               ],
               [
-                -0.0339,
-                0.0173
+                -0.03386,
+                0.01725
               ],
               [
-                -0.0361,
-                0.0117
+                -0.03614,
+                0.01174
               ],
               [
-                -0.0375,
-                0.0059
+                -0.03753,
+                0.00594
               ],
               [
                 -0.038,
-                0.0
+                0
               ],
               [
-                -0.0375,
-                -0.0059
+                -0.03753,
+                -0.00594
               ],
               [
-                -0.0361,
-                -0.0117
+                -0.03614,
+                -0.01174
               ],
               [
-                -0.0339,
-                -0.0173
+                -0.03386,
+                -0.01725
               ],
               [
-                -0.0307,
-                -0.0223
+                -0.03074,
+                -0.02234
               ],
               [
-                -0.0269,
-                -0.0269
+                -0.02687,
+                -0.02687
               ],
               [
-                -0.0223,
-                -0.0307
+                -0.02234,
+                -0.03074
               ],
               [
-                -0.0173,
-                -0.0339
+                -0.01725,
+                -0.03386
+              ],
+              [
+                -0.01174,
+                -0.03614
+              ],
+              [
+                -0.00594,
+                -0.03753
+              ],
+              [
+                0,
+                -0.038
+              ],
+              [
+                0.00594,
+                -0.03753
+              ],
+              [
+                0.01174,
+                -0.03614
+              ],
+              [
+                0.01725,
+                -0.03386
+              ],
+              [
+                0.02234,
+                -0.03074
+              ],
+              [
+                0.02687,
+                -0.02687
+              ],
+              [
+                0.03074,
+                -0.02234
+              ],
+              [
+                0.03386,
+                -0.01725
+              ],
+              [
+                0.03614,
+                -0.01174
+              ],
+              [
+                0.03753,
+                -0.00594
               ]
             ]
           ],
           "depth": 0.085,
-          "bevel": 0.002,
           "at": [
             0,
             0.3095,
             0.3885
           ],
           "color": "powder",
-          "tint": "#3d3d3b"
+          "tint": "#7c7e7d"
         },
         {
           "kind": "bevelBox",
@@ -1041,7 +1134,7 @@
             0.4333
           ],
           "color": "powder",
-          "tint": "#3d3d3b"
+          "tint": "#7c7e7d"
         },
         {
           "kind": "extrude",
@@ -1067,127 +1160,174 @@
             [
               [
                 0.038,
-                0.0
+                0
               ],
               [
-                0.0375,
-                0.0059
+                0.03753,
+                0.00594
               ],
               [
-                0.0361,
-                0.0117
+                0.03614,
+                0.01174
               ],
               [
-                0.0339,
-                0.0173
+                0.03386,
+                0.01725
               ],
               [
-                0.0307,
-                0.0223
+                0.03074,
+                0.02234
               ],
               [
-                0.0269,
-                0.0269
+                0.02687,
+                0.02687
               ],
               [
-                0.0223,
-                0.0307
+                0.02234,
+                0.03074
               ],
               [
-                0.0173,
-                0.0339
+                0.01725,
+                0.03386
               ],
               [
-                0.0117,
-                0.0361
+                0.01174,
+                0.03614
               ],
               [
-                0.0059,
-                0.0375
+                0.00594,
+                0.03753
               ],
               [
-                0.0,
+                0,
                 0.038
               ],
               [
-                -0.0059,
-                0.0375
+                -0.00594,
+                0.03753
               ],
               [
-                -0.0117,
-                0.0361
+                -0.01174,
+                0.03614
               ],
               [
-                -0.0173,
-                0.0339
+                -0.01725,
+                0.03386
               ],
               [
-                -0.0223,
-                0.0307
+                -0.02234,
+                0.03074
               ],
               [
-                -0.0269,
-                0.0269
+                -0.02687,
+                0.02687
               ],
               [
-                -0.0307,
-                0.0223
+                -0.03074,
+                0.02234
               ],
               [
-                -0.0339,
-                0.0173
+                -0.03386,
+                0.01725
               ],
               [
-                -0.0361,
-                0.0117
+                -0.03614,
+                0.01174
               ],
               [
-                -0.0375,
-                0.0059
+                -0.03753,
+                0.00594
               ],
               [
                 -0.038,
-                0.0
+                0
               ],
               [
-                -0.0375,
-                -0.0059
+                -0.03753,
+                -0.00594
               ],
               [
-                -0.0361,
-                -0.0117
+                -0.03614,
+                -0.01174
               ],
               [
-                -0.0339,
-                -0.0173
+                -0.03386,
+                -0.01725
               ],
               [
-                -0.0307,
-                -0.0223
+                -0.03074,
+                -0.02234
               ],
               [
-                -0.0269,
-                -0.0269
+                -0.02687,
+                -0.02687
               ],
               [
-                -0.0223,
-                -0.0307
+                -0.02234,
+                -0.03074
               ],
               [
-                -0.0173,
-                -0.0339
+                -0.01725,
+                -0.03386
+              ],
+              [
+                -0.01174,
+                -0.03614
+              ],
+              [
+                -0.00594,
+                -0.03753
+              ],
+              [
+                0,
+                -0.038
+              ],
+              [
+                0.00594,
+                -0.03753
+              ],
+              [
+                0.01174,
+                -0.03614
+              ],
+              [
+                0.01725,
+                -0.03386
+              ],
+              [
+                0.02234,
+                -0.03074
+              ],
+              [
+                0.02687,
+                -0.02687
+              ],
+              [
+                0.03074,
+                -0.02234
+              ],
+              [
+                0.03386,
+                -0.01725
+              ],
+              [
+                0.03614,
+                -0.01174
+              ],
+              [
+                0.03753,
+                -0.00594
               ]
             ]
           ],
           "depth": 0.085,
-          "bevel": 0.002,
           "at": [
             0,
             0.2225,
             0.3885
           ],
           "color": "powder",
-          "tint": "#3d3d3b"
+          "tint": "#7c7e7d"
         },
         {
           "kind": "bevelBox",
@@ -1203,7 +1343,7 @@
             0.4333
           ],
           "color": "powder",
-          "tint": "#3d3d3b"
+          "tint": "#7c7e7d"
         },
         {
           "kind": "extrude",
@@ -1229,127 +1369,174 @@
             [
               [
                 0.038,
-                0.0
+                0
               ],
               [
-                0.0375,
-                0.0059
+                0.03753,
+                0.00594
               ],
               [
-                0.0361,
-                0.0117
+                0.03614,
+                0.01174
               ],
               [
-                0.0339,
-                0.0173
+                0.03386,
+                0.01725
               ],
               [
-                0.0307,
-                0.0223
+                0.03074,
+                0.02234
               ],
               [
-                0.0269,
-                0.0269
+                0.02687,
+                0.02687
               ],
               [
-                0.0223,
-                0.0307
+                0.02234,
+                0.03074
               ],
               [
-                0.0173,
-                0.0339
+                0.01725,
+                0.03386
               ],
               [
-                0.0117,
-                0.0361
+                0.01174,
+                0.03614
               ],
               [
-                0.0059,
-                0.0375
+                0.00594,
+                0.03753
               ],
               [
-                0.0,
+                0,
                 0.038
               ],
               [
-                -0.0059,
-                0.0375
+                -0.00594,
+                0.03753
               ],
               [
-                -0.0117,
-                0.0361
+                -0.01174,
+                0.03614
               ],
               [
-                -0.0173,
-                0.0339
+                -0.01725,
+                0.03386
               ],
               [
-                -0.0223,
-                0.0307
+                -0.02234,
+                0.03074
               ],
               [
-                -0.0269,
-                0.0269
+                -0.02687,
+                0.02687
               ],
               [
-                -0.0307,
-                0.0223
+                -0.03074,
+                0.02234
               ],
               [
-                -0.0339,
-                0.0173
+                -0.03386,
+                0.01725
               ],
               [
-                -0.0361,
-                0.0117
+                -0.03614,
+                0.01174
               ],
               [
-                -0.0375,
-                0.0059
+                -0.03753,
+                0.00594
               ],
               [
                 -0.038,
-                0.0
+                0
               ],
               [
-                -0.0375,
-                -0.0059
+                -0.03753,
+                -0.00594
               ],
               [
-                -0.0361,
-                -0.0117
+                -0.03614,
+                -0.01174
               ],
               [
-                -0.0339,
-                -0.0173
+                -0.03386,
+                -0.01725
               ],
               [
-                -0.0307,
-                -0.0223
+                -0.03074,
+                -0.02234
               ],
               [
-                -0.0269,
-                -0.0269
+                -0.02687,
+                -0.02687
               ],
               [
-                -0.0223,
-                -0.0307
+                -0.02234,
+                -0.03074
               ],
               [
-                -0.0173,
-                -0.0339
+                -0.01725,
+                -0.03386
+              ],
+              [
+                -0.01174,
+                -0.03614
+              ],
+              [
+                -0.00594,
+                -0.03753
+              ],
+              [
+                0,
+                -0.038
+              ],
+              [
+                0.00594,
+                -0.03753
+              ],
+              [
+                0.01174,
+                -0.03614
+              ],
+              [
+                0.01725,
+                -0.03386
+              ],
+              [
+                0.02234,
+                -0.03074
+              ],
+              [
+                0.02687,
+                -0.02687
+              ],
+              [
+                0.03074,
+                -0.02234
+              ],
+              [
+                0.03386,
+                -0.01725
+              ],
+              [
+                0.03614,
+                -0.01174
+              ],
+              [
+                0.03753,
+                -0.00594
               ]
             ]
           ],
           "depth": 0.085,
-          "bevel": 0.002,
           "at": [
             0,
             0.1355,
             0.3885
           ],
           "color": "powder",
-          "tint": "#3d3d3b"
+          "tint": "#7c7e7d"
         },
         {
           "kind": "bevelBox",
@@ -1365,7 +1552,7 @@
             0.4333
           ],
           "color": "powder",
-          "tint": "#3d3d3b"
+          "tint": "#7c7e7d"
         }
       ],
       "repeat": {
@@ -1725,8 +1912,8 @@
         "zh": "让 GPU 托盘里的热空气从后面排出"
       },
       "detail": {
-        "en": "The back face of the GPU tray is almost all openings, so the hot air leaving the heat sinks meets little resistance [S3].\n\nOn the real tray the openings are dense hexagonal holes; the model uses fine vertical bars, which let the same light and air through on screen.",
-        "zh": "GPU 托盘的后端几乎全是开孔，散热器出来的热空气走得很顺 [S3]。\n\n真机上是密密的六角形孔；模型用细细的竖条近似，画面上一样透光、透风。"
+        "en": "The back face of the GPU tray is almost all openings, so the hot air leaving the heat sinks meets little resistance [S3].\n\nOn the real tray the openings are dense hexagonal holes; the model uses a grid of crossed bars with square holes, which reads the same on screen.",
+        "zh": "GPU 托盘的后端几乎全是开孔，散热器出来的热空气走得很顺 [S3]。\n\n真机上是密密的六角形孔；模型用横竖交叉的细条（方孔）近似，画面上看起来一样。"
       },
       "primitive": {
         "kind": "grille",
@@ -1737,7 +1924,7 @@
           0.005
         ],
         "count": 64,
-        "bar": 0.0035,
+        "bar": 0.0036,
         "rotation": [
           90,
           0,
@@ -1762,7 +1949,32 @@
       "connects": [
         "gpu-tray-frame"
       ],
-      "shell": true
+      "shell": true,
+      "extra": [
+        {
+          "kind": "grille",
+          "style": "slats",
+          "size": [
+            0.29,
+            0.434,
+            0.004
+          ],
+          "count": 42,
+          "bar": 0.0036,
+          "rotation": [
+            90,
+            90,
+            0
+          ],
+          "at": [
+            0,
+            0.2925,
+            -0.4465
+          ],
+          "color": "steel",
+          "tint": "#c9cac6"
+        }
+      ]
     },
     {
       "id": "gpu-baseboard",
@@ -1786,18 +1998,18 @@
       "primitive": {
         "kind": "bevelBox",
         "size": [
-          0.432,
-          0.004,
-          0.58
+          0.426,
+          0.003,
+          0.574
         ],
-        "bevel": 0.001,
+        "bevel": 0.0008,
         "at": [
           0,
-          0.149,
+          0.1495,
           0.02
         ],
         "color": "plastic",
-        "tint": "#3f5f3a"
+        "tint": "#1c211d"
       },
       "explode": {
         "dir": [
@@ -1811,6 +2023,23 @@
         "baseboard-connectors",
         "gpu-modules",
         "nvswitch-chips"
+      ],
+      "extra": [
+        {
+          "kind": "box",
+          "size": [
+            0.432,
+            0.002,
+            0.58
+          ],
+          "at": [
+            0,
+            0.148,
+            0.02
+          ],
+          "color": "plastic",
+          "tint": "#2f4a36"
+        }
       ]
     },
     {
@@ -1836,16 +2065,17 @@
         "kind": "bevelBox",
         "size": [
           0.04,
-          0.026,
+          0.024,
           0.022
         ],
-        "bevel": 0.002,
+        "bevel": 0.0015,
         "at": [
           0,
-          0.164,
+          0.163,
           0.318
         ],
-        "color": "powder"
+        "color": "powder",
+        "tint": "#1e1e1e"
       },
       "repeat": {
         "count": 8,
@@ -1867,6 +2097,41 @@
       "connects": [
         "midplane",
         "gpu-baseboard"
+      ],
+      "extra": [
+        {
+          "kind": "fins",
+          "size": [
+            0.002,
+            0.016,
+            0.0012
+          ],
+          "count": 9,
+          "gap": 0.0028,
+          "axis": "x",
+          "at": [
+            0,
+            0.163,
+            0.3295
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.006,
+            0.02,
+            0.026
+          ],
+          "bevel": 0.001,
+          "at": [
+            0.026,
+            0.161,
+            0.318
+          ],
+          "color": "steel",
+          "tint": "#c9cbc8"
+        }
       ]
     },
     {
@@ -2388,86 +2653,10 @@
           0.29,
           0.152
         ],
-        "color": "casing",
-        "tint": "#6e5c40"
+        "color": "powder",
+        "tint": "#2a2927"
       },
       "extra": [
-        {
-          "kind": "box",
-          "size": [
-            0.003,
-            0.253,
-            0.168
-          ],
-          "at": [
-            -0.0485,
-            0.294,
-            0.152
-          ],
-          "color": "powder",
-          "tint": "#262626"
-        },
-        {
-          "kind": "box",
-          "size": [
-            0.003,
-            0.253,
-            0.168
-          ],
-          "at": [
-            0.0485,
-            0.294,
-            0.152
-          ],
-          "color": "powder",
-          "tint": "#262626"
-        },
-        {
-          "kind": "bevelBox",
-          "size": [
-            0.1,
-            0.006,
-            0.17
-          ],
-          "bevel": 0.0015,
-          "at": [
-            0,
-            0.4235,
-            0.152
-          ],
-          "color": "powder",
-          "tint": "#262626"
-        },
-        {
-          "kind": "bevelBox",
-          "size": [
-            0.03,
-            0.002,
-            0.12
-          ],
-          "bevel": 0.0006,
-          "at": [
-            0,
-            0.4275,
-            0.152
-          ],
-          "color": "brass"
-        },
-        {
-          "kind": "bevelBox",
-          "size": [
-            0.09,
-            0.006,
-            0.15
-          ],
-          "bevel": 0.001,
-          "at": [
-            0,
-            0.1645,
-            0.152
-          ],
-          "color": "copper"
-        },
         {
           "kind": "fins",
           "size": [
@@ -2483,18 +2672,39 @@
             0.29,
             -0.152
           ],
-          "color": "casing",
-          "tint": "#6e5c40"
+          "color": "powder",
+          "tint": "#2a2927"
         },
         {
-          "kind": "box",
+          "kind": "fins",
           "size": [
-            0.003,
+            0.168,
             0.253,
-            0.168
+            0.003
           ],
+          "count": 2,
+          "gap": 0.094,
+          "axis": "x",
           "at": [
-            -0.0485,
+            0,
+            0.294,
+            0.152
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        },
+        {
+          "kind": "fins",
+          "size": [
+            0.168,
+            0.253,
+            0.003
+          ],
+          "count": 2,
+          "gap": 0.094,
+          "axis": "x",
+          "at": [
+            0,
             0.294,
             -0.152
           ],
@@ -2502,16 +2712,17 @@
           "tint": "#262626"
         },
         {
-          "kind": "box",
+          "kind": "bevelBox",
           "size": [
-            0.003,
-            0.253,
-            0.168
+            0.1,
+            0.006,
+            0.17
           ],
+          "bevel": 0.0015,
           "at": [
-            0.0485,
-            0.294,
-            -0.152
+            0,
+            0.4235,
+            0.152
           ],
           "color": "powder",
           "tint": "#262626"
@@ -2535,14 +2746,61 @@
         {
           "kind": "bevelBox",
           "size": [
-            0.03,
-            0.002,
-            0.12
+            0.08,
+            0.0015,
+            0.146
           ],
-          "bevel": 0.0006,
+          "bevel": 0.0004,
           "at": [
             0,
-            0.4275,
+            0.4272,
+            0.152
+          ],
+          "color": "steel",
+          "tint": "#b5b7b4"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.08,
+            0.0015,
+            0.146
+          ],
+          "bevel": 0.0004,
+          "at": [
+            0,
+            0.4272,
+            -0.152
+          ],
+          "color": "steel",
+          "tint": "#b5b7b4"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.032,
+            0.0015,
+            0.12
+          ],
+          "bevel": 0.0004,
+          "at": [
+            0,
+            0.4285,
+            0.152
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.032,
+            0.0015,
+            0.12
+          ],
+          "bevel": 0.0004,
+          "at": [
+            0,
+            0.4285,
             -0.152
           ],
           "color": "brass"
@@ -2558,9 +2816,92 @@
           "at": [
             0,
             0.1645,
+            0.152
+          ],
+          "color": "copper"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.09,
+            0.006,
+            0.15
+          ],
+          "bevel": 0.001,
+          "at": [
+            0,
+            0.1645,
             -0.152
           ],
           "color": "copper"
+        },
+        {
+          "kind": "fins",
+          "size": [
+            0.003,
+            0.24,
+            0.003
+          ],
+          "count": 4,
+          "gap": 0.017,
+          "axis": "x",
+          "at": [
+            0,
+            0.29,
+            0.2315
+          ],
+          "color": "copper"
+        },
+        {
+          "kind": "fins",
+          "size": [
+            0.003,
+            0.24,
+            0.003
+          ],
+          "count": 4,
+          "gap": 0.017,
+          "axis": "x",
+          "at": [
+            0,
+            0.29,
+            -0.2315
+          ],
+          "color": "copper"
+        },
+        {
+          "kind": "fins",
+          "size": [
+            0.094,
+            0.05,
+            0.0005
+          ],
+          "count": 17,
+          "gap": 0.0035,
+          "axis": "y",
+          "at": [
+            0,
+            0.1985,
+            0.263
+          ],
+          "color": "powder",
+          "tint": "#2a2927"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.096,
+            0.004,
+            0.054
+          ],
+          "bevel": 0.001,
+          "at": [
+            0,
+            0.233,
+            0.263
+          ],
+          "color": "powder",
+          "tint": "#262626"
         }
       ],
       "repeat": {
@@ -2677,20 +3018,20 @@
         "zh": "把风导过两排 GPU 之间的交换芯片"
       },
       "detail": {
-        "en": "A black cover as tall as the heat-sink towers, running across the tray between the two rows of GPUs [S16]. It keeps the air from slipping past in the gap, so it goes through the fins and over the switch chips underneath.\n\nThe model shows it as a channel open at the front and back; the inside shape of the real duct is not published.",
-        "zh": "一个和散热塔一样高的黑色罩子，横在两排 GPU 之间 [S16]。它不让空气从空隙里溜走，而是穿过鳍片，并从下面的交换芯片上流过。\n\n模型把它画成前后开口的通道；真实导风罩的内部形状没有公开。"
+        "en": "A black cover as tall as the heat-sink towers, running across the tray between the two rows of GPUs [S16]. It keeps the air from slipping past in the gap, so it goes through the fins and over the switch chips underneath.\n\nThe model shows it as a channel open at the front and back, with the upright strip and lifting handle that the photo shows at the front edge of the board [S16]; the inside shape of the real duct is not published.",
+        "zh": "一个和散热塔一样高的黑色罩子，横在两排 GPU 之间 [S16]。它不让空气从空隙里溜走，而是穿过鳍片，并从下面的交换芯片上流过。\n\n模型把它画成前后开口的通道，并按照片在板子前沿画了一根竖条和一块提手 [S16]；真实导风罩的内部形状没有公开。"
       },
       "primitive": {
         "kind": "bevelBox",
         "size": [
           0.42,
-          0.2135,
-          0.12
+          0.004,
+          0.11
         ],
-        "bevel": 0.003,
+        "bevel": 0.0015,
         "at": [
           0,
-          0.3167,
+          0.4245,
           0
         ],
         "color": "powder",
@@ -2700,13 +3041,13 @@
         {
           "kind": "box",
           "size": [
-            0.004,
-            0.056,
-            0.12
+            0.003,
+            0.269,
+            0.104
           ],
           "at": [
-            -0.208,
-            0.182,
+            -0.2085,
+            0.288,
             0
           ],
           "color": "powder",
@@ -2715,14 +3056,45 @@
         {
           "kind": "box",
           "size": [
-            0.004,
-            0.056,
-            0.12
+            0.003,
+            0.269,
+            0.104
           ],
           "at": [
-            0.208,
-            0.182,
+            0.2085,
+            0.288,
             0
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.018,
+            0.193,
+            0.004
+          ],
+          "at": [
+            0,
+            0.3315,
+            0.2405
+          ],
+          "color": "powder",
+          "tint": "#262626"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.18,
+            0.004,
+            0.03
+          ],
+          "bevel": 0.001,
+          "at": [
+            0,
+            0.4285,
+            0.245
           ],
           "color": "powder",
           "tint": "#262626"
@@ -2896,7 +3268,7 @@
           -0.066
         ],
         "color": "plastic",
-        "tint": "#3f5f3a"
+        "tint": "#2f4630"
       },
       "explode": {
         "dir": [
@@ -3075,7 +3447,7 @@
           -0.13
         ],
         "color": "powder",
-        "tint": "#2b2b2b"
+        "tint": "#1d1d1d"
       },
       "extra": [
         {
@@ -3091,7 +3463,7 @@
             -0.13
           ],
           "color": "powder",
-          "tint": "#2b2b2b"
+          "tint": "#1d1d1d"
         },
         {
           "kind": "box",
@@ -3106,7 +3478,7 @@
             -0.13
           ],
           "color": "powder",
-          "tint": "#2b2b2b"
+          "tint": "#1d1d1d"
         },
         {
           "kind": "box",
@@ -3121,7 +3493,7 @@
             -0.13
           ],
           "color": "powder",
-          "tint": "#2b2b2b"
+          "tint": "#1d1d1d"
         }
       ],
       "repeat": {
@@ -3171,7 +3543,7 @@
         "at": [
           0,
           0.0565,
-          0.024
+          -0.012
         ],
         "color": "steel",
         "tint": "#4b5160"
@@ -3181,16 +3553,16 @@
           "kind": "fins",
           "size": [
             0.035,
-            0.02,
+            0.024,
             0.0005
           ],
-          "count": 8,
+          "count": 10,
           "gap": 0.0035,
           "axis": "x",
           "at": [
             0,
-            0.068,
-            0.024
+            0.07,
+            -0.012
           ],
           "color": "casing"
         }
@@ -3202,7 +3574,7 @@
           0,
           0
         ],
-        "spacing": 0.07
+        "spacing": 0.05
       },
       "explode": {
         "dir": [
@@ -3234,8 +3606,8 @@
         "zh": "8 颗 400 Gb/s 网络芯片，每块 GPU 一颗"
       },
       "detail": {
-        "en": "Two modules near the midplane, each with four ConnectX-7 network chips under a shared heat sink [S3]. Each chip handles one 400 Gb/s link, InfiniBand or Ethernet, so the server has eight, one per GPU [S2, S12].\n\nThey also carry the PCIe connections between the CPUs and the GPUs through the midplane [S3]. 400 Gb/s is about 50 GB/s each way, much less than the 1,800 GB/s each GPU has on NVLink [S2, S7].",
-        "zh": "靠近中板的两个模块，每个模块在一块共用的散热片下有 4 颗 ConnectX-7 网络芯片 [S3]。每颗芯片负责一条 400 Gb/s 的链路（InfiniBand 或以太网），整机 8 条，每块 GPU 一条 [S2, S12]。\n\nCPU 和 GPU 之间的 PCIe 连接也经过它们和中板 [S3]。400 Gb/s 约等于每个方向 50 GB/s，比每块 GPU 的 NVLink 1,800 GB/s 小得多 [S2, S7]。"
+        "en": "Two modules near the midplane, each with four ConnectX-7 network chips, each under its own small heat sink [S3]. Each chip handles one 400 Gb/s link, InfiniBand or Ethernet, so the server has eight, one per GPU [S2, S12].\n\nThey also carry the PCIe connections between the CPUs and the GPUs through the midplane [S3]. 400 Gb/s is about 50 GB/s each way, much less than the 1,800 GB/s each GPU has on NVLink [S2, S7].",
+        "zh": "靠近中板的两个模块，每个模块有 4 颗 ConnectX-7 网络芯片，各自顶着一块小散热片 [S3]。每颗芯片负责一条 400 Gb/s 的链路（InfiniBand 或以太网），整机 8 条，每块 GPU 一条 [S2, S12]。\n\nCPU 和 GPU 之间的 PCIe 连接也经过它们和中板 [S3]。400 Gb/s 约等于每个方向 50 GB/s，比每块 GPU 的 NVLink 1,800 GB/s 小得多 [S2, S7]。"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -3251,7 +3623,7 @@
           0.195
         ],
         "color": "plastic",
-        "tint": "#3f5f3a"
+        "tint": "#2f4630"
       },
       "extra": [
         {
@@ -3272,15 +3644,66 @@
         {
           "kind": "fins",
           "size": [
-            0.09,
+            0.075,
             0.04,
             0.0005
           ],
-          "count": 30,
+          "count": 6,
           "gap": 0.004,
           "axis": "x",
           "at": [
-            0,
+            -0.054,
+            0.0855,
+            0.195
+          ],
+          "color": "casing"
+        },
+        {
+          "kind": "fins",
+          "size": [
+            0.075,
+            0.04,
+            0.0005
+          ],
+          "count": 6,
+          "gap": 0.004,
+          "axis": "x",
+          "at": [
+            -0.018,
+            0.0855,
+            0.195
+          ],
+          "color": "casing"
+        },
+        {
+          "kind": "fins",
+          "size": [
+            0.075,
+            0.04,
+            0.0005
+          ],
+          "count": 6,
+          "gap": 0.004,
+          "axis": "x",
+          "at": [
+            0.018,
+            0.0855,
+            0.195
+          ],
+          "color": "casing"
+        },
+        {
+          "kind": "fins",
+          "size": [
+            0.075,
+            0.04,
+            0.0005
+          ],
+          "count": 6,
+          "gap": 0.004,
+          "axis": "x",
+          "at": [
+            0.054,
             0.0855,
             0.195
           ],
@@ -3333,9 +3756,9 @@
         "kind": "tube",
         "path": [
           [
-            0.0,
-            0.0,
-            0.0
+            0,
+            0,
+            0
           ],
           [
             0.02,
@@ -3383,9 +3806,9 @@
           "kind": "tube",
           "path": [
             [
-              0.0,
-              0.0,
-              0.0
+              0,
+              0,
+              0
             ],
             [
               0.02,
@@ -3432,9 +3855,9 @@
           "kind": "tube",
           "path": [
             [
-              0.0,
-              0.0,
-              0.0
+              0,
+              0,
+              0
             ],
             [
               -0.02,
@@ -3481,9 +3904,9 @@
           "kind": "tube",
           "path": [
             [
-              0.0,
-              0.0,
-              0.0
+              0,
+              0,
+              0
             ],
             [
               -0.02,
@@ -3624,7 +4047,7 @@
           -0.361
         ],
         "color": "plastic",
-        "tint": "#3f5f3a"
+        "tint": "#2f4630"
       },
       "repeat": {
         "count": 2,
@@ -3681,7 +4104,7 @@
           -0.361
         ],
         "color": "plastic",
-        "tint": "#3f5f3a"
+        "tint": "#2f4630"
       },
       "extra": [
         {
@@ -3698,7 +4121,7 @@
             -0.361
           ],
           "color": "plastic",
-          "tint": "#3f5f3a"
+          "tint": "#2f4630"
         },
         {
           "kind": "bevelBox",
@@ -3714,7 +4137,7 @@
             -0.361
           ],
           "color": "plastic",
-          "tint": "#3f5f3a"
+          "tint": "#2f4630"
         }
       ],
       "explode": {
@@ -3764,7 +4187,7 @@
           -0.361
         ],
         "color": "plastic",
-        "tint": "#3f5f3a"
+        "tint": "#2f4630"
       },
       "extra": [
         {
@@ -3781,7 +4204,7 @@
             -0.361
           ],
           "color": "plastic",
-          "tint": "#3f5f3a"
+          "tint": "#2f4630"
         },
         {
           "kind": "bevelBox",
@@ -3797,7 +4220,7 @@
             -0.361
           ],
           "color": "plastic",
-          "tint": "#3f5f3a"
+          "tint": "#2f4630"
         }
       ],
       "explode": {
@@ -4523,12 +4946,12 @@
         "path": [
           [
             0,
-            0.0,
-            0.0
+            0,
+            0
           ],
           [
             0,
-            0.0,
+            0,
             -0.078
           ],
           [
@@ -4601,9 +5024,9 @@
           0.6
         ],
         "at": [
-          -1.2,
+          -1.1,
           1.2,
-          -0.25
+          -0.2
         ],
         "color": "token:mannequin"
       },
@@ -4619,9 +5042,9 @@
             0.95
           ],
           "at": [
-            -1.2,
+            -1.1,
             1.6,
-            -0.25
+            -0.2
           ],
           "color": "token:mannequin"
         },
@@ -4632,9 +5055,9 @@
             0.74
           ],
           "at": [
-            -1.28,
+            -1.18,
             0.45,
-            -0.25
+            -0.2
           ],
           "color": "token:mannequin"
         },
@@ -4645,9 +5068,9 @@
             0.74
           ],
           "at": [
-            -1.12,
+            -1.02,
             0.45,
-            -0.25
+            -0.2
           ],
           "color": "token:mannequin"
         },
@@ -4658,9 +5081,9 @@
             0.56
           ],
           "at": [
-            -1.4,
+            -1.3,
             1.08,
-            -0.25
+            -0.2
           ],
           "color": "token:mannequin"
         },
@@ -4671,9 +5094,9 @@
             0.56
           ],
           "at": [
-            -1.0,
+            -0.9,
             1.08,
-            -0.25
+            -0.2
           ],
           "color": "token:mannequin"
         }
@@ -4699,12 +5122,12 @@
         "kind": "box",
         "size": [
           0.04,
-          2.0,
+          2,
           0.04
         ],
         "at": [
           -0.263,
-          1.0,
+          1,
           0.42
         ],
         "color": "powder",
@@ -4715,12 +5138,12 @@
           "kind": "box",
           "size": [
             0.04,
-            2.0,
+            2,
             0.04
           ],
           "at": [
             -0.263,
-            1.0,
+            1,
             -0.58
           ],
           "color": "powder",
@@ -4730,12 +5153,12 @@
           "kind": "box",
           "size": [
             0.04,
-            2.0,
+            2,
             0.04
           ],
           "at": [
             0.263,
-            1.0,
+            1,
             0.42
           ],
           "color": "powder",
@@ -4745,12 +5168,12 @@
           "kind": "box",
           "size": [
             0.04,
-            2.0,
+            2,
             0.04
           ],
           "at": [
             0.263,
-            1.0,
+            1,
             -0.58
           ],
           "color": "powder",
@@ -5255,27 +5678,27 @@
           -0.135
         ],
         [
-          0.0,
+          0,
           0.016,
           -0.11
         ],
         [
-          0.0,
+          0,
           0.016,
           0.31
         ],
         [
-          0.0,
+          0,
           0.03,
           0.3315
         ],
         [
-          0.0,
+          0,
           0.152,
           0.3315
         ],
         [
-          0.0,
+          0,
           0.158,
           0.3
         ],
@@ -5353,7 +5776,7 @@
         [
           -0.08,
           0.1608,
-          0.0
+          0
         ],
         [
           -0.1575,
@@ -5363,7 +5786,7 @@
         [
           0.08,
           0.1608,
-          0.0
+          0
         ],
         [
           -0.0525,
@@ -5373,7 +5796,7 @@
         [
           -0.08,
           0.1608,
-          0.0
+          0
         ],
         [
           -0.0525,
@@ -5383,7 +5806,7 @@
         [
           0.08,
           0.1608,
-          0.0
+          0
         ],
         [
           0.0525,
@@ -5393,7 +5816,7 @@
         [
           -0.08,
           0.1608,
-          0.0
+          0
         ],
         [
           0.0525,
@@ -5403,7 +5826,7 @@
         [
           0.08,
           0.1608,
-          0.0
+          0
         ],
         [
           0.1575,
@@ -5413,7 +5836,7 @@
         [
           -0.08,
           0.1608,
-          0.0
+          0
         ],
         [
           0.1575,
@@ -5423,7 +5846,7 @@
         [
           0.08,
           0.1608,
-          0.0
+          0
         ],
         [
           -0.1575,
@@ -5433,7 +5856,7 @@
         [
           0.08,
           0.1608,
-          0.0
+          0
         ],
         [
           -0.1575,
@@ -5443,7 +5866,7 @@
         [
           -0.08,
           0.1608,
-          0.0
+          0
         ],
         [
           -0.0525,
@@ -5453,7 +5876,7 @@
         [
           0.08,
           0.1608,
-          0.0
+          0
         ],
         [
           -0.0525,
@@ -5463,7 +5886,7 @@
         [
           -0.08,
           0.1608,
-          0.0
+          0
         ],
         [
           0.0525,
@@ -5473,7 +5896,7 @@
         [
           0.08,
           0.1608,
-          0.0
+          0
         ],
         [
           0.0525,
@@ -5483,7 +5906,7 @@
         [
           -0.08,
           0.1608,
-          0.0
+          0
         ],
         [
           0.1575,
@@ -5493,7 +5916,7 @@
         [
           0.08,
           0.1608,
-          0.0
+          0
         ],
         [
           0.1575,
@@ -5503,7 +5926,7 @@
         [
           -0.08,
           0.1608,
-          0.0
+          0
         ],
         [
           -0.1575,
@@ -5750,7 +6173,7 @@
         "position": [
           1.1,
           0.95,
-          2.0
+          2
         ],
         "target": [
           0,
@@ -5826,16 +6249,16 @@
     },
     "cover": {
       "position": [
-        1.3,
-        1.0,
-        1.3
+        3.29,
+        3.1,
+        2.97
       ],
       "target": [
-        0.04,
-        0.17,
-        -0.04
+        -0.31,
+        0.73,
+        -0.27
       ],
-      "fov": 30
+      "fov": 28
     }
   },
   "spec": [
@@ -5852,7 +6275,7 @@
         "en": "Host",
         "zh": "主机"
       },
-      "value": "2 × Xeon 8570 · 2 TB · 8 × 400 Gb/s",
+      "value": "2 × Xeon 8570 · 2 TB · 8 × 400 Gbit/s",
       "tag": "typical"
     },
     {
@@ -5934,7 +6357,7 @@
         "zh": "出风"
       },
       "unit": "°C",
-      "idle": 32.0,
+      "idle": 32,
       "run": 42.9,
       "lag": 20,
       "decimals": 1
@@ -5951,7 +6374,7 @@
         "position": [
           1.1,
           0.95,
-          2.0
+          2
         ],
         "target": [
           0,
@@ -6239,6 +6662,86 @@
         ]
       },
       "duration": 1.2
+    },
+    "lid-lifted": {
+      "top-cover": {
+        "offset": [
+          0,
+          0.4,
+          0
+        ]
+      },
+      "gpu-tray-frame": {
+        "offset": [
+          0,
+          0,
+          -0.32
+        ]
+      },
+      "rear-grille": {
+        "offset": [
+          0,
+          0,
+          -0.32
+        ]
+      },
+      "gpu-baseboard": {
+        "offset": [
+          0,
+          0,
+          -0.32
+        ]
+      },
+      "baseboard-connectors": {
+        "offset": [
+          0,
+          0,
+          -0.32
+        ]
+      },
+      "gpu-modules": {
+        "offset": [
+          0,
+          0,
+          -0.32
+        ]
+      },
+      "gpu-dies": {
+        "offset": [
+          0,
+          0,
+          -0.32
+        ]
+      },
+      "hbm-stacks": {
+        "offset": [
+          0,
+          0,
+          -0.32
+        ]
+      },
+      "gpu-heatsinks": {
+        "offset": [
+          0,
+          0,
+          -0.32
+        ]
+      },
+      "nvswitch-chips": {
+        "offset": [
+          0,
+          0,
+          -0.32
+        ]
+      },
+      "nvswitch-duct": {
+        "offset": [
+          0,
+          0,
+          -0.32
+        ]
+      },
+      "duration": 1
     }
   }
 }

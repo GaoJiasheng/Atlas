@@ -11,26 +11,32 @@ state:
   cutaway: none
   layers: [chassis, cooling, gpu-tray, host, power, scene]
   hide: [rack-frame, rack-neighbour]
+  pose: lid-lifted
   labels: [bezel, rack-ears, top-cover]
   camera: { position: [1.05, 1.5, 4.0], target: [-0.5, 0.78, 0], fov: 30 }
   summary: { en: "An AI server is a computer built around eight GPUs. This one is about the size of a large suitcase and weighs as much as two adults.", zh: "AI 服务器是一台围绕 8 块 GPU 搭起来的计算机。这一台大小像个大行李箱，重量和两个成年人差不多。" }
   beats:
-    - labels: [bezel, top-cover, rails]
-      caption: { en: "This is an AI server built around eight GPUs, the chips that do most of its work. The figure beside it is 1.70 metres tall.", zh: "这是一台围绕 8 块 GPU 搭起来的 AI 服务器，GPU 是承担主要工作的芯片。旁边的人形高 1.70 米。" }
+    - camera: { position: [3.65, 3.05, 3.35], target: [-0.3, 0.47, -0.27], fov: 28 }
+      labels: [bezel, top-cover, rails]
+      caption: { en: "This is an AI server built around eight GPUs, the chips that do most of its work. Here its top cover is lifted off; the figure beside it is 1.70 metres tall.", zh: "这是一台围绕 8 块 GPU 搭起来的 AI 服务器，GPU 是承担主要工作的芯片。这里把顶盖抬了起来；旁边的人形高 1.70 米。" }
     - camera: front-view
       hide: [rack-frame, rack-neighbour, scale-figure]
+      pose: null
       labels: [bezel, front-controls, rack-ears]
       caption: { en: "The front is one champagne-coloured bezel. On the right-hand rack ear are the power button, an identification light and a fault light.", zh: "前面是一整块香槟金色的面板。右侧挂耳上是电源键、识别灯和故障灯。" }
     - camera: front-view
       hide: [rack-frame, rack-neighbour, scale-figure, bezel]
+      pose: null
       labels: [fan-modules, u2-drives, front-controls]
       caption: { en: "With the bezel off: twenty fan modules in four rows of five, and eight data drives along the bottom.", zh: "拿掉面板：20 个风扇模块，4 排、每排 5 个；最下面一排是 8 块数据盘。" }
     - camera: rear-view
       hide: [rack-frame, rack-neighbour, scale-figure]
+      pose: null
       labels: [rear-grille, rear-io, psus]
       caption: { en: "At the back there are three levels: the exhaust grille of the GPU tray, the ports of the motherboard tray, and six power supplies.", zh: "后面分三层：GPU 托盘的排风面、主板托盘的接口，以及 6 个电源。" }
     - camera: { position: [1.25, 1.05, 2.25], target: [0, 0.16, 0], fov: 30 }
       hide: [rack-frame, rack-neighbour, scale-figure]
+      pose: null
       labels: [top-cover, rack-ears, rails]
       caption: { en: "It is 10 rack units, 444 millimetres, high and about 897 millimetres deep, and weighs up to 142 kilograms, a little more than two adults.", zh: "它高 10 个机架单位，也就是 444 毫米，深约 897 毫米，最重 142 公斤，比两个成年人还重一点。" }
   index:

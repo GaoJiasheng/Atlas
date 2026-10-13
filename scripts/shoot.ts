@@ -342,14 +342,16 @@ async function runShots(s: Session, o: Options, out: string, report: RunReport):
  * store's `highlight` against the map placards (`.ts-co`); SpaceScene: the
  * leader labels' list (`data-want` on `.space-leaders`: the beat's `labels`
  * in the presentation, else the chapter's; nothing listed = nothing to check)
- * against the placards (`.space-co[data-id]`, `group:<id>` for a group).
+ * against the placards (`.space-co[data-id]`, `group:<id>` for a group). A
+ * placard counts from opacity 0.85: the stage renders on demand, so a fade
+ * can rest one step short of 1 (0.9) until the next frame.
  */
 function unlabelled(s: Session): Promise<string[]> {
   return s.page.evaluate(() => {
     if (document.querySelector('.atlas-scene[data-engine="space-scene"]')) {
       const want = (document.querySelector<SVGElement>('.space-leaders')?.dataset.want ?? '').split(',').filter(Boolean);
       const shown = new Set(
-        [...document.querySelectorAll<SVGElement>('.space-co[data-id]')].filter((e) => Number(e.style.opacity || 0) > 0.95).map((e) => e.dataset.id),
+        [...document.querySelectorAll<SVGElement>('.space-co[data-id]')].filter((e) => Number(e.style.opacity || 0) > 0.85).map((e) => e.dataset.id),
       );
       return want.filter((id) => !shown.has(id));
     }
@@ -376,7 +378,12 @@ async function runBeats(s: Session, o: Options, out: string, report: RunReport):
     const landed = st.presentation?.chapter === b.chapter && st.presentation.beat === b.index && st.hud === false;
     if (!landed) report.beatFailures.push(`${name}: state.presentation=${JSON.stringify(st.presentation)} hud=${st.hud}`);
     // Labels the beat asks for: a missing one means no anchor on screen (or its layer is off), usually a content issue.
-    const missing = await unlabelled(s);
+    // A placard still fading in is not missing: poll a little longer before listing it (the stage renders on demand).
+    let missing = await unlabelled(s);
+    for (let t = 0; missing.length && t < 12; t++) {
+      await s.page.waitForTimeout(250);
+      missing = await unlabelled(s);
+    }
     if (missing.length) report.beatNotes.push(`${name}: no label for ${missing.join(', ')}`);
     await s.page.screenshot({ path: join(out, `${name}${o.suffix}.png`) });
     console.log(`  ${name.padEnd(36)} ${landed ? 'OK' : 'FAIL'}${missing.length ? `  (no label: ${missing.join(', ')})` : ''}`);

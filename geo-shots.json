@@ -1,0 +1,27 @@
+{
+ "geo-hgx": {
+  "chapter": "the-machine",
+  "wait": 2600,
+  "js": "window.__atlas.setHud(false); setTimeout(()=>window.__atlas.engine.apply({\"hidden\":[\"bezel\",\"chassis-body\",\"top-cover\",\"rack-ears\",\"rails\",\"midplane\",\"front-controls\",\"status-led\",\"fan-modules\",\"fan-rotors\",\"gpu-tray-frame\",\"rear-grille\",\"host-tray-frame\",\"motherboard\",\"cpus\",\"cpu-heatsinks\",\"dimms\",\"pcie-switches\",\"network-modules\",\"densilink-cables\",\"osfp-cages\",\"bluefield-dpus\",\"pcie-risers\",\"boot-drives\",\"u2-drives\",\"rear-io\",\"psus\",\"psu-single\",\"power-distribution\",\"power-cords\",\"scale-figure\",\"rack-frame\",\"rack-neighbour\"],\"camera\":{\"position\":[0.62,0.78,0.78],\"target\":[0,0.24,-0.02],\"fov\":30},\"layers\":[\"chassis\",\"cooling\",\"gpu-tray\",\"host\",\"power\",\"scene\"]}), 1300);"
+ },
+ "geo-gpu-tray": {
+  "chapter": "the-machine",
+  "wait": 2600,
+  "js": "window.__atlas.setHud(false); setTimeout(()=>window.__atlas.engine.apply({\"hidden\":[\"top-cover\",\"bezel\",\"scale-figure\",\"rack-frame\",\"rack-neighbour\"],\"camera\":{\"position\":[0.004,1.85,-0.02],\"target\":[0,0.15,-0.02],\"fov\":30},\"layers\":[\"chassis\",\"cooling\",\"gpu-tray\",\"host\",\"power\",\"scene\"]}), 1300);"
+ },
+ "geo-host-tray": {
+  "chapter": "the-machine",
+  "wait": 2600,
+  "js": "window.__atlas.setHud(false); setTimeout(()=>window.__atlas.engine.apply({\"hidden\":[\"top-cover\",\"bezel\",\"scale-figure\",\"rack-frame\",\"rack-neighbour\",\"gpu-tray-frame\",\"rear-grille\",\"gpu-baseboard\",\"baseboard-connectors\",\"gpu-modules\",\"gpu-dies\",\"hbm-stacks\",\"gpu-heatsinks\",\"nvswitch-chips\",\"nvswitch-duct\"],\"camera\":{\"position\":[-0.004,1.7,-0.02],\"target\":[0,0.05,-0.02],\"fov\":30},\"layers\":[\"chassis\",\"cooling\",\"gpu-tray\",\"host\",\"power\",\"scene\"]}), 1300);"
+ },
+ "geo-front": {
+  "chapter": "the-machine",
+  "wait": 2600,
+  "js": "window.__atlas.setHud(false); setTimeout(()=>window.__atlas.engine.apply({\"hidden\":[\"bezel\",\"scale-figure\",\"rack-frame\",\"rack-neighbour\"],\"camera\":{\"position\":[0,0.222,2.6],\"target\":[0,0.222,0.4],\"fov\":24},\"layers\":[\"chassis\",\"cooling\",\"gpu-tray\",\"host\",\"power\",\"scene\"]}), 1300);"
+ },
+ "geo-rear": {
+  "chapter": "the-machine",
+  "wait": 2600,
+  "js": "window.__atlas.setHud(false); setTimeout(()=>window.__atlas.engine.apply({\"hidden\":[\"scale-figure\",\"rack-frame\",\"rack-neighbour\"],\"camera\":{\"position\":[0,0.222,-2.6],\"target\":[0,0.222,-0.4],\"fov\":24},\"layers\":[\"chassis\",\"cooling\",\"gpu-tray\",\"host\",\"power\",\"scene\"]}), 1300);"
+ }
+}

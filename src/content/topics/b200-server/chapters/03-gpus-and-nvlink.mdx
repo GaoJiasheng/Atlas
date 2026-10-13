@@ -57,7 +57,7 @@ A model is a long list of numbers called parameters. A model with <Num s="S22">4
 
 <More title={{ en: "Reading a peak number", zh: "怎样读峰值" }}>
 
-NVIDIA's figures for the whole DGX B200 are <Num s="S2">144 petaFLOPS</Num> at FP4 and <Num s="S2">72 petaFLOPS</Num> at FP8, both for sparse work; dense figures are half of these, <Num s="S2">72</Num> and <Num s="S2">36 petaFLOPS</Num>. "Peta" means a thousand million million. FP4 and FP8 store each number in 4 or 8 bits: fast, but rough. At the 32-bit precision of ordinary scientific work the eight GPUs are rated at <Num s="S5">600 teraFLOPS</Num>, more than a hundred times less. "Sparse" means the hardware may skip half the multiplications when many numbers in a model are zero. These are ceilings, not what a real training run achieves.
+NVIDIA's figures for the whole DGX B200 are <Num s="S2">144 petaFLOPS</Num> at FP4 and <Num s="S2">72 petaFLOPS</Num> at FP8, both for sparse work; dense figures are half of these, <Num s="S2">72</Num> and <Num s="S2">36 petaFLOPS</Num>. "Peta" means a thousand million million. FP4 and FP8 store each number in 4 or 8 bits: fast, but rough. At the 32-bit precision of ordinary scientific work NVIDIA rates the eight GPUs at <Num s="S5">600 teraFLOPS</Num>, more than a hundred times less. "Sparse" means the hardware may skip half the multiplications when many numbers in a model are zero. These are ceilings, not what a real training run achieves.
 
 </More>
 
@@ -95,7 +95,7 @@ Each GPU's <Num s="S7">18</Num> links carry <Num s="S7">100 GB/s</Num> each, <Nu
 
 <More title={{ en: "Reading a peak number", zh: "怎样读峰值" }}>
 
-NVIDIA 给整台 DGX B200 的数字是：FP4 <Num s="S2">144 PFLOPS</Num>，FP8 <Num s="S2">72 PFLOPS</Num>，两者都是稀疏口径；稠密口径各减半，即 <Num s="S2">72</Num> 和 <Num s="S2">36 PFLOPS</Num>。"P"（peta）表示一千万亿。FP4、FP8 用 4 位或 8 位来存一个数：快，但很粗略。换成普通科学计算常用的 32 位精度，8 块 GPU 的额定值是 <Num s="S5">600 TFLOPS</Num>，少了一百多倍。"稀疏"是说当模型里很多数是零时，硬件可以跳过一半乘法。这些都是上限，不是一次真实训练能达到的速度。
+NVIDIA 给整台 DGX B200 的数字是：FP4 <Num s="S2">144 PFLOPS</Num>，FP8 <Num s="S2">72 PFLOPS</Num>，两者都是稀疏口径；稠密口径各减半，即 <Num s="S2">72</Num> 和 <Num s="S2">36 PFLOPS</Num>。"P"（peta）表示一千万亿。FP4、FP8 用 4 位或 8 位来存一个数：快，但很粗略。换成普通科学计算常用的 32 位精度，NVIDIA 给 8 块 GPU 的额定值是 <Num s="S5">600 TFLOPS</Num>，少了一百多倍。"稀疏"是说当模型里很多数是零时，硬件可以跳过一半乘法。这些都是上限，不是一次真实训练能达到的速度。
 
 </More>
 
