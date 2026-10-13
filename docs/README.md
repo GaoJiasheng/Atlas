@@ -17,3 +17,5 @@
 | [13-space-topic-template.md](13-space-topic-template.md) | 拆解主题模板（SpaceScene · 对象解剖，机器与生物）：skill `atlas-space-topic`、脚手架 `scripts/new-topic.ts --engine space-scene` |
 | [14-grasshopper-content-spec.md](14-grasshopper-content-spec.md) | 蝗虫解剖主题（已发布）spec 与实现记录：生物解剖模板样板（系统分层、剖切、跳跃姿态、流、生活史托盘）、引擎缺口 B1–B16、施工记录、已知差距 |
 | [15-fractions-content-spec.md](15-fractions-content-spec.md) | 分数主题（已发布；2026-10-11 改为讲解优先，§10）与第三个引擎 MathScene：课纲对照、12 步（讲解节拍 + 章末小测题库）+ 练习、引擎设计、写作规则、决定记录、实现记录与已知差距；课主题模板是 skill `atlas-lesson-topic` |
+| [16-muscles-content-spec.md](16-muscles-content-spec.md) | 人体肌肉系列（胸、背、肩、臂、腿、腰腹，已发布）：真实网格（Z-Anatomy）与管线、共享肌肉卡 / 动作卡、动作模式、决定记录、§15 胸部记录、§16 系列记录 |
+| [17-psle-roadmap.md](17-psle-roadmap.md) | PSLE 课纲（数学 2021、科学 2023、社会研究 2020 等）对 Atlas 三个引擎的映射：逐级逐主题的适配度与工作量、前 12 个优先主题、引擎缺口、来源 |
