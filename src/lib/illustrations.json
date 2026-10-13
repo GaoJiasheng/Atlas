@@ -19,6 +19,26 @@
       "0000000000000000"
     ]
   },
+  "b200-server": {
+    "mask": [
+      "0000000111100000",
+      "09bbbccccdd70000",
+      "1dffffffffff6000",
+      "1dffffffffffe500",
+      "1efffffffffffe40",
+      "1dffffffffffffd1",
+      "1dffffffffffffd1",
+      "1dffffffffffffe1",
+      "0bffffffffffffd1",
+      "07ffffffffffffd1",
+      "03efffffffffffd1",
+      "00bfffffffffffd1",
+      "007fffffffffffd1",
+      "003fffffffffeec0",
+      "001bdba976543210",
+      "0000000000000000"
+    ]
+  },
   "fractions": {
     "mask": [
       "0000000000000000",
