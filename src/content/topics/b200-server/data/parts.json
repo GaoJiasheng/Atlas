@@ -5009,8 +5009,8 @@
         "zh": "一个 1.70 米的人，作比例尺"
       },
       "detail": {
-        "en": "A neutral figure 1.70 m tall, standing beside the server so its size can be judged. It is a silhouette, not a model of anyone.",
-        "zh": "一个 1.70 米高的中性人形，站在服务器旁边，用来比较大小。它只是剪影，不代表任何人。"
+        "en": "A neutral figure 1.70 m tall, standing a few metres behind the server so its size can be judged. It is a silhouette, not a model of anyone.",
+        "zh": "一个 1.70 米高的中性人形，站在服务器后面几米远，用来比较大小。它只是剪影，不代表任何人。"
       },
       "primitive": {
         "kind": "capsule",
@@ -5024,9 +5024,9 @@
           0.6
         ],
         "at": [
-          -1.1,
+          -9.4,
           1.2,
-          -0.2
+          -4.7
         ],
         "color": "token:mannequin"
       },
@@ -5042,9 +5042,9 @@
             0.95
           ],
           "at": [
-            -1.1,
+            -9.4,
             1.6,
-            -0.2
+            -4.7
           ],
           "color": "token:mannequin"
         },
@@ -5055,9 +5055,9 @@
             0.74
           ],
           "at": [
-            -1.18,
+            -9.48,
             0.45,
-            -0.2
+            -4.7
           ],
           "color": "token:mannequin"
         },
@@ -5068,9 +5068,9 @@
             0.74
           ],
           "at": [
-            -1.02,
+            -9.32,
             0.45,
-            -0.2
+            -4.7
           ],
           "color": "token:mannequin"
         },
@@ -5081,9 +5081,9 @@
             0.56
           ],
           "at": [
-            -1.3,
+            -9.6,
             1.08,
-            -0.2
+            -4.7
           ],
           "color": "token:mannequin"
         },
@@ -5094,9 +5094,9 @@
             0.56
           ],
           "at": [
-            -0.9,
+            -9.2,
             1.08,
-            -0.2
+            -4.7
           ],
           "color": "token:mannequin"
         }
@@ -6249,16 +6249,16 @@
     },
     "cover": {
       "position": [
-        3.29,
-        3.1,
-        2.97
+        1.55,
+        0.98,
+        1.57
       ],
       "target": [
-        -0.31,
-        0.73,
-        -0.27
+        0,
+        0.36,
+        -0.15
       ],
-      "fov": 28
+      "fov": 38
     }
   },
   "spec": [
