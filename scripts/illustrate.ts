@@ -14,6 +14,9 @@
  *     asks `codex exec` to draw the subject in the shared style brief (below) into a
  *     temporary directory, then runs `process` on the result.
  *
+ *   pnpm tsx scripts/illustrate.ts figure <src.png> <id>
+ *     a chapter figure (4:3) written to public/illustrations/figures/<id>.webp (+@2x), no manifest.
+ *
  *   pnpm tsx scripts/illustrate.ts exercise <src.png> <id>
  *   pnpm tsx scripts/illustrate.ts exercise-gen <id> "<subject>"
  *     the same for an exercise sketch (docs/16 §10): a two-panel 3:2 drawing
@@ -105,6 +108,19 @@ export const EXERCISE_BRIEF =
   'face kept to a simple contour with no facial detail, anatomically correct hands with five fingers and correct joint angles, no muscles drawn on the skin. ' +
   'EQUIPMENT drawn accurately and to scale (Olympic barbell with round plates and collars, round dumbbells, flat or adjustable bench, cable column with a D-handle, parallel dip bars) exactly as named in the subject. ' +
   'SAFETY: neutral spine, feet planted where applicable, nothing unsafe.';
+
+/** Chapter figures (docs/06 「章节配图」): 4:3, no manifest, under public/illustrations/figures/. */
+const FIGURE: Shape = {
+  aspect: 4 / 3,
+  outDir: join(OUT_DIR, 'figures'),
+  label: 'public/illustrations/figures',
+  variants: [
+    { suffix: '', width: 1200, budget: 120 * 1024 },
+    { suffix: '@2x', width: 2400, budget: 300 * 1024 },
+  ],
+  manifest: false,
+  minQuality: 58,
+};
 
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
@@ -229,6 +245,7 @@ if (command === 'process' && a && b) await processImage(resolve(a), b, PLATE);
 else if (command === 'gen' && a && b) await generate(a, b, PLATE);
 else if (command === 'exercise' && a && b) await processImage(resolve(a), b, EXERCISE);
 else if (command === 'exercise-gen' && a && b) await generate(a, b, EXERCISE);
+else if (command === 'figure' && a && b) await processImage(resolve(a), b, FIGURE);
 else {
   console.error(
     'usage:\n  pnpm tsx scripts/illustrate.ts process <src.png> <slug>\n  pnpm tsx scripts/illustrate.ts gen <slug> "<subject>"' +
