@@ -18,6 +18,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "e2e": "playwright test",
+    "ios:sync": "pnpm build && npx cap sync ios",
+    "ios:open": "pnpm ios:sync && npx cap open ios",
     "deploy": "pnpm build && pnpm dlx wrangler@4.148.0 pages deploy dist --project-name atlas --branch main"
   },
   "dependencies": {
