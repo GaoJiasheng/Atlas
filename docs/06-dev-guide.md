@@ -47,7 +47,7 @@ src/
   lib/                        # content.ts（构建期取内容）, prefs.ts（localStorage）, time.ts, levels.ts（仅供 schema 校验可选的规划字段 `level`）,
                               # home.ts（首页：统计行、精选、扉页构图、目录分节）+ illustrations.json（插图清单，illustrate.ts 写）, drawing-fallback.ts,
                               # speech.ts（演示语音：选声、朗读队列、voiceLog）
-  components/                 # SiteToggles 岛、MDX 组件（Lang / More / Num / FlyTo / Term）、home/（首页：Frontispiece / PlateCard / SubjectIcon / Drawing / ExLibris）
+  components/                 # SiteToggles 岛、MDX 组件（Lang / More / Num / FlyTo / Term / TopicLink）、home/（首页：Frontispiece / PlateCard / SubjectIcon / Drawing / ExLibris）
   layouts/BaseLayout.astro    # <html lang>、首帧前主题脚本、hreflang
   pages/                      # index.astro（跳转）, [locale]/index.astro, [locale]/topics/[slug].astro
   styles/                     # global.css（Tailwind + token 映射）, fonts.css（自托管 Plex woff2）, scene.css（HUD 布局与部件）
@@ -102,6 +102,7 @@ pnpm tsx scripts/new-topic.ts <slug> --engine space-scene --subject science|biol
      | `<Figure>` | `<Figure src="figures/b200-rack" alt={{ en: "…", zh: "…" }} caption={{ en: "…", zh: "…" }} />` | 章节里的一张石墨插图（`public/illustrations/<src>.webp` + `@2x`，4:3，`scripts/illustrate.ts figure`）：paper 下正片叠底，dark plate 反相成粉笔（同首页插图 `.atlas-drawing`）；占位宽高预留；validate 检查文件存在、alt 与 caption 都写了 |
      | `<Num>` | `<Num s="S3">about 70,000</Num>`；多个来源 `s="S3,S7"` | 数字后跟 mono 上标来源号，点开来源弹层（文本、说明、链接，不联网） |
      | `<FlyTo>` | `<FlyTo preset="singapore-island">Singapore island</FlyTo>` | 正文里的 hairline 按钮，镜头飞到命名预设（TimeScene `presets.json`，SpaceScene `parts.json` 的 `presets`；与 VIEW 按钮同一动作；手机上顺便收起阅读面板） |
+     | `<TopicLink>` | `<TopicLink slug="four-taps">Singapore's Four Taps</TopicLink>` | 正文里链到另一个主题的页面：按读者语言和站点 base 生成地址（`localeHref`），不要手写 `/en/topics/…`；`pnpm validate` 检查主题存在 |
      | `<Term>` | `<Term id="blitzkrieg">闪电战</Term>` | 名词：点状下划线的 `span`（`role="button"`，Enter / 空格也能开），点开在阅读面板 inspector 区显示 `glossary.json` 里的定义和相关词（见「名词表」）；只包全主题第一次出现处 |
      | `<Frac>` | `<Frac n={3} d={4} />`、`<Frac w={1} n={3} d={4} />` | 静态竖排分数（与数据文本里的 `{3/4}` 同一套标记），读屏读文字（"three quarters" /「四分之三」）；校验 n、d 是整数、d ≥ 1 |
      | `<Task>` | `<Task id="equivalent-fractions">try one question</Task>` | MathScene：hairline 按钮，打开本章小测（步 id：从题库抽一道；也可写题库题 id）（SceneHost 委托 `data-task` → `SceneControls.goToTask`）；校验 id 是 `lesson.json` 的步或题库题 |

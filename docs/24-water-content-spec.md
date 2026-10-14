@@ -304,7 +304,7 @@
 ### 4.4 剖切、X-RAY、爆炸
 
 - `views.cutaway`：`{ normal: [0,0,-1], offset: 0.2 }`（切掉 z > 0.2 的前缘，露出地下管道与隧道的纵剖面）。
-- `views.cuts`：`ground`（同上，label "Underground / 地下"，第 04、05 章）；`plants`（`{ normal: [0,-1,0], offset: 0.12 }`，切掉厂房屋顶以上，俯视看池子与膜架，label "Inside the plants / 厂内"，第 04–06 章）。
+- `views.cuts`：`ground`（同上，label "Underground / 地下"，第 04、05 章）。（初稿还有一个水平的 `plants` 剖切，发布前去掉：平面高度同时切到森林山丘、楼顶和工厂，切面上出现赭色剖面线；厂房改用 X-RAY 透视，见 §15。）
 - X-RAY：shell = ground-shell、newater-hall、pump-house、clear-water-tank、service-reservoir、hdb-block、distribution-main、house-sewer（地下管线与厂内设备实心）。
 - EXPLODED：天空件向上、厂房件向上、地下件向下、堤坝向前；流禁用（引擎）。主要不是本主题的读法。
 
@@ -356,7 +356,7 @@
 | 01 | `one-island-four-taps` | One island, four taps / 一座岛，四个水喉 | assembled | false | none | 全部 − 流组 | — | hero |
 | 02 | `the-water-cycle` | The Sun drives the water cycle / 太阳推动水循环 | assembled | true | none | sky-and-sea, catchment, water-cycle | — | cycle |
 | 03 | `catching-the-rain` | Catching the rain / 接住每一滴雨 | assembled | true | none | sky-and-sea, catchment, water-cycle, flood | storm | barrage |
-| 04 | `reservoir-to-tap` | From reservoir to tap / 从水库到水龙头 | xray | true | plants | catchment, supply, imported | — | plants |
+| 04 | `reservoir-to-tap` | From reservoir to tap / 从蓄水池到水龙头 | xray | true | none | catchment, supply, imported | — | plants |
 | 05 | `used-water-to-newater` | Used water becomes NEWater / 用过的水变成新生水 | xray | true | ground | supply, reuse, catchment | — | plants |
 | 06 | `sea-and-johor` | Water from the sea and from Johor / 来自大海与柔佛的水 | assembled | true | none | sky-and-sea, desal, imported, supply | — | coast |
 | 07 | `every-drop` | Every drop counts / 每一滴都算数 | assembled | true | none | 全部 | — | home |
@@ -428,7 +428,7 @@
 **06 `sea-and-johor`**
 - summary：Seawater is turned into fresh water with membranes, and water is also bought from Johor under a 1962 agreement. / 海水用膜变成淡水；另有按 1962 年协议从柔佛购买的水。
 - 正文提纲：① 取海水、预处理、反渗透、浓盐水（F-13）② 淡化耗电较多（定性，P5 **待核**）③ 柔佛河、林木水库、跨长堤输水管（F-6—F-8）④ 协议的事实与日期（§0-6）⑤ 指向 B 主题地图。
-- 节拍（4）：海边取水头 → 淡化厂内反渗透（`plants` 剖切）→ 浓盐水管 → 北缘输水管（截断标记，字幕说"地图在下一个主题"）。
+- 节拍（4）：海边取水头 → 淡化厂内反渗透→ 浓盐水管 → 北缘输水管（截断标记，字幕说"地图在下一个主题"）。
 - 细看：`Why desalination uses more energy`（定性）；`The water agreements`（日期与数量，两国一手来源；Gavin 审）；`On the map`（链接 `four-taps`）。
 - **试一试**：把一小杯盐水放在阳光下晒干，看留下的盐——蒸发把水带走、盐留下（与淡化原理不同，细看说明区别）。
 - 索引：desal-intake, desal-pretreat, desal-ro, brine-outfall, johor-main, distribution-main。
@@ -568,3 +568,52 @@
 - [ ] "试一试"只写安全、在家能做的步骤；涉及的公平测试写清变量与不变量。
 - [ ] B：每帧 `SOURCES-GEO.md` 记数据集、许可（SODL / ODbL / PD）、筛选年份与来源；ODbL 署名出现在页面来源列表；没有手画多边形；`land-sg.json` 偏差 p95 写入。
 - [ ] 厂房无标志、无企业名、无文字；`note` 写明示意切片。
+
+
+---
+
+## 15. 实现记录与已知差距（2026-10-14，发布）
+
+两个主题一起收尾：A `water`、B `four-taps`，都改为 `status: published`，首页 17 个主题（科学 3、地理 1 = B；地理曾是"即将推出"，现在可点）。提交由主会话做（本次 QA 不提交）。
+
+### A · `water`（SpaceScene）
+
+**数量**：7 章 33 拍（5 / 5 / 5 / 5 / 5 / 4 / 4）；42 个零件（39 个 + 3 个 context：地表壳、海床块、长堤残段）、9 组、11 条流、3 个动画（刮泥桥转动、云漂移、紫外线脉动）、3 个姿态（storm / gates-open / dry-spell）、6 个预设（hero / cycle / barrage-view / plants / coast / home）、1 个剖切（`ground`）；16 个名词；32 条来源（S1 自描述的设计研究来源；S27 并入 S26 的 `note`）；6 张章节图在用（`water-cycle`、`water-three-states`、`water-marina-barrage`、`water-treatment`、`water-newater-membranes`、`water-ro-membrane`；`water-johor-river` 入库未用，柔佛的水管在 B 的地图上）加首页图；每章一个"试一试"，第 02、07 章是公平测试，都只写在家能做的安全做法。
+
+**QA 收尾做的改动**
+- **文字**：全篇照 `atlas-space-topic/references/writing-rules.md` 读过一遍（EN / ZH）；统一：数量都包 `<Num s>`（补了"三分之二 / two-thirds"四处）；第 06 章把"第四个水喉来自新加坡以外"改成"第二个水喉，进口水，来自新加坡以外"（与第 01 章的编号一致）；第 04 章去掉"厂房从上面剖开"。名词表 16 个，每个只在首次出现处包。试一试不是测验，不判对错。
+- **链接**：正文里手写的 `/en/topics/four-taps/` 改成新的 MDX 组件 `<TopicLink slug>`（`src/components/mdx/TopicLink.astro`，用 `localeHref`，跟读者语言和站点 base；`pnpm validate` 检查主题存在；docs/06 记了）。B 里的 Markdown 链接同样替换。
+- **S27**：没有任何正文引用，删去；内容（SS P3 大纲第 23–26 页、"四大水喉"一词不在大纲里）并入 S26 的 `note`。来源编号因此少一个 S27，不重排。
+- **cinema 眩光**：`ground-shell` 顶面 `#cbc6b1 → #b8b19b`，`city-blocks` `#d6d0c2 → #c5beac`，组屋与工厂的未着色 enamel 件加 `#cdc7b8`；paper 下图底对比更好，cinema 下大片浅色不再发白。
+- **`plants` 剖切**：水平剖切（y = 0.15）同时切到森林山丘（高 0.15–0.37）、楼顶和工厂（高 0.15，与切面共面，出现赭色斑点），第 04、05 章的山丘上全是赭色剖面线。去掉这个剖切；第 04 章 `cutaway: none`，第 05 章第 4 拍沿用 `ground`；厂房是 `shell`，X-RAY 下本来就透明，池子与膜架看得到。
+
+**验收数据**（1920×1080，SwiftShader）：`pnpm shoot water --layout --keys --beats`，EN / ZH × paper / cinema 四种组合，键位 0 失败、七个尺寸 0 布局问题、33 拍 0 失败、chapter highlights 全部在屏、console 干净；`pnpm check`（0 error）、`validate`（0 / 0）、`test`（1512）、`build`、`e2e`（78）全绿。静止 69 calls / 35.5 万三角形（SwiftShader 下的 hero 镜头；`--perf --gpu` 在真机上另测）。规范截图在 `docs/screenshots/water/`（本地）：`hero-paper`、`hero-dark`、`hero-zh`、`mode-xray`、`mode-exploded`、`phone-390`、`ch04-*`、`ch05-cinema`、四个组合的节拍联系表。
+- 另一处修：森林山丘与配水库穹顶的 `lathe` 轮廓是从上到下写的（与引擎要求的从下到上相反，首尾在轴上才是封闭体），任何剖切下整个穹顶都被画成赭色剖面线；4 个轮廓改成从下到上，剖面线消失（第 05 章地面剖切下也是）。
+
+**已知差距**
+- 地面与厂房的 cinema 色是数据里的单一 `tint`（不分主题）；真要两套色得走引擎的主题化 tint。
+- 地下剖面里的深隧道埋深（35–55 m）按厂房放大后画得比真实浅得多；`note` 与第 01 章细看已写明。
+- 新马协议只写了 S4、S17、S18、S19 能支持的日期和数量，价格条款不写；中文待 Gavin 审。
+- 蓄水池 17 个、水厂 6 座、新生水厂 4 座、淡化厂 5 座、DTSS 206 km 都是 PUB 截至 2024–2026 年的页面值，会变；来源页的"最后更新"日期记在 `sources.json`。
+
+### B · `four-taps`（TimeScene，岛尺度地图）
+
+**数量**：背景章 + 5 章共 23 拍（4 / 3 / 5 / 4 / 4 / 3）；7 个控制关键帧 K1–K7（1867、1920、1975、1986、1993、2008-10-31、2011）共 18 个蓄水池多边形；38 个事件（5 个协议 / 政治事件 + 33 个 `site`）、2 条输水管线（长堤、柔佛河）、4 个实体、5 个预设、11 个名词、33 条来源；没有章节图，首页图 `four-taps`（岛的线稿，已重新压缩进预算：80 KB / 231 KB）。
+
+**管线（城市尺度主题，docs/17 C1）**：`fetch.ts`（data.gov.sg 的 URA MP2019 土地利用与规划区边界，Overpass 的蓄水池、管线、水厂）→ `local-land.ts`（55 个规划区无海边界并成岛岸线，去掉 0.02 km² 以下碎块与大于 0.02 km² 的内陆水面，叠在 Natural Earth 周边之上；`public/geo/land-sg.json` 84 KB）→ `compose.ts`（`overlap` 选择器：面积至少一半落在 OSM 同名多边形内的 URA `WATERBODY` 地块，一个蓄水池一步）→ `simplify.ts`（Douglas–Peucker 10 m，70 条弧，`control.json` 62 KB，rings 205 / zero-area 0 / self-crossing 0，偏差 p95 0.01 km）→ `check.ts`（`geo-K#.png` 并排图）。过去的帧 = 当年已存在的蓄水池按今天的水面画（§0-10）。来源、许可（SODL v1.0 / ODbL 1.0 / 公有领域）、方法、残差在 `scripts/geo/four-taps/SOURCES-GEO.md` 与 `data/SOURCES.md`，ODbL 署名在页面来源列表（S31）。
+
+**QA 收尾做的改动**
+- **中文蓄水池名**：对照新加坡"促进华语理事会"的新加坡华语词库（S28：蓄水池 / 麦里芝 / 贝雅士上下段 / 实里达上段 / 登格）和中文维基的新加坡河流列表（克兰芝、慕莱、波扬、莎琳汶、登格、实里达下段、实龙岗、榜鹅），全部统一成"X 蓄水池"（上下段放在后面）；班丹、勿洛、德光岛、裕廊湖按通行写法未找到单独来源，沿用。**林木水库**（Linggiu，在柔佛）译名没有查到权威写法，沿用"水库"，待 Gavin 或 PUB 中文页核对。
+- **协议章 ZH 改写**：只写日期、数量和双方（柔佛州政府 / 新加坡的水务机构，1965 年协议里写作 PUB）；去掉"作为交换"（改成"协议同时规定"）、"分家协议"（改成"新加坡脱离马来西亚的协议"）、签约方"市议会"（来源里没有，删）；"同一份协议，两种说法"一块只列两国官方说法，价格条款一句"本主题只写日期和数量，不涉及价格"。EN 同步。
+- **蓄水池引线**：历史章（01、03）原先高亮实体 `local-catchment`，引线写的是"本地集水 · 加入 1867"，每一拍都一样；现在开 `sites` 图层，每拍高亮当拍出现的蓄水池（`site-*`），引线写蓄水池名。第 02 章末拍的 `imported-water` 实体换成 `site-linggiu-reservoir`。引擎的"加入 {date}"（`time.joinedOn`）是全站共用的字符串，没有主题级覆盖，所以没有改成"启用 / opened"，而是让本主题不再高亮实体；实体卡里"加入"一行还在，要改需要引擎加一个主题级文案（见已知差距）。
+- **ZH 篇幅**：背景章与第 05 章各补一句有来源的内容（4 座新生水厂、5 座淡化厂，S25、S23）；背景章的数量统一成"4.4 亿加仑""2,400 毫米"。
+- **企业名**：事件标题去掉"Keppel / 吉宝"，去掉淡化厂的旧商业名（Tuaspring / 大士泉）；id 同步改成 `site-marina-east-desalination`。
+
+**验收数据**（1920×1080）：`pnpm shoot four-taps --layout --keys --beats`，EN / ZH × paper / cinema 四种组合，键位 0 失败、七个尺寸 0 布局问题、23 拍 0 失败、chapter highlights 全部在屏、unlabelled 清单为空、console 干净、无外部请求。`control.json` 62 KB。规范截图在 `docs/screenshots/four-taps/`（本地，另有 `geo-K1…K7`）。
+
+**已知差距**
+- 蓄水池扩建前的旧轮廓、已消失的水体、填海前的海岸线都没有画（SOURCES-GEO.md §3）；Marina 蓄水池的中央海湾没有蓝色（OSM 关系不含）。
+- "加入 {date}"字样仍出现在实体卡里；需要 `time.joinedOn` 的主题级覆盖（引擎改动）。
+- 林木水库中文名待核；班丹 / 勿洛 / 德光岛 / 裕廊湖的中文只有通行写法。
+- 集水区没有画（PUB 只给图片）。
+

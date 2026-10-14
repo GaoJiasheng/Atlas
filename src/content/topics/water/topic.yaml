@@ -12,7 +12,7 @@ engine: space-scene
 stage: model3d
 theme: paper
 sensitivity: open
-status: draft
+status: published
 illustration: water
 shortTitle: { en: "Water", zh: "水" }
 note: { en: "Schematic slice of Singapore · not to scale · facilities simplified from public descriptions", zh: "新加坡示意切片 · 不按比例 · 设施按公开资料简化" }

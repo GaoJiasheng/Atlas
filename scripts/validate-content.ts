@@ -14,6 +14,7 @@
  *   - MDX bodies carry both <Lang en> and <Lang zh> blocks (warning otherwise)
  *   - data/sources.json: ids unique (S1, S2 …); every event `sources` ref and
  *     every `<Num s="…">` in a chapter body names a listed source
+ *   - `<TopicLink slug="…">` names a topic folder
  *   - `<FlyTo preset="…">` names a preset (TimeScene data/presets.json, SpaceScene
  *     parts.json `presets`); `<More>` has a title
  *   - data/glossary.json: term ids unique, `see` refs exist; every `<Term id="…">`
@@ -202,6 +203,11 @@ function checkBodyComponents(
     const id = attrs.preset;
     if (!id) error(file, `<FlyTo> needs a preset, e.g. <FlyTo preset="singapore-island">: ${raw}`);
     else if (!presets.has(id)) error(file, `<FlyTo preset="${id}">: unknown preset (not a named camera preset of this topic)`);
+  }
+  for (const { raw, attrs } of tagAttrs(body, 'TopicLink')) {
+    const slug = attrs.slug;
+    if (!slug) error(file, `<TopicLink> needs a slug, e.g. <TopicLink slug="four-taps">: ${raw}`);
+    else if (!isDir(join(TOPICS_DIR, slug))) error(file, `<TopicLink slug="${slug}">: no such topic`);
   }
   for (const { raw, attrs } of tagAttrs(body, 'More')) {
     if (!attrs.title) error(file, `<More> needs a title={{ en: "…", zh: "…" }}: ${raw}`);

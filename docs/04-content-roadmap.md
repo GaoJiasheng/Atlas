@@ -16,7 +16,8 @@
 | 生物分类与多样性 | biology | space（树状） | Layer2D | Sci P3 Diversity | 2027 |
 | 磁铁 | science | space + sim | SpaceScene/Model3D + 试一试（`sim`，kind magnet） | Sci P3 磁；详见 docs/22 | 2028 | spec 草案 |
 | 消化系统 | biology | space | Layer2D | Sci P4 人体系统 | 2028 |
-| 水循环 | science | time | TimeScene/Diagram | Sci P5 Cycles | 2029 |
+| 新加坡的水（水循环 + 四大水喉的处理链；一块示意的新加坡切片） | science | space | SpaceScene/Model3D | Sci P5 Cycles in Matter and Water（Water）；SS P3 资源；详见 docs/24 | 2026（提前） | published（2026-10-14），7 章 33 拍 |
+| 新加坡的四大水喉（1867 年至今，蓄水池、厂址、柔佛河输水管） | geography | time | TimeScene/Geo（岛尺度底图，docs/17 C1） | SS P3 资源；详见 docs/24 §15 | 2026（提前） | published（2026-10-14），背景 + 5 章 23 拍 |
 | 光与影 | science | sim | Simulation | Sci P4 光与影 | 2029 |
 | 大陆漂移与板块 | geography | time | TimeScene/Geo+morph | 课外拓展（地理） | 2028–2029 |
 | 山脉与火山形成 | geography | time + space | Diagram + Model3D | 课外拓展 | 2029 |

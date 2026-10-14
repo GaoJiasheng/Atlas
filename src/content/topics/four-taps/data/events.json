@@ -45,7 +45,7 @@
     },
     "detail": {
       "en": "The agreement is dated 1 September 1961 in the 1965 separation agreement [S15]. Under it Singapore supplied Johor with treated water amounting to 12 % of the water imported. When it expired on 31 August 2011, the Gunong Pulai and Scudai waterworks and the pump houses at Pontian and Tebrau were handed to the Johor State government [S13].",
-      "zh": "1965 年的分家协议写明这份协议的日期是 1961 年 9 月 1 日 [S15]。按照协议，新加坡向柔佛供应相当于进口量 12% 的处理过的水。2011 年 8 月 31 日协议到期，布莱山与士姑来水厂以及笨珍、地不佬的抽水站交给了柔佛州政府 [S13]。"
+      "zh": "1965 年新加坡脱离马来西亚的协议写明这份协议的日期是 1961 年 9 月 1 日 [S15]。按照协议，新加坡向柔佛供应相当于进口量 12% 的处理过的水。2011 年 8 月 31 日协议到期，布莱山与士姑来水厂以及笨珍、地不佬的抽水站交给了柔佛州政府 [S13]。"
     },
     "sources": [
       "S13",
@@ -71,8 +71,8 @@
       "zh": "新加坡可在 99 年里每日从柔佛河取原水至多 250 百万加仑，直到 2061 年。"
     },
     "detail": {
-      "en": "Both governments give the same date, 29 September 1962, the same term of 99 years and the same quantity [S13, S16, S17]. In return Johor may receive treated water: up to 2 % of the water supplied to Singapore, or 5 million gallons a day, as Singapore's foreign ministry puts it [S13]; 5 million gallons a day under Clause 11, in the words of Malaysia's ministry [S16]. Johor's state government records that the Johor River Waterworks at Kota Tinggi and the Linggiu Dam are to be handed to Johor on 30 September 2061 [S17].",
-      "zh": "两国政府给出的日期都是 1962 年 9 月 29 日，期限都是 99 年，取水量也一样 [S13、S16、S17]。作为交换，柔佛可获得处理过的水：新加坡外交部的说法是至多相当于新加坡供水量的 2%，即每日 5 百万加仑 [S13]；马来西亚部门的说法是按第 11 条每日 5 百万加仑 [S16]。柔佛州政府记录，哥打丁宜的柔佛河水厂和林木水坝将于 2061 年 9 月 30 日交给柔佛 [S17]。"
+      "en": "Both governments give the same date, 29 September 1962, the same term of 99 years and the same quantity [S13, S16, S17]. The agreement also provides that Johor may receive treated water: up to 2 % of the water supplied to Singapore, or 5 million gallons a day, as Singapore's foreign ministry puts it [S13]; 5 million gallons a day under Clause 11, in the words of Malaysia's ministry [S16]. Johor's state government records that the Johor River Waterworks at Kota Tinggi and the Linggiu Dam are to be handed to Johor on 30 September 2061 [S17].",
+      "zh": "两国政府给出的日期都是 1962 年 9 月 29 日，期限都是 99 年，取水量也一样 [S13、S16、S17]。协议还规定柔佛可获得处理过的水：新加坡外交部的说法是至多相当于新加坡供水量的 2%，即每日 5 百万加仑 [S13]；马来西亚部门的说法是按第 11 条每日 5 百万加仑 [S16]。柔佛州政府记录，哥打丁宜的柔佛河水厂和林木水坝将于 2061 年 9 月 30 日交给柔佛 [S17]。"
     },
     "sources": [
       "S13",
@@ -96,7 +96,7 @@
     },
     "summary": {
       "en": "When Singapore separates from Malaysia, the separation agreement says both governments will make sure the 1961 and 1962 water agreements are kept.",
-      "zh": "新加坡脱离马来西亚时，分家协议规定两国政府都要确保 1961 年和 1962 年的水供协议得到遵守。"
+      "zh": "新加坡脱离马来西亚时，协议规定两国政府都要确保 1961 年和 1962 年的水供协议得到遵守。"
     },
     "detail": {
       "en": "Article 14 of the agreement of 7 August 1965: Singapore's government guarantees that PUB, and Malaysia's government that the Johor State government, will abide by the water agreements of 1 September 1961 and 29 September 1962. Both countries registered the agreement with the United Nations [S15].",
@@ -449,7 +449,7 @@
     },
     "summary": {
       "en": "The 15th reservoir and the first in the city centre, behind Marina Barrage (2008); fresh water from 2010.",
-      "zh": "第 15 个蓄水池，也是第一个位于市中心的蓄水池，在滨海堤坝之内（2008 年）；2010 年起成为淡水库。"
+      "zh": "第 15 个蓄水池，也是第一个位于市中心的蓄水池，在滨海堤坝之内（2008 年）；2010 年起成为淡水蓄水池。"
     },
     "sources": [
       "S12"
@@ -608,7 +608,7 @@
     ]
   },
   {
-    "id": "site-keppel-marina-east-desalination",
+    "id": "site-marina-east-desalination",
     "t": "2020",
     "at": [
       103.877,
@@ -617,8 +617,8 @@
     "kind": "site",
     "importance": 2,
     "title": {
-      "en": "Keppel Marina East Desalination Plant",
-      "zh": "吉宝滨海东海水淡化厂"
+      "en": "Marina East Desalination Plant",
+      "zh": "滨海东海水淡化厂"
     },
     "summary": {
       "en": "Opened in 2020; the first plant that can treat either seawater or water from Marina Reservoir.",
@@ -643,8 +643,8 @@
       "zh": "大士南海水淡化厂"
     },
     "summary": {
-      "en": "Opened in 2013 (then called Tuaspring); Singapore's largest desalination plant.",
-      "zh": "2013 年启用（原名大士泉）；新加坡最大的海水淡化厂。"
+      "en": "Opened in 2013; Singapore's largest desalination plant.",
+      "zh": "2013 年启用；新加坡最大的海水淡化厂。"
     },
     "sources": [
       "S23"

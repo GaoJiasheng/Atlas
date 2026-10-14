@@ -11,7 +11,7 @@ engine: time-scene
 stage: geo
 theme: paper
 sensitivity: open
-status: draft
+status: published
 illustration: four-taps
 shortTitle: { en: "Four Taps", zh: "四大水喉" }
 # Island-scale basemap (docs/06 TimeScene, docs/17 C1): high-resolution land above zoom 9, zoom to 13.
