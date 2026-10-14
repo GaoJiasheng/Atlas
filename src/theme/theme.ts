@@ -46,6 +46,8 @@ export const TOKEN_NAMES = [
   'cut',
   'food',
   'haemolymph',
+  'lamp',
+  'current',
   'muscle-1',
   'muscle-2',
   'muscle-3',

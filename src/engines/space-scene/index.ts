@@ -5,6 +5,7 @@
 import { defineEngine } from '../core/engine';
 import type { ChapterState } from '../core/types';
 import type { SpaceSceneData, SpaceView } from './schema';
+import type { SimValues } from './sim-schema';
 import { EXERCISE_PHASES, type ExercisePhase } from '../../lib/anatomy';
 
 export const SPACE_VIEW_IDS: readonly SpaceView[] = ['assembled', 'xray', 'exploded', 'isolate'];
@@ -35,7 +36,7 @@ export interface SpaceSceneExt {
    * Signal / cold tints (chapter / beat `highlight`; exercise mode adds its own; not cumulative, never
    * in the URL: the store's `highlight` is TimeScene's URL field, hence the other name).
    */
-  tints: { signal: string[]; cold: string[] } | null;
+  tints: { signal: string[]; cold: string[]; custom?: Record<string, string> } | null;
   /** Muscle parts whose origin / insertion markers show (chapter / beat `sites`; not cumulative). */
   sites: string[];
   /**
@@ -48,6 +49,12 @@ export interface SpaceSceneExt {
   beat: number | null;
   /** A muscle sheet's ACTIONS demo on show: that part's joint swinging through the movement (never in the URL). */
   demo: { part: string; joint: string; movement: string } | null;
+  /**
+   * Try-it control values set by the chapter (`state.sim.set`), a beat or the
+   * reader, by control id (not cumulative; the rest are at their defaults,
+   * lib/sim/controls.ts). URL `sim`.
+   */
+  sim: SimValues;
 }
 
 const KEBAB = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -70,9 +77,22 @@ export function exerciseOf(value: unknown): SpaceSceneExt['exercise'] {
 /** A chapter / beat `highlight` (`{ signal?, cold? }`), or null. */
 export function highlightOf(value: unknown): SpaceSceneExt['tints'] {
   if (!value || typeof value !== 'object') return null;
-  const { signal, cold } = value as { signal?: unknown; cold?: unknown };
+  const { signal, cold, custom } = value as { signal?: unknown; cold?: unknown; custom?: unknown };
   const ids = (v: unknown) => (Array.isArray(v) ? v.filter(isId) : []);
-  return { signal: ids(signal), cold: ids(cold) };
+  const colours =
+    custom && typeof custom === 'object'
+      ? Object.fromEntries(Object.entries(custom).filter((e): e is [string, string] => isId(e[0]) && typeof e[1] === 'string'))
+      : {};
+  return { signal: ids(signal), cold: ids(cold), ...(Object.keys(colours).length > 0 ? { custom: colours } : {}) };
+}
+
+/** A chapter's / beat's `sim.set` (values of the right shape only; the engine checks them against its controls). */
+export function simSetOf(value: unknown): SimValues {
+  const set = value && typeof value === 'object' ? (value as { set?: unknown }).set : undefined;
+  if (!set || typeof set !== 'object') return {};
+  const out: SimValues = {};
+  for (const [k, v] of Object.entries(set)) if (isId(k) && (typeof v === 'boolean' || typeof v === 'number' || isId(v))) out[k] = v;
+  return out;
 }
 
 export const spaceSceneEngine = defineEngine<SpaceSceneExt, SpaceSceneData>({
@@ -93,6 +113,7 @@ export const spaceSceneEngine = defineEngine<SpaceSceneExt, SpaceSceneData>({
       sites: [],
       demo: null,
       beat: null,
+      sim: {},
       // All groups visible by default.
       layers: data ? data.parts.groups.map((g) => g.id) : [],
     };
@@ -113,6 +134,7 @@ export const spaceSceneEngine = defineEngine<SpaceSceneExt, SpaceSceneData>({
     out.sites = Array.isArray(state.sites) ? state.sites.filter(isId) : [];
     out.demo = null;
     out.beat = null;
+    out.sim = simSetOf(state.sim);
     return out;
   },
   fromUrl(fields) {
@@ -124,6 +146,7 @@ export const spaceSceneEngine = defineEngine<SpaceSceneExt, SpaceSceneData>({
     if (isId(fields.cutaway)) out.cutaway = fields.cutaway;
     if (fields.pose === null || isId(fields.pose)) out.pose = fields.pose;
     if (fields.beat === null || (typeof fields.beat === 'number' && Number.isInteger(fields.beat) && fields.beat >= 0)) out.beat = fields.beat;
+    if (fields.sim !== undefined) out.sim = { ...fields.sim };
     return out;
   },
   load: () => import('./View'),

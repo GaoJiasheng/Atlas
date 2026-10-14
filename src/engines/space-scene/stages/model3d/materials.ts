@@ -31,6 +31,12 @@
  *    would alias. Those parts keep the shared normal map at zero strength.
  *  - highlight tint (`uHi`): the base colour mixed toward the signal or cold
  *    colour (exercise mode's prime movers / synergists).
+ *  - section faces (`atlasSection` = 1: the flat cuts of a part-turned lathe,
+ *    a cut-open battery or bulb): the part's own colour under the same 45°
+ *    hatch as the cut face, so each layer keeps its material.
+ *  - glow (`uGlow`): self-light added on top (a filament lit by the try-it
+ *    model; PartNode eases it).
+ *  - wood (`map`): the family's grain as a colour map.
  */
 import { Color, DoubleSide, FrontSide, MeshStandardMaterial, Vector3, type Plane } from 'three';
 import type { MaterialLook } from '../../lib/color';
@@ -54,6 +60,8 @@ export interface PartUniforms {
   uTime: { value: number };
   uHi: { value: number };
   uHiColor: { value: Color };
+  /** Self-light added on top of the family's (a lamp filament's glow, lib/sim/bind.ts), linear RGB. */
+  uGlow: { value: Color };
   uSel: { value: number };
   uSelColor: { value: Color };
   uSelRim: { value: number };
@@ -75,7 +83,9 @@ uniform vec3 uFibreCentre;
 uniform float uGrain;
 attribute float atlasU;
 attribute vec3 atlasFibre;
+attribute float atlasSection;
 varying float vAtlasU;
+varying float vAtlasSection;
 varying vec3 vGrainP;
 varying vec3 vGrainF;
 `;
@@ -83,6 +93,7 @@ varying vec3 vGrainF;
 const CONTRACT = /* glsl */ `
 #include <begin_vertex>
 vAtlasU = atlasU;
+vAtlasSection = atlasSection;
 vGrainP = position - uFibreCentre;
 vGrainF = atlasFibre;
 if (uContract > 0.0001) {
@@ -112,6 +123,8 @@ uniform float uTime;
 uniform float uHi;
 uniform vec3 uHiColor;
 varying float vAtlasU;
+varying float vAtlasSection;
+uniform vec3 uGlow;
 uniform float uSel;
 uniform vec3 uSelColor;
 uniform float uSelRim;
@@ -181,6 +194,11 @@ if (uCut > 0.5 && !gl_FrontFacing) {
 const TINT = /* glsl */ `
 #include <color_fragment>
 diffuseColor.rgb = mix(diffuseColor.rgb, uHiColor, uHi);
+if (vAtlasSection > 0.5) {
+  float hd = (gl_FragCoord.x + gl_FragCoord.y) / uHatchPx;
+  float hf = abs(fract(hd) - 0.5) * uHatchPx * 0.7071;
+  diffuseColor.rgb = mix(diffuseColor.rgb, uHatchColor, (1.0 - smoothstep(0.35, 1.1, hf)) * 0.4);
+}
 if (uStripe > 0.001) {
   float w = fract(vAtlasU * 7.0 - uTime * 0.8);
   float band = smoothstep(0.0, 0.16, w) * (1.0 - smoothstep(0.2, 0.42, w));
@@ -190,6 +208,7 @@ if (uStripe > 0.001) {
 
 const SELECTION = /* glsl */ `
 #include <emissivemap_fragment>
+totalEmissiveRadiance += uGlow;
 if (uSel > 0.001) {
   float facing = abs(dot(normalize(normal), normalize(vViewPosition)));
   float rim = pow(1.0 - facing, 2.5);
@@ -228,6 +247,7 @@ export function createPartMaterial(): PartMaterial {
     uTime: { value: 0 },
     uHi: { value: 0 },
     uHiColor: { value: new Color() },
+    uGlow: { value: new Color(0, 0, 0) },
     uSel: { value: 0 },
     uSelColor: { value: new Color() },
     uSelRim: { value: 1 },
@@ -248,7 +268,7 @@ export function createPartMaterial(): PartMaterial {
       .replace('#include <color_fragment>', TINT)
       .replace('#include <emissivemap_fragment>', SELECTION);
   };
-  material.customProgramCacheKey = () => 'atlas-part-3';
+  material.customProgramCacheKey = () => 'atlas-part-4';
   return { material, uniforms };
 }
 
@@ -276,9 +296,11 @@ export function stylePartMaterial({ material, uniforms }: PartMaterial, s: PartS
   material.envMapIntensity = look.envIntensity;
   const rough = kit.roughness(look.finish);
   const normal = kit.normal(look.finish);
-  const changed = material.roughnessMap !== rough || material.normalMap !== normal;
+  const albedo = kit.albedo(look.finish);
+  const changed = material.roughnessMap !== rough || material.normalMap !== normal || material.map !== albedo;
   material.roughnessMap = rough;
   material.normalMap = normal;
+  material.map = albedo;
   // Orange peel on powder coat (and a trace on chitin), facets / fibres / rings on organisms; the rest keep the map at zero strength.
   material.normalScale.set(look.normal, look.normal);
   // Soft tissue: a little self-light in its own colour reads as light scattered under the surface.

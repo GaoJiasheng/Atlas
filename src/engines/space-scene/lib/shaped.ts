@@ -1,5 +1,5 @@
 /**
- * Layout maths of the shaped primitive kinds (lathe, extrude, curvedPanel,
+ * Layout maths of the shaped primitive kinds (lathe, coil, extrude, curvedPanel,
  * blades, coilBank, grille), shared by the WebGL builders, the part bounds
  * and the tests (pure, no three.js). Everything is in the primitive's own
  * frame, before `mirror` and `rotation`.
@@ -144,6 +144,35 @@ export function curvedPanelBox(p: Kind<'curvedPanel'>): { min: Vec3; max: Vec3 }
     }
   }
   return { min: [x0, -p.height / 2, z0], max: [x1, p.height / 2, z1] };
+}
+
+/** Where a partial lathe (`arc` < 360) starts, radians from +Z toward +X: the kept part is centred on −Z. */
+export function latheArcStart(arc: number): number {
+  return (180 - arc / 2) * DEG2RAD;
+}
+
+/** A closed lathe profile: it starts and ends on the axis, or comes back to its first point (a ring section). */
+export function latheProfileClosed(profile: readonly (readonly [number, number])[]): boolean {
+  const a = profile[0]!;
+  const b = profile[profile.length - 1]!;
+  return (a[0] < 1e-9 && b[0] < 1e-9) || (profile.length > 3 && Math.hypot(a[0] - b[0], a[1] - b[1]) < 1e-9);
+}
+
+/** The radius of a coil at height fraction `k` (0 bottom … 1 top). */
+export function helixRadius(p: Kind<'coil'>, k: number): number {
+  return typeof p.radius === 'number' ? p.radius : p.radius[0] + (p.radius[1] - p.radius[0]) * k;
+}
+
+/** A point of a coil's centre line at `k` (0 … 1 along it), in its own frame (axis Y, centred). */
+export function helixPoint(p: Kind<'coil'>, k: number): Vec3 {
+  const a = 2 * Math.PI * p.turns * k;
+  const r = helixRadius(p, k);
+  return [r * Math.sin(a), (k - 0.5) * p.length, r * Math.cos(a)];
+}
+
+export function helixBox(p: Kind<'coil'>): { min: Vec3; max: Vec3 } {
+  const r = (typeof p.radius === 'number' ? p.radius : Math.max(...p.radius)) + p.wire;
+  return { min: [-r, -p.length / 2 - p.wire, -r], max: [r, p.length / 2 + p.wire, r] };
 }
 
 export function latheBox(p: Kind<'lathe'>): { min: Vec3; max: Vec3 } {

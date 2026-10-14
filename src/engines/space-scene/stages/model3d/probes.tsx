@@ -163,6 +163,7 @@ export function LabelProbe({
 
     const fov = (camera as PerspectiveCamera).fov;
     const focal = H / 2 / Math.tan((fov * Math.PI) / 360);
+    bridge.focal = focal;
     // The body turned into an exercise position: anchors are in the model's frame.
     const rooted = !runtime.root.equals(IDENTITY);
     for (const [id, h] of handles) {

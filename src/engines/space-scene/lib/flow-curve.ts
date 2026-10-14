@@ -10,6 +10,9 @@
 import { CatmullRomCurve3, Vector3 } from 'three';
 import type { Vec3 } from './math';
 
+/** Paths in one multi-path flow (`paths`): the shader keeps a count, phase, fade and closed flag per path. */
+export const MAX_FLOW_PATHS = 16;
+
 /** Fewest and most baked samples per flow (the shader reads them from a 1-row float texture). */
 export const FLOW_SAMPLES_MIN = 64;
 export const FLOW_SAMPLES_MAX = 512;
@@ -79,4 +82,16 @@ export function sampleBaked(baked: BakedFlow, u: number): Vec3 {
   const f = x - i;
   const p = baked.points;
   return [0, 1, 2].map((c) => p[i * 3 + c]! + (p[(i + 1) * 3 + c]! - p[i * 3 + c]!) * f) as Vec3;
+}
+
+/**
+ * How a flow's `count` particles are spread over its paths: in proportion to
+ * length, at least 4 per path, the total kept (rounding goes to the longest).
+ */
+export function particlesPerPath(lengths: readonly number[], count: number): number[] {
+  const total = lengths.reduce((a, b) => a + b, 0) || 1;
+  const out = lengths.map((l) => Math.max(4, Math.floor((count * l) / total)));
+  const longest = lengths.indexOf(Math.max(...lengths));
+  out[longest] = Math.max(4, out[longest]! + count - out.reduce((a, b) => a + b, 0));
+  return out;
 }

@@ -57,6 +57,8 @@ export interface StageBridge {
   resolution: number;
   /** Camera distance to its target and the subject's bounding radius (non-context parts; label budget). */
   cameraDistance: number;
+  /** Stage pixels per scene unit at depth 1 (height ÷ 2 ÷ tan(fov ÷ 2)): a length at depth d spans length × focal ÷ d pixels. */
+  focal: number;
   modelRadius: number;
   anchors: Map<string, ScreenAnchor>;
   /** Attachment markers on show, projected (keys from lib/sites.ts `siteKey`). */
@@ -103,6 +105,7 @@ export function createBridge(): StageBridge {
     height: 0,
     resolution: 1,
     cameraDistance: 0,
+    focal: 0,
     modelRadius: 1,
     anchors: new Map(),
     sites: new Map(),

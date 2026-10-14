@@ -1,0 +1,148 @@
+{
+  "terms": [
+    {
+      "id": "electrical-system",
+      "term": { "en": "Electrical system", "zh": "电系统" },
+      "definition": {
+        "en": "An energy source, such as a battery, joined with parts such as wires, a bulb and a switch so that together they do a job, like giving light. A torch is one.",
+        "zh": "能源（比如电池）和导线、灯泡、开关等元件连在一起，共同完成一件事，比如发光。手电筒就是一个电系统。"
+      },
+      "see": ["electric-circuit", "battery"]
+    },
+    {
+      "id": "electric-circuit",
+      "term": { "en": "Electric circuit", "zh": "电路" },
+      "definition": {
+        "en": "The whole path that electric current can flow round, from one end of the battery, through the parts and back to the other end.",
+        "zh": "电流能流过的一整圈路径：从电池的一端出发，经过各个元件，回到另一端。"
+      },
+      "see": ["closed-circuit", "open-circuit", "circuit-diagram"]
+    },
+    {
+      "id": "closed-circuit",
+      "term": { "en": "Closed circuit", "zh": "闭合电路" },
+      "definition": {
+        "en": "A circuit with no gap anywhere in its loop. Current flows, so the bulb lights.",
+        "zh": "整个回路没有任何断开的地方。电路里有电流，灯泡会亮。"
+      },
+      "see": ["open-circuit", "switch"]
+    },
+    {
+      "id": "open-circuit",
+      "term": { "en": "Open circuit", "zh": "开路（断路）" },
+      "definition": {
+        "en": "A circuit with a gap somewhere: an open switch, a loose clip, a broken filament or an insulator in the way. No current flows anywhere in the loop.",
+        "zh": "回路某处断开了：开关断开、夹子松了、灯丝断了，或者中间隔着绝缘体。整个回路都没有电流。"
+      },
+      "see": ["closed-circuit", "switch"]
+    },
+    {
+      "id": "electric-current",
+      "term": { "en": "Electric current", "zh": "电流" },
+      "definition": {
+        "en": "The flow of electricity round a closed circuit. The battery pushes it; it is the same all the way round a single loop and is not used up by the bulb.",
+        "zh": "在闭合电路里流动的电。电池推动它；在只有一条路径的回路里，各处的电流一样大，不会被灯泡用掉。"
+      },
+      "see": ["battery", "closed-circuit"]
+    },
+    {
+      "id": "battery",
+      "term": { "en": "Battery", "zh": "电池" },
+      "definition": {
+        "en": "The energy source of a circuit. Chemicals inside push the current out of its positive end, round the circuit and back into its negative end. Scientists call a single one a cell.",
+        "zh": "电路的能源。里面的化学物质推动电流从正极流出，绕电路一圈，回到负极。科学家把单独的一节叫作“电池单体”。"
+      },
+      "see": ["terminal", "electric-current"]
+    },
+    {
+      "id": "terminal",
+      "term": { "en": "Terminal", "zh": "电极（接线端）" },
+      "definition": {
+        "en": "A place on a battery or another part where a wire is connected. A battery has two, positive and negative; a bulb's are the tip and the metal screw side.",
+        "zh": "电池或其他元件上接导线的地方。电池有正、负两极；灯泡的两个接线端是底部的尖端和金属螺口。"
+      },
+      "see": ["battery"]
+    },
+    {
+      "id": "switch",
+      "term": { "en": "Switch", "zh": "开关" },
+      "definition": {
+        "en": "A part that closes or opens a circuit. Closed, two pieces of metal touch and current can flow; open, there is a gap of air.",
+        "zh": "把电路接通或断开的元件。合上时两片金属相碰，电流能通过；断开时中间隔着空气。"
+      },
+      "see": ["closed-circuit", "open-circuit"]
+    },
+    {
+      "id": "filament",
+      "term": { "en": "Filament", "zh": "灯丝" },
+      "definition": {
+        "en": "The very thin coil of tungsten wire inside a bulb. Current flowing through it makes it so hot that it glows.",
+        "zh": "灯泡里一段极细的螺旋钨丝。电流通过时它热到发光。"
+      },
+      "see": ["electric-current"]
+    },
+    {
+      "id": "circuit-diagram",
+      "term": { "en": "Circuit diagram", "zh": "电路图" },
+      "definition": {
+        "en": "A drawing of a circuit that uses standard symbols for the battery, bulbs, switches and wires, so that anyone can read it and build the same circuit.",
+        "zh": "用标准符号画出电池、灯泡、开关和导线的电路图样，谁都能看懂，并照着搭出同样的电路。"
+      },
+      "see": ["electric-circuit"]
+    },
+    {
+      "id": "series",
+      "term": { "en": "Series", "zh": "串联" },
+      "definition": {
+        "en": "Parts joined one after another on a single path, so the same current flows through each. Batteries in series add their push; bulbs in series share it and glow dimmer.",
+        "zh": "元件一个接一个排在同一条路径上，流过每个元件的电流相同。电池串联，推动力相加；灯泡串联，共用推动力，各自更暗。"
+      },
+      "see": ["parallel"]
+    },
+    {
+      "id": "parallel",
+      "term": { "en": "Parallel", "zh": "并联" },
+      "definition": {
+        "en": "Parts joined side by side, each on its own path to the two ends of the battery. Each bulb glows about as brightly as a single bulb, and one can go out while the others stay lit.",
+        "zh": "元件并排连接，各自有一条通到电池两极的路径。每只灯泡都和单独一只时差不多亮；一只熄灭，其余照样亮。"
+      },
+      "see": ["series"]
+    },
+    {
+      "id": "conductor",
+      "term": { "en": "Electrical conductor", "zh": "导体" },
+      "definition": {
+        "en": "A material that lets electric current pass through it easily: metals such as copper, aluminium and steel, and also graphite.",
+        "zh": "容易让电流通过的材料：铜、铝、钢等金属，还有石墨。"
+      },
+      "see": ["insulator"]
+    },
+    {
+      "id": "insulator",
+      "term": { "en": "Electrical insulator", "zh": "绝缘体" },
+      "definition": {
+        "en": "A material that does not let electric current pass through: plastic, rubber, dry wood, glass and air.",
+        "zh": "不让电流通过的材料：塑料、橡胶、干木头、玻璃和空气。"
+      },
+      "see": ["conductor"]
+    },
+    {
+      "id": "short-circuit",
+      "term": { "en": "Short circuit", "zh": "短路" },
+      "definition": {
+        "en": "A path that lets current go round without passing through the bulb or other part, with almost nothing in its way. The current becomes very large and the wires and battery heat up.",
+        "zh": "电流不经过灯泡等用电器、几乎畅通无阻地绕回电池的一条路径。电流变得很大，导线和电池发热。"
+      },
+      "see": ["electric-circuit", "conductor"]
+    },
+    {
+      "id": "fair-test",
+      "term": { "en": "Fair test", "zh": "公平测试" },
+      "definition": {
+        "en": "An experiment in which only one thing is changed and everything else is kept the same, so that any difference in the result comes from that one change.",
+        "zh": "只改变一个量、其他都保持不变的实验，这样结果的不同只能来自这一个改变。"
+      },
+      "see": ["conductor"]
+    }
+  ]
+}

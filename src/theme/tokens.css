@@ -11,6 +11,7 @@
  *   --signal  emphasis: selection, current chapter
  *   --xray    X-RAY state                         --cut   cutaway face (ochre)
  *   --food    food in a gut (ochre-green)         --haemolymph  insect blood (teal-grey)
+ *   --lamp    a lit filament's glow (warm white)  --current  electric current in a circuit (dark gold)
  *   --muscle-1/2/3  human muscle layers (surface → deep)   --bone  bone (ivory)
  *   --mannequin  the exercise-mode figure (matte, quieter than the muscles)
  * Older names (`--accent-*`, `--bg`, `--surface`, `--border` ...) are mapped
@@ -99,6 +100,9 @@
   --cut: #b8973c;
   --food: #8a8a3c;
   --haemolymph: #7d948f;
+  /* Circuits (docs/23 §4.3 C4): a filament at full glow, and the current's particles (a short circuit runs --hot). */
+  --lamp: #ffc96b;
+  --current: #b88a12;
   /* Human anatomy (docs/16 §5.2): muscle layers, surface warmest to deep darkest; low-saturation, not blood red. */
   --muscle-1: #c48a76;
   --muscle-2: #ad7b6c;
@@ -182,6 +186,8 @@
   --cut: #cdb165;
   --food: #aead5c;
   --haemolymph: #9cb4ae;
+  --lamp: #ffd88f;
+  --current: #e0b53e;
   --muscle-1: #c9715b;
   --muscle-2: #9d5b53;
   --muscle-3: #70443f;

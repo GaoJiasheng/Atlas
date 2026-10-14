@@ -169,9 +169,9 @@ interface SceneState {         // 可序列化，和 URL 双向绑定
 
 ---
 
-## C. Simulation（参数模拟，二期）
+## C. Simulation（独立参数模拟引擎：作废，改为 SpaceScene 的「试一试」扩展）
 
-`{ params: Slider[], model: (params) => state, view: Chart | Diagram }`。光与影（光源高度 vs 影长）、热胀冷缩、电路电流、杠杆平衡。先留目录和 schema 占位，不实现。数学课（分数、比例）不走这里，走 §D MathScene（docs/15 D9）；Simulation 保留给科学类参数模拟。
+2026-10-14 定稿（docs/22 §0-2、docs/23 §0.1-1）：不做独立的 Simulation 引擎。电路、磁铁这类"实物 + 几个可调的量 + 一个算得出结果的模型"的主题，走 SpaceScene 的 `sim` 扩展（docs/06「SpaceScene · 试一试（sim）」）：`parts.json` 里声明控件（开关 / 步进 / 选择）、一个纯函数模型（`lib/sim/<kind>.ts`，`circuit` 已实现，`magnet` 为最小版）、输出和绑定（零件显隐 / 姿态 / 发光 / 份数 / 位移、流的每路径强度与颜色、动画转速与开关），章节写 `state.sim.set` 与 `state.sim.try`（改变 / 不变 / 观察、记一行、先猜后看）。`src/engines/simulation/` 仍是占位目录（schema 占位，不实现）；真正需要 2D 物理过程的主题（光与影的影长曲线、杠杆）以后再评估是加一个新的 `sim.kind` 还是新引擎。数学课（分数、比例）不走这里，走 §D MathScene（docs/15 D9）。
 
 ## D. MathScene（交互式分步课 + 练习，已实现）
 

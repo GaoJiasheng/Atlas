@@ -239,7 +239,7 @@ export function TopBar({ topic, chapters, chapter, chapterNumber, locale, path, 
           )}
           {commandKeys.length > 0 && (
             <span>
-              <kbd>{commandKeys.map(upper).join(' ')}</kbd> {tr('hud.keys.commands')}
+              <kbd>{commandKeys.map(upper).join(' ')}</kbd> {controls.commandsHint ? tx(controls.commandsHint, locale) : tr('hud.keys.commands')}
             </span>
           )}
           {pause && (

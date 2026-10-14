@@ -2,13 +2,16 @@
  * Engine-local UI state shared by the View (HUD controls) and the WebGL
  * stage (separate React roots): ORBIT turntable, REFERENCE mode, the
  * presentation (on) and the cover
- * camera (HUD hidden) and the glb's loading state and part bounds. None of it
+ * camera (HUD hidden) and the glb's loading state and part bounds, and the
+ * try-it card's data tables and predict-then-observe answer. None of it
  * goes into the URL; a chapter change ends ORBIT and REFERENCE.
  */
 import { createStore, type StoreApi } from 'zustand/vanilla';
 import type { OrbitCamera } from '../core/types';
 import type { SpaceSceneExt } from './index';
 import type { ExerciseBody } from '../../lib/anatomy';
+import type { SimValues } from './sim-schema';
+import type { TableRow } from './lib/sim/trial';
 
 /** What REFERENCE saved on entry, restored when it is switched off. */
 export interface ReferenceSave {
@@ -43,6 +46,10 @@ export interface SpaceUiState {
   meshBounds: ReadonlyMap<string, { min: readonly number[]; max: readonly number[] }> | null;
   /** QA (`__atlas.engine.test.exerciseBody`): the exercise body style instead of the data's (null = the data's). */
   exerciseBody: ExerciseBody | null;
+  /** Try-it data tables by chapter id (in memory only: a reload clears them, like MathScene's work). */
+  simTables: Readonly<Record<string, readonly TableRow[]>>;
+  /** A predict-then-observe answer: the option picked, and the values and observed reading before the change. */
+  simPredict: { chapter: string; guess: string; before: SimValues; value: number } | null;
 }
 
 export type SpaceUiStore = StoreApi<SpaceUiState>;
@@ -58,5 +65,7 @@ export function createSpaceUi(): SpaceUiStore {
     model: { state: 'none', progress: 0 },
     meshBounds: null,
     exerciseBody: null,
+    simTables: {},
+    simPredict: null,
   }));
 }

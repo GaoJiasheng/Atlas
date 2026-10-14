@@ -1,0 +1,43 @@
+/**
+ * Fair tests on the try-it card (docs/22 §4.3 S6, S7; pure, unit-tested):
+ * the in-memory data table ("record a row": one row per value of the varied
+ * control, the same value overwrites, at most 12) and the outcome a
+ * predict-then-observe comparison reports (never marked right or wrong).
+ */
+import type { SimValue } from '../../sim-schema';
+import type { SimOutputValue } from './index';
+
+export const MAX_TABLE_ROWS = 12;
+
+export interface TableRow {
+  /** The varied control's value (the row key). */
+  vary: SimValue;
+  /** Observed outputs at that value. */
+  values: Readonly<Record<string, SimOutputValue>>;
+}
+
+/** Add a row: the same varied value replaces its row in place; past 12 rows the oldest goes. */
+export function recordRow(rows: readonly TableRow[], row: TableRow): TableRow[] {
+  const i = rows.findIndex((r) => r.vary === row.vary);
+  if (i >= 0) return rows.map((r, j) => (j === i ? row : r));
+  return [...rows, row].slice(-MAX_TABLE_ROWS);
+}
+
+export type Outcome = 'more' | 'less' | 'same' | 'zero' | 'positive' | 'negative';
+
+/** Within this share of the larger value, two readings are "about the same". */
+export const SAME_BAND = 0.05;
+const EPS = 1e-6;
+
+/**
+ * What changed in an output between before and after: it stopped (`zero`),
+ * turned to the other sign (`negative` / `positive`), stayed within 5 %
+ * (`same`), or went up / down (`more` / `less`).
+ */
+export function outcomeOf(before: number, after: number): Outcome {
+  if (Math.abs(after) < EPS && Math.abs(before) >= EPS) return 'zero';
+  if (Math.sign(after) !== Math.sign(before) && Math.abs(after) >= EPS && Math.abs(before) >= EPS) return after < 0 ? 'negative' : 'positive';
+  const scale = Math.max(Math.abs(before), Math.abs(after));
+  if (scale < EPS || Math.abs(after - before) <= SAME_BAND * scale) return 'same';
+  return after > before ? 'more' : 'less';
+}

@@ -36,7 +36,7 @@
  *    stage resizes); when the HUD returns, 0.8 s back to the camera it left,
  *    unless the camera was moved meanwhile (a transition or a drag)
  */
-import { useEffect, useRef, type ComponentRef } from 'react';
+import { useEffect, useRef, useState, type ComponentRef } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei/core/OrbitControls';
 import type { PerspectiveCamera } from 'three';
@@ -74,6 +74,8 @@ function asOrbit(cam: unknown): OrbitCamera | null {
 
 /** How long an exercise camera waits for the exercise's sweep (the glb may still be loading) before it takes the transition's own camera. */
 const EXERCISE_SWEEP_WAIT_MS = 4000;
+/** An authored camera closer than the default zoom floor lowers the floor to this share of its distance. */
+const NEAR_SHARE = 0.7;
 
 /** Every move ends on a defined field of view (REFERENCE narrows it). */
 const withFov = (cam: OrbitCamera): OrbitCamera => ({ ...cam, fov: cam.fov ?? DEFAULT_FOV });
@@ -162,7 +164,22 @@ export function CameraRig({
     for (const listener of [...bridge.settleListeners]) listener();
   };
 
+  /**
+   * The zoom floor: 0.9 × the model radius by default, lowered to 70 % of an
+   * authored camera's distance when one comes closer (a chapter, beat or
+   * preset framing a magnified group or a small exhibit), so OrbitControls
+   * does not push it back out; a wider camera restores the default.
+   */
+  const [floor, setFloor] = useState(minDistance);
+  const relax = (cam: OrbitCamera) => {
+    const d = Math.hypot(cam.position[0] - cam.target[0], cam.position[1] - cam.target[1], cam.position[2] - cam.target[2]);
+    const next = Math.min(minDistance, d * NEAR_SHARE);
+    if (controls.current) controls.current.minDistance = next;
+    setFloor(next);
+  };
+
   const moveTo = (target: OrbitCamera, instant: boolean, id: number) => {
+    relax(target);
     const hint = ui.getState().nextTweenMs;
     if (hint !== null) ui.setState({ nextTweenMs: null });
     if (instant || prefersReducedMotion()) {
@@ -286,6 +303,7 @@ export function CameraRig({
   };
 
   const moveCover = (to: OrbitCamera) => {
+    relax(to);
     const id = store.getState().transition.id;
     if (prefersReducedMotion()) {
       tween.current = null;
@@ -410,7 +428,7 @@ export function CameraRig({
       makeDefault
       enableDamping
       dampingFactor={0.09}
-      minDistance={minDistance}
+      minDistance={floor}
       maxDistance={minDistance * 20}
       zoomSpeed={0.8}
       maxPolarAngle={Math.PI * 0.82}

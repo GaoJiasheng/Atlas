@@ -140,6 +140,8 @@ export interface SceneControls {
   };
   /** One-off commands with their keys (MathScene: check, hint, undo, example). */
   commands?: readonly SceneCommand[];
+  /** What the key hint calls the commands (default "check · hint · undo"; SpaceScene's try-it keys: "try it"). */
+  commandsHint?: HudText;
   /** Engine-specific test hooks, exposed as `window.__atlas.engine` (docs/06). */
   test?: Record<string, (...args: never[]) => unknown>;
   /** A `<Task id>` in a chapter body was pressed: go to that sub-step; true when it exists. */
@@ -278,6 +280,8 @@ export const LABELS_KEY = 'l';
 const RESERVED_KEYS = new Set([' ', 'h', 'escape', ',', '.']);
 /** Previous / next beat outside the presentation (`SceneControls.beatStep`). */
 export const BEAT_KEYS = { prev: ',', next: '.' } as const;
+/** SpaceScene's try-it card (docs/22 §4.3 S3): `[` `]` step the varied control, `T` flips the card's first switch; registered as commands. */
+export const SIM_KEYS = { prev: '[', next: ']', toggle: 't' } as const;
 
 /** Engine modes plus the host's LABELS switch when the engine supports it. */
 export function allModes(controls: SceneControls, labelsOn: boolean, labelsText: HudText): SceneMode[] {

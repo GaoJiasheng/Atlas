@@ -1,0 +1,91 @@
+---
+id: more-batteries
+order: 4
+title: {"en": "Adding batteries", "zh": "增加电池"}
+sensitive: false
+state:
+  labels: ["cell-1", "cell-holder", "filament-a"]
+  camera: {"position": [0.07, 0.3, 0.3], "target": [-0.02, 0.015, -0.05], "fov": 30}
+  summary: {"en": "More batteries joined end to end push more current, and the bulb glows brighter.", "zh": "头尾相接的电池越多，推动的电流越大，灯越亮。"}
+  sim: {"set": {"arrangement": "single", "cells": 1}, "try": {"vary": "cells", "also": ["flip-2"], "keep": [{"en": "Same bulb", "zh": "同一只灯泡"}, {"en": "Same wires", "zh": "同样的导线"}, "arrangement"], "observe": ["i-cells", "bright-a"], "record": true}}
+  beats:
+    - labels: ["cell-1", "filament-a"]
+      caption: {"en": "One battery, one bulb. The bulb glows, but dimly.", "zh": "一节电池、一只灯泡。灯亮了，但很暗。"}
+    - sim: {"set": {"cells": 2}}
+      labels: ["cell-1", "cell-2", "filament-a"]
+      caption: {"en": "Add a second battery, the positive end of one touching the negative end of the next. In this model the current doubles and the bulb is about four times as bright.", "zh": "加第二节电池，一节的正极接下一节的负极。在这个模型里，电流翻倍，灯大约亮了四倍。"}
+    - sim: {"set": {"cells": 3}}
+      labels: ["cell-3", "filament-a"]
+      caption: {"en": "A third battery makes it brighter still, but the bulb is now pushed far past what it is made for. A real bulb used like this may burn out, and a broken filament breaks the circuit.", "zh": "第三节电池让它更亮，但灯泡已经远远超过它的设计用量。真灯泡这样用可能会烧坏，灯丝一断，电路就断了。"}
+    - sim: {"set": {"cells": 3, "flip-2": true}}
+      labels: ["cell-2", "filament-a"]
+      caption: {"en": "Turn one battery the wrong way round and it pushes against the others. Three batteries with one reversed light the bulb about as dimly as one.", "zh": "把一节电池装反，它就和其他电池对着推。三节里装反一节，灯只和一节电池时差不多暗。"}
+    - sim: {"set": {"cells": 2}}
+      labels: ["cell-holder", "filament-a"]
+      caption: {"en": "Only the number of batteries was changed; the bulb, the wires and the switch stayed the same. That is a fair test, and the table shows the pattern.", "zh": "只改了电池的个数，灯泡、导线和开关都不变。这就是公平测试，表格里能看出规律。"}
+  index: {"parts": ["cell-holder", "cell-1", "cell-2", "cell-3", "bulb-a", "filament-a"]}
+---
+
+<Lang en>
+
+Start with one battery and one bulb. The circuit is closed and the bulb glows, but dimly. The holder has room for three batteries, and a brass link bar in each empty slot carries the current past it. <FlyTo preset="batteries-view">Look at the battery holder</FlyTo>
+
+Add a second battery so that the raised positive end of one presses against the flat negative end of the next. Batteries joined one after another like this are in <Term id="series">series</Term>, and their pushes add together. A stronger push drives a larger current round the circuit, and the bulb becomes much brighter.
+
+A third battery in series makes the current larger again and the bulb brighter still. But a small bulb is made for a certain current, and with three batteries this one is pushed far beyond it. A real bulb used like this may burn out. Once its filament melts through there is a gap, the circuit is open and everything goes dark.
+
+Turn one battery round the wrong way and it pushes against the others. With three batteries and one of them reversed, the bulb is about as dim as with a single battery.
+
+From one row of the table to the next, only the number of batteries changes. The bulb, the wires, the switch and the way they are joined stay the same, so this is a fair test, and the table shows a clear pattern: more batteries in series, a larger current and a brighter bulb. Use the Try it card to change the number of batteries, turn the second one round, and record a row each time.
+
+<More title={{ en: "Volts", zh: "伏特" }}>
+
+Each AA battery is marked <Num s="S10">1.5 V</Num>. The volt measures how hard a battery pushes; voltage is studied properly in secondary school. In series the pushes add: two batteries give <Num s="S7">3.0 V</Num> and three give <Num s="S7">4.5 V</Num>, while one reversed takes its <Num s="S7">1.5 V</Num> away. The bulb is made for <Num s="S13">2.5 V</Num>. In this model the two batteries' ends show <Num s="S1">2.93 V</Num> while lighting one bulb, a little less than <Num s="S1">3.0 V</Num>, because the batteries resist the current a little inside.
+
+</More>
+
+<More title={{ en: "Why the brightness more than doubles", zh: "亮度为什么不止翻倍" }}>
+
+In this model one battery drives <Num s="S1">0.118 A</Num> through the bulb and gives a brightness of <Num s="S1">26</Num>; two batteries drive <Num s="S1">0.233 A</Num>, brightness <Num s="S1">100</Num>; three drive <Num s="S1">0.346 A</Num>, brightness <Num s="S1">220</Num>. Three batteries with one reversed drive <Num s="S1">0.115 A</Num>, brightness <Num s="S1">24</Num>. Doubling the current makes the bulb about four times as bright, because the energy given out each second grows with the current multiplied by itself. With three batteries the bulb gives out <Num s="S1">1.50 W</Num>, three times the <Num s="S13">0.5 W</Num> it is made for.
+
+</More>
+
+<More title={{ en: "Model and real bulbs", zh: "模型与真灯泡" }}>
+
+The model keeps the filament's resistance fixed at its hot value. A real filament resists much less when cold, roughly <Num s="S4">a tenth</Num> as much, and more as it heats up. So in a real circuit a dim bulb is a little brighter than the model says, and the bulb on three batteries draws a little less. A battery's own resistance also rises as it runs down. The model's numbers are illustrative; the order, dimmer with fewer batteries and brighter with more, is right.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+先用一节电池、一只灯泡。电路是闭合的，灯泡亮了，但很暗。电池盒能装三节电池，空着的槽由槽底的黄铜连接条接通。<FlyTo preset="batteries-view">看电池盒</FlyTo>
+
+再加一节电池，让一节凸起的正极顶住下一节平平的负极。电池这样一节接一节地连起来，叫作<Term id="series">串联</Term>，它们的推动力会相加。推动力大了，电路里的电流就大，灯泡亮了许多。
+
+再串上第三节，电流更大，灯泡更亮。可是小灯泡只能承受一定的电流，三节电池已经让它远远超出了设计的用量。真灯泡这样用，可能会烧坏：灯丝一旦熔断，就出现一个缺口，电路断开，灯全灭了。
+
+把其中一节电池装反，它就和其他电池对着推。三节电池里装反一节，灯泡和只有一节电池时差不多暗。
+
+数据表里，每一行和下一行相比，只有电池的节数变了。灯泡、导线、开关和连接方式都不变，所以这是一次公平测试，表格里的规律很清楚：串联的电池越多，电流越大，灯越亮。用「试一试」卡片改变电池的节数、把第二节反过来，每次都记一行。
+
+<More title={{ en: "Volts", zh: "伏特" }}>
+
+每节 AA 电池上都标着 <Num s="S10">1.5 V</Num>。伏特（V）衡量电池推得多用力，电压要到中学才正式学。串联时推动力相加：两节是 <Num s="S7">3.0 V</Num>，三节是 <Num s="S7">4.5 V</Num>；装反一节，就减去它的 <Num s="S7">1.5 V</Num>。灯泡是按 <Num s="S13">2.5 V</Num> 设计的。在这个模型里，两节电池点亮一只灯时，电池两端是 <Num s="S1">2.93 V</Num>，比 <Num s="S1">3.0 V</Num> 略低，因为电池内部对电流也有一点阻碍。
+
+</More>
+
+<More title={{ en: "Why the brightness more than doubles", zh: "亮度为什么不止翻倍" }}>
+
+在这个模型里，一节电池让 <Num s="S1">0.118 A</Num> 的电流流过灯泡，亮度 <Num s="S1">26</Num>；两节是 <Num s="S1">0.233 A</Num>，亮度 <Num s="S1">100</Num>；三节是 <Num s="S1">0.346 A</Num>，亮度 <Num s="S1">220</Num>。三节里装反一节，是 <Num s="S1">0.115 A</Num>，亮度 <Num s="S1">24</Num>。电流翻一倍，灯泡大约亮四倍，因为灯泡每秒放出的能量随“电流乘电流”增长。三节电池时，灯泡的功率是 <Num s="S1">1.50 W</Num>，是它设计功率 <Num s="S13">0.5 W</Num> 的三倍。
+
+</More>
+
+<More title={{ en: "Model and real bulbs", zh: "模型与真灯泡" }}>
+
+模型把灯丝的电阻固定在发热时的数值。真实的灯丝冷的时候电阻小得多，约为热时的<Num s="S4">十分之一</Num>，越热电阻越大。所以在真电路里，暗的灯泡会比模型说的稍亮一点，接三节电池的灯泡电流会稍小一点。电池用旧了，自身的阻碍也会变大。模型的数字只是示意，但“电池少就暗、电池多就亮”这个顺序是对的。
+
+</More>
+
+</Lang>

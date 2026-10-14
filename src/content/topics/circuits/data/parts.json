@@ -1,0 +1,8058 @@
+{
+  "parts": [
+    {
+      "id": "torch-body",
+      "name": {
+        "en": "Torch case",
+        "zh": "手电筒外壳"
+      },
+      "group": "torch",
+      "summary": {
+        "en": "Holds the batteries, switch and bulb in one tube.",
+        "zh": "把电池、开关和灯泡装在一根筒里。"
+      },
+      "detail": {
+        "en": "A tube with a wider head for the reflector and a screw-on tail cap. On the stage it can be made see-through (X-RAY) to show the parts inside.\n\nIn this design the torch is 160 mm long and the tube 32 mm across, just wide enough for two AA batteries end to end [S1][S10]. The current does not flow through the case here: it goes along the brass strip inside.\n\nIf the tail cap works loose, the spring stops pressing the batteries together, the loop opens at a contact and the torch flickers or goes out.",
+        "zh": "一根筒，前端灯头较粗，装反光碗，后端是拧上去的尾盖。舞台上可以把它变成透明（X-RAY），看清里面的零件。\n\n这个设计里，手电筒长 160 mm，筒径 32 mm，刚好装下头尾相接的两节 AA 电池 [S1][S10]。这支手电筒的电流不走外壳，而是沿里面的黄铜片流动。\n\n尾盖松了，弹簧就压不紧电池，回路会在某个接触点断开，手电筒忽明忽暗，甚至不亮。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0,
+            -0.08
+          ],
+          [
+            0.0105,
+            -0.08
+          ],
+          [
+            0.011,
+            -0.0795
+          ],
+          [
+            0.011,
+            -0.0765
+          ],
+          [
+            0.0113,
+            -0.076
+          ],
+          [
+            0.0113,
+            -0.0725
+          ],
+          [
+            0.011,
+            -0.072
+          ],
+          [
+            0.011,
+            0.028
+          ],
+          [
+            0.0125,
+            0.034
+          ],
+          [
+            0.0172,
+            0.047
+          ],
+          [
+            0.018,
+            0.05
+          ],
+          [
+            0.018,
+            0.0785
+          ],
+          [
+            0.0175,
+            0.08
+          ],
+          [
+            0.0165,
+            0.08
+          ],
+          [
+            0.0165,
+            0.0525
+          ],
+          [
+            0.0098,
+            0.0335
+          ],
+          [
+            0.0097,
+            0.03
+          ],
+          [
+            0.0097,
+            -0.0785
+          ],
+          [
+            0,
+            -0.0785
+          ]
+        ],
+        "segments": 48,
+        "at": [
+          -0.33,
+          0.0185,
+          0.105
+        ],
+        "color": "powder",
+        "rotation": [
+          0,
+          0,
+          -90
+        ],
+        "tint": "#4a554d"
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0166,
+            0.0166,
+            0.0016
+          ],
+          "at": [
+            -0.2525,
+            0.0185,
+            0.105
+          ],
+          "color": "glass",
+          "rotation": [
+            0,
+            0,
+            90
+          ]
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0.0181,
+              -0.004
+            ],
+            [
+              0.0186,
+              -0.0035
+            ],
+            [
+              0.0186,
+              0.0035
+            ],
+            [
+              0.0181,
+              0.004
+            ],
+            [
+              0.0181,
+              -0.004
+            ]
+          ],
+          "segments": 48,
+          "at": [
+            -0.2555,
+            0.0185,
+            0.105
+          ],
+          "color": "stainless",
+          "rotation": [
+            0,
+            0,
+            -90
+          ]
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.06
+      },
+      "shell": true,
+      "connects": [
+        "torch-switch",
+        "torch-reflector"
+      ]
+    },
+    {
+      "id": "torch-cells",
+      "name": {
+        "en": "Torch batteries",
+        "zh": "手电筒里的电池"
+      },
+      "group": "torch",
+      "summary": {
+        "en": "Push the current round the torch's loop.",
+        "zh": "推动电流在手电筒的回路里流动。"
+      },
+      "detail": {
+        "en": "Two alkaline AA batteries, each about 14.5 mm across and 50.5 mm long and marked 1.5 V [S10]. They lie end to end, the raised positive end of the back battery pressing on the flat negative end of the front one, so their pushes add [S7].\n\nIn this model the two batteries push 0.233 A through the torch bulb, the same as two batteries and one bulb on the board [S1].\n\nPut one in the wrong way round and its push cancels the other's, so the bulb stays dark [S7]. As the batteries run down, their resistance inside rises and the beam grows dimmer [S11].",
+        "zh": "两节碱性 AA 电池，每节直径约 14.5 mm、长 50.5 mm，标称 1.5 V [S10]。它们头尾相接：后面一节凸起的正极顶住前面一节平平的负极，推动力相加 [S7]。\n\n在这个模型里，两节电池给手电筒灯泡的电流是 0.233 A，和电路板上两节电池点一只灯时一样 [S1]。\n\n装反一节，两节的推动力互相抵消，灯泡不亮 [S7]。电池用旧了，内部的阻碍变大，光就越来越暗 [S11]。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0,
+            -0.02525
+          ],
+          [
+            0.00675,
+            -0.02525
+          ],
+          [
+            0.00725,
+            -0.02485
+          ],
+          [
+            0.00725,
+            0.02375
+          ],
+          [
+            0.00685,
+            0.02425
+          ],
+          [
+            0.0034,
+            0.02425
+          ],
+          [
+            0.0028,
+            0.02435
+          ],
+          [
+            0.0028,
+            0.02525
+          ],
+          [
+            0,
+            0.02525
+          ]
+        ],
+        "segments": 32,
+        "at": [
+          -0.3495,
+          0.0185,
+          0.105
+        ],
+        "color": "powder",
+        "rotation": [
+          0,
+          0,
+          -90
+        ],
+        "tint": "#4c5158"
+      },
+      "extra": [
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0.00729,
+              0.01905
+            ],
+            [
+              0.00729,
+              0.02365
+            ],
+            [
+              0.00695,
+              0.02365
+            ],
+            [
+              0.00695,
+              0.01905
+            ],
+            [
+              0.00729,
+              0.01905
+            ]
+          ],
+          "segments": 32,
+          "at": [
+            -0.3495,
+            0.0185,
+            0.105
+          ],
+          "color": "powder",
+          "rotation": [
+            0,
+            0,
+            -90
+          ],
+          "tint": "#b0773a"
+        }
+      ],
+      "repeat": {
+        "count": 2,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "spacing": 0.0505
+      },
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.05
+      },
+      "connects": [
+        "torch-spring",
+        "torch-bulb"
+      ]
+    },
+    {
+      "id": "torch-spring",
+      "name": {
+        "en": "Tail spring",
+        "zh": "尾部弹簧"
+      },
+      "group": "torch",
+      "summary": {
+        "en": "Presses the batteries together and carries current.",
+        "zh": "压紧电池，同时让电流通过。"
+      },
+      "detail": {
+        "en": "A cone-shaped coil of steel wire in the tail cap. Its narrow end presses on the flat negative end of the back battery and keeps both batteries pushed forward against the bulb.\n\nSteel is a metal and a conductor [S4], so the spring is also part of the loop: current passes from the brass strip through the spring into the battery.\n\nA weak, bent or rusty spring makes a poor contact, and a poor contact anywhere is a gap in the loop: the torch flickers when it is shaken.",
+        "zh": "尾盖里一根锥形的钢丝弹簧。细的一端顶住后面那节电池平平的负极，把两节电池一起向前压向灯泡。\n\n钢是金属，是导体 [S4]，所以弹簧也是回路的一部分：电流从黄铜片经过弹簧进入电池。\n\n弹簧没劲、弯了或生锈，接触就不好；回路上任何一处接触不好都等于一个缺口，手电筒一晃就闪。"
+      },
+      "primitive": {
+        "kind": "coil",
+        "radius": [
+          0.0058,
+          0.0028
+        ],
+        "wire": 0.00038,
+        "turns": 5.5,
+        "length": 0.0072,
+        "at": [
+          -0.4045,
+          0.0185,
+          0.105
+        ],
+        "color": "steel",
+        "rotation": [
+          0,
+          0,
+          -90
+        ]
+      },
+      "explode": {
+        "dir": [
+          -1,
+          0,
+          0
+        ],
+        "dist": 0.05
+      },
+      "connects": [
+        "torch-cells",
+        "torch-strip"
+      ]
+    },
+    {
+      "id": "torch-strip",
+      "name": {
+        "en": "Metal strip",
+        "zh": "金属片"
+      },
+      "group": "torch",
+      "summary": {
+        "en": "Carries current from the spring to the switch.",
+        "zh": "把电流从弹簧引到开关。"
+      },
+      "detail": {
+        "en": "A thin strip of brass that runs along the inside wall of the tube, from the tail cap to the switch, bent over at both ends to make contact.\n\nBrass is a metal and lets current through easily [S4]. It does the job of a wire inside the torch, joining the back of the batteries to the front of the loop.\n\nIf the strip is bent away from its contacts or corroded, there is a gap in the loop and the switch no longer turns the torch on.",
+        "zh": "一条细长的黄铜片，沿筒的内壁从尾盖一直通到开关，两端折弯，压在接触点上。\n\n黄铜是金属，很容易让电流通过 [S4]。它在手电筒里起导线的作用，把电池后端和回路前端连起来。\n\n金属片弯离了接触点或者生锈，回路上就有缺口，开关再怎么推，手电筒也不亮。"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.098,
+          0.0005,
+          0.004
+        ],
+        "at": [
+          -0.359,
+          0.0276,
+          0.105
+        ],
+        "color": "brass"
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "size": [
+            0.0005,
+            0.007,
+            0.004
+          ],
+          "at": [
+            -0.4082,
+            0.0243,
+            0.105
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.006,
+            0.0005,
+            0.004
+          ],
+          "at": [
+            -0.4055,
+            0.0209,
+            0.105
+          ],
+          "color": "brass"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.035
+      },
+      "connects": [
+        "torch-spring",
+        "torch-switch"
+      ]
+    },
+    {
+      "id": "torch-switch",
+      "name": {
+        "en": "Torch switch",
+        "zh": "手电筒开关"
+      },
+      "group": "torch",
+      "summary": {
+        "en": "Closes or opens the torch's loop.",
+        "zh": "接通或断开手电筒的回路。"
+      },
+      "detail": {
+        "en": "A slide switch on the side of the tube. Pushed forward, a brass contact under the button presses against the bulb holder and the loop is complete; pulled back, a gap of air opens between them.\n\nWith the switch on, in this model the current is 0.233 A and the bulb's brightness is 100 [S1]. With it off the current stops everywhere in the loop at once, not just in front of the switch.\n\nA worn switch whose contact no longer reaches the holder leaves the torch dark even when the batteries are fresh.",
+        "zh": "筒侧面的一个拨动开关。往前推，按钮下面的黄铜触片压到灯座上，回路接通；往后拉，两者之间隔开一段空气。\n\n开关打开时，在这个模型里电流是 0.233 A，灯泡亮度 100 [S1]。关上时，整个回路的电流同时停下，不只是开关前面那一段。\n\n开关磨损了，触片碰不到灯座，即使电池是新的，手电筒也不亮。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.012,
+          0.0035,
+          0.0075
+        ],
+        "bevel": 0.0012,
+        "at": [
+          -0.318,
+          0.0313,
+          0.105
+        ],
+        "color": "plastic",
+        "tint": "#1f1f1e"
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "size": [
+            0.016,
+            0.0006,
+            0.004
+          ],
+          "at": [
+            -0.316,
+            0.0273,
+            0.105
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.0006,
+            0.004,
+            0.003
+          ],
+          "at": [
+            -0.308,
+            0.0253,
+            0.105
+          ],
+          "color": "brass"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.045
+      },
+      "connects": [
+        "torch-strip",
+        "torch-bulb"
+      ]
+    },
+    {
+      "id": "torch-bulb",
+      "name": {
+        "en": "Torch bulb",
+        "zh": "手电筒灯泡"
+      },
+      "group": "torch",
+      "summary": {
+        "en": "Glows when current flows through its filament.",
+        "zh": "电流流过灯丝时发光。"
+      },
+      "detail": {
+        "en": "The same kind of miniature bulb as on the board, rated 2.5 V and 0.2 A, with a glass globe 11 mm across and a screw base [S13].\n\nCurrent enters at the tip of the base, rises through one support wire, crosses the coiled filament, which glows white at more than 2,500 °C [S15], and leaves through the metal screw side.\n\nWhen the filament breaks, the loop has a gap inside the bulb and the torch stays dark until the bulb is replaced.",
+        "zh": "和电路板上同一种微型灯泡，额定 2.5 V、0.2 A，玻璃泡直径 11 mm，螺口灯头 [S13]。\n\n电流从灯头底部的尖端进去，沿一根支撑丝上升，穿过螺旋灯丝，灯丝在 2,500 ℃ 以上发出白光 [S15]，再从金属螺口出来。\n\n灯丝一断，回路就在灯泡里出现缺口，换灯泡之前手电筒都不会亮。"
+      },
+      "primitive": {
+        "kind": "coil",
+        "radius": 0.0005,
+        "wire": 8e-05,
+        "turns": 7,
+        "length": 0.003,
+        "at": [
+          -0.2803,
+          0.0185,
+          0.105
+        ],
+        "color": "steel",
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "extra": [
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0.00342,
+              0
+            ],
+            [
+              0.00409,
+              0.00114
+            ],
+            [
+              0.00494,
+              0.00342
+            ],
+            [
+              0.00522,
+              0.0057
+            ],
+            [
+              0.00494,
+              0.00817
+            ],
+            [
+              0.00399,
+              0.01026
+            ],
+            [
+              0.00228,
+              0.01159
+            ],
+            [
+              0,
+              0.01197
+            ]
+          ],
+          "segments": 32,
+          "at": [
+            -0.2881,
+            0.0185,
+            0.105
+          ],
+          "color": "glass",
+          "rotation": [
+            0,
+            0,
+            -90
+          ]
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              0
+            ],
+            [
+              0.0012,
+              0
+            ],
+            [
+              0.0014,
+              0.0006
+            ],
+            [
+              0.0024,
+              0.0008
+            ],
+            [
+              0.0034,
+              0.0016
+            ],
+            [
+              0.0046,
+              0.0018
+            ],
+            [
+              0.005,
+              0.0026
+            ],
+            [
+              0.0046,
+              0.0034
+            ],
+            [
+              0.0046,
+              0.0034
+            ],
+            [
+              0.005,
+              0.0042
+            ],
+            [
+              0.0046,
+              0.005
+            ],
+            [
+              0.0046,
+              0.005
+            ],
+            [
+              0.005,
+              0.0058
+            ],
+            [
+              0.0046,
+              0.0066
+            ],
+            [
+              0.0046,
+              0.0066
+            ],
+            [
+              0.005,
+              0.0074
+            ],
+            [
+              0.0046,
+              0.0082
+            ],
+            [
+              0.0046,
+              0.0082
+            ],
+            [
+              0.005,
+              0.009
+            ],
+            [
+              0.0046,
+              0.0098
+            ],
+            [
+              0.0047,
+              0.0097
+            ],
+            [
+              0.0038,
+              0.0099
+            ],
+            [
+              0,
+              0.0099
+            ]
+          ],
+          "segments": 32,
+          "at": [
+            -0.298,
+            0.0185,
+            0.105
+          ],
+          "color": "brass",
+          "rotation": [
+            0,
+            0,
+            -90
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              -0.0032,
+              0.0003,
+              0
+            ],
+            [
+              -0.0082,
+              -0.0007,
+              0
+            ]
+          ],
+          "radius": 0.00012,
+          "caps": "round",
+          "at": [
+            -0.2803,
+            0.02,
+            0.105
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              -0.0032,
+              -0.0003,
+              0
+            ],
+            [
+              -0.0082,
+              0.0007,
+              0
+            ]
+          ],
+          "radius": 0.00012,
+          "caps": "round",
+          "at": [
+            -0.2803,
+            0.017,
+            0.105
+          ],
+          "color": "steel"
+        }
+      ],
+      "explode": {
+        "dir": [
+          1,
+          0,
+          0
+        ],
+        "dist": 0.05
+      },
+      "connects": [
+        "torch-cells",
+        "torch-reflector"
+      ]
+    },
+    {
+      "id": "torch-reflector",
+      "name": {
+        "en": "Reflector and lens",
+        "zh": "反光碗与透镜"
+      },
+      "group": "torch",
+      "summary": {
+        "en": "Gathers the bulb's light into a forward beam.",
+        "zh": "把灯光聚成向前的光束。"
+      },
+      "detail": {
+        "en": "A polished bowl with a curved, parabolic shape and the bulb at its centre, closed at the front by a clear lens.\n\nLight from the bulb that would spread sideways hits the bowl and is sent forward, so the torch throws a beam instead of lighting all round. The lens keeps dust out and lets the light through. Neither part carries current.\n\nA dented or dusty reflector scatters the light and the beam looks weaker, even though the bulb is just as bright.",
+        "zh": "一个抛光的碗，弯成抛物面形状，灯泡在它中央，前面用透明的透镜封住。\n\n灯泡向四周散开的光照到碗壁上，被反射向前，所以手电筒射出的是一束光，而不是照亮四周。透镜挡住灰尘，让光透出去。这两件都不让电流通过。\n\n反光碗凹了或积了灰，光会散开，光束看起来就弱了，尽管灯泡本身一样亮。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0.0062,
+            0
+          ],
+          [
+            0.0096,
+            0.012
+          ],
+          [
+            0.0128,
+            0.024
+          ],
+          [
+            0.0158,
+            0.036
+          ],
+          [
+            0.0164,
+            0.04
+          ],
+          [
+            0.0157,
+            0.04
+          ],
+          [
+            0.0151,
+            0.036
+          ],
+          [
+            0.0121,
+            0.024
+          ],
+          [
+            0.0089,
+            0.012
+          ],
+          [
+            0.0056,
+            0.0006
+          ],
+          [
+            0.0062,
+            0
+          ]
+        ],
+        "segments": 48,
+        "at": [
+          -0.293,
+          0.0185,
+          0.105
+        ],
+        "color": "stainless",
+        "rotation": [
+          0,
+          0,
+          -90
+        ]
+      },
+      "explode": {
+        "dir": [
+          1,
+          0,
+          0
+        ],
+        "dist": 0.07
+      },
+      "shell": true,
+      "connects": [
+        "torch-bulb",
+        "torch-body"
+      ]
+    },
+    {
+      "id": "cell-holder",
+      "name": {
+        "en": "Battery holder",
+        "zh": "电池盒"
+      },
+      "group": "source",
+      "summary": {
+        "en": "Joins the batteries end to end.",
+        "zh": "把电池头尾相接地连在一起。"
+      },
+      "detail": {
+        "en": "A black plastic holder with three slots in a row, metal contacts at each end and a spring at the negative end. A red lead leaves from the positive end, a black one from the negative end. A brass link bar runs along the floor of each slot: with a battery in place it is covered, and in an empty slot it carries the current past the gap, so the board can run on one, two or three batteries.\n\nThe holder joins the batteries in series: the positive end of one touches the negative end of the next, so their pushes add [S7]. In this model one battery gives 0.118 A through one bulb, two give 0.233 A and three give 0.346 A [S1].\n\nA battery put in backwards pushes against the others: in this model three batteries with one reversed give 0.115 A, about the same as one battery [S1][S7].",
+        "zh": "一个黑色塑料电池盒，三个槽排成一排，两端是金属簧片，负极一端是弹簧。红色导线从正极引出，黑色导线从负极引出。每个槽底有一根黄铜连接条：装了电池时被电池盖住，槽空着时，电流就从它上面通过，所以电路板可以用一节、两节或三节电池。\n\n电池盒把电池串联起来：一节的正极接下一节的负极，推动力相加 [S7]。在这个模型里，点一只灯时，一节电池 0.118 A，两节 0.233 A，三节 0.346 A [S1]。\n\n装反的电池会和其他电池对着推：在这个模型里，三节里装反一节，电流是 0.115 A，和只有一节差不多 [S1][S7]。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.168,
+          0.003,
+          0.019
+        ],
+        "bevel": 0.0008,
+        "at": [
+          0,
+          0.0135,
+          -0.1
+        ],
+        "color": "powder",
+        "tint": "#222222"
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.003,
+            0.016,
+            0.019
+          ],
+          "bevel": 0.0006,
+          "at": [
+            -0.0855,
+            0.02,
+            -0.1
+          ],
+          "color": "powder",
+          "tint": "#222222"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.003,
+            0.016,
+            0.019
+          ],
+          "bevel": 0.0006,
+          "at": [
+            0.0855,
+            0.02,
+            -0.1
+          ],
+          "color": "powder",
+          "tint": "#222222"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.168,
+            0.011,
+            0.0016
+          ],
+          "at": [
+            0,
+            0.0175,
+            -0.1087
+          ],
+          "color": "powder",
+          "tint": "#222222"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.168,
+            0.011,
+            0.0016
+          ],
+          "at": [
+            0,
+            0.0175,
+            -0.0913
+          ],
+          "color": "powder",
+          "tint": "#222222"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.0016,
+            0.006,
+            0.0158
+          ],
+          "at": [
+            -0.0262,
+            0.015,
+            -0.1
+          ],
+          "color": "powder",
+          "tint": "#222222"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.0016,
+            0.006,
+            0.0158
+          ],
+          "at": [
+            0.0262,
+            0.015,
+            -0.1
+          ],
+          "color": "powder",
+          "tint": "#222222"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.0007,
+            0.009,
+            0.008
+          ],
+          "at": [
+            0.0838,
+            0.02225,
+            -0.1
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "coil",
+          "radius": [
+            0.0045,
+            0.0022
+          ],
+          "wire": 0.00035,
+          "turns": 4.5,
+          "length": 0.004,
+          "at": [
+            -0.0815,
+            0.02225,
+            -0.1
+          ],
+          "color": "steel",
+          "rotation": [
+            0,
+            0,
+            -90
+          ]
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0018,
+            0.0018,
+            0.047
+          ],
+          "at": [
+            0.0525,
+            0.01775,
+            -0.1
+          ],
+          "color": "brass",
+          "rotation": [
+            0,
+            0,
+            90
+          ]
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0018,
+            0.0018,
+            0.047
+          ],
+          "at": [
+            0,
+            0.01775,
+            -0.1
+          ],
+          "color": "brass",
+          "rotation": [
+            0,
+            0,
+            90
+          ]
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0018,
+            0.0018,
+            0.047
+          ],
+          "at": [
+            -0.0525,
+            0.01775,
+            -0.1
+          ],
+          "color": "brass",
+          "rotation": [
+            0,
+            0,
+            90
+          ]
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          0,
+          -1
+        ],
+        "dist": 0.05
+      },
+      "connects": [
+        "cell-1",
+        "cell-2",
+        "cell-3",
+        "leads"
+      ]
+    },
+    {
+      "id": "cell-1",
+      "name": {
+        "en": "Battery 1",
+        "zh": "电池 1"
+      },
+      "group": "source",
+      "summary": {
+        "en": "Pushes current round the circuit.",
+        "zh": "推动电流在电路里流动。"
+      },
+      "detail": {
+        "en": "An alkaline AA battery, about 14.5 mm across, 50.5 mm long and 23 g, marked 1.5 V [S10]. The positive end has a raised button; the negative end is flat. The model draws no plus or minus signs: the shape shows which end is which.\n\nInside, zinc and manganese dioxide react whenever the circuit is closed, turning stored chemical energy into electrical energy that pushes the current out of the positive end, round the circuit and back into the negative end [S11][S3]. In this model it has a resistance of 0.15 Ω inside, the low end of a fresh battery's range [S1][S10].\n\nWhen the chemicals have reacted the battery is flat; long before that, its resistance inside rises and the bulb grows dimmer [S11][S7].",
+        "zh": "一节碱性 AA 电池，直径约 14.5 mm、长 50.5 mm、重 23 g，标称 1.5 V [S10]。正极一端有一个凸起的小帽，负极一端是平的。模型上不画正负号，靠形状分辨两极。\n\n只要电路闭合，里面的锌和二氧化锰就发生反应，把储存的化学能变成电能，推动电流从正极流出、绕电路一圈、回到负极 [S11][S3]。在这个模型里，它内部的电阻是 0.15 Ω，是新电池范围的低端 [S1][S10]。\n\n化学物质反应完了，电池就没电了；在那之前很久，内部的阻碍就已经变大，灯泡越来越暗 [S11][S7]。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0,
+            -0.02525
+          ],
+          [
+            0.00675,
+            -0.02525
+          ],
+          [
+            0.00725,
+            -0.02485
+          ],
+          [
+            0.00725,
+            0.02375
+          ],
+          [
+            0.00685,
+            0.02425
+          ],
+          [
+            0.0034,
+            0.02425
+          ],
+          [
+            0.0028,
+            0.02435
+          ],
+          [
+            0.0028,
+            0.02525
+          ],
+          [
+            0,
+            0.02525
+          ]
+        ],
+        "segments": 40,
+        "at": [
+          0.0525,
+          0.02225,
+          -0.1
+        ],
+        "color": "powder",
+        "rotation": [
+          0,
+          0,
+          -90
+        ],
+        "tint": "#4c5158"
+      },
+      "extra": [
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0.00729,
+              0.01905
+            ],
+            [
+              0.00729,
+              0.02365
+            ],
+            [
+              0.00695,
+              0.02365
+            ],
+            [
+              0.00695,
+              0.01905
+            ],
+            [
+              0.00729,
+              0.01905
+            ]
+          ],
+          "segments": 40,
+          "at": [
+            0.0525,
+            0.02225,
+            -0.1
+          ],
+          "color": "powder",
+          "rotation": [
+            0,
+            0,
+            -90
+          ],
+          "tint": "#b0773a"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.060000000000000005
+      },
+      "connects": [
+        "cell-holder"
+      ]
+    },
+    {
+      "id": "cell-2",
+      "name": {
+        "en": "Battery 2",
+        "zh": "电池 2"
+      },
+      "group": "source",
+      "summary": {
+        "en": "Adds its push to the first battery.",
+        "zh": "把自己的推动力加到第一节上。"
+      },
+      "detail": {
+        "en": "The same kind of alkaline AA battery as battery 1 [S10], sitting in the middle slot of the holder. Its positive button presses on the flat negative end of the next battery.\n\nWith it added, in this model the current through one bulb rises from 0.118 A to 0.233 A and the brightness from 26 to 100 [S1]. Two batteries with one bulb is the model's reference brightness of 100.\n\nThe Try it card can turn this battery round. With only two batteries the reversed one cancels the other's push and the bulb stays dark; with three, the bulb is about as dim as with one [S7][S1].",
+        "zh": "和电池 1 同一种碱性 AA 电池 [S10]，装在电池盒中间的槽里。它的正极凸帽顶住下一节平平的负极。\n\n加上它以后，在这个模型里，流过一只灯的电流从 0.118 A 增加到 0.233 A，亮度从 26 增加到 100 [S1]。两节电池点一只灯，就是模型里亮度 100 的参照。\n\n「试一试」卡片可以把这节电池反过来。只有两节时，反过来的这节抵消另一节的推动力，灯泡不亮；三节时，灯泡和只有一节时差不多暗 [S7][S1]。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0,
+            -0.02525
+          ],
+          [
+            0.00675,
+            -0.02525
+          ],
+          [
+            0.00725,
+            -0.02485
+          ],
+          [
+            0.00725,
+            0.02375
+          ],
+          [
+            0.00685,
+            0.02425
+          ],
+          [
+            0.0034,
+            0.02425
+          ],
+          [
+            0.0028,
+            0.02435
+          ],
+          [
+            0.0028,
+            0.02525
+          ],
+          [
+            0,
+            0.02525
+          ]
+        ],
+        "segments": 40,
+        "at": [
+          0,
+          0.02225,
+          -0.1
+        ],
+        "color": "powder",
+        "rotation": [
+          0,
+          0,
+          -90
+        ],
+        "tint": "#4c5158"
+      },
+      "extra": [
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0.00729,
+              0.01905
+            ],
+            [
+              0.00729,
+              0.02365
+            ],
+            [
+              0.00695,
+              0.02365
+            ],
+            [
+              0.00695,
+              0.01905
+            ],
+            [
+              0.00729,
+              0.01905
+            ]
+          ],
+          "segments": 40,
+          "at": [
+            0,
+            0.02225,
+            -0.1
+          ],
+          "color": "powder",
+          "rotation": [
+            0,
+            0,
+            -90
+          ],
+          "tint": "#b0773a"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.07
+      },
+      "connects": [
+        "cell-holder"
+      ]
+    },
+    {
+      "id": "cell-3",
+      "name": {
+        "en": "Battery 3",
+        "zh": "电池 3"
+      },
+      "group": "source",
+      "summary": {
+        "en": "Adds a third push: too much for one small bulb.",
+        "zh": "再加一份推动力，一只小灯泡承受不了。"
+      },
+      "detail": {
+        "en": "A third alkaline AA battery [S10] in the last slot of the holder. With it in, the three pushes add [S7].\n\nIn this model three batteries drive 0.346 A through one bulb. The bulb gives out 1.50 W, three times the 0.5 W it is made for, and the status reads OVER RATING [S1][S13]. A real filament's resistance grows as it heats, so a real bulb would draw a little less [S4].\n\nA real bulb run like this may burn out. When its filament melts through there is a gap, the circuit opens and the bulb goes dark for good.",
+        "zh": "第三节碱性 AA 电池 [S10]，装在电池盒最后一个槽里。装上后，三份推动力相加 [S7]。\n\n在这个模型里，三节电池让 0.346 A 的电流流过一只灯，灯泡的功率是 1.50 W，是它设计功率 0.5 W 的三倍，状态显示 OVER RATING（超过额定）[S1][S13]。真实灯丝越热电阻越大，所以真灯泡的电流会略小一些 [S4]。\n\n真灯泡这样用可能会烧坏。灯丝一熔断就出现缺口，电路断开，灯泡再也不亮了。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0,
+            -0.02525
+          ],
+          [
+            0.00675,
+            -0.02525
+          ],
+          [
+            0.00725,
+            -0.02485
+          ],
+          [
+            0.00725,
+            0.02375
+          ],
+          [
+            0.00685,
+            0.02425
+          ],
+          [
+            0.0034,
+            0.02425
+          ],
+          [
+            0.0028,
+            0.02435
+          ],
+          [
+            0.0028,
+            0.02525
+          ],
+          [
+            0,
+            0.02525
+          ]
+        ],
+        "segments": 40,
+        "at": [
+          -0.0525,
+          0.02225,
+          -0.1
+        ],
+        "color": "powder",
+        "rotation": [
+          0,
+          0,
+          -90
+        ],
+        "tint": "#4c5158"
+      },
+      "extra": [
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0.00729,
+              0.01905
+            ],
+            [
+              0.00729,
+              0.02365
+            ],
+            [
+              0.00695,
+              0.02365
+            ],
+            [
+              0.00695,
+              0.01905
+            ],
+            [
+              0.00729,
+              0.01905
+            ]
+          ],
+          "segments": 40,
+          "at": [
+            -0.0525,
+            0.02225,
+            -0.1
+          ],
+          "color": "powder",
+          "rotation": [
+            0,
+            0,
+            -90
+          ],
+          "tint": "#b0773a"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.08
+      },
+      "connects": [
+        "cell-holder"
+      ]
+    },
+    {
+      "id": "cell-cutaway",
+      "name": {
+        "en": "Cut-open battery",
+        "zh": "剖开的电池"
+      },
+      "group": "source",
+      "summary": {
+        "en": "Shows the chemicals that push the current.",
+        "zh": "露出推动电流的化学物质。"
+      },
+      "detail": {
+        "en": "Half of an alkaline AA battery, cut along its length. From the outside in: a steel can, which is the positive collector; a ring of manganese dioxide mixed with carbon; a thin separator; a gel of zinc powder in the centre; and a brass pin that collects current from the zinc and leads it to the flat negative cap [S11].\n\nThis is inside-out compared with the older carbon–zinc battery drawn in many books, where the zinc can on the outside is negative and a carbon rod in the centre is positive [S12].\n\nA battery is flat when its chemicals have reacted [S11]. This cut-open battery is a model exhibit: a real battery should never be opened.",
+        "zh": "一节碱性 AA 电池沿长度剖开的一半。从外到内：钢壳，它是正极的集流体；一圈混了碳的二氧化锰；一层薄薄的隔膜；中心是凝胶状的锌粉；一根黄铜针把锌上的电流引到平平的负极端盖 [S11]。\n\n这和许多书上画的旧式碳锌电池正好里外颠倒：碳锌电池外面的锌筒是负极，中心的碳棒是正极 [S12]。\n\n化学物质反应完了，电池就没电了 [S11]。这节剖开的电池只是模型展品，真电池千万不要拆开。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0.0066,
+            0.0222
+          ],
+          [
+            0.0068,
+            -0.0236
+          ],
+          [
+            0.00705,
+            -0.0236
+          ],
+          [
+            0.00705,
+            0.0236
+          ],
+          [
+            0.0068,
+            0.0241
+          ],
+          [
+            0.0034,
+            0.0241
+          ],
+          [
+            0.0028,
+            0.0242
+          ],
+          [
+            0.0028,
+            0.02525
+          ],
+          [
+            0,
+            0.02525
+          ],
+          [
+            0,
+            0.0236
+          ],
+          [
+            0.0064,
+            0.023
+          ],
+          [
+            0.0066,
+            0.0222
+          ]
+        ],
+        "segments": 48,
+        "at": [
+          0.248,
+          0.03125,
+          -0.085
+        ],
+        "color": "steel",
+        "arc": 180
+      },
+      "extra": [
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0.00705,
+              -0.0236
+            ],
+            [
+              0.00725,
+              -0.0236
+            ],
+            [
+              0.00725,
+              0.0235
+            ],
+            [
+              0.00705,
+              0.0235
+            ],
+            [
+              0.00705,
+              -0.0236
+            ]
+          ],
+          "segments": 48,
+          "at": [
+            0.248,
+            0.03125,
+            -0.085
+          ],
+          "color": "plastic",
+          "arc": 180,
+          "tint": "#3a3836"
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0.0007,
+              -0.0205
+            ],
+            [
+              0.0047,
+              -0.0205
+            ],
+            [
+              0.0047,
+              0.0222
+            ],
+            [
+              0.0007,
+              0.0222
+            ],
+            [
+              0.0007,
+              -0.0205
+            ]
+          ],
+          "segments": 48,
+          "at": [
+            0.248,
+            0.03125,
+            -0.085
+          ],
+          "color": "enamel",
+          "arc": 180,
+          "tint": "#8f8c86"
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0.0047,
+              -0.0205
+            ],
+            [
+              0.005,
+              -0.0205
+            ],
+            [
+              0.005,
+              0.0222
+            ],
+            [
+              0.0047,
+              0.0222
+            ],
+            [
+              0.0047,
+              -0.0205
+            ]
+          ],
+          "segments": 48,
+          "at": [
+            0.248,
+            0.03125,
+            -0.085
+          ],
+          "color": "plastic",
+          "arc": 180,
+          "tint": "#efece4"
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0.005,
+              -0.0205
+            ],
+            [
+              0.0066,
+              -0.0205
+            ],
+            [
+              0.0066,
+              0.0222
+            ],
+            [
+              0.005,
+              0.0222
+            ],
+            [
+              0.005,
+              -0.0205
+            ]
+          ],
+          "segments": 48,
+          "at": [
+            0.248,
+            0.03125,
+            -0.085
+          ],
+          "color": "powder",
+          "arc": 180,
+          "tint": "#2c2622"
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              -0.0238
+            ],
+            [
+              0.0007,
+              -0.0238
+            ],
+            [
+              0.0007,
+              0.012
+            ],
+            [
+              0.0004,
+              0.0135
+            ],
+            [
+              0,
+              0.0135
+            ]
+          ],
+          "segments": 24,
+          "at": [
+            0.248,
+            0.03125,
+            -0.085
+          ],
+          "color": "brass",
+          "arc": 180
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0.0008,
+              -0.0236
+            ],
+            [
+              0.0066,
+              -0.0236
+            ],
+            [
+              0.0066,
+              -0.0207
+            ],
+            [
+              0.0008,
+              -0.0207
+            ],
+            [
+              0.0008,
+              -0.0236
+            ]
+          ],
+          "segments": 48,
+          "at": [
+            0.248,
+            0.03125,
+            -0.085
+          ],
+          "color": "plastic",
+          "arc": 180,
+          "tint": "#3a3836"
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              -0.02525
+            ],
+            [
+              0.0064,
+              -0.02525
+            ],
+            [
+              0.0066,
+              -0.0242
+            ],
+            [
+              0,
+              -0.0242
+            ]
+          ],
+          "segments": 48,
+          "at": [
+            0.248,
+            0.03125,
+            -0.085
+          ],
+          "color": "steel",
+          "arc": 180
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.03
+      }
+    },
+    {
+      "id": "base-board",
+      "name": {
+        "en": "Circuit board",
+        "zh": "电路板"
+      },
+      "group": "board",
+      "summary": {
+        "en": "Holds every part in its place.",
+        "zh": "把每个元件固定在各自的位置上。"
+      },
+      "detail": {
+        "en": "A wooden board 400 × 300 × 12 mm [S1]. The battery holder sits at the back, the main switch front left, the test gap front centre and bulbs A and B in the middle, with link switch X between them, Y behind and Z in front. The buzzer and motor wait at the back left, the test materials in a tray at the front right and three cut-open exhibits at the back right.\n\nDry wood is an insulator [S4], so the board itself joins nothing: every connection is made by the wires.\n\nDamp wood conducts a little [S8], which is one reason circuit boards and the tables under them are kept dry.",
+        "zh": "一块 400 × 300 × 12 mm 的木板 [S1]。电池盒在后边，主开关在左前，测试缺口在前方中间，灯泡 A、B 在中央，连接开关 X 在两灯之间，Y 在后，Z 在前。蜂鸣器和电机放在左后方，测试材料装在右前方的小盘里，三件剖开的展品在右后方。\n\n干木头是绝缘体 [S4]，所以木板本身不把任何东西连起来，所有连接都靠导线。\n\n湿木头能导一点电 [S8]，这也是电路板和下面的桌子要保持干燥的原因之一。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.4,
+          0.012,
+          0.3
+        ],
+        "bevel": 0.002,
+        "at": [
+          0,
+          0.006,
+          0
+        ],
+        "color": "wood"
+      },
+      "extra": [
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              0
+            ],
+            [
+              0.0144,
+              0
+            ],
+            [
+              0.015,
+              0.0006
+            ],
+            [
+              0.015,
+              0.0102
+            ],
+            [
+              0.0138,
+              0.011
+            ],
+            [
+              0.0072,
+              0.011
+            ],
+            [
+              0.0072,
+              0.0126
+            ],
+            [
+              0,
+              0.0126
+            ]
+          ],
+          "segments": 40,
+          "at": [
+            -0.06,
+            0.012,
+            0
+          ],
+          "color": "powder",
+          "tint": "#222222"
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0.0052,
+              0
+            ],
+            [
+              0.0062,
+              0
+            ],
+            [
+              0.0062,
+              0.0036
+            ],
+            [
+              0.0052,
+              0.0036
+            ],
+            [
+              0.0052,
+              0
+            ]
+          ],
+          "segments": 32,
+          "at": [
+            -0.06,
+            0.021,
+            0
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0024,
+            0.0024,
+            0.0016
+          ],
+          "at": [
+            -0.0715,
+            0.0234,
+            0
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0024,
+            0.0024,
+            0.0016
+          ],
+          "at": [
+            -0.0485,
+            0.0234,
+            0
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              0
+            ],
+            [
+              0.0144,
+              0
+            ],
+            [
+              0.015,
+              0.0006
+            ],
+            [
+              0.015,
+              0.0102
+            ],
+            [
+              0.0138,
+              0.011
+            ],
+            [
+              0.0072,
+              0.011
+            ],
+            [
+              0.0072,
+              0.0126
+            ],
+            [
+              0,
+              0.0126
+            ]
+          ],
+          "segments": 40,
+          "at": [
+            0.1,
+            0.012,
+            0
+          ],
+          "color": "powder",
+          "tint": "#222222"
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0.0052,
+              0
+            ],
+            [
+              0.0062,
+              0
+            ],
+            [
+              0.0062,
+              0.0036
+            ],
+            [
+              0.0052,
+              0.0036
+            ],
+            [
+              0.0052,
+              0
+            ]
+          ],
+          "segments": 32,
+          "at": [
+            0.1,
+            0.021,
+            0
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0024,
+            0.0024,
+            0.0016
+          ],
+          "at": [
+            0.0885,
+            0.0234,
+            0
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0024,
+            0.0024,
+            0.0016
+          ],
+          "at": [
+            0.1115,
+            0.0234,
+            0
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.04,
+            0.006,
+            0.014
+          ],
+          "bevel": 0.0012,
+          "at": [
+            -0.155,
+            0.015,
+            0.07
+          ],
+          "color": "powder",
+          "tint": "#222222"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.0024,
+            0.007,
+            0.006
+          ],
+          "at": [
+            -0.166,
+            0.0215,
+            0.07
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.0045,
+            0.0062,
+            0.0008
+          ],
+          "at": [
+            -0.1425,
+            0.0211,
+            0.0674
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.0045,
+            0.0062,
+            0.0008
+          ],
+          "at": [
+            -0.1425,
+            0.0211,
+            0.0726
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0022,
+            0.0022,
+            0.0016
+          ],
+          "at": [
+            -0.1715,
+            0.0184,
+            0.07
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0022,
+            0.0022,
+            0.0016
+          ],
+          "at": [
+            -0.1385,
+            0.0184,
+            0.07
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.04,
+            0.006,
+            0.014
+          ],
+          "bevel": 0.0012,
+          "at": [
+            0.02,
+            0.015,
+            0
+          ],
+          "color": "powder",
+          "tint": "#222222"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.0024,
+            0.007,
+            0.006
+          ],
+          "at": [
+            0.009,
+            0.0215,
+            0
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.0045,
+            0.0062,
+            0.0008
+          ],
+          "at": [
+            0.0325,
+            0.0211,
+            -0.0026
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.0045,
+            0.0062,
+            0.0008
+          ],
+          "at": [
+            0.0325,
+            0.0211,
+            0.0026
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0022,
+            0.0022,
+            0.0016
+          ],
+          "at": [
+            0.0035,
+            0.0184,
+            0
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0022,
+            0.0022,
+            0.0016
+          ],
+          "at": [
+            0.0365,
+            0.0184,
+            0
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.04,
+            0.006,
+            0.014
+          ],
+          "bevel": 0.0012,
+          "at": [
+            0.02,
+            0.015,
+            -0.05
+          ],
+          "color": "powder",
+          "tint": "#222222"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.0024,
+            0.007,
+            0.006
+          ],
+          "at": [
+            0.009,
+            0.0215,
+            -0.05
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.0045,
+            0.0062,
+            0.0008
+          ],
+          "at": [
+            0.0325,
+            0.0211,
+            -0.0526
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.0045,
+            0.0062,
+            0.0008
+          ],
+          "at": [
+            0.0325,
+            0.0211,
+            -0.0474
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0022,
+            0.0022,
+            0.0016
+          ],
+          "at": [
+            0.0035,
+            0.0184,
+            -0.05
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0022,
+            0.0022,
+            0.0016
+          ],
+          "at": [
+            0.0365,
+            0.0184,
+            -0.05
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.04,
+            0.006,
+            0.014
+          ],
+          "bevel": 0.0012,
+          "at": [
+            0.02,
+            0.015,
+            0.05
+          ],
+          "color": "powder",
+          "tint": "#222222"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.0024,
+            0.007,
+            0.006
+          ],
+          "at": [
+            0.009,
+            0.0215,
+            0.05
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.0045,
+            0.0062,
+            0.0008
+          ],
+          "at": [
+            0.0325,
+            0.0211,
+            0.0474
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.0045,
+            0.0062,
+            0.0008
+          ],
+          "at": [
+            0.0325,
+            0.0211,
+            0.0526
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0022,
+            0.0022,
+            0.0016
+          ],
+          "at": [
+            0.0035,
+            0.0184,
+            0.05
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0022,
+            0.0022,
+            0.0016
+          ],
+          "at": [
+            0.0365,
+            0.0184,
+            0.05
+          ],
+          "color": "brass"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          -1,
+          0
+        ],
+        "dist": 0.04
+      }
+    },
+    {
+      "id": "main-switch",
+      "name": {
+        "en": "Main switch",
+        "zh": "主开关"
+      },
+      "group": "board",
+      "summary": {
+        "en": "Opens or closes the whole circuit.",
+        "zh": "断开或闭合整个电路。"
+      },
+      "detail": {
+        "en": "A small knife switch on a plastic base with two terminals: a brass blade that swings down into a brass clip, at the front left of the board, on the wire from the positive end of the batteries. Closed, two pieces of metal touch; open, a gap of air separates them.\n\nIn this model a closed switch has a resistance of only 0.001 Ω [S1], so it makes no difference to the brightness. Open, no current flows anywhere in the circuit.\n\nIn a single loop it does not matter where the switch sits: before or after the bulb, opening it stops the current everywhere at once. The idea that it must come first is a common misunderstanding [S22].",
+        "zh": "电路板左前方的一个小刀闸开关，塑料底座，两个接线柱，黄铜刀片向下压进黄铜夹片，接在电池正极引出的导线上。合上时两片金属相碰；断开时中间隔着一段空气。\n\n在这个模型里，合上的开关电阻只有 0.001 Ω [S1]，对亮度没有影响。断开时，整个电路都没有电流。\n\n在只有一条路径的回路里，开关放在哪里都一样：放在灯泡前面或后面，一断开，各处电流同时停下。以为开关必须放在前面，是一种常见的误解 [S22]。"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.0265,
+          0.0012,
+          0.0042
+        ],
+        "at": [
+          -0.1528,
+          0.0225,
+          0.07
+        ],
+        "color": "brass"
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0024,
+            0.0024,
+            0.009
+          ],
+          "at": [
+            -0.1392,
+            0.027,
+            0.07
+          ],
+          "color": "plastic",
+          "tint": "#1d1d1c"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0008,
+            0.0008,
+            0.0068
+          ],
+          "at": [
+            -0.166,
+            0.0225,
+            0.07
+          ],
+          "color": "brass",
+          "rotation": [
+            90,
+            0,
+            0
+          ]
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.03
+      }
+    },
+    {
+      "id": "switch-x",
+      "name": {
+        "en": "Link switch X",
+        "zh": "连接开关 X"
+      },
+      "group": "board",
+      "summary": {
+        "en": "Joins bulb A to bulb B, one after the other.",
+        "zh": "把灯泡 A 和灯泡 B 一前一后连起来。"
+      },
+      "detail": {
+        "en": "A small knife switch between the two bulb holders. Closed, it joins the far side of bulb A to bulb B.\n\nX alone closed (Y and Z open) puts the bulbs in series, one path with the same current through each [S6]: in this model 0.118 A through both and a brightness of 26 each with two batteries [S1]. X and Z closed lets current go round bulb B, so only A lights; X and Y closed lets it go round bulb A, so only B lights.\n\nWith X, Y and Z all closed, the batteries' two ends are joined almost directly: a short circuit of about 8.2 A in this model [S1], shown in chapter 06 and not to be tried with real batteries.",
+        "zh": "两个灯座之间的一个小刀闸开关。合上时，它把灯泡 A 的另一端接到灯泡 B 上。\n\n只合 X（Y、Z 断开），两只灯就是串联，只有一条路径，流过每只灯的电流相同 [S6]：在这个模型里，用两节电池时，两只灯的电流都是 0.118 A，亮度各为 26 [S1]。合上 X 和 Z，电流可以绕过灯泡 B，只有 A 亮；合上 X 和 Y，电流绕过灯泡 A，只有 B 亮。\n\nX、Y、Z 全合上，电池两极几乎直接相连：在这个模型里是约 8.2 A 的短路 [S1]，第 06 章演示，真电池不要这样试。"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.0265,
+          0.0012,
+          0.0042
+        ],
+        "at": [
+          0.0222,
+          0.0225,
+          0
+        ],
+        "color": "brass"
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0024,
+            0.0024,
+            0.009
+          ],
+          "at": [
+            0.0358,
+            0.027,
+            0
+          ],
+          "color": "plastic",
+          "tint": "#1d1d1c"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0008,
+            0.0008,
+            0.0068
+          ],
+          "at": [
+            0.009,
+            0.0225,
+            0
+          ],
+          "color": "brass",
+          "rotation": [
+            90,
+            0,
+            0
+          ]
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.03
+      }
+    },
+    {
+      "id": "switch-y",
+      "name": {
+        "en": "Link switch Y",
+        "zh": "连接开关 Y"
+      },
+      "group": "board",
+      "summary": {
+        "en": "Gives bulb B its own path from the batteries.",
+        "zh": "给灯泡 B 一条直通电池的路径。"
+      },
+      "detail": {
+        "en": "A small knife switch behind the bulbs. Closed, it joins the wire leading to bulb A straight to bulb B, without passing through A.\n\nY and Z closed (X open) put the bulbs in parallel: in this model each bulb takes 0.227 A and glows with a brightness of 95, while the batteries supply 0.454 A in total [S1]. Y alone closed lights bulb B on its own.\n\nClosed together with X, it lets the current go round bulb A, which goes dark while B stays lit.",
+        "zh": "灯泡后面的一个小刀闸开关。合上时，它把通往灯泡 A 的导线直接接到灯泡 B，不经过 A。\n\n合上 Y 和 Z（X 断开），两只灯就是并联：在这个模型里，每只灯 0.227 A，亮度 95，电池共供出 0.454 A [S1]。只合 Y，只有灯泡 B 亮。\n\n和 X 一起合上时，电流绕过灯泡 A，A 熄灭，B 仍然亮。"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.0265,
+          0.0012,
+          0.0042
+        ],
+        "at": [
+          0.0222,
+          0.0225,
+          -0.05
+        ],
+        "color": "brass"
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0024,
+            0.0024,
+            0.009
+          ],
+          "at": [
+            0.0358,
+            0.027,
+            -0.05
+          ],
+          "color": "plastic",
+          "tint": "#1d1d1c"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0008,
+            0.0008,
+            0.0068
+          ],
+          "at": [
+            0.009,
+            0.0225,
+            -0.05
+          ],
+          "color": "brass",
+          "rotation": [
+            90,
+            0,
+            0
+          ]
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.03
+      }
+    },
+    {
+      "id": "switch-z",
+      "name": {
+        "en": "Link switch Z",
+        "zh": "连接开关 Z"
+      },
+      "group": "board",
+      "summary": {
+        "en": "Gives bulb A its own path back to the batteries.",
+        "zh": "给灯泡 A 一条直接回到电池的路径。"
+      },
+      "detail": {
+        "en": "A small knife switch in front of the bulbs. Closed, it joins the far side of bulb A straight to the wire that returns to the batteries.\n\nZ alone closed is the board's single-bulb circuit: only bulb A, 0.233 A and a brightness of 100 with two batteries in this model [S1]. Opening Z darkens the bulb just as surely as opening the main switch on the other side of it.\n\nClosed together with Y it makes the parallel circuit; closed together with X it lets the current go round bulb B, so only A lights.",
+        "zh": "灯泡前面的一个小刀闸开关。合上时，它把灯泡 A 的另一端直接接到回电池的导线上。\n\n只合 Z，就是电路板上的单灯电路：只有灯泡 A，在这个模型里用两节电池时电流 0.233 A，亮度 100 [S1]。断开 Z 和断开灯泡另一侧的主开关一样，灯都会熄灭。\n\n和 Y 一起合上，就是并联电路；和 X 一起合上，电流绕过灯泡 B，只有 A 亮。"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.0265,
+          0.0012,
+          0.0042
+        ],
+        "at": [
+          0.0222,
+          0.0225,
+          0.05
+        ],
+        "color": "brass"
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0024,
+            0.0024,
+            0.009
+          ],
+          "at": [
+            0.0358,
+            0.027,
+            0.05
+          ],
+          "color": "plastic",
+          "tint": "#1d1d1c"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0008,
+            0.0008,
+            0.0068
+          ],
+          "at": [
+            0.009,
+            0.0225,
+            0.05
+          ],
+          "color": "brass",
+          "rotation": [
+            90,
+            0,
+            0
+          ]
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.03
+      }
+    },
+    {
+      "id": "leads",
+      "name": {
+        "en": "Wires",
+        "zh": "导线"
+      },
+      "group": "board",
+      "summary": {
+        "en": "Copper inside, plastic outside: carry the current.",
+        "zh": "里面是铜，外面是塑料，用来传导电流。"
+      },
+      "detail": {
+        "en": "Flexible red and black wires that join the batteries, switches, bulbs and test gap, each end held under a brass terminal screw. Each wire has a copper core, a good conductor, inside a plastic coat, an insulator [S4].\n\nIn this model all the wires together have a resistance of only 0.05 Ω [S1], so they barely affect the brightness. In a short circuit they carry about 8.2 A in this model [S1] and heat up, as any wire does when the current is very large [S5].\n\nA wire with a cracked or worn coat must be replaced, not taped [S26]; damaged cables are among the common causes of electrical incidents at home [S27][S28].",
+        "zh": "红、黑两色的软导线，把电池、开关、灯泡和测试缺口连起来，两端都压在黄铜接线柱下面。导线里面是铜芯，是良好的导体；外面是塑料皮，是绝缘体 [S4]。\n\n在这个模型里，所有导线合起来电阻只有 0.05 Ω [S1]，几乎不影响亮度。短路时，在这个模型里它们要通过约 8.2 A 的电流 [S1]，会发热；任何导线电流很大时都会这样 [S5]。\n\n外皮开裂或磨损的导线要换掉，不能用胶布缠 [S26]；电线破损是家庭用电事故的常见原因之一 [S27][S28]。"
+      },
+      "primitive": {
+        "kind": "sweep",
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.0095,
+            -0.009,
+            0
+          ],
+          [
+            0.0165,
+            -0.009,
+            -0.025
+          ],
+          [
+            -0.2785,
+            -0.009,
+            -0.025
+          ],
+          [
+            -0.2785,
+            -0.009,
+            0.17
+          ],
+          [
+            -0.267,
+            -0.009,
+            0.17
+          ],
+          [
+            -0.26,
+            -0.00305,
+            0.17
+          ]
+        ],
+        "radius": 0.00125,
+        "caps": "flat",
+        "at": [
+          0.0885,
+          0.02225,
+          -0.1
+        ],
+        "color": "rubber",
+        "tint": "#a3362c"
+      },
+      "extra": [
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.006,
+              -0.00595,
+              0
+            ],
+            [
+              0.0175,
+              -0.00595,
+              0.045
+            ],
+            [
+              0.0215,
+              -0.0032,
+              0.045
+            ]
+          ],
+          "radius": 0.00125,
+          "caps": "flat",
+          "at": [
+            -0.1385,
+            0.0192,
+            0.07
+          ],
+          "color": "rubber",
+          "tint": "#a3362c"
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.006,
+              -0.00275,
+              0
+            ],
+            [
+              0.011,
+              -0.00275,
+              -0.04
+            ],
+            [
+              -0.065,
+              -0.00275,
+              -0.04
+            ],
+            [
+              -0.065,
+              -0.00275,
+              -0.107
+            ],
+            [
+              -0.0545,
+              -0.00275,
+              -0.115
+            ],
+            [
+              -0.0485,
+              0.0082,
+              -0.115
+            ]
+          ],
+          "radius": 0.00125,
+          "caps": "flat",
+          "at": [
+            -0.023,
+            0.016,
+            0.115
+          ],
+          "color": "rubber",
+          "tint": "#a3362c"
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.006,
+              -0.01095,
+              0
+            ],
+            [
+              0.046,
+              -0.01095,
+              0
+            ],
+            [
+              0.052,
+              -0.005,
+              0
+            ]
+          ],
+          "radius": 0.00125,
+          "caps": "flat",
+          "at": [
+            -0.0485,
+            0.0242,
+            0
+          ],
+          "color": "rubber",
+          "tint": "#a3362c"
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              -0.01095,
+              -0.006
+            ],
+            [
+              0,
+              -0.01095,
+              -0.05
+            ],
+            [
+              0.069,
+              -0.01095,
+              -0.05
+            ],
+            [
+              0.075,
+              -0.005,
+              -0.05
+            ]
+          ],
+          "radius": 0.00125,
+          "caps": "flat",
+          "at": [
+            -0.0715,
+            0.0242,
+            0
+          ],
+          "color": "rubber",
+          "tint": "#a3362c"
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              -0.01095,
+              0.006
+            ],
+            [
+              0,
+              -0.01095,
+              0.05
+            ],
+            [
+              0.046,
+              -0.01095,
+              0.05
+            ],
+            [
+              0.052,
+              -0.005,
+              0.05
+            ]
+          ],
+          "radius": 0.00125,
+          "caps": "flat",
+          "at": [
+            -0.0485,
+            0.0242,
+            0
+          ],
+          "color": "rubber",
+          "tint": "#a3362c"
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.006,
+              -0.00595,
+              0
+            ],
+            [
+              0.046,
+              -0.00595,
+              0
+            ],
+            [
+              0.052,
+              0.005,
+              0
+            ]
+          ],
+          "radius": 0.00125,
+          "caps": "flat",
+          "at": [
+            0.0365,
+            0.0192,
+            0
+          ],
+          "color": "rubber",
+          "tint": "#1c1c1c"
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.006,
+              -0.00595,
+              0
+            ],
+            [
+              0.052,
+              -0.00595,
+              0
+            ],
+            [
+              0.052,
+              -0.00595,
+              0.044
+            ],
+            [
+              0.052,
+              0.005,
+              0.05
+            ]
+          ],
+          "radius": 0.00125,
+          "caps": "flat",
+          "at": [
+            0.0365,
+            0.0192,
+            -0.05
+          ],
+          "color": "rubber",
+          "tint": "#1c1c1c"
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.006,
+              -0.00595,
+              0
+            ],
+            [
+              0.075,
+              -0.00595,
+              0
+            ],
+            [
+              0.075,
+              -0.00595,
+              -0.044
+            ],
+            [
+              0.075,
+              0.005,
+              -0.05
+            ]
+          ],
+          "radius": 0.00125,
+          "caps": "flat",
+          "at": [
+            0.0365,
+            0.0192,
+            0.05
+          ],
+          "color": "rubber",
+          "tint": "#1c1c1c"
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.006,
+              -0.01095,
+              0
+            ],
+            [
+              0.0165,
+              -0.01095,
+              -0.03
+            ],
+            [
+              0.0165,
+              -0.01095,
+              -0.135
+            ],
+            [
+              -0.2095,
+              -0.01095,
+              -0.135
+            ],
+            [
+              -0.2095,
+              -0.01095,
+              -0.1
+            ],
+            [
+              -0.2,
+              -0.00195,
+              -0.1
+            ]
+          ],
+          "radius": 0.00125,
+          "caps": "flat",
+          "at": [
+            0.1115,
+            0.0242,
+            0
+          ],
+          "color": "rubber",
+          "tint": "#1c1c1c"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.0
+      },
+      "connects": [
+        "cell-holder",
+        "main-switch",
+        "gap-clips",
+        "bulb-a",
+        "bulb-b",
+        "switch-x",
+        "switch-y",
+        "switch-z"
+      ]
+    },
+    {
+      "id": "gap-clips",
+      "name": {
+        "en": "Test gap",
+        "zh": "测试缺口"
+      },
+      "group": "board",
+      "summary": {
+        "en": "Leaves a gap for testing materials.",
+        "zh": "留出一个缺口，用来测试材料。"
+      },
+      "detail": {
+        "en": "Two crocodile clips at the front of the board, 30 mm apart [S1], each on a short wire in the loop. Whatever is clipped between them becomes part of the circuit.\n\nA short copper wire normally bridges them and closes the circuit. A metal across the gap lights the bulb about as brightly; plastic, wood, rubber or air leaves it dark [S4]. In this model pencil lead lets 0.091 A through and the brightness drops to 15 [S1].\n\nBecause only the material changes, the gap makes a fair test: the batteries, bulb and wires stay the same. Recognising a fair test is part of the primary science syllabus, and identifying conductors and insulators is a P5 learning outcome [S2].",
+        "zh": "电路板前方的两只鳄鱼夹，相距 30 mm [S1]，各连着回路里的一小段导线。夹在它们之间的东西就成了电路的一部分。\n\n平时缺口上夹着一小段铜线，电路是闭合的。缺口里放金属，灯泡差不多一样亮；放塑料、木头、橡胶或者什么都不放（空气），灯就不亮 [S4]。在这个模型里，放铅笔芯时电流 0.091 A，亮度降到 15 [S1]。\n\n每次只换材料，所以这个缺口适合做公平测试：电池、灯泡和导线都不变。认出公平测试、辨认导体和绝缘体，都是小学科学课纲的学习要求 [S2]。"
+      },
+      "primitive": {
+        "kind": "extrude",
+        "shape": [
+          [
+            0,
+            0.0006
+          ],
+          [
+            -0.008,
+            0.0005
+          ],
+          [
+            -0.02,
+            0.0003
+          ],
+          [
+            -0.03,
+            0.0002
+          ],
+          [
+            -0.03,
+            -0.001
+          ],
+          [
+            -0.026,
+            -0.0012
+          ],
+          [
+            -0.02,
+            -0.0014
+          ],
+          [
+            -0.012,
+            -0.0012
+          ],
+          [
+            -0.004,
+            -0.0006
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "depth": 0.0052,
+        "at": [
+          -0.085,
+          0.0152,
+          0.115
+        ],
+        "color": "steel"
+      },
+      "extra": [
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              -0.0006
+            ],
+            [
+              -0.008,
+              -0.0005
+            ],
+            [
+              -0.02,
+              -0.0003
+            ],
+            [
+              -0.03,
+              -0.0002
+            ],
+            [
+              -0.03,
+              0.001
+            ],
+            [
+              -0.026,
+              0.0012
+            ],
+            [
+              -0.02,
+              0.0014
+            ],
+            [
+              -0.012,
+              0.0012
+            ],
+            [
+              -0.004,
+              0.0006
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "depth": 0.0052,
+          "at": [
+            -0.085,
+            0.0172,
+            0.115
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0007,
+            0.0007,
+            0.0062
+          ],
+          "at": [
+            -0.104,
+            0.0162,
+            0.115
+          ],
+          "color": "steel",
+          "rotation": [
+            90,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0033,
+            0.0033,
+            0.016
+          ],
+          "at": [
+            -0.11,
+            0.0157,
+            0.115
+          ],
+          "color": "rubber",
+          "rotation": [
+            0,
+            0,
+            90
+          ],
+          "tint": "#a3362c"
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0.004,
+              -0.0006
+            ],
+            [
+              0.012,
+              -0.0012
+            ],
+            [
+              0.02,
+              -0.0014
+            ],
+            [
+              0.026,
+              -0.0012
+            ],
+            [
+              0.03,
+              -0.001
+            ],
+            [
+              0.03,
+              0.0002
+            ],
+            [
+              0.02,
+              0.0003
+            ],
+            [
+              0.008,
+              0.0005
+            ],
+            [
+              0,
+              0.0006
+            ]
+          ],
+          "depth": 0.0052,
+          "at": [
+            -0.055,
+            0.0152,
+            0.115
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0.004,
+              0.0006
+            ],
+            [
+              0.012,
+              0.0012
+            ],
+            [
+              0.02,
+              0.0014
+            ],
+            [
+              0.026,
+              0.0012
+            ],
+            [
+              0.03,
+              0.001
+            ],
+            [
+              0.03,
+              -0.0002
+            ],
+            [
+              0.02,
+              -0.0003
+            ],
+            [
+              0.008,
+              -0.0005
+            ],
+            [
+              0,
+              -0.0006
+            ]
+          ],
+          "depth": 0.0052,
+          "at": [
+            -0.055,
+            0.0172,
+            0.115
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0007,
+            0.0007,
+            0.0062
+          ],
+          "at": [
+            -0.036,
+            0.0162,
+            0.115
+          ],
+          "color": "steel",
+          "rotation": [
+            90,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0033,
+            0.0033,
+            0.016
+          ],
+          "at": [
+            -0.03,
+            0.0157,
+            0.115
+          ],
+          "color": "rubber",
+          "rotation": [
+            0,
+            0,
+            90
+          ],
+          "tint": "#a3362c"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          0,
+          1
+        ],
+        "dist": 0.03
+      },
+      "connects": [
+        "leads"
+      ]
+    },
+    {
+      "id": "wire-cutaway",
+      "name": {
+        "en": "Stripped wire",
+        "zh": "剥开的导线"
+      },
+      "group": "board",
+      "summary": {
+        "en": "Shows the copper core inside the plastic coat.",
+        "zh": "露出塑料皮里面的铜芯。"
+      },
+      "detail": {
+        "en": "A short length of wire with part of its plastic coat stripped back to show the copper core. The model draws it about 2.5 mm across with a 1 mm core, sizes chosen to make the two layers easy to see [S1].\n\nCopper is one of the best conductors: about 2,000 times better than graphite [S4]. The plastic coat is an insulator and keeps the current inside the wire.\n\nWhen a coat wears through, the bare copper can pass current into whatever touches it, including a person. Damaged cables at home must be replaced [S25][S26].",
+        "zh": "一小段导线，剥掉了一部分塑料皮，露出铜芯。模型把它画成外径约 2.5 mm、铜芯 1 mm，这个尺寸是为了看清两层而取的 [S1]。\n\n铜是最好的导体之一，导电本领约是石墨的 2,000 倍 [S4]。塑料皮是绝缘体，把电流约束在导线里。\n\n外皮磨穿了，裸露的铜芯会把电流传给碰到它的任何东西，包括人。家里破损的电线必须更换 [S25][S26]。"
+      },
+      "primitive": {
+        "kind": "sweep",
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.038,
+            0,
+            0
+          ]
+        ],
+        "radius": 0.00125,
+        "caps": "flat",
+        "at": [
+          0.238,
+          0.0035,
+          -0.035
+        ],
+        "color": "plastic",
+        "tint": "#a3362c",
+        "hollow": 0.0007
+      },
+      "extra": [
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.0622,
+              0,
+              0
+            ]
+          ],
+          "radius": 0.0005,
+          "caps": "round",
+          "at": [
+            0.2378,
+            0.0035,
+            -0.035
+          ],
+          "color": "copper"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.03
+      }
+    },
+    {
+      "id": "bulb-a",
+      "name": {
+        "en": "Bulb A and holder",
+        "zh": "灯泡 A 与灯座"
+      },
+      "group": "loads",
+      "summary": {
+        "en": "Lights when current passes through it.",
+        "zh": "有电流通过就发光。"
+      },
+      "detail": {
+        "en": "A miniature screw bulb rated 2.5 V and 0.2 A, its glass globe 11 mm across and 23 mm long overall [S13], in a round holder 30 mm across with a terminal on each side [S14].\n\nCurrent enters at the tip under the bulb, rises through one wire, crosses the filament, comes down the other wire and leaves through the screw thread into the holder. In this model the bulb has a fixed resistance of 12.5 Ω and a rating of 0.5 W [S1].\n\nUnscrew it and the holder leaves a gap: in series the other bulb goes dark too; in parallel it stays lit.",
+        "zh": "一只螺口微型灯泡，额定 2.5 V、0.2 A，玻璃泡直径 11 mm、全长 23 mm [S13]，装在直径 30 mm、两侧各有一个接线柱的圆形灯座里 [S14]。\n\n电流从灯泡底部的尖端进去，沿一根引线上升，穿过灯丝，再沿另一根引线下来，从螺纹流进灯座。在这个模型里，灯泡电阻固定为 12.5 Ω，额定功率 0.5 W [S1]。\n\n把它拧下来，灯座处就有了缺口：串联时另一只灯也灭；并联时另一只照样亮。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0.0036,
+            0
+          ],
+          [
+            0.0043,
+            0.0012
+          ],
+          [
+            0.0052,
+            0.0036
+          ],
+          [
+            0.0055,
+            0.006
+          ],
+          [
+            0.0052,
+            0.0086
+          ],
+          [
+            0.0042,
+            0.0108
+          ],
+          [
+            0.0024,
+            0.0122
+          ],
+          [
+            0,
+            0.0126
+          ]
+        ],
+        "segments": 40,
+        "at": [
+          -0.06,
+          0.0294,
+          0
+        ],
+        "color": "glass"
+      },
+      "extra": [
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              0
+            ],
+            [
+              0.0012,
+              0
+            ],
+            [
+              0.0014,
+              0.0006
+            ],
+            [
+              0.0024,
+              0.0008
+            ],
+            [
+              0.0034,
+              0.0016
+            ],
+            [
+              0.0046,
+              0.0018
+            ],
+            [
+              0.005,
+              0.0026
+            ],
+            [
+              0.0046,
+              0.0034
+            ],
+            [
+              0.0046,
+              0.0034
+            ],
+            [
+              0.005,
+              0.0042
+            ],
+            [
+              0.0046,
+              0.005
+            ],
+            [
+              0.0046,
+              0.005
+            ],
+            [
+              0.005,
+              0.0058
+            ],
+            [
+              0.0046,
+              0.0066
+            ],
+            [
+              0.0046,
+              0.0066
+            ],
+            [
+              0.005,
+              0.0074
+            ],
+            [
+              0.0046,
+              0.0082
+            ],
+            [
+              0.0046,
+              0.0082
+            ],
+            [
+              0.005,
+              0.009
+            ],
+            [
+              0.0046,
+              0.0098
+            ],
+            [
+              0.0047,
+              0.0097
+            ],
+            [
+              0.0038,
+              0.0099
+            ],
+            [
+              0,
+              0.0099
+            ]
+          ],
+          "segments": 40,
+          "at": [
+            -0.06,
+            0.0195,
+            0
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0011,
+            0.0011,
+            0.0006
+          ],
+          "at": [
+            -0.06,
+            0.0194,
+            0
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              0
+            ],
+            [
+              0.0013,
+              0
+            ],
+            [
+              0.0009,
+              0.0026
+            ],
+            [
+              0.0005,
+              0.0034
+            ],
+            [
+              0,
+              0.0036
+            ]
+          ],
+          "segments": 16,
+          "at": [
+            -0.06,
+            0.0289,
+            0
+          ],
+          "color": "glass"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.04
+      },
+      "connects": [
+        "filament-a",
+        "leads",
+        "switch-x",
+        "switch-z",
+        "switch-y"
+      ]
+    },
+    {
+      "id": "filament-a",
+      "name": {
+        "en": "Filament A",
+        "zh": "灯丝 A"
+      },
+      "group": "loads",
+      "summary": {
+        "en": "Thin coiled wire that glows white-hot.",
+        "zh": "细细的螺旋钨丝，热到发白光。"
+      },
+      "detail": {
+        "en": "A very thin tungsten wire, wound into a tight coil and held between two support wires inside bulb A. Current heating it to more than 2,500 °C makes it glow white [S15]; tungsten is used because it melts only at about 3,400 °C [S15].\n\nOn the stage the filament's glow follows the brightness reading: in this model 26 with one battery, 100 with two and 220 with three [S1]. A real filament resists only about a tenth as much when cold [S4], so real dim bulbs are a little brighter than the model's.\n\nWhen the filament breaks there is a gap inside the bulb and the circuit is open.",
+        "zh": "一根极细的钨丝，绕成紧密的螺旋，架在灯泡 A 里的两根支撑丝之间。电流把它加热到 2,500 ℃ 以上，它就发出白光 [S15]；用钨，是因为它要到约 3,400 ℃ 才熔化 [S15]。\n\n舞台上灯丝的亮度跟着亮度读数变化：在这个模型里，一节电池 26，两节 100，三节 220 [S1]。真实灯丝冷的时候电阻只有热时的十分之一左右 [S4]，所以真实的暗灯会比模型稍亮。\n\n灯丝断了，灯泡里就有缺口，电路断开。"
+      },
+      "primitive": {
+        "kind": "coil",
+        "radius": 0.00045,
+        "wire": 8e-05,
+        "turns": 7,
+        "length": 0.0028,
+        "at": [
+          -0.06,
+          0.0356,
+          0
+        ],
+        "color": "steel",
+        "rotation": [
+          0,
+          0,
+          90
+        ]
+      },
+      "extra": [
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              -0.0002,
+              -0.003,
+              0
+            ],
+            [
+              0.0007,
+              -0.0058,
+              0
+            ],
+            [
+              0.0008,
+              -0.0092,
+              0
+            ]
+          ],
+          "radius": 0.00012,
+          "caps": "round",
+          "at": [
+            -0.0616,
+            0.0356,
+            0
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.0002,
+              -0.003,
+              0
+            ],
+            [
+              -0.0007,
+              -0.0058,
+              0
+            ],
+            [
+              -0.0008,
+              -0.0092,
+              0
+            ]
+          ],
+          "radius": 0.00012,
+          "caps": "round",
+          "at": [
+            -0.0584,
+            0.0356,
+            0
+          ],
+          "color": "steel"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.04
+      },
+      "connects": [
+        "bulb-a"
+      ]
+    },
+    {
+      "id": "bulb-b",
+      "name": {
+        "en": "Bulb B and holder",
+        "zh": "灯泡 B 与灯座"
+      },
+      "group": "loads",
+      "summary": {
+        "en": "A second bulb, joined in series or in parallel.",
+        "zh": "第二只灯泡，可以串联也可以并联。"
+      },
+      "detail": {
+        "en": "The same miniature 2.5 V 0.2 A bulb [S13] in a 30 mm holder [S14], to the right of bulb A. The link switches decide how it is joined to A.\n\nIn series with A (X closed), in this model both bulbs carry 0.118 A and glow with a brightness of 26 each [S1]. In parallel (Y and Z closed) each carries 0.227 A and glows at 95 [S1].\n\nUnscrewing bulb B in series darkens bulb A too; in parallel bulb A stays lit.",
+        "zh": "同样的 2.5 V、0.2 A 微型灯泡 [S13]，装在 30 mm 的灯座里 [S14]，在灯泡 A 右边。连接开关决定它和 A 怎样连接。\n\n和 A 串联（合上 X）时，在这个模型里两只灯的电流都是 0.118 A，亮度各 26 [S1]。并联（合上 Y 和 Z）时，每只 0.227 A，亮度 95 [S1]。\n\n串联时拧下灯泡 B，灯泡 A 也会灭；并联时 A 照样亮。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0.0036,
+            0
+          ],
+          [
+            0.0043,
+            0.0012
+          ],
+          [
+            0.0052,
+            0.0036
+          ],
+          [
+            0.0055,
+            0.006
+          ],
+          [
+            0.0052,
+            0.0086
+          ],
+          [
+            0.0042,
+            0.0108
+          ],
+          [
+            0.0024,
+            0.0122
+          ],
+          [
+            0,
+            0.0126
+          ]
+        ],
+        "segments": 40,
+        "at": [
+          0.1,
+          0.0294,
+          0
+        ],
+        "color": "glass"
+      },
+      "extra": [
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              0
+            ],
+            [
+              0.0012,
+              0
+            ],
+            [
+              0.0014,
+              0.0006
+            ],
+            [
+              0.0024,
+              0.0008
+            ],
+            [
+              0.0034,
+              0.0016
+            ],
+            [
+              0.0046,
+              0.0018
+            ],
+            [
+              0.005,
+              0.0026
+            ],
+            [
+              0.0046,
+              0.0034
+            ],
+            [
+              0.0046,
+              0.0034
+            ],
+            [
+              0.005,
+              0.0042
+            ],
+            [
+              0.0046,
+              0.005
+            ],
+            [
+              0.0046,
+              0.005
+            ],
+            [
+              0.005,
+              0.0058
+            ],
+            [
+              0.0046,
+              0.0066
+            ],
+            [
+              0.0046,
+              0.0066
+            ],
+            [
+              0.005,
+              0.0074
+            ],
+            [
+              0.0046,
+              0.0082
+            ],
+            [
+              0.0046,
+              0.0082
+            ],
+            [
+              0.005,
+              0.009
+            ],
+            [
+              0.0046,
+              0.0098
+            ],
+            [
+              0.0047,
+              0.0097
+            ],
+            [
+              0.0038,
+              0.0099
+            ],
+            [
+              0,
+              0.0099
+            ]
+          ],
+          "segments": 40,
+          "at": [
+            0.1,
+            0.0195,
+            0
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0011,
+            0.0011,
+            0.0006
+          ],
+          "at": [
+            0.1,
+            0.0194,
+            0
+          ],
+          "color": "brass"
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              0
+            ],
+            [
+              0.0013,
+              0
+            ],
+            [
+              0.0009,
+              0.0026
+            ],
+            [
+              0.0005,
+              0.0034
+            ],
+            [
+              0,
+              0.0036
+            ]
+          ],
+          "segments": 16,
+          "at": [
+            0.1,
+            0.0289,
+            0
+          ],
+          "color": "glass"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.04
+      },
+      "connects": [
+        "filament-b",
+        "switch-x",
+        "switch-y",
+        "switch-z",
+        "leads"
+      ]
+    },
+    {
+      "id": "filament-b",
+      "name": {
+        "en": "Filament B",
+        "zh": "灯丝 B"
+      },
+      "group": "loads",
+      "summary": {
+        "en": "Coiled wire that glows when bulb B has current.",
+        "zh": "灯泡 B 有电流时发光的螺旋钨丝。"
+      },
+      "detail": {
+        "en": "A thin coil of tungsten wire between two support wires, the same as filament A. It glows white above about 2,500 °C [S15].\n\nIts glow on the stage shows bulb B's brightness reading: in this model 26 in series and 95 in parallel, against 100 for a single bulb on two batteries [S1].\n\nIf it breaks, bulb B stops conducting: in series the whole circuit is open, in parallel only B's own path.",
+        "zh": "一段架在两根支撑丝之间的细钨丝螺旋，和灯丝 A 一样。温度超过约 2,500 ℃ 时发出白光 [S15]。\n\n舞台上它的亮度对应灯泡 B 的读数：在这个模型里，串联时 26，并联时 95，两节电池点单独一只灯时是 100 [S1]。\n\n它一断，灯泡 B 就不通了：串联时整个电路断开，并联时只断开 B 自己那条路径。"
+      },
+      "primitive": {
+        "kind": "coil",
+        "radius": 0.00045,
+        "wire": 8e-05,
+        "turns": 7,
+        "length": 0.0028,
+        "at": [
+          0.1,
+          0.0356,
+          0
+        ],
+        "color": "steel",
+        "rotation": [
+          0,
+          0,
+          90
+        ]
+      },
+      "extra": [
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              -0.0002,
+              -0.003,
+              0
+            ],
+            [
+              0.0007,
+              -0.0058,
+              0
+            ],
+            [
+              0.0008,
+              -0.0092,
+              0
+            ]
+          ],
+          "radius": 0.00012,
+          "caps": "round",
+          "at": [
+            0.0984,
+            0.0356,
+            0
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.0002,
+              -0.003,
+              0
+            ],
+            [
+              -0.0007,
+              -0.0058,
+              0
+            ],
+            [
+              -0.0008,
+              -0.0092,
+              0
+            ]
+          ],
+          "radius": 0.00012,
+          "caps": "round",
+          "at": [
+            0.1016,
+            0.0356,
+            0
+          ],
+          "color": "steel"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.04
+      },
+      "connects": [
+        "bulb-b"
+      ]
+    },
+    {
+      "id": "buzzer",
+      "name": {
+        "en": "Buzzer",
+        "zh": "蜂鸣器"
+      },
+      "group": "loads",
+      "summary": {
+        "en": "Turns current into sound.",
+        "zh": "把电变成声音。"
+      },
+      "detail": {
+        "en": "A small round buzzer with two leads, at the back left of the board; it can be moved into bulb A's place. Inside, a coil and a thin metal disc make the disc vibrate about 2,300 times a second when current flows [S18]. The model shows the vibration slowed down.\n\nA typical small buzzer like this is made for 3 V and draws up to 30 mA [S18]. In this model it has a resistance of 100 Ω, takes 0.030 A from two batteries and sounds whenever the current is above 10 mA [S1].\n\nThe circuit around it is the same as for the bulb; only the job changes, from light to sound.",
+        "zh": "一个小小的圆形蜂鸣器，带两根引线，放在电路板左后方，可以换到灯泡 A 的位置上。里面有一个线圈和一片薄金属片，有电流时金属片每秒振动约 2,300 次 [S18]。模型里的振动是放慢了画的。\n\n这类小蜂鸣器一般按 3 V 设计，电流最多 30 mA [S18]。在这个模型里它的电阻是 100 Ω，用两节电池时电流 0.030 A，只要电流超过 10 mA 就会响 [S1]。\n\n它周围的电路和灯泡的一样，只是用处从发光变成了发声。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0,
+            0
+          ],
+          [
+            0.0148,
+            0
+          ],
+          [
+            0.015,
+            0.0008
+          ],
+          [
+            0.015,
+            0.0118
+          ],
+          [
+            0.0142,
+            0.0128
+          ],
+          [
+            0.004,
+            0.0128
+          ],
+          [
+            0.004,
+            0.0115
+          ],
+          [
+            0,
+            0.0115
+          ]
+        ],
+        "segments": 40,
+        "at": [
+          -0.27,
+          0,
+          -0.105
+        ],
+        "color": "rubber",
+        "tint": "#1c1c1c"
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0036,
+            0.0036,
+            0.0006
+          ],
+          "at": [
+            -0.27,
+            0.0118,
+            -0.105
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.002,
+              -0.0028,
+              0.01
+            ],
+            [
+              0.006,
+              -0.0032,
+              0.02
+            ]
+          ],
+          "radius": 0.0006,
+          "caps": "flat",
+          "at": [
+            -0.264,
+            0.004,
+            -0.091
+          ],
+          "color": "rubber",
+          "tint": "#a3362c"
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              -0.002,
+              -0.0028,
+              0.01
+            ],
+            [
+              -0.006,
+              -0.0032,
+              0.02
+            ]
+          ],
+          "radius": 0.0006,
+          "caps": "flat",
+          "at": [
+            -0.276,
+            0.004,
+            -0.091
+          ],
+          "color": "rubber",
+          "tint": "#1c1c1c"
+        }
+      ],
+      "explode": {
+        "dir": [
+          -1,
+          0,
+          0
+        ],
+        "dist": 0.04
+      },
+      "connects": [
+        "leads"
+      ]
+    },
+    {
+      "id": "motor",
+      "name": {
+        "en": "Motor",
+        "zh": "电机"
+      },
+      "group": "loads",
+      "summary": {
+        "en": "Turns current into turning.",
+        "zh": "把电变成转动。"
+      },
+      "detail": {
+        "en": "A small motor in a steel case with a shaft and two tabs for wires, at the back left of the board; it can be moved into bulb A's place. Inside, current in coils of wire near magnets makes the shaft turn.\n\nA typical small 3 V toy motor draws about 0.15 A spinning freely and about 2.1 A if it is held still [S17]. In this model it is a fixed 6 Ω, taking 0.47 A with 2.8 V across it from two batteries [S1]; a real motor's current depends on how hard it is working.\n\nA real motor like this turns about 12,300 times a minute with no load [S17]; the fan on the stage is shown turning far slower so that it can be followed.",
+        "zh": "一个装在钢壳里的小电机，有一根轴和两个接线片，放在电路板左后方，可以换到灯泡 A 的位置上。里面的线圈靠近磁铁，线圈里有电流时，轴就转起来。\n\n典型的 3 V 玩具小电机，空转时电流约 0.15 A，被卡住不转时约 2.1 A [S17]。在这个模型里它是固定的 6 Ω，两节电池时电流 0.47 A，两端 2.8 V [S1]；真电机的电流要看它带的负载有多重。\n\n这样的真电机空转时每分钟约转 12,300 圈 [S17]；舞台上的风扇转得慢得多，是为了让人看清。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0,
+            0
+          ],
+          [
+            0.0118,
+            0
+          ],
+          [
+            0.012,
+            0.001
+          ],
+          [
+            0.012,
+            0.0215
+          ],
+          [
+            0.0116,
+            0.0225
+          ],
+          [
+            0,
+            0.0225
+          ]
+        ],
+        "segments": 40,
+        "at": [
+          -0.27,
+          0.006,
+          -0.035
+        ],
+        "color": "steel"
+      },
+      "extra": [
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              0
+            ],
+            [
+              0.0125,
+              0
+            ],
+            [
+              0.0125,
+              0.006
+            ],
+            [
+              0,
+              0.006
+            ]
+          ],
+          "segments": 32,
+          "at": [
+            -0.27,
+            0,
+            -0.035
+          ],
+          "color": "plastic",
+          "tint": "#d9d3c6"
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              0
+            ],
+            [
+              0.004,
+              0
+            ],
+            [
+              0.004,
+              0.0025
+            ],
+            [
+              0,
+              0.0025
+            ]
+          ],
+          "segments": 24,
+          "at": [
+            -0.27,
+            0.0285,
+            -0.035
+          ],
+          "color": "plastic",
+          "tint": "#d9d3c6"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.001,
+            0.001,
+            0.012
+          ],
+          "at": [
+            -0.27,
+            0.034,
+            -0.035
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.003,
+            0.004,
+            0.0006
+          ],
+          "at": [
+            -0.276,
+            0.0045,
+            -0.0222
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.003,
+            0.004,
+            0.0006
+          ],
+          "at": [
+            -0.264,
+            0.0045,
+            -0.0222
+          ],
+          "color": "steel"
+        }
+      ],
+      "explode": {
+        "dir": [
+          -1,
+          0,
+          0
+        ],
+        "dist": 0.04
+      },
+      "connects": [
+        "motor-fan",
+        "leads"
+      ]
+    },
+    {
+      "id": "motor-fan",
+      "name": {
+        "en": "Fan blades",
+        "zh": "风扇叶"
+      },
+      "group": "loads",
+      "summary": {
+        "en": "Shows the motor turning.",
+        "zh": "让人看见电机在转。"
+      },
+      "detail": {
+        "en": "Three plastic blades on the motor's shaft. They are not part of the circuit: plastic is an insulator [S4], and the blades only turn because the shaft does.\n\nOn the stage their speed follows the push across the motor: more batteries, faster turning. The speed is slowed far below a real motor's [S17] so that the blades can be seen.\n\nIf the motor is moved off the circuit or the switch is opened, the blades coast to a stop.",
+        "zh": "装在电机轴上的三片塑料叶片。它们不属于电路：塑料是绝缘体 [S4]，叶片转只是因为轴在转。\n\n舞台上它们的转速跟着电机两端的推动力变化：电池越多，转得越快。为了看清叶片，转速比真电机慢得多 [S17]。\n\n电机离开电路或者开关断开，叶片就慢慢停下来。"
+      },
+      "primitive": {
+        "kind": "blades",
+        "layout": "axial",
+        "count": 3,
+        "radius": 0.03,
+        "hub": 0.0045,
+        "chord": 0.016,
+        "twist": 10,
+        "sweep": 20,
+        "pitch": 28,
+        "thickness": 0.0008,
+        "at": [
+          -0.27,
+          0.039,
+          -0.035
+        ],
+        "color": "plastic",
+        "tint": "#c96f2e"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.03
+      },
+      "connects": [
+        "motor"
+      ]
+    },
+    {
+      "id": "bulb-cutaway",
+      "name": {
+        "en": "Cut-open bulb",
+        "zh": "剖开的灯泡"
+      },
+      "group": "loads",
+      "summary": {
+        "en": "Shows the path the current takes through a bulb.",
+        "zh": "露出电流穿过灯泡的路径。"
+      },
+      "detail": {
+        "en": "Half of a miniature bulb, cut in two. Inside the glass, a glass stem holds two lead wires; a coiled filament is strung between their tops. One lead goes down to the contact at the tip of the base, the other to the metal screw thread, and a ring of black insulating material keeps tip and thread apart.\n\nThe path is tip, lead wire, filament, lead wire, screw thread. The same current comes out as goes in: the filament turns the batteries' energy into light and heat, it does not use up current [S6][S20]. Both the tip and the thread must be connected for current to flow, which is why a bulb needs a wire to each of its contacts [S19][S21].\n\nWithout the insulating ring the current could go straight from tip to thread and miss the filament, and the bulb would not light.",
+        "zh": "一只微型灯泡剖成两半。玻璃泡里，一根玻璃芯柱托着两根引线，螺旋灯丝架在两根引线顶端之间。一根引线向下通到灯头底部尖端的触点，另一根通到金属螺纹，中间一圈黑色绝缘材料把尖端和螺纹隔开。\n\n电流的路径是：尖端、引线、灯丝、引线、螺纹。流出去的电流和流进来的一样多：灯丝把电池的能量变成光和热，并不消耗电流 [S6][S20]。尖端和螺纹都要接上，电流才能通过，所以灯泡的两个接触点都需要接导线 [S19][S21]。\n\n要是没有那圈绝缘材料，电流会直接从尖端跑到螺纹，不经过灯丝，灯泡就不会亮。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0.0036,
+            0
+          ],
+          [
+            0.0043,
+            0.0012
+          ],
+          [
+            0.0052,
+            0.0036
+          ],
+          [
+            0.0055,
+            0.006
+          ],
+          [
+            0.0052,
+            0.0086
+          ],
+          [
+            0.0042,
+            0.0108
+          ],
+          [
+            0.0024,
+            0.0122
+          ],
+          [
+            0,
+            0.0126
+          ]
+        ],
+        "segments": 48,
+        "at": [
+          0.292,
+          0.0159,
+          -0.085
+        ],
+        "color": "glass",
+        "arc": 180
+      },
+      "extra": [
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0.0046,
+              0.0016
+            ],
+            [
+              0.005,
+              0.0024
+            ],
+            [
+              0.0046,
+              0.0032
+            ],
+            [
+              0.005,
+              0.004
+            ],
+            [
+              0.0046,
+              0.0048
+            ],
+            [
+              0.005,
+              0.0056
+            ],
+            [
+              0.0046,
+              0.0064
+            ],
+            [
+              0.005,
+              0.0072
+            ],
+            [
+              0.0046,
+              0.008
+            ],
+            [
+              0.0047,
+              0.0097
+            ],
+            [
+              0.0042,
+              0.0097
+            ],
+            [
+              0.0042,
+              0.0016
+            ],
+            [
+              0.0046,
+              0.0016
+            ]
+          ],
+          "segments": 48,
+          "at": [
+            0.292,
+            0.006,
+            -0.085
+          ],
+          "color": "brass",
+          "arc": 180
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              0.0004
+            ],
+            [
+              0.0042,
+              0.0004
+            ],
+            [
+              0.0042,
+              0.0016
+            ],
+            [
+              0.0034,
+              0.0016
+            ],
+            [
+              0.0012,
+              0.0016
+            ],
+            [
+              0,
+              0.0016
+            ]
+          ],
+          "segments": 40,
+          "at": [
+            0.292,
+            0.006,
+            -0.085
+          ],
+          "color": "powder",
+          "arc": 180,
+          "tint": "#1d1d1c"
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              0
+            ],
+            [
+              0.0011,
+              0
+            ],
+            [
+              0.0011,
+              0.0004
+            ],
+            [
+              0,
+              0.0004
+            ]
+          ],
+          "segments": 24,
+          "at": [
+            0.292,
+            0.006,
+            -0.085
+          ],
+          "color": "brass",
+          "arc": 180
+        },
+        {
+          "kind": "lathe",
+          "profile": [
+            [
+              0,
+              0
+            ],
+            [
+              0.0013,
+              0
+            ],
+            [
+              0.0009,
+              0.0026
+            ],
+            [
+              0.0005,
+              0.0034
+            ],
+            [
+              0,
+              0.0036
+            ]
+          ],
+          "segments": 16,
+          "at": [
+            0.292,
+            0.0154,
+            -0.086
+          ],
+          "color": "glass"
+        },
+        {
+          "kind": "coil",
+          "radius": 0.00045,
+          "wire": 8e-05,
+          "turns": 7,
+          "length": 0.0028,
+          "at": [
+            0.292,
+            0.0221,
+            -0.086
+          ],
+          "color": "steel",
+          "rotation": [
+            0,
+            0,
+            90
+          ]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              -0.0002,
+              -0.0032,
+              0
+            ],
+            [
+              0.0007,
+              -0.0062,
+              0
+            ],
+            [
+              0.0012,
+              -0.0151,
+              0
+            ]
+          ],
+          "radius": 0.00012,
+          "caps": "round",
+          "at": [
+            0.2904,
+            0.0221,
+            -0.086
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.0002,
+              -0.0032,
+              0
+            ],
+            [
+              -0.0007,
+              -0.0062,
+              0
+            ],
+            [
+              0.0028,
+              -0.0071,
+              0
+            ]
+          ],
+          "radius": 0.00012,
+          "caps": "round",
+          "at": [
+            0.2936,
+            0.0221,
+            -0.086
+          ],
+          "color": "steel"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.03
+      }
+    },
+    {
+      "id": "paper-clip",
+      "name": {
+        "en": "Steel paper clip",
+        "zh": "钢回形针"
+      },
+      "group": "test-items",
+      "summary": {
+        "en": "Steel: lets current through easily.",
+        "zh": "钢：很容易让电流通过。"
+      },
+      "detail": {
+        "en": "An ordinary steel paper clip from the test tray. Steel is a metal and a conductor [S4].\n\nIn this model it has a resistance of 0.05 Ω [S1], so the bulb lights about as brightly as with the copper wire. Steel conducts less well than copper, about twelve times less [S4], but across a 30 mm gap the difference cannot be seen.\n\nA coated paper clip, with a layer of plastic over the steel, would need the coating scraped off where the clips grip it.",
+        "zh": "测试盘里一枚普通的钢回形针。钢是金属，是导体 [S4]。\n\n在这个模型里它的电阻是 0.05 Ω [S1]，灯泡和接铜线时差不多亮。钢的导电本领比铜差，约差十二倍 [S4]，但在 30 mm 的缺口上看不出区别。\n\n外面包了一层塑料的彩色回形针，要先把夹子夹住的地方刮掉塑料才能导电。"
+      },
+      "primitive": {
+        "kind": "sweep",
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.024,
+            0,
+            0
+          ],
+          [
+            0.0265,
+            0,
+            0.002
+          ],
+          [
+            0.024,
+            0,
+            0.004
+          ],
+          [
+            -0.003,
+            0,
+            0.004
+          ],
+          [
+            -0.0055,
+            0,
+            0.0015
+          ],
+          [
+            -0.003,
+            0,
+            -0.0016
+          ],
+          [
+            0.026,
+            0,
+            -0.0016
+          ],
+          [
+            0.0288,
+            0,
+            0.0009
+          ],
+          [
+            0.026,
+            0,
+            0.0028
+          ],
+          [
+            0.004,
+            0,
+            0.0028
+          ]
+        ],
+        "radius": 0.00045,
+        "caps": "round",
+        "at": [
+          -0.027,
+          0.003,
+          0.2018
+        ],
+        "color": "stainless"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.03
+      }
+    },
+    {
+      "id": "copper-wire",
+      "name": {
+        "en": "Copper wire",
+        "zh": "铜线"
+      },
+      "group": "test-items",
+      "summary": {
+        "en": "Copper: one of the best conductors.",
+        "zh": "铜：最好的导体之一。"
+      },
+      "detail": {
+        "en": "A short bare piece of copper wire from the test tray, the same metal as the core of every lead on the board.\n\nCopper conducts better than almost any other common material [S4]. In this model the piece has a resistance of 0.01 Ω [S1] and the bulb lights fully.\n\nThat is why copper is used inside wires all over the world, coated in plastic so that the current stays where it should.",
+        "zh": "测试盘里一小段裸铜线，和电路板上每根导线的芯是同一种金属。\n\n铜的导电本领比几乎所有常见材料都好 [S4]。在这个模型里这段铜线的电阻是 0.01 Ω [S1]，灯泡全亮。\n\n所以世界各地的导线里都用铜，外面再包上塑料，让电流只走该走的路。"
+      },
+      "primitive": {
+        "kind": "sweep",
+        "path": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.044,
+            0,
+            0
+          ]
+        ],
+        "radius": 0.0007,
+        "caps": "round",
+        "at": [
+          -0.002,
+          0.0032,
+          0.204
+        ],
+        "color": "copper"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.03
+      }
+    },
+    {
+      "id": "foil-strip",
+      "name": {
+        "en": "Aluminium foil strip",
+        "zh": "铝箔条"
+      },
+      "group": "test-items",
+      "summary": {
+        "en": "Aluminium foil: a thin metal conductor.",
+        "zh": "铝箔：薄薄的金属导体。"
+      },
+      "detail": {
+        "en": "A narrow strip of kitchen aluminium foil from the test tray.\n\nAluminium is a metal and a good conductor, not quite as good as copper [S4]. In this model the strip has a resistance of 0.02 Ω [S1] and the bulb lights about as brightly as with copper.\n\nThin as it is, the foil still carries the small current from two batteries easily; crumpled or torn through, it leaves a gap.",
+        "zh": "测试盘里一条窄窄的厨房用铝箔。\n\n铝是金属，是良好的导体，只比铜稍差一些 [S4]。在这个模型里这条铝箔的电阻是 0.02 Ω [S1]，灯泡和用铜线时差不多亮。\n\n铝箔虽薄，两节电池的小电流它还是能轻松通过；要是撕断了，就留下一个缺口。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.04,
+          0.0003,
+          0.008
+        ],
+        "bevel": 0.0001,
+        "at": [
+          -0.013,
+          0.0027,
+          0.187
+        ],
+        "color": "casing",
+        "tint": "#d5d7d6"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.03
+      }
+    },
+    {
+      "id": "pencil-lead",
+      "name": {
+        "en": "Pencil lead",
+        "zh": "铅笔芯"
+      },
+      "group": "test-items",
+      "summary": {
+        "en": "Graphite: conducts, but not well.",
+        "zh": "石墨：能导电，但导得不好。"
+      },
+      "detail": {
+        "en": "A stick of pencil lead from the test tray. It contains no metallic lead: it is graphite mixed with clay, more graphite in soft dark grades and more clay in hard pale ones [S9]. The model draws it 1.2 mm thick instead of the real 0.5 mm so that it can be seen [S1].\n\nGraphite is a conductor, but pure graphite conducts about 2,000 times less well than copper [S4][S9], and the clay makes it poorer still. In this model the lead in the gap is given 20 Ω, so the current is 0.091 A and the bulb glows with a brightness of 15 [S1]. Real results vary with the grade, the length and how firmly the clips grip [S9].\n\nWith a great deal of clay, as in the hardest grades, the mixture stops conducting at all [S9].",
+        "zh": "测试盘里的一根铅笔芯。它不含金属铅，而是石墨和黏土的混合物：软而黑的笔芯石墨多，硬而淡的黏土多 [S9]。真笔芯直径 0.5 mm，模型画成 1.2 mm 粗，是为了看得见 [S1]。\n\n石墨是导体，但纯石墨的导电本领只有铜的约两千分之一 [S4][S9]，加了黏土就更差。在这个模型里，缺口里的铅笔芯取 20 Ω，电流 0.091 A，灯泡亮度 15 [S1]。真实的结果随笔芯软硬、长短和夹子夹得多紧而不同 [S9]。\n\n黏土很多的时候，比如最硬的笔芯，混合物就完全不导电了 [S9]。"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.0006,
+          0.0006,
+          0.05
+        ],
+        "at": [
+          0.02,
+          0.0031,
+          0.191
+        ],
+        "color": "powder",
+        "rotation": [
+          0,
+          0,
+          90
+        ],
+        "tint": "#4d4f52"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.03
+      }
+    },
+    {
+      "id": "plastic-straw",
+      "name": {
+        "en": "Plastic straw",
+        "zh": "塑料吸管"
+      },
+      "group": "test-items",
+      "summary": {
+        "en": "Plastic: does not let current through.",
+        "zh": "塑料：不让电流通过。"
+      },
+      "detail": {
+        "en": "A plastic drinking straw from the test tray.\n\nPlastic is an insulator; it resists current more than ten thousand million million times as strongly as copper [S4]. Clipped across the gap it leaves the circuit open: in this model no current flows and the bulb stays dark [S1].\n\nThe same property makes plastic the coat of every wire and the case of every plug.",
+        "zh": "测试盘里一根塑料吸管。\n\n塑料是绝缘体，它对电流的阻碍比铜大一亿亿倍以上 [S4]。夹在缺口上，电路仍然是断开的：在这个模型里没有电流，灯泡不亮 [S1]。\n\n正因为这样，每根导线的外皮、每个插头的外壳都用塑料。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0.0029,
+            -0.024
+          ],
+          [
+            0.0032,
+            -0.024
+          ],
+          [
+            0.0032,
+            0.024
+          ],
+          [
+            0.0029,
+            0.024
+          ],
+          [
+            0.0029,
+            -0.024
+          ]
+        ],
+        "segments": 24,
+        "at": [
+          0.02,
+          0.0057,
+          0.179
+        ],
+        "color": "plastic",
+        "rotation": [
+          0,
+          0,
+          -90
+        ],
+        "tint": "#f0ece2"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.03
+      }
+    },
+    {
+      "id": "wooden-stick",
+      "name": {
+        "en": "Wooden ice-cream stick",
+        "zh": "木冰棒棍"
+      },
+      "group": "test-items",
+      "summary": {
+        "en": "Dry wood: does not let current through.",
+        "zh": "干木头：不让电流通过。"
+      },
+      "detail": {
+        "en": "A flat wooden ice-cream stick from the test tray.\n\nDry wood is an insulator [S4]: across the gap it leaves the circuit open, and in this model no current flows [S1]. The board underneath is wood for the same reason.\n\nDamp wood conducts a little [S8], so a wet stick could let a tiny current through; the model's stick is dry.",
+        "zh": "测试盘里一根扁扁的木冰棒棍。\n\n干木头是绝缘体 [S4]：放在缺口上，电路仍然断开，在这个模型里没有电流 [S1]。下面的电路板用木头也是这个原因。\n\n湿木头能导一点电 [S8]，湿的冰棒棍可能让极小的电流通过；模型里的冰棒棍是干的。"
+      },
+      "primitive": {
+        "kind": "extrude",
+        "shape": [
+          [
+            -0.024,
+            -0.005
+          ],
+          [
+            0.024,
+            -0.005
+          ],
+          [
+            0.0265,
+            -0.0035
+          ],
+          [
+            0.027,
+            0
+          ],
+          [
+            0.0265,
+            0.0035
+          ],
+          [
+            0.024,
+            0.005
+          ],
+          [
+            -0.024,
+            0.005
+          ],
+          [
+            -0.0265,
+            0.0035
+          ],
+          [
+            -0.027,
+            0
+          ],
+          [
+            -0.0265,
+            -0.0035
+          ]
+        ],
+        "depth": 0.002,
+        "bevel": 0.0004,
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "at": [
+          -0.013,
+          0.0035,
+          0.175
+        ],
+        "color": "wood",
+        "tint": "#d8bb8a"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.03
+      }
+    },
+    {
+      "id": "rubber-band",
+      "name": {
+        "en": "Rubber band",
+        "zh": "橡皮筋"
+      },
+      "group": "test-items",
+      "summary": {
+        "en": "Rubber: does not let current through.",
+        "zh": "橡胶：不让电流通过。"
+      },
+      "detail": {
+        "en": "An ordinary rubber band from the test tray.\n\nRubber is an insulator, among the poorest conductors of all [S4]. Stretched across the gap it leaves the circuit open: in this model no current flows [S1].\n\nThe crocodile clips of the test gap have rubber sleeves for the same reason.",
+        "zh": "测试盘里一根普通的橡皮筋。\n\n橡胶是绝缘体，是导电最差的材料之一 [S4]。把它拉在缺口上，电路仍然断开：在这个模型里没有电流 [S1]。\n\n测试缺口的鳄鱼夹套着橡胶护套，也是这个道理。"
+      },
+      "primitive": {
+        "kind": "torus",
+        "size": [
+          0.011,
+          0.0008
+        ],
+        "scale": [
+          1,
+          1,
+          0.45
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "at": [
+          0.02,
+          0.0029,
+          0.215
+        ],
+        "color": "rubber",
+        "tint": "#c8a878"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.03
+      }
+    },
+    {
+      "id": "bench",
+      "name": {
+        "en": "Lab bench",
+        "zh": "实验台"
+      },
+      "summary": {
+        "en": "Gives the board a table to sit on.",
+        "zh": "给电路板一张可以放的桌子。"
+      },
+      "detail": {
+        "en": "A plain wooden table under the circuit board. It is scenery: it is not part of any circuit and is not drawn in the circuit diagram.\n\nIt is there to give a sense of scale, the board and the torch at the size they would be on a classroom table, and a surface for the shadows. Its size is a design choice, not a measured table.\n\nLike the board, the table is dry wood, an insulator [S4].",
+        "zh": "电路板下面一张普通的木桌。它是布景，不属于任何电路，电路图里也不画它。\n\n放它是为了显示大小：电路板和手电筒就像放在教室桌上那样大；桌面也用来承接阴影。它的尺寸是设计取的，不是量来的。\n\n和电路板一样，桌子是干木头，是绝缘体 [S4]。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.9,
+          0.02,
+          0.48
+        ],
+        "bevel": 0.003,
+        "at": [
+          0,
+          -0.01,
+          0
+        ],
+        "color": "wood",
+        "tint": "#a98e6a"
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.09,
+            0.0025,
+            0.052
+          ],
+          "bevel": 0.0006,
+          "at": [
+            0.005,
+            0.00125,
+            0.195
+          ],
+          "color": "plastic",
+          "tint": "#bdb6a7"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.09,
+            0.004,
+            0.002
+          ],
+          "at": [
+            0.005,
+            0.0045,
+            0.169
+          ],
+          "color": "plastic",
+          "tint": "#bdb6a7"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.09,
+            0.004,
+            0.002
+          ],
+          "at": [
+            0.005,
+            0.0045,
+            0.221
+          ],
+          "color": "plastic",
+          "tint": "#bdb6a7"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.03,
+            0.006,
+            0.03
+          ],
+          "bevel": 0.001,
+          "at": [
+            0.248,
+            0.003,
+            -0.085
+          ],
+          "color": "plastic",
+          "tint": "#bdb6a7"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.03,
+            0.006,
+            0.03
+          ],
+          "bevel": 0.001,
+          "at": [
+            0.292,
+            0.003,
+            -0.085
+          ],
+          "color": "plastic",
+          "tint": "#bdb6a7"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.07,
+            0.002,
+            0.02
+          ],
+          "bevel": 0.0005,
+          "at": [
+            0.27,
+            0.001,
+            -0.035
+          ],
+          "color": "plastic",
+          "tint": "#bdb6a7"
+        }
+      ],
+      "context": true
+    }
+  ],
+  "groups": [
+    {
+      "id": "torch",
+      "name": {
+        "en": "Torch",
+        "zh": "手电筒"
+      },
+      "color": "token:ink-3"
+    },
+    {
+      "id": "source",
+      "name": {
+        "en": "Batteries",
+        "zh": "电池"
+      },
+      "color": "token:ink-2"
+    },
+    {
+      "id": "board",
+      "name": {
+        "en": "Circuit board",
+        "zh": "电路板"
+      },
+      "color": "token:neutral"
+    },
+    {
+      "id": "loads",
+      "name": {
+        "en": "Bulbs and other loads",
+        "zh": "灯泡与用电器"
+      },
+      "color": "token:accent-2"
+    },
+    {
+      "id": "test-items",
+      "name": {
+        "en": "Test materials",
+        "zh": "测试材料"
+      },
+      "color": "token:accent-3",
+      "card": false
+    },
+    {
+      "id": "current",
+      "name": {
+        "en": "Current",
+        "zh": "电流"
+      },
+      "color": "token:current"
+    }
+  ],
+  "flows": [
+    {
+      "id": "current-flow",
+      "group": "current",
+      "paths": [
+        {
+          "id": "cells",
+          "path": [
+            [
+              -0.0885,
+              0.0222,
+              -0.1
+            ],
+            [
+              -0.08,
+              0.0222,
+              -0.1
+            ],
+            [
+              0.08,
+              0.0222,
+              -0.1
+            ],
+            [
+              0.0885,
+              0.0222,
+              -0.1
+            ]
+          ]
+        },
+        {
+          "id": "main",
+          "path": [
+            [
+              0.0885,
+              0.0222,
+              -0.1
+            ],
+            [
+              0.098,
+              0.0132,
+              -0.1
+            ],
+            [
+              0.105,
+              0.0132,
+              -0.125
+            ],
+            [
+              -0.19,
+              0.0132,
+              -0.125
+            ],
+            [
+              -0.19,
+              0.0132,
+              0.07
+            ],
+            [
+              -0.1785,
+              0.0132,
+              0.07
+            ],
+            [
+              -0.1715,
+              0.0192,
+              0.07
+            ],
+            [
+              -0.166,
+              0.0225,
+              0.07
+            ],
+            [
+              -0.1425,
+              0.0225,
+              0.07
+            ],
+            [
+              -0.1385,
+              0.0192,
+              0.07
+            ],
+            [
+              -0.1325,
+              0.0132,
+              0.07
+            ],
+            [
+              -0.121,
+              0.0132,
+              0.115
+            ],
+            [
+              -0.117,
+              0.016,
+              0.115
+            ]
+          ]
+        },
+        {
+          "id": "gap",
+          "path": [
+            [
+              -0.117,
+              0.016,
+              0.115
+            ],
+            [
+              -0.089,
+              0.0162,
+              0.115
+            ],
+            [
+              -0.051,
+              0.0162,
+              0.115
+            ],
+            [
+              -0.023,
+              0.016,
+              0.115
+            ],
+            [
+              -0.017,
+              0.0132,
+              0.115
+            ],
+            [
+              -0.012,
+              0.0132,
+              0.075
+            ],
+            [
+              -0.088,
+              0.0132,
+              0.075
+            ],
+            [
+              -0.088,
+              0.0132,
+              0.008
+            ],
+            [
+              -0.0775,
+              0.0132,
+              0
+            ],
+            [
+              -0.0715,
+              0.0242,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "a",
+          "path": [
+            [
+              -0.0715,
+              0.0242,
+              0
+            ],
+            [
+              -0.066,
+              0.0235,
+              0
+            ],
+            [
+              -0.06,
+              0.0197,
+              0
+            ],
+            [
+              -0.0608,
+              0.0274,
+              0
+            ],
+            [
+              -0.0616,
+              0.0356,
+              0
+            ],
+            [
+              -0.0584,
+              0.0356,
+              0
+            ],
+            [
+              -0.0592,
+              0.0274,
+              0
+            ],
+            [
+              -0.0554,
+              0.0235,
+              0
+            ],
+            [
+              -0.054,
+              0.0235,
+              0
+            ],
+            [
+              -0.0485,
+              0.0242,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "x",
+          "path": [
+            [
+              -0.0485,
+              0.0242,
+              0
+            ],
+            [
+              -0.0425,
+              0.0132,
+              0
+            ],
+            [
+              -0.0025,
+              0.0132,
+              0
+            ],
+            [
+              0.0035,
+              0.0192,
+              0
+            ],
+            [
+              0.009,
+              0.0225,
+              0
+            ],
+            [
+              0.0325,
+              0.0225,
+              0
+            ],
+            [
+              0.0365,
+              0.0192,
+              0
+            ],
+            [
+              0.0425,
+              0.0132,
+              0
+            ],
+            [
+              0.0825,
+              0.0132,
+              0
+            ],
+            [
+              0.0885,
+              0.0242,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "b",
+          "path": [
+            [
+              0.0885,
+              0.0242,
+              0
+            ],
+            [
+              0.094,
+              0.0235,
+              0
+            ],
+            [
+              0.1,
+              0.0197,
+              0
+            ],
+            [
+              0.0992,
+              0.0274,
+              0
+            ],
+            [
+              0.0984,
+              0.0356,
+              0
+            ],
+            [
+              0.1016,
+              0.0356,
+              0
+            ],
+            [
+              0.1008,
+              0.0274,
+              0
+            ],
+            [
+              0.1046,
+              0.0235,
+              0
+            ],
+            [
+              0.106,
+              0.0235,
+              0
+            ],
+            [
+              0.1115,
+              0.0242,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "y",
+          "path": [
+            [
+              -0.0715,
+              0.0242,
+              0
+            ],
+            [
+              -0.0715,
+              0.0132,
+              -0.006
+            ],
+            [
+              -0.0715,
+              0.0132,
+              -0.05
+            ],
+            [
+              -0.0025,
+              0.0132,
+              -0.05
+            ],
+            [
+              0.0035,
+              0.0192,
+              -0.05
+            ],
+            [
+              0.009,
+              0.0225,
+              -0.05
+            ],
+            [
+              0.0325,
+              0.0225,
+              -0.05
+            ],
+            [
+              0.0365,
+              0.0192,
+              -0.05
+            ],
+            [
+              0.0425,
+              0.0132,
+              -0.05
+            ],
+            [
+              0.0885,
+              0.0132,
+              -0.05
+            ],
+            [
+              0.0885,
+              0.0132,
+              -0.006
+            ],
+            [
+              0.0885,
+              0.0242,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "z",
+          "path": [
+            [
+              -0.0485,
+              0.0242,
+              0
+            ],
+            [
+              -0.0485,
+              0.0132,
+              0.006
+            ],
+            [
+              -0.0485,
+              0.0132,
+              0.05
+            ],
+            [
+              -0.0025,
+              0.0132,
+              0.05
+            ],
+            [
+              0.0035,
+              0.0192,
+              0.05
+            ],
+            [
+              0.009,
+              0.0225,
+              0.05
+            ],
+            [
+              0.0325,
+              0.0225,
+              0.05
+            ],
+            [
+              0.0365,
+              0.0192,
+              0.05
+            ],
+            [
+              0.0425,
+              0.0132,
+              0.05
+            ],
+            [
+              0.1115,
+              0.0132,
+              0.05
+            ],
+            [
+              0.1115,
+              0.0132,
+              0.006
+            ],
+            [
+              0.1115,
+              0.0242,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "ret",
+          "path": [
+            [
+              0.1115,
+              0.0242,
+              0
+            ],
+            [
+              0.1175,
+              0.0132,
+              0
+            ],
+            [
+              0.128,
+              0.0132,
+              -0.03
+            ],
+            [
+              0.128,
+              0.0132,
+              -0.135
+            ],
+            [
+              -0.098,
+              0.0132,
+              -0.135
+            ],
+            [
+              -0.098,
+              0.0132,
+              -0.1
+            ],
+            [
+              -0.0885,
+              0.0222,
+              -0.1
+            ]
+          ]
+        },
+        {
+          "id": "t-cells",
+          "path": [
+            [
+              -0.4005,
+              0.0185,
+              0.105
+            ],
+            [
+              -0.299,
+              0.0185,
+              0.105
+            ]
+          ]
+        },
+        {
+          "id": "t-bulb",
+          "path": [
+            [
+              -0.299,
+              0.0185,
+              0.105
+            ],
+            [
+              -0.2935,
+              0.0185,
+              0.105
+            ],
+            [
+              -0.2803,
+              0.02,
+              0.105
+            ],
+            [
+              -0.2803,
+              0.017,
+              0.105
+            ],
+            [
+              -0.2935,
+              0.014,
+              0.105
+            ],
+            [
+              -0.2935,
+              0.0136,
+              0.105
+            ]
+          ]
+        },
+        {
+          "id": "t-switch",
+          "path": [
+            [
+              -0.2935,
+              0.0136,
+              0.105
+            ],
+            [
+              -0.2935,
+              0.0127,
+              0.105
+            ],
+            [
+              -0.3,
+              0.01,
+              0.105
+            ],
+            [
+              -0.3,
+              0.0257,
+              0.105
+            ],
+            [
+              -0.308,
+              0.0273,
+              0.105
+            ]
+          ]
+        },
+        {
+          "id": "t-strip",
+          "path": [
+            [
+              -0.308,
+              0.0273,
+              0.105
+            ],
+            [
+              -0.406,
+              0.0273,
+              0.105
+            ],
+            [
+              -0.408,
+              0.0225,
+              0.105
+            ],
+            [
+              -0.4045,
+              0.0213,
+              0.105
+            ],
+            [
+              -0.4005,
+              0.0185,
+              0.105
+            ]
+          ]
+        }
+      ],
+      "speed": 0.05,
+      "color": "token:current",
+      "ends": "open",
+      "count": 700,
+      "size": 0.055,
+      "spread": 0.0002,
+      "clip": true
+    }
+  ],
+  "animations": [
+    {
+      "id": "fan-spin",
+      "target": "motor-fan",
+      "kind": "rotate",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "rpm": 40
+    },
+    {
+      "id": "buzzer-pulse",
+      "target": "buzzer",
+      "kind": "pulse",
+      "scale": [
+        1.015,
+        1.03,
+        1.015
+      ],
+      "hz": 6
+    }
+  ],
+  "views": {
+    "assembled": {
+      "camera": {
+        "position": [
+          0.45,
+          0.62,
+          0.92
+        ],
+        "target": [
+          -0.02,
+          0,
+          0
+        ],
+        "fov": 30
+      }
+    },
+    "exploded": {
+      "camera": {
+        "position": [
+          0.5,
+          0.72,
+          1.02
+        ],
+        "target": [
+          -0.02,
+          0.02,
+          0
+        ],
+        "fov": 30
+      }
+    },
+    "cutaway": {
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "offset": 0
+    },
+    "section": {
+      "plane": "xz"
+    },
+    "cover": {
+      "position": [
+        0.36,
+        0.5,
+        0.74
+      ],
+      "target": [
+        -0.03,
+        0.0,
+        0.0
+      ],
+      "fov": 30
+    }
+  },
+  "spec": [
+    {
+      "key": {
+        "en": "Batteries",
+        "zh": "电池"
+      },
+      "value": "AA · 1.5 V each · 1–3",
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Bulbs",
+        "zh": "灯泡"
+      },
+      "value": "2.5 V · 0.2 A",
+      "tag": "typical"
+    },
+    {
+      "key": {
+        "en": "Board",
+        "zh": "电路板"
+      },
+      "value": "400 × 300 mm",
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Wire",
+        "zh": "导线"
+      },
+      "value": {
+        "en": "Copper core · PVC coat",
+        "zh": "铜芯 · PVC 外皮"
+      },
+      "tag": "typical"
+    }
+  ],
+  "telemetry": [
+    {
+      "key": {
+        "en": "Batteries",
+        "zh": "电池"
+      },
+      "unit": "V",
+      "follow": "volts"
+    },
+    {
+      "key": {
+        "en": "Current",
+        "zh": "电流"
+      },
+      "unit": "A",
+      "follow": "i-cells"
+    },
+    {
+      "key": {
+        "en": "Bulb A",
+        "zh": "灯 A"
+      },
+      "unit": "",
+      "follow": "bright-a"
+    },
+    {
+      "key": {
+        "en": "Bulb B",
+        "zh": "灯 B"
+      },
+      "unit": "",
+      "follow": "bright-b"
+    },
+    {
+      "key": {
+        "en": "Torch",
+        "zh": "手电筒"
+      },
+      "unit": "",
+      "follow": "bright-torch"
+    }
+  ],
+  "presets": [
+    {
+      "id": "torch-view",
+      "label": {
+        "en": "Torch",
+        "zh": "手电筒"
+      },
+      "camera": {
+        "position": [
+          -0.19,
+          0.2,
+          0.42
+        ],
+        "target": [
+          -0.32,
+          0.02,
+          0.1
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "board-top",
+      "label": {
+        "en": "Board",
+        "zh": "电路板"
+      },
+      "camera": {
+        "position": [
+          -0.01,
+          0.82,
+          0.13
+        ],
+        "target": [
+          -0.01,
+          0,
+          0.005
+        ],
+        "fov": 32
+      }
+    },
+    {
+      "id": "bulbs-view",
+      "label": {
+        "en": "Bulbs",
+        "zh": "灯泡"
+      },
+      "camera": {
+        "position": [
+          0.07,
+          0.2,
+          0.3
+        ],
+        "target": [
+          0.025,
+          0.02,
+          0
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "gap-view",
+      "label": {
+        "en": "Test gap",
+        "zh": "测试缺口"
+      },
+      "camera": {
+        "position": [
+          0.06,
+          0.25,
+          0.47
+        ],
+        "target": [
+          -0.035,
+          0.01,
+          0.14
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "cutaways-view",
+      "label": {
+        "en": "Cut open",
+        "zh": "剖开看"
+      },
+      "camera": {
+        "position": [
+          0.29,
+          0.1,
+          0.1
+        ],
+        "target": [
+          0.27,
+          0.022,
+          -0.065
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "batteries-view",
+      "label": {
+        "en": "Batteries",
+        "zh": "电池盒"
+      },
+      "camera": {
+        "position": [
+          0.07,
+          0.3,
+          0.3
+        ],
+        "target": [
+          -0.02,
+          0.015,
+          -0.05
+        ],
+        "fov": 30
+      }
+    }
+  ],
+  "poses": {
+    "main-open": {
+      "main-switch": {
+        "pivot": [
+          -0.166,
+          0.0225,
+          0.07
+        ],
+        "rotation": [
+          0,
+          0,
+          38
+        ]
+      },
+      "duration": 0.4
+    },
+    "x-open": {
+      "switch-x": {
+        "pivot": [
+          0.009,
+          0.0225,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          38
+        ]
+      },
+      "duration": 0.4
+    },
+    "y-open": {
+      "switch-y": {
+        "pivot": [
+          0.009,
+          0.0225,
+          -0.05
+        ],
+        "rotation": [
+          0,
+          0,
+          38
+        ]
+      },
+      "duration": 0.4
+    },
+    "z-open": {
+      "switch-z": {
+        "pivot": [
+          0.009,
+          0.0225,
+          0.05
+        ],
+        "rotation": [
+          0,
+          0,
+          38
+        ]
+      },
+      "duration": 0.4
+    },
+    "torch-on": {
+      "torch-switch": {
+        "offset": [
+          0.005,
+          0,
+          0
+        ]
+      },
+      "duration": 0.4
+    },
+    "cell-2-turned": {
+      "cell-2": {
+        "pivot": [
+          0.0,
+          0.02225,
+          -0.1
+        ],
+        "rotation": [
+          0,
+          180,
+          0
+        ]
+      },
+      "duration": 0.8
+    },
+    "bulb-a-out": {
+      "bulb-a": {
+        "pivot": [
+          -0.06,
+          0.0294,
+          0
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "offset": [
+          0,
+          -0.0118,
+          0.03
+        ]
+      },
+      "filament-a": {
+        "pivot": [
+          -0.06,
+          0.0294,
+          0
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "offset": [
+          0,
+          -0.0118,
+          0.03
+        ]
+      },
+      "duration": 0.8
+    },
+    "bulb-b-out": {
+      "bulb-b": {
+        "pivot": [
+          0.1,
+          0.0294,
+          0
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "offset": [
+          0,
+          -0.0118,
+          0.03
+        ]
+      },
+      "filament-b": {
+        "pivot": [
+          0.1,
+          0.0294,
+          0
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "offset": [
+          0,
+          -0.0118,
+          0.03
+        ]
+      },
+      "duration": 0.8
+    },
+    "buzzer-at-a": {
+      "buzzer": {
+        "offset": [
+          0.214,
+          0.012,
+          0.075
+        ]
+      },
+      "duration": 0.8
+    },
+    "motor-at-a": {
+      "motor": {
+        "offset": [
+          0.207,
+          0.012,
+          0.071
+        ]
+      },
+      "motor-fan": {
+        "offset": [
+          0.207,
+          0.012,
+          0.071
+        ]
+      },
+      "duration": 0.8
+    },
+    "paper-clip-in-gap": {
+      "paper-clip": {
+        "offset": [
+          -0.055,
+          0.0132,
+          -0.088
+        ]
+      },
+      "duration": 0.7
+    },
+    "copper-wire-in-gap": {
+      "copper-wire": {
+        "offset": [
+          -0.09,
+          0.013,
+          -0.089
+        ]
+      },
+      "duration": 0.7
+    },
+    "foil-strip-in-gap": {
+      "foil-strip": {
+        "offset": [
+          -0.057,
+          0.0135,
+          -0.072
+        ]
+      },
+      "duration": 0.7
+    },
+    "pencil-lead-in-gap": {
+      "pencil-lead": {
+        "offset": [
+          -0.09,
+          0.0131,
+          -0.076
+        ]
+      },
+      "duration": 0.7
+    },
+    "plastic-straw-in-gap": {
+      "plastic-straw": {
+        "offset": [
+          -0.09,
+          0.0105,
+          -0.064
+        ]
+      },
+      "duration": 0.7
+    },
+    "wooden-stick-in-gap": {
+      "wooden-stick": {
+        "offset": [
+          -0.057,
+          0.0127,
+          -0.06
+        ]
+      },
+      "duration": 0.7
+    },
+    "rubber-band-in-gap": {
+      "rubber-band": {
+        "offset": [
+          -0.09,
+          0.0133,
+          -0.1
+        ],
+        "scale": [
+          1.55,
+          1,
+          0.5
+        ]
+      },
+      "duration": 0.7
+    }
+  },
+  "units": {
+    "modelUnit": "mm",
+    "scale": 1000
+  },
+  "sim": {
+    "kind": "circuit",
+    "controls": [
+      {
+        "id": "main",
+        "kind": "toggle",
+        "default": true,
+        "label": {
+          "en": "Switch",
+          "zh": "开关"
+        }
+      },
+      {
+        "id": "cells",
+        "kind": "step",
+        "values": [
+          1,
+          2,
+          3
+        ],
+        "default": 2,
+        "label": {
+          "en": "Batteries",
+          "zh": "电池"
+        }
+      },
+      {
+        "id": "flip-2",
+        "kind": "toggle",
+        "default": false,
+        "label": {
+          "en": "Battery 2 turned round",
+          "zh": "第 2 节接反"
+        }
+      },
+      {
+        "id": "arrangement",
+        "kind": "choice",
+        "default": "single",
+        "label": {
+          "en": "Bulbs",
+          "zh": "接法"
+        },
+        "options": [
+          {
+            "id": "single",
+            "label": {
+              "en": "One bulb",
+              "zh": "单灯"
+            }
+          },
+          {
+            "id": "series",
+            "label": {
+              "en": "Series",
+              "zh": "串联"
+            }
+          },
+          {
+            "id": "parallel",
+            "label": {
+              "en": "Parallel",
+              "zh": "并联"
+            }
+          },
+          {
+            "id": "free",
+            "label": {
+              "en": "Free",
+              "zh": "自由"
+            }
+          }
+        ],
+        "sets": {
+          "single": {
+            "x": false,
+            "y": false,
+            "z": true
+          },
+          "series": {
+            "x": true,
+            "y": false,
+            "z": false
+          },
+          "parallel": {
+            "x": false,
+            "y": true,
+            "z": true
+          }
+        }
+      },
+      {
+        "id": "x",
+        "kind": "toggle",
+        "default": false,
+        "label": {
+          "en": "Switch X",
+          "zh": "开关 X"
+        }
+      },
+      {
+        "id": "y",
+        "kind": "toggle",
+        "default": false,
+        "label": {
+          "en": "Switch Y",
+          "zh": "开关 Y"
+        }
+      },
+      {
+        "id": "z",
+        "kind": "toggle",
+        "default": true,
+        "label": {
+          "en": "Switch Z",
+          "zh": "开关 Z"
+        }
+      },
+      {
+        "id": "gap",
+        "kind": "choice",
+        "default": "copper-wire",
+        "label": {
+          "en": "In the gap",
+          "zh": "缺口里"
+        },
+        "options": [
+          {
+            "id": "copper-wire",
+            "label": {
+              "en": "Copper wire",
+              "zh": "铜线"
+            }
+          },
+          {
+            "id": "paper-clip",
+            "label": {
+              "en": "Paper clip",
+              "zh": "回形针"
+            }
+          },
+          {
+            "id": "foil-strip",
+            "label": {
+              "en": "Foil",
+              "zh": "铝箔"
+            }
+          },
+          {
+            "id": "pencil-lead",
+            "label": {
+              "en": "Pencil lead",
+              "zh": "铅笔芯"
+            }
+          },
+          {
+            "id": "plastic-straw",
+            "label": {
+              "en": "Straw",
+              "zh": "吸管"
+            }
+          },
+          {
+            "id": "wooden-stick",
+            "label": {
+              "en": "Wooden stick",
+              "zh": "木棍"
+            }
+          },
+          {
+            "id": "rubber-band",
+            "label": {
+              "en": "Rubber band",
+              "zh": "橡皮筋"
+            }
+          },
+          {
+            "id": "empty",
+            "label": {
+              "en": "Nothing",
+              "zh": "空着"
+            }
+          }
+        ]
+      },
+      {
+        "id": "load-a",
+        "kind": "choice",
+        "default": "bulb",
+        "label": {
+          "en": "At A",
+          "zh": "A 位"
+        },
+        "options": [
+          {
+            "id": "bulb",
+            "label": {
+              "en": "Bulb",
+              "zh": "灯泡"
+            }
+          },
+          {
+            "id": "buzzer",
+            "label": {
+              "en": "Buzzer",
+              "zh": "蜂鸣器"
+            }
+          },
+          {
+            "id": "motor",
+            "label": {
+              "en": "Motor",
+              "zh": "电机"
+            }
+          }
+        ]
+      },
+      {
+        "id": "bulb-a-in",
+        "kind": "toggle",
+        "default": true,
+        "label": {
+          "en": "Bulb A in",
+          "zh": "灯泡 A 装上"
+        }
+      },
+      {
+        "id": "bulb-b-in",
+        "kind": "toggle",
+        "default": true,
+        "label": {
+          "en": "Bulb B in",
+          "zh": "灯泡 B 装上"
+        }
+      },
+      {
+        "id": "torch-switch",
+        "kind": "toggle",
+        "default": false,
+        "label": {
+          "en": "Torch switch",
+          "zh": "手电筒开关"
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "id": "i-cells",
+        "label": {
+          "en": "Current",
+          "zh": "电流"
+        },
+        "from": "current:cells",
+        "unit": "A",
+        "decimals": 3
+      },
+      {
+        "id": "volts",
+        "label": {
+          "en": "Batteries",
+          "zh": "电池"
+        },
+        "from": "volts:cells",
+        "unit": "V",
+        "decimals": 2
+      },
+      {
+        "id": "bright-a",
+        "label": {
+          "en": "Bulb A",
+          "zh": "灯 A"
+        },
+        "from": "brightness:a",
+        "decimals": 0
+      },
+      {
+        "id": "bright-b",
+        "label": {
+          "en": "Bulb B",
+          "zh": "灯 B"
+        },
+        "from": "brightness:b",
+        "decimals": 0
+      },
+      {
+        "id": "bright-torch",
+        "label": {
+          "en": "Torch",
+          "zh": "手电筒"
+        },
+        "from": "brightness:t-bulb",
+        "decimals": 0
+      },
+      {
+        "id": "i-a",
+        "label": {
+          "en": "Current in A",
+          "zh": "A 的电流"
+        },
+        "from": "current:a",
+        "unit": "A",
+        "decimals": 3
+      },
+      {
+        "id": "i-b",
+        "label": {
+          "en": "Current in B",
+          "zh": "B 的电流"
+        },
+        "from": "current:b",
+        "unit": "A",
+        "decimals": 3
+      },
+      {
+        "id": "motor-speed",
+        "label": {
+          "en": "Motor",
+          "zh": "电机"
+        },
+        "from": "speed:a",
+        "unit": "rpm",
+        "decimals": 0
+      },
+      {
+        "id": "status",
+        "label": {
+          "en": "Circuit",
+          "zh": "电路"
+        },
+        "kind": "state",
+        "from": "status:cells",
+        "states": {
+          "open": {
+            "en": "Open",
+            "zh": "开路"
+          },
+          "closed": {
+            "en": "Closed",
+            "zh": "闭合"
+          },
+          "short": {
+            "en": "Short circuit",
+            "zh": "短路"
+          },
+          "over-rating": {
+            "en": "Over rating",
+            "zh": "超过额定"
+          }
+        }
+      },
+      {
+        "id": "buzz",
+        "label": {
+          "en": "Buzzer",
+          "zh": "蜂鸣器"
+        },
+        "kind": "state",
+        "from": "sound:a",
+        "states": {
+          "off": {
+            "en": "Silent",
+            "zh": "不响"
+          },
+          "on": {
+            "en": "Sounding",
+            "zh": "在响"
+          }
+        }
+      },
+      {
+        "id": "edge-currents",
+        "label": {
+          "en": "Current in each wire",
+          "zh": "各段电流"
+        },
+        "kind": "vector",
+        "from": "edges"
+      }
+    ],
+    "bind": [
+      {
+        "output": "bright-a",
+        "part": "filament-a",
+        "glow": {
+          "color": "token:lamp",
+          "full": 100
+        }
+      },
+      {
+        "output": "bright-b",
+        "part": "filament-b",
+        "glow": {
+          "color": "token:lamp",
+          "full": 100
+        }
+      },
+      {
+        "output": "bright-torch",
+        "part": "torch-bulb",
+        "glow": {
+          "color": "token:lamp",
+          "full": 100
+        }
+      },
+      {
+        "output": "bright-a",
+        "part": "bulb-a",
+        "glow": {
+          "color": "token:lamp",
+          "full": 1400,
+          "curve": "linear"
+        }
+      },
+      {
+        "output": "bright-b",
+        "part": "bulb-b",
+        "glow": {
+          "color": "token:lamp",
+          "full": 1400,
+          "curve": "linear"
+        }
+      },
+      {
+        "output": "i-cells",
+        "part": "leads",
+        "glow": {
+          "color": "token:hot",
+          "full": 16,
+          "curve": "linear"
+        }
+      },
+      {
+        "output": "edge-currents",
+        "flow": "current-flow",
+        "intensity": {
+          "full": 0.25
+        }
+      },
+      {
+        "output": "status",
+        "flow": "current-flow",
+        "stops": {
+          "short": "token:hot"
+        }
+      },
+      {
+        "control": "cells",
+        "part": "cell-2",
+        "visible": {
+          "gte": 2
+        }
+      },
+      {
+        "control": "cells",
+        "part": "cell-3",
+        "visible": {
+          "gte": 3
+        }
+      },
+      {
+        "control": "flip-2",
+        "part": "cell-2",
+        "pose": {
+          "true": "cell-2-turned"
+        }
+      },
+      {
+        "control": "main",
+        "part": "main-switch",
+        "pose": {
+          "false": "main-open"
+        }
+      },
+      {
+        "control": "x",
+        "part": "switch-x",
+        "pose": {
+          "false": "x-open"
+        }
+      },
+      {
+        "control": "y",
+        "part": "switch-y",
+        "pose": {
+          "false": "y-open"
+        }
+      },
+      {
+        "control": "z",
+        "part": "switch-z",
+        "pose": {
+          "false": "z-open"
+        }
+      },
+      {
+        "control": "torch-switch",
+        "part": "torch-switch",
+        "pose": {
+          "true": "torch-on"
+        }
+      },
+      {
+        "control": "bulb-a-in",
+        "part": [
+          "bulb-a",
+          "filament-a"
+        ],
+        "pose": {
+          "false": "bulb-a-out"
+        }
+      },
+      {
+        "control": "load-a",
+        "part": [
+          "bulb-a",
+          "filament-a"
+        ],
+        "pose": {
+          "buzzer": "bulb-a-out",
+          "motor": "bulb-a-out"
+        }
+      },
+      {
+        "control": "bulb-b-in",
+        "part": [
+          "bulb-b",
+          "filament-b"
+        ],
+        "pose": {
+          "false": "bulb-b-out"
+        }
+      },
+      {
+        "control": "load-a",
+        "part": "buzzer",
+        "pose": {
+          "buzzer": "buzzer-at-a"
+        }
+      },
+      {
+        "control": "load-a",
+        "part": [
+          "motor",
+          "motor-fan"
+        ],
+        "pose": {
+          "motor": "motor-at-a"
+        }
+      },
+      {
+        "output": "motor-speed",
+        "animation": "fan-spin",
+        "rpm": {}
+      },
+      {
+        "output": "buzz",
+        "animation": "buzzer-pulse",
+        "enabled": true
+      },
+      {
+        "control": "gap",
+        "part": "paper-clip",
+        "pose": {
+          "paper-clip": "paper-clip-in-gap"
+        }
+      },
+      {
+        "control": "gap",
+        "part": "copper-wire",
+        "pose": {
+          "copper-wire": "copper-wire-in-gap"
+        }
+      },
+      {
+        "control": "gap",
+        "part": "foil-strip",
+        "pose": {
+          "foil-strip": "foil-strip-in-gap"
+        }
+      },
+      {
+        "control": "gap",
+        "part": "pencil-lead",
+        "pose": {
+          "pencil-lead": "pencil-lead-in-gap"
+        }
+      },
+      {
+        "control": "gap",
+        "part": "plastic-straw",
+        "pose": {
+          "plastic-straw": "plastic-straw-in-gap"
+        }
+      },
+      {
+        "control": "gap",
+        "part": "wooden-stick",
+        "pose": {
+          "wooden-stick": "wooden-stick-in-gap"
+        }
+      },
+      {
+        "control": "gap",
+        "part": "rubber-band",
+        "pose": {
+          "rubber-band": "rubber-band-in-gap"
+        }
+      }
+    ],
+    "circuit": {
+      "nodes": {
+        "bn": {
+          "d": [
+            230,
+            22
+          ]
+        },
+        "bp": {
+          "d": [
+            70,
+            22
+          ]
+        },
+        "s1": {
+          "d": [
+            20,
+            110
+          ]
+        },
+        "n1": {
+          "d": [
+            80,
+            150
+          ]
+        },
+        "n2": {
+          "d": [
+            150,
+            150
+          ]
+        },
+        "n3": {
+          "d": [
+            200,
+            150
+          ]
+        },
+        "n4": {
+          "d": [
+            270,
+            150
+          ]
+        },
+        "tn": {
+          "d": [
+            150,
+            262
+          ]
+        },
+        "tp": {
+          "d": [
+            40,
+            262
+          ]
+        },
+        "ts": {
+          "d": [
+            40,
+            305
+          ]
+        },
+        "tm": {
+          "d": [
+            150,
+            305
+          ]
+        }
+      },
+      "edges": [
+        {
+          "id": "cells",
+          "from": "bn",
+          "to": "bp",
+          "kind": "battery",
+          "cells": "cells",
+          "flip": {
+            "2": "flip-2"
+          },
+          "emf": 1.5,
+          "r": 0.15,
+          "part": "cell-holder",
+          "path": [
+            [
+              -0.0885,
+              0.0222,
+              -0.1
+            ],
+            [
+              -0.08,
+              0.0222,
+              -0.1
+            ],
+            [
+              0.08,
+              0.0222,
+              -0.1
+            ],
+            [
+              0.0885,
+              0.0222,
+              -0.1
+            ]
+          ]
+        },
+        {
+          "id": "main",
+          "from": "bp",
+          "to": "s1",
+          "kind": "switch",
+          "control": "main",
+          "part": "main-switch",
+          "path": [
+            [
+              0.0885,
+              0.0222,
+              -0.1
+            ],
+            [
+              0.098,
+              0.0132,
+              -0.1
+            ],
+            [
+              0.105,
+              0.0132,
+              -0.125
+            ],
+            [
+              -0.19,
+              0.0132,
+              -0.125
+            ],
+            [
+              -0.19,
+              0.0132,
+              0.07
+            ],
+            [
+              -0.1785,
+              0.0132,
+              0.07
+            ],
+            [
+              -0.1715,
+              0.0192,
+              0.07
+            ],
+            [
+              -0.166,
+              0.0225,
+              0.07
+            ],
+            [
+              -0.1425,
+              0.0225,
+              0.07
+            ],
+            [
+              -0.1385,
+              0.0192,
+              0.07
+            ],
+            [
+              -0.1325,
+              0.0132,
+              0.07
+            ],
+            [
+              -0.121,
+              0.0132,
+              0.115
+            ],
+            [
+              -0.117,
+              0.016,
+              0.115
+            ]
+          ],
+          "via": [
+            [
+              20,
+              22
+            ]
+          ],
+          "at": 0.45
+        },
+        {
+          "id": "gap",
+          "from": "s1",
+          "to": "n1",
+          "kind": "gap",
+          "control": "gap",
+          "part": "gap-clips",
+          "path": [
+            [
+              -0.117,
+              0.016,
+              0.115
+            ],
+            [
+              -0.089,
+              0.0162,
+              0.115
+            ],
+            [
+              -0.051,
+              0.0162,
+              0.115
+            ],
+            [
+              -0.023,
+              0.016,
+              0.115
+            ],
+            [
+              -0.017,
+              0.0132,
+              0.115
+            ],
+            [
+              -0.012,
+              0.0132,
+              0.075
+            ],
+            [
+              -0.088,
+              0.0132,
+              0.075
+            ],
+            [
+              -0.088,
+              0.0132,
+              0.008
+            ],
+            [
+              -0.0775,
+              0.0132,
+              0
+            ],
+            [
+              -0.0715,
+              0.0242,
+              0
+            ]
+          ],
+          "via": [
+            [
+              20,
+              205
+            ],
+            [
+              80,
+              205
+            ]
+          ],
+          "at": 0.5
+        },
+        {
+          "id": "a",
+          "from": "n1",
+          "to": "n2",
+          "kind": "load",
+          "control": "load-a",
+          "present": "bulb-a-in",
+          "part": "filament-a",
+          "path": [
+            [
+              -0.0715,
+              0.0242,
+              0
+            ],
+            [
+              -0.066,
+              0.0235,
+              0
+            ],
+            [
+              -0.06,
+              0.0197,
+              0
+            ],
+            [
+              -0.0608,
+              0.0274,
+              0
+            ],
+            [
+              -0.0616,
+              0.0356,
+              0
+            ],
+            [
+              -0.0584,
+              0.0356,
+              0
+            ],
+            [
+              -0.0592,
+              0.0274,
+              0
+            ],
+            [
+              -0.0554,
+              0.0235,
+              0
+            ],
+            [
+              -0.054,
+              0.0235,
+              0
+            ],
+            [
+              -0.0485,
+              0.0242,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "x",
+          "from": "n2",
+          "to": "n3",
+          "kind": "switch",
+          "control": "x",
+          "part": "switch-x",
+          "path": [
+            [
+              -0.0485,
+              0.0242,
+              0
+            ],
+            [
+              -0.0425,
+              0.0132,
+              0
+            ],
+            [
+              -0.0025,
+              0.0132,
+              0
+            ],
+            [
+              0.0035,
+              0.0192,
+              0
+            ],
+            [
+              0.009,
+              0.0225,
+              0
+            ],
+            [
+              0.0325,
+              0.0225,
+              0
+            ],
+            [
+              0.0365,
+              0.0192,
+              0
+            ],
+            [
+              0.0425,
+              0.0132,
+              0
+            ],
+            [
+              0.0825,
+              0.0132,
+              0
+            ],
+            [
+              0.0885,
+              0.0242,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "b",
+          "from": "n3",
+          "to": "n4",
+          "kind": "load",
+          "load": "bulb",
+          "present": "bulb-b-in",
+          "part": "filament-b",
+          "path": [
+            [
+              0.0885,
+              0.0242,
+              0
+            ],
+            [
+              0.094,
+              0.0235,
+              0
+            ],
+            [
+              0.1,
+              0.0197,
+              0
+            ],
+            [
+              0.0992,
+              0.0274,
+              0
+            ],
+            [
+              0.0984,
+              0.0356,
+              0
+            ],
+            [
+              0.1016,
+              0.0356,
+              0
+            ],
+            [
+              0.1008,
+              0.0274,
+              0
+            ],
+            [
+              0.1046,
+              0.0235,
+              0
+            ],
+            [
+              0.106,
+              0.0235,
+              0
+            ],
+            [
+              0.1115,
+              0.0242,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "y",
+          "from": "n1",
+          "to": "n3",
+          "kind": "switch",
+          "control": "y",
+          "part": "switch-y",
+          "path": [
+            [
+              -0.0715,
+              0.0242,
+              0
+            ],
+            [
+              -0.0715,
+              0.0132,
+              -0.006
+            ],
+            [
+              -0.0715,
+              0.0132,
+              -0.05
+            ],
+            [
+              -0.0025,
+              0.0132,
+              -0.05
+            ],
+            [
+              0.0035,
+              0.0192,
+              -0.05
+            ],
+            [
+              0.009,
+              0.0225,
+              -0.05
+            ],
+            [
+              0.0325,
+              0.0225,
+              -0.05
+            ],
+            [
+              0.0365,
+              0.0192,
+              -0.05
+            ],
+            [
+              0.0425,
+              0.0132,
+              -0.05
+            ],
+            [
+              0.0885,
+              0.0132,
+              -0.05
+            ],
+            [
+              0.0885,
+              0.0132,
+              -0.006
+            ],
+            [
+              0.0885,
+              0.0242,
+              0
+            ]
+          ],
+          "via": [
+            [
+              80,
+              90
+            ],
+            [
+              200,
+              90
+            ]
+          ]
+        },
+        {
+          "id": "z",
+          "from": "n2",
+          "to": "n4",
+          "kind": "switch",
+          "control": "z",
+          "part": "switch-z",
+          "path": [
+            [
+              -0.0485,
+              0.0242,
+              0
+            ],
+            [
+              -0.0485,
+              0.0132,
+              0.006
+            ],
+            [
+              -0.0485,
+              0.0132,
+              0.05
+            ],
+            [
+              -0.0025,
+              0.0132,
+              0.05
+            ],
+            [
+              0.0035,
+              0.0192,
+              0.05
+            ],
+            [
+              0.009,
+              0.0225,
+              0.05
+            ],
+            [
+              0.0325,
+              0.0225,
+              0.05
+            ],
+            [
+              0.0365,
+              0.0192,
+              0.05
+            ],
+            [
+              0.0425,
+              0.0132,
+              0.05
+            ],
+            [
+              0.1115,
+              0.0132,
+              0.05
+            ],
+            [
+              0.1115,
+              0.0132,
+              0.006
+            ],
+            [
+              0.1115,
+              0.0242,
+              0
+            ]
+          ],
+          "via": [
+            [
+              150,
+              205
+            ],
+            [
+              270,
+              205
+            ]
+          ]
+        },
+        {
+          "id": "ret",
+          "from": "n4",
+          "to": "bn",
+          "kind": "wire",
+          "r": 0.05,
+          "part": "leads",
+          "path": [
+            [
+              0.1115,
+              0.0242,
+              0
+            ],
+            [
+              0.1175,
+              0.0132,
+              0
+            ],
+            [
+              0.128,
+              0.0132,
+              -0.03
+            ],
+            [
+              0.128,
+              0.0132,
+              -0.135
+            ],
+            [
+              -0.098,
+              0.0132,
+              -0.135
+            ],
+            [
+              -0.098,
+              0.0132,
+              -0.1
+            ],
+            [
+              -0.0885,
+              0.0222,
+              -0.1
+            ]
+          ],
+          "via": [
+            [
+              270,
+              22
+            ]
+          ]
+        },
+        {
+          "id": "t-cells",
+          "from": "tn",
+          "to": "tp",
+          "kind": "battery",
+          "cells": 2,
+          "r": 0.15,
+          "part": "torch-cells",
+          "path": [
+            [
+              -0.4005,
+              0.0185,
+              0.105
+            ],
+            [
+              -0.299,
+              0.0185,
+              0.105
+            ]
+          ]
+        },
+        {
+          "id": "t-bulb",
+          "from": "tp",
+          "to": "ts",
+          "kind": "load",
+          "load": "bulb",
+          "part": "torch-bulb",
+          "path": [
+            [
+              -0.299,
+              0.0185,
+              0.105
+            ],
+            [
+              -0.2935,
+              0.0185,
+              0.105
+            ],
+            [
+              -0.2803,
+              0.02,
+              0.105
+            ],
+            [
+              -0.2803,
+              0.017,
+              0.105
+            ],
+            [
+              -0.2935,
+              0.014,
+              0.105
+            ],
+            [
+              -0.2935,
+              0.0136,
+              0.105
+            ]
+          ],
+          "via": [
+            [
+              0,
+              262
+            ],
+            [
+              0,
+              305
+            ]
+          ],
+          "at": 0.5
+        },
+        {
+          "id": "t-switch",
+          "from": "ts",
+          "to": "tm",
+          "kind": "switch",
+          "control": "torch-switch",
+          "part": "torch-switch",
+          "path": [
+            [
+              -0.2935,
+              0.0136,
+              0.105
+            ],
+            [
+              -0.2935,
+              0.0127,
+              0.105
+            ],
+            [
+              -0.3,
+              0.01,
+              0.105
+            ],
+            [
+              -0.3,
+              0.0257,
+              0.105
+            ],
+            [
+              -0.308,
+              0.0273,
+              0.105
+            ]
+          ]
+        },
+        {
+          "id": "t-strip",
+          "from": "tm",
+          "to": "tn",
+          "kind": "wire",
+          "r": 0.05,
+          "part": "torch-strip",
+          "path": [
+            [
+              -0.308,
+              0.0273,
+              0.105
+            ],
+            [
+              -0.406,
+              0.0273,
+              0.105
+            ],
+            [
+              -0.408,
+              0.0225,
+              0.105
+            ],
+            [
+              -0.4045,
+              0.0213,
+              0.105
+            ],
+            [
+              -0.4005,
+              0.0185,
+              0.105
+            ]
+          ]
+        }
+      ],
+      "materials": {
+        "copper-wire": 0.01,
+        "paper-clip": 0.05,
+        "foil-strip": 0.02,
+        "pencil-lead": 20
+      },
+      "loads": {
+        "bulb": {
+          "kind": "lamp",
+          "r": 12.5,
+          "rated": 0.5
+        },
+        "buzzer": {
+          "kind": "buzzer",
+          "r": 100,
+          "on": 0.01
+        },
+        "motor": {
+          "kind": "motor",
+          "r": 6,
+          "rpm": 40,
+          "at": 3
+        }
+      },
+      "reference": {
+        "power": 0.68
+      },
+      "diagram": {
+        "size": [
+          290,
+          305
+        ],
+        "labels": [
+          {
+            "at": [
+              164,
+              288
+            ],
+            "text": {
+              "en": "Torch",
+              "zh": "手电筒"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

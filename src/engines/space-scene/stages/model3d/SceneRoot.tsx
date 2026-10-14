@@ -50,6 +50,9 @@ import type { PartStyle } from './materials';
 import type { Box3Like } from '../../lib/parts';
 import type { StageLook } from './look';
 import { stageDpr } from './dpr';
+import { resolveSimValues } from '../../lib/sim/controls';
+import { evaluateSim } from '../../lib/sim';
+import { simEffects, type SimEffects } from '../../lib/sim/bind';
 
 const GltfSource = lazy(() => import('./GltfSource'));
 
@@ -173,6 +176,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
       tints: st.tints,
       sites: st.sites,
       demo: st.demo,
+      sim: st.sim,
       transitionId: st.transition.id,
       instant: st.transition.instant,
     })),
@@ -327,7 +331,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
   const highlight = useMemo(
     () =>
       exerciseLook
-        ? { signal: [...exerciseLook.signal, ...(s.tints?.signal ?? NO_IDS)], cold: [...exerciseLook.cold, ...(s.tints?.cold ?? NO_IDS)] }
+        ? { signal: [...exerciseLook.signal, ...(s.tints?.signal ?? NO_IDS)], cold: [...exerciseLook.cold, ...(s.tints?.cold ?? NO_IDS)], custom: s.tints?.custom }
         : s.tints,
     [exerciseLook, s.tints],
   );
@@ -349,8 +353,19 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
   if (body) lastBody.current = body;
   else if (exercising && bodyStyle === 'ghost') lastBody.current = 'wire';
   const bonesOn = s.exercise?.bones === true;
+  // Try-it: the model's outputs for the values on show, and what they do to the parts and flows (lib/sim).
+  const sim = useMemo<SimEffects | null>(() => {
+    if (!data.sim) return null;
+    const values = resolveSimValues(data.sim, s.sim);
+    return simEffects(data.sim, values, evaluateSim(data.sim, values));
+  }, [data.sim, s.sim]);
   const displays = useMemo(() => {
     const out = resolveAllPartDisplays(data.parts, { view: s.view, part: s.part, layers: s.layers, hidden: s.hidden, ghosted, solo: s.solo, highlight });
+    // A part a try-it binding hides fades out like a hidden layer (and is not picked).
+    for (const id of sim?.hidden ?? []) {
+      const d = out.get(id);
+      if (d) out.set(id, { ...d, visible: false, selectable: false, selected: false });
+    }
     if (!mannequin) return out;
     // With the mannequin: the skin is drawn by it, the bones (parts that are neither muscle nor context) step aside unless the beat keeps them.
     for (const p of data.parts) {
@@ -359,7 +374,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
       if (p.id === skinPart?.id || isSkinHand(p.mesh) || (!bonesOn && p.muscle === undefined && !p.context)) out.set(p.id, { ...d, visible: false, hidden: false, selectable: false });
     }
     return out;
-  }, [data.parts, s.view, s.part, s.layers, s.hidden, ghosted, s.solo, highlight, mannequin, bonesOn, skinPart]);
+  }, [data.parts, s.view, s.part, s.layers, s.hidden, ghosted, s.solo, highlight, mannequin, bonesOn, skinPart, sim]);
   const sitesOn = useMemo(() => activeSites(data.sites, s.part, s.sites), [data.sites, s.part, s.sites]);
   const equipment = useMemo(() => {
     const e = exerciseSheet && playable.has(exerciseSheet.id) ? exerciseSheet.motion?.equipment : undefined;
@@ -458,6 +473,28 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
   );
   const poseParts = s.pose ? poseTargets.get(s.pose) : undefined;
   const poseSeconds = s.pose ? (data.poses?.[s.pose]?.duration ?? POSE_DURATION) : POSE_DURATION;
+  /** A part's pose: a try-it binding's own (its pose, or rest) over the chapter / beat pose. */
+  const partPose = (id: string): { pose: PartTransform; seconds: number } => {
+    if (sim?.poses.has(id)) {
+      const name = sim.poses.get(id) ?? null;
+      return { pose: (name ? poseTargets.get(name)?.get(id) : undefined) ?? rest, seconds: name ? (data.poses?.[name]?.duration ?? POSE_DURATION) : POSE_DURATION };
+    }
+    return { pose: poseParts?.get(id) ?? rest, seconds: poseSeconds };
+  };
+  // Try-it glow colours (theme tokens resolved for the stage).
+  const glows = useMemo(() => {
+    const out = new Map<string, { color: string; level: number }>();
+    sim?.glow.forEach((g, id) => out.set(id, { color: resolveDataColor(g.color, look.tokens, look.theme, '#ffc96b'), level: g.level }));
+    return out;
+  }, [sim, look]);
+  const simMoves = useMemo(() => {
+    const out = new Map<string, { offset: Vec3; axis: Vec3; deg: number }>();
+    for (const id of new Set([...(sim?.offset.keys() ?? []), ...(sim?.rotate.keys() ?? [])])) {
+      const r = sim?.rotate.get(id);
+      out.set(id, { offset: sim?.offset.get(id) ?? [0, 0, 0], axis: r?.axis ?? [0, 1, 0], deg: r?.deg ?? 0 });
+    }
+    return out;
+  }, [sim]);
   const explodeTarget = targetExplodeAmount(s.view, s.explode);
   const anims = useMemo(() => animationsByPart(data.animations), [data.animations]);
   const alwaysOn = useMemo(
@@ -543,8 +580,15 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
             styles={partStyles}
             display={display}
             animations={anims.get(part.id) ?? []}
-            pose={poseParts?.get(part.id) ?? rest}
-            poseSeconds={poseSeconds}
+            {...(() => {
+              const pp = partPose(part.id);
+              return { pose: pp.pose, poseSeconds: pp.seconds };
+            })()}
+            glow={glows.get(part.id) ?? null}
+            tintColor={display.tintRef ? resolveDataColor(display.tintRef, look.tokens, look.theme) : null}
+            count={sim?.count.get(part.id) ?? null}
+            simMove={simMoves.get(part.id) ?? null}
+            animSim={sim?.animations}
             lineColor={lineColor}
             hovered={hovered === part.id}
             clipping={clipping}
@@ -566,7 +610,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
       })}
       </group>
       {/* Flow paths do not follow the parts apart: no particles while exploded (docs/12 §7.5, G16). */}
-      <Flows flows={data.flows} layers={s.view === 'exploded' ? NO_LAYERS : s.layers} look={look} clipping={clipping} />
+      <Flows flows={data.flows} layers={s.view === 'exploded' ? NO_LAYERS : s.layers} look={look} clipping={clipping} effects={sim?.flows} />
       <CameraRig
         store={store}
         ui={ui}

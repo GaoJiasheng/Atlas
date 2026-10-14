@@ -12,7 +12,9 @@
  *    the topic's `explodeLabel`); with `parts.json` `telemetry` the simulated
  *    readings follow (SIM chip), easing toward their `run` value while the
  *    scene runs (first-order lag, τ = `lag` s; 4 Hz; jumps on instant
- *    transitions so screenshots are reproducible)
+ *    transitions so screenshots are reproducible); a reading that `follow`s
+ *    a try-it output eases to each new value (τ 0.3 s), the chapter's
+ *    observed outputs in bold, and a `SIM <STATE> · <try-it values>` line
  *  - one line for the selection (number + short name); a click shows the
  *    inspector in the reading panel (opening a folded reader)
  *  - the quiet perf readout
@@ -29,7 +31,10 @@ import { resolveColorRef } from '../../../theme/theme';
 import { getPlateExpanded, setPlateExpanded } from '../../../lib/prefs';
 import { elevation, numberedParts } from '../lib/schematic';
 import { realLength, scaleBar } from '../lib/units';
-import { formatReading, lagValue, readingDecimals } from '../lib/telemetry';
+import { FOLLOW_LAG, formatReading, lagValue, readingDecimals, readingTarget } from '../lib/telemetry';
+import { numberOf, outputDecimals } from '../lib/sim';
+import type { SimControl, SimData, SimValue } from '../sim-schema';
+import { useSimView } from './sim';
 import type { SpaceSceneExt } from '../index';
 import type { PartsFile, TelemetryRow } from '../schema';
 import type { SpaceUiStore } from '../ui';
@@ -113,35 +118,35 @@ function Elevation({ file, ui }: { file: PartsFile; ui: SpaceUiStore }) {
   );
 }
 
-/** Lagged readings: values follow `run` with each row's time constant. */
-function useReadings(rows: readonly TelemetryRow[], run: boolean, snapId: number): number[] {
-  const target = (r: TelemetryRow) => (run ? r.run : r.idle);
+/** Lagged readings: each eases to its target (`run` / `idle`, or the followed try-it output) with its time constant. */
+function useReadings(rows: readonly TelemetryRow[], targets: readonly number[], snapId: number): number[] {
   const lag = useRef<{ from: number[]; to: number[]; t0: number } | null>(null);
   const [, setTick] = useState(0);
   const now = () => performance.now();
+  const lagOf = (r: TelemetryRow) => r.lag ?? FOLLOW_LAG;
   const valueAt = (i: number, at: number) => {
     const l = lag.current;
-    if (!l) return target(rows[i]!);
-    return lagValue(l.from[i]!, l.to[i]!, (at - l.t0) / 1000, rows[i]!.lag);
+    if (!l) return targets[i]!;
+    return lagValue(l.from[i]!, l.to[i]!, (at - l.t0) / 1000, lagOf(rows[i]!));
   };
-  // The run switch (or the data) changed: start easing from where the readings are now.
-  const key = `${run}`;
+  // A target changed (RUN, a try-it control): start easing from where the readings are now.
+  const key = targets.join(',');
   const seen = useRef<{ key: string; rows: readonly TelemetryRow[]; snap: number } | null>(null);
   if (!seen.current || seen.current.rows !== rows || seen.current.snap !== snapId) {
-    lag.current = { from: rows.map(target), to: rows.map(target), t0: now() };
+    lag.current = { from: [...targets], to: [...targets], t0: now() };
   } else if (seen.current.key !== key) {
     const at = now();
-    lag.current = { from: rows.map((_, i) => valueAt(i, at)), to: rows.map(target), t0: at };
+    lag.current = { from: rows.map((_, i) => valueAt(i, at)), to: [...targets], t0: at };
   }
   seen.current = { key, rows, snap: snapId };
   const values = rows.map((_, i) => valueAt(i, now()));
-  const settled = rows.every((r, i) => Math.abs(values[i]! - target(r)) < 0.5 * 10 ** -readingDecimals(r));
+  const settled = rows.every((r, i) => Math.abs(values[i]! - targets[i]!) < 0.5 * 10 ** -readingDecimals(r));
   useEffect(() => {
     if (settled) return;
     const id = setInterval(() => setTick((n) => n + 1), REFRESH_MS);
     return () => clearInterval(id);
   }, [settled]);
-  return settled ? rows.map(target) : values;
+  return settled ? [...targets] : values;
 }
 
 function Row({ label, value, on }: { label: BilingualText; value: ReactNode; on?: boolean }) {
@@ -153,23 +158,55 @@ function Row({ label, value, on }: { label: BilingualText; value: ReactNode; on?
   );
 }
 
-function Telemetry({ rows, run }: { rows: readonly TelemetryRow[]; run: boolean }) {
+/** A try-it control's value in the status line: `2 BATTERIES`, `SERIES`, `SWITCH ON`. */
+function controlStatus(c: SimControl, v: SimValue | undefined): string {
+  const label = c.label.en.toUpperCase();
+  if (c.kind === 'toggle') return `${label}: ${v ? 'ON' : 'OFF'}`;
+  if (c.kind === 'step') return `${v}${c.unit ? ` ${c.unit.toUpperCase()}` : ''} ${label}`;
+  return tx(c.options.find((o) => o.id === v)?.label ?? { en: String(v), zh: String(v) }, 'en').toUpperCase();
+}
+
+function Telemetry({ rows, run, sim }: { rows: readonly TelemetryRow[]; run: boolean; sim: SimData | undefined }) {
   const t = useT();
+  const view = useSimView(sim);
   // Instant transitions (deep links, snaps for tests / screenshots) jump to the end values.
   const snapId = useScene<SpaceSceneExt, number>((st) => (st.transition.instant ? st.transition.id : -1));
   const snap = useRef(0);
   if (snapId >= 0) snap.current = snapId;
-  const values = useReadings(rows, run, snap.current);
+  const outputs = new Map((sim?.outputs ?? []).map((o) => [o.id, o]));
+  const targets = rows.map((r) => readingTarget(r, run, r.follow !== undefined ? numberOf(view?.outputs[r.follow]) : undefined));
+  const values = useReadings(rows, targets, snap.current);
+  const observed = new Set(view?.card?.observe ?? []);
+  const decimals = (r: TelemetryRow) => (r.follow !== undefined ? (r.decimals ?? outputDecimals(outputs.get(r.follow) ?? {})) : readingDecimals(r));
+  // `SIM CLOSED · 2 BATTERIES`: the model's state, then the try-it card's controls.
+  const state = sim?.outputs.find((o) => o.kind === 'state' && o.states);
+  const stateValue = state && view ? String(view.outputs[state.id] ?? '') : '';
+  const card = view?.card;
+  const tried = card && view ? [card.vary, ...(card.also ?? [])].map((id) => sim!.controls.find((c) => c.id === id)).filter((c): c is SimControl => c !== undefined) : [];
   return (
-    <p className="space-plate__sim">
-      <span className="atlas-chip">{t('source.simulated').toUpperCase()}</span>
-      {rows.map((r, i) => (
-        <span key={i} className="space-plate__reading" data-on={run || undefined} title={`${r.key.en} / ${r.key.zh}`}>
-          {r.key.en.toUpperCase()} <b>{formatReading(values[i]!, readingDecimals(r))}</b>
-          {r.unit && <small> {r.unit}</small>}
-        </span>
-      ))}
-    </p>
+    <>
+      <p className="space-plate__sim">
+        <span className="atlas-chip">{t('source.simulated').toUpperCase()}</span>
+        {rows.map((r, i) => (
+          <span
+            key={i}
+            className="space-plate__reading"
+            data-on={(r.follow !== undefined ? numberOf(view?.outputs[r.follow]) !== 0 : run) || undefined}
+            data-observe={r.follow !== undefined && observed.has(r.follow) ? '' : undefined}
+            title={`${r.key.en} / ${r.key.zh}`}
+          >
+            {r.key.en.toUpperCase()} <b>{formatReading(values[i]!, decimals(r))}</b>
+            {r.unit && <small> {r.unit}</small>}
+          </span>
+        ))}
+      </p>
+      {state && view && (
+        <p className="space-plate__simstate" data-state={stateValue}>
+          SIM {tx(state.states?.[stateValue] ?? { en: stateValue, zh: stateValue }, 'en').toUpperCase()}
+          {tried.map((c) => ` · ${controlStatus(c, view.values[c.id])}`).join('')}
+        </p>
+      )}
+    </>
   );
 }
 
@@ -247,7 +284,7 @@ export function PlateBlock({ file, ui, bridge }: { file: PartsFile; ui: SpaceUiS
             </span>
           ))}
         </p>
-        {file.telemetry && <Telemetry rows={file.telemetry} run={s.run} />}
+        {file.telemetry && <Telemetry rows={file.telemetry} run={s.run} sim={file.sim} />}
         {picked ? (
           <button type="button" className="space-plate__sel" title={t('space.plate.show', { name: tx(picked.name, locale) })} onClick={showInspector}>
             <b>{partNumber(file, picked.id)}</b>

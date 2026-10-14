@@ -1,0 +1,107 @@
+---
+id: series-and-parallel
+order: 5
+title: {"en": "Series and parallel", "zh": "串联与并联"}
+sensitive: false
+state:
+  labels: ["bulb-a", "bulb-b", "switch-x"]
+  camera: {"position": [0.07, 0.2, 0.3], "target": [0.025, 0.02, 0], "fov": 30}
+  summary: {"en": "Bulbs in series share one path and glow dimmer; bulbs in parallel each have their own path and stay bright.", "zh": "串联的灯泡共用一条路径，更暗；并联的灯泡各有自己的路径，一样亮。"}
+  sim: {"set": {"arrangement": "series", "cells": 2}, "try": {"vary": "arrangement", "also": ["bulb-a-in"], "keep": ["cells", {"en": "Same bulbs", "zh": "同样的灯泡"}], "observe": ["i-cells", "bright-a", "bright-b"], "record": true}}
+  beats:
+    - labels: ["bulb-a", "bulb-b", "switch-x"]
+      caption: {"en": "Two bulbs in series: one path, through one bulb and then the other. Both glow, each much dimmer than a single bulb.", "zh": "两只灯泡串联：只有一条路径，先经过一只，再经过另一只。两只都亮，但都比单独一只暗得多。"}
+    - sim: {"set": {"bulb-a-in": false}}
+      labels: ["bulb-a", "bulb-b"]
+      caption: {"en": "Unscrew one bulb and the only path is broken. Both go dark.", "zh": "拧下一只灯泡，唯一的路径断了，两只都熄灭。"}
+    - sim: {"set": {"arrangement": "parallel"}}
+      labels: ["switch-y", "switch-z", "bulb-a", "bulb-b"]
+      caption: {"en": "Two bulbs in parallel: each has its own path to the batteries. Each glows about as brightly as a single bulb.", "zh": "两只灯泡并联：每只都有一条通向电池的路径。每只都和单独一只时差不多亮。"}
+    - sim: {"set": {"arrangement": "parallel", "bulb-a-in": false}}
+      labels: ["bulb-a", "bulb-b"]
+      caption: {"en": "Unscrew one bulb now and the other stays lit, because its own path is still complete.", "zh": "这时拧下一只，另一只照样亮，因为它自己的路径还是完整的。"}
+    - camera: "board-top"
+      sim: {"set": {"arrangement": "parallel"}}
+      labels: ["cell-holder", "bulb-a", "bulb-b"]
+      caption: {"en": "The cost: in this model the parallel circuit draws about twice the current of a single bulb, so its batteries run down sooner.", "zh": "代价是：在这个模型里，并联电路从电池取的电流约是单只灯时的两倍，电池用得更快。"}
+    - sim: {"set": {"arrangement": "free", "x": true, "z": true, "y": false}}
+      labels: ["switch-x", "switch-z", "bulb-a", "bulb-b"]
+      caption: {"en": "Switches in different places control different paths. With these two closed, current skips bulb B, so only bulb A lights.", "zh": "不同位置的开关控制不同的路径。合上这两个开关，电流绕过了灯泡 B，只有灯泡 A 亮。"}
+  index: {"parts": ["bulb-a", "bulb-b", "filament-a", "filament-b", "switch-x", "switch-y", "switch-z", "cell-holder"]}
+---
+
+<Lang en>
+
+Bulbs A and B stand side by side in the middle of the board, and three small link switches, X, Y and Z, decide how they are joined. With only X closed the two bulbs are in series: there is one path, and the current flows through bulb A and then through bulb B. Both glow, each much dimmer than a single bulb on the same two batteries. <FlyTo preset="bulbs-view">Look at the two bulbs</FlyTo>
+
+Unscrew one bulb from the series circuit and its empty holder leaves a gap in the only path. Both bulbs go dark, the one still in place as well.
+
+Now open X and close Y and Z. The bulbs are in <Term id="parallel">parallel</Term>: each has its own path from one end of the batteries to the other. Each glows about as brightly as a single bulb. Unscrew one and the other stays lit, because its own path is still complete.
+
+Parallel has a cost. Each bulb takes about the current a single bulb would, so the batteries supply about twice as much in total and run down sooner.
+
+Other combinations of the switches make other paths. With X and Z closed the current can go round bulb B through Z, an easier path, so only bulb A lights; with X and Y closed only bulb B lights. The circuit diagram at the top right highlights every wire that carries current. Use the Try it card to switch between one bulb, series and parallel, record a row for each, then try the switches one by one.
+
+<More title={{ en: "The same current all along a series path", zh: "串联时处处电流相同" }}>
+
+In this model, with two batteries and the bulbs in series, the reading for bulb A and the reading for bulb B are the same, <Num s="S1">0.118 A</Num>, and so is the current from the batteries. The second bulb gets just as much current as the first; what the two bulbs share is the batteries' push. Each glows with a brightness of <Num s="S1">26</Num>, against <Num s="S1">100</Num> for one bulb alone. With a single battery the series pair drops to <Num s="S1">0.060 A</Num> and a brightness of <Num s="S1">7</Num> each.
+
+</More>
+
+<More title={{ en: "Parallel in numbers", zh: "并联的数字" }}>
+
+In this model the two batteries supply <Num s="S1">0.454 A</Num> to the parallel pair, <Num s="S1">0.227 A</Num> through each bulb, against <Num s="S1">0.233 A</Num> for a single bulb. Each bulb's brightness is <Num s="S1">95</Num>, a little below <Num s="S1">100</Num> because the larger current loses a little more push inside the batteries.
+
+</More>
+
+<More title={{ en: "Lights at home are in parallel", zh: "家里的电灯是并联的" }}>
+
+The lights and sockets in a home are wired in parallel, each with its own path, so that each can be switched on and off without the others. If every bulb on a string of decorative lights were joined in series instead, one loose or broken bulb would darken the whole string, just as on the board.
+
+</More>
+
+<More title={{ en: "The switch puzzle", zh: "开关谜题" }}>
+
+With the main switch closed, X, Y and Z can be set in eight ways. None closed: nothing lights, because there is no path back to the batteries. X only: A and B in series, both dim. Y only: B alone. Z only: A alone. X and Y: B alone, because A is bypassed. X and Z: A alone, because B is bypassed. Y and Z: both in parallel, both bright. All three closed is the subject of chapter 06. The circuit diagram shows each answer as you set it.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+电路板中间并排立着灯泡 A 和 B，三个小小的连接开关 X、Y、Z 决定它们怎样连接。只合上 X，两只灯泡就是串联：只有一条路径，电流先流过灯泡 A，再流过灯泡 B。两只都亮，但都比同样两节电池点一只灯时暗得多。<FlyTo preset="bulbs-view">看两只灯泡</FlyTo>
+
+在串联电路里拧下一只灯泡，空灯座在唯一的路径上留下缺口。两只灯都熄了，还在灯座上的那只也一样。
+
+现在断开 X，合上 Y 和 Z。两只灯泡变成了<Term id="parallel">并联</Term>：每只都有自己的一条路径，从电池的一极通到另一极。每只都和单独一只灯时差不多亮。拧下其中一只，另一只照样亮，因为它自己的路径仍然完整。
+
+并联是有代价的。每只灯泡取的电流和单独一只时差不多，电池总共要供出约两倍的电流，用得也更快。并联的灯越多，电池要供出的电流就越大。
+
+开关的其他组合会接出别的路径。合上 X 和 Z，电流可以经 Z 绕过灯泡 B，走更顺畅的路，所以只有灯泡 A 亮；合上 X 和 Y，就只有灯泡 B 亮。右上角的电路图会把有电流的导线都标亮。用「试一试」卡片在单灯、串联、并联之间切换，每种记一行，再一个一个地拨开关试试。
+
+<More title={{ en: "The same current all along a series path", zh: "串联时处处电流相同" }}>
+
+在这个模型里，用两节电池、两只灯串联时，灯泡 A 和灯泡 B 的读数一样，都是 <Num s="S1">0.118 A</Num>，电池输出的电流也是这么多。第二只灯得到的电流和第一只一样多；两只灯分摊的是电池的推动力。每只的亮度是 <Num s="S1">26</Num>，单独一只灯时是 <Num s="S1">100</Num>。只用一节电池时，串联的两只灯电流降到 <Num s="S1">0.060 A</Num>，各自亮度只有 <Num s="S1">7</Num>。
+
+</More>
+
+<More title={{ en: "Parallel in numbers", zh: "并联的数字" }}>
+
+在这个模型里，两节电池给并联的两只灯共供出 <Num s="S1">0.454 A</Num>，每只灯 <Num s="S1">0.227 A</Num>；单独一只灯时是 <Num s="S1">0.233 A</Num>。每只灯的亮度是 <Num s="S1">95</Num>，比 <Num s="S1">100</Num> 稍低，因为电流大了，电池内部损失的推动力也多一点。
+
+</More>
+
+<More title={{ en: "Lights at home are in parallel", zh: "家里的电灯是并联的" }}>
+
+家里的电灯和插座都是并联的，各有各的路径，所以每一个都能单独开关，不影响别的。假如一串装饰彩灯的每只小灯都串联起来，只要一只松了或坏了，整串就全黑，和电路板上一样。
+
+</More>
+
+<More title={{ en: "The switch puzzle", zh: "开关谜题" }}>
+
+主开关合上时，X、Y、Z 共有八种拨法。全断开：哪只都不亮，因为没有回到电池的路径。只合 X：A、B 串联，都暗。只合 Y：只有 B 亮。只合 Z：只有 A 亮。合 X 和 Y：A 被绕过，只有 B 亮。合 X 和 Z：B 被绕过，只有 A 亮。合 Y 和 Z：两只并联，都很亮。三个全合上，留到第 06 章讲。每拨一种，右上角的电路图都会显示答案。
+
+</More>
+
+</Lang>

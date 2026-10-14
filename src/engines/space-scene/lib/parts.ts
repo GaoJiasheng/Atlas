@@ -6,7 +6,7 @@
 import type { Part, PartRepeat, Primitive } from '../schema';
 import { normalize3, type Vec3 } from './math';
 import { apply3, axisAngle, eulerDeg, IDENTITY3, mul3, perpendicular, type Mat3 } from './xform';
-import { axialHalfHeight, barrelDiscs, coilBox, curvedPanelBox, extrudeBox, grilleBox, latheBox } from './shaped';
+import { axialHalfHeight, barrelDiscs, coilBox, curvedPanelBox, extrudeBox, grilleBox, helixBox, latheBox } from './shaped';
 import { sweepBox } from './sweep';
 import { wingBox } from './wing';
 
@@ -174,6 +174,8 @@ function unmirroredBox(p: Primitive): Box3Like {
       return sym(p.size[0] / 2, p.size[1] / 2, p.size[2] / 2);
     case 'lathe':
       return latheBox(p);
+    case 'coil':
+      return helixBox(p);
     case 'extrude':
       return extrudeBox(p);
     case 'curvedPanel':

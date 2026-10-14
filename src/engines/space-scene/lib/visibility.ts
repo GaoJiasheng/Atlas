@@ -51,10 +51,11 @@ export interface DisplayState {
   /** Soloed group (every part outside it faint) or soloed part (see above). */
   solo?: string | null;
   /** Tints: part or group ids. */
-  highlight?: { signal: readonly string[]; cold: readonly string[] } | null;
+  highlight?: { signal: readonly string[]; cold: readonly string[]; custom?: Readonly<Record<string, string>> | undefined } | null;
 }
 
-export type PartTint = 'signal' | 'cold' | null;
+/** A highlight tint: signal, cold, or `custom` (the part's own colour ref in `PartDisplay.tintRef`). */
+export type PartTint = 'signal' | 'cold' | 'custom' | null;
 
 export interface PartDisplay {
   visible: boolean;
@@ -71,6 +72,8 @@ export interface PartDisplay {
   faint: boolean;
   /** Highlight tint. */
   tint: PartTint;
+  /** With tint `custom`: the colour ref (`token:<name>` / `#hex`). */
+  tintRef?: string;
 }
 
 /** Whether a part list uses the `shell` flag (then X-RAY ghosts only shells). */
@@ -107,8 +110,10 @@ export function resolvePartDisplay(
   const ghost = xray || faint;
   const opacity = faint ? GHOST_OPACITY : xray ? XRAY_OPACITY : 1;
   const lists = (ids: readonly string[] | undefined) => names(ids) || (part.group !== undefined && (ids?.includes(part.group) ?? false));
-  const tint: PartTint = lists(state.highlight?.signal) ? 'signal' : lists(state.highlight?.cold) ? 'cold' : null;
-  return { visible, opacity, selected, ghost, hidden, selectable: part.context !== true && !faint, faint, tint };
+  const custom = state.highlight?.custom;
+  const customRef = custom ? (custom[part.id] ?? (part.twinOf !== undefined ? custom[part.twinOf] : undefined) ?? (part.group !== undefined ? custom[part.group] : undefined)) : undefined;
+  const tint: PartTint = lists(state.highlight?.signal) ? 'signal' : lists(state.highlight?.cold) ? 'cold' : customRef !== undefined ? 'custom' : null;
+  return { visible, opacity, selected, ghost, hidden, selectable: part.context !== true && !faint, faint, tint, ...(tint === 'custom' ? { tintRef: customRef! } : {}) };
 }
 
 /** Display for every part, keyed by id. */

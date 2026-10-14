@@ -9,8 +9,15 @@
  * per material slot (a coil's fins and copper tubes, a compressor's shell
  * and terminal cover).
  *
- * Transform stack: position (rest centre + explode) → pose (matrix) →
- * animations (matrix) → the shape's own transform (glb meshes).
+ * Transform stack: position (rest centre + explode) → pose (matrix) → the
+ * try-it offset / turn (eased) → animations (matrix) → the shape's own
+ * transform (glb meshes).
+ *
+ * Try-it bindings (lib/sim/bind.ts) also give a part a glow (`uGlow` on its
+ * own material, slot 0; eased: a dull red at a trace warming to the lamp
+ * colour, brighter past full), a
+ * count of its `repeat` copies on show, and per animation a speed (a rotate's
+ * rpm, integrated so a change never jumps) or an off switch (eased out).
  *
  * glb parts skinned to the model's skeleton draw as skinned meshes in
  * detached bind mode, so the explode / put-aside / pose transforms still
@@ -24,6 +31,7 @@ import { useEffect, useLayoutEffect, useMemo, useRef, type Ref } from 'react';
 import { useFrame, type ThreeEvent } from '@react-three/fiber';
 import {
   Box3,
+  Color,
   DetachedBindMode,
   Euler,
   InstancedMesh,
@@ -123,6 +131,16 @@ export interface PartNodeProps {
   stages: number;
   /** Exercise mode: the highlight tint follows the part's contraction (stronger as it shortens). */
   tintLive?: boolean;
+  /** A `custom` highlight's colour (sRGB hex; display.tint `custom`). */
+  tintColor?: string | null;
+  /** Try-it glow: colour (sRGB hex) and level (0 dark, 1 full, ≤ 2 brighter). */
+  glow?: { color: string; level: number } | null;
+  /** Try-it: copies of the part's `repeat` on show (null: all). */
+  count?: number | null;
+  /** Try-it offset (scene units) and turn about a unit axis through the part centre. */
+  simMove?: { offset: Vec3; axis: Vec3; deg: number } | null;
+  /** Try-it animation overrides by animation id: a rotate's rpm, and whether it plays. */
+  animSim?: ReadonlyMap<string, { rpm?: number; enabled: boolean }>;
   onSelect(id: string): void;
   onHover(id: string | null): void;
 }
@@ -160,6 +178,14 @@ const tmpS = new Vector3();
 const tmpS3: Vec3 = [1, 1, 1];
 const tmpEach = new Matrix4();
 const tmpInst = new Matrix4();
+const tmpGlow = new Color();
+const GLOW_DIM = new Color('#7a2410');
+const GLOW_WHITE = new Color('#ffffff');
+/** Emissive strength of a full glow (level 1). */
+const GLOW_GAIN = 2.2;
+/** Glow eases in ~0.2 s, a try-it move in ~0.5 s. */
+const GLOW_RATE = 14;
+const MOVE_RATE = 7;
 
 /** An animation that moves every copy of its part about the copy's own centre (schema `each`). */
 const isEach = (a: PartAnimation) => (a.kind === 'rotate' || a.kind === 'oscillate' || a.kind === 'pulse') && a.each === true;
@@ -263,6 +289,13 @@ export function PartNode(props: PartNodeProps) {
     frame: 0,
     /** `each` animations moved the instances last frame (one more write puts them back at rest). */
     eachMoved: false,
+    /** Try-it glow level now; offset and turn now. */
+    glow: props.glow?.level ?? 0,
+    move: [0, 0, 0] as Vec3,
+    turn: 0,
+    /** Per animation: its integrated angle (a sim-driven rotate) and how far it is switched on. */
+    angle: props.animations.map(() => 0),
+    on: props.animations.map((a): number => (props.animSim?.get(a.id)?.enabled === false ? 0 : 1)),
   });
   const press = useRef<{ timer: ReturnType<typeof setTimeout> | null; x: number; y: number }>({ timer: null, x: 0, y: 0 });
 
@@ -274,6 +307,8 @@ export function PartNode(props: PartNodeProps) {
     [hasLines],
   );
   const fans = useMemo(() => shape.pieces.filter((p) => p.fan), [shape]);
+  const glowHex = props.glow?.color ?? '#ffffff';
+  const glowColor = useMemo(() => new Color(glowHex), [glowHex]);
   const eachPieces = useMemo(() => shape.pieces.filter((p) => p.pivots && p.matrices), [shape]);
   // Per-frame maths without allocation: explode vector and unit animation axes, once. Context parts stay put.
   const push = useMemo(() => (part.context ? ([0, 0, 0] as Vec3) : explodeOffset(part.explode, 1)), [part.explode, part.context]);
@@ -376,6 +411,21 @@ export function PartNode(props: PartNodeProps) {
     [handle],
   );
 
+  // Try-it count: the first k copies of the `repeat` (merged copies are contiguous, so a draw range; instances: the count).
+  const copies = part.repeat?.count ?? 1;
+  const shownCopies = props.count ?? null;
+  useLayoutEffect(() => {
+    for (const [piece, o] of pieces.current) {
+      if (o instanceof InstancedMesh) o.count = shownCopies === null ? (piece.matrices?.length ?? o.count) : Math.min(piece.matrices?.length ?? 0, Math.round(((piece.matrices?.length ?? 0) * shownCopies) / copies));
+      else if (o instanceof Mesh && !(o instanceof SkinnedMesh)) {
+        const total = piece.geometry.getAttribute('position').count;
+        const per = total / copies;
+        piece.geometry.setDrawRange(0, shownCopies === null ? Infinity : Math.round(per * Math.min(copies, shownCopies)));
+      }
+    }
+    runtime.shadowDirty = true;
+  }, [shownCopies, copies, shape, runtime]);
+
   // Hidden, faint and context parts do not take part in picking (clicks pass through).
   const pickable = display.visible && display.selectable;
   useEffect(() => {
@@ -459,6 +509,19 @@ export function PartNode(props: PartNodeProps) {
     if (Math.abs(m.sel - selTarget) < 0.003) m.sel = selTarget;
     for (const pm of pms) pm.uniforms.uSel.value = m.sel;
 
+    // Try-it glow: a dull red at a trace, warming to the lamp colour at full, whiter past it.
+    const glowTarget = props.glow?.level ?? 0;
+    m.glow = snap ? glowTarget : damp(m.glow, glowTarget, GLOW_RATE, dt);
+    if (Math.abs(m.glow - glowTarget) < 0.002) m.glow = glowTarget;
+    if (props.glow || m.glow > 0) {
+      const l = m.glow;
+      tmpGlow.copy(GLOW_DIM).lerp(glowColor, Math.min(1, l * 1.4));
+      if (l > 1) tmpGlow.lerp(GLOW_WHITE, Math.min(1, (l - 1) * 0.6));
+      tmpGlow.multiplyScalar(l * GLOW_GAIN);
+      // The part's own material only (slot 0: a filament coil, not its support wires or the brass base).
+      pms[0]!.uniforms.uGlow.value.copy(tmpGlow);
+    }
+
     // Highlight tint (exercise mode, `highlight`): eased like the selection; in an exercise it follows the contraction.
     const c = runtime.contract.get(part.id) ?? 0;
     const tintTarget = display.tint ? TINT * (props.tintLive ? TINT_REST + (1 - TINT_REST) * c : 1) : 0;
@@ -466,7 +529,7 @@ export function PartNode(props: PartNodeProps) {
     if (Math.abs(m.tint - tintTarget) < 0.003) m.tint = tintTarget;
     for (const pm of pms) {
       pm.uniforms.uHi.value = m.tint;
-      pm.uniforms.uHiColor.value.set(display.tint === 'cold' ? style.cold : style.signal);
+      pm.uniforms.uHiColor.value.set(display.tint === 'custom' && props.tintColor ? props.tintColor : display.tint === 'cold' ? style.cold : style.signal);
     }
 
     // Contraction (MotionDriver): along the fibres in the shader, else a scale below.
@@ -501,6 +564,20 @@ export function PartNode(props: PartNodeProps) {
     if (pr) {
       pr.matrix.identity();
       if (!isRest(m.poseNow)) applyTransform(pr.matrix, m.poseNow, shape.position);
+      // Try-it offset and turn (about the part centre), eased.
+      const sm = props.simMove;
+      for (let a = 0; a < 3; a++) {
+        const to = sm?.offset[a] ?? 0;
+        m.move[a] = snap ? to : damp(m.move[a]!, to, MOVE_RATE, dt);
+        if (Math.abs(m.move[a]! - to) < 1e-6) m.move[a] = to;
+        else moving = true;
+      }
+      const turnTo = sm?.deg ?? 0;
+      m.turn = snap ? turnTo : damp(m.turn, turnTo, MOVE_RATE, dt);
+      if (Math.abs(m.turn - turnTo) < 0.01) m.turn = turnTo;
+      else moving = true;
+      if (m.move[0] !== 0 || m.move[1] !== 0 || m.move[2] !== 0) pr.matrix.multiply(tmpT.makeTranslation(m.move[0], m.move[1], m.move[2]));
+      if (m.turn !== 0 && sm) pr.matrix.multiply(tmpM.makeRotationAxis(tmpV.set(sm.axis[0], sm.axis[1], sm.axis[2]), m.turn * DEG2RAD));
       pr.matrixWorldNeedsUpdate = true;
       // The label anchor follows the pose.
       const move = (rest: readonly number[], out: Vec3) => {
@@ -527,10 +604,21 @@ export function PartNode(props: PartNodeProps) {
       m.wasRunning = running;
       props.animations.forEach((a, i) => {
         if (isEach(a)) return; // per copy, below
+        // Try-it: an animation switched off eases out; a rotate with a bound speed integrates its own angle.
+        const sim = props.animSim?.get(a.id);
+        const onTarget = sim?.enabled === false ? 0 : 1;
+        m.on[i] = snap ? onTarget : damp(m.on[i] ?? 1, onTarget, 6, dt);
+        if (Math.abs(m.on[i]! - onTarget) < 0.003) m.on[i] = onTarget;
+        else moving = true;
         const always = !a.whenRun;
-        if (!always && runtime.energy === 0) return;
+        if ((!always && runtime.energy === 0) || m.on[i] === 0) return;
         const t = always ? runtime.elapsed : runtime.phase;
-        const k = always ? 1 : runtime.energy;
+        const k = (always ? 1 : runtime.energy) * m.on[i]!;
+        if (a.kind === 'rotate' && sim?.rpm !== undefined) {
+          m.angle[i] = (m.angle[i]! + dt * k * (sim.rpm / 60) * 2 * Math.PI) % (2 * Math.PI);
+          aboutPivot(anim.matrix, tmpM.makeRotationFromQuaternion(tmpQ.setFromAxisAngle(axes[i]!, m.angle[i]!)), pivots[i]!);
+          return;
+        }
         if (a.kind === 'sequence') {
           // A one-shot clip plays from the start of each run (always-on ones from load) and holds its last key.
           const time = a.loop || always ? t : Math.min(t - m.runStart, sequenceLength(a.keys));
@@ -621,7 +709,7 @@ export function PartNode(props: PartNodeProps) {
       }
     } else if (sk && m.skinMoved !== runtime.bonesMoved) keepAnimating(state.invalidate); // the last pose still needs measuring
 
-    if (moving || m.fade !== targetFade || m.base !== targetBase || m.aside !== asideTarget || m.sel !== selTarget || m.tint !== tintTarget)
+    if (moving || m.fade !== targetFade || m.base !== targetBase || m.aside !== asideTarget || m.sel !== selTarget || m.tint !== tintTarget || m.glow !== glowTarget)
       keepAnimating(state.invalidate);
   });
 

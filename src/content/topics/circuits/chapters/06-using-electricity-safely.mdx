@@ -1,0 +1,94 @@
+---
+id: using-electricity-safely
+order: 6
+title: {"en": "Using electricity safely", "zh": "安全用电"}
+sensitive: false
+state:
+  labels: ["switch-x", "switch-y", "switch-z", "leads"]
+  camera: {"position": [0.45, 0.62, 0.92], "target": [-0.02, 0, 0], "fov": 30}
+  summary: {"en": "Batteries are safe for experiments; mains electricity is far more powerful, so circuits are kept insulated, dry and not overloaded.", "zh": "电池做实验是安全的；市电强大得多，所以电路要绝缘、保持干燥、不能过载。"}
+  sim: {"set": {"arrangement": "single", "cells": 2}, "try": {"vary": "arrangement", "keep": ["cells"], "observe": ["bright-a", "i-cells", "status"], "predict": {"prompt": {"en": "What happens if all three link switches are closed?", "zh": "三个连接开关都合上，会怎样？"}, "start": {"arrangement": "single"}, "change": {"arrangement": "free", "x": true, "y": true, "z": true}, "observe": "bright-a", "options": [{"id": "brighter", "label": {"en": "Both bulbs brighter", "zh": "两只都更亮"}, "means": "more"}, {"id": "out", "label": {"en": "Both go out", "zh": "两只都灭"}, "means": "zero"}, {"id": "no-change", "label": {"en": "Nothing changes", "zh": "没变化"}, "means": "same"}]}}}
+  beats:
+    - camera: "bulbs-view"
+      sim: {"set": {"arrangement": "free", "x": true, "y": true, "z": true}}
+      labels: ["switch-x", "switch-y", "switch-z", "leads"]
+      caption: {"en": "Close all three link switches and the batteries are joined almost straight to themselves. Nearly all the current takes this easy path: the bulbs go out and the wires and batteries heat up. This is a short circuit. Do not try it at home.", "zh": "三个连接开关全合上，电池的两极几乎直接连在一起。几乎所有电流都走这条捷径：灯灭了，导线和电池发热。这叫短路。不要在家里试。"}
+    - camera: {"position": [0.3, 0.055, 0.035], "target": [0.272, 0.004, -0.036], "fov": 30}
+      labels: ["wire-cutaway"]
+      caption: {"en": "Insulation keeps current on its path. A cable with its plastic coat worn through, copper showing, must not be used.", "zh": "绝缘层让电流沿着该走的路走。外皮磨破、露出铜芯的电线不能再用。"}
+    - labels: ["cell-holder", "leads"]
+      caption: {"en": "The sockets at home supply 230 volts, about one hundred and fifty times the push of one battery. That is enough to cause serious injury or death.", "zh": "家里的插座提供 230 伏电压，约是一节电池的一百五十倍。足以造成严重伤害甚至死亡。"}
+    - labels: ["leads", "wire-cutaway"]
+      caption: {"en": "Tap water conducts electricity. Keep drinks away from sockets and never touch switches or plugs with wet hands.", "zh": "自来水能导电。饮料不要放在插座旁，不要用湿手碰开关和插头。"}
+    - labels: ["main-switch", "leads"]
+      caption: {"en": "Too many appliances on one socket can overheat it. Wiring at home is done by licensed electricians, and a circuit breaker cuts the power when something goes wrong.", "zh": "一个插座接太多电器会过热。家里的电线要由持证电工安装，出了问题时断路器会切断电源。"}
+  index: {"parts": ["switch-x", "switch-y", "switch-z", "leads", "wire-cutaway", "cell-cutaway", "main-switch"]}
+---
+
+<Lang en>
+
+Close all three link switches and the two ends of the batteries are joined almost directly. Nearly all the current takes this easy path instead of going through the bulbs, so both bulbs go out while the current becomes very large and heats the wires and the batteries. This is a <Term id="short-circuit">short circuit</Term>. The model shows it so that nobody has to: do not try it at home, as a shorted battery can grow hot and give off gas. Use the Try it card to predict the result first.
+
+Insulation keeps current on its path. A cable whose plastic coat is cracked or worn through, with copper showing, must not be used; it should be replaced, not mended with tape. <FlyTo preset="cutaways-view">Look again at the stripped wire</FlyTo>
+
+At home the push is far stronger. The sockets in Singapore supply <Num s="S23">230 V</Num>, about <Num s="S23">150</Num> times the push of one AA battery. That is enough to drive a dangerous current through a person, and a shock can kill. Tap water conducts and wet skin lets much more current through than dry skin, so keep drinks away from sockets and never touch switches, plugs or appliances with wet hands.
+
+<Figure src="figures/circuits-socket-plug" alt={{ en: "Pencil drawing of a three-pin plug with rectangular pins, its back cut open to show the insulated wires fixed under screw terminals, a small cartridge fuse and a clamp gripping the cable. Behind it is a wall socket with three rectangular holes and a rocker switch.", zh: "三脚插头的铅笔画，插脚是长方形的；插头背面剖开，露出拧在接线螺丝下的绝缘导线、一支小小的管状保险丝和夹住电线的线夹。后面是一个有三个长方形插孔和一个翘板开关的墙上插座。" }} caption={{ en: "A three-pin plug, cut open to show the fuse inside, in front of a wall socket of the kind used in Singapore homes. An illustration made for this topic.", zh: "剖开的三脚插头，露出里面的保险丝，后面是新加坡家庭用的那种墙上插座。为本主题画的示意图。" }} />
+
+Plugging too many appliances into one socket or extension can overheat it and start a fire; damaged cables and burn marks are warning signs. Electrical work at home is done by licensed electrical workers. Every home in Singapore must have a residual current circuit breaker, which cuts the power at once when current leaks from its path; test it once a month with its test button.
+
+Using electricity well means not wasting it. Switch off lights when leaving a room and turn appliances off at the socket. In Singapore about <Num s="S29">94 %</Num> of electricity is made from natural gas, so electricity saved is fuel saved.
+
+<More title={{ en: "Short circuits in numbers", zh: "短路的数字" }}>
+
+In this model the short circuit draws about <Num s="S1">8.2 A</Num> from the two batteries, more than <Num s="S1">35</Num> times the <Num s="S1">0.233 A</Num> of one bulb, and the bulbs get none. Almost the only thing holding the current back is the batteries' own resistance inside. In mains wiring, fuses and circuit breakers open the circuit automatically when a current stays too large for too long.
+
+</More>
+
+<More title={{ en: "Inside a plug and socket", zh: "插头和插座里面" }}>
+
+Singapore uses three-pin plugs with rectangular pins, Type G, rated for up to <Num s="S24">13 A</Num>: live and neutral below, a larger earth pin on top. Inside every plug is a small cartridge fuse, commonly <Num s="S24">3 A</Num> or <Num s="S24">13 A</Num>. If a fault makes the current too large, the thin wire in the fuse melts and opens the circuit, protecting the cable. The socket's holes for live and neutral are covered by shutters. The supply pushes back and forth <Num s="S23">50</Num> times a second, unlike a battery's steady push in one direction.
+
+</More>
+
+<More title={{ en: "Where the electricity comes from", zh: "电从哪里来" }}>
+
+Most of Singapore's electricity is made in gas-fired power stations. In 2024 natural gas supplied <Num s="S29">94.0 %</Num> of the fuel for generating electricity; waste, biomass and imported electricity <Num s="S29">2.7 %</Num>; solar panels <Num s="S29">2.1 %</Num>. Cables on towers and underground carry it to substations and on to homes. The National Environment Agency's tips for saving it include switching off lights when you leave a room, switching appliances off at the socket, and setting air-conditioners at <Num s="S30">25 °C</Num>.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+把三个连接开关全合上，电池的两极几乎直接连在了一起，中间只有导线和开关的金属触点。几乎所有电流都走这条捷径，不再经过灯泡，于是两只灯都灭了，电流却变得很大，导线和电池都发热。这叫<Term id="short-circuit">短路</Term>。这里只在模型里演示，谁都不必真的去做：不要在家试，短路的电池会发烫，还可能放出气体。用「试一试」卡片先猜猜两只灯会怎样。
+
+绝缘层让电流沿着该走的路走。塑料外皮开裂或磨穿、露出铜芯的电线不能再用，要整根换掉，不能用胶布缠一缠了事。<FlyTo preset="cutaways-view">再看一眼剥开的导线</FlyTo>
+
+家里的电，推动力要大得多。新加坡的插座供电 <Num s="S23">230 V</Num>，约是一节 AA 电池的 <Num s="S23">150</Num> 倍，足以推动危险的电流穿过人体，触电可能致命。自来水能导电，湿皮肤比干皮肤让多得多的电流通过，所以饮料不要放在插座旁，也绝不要用湿手碰开关、插头和电器。
+
+<Figure src="figures/circuits-socket-plug" alt={{ en: "Pencil drawing of a three-pin plug with rectangular pins, its back cut open to show the insulated wires fixed under screw terminals, a small cartridge fuse and a clamp gripping the cable. Behind it is a wall socket with three rectangular holes and a rocker switch.", zh: "三脚插头的铅笔画，插脚是长方形的；插头背面剖开，露出拧在接线螺丝下的绝缘导线、一支小小的管状保险丝和夹住电线的线夹。后面是一个有三个长方形插孔和一个翘板开关的墙上插座。" }} caption={{ en: "A three-pin plug, cut open to show the fuse inside, in front of a wall socket of the kind used in Singapore homes. An illustration made for this topic.", zh: "剖开的三脚插头，露出里面的保险丝，后面是新加坡家庭用的那种墙上插座。为本主题画的示意图。" }} />
+
+一个插座或拖线板插太多电器，会过热起火；电线破损、出现烧焦痕迹，都是警告信号。家里的电气工程由持证电工来做。新加坡每户人家都必须装漏电断路器，电流一旦从该走的路径漏出去，它立刻切断电源；应该每月按一次测试按钮，检查它是否正常。
+
+用好电，也包括不浪费电。离开房间随手关灯，电器不用时在插座处关掉。新加坡约 <Num s="S29">94 %</Num> 的电是用天然气发的，省下的电就是省下的燃料。
+
+<More title={{ en: "Short circuits in numbers", zh: "短路的数字" }}>
+
+在这个模型里，短路时两节电池输出约 <Num s="S1">8.2 A</Num> 的电流，是点亮一只灯时 <Num s="S1">0.233 A</Num> 的 <Num s="S1">35</Num> 倍以上，而灯泡一点电流也得不到。挡住电流的几乎只剩电池自身内部的阻碍。在家里的线路上，电流过大而且持续一段时间，保险丝和断路器就会自动断开电路。
+
+</More>
+
+<More title={{ en: "Inside a plug and socket", zh: "插头和插座里面" }}>
+
+新加坡用的是长方形插脚的三脚插头，属于 G 型，额定电流最高 <Num s="S24">13 A</Num>：下面两个插脚接相线和零线，上面较大的一个接地。每个插头里都有一支小小的管状保险丝，常见的是 <Num s="S24">3 A</Num> 或 <Num s="S24">13 A</Num>。出了故障、电流过大时，保险丝里的细金属丝熔断，电路就断开，保护了电线。插座上相线、零线的插孔装有挡板。家里的电每秒往复推动 <Num s="S23">50</Num> 次，不像电池那样一直朝一个方向推。
+
+</More>
+
+<More title={{ en: "Where the electricity comes from", zh: "电从哪里来" }}>
+
+新加坡的电大多来自燃气发电厂。2024 年，发电燃料里天然气占 <Num s="S29">94.0 %</Num>；垃圾焚烧、生物质和进口电力占 <Num s="S29">2.7 %</Num>；太阳能板占 <Num s="S29">2.1 %</Num>。电经过铁塔上和地下的电缆送到变电站，再送进千家万户。国家环境局的节电建议包括：离开房间就关灯，电器在插座处关掉，冷气设在 <Num s="S30">25 ℃</Num>。
+
+</More>
+
+</Lang>

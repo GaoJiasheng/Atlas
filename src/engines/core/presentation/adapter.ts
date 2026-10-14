@@ -76,9 +76,11 @@ export interface SpaceBeatSpec extends BeatBase {
   /** Exercise mode for this beat (`null`: none); default the chapter's. */
   exercise?: { id: string; phase: 'start' | 'end' | 'loop' } | null;
   /** Signal / cold tints for this beat; default the chapter's. */
-  highlight?: { signal: string[]; cold: string[] } | null;
+  highlight?: { signal: string[]; cold: string[]; custom?: Record<string, string> } | null;
   /** Muscle parts whose attachment markers show in this beat; default the chapter's. */
   sites?: string[];
+  /** Try-it control values for this beat, on top of the chapter's `sim.set`. */
+  sim?: { set: Record<string, boolean | number | string> };
 }
 
 export interface SpaceSavedState {
@@ -95,10 +97,12 @@ export interface SpaceSavedState {
   pose: string | null;
   ghosted: string[];
   exercise: { id: string; phase: 'start' | 'end' | 'loop' } | null;
-  tints: { signal: string[]; cold: string[] } | null;
+  tints: { signal: string[]; cold: string[]; custom?: Record<string, string> } | null;
   sites: string[];
   /** The beat on show outside the presentation (chapter axis; `null` = the chapter's own state). */
   beat: number | null;
+  /** Try-it control values set. */
+  sim: Record<string, boolean | number | string>;
   /** ORBIT turntable on. */
   orbit: boolean;
   /** The VIEW preset lit before, and whether the camera had been moved since. */

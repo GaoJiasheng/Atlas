@@ -2,7 +2,7 @@
  * Colour and material resolution for the 3D stage (pure, unit-tested).
  *
  * Part colours in data are a material family (`casing`, `steel`, `powder`,
- * `stainless`, `copper`, `rubber`, `plastic`, `glass`, `enamel`, `brass`, and
+ * `stainless`, `copper`, `rubber`, `plastic`, `glass`, `enamel`, `brass`, `wood`, and
  * the organism families `chitin`, `membrane`, `tissue`, `muscle`, `trachea`,
  * `nerve`, `eye`; `metal` / `matte` are aliases of `steel` / `plastic`), a theme token
  * (`token:accent-1`) or a hex literal. A family can take a `tint` (token or
@@ -70,7 +70,7 @@ export function rgbaToHex({ r, g, b }: Rgba): string {
  * roughness streaks (brushed), orange peel, fine grain, and the organism normal maps
  * hex (compound-eye facets), fibres (muscle), rings (tracheal taenidia).
  */
-export type SurfaceFinish = 'brushed' | 'brushed-axial' | 'peel' | 'grain' | 'hex' | 'fibres' | 'rings';
+export type SurfaceFinish = 'brushed' | 'brushed-axial' | 'peel' | 'grain' | 'hex' | 'fibres' | 'rings' | 'wood';
 
 export interface MaterialLook {
   /** `#rrggbb` sRGB. */
@@ -120,6 +120,8 @@ export const MATERIAL_FAMILIES: Record<MaterialFamily, FamilySpec> = {
   // silhouette on the sheet; low roughness under the fine grain map gives a soft, satin sheen.
   enamel: { color: { paper: '#dcd7cb', cinema: '#cfcabd' }, metalness: 0, roughness: 0.34, finish: 'grain', envIntensity: 0.85 },
   brass: { color: { paper: '#a88a4c', cinema: '#b39555' }, metalness: 0.9, roughness: 0.32, finish: 'grain' },
+  // Sanded, sealed plywood or pine (a circuit board, a bench): matte, its grain a colour map the tint colours.
+  wood: { color: { paper: '#c49a64', cinema: '#a9845a' }, metalness: 0, roughness: 0.68, finish: 'wood', envIntensity: 0.6 },
   // Organisms (docs/14 §3.4): restrained, low-saturation colours (no "gore" red); tint chitin per species.
   chitin: { color: { paper: '#8b6d43', cinema: '#a3845a' }, metalness: 0, roughness: 0.42, finish: 'peel', normal: 0.05, envIntensity: 0.9 },
   membrane: {

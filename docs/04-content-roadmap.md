@@ -14,13 +14,13 @@
 | 新加坡 1819–1965 | history | time | TimeScene/Geo | SS P4 新加坡故事 | 2027 |
 | 植物的身体（根茎叶花） | biology | space | SpaceScene/Layer2D | Sci P4 植物部位与功能；P5 植物运输 | 2027 |
 | 生物分类与多样性 | biology | space（树状） | Layer2D | Sci P3 Diversity | 2027 |
-| 磁铁 | science | sim | Simulation | Sci P3 磁 | 2028 |
+| 磁铁 | science | space + sim | SpaceScene/Model3D + 试一试（`sim`，kind magnet） | Sci P3 磁；详见 docs/22 | 2028 | spec 草案 |
 | 消化系统 | biology | space | Layer2D | Sci P4 人体系统 | 2028 |
 | 水循环 | science | time | TimeScene/Diagram | Sci P5 Cycles | 2029 |
 | 光与影 | science | sim | Simulation | Sci P4 光与影 | 2029 |
 | 大陆漂移与板块 | geography | time | TimeScene/Geo+morph | 课外拓展（地理） | 2028–2029 |
 | 山脉与火山形成 | geography | time + space | Diagram + Model3D | 课外拓展 | 2029 |
-| 电路 | science | space + sim | Layer2D + Simulation | Sci P5 电路 | 2030 |
+| 电路是怎么工作的（手电筒 + 电路板） | science | space + sim | SpaceScene/Model3D + 试一试（`sim`，kind circuit） | Sci P5 Electrical System；详见 docs/23 | 2026 提前（与植物并行） | draft：6 章 31 拍，引擎「试一试」扩展已做（2026-10-14） |
 | 呼吸与循环系统 | biology | space | Layer2D/Model3D | Sci P5 呼吸与循环（人体与植物） | 2030 |
 | 力（摩擦、重力、弹力） | science | sim | Simulation | Sci P6 | 2030 |
 | 气候带与季风 | geography | time | TimeScene/Geo | 课外拓展 | 随时 |
@@ -29,7 +29,7 @@
 | 拆开一台 AI 服务器（NVIDIA DGX B200） | computer | space | SpaceScene/Model3D | 课外（MOE 小学无计算机课纲）；能量转换与热的传递接 Sci P4 热；详见 docs/18 | 2026（computer 类第一个） | published（2026-10-13） |
 | 二进制与像素 | computer | 待定 | 待定 | 待定 | 待定 |
 
-数学类走 MathScene（分步课 + 练习，第三个引擎，分数已做，docs/15），比例、面积、速度随年级补；Simulation 留给科学类参数模拟；computer 类的第一个主题是 AI 服务器（`b200-server`，SpaceScene，docs/18），之后的计算机主题按同一拆解模板做。
+数学类走 MathScene（分步课 + 练习，第三个引擎，分数已做，docs/15），比例、面积、速度随年级补；科学类的参数模拟不再单开 Simulation 引擎，走 SpaceScene 的「试一试」扩展（`sim`，docs/03 §C、docs/06）：电路已做、磁铁复用；computer 类的第一个主题是 AI 服务器（`b200-server`，SpaceScene，docs/18），之后的计算机主题按同一拆解模板做。
 
 肌肉系列若增第七个主题：先定范围与事实 spec，补该区 manifest / glb / rig、共享肌肉与动作卡及六章节拍，再过许可、附着点人审、网格 audits、previews 与 shoot；流程见 `atlas-space-topic/references/anatomy-mesh-runbook.md`。
 

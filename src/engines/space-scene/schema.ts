@@ -41,6 +41,8 @@ import {
 import { MAX_POSES, POSE_DURATION } from './lib/pose';
 import { canMove, jointCandidates, DEFAULT_BULGE, DEFAULT_DEMO_ANGLE, JOINT_PREFIX, jointOf, MIN_DEMO_ANGLE, musclePartIds } from './lib/rig';
 import { MAX_EXPLODE_STAGE } from './lib/explode';
+import { MAX_FLOW_PATHS } from './lib/flow-curve';
+import { beatSimSchema, chapterSimIssues, chapterSimSchema, simIssues, simSchema } from './sim-schema';
 
 /* ------------------------------------------------------------------ */
 /* Parts                                                               */
@@ -80,8 +82,11 @@ export const ENGINEERED_KINDS = ['bevelBox', 'tube', 'flange', 'fins', 'vessel',
  * Shaped parts (docs/06 §SpaceScene, realism round): profiles and fan /
  * heat-exchanger builders. Round kinds turn about their local Y axis like
  * `vessel` and `flange`; turn them with `rotation`.
- *   lathe        {profile: [[r, y]...], segments}  profile revolved about Y (r ≥ 0);
- *                points on the axis (r = 0) close the solid
+ *   lathe        {profile: [[r, y]...], segments, arc?}  profile revolved about Y (r ≥ 0);
+ *                points on the axis (r = 0) close the solid; `arc` < 360 turns it only
+ *                that far (kept on −Z) and closes both cuts with hatched section faces
+ *   coil         {radius | [r0, r1], wire, turns, length, segments?, radial?}  a helix of
+ *                round wire along Y, centred (a spring, a filament; a cone with [r0, r1])
  *   extrude      {shape: [[x, y]...], holes?, depth, bevel?}  outline in XY extruded along Z,
  *                centred (depth = overall thickness, a bevel rounds the edges inside it)
  *   curvedPanel  {radius, angle, height, thickness, segments}  slice of a cylinder (axis ‖ Y)
@@ -107,7 +112,7 @@ export const ENGINEERED_KINDS = ['bevelBox', 'tube', 'flange', 'fins', 'vessel',
  * and `scale` [sx, sy, sz]: stretch it along its own axes first (a sphere
  * becomes an ellipsoid, a lathe an oval shell). Order: scale, mirror, rotation.
  */
-export const SHAPED_KINDS = ['lathe', 'extrude', 'curvedPanel', 'blades', 'coilBank', 'grille'] as const;
+export const SHAPED_KINDS = ['lathe', 'coil', 'extrude', 'curvedPanel', 'blades', 'coilBank', 'grille'] as const;
 
 /**
  * Organic parts (docs/06 §SpaceScene "organisms"; lib/sweep.ts, lib/wing.ts):
@@ -158,6 +163,7 @@ export const MATERIAL_PRESETS = [
   'glass',
   'enamel',
   'brass',
+  'wood',
   'chitin',
   'membrane',
   'tissue',
@@ -249,6 +255,30 @@ export const primitiveSchema = z
         kind: z.literal('lathe'),
         profile: z.array(z.tuple([z.number().nonnegative(), z.number()])).min(2).max(96),
         segments: z.number().int().min(6).max(128).default(48),
+        /**
+         * Turn the profile through this many degrees only (a cut-open exhibit:
+         * 180 = half), the part kept on the −Z side; a closed profile (ends on
+         * the axis, or first point = last) gets flat section faces at both cuts,
+         * drawn in its own colour with the section hatch.
+         */
+        arc: z.number().gt(0).lt(360).optional(),
+        ...placement,
+      })
+      .strict(),
+    z
+      .object({
+        kind: z.literal('coil'),
+        /** Helix radius to the wire centre: one number, or [bottom, top] for a cone (a torch's tail spring). */
+        radius: z.union([positive, z.tuple([positive, positive])]),
+        /** Radius of the wire. */
+        wire: positive,
+        turns: z.number().positive().max(200),
+        /** Height of the helix along its own Y axis (centred on `at`). */
+        length: positive,
+        /** Tube segments per turn (default 24). */
+        segments: z.number().int().min(6).max(64).optional(),
+        /** Sides of the wire (default 8). */
+        radial: z.number().int().min(3).max(24).optional(),
         ...placement,
       })
       .strict(),
@@ -387,6 +417,12 @@ export const primitiveSchema = z
       case 'lathe':
         if (p.profile.every(([r]) => r < 1e-9)) issue(['profile'], 'a lathe profile needs a point off the axis');
         break;
+      case 'coil': {
+        const r = typeof p.radius === 'number' ? p.radius : Math.min(...p.radius);
+        if (p.wire >= r) issue(['wire'], `wire radius ${p.wire} must be less than the coil radius ${r}`);
+        if (p.length / p.turns < 2 * p.wire * 0.999) issue(['turns'], `${p.turns} turns of a ${2 * p.wire} wire do not fit in ${p.length}: the turns would overlap`);
+        break;
+      }
       case 'extrude':
         if (p.bevel !== undefined && p.bevel * 2 >= p.depth) issue(['bevel'], `bevel ${p.bevel} must be less than half the depth ${p.depth}`);
         break;
@@ -442,7 +478,7 @@ export const primitiveSchema = z
 export type Primitive = z.output<typeof primitiveSchema>;
 
 /** Extra primitives a part may carry (each its own material; repeated with the part). */
-export const MAX_EXTRA_PRIMITIVES = 16;
+export const MAX_EXTRA_PRIMITIVES = 32;
 
 /**
  * Repeat a part as instances (one draw call): `count` copies along `axis`
@@ -597,6 +633,13 @@ export const groupSchema = z
     color: colorRef,
     /** `false`: the group's parts stay out of the part-chain card (still numbered, labelled, selectable). */
     card: z.boolean().optional(),
+    /**
+     * A scale bar under the group while it is the focus (a part of it selected,
+     * soloed, or `group:<id>` among the labels on show): a round real length in
+     * `unit`, for a sub-model drawn `magnification` × life size (default 1),
+     * reading the model's `units` (default 1 scene unit = 1 m).
+     */
+    scale: z.object({ unit: z.enum(['mm', 'cm', 'm']), magnification: z.number().positive().default(1) }).strict().optional(),
   })
   .strict();
 export type PartGroup = z.output<typeof groupSchema>;
@@ -613,8 +656,19 @@ export const flowSchema = z
   .object({
     id: kebabId,
     group: kebabId,
-    /** Polyline in scene coordinates the particles travel along. */
-    path: z.array(vec3).min(2),
+    /** Polyline in scene coordinates the particles travel along (or several: `paths`). */
+    path: z.array(vec3).min(2).optional(),
+    /**
+     * Several polylines drawn as one flow (one draw call): the particles share
+     * the flow's look and are spread over the paths by length. A sim binding
+     * (`intensity`) can then run each path at its own speed and direction, or
+     * stop it (a circuit's current per edge).
+     */
+    paths: z
+      .array(z.object({ id: kebabId, path: z.array(vec3).min(2) }).strict())
+      .min(1)
+      .max(MAX_FLOW_PATHS)
+      .optional(),
     /** Scene units per second. */
     speed: z.number().positive(),
     /** Particle colour without `stops`; with `stops`, the colour of the legend swatch. */
@@ -660,7 +714,14 @@ export const flowSchema = z
       const prev = f.stops![i - 1];
       if (prev && s.at < prev.at) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['stops', i, 'at'], message: 'stops must be in ascending `at` order' });
     });
-  });
+    if ((f.path === undefined) === (f.paths === undefined)) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['path'], message: 'give `path` or `paths` (not both)' });
+    f.paths?.forEach((p, i) => {
+      if (f.paths!.findIndex((q) => q.id === p.id) !== i) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['paths', i, 'id'], message: `duplicate path "${p.id}"` });
+    });
+    if (f.paths && f.bilateral) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['bilateral'], message: 'a multi-path flow is not mirrored' });
+  })
+  // `path` is always there afterwards: a multi-path flow's is its first path's.
+  .transform((f) => ({ ...f, path: f.path ?? f.paths![0]!.path }));
 export type Flow = z.output<typeof flowSchema>;
 
 /** A rig joint as an animation / pose target: `joint:shoulder.l`. */
@@ -884,14 +945,26 @@ export const telemetrySchema = z
     key: bilingual,
     /** Shown after the value, e.g. `rpm`, `MPa abs`, `°C`. */
     unit: z.string().trim().max(12),
-    idle: z.number(),
-    run: z.number(),
-    /** Time constant, seconds. */
-    lag: z.number().positive().max(120),
-    /** Decimal places (default: as many as `idle` / `run` are written with, at most 3). */
+    idle: z.number().optional(),
+    run: z.number().optional(),
+    /** Time constant, seconds (with `follow`, default 0.3). */
+    lag: z.number().positive().max(120).optional(),
+    /** Decimal places (default: as many as `idle` / `run` are written with, at most 3; with `follow`, the output's). */
     decimals: z.number().int().min(0).max(3).optional(),
+    /**
+     * A number output of `sim` this reading shows instead (docs/22 §4.3 S5):
+     * it eases to each new value over `lag`, whatever RUN says; `idle` / `run`
+     * are then left out.
+     */
+    follow: kebabId.optional(),
   })
-  .strict();
+  .strict()
+  .superRefine((r, ctx) => {
+    if (r.follow === undefined && (r.idle === undefined || r.run === undefined || r.lag === undefined))
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['idle'], message: 'a reading needs `idle`, `run` and `lag`, or `follow` (a sim output)' });
+    if (r.follow !== undefined && (r.idle !== undefined || r.run !== undefined))
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['follow'], message: 'a `follow` reading takes no `idle` / `run`' });
+  });
 export type TelemetryRow = z.output<typeof telemetrySchema>;
 export const MAX_TELEMETRY_ROWS = 6;
 
@@ -1038,9 +1111,29 @@ export const partsFileBase = z
     rig: rigSchema.optional(),
     /** Muscle attachments (see siteSchema). */
     sites: z.array(siteSchema).max(256).optional(),
+    /** Try-it simulation: controls, a model, outputs and bindings (sim-schema.ts, docs/06 「SpaceScene · 试一试」). */
+    sim: simSchema.optional(),
   })
   .strict()
   .superRefine((file, ctx) => {
+    if (file.sim) {
+      const countable = new Set(file.parts.filter((p) => p.repeat !== undefined && (p.extra ?? []).length === 0).map((p) => p.id));
+      for (const x of simIssues(file.sim, {
+        parts: new Set(file.parts.map((p) => p.id)),
+        flows: new Map(file.flows.map((f) => [f.id, { paths: f.paths }])),
+        animations: new Map(file.animations.map((a) => [a.id, { kind: a.kind, target: a.target }])),
+        poses: new Set(Object.keys(file.poses ?? {})),
+        countable,
+      }))
+        ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['sim', ...x.path], message: x.message });
+    }
+    const outputs = new Map((file.sim?.outputs ?? []).map((o) => [o.id, o]));
+    file.telemetry?.forEach((r, i) => {
+      if (r.follow === undefined) return;
+      const o = outputs.get(r.follow);
+      if (!o) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['telemetry', i, 'follow'], message: file.sim ? `unknown sim output "${r.follow}"` : 'parts.json has no `sim`' });
+      else if (o.kind !== 'number') ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['telemetry', i, 'follow'], message: `"${r.follow}" is a ${o.kind}, not a number` });
+    });
     file.presets?.forEach((p, i) => {
       if ((RESERVED_PRESET_IDS as readonly string[]).includes(p.id))
         ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['presets', i, 'id'], message: `"${p.id}" is the engine's own preset id` });
@@ -1388,7 +1481,10 @@ export const exerciseRef = z
 export type ExerciseRef = z.output<typeof exerciseRef>;
 
 /** Parts (or groups) tinted in the signal colour (prime movers) and the cold colour (synergists). */
-export const highlightSchema = z.object({ signal: z.array(kebabId).default([]), cold: z.array(kebabId).default([]) }).strict();
+/** `custom`: part or group id → its own colour (`token:<name>` or `#hex`): a stain or a dye, any colour. */
+export const highlightSchema = z
+  .object({ signal: z.array(kebabId).default([]), cold: z.array(kebabId).default([]), custom: z.record(kebabId, colorRef).optional() })
+  .strict();
 export type Highlight = z.output<typeof highlightSchema>;
 
 /** Fields a chapter state and a beat share for the muscle topics (each not cumulative). */
@@ -1417,6 +1513,8 @@ export const spaceBeat = z
     /** Groups (or parts) drawn faint for this beat (not cumulative); default the chapter's. */
     ghost: z.array(kebabId).optional(),
     ...muscleStateFields,
+    /** Try-it control values for this beat, on top of the chapter's `sim.set`. */
+    sim: beatSimSchema.optional(),
     caption: bilingual,
     audio: z
       .string()
@@ -1485,6 +1583,11 @@ export const spaceChapterState = z
     beats: z.array(spaceBeat).min(1).optional(),
     /** The chapter index after the body in the reading panel (exercises or parts). */
     index: spaceChapterIndex.optional(),
+    /**
+     * Try-it: the control values the chapter starts from (`set`, not
+     * cumulative: what it leaves out is at its default) and its try-it card (`try`).
+     */
+    sim: chapterSimSchema.optional(),
   })
   .strict();
 export type SpaceChapterState = z.output<typeof spaceChapterState>;
@@ -1548,12 +1651,14 @@ export function spaceChapterIssues(state: SpaceChapterState, data: SpaceSceneDat
     if (typeof s.camera === 'string' && !presets.has(s.camera))
       out.push(`${where}camera: unknown preset "${s.camera}" (not in parts.json presets)`);
     if (s.exercise && !training.has(s.exercise.id)) out.push(`${where}exercise: "${s.exercise.id}" is not in data/training.json exercises`);
-    for (const id of [...(s.highlight?.signal ?? []), ...(s.highlight?.cold ?? [])])
+    for (const id of [...(s.highlight?.signal ?? []), ...(s.highlight?.cold ?? []), ...Object.keys(s.highlight?.custom ?? {})])
       if (!groups.has(id) && !parts.has(id)) out.push(`${where}highlight: unknown group or part "${id}"`);
     for (const id of s.sites ?? []) if (!sited.has(id)) out.push(`${where}sites: "${id}" has no sites in parts.json`);
   };
   check('state.', state);
   state.beats?.forEach((b, i) => check(`state.beats.${i}.`, b));
+  out.push(...chapterSimIssues('state.', state.sim, f.sim));
+  state.beats?.forEach((b, i) => out.push(...chapterSimIssues(`state.beats.${i}.`, b.sim, f.sim)));
   for (const id of state.index?.parts ?? []) {
     const p = parts.get(id);
     if (!p) out.push(`state.index.parts: unknown part "${id}"`);

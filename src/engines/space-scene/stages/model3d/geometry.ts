@@ -49,6 +49,7 @@ import { DEG2RAD } from '../../lib/math';
 import { primitiveScale } from '../../lib/parts';
 import type { Wing } from '../../lib/wing';
 import { shapedPieces } from './shaped';
+import { latheProfileClosed } from '../../lib/shaped';
 import { FanDeform, sweepClosed, sweepGeometry, wingMembrane, wingVeins } from './organic';
 
 export interface ShapePiece {
@@ -89,12 +90,12 @@ export interface BasePiece {
 
 /** Kinds whose surface is closed, so back faces only show through a cut (cut face fill). */
 export function isClosedKind(kind: Primitive['kind']): boolean {
-  return !['plane', 'tube', 'blades', 'coilBank', 'grille'].includes(kind);
+  return !['plane', 'tube', 'coil', 'blades', 'coilBank', 'grille'].includes(kind);
 }
 
 /** Closed surface of a whole primitive (a lathe is closed only when its profile starts and ends on the axis). */
 export function isClosedPrimitive(p: Primitive): boolean {
-  if (p.kind === 'lathe') return p.profile[0]![0] < 1e-9 && p.profile[p.profile.length - 1]![0] < 1e-9;
+  if (p.kind === 'lathe') return latheProfileClosed(p.profile);
   if (p.kind === 'sweep') return sweepClosed(p);
   return isClosedKind(p.kind);
 }
@@ -406,6 +407,7 @@ function kindPieces(p: Primitive): BasePiece[] {
     case 'panelHole':
       return one(panelHoleGeometry(p));
     case 'lathe':
+    case 'coil':
     case 'extrude':
     case 'curvedPanel':
     case 'blades':
@@ -574,6 +576,9 @@ export function mergeBaked(list: { geometry: BufferGeometry; matrices: Matrix4[]
   const pos = new Float32Array(total * 3);
   const nor = new Float32Array(total * 3);
   const uv = new Float32Array(total * 2);
+  // Section faces of a part-turned lathe keep their marker (materials.ts hatches them).
+  const sectioned = flat.some((f) => f.g.getAttribute('atlasSection') !== undefined);
+  const sec = sectioned ? new Float32Array(total) : null;
   const v = new Vector3();
   const nm = new Matrix3();
   let o = 0;
@@ -581,6 +586,7 @@ export function mergeBaked(list: { geometry: BufferGeometry; matrices: Matrix4[]
     const P = g.getAttribute('position');
     const N = g.getAttribute('normal');
     const U = g.getAttribute('uv');
+    const S = g.getAttribute('atlasSection');
     for (const m of matrices) {
       nm.getNormalMatrix(m);
       const flip = m.determinant() < 0;
@@ -592,6 +598,7 @@ export function mergeBaked(list: { geometry: BufferGeometry; matrices: Matrix4[]
         v.fromBufferAttribute(N, j).applyMatrix3(nm).normalize();
         nor.set([v.x, v.y, v.z], (o + i) * 3);
         if (U) uv.set([U.getX(j), U.getY(j)], (o + i) * 2);
+        if (sec && S) sec[o + i] = S.getX(j);
       }
       o += P.count;
     }
@@ -602,6 +609,7 @@ export function mergeBaked(list: { geometry: BufferGeometry; matrices: Matrix4[]
   out.setAttribute('position', new BufferAttribute(pos, 3));
   out.setAttribute('normal', new BufferAttribute(nor, 3));
   out.setAttribute('uv', new BufferAttribute(uv, 2));
+  if (sec) out.setAttribute('atlasSection', new BufferAttribute(sec, 1));
   out.computeBoundingSphere();
   out.computeBoundingBox();
   return out;

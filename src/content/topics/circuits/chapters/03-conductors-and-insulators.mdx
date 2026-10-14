@@ -1,0 +1,96 @@
+---
+id: conductors-and-insulators
+order: 3
+title: {"en": "What lets current through", "zh": "导体与绝缘体"}
+sensitive: false
+state:
+  labels: ["gap-clips", "bulb-a", "paper-clip"]
+  camera: {"position": [0.06, 0.25, 0.47], "target": [-0.035, 0.01, 0.14], "fov": 30}
+  summary: {"en": "Metals and graphite let current through; plastic, rubber, wood and glass do not.", "zh": "金属和石墨能让电流通过；塑料、橡胶、木头和玻璃不能。"}
+  sim: {"set": {"arrangement": "single", "gap": "empty"}, "try": {"vary": "gap", "keep": ["cells", {"en": "Same bulb", "zh": "同一只灯泡"}, {"en": "Same wires", "zh": "同样的导线"}], "observe": ["bright-a"], "record": {"judge": {"output": "bright-a", "gt": 0.5, "label": {"en": "Conductor?", "zh": "导体？"}}}}}
+  beats:
+    - labels: ["gap-clips", "bulb-a"]
+      caption: {"en": "Leave a gap in the loop between two crocodile clips. The bulb stays dark: air does not let current through.", "zh": "在回路里两只鳄鱼夹之间留一个缺口。灯泡不亮：空气不让电流通过。"}
+    - sim: {"set": {"gap": "foil-strip"}}
+      labels: ["paper-clip", "copper-wire", "foil-strip", "bulb-a"]
+      caption: {"en": "Bridge the gap with a steel paper clip, copper wire or aluminium foil and the bulb lights. These metals are electrical conductors.", "zh": "用钢回形针、铜线或铝箔把缺口接上，灯泡就亮了。这些金属是导体。"}
+    - sim: {"set": {"gap": "rubber-band"}}
+      labels: ["plastic-straw", "wooden-stick", "rubber-band", "bulb-a"]
+      caption: {"en": "A plastic straw, a wooden stick or a rubber band leaves the bulb dark. These are electrical insulators.", "zh": "塑料吸管、木冰棒棍或橡皮筋放进去，灯泡还是不亮。它们是绝缘体。"}
+    - sim: {"set": {"gap": "pencil-lead"}}
+      labels: ["pencil-lead", "filament-a"]
+      caption: {"en": "Pencil lead is graphite, not metal, yet the bulb glows dimly. Graphite conducts, but not as well as metal.", "zh": "铅笔芯是石墨，不是金属，灯泡却微微发亮。石墨能导电，只是不如金属好。"}
+    - camera: {"position": [0.3, 0.055, 0.035], "target": [0.272, 0.004, -0.036], "fov": 30}
+      sim: {"set": {"gap": "copper-wire"}}
+      labels: ["wire-cutaway"]
+      caption: {"en": "A wire uses both kinds: a copper core to carry the current and a plastic coat to keep it from touching anything else.", "zh": "一根导线同时用到两种材料：铜芯传导电流，塑料外皮把它和别的东西隔开。"}
+  index: {"parts": ["gap-clips", "paper-clip", "copper-wire", "foil-strip", "pencil-lead", "plastic-straw", "wooden-stick", "rubber-band", "wire-cutaway"]}
+---
+
+<Lang en>
+
+At the front of the board the loop has a gap between two crocodile clips, <Num s="S1">30 mm</Num> apart. With nothing in the gap the bulb stays dark: air does not let current through, so the circuit is open. <FlyTo preset="gap-view">Go to the test gap</FlyTo>
+
+Clip a steel paper clip, a piece of copper wire or a strip of aluminium foil across the gap and the bulb lights, about as brightly as with the copper wire that normally bridges it. Metals let current pass easily. Materials like these are electrical <Term id="conductor">conductors</Term>.
+
+A plastic straw, a wooden ice-cream stick or a rubber band leaves the bulb dark. These materials are electrical <Term id="insulator">insulators</Term>; glass and air are insulators too. Pencil lead is the surprise. It is not metal at all but graphite mixed with clay, yet the bulb glows, dimly. Graphite is a conductor, just a much poorer one than metal.
+
+<Figure src="figures/circuits-tester" alt={{ en: "Pencil drawing of a simple tester: two batteries in a holder, wired to a small bulb on a round holder, the wires ending in two crocodile clips that grip a short dark rod between them. Below it a row of objects: a paper clip, a crumpled strip of foil, a twisted piece of copper wire, a plastic straw, a wooden ice-cream stick, a rubber band and a glass marble.", zh: "简单测试器的铅笔画：电池盒里两节电池，用导线接到圆形灯座上的小灯泡，导线末端两只鳄鱼夹夹住中间一小段深色的棒。下方一排物品：回形针、一条揉皱的铝箔、一段拧在一起的铜线、塑料吸管、木冰棒棍、橡皮筋和一颗玻璃弹珠。" }} caption={{ en: "A tester like the gap on the board, with everyday objects waiting to be tried. The drawing marks the batteries with plus and minus signs, which the model leaves off. An illustration made for this topic.", zh: "和电路板上的缺口一样的测试器，旁边是等着测试的日常物品。图里电池上画了正负号，模型里没有画。为本主题画的示意图。" }} />
+
+Only one thing changes from one try to the next: the material in the gap. The batteries, the bulb, the wires and the switch stay the same, so any change in the bulb can only come from the material. That makes this a <Term id="fair-test">fair test</Term>. Use the Try it card to put each material in the gap and record a row for it in the table.
+
+A wire uses both kinds of material. Its copper core carries the current, and its plastic coat stops the current from passing into anything the wire touches, including a hand. A wire whose coat is damaged is no longer safe. <FlyTo preset="cutaways-view">Look at the stripped wire</FlyTo>
+
+<More title={{ en: "Pencil lead contains no lead", zh: "铅笔芯里没有铅" }}>
+
+Pencil lead is a baked mixture of graphite and clay; soft, dark grades have more graphite and hard, pale grades more clay. With enough clay the mixture stops conducting. In this model the pencil lead in the gap lets through <Num s="S1">0.091 A</Num> and the bulb's brightness drops to <Num s="S1">15</Num>, against <Num s="S1">100</Num> with a metal in the gap. The model gives the lead a fixed resistance; a real result depends on the grade, the length and how firmly the clips grip.
+
+</More>
+
+<More title={{ en: "Water conducts", zh: "水能导电" }}>
+
+Pure water conducts very poorly, but tap water has substances dissolved in it and conducts roughly <Num s="S8">90 to 9,000</Num> times better. Rain, sweat and spilled drinks are never pure. Wood is similar: dry wood is an insulator, damp wood conducts a little. This is why water and electricity must be kept apart at home.
+
+</More>
+
+<More title={{ en: "Your body conducts too", zh: "人体也导电" }}>
+
+A person is a poor conductor, but not an insulator. Most of the body's resistance is in dry skin; soaking-wet skin lets about <Num s="S5">20</Num> times as much current through. Two AA batteries are too weak to push a current that a person can feel, even through wet skin, which is why the board is safe to handle. The sockets at home are another matter (chapter 06).
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+电路板前方，回路在两只鳄鱼夹之间留了一个缺口，两夹相距 <Num s="S1">30 mm</Num>。缺口里什么也不放，灯泡就不亮：空气不让电流通过，电路是断开的。<FlyTo preset="gap-view">去测试缺口看看</FlyTo>
+
+用钢回形针、一段铜线或一条铝箔把缺口接上，灯泡就亮了，和平时接在缺口上的铜线差不多亮。金属很容易让电流通过，这样的材料叫作<Term id="conductor">导体</Term>。
+
+换成塑料吸管、木冰棒棍或橡皮筋，灯泡还是不亮。这些材料叫作<Term id="insulator">绝缘体</Term>；玻璃和空气也是绝缘体。铅笔芯让人意外：它根本不是金属，而是石墨和黏土的混合物，灯泡却微微亮了。石墨是导体，只是导电本领比金属差得多。
+
+<Figure src="figures/circuits-tester" alt={{ en: "Pencil drawing of a simple tester: two batteries in a holder, wired to a small bulb on a round holder, the wires ending in two crocodile clips that grip a short dark rod between them. Below it a row of objects: a paper clip, a crumpled strip of foil, a twisted piece of copper wire, a plastic straw, a wooden ice-cream stick, a rubber band and a glass marble.", zh: "简单测试器的铅笔画：电池盒里两节电池，用导线接到圆形灯座上的小灯泡，导线末端两只鳄鱼夹夹住中间一小段深色的棒。下方一排物品：回形针、一条揉皱的铝箔、一段拧在一起的铜线、塑料吸管、木冰棒棍、橡皮筋和一颗玻璃弹珠。" }} caption={{ en: "A tester like the gap on the board, with everyday objects waiting to be tried. The drawing marks the batteries with plus and minus signs, which the model leaves off. An illustration made for this topic.", zh: "和电路板上的缺口一样的测试器，旁边是等着测试的日常物品。图里电池上画了正负号，模型里没有画。为本主题画的示意图。" }} />
+
+每次只改变一样东西：缺口里的材料。电池、灯泡、导线和开关都不变，所以灯泡的任何变化只能来自材料。这就是<Term id="fair-test">公平测试</Term>。用「试一试」卡片把每种材料放进缺口，每试一种就在表里记一行。
+
+一根导线同时用到这两类材料：铜芯让电流通过，塑料外皮不让电流跑到导线碰到的东西上，包括人的手。外皮一旦破了、露出铜芯，这根导线就不再安全，第 06 章还会讲到。<FlyTo preset="cutaways-view">看剥开外皮的导线</FlyTo>
+
+<More title={{ en: "Pencil lead contains no lead", zh: "铅笔芯里没有铅" }}>
+
+铅笔芯是石墨和黏土烧制成的；软而黑的笔芯石墨多，硬而淡的笔芯黏土多。黏土多到一定程度，混合物就不再导电。在这个模型里，缺口放铅笔芯时电流是 <Num s="S1">0.091 A</Num>，灯泡亮度降到 <Num s="S1">15</Num>，缺口放金属时是 <Num s="S1">100</Num>。模型给铅笔芯一个固定的电阻；真实的结果要看笔芯的软硬、长短，以及夹子夹得紧不紧。
+
+</More>
+
+<More title={{ en: "Water conducts", zh: "水能导电" }}>
+
+纯水几乎不导电，但自来水里溶有别的物质，导电本领比纯水强约 <Num s="S8">90 到 9,000</Num> 倍。雨水、汗水和洒出来的饮料都不是纯水。木头也类似：干木头是绝缘体，湿木头能导一点电。所以在家里，水和电一定要分开。
+
+</More>
+
+<More title={{ en: "Your body conducts too", zh: "人体也导电" }}>
+
+人体导电不好，但也不是绝缘体。人体的电阻主要在干燥的皮肤上；皮肤湿透时，能通过的电流约是干燥时的 <Num s="S5">20</Num> 倍。两节 AA 电池推动的电流太小，即使皮肤是湿的，人也感觉不到，所以电路板可以放心用手操作。家里的插座就完全不同了（见第 06 章）。
+
+</More>
+
+</Lang>

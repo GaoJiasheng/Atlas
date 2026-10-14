@@ -1,16 +1,19 @@
 /**
- * Particle material for flows: a hand-written ShaderMaterial. Each particle
- * carries a start offset along the path; the vertex shader advances it by
- * `uTime * uSpeed / uLength`, interpolates the baked arc-length samples of the
- * Catmull-Rom curve (64–512 of them in a 1-row float texture, read with
- * `texelFetch`), takes its colour from the flow's colour
- * stops at that fraction (linear RGB, up to MAX_STOPS) and attenuates point
- * size with distance. Open paths fade in / out at their ends unless the flow
- * is `ends: open` (segments laid end to end). Supports clipping planes
- * (cutaway) like the part materials.
+ * Particle material for flows: a hand-written ShaderMaterial. A flow has one
+ * path or several (`paths`, ≤ MAX_FLOW_PATHS, one draw call): each path's
+ * baked arc-length samples of its Catmull-Rom curve (64–512) are one row of a
+ * float texture read with `texelFetch`. Each particle carries its path index
+ * and a start offset along it; the vertex shader advances it by the path's
+ * phase (`uPhase[k]`, the fraction of the path travelled so far, kept by
+ * Flows.tsx so a path can change speed or direction without jumping),
+ * interpolates the samples, takes its colour from the flow's colour stops at
+ * that fraction (linear RGB, up to MAX_STOPS), fades with the path's
+ * `uAlpha[k]` and attenuates point size with distance. Open paths fade in /
+ * out at their ends unless the flow is `ends: open` (segments laid end to
+ * end). Supports clipping planes (cutaway) like the part materials.
  */
 import { AdditiveBlending, Color, DataTexture, FloatType, NearestFilter, NormalBlending, RGBAFormat, ShaderMaterial } from 'three';
-import type { BakedFlow } from '../../lib/flow-curve';
+import { MAX_FLOW_PATHS, type BakedFlow } from '../../lib/flow-curve';
 
 /** Colour stops the shader interpolates (schema MAX_FLOW_STOPS). */
 export const MAX_STOPS = 6;
@@ -20,11 +23,10 @@ const vertexShader = /* glsl */ `
 #include <clipping_planes_pars_vertex>
 
 uniform sampler2D uPath;
-uniform float uCount;
-uniform float uTime;
-uniform float uSpeed;
-uniform float uLength;
-uniform float uClosed;
+uniform float uCount[MAX_PATHS];
+uniform float uPhase[MAX_PATHS];
+uniform float uAlpha[MAX_PATHS];
+uniform float uClosed[MAX_PATHS];
 uniform float uOpen;
 uniform float uSize;
 uniform float uScale;
@@ -34,6 +36,7 @@ uniform float uStopCount;
 
 attribute float aOffset;
 attribute float aSeed;
+attribute float aPath;
 
 varying float vAlpha;
 varying vec3 vColor;
@@ -51,17 +54,19 @@ vec3 stopColor(float u) {
 }
 
 void main() {
-  float u = fract(aOffset + uTime * uSpeed / max(uLength, 1e-4));
-  float x = u * (uCount - 1.0);
-  float fi = min(floor(x), uCount - 2.0);
+  int k = int(aPath + 0.5);
+  float u = fract(aOffset + uPhase[k]);
+  float n = uCount[k];
+  float x = u * (n - 1.0);
+  float fi = min(floor(x), n - 2.0);
   int i = int(fi);
   float f = x - fi;
   // \`position\` holds a small per-particle jitter around the centre line.
-  vec3 p = mix(texelFetch(uPath, ivec2(i, 0), 0).xyz, texelFetch(uPath, ivec2(i + 1, 0), 0).xyz, f) + position;
+  vec3 p = mix(texelFetch(uPath, ivec2(i, k), 0).xyz, texelFetch(uPath, ivec2(i + 1, k), 0).xyz, f) + position;
   vec4 mvPosition = modelViewMatrix * vec4(p, 1.0);
   gl_Position = projectionMatrix * mvPosition;
   gl_PointSize = uSize * (0.7 + 0.6 * aSeed) * uScale / max(-mvPosition.z, 0.05);
-  vAlpha = uClosed > 0.5 || uOpen > 0.5 ? 1.0 : smoothstep(0.0, 0.05, u) * (1.0 - smoothstep(0.92, 1.0, u));
+  vAlpha = (uClosed[k] > 0.5 || uOpen > 0.5 ? 1.0 : smoothstep(0.0, 0.05, u) * (1.0 - smoothstep(0.92, 1.0, u))) * uAlpha[k];
   vColor = stopColor(u);
   #include <clipping_planes_vertex>
 }
@@ -92,11 +97,10 @@ void main() {
 export type FlowMaterial = ShaderMaterial & {
   uniforms: {
     uPath: { value: DataTexture };
-    uCount: { value: number };
-    uTime: { value: number };
-    uSpeed: { value: number };
-    uLength: { value: number };
-    uClosed: { value: number };
+    uCount: { value: number[] };
+    uPhase: { value: number[] };
+    uAlpha: { value: number[] };
+    uClosed: { value: number[] };
     uOpen: { value: number };
     uSize: { value: number };
     uScale: { value: number };
@@ -108,11 +112,14 @@ export type FlowMaterial = ShaderMaterial & {
   };
 };
 
-/** The baked samples as a `count` × 1 RGBA float texture (xyz, nearest: the shader interpolates). */
-function pathTexture(baked: BakedFlow): DataTexture {
-  const data = new Float32Array(baked.count * 4);
-  for (let i = 0; i < baked.count; i++) data.set(baked.points.subarray(i * 3, i * 3 + 3), i * 4);
-  const tex = new DataTexture(data, baked.count, 1, RGBAFormat, FloatType);
+/** The baked samples, one path per row, as a (longest path) × paths RGBA float texture (xyz, nearest: the shader interpolates). */
+function pathTexture(paths: readonly BakedFlow[]): DataTexture {
+  const width = Math.max(...paths.map((b) => b.count));
+  const data = new Float32Array(width * paths.length * 4);
+  paths.forEach((baked, row) => {
+    for (let i = 0; i < baked.count; i++) data.set(baked.points.subarray(i * 3, i * 3 + 3), (row * width + i) * 4);
+  });
+  const tex = new DataTexture(data, width, paths.length, RGBAFormat, FloatType);
   tex.minFilter = NearestFilter;
   tex.magFilter = NearestFilter;
   tex.generateMipmaps = false;
@@ -120,20 +127,20 @@ function pathTexture(baked: BakedFlow): DataTexture {
   return tex;
 }
 
-/** Disposing the material also disposes its path texture. */
-export function createFlowMaterial(baked: BakedFlow, speed: number, open: boolean): FlowMaterial {
-  const path = pathTexture(baked);
+/** Disposing the material also disposes its path texture. Phases and fades start at 0 / 1 (Flows.tsx drives them). */
+export function createFlowMaterial(paths: readonly BakedFlow[], open: boolean): FlowMaterial {
+  const path = pathTexture(paths);
+  const per = (f: (b: BakedFlow) => number) => Array.from({ length: MAX_FLOW_PATHS }, (_, k) => (paths[k] ? f(paths[k]!) : 0));
   const material = new ShaderMaterial({
     vertexShader,
     fragmentShader,
-    defines: { MAX_STOPS },
+    defines: { MAX_STOPS, MAX_PATHS: MAX_FLOW_PATHS },
     uniforms: {
       uPath: { value: path },
-      uCount: { value: baked.count },
-      uTime: { value: 0 },
-      uSpeed: { value: speed },
-      uLength: { value: baked.length },
-      uClosed: { value: baked.closed ? 1 : 0 },
+      uCount: { value: per((b) => b.count) },
+      uPhase: { value: per(() => 0) },
+      uAlpha: { value: per(() => 1) },
+      uClosed: { value: per((b) => (b.closed ? 1 : 0)) },
       uOpen: { value: open ? 1 : 0 },
       uSize: { value: 0.06 },
       uScale: { value: 500 },

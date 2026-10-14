@@ -644,14 +644,16 @@ lib/                     纯函数，有单测：explode / visibility（图层�
                          schematic（零件链路、流经连线、立面、标注预算）/ labels（组标注 id、演示时用哪张标注表、组包围盒）/
                          leader-layout（引线标注摆放：两列、避让 HUD 与被标零件、代价搜索）/ shaped（成形零件的版式数学：盘管管位、回弯、叶片）/ xform / math /
                          sweep（扫掠站点、标架、半径轮廓、环节沟）/ wing（扇形折叠）/ bilateral（双侧镜像）/ pose（姿态、关键帧）/ units（实长）/
-                         rig（关节角、解剖轴、收缩、动作节拍、肌肉 ↔ 零件）/ sites（起止点）/ equipment（动作器械的基本体）
+                         rig（关节角、解剖轴、收缩、动作节拍、肌肉 ↔ 零件）/ sites（起止点）/ equipment（动作器械的基本体）/
+                         sim/（试一试：controls 值与 URL、index 模型注册表、circuit 节点分析、magnet 磁荷、bind 绑定、trial 数据表与先猜后看、diagram 电路图排版）
+sim-schema.ts            parts.json `sim` 与章 / 拍 `sim` 的 zod 和交叉校验（见「试一试」）
 stages/model3d/          R3F 舞台：Model3DStage（createRoot 宿主）、SceneRoot、PartNode、geometry（程序化零件）、shaped（成形零件构建）、organic（sweep / wing 构建、FanDeform）、
                          materials（材质 + 选中边缘 / 剖面 shader 补丁）、textures（程序化贴图）、Lighting、
                          GroundShadow、CameraRig、Flows + flowMaterial、probes（标注投影 / 起止点投影 / 计数 / 阴影更新）、GltfSource（glb、蒙皮、骨架）、
                          MotionDriver（关节、收缩、动作体位）、Equipment（动作器械）
-hud/                     LeaderLabels + SitesOverlay（leaders）、PartChainCard（card）、PlateBlock（plate：立面缩略图、状态小行、模拟读数、当前选中、
+hud/                     LeaderLabels + SitesOverlay（leaders）、PartChainCard 或 CircuitCard（card：零件链路 / 电路图）、sim.ts（HUD 读写试一试）、PlateBlock（plate：立面缩略图、状态小行、模拟读数、当前选中、
                          PerfReadout）、spec（标题块规格行）
-explorer/                ExplorerOverlay（stageOverlay，EXPLODED 时带 ExplorerBar 拆开滑块）、BeatLine + Inspector（readerTop：节拍行；零件详情、
+explorer/                ExplorerOverlay（stageOverlay，EXPLODED 时带 ExplorerBar 拆开滑块）、BeatLine + TryIt + Inspector（readerTop：节拍行；试一试卡片；零件详情、
                          MuscleSheet 四页、ExerciseCard）、ChapterIndex（readerEnd：本章索引）；章节轴是 core 的 ChapterAxis（bottomBar）
 space-scene.css          舞台、标注、卡片与面板绘图、滑块、详情样式（只用 token，尺寸 × --u）
 ```
@@ -704,7 +706,7 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
   "spec": [                                // 可选，≤ 4 行：标题块规格行（宿主 3 行 + PARTS + 这些，总共 ≤ 8）；有它时 GROUPS / FLOWS 行不画
     { "key": {en, zh}, "value": "R32 · 0.60 kg", "tag": "design" },   // value：字符串（mono）或 {en, zh}；tag：typical | design | sim（sim 带 SIM 芯片，其余不出芯片）
   ],
-  "telemetry": [                           // 可选，≤ 6 行：PLATE 块在 RUN / FLOW / ANIM / VIEW / EXPLODE 之后接这些模拟读数（一枚 SIM 芯片，`标签 值 单位` 连排）
+  "telemetry": [                           // 可选，≤ 6 行：PLATE 块在 RUN / FLOW / ANIM / VIEW / EXPLODE 之后接这些模拟读数（一枚 SIM 芯片，`标签 值 单位` 连排）；`{ key, unit, follow: "<sim 输出>" }` = 跟随试一试的输出（见「试一试」）
     { "key": {en, zh}, "unit": "MPa abs", "idle": 1.93, "run": 3.0, "lag": 10, "decimals": 2 }   // 一阶滞后 τ = lag 秒；decimals 默认取 idle / run 写出的位数
   ],
   "presets": [                             // 可选，≤ 6 个命名镜头预设（docs/12 §7.4 G7）：VIEW 按钮排在 ORBIT、REF. 之后（数字键接着排：1–9，第 10 个是 0，再往后只有按钮）
@@ -728,17 +730,18 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
   - `panelHole {size:[w,h,t], hole:{r, at:[x,y]}}`：XY 平面里 w×h 的板（厚 t 沿 Z），一个圆形通孔（半径 r，圆心相对板中心 (x,y)，必须整个在板内），孔壁、外边都有；手工三角化（不引 Shape / ExtrudeGeometry），封闭体，剖切时填剖面。用 `rotation` 转到需要的朝向（室外机前面板的风扇口、室内机出风口）
   - `fins` 上限 512 片（一个 InstancedMesh，一次绘制）
 - **成形零件**（写实轮次，`lib/shaped.ts` 版式数学 + `stages/model3d/shaped.ts` 构建；圆形件都绕自身 Y 轴，用 `rotation` 转向）：
-  - `lathe {profile:[[r,y]...], segments}`：轮廓绕 Y 旋转（r ≥ 0）；首尾点在轴上（r = 0）才是封闭体（剖切填剖面）；同一点写两次 = 硬边。压缩机外壳（上下封头、焊缝）、储液器、电机、轮毂、六角螺母（`segments: 6`）都用它
+  - `lathe {profile:[[r,y]...], segments, arc?}`：轮廓绕 Y 旋转（r ≥ 0）；首尾点在轴上（r = 0）才是封闭体（剖切填剖面），首点 = 末点（不在轴上）是一圈环形截面，也封闭；同一点写两次 = 硬边。压缩机外壳（上下封头、焊缝）、储液器、电机、轮毂、六角螺母（`segments: 6`）都用它。`arc`（< 360）只转这么多度、保留 −Z 一侧（180 = 剖开的半个，剖面朝观者）：封闭轮廓在两个切口上封平面（轮廓三角化，顶点带 `atlasSection` = 1），按零件自己的材质画、再叠一层与 CUTAWAY 相同的 45° 剖面线，所以剖开电池的钢壳、二氧化锰、隔膜、锌膏各是各的颜色；开放轮廓（半个玻璃泡）不封口、双面画。剖开的电池、灯泡展品用它（docs/23 C3），一层一个 `extra`，用环形截面避免共面
+  - `coil {radius | [r0, r1], wire, turns, length, segments?, radial?}`：沿自身 Y 的螺旋线圆截面导线（`TubeGeometry` 走解析螺旋线），居中；`radius` 写两个数 = 锥形（手电筒尾簧、电池盒负极簧），灯丝（r 0.45 mm、丝 0.08 mm）也用它。`wire` 必须小于半径，`turns` 圈在 `length` 里不能重叠（validate 报）；包围盒按最大半径 + 丝径
   - `extrude {shape:[[x,y]...], holes?, depth, bevel?}`：XY 平面里的轮廓（可带孔）沿 Z 拉伸、居中；`depth` 是总厚度，`bevel` 在厚度之内倒圆。沿 X 拉伸写 `rotation: [0, -90, 0]`（轮廓 x = 场景 z）；平面图沿 Y 拉伸写 `[90, 0, 0]`（轮廓 y = 场景 z）。室内机端盖侧轮廓、底壳风道、接水盘、导风板截面、隔板、开槽侧板
   - `curvedPanel {radius, angle, height, thickness, segments}`：圆柱面的一段（轴 ‖ Y），绕 +Z 对称张开 `angle`°；`at` 是外表面正中点，法线朝 +Z。横放（轴 ‖ X）写 `rotation: [倾角, 0, 90]`。室内机前面板、圆角
   - `blades {layout, count, radius, hub, chord, twist, sweep, pitch, thickness, length?, discs}`：`axial`（默认）= XZ 平面里 `count` 片带弧度的宽叶片，叶根角 `pitch`°、到叶尖减 `twist`°、叶尖前掠 `sweep`°、弦长从根部 55 % 长到叶尖 `chord`，加穹顶轮毂；`barrel` = 贯流风扇转子，`count` 片前弯叶片（`hub` 到 `radius`，弦 `chord`，前倾 `sweep`°，默认 25°）沿 Y 长 `length`，`discs` 片隔盘（两端实心）。全部合成一个几何体
   - `coilBank {rows, cols, pitch, tubeRadius, length, finPitch, finDepth, bends, shape, legs?, corner?, tubeColor}`：翅片管换热器。管沿 X，`cols` 根沿 Y 间距 `pitch`，`rows` 排沿 Z（行距 0.866 pitch，错排）；铝翅片每 `finPitch` 一片、深 `finDepth`；U 形回弯在两端（`both`）、不要（`none`）或只要回弯（`only`：给单独的"回弯"零件）。回弯规律：+X 端偶数排空出最下一根、奇数排空出最上一根（`coilBendStart`），接管从这里进出。`shape: "L"`：第 0 段沿 X 长 `legs[0]`，在 −X 端绕 Y 转 90°（转角半径 `corner`），第 1 段沿 +Z 长 `legs[1]`（室外机后面 + 左侧的 L 形冷凝器）。铜管、回弯用 `tubeColor`（默认 copper），翅片用 `color`：一个零件两种材质、两次绘制
   - `grille {style, radius | size, count, spokes, bar}`：`rings` = XZ 平面里 `count` 圈钢丝圈（从 0.2 radius 到 radius）+ `spokes` 根辐条 + 中心圆片（室外机风扇护网）；`slats` = `size:[w,d,h]` 框里 `count` 根宽 `bar` 的格条，沿 d 方向（室内机顶部进风格栅、滤网）
   - 所有 primitive 可选 `mirror: "x" | "y" | "z"`：在自身坐标里沿该轴镜像（先镜像、再 `rotation`），绕序自动翻转
-- **一个零件多个 primitive**（`extra: [primitive…]`，≤ 16）：`at` 同样是场景坐标；随零件一起移动、淡出、拆开、repeat（绕主 `at` 重复）和转动；引线指向主 `primitive`。每个 primitive 可以有自己的 `color` / `tint`：零件按材质分槽（`partMaterialSlots`：主材质在前，再按出现顺序），**同材质的所有块烘焙合并成一个几何体，一个材质一次绘制**（顶点超过 40 万才保留实例化）。压缩机 = 外壳 + 接线盒 + 底板，阀门 = 阀体 + 阀帽 + 接口，等等
+- **一个零件多个 primitive**（`extra: [primitive…]`，≤ 32）：`at` 同样是场景坐标；随零件一起移动、淡出、拆开、repeat（绕主 `at` 重复）和转动；引线指向主 `primitive`。每个 primitive 可以有自己的 `color` / `tint`：零件按材质分槽（`partMaterialSlots`：主材质在前，再按出现顺序），**同材质的所有块烘焙合并成一个几何体，一个材质一次绘制**（顶点超过 40 万才保留实例化）。压缩机 = 外壳 + 接线盒 + 底板，阀门 = 阀体 + 阀帽 + 接口，等等
 - **逐个副本的动画**（`each: true`，rotate / oscillate / pulse；b200-server 的 40 只风扇转子）：默认动画让整个零件绕零件中心（或 `pivot`）动，`repeat` 的各列和 `extra` 会一起公转。写 `each: true` 后，零件的每个**副本**——主 primitive 和每个 `extra`、乘以每个 `repeat` 实例（`lib/parts.ts partCopies`）——各自绕自己的 `at`（随 repeat 移过去）转 / 摆 / 缩放，轴仍是场景坐标。这样的零件不再烘焙合并：形状相同的 primitive（`primitiveShapeKey`：除 `at`、`rotation` 外参数与材质全同）共用一个 InstancedMesh，每个副本一个实例（`stages/model3d/geometry.ts eachPieces`，片的 `pivots` = 各实例的转心），舞台每帧写 `T(c) · 动作 · T(−c) · 静止矩阵`；所以 5 列 × 8 只转子 = 1 次绘制。限制：不能和 `pivot` 一起写；零件要有 `repeat` 或 `extra`；不能是 glb 零件；翅脉线、折叠翅在这种零件里是静止的。同一零件里不带 `each` 的动画照旧作用于整个零件，二者叠加。
 - **repeat**：`{count, axis, spacing}`（沿轴、以 `at` 为中心等距）或 `{count, axis, radius}`（绕过 `at` 的轴一圈，每个实例朝外转）。轴是场景坐标。重复的是整个零件（含 `extra`）；同材质的副本烘焙合并成一个几何体（一次绘制），顶点很多时才用 InstancedMesh。
-- **材质族**（`color`）：`casing`（拉丝铝，各向异性）、`steel`（机加工钢）、`powder`（缎面黑粉末涂层，轻微橘皮）、`stainless`（轴向拉丝不锈钢）、`copper`、`brass`（黄铜：阀门、喇叭口螺母）、`rubber`（近黑，roughness .78）、`plastic`（哑光暖砂色，不是默认灰）、`enamel`（暖白烤漆，比纸色深一档，低粗糙度 + 细颗粒粗糙度贴图 = 缎面光泽，家电外壳）、`glass`（半透明）；旧名 `metal` = steel、`matte` = plastic。或者 `token:<name>` / `#hex`：缎面漆。`primitive.tint`（token 或 #hex）给材质族换颜色、保留它的金属度 / 粗糙度 / 贴图，例如浅灰 `powder` 外壳：`"color": "powder", "tint": "#c4c6c2"`。程序化 canvas 贴图给拉丝方向、粗糙度变化、橘皮法线（`stages/model3d/textures.ts`，种子固定，截图可复现）。
+- **材质族**（`color`）：`casing`（拉丝铝，各向异性）、`steel`（机加工钢）、`powder`（缎面黑粉末涂层，轻微橘皮）、`stainless`（轴向拉丝不锈钢）、`copper`、`brass`（黄铜：阀门、喇叭口螺母）、`rubber`（近黑，roughness .78）、`plastic`（哑光暖砂色，不是默认灰）、`enamel`（暖白烤漆，比纸色深一档，低粗糙度 + 细颗粒粗糙度贴图 = 缎面光泽，家电外壳）、`glass`（半透明）、`wood`（哑光松木 / 胶合板：程序化木纹灰度颜色贴图 × 族色或 `tint`，电路板、实验台、冰棒棍）；旧名 `metal` = steel、`matte` = plastic。或者 `token:<name>` / `#hex`：缎面漆。`primitive.tint`（token 或 #hex）给材质族换颜色、保留它的金属度 / 粗糙度 / 贴图，例如浅灰 `powder` 外壳：`"color": "powder", "tint": "#c4c6c2"`。程序化 canvas 贴图给拉丝方向、粗糙度变化、橘皮法线（`stages/model3d/textures.ts`，种子固定，截图可复现）。
 - **流场**：`path` 首尾点相同 = 闭环。centripetal Catmull-Rom，按弧长烘焙进 shader：每 8 mm（0.008 场景单位）一个点，64–512 个，存成一行浮点纹理（`texelFetch` 取样，不占 uniform 数组），粒子在弯头处贴着曲线走、不抄近路（4 m 的冷媒段约 500 个点，弯头偏差从 64 点时的 15–20 mm 降到 3 mm 以内；盘管仍只能画 2–3 程，不能逐根追 U 形弯头），默认每条 360 个细粒子（贴着中心线，像 CFD 流线而不是魔法粒子），`speed` 是场景单位/秒。`stops` 在顶点着色器里按粒子位置插值（线性 RGB）；分段流（冷媒四段）用 `ends: "open"`，并让各段 `count / 长度 × speed` 大致相等（粒子通量连续）。`whenRun: false` 的流/动画一直播放（只受图层开关）。每条流一次绘制。
 - **已知限制**：同一时刻只有一个剖切面（`views.cutaway` 或一个命名 `views.cuts`，同时切所有零件；两个平面一起切暂不做）；`coilBank` 只做平直和 L 形（弧形蒸发器用两三段倾斜的平直盘管拼）；流不随拆开移动；`extrude` / 贯流叶片用 three 的 `ExtrudeGeometry`（`panelHole` 仍是手工三角化）。
 - **glb**：可以用 meshopt 压缩 + 量化（解码器内联，见「真实网格与人体肌肉」）；不要用 Draco（解码器在 CDN，Atlas 不允许运行时外部请求）。mesh 名找不到是 `pnpm validate` 的 error（运行时不再 console.warn）；glb 整体加载失败时舞台中央出双语说明，积木零件照常显示。glb 零件写 `material`。
@@ -777,6 +780,10 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
 
 // group
 { "id": "growth", "name": {en, zh}, "color": "token:food", "card": false }   // card:false：这一组不进右上零件链路卡（照常编号、可选、可标注）
+{ "id": "leaf-section", "name": {en, zh}, "color": "token:accent-2", "scale": { "unit": "mm", "magnification": 20 } }
+// scale：这一组是焦点时（选中了组里的零件、单显这一组、或当前拍 / 本章的 labels 里有 `group:<id>`），组的屏幕框下方画一条发丝比例尺：
+// 约 100 px 的整数长度（1 / 2 / 5 × 10ⁿ），标签按 unit 写，放大画的子模型带倍数（`5 MM · ×20`）；实长按 parts.json `units`（没写 = 1 场景单位 1 m）÷ magnification
+// （`hud/GroupScaleBars.tsx`、`lib/units.ts groupScaleBar`，有单测）
 // context 零件可以写 group：受图层开关、ghost、solo 控制（仍不标注、不可选）
 
 // flow
@@ -946,6 +953,76 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
 
 **模型前提**：模特只能按 glb 骨架动。主题 glb 的骨架缺哪条链，模特那部分就跟着躯干僵着（腿主题没有手臂骨、胸部主题没有腿骨、手臂 / 肩 / 背主题没有膝踝）；rig 里没写的骨（腰腹主题 glb 有手臂骨，但 rig 没映射）也不会动。要全身动作，先在管线 manifest 的 `jointNames` 补全全身关节重跑（`scripts/anatomy/README.md`），再在 parts.json 的 `rig.joints` 映射。
 
+### SpaceScene · 试一试（sim）
+
+docs/22 §4.3（E-SIM 核心，磁铁与电路共用）+ docs/23 §4（电路模型与电路图卡）。一个 SpaceScene 主题可以在 `parts.json` 里加一段 `sim`：读者能改的几个量（控件）、一个纯函数模型、模型给出的量（输出），以及控件 / 输出到零件、流、动画的绑定。没有独立的 Simulation 引擎（docs/03 §C）。代码：`sim-schema.ts`（zod 与交叉校验）、`lib/sim/`（`controls.ts` 值的合成与 URL、`index.ts` 模型注册表、`circuit.ts`、`magnet.ts`、`bind.ts`、`trial.ts`、`diagram.ts`，全部纯函数、有单测 `tests/space-scene/sim.test.ts`）、`explorer/TryIt.tsx`（试一试卡片）、`hud/CircuitCard.tsx`（电路图卡）、`hud/sim.ts`（HUD 读写的入口）。
+
+```jsonc
+"sim": {
+  "kind": "circuit",                                   // circuit | magnet：lib/sim/<kind>.ts
+  "controls": [                                        // ≤ 16，id 全主题的 sim 里唯一
+    { "id": "main", "kind": "toggle", "default": true, "label": {en, zh} },
+    { "id": "cells", "kind": "step", "values": [1, 2, 3], "default": 2, "label": {en, zh}, "unit"?: "cm" },
+    { "id": "arrangement", "kind": "choice", "default": "single", "label": {en, zh},
+      "options": [ { "id": "single", "label": {en, zh} }, …, { "id": "free", "label": {en, zh} } ],
+      "sets": { "single": { "x": false, "y": false, "z": true }, "series": { … }, "parallel": { … } } }
+  ],
+  "outputs": [                                         // ≤ 16
+    { "id": "i-cells", "label": {en, zh}, "from": "current:cells", "unit": "A", "decimals": 3 },   // from 默认 = id
+    { "id": "status", "label": {en, zh}, "kind": "state", "from": "status:cells", "states": { "open": {en, zh}, "closed": … } },
+    { "id": "edge-currents", "label": {en, zh}, "kind": "vector", "from": "edges" }
+  ],
+  "bind": [                                            // ≤ 64；每条只写 control 或 output 之一
+    { "output": "bright-a", "part": "filament-a", "glow": { "color": "token:lamp", "full": 100, "curve": "sqrt" } },
+    { "control": "cells", "part": "cell-3", "visible": { "gte": 3 } },
+    { "control": "flip-2", "part": "cell-2", "pose": { "true": "cell-2-turned" } },
+    { "control": "gap", "part": "pencil-lead", "pose": { "pencil-lead": "pencil-lead-in-gap" } },
+    { "output": "edge-currents", "flow": "current-flow", "intensity": { "full": 0.25 } },
+    { "output": "status", "flow": "current-flow", "stops": { "short": "token:hot" } },
+    { "output": "motor-speed", "animation": "fan-spin", "rpm": {} },
+    { "output": "buzz", "animation": "buzzer-pulse", "enabled": true }
+  ],
+  "circuit": { "nodes": {…}, "edges": [ … ], "materials": {…}, "loads": {…}, "reference": { "power": 0.68 }, "diagram": { "size": [290, 305], "labels": [ … ] } }
+}
+```
+
+- **控件**：`toggle`（开关）、`step`（有序的数，升序）、`choice`（选项 `{ id, label }`，id 不能是 `on` / `off` / 数字）。`choice.sets`：选这个选项同时设定别的控件（接法 → X / Y / Z）；读者手拨了被覆盖的控件时，选择移到 `sets` 正好成立的选项，否则移到第一个不带 `sets` 的选项（`free`，必须有一个），被覆盖的控件停在原处；`free` 本身一直是 `free`（`lib/sim/controls.ts setSimControl`，有单测）。默认值必须与默认选项的 `sets` 一致（validate 报）。
+- **值从哪里来**：store 字段 `sim` 只存"设过的值"（不累积：章 `state.sim.set`，拍 `sim.set` 叠在本章的上面，读者在卡片 / 键 / 电路图上改的）；显示的值 = 默认 ⊕ 各选择的 `sets` ⊕ 设过的值，无效值忽略（`resolveSimValues`）。换章回到那一章的 `set`；ESC 不清；URL `sim`（见「URL 参数」）；演示的保存 / 恢复带着它；拍的深链接 `b` 照常。
+- **模型**（`lib/sim/index.ts evaluateSim`，同步、< 1 ms，只在值变化时算）：`circuit` = 节点分析（docs/23 §4.2）：电池是诺顿等效（每节 `emf` 默认 1.5 V、`r` 每节内阻，`flip` 指定某节由开关翻转成 −EMF；`cells` 是数或步进控件），`switch`（合上 `closed` 默认 0.001 Ω，断开去掉），`wire`（`r`），`gap`（选择控件 → `materials` 的欧姆数，没列 = 绝缘、断开），`load`（固定 `load` 或选择控件；`present` 开关 = 装没装上；`loads` 的 `lamp`（`rated` W）/ `buzzer`（`on` A 以上响）/ `motor`（`at` V 时 `rpm` 的可视转速，∝ 电压））；每个连通块接地一个节点，高斯消元（部分主元），没有电池的块电流为 0。量名（输出的 `from`）：`current:<边>`、`volts:<边>`（电池 = 端电压）、`power:<边>`、`brightness:<边>`（灯功率 ÷ `reference.power` × 100）、`speed:<边>`、`sound:<边>`（`on` / `off`）、`status:<电池边>`（`open` < 1 mA、`short` > `short` A（默认 3）、`over-rating`：同一回路里有灯超过额定 × `over`（默认 1.5）、否则 `closed`）、`edges`（每条边的带号电流，from → to）。`magnet` = 最小版（docs/22 §4.2）：前两根磁铁的 Gilbert 磁荷对（`move` 控件沿轴移动、`flip` 的选项调头），`force`（吸 + 斥 −，`reference` 设定处的吸力 = 100 %）、`facing`、`clips-cards`、`clips-stroke`、`clips-em`；场线、指南针、力箭头叠加随磁铁主题做（docs/22 §4.4 M1、M4、M5）。validate 核对输出的 `from` 是这个模型的量、种类（数 / 状态 / 向量）对得上。
+- **绑定**（`lib/sim/bind.ts simEffects`，舞台叠在章节状态上）：零件 `visible`（条件：`true` = 真值 / 非零 / 不是第一个状态；或 `{ eq | ne | in | gte | lte }`）、`pose`（值 → `poses` 里的姿态，只动这些零件，压在章 / 拍的姿态之上；几条绑定动同一零件时非静止的那条胜出）、`glow`（值 ÷ `full`，`sqrt` 或 `linear`，0–2：从暗红渐到 `color`，过 1 更白；只点亮零件自己的材质，即槽 0：灯丝不带支撑丝和铜座）、`count`（`repeat` 零件只显示前 k 份；该零件不能有 `extra`）、`offset` / `rotate`（(值 − origin) × per，沿轴移 / 绕零件中心转，0.5 s 缓动）；流 `visible`、`intensity`（向量输出按 `paths` 的 id：每条路径的粒子速度 ∝ |值| ÷ `full`（夹在 ±2），负值反向，< 1 % 的路径 0.3 s 淡出；相位逐帧积分，变速不跳）、`stops`（状态 → 粒子色，如短路 `token:hot`）；动画 `rpm`（rotate 的转速 = 值 × per，角度积分）、`enabled`（条件不成立时 0.15 s 缓停）。运转（RUN / FLOW）只管"动起来"：灯亮不亮、零件在哪儿不受它影响。
+- **多路径流**（`flows[].paths: [{ id, path }]`，≤ 16 条，代替 `path`）：一条流、一次绘制；粒子按路径长度分配（每条 ≥ 4），每条路径一行浮点纹理，shader 里每条路径一个相位 / 透明度 / 闭合标志（`flowMaterial.ts`）。电路主题每条边一条路径（与导线 sweep 同源，生成脚本写出两者）。不能 `bilateral`。
+- **读数**：`telemetry` 行写 `follow: "<数输出>"`（不写 `idle` / `run`）：跟随输出值、0.3 s 一阶滞后（`lag` 可改）、小数位取输出的；本章 `try.observe` 里的输出在 PLATE 块加粗；块尾一行 `SIM <第一个状态输出> · <本章试一试控件的值>`，短路 / 超额定用 hot 色。
+- **章节**：
+
+```yaml
+state:
+  sim:
+    set: { arrangement: series, cells: 2 }     # 本章从这些值开始（不累积）
+    try:                                       # 本章的试一试卡片（每章至多一个，不做测验）
+      vary: arrangement                        # 改变的量（signal 芯片；[ ] 键）
+      also: [bulb-a-in]                        # 卡片上再给的控件（≤ 4）
+      keep: [cells, { en: "Same bulbs", zh: "同样的灯泡" }]   # 不变的量：控件（显示当前值）或一句话
+      observe: [i-cells, bright-a, bright-b]   # 观察的输出（大号读数，PLATE 块加粗）
+      record: true                             # 「记一行」+ 数据表；或 { judge: { output, gt, label } } 加一列是 / 否
+      predict:                                 # 先猜后看（可选，不判对错）
+        prompt: { en, zh }
+        start: { main: true }                  # 先设成这样再读"之前"（可选）
+        change: { gap: empty }
+        observe: bright-a
+        options: [ { id, label, means: same | zero | less | more | positive | negative } ]
+  beats:
+    - sim: { set: { bulb-a-in: false } }       # 这一拍的值（叠在本章 set 上）
+      caption: { en, zh }
+```
+
+  validate 核对 `set` / `start` / `change` 的控件与值、`vary` / `also` / `keep` 是控件、`observe` 是输出。
+- **试一试卡片**（`readerTop`，节拍行之后、详情之前；docs/08 §2 铁律 d）：标题 TRY IT / 试一试 + 键位提示；三行芯片（改变 signal 实心、不变 cold 描边、观察墨色描边）；控件：开关钮（`role="switch"`）、‹ 值 ›（`role="group"`，两端禁用）、选项钮（`role="radiogroup"` / `radio`），全部 ≥ 44 px，`data-sim-control` / `data-sim-value`；观察量大号读数 + SIM 芯片"在这个模型里"；先猜后看：选项 → 应用 `start`、读"之前"、应用 `change` → "你猜：… · 观察到：…"（观察 = `lib/sim/trial.ts outcomeOf`：变为零 / 变号 / ±5 % 内差不多一样 / 变大 / 变小，用 `means` 相同的选项的话说），「回到改变前」恢复改变前的值；换章、拍、深链接时清掉。数据表：「记一行」按改变量的值一行（同值覆盖，≤ 12 行，只在内存：刷新即清），列 = 改变量 + 观察量（+ 是 / 否）。手机在底部抽屉里同样可用。
+- **键**：`[` `]` = 本章 `vary` 的上一值 / 下一值（开关 = 关 / 开，选择 = 上 / 下一个选项），`T` = 本章卡片里第一个开关（`vary` 或 `also`）；注册为命令 `sim-prev` / `sim-next` / `sim-toggle`（`SIM_KEYS`），和按钮、电路图、测试 API 写同一个 store 值；状态行键位提示写 `[ ] T TRY IT`。没有卡片的章不注册。
+- **电路图卡**（有 `circuit.diagram` 时代替右上零件链路卡，标题 CIRCUIT DIAGRAM / 电路图；< 1024 px 收进试一试卡片里可折叠的一节）：节点的 `d` 是图上坐标，边的 `via` 是直角拐点，符号放在最长的一段直线上（`at`，默认中点）：电池 = 每节一对长（+）短（−）线、翻转的那节反过来，灯 = 圆内叉（按亮度填 `--lamp`，拔掉时虚线），开关 = 两个接线点 + 刀片（断开时抬起），缺口 = 两个接线点 + 材料（导体实线、铅笔芯虚线、绝缘体空着），蜂鸣器、电机（M）；有电流的边用 `--current` 加粗并带方向箭头（从正极出发），短路时整张图 `--hot`；开关符号 = 拨真开关（`role="button"`、`aria-pressed`、44 px 命中区，Enter / Space），其他符号 = 选中边的 `part`，选中的零件对应符号描 signal；`diagram.labels` 是图上的小字（"手电筒"）。没有 `d` 的节点不画。
+- **测试与 QA**：`__atlas.engine.sim()` → `{ values, set, outputs, try, table }`，`__atlas.engine.setSim({ id: value })`（逐个走 `setSimControl`，有非法值返回 false）；`__atlas.state().sim` = 设过的值。`pnpm shoot <slug> --keys` 测 `[` `]` `T`（在第一个有卡片的章：`]` 前进一值、`[` 回来、URL 带 `sim`；`T` 翻转一个开关再翻回）；`--beats` 每拍照常截图（拍的 `sim.set` 随 `beatScene` 应用）。
+- **token**：`--lamp`（灯丝发光，暖白）、`--current`（电流粒子，暗金；短路用 `--hot`）。
+- **已知限制**：读者不能自己拖元件、连线（docs/23 §4.5，v2）；`magnet` 只有最小模型；`overlays`（力箭头）与绑定的 `at` / `state` / `settle`（docs/22 §4.3 S4 里磁铁用的）随磁铁主题做，schema 现在不收。
+
 ### 章节怎么写（`state`）
 
 ```yaml
@@ -972,7 +1049,7 @@ state:
       labels: [compressor, accumulator]   # 这一拍的引线标注（≤ 6，不累积；不写 = 本章的 labels）
       hide: [outdoor-front]               # 这一拍移开的零件（不累积；不写 = 本章的 hide）
       exercise: { id: barbell-bench-press, phase: loop }   # 动作模式（肌肉主题；null = 无；不写 = 本章的）
-      highlight: { signal: [pectoralis-major-clavicular], cold: [deltoid-anterior] }   # 高亮（组或零件；不写 = 本章的）
+      highlight: { signal: [pectoralis-major-clavicular], cold: [deltoid-anterior] }   # 高亮（组或零件；不写 = 本章的）；`custom: { <零件或组>: token:<名> | "#hex" }` = 任意颜色的染色（碘液、红墨水实验）
       sites: [pectoralis-minor]           # 显示起止点的肌肉零件（不写 = 本章的）
       caption: { en: "…", zh: "…" }
       audio: /audio/aircon/ch03-1.mp3     # 可选：进拍时播放的旁白文件（站内路径）
@@ -1039,6 +1116,7 @@ core 演示系统（字幕卡、两级进度条、自动播放、语音、拍键
 ### 交互（舞台）
 
 - 点零件选中（拖动结束在零件上不算点击）；点空白处取消；拖动（OrbitControls，带阻尼）旋转，停手 400 ms 后 `setCamera()` 回写 URL（→ FREE CAMERA）。
+- 缩放下限默认是模型半径（非 context 零件）的 0.9 倍；章、拍、预设或封面镜头比它更近时，下限降到那个镜头距离的 70 %（`CameraRig` `relax`），放大的子模型、小展品的近景不会被推远；下一个更远的作者镜头恢复默认。上限仍是默认下限的 20 倍。
 - 悬停零件：signal 色弱边缘；触摸长按 ≥ 400 ms 选中。选中：signal 色菲涅尔边缘 + 极淡染色（paper 边缘清晰；dark plate 边缘发光 ≤ .35，不脉动）。
 - 视图：`xray` 未选中零件透明 .15；`isolate` 只显示选中零件和同组零件；图层开关对所有视图生效（包括选中的零件）。可见性规则在 `lib/visibility.ts`，有单测。
 
@@ -1152,6 +1230,7 @@ scripts/math/check-pool.ts   题库草稿自证：pnpm tsx scripts/math/check-po
 | `run` | 通电运转 | `1` \| `0` | SpaceScene | `run=1` |
 | `cut` | 剖切 | `none` \| `half` \| 命名剖切面（`views.cuts`，数据里没有就不切） | SpaceScene | `cut=sagittal` |
 | `pose` | 姿态 | `parts.json` `poses` 里的名字；空值 = 静止 | SpaceScene | `pose=wings-open` |
+| `sim` | 试一试的控件值（本章 `sim.set` 之外、读者或拍改过的） | `控件.值` 用 `~` 连，键排序；开关 `on` / `off`，步进写数，选择写选项 id；与本章基线相同时不写 | SpaceScene | `sim=cells.3~flip-2.on` |
 | `model` | 小测的模型视图 | `bar` \| `circle` \| `numberline` \| `wall` \| `barmodel`；= 题目默认时不写 | MathScene | `model=circle` |
 
 新增可链接字段：改 `core/types.ts` 的 `UrlEngineFields`、`core/url-state.ts`（`URL_KEY_ORDER`、编解码）、`SceneHost.tsx` 里解构的字段、descriptor 的 `fromUrl`，并补 `tests/url-state.test.ts`。

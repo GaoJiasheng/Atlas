@@ -1,6 +1,7 @@
 /**
  * WebGL builders of the shaped primitive kinds (layout maths in
- * lib/shaped.ts): lathe, extrude, curvedPanel, blades (axial and barrel
+ * lib/shaped.ts): lathe (whole, or part of a turn with hatched section
+ * faces: `atlasSection` = 1 on their vertices, materials.ts), coil, extrude, curvedPanel, blades (axial and barrel
  * rotors), coilBank (finned-tube heat exchanger, flat or L) and grille
  * (wire rings or slats). Each returns pieces in the primitive's own frame;
  * pieces with many small solids are already merged into one geometry.
@@ -9,14 +10,18 @@ import {
   BoxGeometry,
   BufferAttribute,
   BufferGeometry,
+  Curve,
   CylinderGeometry,
   ExtrudeGeometry,
   LatheGeometry,
   Matrix4,
   Path,
   Shape,
+  ShapeUtils,
   TorusGeometry,
+  TubeGeometry,
   Vector2,
+  Vector3,
 } from 'three';
 import type { Primitive } from '../../schema';
 import {
@@ -33,6 +38,9 @@ import {
   coilTubeHeights,
   grilleRings,
   grilleSlats,
+  helixPoint,
+  latheArcStart,
+  latheProfileClosed,
   panelPoint,
   type Blades,
   type CoilBank,
@@ -106,7 +114,63 @@ function sweep(t: TriBuilder, pts: Vec[], up: Vec, r: number, seg = 8): void {
 /* ------------------------------------------------------------------ */
 
 function latheGeometry(p: Kind<'lathe'>): BufferGeometry {
-  return new LatheGeometry(p.profile.map(([r, y]) => new Vector2(r, y)), p.segments);
+  const pts = p.profile.map(([r, y]) => new Vector2(r, y));
+  if (p.arc === undefined) return new LatheGeometry(pts, p.segments);
+  const start = latheArcStart(p.arc);
+  const length = p.arc * DEG2RAD;
+  const body = new LatheGeometry(pts, Math.max(3, Math.round((p.segments * p.arc) / 360)), start, length);
+  if (!latheProfileClosed(p.profile)) return body;
+  // Flat section faces at both cuts: the profile polygon (the axis closes a solid's), triangulated.
+  const ring = p.profile.map(([r, y]) => new Vector2(r, y));
+  if (Math.hypot(ring[0]!.x - ring[ring.length - 1]!.x, ring[0]!.y - ring[ring.length - 1]!.y) < 1e-9) ring.pop();
+  if (ShapeUtils.isClockWise(ring)) ring.reverse();
+  const tris = ShapeUtils.triangulateShape(ring, []);
+  const caps = new TriBuilder();
+  for (const phi of [start, start + length]) {
+    const s = Math.sin(phi);
+    const c = Math.cos(phi);
+    // Outward: away from the kept turn (against the turn at the start, along it at the end).
+    const sign = phi === start ? -1 : 1;
+    const n: Vec = [sign * c, 0, -sign * s];
+    const at = (v: Vector2): Vec => [v.x * s, v.y, v.x * c];
+    for (const tri of tris) {
+      const [a, b, d] = tri as [number, number, number];
+      const A = at(ring[a]!);
+      const B = at(ring[b]!);
+      const D = at(ring[d]!);
+      // Wind each triangle to face `n`.
+      const nx = (B[1] - A[1]) * (D[2] - A[2]) - (B[2] - A[2]) * (D[1] - A[1]);
+      const ny = (B[2] - A[2]) * (D[0] - A[0]) - (B[0] - A[0]) * (D[2] - A[2]);
+      const nz = (B[0] - A[0]) * (D[1] - A[1]) - (B[1] - A[1]) * (D[0] - A[0]);
+      const facing = nx * n[0] + ny * n[1] + nz * n[2];
+      const [p1, p2] = facing >= 0 ? [B, D] : [D, B];
+      caps.vertex(A, n, ring[a]!.x, ring[a]!.y);
+      caps.vertex(p1, n);
+      caps.vertex(p2, n);
+    }
+  }
+  const capGeo = caps.build();
+  capGeo.setAttribute('atlasSection', new BufferAttribute(new Float32Array(capGeo.getAttribute('position').count).fill(1), 1));
+  return mergeBaked([
+    { geometry: body, matrices: [new Matrix4()] },
+    { geometry: capGeo, matrices: [new Matrix4()] },
+  ]);
+}
+
+/** A helix (lib/shaped.ts `helixPoint`) as a centre-line curve for TubeGeometry. */
+class HelixCurve extends Curve<Vector3> {
+  constructor(private readonly p: Kind<'coil'>) {
+    super();
+  }
+  override getPoint(t: number, target = new Vector3()): Vector3 {
+    const [x, y, z] = helixPoint(this.p, t);
+    return target.set(x, y, z);
+  }
+}
+
+function coilGeometry(p: Kind<'coil'>): BufferGeometry {
+  const segments = Math.min(2048, Math.ceil(p.turns * (p.segments ?? 24)));
+  return new TubeGeometry(new HelixCurve(p), segments, p.wire, p.radial ?? 8, false);
 }
 
 function extrudeGeometry(p: Kind<'extrude'>): BufferGeometry {
@@ -394,10 +458,12 @@ function grillePieces(p: Kind<'grille'>): BasePiece[] {
 
 /* ------------------------------------------------------------------ */
 
-export function shapedPieces(p: Kind<'lathe' | 'extrude' | 'curvedPanel' | 'blades' | 'coilBank' | 'grille'>): BasePiece[] {
+export function shapedPieces(p: Kind<'lathe' | 'coil' | 'extrude' | 'curvedPanel' | 'blades' | 'coilBank' | 'grille'>): BasePiece[] {
   switch (p.kind) {
     case 'lathe':
       return [{ geometry: latheGeometry(p), instances: ID() }];
+    case 'coil':
+      return [{ geometry: coilGeometry(p), instances: ID() }];
     case 'extrude':
       return [{ geometry: extrudeGeometry(p), instances: ID() }];
     case 'curvedPanel':

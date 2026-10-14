@@ -52,6 +52,8 @@ export interface UrlEngineFields {
   task?: number;
   /** MathScene: model view (`bar`, `circle`, `numberline`, `wall`; `null` = the sub-step's own). URL `model`. */
   model?: string | null;
+  /** SpaceScene: try-it control values set on top of the defaults. URL `sim` (`cells.3~x.on`). */
+  sim?: Record<string, boolean | number | string>;
 }
 
 /**

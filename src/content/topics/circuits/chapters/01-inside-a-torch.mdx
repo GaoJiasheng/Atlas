@@ -1,0 +1,104 @@
+---
+id: inside-a-torch
+order: 1
+title: {"en": "Inside a torch", "zh": "手电筒里面"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: true
+  cutaway: "none"
+  layers: ["torch", "source", "board", "loads", "test-items", "current"]
+  labels: ["torch-body", "torch-switch", "torch-bulb"]
+  camera: {"position": [-0.19, 0.2, 0.42], "target": [-0.32, 0.02, 0.1], "fov": 30}
+  summary: {"en": "A torch is a small electrical system: batteries, a switch and a bulb joined in one loop of metal.", "zh": "手电筒是一个小小的电系统：电池、开关和灯泡用金属连成一个回路。"}
+  sim: {"set": {"torch-switch": false}, "try": {"vary": "torch-switch", "keep": [{"en": "Same batteries", "zh": "同样的电池"}, {"en": "Same bulb", "zh": "同一只灯泡"}], "observe": ["bright-torch"]}}
+  beats:
+    - labels: ["torch-body", "torch-switch"]
+      caption: {"en": "A torch is a small electrical system. Inside the tube are batteries, a switch and a bulb, joined by metal parts.", "zh": "手电筒是一个小小的电系统。筒里有电池、开关和灯泡，用金属零件连在一起。"}
+    - view: "xray"
+      labels: ["torch-cells", "torch-spring", "torch-strip", "torch-bulb", "torch-reflector"]
+      caption: {"en": "Look through the case: two batteries end to end, a spring at the back, a metal strip along the side and a small bulb in a mirror.", "zh": "透过外壳看：两节电池头尾相接，尾部一根弹簧，侧面一条金属片，前面反光碗里一只小灯泡。"}
+    - view: "xray"
+      sim: {"set": {"torch-switch": true}}
+      labels: ["torch-switch", "torch-strip", "torch-bulb"]
+      caption: {"en": "Slide the switch on. Its contact now touches the bulb holder, the loop is complete and the bulb lights.", "zh": "把开关推上。触片碰到灯座，回路接通，灯泡亮了。"}
+    - view: "xray"
+      camera: {"position": [-0.29, 0.13, 0.33], "target": [-0.33, 0.016, 0.105], "fov": 30}
+      sim: {"set": {"torch-switch": true}}
+      labels: ["torch-bulb", "torch-cells", "torch-spring"]
+      caption: {"en": "Current flows out of one end of the batteries, through the bulb, along the strip and back through the spring to the other end.", "zh": "电流从电池的一端流出，穿过灯泡，沿金属片、经过弹簧，回到电池的另一端。"}
+    - view: "xray"
+      labels: ["torch-switch", "torch-bulb"]
+      caption: {"en": "Slide it off and the loop is broken at the switch. Current stops everywhere at once, so the bulb goes dark.", "zh": "把开关推下，回路在开关处断开。整个回路的电流同时停下，灯泡熄灭。"}
+  index: {"parts": ["torch-body", "torch-cells", "torch-spring", "torch-strip", "torch-switch", "torch-bulb", "torch-reflector"]}
+---
+
+<Lang en>
+
+A torch is a small <Term id="electrical-system">electrical system</Term>: an energy source and a few parts joined so that together they give light. On the stage its case is see-through. Inside are two AA <Term id="battery">batteries</Term> lying end to end, a <Term id="switch">switch</Term> on the side and a small bulb at the front. In this design the torch is <Num s="S1">160 mm</Num> long. <FlyTo preset="torch-view">Look along the torch</FlyTo>
+
+Wherever electricity has to pass, the torch uses metal. A cone-shaped steel spring in the tail cap presses on the flat end of the back battery. A thin brass strip runs along the inside wall from the tail to the switch. The bulb sits in the middle of a curved mirror, the reflector, which sends its light forward through a clear lens.
+
+<Figure src="figures/circuits-torch" alt={{ en: "Pencil drawing of a metal torch cut open along its length: a ridged tail cap with a cone-shaped spring, two batteries end to end in the tube, a thin metal strip along the inside wall leading to a sliding switch on top, and a small bulb in the middle of a bowl-shaped mirror behind a round glass lens.", zh: "沿长度方向剖开的金属手电筒铅笔画：带防滑纹的尾盖里有一根锥形弹簧，筒里两节电池头尾相接，一条细金属片沿内壁通到顶上的拨动开关，前面碗形反光镜中央是一只小灯泡，最前面是圆形玻璃透镜。" }} caption={{ en: "The parts of a filament torch, cut open lengthwise. An illustration made for this topic, not a particular product.", zh: "剖开的灯泡手电筒，各个零件一目了然。为本主题画的示意图，不代表任何具体产品。" }} />
+
+Slide the switch on and its contact touches the bulb holder. Now there is one unbroken loop of metal: from the raised positive end of the front battery into the tip of the bulb, through its <Term id="filament">filament</Term>, out through the bulb's metal side, across the switch, along the strip, through the spring and into the flat negative end of the back battery. <Term id="electric-current">Electric current</Term> flows round this loop, and the filament becomes so hot, above <Num s="S15">2,500 °C</Num>, that it glows white.
+
+Slide the switch off and the loop is broken at the switch. The current stops everywhere in the loop at the same moment, not only after the switch, and the bulb goes dark. Use the Try it card to switch the torch on and off.
+
+The push comes from chemicals inside the batteries. While the loop is complete they react and keep the current moving. When the chemicals have reacted, the battery is flat.
+
+<More title={{ en: "Most torches today use LEDs", zh: "今天的手电筒多用 LED" }}>
+
+Most torches sold today use a light-emitting diode, an LED, instead of a filament bulb. An LED turns much more of the battery's energy into light: white LEDs give on the order of <Num s="S16">100 lumens per watt</Num>, small filament bulbs about <Num s="S16">8–10 lumens per watt</Num>. The loop is the same: batteries, switch, light and back to the batteries. This topic keeps the filament bulb because its glowing coil shows the current at work.
+
+</More>
+
+<More title={{ en: "What the spring is for", zh: "弹簧的用处" }}>
+
+The spring keeps the batteries pressed against each other and against the bulb, so that the metal parts stay touching even when the torch is knocked or dropped. Being steel, it also carries the current. A loose contact anywhere, at the spring, between the batteries or at the switch, is a gap in the loop, and the bulb flickers or goes out.
+
+</More>
+
+<More title={{ en: "A flat battery", zh: "电池为什么会没电" }}>
+
+In an alkaline battery, zinc powder in the centre and manganese dioxide round the outside react with each other, and they only react while the loop is complete. As the battery is used, the products of the reaction build up and its resistance inside rises, so it pushes less current and the bulb grows dimmer. In this model two fresh batteries push <Num s="S1">0.233 A</Num> through the torch bulb; the model does not show a battery running down.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+手电筒是一个小小的<Term id="electrical-system">电系统</Term>：一个能源加上几个元件连在一起，共同发出光来。舞台上它的外壳是透明的，能看到里面：两节 AA <Term id="battery">电池</Term>头尾相接地躺在筒里，侧面有一个<Term id="switch">开关</Term>，最前面是一只小灯泡。这个设计里，手电筒长 <Num s="S1">160 mm</Num>。<FlyTo preset="torch-view">顺着手电筒看一遍</FlyTo>
+
+凡是电要经过的地方，手电筒都用金属。尾盖里有一根锥形的钢弹簧，顶住后面那节电池平平的一端。一条细细的黄铜片沿着内壁，从尾部一直通到开关。灯泡装在一个弯曲的镜子中央，这面镜子叫反光碗，它把灯光聚起来，穿过前面的透镜射出去。
+
+<Figure src="figures/circuits-torch" alt={{ en: "Pencil drawing of a metal torch cut open along its length: a ridged tail cap with a cone-shaped spring, two batteries end to end in the tube, a thin metal strip along the inside wall leading to a sliding switch on top, and a small bulb in the middle of a bowl-shaped mirror behind a round glass lens.", zh: "沿长度方向剖开的金属手电筒铅笔画：带防滑纹的尾盖里有一根锥形弹簧，筒里两节电池头尾相接，一条细金属片沿内壁通到顶上的拨动开关，前面碗形反光镜中央是一只小灯泡，最前面是圆形玻璃透镜。" }} caption={{ en: "The parts of a filament torch, cut open lengthwise. An illustration made for this topic, not a particular product.", zh: "剖开的灯泡手电筒，各个零件一目了然。为本主题画的示意图，不代表任何具体产品。" }} />
+
+把开关推上，开关的触片碰到灯座。这时金属连成了一个没有缺口的回路：从前面那节电池凸起的正极，进入灯泡底部的尖端，穿过<Term id="filament">灯丝</Term>，从灯泡的金属螺口出来，经过开关、沿着金属片、穿过弹簧，回到后面那节电池平平的负极。<Term id="electric-current">电流</Term>沿着这个回路流动，灯丝热到 <Num s="S15">2,500 ℃</Num> 以上，发出白光。
+
+把开关推下，回路在开关处断开。整个回路里的电流在同一刻停下，不只是开关后面那一段，灯泡随即熄灭。可以用「试一试」卡片把手电筒开了又关，看看灯泡的变化。
+
+推动电流的是电池里的化学物质。只要回路是通的，它们就不断反应，让电流一直流动；等这些物质反应完了，电池也就没电了。
+
+<More title={{ en: "Most torches today use LEDs", zh: "今天的手电筒多用 LED" }}>
+
+今天卖的手电筒，大多用发光二极管（LED）代替灯泡。LED 能把电池里更多的能量变成光：白光 LED 每瓦大约发出 <Num s="S16">100 流明</Num>的光，小灯泡只有每瓦 <Num s="S16">8–10 流明</Num>左右。回路还是一样的：电池、开关、发光的元件，再回到电池。本主题仍然用灯泡，是因为发光的灯丝能让人看见电流在起作用。
+
+</More>
+
+<More title={{ en: "What the spring is for", zh: "弹簧的用处" }}>
+
+弹簧把两节电池互相压紧，也把它们压向灯泡，这样手电筒就算被碰了、摔了，金属零件之间仍然贴在一起。弹簧是钢做的，本身也让电流通过。回路上任何一处接触不良，无论在弹簧、两节电池之间还是开关上，都等于留了一个缺口，灯泡就会忽明忽暗，甚至熄灭。
+
+</More>
+
+<More title={{ en: "A flat battery", zh: "电池为什么会没电" }}>
+
+碱性电池里，中心是锌粉，外圈是二氧化锰，两者只有在回路接通时才发生反应。用得越久，反应生成的物质越多，电池内部的阻碍也越大，推动的电流就越小，灯泡越来越暗。在这个模型里，两节新电池给手电筒灯泡的电流是 <Num s="S1">0.233 A</Num>；模型不演示电池慢慢没电的过程。
+
+</More>
+
+</Lang>

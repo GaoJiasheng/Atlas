@@ -1,0 +1,363 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": {
+        "en": "Atlas design study for this topic (docs/23-circuits-content-spec.md §1.2, §1.3 and §4.2): a generic school circuit board and filament torch, not a specific product or brand. Design values: wooden board 400 × 300 × 12 mm; torch 160 mm long, tube Ø 22 mm, head Ø 36 mm; test gap 30 mm between the clips; bulb holders Ø 30 mm; wire drawn Ø 2.5 mm with a 1 mm copper core and pencil lead drawn Ø 1.2 mm (a real one is 0.5 mm), both thickened so that they can be seen; AA batteries Ø 14.5 × 50.5 mm, 1.5 V each, internal resistance 0.15 Ω each; miniature MES bulb rated 2.5 V 0.2 A, so 2.5 × 0.2 = 0.5 W rated and 2.5 ÷ 0.2 = 12.5 Ω hot resistance, held constant in the model; a closed switch 0.001 Ω; leads 0.05 Ω in total; materials in the test gap: steel paper clip 0.05 Ω, copper wire 0.01 Ω (it bridges the gap unless a test material takes its place), aluminium foil 0.02 Ω, pencil lead 20 Ω, plastic straw, wooden stick, rubber band and air = open (no current); buzzer 100 Ω, sounding above 10 mA; motor 6 Ω; torch = 2 batteries + switch + the same bulb. Brightness = bulb power ÷ 0.680 W (two batteries, one bulb) × 100. Simulated results (nodal analysis of the board circuit): 1 battery, one bulb 0.118 A, brightness 26; 2 batteries, one bulb 0.233 A, brightness 100, battery terminal voltage 2.93 V; 3 batteries, one bulb 0.346 A, brightness 220, bulb power 1.50 W, three times its 0.5 W rating (status OVER RATING); 3 batteries with one reversed 0.115 A, brightness 24; 2 batteries, two bulbs in series 0.118 A through both, brightness 26 each; 1 battery, two bulbs in series 0.060 A, brightness 7 each; 2 batteries, two bulbs in parallel 0.454 A from the batteries, 0.227 A in each bulb, brightness 95 each; pencil lead in the gap 0.091 A, brightness 15; an insulator in the gap, the switch open or a bulb removed: 0 A; short circuit (all three link switches closed) about 8.2 A, limited by the batteries' internal resistance, bulbs 0; motor in place of bulb A 0.47 A with 2.8 V across it; buzzer 0.030 A; torch switched on 0.233 A, brightness 100.",
+        "zh": "本主题的 Atlas 设计研究（docs/23-circuits-content-spec.md §1.2、§1.3、§4.2）：一块通用的小学电路板和一支灯泡手电筒，不对应任何具体产品或品牌。设计值：木板 400 × 300 × 12 mm；手电筒长 160 mm，筒径 Ø 22 mm，灯头 Ø 36 mm；测试缺口两夹相距 30 mm；灯座 Ø 30 mm；导线画成 Ø 2.5 mm、铜芯 1 mm，铅笔芯画成 Ø 1.2 mm（真的是 0.5 mm），两者都加粗了以便看清；AA 电池 Ø 14.5 × 50.5 mm，每节 1.5 V，每节内阻 0.15 Ω；MES 螺口小灯泡额定 2.5 V 0.2 A，即额定功率 2.5 × 0.2 = 0.5 W、热态电阻 2.5 ÷ 0.2 = 12.5 Ω，模型里保持不变；合上的开关 0.001 Ω；导线合计 0.05 Ω；测试缺口里的材料：钢回形针 0.05 Ω、铜线 0.01 Ω（不测试别的材料时，缺口上夹的就是它）、铝箔 0.02 Ω、铅笔芯 20 Ω，塑料吸管、木冰棒棍、橡皮筋和空气 = 断开（没有电流）；蜂鸣器 100 Ω，电流超过 10 mA 才响；电机 6 Ω；手电筒 = 2 节电池 + 开关 + 同样的灯泡。亮度 = 灯泡功率 ÷ 0.680 W（两节电池点一只灯）× 100。模拟结果（对电路板做节点分析）：1 节电池、一只灯 0.118 A，亮度 26；2 节电池、一只灯 0.233 A，亮度 100，电池两端电压 2.93 V；3 节电池、一只灯 0.346 A，亮度 220，灯泡功率 1.50 W，是额定 0.5 W 的 3 倍（状态 OVER RATING）；3 节里接反一节 0.115 A，亮度 24；2 节电池、两只灯串联 0.118 A 流过两只灯，各亮 26；1 节电池、两只灯串联 0.060 A，各亮 7；2 节电池、两只灯并联，电池输出 0.454 A，每只灯 0.227 A，各亮 95；缺口里是铅笔芯 0.091 A，亮度 15；缺口里是绝缘体、开关断开或拔掉灯泡：0 A；短路（三个连接开关全合上）约 8.2 A，受电池内阻限制，灯都不亮；A 位换成电机 0.47 A，电机两端 2.8 V；蜂鸣器 0.030 A；手电筒打开 0.233 A，亮度 100。"
+      },
+      "note": {
+        "en": "Not a measurement. The numbers are illustrative; the order brighter / dimmer is right. A real filament's resistance changes with temperature: cold it is roughly a tenth of its hot value (S4: 0.350 Ω cold, about 4.8 Ω at 2,850 °C, a ratio of about 14), so in a real circuit the dim bulbs are a little brighter and the over-rated bulb draws a little less current than the model says. A battery's internal resistance rises as it runs down and changes with the current drawn (S11), so the short-circuit current and the three-battery figures are the least certain. Arithmetic: two batteries, one bulb, I = 3.0 ÷ (0.30 + 0.05 + 0.002 + 0.01 + 12.5) = 0.233 A (batteries, leads, two closed switches, the copper wire in the gap, the bulb), bulb power 0.233² × 12.5 = 0.680 W, terminal voltage 3.0 − 0.233 × 0.30 = 2.93 V; short circuit 3.0 ÷ (0.30 + 0.05 + 0.01 + 0.004) ≈ 8.2 A. Sources of the inputs: AA size, 1.5 V and 0.15 Ω (the low end of 150–300 mΩ for a fresh cell) from S10; bulb rating from S13; holder Ø 30 mm from S14; series and parallel rules from S6 and S7; metals and graphite as conductors from S4 and S9 (the 20 Ω for 30 mm of pencil lead, clips included, is a design choice, see S9); buzzer from S18; motor from S17 (a real motor is not a fixed resistance: its current depends on its load and speed).",
+        "zh": "不是实测值。数字是示意，亮暗的排序是对的。真实灯丝的电阻随温度变化：冷的时候约为热态的十分之一（S4：冷态 0.350 Ω，2,850 ℃ 时约 4.8 Ω，相差约 14 倍），所以真实电路里暗的灯会比模型稍亮，超过额定的灯电流比模型稍小。电池内阻随电量下降而升高，也随电流变化（S11），所以短路电流和三节电池的数字最不确定。算式：两节电池、一只灯，I = 3.0 ÷ (0.30 + 0.05 + 0.002 + 0.01 + 12.5) = 0.233 A （电池、导线、两个合上的开关、缺口里的铜线、灯泡），灯泡功率 0.233² × 12.5 = 0.680 W，电池两端电压 3.0 − 0.233 × 0.30 = 2.93 V；短路 3.0 ÷ (0.30 + 0.05 + 0.01 + 0.004) ≈ 8.2 A。输入的来源：AA 尺寸、1.5 V 和 0.15 Ω（新电池 150–300 mΩ 的低端）见 S10；灯泡额定值见 S13；灯座 Ø 30 mm 见 S14；串联与并联的规律见 S6、S7；金属和石墨是导体见 S4、S9（30 mm 铅笔芯连同夹子取 20 Ω 是设计选择，见 S9）；蜂鸣器见 S18；电机见 S17（真电机不是固定电阻，电流随负载和转速变化）。"
+      }
+    },
+    {
+      "id": "S2",
+      "text": {
+        "en": "Ministry of Education Singapore, Curriculum Planning and Development Division, Science Teaching & Learning Syllabus, Primary Three to Six, Standard / Foundation (implementation starting with the 2023 Primary Three cohort; cover: updated Jan 2026). Electrical System (P5 Standard), p. 59: recognise that an electric circuit consisting of an energy source (battery) and other circuit components (wire, bulb, switch) forms an electrical system; show an understanding that a closed circuit allows current to flow; identify electrical conductors and insulators; construct simple circuits from circuit diagrams; investigate the effect of some variables on the current in a circuit: number of batteries (arranged in series), number of bulbs (arranged in series and parallel); show concern for the need to conserve and to have proper use and handling of electricity. P5 Foundation, p. 60: the same, with bulbs in series only. Ways of thinking and doing, p. 15: by the end of P4 recognise a fair test, by the end of P6 design a fair test (changed / unchanged variables).",
+        "zh": "新加坡教育部课程规划与发展司：《小学三至六年级科学教学大纲》（标准 / 基础，2023 年小三起实施；封面注明 2026 年 1 月更新）。电系统（小五标准），第 59 页：认识由能源（电池）和其他电路元件（导线、灯泡、开关）组成的电路构成一个电系统；理解闭合电路才有电流；辨认导体和绝缘体；按电路图搭简单电路；探究一些变量对电路中电流的影响：电池个数（串联）、灯泡个数（串联与并联）；关心节约用电，正确使用和处理电。小五基础，第 60 页：内容相同，灯泡只要求串联。思考与做事的方式，第 15 页：小四结束时能认出公平测试，小六结束时能设计公平测试（改变的量 / 不变的量）。"
+      },
+      "url": "https://www.moe.gov.sg/api/media/ba3562d3-5b31-4459-8693-45cde7b97273/Primary-Science-Syllabus-2023_May24.pdf",
+      "note": {
+        "en": "Read in full 2026-10-14 (PDF downloaded and converted to text). Page numbers are those printed on the pages (PDF pages 60, 61 and 16). The file name says May24 but the cover says updated Jan 2026; the docs/23 spec cited p. 16 for the fair test, which is the PDF page, printed p. 15. The syllabus does not use voltage, resistance or ampere for P5.",
+        "zh": "2026-10-14 读全文（下载 PDF 转成文本）。页码是页面上印的页码（PDF 第 60、61、16 页）。文件名写 May24，封面写 2026 年 1 月更新；docs/23 spec 写公平测试在第 16 页，那是 PDF 页码，印的页码是第 15 页。大纲在小五不用电压、电阻、安培这些词。"
+      }
+    },
+    {
+      "id": "S3",
+      "text": {
+        "en": "OpenStax, College Physics 2e, section 20.1 Current: electric current is the rate at which charge flows; an ampere is one coulomb per second; a closed path for current is supplied by conducting wires connecting a load to the terminals of a battery; the direction of conventional current is the direction positive charge would flow, and in metal wires the moving charges are electrons, going the opposite way.",
+        "zh": "OpenStax《大学物理》第 2 版 20.1 节“电流”：电流是电荷流动的快慢；1 安培等于每秒 1 库仑；导线把用电器接到电池两极，给电流提供一条闭合的路径；规定的电流方向是正电荷流动的方向，金属导线里移动的其实是电子，方向相反。"
+      },
+      "url": "https://openstax.org/books/college-physics-2e/pages/20-1-current",
+      "note": {
+        "en": "Read 2026-10-14. Open textbook (CC BY 4.0). Used for the direction of current (from the positive end of the battery round to the negative end) and for the note that electrons move the other way.",
+        "zh": "2026-10-14 读取。开放教材（CC BY 4.0）。用于电流方向（从电池正极经外电路到负极）和“电子实际反向移动”的说明。"
+      }
+    },
+    {
+      "id": "S4",
+      "text": {
+        "en": "OpenStax, College Physics 2e, section 20.3 Resistance and Resistivity: conductors have the smallest resistivities and insulators the largest; Table 20.1 at 20 °C (Ω·m): copper 1.72 × 10⁻⁸, aluminium 2.65 × 10⁻⁸, steel 20 × 10⁻⁸, tungsten 5.6 × 10⁻⁸, carbon (pure) 3.5 × 10⁻⁵, wood 10⁸–10¹¹, glass 10⁹–10¹⁴, hard rubber 10¹³–10¹⁶. Examples 20.5 and 20.6: a tungsten filament of 0.350 Ω at 20 °C has about 4.8 Ω at 2,850 °C.",
+        "zh": "OpenStax《大学物理》第 2 版 20.3 节“电阻与电阻率”：导体的电阻率最小，绝缘体最大；表 20.1（20 ℃，单位 Ω·m）：铜 1.72 × 10⁻⁸，铝 2.65 × 10⁻⁸，钢 20 × 10⁻⁸，钨 5.6 × 10⁻⁸，碳（纯）3.5 × 10⁻⁵，木 10⁸–10¹¹，玻璃 10⁹–10¹⁴，硬橡胶 10¹³–10¹⁶。例 20.5、20.6：20 ℃ 时 0.350 Ω 的钨丝，到 2,850 ℃ 约为 4.8 Ω。"
+      },
+      "url": "https://openstax.org/books/college-physics-2e/pages/20-3-resistance-and-resistivity",
+      "note": {
+        "en": "Read 2026-10-14. Hot ÷ cold = 4.8 ÷ 0.350 ≈ 14, so a cold filament has roughly a tenth of its working resistance (the figure used in S1's note). Copper conducts about 3.5 × 10⁻⁵ ÷ 1.72 × 10⁻⁸ ≈ 2,000 times better than pure carbon; glass and rubber are more than 10¹⁶ times worse than copper.",
+        "zh": "2026-10-14 读取。热态 ÷ 冷态 = 4.8 ÷ 0.350 ≈ 14，所以冷灯丝的电阻约为工作时的十分之一（S1 说明里用的数字）。铜的导电本领约是纯碳的 3.5 × 10⁻⁵ ÷ 1.72 × 10⁻⁸ ≈ 2,000 倍；玻璃和橡胶比铜差 10¹⁶ 倍以上。"
+      }
+    },
+    {
+      "id": "S5",
+      "text": {
+        "en": "OpenStax, College Physics 2e, section 20.6 Electric Hazards and the Human Body: a short circuit is a low-resistance path between the terminals of a voltage source; the heat delivered can quickly raise the temperature of nearby materials, melting or igniting them; fuses and circuit breakers open the circuit automatically when a sustained current exceeds safe limits; most of the body's resistance is in its dry skin, about 200 kΩ, and the same person soaking wet may have 10.0 kΩ; the threshold of sensation is only 1 mA; currents above about 10 to 20 mA can cause sustained muscle contraction, and 100 to 300 mA can stop the heart's rhythm (ventricular fibrillation).",
+        "zh": "OpenStax《大学物理》第 2 版 20.6 节“电的危害与人体”：短路是电源两极之间一条电阻很小的路径；产生的热会很快让附近的材料升温，熔化甚至着火；保险丝和断路器在电流持续超过安全限度时自动断开电路；人体的电阻主要在干燥的皮肤上，约 200 kΩ，同一个人全身湿透时可能只有 10.0 kΩ；人能感觉到的电流下限只有 1 mA；约 10–20 mA 以上的电流会让肌肉持续收缩，100–300 mA 可使心脏节律紊乱（心室颤动）。"
+      },
+      "url": "https://openstax.org/books/college-physics-2e/pages/20-6-electric-hazards-and-the-human-body",
+      "note": {
+        "en": "Read 2026-10-14. Wet skin: 200 ÷ 10 = 20 times lower resistance, so the same voltage drives about 20 times the current. Two AA batteries across wet skin: 3.0 V ÷ 10,000 Ω = 0.3 mA, below the 1 mA a person can feel, so the board is safe to handle; mains at 230 V (S23) across the same skin would be 23 mA. The chapters give only the factor of 20 and the qualitative conclusions; no mA figures appear in the text.",
+        "zh": "2026-10-14 读取。湿皮肤：电阻低 200 ÷ 10 = 20 倍，同样的电压推动约 20 倍的电流。两节 AA 电池接在湿皮肤上：3.0 V ÷ 10,000 Ω = 0.3 mA，低于人能感觉到的 1 mA，所以电路板可以放心操作；同样的皮肤接上 230 V 市电（S23）是 23 mA。章节里只写 20 倍和定性结论，不写毫安数。"
+      }
+    },
+    {
+      "id": "S6",
+      "text": {
+        "en": "OpenStax, College Physics 2e, section 21.1 Resistors in Series and Parallel: the same current flows through each resistor in series, and resistances in series simply add up; the same amount of charge passes through the battery and each resistor in a given time (conservation of charge); each resistor in parallel has the same full voltage of the source applied to it, the total resistance is smaller than any single one, and the total current is the sum of the branch currents; devices in a car or a house are wired in parallel so that they can operate independently.",
+        "zh": "OpenStax《大学物理》第 2 版 21.1 节“电阻的串联与并联”：串联时流过每个电阻的电流相同，电阻直接相加；同一段时间里流过电池和每个电阻的电荷一样多（电荷守恒）；并联时每个电阻都加上电源的全部电压，总电阻比其中任何一个都小，总电流等于各支路电流之和；汽车和房子里的用电器是并联的，所以能各自独立工作。"
+      },
+      "url": "https://openstax.org/books/college-physics-2e/pages/21-1-resistors-in-series-and-parallel",
+      "note": {
+        "en": "Read 2026-10-14. The page does not discuss a broken component; that one break in a series loop stops all the current, and that a broken branch in parallel leaves the others working, follow from its statements (one path in series, independent branches in parallel) and are shown by the S1 model.",
+        "zh": "2026-10-14 读取。这一页没有专门讲元件坏了的情况；“串联回路断一处全停、并联断一条支路其余照常”是从它的说法（串联只有一条路径、并联各支路独立）推出来的，并由 S1 的模型演示。"
+      }
+    },
+    {
+      "id": "S7",
+      "text": {
+        "en": "OpenStax, College Physics 2e, section 21.2 Electromotive Force: Terminal Voltage: internal resistance is the resistance to current within the source itself; terminal voltage V = emf − Ir; as batteries are depleted their internal resistance increases; when voltage sources are in series their internal resistances add and their emfs add algebraically, so a cell put in backwards opposes the others and the total emf is less.",
+        "zh": "OpenStax《大学物理》第 2 版 21.2 节“电动势与端电压”：内阻是电源内部对电流的阻碍；端电压 V = 电动势 − Ir；电池用旧了，内阻会变大；电源串联时内阻相加、电动势按方向相加，所以一节装反的电池和其他电池对着推，总电动势变小。"
+      },
+      "url": "https://openstax.org/books/college-physics-2e/pages/21-2-electromotive-force-terminal-voltage",
+      "note": {
+        "en": "Read 2026-10-14. Three batteries with one reversed: 1.5 + 1.5 − 1.5 = 1.5 V, the push of one battery, while the three internal resistances still add (S1: 0.115 A against 0.118 A for one battery).",
+        "zh": "2026-10-14 读取。三节里装反一节：1.5 + 1.5 − 1.5 = 1.5 V，只剩一节电池的推动，而三节的内阻照样相加（S1：0.115 A，一节电池时是 0.118 A）。"
+      }
+    },
+    {
+      "id": "S8",
+      "text": {
+        "en": "Wikipedia, “Electrical resistivity and conductivity”, table of resistivities at 20 °C (Ω·m): sea water 2.1 × 10⁻¹, drinking water 2 × 10¹ to 2 × 10³, deionised water 1.8 × 10⁵, damp wood 10³ to 10⁴, oven-dry wood 10¹⁴ to 10¹⁶, air 10⁹ to 10¹⁵.",
+        "zh": "维基百科《电阻率与电导率》，20 ℃ 电阻率表（Ω·m）：海水 2.1 × 10⁻¹，饮用水 2 × 10¹ 到 2 × 10³，去离子水 1.8 × 10⁵，潮湿的木头 10³ 到 10⁴，烘干的木头 10¹⁴ 到 10¹⁶，空气 10⁹ 到 10¹⁵。"
+      },
+      "url": "https://en.wikipedia.org/wiki/Electrical_resistivity_and_conductivity",
+      "note": {
+        "en": "Read 2026-10-14. Secondary source (an encyclopedia table compiling primary references), used only for the qualitative point that tap water conducts far better than pure water (1.8 × 10⁵ ÷ 2 × 10³ ≈ 90 to 1.8 × 10⁵ ÷ 2 × 10¹ ≈ 9,000 times) and that wet wood conducts while dry wood does not. Both are still poor conductors next to copper (S4).",
+        "zh": "2026-10-14 读取。二手来源（百科全书汇编原始文献的表），只用于定性说明：自来水的导电本领远好于纯水（1.8 × 10⁵ ÷ 2 × 10³ ≈ 90 倍到 1.8 × 10⁵ ÷ 2 × 10¹ ≈ 9,000 倍），湿木头能导电而干木头不能。跟铜（S4）比，它们仍然是很差的导体。"
+      }
+    },
+    {
+      "id": "S9",
+      "text": {
+        "en": "Rick Marshall, “Pencil leads: 20 project ideas”, Physics Education 38(2), March 2003, pp. 94–95: pencil leads are electrical conductors though they contain no metallic lead; they are a mixture of graphite and clay (about 25 % clay in the softest grade, about 75 % in the hardest); pure graphite has a typical resistivity of 3 × 10⁻⁵ Ω·m against 2.2 × 10⁻⁸ Ω·m for copper; the contact resistance where the lead meets the rest of the circuit may be as large as the lead's own resistance; too much clay and the mixture becomes an insulator.",
+        "zh": "Rick Marshall《铅笔芯：20 个课题设想》，《物理教育》第 38 卷第 2 期，2003 年 3 月，第 94–95 页：铅笔芯虽然不含金属铅，却是导体；它是石墨和黏土的混合物（最软的一级约含 25 % 黏土，最硬的约 75 %）；纯石墨的电阻率约 3 × 10⁻⁵ Ω·m，铜是 2.2 × 10⁻⁸ Ω·m；笔芯和电路其余部分接触处的接触电阻可能和笔芯本身的电阻一样大；黏土太多，混合物就成了绝缘体。"
+      },
+      "url": "http://users.df.uba.ar/sgil/physics_paper_doc/papers_phys/e&m/pe_Pencilleads.pdf",
+      "note": {
+        "en": "Read in full 2026-10-14 (copy of the journal pages hosted by the University of Buenos Aires physics department). The design value of 20 Ω could not be confirmed from a published measurement and is a design choice: a 30 mm length of 0.5 mm lead of pure graphite would be 3 × 10⁻⁵ × 0.030 ÷ (π × 0.00025²) ≈ 4.6 Ω; a writing lead with clay is several times more, and the clips add contact resistance of the same order, so a few ohms to a few tens of ohms is plausible. The text only says the bulb glows dimly. Graphite is a conductor, but a much poorer one than metal (S4).",
+        "zh": "2026-10-14 读全文（布宜诺斯艾利斯大学物理系网站上的期刊页面副本）。设计值 20 Ω 找不到公开的实测值核对，是设计选择：30 mm 长、直径 0.5 mm 的纯石墨约为 3 × 10⁻⁵ × 0.030 ÷ (π × 0.00025²) ≈ 4.6 Ω；含黏土的书写笔芯要大几倍，夹子的接触电阻也在同一量级，所以几欧到几十欧都说得通。正文只说灯泡微微发亮。石墨是导体，但比金属差得多（S4）。"
+      }
+    },
+    {
+      "id": "S10",
+      "text": {
+        "en": "Energizer, product datasheet E91 (AA, IEC LR6, ANSI 15A; form E91NA1018): alkaline zinc–manganese dioxide; nominal voltage 1.5 V; nominal internal resistance 150 to 300 milliohms (fresh); typical weight 23.0 g; industry-standard dimensions: diameter 13.50–14.50 mm, height 49.50–50.50 mm; positive button up to 5.50 mm across and at least 1.00 mm high.",
+        "zh": "Energizer E91 产品数据表（AA，IEC LR6，ANSI 15A；表号 E91NA1018）：碱性锌–二氧化锰电池；标称电压 1.5 V；新电池标称内阻 150–300 毫欧；典型重量 23.0 g；行业标准尺寸：直径 13.50–14.50 mm，高 49.50–50.50 mm；正极凸帽直径不超过 5.50 mm，高至少 1.00 mm。"
+      },
+      "url": "https://data.energizer.com/pdfs/e91.pdf",
+      "note": {
+        "en": "Read 2026-10-14 (PDF converted to text). Cited as a typical alkaline AA datasheet, not as a recommendation; the dimensions are the industry standard for the LR6 size. The design values in S1 are the maximum diameter and height (Ø 14.5 × 50.5 mm) and the low end of the internal resistance (0.15 Ω).",
+        "zh": "2026-10-14 读取（PDF 转成文本）。作为一份典型的碱性 AA 电池数据表引用，不是推荐产品；尺寸是 LR6 型号的行业标准。S1 的设计值取最大直径和高度（Ø 14.5 × 50.5 mm）以及内阻的低端（0.15 Ω）。"
+      }
+    },
+    {
+      "id": "S11",
+      "text": {
+        "en": "Energizer Brands, Alkaline Manganese Dioxide Handbook and Application Manual (2018), “Battery Description” and “Internal Resistance”: a cylindrical alkaline battery has a cathode of manganese dioxide mixed with carbon, an anode of gelled zinc powder and electrolyte, a separator, a steel can that holds the active materials and serves as the cathode collector, a brass anode collector, and positive and negative covers of nickel-plated steel; the plastic label insulates the battery; the stored electrons flow only when the circuit is closed; internal resistance rises during discharge as reaction by-products form; electrically shorting a battery is an abusive condition that can produce high levels of hydrogen gas.",
+        "zh": "Energizer《碱性锌锰电池手册与应用指南》（2018）“电池结构”与“内阻”两节：圆柱形碱性电池的正极是二氧化锰与碳的混合物，负极是凝胶状的锌粉与电解液，中间有隔膜；钢壳装住活性物质，同时是正极的集流体；黄铜针是负极集流体；正、负极端盖是镀镍钢；外面的塑料标签让电池绝缘；只有电路闭合时，储存的电子才会流动；放电过程中反应产物增多，内阻随之变大；把电池短路属于滥用，会产生大量氢气。"
+      },
+      "url": "https://data.energizer.com/pdfs/alkaline_appman.pdf",
+      "note": {
+        "en": "Read 2026-10-14 (PDF converted to text, 14 pages). Manufacturer technical handbook, used for the structure of the cut-open battery (cell-cutaway) and for why a battery runs down; no product is named in the chapters.",
+        "zh": "2026-10-14 读取（PDF 转成文本，共 14 页）。厂商技术手册，用于剖开的电池（cell-cutaway）的结构和电池为什么会“没电”；章节里不点名任何产品。"
+      }
+    },
+    {
+      "id": "S12",
+      "text": {
+        "en": "Energizer Brands, Eveready Carbon Zinc Battery Handbook and Application Manual (2018): a carbon–zinc battery has a zinc anode, a manganese dioxide cathode and a slightly acidic electrolyte; in the cylindrical cell the anode is the zinc alloy can, which also holds the active materials, the cathode is a mix of manganese dioxide, carbon and electrolyte, the separator is coated paper, and a carbon electrode in the centre is the cathode current collector.",
+        "zh": "Energizer《Eveready 碳锌电池手册与应用指南》（2018）：碳锌电池负极是锌，正极是二氧化锰，电解液略呈酸性；圆柱形电池里，锌合金外筒就是负极，同时装住活性物质；正极是二氧化锰、碳和电解液的混合物；隔膜是涂层纸；中心的碳棒是正极集流体。"
+      },
+      "url": "https://data.energizer.com/pdfs/carbonzinc_appman.pdf",
+      "note": {
+        "en": "Read 2026-10-14. Used only for the comparison in the battery More block: in the older carbon–zinc cell the outside can is the negative zinc and the centre rod is positive, the reverse of the alkaline layout (S11), where the steel can is positive and the zinc is in the middle.",
+        "zh": "2026-10-14 读取。只用于电池细看里的对比：旧式碳锌电池外面的锌筒是负极、中心碳棒是正极，与碱性电池（S11）钢壳为正极、锌在中心的布置正好相反。"
+      }
+    },
+    {
+      "id": "S13",
+      "text": {
+        "en": "Rapid Electronics, catalogue page “KL 2.5V 200mA Miniature MES Lamp”, order code 41-0120 (MPN G11/E10 2.5V 0.2): operating voltage 2.5 V; rating 200 mA; base MES (E10); 11 mm diameter, 23 mm overall length; clear; 100 hours of life.",
+        "zh": "Rapid Electronics 产品目录页“KL 2.5V 200mA 微型 MES 灯泡”，订货号 41-0120（型号 G11/E10 2.5V 0.2）：工作电压 2.5 V；额定电流 200 mA；灯头 MES（E10 螺口）；直径 11 mm，全长 23 mm；透明玻璃；寿命 100 小时。"
+      },
+      "url": "https://www.rapidonline.com/kl-2-5v-200ma-miniature-mes-lamp-miniature-41-0120",
+      "note": {
+        "en": "Read 2026-10-14. Cited as a typical school bulb, not as a recommendation. Rated power = 2.5 V × 0.2 A = 0.5 W; hot resistance = 2.5 ÷ 0.2 = 12.5 Ω. UK school-supplier pages listing the same 2.5 V 0.2 A MES bulb (Findel, Hope Education, Philip Harris) refused automated access or showed a human-verification page, so they were not used. A 2.5 V 0.3 A version, mentioned in the spec, could not be confirmed and is not used.",
+        "zh": "2026-10-14 读取。作为典型的学校小灯泡引用，不是推荐产品。额定功率 = 2.5 V × 0.2 A = 0.5 W；热态电阻 = 2.5 ÷ 0.2 = 12.5 Ω。列出同样 2.5 V 0.2 A MES 灯泡的英国教具商页面（Findel、Hope Education、Philip Harris）拒绝自动访问或要求人机验证，没有采用。spec 提到的 2.5 V 0.3 A 型号无法核实，不用。"
+      }
+    },
+    {
+      "id": "S14",
+      "text": {
+        "en": "Eisco Labs, catalogue page “Plastic Bulb Holder (M.E.S.)”, SKU PH1022A: metal bulb holder in a plastic base; diameter of the unit 30 mm; mounted for connection to electrical circuits; bulb not included.",
+        "zh": "Eisco Labs 产品目录页“塑料灯座（M.E.S.）”，编号 PH1022A：塑料底座上的金属螺口灯座；整体直径 30 mm；带接线柱，可接进电路；不含灯泡。"
+      },
+      "url": "https://www.eiscolabs.com/products/ph1022a",
+      "note": {
+        "en": "Read 2026-10-14. Cited as a typical school MES holder; the board's holders are Ø 30 mm in the model.",
+        "zh": "2026-10-14 读取。作为典型的学校 MES 灯座引用；模型里电路板上的灯座直径 30 mm。"
+      }
+    },
+    {
+      "id": "S15",
+      "text": {
+        "en": "Lamptech (lamptech.co.uk, museum of electric lamp technology), “Incandescent lamps: operating principle”: a filament begins to glow dimly if heated above about 500 °C; to give useful light it must operate at temperatures in excess of 2,500 °C, when it glows white hot; tungsten is used because of its melting point of 3,417 °C.",
+        "zh": "Lamptech（lamptech.co.uk，电灯技术博物馆网站）《白炽灯的工作原理》：灯丝加热到约 500 ℃ 以上开始微微发光；要发出有用的光，工作温度要超过 2,500 ℃，这时它白热发光；用钨是因为它的熔点高达 3,417 ℃。"
+      },
+      "url": "https://lamptech.co.uk/Documents/IN%20Operation.htm",
+      "note": {
+        "en": "Read 2026-10-14. Other references give tungsten's melting point as 3,414 °C (Royal Society of Chemistry periodic table) or 3,422 °C; the text says about 3,400 °C. The page does not give a cold-to-hot resistance ratio; that comes from S4.",
+        "zh": "2026-10-14 读取。别的资料写钨的熔点为 3,414 ℃（英国皇家化学会元素周期表）或 3,422 ℃；正文写约 3,400 ℃。这一页没有给冷热电阻之比，那个数来自 S4。"
+      }
+    },
+    {
+      "id": "S16",
+      "text": {
+        "en": "Wikipedia, “Flashlight”: the dry cell and miniature incandescent lamps made the first battery-powered flashlights possible around 1899; in 1999 a high-power white LED was introduced; white LEDs give on the order of 100 lumens per watt, against 8–10 for small incandescent bulbs; today flashlights use mostly light-emitting diodes.",
+        "zh": "维基百科《手电筒》：干电池和微型白炽灯让第一批电池手电筒在 1899 年前后出现；1999 年出现大功率白光 LED；白光 LED 每瓦约发出 100 流明，小白炽灯泡只有 8–10 流明；今天的手电筒大多用发光二极管（LED）。"
+      },
+      "url": "https://en.wikipedia.org/wiki/Flashlight",
+      "note": {
+        "en": "Read 2026-10-14. Secondary source; the article carries a general “needs more citations” banner, though these sentences have no “citation needed” tag. Used only for one sentence in a More block (most torches today use LEDs, and the loop is the same). No primary source on the market share of LED torches was found.",
+        "zh": "2026-10-14 读取。二手来源；条目顶部有“需要更多引用”的提示，但这几句没有“需要引用”的标记。只用于细看里的一句话（今天大多数手电筒用 LED，回路是同一个道理）。没有找到关于 LED 手电筒市场占比的一手来源。"
+      }
+    },
+    {
+      "id": "S17",
+      "text": {
+        "en": "Pololu, product page and specifications “Tamiya 980112M Mabuchi FA-130 Motor” (item 77): the brushed DC motor used in many educational toys; operating voltage 1.5–3 V, typical 3 V; at 3 V: no-load speed about 12,300 rpm, no-load current 150 mA, stall current about 2.1 A.",
+        "zh": "Pololu 产品页与规格“Tamiya 980112M Mabuchi FA-130 电机”（编号 77）：许多教育玩具里用的有刷直流电机；工作电压 1.5–3 V，典型 3 V；3 V 时空载转速约每分钟 12,300 转，空载电流 150 mA，堵转电流约 2.1 A。"
+      },
+      "url": "https://www.pololu.com/product/77/specs",
+      "note": {
+        "en": "Read 2026-10-14; the page says the item is discontinued. Cited as a typical small 3 V motor. A real motor's current lies between 0.15 A (spinning freely) and 2.1 A (held still) depending on its load; the model's fixed 6 Ω gives 0.47 A at 2.8 V, inside that range. The stall figure implies a winding resistance of about 3 ÷ 2.1 ≈ 1.4 Ω; a turning motor draws less because it pushes back against the battery.",
+        "zh": "2026-10-14 读取；页面注明已停产。作为典型的 3 V 小电机引用。真电机的电流随负载变化，在 0.15 A（空转）到 2.1 A（卡住不转）之间；模型取固定 6 Ω，2.8 V 时 0.47 A，落在这个范围里。由堵转电流可算出线圈电阻约 3 ÷ 2.1 ≈ 1.4 Ω；电机转起来时会“反推”电池，所以电流比这小。"
+      }
+    },
+    {
+      "id": "S18",
+      "text": {
+        "en": "Same Sky (formerly CUI Devices), datasheet CMI-1295-85T magnetic buzzer indicator (dated 2024-09-11): rated voltage 3.0 V DC; operating voltage 2.0–5.0 V DC; current consumption at rated voltage up to 30 mA; constant tone, 2,300 Hz typical; sound pressure at least 85 dB at 10 cm; Ø 12 × 10 mm, 1.6 g.",
+        "zh": "Same Sky（原 CUI Devices）CMI-1295-85T 电磁式蜂鸣器数据表（2024-09-11）：额定电压直流 3.0 V；工作电压 2.0–5.0 V；额定电压下电流最大 30 mA；连续音，典型 2,300 Hz；10 cm 处声压至少 85 dB；Ø 12 × 10 mm，1.6 g。"
+      },
+      "url": "https://www.sameskydevices.com/product/resource/cmi-1295-85t.pdf",
+      "note": {
+        "en": "Read 2026-10-14. Cited as a typical small buzzer with a built-in driving circuit (it only needs a battery). The model's buzzer is 100 Ω, drawing 3.0 ÷ 100 ≈ 0.030 A from two batteries, matching the 30 mA here; the 10 mA “sounds” threshold in S1 is a design choice for the 2.0 V lower end of the operating range.",
+        "zh": "2026-10-14 读取。作为典型的自带驱动电路的小蜂鸣器引用（只要接电池就能响）。模型里蜂鸣器取 100 Ω，两节电池时 3.0 ÷ 100 ≈ 0.030 A，与这里的 30 mA 相符；S1 里“超过 10 mA 才响”是按工作电压下限 2.0 V 取的设计值。"
+      }
+    },
+    {
+      "id": "S19",
+      "text": {
+        "en": "Institute of Physics, IOPSpark misconception page “Some students hold a ‘consumer-source’ model of the simple circuit”: these students think that the battery (the source) gives something to the bulb (the consumer), and therefore that a single wire from a battery terminal to a bulb terminal will be enough to light the bulb.",
+        "zh": "英国物理学会 IOPSpark 误解条目《有些学生持“供给–消耗”模型看待简单电路》：这些学生认为电池（来源）把某种东西送给灯泡（消耗者），因此以为从电池一极接一根线到灯泡的一个接线点，就足以点亮灯泡。"
+      },
+      "url": "https://spark.iop.org/some-students-hold-consumer-source-model-simple-circuit",
+      "note": {
+        "en": "Read 2026-10-14 in a browser (the page refuses automated download). Research literature calls this the unipolar model (Osborne 1983, cited on IOPSpark; only the bibliographic record of that paper could be reached, no abstract).",
+        "zh": "2026-10-14 用浏览器读取（页面拒绝自动下载）。研究文献把它叫作“单极模型”（Osborne 1983，IOPSpark 列为参考；那篇论文只能查到书目信息，读不到摘要）。"
+      }
+    },
+    {
+      "id": "S20",
+      "text": {
+        "en": "Institute of Physics, IOPSpark misconception page “Some students have differing ideas about what is happening in the wires of an electric circuit when it is working”: some interpret electric effects as a meeting (‘clash’) of currents from the positive and negative battery terminals; many think that electricity or electric current is partly used up (attenuated) by any component, such as a bulb, buzzer or motor, that it passes through, and this view is very resistant to change.",
+        "zh": "英国物理学会 IOPSpark 误解条目《学生对电路工作时导线里发生什么有不同的想法》：有人认为电的作用来自电池正、负两极出发的电流在中间“相撞”；许多人认为电或电流经过灯泡、蜂鸣器、电机等元件时会被部分“用掉”（削弱），这种想法很难改变。"
+      },
+      "url": "https://spark.iop.org/some-students-have-differing-ideas-about-what-happening-wires-electric-circuit-when-it-working",
+      "note": {
+        "en": "Read 2026-10-14 in a browser (the page refuses automated download). The page lists the research behind it, including Osborne (1983), Shipstone (1988) and McDermott & Shaffer (1992). What a bulb transfers is energy from the battery, not current (S6: the same charge passes the battery and each component).",
+        "zh": "2026-10-14 用浏览器读取（页面拒绝自动下载）。页面列出了依据的研究，包括 Osborne（1983）、Shipstone（1988）、McDermott 与 Shaffer（1992）。灯泡转化的是电池里的能量，不是电流（S6：流过电池和每个元件的电荷一样多）。"
+      }
+    },
+    {
+      "id": "S21",
+      "text": {
+        "en": "A. Métioui, M. Baulu MacWillie and L. Trudel, “Conceptions of pupils of the primary on the topic of an electric circuit in three countries (Canada, France and Morocco)”, European Journal of Science and Mathematics Education 4(4), 2016, pp. 469–476: questionnaire answered by 237 pupils aged 10 to 12; asked which battery–bulb arrangements light the bulb, 48–67 % of pupils (by city) chose arrangements in which the battery's two ends were joined but the bulb's two contacts were not both in the loop; 33–57 % explained the bulb lighting by two currents leaving both ends of the battery and meeting in the bulb; 25–59 % said the current in the wire to the bulb differs from the current in the wire back.",
+        "zh": "A. Métioui、M. Baulu MacWillie、L. Trudel《加拿大、法国和摩洛哥三国小学生对电路的观念》，《欧洲科学与数学教育杂志》第 4 卷第 4 期，2016 年，第 469–476 页：237 名 10–12 岁学生答问卷；问哪些电池–灯泡接法能让灯亮时，各城市有 48–67 % 的学生选了“电池两极接上了、但灯泡的两个接触点没有都接进回路”的接法；33–57 % 的学生用“两股电流从电池两极出发、在灯泡里相遇”解释灯为什么亮；25–59 % 的学生认为通往灯泡的导线和回来的导线里电流不一样。"
+      },
+      "url": "https://scimath.editorialpark.com/download/conceptions-of-pupils-of-the-primary-on-the-topic-of-an-electric-circuit-in-three-countries-canada-9486.pdf",
+      "note": {
+        "en": "Read in full 2026-10-14 (open-access PDF). Chosen because its pupils are the age of a Singapore P5 class; the older papers named in the spec (Osborne 1983, Shipstone 1984) are behind a publisher's verification page and only their bibliographic records could be read. The percentages are not used in the chapters; the paper supports the More blocks on “two wires” and “current is not used up”.",
+        "zh": "2026-10-14 读全文（开放获取 PDF）。选它是因为研究对象和新加坡小五学生同龄；spec 列的较早论文（Osborne 1983、Shipstone 1984）在出版社的验证页后面，只读到书目信息。章节里不用这些百分比；这篇论文支撑“两根线”和“电流不会被用掉”两个细看。"
+      }
+    },
+    {
+      "id": "S22",
+      "text": {
+        "en": "Hildegard Urban, “Sequential Reasoning in Electricity: Developing and Using a Three-Tier Multiple Choice Test”, Scientia in educatione 8 (Special Issue), 2017, pp. 285–292: Closset introduced the term sequential reasoning, which is widespread among students (Closset 1983; Shipstone 1984): the idea that electricity leaves the battery at one terminal and reaches the components one after another, so that the circuit is not seen as one system; research does not show it fading with age, and similar ideas are held by adults and some teachers.",
+        "zh": "Hildegard Urban《电学中的顺序推理：三层选择题测验的编制与使用》，《Scientia in educatione》第 8 卷特刊，2017 年，第 285–292 页：Closset 提出“顺序推理”一词，这种想法在学生中很普遍（Closset 1983；Shipstone 1984）：以为电从电池一极出发，依次到达各个元件，而不把电路看成一个整体；研究没有发现它随年龄减少，成年人和一些教师也有类似想法。"
+      },
+      "url": "https://medusa.is.cuni.cz/scied/article/download/755/397/3502",
+      "note": {
+        "en": "Read in full 2026-10-14 (open-access PDF, Charles University). Supports the More block “Where should the switch go?”: in a series loop the switch stops the current everywhere at once, wherever it is placed, which the S1 model shows.",
+        "zh": "2026-10-14 读全文（开放获取 PDF，布拉格查理大学）。支撑细看“开关该放在哪里”：在串联回路里，开关放在哪里，断开时整个回路的电流都同时停下，S1 的模型演示了这一点。"
+      }
+    },
+    {
+      "id": "S23",
+      "text": {
+        "en": "SP Group, How to Apply for Electricity Connection (handbook, Jan 2026), §1.2 Connection Voltages and Supply Frequency: in Singapore installations are connected at distribution voltages of 230 V, 400 V, 6.6 kV and 22 kV (may vary within ± 6 %); low tension means 230 V single-phase and 400 V three-phase; low-voltage supply is 50 Hz, 230 V single-phase up to a maximum of 23 kVA, 100 A.",
+        "zh": "SP 集团《如何申请电力接驳》（手册，2026 年 1 月）§1.2“接驳电压与供电频率”：新加坡用户按 230 V、400 V、6.6 kV、22 kV 的配电电压接入（可在 ± 6 % 内变动）；低压指 230 V 单相和 400 V 三相；低压供电频率 50 Hz，230 V 单相最大 23 kVA、100 A。"
+      },
+      "url": "https://www.spgroup.com.sg/dam/jcr%3A66289889-80d2-4559-a479-a804d5323f19/How%20to%20Apply%20for%20Electricity%20Connection.pdf",
+      "note": {
+        "en": "Read 2026-10-14 (PDF converted to text). The IEC World Plugs page for Singapore listed in the spec showed a human-verification page and was not used. 230 ÷ 1.5 ≈ 153, so a home socket pushes about 150 times as hard as one AA battery.",
+        "zh": "2026-10-14 读取（PDF 转成文本）。spec 列的 IEC World Plugs 新加坡页面要求人机验证，没有采用。230 ÷ 1.5 ≈ 153，所以家里插座的推动约是一节 AA 电池的 150 倍。"
+      }
+    },
+    {
+      "id": "S24",
+      "text": {
+        "en": "Wikipedia, “BS 1363”: the plug has two horizontal rectangular pins for line and neutral and a larger earth pin above them; plugs and sockets are rated for a maximum of 250 V AC and 13 A; BS 1363 plugs must carry a cartridge fuse conforming to BS 1362, commonly rated 3, 5 or 13 A, which protects the flexible cord between the plug and the appliance under fault conditions; sockets have shutters on the line and neutral contacts; the plug is Type G in the IEC classification; Singapore uses it, with its own standard SS 145, specification for 13 A plugs and socket-outlets.",
+        "zh": "维基百科《BS 1363》：插头有两个水平的长方形插脚（相线、零线），上方一个更大的接地插脚；插头和插座的额定值最高 250 V 交流、13 A；BS 1363 插头里必须装一支符合 BS 1362 的管状保险丝，常见 3、5、13 A，在出故障时保护插头和电器之间的软线；插座的相线和零线插孔有挡板；在 IEC 分类里是 G 型；新加坡使用它，本国标准是 SS 145（13 A 插头与插座规范）。"
+      },
+      "url": "https://en.wikipedia.org/wiki/BS_1363",
+      "note": {
+        "en": "Read 2026-10-14. Secondary source; the British and Singapore standards themselves are paywalled. Used for the plug-and-socket More block and the circuits-socket-plug figure caption only.",
+        "zh": "2026-10-14 读取。二手来源；英国和新加坡的标准原文要付费。只用于插头插座的细看和图 circuits-socket-plug 的说明。"
+      }
+    },
+    {
+      "id": "S25",
+      "text": {
+        "en": "Consumer Product Safety Office, Singapore, “Tips to Keep your Home Safe from Electrical Hazards”: if an appliance has damaged or frayed cords, stop using it and get the cords replaced; overloading wall socket outlets can cause fire hazards; always engage a licensed electrical worker for all electrical installation, maintenance and repair work; keep liquids away from appliances and wall socket outlets to prevent short circuits; do not handle electrical appliances with wet hands; hold the plug instead of the cord when unplugging; many household items require a SAFETY Mark.",
+        "zh": "新加坡消费品安全局《让家远离电气危险的提示》：电器的电线破损或磨损，立即停用并更换电线；插座过载可能引起火灾；所有电气安装、维护和维修都要请持证电工；液体远离电器和插座，以免短路；不要用湿手碰电器；拔插头时捏住插头而不是拉电线；许多家用电器须有 SAFETY 标志。"
+      },
+      "url": "https://www.consumerproductsafety.gov.sg/consumers/product-safety-tips/home-appliances-furniture-and-indoor-product-safety/tips-to-keep-your-home-safe-from-electrical-hazards/",
+      "note": {
+        "en": "Read 2026-10-14 (page last updated 21 May 2026). The page does not mention residual current circuit breakers; that advice comes from EMA (S26–S28).",
+        "zh": "2026-10-14 读取（页面 2026-05-21 更新）。这一页没有提到漏电断路器；那条建议来自能源市场管理局（S26–S28）。"
+      }
+    },
+    {
+      "id": "S26",
+      "text": {
+        "en": "Energy Market Authority, Singapore, “Electrical Safety” consumer page: engage only licensed electrical workers for installation, maintenance and repair; do not use electrical appliances near water or with wet hands, or touch an open outlet or switch with wet hands; overloading power points may lead to overheating and start a fire, so do not piggy-back multiple plugs into one socket with double adaptors; replace cords with broken or frayed insulation and do not mend them with insulation tape; do not run wires round sharp edges; the residual current circuit breaker (RCCB) cuts off the supply immediately when it detects current leakage that may lead to an electric shock; all residential premises must have one, and it should be tested once a month.",
+        "zh": "新加坡能源市场管理局“用电安全”消费者页面：安装、维护和维修只请持证电工；不要在水边或用湿手使用电器，不要用湿手碰敞开的插座或开关；插座过载可能过热起火，不要用多用插头把几个插头叠在一个插座上；绝缘层破裂或磨损的电线要换新，不要用绝缘胶布缠；电线不要绕过锋利的边角；漏电断路器（RCCB）检测到可能导致触电的漏电时立即切断电源；所有住宅都必须装，应每月测试一次。"
+      },
+      "url": "https://www.ema.gov.sg/consumer-information/electricity/electrical-safety",
+      "note": {
+        "en": "Read 2026-10-14 in a browser (the page is rendered by script; page last updated 19 March 2026).",
+        "zh": "2026-10-14 用浏览器读取（页面由脚本渲染；2026-03-19 更新）。"
+      }
+    },
+    {
+      "id": "S27",
+      "text": {
+        "en": "Energy Market Authority, Singapore, feature story “5 Common Electrical Safety Questions: EMA's Inspectorate Department Explains”, 29 May 2025: an RCCB immediately cuts off the supply on detecting current leakage that may lead to electric shocks, and without one the current could pass through a person and the shock can be fatal; it became mandatory for all homes by 1 July 2025; many electrical incidents stem from improper use of appliances and worn-out cables; do not use appliances with damaged or exposed cables, do not overload circuits with too many multi-plugs, and test the RCCB regularly.",
+        "zh": "新加坡能源市场管理局专题文章《用电安全五问：EMA 检查部解答》，2025-05-29：漏电断路器检测到可能导致触电的漏电时会立即断电，没有它，电流可能流过人体，触电可能致命；2025 年 7 月 1 日起所有住宅都必须装；许多用电事故源于电器使用不当和电线老化；不要用电线破损或外露的电器，不要用太多多用插头让电路过载，要定期测试漏电断路器。"
+      },
+      "url": "https://www.ema.gov.sg/news-events/news/feature-stories/2025/five-common-electrical-safety-questions-ema-inspectorate-department-explains",
+      "note": {
+        "en": "Read 2026-10-14 in a browser.",
+        "zh": "2026-10-14 用浏览器读取。"
+      }
+    },
+    {
+      "id": "S28",
+      "text": {
+        "en": "Energy Market Authority, Singapore, feature story “An Electrical Safety Inspector's View: Everyday Habits for a Safer Home”, 8 June 2026: damaged cables or burn marks are warning signs; frayed or cracked wires are a fire hazard and should be replaced; plugging too many appliances into one extension cord can cause overheating and fire, and there is no fixed safe number because appliances draw different power; an RCCB compares the current going into a circuit with the current coming back and cuts the supply when they differ; test it ideally once a month by pressing its test button; frequent tripping should be checked by a licensed electrical worker.",
+        "zh": "新加坡能源市场管理局专题文章《电气安全检查员的视角：让家更安全的日常习惯》，2026-06-08：电线破损或有烧焦痕迹是警告信号；磨损或开裂的电线有火灾风险，应更换；一个拖线板插太多电器会过热起火，没有固定的“安全个数”，因为各电器耗电不同；漏电断路器比较流进电路和流回来的电流，两者不等时就切断电源；最好每月按一次测试按钮测试；经常跳闸要请持证电工检查。"
+      },
+      "url": "https://www.ema.gov.sg/news-events/news/feature-stories/2026/an-electrical-safety-inspector-view-everyday-habits-for-a-safer-home",
+      "note": {
+        "en": "Read 2026-10-14 in a browser (page last updated 17 September 2026). Its account of how an RCCB works (current out compared with current back) is the same idea as the chapters' “the same current all the way round the loop”.",
+        "zh": "2026-10-14 用浏览器读取（页面 2026-09-17 更新）。它对漏电断路器原理的说明（比较流出和流回的电流）与章节里“整个回路电流处处相同”是同一个道理。"
+      }
+    },
+    {
+      "id": "S29",
+      "text": {
+        "en": "Energy Market Authority, Singapore Energy Statistics 2025, Chapter 2 Energy Transformation, “Fuel Mix for Electricity Generation”: in 2024 natural gas accounted for 94.0 % of Singapore's fuel mix; other energy products (such as municipal waste, biomass and imports) 2.7 %; solar PV 2.1 %; coal and petroleum products 1.2 %. In the first half of 2025 natural gas was 93.1 %. In 2024 combined-cycle gas turbine, co-generation and tri-generation plants made up 81.3 % of generation capacity.",
+        "zh": "新加坡能源市场管理局《新加坡能源统计 2025》第 2 章“能源转换”之“发电燃料构成”：2024 年天然气占新加坡发电燃料的 94.0 %；其他能源产品（如城市垃圾、生物质和进口电力）2.7 %；太阳能光伏 2.1 %；煤和石油产品 1.2 %。2025 年上半年天然气占 93.1 %。2024 年联合循环燃气轮机、热电联产和冷热电三联产电厂占发电装机容量的 81.3 %。"
+      },
+      "url": "https://www.ema.gov.sg/resources/singapore-energy-statistics/chapter2",
+      "note": {
+        "en": "Read 2026-10-14 in a browser. 2024 is the latest full year published; the text says about 94 % (2024). The spec's “about 95 %” is replaced by this figure.",
+        "zh": "2026-10-14 用浏览器读取。2024 年是已公布的最新全年数据；正文写约 94 %（2024 年）。spec 里的“约 95 %”改用这个数。"
+      }
+    },
+    {
+      "id": "S30",
+      "text": {
+        "en": "National Environment Agency, Singapore, “Energy Saving Tips by Appliance”: switch the lights off whenever you leave the room and make the most of natural light; switch off connected devices when they are not in use; many appliances keep drawing power after being switched off, so turn them off at the socket; set the air-conditioner at 25 °C, and use a fan instead of an air-conditioner where possible.",
+        "zh": "新加坡国家环境局《各类电器的节能提示》：离开房间就关灯，多用自然光；不用时关掉联网设备；许多电器关机后仍在耗电，要在插座处关掉；冷气设在 25 ℃，能用风扇时就不开冷气。"
+      },
+      "url": "https://www.nea.gov.sg/our-services/climate-change-energy-efficiency/energy-efficiency/household-sector/energy-saving-tips",
+      "note": {
+        "en": "Read 2026-10-14 in a browser. Used for the syllabus value of saving electricity in chapter 06; the percentages of savings on the page are not used.",
+        "zh": "2026-10-14 用浏览器读取。用于第 06 章课纲要求的节约用电；页面上的省电百分比不用。"
+      }
+    }
+  ]
+}

@@ -70,6 +70,14 @@ import { spaceSpecRows } from './hud/spec';
 import { partNumber } from './hud/common';
 import { LeaderLabels } from './hud/LeaderLabels';
 import { SitesOverlay } from './hud/SitesOverlay';
+import { CircuitCard } from './hud/CircuitCard';
+import { GroupScaleBars } from './hud/GroupScaleBars';
+import { TryIt } from './explorer/TryIt';
+import { setSim } from './hud/sim';
+import { isControlValue, resolveSimValues, stepValue } from './lib/sim/controls';
+import { evaluateSim } from './lib/sim';
+import type { SimTry } from './sim-schema';
+import { SIM_KEYS } from '../core/controls';
 import './space-scene.css';
 
 const Model3DStage = lazy(() => import('./stages/model3d/Model3DStage'));
@@ -214,6 +222,8 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       sites: spec?.sites ? [...spec.sites] : target.sites,
       demo: null,
       beat: b.index,
+      // Try-it values: the chapter's, then the beat's (not cumulative across beats).
+      sim: { ...target.sim, ...(spec?.sim?.set ?? {}) },
       camera,
     };
     return next;
@@ -268,6 +278,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
         tints: snap.tints,
         sites: [...snap.sites],
         beat: snap.beat,
+        sim: { ...snap.sim },
         orbit: u.orbit,
         presetId: ref ? ref.presetId : h.presetId,
         cameraFree: ref ? ref.cameraFree : h.cameraFree,
@@ -279,10 +290,10 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
     saveState: () => entered.current!,
     restoreState: (saved) => {
       ui.setState({ presenting: false, orbit: saved.orbit });
-      const { chapter, layers, camera, view, part, explode, run, cutaway, hidden, pose, ghosted, exercise, tints, sites, beat } = saved;
+      const { chapter, layers, camera, view, part, explode, run, cutaway, hidden, pose, ghosted, exercise, tints, sites, beat, sim } = saved;
       store
         .getState()
-        .applyState({ chapter, layers, camera, view, part, explode, run, cutaway, hidden, pose, ghosted, exercise, tints, sites, beat, demo: null }, { instant: false });
+        .applyState({ chapter, layers, camera, view, part, explode, run, cutaway, hidden, pose, ghosted, exercise, tints, sites, beat, sim, demo: null }, { instant: false });
       hud.setState({ presetId: saved.presetId, cameraFree: saved.cameraFree });
     },
   };
@@ -376,6 +387,47 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       reverting = false;
     });
   }, [store, isPresenting]);
+
+  // A predict-then-observe answer belongs to the scene it was given in: a chapter, a beat or a link resets it.
+  useEffect(
+    () =>
+      store.subscribe((st, prev) => {
+        if (st.transition.id === prev.transition.id) return;
+        const { reason } = st.transition;
+        if (reason === 'chapter' || reason === 'state' || reason === 'url') ui.setState({ simPredict: null });
+      }),
+    [store, ui],
+  );
+
+  /* ---------- TRY IT: `[` `]` step the varied control, `T` flips the card's first switch ---------- */
+  const simCard = useScene<SpaceSceneExt, SimTry | null>((st) => {
+    const state = chapters.find((c) => c.id === st.chapter)?.state as SpaceChapterState | undefined;
+    return state?.sim?.try ?? null;
+  });
+  const simCommands = useMemo(() => {
+    const sim = file.sim;
+    if (!sim || !simCard) return [];
+    const ctl = (id: string) => sim.controls.find((c) => c.id === id);
+    const vary = ctl(simCard.vary);
+    const toggle = [simCard.vary, ...(simCard.also ?? [])].map(ctl).find((c) => c?.kind === 'toggle');
+    const now = () => resolveSimValues(sim, store.getState().sim);
+    const step = (dir: 1 | -1) => () => {
+      if (vary) setSim(store, sim, vary.id, stepValue(vary, now()[vary.id]!, dir));
+    };
+    return [
+      { id: 'sim-prev', key: SIM_KEYS.prev, label: t('space.try.prev'), disabled: !vary, run: step(-1) },
+      { id: 'sim-next', key: SIM_KEYS.next, label: t('space.try.next'), disabled: !vary, run: step(1) },
+      {
+        id: 'sim-toggle',
+        key: SIM_KEYS.toggle,
+        label: toggle ? tx(toggle.label, locale) : t('space.try.title'),
+        disabled: !toggle,
+        run: () => {
+          if (toggle) setSim(store, sim, toggle.id, !(now()[toggle.id] === true));
+        },
+      },
+    ];
+  }, [file.sim, simCard, store, t, locale]);
 
   // HUD hidden (H, hero shots) outside the presentation: the stage frames the cover camera.
   const hudOn = useHud((h) => h.hud);
@@ -490,9 +542,10 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       },
       specRows: spaceSpecRows(file),
       status,
-      card: both('space.card.title'),
+      card: file.sim?.circuit?.diagram ? both('space.card.circuit') : both('space.card.title'),
       beats: beatControls,
       beatStep,
+      ...(simCommands.length > 0 ? { commands: simCommands, commandsHint: t('space.try.title') } : {}),
       // `pnpm shoot --beats`: hold an exercise beat at its start / end key for a still.
       test: {
         exercisePhase: (phase: 'start' | 'end' | 'loop') => {
@@ -505,6 +558,27 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
         apply: (patch: Parameters<ReturnType<typeof store.getState>['applyState']>[0]) => {
           store.getState().applyState(patch, { instant: true });
           return true;
+        },
+        // Try-it (docs/06 「SpaceScene · 试一试」): the values on show, what was set, the outputs, the card and its table.
+        sim: () => {
+          const sim = file.sim;
+          if (!sim) return null;
+          const st = store.getState();
+          const values = resolveSimValues(sim, st.sim);
+          const state = chapters.find((c) => c.id === st.chapter)?.state as SpaceChapterState | undefined;
+          return { values, set: { ...st.sim }, outputs: evaluateSim(sim, values), try: state?.sim?.try ?? null, table: ui.getState().simTables[st.chapter ?? ''] ?? [] };
+        },
+        // Set controls as the reader would (one at a time, through the choices' `sets`); false if one is not a control value.
+        setSim: (values: Record<string, boolean | number | string>) => {
+          const sim = file.sim;
+          if (!sim) return false;
+          let ok = true;
+          for (const [id, v] of Object.entries(values)) {
+            const c = sim.controls.find((x) => x.id === id);
+            if (!c || !isControlValue(c, v)) ok = false;
+            else setSim(store, sim, id, v);
+          }
+          return ok;
         },
         // QA: hold a pose of parts.json (null = rest).
         pose: (name: string | null) => {
@@ -571,6 +645,8 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
     startPresentation,
     stopPresentation,
     locale, // `t` is bound to `locale`
+    simCommands,
+    chapters,
   ]);
   useSceneControls(controls);
 
@@ -615,10 +691,9 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       <SceneSlot name="leaders">
         <LeaderLabels file={file} chapters={chapters} bridge={bridge} ui={ui} />
         <SitesOverlay file={file} bridge={bridge} />
+        <GroupScaleBars file={file} bridge={bridge} />
       </SceneSlot>
-      <SceneSlot name="card">
-        <PartChainCard file={file} />
-      </SceneSlot>
+      <SceneSlot name="card">{file.sim?.circuit?.diagram ? <CircuitCard file={file} /> : <PartChainCard file={file} />}</SceneSlot>
       <SceneSlot name="plate">
         <PlateBlock file={file} ui={ui} bridge={bridge} />
       </SceneSlot>
@@ -646,6 +721,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
           canNext={canStep(1)}
           onStep={beatStep}
         />
+        <TryIt file={file} ui={ui} />
         <Inspector file={file} fitness={fitness} training={training} />
       </SceneSlot>
       <SceneSlot name="readerEnd">

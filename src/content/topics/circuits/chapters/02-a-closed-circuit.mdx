@@ -1,0 +1,107 @@
+---
+id: a-closed-circuit
+order: 2
+title: {"en": "A complete loop", "zh": "闭合电路"}
+sensitive: false
+state:
+  view: "assembled"
+  labels: ["cell-holder", "main-switch", "bulb-a", "leads"]
+  camera: {"position": [-0.01, 0.82, 0.13], "target": [-0.01, 0, 0.005], "fov": 32}
+  summary: {"en": "Current flows only round a complete loop; a switch opens or closes that loop.", "zh": "只有完整的回路才有电流；开关把回路断开或接通。"}
+  sim: {"set": {"arrangement": "single", "cells": 2, "main": false}, "try": {"vary": "main", "keep": ["cells", {"en": "Same bulb", "zh": "同一只灯泡"}], "observe": ["bright-a", "i-cells"], "predict": {"prompt": {"en": "Unclip one end of the copper link in the gap. Will the bulb stay lit?", "zh": "把缺口里铜线的一头松开，灯泡还会亮吗？"}, "start": {"main": true}, "change": {"gap": "empty"}, "observe": "bright-a", "options": [{"id": "stays-lit", "label": {"en": "Stays lit", "zh": "还亮"}, "means": "same"}, {"id": "goes-out", "label": {"en": "Goes out", "zh": "熄灭"}, "means": "zero"}, {"id": "dims", "label": {"en": "Gets dimmer", "zh": "变暗"}, "means": "less"}]}}}
+  beats:
+    - labels: ["cell-holder", "main-switch", "bulb-a", "leads"]
+      caption: {"en": "The same parts, spread out on a board: batteries in a holder, wires, a switch and a bulb. The diagram at the top right shows the same circuit in symbols.", "zh": "同样的元件摊在一块板上：电池盒里的电池、导线、一个开关和一只灯泡。右上角的电路图用符号画出同一个电路。"}
+    - sim: {"set": {"main": true}}
+      labels: ["cell-holder", "main-switch", "gap-clips", "bulb-a"]
+      caption: {"en": "Close the switch. Current leaves the positive end of the batteries, goes round through the bulb and returns to the negative end. A closed circuit.", "zh": "合上开关。电流从电池的正极流出，经过灯泡，回到负极。这是闭合电路。"}
+    - camera: "cutaways-view"
+      sim: {"set": {"main": true}}
+      labels: ["bulb-cutaway"]
+      caption: {"en": "Inside a bulb, current goes in at the tip, up one wire, through the thin coiled filament and down the other wire to the metal side. Both must be connected.", "zh": "在灯泡里，电流从底部的尖端进去，沿一根引线上去，穿过细细的螺旋灯丝，再沿另一根引线到金属螺口。两处都要接上。"}
+    - camera: "cutaways-view"
+      sim: {"set": {"main": true}}
+      labels: ["cell-cutaway"]
+      caption: {"en": "A battery has two ends, positive and negative. Inside, chemicals push the current round the circuit, and both ends must be part of the loop.", "zh": "电池有两极：正极和负极。里面的化学物质推动电流在电路里流动，两极都必须接在回路里。"}
+    - camera: {"position": [0.06, 0.17, 0.26], "target": [-0.07, 0.025, 0.02], "fov": 30}
+      sim: {"set": {"main": true, "load-a": "motor"}}
+      labels: ["motor", "motor-fan", "buzzer"]
+      caption: {"en": "Swap the bulb for a motor or a buzzer. The loop is the same; the job is different: movement or sound instead of light.", "zh": "把灯泡换成电机或蜂鸣器。回路一样，用处不同：转动或发声，而不是发光。"}
+  index: {"parts": ["cell-holder", "cell-1", "main-switch", "leads", "gap-clips", "bulb-a", "filament-a", "bulb-cutaway", "cell-cutaway", "buzzer", "motor"]}
+---
+
+<Lang en>
+
+The board spreads the same kinds of parts out flat, so that each one can be seen and changed. At the back a black holder carries the batteries. Red and black wires run from it to a switch at the front left and on to bulb A in its holder. Joined like this they make an <Term id="electric-circuit">electric circuit</Term>. The card at the top right is a <Term id="circuit-diagram">circuit diagram</Term> of the same circuit: each symbol stands for one part on the board, and tapping a switch symbol works the real switch. <FlyTo preset="board-top">Look straight down at the board</FlyTo>
+
+Close the switch and the loop has no gap. This is a <Term id="closed-circuit">closed circuit</Term>: current leaves the positive end of the batteries, flows along the wire, through the bulb and back to the negative end, and the bulb lights. Open the switch and a gap of air breaks the loop. In this <Term id="open-circuit">open circuit</Term> no current flows anywhere.
+
+Both ends matter. A battery has two <Term id="terminal">terminals</Term>, positive and negative, and a bulb has two contacts: the tip underneath and the metal screw side. Inside the bulb one wire goes up from the tip to the filament and another comes down from it to the screw. Current goes in by one contact and out by the other, so each contact needs a wire, and the two wires must lead back to different ends of the battery. <FlyTo preset="cutaways-view">See the cut-open bulb and battery</FlyTo>
+
+Other parts can sit in the loop too. Swap it for a small motor and the fan turns; swap it for a buzzer and it sounds. The circuit is the same; the job is different.
+
+Use the Try it card to predict what a loose clip at the battery does to the bulb, then watch the board.
+
+<More title={{ en: "One wire is not enough", zh: "一根线不够" }}>
+
+Given a battery, a bulb and some wire, many people at first join one end of the battery to the bulb and expect it to light, as if the battery sent something along the wire to be used up. In one study of <Num s="S21">237</Num> pupils aged <Num s="S21">10 to 12</Num>, about half or more in each city chose arrangements in which the bulb's two contacts were not both part of the loop. The bulb only lights when current can enter at one contact, leave at the other and return to the battery's other end.
+
+</More>
+
+<More title={{ en: "Where the switch goes", zh: "开关放在哪里" }}>
+
+It is easy to picture current setting off from the battery and reaching each part in turn, so that a switch "before" the bulb would matter more than one "after" it. Researchers call this sequential reasoning, and it is common at every age. In a single loop the current starts and stops everywhere together. On the board, opening the main switch next to the batteries or opening link switch Z on the far side of bulb A has the same result: no current anywhere and a dark bulb.
+
+</More>
+
+<More title={{ en: "Current is not used up", zh: "电流不会被用掉" }}>
+
+In this model the current in the wire going to bulb A and in the wire coming back from it are the same, <Num s="S1">0.233 A</Num>. The bulb does not use up current. What it takes is energy, which the chemicals in the batteries supply and the filament gives off as light and heat. Another common idea, that two currents leave both ends of the battery and clash inside the bulb, is not right either: the current goes one way round the whole loop. By convention that is from the positive end round to the negative end; inside metal wires the tiny charged particles that actually move, electrons, travel the other way.
+
+</More>
+
+<More title={{ en: "Reading the symbols", zh: "认识电路符号" }}>
+
+In the circuit diagram a battery is a pair of lines, the longer one for the positive end; several batteries are several pairs in a row. A bulb is a circle with a cross in it. A switch is a gap in the line with a short line hinged at one end: lifted when open, lying across the gap when closed. A motor is a circle with M in it, and a buzzer has its own small symbol. Wires are straight lines with square corners, wherever the real wires happen to run.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+电路板把同样的元件平摊开来，每一件都看得清、换得了。板的后边是一个黑色电池盒，里面装着电池。红、黑两色的导线从电池盒接到左前方的开关，再接到灯座里的灯泡 A，然后绕回来。这样连起来，就是一个<Term id="electric-circuit">电路</Term>。右上角的卡片是这个电路的<Term id="circuit-diagram">电路图</Term>：每个符号对应板上的一个元件，点一下图上的开关符号，板上真正的开关就会跟着拨动。<FlyTo preset="board-top">从正上方看电路板</FlyTo>
+
+合上开关，回路上没有任何缺口，这就是<Term id="closed-circuit">闭合电路</Term>：电流从电池的正极流出，沿导线经过灯泡，回到负极，灯泡亮了。断开开关，一段空气把回路隔断，成了<Term id="open-circuit">开路</Term>。这时整个回路都没有电流，开关前后都一样。
+
+两端都要接上。电池有正、负两个<Term id="terminal">电极</Term>；灯泡也有两个接触点：底部的尖端和侧面的金属螺口。灯泡里，一根引线从尖端通到灯丝，另一根从灯丝通到螺口。电流从一个接触点进，从另一个出，所以两个接触点都要接导线，而且这两根导线要分别回到电池的两极。<FlyTo preset="cutaways-view">看剖开的灯泡和电池</FlyTo>
+
+接在回路里的不一定是灯泡。换成小电机，风扇叶就转起来；换成蜂鸣器，它就响了。电路一样，用处不同。
+
+用「试一试」卡片先猜一猜：一只夹子从电池上松脱，灯泡会怎样，再看看电路板上的结果。
+
+<More title={{ en: "One wire is not enough", zh: "一根线不够" }}>
+
+拿到一节电池、一只灯泡和几根导线，很多人第一次会只把电池的一端接到灯泡上，以为电池会沿着导线把什么东西送过去、让灯泡用掉。一项研究调查了 <Num s="S21">237</Num> 名 <Num s="S21">10 到 12</Num> 岁的学生，每个城市都有大约一半甚至更多的学生，选了灯泡的两个接触点没有都接进回路的接法。只有电流能从一个接触点进、从另一个接触点出，再回到电池的另一极，灯泡才会亮。
+
+</More>
+
+<More title={{ en: "Where the switch goes", zh: "开关放在哪里" }}>
+
+人们常常想象电流从电池出发，一站一站地到达各个元件，于是觉得开关放在灯泡“前面”比放在“后面”更管用。研究者把这种想法叫作“顺序推理”，各个年龄的人都常有。在只有一条路径的回路里，电流是同时流动、同时停下的。在电路板上，断开电池旁边的主开关，或者断开灯泡 A 另一侧的连接开关 Z，结果完全一样：整个回路没有电流，灯不亮。
+
+</More>
+
+<More title={{ en: "Current is not used up", zh: "电流不会被用掉" }}>
+
+在这个模型里，通往灯泡 A 的导线和从灯泡 A 回来的导线，电流一样，都是 <Num s="S1">0.233 A</Num>。灯泡并没有把电流用掉，它消耗的是能量：电池里的化学物质提供能量，灯丝把它变成光和热放出去。还有一种常见的想法，以为两股电流分别从电池两极出发，在灯泡里相撞，这也不对：电流是沿着整个回路朝一个方向流的。按照约定，这个方向是从正极出发、绕回负极；而在金属导线里真正移动的带电小粒子叫电子，它们走的方向正好相反。
+
+</More>
+
+<More title={{ en: "Reading the symbols", zh: "认识电路符号" }}>
+
+电路图里，一节电池画成一长一短两条线，长的一边是正极；几节电池就是几对线排成一排。灯泡是一个圆圈里画个叉。开关是线上的一个缺口，加一条一端铰住的短线：断开时翘起，合上时搭在缺口上。电机是圆圈里写个 M，蜂鸣器有它自己的小符号。导线一律画成直线、直角拐弯，不管真导线在板上怎么绕。
+
+</More>
+
+</Lang>

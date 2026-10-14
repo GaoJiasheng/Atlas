@@ -11,6 +11,7 @@ import type { Vec3 } from '../../lib/math';
 import { eachPieces, isClosedPrimitive, partPieces } from './geometry';
 import { partPrimitives } from '../../lib/parts';
 import { restFan } from '../../lib/wing';
+import { latheProfileClosed } from '../../lib/shaped';
 import type { PartShape } from './PartNode';
 
 /** `each`: an `each` animation targets the part, so its copies are drawn instanced and move one by one. */
@@ -27,7 +28,8 @@ export function primitiveShape(part: Part, each = false): PartShape | null {
     scale: new Vector3(1, 1, 1),
     radius,
     closed: isClosedPrimitive(p),
-    twoSided: p.kind === 'plane',
+    // Planes, and open shells turned only part of the way (half a bulb's glass): their inside shows.
+    twoSided: partPrimitives(part).some((q) => q.kind === 'plane' || (q.kind === 'lathe' && q.arc !== undefined && !latheProfileClosed(q.profile))),
     restFan: partRestFan(part),
   };
 }

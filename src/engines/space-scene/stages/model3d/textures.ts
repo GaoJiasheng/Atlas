@@ -9,8 +9,9 @@
  *  - hex           domed hexagonal facets, normal map (compound eyes)
  *  - fibres        fine parallel fibres along U, normal map (muscle)
  *  - rings         sharp ridges across U, normal map (tracheal taenidia, along a sweep)
+ *  - wood          long-grain streaks along U, a grey colour map the family colour tints
  */
-import { CanvasTexture, RepeatWrapping, type Texture } from 'three';
+import { CanvasTexture, RepeatWrapping, SRGBColorSpace, type Texture } from 'three';
 import type { SurfaceFinish } from '../../lib/color';
 
 function mulberry32(seed: number): () => number {
@@ -174,11 +175,33 @@ function ringsCanvas(): HTMLCanvasElement {
   return normalCanvas(size, (x) => Math.pow(0.5 + 0.5 * Math.cos((x / size) * Math.PI * 2 * 12), 6), 3);
 }
 
+/** Long grain along U: wavy late-wood lines over a lighter ground, light to mid grey (the tint gives the colour). */
+function woodCanvas(): HTMLCanvasElement {
+  const size = 256;
+  const rand = mulberry32(41);
+  const wave = valueNoise(size, 4, rand);
+  const fleck = valueNoise(size, 32, rand);
+  const [c, g] = canvas(size);
+  const img = g.createImageData(size, size);
+  for (let y = 0; y < size; y++)
+    for (let x = 0; x < size; x++) {
+      const i = y * size + x;
+      const ring = 0.5 + 0.5 * Math.sin(((y + wave[i]! * 40) / size) * Math.PI * 2 * 18);
+      const v = 0.93 + 0.07 * (1 - Math.pow(ring, 6)) * (0.5 + fleck[i]!) - 0.03 * fleck[i]!;
+      const n = Math.round(255 * Math.min(1, v));
+      img.data.set([n, n, n, 255], i * 4);
+    }
+  g.putImageData(img, 0, 0);
+  return c;
+}
+
 export interface TextureKit {
   /** Roughness map for a finish (every finish has one: one shader program for all parts). */
   roughness(finish: SurfaceFinish): Texture;
   /** Normal map for a finish (orange peel unless it has its own; strength is set per family). */
   normal(finish?: SurfaceFinish): Texture;
+  /** Colour map for a finish that has one (wood), else null. */
+  albedo(finish: SurfaceFinish): Texture | null;
   dispose(): void;
 }
 
@@ -210,6 +233,16 @@ export function createTextureKit(): TextureKit {
     },
     normal(finish) {
       return (finish && own(finish)) || peel;
+    },
+    albedo(finish) {
+      if (finish !== 'wood') return null;
+      let t = extra.get('wood');
+      if (!t) {
+        t = wrap(woodCanvas(), 1);
+        t.colorSpace = SRGBColorSpace;
+        extra.set('wood', t);
+      }
+      return t;
     },
     dispose() {
       brushed.dispose();

@@ -5,7 +5,7 @@
  *   /en/topics/aircon/?ch=power-on&part=compressor&view=xray&run=1
  *
  * Keys: `ch`, `layers`, `cam`, `theme` (core) and `b` (beat, 1-based), `task`, `model`, `t`, `hl`, `part`, `view`,
- * `explode`, `run`, `cut`, `pose` (engine passthrough). Values equal to the current chapter's
+ * `explode`, `run`, `cut`, `pose`, `sim` (engine passthrough; `sim=cells.3~x.on`, SpaceScene's try-it values). Values equal to the current chapter's
  * target are omitted, so a plain chapter link is just `?ch=<id>`.
  * Unknown query parameters (utm_*, etc.) are preserved.
  *
@@ -16,11 +16,12 @@ import type { CameraState, SceneState, UrlEngineFields } from './types';
 import { decodeCamera, encodeCamera } from './camera';
 import { formatTimeParam, parseTimeParam, type TimePoint } from '../../lib/time';
 import { isTheme } from '../../theme/theme';
+import { decodeSimParam, encodeSimParam } from '../space-scene/lib/sim/controls';
 
 export type UrlState = Partial<SceneState & UrlEngineFields>;
 
 /** Order in which keys are written (most meaningful first). */
-export const URL_KEY_ORDER = ['ch', 'b', 'task', 'model', 't', 'hl', 'part', 'view', 'explode', 'run', 'cut', 'pose', 'layers', 'cam', 'theme'] as const;
+export const URL_KEY_ORDER = ['ch', 'b', 'task', 'model', 't', 'hl', 'part', 'view', 'explode', 'run', 'cut', 'pose', 'sim', 'layers', 'cam', 'theme'] as const;
 export type UrlKey = (typeof URL_KEY_ORDER)[number];
 
 const ID_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -64,6 +65,8 @@ function encodeField(key: UrlKey, state: UrlState): string | null {
       return state.cutaway ?? null;
     case 'pose':
       return state.pose === undefined ? null : (state.pose ?? '');
+    case 'sim':
+      return state.sim === undefined ? null : encodeSimParam(state.sim);
     case 'task':
       return state.task === undefined ? null : String(state.task);
     case 'model':
@@ -155,6 +158,9 @@ export function decodeSceneState(input: string | URLSearchParams): UrlState {
     if (pose === '') out.pose = null;
     else if (ID_RE.test(pose)) out.pose = pose;
   }
+
+  const sim = params.get('sim');
+  if (sim !== null) out.sim = decodeSimParam(sim);
 
   const task = params.get('task');
   if (task !== null && /^[1-9]\d{0,2}$/.test(task)) out.task = Number(task);

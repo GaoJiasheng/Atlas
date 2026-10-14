@@ -528,6 +528,61 @@ async function runTasks(s: Session, out: string, report: RunReport): Promise<voi
 /* Keys                                                                */
 /* ------------------------------------------------------------------ */
 
+interface SimInfo {
+  values: Record<string, unknown>;
+  try: { vary: string; also?: string[] } | null;
+}
+const simEngine = (s: Session) => ({
+  get: () => s.page.evaluate(() => (window.__atlas!.engine as unknown as { sim(): SimInfo | null }).sim()),
+  set: (v: Record<string, unknown>) => s.page.evaluate((x) => (window.__atlas!.engine as unknown as { setSim(v: Record<string, unknown>): boolean }).setSim(x), v),
+});
+
+/**
+ * A try-it key on the first chapter with a try-it card: `]` then `[` must step
+ * the varied control one value on and back (from its first value), `T` must
+ * flip the card's first switch and back, and the URL must carry `sim`.
+ */
+async function simKey(s: Session, key: string, name: string): Promise<{ ok: boolean; note: string }> {
+  const e = simEngine(s);
+  for (const c of await s.ev(() => window.__atlas!.chapters())) {
+    await s.apply({ chapter: c, wait: 400 });
+    const info = await e.get();
+    if (!info?.try) continue;
+    const press = async (k: string) => {
+      await s.page.keyboard.press(k);
+      await s.page.waitForTimeout(250);
+      return (await e.get())!.values;
+    };
+    if (name === 'sim-toggle') {
+      const id = (await s.page.evaluate(() => window.__atlas!.commands().find((x) => x.id === 'sim-toggle')?.disabled)) ? null : 'ok';
+      if (!id) continue;
+      const before = info.values;
+      const after = await press(key);
+      const changed = Object.keys(before).filter((k) => typeof before[k] === 'boolean' && before[k] !== after[k]);
+      const back = await press(key);
+      const ok = changed.length === 1 && back[changed[0]!] === before[changed[0]!];
+      return { ok, note: ok ? `${c}: ${changed[0]}` : `${c}: T changed ${JSON.stringify(changed)}` };
+    }
+    const vary = info.try.vary;
+    const first = (await s.page.evaluate((v) => {
+      const cmds = window.__atlas!.commands();
+      return cmds.some((x) => x.id === 'sim-next' && !x.disabled) ? v : null;
+    }, vary)) as string | null;
+    if (!first) continue;
+    // From the control's first value: `]` moves on, `[` comes back.
+    await press('[');
+    await press('[');
+    const v0 = (await e.get())!.values[vary];
+    const v1 = (await press(']'))[vary];
+    await s.page.waitForTimeout(400);
+    const url = await s.page.evaluate(() => location.search);
+    const v2 = (await press('['))[vary];
+    const ok = v1 !== v0 && v2 === v0 && url.includes('sim=');
+    return { ok, note: ok ? `${c}: ${vary} ${String(v0)} → ${String(v1)} → ${String(v2)}` : `${c}: ${vary} ${String(v0)} → ${String(v1)} → ${String(v2)}, url ${url}` };
+  }
+  return { ok: true, note: 'no chapter with a try-it card (skipped)' };
+}
+
 async function runKeys(s: Session, o: Options, report: RunReport): Promise<void> {
   const { page } = s;
   const keymap = await s.ev(() => window.__atlas!.keymap());
@@ -588,6 +643,11 @@ async function runKeys(s: Session, o: Options, report: RunReport): Promise<void>
         ok = false;
         note += ` not restored (${back})`;
       }
+    } else if (k.type === 'command' && k.name.startsWith('sim-')) {
+      // SpaceScene try-it keys: `[` `]` step the chapter's varied control, `T` flips its first switch; read back through the test hooks.
+      const res = await simKey(s, k.key, k.name);
+      record({ ...base, ok: res.ok, note: res.note });
+      continue;
     } else if (k.type === 'command') {
       // A fresh check task for each command (a finished one takes no hint, undo or check); the effect is read from the engine's test hooks.
       const e = engine(s);
