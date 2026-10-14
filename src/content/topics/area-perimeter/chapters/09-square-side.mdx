@@ -1,0 +1,43 @@
+---
+id: square-side
+order: 9
+title: { en: "The side of a square", zh: "求正方形的边长" }
+state:
+  summary: { en: "From the perimeter, divide by 4; from the area, find the number that times itself makes the area.", zh: "已知周长，就除以 4；已知面积，就找哪个数乘它自己得到这个面积。" }
+---
+
+<Lang en>
+
+In the last step you found a missing side of a rectangle. A <Term id="square">square</Term> is a special rectangle: its four <Term id="side">sides</Term> are all the same length. That makes its side quicker to find, from the perimeter or from the area.
+
+Start with <Beat n={1}>a square with a perimeter of 20 cm</Beat>. All four sides have question marks, but they are equal. Going round the square means going along the same length 4 times. So 4 × ? = 20.
+
+Now <Beat n={2}>walk round the four sides</Beat> one at a time. The 20 cm is shared equally among 4 sides, so each side is 20 ÷ 4 = 5 cm. Check it: 5 + 5 + 5 + 5 = 20. Halving 20 gives 10, but 10 cm is two sides, not one.
+
+Next is <Beat n={3}>a square with an area of 36 cm²</Beat>. Area is length × breadth, and in a square the length and the breadth are the same side. So you need a number that, times itself, makes 36: ? × ? = 36.
+
+To find it, <Beat n={4}>try squares that grow one at a time</Beat>. A square with sides of 4 cm covers 4 × 4 = 16 cm². With sides of 5 cm it covers 5 × 5 = 25 cm², still not enough. With sides of 6 cm it covers 6 × 6 = 36 cm². So the side is 6 cm. Knowing your times tables makes this search quick.
+
+A common mistake is to use the perimeter rule for the area: 36 ÷ 4 = 9. Dividing by 4 works for the perimeter, because a square has 4 sides to go round. It does not work for the area. A square with sides of 9 cm would cover 9 × 9 = 81 cm², far more than 36 cm².
+
+When you are ready, <Task id="square-side">try one question</Task> on finding the side of a square.
+
+</Lang>
+
+<Lang zh>
+
+上一步，你求出了长方形缺的那条边。<Term id="square">正方形</Term>是一种特别的长方形：四条<Term id="side">边</Term>一样长。所以不管已知的是周长还是面积，求它的边长都更快。
+
+先看<Beat n={1}>周长是 20 cm 的正方形</Beat>。四条边都画着问号，可它们一样长。绕正方形走一圈，就是把同样长的一条边走 4 次，所以 4 × ? = 20。只要求出一条边，四条边就都知道了。
+
+现在<Beat n={2}>沿着四条边一条一条地走</Beat>。20 cm 平均分给 4 条边，每条边是 20 ÷ 4 = 5 cm。验算：5 + 5 + 5 + 5 = 20。四条边一条一条亮起来，每一条都是 5 cm。如果把 20 除以 2，得到的 10 cm 是两条边的长，不是一条边。
+
+再看<Beat n={3}>面积是 36 cm² 的正方形</Beat>。面积 = 长 × 宽，正方形的长和宽都是同一个边长。所以要找一个数，它乘它自己得 36：? × ? = 36。这一次不能除以 4：面积数的是铺满正方形要几个 1 cm² 的小正方形，不是绕一圈有多长。
+
+怎么找呢？<Beat n={4}>让正方形一个一个地长大来试</Beat>。边长 4 cm，要铺 4 行，每行 4 个，4 × 4 = 16 cm²；边长 5 cm，要铺 5 × 5 = 25 cm²，还不够；边长 6 cm，要铺 6 × 6 = 36 cm²，正好。所以边长是 6 cm。乘法表背得熟，这样试起来就很快。
+
+常见的错误是把求周长的办法搬到面积上，算成 36 ÷ 4 = 9。除以 4，是因为绕正方形一圈要走 4 条边，这只适用于周长，不适用于面积。边长 9 cm 的正方形，要铺 9 × 9 = 81 cm²，比 36 cm² 大得多。先想清楚已知的是周长还是面积：已知周长，就除以 4；已知面积，就找乘它自己得到面积的那个数。
+
+准备好了，就<Task id="square-side">做一道小题</Task>：求出正方形的边长。
+
+</Lang>

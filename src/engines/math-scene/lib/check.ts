@@ -9,7 +9,10 @@
  */
 import type { InputSpec, MisconceptionCode, Task, TaskOf } from '../schema';
 import { compare, equal, equivalent, isSimplest, sign, toImproper, valueOnLine, type Frac } from './fraction';
-import { inputSpecOf, partsFor, phasesOf, type Phase, type Sym, type TaskState } from './state';
+import { inputSpecOf, partsFor, phasesOf, taskFigure, tileKeys, type Phase, type Sym, type TaskState } from './state';
+import { boundaryEdges, isHalfKey, parseCut, piecesAfter, rectOf } from './grid';
+import { askOf, diagnoseNumber, drawnRight, drawnShows, measured, unitShows } from './diagnose/measure';
+import { isUnit, type Unit } from './value';
 
 export interface CheckResult {
   ok: boolean;
@@ -51,10 +54,11 @@ export function inputRows(spec: InputSpec): InputRow[] {
   return answers.map((a, i) => {
     const id = (slot: Slot) => (many ? `${slot}${i}` : slot);
     const blank = spec.blanks?.[i];
-    const slots: Slot[] = spec.form === 'whole' ? ['w'] : spec.form === 'mixed' || a.w ? ['w', 'n', 'd'] : ['n', 'd'];
+    const whole = spec.form === 'whole' || spec.form === 'measure';
+    const slots: Slot[] = whole ? ['w'] : spec.form === 'mixed' || a.w ? ['w', 'n', 'd'] : ['n', 'd'];
     return {
       slots: slots.map((slot) => {
-        const value = slot === 'w' ? (spec.form === 'whole' ? a.n : (a.w ?? 0)) : a[slot];
+        const value = slot === 'w' ? (whole ? a.n : (a.w ?? 0)) : a[slot];
         const filled = blank === undefined || blank === slot;
         return { slot, field: filled ? id(slot) : null, printed: filled ? null : value };
       }),
@@ -67,8 +71,9 @@ export function inputFields(spec: InputSpec): string[] {
   return inputRows(spec).flatMap((r) => r.slots.flatMap((s) => (s.field ? [s.field] : [])));
 }
 
-/** The fractions as written (`null` while a box is empty). A whole-number answer is `{ n, d: 1 }`. Zero denominators are kept raw for the diagnosis. */
+/** The fractions as written (`null` while a box is empty, or a measure's unit is not chosen). A whole-number answer is `{ n, d: 1 }`. Zero denominators are kept raw for the diagnosis. */
 export function readInput(spec: InputSpec, input: Readonly<Record<string, string>>): Frac[] | null {
+  if (spec.form === 'measure' && !isUnit(input.u)) return null;
   const out: Frac[] = [];
   for (const row of inputRows(spec)) {
     const v: Partial<Record<Slot, number>> = {};
@@ -77,7 +82,7 @@ export function readInput(spec: InputSpec, input: Readonly<Record<string, string
       if (raw === undefined || raw === '') return null;
       v[s.slot] = Number(raw);
     }
-    if (spec.form === 'whole') out.push({ n: v.w!, d: 1 });
+    if (spec.form === 'whole' || spec.form === 'measure') out.push({ n: v.w!, d: 1 });
     else out.push(v.w ? { w: v.w, n: v.n!, d: v.d! } : { n: v.n!, d: v.d! });
   }
   return out;
@@ -91,7 +96,7 @@ export function inputValues(spec: InputSpec, values: readonly Frac[]): Record<st
     if (!v) return;
     for (const s of row.slots) {
       if (!s.field) continue;
-      out[s.field] = String(s.slot === 'w' ? (spec.form === 'whole' ? v.n : (v.w ?? 0)) : v[s.slot]);
+      out[s.field] = String(s.slot === 'w' ? (spec.form === 'whole' || spec.form === 'measure' ? v.n : (v.w ?? 0)) : v[s.slot]);
     }
   });
   return out;
@@ -181,6 +186,7 @@ export function checkInputValues(task: Task, spec: InputSpec, values: readonly F
         right = v.d > 0 && v.w !== undefined && v.n < v.d && equivalent(v, answer) && isSimplest({ n: v.n, d: v.d });
         break;
       case 'whole':
+      case 'measure':
         right = v.n === answer.n && answer.d === 1;
         break;
     }
@@ -312,14 +318,96 @@ function checkBuildSum(task: TaskOf<'build-sum'>, state: TaskState, phase: Phase
   return { ok: false, code: unconverted && declaredCodes(task).includes('not-converted') ? 'not-converted' : null };
 }
 
+/* ------------------------------------------------------------------ */
+/* Square grid (docs/21 §3.2–3.3)                                      */
+/* ------------------------------------------------------------------ */
+
+/** The two pieces of the figure a split task's cut makes, when both are rectangles (areas, in the order of the cut). */
+export function cutPieces(task: Task, cutKey: string | null): [number, number] | null {
+  const fig = taskFigure(task);
+  const cut = parseCut(cutKey);
+  if (!fig || !cut) return null;
+  const pieces = piecesAfter(fig.facts.cells, cut);
+  if (!pieces || !rectOf(pieces[0]) || !rectOf(pieces[1])) return null;
+  return [pieces[0].size, pieces[1].size];
+}
+
+/** A written grid answer: the number (and unit) against the figure; a split's sentence against the pieces of the child's cut. */
+function checkGridInput(task: Task, spec: InputSpec, values: readonly Frac[], state: TaskState): CheckResult {
+  const codes = declaredCodes(task);
+  const ctx = askOf(task, spec);
+  const numbers = values.map((v) => v.n);
+  if (task.kind === 'split-figure') {
+    const pieces = cutPieces(task, state.cut);
+    const total = numbers.at(-1)!;
+    if (pieces && numbers.length === 3 && total === pieces[0] + pieces[1]) {
+      const [p, q] = numbers;
+      if ((p === pieces[0] && q === pieces[1]) || (p === pieces[1] && q === pieces[0])) return OK;
+      return NOT_YET;
+    }
+    return { ok: false, code: ctx ? diagnoseNumber(codes, ctx, total) : null };
+  }
+  const answers = answersOf(spec).map((f) => f.n);
+  if (numbers.length > 1 || !ctx) return numbers.every((x, i) => x === answers[i]) ? OK : NOT_YET;
+  const x = numbers[0]!;
+  const unit: Unit | null = spec.form === 'measure' ? ((state.input.u as Unit) ?? null) : null;
+  if (x === answers[0] && (spec.form !== 'measure' || unit === spec.unit)) return OK;
+  if (x === answers[0]) return { ok: false, code: codes.includes('unit-not-squared') && unitShows(ctx, unit, spec.unit) ? 'unit-not-squared' : null };
+  return { ok: false, code: diagnoseNumber(codes, ctx, x) };
+}
+
+/** The model phase of a grid task: covered, traced, drawn, cut. */
+function checkGridModel(task: Task, state: TaskState): CheckResult {
+  const codes = declaredCodes(task);
+  const fig = taskFigure(task);
+  switch (task.kind) {
+    case 'count-squares': {
+      const keys = tileKeys(task);
+      if (task.cover === 'all') return keys.every((k) => state.tiles.includes(k)) ? OK : NOT_YET;
+      // A full row and a full column of the rectangle: rows × the squares in a row.
+      if (!fig) return NOT_YET;
+      const laid = new Set(state.tiles.filter((k) => !isHalfKey(k)));
+      const { x, y, w, h } = fig.facts.box;
+      const row = Array.from({ length: h }, (_, j) => y + j).some((yy) => Array.from({ length: w }, (_, i) => `${x + i},${yy}`).every((k) => laid.has(k)));
+      const col = Array.from({ length: w }, (_, i) => x + i).some((xx) => Array.from({ length: h }, (_, j) => `${xx},${y + j}`).every((k) => laid.has(k)));
+      return row && col ? OK : NOT_YET;
+    }
+    case 'trace-perimeter': {
+      if (!fig) return NOT_YET;
+      const boundary = boundaryEdges(fig.facts.cells);
+      const inner = state.edges.some((e) => !boundary.has(e));
+      if (!inner && state.edges.length === boundary.size) return OK;
+      return { ok: false, code: inner && codes.includes('area-perimeter-swap') ? 'area-perimeter-swap' : null };
+    }
+    case 'draw-rectangle': {
+      if (!state.rect) return NOT_YET;
+      const [w, h] = state.rect;
+      if (drawnRight(task, w, h)) return OK;
+      return { ok: false, code: codes.find((c) => drawnShows(c, task, w, h)) ?? null };
+    }
+    case 'split-figure':
+      return cutPieces(task, state.cut) ? OK : NOT_YET;
+    default:
+      return NOT_YET;
+  }
+}
+
+/** The number a grid task's written part should hold (from the figure), `null` when it is not measured. */
+export function gridAnswer(task: Task): number | null {
+  const ctx = askOf(task, inputSpecOf(task));
+  return ctx ? measured(ctx) : null;
+}
+
 /** Check one phase of a task. */
 export function checkPhase(task: Task, state: TaskState, phase: Phase): CheckResult {
   if (phase === 'input') {
     const spec = inputSpecOf(task);
     if (!spec) return NOT_YET;
     const values = readInput(spec, state.input);
-    return values ? checkInputValues(task, spec, values) : NOT_YET;
+    if (!values) return NOT_YET;
+    return task.model.kind === 'grid' ? checkGridInput(task, spec, values, state) : checkInputValues(task, spec, values);
   }
+  if (task.kind === 'count-squares' || task.kind === 'trace-perimeter' || task.kind === 'draw-rectangle' || task.kind === 'split-figure') return checkGridModel(task, state);
   switch (task.kind) {
     case 'shade':
       return checkShade(task, state);
@@ -384,6 +472,14 @@ export function answered(task: Task, state: TaskState): boolean {
       return state.order.length === task.items.length;
     case 'choose':
       return state.chosen.length > 0;
+    case 'count-squares':
+      return state.tiles.length > 0;
+    case 'trace-perimeter':
+      return state.edges.length > 0;
+    case 'draw-rectangle':
+      return state.rect !== null;
+    case 'split-figure':
+      return state.cut !== null;
     default:
       return false;
   }

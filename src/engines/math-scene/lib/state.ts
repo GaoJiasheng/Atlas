@@ -8,6 +8,8 @@
  */
 import type { InputSpec, Task, TaskKind } from '../schema';
 import { lcm, toImproper, type Frac } from './fraction';
+import { allSides, factsOf, figureOf, halfKey, parseCell, parseCut, readingOrder, rowCells } from './grid';
+import { isUnit } from './value';
 
 export type Sym = '<' | '=' | '>';
 export type Phase = 'model' | 'convert' | 'mark' | 'input';
@@ -29,6 +31,22 @@ export type Action =
   | { do: 'unorder'; item: number }
   | { do: 'choose'; id: string }
   | { do: 'input'; field: string; value: string }
+  /** Grid: lay or lift the unit square on a cell (`"3,2"`) or a half cell (`"3,2,ne"`). */
+  | { do: 'tile'; key: string }
+  /** Grid: lay (or lift) every square of row `y` of the figure. */
+  | { do: 'row'; y: number; on: boolean }
+  /** Grid: the figure's squares laid in its top `count` rows (the −/+ row stepper). */
+  | { do: 'rows'; count: number }
+  /** Grid: trace or untrace one unit side (`"h3,2"`, `"v3,2"`). */
+  | { do: 'edge'; key: string }
+  /** Grid: lift every square, untrace every side. */
+  | { do: 'clear' }
+  /** Grid: "Walk round": number the traced sides in walking order (or stop). */
+  | { do: 'walk' }
+  /** Grid: the rectangle drawn from the fixed bottom-left corner, `w` across and `h` up. */
+  | { do: 'rect'; w: number; h: number }
+  /** Grid: the cut along a grid line (`"x:5"`, `"y:4"`, `null` = none). */
+  | { do: 'gridcut'; cut: string | null }
   /** Check the current phase: on success a multi-part task moves to its next phase. */
   | { do: 'check' };
 
@@ -58,6 +76,16 @@ export interface TaskState {
   chosen: string[];
   /** Input boxes by field id (`n`, `d`, `w`, or `n0`, `d1` … with several fractions). */
   input: Record<string, string>;
+  /** Grid: squares laid (cell keys, half-cell keys). */
+  tiles: string[];
+  /** Grid: unit sides traced. */
+  edges: string[];
+  /** Grid: the traced sides are numbered ("Walk round"). */
+  walked: boolean;
+  /** Grid: the rectangle drawn, `[across, up]`. */
+  rect: [number, number] | null;
+  /** Grid: the cut placed (`"x:5"`). */
+  cut: string | null;
   /** Index into `phasesOf(task)`. */
   phase: number;
 }
@@ -74,6 +102,10 @@ export function phasesOf(task: Task): Phase[] {
     case 'split':
     case 'merge':
       return task.then ? ['model', 'input'] : ['model'];
+    case 'count-squares':
+    case 'trace-perimeter':
+    case 'split-figure':
+      return ['model', 'input'];
     default:
       return ['model'];
   }
@@ -117,8 +149,42 @@ export function initialState(task: Task): TaskState {
     order: [],
     chosen: [],
     input: {},
+    tiles: [],
+    edges: [],
+    walked: false,
+    rect: null,
+    cut: null,
     phase: 0,
   };
+}
+
+/** The figure a grid task works on (count, trace, cut), with its cells and halves. */
+export function taskFigure(task: Task) {
+  const m = task.model;
+  if (m.kind !== 'grid') return null;
+  const id = 'figure' in task ? task.figure : task.kind === 'input' ? task.figure : undefined;
+  const f = figureOf(m, id);
+  return f ? { figure: f, facts: factsOf(f) } : null;
+}
+
+/** Squares of a grid figure that can be laid: cells, then half cells (keys). */
+export function tileKeys(task: Task): string[] {
+  const fig = taskFigure(task);
+  if (!fig) return [];
+  return [...readingOrder(fig.facts.cells), ...fig.facts.halves.map(halfKey)];
+}
+
+/** Rows of a grid figure, top first (the y of each), and the keys laid by "row y". */
+export function figureRows(task: Task): { y: number; keys: string[] }[] {
+  const fig = taskFigure(task);
+  if (!fig) return [];
+  const ys = [...new Set([...[...fig.facts.cells].map((k) => parseCell(k)[1]), ...fig.facts.halves.map((h) => h.y)])].sort((a, b) => b - a);
+  return ys.map((y) => ({ y, keys: [...rowCells(fig.facts.cells, y), ...fig.facts.halves.filter((h) => h.y === y).map(halfKey)] }));
+}
+
+/** Digits an answer box takes: two for a fraction's numbers, five for a whole number or a measure. */
+export function boxDigits(spec: InputSpec | null): number {
+  return spec && (spec.form === 'whole' || spec.form === 'measure') ? 5 : 2;
 }
 
 const toggle = (list: readonly number[], i: number) => (list.includes(i) ? list.filter((x) => x !== i) : [...list, i].sort((a, b) => a - b));
@@ -210,8 +276,46 @@ export function reduce(task: Task, state: TaskState, action: Action): TaskState 
       return { ...state, chosen: multi ? [...state.chosen, action.id] : [action.id] };
     }
     case 'input': {
-      const value = action.value.replace(/\D/g, '').slice(0, 2);
+      if (action.field === 'u') return isUnit(action.value) || action.value === '' ? { ...state, input: { ...state.input, u: action.value } } : state;
+      const value = action.value.replace(/\D/g, '').slice(0, boxDigits(inputSpecOf(task)));
       return { ...state, input: { ...state.input, [action.field]: value } };
+    }
+    case 'tile': {
+      if (!tileKeys(task).includes(action.key)) return state;
+      return { ...state, tiles: state.tiles.includes(action.key) ? state.tiles.filter((k) => k !== action.key) : [...state.tiles, action.key] };
+    }
+    case 'row': {
+      const row = figureRows(task).find((r) => r.y === action.y);
+      if (!row) return state;
+      const rest = state.tiles.filter((k) => !row.keys.includes(k));
+      return { ...state, tiles: action.on ? [...rest, ...row.keys] : rest };
+    }
+    case 'rows': {
+      const rows = figureRows(task);
+      const n = Math.max(0, Math.min(rows.length, Math.round(action.count)));
+      return { ...state, tiles: rows.slice(0, n).flatMap((r) => r.keys) };
+    }
+    case 'edge': {
+      const fig = taskFigure(task);
+      if (!fig || !allSides(fig.facts.cells).has(action.key)) return state;
+      return { ...state, edges: state.edges.includes(action.key) ? state.edges.filter((k) => k !== action.key) : [...state.edges, action.key] };
+    }
+    case 'clear':
+      return state.tiles.length || state.edges.length ? { ...state, tiles: [], edges: [], walked: false } : state;
+    case 'walk':
+      return { ...state, walked: !state.walked };
+    case 'rect': {
+      const m = task.model;
+      if (m.kind !== 'grid') return state;
+      const cols = m.cols ?? 12;
+      const rows = m.rows ?? 10;
+      const w = Math.min(cols, Math.max(1, Math.round(action.w)));
+      const h = Math.min(rows, Math.max(1, Math.round(action.h)));
+      return state.rect && state.rect[0] === w && state.rect[1] === h ? state : { ...state, rect: [w, h] };
+    }
+    case 'gridcut': {
+      if (action.cut === null) return { ...state, cut: null };
+      return parseCut(action.cut) ? { ...state, cut: action.cut } : state;
     }
     case 'check':
       return state;

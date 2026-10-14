@@ -20,6 +20,7 @@ import { NumberLine, type LinePoint } from './NumberLine';
 import { Rows, type RowSpec } from './Rows';
 import { BarModelDiagram } from './BarModelDiagram';
 import { SvgFrac } from './svg';
+import { GridModel } from './GridModel';
 import type { DisplayModes } from './Stage';
 
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
@@ -39,6 +40,9 @@ export function beatShape(beat: Beat): string {
       return `wall|${m.rows.join(',')}`;
     case 'barmodel':
       return `barmodel|${m.bars.map((b) => b.id).join(',')}`;
+    case 'grid':
+      // Squares laid, sides walked, dimensions and highlights change in place; new figures, a cut or another scale remount.
+      return `grid|${m.unit}|${m.show}|${JSON.stringify(m.figures.map((f) => [f.rect, f.rects, f.cells, f.poly, f.halves]))}|${JSON.stringify(m.cuts ?? [])}|${m.apart ? 'apart' : ''}`;
   }
 }
 
@@ -66,6 +70,8 @@ export function BeatModel({ beat, box, defs, modes, locale }: { beat: Beat; box:
     const v = toImproper(value).n > value.d ? toMixed(value) : value;
     return <SvgFrac cx={area.x + area.w + 60} cy={y} n={v.n} d={v.d} w={v.w} size={34} className="ms-symbol" />;
   };
+
+  if (m.kind === 'grid') return <GridModel defs={defs} box={box} model={m} locale={locale} label={label} />;
 
   if (m.kind === 'wall') {
     const lit = beat.highlight ?? [];
@@ -192,6 +198,7 @@ export function beatPair(beat: Beat): { a: Frac; b: Frac; open: boolean } | null
 /** The plate's counts for a beat: parts in all, parts marked (given + shaded − crossed). */
 export function beatCounts(beat: Beat): { parts: number | null; marked: number | null } {
   const m = beat.model;
+  if (m.kind === 'grid') return { parts: null, marked: null };
   if (m.kind === 'bar' && !m.rows) {
     const parts = (m.cuts ? m.cuts.length + 1 : m.diagonal ? 2 : (m.parts ?? 1)) * (m.wholes ?? 1);
     return { parts, marked: indices(m.given).length + indices(m.shaded).length - indices(beat.crossed).length };

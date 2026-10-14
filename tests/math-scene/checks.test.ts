@@ -4,7 +4,7 @@
  * two answers that show it and one that does not.
  */
 import { describe, expect, it } from 'vitest';
-import { MISCONCEPTIONS, taskSchema, type MisconceptionCode, type Task } from '../../src/engines/math-scene/schema';
+import { FRACTION_CODES, taskSchema, type MisconceptionCode, type Task } from '../../src/engines/math-scene/schema';
 import { answered, check, diagnose, inputFields, inputRows } from '../../src/engines/math-scene/lib/check';
 import { apply, sampleState, solve } from '../../src/engines/math-scene/lib/solve';
 import { canMerge, initialState, inputSpecOf, reduce } from '../../src/engines/math-scene/lib/state';
@@ -132,8 +132,8 @@ describe('checks per kind', () => {
   });
 });
 
-/** Two answers that show the code and one that does not, per misconception. */
-const CASES: Record<MisconceptionCode, { task: () => Task; yes: string[]; no: string }> = {
+/** Two answers that show the code and one that does not, per fractions misconception (the grid's: diagnose-measure.test.ts). */
+const CASES: Record<(typeof FRACTION_CODES)[number], { task: () => Task; yes: string[]; no: string }> = {
   'unequal-parts': { task: () => task({ kind: 'cut', model: bar(null), parts: 3 }, ['unequal-parts']), yes: ['3,8', '2,10'], no: '4' },
   'equal-area-not-same-shape': {
     task: () => task({ kind: 'choose', multi: true, model: bar(null), options: [{ id: 'a', value: '1/2', correct: true }, { id: 'b', value: '2/4', correct: true, misconception: 'equal-area-not-same-shape' }, { id: 'c', value: '1/3', correct: false, misconception: 'unequal-parts' }] }),
@@ -192,7 +192,7 @@ const MORE: [MisconceptionCode, () => Task, string][] = [
 ];
 
 describe('diagnosis', () => {
-  for (const code of MISCONCEPTIONS) {
+  for (const code of FRACTION_CODES) {
     it(`${code}: two answers that show it, one that does not`, () => {
       const c = CASES[code];
       const t = c.task();

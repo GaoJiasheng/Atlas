@@ -2,7 +2,8 @@
  * The reading panel's chapter index (slot `readerEnd`, docs/08 §2 HUD 铁律 d):
  * after the chapter body, the step's key facts (2–4 one-liners from
  * `lesson.json` `keyFacts`) and its SYLLABUS LINKS — the MOE 2021 lines the
- * step teaches, with their source chip (S1) — plus a link to the check.
+ * step teaches, with their source chip (S1; no school level or reference
+ * number is shown, those stay in the data) — plus a link to the check.
  */
 import type { Locale } from '../../core/types';
 import { t, tx } from '../../../i18n';
@@ -29,7 +30,7 @@ export function ChapterIndex({ step, lesson, onCheck, locale }: { step: Step | n
         {step.bridge && <b className="atlas-chip">{t(locale, 'math.bridge')}</b>}
         {lines.map((l) => (
           <span key={l.id}>
-            <b>{t(locale, 'math.syllabus', { ref: l.ref })}</b> {tx(l.text, locale)}{' '}
+            <b>{t(locale, 'math.syllabus')}</b> {tx(l.text, locale)}{' '}
             <button type="button" className="atlas-src" data-source={l.source}>
               {l.source}
             </button>

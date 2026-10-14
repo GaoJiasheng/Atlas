@@ -1,0 +1,43 @@
+---
+id: same-area-different-perimeter
+order: 7
+title: { en: "Same area, different perimeter", zh: "面积相同，周长不同" }
+state:
+  summary: { en: "The same squares can make shapes with different perimeters, and the same perimeter can go round different areas.", zh: "同样多的正方形能拼出周长不同的图形；周长一样，面积也可以不一样。" }
+---
+
+<Lang en>
+
+You can now find the <Term id="area">area</Term> of a <Term id="rectangle">rectangle</Term> by counting rows of squares, and its <Term id="perimeter">perimeter</Term> by going round its edge. This step puts the two side by side, with the same 12 square tiles each time.
+
+Start with <Beat n={1}>12 tiles in one long row</Beat>. There are 12 tiles, so the area is 12 <Term id="square-unit">square units</Term>. Now go round the edge. Along the top there are 12 units, along the bottom another 12, and 1 unit at each end. 12 + 1 + 12 + 1 = 26, so the perimeter is 26 units.
+
+Next, <Beat n={2}>move the same tiles into 2 rows of 6</Beat>. No tile is added and none is taken away, so the area is still 12 square units. Go round again: 6 + 2 + 6 + 2 = 16 units. The squares inside did not change, but the distance round did.
+
+Now <Beat n={3}>make 3 rows of 4</Beat>. The area is still 12. The way round is 4 + 3 + 4 + 3 = 14 units. The same 12 tiles have made three different perimeters: 26, 16 and 14. The long strip has the longest way round. The rectangle with 3 rows of 4 is the closest to a <Term id="square">square</Term>, and it has the shortest way round.
+
+It <Beat n={4}>works the other way too</Beat>. Look at a 7 by 1 strip and a 4 by 4 square. Go round the strip: 7 + 1 + 7 + 1 = 16 units. Go round the square: 4 + 4 + 4 + 4 = 16 units. Both have a perimeter of 16. Now count the squares inside: the strip covers 7, and the square covers 16. The same perimeter can go round very different areas.
+
+A common mistake is to think that two shapes with the same area must have the same perimeter, or that the shape with the longer perimeter must cover more. Area counts the squares that cover a shape; perimeter is the distance round its outside. Moving the squares changes the outside edge without changing how many squares there are.
+
+When you are ready, <Task id="same-area-different-perimeter">try one question</Task> on rectangles that share an area but not a perimeter.
+
+</Lang>
+
+<Lang zh>
+
+你已经会求<Term id="rectangle">长方形</Term>的<Term id="area">面积</Term>：一行一行地数铺满它的正方形；也会求它的<Term id="perimeter">周长</Term>：沿着边绕一圈。这一步把两件事放在一起看，每次都用同样的 12 块方砖。
+
+先看<Beat n={1}>排成一长行的 12 块方砖</Beat>。数一数，一共铺了 12 块，面积是 12 <Term id="square-unit">平方单位</Term>。再沿着边走一圈：上面是 12 单位，下面也是 12 单位，左右两头各 1 单位。12 + 1 + 12 + 1 = 26，周长是 26 单位。长条又长又细，绕一圈就很长。
+
+接着，<Beat n={2}>把同样的方砖排成 2 行、每行 6 块</Beat>。一块也没加，一块也没拿走，所以面积还是 12 平方单位。再走一圈：6 + 2 + 6 + 2 = 16 单位。里面铺的方砖没有变，绕一圈的长度却变了。
+
+再<Beat n={3}>排成 3 行、每行 4 块</Beat>。面积还是 12，绕一圈是 4 + 3 + 4 + 3 = 14 单位。同样 12 块方砖，拼出了三个长方形，周长有三种：26、16 和 14。比一比它们的样子：长条最细最长，周长也最长；3 行 4 块的那个最接近<Term id="square">正方形</Term>，绕一圈最短。
+
+<Beat n={4}>反过来也一样</Beat>。看一个 7 × 1 的长条和一个 4 × 4 的正方形。绕长条走一圈：7 + 1 + 7 + 1 = 16 单位；绕正方形走一圈：4 + 4 + 4 + 4 = 16 单位。两个的周长都是 16。再数里面铺了几块：长条只铺了 7 块，正方形铺了 16 块。周长一样，面积可以差很多。
+
+常见的错误是以为面积一样，周长就一样；或者以为周长长的，面积一定大。面积数的是铺满图形要几个正方形，周长量的是绕外面一圈有多长。把方砖挪一挪，块数不变，外面那一圈却跟着变了。
+
+准备好了，就<Task id="same-area-different-perimeter">做一道小题</Task>：面积一样的长方形，周长是不是也一样？
+
+</Lang>

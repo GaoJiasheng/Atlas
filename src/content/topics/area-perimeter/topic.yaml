@@ -1,0 +1,17 @@
+# Area and perimeter (MathScene lesson). Spec: docs/21-area-perimeter-content-spec.md.
+id: area-perimeter
+title: { en: "Area and perimeter", zh: "面积与周长" }
+subtitle: { en: "Squares that cover a shape, and the distance round it", zh: "铺满图形的正方形，和绕它一圈的长度" }
+subject: math
+levels: [P3, P4]
+tags: [measurement, singapore]
+moe: ["MOE 2021 P3 Area and Volume 1 (Area and Perimeter)", "MOE 2021 P4 Area and Volume 1 (Area and Perimeter, going further)"]
+mode: lesson
+engine: math-scene
+stage: svg
+theme: paper
+sensitivity: open
+note: { en: "Interactive lesson · aligned to the MOE 2021 syllabus", zh: "交互课 · 对照 MOE 2021 课纲" }
+status: draft
+illustration: area-perimeter
+shortTitle: { en: "Area & perimeter", zh: "面积与周长" }

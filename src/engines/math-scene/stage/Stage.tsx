@@ -28,6 +28,9 @@ import { CutBar } from './CutBar';
 import { OptionGrid, type OptionCell } from './OptionGrid';
 import { SvgFrac, type BarObject } from './svg';
 import { BeatModel } from './BeatModel';
+import { GridModel, describeFigure } from './GridModel';
+import type { GridModelSpec } from '../schema';
+import { figureOf } from '../lib/grid';
 
 export interface DisplayModes {
   symbol: boolean;
@@ -88,8 +91,23 @@ export function StageContent(p: StageContentProps) {
 /* Background chapter: one fraction, four ways                          */
 /* ------------------------------------------------------------------ */
 
+/** The background chapter of a grid lesson: one rectangle, covered and walked round. */
+export const SPECIMEN_GRID: GridModelSpec = {
+  kind: 'grid',
+  unit: 'cm',
+  show: 'cells',
+  figures: [{ id: 'a', rect: [0, 0, 4, 3], tone: 'cold' }],
+  tiles: { a: 'all' },
+  walk: { a: 'all' },
+  dims: [
+    { side: 'top', figure: 'a' },
+    { side: 'left', figure: 'a' },
+  ],
+};
+
 function Specimen(p: StageContentProps & { view: ModelView }) {
   const { box, locale, defs } = p;
+  if (p.view === 'grid') return <GridModel defs={defs} box={box} model={SPECIMEN_GRID} locale={locale} label={t(locale, 'math.specimen.grid')} />;
   const label = t(locale, 'math.specimen', { name: fractionWords({ n: 3, d: 4 }, locale) });
   const cx = box.x + box.w / 2;
   const cy = box.y + box.h / 2;
@@ -132,6 +150,24 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
   const symbolAt = (x: number, y: number, f: Frac | null): ReactNode => (withSymbol ? <Symbol x={x} y={y} f={f} /> : null);
   const out: ReactNode[] = [];
 
+  /* the square grid: count, trace, draw, cut, or a figure to read (input, a choice in words) */
+  if (m.kind === 'grid' && !(task.kind === 'choose' && task.options.some((o) => o.model || o.value))) {
+    return (
+      <GridModel
+        defs={defs}
+        box={area}
+        model={m}
+        locale={locale}
+        label={label}
+        task={task.kind === 'choose' ? null : task}
+        state={task.kind === 'choose' ? null : state}
+        editable={editable}
+        act={act}
+        ghost={ghost && task.kind !== 'choose' && task.kind !== 'input' ? solvedState(task) : null}
+      />
+    );
+  }
+
   /* choose: picture or number cards on the stage, sentences in the tray */
   if (task.kind === 'choose') {
     const letters = 'ABCDEFG';
@@ -141,7 +177,13 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
       .map(({ o, letter }) => ({
         id: o.id,
         letter,
-        alt: o.value ? fractionWords(o.value, locale) : o.model?.kind === 'bar' ? describePicture(o.model.rows ?? [o.model], locale) : '',
+        alt: o.value
+          ? fractionWords(o.value, locale)
+          : o.model?.kind === 'bar'
+            ? describePicture(o.model.rows ?? [o.model], locale)
+            : o.model?.kind === 'grid'
+              ? (o.text ? tx(o.text, locale) : (figureOf(o.model) ? describeFigure(o.model, figureOf(o.model)!, locale) : ''))
+              : '',
         draw: (b) => (o.model ? <MiniModel defs={defs} model={o.model} box={b} locale={locale} /> : <SvgFrac cx={b.x + b.w / 2} cy={b.y + b.h / 2 - 8} n={o.value!.n} d={o.value!.d} w={o.value!.w} size={clamp(b.h / 4, 18, 40)} className="ms-option__frac" />),
       }));
     if (cells.length === 0) return null;
@@ -414,6 +456,7 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
 
 export function MiniModel({ defs, model, box, locale }: { defs: string; model: Task['model']; box: Rect; locale: Locale }) {
   const label = '';
+  if (model.kind === 'grid') return <GridModel defs={defs} box={box} model={model} locale={locale} label={label} mini />;
   if (model.kind === 'circle') {
     const r = Math.max(10, Math.min(box.w, box.h) / 2 - 4);
     const idx = (s: number | number[] | undefined) => (s === undefined ? [] : Array.isArray(s) ? s : Array.from({ length: s }, (_, i) => i));

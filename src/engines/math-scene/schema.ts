@@ -13,13 +13,14 @@ import { bilingual, kebabId, theme } from '../../content/schema/common';
 import { sourcesFile } from '../../content/schema/sources';
 import { glossaryFile } from '../../content/schema/glossary';
 import { parseFrac, type Frac } from './lib/fraction';
+import { UNITS } from './lib/value';
 
 /* ------------------------------------------------------------------ */
 /* Vocabulary                                                          */
 /* ------------------------------------------------------------------ */
 
-/** Misconceptions the feedback is designed around (docs/15 §2.2). `not-simplest` is the "one step short" case, not an error. */
-export const MISCONCEPTIONS = [
+/** Fractions (docs/15 §2.2). `not-simplest` is the "one step short" case, not an error. */
+export const FRACTION_CODES = [
   'unequal-parts',
   'equal-area-not-same-shape',
   'part-part',
@@ -36,14 +37,34 @@ export const MISCONCEPTIONS = [
   'tick-counting',
   'whole-changed',
 ] as const;
+/** Area and perimeter on the square grid (docs/21 §2.1; rules in lib/diagnose/measure.ts). */
+export const MEASURE_CODES = [
+  'unequal-units',
+  'half-squares',
+  'unit-not-squared',
+  'area-perimeter-swap',
+  'border-squares',
+  'two-sides-only',
+  'sides-added-for-area',
+  'missing-side',
+  'same-area-same-perimeter',
+  'perimeter-not-halved',
+  'side-from-total',
+  'overlap-counted',
+  'inner-edge-counted',
+] as const;
+/** Misconceptions the feedback is designed around, registered by domain (docs/19 §3.0 G5); one flat list, every code unique. */
+export const MISCONCEPTIONS = [...FRACTION_CODES, ...MEASURE_CODES] as const;
 export const misconception = z.enum(MISCONCEPTIONS);
 export type MisconceptionCode = (typeof MISCONCEPTIONS)[number];
 
-export const TASK_KINDS = ['shade', 'cut', 'fold', 'split', 'merge', 'place', 'compare', 'order', 'choose', 'input', 'build-sum'] as const;
+export const TASK_KINDS = ['shade', 'cut', 'fold', 'split', 'merge', 'place', 'compare', 'order', 'choose', 'input', 'build-sum', 'count-squares', 'trace-perimeter', 'draw-rectangle', 'split-figure'] as const;
+/** Task kinds on the square grid (docs/21 §3.2). */
+export const GRID_KINDS = ['count-squares', 'trace-perimeter', 'draw-rectangle', 'split-figure'] as const;
 export type TaskKind = (typeof TASK_KINDS)[number];
 
 /** Model views a step may switch between (the VIEW group). */
-export const MODEL_VIEWS = ['bar', 'circle', 'numberline', 'wall', 'barmodel'] as const;
+export const MODEL_VIEWS = ['bar', 'circle', 'numberline', 'wall', 'barmodel', 'grid'] as const;
 export const modelView = z.enum(MODEL_VIEWS);
 export type ModelView = (typeof MODEL_VIEWS)[number];
 
@@ -142,9 +163,88 @@ const barModelDiagram = z
   })
   .strict();
 
-export const model = z.discriminatedUnion('kind', [barModel, circleModel, numberLineModel, wallModel, barModelDiagram]);
+/* The square grid (docs/21 §3.1, model A4): grid points with y up, cell (x, y) = [x, x+1] × [y, y+1]. */
+const coord = z.number().int().min(0).max(99);
+const point = z.tuple([coord, coord]);
+const rect4 = z.tuple([coord, coord, z.number().int().min(1).max(99), z.number().int().min(1).max(99)]);
+const gridFigure = z
+  .object({
+    id: kebabId,
+    /** `[x, y, w, h]`: a rectangle of w × h cells with its bottom-left corner at (x, y). */
+    rect: rect4.optional(),
+    /** Rectangles put together (a composite figure; the joins are drawn as dashed seams). */
+    rects: z.array(rect4).min(2).max(4).optional(),
+    cells: z.array(point).min(1).optional(),
+    /** Corners of a rectilinear figure, in order (sides across or up only). */
+    poly: z.array(point).min(4).max(16).optional(),
+    /** Half cells: `[x, y, corner]`, the triangle with its square corner at that corner of cell (x, y). */
+    halves: z.array(z.tuple([coord, coord, z.enum(['ne', 'nw', 'se', 'sw'])])).optional(),
+    /** `cold` = given (default), `hot` = a second figure to compare, `ghost` = a dashed outline (the box round it, a size tried). */
+    tone: z.enum(['cold', 'hot', 'ghost']).default('cold'),
+  })
+  .strict()
+  .refine((f) => [f.rect, f.rects, f.cells, f.poly].filter(Boolean).length === 1, { message: 'a figure needs exactly one of rect, rects, cells or poly' });
+const gridDim = z
+  .object({
+    /** A whole side of a figure's box … */
+    side: z.enum(['top', 'bottom', 'left', 'right']).optional(),
+    figure: kebabId.optional(),
+    /** … or any straight side, by its ends. */
+    from: point.optional(),
+    to: point.optional(),
+    /** Labelled "?" (the length is the question). */
+    unknown: z.boolean().optional(),
+    /** Light the side and its dimension line (a pair of opposite sides, the side just found). */
+    tone: z.enum(['cold', 'hot', 'signal']).optional(),
+  })
+  .strict()
+  .refine((d) => !!d.side !== !!(d.from && d.to), { message: 'a dimension needs a side, or from and to' });
+const tileSpec = z.union([
+  z.number().int().min(0),
+  z.literal('all'),
+  z.object({ rows: z.number().int().min(1).optional(), count: z.number().int().min(1).optional(), size: z.number().int().min(2).max(4).optional() }).strict(),
+]);
+const gridModel = z
+  .object({
+    kind: z.literal('grid'),
+    /** At least this many cells across and up (default: what the figures cover). */
+    cols: z.number().int().min(1).max(60).optional(),
+    rows: z.number().int().min(1).max(40).optional(),
+    /** One cell is 1 unit, 1 cm or 1 m. */
+    unit: z.enum(['unit', 'cm', 'm']).default('unit'),
+    /** `cells`: grid lines · `dots`: grid points · `none`: no grid (only the lengths given; not drawn to scale). */
+    show: z.enum(['cells', 'dots', 'none']).default('cells'),
+    figures: z.array(gridFigure).max(4).default([]),
+    /** Unit squares laid on a figure: a count (reading order), `all`, the top rows, or `count` big squares of `size`. */
+    tiles: z.record(kebabId, tileSpec).optional(),
+    /** Sides walked round a figure from its top-left corner (a count or `all`), with the running count. */
+    walk: z.record(kebabId, z.union([z.number().int().min(0), z.literal('all')])).optional(),
+    /** The squares along a figure's edge drawn dashed, each corner square's two outside sides marked. */
+    border: kebabId.optional(),
+    /** Opposite sides lit in pairs: the two lengths cold, the two breadths hot. */
+    sides: z.literal('pairs').optional(),
+    dims: z.array(gridDim).optional(),
+    /** Cuts along grid lines: `{ "x": 5 }` (up and down) or `{ "y": 4 }` (across). */
+    cuts: z.array(z.object({ x: coord.optional(), y: coord.optional() }).strict().refine((c) => (c.x === undefined) !== (c.y === undefined), { message: 'a cut is x or y' })).max(2).optional(),
+    /** The pieces of a cut drawn a little apart. */
+    apart: z.boolean().optional(),
+    /** Parts taken away (ink hatch): the missing corner of a box. */
+    crossed: z.array(rect4).optional(),
+    /** One line under the drawing: what is known. */
+    note: bilingual.optional(),
+    /** A unit square with its name in the corner (1 cm², 1 m²). */
+    legend: z.boolean().optional(),
+    /** "Not drawn to scale" in the corner (required with `show: none`). */
+    notToScale: z.boolean().optional(),
+  })
+  .strict();
+
+export const model = z.discriminatedUnion('kind', [barModel, circleModel, numberLineModel, wallModel, barModelDiagram, gridModel]);
 export type Model = z.output<typeof model>;
 export type BarModelDiagramSpec = z.output<typeof barModelDiagram>;
+export type GridModelSpec = z.output<typeof gridModel>;
+export type GridFigure = z.output<typeof gridFigure>;
+export type GridDim = z.output<typeof gridDim>;
 
 /* ------------------------------------------------------------------ */
 /* Tasks                                                               */
@@ -154,8 +254,18 @@ export const inputSpec = z
   .object({
     /** One answer, or one per written fraction (`blanks`). */
     answer: z.union([frac, z.array(frac).min(1).max(3)]),
-    /** `equal`: these exact numbers · `equivalent`: any equal value · `simplest`: lowest terms · `mixed`: a mixed number · `whole`: a whole number. */
-    form: z.enum(['equal', 'equivalent', 'simplest', 'mixed', 'whole']),
+    /** `equal`: these exact numbers · `equivalent`: any equal value · `simplest`: lowest terms · `mixed`: a mixed number · `whole`: a whole number (1–5 digits) · `measure`: a whole number and a unit chip. */
+    form: z.enum(['equal', 'equivalent', 'simplest', 'mixed', 'whole', 'measure']),
+    /** `measure`: the answer's unit (`cm2`, `m`, `unit2` …); `whole` on a grid: the unit printed after the box. */
+    unit: z.enum(UNITS).optional(),
+    /** Grid: what the number is, measured on the figure (checked against its geometry; tells the diagnosis what to look for). */
+    ask: z.enum(['area', 'perimeter', 'length', 'breadth', 'side']).optional(),
+    /** Grid: the figure asked about (default: the first that is not a ghost). */
+    figure: kebabId.optional(),
+    /** Grid, a missing side: what the length is found from. */
+    given: z.enum(['area', 'perimeter']).optional(),
+    /** A printed number sentence with a box for each `?`, in order: `"? + ? = ?"`. */
+    sentence: z.string().min(1).optional(),
     /** Per written fraction, the box the child fills (the rest is printed): `2/3 = ?/12 = 8/?` → `["n", "d"]`. */
     blanks: z.array(z.enum(['n', 'd', 'w'])).optional(),
     /** The fraction the answer is renamed from (diagnoses additive / one-sided renaming). */
@@ -238,6 +348,25 @@ const buildSumFields = z.object({
   answer: inputSpec,
 });
 
+/* Square-grid tasks (docs/21 §3.2) */
+const countSquaresFields = z.object({
+  figure: kebabId.optional(),
+  /** `all`: lay a square on every cell · `row-col`: one full row and one full column are enough (then multiply). */
+  cover: z.enum(['all', 'row-col']).default('all'),
+  then: inputSpec,
+});
+const traceFields = z.object({ figure: kebabId.optional(), then: inputSpec });
+const drawRectFields = z.object({
+  area: z.number().int().min(1).max(144).optional(),
+  perimeter: z.number().int().min(4).max(60).optional(),
+  length: z.number().int().min(1).max(12).optional(),
+  breadth: z.number().int().min(1).max(12).optional(),
+  square: z.boolean().optional(),
+  /** `any`: either way round · `exact`: length across, breadth up. */
+  accept: z.enum(['any', 'exact']).default('any'),
+});
+const splitFigureFields = z.object({ figure: kebabId.optional(), then: inputSpec });
+
 export const taskSchema = z.discriminatedUnion('kind', [
   base.extend({ kind: z.literal('shade') }).merge(shadeFields).strict(),
   base.extend({ kind: z.literal('cut') }).merge(cutFields).strict(),
@@ -250,6 +379,10 @@ export const taskSchema = z.discriminatedUnion('kind', [
   base.extend({ kind: z.literal('choose') }).merge(chooseFields).strict(),
   base.extend({ kind: z.literal('input') }).merge(inputSpec).strict(),
   base.extend({ kind: z.literal('build-sum') }).merge(buildSumFields).strict(),
+  base.extend({ kind: z.literal('count-squares') }).merge(countSquaresFields).strict(),
+  base.extend({ kind: z.literal('trace-perimeter') }).merge(traceFields).strict(),
+  base.extend({ kind: z.literal('draw-rectangle') }).merge(drawRectFields).strict(),
+  base.extend({ kind: z.literal('split-figure') }).merge(splitFigureFields).strict(),
 ]);
 export type Task = z.output<typeof taskSchema>;
 export type TaskOf<K extends TaskKind> = Extract<Task, { kind: K }>;
@@ -258,7 +391,7 @@ export type TaskOf<K extends TaskKind> = Extract<Task, { kind: K }>;
 /* Lesson                                                              */
 /* ------------------------------------------------------------------ */
 
-export const LESSON_LEVELS = ['P2', 'P3', 'P4', 'P5'] as const;
+export const LESSON_LEVELS = ['P1', 'P2', 'P3', 'P4', 'P5'] as const;
 
 const syllabusLine = z
   .object({
@@ -279,7 +412,7 @@ const syllabusLine = z
 /* ------------------------------------------------------------------ */
 
 /** How the stage gets from the previous beat to this one (a short eased transition; `morph` = another model kind). */
-export const BEAT_MOVES = ['cut', 'shade', 'fold', 'split', 'merge', 'convert', 'place', 'cross', 'morph'] as const;
+export const BEAT_MOVES = ['cut', 'shade', 'fold', 'split', 'merge', 'convert', 'place', 'cross', 'morph', 'tile', 'walk', 'arrange'] as const;
 export type BeatMove = (typeof BEAT_MOVES)[number];
 
 const beatOverlay = z
@@ -306,6 +439,8 @@ export const beatSchema = z
     overlay: beatOverlay.optional(),
     /** The number sentence under the model, `{a/b}` tokens: `{3/4} = {6/8}`. */
     equation: z.string().min(1).optional(),
+    /** A number sentence with words in it (`area = length × breadth`), one per language; instead of `equation`. */
+    words: bilingual.optional(),
     /** The transition from the previous beat. */
     move: z.enum(BEAT_MOVES).optional(),
     /** One or two sentences (also the voice text): what to see on the model now. */
@@ -314,14 +449,32 @@ export const beatSchema = z
   .strict();
 export type Beat = z.output<typeof beatSchema>;
 
+const stepLimits = z
+  .object({
+    /** Longest side of any figure (in the model's unit). */
+    maxSide: z.number().int().min(1).optional(),
+    maxArea: z.number().int().min(1).optional(),
+    maxPerimeter: z.number().int().min(1).optional(),
+    /** Squares to lay (whole + half cells). */
+    maxCells: z.number().int().min(1).optional(),
+    /** A grid the child works on: at most this many cells across and up. */
+    gridMax: z.tuple([z.number().int().min(1), z.number().int().min(1)]).optional(),
+    /** Sides of a rectilinear figure. */
+    sides: z.tuple([z.number().int().min(4), z.number().int().min(4)]).optional(),
+  })
+  .strict();
+export type StepLimits = z.output<typeof stepLimits>;
+
 const step = z
   .object({
     /** = the chapter id (one chapter per step). */
     id: kebabId,
     /** Syllabus line ids. */
     lo: z.array(kebabId).min(1),
-    /** P4 bridge step (the reader's eyebrow says BRIDGE · P4). */
+    /** A step past the main lesson (the reader says "Going further"; no school level is shown anywhere). */
     bridge: z.boolean().optional(),
+    /** Number limits for every task and beat of the step (docs/19 §3.0 G11), checked by validate and check-pool. */
+    limits: stepLimits.optional(),
     /** Model views the VIEW group offers on the check (default: the drawn task's model). */
     views: z.array(modelView).min(1).optional(),
     /** The explanation, 3–5 beats (validate). */

@@ -25,6 +25,9 @@ import { answered, answersOf, inputRows, segments } from '../lib/check';
 import { solvedState } from '../lib/solve';
 import { denominatorEn, numberZh } from '../lib/words';
 import { formatFrac } from '../lib/fraction';
+import { GridModelControls, WholeInput } from './GridControls';
+import { askOf } from '../lib/diagnose/measure';
+import { squared, unitText } from '../lib/value';
 
 export interface TrayProps {
   ctl: Controller;
@@ -85,7 +88,7 @@ export function Tray(p: TrayProps) {
           </>
         )}
       </p>
-      {run.revealed && spec && <span className="ms-tray__answer">{T('math.tray.answer')} {renderRich(answersOf(spec).map((f) => `{${f.w ? `${f.w} ` : ''}${f.n}/${f.d}}`).join(' = '), locale)}</span>}
+      {run.revealed && spec && <span className="ms-tray__answer">{T('math.tray.answer')} {task.model.kind === 'grid' ? gridAnswerText(task, locale) : renderRich(answersOf(spec).map((f) => `{${f.w ? `${f.w} ` : ''}${f.n}/${f.d}}`).join(' = '), locale)}</span>}
       {run.revealed && !p.practice && run.feedback?.tone !== 'reveal' && <p className="ms-tray__why">{renderRich(tx(task.feedback.reveal, locale), locale)}</p>}
       {run.attempts.length > 0 && (
         <p className="ms-attempts">
@@ -149,7 +152,11 @@ function Controls(p: TrayProps & { phase: string; locked: boolean }) {
   const parts: ReactNode[] = [];
   const unitName = (d: number) => (locale === 'zh' ? `${numberZh(d)}分之几` : denominatorEn(d, true));
 
-  if (phase === 'input') {
+  if (phase === 'input' && task.model.kind === 'grid') {
+    parts.push(<WholeInput key="input" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);
+  } else if (phase === 'model' && task.model.kind === 'grid' && task.kind !== 'choose') {
+    parts.push(<GridModelControls key="grid" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);
+  } else if (phase === 'input') {
     parts.push(<FractionInput key="input" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);
     if (task.model.kind === 'barmodel' && task.model.units) {
       parts.push(
@@ -258,6 +265,18 @@ function Controls(p: TrayProps & { phase: string; locked: boolean }) {
   }
   if (parts.length === 0) return null;
   return <div className="ms-tray__controls">{parts}</div>;
+}
+
+/** A grid task's answer as written: `28 cm²`, `30 + 12 = 42 m²`. */
+function gridAnswerText(task: Task, locale: Locale): string {
+  const spec = inputSpecOf(task);
+  const m = task.model;
+  if (!spec || m.kind !== 'grid') return '';
+  const ask = askOf(task, spec)?.ask;
+  const unit = spec.unit ?? (ask === 'area' || task.kind === 'split-figure' ? squared(m.unit) : m.unit);
+  const nums = answersOf(spec).map((f) => f.n);
+  if (nums.length === 3) return `${nums[0]} + ${nums[1]} = ${nums[2]} ${unitText(unit, locale, nums[2])}`;
+  return `${nums.join(', ')} ${unitText(unit, locale, nums[0])}`;
 }
 
 /** Where "Add a cut" cuts: the middle of the longest piece (on the grid). */

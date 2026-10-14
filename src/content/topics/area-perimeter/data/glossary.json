@@ -1,0 +1,200 @@
+{
+  "terms": [
+    {
+      "id": "area",
+      "term": {
+        "en": "area",
+        "zh": "面积"
+      },
+      "definition": {
+        "en": "How much surface a shape covers, counted in unit squares of one size.",
+        "zh": "一个图形盖住的面有多大，用一样大的单位正方形去数。"
+      },
+      "see": [
+        "square-unit",
+        "perimeter"
+      ]
+    },
+    {
+      "id": "perimeter",
+      "term": {
+        "en": "perimeter",
+        "zh": "周长"
+      },
+      "definition": {
+        "en": "The distance all the way round the edge of a shape.",
+        "zh": "沿图形的边走一圈的长度。"
+      },
+      "see": [
+        "area"
+      ]
+    },
+    {
+      "id": "square-unit",
+      "term": {
+        "en": "square unit",
+        "zh": "平方单位"
+      },
+      "definition": {
+        "en": "The area of one unit square: the unit for counting area on a grid.",
+        "zh": "一个单位正方形的面积；在方格上数面积用的单位。"
+      },
+      "see": [
+        "unit-square"
+      ]
+    },
+    {
+      "id": "square-centimetre",
+      "term": {
+        "en": "square centimetre (cm²)",
+        "zh": "平方厘米（cm²）"
+      },
+      "definition": {
+        "en": "The area of a square with sides of 1 cm.",
+        "zh": "边长 1 cm 的正方形的面积。"
+      },
+      "see": [
+        "square-metre"
+      ]
+    },
+    {
+      "id": "square-metre",
+      "term": {
+        "en": "square metre (m²)",
+        "zh": "平方米（m²）"
+      },
+      "definition": {
+        "en": "The area of a square with sides of 1 m: for floors and walls.",
+        "zh": "边长 1 m 的正方形的面积；用来量地面、墙面。"
+      },
+      "see": [
+        "square-centimetre"
+      ]
+    },
+    {
+      "id": "unit-square",
+      "term": {
+        "en": "unit square",
+        "zh": "单位正方形"
+      },
+      "definition": {
+        "en": "A square whose sides are 1 unit long.",
+        "zh": "边长是 1 个单位的正方形。"
+      },
+      "see": [
+        "square-unit"
+      ]
+    },
+    {
+      "id": "length-breadth",
+      "term": {
+        "en": "length, breadth",
+        "zh": "长、宽"
+      },
+      "definition": {
+        "en": "The longer side of a rectangle is its length, the shorter side its breadth. Area = length × breadth.",
+        "zh": "长方形较长的边叫长，较短的边叫宽。面积 = 长 × 宽。"
+      },
+      "see": [
+        "rectangle"
+      ]
+    },
+    {
+      "id": "side",
+      "term": {
+        "en": "side",
+        "zh": "边、边长"
+      },
+      "definition": {
+        "en": "One straight edge of a figure. A square's four sides are equal; its side is the length of one of them.",
+        "zh": "图形的一条直边。正方形四条边一样长，一条边的长度叫边长。"
+      },
+      "see": [
+        "square"
+      ]
+    },
+    {
+      "id": "rectangle",
+      "term": {
+        "en": "rectangle",
+        "zh": "长方形"
+      },
+      "definition": {
+        "en": "A four-sided figure with four square corners and opposite sides equal.",
+        "zh": "四个角都是直角、对边一样长的四边形。"
+      },
+      "see": [
+        "square",
+        "length-breadth"
+      ]
+    },
+    {
+      "id": "square",
+      "term": {
+        "en": "square",
+        "zh": "正方形"
+      },
+      "definition": {
+        "en": "A four-sided figure with four equal sides and four square corners.",
+        "zh": "四条边一样长、四个角都是直角的四边形。"
+      },
+      "see": [
+        "rectangle",
+        "side"
+      ]
+    },
+    {
+      "id": "rectilinear-figure",
+      "term": {
+        "en": "rectilinear figure",
+        "zh": "直线图形"
+      },
+      "definition": {
+        "en": "A figure whose sides are all straight and meet at square corners, like an L shape.",
+        "zh": "边都是直线、角都是直角的图形，比如 L 形。"
+      },
+      "see": [
+        "composite-figure"
+      ]
+    },
+    {
+      "id": "composite-figure",
+      "term": {
+        "en": "composite figure",
+        "zh": "组合图形"
+      },
+      "definition": {
+        "en": "A figure made of rectangles and squares put together.",
+        "zh": "由几个长方形、正方形拼成的图形。"
+      },
+      "see": [
+        "rectilinear-figure"
+      ]
+    },
+    {
+      "id": "not-to-scale",
+      "term": {
+        "en": "not drawn to scale",
+        "zh": "未按比例画"
+      },
+      "definition": {
+        "en": "The lengths in the picture only show the idea; work with the numbers marked.",
+        "zh": "图上的长短只是示意，要用标出的数来算。"
+      }
+    },
+    {
+      "id": "grid",
+      "term": {
+        "en": "square grid",
+        "zh": "方格"
+      },
+      "definition": {
+        "en": "Paper or a picture covered with equal squares, used to count area and perimeter.",
+        "zh": "画满一样大正方形的纸或图，用来数面积和周长。"
+      },
+      "see": [
+        "unit-square"
+      ]
+    }
+  ]
+}

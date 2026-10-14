@@ -1059,19 +1059,19 @@ core 演示系统（字幕卡、两级进度条、自动播放、语音、拍键
 
 ```
 index.ts            descriptor：扩展字段 beat（0 起；URL b，1 起）、model（小测时 VIEW 组的模型，null = 题目自己的）；每章从第一拍开始；fromUrl 收 b / model，从不收作答和抽到的题
-schema.ts           lesson.json 的 zod（构建期）：分数字符串；模型；讲解节拍（beatSchema）；11 种任务；步（beats、pool、keyFacts）；练习题；课纲条目；章节 state
+schema.ts           lesson.json 的 zod（构建期）：分数字符串；模型（含方格 grid）；讲解节拍（beatSchema）；15 种任务；步（beats、pool、keyFacts、limits）；练习题；课纲条目；章节 state；误解按域登记
 validate.ts         docs/15 §4.10 / §10 的主题级规则：章 ↔ 步、3–5 拍且模型画得出、题库 8–10 道、每道题的规则（taskIssues，与 check-pool 共用）
 View.tsx            HUD 注册、舞台（节拍 / 小测）、算式行、章节轴、阅读面板（节拍行、小测托盘、本章索引）、右上卡、PLATE 块、控制面板、演示适配器
 controller.ts       换拍、抽题（visit / another / skip / force）、孩子的动作、检查、提示、看答案、撤销、练习流程；也是 __atlas.engine 的实现
 ui.ts               引擎自己的内存 store：每道题的作答（模型状态、尝试、提示级、反馈、看答案、完成、"你的尝试"）、每步抽到的题、练习结果、模式
-lib/                纯函数（有单测）：fraction、state、check（检查 + 误解诊断）、solve（正确解法、错例 sample → 状态）、proof（任务自证）、
+lib/                纯函数（有单测）：fraction、value（带单位的量）、grid（方格几何）、diagnose/measure（量度域诊断）、state、check（检查 + 误解诊断）、solve（正确解法、错例 sample → 状态）、proof（任务自证）、
                     pool（按页面种子抽题，避开上一道）、beats（演示拍）、lesson（定位、拍的槽位、VIEW 可切换的模型）、working（算式）、words（读法）
-stage/              SVG：Stage（小测的模型）、BeatModel（讲解节拍：五种模型 + 叠加 + 过渡）、BarModel、CircleModel、NumberLine、Rows、BarModelDiagram、CutBar、OptionGrid、svg、layout
-tray/Tray.tsx       小测托盘（分数框 + 数字键、< = >、选项、排序、×k / ÷k、对折、−/+；你的尝试；提示 / 检查 / 看答案 / 再来一道 / 跳过 / 下一章）
-hud/                Panels（右上卡 FRACTION）、BeatLine（节拍行）、ChapterIndex（要点 + 课纲对照）、PlateBlock（左列 PLATE 块）、Overlay（控制面板）
+stage/              SVG：Stage（小测的模型）、BeatModel（讲解节拍：六种模型 + 叠加 + 过渡）、BarModel、CircleModel、NumberLine、Rows、BarModelDiagram、GridModel（方格）、CutBar、OptionGrid、svg、layout
+tray/Tray.tsx       小测托盘（分数框 + 数字键、< = >、选项、排序、×k / ÷k、对折、−/+；你的尝试；提示 / 检查 / 看答案 / 再来一道 / 跳过 / 下一章）；tray/GridControls（方格：按行铺、走一圈、长宽步进、切线移动；整数框 / 量 + 单位芯片 / 算式框）
+hud/                Panels（右上卡 FRACTION）、AreaCard（方格课的右上卡 AREA）、BeatLine（节拍行）、ChapterIndex（要点 + 课纲对照）、PlateBlock（左列 PLATE 块）、Overlay（控制面板）
 practice/Summary    练习总结
 math-scene.css      全部样式（token、× --u、触控 ≥ 44 px；节拍过渡；1024 px 以下停在舞台上的托盘）
-scripts/math/check-pool.ts   题库草稿自证：pnpm tsx scripts/math/check-pool.ts <draft.json> [--bridge]
+scripts/math/check-pool.ts   题库草稿自证：pnpm tsx scripts/math/check-pool.ts <draft.json> [--bridge] [--topic <slug> --step <id>] [--limits <json>]
 ```
 
 ### 数据（`data/lesson.json`）
@@ -1100,6 +1100,15 @@ scripts/math/check-pool.ts   题库草稿自证：pnpm tsx scripts/math/check-po
 - 任务：`shade`、`cut`、`fold`、`split` / `merge`、`place`、`compare`、`order`、`choose`、`input`、`build-sum`（字段同前：`target`、`accept`、`then`、`parts`、`snap`、`factors`、`ask`、`align`、`items`、`direction`、`line`、`options`、`answer`、`form`、`blanks`、`from`、`sum`、`op`、`a`、`b`、`convert`）。**`feedback.wrong[].sample`** 是这个误解的一个错答（写法同前：input `"5/14"`，shade `"3"`，place `"5"`，compare `"<"` / `"a"`，order `"1/2,3/4,3/8"`，cut `"4,9"`，choose 选项 id，split / merge `"x2"`，多段任务以 `=` 开头）。`lib/proof.ts proveTask` 证明每道题：解法通过、起点不通过、每个 sample 与错选项诊断成声明的误解；`tests/math-scene/lesson.test.ts` 对全部题库题与练习题跑一遍。
 - 正文组件：`<Beat n={2}>短语</Beat>`（跳到本章第 n 拍；当前拍的链接高亮；validate 检查 n 在拍数内）、`<Task id="<step-id>">`（打开本章小测；也可写题库题 id）、`<Frac>`、`<Term>`、`<Num>`、`<More>`。`{3/4}` 记号与 `.atlas-nowrap` 同前（`src/lib/rich-text.ts`、`src/lib/frac-glue.ts`）。
 
+### 方格（A4 `grid`，docs/21 §3；面积与周长）
+
+- **模型** `{ "kind": "grid", "unit": "unit" | "cm" | "m", "show": "cells" | "dots" | "none", "figures": [...] }`：格点坐标 **y 向上**，格 (x, y) = [x, x+1] × [y, y+1]。图形 `rect: [x, y, w, h]` | `rects`（2–4 个长方形拼成，接缝画虚线）| `cells` | `poly`（直线图形的顶点，边只能横或竖）+ `halves: [[x, y, "sw"]]`（半格三角形，直角在那个角，成对）；`tone` = `cold`（给定）| `hot`（比较的第二个）| `ghost`（虚线外框）。坐标就是真长度（不按比例时也一样），面积、周长、外圈、边上的格子、切开的两块都由 `lib/grid.ts` 从几何算出，数据里不写数。讲解用的层：`tiles`（铺上的单位正方形：个数 / `all` / `{rows}` / `{count, size}` 大方块）、`walk`（从左上角沿边走几段：路径画出、小圆点跑、计数 1、2、3…）、`border`（边上的格子画虚线，角格的两段标出）、`sides: "pairs"`（对边成对：长 cold、宽 hot）、`dims`（尺寸线：`side` 或 `from` / `to`，标签按几何算，`unknown` 写 ?，`tone` 点亮那条边）、`cuts` + `apart`、`crossed`（墨色斜线的缺角）、`note`（图下一行已知条件）、`legend`（1 cm² 图例）、`notToScale`（`show: none` 必须带，右下角 "Not drawn to scale / 未按比例画"）。多个图形时图上标 A、B。
+- **题型**：`count-squares`（`cover: all | row-col`；点格 / 点半格 / 行首按钮铺一行，托盘 −/+ 行与"清空"，方向键 + Enter；再写面积）、`trace-perimeter`（点格边，里面的边也能点；边游标沿格线移动 + Enter；托盘"走一圈"按走的顺序给已描的边编号；再写周长）、`draw-rectangle`（`area`、`perimeter`、`length`、`breadth`、`square`、`accept: any | exact`；左下角固定，点格点 / 拖角柄 / 角柄 `role=slider` 的 ←→↑↓ / 托盘长、宽步进器；尺寸线实时显示长、宽，不显示面积、周长）、`split-figure`（点格线切一刀，切线游标 ←→ 竖切、↑↓ 横切 + Enter，托盘竖切 / 横切 −/+；两块分开并各标尺寸；再填 `? + ? = ?`，按孩子自己的切法判）。`input` 加 `ask`（`area` | `perimeter` | `length` | `breadth` | `side`）、`figure`、`given`（`area` | `perimeter`，求边时）、`unit`、`form: "measure"`（数字框 + 单位芯片 cm、cm²、m、m²；`unit` 方格为"单位 / 平方单位"）、`sentence`（`? + ? = ?`）；`whole` 框 1–5 位，单位印在框后。答案必须等于图形自己的量（validate）。
+- **误解（量度域，`lib/diagnose/measure.ts`）**：`unequal-units`（只用于 choose）、`half-squares`、`unit-not-squared`、`area-perimeter-swap`、`border-squares`、`two-sides-only`、`sides-added-for-area`、`missing-side`、`same-area-same-perimeter`、`perimeter-not-halved`、`side-from-total`、`overlap-counted`、`inner-edge-counted`；`schema.ts` 按域登记（`FRACTION_CODES`、`MEASURE_CODES`，zod 仍是一个 enum），validate 拒绝跨域的 code。**sample 写法**：数 `"14"`、量 `"12 cm"`；多段 `"=10"`、`"=9 cm2"`、`"=35,36,71"`；`count-squares` `"tiles:6"`；`trace-perimeter` `"edges:12"` / `"edges:14+2"`（外圈 14 段 + 里面 2 段）；`draw-rectangle` `"3x4"`（横 × 竖）；`split-figure` `"x:5"`。
+- **每步数字上限** `steps[].limits`：`maxSide`、`maxArea`、`maxPerimeter`、`maxCells`、`gridMax: [列, 行]`（交互题默认 ≤ 12 × 10，显示 ≤ 24 × 16）、`sides: [最少, 最多]`；`pnpm validate` 与 `pnpm tsx scripts/math/check-pool.ts <draft> --topic <slug> --step <id>`（或 `--limits '{…}'`）都按它查。
+- **讲解拍**：新过渡 `tile`（新铺的方块按行淡入）、`walk`（路径画出 + 圆点跑 + 计数）、`arrange`（同样的方块换一种排法，整幅重挂载）；`cut`、`cross`、`shade`、`morph` 复用；`prefers-reduced-motion` 时都换成淡入。带文字的算式写 `words: { en, zh }`（如 `area = length × breadth / 面积 = 长 × 宽`），与 `equation` 二选一。
+- **HUD**：方格课的右上卡是 AREA · PERIMETER（尺寸 · 面积 · 周长；讲解拍只显示这一拍量过的：铺了才有面积、走了才有周长，不按比例的图按尺寸线；有 ? 时不算；小测只显示已知的边和孩子做的：铺了几块、描了几段、画了几 × 几、切成的两块，做完才给面积和周长）；PLATE 块 MODEL GRID · UNIT · SQUARES · SIDES；规格表多一行 UNITS（cm · m · cm² · m²），没有年级；方格课没有 S / E / N / L 辅助。步 `bridge: true` 在阅读面板节拍行上方显示 "Going further / 再往前一步"；**界面任何地方都不显示年级**（课纲对照只写 "MOE syllabus / 课纲" + 原文 + 来源芯片，`level`、`ref` 只留在数据里）。
+
 ### 舞台、阅读面板、HUD（docs/08 §2 全引擎 HUD 铁律）
 
 - **舞台**：讲解拍由 `BeatModel` 画（只读）；结构变了（模型种类、份数）整幅重挂载并按 `move` 播放过渡，只有标记变了时逐份过渡。模型下方一行算式（`.ms-equation`，贴在模型包围盒下方）：讲解拍 = `equation`，小测 = `workingLines` 的最后一行（不先说答案），练习不显示。
@@ -1115,7 +1124,7 @@ scripts/math/check-pool.ts   题库草稿自证：pnpm tsx scripts/math/check-po
 - **URL**：`ch`、`b`（≠ 1 才写）、`model`（≠ 题目默认才写）；作答、抽到的题、进度、练习结果从不进 URL、不进 storage。
 - **`__atlas.engine`**：`task()`（`{ step, beat, slot, index（题库第几道）, id, kind, phase, answered, done, tries, hints, revealed, attempts, feedback, practice }`）、`tasks()`（每道题库题 / 练习题 `{ step, index, id, kind, practice, wrong }`）、`goToTask(step, i, { instant })`（第 i 道题库题作为这一章的小测；练习章 = 第 i 题）、`goToBeat(chapter, i)`、`another()`、`skip()`、`solve()`、`answer(code | 'correct')`、`act(action)`、`practice()`。
 - **`pnpm shoot <topic> --tasks`**：每道题库题三张 `task-<step>-<n>`、`-wrong`、`-solved`；练习每题 `practice-q<n>` + `practice-summary`。`--beats` 每拍一张（小测拍带字幕卡里的托盘）。`--keys` 核对 C / I / U 与 `,` / `.`。
-- e2e：`tests-e2e/fractions.spec.ts`（点刻度换拍、节拍行与 `<Beat>`、方块打开小测、点按 / 纯键盘作答、错 → 诊断 → 看答案、再来一道、跳过、练习与总结、URL、演示停在小测、zh、390×844、七尺寸布局 en / zh）。
+- e2e：`tests-e2e/area-perimeter.spec.ts`（点刻度换拍、方格题点按与纯键盘作答、量的单位芯片、练习、zh、390×844）；`tests-e2e/fractions.spec.ts`（点刻度换拍、节拍行与 `<Beat>`、方块打开小测、点按 / 纯键盘作答、错 → 诊断 → 看答案、再来一道、跳过、练习与总结、URL、演示停在小测、zh、390×844、七尺寸布局 en / zh）。
 
 ## PWA、部署与 e2e（Phase 3）
 

@@ -7,9 +7,14 @@
  * length, practice shape and the `{a/b}` tokens in every text. Build time only.
  * `taskIssues` is shared with `scripts/math/check-pool.ts` (authoring drafts).
  */
-import type { Beat, Lesson, MathChapterState, MathSceneData, Task } from './schema';
+import { FRACTION_CODES, GRID_KINDS, MEASURE_CODES, type Beat, type GridModelSpec, type Lesson, type MathChapterState, type MathSceneData, type Model, type StepLimits, type Task } from './schema';
 import { add, compare, gcd, related, sub, toImproper, valueOnLine, type Frac } from './lib/fraction';
-import { baseParts } from './lib/state';
+import { baseParts, inputSpecOf } from './lib/state';
+import { cutPieces, gridAnswer } from './lib/check';
+import { drawnSolution, solve } from './lib/solve';
+import { dimEnds, extentOf, factsOf, figureOf, labels, polyIssues } from './lib/grid';
+import { askOf } from './lib/diagnose/measure';
+import { isAreaUnit, squared, WHOLE_MAX } from './lib/value';
 import { badTokens } from '../../lib/rich-text';
 
 export interface LessonIssue {
@@ -102,7 +107,8 @@ function feedbackIssues(task: Task): string[] {
     if (!task.multi && task.options.filter((o) => o.correct).length !== 1) out.push('a single-choice task needs exactly one correct option');
     if (task.options.every((o) => !o.correct)) out.push('no option is correct');
     for (const o of task.options) {
-      if (!o.correct && !o.misconception) out.push(`option "${o.id}" is wrong but names no misconception`);
+      // A grid choice may offer a wrong option no catalogued misconception explains (m² for a stamp): its feedback is the fallback.
+      if (!o.correct && !o.misconception && task.model.kind !== 'grid') out.push(`option "${o.id}" is wrong but names no misconception`);
       if (o.misconception && !codes.includes(o.misconception)) out.push(`option "${o.id}" shows "${o.misconception}" but feedback.wrong has no line for it`);
       if (!o.value && !o.model && !o.text) out.push(`option "${o.id}" needs a value, a model or a text`);
     }
@@ -132,23 +138,164 @@ function beatIssues(beat: Beat): string[] {
       else if (valueOnLine(f, m) === null) out.push(`${f.n}/${f.d} is not on a tick of a line cut in ${m.intervals}`);
     }
   }
-  if (beat.highlight) {
+  if (beat.highlight && m.kind !== 'grid') {
     if (m.kind === 'wall') {
       for (const f of beat.highlight) if (!m.rows.includes(toImproper(f).d)) out.push(`the wall has no row of ${toImproper(f).d}ths for ${f.n}/${f.d}`);
     } else out.push('highlight is for the fraction wall');
+  }
+  if (m.kind === 'grid') {
+    out.push(...gridModelIssues(m));
+    if (m.figures.length === 0) out.push('a grid beat needs a figure');
+    if (beat.highlight || beat.overlay) out.push('highlight and overlay are for fraction models');
   }
   if (beat.overlay?.equivalent && m.kind !== 'bar' && !(m.kind === 'barmodel' && m.units)) out.push('overlay.equivalent needs a bar (or a model drawing with units)');
   if (beat.overlay?.numberline && m.kind !== 'bar') out.push('overlay.numberline needs a bar');
   return out;
 }
 
+/* ------------------------------------------------------------------ */
+/* Square grid (docs/21 §3.4)                                          */
+/* ------------------------------------------------------------------ */
+
+/** Largest grid a child works on (docs/21 §3.1: 12 × 10 interactive, 24 × 16 shown). */
+export const GRID_INTERACTIVE: [number, number] = [12, 10];
+export const GRID_SHOWN: [number, number] = [24, 16];
+
+/** Can a grid model be drawn as written? */
+export function gridModelIssues(m: GridModelSpec): string[] {
+  const out: string[] = [];
+  const ids = m.figures.map((f) => f.id);
+  const dup = ids.find((id, i) => ids.indexOf(id) !== i);
+  if (dup) out.push(`figure id "${dup}" is used twice`);
+  const known = new Set(ids);
+  for (const f of m.figures) {
+    if (f.poly) for (const p of polyIssues(f.poly)) out.push(`figure "${f.id}": ${p}`);
+    if (f.halves && f.halves.length % 2 !== 0) out.push(`figure "${f.id}": half cells come in pairs (an area of whole squares)`);
+    const facts = factsOf(f);
+    if (facts.whole === 0 && facts.halfCount === 0) out.push(`figure "${f.id}" covers no cells`);
+    for (const h of facts.halves) if (facts.cells.has(`${h.x},${h.y}`)) out.push(`figure "${f.id}": half cell ${h.x},${h.y} is also a whole cell`);
+  }
+  const ext = extentOf(m);
+  if (m.show !== 'none' && (ext.w > GRID_SHOWN[0] || ext.h > GRID_SHOWN[1])) out.push(`the grid is ${ext.w} × ${ext.h} cells (shown ≤ ${GRID_SHOWN[0]} × ${GRID_SHOWN[1]}; draw it with show: none)`);
+  if (m.show === 'none' && !m.notToScale) out.push('show: none needs notToScale: true ("Not drawn to scale")');
+  for (const key of [...Object.keys(m.tiles ?? {}), ...Object.keys(m.walk ?? {}), ...(m.border ? [m.border] : [])]) if (!known.has(key)) out.push(`"${key}" is not a figure of this grid`);
+  for (const d of m.dims ?? []) {
+    if (d.figure && !known.has(d.figure)) out.push(`dimension on "${d.figure}": no such figure`);
+    const e = dimEnds(m, d);
+    if (!e) out.push('a dimension has no figure to measure');
+    else if ((e.from[0] !== e.to[0] && e.from[1] !== e.to[1]) || e.length === 0) out.push(`dimension (${e.from}) → (${e.to}) is not across or up`);
+  }
+  if (m.walk) for (const [id, n] of Object.entries(m.walk)) {
+    const f = m.figures.find((x) => x.id === id);
+    if (f && typeof n === 'number' && n > factsOf(f).walk.length) out.push(`walk on "${id}": ${n} sides, the figure has ${factsOf(f).walk.length}`);
+  }
+  if (m.tiles) for (const [id, t] of Object.entries(m.tiles)) {
+    const f = m.figures.find((x) => x.id === id);
+    if (f && typeof t === 'number' && t > factsOf(f).whole) out.push(`tiles on "${id}": ${t} squares, the figure has ${factsOf(f).whole}`);
+  }
+  const main = figureOf(m);
+  if (m.sides && (!main || !factsOf(main).rect)) out.push('sides: pairs is for a rectangle');
+  for (const c of m.cuts ?? []) {
+    const at = c.x ?? c.y ?? 0;
+    const f = figureOf(m);
+    const b = f ? factsOf(f).box : null;
+    if (b && (c.x !== undefined ? at <= b.x || at >= b.x + b.w : at <= b.y || at >= b.y + b.h)) out.push(`cut ${c.x !== undefined ? 'x' : 'y'}=${at} does not cross the figure`);
+  }
+  return out;
+}
+
+const modelsOf = (task: Task): Model[] => [task.model, ...(task.kind === 'choose' ? task.options.flatMap((o) => (o.model ? [o.model] : [])) : [])];
+
+/** A grid task: its model, its written part against the figure, what it may diagnose, the step's number limits. */
+function gridTaskIssues(task: Task, limits: StepLimits | undefined): string[] {
+  const out: string[] = [];
+  for (const m of modelsOf(task)) if (m.kind === 'grid') out.push(...gridModelIssues(m));
+  const m = task.model;
+  if ((GRID_KINDS as readonly string[]).includes(task.kind) && m.kind !== 'grid') return [...out, `a ${task.kind} task needs a grid model`];
+  if (m.kind !== 'grid') return out;
+  for (const c of task.feedback.wrong.map((w) => w.when)) if (!(MEASURE_CODES as readonly string[]).includes(c)) out.push(`"${c}" is a fractions code, not one for the grid`);
+  const spec = inputSpecOf(task);
+  const fig = figureOf(m, 'figure' in task ? task.figure : spec?.figure);
+  const ext = extentOf(m);
+  if (task.kind !== 'input' && task.kind !== 'choose') {
+    if (m.show === 'none') out.push(`a ${task.kind} task needs the grid shown`);
+    const max = limits?.gridMax ?? GRID_INTERACTIVE;
+    if (ext.w > max[0] || ext.h > max[1]) out.push(`the grid is ${ext.w} × ${ext.h} cells (a child works on ≤ ${max[0]} × ${max[1]})`);
+  }
+  if ((task.kind === 'count-squares' || task.kind === 'trace-perimeter' || task.kind === 'split-figure' || spec?.ask) && !fig) out.push('there is no figure to measure');
+  if (task.kind === 'trace-perimeter' && fig && factsOf(fig).halfCount) out.push('a figure with half cells has no perimeter in units');
+  if (task.kind === 'count-squares' && task.cover === 'row-col' && fig && !factsOf(fig).rect) out.push('cover: row-col is for a rectangle');
+  if (task.kind === 'draw-rectangle') {
+    if (!drawnSolution(task)) out.push(`no rectangle on the ${m.cols ?? 12} × ${m.rows ?? 10} grid meets the task`);
+    if ([task.area, task.perimeter, task.length, task.breadth].every((v) => v === undefined)) out.push('a draw-rectangle task needs an area, a perimeter or a side');
+  }
+  if (spec) {
+    const answers = Array.isArray(spec.answer) ? spec.answer : [spec.answer];
+    for (const a of answers) if (a.d !== 1 || a.w || a.n > WHOLE_MAX) out.push(`answer ${a.n}/${a.d} is not a whole number (0–${WHOLE_MAX})`);
+    if (spec.form !== 'whole' && spec.form !== 'measure') out.push(`form "${spec.form}" is for fractions (use whole or measure)`);
+    if (spec.form === 'measure' && !spec.unit) out.push('form measure needs the answer\'s unit');
+    if (spec.sentence && (spec.sentence.match(/\?/g) ?? []).length !== answers.length) out.push('the sentence needs one ? per answer');
+    const ctx = askOf(task, spec);
+    if (task.kind === 'split-figure') {
+      if (answers.length !== 3) out.push('a split-figure task writes three numbers: piece + piece = total');
+      const cut = solve(task).find((a) => a.do === 'gridcut');
+      const pieces = cut && cut.do === 'gridcut' ? cutPieces(task, cut.cut) : null;
+      if (!pieces) out.push('no straight cut leaves two rectangles');
+      else if (answers[0]?.n !== pieces[0] || answers[1]?.n !== pieces[1] || answers[2]?.n !== pieces[0] + pieces[1]) out.push(`the answer should be ${pieces[0]}, ${pieces[1]}, ${pieces[0] + pieces[1]} (the pieces of the first cut that works, then the total)`);
+    } else if (ctx) {
+      const want = gridAnswer(task);
+      if (want === null) out.push(`the figure's ${ctx.ask} is not measured in whole units`);
+      else if (answers.length === 1 && answers[0]!.n !== want) out.push(`the answer is ${answers[0]!.n}, the figure's ${ctx.ask} is ${want}`);
+      const unit = ctx.ask === 'area' ? squared(m.unit) : m.unit;
+      if (spec.unit && spec.unit !== unit) out.push(`the ${ctx.ask} is in ${unit}, not ${spec.unit} (no conversion between cm² and m²)`);
+      if (spec.unit && isAreaUnit(spec.unit) !== (ctx.ask === 'area')) out.push(`unit ${spec.unit} does not fit an ${ctx.ask}`);
+      if (fig && (ctx.ask === 'length' || ctx.ask === 'breadth' || ctx.ask === 'side')) {
+        const across = labels(m, fig, 'across');
+        const up = labels(m, fig, 'up');
+        if ((ctx.ask === 'length' && across) || (ctx.ask === 'breadth' && up) || (ctx.ask === 'side' && (across || up))) out.push(`the model prints the ${ctx.ask} it asks for (mark that dimension unknown)`);
+        if ((ctx.ask === 'length' || ctx.ask === 'breadth') && !ctx.given) out.push(`a missing ${ctx.ask} needs given: area or perimeter`);
+        if (m.show !== 'none' && ctx.given) out.push('a missing side is found from the numbers: draw it with show: none');
+      }
+    } else if (task.kind === 'input') out.push('an input task on a grid needs ask (area, perimeter, length, breadth or side)');
+  }
+  /* the step's number limits (docs/19 G11) */
+  if (limits) {
+    for (const mm of modelsOf(task)) {
+      if (mm.kind !== 'grid') continue;
+      for (const f of mm.figures) {
+        if (f.tone === 'ghost') continue;
+        const facts = factsOf(f);
+        if (limits.maxSide !== undefined && Math.max(facts.box.w, facts.box.h) > limits.maxSide) out.push(`figure "${f.id}" has a side of ${Math.max(facts.box.w, facts.box.h)} (limit ${limits.maxSide})`);
+        if (limits.maxArea !== undefined && facts.area > limits.maxArea) out.push(`figure "${f.id}" has an area of ${facts.area} (limit ${limits.maxArea})`);
+        if (limits.maxPerimeter !== undefined && facts.perimeter !== null && facts.perimeter > limits.maxPerimeter) out.push(`figure "${f.id}" has a perimeter of ${facts.perimeter} (limit ${limits.maxPerimeter})`);
+        if (limits.sides && f.poly && (f.poly.length < limits.sides[0] || f.poly.length > limits.sides[1])) out.push(`figure "${f.id}" has ${f.poly.length} sides (${limits.sides[0]}–${limits.sides[1]})`);
+      }
+    }
+    if (task.kind === 'count-squares' && limits.maxCells !== undefined && fig) {
+      const n = factsOf(fig).whole + factsOf(fig).halfCount;
+      if (n > limits.maxCells) out.push(`${n} squares to lay (limit ${limits.maxCells})`);
+    }
+    if (task.kind === 'draw-rectangle') {
+      if (limits.maxSide !== undefined && [task.length, task.breadth].some((v) => v !== undefined && v > limits.maxSide!)) out.push(`a side over ${limits.maxSide}`);
+      if (limits.maxArea !== undefined && task.area !== undefined && task.area > limits.maxArea) out.push(`area ${task.area} (limit ${limits.maxArea})`);
+      const r = drawnSolution(task);
+      if (r && limits.maxSide !== undefined && Math.max(...r) > limits.maxSide) out.push(`the rectangle drawn has a side of ${Math.max(...r)} (limit ${limits.maxSide})`);
+    }
+    if (spec && limits.maxPerimeter !== undefined && spec.ask === 'perimeter') for (const a of Array.isArray(spec.answer) ? spec.answer : [spec.answer]) if (a.n > limits.maxPerimeter) out.push(`perimeter ${a.n} (limit ${limits.maxPerimeter})`);
+  }
+  return out;
+}
+
 /** Every rule for one task (pool task or practice question), as messages. */
-export function taskIssues(task: Task, where: string, opts: { bridge: boolean; practice: boolean }): LessonIssue[] {
+export function taskIssues(task: Task, where: string, opts: { bridge: boolean; practice: boolean; limits?: StepLimits }): LessonIssue[] {
   const issues: LessonIssue[] = [];
   const error = (message: string) => issues.push({ level: 'error', message: `${where}: ${message}` });
   const warn = (message: string) => issues.push({ level: 'warn', message: `${where}: ${message}` });
-  for (const f of fractionsOf(task)) if (toImproper(f).d > 12 || f.d < 1) error(`denominator ${f.d} is out of range (1–12)`);
-  if (!opts.bridge) {
+  const grid = task.model.kind === 'grid' || modelsOf(task).some((m) => m.kind === 'grid') || (GRID_KINDS as readonly string[]).includes(task.kind);
+  if (grid) for (const m of gridTaskIssues(task, opts.limits)) error(m);
+  else for (const c of task.feedback.wrong.map((w) => w.when)) if (!(FRACTION_CODES as readonly string[]).includes(c)) error(`"${c}" is a grid code, not one for fractions`);
+  for (const f of grid ? [] : fractionsOf(task)) if (toImproper(f).d > 12 || f.d < 1) error(`denominator ${f.d} is out of range (1–12)`);
+  if (!opts.bridge && !grid) {
     for (const f of fractionsOf(task)) {
       const x = toImproper(f);
       if (f.w || x.n > x.d) error(`${f.w ? `${f.w} ` : ''}${f.n}/${f.d} is more than one whole (mixed numbers are the P4 bridge)`);
@@ -207,21 +354,24 @@ export function lessonIssues(data: MathSceneData, chapters: readonly ChapterInfo
     s.beats.forEach((b, i) => {
       for (const m of beatIssues(b)) error(`step "${s.id}" / beat ${i + 1}: ${m}`);
       if (i === 0 && b.move) warn(`step "${s.id}" / beat 1: the first beat has no previous one to move from`);
+      if (b.equation && b.words) error(`step "${s.id}" / beat ${i + 1}: write equation or words, not both`);
     });
     if (s.pool.length < POOL_MIN || s.pool.length > POOL_MAX) error(`step "${s.id}": the check pool has ${s.pool.length} tasks (${POOL_MIN}–${POOL_MAX})`);
     if (s.keyFacts && s.keyFacts.length < 2) error(`step "${s.id}": keyFacts has ${s.keyFacts.length} line (2–4)`);
   }
 
   /* 5–8 per task */
-  const tasks: { where: string; task: Task; bridge: boolean; practice: boolean }[] = [
-    ...lesson.steps.flatMap((s) => s.pool.map((task) => ({ where: `step "${s.id}" / ${task.id}`, task, bridge: !!s.bridge, practice: false }))),
-    ...lesson.practice.map((q) => ({ where: `practice / ${q.id}`, task: q.task, bridge: false, practice: true })),
+  const limitsOf = (id: string) => lesson.steps.find((s) => s.id === id)?.limits;
+  const tasks: { where: string; task: Task; bridge: boolean; practice: boolean; limits?: StepLimits }[] = [
+    ...lesson.steps.flatMap((s) => s.pool.map((task) => ({ where: `step "${s.id}" / ${task.id}`, task, bridge: !!s.bridge, practice: false, limits: s.limits }))),
+    // A practice question keeps to the limits of every step it sends the child back to.
+    ...lesson.practice.map((q) => ({ where: `practice / ${q.id}`, task: q.task, bridge: q.revisit.some((r) => !!lesson.steps.find((s) => s.id === r)?.bridge), practice: true, limits: limitsOf(q.revisit[0]!) })),
   ];
   const seen = new Set<string>();
-  for (const { where, task, bridge, practice } of tasks) {
+  for (const { where, task, bridge, practice, limits } of tasks) {
     if (seen.has(task.id)) error(`${where}: task id "${task.id}" is used twice`);
     seen.add(task.id);
-    issues.push(...taskIssues(task, where, { bridge, practice }));
+    issues.push(...taskIssues(task, where, { bridge, practice, limits }));
   }
 
   /* 9. practice */

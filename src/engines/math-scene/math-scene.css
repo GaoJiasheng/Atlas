@@ -469,6 +469,362 @@
 }
 
 /* ------------------------------------------------------------------ */
+/* Square grid (docs/21 §3.1): lines in ink, squares laid as signal    */
+/* fills, sides walked as thick signal lines                           */
+/* ------------------------------------------------------------------ */
+
+.ms-grid__lines line {
+  stroke: color-mix(in srgb, var(--ink) 18%, transparent);
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+.ms-grid__lines line[data-major] {
+  stroke: color-mix(in srgb, var(--ink) 30%, transparent);
+}
+.ms-grid__lines circle {
+  fill: color-mix(in srgb, var(--ink) 45%, transparent);
+}
+:root[data-theme="cinema"] .ms-grid__lines line {
+  stroke: color-mix(in srgb, var(--ink) 24%, transparent);
+}
+:root[data-theme="cinema"] .ms-grid__lines line[data-major] {
+  stroke: color-mix(in srgb, var(--ink) 38%, transparent);
+}
+.ms-grid__fill {
+  fill: color-mix(in srgb, var(--cold) 12%, var(--panel-solid));
+  fill-opacity: 0.9;
+}
+.ms-grid__figure[data-tone="hot"] .ms-grid__fill {
+  fill: color-mix(in srgb, var(--hot) 14%, var(--panel-solid));
+}
+.ms-grid__half {
+  stroke: none;
+}
+.ms-grid__outline {
+  fill: none;
+  stroke: var(--cold);
+  stroke-width: 1.5;
+  stroke-linecap: square;
+}
+.ms-grid__figure[data-tone="hot"] .ms-grid__outline {
+  stroke: var(--hot);
+}
+.ms-grid__figure[data-tone="ghost"] .ms-grid__outline {
+  stroke: var(--ink-2);
+  stroke-dasharray: 5 4;
+  stroke-width: 1.2;
+}
+.ms-grid__name {
+  fill: var(--ink);
+  font: 600 13px / 1 var(--font-mono);
+}
+.ms-grid__seam {
+  fill: none;
+  stroke: var(--ink-2);
+  stroke-width: 1;
+  stroke-dasharray: 4 3;
+}
+/* A laid square: signal, a hairline gap to the next, so the squares read one by one. */
+.ms-grid__tile {
+  fill: color-mix(in srgb, var(--signal) 56%, var(--panel-solid));
+  stroke: color-mix(in srgb, var(--signal) 80%, var(--ink));
+  stroke-width: 0.6;
+  animation: ms-tile-in 340ms var(--ease-out) var(--d, 0ms) both;
+}
+:root[data-theme="cinema"] .ms-grid__tile {
+  fill: color-mix(in srgb, var(--signal) 72%, var(--panel-solid));
+}
+.ms-grid__tile--big {
+  stroke-width: 1.4;
+}
+@keyframes ms-tile-in {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.ms-grid__tile {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.ms-grid__halfname text {
+  fill: var(--ink);
+  font: 600 12px / 1 var(--font-mono);
+}
+.ms-grid__crossed rect:first-child {
+  stroke: none;
+}
+.ms-grid__crossed-edge {
+  fill: none;
+  stroke: var(--ink-2);
+  stroke-width: 1;
+  stroke-dasharray: 5 4;
+}
+.ms-grid__crossed {
+  animation: ms-fade-in 420ms var(--ease-out) both;
+}
+@keyframes ms-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* The squares along the edge (a mistake shown): dashed ink; a corner square's two outside sides marked. */
+.ms-grid__border rect {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+.ms-grid__corner-side {
+  stroke: var(--signal);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+.ms-grid__sides line {
+  stroke-width: 3.5;
+  stroke-linecap: square;
+  animation: ms-fade-in 420ms var(--ease-out) both;
+}
+.ms-grid__sides line[data-tone="cold"] {
+  stroke: var(--cold);
+}
+.ms-grid__sides line[data-tone="hot"] {
+  stroke: var(--hot);
+}
+/* Walking round: the path draws itself, a dot runs along it, the count jumps 1, 2, 3 … */
+.ms-grid__walk-path {
+  fill: none;
+  stroke: var(--signal);
+  stroke-width: 2.6;
+  stroke-linejoin: miter;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  animation: ms-walk 800ms var(--ease-in-out) both;
+}
+@keyframes ms-walk {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.ms-grid__walk-dot {
+  fill: var(--signal);
+  stroke: var(--panel-solid);
+  stroke-width: 1.5;
+}
+.ms-grid__walk-no,
+.ms-grid__walk-count {
+  fill: var(--signal);
+  font: 600 10.5px / 1 var(--font-mono);
+}
+.ms-grid__walk-count {
+  font-size: 15px;
+}
+.ms-grid__walk-no[data-tucked] {
+  fill: var(--ink);
+}
+.ms-grid__walk-no {
+  animation: ms-fade-in 160ms linear var(--d, 0ms) both;
+}
+.ms-grid__cut {
+  stroke: var(--signal);
+  stroke-width: 2;
+  stroke-dasharray: 7 4;
+}
+.ms-grid__cut--mine {
+  stroke-dasharray: none;
+  stroke-width: 2.4;
+}
+.ms-grid__piece,
+.ms-grid__note,
+.ms-grid__corner,
+.ms-grid__legend text {
+  fill: var(--ink-2);
+  font: 500 12px / 1 var(--font-mono);
+}
+.ms-grid__piece {
+  fill: var(--ink);
+  font-size: 13px;
+}
+.ms-grid__note {
+  fill: var(--ink);
+  font: 500 14px / 1 var(--font-hud);
+}
+.ms-grid__corner {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.ms-grid__legend rect {
+  fill: color-mix(in srgb, var(--signal) 56%, var(--panel-solid));
+  stroke: var(--ink-2);
+  stroke-width: 1;
+}
+/* Dimension lines (technical plate): extension lines, arrowheads, the length in the middle; "?" in signal. */
+.ms-gdim line {
+  stroke: var(--ink-2);
+  stroke-width: 1;
+}
+.ms-gdim text {
+  fill: var(--ink);
+  font: 500 13px / 1 var(--font-mono);
+}
+.ms-gdim[data-unknown] text {
+  fill: var(--signal);
+  font-weight: 700;
+  font-size: 15px;
+}
+.ms-gdim .ms-gdim__edge {
+  stroke-width: 3.5;
+  stroke-linecap: square;
+}
+.ms-gdim[data-tone="cold"] .ms-gdim__edge,
+.ms-gdim[data-tone="cold"] .ms-gdim__line {
+  stroke: var(--cold);
+}
+.ms-gdim[data-tone="hot"] .ms-gdim__edge,
+.ms-gdim[data-tone="hot"] .ms-gdim__line {
+  stroke: var(--hot);
+}
+.ms-gdim[data-tone="signal"] .ms-gdim__edge,
+.ms-gdim[data-tone="signal"] .ms-gdim__line {
+  stroke: var(--signal);
+}
+/* The child's layer: tap targets, focus, traced sides, the drawn rectangle, the cut. */
+.ms-grid__hit,
+.ms-grid__rowhit,
+.ms-grid__drawhit,
+.ms-grid__cuthit {
+  fill: transparent;
+  cursor: pointer;
+}
+.ms-grid__cellbtn,
+.ms-grid__rowbtn,
+.ms-grid__cursor,
+.ms-grid__handle,
+.ms-grid__cutcursor {
+  outline: none;
+}
+.ms-grid__cellbtn:focus-visible .ms-grid__hit {
+  stroke: var(--signal);
+  stroke-width: 3;
+}
+@media (hover: hover) {
+  .ms-grid__cellbtn:hover .ms-grid__hit {
+    fill: color-mix(in srgb, var(--signal) 14%, transparent);
+  }
+  .ms-grid__sidehit:hover {
+    stroke: color-mix(in srgb, var(--signal) 40%, transparent);
+  }
+}
+.ms-grid__rowhit {
+  stroke: var(--line);
+  stroke-width: 1;
+  fill: var(--panel-solid);
+  rx: 3px;
+}
+.ms-grid__rowglyph {
+  fill: var(--ink-2);
+  pointer-events: none;
+}
+.ms-grid__rowbtn[aria-pressed="true"] .ms-grid__rowglyph {
+  fill: var(--signal);
+}
+.ms-grid__rowbtn:focus-visible .ms-grid__rowhit {
+  stroke: var(--signal);
+  stroke-width: 2;
+}
+.ms-grid__sidehit {
+  stroke: transparent;
+  stroke-width: 14;
+  stroke-linecap: butt;
+  cursor: pointer;
+}
+.ms-grid__traced {
+  stroke: var(--signal);
+  stroke-width: 3.2;
+  stroke-linecap: square;
+}
+.ms-grid__traced[data-inside] {
+  stroke-dasharray: 5 3;
+}
+.ms-grid__cursor-line {
+  stroke: transparent;
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+.ms-grid__cursor:focus-visible .ms-grid__cursor-line,
+.ms-grid__cutcursor:focus-visible .ms-grid__cursor-line {
+  stroke: color-mix(in srgb, var(--focus, var(--signal)) 70%, transparent);
+  stroke-dasharray: 2 3;
+}
+.ms-grid__pen {
+  fill: none;
+  stroke: transparent;
+  stroke-width: 2;
+}
+.ms-grid__cursor:focus-visible .ms-grid__pen {
+  stroke: var(--signal);
+}
+.ms-grid__origin {
+  fill: var(--ink);
+}
+.ms-grid__drawn {
+  fill: color-mix(in srgb, var(--signal) 26%, transparent);
+  stroke: var(--signal);
+  stroke-width: 2.4;
+}
+.ms-grid__handle {
+  cursor: grab;
+}
+.ms-grid__handle-hit {
+  fill: transparent;
+}
+.ms-grid__handle-dot {
+  fill: var(--panel-solid);
+  stroke: var(--signal);
+  stroke-width: 2.4;
+}
+.ms-grid__handle:focus-visible .ms-grid__handle-dot {
+  stroke-width: 4;
+}
+/* "Show me": the answer in dashed ink. */
+.ms-grid__ghost rect,
+.ms-grid__ghost polygon,
+.ms-grid__ghost-rect {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.4;
+  stroke-dasharray: 4 3;
+  pointer-events: none;
+}
+.ms-grid__ghost-line {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2;
+  stroke-dasharray: 5 3;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ms-grid__tile,
+  .ms-grid__walk-path,
+  .ms-grid__walk-no,
+  .ms-grid__crossed,
+  .ms-grid__sides line {
+    animation: ms-fade-in 200ms linear both;
+  }
+}
+
+/* ------------------------------------------------------------------ */
 /* Buttons (child-facing: ≥ 44 px, sentence case)                      */
 /* ------------------------------------------------------------------ */
 
@@ -696,6 +1052,86 @@
   outline: 2px solid var(--signal);
   outline-offset: 1px;
 }
+.ms-box--whole {
+  width: 84px;
+}
+.ms-input__rows--whole {
+  flex-wrap: wrap;
+}
+.ms-input__part {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.ms-input__rows--whole .ms-input__eq {
+  font: 500 18px / 1 var(--font-mono);
+}
+.ms-input__unit {
+  font: 500 18px / 1 var(--font-mono);
+  color: var(--ink-2);
+}
+.ms-units {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.ms-unit {
+  min-width: var(--hit);
+  text-transform: none;
+}
+.ms-tray__row--wrap {
+  flex-wrap: wrap;
+}
+.ms-tray__count b {
+  font-weight: 600;
+  color: var(--ink);
+}
+/* Going further: the chip above the beat line of a step past the main lesson. */
+.ms-further {
+  margin: 0 0 6px;
+}
+/* The AREA card: size, area, perimeter. */
+.ms-areacard {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+}
+.ms-areacard__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 10px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--line);
+}
+.ms-areacard__row dt {
+  font: 500 10.5px / 1.2 var(--font-hud);
+  letter-spacing: 0.1em;
+  color: var(--ink-2);
+}
+.ms-areacard__row dt b {
+  font-weight: 600;
+}
+.ms-areacard__row dd {
+  margin: 0;
+  font: 600 18px / 1.1 var(--font-mono);
+  color: var(--ink);
+  text-align: right;
+}
+.ms-areacard__row dd span {
+  display: block;
+}
+.ms-areacard__row dd[data-lines] {
+  font-size: 14px;
+  line-height: 1.35;
+}
+.ms-areacard__row[data-tone="area"] dd {
+  box-shadow: inset 0 -6px 0 color-mix(in srgb, var(--signal) 30%, transparent);
+}
+.ms-areacard__row[data-tone="perimeter"] dd {
+  text-decoration: underline 2.5px var(--signal);
+  text-underline-offset: 4px;
+}
 .ms-box--printed {
   display: inline-grid;
   place-items: center;
@@ -892,6 +1328,10 @@
 }
 .ms-stepper {
   margin-left: auto;
+}
+/* The grid's steppers sit in a column at the start of the tray, label after the buttons. */
+.ms-gstep {
+  flex: 1 1 100%;
 }
 
 /* Practice summary */
@@ -1104,6 +1544,20 @@
 }
 .ms-beat[data-move="merge"] {
   animation: ms-beat-join 640ms var(--ease-in-out) both;
+}
+/* The grid: the same squares put the other way (arrange), squares laid (tile) and sides walked (walk) ease in their own layer. */
+.ms-beat[data-move="arrange"] {
+  animation: ms-beat-arrange 640ms var(--ease-in-out) both;
+}
+@keyframes ms-beat-arrange {
+  from {
+    opacity: 0.25;
+    transform: scale(0.94, 1.06);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 @keyframes ms-beat-morph {
   from {

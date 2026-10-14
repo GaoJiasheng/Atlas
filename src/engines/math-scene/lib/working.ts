@@ -9,7 +9,11 @@ import { t } from '../../../i18n';
 import type { Task } from '../schema';
 import { answersOf, readInput, segments } from './check';
 import { formatFrac, lcm, over, toImproper, toMixed, type Frac } from './fraction';
-import { inputSpecOf, modelValue, phasesOf, type TaskState } from './state';
+import { inputSpecOf, modelValue, phasesOf, taskFigure, type TaskState } from './state';
+import { askOf, measured } from './diagnose/measure';
+import { cutPieces } from './check';
+import { isHalfKey, parseCut, piecesAfter, rectOf } from './grid';
+import { squared, unitText, type Unit } from './value';
 
 const tok = (f: Frac) => `{${formatFrac(f)}}`;
 const SYM = { '<': '<', '=': '=', '>': '>' } as const;
@@ -32,7 +36,73 @@ function written(task: Task, state: TaskState): Frac[] | null {
   return spec ? readInput(spec, state.input) : null;
 }
 
+/**
+ * A grid task's line (docs/21 §3): what the child has laid, traced, drawn or
+ * cut, then the written answer (`area = ? cm²`); once done, the figure's
+ * number sentence (`3 × 4 = 12 cm²`, `2 × (4 + 3) = 14 cm`). Never the answer first.
+ */
+function gridLines(task: Task, state: TaskState, locale: Locale, done: boolean): string[] {
+  const m = task.model;
+  if (m.kind !== 'grid') return [];
+  const spec = inputSpecOf(task);
+  const ctx = askOf(task, spec);
+  const phase = phasesOf(task)[state.phase] ?? 'model';
+  const u = (unit: Unit, n = 2) => unitText(unit, locale, n);
+  const len = m.unit;
+  const sq = squared(m.unit);
+  const v = written(task, state);
+  if (done && ctx) {
+    const f = ctx.facts;
+    const value = measured(ctx);
+    if (task.kind === 'split-figure') {
+      const p = cutPieces(task, state.cut);
+      if (p) return [`${p[0]} + ${p[1]} = ${p[0] + p[1]} ${u(sq)}`];
+    }
+    if (ctx.ask === 'area' && f.rect) return [`${f.box.w} × ${f.box.h} = ${f.area} ${u(sq, f.area)}`];
+    if (ctx.ask === 'perimeter' && f.rect) return [f.square ? `4 × ${f.box.w} = ${f.perimeter} ${u(len)}` : `2 × (${f.box.w} + ${f.box.h}) = ${f.perimeter} ${u(len)}`];
+    if (value !== null) return [`${t(locale, `math.grid.${ctx.ask}`)} = ${value} ${u(ctx.ask === 'area' ? sq : len, value)}`];
+  }
+  if (phase === 'input' && spec) {
+    const unit = spec.unit ?? (ctx?.ask === 'area' ? sq : len);
+    if (task.kind === 'split-figure') {
+      const p = cutPieces(task, state.cut);
+      const boxes = v ? v.map((x) => String(x.n)) : ['?', '?', '?'];
+      return [...(p ? [`${pieceDims(task, state)} `] : []), `${boxes[0] ?? '?'} + ${boxes[1] ?? '?'} = ${boxes[2] ?? '?'} ${u(sq)}`];
+    }
+    const shown = v && v[0] ? `${v[0].n} ${spec.form === 'measure' ? u((state.input.u as Unit) || unit, v[0].n) : u(unit, v[0].n)}` : `? ${spec.form === 'measure' ? '' : u(unit)}`.trim();
+    return ctx ? [`${t(locale, `math.grid.${ctx.ask}`)} = ${shown}`] : [];
+  }
+  switch (task.kind) {
+    case 'count-squares': {
+      const halves = state.tiles.filter(isHalfKey).length;
+      const whole = state.tiles.length - halves;
+      return state.tiles.length ? [t(locale, halves ? 'math.grid.laidHalves' : 'math.grid.laid', { n: whole, h: halves })] : [];
+    }
+    case 'trace-perimeter':
+      return state.edges.length ? [t(locale, 'math.grid.traced', { n: state.edges.length })] : [];
+    case 'draw-rectangle':
+      return state.rect ? [`${state.rect[0]} ${u(len)} × ${state.rect[1]} ${u(len)}`] : [];
+    case 'split-figure':
+      return state.cut ? [cutPieces(task, state.cut) ? pieceDims(task, state) : t(locale, 'math.grid.notRects')] : [];
+    default:
+      return [];
+  }
+}
+
+/** The two pieces of a cut, as `5 × 6 + 3 × 4`. */
+function pieceDims(task: Task, state: TaskState): string {
+  const fig = taskFigure(task);
+  const cut = parseCut(state.cut);
+  const pieces = fig && cut ? piecesAfter(fig.facts.cells, cut) : null;
+  if (!pieces) return '';
+  return pieces
+    .map((p) => rectOf(p))
+    .map((b) => (b ? `${b.w} × ${b.h}` : '?'))
+    .join(' + ');
+}
+
 export function workingLines(task: Task, state: TaskState, locale: Locale, done = false): string[] {
+  if (task.model.kind === 'grid') return gridLines(task, state, locale, done).filter(Boolean);
   const out: string[] = [];
   const v = written(task, state);
   switch (task.kind) {
@@ -91,6 +161,11 @@ export function workingLines(task: Task, state: TaskState, locale: Locale, done 
       else out.push(v ? v.map(tok).join(' = ') : `{?/?}`);
       break;
     }
+    case 'count-squares':
+    case 'trace-perimeter':
+    case 'draw-rectangle':
+    case 'split-figure':
+      break;
     case 'build-sum': {
       const op = task.op === '+' ? '+' : '−';
       const line = [`${tok(task.a)} ${op} ${tok(task.b)}`];
@@ -113,6 +188,7 @@ export function workingLines(task: Task, state: TaskState, locale: Locale, done 
  * marks are the answer (shade, fold, split, merge, place), it is their value.
  */
 export function cardValue(task: Task, state: TaskState, done = false): Frac | null {
+  if (task.model.kind === 'grid') return null;
   const phase = phasesOf(task)[state.phase];
   if (phase === 'input' || task.kind === 'input') {
     const v = written(task, state);

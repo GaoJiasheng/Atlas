@@ -1,0 +1,169 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": {
+        "en": "Ministry of Education Singapore, Curriculum Planning and Development Division. Mathematics Syllabus Primary One to Six (implementation starting with the 2021 Primary One cohort; updated October 2025). Area and Perimeter: pp. 36 and 39; Length: pp. 32 and 34.",
+        "zh": "新加坡教育部课程规划与发展司：《小学一至六年级数学课程纲要》（2021 年版，2025 年 10 月更新）。面积与周长：第 36、39 页；长度：第 32、34 页。"
+      },
+      "url": "https://www.moe.gov.sg/api/media/92bff26d-b2b4-4535-b868-b8415c744b91/2021-Primary-Mathematics-Syllabus-P1-to-P6-Updated-October-2025.pdf",
+      "note": {
+        "en": "The only source for what each step covers; the syllabus lines in the lesson are quoted from it, including \"excluding conversion between cm2 and m2\" (p. 36). Pages as printed on the PDF.",
+        "zh": "每一步学什么，只以这份课纲为准；课里的课纲条目照原文引用，包括「不包括 cm² 与 m² 之间的换算」（第 36 页）。页码是 PDF 上印的页码。"
+      }
+    },
+    {
+      "id": "S2",
+      "text": {
+        "en": "Ministry of Education Singapore: primary syllabuses page.",
+        "zh": "新加坡教育部：小学课程纲要页面。"
+      },
+      "url": "https://www.moe.gov.sg/primary/curriculum/syllabus",
+      "note": {
+        "en": "Version check of S1.",
+        "zh": "用于核对 S1 的版本。"
+      }
+    },
+    {
+      "id": "S3",
+      "text": {
+        "en": "TIMSS 2015 Encyclopedia. Singapore: The Mathematics Curriculum in Primary and Lower Secondary Grades. TIMSS & PIRLS International Study Center, Boston College.",
+        "zh": "《TIMSS 2015 百科》新加坡条目：小学与初中的数学课程。波士顿学院 TIMSS & PIRLS 国际研究中心。"
+      },
+      "url": "https://timssandpirls.bc.edu/timss2015/encyclopedia/countries/singapore/the-mathematics-curriculum-in-primary-and-lower-secondary-grades/",
+      "note": {
+        "en": "The Concrete-Pictorial-Abstract approach: squares laid and sides walked on the stage, the number sentence under them.",
+        "zh": "「具体—图像—抽象」教学法：舞台上铺正方形、沿边走，下面写算式。"
+      }
+    },
+    {
+      "id": "S4",
+      "text": {
+        "en": "Battista, M. T., Clements, D. H., Arnoff, J., Battista, K. & Van Auken Borrow, C. (1998). Students' spatial structuring of 2D arrays of squares. Journal for Research in Mathematics Education 29(5), 503–532.",
+        "zh": "Battista, M. T. 等（1998）：学生对二维正方形阵列的空间结构化。《数学教育研究杂志》第 29 卷第 5 期，503–532 页。"
+      },
+      "url": "https://doi.org/10.2307/749731",
+      "note": {
+        "en": "Rows and columns of a square array; counting sides against counting squares (steps 03 and 06). DOI checked 2026-10-14.",
+        "zh": "正方形阵列的行与列；数边与数格的区别（第 03、06 步）。DOI 于 2026-10-14 核对。"
+      }
+    },
+    {
+      "id": "S5",
+      "text": {
+        "en": "Outhred, L. N. & Mitchelmore, M. C. (2000). Young children's intuitive understanding of rectangular area measurement. Journal for Research in Mathematics Education 31(2), 144–167.",
+        "zh": "Outhred, L. N. 与 Mitchelmore, M. C.（2000）：幼儿对长方形面积测量的直觉理解。《数学教育研究杂志》第 31 卷第 2 期，144–167 页。"
+      },
+      "url": "https://doi.org/10.2307/749749",
+      "note": {
+        "en": "Covering without gaps, units of one size, the row-and-column structure of a rectangle (steps 01, 02, 06). DOI checked 2026-10-14.",
+        "zh": "铺满不留空、单位一样大、长方形的行列结构（第 01、02、06 步）。DOI 于 2026-10-14 核对。"
+      }
+    },
+    {
+      "id": "S6",
+      "text": {
+        "en": "Kamii, C. & Kysh, J. (2006). The difficulty of \"length × width\": Is a square the unit of measurement? Journal of Mathematical Behavior 25(2), 105–115.",
+        "zh": "Kamii, C. 与 Kysh, J.（2006）：「长 × 宽」的难处：正方形是量面积的单位吗？《数学行为杂志》第 25 卷第 2 期，105–115 页。"
+      },
+      "url": "https://doi.org/10.1016/j.jmathb.2006.02.001",
+      "note": {
+        "en": "Why length × breadth counts squares; adding the sides for an area (steps 02 and 06). DOI checked 2026-10-14.",
+        "zh": "长 × 宽为什么数的是正方形；把边加起来当面积（第 02、06 步）。DOI 于 2026-10-14 核对。"
+      }
+    },
+    {
+      "id": "S7",
+      "text": {
+        "en": "Ma, L. (1999). Knowing and Teaching Elementary Mathematics. Mahwah, NJ: Lawrence Erlbaum. Chapter 4: the relationship between perimeter and area.",
+        "zh": "马力平（1999）：《小学数学的掌握与教学》。新泽西：Lawrence Erlbaum。第 4 章：周长与面积的关系。"
+      },
+      "note": {
+        "en": "The claim that a bigger perimeter means a bigger area, and counter-examples (step 07).",
+        "zh": "「周长大，面积就大」的说法与反例（第 07 步）。"
+      }
+    },
+    {
+      "id": "S8",
+      "text": {
+        "en": "Zacharos, K. (2006). Prevailing educational practices for area measurement and students' failure in measuring areas. Journal of Mathematical Behavior 25(3), 224–239.",
+        "zh": "Zacharos, K.（2006）：通行的面积测量教学与学生在量面积上的失败。《数学行为杂志》第 25 卷第 3 期，224–239 页。"
+      },
+      "url": "https://doi.org/10.1016/j.jmathb.2006.09.003",
+      "note": {
+        "en": "Area and perimeter confused when formulas come before meaning; the lesson counts before it uses a formula (steps 01–06). DOI checked 2026-10-14.",
+        "zh": "先背公式、后懂意义时，面积与周长容易混；本课先数格子，再用公式（第 01–06 步）。DOI 于 2026-10-14 核对。"
+      }
+    },
+    {
+      "id": "S9",
+      "text": {
+        "en": "Common Core Standards Writing Team (2012). Progressions for the Common Core State Standards in Mathematics: K–5, Geometric Measurement. Tucson: Institute for Mathematics and Education, University of Arizona.",
+        "zh": "共同核心标准编写组（2012）：《共同核心数学标准进阶：幼儿园至五年级·几何测量》。图森：亚利桑那大学数学与教育研究所。"
+      },
+      "url": "https://www.math.arizona.edu/~ime/progressions/",
+      "note": {
+        "en": "Area as covering, perimeter as a length, rectilinear and composite figures, and the usual mistakes (steps 03–05, 08–11). The page lists the progressions documents; the Geometric Measurement one is linked from it.",
+        "zh": "面积是铺满，周长是长度；直线图形与组合图形；常见错误（第 03–05、08–11 步）。该页列出各进阶文件，几何测量一册由此链接。"
+      }
+    },
+    {
+      "id": "S10",
+      "text": {
+        "en": "Clements, D. H. & Sarama, J. (2014). Learning and Teaching Early Math: The Learning Trajectories Approach (2nd ed.). New York: Routledge. The chapters on length and area.",
+        "zh": "Clements, D. H. 与 Sarama, J.（2014）：《早期数学的学与教：学习轨迹方法》（第 2 版）。纽约：Routledge。长度与面积两章。"
+      },
+      "note": {
+        "en": "Iterating a unit, half units, units of one size (steps 01 and 02).",
+        "zh": "单位的重复、半个单位、单位一样大（第 01、02 步）。"
+      }
+    },
+    {
+      "id": "S11",
+      "text": {
+        "en": "Baturo, A. & Nason, R. (1996). Student teachers' subject matter knowledge within the domain of area measurement. Educational Studies in Mathematics 31(3), 235–268.",
+        "zh": "Baturo, A. 与 Nason, R.（1996）：师范生在面积测量领域的学科知识。《数学教育研究》第 31 卷第 3 期，235–268 页。"
+      },
+      "url": "https://doi.org/10.1007/BF00376322",
+      "note": {
+        "en": "Composite figures: cutting and rearranging keep the area (step 10). DOI checked 2026-10-14.",
+        "zh": "组合图形：切开、拼合，面积不变（第 10 步）。DOI 于 2026-10-14 核对。"
+      }
+    },
+    {
+      "id": "S12",
+      "text": {
+        "en": "Dickson, L. (1989). Area of a rectangle. In D. C. Johnson (Ed.), Children's Mathematical Frameworks 8–13: A Study of Classroom Teaching (pp. 89–125). Windsor: NFER-Nelson.",
+        "zh": "Dickson, L.（1989）：长方形的面积。载于 Johnson, D. C. 编《8–13 岁儿童的数学框架：课堂教学研究》，89–125 页。温莎：NFER-Nelson。"
+      },
+      "note": {
+        "en": "Area of a rectangle, its units, and counting the squares along the edge for a perimeter (steps 03, 06, 08). Page range as cited in the literature; not yet checked against a library copy.",
+        "zh": "长方形的面积与单位，以及把边上的格子当周长来数（第 03、06、08 步）。页码按文献引用；尚未借阅原书核对。"
+      }
+    },
+    {
+      "id": "S13",
+      "text": {
+        "en": "Moyer, P. S. (2001). Links to literature: Using representations to explore perimeter and area. Teaching Children Mathematics 8(1), 52–59.",
+        "zh": "Moyer, P. S.（2001）：联系文学作品——用表征探索周长与面积。《儿童数学教学》第 8 卷第 1 期，52–59 页。"
+      },
+      "url": "https://doi.org/10.5951/TCM.8.1.0052",
+      "note": {
+        "en": "Rearranging the same tiles into shapes with different perimeters (step 07). DOI checked 2026-10-14.",
+        "zh": "把同样的方砖拼成周长不同的图形（第 07 步）。DOI 于 2026-10-14 核对。"
+      }
+    },
+    {
+      "id": "S14",
+      "text": {
+        "en": "Textbook series on the MOE approved list (for the usual order of topics and the words length, breadth and \"Not drawn to scale\" only, not copied): Marshall Cavendish My Pals Are Here! Maths; Shaping Maths.",
+        "zh": "教育部批准目录上的教材系列（只参考通常的教学顺序和 length、breadth、「未按比例画」等用词，不照抄）：Marshall Cavendish《My Pals Are Here! Maths》、《Shaping Maths》。"
+      },
+      "url": "https://www.moe.gov.sg/education-in-sg/approved-textbook-list",
+      "note": {
+        "en": "Questions, pictures and wording in this lesson are our own; the numbers are made up and claim no real flat's size.",
+        "zh": "本课的题目、插图和措辞都是自己写的；数字是虚构的，不代表任何真实户型的面积。"
+      }
+    }
+  ]
+}

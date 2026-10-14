@@ -62,6 +62,7 @@ const SINGLE_KINDS = new Set(['shade', 'fold', 'split', 'merge', 'input', 'build
 export function canShow(task: Task, view: ModelView): boolean {
   const m = task.model;
   if (view === m.kind) return true;
+  if (m.kind === 'grid' || view === 'grid') return false;
   const singleBar = m.kind === 'bar' && !m.rows && (m.wholes ?? 1) === 1 && m.parts !== null && !m.cuts && !m.diagonal;
   if ((singleBar || m.kind === 'circle') && SINGLE_KINDS.has(task.kind)) {
     if (view === 'bar' || view === 'circle') return true;

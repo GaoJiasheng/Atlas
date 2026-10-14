@@ -40,11 +40,14 @@ import type { Action } from './lib/state';
 import { cardValue, workingLines } from './lib/working';
 import { formatFrac } from './lib/fraction';
 import { Defs } from './stage/svg';
-import { StageContent } from './stage/Stage';
+import { SPECIMEN_GRID, StageContent } from './stage/Stage';
 import { beatCounts, beatFraction, beatPair, beatShape } from './stage/BeatModel';
 import { useStageLayout, type LayoutMode, type Rect } from './stage/layout';
 import { Tray, partsAreNarrow } from './tray/Tray';
 import { FractionCard } from './hud/Panels';
+import { AreaCard } from './hud/AreaCard';
+import { factsOf, figureOf } from './lib/grid';
+import type { GridModelSpec } from './schema';
 import { MathOverlay } from './hud/Overlay';
 import { BeatLine } from './hud/BeatLine';
 import { ChapterIndex } from './hud/ChapterIndex';
@@ -60,8 +63,25 @@ const VIEW_KEY: Record<ModelView, Parameters<typeof t>[1]> = {
   numberline: 'math.view.numberline',
   wall: 'math.view.wall',
   barmodel: 'math.view.barmodel',
+  grid: 'math.view.grid',
 };
 const SPECIMEN_VIEWS: ModelView[] = ['bar', 'circle', 'numberline', 'wall'];
+
+/** The plate's rows for a grid: unit, squares laid, sides walked or traced (the child's on a check). */
+function gridRows(m: GridModelSpec, state: { tiles: string[]; edges: string[] } | null): PlateRow[] {
+  const f = figureOf(m);
+  const facts = f ? factsOf(f) : null;
+  const tiles = f ? m.tiles?.[f.id] : undefined;
+  const walk = f ? m.walk?.[f.id] : undefined;
+  const squares = state ? state.tiles.length : facts && tiles !== undefined ? (tiles === 'all' ? facts.whole + facts.halfCount : typeof tiles === 'number' ? tiles : (tiles.count ?? 0)) : null;
+  const sides = state ? state.edges.length : facts && walk !== undefined ? (walk === 'all' ? facts.walk.length : walk) : null;
+  return [
+    { key: 'math.plate.model', value: 'GRID' },
+    { key: 'math.plate.unit', value: m.unit === 'unit' ? 'UNIT' : m.unit.toUpperCase() },
+    { key: 'math.plate.squares', value: squares === null ? '—' : String(squares) },
+    { key: 'math.plate.sides', value: sides === null ? '—' : String(sides), on: true },
+  ];
+}
 /** A beat's model change settles (the stage is SVG: a short ease). */
 const BEAT_SETTLE_MS = 650;
 /** Height of the number-sentence line under the model. */
@@ -104,6 +124,8 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
   const cur = ctl.current();
   const { place, practice, slot, task, run, step } = cur;
   const background = place.kind === 'background';
+  // A lesson on the square grid (area and perimeter): its own card, plate rows, specimen and no fraction assists.
+  const gridLesson = useMemo(() => lesson.steps.some((x) => x.beats.some((b) => b.model.kind === 'grid')), [lesson]);
   const explain = slot.kind === 'explain' ? slot.beat : null;
   const number = (id: string | null) => {
     const c = chapters.find((x) => x.id === id);
@@ -132,8 +154,8 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
   }, [s.beat, place, store]);
 
   /* ---------- the view on a check: the VIEW group's model, else the task's own ---------- */
-  const views = task && slot.kind === 'check' ? viewsFor(step, task) : background ? SPECIMEN_VIEWS : [];
-  const view: ModelView = task ? (s.model && views.includes(s.model) ? s.model : task.model.kind) : (s.model ?? 'bar');
+  const views = task && slot.kind === 'check' ? viewsFor(step, task) : background && !gridLesson ? SPECIMEN_VIEWS : [];
+  const view: ModelView = task ? (s.model && views.includes(s.model) ? s.model : task.model.kind) : gridLesson ? 'grid' : (s.model ?? 'bar');
 
   /* ---------- the flat list of beats (axis ticks, `,` / `.`) ---------- */
   const flat = useMemo(() => chapters.flatMap((c) => Array.from({ length: ctl.beatCount(c.id) }, (_, index) => ({ chapter: c.id, index }))), [chapters, ctl]);
@@ -240,7 +262,7 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
     numberline: u.modes.numberline && !practice && view !== 'numberline',
     labels: labelsOn && !practice,
   };
-  const equation = explain ? (explain.equation ?? null) : task && run && !practice ? (workingLines(task, run.state, locale, run.done).at(-1) ?? null) : null;
+  const equation = explain ? (explain.equation ?? (explain.words ? tx(explain.words, locale) : null)) : task && run && !practice ? (workingLines(task, run.state, locale, run.done).at(-1) ?? null) : null;
   const modelBox: Rect = equation ? { ...L.free, h: Math.max(0, L.free.h - EQUATION_H) } : L.free;
   // The sentence sits right under the drawing (its bounding box), not at the foot of the free rectangle.
   const drawingRef = useRef<SVGGElement>(null);
@@ -252,7 +274,9 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
     const top = Math.round(Math.min(modelBox.y + modelBox.h, Math.max(modelBox.y, bb.y + bb.height + 10)));
     if (top !== equationTop) setEquationTop(top);
   });
-  const value = task && run ? cardValue(task, run.state, run.done) : explain ? beatFraction(explain) : background ? { n: 3, d: 4 } : null;
+  const value = task && run ? cardValue(task, run.state, run.done) : explain ? beatFraction(explain) : background && !gridLesson ? { n: 3, d: 4 } : null;
+  /** The grid on show (a beat's, a check's, the specimen's), for the AREA card and the plate. */
+  const gridOnShow: GridModelSpec | null = task ? (task.model.kind === 'grid' ? task.model : null) : explain ? (explain.model.kind === 'grid' ? explain.model : null) : background && gridLesson ? SPECIMEN_GRID : null;
 
   /* ---------- HUD registration ---------- */
   const canCheck = !!task && !!run && !run.done && answered(task, run.state);
@@ -268,7 +292,7 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
       ? [UP(t('en', 'math.check.title')), ...(value ? [`${UP(t('en', 'math.status.value'))} ${formatFrac(value)}`] : []), ...(run.done ? [UP(t('en', 'math.status.done'))] : [])]
       : explain
         ? [`${UP(t('en', 'math.beat.label'))} ${cur.beat + 1}/${count - 1}`, ...(value ? [`${UP(t('en', 'math.status.value'))} ${formatFrac(value)}`] : [])]
-        : [`${UP(t('en', 'math.status.specimen'))} 3/4`];
+        : [`${UP(t('en', 'math.status.specimen'))} ${gridLesson ? '4 × 3' : '3/4'}`];
   const [cardExpanded, setCardExpanded] = useState(false);
   const specRows = useMemo<SpecRow[]>(
     () => [
@@ -276,18 +300,24 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
       { id: 'beats', label: both('math.spec.beats'), value: String(lesson.steps.reduce((n, x) => n + x.beats.length, 0)), mono: true },
       { id: 'checks', label: both('math.spec.checks'), value: `${lesson.steps.length} × ${Math.min(...lesson.steps.map((x) => x.pool.length))}–${Math.max(...lesson.steps.map((x) => x.pool.length))}`, mono: true },
       { id: 'practice', label: both('math.spec.practice'), value: String(lesson.practice.length), mono: true },
-      { id: 'levels', label: both('math.spec.levels'), value: 'P2–P3 (+P4)', mono: true, source: 'ref' },
-      { id: 'denominators', label: both('math.spec.denominators'), value: '≤ 12', mono: true, source: 'ref' },
+      gridLesson
+        ? { id: 'units', label: both('math.spec.units'), value: 'cm · m · cm² · m²', mono: true, source: 'ref' }
+        : { id: 'denominators', label: both('math.spec.denominators'), value: '≤ 12', mono: true, source: 'ref' },
     ],
-    [lesson],
+    [lesson, gridLesson],
   );
 
   const controls = useMemo<SceneControls>(() => {
     const presets: ScenePreset[] = views.map((v) => ({ id: v, label: both(VIEW_KEY[v]), title: both(VIEW_KEY[v]) }));
     const modeItems: SceneMode[] = [
-      { id: 'symbol', key: 's', label: t(locale, 'math.mode.symbol'), on: modes.symbol, disabled: practice },
-      { id: 'equivalent', key: 'e', label: t(locale, 'math.mode.equivalent'), on: modes.equivalent, disabled: practice },
-      { id: 'numberline', key: 'n', label: t(locale, 'math.mode.numberline'), on: modes.numberline, disabled: practice || view === 'numberline' },
+      // The S / E / N assists are about fractions: a grid lesson has none.
+      ...(gridLesson
+        ? []
+        : [
+            { id: 'symbol', key: 's', label: t(locale, 'math.mode.symbol'), on: modes.symbol, disabled: practice },
+            { id: 'equivalent', key: 'e', label: t(locale, 'math.mode.equivalent'), on: modes.equivalent, disabled: practice },
+            { id: 'numberline', key: 'n', label: t(locale, 'math.mode.numberline'), on: modes.numberline, disabled: practice || view === 'numberline' },
+          ]),
       { id: 'presentation', key: 'p', label: t(locale, 'present.mode'), on: presenting, tone: 'signal', status: presentationStatus, phone: false },
     ];
     return {
@@ -312,12 +342,12 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
           if (id === 'symbol' || id === 'equivalent' || id === 'numberline') ui.setState((x) => ({ modes: { ...x.modes, [id]: on } }));
         },
       },
-      // Labels are an assist: none in the practice.
-      labels: !practice,
+      // Labels are an assist (each part named 1/n): none in the practice, none on the grid.
+      labels: !practice && !gridLesson,
       commands,
       specRows,
       status,
-      card: both('math.card.title'),
+      card: both(gridLesson ? 'math.card.area' : 'math.card.title'),
       cardToggle: { expanded: cardExpanded, set: setCardExpanded },
       beats: beatControls,
       beatStep,
@@ -343,7 +373,7 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
       },
     };
     // `commands`, `status` and the modes are rebuilt from state every render; the deps below cover what they read.
-  }, [ctl, ui, u, s, run, task, view, views.join(','), practice, presenting, presentationStatus, beatControls, beatStep, isPresenting, startPresentation, stopPresentation, specRows, cardExpanded, locale, labelsOn, canCheck]);
+  }, [ctl, ui, u, s, run, task, view, views.join(','), practice, presenting, presentationStatus, beatControls, beatStep, isPresenting, startPresentation, stopPresentation, specRows, cardExpanded, locale, labelsOn, canCheck, gridLesson]);
   useSceneControls(controls);
 
   /* ---------- the chapter axis ---------- */
@@ -379,7 +409,9 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
         { key: 'math.state.answered', value: `${Object.keys(u.practice).length}/${lesson.practice.length}` },
         { key: 'math.state.assists', value: UP(t('en', 'math.state.off')) },
       ]
-    : explain
+    : gridOnShow
+      ? gridRows(gridOnShow, task && run && task.kind !== 'choose' && task.kind !== 'input' ? run.state : null)
+      : explain
       ? modelRows(t('en', VIEW_KEY[explain.model.kind]), beatCounts(explain).parts, beatCounts(explain).marked, value)
       : task && run
         ? modelRows(t('en', VIEW_KEY[view]), run.state.parts * run.state.wholes || null, run.done || slot.kind === 'check' ? run.state.shaded.length + run.state.given.length - run.state.crossed.length : null, value)
@@ -423,7 +455,11 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
       {presentation.element}
 
       <SceneSlot name="card">
-        <FractionCard task={showSummary ? null : task} state={run?.state ?? null} done={!!run?.done} fixed={showSummary ? null : value} pair={explain ? beatPair(explain) : null} expanded={cardExpanded} locale={locale} />
+        {gridLesson ? (
+          <AreaCard model={showSummary ? null : gridOnShow} task={showSummary ? null : task} state={run?.state ?? null} done={!!run?.done} locale={locale} />
+        ) : (
+          <FractionCard task={showSummary ? null : task} state={run?.state ?? null} done={!!run?.done} fixed={showSummary ? null : value} pair={explain ? beatPair(explain) : null} expanded={cardExpanded} locale={locale} />
+        )}
       </SceneSlot>
       <SceneSlot name="plate">
         <PlateBlock rows={plateRows} locale={locale} />
@@ -445,6 +481,11 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
         />
       </SceneSlot>
       <SceneSlot name="readerTop">
+        {step?.bridge && (
+          <p className="ms-further">
+            <b className="atlas-chip">{t(locale, 'math.chip.further')}</b>
+          </p>
+        )}
         {!background && (
           <BeatLine
             kind={slot.kind === 'check' ? 'check' : practice ? 'question' : 'explain'}

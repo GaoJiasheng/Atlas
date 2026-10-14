@@ -1,0 +1,43 @@
+---
+id: missing-side
+order: 8
+title: { en: "Finding a missing side", zh: "已知面积或周长，求一条边" }
+state:
+  summary: { en: "Know the area or the perimeter of a rectangle and one side, and you can work back to the other side.", zh: "知道长方形的面积或周长，再知道一条边，就能倒过来求出另一条边。" }
+---
+
+<Lang en>
+
+In the last steps you used the <Term id="length-breadth">length and breadth</Term> of a <Term id="rectangle">rectangle</Term> to find its area and its perimeter. This step goes a little further: you know the answer and one side, and you work back to the other side.
+
+Look at the <Beat n={1}>rectangle with an area of 24 cm²</Beat>. Its length is 6 cm, and its breadth has a question mark. The drawing is <Term id="not-to-scale">not drawn to scale</Term>, so measuring it on the screen will not help. You work it out from the numbers. Length × breadth = area, so 6 × ? = 24.
+
+Now <Beat n={2}>think in rows of 6 squares</Beat>. One row along the length holds 6 <Term id="square-centimetre">square centimetres</Term>. How many rows are needed to cover 24? Count in sixes: 6, 12, 18, 24. That is 4 rows. As a division, 24 ÷ 6 = 4, so the breadth is 4 cm. Check it: 6 × 4 = 24.
+
+Next comes <Beat n={3}>a rectangle with a perimeter of 20 cm</Beat>. Its length is again 6 cm. The perimeter goes all the way round: length, breadth, length, breadth. Half the way round is one length and one breadth. So 20 ÷ 2 = 10 cm is the length and the breadth together.
+
+The last move is to <Beat n={4}>take the length away from that half</Beat>. 10 − 6 = 4, so the breadth is 4 cm. Check it by going round: 6 + 4 + 6 + 4 = 20 cm.
+
+A common mistake with the perimeter is to work out 20 − 6 = 14 and call that the breadth. But 20 − 6 takes away only one length. What is left, 14 cm, is the other three sides together: a breadth, a length and another breadth. Halve the perimeter first, then take away the length.
+
+When you are ready, <Task id="missing-side">try one question</Task> on finding the missing side of a rectangle.
+
+</Lang>
+
+<Lang zh>
+
+前面几步，你用<Term id="rectangle">长方形</Term>的<Term id="length-breadth">长和宽</Term>求出了面积和周长。这一步再往前一步：答案已经知道了，也知道一条边，要倒过来求另一条边。
+
+先看<Beat n={1}>面积是 24 cm² 的长方形</Beat>。它长 6 cm，宽的地方画着一个问号。这张图<Term id="not-to-scale">未按比例画</Term>，在屏幕上量是量不出来的，要用标出的数来算。长 × 宽 = 面积，所以 6 × ? = 24。题目给了面积，问的是一条边，正好和前面几步反过来。
+
+现在<Beat n={2}>按每行 6 个正方形来想</Beat>。每一行都沿着长铺，铺一行是 6 个 1 <Term id="square-centimetre">平方厘米</Term>的小正方形。要铺几行，才能铺满 24 个？六个六个地数：6、12、18、24，一共 4 行。每多铺一行，就多 6 个正方形。写成除法就是 24 ÷ 6 = 4，所以宽是 4 cm。验算一下：6 × 4 = 24。
+
+再看<Beat n={3}>周长是 20 cm 的长方形</Beat>，它的长也是 6 cm。周长要绕一整圈：长、宽、长、宽。一个长方形有两条长、两条宽，长和宽在一圈里各走两次。只走半圈，正好是一条长加一条宽。所以 20 ÷ 2 = 10 cm，就是长和宽合起来的长度。
+
+最后<Beat n={4}>从这半圈里减去长</Beat>：10 − 6 = 4，宽是 4 cm。再绕一整圈验算：6 + 4 + 6 + 4 = 20 cm，没有问题。
+
+已知周长的时候，常见的错误是直接算 20 − 6 = 14，把 14 当成宽。可是 20 − 6 只减去了一条长，剩下的 14 cm 是另外三条边加在一起：一条宽、一条长，再加一条宽。所以要先把周长除以 2，得到一条长加一条宽，再减去长。已知面积的时候，就想一想要铺几行。
+
+准备好了，就<Task id="missing-side">做一道小题</Task>：求出长方形缺的那条边。
+
+</Lang>

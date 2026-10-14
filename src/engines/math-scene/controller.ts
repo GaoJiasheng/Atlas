@@ -19,6 +19,7 @@ import { initialState, inputSpecOf, phasesOf, type Action, type TaskState } from
 import { beatCount, beatSlot, findTask, locate, type BeatSlot, type Place } from './lib/lesson';
 import { drawIndex, pageSeed } from './lib/pool';
 import { formatFrac, lcm } from './lib/fraction';
+import { isUnit, unitText } from './lib/value';
 
 export interface Current {
   chapter: string | null;
@@ -72,8 +73,23 @@ function describe(task: Task, action: Action, s: TaskState): string {
     case 'input': {
       const spec = inputSpecOf(task);
       const v = spec ? readInput(spec, s.input) : null;
-      return v ? `WRITE ${v.map(formatFrac).join(' · ')}` : 'WRITE …';
+      const unit = spec?.form === 'measure' && isUnit(s.input.u) ? ` ${unitText(s.input.u, 'en', 2).toLocaleUpperCase('en')}` : '';
+      return v ? `WRITE ${v.map(formatFrac).join(' · ')}${unit}` : 'WRITE …';
     }
+    case 'tile':
+    case 'row':
+    case 'rows':
+      return `LAY ${s.tiles.length}`;
+    case 'edge':
+      return `TRACE ${s.edges.length}`;
+    case 'clear':
+      return 'CLEAR';
+    case 'walk':
+      return s.walked ? `WALK ${s.edges.length}` : `TRACE ${s.edges.length}`;
+    case 'rect':
+      return s.rect ? `DRAW ${s.rect[0]} × ${s.rect[1]}` : 'DRAW';
+    case 'gridcut':
+      return s.cut ? `CUT ${s.cut.toUpperCase()}` : 'CUT';
     case 'check':
       return 'CHECK';
   }
@@ -106,6 +122,14 @@ export function answerLabel(task: Task, s: TaskState): string {
       return describe(task, { do: 'choose', id: '' }, s);
     case 'input':
       return describe(task, { do: 'input', field: '', value: '' }, s);
+    case 'count-squares':
+      return describe(task, { do: 'rows', count: 0 }, s);
+    case 'trace-perimeter':
+      return describe(task, { do: 'edge', key: '' }, s);
+    case 'draw-rectangle':
+      return describe(task, { do: 'rect', w: 0, h: 0 }, s);
+    case 'split-figure':
+      return describe(task, { do: 'gridcut', cut: null }, s);
   }
 }
 
