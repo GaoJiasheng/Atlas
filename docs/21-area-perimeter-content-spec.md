@@ -24,6 +24,15 @@ docs/17 §6 #4。2026-10-13 起草，**只做规划，不施工、不建目录�
 
 ---
 
+### 0.1 定稿（2026-10-14，主会话按 Gavin 惯例代定）
+
+1. 开工：面积与周长是下一批里第一个建的主题。
+2. 步 08–11（P4：缺边、正方形边长、拼合图形）标为"再进一步"，不是主线；主线 = 步 01–07（P3）。
+3. 术语按新加坡课本：length / breadth（不用 width），中文"长 / 宽"；单位 cm²、m²、cm、m；公式只在步 06 之后出现，之前靠数格子。
+4. 界面不显示年级（含分数主题的"Bridge · P4"芯片与"Syllabus P3 1.3"行，一并撤掉；课纲锚点留在数据里）。
+5. 图：首页图版（铺砖地板）与两张配图（菜园围栏、组屋平面）已入库（`public/illustrations/area-perimeter.webp`、`figures/area-perimeter-garden-fence.webp`、`figures/area-perimeter-hdb-floor-plan.webp`）；再要图走 Codex、主会话审。
+6. 引擎：共享工作 G1–G12 只做本主题用到的部分（整数与带单位的度量值、答题框、按步数值范围校验、新转场），其余留给乘除 / 时间；A4 方格模型与 `count-squares` / `trace-perimeter` / `draw-rectangle` / `split-figure` 四种题型全部做。
+
 ## 1. 范围与课纲对照
 
 ### 1.1 课纲原文（S1，逐字）
