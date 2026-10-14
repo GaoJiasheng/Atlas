@@ -1,0 +1,117 @@
+---
+id: leaves-make-food
+order: 4
+title: { en: "Leaves make food", zh: 叶子造食物 }
+sensitive: false
+state:
+  view: assembled
+  run: true
+  cutaway: none
+  layers: [roots, stem, leaves, flowers-fruit, close-ups, photosynthesis]
+  hide: [stem-section, root-tip, flower-section, ovules, pollen-grains]
+  labels: ["group:leaves", leaves-upper, main-stem]
+  camera: { position: [1.166, 1.583, 2.531], target: [-0.1, 0.95, 0.0], fov: 30 }
+  summary: { en: "With light, water and carbon dioxide, the green parts of leaves make sugar and give out oxygen.", zh: "叶子的绿色部分利用光、水和二氧化碳制造糖，并放出氧。" }
+  beats:
+    - labels: ["group:leaves", leaves-upper]
+      camera: { position: [1.166, 1.583, 2.531], target: [-0.1, 0.95, 0.0], fov: 30 }
+      caption: { en: "Orange dots are light, here from a lamp; outdoors it comes from the Sun. The light falls on the green leaves, where the plant's food is made.", zh: "橙色的点是光，这里来自一盏灯，在室外则来自太阳。光照在绿色的叶子上，植物的食物就在这里制造。" }
+    - run: false
+      labels: [leaf-section, leaf-vein-section, stoma]
+      camera: { position: [0.963, 0.501, 0.781], target: [0.7, 0.06, -0.27], fov: 28 }
+      caption: { en: "A block cut from a leaf, drawn about two hundred times larger. Under the thin skin are column-shaped cells, then loosely packed cells with air spaces; both are green with chlorophyll.", zh: "从叶子上切下的一小块，放大约 200 倍。薄薄的表皮下面是一排柱子形的细胞，再下面是排得松散、中间有空隙的细胞，它们都含绿色的叶绿素。" }
+    - labels: [stoma, leaf-section, leaf-vein-section]
+      camera: { position: [0.963, 0.501, 0.781], target: [0.7, 0.06, -0.27], fov: 28 }
+      caption: { en: "Grey dots are carbon dioxide, coming in through a tiny opening underneath. Blue dots are water, arriving through the vein. In the green cells they become sugar, ochre-green, and oxygen, pale blue-green.", zh: "灰色的点是二氧化碳，从叶背的小孔进来；蓝色的点是水，从叶脉送来。在绿色的细胞里，它们变成糖（赭绿色）和氧（浅青色）。" }
+    - layers: [roots, stem, leaves, flowers-fruit, close-ups, photosynthesis, vapour]
+      labels: [stoma, leaf-section]
+      camera: { position: [0.963, 0.501, 0.781], target: [0.7, 0.06, -0.27], fov: 28 }
+      caption: { en: "Beige dots are water vapour leaving through the same openings. Most of the water a plant takes in escapes this way; only a small part is used to make food.", zh: "米色的点是水蒸气，也从这些小孔出去。植物吸进的水，大部分这样散失掉，只有一小部分用来造食物。" }
+    - run: false
+      pose: stomata-closed
+      labels: [stoma, leaf-section]
+      camera: { position: [0.963, 0.501, 0.781], target: [0.7, 0.06, -0.27], fov: 28 }
+      caption: { en: "At night there is no light, so no sugar is made and most of the tiny openings close. The plant still respires, day and night, using sugar to release energy.", zh: "夜里没有光，就不再造糖，大多数小孔也关上了。但植物日夜都在呼吸，分解糖来释放能量。" }
+    - run: false
+      labels: [leaves-lower, main-stem]
+      camera: { position: [0.371, 1.047, 2.089], target: [-0.36, 0.42, 0.0], fov: 30 }
+      caption: { en: "A fair test of light: two plants alike in every way, one left in the light and one under a cardboard box. Only the light is changed; then their colour and height are compared.", zh: "关于光的公平测试：两株一样的植物，一株放在光下，一株用纸箱罩住。只改变光，其他都不变，然后比较它们的颜色和高度。" }
+  index:
+    parts: [leaves-lower, leaves-upper, leaf-section, leaf-vein-section, stoma, stem-food-tubes]
+---
+
+<Lang en>
+
+Leaves make the plant's food. In the green parts of a plant, light energy is used to turn water and carbon dioxide into sugar, and oxygen is given out. This is <Term id="photosynthesis">photosynthesis</Term>. The green colour comes from <Term id="chlorophyll">chlorophyll</Term>, which takes in the light. On a Singapore morning at about 10 o'clock, sunlight brings about <Num s="S1,S23">500 W/m²</Num> to the leaves; in this simulation a lamp stands in for the Sun.
+
+The bench shows a block cut from a leaf, drawn about <Num s="S1">250</Num> times larger. Under a thin skin are tall cells packed side by side, then loosely packed cells with air spaces between them. Both are full of chlorophyll. Carbon dioxide from the air comes in through tiny openings on the underside of the leaf and spreads through the air spaces. Water arrives through the veins. <FlyTo preset="leaf-bench">Look inside a leaf</FlyTo>
+
+The sugar travels out of the leaf in the food-carrying tubes. Some is used at once, some is stored as starch, and some goes to the roots, flowers and fruit. Oxygen leaves through the tiny openings, and so does water vapour.
+
+At night there is no light, so no sugar is made, and most of the openings close. The plant still respires, by day and by night, using sugar to release the energy it needs to live and grow. The Sun is the source of the energy stored in that sugar, and through food it is the main source of energy for animals and people too.
+
+<Figure src="figures/plant-light-fair-test" alt={{ en: "Pencil drawing of two potted seedlings on a windowsill, one in the light, green and upright, the other under an upturned cardboard box drawn cut away, pale and thin, with a ruler between them.", zh: "铅笔画：窗台上两盆幼苗，一盆在光下，绿而挺直；另一盆罩在倒扣的纸箱里（纸箱画成剖开的），苍白细弱；两盆之间立着一把尺。" }} caption={{ en: "A fair test of light: only the light is changed. Illustration for this topic, not a record of a real experiment.", zh: "关于光的公平测试：只改变光。为本主题画的示意图，不是真实实验的记录。" }} />
+
+<More title={{ en: "Where the water goes", zh: "水去了哪里" }}>
+
+Only a small part of the water a plant takes in is used to make food. Most escapes as water vapour through the openings: up to <Num s="S5">90 %</Num> according to one textbook, up to <Num s="S9">99 %</Num> according to another. In this simulation about <Num s="S1">40 mL</Num> of water rises up the stem in an hour on a bright morning, against about <Num s="S1">2 mL</Num> at night; that is an estimate based on how much potted peppers were watered in one study, not a measurement of this plant.
+
+</More>
+
+<More title={{ en: "Tiny openings have a name", zh: "叶上的小孔有名字" }}>
+
+Scientists call the tiny openings <Term id="stomata">stomata</Term>. Each lies between two bean-shaped guard cells, which open it in light and close it at night. On most leaves the openings are mainly on the underside. The primary syllabus does not ask for the word.
+
+</More>
+
+<More title={{ en: "The starch test", zh: "淀粉检验" }}>
+
+Iodine solution turns blue-black where there is starch, so it can show where a leaf has made food. The leaf must first be boiled and then soaked in hot ethanol, which catches fire easily, so this test is done only in a laboratory with a teacher, never at home.
+
+</More>
+
+<More title={{ en: "Try it: a fair test with light", zh: "试一试：关于光的公平测试" }}>
+
+Take two seedlings of the same kind and size, in the same pots and soil. Put one by a bright window and cover the other with a cardboard box. Water both the same. After a week, compare their colour and measure their height. What did you change? What did you keep the same? What did you measure?
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+叶子为植物制造食物。在植物的绿色部分里，光能把水和二氧化碳变成糖，同时放出氧。这就是<Term id="photosynthesis">光合作用</Term>。绿色来自<Term id="chlorophyll">叶绿素</Term>，叶绿素吸收光。在新加坡上午 10 点左右，阳光照到叶子上大约是 <Num s="S1,S23">500 W/m²</Num>；在这个模拟里，用一盏灯代替太阳。
+
+台上是从叶子上切下的一小块，放大约 <Num s="S1">250</Num> 倍。薄薄的表皮下面，是一排紧挨着的高高的细胞，再下面是排得松散、中间有空隙的细胞，它们都含有很多叶绿素。空气里的二氧化碳从叶背的小孔进来，在空隙里散开；水则由叶脉送来。<FlyTo preset="leaf-bench">看看叶子的里面</FlyTo>
+
+造出来的糖经输食管离开叶子：一部分马上用掉，一部分变成淀粉储存起来，还有一部分送到根、花和果实。氧从小孔出去，水蒸气也从小孔出去。
+
+夜里没有光，就不再造糖，大多数小孔也关上了。但植物白天和夜里都在呼吸，分解糖来释放生长和生活所需的能量。糖里储存的能量来自太阳；通过食物，太阳也是动物和人的主要能量来源。
+
+<Figure src="figures/plant-light-fair-test" alt={{ en: "Pencil drawing of two potted seedlings on a windowsill, one in the light, green and upright, the other under an upturned cardboard box drawn cut away, pale and thin, with a ruler between them.", zh: "铅笔画：窗台上两盆幼苗，一盆在光下，绿而挺直；另一盆罩在倒扣的纸箱里（纸箱画成剖开的），苍白细弱；两盆之间立着一把尺。" }} caption={{ en: "A fair test of light: only the light is changed. Illustration for this topic, not a record of a real experiment.", zh: "关于光的公平测试：只改变光。为本主题画的示意图，不是真实实验的记录。" }} />
+
+<More title={{ en: "Where the water goes", zh: "水去了哪里" }}>
+
+植物吸进的水，只有一小部分用来造食物，大部分变成水蒸气从小孔散失：一本教科书说最多 <Num s="S5">90 %</Num>，另一份资料说最多 <Num s="S9">99 %</Num>。在这个模拟里，晴朗的上午每小时约有 <Num s="S1">40 毫升</Num>水沿茎上升，夜里约 <Num s="S1">2 毫升</Num>；这是根据一项研究里盆栽甜椒的浇水量估计的，不是这株植物的实测值。
+
+</More>
+
+<More title={{ en: "Tiny openings have a name", zh: "叶上的小孔有名字" }}>
+
+科学家把叶上的小孔叫作<Term id="stomata">气孔</Term>。每个小孔夹在两个豆子形的保卫细胞之间，保卫细胞在有光时把它打开、夜里关上。多数叶子的小孔主要在叶背。小学课纲不要求使用这个词。
+
+</More>
+
+<More title={{ en: "The starch test", zh: "淀粉检验" }}>
+
+碘液遇到淀粉会变成蓝黑色，所以可以用来看叶子哪里造了食物。检验前要先把叶子放进沸水里烫，再浸到热酒精里，而酒精很容易着火，所以这个实验只能在实验室里由老师带着做，不能在家里做。
+
+</More>
+
+<More title={{ en: "Try it: a fair test with light", zh: "试一试：关于光的公平测试" }}>
+
+找两株同种、同样大小的幼苗，种在同样的盆和土里。一株放在明亮的窗边，另一株用纸箱罩住，两株浇一样多的水。一周以后，比较它们的颜色，量一量高度。你改变了什么？哪些保持不变？你量了什么？
+
+</More>
+
+</Lang>

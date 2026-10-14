@@ -1,0 +1,21 @@
+# A potted chilli plant (SpaceScene). Spec: docs/26-plant-content-spec.md.
+id: plant
+title: { en: "A Plant", zh: "一株植物" }
+subtitle: { en: "A potted chilli, Capsicum annuum, from root to seed", zh: "一盆辣椒：从根到种子" }
+subject: biology
+tags: [singapore, plants]
+moe:
+  - "MOE 2023 Science P3 Cycles: life cycles of flowering plants (seed, young plant, adult plant)"
+  - "MOE 2023 Science P4 Systems: plant parts and their functions (leaf, stem, root)"
+  - "MOE 2023 Science P5 Systems: the plant transport system (water-carrying and food-carrying tubes)"
+  - "MOE 2023 Science P5 Cycles: reproduction in flowering plants (pollination, fertilisation, seed dispersal, germination)"
+  - "MOE 2023 Science P6 Energy: photosynthesis; P6 Interactions: adaptations for seed dispersal"
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: draft
+illustration: plant
+shortTitle: { en: "Chilli plant", zh: "辣椒" }
+note: { en: "Model study · a chilli plant (Capsicum annuum) · close-ups magnified as marked, cells schematic", zh: "模型研究 · 一株辣椒 · 放大标本另注倍数，细胞为示意" }

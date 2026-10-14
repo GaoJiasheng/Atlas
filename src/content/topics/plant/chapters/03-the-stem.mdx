@@ -1,0 +1,104 @@
+---
+id: the-stem
+order: 3
+title: { en: "The stem carries water and food", zh: "茎：支撑与运输" }
+sensitive: false
+state:
+  view: xray
+  run: false
+  cutaway: none
+  layers: [roots, stem, leaves, flowers-fruit, close-ups, transport, sugar]
+  hide: [leaf-section, leaf-vein-section, stoma, root-tip, flower-section, ovules, pollen-grains, dry-pot]
+  labels: [main-stem, stem-water-tubes, stem-food-tubes]
+  camera: { position: [0.489, 0.9, 1.086], target: [0.0, 0.52, 0.0], fov: 28 }
+  summary: { en: "Inside the stem, water-carrying tubes take water up and food-carrying tubes take sugar to the rest of the plant.", zh: "茎里面，输水管把水往上送，输食管把糖送到植物各处。" }
+  beats:
+    - labels: [main-stem, stem-water-tubes, stem-food-tubes]
+      camera: { position: [0.489, 0.9, 1.086], target: [0.0, 0.52, 0.0], fov: 28 }
+      caption: { en: "With the stem made see-through, two kinds of tube show inside: thicker water-carrying tubes and thinner food-carrying tubes, running the whole length of the stem.", zh: "把茎变成透明，里面有两种管：粗一些的输水管和细一些的输食管，贯穿整根茎。" }
+    - view: assembled
+      cutaway: stem-cross
+      labels: [main-stem, stem-section]
+      camera: { position: [0.744, 1.477, 1.068], target: [0.45, 0.3, -0.05], fov: 30 }
+      caption: { en: "Cut across, the stem shows its tubes in bundles arranged in a ring. On the bench is the same slice drawn eight times larger: blue-grey water tubes inside, ochre food tubes outside.", zh: "横着切开，茎里的管子成束排成一圈。台上是放大 8 倍的同一个切面：蓝灰色的输水管在内侧，赭黄色的输食管在外侧。" }
+    - run: true
+      layers: [roots, stem, leaves, flowers-fruit, close-ups, transport]
+      labels: [stem-water-tubes, petioles, leaves-lower]
+      camera: { position: [0.97, 1.313, 2.31], target: [0.0, 0.62, 0.0], fov: 30 }
+      caption: { en: "Blue dots are water. It travels only upwards: from the roots, through the water-carrying tubes in the stem and the leaf stalks, out to the leaves.", zh: "蓝色的点是水。水只向上走：从根出发，经过茎和叶柄里的输水管，一直送到叶子。" }
+    - run: true
+      labels: [stem-food-tubes, fruit-green, taproot]
+      camera: { position: [0.97, 1.313, 2.31], target: [0.0, 0.62, 0.0], fov: 30 }
+      caption: { en: "Ochre-green dots are sugar made in the leaves. The food-carrying tubes take it both ways: down to the roots and along the branches to the growing fruit.", zh: "赭绿色的点是叶子造的糖。输食管把糖往两个方向送：向下送到根，沿着枝条送到正在长大的果实。" }
+    - run: false
+      labels: [stem-water-tubes, stem-food-tubes]
+      highlight: { signal: [stem-water-tubes] }
+      camera: { position: [0.489, 0.9, 1.086], target: [0.0, 0.52, 0.0], fov: 28 }
+      caption: { en: "Stand a cut leafy stem in coloured water, and after some hours only the water-carrying tubes are stained. In the model the orange tint stands for the colour.", zh: "把一段带叶的枝条插进有颜色的水里，几个小时以后，只有输水管被染了色。模型里用橙色代表这种颜色。" }
+  index:
+    parts: [main-stem, stem-water-tubes, stem-food-tubes, stem-section, petioles, fruit-green]
+---
+
+<Lang en>
+
+The stem holds the plant up: it lifts the leaves to the light and carries the flowers and fruit. In the model it is about <Num s="S1">1.3 cm</Num> thick at the base. Made see-through, it shows what else it does: inside run two kinds of tube, from the roots all the way to the leaves. <FlyTo preset="stem-close">Look inside the stem</FlyTo>
+
+The <Term id="water-carrying-tubes">water-carrying tubes</Term> take water and mineral salts from the roots up to the leaves, flowers and fruit. Water travels in them only upwards. The <Term id="food-carrying-tubes">food-carrying tubes</Term> take the sugar made in the leaves to every part that needs it: down to the roots, and up and out to new shoots, flowers and growing fruit. So sugar can travel both ways.
+
+Cut across the stem and the tubes show as bundles arranged in a ring. On the bench is the same slice drawn <Num s="S1">8</Num> times larger, with the water-carrying tubes coloured blue-grey and the food-carrying tubes ochre. You do not need to remember which lies where; what matters is what each kind carries.
+
+The two kinds of tube do not stop at the stem. They run on through every leaf stalk into the veins of each leaf, and down through the main root into the side roots and fine roots, so every living part of the plant is joined to both. Together they make up the plant's transport system, much as blood vessels carry food and oxygen round the human body.
+
+<Figure src="figures/plant-stem-dye" alt={{ en: "Pencil drawing of a leafy stem standing in a beaker of dark coloured water, and beside it the same stem cut across, its cut face showing a ring of small dark dots, with a knife and a hand lens on the bench.", zh: "铅笔画：一段带叶的枝条插在装着深色水的烧杯里；旁边是同一段枝条的横切面，切面上有一圈深色小点；桌上放着小刀和放大镜。" }} caption={{ en: "The coloured-water test. After some hours the cut face shows a ring of stained dots: the water-carrying tubes. Illustration for this topic.", zh: "有色水实验。几个小时以后，横切面上出现一圈被染色的小点，那就是输水管。为本主题画的示意图。" }} />
+
+<More title={{ en: "The tubes have names", zh: "这两种管有名字" }}>
+
+Scientists call the water-carrying tubes <Term id="xylem">xylem</Term> and the food-carrying tubes <Term id="phloem">phloem</Term>. Xylem tubes are made of cells that are dead and hollow when they work; phloem is made of living cells joined end to end. The primary syllabus does not ask for these words.
+
+</More>
+
+<More title={{ en: "Ring-barking", zh: "环剥树皮" }}>
+
+The food-carrying tubes lie close under the bark. If a ring of bark is cut away all round a tree trunk, sugar from the leaves can no longer reach the roots. In one study of young spruce trees, the mass of fine roots and the starch stored in the roots both fell after girdling.
+
+</More>
+
+<More title={{ en: "Try it: coloured water", zh: "试一试：有色水" }}>
+
+Stand a leafy stick of celery, or a white flower such as a white chrysanthemum, in water with food colouring. Stand another in plain water beside it. After half a day, ask an adult to cut both stems across, and count the coloured dots with a hand lens. What did you change? What did you keep the same?
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+茎把植物撑起来：它把叶子举向光，托着花和果实。模型里茎基部粗约 <Num s="S1">1.3 厘米</Num>。把它变成透明，就能看到茎的另一项工作：里面有两种管，从根一直通到叶子。<FlyTo preset="stem-close">看看茎的里面</FlyTo>
+
+<Term id="water-carrying-tubes">输水管</Term>把水和矿物盐从根往上送到叶、花和果实，水在里面只向上走。<Term id="food-carrying-tubes">输食管</Term>把叶子造的糖送到需要它的每个部分：向下送到根，也向上、向外送到新芽、花和正在长大的果实。所以糖可以往两个方向走。
+
+把茎横着切开，可以看到管子成束地排成一圈。台上是同一个切面放大 <Num s="S1">8</Num> 倍的样子：输水管画成蓝灰色，输食管画成赭黄色。不必记住哪种管在里、哪种在外，重要的是每种管运送什么。
+
+这两种管并不只在茎里。它们穿过每一根叶柄，一直通到叶子的叶脉里；向下经过主根，通到侧根和细根。所以植物每一个活着的部分都和这两种管连在一起。它们共同组成植物的运输系统，就像人体的血管把养分和氧送到全身一样。
+
+<Figure src="figures/plant-stem-dye" alt={{ en: "Pencil drawing of a leafy stem standing in a beaker of dark coloured water, and beside it the same stem cut across, its cut face showing a ring of small dark dots, with a knife and a hand lens on the bench.", zh: "铅笔画：一段带叶的枝条插在装着深色水的烧杯里；旁边是同一段枝条的横切面，切面上有一圈深色小点；桌上放着小刀和放大镜。" }} caption={{ en: "The coloured-water test. After some hours the cut face shows a ring of stained dots: the water-carrying tubes. Illustration for this topic.", zh: "有色水实验。几个小时以后，横切面上出现一圈被染色的小点，那就是输水管。为本主题画的示意图。" }} />
+
+<More title={{ en: "The tubes have names", zh: "这两种管有名字" }}>
+
+科学家把输水管叫作<Term id="xylem">木质部</Term>，把输食管叫作<Term id="phloem">韧皮部</Term>。木质部的管由工作时已经死去、中空的细胞组成；韧皮部由首尾相连的活细胞组成。小学课纲不要求使用这两个词。
+
+</More>
+
+<More title={{ en: "Ring-barking", zh: "环剥树皮" }}>
+
+输食管紧贴在树皮下面。如果把树干的树皮环剥一圈，叶子造的糖就送不到根了。一项对云杉幼树的研究发现，环剥以后，细根的量和根里储存的淀粉都减少了。
+
+</More>
+
+<More title={{ en: "Try it: coloured water", zh: "试一试：有色水" }}>
+
+把一根带叶的芹菜，或者一朵白花（比如白菊花），插进加了食用色素的水里；旁边另插一根在清水里。半天以后，请大人把两根茎都横着切开，用放大镜数一数有颜色的小点。你改变了什么？哪些保持不变？
+
+</More>
+
+</Lang>

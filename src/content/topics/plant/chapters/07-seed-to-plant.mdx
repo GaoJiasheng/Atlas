@@ -1,0 +1,104 @@
+---
+id: seed-to-plant
+order: 7
+title: { en: "From seed to plant", zh: 从种子到植物 }
+sensitive: false
+state:
+  view: assembled
+  run: true
+  cutaway: none
+  layers: [growth, roots, stem, leaves, flowers-fruit]
+  labels: [bean-seed, bean-sprouting, bean-seedling, chilli-seedling]
+  camera: { position: [0.125, 0.559, 1.768], target: [0.0, 0.06, 0.52], fov: 30 }
+  summary: { en: "A seed needs water, air and warmth to germinate; it grows into a young plant and then an adult plant that flowers.", zh: "种子要有水、空气和适宜的温度才能萌发，长成幼苗，再长成能开花的成株。" }
+  beats:
+    - layers: [growth]
+      hide: [pot, soil]
+      labels: [bean-seed]
+      camera: { position: [-0.071, 0.48, 1.592], target: [-0.2, 0.03, 0.52], fov: 26 }
+      caption: { en: "This is a green bean seed, not a chilli seed, split open and drawn ten times life size: a seed coat, two seed leaves full of stored food, and a tiny plant.", zh: "这是一粒绿豆，不是辣椒籽，剖开并放大 10 倍：外面是种皮，里面是储满养分的两片子叶和一个小小的胚。" }
+    - layers: [growth]
+      hide: [pot, soil]
+      labels: [bean-sprouting, bean-seed]
+      camera: { position: [-0.071, 0.48, 1.592], target: [-0.2, 0.03, 0.52], fov: 26 }
+      caption: { en: "Given water, air and warmth, the seed swells, its coat splits and the root comes out first, growing downwards.", zh: "有了水、空气和适宜的温度，种子吸水胀大，种皮裂开，胚根先长出来，向下生长。" }
+    - layers: [growth]
+      hide: [pot, soil]
+      labels: [bean-seedling]
+      camera: { position: [0.333, 0.424, 1.627], target: [0.2, 0.07, 0.52], fov: 26 }
+      caption: { en: "The young shoot lifts the seed leaves above the soil. Their stored food feeds the seedling until its first true leaves can make food.", zh: "幼茎把子叶举出土面。子叶里储存的养分供幼苗生长，直到第一对真叶能自己造食物。" }
+    - layers: [growth]
+      hide: [pot, soil]
+      labels: [chilli-seedling, bean-seedling]
+      camera: { position: [0.333, 0.424, 1.627], target: [0.2, 0.07, 0.52], fov: 26 }
+      caption: { en: "A chilli seedling, a young plant, with two narrow seed leaves and its first true leaves.", zh: "辣椒的幼苗，也就是幼株：两片窄窄的子叶，加上第一对真叶。" }
+    - labels: [flower, fruit-red, main-stem]
+      camera: { position: [0.995, 1.45, 2.565], target: [0.02, 0.68, 0.0], fov: 30 }
+      caption: { en: "About three to four months after sowing, the chilli is an adult plant that flowers and bears fruit, and every fruit holds new seeds.", zh: "播种后大约三到四个月，辣椒长成成株，开花结果，每个果实里又有了新的种子。" }
+  index:
+    parts: [bean-seed, bean-sprouting, bean-seedling, chilli-seedling, flower, fruit-red]
+---
+
+<Lang en>
+
+A flowering plant's life goes in a cycle: seed, young plant, adult plant, and back to seed. The tray in front of the pot shows the first steps with a green bean (mung bean) seed, not a chilli seed, because a bean's large seed leaves are easy to see; a chilli seed is flat and only <Num s="S10">3–5 mm</Num> across. <FlyTo preset="tray">Look at the tray</FlyTo>
+
+Split open, the bean seed shows a seed coat, two thick seed leaves full of stored food, and a tiny plant with a root tip and a shoot tip. <Term id="germination">Germination</Term> starts when the seed has water, air and a suitable temperature. The seed takes in water and swells, the coat splits, and the root comes out first, growing down. Then the shoot lifts the seed leaves above the soil. Their stored food keeps the seedling growing until its first true leaves can make food by photosynthesis.
+
+Chilli seeds take longer. Kept in warm soil, they come up in about <Num s="S22">8 days</Num> at <Num s="S22">25 °C</Num>, and in about <Num s="S22">12.5 days</Num> at <Num s="S22">20 °C</Num>; NParks gives <Num s="S12">6 to 21 days</Num>. The seedling has two narrow seed leaves, then true leaves shaped like the adult's.
+
+The young plant grows into an adult plant that flowers. From sowing to the first ripe fruit takes about <Num s="S12">88 to 125 days</Num>, or about <Num s="S13">3 to 4 months</Num>. Every fruit holds new seeds, and the cycle can begin again.
+
+<Figure src="figures/plant-germinating-bean" alt={{ en: "Pencil drawing of five green bean seeds on damp cotton wool, from left to right: a dry seed, a swollen seed with its coat splitting, a seed with a short white root, a seedling with a hooked shoot, and a seedling standing up with two seed leaves and two small true leaves.", zh: "铅笔画：湿棉花上的五粒绿豆，从左到右：一粒干种子、一粒种皮正在裂开的胀大种子、一粒长出白色短根的种子、一株幼茎弯成钩状的幼苗，以及一株直立、带两片子叶和两片小真叶的幼苗。" }} caption={{ en: "A green bean germinating, step by step. Illustration for this topic; not to scale and not timed.", zh: "一粒绿豆一步步萌发。为本主题画的示意图，不按比例，也不对应具体天数。" }} />
+
+<More title={{ en: "Light is not needed to germinate", zh: "萌发不需要光" }}>
+
+Many seeds germinate in the dark. Bean sprouts are grown in the dark, in about <Num s="S21">3 to 7 days</Num>. A few kinds of seed need light to germinate and a few germinate better without it. A seedling does need light as soon as its leaves must make food.
+
+</More>
+
+<More title={{ en: "A green bean is not a chilli", zh: "绿豆不是辣椒" }}>
+
+The tray mixes two plants on purpose. The seed, the sprouting seed and the first seedling are a green bean; the last seedling is a chilli. A chilli seed is small and its seed leaves are thin and folded, so the bean shows the parts more clearly.
+
+</More>
+
+<More title={{ en: "Try it: a fair test with seeds", zh: "试一试：关于种子的公平测试" }}>
+
+Put five green bean seeds in each of four cups: on damp cotton wool; on dry cotton wool; on damp cotton wool in the fridge; and fully under water that was boiled and cooled, which has little air. Keep everything else the same. After three days, count how many seeds have germinated in each cup and fill in a table. Which condition did each cup change?
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+开花植物的一生是一个循环：种子、幼株、成株，再回到种子。花盆前面的托盘用一粒绿豆（不是辣椒籽）来展示最初几步，因为绿豆的子叶大，容易看清；辣椒籽扁平，只有 <Num s="S10">3–5 毫米</Num>宽。<FlyTo preset="tray">看看托盘</FlyTo>
+
+剖开绿豆，可以看到种皮、两片储满养分的厚厚的子叶，以及一个带着胚根和胚芽的小小的胚。种子有了水、空气和适宜的温度，就开始<Term id="germination">萌发</Term>：先吸水胀大，种皮裂开，胚根最先长出来，向下生长；然后幼茎把子叶举出土面。子叶里储存的养分供幼苗生长，直到第一对真叶能靠光合作用自己造食物。
+
+辣椒种子出苗慢一些。在温暖的土里，<Num s="S22">25℃</Num> 时约 <Num s="S22">8 天</Num>，<Num s="S22">20℃</Num> 时约 <Num s="S22">12.5 天</Num>；NParks 给出的是 <Num s="S12">6 到 21 天</Num>。辣椒幼苗先有两片窄窄的子叶，接着长出形状和成株相似的真叶。
+
+幼株长成能开花的成株。从播种到第一次采收成熟的果实，大约要 <Num s="S12">88 到 125 天</Num>，也就是约 <Num s="S13">3 到 4 个月</Num>。每个果实里又有新的种子，循环可以重新开始。
+
+<Figure src="figures/plant-germinating-bean" alt={{ en: "Pencil drawing of five green bean seeds on damp cotton wool, from left to right: a dry seed, a swollen seed with its coat splitting, a seed with a short white root, a seedling with a hooked shoot, and a seedling standing up with two seed leaves and two small true leaves.", zh: "铅笔画：湿棉花上的五粒绿豆，从左到右：一粒干种子、一粒种皮正在裂开的胀大种子、一粒长出白色短根的种子、一株幼茎弯成钩状的幼苗，以及一株直立、带两片子叶和两片小真叶的幼苗。" }} caption={{ en: "A green bean germinating, step by step. Illustration for this topic; not to scale and not timed.", zh: "一粒绿豆一步步萌发。为本主题画的示意图，不按比例，也不对应具体天数。" }} />
+
+<More title={{ en: "Light is not needed to germinate", zh: "萌发不需要光" }}>
+
+很多种子在黑暗中也能萌发。豆芽就是在暗处培育的，大约 <Num s="S21">3 到 7 天</Num>就长成。少数种子要有光才萌发，也有少数在没有光时萌发得更好。不过，一旦幼苗的叶子要开始造食物，它就需要光了。
+
+</More>
+
+<More title={{ en: "A green bean is not a chilli", zh: "绿豆不是辣椒" }}>
+
+托盘里有意放了两种植物：种子、发芽的种子和第一株幼苗是绿豆，最后一株幼苗是辣椒。辣椒籽小，子叶又薄又卷着，所以用绿豆来看这些部分更清楚。
+
+</More>
+
+<More title={{ en: "Try it: a fair test with seeds", zh: "试一试：关于种子的公平测试" }}>
+
+准备四个杯子，每杯放 5 粒绿豆：一杯放在湿棉花上；一杯放在干棉花上；一杯放在湿棉花上、放进冰箱；一杯完全泡在煮沸后放凉的水里（这样的水里空气很少）。其他条件都保持一样。三天以后，数一数每杯里有几粒发芽，填进一张表。每个杯子改变的是哪个条件？
+
+</More>
+
+</Lang>

@@ -1,0 +1,100 @@
+---
+id: flowers-and-pollination
+order: 5
+title: { en: "Flowers, pollination and fertilisation", zh: "花、传粉与受精" }
+sensitive: false
+state:
+  view: assembled
+  run: false
+  cutaway: none
+  layers: [roots, stem, leaves, flowers-fruit, close-ups, pollination]
+  hide: [leaf-section, leaf-vein-section, stoma, stem-section, root-tip]
+  labels: [flower, sepals, bee]
+  camera: { position: [0.33, 1.16, 1.291], target: [0.0, 0.94, 0.19], fov: 26 }
+  summary: { en: "Pollen moves from anther to stigma; then a male cell joins a female cell in the ovule, and a seed begins.", zh: "花粉从花药落到柱头上；随后雄性生殖细胞与胚珠里的雌性生殖细胞融合，种子开始形成。" }
+  beats:
+    - labels: [flower, sepals, flower-bud]
+      camera: { position: [0.33, 1.16, 1.291], target: [0.0, 0.94, 0.19], fov: 26 }
+      caption: { en: "A chilli flower, white with five petals, hanging below a fork in the stem. Real ones are about one centimetre across; the model draws them a little larger. Green sepals held it closed as a bud.", zh: "一朵辣椒花，白色，5 片花瓣，垂在茎的分叉下面。真实的花宽约 1 厘米，模型画得稍大一些。还是花蕾时，绿色的花萼把它包住。" }
+    - pose: flower-open
+      labels: [flower-section, ovules]
+      camera: { position: [0.852, 0.851, 0.856], target: [0.66, 0.035, 0.04], fov: 26 }
+      caption: { en: "The same kind of flower cut in half lengthwise, drawn six times larger. In the middle is the pistil; at its base the ovary holds the ovules.", zh: "同样一朵花纵向剖开，放大 6 倍。中间是雌蕊，雌蕊基部的子房里有胚珠。" }
+    - pose: flower-open
+      labels: [pollen-grains, flower-section]
+      camera: { position: [0.932, 0.846, 0.886], target: [0.74, 0.03, 0.07], fov: 28 }
+      caption: { en: "Around the pistil stand the stamens. Their purple anthers make pollen; the grains are shown here greatly magnified. Each grain carries a male reproductive cell.", zh: "雄蕊围在雌蕊四周，紫色的花药产生花粉。这里的花粉粒放大了很多倍，每一粒都带着雄性生殖细胞。" }
+    - run: true
+      labels: [bee, stamens, pistil]
+      camera: { position: [0.33, 1.16, 1.291], target: [0.0, 0.94, 0.19], fov: 26 }
+      caption: { en: "Gold dots are pollen. A bee visiting one flower picks up pollen and carries it to the sticky top of another flower's pistil, the stigma. This is pollination.", zh: "金黄色的点是花粉。蜜蜂在一朵花上沾了花粉，带到另一朵花雌蕊顶端黏黏的柱头上。这就是传粉。" }
+    - labels: [fruit-green, fruit-red, pistil]
+      camera: { position: [0.498, 0.979, 1.195], target: [0.02, 0.8, 0.0], fov: 28 }
+      caption: { en: "After pollination, a male cell from the pollen joins a female cell in an ovule. That is fertilisation: the ovule becomes a seed and the ovary grows into a fruit.", zh: "传粉以后，花粉带来的雄性生殖细胞与胚珠里的雌性生殖细胞融合，这就是受精。之后胚珠发育成种子，子房长成果实。" }
+  index:
+    parts: [flower, sepals, stamens, pistil, flower-section, ovules, pollen-grains, bee, fruit-green]
+---
+
+<Lang en>
+
+The flower is the part of the plant that makes seeds. A chilli flower is white, about <Num s="S10">1 cm</Num> across, and usually hangs alone below a fork in the stem; the model draws its flowers a little larger so they can be seen. Green sepals wrapped it while it was a bud. <FlyTo preset="flower-close">Look at a flower</FlyTo>
+
+Cut in half, the flower shows its parts. Round the edge are the petals, usually <Num s="S11">5</Num>. Inside stand the <Term id="stamen">stamens</Term>, each a thin stalk carrying an anther; chilli anthers are purplish and about <Num s="S10">2 mm</Num> long, and they make pollen. In the centre is the <Term id="pistil">pistil</Term>: a sticky stigma on top, a slender style, and the ovary at the base. Inside the ovary are the <Term id="ovule">ovules</Term>, each with a female reproductive cell.
+
+<Term id="pollination">Pollination</Term> is the moving of pollen from an anther to a stigma. Bees visiting the flowers pick up pollen on their hairy bodies and leave some on the next stigma they touch. A chilli flower can also pollinate itself, but bee visits give more and better fruit. On the stage the gold dots are the pollen the bee carries.
+
+Then comes <Term id="fertilisation">fertilisation</Term>: a male reproductive cell from a pollen grain joins the female reproductive cell in an ovule. The fertilised ovule grows into a seed, and the ovary around it grows into a fruit, green at first.
+
+<Figure src="figures/plant-bee-on-flower" alt={{ en: "Pencil drawing of a honeybee on a small white five-petalled flower, its hairy body dusted with pollen and its legs touching the anthers, with a second flower nearby.", zh: "铅笔画：一只蜜蜂停在一朵白色五瓣小花上，毛茸茸的身体沾满花粉，腿碰着花药；旁边还有一朵花。" }} caption={{ en: "A bee carries pollen from flower to flower. Illustration for this topic; the flower is a generic one, not drawn from a chilli.", zh: "蜜蜂把花粉从一朵花带到另一朵。为本主题画的示意图，画的是一般的花，不是照辣椒花画的。" }} />
+
+<More title={{ en: "Chilli flowers can pollinate themselves", zh: "辣椒花能自己传粉" }}>
+
+Pollen from a chilli flower's own anthers can land on its own stigma, so a plant growing alone indoors can still set fruit. In a greenhouse study of sweet pepper, flowers visited by bees gave heavier fruit with more seeds than flowers left to pollinate themselves. NParks notes that chilli gives the most fruit when bees are around.
+
+</More>
+
+<More title={{ en: "Plants and people", zh: "植物和人" }}>
+
+Fertilisation is alike in flowering plants and in people: a male reproductive cell joins a female reproductive cell. In people, a sperm joins an egg, and the fertilised egg develops in the womb. The ovaries make the eggs and the testes make the sperms.
+
+</More>
+
+<More title={{ en: "Try it", zh: "试一试" }}>
+
+Look at a flower with a hand lens: a chilli flower, a hibiscus or a flower from the market. Find the anthers and the stigma. Touch an anther gently with a cotton bud and look at the dust it picks up: that is pollen.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+花是植物产生种子的部分。辣椒花白色，宽约 <Num s="S10">1 厘米</Num>，通常单独一朵垂在茎的分叉下面；为了看得清，模型把花画得稍大一些。还是花蕾时，绿色的花萼把它包住。<FlyTo preset="flower-close">看一朵花</FlyTo>
+
+把花剖开，就能看到它的各个部分。外圈是花瓣，通常 <Num s="S11">5</Num> 片。里面是<Term id="stamen">雄蕊</Term>，每枚雄蕊由细细的花丝托着一个花药；辣椒的花药带紫色，长约 <Num s="S10">2 毫米</Num>，花药产生花粉。正中间是<Term id="pistil">雌蕊</Term>：顶上是黏黏的柱头，中间是细长的花柱，基部是子房。子房里有<Term id="ovule">胚珠</Term>，每个胚珠里有一个雌性生殖细胞。
+
+<Term id="pollination">传粉</Term>就是花粉从花药落到柱头上。蜜蜂访花时，毛茸茸的身体沾上花粉，碰到下一朵花的柱头时，就留下一些。辣椒花也能自己传粉，但有蜜蜂来访，结的果更多、更好。在舞台上，金黄色的点就是蜜蜂带着的花粉。
+
+接着是<Term id="fertilisation">受精</Term>：花粉粒带来的雄性生殖细胞，与胚珠里的雌性生殖细胞融合。受精的胚珠长成种子，包着胚珠的子房长成果实，起初是绿色的。
+
+<Figure src="figures/plant-bee-on-flower" alt={{ en: "Pencil drawing of a honeybee on a small white five-petalled flower, its hairy body dusted with pollen and its legs touching the anthers, with a second flower nearby.", zh: "铅笔画：一只蜜蜂停在一朵白色五瓣小花上，毛茸茸的身体沾满花粉，腿碰着花药；旁边还有一朵花。" }} caption={{ en: "A bee carries pollen from flower to flower. Illustration for this topic; the flower is a generic one, not drawn from a chilli.", zh: "蜜蜂把花粉从一朵花带到另一朵。为本主题画的示意图，画的是一般的花，不是照辣椒花画的。" }} />
+
+<More title={{ en: "Chilli flowers can pollinate themselves", zh: "辣椒花能自己传粉" }}>
+
+辣椒花自己花药里的花粉可以落到自己的柱头上，所以一株单独养在室内的辣椒也能结果。一项在温室里对甜椒的研究发现，有蜜蜂来访的花，结出的果实比自己传粉的更重，种子也更多。NParks 也指出，有蜜蜂来访时辣椒结果最多。
+
+</More>
+
+<More title={{ en: "Plants and people", zh: "植物和人" }}>
+
+开花植物和人的受精很相似：都是雄性生殖细胞与雌性生殖细胞融合。在人体里，精子与卵子结合，受精卵在子宫里发育。卵巢产生卵子，睾丸产生精子。
+
+</More>
+
+<More title={{ en: "Try it", zh: "试一试" }}>
+
+用放大镜看一朵花：辣椒花、大红花，或者从市场买来的花都可以。找出花药和柱头。用棉签轻轻碰一下花药，看看棉签上沾到的粉末，那就是花粉。
+
+</More>
+
+</Lang>
