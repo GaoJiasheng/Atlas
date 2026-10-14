@@ -25,6 +25,14 @@ SpaceScene / Model3DStage，paper 默认、cinema 可切。原型：`archetypes.
 
 ---
 
+### 0.1 定稿（2026-10-14，主会话按 Gavin 惯例代定）
+
+1. 开工（与电路并行）。植物 = 盆栽辣椒（Capsicum annuum），发芽用绿豆托盘并明示是另一种植物。
+2. 比例方案按 §2（1 单位 = 50 cm；放大特写各自带比例尺——比例尺若引擎没有，先用文字标注，并把缺口报给主会话）。
+3. 正文用课纲用语（water-carrying tubes / food-carrying tubes / tiny openings；中文"导水管 / 导养管 / 气孔"按名词委），xylem / phloem / stomata 只进细看与名词表。
+4. 多色高亮（染色实验、碘试）若引擎只有两色，先用现有两色 + 文字说明，缺口报主会话。
+5. 图：首页图版（辣椒）与 8 张配图已入库（`public/illustrations/plant.webp`、`figures/plant-*.webp`）。
+
 ## 1. 范围、读者、必须讲对的事实
 
 ### 1.1 读者与范围
