@@ -15,7 +15,7 @@ docs/17 §6 #4。2026-10-13 起草，**只做规划，不施工、不建目录�
 | D3 | 课的形状同分数改版后：每章 3–5 拍 + 一道随机小测；练习 8 道固定题 | 同意 |
 | D4 | **UI 不出现年级**（docs/19 D3、G8） | 同意 |
 | D5 | **新模型 A4 方格**（`grid`）：单位正方形铺满、沿边走、画长方形、切开组合图形、带尺寸线的"不按比例"图；新小测类型 `count-squares`、`trace-perimeter`、`draw-rectangle`、`split-figure`；`input` 加 `measure`（数 + 单位芯片）写法（§3） | 同意 |
-| D6 | **英文用 length 和 breadth**（新加坡课本的说法，不用 width；**待核**一页 P3 课本）；ZH 用"长""宽"；正方形的边叫 side / 边长 | 同意 |
+| D6 | **英文用 length 和 breadth**（新加坡课本的说法，不用 width；已核，见 §9）；ZH 用"长""宽"；正方形的边叫 side / 边长 | 同意 |
 | D7 | **单位**：课纲只要求 square units、cm²、m²，**不做 cm² ↔ m² 换算**（S1 第 36 页原文 "excluding conversion between cm2 and m2"）；周长用 cm、m；方格题不带单位时写 "square units / 平方单位" 和 "units / 单位长" | 同意 |
 | D8 | **"不按比例"**：第 04 步起出现没有方格、只标边长的图，右下角固定一行 "Not drawn to scale / 未按比例画"（新加坡试卷的写法）；方格图按比例 | 同意 |
 | D9 | **情境**：餐垫、组屋地砖、卧室地面、社区花园的围栏、学校告示板、hawker 桌面、组屋户型平面图；数字是虚构的整数，不声称某户型的真实面积 | 同意 |
@@ -497,4 +497,47 @@ G1（`Measure` 值）、G2（`measure`、`whole` 写法）、G3（AREA 卡）、
 
 ## 9. 施工记录 / 已知差距
 
-施工时追加。
+**状态**：2026-10-14 发布（`status: published`，13 个已发布主题之一）。
+
+### 9.1 规模
+
+- 11 个课步（主线 01–07，"再往前一步" 08–11 带 `bridge`）+ 背景章 00 + 练习章 12；**45 个讲解拍**；**题库 103 道**（9 / 9 / 9 / 10 / 9 / 10 / 9 / 10 / 9 / 10 / 9）；**练习 8 道**；名词表 14 个；来源 14 条（`sources.json` / `SOURCES.md`）。
+- 题型分布（题库 + 练习）：`input` 48、`choose` 28、`draw-rectangle` 11、`trace-perimeter` 10、`count-squares` 9、`split-figure` 5。
+- 测试：`tests/math-scene/{grid,diagnose-measure,area-perimeter-lesson}.test.ts`（grid 几何、13 条误解规则的正反例、本课数据的数字约束与题库自证）；`tests/home.test.ts` 加本课的 stats 行；`tests-e2e/area-perimeter.spec.ts` 8 条（点刻度换拍、方格题点按与纯键盘作答、量的单位芯片、练习、zh、390×844）；`tests-e2e/smoke.spec.ts` 首页改为 13 个已发布主题、Maths 区 2 个。全量 `pnpm test` 1406 条。
+
+### 9.2 A4 方格模型与题型（实际做成的样子）
+
+- 模型 `{ kind: "grid", unit: unit | cm | m, show: cells | dots | none, figures: [...] }`，格点 y 向上；图形 `rect` / `rects`（拼合，接缝画虚线）/ `cells` / `poly`（直线图形）+ `halves`（半格）；面积、周长、外圈边序、半格、切开后的两块由 `lib/grid.ts` 算出，拍的算式、字幕和 validate 都以它为准。
+- 讲解拍过渡：`tile`、`walk`（路径 + 圆点 + 计数）、`arrange`（同样的方块换排法）；`cut`、`cross`、`shade`、`morph` 复用；`prefers-reduced-motion` 一律换成淡入。
+- 小测题型 4 种：`count-squares`（点格 / 点半格 / 行首按钮按行铺）、`trace-perimeter`（点格边，里面的边能点、能撤；"走一圈"按顺序编号）、`draw-rectangle`（拖角柄或长、宽步进器；尺寸线实时变，不泄露面积和周长）、`split-figure`（切线沿格线移动）；加上 `input` 的 `measure` 写法（数 + 单位芯片 cm / cm² / m / m²）。
+- 误解 13 条（`lib/diagnose/measure.ts`）：`unequal-units`、`half-squares`、`unit-not-squared`、`area-perimeter-swap`、`border-squares`、`two-sides-only`、`sides-added-for-area`、`missing-side`、`same-area-same-perimeter`、`perimeter-not-halved`、`side-from-total`、`overlap-counted`、`inner-edge-counted`。
+- HUD：右上卡 AREA · PERIMETER（讲解拍只显示这一拍量过的；小测不先说答案）；PLATE 块 MODEL GRID · UNIT · SQUARES · EDGES；界面不显示年级（含分数主题的 "Bridge" 芯片与 "Syllabus" 行）。
+- 每步数字上限 `steps[].limits`（`maxSide`、`maxArea`、`maxPerimeter`、`maxCells`、`gridMax`、`sides`），`pnpm validate` 与 `check-pool.ts --topic --step` 都按它查。
+
+### 9.3 施工中定的事
+
+1. 题库由 Codex 起草，`check-pool` 逐道自证（解法做完、起点未解、每个错例与错选项被诊断成声明的 code）；主会话合并，ZH 经本轮润色（见 9.4）。
+2. 步 08–11 不在 UI 写年级，章头只有 "Going further / 再往前一步"；课纲锚点留在数据里。
+3. "没标的边"（直线图形里没写长度的边，EN "missing side" 或 "unlabelled side"）保留为 ZH 用词，不改"缺的边"：和"缺角"分得开。
+4. ZH "组合图形" 是名词表里的正式词（对应 composite figure），"拼成 / 拼合" 只作动词用，没有改成"拼合图形"。
+5. 选择题的 reveal 里不写"选 b / 选 c"（选项字母在界面上可能不出现或顺序不同），改为直接写答案。
+6. 步 07 以及无单位方格题的 ZH 周长写 "n 个单位长"，面积写 "n 平方单位"（原稿里有 "14 单位" 的混写，已统一）。
+7. 走一圈的计数器（讲解拍里的大数字）有尺寸线时放进图形内侧，不再压在右侧尺寸线上（`GridModel.tsx` 的 `counterDx / counterDy`）。
+
+### 9.4 ZH 润色（Codex 草稿 → 教师口吻）
+
+通读了 103 道题库题与 8 道练习的全部 ZH（题面、guide、hints、feedback、options），改写 129 处：去掉"看面积说明 / 看周长说明 / 看面积标注"这类指向不明的说法（改为"题目给的是面积"）；"X 数的是……的格子"改为"X 是……的格子数"；"量的是面积"改为"数……得到的是面积"；"向内转角"改为"凹角"；"选 b / 选 c" 去掉；"X 单位" 统一为 "X 个单位长"；几处错例反馈补上"这里错在哪、下一步做什么"。数字、code、sample 一律没动；`check-pool` 逐步 0 error。
+
+### 9.5 length / breadth 核对（D6）
+
+- 找到的：新加坡的备考讲解页与 PSLE 解答（如 JimmyMaths 的 P4 面积与周长页、The Learning Lab 的 PSLE 题解）一律写 "Length × Breadth"、"Breadth of swimming pool"；MOE 课纲与学校学习计划（Xingnan、Shuqun 的 P3 / P4 数学）只列条目，不写公式，没有出现 width；只有一个补习站（agrader.sg）写 "length × width"。
+- **没核到**的：My Pals Are Here / Shaping Maths / Targeting Maths 的课本页本身无法在线取得，所以课本原文未逐页核对；结论是 "length and breadth" 是新加坡教学与考试的通行写法，保留（EN 不改成 width，lesson.json、章节、名词表不动）。请 Gavin 手边有 P3 课本时翻一页面积章确认。
+- S14 的措辞（"the words length, breadth"）保持不变。
+
+### 9.6 已知差距
+
+- "再来一道" 的随机抽题（种子抽取）没有单独为本课加覆盖，沿用分数主题的 `pool.test.ts`。
+- 步 08–11 题库相对薄（9–10 道），且数字上限偏小（边 ≤ 12 / 20），再往后的主题（三角形面积）复用 A4 时再扩。
+- 课本原文（length / breadth）未逐页核对，见 9.5。
+- 手机 390 × 844 的方格交互是"按行铺"，没有单格 44 px 点按区；格子最小 22 px（spec §3.1 的取舍）。
+

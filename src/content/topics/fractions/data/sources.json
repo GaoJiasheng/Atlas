@@ -2,9 +2,9 @@
   "sources": [
     {
       "id": "S1",
-      "text": { "en": "Ministry of Education Singapore, Curriculum Planning and Development Division. Mathematics Syllabus Primary One to Six (implementation starting with the 2021 Primary One cohort; updated October 2025). Fractions: P2 p. 33, P3 p. 35, P4 p. 37, P5 p. 41.", "zh": "新加坡教育部课程规划与发展司：《小学一至六年级数学课程纲要》（自 2021 年小一新生起实施；2025 年 10 月更新版）。分数：小二第 33 页、小三第 35 页、小四第 37 页、小五第 41 页。" },
+      "text": { "en": "Ministry of Education Singapore, Curriculum Planning and Development Division. Mathematics Syllabus Primary One to Six (implementation starting with the 2021 Primary One cohort; updated October 2025). Fractions: pp. 33, 35, 37 and 41.", "zh": "新加坡教育部课程规划与发展司：《小学一至六年级数学课程纲要》（自 2021 年小一新生起实施；2025 年 10 月更新版）。分数：第 33、35、37、41 页。" },
       "url": "https://www.moe.gov.sg/api/media/92bff26d-b2b4-4535-b868-b8415c744b91/2021-Primary-Mathematics-Syllabus-P1-to-P6-Updated-October-2025.pdf",
-      "note": { "en": "The only source for what each step covers; the syllabus lines in the lesson are quoted from it. Pages checked 2026-10-11 against the PDF: Fractions P2 p. 33, P3 p. 35, P4 p. 37, P5 p. 41; Skemp's relational understanding p. 20; applies to P6 from 2026, p. 30.", "zh": "每一步学什么，只以这份课纲为准；课里的课纲条目照原文引用。2026-10-11 对照 PDF 核对页码：分数小二第 33 页、小三第 35 页、小四第 37 页、小五第 41 页；Skemp 的关系性理解见第 20 页；2026 年起也适用于小六，见第 30 页。" }
+      "note": { "en": "The only source for what each step covers; the syllabus lines in the lesson are quoted from it. Pages checked 2026-10-11 against the PDF: Fractions pp. 33, 35, 37 and 41; Skemp's relational understanding p. 20; also applies to the last primary year from 2026, p. 30.", "zh": "每一步学什么，只以这份课纲为准；课里的课纲条目照原文引用。2026-10-11 对照 PDF 核对页码：分数第 33、35、37、41 页；Skemp 的关系性理解见第 20 页；2026 年起也适用于小学最后一年，见第 30 页。" }
     },
     {
       "id": "S2",

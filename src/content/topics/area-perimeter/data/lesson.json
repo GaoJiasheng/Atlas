@@ -508,7 +508,7 @@
         "when": "sides-added-for-area",
         "say": {
          "en": "Counting 3 across and 3 up does not count all the covered cells. Look at the squares in every row.",
-         "zh": "横着数 3 格、竖着数 3 格，还没有数完铺满卡片的格子。看看每一行的正方形。"
+         "zh": "6 只数了一行和一列。要数铺满卡片的全部格子：3 行，每行 3 块。"
         },
         "sample": "=6"
        }
@@ -564,7 +564,7 @@
      "hints": [
       {
        "en": "Find the four rows inside the board.",
-       "zh": "找出告示板里面的四行。"
+       "zh": "先数一数告示板有几行。"
       },
       {
        "en": "Lay a square on every cell in each row.",
@@ -585,7 +585,7 @@
         "when": "sides-added-for-area",
         "say": {
          "en": "Counting 6 across and 4 up leaves many covered cells uncounted. Count every square in all four rows.",
-         "zh": "横着数 6 格、竖着数 4 格，漏了许多铺上的格子。把四行里的正方形全部数完。"
+         "zh": "10 只数了一行和一列，漏了里面的许多格子。要把 4 行里的正方形都数完。"
         },
         "sample": "=10"
        }
@@ -706,7 +706,7 @@
         "when": "overlap-counted",
         "say": {
          "en": "16 counts the empty corner as well. Look at the four unshaded cells at the top right; they are outside the figure.",
-         "zh": "16 把缺角也数进去了。看看右上角四格没涂色的格子，它们在图形外面。"
+         "zh": "16 把缺角也数进去了。右上角四个没涂色的格子在图形外面，不用铺。"
         },
         "sample": "=16"
        }
@@ -788,7 +788,7 @@
      },
      "guide": {
       "en": "Use the same small grid squares to measure both figures. Count only cells inside each figure.",
-      "zh": "用方格里的同样大小的小正方形量两个图形。只数各个图形里面的格子。"
+      "zh": "用同样大的小方格来量两个图形，只数图形里面的格子。"
      },
      "hints": [
       {
@@ -939,7 +939,7 @@
         "when": "unequal-units",
         "say": {
          "en": "12 small squares and 4 big squares use different sizes. Look inside B's big squares and compare both mats in small grid squares.",
-         "zh": "12 块小的和 4 块大的，大小不同。看看 B 的大正方形里面，两张餐垫都用小格来比较。"
+         "zh": "12 块小的和 4 块大的，正方形大小不同，不能直接比块数。先数出 B 的一块大正方形里有几个小格，再用小格比较两张餐垫。"
         },
         "sample": "a-count"
        }
@@ -1244,7 +1244,7 @@
         "when": "unequal-units",
         "say": {
          "en": "C's 3 squares are bigger than D's 3 squares. Look at the small cells inside C's squares before comparing C and D.",
-         "zh": "C 的 3 块比 D 的 3 块大。比较 C 和 D 前，先看看 C 的大正方形里面的小格。"
+         "zh": "C 的 3 块正方形比 D 的 3 块大，块数一样，面积不一定一样。先看 C 的一块大正方形里有几个小格。"
         },
         "sample": "c-d-count"
        }
@@ -1546,7 +1546,7 @@
       },
       {
        "en": "You have 8 whole squares and one pair of halves. Add the pair and choose cm².",
-       "zh": "有 8 个整格和一对半格。加上这对半格，选 cm²。"
+       "zh": "有 8 个整格和一对半格。再加上这对半格合成的 1 格，单位选 cm²。"
       }
      ],
      "feedback": {
@@ -1785,7 +1785,7 @@
         "when": "unit-not-squared",
         "say": {
          "en": "19 counts squares covering the shape. cm measures a length; look at the 1 cm² square in the legend.",
-         "zh": "19 数的是铺满图形的正方形。cm 量长度，看看图例中的 1 cm² 正方形。"
+         "zh": "19 对了，可 cm 量的是长度。图形是用 1 cm² 的正方形铺的，单位要选 cm²。"
         },
         "sample": "=19 cm"
        }
@@ -1844,7 +1844,7 @@
       },
       {
        "en": "The count reaches 24 squares. Choose the unit for squares with 1 m sides.",
-       "zh": "数到最后是 24 格。选边长 1 m 的正方形的面积单位。"
+       "zh": "一共 24 格。每格边长 1 m，面积单位是 m²。"
       }
      ],
      "feedback": {
@@ -1857,7 +1857,7 @@
         "when": "unit-not-squared",
         "say": {
          "en": "24 counts squares, but m measures length. Look at the unit square: it covers 1 m², so choose m².",
-         "zh": "24 数的是正方形，可 m 量长度。看看单位正方形，它盖住 1 m²，要选 m²。"
+         "zh": "24 对了，可 m 量的是长度。一格是 1 m²，面积要写 m²。"
         },
         "sample": "24 m"
        }
@@ -1923,7 +1923,7 @@
      },
      "guide": {
       "en": "Follow each row inside the corridor outline and count only covered squares. Read the legend to choose the square unit for the total.",
-      "zh": "沿走廊轮廓逐行数，只数里面铺满的格子。看看图例，为总数选择平方单位。"
+      "zh": "沿走廊轮廓一行一行数，只数里面的格子。再看图例，选出平方单位。"
      },
      "hints": [
       {
@@ -1949,7 +1949,7 @@
         "when": "unit-not-squared",
         "say": {
          "en": "16 is the count of covered squares. m measures length; look at the legend and use m² for area.",
-         "zh": "16 是铺满的格子数。m 量长度，看看图例，面积要用 m²。"
+         "zh": "16 对了，可 m 量的是长度。图例里一格是 1 m²，面积要写 m²。"
         },
         "sample": "16 m"
        }
@@ -2003,7 +2003,7 @@
       },
       {
        "en": "Area needs a square unit with the small 2.",
-       "zh": "面积要用带小 2 的平方单位。"
+       "zh": "面积的单位右上角有个小 2。"
       }
      ],
      "options": [
@@ -2088,7 +2088,7 @@
      },
      "guide": {
       "en": "A classroom floor is big. Squares with 1 m sides cover it in a sensible number; 1 cm squares would take a very long time to count.",
-      "zh": "教室地面很大。用边长 1 m 的正方形来铺，块数刚好；用 1 cm 的正方形要数到很久很久。"
+      "zh": "教室地面很大。用边长 1 m 的正方形来铺，块数不多；用 1 cm 的正方形，要数到很久很久。"
      },
      "hints": [
       {
@@ -2097,7 +2097,7 @@
       },
       {
        "en": "Area needs a square unit with the small 2.",
-       "zh": "面积要用带小 2 的平方单位。"
+       "zh": "面积的单位右上角有个小 2。"
       }
      ],
      "options": [
@@ -2130,7 +2130,7 @@
      "feedback": {
       "correct": {
        "en": "Yes. Big surfaces like a floor are measured in square metres, m².",
-       "zh": "对。地面这样大的面，用平方米 m² 来量。"
+       "zh": "对。教室地面这么大，用平方米（m²）来量。"
       },
       "wrong": [
        {
@@ -2182,7 +2182,7 @@
      },
      "guide": {
       "en": "A corridor floor is long and wide enough to walk on. Choose squares that suit a floor.",
-      "zh": "走廊地面又长又宽，人可以在上面走。选适合量地面的正方形。"
+      "zh": "走廊地面很大。选一个大小适合量地面的正方形。"
      },
      "hints": [
       {
@@ -2191,7 +2191,7 @@
       },
       {
        "en": "Area needs a square unit with the small 2.",
-       "zh": "面积要用带小 2 的平方单位。"
+       "zh": "面积的单位右上角有个小 2。"
       }
      ],
      "options": [
@@ -2440,7 +2440,7 @@
         "when": "area-perimeter-swap",
         "say": {
          "en": "15 counts the squares inside: that is the area. The perimeter is the distance round the edge.",
-         "zh": "15 数的是里面的格子，那是面积。周长是绕边一圈的长度。"
+         "zh": "15 是里面的格子数，那是面积。周长是绕边一圈的长度。"
         },
         "sample": "=15"
        }
@@ -2514,7 +2514,7 @@
         "when": "border-squares",
         "say": {
          "en": "16 counts the squares along the edge. Look at a corner square: both its outside sides belong to the perimeter.",
-         "zh": "16 数的是边上的格子。看看角上的格子，它露在外面的两段都算周长。"
+         "zh": "16 是边上的格子数。看看角上的格子，它露在外面的两段都算周长。"
         },
         "sample": "=16"
        },
@@ -2522,7 +2522,7 @@
         "when": "area-perimeter-swap",
         "say": {
          "en": "Inside squares measure area, and a line shared by two squares is inside too. Count only the sides round the bookmark.",
-         "zh": "里面的格子量的是面积，两个格子共用的线也在里面。只数绕书签一圈的外边。"
+         "zh": "数里面的格子得到的是面积。格子之间共用的线在里面，不算周长；只数绕书签一圈的外边。"
         },
         "sample": "edges:20+1"
        }
@@ -2604,7 +2604,7 @@
         "when": "area-perimeter-swap",
         "say": {
          "en": "The inside squares measure area; the line between two squares is also inside. Keep your count and trace on the outside edge.",
-         "zh": "里面的格子量的是面积，两个格子之间的线也在里面。数周长和描边时，都沿外边绕一圈。"
+         "zh": "数里面的格子得到的是面积。格子之间的线在里面，不算周长；描边和数周长，都只沿外边绕一圈。"
         },
         "sample": "edges:12+1"
        }
@@ -2698,7 +2698,7 @@
         "when": "border-squares",
         "say": {
          "en": "11 counts squares touching the boundary. A square can have more than one exposed side; count each exposed side.",
-         "zh": "11 数的是贴着边的格子。一个格子可能露出不止一段，每一段都要数。"
+         "zh": "11 是贴着边的格子数。一个格子可能露出不止一段，每一段都要数。"
         },
         "sample": "=11"
        },
@@ -2706,7 +2706,7 @@
         "when": "area-perimeter-swap",
         "say": {
          "en": "Squares covering the L shape measure area. Lines with a square on both sides are inside; trace only where the shape meets empty grid.",
-         "zh": "铺满 L 形的格子量的是面积。两边都有格子的线在里面，只描图形和空白方格交界的边。"
+         "zh": "数铺满 L 形的格子得到的是面积。两边都有格子的线在 L 形里面，只描 L 形和空白方格交界的边。"
         },
         "sample": "edges:16+1"
        }
@@ -2774,7 +2774,7 @@
      },
      "guide": {
       "en": "Keep your trace between the figure and the empty grid, including the two sides at the step. Count each small side as 1 cm.",
-      "zh": "沿图形和空白方格交界的边描一圈，台阶处的两条边也要描。每小段数作 1 cm。"
+      "zh": "沿图形和空白方格交界的边描一圈，台阶处的两条边也要描。每小段算 1 cm。"
      },
      "hints": [
       {
@@ -2800,7 +2800,7 @@
         "when": "border-squares",
         "say": {
          "en": "13 counts the squares along the edge. Look at the exposed sides of each square and count each side separately.",
-         "zh": "13 数的是边上的格子。看看每个格子露在外面的边，每一小段分别数。"
+         "zh": "13 是边上的格子数。看看每个格子露在外面的边，每一小段分别数。"
         },
         "sample": "=13"
        },
@@ -2808,7 +2808,7 @@
         "when": "area-perimeter-swap",
         "say": {
          "en": "The squares covering the figure measure area, and their shared lines lie inside. Follow only the exposed sides all the way round.",
-         "zh": "铺满图形的格子量的是面积，共用的格线在里面。只沿露在外面的边绕一圈。"
+         "zh": "数铺满图形的格子得到的是面积。格子之间共用的格线在里面，不算周长；只沿露在外面的边绕一圈。"
         },
         "sample": "edges:18+1"
        }
@@ -2881,7 +2881,7 @@
         "when": "area-perimeter-swap",
         "say": {
          "en": "24 counts the squares that cover the strip. Look at the outside edge and count its small sides.",
-         "zh": "24 数的是铺满纸条的格子。看看外面一圈的边，数那里的小线段。"
+         "zh": "24 是铺满纸条的格子数。看看外面一圈的边，数那里的小线段。"
         },
         "sample": "24"
        },
@@ -2889,7 +2889,7 @@
         "when": "border-squares",
         "say": {
          "en": "18 counts border squares. At each corner, the square has two exposed sides; count both.",
-         "zh": "18 数的是边上的格子。每个角上的格子有两段露在外面，两段都要数。"
+         "zh": "18 是边上的格子数。每个角上的格子有两段露在外面，两段都要数。"
         },
         "sample": "18"
        }
@@ -2962,7 +2962,7 @@
         "when": "border-squares",
         "say": {
          "en": "14 counts squares touching the edge. Count the exposed sides, including both sides at each corner.",
-         "zh": "14 数的是贴着边的格子。要数露在外面的线段，每个角上的两段都要数。"
+         "zh": "14 是贴着边的格子数。要数露在外面的线段，每个角上的两段都要数。"
         },
         "sample": "14"
        },
@@ -3043,7 +3043,7 @@
         "when": "area-perimeter-swap",
         "say": {
          "en": "6 counts the squares covering the stamp. To find perimeter, look at the small sides round its edge.",
-         "zh": "6 数的是铺满邮票的格子。求周长要看外面一圈的小线段。"
+         "zh": "6 是铺满邮票的格子数。求周长要看外面一圈的小线段。"
         },
         "sample": "6"
        }
@@ -3082,11 +3082,11 @@
      },
      "prompt": {
       "en": "Which description tells you how to measure this shape’s perimeter?",
-      "zh": "哪一种说法说明怎样量这个图形的周长？"
+      "zh": "哪一种说法说的是怎样求这个图形的周长？"
      },
      "guide": {
       "en": "Think of a path that goes round the shape and returns to its start. Decide which description follows that path.",
-      "zh": "想象沿图形的边绕一圈，回到起点。选出说的是这条路线的描述。"
+      "zh": "想象沿图形的边绕一圈，回到起点。选出描述这条路线的说法。"
      },
      "options": [
       {
@@ -3110,7 +3110,7 @@
        "id": "border-squares",
        "text": {
         "en": "Count each square touching the outside edge once.",
-        "zh": "贴着外边的格子，每个数一次。"
+        "zh": "数贴着外边的格子，每个格子数一次。"
        },
        "correct": false,
        "misconception": "border-squares"
@@ -3123,20 +3123,20 @@
       },
       {
        "en": "Perimeter measures a route round the shape.",
-       "zh": "周长量的是绕图形一圈的长度。"
+       "zh": "周长就是绕图形一圈的长度。"
       }
      ],
      "feedback": {
       "correct": {
        "en": "Yes. The small sides round the outside measure the distance round the shape: its perimeter.",
-       "zh": "对。外面一圈的小线段量的是绕图形一圈的长度，也就是周长。"
+       "zh": "对。数外面一圈的小线段，得到的是绕图形一圈的长度，也就是周长。"
       },
       "wrong": [
        {
         "when": "area-perimeter-swap",
         "say": {
          "en": "Squares covering the inside measure area. Look for the description that follows the outside edge.",
-         "zh": "铺满里面的正方形量的是面积。找一找沿外边绕一圈的描述。"
+         "zh": "数铺满里面的正方形，得到的是面积。找一找沿外边绕一圈的说法。"
         },
         "sample": "inside-squares"
        },
@@ -3144,7 +3144,7 @@
         "when": "border-squares",
         "say": {
          "en": "A square at a corner has two sides on the edge. Count those sides, rather than counting that square once.",
-         "zh": "角上的格子有两段在外边。要数那两段，不能把这个格子只数一次。"
+         "zh": "角上的格子有两段在外边，两段都要数，不能只当一段。"
         },
         "sample": "border-squares"
        }
@@ -3155,7 +3155,7 @@
       },
       "reveal": {
        "en": "Choose \"Count every small side all the way round the outside edge.\" Each small side is 1 cm of the perimeter.",
-       "zh": "选“数图形外面一圈的每一小段”。每小段是周长中的 1 cm。"
+       "zh": "选“数图形外面一圈的每一小段”。每小段长 1 cm，加起来就是周长。"
       }
      }
     }
@@ -4084,7 +4084,7 @@
      },
      "guide": {
       "en": "Check which sides each number sentence includes. You need two lengths and two breadths to go all the way round.",
-      "zh": "看看每个算式包含了哪些边。绕一整圈要算两条长、两条宽。"
+      "zh": "看看每个算式算了哪些边。绕一整圈要算两条长、两条宽。"
      },
      "hints": [
       {
@@ -4103,7 +4103,7 @@
      "feedback": {
       "correct": {
        "en": "Yes. This sentence includes both lengths and both breadths, so it finds the distance round all four sides.",
-       "zh": "对。这个算式包含两条长、两条宽，算的是沿四条边绕一圈的长度。"
+       "zh": "对。这个算式把两条长、两条宽都算上了，求的是沿四条边绕一圈的长度。"
       },
       "wrong": [
        {
@@ -4196,7 +4196,7 @@
      },
      "guide": {
       "en": "Check which sides each number sentence includes. You need two lengths and two breadths to go all the way round.",
-      "zh": "看看每个算式包含了哪些边。绕一整圈要算两条长、两条宽。"
+      "zh": "看看每个算式算了哪些边。绕一整圈要算两条长、两条宽。"
      },
      "hints": [
       {
@@ -4215,7 +4215,7 @@
      "feedback": {
       "correct": {
        "en": "Yes. This sentence includes both lengths and both breadths, so it finds the distance round all four sides.",
-       "zh": "对。这个算式包含两条长、两条宽，算的是沿四条边绕一圈的长度。"
+       "zh": "对。这个算式把两条长、两条宽都算上了，求的是沿四条边绕一圈的长度。"
       },
       "wrong": [
        {
@@ -4843,12 +4843,12 @@
      },
      "guide": {
       "en": "Two sides have no length marked. Match the horizontal parts to the bottom side and the vertical parts to the left side, then add all six.",
-      "zh": "有两条边没标长度。横边合起来等于下边，竖边合起来等于左边；先求缺边，再加六条边。"
+      "zh": "有两条边没标长度。上面的横边合起来等于下边，竖边合起来等于左边；先求没标的边，再加六条边。"
      },
      "hints": [
       {
        "en": "Look at the two sides at the inward corner.",
-       "zh": "看向内转角处的两条边。"
+       "zh": "看凹角处的两条边。"
       },
       {
        "en": "Across: 5 + ? = 12. Up: 4 + ? = 9.",
@@ -5482,7 +5482,7 @@
      },
      "guide": {
       "en": "Tap every 1 cm segment along the boundary, including the inward turn. Count the segments all the way round, then write the total.",
-      "zh": "点出边界上的每段 1 cm 线段，包括向内的转角。绕一圈数完，再写出总长度。"
+      "zh": "点出边界上的每段 1 cm 线段，包括凹角。绕一圈数完，再写出总长度。"
      },
      "hints": [
       {
@@ -5509,13 +5509,13 @@
         "sample": "=31",
         "say": {
          "en": "31 counts the squares inside the figure: that is its area. Look at the line segments that go round it.",
-         "zh": "31 数的是图形里面的格子，那是面积。要看绕图形一圈的线段。"
+         "zh": "31 是图形里面的格子数，那是面积。要数绕图形一圈的线段。"
         }
        }
       ],
       "fallback": {
        "en": "Not yet. Follow the boundary, including the inward turn, and count each 1 cm segment once.",
-       "zh": "还没对。沿边走，包括向内的转角，每段 1 cm 线段数一次。"
+       "zh": "还没对。沿边走，包括凹角，每段 1 cm 线段数一次。"
       },
       "reveal": {
        "en": "Starting at the bottom-left corner: 8 across, 2 up, 3 left, 3 up, 5 left and 5 down. The perimeter is 26 cm.",
@@ -5585,7 +5585,7 @@
      },
      "guide": {
       "en": "The boundary follows the notch down, across and up. Tap those segments as well as the outer sides, then count all the 1 cm segments.",
-      "zh": "边界也沿着凹口向下、横着走、再向上。点出这些线段和其余外边，再数每段 1 cm 的线段。"
+      "zh": "边界会沿着凹口向下、横着走、再向上。把凹口的线段和其余外边都点出来，数出有几段，每段 1 cm。"
      },
      "hints": [
       {
@@ -5706,7 +5706,7 @@
      "hints": [
       {
        "en": "Locate the two unmarked sides at the inward corner.",
-       "zh": "找向内转角处两条没标长度的边。"
+       "zh": "找凹角处两条没标长度的边。"
       },
       {
        "en": "The horizontal parts total 11 cm; the vertical parts total 8 cm.",
@@ -5722,7 +5722,7 @@
        "id": "horizontal-step",
        "text": {
         "en": "The horizontal side at the inward corner",
-        "zh": "向内转角处的横边"
+        "zh": "凹角处的横边"
        },
        "correct": false,
        "misconception": "missing-side"
@@ -5731,7 +5731,7 @@
        "id": "vertical-step",
        "text": {
         "en": "The vertical side at the inward corner",
-        "zh": "向内转角处的竖边"
+        "zh": "凹角处的竖边"
        },
        "correct": true
       }
@@ -5739,7 +5739,7 @@
      "feedback": {
       "correct": {
        "en": "Yes. The vertical side at the inward corner is 8 − 3 = 5 cm. The horizontal side is 11 − 5 = 6 cm.",
-       "zh": "对。向内转角处的竖边是 8 − 3 = 5 cm，横边是 11 − 5 = 6 cm。"
+       "zh": "对。凹角处的竖边是 8 − 3 = 5 cm，横边是 11 − 5 = 6 cm。"
       },
       "wrong": [
        {
@@ -5757,7 +5757,7 @@
       },
       "reveal": {
        "en": "The vertical side at the inward corner is 8 − 3 = 5 cm. The horizontal side is 11 − 5 = 6 cm.",
-       "zh": "向内转角处的竖边是 8 − 3 = 5 cm，横边是 11 − 5 = 6 cm。"
+       "zh": "凹角处的竖边是 8 − 3 = 5 cm，横边是 11 − 5 = 6 cm。"
       }
      }
     }
@@ -6077,7 +6077,7 @@
      "feedback": {
       "correct": {
        "en": "Yes. 12 × 7 = 84, so the area is 84 cm². The unit counts squares.",
-       "zh": "对。12 × 7 = 84，面积是 84 cm²。数的是正方形，所以用平方单位。"
+       "zh": "对。12 × 7 = 84，面积是 84 cm²。数的是正方形的个数，所以用平方单位。"
       },
       "wrong": [
        {
@@ -6100,7 +6100,7 @@
         "when": "unit-not-squared",
         "say": {
          "en": "84 counts squares, so use cm². The unit cm measures a length; look at the area unit chips.",
-         "zh": "84 数的是正方形，要用 cm²。cm 是长度单位，再看面积的单位选项。"
+         "zh": "84 对了，可面积要写 cm²。cm 是长度单位，再看一下单位选项。"
         },
         "sample": "84 cm"
        }
@@ -6173,7 +6173,7 @@
      "feedback": {
       "correct": {
        "en": "Yes. 9 × 6 = 54, so the area is 54 m². The unit counts squares.",
-       "zh": "对。9 × 6 = 54，面积是 54 m²。数的是正方形，所以用平方单位。"
+       "zh": "对。9 × 6 = 54，面积是 54 m²。数的是正方形的个数，所以用平方单位。"
       },
       "wrong": [
        {
@@ -6196,7 +6196,7 @@
         "when": "unit-not-squared",
         "say": {
          "en": "54 counts squares, so use m². The unit m measures a length; look at the area unit chips.",
-         "zh": "54 数的是正方形，要用 m²。m 是长度单位，再看面积的单位选项。"
+         "zh": "54 对了，可面积要写 m²。m 是长度单位，再看一下单位选项。"
         },
         "sample": "54 m"
        }
@@ -6266,7 +6266,7 @@
      "feedback": {
       "correct": {
        "en": "Yes. 6 × 6 = 36, so the area is 36 cm². The unit counts squares.",
-       "zh": "对。6 × 6 = 36，面积是 36 cm²。数的是正方形，所以用平方单位。"
+       "zh": "对。6 × 6 = 36，面积是 36 cm²。数的是正方形的个数，所以用平方单位。"
       },
       "wrong": [
        {
@@ -6289,7 +6289,7 @@
         "when": "unit-not-squared",
         "say": {
          "en": "36 counts squares, so use cm². The unit cm measures a length; look at the area unit chips.",
-         "zh": "36 数的是正方形，要用 cm²。cm 是长度单位，再看面积的单位选项。"
+         "zh": "36 对了，可面积要写 cm²。cm 是长度单位，再看一下单位选项。"
         },
         "sample": "36 cm"
        }
@@ -6560,7 +6560,7 @@
      },
      "guide": {
       "en": "Read the length and breadth. Choose the calculation that counts equal rows of squares covering the inside.",
-      "zh": "看长和宽。选能求铺满里面的正方形总数的算式。"
+      "zh": "看长和宽。选出能算出铺满里面的正方形总数的算式。"
      },
      "hints": [
       {
@@ -6607,7 +6607,7 @@
      "feedback": {
       "correct": {
        "en": "Yes. 10 × 4 counts 4 rows of 10 squares, so the area is 40 cm².",
-       "zh": "对。10 × 4 数的是 4 行、每行 10 个正方形，面积是 40 cm²。"
+       "zh": "对。10 × 4 算的是 4 行、每行 10 个正方形，面积是 40 cm²。"
       },
       "wrong": [
        {
@@ -6674,7 +6674,7 @@
      "hints": [
       {
        "en": "All sides of this square are 7 m.",
-       "zh": "这个正方形的边长都是 7 m。"
+       "zh": "这个正方形每条边都是 7 m。"
       },
       {
        "en": "Use side × side to find the area.",
@@ -6740,7 +6740,7 @@
         "when": "unit-not-squared",
         "say": {
          "en": "49 is the number of 1 m squares covering the square. Look at the units: their area is measured in m².",
-         "zh": "49 是铺满这个正方形的边长 1 m 的正方形个数。看单位，面积要用 m²。"
+         "zh": "49 对了，可 m 是长度单位。面积要用平方单位 m²。"
         },
         "sample": "length-unit"
        },
@@ -6779,7 +6779,7 @@
      },
      "guide": {
       "en": "Read the side lengths on each picture. Multiply length × breadth for each one to find which surface takes 12 unit squares to cover.",
-      "zh": "看每幅图标出的边长。各用长 × 宽，找出能用 12 个单位正方形铺满的长方形。"
+      "zh": "看每幅图标出的边长，各算一算长 × 宽，找出能用 12 个单位正方形铺满的长方形。"
      },
      "hints": [
       {
@@ -6972,7 +6972,7 @@
      },
      "caption": {
       "en": "12 square tiles in one long row: area 12 square units, perimeter 26 units.",
-      "zh": "12 块方砖排成一长行：面积 12 平方单位，周长 26 单位。"
+      "zh": "12 块方砖排成一长行：面积 12 平方单位，周长 26 个单位长。"
      }
     },
     {
@@ -7165,7 +7165,7 @@
      "feedback": {
       "correct": {
        "en": "Yes. A goes round 14 units and B only 10, though both cover 6 squares.",
-       "zh": "对。A 绕一圈是 14 单位，B 只有 10，虽然两个都铺了 6 格。"
+       "zh": "对。A 绕一圈是 14 个单位长，B 只有 10 个，虽然两个都铺了 6 格。"
       },
       "wrong": [
        {
@@ -7183,7 +7183,7 @@
       },
       "reveal": {
        "en": "A's perimeter is 2 × (6 + 1) = 14 units, B's is 2 × (3 + 2) = 10 units. The long thin shape has the longer way round.",
-       "zh": "A 的周长是 2 × (6 + 1) = 14 单位，B 的是 2 × (3 + 2) = 10 单位。又细又长的绕一圈更长。"
+       "zh": "A 的周长是 2 × (6 + 1) = 14 个单位长，B 的是 2 × (3 + 2) = 10 个单位长。又细又长的那个绕一圈更长。"
       }
      }
     },
@@ -7205,11 +7205,11 @@
      },
      "prompt": {
       "en": "Draw a rectangle with an area of 12 square units and a perimeter of 14 units.",
-      "zh": "画一个面积为 12 平方单位、周长为 14 单位的长方形。"
+      "zh": "画一个面积是 12 平方单位、周长是 14 个单位长的长方形。"
      },
      "guide": {
       "en": "Find lengths that multiply to the area. Check that two lengths and two breadths give the required perimeter.",
-      "zh": "先找出相乘得所需面积的长和宽，再检查两个长加两个宽是否等于所需周长。"
+      "zh": "先找出相乘得 12 的长和宽，再检查两个长加两个宽是不是 14。"
      },
      "hints": [
       {
@@ -7222,20 +7222,20 @@
       },
       {
        "en": "The length and breadth must add to 7 units.",
-       "zh": "长加宽必须等于 7 单位。"
+       "zh": "长加宽必须等于 7 个单位长。"
       }
      ],
      "feedback": {
       "correct": {
        "en": "Yes. 4 × 3 covers 12 square units, and 2 × (4 + 3) goes round 14 units.",
-       "zh": "对。4 × 3 铺满 12 平方单位，2 × (4 + 3) 算出绕一圈是 14 单位。"
+       "zh": "对。4 × 3 铺满 12 平方单位，2 × (4 + 3) 算出绕一圈是 14 个单位长。"
       },
       "wrong": [
        {
         "when": "same-area-same-perimeter",
         "say": {
          "en": "Your rectangle covers 12 square units, but it goes round a different distance. Check all four sides.",
-         "zh": "你画的长方形面积是 12 平方单位，但周长不符合要求。检查四条边。"
+         "zh": "你画的长方形面积是 12 平方单位，可周长不是 14 个单位长。把四条边加起来再看看。"
         },
         "sample": "6x2"
        }
@@ -7246,7 +7246,7 @@
       },
       "reveal": {
        "en": "Use a length of 4 units and a breadth of 3 units. The area is 4 × 3 = 12 square units and the perimeter is 4 + 3 + 4 + 3 = 14 units. Either way round works.",
-       "zh": "长取 4 单位，宽取 3 单位。面积是 4 × 3 = 12 平方单位，周长是 4 + 3 + 4 + 3 = 14 单位。横放或竖放都可以。"
+       "zh": "长取 4 个单位长，宽取 3 个单位长。面积是 4 × 3 = 12 平方单位，周长是 4 + 3 + 4 + 3 = 14 个单位长。横放或竖放都可以。"
       }
      }
     },
@@ -7306,7 +7306,7 @@
         "when": "area-perimeter-swap",
         "say": {
          "en": "These sides go round 16 cm. The number 16 describes the area, so check how many squares your rectangle covers.",
-         "zh": "这些边绕一圈是 16 cm。题里的 16 指面积，请检查长方形铺满多少格。"
+         "zh": "你画的长方形绕一圈是 16 cm。题目里的 16 cm² 是面积，要看里面铺满多少格。"
         },
         "sample": "5x3"
        }
@@ -7339,7 +7339,7 @@
      },
      "prompt": {
       "en": "Draw a rectangle that covers 24 square units and goes round 22 units.",
-      "zh": "画一个铺满 24 平方单位、绕一圈为 22 单位的长方形。"
+      "zh": "画一个面积是 24 平方单位、周长是 22 个单位长的长方形。"
      },
      "guide": {
       "en": "Keep the area fixed while trying different lengths and breadths. Each time, check the total of the four sides.",
@@ -7352,24 +7352,24 @@
       },
       {
        "en": "For a perimeter of 22 units, one length and one breadth add to 11 units.",
-       "zh": "周长为 22 单位时，一个长加一个宽等于 11 单位。"
+       "zh": "周长为 22 个单位长时，一个长加一个宽等于 11 个单位长。"
       },
       {
        "en": "Try a length of 8 units and find the breadth from the area.",
-       "zh": "试把长取为 8 单位，再用面积求宽。"
+       "zh": "先把长定为 8 个单位长，再用面积求宽。"
       }
      ],
      "feedback": {
       "correct": {
        "en": "Yes. 8 × 3 covers 24 square units and 8 + 3 + 8 + 3 goes round 22 units.",
-       "zh": "对。8 × 3 铺满 24 平方单位，8 + 3 + 8 + 3 算出绕一圈是 22 单位。"
+       "zh": "对。8 × 3 铺满 24 平方单位，8 + 3 + 8 + 3 算出绕一圈是 22 个单位长。"
       },
       "wrong": [
        {
         "when": "same-area-same-perimeter",
         "say": {
          "en": "A 6 by 4 rectangle has the required area, but goes round 20 units. Try another rectangle with the same area.",
-         "zh": "6 × 4 的长方形面积符合要求，但绕一圈是 20 单位。试另一个面积相同的长方形。"
+         "zh": "6 × 4 的长方形面积符合要求，但绕一圈是 20 个单位长。试另一个面积相同的长方形。"
         },
         "sample": "6x4"
        }
@@ -7380,7 +7380,7 @@
       },
       "reveal": {
        "en": "Draw an 8 by 3 rectangle, or turn it. Its area is 8 × 3 = 24 square units and its perimeter is 2 × (8 + 3) = 22 units.",
-       "zh": "画一个 8 × 3 的长方形，或转个方向。面积是 8 × 3 = 24 平方单位，周长是 2 × (8 + 3) = 22 单位。"
+       "zh": "画一个 8 × 3 的长方形，或转个方向。面积是 8 × 3 = 24 平方单位，周长是 2 × (8 + 3) = 22 个单位长。"
       }
      }
     },
@@ -7469,7 +7469,7 @@
       },
       {
        "en": "A has sides 4 and 2; B has sides 8 and 1; C has sides 2 and 4.",
-       "zh": "A 的两种边长是 4 和 2，B 是 8 和 1，C 是 2 和 4。"
+       "zh": "A 的长和宽是 4 和 2，B 是 8 和 1，C 是 2 和 4。"
       },
       {
        "en": "Compare 2 × (4 + 2), 2 × (8 + 1), and 2 × (2 + 4).",
@@ -7479,7 +7479,7 @@
      "feedback": {
       "correct": {
        "en": "Yes. B goes round 18 units; A and C each go round 12 units. All three cover 8 square units.",
-       "zh": "对。B 绕一圈是 18 单位，A 和 C 各是 12 单位。三个都铺满 8 平方单位。"
+       "zh": "对。B 绕一圈是 18 个单位长，A 和 C 各是 12 个单位长。三个都铺满 8 平方单位。"
       },
       "wrong": [
        {
@@ -7497,7 +7497,7 @@
       },
       "reveal": {
        "en": "A: 2 × (4 + 2) = 12 units. B: 2 × (8 + 1) = 18 units. C: 2 × (2 + 4) = 12 units. B has the longest perimeter.",
-       "zh": "A：2 × (4 + 2) = 12 单位。B：2 × (8 + 1) = 18 单位。C：2 × (2 + 4) = 12 单位。B 的周长最长。"
+       "zh": "A：2 × (4 + 2) = 12 个单位长。B：2 × (8 + 1) = 18 个单位长。C：2 × (2 + 4) = 12 个单位长。B 的周长最长。"
       }
      }
     },
@@ -7552,7 +7552,7 @@
        "id": "a-and-b",
        "text": {
         "en": "A and B, because both have perimeter 16 units",
-        "zh": "A 和 B，因为周长都是 16 单位"
+        "zh": "A 和 B，因为周长都是 16 个单位长"
        },
        "correct": false,
        "misconception": "same-area-same-perimeter"
@@ -7590,7 +7590,7 @@
         "when": "same-area-same-perimeter",
         "say": {
          "en": "A and B both go round 16 units, but they cover different numbers of squares. Compare their rows.",
-         "zh": "A 和 B 绕一圈都是 16 单位，但铺满的格子数不同。比较它们的行数和每行格子数。"
+         "zh": "A 和 B 绕一圈都是 16 个单位长，但铺满的格子数不同。比较它们的行数和每行格子数。"
         },
         "sample": "a-and-b"
        }
@@ -7601,7 +7601,7 @@
       },
       "reveal": {
        "en": "A covers 6 × 2 = 12 square units, B covers 5 × 3 = 15, and C covers 4 × 3 = 12. Choose A and C. Their perimeters are 16 and 14 units.",
-       "zh": "A 铺满 6 × 2 = 12 平方单位，B 铺满 5 × 3 = 15 平方单位，C 铺满 4 × 3 = 12 平方单位。选 A 和 C，它们的周长分别是 16 和 14 单位。"
+       "zh": "A 铺满 6 × 2 = 12 平方单位，B 铺满 5 × 3 = 15 平方单位，C 铺满 4 × 3 = 12 平方单位。选 A 和 C，它们的周长分别是 16 和 14 个单位长。"
       }
      }
     },
@@ -7766,7 +7766,7 @@
       },
       {
        "en": "B is 10 units long and 2 units broad. Add all four sides.",
-       "zh": "B 长 10 单位、宽 2 单位。把四条边加起来。"
+       "zh": "B 长 10 个单位长、宽 2 个单位长。把四条边加起来。"
       },
       {
        "en": "Work out 10 + 2 + 10 + 2.",
@@ -7776,14 +7776,14 @@
      "feedback": {
       "correct": {
        "en": "Yes. B goes round 10 + 2 + 10 + 2 = 24 units. A has the same area but a perimeter of 18 units.",
-       "zh": "对。B 绕一圈是 10 + 2 + 10 + 2 = 24 单位。A 的面积相同，周长却是 18 单位。"
+       "zh": "对。B 绕一圈是 10 + 2 + 10 + 2 = 24 个单位长。A 的面积相同，周长却是 18 个单位长。"
       },
       "wrong": [
        {
         "when": "same-area-same-perimeter",
         "say": {
          "en": "18 units is the perimeter of A. Use the sides of B, even though both figures cover 20 square units.",
-         "zh": "18 单位是 A 的周长。虽然两个图形都铺满 20 平方单位，还是要用 B 的边来算。"
+         "zh": "18 个单位长是 A 的周长。虽然两个图形都铺满 20 平方单位，还是要用 B 的边来算。"
         },
         "sample": "18"
        },
@@ -7791,7 +7791,7 @@
         "when": "two-sides-only",
         "say": {
          "en": "10 + 2 counts only one length and one breadth. Continue round the other two sides of B.",
-         "zh": "10 + 2 只算了一个长和一个宽。接着绕 B 的另外两条边走。"
+         "zh": "10 + 2 只算了一个长和一个宽。还要加上 B 的另外两条边。"
         },
         "sample": "12"
        },
@@ -7799,7 +7799,7 @@
         "when": "area-perimeter-swap",
         "say": {
          "en": "20 is the number of square units covered. For perimeter, count the unit sides round B.",
-         "zh": "20 是铺满图形的平方单位数。求周长要数 B 外面一圈的单位线段。"
+         "zh": "20 是铺满图形的平方单位数，那是面积。求周长要数 B 外面一圈的单位线段。"
         },
         "sample": "20"
        }
@@ -7810,7 +7810,7 @@
       },
       "reveal": {
        "en": "B has two sides of 10 units and two of 2 units, so its perimeter is 2 × (10 + 2) = 24 units. A covers the same area but goes round 2 × (5 + 4) = 18 units.",
-       "zh": "B 有两条 10 单位的边和两条 2 单位的边，周长是 2 × (10 + 2) = 24 单位。A 铺满相同的面积，绕一圈却是 2 × (5 + 4) = 18 单位。"
+       "zh": "B 有两条 10 个单位长的边和两条 2 个单位长的边，周长是 2 × (10 + 2) = 24 个单位长。A 铺满相同的面积，绕一圈却是 2 × (5 + 4) = 18 个单位长。"
       }
      }
     },
@@ -7858,7 +7858,7 @@
      },
      "guide": {
       "en": "Read the side lengths of B from its grid. Add all four sides and use a unit for length.",
-      "zh": "从方格读出 B 的长和宽。把四条边加起来，并使用长度单位。"
+      "zh": "从方格读出 B 的长和宽，把四条边加起来，单位用长度单位。"
      },
      "hints": [
       {
@@ -7871,7 +7871,7 @@
       },
       {
        "en": "Double 9 + 4, then choose the unit for the distance round a figure.",
-       "zh": "把 9 + 4 的和乘 2，再选量绕一圈长度的单位。"
+       "zh": "把 9 + 4 的和乘 2，再选量长度的单位。"
       }
      ],
      "feedback": {
@@ -7892,7 +7892,7 @@
         "when": "unit-not-squared",
         "say": {
          "en": "The number gives the distance round B, so choose cm. Square centimetres measure the area covered.",
-         "zh": "这个数表示 B 绕一圈的长度，要选 cm。平方厘米量的是铺满的面积。"
+         "zh": "这个数是 B 绕一圈的长度，单位要选 cm；cm² 是量面积的单位。"
         },
         "sample": "26 cm2"
        },
@@ -7911,7 +7911,7 @@
       },
       "reveal": {
        "en": "B has perimeter 9 + 4 + 9 + 4 = 26 cm. A has perimeter 6 + 6 + 6 + 6 = 24 cm. Both areas are 36 cm², so equal area does not guarantee equal perimeter.",
-       "zh": "B 的周长是 9 + 4 + 9 + 4 = 26 cm。A 的周长是 6 + 6 + 6 + 6 = 24 cm。两者面积都是 36 cm²，可见面积相同，周长不一定相同。"
+       "zh": "B 的周长是 9 + 4 + 9 + 4 = 26 cm。A 的周长是 6 + 6 + 6 + 6 = 24 cm。两者面积都是 36 cm²，周长却不同：面积相同，周长不一定相同。"
       }
      }
     }
@@ -8260,7 +8260,7 @@
         "when": "area-perimeter-swap",
         "say": {
          "en": "24 ÷ 2 − 8 treats the area as a perimeter. Look at the area note: divide by the length.",
-         "zh": "24 ÷ 2 − 8 把面积当成了周长。看面积说明：要用面积除以长。"
+         "zh": "24 ÷ 2 − 8 是已知周长时的办法，这里给的是面积。要用面积除以长。"
         },
         "sample": "4"
        }
@@ -8320,7 +8320,7 @@
      },
      "guide": {
       "en": "You know the breadth and the area it covers. Find the length that multiplies with the breadth to make the area.",
-      "zh": "你知道宽和面积。想一想：宽乘多少才等于面积？"
+      "zh": "已知宽和面积。想一想：宽乘多少才等于面积？"
      },
      "hints": [
       {
@@ -8346,7 +8346,7 @@
         "when": "area-perimeter-swap",
         "say": {
          "en": "36 ÷ 2 − 4 treats the area as a perimeter. Look at the area note: divide by the breadth.",
-         "zh": "36 ÷ 2 − 4 把面积当成了周长。看面积说明：要用面积除以宽。"
+         "zh": "36 ÷ 2 − 4 是已知周长时的办法，这里给的是面积。要用面积除以宽。"
         },
         "sample": "14"
        }
@@ -8432,7 +8432,7 @@
         "when": "area-perimeter-swap",
         "say": {
          "en": "60 ÷ 2 − 12 treats the area as a perimeter. Look at the area note: divide by the length.",
-         "zh": "60 ÷ 2 − 12 把面积当成了周长。看面积说明：要用面积除以长。"
+         "zh": "60 ÷ 2 − 12 是已知周长时的办法，这里给的是面积。要用面积除以长。"
         },
         "sample": "18"
        }
@@ -8497,7 +8497,7 @@
      "hints": [
       {
        "en": "Look at the perimeter note: it measures all four sides.",
-       "zh": "看周长说明：周长是四条边的总长。"
+       "zh": "题目给的是周长，也就是四条边的总长。"
       },
       {
        "en": "Find half the perimeter first.",
@@ -8518,7 +8518,7 @@
         "when": "perimeter-not-halved",
         "say": {
          "en": "30 − 11 gives the other three sides together. Look at the four sides: halve the perimeter before subtracting the length.",
-         "zh": "30 − 11 得到的是另外三条边的和。看四条边：先把周长除以 2，再减去长。"
+         "zh": "30 − 11 得到的是另外三条边的和。周长里有两条长、两条宽：先把周长除以 2，再减去长。"
         },
         "sample": "19"
        }
@@ -8583,7 +8583,7 @@
      "hints": [
       {
        "en": "Look at the perimeter note: it measures all four sides.",
-       "zh": "看周长说明：周长是四条边的总长。"
+       "zh": "题目给的是周长，也就是四条边的总长。"
       },
       {
        "en": "Find half the perimeter first.",
@@ -8604,7 +8604,7 @@
         "when": "perimeter-not-halved",
         "say": {
          "en": "34 − 7 gives the other three sides together. Look at the four sides: halve the perimeter before subtracting the breadth.",
-         "zh": "34 − 7 得到的是另外三条边的和。看四条边：先把周长除以 2，再减去宽。"
+         "zh": "34 − 7 得到的是另外三条边的和。周长里有两条长、两条宽：先把周长除以 2，再减去宽。"
         },
         "sample": "27"
        }
@@ -8816,7 +8816,7 @@
      "hints": [
       {
        "en": "The note gives area, which covers the inside.",
-       "zh": "说明给的是面积，是铺满里面的面。"
+       "zh": "题目给的是面积，是铺满里面的面。"
       },
       {
        "en": "Divide the area by the length. The breadth is a length, so use cm.",
@@ -8833,7 +8833,7 @@
         "when": "area-perimeter-swap",
         "say": {
          "en": "Halving then subtracting is the perimeter method. Look at the area note: divide 60 by the length 10.",
-         "zh": "先除以 2 再减去长，是已知周长时的方法。看面积说明：用 60 除以长 10。"
+         "zh": "先除以 2 再减去长，是已知周长时的方法，这里给的是面积：用 60 除以长 10。"
         },
         "sample": "a"
        },
@@ -8841,7 +8841,7 @@
         "when": "unit-not-squared",
         "say": {
          "en": "The number 6 gives the breadth, a length. Look at the side marked ?: use cm; cm² measures area.",
-         "zh": "6 表示宽，是一段长度。看问号处的边：单位用 cm；cm² 是面积单位。"
+         "zh": "6 对了，可宽是一段长度，单位要用 cm；cm² 是面积单位。"
         },
         "sample": "c"
        }
@@ -8929,7 +8929,7 @@
      "hints": [
       {
        "en": "The note gives the distance round all four sides.",
-       "zh": "说明给的是四条边绕一圈的总长。"
+       "zh": "题目给的是四条边绕一圈的总长。"
       },
       {
        "en": "Half the perimeter = length + breadth.",
@@ -8950,7 +8950,7 @@
         "when": "area-perimeter-swap",
         "say": {
          "en": "Dividing by the breadth finds a length from area. Look at the perimeter note: halve 32 before subtracting 4.",
-         "zh": "用总数除以宽，是已知面积时的方法。看周长说明：先把 32 除以 2，再减去 4。"
+         "zh": "用 32 除以宽，是已知面积时的方法，这里给的是周长：先把 32 除以 2，再减去 4。"
         },
         "sample": "a"
        },
@@ -8958,7 +8958,7 @@
         "when": "perimeter-not-halved",
         "say": {
          "en": "32 − 4 gives the other three sides together. Look at the pair of equal lengths: use half the perimeter first.",
-         "zh": "32 − 4 得到另外三条边的和。看两条相等的长：要先求周长的一半。"
+         "zh": "32 − 4 得到另外三条边的和。周长里有两条长、两条宽，要先求周长的一半。"
         },
         "sample": "b"
        }
@@ -9236,7 +9236,7 @@
         "when": "side-from-total",
         "say": {
          "en": "64 ÷ 4 = 16 shares out a perimeter, not an area. A 16 cm square has an area of 256 cm². Find the number that times itself makes 64.",
-         "zh": "64 ÷ 4 = 16 是分周长的办法，不是求面积的。边长 16 cm 的正方形面积是 256 cm²。找乘它自己得 64 的数。"
+         "zh": "64 ÷ 4 = 16 是已知周长时的办法。边长 16 cm 的正方形面积是 256 cm²，不是 64 cm²。要找乘它自己得 64 的数。"
         },
         "sample": "16"
        }
@@ -9434,7 +9434,7 @@
         "when": "unit-not-squared",
         "say": {
          "en": "11 is the side length. Look at the side: it is measured in cm; cm² measures the surface covered.",
-         "zh": "11 是边长。看看那条边，长度用 cm；cm² 是量铺满的面的单位。"
+         "zh": "11 对了，可边长是一段长度，单位要用 cm；cm² 是量面积的单位。"
         },
         "sample": "11 cm2"
        }
@@ -9529,7 +9529,7 @@
         "when": "side-from-total",
         "say": {
          "en": "100 ÷ 4 = 25 uses the rule for sharing a perimeter. Look at the area note: find a number that times itself makes 100.",
-         "zh": "100 ÷ 4 = 25 用的是分周长的办法。看看面积标注，找乘它自己得 100 的数。"
+         "zh": "100 ÷ 4 = 25 是已知周长时的办法，这里给的是面积。要找乘它自己得 100 的数。"
         },
         "sample": "25"
        }
@@ -9624,7 +9624,7 @@
         "when": "side-from-total",
         "say": {
          "en": "16 ÷ 2 = 8 does not undo side × side. An 8 m square covers 64 m². Look for the equal factors of 16.",
-         "zh": "16 ÷ 2 = 8 不能还原边长 × 边长。边长 8 m 的正方形面积是 64 m²。找两个相同的数，相乘得 16。"
+         "zh": "16 ÷ 2 = 8 不对：边长 8 m 的正方形面积是 64 m²。要找两个相同的数，相乘得 16。"
         },
         "sample": "8 m"
        },
@@ -9632,7 +9632,7 @@
         "when": "unit-not-squared",
         "say": {
          "en": "4 is the side length, measured in m. Look at one edge of the floor; m² measures the surface covered.",
-         "zh": "4 是边长，用 m 来量。看看地面的一条边；m² 是量铺满的面的单位。"
+         "zh": "4 对了，可边长是一段长度，单位要用 m；m² 是量面积的单位。"
         },
         "sample": "4 m2"
        }
@@ -9750,7 +9750,7 @@
         "when": "side-from-total",
         "say": {
          "en": "24 ÷ 2 = 12 gives two sides together. Squaring 12 gives 144. Look at the four equal sides and use 24 ÷ 4 before multiplying.",
-         "zh": "24 ÷ 2 = 12 是两条边的总长，12 × 12 才会得 144。看看四条相等的边，先用 24 ÷ 4，再相乘。"
+         "zh": "24 ÷ 2 = 12 是两条边的总长，用它算出的是 144。周长要平均分给四条边：先算 24 ÷ 4，再相乘。"
         },
         "sample": "a"
        },
@@ -9768,8 +9768,8 @@
        "zh": "还没对。先从周长求一条边，再把边长乘它自己。"
       },
       "reveal": {
-       "en": "The side is 24 ÷ 4 = 6 cm. Its area is 6 × 6 = 36 cm², option b.",
-       "zh": "边长是 24 ÷ 4 = 6 cm。面积是 6 × 6 = 36 cm²，选 b。"
+       "en": "The side is 24 ÷ 4 = 6 cm. Its area is 6 × 6 = 36 cm².",
+       "zh": "边长是 24 ÷ 4 = 6 cm。面积是 6 × 6 = 36 cm²。"
       }
      }
     },
@@ -9876,7 +9876,7 @@
         "when": "area-perimeter-swap",
         "say": {
          "en": "36 m measures the fence round the garden. Changing the unit to m² does not find the area. Look inside: find the side, then multiply it by itself.",
-         "zh": "36 m 量的是绕花园一圈的围栏。把单位换成 m² 不能求出面积。看看里面的面，先求边长，再把边长乘它自己。"
+         "zh": "36 m 是绕花园一圈的围栏长度，不是面积，改写成 m² 也不对。先求边长，再把边长乘它自己。"
         },
         "sample": "a"
        },
@@ -9884,7 +9884,7 @@
         "when": "side-from-total",
         "say": {
          "en": "36 ÷ 2 = 18 gives two sides together, and 18 × 18 gives 324. Look at all four equal sides: divide 36 by 4 first.",
-         "zh": "36 ÷ 2 = 18 是两条边的总长，18 × 18 得 324。看看四条相等的边，先把 36 除以 4。"
+         "zh": "36 ÷ 2 = 18 是两条边的总长，18 × 18 得 324。四条边一样长，要先把 36 除以 4。"
         },
         "sample": "b"
        }
@@ -9894,8 +9894,8 @@
        "zh": "还没对。把周长平均分给四条边，再用边长 × 边长求面积。"
       },
       "reveal": {
-       "en": "36 ÷ 4 = 9 m for one side. 9 × 9 = 81 m², so choose c.",
-       "zh": "边长是 36 ÷ 4 = 9 m。9 × 9 = 81 m²，所以选 c。"
+       "en": "36 ÷ 4 = 9 m for one side. 9 × 9 = 81 m².",
+       "zh": "边长是 36 ÷ 4 = 9 m。9 × 9 = 81 m²。"
       }
      }
     },
@@ -10024,7 +10024,7 @@
         "when": "area-perimeter-swap",
         "say": {
          "en": "A 3 by 5 rectangle has a perimeter of 16 m, but covers 15 m² and has unequal adjacent sides. Look at the area note and draw equal sides whose product is 16.",
-         "zh": "3 × 5 的长方形周长是 16 m，面积却是 15 m²，相邻的边也不相等。看看面积标注，画相等的边，让边长乘边长得 16。"
+         "zh": "3 × 5 的长方形周长是 16 m，面积却是 15 m²，而且相邻的两条边不相等。要画四条边相等的正方形，让边长乘边长得 16。"
         },
         "sample": "3x5"
        }
@@ -10970,7 +10970,7 @@
      },
      "guide": {
       "en": "Use the total lengths to find the missing sides of the joined rectangles. Multiply for each piece and add the areas in square centimetres.",
-      "zh": "用总长度求拼合的长方形没标的边。每块分别相乘，再把面积相加，用平方厘米。"
+      "zh": "用总长度求出没标的边。两块的面积分别相乘再相加，单位用平方厘米。"
      },
      "hints": [
       {
@@ -12386,7 +12386,7 @@
         "when": "unit-not-squared",
         "say": {
          "en": "You found the distance round the edge, so use m. m² measures the surface covered by a figure.",
-         "zh": "你求的是绕外边一圈的长度，单位用 m。m² 用来量图形铺满的面积。"
+         "zh": "你求的是绕外边一圈的长度，单位要用 m；m² 是量铺满的面积的单位。"
         },
         "sample": "64 m2"
        }
@@ -12549,7 +12549,7 @@
       },
       {
        "en": "Add each outside segment once, including the short vertical steps.",
-       "zh": "外面每一小段数一次，也要数短的竖直台阶边。"
+       "zh": "外面每一小段数一次，竖着的短台阶边也要数。"
       },
       {
        "en": "Use 9 + 6 + 3 + 2 + 3 + 2 + 3 + 2.",
@@ -12854,7 +12854,7 @@
       },
       {
        "en": "Their lengths are 13 − 8 m and 8 − 5 m.",
-       "zh": "它们的长度是 13 − 8 m 和 8 − 5 m。"
+       "zh": "它们分别是 13 − 8 和 8 − 5。"
       },
       {
        "en": "Add 13 + 8 + 8 + 3 + 5 + 5.",
@@ -12879,7 +12879,7 @@
         "when": "area-perimeter-swap",
         "say": {
          "en": "89 m² is the area covered by the figure. Look at the outside lengths to find the distance round in m.",
-         "zh": "89 m² 是这个图形铺满的面积。看外面一圈的边长，用 m 表示周长。"
+         "zh": "89 m² 是铺满这个图形的面积。周长是绕外面一圈的长度，单位要用 m。"
         },
         "sample": "surface"
        }
@@ -13041,7 +13041,7 @@
        "when": "border-squares",
        "say": {
         "en": "10 counts the squares along the edge. Count their sides on the edge: corner squares have two.",
-        "zh": "10 数的是边上的格子。要数它们在外面的边：角上的格子有两段。"
+        "zh": "10 是边上的格子数。要数露在外面的边：角上的格子有两段。"
        },
        "sample": "=10"
       },

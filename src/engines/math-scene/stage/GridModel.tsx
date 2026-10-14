@@ -473,6 +473,12 @@ export function GridModel(p: GridModelProps) {
       const d = `M${pts.map(([x, y]) => `${x} ${y}`).join('L')}${n === order.length ? 'Z' : ''}`;
       const end = pts.at(-1)!;
       const counts = F.sx >= 24 && m.show !== 'none';
+      // The running count sits just inside the figure when dimension lines stand outside it, so it never meets a dimension line.
+      const all = walkPoints(order, order.length).map(([x, y]) => [F.X(x), F.Y(y)] as const);
+      const mid: [number, number] = [(Math.min(...all.map((p) => p[0])) + Math.max(...all.map((p) => p[0]))) / 2, (Math.min(...all.map((p) => p[1])) + Math.max(...all.map((p) => p[1]))) / 2];
+      const tuck = (m.dims?.length ?? 0) > 0;
+      const counterDx = tuck && end[0] > mid[0] ? -9 : 9;
+      const counterDy = tuck && end[1] > mid[1] ? -9 : tuck ? 17 : -9;
       out.push(
         <g key={`walk-${f.id}-${n}`} className="ms-grid__walk" aria-hidden="true">
           <path className="ms-grid__walk-path" d={d} pathLength={1} />
@@ -496,7 +502,7 @@ export function GridModel(p: GridModelProps) {
             {!reduced && <animateMotion dur="0.8s" fill="freeze" path={`M0 0${pts.map(([x, y]) => `L${x - pts[0]![0]} ${y - pts[0]![1]}`).join('')}`} />}
           </circle>
           {!counts && (
-            <text className="ms-grid__walk-count" x={end[0] + 9} y={end[1] - 9}>
+            <text className="ms-grid__walk-count" x={end[0] + counterDx} y={end[1] + counterDy} textAnchor={counterDx < 0 ? 'end' : 'start'}>
               {n}
             </text>
           )}
