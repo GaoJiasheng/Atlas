@@ -1,0 +1,7056 @@
+{
+ "parts": [
+  {
+   "id": "sun",
+   "name": {
+    "en": "Sun",
+    "zh": "太阳"
+   },
+   "group": "sky-and-sea",
+   "summary": {
+    "en": "Heats the sea and land so that water evaporates.",
+    "zh": "晒热海面和陆地，让水蒸发。"
+   },
+   "detail": {
+    "en": "The Sun's heat is what drives the water cycle. Warmed by sunlight, water at the surface of the sea, of reservoirs and of wet ground and leaves evaporates, at any temperature and not only at boiling point [S26]. On a clear day close to noon, about 1,000 watts of sunlight fall on each square metre of ground [S29]; the simulation in this topic uses 900 W/m² [S1].\n\nThe model puts the Sun in a fixed place over the sea so that the start of the cycle reads from left to right. Its size and distance are not to scale.\n\nWithout the Sun's heat, evaporation would slow down and the water cycle would stop.",
+    "zh": "推动水循环的是太阳的热。海面、蓄水池、潮湿的地面和叶子上的水被阳光晒暖就会蒸发；蒸发在任何温度下都会发生，不是到了沸点才有 [S26]。晴天接近正午时，每平方米地面接收约 1,000 瓦的阳光 [S29]；本主题的模拟取 900 W/m² [S1]。\n\n模型把太阳固定画在海的上方，好让水循环从左往右读。它的大小和距离都不按比例。\n\n没有太阳的热，蒸发会变慢，水循环就会停下来。"
+   },
+   "primitive": {
+    "kind": "sphere",
+    "size": [
+     0.17
+    ],
+    "at": [
+     -2.62,
+     1.5,
+     -0.75
+    ],
+    "color": "token:lamp"
+   },
+   "castShadow": false
+  },
+  {
+   "id": "sea",
+   "name": {
+    "en": "Sea",
+    "zh": "海"
+   },
+   "group": "sky-and-sea",
+   "summary": {
+    "en": "Holds most of the water that evaporates into the air.",
+    "zh": "空气里的水汽大多从海面蒸发而来。"
+   },
+   "detail": {
+    "en": "About 96.5 % of all the water on Earth is in the oceans, and it is salty; only about 2.5 % is fresh water, and most of that is frozen in ice or lies underground [S28]. Most of the water vapour that later falls on Singapore as rain evaporates from warm sea.\n\nThe model shows the sea as a clear block so that its depth and the pipes on the sea floor can be seen. Seawater is also the source of the desalination plant on the left.\n\nSalt does not evaporate with the water, which is why rain is fresh while the sea stays salty.",
+    "zh": "地球上约 96.5 % 的水在海洋里，是咸的；淡水只占约 2.5 %，而且大部分冻在冰里或藏在地下 [S28]。后来落在新加坡的雨，大部分是从温暖的海面蒸发上去的水蒸气。\n\n模型把海画成透明的一块，好让人看见海的深度和海床上的管道。左边的海水淡化厂也从这片海取水。\n\n盐不会跟着水一起蒸发，所以雨水是淡的，海水却一直是咸的。"
+   },
+   "primitive": {
+    "kind": "extrude",
+    "shape": [
+     [
+      -3.0,
+      -0.03
+     ],
+     [
+      -3.0,
+      -0.46
+     ],
+     [
+      -2.2,
+      -0.31
+     ],
+     [
+      -1.78,
+      -0.14
+     ],
+     [
+      -1.7,
+      -0.1
+     ],
+     [
+      -1.7,
+      -0.03
+     ]
+    ],
+    "depth": 2.4,
+    "at": [
+     0,
+     0,
+     0.0
+    ],
+    "color": "membrane",
+    "tint": "#6c919a"
+   },
+   "castShadow": false,
+   "connects": [
+    "desal-intake"
+   ]
+  },
+  {
+   "id": "cumulus",
+   "name": {
+    "en": "Cumulus cloud",
+    "zh": "积云"
+   },
+   "group": "sky-and-sea",
+   "summary": {
+    "en": "Made of tiny droplets formed by condensation.",
+    "zh": "由水蒸气凝结成的小水滴组成。"
+   },
+   "detail": {
+    "en": "A cloud is made of tiny droplets of liquid water, not of water vapour. Warm, moist air rises from the sea and cools as it goes higher; the cooler air cannot hold as much water vapour, so some of it condenses into droplets far too small to fall [S26].\n\nPuffy cumulus clouds like this one grow over the sea and the land on hot afternoons. The model draws the cloud far closer to the ground than it is.\n\nIf the droplets join into drops heavy enough to fall, the cloud gives rain.",
+    "zh": "云是由极小的液态水滴组成的，不是水蒸气。温暖潮湿的空气从海面升起，越往上越冷；冷空气容纳不下那么多水蒸气，一部分就凝结成小水滴，小得落不下来 [S26]。\n\n像这样一团团的积云，常在炎热的午后出现在海面和陆地上空。模型把云画得离地面近得多。\n\n小水滴合成够重的大水滴，云就下雨了。"
+   },
+   "primitive": {
+    "kind": "sphere",
+    "size": [
+     0.23
+    ],
+    "at": [
+     -2.12,
+     1.26,
+     -0.25
+    ],
+    "color": "plastic",
+    "tint": "#f3f0e8",
+    "scale": [
+     1,
+     0.9,
+     1
+    ]
+   },
+   "extra": [
+    {
+     "kind": "sphere",
+     "size": [
+      0.19
+     ],
+     "at": [
+      -2.39,
+      1.12,
+      -0.19
+     ],
+     "color": "plastic",
+     "tint": "#f3f0e8",
+     "scale": [
+      1,
+      0.72,
+      1
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.2
+     ],
+     "at": [
+      -1.84,
+      1.13,
+      -0.28
+     ],
+     "color": "plastic",
+     "tint": "#f3f0e8",
+     "scale": [
+      1,
+      0.72,
+      1
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.18
+     ],
+     "at": [
+      -2.06,
+      1.12,
+      -0.02
+     ],
+     "color": "plastic",
+     "tint": "#f3f0e8",
+     "scale": [
+      1,
+      0.7,
+      1
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.18
+     ],
+     "at": [
+      -2.22,
+      1.14,
+      -0.48
+     ],
+     "color": "plastic",
+     "tint": "#f3f0e8",
+     "scale": [
+      1,
+      0.7,
+      1
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.13
+     ],
+     "at": [
+      -2.58,
+      1.08,
+      -0.33
+     ],
+     "color": "plastic",
+     "tint": "#f3f0e8",
+     "scale": [
+      1,
+      0.66,
+      1
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.13
+     ],
+     "at": [
+      -1.64,
+      1.08,
+      -0.15
+     ],
+     "color": "plastic",
+     "tint": "#f3f0e8",
+     "scale": [
+      1,
+      0.66,
+      1
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.17
+     ],
+     "at": [
+      -2.02,
+      1.44,
+      -0.21
+     ],
+     "color": "plastic",
+     "tint": "#f3f0e8",
+     "scale": [
+      1,
+      0.95,
+      1
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.15
+     ],
+     "at": [
+      -2.26,
+      1.36,
+      -0.33
+     ],
+     "color": "plastic",
+     "tint": "#f3f0e8",
+     "scale": [
+      1,
+      0.9,
+      1
+     ]
+    }
+   ],
+   "castShadow": false,
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.3
+   },
+   "connects": [
+    "rain-cloud"
+   ]
+  },
+  {
+   "id": "rain-cloud",
+   "name": {
+    "en": "Rain cloud",
+    "zh": "雨云"
+   },
+   "group": "sky-and-sea",
+   "summary": {
+    "en": "Lets its drops fall as rain.",
+    "zh": "云里的水滴变大，落下成雨。"
+   },
+   "detail": {
+    "en": "Inside a rain cloud the droplets collide and join into drops heavy enough to fall. Rain is the part of the water cycle that brings fresh water back to the land [S26]. Singapore receives a lot of it: on average about 2,534 mm a year across the island, and about 2,113 mm at the Changi climate station [S24, S23].\n\nIn this topic's simulation a heavy shower of 30 mm an hour falls on the catchment [S1]. In the storm pose the model makes the cloud larger and moves the sea cloud inland.\n\nWithout rain the reservoirs slowly go down, which is why Singapore also has sources that do not depend on the weather.",
+    "zh": "雨云里的小水滴互相碰撞，合成重得能落下来的大水滴。下雨是水循环中把淡水送回陆地的一步 [S26]。新加坡的雨水很多：全岛平均每年约 2,534 mm，樟宜气候站约 2,113 mm [S24, S23]。\n\n在本主题的模拟里，一场每小时 30 mm 的大阵雨落在集水区上 [S1]。在\"暴雨\"姿态下，模型把雨云放大，把海上的云往内陆推。\n\n不下雨，蓄水池的水位就慢慢下降；所以新加坡还有不靠天气的水源。"
+   },
+   "primitive": {
+    "kind": "sphere",
+    "size": [
+     0.17
+    ],
+    "at": [
+     -0.15,
+     1.06,
+     -0.56
+    ],
+    "color": "plastic",
+    "tint": "#a7a7a2",
+    "scale": [
+     1,
+     0.66,
+     1.0
+    ]
+   },
+   "extra": [
+    {
+     "kind": "sphere",
+     "size": [
+      0.21
+     ],
+     "at": [
+      0.14,
+      1.11,
+      -0.72
+     ],
+     "color": "plastic",
+     "tint": "#a7a7a2",
+     "scale": [
+      1,
+      0.66,
+      1.0
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.24
+     ],
+     "at": [
+      0.45,
+      1.15,
+      -0.54
+     ],
+     "color": "plastic",
+     "tint": "#a7a7a2",
+     "scale": [
+      1,
+      0.66,
+      1.0
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.25
+     ],
+     "at": [
+      0.76,
+      1.18,
+      -0.69
+     ],
+     "color": "plastic",
+     "tint": "#a7a7a2",
+     "scale": [
+      1,
+      0.66,
+      1.0
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.26
+     ],
+     "at": [
+      1.08,
+      1.19,
+      -0.55
+     ],
+     "color": "plastic",
+     "tint": "#a7a7a2",
+     "scale": [
+      1,
+      0.66,
+      1.0
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.25
+     ],
+     "at": [
+      1.4,
+      1.17,
+      -0.69
+     ],
+     "color": "plastic",
+     "tint": "#a7a7a2",
+     "scale": [
+      1,
+      0.66,
+      1.0
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.22
+     ],
+     "at": [
+      1.7,
+      1.14,
+      -0.54
+     ],
+     "color": "plastic",
+     "tint": "#a7a7a2",
+     "scale": [
+      1,
+      0.66,
+      1.0
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.2
+     ],
+     "at": [
+      2.0,
+      1.11,
+      -0.67
+     ],
+     "color": "plastic",
+     "tint": "#a7a7a2",
+     "scale": [
+      1,
+      0.66,
+      1.0
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.16
+     ],
+     "at": [
+      2.26,
+      1.07,
+      -0.56
+     ],
+     "color": "plastic",
+     "tint": "#a7a7a2",
+     "scale": [
+      1,
+      0.66,
+      1.0
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.19
+     ],
+     "at": [
+      0.6,
+      1.34,
+      -0.62
+     ],
+     "color": "plastic",
+     "tint": "#a7a7a2",
+     "scale": [
+      1,
+      0.66,
+      1.0
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.2
+     ],
+     "at": [
+      1.05,
+      1.38,
+      -0.6
+     ],
+     "color": "plastic",
+     "tint": "#a7a7a2",
+     "scale": [
+      1,
+      0.66,
+      1.0
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.18
+     ],
+     "at": [
+      1.5,
+      1.32,
+      -0.64
+     ],
+     "color": "plastic",
+     "tint": "#a7a7a2",
+     "scale": [
+      1,
+      0.66,
+      1.0
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.15
+     ],
+     "at": [
+      0.3,
+      1.18,
+      -0.42
+     ],
+     "color": "plastic",
+     "tint": "#a7a7a2",
+     "scale": [
+      1,
+      0.66,
+      1.0
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.16
+     ],
+     "at": [
+      1.3,
+      1.14,
+      -0.38
+     ],
+     "color": "plastic",
+     "tint": "#a7a7a2",
+     "scale": [
+      1,
+      0.66,
+      1.0
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.17
+     ],
+     "at": [
+      0.9,
+      1.13,
+      -0.88
+     ],
+     "color": "plastic",
+     "tint": "#a7a7a2",
+     "scale": [
+      1,
+      0.66,
+      1.0
+     ]
+    }
+   ],
+   "castShadow": false,
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.3
+   },
+   "connects": [
+    "forest-hill"
+   ]
+  },
+  {
+   "id": "forest-hill",
+   "name": {
+    "en": "Forested catchment",
+    "zh": "森林集水区"
+   },
+   "group": "catchment",
+   "summary": {
+    "en": "Catches rain on protected forest.",
+    "zh": "受保护的森林接住雨水。"
+   },
+   "detail": {
+    "en": "Forest on the hills catches the rain. Water soaks into the soil and runs down the slopes into streams and into the reservoir in the valley. Singapore's oldest reservoirs lie among protected forest in the centre of the island; its highest natural point, Bukit Timah Hill, is only 163 m high [S31].\n\nThe model raises the hills far above their real height and draws the trees as round crowns.\n\nKeeping the forest and its streams clean keeps the water clean: what falls or is dumped in a catchment ends up in the reservoir [S25].",
+    "zh": "山上的森林接住雨水。水渗进土里，再顺着山坡流进小溪、流进山谷里的蓄水池。新加坡最早的几座蓄水池就在岛中央受保护的森林里；全岛最高的自然地点武吉知马山也只有 163 米 [S31]。\n\n模型把山画得比实际高得多，树也画成一个个圆圆的树冠。\n\n保持森林和溪流干净，水也就干净：落在或被丢在集水区里的东西，最后都会流进蓄水池 [S25]。"
+   },
+   "primitive": {
+    "kind": "extrude",
+    "shape": [
+     [
+      1.05,
+      -1.2
+     ],
+     [
+      3.0,
+      -1.2
+     ],
+     [
+      3.0,
+      -0.22
+     ],
+     [
+      2.18,
+      -0.22
+     ],
+     [
+      2.18,
+      -0.37
+     ],
+     [
+      2.46,
+      -0.455
+     ],
+     [
+      2.515,
+      -0.62
+     ],
+     [
+      2.485,
+      -0.85
+     ],
+     [
+      2.335,
+      -0.955
+     ],
+     [
+      2.0,
+      -0.955
+     ],
+     [
+      1.71,
+      -0.86
+     ],
+     [
+      1.605,
+      -0.66
+     ],
+     [
+      1.74,
+      -0.49
+     ],
+     [
+      1.88,
+      -0.405
+     ],
+     [
+      1.88,
+      -0.22
+     ],
+     [
+      1.05,
+      -0.22
+     ]
+    ],
+    "depth": 0.1,
+    "rotation": [
+     90,
+     0,
+     0
+    ],
+    "at": [
+     0,
+     0.05,
+     0
+    ],
+    "color": "tissue",
+    "tint": "#71805a"
+   },
+   "extra": [
+    {
+     "kind": "lathe",
+     "profile": [
+      [
+       0,
+       0.22
+      ],
+      [
+       0.075,
+       0.2112
+      ],
+      [
+       0.15,
+       0.176
+      ],
+      [
+       0.216,
+       0.1144
+      ],
+      [
+       0.27,
+       0.044
+      ],
+      [
+       0.3,
+       0
+      ],
+      [
+       0,
+       0
+      ]
+     ],
+     "segments": 40,
+     "at": [
+      1.38,
+      0.1,
+      -0.86
+     ],
+     "color": "tissue",
+     "tint": "#71805a",
+     "scale": [
+      1,
+      1,
+      0.92
+     ]
+    },
+    {
+     "kind": "lathe",
+     "profile": [
+      [
+       0,
+       0.27
+      ],
+      [
+       0.0625,
+       0.2592
+      ],
+      [
+       0.125,
+       0.216
+      ],
+      [
+       0.18,
+       0.1404
+      ],
+      [
+       0.225,
+       0.054
+      ],
+      [
+       0.25,
+       0
+      ],
+      [
+       0,
+       0
+      ]
+     ],
+     "segments": 40,
+     "at": [
+      2.76,
+      0.1,
+      -0.86
+     ],
+     "color": "tissue",
+     "tint": "#71805a",
+     "scale": [
+      1,
+      1,
+      1.25
+     ]
+    },
+    {
+     "kind": "lathe",
+     "profile": [
+      [
+       0,
+       0.12
+      ],
+      [
+       0.0425,
+       0.1152
+      ],
+      [
+       0.085,
+       0.096
+      ],
+      [
+       0.1224,
+       0.0624
+      ],
+      [
+       0.153,
+       0.024
+      ],
+      [
+       0.17,
+       0
+      ],
+      [
+       0,
+       0
+      ]
+     ],
+     "segments": 40,
+     "at": [
+      2.18,
+      0.1,
+      -1.08
+     ],
+     "color": "tissue",
+     "tint": "#71805a",
+     "scale": [
+      1,
+      1,
+      0.7
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.034
+     ],
+     "at": [
+      1.12,
+      0.118,
+      -1.12
+     ],
+     "color": "tissue",
+     "tint": "#5b6c45",
+     "scale": [
+      1,
+      0.8,
+      1
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.034
+     ],
+     "at": [
+      1.2,
+      0.2428,
+      -0.95
+     ],
+     "color": "tissue",
+     "tint": "#5b6c45",
+     "scale": [
+      1,
+      0.8,
+      1
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.034
+     ],
+     "at": [
+      1.18,
+      0.1685,
+      -0.7
+     ],
+     "color": "tissue",
+     "tint": "#5b6c45",
+     "scale": [
+      1,
+      0.8,
+      1
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.034
+     ],
+     "at": [
+      1.3,
+      0.118,
+      -0.55
+     ],
+     "color": "tissue",
+     "tint": "#5b6c45",
+     "scale": [
+      1,
+      0.8,
+      1
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.034
+     ],
+     "at": [
+      1.48,
+      0.1183,
+      -0.6
+     ],
+     "color": "tissue",
+     "tint": "#5b6c45",
+     "scale": [
+      1,
+      0.8,
+      1
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.034
+     ],
+     "at": [
+      1.52,
+      0.1516,
+      -1.08
+     ],
+     "color": "tissue",
+     "tint": "#5b6c45",
+     "scale": [
+      1,
+      0.8,
+      1
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.034
+     ],
+     "at": [
+      1.33,
+      0.118,
+      -0.36
+     ],
+     "color": "tissue",
+     "tint": "#5b6c45",
+     "scale": [
+      1,
+      0.8,
+      1
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.034
+     ],
+     "at": [
+      1.55,
+      0.118,
+      -0.3
+     ],
+     "color": "tissue",
+     "tint": "#5b6c45",
+     "scale": [
+      1,
+      0.8,
+      1
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.034
+     ],
+     "at": [
+      1.68,
+      0.118,
+      -1.08
+     ],
+     "color": "tissue",
+     "tint": "#5b6c45",
+     "scale": [
+      1,
+      0.8,
+      1
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.034
+     ],
+     "at": [
+      1.6,
+      0.2148,
+      -0.92
+     ],
+     "color": "tissue",
+     "tint": "#5b6c45",
+     "scale": [
+      1,
+      0.8,
+      1
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.034
+     ],
+     "at": [
+      1.25,
+      0.1959,
+      -1.05
+     ],
+     "color": "tissue",
+     "tint": "#5b6c45",
+     "scale": [
+      1,
+      0.8,
+      1
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.034
+     ],
+     "at": [
+      1.45,
+      0.2949,
+      -0.98
+     ],
+     "color": "tissue",
+     "tint": "#5b6c45",
+     "scale": [
+      1,
+      0.8,
+      1
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.034
+     ],
+     "at": [
+      2.62,
+      0.118,
+      -1.12
+     ],
+     "color": "tissue",
+     "tint": "#5b6c45",
+     "scale": [
+      1,
+      0.8,
+      1
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.034
+     ],
+     "at": [
+      2.85,
+      0.1969,
+      -1.1
+     ],
+     "color": "tissue",
+     "tint": "#5b6c45",
+     "scale": [
+      1,
+      0.8,
+      1
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.034
+     ],
+     "at": [
+      2.95,
+      0.2139,
+      -0.95
+     ],
+     "color": "tissue",
+     "tint": "#5b6c45",
+     "scale": [
+      1,
+      0.8,
+      1
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.034
+     ],
+     "at": [
+      2.65,
+      0.1791,
+      -0.62
+     ],
+     "color": "tissue",
+     "tint": "#5b6c45",
+     "scale": [
+      1,
+      0.8,
+      1
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.034
+     ],
+     "at": [
+      2.9,
+      0.1447,
+      -0.62
+     ],
+     "color": "tissue",
+     "tint": "#5b6c45",
+     "scale": [
+      1,
+      0.8,
+      1
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.034
+     ],
+     "at": [
+      2.8,
+      0.118,
+      -0.4
+     ],
+     "color": "tissue",
+     "tint": "#5b6c45",
+     "scale": [
+      1,
+      0.8,
+      1
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.034
+     ],
+     "at": [
+      2.6,
+      0.118,
+      -0.3
+     ],
+     "color": "tissue",
+     "tint": "#5b6c45",
+     "scale": [
+      1,
+      0.8,
+      1
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.034
+     ],
+     "at": [
+      2.92,
+      0.118,
+      -0.32
+     ],
+     "color": "tissue",
+     "tint": "#5b6c45",
+     "scale": [
+      1,
+      0.8,
+      1
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.034
+     ],
+     "at": [
+      2.7,
+      0.3734,
+      -0.82
+     ],
+     "color": "tissue",
+     "tint": "#5b6c45",
+     "scale": [
+      1,
+      0.8,
+      1
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.034
+     ],
+     "at": [
+      2.4,
+      0.118,
+      -0.3
+     ],
+     "color": "tissue",
+     "tint": "#5b6c45",
+     "scale": [
+      1,
+      0.8,
+      1
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.034
+     ],
+     "at": [
+      2.42,
+      0.118,
+      -1.12
+     ],
+     "color": "tissue",
+     "tint": "#5b6c45",
+     "scale": [
+      1,
+      0.8,
+      1
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.034
+     ],
+     "at": [
+      2.05,
+      0.1558,
+      -1.12
+     ],
+     "color": "tissue",
+     "tint": "#5b6c45",
+     "scale": [
+      1,
+      0.8,
+      1
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.034
+     ],
+     "at": [
+      1.9,
+      0.118,
+      -1.1
+     ],
+     "color": "tissue",
+     "tint": "#5b6c45",
+     "scale": [
+      1,
+      0.8,
+      1
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.034
+     ],
+     "at": [
+      2.25,
+      0.2005,
+      -1.13
+     ],
+     "color": "tissue",
+     "tint": "#5b6c45",
+     "scale": [
+      1,
+      0.8,
+      1
+     ]
+    },
+    {
+     "kind": "sphere",
+     "size": [
+      0.034
+     ],
+     "at": [
+      1.62,
+      0.118,
+      -0.42
+     ],
+     "color": "tissue",
+     "tint": "#5b6c45",
+     "scale": [
+      1,
+      0.8,
+      1
+     ]
+    }
+   ],
+   "connects": [
+    "inland-reservoir"
+   ]
+  },
+  {
+   "id": "inland-reservoir",
+   "name": {
+    "en": "Inland reservoir",
+    "zh": "内陆蓄水池"
+   },
+   "group": "catchment",
+   "summary": {
+    "en": "Stores rain from the forest.",
+    "zh": "储存从森林流下来的雨水。"
+   },
+   "detail": {
+    "en": "An inland reservoir stores rain that runs off the forested hills around it. Singapore has 17 reservoirs [S3]. The water in them is raw water: it still carries fine soil, tiny living things and dissolved substances, so it is treated at a waterworks before anyone drinks it [S10].\n\nThe model draws the lake small and shallow. In the dry-spell pose its level drops.\n\nIn a long dry spell little rain comes in while water is still drawn out, so the level falls.",
+    "zh": "内陆蓄水池储存从周围森林山坡流下来的雨水。新加坡有 17 个蓄水池 [S3]。池里的水是原水：还带着细小的泥土、微小的生物和溶解的物质，所以要先在水厂处理，才能喝 [S10]。\n\n模型把湖画得又小又浅。在\"干旱\"姿态下，水位会下降。\n\n长时间不下雨，流进来的水很少，取走的水却照样要取，水位就下降了。"
+   },
+   "primitive": {
+    "kind": "extrude",
+    "shape": [
+     [
+      2.17,
+      -0.34
+     ],
+     [
+      2.45,
+      -0.45
+     ],
+     [
+      2.5,
+      -0.62
+     ],
+     [
+      2.47,
+      -0.84
+     ],
+     [
+      2.33,
+      -0.94
+     ],
+     [
+      2.0,
+      -0.94
+     ],
+     [
+      1.72,
+      -0.85
+     ],
+     [
+      1.62,
+      -0.66
+     ],
+     [
+      1.75,
+      -0.5
+     ],
+     [
+      1.89,
+      -0.4
+     ],
+     [
+      1.89,
+      -0.34
+     ]
+    ],
+    "depth": 0.082,
+    "rotation": [
+     90,
+     0,
+     0
+    ],
+    "at": [
+     0,
+     0.041,
+     0
+    ],
+    "color": "membrane",
+    "tint": "#7fa6ae"
+   },
+   "castShadow": false,
+   "connects": [
+    "earth-dam"
+   ]
+  },
+  {
+   "id": "earth-dam",
+   "name": {
+    "en": "Earth dam",
+    "zh": "土坝"
+   },
+   "group": "catchment",
+   "summary": {
+    "en": "Holds the reservoir back in its valley.",
+    "zh": "拦住山谷，把水留在库里。"
+   },
+   "detail": {
+    "en": "An earth dam is a long bank of packed soil and clay built across a valley, so that water collects behind it. Its sides slope gently, and it is wide at the bottom where the water presses hardest.\n\nThe model draws one short dam closing the lake at the front of the forest. Real reservoirs may have several dams and spillways that let floodwater out safely.\n\nA dam is checked for leaks and erosion, because water seeping through could wash the soil away.",
+    "zh": "土坝是用压实的泥土和黏土筑成的长堤，横在山谷上，让水积在它后面。土坝两侧坡度平缓，底部最宽，因为那里水压最大。\n\n模型只画了一道短短的坝，把森林前面的湖拦住。真实的蓄水池可能有好几道坝，还有让洪水安全泄出的溢洪道。\n\n土坝要定期检查有没有渗漏和冲刷，因为渗过坝身的水可能把泥土冲走。"
+   },
+   "primitive": {
+    "kind": "extrude",
+    "shape": [
+     [
+      -0.4,
+      0
+     ],
+     [
+      -0.15,
+      0
+     ],
+     [
+      -0.265,
+      0.112
+     ],
+     [
+      -0.325,
+      0.112
+     ]
+    ],
+    "depth": 0.34,
+    "rotation": [
+     0,
+     -90,
+     0
+    ],
+    "at": [
+     2.03,
+     0,
+     0
+    ],
+    "color": "tissue",
+    "tint": "#93a06c"
+   },
+   "explode": {
+    "dir": [
+     0,
+     0,
+     1
+    ],
+    "dist": 0.2
+   },
+   "connects": [
+    "intake-tower"
+   ]
+  },
+  {
+   "id": "intake-tower",
+   "name": {
+    "en": "Intake tower",
+    "zh": "取水塔"
+   },
+   "group": "catchment",
+   "summary": {
+    "en": "Draws raw water out of the reservoir.",
+    "zh": "从蓄水池里取出原水。"
+   },
+   "detail": {
+    "en": "The intake tower stands in the reservoir near the dam. It draws raw water out of the reservoir into a pipe that runs to the waterworks, where the water is treated [S10].\n\nThe model draws a single slim tower with a footbridge to the dam crest.\n\nIf an intake draws water from near the muddy bottom, the waterworks has more dirt to remove.",
+    "zh": "取水塔立在靠近坝的水里。它从蓄水池里取出原水，送进通往水厂的管道，到水厂再处理 [S10]。\n\n模型只画了一座细长的塔，有一道小桥通到坝顶。\n\n如果从靠近池底的泥水层取水，水厂要去掉的污物就更多。"
+   },
+   "primitive": {
+    "kind": "cylinder",
+    "size": [
+     0.016,
+     0.02,
+     0.2
+    ],
+    "at": [
+     2.03,
+     0.1,
+     -0.47
+    ],
+    "color": "enamel"
+   },
+   "extra": [
+    {
+     "kind": "cylinder",
+     "size": [
+      0.024,
+      0.024,
+      0.014
+     ],
+     "at": [
+      2.03,
+      0.207,
+      -0.47
+     ],
+     "color": "enamel"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.012,
+      0.008,
+      0.15
+     ],
+     "at": [
+      2.03,
+      0.12,
+      -0.375
+     ],
+     "color": "enamel"
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.2
+   },
+   "connects": [
+    "raw-water-main"
+   ]
+  },
+  {
+   "id": "city-blocks",
+   "name": {
+    "en": "Urban catchment",
+    "zh": "城市集水区"
+   },
+   "group": "catchment",
+   "summary": {
+    "en": "Shed rain from roofs, roads and open ground.",
+    "zh": "屋顶、路面和空地把雨水排走。"
+   },
+   "detail": {
+    "en": "In Singapore's city, roofs, roads and open ground are part of the catchment too. Rain that falls on them runs into drains and canals that lead to reservoirs; rain falling on about two-thirds of the land is collected this way [S3].\n\nThe model draws the city as a grid of plain blocks. Rain on hard surfaces runs off much faster than rain on forest: the drainage code counts almost all of it on paved ground and less than half on vegetated ground [S30].\n\nLitter and oil left on the ground are washed into the drains with the next shower.",
+    "zh": "在新加坡，城市的屋顶、道路和空地也是集水区的一部分。落在上面的雨流进排水沟和运河，再流到蓄水池；约三分之二土地上的雨水都这样收集起来 [S3]。\n\n模型把城市画成一格格简单的楼块。雨落在硬地上，比落在森林里流走得快得多：排水规范把铺装地上的雨几乎全部算作径流，植被地上不到一半 [S30]。\n\n丢在地上的垃圾和油污，下一场雨就被冲进排水沟。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.2,
+     0.15,
+     0.07
+    ],
+    "bevel": 0.006,
+    "at": [
+     0.075,
+     0.075,
+     -1.0
+    ],
+    "color": "enamel",
+    "tint": "#d6d0c2"
+   },
+   "extra": [
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.2,
+      0.15,
+      0.07
+     ],
+     "bevel": 0.006,
+     "at": [
+      0.075,
+      0.075,
+      -0.72
+     ],
+     "color": "enamel",
+     "tint": "#d6d0c2"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.2,
+      0.15,
+      0.07
+     ],
+     "bevel": 0.006,
+     "at": [
+      0.075,
+      0.075,
+      -0.44
+     ],
+     "color": "enamel",
+     "tint": "#d6d0c2"
+    }
+   ],
+   "repeat": {
+    "count": 4,
+    "axis": [
+     1,
+     0,
+     0
+    ],
+    "spacing": 0.35
+   },
+   "connects": [
+    "drains"
+   ]
+  },
+  {
+   "id": "drains",
+   "name": {
+    "en": "Drains",
+    "zh": "排水沟"
+   },
+   "group": "catchment",
+   "summary": {
+    "en": "Collect the rain that runs off the ground.",
+    "zh": "收集地面上流走的雨水。"
+   },
+   "detail": {
+    "en": "Open concrete drains run along the streets and collect the rain that runs off roofs and roads. They join larger drains and canals that carry the water downhill to a reservoir [S3].\n\nThe model draws a few straight U-shaped drains between the blocks; real drains form a network across the whole island.\n\nA drain blocked by leaves or litter overflows in a heavy shower, and the street floods.",
+    "zh": "街道旁的露天混凝土排水沟收集从屋顶和路面流下来的雨水。它们汇进更大的排水沟和运河，把水顺坡送到蓄水池 [S3]。\n\n模型只在楼块之间画了几条笔直的 U 形排水沟；真实的排水沟连成一张覆盖全岛的网。\n\n排水沟被落叶或垃圾堵住，大雨时就会漫出来，淹到街上。"
+   },
+   "primitive": {
+    "kind": "sweep",
+    "path": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.28
+     ],
+     [
+      0.0,
+      0.0,
+      0.56
+     ],
+     [
+      0.0,
+      -0.004,
+      0.66
+     ]
+    ],
+    "radius": 0.013,
+    "section": "u",
+    "up": [
+     0,
+     -1,
+     0
+    ],
+    "caps": "flat",
+    "at": [
+     0.42,
+     0.012,
+     -0.86
+    ],
+    "color": "enamel",
+    "tint": "#bdb7aa"
+   },
+   "extra": [
+    {
+     "kind": "sweep",
+     "path": [
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       1.04,
+       0.0,
+       0.0
+      ]
+     ],
+     "radius": 0.013,
+     "section": "u",
+     "up": [
+      0,
+      -1,
+      0
+     ],
+     "caps": "flat",
+     "at": [
+      -0.62,
+      0.012,
+      -0.86
+     ],
+     "color": "enamel",
+     "tint": "#bdb7aa"
+    },
+    {
+     "kind": "sweep",
+     "path": [
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       1.04,
+       0.0,
+       0.0
+      ]
+     ],
+     "radius": 0.013,
+     "section": "u",
+     "up": [
+      0,
+      -1,
+      0
+     ],
+     "caps": "flat",
+     "at": [
+      -0.62,
+      0.012,
+      -0.58
+     ],
+     "color": "enamel",
+     "tint": "#bdb7aa"
+    },
+    {
+     "kind": "sweep",
+     "path": [
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       1.02,
+       0.0,
+       0.0
+      ]
+     ],
+     "radius": 0.013,
+     "section": "u",
+     "up": [
+      0,
+      -1,
+      0
+     ],
+     "caps": "flat",
+     "at": [
+      -0.62,
+      0.012,
+      -0.3
+     ],
+     "color": "enamel",
+     "tint": "#bdb7aa"
+    }
+   ],
+   "connects": [
+    "canal"
+   ]
+  },
+  {
+   "id": "canal",
+   "name": {
+    "en": "Canal",
+    "zh": "运河"
+   },
+   "group": "catchment",
+   "summary": {
+    "en": "Carries rain from the drains to a reservoir.",
+    "zh": "把排水沟里的雨水送进蓄水池。"
+   },
+   "detail": {
+    "en": "A concrete canal collects water from many drains and carries it to an estuary reservoir. In the city, canals and rivers that once flowed straight to the sea now end in reservoirs [S3, S7].\n\nThe model draws one canal from the city to the reservoir behind the barrage.\n\nCanals are built large enough for heavy storms, so for most of the year the water in them is shallow.",
+    "zh": "混凝土运河汇集许多排水沟的水，把它送进河口蓄水池。在城市里，以前直接流进大海的运河和河流，现在都流进蓄水池 [S3, S7]。\n\n模型只画了一条运河，从城市通到堤坝后面的蓄水池。\n\n运河要按大暴雨的水量来建，所以一年里大部分时候，里面的水都很浅。"
+   },
+   "primitive": {
+    "kind": "sweep",
+    "path": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      -0.64,
+      0.0,
+      0.0
+     ],
+     [
+      -0.94,
+      -0.005,
+      0.6
+     ]
+    ],
+    "radius": 0.046,
+    "section": {
+     "u": 150
+    },
+    "up": [
+     0,
+     -1,
+     0
+    ],
+    "caps": "flat",
+    "at": [
+     0.44,
+     -0.05,
+     -0.15
+    ],
+    "color": "enamel",
+    "tint": "#bdb7aa"
+   },
+   "connects": [
+    "estuary-reservoir"
+   ]
+  },
+  {
+   "id": "estuary-reservoir",
+   "name": {
+    "en": "Estuary reservoir",
+    "zh": "河口蓄水池"
+   },
+   "group": "catchment",
+   "summary": {
+    "en": "Keeps river water fresh behind the barrage.",
+    "zh": "在堤坝后面把河水留成淡水。"
+   },
+   "detail": {
+    "en": "An estuary reservoir is made by damming a river mouth. Behind the barrage the water slowly turns from brackish to fresh as rain and runoff flush the sea water out. Marina Reservoir, made this way in 2008, was Singapore's 15th reservoir and the first in the city centre, with a catchment of 10,000 hectares [S7].\n\nIn dry periods NEWater can be added to reservoirs and mixed with the rain water; the mixed water is treated again at a waterworks before it reaches taps [S5].\n\nA city reservoir stays clean only if its catchment does: whatever is washed off the streets flows into it.",
+    "zh": "把河口拦起来，就成了河口蓄水池。堤坝后面的水被雨水和径流慢慢冲淡，由半咸水变成淡水。2008 年用这种办法建成的滨海蓄水池，是新加坡第 15 个蓄水池，也是第一个在市中心的，集水区 10,000 公顷 [S7]。\n\n干旱时期，新生水可以加进蓄水池，和雨水混在一起；混合后的水还要在水厂再处理一遍，才送到水龙头 [S5]。\n\n城市里的蓄水池要干净，集水区就得干净：街上冲下来的东西都会流进来。"
+   },
+   "primitive": {
+    "kind": "extrude",
+    "shape": [
+     [
+      -1.645,
+      1.055
+     ],
+     [
+      -1.3,
+      1.055
+     ],
+     [
+      -0.85,
+      1.015
+     ],
+     [
+      -0.555,
+      0.915
+     ],
+     [
+      -0.425,
+      0.72
+     ],
+     [
+      -0.435,
+      0.55
+     ],
+     [
+      -0.565,
+      0.405
+     ],
+     [
+      -0.85,
+      0.275
+     ],
+     [
+      -1.25,
+      0.205
+     ],
+     [
+      -1.645,
+      0.225
+     ]
+    ],
+    "depth": 0.078,
+    "rotation": [
+     90,
+     0,
+     0
+    ],
+    "at": [
+     0,
+     -0.061,
+     0
+    ],
+    "color": "membrane",
+    "tint": "#7fa6ae"
+   },
+   "castShadow": false,
+   "connects": [
+    "barrage"
+   ]
+  },
+  {
+   "id": "barrage",
+   "name": {
+    "en": "Barrage",
+    "zh": "堤坝"
+   },
+   "group": "catchment",
+   "summary": {
+    "en": "Keeps the sea out and the fresh water in.",
+    "zh": "挡住海水，把淡水留在里面。"
+   },
+   "detail": {
+    "en": "A barrage is a low dam across a river mouth. It keeps the sea out, so that the water behind it becomes a freshwater reservoir, and it holds the reservoir at a steady level. Marina Barrage also protects low-lying parts of the city from flooding [S7].\n\nThe model draws the barrage as a concrete sill with ten piers, nine gates between them and a crest walkway, simplified from public photos; a pump house stands at one end.\n\nWithout the barrage, seawater would flow in and out of the river mouth with every tide.",
+    "zh": "堤坝是横跨河口的低矮水坝。它把海水挡在外面，让坝后的水变成淡水蓄水池，并保持水位稳定。滨海堤坝也保护市区低洼地带免受水淹 [S7]。\n\n模型按公开照片简化：混凝土坝基、十座闸墩、闸墩之间九道闸门和坝顶走道；一端是泵房。\n\n没有堤坝，海水会随着每一次潮汐流进流出河口。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.09,
+     0.04,
+     0.87
+    ],
+    "bevel": 0.005,
+    "at": [
+     -1.69,
+     -0.08,
+     0.64
+    ],
+    "color": "enamel",
+    "tint": "#bdb7aa"
+   },
+   "extra": [
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.085,
+      0.15,
+      0.02
+     ],
+     "bevel": 0.002,
+     "at": [
+      -1.69,
+      -0.025,
+      0.28
+     ],
+     "color": "enamel",
+     "tint": "#bdb7aa"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.085,
+      0.15,
+      0.02
+     ],
+     "bevel": 0.002,
+     "at": [
+      -1.69,
+      -0.025,
+      0.36
+     ],
+     "color": "enamel",
+     "tint": "#bdb7aa"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.085,
+      0.15,
+      0.02
+     ],
+     "bevel": 0.002,
+     "at": [
+      -1.69,
+      -0.025,
+      0.44
+     ],
+     "color": "enamel",
+     "tint": "#bdb7aa"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.085,
+      0.15,
+      0.02
+     ],
+     "bevel": 0.002,
+     "at": [
+      -1.69,
+      -0.025,
+      0.52
+     ],
+     "color": "enamel",
+     "tint": "#bdb7aa"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.085,
+      0.15,
+      0.02
+     ],
+     "bevel": 0.002,
+     "at": [
+      -1.69,
+      -0.025,
+      0.6
+     ],
+     "color": "enamel",
+     "tint": "#bdb7aa"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.085,
+      0.15,
+      0.02
+     ],
+     "bevel": 0.002,
+     "at": [
+      -1.69,
+      -0.025,
+      0.68
+     ],
+     "color": "enamel",
+     "tint": "#bdb7aa"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.085,
+      0.15,
+      0.02
+     ],
+     "bevel": 0.002,
+     "at": [
+      -1.69,
+      -0.025,
+      0.76
+     ],
+     "color": "enamel",
+     "tint": "#bdb7aa"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.085,
+      0.15,
+      0.02
+     ],
+     "bevel": 0.002,
+     "at": [
+      -1.69,
+      -0.025,
+      0.84
+     ],
+     "color": "enamel",
+     "tint": "#bdb7aa"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.085,
+      0.15,
+      0.02
+     ],
+     "bevel": 0.002,
+     "at": [
+      -1.69,
+      -0.025,
+      0.92
+     ],
+     "color": "enamel",
+     "tint": "#bdb7aa"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.085,
+      0.15,
+      0.02
+     ],
+     "bevel": 0.002,
+     "at": [
+      -1.69,
+      -0.025,
+      1.0
+     ],
+     "color": "enamel",
+     "tint": "#bdb7aa"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.05,
+      0.004,
+      0.034
+     ],
+     "at": [
+      -1.684,
+      0.062,
+      0.28
+     ],
+     "color": "enamel"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.05,
+      0.004,
+      0.034
+     ],
+     "at": [
+      -1.684,
+      0.062,
+      0.36
+     ],
+     "color": "enamel"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.05,
+      0.004,
+      0.034
+     ],
+     "at": [
+      -1.684,
+      0.062,
+      0.44
+     ],
+     "color": "enamel"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.05,
+      0.004,
+      0.034
+     ],
+     "at": [
+      -1.684,
+      0.062,
+      0.52
+     ],
+     "color": "enamel"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.05,
+      0.004,
+      0.034
+     ],
+     "at": [
+      -1.684,
+      0.062,
+      0.6
+     ],
+     "color": "enamel"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.05,
+      0.004,
+      0.034
+     ],
+     "at": [
+      -1.684,
+      0.062,
+      0.68
+     ],
+     "color": "enamel"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.05,
+      0.004,
+      0.034
+     ],
+     "at": [
+      -1.684,
+      0.062,
+      0.76
+     ],
+     "color": "enamel"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.05,
+      0.004,
+      0.034
+     ],
+     "at": [
+      -1.684,
+      0.062,
+      0.84
+     ],
+     "color": "enamel"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.05,
+      0.004,
+      0.034
+     ],
+     "at": [
+      -1.684,
+      0.062,
+      0.92
+     ],
+     "color": "enamel"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.05,
+      0.004,
+      0.034
+     ],
+     "at": [
+      -1.684,
+      0.062,
+      1.0
+     ],
+     "color": "enamel"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.034,
+      0.01,
+      0.87
+     ],
+     "at": [
+      -1.661,
+      0.012,
+      0.64
+     ],
+     "color": "enamel",
+     "tint": "#bdb7aa"
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     0,
+     1
+    ],
+    "dist": 0.25
+   },
+   "connects": [
+    "crest-gates",
+    "pump-house"
+   ]
+  },
+  {
+   "id": "crest-gates",
+   "name": {
+    "en": "Crest gates",
+    "zh": "闸门"
+   },
+   "group": "catchment",
+   "summary": {
+    "en": "Lower at low tide to let excess water out.",
+    "zh": "退潮时放倒，把多余的水放出去。"
+   },
+   "detail": {
+    "en": "Nine steel crest gates, each about 30 m long and 5 m tall, sit between the piers [S8]. They are hinged at the bottom. When heavy rain falls at low tide, the gates are lowered so that the excess water spills over them into the sea [S7].\n\nThe model draws the gates far shorter than they are; in the gates-open pose they tip towards the sea.\n\nAt high tide the sea is higher than the reservoir, so opening the gates would let seawater in; then the pumps do the work.",
+    "zh": "九道钢闸门立在闸墩之间，每道长约 30 m、高约 5 m [S8]。闸门底部装有铰链。退潮时遇上大雨，就把闸门放倒，让多余的水漫过闸门流进大海 [S7]。\n\n模型把闸门画得短得多；在\"开闸\"姿态下，闸门向海的一侧倒下。\n\n涨潮时海面比蓄水池高，打开闸门会让海水倒灌，这时就靠水泵。"
+   },
+   "primitive": {
+    "kind": "box",
+    "size": [
+     0.01,
+     0.065,
+     0.07
+    ],
+    "at": [
+     -1.705,
+     -0.0275,
+     0.6
+    ],
+    "color": "steel"
+   },
+   "repeat": {
+    "count": 9,
+    "axis": [
+     0,
+     0,
+     1
+    ],
+    "spacing": 0.08
+   },
+   "castShadow": false,
+   "connects": [
+    "pump-house"
+   ]
+  },
+  {
+   "id": "pump-house",
+   "name": {
+    "en": "Pump house",
+    "zh": "泵房"
+   },
+   "group": "catchment",
+   "summary": {
+    "en": "Pumps water out to sea in a storm at high tide.",
+    "zh": "涨潮又遇暴雨时，把水泵进海里。"
+   },
+   "detail": {
+    "en": "When heavy rain coincides with high tide, the gates cannot be lowered, so pumps lift the stormwater over the barrage into the sea [S7]. Marina Barrage has seven pumps of 40 m³ per second each, 280 m³ per second together [S8].\n\nThe model draws the pump house as a block with a green roof and seven outlet pipes facing the sea.\n\nIf the pumps could not keep up in a long storm at high tide, the reservoir and low-lying streets would rise.",
+    "zh": "大雨碰上涨潮时，闸门不能放倒，就由水泵把暴雨水抽过堤坝排进海里 [S7]。滨海堤坝有 7 台水泵，每台每秒 40 m³，合计每秒 280 m³ [S8]。\n\n模型把泵房画成一个带绿色屋顶的方块，七根排水管朝向大海。\n\n如果涨潮时的暴雨太久、水泵来不及抽，蓄水池和低洼街道的水位就会上涨。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.17,
+     0.1,
+     0.12
+    ],
+    "bevel": 0.008,
+    "at": [
+     -1.645,
+     0.05,
+     1.135
+    ],
+    "color": "enamel"
+   },
+   "extra": [
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.18,
+      0.012,
+      0.13
+     ],
+     "bevel": 0.004,
+     "at": [
+      -1.645,
+      0.105,
+      1.135
+     ],
+     "color": "enamel",
+     "tint": "#93a06c"
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0065,
+      0.0065,
+      0.06
+     ],
+     "at": [
+      -1.745,
+      -0.02,
+      1.083
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0065,
+      0.0065,
+      0.06
+     ],
+     "at": [
+      -1.745,
+      -0.02,
+      1.0985
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0065,
+      0.0065,
+      0.06
+     ],
+     "at": [
+      -1.745,
+      -0.02,
+      1.114
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0065,
+      0.0065,
+      0.06
+     ],
+     "at": [
+      -1.745,
+      -0.02,
+      1.1295
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0065,
+      0.0065,
+      0.06
+     ],
+     "at": [
+      -1.745,
+      -0.02,
+      1.145
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0065,
+      0.0065,
+      0.06
+     ],
+     "at": [
+      -1.745,
+      -0.02,
+      1.1605
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0065,
+      0.0065,
+      0.06
+     ],
+     "at": [
+      -1.745,
+      -0.02,
+      1.176
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    }
+   ],
+   "shell": true,
+   "explode": {
+    "dir": [
+     0,
+     0,
+     1
+    ],
+    "dist": 0.2
+   }
+  },
+  {
+   "id": "raw-water-main",
+   "name": {
+    "en": "Raw-water main",
+    "zh": "原水管"
+   },
+   "group": "supply",
+   "summary": {
+    "en": "Carries raw water to the waterworks.",
+    "zh": "把原水送到水厂。"
+   },
+   "detail": {
+    "en": "The raw-water main is a large pipe that carries untreated water from the intake to the waterworks [S10]. Most of it runs underground.\n\nThe model draws it short and buried just below the surface, passing under the dam.\n\nA burst main would cut off the waterworks' supply until it was repaired, which is why big pipes are inspected regularly.",
+    "zh": "原水管是把未经处理的水从取水口送到水厂的大管子 [S10]，大部分埋在地下。\n\n模型把它画得很短，埋在地表下，从坝底下穿过。\n\n原水管一旦爆裂，水厂的进水就断了，要等修好才能恢复，所以大水管要定期检查。"
+   },
+   "primitive": {
+    "kind": "tube",
+    "path": [
+     [
+      0.43,
+      0.03,
+      -0.22
+     ],
+     [
+      0.43,
+      -0.015,
+      -0.2
+     ],
+     [
+      0.43,
+      -0.015,
+      0.12
+     ],
+     [
+      -0.35,
+      -0.015,
+      0.12
+     ],
+     [
+      -0.35,
+      0.025,
+      0.2
+     ]
+    ],
+    "radius": 0.012,
+    "at": [
+     1.6,
+     -0.03,
+     -0.25
+    ],
+    "color": "steel",
+    "bendRadius": 0.04
+   },
+   "connects": [
+    "waterworks-mixing"
+   ]
+  },
+  {
+   "id": "waterworks-mixing",
+   "name": {
+    "en": "Mixing basins",
+    "zh": "混凝池"
+   },
+   "group": "supply",
+   "summary": {
+    "en": "Mixes in chemicals that clump the dirt.",
+    "zh": "加入药剂，让细小的污物聚成絮团。"
+   },
+   "detail": {
+    "en": "At the start of the waterworks, chemicals are mixed into the raw water. They make the tiny particles of clay and other dirt stick together into soft clumps, called flocs, that are large enough to settle; this is coagulation and flocculation [S10]. Imported water from Johor enters here too.\n\nThe model draws two rectangular basins; real waterworks have many, with stirrers.\n\nIf too little chemical is added, the fine particles stay in the water and the next steps have more to remove.",
+    "zh": "在水厂的第一段，把药剂加进原水里。药剂让细小的黏土和污物颗粒粘在一起，结成足以下沉的松软絮团，这叫混凝和絮凝 [S10]。从柔佛来的进口水也从这里进厂。\n\n模型画了两个长方形的池子；真实的水厂有很多个，池里还有搅拌机。\n\n药剂加得太少，细小的颗粒就留在水里，后面几步要去掉的东西就更多。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.12,
+     0.05,
+     0.1
+    ],
+    "bevel": 0.0015,
+    "at": [
+     1.25,
+     0.005,
+     -0.02
+    ],
+    "color": "enamel",
+    "tint": "#bdb7aa"
+   },
+   "extra": [
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.12,
+      0.05,
+      0.1
+     ],
+     "bevel": 0.0015,
+     "at": [
+      1.25,
+      0.005,
+      0.1
+     ],
+     "color": "enamel",
+     "tint": "#bdb7aa"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.11,
+      0.003,
+      0.09
+     ],
+     "at": [
+      1.25,
+      0.0315,
+      -0.02
+     ],
+     "color": "membrane",
+     "tint": "#7fa6ae"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.11,
+      0.003,
+      0.09
+     ],
+     "at": [
+      1.25,
+      0.0315,
+      0.1
+     ],
+     "color": "membrane",
+     "tint": "#7fa6ae"
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.15
+   },
+   "connects": [
+    "clarifiers"
+   ]
+  },
+  {
+   "id": "clarifiers",
+   "name": {
+    "en": "Settling tanks",
+    "zh": "沉淀池"
+   },
+   "group": "supply",
+   "summary": {
+    "en": "Let the clumps of dirt settle out.",
+    "zh": "让絮团沉到池底。"
+   },
+   "detail": {
+    "en": "In the settling tanks the water moves so slowly that the clumps of dirt sink to the bottom; this is sedimentation [S10]. A bridge turning slowly over each tank drags a scraper across the floor and pushes the sludge to the centre, where it is drawn off.\n\nThe model draws three round tanks; its bridges turn far faster than real ones.\n\nIf the water flows through too fast, the clumps are carried on to the filters and clog them sooner.",
+    "zh": "在沉淀池里，水流得很慢，絮团就沉到池底，这叫沉淀 [S10]。每个池子上方有一座慢慢转动的桥，带着刮板扫过池底，把污泥推到中央排走。\n\n模型画了三个圆形池子；池上的桥转得比真实的快得多。\n\n水流得太快，絮团就会被带到滤池，把滤池更快堵住。"
+   },
+   "primitive": {
+    "kind": "cylinder",
+    "size": [
+     0.085,
+     0.085,
+     0.05
+    ],
+    "at": [
+     1.645,
+     0.005,
+     0.04
+    ],
+    "color": "enamel",
+    "tint": "#bdb7aa"
+   },
+   "extra": [
+    {
+     "kind": "cylinder",
+     "size": [
+      0.079,
+      0.079,
+      0.003
+     ],
+     "at": [
+      1.645,
+      0.0315,
+      0.04
+     ],
+     "color": "membrane",
+     "tint": "#7fa6ae"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.172,
+      0.008,
+      0.012
+     ],
+     "at": [
+      1.645,
+      0.038,
+      0.04
+     ],
+     "color": "steel"
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.01,
+      0.01,
+      0.02
+     ],
+     "at": [
+      1.645,
+      0.04,
+      0.04
+     ],
+     "color": "steel"
+    }
+   ],
+   "repeat": {
+    "count": 3,
+    "axis": [
+     1,
+     0,
+     0
+    ],
+    "spacing": 0.195
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.15
+   },
+   "connects": [
+    "filter-beds"
+   ]
+  },
+  {
+   "id": "filter-beds",
+   "name": {
+    "en": "Sand filters",
+    "zh": "砂滤池"
+   },
+   "group": "supply",
+   "summary": {
+    "en": "Strain out the fine particles left.",
+    "zh": "滤掉剩下的细小颗粒。"
+   },
+   "detail": {
+    "en": "The water then passes down through beds of sand that trap the fine particles still left in it. Many waterworks use rapid gravity sand filters; some use membranes instead [S10]. After filtering, the water is disinfected so that no harmful microbes survive [S10].\n\nIn the model the sand filters are six rectangular cells with a channel down the middle. From here on the dots in the pipes change from the colour of raw water to the colour of tap water.\n\nAs the sand fills with dirt the water flows more slowly, so each filter is cleaned regularly by pushing water and air back up through it.",
+    "zh": "接着，水往下穿过砂层，砂层截住水里剩下的细小颗粒。很多水厂用快速重力砂滤池，也有的用膜 [S10]。过滤之后还要消毒，让有害的微生物不能存活 [S10]。\n\n模型里的砂滤池是六个长方形的格子，中间有一道槽。从这里开始，管道里的点由原水的颜色变成自来水的颜色。\n\n砂层里的污物越积越多，水就流得越慢，所以每个滤池都要定期反冲洗：把水和空气从下往上压过砂层。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.08,
+     0.05,
+     0.11
+    ],
+    "bevel": 0.0015,
+    "at": [
+     1.625,
+     0.005,
+     0.3
+    ],
+    "color": "enamel",
+    "tint": "#bdb7aa"
+   },
+   "extra": [
+    {
+     "kind": "box",
+     "size": [
+      0.07,
+      0.003,
+      0.1
+     ],
+     "at": [
+      1.625,
+      0.0315,
+      0.3
+     ],
+     "color": "membrane",
+     "tint": "#7fa6ae"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.07,
+      0.006,
+      0.012
+     ],
+     "at": [
+      1.625,
+      0.032,
+      0.3
+     ],
+     "color": "enamel",
+     "tint": "#c9b58c"
+    }
+   ],
+   "repeat": {
+    "count": 6,
+    "axis": [
+     1,
+     0,
+     0
+    ],
+    "spacing": 0.09
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.15
+   },
+   "connects": [
+    "clear-water-tank"
+   ]
+  },
+  {
+   "id": "clear-water-tank",
+   "name": {
+    "en": "Clear-water tank",
+    "zh": "清水池"
+   },
+   "group": "supply",
+   "summary": {
+    "en": "Stores clean water after disinfection.",
+    "zh": "储存消过毒的清水。"
+   },
+   "detail": {
+    "en": "The clear-water tank holds treated, disinfected water before it is pumped out to the supply network. Covering it keeps out dust, leaves and animals. The water leaving the waterworks is well within the World Health Organization's Guidelines for Drinking-water Quality [S10, S33].\n\nThe model draws one covered tank with grass on top; it turns see-through in X-ray.\n\nTreated water must stay sealed from here to the tap, because dirt that gets in after treatment would not be removed again.",
+    "zh": "清水池储存处理好、消过毒的水，再由水泵送进供水管网。池子加盖，挡住灰尘、落叶和动物。离开水厂的水远优于世界卫生组织《饮用水水质准则》的要求 [S10, S33]。\n\n模型画了一个顶上铺着草的加盖水池；X 光模式下会变透明。\n\n从这里到水龙头，处理好的水都必须密闭，因为处理之后再混进的污物不会再被去掉。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.17,
+     0.07,
+     0.12
+    ],
+    "bevel": 0.006,
+    "at": [
+     1.12,
+     0.005,
+     0.3
+    ],
+    "color": "enamel"
+   },
+   "extra": [
+    {
+     "kind": "box",
+     "size": [
+      0.174,
+      0.006,
+      0.124
+     ],
+     "at": [
+      1.12,
+      0.042,
+      0.3
+     ],
+     "color": "tissue",
+     "tint": "#93a06c"
+    }
+   ],
+   "shell": true,
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.15
+   },
+   "connects": [
+    "service-reservoir"
+   ]
+  },
+  {
+   "id": "service-reservoir",
+   "name": {
+    "en": "Service reservoir",
+    "zh": "配水库"
+   },
+   "group": "supply",
+   "summary": {
+    "en": "Stores tap water high up for steady pressure.",
+    "zh": "把自来水存在高处，保持水压。"
+   },
+   "detail": {
+    "en": "A service reservoir is a covered tank on high ground. Water pumped up into it can flow down to homes by gravity, at a steady pressure, even when demand changes during the day.\n\nThe model draws it inside a small grassy hill.\n\nMains pressure alone reaches taps only up to a certain height; taller buildings, such as HDB blocks, also need their own tanks on the roof [S20].",
+    "zh": "配水库是建在高处的加盖水池。水被泵上去以后，可以靠重力以稳定的水压流到各家各户，即使一天里用水量有高有低也不受影响。\n\n模型把它画在一座长着草的小山里。\n\n单靠管网的水压只能把水送到一定高度；组屋这样的高楼还要在屋顶设自己的水箱 [S20]。"
+   },
+   "primitive": {
+    "kind": "cylinder",
+    "size": [
+     0.1,
+     0.1,
+     0.07
+    ],
+    "at": [
+     0.72,
+     0.075,
+     0.15
+    ],
+    "color": "enamel"
+   },
+   "extra": [
+    {
+     "kind": "lathe",
+     "profile": [
+      [
+       0,
+       0.13
+      ],
+      [
+       0.1,
+       0.125
+      ],
+      [
+       0.16,
+       0.07
+      ],
+      [
+       0.21,
+       0.0
+      ],
+      [
+       0,
+       0
+      ]
+     ],
+     "segments": 36,
+     "at": [
+      0.72,
+      0,
+      0.15
+     ],
+     "color": "tissue",
+     "tint": "#93a06c"
+    }
+   ],
+   "shell": true,
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.15
+   },
+   "connects": [
+    "distribution-main"
+   ]
+  },
+  {
+   "id": "distribution-main",
+   "name": {
+    "en": "Water main",
+    "zh": "输水干管"
+   },
+   "group": "supply",
+   "summary": {
+    "en": "Carries tap water to homes.",
+    "zh": "把自来水送到各家各户。"
+   },
+   "detail": {
+    "en": "The water main carries treated water under the streets to homes and businesses. Singapore's potable-water network is about 6,000 km long [S9]. A second main from the desalination plant joins it in the model: desalinated water, one of the Four National Taps [S2], is piped into the same supply.\n\nThe model draws one buried main and its branch; it turns see-through in X-ray so the water inside shows.\n\nA leak loses treated water and lets pressure drop; pipes are checked and replaced as they age.",
+    "zh": "输水干管在街道底下把处理好的水送到住家和商家。新加坡的自来水管网长约 6,000 km [S9]。模型里还有一条从海水淡化厂来的干管接进来：淡化海水是四大水喉之一 [S2]，也送进同一个供水管网。\n\n模型画了一条埋在地下的干管和它的支管；X 光模式下会变透明，看得见管里的水。\n\n管子漏水会浪费处理好的水、让水压下降；管子老了就要检查、更换。"
+   },
+   "primitive": {
+    "kind": "tube",
+    "path": [
+     [
+      0.335,
+      -0.01,
+      0.0
+     ],
+     [
+      0.16,
+      -0.01,
+      -0.06
+     ],
+     [
+      0.05,
+      0.08,
+      -0.13
+     ],
+     [
+      -0.02,
+      0.08,
+      -0.15
+     ],
+     [
+      -0.12,
+      -0.02,
+      -0.04
+     ],
+     [
+      -0.34,
+      -0.02,
+      0.17
+     ],
+     [
+      -0.34,
+      -0.02,
+      0.21
+     ]
+    ],
+    "radius": 0.012,
+    "at": [
+     0.7,
+     -0.02,
+     0.3
+    ],
+    "color": "steel",
+    "bendRadius": 0.04
+   },
+   "extra": [
+    {
+     "kind": "tube",
+     "path": [
+      [
+       -0.93,
+       -0.01,
+       -0.42
+      ],
+      [
+       -0.93,
+       -0.01,
+       -0.1
+      ],
+      [
+       0.62,
+       -0.01,
+       -0.1
+      ],
+      [
+       0.62,
+       -0.01,
+       0.4
+      ],
+      [
+       0.6,
+       0.008,
+       0.455
+      ]
+     ],
+     "radius": 0.01,
+     "at": [
+      0.0,
+      -0.05,
+      -0.2
+     ],
+     "color": "steel",
+     "bendRadius": 0.04
+    }
+   ],
+   "shell": true,
+   "castShadow": false,
+   "connects": [
+    "hdb-block"
+   ]
+  },
+  {
+   "id": "hdb-block",
+   "name": {
+    "en": "HDB block",
+    "zh": "组屋"
+   },
+   "group": "supply",
+   "summary": {
+    "en": "Flats: households use about 45 % of the water.",
+    "zh": "组屋：家庭用掉约 45 % 的水。"
+   },
+   "detail": {
+    "en": "Most Singaporeans live in HDB flats. Households use about 45 % of Singapore's water and the non-domestic sector about 55 % [S32, S12]. In 2025 household use averaged 141 litres per person per day; the national target is 130 litres by 2030 [S12, S13].\n\nThe model draws one slab block of twelve storeys with a grid of floors and columns. One flat is drawn opened up so that its kitchen tap shows.\n\nWater saved in every flat adds up across the hundreds of thousands of flats on the island.",
+    "zh": "大多数新加坡人住在组屋里。家庭用掉新加坡约 45 % 的水，非家庭部门约 55 % [S32, S12]。2025 年，家庭人均每天用水 141 升；国家目标是到 2030 年降到 130 升 [S12, S13]。\n\n模型画了一栋十二层的板式组屋，楼层和柱子排成格子。有一户画成打开的样子，好让人看见厨房的水龙头。\n\n每一户省下的水，乘上全岛几十万户，就是很大的数量。"
+   },
+   "primitive": {
+    "kind": "box",
+    "size": [
+     0.245,
+     0.42,
+     0.1
+    ],
+    "at": [
+     0.3075,
+     0.21,
+     0.55
+    ],
+    "color": "enamel"
+   },
+   "extra": [
+    {
+     "kind": "box",
+     "size": [
+      0.095,
+      0.42,
+      0.1
+     ],
+     "at": [
+      0.0375,
+      0.21,
+      0.55
+     ],
+     "color": "enamel"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.1,
+      0.42,
+      0.055
+     ],
+     "at": [
+      0.135,
+      0.21,
+      0.5275
+     ],
+     "color": "enamel"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.1,
+      0.191,
+      0.045
+     ],
+     "at": [
+      0.135,
+      0.0955,
+      0.5775
+     ],
+     "color": "enamel"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.1,
+      0.162,
+      0.045
+     ],
+     "at": [
+      0.135,
+      0.339,
+      0.5775
+     ],
+     "color": "enamel"
+    },
+    {
+     "kind": "fins",
+     "size": [
+      0.452,
+      0.114,
+      0.005
+     ],
+     "count": 12,
+     "gap": 0.0285,
+     "axis": "y",
+     "at": [
+      0.21,
+      0.2075,
+      0.55
+     ],
+     "color": "enamel",
+     "tint": "#bdb7aa"
+    },
+    {
+     "kind": "fins",
+     "size": [
+      0.11,
+      0.41,
+      0.006
+     ],
+     "count": 9,
+     "gap": 0.044,
+     "axis": "x",
+     "at": [
+      0.21,
+      0.21,
+      0.55
+     ],
+     "color": "enamel",
+     "tint": "#bdb7aa"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.08,
+      0.04,
+      0.07
+     ],
+     "bevel": 0.005,
+     "at": [
+      0.09,
+      0.44,
+      0.55
+     ],
+     "color": "enamel"
+    }
+   ],
+   "shell": true,
+   "connects": [
+    "roof-tank"
+   ]
+  },
+  {
+   "id": "roof-tank",
+   "name": {
+    "en": "Roof tank",
+    "zh": "屋顶水箱"
+   },
+   "group": "supply",
+   "summary": {
+    "en": "Lets water flow down to each flat by gravity.",
+    "zh": "让水靠重力流到每一户。"
+   },
+   "detail": {
+    "en": "Water from the main is pumped up a pipe to tanks on the roof; from there it flows down to every flat by gravity [S20, S21]. Two tanks side by side let one be cleaned while the other stays in use.\n\nThe model draws the riser up the back of the block and the down pipe to the opened flat; both show in X-ray.\n\nThe tanks are covered and cleaned regularly, because dirt or animals getting in would spoil the treated water.",
+    "zh": "干管里的水被泵沿着管子送上屋顶的水箱，再靠重力流到每一户 [S20, S21]。两个水箱并排，一个清洗时另一个照常使用。\n\n模型把上水管画在楼的背面，下水管通到打开的那一户；X 光模式下两者都看得见。\n\n水箱加盖并定期清洗，因为污物或小动物进去会弄脏处理好的水。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.055,
+     0.044,
+     0.07
+    ],
+    "bevel": 0.004,
+    "at": [
+     0.27,
+     0.444,
+     0.55
+    ],
+    "color": "casing"
+   },
+   "extra": [
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.055,
+      0.044,
+      0.07
+     ],
+     "bevel": 0.004,
+     "at": [
+      0.33,
+      0.444,
+      0.55
+     ],
+     "color": "casing"
+    },
+    {
+     "kind": "tube",
+     "path": [
+      [
+       0.01,
+       -0.24,
+       -0.01
+      ],
+      [
+       0.01,
+       0.235,
+       -0.01
+      ],
+      [
+       -0.02,
+       0.235,
+       0.015
+      ]
+     ],
+     "radius": 0.0055,
+     "at": [
+      0.35,
+      0.2,
+      0.52
+     ],
+     "color": "steel",
+     "bendRadius": 0.012
+    },
+    {
+     "kind": "tube",
+     "path": [
+      [
+       0.09,
+       0.102,
+       0.0
+      ],
+      [
+       -0.035,
+       0.102,
+       -0.007
+      ],
+      [
+       -0.045,
+       0.07,
+       -0.007
+      ],
+      [
+       -0.045,
+       -0.08,
+       -0.007
+      ],
+      [
+       -0.045,
+       -0.08,
+       0.005
+      ]
+     ],
+     "radius": 0.0045,
+     "at": [
+      0.18,
+      0.33,
+      0.55
+     ],
+     "color": "steel",
+     "bendRadius": 0.012
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.2
+   },
+   "connects": [
+    "kitchen-tap"
+   ]
+  },
+  {
+   "id": "kitchen-tap",
+   "name": {
+    "en": "Kitchen tap",
+    "zh": "厨房水龙头"
+   },
+   "group": "supply",
+   "summary": {
+    "en": "Where treated water is used, then drained away.",
+    "zh": "处理过的水在这里被用掉、排走。"
+   },
+   "detail": {
+    "en": "The tap is where treated water is finally used. Small habits at the tap matter: turning it off while brushing teeth saves about 23 litres a day, and turning off the shower while soaping about 27 litres [S9].\n\nThe model draws the tap and sink far larger than life against the building.\n\nAfter use, the water goes down the drain as used water and starts its way to a water reclamation plant.",
+    "zh": "水龙头是处理好的水最后被使用的地方。在水龙头前的小习惯很重要：刷牙时关水龙头，每天约省 23 升；淋浴抹肥皂时关水，约省 27 升 [S9]。\n\n模型把水龙头和水槽画得比楼房比例大得多。\n\n用过以后，水作为用过的水流下排水口，开始流向再生水厂。"
+   },
+   "primitive": {
+    "kind": "tube",
+    "path": [
+     [
+      0.0,
+      0.002,
+      -0.015
+     ],
+     [
+      0.0,
+      0.002,
+      -0.003
+     ],
+     [
+      0.0,
+      0.004,
+      0.015
+     ],
+     [
+      0.0,
+      -0.008,
+      0.019
+     ]
+    ],
+    "radius": 0.003,
+    "at": [
+     0.135,
+     0.248,
+     0.57
+    ],
+    "color": "stainless",
+    "bendRadius": 0.006
+   },
+   "extra": [
+    {
+     "kind": "cylinder",
+     "size": [
+      0.005,
+      0.005,
+      0.008
+     ],
+     "at": [
+      0.135,
+      0.25,
+      0.561
+     ],
+     "color": "stainless",
+     "rotation": [
+      90,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0025,
+      0.0025,
+      0.008
+     ],
+     "at": [
+      0.135,
+      0.257,
+      0.561
+     ],
+     "color": "stainless"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.034,
+      0.008,
+      0.032
+     ],
+     "bevel": 0.002,
+     "at": [
+      0.135,
+      0.232,
+      0.577
+     ],
+     "color": "stainless"
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     0,
+     1
+    ],
+    "dist": 0.2
+   },
+   "connects": [
+    "house-sewer"
+   ]
+  },
+  {
+   "id": "house-sewer",
+   "name": {
+    "en": "Sewer",
+    "zh": "污水管"
+   },
+   "group": "reuse",
+   "summary": {
+    "en": "Takes used water away from the flats.",
+    "zh": "把用过的水从各户排走。"
+   },
+   "detail": {
+    "en": "Used water from kitchens, bathrooms and toilets flows down pipes in the building and into the public sewers, about 3,700 km of them [S9]. PUB calls it used water rather than waste water, because it is collected to be cleaned and reused.\n\nThe model draws one sewer dropping from the flat to the deep tunnel through a shaft; it shows in X-ray and in the underground cut.\n\nOil, wet wipes and rubbish poured down a sink or toilet can block sewers.",
+    "zh": "厨房、浴室和厕所用过的水，顺着楼里的管子流进公共污水管，全国约有 3,700 km [S9]。PUB 把它叫做\"用过的水\"而不是\"废水\"，因为它被收集起来是为了净化、再利用。\n\n模型画了一条污水管，从那一户经竖井下到深隧道；X 光和地下剖切时看得见。\n\n倒进水槽或马桶的油、湿纸巾和垃圾会堵住污水管。"
+   },
+   "primitive": {
+    "kind": "tube",
+    "path": [
+     [
+      -0.015,
+      0.278,
+      -0.223
+     ],
+     [
+      -0.015,
+      0.27,
+      -0.22
+     ],
+     [
+      -0.015,
+      0.0,
+      -0.22
+     ],
+     [
+      -0.015,
+      -0.01,
+      0.0
+     ],
+     [
+      0.03,
+      -0.01,
+      0.2
+     ],
+     [
+      0.03,
+      -0.31,
+      0.2
+     ]
+    ],
+    "radius": 0.0065,
+    "at": [
+     0.15,
+     -0.05,
+     0.8
+    ],
+    "color": "plastic",
+    "tint": "#5d5a55",
+    "bendRadius": 0.02
+   },
+   "shell": true,
+   "castShadow": false,
+   "connects": [
+    "dtss-tunnel"
+   ]
+  },
+  {
+   "id": "dtss-tunnel",
+   "name": {
+    "en": "Deep tunnel",
+    "zh": "深隧道"
+   },
+   "group": "reuse",
+   "summary": {
+    "en": "Carries used water deep underground by gravity.",
+    "zh": "靠重力在地下深处输送用过的水。"
+   },
+   "detail": {
+    "en": "The Deep Tunnel Sewerage System is a network of tunnels, 206 km long, that carries used water by gravity to three centralised water reclamation plants at Changi, Kranji and Tuas [S14]. The newer tunnels lie 35 to 55 m below ground [S15].\n\nThe model draws one tunnel at the front of the slice, much shallower and shorter than the real ones, rising at the plant end.\n\nBecause the tunnels slope gently downhill, few pumping stations are needed along the way.",
+    "zh": "深隧道排污系统是一张长 206 km 的隧道网，靠重力把用过的水送到樟宜、克兰芝和大士三座集中的再生水厂 [S14]。较新的隧道位于地下 35 至 55 米 [S15]。\n\n模型在切片前缘画了一条隧道，比真实的浅得多、短得多，在厂的一端升上来。\n\n隧道一路缓缓向下倾斜，所以沿途需要的泵站很少。"
+   },
+   "primitive": {
+    "kind": "tube",
+    "path": [
+     [
+      -0.62,
+      -0.06,
+      0.0
+     ],
+     [
+      -0.62,
+      -0.13,
+      0.0
+     ],
+     [
+      0.65,
+      -0.16,
+      0.0
+     ],
+     [
+      0.65,
+      0.24,
+      0.0
+     ]
+    ],
+    "radius": 0.05,
+    "at": [
+     0.8,
+     -0.3,
+     1.0
+    ],
+    "color": "enamel",
+    "tint": "#a9a49a",
+    "bendRadius": 0.12
+   },
+   "castShadow": false,
+   "explode": {
+    "dir": [
+     0,
+     -1,
+     0
+    ],
+    "dist": 0.2
+   },
+   "connects": [
+    "reclamation-plant"
+   ]
+  },
+  {
+   "id": "reclamation-plant",
+   "name": {
+    "en": "Water reclamation plant",
+    "zh": "再生水厂"
+   },
+   "group": "reuse",
+   "summary": {
+    "en": "Cleans used water with settling and microbes.",
+    "zh": "用沉淀和微生物净化用过的水。"
+   },
+   "detail": {
+    "en": "At a water reclamation plant, solids are first allowed to settle out; then, in aeration tanks, microbes feed on the dissolved dirt in the used water; a final settling step removes the microbes. Part of the treated water goes on to a NEWater factory [S5].\n\nThe model draws a long aeration tank and four round settling tanks. The dots in them keep the colour of used water.\n\nIf harmful chemicals are poured into the sewers, they can kill the microbes that do the cleaning, which is why trade effluent is controlled [S25].",
+    "zh": "在再生水厂里，先让固体沉下去；接着在曝气池里，微生物以用过的水中溶解的污物为食；最后再沉淀一次，把微生物分出去。处理过的水有一部分再送到新生水厂 [S5]。\n\n模型画了一条长长的曝气池和四个圆形沉淀池。池里的点保持\"用过的水\"的颜色。\n\n如果有害化学品被倒进污水管，就可能杀死负责净化的微生物，所以工业废水的排放受到管制 [S25]。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.46,
+     0.05,
+     0.1
+    ],
+    "bevel": 0.005,
+    "at": [
+     1.5,
+     0.025,
+     0.68
+    ],
+    "color": "enamel",
+    "tint": "#bdb7aa"
+   },
+   "extra": [
+    {
+     "kind": "cylinder",
+     "size": [
+      0.068,
+      0.068,
+      0.05
+     ],
+     "at": [
+      1.26,
+      0.025,
+      0.865
+     ],
+     "color": "enamel",
+     "tint": "#bdb7aa"
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.068,
+      0.068,
+      0.05
+     ],
+     "at": [
+      1.42,
+      0.025,
+      0.865
+     ],
+     "color": "enamel",
+     "tint": "#bdb7aa"
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.068,
+      0.068,
+      0.05
+     ],
+     "at": [
+      1.58,
+      0.025,
+      0.865
+     ],
+     "color": "enamel",
+     "tint": "#bdb7aa"
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.068,
+      0.068,
+      0.05
+     ],
+     "at": [
+      1.74,
+      0.025,
+      0.865
+     ],
+     "color": "enamel",
+     "tint": "#bdb7aa"
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.06,
+      0.06,
+      0.003
+     ],
+     "at": [
+      1.26,
+      0.0515,
+      0.865
+     ],
+     "color": "membrane",
+     "tint": "#b8b39b"
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.06,
+      0.06,
+      0.003
+     ],
+     "at": [
+      1.42,
+      0.0515,
+      0.865
+     ],
+     "color": "membrane",
+     "tint": "#b8b39b"
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.06,
+      0.06,
+      0.003
+     ],
+     "at": [
+      1.58,
+      0.0515,
+      0.865
+     ],
+     "color": "membrane",
+     "tint": "#b8b39b"
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.06,
+      0.06,
+      0.003
+     ],
+     "at": [
+      1.74,
+      0.0515,
+      0.865
+     ],
+     "color": "membrane",
+     "tint": "#b8b39b"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.44,
+      0.003,
+      0.084
+     ],
+     "at": [
+      1.5,
+      0.0515,
+      0.68
+     ],
+     "color": "membrane",
+     "tint": "#b8b39b"
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.032,
+      0.032,
+      0.06
+     ],
+     "at": [
+      1.45,
+      -0.03,
+      1.0
+     ],
+     "color": "enamel",
+     "tint": "#bdb7aa"
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.15
+   },
+   "connects": [
+    "newater-membranes"
+   ]
+  },
+  {
+   "id": "newater-hall",
+   "name": {
+    "en": "NEWater factory",
+    "zh": "新生水厂"
+   },
+   "group": "reuse",
+   "summary": {
+    "en": "Turns treated used water into NEWater.",
+    "zh": "把处理过的用过的水制成新生水。"
+   },
+   "detail": {
+    "en": "In a NEWater factory, treated used water is cleaned again in three steps: membrane filtration, reverse osmosis and ultraviolet disinfection [S5]. NEWater was introduced in 2002, and the first factories opened in 2003; four are in operation today [S5, S16].\n\nThe model draws the hall's walls and roof as a light shell; X-ray or the plant cut shows the machines inside. No plant name or logo is drawn.\n\nNEWater meets drinking-water standards, but most of it goes to factories that need very pure water [S5, S16].",
+    "zh": "在新生水厂里，处理过的用过的水还要再经过三步：膜过滤、反渗透和紫外线消毒 [S5]。新生水 2002 年推出，第一批工厂 2003 年启用；今天有 4 座在运行 [S5, S16]。\n\n模型把厂房的墙和屋顶画成一层浅色外壳；用 X 光或厂内剖切能看见里面的机器。模型不画厂名和标志。\n\n新生水达到饮用水标准，但大部分送给需要高纯度水的工厂 [S5, S16]。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.62,
+     0.012,
+     0.44
+    ],
+    "bevel": 0.004,
+    "at": [
+     2.32,
+     0.176,
+     0.7
+    ],
+    "color": "casing",
+    "tint": "#c9ccc8"
+   },
+   "extra": [
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.6,
+      0.17,
+      0.01
+     ],
+     "bevel": 0.003,
+     "at": [
+      2.32,
+      0.085,
+      0.905
+     ],
+     "color": "casing",
+     "tint": "#c9ccc8"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.6,
+      0.17,
+      0.01
+     ],
+     "bevel": 0.003,
+     "at": [
+      2.32,
+      0.085,
+      0.495
+     ],
+     "color": "casing",
+     "tint": "#c9ccc8"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.01,
+      0.17,
+      0.4
+     ],
+     "bevel": 0.003,
+     "at": [
+      2.025,
+      0.085,
+      0.7
+     ],
+     "color": "casing",
+     "tint": "#c9ccc8"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.01,
+      0.17,
+      0.4
+     ],
+     "bevel": 0.003,
+     "at": [
+      2.615,
+      0.085,
+      0.7
+     ],
+     "color": "casing",
+     "tint": "#c9ccc8"
+    }
+   ],
+   "shell": true,
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.35
+   }
+  },
+  {
+   "id": "newater-membranes",
+   "name": {
+    "en": "Ultrafiltration",
+    "zh": "超滤膜"
+   },
+   "group": "reuse",
+   "summary": {
+    "en": "Hold back bacteria and fine particles.",
+    "zh": "挡住细菌和微小颗粒。"
+   },
+   "detail": {
+    "en": "The first step pushes the water through bundles of hollow fibres with pores far smaller than a hair is wide. Bacteria, fine particles and some viruses are held back; this is microfiltration or ultrafiltration [S5].\n\nThe model draws two rows of upright white modules with a header above them.\n\nThe membranes are cleaned often, because what they hold back builds up on their surface.",
+    "zh": "第一步把水压过一束束空心纤维，纤维上的孔比头发丝细得多，能挡住细菌、微小颗粒和一部分病毒，这叫微滤或超滤 [S5]。\n\n模型画了两排直立的白色膜组件，上面有一根总管。\n\n膜要经常清洗，因为被挡下的东西会积在膜的表面。"
+   },
+   "primitive": {
+    "kind": "cylinder",
+    "size": [
+     0.012,
+     0.012,
+     0.11
+    ],
+    "at": [
+     2.076,
+     0.065,
+     0.7
+    ],
+    "color": "plastic",
+    "tint": "#e6e3da"
+   },
+   "extra": [
+    {
+     "kind": "cylinder",
+     "size": [
+      0.012,
+      0.012,
+      0.11
+     ],
+     "at": [
+      2.124,
+      0.065,
+      0.7
+     ],
+     "color": "plastic",
+     "tint": "#e6e3da"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.07,
+      0.008,
+      0.012
+     ],
+     "at": [
+      2.1,
+      0.124,
+      0.7
+     ],
+     "color": "plastic",
+     "tint": "token:cold"
+    }
+   ],
+   "repeat": {
+    "count": 8,
+    "axis": [
+     0,
+     0,
+     1
+    ],
+    "spacing": 0.038
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.15
+   },
+   "connects": [
+    "newater-ro"
+   ]
+  },
+  {
+   "id": "newater-ro",
+   "name": {
+    "en": "Reverse osmosis",
+    "zh": "反渗透"
+   },
+   "group": "reuse",
+   "summary": {
+    "en": "Push water through membranes that stop salts.",
+    "zh": "把水压过膜，挡住溶解的盐分。"
+   },
+   "detail": {
+    "en": "In reverse osmosis, water is pushed under pressure through a membrane whose pores are so small that dissolved salts and most other dissolved substances cannot pass. Only clean water comes out on the other side [S5].\n\nThe model draws three tiers of horizontal white pressure vessels with blue headers at their ends, simplified from photos of a NEWater plant.\n\nThe water left on the feed side carries what the membranes held back and leaves the plant separately.",
+    "zh": "反渗透是加压把水压过一层膜，膜上的孔小得连溶解的盐和大多数溶解物都过不去，另一侧出来的只有干净的水 [S5]。\n\n模型按新生水厂的照片简化，画了三层横放的白色压力管，两端有蓝色的总管。\n\n留在进水一侧的水带着被膜挡下的东西，另外排出厂外。"
+   },
+   "primitive": {
+    "kind": "cylinder",
+    "size": [
+     0.0125,
+     0.0125,
+     0.2
+    ],
+    "at": [
+     2.33,
+     0.035,
+     0.7
+    ],
+    "color": "plastic",
+    "tint": "#e6e3da",
+    "rotation": [
+     0,
+     0,
+     90
+    ]
+   },
+   "extra": [
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0125,
+      0.0125,
+      0.2
+     ],
+     "at": [
+      2.33,
+      0.068,
+      0.7
+     ],
+     "color": "plastic",
+     "tint": "#e6e3da",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0125,
+      0.0125,
+      0.2
+     ],
+     "at": [
+      2.33,
+      0.101,
+      0.7
+     ],
+     "color": "plastic",
+     "tint": "#e6e3da",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.005,
+      0.005,
+      0.11
+     ],
+     "at": [
+      2.223,
+      0.068,
+      0.7
+     ],
+     "color": "plastic",
+     "tint": "#5f9fb0"
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.005,
+      0.005,
+      0.11
+     ],
+     "at": [
+      2.437,
+      0.068,
+      0.7
+     ],
+     "color": "plastic",
+     "tint": "#5f9fb0"
+    }
+   ],
+   "repeat": {
+    "count": 6,
+    "axis": [
+     0,
+     0,
+     1
+    ],
+    "spacing": 0.05
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.15
+   },
+   "connects": [
+    "uv-reactors"
+   ]
+  },
+  {
+   "id": "uv-reactors",
+   "name": {
+    "en": "UV disinfection",
+    "zh": "紫外线消毒"
+   },
+   "group": "reuse",
+   "summary": {
+    "en": "Disinfect the water with ultraviolet light.",
+    "zh": "用紫外线给水消毒。"
+   },
+   "detail": {
+    "en": "As a final safety step, the water flows past ultraviolet lamps inside stainless-steel reactors. The ultraviolet light damages any microbes still left so that they cannot multiply [S5].\n\nThe model draws three short reactors; their slow pulse while running is only a sign that they are working.\n\nUV light disinfects without adding chemicals, but it only works if the water is already very clear.",
+    "zh": "最后一道保险，是让水流过不锈钢反应器里的紫外线灯。紫外线破坏剩下的微生物，让它们不能繁殖 [S5]。\n\n模型画了三个短短的反应器；运转时的轻微脉动只表示它们在工作。\n\n紫外线消毒不需要加化学品，但只有在水已经很清澈时才有效。"
+   },
+   "primitive": {
+    "kind": "cylinder",
+    "size": [
+     0.017,
+     0.017,
+     0.075
+    ],
+    "at": [
+     2.53,
+     0.04,
+     0.7
+    ],
+    "color": "stainless",
+    "rotation": [
+     0,
+     0,
+     90
+    ]
+   },
+   "extra": [
+    {
+     "kind": "cylinder",
+     "size": [
+      0.008,
+      0.008,
+      0.03
+     ],
+     "at": [
+      2.53,
+      0.07,
+      0.7
+     ],
+     "color": "stainless"
+    }
+   ],
+   "repeat": {
+    "count": 3,
+    "axis": [
+     0,
+     0,
+     1
+    ],
+    "spacing": 0.09
+   },
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.15
+   },
+   "connects": [
+    "newater-main"
+   ]
+  },
+  {
+   "id": "newater-main",
+   "name": {
+    "en": "NEWater pipes",
+    "zh": "新生水管"
+   },
+   "group": "reuse",
+   "summary": {
+    "en": "Carry NEWater to factories and reservoirs.",
+    "zh": "把新生水送到工厂和蓄水池。"
+   },
+   "detail": {
+    "en": "NEWater travels in its own pipe network, about 660 km long, separate from the drinking-water mains [S9]. It is used mainly by industry and for cooling air-conditioning systems; in dry periods it is also added to reservoirs [S5].\n\nThe model draws a short pipe to a factory and a long buried branch to the estuary reservoir; the branch is used in the dry-spell beat.\n\nKeeping the NEWater and drinking-water networks apart means each can be managed for its own users.",
+    "zh": "新生水在自己的管网里输送，全长约 660 km，和饮用水管分开 [S9]。它主要供工业和空调冷却使用；干旱时期也加进蓄水池 [S5]。\n\n模型画了一段通到工厂的短管和一条通到河口蓄水池、埋在地下的长支管；干旱那一拍会用到这条支管。\n\n新生水管网和饮用水管网分开，就能各自按用户的需要来管理。"
+   },
+   "primitive": {
+    "kind": "tube",
+    "path": [
+     [
+      -0.09,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.09,
+      0.0,
+      0.0
+     ]
+    ],
+    "radius": 0.011,
+    "at": [
+     2.66,
+     0.03,
+     0.61
+    ],
+    "color": "steel",
+    "tint": "token:loop",
+    "bendRadius": 0.03
+   },
+   "extra": [
+    {
+     "kind": "tube",
+     "path": [
+      [
+       1.53,
+       0.08,
+       -0.23
+      ],
+      [
+       1.53,
+       0.08,
+       -0.09
+      ],
+      [
+       1.53,
+       -0.02,
+       0.05
+      ],
+      [
+       -1.3,
+       -0.02,
+       0.05
+      ],
+      [
+       -1.5,
+       -0.01,
+       -0.09
+      ]
+     ],
+     "radius": 0.009,
+     "at": [
+      1.0,
+      -0.05,
+      1.05
+     ],
+     "color": "steel",
+     "tint": "token:loop",
+     "bendRadius": 0.05
+    }
+   ],
+   "castShadow": false,
+   "connects": [
+    "factory",
+    "estuary-reservoir"
+   ]
+  },
+  {
+   "id": "factory",
+   "name": {
+    "en": "Factory",
+    "zh": "工厂"
+   },
+   "group": "reuse",
+   "summary": {
+    "en": "Uses NEWater where very clean water is needed.",
+    "zh": "需要很干净的水时用新生水。"
+   },
+   "detail": {
+    "en": "Wafer fabrication plants, which make computer chips, are the largest users of NEWater, because they need very clean water [S5]. Factories also use it to cool machinery and buildings.\n\nThe model draws a plain factory block with cooling units on the roof; it stands for any industrial user.\n\nNon-domestic users take about 55 % of Singapore's water today, and their share is expected to grow [S12].",
+    "zh": "制造电脑芯片的晶圆厂是新生水最大的用户，因为它们需要非常干净的水 [S5]。工厂也用它冷却机器和建筑。\n\n模型画了一个屋顶有冷却设备的简单厂房，代表各种工业用户。\n\n今天非家庭用户约用掉新加坡 55 % 的水，这个比例预计还会上升 [S12]。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.22,
+     0.11,
+     0.34
+    ],
+    "bevel": 0.006,
+    "at": [
+     2.87,
+     0.055,
+     0.72
+    ],
+    "color": "enamel"
+   },
+   "extra": [
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.08,
+      0.04,
+      0.08
+     ],
+     "bevel": 0.004,
+     "at": [
+      2.87,
+      0.13,
+      0.64
+     ],
+     "color": "casing"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.08,
+      0.04,
+      0.08
+     ],
+     "bevel": 0.004,
+     "at": [
+      2.87,
+      0.13,
+      0.78
+     ],
+     "color": "casing"
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.03,
+      0.03,
+      0.012
+     ],
+     "at": [
+      2.87,
+      0.156,
+      0.64
+     ],
+     "color": "steel"
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.03,
+      0.03,
+      0.012
+     ],
+     "at": [
+      2.87,
+      0.156,
+      0.78
+     ],
+     "color": "steel"
+    }
+   ],
+   "explode": {
+    "dir": [
+     1,
+     0,
+     0
+    ],
+    "dist": 0.15
+   }
+  },
+  {
+   "id": "desal-intake",
+   "name": {
+    "en": "Seawater intake",
+    "zh": "海水取水口"
+   },
+   "group": "desal",
+   "summary": {
+    "en": "Draws seawater in from offshore.",
+    "zh": "从近海取海水。"
+   },
+   "detail": {
+    "en": "A desalination plant draws seawater through an intake out at sea, away from the shore, so that it takes in less sand and floating debris. Singapore's first desalination plant opened in 2005; five operate today [S6].\n\nThe model draws one intake head on the sea floor and a pipe along the seabed to the plant.\n\nScreens at the intake keep out fish and debris.",
+    "zh": "海水淡化厂通过伸到离岸海里的取水口取海水，这样吸进的泥沙和漂浮物少一些。新加坡第一座海水淡化厂 2005 年启用，今天有 5 座 [S6]。\n\n模型在海床上画了一个取水头，一条管子沿着海床通到厂里。\n\n取水口装有格网，挡住鱼和杂物。"
+   },
+   "primitive": {
+    "kind": "tube",
+    "path": [
+     [
+      -0.55,
+      -0.1556,
+      0.0
+     ],
+     [
+      -0.2,
+      -0.096,
+      0.0
+     ],
+     [
+      0.22,
+      0.074,
+      0.0
+     ],
+     [
+      0.32,
+      0.145,
+      0.0
+     ],
+     [
+      0.5,
+      0.145,
+      0.0
+     ],
+     [
+      0.5,
+      0.2,
+      0.0
+     ]
+    ],
+    "radius": 0.013,
+    "at": [
+     -2.0,
+     -0.2,
+     -0.9
+    ],
+    "color": "steel",
+    "bendRadius": 0.05
+   },
+   "extra": [
+    {
+     "kind": "cylinder",
+     "size": [
+      0.03,
+      0.03,
+      0.05
+     ],
+     "at": [
+      -2.55,
+      -0.3506,
+      -0.9
+     ],
+     "color": "steel"
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.04,
+      0.04,
+      0.01
+     ],
+     "at": [
+      -2.55,
+      -0.3206,
+      -0.9
+     ],
+     "color": "steel"
+    }
+   ],
+   "castShadow": false,
+   "explode": {
+    "dir": [
+     0,
+     -1,
+     0
+    ],
+    "dist": 0.15
+   },
+   "connects": [
+    "desal-pretreat"
+   ]
+  },
+  {
+   "id": "desal-pretreat",
+   "name": {
+    "en": "Pre-treatment",
+    "zh": "预处理池"
+   },
+   "group": "desal",
+   "summary": {
+    "en": "Removes sand, silt and algae from seawater.",
+    "zh": "去掉海水里的泥沙和藻类。"
+   },
+   "detail": {
+    "en": "Before reverse osmosis, seawater is pre-treated to remove sand, silt, algae and other particles that would quickly clog the membranes [S6].\n\nThe model draws three rectangular basins holding seawater.\n\nIf pre-treatment fails, the membranes foul and have to be cleaned or replaced sooner.",
+    "zh": "在反渗透之前，先对海水做预处理，去掉会很快堵住膜的泥沙、淤泥、藻类和其他颗粒 [S6]。\n\n模型画了三个装着海水的长方形池子。\n\n预处理出了问题，膜就会脏得更快，得提早清洗或更换。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.1,
+     0.05,
+     0.1
+    ],
+    "bevel": 0.004,
+    "at": [
+     -1.5,
+     0.025,
+     -1.02
+    ],
+    "color": "enamel",
+    "tint": "#bdb7aa"
+   },
+   "extra": [
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.1,
+      0.05,
+      0.1
+     ],
+     "bevel": 0.004,
+     "at": [
+      -1.5,
+      0.025,
+      -0.9
+     ],
+     "color": "enamel",
+     "tint": "#bdb7aa"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.1,
+      0.05,
+      0.1
+     ],
+     "bevel": 0.004,
+     "at": [
+      -1.5,
+      0.025,
+      -0.78
+     ],
+     "color": "enamel",
+     "tint": "#bdb7aa"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.086,
+      0.003,
+      0.086
+     ],
+     "at": [
+      -1.5,
+      0.0515,
+      -1.02
+     ],
+     "color": "membrane",
+     "tint": "#6c919a"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.086,
+      0.003,
+      0.086
+     ],
+     "at": [
+      -1.5,
+      0.0515,
+      -0.9
+     ],
+     "color": "membrane",
+     "tint": "#6c919a"
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.086,
+      0.003,
+      0.086
+     ],
+     "at": [
+      -1.5,
+      0.0515,
+      -0.78
+     ],
+     "color": "membrane",
+     "tint": "#6c919a"
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.15
+   },
+   "connects": [
+    "desal-ro"
+   ]
+  },
+  {
+   "id": "desal-ro",
+   "name": {
+    "en": "Desalination membranes",
+    "zh": "淡化膜组"
+   },
+   "group": "desal",
+   "summary": {
+    "en": "Push seawater through membranes that stop salt.",
+    "zh": "把海水压过膜，把盐挡在外面。"
+   },
+   "detail": {
+    "en": "High-pressure pumps push the seawater through reverse-osmosis membranes that let water pass but hold back the salt [S6]. Seawater is much saltier than used water, so this takes much more pressure: desalination uses about 3.5 kWh of electricity for each cubic metre of water, and it is more energy-intensive than NEWater or imported water [S6, S22].\n\nThe model draws four tiers of white pressure vessels on a concrete pad, with blue headers and two pump units; the dots change from the colour of seawater to that of tap water as they pass.\n\nBecause it needs so much energy, desalinated water costs more to make than water from the other taps [S22].",
+    "zh": "高压泵把海水压过反渗透膜，膜让水通过，却把盐挡在外面 [S6]。海水比用过的水咸得多，所以需要大得多的压力：海水淡化每立方米水约用电 3.5 千瓦时，比新生水和进口水更耗能 [S6, S22]。\n\n模型在混凝土台座上画了四层白色压力管、蓝色总管和两台泵；点经过这里，由海水的颜色变成自来水的颜色。\n\n因为耗能多，淡化海水的生产成本比其他水喉的水高 [S22]。"
+   },
+   "primitive": {
+    "kind": "cylinder",
+    "size": [
+     0.0125,
+     0.0125,
+     0.26
+    ],
+    "at": [
+     -1.12,
+     0.03,
+     -0.8775
+    ],
+    "color": "plastic",
+    "tint": "#e6e3da",
+    "rotation": [
+     0,
+     0,
+     90
+    ]
+   },
+   "extra": [
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0125,
+      0.0125,
+      0.26
+     ],
+     "at": [
+      -1.12,
+      0.03,
+      -0.8225
+     ],
+     "color": "plastic",
+     "tint": "#e6e3da",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0125,
+      0.0125,
+      0.26
+     ],
+     "at": [
+      -1.12,
+      0.03,
+      -0.7675
+     ],
+     "color": "plastic",
+     "tint": "#e6e3da",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0125,
+      0.0125,
+      0.26
+     ],
+     "at": [
+      -1.12,
+      0.03,
+      -0.7125
+     ],
+     "color": "plastic",
+     "tint": "#e6e3da",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0125,
+      0.0125,
+      0.26
+     ],
+     "at": [
+      -1.12,
+      0.03,
+      -0.6575
+     ],
+     "color": "plastic",
+     "tint": "#e6e3da",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0125,
+      0.0125,
+      0.26
+     ],
+     "at": [
+      -1.12,
+      0.03,
+      -0.6025
+     ],
+     "color": "plastic",
+     "tint": "#e6e3da",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0125,
+      0.0125,
+      0.26
+     ],
+     "at": [
+      -1.12,
+      0.062,
+      -0.8775
+     ],
+     "color": "plastic",
+     "tint": "#e6e3da",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0125,
+      0.0125,
+      0.26
+     ],
+     "at": [
+      -1.12,
+      0.062,
+      -0.8225
+     ],
+     "color": "plastic",
+     "tint": "#e6e3da",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0125,
+      0.0125,
+      0.26
+     ],
+     "at": [
+      -1.12,
+      0.062,
+      -0.7675
+     ],
+     "color": "plastic",
+     "tint": "#e6e3da",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0125,
+      0.0125,
+      0.26
+     ],
+     "at": [
+      -1.12,
+      0.062,
+      -0.7125
+     ],
+     "color": "plastic",
+     "tint": "#e6e3da",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0125,
+      0.0125,
+      0.26
+     ],
+     "at": [
+      -1.12,
+      0.062,
+      -0.6575
+     ],
+     "color": "plastic",
+     "tint": "#e6e3da",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0125,
+      0.0125,
+      0.26
+     ],
+     "at": [
+      -1.12,
+      0.062,
+      -0.6025
+     ],
+     "color": "plastic",
+     "tint": "#e6e3da",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0125,
+      0.0125,
+      0.26
+     ],
+     "at": [
+      -1.12,
+      0.094,
+      -0.8775
+     ],
+     "color": "plastic",
+     "tint": "#e6e3da",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0125,
+      0.0125,
+      0.26
+     ],
+     "at": [
+      -1.12,
+      0.094,
+      -0.8225
+     ],
+     "color": "plastic",
+     "tint": "#e6e3da",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0125,
+      0.0125,
+      0.26
+     ],
+     "at": [
+      -1.12,
+      0.094,
+      -0.7675
+     ],
+     "color": "plastic",
+     "tint": "#e6e3da",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0125,
+      0.0125,
+      0.26
+     ],
+     "at": [
+      -1.12,
+      0.094,
+      -0.7125
+     ],
+     "color": "plastic",
+     "tint": "#e6e3da",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0125,
+      0.0125,
+      0.26
+     ],
+     "at": [
+      -1.12,
+      0.094,
+      -0.6575
+     ],
+     "color": "plastic",
+     "tint": "#e6e3da",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0125,
+      0.0125,
+      0.26
+     ],
+     "at": [
+      -1.12,
+      0.094,
+      -0.6025
+     ],
+     "color": "plastic",
+     "tint": "#e6e3da",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0125,
+      0.0125,
+      0.26
+     ],
+     "at": [
+      -1.12,
+      0.126,
+      -0.8775
+     ],
+     "color": "plastic",
+     "tint": "#e6e3da",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0125,
+      0.0125,
+      0.26
+     ],
+     "at": [
+      -1.12,
+      0.126,
+      -0.8225
+     ],
+     "color": "plastic",
+     "tint": "#e6e3da",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0125,
+      0.0125,
+      0.26
+     ],
+     "at": [
+      -1.12,
+      0.126,
+      -0.7675
+     ],
+     "color": "plastic",
+     "tint": "#e6e3da",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0125,
+      0.0125,
+      0.26
+     ],
+     "at": [
+      -1.12,
+      0.126,
+      -0.7125
+     ],
+     "color": "plastic",
+     "tint": "#e6e3da",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0125,
+      0.0125,
+      0.26
+     ],
+     "at": [
+      -1.12,
+      0.126,
+      -0.6575
+     ],
+     "color": "plastic",
+     "tint": "#e6e3da",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.0125,
+      0.0125,
+      0.26
+     ],
+     "at": [
+      -1.12,
+      0.126,
+      -0.6025
+     ],
+     "color": "plastic",
+     "tint": "#e6e3da",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.34,
+      0.012,
+      0.42
+     ],
+     "bevel": 0.003,
+     "at": [
+      -1.12,
+      0.006,
+      -0.74
+     ],
+     "color": "enamel",
+     "tint": "#bdb7aa"
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.006,
+      0.006,
+      0.34
+     ],
+     "at": [
+      -1.257,
+      0.03,
+      -0.74
+     ],
+     "color": "plastic",
+     "tint": "#5f9fb0",
+     "rotation": [
+      90,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.006,
+      0.006,
+      0.34
+     ],
+     "at": [
+      -1.257,
+      0.126,
+      -0.74
+     ],
+     "color": "plastic",
+     "tint": "#5f9fb0",
+     "rotation": [
+      90,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.006,
+      0.006,
+      0.34
+     ],
+     "at": [
+      -0.983,
+      0.03,
+      -0.74
+     ],
+     "color": "plastic",
+     "tint": "#5f9fb0",
+     "rotation": [
+      90,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.006,
+      0.006,
+      0.34
+     ],
+     "at": [
+      -0.983,
+      0.126,
+      -0.74
+     ],
+     "color": "plastic",
+     "tint": "#5f9fb0",
+     "rotation": [
+      90,
+      0,
+      0
+     ]
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.06,
+      0.04,
+      0.05
+     ],
+     "bevel": 0.004,
+     "at": [
+      -1.17,
+      0.032,
+      -0.49
+     ],
+     "color": "casing"
+    },
+    {
+     "kind": "bevelBox",
+     "size": [
+      0.06,
+      0.04,
+      0.05
+     ],
+     "bevel": 0.004,
+     "at": [
+      -1.07,
+      0.032,
+      -0.49
+     ],
+     "color": "casing"
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     1,
+     0
+    ],
+    "dist": 0.15
+   },
+   "connects": [
+    "brine-outfall",
+    "distribution-main"
+   ]
+  },
+  {
+   "id": "johor-main",
+   "name": {
+    "en": "Johor pipeline",
+    "zh": "柔佛输水管"
+   },
+   "group": "imported",
+   "summary": {
+    "en": "Brings water bought from Johor across the Causeway.",
+    "zh": "把从柔佛买的水经长堤送来。"
+   },
+   "detail": {
+    "en": "Imported water comes from the Johor River in Malaysia. Under the 1962 Water Agreement, Singapore may draw up to 250 million gallons a day, about 1.1 million m³, until 2061; Johor is entitled to buy treated water of up to 2 % of the water supplied, about 5 million gallons a day [S17, S18, S11]. Pipelines carry the water across the Causeway.\n\nThe model cuts the pipeline off at the edge of the slice; the map topic Four Taps shows the river and the route.\n\nAn earlier agreement of 1961 expired in 2011 [S17]; before it, a 1927 agreement let Singapore lease land in Johor to collect water [S19]. Linggiu Reservoir, built upstream under a 1990 agreement, releases water to supplement the river [S4].",
+    "zh": "进口水来自马来西亚的柔佛河。根据 1962 年水供协议，新加坡每天可抽取最多 2.5 亿加仑（约 110 万 m³）的水，直到 2061 年；柔佛有权购买相当于供水量最多 2 %（每天约 500 万加仑）的经处理的水 [S17, S18, S11]。水管经长堤把水送过来。\n\n模型在切片边缘把输水管截断；地图主题《四大水喉》画出河流与路线。\n\n更早的 1961 年协议已于 2011 年到期 [S17]；再往前，1927 年的协议让新加坡在柔佛租地集水 [S19]。根据 1990 年的协议在上游兴建的林木水库，放水补充河流的水量 [S4]。"
+   },
+   "primitive": {
+    "kind": "tube",
+    "path": [
+     [
+      0.0,
+      0.0,
+      -0.77
+     ],
+     [
+      0.0,
+      0.0,
+      0.63
+     ],
+     [
+      0.24,
+      0.0,
+      0.63
+     ],
+     [
+      0.24,
+      -0.01,
+      0.665
+     ]
+    ],
+    "radius": 0.02,
+    "at": [
+     0.95,
+     0.04,
+     -0.7
+    ],
+    "color": "steel",
+    "bendRadius": 0.06
+   },
+   "extra": [
+    {
+     "kind": "torus",
+     "size": [
+      0.022,
+      0.004
+     ],
+     "at": [
+      0.95,
+      0.04,
+      -1.47
+     ],
+     "rotation": [
+      90,
+      0,
+      0
+     ],
+     "color": "token:ink-2"
+    }
+   ],
+   "explode": {
+    "dir": [
+     0,
+     0,
+     -1
+    ],
+    "dist": 0.3
+   },
+   "connects": [
+    "waterworks-mixing"
+   ]
+  },
+  {
+   "id": "brine-outfall",
+   "name": {
+    "en": "Brine outfall",
+    "zh": "浓盐水排放管"
+   },
+   "group": "desal",
+   "summary": {
+    "en": "Returns the salty leftover water to the sea.",
+    "zh": "把剩下的浓盐水排回海里。"
+   },
+   "detail": {
+    "en": "Reverse osmosis turns only part of the seawater into fresh water. The rest, now saltier, leaves the plant and is returned to the sea through a pipe.\n\nThe model draws the outfall as a pipe along the seabed ending in a diffuser with short risers; its exact design and the way the brine is spread are not taken from a Singapore source and are schematic [S6].\n\nA diffuser spreads the salty water so that it mixes quickly with the surrounding sea.",
+    "zh": "反渗透只把一部分海水变成淡水，剩下变得更咸的水离开厂区，经管道排回海里。\n\n模型把排放管画成一条沿海床铺设、末端带几根短竖管扩散器的管子；它的具体设计和浓盐水的扩散方式不是取自新加坡的来源，是示意 [S6]。\n\n扩散器把咸水分散开，让它很快和周围的海水混合。"
+   },
+   "primitive": {
+    "kind": "tube",
+    "path": [
+     [
+      0.75,
+      0.22,
+      -0.04
+     ],
+     [
+      0.58,
+      0.22,
+      0.0
+     ],
+     [
+      0.38,
+      0.145,
+      0.0
+     ],
+     [
+      0.22,
+      0.072,
+      0.0
+     ],
+     [
+      -0.2,
+      -0.098,
+      0.05
+     ],
+     [
+      -0.72,
+      -0.1955,
+      0.1
+     ]
+    ],
+    "radius": 0.01,
+    "at": [
+     -2.0,
+     -0.2,
+     -0.5
+    ],
+    "color": "steel",
+    "bendRadius": 0.05
+   },
+   "extra": [
+    {
+     "kind": "cylinder",
+     "size": [
+      0.012,
+      0.012,
+      0.12
+     ],
+     "at": [
+      -2.78,
+      -0.3955,
+      -0.4
+     ],
+     "color": "steel",
+     "rotation": [
+      0,
+      0,
+      90
+     ]
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.004,
+      0.004,
+      0.03
+     ],
+     "at": [
+      -2.82,
+      -0.3775,
+      -0.4
+     ],
+     "color": "steel"
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.004,
+      0.004,
+      0.03
+     ],
+     "at": [
+      -2.785,
+      -0.3775,
+      -0.4
+     ],
+     "color": "steel"
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.004,
+      0.004,
+      0.03
+     ],
+     "at": [
+      -2.75,
+      -0.3775,
+      -0.4
+     ],
+     "color": "steel"
+    },
+    {
+     "kind": "cylinder",
+     "size": [
+      0.004,
+      0.004,
+      0.03
+     ],
+     "at": [
+      -2.715,
+      -0.3775,
+      -0.4
+     ],
+     "color": "steel"
+    }
+   ],
+   "castShadow": false,
+   "explode": {
+    "dir": [
+     0,
+     -1,
+     0
+    ],
+    "dist": 0.15
+   },
+   "connects": [
+    "sea"
+   ]
+  },
+  {
+   "id": "ground-shell",
+   "name": {
+    "en": "Land",
+    "zh": "陆地"
+   },
+   "summary": {
+    "en": "The slice of land the model stands on.",
+    "zh": "模型所在的这块陆地。"
+   },
+   "detail": {
+    "en": "The land the model stands on, drawn as a slab with a cut face. In X-ray it turns see-through so the pipes and the tunnel underground show; the underground cut slices off its front edge.\n\nHeights and depths are not to scale: hills, buildings and the tunnel are all drawn larger or shallower than they are [S1].",
+    "zh": "模型所在的陆地，画成一块带剖面的地块。X 光模式下它会变透明，露出地下的管道和隧道；地下剖切会切掉它的前缘。\n\n高度和深度都不按比例：山、楼房和隧道都画得更大或更浅 [S1]。"
+   },
+   "primitive": {
+    "kind": "extrude",
+    "shape": [
+     [
+      -1.7,
+      -1.2
+     ],
+     [
+      3.0,
+      -1.2
+     ],
+     [
+      3.0,
+      1.2
+     ],
+     [
+      -1.7,
+      1.2
+     ],
+     [
+      -1.7,
+      1.06
+     ],
+     [
+      -1.3,
+      1.06
+     ],
+     [
+      -0.85,
+      1.02
+     ],
+     [
+      -0.55,
+      0.92
+     ],
+     [
+      -0.42,
+      0.72
+     ],
+     [
+      -0.43,
+      0.55
+     ],
+     [
+      -0.15,
+      -0.1
+     ],
+     [
+      0.47,
+      -0.1
+     ],
+     [
+      0.47,
+      -0.2
+     ],
+     [
+      -0.25,
+      -0.2
+     ],
+     [
+      -0.57,
+      0.4
+     ],
+     [
+      -0.85,
+      0.27
+     ],
+     [
+      -1.25,
+      0.2
+     ],
+     [
+      -1.7,
+      0.22
+     ]
+    ],
+    "depth": 0.1,
+    "rotation": [
+     90,
+     0,
+     0
+    ],
+    "at": [
+     0,
+     -0.05,
+     0
+    ],
+    "color": "enamel",
+    "tint": "#cbc6b1"
+   },
+   "extra": [
+    {
+     "kind": "box",
+     "size": [
+      4.7,
+      0.52,
+      2.4
+     ],
+     "at": [
+      0.65,
+      -0.36,
+      0
+     ],
+     "color": "tissue",
+     "tint": "#a89d88"
+    }
+   ],
+   "context": true,
+   "shell": true
+  },
+  {
+   "id": "seabed-block",
+   "name": {
+    "en": "Seabed",
+    "zh": "海床"
+   },
+   "summary": {
+    "en": "The sea floor off the coast.",
+    "zh": "近岸的海床。"
+   },
+   "detail": {
+    "en": "The sea floor under the coastal sea, sloping down away from the shore. The intake pipe and the brine outfall lie on it.\n\nThe slope is schematic [S1].",
+    "zh": "近岸海域下面的海床，离岸越远越深。取水管和浓盐水排放管铺在上面。\n\n坡度是示意 [S1]。"
+   },
+   "primitive": {
+    "kind": "extrude",
+    "shape": [
+     [
+      -3.0,
+      -0.62
+     ],
+     [
+      -1.7,
+      -0.62
+     ],
+     [
+      -1.7,
+      -0.1
+     ],
+     [
+      -1.78,
+      -0.14
+     ],
+     [
+      -2.2,
+      -0.31
+     ],
+     [
+      -3.0,
+      -0.46
+     ]
+    ],
+    "depth": 2.4,
+    "at": [
+     0,
+     0,
+     0.0
+    ],
+    "color": "tissue",
+    "tint": "#c9b58c"
+   },
+   "context": true
+  },
+  {
+   "id": "causeway-stub",
+   "name": {
+    "en": "Causeway (cut off)",
+    "zh": "长堤（截断）"
+   },
+   "summary": {
+    "en": "Where the slice ends at the Causeway.",
+    "zh": "切片在长堤处截断。"
+   },
+   "detail": {
+    "en": "The slice ends here. Beyond this edge the pipeline from Johor continues across the Causeway to the Johor River, which the map topic Four Taps shows [S17].\n\nThe cut end is schematic [S1].",
+    "zh": "切片到这里为止。越过这条边，来自柔佛的输水管经长堤一直通到柔佛河，地图主题《四大水喉》画出了这一段 [S17]。\n\n截断的一端是示意 [S1]。"
+   },
+   "primitive": {
+    "kind": "bevelBox",
+    "size": [
+     0.2,
+     0.09,
+     0.26
+    ],
+    "bevel": 0.006,
+    "at": [
+     0.95,
+     -0.025,
+     -1.33
+    ],
+    "color": "enamel",
+    "tint": "#bdb7aa"
+   },
+   "context": true
+  }
+ ],
+ "groups": [
+  {
+   "id": "sky-and-sea",
+   "name": {
+    "en": "Sun, sea and sky",
+    "zh": "太阳、海与天"
+   },
+   "color": "token:ink-2",
+   "card": false
+  },
+  {
+   "id": "catchment",
+   "name": {
+    "en": "Catchment",
+    "zh": "集水"
+   },
+   "color": "token:xray"
+  },
+  {
+   "id": "supply",
+   "name": {
+    "en": "Treatment and supply",
+    "zh": "处理与供水"
+   },
+   "color": "token:cold"
+  },
+  {
+   "id": "reuse",
+   "name": {
+    "en": "Used water and NEWater",
+    "zh": "用过的水与新生水"
+   },
+   "color": "token:loop"
+  },
+  {
+   "id": "desal",
+   "name": {
+    "en": "Desalination",
+    "zh": "海水淡化"
+   },
+   "color": "token:ink-3"
+  },
+  {
+   "id": "imported",
+   "name": {
+    "en": "Imported water",
+    "zh": "进口水"
+   },
+   "color": "token:ink-2",
+   "card": false
+  },
+  {
+   "id": "water-cycle",
+   "name": {
+    "en": "Water cycle",
+    "zh": "水循环"
+   },
+   "color": "token:neutral"
+  },
+  {
+   "id": "flood",
+   "name": {
+    "en": "Flood release",
+    "zh": "开闸泄洪"
+   },
+   "color": "token:xray"
+  },
+  {
+   "id": "topup",
+   "name": {
+    "en": "Dry-spell top-up",
+    "zh": "干旱补水"
+   },
+   "color": "token:loop"
+  }
+ ],
+ "flows": [
+  {
+   "id": "evaporation",
+   "group": "water-cycle",
+   "path": [
+    [
+     -2.32,
+     -0.02,
+     -0.15
+    ],
+    [
+     -2.27,
+     0.45,
+     -0.18
+    ],
+    [
+     -2.18,
+     0.98,
+     -0.24
+    ]
+   ],
+   "speed": 0.22,
+   "color": "token:neutral",
+   "stops": [
+    {
+     "at": 0,
+     "color": "token:xray"
+    },
+    {
+     "at": 0.12,
+     "color": "token:neutral"
+    },
+    {
+     "at": 1,
+     "color": "token:neutral"
+    }
+   ],
+   "ends": "fade",
+   "count": 300,
+   "size": 1.5,
+   "spread": [
+    0.42,
+    0.02,
+    0.45
+   ],
+   "clip": false,
+   "parts": [
+    "sea",
+    "cumulus"
+   ]
+  },
+  {
+   "id": "drift-condense",
+   "group": "water-cycle",
+   "path": [
+    [
+     -1.95,
+     1.16,
+     -0.25
+    ],
+    [
+     -1.0,
+     1.24,
+     -0.42
+    ],
+    [
+     0.0,
+     1.2,
+     -0.55
+    ],
+    [
+     0.6,
+     1.14,
+     -0.62
+    ]
+   ],
+   "speed": 0.32,
+   "color": "token:neutral",
+   "stops": [
+    {
+     "at": 0,
+     "color": "token:neutral"
+    },
+    {
+     "at": 0.6,
+     "color": "token:neutral"
+    },
+    {
+     "at": 1,
+     "color": "token:xray"
+    }
+   ],
+   "ends": "fade",
+   "count": 200,
+   "size": 1.3,
+   "spread": [
+    0.12,
+    0.06,
+    0.18
+   ],
+   "clip": false,
+   "parts": [
+    "cumulus",
+    "rain-cloud"
+   ]
+  },
+  {
+   "id": "rain",
+   "group": "water-cycle",
+   "path": [
+    [
+     1.0,
+     0.98,
+     -0.6
+    ],
+    [
+     1.0,
+     0.06,
+     -0.6
+    ]
+   ],
+   "speed": 0.9,
+   "color": "token:xray",
+   "ends": "fade",
+   "count": 760,
+   "size": 0.75,
+   "spread": [
+    1.3,
+    0.02,
+    0.36
+   ],
+   "clip": false,
+   "parts": [
+    "rain-cloud",
+    "forest-hill",
+    "city-blocks"
+   ]
+  },
+  {
+   "id": "runoff",
+   "group": "catchment",
+   "paths": [
+    {
+     "id": "hill-west",
+     "path": [
+      [
+       1.36,
+       0.3,
+       -0.86
+      ],
+      [
+       1.55,
+       0.16,
+       -0.76
+      ],
+      [
+       1.75,
+       0.075,
+       -0.68
+      ],
+      [
+       1.95,
+       0.075,
+       -0.62
+      ]
+     ]
+    },
+    {
+     "id": "hill-east",
+     "path": [
+      [
+       2.74,
+       0.36,
+       -0.86
+      ],
+      [
+       2.56,
+       0.16,
+       -0.76
+      ],
+      [
+       2.36,
+       0.075,
+       -0.7
+      ],
+      [
+       2.15,
+       0.075,
+       -0.62
+      ]
+     ]
+    },
+    {
+     "id": "city",
+     "path": [
+      [
+       -0.6,
+       0.016,
+       -0.58
+      ],
+      [
+       0.42,
+       0.016,
+       -0.58
+      ],
+      [
+       0.42,
+       0.016,
+       -0.2
+      ],
+      [
+       0.42,
+       -0.03,
+       -0.15
+      ],
+      [
+       -0.2,
+       -0.035,
+       -0.15
+      ],
+      [
+       -0.5,
+       -0.04,
+       0.45
+      ],
+      [
+       -0.78,
+       -0.03,
+       0.56
+      ]
+     ]
+    }
+   ],
+   "speed": 0.3,
+   "color": "token:xray",
+   "ends": "fade",
+   "count": 420,
+   "size": 0.8,
+   "spread": 0.007,
+   "clip": true,
+   "parts": [
+    "forest-hill",
+    "inland-reservoir",
+    "drains",
+    "canal",
+    "estuary-reservoir"
+   ]
+  },
+  {
+   "id": "barrage-release",
+   "group": "flood",
+   "path": [
+    [
+     -1.52,
+     -0.024,
+     0.64
+    ],
+    [
+     -1.66,
+     -0.03,
+     0.64
+    ],
+    [
+     -1.72,
+     -0.05,
+     0.64
+    ],
+    [
+     -1.8,
+     -0.045,
+     0.64
+    ],
+    [
+     -2.05,
+     -0.035,
+     0.64
+    ]
+   ],
+   "speed": 0.55,
+   "color": "token:xray",
+   "ends": "fade",
+   "count": 260,
+   "size": 0.85,
+   "spread": [
+    0.02,
+    0.004,
+    0.34
+   ],
+   "clip": true,
+   "parts": [
+    "estuary-reservoir",
+    "crest-gates",
+    "sea"
+   ]
+  },
+  {
+   "id": "raw-to-tap",
+   "group": "supply",
+   "path": [
+    [
+     2.03,
+     0.07,
+     -0.47
+    ],
+    [
+     2.03,
+     -0.045,
+     -0.45
+    ],
+    [
+     2.03,
+     -0.045,
+     -0.13
+    ],
+    [
+     1.25,
+     -0.045,
+     -0.13
+    ],
+    [
+     1.25,
+     -0.0,
+     -0.05
+    ],
+    [
+     1.25,
+     0.032,
+     -0.02
+    ],
+    [
+     1.25,
+     0.032,
+     0.1
+    ],
+    [
+     1.45,
+     0.034,
+     0.05
+    ],
+    [
+     1.645,
+     0.034,
+     0.04
+    ],
+    [
+     1.84,
+     0.034,
+     0.04
+    ],
+    [
+     1.86,
+     0.036,
+     0.3
+    ],
+    [
+     1.4,
+     0.036,
+     0.3
+    ],
+    [
+     1.2,
+     0.01,
+     0.3
+    ],
+    [
+     1.035,
+     -0.03,
+     0.3
+    ],
+    [
+     0.86,
+     -0.03,
+     0.24
+    ],
+    [
+     0.75,
+     0.06,
+     0.17
+    ],
+    [
+     0.68,
+     0.06,
+     0.15
+    ],
+    [
+     0.58,
+     -0.04,
+     0.26
+    ],
+    [
+     0.36,
+     -0.04,
+     0.47
+    ],
+    [
+     0.36,
+     -0.04,
+     0.51
+    ],
+    [
+     0.36,
+     0.435,
+     0.51
+    ],
+    [
+     0.33,
+     0.435,
+     0.535
+    ],
+    [
+     0.27,
+     0.432,
+     0.55
+    ],
+    [
+     0.145,
+     0.432,
+     0.543
+    ],
+    [
+     0.135,
+     0.4,
+     0.543
+    ],
+    [
+     0.135,
+     0.25,
+     0.543
+    ],
+    [
+     0.135,
+     0.25,
+     0.555
+    ],
+    [
+     0.135,
+     0.25,
+     0.567
+    ],
+    [
+     0.135,
+     0.252,
+     0.585
+    ],
+    [
+     0.135,
+     0.24,
+     0.589
+    ]
+   ],
+   "speed": 0.4,
+   "color": "token:xray",
+   "stops": [
+    {
+     "at": 0,
+     "color": "token:xray"
+    },
+    {
+     "at": 0.462,
+     "color": "token:xray"
+    },
+    {
+     "at": 0.594,
+     "color": "token:cold"
+    },
+    {
+     "at": 1,
+     "color": "token:cold"
+    }
+   ],
+   "ends": "fade",
+   "count": 900,
+   "size": 0.6,
+   "spread": 0.004,
+   "clip": true,
+   "parts": [
+    "intake-tower",
+    "raw-water-main",
+    "waterworks-mixing",
+    "clarifiers",
+    "filter-beds",
+    "clear-water-tank",
+    "service-reservoir",
+    "distribution-main",
+    "hdb-block",
+    "roof-tank",
+    "kitchen-tap"
+   ]
+  },
+  {
+   "id": "johor-water",
+   "group": "imported",
+   "path": [
+    [
+     0.95,
+     0.04,
+     -1.47
+    ],
+    [
+     0.95,
+     0.04,
+     -0.07
+    ],
+    [
+     1.19,
+     0.04,
+     -0.07
+    ],
+    [
+     1.19,
+     0.03,
+     -0.035
+    ]
+   ],
+   "speed": 0.4,
+   "color": "token:xray",
+   "ends": "fade",
+   "count": 220,
+   "size": 0.7,
+   "spread": 0.006,
+   "clip": true,
+   "parts": [
+    "johor-main",
+    "waterworks-mixing"
+   ]
+  },
+  {
+   "id": "used-water",
+   "group": "reuse",
+   "path": [
+    [
+     0.135,
+     0.24,
+     0.589
+    ],
+    [
+     0.135,
+     0.235,
+     0.577
+    ],
+    [
+     0.135,
+     0.228,
+     0.577
+    ],
+    [
+     0.135,
+     0.22,
+     0.58
+    ],
+    [
+     0.135,
+     -0.05,
+     0.58
+    ],
+    [
+     0.135,
+     -0.06,
+     0.8
+    ],
+    [
+     0.18,
+     -0.06,
+     1.0
+    ],
+    [
+     0.18,
+     -0.36,
+     1.0
+    ],
+    [
+     0.18,
+     -0.43,
+     1.0
+    ],
+    [
+     1.45,
+     -0.46,
+     1.0
+    ],
+    [
+     1.45,
+     -0.06,
+     1.0
+    ],
+    [
+     1.45,
+     0.0,
+     0.93
+    ],
+    [
+     1.26,
+     0.034,
+     0.865
+    ],
+    [
+     1.42,
+     0.034,
+     0.865
+    ],
+    [
+     1.42,
+     0.034,
+     0.68
+    ],
+    [
+     1.3,
+     0.034,
+     0.68
+    ],
+    [
+     1.7,
+     0.034,
+     0.68
+    ],
+    [
+     1.74,
+     0.034,
+     0.865
+    ]
+   ],
+   "speed": 0.3,
+   "color": "token:cut",
+   "ends": "fade",
+   "count": 420,
+   "size": 0.7,
+   "spread": 0.006,
+   "clip": true,
+   "parts": [
+    "kitchen-tap",
+    "house-sewer",
+    "dtss-tunnel",
+    "reclamation-plant"
+   ]
+  },
+  {
+   "id": "newater",
+   "group": "reuse",
+   "path": [
+    [
+     1.74,
+     0.034,
+     0.865
+    ],
+    [
+     1.95,
+     0.03,
+     0.865
+    ],
+    [
+     2.076,
+     0.04,
+     0.82
+    ],
+    [
+     2.076,
+     0.09,
+     0.72
+    ],
+    [
+     2.124,
+     0.09,
+     0.62
+    ],
+    [
+     2.24,
+     0.068,
+     0.6
+    ],
+    [
+     2.42,
+     0.068,
+     0.72
+    ],
+    [
+     2.24,
+     0.068,
+     0.82
+    ],
+    [
+     2.5,
+     0.04,
+     0.8
+    ],
+    [
+     2.56,
+     0.04,
+     0.7
+    ],
+    [
+     2.57,
+     0.03,
+     0.61
+    ],
+    [
+     2.66,
+     0.03,
+     0.61
+    ],
+    [
+     2.75,
+     0.03,
+     0.61
+    ]
+   ],
+   "speed": 0.32,
+   "color": "token:loop",
+   "stops": [
+    {
+     "at": 0,
+     "color": "token:cut"
+    },
+    {
+     "at": 0.119,
+     "color": "token:cut"
+    },
+    {
+     "at": 0.259,
+     "color": "token:neutral"
+    },
+    {
+     "at": 0.39,
+     "color": "token:neutral"
+    },
+    {
+     "at": 0.63,
+     "color": "token:loop"
+    },
+    {
+     "at": 1,
+     "color": "token:loop"
+    }
+   ],
+   "ends": "fade",
+   "count": 420,
+   "size": 0.7,
+   "spread": 0.006,
+   "clip": true,
+   "parts": [
+    "reclamation-plant",
+    "newater-membranes",
+    "newater-ro",
+    "uv-reactors",
+    "newater-main",
+    "factory"
+   ]
+  },
+  {
+   "id": "newater-topup",
+   "group": "topup",
+   "path": [
+    [
+     2.53,
+     0.03,
+     0.82
+    ],
+    [
+     2.53,
+     0.03,
+     0.96
+    ],
+    [
+     2.53,
+     -0.07,
+     1.1
+    ],
+    [
+     -0.3,
+     -0.07,
+     1.1
+    ],
+    [
+     -0.5,
+     -0.06,
+     0.96
+    ],
+    [
+     -0.75,
+     -0.03,
+     0.85
+    ]
+   ],
+   "speed": 0.35,
+   "color": "token:loop",
+   "ends": "fade",
+   "count": 120,
+   "size": 0.65,
+   "spread": 0.004,
+   "clip": true,
+   "parts": [
+    "newater-main",
+    "estuary-reservoir"
+   ]
+  },
+  {
+   "id": "desal-water",
+   "group": "desal",
+   "path": [
+    [
+     -2.55,
+     -0.3356,
+     -0.9
+    ],
+    [
+     -2.55,
+     -0.3556,
+     -0.9
+    ],
+    [
+     -2.2,
+     -0.296,
+     -0.9
+    ],
+    [
+     -1.78,
+     -0.126,
+     -0.9
+    ],
+    [
+     -1.68,
+     -0.055,
+     -0.9
+    ],
+    [
+     -1.5,
+     -0.055,
+     -0.9
+    ],
+    [
+     -1.5,
+     0.0,
+     -0.9
+    ],
+    [
+     -1.5,
+     0.034,
+     -1.02
+    ],
+    [
+     -1.5,
+     0.034,
+     -0.78
+    ],
+    [
+     -1.25,
+     0.05,
+     -0.74
+    ],
+    [
+     -0.99,
+     0.05,
+     -0.74
+    ],
+    [
+     -0.93,
+     -0.06,
+     -0.62
+    ],
+    [
+     -0.93,
+     -0.06,
+     -0.3
+    ],
+    [
+     0.62,
+     -0.06,
+     -0.3
+    ],
+    [
+     0.62,
+     -0.06,
+     0.2
+    ],
+    [
+     0.6,
+     -0.042,
+     0.255
+    ],
+    [
+     0.58,
+     -0.04,
+     0.26
+    ],
+    [
+     0.36,
+     -0.04,
+     0.47
+    ],
+    [
+     0.36,
+     -0.04,
+     0.51
+    ]
+   ],
+   "speed": 0.38,
+   "color": "token:ink-3",
+   "stops": [
+    {
+     "at": 0,
+     "color": "token:ink-3"
+    },
+    {
+     "at": 0.358,
+     "color": "token:ink-3"
+    },
+    {
+     "at": 0.41,
+     "color": "token:cold"
+    },
+    {
+     "at": 1,
+     "color": "token:cold"
+    }
+   ],
+   "ends": "fade",
+   "count": 420,
+   "size": 0.7,
+   "spread": 0.005,
+   "clip": true,
+   "parts": [
+    "desal-intake",
+    "desal-pretreat",
+    "desal-ro",
+    "distribution-main"
+   ]
+  }
+ ],
+ "animations": [
+  {
+   "id": "scraper-turn",
+   "target": "clarifiers",
+   "kind": "rotate",
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "rpm": 2,
+   "each": true
+  },
+  {
+   "id": "cloud-drift",
+   "target": "cumulus",
+   "kind": "sequence",
+   "loop": true,
+   "keys": [
+    {
+     "t": 0,
+     "offset": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "t": 4,
+     "offset": [
+      0.05,
+      0,
+      0
+     ]
+    },
+    {
+     "t": 8,
+     "offset": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "id": "uv-glow",
+   "target": "uv-reactors",
+   "kind": "pulse",
+   "scale": 1.03,
+   "hz": 0.5
+  }
+ ],
+ "poses": {
+  "gates-open": {
+   "crest-gates": {
+    "pivot": [
+     -1.705,
+     -0.06,
+     0.64
+    ],
+    "rotation": [
+     0,
+     0,
+     70
+    ]
+   },
+   "duration": 1.2
+  },
+  "dry-spell": {
+   "inland-reservoir": {
+    "pivot": [
+     2.06,
+     0.0,
+     -0.64
+    ],
+    "offset": [
+     0,
+     -0.03,
+     0
+    ],
+    "scale": [
+     0.97,
+     1,
+     0.97
+    ]
+   },
+   "estuary-reservoir": {
+    "pivot": [
+     -1.0,
+     -0.1,
+     0.62
+    ],
+    "offset": [
+     0,
+     -0.03,
+     0
+    ],
+    "scale": [
+     0.97,
+     1,
+     0.97
+    ]
+   },
+   "rain-cloud": {
+    "pivot": [
+     1.0,
+     1.08,
+     -0.62
+    ],
+    "scale": 0.01
+   },
+   "duration": 1.2
+  },
+  "storm": {
+   "rain-cloud": {
+    "pivot": [
+     1.0,
+     1.08,
+     -0.62
+    ],
+    "scale": 1.25
+   },
+   "cumulus": {
+    "offset": [
+     0.4,
+     0,
+     0
+    ]
+   },
+   "duration": 1.2
+  }
+ },
+ "views": {
+  "assembled": {
+   "camera": {
+    "position": [
+     6.55,
+     4.8,
+     11.3
+    ],
+    "target": [
+     0.45,
+     0.2,
+     0.0
+    ],
+    "fov": 30
+   }
+  },
+  "exploded": {
+   "camera": {
+    "position": [
+     5.0,
+     4.2,
+     9.2
+    ],
+    "target": [
+     0.1,
+     0.25,
+     0.05
+    ],
+    "fov": 30
+   }
+  },
+  "cutaway": {
+   "normal": [
+    0,
+    0,
+    -1
+   ],
+   "offset": 1.0
+  },
+  "cuts": {
+   "ground": {
+    "normal": [
+     0,
+     0,
+     -1
+    ],
+    "offset": 1.0,
+    "label": {
+     "en": "Underground",
+     "zh": "地下"
+    }
+   },
+   "plants": {
+    "normal": [
+     0,
+     -1,
+     0
+    ],
+    "offset": 0.15,
+    "label": {
+     "en": "Inside the plants",
+     "zh": "厂内"
+    }
+   }
+  },
+  "section": {
+   "plane": "xy"
+  },
+  "cover": {
+   "position": [
+    4.45,
+    3.35,
+    7.9
+   ],
+   "target": [
+    0.05,
+    0.3,
+    0.0
+   ],
+   "fov": 30
+  }
+ },
+ "presets": [
+  {
+   "id": "hero",
+   "label": {
+    "en": "Slice",
+    "zh": "全景"
+   },
+   "camera": {
+    "position": [
+     6.55,
+     4.8,
+     11.3
+    ],
+    "target": [
+     0.45,
+     0.2,
+     0.0
+    ],
+    "fov": 30
+   }
+  },
+  {
+   "id": "cycle",
+   "label": {
+    "en": "Cycle",
+    "zh": "水循环"
+   },
+   "camera": {
+    "position": [
+     0.8,
+     2.1,
+     9.6
+    ],
+    "target": [
+     -0.1,
+     0.6,
+     -0.25
+    ],
+    "fov": 30
+   }
+  },
+  {
+   "id": "barrage-view",
+   "label": {
+    "en": "Barrage",
+    "zh": "堤坝"
+   },
+   "camera": {
+    "position": [
+     -2.75,
+     0.8,
+     2.3
+    ],
+    "target": [
+     -1.55,
+     -0.03,
+     0.62
+    ],
+    "fov": 30
+   }
+  },
+  {
+   "id": "plants",
+   "label": {
+    "en": "Plants",
+    "zh": "水厂"
+   },
+   "camera": {
+    "position": [
+     2.9,
+     2.4,
+     3.5
+    ],
+    "target": [
+     1.85,
+     0.0,
+     0.45
+    ],
+    "fov": 30
+   }
+  },
+  {
+   "id": "coast",
+   "label": {
+    "en": "Coast",
+    "zh": "海岸"
+   },
+   "camera": {
+    "position": [
+     -0.35,
+     1.5,
+     1.5
+    ],
+    "target": [
+     -1.7,
+     -0.12,
+     -0.7
+    ],
+    "fov": 30
+   }
+  },
+  {
+   "id": "home",
+   "label": {
+    "en": "Home",
+    "zh": "住家"
+   },
+   "camera": {
+    "position": [
+     1.0,
+     0.7,
+     2.2
+    ],
+    "target": [
+     0.25,
+     0.22,
+     0.55
+    ],
+    "fov": 30
+   }
+  }
+ ],
+ "spec": [
+  {
+   "key": {
+    "en": "Four taps",
+    "zh": "四大水喉"
+   },
+   "value": {
+    "en": "Local · imported · NEWater · desalinated",
+    "zh": "本地集水 · 进口水 · 新生水 · 淡化海水"
+   },
+   "tag": "typical"
+  },
+  {
+   "key": {
+    "en": "Reservoirs",
+    "zh": "蓄水池"
+   },
+   "value": "17",
+   "tag": "typical"
+  },
+  {
+   "key": {
+    "en": "Demand",
+    "zh": "用水量"
+   },
+   "value": "≈ 440 MGD ≈ 2 MILLION M³/DAY",
+   "tag": "typical"
+  },
+  {
+   "key": {
+    "en": "Catchment",
+    "zh": "集水区"
+   },
+   "value": {
+    "en": "About two-thirds of the land",
+    "zh": "约三分之二的国土"
+   },
+   "tag": "typical"
+  }
+ ],
+ "telemetry": [
+  {
+   "key": {
+    "en": "Sunlight",
+    "zh": "阳光"
+   },
+   "unit": "W/m²",
+   "idle": 0,
+   "run": 900,
+   "lag": 3,
+   "decimals": 0
+  },
+  {
+   "key": {
+    "en": "Air",
+    "zh": "气温"
+   },
+   "unit": "°C",
+   "idle": 25,
+   "run": 32,
+   "lag": 20,
+   "decimals": 0
+  },
+  {
+   "key": {
+    "en": "Rain",
+    "zh": "雨强"
+   },
+   "unit": "mm/h",
+   "idle": 0,
+   "run": 30,
+   "lag": 6,
+   "decimals": 0
+  },
+  {
+   "key": {
+    "en": "Inflow",
+    "zh": "进库水量"
+   },
+   "unit": "m³/s",
+   "idle": 0,
+   "run": 580,
+   "lag": 12,
+   "decimals": 0
+  }
+ ]
+}

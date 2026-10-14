@@ -1,0 +1,92 @@
+---
+id: sea-and-johor
+order: 6
+title: { en: "Water from the sea and from Johor", zh: "来自大海与柔佛的水" }
+sensitive: false
+state:
+  view: assembled
+  run: true
+  cutaway: none
+  layers: [sky-and-sea, desal, imported, supply]
+  labels: [desal-intake, desal-pretreat, desal-ro, brine-outfall]
+  camera: { position: [-0.35, 1.5, 1.5], target: [-1.7, -0.12, -0.7], fov: 30 }
+  summary: { en: "Seawater is turned into fresh water with membranes, and water is also bought from Johor under a 1962 agreement.", zh: "海水用膜变成淡水；另有按 1962 年协议从柔佛购买的水。" }
+  beats:
+    - labels: [sea, desal-intake]
+      caption: { en: "A desalination plant draws seawater through an intake out at sea. The grey dots are seawater travelling along the sea floor to the plant.", zh: "海水淡化厂通过伸到海里的取水口取海水。灰色的点是沿着海床流向厂里的海水。" }
+    - labels: [desal-pretreat, desal-ro]
+      camera: { position: [-0.55, 0.75, -0.05], target: [-1.25, 0.02, -0.78], fov: 30 }
+      caption: { en: "Basins remove sand and algae first. Then pumps push the seawater through reverse osmosis membranes that hold back the salt, and the dots turn steel blue.", zh: "先在池里去掉泥沙和藻类，再由水泵把海水压过反渗透膜，盐被挡在外面，点就变成钢蓝色。" }
+    - labels: [brine-outfall, desal-ro, sea]
+      caption: { en: "The fresh water joins the supply mains. The leftover water, now saltier, goes back to the sea through an outfall pipe.", zh: "淡水接进供水干管。剩下变得更咸的水，经排放管回到海里。" }
+    - layers: [sky-and-sea, desal, imported, supply, catchment]
+      labels: [johor-main, waterworks-mixing]
+      camera: { position: [2.45, 1.3, 1.25], target: [1.1, 0.0, -0.45], fov: 30 }
+      caption: { en: "At the back edge, a pipeline brings water bought from the Johor River across the Causeway to a waterworks. The model cuts it off; the map topic follows it.", zh: "在后缘，一条输水管把从柔佛河买的水经长堤送到水厂。模型把它截断了，地图主题会接着画下去。" }
+  index:
+    parts: [sea, desal-intake, desal-pretreat, desal-ro, brine-outfall, distribution-main, johor-main, waterworks-mixing]
+---
+
+<Lang en>
+
+Seawater is plentiful, but it is far too salty to drink or to use in most factories. Desalination takes the salt out. Singapore opened its first desalination plant in 2005, and <Num s="S6">five</Num> operate today. <FlyTo preset="coast">Look along the coast</FlyTo>
+
+The plant draws seawater through an intake pipe that reaches out to sea. Basins first remove sand, silt and algae that would clog the membranes. Then high-pressure pumps force the seawater through reverse osmosis membranes, which let water pass but hold back the salt. The fresh water joins the same supply mains as water from the waterworks. The water left behind, now saltier, is returned to the sea.
+
+<Figure src="figures/water-ro-membrane" alt={{ en: "Pencil drawing of a spiral-wound reverse osmosis element cut open: thin membrane sheets wound around a perforated central tube inside a cylinder, with small arrows showing water flowing along the sheets and clean water passing into the tube.", zh: "铅笔画：剖开的卷式反渗透膜元件，薄薄的膜片卷在一根带孔的中心管周围，装在圆筒里；小箭头表示水沿膜片流过，干净的水进入中心管。" }} caption={{ en: "Inside a reverse osmosis element: water passes through the membrane into the centre tube, the salt stays behind. An illustration made for this topic.", zh: "反渗透膜元件内部：水穿过膜进入中心管，盐留在外面。为本主题画的示意图。" }} />
+
+Seawater is much saltier than used water, so it takes far more pressure, and far more electricity, to push it through the membranes: about <Num s="S6">3.5 kWh</Num> for each cubic metre. Desalinated water is more energy-intensive and costs more to make than NEWater or imported water. Unlike rain, though, it does not depend on the weather.
+
+The fourth tap comes from outside Singapore. Under the 1962 Water Agreement, Singapore may draw up to <Num s="S17">250 million gallons</Num> a day from the Johor River until 2061, and Johor is entitled to buy treated water of up to <Num s="S17">2 %</Num> of the water supplied. Pipelines carry the water across the Causeway; the model cuts them off at its back edge.
+
+<More title={{ en: "The water agreements", zh: "水供协议" }}>
+
+Singapore and Johor have signed several water agreements. A 1927 agreement let Singapore lease land in Johor to collect water. The 1961 agreement, covering the Tebrau and Scudai rivers, expired in 2011. The 1962 agreement allows up to <Num s="S17">250 million gallons</Num> a day, about <Num s="S11">1.1 million m³</Num>, to be drawn from the Johor River; Malaysia's Ministry of Water, Land and Natural Resources describes the same clause and a term of 99 years from 29 September 1962. Under a 1990 agreement, Linggiu Reservoir was built upstream to release water into the river.
+
+</More>
+
+<More title={{ en: "On the map", zh: "在地图上" }}>
+
+The companion map topic <a href="/en/topics/four-taps/">Singapore's Four Taps</a> shows the Johor River, the Causeway and the sites of the reservoirs, waterworks, NEWater factories and desalination plants on the island.
+
+</More>
+
+<More title={{ en: "Try it: salt stays behind", zh: "试一试：盐留下来了" }}>
+
+Stir a teaspoon of salt into a small cup of warm water until it disappears. Pour a little into a saucer and leave it in the sun for a day or two. When the water has gone, what is left? Evaporation carried the water into the air and left the salt behind. A desalination plant also separates water from salt, but it does not boil or evaporate the water: its membranes hold the salt back while the water is pushed through.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+海水很多，可是太咸，既不能喝，大多数工厂也用不了。海水淡化就是把盐去掉。新加坡 2005 年开放第一座海水淡化厂，今天有 <Num s="S6">5</Num> 座。<FlyTo preset="coast">沿着海岸看</FlyTo>
+
+淡化厂通过一条伸到海里的取水管取海水。先在池里去掉会堵住膜的泥沙、淤泥和藻类，再由高压泵把海水压过反渗透膜：膜让水通过，却把盐挡在外面。得到的淡水和水厂的水接进同一套供水干管。剩下变得更咸的水，排回海里。
+
+<Figure src="figures/water-ro-membrane" alt={{ en: "Pencil drawing of a spiral-wound reverse osmosis element cut open: thin membrane sheets wound around a perforated central tube inside a cylinder, with small arrows showing water flowing along the sheets and clean water passing into the tube.", zh: "铅笔画：剖开的卷式反渗透膜元件，薄薄的膜片卷在一根带孔的中心管周围，装在圆筒里；小箭头表示水沿膜片流过，干净的水进入中心管。" }} caption={{ en: "Inside a reverse osmosis element: water passes through the membrane into the centre tube, the salt stays behind. An illustration made for this topic.", zh: "反渗透膜元件内部：水穿过膜进入中心管，盐留在外面。为本主题画的示意图。" }} />
+
+海水比用过的水咸得多，要把它压过膜，需要大得多的压力，也就要用多得多的电：每立方米水约 <Num s="S6">3.5 千瓦时</Num>。淡化海水比新生水和进口水更耗能、成本也更高。不过，它和雨水不同，不靠天气。
+
+还有一个水喉来自新加坡以外。根据 1962 年水供协议，新加坡每天可从柔佛河抽取最多 <Num s="S17">2.5 亿加仑</Num>水，直到 2061 年；柔佛有权购买相当于供水量最多 <Num s="S17">2 %</Num> 的经处理的水。水管经长堤把水送过来；模型在后缘把水管截断了。
+
+<More title={{ en: "The water agreements", zh: "水供协议" }}>
+
+新加坡和柔佛签过几份水供协议。1927 年的协议让新加坡在柔佛租地集水。涉及地不佬河和士姑来河的 1961 年协议，已于 2011 年到期。1962 年协议允许每天从柔佛河抽取最多 <Num s="S17">2.5 亿加仑</Num>（约 <Num s="S11">110 万立方米</Num>）的水；马来西亚水务、土地及天然资源部对同一条款的说明，写明协议自 1962 年 9 月 29 日起为期 99 年。根据 1990 年的协议，上游建了林木水库，向河里放水。
+
+</More>
+
+<More title={{ en: "On the map", zh: "在地图上" }}>
+
+配套的地图主题<a href="/zh/topics/four-taps/">《新加坡的四大水喉》</a>画出了柔佛河、长堤，以及岛上蓄水池、水厂、新生水厂和海水淡化厂的位置。
+
+</More>
+
+<More title={{ en: "Try it: salt stays behind", zh: "试一试：盐留下来了" }}>
+
+把一茶匙盐搅进一小杯温水，搅到看不见为止。倒一点在碟子里，放在阳光下晒一两天。水不见了以后，碟子里留下什么？蒸发把水带进空气，把盐留了下来。海水淡化厂也把水和盐分开，但它不煮水，也不靠蒸发：它的膜把盐挡住，让水被压过去。
+
+</More>
+
+</Lang>

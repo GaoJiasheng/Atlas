@@ -1,0 +1,97 @@
+---
+id: reservoir-to-tap
+order: 4
+title: { en: "From reservoir to tap", zh: "从水库到水龙头" }
+sensitive: false
+state:
+  view: xray
+  run: true
+  cutaway: plants
+  layers: [catchment, supply, imported]
+  labels: [intake-tower, waterworks-mixing, clarifiers, filter-beds]
+  camera: { position: [3.3, 2.75, 4.05], target: [1.75, 0.0, 0.4], fov: 30 }
+  summary: { en: "Raw water is cleaned at a waterworks, stored high up and sent through pipes to every home.", zh: "原水在水厂里处理干净，存在高处，再经管道送到每一户。" }
+  beats:
+    - labels: [inland-reservoir, intake-tower, raw-water-main]
+      camera: { position: [3.0, 1.2, 1.4], target: [1.9, 0.0, -0.25], fov: 30 }
+      caption: { en: "An intake tower draws raw water from the reservoir. A pipe under the dam carries it to the waterworks; water from Johor arrives at the same place.", zh: "取水塔从蓄水池里取出原水，一条从坝底穿过的管子把它送到水厂；从柔佛来的水也送到这里。" }
+    - labels: [waterworks-mixing, johor-main]
+      camera: { position: [1.95, 0.9, 1.35], target: [1.35, 0.0, 0.08], fov: 30 }
+      caption: { en: "In the mixing basins, chemicals are added. They make the tiny particles of dirt stick together into clumps.", zh: "在混凝池里加入药剂，让细小的污物颗粒粘在一起，结成絮团。" }
+    - labels: [clarifiers]
+      camera: { position: [2.2, 0.85, 1.25], target: [1.64, 0.0, 0.06], fov: 30 }
+      caption: { en: "In the round settling tanks the water moves slowly, and the clumps sink. A slowly turning bridge scrapes the sludge to the centre; here it turns faster than in real life.", zh: "在圆形沉淀池里水流得很慢，絮团沉到池底。慢慢转动的桥把污泥刮到中央；模型里转得比实际快。" }
+    - labels: [filter-beds, clear-water-tank]
+      camera: { position: [1.95, 0.9, 1.55], target: [1.45, 0.0, 0.3], fov: 30 }
+      caption: { en: "Sand filters trap the fine particles left, and the water is disinfected. From here the dots turn steel blue: treated tap water.", zh: "砂滤池截住剩下的细小颗粒，水再经消毒。从这里开始，点变成钢蓝色，代表处理好的自来水。" }
+    - cutaway: none
+      labels: [service-reservoir, distribution-main, roof-tank, kitchen-tap]
+      camera: { position: [1.25, 0.8, 2.25], target: [0.45, 0.18, 0.45], fov: 30 }
+      caption: { en: "Tap water is stored on a hill, flows through the mains to the block of flats, is pumped up to the roof tanks and runs down to each tap.", zh: "自来水存在小山上的配水库里，经干管流到组屋，被泵上屋顶水箱，再流到每一个水龙头。" }
+  index:
+    parts: [intake-tower, raw-water-main, waterworks-mixing, clarifiers, filter-beds, clear-water-tank, service-reservoir, distribution-main, roof-tank, kitchen-tap]
+---
+
+<Lang en>
+
+Water from a reservoir looks clear, but it still carries fine clay, tiny living things and dissolved substances. Before anyone drinks it, it goes to a <Term id="waterworks">waterworks</Term>; Singapore has <Num s="S9">six</Num>. On the stage the plant buildings are cut open from above, and the dots show the water moving through. <FlyTo preset="plants">Look into the waterworks</FlyTo>
+
+An intake tower draws raw water from the reservoir into a pipe. Imported water from Johor arrives at the same waterworks. First, chemicals are mixed into the water. They make the tiny particles stick together into soft clumps, which is called coagulation and flocculation. In the settling tanks the water moves so slowly that the clumps sink to the bottom.
+
+<Figure src="figures/water-treatment" alt={{ en: "Pencil drawing of a water treatment works seen from above at an angle: rectangular mixing basins, three round settling tanks with scraper bridges, a block of rectangular filter beds and a covered tank, linked by pipes.", zh: "铅笔画：斜俯视的水厂，有长方形混凝池、三个带刮泥桥的圆形沉淀池、一排长方形滤池和一个加盖水池，用管道依次连接。" }} caption={{ en: "The order of treatment at a conventional waterworks. An illustration made for this topic.", zh: "常规水厂的处理顺序。为本主题画的示意图。" }} />
+
+Next comes <Term id="filtration">filtration</Term>. The water trickles down through beds of sand that catch the fine particles still left. Then it is disinfected, so that no harmful microbes survive, and stored in a covered clear-water tank. PUB tests the water, which is well within the World Health Organization's guidelines for drinking water. On the stage the dots change colour here, from raw water to treated tap water.
+
+Pumps send the treated water to service reservoirs on high ground and through about <Num s="S9">6,000 km</Num> of pipes under the streets. Taller buildings need one more step: in an HDB block the water is pumped up to tanks on the roof and flows down to every flat by gravity. <FlyTo preset="home">Follow the water home</FlyTo>
+
+<More title={{ en: "Why water is stored on hills and roofs", zh: "为什么把水存在山上和屋顶" }}>
+
+Water flows downhill by itself. A tank on high ground or on a roof can supply the taps below it by gravity, at a steady pressure, even when many people turn on their taps at the same time. Mains pressure reaches taps only up to about <Num s="S20">25 m</Num> above mean sea level; above that, water is supplied from storage tanks, which in HDB blocks are on the rooftop.
+
+</More>
+
+<More title={{ en: "Is tap water safe to drink", zh: "自来水可以直接喝吗" }}>
+
+Yes. PUB says Singapore's tap water is well within both national drinking-water regulations and the World Health Organization's Guidelines for Drinking-water Quality, so it can be drunk straight from the tap. Water can still pick up dirt from old, dirty pipes or tanks inside a building, which is why roof tanks are covered and cleaned regularly.
+
+</More>
+
+<More title={{ en: "Try it: settling and filtering", zh: "试一试：沉淀和过滤" }}>
+
+Stir a spoonful of soil into a clear cup of water and leave it for 30 minutes. What happens to the cloudiness? Then make a simple filter: put a paper towel in a funnel or a cut plastic bottle and add a layer of sand and a layer of small stones. Pour the cloudy water through and compare it with the water you started with. Look only: do not drink it. Your filter can remove dirt you can see, but not the germs a waterworks removes.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+蓄水池里的水看起来很清，其实还带着细小的黏土、微小的生物和溶解的物质。人要喝之前，水得先送到<Term id="waterworks">水厂</Term>；新加坡有 <Num s="S9">6</Num> 座水厂。舞台上把厂房从上面剖开，点显示水在里面怎样流动。<FlyTo preset="plants">看进水厂里面</FlyTo>
+
+取水塔从蓄水池取出原水，送进管道；从柔佛来的进口水也送到同一座水厂。第一步，把药剂混进水里，让细小的颗粒粘在一起，结成松软的絮团，这叫混凝和絮凝。在沉淀池里，水流得很慢，絮团就沉到池底。
+
+<Figure src="figures/water-treatment" alt={{ en: "Pencil drawing of a water treatment works seen from above at an angle: rectangular mixing basins, three round settling tanks with scraper bridges, a block of rectangular filter beds and a covered tank, linked by pipes.", zh: "铅笔画：斜俯视的水厂，有长方形混凝池、三个带刮泥桥的圆形沉淀池、一排长方形滤池和一个加盖水池，用管道依次连接。" }} caption={{ en: "The order of treatment at a conventional waterworks. An illustration made for this topic.", zh: "常规水厂的处理顺序。为本主题画的示意图。" }} />
+
+接下来是<Term id="filtration">过滤</Term>。水慢慢往下渗过砂层，砂层截住剩下的细小颗粒。然后给水消毒，让有害的微生物不能存活，再存进加盖的清水池。PUB 对水进行检测，水质远优于世界卫生组织的饮用水准则。舞台上的点在这里变色：由原水变成处理好的自来水。
+
+水泵把处理好的水送到建在高处的配水库，再经街道底下约 <Num s="S9">6,000 公里</Num>长的管道送出去。高楼还要多一步：在组屋里，水先被泵上屋顶的水箱，再靠重力流到每一户。<FlyTo preset="home">跟着水回家</FlyTo>
+
+<More title={{ en: "Why water is stored on hills and roofs", zh: "为什么把水存在山上和屋顶" }}>
+
+水会自己往低处流。建在高处或屋顶上的水箱，可以靠重力以稳定的水压给下面的水龙头供水，即使很多人同时开水龙头也一样。管网的水压只能把水送到平均海平面以上约 <Num s="S20">25 米</Num>；更高的地方由储水箱供水，组屋的水箱就设在屋顶。
+
+</More>
+
+<More title={{ en: "Is tap water safe to drink", zh: "自来水可以直接喝吗" }}>
+
+可以。PUB 表示，新加坡的自来水远优于国家饮用水法规和世界卫生组织《饮用水水质准则》的要求，可以直接从水龙头喝。不过，楼里又旧又脏的管道或水箱仍可能把水弄脏，所以屋顶水箱要加盖并定期清洗。
+
+</More>
+
+<More title={{ en: "Try it: settling and filtering", zh: "试一试：沉淀和过滤" }}>
+
+在一杯清水里搅进一勺泥土，放 30 分钟。浑浊的样子有什么变化？然后做一个简单的过滤器：在漏斗或剪开的塑料瓶里垫一张纸巾，铺一层沙，再铺一层小石子。把浑水倒进去，和原来的浑水比一比。只观察，不要喝。你的过滤器能去掉看得见的泥，却去不掉水厂要去掉的病菌。
+
+</More>
+
+</Lang>

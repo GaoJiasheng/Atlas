@@ -1,0 +1,113 @@
+---
+id: catching-the-rain
+order: 3
+title: { en: "Catching the rain", zh: "接住每一滴雨" }
+sensitive: false
+state:
+  view: assembled
+  run: true
+  cutaway: none
+  layers: [sky-and-sea, catchment, water-cycle, flood]
+  pose: storm
+  labels: [forest-hill, inland-reservoir, city-blocks, estuary-reservoir]
+  camera: { position: [4.6, 3.0, 6.4], target: [0.3, 0.05, -0.1], fov: 30 }
+  summary: { en: "Drains and canals lead rain into reservoirs; about two-thirds of Singapore's land is catchment.", zh: "排水沟和运河把雨水引进蓄水池；新加坡约三分之二的土地是集水区。" }
+  beats:
+    - labels: [forest-hill, inland-reservoir, earth-dam, intake-tower]
+      camera: { position: [3.3, 1.5, 1.5], target: [2.05, 0.08, -0.6], fov: 30 }
+      caption: { en: "In the forest, rain soaks into the soil and runs down the slopes into an inland reservoir, held back by an earth dam across the valley.", zh: "在森林里，雨水渗进土壤，顺着山坡流进内陆蓄水池；一道横跨山谷的土坝把水拦住。" }
+    - labels: [city-blocks, drains, canal]
+      camera: { position: [1.2, 1.5, 1.5], target: [-0.05, 0.0, -0.45], fov: 30 }
+      caption: { en: "In the city, rain runs off roofs and roads into drains. The drains feed a canal, and the canal leads to a reservoir instead of the sea.", zh: "在城市里，雨水从屋顶和路面流进排水沟。排水沟汇进运河，运河通往蓄水池，而不是大海。" }
+    - layers: [sky-and-sea, catchment, flood]
+      labels: [estuary-reservoir, barrage, crest-gates]
+      camera: barrage-view
+      caption: { en: "A barrage across the river mouth keeps the sea out. Behind it the water is fresh: a reservoir in the middle of the city.", zh: "横跨河口的堤坝把海水挡在外面。坝后的水是淡水，成了城市中心的蓄水池。" }
+    - pose: gates-open
+      layers: [sky-and-sea, catchment, flood]
+      labels: [crest-gates, barrage, estuary-reservoir, sea]
+      camera: barrage-view
+      caption: { en: "In heavy rain at low tide, the steel gates are lowered and the extra water spills over them into the sea.", zh: "退潮时遇上大雨，钢闸门放倒，多出来的水漫过闸门流进大海。" }
+    - layers: [sky-and-sea, catchment]
+      labels: [pump-house, barrage]
+      camera: { position: [-0.85, 0.75, 2.35], target: [-1.6, 0.0, 0.95], fov: 30 }
+      caption: { en: "At high tide the sea is higher than the reservoir, so the gates stay up. Seven large pumps lift the stormwater over the barrage instead.", zh: "涨潮时海面比蓄水池高，闸门不能放倒，改由七台大水泵把暴雨水抽过堤坝。" }
+  index:
+    parts: [forest-hill, inland-reservoir, earth-dam, city-blocks, drains, canal, estuary-reservoir, barrage, crest-gates, pump-house]
+---
+
+<Lang en>
+
+Singapore has two kinds of catchment. In the protected forest in the centre of the island, rain soaks into the soil and trickles down the slopes into streams and inland reservoirs, held back by earth dams across the valleys. On the stage, the forested hills on the right surround one such reservoir. <FlyTo preset="hero">Back to the whole slice</FlyTo>
+
+The other kind is the city itself. Roofs, roads and open ground shed rain quickly, and the island is laced with concrete drains that lead it into canals and rivers. Many of them now end in reservoirs instead of the sea. Rain falling on about two-thirds of Singapore's land is collected this way, and there are <Num s="S3">17</Num> reservoirs.
+
+The newest reservoirs were made by damming river mouths. Marina Barrage, finished in 2008, stretches across the mouth of the Marina Channel. It keeps the sea out, so the water behind it became fresh: Singapore's 15th reservoir and the first in the city centre, with a catchment of <Num s="S7">10,000 hectares</Num>. <FlyTo preset="barrage-view">Look at the barrage</FlyTo>
+
+<Figure src="figures/water-marina-barrage" alt={{ en: "Pencil drawing of a long, low concrete barrage across a river mouth, seen from the sea side: a row of steel gates partly lowered with water spilling over them, a pump house at one end and a calm reservoir with city towers behind.", zh: "铅笔画：从海的一侧看一道横跨河口的低矮混凝土堤坝，一排钢闸门部分放倒，水从上面漫过，一端是泵房，坝后是平静的蓄水池和远处的城市高楼。" }} caption={{ en: "A barrage with its crest gates lowered at low tide. An illustration made for this topic, not a drawing of a specific day.", zh: "退潮时放倒闸门的堤坝。为本主题画的示意图，不是某一天的写生。" }} />
+
+The barrage also controls floods. When heavy rain falls at low tide, its <Num s="S8">nine</Num> steel crest gates are lowered and the extra water spills into the sea. When the tide is high, the sea is higher than the reservoir, so the gates stay up and <Num s="S8">seven</Num> pumps lift the water over instead, together up to <Num s="S8">280 m³</Num> a second.
+
+<More title={{ en: "Two rainfall averages", zh: "两个年雨量平均值" }}>
+
+Averaged over <Num s="S24">32</Num> stations across the island from 1991 to 2020, Singapore receives about <Num s="S24">2,534 mm</Num> of rain a year. The single climate station at Changi records about <Num s="S23">2,113 mm</Num>. Both are correct: they measure different things, one the whole island and one a single place.
+
+</More>
+
+<More title={{ en: "A storm in numbers", zh: "一场暴雨的数字" }}>
+
+In this topic's simulation a heavy shower of <Num s="S1">30 mm</Num> an hour falls on a <Num s="S7">10,000-hectare</Num> city catchment. Using PUB's drainage formula with a runoff coefficient of <Num s="S1">0.7</Num>, between the code's values for vegetated and urban land, about <Num s="S1">580 m³</Num> of water a second flows towards the reservoir. In this simulation, one hour of it is about <Num s="S1">2.1 million m³</Num>, roughly what the whole country uses in a day.
+
+</More>
+
+<More title={{ en: "Keeping catchments clean", zh: "保持集水区干净" }}>
+
+Because drains lead to reservoirs, anything left on the streets, such as litter, oil or chemicals, can end up in the water we drink after treatment. Polluted water is harder and costlier to treat, and it harms the plants and animals that live in it. The National Environment Agency monitors inland and coastal waters and controls what industries may discharge.
+
+</More>
+
+<More title={{ en: "Try it", zh: "试一试" }}>
+
+After the next shower, look at the drain nearest your block. Which way does the water flow? Follow it, with an adult, as far as you can see it go. Then switch on FLOW on the stage and follow the dots from the city drains to the reservoir.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+新加坡有两种集水区。在岛中央受保护的森林里，雨水渗进土壤，顺着山坡流进小溪和内陆蓄水池；横跨山谷的土坝把水拦住。舞台右边长满森林的山，围着的就是这样一个蓄水池。<FlyTo preset="hero">回到整块切片</FlyTo>
+
+另一种集水区就是城市本身。屋顶、道路和空地很快就把雨水排走，全岛布满混凝土排水沟，把雨水引进运河和河流，其中很多现在流进蓄水池，而不是大海。约三分之二土地上的雨水都这样收集起来，全国有 <Num s="S3">17</Num> 个蓄水池。
+
+最新的几个蓄水池是把河口拦起来建成的。2008 年建成的滨海堤坝横跨滨海水道的出海口，把海水挡在外面，坝后的水于是变成淡水：这是新加坡第 15 个蓄水池，也是第一个在市中心的，集水区 <Num s="S7">10,000 公顷</Num>。<FlyTo preset="barrage-view">看看堤坝</FlyTo>
+
+<Figure src="figures/water-marina-barrage" alt={{ en: "Pencil drawing of a long, low concrete barrage across a river mouth, seen from the sea side: a row of steel gates partly lowered with water spilling over them, a pump house at one end and a calm reservoir with city towers behind.", zh: "铅笔画：从海的一侧看一道横跨河口的低矮混凝土堤坝，一排钢闸门部分放倒，水从上面漫过，一端是泵房，坝后是平静的蓄水池和远处的城市高楼。" }} caption={{ en: "A barrage with its crest gates lowered at low tide. An illustration made for this topic, not a drawing of a specific day.", zh: "退潮时放倒闸门的堤坝。为本主题画的示意图，不是某一天的写生。" }} />
+
+堤坝还能防洪。退潮时遇上大雨，<Num s="S8">9</Num> 道钢闸门放倒，多出来的水流进大海。涨潮时海面比蓄水池高，闸门不能放倒，就由 <Num s="S8">7</Num> 台水泵把水抽过堤坝，合计每秒最多 <Num s="S8">280 立方米</Num>。
+
+<More title={{ en: "Two rainfall averages", zh: "两个年雨量平均值" }}>
+
+按全岛 <Num s="S24">32</Num> 个站 1991 至 2020 年的平均，新加坡每年下雨约 <Num s="S24">2,534 毫米</Num>。樟宜气候站一个站记录约 <Num s="S23">2,113 毫米</Num>。两个数都对：一个量的是全岛，一个量的是一个地点。
+
+</More>
+
+<More title={{ en: "A storm in numbers", zh: "一场暴雨的数字" }}>
+
+在本主题的模拟里，一场每小时 <Num s="S1">30 毫米</Num>的大阵雨落在 <Num s="S7">10,000 公顷</Num>的城市集水区上。用 PUB 排水规范的公式、取介于植被地和城市地之间的径流系数 <Num s="S1">0.7</Num>，每秒约有 <Num s="S1">580 立方米</Num>的水流向蓄水池。在这个模拟里，一小时就约 <Num s="S1">210 万立方米</Num>，差不多是全国一天的用水量。
+
+</More>
+
+<More title={{ en: "Keeping catchments clean", zh: "保持集水区干净" }}>
+
+排水沟通往蓄水池，所以留在街上的东西，比如垃圾、油污或化学品，都可能流进经过处理后供人饮用的水里。被污染的水更难处理、成本更高，还会伤害生活在水里的动植物。国家环境局监测内陆和沿海水体，并管制工厂可以排放什么。
+
+</More>
+
+<More title={{ en: "Try it", zh: "试一试" }}>
+
+下一场雨过后，看看你家组屋楼下最近的排水沟。水往哪个方向流？在大人陪同下，跟着它走到你能看到的最远处。然后在舞台上打开 FLOW，跟着点从城市的排水沟走到蓄水池。
+
+</More>
+
+</Lang>

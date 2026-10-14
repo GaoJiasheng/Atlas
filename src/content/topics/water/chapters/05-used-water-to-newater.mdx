@@ -1,0 +1,99 @@
+---
+id: used-water-to-newater
+order: 5
+title: { en: "Used water becomes NEWater", zh: "用过的水变成新生水" }
+sensitive: false
+state:
+  view: xray
+  run: true
+  cutaway: ground
+  layers: [catchment, supply, reuse]
+  labels: [house-sewer, dtss-tunnel, reclamation-plant]
+  camera: { position: [1.75, 1.15, 4.6], target: [1.15, -0.12, 0.75], fov: 30 }
+  summary: { en: "Used water flows through deep tunnels to be treated; part of it is cleaned again into NEWater.", zh: "用过的水经深隧道送去处理，其中一部分再净化成新生水。" }
+  beats:
+    - labels: [house-sewer, hdb-block]
+      camera: { position: [0.8, 0.45, 1.9], target: [0.2, 0.12, 0.65], fov: 30 }
+      caption: { en: "Water used at the sink goes down the drain. The ochre dots are used water, leaving the flat in a sewer pipe.", zh: "在水槽用过的水流下排水口。赭黄色的点是用过的水，经污水管离开这一户。" }
+    - labels: [house-sewer, dtss-tunnel]
+      caption: { en: "The front of the ground is cut away here. The sewer drops down a shaft into a deep tunnel, and the used water flows along it by gravity.", zh: "这里把地面的前缘切开了。污水管经竖井下到深隧道，用过的水靠重力沿隧道流走。" }
+    - labels: [dtss-tunnel, reclamation-plant]
+      camera: { position: [2.3, 0.85, 2.4], target: [1.5, -0.1, 0.8], fov: 30 }
+      caption: { en: "The tunnel brings the used water up into a water reclamation plant. There, solids settle out and microbes feed on the dirt dissolved in the water.", zh: "隧道把用过的水送上来，进入再生水厂。在这里，固体沉下去，微生物以水里溶解的污物为食。" }
+    - cutaway: plants
+      labels: [newater-membranes, newater-ro, uv-reactors, newater-main, factory]
+      camera: { position: [2.75, 0.85, 1.75], target: [2.33, 0.03, 0.72], fov: 30 }
+      caption: { en: "In the NEWater factory the water passes fine membranes, then reverse osmosis, then ultraviolet light. The dots turn grey-green: NEWater, piped to a factory.", zh: "在新生水厂里，水先过细密的膜，再经反渗透，最后照紫外线。点变成灰绿色，这就是新生水，经管道送到工厂。" }
+    - cutaway: none
+      pose: dry-spell
+      layers: [catchment, supply, reuse, topup]
+      labels: [newater-main, estuary-reservoir, inland-reservoir]
+      camera: { position: [3.2, 2.6, 6.2], target: [0.6, -0.05, 0.4], fov: 30 }
+      caption: { en: "In a dry spell the reservoirs run low. Some NEWater is then piped into a reservoir, mixed with the rain water and treated again at a waterworks.", zh: "干旱时蓄水池水位下降，这时把一部分新生水送进蓄水池，和雨水混在一起，再到水厂处理一遍。" }
+  index:
+    parts: [house-sewer, dtss-tunnel, reclamation-plant, newater-hall, newater-membranes, newater-ro, uv-reactors, newater-main, factory]
+---
+
+<Lang en>
+
+Water does not disappear down the drain. PUB calls it used water, because it is collected to be cleaned and used again. On the stage the front of the ground is cut away so that the pipes and tunnel underneath show. <FlyTo preset="home">Start at the kitchen sink</FlyTo>
+
+From homes, used water runs into sewers and then into the Deep Tunnel Sewerage System, a network of tunnels about <Num s="S14">206 km</Num> long. The newer tunnels lie <Num s="S15">35 to 55 m</Num> below ground and slope gently, so the water flows by gravity to <Num s="S14">three</Num> large water reclamation plants. There, solids are allowed to settle out, and in big aerated tanks microbes feed on the dirt dissolved in the water.
+
+<Figure src="figures/water-newater-membranes" alt={{ en: "Pencil drawing inside a treatment hall: tall racks of upright membrane tubes on the left, stacks of horizontal white pressure vessels on the right, a stainless-steel ultraviolet reactor in front and a small sealed bottle of clear water on a plinth.", zh: "铅笔画：处理厂房内部，左边是一排排直立的膜管，右边是一层层横放的白色压力管，前面是不锈钢紫外线反应器，还有一小瓶密封的清水放在台座上。" }} caption={{ en: "Membranes, reverse osmosis and ultraviolet disinfection, the three steps that make NEWater. An illustration made for this topic, not a specific plant.", zh: "膜过滤、反渗透和紫外线消毒，制成新生水的三步。为本主题画的示意图，不代表某座具体的厂。" }} />
+
+Part of this treated water goes on to a NEWater factory. First it is pushed through a <Term id="membrane">membrane</Term> of hollow fibres with tiny pores that hold back bacteria and fine particles. Then comes <Term id="reverse-osmosis">reverse osmosis</Term>: under pressure, water is forced through a membrane so fine that dissolved salts stay behind. Finally, ultraviolet light disinfects it. NEWater was introduced in 2002, and <Num s="S5">four</Num> factories are in operation today. <FlyTo preset="plants">Look inside the NEWater factory</FlyTo>
+
+Most NEWater goes through its own pipes to industry, especially wafer fabrication plants that make computer chips and need very clean water, and to cool air-conditioning systems. In dry periods, some is added to reservoirs. There it mixes with rain water, and the mixture is treated again at a waterworks before it reaches anyone's tap.
+
+<More title={{ en: "Not straight from the sewer", zh: "不是直接喝下水道的水" }}>
+
+People sometimes say that Singaporeans drink sewage. That is not what happens. Used water is first treated at a water reclamation plant, then purified in three more steps into NEWater, which meets drinking-water standards. Even so, the NEWater that is added to reservoirs is mixed with rain water and treated once more at a waterworks.
+
+</More>
+
+<More title={{ en: "A closed loop", zh: "闭合的循环" }}>
+
+Every drop of used water that is reclaimed is a drop that does not have to come from rain, Johor or the sea. Singapore has about <Num s="S9">3,700 km</Num> of public sewers and about <Num s="S9">660 km</Num> of NEWater pipes. Reusing water this way turns a one-way flow from tap to sea into a loop.
+
+</More>
+
+<More title={{ en: "Try it", zh: "试一试" }}>
+
+Open LAYERS and press ⊙ next to "Used water and NEWater" to show that group alone. Then click the parts one by one, from the kitchen tap to the factory, and read what each step takes out of the water. Which step removes the salts?
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+水流下排水口，并没有消失。PUB 把它叫做"用过的水"，因为它会被收集起来、净化，再用一次。舞台上把地面的前缘切开了，好让人看见下面的管道和隧道。<FlyTo preset="home">从厨房水槽看起</FlyTo>
+
+住家用过的水流进污水管，再流进深隧道排污系统，这是一张约 <Num s="S14">206 公里</Num>长的隧道网。较新的隧道位于地下 <Num s="S15">35 至 55 米</Num>，缓缓倾斜，水靠重力流到 <Num s="S14">3</Num> 座大型再生水厂。在那里，先让固体沉下去，再在通着空气的大池里让微生物吃掉水里溶解的污物。
+
+<Figure src="figures/water-newater-membranes" alt={{ en: "Pencil drawing inside a treatment hall: tall racks of upright membrane tubes on the left, stacks of horizontal white pressure vessels on the right, a stainless-steel ultraviolet reactor in front and a small sealed bottle of clear water on a plinth.", zh: "铅笔画：处理厂房内部，左边是一排排直立的膜管，右边是一层层横放的白色压力管，前面是不锈钢紫外线反应器，还有一小瓶密封的清水放在台座上。" }} caption={{ en: "Membranes, reverse osmosis and ultraviolet disinfection, the three steps that make NEWater. An illustration made for this topic, not a specific plant.", zh: "膜过滤、反渗透和紫外线消毒，制成新生水的三步。为本主题画的示意图，不代表某座具体的厂。" }} />
+
+处理过的水有一部分再送到新生水厂。首先，水被压过由空心纤维做成的<Term id="membrane">膜</Term>，膜上的小孔挡住细菌和微小颗粒。接着是<Term id="reverse-osmosis">反渗透</Term>：加压把水压过一层极细的膜，溶解的盐被留在另一侧。最后用紫外线消毒。新生水 2002 年推出，今天有 <Num s="S5">4</Num> 座新生水厂在运行。<FlyTo preset="plants">看看新生水厂里面</FlyTo>
+
+大部分新生水经专用管道送到工业用户，特别是制造电脑芯片、需要非常干净的水的晶圆厂，也用来冷却空调系统。干旱时期，一部分新生水加进蓄水池，和雨水混在一起，混合后的水还要在水厂再处理一遍，才送到水龙头。
+
+<More title={{ en: "Not straight from the sewer", zh: "不是直接喝下水道的水" }}>
+
+有人说新加坡人喝的是污水。事实不是这样。用过的水先在再生水厂处理，再经过三道工序提纯成新生水，达到饮用水标准。即使这样，加进蓄水池的新生水还要和雨水混合，在水厂再处理一次。
+
+</More>
+
+<More title={{ en: "A closed loop", zh: "闭合的循环" }}>
+
+每回收一滴用过的水，就少一滴要靠下雨、柔佛或大海供应的水。新加坡有约 <Num s="S9">3,700 公里</Num>的公共污水管和约 <Num s="S9">660 公里</Num>的新生水管。这样重复用水，把"从水龙头流进大海"的单程，变成了一个循环。
+
+</More>
+
+<More title={{ en: "Try it", zh: "试一试" }}>
+
+打开 LAYERS，按"用过的水与新生水"旁边的 ⊙，只显示这一组。然后从厨房水龙头到工厂，一个一个点开零件，读一读每一步从水里去掉了什么。哪一步去掉了盐？
+
+</More>
+
+</Lang>

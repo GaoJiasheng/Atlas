@@ -1,0 +1,109 @@
+---
+id: the-water-cycle
+order: 2
+title: { en: "The Sun drives the water cycle", zh: "太阳推动水循环" }
+sensitive: false
+state:
+  view: assembled
+  run: true
+  cutaway: none
+  layers: [sky-and-sea, catchment, water-cycle]
+  labels: [sun, sea, cumulus, rain-cloud]
+  camera: { position: [0.8, 2.1, 9.6], target: [-0.1, 0.6, -0.25], fov: 30 }
+  summary: { en: "Heat from the Sun turns water into vapour; the vapour cools and condenses into clouds, and rain brings the water back down.", zh: "太阳的热把水变成水蒸气；水蒸气冷却、凝结成云，再以雨的形式落回地面。" }
+  beats:
+    - labels: [sun, sea]
+      caption: { en: "The Sun heats the sea. Water at the surface evaporates and rises as invisible water vapour, drawn here as sparse grey dots. The dense blue-green dots are liquid water.", zh: "太阳晒热海面，表面的水蒸发，变成看不见的水蒸气上升；这里用稀疏的灰点表示水蒸气。密集的蓝绿色点是液态水。" }
+    - labels: [cumulus, sea]
+      caption: { en: "Higher up the air is cooler, so the vapour condenses into tiny droplets. A cloud is made of droplets, not of vapour.", zh: "高处空气较冷，水蒸气凝结成小水滴。云是小水滴，不是水蒸气。" }
+    - labels: [rain-cloud, forest-hill, city-blocks]
+      caption: { en: "The wind carries the cloud inland. Its droplets join into drops heavy enough to fall, and rain falls on the hills and the city.", zh: "风把云吹到内陆。云里的小水滴合成重得能落下的大水滴，雨落在山上和城市里。" }
+    - pose: storm
+      labels: [forest-hill, drains, canal]
+      caption: { en: "Rain runs down the slopes and along the drains. Some of it is stored in reservoirs; the rest flows back towards the sea, and the cycle starts again.", zh: "雨水顺着山坡和排水沟流走，一部分被蓄水池留下，其余的流回大海，循环重新开始。" }
+    - run: false
+      labels: [sun, sea, cumulus]
+      caption: { en: "Stop the heating and the dots stop. Without the Sun's heat, evaporation would slow down and the water cycle would come to a halt.", zh: "停止加热，点也停了下来。没有太阳的热，蒸发会变慢，水循环就会停下来。" }
+  index:
+    parts: [sun, sea, cumulus, rain-cloud, forest-hill, city-blocks, drains, canal, inland-reservoir]
+---
+
+<Lang en>
+
+On the left of the stage the Sun shines on the sea. Water is always on the move between the sea, the air and the land, and this endless journey is called the <Term id="water-cycle">water cycle</Term>. Heat from the Sun drives it. <FlyTo preset="cycle">Look at the whole cycle</FlyTo>
+
+Warmed by the Sun, water at the surface of the sea turns into a gas, <Term id="water-vapour">water vapour</Term>. This change is <Term id="evaporation">evaporation</Term>. It happens at any temperature, not only at boiling point: puddles dry up on a cool morning too. It is faster when the water is warmer, when there is wind, and when more of its surface is exposed. Water vapour is invisible. On the stage it is drawn as sparse grey dots so that you can follow it; liquid water is drawn as dense blue-green dots.
+
+Warm, moist air rises, and higher up it is cooler. Cooled water vapour turns back into tiny droplets of liquid water. This is <Term id="condensation">condensation</Term>, and a cloud is a mass of such droplets. Inside a rain cloud the droplets join into drops heavy enough to fall, and the water returns to the land as rain. Singapore is a rainy place: on average about <Num s="S24">2,534 mm</Num> falls across the island in a year.
+
+<Figure src="figures/water-cycle" alt={{ en: "Pencil drawing of the water cycle: a sun at upper left over the sea, wisps of vapour rising from the waves to a cloud, a darker cloud over forested hills with rain falling, a stream running down to the sea, and curved arrows linking the steps.", zh: "水循环的铅笔画：左上方的太阳照着大海，水汽从海面升到云里，较深色的云在长满森林的山上方下雨，小溪流回大海，弯曲的箭头把各步连起来。" }} caption={{ en: "Evaporation, condensation and rain, joined into one cycle. An illustration made for this topic.", zh: "蒸发、凝结和下雨连成一个循环。为本主题画的示意图。" }} />
+
+Rain soaks into the ground, runs down slopes and along drains and rivers, and flows back to the sea, where the cycle begins again. Every drop of fresh water we use has passed through this cycle, which is why it matters so much: it keeps refilling the rivers, reservoirs and soil that living things depend on.
+
+<More title={{ en: "Evaporation is not boiling", zh: "蒸发不是沸腾" }}>
+
+Ice melts at <Num s="S26">0 °C</Num> and water boils at <Num s="S26">100 °C</Num>. Boiling happens all through the water, with bubbles of vapour forming inside it. Evaporation happens only at the surface, and at any temperature, which is why washing dries on a line and the sea gives off vapour without ever boiling.
+
+</More>
+
+<More title={{ en: "Steam you can see", zh: "看得见的白气" }}>
+
+The white cloud above a boiling kettle is not water vapour. Vapour leaves the spout invisibly, cools in the room air and condenses into a mist of tiny droplets a short distance away, just as a cloud forms in the sky.
+
+<Figure src="figures/water-three-states" alt={{ en: "Pencil drawing of three glass beakers on a bench: one with ice cubes, one with water, and one over a small flame, boiling, with a white plume of droplets rising from the spout of its cover.", zh: "铅笔画：实验台上三个玻璃烧杯，一个装冰块，一个装水，一个放在小火上沸腾，盖子的壶嘴冒出一缕白色的小水滴。" }} caption={{ en: "Ice, water and boiling water; the white plume is condensed droplets. An illustration made for this topic.", zh: "冰、水和沸腾的水；白气是凝结出的小水滴。为本主题画的示意图。" }} />
+
+</More>
+
+<More title={{ en: "Where Earth's fresh water is", zh: "地球上的淡水在哪里" }}>
+
+About <Num s="S28">96.5 %</Num> of Earth's water is in the oceans and is salty. Only about <Num s="S28">2.5 %</Num> is fresh, and about <Num s="S28">68.6 %</Num> of that is frozen in ice caps and glaciers. Scientists call all the water that falls from clouds, as rain, drizzle or hail, <Term id="precipitation">precipitation</Term>; in Singapore it falls as rain.
+
+</More>
+
+<More title={{ en: "Try it: a fair test of evaporation", zh: "试一试：蒸发的公平测试" }}>
+
+Pour 20 mL of water into each of three identical saucers. Leave one indoors as it is; put one in front of a fan; leave the third in the same place but pour its water into a wide, shallow tray instead of a saucer. Change only one thing for each, and keep everything else the same: the amount of water, the room and the time. After an hour, measure how much water is left in each. Which one lost the most? What did you change, and what did you keep the same?
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+舞台左边，太阳照着大海。水总在大海、空气和陆地之间移动，这趟没有尽头的旅程叫做<Term id="water-cycle">水循环</Term>。推动它的是太阳的热。<FlyTo preset="cycle">看看整个水循环</FlyTo>
+
+海面的水被太阳晒暖，变成气体，也就是<Term id="water-vapour">水蒸气</Term>。这种变化叫<Term id="evaporation">蒸发</Term>。蒸发在任何温度下都会发生，不是到了沸点才有：凉爽的早上，地上的水洼也会慢慢变干。水越暖、风越大、暴露在空气中的面积越大，蒸发就越快。水蒸气是看不见的。为了让人能跟着它走，舞台上把它画成稀疏的灰点；液态水则画成密集的蓝绿色点。
+
+温暖潮湿的空气往上升，越往高处越冷。水蒸气遇冷，又变回极小的液态水滴，这叫<Term id="condensation">凝结</Term>；云就是一大团这样的小水滴。在雨云里，小水滴合成重得能落下来的大水滴，水就以雨的形式回到陆地。新加坡雨水很多：全岛平均每年下约 <Num s="S24">2,534 毫米</Num>的雨。
+
+<Figure src="figures/water-cycle" alt={{ en: "Pencil drawing of the water cycle: a sun at upper left over the sea, wisps of vapour rising from the waves to a cloud, a darker cloud over forested hills with rain falling, a stream running down to the sea, and curved arrows linking the steps.", zh: "水循环的铅笔画：左上方的太阳照着大海，水汽从海面升到云里，较深色的云在长满森林的山上方下雨，小溪流回大海，弯曲的箭头把各步连起来。" }} caption={{ en: "Evaporation, condensation and rain, joined into one cycle. An illustration made for this topic.", zh: "蒸发、凝结和下雨连成一个循环。为本主题画的示意图。" }} />
+
+雨水渗进土里，顺着山坡、排水沟和河流流回大海，在那里重新开始循环。我们用的每一滴淡水都走过这个循环。它之所以重要，是因为它不断补充河流、蓄水池和土壤里的水，而生物都依靠这些水生活。
+
+<More title={{ en: "Evaporation is not boiling", zh: "蒸发不是沸腾" }}>
+
+冰在 <Num s="S26">0 ℃</Num> 熔化，水在 <Num s="S26">100 ℃</Num> 沸腾。沸腾时整锅水里都在冒出水蒸气的气泡；蒸发只在水面发生，而且在任何温度下都会发生。所以晾着的衣服会干，海水从不沸腾，海面却不断冒出水蒸气。
+
+</More>
+
+<More title={{ en: "Steam you can see", zh: "看得见的白气" }}>
+
+开水壶上方的白气不是水蒸气。水蒸气离开壶嘴时是看不见的，它在房间的空气里冷却，在离壶嘴不远处凝结成一团极小的水滴，和天上的云形成的道理一样。
+
+<Figure src="figures/water-three-states" alt={{ en: "Pencil drawing of three glass beakers on a bench: one with ice cubes, one with water, and one over a small flame, boiling, with a white plume of droplets rising from the spout of its cover.", zh: "铅笔画：实验台上三个玻璃烧杯，一个装冰块，一个装水，一个放在小火上沸腾，盖子的壶嘴冒出一缕白色的小水滴。" }} caption={{ en: "Ice, water and boiling water; the white plume is condensed droplets. An illustration made for this topic.", zh: "冰、水和沸腾的水；白气是凝结出的小水滴。为本主题画的示意图。" }} />
+
+</More>
+
+<More title={{ en: "Where Earth's fresh water is", zh: "地球上的淡水在哪里" }}>
+
+地球上约 <Num s="S28">96.5 %</Num> 的水在海洋里，是咸的。淡水只有约 <Num s="S28">2.5 %</Num>，其中约 <Num s="S28">68.6 %</Num> 冻在冰盖和冰川里。从云里落下来的水，不论是雨、毛毛雨还是冰雹，科学家统称为<Term id="precipitation">降水</Term>；在新加坡，降水就是下雨。
+
+</More>
+
+<More title={{ en: "Try it: a fair test of evaporation", zh: "试一试：蒸发的公平测试" }}>
+
+在三个一样的碟子里各倒 20 毫升水。第一个照原样放在室内；第二个放在风扇前；第三个放在同一个地方，但把水倒进一个又宽又浅的盘子里。每次只改变一样东西，其余保持一样：水量、房间和时间都相同。一小时后，量一量每个容器里还剩多少水。哪一个少得最多？你改变了什么？哪些保持不变？
+
+</More>
+
+</Lang>

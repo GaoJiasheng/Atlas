@@ -1,0 +1,241 @@
+{
+  "terms": [
+    {
+      "id": "water-cycle",
+      "term": {
+        "en": "Water cycle",
+        "zh": "水循环"
+      },
+      "definition": {
+        "en": "The continuous movement of water between the sea, the air and the land: water evaporates, the vapour condenses into clouds, and rain brings it back down. Heat from the Sun drives it.",
+        "zh": "水在海洋、空气和陆地之间不停地循环：水蒸发，水蒸气凝结成云，再以雨的形式落回地面。推动它的是太阳的热。"
+      },
+      "see": [
+        "evaporation",
+        "condensation"
+      ]
+    },
+    {
+      "id": "evaporation",
+      "term": {
+        "en": "Evaporation",
+        "zh": "蒸发"
+      },
+      "definition": {
+        "en": "The change of liquid water into water vapour at its surface. It happens at any temperature, faster when it is warm, windy or when more surface is exposed; boiling is different and happens at 100 °C.",
+        "zh": "液态水在表面变成水蒸气的过程。任何温度下都会发生；天气暖、有风、暴露面积大时更快。沸腾不一样，在 100 ℃ 时发生。"
+      },
+      "see": [
+        "water-vapour",
+        "water-cycle"
+      ]
+    },
+    {
+      "id": "condensation",
+      "term": {
+        "en": "Condensation",
+        "zh": "凝结"
+      },
+      "definition": {
+        "en": "The change of water vapour back into liquid water when it is cooled. Clouds, mist and the drops on a cold glass form this way.",
+        "zh": "水蒸气遇冷变回液态水的过程。云、雾和冷杯子外的水珠都是这样形成的。"
+      },
+      "see": [
+        "water-vapour",
+        "water-cycle"
+      ]
+    },
+    {
+      "id": "water-vapour",
+      "term": {
+        "en": "Water vapour",
+        "zh": "水蒸气"
+      },
+      "definition": {
+        "en": "Water as a gas. It is invisible; the white cloud above a kettle is made of tiny liquid droplets that have already condensed.",
+        "zh": "气态的水，肉眼看不见；水壶口冒出的白气是已经凝结的小水滴。"
+      },
+      "see": [
+        "evaporation",
+        "condensation"
+      ]
+    },
+    {
+      "id": "precipitation",
+      "term": {
+        "en": "Precipitation",
+        "zh": "降水"
+      },
+      "definition": {
+        "en": "Water that falls from clouds to the ground, as rain, drizzle or hail. In Singapore it falls as rain.",
+        "zh": "从云里落到地面的水，例如雨、毛毛雨或冰雹。在新加坡就是下雨。"
+      },
+      "see": [
+        "water-cycle"
+      ]
+    },
+    {
+      "id": "catchment",
+      "term": {
+        "en": "Catchment",
+        "zh": "集水区"
+      },
+      "definition": {
+        "en": "An area of land where rain is collected and led, through streams, drains and canals, into a reservoir. About two-thirds of Singapore's land is catchment.",
+        "zh": "雨水被收集起来、经溪流、排水沟和运河引进蓄水池的一片土地。新加坡约三分之二的土地是集水区。"
+      },
+      "see": [
+        "reservoir",
+        "four-national-taps"
+      ]
+    },
+    {
+      "id": "reservoir",
+      "term": {
+        "en": "Reservoir",
+        "zh": "蓄水池"
+      },
+      "definition": {
+        "en": "A lake, natural or made by a dam or barrage, that stores raw water until it is treated. Singapore has 17.",
+        "zh": "储存原水、等待处理的湖泊，可以是天然的，也可以是筑坝或堤坝形成的。新加坡有 17 个。"
+      },
+      "see": [
+        "catchment"
+      ]
+    },
+    {
+      "id": "four-national-taps",
+      "term": {
+        "en": "Four National Taps",
+        "zh": "四大水喉"
+      },
+      "definition": {
+        "en": "PUB's name for Singapore's four sources of water: local catchment, imported water, NEWater and desalinated water.",
+        "zh": "PUB 对新加坡四个水源的统称：本地集水、进口水、新生水和淡化海水。"
+      },
+      "see": [
+        "catchment",
+        "newater",
+        "desalination"
+      ]
+    },
+    {
+      "id": "waterworks",
+      "term": {
+        "en": "Waterworks",
+        "zh": "水厂"
+      },
+      "definition": {
+        "en": "A plant that treats raw water into tap water by coagulation, settling, filtration and disinfection.",
+        "zh": "通过混凝、沉淀、过滤和消毒，把原水处理成自来水的工厂。"
+      },
+      "see": [
+        "filtration",
+        "reservoir"
+      ]
+    },
+    {
+      "id": "filtration",
+      "term": {
+        "en": "Filtration",
+        "zh": "过滤"
+      },
+      "definition": {
+        "en": "Passing water through a layer, such as sand or a membrane, that lets the water through but holds back particles.",
+        "zh": "让水穿过一层沙或膜之类的东西，水能通过，颗粒被挡住。"
+      },
+      "see": [
+        "waterworks",
+        "membrane"
+      ]
+    },
+    {
+      "id": "used-water",
+      "term": {
+        "en": "Used water",
+        "zh": "用过的水"
+      },
+      "definition": {
+        "en": "PUB's word for water after it has been used in homes and industry, collected in sewers to be cleaned and reused.",
+        "zh": "PUB 对住家和工业用过的水的叫法；它经污水管收集，再净化、再利用。"
+      },
+      "see": [
+        "newater"
+      ]
+    },
+    {
+      "id": "newater",
+      "term": {
+        "en": "NEWater",
+        "zh": "新生水"
+      },
+      "definition": {
+        "en": "High-grade reclaimed water made from treated used water by membrane filtration, reverse osmosis and ultraviolet disinfection; used mainly by industry and added to reservoirs in dry periods.",
+        "zh": "把处理过的用过的水再经膜过滤、反渗透和紫外线消毒制成的高品质再生水；主要供工业使用，干旱时也加进蓄水池。"
+      },
+      "see": [
+        "used-water",
+        "reverse-osmosis"
+      ]
+    },
+    {
+      "id": "membrane",
+      "term": {
+        "en": "Membrane",
+        "zh": "膜"
+      },
+      "definition": {
+        "en": "A thin layer with tiny pores that lets water through and holds back anything larger than the pores.",
+        "zh": "有极小孔洞的薄层，水能通过，比孔大的东西被挡住。"
+      },
+      "see": [
+        "filtration",
+        "reverse-osmosis"
+      ]
+    },
+    {
+      "id": "reverse-osmosis",
+      "term": {
+        "en": "Reverse osmosis",
+        "zh": "反渗透"
+      },
+      "definition": {
+        "en": "Pushing water under pressure through a membrane so fine that dissolved salts stay behind on the other side.",
+        "zh": "加压把水压过一层极细的膜，让溶解的盐留在另一侧。"
+      },
+      "see": [
+        "membrane",
+        "desalination"
+      ]
+    },
+    {
+      "id": "desalination",
+      "term": {
+        "en": "Desalination",
+        "zh": "海水淡化"
+      },
+      "definition": {
+        "en": "Removing salt from seawater to make fresh water; in Singapore mainly by reverse osmosis.",
+        "zh": "去掉海水里的盐、得到淡水；新加坡主要用反渗透。"
+      },
+      "see": [
+        "reverse-osmosis",
+        "four-national-taps"
+      ]
+    },
+    {
+      "id": "water-conservation",
+      "term": {
+        "en": "Water conservation",
+        "zh": "节约用水"
+      },
+      "definition": {
+        "en": "Using less water and wasting none of it, at home and at work, so that the supply goes further.",
+        "zh": "在家里和工作中少用水、不浪费，让有限的水够用。"
+      },
+      "see": [
+        "four-national-taps"
+      ]
+    }
+  ]
+}

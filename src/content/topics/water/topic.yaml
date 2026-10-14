@@ -1,0 +1,18 @@
+# Water cycle and Singapore's water (SpaceScene). Spec: docs/24-water-content-spec.md (topic A; topic B is four-taps).
+id: water
+title: { en: "Water in Singapore", zh: "新加坡的水" }
+subtitle: { en: "The water cycle and the Four National Taps", zh: "水循环与四大水喉" }
+subject: science
+tags: [singapore, psle, p5, water, space]
+moe:
+  - "MOE 2023 Science P5 Cycles in Matter and Water (Water): states of water, evaporation and condensation in the water cycle, factors affecting evaporation, importance of water, water pollution"
+  - "MOE 2020 Social Studies P3 Understanding Singapore's Environment and Challenges: using resources wisely"
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: draft
+illustration: water
+shortTitle: { en: "Water", zh: "水" }
+note: { en: "Schematic slice of Singapore · not to scale · facilities simplified from public descriptions", zh: "新加坡示意切片 · 不按比例 · 设施按公开资料简化" }

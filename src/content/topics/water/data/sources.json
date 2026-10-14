@@ -1,0 +1,399 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": {
+        "en": "Atlas design study for this topic (docs/24): a schematic slice of Singapore, not to scale and not a specific place; facilities simplified from public descriptions, no brand or operator. Simulated operating point: a hot afternoon when a heavy shower falls on a 10,000-hectare urban catchment. Inputs: sunlight at the ground 900 W/m², air temperature 32 °C (25 °C at the idle, night-time state), rain 30 mm/h, runoff coefficient 0.7. Result: inflow to the reservoir Q = C × I × A / 360 = 0.7 × 30 × 10,000 / 360 ≈ 580 m³/s; one hour of it is about 580 × 3,600 ≈ 2.1 million m³.",
+        "zh": "本主题的 Atlas 设计研究（docs/24）：一块示意的新加坡切片，不按比例，也不是某个真实地点；设施按公开资料简化，不画品牌或运营者。模拟运行点：炎热的午后，一场大阵雨落在 10,000 公顷的城市集水区上。输入：到达地面的阳光 900 W/m²，气温 32 ℃（停机状态即夜间 25 ℃），雨强 30 mm/h，径流系数 0.7。结果：流进蓄水池的水量 Q = C × I × A ÷ 360 = 0.7 × 30 × 10,000 ÷ 360 ≈ 580 m³/s；一小时约 580 × 3,600 ≈ 210 万 m³。"
+      },
+      "note": {
+        "en": "Not a measurement. Inputs sit inside the sources' ranges: sunlight S29 (about 1,000 W/m² at clear-sky noon), air temperature S23 (daily maximum 31–33 °C, night minimum 23–25 °C), catchment area S7, runoff coefficient between S30's 0.45 (vegetated) and 0.90 (urban); the formula Q = CIA/360 is S30's. Rain of 30 mm/h is a chosen heavy shower, not an MSS class. The comparison with daily demand uses S11 (440 mgd ≈ 2.0 million m³). Clouds, hills and plants are drawn at schematic heights; buildings are enlarged against the land.",
+        "zh": "不是实测值。输入都在来源给出的范围内：阳光见 S29（晴天正午约 1,000 W/m²），气温见 S23（日最高 31–33 ℃、夜间最低 23–25 ℃），集水面积见 S7，径流系数取在 S30 的 0.45（植被地）与 0.90（城市）之间；公式 Q = CIA/360 出自 S30。30 mm/h 是选定的一场大阵雨，不是气象局的分级。与全国日用水量的对比用 S11（440 百万加仑 ≈ 200 万 m³）。云、山与厂房的高度都是示意，建筑相对地面放大了。"
+      }
+    },
+    {
+      "id": "S2",
+      "text": {
+        "en": "PUB, Singapore's National Water Agency, \"Our Water Story\" (last updated 28 February 2024): the Four National Taps are water from local catchment, imported water, NEWater and desalinated water.",
+        "zh": "新加坡国家水务局（PUB）《Our Water Story》（2024 年 2 月 28 日更新）：四大水喉是本地集水、进口水、新生水和淡化海水。"
+      },
+      "url": "https://www.pub.gov.sg/Public/WaterLoop/OurWaterStory",
+      "note": {
+        "en": "Read in full.",
+        "zh": "已读全文。"
+      }
+    },
+    {
+      "id": "S3",
+      "text": {
+        "en": "PUB, \"Water from Local Catchment\" (last updated 9 October 2026): 17 reservoirs; rain falling on two-thirds of Singapore's land area is collected through drains, canals and rivers into them; the catchment grew from half to two-thirds of the land after 2011.",
+        "zh": "PUB《Water from Local Catchment》（2026 年 10 月 9 日更新）：17 个蓄水池；落在新加坡三分之二土地上的雨水经排水沟、运河和河流汇进这些蓄水池；2011 年以后集水区由一半国土扩大到三分之二。"
+      },
+      "url": "https://www.pub.gov.sg/Public/WaterLoop/OurWaterStory/Local-Catchment-Water",
+      "note": {
+        "en": "Read in full. The SG60 panels (S9) say \"more than two-thirds\"; the topic writes \"about two-thirds\".",
+        "zh": "已读全文。SG60 展板（S9）写\"超过三分之二\"；本主题写\"约三分之二\"。"
+      }
+    },
+    {
+      "id": "S4",
+      "text": {
+        "en": "PUB, \"Imported Water\" (last updated 2 April 2024): under the 1962 Water Agreement Singapore may draw up to 250 million gallons a day from the Johor River until 2061; Johor is entitled to buy treated water of up to 2 % of the water supplied; Linggiu Reservoir upstream was built by PUB under a 1990 agreement with Johor and releases water to supplement the river's flow.",
+        "zh": "PUB《Imported Water》（2024 年 4 月 2 日更新）：根据 1962 年水供协议，新加坡每天可从柔佛河抽取最多 2.5 亿加仑水，直到 2061 年；柔佛有权购买相当于供水量最多 2 % 的经处理的水；上游的林木水库由 PUB 根据 1990 年与柔佛的协议兴建，放水补充河流的水量。"
+      },
+      "url": "https://www.pub.gov.sg/Public/WaterLoop/OurWaterStory/ImportedWater",
+      "note": {
+        "en": "Read in full. Linggiu's completion year is not stated here and is not used.",
+        "zh": "已读全文。此页没有写林木水库的建成年份，本主题不写。"
+      }
+    },
+    {
+      "id": "S5",
+      "text": {
+        "en": "PUB, \"NEWater\" (last updated 2 October 2024): NEWater is made from treated used water by microfiltration or ultrafiltration, reverse osmosis and ultraviolet disinfection; it was introduced to the public in 2002; four NEWater plants are in operation; it is used mainly by industry, wafer fabrication plants being the largest users, and is added to reservoirs during dry periods.",
+        "zh": "PUB《NEWater》（2024 年 10 月 2 日更新）：新生水由处理过的用过的水，经微滤或超滤、反渗透和紫外线消毒制成；2002 年向公众推出；目前有 4 座新生水厂在运行；主要供工业使用，晶圆厂是最大用户；干旱时期加进蓄水池。"
+      },
+      "url": "https://www.pub.gov.sg/Public/WaterLoop/OurWaterStory/NEWater",
+      "note": {
+        "en": "Read in full. The often-quoted share of demand NEWater can meet is not on this page and is not used.",
+        "zh": "已读全文。常见的\"新生水能满足多少比例的需求\"不在此页，本主题不用。"
+      }
+    },
+    {
+      "id": "S6",
+      "text": {
+        "en": "PUB, \"Desalinated Water\" (last updated 2 April 2024): Singapore's first desalination plant opened in Tuas in September 2005; five desalination plants operate today; desalination is energy-intensive, reverse osmosis using about 3.5 kWh of electricity per cubic metre of water.",
+        "zh": "PUB《Desalinated Water》（2024 年 4 月 2 日更新）：新加坡第一座海水淡化厂 2005 年 9 月在大士启用；今天有 5 座淡化厂；海水淡化耗能高，反渗透每立方米水约用电 3.5 千瓦时。"
+      },
+      "url": "https://www.pub.gov.sg/Public/WaterLoop/OurWaterStory/DesalinatedWater",
+      "note": {
+        "en": "Read in full. The page names no share of demand and says nothing about the brine; the model's brine pipe is drawn from the general reverse-osmosis process (the part of the seawater that does not pass the membrane leaves with the salt).",
+        "zh": "已读全文。此页没有写供水比例，也没写浓盐水；模型里的浓盐水管按反渗透的一般流程画（没有穿过膜的那部分海水带着盐离开）。"
+      }
+    },
+    {
+      "id": "S7",
+      "text": {
+        "en": "PUB, \"Marina Barrage\" (last updated 23 September 2026): opened in 2008 across the mouth of the Marina Channel, it made Singapore's 15th reservoir and the first in the city centre, with a catchment of 10,000 hectares; its crest gates open when the tide is low to let excess water out, and at high tide pumps drain the stormwater to the sea.",
+        "zh": "PUB《Marina Barrage》（2026 年 9 月 23 日更新）：2008 年建成，横跨滨海水道出海口，造出新加坡第 15 个、也是第一个市中心的蓄水池，集水区 10,000 公顷；退潮时闸门打开放出多余的水，涨潮时由水泵把暴雨水排进海里。"
+      },
+      "url": "https://www.pub.gov.sg/public/places-of-interest/marina-barrage",
+      "note": {
+        "en": "Read in full.",
+        "zh": "已读全文。"
+      }
+    },
+    {
+      "id": "S8",
+      "text": {
+        "en": "PUB, \"Bask in Marina Barrage\" brochure (October 2008): nine steel crest gates, each 30 m long and 5 m tall, lowered during heavy rain at low tide; seven drainage pumps of 40 m³/s each, 280 m³/s together, used when heavy rain falls at high tide.",
+        "zh": "PUB《Bask in Marina Barrage》手册（2008 年 10 月）：9 道钢闸门，每道长 30 m、高 5 m，退潮遇大雨时放倒；7 台排水泵，每台 40 m³/s，合计 280 m³/s，涨潮又遇大雨时使用。"
+      },
+      "url": "https://www.pub.gov.sg/-/media/Images/Feature/Content-Pages/Resources/Publications/Pdfs/Bask-in-MB_2210.pdf",
+      "note": {
+        "en": "Read in full.",
+        "zh": "已读全文。"
+      }
+    },
+    {
+      "id": "S9",
+      "text": {
+        "en": "PUB, \"Our Water Story\" exhibition panels (SG60, February 2025): the Four National Taps; six waterworks; a 6,000 km potable-water network, 660 km of NEWater pipes and 3,700 km of public sewers; the Deep Tunnel Sewerage System, 206 km long, takes used water to centralised water reclamation plants; daily water use of about 440 million gallons, which may almost double by 2065; water-saving habits: turning off the tap while brushing teeth saves about 23 litres a day, and turning off the shower while soaping about 27 litres.",
+        "zh": "PUB《Our Water Story》展板（SG60，2025 年 2 月）：四大水喉；6 座水厂；6,000 km 自来水管网、660 km 新生水管和 3,700 km 公共污水管；全长 206 km 的深隧道排污系统把用过的水送到集中的再生水厂；每天用水约 4.4 亿加仑，到 2065 年可能接近翻倍；节水习惯：刷牙时关水龙头每天省约 23 升，淋浴抹肥皂时关水约 27 升。"
+      },
+      "url": "https://www.pub.gov.sg/-/media/PUB/Public/Key-Initiatives/Our-Water-SG60/Resources/Exhibition-Panels/Exhibition-Panels---Our-Water-Story.pdf",
+      "note": {
+        "en": "Read in full. The panels give the non-domestic share in 2065 as \"almost 60 %\"; the newer S12 says \"about two-thirds\", and this topic follows S12. The panels' dual-flush figure (4.5 L for a full flush) is older than PUB's current labelling requirement and is not used.",
+        "zh": "已读全文。展板说到 2065 年非家庭用水\"接近 60 %\"；较新的 S12 说\"约三分之二\"，本主题按 S12。展板的双冲水量（全冲 4.5 升）早于 PUB 现行的用水效率标签规定，本主题不用。"
+      }
+    },
+    {
+      "id": "S10",
+      "text": {
+        "en": "PUB, \"Water Treatment\" (last updated 20 February 2026): at the waterworks raw water goes through coagulation and flocculation, sedimentation, filtration through rapid gravity sand filters or membranes, and disinfection; the tap water is well within the World Health Organization Guidelines for Drinking-water Quality.",
+        "zh": "PUB《Water Treatment》（2026 年 2 月 20 日更新）：原水在水厂里经过混凝与絮凝、沉淀、快速砂滤或膜过滤和消毒；自来水远优于世界卫生组织《饮用水水质准则》。"
+      },
+      "url": "https://www.pub.gov.sg/Public/WaterLoop/Water-Treatment",
+      "note": {
+        "en": "Read in full.",
+        "zh": "已读全文。"
+      }
+    },
+    {
+      "id": "S11",
+      "text": {
+        "en": "PUB, \"Water Conservation\" (last updated 29 September 2026): Singapore uses about 440 million gallons of water a day, and demand is expected to almost double by 2065.",
+        "zh": "PUB《Water Conservation》（2026 年 9 月 29 日更新）：新加坡每天用水约 4.4 亿加仑，到 2065 年需求预计接近翻倍。"
+      },
+      "url": "https://www.pub.gov.sg/public/waterloop/water-conservation",
+      "note": {
+        "en": "Read in full. Unit conversion (this topic): 1 million imperial gallons ≈ 4,546 m³, so 440 million gallons a day ≈ 2.0 million m³ a day.",
+        "zh": "已读全文。单位换算（本主题）：100 万英制加仑 ≈ 4,546 m³，所以每天 4.4 亿加仑 ≈ 200 万 m³。"
+      }
+    },
+    {
+      "id": "S12",
+      "text": {
+        "en": "PUB press release, \"It's Everyone's Business to Make Every Drop Count\" (17 March 2026): household water use was 141 litres per person per day in 2025; non-domestic use is about 55 % of demand today and will be about two-thirds by 2065.",
+        "zh": "PUB 新闻稿《It's Everyone's Business to Make Every Drop Count》（2026 年 3 月 17 日）：2025 年家庭人均用水每天 141 升；非家庭用水今天约占 55 %，到 2065 年约占三分之二。"
+      },
+      "url": "https://www.pub.gov.sg/Resources/News-Room/PressReleases/2026/03/Its-Everyones-Business-to-Make-Every-Drop-Count",
+      "note": {
+        "en": "Read in full.",
+        "zh": "已读全文。"
+      }
+    },
+    {
+      "id": "S13",
+      "text": {
+        "en": "PUB press release, \"Save water. Big ways, small ways. All OK!\" (9 March 2024): the Singapore Green Plan 2030 aims to bring household water use down to 130 litres per person per day.",
+        "zh": "PUB 新闻稿《Save water. Big ways, small ways. All OK!》（2024 年 3 月 9 日）：新加坡绿色发展蓝图 2030 的目标是把家庭人均用水降到每天 130 升。"
+      },
+      "url": "https://www.pub.gov.sg/Resources/News-Room/PressReleases/2024/03/Save-water-Big-ways-small-ways-All-OK",
+      "note": {
+        "en": "Read in full.",
+        "zh": "已读全文。"
+      }
+    },
+    {
+      "id": "S14",
+      "text": {
+        "en": "PUB, \"Deep Tunnel Sewerage System\" (last updated 3 March 2026): the DTSS, 206 km long, conveys used water by gravity through deep tunnels to three centralised water reclamation plants at Changi, Kranji and Tuas.",
+        "zh": "PUB《Deep Tunnel Sewerage System》（2026 年 3 月 3 日更新）：深隧道排污系统全长 206 km，靠重力经深层隧道把用过的水送到樟宜、克兰芝和大士三座集中的再生水厂。"
+      },
+      "url": "https://www.pub.gov.sg/Professionals/Requirements/Used-Water/DTSS",
+      "note": {
+        "en": "Read in full.",
+        "zh": "已读全文。"
+      }
+    },
+    {
+      "id": "S15",
+      "text": {
+        "en": "PUB press release, \"PUB completes tunnelling works for second phase of Deep Tunnel Sewerage System\" (21 August 2023): the new domestic tunnel lies 35 to 55 metres below ground.",
+        "zh": "PUB 新闻稿《PUB completes tunnelling works for second phase of Deep Tunnel Sewerage System》（2023 年 8 月 21 日）：新的生活污水隧道位于地下 35 至 55 米。"
+      },
+      "url": "https://www.pub.gov.sg/Resources/News-Room/PressReleases/2023/08/PUB-completes-tunneling-works-for-second-phase-of-Deep-Tunnel-Sewerage-System",
+      "note": {
+        "en": "Read in full.",
+        "zh": "已读全文。"
+      }
+    },
+    {
+      "id": "S16",
+      "text": {
+        "en": "PUB, annex to the media release \"NEWater Visitor Centre to close on 31 July\" (24 June 2024): the Bedok and Kranji NEWater factories officially opened in January 2003; NEWater is within the WHO and US EPA drinking-water standards.",
+        "zh": "PUB 新闻稿附件《NEWater Visitor Centre to close on 31 July》（2024 年 6 月 24 日）：勿洛和克兰芝新生水厂于 2003 年 1 月正式启用；新生水符合世界卫生组织和美国环保署的饮用水标准。"
+      },
+      "url": "https://www.pub.gov.sg/-/media/PUB/Resources/Press-Releases/2024/06/Annex-24-06-2024-PUB-Media-Release---NEWater-Visitor-Centre-to-close-on-31-July.pdf",
+      "note": {
+        "en": "Read in full. The SG60 panels (S9) date the first factory to 2002, the year NEWater was introduced; this topic says NEWater was introduced in 2002 (S5) and the first factories opened in 2003.",
+        "zh": "已读全文。SG60 展板（S9）把第一座厂写在 2002 年，即新生水推出的那一年；本主题写 2002 年推出新生水（S5）、2003 年第一批工厂启用。"
+      }
+    },
+    {
+      "id": "S17",
+      "text": {
+        "en": "Ministry of Foreign Affairs, Singapore, \"Water Agreements\" (last updated 28 November 2025): the 1961 Water Agreement, covering the Tebrau and Scudai rivers, expired on 31 August 2011; the 1962 Water Agreement entitles Singapore to draw up to 250 million gallons a day from the Johor River and will expire in 2061; Johor is entitled to buy treated water of up to 2 % of the water supplied to Singapore, about 5 million gallons a day; Linggiu Reservoir regulates the river.",
+        "zh": "新加坡外交部《Water Agreements》（2025 年 11 月 28 日更新）：涉及地不佬河和士姑来河的 1961 年水供协议于 2011 年 8 月 31 日到期；1962 年水供协议让新加坡每天可从柔佛河抽取最多 2.5 亿加仑水，2061 年到期；柔佛有权购买相当于供给新加坡水量最多 2 %（约每天 500 万加仑）的经处理的水；林木水库调节河流。"
+      },
+      "url": "https://www.mfa.gov.sg/about-mfa/key-issues/water-agreements/",
+      "note": {
+        "en": "Read in full. Price terms are not used in this topic.",
+        "zh": "已读全文。本主题不写价格条款。"
+      }
+    },
+    {
+      "id": "S18",
+      "text": {
+        "en": "Malaysia, Ministry of Water, Land and Natural Resources, written reply in the Dewan Rakyat to a question from Dato' Sri Dr. Santhara (12 November 2019): the Johor River Water Agreement of 29 September 1962, for 99 years, allows up to 250 million gallons a day to be drawn; Johor may take treated water of up to 2 % of the total supplied to Singapore.",
+        "zh": "马来西亚水务、土地及天然资源部在下议院对 Dato' Sri Dr. Santhara 提问的书面答复（2019 年 11 月 12 日）：1962 年 9 月 29 日签订、为期 99 年的柔佛河水供协议允许每天抽取最多 2.5 亿加仑水；柔佛可取得最多为供给新加坡总量 2 % 的经处理的水。"
+      },
+      "url": "https://www.nres.gov.my/Parlimen/MQT/MQT-DATO%27%20SRI%20DR.%20SANTHARA%20(12%20November%202019).pdf",
+      "note": {
+        "en": "Read in full (Malay). The reply does not print 2061; 1962 plus 99 years gives it. The reply also records Malaysia's position on reviewing the price, which this topic does not discuss.",
+        "zh": "已读全文（马来文）。答复没有直接写 2061 年，由 1962 年加 99 年得出。答复里还有马来西亚对价格检讨的立场，本主题不讨论。"
+      }
+    },
+    {
+      "id": "S19",
+      "text": {
+        "en": "Lim Tin Seng, \"Four Taps: The Story of Singapore Water\", BiblioAsia, National Library Board (2018, online 4 April 2019): under a 1927 agreement Singapore leased land at Gunong Pulai in Johor for water; the 1961 agreement replaced it; the Linggiu agreement was signed on 24 November 1990.",
+        "zh": "Lim Tin Seng《Four Taps: The Story of Singapore Water》，国家图书馆管理局 BiblioAsia（2018 年，2019 年 4 月 4 日上线）：根据 1927 年的协议，新加坡在柔佛的布莱山租地取水；1961 年的协议取代了它；林木水库协议于 1990 年 11 月 24 日签订。"
+      },
+      "url": "https://biblioasia.nlb.gov.sg/vol-14/issue-1/apr-jun-2018/four-taps-sg-water/",
+      "note": {
+        "en": "Read in full.",
+        "zh": "已读全文。"
+      }
+    },
+    {
+      "id": "S20",
+      "text": {
+        "en": "Ministry of Sustainability and the Environment, written reply to a parliamentary question on water pressure (7 May 2026): fittings higher than about 25 m above mean sea level are served from storage tanks; for HDB blocks these tanks are on the rooftop.",
+        "zh": "永续发展与环境部关于水压的国会书面答复（2026 年 5 月 7 日）：高于平均海平面约 25 m 的用水点由储水箱供水；组屋的水箱设在屋顶。"
+      },
+      "url": "https://www.mse.gov.sg/latest-news/written-reply-to-parliamentary-question-on-water-pressure/",
+      "note": {
+        "en": "Read in full.",
+        "zh": "已读全文。"
+      }
+    },
+    {
+      "id": "S21",
+      "text": {
+        "en": "PUB, \"Best Practice Guide in Water Efficiency: Buildings\", version 2 (May 2022), p. 21: in high-rise buildings water is typically pumped into storage tanks on the upper floors, from which the rest of the building is supplied by gravity.",
+        "zh": "PUB《Best Practice Guide in Water Efficiency: Buildings》第 2 版（2022 年 5 月）第 21 页：高楼的水通常先泵到上层的储水箱，再靠重力供给楼里其余各层。"
+      },
+      "url": "https://www.pub.gov.sg/-/media/Images/Feature/Content-Pages/Public/Singapore-Water-Loop/Water-Conversation/Resources-on-Water-Efficiency-Measures/Water_Efficiency_Buildings_v2.pdf",
+      "note": {
+        "en": "Read in full.",
+        "zh": "已读全文。"
+      }
+    },
+    {
+      "id": "S22",
+      "text": {
+        "en": "Ministry of Sustainability and the Environment, written reply on the unit cost and energy intensity of desalinated water compared with NEWater and imported water (12 January 2026): desalinated water is more energy-intensive and costly than NEWater and imported water.",
+        "zh": "永续发展与环境部关于淡化海水与新生水、进口水单位成本和能耗的国会书面答复（2026 年 1 月 12 日）：淡化海水比新生水和进口水更耗能、成本更高。"
+      },
+      "url": "https://www.mse.gov.sg/latest-news/written-reply-to-parliamentary-question-on-unit-cost-and-energy-intensity-of-desalinated-water-vs-newater-and-imported-water/",
+      "note": {
+        "en": "Read in full.",
+        "zh": "已读全文。"
+      }
+    },
+    {
+      "id": "S23",
+      "text": {
+        "en": "Meteorological Service Singapore, \"Climate of Singapore\": the 1991–2020 long-term mean annual rainfall at the Changi climate station is 2,113.3 mm; daily maximum temperatures seldom rise above 31–33 °C and night minimums are 23–25 °C.",
+        "zh": "新加坡气象局《Climate of Singapore》：1991–2020 年樟宜气候站的长期年平均雨量为 2,113.3 mm；白天最高气温很少超过 31–33 ℃，夜间最低 23–25 ℃。"
+      },
+      "url": "https://www.weather.gov.sg/climate-climate-of-singapore/",
+      "note": {
+        "en": "Read in full (undated page).",
+        "zh": "已读全文（页面无日期）。"
+      }
+    },
+    {
+      "id": "S24",
+      "text": {
+        "en": "Meteorological Service Singapore, \"The Year in Numbers 2023\" (January 2024): the island-wide long-term average annual rainfall, from 32 stations over 1991–2020, is 2,534.3 mm.",
+        "zh": "新加坡气象局《The Year in Numbers 2023》（2024 年 1 月）：全岛 32 个站 1991–2020 年的长期年平均雨量为 2,534.3 mm。"
+      },
+      "url": "https://isomer-user-content.by.gov.sg/139/79f822da-347f-4303-b208-3ac5911c7fcf/The_Year_in_Numbers_2023.pdf",
+      "note": {
+        "en": "Read in full. Island-wide (32 stations) and Changi (one station, S23) measure different things, so both are given.",
+        "zh": "已读全文。全岛（32 个站）和樟宜（一个站，S23）测的范围不同，所以两个数并列。"
+      }
+    },
+    {
+      "id": "S25",
+      "text": {
+        "en": "National Environment Agency, \"Keeping Our Water Clean\" (last updated 12 November 2024): Singapore has limited water resources; NEA monitors inland and coastal waters and controls the discharge of trade effluent under the Environmental Protection and Management Act.",
+        "zh": "国家环境局《Keeping Our Water Clean》（2024 年 11 月 12 日更新）：新加坡水资源有限；国家环境局监测内陆和沿海水体，并依据《环境保护与管理法》管制工业废水的排放。"
+      },
+      "url": "https://www.nea.gov.sg/our-services/pollution-control/water-quality/keeping-our-water-clean",
+      "note": {
+        "en": "Read in full.",
+        "zh": "已读全文。"
+      }
+    },
+    {
+      "id": "S26",
+      "text": {
+        "en": "Ministry of Education, Singapore, Science Teaching and Learning Syllabus, Primary Three to Six (2023, updated May 2024), \"Cycles in Matter and Water (Water)\", pp. 49–51: the three states of water and the changes between them; ice melts at 0 °C and water boils at 100 °C; the roles of evaporation and condensation in the water cycle; factors that affect the rate of evaporation (wind, temperature, exposed surface area); the importance of the water cycle and of water to life; the impact of water pollution; water as a limited resource to be used responsibly.",
+        "zh": "新加坡教育部《小学三至六年级科学教学大纲》（2023 年，2024 年 5 月更新）「物质与水的循环（水）」第 49–51 页：水的三态及相互转变；冰在 0 ℃ 熔化、水在 100 ℃ 沸腾；蒸发和凝结在水循环中的作用；影响蒸发快慢的因素（风、温度、暴露面积）；水循环和水对生命的重要性；水污染的影响；水是有限资源，要负责任地使用。"
+      },
+      "url": "https://cms.moe.gov.sg/assets/ba3562d3-5b31-4459-8693-45cde7b97273/Primary%20Science%20Syllabus%202023.pdf",
+      "note": {
+        "en": "Read in full (archived copy of the same PDF; the live link refused automated access). Page numbers are the printed ones.",
+        "zh": "已读全文（同一份 PDF 的存档副本；正式链接拒绝自动访问）。页码为印刷页码。"
+      }
+    },
+    {
+      "id": "S27",
+      "text": {
+        "en": "Ministry of Education, Singapore, 2020 Social Studies Primary Teaching and Learning Syllabus, Primary 3 \"Understanding Singapore's Environment and Challenges\", pp. 23–26: using resources wisely to protect the environment, and how Singapore manages its resources.",
+        "zh": "新加坡教育部《2020 年小学社会科教学大纲》小三「认识新加坡的环境与挑战」第 23–26 页：明智使用资源、保护环境，以及新加坡怎样管理资源。"
+      },
+      "url": "https://www.moe.gov.sg/media/files/primary/d8ea4817-c1b3-4217-84d4-82838d39d75c.pdf",
+      "note": {
+        "en": "Read in full. The phrase \"Four National Taps\" does not appear in the syllabus; this topic links it to the P3 resources theme only.",
+        "zh": "已读全文。大纲里没有\"四大水喉\"这个词；本主题只把它对应到小三的资源主题。"
+      }
+    },
+    {
+      "id": "S28",
+      "text": {
+        "en": "US Geological Survey, Water Science School, \"The Water Cycle for Kids: Where is Earth's Water?\" (modified 5 April 2021): about 96.5 % of Earth's water is in the oceans and only about 2.5 % is fresh water, of which about 68.6 % is in ice caps, glaciers and permanent snow and about 30.1 % is groundwater.",
+        "zh": "美国地质调查局水科学学校《The Water Cycle for Kids: Where is Earth's Water?》（2021 年 4 月 5 日修订）：地球上约 96.5 % 的水在海洋里，淡水只占约 2.5 %，其中约 68.6 % 在冰盖、冰川和终年积雪里，约 30.1 % 是地下水。"
+      },
+      "url": "https://water.usgs.gov/edu/gallery/watercyclekids/earth-water-distribution.html",
+      "note": {
+        "en": "Read in full.",
+        "zh": "已读全文。"
+      }
+    },
+    {
+      "id": "S29",
+      "text": {
+        "en": "PVEducation, \"Air Mass\": the standard AM1.5G spectrum is normalised to 1 kW/m², and the direct and diffuse sunlight on a clear day at the ground is of that order (about 970 W/m² in the page's own calculation).",
+        "zh": "PVEducation《Air Mass》：标准 AM1.5G 光谱归一化为 1 kW/m²，晴天到达地面的直射加散射阳光就在这个量级（该页自己的计算约 970 W/m²）。"
+      },
+      "url": "https://www.pveducation.org/pvcdrom/properties-of-sunlight/air-mass",
+      "note": {
+        "en": "Read in full.",
+        "zh": "已读全文。"
+      }
+    },
+    {
+      "id": "S30",
+      "text": {
+        "en": "PUB, Code of Practice on Surface Water Drainage, 7th edition (December 2018) with Addendum No. 3 (April 2025), clause 7.1.2: runoff is estimated with the rational formula Q = CIA/360 (Q in m³/s, I in mm/h, A in hectares); runoff coefficients C of 1.00 for paved areas, 0.90 for urban areas and 0.45 for vegetated, pervious areas.",
+        "zh": "PUB《地表水排水作业守则》第 7 版（2018 年 12 月）及第 3 号增补（2025 年 4 月）第 7.1.2 条：径流用推理公式 Q = CIA/360 估算（Q 单位 m³/s，I 单位 mm/h，A 单位公顷）；径流系数 C：铺装地 1.00，城市地区 0.90，植被透水地 0.45。"
+      },
+      "url": "https://www.pub.gov.sg/-/media/PUB/PDF/Code-of-Practices-and-Submission-Guidelines/Surface-Water-Drainage/Code-of-Practice-on-Surface-Water-Drainage.pdf",
+      "note": {
+        "en": "Read in full.",
+        "zh": "已读全文。"
+      }
+    },
+    {
+      "id": "S31",
+      "text": {
+        "en": "National Parks Board, \"Bukit Timah Nature Reserve\" (last updated 27 January 2026): Bukit Timah Hill, 163 metres high, is Singapore's highest natural point.",
+        "zh": "国家公园局《Bukit Timah Nature Reserve》（2026 年 1 月 27 日更新）：武吉知马山高 163 米，是新加坡最高的自然地点。"
+      },
+      "url": "https://www.nparks.gov.sg/visit/parks/park-detail/bukit-timah-nature-reserve",
+      "note": {
+        "en": "Read in full.",
+        "zh": "已读全文。"
+      }
+    },
+    {
+      "id": "S32",
+      "text": {
+        "en": "PUB, Water Conservation Quiz (SG60 resources): households use about 45 % of Singapore's water and the non-domestic sector about 55 %.",
+        "zh": "PUB 节水问答（SG60 资料）：家庭用掉新加坡约 45 % 的水，非家庭部门约 55 %。"
+      },
+      "url": "https://www.pub.gov.sg/-/media/PUB/Public/Key-Initiatives/Our-Water-SG60/Resources/Activities/Quiz.pdf",
+      "note": {
+        "en": "Read in full.",
+        "zh": "已读全文。"
+      }
+    },
+    {
+      "id": "S33",
+      "text": {
+        "en": "World Health Organization, Guidelines for Drinking-water Quality, fourth edition incorporating the first and second addenda (2022): the international reference for safe drinking water that PUB measures its tap water against (S10).",
+        "zh": "世界卫生组织《饮用水水质准则》第四版（含第一、第二增补，2022 年）：PUB 用来衡量自来水的国际饮用水安全基准（S10）。"
+      },
+      "url": "https://www.who.int/publications/i/item/9789240045064",
+      "note": {
+        "en": "Cited for the title and edition only; the topic gives no limit values.",
+        "zh": "只引书名和版本；本主题不写具体限值。"
+      }
+    }
+  ]
+}
