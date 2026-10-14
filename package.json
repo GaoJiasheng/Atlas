@@ -23,6 +23,7 @@
   "dependencies": {
     "@astrojs/mdx": "4.3.14",
     "@astrojs/react": "4.4.2",
+    "@capacitor/core": "^8.5.3",
     "@fontsource/ibm-plex-mono": "5.2.5",
     "@fontsource/ibm-plex-sans-condensed": "5.2.5",
     "@react-three/drei": "10.7.9",
@@ -40,6 +41,8 @@
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",
+    "@capacitor/cli": "^8.5.3",
+    "@capacitor/ios": "^8.5.3",
     "@gltf-transform/core": "^4.5.1",
     "@gltf-transform/extensions": "^4.5.1",
     "@gltf-transform/functions": "^4.5.1",
