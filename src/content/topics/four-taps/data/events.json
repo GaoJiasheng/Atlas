@@ -1,0 +1,851 @@
+[
+  {
+    "id": "agreement-1927",
+    "t": "1927",
+    "at": [
+      103.7693,
+      1.4524
+    ],
+    "kind": "political",
+    "importance": 2,
+    "title": {
+      "en": "The 1927 water agreement",
+      "zh": "1927 年水供协议"
+    },
+    "summary": {
+      "en": "Johor lets Singapore take water from Johor; Singapore pays rent for the land of the catchment and waterworks.",
+      "zh": "柔佛让新加坡从柔佛取水；新加坡为集水区和水厂的土地付租金。"
+    },
+    "detail": {
+      "en": "Singapore's sources say the water itself was free and Singapore paid rent for the land [S19]; Malaysian sources describe the water supplied from 1927 to 1961 as free raw water [S16, S18]. The exact day of signing is not given in the sources read for this topic.",
+      "zh": "新加坡方面的来源说水本身免费、新加坡为土地付租金 [S19]；马来西亚方面的来源把 1927 年至 1961 年供应的水称为免费原水 [S16、S18]。本主题读到的来源没有写明签约的具体日期。"
+    },
+    "sources": [
+      "S19",
+      "S16",
+      "S18"
+    ]
+  },
+  {
+    "id": "agreement-1961",
+    "t": "1961-09-01",
+    "at": [
+      103.77,
+      1.449
+    ],
+    "kind": "political",
+    "importance": 2,
+    "title": {
+      "en": "The 1961 water agreement",
+      "zh": "1961 年水供协议"
+    },
+    "summary": {
+      "en": "Singapore may draw raw water from the Tebrau and Scudai rivers and Gunong Pulai in Johor for 50 years, until 31 August 2011.",
+      "zh": "新加坡可从柔佛的地不佬河、士姑来河和布莱山取原水 50 年，到 2011 年 8 月 31 日为止。"
+    },
+    "detail": {
+      "en": "The agreement is dated 1 September 1961 in the 1965 separation agreement [S15]. Under it Singapore supplied Johor with treated water amounting to 12 % of the water imported. When it expired on 31 August 2011, the Gunong Pulai and Scudai waterworks and the pump houses at Pontian and Tebrau were handed to the Johor State government [S13].",
+      "zh": "1965 年的分家协议写明这份协议的日期是 1961 年 9 月 1 日 [S15]。按照协议，新加坡向柔佛供应相当于进口量 12% 的处理过的水。2011 年 8 月 31 日协议到期，布莱山与士姑来水厂以及笨珍、地不佬的抽水站交给了柔佛州政府 [S13]。"
+    },
+    "sources": [
+      "S13",
+      "S15",
+      "S3"
+    ]
+  },
+  {
+    "id": "agreement-1962",
+    "t": "1962-09-29",
+    "at": [
+      103.8744,
+      1.7284
+    ],
+    "kind": "political",
+    "importance": 3,
+    "title": {
+      "en": "The 1962 water agreement",
+      "zh": "1962 年水供协议"
+    },
+    "summary": {
+      "en": "Singapore may draw up to 250 million gallons of raw water a day from the Johor River for 99 years, until 2061.",
+      "zh": "新加坡可在 99 年里每日从柔佛河取原水至多 250 百万加仑，直到 2061 年。"
+    },
+    "detail": {
+      "en": "Both governments give the same date, 29 September 1962, the same term of 99 years and the same quantity [S13, S16, S17]. In return Johor may receive treated water: up to 2 % of the water supplied to Singapore, or 5 million gallons a day, as Singapore's foreign ministry puts it [S13]; 5 million gallons a day under Clause 11, in the words of Malaysia's ministry [S16]. Johor's state government records that the Johor River Waterworks at Kota Tinggi and the Linggiu Dam are to be handed to Johor on 30 September 2061 [S17].",
+      "zh": "两国政府给出的日期都是 1962 年 9 月 29 日，期限都是 99 年，取水量也一样 [S13、S16、S17]。作为交换，柔佛可获得处理过的水：新加坡外交部的说法是至多相当于新加坡供水量的 2%，即每日 5 百万加仑 [S13]；马来西亚部门的说法是按第 11 条每日 5 百万加仑 [S16]。柔佛州政府记录，哥打丁宜的柔佛河水厂和林木水坝将于 2061 年 9 月 30 日交给柔佛 [S17]。"
+    },
+    "sources": [
+      "S13",
+      "S14",
+      "S16",
+      "S17"
+    ]
+  },
+  {
+    "id": "separation-guarantee",
+    "t": "1965-08-07",
+    "at": [
+      103.768,
+      1.4467
+    ],
+    "kind": "political",
+    "importance": 2,
+    "title": {
+      "en": "Both governments guarantee the agreements",
+      "zh": "两国政府保证遵守协议"
+    },
+    "summary": {
+      "en": "When Singapore separates from Malaysia, the separation agreement says both governments will make sure the 1961 and 1962 water agreements are kept.",
+      "zh": "新加坡脱离马来西亚时，分家协议规定两国政府都要确保 1961 年和 1962 年的水供协议得到遵守。"
+    },
+    "detail": {
+      "en": "Article 14 of the agreement of 7 August 1965: Singapore's government guarantees that PUB, and Malaysia's government that the Johor State government, will abide by the water agreements of 1 September 1961 and 29 September 1962. Both countries registered the agreement with the United Nations [S15].",
+      "zh": "1965 年 8 月 7 日协议第 14 条：新加坡政府保证 PUB、马来西亚政府保证柔佛州政府，遵守 1961 年 9 月 1 日和 1962 年 9 月 29 日的两份水供协议。两国都把这份协议在联合国登记 [S15]。"
+    },
+    "sources": [
+      "S15"
+    ]
+  },
+  {
+    "id": "agreement-1990",
+    "t": "1990",
+    "at": [
+      103.6908,
+      1.9077
+    ],
+    "kind": "political",
+    "importance": 2,
+    "title": {
+      "en": "The 1990 Linggiu agreement",
+      "zh": "1990 年林木协议"
+    },
+    "summary": {
+      "en": "PUB and the Johor State government agree to build Linggiu Reservoir upstream on the Johor River, as a supplement to the 1962 agreement.",
+      "zh": "PUB 与柔佛州政府签约，在柔佛河上游兴建林木水库，作为 1962 年协议的补充。"
+    },
+    "detail": {
+      "en": "Singapore's sources describe it as an agreement supplementary to the 1962 agreement [S13, S14]; Malaysia's public broadcaster refers to the 1962 agreement and a supplementary agreement of 1990 [S20]. Johor owns the dam; PUB built it, paid for it and operates it [S13, S20]. The exact day of signing is not given in the sources read for this topic.",
+      "zh": "新加坡方面的来源称之为 1962 年协议的补充协议 [S13、S14]；马来西亚国营电台提到 1962 年协议和 1990 年的补充协议 [S20]。水坝属于柔佛；由 PUB 兴建、出资并运作 [S13、S20]。本主题读到的来源没有写明签约的具体日期。"
+    },
+    "sources": [
+      "S13",
+      "S14",
+      "S20"
+    ]
+  },
+  {
+    "id": "site-macritchie-reservoir",
+    "t": "1867",
+    "at": [
+      103.8326,
+      1.3436
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "MacRitchie Reservoir",
+      "zh": "麦里芝蓄水池"
+    },
+    "summary": {
+      "en": "Singapore's first reservoir, completed in 1867; named after the engineer James MacRitchie in 1922.",
+      "zh": "新加坡第一个蓄水池，1867 年建成；1922 年以工程师麦里芝命名。"
+    },
+    "sources": [
+      "S2",
+      "S28"
+    ]
+  },
+  {
+    "id": "site-lower-peirce-reservoir",
+    "t": "1920",
+    "at": [
+      103.8229,
+      1.3702
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Lower Peirce Reservoir",
+      "zh": "贝雅士蓄水池下段"
+    },
+    "summary": {
+      "en": "The second reservoir, first called Kallang River Reservoir; renamed Peirce in 1922 and Lower Peirce in 1975.",
+      "zh": "第二个蓄水池，原名加冷河蓄水池；1922 年改名贝雅士，1975 年改名贝雅士蓄水池下段。"
+    },
+    "sources": [
+      "S8",
+      "S4"
+    ]
+  },
+  {
+    "id": "site-upper-seletar-reservoir",
+    "t": "1920",
+    "at": [
+      103.8011,
+      1.4015
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Upper Seletar Reservoir",
+      "zh": "实里达蓄水池上段"
+    },
+    "summary": {
+      "en": "The third reservoir, Seletar, from 1920; enlarged in 1940 and 1967; renamed Upper Seletar in 1992.",
+      "zh": "第三个蓄水池实里达，1920 年起；1940 年和 1967 年两次扩建；1992 年改名实里达蓄水池上段。"
+    },
+    "sources": [
+      "S5",
+      "S3"
+    ]
+  },
+  {
+    "id": "site-upper-peirce-reservoir",
+    "t": "1975",
+    "at": [
+      103.8089,
+      1.3689
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Upper Peirce Reservoir",
+      "zh": "贝雅士蓄水池上段"
+    },
+    "summary": {
+      "en": "A higher dam upstream of Peirce Reservoir, completed in 1975.",
+      "zh": "在贝雅士蓄水池上游筑起更高的坝，1975 年建成。"
+    },
+    "sources": [
+      "S6"
+    ]
+  },
+  {
+    "id": "site-jurong-lake",
+    "t": "1971",
+    "at": [
+      103.7277,
+      1.3414
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Jurong Lake",
+      "zh": "裕廊湖"
+    },
+    "summary": {
+      "en": "Formed when the upper Jurong River was dammed in 1971.",
+      "zh": "1971 年在裕廊河上游筑坝形成。"
+    },
+    "sources": [
+      "S10"
+    ]
+  },
+  {
+    "id": "site-kranji-reservoir",
+    "t": "1975",
+    "at": [
+      103.7422,
+      1.4288
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Kranji Reservoir",
+      "zh": "克兰芝蓄水池"
+    },
+    "summary": {
+      "en": "A river mouth dammed under the Kranji–Pandan Water Scheme, completed in 1975.",
+      "zh": "按克兰芝—班丹水源计划在河口筑坝，1975 年完成。"
+    },
+    "sources": [
+      "S2",
+      "S11"
+    ]
+  },
+  {
+    "id": "site-pandan-reservoir",
+    "t": "1975",
+    "at": [
+      103.7414,
+      1.3139
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Pandan Reservoir",
+      "zh": "班丹蓄水池"
+    },
+    "summary": {
+      "en": "The swamps of the Pandan river mouth enclosed with an earthen dyke in 1974.",
+      "zh": "1974 年用土堤围住班丹河口的沼泽而成。"
+    },
+    "sources": [
+      "S9",
+      "S2"
+    ]
+  },
+  {
+    "id": "site-murai-reservoir",
+    "t": "1981",
+    "at": [
+      103.673,
+      1.4039
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Murai Reservoir",
+      "zh": "慕莱蓄水池"
+    },
+    "summary": {
+      "en": "One of the western rivers dammed between 1975 and 1981.",
+      "zh": "1975 年至 1981 年间筑坝的西部河流之一。"
+    },
+    "sources": [
+      "S11"
+    ]
+  },
+  {
+    "id": "site-poyan-reservoir",
+    "t": "1981",
+    "at": [
+      103.6667,
+      1.3782
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Poyan Reservoir",
+      "zh": "波扬蓄水池"
+    },
+    "summary": {
+      "en": "One of the western rivers dammed between 1975 and 1981.",
+      "zh": "1975 年至 1981 年间筑坝的西部河流之一。"
+    },
+    "sources": [
+      "S11"
+    ]
+  },
+  {
+    "id": "site-sarimbun-reservoir",
+    "t": "1981",
+    "at": [
+      103.6812,
+      1.4234
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Sarimbun Reservoir",
+      "zh": "莎琳汶蓄水池"
+    },
+    "summary": {
+      "en": "One of the western rivers dammed between 1975 and 1981.",
+      "zh": "1975 年至 1981 年间筑坝的西部河流之一。"
+    },
+    "sources": [
+      "S11"
+    ]
+  },
+  {
+    "id": "site-tengeh-reservoir",
+    "t": "1981",
+    "at": [
+      103.6416,
+      1.3504
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Tengeh Reservoir",
+      "zh": "登格蓄水池"
+    },
+    "summary": {
+      "en": "One of the western rivers dammed between 1975 and 1981.",
+      "zh": "1975 年至 1981 年间筑坝的西部河流之一。"
+    },
+    "sources": [
+      "S11",
+      "S28"
+    ]
+  },
+  {
+    "id": "site-lower-seletar-reservoir",
+    "t": "1986",
+    "at": [
+      103.8401,
+      1.4048
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Lower Seletar Reservoir",
+      "zh": "实里达蓄水池下段"
+    },
+    "summary": {
+      "en": "The mouth of the Seletar River dammed in 1986 (Sungei Seletar–Bedok Water Scheme).",
+      "zh": "1986 年在实里达河口筑坝而成（实里达河—勿洛水源计划）。"
+    },
+    "sources": [
+      "S3",
+      "S5"
+    ]
+  },
+  {
+    "id": "site-bedok-reservoir",
+    "t": "1986",
+    "at": [
+      103.9235,
+      1.3429
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Bedok Reservoir",
+      "zh": "勿洛蓄水池"
+    },
+    "summary": {
+      "en": "A former sand quarry turned into a reservoir, completed in 1986.",
+      "zh": "由采沙场改建的蓄水池，1986 年建成。"
+    },
+    "sources": [
+      "S7"
+    ]
+  },
+  {
+    "id": "site-pulau-tekong-reservoir",
+    "t": "2008",
+    "at": [
+      104.0421,
+      1.4144
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Pulau Tekong Reservoir",
+      "zh": "德光岛蓄水池"
+    },
+    "summary": {
+      "en": "The reservoir on the island of Pulau Tekong, one of the 17.",
+      "zh": "德光岛上的蓄水池，17 个之一。"
+    },
+    "sources": [
+      "S1"
+    ]
+  },
+  {
+    "id": "site-marina-reservoir",
+    "t": "2008-10-31",
+    "at": [
+      103.8665,
+      1.2871
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Marina Reservoir",
+      "zh": "滨海蓄水池"
+    },
+    "summary": {
+      "en": "The 15th reservoir and the first in the city centre, behind Marina Barrage (2008); fresh water from 2010.",
+      "zh": "第 15 个蓄水池，也是第一个位于市中心的蓄水池，在滨海堤坝之内（2008 年）；2010 年起成为淡水库。"
+    },
+    "sources": [
+      "S12"
+    ]
+  },
+  {
+    "id": "site-punggol-reservoir",
+    "t": "2011",
+    "at": [
+      103.8907,
+      1.406
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Punggol Reservoir",
+      "zh": "榜鹅蓄水池"
+    },
+    "summary": {
+      "en": "An estuary reservoir commissioned in 2011.",
+      "zh": "2011 年启用的河口蓄水池。"
+    },
+    "sources": [
+      "S2"
+    ]
+  },
+  {
+    "id": "site-serangoon-reservoir",
+    "t": "2011",
+    "at": [
+      103.9269,
+      1.4019
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Serangoon Reservoir",
+      "zh": "实龙岗蓄水池"
+    },
+    "summary": {
+      "en": "An estuary reservoir commissioned in 2011, bringing the number of reservoirs to 17.",
+      "zh": "2011 年启用的河口蓄水池，蓄水池总数由此达到 17 个。"
+    },
+    "sources": [
+      "S2",
+      "S1"
+    ]
+  },
+  {
+    "id": "site-linggiu-reservoir",
+    "t": "1993",
+    "at": [
+      103.7046,
+      1.9611
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Linggiu Reservoir",
+      "zh": "林木水库"
+    },
+    "summary": {
+      "en": "A reservoir on the upper Johor River in Johor, completed in 1993, that keeps enough water in the river for the intake downstream.",
+      "zh": "柔佛河上游的水库，1993 年建成，让下游取水点的河水保持充足。"
+    },
+    "sources": [
+      "S2",
+      "S14"
+    ]
+  },
+  {
+    "id": "site-linggiu-dam",
+    "t": "1993",
+    "at": [
+      103.6908,
+      1.9077
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Linggiu Dam",
+      "zh": "林木水坝"
+    },
+    "summary": {
+      "en": "Owned by Johor; built, paid for and operated by PUB under the 1990 agreement.",
+      "zh": "属于柔佛；按 1990 年协议由 PUB 兴建、出资和运作。"
+    },
+    "sources": [
+      "S13",
+      "S20"
+    ]
+  },
+  {
+    "id": "site-johor-river-waterworks",
+    "t": "1962-09-29",
+    "at": [
+      103.8744,
+      1.7284
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Johor River Waterworks",
+      "zh": "柔佛河水厂"
+    },
+    "summary": {
+      "en": "PUB's waterworks near Kota Tinggi, where water drawn from the Johor River is treated.",
+      "zh": "PUB 在哥打丁宜附近的水厂，从柔佛河取来的水在这里处理。"
+    },
+    "sources": [
+      "S13",
+      "S14"
+    ]
+  },
+  {
+    "id": "site-marina-barrage",
+    "t": "2008-10-31",
+    "at": [
+      103.8709,
+      1.2794
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Marina Barrage",
+      "zh": "滨海堤坝"
+    },
+    "summary": {
+      "en": "A dam across the Marina Channel, opened on 31 October 2008, that keeps the sea out of Marina Reservoir.",
+      "zh": "横跨滨海水道的堤坝，2008 年 10 月 31 日启用，把海水挡在滨海蓄水池之外。"
+    },
+    "sources": [
+      "S12"
+    ]
+  },
+  {
+    "id": "site-changi-newater",
+    "t": "2010-05",
+    "at": [
+      104.0017,
+      1.3139
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Changi NEWater Factory 1",
+      "zh": "樟宜第一新生水厂"
+    },
+    "summary": {
+      "en": "One of the two NEWater factories at Changi (2010; the second opened in 2017).",
+      "zh": "樟宜的两座新生水厂之一（2010 年；第二座 2017 年启用）。"
+    },
+    "sources": [
+      "S22",
+      "S25"
+    ]
+  },
+  {
+    "id": "site-keppel-marina-east-desalination",
+    "t": "2020",
+    "at": [
+      103.877,
+      1.2939
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Keppel Marina East Desalination Plant",
+      "zh": "吉宝滨海东海水淡化厂"
+    },
+    "summary": {
+      "en": "Opened in 2020; the first plant that can treat either seawater or water from Marina Reservoir.",
+      "zh": "2020 年启用；第一座既能处理海水、也能处理滨海蓄水池淡水的淡化厂。"
+    },
+    "sources": [
+      "S23",
+      "S28"
+    ]
+  },
+  {
+    "id": "site-tuas-south-desalination",
+    "t": "2013",
+    "at": [
+      103.6225,
+      1.3024
+    ],
+    "kind": "site",
+    "importance": 2,
+    "title": {
+      "en": "Tuas South Desalination Plant",
+      "zh": "大士南海水淡化厂"
+    },
+    "summary": {
+      "en": "Opened in 2013 (then called Tuaspring); Singapore's largest desalination plant.",
+      "zh": "2013 年启用（原名大士泉）；新加坡最大的海水淡化厂。"
+    },
+    "sources": [
+      "S23"
+    ]
+  },
+  {
+    "id": "site-jurong-island-desalination",
+    "t": "2022-04",
+    "at": [
+      103.6657,
+      1.2756
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Jurong Island Desalination Plant",
+      "zh": "裕廊岛海水淡化厂"
+    },
+    "summary": {
+      "en": "The fifth desalination plant, opened in April 2022.",
+      "zh": "第五座海水淡化厂，2022 年 4 月启用。"
+    },
+    "sources": [
+      "S23"
+    ]
+  },
+  {
+    "id": "site-chestnut-avenue-waterworks",
+    "t": "2024",
+    "at": [
+      103.7836,
+      1.3724
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Chestnut Avenue Waterworks",
+      "zh": "策士纳道水厂"
+    },
+    "summary": {
+      "en": "One of PUB's six waterworks, where reservoir water is made safe to drink.",
+      "zh": "PUB 的 6 座水厂之一，蓄水池的原水在这里处理成可饮用的水。"
+    },
+    "sources": [
+      "S32",
+      "S25"
+    ]
+  },
+  {
+    "id": "site-choa-chu-kang-waterworks",
+    "t": "2024",
+    "at": [
+      103.6752,
+      1.3442
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Choa Chu Kang Waterworks",
+      "zh": "蔡厝港水厂"
+    },
+    "summary": {
+      "en": "One of PUB's six waterworks, serving the west of the island.",
+      "zh": "PUB 的 6 座水厂之一，位于岛的西部。"
+    },
+    "sources": [
+      "S32",
+      "S25"
+    ]
+  },
+  {
+    "id": "site-lower-seletar-waterworks",
+    "t": "2024",
+    "at": [
+      103.8546,
+      1.4006
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Lower Seletar Waterworks",
+      "zh": "实里达下段水厂"
+    },
+    "summary": {
+      "en": "One of PUB's six waterworks, beside Lower Seletar Reservoir.",
+      "zh": "PUB 的 6 座水厂之一，在实里达蓄水池下段旁。"
+    },
+    "sources": [
+      "S32",
+      "S25"
+    ]
+  },
+  {
+    "id": "site-bedok-waterworks",
+    "t": "2024",
+    "at": [
+      103.9171,
+      1.3419
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Bedok Waterworks",
+      "zh": "勿洛水厂"
+    },
+    "summary": {
+      "en": "One of PUB's six waterworks, west of Bedok Reservoir.",
+      "zh": "PUB 的 6 座水厂之一，在勿洛蓄水池西边。"
+    },
+    "sources": [
+      "S32",
+      "S25"
+    ]
+  },
+  {
+    "id": "site-changi-wrp",
+    "t": "2008",
+    "at": [
+      104.0034,
+      1.3151
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Changi Water Reclamation Plant",
+      "zh": "樟宜再生水厂"
+    },
+    "summary": {
+      "en": "Where used water from the Deep Tunnel Sewerage System is treated; NEWater is made next to it.",
+      "zh": "深隧道排污系统送来的用过的水在这里处理；旁边就是新生水厂。"
+    },
+    "sources": [
+      "S33",
+      "S25",
+      "S31"
+    ]
+  },
+  {
+    "id": "site-kranji-wrp",
+    "t": "2024",
+    "at": [
+      103.7589,
+      1.4279
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Kranji Water Reclamation Plant",
+      "zh": "克兰芝再生水厂"
+    },
+    "summary": {
+      "en": "One of the four plants where used water is treated before part of it becomes NEWater.",
+      "zh": "4 座再生水厂之一，用过的水在这里处理，其中一部分再制成新生水。"
+    },
+    "sources": [
+      "S25",
+      "S31"
+    ]
+  },
+  {
+    "id": "site-ulu-pandan-wrp",
+    "t": "2024",
+    "at": [
+      103.7535,
+      1.3326
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Ulu Pandan Water Reclamation Plant",
+      "zh": "乌鲁班丹再生水厂"
+    },
+    "summary": {
+      "en": "One of the four plants where used water is treated before part of it becomes NEWater.",
+      "zh": "4 座再生水厂之一，用过的水在这里处理，其中一部分再制成新生水。"
+    },
+    "sources": [
+      "S25",
+      "S31"
+    ]
+  },
+  {
+    "id": "site-jurong-wrp",
+    "t": "2024",
+    "at": [
+      103.685,
+      1.3146
+    ],
+    "kind": "site",
+    "importance": 1,
+    "title": {
+      "en": "Jurong Water Reclamation Plant",
+      "zh": "裕廊再生水厂"
+    },
+    "summary": {
+      "en": "One of the four plants where used water is treated.",
+      "zh": "4 座再生水厂之一，用过的水在这里处理。"
+    },
+    "sources": [
+      "S25",
+      "S31"
+    ]
+  }
+]

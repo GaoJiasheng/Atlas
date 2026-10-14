@@ -1,0 +1,103 @@
+{
+  "terms": [
+    {
+      "id": "four-national-taps",
+      "term": { "en": "Four National Taps", "zh": "四大水喉" },
+      "definition": {
+        "en": "PUB's name for Singapore's four sources of water: water from local catchments, imported water, NEWater and desalinated water.",
+        "zh": "公用事业局（PUB）对新加坡四个水源的统称：本地集水区的水、进口水、新生水和淡化海水。"
+      },
+      "see": ["catchment", "newater", "desalination"]
+    },
+    {
+      "id": "catchment",
+      "term": { "en": "catchment", "zh": "集水区" },
+      "definition": {
+        "en": "Land where the rain that falls is collected and led by streams, drains and canals into the same reservoir.",
+        "zh": "一片土地上落下的雨水，经溪流、水沟和运河被引进同一个蓄水池，这片土地就是那个蓄水池的集水区。"
+      },
+      "see": ["reservoir"]
+    },
+    {
+      "id": "reservoir",
+      "term": { "en": "reservoir", "zh": "蓄水池" },
+      "definition": {
+        "en": "A body of water held back by a dam or barrage and stored until it is treated for use. Its water is raw water, not yet safe to drink.",
+        "zh": "被水坝或堤坝拦住、储存起来等待处理的一片水。里面是原水，还不能直接饮用。"
+      },
+      "see": ["catchment", "dam", "waterworks"]
+    },
+    {
+      "id": "dam",
+      "term": { "en": "dam", "zh": "水坝" },
+      "definition": {
+        "en": "A wall of earth or concrete built across a valley or a river so that the water behind it rises and is stored.",
+        "zh": "横筑在山谷或河上的土墙或混凝土墙，让后面的水位升高、把水存起来。"
+      },
+      "see": ["reservoir", "estuary-reservoir"]
+    },
+    {
+      "id": "estuary-reservoir",
+      "term": { "en": "estuary reservoir", "zh": "河口蓄水池" },
+      "definition": {
+        "en": "A reservoir made by closing the mouth of a river where it meets the sea with a dam or barrage, so that the river water behind it turns fresh.",
+        "zh": "在河流入海的河口筑坝或堤坝把它封住，坝内的河水慢慢变成淡水，形成的蓄水池。"
+      },
+      "see": ["dam", "reservoir"]
+    },
+    {
+      "id": "waterworks",
+      "term": { "en": "waterworks", "zh": "水厂" },
+      "definition": {
+        "en": "A plant that treats raw water from reservoirs or rivers so that it is safe to drink, then sends it into the pipes that supply homes.",
+        "zh": "把蓄水池或河里的原水处理成可以饮用的自来水、再送进供水管网的工厂。"
+      },
+      "see": ["reservoir"]
+    },
+    {
+      "id": "water-agreement",
+      "term": { "en": "water agreement", "zh": "水供协议" },
+      "definition": {
+        "en": "An agreement between the governments in Singapore and Johor on how much water Singapore may draw from rivers in Johor, for how long and on what terms.",
+        "zh": "新加坡与柔佛两地政府之间的协议，规定新加坡可以从柔佛的河流取多少水、取多少年、按什么条件。"
+      },
+      "see": ["four-national-taps"]
+    },
+    {
+      "id": "used-water",
+      "term": { "en": "used water", "zh": "用过的水" },
+      "definition": {
+        "en": "PUB's term for water that has been used in homes, offices and factories and goes down the drain into the sewers.",
+        "zh": "公用事业局对在家庭、办公室和工厂用过、流进污水管的水的说法。"
+      },
+      "see": ["newater"]
+    },
+    {
+      "id": "newater",
+      "term": { "en": "NEWater", "zh": "新生水" },
+      "definition": {
+        "en": "High-grade reclaimed water: used water that has been treated and then purified again with membranes and ultraviolet light.",
+        "zh": "高纯度的再生水：用过的水先经处理，再用膜和紫外线进一步净化而成。"
+      },
+      "see": ["used-water", "membrane"]
+    },
+    {
+      "id": "membrane",
+      "term": { "en": "membrane", "zh": "膜" },
+      "definition": {
+        "en": "A thin sheet with extremely small pores. Water is pushed through it, and salts and other dissolved substances are held back.",
+        "zh": "布满极小孔洞的薄层。把水压过去，盐和其他溶解在水里的物质就被挡在另一边。"
+      },
+      "see": ["newater", "desalination"]
+    },
+    {
+      "id": "desalination",
+      "term": { "en": "desalination", "zh": "海水淡化" },
+      "definition": {
+        "en": "Removing the salt from seawater to make fresh water. Singapore's plants push seawater through membranes.",
+        "zh": "去掉海水里的盐、得到淡水。新加坡的淡化厂把海水压过膜来做到这一点。"
+      },
+      "see": ["membrane", "four-national-taps"]
+    }
+  ]
+}

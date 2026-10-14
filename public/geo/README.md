@@ -18,3 +18,7 @@ Rings that cross the antimeridian are made longitude-continuous at build time (`
 Natural Earth data is in the **public domain** (see https://www.naturalearthdata.com/about/terms-of-use/). No attribution is required; we credit it here anyway.
 
 Country names and boundaries are modern (de facto, as drawn by Natural Earth) and are a reference layer only; historical control areas come from each topic's `data/control.json`.
+
+## `land-sg.json` (island-scale basemap, topic `four-taps`)
+
+Not from Natural Earth. Built by `pnpm tsx scripts/geo/lib/local-land.ts --topic four-taps` (recipe `pipeline.localLand` in `scripts/geo/four-taps/sources.json`, provenance in `scripts/geo/four-taps/SOURCES-GEO.md`): the URA Master Plan 2019 Planning Area Boundary (No Sea) dissolved into one land, with the URA Master Plan 2019 Land Use `WATERBODY` polygons of rivers, canals, bays and estuary reservoirs cut out; a `mask` geometry hides the Natural Earth 1:10m Singapore polygon under it. Contains information from Master Plan 2019 Planning Area Boundary (No Sea) and Master Plan 2019 Land Use layer accessed on 14 October 2026 from data.gov.sg (Urban Redevelopment Authority), made available under the terms of the [Singapore Open Data Licence version 1.0](https://data.gov.sg/open-data-licence). Which water bodies stay land is chosen with OpenStreetMap reservoir outlines (© OpenStreetMap contributors, ODbL 1.0). Drawn only for topics with `basemap: { local: land-sg }` (docs/06).

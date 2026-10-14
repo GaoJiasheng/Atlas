@@ -1,0 +1,2190 @@
+{
+  "_comment": "Island-scale topic (docs/24 §2.4, §4.6 C1/C1b): no sovereign base; control areas are today's reservoir water surfaces (URA MP2019 land use, named via OpenStreetMap), filtered per keyframe by the year each reservoir was completed (PUB / NLB). Expansions before today's outline and vanished water bodies are known gaps, never drawn.",
+  "datasets": {
+    "ura-landuse": {
+      "ref": "G1",
+      "title": "Master Plan 2019 Land Use layer",
+      "url": "https://data.gov.sg/datasets/d_90d86daa5bfaa371668b84fa5f01424f/view",
+      "datagov": "d_90d86daa5bfaa371668b84fa5f01424f",
+      "file": "ura-mp2019-landuse.geojson",
+      "page": "https://data.gov.sg/datasets/d_90d86daa5bfaa371668b84fa5f01424f/view",
+      "author": "Urban Redevelopment Authority (URA), via data.gov.sg",
+      "license": "Singapore Open Data Licence v1.0",
+      "role": "today's reservoir water surfaces (LU_DESC = RESERVOIR), the control areas of every keyframe"
+    },
+    "ura-planning-area": {
+      "ref": "G2",
+      "title": "Master Plan 2019 Planning Area Boundary (No Sea)",
+      "url": "https://data.gov.sg/datasets/d_4765db0e87b9c86336792efe8a1f7a66/view",
+      "datagov": "d_4765db0e87b9c86336792efe8a1f7a66",
+      "file": "ura-mp2019-planning-area.geojson",
+      "page": "https://data.gov.sg/datasets/d_4765db0e87b9c86336792efe8a1f7a66/view",
+      "author": "Urban Redevelopment Authority (URA), via data.gov.sg",
+      "license": "Singapore Open Data Licence v1.0",
+      "role": "dissolved into today's island outline: the local basemap public/geo/land-sg.json (local-land.ts)"
+    },
+    "osm-water": {
+      "ref": "G3",
+      "title": "OpenStreetMap: named reservoirs of Singapore and Linggiu Reservoir (Johor), Overpass export",
+      "url": "https://www.openstreetmap.org/",
+      "overpass": "[out:json][timeout:600];(nwr[\"natural\"=\"water\"][\"name\"~\"Reservoir|Jurong Lake\",i](1.15,103.55,1.48,104.10);nwr[\"landuse\"=\"reservoir\"][\"name\"~\"Reservoir\",i](1.15,103.55,1.48,104.10);rel(4461621););out geom;",
+      "file": "osm-water.geojson",
+      "page": "https://www.openstreetmap.org/copyright",
+      "author": "© OpenStreetMap contributors",
+      "license": "ODbL 1.0",
+      "role": "reservoir names and outlines that select the URA waterbody parcels of each reservoir; Linggiu Reservoir's outline (outside the URA data)"
+    },
+    "osm-lines": {
+      "ref": "G4",
+      "title": "OpenStreetMap: Johor River, water pipelines and the Johor–Singapore Causeway, Overpass export",
+      "url": "https://www.openstreetmap.org/",
+      "overpass": "[out:json][timeout:600];(way[\"waterway\"=\"river\"][\"name\"~\"Johor\",i](1.40,103.60,2.10,104.30);way[\"man_made\"=\"pipeline\"][\"substance\"=\"water\"](1.25,103.55,2.00,104.10);way[\"name\"~\"Causeway\",i][\"highway\"](1.43,103.75,1.47,103.79););out geom;",
+      "file": "osm-lines.geojson",
+      "page": "https://www.openstreetmap.org/copyright",
+      "author": "© OpenStreetMap contributors",
+      "license": "ODbL 1.0",
+      "role": "waypoints of the pipeline routes in movements.json (data/SOURCES.md, Movement routes)"
+    },
+    "osm-sites": {
+      "ref": "G5",
+      "title": "OpenStreetMap: waterworks, water reclamation, NEWater and desalination plants, Overpass export",
+      "url": "https://www.openstreetmap.org/",
+      "overpass": "[out:json][timeout:600];(nwr[\"man_made\"~\"^(water_works|wastewater_plant)$\"](1.15,103.55,1.48,104.10);nwr[\"name\"~\"NEWater|Desalination|Waterworks|Water Works|Water Reclamation|Loji Air|Linggiu\",i](1.10,103.40,2.20,104.40););out center tags;",
+      "file": "osm-sites.geojson",
+      "page": "https://www.openstreetmap.org/copyright",
+      "author": "© OpenStreetMap contributors",
+      "license": "ODbL 1.0",
+      "role": "positions of the site events (events.json `at`)"
+    }
+  },
+  "keyframes": [
+    {
+      "id": "K1",
+      "t": "1867",
+      "method": "MacRitchie Reservoir (then the Impounding Reservoir), completed 1867: today's water surface of the reservoir (URA MP2019 waterbody parcels named by OpenStreetMap).",
+      "steps": [
+        {
+          "note": "MacRitchie Reservoir (completed 1867, PUB [S2]; enlargements not drawn); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "MacRitchie Reservoir",
+            "zh": "麦里芝蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^MacRitchie Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        }
+      ],
+      "checks": [
+        {
+          "name": "Singapore island",
+          "center": [
+            103.82,
+            1.355
+          ],
+          "zoom": 10.4,
+          "source": "osm-water"
+        }
+      ]
+    },
+    {
+      "id": "K2",
+      "t": "1920",
+      "method": "The first three reservoirs: MacRitchie, Peirce (today Lower Peirce) and Seletar (today Upper Seletar, shown with its later, larger outline).",
+      "steps": [
+        {
+          "note": "MacRitchie Reservoir (completed 1867, PUB [S2]; enlargements not drawn); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "MacRitchie Reservoir",
+            "zh": "麦里芝蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^MacRitchie Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Lower Peirce Reservoir (Singapore's second reservoir (Kallang River Reservoir, named Peirce 1922), before Seletar (1920), PUB / NHB [S5, S8]; exact completion year not verified); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Lower Peirce Reservoir",
+            "zh": "贝雅士蓄水池下段"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Lower Peirce Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Upper Seletar Reservoir (Seletar Reservoir, 1920, PUB [S5]; expanded 1940 and 1967–69, today's larger outline drawn); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Upper Seletar Reservoir",
+            "zh": "实里达蓄水池上段"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Upper Seletar Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        }
+      ],
+      "checks": [
+        {
+          "name": "Singapore island",
+          "center": [
+            103.82,
+            1.355
+          ],
+          "zoom": 10.4,
+          "source": "osm-water"
+        }
+      ]
+    },
+    {
+      "id": "K3",
+      "t": "1975",
+      "method": "Upper Peirce (1975), the Kranji–Pandan scheme (1975) and Jurong Lake (dammed 1971) added to K2.",
+      "steps": [
+        {
+          "note": "MacRitchie Reservoir (completed 1867, PUB [S2]; enlargements not drawn); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "MacRitchie Reservoir",
+            "zh": "麦里芝蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^MacRitchie Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Lower Peirce Reservoir (Singapore's second reservoir (Kallang River Reservoir, named Peirce 1922), before Seletar (1920), PUB / NHB [S5, S8]; exact completion year not verified); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Lower Peirce Reservoir",
+            "zh": "贝雅士蓄水池下段"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Lower Peirce Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Upper Seletar Reservoir (Seletar Reservoir, 1920, PUB [S5]; expanded 1940 and 1967–69, today's larger outline drawn); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Upper Seletar Reservoir",
+            "zh": "实里达蓄水池上段"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Upper Seletar Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Jurong Lake (upper Jurong River dammed 1971, NHB [S10]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Jurong Lake",
+            "zh": "裕廊湖"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Jurong Lake$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Upper Peirce Reservoir (completed 1975, PUB [S6]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Upper Peirce Reservoir",
+            "zh": "贝雅士蓄水池上段"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Upper Peirce Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Kranji Reservoir (Kranji–Pandan scheme completed 1975, PUB [S2]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Kranji Reservoir",
+            "zh": "克兰芝蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Kranji Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Pandan Reservoir (Kranji–Pandan scheme 1975, PUB [S2]; dyke 1974, NHB [S9]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Pandan Reservoir",
+            "zh": "班丹蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Pandan Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        }
+      ],
+      "checks": [
+        {
+          "name": "Singapore island",
+          "center": [
+            103.82,
+            1.355
+          ],
+          "zoom": 10.4,
+          "source": "osm-water"
+        }
+      ]
+    },
+    {
+      "id": "K4",
+      "t": "1986",
+      "method": "The western reservoirs Murai, Poyan, Sarimbun and Tengeh (dammed 1975–1981) and the Sungei Seletar–Bedok scheme (Lower Seletar, Bedok; 1986) added to K3.",
+      "steps": [
+        {
+          "note": "MacRitchie Reservoir (completed 1867, PUB [S2]; enlargements not drawn); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "MacRitchie Reservoir",
+            "zh": "麦里芝蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^MacRitchie Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Lower Peirce Reservoir (Singapore's second reservoir (Kallang River Reservoir, named Peirce 1922), before Seletar (1920), PUB / NHB [S5, S8]; exact completion year not verified); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Lower Peirce Reservoir",
+            "zh": "贝雅士蓄水池下段"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Lower Peirce Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Upper Seletar Reservoir (Seletar Reservoir, 1920, PUB [S5]; expanded 1940 and 1967–69, today's larger outline drawn); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Upper Seletar Reservoir",
+            "zh": "实里达蓄水池上段"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Upper Seletar Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Jurong Lake (upper Jurong River dammed 1971, NHB [S10]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Jurong Lake",
+            "zh": "裕廊湖"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Jurong Lake$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Upper Peirce Reservoir (completed 1975, PUB [S6]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Upper Peirce Reservoir",
+            "zh": "贝雅士蓄水池上段"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Upper Peirce Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Kranji Reservoir (Kranji–Pandan scheme completed 1975, PUB [S2]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Kranji Reservoir",
+            "zh": "克兰芝蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Kranji Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Pandan Reservoir (Kranji–Pandan scheme 1975, PUB [S2]; dyke 1974, NHB [S9]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Pandan Reservoir",
+            "zh": "班丹蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Pandan Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Murai Reservoir (dammed between 1975 and 1981, SG101 [S11]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Murai Reservoir",
+            "zh": "慕莱蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Murai Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Poyan Reservoir (dammed between 1975 and 1981, SG101 [S11]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Poyan Reservoir",
+            "zh": "波扬蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Poyan Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Sarimbun Reservoir (dammed between 1975 and 1981, SG101 [S11]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Sarimbun Reservoir",
+            "zh": "莎琳汶蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Sarimbun Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Tengeh Reservoir (dammed between 1975 and 1981, SG101 [S11]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Tengeh Reservoir",
+            "zh": "登格蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Tengeh Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Lower Seletar Reservoir (Sungei Seletar–Bedok scheme completed 1986, PUB [S3]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Lower Seletar Reservoir",
+            "zh": "实里达蓄水池下段"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Lower Seletar Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Bedok Reservoir (completed 1986, PUB [S7]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Bedok Reservoir",
+            "zh": "勿洛蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Bedok Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        }
+      ],
+      "checks": [
+        {
+          "name": "Singapore island",
+          "center": [
+            103.82,
+            1.355
+          ],
+          "zoom": 10.4,
+          "source": "osm-water"
+        }
+      ]
+    },
+    {
+      "id": "K5",
+      "t": "1993",
+      "method": "Linggiu Reservoir in Johor (completed 1993, OpenStreetMap outline), holder imported water, added to K4.",
+      "steps": [
+        {
+          "note": "MacRitchie Reservoir (completed 1867, PUB [S2]; enlargements not drawn); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "MacRitchie Reservoir",
+            "zh": "麦里芝蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^MacRitchie Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Lower Peirce Reservoir (Singapore's second reservoir (Kallang River Reservoir, named Peirce 1922), before Seletar (1920), PUB / NHB [S5, S8]; exact completion year not verified); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Lower Peirce Reservoir",
+            "zh": "贝雅士蓄水池下段"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Lower Peirce Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Upper Seletar Reservoir (Seletar Reservoir, 1920, PUB [S5]; expanded 1940 and 1967–69, today's larger outline drawn); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Upper Seletar Reservoir",
+            "zh": "实里达蓄水池上段"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Upper Seletar Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Jurong Lake (upper Jurong River dammed 1971, NHB [S10]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Jurong Lake",
+            "zh": "裕廊湖"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Jurong Lake$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Upper Peirce Reservoir (completed 1975, PUB [S6]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Upper Peirce Reservoir",
+            "zh": "贝雅士蓄水池上段"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Upper Peirce Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Kranji Reservoir (Kranji–Pandan scheme completed 1975, PUB [S2]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Kranji Reservoir",
+            "zh": "克兰芝蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Kranji Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Pandan Reservoir (Kranji–Pandan scheme 1975, PUB [S2]; dyke 1974, NHB [S9]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Pandan Reservoir",
+            "zh": "班丹蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Pandan Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Murai Reservoir (dammed between 1975 and 1981, SG101 [S11]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Murai Reservoir",
+            "zh": "慕莱蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Murai Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Poyan Reservoir (dammed between 1975 and 1981, SG101 [S11]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Poyan Reservoir",
+            "zh": "波扬蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Poyan Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Sarimbun Reservoir (dammed between 1975 and 1981, SG101 [S11]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Sarimbun Reservoir",
+            "zh": "莎琳汶蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Sarimbun Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Tengeh Reservoir (dammed between 1975 and 1981, SG101 [S11]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Tengeh Reservoir",
+            "zh": "登格蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Tengeh Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Lower Seletar Reservoir (Sungei Seletar–Bedok scheme completed 1986, PUB [S3]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Lower Seletar Reservoir",
+            "zh": "实里达蓄水池下段"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Lower Seletar Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Bedok Reservoir (completed 1986, PUB [S7]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Bedok Reservoir",
+            "zh": "勿洛蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Bedok Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Linggiu Reservoir (completed 1993, PUB [S2]); OpenStreetMap outline (no URA data outside Singapore)",
+          "holder": "imported-water",
+          "label": {
+            "en": "Linggiu Reservoir",
+            "zh": "林木水库"
+          },
+          "src": [
+            "G3"
+          ],
+          "from": {
+            "geojson": "osm-water",
+            "match": {
+              "name": "^Tasik Linggiu$"
+            }
+          }
+        }
+      ],
+      "checks": [
+        {
+          "name": "Singapore island",
+          "center": [
+            103.82,
+            1.355
+          ],
+          "zoom": 10.4,
+          "source": "osm-water"
+        },
+        {
+          "name": "Johor River and Linggiu",
+          "center": [
+            103.78,
+            1.72
+          ],
+          "zoom": 8.9,
+          "source": "osm-water"
+        }
+      ]
+    },
+    {
+      "id": "K6",
+      "t": "2008-10-31",
+      "method": "Marina Reservoir behind Marina Barrage (opened 31 October 2008) and Pulau Tekong Reservoir (one of the 14 before Marina; year not verified) added to K5.",
+      "steps": [
+        {
+          "note": "MacRitchie Reservoir (completed 1867, PUB [S2]; enlargements not drawn); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "MacRitchie Reservoir",
+            "zh": "麦里芝蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^MacRitchie Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Lower Peirce Reservoir (Singapore's second reservoir (Kallang River Reservoir, named Peirce 1922), before Seletar (1920), PUB / NHB [S5, S8]; exact completion year not verified); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Lower Peirce Reservoir",
+            "zh": "贝雅士蓄水池下段"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Lower Peirce Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Upper Seletar Reservoir (Seletar Reservoir, 1920, PUB [S5]; expanded 1940 and 1967–69, today's larger outline drawn); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Upper Seletar Reservoir",
+            "zh": "实里达蓄水池上段"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Upper Seletar Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Jurong Lake (upper Jurong River dammed 1971, NHB [S10]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Jurong Lake",
+            "zh": "裕廊湖"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Jurong Lake$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Upper Peirce Reservoir (completed 1975, PUB [S6]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Upper Peirce Reservoir",
+            "zh": "贝雅士蓄水池上段"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Upper Peirce Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Kranji Reservoir (Kranji–Pandan scheme completed 1975, PUB [S2]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Kranji Reservoir",
+            "zh": "克兰芝蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Kranji Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Pandan Reservoir (Kranji–Pandan scheme 1975, PUB [S2]; dyke 1974, NHB [S9]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Pandan Reservoir",
+            "zh": "班丹蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Pandan Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Murai Reservoir (dammed between 1975 and 1981, SG101 [S11]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Murai Reservoir",
+            "zh": "慕莱蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Murai Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Poyan Reservoir (dammed between 1975 and 1981, SG101 [S11]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Poyan Reservoir",
+            "zh": "波扬蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Poyan Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Sarimbun Reservoir (dammed between 1975 and 1981, SG101 [S11]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Sarimbun Reservoir",
+            "zh": "莎琳汶蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Sarimbun Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Tengeh Reservoir (dammed between 1975 and 1981, SG101 [S11]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Tengeh Reservoir",
+            "zh": "登格蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Tengeh Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Lower Seletar Reservoir (Sungei Seletar–Bedok scheme completed 1986, PUB [S3]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Lower Seletar Reservoir",
+            "zh": "实里达蓄水池下段"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Lower Seletar Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Bedok Reservoir (completed 1986, PUB [S7]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Bedok Reservoir",
+            "zh": "勿洛蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Bedok Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Linggiu Reservoir (completed 1993, PUB [S2]); OpenStreetMap outline (no URA data outside Singapore)",
+          "holder": "imported-water",
+          "label": {
+            "en": "Linggiu Reservoir",
+            "zh": "林木水库"
+          },
+          "src": [
+            "G3"
+          ],
+          "from": {
+            "geojson": "osm-water",
+            "match": {
+              "name": "^Tasik Linggiu$"
+            }
+          }
+        },
+        {
+          "note": "Pulau Tekong Reservoir (one of the 14 reservoirs before Marina, the 15th (2008) [S12]; completion year not verified, so first drawn in 2008); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Pulau Tekong Reservoir",
+            "zh": "德光岛蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Pulau Tekong Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Marina Reservoir (Marina Barrage opened 31 October 2008, the 15th reservoir, PUB [S12]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Marina Reservoir",
+            "zh": "滨海蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Marina Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        }
+      ],
+      "checks": [
+        {
+          "name": "Singapore island",
+          "center": [
+            103.82,
+            1.355
+          ],
+          "zoom": 10.4,
+          "source": "osm-water"
+        },
+        {
+          "name": "Johor River and Linggiu",
+          "center": [
+            103.78,
+            1.72
+          ],
+          "zoom": 8.9,
+          "source": "osm-water"
+        }
+      ]
+    },
+    {
+      "id": "K7",
+      "t": "2011",
+      "method": "Punggol and Serangoon Reservoirs (commissioned 2011): all 17 reservoirs plus Linggiu.",
+      "steps": [
+        {
+          "note": "MacRitchie Reservoir (completed 1867, PUB [S2]; enlargements not drawn); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "MacRitchie Reservoir",
+            "zh": "麦里芝蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^MacRitchie Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Lower Peirce Reservoir (Singapore's second reservoir (Kallang River Reservoir, named Peirce 1922), before Seletar (1920), PUB / NHB [S5, S8]; exact completion year not verified); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Lower Peirce Reservoir",
+            "zh": "贝雅士蓄水池下段"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Lower Peirce Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Upper Seletar Reservoir (Seletar Reservoir, 1920, PUB [S5]; expanded 1940 and 1967–69, today's larger outline drawn); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Upper Seletar Reservoir",
+            "zh": "实里达蓄水池上段"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Upper Seletar Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Jurong Lake (upper Jurong River dammed 1971, NHB [S10]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Jurong Lake",
+            "zh": "裕廊湖"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Jurong Lake$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Upper Peirce Reservoir (completed 1975, PUB [S6]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Upper Peirce Reservoir",
+            "zh": "贝雅士蓄水池上段"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Upper Peirce Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Kranji Reservoir (Kranji–Pandan scheme completed 1975, PUB [S2]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Kranji Reservoir",
+            "zh": "克兰芝蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Kranji Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Pandan Reservoir (Kranji–Pandan scheme 1975, PUB [S2]; dyke 1974, NHB [S9]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Pandan Reservoir",
+            "zh": "班丹蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Pandan Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Murai Reservoir (dammed between 1975 and 1981, SG101 [S11]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Murai Reservoir",
+            "zh": "慕莱蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Murai Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Poyan Reservoir (dammed between 1975 and 1981, SG101 [S11]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Poyan Reservoir",
+            "zh": "波扬蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Poyan Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Sarimbun Reservoir (dammed between 1975 and 1981, SG101 [S11]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Sarimbun Reservoir",
+            "zh": "莎琳汶蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Sarimbun Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Tengeh Reservoir (dammed between 1975 and 1981, SG101 [S11]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Tengeh Reservoir",
+            "zh": "登格蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Tengeh Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Lower Seletar Reservoir (Sungei Seletar–Bedok scheme completed 1986, PUB [S3]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Lower Seletar Reservoir",
+            "zh": "实里达蓄水池下段"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Lower Seletar Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Bedok Reservoir (completed 1986, PUB [S7]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Bedok Reservoir",
+            "zh": "勿洛蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Bedok Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Linggiu Reservoir (completed 1993, PUB [S2]); OpenStreetMap outline (no URA data outside Singapore)",
+          "holder": "imported-water",
+          "label": {
+            "en": "Linggiu Reservoir",
+            "zh": "林木水库"
+          },
+          "src": [
+            "G3"
+          ],
+          "from": {
+            "geojson": "osm-water",
+            "match": {
+              "name": "^Tasik Linggiu$"
+            }
+          }
+        },
+        {
+          "note": "Pulau Tekong Reservoir (one of the 14 reservoirs before Marina, the 15th (2008) [S12]; completion year not verified, so first drawn in 2008); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Pulau Tekong Reservoir",
+            "zh": "德光岛蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Pulau Tekong Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Marina Reservoir (Marina Barrage opened 31 October 2008, the 15th reservoir, PUB [S12]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Marina Reservoir",
+            "zh": "滨海蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Marina Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Punggol Reservoir (commissioned 2011, PUB [S2]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Punggol Reservoir",
+            "zh": "榜鹅蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Punggol Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        },
+        {
+          "note": "Serangoon Reservoir (commissioned 2011, PUB [S2]); URA MP2019 waterbody parcels lying mostly inside the OpenStreetMap outline",
+          "holder": "local-catchment",
+          "label": {
+            "en": "Serangoon Reservoir",
+            "zh": "实龙岗蓄水池"
+          },
+          "src": [
+            "G1",
+            "G3"
+          ],
+          "from": {
+            "overlap": {
+              "geojson": "ura-landuse",
+              "where": {
+                "LU_DESC": "WATERBODY"
+              }
+            },
+            "within": {
+              "geojson": "osm-water",
+              "match": {
+                "name": "^Serangoon Reservoir$"
+              }
+            },
+            "minShare": 0.5
+          }
+        }
+      ],
+      "checks": [
+        {
+          "name": "Singapore island",
+          "center": [
+            103.82,
+            1.355
+          ],
+          "zoom": 10.4,
+          "source": "osm-water"
+        },
+        {
+          "name": "Johor River and Linggiu",
+          "center": [
+            103.78,
+            1.72
+          ],
+          "zoom": 8.9,
+          "source": "osm-water"
+        }
+      ]
+    }
+  ],
+  "pipeline": {
+    "plannedKeyframes": 7,
+    "budgetMB": 0.1,
+    "focus": [
+      [
+        103.3,
+        1.1,
+        104.4,
+        2.2
+      ]
+    ],
+    "fineStartKm": 0.01,
+    "fineStepKm": 0.005,
+    "coarseKm": 0.05,
+    "quantization": 100000,
+    "islandsKm2": {
+      "focus": 0.01,
+      "coarse": 0.01
+    },
+    "compose": {
+      "lightM": 5,
+      "sliverKm2": 0.005
+    },
+    "clean": {
+      "snapDeg": 5e-05,
+      "sliverKm2": 0.005
+    },
+    "coast": {
+      "enabled": false,
+      "land": "public/geo/land-sg.json",
+      "detailBox": null,
+      "detailLand": null
+    },
+    "localLand": {
+      "id": "land-sg",
+      "dataset": "ura-planning-area",
+      "water": {
+        "dataset": "ura-landuse",
+        "where": {
+          "LU_DESC": "WATERBODY"
+        },
+        "minKm2": 0.02,
+        "keep": "osm-water",
+        "keepShare": 0.5,
+        "keepMatch": {
+          "name": "^(MacRitchie|Lower Peirce|Upper Peirce|Upper Seletar|Bedok|Pulau Tekong) Reservoir$|^Jurong Lake$"
+        }
+      },
+      "simplifyM": 5,
+      "minIslandKm2": 0.02,
+      "replaces": "public/geo/land-10m-sea.json",
+      "replaceBox": [
+        103.55,
+        1.15,
+        104.1,
+        1.48
+      ],
+      "maskBufferM": 400,
+      "budgetKB": 150
+    }
+  }
+}

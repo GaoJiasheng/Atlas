@@ -29,7 +29,7 @@ import { entityBlocAt, type TimeModel } from '../../lib/model';
 import type { SceneEvent } from '../../schema';
 import { sideAt, warStatusAt } from '../../lib/bloc';
 import { blocLabel } from '../../lib/blocLabels';
-import type { BlocLabels } from '../../../../content/schema/topic';
+import type { BasemapOptions, BlocLabels } from '../../../../content/schema/topic';
 import type { Playhead } from '../../lib/playhead';
 import { frameAt, type Frame } from '../../lib/frame';
 import { areaLabelPoint, metresPerPixel, pickWorldCopy, pointAlong, projectNearCentre, scaleBar, type LngLat } from '../../lib/geo';
@@ -52,6 +52,8 @@ export interface GeoControllerOptions {
   locale: Locale;
   /** The topic's own bloc names (`topic.blocLabels`); the UI strings when absent. */
   blocLabels?: BlocLabels;
+  /** The topic's island-scale land (`topic.basemap`): drawn above zoom 9, and a higher `maxZoom`. */
+  basemap?: BasemapOptions;
   onSelectEvent(id: string): void;
 }
 
@@ -143,6 +145,31 @@ function hiResLayers(tk: ThemeTokens): LayerSpecification[] {
     { id: HI.mask, type: 'fill', source: HI.src, minzoom: HI_MIN_ZOOM, filter: kind('frame'), paint: { 'fill-color': tk.water || '#dde2df', 'fill-opacity': fade, 'fill-antialias': false } },
     { id: HI.fill, type: 'fill', source: HI.src, minzoom: HI_MIN_ZOOM, filter: kind('land'), paint: { 'fill-color': tk.land || '#e1dbcc', 'fill-antialias': true } },
     { id: HI.edge, type: 'line', source: HI.src, minzoom: HI_MIN_ZOOM, filter: kind('coast'), paint: { 'line-color': tk['land-edge'] || 'rgba(42, 40, 36, 0.3)', 'line-width': 1.2, 'line-opacity': fade } },
+  ];
+}
+
+/**
+ * Island-scale land (`topic.basemap.local`, e.g. `public/geo/land-sg.json`
+ * from URA planning areas, scripts/geo/lib/local-land.ts): drawn above the
+ * 1:10m land from zoom 9.4, fully at 9.6. Its `mask` geometry (the coarse
+ * polygons it replaces, buffered) fades in in the water colour, its `land`
+ * is filled and stroked as the coast. Fetched once the map has loaded, only
+ * for topics that set it; the map may then zoom to `basemap.maxZoom`.
+ */
+const LOCAL = { src: 'ts-land-local', mask: 'ts-land-local-mask', fill: 'ts-land-local-fill', edge: 'ts-land-local-edge' } as const;
+const LOCAL_MIN_ZOOM = 9.4;
+/** A short fade: in between, two coastlines at half strength read as a ghosted double edge. */
+const LOCAL_FADE = 0.2;
+/** Default map zoom ceiling (world to one island); `basemap.maxZoom` raises it. */
+const MAX_ZOOM = 10;
+
+function localLandLayers(tk: ThemeTokens): LayerSpecification[] {
+  const fade: ExpressionSpecification = ['interpolate', ['linear'], ['zoom'], LOCAL_MIN_ZOOM, 0, LOCAL_MIN_ZOOM + LOCAL_FADE, 1];
+  const kind = (k: string): FilterSpecification => ['==', ['get', 'kind'], k];
+  return [
+    { id: LOCAL.mask, type: 'fill', source: LOCAL.src, minzoom: LOCAL_MIN_ZOOM, filter: kind('mask'), paint: { 'fill-color': tk.water || '#dde2df', 'fill-opacity': fade, 'fill-antialias': false } },
+    { id: LOCAL.fill, type: 'fill', source: LOCAL.src, minzoom: LOCAL_MIN_ZOOM, filter: kind('land'), paint: { 'fill-color': tk.land || '#e1dbcc', 'fill-opacity': fade, 'fill-antialias': true } },
+    { id: LOCAL.edge, type: 'line', source: LOCAL.src, minzoom: LOCAL_MIN_ZOOM, filter: kind('land'), paint: { 'line-color': tk['land-edge'] || 'rgba(42, 40, 36, 0.3)', 'line-width': 1.2, 'line-opacity': fade } },
   ];
 }
 
@@ -371,6 +398,8 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   let tokens = readThemeTokens();
   const landUrl = withBase('/geo/land-50m.json');
   const landHiUrl = withBase('/geo/land-10m-sea.json');
+  const localLand = options.basemap?.local ?? null;
+  const landLocalUrl = localLand ? withBase(`/geo/${localLand}.json`) : null;
   const countriesUrl = withBase('/geo/countries-50m.json');
   const bordersUrl = withBase('/geo/borders-50m.json');
   const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
@@ -391,7 +420,9 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   // The control fills: MapLibre's default tile simplification (0.375) leaves wedges at zoom 0-3 (BC, Brazil, Italy).
   for (const id of [SRC.prev, SRC.next]) style.sources[id] = { type: 'geojson', data: EMPTY, tolerance: 0.05 };
   style.sources[HI.src] = { type: 'geojson', data: EMPTY };
-  style.layers.splice(style.layers.findIndex((l) => l.id === BASE_LAYER_IDS.landEdge) + 1, 0, ...hiResLayers(tokens));
+  const regional = [...hiResLayers(tokens), ...(localLand ? localLandLayers(tokens) : [])];
+  if (localLand) style.sources[LOCAL.src] = { type: 'geojson', data: EMPTY };
+  style.layers.splice(style.layers.findIndex((l) => l.id === BASE_LAYER_IDS.landEdge) + 1, 0, ...regional);
   style.layers.push(...dataLayers(tokens));
 
   const initial = store.getState();
@@ -408,7 +439,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     dragRotate: false,
     pitchWithRotate: false,
     touchPitch: false,
-    maxZoom: 10,
+    maxZoom: options.basemap?.maxZoom ?? MAX_ZOOM,
     minZoom: 0.5,
     fadeDuration: 0,
     maxPitch: 60,
@@ -745,6 +776,8 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     const seen = new Set<string>();
     if (visible) {
       for (const mv of frame.movements) {
+        // A built line (`persist`) that is finished has no head.
+        if (mv.persisting) continue;
         const id = mv.m.movement.id;
         seen.add(id);
         let marker = arrows.get(id);
@@ -1218,6 +1251,22 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   };
   map.on('moveend', () => void ensureHiResLand());
 
+  /* ---------- island-scale land (topic.basemap.local; fetched once the map has loaded) ---------- */
+  const loadLocalLand = async () => {
+    if (!landLocalUrl || !localLand) return;
+    try {
+      const res = await fetch(landLocalUrl);
+      if (!res.ok) throw new Error(`${res.status} ${landLocalUrl}`);
+      const topo = (await res.json()) as Parameters<typeof topoFeature>[0];
+      if (destroyed) return;
+      const obj = (topo.objects as Record<string, Parameters<typeof topoFeature>[1]>)[localLand];
+      if (!obj) throw new Error(`${landLocalUrl} has no object "${localLand}"`);
+      source(LOCAL.src)?.setData(topoFeature(topo, obj) as FeatureCollection);
+    } catch (err) {
+      console.warn('[atlas] island-scale coastline unavailable:', err);
+    }
+  };
+
   /* ---------- camera ---------- */
   const applyCamera = (camera: GeoCamera, instant: boolean) => {
     const target = { center: camera.center, zoom: camera.zoom, pitch: camera.pitch ?? 0, bearing: camera.bearing ?? 0 };
@@ -1291,7 +1340,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     tokens = readThemeTokens();
     applyHatches();
     const next = baseStyle(tokens);
-    for (const layer of [...next.layers, ...hiResLayers(tokens), ...dataLayers(tokens)]) {
+    for (const layer of [...next.layers, ...hiResLayers(tokens), ...(localLand ? localLandLayers(tokens) : []), ...dataLayers(tokens)]) {
       if (!map.getLayer(layer.id) || !('paint' in layer) || !layer.paint) continue;
       for (const [key, value] of Object.entries(layer.paint)) {
         // Animated opacities (control crossfade, reference fade) and the dash are re-applied by render().
@@ -1317,6 +1366,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     // The theme may have changed while the style was loading.
     applyTheme();
     void ensureHiResLand();
+    void loadLocalLand();
     updateScale();
     leaders.relayout();
     const s = store.getState();

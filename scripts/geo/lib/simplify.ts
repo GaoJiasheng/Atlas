@@ -116,16 +116,17 @@ const BUDGET_MB = values.budget ? Number(values.budget) : config.budgetMB;
 const METHOD = values.method ?? config.method;
 const QUANTIZATION = values.quant ? Number(values.quant) : config.quantization;
 /**
- * Post-quantisation clean: vertices closer than SNAP_DEG (at least one grid cell,
- * and at least SNAP_MIN_DEG ≈ 0.5 km) are merged, and rings under SLIVER_KM2 km²
+ * Post-quantisation clean (`pipeline.clean`): vertices closer than `snapDeg` (at least one grid cell,
+ * and at least SNAP_MIN_DEG, ww2 0.005° ≈ 0.5 km) are merged, and rings under SLIVER_KM2 km² (ww2 1)
  * (collapsed holes, specks) dropped. Narrower necks and near-touching parts of a
  * ring (a 50 km border chord passing 300 m from a lake shore, ww1 Canada; the
  * Petsamo spike of Finland) cross once MapLibre's geojson-vt quantises them into
  * low-zoom tiles, and earcut then fills a stray wedge across the map.
  */
-const SNAP_MIN_DEG = 0.005;
-const SNAP_DEG = Math.max(360 / QUANTIZATION, SNAP_MIN_DEG);
-const SLIVER_KM2 = 1;
+const SNAP_MIN_DEG = config.clean.snapDeg;
+/** One quantisation grid cell of data spanning `extentDeg` (the larger side of its bbox), but at least SNAP_MIN_DEG (world data: 360° / 4e5 < 0.005°). */
+const snapDeg = (extentDeg: number) => Math.max(extentDeg / QUANTIZATION, SNAP_MIN_DEG);
+const SLIVER_KM2 = config.clean.sliverKm2;
 /** Cut control areas to the basemap land (`pipeline.coast.enabled`; `--no-coast` skips it). */
 const COAST = config.coast.enabled && !values['no-coast'];
 if (values.islands) [FOCUS_ISLAND_KM2 = FOCUS_ISLAND_KM2, COARSE_ISLAND_KM2 = COARSE_ISLAND_KM2] = values.islands.split(',').map(Number);
@@ -303,7 +304,9 @@ async function build(ids: string[], cuts: Cut[], fine: number, coarse: number, c
     const byId: Record<string, FeatureCollection> = {};
     for (const id of ids) {
       const raw = out[`${id}.json`];
-      byId[id] = raw ? (JSON.parse(raw.toString()) as FeatureCollection) : toFc([]);
+      const parsed = raw ? (JSON.parse(raw.toString()) as Partial<FeatureCollection>) : null;
+      // An empty part (a topic whose focus box covers everything) comes back as an empty GeometryCollection.
+      byId[id] = parsed && Array.isArray(parsed.features) ? (parsed as FeatureCollection) : toFc([]);
     }
     return byId;
   };
@@ -336,9 +339,20 @@ async function build(ids: string[], cuts: Cut[], fine: number, coarse: number, c
   // Quantisation can collapse a small hole into a zero-area or self-touching ring and
   // make a simplified ring cross itself; MapLibre's triangulation (earcut) then draws
   // stray wedges across the map (ww1: a band from the Pacific to Montreal). Clean the
-  // quantised topology once more (SNAP_DEG, SLIVER_KM2 above) and export again on the same grid.
+  // quantised topology once more (snapDeg, SLIVER_KM2 above) and export again on the same grid.
+  let [w, so, e, n] = [Infinity, Infinity, -Infinity, -Infinity];
+  for (const fc of Object.values(geojson))
+    for (const f of areaFeatures(fc))
+      for (const poly of f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.coordinates)
+        for (const [x = 0, y = 0] of poly[0] ?? []) {
+          w = Math.min(w, x);
+          e = Math.max(e, x);
+          so = Math.min(so, y);
+          n = Math.max(n, y);
+        }
+  const snap = snapDeg(Number.isFinite(w) ? Math.max(e - w, n - so) : 360);
   const out = await m.applyCommands(
-    `-i topo.json -clean snap-interval=${SNAP_DEG} target=* -filter-slivers min-area=${SLIVER_KM2}km2 target=* -o out.json format=topojson quantization=${QUANTIZATION} target=*`,
+    `-i topo.json -clean snap-interval=${snap} target=* -filter-slivers min-area=${SLIVER_KM2}km2 target=* -o out.json format=topojson quantization=${QUANTIZATION} target=*`,
     { 'topo.json': JSON.parse(quantised.toString()) as unknown },
   );
   const raw = out['out.json'] ?? Object.values(out)[0];

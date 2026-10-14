@@ -1,0 +1,9 @@
+{
+  "presets": [
+    { "id": "island", "label": { "en": "Island", "zh": "全岛" }, "camera": { "center": [103.82, 1.355], "zoom": 10.6 } },
+    { "id": "central-catchment", "label": { "en": "Central", "zh": "中央集水区" }, "camera": { "center": [103.81, 1.375], "zoom": 12 } },
+    { "id": "johor-river", "label": { "en": "Johor River", "zh": "柔佛河" }, "camera": { "center": [103.8, 1.62], "zoom": 9.3 } },
+    { "id": "marina", "label": { "en": "Marina", "zh": "滨海" }, "camera": { "center": [103.865, 1.292], "zoom": 12.6 } },
+    { "id": "west-coast", "label": { "en": "West coast", "zh": "西部海岸" }, "camera": { "center": [103.66, 1.31], "zoom": 11.6 } }
+  ]
+}

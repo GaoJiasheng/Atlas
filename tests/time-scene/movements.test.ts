@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { timeSceneGeoData } from '../../src/engines/time-scene/schema';
 import { buildTimeModel } from '../../src/engines/time-scene/lib/model';
-import { LINGER_OPACITY, frameAt } from '../../src/engines/time-scene/lib/frame';
+import { LINGER_OPACITY, PERSIST_OPACITY, frameAt } from '../../src/engines/time-scene/lib/frame';
 import { frameStats } from '../../src/engines/time-scene/lib/stats';
 import { lineLength, lineLengthKm, unwrapPath, unwrapPathCentred } from '../../src/engines/time-scene/lib/geo';
 import { toNumber } from '../../src/engines/time-scene/lib/time';
@@ -52,6 +52,38 @@ describe('antimeridian paths', () => {
     expect(out.map((p) => p[0])).toEqual([-190, -150]);
     // A path whose centre is already inside keeps its copy: Hitokappu is 147.7..202, centre 175.
     expect(unwrapPathCentred(HITOKAPPU).map((p) => p[0])).toEqual([147.7, 165, 179.5, 185, 195, 202]);
+  });
+});
+
+describe('persist (a built line: pipelines, docs/24 C2-lite)', () => {
+  const t = (d: string) => toNumber(d);
+
+  it('draws like a movement, then stays for good at PERSIST_OPACITY without a head', () => {
+    const model = modelWith({ persist: true });
+    const during = frameAt(model, t('2000-02-15')).movements[0]!;
+    expect(during.persisting).toBe(false);
+    expect(during.opacity).toBe(1);
+    const after = frameAt(model, t('2000-03-02')).movements[0]!;
+    expect(after.persisting).toBe(true);
+    expect(after.lingering).toBe(true);
+    expect(after.progress).toBe(1);
+    expect(after.opacity).toBe(PERSIST_OPACITY);
+    // Long after `to` (well past any linger fade) it is still there.
+    expect(frameAt(model, t('2000-03-01') + model.span * 10).movements[0]!.opacity).toBe(PERSIST_OPACITY);
+    expect(frameStats(model, frameAt(model, t('2000-04-01'))).activeMovements).toBe(0);
+  });
+
+  it('cannot be combined with linger', () => {
+    const parse = (extra: Record<string, unknown>) =>
+      timeSceneGeoData.safeParse({
+        entities,
+        control,
+        events: [],
+        sources,
+        movements: [{ id: 'm', from: '2000-02-01', to: '2000-02-01', holder: 'north-sample', label: { en: 'M', zh: 'M' }, kind: 'land', path: { type: 'LineString', coordinates: [[0, 0], [1, 1]] }, ...extra }],
+      });
+    expect(parse({ persist: true }).success).toBe(true);
+    expect(parse({ persist: true, linger: '2000-04-01' }).success).toBe(false);
   });
 });
 

@@ -37,6 +37,21 @@ export const blocLabels = z
   .strict();
 export type BlocLabels = z.output<typeof blocLabels>;
 
+/**
+ * TimeScene basemap options (docs/06 "TimeScene" · 底图数据). `local` names a
+ * high-resolution land file `public/geo/<local>.json` (TopoJSON with `kind:
+ * mask` and `kind: land` geometries, built by `scripts/geo/lib/local-land.ts`)
+ * drawn over the Natural Earth layers from zoom 9 (fully at 10); `maxZoom`
+ * lets the map zoom in further than the default 10 (island- and city-scale topics).
+ */
+export const basemapOptions = z
+  .object({
+    local: kebabId,
+    maxZoom: z.number().min(10).max(16).optional(),
+  })
+  .strict();
+export type BasemapOptions = z.output<typeof basemapOptions>;
+
 /** `src/content/topics/<slug>/topic.yaml` (docs/02). */
 export const topicSchema = z
   .object({
@@ -76,6 +91,8 @@ export const topicSchema = z
      * overriding the site-wide `time.bloc.*` strings. `out` = "no longer at war".
      */
     blocLabels: blocLabels.optional(),
+    /** TimeScene: island- / city-scale basemap (`{ local: land-sg, maxZoom: 13 }`). */
+    basemap: basemapOptions.optional(),
     /**
      * Title-block disclaimer line (any engine), replacing the site-wide
      * "Educational visualization", e.g. "Generic design study · not a specific

@@ -244,11 +244,20 @@ export const movementSchema = z
      * date, then fade it out. Default: the line disappears right after `to`.
      */
     linger: timePoint.optional(),
+    /**
+     * A built line that stays (docs/24 C2-lite: a pipeline, an aqueduct, a
+     * railway): drawn from `from` to `to` like any movement, then kept for the
+     * rest of the timeline at PERSIST_OPACITY without an arrowhead. Not with `linger`.
+     */
+    persist: z.boolean().optional(),
     label: bilingual,
     kind: z.enum(MOVEMENT_KINDS),
   })
   .strict()
   .superRefine((m, ctx) => {
+    if (m.persist && m.linger !== undefined) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['persist'], message: '`persist` keeps the line for good: drop `linger`' });
+    }
     const cmp = compareTime(m.from, m.to);
     if (cmp === null || cmp > 0) {
       ctx.addIssue({

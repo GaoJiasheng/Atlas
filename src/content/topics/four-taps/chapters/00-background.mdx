@@ -1,0 +1,95 @@
+---
+id: background
+order: 0
+kind: background
+title: { en: "One island, four taps", zh: "一座岛，四个水喉" }
+sensitive: false
+state:
+  time: "2024-12-31"
+  camera: { center: [103.82, 1.355], zoom: 10.6 }
+  layers: [base, control, movements, sites]
+  highlight: [site-macritchie-reservoir, site-marina-reservoir, site-kranji-reservoir]
+  summary:
+    en: "Singapore has no big rivers or lakes, so its water comes from four sources: rain caught in reservoirs, water from Johor, NEWater and desalinated seawater."
+    zh: "新加坡没有大河大湖，用水来自四个水源：蓄水池收集的雨水、来自柔佛的水、新生水和淡化海水。"
+  note:
+    en: "This topic follows the places where Singapore's water comes from, year by year. The blue areas are reservoirs, drawn with today's outlines from the Urban Redevelopment Authority's Master Plan 2019 and named with OpenStreetMap; each appears in the year it was completed, so reservoirs that were enlarged later look too big in early years. The diamonds mark today's plants. The water agreements with Johor are given as dates and quantities, citing sources from both Singapore and Malaysia. Numbers are rounded and each names its source."
+    zh: "本主题按年份讲述新加坡的水从哪里来。蓝色的区域是蓄水池，轮廓取自市区重建局 2019 年总体规划、名称取自 OpenStreetMap，都是今天的样子；每个蓄水池在建成那年出现，所以后来扩建过的蓄水池在早年看上去偏大。菱形标出的是今天的各种水厂。与柔佛的水供协议只写日期和数量，同时引用新加坡和马来西亚两方面的来源。数字都取整并注明出处。"
+  beats:
+    - t: "2024-12-31"
+      camera: { center: [103.82, 1.355], zoom: 10.6 }
+      layers: [base, control, sites]
+      highlight: [site-macritchie-reservoir, site-marina-reservoir, site-kranji-reservoir]
+      caption:
+        en: "Today: the blue areas are Singapore's seventeen reservoirs, from MacRitchie in the forest to Marina in the city. Rain that falls on two-thirds of the land flows into them."
+        zh: "今天：蓝色区域是新加坡的十七个蓄水池，从森林里的麦里芝到市中心的滨海。落在三分之二土地上的雨水都流进这些蓄水池。"
+    - t: "2024-12-31"
+      camera: { center: [103.82, 1.378], zoom: 12 }
+      layers: [base, control, sites]
+      highlight: [site-chestnut-avenue-waterworks, site-lower-seletar-waterworks, site-upper-seletar-reservoir]
+      caption:
+        en: "Reservoir water is raw water. It goes to waterworks such as Chestnut Avenue and Lower Seletar, where it is cleaned before it reaches anyone's tap."
+        zh: "蓄水池里的是原水。它先送到策士纳道、实里达下段这样的水厂处理，然后才流到家家户户的水龙头。"
+    - t: "2024-12-31"
+      camera: { center: [103.79, 1.66], zoom: 9.1 }
+      layers: [base, control, movements, sites]
+      highlight: [site-johor-river-waterworks, site-linggiu-reservoir, johor-river-pipeline]
+      caption:
+        en: "The second tap is imported water. Water drawn from the Johor River is treated at a waterworks near Kota Tinggi and piped across the Causeway."
+        zh: "第二个水喉是进口水。从柔佛河取来的水在哥打丁宜附近的水厂处理，再经长堤上的水管送到新加坡。"
+    - t: "2024-12-31"
+      camera: { center: [103.82, 1.33], zoom: 10.4 }
+      layers: [base, control, sites]
+      highlight: [site-changi-newater, site-keppel-marina-east-desalination, site-tuas-south-desalination]
+      caption:
+        en: "The third and fourth taps are made, not caught: NEWater from used water, as at Changi, and desalinated seawater from plants on the coast, such as Marina East and Tuas South."
+        zh: "第三和第四个水喉不是收集来的，而是制造出来的：用过的水制成的新生水，例如樟宜；以及海边淡化厂里淡化的海水，例如滨海东和大士南。"
+---
+
+<Lang en>
+
+Singapore is a small island of about <Num s="S1">710 km²</Num>. It has no big rivers or lakes, and although some <Num s="S3">2,400 mm</Num> of rain falls in a year, there is little land to collect and store it. Today it uses about <Num s="S24">440 million gallons</Num> of water a day, enough to fill <Num s="S24">800</Num> Olympic swimming pools. PUB, the national water agency, gets this water from the <Term id="four-national-taps">Four National Taps</Term>.
+
+The first tap is water from local catchments. Rain falling on about <Num s="S1">two-thirds</Num> of the land runs through drains, canals and rivers into <Num s="S1">17</Num> <Term id="reservoir">reservoirs</Term>. The land that drains into a reservoir is its <Term id="catchment">catchment</Term>. From a reservoir the raw water goes to one of <Num s="S25">six</Num> <Term id="waterworks">waterworks</Term> to be treated.
+
+The second tap is imported water from the Johor River in Malaysia, under an agreement signed in 1962 that runs until 2061. The third is NEWater, made by cleaning used water again and again. The fourth is desalinated water, made from seawater.
+
+The map shows how these taps were added, from the first reservoir in 1867 to the newest plants. To see how water moves through the whole system, from rain to tap and back again, open the 3D model in the topic [Water in Singapore](/en/topics/water/).
+
+<More title={{ en: "How to read the map", zh: "怎样读这张地图" }}>
+
+Reservoirs are tinted by the tap they belong to: local catchment water, or imported water for Linggiu Reservoir in Johor. Each one appears in the year it was completed, with the outline it has today, because no open dataset records the older, smaller outlines. Small diamonds mark today's waterworks, NEWater factories, desalination plants and water reclamation plants. The thin lines are water pipelines. Catchment areas themselves are not drawn: PUB publishes them only as pictures, not as data.
+
+</More>
+
+<More title={{ en: "Try it", zh: "试一试" }}>
+
+Find the reservoir nearest to your home on the map. Press 3 for the whole island, then zoom in. Which tap does it belong to?
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+新加坡是一座小岛，面积约 <Num s="S1">710 平方公里</Num>。岛上没有大河大湖；一年的雨量虽有约 <Num s="S3">2400 毫米</Num>，能用来收集和储存雨水的土地却很少。今天新加坡每天用水约 <Num s="S24">440 百万加仑</Num>，足以注满 <Num s="S24">800</Num> 个奥运标准游泳池。负责全国用水的公用事业局（PUB）从<Term id="four-national-taps">四大水喉</Term>取得这些水。
+
+第一个水喉是本地集水。落在约<Num s="S1">三分之二</Num>土地上的雨水，经水沟、运河和河流流进 <Num s="S1">17</Num> 个<Term id="reservoir">蓄水池</Term>。雨水流向同一个蓄水池的那片土地，就是它的<Term id="catchment">集水区</Term>。蓄水池里的原水再送到 <Num s="S25">6</Num> 座<Term id="waterworks">水厂</Term>之一处理。
+
+第二个水喉是进口水，按 1962 年签订、到 2061 年为止的协议，从马来西亚的柔佛河取水。第三个是新生水，把用过的水一再净化而成。第四个是淡化海水，由海水制成。
+
+地图按年份展示这些水喉怎样一个个出现：从 1867 年的第一个蓄水池，到最新的水厂。想看水在整个系统里怎样流动——从雨水到水龙头再回到循环里——请打开三维模型主题[《新加坡的水》](/zh/topics/water/)。
+
+<More title={{ en: "How to read the map", zh: "怎样读这张地图" }}>
+
+蓄水池按所属的水喉着色：本地集水，或者进口水（柔佛的林木水库）。每个蓄水池在建成那年出现，画的是今天的轮廓，因为没有公开数据记录它们早年较小的轮廓。小菱形标出今天的水厂、新生水厂、海水淡化厂和再生水厂。细线是输水管。集水区本身没有画出来：PUB 只以图片公布集水区，没有公开数据。
+
+</More>
+
+<More title={{ en: "Try it", zh: "试一试" }}>
+
+在地图上找出离你家最近的蓄水池。按 3 看全岛，再放大。它属于哪个水喉？
+
+</More>
+
+</Lang>

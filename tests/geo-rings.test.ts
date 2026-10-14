@@ -19,7 +19,7 @@ describe('ringIssues', () => {
 });
 
 describe('control keyframes have no wedge-makers', () => {
-  for (const slug of ['ww1', 'ww2']) {
+  for (const slug of ['ww1', 'ww2', 'four-taps']) {
     it(`${slug}: 0 zero-area and 0 self-crossing rings`, () => {
       type Topology = Parameters<typeof feature>[0];
       const data = JSON.parse(readFileSync(`src/content/topics/${slug}/data/control.json`, 'utf8')) as {
@@ -33,4 +33,30 @@ describe('control keyframes have no wedge-makers', () => {
       expect(ringIssues(polygons)).toMatchObject({ zeroArea: 0, selfCrossing: 0 });
     });
   }
+});
+
+describe('island-scale basemap (public/geo/land-sg.json, docs/17 C1)', () => {
+  type Topology = Parameters<typeof feature>[0];
+  const data = JSON.parse(readFileSync('public/geo/land-sg.json', 'utf8')) as Topology & { objects: Record<string, Parameters<typeof feature>[1] & object> };
+  const fc = feature(data, data.objects['land-sg']!) as unknown as FeatureCollection;
+  const polys = (kind: string) =>
+    fc.features
+      .filter((f) => f.properties?.kind === kind)
+      .flatMap((f) => (f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.type === 'MultiPolygon' ? f.geometry.coordinates : []));
+
+  it('has the land and the mask the engine draws, with no wedge-makers', () => {
+    expect(polys('land').length).toBeGreaterThan(10);
+    expect(polys('mask').length).toBeGreaterThan(0);
+    expect(ringIssues([...polys('land'), ...polys('mask')])).toMatchObject({ zeroArea: 0, selfCrossing: 0 });
+  });
+
+  it('covers Singapore only (the island and its offshore islands)', () => {
+    for (const poly of polys('land'))
+      for (const [x = 0, y = 0] of poly[0]!) {
+        expect(x).toBeGreaterThan(103.55);
+        expect(x).toBeLessThan(104.15);
+        expect(y).toBeGreaterThan(1.1);
+        expect(y).toBeLessThan(1.48);
+      }
+  });
 });

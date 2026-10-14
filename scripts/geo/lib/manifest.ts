@@ -13,6 +13,18 @@ export interface Dataset {
   author?: string;
   license: string;
   role: string;
+  /**
+   * data.gov.sg dataset id (`d_…`): fetch.ts asks the data.gov.sg API
+   * (`poll-download`) for the current signed download link instead of using
+   * `url`, which stays the human-readable dataset page.
+   */
+  datagov?: string;
+  /**
+   * Overpass QL (OpenStreetMap, ODbL): fetch.ts posts it to the Overpass API
+   * at build time, keeps the response as `<file>.osm.json` and writes the
+   * osmtogeojson conversion to `file` (GeoJSON, read by the `geojson` selector).
+   */
+  overpass?: string;
 }
 
 export interface ControlPoint {
@@ -85,6 +97,22 @@ export type GeomSpec =
   /** The parts (single polygons) of a geometry that contain any of the points — or, with `drop`, all the other parts. */
   | { parts: GeomSpec; at: [number, number][]; drop?: boolean }
   | { bbox: [number, number, number, number] }
+  /**
+   * Features of a GeoJSON dataset (its `file` in raw/), filtered by attribute:
+   * `where` keeps features whose property equals the value or one of the
+   * values; `match` keeps features whose property matches the regular
+   * expression (case-insensitive). Both are ANDed. URA Master Plan land use:
+   * `{ "geojson": "ura-landuse", "where": { "LU_DESC": ["RESERVOIR", "WATERBODY"] } }`;
+   * OpenStreetMap: `{ "geojson": "osm-water", "match": { "name": "^MacRitchie" } }`.
+   */
+  | { geojson: string; where?: Record<string, string | number | (string | number)[]>; match?: Record<string, string> }
+  /**
+   * The single polygons of `of` whose area lies at least `minShare` (default
+   * 0.5) inside `within`: selects one dataset's parcels by another dataset's
+   * outline without mixing their edges (URA waterbody parcels that make up the
+   * OpenStreetMap polygon named "MacRitchie Reservoir").
+   */
+  | { overlap: GeomSpec; within: GeomSpec; minShare?: number }
   | { union: GeomSpec[] }
   | { intersect: [GeomSpec, GeomSpec] }
   | { difference: [GeomSpec, GeomSpec] };
@@ -104,10 +132,10 @@ export interface Step {
 export interface Keyframe {
   id: string;
   t: string;
-  /** CShapes gwcode -> holder (or holder + label) for the sovereign base. */
-  base: Record<string, string | { holder: string; label?: { en: string; zh: string } }>;
-  /** OHM relation set used by `ohm` selectors in this keyframe. */
-  ohm: string;
+  /** CShapes gwcode -> holder (or holder + label) for the sovereign base; omit (with no `cshapes` dataset) for a topic without one. */
+  base?: Record<string, string | { holder: string; label?: { en: string; zh: string } }>;
+  /** OHM relation set used by `ohm` selectors in this keyframe (omit when none is used). */
+  ohm?: string;
   /** How the keyframe was made, for SOURCES.md. */
   method: string;
   steps: Step[];
@@ -156,10 +184,51 @@ export interface Pipeline {
     /** Deviation is not measured for vertices this close (km) to the basemap coast. */
     skipKm?: number;
   };
+  /** compose.ts: light pre-simplification of each step (m) and the sliver filter of the final dissolve (km²). */
+  compose?: { lightM?: number; sliverKm2?: number };
+  /** simplify.ts post-quantisation clean: vertex snap (degrees, at least one grid cell) and the smallest ring kept (km²). */
+  clean?: { snapDeg?: number; sliverKm2?: number };
+  /** Island-scale basemap (local-land.ts): a dataset dissolved into one land layer for `basemap.local` topics. */
+  localLand?: LocalLand;
   /** check.ts colours: holder id -> #rrggbb (unlisted holders get a colour hashed from their id). */
   checkColors?: Record<string, string>;
   /** Repo-relative folder for check.ts screenshots. */
   shots?: string;
+}
+
+/**
+ * `pipeline.localLand`: the high-resolution land of a city- or island-scale
+ * topic (docs/17 C1), built by local-land.ts into `public/geo/<id>.json` and
+ * drawn by the GeoStage above `minZoom` when topic.yaml sets
+ * `basemap: { local: <id> }`.
+ */
+export interface LocalLand {
+  /** File stem under public/geo/ and the TopoJSON object name, e.g. `land-sg`. */
+  id: string;
+  /** Polygon dataset (GeoJSON in raw/) dissolved into the land, e.g. the URA planning areas. */
+  dataset: string;
+  /**
+   * Inland water cut out of the land (rivers, canals, bays inside the planning
+   * areas): the polygons of `dataset` matching `where`, at least `minKm2`, except
+   * those lying at least `keepShare` inside a feature of `keep` (optionally only
+   * the features whose properties match the `keepMatch` regular expressions):
+   * reservoirs made by flooding a valley, which keyframes tint by year and must
+   * stay land-coloured before they exist. Estuary reservoirs are left out of
+   * `keep`: before their dam they were river mouths, i.e. water.
+   */
+  water?: { dataset: string; where: Record<string, string | string[]>; minKm2: number; keep?: string; keepMatch?: Record<string, string>; keepShare?: number };
+  /** Douglas–Peucker interval (m). */
+  simplifyM: number;
+  /** Detached parts under this (km²) are dropped. */
+  minIslandKm2: number;
+  /** Repo-relative coarser basemap whose polygons inside `replaceBox` the local land replaces (painted in the water colour under it). */
+  replaces: string;
+  /** [w, s, e, n]: coarser land polygons that intersect the local land inside this box are masked. */
+  replaceBox: Box;
+  /** Buffer (m) of the mask around the replaced polygons, so their coastline stroke is hidden too. */
+  maskBufferM: number;
+  /** Size budget (KB) of the written file. */
+  budgetKB: number;
 }
 
 export interface Sources {
@@ -193,6 +262,9 @@ export interface PipelineConfig {
     outsideKm: number;
     skipKm: number;
   };
+  compose: { lightM: number; sliverKm2: number };
+  clean: { snapDeg: number; sliverKm2: number };
+  localLand: LocalLand | null;
   checkColors: Record<string, string>;
   shots: string;
 }
@@ -224,6 +296,9 @@ export const PIPELINE_DEFAULTS: Omit<PipelineConfig, 'shots'> = {
     outsideKm: 2,
     skipKm: 15,
   },
+  compose: { lightM: 300, sliverKm2: 5 },
+  clean: { snapDeg: 0.005, sliverKm2: 1 },
+  localLand: null,
   checkColors: {},
 };
 
@@ -253,6 +328,9 @@ export function pipelineConfig(manifest: Sources, slug: string): PipelineConfig 
       outsideKm: c.outsideKm ?? d.coast.outsideKm,
       skipKm: c.skipKm ?? d.coast.skipKm,
     },
+    compose: { lightM: p.compose?.lightM ?? d.compose.lightM, sliverKm2: p.compose?.sliverKm2 ?? d.compose.sliverKm2 },
+    clean: { snapDeg: p.clean?.snapDeg ?? d.clean.snapDeg, sliverKm2: p.clean?.sliverKm2 ?? d.clean.sliverKm2 },
+    localLand: p.localLand ?? d.localLand,
     checkColors: p.checkColors ?? d.checkColors,
     shots: p.shots ?? `docs/screenshots/${slug}`,
   };

@@ -16,9 +16,11 @@ export interface MovementFrame {
   head: LngLat;
   /** Point a little behind the head, for the arrow direction. */
   tail: LngLat;
-  /** The movement is over and its finished line is kept (`linger`): `progress` is 1. */
+  /** The movement is over and its finished line is kept (`linger` or `persist`): `progress` is 1. */
   lingering: boolean;
-  /** Line and arrowhead opacity: 1 while under way, LINGER_OPACITY while lingering, fading to 0 after `linger`. */
+  /** Kept for good (`persist`, a built line): no arrowhead. */
+  persisting: boolean;
+  /** Line and arrowhead opacity: 1 while under way, LINGER_OPACITY while lingering (fading to 0 after `linger`), PERSIST_OPACITY when persisting. */
   opacity: number;
 }
 
@@ -49,6 +51,8 @@ export const FLASH_SHARE = 0.04;
 export const LINGER_OPACITY = 0.4;
 /** Share of the timeline span over which a lingering line fades out once `linger` has passed. */
 export const LINGER_FADE_SHARE = 0.02;
+/** Opacity of a finished `persist` line (a pipeline that stays built). */
+export const PERSIST_OPACITY = 0.6;
 
 export function frameAt(model: TimeModel, t: number, highlight: readonly string[] = []): Frame {
   const hl = new Set(highlight);
@@ -58,7 +62,9 @@ export function frameAt(model: TimeModel, t: number, highlight: readonly string[
   for (const m of model.movements) {
     if (t < m.start) continue;
     let opacity = 1;
-    if (t > m.end) {
+    if (t > m.end && m.persist) {
+      opacity = PERSIST_OPACITY;
+    } else if (t > m.end) {
       // Over: hidden, unless `linger` keeps the finished line (faint, then a short fade).
       if (m.linger === null) continue;
       const fade = model.span * LINGER_FADE_SHARE;
@@ -76,7 +82,7 @@ export function frameAt(model: TimeModel, t: number, highlight: readonly string[
       behind[0] !== head[0] || behind[1] !== head[1]
         ? behind
         : mirror(head, pointAlong(path, Math.min(1, progress + 0.02)) ?? head);
-    movements.push({ m, progress, coords, head, tail, lingering, opacity });
+    movements.push({ m, progress, coords, head, tail, lingering, persisting: lingering && m.persist, opacity });
   }
 
   const events: EventFrame[] = [];

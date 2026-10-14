@@ -1,6 +1,7 @@
 /**
  * Step 6 — visual check: render each keyframe of the topic's control.json on
- * the Natural Earth basemap (`pipeline.coast.land`) with MapLibre (from
+ * the basemap land (`pipeline.coast.land`: Natural Earth, or an island-scale
+ * TopoJSON from local-land.ts) with MapLibre (from
  * node_modules, in headless Chromium via Playwright) next to the source map it
  * was taken from, one row per view in sources.json `keyframes[].checks`, and
  * save <pipeline.shots>/geo-<K>.png (default docs/screenshots/<slug>/).
@@ -71,6 +72,21 @@ function colorsFor(fc: FeatureCollection): Record<string, string> {
   return out;
 }
 
+/**
+ * The basemap land as GeoJSON: a GeoJSON file as is; a TopoJSON file (the
+ * island-scale `public/geo/land-sg.json` of local-land.ts) decoded, keeping
+ * only `kind: land` when its geometries are tagged.
+ */
+function landBody(file: string): Buffer | string {
+  const raw = readFileSync(file);
+  const data = JSON.parse(raw.toString()) as { type: string; objects?: Record<string, TopoObject> };
+  if (data.type !== 'Topology') return raw;
+  const topo = data as unknown as Topology;
+  const all = Object.values(data.objects ?? {}).flatMap((o) => (feature(topo, o) as unknown as FeatureCollection).features);
+  const tagged = all.some((f) => f.properties?.kind !== undefined);
+  return JSON.stringify({ type: 'FeatureCollection', features: tagged ? all.filter((f) => f.properties?.kind === 'land') : all });
+}
+
 const MIME: Record<string, string> = {
   '.html': 'text/html',
   '.js': 'text/javascript',
@@ -85,13 +101,14 @@ interface Row {
   name: string;
   center: [number, number];
   zoom: number;
-  source?: { url: string; caption: string };
+  /** An image (map, georeferenced or not), or with `geo` a GeoJSON dataset drawn as a second map (outlines + names). */
+  source?: { url: string; caption: string; geo?: boolean };
 }
 
 function page(id: string, t: string, rows: Row[], caption: string, colors: Record<string, string>): string {
   const rowsHtml = rows
     .map(
-      (r, i) => `<section><div class="map" id="m${i}"></div><figure>${r.source ? `<img src="${r.source.url}"><figcaption>${r.source.caption}</figcaption>` : '<figcaption>no source image for this view</figcaption>'}</figure><h2>${id} · ${t} · ${r.name}</h2></section>`,
+      (r, i) => `<section><div class="map" id="m${i}"></div><figure>${r.source?.geo ? `<div class="map" id="r${i}"></div><figcaption>${r.source.caption}</figcaption>` : r.source ? `<img src="${r.source.url}"><figcaption>${r.source.caption}</figcaption>` : '<figcaption>no source image for this view</figcaption>'}</figure><h2>${id} · ${t} · ${r.name}</h2></section>`,
     )
     .join('');
   return `<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="/maplibre-gl.css">
@@ -131,6 +148,25 @@ window.__ready=Promise.all(rows.map(async (r,i)=>{
     const el=document.createElement('div');el.className='lbl';el.textContent=f.properties.label?f.properties.label.en:f.properties.holder;
     new maplibregl.Marker({element:el}).setLngLat(best).addTo(map);
   }
+  if(r.source&&r.source.geo){
+    const ref=await fetch(r.source.url).then(x=>x.json());
+    const m2=new maplibregl.Map({container:'r'+i,center:r.center,zoom:r.zoom,attributionControl:false,fadeDuration:0,canvasContextAttributes:{preserveDrawingBuffer:true},
+      style:{version:8,sources:{land:{type:'geojson',data:land},ref:{type:'geojson',data:ref}},layers:[
+        {id:'bg',type:'background',paint:{'background-color':'#dfe9f0'}},
+        {id:'land',type:'fill',source:'land',paint:{'fill-color':'#f4f1e8'}},
+        {id:'reff',type:'fill',source:'ref',filter:['!=',['geometry-type'],'LineString'],paint:{'fill-color':'#3a78b5','fill-opacity':0.35}},
+        {id:'refl',type:'line',source:'ref',paint:{'line-color':'#1d4f80','line-width':0.8}},
+        {id:'coast',type:'line',source:'land',paint:{'line-color':'#6d8fa6','line-width':0.5}}]}});
+    await new Promise(res=>m2.once('idle',res));
+    const named=new Set();
+    for(const f of ref.features){
+      const nm=f.properties&&f.properties.name;if(!nm||named.has(nm)||!f.geometry||f.geometry.type==='Point')continue;named.add(nm);
+      const ring=f.geometry.type==='Polygon'?f.geometry.coordinates[0]:f.geometry.type==='MultiPolygon'?f.geometry.coordinates[0][0]:f.geometry.coordinates;
+      let x=0,y=0;for(const p of ring){x+=p[0];y+=p[1];}
+      const el=document.createElement('div');el.className='lbl';el.textContent=nm;
+      new maplibregl.Marker({element:el}).setLngLat([x/ring.length,y/ring.length]).addTo(m2);
+    }
+  }
   await new Promise(res=>setTimeout(res,300));
 }));
 </script></body></html>`;
@@ -154,7 +190,7 @@ async function main(): Promise<void> {
   const mapDist = join(ROOT, 'node_modules', 'maplibre-gl', 'dist');
   files.set('/maplibre-gl.js', { body: readFileSync(join(mapDist, 'maplibre-gl.js')), type: MIME['.js']! });
   files.set('/maplibre-gl.css', { body: readFileSync(join(mapDist, 'maplibre-gl.css')), type: MIME['.css']! });
-  files.set('/land.json', { body: readFileSync(repoPath(topic.config.coast.land)), type: MIME['.json']! });
+  files.set('/land.json', { body: landBody(repoPath(topic.config.coast.land)), type: MIME['.json']! });
   const browser = await chromium.launch({ headless: true, args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
   try {
     for (const id of wanted) {
@@ -178,6 +214,13 @@ async function main(): Promise<void> {
         const ds = c.source ? sources.datasets[c.source] : undefined;
         if (ds && existsSync(topic.rawFile(ds.file))) {
           const url = `/src/${encodeURIComponent(ds.file)}`;
+          if (extname(ds.file).toLowerCase() === '.geojson') {
+            // A vector dataset (OpenStreetMap export): drawn as a second map on the same view, not traced.
+            files.set(url, { body: readFileSync(topic.rawFile(ds.file)), type: MIME['.json']! });
+            row.source = { url, caption: `[${ds.ref}] ${ds.title} — ${ds.author ?? ''} — ${ds.license} · independent dataset, drawn as is`, geo: true };
+            rows.push(row);
+            continue;
+          }
           files.set(url, { body: readFileSync(topic.rawFile(ds.file)), type: MIME[extname(ds.file).toLowerCase()] ?? 'application/octet-stream' });
           const svgId = Object.entries(sources.svg ?? {}).find(([, s]) => s.dataset === c.source)?.[0];
           const rasterId = Object.entries(sources.raster ?? {}).find(([, s]) => s.dataset === c.source)?.[0];

@@ -18,7 +18,12 @@
  *    georef-raster.ts; `coastFillKm` extends a class into the source map's sea
  *    within that distance so the coast follows the base data, not the source
  *    map's coastline), boxes, and `parts` (keep or drop the single polygons of
- *    a geometry that contain given points).
+ *    a geometry that contain given points), and `geojson`: features of a
+ *    preprocessed GeoJSON dataset filtered by attribute (URA Master Plan
+ *    land use `LU_DESC`, OpenStreetMap `name`; fetch.ts downloads data.gov.sg
+ *    and Overpass datasets), and `overlap`: the single polygons of one
+ *    geometry lying mostly inside another (URA parcels inside an OSM outline). A topic without a sovereign base (no `cshapes`
+ *    dataset, no `base`: an island-scale topic) is built from its steps only.
  * 3. Dissolve by holder + label. Output: work/<K>.geojson with properties
  *    { holder, label_en, label_zh, src[] }.
  *
@@ -34,6 +39,9 @@ import { openTopic } from './topic';
 
 const { values, positionals } = parseArgs({ allowPositionals: true, options: { topic: { type: 'string' } } });
 const topic = openTopic(values.topic);
+/** Light pre-simplification interval (m) and final sliver filter (km²): `pipeline.compose` (ww2: 300 m, 5 km²). */
+const LIGHT_M = topic.config.compose.lightM;
+const SLIVER_KM2 = topic.config.compose.sliverKm2;
 
 /* ------------------------------------------------------------------ */
 /* Geometry ops (mapshaper)                                            */
@@ -62,10 +70,10 @@ async function buffer(a: FeatureCollection, km: number): Promise<FeatureCollecti
   return mapshaper(`-i a.json -buffer radius=${km}km`, { a });
 }
 
-/** Light pre-simplification of large inputs (≈300 m) so the overlay stays fast. */
+/** Light pre-simplification of large inputs (`LIGHT_M`, ≈300 m) so the overlay stays fast. */
 async function light(a: FeatureCollection): Promise<FeatureCollection> {
   if (isEmpty(a)) return a;
-  return mapshaper('-i a.json -simplify interval=300 keep-shapes', { a });
+  return mapshaper(`-i a.json -simplify interval=${LIGHT_M} keep-shapes`, { a });
 }
 
 function bboxPolygon([w, s, e, n]: [number, number, number, number]): FeatureCollection {
@@ -170,7 +178,7 @@ class Inputs {
     }) as Feature<Polygon | MultiPolygon, CShapesProps>[];
   }
 
-  ohm(rel: number, set = this.kf.ohm): FeatureCollection {
+  ohm(rel: number, set = this.kf.ohm ?? ''): FeatureCollection {
     const fc = this.file(`ohm-${set}`, () => {
       const path = topic.workFile(`ohm-${set}.geojson`);
       if (!existsSync(path)) throw new Error(`missing work/ohm-${set}.geojson: run ohm-export.ts`);
@@ -187,6 +195,11 @@ class Inputs {
     const found = new Set(hit.map((f) => String(f.properties?.name)));
     for (const n of names) if (!found.has(n)) warn(`${this.kf.id}: Natural Earth admin-1 "${n}" (${admin}) not found`);
     return toFc(hit);
+  }
+
+  /** A GeoJSON dataset in raw/ (URA Master Plan layers, an Overpass export), area features only. */
+  geojson(id: string): FeatureCollection {
+    return this.file(`geojson-${id}`, () => toFc(areaFeatures(readJson<FeatureCollection>(this.dataset(id)))));
   }
 
   /** A georeferenced map: `svg` (georef-svg.ts) or `raster` (georef-raster.ts). */
@@ -223,7 +236,73 @@ async function mapClass(kind: 'svg' | 'raster', id: string, cls: string | string
   return toFc([...sel.features, ...near.features]);
 }
 
+/** `where` (equal to the value or one of the values) and `match` (case-insensitive regex) on a feature's properties. */
+function attributeFilter(where: Record<string, string | number | (string | number)[]> = {}, match: Record<string, string> = {}) {
+  const tests = [
+    ...Object.entries(where).map(([k, v]) => {
+      const allowed = (Array.isArray(v) ? v : [v]).map(String);
+      return (p: Record<string, unknown>) => allowed.includes(String(p[k] ?? ''));
+    }),
+    ...Object.entries(match).map(([k, v]) => {
+      const re = new RegExp(v, 'i');
+      return (p: Record<string, unknown>) => re.test(String(p[k] ?? ''));
+    }),
+  ];
+  return (f: Feature) => tests.every((test) => test((f.properties ?? {}) as Record<string, unknown>));
+}
+
+/** Planar ring area in km² (equirectangular at the ring's mean latitude). */
+function ringKm2(ring: readonly Position[]): number {
+  let a = 0;
+  let lat = 0;
+  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+    a += ((ring[j]![0] ?? 0) - (ring[i]![0] ?? 0)) * ((ring[j]![1] ?? 0) + (ring[i]![1] ?? 0));
+    lat += ring[i]![1] ?? 0;
+  }
+  const k = 111.195;
+  return Math.abs((a / 2) * Math.cos(((lat / Math.max(1, ring.length)) * Math.PI) / 180) * k * k);
+}
+const polyKm2 = (poly: Position[][]) => ringKm2(poly[0] ?? []) - poly.slice(1).reduce((s, h) => s + ringKm2(h), 0);
+
+const ringBox = (ring: readonly Position[]) => {
+  const xs = ring.map((p) => p[0] ?? 0);
+  const ys = ring.map((p) => p[1] ?? 0);
+  return [Math.min(...xs), Math.min(...ys), Math.max(...xs), Math.max(...ys)] as const;
+};
+
+/** `overlap`: the single polygons of `of` with at least `minShare` of their area inside `within`. */
+async function overlapParts(of: FeatureCollection, within: FeatureCollection, minShare: number): Promise<FeatureCollection> {
+  const target = polygonsOf(within);
+  if (!target.length) return emptyFc();
+  const boxes = target.map((p) => ringBox(p[0] ?? []));
+  const [w, s, e, n] = [Math.min(...boxes.map((b) => b[0])), Math.min(...boxes.map((b) => b[1])), Math.max(...boxes.map((b) => b[2])), Math.max(...boxes.map((b) => b[3]))];
+  const candidates = polygonsOf(of).filter((p) => {
+    const b = ringBox(p[0] ?? []);
+    return b[0] <= e && b[2] >= w && b[1] <= n && b[3] >= s;
+  });
+  if (!candidates.length) return emptyFc();
+  const tagged = toFc(candidates.map((p, i) => ({ type: 'Feature', properties: { part: i }, geometry: { type: 'Polygon', coordinates: p } }) as Feature));
+  const inside = await clip(tagged, polygonFc(target));
+  const shareOf = new Map<number, number>();
+  for (const f of areaFeatures(inside)) {
+    const i = Number(f.properties?.part);
+    const polys = f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.coordinates;
+    shareOf.set(i, (shareOf.get(i) ?? 0) + polys.reduce((sum, p) => sum + polyKm2(p), 0));
+  }
+  return polygonFc(candidates.filter((p, i) => (shareOf.get(i) ?? 0) >= minShare * polyKm2(p)));
+}
+
 async function resolve(spec: GeomSpec, inp: Inputs, kf: Keyframe): Promise<FeatureCollection> {
+  if ('overlap' in spec) {
+    const hit = await overlapParts(await resolve(spec.overlap, inp, kf), await resolve(spec.within, inp, kf), spec.minShare ?? 0.5);
+    if (isEmpty(hit)) warn(`${kf.id}: no part overlaps its \`within\` geometry by ${spec.minShare ?? 0.5}`);
+    return hit;
+  }
+  if ('geojson' in spec) {
+    const hit = toFc(inp.geojson(spec.geojson).features.filter(attributeFilter(spec.where, spec.match)));
+    if (isEmpty(hit)) warn(`${kf.id}: no feature of ${spec.geojson} matches ${JSON.stringify({ where: spec.where, match: spec.match })}`);
+    return hit;
+  }
   if ('cshapes' in spec) {
     const date = spec.at ?? kf.t;
     const feats = inp.cshapesAt(date).filter((f) => spec.cshapes.includes(f.properties.gwcode));
@@ -272,22 +351,23 @@ function props(holder: string, label: { en: string; zh: string } | undefined, sr
 async function compose(sources: Sources, kf: Keyframe): Promise<void> {
   const inp = new Inputs(sources, kf);
   const baseRef = sources.datasets.cshapes?.ref;
-  if (!baseRef) throw new Error('sources.json has no `cshapes` dataset (the sovereign base)');
+  const baseMap = kf.base ?? {};
+  if (!baseRef && Object.keys(baseMap).length) throw new Error('sources.json has no `cshapes` dataset (the sovereign base)');
   const t0 = Date.now();
-  // Base.
+  // Base (none for a topic without a `cshapes` dataset).
   const base: Feature[] = [];
   const unmapped: string[] = [];
-  for (const f of inp.cshapesAt()) {
-    const entry = kf.base[String(f.properties.gwcode)];
+  for (const f of baseRef ? inp.cshapesAt() : []) {
+    const entry = baseMap[String(f.properties.gwcode)];
     if (!entry) {
       unmapped.push(`${f.properties.gwcode} ${f.properties.cntry_name}`);
       continue;
     }
     const holder = typeof entry === 'string' ? entry : entry.holder;
     const label = typeof entry === 'string' ? undefined : entry.label;
-    base.push({ type: 'Feature', geometry: f.geometry, properties: props(holder, label, [baseRef], `CShapes GW ${f.properties.gwcode} ${f.properties.cntry_name}`) });
+    base.push({ type: 'Feature', geometry: f.geometry, properties: props(holder, label, [baseRef!], `CShapes GW ${f.properties.gwcode} ${f.properties.cntry_name}`) });
   }
-  log(`${kf.id} ${kf.t}: base ${base.length} CShapes polygons (${unmapped.length} states not in this topic left out)`);
+  log(baseRef ? `${kf.id} ${kf.t}: base ${base.length} CShapes polygons (${unmapped.length} states not in this topic left out)` : `${kf.id} ${kf.t}: no sovereign base`);
   let acc = await light(await splitAntimeridian(toFc(base)));
   for (const step of kf.steps) {
     let geom = await resolve(step.from, inp, kf);
@@ -304,7 +384,7 @@ async function compose(sources: Sources, kf: Keyframe): Promise<void> {
     log(`  + ${step.holder.padEnd(14)} ${step.note}`);
   }
   // Dissolve by holder + label; keep the union of source ids.
-  const out = await mapshaper(`-i a.json -dissolve2 holder,label_en,label_zh calc='src=collect(src)' -filter-slivers min-area=5km2`, { a: acc });
+  const out = await mapshaper(`-i a.json -dissolve2 holder,label_en,label_zh calc='src=collect(src)' -filter-slivers min-area=${SLIVER_KM2}km2`, { a: acc });
   out.features = out.features.filter((f) => f.geometry);
   for (const f of out.features) {
     const raw = f.properties?.src as unknown;

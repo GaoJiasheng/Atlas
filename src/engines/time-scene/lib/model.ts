@@ -29,6 +29,8 @@ export interface MovementN {
   path: LngLat[];
   /** After `end`, the finished line stays (faint) until this time; null = hidden right after `end`. */
   linger: number | null;
+  /** `persist`: after `end` the line stays for good (a built pipeline), without an arrowhead. */
+  persist: boolean;
 }
 
 export interface EntityN {
@@ -89,6 +91,7 @@ export function buildTimeModel(
         end,
         path: unwrapPathCentred(movement.path.coordinates),
         linger: finite(linger) && linger > end ? linger : null,
+        persist: movement.persist === true,
       };
     })
     .filter((m) => finite(m.start) && finite(m.end));

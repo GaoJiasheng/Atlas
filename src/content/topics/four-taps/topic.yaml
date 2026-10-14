@@ -1,0 +1,24 @@
+# Singapore's Four National Taps (docs/24 topic B): background + chapters 01–05, seven control keyframes K1–K7 (1867–2011).
+# The map is island-scale: URA Master Plan 2019 land (public/geo/land-sg.json) over Natural Earth, reservoirs by year.
+id: four-taps
+title: { en: "Singapore's Four Taps", zh: "新加坡的四大水喉" }
+subtitle: { en: "1867–today", zh: "1867 年至今" }
+subject: geography
+levels: [P3, P5]
+tags: [singapore, water, map]
+mode: time
+engine: time-scene
+stage: geo
+theme: paper
+sensitivity: open
+status: draft
+illustration: four-taps
+shortTitle: { en: "Four Taps", zh: "四大水喉" }
+# Island-scale basemap (docs/06 TimeScene, docs/17 C1): high-resolution land above zoom 9, zoom to 13.
+basemap: { local: land-sg, maxZoom: 13 }
+# The engine's three slots, named for the water sources (docs/06 blocLabels).
+blocLabels:
+  axis: { en: "Local catchment", zh: "本地集水" }
+  allied: { en: "Imported water", zh: "进口水" }
+  neutral: { en: "NEWater and desalinated water", zh: "新生水与淡化海水" }
+note: { en: "Map from URA Master Plan 2019 and OpenStreetMap data · reservoirs shown by the year they were completed", zh: "地图取自 URA 2019 总体规划与 OpenStreetMap 数据 · 蓄水池按建成年份显示" }

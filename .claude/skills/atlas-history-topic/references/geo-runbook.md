@@ -79,6 +79,19 @@ pnpm tsx scripts/geo/lib/check.ts --topic <slug> [K1]        # 成品并排图 -
 - 旋钮：`--budget <MB>`、`--fine / --coarse <km>`（固定间隔）、`--quant`、`--method dp|weighted`（Visvalingam 会删掉细长峡湾）、`--islands focus,coarse`、`--no-coast`、`--out <file>`、`--no-measure`。脚本最后打印焦点框内原始顶点到成品边界的偏差 p50 / p95 / p99 / max（km），写进 SOURCES-GEO.md。
 - 已知：ww2 的 `control.json` 已做过环清理重建（f8cbbb6，0 个自交环，1.6 MB，预算 2.5 MB 之内）；ww1 约 0.96 MB。重新生成前先 `git stash` 对比大小，别回到有自交环的旧版。
 
+## 城市尺度主题（例外路径，范本 `scripts/geo/four-taps/`）
+
+一座岛、一座城的主题（新加坡的蓄水池、组屋新镇、MRT）用不上 CShapes / OHM 的国界：NE 10m 的新加坡海岸是公里级，蓄水池看不见。docs/24 §0.1-3 定的做法：
+
+- **底图**：`pipeline.localLand` + `pnpm tsx scripts/geo/lib/local-land.ts --topic <slug>` → `public/geo/<id>.json`（`land-sg`：URA 2019 规划区边界 No Sea 并成一个面，再按 `water` 挖掉河、运河、海湾和河口蓄水池——淹没山谷而成的蓄水池用 `keepMatch` 留作陆地，按年份上色前读作陆地；DP 5 m，约 84 KB）；`topic.yaml` 写 `basemap: { local: land-sg, maxZoom: 13 }`，引擎在 zoom 9–10 渐入、盖住 10m 新加坡，地图能放大到 13（docs/06「底图数据」）。别的城市照抄：换数据集、`replaceBox`、预算。
+- **数据集**：`datasets` 里写 `datagov: "d_…"`（data.gov.sg）或 `overpass: "<QL>"`（OSM 构建期导出），`fetch.ts` 下载、记 SHA-256 到 `raw/fetch-log.json`。没有主权底图：不写 `cshapes` 数据集、关键帧不写 `base` / `ohm`。
+- **选择器**：`geojson`（按属性筛：`where` 等值 / 列表，`match` 正则）；`overlap`（一个数据集的地块里面积过半落在另一个数据集轮廓内的那些，边界只来自前者）。蓄水池：`{ overlap: { geojson: ura-landuse, where: { LU_DESC: WATERBODY } }, within: { geojson: osm-water, match: { name: "^MacRitchie Reservoir$" } } }`——URA 给形状（MP2019 没有 RESERVOIR 类，水面都是 `WATERBODY`），OSM 给名字。
+- **清单旋钮**：`coast.enabled: false`（内陆水面不沿海岸裁，否则补缝会把全岛涂成一个 holder），`coast.land` 指向本地底图（check.ts 用）；`compose { lightM: 5, sliverKm2: 0.005 }`、`clean { snapDeg: 0.00005, sliverKm2: 0.005 }`、`islandsKm2` 0.01、`fineStartKm` 0.01 / `fineStepKm` 0.005、`quantization` 100000、`budgetMB` 按实际（four-taps 0.35）；缺省值不动，ww1 / ww2 产物逐字节不变。
+- **过去的帧**：今天的面按建成年份筛（PUB / NLB 年份逐条记在 SOURCES.md）；扩建前的小水面、已消失的水体、填海前的海岸**不画**，写进已知差距，不臆造。
+- **核对**：`checks[].source` 指向一个 `.geojson` 数据集时，check.ts 右边画同视角的第二张图（独立数据集的轮廓和名称）；有机构原图（PUB 的地图等，© 只作本地对照）就放 `scripts/geo/<slug>/refs/`（gitignore）并在 SOURCES-GEO.md 写明。
+- **许可**：URA / data.gov.sg = Singapore Open Data Licence v1.0（署名格式"Contains information from {数据集} accessed on {日期} from {来源} which is made available under the terms of the Singapore Open Data Licence version 1.0"）；OSM = ODbL 1.0（署名"© OpenStreetMap contributors"，导出的 GeoJSON 是衍生数据库，同许可提供，页面来源列表要有署名）；Natural Earth 公有领域。
+- **线**：输水管、铁路这类建成后一直在的线写进 `movements.json`，`persist: true`（docs/06），途经点取 OSM 的 way，记在 SOURCES.md「Movement routes」。
+
 ## 路线
 
 行军 / 航线不进管线，直接写在 `movements.json`（见 data-cookbook）：沿真实道路 / 铁路 / 海路取点，过日界线照实写经度跳变（引擎展开走近路），途经点和来源记在 SOURCES.md「Movement routes」。
