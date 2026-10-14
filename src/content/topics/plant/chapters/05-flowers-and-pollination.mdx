@@ -7,7 +7,7 @@ state:
   view: assembled
   run: false
   cutaway: none
-  layers: [roots, stem, leaves, flowers-fruit, close-ups, pollination]
+  layers: [roots, stem, leaves, flowers-fruit, leaf-block, stem-slice, root-sample, flower-half, pollen-sample, pollination]
   hide: [leaf-section, leaf-vein-section, stoma, stem-section, root-tip]
   labels: [flower, sepals, bee]
   camera: { position: [0.33, 1.16, 1.291], target: [0.0, 0.94, 0.19], fov: 26 }
@@ -17,12 +17,12 @@ state:
       camera: { position: [0.33, 1.16, 1.291], target: [0.0, 0.94, 0.19], fov: 26 }
       caption: { en: "A chilli flower, white with five petals, hanging below a fork in the stem. Real ones are about one centimetre across; the model draws them a little larger. Green sepals held it closed as a bud.", zh: "一朵辣椒花，白色，5 片花瓣，垂在茎的分叉下面。真实的花宽约 1 厘米，模型画得稍大一些。还是花蕾时，绿色的花萼把它包住。" }
     - pose: flower-open
-      labels: [flower-section, ovules]
-      camera: { position: [0.852, 0.851, 0.856], target: [0.66, 0.035, 0.04], fov: 26 }
+      labels: [flower-section, ovules, "group:flower-half"]
+      camera: { position: [0.739, 0.446, 0.516], target: [0.62, -0.06, 0.01], fov: 26 }
       caption: { en: "The same kind of flower cut in half lengthwise, drawn six times larger. In the middle is the pistil; at its base the ovary holds the ovules.", zh: "同样一朵花纵向剖开，放大 6 倍。中间是雌蕊，雌蕊基部的子房里有胚珠。" }
     - pose: flower-open
-      labels: [pollen-grains, flower-section]
-      camera: { position: [0.932, 0.846, 0.886], target: [0.74, 0.03, 0.07], fov: 28 }
+      labels: [pollen-grains, flower-section, "group:flower-half"]
+      camera: { position: [0.859, 0.536, 0.576], target: [0.74, 0.03, 0.07], fov: 28 }
       caption: { en: "Around the pistil stand the stamens. Their purple anthers make pollen; the grains are shown here greatly magnified. Each grain carries a male reproductive cell.", zh: "雄蕊围在雌蕊四周，紫色的花药产生花粉。这里的花粉粒放大了很多倍，每一粒都带着雄性生殖细胞。" }
     - run: true
       labels: [bee, stamens, pistil]

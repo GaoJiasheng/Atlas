@@ -10954,6 +10954,159 @@
       101.2535
      ],
      "color": "membrane"
+    },
+    {
+     "kind": "lathe",
+     "profile": [
+      [
+       0.0,
+       -0.00453
+      ],
+      [
+       0.0022,
+       -0.00388
+      ],
+      [
+       0.00388,
+       -0.00233
+      ],
+      [
+       0.00453,
+       -0.0
+      ],
+      [
+       0.00388,
+       0.0022
+      ],
+      [
+       0.0022,
+       0.00388
+      ],
+      [
+       0.0,
+       0.00453
+      ]
+     ],
+     "segments": 12,
+     "at": [
+      -0.1423,
+      0.9508,
+      0.1679
+     ],
+     "color": "chitin",
+     "tint": "#3f3427",
+     "scale": [
+      1,
+      0.2,
+      1
+     ],
+     "rotation": [
+      -90.0,
+      -3.5476,
+      -107.4791
+     ]
+    },
+    {
+     "kind": "lathe",
+     "profile": [
+      [
+       0.0,
+       -0.00453
+      ],
+      [
+       0.0022,
+       -0.00388
+      ],
+      [
+       0.00388,
+       -0.00233
+      ],
+      [
+       0.00453,
+       -0.0
+      ],
+      [
+       0.00388,
+       0.0022
+      ],
+      [
+       0.0022,
+       0.00388
+      ],
+      [
+       0.0,
+       0.00453
+      ]
+     ],
+     "segments": 12,
+     "at": [
+      -0.1396,
+      0.9509,
+      0.1688
+     ],
+     "color": "chitin",
+     "tint": "#3f3427",
+     "scale": [
+      1,
+      0.2,
+      1
+     ],
+     "rotation": [
+      -90.0,
+      -3.5476,
+      -107.4791
+     ]
+    },
+    {
+     "kind": "lathe",
+     "profile": [
+      [
+       0.0,
+       -0.00453
+      ],
+      [
+       0.0022,
+       -0.00388
+      ],
+      [
+       0.00388,
+       -0.00233
+      ],
+      [
+       0.00453,
+       -0.0
+      ],
+      [
+       0.00388,
+       0.0022
+      ],
+      [
+       0.0022,
+       0.00388
+      ],
+      [
+       0.0,
+       0.00453
+      ]
+     ],
+     "segments": 12,
+     "at": [
+      -0.137,
+      0.9511,
+      0.1696
+     ],
+     "color": "chitin",
+     "tint": "#3f3427",
+     "scale": [
+      1,
+      0.2,
+      1
+     ],
+     "rotation": [
+      -90.0,
+      -3.5476,
+      -107.4791
+     ]
     }
    ],
    "connects": [
@@ -10966,7 +11119,7 @@
     "en": "Leaf section ×250",
     "zh": "叶片切块 ×250"
    },
-   "group": "close-ups",
+   "group": "leaf-block",
    "summary": {
     "en": "Inside a leaf: where the food is made.",
     "zh": "叶子的里面：造食物的地方。"
@@ -11532,7 +11685,7 @@
     "en": "Vein section ×250",
     "zh": "叶脉切面 ×250"
    },
-   "group": "close-ups",
+   "group": "leaf-block",
    "summary": {
     "en": "Both kinds of tube run through every vein.",
     "zh": "每条叶脉里都有两种管。"
@@ -12067,14 +12220,14 @@
     "en": "Tiny opening ×250",
     "zh": "叶上的小孔 ×250"
    },
-   "group": "close-ups",
+   "group": "leaf-block",
    "summary": {
     "en": "Lets carbon dioxide in, oxygen and water vapour out.",
     "zh": "让二氧化碳进来，氧和水蒸气出去。"
    },
    "detail": {
-    "en": "One of the tiny openings in the leaf, between two bean-shaped guard cells. Carbon dioxide comes in through it and oxygen goes out; water vapour also escapes through it [S4, S5]. Scientists call these openings stomata.\n\nOn most leaves they are mainly on the underside [S4]. The guard cells open the stoma in light and close it at night [S5]; the model's gentle pulse stands for this, much faster than in life.\n\nWith its openings closed a leaf loses little water, but it also takes in little carbon dioxide.",
-    "zh": "叶上的一个小孔，夹在两个豆子形的保卫细胞之间。二氧化碳从这里进来，氧从这里出去，水蒸气也从这里散失 [S4, S5]。科学家把这些小孔叫作气孔。\n\n多数叶子的小孔主要在叶背 [S4]。保卫细胞在有光时把小孔打开、夜里关上 [S5]；模型里轻微的开合代表这一点，比真实的快得多。\n\n小孔关着时，叶子散失的水少了，吸进的二氧化碳也少了。"
+    "en": "One of the tiny openings in the leaf, between two bean-shaped guard cells. Carbon dioxide comes in through it and oxygen goes out; water vapour also escapes through it [S4, S5]. Scientists call these openings stomata.\n\nOn most leaves they are mainly on the underside [S4]. The guard cells open the stoma in light and close it at night [S5]; the model's gentle pulse stands for this, much faster than in life. Beside the leaf block the model also draws the opening larger than a real one would be at the same magnification, so that its two guard cells can be seen.\n\nWith its openings closed a leaf loses little water, but it also takes in little carbon dioxide.",
+    "zh": "叶上的一个小孔，夹在两个豆子形的保卫细胞之间。二氧化碳从这里进来，氧从这里出去，水蒸气也从这里散失 [S4, S5]。科学家把这些小孔叫作气孔。\n\n多数叶子的小孔主要在叶背 [S4]。保卫细胞在有光时把小孔打开、夜里关上 [S5]；模型里轻微的开合代表这一点，比真实的快得多。放在叶片切块旁边的这个小孔，也比同样放大倍数下的真实小孔画得大，这样才能看清两个保卫细胞。\n\n小孔关着时，叶子散失的水少了，吸进的二氧化碳也少了。"
    },
    "primitive": {
     "kind": "sweep",
@@ -12168,7 +12321,7 @@
     "en": "Stem section ×8",
     "zh": "茎横切 ×8"
    },
-   "group": "close-ups",
+   "group": "stem-slice",
    "summary": {
     "en": "A slice across the stem shows the bundles of tubes.",
     "zh": "茎的横切面上可以看到一束束管子。"
@@ -12615,7 +12768,7 @@
     "en": "Root tip ×30",
     "zh": "根尖 ×30"
    },
-   "group": "close-ups",
+   "group": "root-sample",
    "summary": {
     "en": "Root hairs reach between the soil grains.",
     "zh": "根毛伸进土粒之间。"
@@ -13237,7 +13390,7 @@
     "en": "Flower cut in half ×6",
     "zh": "剖开的花 ×6"
    },
-   "group": "close-ups",
+   "group": "flower-half",
    "summary": {
     "en": "The stamens stand round the pistil.",
     "zh": "雄蕊围着雌蕊。"
@@ -13777,7 +13930,7 @@
     "en": "Ovules ×6",
     "zh": "胚珠 ×6"
    },
-   "group": "close-ups",
+   "group": "flower-half",
    "summary": {
     "en": "Become seeds after fertilisation.",
     "zh": "受精以后发育成种子。"
@@ -14167,7 +14320,7 @@
     "en": "Pollen grains (magnified)",
     "zh": "花粉粒（放大）"
    },
-   "group": "close-ups",
+   "group": "pollen-sample",
    "summary": {
     "en": "Each grain carries a male reproductive cell.",
     "zh": "每粒花粉里有雄性生殖细胞。"
@@ -20562,10 +20715,62 @@
    "color": "token:hot"
   },
   {
-   "id": "close-ups",
+   "id": "leaf-block",
    "name": {
-    "en": "Close-ups",
-    "zh": "放大标本"
+    "en": "Leaf specimen",
+    "zh": "叶片标本"
+   },
+   "color": "token:ink-2",
+   "card": false,
+   "scale": {
+    "unit": "mm",
+    "magnification": 250
+   }
+  },
+  {
+   "id": "stem-slice",
+   "name": {
+    "en": "Stem specimen",
+    "zh": "茎的标本"
+   },
+   "color": "token:ink-2",
+   "card": false,
+   "scale": {
+    "unit": "mm",
+    "magnification": 8
+   }
+  },
+  {
+   "id": "root-sample",
+   "name": {
+    "en": "Root-tip specimen",
+    "zh": "根尖标本"
+   },
+   "color": "token:ink-2",
+   "card": false,
+   "scale": {
+    "unit": "mm",
+    "magnification": 30
+   }
+  },
+  {
+   "id": "flower-half",
+   "name": {
+    "en": "Flower specimen",
+    "zh": "花的标本"
+   },
+   "color": "token:ink-2",
+   "card": false,
+   "scale": {
+    "unit": "mm",
+    "magnification": 6
+   }
+  },
+  {
+   "id": "pollen-sample",
+   "name": {
+    "en": "Pollen specimen",
+    "zh": "花粉标本"
    },
    "color": "token:ink-2",
    "card": false
@@ -21693,9 +21898,9 @@
    },
    "camera": {
     "position": [
-     0.963,
-     0.501,
-     0.781
+     0.892,
+     0.382,
+     0.497
     ],
     "target": [
      0.7,

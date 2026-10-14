@@ -45,6 +45,10 @@ describe('topicStats', () => {
       { n: 5, key: 'index.stats.chapters' },
       { n: 37, key: 'index.stats.parts' },
     ]);
+    expect(topicStats('space-scene', loadData('circuits'), 6)).toEqual([
+      { n: 6, key: 'index.stats.chapters' },
+      { n: 36, key: 'index.stats.parts' },
+    ]);
     expect(topicStats('math-scene', loadData('fractions'), 14)).toEqual([
       { n: 12, key: 'index.stats.steps' },
       { n: 51, key: 'index.stats.beats' },

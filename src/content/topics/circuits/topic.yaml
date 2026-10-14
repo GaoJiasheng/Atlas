@@ -10,7 +10,7 @@ engine: space-scene
 stage: model3d
 theme: paper
 sensitivity: open
-status: draft
+status: published
 illustration: circuits
 shortTitle: { en: "Circuits", zh: "电路" }
 note: { en: "Generic design study · a school circuit board and torch · not a specific product", zh: "通用设计研究 · 小学电路板与手电筒 · 不代表任何具体产品" }

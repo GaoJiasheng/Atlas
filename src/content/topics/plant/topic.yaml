@@ -15,7 +15,7 @@ engine: space-scene
 stage: model3d
 theme: paper
 sensitivity: open
-status: draft
+status: published
 illustration: plant
 shortTitle: { en: "Chilli plant", zh: "辣椒" }
 note: { en: "Model study · a chilli plant (Capsicum annuum) · close-ups magnified as marked, cells schematic", zh: "模型研究 · 一株辣椒 · 放大标本另注倍数，细胞为示意" }

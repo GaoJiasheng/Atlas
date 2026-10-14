@@ -8,7 +8,7 @@ state:
   labels: ["cell-holder", "main-switch", "bulb-a", "leads"]
   camera: {"position": [-0.01, 0.82, 0.13], "target": [-0.01, 0, 0.005], "fov": 32}
   summary: {"en": "Current flows only round a complete loop; a switch opens or closes that loop.", "zh": "只有完整的回路才有电流；开关把回路断开或接通。"}
-  sim: {"set": {"arrangement": "single", "cells": 2, "main": false}, "try": {"vary": "main", "keep": ["cells", {"en": "Same bulb", "zh": "同一只灯泡"}], "observe": ["bright-a", "i-cells"], "predict": {"prompt": {"en": "Unclip one end of the copper link in the gap. Will the bulb stay lit?", "zh": "把缺口里铜线的一头松开，灯泡还会亮吗？"}, "start": {"main": true}, "change": {"gap": "empty"}, "observe": "bright-a", "options": [{"id": "stays-lit", "label": {"en": "Stays lit", "zh": "还亮"}, "means": "same"}, {"id": "goes-out", "label": {"en": "Goes out", "zh": "熄灭"}, "means": "zero"}, {"id": "dims", "label": {"en": "Gets dimmer", "zh": "变暗"}, "means": "less"}]}}}
+  sim: {"set": {"arrangement": "single", "cells": 2, "main": false}, "try": {"vary": "main", "keep": ["cells", {"en": "Same bulb", "zh": "同一只灯泡"}], "observe": ["bright-a", "i-cells"], "predict": {"prompt": {"en": "The switch is closed and the bulb is lit. Unclip one end of the copper link in the gap. Will the bulb stay lit?", "zh": "开关合上，灯泡亮着。把缺口里铜线的一头松开，灯泡还会亮吗？"}, "start": {"main": true}, "change": {"gap": "empty"}, "observe": "bright-a", "options": [{"id": "stays-lit", "label": {"en": "Stays lit", "zh": "还亮"}, "means": "same"}, {"id": "goes-out", "label": {"en": "Goes out", "zh": "熄灭"}, "means": "zero"}, {"id": "dims", "label": {"en": "Gets dimmer", "zh": "变暗"}, "means": "less"}]}}}
   beats:
     - labels: ["cell-holder", "main-switch", "bulb-a", "leads"]
       caption: {"en": "The same parts, spread out on a board: batteries in a holder, wires, a switch and a bulb. The diagram at the top right shows the same circuit in symbols.", "zh": "同样的元件摊在一块板上：电池盒里的电池、导线、一个开关和一只灯泡。右上角的电路图用符号画出同一个电路。"}
@@ -40,7 +40,7 @@ Both ends matter. A battery has two <Term id="terminal">terminals</Term>, positi
 
 Other parts can sit in the loop too. Swap it for a small motor and the fan turns; swap it for a buzzer and it sounds. The circuit is the same; the job is different.
 
-Use the Try it card to predict what a loose clip at the battery does to the bulb, then watch the board.
+Use the Try it card to predict what a loose clip in the loop does to the bulb, then watch the board.
 
 <More title={{ en: "One wire is not enough", zh: "一根线不够" }}>
 
@@ -78,7 +78,7 @@ In the circuit diagram a battery is a pair of lines, the longer one for the posi
 
 接在回路里的不一定是灯泡。换成小电机，风扇叶就转起来；换成蜂鸣器，它就响了。电路一样，用处不同。
 
-用「试一试」卡片先猜一猜：一只夹子从电池上松脱，灯泡会怎样，再看看电路板上的结果。
+用「试一试」卡片先猜一猜：回路里一只夹子松脱，灯泡会怎样，再看看电路板上的结果。
 
 <More title={{ en: "One wire is not enough", zh: "一根线不够" }}>
 

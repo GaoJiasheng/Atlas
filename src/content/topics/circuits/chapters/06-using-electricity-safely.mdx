@@ -7,7 +7,7 @@ state:
   labels: ["switch-x", "switch-y", "switch-z", "leads"]
   camera: {"position": [0.45, 0.62, 0.92], "target": [-0.02, 0, 0], "fov": 30}
   summary: {"en": "Batteries are safe for experiments; mains electricity is far more powerful, so circuits are kept insulated, dry and not overloaded.", "zh": "电池做实验是安全的；市电强大得多，所以电路要绝缘、保持干燥、不能过载。"}
-  sim: {"set": {"arrangement": "single", "cells": 2}, "try": {"vary": "arrangement", "keep": ["cells"], "observe": ["bright-a", "i-cells", "status"], "predict": {"prompt": {"en": "What happens if all three link switches are closed?", "zh": "三个连接开关都合上，会怎样？"}, "start": {"arrangement": "single"}, "change": {"arrangement": "free", "x": true, "y": true, "z": true}, "observe": "bright-a", "options": [{"id": "brighter", "label": {"en": "Both bulbs brighter", "zh": "两只都更亮"}, "means": "more"}, {"id": "out", "label": {"en": "Both go out", "zh": "两只都灭"}, "means": "zero"}, {"id": "no-change", "label": {"en": "Nothing changes", "zh": "没变化"}, "means": "same"}]}}}
+  sim: {"set": {"arrangement": "single", "cells": 2}, "try": {"vary": "arrangement", "keep": ["cells"], "observe": ["bright-a", "i-cells", "status"], "predict": {"prompt": {"en": "What happens if all three link switches are closed?", "zh": "三个连接开关都合上，会怎样？"}, "start": {"arrangement": "single"}, "change": {"arrangement": "free", "x": true, "y": true, "z": true}, "observe": "bright-a", "options": [{"id": "brighter", "label": {"en": "Both bulbs brighter", "zh": "两只都更亮"}, "means": "more"}, {"id": "out", "label": {"en": "Both go out", "zh": "两只都灭"}, "means": "less"}, {"id": "no-change", "label": {"en": "Nothing changes", "zh": "没变化"}, "means": "same"}]}}}
   beats:
     - camera: "bulbs-view"
       sim: {"set": {"arrangement": "free", "x": true, "y": true, "z": true}}
@@ -21,7 +21,7 @@ state:
     - labels: ["leads", "wire-cutaway"]
       caption: {"en": "Tap water conducts electricity. Keep drinks away from sockets and never touch switches or plugs with wet hands.", "zh": "自来水能导电。饮料不要放在插座旁，不要用湿手碰开关和插头。"}
     - labels: ["main-switch", "leads"]
-      caption: {"en": "Too many appliances on one socket can overheat it. Wiring at home is done by licensed electricians, and a circuit breaker cuts the power when something goes wrong.", "zh": "一个插座接太多电器会过热。家里的电线要由持证电工安装，出了问题时断路器会切断电源。"}
+      caption: {"en": "Too many appliances on one socket can overheat it. Wiring at home is done by licensed electricians, and a circuit breaker cuts the power when something goes wrong.", "zh": "一个插座接太多电器会过热。家里的电线要由持证电工安装，出了问题时漏电断路器会切断电源。"}
   index: {"parts": ["switch-x", "switch-y", "switch-z", "leads", "wire-cutaway", "cell-cutaway", "main-switch"]}
 ---
 
@@ -37,7 +37,11 @@ At home the push is far stronger. The sockets in Singapore supply <Num s="S23">2
 
 Plugging too many appliances into one socket or extension can overheat it and start a fire; damaged cables and burn marks are warning signs. Electrical work at home is done by licensed electrical workers. Every home in Singapore must have a residual current circuit breaker, which cuts the power at once when current leaks from its path; test it once a month with its test button.
 
+<Figure src="figures/circuits-safety-home" alt={{ en: "Pencil drawing of a tidy still life: a wall socket with a rocker switch, a household circuit breaker box with its cover open showing a row of small switches, a folded towel, and an electric kettle standing apart with its cord coiled neatly to a three-pin plug.", zh: "整洁物品的铅笔画：带翘板开关的墙上插座，盖子打开、露出一排小开关的家用断路器箱，一条叠好的毛巾，以及一只单独放着的电热水壶，电线整齐地盘着，接一个三脚插头。" }} caption={{ en: "Everyday things near mains electricity: a socket, a kettle whose cable is whole and coiled neatly, a dry towel and a breaker box with its cover open. An illustration made for this topic.", zh: "家里靠近市电的日常物品：插座、电线完好且盘得整齐的电热水壶、一条干毛巾，以及盖子打开的断路器箱。为本主题画的示意图。" }} />
+
 Using electricity well means not wasting it. Switch off lights when leaving a room and turn appliances off at the socket. In Singapore about <Num s="S29">94 %</Num> of electricity is made from natural gas, so electricity saved is fuel saved.
+
+<Figure src="figures/circuits-power-chain" alt={{ en: "Pencil drawing of a chain from left to right: a gas-fired power station with three tall chimneys, transmission towers carrying cables, a fenced substation with transformers, a buried cable tunnel shown in cross-section beneath the ground, and a row of tall apartment blocks on the right.", zh: "从左到右的一条链的铅笔画：有三根高烟囱的燃气发电厂，架着电缆的输电铁塔，装有变压器、围着栏杆的变电站，地下剖开能看到的电缆隧道，右边是一排高层住宅楼。" }} caption={{ en: "From power station to home: gas-fired generation, overhead cables on towers, a substation, underground cables and the buildings they supply. A simplified illustration made for this topic.", zh: "从发电厂到家：燃气发电、铁塔上的架空电缆、变电站、地下电缆，以及它们供电的楼房。为本主题画的简化示意图。" }} />
 
 <More title={{ en: "Short circuits in numbers", zh: "短路的数字" }}>
 
@@ -71,7 +75,11 @@ Most of Singapore's electricity is made in gas-fired power stations. In 2024 nat
 
 一个插座或拖线板插太多电器，会过热起火；电线破损、出现烧焦痕迹，都是警告信号。家里的电气工程由持证电工来做。新加坡每户人家都必须装漏电断路器，电流一旦从该走的路径漏出去，它立刻切断电源；应该每月按一次测试按钮，检查它是否正常。
 
+<Figure src="figures/circuits-safety-home" alt={{ en: "Pencil drawing of a tidy still life: a wall socket with a rocker switch, a household circuit breaker box with its cover open showing a row of small switches, a folded towel, and an electric kettle standing apart with its cord coiled neatly to a three-pin plug.", zh: "整洁物品的铅笔画：带翘板开关的墙上插座，盖子打开、露出一排小开关的家用断路器箱，一条叠好的毛巾，以及一只单独放着的电热水壶，电线整齐地盘着，接一个三脚插头。" }} caption={{ en: "Everyday things near mains electricity: a socket, a kettle whose cable is whole and coiled neatly, a dry towel and a breaker box with its cover open. An illustration made for this topic.", zh: "家里靠近市电的日常物品：插座、电线完好且盘得整齐的电热水壶、一条干毛巾，以及盖子打开的断路器箱。为本主题画的示意图。" }} />
+
 用好电，也包括不浪费电。离开房间随手关灯，电器不用时在插座处关掉。新加坡约 <Num s="S29">94 %</Num> 的电是用天然气发的，省下的电就是省下的燃料。
+
+<Figure src="figures/circuits-power-chain" alt={{ en: "Pencil drawing of a chain from left to right: a gas-fired power station with three tall chimneys, transmission towers carrying cables, a fenced substation with transformers, a buried cable tunnel shown in cross-section beneath the ground, and a row of tall apartment blocks on the right.", zh: "从左到右的一条链的铅笔画：有三根高烟囱的燃气发电厂，架着电缆的输电铁塔，装有变压器、围着栏杆的变电站，地下剖开能看到的电缆隧道，右边是一排高层住宅楼。" }} caption={{ en: "From power station to home: gas-fired generation, overhead cables on towers, a substation, underground cables and the buildings they supply. A simplified illustration made for this topic.", zh: "从发电厂到家：燃气发电、铁塔上的架空电缆、变电站、地下电缆，以及它们供电的楼房。为本主题画的简化示意图。" }} />
 
 <More title={{ en: "Short circuits in numbers", zh: "短路的数字" }}>
 

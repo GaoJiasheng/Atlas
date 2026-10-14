@@ -12,7 +12,7 @@
 | 一只蝗虫的身体（黑角瓦兰蝗解剖） | biology | space | SpaceScene/Model3D | Sci P3 Diversity、Cycles；与人体系统对照；详见 docs/14 | 2026 第三个（验证生物解剖模板） | 已完成 6 章（待审） |
 | 人体肌肉系列（胸 / 背 / 肩 / 臂 / 腿 / 腰腹） | biology | space | SpaceScene/Model3D | 人体系统与课外健身知识；详见 docs/16 §16 | 2026 | published ×6（2026-10-12） |
 | 新加坡 1819–1965 | history | time | TimeScene/Geo | SS P4 新加坡故事 | 2027 |
-| 植物的身体（根茎叶花） | biology | space | SpaceScene/Layer2D | Sci P4 植物部位与功能；P5 植物运输 | 2027 |
+| 一株植物（盆栽辣椒：根茎叶花果种子，P3–P6 五个课题） | biology | space | SpaceScene/Model3D | Sci P3 生命周期；P4 植物部位与功能；P5 运输系统与繁殖；P6 光合作用与传播；详见 docs/26 | 2026 提前 | published（2026-10-14）：7 章 37 拍 |
 | 生物分类与多样性 | biology | space（树状） | Layer2D | Sci P3 Diversity | 2027 |
 | 磁铁 | science | space + sim | SpaceScene/Model3D + 试一试（`sim`，kind magnet） | Sci P3 磁；详见 docs/22 | 2028 | spec 草案 |
 | 消化系统 | biology | space | Layer2D | Sci P4 人体系统 | 2028 |
@@ -20,7 +20,7 @@
 | 光与影 | science | sim | Simulation | Sci P4 光与影 | 2029 |
 | 大陆漂移与板块 | geography | time | TimeScene/Geo+morph | 课外拓展（地理） | 2028–2029 |
 | 山脉与火山形成 | geography | time + space | Diagram + Model3D | 课外拓展 | 2029 |
-| 电路是怎么工作的（手电筒 + 电路板） | science | space + sim | SpaceScene/Model3D + 试一试（`sim`，kind circuit） | Sci P5 Electrical System；详见 docs/23 | 2026 提前（与植物并行） | draft：6 章 31 拍，引擎「试一试」扩展已做（2026-10-14） |
+| 电路是怎么工作的（手电筒 + 电路板） | science | space + sim | SpaceScene/Model3D + 试一试（`sim`，kind circuit） | Sci P5 Electrical System；详见 docs/23 | 2026 提前（与植物并行） | published（2026-10-14）：6 章 31 拍，「试一试」扩展（`sim`）随本主题上线 |
 | 呼吸与循环系统 | biology | space | Layer2D/Model3D | Sci P5 呼吸与循环（人体与植物） | 2030 |
 | 力（摩擦、重力、弹力） | science | sim | Simulation | Sci P6 | 2030 |
 | 气候带与季风 | geography | time | TimeScene/Geo | 课外拓展 | 随时 |

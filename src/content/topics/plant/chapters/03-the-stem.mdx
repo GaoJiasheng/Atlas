@@ -7,7 +7,7 @@ state:
   view: xray
   run: false
   cutaway: none
-  layers: [roots, stem, leaves, flowers-fruit, close-ups, transport, sugar]
+  layers: [roots, stem, leaves, flowers-fruit, leaf-block, stem-slice, root-sample, flower-half, pollen-sample, transport, sugar]
   hide: [leaf-section, leaf-vein-section, stoma, root-tip, flower-section, ovules, pollen-grains, dry-pot]
   labels: [main-stem, stem-water-tubes, stem-food-tubes]
   camera: { position: [0.489, 0.9, 1.086], target: [0.0, 0.52, 0.0], fov: 28 }
@@ -17,12 +17,12 @@ state:
       camera: { position: [0.489, 0.9, 1.086], target: [0.0, 0.52, 0.0], fov: 28 }
       caption: { en: "With the stem made see-through, two kinds of tube show inside: thicker water-carrying tubes and thinner food-carrying tubes, running the whole length of the stem.", zh: "把茎变成透明，里面有两种管：粗一些的输水管和细一些的输食管，贯穿整根茎。" }
     - view: assembled
-      cutaway: stem-cross
-      labels: [main-stem, stem-section]
-      camera: { position: [0.744, 1.477, 1.068], target: [0.45, 0.3, -0.05], fov: 30 }
-      caption: { en: "Cut across, the stem shows its tubes in bundles arranged in a ring. On the bench is the same slice drawn eight times larger: blue-grey water tubes inside, ochre food tubes outside.", zh: "横着切开，茎里的管子成束排成一圈。台上是放大 8 倍的同一个切面：蓝灰色的输水管在内侧，赭黄色的输食管在外侧。" }
+      cutaway: none
+      labels: [stem-section, "group:stem-slice"]
+      camera: { position: [1.05, 0.58, 0.36], target: [0.9, 0.05, -0.1], fov: 28 }
+      caption: { en: "A slice cut across the stem and drawn eight times larger. The tubes lie in bundles arranged in a ring: blue-grey water tubes inside, ochre food tubes outside.", zh: "把茎横着切开的一片，放大 8 倍。管子成束排成一圈：蓝灰色的输水管在内侧，赭黄色的输食管在外侧。" }
     - run: true
-      layers: [roots, stem, leaves, flowers-fruit, close-ups, transport]
+      layers: [roots, stem, leaves, flowers-fruit, leaf-block, stem-slice, root-sample, flower-half, pollen-sample, transport]
       labels: [stem-water-tubes, petioles, leaves-lower]
       camera: { position: [0.97, 1.313, 2.31], target: [0.0, 0.62, 0.0], fov: 30 }
       caption: { en: "Blue dots are water. It travels only upwards: from the roots, through the water-carrying tubes in the stem and the leaf stalks, out to the leaves.", zh: "蓝色的点是水。水只向上走：从根出发，经过茎和叶柄里的输水管，一直送到叶子。" }
@@ -32,9 +32,9 @@ state:
       caption: { en: "Ochre-green dots are sugar made in the leaves. The food-carrying tubes take it both ways: down to the roots and along the branches to the growing fruit.", zh: "赭绿色的点是叶子造的糖。输食管把糖往两个方向送：向下送到根，沿着枝条送到正在长大的果实。" }
     - run: false
       labels: [stem-water-tubes, stem-food-tubes]
-      highlight: { signal: [stem-water-tubes] }
-      camera: { position: [0.489, 0.9, 1.086], target: [0.0, 0.52, 0.0], fov: 28 }
-      caption: { en: "Stand a cut leafy stem in coloured water, and after some hours only the water-carrying tubes are stained. In the model the orange tint stands for the colour.", zh: "把一段带叶的枝条插进有颜色的水里，几个小时以后，只有输水管被染了色。模型里用橙色代表这种颜色。" }
+      highlight: { custom: { stem-water-tubes: "#e0212d" } }
+      camera: { position: [0.269, 0.729, 0.597], target: [0.0, 0.52, 0.0], fov: 28 }
+      caption: { en: "Stand a cut leafy stem in red ink or dye, and after some hours only the water-carrying tubes are stained. In the model the water-carrying tubes are tinted red.", zh: "把一段带叶的枝条插进红墨水里，几个小时以后，只有输水管被染了色。模型里把输水管染成红色。" }
   index:
     parts: [main-stem, stem-water-tubes, stem-food-tubes, stem-section, petioles, fruit-green]
 ---
@@ -75,7 +75,7 @@ Stand a leafy stick of celery, or a white flower such as a white chrysanthemum, 
 
 茎把植物撑起来：它把叶子举向光，托着花和果实。模型里茎基部粗约 <Num s="S1">1.3 厘米</Num>。把它变成透明，就能看到茎的另一项工作：里面有两种管，从根一直通到叶子。<FlyTo preset="stem-close">看看茎的里面</FlyTo>
 
-<Term id="water-carrying-tubes">输水管</Term>把水和矿物盐从根往上送到叶、花和果实，水在里面只向上走。<Term id="food-carrying-tubes">输食管</Term>把叶子造的糖送到需要它的每个部分：向下送到根，也向上、向外送到新芽、花和正在长大的果实。所以糖可以往两个方向走。
+<Term id="water-carrying-tubes">输水管</Term>把水和矿物盐从根往上送到叶、花和果实，水在里面只向上走。<Term id="food-carrying-tubes">输食管</Term>把叶子造的糖送到需要它的每个部分：向下送到根，也向上、向外送到新芽、花和正在长大的果实。所以糖可以往两个方向走。两种管运送的东西不同，所以茎里有两种管：一种送水，一种送糖。
 
 把茎横着切开，可以看到管子成束地排成一圈。台上是同一个切面放大 <Num s="S1">8</Num> 倍的样子：输水管画成蓝灰色，输食管画成赭黄色。不必记住哪种管在里、哪种在外，重要的是每种管运送什么。
 

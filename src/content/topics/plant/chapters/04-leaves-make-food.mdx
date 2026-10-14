@@ -7,7 +7,7 @@ state:
   view: assembled
   run: true
   cutaway: none
-  layers: [roots, stem, leaves, flowers-fruit, close-ups, photosynthesis]
+  layers: [roots, stem, leaves, flowers-fruit, leaf-block, stem-slice, root-sample, flower-half, pollen-sample, photosynthesis]
   hide: [stem-section, root-tip, flower-section, ovules, pollen-grains]
   labels: ["group:leaves", leaves-upper, main-stem]
   camera: { position: [1.166, 1.583, 2.531], target: [-0.1, 0.95, 0.0], fov: 30 }
@@ -17,25 +17,30 @@ state:
       camera: { position: [1.166, 1.583, 2.531], target: [-0.1, 0.95, 0.0], fov: 30 }
       caption: { en: "Orange dots are light, here from a lamp; outdoors it comes from the Sun. The light falls on the green leaves, where the plant's food is made.", zh: "橙色的点是光，这里来自一盏灯，在室外则来自太阳。光照在绿色的叶子上，植物的食物就在这里制造。" }
     - run: false
-      labels: [leaf-section, leaf-vein-section, stoma]
-      camera: { position: [0.963, 0.501, 0.781], target: [0.7, 0.06, -0.27], fov: 28 }
-      caption: { en: "A block cut from a leaf, drawn about two hundred times larger. Under the thin skin are column-shaped cells, then loosely packed cells with air spaces; both are green with chlorophyll.", zh: "从叶子上切下的一小块，放大约 200 倍。薄薄的表皮下面是一排柱子形的细胞，再下面是排得松散、中间有空隙的细胞，它们都含绿色的叶绿素。" }
-    - labels: [stoma, leaf-section, leaf-vein-section]
-      camera: { position: [0.963, 0.501, 0.781], target: [0.7, 0.06, -0.27], fov: 28 }
+      labels: [leaf-section, leaf-vein-section, stoma, "group:leaf-block"]
+      camera: { position: [0.892, 0.382, 0.497], target: [0.7, 0.06, -0.27], fov: 28 }
+      caption: { en: "A block cut from a leaf, drawn about two hundred and fifty times larger. Under the thin skin are column-shaped cells, then loosely packed cells with air spaces; both are green with chlorophyll.", zh: "从叶子上切下的一小块，放大约 250 倍。薄薄的表皮下面是一排柱子形的细胞，再下面是排得松散、中间有空隙的细胞，它们都含绿色的叶绿素。" }
+    - labels: [stoma, leaf-section, leaf-vein-section, "group:leaf-block"]
+      camera: { position: [0.892, 0.382, 0.497], target: [0.7, 0.06, -0.27], fov: 28 }
       caption: { en: "Grey dots are carbon dioxide, coming in through a tiny opening underneath. Blue dots are water, arriving through the vein. In the green cells they become sugar, ochre-green, and oxygen, pale blue-green.", zh: "灰色的点是二氧化碳，从叶背的小孔进来；蓝色的点是水，从叶脉送来。在绿色的细胞里，它们变成糖（赭绿色）和氧（浅青色）。" }
-    - layers: [roots, stem, leaves, flowers-fruit, close-ups, photosynthesis, vapour]
-      labels: [stoma, leaf-section]
-      camera: { position: [0.963, 0.501, 0.781], target: [0.7, 0.06, -0.27], fov: 28 }
+    - layers: [roots, stem, leaves, flowers-fruit, leaf-block, stem-slice, root-sample, flower-half, pollen-sample, photosynthesis, vapour]
+      labels: [stoma, leaf-section, "group:leaf-block"]
+      camera: { position: [0.892, 0.382, 0.497], target: [0.7, 0.06, -0.27], fov: 28 }
       caption: { en: "Beige dots are water vapour leaving through the same openings. Most of the water a plant takes in escapes this way; only a small part is used to make food.", zh: "米色的点是水蒸气，也从这些小孔出去。植物吸进的水，大部分这样散失掉，只有一小部分用来造食物。" }
     - run: false
       pose: stomata-closed
-      labels: [stoma, leaf-section]
-      camera: { position: [0.963, 0.501, 0.781], target: [0.7, 0.06, -0.27], fov: 28 }
+      labels: [stoma, leaf-section, "group:leaf-block"]
+      camera: { position: [0.892, 0.382, 0.497], target: [0.7, 0.06, -0.27], fov: 28 }
       caption: { en: "At night there is no light, so no sugar is made and most of the tiny openings close. The plant still respires, day and night, using sugar to release energy.", zh: "夜里没有光，就不再造糖，大多数小孔也关上了。但植物日夜都在呼吸，分解糖来释放能量。" }
     - run: false
       labels: [leaves-lower, main-stem]
       camera: { position: [0.371, 1.047, 2.089], target: [-0.36, 0.42, 0.0], fov: 30 }
       caption: { en: "A fair test of light: two plants alike in every way, one left in the light and one under a cardboard box. Only the light is changed; then their colour and height are compared.", zh: "关于光的公平测试：两株一样的植物，一株放在光下，一株用纸箱罩住。只改变光，其他都不变，然后比较它们的颜色和高度。" }
+    - run: false
+      labels: ["group:leaves", leaves-upper]
+      highlight: { custom: { leaves: "#10163a" } }
+      camera: { position: [0.95, 1.4, 2.15], target: [-0.05, 0.85, 0.0], fov: 30 }
+      caption: { en: "The starch test: iodine solution turns blue-black where a leaf has stored starch. The model tints the leaves that colour to show the result for a plant that has stood in the light; a teacher does the real test in a laboratory.", zh: "淀粉检验：叶子储存了淀粉的地方，碘液会把它染成蓝黑色。模型把叶子染成这种颜色，表示一株在光下放过的植物的结果；真正的检验由老师在实验室里做。" }
   index:
     parts: [leaves-lower, leaves-upper, leaf-section, leaf-vein-section, stoma, stem-food-tubes]
 ---
