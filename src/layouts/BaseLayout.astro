@@ -70,6 +70,13 @@ const pwa = import.meta.env.PROD;
       >{t(locale, 'a11y.skipToContent')}</a
     >
     <slot />
-    {pwa && <script is:inline src={`${root}/registerSW.js`}></script>}
+    {pwa && <script is:inline define:vars={{ swUrl: `${root}/sw.js`, swScope: `${root}/` }}>
+      // Capacitor serves the entire site from its bundle; a PWA worker is unnecessary.
+      if (location.protocol !== 'capacitor:' && !window.Capacitor?.isNativePlatform?.() && 'serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register(swUrl, { scope: swScope });
+        });
+      }
+    </script>}
   </body>
 </html>

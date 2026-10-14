@@ -40,6 +40,8 @@ export default defineConfig({
       base: pwaBase,
       scope: pwaBase,
       registerType: 'autoUpdate',
+      // BaseLayout owns registration so the native shell can skip it.
+      injectRegister: false,
       includeAssets: ['favicon.svg'],
       manifest: {
         id: pwaBase,

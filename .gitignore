@@ -8,6 +8,14 @@ dist/
 !.env.example
 coverage/
 
+# Keep the native project; regenerate bundled web assets with cap sync.
+ios/App/Pods/
+ios/**/DerivedData/
+ios/**/xcuserdata/
+ios/App/App/public/
+ios/App/App/capacitor.config.json
+ios/App/App/config.xml
+
 # Playwright
 tests-e2e/__screenshots__/
 test-results/

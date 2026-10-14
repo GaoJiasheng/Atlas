@@ -42,6 +42,17 @@
 }
 
 @layer base {
+  :root {
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-right: env(safe-area-inset-right, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-left: env(safe-area-inset-left, 0px);
+  }
+
+  html, body {
+    overscroll-behavior: none;
+  }
+
   html {
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
@@ -278,12 +289,14 @@ astro-static-slot {
   }
 
   .home {
+    padding-bottom: var(--safe-bottom);
     --home-gutter: clamp(16px, 4vw, 48px);
   }
   .home__wrap {
     max-width: 1312px;
     margin-inline: auto;
-    padding-inline: var(--home-gutter);
+    padding-left: max(var(--home-gutter), var(--safe-left));
+    padding-right: max(var(--home-gutter), var(--safe-right));
   }
 
   /* 1. Frontispiece ------------------------------------------------- */
@@ -943,4 +956,11 @@ astro-static-slot {
       align-items: flex-start;
     }
   }
+}
+
+/* Utility padding on the home header must also clear the status bar. */
+body > header {
+  padding-top: calc(0.5rem + var(--safe-top));
+  padding-left: max(1rem, var(--safe-left));
+  padding-right: max(1rem, var(--safe-right));
 }
