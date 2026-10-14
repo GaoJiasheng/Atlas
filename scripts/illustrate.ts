@@ -15,14 +15,13 @@
  *     temporary directory, then runs `process` on the result.
  *
  *   pnpm tsx scripts/illustrate.ts figure <src.png> <id>
- *     a chapter figure (4:3) written to public/illustrations/figures/<id>.webp (+@2x), no manifest.
+ *     a chapter figure (4:3) written to public/illustrations/figures/<id>.webp (1200 px, single density), no manifest.
  *
  *   pnpm tsx scripts/illustrate.ts exercise <src.png> <id>
  *   pnpm tsx scripts/illustrate.ts exercise-gen <id> "<subject>"
  *     the same for an exercise sketch (docs/16 §10): a two-panel 3:2 drawing
  *     (START left, END right) written to
- *       public/illustrations/exercises/<id>.webp     1200 × 800, alpha, target <= 110 KB
- *       public/illustrations/exercises/<id>@2x.webp  2400 × 1600, alpha, target <= 260 KB
+ *       public/illustrations/exercises/<id>.webp     1200 × 800, alpha, target <= 110 KB (single density)
  *     with no manifest entry (the exercise card references the stem directly).
  *
  * `<slug>` is the file stem a topic names in `topic.yaml` (`illustration: <slug>`);
@@ -82,10 +81,7 @@ const EXERCISE: Shape = {
   aspect: 3 / 2,
   outDir: join(OUT_DIR, 'exercises'),
   label: 'public/illustrations/exercises',
-  variants: [
-    { suffix: '', width: 1200, budget: 110 * 1024 },
-    { suffix: '@2x', width: 2400, budget: 260 * 1024 },
-  ],
+  variants: [{ suffix: '', width: 1200, budget: 110 * 1024 }],
   manifest: false,
   minQuality: 58,
 };
@@ -114,10 +110,7 @@ const FIGURE: Shape = {
   aspect: 4 / 3,
   outDir: join(OUT_DIR, 'figures'),
   label: 'public/illustrations/figures',
-  variants: [
-    { suffix: '', width: 1200, budget: 120 * 1024 },
-    { suffix: '@2x', width: 2400, budget: 300 * 1024 },
-  ],
+  variants: [{ suffix: '', width: 1200, budget: 120 * 1024 }],
   manifest: false,
   minQuality: 58,
 };

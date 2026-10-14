@@ -308,7 +308,7 @@ export const exerciseSheet = z
     cautions: z.array(bilingual).default([]),
     /** "Research shows …" with sample and conditions. */
     evidence: z.array(z.object({ text: bilingual, s: z.array(sharedSourceId).min(1) }).strict()).default([]),
-    /** Two-panel drawing `public/illustrations/exercises/<sketch>.webp` (and `@2x`). */
+    /** Two-panel drawing `public/illustrations/exercises/<sketch>.webp` (1200 × 800, single density). */
     sketch: kebabId.optional(),
     /** Exercise mode keyframes (docs/16 §6.5). */
     motion: exerciseMotion.optional(),

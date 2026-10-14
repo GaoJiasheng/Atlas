@@ -229,8 +229,8 @@ function checkBodyComponents(
     const stem = attrs.src;
     if (!stem) error(file, `<Figure> needs src="<stem under public/illustrations/>", e.g. src="figures/b200-rack": ${raw}`);
     else
-      for (const f of [`${stem}.webp`, `${stem}@2x.webp`])
-        if (!existsSync(join(ROOT, 'public/illustrations', f))) error(file, `<Figure src="${stem}">: public/illustrations/${f} not found`);
+      if (!existsSync(join(ROOT, 'public/illustrations', `${stem}.webp`)))
+        error(file, `<Figure src="${stem}">: public/illustrations/${stem}.webp not found`);
     if (!/\balt=/.test(raw)) error(file, `<Figure> needs alt={{ en: "…", zh: "…" }}: ${raw}`);
     if (!/\bcaption=/.test(raw)) error(file, `<Figure> needs caption={{ en: "…", zh: "…" }}: ${raw}`);
   }
@@ -284,10 +284,8 @@ function validateSharedFitness(raw: SharedFitnessRaw): void {
       tree.exercises.set(stem, parsed.data);
       for (const e of parsed.data.exercises) {
         if (!e.sketch) continue;
-        for (const variant of ['', '@2x']) {
-          const img = join(PUBLIC_DIR, 'illustrations/exercises', `${e.sketch}${variant}.webp`);
-          if (!existsSync(img)) error(file, `${e.id}: sketch file not found: ${relative(ROOT, img)}`);
-        }
+        const img = join(PUBLIC_DIR, 'illustrations/exercises', `${e.sketch}.webp`);
+        if (!existsSync(img)) error(file, `${e.id}: sketch file not found: ${relative(ROOT, img)}`);
       }
     } else reportZod(file, parsed.error);
   }

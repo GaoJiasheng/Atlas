@@ -121,7 +121,6 @@ export function ExerciseCard({ exercise, file, fitness, playable }: { exercise: 
         <img
           className="space-exercise__sketch"
           src={withBase(`/illustrations/exercises/${exercise.sketch}.webp`)}
-          srcSet={`${withBase(`/illustrations/exercises/${exercise.sketch}.webp`)} 1x, ${withBase(`/illustrations/exercises/${exercise.sketch}@2x.webp`)} 2x`}
           width={1200}
           height={800}
           alt={t('space.exercise.sketch', { name })}
