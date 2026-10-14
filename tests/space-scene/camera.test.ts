@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   COVER_FILL,
+  COVER_FILL_HEIGHT,
   COVER_MAX_HEIGHT,
   DEFAULT_CAMERA,
   fitCameraToAspect,
@@ -131,5 +132,19 @@ describe('fitSphereCamera (default cover camera)', () => {
     const len = Math.hypot(...cam.position);
     const tv = Math.tan((30 * Math.PI) / 360);
     expect(Math.tan(Math.asin(1 / len)) / tv).toBeCloseTo(COVER_MAX_HEIGHT, 6);
+  });
+  it('fits a tall narrow subject by height: its box fills ~80 % of the stage height', () => {
+    const half = [0.15, 0.6, 0.15] as const;
+    const radius = Math.hypot(...half);
+    const wide = fitSphereCamera(view, [0, 0.6, 0], radius, 1.78);
+    const tall = fitSphereCamera(view, [0, 0.6, 0], radius, 1.78, undefined, half);
+    const dist = (c: { position: readonly number[]; target: readonly number[] }) => Math.hypot(c.position[0]! - c.target[0]!, c.position[1]! - c.target[1]!, c.position[2]! - c.target[2]!);
+    expect(dist(tall)).toBeGreaterThan(dist(wide));
+    // The box is 1.2 m tall; at the new distance it fills at most COVER_FILL_HEIGHT of the frame.
+    const tv = Math.tan((30 * Math.PI) / 360);
+    expect(1.2 / 2 / (dist(tall) * tv)).toBeLessThanOrEqual(COVER_FILL_HEIGHT + 1e-9);
+    // A wide subject (height-fit is not binding) keeps the sphere fit.
+    const flat = fitSphereCamera(view, [0, 0, 0], 1.2, 1.6, undefined, [1.1, 0.1, 0.4]);
+    expect(dist(flat)).toBeCloseTo(dist(fitSphereCamera(view, [0, 0, 0], 1.2, 1.6)), 9);
   });
 });

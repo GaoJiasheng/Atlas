@@ -22,6 +22,8 @@ export const COVER_TWEEN_MS = 800;
 export const COVER_FILL = 0.75;
 /** …and at most this share of the stage height. */
 export const COVER_MAX_HEIGHT = 1.3;
+/** A tall subject (its box, seen from the cover direction) fills this share of the stage height. */
+export const COVER_FILL_HEIGHT = 0.8;
 
 /**
  * Where the camera should go after a transition:
@@ -146,15 +148,33 @@ export function referenceCamera(bounds: Box3Like, plane: SectionPlane, aspect: n
  * fills `fill` of the stage width, seen from the same direction and centred
  * on the sphere. On wide stages the sphere may overrun the height by up to
  * 30 % (a bounding sphere is larger than the model inside it), no more.
+ * With the model's half extents (`half`, x / y / z), a tall narrow subject is
+ * also fitted by height: the camera never sits closer than the one where the
+ * box's projected height fills `COVER_FILL_HEIGHT` of the stage, so the
+ * subject fills most of the frame height instead of overrunning it.
  */
-export function fitSphereCamera(cam: OrbitCamera, center: readonly number[], radius: number, aspect: number, fill = COVER_FILL): OrbitCamera {
+export function fitSphereCamera(
+  cam: OrbitCamera,
+  center: readonly number[],
+  radius: number,
+  aspect: number,
+  fill = COVER_FILL,
+  half?: readonly number[],
+): OrbitCamera {
   const fov = cam.fov ?? DEFAULT_FOV;
   const tv = Math.tan((fov * Math.PI) / 360);
   const t = Math.min(fill * tv * Math.max(aspect, 0.1), COVER_MAX_HEIGHT * tv);
-  const d = Math.max(radius, 1e-3) / Math.sin(Math.atan(t));
+  let d = Math.max(radius, 1e-3) / Math.sin(Math.atan(t));
   let dir = [cam.position[0] - cam.target[0], cam.position[1] - cam.target[1], cam.position[2] - cam.target[2]];
   const len = Math.hypot(dir[0]!, dir[1]!, dir[2]!);
   dir = len > 1e-9 ? dir.map((v) => v / len) : [0, 0, 1];
+  if (half) {
+    // Projected half height of the box seen from `dir` (up = +Y): its height foreshortened by the elevation, plus the footprint's depth.
+    const sin = Math.min(1, Math.abs(dir[1]!));
+    const cos = Math.sqrt(1 - sin * sin);
+    const hh = (half[1] ?? 0) * cos + Math.hypot(half[0] ?? 0, half[2] ?? 0) * sin;
+    d = Math.max(d, (hh / (COVER_FILL_HEIGHT * tv)) + Math.hypot(half[0] ?? 0, half[2] ?? 0) * cos);
+  }
   const c: Vec3 = [center[0] ?? 0, center[1] ?? 0, center[2] ?? 0];
   return { position: [c[0] + dir[0]! * d, c[1] + dir[1]! * d, c[2] + dir[2]! * d], target: c, fov };
 }

@@ -7,7 +7,8 @@
  * chapter axis), and a colour key of the groups and flows.
  */
 import { useScene, useSceneContext, useSceneStore, useT } from '../../core/context';
-import { tx } from '../../../i18n';
+import { tx, type BilingualText } from '../../../i18n';
+import { resolveColorRef } from '../../../theme/theme';
 import { ControlPanel, type ControlRow } from '../../widgets/ControlPanel';
 import type { LegendItem } from '../../widgets/Legend';
 import type { SpaceSceneExt } from '../index';
@@ -48,13 +49,23 @@ export function ExplorerOverlay({ file, glossary = false }: { file: PartsFile; g
         }
       : {}),
   }));
-  const legend: LegendItem[] = [
-    ...file.groups.map((g) => ({ id: `group-${g.id}`, label: g.name, color: g.color, kind: 'fill' as const })),
-    ...file.flows.map((f) => {
-      const group = file.groups.find((g) => g.id === f.group);
-      return { id: `flow-${f.id}`, label: group?.name ?? f.id, color: f.color, kind: 'arrow' as const };
-    }),
-  ];
+  // Groups with parts get a fill swatch; a flow gets an arrow once per label and colour
+  // (a group with no parts, like "Current", is keyed by its flow alone).
+  const legend: LegendItem[] = [];
+  const seen = new Set<string>();
+  const add = (item: LegendItem) => {
+    const key = `${item.kind}|${tx(item.label as BilingualText, 'en')}|${resolveColorRef(item.color)}`;
+    if (seen.has(key)) return;
+    seen.add(key);
+    legend.push(item);
+  };
+  for (const g of file.groups) {
+    if (withParts.has(g.id)) add({ id: `group-${g.id}`, label: g.name, color: g.color, kind: 'fill' });
+  }
+  for (const f of file.flows) {
+    const group = file.groups.find((g) => g.id === f.group);
+    add({ id: `flow-${f.id}`, label: group?.name ?? f.id, color: f.color, kind: 'arrow' });
+  }
   return (
     <div className="atlas-overlay-card space-overlay">
       <ControlPanel layers={layers} tools={glossary ? TOOLS_GLOSSARY : TOOLS} legend={legend} />

@@ -121,7 +121,7 @@ export const MATERIAL_FAMILIES: Record<MaterialFamily, FamilySpec> = {
   enamel: { color: { paper: '#dcd7cb', cinema: '#cfcabd' }, metalness: 0, roughness: 0.34, finish: 'grain', envIntensity: 0.85 },
   brass: { color: { paper: '#a88a4c', cinema: '#b39555' }, metalness: 0.9, roughness: 0.32, finish: 'grain' },
   // Sanded, sealed plywood or pine (a circuit board, a bench): matte, its grain a colour map the tint colours.
-  wood: { color: { paper: '#c49a64', cinema: '#a9845a' }, metalness: 0, roughness: 0.68, finish: 'wood', envIntensity: 0.6 },
+  wood: { color: { paper: '#c49a64', cinema: '#4f3e2d' }, metalness: 0, roughness: 0.68, finish: 'wood', envIntensity: 0.6 },
   // Organisms (docs/14 §3.4): restrained, low-saturation colours (no "gore" red); tint chitin per species.
   chitin: { color: { paper: '#8b6d43', cinema: '#a3845a' }, metalness: 0, roughness: 0.42, finish: 'peel', normal: 0.05, envIntensity: 0.9 },
   membrane: {
@@ -175,6 +175,21 @@ export function resolveDataColor(
   return parsed ? rgbaToHex(parsed) : fallback;
 }
 
+/**
+ * A family colour with a data tint. Wood keeps its paper-to-cinema relation
+ * under a tint (a light bench top must not glare on the dark plate): the tint
+ * is scaled channel by channel by the family's cinema / paper ratio.
+ */
+function tintedColor(f: FamilySpec, tint: string, tokens: Partial<Record<string, string>>, theme: Theme): string {
+  const c = resolveDataColor(tint, tokens, theme, f.color[theme]);
+  if (theme === 'paper' || f.finish !== 'wood') return c;
+  const base = parseCssColor(f.color.paper);
+  const dim = parseCssColor(f.color.cinema);
+  const own = parseCssColor(c);
+  if (!base || !dim || !own) return c;
+  return rgbaToHex({ r: own.r * (dim.r / base.r), g: own.g * (dim.g / base.g), b: own.b * (dim.b / base.b), a: 1 });
+}
+
 /** Full surface look of a part for the current theme. */
 export function resolveMaterialLook(
   ref: string,
@@ -185,7 +200,7 @@ export function resolveMaterialLook(
   if (isMaterialPreset(ref)) {
     const f = MATERIAL_FAMILIES[familyOf(ref)];
     return {
-      color: tint ? resolveDataColor(tint, tokens, theme, f.color[theme]) : f.color[theme],
+      color: tint ? tintedColor(f, tint, tokens, theme) : f.color[theme],
       metalness: f.metalness,
       roughness: f.roughness,
       opacity: f.opacity ?? 1,

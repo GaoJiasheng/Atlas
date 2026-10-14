@@ -97,7 +97,7 @@ export function CameraRig({
   chapters: readonly Chapter[];
   views: ViewPresets;
   /** The assembled model's bounding sphere (default cover camera). */
-  sphere: { center: readonly number[]; radius: number };
+  sphere: { center: readonly number[]; radius: number; half?: readonly number[] };
   minDistance: number;
   /** The held bar's reach in the exercise with this id (standing lifts), or null. */
   span: (exercise: string) => { half: number; yaw: number } | null;
@@ -284,7 +284,7 @@ export function CameraRig({
   /** Where the cover camera is for the current stage. */
   const coverCamera = (from: OrbitCamera): OrbitCamera => {
     const { views: presets, sphere: s } = props.current;
-    return presets.cover ? fitCameraToAspect(withFov(presets.cover), camera.aspect) : fitSphereCamera(withFov(from), s.center, s.radius, camera.aspect);
+    return presets.cover ? fitCameraToAspect(withFov(presets.cover), camera.aspect) : fitSphereCamera(withFov(from), s.center, s.radius, camera.aspect, undefined, s.half);
   };
 
   const onCover = (on: boolean) => {

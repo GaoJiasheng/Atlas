@@ -36,3 +36,20 @@ export function spanCss(span: StopSpan): string {
 export function clip(text: string, max: number): string {
   return text.length <= max ? text : `${text.slice(0, Math.max(1, max - 1)).trimEnd()}…`;
 }
+
+/**
+ * The groups worth a swatch in a key: ones that own at least one shown part
+ * (a flow-only group is keyed by its flow instead), skipping groups kept out of
+ * the part-chain card (`card: false`: specimens, trays) and later groups that
+ * repeat an earlier group's colour.
+ */
+export function keyGroups(file: PartsFile): PartsFile['groups'] {
+  const seen = new Set<string>();
+  return file.groups.filter((g) => {
+    if (g.card === false || !file.parts.some((p) => p.group === g.id && !p.context)) return false;
+    const c = resolveColorRef(g.color);
+    if (seen.has(c)) return false;
+    seen.add(c);
+    return true;
+  });
+}

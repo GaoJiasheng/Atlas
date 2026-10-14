@@ -39,7 +39,7 @@ import type { SpaceSceneExt } from '../index';
 import type { PartsFile, TelemetryRow } from '../schema';
 import type { SpaceUiStore } from '../ui';
 import type { StageBridge } from '../bridge';
-import { flowingGroups, partNumber } from './common';
+import { flowingGroups, keyGroups, partNumber } from './common';
 import { PerfReadout } from './PerfReadout';
 
 const REFRESH_MS = 250;
@@ -246,7 +246,7 @@ export function PlateBlock({ file, ui, bridge }: { file: PartsFile; ui: SpaceUiS
     if (e.detail > 0) e.currentTarget.blur();
   };
   const bodyId = useId();
-  const legend = file.groups.filter((g) => file.parts.some((p) => p.group === g.id && !p.context));
+  const legend = useMemo(() => keyGroups(file), [file]);
 
   return (
     <section className="space-plate" data-hud-panel="plate" data-folded={open ? undefined : ''} aria-label={t('space.plate')}>

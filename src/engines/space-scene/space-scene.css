@@ -487,8 +487,9 @@ div.space-inspector__detail:not([hidden]) {
 }
 .space-plate__key {
   display: flex;
-  flex-wrap: nowrap;
-  gap: calc(6 * var(--u));
+  flex-wrap: wrap;
+  gap: calc(3 * var(--u)) calc(8 * var(--u));
+  max-height: calc(2 * 12 * var(--u) + 3 * var(--u));
   overflow: hidden;
   margin: 0;
   font: 500 calc(10 * var(--u)) / 1.2 var(--font-hud);
@@ -498,9 +499,10 @@ div.space-inspector__detail:not([hidden]) {
 }
 .space-plate__key span {
   display: inline-flex;
-  flex: 1 1 0;
+  flex: 0 1 auto;
   align-items: center;
   gap: calc(3 * var(--u));
+  max-width: 100%;
   min-width: 0;
 }
 .space-plate__key i {

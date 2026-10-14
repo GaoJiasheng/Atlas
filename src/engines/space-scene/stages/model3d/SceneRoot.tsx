@@ -277,7 +277,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
     bridge.modelRadius = bounds.fit.radius;
   }, [bridge, bounds]);
   // The camera frames the subject, not the context around it (M12).
-  const sphere = useMemo(() => ({ center: bounds.fit.center, radius: bounds.fit.radius }), [bounds]);
+  const sphere = useMemo(() => ({ center: bounds.fit.center, radius: bounds.fit.radius, half: bounds.fit.half }), [bounds]);
 
   /* ---------------- materials ---------------- */
   const kit = useMemo(() => createTextureKit(), []);

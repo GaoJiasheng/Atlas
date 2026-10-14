@@ -89,7 +89,7 @@ export interface StageBounds {
   center: Vec3;
   modelRadius: number;
   /** The camera's fit sphere: the non-context parts (all parts when every part is context). */
-  fit: { center: Vec3; radius: number };
+  fit: { center: Vec3; radius: number; half: Vec3 };
   /** Assembled bounds of all parts. */
   min: Vec3;
   max: Vec3;
@@ -139,8 +139,8 @@ export function stageBounds(parts: readonly Part[], shapes: ReadonlyMap<string, 
     center: ok ? [(min[0] + max[0]) / 2, (min[1] + max[1]) / 2, (min[2] + max[2]) / 2] : [0, 0, 0],
     modelRadius: ok ? Math.hypot(max[0] - min[0], max[1] - min[1], max[2] - min[2]) / 2 : 1,
     fit: fitOk
-      ? { center: [(fmin[0] + fmax[0]) / 2, (fmin[1] + fmax[1]) / 2, (fmin[2] + fmax[2]) / 2], radius: Math.hypot(fmax[0] - fmin[0], fmax[1] - fmin[1], fmax[2] - fmin[2]) / 2 }
-      : { center: [0, 0, 0], radius: 1 },
+      ? { center: [(fmin[0] + fmax[0]) / 2, (fmin[1] + fmax[1]) / 2, (fmin[2] + fmax[2]) / 2], radius: Math.hypot(fmax[0] - fmin[0], fmax[1] - fmin[1], fmax[2] - fmin[2]) / 2, half: [(fmax[0] - fmin[0]) / 2, (fmax[1] - fmin[1]) / 2, (fmax[2] - fmin[2]) / 2] }
+      : { center: [0, 0, 0], radius: 1, half: [1, 1, 1] },
     min: ok ? min : [-1, -1, -1],
     max: ok ? max : [1, 1, 1],
   };
