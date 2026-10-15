@@ -11,37 +11,38 @@ state:
   cutaway: "none"
   layers: ["magnet-set", "compass", "materials", "making", "uses", "field", "current"]
   hide: ["fridge-door", "door-gasket", "fridge-magnet", "cabinet-latch", "fridge-body", "cabinet-corner"]
-  labels: ["steel-rod"]
+  labels: ["em-nail", "em-coil", "em-cells", "em-paper-clips"]
   camera: {"position": [0.38, 0.4, 0.52], "target": [0.25, 0.045, -0.01], "fov": 30}
   summary: {"en": "Stroking steel or passing current round it can make a magnet. The steel core keeps a little magnetism after switch-off.", "zh": "摩擦钢或让电流绕钢流动，都能制作磁铁；钢芯断电后会留一点磁性。"}
-  sim: {"set": {"strokes": 0, "em-switch": true, "em-cells": 2}, "try": {"vary": "em-cells", "keep": ["em-switch", {"en": "Same coil and steel core", "zh": "同样的线圈和钢芯"}], "observe": ["clips-em"], "record": true}}
+  sim: {"set": {"setup": "electromagnet", "hang": false, "strokes": 0, "em-switch": true, "em-cells": 2, "bar-position": "bench"}, "try": {"vary": "em-cells", "keep": ["em-switch", {"en": "Same coil and steel core", "zh": "同样的线圈和钢芯"}], "observe": ["clips-em"], "record": true}}
   beats:
-    - labels: ["steel-rod"]
+    - labels: ["steel-rod", "stroke-paper-clips"]
+      layers: ["magnet-set", "compass", "materials", "making", "uses", "current"]
       pose: "stroke-start"
-      sim: {"set": {"strokes": 0, "em-switch": false, "em-cells": 2}}
+      sim: {"set": {"setup": "alone", "hang": false, "strokes": 0, "em-switch": false, "em-cells": 2, "bar-position": "stroke"}}
       caption: {"en": "The steel needle starts without enough magnetism to lift a clip. A magnetic material need not already be a magnet.", "zh": "钢针起初没有足够磁性吸起回形针。磁性材料不一定已经是磁铁。"}
-    - labels: ["steel-rod", "bar-magnet-n"]
+    - labels: ["steel-rod", "stroke-paper-clips", "bar-magnet-n"]
+      layers: ["magnet-set", "compass", "materials", "making", "uses", "current"]
       pose: "stroke-start"
-      sim: {"set": {"strokes": 20, "em-switch": false, "em-cells": 2}}
+      sim: {"set": {"setup": "alone", "hang": false, "strokes": 20, "em-switch": false, "em-cells": 2, "bar-position": "stroke"}}
       caption: {"en": "Stroke in the same direction and lift the magnet clear before returning. After twenty strokes this model lifts four clips.", "zh": "沿同一方向摩擦，每次抬起磁铁再返回。在这个模型里，摩擦二十次能吸起四只回形针。"}
     - labels: ["em-coil", "em-nail", "em-cells", "em-switch"]
       pose: null
-      sim: {"set": {"strokes": 0, "em-switch": false, "em-cells": 2}}
+      sim: {"set": {"setup": "electromagnet", "hang": false, "strokes": 0, "em-switch": false, "em-cells": 2, "bar-position": "bench"}}
       caption: {"en": "The electrical method uses insulated wire wound round a steel nail, with cells, leads and a switch making a complete circuit.", "zh": "电流法把绝缘导线绕在钢钉上，用电池、引线和开关接成完整电路。"}
     - labels: ["em-coil", "em-nail", "em-paper-clips"]
       pose: null
-      sim: {"set": {"strokes": 0, "em-switch": true, "em-cells": 2}}
+      sim: {"set": {"setup": "electromagnet", "hang": false, "strokes": 0, "em-switch": true, "em-cells": 2, "bar-position": "bench"}}
       caption: {"en": "Close the switch. In this model two cells let the steel nail lift six clips.", "zh": "合上开关。在这个模型里，两节电池让钢钉吸起六只回形针。"}
     - labels: ["em-cells", "em-paper-clips"]
       pose: null
-      sim: {"set": {"strokes": 0, "em-switch": true, "em-cells": 1}}
+      sim: {"set": {"setup": "electromagnet", "hang": false, "strokes": 0, "em-switch": true, "em-cells": 1, "bar-position": "bench"}}
       caption: {"en": "Keep the switch closed and use one cell. This model lifts three clips, fewer than before.", "zh": "保持开关闭合，改用一节电池。在这个模型里吸起三只回形针，比刚才少。"}
     - labels: ["em-switch", "em-nail", "em-paper-clips"]
       pose: null
-      sim: {"set": {"strokes": 0, "em-switch": false, "em-cells": 2}}
+      sim: {"set": {"setup": "electromagnet", "hang": false, "strokes": 0, "em-switch": false, "em-cells": 2, "bar-position": "bench"}}
       caption: {"en": "Open the switch. In this model one clip remains: steel keeps a little magnetism. A soft iron core would keep very little.", "zh": "断开开关。在这个模型里仍留下一个回形针：钢会保留一点磁性，软铁芯保留的很少。"}
-  index: {"parts": ["steel-rod", "bar-magnet-n", "bar-magnet-s", "em-nail", "em-coil", "em-cells", "em-switch", "em-leads", "em-paper-clips"]}
-  pose: "stroke-start"
+  index: {"parts": ["steel-rod", "stroke-paper-clips", "bar-magnet-n", "bar-magnet-s", "em-nail", "em-coil", "em-cells", "em-switch", "em-leads", "em-paper-clips"]}
 ---
 
 <Lang en>

@@ -14,27 +14,28 @@ state:
   labels: ["bar-magnet-n", "horseshoe-magnet", "ring-magnet-upper", "test-tray"]
   camera: {"position": [0.68, 0.92, 1.72], "target": [0, 0.05, 0], "fov": 30}
   summary: {"en": "A magnet can push or pull without touching. Different objects respond differently.", "zh": "磁铁不用接触就能推、能拉；不同物品的反应不同。"}
-  sim: {"set": {"facing": "ns", "gap": 6}, "try": {"vary": "facing", "keep": ["gap"], "observe": ["force"]}}
+  sim: {"set": {"setup": "pair", "hang": false, "facing": "ns", "gap": 6, "bar-position": "bench"}, "try": {"vary": "facing", "keep": ["gap"], "observe": ["force"]}}
   beats:
     - labels: ["bar-magnet-n", "horseshoe-magnet", "ring-magnet-upper", "test-tray"]
-      sim: {"set": {"facing": "ns", "gap": 6}}
+      sim: {"set": {"setup": "pair", "hang": false, "facing": "ns", "gap": 6, "bar-position": "bench"}}
       caption: {"en": "Start with the science bench. Bar, horseshoe and ring magnets sit beside a compass, a test tray and the equipment for making magnets.", "zh": "先看科学实验台。条形、马蹄形和环形磁铁旁边，摆着指南针、测试盘和制作磁铁的器材。"}
     - camera: "two-magnets"
       labels: ["bar-magnet-n", "bar-magnet-b"]
-      sim: {"set": {"facing": "ns", "gap": 1.5}}
+      sim: {"set": {"setup": "pair", "hang": false, "facing": "ns", "gap": 1.5, "bar-position": "bench"}}
       caption: {"en": "Bring the bar magnets closer with unlike poles facing. They pull towards each other before they touch.", "zh": "让条形磁铁的异极相对，缩小间隙。它们还没有接触，就互相拉近。"}
     - camera: "two-magnets"
       labels: ["bar-magnet-n", "bar-magnet-b"]
-      sim: {"set": {"facing": "nn", "gap": 3}}
+      sim: {"set": {"setup": "pair", "hang": false, "facing": "nn", "gap": 3, "bar-position": "bench"}}
       caption: {"en": "Turn the second magnet round. The facing ends now push apart. A magnet can push as well as pull.", "zh": "把第二根磁铁调头。相对的两端现在互相推开。磁铁能推，也能拉。"}
     - camera: "tray-view"
       pose: "tray-picked"
+      layers: ["magnet-set", "compass", "materials", "making", "uses", "current"]
       labels: ["iron-nail", "steel-paper-clips", "wooden-block", "plastic-button"]
-      sim: {"set": {"facing": "ns", "gap": 6}}
+      sim: {"set": {"setup": "alone", "hang": false, "facing": "ns", "gap": 6, "bar-position": "tray"}}
       caption: {"en": "The iron nail and steel clips lift towards the magnet. The wooden block and plastic ruler stay on the tray.", "zh": "铁钉和钢回形针朝磁铁抬起，木块和塑料尺留在盘里。"}
     - camera: {"position": [0.68, 0.92, 1.72], "target": [0, 0.05, 0], "fov": 30}
       labels: ["horseshoe-magnet", "ring-magnet-upper", "bar-magnet-s"]
-      sim: {"set": {"facing": "ns", "gap": 6}}
+      sim: {"set": {"setup": "horseshoe", "hang": false, "facing": "ns", "gap": 6, "bar-position": "bench"}}
       caption: {"en": "Different shapes still work as magnets. Their shape changes where the poles sit, not the rule about pushing and pulling.", "zh": "不同形状的磁铁仍然遵守同样的推拉规律；形状改变的是磁极所在的位置。"}
   index: {"parts": ["bar-magnet-n", "bar-magnet-s", "bar-magnet-b", "horseshoe-magnet", "ring-magnet-upper", "ring-magnet-lower", "ring-post", "compass-case", "test-tray", "iron-nail", "steel-paper-clips", "wooden-block", "plastic-button", "steel-rod", "em-coil", "em-cells", "em-switch"]}
 ---

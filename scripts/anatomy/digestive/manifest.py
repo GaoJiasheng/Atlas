@@ -38,6 +38,11 @@ def generate():
         else:
             i=order.index(id)
             p['centreline']={'from':order[i-1],'to':order[i+1] if i+1<len(order) else None}
+    # The source stomach has a round display window cut through its front wall
+    # (Z-Anatomy shows the lining through it). A pupil reads it as a hole, so the
+    # build closes that one opening with a smooth patch that continues the wall
+    # (static_region.fill_openings); the cardia and pylorus rings stay open.
+    next(p for p in parts if p['id']=='stomach')['fillOpenings']=[dict(near=[0.06,0.135,-0.034],maxRadiusM=0.04,reason='display window in the anterior wall of the source stomach')]
     for id,source,b in [('liver','Liver',10000),('gallbladder','Gallbladder',2000),('pancreas','Pancreas',5000),('bile-duct','Bile duct',2000)]:
         part(id,[source],budget=b,layer='helpers')
     # One low-poly mesh per system. Skull/jaw, ribs, spine, pelvis and long bones
@@ -66,7 +71,8 @@ def generate():
                'Ileum, caecum, rectum and anal canal are not separately labelled. No synthetic replacements.',
                'Lungs and trachea come from VisceralSystem100.fbx; CardioVascular41.fbx has no lungs or single Heart mesh.',
                'Skin retains full hands as static context. No articulated hand cuts are needed.',
-               'Procedural tooth, stomach wall and villi close-ups are outside this pipeline.'])
+               'Procedural tooth, stomach wall and villi close-ups are outside this pipeline.',
+               'The stomach source display window is closed by a smooth wall patch (fillOpenings); no other opening is filled.'])
     manifest['budgets']['total']=dict(targetBytes=4000000,maxBytes=8000000,targetTriangles=350000,maxTriangles=500000)
     for p in parts:
         # Do not silently retain stale/nonexistent candidate labels.

@@ -14,23 +14,23 @@ state:
   labels: ["bar-magnet-n", "bar-magnet-b"]
   camera: {"position": [-0.08, 0.42, 0.58], "target": [-0.1, 0.014, 0], "fov": 30}
   summary: {"en": "Unlike poles pull together and like poles push apart. A smaller gap gives a stronger effect.", "zh": "异极相吸，同极相斥；间隙越小，作用越强。"}
-  sim: {"set": {"facing": "ns", "gap": 6}, "try": {"vary": "gap", "keep": ["facing", {"en": "Same magnets", "zh": "同样的磁铁"}], "observe": ["force"], "record": true, "predict": {"prompt": {"en": "Turn magnet B round. What will happen?", "zh": "把磁铁 B 调头，会怎样？"}, "start": {"facing": "ns", "gap": 3}, "change": {"facing": "nn"}, "options": [{"id": "pull", "label": {"en": "Pull together", "zh": "互相拉近"}, "means": "positive"}, {"id": "push", "label": {"en": "Push apart", "zh": "互相推开"}, "means": "negative"}, {"id": "nothing", "label": {"en": "No effect", "zh": "没有作用"}, "means": "zero"}], "observe": "force"}}}
+  sim: {"set": {"setup": "pair", "hang": false, "facing": "ns", "gap": 6, "bar-position": "bench"}, "try": {"vary": "gap", "keep": ["facing", {"en": "Same magnets", "zh": "同样的磁铁"}], "observe": ["force"], "record": true, "predict": {"prompt": {"en": "Turn magnet B round. What will happen?", "zh": "把磁铁 B 调头，会怎样？"}, "start": {"facing": "ns", "gap": 3}, "change": {"facing": "nn"}, "options": [{"id": "pull", "label": {"en": "Pull together", "zh": "互相拉近"}, "means": "positive"}, {"id": "push", "label": {"en": "Push apart", "zh": "互相推开"}, "means": "negative"}, {"id": "nothing", "label": {"en": "No effect", "zh": "没有作用"}, "means": "zero"}], "observe": "force"}}}
   beats:
     - labels: ["bar-magnet-n", "bar-magnet-b"]
-      sim: {"set": {"facing": "ns", "gap": 6}}
+      sim: {"set": {"setup": "pair", "hang": false, "facing": "ns", "gap": 6, "bar-position": "bench"}}
       caption: {"en": "North faces south across a six centimetre gap. In this model the pull is twelve percent of the close-gap reference.", "zh": "北极对南极，间隙六厘米。在这个模型里，拉力是近距离参考值的百分之十二。"}
     - labels: ["bar-magnet-n", "bar-magnet-b"]
-      sim: {"set": {"facing": "ns", "gap": 3}}
+      sim: {"set": {"setup": "pair", "hang": false, "facing": "ns", "gap": 3, "bar-position": "bench"}}
       caption: {"en": "Reduce only the gap to three centimetres. In this model the pull rises to forty-one percent of the reference.", "zh": "只把间隙减到三厘米。在这个模型里，拉力升到参考值的百分之四十一。"}
     - labels: ["bar-magnet-n", "bar-magnet-b", "iron-filings"]
-      sim: {"set": {"facing": "ns", "gap": 1.5}}
+      sim: {"set": {"setup": "pair", "hang": false, "facing": "ns", "gap": 1.5, "bar-position": "bench"}}
       caption: {"en": "At one and a half centimetres the pull is the reference value, one hundred percent in this model. The filings bridge the facing poles.", "zh": "间隙一厘米半时，拉力达到这个模型的参考值，百分之一百。铁屑在相对的磁极之间连成桥。"}
     - labels: ["bar-magnet-n", "bar-magnet-b", "iron-filings"]
-      sim: {"set": {"facing": "nn", "gap": 3}}
+      sim: {"set": {"setup": "pair", "hang": false, "facing": "nn", "gap": 3, "bar-position": "bench"}}
       caption: {"en": "Turn the second bar so north faces north. The arrows reverse and the filing pattern bends away from the gap.", "zh": "把第二根磁铁调头，让北极对北极。箭头反向，铁屑图样向间隙外弯开。"}
     - camera: {"position": [-0.28, 0.20, 0.16], "target": [-0.36, 0.04, -0.14], "fov": 30}
       labels: ["ring-magnet-upper", "ring-magnet-lower"]
-      sim: {"set": {"facing": "ns", "gap": 6, "top-ring": "attract"}}
+      sim: {"set": {"setup": "pair", "hang": false, "facing": "ns", "gap": 6, "top-ring": "attract", "bar-position": "bench"}}
       caption: {"en": "The upper ring is supported by repulsion when like poles face. With unlike poles facing, the rings come together on the guide post.", "zh": "环形磁铁同极相对时，斥力托住上环；改成异极相对，两环沿立柱靠在一起。"}
   index: {"parts": ["bar-magnet-n", "bar-magnet-s", "bar-magnet-b", "ring-magnet-upper", "ring-magnet-lower", "ring-post", "iron-filings"]}
 ---

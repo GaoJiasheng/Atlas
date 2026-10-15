@@ -1,8 +1,8 @@
 # Digestive region — round 10
 
-Published: `public/models/digestive-system.glb`. **2,089,100 bytes / 233,254 triangles / 28 nodes / 28 draws.**
+Published: `public/models/digestive-system.glb`. **2,093,620 bytes / 233,786 triangles / 28 nodes / 28 draws.**
 
-SHA-256: `7f91334e469754b5b92fc2f2fa3a003bd22c220dd73d5e03a5309309569106d7`
+SHA-256: `24ecf044c1c48ad4cfefbc6222d0f8c192469c18b873270372c80deb22263c95`
 
 Static native Blender meshes, no armature, JOINTS, WEIGHTS, fibres or attachment sites. Every tube carries float32 `_U` (0 upstream, 1 downstream). Mesh/node extras retain role, layer, bodySystem, source labels and section-cap intent (`closed`); source topology is recorded separately.
 
@@ -23,7 +23,7 @@ Flow review:  **jejunum: 13 flow segments cross overlapping source walls; exact 
 | salivary-glands.r | organ | 2,420 | 2,420 | 0.001 | 1.5 | True/True | 0 |
 | pharynx | organ | 5,020 | 3,500 | 0.111 | 1.5 | True/True | 0 |
 | oesophagus | tube | 16,320 | 4,000 | 0.083 | 1.5 | True/True | 0 |
-| stomach | tube | 9,468 | 9,468 | 0.002 | 1.5 | False/False | 140 |
+| stomach | tube | 10,404 | 10,000 | 0.051 | 1.5 | False/False | 62 |
 | duodenum | tube | 1,750 | 1,750 | 0.001 | 1.5 | False/False | 24 |
 | jejunum | tube | 27,648 | 26,000 | 0.063 | 1.5 | False/False | 24 |
 | appendix | tube | 442 | 442 | 0.001 | 1.5 | True/True | 0 |
@@ -52,8 +52,8 @@ Coordinates match GLB world coordinates: metres, +Y up, +Z anterior, +X anatomic
 | Tube | Method | Points | Length m | Schematic | Max exit mm | _U audit outliers |
 |---|---|---:|---:|---|---:|---:|
 | oesophagus | principal-axis triangle-section perimeter centroids | 36 | 0.2778 | False | 0.000 | 0 |
-| stomach | surface-geodesic ring centroids (anatomical neighbour end rings) | 30 | 0.2287 | False | 0.000 | 0 |
-| duodenum | surface-geodesic ring centroids (anatomical neighbour end rings) | 13 | 0.0912 | False | 0.000 | 0 |
+| stomach | surface-geodesic ring centroids (anatomical neighbour end rings) | 31 | 0.2329 | False | 0.000 | 0 |
+| duodenum | surface-geodesic ring centroids (anatomical neighbour end rings) | 28 | 0.2139 | False | 0.000 | 0 |
 | jejunum | topological medial axis: exact 12-vertex source section rings | 1015 | 2.0191 | False | 0.000 | 0 |
 | appendix | principal-axis triangle-section perimeter centroids | 11 | 0.0745 | False | 0.000 | 0 |
 | ascending-colon | principal-axis triangle-section perimeter centroids | 25 | 0.1879 | False | 0.000 | 0 |
@@ -63,13 +63,13 @@ Coordinates match GLB world coordinates: metres, +Y up, +Z anterior, +X anatomic
 
 ## Available-source endpoint gaps
 
-These are extraction endpoints, not a continuous food path. Paths are inset at partial wall lips. Content must review and bridge only anatomically supported gaps; the missing segments remain explicit breaks.
+These are extraction endpoints, not a continuous food path. Paths are inset at partial wall lips. Content must review and bridge only anatomically supported gaps; missing segments remain explicit breaks.
 
 | From | To | Gap mm | Missing between |
 |---|---|---:|---|
 | oesophagus | stomach | 5.77 | — |
 | stomach | duodenum | 0.00 | — |
-| duodenum | jejunum | 70.14 | — |
+| duodenum | jejunum | 6.89 | — |
 | jejunum | ascending-colon | 40.49 | ileum, caecum |
 | ascending-colon | transverse-colon | 28.59 | — |
 | transverse-colon | descending-colon | 17.64 | — |

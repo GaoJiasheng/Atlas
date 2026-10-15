@@ -226,7 +226,18 @@
       "centreline": {
         "from": "oesophagus",
         "to": "duodenum"
-      }
+      },
+      "fillOpenings": [
+        {
+          "near": [
+            0.06,
+            0.135,
+            -0.034
+          ],
+          "maxRadiusM": 0.04,
+          "reason": "display window in the anterior wall of the source stomach"
+        }
+      ]
     },
     {
       "id": "duodenum",
@@ -1714,6 +1725,7 @@
     "Ileum, caecum, rectum and anal canal are not separately labelled. No synthetic replacements.",
     "Lungs and trachea come from VisceralSystem100.fbx; CardioVascular41.fbx has no lungs or single Heart mesh.",
     "Skin retains full hands as static context. No articulated hand cuts are needed.",
-    "Procedural tooth, stomach wall and villi close-ups are outside this pipeline."
+    "Procedural tooth, stomach wall and villi close-ups are outside this pipeline.",
+    "The stomach source display window is closed by a smooth wall patch (fillOpenings); no other opening is filled."
   ]
 }

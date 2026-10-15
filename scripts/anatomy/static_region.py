@@ -33,11 +33,109 @@ def build(api):
             if len(records)<part['minimumObjects']: raise RuntimeError(f"Missing {part['id']}.{side}")
             points,faces=api.merge_records(records)
             name=part['id']+('.'+side if side else '')
-            selected[name]=dict(part=part,side=side,points=points,faces=faces,sourceNames=[r['info']['name'] for r in records])
+            filled=[]
+            if part.get('fillOpenings'):points,faces,filled=fill_openings(points,faces,part['fillOpenings'])
+            selected[name]=dict(part=part,side=side,points=points,faces=faces,sourceNames=[r['info']['name'] for r in records],filledOpenings=filled)
     # Keep the wire target independent from opaque context, with the same source.
     wire=selected.pop('skin-wire',None)
     api.simplify_selection()
     finish(api,wire,centre,floor,top)
+
+
+def _ordered_loops(faces):
+    """Boundary loops as ordered vertex lists, walked along the faces' own edge direction."""
+    count={}
+    for f in faces:
+        for a,b in ((f[0],f[1]),(f[1],f[2]),(f[2],f[0])):
+            k=(min(a,b),max(a,b));count[k]=count.get(k,0)+1
+    nxt={}
+    for f in faces:
+        for a,b in ((f[0],f[1]),(f[1],f[2]),(f[2],f[0])):
+            if count[(min(a,b),max(a,b))]==1:nxt[a]=b
+    loops=[];seen=set()
+    for start in nxt:
+        if start in seen:continue
+        loop=[start];seen.add(start);cur=nxt[start]
+        while cur!=start and cur not in seen and cur in nxt:
+            loop.append(cur);seen.add(cur);cur=nxt[cur]
+        loops.append(loop)
+    return loops
+
+
+def fill_openings(points,faces,specs):
+    """Close named source openings (a display window cut in a wall) with a smooth patch.
+
+    The opening nearest `near` (topic coordinates: metres, +Y up, +Z front,
+    centred like the export) within `maxRadiusM` is filled with concentric rings
+    whose interior vertices solve a bi-harmonic system against the opening and the
+    wall's first ring of vertices outside it, so the patch continues the wall's
+    curvature instead of spanning it flat. Coincident vertices are welded first.
+    """
+    pts=np.asarray([tuple(v) for v in points],dtype=float)
+    _,first,inverse=np.unique(np.round(pts,7),axis=0,return_index=True,return_inverse=True)
+    inverse=inverse.ravel();pts=pts[first]
+    tris=[tuple(int(inverse[i]) for i in f) for f in faces]
+    tris=[f for f in tris if len(set(f))==3]
+    report=[]
+    for spec in specs:
+        x,y,z=spec['near'];near=np.array([x,-z,y])  # topic (x, up, front) -> source (x, -front, up)
+        loops=_ordered_loops(tris)
+        best=min(loops,key=lambda l:np.linalg.norm(pts[l].mean(0)-near))
+        centre=pts[best].mean(0)
+        if np.linalg.norm(centre-near)>spec['maxRadiusM']:raise RuntimeError(f"fillOpenings: no opening within {spec['maxRadiusM']} m of {spec['near']}")
+        n=len(best);ring_r=float(np.linalg.norm(pts[best]-centre,axis=1).mean())
+        edge=float(np.mean(np.linalg.norm(pts[best]-pts[np.roll(best,-1)],axis=1)))
+        k=max(3,int(round(ring_r/max(edge,1e-4))))
+        # Interior rings shrink in vertex count towards a centre vertex.
+        counts=[n]+[max(6,int(round(n*(1-j/k)))) for j in range(1,k)]
+        base=len(pts);new=[];rings=[list(best)]
+        outline=pts[best];closed=np.vstack([outline,outline[:1]])
+        seg=np.linalg.norm(np.diff(closed,axis=0),axis=1);station=np.r_[0,np.cumsum(seg)]/seg.sum()
+        for j in range(1,k):
+            t=(np.arange(counts[j])+.5)/counts[j]
+            ring=np.stack([np.interp(t,station,closed[:,a]) for a in range(3)],axis=1)
+            ring=ring+(centre-ring)*(j/k)
+            ids=list(range(base+len(new),base+len(new)+len(ring)));new.extend(ring);rings.append(ids)
+        centre_id=base+len(new);new.append(centre.copy())
+        allp=np.vstack([pts,np.asarray(new)])
+        patch=[]
+        def strip(outer,inner):
+            # Walk two rings by their angular parameter; the outer ring runs along the
+            # boundary's own direction, so (b, a, c) faces the wall's outside.
+            a_n,b_n=len(outer),len(inner);i=j=0
+            while i<a_n or j<b_n:
+                ta=(i+1)/a_n if i<a_n else 9;tb=(j+.5+1)/b_n if j<b_n else 9
+                if ta<=tb:patch.append((outer[(i+1)%a_n],outer[i%a_n],inner[j%b_n]));i+=1
+                else:patch.append((inner[(j+1)%b_n],outer[i%a_n],inner[j%b_n]));j+=1
+        for j in range(len(rings)-1):strip(rings[j],rings[j+1])
+        last=rings[-1]
+        for i in range(len(last)):patch.append((last[(i+1)%len(last)],last[i],centre_id))
+        # Bi-harmonic interior: minimise |L x|^2 over patch and opening vertices,
+        # holding the opening and the wall ring just outside it fixed.
+        nbr={}
+        def link(a,b):nbr.setdefault(a,set()).add(b);nbr.setdefault(b,set()).add(a)
+        for f in tris+patch:
+            for a,b in ((f[0],f[1]),(f[1],f[2]),(f[2],f[0])):link(a,b)
+        unknown=list(range(base,len(allp)));uidx={v:i for i,v in enumerate(unknown)}
+        rows=list(best)+unknown
+        A=np.zeros((len(rows),len(unknown)));B=np.zeros((len(rows),3))
+        for r,v in enumerate(rows):
+            w=1./len(nbr[v])
+            terms=[(v,1.)]+[(u,-w) for u in nbr[v]]
+            for u,c in terms:
+                if u in uidx:A[r,uidx[u]]+=c
+                else:B[r]-=c*allp[u]
+        sol,*_=np.linalg.lstsq(A,B,rcond=None)
+        allp[base:]=sol
+        # Keep the patch facing outwards like the wall around it.
+        normals=np.cross(allp[[f[1] for f in patch]]-allp[[f[0] for f in patch]],allp[[f[2] for f in patch]]-allp[[f[0] for f in patch]])
+        wall=[f for f in tris if any(v in best for v in f)]
+        wn=np.cross(allp[[f[1] for f in wall]]-allp[[f[0] for f in wall]],allp[[f[2] for f in wall]]-allp[[f[0] for f in wall]]).sum(0)
+        if np.dot(normals.sum(0),wn)<0:patch=[(f[0],f[2],f[1]) for f in patch]
+        pts=allp;tris=tris+patch
+        report.append(dict(near=spec['near'],reason=spec.get('reason'),openingVertices=n,openingRadiusM=ring_r,rings=k,addedVertices=len(new),addedTriangles=len(patch)))
+        print('FILL OPENING',json.dumps(report[-1]),flush=True)
+    return [Vector(v) for v in pts],tris,report
 
 
 def finish(api,wire,centre,floor,top):

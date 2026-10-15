@@ -57,7 +57,15 @@ def resample(path, step=.008):
 def extract(points,faces,upstream=None,downstream=None):
     p,f,adj,loops,inverse=graph_geometry(points,faces)
     # Most distant boundary rings, so a torn seam doesn't masquerade as a tube end.
-    rings=[loop for loop in loops if len(loop)>=5]
+    # A tube end is a ring of real width: a pinhole (the duodenal papilla's
+    # 0.5 mm opening) is not one.
+    rings=[loop for loop in loops if len(loop)>=5 and np.linalg.norm(p[loop]-p[loop].mean(0),axis=1).mean()>=.002]
+    if len(rings)==1:
+        # One open end, the other capped (the duodenum ends closed at the
+        # jejunum): the far end is the vertex geodesically furthest from the ring.
+        da=distances(adj,rings[0]);far=int(np.argmax(np.where(np.isfinite(da),da,-1)))
+        near_far=[i for i in range(len(p)) if np.linalg.norm(p[i]-p[far])<.004]
+        rings=[rings[0],near_far]
     if len(rings)>=2:
         def near(ring,cloud):
             cloud=np.asarray(cloud).reshape(-1,3)

@@ -14,30 +14,28 @@ state:
   labels: ["iron-filings", "bar-magnet-n", "bar-magnet-s"]
   camera: {"position": [-0.16, 0.65, 0.01], "target": [-0.16, 0.01, 0], "fov": 28}
   summary: {"en": "A magnet pulls most strongly at its poles. A freely hanging magnet settles along north and south.", "zh": "磁极处吸力最强；自由悬挂的磁铁静止时指向南北。"}
-  sim: {"set": {"compass-at": 1}, "try": {"vary": "compass-at", "keep": [{"en": "Same bar magnet", "zh": "同一根条形磁铁"}], "observe": ["needle-bearing"]}}
+  sim: {"set": {"setup": "alone", "hang": false, "compass-at": 1, "bar-position": "bench"}, "try": {"vary": "compass-at", "keep": [{"en": "Same bar magnet", "zh": "同一根条形磁铁"}], "observe": ["needle-bearing"]}}
   beats:
     - labels: ["iron-filings", "bar-magnet-n", "bar-magnet-s"]
-      sim: {"set": {"compass-at": 1}}
+      sim: {"set": {"setup": "alone", "hang": false, "compass-at": 1, "bar-position": "bench"}}
       caption: {"en": "The iron filings crowd near the ends of the bar. These are its poles, where its pull is strongest.", "zh": "铁屑在条形磁铁两端聚得最密。两端叫磁极，吸力最强。"}
     - layers: ["magnet-set", "compass", "field"]
       labels: ["iron-filings"]
-      sim: {"set": {"compass-at": 1}}
+      sim: {"set": {"setup": "alone", "hang": false, "compass-at": 1, "bar-position": "bench"}}
       caption: {"en": "The filings form curved patterns around the bar. The drawn lines help us follow the pattern; they are not threads in the air.", "zh": "铁屑在磁铁周围排成弯曲图样。画出的线帮助看清图样，不是空气中真的有线。"}
     - camera: "compass-view"
       labels: ["compass-case", "compass-needle"]
-      sim: {"set": {"compass-at": 5}}
+      sim: {"set": {"setup": "alone", "hang": false, "compass-at": 5, "bar-position": "bench"}}
       caption: {"en": "Move the compass round the bar. Its needle is a small magnet, and it turns to a new direction at each position.", "zh": "把指南针移到磁铁周围的另一位置。指针是小磁铁，会转向新的方向。"}
     - camera: "compass-view"
-      pose: "suspended"
       hide: ["fridge-door", "door-gasket", "fridge-magnet", "cabinet-latch", "fridge-body", "cabinet-corner", "bar-magnet-b", "compass-case", "compass-card", "compass-needle", "compass-glass", "horseshoe-magnet", "ring-magnet-upper", "ring-magnet-lower"]
       labels: ["suspension-stand", "bar-magnet-n", "bar-magnet-s"]
-      sim: {"set": {"compass-at": 1}}
+      sim: {"set": {"setup": "alone", "hang": true, "compass-at": 1, "bar-position": "bench"}}
       caption: {"en": "Hang the bar on the thread, away from other magnets. Free to turn, it swings and settles pointing north and south.", "zh": "把条形磁铁挂在线上，远离别的磁铁。让它自由转动，摆动后会指向南北停住。"}
     - camera: "compass-view"
-      pose: "suspended"
       hide: ["fridge-door", "door-gasket", "fridge-magnet", "cabinet-latch", "fridge-body", "cabinet-corner", "bar-magnet-b", "compass-case", "compass-card", "compass-needle", "compass-glass", "horseshoe-magnet", "ring-magnet-upper", "ring-magnet-lower"]
       labels: ["bar-magnet-n", "bar-magnet-s"]
-      sim: {"set": {"compass-at": 1}}
+      sim: {"set": {"setup": "alone", "hang": true, "compass-at": 1, "bar-position": "bench"}}
       caption: {"en": "The end pointing north is called the north pole. The other is the south pole. The colours simply help us tell them apart.", "zh": "指向北方的一端叫北极，另一端叫南极。颜色只是方便区分它们的标记。"}
   index: {"parts": ["bar-magnet-n", "bar-magnet-s", "iron-filings", "compass-case", "compass-card", "compass-needle", "compass-glass", "suspension-stand"]}
 ---

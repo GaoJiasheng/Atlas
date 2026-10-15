@@ -14,31 +14,31 @@ state:
   labels: ["fridge-door", "fridge-magnet", "door-gasket"]
   camera: {"position": [0.98, 0.65, 0.98], "target": [0.36, 0.15, 0], "fov": 30}
   summary: {"en": "Magnets hold doors, guide compasses and lift steel. Electromagnets let the attraction be controlled.", "zh": "磁铁能关门、让指南针定向、吊起钢材；电磁铁让吸引可以控制。"}
-  sim: {"set": {"em-switch": false, "em-cells": 2}, "try": {"vary": "em-switch", "keep": ["em-cells", {"en": "Same coil and steel core", "zh": "同样的线圈和钢芯"}], "observe": ["clips-em"]}}
+  sim: {"set": {"setup": "electromagnet", "hang": false, "em-switch": false, "em-cells": 2, "bar-position": "bench"}, "try": {"vary": "em-switch", "keep": ["em-cells", {"en": "Same coil and steel core", "zh": "同样的线圈和钢芯"}], "observe": ["clips-em"]}}
   beats:
     - labels: ["fridge-door", "fridge-magnet", "door-gasket"]
-      sim: {"set": {"em-switch": false, "em-cells": 2}}
+      sim: {"set": {"setup": "electromagnet", "hang": false, "em-switch": false, "em-cells": 2, "bar-position": "bench"}}
       caption: {"en": "The fridge magnet sticks to the steel door. A magnetic strip hidden in the seal helps hold the door closed.", "zh": "冰箱贴吸在钢制门板上；门封里藏着的磁条帮助把门关紧。"}
     - cutaway: "uses"
       labels: ["door-gasket"]
-      sim: {"set": {"em-switch": false, "em-cells": 2}}
+      sim: {"set": {"setup": "electromagnet", "hang": false, "em-switch": false, "em-cells": 2, "bar-position": "bench"}}
       caption: {"en": "The cut shows the strip inside the flexible seal. Its attraction helps press the seal against the steel cabinet.", "zh": "剖面露出柔软门封里的磁条。磁条吸住钢制箱体，帮助门封贴紧。"}
     - cutaway: "none"
       pose: "cabinet-open"
       labels: ["cabinet-latch"]
-      sim: {"set": {"em-switch": false, "em-cells": 2}}
+      sim: {"set": {"setup": "electromagnet", "hang": false, "em-switch": false, "em-cells": 2, "bar-position": "bench"}}
       caption: {"en": "A small magnet in the cabinet catch attracts a steel plate on the door. The miniature crane and train beside it show larger uses.", "zh": "门扣里的小磁铁吸住门上的钢片；旁边的起重机和列车模型展示更大的用途。"}
     - camera: "compass-view"
       labels: ["compass-case", "compass-needle"]
-      sim: {"set": {"compass-at": 1, "em-switch": false, "em-cells": 2}}
+      sim: {"set": {"setup": "alone", "hang": false, "compass-at": 1, "em-switch": false, "em-cells": 2, "bar-position": "bench"}}
       caption: {"en": "A compass needle is a turning magnet. Keep other magnets away when using it to find north.", "zh": "指南针的针是能转动的磁铁；用它找北时，要远离其他磁铁。"}
     - camera: "make-bench"
       labels: ["em-switch", "em-coil", "em-paper-clips"]
-      sim: {"set": {"em-switch": true, "em-cells": 2}}
+      sim: {"set": {"setup": "electromagnet", "hang": false, "em-switch": true, "em-cells": 2, "bar-position": "bench"}}
       caption: {"en": "Return to the bench electromagnet to model controlled pickup. With the switch closed, this model lifts six clips.", "zh": "回到台上的电磁铁，观察可控制的吸取。开关闭合时，这个模型吸起六只回形针。"}
     - camera: "make-bench"
       labels: ["em-nail", "em-paper-clips"]
-      sim: {"set": {"em-switch": false, "em-cells": 2}}
+      sim: {"set": {"setup": "electromagnet", "hang": false, "em-switch": false, "em-cells": 2, "bar-position": "bench"}}
       caption: {"en": "Open the switch: this steel core keeps only one clip in the model. A lifting electromagnet uses a core chosen to release its load readily.", "zh": "断开开关：模型的钢芯只留下一个回形针。吊运电磁铁会选用容易释放负载的芯材。"}
   index: {"parts": ["fridge-door", "door-gasket", "fridge-magnet", "cabinet-latch", "compass-case", "compass-card", "compass-needle", "em-nail", "em-coil", "em-cells", "em-switch", "em-leads", "em-paper-clips", "aluminium-can"]}
 ---

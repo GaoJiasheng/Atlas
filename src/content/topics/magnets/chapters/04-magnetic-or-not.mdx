@@ -9,37 +9,37 @@ state:
   part: null
   run: false
   cutaway: "none"
-  layers: ["magnet-set", "compass", "materials", "making", "uses", "field", "current"]
+  layers: ["magnet-set", "compass", "materials", "making", "uses", "current"]
   hide: ["fridge-door", "door-gasket", "fridge-magnet", "cabinet-latch", "fridge-body", "cabinet-corner"]
   labels: ["test-tray", "aluminium-can", "steel-spoon"]
   camera: {"position": [0.32, 0.57, 0.80], "target": [0.11, 0.15, 0.12], "fov": 30}
   pose: "card-test"
   summary: {"en": "Iron and steel are magnetic materials. A magnet can attract through paper, with a weaker pull as the gap grows.", "zh": "铁和钢是磁性材料。磁铁隔着纸也能吸，距离变大时吸力减弱。"}
-  sim: {"set": {"cards": 0}, "try": {"vary": "cards", "keep": [{"en": "Same magnet", "zh": "同一根磁铁"}, {"en": "Same clips and lifting method", "zh": "同样的回形针和提起方法"}], "observe": ["clips-cards"], "record": true}}
+  sim: {"set": {"setup": "alone", "hang": false, "cards": 0, "bar-position": "cards"}, "try": {"vary": "cards", "keep": [{"en": "Same magnet", "zh": "同一根磁铁"}, {"en": "Same clips and lifting method", "zh": "同样的回形针和提起方法"}], "observe": ["clips-cards"], "record": true}}
   beats:
     - pose: null
       labels: ["test-tray", "aluminium-can", "steel-spoon"]
-      sim: {"set": {"cards": 0}}
+      sim: {"set": {"setup": "alone", "hang": false, "cards": 0, "bar-position": "bench"}}
       caption: {"en": "Look across the test tray before moving the magnet. Predict which objects will be attracted, using their materials rather than their appearance.", "zh": "移动磁铁前先看测试盘。根据材料预测哪些物品会被吸，不要只看外观。"}
     - pose: "tray-picked"
       labels: ["iron-nail", "steel-paper-clips", "steel-can"]
-      sim: {"set": {"cards": 0}}
+      sim: {"set": {"setup": "alone", "hang": false, "cards": 0, "bar-position": "tray"}}
       caption: {"en": "The iron nail, steel clips and steel can lift. Iron and ordinary steel are magnetic materials.", "zh": "铁钉、钢回形针和钢罐抬起。铁和普通钢是磁性材料。"}
     - pose: "tray-picked"
       labels: ["aluminium-can", "copper-wire", "wooden-block", "plastic-button"]
-      sim: {"set": {"cards": 0}}
+      sim: {"set": {"setup": "alone", "hang": false, "cards": 0, "bar-position": "tray"}}
       caption: {"en": "The aluminium tab, copper disc, wooden block and plastic ruler stay put. Not every metal is attracted by a magnet.", "zh": "铝拉环、铜片、木块和塑料尺留在盘里。不是所有金属都会被磁铁吸引。"}
     - pose: null
       labels: ["steel-spoon"]
-      sim: {"set": {"cards": 0}}
+      sim: {"set": {"setup": "alone", "hang": false, "cards": 0, "bar-position": "bench"}}
       caption: {"en": "The stainless steel spoon is hardly attracted in this design. Stainless steels differ; the name alone does not predict the result.", "zh": "本设计的不锈钢勺几乎不被吸引。不锈钢有不同种类，单凭名称不能判断结果。"}
     - pose: "card-test"
       labels: ["barrier-cards", "clip-chain", "bar-magnet-n"]
-      sim: {"set": {"cards": 3}}
+      sim: {"set": {"setup": "alone", "hang": false, "cards": 3, "bar-position": "cards"}}
       caption: {"en": "Put three cards between the magnet and clips. In this model it still holds two clips; paper does not stop the attraction.", "zh": "在磁铁和回形针之间放三张卡片。在这个模型里仍吸住两只回形针；纸没有阻断吸引。"}
     - pose: "card-test"
       labels: ["barrier-cards", "clip-chain"]
-      sim: {"set": {"cards": 6}}
+      sim: {"set": {"setup": "alone", "hang": false, "cards": 6, "bar-position": "cards"}}
       caption: {"en": "With six cards, this model holds no clips. Record each setting while keeping the same magnet and clips.", "zh": "隔六张卡片时，这个模型吸不起回形针。保持磁铁和回形针不变，记录每种设置。"}
   index: {"parts": ["test-tray", "iron-nail", "steel-paper-clips", "steel-can", "aluminium-can", "copper-wire", "steel-spoon", "wooden-block", "plastic-button", "barrier-cards", "clip-chain", "bar-magnet-n", "cabinet-latch"]}
 ---
