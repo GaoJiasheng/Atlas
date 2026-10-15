@@ -28,7 +28,7 @@ for (const locale of LOCALES) {
     const errors = collectConsoleErrors(page);
     await page.goto(`/${locale}/`);
     // Draft sample topics are reachable by URL but not listed.
-    await expect(page.locator('[data-topic]')).toHaveCount(18);
+    await expect(page.locator('[data-topic]')).toHaveCount(19);
     await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/ww1/"]`)).toHaveCount(1);
     for (const region of ['chest', 'back', 'shoulders', 'arms', 'legs', 'core'])
       await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/muscles-${region}/"]`)).toHaveCount(1);
@@ -41,6 +41,7 @@ for (const locale of LOCALES) {
     await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/plant/"]`)).toHaveCount(1);
     await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/digestive-system/"]`)).toHaveCount(1);
     await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/circuits/"]`)).toHaveCount(1);
+    await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/magnets/"]`)).toHaveCount(1);
     await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/water/"]`)).toHaveCount(1);
     await expect(page.locator(`[data-topic] a[href$="/${locale}/topics/four-taps/"]`)).toHaveCount(1);
     await expect(page.locator('[data-filter="subject"]:not([data-value=""])')).toHaveCount(6);
@@ -55,13 +56,13 @@ for (const locale of LOCALES) {
     await expect(page.locator('[data-section="geography"] [data-topic]')).toHaveCount(1);
     await expect(page.locator('[data-section="biology"] [data-topic]')).toHaveCount(9);
     await expect(page.locator('[data-section="computer"] [data-topic]')).toHaveCount(1);
-    // Card tags: subject, then the stage type (ww1, ww2 and four-taps are Time, aircon, circuits, water, grasshopper, plant, digestive-system, b200-server and the six muscle topics are Space, fractions and area-perimeter are Lessons). No status or sensitivity tags.
-    await expect(page.locator('[data-topic] .atlas-badge')).toHaveCount(36);
+    // Card tags: subject, then the stage type (ww1, ww2 and four-taps are Time, aircon, circuits, magnets, water, grasshopper, plant, digestive-system, b200-server and the six muscle topics are Space, fractions and area-perimeter are Lessons). No status or sensitivity tags.
+    await expect(page.locator('[data-topic] .atlas-badge')).toHaveCount(38);
     await page.locator('[data-filter="subject"][data-value="history"]').click();
     await expect(page.locator('[data-topic]:visible')).toHaveCount(2);
     await expect(page.locator('[data-catalogue-end]')).toBeHidden();
     await page.locator('[data-filter="subject"][data-value="science"]').click();
-    await expect(page.locator('[data-topic]:visible')).toHaveCount(3);
+    await expect(page.locator('[data-topic]:visible')).toHaveCount(4);
     await page.locator('[data-filter="subject"][data-value="biology"]').click();
     await expect(page.locator('[data-topic]:visible')).toHaveCount(9);
     await expect(page.locator('[data-section="history"]')).toBeHidden();
@@ -72,7 +73,7 @@ for (const locale of LOCALES) {
     await page.locator('[data-filter="subject"][data-value="geography"]').click();
     await expect(page.locator('[data-topic]:visible')).toHaveCount(1);
     await page.locator('[data-filter="subject"][data-value=""]').click();
-    await expect(page.locator('[data-topic]:visible')).toHaveCount(18);
+    await expect(page.locator('[data-topic]:visible')).toHaveCount(19);
     await page.screenshot({ path: `tests-e2e/__screenshots__/index-${locale}.png` });
     expect(errors).toEqual([]);
   });
@@ -97,11 +98,11 @@ for (const locale of LOCALES) {
     await expect(page.locator('[data-filter="subject"][data-soon]')).toHaveCount(0);
     await expect(page.locator('[data-filter="subject"][data-soon] svg[stroke-dasharray]')).toHaveCount(0);
     // Plate cards: one link each, numbered, with a drawing and a stats line counted from the topic data.
-    await expect(page.locator('[data-topic] [data-plate]')).toHaveCount(18);
-    await expect(page.locator('[data-topic] [data-figure="drawing"] img')).toHaveCount(18);
+    await expect(page.locator('[data-topic] [data-plate]')).toHaveCount(19);
+    await expect(page.locator('[data-topic] [data-figure="drawing"] img')).toHaveCount(19);
     const ww2 = page.locator('[data-topic]', { has: page.locator(`a[href$="/${locale}/topics/ww2/"]`) });
     await expect(ww2.locator('[data-stats]')).toHaveText(WW2_STATS[locale]);
-    await expect(ww2.locator('.plate__no')).toHaveText(locale === 'en' ? 'Plate 18' : '图版 18');
+    await expect(ww2.locator('.plate__no')).toHaveText(locale === 'en' ? 'Plate 19' : '图版 19');
     await expect(page.locator('[data-topic] [data-stats]:empty')).toHaveCount(0);
     // Reserved image boxes: no layout shift while drawings load.
     const box = await page.locator('[data-topic] [data-figure] img').first().boundingBox();

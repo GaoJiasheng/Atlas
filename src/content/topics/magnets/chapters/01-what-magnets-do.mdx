@@ -13,52 +13,49 @@ state:
   hide: ["fridge-door", "door-gasket", "fridge-magnet", "cabinet-latch", "fridge-body", "cabinet-corner"]
   labels: ["bar-magnet-n", "horseshoe-magnet", "ring-magnet-upper", "test-tray"]
   camera: {"position": [0.68, 0.92, 1.72], "target": [0, 0.05, 0], "fov": 30}
-  summary: {"en": "A magnet can push or pull without touching. Different objects respond differently.", "zh": "磁铁不用接触就能推、能拉；不同物品的反应不同。"}
-  sim: {"set": {"setup": "pair", "hang": false, "facing": "ns", "gap": 6, "bar-position": "bench"}, "try": {"vary": "facing", "keep": ["gap"], "observe": ["force"]}}
+  summary: {"en": "A magnet can pull or push without touching, and it attracts some objects but not others.", "zh": "磁铁不用接触就能拉、也能推；它吸引一些物品，却不吸引另一些。"}
+  sim: {"set": {"setup": "pair", "facing": "ns", "gap": 6, "bar-position": "bench"}, "try": {"vary": "facing", "keep": ["gap", {"en": "Same two magnets", "zh": "同样的两根磁铁"}], "observe": ["force"]}}
   beats:
-    - labels: ["bar-magnet-n", "horseshoe-magnet", "ring-magnet-upper", "test-tray"]
-      sim: {"set": {"setup": "pair", "hang": false, "facing": "ns", "gap": 6, "bar-position": "bench"}}
-      caption: {"en": "Start with the science bench. Bar, horseshoe and ring magnets sit beside a compass, a test tray and the equipment for making magnets.", "zh": "先看科学实验台。条形、马蹄形和环形磁铁旁边，摆着指南针、测试盘和制作磁铁的器材。"}
+    - labels: ["bar-magnet-n", "bar-magnet-b", "horseshoe-magnet", "ring-magnet-upper", "compass-case", "test-tray"]
+      caption: {"en": "This science bench holds everything we will test: two bar magnets, a horseshoe magnet, a pair of ring magnets, a compass, a tray of objects and a home-made electromagnet.", "zh": "实验台上摆着这一课要用的东西：两根条形磁铁、一块马蹄形磁铁、一对环形磁铁、一个指南针、一盘待测的物品，还有一个自制的电磁铁。"}
     - camera: "two-magnets"
       labels: ["bar-magnet-n", "bar-magnet-b"]
-      sim: {"set": {"setup": "pair", "hang": false, "facing": "ns", "gap": 1.5, "bar-position": "bench"}}
-      caption: {"en": "Bring the bar magnets closer with unlike poles facing. They pull towards each other before they touch.", "zh": "让条形磁铁的异极相对，缩小间隙。它们还没有接触，就互相拉近。"}
+      sim: {"set": {"gap": 1.5}}
+      caption: {"en": "Slide the second magnet towards the first, with a south pole facing a north pole. Before they touch, it is pulled the rest of the way. A magnet can pull.", "zh": "让第二根磁铁的南极对着第一根的北极，慢慢推近。还没碰到，它就被拉了过去。磁铁能拉。"}
     - camera: "two-magnets"
       labels: ["bar-magnet-n", "bar-magnet-b"]
-      sim: {"set": {"setup": "pair", "hang": false, "facing": "nn", "gap": 3, "bar-position": "bench"}}
-      caption: {"en": "Turn the second magnet round. The facing ends now push apart. A magnet can push as well as pull.", "zh": "把第二根磁铁调头。相对的两端现在互相推开。磁铁能推，也能拉。"}
-    - camera: "tray-view"
+      sim: {"set": {"facing": "nn", "gap": 3}}
+      caption: {"en": "Turn the second magnet round so that two north poles face each other. Now it is pushed away instead. A magnet can push, too.", "zh": "把第二根磁铁调个头，让两个北极相对，它反而被推开。磁铁也能推。"}
+    - camera: {"position": [0.28, 0.2, 0.42], "target": [0.11, 0.04, 0.11], "fov": 30}
       pose: "tray-picked"
-      layers: ["magnet-set", "compass", "materials", "making", "uses", "current"]
       labels: ["iron-nail", "steel-paper-clips", "wooden-block", "plastic-button"]
-      sim: {"set": {"setup": "alone", "hang": false, "facing": "ns", "gap": 6, "bar-position": "tray"}}
-      caption: {"en": "The iron nail and steel clips lift towards the magnet. The wooden block and plastic ruler stay on the tray.", "zh": "铁钉和钢回形针朝磁铁抬起，木块和塑料尺留在盘里。"}
-    - camera: {"position": [0.68, 0.92, 1.72], "target": [0, 0.05, 0], "fov": 30}
-      labels: ["horseshoe-magnet", "ring-magnet-upper", "bar-magnet-s"]
-      sim: {"set": {"setup": "horseshoe", "hang": false, "facing": "ns", "gap": 6, "bar-position": "bench"}}
-      caption: {"en": "Different shapes still work as magnets. Their shape changes where the poles sit, not the rule about pushing and pulling.", "zh": "不同形状的磁铁仍然遵守同样的推拉规律；形状改变的是磁极所在的位置。"}
-  index: {"parts": ["bar-magnet-n", "bar-magnet-s", "bar-magnet-b", "horseshoe-magnet", "ring-magnet-upper", "ring-magnet-lower", "ring-post", "compass-case", "test-tray", "iron-nail", "steel-paper-clips", "wooden-block", "plastic-button", "steel-rod", "em-coil", "em-cells", "em-switch"]}
+      sim: {"set": {"setup": "away", "bar-position": "tray"}}
+      caption: {"en": "Hold a magnet over the test tray. The iron nail and the steel paper clips jump up to it; the wooden block and the plastic ruler do not move.", "zh": "把磁铁拿到测试盘上方，铁钉和钢回形针跳了上来，木块和塑料尺一动不动。"}
+    - camera: {"position": [-0.04, 0.34, 0.5], "target": [-0.27, 0.03, 0], "fov": 32}
+      labels: ["horseshoe-magnet", "ring-magnet-upper", "bar-magnet-n"]
+      caption: {"en": "Magnets come as bars, horseshoes and rings. Whatever the shape, every magnet has two poles, and magnets can be made of iron or steel.", "zh": "磁铁有条形、马蹄形和环形等形状。不管什么形状，每块磁铁都有两个磁极；磁铁可以用铁或钢制成。"}
+  index: {"parts": ["bar-magnet-n", "bar-magnet-b", "horseshoe-magnet", "ring-magnet-upper", "compass-case", "test-tray", "iron-nail", "steel-paper-clips", "wooden-block", "plastic-button"]}
 ---
 
 <Lang en>
 
-A science bench holds a <Term id="magnet">magnet</Term> in several shapes. The long bars lie beside a horseshoe and a pair of rings on a post. A compass, a tray of test objects and the equipment for making magnets share the bench. This is a design study of school equipment. The bar magnet is <Num s="S1">100 mm</Num> long; the objects are arranged to make their actions easy to compare.
+This bench is set up for testing magnets. Two bar magnets lie on a sheet of paper in the middle. To their left are a horseshoe magnet and a pair of ring magnets on a wooden post. In front are a compass and a tray of everyday objects, and on the right is the equipment for making a magnet. Each <Term id="magnet">magnet</Term> has two painted ends. The bar magnets are <Num s="S1">10 cm</Num> long.
 
-Look at the gap between the bars. With the ends arranged as shown, the magnets pull towards each other. To <Term id="attract">attract</Term> means to pull closer. Bring the bars nearer and the pull grows, even before they touch. Nothing needs to stretch across the gap to connect them. <FlyTo preset="two-magnets">Look between the bars</FlyTo>
+Slide the second bar magnet towards the first, with a south pole facing a north pole. While there is still a gap, it is pulled towards the first magnet. To <Term id="attract">attract</Term> means to pull towards. The smaller the gap, the stronger the pull. <FlyTo preset="two-magnets">Look between the bar magnets</FlyTo>
 
-Turn the second bar round. The ends now push away from each other. To <Term id="repel">repel</Term> means to push apart. A magnet can exert a push or a pull without touching the other magnet. Use the Try it card to change the facing ends. Keep the gap unchanged and observe the direction of the arrows and the signed reading.
+Turn the second magnet round so that two north poles face each other, and it is pushed away instead. To <Term id="repel">repel</Term> means to push away. A push or a pull is a force, and a magnet can push or pull another magnet without touching it. Use the Try it card to change which ends face each other while the gap stays the same. Watch the arrows and the reading: a plus sign means a pull, a minus sign a push.
 
-The test tray gives a different comparison. A magnet attracts the iron nail and steel clips, but the wooden block and plastic ruler stay put. Shape and shiny appearance alone cannot tell us what will be attracted. Later we will test the materials separately. First, look closely at the ends of a magnet: those ends explain why turning a bar round changes a pull into a push.
+A magnet does not attract everything. Held over the test tray, it lifts the iron nail and the steel paper clips, but the wooden block and the plastic ruler stay where they are. Magnets can be made of iron or steel, and they come in many shapes: bars, horseshoes, rings and the thin, bendy sheets on a fridge door. The next chapter looks at their ends, where the pull is strongest.
 
 <More title={{"en": "A force is a push or a pull", "zh": "力是推或拉"}}>
 
-A push or a pull is a force. Magnetic forces are useful examples because they can act across a gap. The arrows show direction; the bench keeps the magnets on a guide rather than allowing them to fly together.
+A push or a pull is called a force. Most pushes and pulls need contact, like a hand pushing a door. A magnet's push or pull reaches across a gap of air. On this bench the second bar magnet slides along a straight line, so its pull or push only moves it closer or further away.
 
 </More>
 
-<More title={{"en": "Reading this design study", "zh": "怎样读这个模型"}}>
+<More title={{"en": "About this model", "zh": "关于这个模型"}}>
 
-The coloured ends are labels, not a source of magnetism. The sizes are design choices, and the readings marked SIM are illustrative model results, not measurements of a particular school magnet.
+The bench is a design study of school science equipment, not a particular product, and the sizes are chosen for it. The two colours on each magnet only mark which end is which; paint does not make a magnet work. In this model, north is towards the back of the bench. Readings marked SIM, such as the pull in percent, come from a simple model of two magnets. Use them to compare settings, not as measurements.
 
 </More>
 
@@ -66,23 +63,23 @@ The coloured ends are labels, not a source of magnetism. The sizes are design ch
 
 <Lang zh>
 
-实验台上摆着不同形状的<Term id="magnet">磁铁</Term>：长条旁边有马蹄形磁铁，立柱上套着环形磁铁。台上还放着指南针、测试盘和制作磁铁的器材。这是一张为观察而安排的科学实验台，不代表某种商品。条形磁铁长 <Num s="S1">100 mm</Num>；模型把器材分区放开，方便比较它们的动作。
+这张实验台是专门用来做磁铁实验的。中间的纸上放着两根条形磁铁；左边是一块马蹄形磁铁和套在木柱上的一对环形磁铁；前面有一个指南针和一盘日常物品；右边是制作磁铁的器材。每块<Term id="magnet">磁铁</Term>的两端都涂了不同的颜色。条形磁铁长 <Num s="S1">10 cm</Num>。
 
-先看条形磁铁之间的空隙。按画面中的方向放好时，它们会互相拉近，这叫<Term id="attract">吸引</Term>。把间隙缩小，拉的作用更强。它们还没有碰到就已经受到拉力，中间不用接绳子，也不用有别的东西把它们连起来。<FlyTo preset="two-magnets">看条形磁铁之间</FlyTo>
+让第二根条形磁铁的南极对着第一根的北极，慢慢推近。两根磁铁之间还隔着空隙，第二根就被拉了过去。拉向自己叫<Term id="attract">吸引</Term>。间隙越小，拉力越大。<FlyTo preset="two-magnets">看两根条形磁铁之间</FlyTo>
 
-把第二根磁铁调个头，相对的两端就会互相推开，这叫<Term id="repel">排斥</Term>。磁铁不用接触，也能对另一根磁铁产生推力或拉力。在「试一试」里改变相对的两端，保持间隙不变，观察箭头方向和读数怎样改变。
+把第二根磁铁调个头，让两个北极相对，它反而被推开。把东西推开叫<Term id="repel">排斥</Term>。推和拉都是力；磁铁不用碰到另一块磁铁，就能推它或拉它。在「试一试」里改变相对的两端，保持间隙不变，看箭头和读数怎样变：正号表示拉，负号表示推。
 
-测试盘提供另一种比较：铁钉和钢回形针会被吸引，木块和塑料尺却留在原处。只看外形或表面是否发亮，不能判断物品会不会被吸。后面会分别测试这些材料；先仔细看磁铁的两端，了解为什么调头会把拉变成推。先看现象、再比较条件，可以避免只凭物品外观下结论。
+磁铁并不是什么都吸。把它拿到测试盘上方，铁钉和钢回形针被吸了起来，木块和塑料尺却留在原处。磁铁可以用铁或钢制成，形状也有很多种：条形、马蹄形、环形，还有贴在冰箱门上的薄薄的软磁片。下一章看磁铁的两端，那里的吸力最强。
 
 <More title={{"en": "A force is a push or a pull", "zh": "力是推或拉"}}>
 
-推或拉都是力。磁铁隔着空隙也能产生作用，适合用来观察。箭头表示作用方向；模型用导轨固定磁铁的位置，不让它们突然撞到一起。
+推或拉叫作力。大多数推和拉要靠接触，比如用手推门。磁铁的推和拉却能隔着一段空气起作用。在这张实验台上，第二根条形磁铁只能沿一条直线滑动，所以拉力或推力只会让它靠近或离开。
 
 </More>
 
-<More title={{"en": "Reading this design study", "zh": "怎样读这个模型"}}>
+<More title={{"en": "About this model", "zh": "关于这个模型"}}>
 
-两端的颜色只是标记，并不是磁性的来源。尺寸是本设计选定的值；标有 SIM 的读数是示意模型的结果，不是某根学校磁铁的实测值。
+这张实验台是按小学科学器材做的设计研究，不代表某种商品，尺寸也是为它选定的。磁铁两端的颜色只是用来区分两端的标记，磁铁并不是因为涂了颜色才有磁性。在这个模型里，北方朝着实验台的后面。标着 SIM 的读数（比如以百分数表示的拉力）来自一个简单的双磁铁模型，用来比较不同的设置，不是实测值。
 
 </More>
 

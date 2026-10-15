@@ -8,12 +8,12 @@
       },
       "group": "magnet-set",
       "summary": {
-        "en": "Marks a pole of the bar magnet.",
-        "zh": "标出条形磁铁的一个磁极。"
+        "en": "Pulls hardest here; points north when hung.",
+        "zh": "这一端吸力最强；悬挂时指向北方。"
       },
       "detail": {
-        "en": "This half belongs to a complete steel bar magnet, 100 × 20 × 10 mm. Its strongest pull is near its end. Pole colours identify the ends; they do not cause magnetism. Cutting a magnet makes smaller magnets with both poles. [S3].\n\nDimensions and placement are a teaching design, not a product specification [S1].",
-        "zh": "这一半属于完整的钢制条形磁铁，尺寸为 100 × 20 × 10 mm。靠近端部的吸力最强。两色只是极的标记，不是磁性的原因。切开后每段仍有两极。 [S3]。\n\n尺寸和摆放由本教学设计选取，不代表具体产品规格 [S1]。"
+        "en": "The north-pole half of a steel bar magnet, 100 × 20 × 10 mm in this design [S1]. A magnet pulls hardest near its ends. Hung from a thread, this end turns to point north, which is how the north pole gets its name [S2].\n\nThe colour only marks the end; paint does not make a magnet work. Cut the bar in two and each piece still has a north pole and a south pole [S3].",
+        "zh": "钢制条形磁铁的北极这一半，本设计尺寸 100 × 20 × 10 mm [S1]。磁铁两端附近吸力最强。用细线挂起来时，这一端转向北方，北极的名字就是这样来的 [S2]。\n\n颜色只是标记，磁铁并不是因为涂了颜色才有磁性。把条形磁铁切成两段，每段仍各有北极和南极 [S3]。"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -40,12 +40,12 @@
       },
       "group": "magnet-set",
       "summary": {
-        "en": "Marks a pole of the bar magnet.",
-        "zh": "标出条形磁铁的一个磁极。"
+        "en": "Pulls hardest here; points south when hung.",
+        "zh": "这一端吸力最强；悬挂时指向南方。"
       },
       "detail": {
-        "en": "This half belongs to a complete steel bar magnet, 100 × 20 × 10 mm. Its strongest pull is near its end. Pole colours identify the ends; they do not cause magnetism. Cutting a magnet makes smaller magnets with both poles. [S3].\n\nDimensions and placement are a teaching design, not a product specification [S1].",
-        "zh": "这一半属于完整的钢制条形磁铁，尺寸为 100 × 20 × 10 mm。靠近端部的吸力最强。两色只是极的标记，不是磁性的原因。切开后每段仍有两极。 [S3]。\n\n尺寸和摆放由本教学设计选取，不代表具体产品规格 [S1]。"
+        "en": "The south-pole half of the same bar magnet [S1]. It pulls as hard as the north pole. A south pole attracts a north pole and repels another south pole [S2].\n\nThe model draws the bar as two coloured halves so that each pole can be picked and labelled; a real bar magnet is one piece of steel [S1].",
+        "zh": "同一根条形磁铁的南极这一半 [S1]。它的吸力和北极一样大。南极吸引北极，排斥另一个南极 [S2]。\n\n模型把条形磁铁画成两段不同颜色，只是为了让两个磁极能分别点选和标注；真的条形磁铁是一整块钢 [S1]。"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -72,12 +72,12 @@
       },
       "group": "magnet-set",
       "summary": {
-        "en": "Pushes or pulls the other magnet.",
-        "zh": "对另一根磁铁施加推力或拉力。"
+        "en": "Pulls or pushes magnet A across the gap.",
+        "zh": "隔着间隙拉或推磁铁 A。"
       },
       "detail": {
-        "en": "Two coloured halves form a second 100 mm bar. The guide changes the face-to-face gap from 6 to 3 to 1.5 cm. The two-pole model gives rounded pulls 12, 41 and 100 percent; reversing a magnet reverses the force sign. These are relative SIM results. [S1].\n\nDimensions and placement are a teaching design, not a product specification [S1].",
-        "zh": "两块异色半条拼成另一根 100 mm 磁铁。导轨让端面间隙从 6 变为 3、再变为 1.5 cm。两极模型的相对拉力取整为 12、41、100%；调头后力的正负号反转。这些是 SIM 相对值。 [S1]。\n\n尺寸和摆放由本教学设计选取，不代表具体产品规格 [S1]。"
+        "en": "A second 100 mm bar magnet on a plastic guide, so that the gap to magnet A can be set to 6, 3 or 1.5 cm [S1]. With unlike poles facing it is pulled towards A; turned round, it is pushed away [S2].\n\nIn this model the pull at 6, 3 and 1.5 cm is 12, 41 and 100 percent of the pull at 1.5 cm [S1]. These are model numbers for comparing, not measurements.",
+        "zh": "第二根 100 mm 的条形磁铁，放在一条塑料导轨上，和磁铁 A 的间隙可以设为 6、3 或 1.5 cm [S1]。异极相对时，它被拉向 A；调个头，它就被推开 [S2]。\n\n在这个模型里，间隙 6、3、1.5 cm 时的拉力，分别是 1.5 cm 时的 12 %、41 %、100 % [S1]。这些是用来比较的模型数字，不是实测值。"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -111,12 +111,12 @@
       },
       "group": "magnet-set",
       "summary": {
-        "en": "Brings both poles to the open tips.",
-        "zh": "把两极带到开口的两端。"
+        "en": "Brings both poles side by side.",
+        "zh": "把两个磁极并排放在一起。"
       },
       "detail": {
-        "en": "The U shape brings both poles close together. Clips cling near the tips. The two tips remain unlike poles; the bend does not remove either pole. [S3].\n\nDimensions and placement are a teaching design, not a product specification [S1].",
-        "zh": "U 形把两极带到相近的两端，回形针吸在极尖附近。两极仍是一北一南，弯曲不会消除任何一极。 [S3]。\n\n尺寸和摆放由本教学设计选取，不代表具体产品规格 [S1]。"
+        "en": "A magnet bent into a U, so that its north and south poles sit side by side at the open end. Paper clips cling to the pole tips, where the pull is strongest [S3].\n\nBending does not remove either pole: one tip is a north pole and the other a south pole [S3]. Its size is a design choice [S1].",
+        "zh": "弯成 U 形的磁铁，北极和南极并排在开口的两端。回形针吸在两个极尖上，那里吸力最强 [S3]。\n\n弯曲不会让任何一个磁极消失：一个极尖是北极，另一个是南极 [S3]。尺寸是本设计选定的 [S1]。"
       },
       "primitive": {
         "kind": "sweep",
@@ -209,43 +209,28 @@
       "id": "ring-magnet-lower",
       "name": {
         "en": "Lower ring magnet",
-        "zh": "下环形磁铁"
+        "zh": "下面的环形磁铁"
       },
       "group": "magnet-set",
       "summary": {
-        "en": "Pushes or pulls the other ring.",
-        "zh": "推开或吸住另一只环形磁铁。"
+        "en": "Pushes the upper ring up, or pulls it down.",
+        "zh": "把上面的环推起，或把它拉下。"
       },
       "detail": {
-        "en": "The rings have poles on their flat faces. Like faces push apart, lifting the upper ring. The wooden post prevents it slipping sideways. Turning a ring over makes unlike faces meet and the rings join. [S3].\n\nDimensions and placement are a teaching design, not a product specification [S1].",
-        "zh": "两只环形磁铁的极在平面上。同极相对时互相排斥，托住上环；木柱限制侧滑。翻过来使异极相对，两环就吸在一起。 [S3]。\n\n尺寸和摆放由本教学设计选取，不代表具体产品规格 [S1]。"
+        "en": "A flat ring magnet with its poles on its two flat faces, 30 mm across in this design [S1]. With like poles facing, it pushes the upper ring up so that it floats; turn the upper ring over and the two clamp together [S2].",
+        "zh": "扁平的环形磁铁，两个磁极在上下两个平面上，本设计直径 30 mm [S1]。同极相对时，它把上面的环推起来，让它悬在空中；把上面的环翻过来，两只环就紧紧贴在一起 [S2]。"
       },
       "primitive": {
         "kind": "lathe",
         "profile": [
-          [
-            0.004,
-            -0.004
-          ],
-          [
-            0.015,
-            -0.004
-          ],
-          [
-            0.015,
-            0.004
-          ],
-          [
-            0.004,
-            0.004
-          ],
-          [
-            0.004,
-            -0.004
-          ]
+          [0.004, -0.004],
+          [0.015, -0.004],
+          [0.015, 0.004],
+          [0.004, 0.004],
+          [0.004, -0.004]
         ],
         "segments": 48,
-        "at": [-0.36, 0.004, -0.14],
+        "at": [-0.36, 0.012, -0.14],
         "color": "powder",
         "tint": "token:ink-2"
       },
@@ -259,40 +244,25 @@
       "id": "ring-magnet-upper",
       "name": {
         "en": "Upper ring magnet",
-        "zh": "上环形磁铁"
+        "zh": "上面的环形磁铁"
       },
       "group": "magnet-set",
       "summary": {
-        "en": "Pushes or pulls the other ring.",
-        "zh": "推开或吸住另一只环形磁铁。"
+        "en": "Floats when like poles face.",
+        "zh": "同极相对时悬在空中。"
       },
       "detail": {
-        "en": "The rings have poles on their flat faces. Like faces push apart, lifting the upper ring. The wooden post prevents it slipping sideways. Turning a ring over makes unlike faces meet and the rings join. [S3].\n\nDimensions and placement are a teaching design, not a product specification [S1].",
-        "zh": "两只环形磁铁的极在平面上。同极相对时互相排斥，托住上环；木柱限制侧滑。翻过来使异极相对，两环就吸在一起。 [S3]。\n\n尺寸和摆放由本教学设计选取，不代表具体产品规格 [S1]。"
+        "en": "The same kind of ring magnet, threaded on the post above the lower one. With like poles facing, the push from the lower ring holds it up against its weight; in this model it floats about 1 cm above [S1].\n\nTurned over, unlike poles face each other, the push becomes a pull and the ring drops onto the lower one [S2].",
+        "zh": "同样的环形磁铁，套在立柱上、下面那只的上方。同极相对时，下面那只的推力托住它，不让它落下；在这个模型里，它悬在下面那只上方约 1 cm [S1]。\n\n翻过来，异极相对，推力变成拉力，它就落到下面那只上 [S2]。"
       },
       "primitive": {
         "kind": "lathe",
         "profile": [
-          [
-            0.004,
-            -0.004
-          ],
-          [
-            0.015,
-            -0.004
-          ],
-          [
-            0.015,
-            0.004
-          ],
-          [
-            0.004,
-            0.004
-          ],
-          [
-            0.004,
-            -0.004
-          ]
+          [0.004, -0.004],
+          [0.015, -0.004],
+          [0.015, 0.004],
+          [0.004, 0.004],
+          [0.004, -0.004]
         ],
         "segments": 48,
         "at": [-0.36, 0.03, -0.14],
@@ -308,17 +278,17 @@
     {
       "id": "ring-post",
       "name": {
-        "en": "Ring guide post",
-        "zh": "环形磁铁立柱"
+        "en": "Wooden post",
+        "zh": "木立柱"
       },
       "group": "magnet-set",
       "summary": {
-        "en": "Guides the floating ring sideways.",
-        "zh": "限制悬浮环形磁铁的侧向移动。"
+        "en": "Stops the floating ring sliding off.",
+        "zh": "不让悬浮的环从旁边滑下。"
       },
       "detail": {
-        "en": "A non-magnetic wooden guide keeps the rings aligned. The ring is supported vertically by repulsion, not by a hidden shelf. [S1].\n\nDimensions and placement are a teaching design, not a product specification [S1].",
-        "zh": "非磁性的木柱让两环对齐。上环在竖直方向由斥力托住，没有隐藏的托架。 [S1]。\n\n尺寸和摆放由本教学设计选取，不代表具体产品规格 [S1]。"
+        "en": "A wooden post through the middle of both rings. Wood is not a magnetic material, so the post does not pull on the rings [S2]. It only stops the upper ring sliding sideways: the ring is held up by the push between the magnets, not by the post [S1].",
+        "zh": "一根穿过两只环中间的木柱。木头不是磁性材料，立柱不会吸引环 [S2]。它只是不让上面的环向旁边滑走：托住环的是两块磁铁之间的推力，不是立柱 [S1]。"
       },
       "primitive": {
         "kind": "cylinder",
@@ -345,47 +315,26 @@
       },
       "group": "compass",
       "summary": {
-        "en": "Protects the freely turning needle.",
-        "zh": "保护能自由转动的磁针。"
+        "en": "Holds the turning needle and its dial.",
+        "zh": "装着能转动的磁针和刻度盘。"
       },
       "detail": {
-        "en": "A shallow brass case surrounds the dial and needle without fixing the needle direction. Nearby bar magnets can turn the needle away from north. [S5].\n\nDimensions and placement are a teaching design, not a product specification [S1].",
-        "zh": "浅黄铜壳围住刻度盘与磁针，但不固定磁针的方向。附近的磁铁能让磁针偏离北方。 [S5]。\n\n尺寸和摆放由本教学设计选取，不代表具体产品规格 [S1]。"
+        "en": "A round brass case, 50 mm across in this design [S1]. Brass is not attracted by a magnet, so the case does not turn the needle [S20].\n\nThe compass can be moved to eight spots round bar magnet A. At each spot the needle lines up with the pattern round the magnet [S5].",
+        "zh": "圆形黄铜外壳，本设计直径 50 mm [S1]。黄铜不被磁铁吸引，所以外壳不会让磁针转动 [S20]。\n\n指南针可以放到条形磁铁 A 周围的八个位置上，在每个位置，磁针都顺着磁铁周围的图样指 [S5]。"
       },
       "primitive": {
         "kind": "lathe",
         "profile": [
-          [
-            0,
-            -0.006
-          ],
-          [
-            0.023,
-            -0.006
-          ],
-          [
-            0.025,
-            -0.004
-          ],
-          [
-            0.025,
-            0.006
-          ],
-          [
-            0.023,
-            0.006
-          ],
-          [
-            0.023,
-            -0.003
-          ],
-          [
-            0,
-            -0.003
-          ]
+          [0, -0.006],
+          [0.023, -0.006],
+          [0.025, -0.004],
+          [0.025, 0.006],
+          [0.023, 0.006],
+          [0.023, -0.003],
+          [0, -0.003]
         ],
         "segments": 48,
-        "at": [-0.16, 0.017, 0.085],
+        "at": [-0.16, 0.0064, 0.085],
         "color": "brass"
       },
       "castShadow": false,
@@ -405,17 +354,17 @@
       },
       "group": "compass",
       "summary": {
-        "en": "Gives a fixed reference for direction.",
-        "zh": "提供固定的方向参照。"
+        "en": "Shows which way the needle points.",
+        "zh": "显示磁针指向哪个方向。"
       },
       "detail": {
-        "en": "There are 32 ticks and four longer marks in this design. The long rear mark indicates model north, toward negative Z. The dial is a reference, not a source of magnetic pull. [S1].\n\nDimensions and placement are a teaching design, not a product specification [S1].",
-        "zh": "本设计有 32 条刻度，其中 4 条较长。后方长刻度表示模型的北，即 Z 轴负方向。刻度盘只是方向参照，不产生磁力。 [S1]。\n\n尺寸和摆放由本教学设计选取，不代表具体产品规格 [S1]。"
+        "en": "A dial with 32 marks, four of them longer for north, east, south and west [S1]. The dial does not move; read the needle against it.\n\nIn this model north is towards the back of the bench [S1].",
+        "zh": "刻度盘上有 32 条刻度，其中四条较长，分别对着北、东、南、西 [S1]。刻度盘不动，对照它读出磁针的方向。\n\n在这个模型里，北方朝着实验台的后面 [S1]。"
       },
       "primitive": {
         "kind": "cylinder",
         "size": [0.022, 0.022, 0.0006],
-        "at": [-0.16, 0.021, 0.085],
+        "at": [-0.16, 0.0104, 0.085],
         "color": "enamel"
       },
       "castShadow": false,
@@ -423,256 +372,256 @@
         {
           "kind": "bevelBox",
           "size": [0.00045, 0.0002, 0.004],
-          "bevel": 5e-05,
-          "at": [-0.16, 0.0214, 0.066],
+          "bevel": 0.00005,
+          "at": [-0.16, 0.0108, 0.066],
           "color": "powder",
-          "rotation": [0, 0.0, 0]
+          "rotation": [0, 0, 0]
         },
         {
           "kind": "bevelBox",
           "size": [0.00045, 0.0002, 0.002],
-          "bevel": 5e-05,
-          "at": [-0.15629328388169356, 0.0214, 0.06636507967233862],
+          "bevel": 0.00005,
+          "at": [-0.15629328388169356, 0.0108, 0.06636507967233862],
           "color": "powder",
           "rotation": [0, -11.25, 0]
         },
         {
           "kind": "bevelBox",
           "size": [0.00045, 0.0002, 0.002],
-          "bevel": 5e-05,
-          "at": [-0.1527290147850633, 0.0214, 0.06744628888228556],
+          "bevel": 0.00005,
+          "at": [-0.1527290147850633, 0.0108, 0.06744628888228556],
           "color": "powder",
           "rotation": [0, -22.5, 0]
         },
         {
           "kind": "bevelBox",
           "size": [0.00045, 0.0002, 0.002],
-          "bevel": 5e-05,
-          "at": [-0.14944416557262757, 0.0214, 0.06920207736625164],
+          "bevel": 0.00005,
+          "at": [-0.14944416557262757, 0.0108, 0.06920207736625164],
           "color": "powder",
           "rotation": [0, -33.75, 0]
         },
         {
           "kind": "bevelBox",
           "size": [0.00045, 0.0002, 0.002],
-          "bevel": 5e-05,
-          "at": [-0.1465649711574556, 0.0214, 0.07156497115745561],
+          "bevel": 0.00005,
+          "at": [-0.1465649711574556, 0.0108, 0.07156497115745561],
           "color": "powder",
-          "rotation": [0, -45.0, 0]
+          "rotation": [0, -45, 0]
         },
         {
           "kind": "bevelBox",
           "size": [0.00045, 0.0002, 0.002],
-          "bevel": 5e-05,
-          "at": [-0.14420207736625165, 0.0214, 0.07444416557262756],
+          "bevel": 0.00005,
+          "at": [-0.14420207736625165, 0.0108, 0.07444416557262756],
           "color": "powder",
           "rotation": [0, -56.25, 0]
         },
         {
           "kind": "bevelBox",
           "size": [0.00045, 0.0002, 0.002],
-          "bevel": 5e-05,
-          "at": [-0.14244628888228555, 0.0214, 0.0777290147850633],
+          "bevel": 0.00005,
+          "at": [-0.14244628888228555, 0.0108, 0.0777290147850633],
           "color": "powder",
           "rotation": [0, -67.5, 0]
         },
         {
           "kind": "bevelBox",
           "size": [0.00045, 0.0002, 0.002],
-          "bevel": 5e-05,
-          "at": [-0.14136507967233863, 0.0214, 0.08129328388169357],
+          "bevel": 0.00005,
+          "at": [-0.14136507967233863, 0.0108, 0.08129328388169357],
           "color": "powder",
           "rotation": [0, -78.75, 0]
         },
         {
           "kind": "bevelBox",
           "size": [0.00045, 0.0002, 0.004],
-          "bevel": 5e-05,
-          "at": [-0.14100000000000001, 0.0214, 0.085],
+          "bevel": 0.00005,
+          "at": [-0.14100000000000001, 0.0108, 0.085],
           "color": "powder",
-          "rotation": [0, -90.0, 0]
+          "rotation": [0, -90, 0]
         },
         {
           "kind": "bevelBox",
           "size": [0.00045, 0.0002, 0.002],
-          "bevel": 5e-05,
-          "at": [-0.14136507967233863, 0.0214, 0.08870671611830644],
+          "bevel": 0.00005,
+          "at": [-0.14136507967233863, 0.0108, 0.08870671611830644],
           "color": "powder",
           "rotation": [0, -101.25, 0]
         },
         {
           "kind": "bevelBox",
           "size": [0.00045, 0.0002, 0.002],
-          "bevel": 5e-05,
-          "at": [-0.14244628888228555, 0.0214, 0.09227098521493671],
+          "bevel": 0.00005,
+          "at": [-0.14244628888228555, 0.0108, 0.09227098521493671],
           "color": "powder",
           "rotation": [0, -112.5, 0]
         },
         {
           "kind": "bevelBox",
           "size": [0.00045, 0.0002, 0.002],
-          "bevel": 5e-05,
-          "at": [-0.14420207736625165, 0.0214, 0.09555583442737245],
+          "bevel": 0.00005,
+          "at": [-0.14420207736625165, 0.0108, 0.09555583442737245],
           "color": "powder",
           "rotation": [0, -123.75, 0]
         },
         {
           "kind": "bevelBox",
           "size": [0.00045, 0.0002, 0.002],
-          "bevel": 5e-05,
-          "at": [-0.1465649711574556, 0.0214, 0.0984350288425444],
+          "bevel": 0.00005,
+          "at": [-0.1465649711574556, 0.0108, 0.0984350288425444],
           "color": "powder",
-          "rotation": [0, -135.0, 0]
+          "rotation": [0, -135, 0]
         },
         {
           "kind": "bevelBox",
           "size": [0.00045, 0.0002, 0.002],
-          "bevel": 5e-05,
-          "at": [-0.14944416557262757, 0.0214, 0.10079792263374837],
+          "bevel": 0.00005,
+          "at": [-0.14944416557262757, 0.0108, 0.10079792263374837],
           "color": "powder",
           "rotation": [0, -146.25, 0]
         },
         {
           "kind": "bevelBox",
           "size": [0.00045, 0.0002, 0.002],
-          "bevel": 5e-05,
-          "at": [-0.1527290147850633, 0.0214, 0.10255371111771446],
+          "bevel": 0.00005,
+          "at": [-0.1527290147850633, 0.0108, 0.10255371111771446],
           "color": "powder",
           "rotation": [0, -157.5, 0]
         },
         {
           "kind": "bevelBox",
           "size": [0.00045, 0.0002, 0.002],
-          "bevel": 5e-05,
-          "at": [-0.15629328388169356, 0.0214, 0.10363492032766139],
+          "bevel": 0.00005,
+          "at": [-0.15629328388169356, 0.0108, 0.10363492032766139],
           "color": "powder",
           "rotation": [0, -168.75, 0]
         },
         {
           "kind": "bevelBox",
           "size": [0.00045, 0.0002, 0.004],
-          "bevel": 5e-05,
-          "at": [-0.16, 0.0214, 0.10400000000000001],
+          "bevel": 0.00005,
+          "at": [-0.16, 0.0108, 0.10400000000000001],
           "color": "powder",
-          "rotation": [0, -180.0, 0]
+          "rotation": [0, -180, 0]
         },
         {
           "kind": "bevelBox",
           "size": [0.00045, 0.0002, 0.002],
-          "bevel": 5e-05,
-          "at": [-0.16370671611830645, 0.0214, 0.10363492032766139],
+          "bevel": 0.00005,
+          "at": [-0.16370671611830645, 0.0108, 0.10363492032766139],
           "color": "powder",
           "rotation": [0, -191.25, 0]
         },
         {
           "kind": "bevelBox",
           "size": [0.00045, 0.0002, 0.002],
-          "bevel": 5e-05,
-          "at": [-0.16727098521493672, 0.0214, 0.10255371111771446],
+          "bevel": 0.00005,
+          "at": [-0.16727098521493672, 0.0108, 0.10255371111771446],
           "color": "powder",
           "rotation": [0, -202.5, 0]
         },
         {
           "kind": "bevelBox",
           "size": [0.00045, 0.0002, 0.002],
-          "bevel": 5e-05,
-          "at": [-0.17055583442737243, 0.0214, 0.10079792263374837],
+          "bevel": 0.00005,
+          "at": [-0.17055583442737243, 0.0108, 0.10079792263374837],
           "color": "powder",
           "rotation": [0, -213.75, 0]
         },
         {
           "kind": "bevelBox",
           "size": [0.00045, 0.0002, 0.002],
-          "bevel": 5e-05,
-          "at": [-0.17343502884254441, 0.0214, 0.09843502884254442],
+          "bevel": 0.00005,
+          "at": [-0.17343502884254441, 0.0108, 0.09843502884254442],
           "color": "powder",
-          "rotation": [0, -225.0, 0]
+          "rotation": [0, -225, 0]
         },
         {
           "kind": "bevelBox",
           "size": [0.00045, 0.0002, 0.002],
-          "bevel": 5e-05,
-          "at": [-0.17579792263374835, 0.0214, 0.09555583442737245],
+          "bevel": 0.00005,
+          "at": [-0.17579792263374835, 0.0108, 0.09555583442737245],
           "color": "powder",
           "rotation": [0, -236.25, 0]
         },
         {
           "kind": "bevelBox",
           "size": [0.00045, 0.0002, 0.002],
-          "bevel": 5e-05,
-          "at": [-0.17755371111771445, 0.0214, 0.09227098521493672],
+          "bevel": 0.00005,
+          "at": [-0.17755371111771445, 0.0108, 0.09227098521493672],
           "color": "powder",
           "rotation": [0, -247.5, 0]
         },
         {
           "kind": "bevelBox",
           "size": [0.00045, 0.0002, 0.002],
-          "bevel": 5e-05,
-          "at": [-0.17863492032766137, 0.0214, 0.08870671611830645],
+          "bevel": 0.00005,
+          "at": [-0.17863492032766137, 0.0108, 0.08870671611830645],
           "color": "powder",
           "rotation": [0, -258.75, 0]
         },
         {
           "kind": "bevelBox",
           "size": [0.00045, 0.0002, 0.004],
-          "bevel": 5e-05,
-          "at": [-0.179, 0.0214, 0.085],
+          "bevel": 0.00005,
+          "at": [-0.179, 0.0108, 0.085],
           "color": "powder",
-          "rotation": [0, -270.0, 0]
+          "rotation": [0, -270, 0]
         },
         {
           "kind": "bevelBox",
           "size": [0.00045, 0.0002, 0.002],
-          "bevel": 5e-05,
-          "at": [-0.17863492032766137, 0.0214, 0.08129328388169357],
+          "bevel": 0.00005,
+          "at": [-0.17863492032766137, 0.0108, 0.08129328388169357],
           "color": "powder",
           "rotation": [0, -281.25, 0]
         },
         {
           "kind": "bevelBox",
           "size": [0.00045, 0.0002, 0.002],
-          "bevel": 5e-05,
-          "at": [-0.17755371111771445, 0.0214, 0.07772901478506329],
+          "bevel": 0.00005,
+          "at": [-0.17755371111771445, 0.0108, 0.07772901478506329],
           "color": "powder",
           "rotation": [0, -292.5, 0]
         },
         {
           "kind": "bevelBox",
           "size": [0.00045, 0.0002, 0.002],
-          "bevel": 5e-05,
-          "at": [-0.17579792263374835, 0.0214, 0.07444416557262758],
+          "bevel": 0.00005,
+          "at": [-0.17579792263374835, 0.0108, 0.07444416557262758],
           "color": "powder",
           "rotation": [0, -303.75, 0]
         },
         {
           "kind": "bevelBox",
           "size": [0.00045, 0.0002, 0.002],
-          "bevel": 5e-05,
-          "at": [-0.17343502884254441, 0.0214, 0.07156497115745561],
+          "bevel": 0.00005,
+          "at": [-0.17343502884254441, 0.0108, 0.07156497115745561],
           "color": "powder",
-          "rotation": [0, -315.0, 0]
+          "rotation": [0, -315, 0]
         },
         {
           "kind": "bevelBox",
           "size": [0.00045, 0.0002, 0.002],
-          "bevel": 5e-05,
-          "at": [-0.17055583442737243, 0.0214, 0.06920207736625164],
+          "bevel": 0.00005,
+          "at": [-0.17055583442737243, 0.0108, 0.06920207736625164],
           "color": "powder",
           "rotation": [0, -326.25, 0]
         },
         {
           "kind": "bevelBox",
           "size": [0.00045, 0.0002, 0.002],
-          "bevel": 5e-05,
-          "at": [-0.16727098521493672, 0.0214, 0.06744628888228557],
+          "bevel": 0.00005,
+          "at": [-0.16727098521493672, 0.0108, 0.06744628888228557],
           "color": "powder",
           "rotation": [0, -337.5, 0]
         },
         {
           "kind": "bevelBox",
           "size": [0.00045, 0.0002, 0.002],
-          "bevel": 5e-05,
-          "at": [-0.16370671611830645, 0.0214, 0.06636507967233862],
+          "bevel": 0.00005,
+          "at": [-0.16370671611830645, 0.0108, 0.06636507967233862],
           "color": "powder",
           "rotation": [0, -348.75, 0]
         }
@@ -690,36 +639,24 @@
       },
       "group": "compass",
       "summary": {
-        "en": "Turns as a small magnet on a pivot.",
-        "zh": "绕支点转动的小磁铁。"
+        "en": "Turns to line up with a magnet’s pull.",
+        "zh": "转动，顺着磁铁吸力的方向。"
       },
       "detail": {
-        "en": "A two-colour magnet balances on a low-friction pivot. Its north-seeking half turns along the local direction of magnetic action. The simulation damps the swing; the chosen period and damping describe the display, not every real compass. [S5].\n\nDimensions and placement are a teaching design, not a product specification [S1].",
-        "zh": "两色的小磁铁支在低摩擦支点上，指北的一半随周围磁作用的方向转动。模拟让摆动逐渐减弱；选定周期与阻尼是画面参数，不代表所有真实指南针。 [S5]。\n\n尺寸和摆放由本教学设计选取，不代表具体产品规格 [S1]。"
+        "en": "A small, light magnet balanced on a point so that it can turn freely. Its north-pole half is coloured. Near a bar magnet it lines up with the curves of the iron filings; away from magnets it settles pointing north [S5].\n\nIn this model it swings for a few seconds before it comes to rest [S1].",
+        "zh": "一根又小又轻的磁铁，支在一个尖上，能自由转动，北极那一半涂了颜色。靠近条形磁铁时，它顺着铁屑的弧线指；远离磁铁时，它指着北方停住 [S5]。\n\n在这个模型里，它要摆几秒钟才停稳 [S1]。"
       },
       "primitive": {
         "kind": "extrude",
         "shape": [
-          [
-            0,
-            0
-          ],
-          [
-            0.003,
-            -0.001
-          ],
-          [
-            0,
-            -0.019
-          ],
-          [
-            -0.003,
-            -0.001
-          ]
+          [0, 0],
+          [0.003, -0.001],
+          [0, -0.019],
+          [-0.003, -0.001]
         ],
         "depth": 0.0007,
         "rotation": [90, 0, 0],
-        "at": [-0.16, 0.023, 0.085],
+        "at": [-0.16, 0.0124, 0.085],
         "color": "steel",
         "tint": "token:pole-n"
       },
@@ -728,33 +665,21 @@
         {
           "kind": "extrude",
           "shape": [
-            [
-              0,
-              0
-            ],
-            [
-              0.003,
-              0.001
-            ],
-            [
-              0,
-              0.019
-            ],
-            [
-              -0.003,
-              0.001
-            ]
+            [0, 0],
+            [0.003, 0.001],
+            [0, 0.019],
+            [-0.003, 0.001]
           ],
           "depth": 0.0007,
           "rotation": [90, 0, 0],
-          "at": [-0.16, 0.023, 0.085],
+          "at": [-0.16, 0.0124, 0.085],
           "color": "steel",
           "tint": "token:pole-s"
         },
         {
           "kind": "cylinder",
           "size": [0.0012, 0.0012, 0.002],
-          "at": [-0.16, 0.023, 0.085],
+          "at": [-0.16, 0.0124, 0.085],
           "color": "brass"
         }
       ],
@@ -771,43 +696,25 @@
       },
       "group": "compass",
       "summary": {
-        "en": "Covers the needle without touching it.",
-        "zh": "罩住磁针而不碰到它。"
+        "en": "Keeps fingers and dust off the needle.",
+        "zh": "挡住手指和灰尘，保护磁针。"
       },
       "detail": {
-        "en": "A low transparent cover protects the pivot from fingers. X-ray makes only this cover and the refrigerator door transparent. [S1].\n\nDimensions and placement are a teaching design, not a product specification [S1].",
-        "zh": "透明低罩防止手指碰到支点。透视时只有玻璃罩和冰箱门段变透明。 [S1]。\n\n尺寸和摆放由本教学设计选取，不代表具体产品规格 [S1]。"
+        "en": "A clear cover over the needle, so that the needle can be read without touching it [S1].",
+        "zh": "罩在磁针上的透明盖子，不用碰磁针就能读出它的方向 [S1]。"
       },
       "primitive": {
         "kind": "lathe",
         "profile": [
-          [
-            0,
-            0.002
-          ],
-          [
-            0.02,
-            0.002
-          ],
-          [
-            0.024,
-            0
-          ],
-          [
-            0.024,
-            -0.001
-          ],
-          [
-            0.02,
-            0.001
-          ],
-          [
-            0,
-            0.001
-          ]
+          [0, 0.002],
+          [0.02, 0.002],
+          [0.024, 0],
+          [0.024, -0.001],
+          [0.02, 0.001],
+          [0, 0.001]
         ],
         "segments": 48,
-        "at": [-0.16, 0.027, 0.085],
+        "at": [-0.16, 0.0164, 0.085],
         "color": "glass"
       },
       "castShadow": false,
@@ -820,8 +727,8 @@
     {
       "id": "suspension-stand",
       "name": {
-        "en": "Suspension stand and thread",
-        "zh": "悬挂架与细线"
+        "en": "Stand and thread",
+        "zh": "支架与细线"
       },
       "group": "compass",
       "summary": {
@@ -829,8 +736,8 @@
         "zh": "让条形磁铁能自由转动。"
       },
       "detail": {
-        "en": "The stand carries a thin thread and paper stirrup. Away from nearby magnets a freely suspended bar comes to rest pointing north and south. In the model the north end points toward negative Z. [S2].\n\nDimensions and placement are a teaching design, not a product specification [S1].",
-        "zh": "支架托住细线和纸托。远离其他磁铁时，自由悬挂的条形磁铁静止后指南北。模型里的北极转向 Z 轴负方向。 [S2]。\n\n尺寸和摆放由本教学设计选取，不代表具体产品规格 [S1]。"
+        "en": "A stand with a thin thread and a paper cradle for the bar magnet. Hung like this, the magnet can turn without being held or blocked: it is freely suspended [S2].\n\nAway from other magnets it swings, slows and comes to rest pointing north and south [S2]. In this model north is towards the back of the bench [S1].",
+        "zh": "支架上挂着一根细线和一个纸托，用来挂条形磁铁。这样挂着，磁铁不被握住、也不被挡住，能自由转动，这就是自由悬挂 [S2]。\n\n远离其他磁铁时，它摆几下、慢下来，最后指着南北停住 [S2]。在这个模型里，北方朝着实验台的后面 [S1]。"
       },
       "primitive": {
         "kind": "sweep",
@@ -878,17 +785,17 @@
     {
       "id": "test-tray",
       "name": {
-        "en": "Test tray",
-        "zh": "测试盘"
+        "en": "Test tray and card stand",
+        "zh": "测试盘与卡片架"
       },
       "group": "materials",
       "summary": {
-        "en": "Keeps the test objects together.",
-        "zh": "把待测物品放在一起。"
+        "en": "Holds the objects to test, and the card stand.",
+        "zh": "放着待测物品；后面是卡片架。"
       },
       "detail": {
-        "en": "The shallow tray supports comparisons using the same magnet. All objects have separate selectable labels. The steel can is the eighth comparison object from the spec. [S1].\n\nDimensions and placement are a teaching design, not a product specification [S1].",
-        "zh": "浅盘便于使用同一根磁铁比较物品。每件测试物都可单独点选。钢罐作为规格中的第 8 件比较物保留。 [S1]。\n\n尺寸和摆放由本教学设计选取，不代表具体产品规格 [S1]。"
+        "en": "A plastic tray of eight everyday objects made of different materials, all tested with the same magnet [S1].\n\nBehind the paper, a steel stand holds the bar magnet over a chain of paper clips for the card test [S1].",
+        "zh": "塑料盘里放着八件用不同材料做的日常物品，都用同一根磁铁来测试 [S1]。\n\n纸的后面有一个钢支架，做卡片实验时，用它把条形磁铁夹在一串回形针上方 [S1]。"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -926,6 +833,31 @@
           "bevel": 0.00075,
           "at": [0.22, 0.012, 0.13],
           "color": "plastic"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [0.07, 0.008, 0.06],
+          "bevel": 0.001,
+          "at": [-0.19, 0.004, -0.17],
+          "color": "steel"
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [0, 0, 0],
+            [0, 0.29, 0],
+            [0.05, 0.29, 0]
+          ],
+          "radius": 0.003,
+          "at": [-0.2, 0.004, -0.17],
+          "color": "steel"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [0.018, 0.012, 0.028],
+          "bevel": 0.001,
+          "at": [-0.15, 0.2865, -0.17],
+          "color": "steel"
         }
       ],
       "explode": {
@@ -941,12 +873,12 @@
       },
       "group": "materials",
       "summary": {
-        "en": "Shows iron being attracted.",
-        "zh": "显示铁会被磁铁吸引。"
+        "en": "Is attracted: iron is a magnetic material.",
+        "zh": "被吸引：铁是磁性材料。"
       },
       "detail": {
-        "en": "This selected nail is iron, a magnetic material. Being attracted does not prove the nail is already a permanent magnet. A magnet can pull an unmagnetised iron object. [S2].\n\nDimensions and placement are a teaching design, not a product specification [S1].",
-        "zh": "这根选定的钉子是铁，属于磁性材料。被吸住不能证明它原先就是永久磁铁；磁铁也能吸未磁化的铁物体。 [S2]。\n\n尺寸和摆放由本教学设计选取，不代表具体产品规格 [S1]。"
+        "en": "An iron nail is attracted by a magnet, even though it is not a magnet itself [S2].\n\nBeing attracted does not prove that an object is a magnet: only a push from a magnet’s pole shows that [S3].",
+        "zh": "铁钉本身不是磁铁，却会被磁铁吸引 [S2]。\n\n被吸引并不能证明一个物体是磁铁，只有被磁极推开才能证明 [S3]。"
       },
       "primitive": {
         "kind": "cylinder",
@@ -966,10 +898,7 @@
         },
         {
           "kind": "cone",
-          "size": [
-            0.0018,
-            0.006
-          ],
+          "size": [0.0018, 0.006],
           "at": [0.083, 0.012, 0.095],
           "rotation": [0, 0, -90],
           "color": "steel"
@@ -988,12 +917,12 @@
       },
       "group": "materials",
       "summary": {
-        "en": "Shows steel being attracted.",
-        "zh": "显示钢会被磁铁吸引。"
+        "en": "Are attracted: steel is a magnetic material.",
+        "zh": "被吸引：钢是磁性材料。"
       },
       "detail": {
-        "en": "The steel wire is bent into a clip. A shiny coating does not make it non-magnetic. These test clips stay the same size when comparing how many a magnet holds. [S2].\n\nDimensions and placement are a teaching design, not a product specification [S1].",
-        "zh": "钢丝弯成回形针。表面亮亮的镀层不会让内部的钢变成非磁性材料。比较吸住多少只时，要保持回形针的大小相同。 [S2]。\n\n尺寸和摆放由本教学设计选取，不代表具体产品规格 [S1]。"
+        "en": "Three small clips bent from steel wire [S1]. Steel is a magnetic material, so a magnet picks them up [S2].\n\nThe same kind of clip is used for every count in this topic, so that the results can be compared [S2].",
+        "zh": "三只用钢丝弯成的小回形针 [S1]。钢是磁性材料，磁铁能把它们吸起来 [S2]。\n\n这一课的计数都用同一种回形针，结果才能互相比较 [S2]。"
       },
       "primitive": {
         "kind": "sweep",
@@ -1036,40 +965,22 @@
       },
       "group": "materials",
       "summary": {
-        "en": "Shows a steel container being attracted.",
-        "zh": "显示钢制容器会被吸引。"
+        "en": "Is attracted: the can is made of steel.",
+        "zh": "被吸引：罐子是钢做的。"
       },
       "detail": {
-        "en": "This miniature steel container contrasts with the aluminium tab. Its dimensions are selected for the teaching tray and do not represent a standard food-can capacity. [S2].\n\nDimensions and placement are a teaching design, not a product specification [S1].",
-        "zh": "这只微型钢罐与铝拉环作比较。尺寸为教学盘选取，不代表标准罐头容量。 [S2]。\n\n尺寸和摆放由本教学设计选取，不代表具体产品规格 [S1]。"
+        "en": "A small food can made of steel [S1]. A magnet attracts it [S2].\n\nSteel and aluminium cans can look alike; a magnet tells them apart, and the same idea is used to pick steel out of scrap [S4].",
+        "zh": "一个钢做的小罐头 [S1]。磁铁会吸引它 [S2]。\n\n钢罐和铝罐看起来可能差不多，用磁铁一试就分得出来；从废料里挑出钢铁，用的也是这个道理 [S4]。"
       },
       "primitive": {
         "kind": "lathe",
         "profile": [
-          [
-            0,
-            -0.026
-          ],
-          [
-            0.024,
-            -0.026
-          ],
-          [
-            0.026,
-            -0.024
-          ],
-          [
-            0.026,
-            0.024
-          ],
-          [
-            0.025,
-            0.026
-          ],
-          [
-            0,
-            0.026
-          ]
+          [0, -0.026],
+          [0.024, -0.026],
+          [0.026, -0.024],
+          [0.026, 0.024],
+          [0.025, 0.026],
+          [0, 0.026]
         ],
         "segments": 48,
         "at": [0.25, 0.026, 0.16],
@@ -1085,59 +996,32 @@
       "id": "aluminium-can",
       "name": {
         "en": "Aluminium can tab",
-        "zh": "铝罐拉环"
+        "zh": "铝拉环"
       },
       "group": "materials",
       "summary": {
-        "en": "Stays still beside the magnet.",
-        "zh": "放在磁铁旁边仍不被吸起。"
+        "en": "Is not attracted: aluminium is non-magnetic.",
+        "zh": "不被吸引：铝是非磁性材料。"
       },
       "detail": {
-        "en": "The tab is made from aluminium, a metal that is not attracted in this classroom test. Its thin loop provides a useful contrast with the iron nail and steel clips [S3].\n\nUse the same magnet and approach each object in the same way [S1].",
-        "zh": "拉环由铝制成。铝是金属，但在这项课堂测试中不被吸引，和铁钉、钢回形针形成对照 [S3]。\n\n比较时使用同一根磁铁，以相同方式靠近各件物品 [S1]。"
+        "en": "The ring-pull tab from a drinks can, made of aluminium [S1]. Aluminium is a metal, but a magnet does not attract it [S20].\n\nIt shows that not every metal is a magnetic material [S20].",
+        "zh": "饮料罐上的拉环，用铝做成 [S1]。铝是金属，但磁铁不吸引它 [S20]。\n\n它说明不是所有金属都是磁性材料 [S20]。"
       },
       "primitive": {
         "kind": "extrude",
         "shape": [
-          [
-            -0.007,
-            -0.012
-          ],
-          [
-            0.007,
-            -0.012
-          ],
-          [
-            0.008,
-            0.01
-          ],
-          [
-            0,
-            0.014
-          ],
-          [
-            -0.008,
-            0.01
-          ]
+          [-0.007, -0.012],
+          [0.007, -0.012],
+          [0.008, 0.01],
+          [0, 0.014],
+          [-0.008, 0.01]
         ],
         "holes": [
           [
-            [
-              -0.004,
-              -0.007
-            ],
-            [
-              0.004,
-              -0.007
-            ],
-            [
-              0.004,
-              0.005
-            ],
-            [
-              -0.004,
-              0.005
-            ]
+            [-0.004, -0.007],
+            [0.004, -0.007],
+            [0.004, 0.005],
+            [-0.004, 0.005]
           ]
         ],
         "depth": 0.0007,
@@ -1154,17 +1038,17 @@
     {
       "id": "copper-wire",
       "name": {
-        "en": "Copper coin-shaped disc",
-        "zh": "铜质圆片"
+        "en": "Copper disc",
+        "zh": "铜片"
       },
       "group": "materials",
       "summary": {
-        "en": "Shows that copper is not attracted.",
-        "zh": "显示铜不被磁铁吸引。"
+        "en": "Is not attracted: copper is non-magnetic.",
+        "zh": "不被吸引：铜是非磁性材料。"
       },
       "detail": {
-        "en": "A plain solid-copper disc represents a coin-shaped test piece. It has no monetary marking and is not a copper-plated steel coin. Copper is not attracted in this classroom test [S3].\n\nA real coin can contain several materials, so test it rather than judge by its surface colour [S1].",
-        "zh": "素面实心铜片作为硬币形状的测试件，没有币值，也不是镀铜钢币。铜在这项课堂测试中不被吸引 [S3]。\n\n真实硬币可能含有不同材料，不能仅凭表面颜色判断，应实际测试 [S1]。"
+        "en": "A plain disc of solid copper, with nothing printed on it [S1]. Copper is a metal, but a magnet does not attract it [S20].",
+        "zh": "一片素面的实心铜片 [S1]。铜是金属，但磁铁不吸引它 [S20]。"
       },
       "primitive": {
         "kind": "cylinder",
@@ -1181,17 +1065,17 @@
     {
       "id": "steel-spoon",
       "name": {
-        "en": "Selected stainless steel spoon",
-        "zh": "选定的不锈钢勺"
+        "en": "Stainless steel spoon",
+        "zh": "不锈钢勺"
       },
       "group": "materials",
       "summary": {
-        "en": "Shows a selected steel with little response.",
-        "zh": "显示一种几乎不响应的特殊钢。"
+        "en": "Is hardly attracted, unlike ordinary steel.",
+        "zh": "几乎不被吸引，和普通的钢不同。"
       },
       "detail": {
-        "en": "This selected spoon is austenitic stainless steel, which is almost unresponsive to a classroom magnet. Other stainless steels can be attracted; working and bending can also alter the response. Test the actual object rather than infer from its shine. [S9].\n\nDimensions and placement are a teaching design, not a product specification [S1].",
-        "zh": "这把选定的勺子是奥氏体不锈钢，课堂磁铁几乎吸不动。其他种类的不锈钢可能被吸引，加工弯折也可能改变响应。应实际测试，不能仅凭亮光判断。 [S9]。\n\n尺寸和摆放由本教学设计选取，不代表具体产品规格 [S1]。"
+        "en": "The spoon in this model is made of austenitic stainless steel, a kind that a magnet hardly attracts [S9]. Other kinds of stainless steel, called ferritic and martensitic, are attracted [S9].\n\nIt was chosen to show that the word “steel” alone does not predict the result: test the object itself [S1].",
+        "zh": "模型里的勺子是奥氏体不锈钢，磁铁几乎吸不动这一种 [S9]。另外几种不锈钢叫铁素体不锈钢和马氏体不锈钢，会被磁铁吸引 [S9]。\n\n选它，是为了说明单看“钢”这个字不能判断结果，要拿物品本身来试 [S1]。"
       },
       "primitive": {
         "kind": "sweep",
@@ -1212,26 +1096,11 @@
         {
           "kind": "lathe",
           "profile": [
-            [
-              0,
-              0
-            ],
-            [
-              0.009,
-              0.001
-            ],
-            [
-              0.012,
-              0.003
-            ],
-            [
-              0.009,
-              0.002
-            ],
-            [
-              0,
-              0.001
-            ]
+            [0, 0],
+            [0.009, 0.001],
+            [0.012, 0.003],
+            [0.009, 0.002],
+            [0, 0.001]
           ],
           "segments": 48,
           "at": [0.185, 0.01, 0.154],
@@ -1252,12 +1121,12 @@
       },
       "group": "materials",
       "summary": {
-        "en": "Stays on the tray during the test.",
-        "zh": "测试时仍留在盘里。"
+        "en": "Is not attracted: wood is non-magnetic.",
+        "zh": "不被吸引：木头是非磁性材料。"
       },
       "detail": {
-        "en": "Wood is a non-magnetic material in this test. The wooden support does not stop a nearby magnet pulling a steel object through it; separation still matters. [S2].\n\nDimensions and placement are a teaching design, not a product specification [S1].",
-        "zh": "木头在本测试中是非磁性材料。木支撑不会完全阻止磁铁隔着它吸钢件，但间隔距离仍会影响吸力。 [S2]。\n\n尺寸和摆放由本教学设计选取，不代表具体产品规格 [S1]。"
+        "en": "A small block of wood [S1]. A magnet does not attract it [S2], but a magnet’s pull passes through wood [S23].",
+        "zh": "一小块木头 [S1]。磁铁不吸引它 [S2]，但磁铁的吸力能穿过木头 [S23]。"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -1280,12 +1149,12 @@
       },
       "group": "materials",
       "summary": {
-        "en": "Shows a non-magnetic measuring tool.",
-        "zh": "提供非磁性的测量工具。"
+        "en": "Is not attracted: plastic is non-magnetic.",
+        "zh": "不被吸引：塑料是非磁性材料。"
       },
       "detail": {
-        "en": "The small plastic ruler stays on the tray when the magnet approaches. Its raised marks help compare distances [S1].\n\nPlastic is a non-magnetic material in this classroom test [S2].",
-        "zh": "磁铁靠近时，塑料小尺仍留在盘里。凸起刻度方便比较距离 [S1]。\n\n塑料在这项课堂测试中是非磁性材料 [S2]。"
+        "en": "A short plastic ruler [S1]. A magnet does not attract it [S2].",
+        "zh": "一把短塑料尺 [S1]。磁铁不吸引它 [S2]。"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -1299,84 +1168,84 @@
         {
           "kind": "bevelBox",
           "size": [0.0005, 0.0003, 0.004],
-          "bevel": 5e-05,
+          "bevel": 0.00005,
           "at": [0.065, 0.01, 0.188],
           "color": "powder"
         },
         {
           "kind": "bevelBox",
           "size": [0.0005, 0.0003, 0.004],
-          "bevel": 5e-05,
+          "bevel": 0.00005,
           "at": [0.075, 0.01, 0.188],
           "color": "powder"
         },
         {
           "kind": "bevelBox",
           "size": [0.0005, 0.0003, 0.004],
-          "bevel": 5e-05,
+          "bevel": 0.00005,
           "at": [0.085, 0.01, 0.188],
           "color": "powder"
         },
         {
           "kind": "bevelBox",
           "size": [0.0005, 0.0003, 0.004],
-          "bevel": 5e-05,
+          "bevel": 0.00005,
           "at": [0.095, 0.01, 0.188],
           "color": "powder"
         },
         {
           "kind": "bevelBox",
           "size": [0.0005, 0.0003, 0.004],
-          "bevel": 5e-05,
+          "bevel": 0.00005,
           "at": [0.10500000000000001, 0.01, 0.188],
           "color": "powder"
         },
         {
           "kind": "bevelBox",
           "size": [0.0005, 0.0003, 0.004],
-          "bevel": 5e-05,
+          "bevel": 0.00005,
           "at": [0.115, 0.01, 0.188],
           "color": "powder"
         },
         {
           "kind": "bevelBox",
           "size": [0.0005, 0.0003, 0.004],
-          "bevel": 5e-05,
+          "bevel": 0.00005,
           "at": [0.125, 0.01, 0.188],
           "color": "powder"
         },
         {
           "kind": "bevelBox",
           "size": [0.0005, 0.0003, 0.004],
-          "bevel": 5e-05,
+          "bevel": 0.00005,
           "at": [0.135, 0.01, 0.188],
           "color": "powder"
         },
         {
           "kind": "bevelBox",
           "size": [0.0005, 0.0003, 0.004],
-          "bevel": 5e-05,
+          "bevel": 0.00005,
           "at": [0.14500000000000002, 0.01, 0.188],
           "color": "powder"
         },
         {
           "kind": "bevelBox",
           "size": [0.0005, 0.0003, 0.004],
-          "bevel": 5e-05,
+          "bevel": 0.00005,
           "at": [0.155, 0.01, 0.188],
           "color": "powder"
         },
         {
           "kind": "bevelBox",
           "size": [0.0005, 0.0003, 0.004],
-          "bevel": 5e-05,
+          "bevel": 0.00005,
           "at": [0.165, 0.01, 0.188],
           "color": "powder"
         },
         {
           "kind": "bevelBox",
           "size": [0.0005, 0.0003, 0.004],
-          "bevel": 5e-05,
+          "bevel": 0.00005,
           "at": [0.175, 0.01, 0.188],
           "color": "powder"
         }
@@ -1389,30 +1258,30 @@
     {
       "id": "barrier-cards",
       "name": {
-        "en": "Barrier cards",
-        "zh": "隔挡卡片"
+        "en": "Cards",
+        "zh": "卡片"
       },
       "group": "materials",
       "summary": {
-        "en": "Adds a non-magnetic gap.",
-        "zh": "增加非磁性的间隔。"
+        "en": "Each card adds 2 mm between magnet and clips.",
+        "zh": "每张卡片在磁铁和回形针之间加宽 2 mm。"
       },
       "detail": {
-        "en": "Each design card is 2 mm thick. In this simulation 0–6 cards hold 10, 5, 3, 2, 1, 1 and 0 clips. These are illustrative counts, not a measured law for all magnets. The stack is elevated to give the hanging chain clearance above the bench. [S1].\n\nDimensions and placement are a teaching design, not a product specification [S1].",
-        "zh": "每张设计卡片厚 2 mm。本模拟隔 0–6 张卡片可吸住 10、5、3、2、1、1、0 只回形针。数字只是示意，不是所有磁铁的实测定律。卡片架升高以免下方回形针串穿过桌面。 [S1]。\n\n尺寸和摆放由本教学设计选取，不代表具体产品规格 [S1]。"
+        "en": "Paper cards, each 2 mm thick in this design, held under the north pole of the clamped magnet [S1]. Paper is not a magnetic material, so the pull passes through, but each card widens the gap and weakens the pull [S23].\n\nIn this model, 0 to 6 cards let the magnet hold 10, 5, 3, 2, 1, 1 and 0 clips [S1]. The numbers are an example; the pattern is what matters.",
+        "zh": "纸卡片，本设计每张厚 2 mm，夹在磁铁北极的下面 [S1]。纸不是磁性材料，吸力能穿过去，但每多一张，间隙就宽一些，吸力也弱一些 [S23]。\n\n在这个模型里，隔着 0 到 6 张卡片，磁铁依次吸住 10、5、3、2、1、1、0 只回形针 [S1]。数字只是举例，重要的是规律。"
       },
       "primitive": {
         "kind": "bevelBox",
         "size": [0.06, 0.002, 0.04],
         "bevel": 0.0005,
-        "at": [0.02, 0.352, 0.17],
+        "at": [-0.085, 0.264, -0.17],
         "color": "plastic",
         "tint": "token:paper"
       },
       "castShadow": false,
       "repeat": {
         "count": 6,
-        "axis": [0, 1, 0],
+        "axis": [0, -1, 0],
         "spacing": 0.002
       },
       "explode": {
@@ -1423,17 +1292,17 @@
     {
       "id": "clip-chain",
       "name": {
-        "en": "Hanging clip chain",
-        "zh": "悬挂回形针串"
+        "en": "Chain of paper clips",
+        "zh": "回形针串"
       },
       "group": "materials",
       "summary": {
-        "en": "Compares pull by the number held.",
-        "zh": "用吸住的只数比较吸力。"
+        "en": "Shows how strong the pull is by the count.",
+        "zh": "用吸住的只数表示吸力大小。"
       },
       "detail": {
-        "en": "Identical steel clips form a hanging chain. Change only the number of cards and observe how many clips remain held [S1].\n\nThese counts are illustrative. A real comparison must also keep clip size and the magnet unchanged [S2].",
-        "zh": "相同的钢回形针组成悬挂链串。只改变卡片张数，观察还有多少只回形针被吸住 [S1]。\n\n数量是教学示意值，实际比较也要保持回形针大小和磁铁不变 [S2]。"
+        "en": "Identical steel paper clips hang one from another under the cards. The more clips the magnet holds, the stronger its pull through the cards [S1].\n\nIn this model the magnet holds a chain of ten clips with no cards in between [S1].",
+        "zh": "一样的钢回形针一只挂一只，吊在卡片下面。磁铁吸住的回形针越多，说明它隔着卡片的吸力越大 [S1]。\n\n在这个模型里，不夹卡片时，磁铁能吸住一串十只回形针 [S1]。"
       },
       "primitive": {
         "kind": "sweep",
@@ -1454,7 +1323,7 @@
           [0.002, 0, -0.009]
         ],
         "radius": 0.00045,
-        "at": [0.02, 0.19, 0.17],
+        "at": [-0.082, 0.1505, -0.17],
         "color": "stainless",
         "rotation": [90, 0, 0]
       },
@@ -1462,28 +1331,28 @@
       "repeat": {
         "count": 10,
         "axis": [0, -1, 0],
-        "spacing": 0.03
+        "spacing": 0.023
       }
     },
     {
       "id": "steel-rod",
       "name": {
-        "en": "Steel needle for stroking",
-        "zh": "摩擦法用钢针"
+        "en": "Steel needle",
+        "zh": "钢针"
       },
       "group": "making",
       "summary": {
-        "en": "Becomes a magnet after repeated strokes.",
-        "zh": "反复同向摩擦后成为磁铁。"
+        "en": "Becomes a magnet when stroked one way.",
+        "zh": "朝一个方向摩擦后，变成磁铁。"
       },
       "detail": {
-        "en": "Stroke the steel needle with one pole in one direction, lift the magnet clear and return. In this model 0, 10, 20 and 30 strokes hold 0, 2, 4 and 6 clips [S1].\n\nReal results depend on the needle and magnet. The direction of repeated strokes matters; there is no universal fixed stroke count [S19].",
-        "zh": "用同一磁极沿同一方向摩擦钢针，抬起磁铁再回到起点。本模型摩擦 0、10、20、30 次，依次可吸 0、2、4、6 只回形针 [S1]。\n\n真实结果取决于钢针与磁铁。反复摩擦的方向有影响，没有通用的固定次数 [S19]。"
+        "en": "A steel needle, 80 mm long in this design [S1]. Stroked many times from end to end with the same pole of a magnet, always the same way and lifting the magnet clear in between, it becomes a magnet [S19].\n\nIn this model 0, 10, 20 and 30 strokes let it hold 0, 2, 4 and 6 clips [S1]. Real needles give different numbers.",
+        "zh": "一根钢针，本设计长 80 mm [S1]。用磁铁的同一个磁极从一端摩擦到另一端，每次方向相同，中间把磁铁抬起来，摩擦许多次后，它就变成了磁铁 [S19]。\n\n在这个模型里，摩擦 0、10、20、30 次，它依次能吸住 0、2、4、6 只回形针 [S1]。真的钢针会得出不同的数目。"
       },
       "primitive": {
         "kind": "cylinder",
         "size": [0.001, 0.001, 0.08],
-        "at": [0.15, 0.006, -0.06],
+        "at": [0.15, 0.001, -0.06],
         "color": "steel",
         "rotation": [0, 0, 90]
       },
@@ -1499,17 +1368,17 @@
     {
       "id": "stroke-paper-clips",
       "name": {
-        "en": "Stroked needle paper clips",
-        "zh": "摩擦钢针回形针"
+        "en": "Clips on the needle",
+        "zh": "钢针吸住的回形针"
       },
       "group": "making",
       "summary": {
-        "en": "Shows how many clips the stroked needle holds.",
-        "zh": "显示摩擦后的钢针吸住的回形针只数。"
+        "en": "Show how strong the stroked needle is.",
+        "zh": "显示摩擦后的钢针有多强。"
       },
       "detail": {
-        "en": "In this model 0, 10, 20 and 30 same-direction strokes let the steel needle hold 0, 2, 4 and 6 identical clips. These are illustrative SIM counts [S1].",
-        "zh": "在这个模型里，同向摩擦 0、10、20、30 次后，钢针依次吸住 0、2、4、6 只相同的回形针。这些只数是 SIM 教学示意值 [S1]。"
+        "en": "Steel paper clips picked up by the end of the needle. In this model 20 strokes give 4 clips and 30 strokes give 6 [S1].",
+        "zh": "被钢针一端吸住的钢回形针。在这个模型里，摩擦 20 次吸住 4 只，30 次吸住 6 只 [S1]。"
       },
       "primitive": {
         "kind": "sweep",
@@ -1530,13 +1399,14 @@
           [0.002, 0, -0.009]
         ],
         "radius": 0.00045,
-        "at": [0.12, 0.012, -0.025],
-        "color": "stainless"
+        "at": [0.206, 0.00327, -0.0462],
+        "color": "stainless",
+        "rotation": [0, 90, 0]
       },
       "repeat": {
         "count": 6,
-        "axis": [1, 0, 0],
-        "spacing": 0.012
+        "axis": [0, 0.15, 1],
+        "spacing": 0.0072
       },
       "castShadow": false,
       "connects": [
@@ -1550,22 +1420,22 @@
     {
       "id": "em-nail",
       "name": {
-        "en": "Steel electromagnet core",
-        "zh": "电磁铁钢钉芯"
+        "en": "Steel nail",
+        "zh": "钢钉"
       },
       "group": "making",
       "summary": {
-        "en": "Becomes magnetic when the coil carries current.",
-        "zh": "线圈通电时变成磁铁。"
+        "en": "Becomes a magnet while current flows.",
+        "zh": "有电流流过线圈时，变成磁铁。"
       },
       "detail": {
-        "en": "A steel nail forms the core of this electrical-method demonstration. Steel can retain magnetism after current stops, unlike a soft-iron core which retains very little. The SIM keeps one clip after switch-off; it is not a universal residual count. [S4].\n\nDimensions and placement are a teaching design, not a product specification [S1].",
-        "zh": "钢钉是本次电流法演示的芯。钢在断电后能留磁，软铁芯则几乎不留。本模拟断电后留下 1 只回形针，不代表所有钢钉都有同样的剩磁。 [S4]。\n\n尺寸和摆放由本教学设计选取，不代表具体产品规格 [S1]。"
+        "en": "A 100 mm steel nail inside the coil [S1]. While current flows round the coil, the nail is a magnet; in this model it changes colour to show this [S4].\n\nSteel keeps a little magnetism after the current stops, so in this model it still holds one clip. A soft iron core keeps almost none [S22].",
+        "zh": "线圈里的一根 100 mm 钢钉 [S1]。电流绕着线圈流动时，钉子就是一块磁铁；在这个模型里，它会变色来表示这一点 [S4]。\n\n电流停止后，钢还留着一点磁性，所以在这个模型里它仍吸住一只回形针。软铁芯几乎不留磁性 [S22]。"
       },
       "primitive": {
         "kind": "cylinder",
         "size": [0.002, 0.002, 0.088],
-        "at": [0.29, 0.07, -0.05],
+        "at": [0.29, 0.1, -0.05],
         "color": "steel"
       },
       "castShadow": false,
@@ -1573,36 +1443,15 @@
         {
           "kind": "cylinder",
           "size": [0.006, 0.006, 0.003],
-          "at": [0.29, 0.115, -0.05],
+          "at": [0.29, 0.145, -0.05],
           "color": "steel"
         },
         {
           "kind": "cone",
-          "size": [
-            0.002,
-            0.009
-          ],
-          "at": [0.29, 0.0215, -0.05],
+          "size": [0.002, 0.009],
+          "at": [0.29, 0.0515, -0.05],
           "rotation": [180, 0, 0],
           "color": "steel"
-        },
-        {
-          "kind": "sweep",
-          "path": [
-            [0, 0, 0],
-            [0, 0.13, 0],
-            [-0.03, 0.13, 0]
-          ],
-          "radius": 0.002,
-          "at": [0.32, 0.004, -0.05],
-          "color": "steel"
-        },
-        {
-          "kind": "bevelBox",
-          "size": [0.045, 0.008, 0.04],
-          "bevel": 0.001,
-          "at": [0.32, 0.004, -0.05],
-          "color": "wood"
         }
       ],
       "explode": {
@@ -1613,17 +1462,17 @@
     {
       "id": "em-coil",
       "name": {
-        "en": "Insulated copper coil",
-        "zh": "绝缘铜线圈"
+        "en": "Coil of insulated wire",
+        "zh": "绝缘导线线圈"
       },
       "group": "making",
       "summary": {
-        "en": "Makes the nail magnetic using current.",
-        "zh": "用电流使钉子磁化。"
+        "en": "Makes the nail a magnet when current flows.",
+        "zh": "电流流过时，使钉子成为磁铁。"
       },
       "detail": {
-        "en": "Thirty turns of insulated copper wire surround the core. The insulation keeps neighbouring turns from touching electrically. The number of turns is fixed; only cell count and the switch vary in this topic. [S4].\n\nDimensions and placement are a teaching design, not a product specification [S1].",
-        "zh": "钢芯外绕 30 圈绝缘铜线。绝缘层防止相邻线圈直接导通。本主题固定圈数，只改变电池节数和开关。 [S4]。\n\n尺寸和摆放由本教学设计选取，不代表具体产品规格 [S1]。"
+        "en": "Thirty turns of insulated copper wire wound round the nail [S1]. Current flowing round the turns makes the nail inside a magnet [S4].\n\nThe coating on the wire stops neighbouring turns touching electrically, so the current goes round and round instead of taking a short cut [S8].",
+        "zh": "绕在钉子上的 30 圈绝缘铜线 [S1]。电流一圈圈地流过，里面的钉子就成了磁铁 [S4]。\n\n导线外面的绝缘皮让相邻的线圈不会接通，电流只能一圈一圈地绕，不会抄近路 [S8]。"
       },
       "primitive": {
         "kind": "coil",
@@ -1631,7 +1480,7 @@
         "wire": 0.0004,
         "turns": 30,
         "length": 0.036,
-        "at": [0.29, 0.07, -0.05],
+        "at": [0.29, 0.1, -0.05],
         "color": "copper",
         "tint": "token:accent-2"
       },
@@ -1649,45 +1498,27 @@
     {
       "id": "em-cells",
       "name": {
-        "en": "Electromagnet cells",
-        "zh": "电磁铁电池"
+        "en": "Batteries",
+        "zh": "电池"
       },
       "group": "making",
       "summary": {
-        "en": "Supplies current for the coil.",
-        "zh": "给线圈提供电流。"
+        "en": "Push the current round the coil.",
+        "zh": "推动电流流过线圈。"
       },
       "detail": {
-        "en": "The repeated AA-sized cells are 14.5 mm in diameter and about 50.5 mm long in this design. With the switch on, one cell holds 3 clips and two hold 6 in this illustrative model. Use dry cells for the demonstration. [S1].\n\nDimensions and placement are a teaching design, not a product specification [S1].",
-        "zh": "本设计的 AA 大小电池直径 14.5 mm、长约 50.5 mm。开关接通时，本示意模型用 1 节吸 3 只、2 节吸 6 只回形针。演示只用干电池。 [S1]。\n\n尺寸和摆放由本教学设计选取，不代表具体产品规格 [S1]。"
+        "en": "Two AA-size dry cells, 14.5 mm across and 50.5 mm long [S1]. In this model two batteries let the nail lift 6 clips and one battery lets it lift 3 [S1].\n\nUse dry cells only: the coil and batteries get warm, so switch off between tests [S8].",
+        "zh": "两节 AA 号干电池，直径 14.5 mm、长 50.5 mm [S1]。在这个模型里，两节电池让钉子吸起 6 只回形针，一节电池吸起 3 只 [S1]。\n\n只用干电池：线圈和电池会发热，每次测完就断开开关 [S8]。"
       },
       "primitive": {
         "kind": "lathe",
         "profile": [
-          [
-            0,
-            -0.02525
-          ],
-          [
-            0.00725,
-            -0.02525
-          ],
-          [
-            0.00725,
-            0.024
-          ],
-          [
-            0.003,
-            0.024
-          ],
-          [
-            0.003,
-            0.026
-          ],
-          [
-            0,
-            0.026
-          ]
+          [0, -0.02525],
+          [0.00725, -0.02525],
+          [0.00725, 0.024],
+          [0.003, 0.024],
+          [0.003, 0.026],
+          [0, 0.026]
         ],
         "segments": 48,
         "at": [0.37, 0.012, -0.005],
@@ -1712,17 +1543,17 @@
     {
       "id": "em-switch",
       "name": {
-        "en": "Electromagnet switch",
-        "zh": "电磁铁开关"
+        "en": "Switch",
+        "zh": "开关"
       },
       "group": "making",
       "summary": {
-        "en": "Closes or opens the coil circuit.",
-        "zh": "闭合或断开线圈电路。"
+        "en": "Turns the electromagnet on and off.",
+        "zh": "接通或断开电磁铁。"
       },
       "detail": {
-        "en": "The slider is drawn above the contacts so it can visibly move between open and closed. Only the moving switch is a part; the support and contacts are attached to the lead assembly. [S1].\n\nDimensions and placement are a teaching design, not a product specification [S1].",
-        "zh": "拨钮画在触点上方，能明显显示接通与断开。这个零件只含运动的拨钮，底座和触点归入导线组件。 [S1]。\n\n尺寸和摆放由本教学设计选取，不代表具体产品规格 [S1]。"
+        "en": "A slide switch in the circuit [S1]. Closed, it completes the circuit and current flows; open, the current stops and the nail lets go of most of its clips [S2].",
+        "zh": "电路里的一个拨动开关 [S1]。合上时电路接通，电流流动；断开时电流停止，钉子放下大部分回形针 [S2]。"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -1744,17 +1575,17 @@
     {
       "id": "em-leads",
       "name": {
-        "en": "Leads, holder and contacts",
-        "zh": "导线、电池盒与触点"
+        "en": "Leads and stand",
+        "zh": "导线与支架"
       },
       "group": "making",
       "summary": {
-        "en": "Completes the path through the coil.",
-        "zh": "连接穿过线圈的完整电路。"
+        "en": "Join batteries, switch and coil in one loop.",
+        "zh": "把电池、开关和线圈连成一个回路。"
       },
       "detail": {
-        "en": "Copper conducts inside an insulating cover. The battery tray and switch base remain visible when the moving slider changes position. The display current follows the positive-to-negative convention. [S1].\n\nDimensions and placement are a teaching design, not a product specification [S1].",
-        "zh": "绝缘外皮包着导电铜芯。拨钮移动时，电池托盘与开关底座仍留在原处。粒子按从正到负的约定方向表示电流。 [S1]。\n\n尺寸和摆放由本教学设计选取，不代表具体产品规格 [S1]。"
+        "en": "Insulated wires join the batteries, the switch and the coil in a closed loop [S1]. A steel stand holds the nail upright, with a few loose clips lying below it [S1].\n\nThe moving dots show the current, from the positive end of the batteries round to the negative end [S1].",
+        "zh": "绝缘导线把电池、开关和线圈连成一个闭合的回路 [S1]。钢支架把钉子竖着夹住，下面散放着几只回形针 [S1]。\n\n流动的小点表示电流，从电池的正极绕一圈回到负极 [S1]。"
       },
       "primitive": {
         "kind": "sweep",
@@ -1775,8 +1606,8 @@
           "path": [
             [0.281, 0.014, 0.04],
             [0.27, 0.018, 0.04],
-            [0.27, 0.052, -0.05],
-            [0.29, 0.052, -0.05]
+            [0.27, 0.082, -0.05],
+            [0.29, 0.082, -0.05]
           ],
           "radius": 0.0012,
           "at": [0, 0, 0],
@@ -1786,8 +1617,8 @@
         {
           "kind": "sweep",
           "path": [
-            [0.29, 0.088, -0.05],
-            [0.33, 0.088, -0.05],
+            [0.29, 0.118, -0.05],
+            [0.33, 0.118, -0.05],
             [0.35, 0.012, -0.031]
           ],
           "radius": 0.0012,
@@ -1820,6 +1651,93 @@
           "size": [0.002, 0.002, 0.004],
           "at": [0.301, 0.006, 0.04],
           "color": "brass"
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [0, 0, 0],
+            [0, 0.16, 0],
+            [-0.03, 0.16, 0]
+          ],
+          "radius": 0.002,
+          "at": [0.32, 0.004, -0.05],
+          "color": "steel"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [0.045, 0.008, 0.04],
+          "bevel": 0.001,
+          "at": [0.32, 0.004, -0.05],
+          "color": "wood"
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [-0.004, 0, -0.01],
+            [-0.004, 0, 0.01],
+            [-0.002, 0, 0.016],
+            [0.003, 0, 0.016],
+            [0.005, 0, 0.012],
+            [0.005, 0, -0.012],
+            [0.003, 0, -0.016],
+            [-0.002, 0, -0.016],
+            [-0.005, 0, -0.012],
+            [-0.005, 0, 0.007],
+            [-0.003, 0, 0.011],
+            [0.001, 0, 0.011],
+            [0.002, 0, 0.007],
+            [0.002, 0, -0.009]
+          ],
+          "radius": 0.00045,
+          "at": [0.283, 0.0006, -0.046],
+          "color": "stainless",
+          "rotation": [0, 35, 0]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [-0.004, 0, -0.01],
+            [-0.004, 0, 0.01],
+            [-0.002, 0, 0.016],
+            [0.003, 0, 0.016],
+            [0.005, 0, 0.012],
+            [0.005, 0, -0.012],
+            [0.003, 0, -0.016],
+            [-0.002, 0, -0.016],
+            [-0.005, 0, -0.012],
+            [-0.005, 0, 0.007],
+            [-0.003, 0, 0.011],
+            [0.001, 0, 0.011],
+            [0.002, 0, 0.007],
+            [0.002, 0, -0.009]
+          ],
+          "radius": 0.00045,
+          "at": [0.296, 0.0012, -0.052],
+          "color": "stainless",
+          "rotation": [0, -60, 0]
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [-0.004, 0, -0.01],
+            [-0.004, 0, 0.01],
+            [-0.002, 0, 0.016],
+            [0.003, 0, 0.016],
+            [0.005, 0, 0.012],
+            [0.005, 0, -0.012],
+            [0.003, 0, -0.016],
+            [-0.002, 0, -0.016],
+            [-0.005, 0, -0.012],
+            [-0.005, 0, 0.007],
+            [-0.003, 0, 0.011],
+            [0.001, 0, 0.011],
+            [0.002, 0, 0.007],
+            [0.002, 0, -0.009]
+          ],
+          "radius": 0.00045,
+          "at": [0.289, 0.0006, -0.062],
+          "color": "stainless",
+          "rotation": [0, 95, 0]
         }
       ],
       "connects": [
@@ -1831,17 +1749,17 @@
     {
       "id": "em-paper-clips",
       "name": {
-        "en": "Electromagnet paper clips",
-        "zh": "电磁铁回形针"
+        "en": "Clips on the nail",
+        "zh": "钢钉吸住的回形针"
       },
       "group": "making",
       "summary": {
-        "en": "Shows how many clips the core holds.",
-        "zh": "显示钢芯吸住的回形针只数。"
+        "en": "Show how strong the electromagnet is.",
+        "zh": "显示电磁铁有多强。"
       },
       "detail": {
-        "en": "Six equal steel clips form a small pickup cluster below the nail tip. The simulation shows 3 per cell while powered and 1 after switch-off. The count is illustrative and does not pause when particle motion is stopped. [S1].\n\nDimensions and placement are a teaching design, not a product specification [S1].",
-        "zh": "6 只相同的钢回形针在钉尖下组成一小簇。本模拟通电时每节电池吸 3 只，断电后留 1 只。只数是示意值，暂停粒子运动不会改变物理结果。 [S1]。\n\n尺寸和摆放由本教学设计选取，不代表具体产品规格 [S1]。"
+        "en": "Steel paper clips hanging from the tip of the nail [S1]. In this model two batteries hold 6, one battery holds 3, and with the switch open 1 stays [S1].",
+        "zh": "挂在钉尖上的钢回形针 [S1]。在这个模型里，两节电池吸住 6 只，一节电池吸住 3 只，开关断开后还剩 1 只 [S1]。"
       },
       "primitive": {
         "kind": "sweep",
@@ -1862,30 +1780,31 @@
           [0.002, 0, -0.009]
         ],
         "radius": 0.00045,
-        "at": [0.29, 0.012, -0.05],
-        "color": "stainless"
+        "at": [0.29, 0.0315, -0.04475],
+        "color": "stainless",
+        "rotation": [90, 0, 0]
       },
       "castShadow": false,
       "repeat": {
         "count": 6,
-        "axis": [1, 0, 0],
-        "spacing": 0.005
+        "axis": [0, 0, 1],
+        "spacing": 0.0025
       }
     },
     {
       "id": "fridge-door",
       "name": {
-        "en": "Refrigerator door section",
-        "zh": "冰箱门段"
+        "en": "Fridge door",
+        "zh": "冰箱门"
       },
       "group": "uses",
       "summary": {
-        "en": "Carries the magnetic door seal.",
-        "zh": "装着带磁条的门封。"
+        "en": "Has a steel front that magnets stick to.",
+        "zh": "钢制门面，磁铁能吸在上面。"
       },
       "detail": {
-        "en": "This is a cropped door section, not a complete refrigerator. The steel front accepts the flexible fridge magnet. A named cut exposes the seal structure; the drawing does not specify a manufactured gasket profile. [S1].\n\nDimensions and placement are a teaching design, not a product specification [S1].",
-        "zh": "这是一段截取的门，不是完整冰箱。钢制门面可吸住柔性冰箱贴。命名剖面露出门封内部，不代表某个厂家的胶条截面。 [S1]。\n\n尺寸和摆放由本教学设计选取，不代表具体产品规格 [S1]。"
+        "en": "A cut-off piece of a fridge door, not a whole fridge [S1]. Its front is steel, so a fridge magnet sticks to it [S15].\n\nThe rubber seal round its edge has a magnetic strip inside [S15].",
+        "zh": "截取的一段冰箱门，不是整台冰箱 [S1]。门面是钢做的，冰箱贴能吸在上面 [S15]。\n\n门四周的橡胶门封里有一条磁条 [S15]。"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -1913,17 +1832,17 @@
     {
       "id": "door-gasket",
       "name": {
-        "en": "Door gasket and magnetic strip",
+        "en": "Door seal and magnetic strip",
         "zh": "门封与磁条"
       },
       "group": "uses",
       "summary": {
-        "en": "Pulls the seal against the steel body.",
-        "zh": "把门封吸向钢制箱体。"
+        "en": "Pulls the door shut against the steel body.",
+        "zh": "把门吸在钢制箱体上关紧。"
       },
       "detail": {
-        "en": "A flexible magnetic strip lies inside the rubber gasket. Magnetic attraction holds the seal against the cabinet edge. The open section and enlarged hollow are teaching geometry, not a patented product reproduction. [S1].\n\nDimensions and placement are a teaching design, not a product specification [S1].",
-        "zh": "柔性磁条藏在橡胶门封内，磁力让门封贴住箱体边缘。开口截面和放大的空腔用于教学，不复制具体专利产品。 [S1]。\n\n尺寸和摆放由本教学设计选取，不代表具体产品规格 [S1]。"
+        "en": "A soft rubber seal runs round the inside edge of the door, with a flat magnetic strip inside it. The strip pulls the seal against the steel body of the fridge, so the door stays shut and the seal fits tightly [S15].\n\nThe seal’s shape is simplified in this model [S1].",
+        "zh": "柔软的橡胶门封沿门的内侧绕一圈，里面有一条扁平的磁条。磁条把门封吸在冰箱的钢制箱体上，门就关得住，门封也贴得紧 [S15]。\n\n模型把门封的形状画简单了 [S1]。"
       },
       "primitive": {
         "kind": "sweep",
@@ -1971,17 +1890,17 @@
     {
       "id": "fridge-magnet",
       "name": {
-        "en": "Flexible fridge magnet",
-        "zh": "柔性冰箱贴"
+        "en": "Fridge magnet",
+        "zh": "冰箱贴"
       },
       "group": "uses",
       "summary": {
-        "en": "Holds a note against a steel door.",
-        "zh": "把便条固定在钢制门面上。"
+        "en": "Holds a note against the steel door.",
+        "zh": "把便条吸在钢制门上。"
       },
       "detail": {
-        "en": "The thin flexible backing is magnetic. A plain face avoids brand marks. The selected copper disc and aluminium tab do not become magnetic just because they look metallic. [S1].\n\nDimensions and placement are a teaching design, not a product specification [S1].",
-        "zh": "薄薄的柔性背层有磁性，素面不带品牌。铜片和铝拉环不会因为有金属光泽就成为磁性材料。 [S1]。\n\n尺寸和摆放由本教学设计选取，不代表具体产品规格 [S1]。"
+        "en": "A thin, bendy magnet [S15]. It sticks to the steel door and holds a sheet of paper under it, because its pull passes through paper [S23].",
+        "zh": "一块又薄又软的磁铁 [S15]。它吸在钢制的门上，还能压住一张纸，因为它的吸力能穿过纸 [S23]。"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -2003,7 +1922,7 @@
         {
           "kind": "bevelBox",
           "size": [0.045, 0.045, 0.0003],
-          "bevel": 7.5e-05,
+          "bevel": 0.000075,
           "at": [0.35, 0.175, -0.1675],
           "color": "enamel"
         }
@@ -2016,17 +1935,17 @@
     {
       "id": "cabinet-latch",
       "name": {
-        "en": "Door latch and uses models",
-        "zh": "磁吸门扣与用途模型"
+        "en": "Cabinet catch and use models",
+        "zh": "橱柜门扣与用途模型"
       },
       "group": "uses",
       "summary": {
-        "en": "Holds a steel plate; compares other uses.",
-        "zh": "吸住钢片，并与其他用途比较。"
+        "en": "Holds the cabinet door shut with a magnet.",
+        "zh": "用磁铁吸住柜门。"
       },
       "detail": {
-        "en": "A magnet between steel pole plates attracts the keeper on a cabinet door [S20]. The nearby miniature train and crane compare other magnetic uses.\n\nThe train display shows support with a guide; it is a teaching model, not a scale vehicle. The crane holds steel with a round lifting magnet. Attraction-type trains and switchable lifting magnets work in different arrangements [S21, S4].",
-        "zh": "门扣里的磁铁夹在钢极板之间，吸住柜门的钢吸片 [S20]。旁边的列车和起重机小模型用来比较其他用途。\n\n列车模型表示磁力支撑与导轨约束，不是等比例车辆；吊车用圆形起重磁铁吸住钢件。吸引式列车与可开关起重磁铁的结构安排不同 [S21, S4]。"
+        "en": "A small magnet between two steel plates, fixed in the cabinet frame, attracts a steel plate on the door [S20]. The plate on the door has to be made of a magnetic material.\n\nBeside it, two small models show bigger uses: a crane with a round lifting electromagnet [S4] and a maglev train held up by magnetic attraction under its track [S21]. They are teaching models, not to scale [S1].",
+        "zh": "门框里固定着一块夹在两片钢片之间的小磁铁，吸住柜门上的一块钢片 [S20]。柜门上的这块片子必须用磁性材料做。\n\n旁边两个小模型展示更大的用途：一台装着圆形起重电磁铁的起重机 [S4]，和一列靠轨道下方的磁吸引托起的磁浮列车 [S21]。它们是教学模型，没有按比例 [S1]。"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -2165,43 +2084,36 @@
     {
       "id": "iron-filings",
       "name": {
-        "en": "Iron-filings and line cards",
-        "zh": "铁屑卡与曲线示意卡"
+        "en": "Iron filings on paper",
+        "zh": "纸上的铁屑"
       },
       "group": "field",
       "summary": {
-        "en": "Shows the pattern around the magnets.",
-        "zh": "显示磁铁周围的作用图样。"
+        "en": "Show the pattern round the magnet.",
+        "zh": "显出磁铁周围的图样。"
       },
       "detail": {
-        "en": "Iron filings on the paper line up in a pattern, crowding near the poles. The neighbouring line card is another way to show the direction around the magnet [S5].\n\nThese patterns are calculated representations. The drawn curves are not material flowing out of a magnet. Paper sizes and particle sizes are selected for the teaching display [S1].",
-        "zh": "纸上的铁屑排成图样，在磁极附近较密。旁边的曲线卡用另一种方式显示磁铁周围的作用方向 [S5]。\n\n图样是计算得到的表示法，画出的曲线不是磁铁流出的物质。纸张与颗粒的大小按教学展示选取 [S1]。"
+        "en": "Tiny bits of iron sprinkled on paper round the magnets. Each bit lines up with the magnet’s pull, and they crowd where the pull is strongest, at the poles [S7].\n\nIn this model the pattern is worked out from where the magnets are. The moving lines, when switched on, trace the same curves; they are a way of picturing the pattern [S5].",
+        "zh": "撒在磁铁周围纸上的细小铁屑。每一粒都顺着磁铁吸力的方向排列，在吸力最强的磁极处挤得最密 [S7]。\n\n在这个模型里，图样是按磁铁的位置算出来的。打开后流动的线描出同样的弧线，它们只是画出图样的方法 [S5]。"
       },
       "primitive": {
         "kind": "filings",
-        "size": [0.36, 0.21],
-        "at": [-0.11, 0.0115, 0],
+        "size": [0.36, 0.19],
+        "at": [-0.12, 0.0006, 0],
         "color": "powder",
-        "tint": "token:ink-2",
-        "count": 2400,
-        "needle": [0.002, 0.0003],
-        "saturate": 0.002,
-        "exponent": 0.5
+        "tint": "token:ink",
+        "count": 3600,
+        "needle": [0.0035, 0.0004],
+        "saturate": 0.004,
+        "exponent": 0.9
       },
       "castShadow": false,
       "extra": [
         {
           "kind": "bevelBox",
-          "size": [0.36, 0.0004, 0.21],
-          "bevel": 5e-05,
-          "at": [-0.11, 0.0111, 0],
-          "color": "enamel"
-        },
-        {
-          "kind": "bevelBox",
-          "size": [0.1, 0.0004, 0.075],
-          "bevel": 5e-05,
-          "at": [-0.29, 0.001, 0.04],
+          "size": [0.36, 0.0004, 0.19],
+          "bevel": 0.00005,
+          "at": [-0.12, 0.0002, 0],
           "color": "enamel"
         }
       ]
@@ -2213,12 +2125,12 @@
         "zh": "科学实验台"
       },
       "summary": {
-        "en": "Provides the setting for the demonstration.",
-        "zh": "提供演示所需的背景。"
+        "en": "Holds the equipment.",
+        "zh": "摆放器材。"
       },
       "detail": {
-        "en": "Context only. Cropped generic teaching furniture, with sizes chosen for this bench [S1].",
-        "zh": "只是背景；截取的通用教学家具，尺寸由本实验台设计选取 [S1]。"
+        "en": "Context only: a generic school bench, 90 × 50 cm in this design [S1]. A plastic guide strip lets bar magnet B slide in a straight line [S1].",
+        "zh": "只是背景：通用的学校实验台，本设计 90 × 50 cm [S1]。一条塑料导轨让条形磁铁 B 沿直线滑动 [S1]。"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -2232,9 +2144,9 @@
       "extra": [
         {
           "kind": "bevelBox",
-          "size": [0.18, 0.002, 0.028],
+          "size": [0.18, 0.004, 0.004],
           "bevel": 0.0005,
-          "at": [0.015, 0.001, 0],
+          "at": [0.015, 0.002, -0.0125],
           "color": "plastic"
         }
       ]
@@ -2242,16 +2154,16 @@
     {
       "id": "fridge-body",
       "name": {
-        "en": "Refrigerator body section",
-        "zh": "冰箱箱体截段"
+        "en": "Fridge body",
+        "zh": "冰箱箱体"
       },
       "summary": {
-        "en": "Provides the setting for the demonstration.",
-        "zh": "提供演示所需的背景。"
+        "en": "Gives the door seal a steel edge to grip.",
+        "zh": "给门封一条能吸住的钢边。"
       },
       "detail": {
-        "en": "Context only. Cropped generic teaching furniture, with sizes chosen for this bench [S1].",
-        "zh": "只是背景；截取的通用教学家具，尺寸由本实验台设计选取 [S1]。"
+        "en": "Context only: a cut-off piece of the fridge’s steel body, which the magnetic strip in the door seal is pulled against [S15].",
+        "zh": "只是背景：截取的一段冰箱钢制箱体，门封里的磁条就吸在它上面 [S15]。"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -2267,16 +2179,16 @@
     {
       "id": "cabinet-corner",
       "name": {
-        "en": "Cabinet corner",
-        "zh": "橱柜一角"
+        "en": "Cabinet door and shelf",
+        "zh": "柜门与搁板"
       },
       "summary": {
-        "en": "Provides the setting for the demonstration.",
-        "zh": "提供演示所需的背景。"
+        "en": "Carries the steel plate for the catch.",
+        "zh": "装着门扣用的钢片。"
       },
       "detail": {
-        "en": "Context only. Cropped generic teaching furniture, with sizes chosen for this bench [S1].",
-        "zh": "只是背景；截取的通用教学家具，尺寸由本实验台设计选取 [S1]。"
+        "en": "Context only: a cut-off piece of a cupboard door and shelf [S1].",
+        "zh": "只是背景：截取的一段橱柜门和搁板 [S1]。"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -2351,8 +2263,8 @@
     {
       "id": "field",
       "name": {
-        "en": "Filings and line cards",
-        "zh": "铁屑与曲线卡"
+        "en": "Iron filings",
+        "zh": "铁屑"
       },
       "color": "token:accent-3",
       "card": false
@@ -2363,7 +2275,8 @@
         "en": "Current",
         "zh": "电流"
       },
-      "color": "token:accent-4"
+      "color": "token:accent-4",
+      "card": false
     }
   ],
   "flows": [
@@ -2374,8 +2287,8 @@
       "color": "token:accent-3",
       "whenRun": false,
       "clip": false,
-      "count": 960,
-      "size": 0.5,
+      "count": 320,
+      "size": 0.12,
       "spread": 0,
       "ends": "open"
     },
@@ -2386,14 +2299,14 @@
         [0.37, 0.012, -0.031],
         [0.37, 0.014, 0.04],
         [0.299, 0.014, 0.04],
-        [0.29, 0.052, -0.05],
-        [0.27, 0.052, -0.05],
+        [0.29, 0.082, -0.05],
+        [0.27, 0.082, -0.05],
         [0.27, 0.018, 0.04],
         [0.281, 0.014, 0.04],
-        [0.29, 0.052, -0.05],
-        [0.29, 0.088, -0.05],
-        [0.29, 0.088, -0.05],
-        [0.33, 0.088, -0.05],
+        [0.29, 0.082, -0.05],
+        [0.29, 0.118, -0.05],
+        [0.29, 0.118, -0.05],
+        [0.33, 0.118, -0.05],
         [0.35, 0.012, -0.031],
         [0.37, 0.012, -0.031]
       ],
@@ -2401,8 +2314,8 @@
       "color": "token:accent-4",
       "whenRun": true,
       "clip": false,
-      "count": 160,
-      "size": 0.5,
+      "count": 120,
+      "size": 0.15,
       "spread": 0,
       "ends": "open"
     }
@@ -2499,7 +2412,7 @@
     "rings-attract": {
       "ring-magnet-upper": {
         "rotation": [180, 0, 0],
-        "offset": [0, -0.018, 0]
+        "offset": [0, -0.01, 0]
       },
       "duration": 1
     },
@@ -2529,19 +2442,23 @@
     },
     "card-test": {
       "bar-magnet-n": {
-        "offset": [0.18, 0.359, 0.17]
+        "offset": [0.04, 0.27, -0.17]
       },
       "bar-magnet-s": {
-        "offset": [0.18, 0.359, 0.17]
+        "offset": [0.04, 0.27, -0.17]
       },
       "duration": 1
     },
     "stroke-start": {
       "bar-magnet-n": {
-        "offset": [0.27, 0.007, -0.06]
+        "pivot": [-0.16, 0.005, 0],
+        "rotation": [0, 0, -55],
+        "offset": [0.2454, 0.0408, -0.06]
       },
       "bar-magnet-s": {
-        "offset": [0.27, 0.007, -0.06]
+        "pivot": [-0.16, 0.005, 0],
+        "rotation": [0, 0, -55],
+        "offset": [0.2454, 0.0408, -0.06]
       },
       "duration": 1
     },
@@ -2558,31 +2475,10 @@
       },
       "duration": 1
     },
-    "fridge-open": {
-      "fridge-door": {
-        "pivot": [0.25, 0.16, -0.2],
-        "rotation": [0, -25, 0]
-      },
-      "door-gasket": {
-        "pivot": [0.25, 0.16, -0.2],
-        "rotation": [0, -25, 0]
-      },
-      "fridge-magnet": {
-        "pivot": [0.25, 0.16, -0.2],
-        "rotation": [0, -25, 0]
-      },
-      "duration": 1
-    },
     "cabinet-open": {
       "cabinet-corner": {
         "pivot": [0.325, 0.09, 0.11],
         "rotation": [0, -25, 0]
-      },
-      "duration": 1
-    },
-    "em-clips-up": {
-      "em-paper-clips": {
-        "offset": [0, 0.01, 0]
       },
       "duration": 1
     },
@@ -2608,7 +2504,7 @@
     },
     "exploded": {
       "camera": {
-        "position": [0.7, 1.0, 1.9],
+        "position": [0.7, 1, 1.9],
         "target": [0, 0.12, 0],
         "fov": 30
       }
@@ -2627,8 +2523,8 @@
     },
     "cuts": {
       "uses": {
-        "normal": [0, 0, -1],
-        "offset": -0.202,
+        "normal": [0, -1, 0],
+        "offset": 0.16,
         "label": {
           "en": "Door seal",
           "zh": "门封剖面"
@@ -2652,8 +2548,8 @@
         "zh": "两根磁铁"
       },
       "camera": {
-        "position": [0.15, 0.43, 0.55],
-        "target": [-0.1, 0.02, 0],
+        "position": [0.12, 0.4, 0.5],
+        "target": [-0.1, 0.01, 0],
         "fov": 30
       }
     },
@@ -2664,8 +2560,8 @@
         "zh": "俯视图样"
       },
       "camera": {
-        "position": [-0.13, 0.78, 0.001],
-        "target": [-0.13, 0, 0],
+        "position": [-0.12, 0.6, 0.001],
+        "target": [-0.12, 0, 0],
         "fov": 28
       }
     },
@@ -2676,8 +2572,8 @@
         "zh": "指南针与悬挂"
       },
       "camera": {
-        "position": [0.15, 0.43, 0.62],
-        "target": [-0.045, 0.09, -0.035],
+        "position": [-0.16, 0.36, 0.34],
+        "target": [-0.16, 0.005, 0.02],
         "fov": 30
       }
     },
@@ -2688,8 +2584,8 @@
         "zh": "材料与卡片"
       },
       "camera": {
-        "position": [0.32, 0.57, 0.8],
-        "target": [0.11, 0.15, 0.12],
+        "position": [0.05, 0.45, 0.8],
+        "target": [-0.03, 0.1, 0],
         "fov": 30
       }
     },
@@ -2700,8 +2596,8 @@
         "zh": "制作磁铁"
       },
       "camera": {
-        "position": [0.46, 0.32, 0.4],
-        "target": [0.26, 0.055, -0.025],
+        "position": [0.1, 0.3, 0.48],
+        "target": [0.28, 0.025, 0.02],
         "fov": 30
       }
     },
@@ -2777,29 +2673,11 @@
     },
     {
       "key": {
-        "en": "Through cards",
-        "zh": "隔卡片"
+        "en": "Clips held",
+        "zh": "吸住的回形针"
       },
       "unit": "",
-      "follow": "clips-cards",
-      "decimals": 0
-    },
-    {
-      "key": {
-        "en": "After stroking",
-        "zh": "摩擦后"
-      },
-      "unit": "",
-      "follow": "clips-stroke",
-      "decimals": 0
-    },
-    {
-      "key": {
-        "en": "Electromagnet",
-        "zh": "电磁铁"
-      },
-      "unit": "",
-      "follow": "clips-em",
+      "follow": "clips",
       "decimals": 0
     }
   ],
@@ -2830,20 +2708,29 @@
             }
           },
           {
-            "id": "horseshoe",
-            "label": {
-              "en": "Horseshoe magnet",
-              "zh": "马蹄形磁铁"
-            }
-          },
-          {
             "id": "electromagnet",
             "label": {
               "en": "Electromagnet",
               "zh": "电磁铁"
             }
+          },
+          {
+            "id": "away",
+            "label": {
+              "en": "Bar magnet in use elsewhere",
+              "zh": "条形磁铁在别处使用"
+            }
           }
         ]
+      },
+      {
+        "id": "lines",
+        "kind": "toggle",
+        "label": {
+          "en": "Pattern lines",
+          "zh": "图样线"
+        },
+        "default": false
       },
       {
         "id": "gap",
@@ -3101,10 +2988,6 @@
             "en": "S–S · 1.5 cm",
             "zh": "南–南 · 1.5 cm"
           },
-          "horseshoe": {
-            "en": "Horseshoe magnet",
-            "zh": "马蹄形磁铁"
-          },
           "em-on-1": {
             "en": "Electromagnet on · 1 cell",
             "zh": "电磁铁通电 · 1 节"
@@ -3117,11 +3000,24 @@
             "en": "Electromagnet off",
             "zh": "电磁铁断电"
           },
+          "away": {
+            "en": "No magnet on the paper",
+            "zh": "纸上没有磁铁"
+          },
           "single": {
             "en": "One bar magnet",
             "zh": "单根条形磁铁"
           }
         }
+      },
+      {
+        "id": "clips",
+        "label": {
+          "en": "Clips held",
+          "zh": "吸住的回形针"
+        },
+        "unit": "",
+        "decimals": 0
       }
     ],
     "bind": [
@@ -3288,20 +3184,6 @@
         }
       },
       {
-        "control": "hang",
-        "part": "iron-filings",
-        "visible": {
-          "eq": false
-        }
-      },
-      {
-        "control": "hang",
-        "flow": "field-lines",
-        "visible": {
-          "eq": false
-        }
-      },
-      {
         "control": "bar-position",
         "part": [
           "bar-magnet-n",
@@ -3319,6 +3201,40 @@
         "part": "bar-magnet-b",
         "visible": {
           "eq": "pair"
+        }
+      },
+      {
+        "control": "lines",
+        "flow": "field-lines",
+        "visible": true
+      },
+      {
+        "control": "setup",
+        "part": "iron-filings",
+        "visible": {
+          "in": [
+            "pair",
+            "alone"
+          ]
+        }
+      },
+      {
+        "control": "bar-position",
+        "part": [
+          "clip-chain",
+          "barrier-cards"
+        ],
+        "visible": {
+          "eq": "cards"
+        }
+      },
+      {
+        "control": "cards",
+        "part": "clip-chain",
+        "offset": {
+          "axis": [0, -1, 0],
+          "per": 0.002,
+          "origin": 0
         }
       }
     ],
@@ -3363,15 +3279,9 @@
           }
         },
         {
-          "id": "horseshoe",
-          "north": [-0.326, 0.006, 0.115],
-          "south": [-0.326, 0.006, 0.165],
-          "moment": 0.4
-        },
-        {
           "id": "em",
-          "north": [0.29, 0.03, -0.05],
-          "south": [0.29, 0.11, -0.05],
+          "north": [0.29, 0.06, -0.05],
+          "south": [0.29, 0.14, -0.05],
           "moment": 0.15,
           "power": {
             "switch": "em-switch",
@@ -3393,7 +3303,7 @@
       },
       "rings": {
         "compass-ring": {
-          "center": [-0.16, 0.017, 0],
+          "center": [-0.16, 0.012, 0],
           "radius": 0.085,
           "count": 8
         }
@@ -3403,8 +3313,8 @@
         "control": "compass-at"
       },
       "plane": {
-        "center": [-0.11, 0.012, 0],
-        "size": [0.36, 0.21]
+        "center": [-0.12, 0.006, 0],
+        "size": [0.36, 0.19]
       },
       "fields": {
         "ns-6": {
@@ -3506,19 +3416,6 @@
             "gap": 1.5
           }
         },
-        "horseshoe": {
-          "magnets": [
-            "horseshoe"
-          ],
-          "when": {
-            "setup": "horseshoe"
-          },
-          "lines": 20,
-          "plane": {
-            "center": [-0.33, 0.012, 0.14],
-            "size": [0.16, 0.14]
-          }
-        },
         "em-on-1": {
           "magnets": [
             "em"
@@ -3530,7 +3427,7 @@
           },
           "lines": 40,
           "plane": {
-            "center": [0.29, 0.07, -0.05],
+            "center": [0.29, 0.1, -0.05],
             "size": [0.16, 0.16],
             "normal": [0, 0, 1]
           }
@@ -3546,7 +3443,7 @@
           },
           "lines": 40,
           "plane": {
-            "center": [0.29, 0.07, -0.05],
+            "center": [0.29, 0.1, -0.05],
             "size": [0.16, 0.16],
             "normal": [0, 0, 1]
           }
@@ -3561,7 +3458,21 @@
           },
           "lines": 40,
           "plane": {
-            "center": [0.29, 0.07, -0.05],
+            "center": [0.29, 0.1, -0.05],
+            "size": [0.16, 0.16],
+            "normal": [0, 0, 1]
+          }
+        },
+        "away": {
+          "magnets": [
+            "em"
+          ],
+          "when": {
+            "setup": "away"
+          },
+          "lines": 40,
+          "plane": {
+            "center": [0.29, 0.1, -0.05],
             "size": [0.16, 0.16],
             "normal": [0, 0, 1]
           }

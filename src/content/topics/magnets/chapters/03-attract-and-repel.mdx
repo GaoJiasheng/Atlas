@@ -12,50 +12,52 @@ state:
   layers: ["magnet-set", "compass", "materials", "making", "uses", "field", "current"]
   hide: ["fridge-door", "door-gasket", "fridge-magnet", "cabinet-latch", "fridge-body", "cabinet-corner", "compass-case", "compass-card", "compass-needle", "compass-glass"]
   labels: ["bar-magnet-n", "bar-magnet-b"]
-  camera: {"position": [-0.08, 0.42, 0.58], "target": [-0.1, 0.014, 0], "fov": 30}
-  summary: {"en": "Unlike poles pull together and like poles push apart. A smaller gap gives a stronger effect.", "zh": "异极相吸，同极相斥；间隙越小，作用越强。"}
-  sim: {"set": {"setup": "pair", "hang": false, "facing": "ns", "gap": 6, "bar-position": "bench"}, "try": {"vary": "gap", "keep": ["facing", {"en": "Same magnets", "zh": "同样的磁铁"}], "observe": ["force"], "record": true, "predict": {"prompt": {"en": "Turn magnet B round. What will happen?", "zh": "把磁铁 B 调头，会怎样？"}, "start": {"facing": "ns", "gap": 3}, "change": {"facing": "nn"}, "options": [{"id": "pull", "label": {"en": "Pull together", "zh": "互相拉近"}, "means": "positive"}, {"id": "push", "label": {"en": "Push apart", "zh": "互相推开"}, "means": "negative"}, {"id": "nothing", "label": {"en": "No effect", "zh": "没有作用"}, "means": "zero"}], "observe": "force"}}}
+  camera: {"position": [0.12, 0.4, 0.5], "target": [-0.1, 0.01, 0], "fov": 30}
+  summary: {"en": "Unlike poles pull together and like poles push apart, and both get stronger as the gap closes.", "zh": "异极相吸，同极相斥；间隙越小，推和拉都越强。"}
+  sim: {"set": {"setup": "pair", "facing": "ns", "gap": 6}, "try": {"vary": "gap", "keep": ["facing", {"en": "Same two magnets", "zh": "同样的两根磁铁"}], "observe": ["force"], "record": true, "predict": {"prompt": {"en": "Keep the gap at 3 cm and turn magnet B round. What will happen?", "zh": "间隙保持 3 cm，把磁铁 B 调个头，会怎样？"}, "start": {"facing": "ns", "gap": 3}, "change": {"facing": "nn"}, "options": [{"id": "pull", "label": {"en": "They pull together", "zh": "互相吸引"}, "means": "positive"}, {"id": "push", "label": {"en": "They push apart", "zh": "互相排斥"}, "means": "negative"}, {"id": "nothing", "label": {"en": "Nothing happens", "zh": "没有反应"}, "means": "zero"}], "observe": "force"}}}
   beats:
     - labels: ["bar-magnet-n", "bar-magnet-b"]
-      sim: {"set": {"setup": "pair", "hang": false, "facing": "ns", "gap": 6, "bar-position": "bench"}}
-      caption: {"en": "North faces south across a six centimetre gap. In this model the pull is twelve percent of the close-gap reference.", "zh": "北极对南极，间隙六厘米。在这个模型里，拉力是近距离参考值的百分之十二。"}
+      caption: {"en": "A north pole faces a south pole six centimetres away. The arrows show the pull on each magnet, pointing towards each other. At this distance the pull is weak.", "zh": "北极对着六厘米外的南极。箭头表示两根磁铁受到的拉力，指向对方。离得这么远，拉力很弱。"}
     - labels: ["bar-magnet-n", "bar-magnet-b"]
-      sim: {"set": {"setup": "pair", "hang": false, "facing": "ns", "gap": 3, "bar-position": "bench"}}
-      caption: {"en": "Reduce only the gap to three centimetres. In this model the pull rises to forty-one percent of the reference.", "zh": "只把间隙减到三厘米。在这个模型里，拉力升到参考值的百分之四十一。"}
+      sim: {"set": {"gap": 3}}
+      caption: {"en": "Halve the gap to three centimetres. In this model the pull is now more than three times as strong.", "zh": "把间隙缩小一半，到三厘米。在这个模型里，拉力变成原来的三倍多。"}
     - labels: ["bar-magnet-n", "bar-magnet-b", "iron-filings"]
-      sim: {"set": {"setup": "pair", "hang": false, "facing": "ns", "gap": 1.5, "bar-position": "bench"}}
-      caption: {"en": "At one and a half centimetres the pull is the reference value, one hundred percent in this model. The filings bridge the facing poles.", "zh": "间隙一厘米半时，拉力达到这个模型的参考值，百分之一百。铁屑在相对的磁极之间连成桥。"}
+      sim: {"set": {"gap": 1.5, "lines": true}}
+      caption: {"en": "At one and a half centimetres the pull in this model is about eight times what it was at six. The filings run straight across from one pole to the other, like a bridge.", "zh": "到一厘米半，在这个模型里，拉力约是六厘米时的八倍。铁屑从一个磁极直直连到另一个磁极，像一座桥。"}
     - labels: ["bar-magnet-n", "bar-magnet-b", "iron-filings"]
-      sim: {"set": {"setup": "pair", "hang": false, "facing": "nn", "gap": 3, "bar-position": "bench"}}
-      caption: {"en": "Turn the second bar so north faces north. The arrows reverse and the filing pattern bends away from the gap.", "zh": "把第二根磁铁调头，让北极对北极。箭头反向，铁屑图样向间隙外弯开。"}
-    - camera: {"position": [-0.28, 0.20, 0.16], "target": [-0.36, 0.04, -0.14], "fov": 30}
+      sim: {"set": {"facing": "nn", "gap": 3, "lines": true}}
+      caption: {"en": "Turn the second magnet so that north faces north. The arrows point apart: the magnets repel. The filings turn away from each other and leave an empty patch between the poles.", "zh": "把第二根磁铁调头，让北极对北极。箭头朝外：两根磁铁互相排斥。铁屑各自拐开，两极之间空出一块。"}
+    - camera: {"position": [-0.25, 0.13, 0.04], "target": [-0.36, 0.035, -0.14], "fov": 30}
+      labels: ["ring-magnet-upper", "ring-magnet-lower", "ring-post"]
+      caption: {"en": "Two ring magnets on a wooden post face each other with like poles. The top ring is pushed up and floats above the bottom one.", "zh": "木柱上的两只环形磁铁同极相对，上面那只被推起来，悬在下面那只上方。"}
+    - camera: {"position": [-0.25, 0.13, 0.04], "target": [-0.36, 0.035, -0.14], "fov": 30}
       labels: ["ring-magnet-upper", "ring-magnet-lower"]
-      sim: {"set": {"setup": "pair", "hang": false, "facing": "ns", "gap": 6, "top-ring": "attract", "bar-position": "bench"}}
-      caption: {"en": "The upper ring is supported by repulsion when like poles face. With unlike poles facing, the rings come together on the guide post.", "zh": "环形磁铁同极相对时，斥力托住上环；改成异极相对，两环沿立柱靠在一起。"}
-  index: {"parts": ["bar-magnet-n", "bar-magnet-s", "bar-magnet-b", "ring-magnet-upper", "ring-magnet-lower", "ring-post", "iron-filings"]}
+      sim: {"set": {"top-ring": "attract"}}
+      caption: {"en": "Turn the top ring over so that unlike poles face each other. It is pulled down, and the two rings clamp together.", "zh": "把上面的环翻过来，让异极相对，它就被拉下来，两只环紧紧贴在一起。"}
+  index: {"parts": ["bar-magnet-n", "bar-magnet-s", "bar-magnet-b", "iron-filings", "ring-magnet-upper", "ring-magnet-lower", "ring-post"]}
 ---
 
 <Lang en>
 
-The bars are arranged with a north pole facing a south pole. These are <Term id="unlike-poles">unlike poles</Term>, and they attract. Turn the second magnet so that north faces north. These are <Term id="like-poles">like poles</Term>, and they repel. South facing south also gives repulsion. The rule depends on which poles face, rather than on which bar is moved.
+Lay the two bar magnets on the paper with a north pole facing a south pole. A north pole and a south pole are <Term id="unlike-poles">unlike poles</Term>, and they attract. Turn one magnet round so that north faces north, and the magnets repel. Two north poles, or two south poles, are <Term id="like-poles">like poles</Term>. So like poles repel and unlike poles attract. It does not matter which magnet you move; what matters is which poles face each other.
 
-Now leave unlike poles facing and change only the gap. In this model, gaps of <Num s="S1">6 cm</Num>, <Num s="S1">3 cm</Num> and <Num s="S1">1.5 cm</Num> give relative pulls of <Num s="S1">12 %</Num>, <Num s="S1">41 %</Num> and <Num s="S1">100 %</Num>. The closest setting is the reference. These percentages compare the model's results; they are not measurements of every magnet. <FlyTo preset="two-magnets">Compare the gaps</FlyTo>
+Keep unlike poles facing and change only the gap. In this model, a gap of <Num s="S1">6 cm</Num> gives a pull of <Num s="S1">12 %</Num> of the strongest setting, <Num s="S1">3 cm</Num> gives <Num s="S1">41 %</Num> and <Num s="S1">1.5 cm</Num> gives <Num s="S1">100 %</Num>. Halving the gap from 6 to 3 cm makes the pull more than three times as strong. A push between like poles grows in the same way as they come closer. <FlyTo preset="two-magnets">Compare the gaps</FlyTo>
 
-Record a row for each gap in the Try it table. Keep the same magnets and the same facing poles. Read the rows together: bringing the magnets closer makes the attraction stronger. Repulsion also grows stronger as like poles come closer. Before revealing the prediction, imagine turning the second bar without changing the gap.
+In the Try it card, record a row for each gap. Only the gap changes; the magnets and the poles facing each other stay the same. That makes it a <Term id="fair-test">fair test</Term> of how the gap affects the pull. Before you look, predict what will happen if magnet B is turned round.
 
-The filing patterns show a difference too. Unlike poles have a bridge-like pattern between them. With like poles, the pattern curves away from the middle. On the post, repulsion supports the upper ring against its weight. The post keeps it lined up. Flip the ring so unlike poles face and it comes down onto the lower ring.
+The iron filings show the difference too. Between unlike poles they join up in a bridge. Between like poles they turn away from each other and leave an empty patch in the middle. On the wooden post, two ring magnets with like poles facing push apart so strongly that the top ring floats in the air; the post only stops it sliding off sideways. Turn the top ring over and it drops onto the bottom one.
 
-<Figure src="figures/magnets-filings" alt={{"en": "Iron filing patterns between unlike poles and between like poles.", "zh": "异极相对与同极相对时的铁屑图样。"}} caption={{"en": "Unlike poles make a bridge-like pattern; like poles leave a sparse region between them. Illustration for this topic.", "zh": "异极之间的图样连成桥，同极之间较稀疏。为本主题画的示意图。"}} />
+<Figure src="figures/magnets-filings" alt={{"en": "Iron filings between two magnets with unlike poles facing, and between two with like poles facing.", "zh": "异极相对和同极相对的两对磁铁之间的铁屑图样。"}} caption={{"en": "Left: unlike poles, and the filings bridge the gap. Right: like poles, and the filings turn away from the gap. Illustration for this topic.", "zh": "左：异极相对，铁屑连成桥。右：同极相对，铁屑在间隙处拐开。为本主题画的示意图。"}} />
 
-<More title={{"en": "Reading the arrows", "zh": "读力箭头"}}>
+<More title={{"en": "How the arrows are drawn", "zh": "箭头是怎样画的"}}>
 
-A positive reading means attraction and a negative reading means repulsion. Arrow lengths are visually compressed so weak forces remain visible. Use the numerical reading, rather than a ruler on the screen, to compare force sizes.
+The arrows are drawn shorter than the force would make them, so that a weak pull can still be seen: the arrow for <Num s="S1">100 %</Num> is only about three times as long as the one for <Num s="S1">12 %</Num>. Compare the numbers, not the arrows. The numbers are percentages of the pull at <Num s="S1">1.5 cm</Num> in this model, not measurements.
 
 </More>
 
-<More title={{"en": "Identifying an unknown pole", "zh": "辨认未知磁极"}}>
+<More title={{"en": "Finding an unknown pole", "zh": "怎样认出一个未知的磁极"}}>
 
-Repulsion from a known north pole identifies another north pole. Attraction alone is weaker evidence: the object might be a south pole, but an ordinary piece of iron is attracted too. First establish that the unknown object is a magnet.
+Hold the north pole of a magnet near one end of a bar. If that end is pushed away, it must be a north pole. If it is pulled, it could be a south pole, but it could also be a plain piece of iron or steel that is not a magnet at all, because a magnet attracts both. Only a push proves that the end is a pole.
 
 </More>
 
@@ -63,25 +65,25 @@ Repulsion from a known north pole identifies another north pole. Attraction alon
 
 <Lang zh>
 
-条形磁铁的北极对着南极时，它们会互相吸引。这样的磁极叫<Term id="unlike-poles">异极</Term>。把第二根磁铁调头，让北极对北极，就会互相排斥；这样的磁极叫<Term id="like-poles">同极</Term>。南极对南极也相斥。规律取决于相对的是哪种磁极，不取决于移动哪根磁铁。
+把两根条形磁铁放在纸上，让北极对着南极。北极和南极叫<Term id="unlike-poles">异极</Term>，它们互相吸引。把一根磁铁调头，让北极对北极，两根磁铁就互相排斥。两个北极，或两个南极，叫<Term id="like-poles">同极</Term>。所以同极相斥，异极相吸。移动哪一根磁铁都一样，要看的是哪两个磁极相对。
 
-保持异极相对，只改变间隙。在这个模型里，间隙为 <Num s="S1">6 cm</Num>、<Num s="S1">3 cm</Num> 和 <Num s="S1">1.5 cm</Num> 时，相对拉力依次是 <Num s="S1">12 %</Num>、<Num s="S1">41 %</Num> 和 <Num s="S1">100 %</Num>。最近的设置作为参考值。这些百分比用来比较模型结果，不是所有磁铁的实测值。<FlyTo preset="two-magnets">比较不同间隙</FlyTo>
+保持异极相对，只改变间隙。在这个模型里，间隙 <Num s="S1">6 cm</Num> 时，拉力是最强设置的 <Num s="S1">12 %</Num>；<Num s="S1">3 cm</Num> 时是 <Num s="S1">41 %</Num>；<Num s="S1">1.5 cm</Num> 时是 <Num s="S1">100 %</Num>。间隙从 6 cm 缩到 3 cm，拉力变成原来的三倍多。同极之间的推力，也是靠得越近越大。<FlyTo preset="two-magnets">比较不同的间隙</FlyTo>
 
-每种间隙在「试一试」表里记一行，使用同样的磁铁，保持相对的磁极不变。一起读这些记录，就能看出距离越近吸引越强；同极靠近时，排斥也会变强。揭晓预测之前，先想想保持间隙不变、只把磁铁调头会怎样。
+在「试一试」里，每种间隙记一行。只改变间隙，两根磁铁和相对的磁极都不变，这样的实验叫<Term id="fair-test">公平测试</Term>，能看出间隙怎样影响拉力。揭晓之前，先猜一猜：把磁铁 B 调个头，会发生什么？
 
-铁屑图样也不同：异极之间像有桥相连，同极之间的图样向外弯开。立柱上的上环被斥力托住，立柱让它不向旁边滑走。把上环翻面，让异极相对，它就会落到下环上。观察上环时，要分清磁铁的作用和立柱的作用：磁力托住上环，立柱只帮助它保持位置。比较实验时不要同时换磁铁和改距离，否则难以判断读数为何改变。
+铁屑也显出不同。异极之间，铁屑连成一座桥；同极之间，铁屑各自拐开，中间空出一块。木柱上的两只环形磁铁同极相对，互相推得很用力，上面那只就悬在半空；木柱只是不让它从旁边滑下来。把上面的环翻过来，它就落到下面那只上。
 
-<Figure src="figures/magnets-filings" alt={{"en": "Iron filing patterns between unlike poles and between like poles.", "zh": "异极相对与同极相对时的铁屑图样。"}} caption={{"en": "Unlike poles make a bridge-like pattern; like poles leave a sparse region between them. Illustration for this topic.", "zh": "异极之间的图样连成桥，同极之间较稀疏。为本主题画的示意图。"}} />
+<Figure src="figures/magnets-filings" alt={{"en": "Iron filings between two magnets with unlike poles facing, and between two with like poles facing.", "zh": "异极相对和同极相对的两对磁铁之间的铁屑图样。"}} caption={{"en": "Left: unlike poles, and the filings bridge the gap. Right: like poles, and the filings turn away from the gap. Illustration for this topic.", "zh": "左：异极相对，铁屑连成桥。右：同极相对，铁屑在间隙处拐开。为本主题画的示意图。"}} />
 
-<More title={{"en": "Reading the arrows", "zh": "读力箭头"}}>
+<More title={{"en": "How the arrows are drawn", "zh": "箭头是怎样画的"}}>
 
-正读数表示相吸，负读数表示相斥。箭头长度经过视觉压缩，让较弱的作用也看得见。比较力的大小应读数值，不应拿尺量屏幕上的箭头。
+箭头画得比实际的力短，这样很弱的拉力也看得见：<Num s="S1">100 %</Num> 的箭头只有 <Num s="S1">12 %</Num> 的约三倍长。比较大小要看数字，不要看箭头。这些数字是这个模型里间隙 <Num s="S1">1.5 cm</Num> 时拉力的百分数，不是实测值。
 
 </More>
 
-<More title={{"en": "Identifying an unknown pole", "zh": "辨认未知磁极"}}>
+<More title={{"en": "Finding an unknown pole", "zh": "怎样认出一个未知的磁极"}}>
 
-已知北极能排斥的一端，也是北极。只看到相吸，证据还不够：物品可能是南极，也可能只是普通铁块。应先确认未知物品确实是磁铁。
+拿一块磁铁的北极，靠近另一根条子的一端。如果那一端被推开，它一定是北极。如果被吸住，它可能是南极，也可能根本不是磁铁，只是一块普通的铁或钢，因为磁铁对这两种都会吸引。只有“推开”才能证明那一端是磁极。
 
 </More>
 

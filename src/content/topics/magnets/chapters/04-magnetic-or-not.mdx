@@ -1,7 +1,7 @@
 ---
 id: "magnetic-or-not"
 order: 4
-title: {"en": "Magnetic materials", "zh": "磁性材料"}
+title: {"en": "Magnetic or not", "zh": "磁性材料与非磁性材料"}
 sensitive: false
 state:
   view: "assembled"
@@ -9,62 +9,70 @@ state:
   part: null
   run: false
   cutaway: "none"
-  layers: ["magnet-set", "compass", "materials", "making", "uses", "current"]
+  layers: ["magnet-set", "compass", "materials", "making", "uses", "field", "current"]
   hide: ["fridge-door", "door-gasket", "fridge-magnet", "cabinet-latch", "fridge-body", "cabinet-corner"]
-  labels: ["test-tray", "aluminium-can", "steel-spoon"]
-  camera: {"position": [0.32, 0.57, 0.80], "target": [0.11, 0.15, 0.12], "fov": 30}
-  pose: "card-test"
-  summary: {"en": "Iron and steel are magnetic materials. A magnet can attract through paper, with a weaker pull as the gap grows.", "zh": "铁和钢是磁性材料。磁铁隔着纸也能吸，距离变大时吸力减弱。"}
-  sim: {"set": {"setup": "alone", "hang": false, "cards": 0, "bar-position": "cards"}, "try": {"vary": "cards", "keep": [{"en": "Same magnet", "zh": "同一根磁铁"}, {"en": "Same clips and lifting method", "zh": "同样的回形针和提起方法"}], "observe": ["clips-cards"], "record": true}}
+  labels: ["test-tray", "barrier-cards", "clip-chain"]
+  camera: {"position": [0.05, 0.45, 0.8], "target": [-0.03, 0.1, 0], "fov": 30}
+  summary: {"en": "Only magnetic materials such as iron and steel are attracted, and a magnet's pull passes through materials that are not magnetic.", "zh": "只有铁、钢这类磁性材料会被吸引；磁铁的吸力能穿过非磁性材料。"}
+  sim: {"set": {"setup": "away", "bar-position": "cards", "cards": 0}, "try": {"vary": "cards", "keep": [{"en": "Same magnet", "zh": "同一根磁铁"}, {"en": "Same paper clips", "zh": "同样的回形针"}], "observe": ["clips-cards"], "record": true}}
   beats:
-    - pose: null
-      labels: ["test-tray", "aluminium-can", "steel-spoon"]
-      sim: {"set": {"setup": "alone", "hang": false, "cards": 0, "bar-position": "bench"}}
-      caption: {"en": "Look across the test tray before moving the magnet. Predict which objects will be attracted, using their materials rather than their appearance.", "zh": "移动磁铁前先看测试盘。根据材料预测哪些物品会被吸，不要只看外观。"}
-    - pose: "tray-picked"
+    - camera: {"position": [0.24, 0.3, 0.44], "target": [0.12, 0.03, 0.12], "fov": 30}
+      labels: ["test-tray", "steel-can", "aluminium-can", "steel-spoon"]
+      sim: {"set": {"setup": "alone", "bar-position": "bench"}}
+      caption: {"en": "Eight everyday objects. Before testing, sort them in your head: which ones will the magnet attract?", "zh": "八件日常物品。试之前先在心里分一分：哪些会被磁铁吸引？"}
+    - camera: {"position": [0.28, 0.2, 0.42], "target": [0.11, 0.04, 0.11], "fov": 30}
+      pose: "tray-picked"
       labels: ["iron-nail", "steel-paper-clips", "steel-can"]
-      sim: {"set": {"setup": "alone", "hang": false, "cards": 0, "bar-position": "tray"}}
-      caption: {"en": "The iron nail, steel clips and steel can lift. Iron and ordinary steel are magnetic materials.", "zh": "铁钉、钢回形针和钢罐抬起。铁和普通钢是磁性材料。"}
-    - pose: "tray-picked"
+      sim: {"set": {"bar-position": "tray"}}
+      caption: {"en": "The iron nail, the steel paper clips and the steel can are attracted. Iron and steel are magnetic materials.", "zh": "铁钉、钢回形针和钢罐被吸住了。铁和钢是磁性材料。"}
+    - camera: {"position": [0.28, 0.2, 0.42], "target": [0.11, 0.04, 0.11], "fov": 30}
+      pose: "tray-picked"
       labels: ["aluminium-can", "copper-wire", "wooden-block", "plastic-button"]
-      sim: {"set": {"setup": "alone", "hang": false, "cards": 0, "bar-position": "tray"}}
-      caption: {"en": "The aluminium tab, copper disc, wooden block and plastic ruler stay put. Not every metal is attracted by a magnet.", "zh": "铝拉环、铜片、木块和塑料尺留在盘里。不是所有金属都会被磁铁吸引。"}
-    - pose: null
+      sim: {"set": {"bar-position": "tray"}}
+      caption: {"en": "The aluminium can tab, the copper disc, the wooden block and the plastic ruler stay put. Not every metal is attracted by a magnet.", "zh": "铝拉环、铜片、木块和塑料尺都没动。不是所有金属都会被磁铁吸引。"}
+    - camera: {"position": [0.25, 0.17, 0.3], "target": [0.16, 0.01, 0.15], "fov": 30}
+      pose: "tray-picked"
       labels: ["steel-spoon"]
-      sim: {"set": {"setup": "alone", "hang": false, "cards": 0, "bar-position": "bench"}}
-      caption: {"en": "The stainless steel spoon is hardly attracted in this design. Stainless steels differ; the name alone does not predict the result.", "zh": "本设计的不锈钢勺几乎不被吸引。不锈钢有不同种类，单凭名称不能判断结果。"}
-    - pose: "card-test"
-      labels: ["barrier-cards", "clip-chain", "bar-magnet-n"]
-      sim: {"set": {"setup": "alone", "hang": false, "cards": 3, "bar-position": "cards"}}
-      caption: {"en": "Put three cards between the magnet and clips. In this model it still holds two clips; paper does not stop the attraction.", "zh": "在磁铁和回形针之间放三张卡片。在这个模型里仍吸住两只回形针；纸没有阻断吸引。"}
-    - pose: "card-test"
-      labels: ["barrier-cards", "clip-chain"]
-      sim: {"set": {"setup": "alone", "hang": false, "cards": 6, "bar-position": "cards"}}
-      caption: {"en": "With six cards, this model holds no clips. Record each setting while keeping the same magnet and clips.", "zh": "隔六张卡片时，这个模型吸不起回形针。保持磁铁和回形针不变，记录每种设置。"}
-  index: {"parts": ["test-tray", "iron-nail", "steel-paper-clips", "steel-can", "aluminium-can", "copper-wire", "steel-spoon", "wooden-block", "plastic-button", "barrier-cards", "clip-chain", "bar-magnet-n", "cabinet-latch"]}
+      sim: {"set": {"bar-position": "tray"}}
+      caption: {"en": "The stainless steel spoon stays put too. Some kinds of stainless steel are hardly attracted, and this spoon is made of one of them.", "zh": "不锈钢勺也没动。有些种类的不锈钢几乎不被磁铁吸引，这把勺子就是用其中一种做的。"}
+    - camera: {"position": [0.1, 0.25, 0.36], "target": [-0.1, 0.16, -0.17], "fov": 30}
+      labels: ["barrier-cards", "bar-magnet-n"]
+      sim: {"set": {"cards": 3}}
+      caption: {"en": "Now put cards between the magnet and a chain of paper clips. In this model, through three cards the magnet still holds two clips. Its pull passes through, but it is weaker.", "zh": "在磁铁和一串回形针之间夹上卡片。在这个模型里，隔着三张卡片，磁铁仍吸住两只回形针。吸力穿过了卡片，但变弱了。"}
+    - camera: {"position": [0.1, 0.25, 0.36], "target": [-0.1, 0.16, -0.17], "fov": 30}
+      labels: ["barrier-cards", "bar-magnet-n"]
+      sim: {"set": {"cards": 6}}
+      caption: {"en": "Change only the number of cards and record each result. Through six cards the magnet holds no clips in this model. The more cards, the fewer clips.", "zh": "只改卡片的张数，每次记下结果。在这个模型里，隔着六张卡片，一只回形针也吸不住。卡片越多，吸住的回形针越少。"}
+  index: {"parts": ["test-tray", "iron-nail", "steel-paper-clips", "steel-can", "aluminium-can", "copper-wire", "steel-spoon", "wooden-block", "plastic-button", "barrier-cards", "clip-chain"]}
 ---
 
 <Lang en>
 
-The tray holds objects made from different materials. Move a magnet close to each in turn. The iron nail, steel clips and steel can are attracted. Iron and steel are <Term id="magnetic-material">magnetic materials</Term>: they are attracted by a magnet. A steel clip need not already be a magnet to respond.
+The tray holds eight everyday objects. Bring a magnet close to each one in turn. The iron nail, the steel paper clips and the steel can are attracted. Iron and steel are <Term id="magnetic-material">magnetic materials</Term>: a magnet attracts them, even though they are not magnets themselves. <FlyTo preset="tray-view">Look at the test tray</FlyTo>
 
-The aluminium can tab and plain copper disc are metals too, yet they stay on the tray. The wooden block and plastic ruler also stay put. These are <Term id="non-magnetic-material">non-magnetic materials</Term>. A shiny surface is not enough evidence. The stainless steel spoon needs care: the particular kind represented here is hardly attracted. Different stainless steels can give different results, so test the object rather than assuming from its name.
+The aluminium can tab and the copper disc are metals too, but they stay where they are, and so do the wooden block and the plastic ruler. They are made of <Term id="non-magnetic-material">non-magnetic materials</Term>. So a shiny metal object is not always attracted by a magnet. The only way to find out is to test it.
 
-Place paper cards between a magnet and the clips. The magnet still attracts through the paper. Plastic, wood and aluminium also allow this attraction across them. Adding cards increases the distance from magnet to clips; it does not create an on-or-off shield. <FlyTo preset="tray-view">Look at the card test</FlyTo>
+The stainless steel spoon needs care. Stainless steel comes in several kinds: a magnet attracts some of them, while others are hardly attracted at all. The spoon in this model is made of a kind that is hardly attracted. It was chosen to show that the word “steel” on its own does not tell you what a magnet will do. Test the spoon in your own kitchen to see which kind it is.
 
-This is a <Term id="fair-test">fair test</Term> when only the number of cards changes. Keep the same magnet, the same clips and the same way of lifting. In this model, <Num s="S1">3 cards</Num> leave <Num s="S1">2 clips</Num> hanging; <Num s="S1">6 cards</Num> leave <Num s="S1">0 clips</Num>. Record the settings in the table and compare the rows. The numbers are illustrative, but the pattern shows attraction weakening as the gap grows.
+A magnet's pull passes through materials that are not magnetic, such as paper, plastic and wood. Hold cards between the magnet and a chain of paper clips, and the magnet still holds some clips. Each card makes the gap <Num s="S1">2 mm</Num> wider and the pull weaker. In this model, through <Num s="S1">3 cards</Num> it holds <Num s="S1">2 clips</Num>, and through <Num s="S1">6 cards</Num> it holds none. In the Try it card, change only the number of cards, keep the same magnet and the same clips, and record a row for each setting.
 
-<Figure src="figures/magnets-scrap-crane" alt={{"en": "An electromagnet suspended from a crane holds scrap steel above a heap.", "zh": "起重机吊着的电磁铁吸起一堆废钢。"}} caption={{"en": "A lifting electromagnet selects magnetic scrap. The drawing is illustrative, not a measured sorting trial.", "zh": "电磁铁吊起磁性废料。这是用途示意图，不是磁选实测。"}} />
+<More title={{"en": "The full card table", "zh": "完整的卡片表"}}>
 
-<More title={{"en": "The complete card table", "zh": "完整的卡片表"}}>
-
-For <Num s="S1">0, 1, 2, 3, 4, 5 and 6 cards</Num>, the model holds <Num s="S1">10, 5, 3, 2, 1, 1 and 0 clips</Num>, respectively. Each card is <Num s="S1">2 mm</Num> thick. Real counts depend on the magnet, clip size and how steadily the test is done.
+In this model, <Num s="S1">0, 1, 2, 3, 4, 5 and 6</Num> cards let the magnet hold <Num s="S1">10, 5, 3, 2, 1, 1 and 0</Num> clips. The numbers are only an example: a different magnet, other clips or an unsteady hand would give different counts. The pattern stays the same: the more cards, the fewer clips.
 
 </More>
 
-<More title={{"en": "The stainless steel exception", "zh": "不锈钢的例外"}}>
+<More title={{"en": "Kinds of stainless steel", "zh": "不锈钢有好几种"}}>
 
-The spoon represents an austenitic stainless steel, which is usually only weakly magnetic. Other stainless steels can be strongly attracted. This exception does not make aluminium or copper magnetic, and it does not change the P3 examples of iron and steel.
+The spoon in this model is an austenitic stainless steel, the kind that a magnet hardly attracts. Other kinds, called ferritic and martensitic stainless steels, are attracted. Bending or hammering an austenitic steel can make it a little magnetic, so two spoons that look alike may behave differently.
+
+</More>
+
+<More title={{"en": "Sorting metal for recycling", "zh": "回收时把金属分开"}}>
+
+A large electromagnet hanging from a crane can lift steel scrap, such as old steel cans and bicycle frames. Aluminium is not attracted and stays behind. So a magnet can separate magnetic metals from non-magnetic ones.
+
+<Figure src="figures/magnets-scrap-crane" alt={{"en": "A round electromagnet hanging from a crane lifts a mass of steel scrap above a heap.", "zh": "起重机吊着的圆形电磁铁，从废料堆上吸起一大团废钢。"}} caption={{"en": "A lifting electromagnet picks out steel from a scrap heap. Illustration for this topic.", "zh": "起重电磁铁从废料堆里吸出钢铁。为本主题画的示意图。"}} />
 
 </More>
 
@@ -72,25 +80,31 @@ The spoon represents an austenitic stainless steel, which is usually only weakly
 
 <Lang zh>
 
-测试盘里有不同材料制成的物品。把磁铁依次靠近它们，铁钉、钢回形针和钢罐会被吸引。铁和钢是<Term id="magnetic-material">磁性材料</Term>，能被磁铁吸引。钢回形针即使本来不是磁铁，也会有这样的反应。
+测试盘里有八件日常物品。拿磁铁一件一件地靠近它们，铁钉、钢回形针和钢罐被吸住了。铁和钢是<Term id="magnetic-material">磁性材料</Term>：它们本身不是磁铁，却会被磁铁吸引。<FlyTo preset="tray-view">看测试盘</FlyTo>
 
-铝拉环和没有货币图案的铜片也是金属，却留在盘里。木块和塑料尺也不动，它们都是<Term id="non-magnetic-material">非磁性材料</Term>。表面发亮并不足以判断。不锈钢勺要特别留意：这里选用的种类几乎不被吸引；不同种类的不锈钢可能有不同反应，应该测试物品，不能只凭名称判断。
+铝拉环和铜片也是金属，却留在原处，木块和塑料尺也没动。它们是用<Term id="non-magnetic-material">非磁性材料</Term>做的。可见，闪亮的金属不一定会被磁铁吸引，要知道答案，只能试一试。
 
-把纸卡片夹在磁铁和回形针之间，仍然会有吸引。隔着塑料、木头或铝也能吸。增加卡片会拉大磁铁和回形针的距离，并不是把吸引像开关一样关掉。<FlyTo preset="tray-view">看隔卡片的测试</FlyTo>
+不锈钢勺要特别留意。不锈钢有好几种：有的会被磁铁吸引，有的几乎吸不动。这个模型里的勺子用的是几乎吸不动的那一种。选它，是为了说明单看“钢”这个字，并不能判断磁铁会怎样。拿你家厨房里的勺子试试，就知道它是哪一种。
 
-每次只改变卡片张数，使用同样的磁铁和回形针，保持提起的方法不变，这样才是<Term id="fair-test">公平测试</Term>。在这个模型里，隔 <Num s="S1">3 张卡片</Num>能吸住 <Num s="S1">2 只回形针</Num>，隔 <Num s="S1">6 张</Num>则是 <Num s="S1">0 只</Num>。把设置逐行记进表里比较；数字是示意，反映的是距离增大、吸引减弱的规律。若某次结果相同，也要照实记录，不为凑出整齐的规律改写观察。先看表中的变化，再说明比较条件。
+磁铁的吸力能穿过纸、塑料、木头这些非磁性材料。在磁铁和一串回形针之间夹上卡片，磁铁仍能吸住一些回形针。每多一张卡片，间隙就宽 <Num s="S1">2 mm</Num>，吸力也就弱一些。在这个模型里，隔着 <Num s="S1">3 张</Num>卡片，磁铁吸住 <Num s="S1">2 只</Num>回形针；隔着 <Num s="S1">6 张</Num>，一只也吸不住。在「试一试」里只改卡片的张数，磁铁和回形针都不换，每种设置记一行。
 
-<Figure src="figures/magnets-scrap-crane" alt={{"en": "An electromagnet suspended from a crane holds scrap steel above a heap.", "zh": "起重机吊着的电磁铁吸起一堆废钢。"}} caption={{"en": "A lifting electromagnet selects magnetic scrap. The drawing is illustrative, not a measured sorting trial.", "zh": "电磁铁吊起磁性废料。这是用途示意图，不是磁选实测。"}} />
+<More title={{"en": "The full card table", "zh": "完整的卡片表"}}>
 
-<More title={{"en": "The complete card table", "zh": "完整的卡片表"}}>
-
-隔 <Num s="S1">0、1、2、3、4、5、6 张卡片</Num>时，模型依次吸住 <Num s="S1">10、5、3、2、1、1、0 只回形针</Num>。每张卡片厚 <Num s="S1">2 mm</Num>。真实结果还取决于磁铁强弱、回形针大小和操作是否平稳。
+在这个模型里，隔着 <Num s="S1">0、1、2、3、4、5、6</Num> 张卡片，磁铁依次吸住 <Num s="S1">10、5、3、2、1、1、0</Num> 只回形针。这些数字只是举例：换一块磁铁、换一种回形针，或者手不稳，数目都会不同。但规律不变：卡片越多，吸住的回形针越少。
 
 </More>
 
-<More title={{"en": "The stainless steel exception", "zh": "不锈钢的例外"}}>
+<More title={{"en": "Kinds of stainless steel", "zh": "不锈钢有好几种"}}>
 
-这里的勺子代表奥氏体不锈钢，通常只有很弱的磁性。其他种类的不锈钢可能明显被吸引。这个例外不会使铝和铜变成磁性材料，也不改变小学课纲用铁和钢作为例子的做法。
+模型里的勺子是奥氏体不锈钢，磁铁几乎吸不动这一种。另外几种叫铁素体不锈钢和马氏体不锈钢，会被磁铁吸引。奥氏体不锈钢经过弯折、锤打，也可能带上一点磁性，所以两把看起来一样的勺子，结果可能不同。
+
+</More>
+
+<More title={{"en": "Sorting metal for recycling", "zh": "回收时把金属分开"}}>
+
+起重机吊着的大电磁铁，能把废钢吸起来，比如旧钢罐和旧自行车架。铝不会被吸引，留在原地。所以用磁铁能把磁性金属和非磁性金属分开。
+
+<Figure src="figures/magnets-scrap-crane" alt={{"en": "A round electromagnet hanging from a crane lifts a mass of steel scrap above a heap.", "zh": "起重机吊着的圆形电磁铁，从废料堆上吸起一大团废钢。"}} caption={{"en": "A lifting electromagnet picks out steel from a scrap heap. Illustration for this topic.", "zh": "起重电磁铁从废料堆里吸出钢铁。为本主题画的示意图。"}} />
 
 </More>
 

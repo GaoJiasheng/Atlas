@@ -22,8 +22,8 @@
         "zh": "吸引"
       },
       "definition": {
-        "en": "Pull towards each other. Unlike magnetic poles attract.",
-        "zh": "互相拉近；异极相吸。"
+        "en": "Pull towards. Unlike poles attract each other, and a magnet attracts magnetic materials.",
+        "zh": "拉向自己。异极互相吸引，磁铁也吸引磁性材料。"
       },
       "see": [
         "repel",
@@ -52,8 +52,8 @@
         "zh": "磁极"
       },
       "definition": {
-        "en": "Either of the strongest regions near a magnet’s ends, called north and south.",
-        "zh": "磁铁两端附近作用最强的区域，分为北极和南极。"
+        "en": "Either end of a magnet, where its pull is strongest: the north pole or the south pole.",
+        "zh": "磁铁吸力最强的两端：北极和南极。"
       },
       "see": [
         "magnet"
@@ -94,8 +94,8 @@
         "zh": "磁场"
       },
       "definition": {
-        "en": "A way to describe the magnetic influence at positions around a magnet. Filings and compasses help show its pattern; drawn lines are a representation. This term is for a closer look beyond the P3 main text.",
-        "zh": "描述磁铁周围不同位置磁作用的方法。铁屑和指南针能显示图样；画出的线只是表示法。这个词放在超出小三主线的细看里。"
+        "en": "The space around a magnet where its pull acts. Iron filings and a compass show its pattern; drawn lines are a way of picturing it. Pupils meet the term properly in secondary school.",
+        "zh": "磁铁周围、吸力能起作用的地方。铁屑和指南针能显出它的图样，画出的线只是表示它的方法。这个词到中学才正式学。"
       },
       "see": [
         "pole",
@@ -109,8 +109,8 @@
         "zh": "指南针"
       },
       "definition": {
-        "en": "A small magnetised needle that turns freely. Away from nearby magnets, it settles roughly north–south.",
-        "zh": "能自由转动的小磁针。远离附近磁铁时，静止后大致指南北。"
+        "en": "A small magnetic needle that can turn freely. Away from other magnets it settles pointing north and south.",
+        "zh": "一根能自由转动的小磁针。远离其他磁铁时，它指着南北停住。"
       },
       "see": [
         "freely-suspended",
@@ -138,8 +138,8 @@
         "zh": "磁性材料"
       },
       "definition": {
-        "en": "A material attracted noticeably by an ordinary school magnet. Iron and ordinary steel are the examples used in this topic; some special stainless steels behave differently.",
-        "zh": "能被普通学校磁铁明显吸引的材料。本课用铁和普通钢作例子；某些特殊不锈钢的表现不同。"
+        "en": "A material that a magnet attracts, such as iron and steel. Some kinds of stainless steel are hardly attracted.",
+        "zh": "会被磁铁吸引的材料，例如铁和钢。有些种类的不锈钢几乎不被吸引。"
       },
       "see": [
         "non-magnetic-material",
@@ -153,8 +153,8 @@
         "zh": "非磁性材料"
       },
       "definition": {
-        "en": "A material that an ordinary school magnet does not noticeably attract, such as aluminium, copper, wood or plastic.",
-        "zh": "普通学校磁铁不能明显吸引的材料，例如铝、铜、木和塑料。"
+        "en": "A material that a magnet does not attract, such as aluminium, copper, wood, plastic, glass and rubber.",
+        "zh": "不被磁铁吸引的材料，例如铝、铜、木头、塑料、玻璃和橡胶。"
       },
       "see": [
         "magnetic-material"

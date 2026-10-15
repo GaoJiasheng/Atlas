@@ -11,59 +11,59 @@ state:
   cutaway: "none"
   layers: ["magnet-set", "compass", "materials", "making", "uses", "field", "current"]
   hide: ["fridge-door", "door-gasket", "fridge-magnet", "cabinet-latch", "fridge-body", "cabinet-corner"]
-  labels: ["em-nail", "em-coil", "em-cells", "em-paper-clips"]
-  camera: {"position": [0.38, 0.4, 0.52], "target": [0.25, 0.045, -0.01], "fov": 30}
-  summary: {"en": "Stroking steel or passing current round it can make a magnet. The steel core keeps a little magnetism after switch-off.", "zh": "摩擦钢或让电流绕钢流动，都能制作磁铁；钢芯断电后会留一点磁性。"}
-  sim: {"set": {"setup": "electromagnet", "hang": false, "strokes": 0, "em-switch": true, "em-cells": 2, "bar-position": "bench"}, "try": {"vary": "em-cells", "keep": ["em-switch", {"en": "Same coil and steel core", "zh": "同样的线圈和钢芯"}], "observe": ["clips-em"], "record": true}}
+  labels: ["em-nail", "em-coil", "em-paper-clips"]
+  camera: {"position": [0.1, 0.3, 0.48], "target": [0.28, 0.025, 0.02], "fov": 30}
+  summary: {"en": "Stroking a steel needle with a magnet, or passing a current through a coil round a steel nail, turns it into a magnet.", "zh": "用磁铁摩擦钢针，或让电流流过绕在钢钉外的线圈，都能把它变成磁铁。"}
+  sim: {"set": {"setup": "electromagnet", "em-switch": true, "em-cells": 2}, "try": {"vary": "em-cells", "also": ["em-switch"], "keep": [{"en": "Same coil and nail", "zh": "同样的线圈和钢钉"}, {"en": "Same paper clips", "zh": "同样的回形针"}], "observe": ["clips-em"], "record": true}}
   beats:
-    - labels: ["steel-rod", "stroke-paper-clips"]
-      layers: ["magnet-set", "compass", "materials", "making", "uses", "current"]
-      pose: "stroke-start"
-      sim: {"set": {"setup": "alone", "hang": false, "strokes": 0, "em-switch": false, "em-cells": 2, "bar-position": "stroke"}}
-      caption: {"en": "The steel needle starts without enough magnetism to lift a clip. A magnetic material need not already be a magnet.", "zh": "钢针起初没有足够磁性吸起回形针。磁性材料不一定已经是磁铁。"}
-    - labels: ["steel-rod", "stroke-paper-clips", "bar-magnet-n"]
-      layers: ["magnet-set", "compass", "materials", "making", "uses", "current"]
-      pose: "stroke-start"
-      sim: {"set": {"setup": "alone", "hang": false, "strokes": 20, "em-switch": false, "em-cells": 2, "bar-position": "stroke"}}
-      caption: {"en": "Stroke in the same direction and lift the magnet clear before returning. After twenty strokes this model lifts four clips.", "zh": "沿同一方向摩擦，每次抬起磁铁再返回。在这个模型里，摩擦二十次能吸起四只回形针。"}
+    - camera: {"position": [0.27, 0.19, 0.2], "target": [0.15, 0.025, -0.05], "fov": 30}
+      labels: ["steel-rod", "bar-magnet-n"]
+      sim: {"set": {"setup": "away", "em-switch": false, "bar-position": "stroke", "strokes": 0}}
+      caption: {"en": "A plain steel needle picks up no paper clips. Steel is a magnetic material, but this needle is not yet a magnet.", "zh": "一根普通的钢针吸不起回形针。钢是磁性材料，但这根针还不是磁铁。"}
+    - camera: {"position": [0.27, 0.19, 0.2], "target": [0.15, 0.025, -0.05], "fov": 30}
+      labels: ["steel-rod", "bar-magnet-n", "stroke-paper-clips"]
+      sim: {"set": {"setup": "away", "em-switch": false, "bar-position": "stroke", "strokes": 20}}
+      caption: {"en": "Stroke it with the north pole of a magnet from one end to the other, always the same way, lifting the magnet clear each time. After twenty strokes it holds four clips in this model.", "zh": "用磁铁的北极从针的一端摩擦到另一端，每次方向相同，每次都把磁铁抬起来再回到起点。在这个模型里，摩擦二十次后，钢针能吸住四只回形针。"}
     - labels: ["em-coil", "em-nail", "em-cells", "em-switch"]
-      pose: null
-      sim: {"set": {"setup": "electromagnet", "hang": false, "strokes": 0, "em-switch": false, "em-cells": 2, "bar-position": "bench"}}
-      caption: {"en": "The electrical method uses insulated wire wound round a steel nail, with cells, leads and a switch making a complete circuit.", "zh": "电流法把绝缘导线绕在钢钉上，用电池、引线和开关接成完整电路。"}
-    - labels: ["em-coil", "em-nail", "em-paper-clips"]
-      pose: null
-      sim: {"set": {"setup": "electromagnet", "hang": false, "strokes": 0, "em-switch": true, "em-cells": 2, "bar-position": "bench"}}
-      caption: {"en": "Close the switch. In this model two cells let the steel nail lift six clips.", "zh": "合上开关。在这个模型里，两节电池让钢钉吸起六只回形针。"}
+      sim: {"set": {"em-switch": false}}
+      caption: {"en": "The electrical method: wind insulated wire round a steel nail and join it to two batteries through a switch. With the switch open, no current flows.", "zh": "电流法：在钢钉上绕绝缘导线，经过开关接到两节电池上。开关断开时，没有电流。"}
+    - labels: ["em-nail", "em-coil", "em-paper-clips"]
+      sim: {"set": {"lines": true}}
+      caption: {"en": "Close the switch. Current flows round the coil, and the nail becomes a magnet. In this model it lifts six clips.", "zh": "合上开关。电流绕着线圈流动，钉子变成了磁铁。在这个模型里，它吸起六只回形针。"}
     - labels: ["em-cells", "em-paper-clips"]
-      pose: null
-      sim: {"set": {"setup": "electromagnet", "hang": false, "strokes": 0, "em-switch": true, "em-cells": 1, "bar-position": "bench"}}
-      caption: {"en": "Keep the switch closed and use one cell. This model lifts three clips, fewer than before.", "zh": "保持开关闭合，改用一节电池。在这个模型里吸起三只回形针，比刚才少。"}
+      sim: {"set": {"em-cells": 1}}
+      caption: {"en": "Use one battery instead of two. In this model the nail now lifts only three clips. With fewer batteries the electromagnet is weaker.", "zh": "把两节电池换成一节。在这个模型里，钉子只吸起三只回形针。电池少了，电磁铁就弱了。"}
     - labels: ["em-switch", "em-nail", "em-paper-clips"]
-      pose: null
-      sim: {"set": {"setup": "electromagnet", "hang": false, "strokes": 0, "em-switch": false, "em-cells": 2, "bar-position": "bench"}}
-      caption: {"en": "Open the switch. In this model one clip remains: steel keeps a little magnetism. A soft iron core would keep very little.", "zh": "断开开关。在这个模型里仍留下一个回形针：钢会保留一点磁性，软铁芯保留的很少。"}
-  index: {"parts": ["steel-rod", "stroke-paper-clips", "bar-magnet-n", "bar-magnet-s", "em-nail", "em-coil", "em-cells", "em-switch", "em-leads", "em-paper-clips"]}
+      sim: {"set": {"em-switch": false}}
+      caption: {"en": "Open the switch and most clips drop. The steel nail keeps a little magnetism and holds one clip in this model; a soft iron core would keep almost none. A magnet you can switch on and off is an electromagnet.", "zh": "断开开关，大部分回形针掉了下来。钢钉还留着一点磁性，在这个模型里吸住一只；换成软铁芯，几乎一点也不留。能开能关的磁铁叫电磁铁。"}
+  index: {"parts": ["steel-rod", "stroke-paper-clips", "bar-magnet-n", "em-nail", "em-coil", "em-cells", "em-switch", "em-leads", "em-paper-clips"]}
 ---
 
 <Lang en>
 
-The steel needle on the making bench is a magnetic material, but it starts without enough magnetism to lift a clip. The <Term id="stroke-method">stroke method</Term> changes this. Use a pole of a bar magnet to stroke along the needle in the same direction each time. At the end, lift the magnet clear, return to the start and repeat. Rubbing backwards and forwards is not the method shown here.
+The steel needle on the bench is made of a magnetic material, but it is not a magnet: it picks up no paper clips. The <Term id="stroke-method">stroke method</Term> turns it into one. Touch one pole of a bar magnet to one end of the needle and slide it along to the other end. Then lift the magnet clear, bring it back to the start and stroke again, always in the same direction and with the same pole.
 
-In this model, after <Num s="S1">20 strokes</Num> the needle holds <Num s="S1">4 clips</Num>. These are teaching values, not a promised result for every needle. Use the same pole and direction throughout, and compare its ability to lift the same clips before and after stroking. <FlyTo preset="make-bench">Follow the stroking sequence</FlyTo>
+In this model the needle holds <Num s="S1">2 clips</Num> after <Num s="S1">10 strokes</Num>, <Num s="S1">4</Num> after <Num s="S1">20</Num> and <Num s="S1">6</Num> after <Num s="S1">30</Num>. Real needles and magnets give different numbers, so try it and count.
 
-The <Term id="electrical-method">electrical method</Term> uses a coil of insulated wire round a steel nail. Leads connect the coil to dry cells through a switch. Close the switch to complete the circuit. Current flows around the coil and the nail becomes a magnet. A magnet produced by electric current is an <Term id="electromagnet">electromagnet</Term>. The topic <TopicLink slug="circuits">Electric Circuits</TopicLink> explains why the loop must be complete.
+The <Term id="electrical-method">electrical method</Term> uses electricity. Insulated wire is wound round a steel nail to make a coil, and the coil is joined to two batteries through a switch. Close the switch and current flows round the coil. The nail becomes a magnet and lifts paper clips. A magnet made by an electric current like this is called an <Term id="electromagnet">electromagnet</Term>. Current only flows when the circuit is closed, as <TopicLink slug="circuits">Electric circuits</TopicLink> explains. <FlyTo preset="make-bench">Look at the electromagnet</FlyTo>
 
-For the fair test, keep the switch closed and the coil and steel core unchanged. Change only the cell count and record clips lifted. In this model, <Num s="S1">1 cell</Num> lifts <Num s="S1">3 clips</Num> and <Num s="S1">2 cells</Num> lift <Num s="S1">6 clips</Num>. Opening the switch stops the current, but this steel nail keeps enough magnetism for <Num s="S1">1 clip</Num>. A soft iron core would keep very little.
+In this model two batteries lift <Num s="S1">6 clips</Num> and one battery lifts <Num s="S1">3</Num>. In the Try it card, change only the number of batteries, keep the same coil, nail and clips, and record a row each time. Then open the switch. The current stops and most clips drop, but the steel nail keeps a little magnetism and still holds <Num s="S1">1 clip</Num>. A core of soft iron keeps almost none, so an electromagnet with a soft iron core lets go of everything when it is switched off.
 
-<More title={{"en": "The stroking table", "zh": "摩擦法的示意表"}}>
+<More title={{"en": "Why the wire is insulated", "zh": "导线为什么要绝缘"}}>
 
-In this model, <Num s="S1">0, 10, 20 and 30 strokes</Num> give <Num s="S1">0, 2, 4 and 6 clips</Num>. The model caps this result at <Num s="S1">6 clips</Num>; it is not a universal rule that every extra stroke adds a fixed amount of magnetism.
+The wire has a thin coat that does not let electricity through. Without it, turns of wire touching one another would let the current take a short cut instead of going round and round the nail, and the nail would hardly become a magnet. The coil and the batteries can get warm, so use only dry cells and switch off between tests.
 
 </More>
 
-<More title={{"en": "Why the coil is insulated", "zh": "线圈为什么要绝缘"}}>
+<More title={{"en": "More turns, more current", "zh": "圈数多，电流大"}}>
 
-Insulation keeps neighbouring turns from making unintended electrical contact, so current follows the wire around the core. Keep the experiment to dry cells, disconnect between observations, and follow the supervising teacher’s instructions: the wire can become warm. The model uses a fixed <Num s="S1">30-turn</Num> coil.
+An electromagnet also gets stronger with more turns of wire round the nail, or with more current through the wire. The coil in this model has a fixed <Num s="S1">30 turns</Num>, so only the number of batteries changes.
+
+</More>
+
+<More title={{"en": "How a magnet can be spoilt", "zh": "磁铁怎样会失去磁性"}}>
+
+Heating a magnet strongly, or dropping and knocking it hard, can weaken it. Iron stops being magnetic at about <Num s="S4">770 °C</Num>. Store magnets carefully and do not drop them.
 
 </More>
 
@@ -71,23 +71,29 @@ Insulation keeps neighbouring turns from making unintended electrical contact, s
 
 <Lang zh>
 
-制作区的钢针是磁性材料，但起初没有足够磁性吸起回形针。<Term id="stroke-method">摩擦法</Term>能改变它：用条形磁铁的一极沿着钢针摩擦，每次方向相同。到达末端后，把磁铁抬离钢针，返回起点再做。这里不是来回反复搓擦。模型的动作把接触、滑动、抬起和返回分开，方便看清。
+台上的钢针是用磁性材料做的，但它不是磁铁：一只回形针也吸不起来。用<Term id="stroke-method">摩擦法</Term>可以把它变成磁铁：把条形磁铁的一个磁极放在钢针的一端，沿着针滑到另一端；然后把磁铁抬起来，回到起点，再摩擦一次。每次都用同一个磁极，朝同一个方向。
 
-在这个模型里，摩擦 <Num s="S1">20 次</Num>后能吸住 <Num s="S1">4 只回形针</Num>。这是教学示意值，并非每根钢针都保证有同样结果。全过程保持同一磁极、同一方向，用同样的回形针比较摩擦前后。<FlyTo preset="make-bench">看摩擦法的动作</FlyTo>
+在这个模型里，摩擦 <Num s="S1">10 次</Num>后钢针吸住 <Num s="S1">2 只</Num>回形针，<Num s="S1">20 次</Num>后吸住 <Num s="S1">4 只</Num>，<Num s="S1">30 次</Num>后吸住 <Num s="S1">6 只</Num>。真的钢针和磁铁会得出不同的数目，可以自己试一试、数一数。
 
-<Term id="electrical-method">电流法</Term>把绝缘导线绕在钢钉上，引线经过开关接到干电池。合上开关形成完整回路，电流绕线圈流动，钉子就成为磁铁。由电流产生磁性的磁铁叫<Term id="electromagnet">电磁铁</Term>。<TopicLink slug="circuits">《电路》</TopicLink>说明回路为什么必须接通。
+<Term id="electrical-method">电流法</Term>要用电。把绝缘导线绕在钢钉上，做成线圈，再经过开关接到两节电池上。合上开关，电流就绕着线圈流动，钉子变成磁铁，能吸起回形针。像这样靠电流产生磁性的磁铁，叫<Term id="electromagnet">电磁铁</Term>。电路要闭合，电流才会流动，<TopicLink slug="circuits">《电路》</TopicLink>里讲过这一点。<FlyTo preset="make-bench">看电磁铁</FlyTo>
 
-公平测试时保持开关闭合、线圈和钢芯不变，只改电池节数，记录吸起的回形针。在这个模型里，<Num s="S1">1 节</Num>吸起 <Num s="S1">3 只</Num>，<Num s="S1">2 节</Num>吸起 <Num s="S1">6 只</Num>。断开开关后电流停止，但钢钉仍留一点磁性，能吸住 <Num s="S1">1 只</Num>；软铁芯保留的磁性则很少。比较时应等回形针稳定再数，不要把刚好碰到钉尖却没有被托住的回形针算进去。
+在这个模型里，两节电池能吸起 <Num s="S1">6 只</Num>回形针，一节电池吸起 <Num s="S1">3 只</Num>。在「试一试」里只改电池的节数，线圈、钢钉和回形针都不换，每次记一行。然后断开开关：电流停了，大部分回形针掉下来，但钢钉还留着一点磁性，仍吸住 <Num s="S1">1 只</Num>。软铁芯几乎不留磁性，所以用软铁芯的电磁铁一断电，就把吸着的东西全部放下。
 
-<More title={{"en": "The stroking table", "zh": "摩擦法的示意表"}}>
+<More title={{"en": "Why the wire is insulated", "zh": "导线为什么要绝缘"}}>
 
-在这个模型里，摩擦 <Num s="S1">0、10、20、30 次</Num>，依次吸住 <Num s="S1">0、2、4、6 只回形针</Num>。模型上限是 <Num s="S1">6 只</Num>，不代表真实钢针每增加固定次数就一定增加固定磁性。
+导线外面包着一层不导电的薄皮。没有它，挨在一起的导线就会让电流抄近路，不再一圈一圈地绕着钉子走，钉子也就几乎变不成磁铁。线圈和电池会发热，所以只用干电池，每次测完就断开开关。
 
 </More>
 
-<More title={{"en": "Why the coil is insulated", "zh": "线圈为什么要绝缘"}}>
+<More title={{"en": "More turns, more current", "zh": "圈数多，电流大"}}>
 
-绝缘层隔开相邻导线，避免电流从接触处走捷径，让电流沿导线绕过钢芯。实验只用干电池，观察之间要断开，并遵照教师指导；导线可能发热。模型的线圈固定为 <Num s="S1">30 圈</Num>。
+导线在钉子上绕的圈数越多，或者流过导线的电流越大，电磁铁也越强。这个模型的线圈固定是 <Num s="S1">30 圈</Num>，所以只改电池的节数。
+
+</More>
+
+<More title={{"en": "How a magnet can be spoilt", "zh": "磁铁怎样会失去磁性"}}>
+
+把磁铁加热到很高的温度，或者让它重重地摔、撞，都会让它的磁性变弱。铁在约 <Num s="S4">770 °C</Num> 时就不再有磁性。磁铁要好好存放，别摔它。
 
 </More>
 
