@@ -103,6 +103,9 @@
   /* Circuits (docs/23 §4.3 C4): a filament at full glow, and the current's particles (a short circuit runs --hot). */
   --lamp: #ffc96b;
   --current: #b88a12;
+  /* Magnets (docs/22 §4.3): the painted ends of a bar magnet, muted red and a slate blue. */
+  --pole-n: #b5473a;
+  --pole-s: #3f5f8a;
   /* Human anatomy (docs/16 §5.2): muscle layers, surface warmest to deep darkest; low-saturation, not blood red. */
   --muscle-1: #c48a76;
   --muscle-2: #ad7b6c;
@@ -188,6 +191,8 @@
   --haemolymph: #9cb4ae;
   --lamp: #ffd88f;
   --current: #e0b53e;
+  --pole-n: #c95a4a;
+  --pole-s: #5878a8;
   --muscle-1: #c9715b;
   --muscle-2: #9d5b53;
   --muscle-3: #70443f;

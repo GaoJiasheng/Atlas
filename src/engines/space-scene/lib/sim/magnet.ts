@@ -7,7 +7,9 @@
  * counts. Field lines and iron filings of a state: lib/sim/field.ts.
  *
  * Quantities: `force` (pull positive, push negative, % of the pull at the
- * `reference` setting), `facing` (`opposite` poles facing or the `same`),
+ * `reference` setting; NaN, shown `—`, while the field state on show leaves
+ * either of the first two magnets off the bench), `facing` (`opposite`
+ * poles facing or the `same`),
  * `needle-bearing` (degrees 0–360, clockwise from model north seen from
  * above), `field-state`, `clips-cards`, `clips-stroke`, `clips-em`
  * (`clips`, the observed one of these, comes from lib/sim/index.ts).
@@ -142,6 +144,8 @@ export function bearingOf(b: Vec3, north: Vec3): number {
 export function solveMagnets(m: MagnetData, values: SimValues, compass: Vec3 | null = null): Record<string, number | string> {
   const out: Record<string, number | string> = {};
   const [a, b] = m.magnets;
+  const state = fieldStateOf(m, values);
+  const onBench = new Set(fieldMagnets(m, state).map((g) => g.id));
   if (a && b) {
     const now = pull(magnetPoles(a, values), magnetPoles(b, values));
     const refValues: SimValues = { ...values };
@@ -150,13 +154,12 @@ export function solveMagnets(m: MagnetData, values: SimValues, compass: Vec3 | n
     if (a.flip) refValues[a.flip.control] = '';
     if (b.flip) refValues[b.flip.control] = '';
     const ref = Math.abs(pull(magnetPoles(a, refValues), magnetPoles(b, refValues)));
-    out.force = ref > 0 ? (now / ref) * 100 : 0;
+    out.force = !onBench.has(a.id) || !onBench.has(b.id) ? NaN : ref > 0 ? (now / ref) * 100 : 0;
     out.facing = now >= 0 ? 'opposite' : 'same';
   } else {
     out.force = 0;
     out.facing = 'opposite';
   }
-  const state = fieldStateOf(m, values);
   out['field-state'] = state;
   if (compass) {
     const poles = fieldMagnets(m, state).flatMap((g) => magnetCharges(g, values));

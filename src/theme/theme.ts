@@ -48,6 +48,8 @@ export const TOKEN_NAMES = [
   'haemolymph',
   'lamp',
   'current',
+  'pole-n',
+  'pole-s',
   'muscle-1',
   'muscle-2',
   'muscle-3',

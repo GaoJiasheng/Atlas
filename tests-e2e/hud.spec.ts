@@ -951,6 +951,11 @@ test('sample-space PRESENTATION: beats on the 3D stage (hide, the beat\'s labels
     'sample-motion.0',
     'sample-motion.1',
     'sample-motion.2',
+    'magnet-field.0',
+    'magnet-field.1',
+    'magnet-field.2',
+    'magnet-field.3',
+    'magnet-field.4',
   ]);
 
   // P starts at the current chapter's first beat: the beat's view, hide and labels on top of the chapter.
@@ -1004,10 +1009,10 @@ test('sample-space PRESENTATION: beats on the 3D stage (hide, the beat\'s labels
   expect(await api()).toMatchObject({ cutaway: 'sample-cross', pose: 'sample-open', ghosted: ['sample-core', 'sample-drive', 'sample-loop'] });
   // The last beat stays the last.
   await page.evaluate((last) => window.__atlas!.goToBeat(last, { instant: true }), beats.length - 1);
-  await expect.poll(async () => (await api()).presentation).toMatchObject({ chapter: 'sample-motion', beat: 2 });
+  await expect.poll(async () => (await api()).presentation).toMatchObject({ chapter: 'magnet-field', beat: 4 });
   await page.keyboard.press('ArrowRight');
   await page.waitForTimeout(400);
-  expect((await api()).presentation).toMatchObject({ chapter: 'sample-motion', beat: 2 });
+  expect((await api()).presentation).toMatchObject({ chapter: 'magnet-field', beat: 4 });
 
   // ESC: the HUD and the scene as they were (chapter, view, hide, selection, ORBIT).
   await page.keyboard.press('Escape');

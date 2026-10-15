@@ -194,7 +194,10 @@ export function SimOverlays({
         const firstState = w?.output ? Object.keys(sim.outputs.find((x) => x.id === w.output)?.states ?? {})[0] : undefined;
         const when = !w || holds(w.is, w.control !== undefined ? resolved[w.control] : outputs[w.output!], firstState);
         const on = when && !exploded && o.between.every((id) => displays.get(id)?.visible === true);
-        return <ForceArrows key={i} overlay={o} value={numberOf(outputs[o.output])} on={on} handles={handles} look={look} snapKey={snapKey} />;
+        // A value that does not apply (NaN: a magnet off the bench) draws no arrows.
+        const value = numberOf(outputs[o.output]);
+        const ok = Number.isFinite(value);
+        return <ForceArrows key={i} overlay={o} value={ok ? value : 0} on={on && ok} handles={handles} look={look} snapKey={snapKey} />;
       })}
     </>
   );

@@ -232,7 +232,7 @@ export function fieldLines(sim: SimData, state: string): FieldLine[] {
     const magnets = fieldMagnets(m, state);
     const counts = linesPerMagnet(
       magnets.map((g) => magnetMoment(g, values)),
-      m.lines,
+      f.lines ?? m.lines,
     );
     const starts = magnets.map((g, i) => {
       const [n, s] = magnetCharges(g, values);

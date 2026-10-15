@@ -11,7 +11,7 @@
 import { z } from 'zod';
 import { bilingual, colorRef, kebabId, vec3 } from '../../content/schema/common';
 import { fieldLines } from './lib/sim/field';
-import { CLIP_QUANTITIES, MAX_FIELD_LINES } from './lib/sim/magnet';
+import { CLIP_QUANTITIES } from './lib/sim/magnet';
 
 /** A control value: a toggle's boolean, a step's number, a choice's option id. */
 export const simValue = z.union([z.boolean(), z.number(), kebabId]);
@@ -363,8 +363,8 @@ export const magnetSchema = z
     compass: z.union([z.object({ at: vec3 }).strict(), z.object({ ring: kebabId, control: kebabId }).strict()]).optional(),
     /** The default plane field lines are traced in (each field state may give its own). */
     plane: fieldPlaneSchema.optional(),
-    /** Field lines leaving the north pole of a 1 A·m² magnet (∝ moment; ≤ 16 a state). Default 8. */
-    lines: z.number().int().min(1).max(MAX_FIELD_LINES).default(8),
+    /** Field lines leaving the north pole of a 1 A·m² magnet (∝ moment, ≥ 1 a magnet; ≤ 16 a state). Default 8. */
+    lines: z.number().positive().max(400).default(8),
     /**
      * Field states (the `field-state` quantity; docs/22 §4.2 item 4): the
      * first whose `when` control values all hold is on show (one without
@@ -380,6 +380,8 @@ export const magnetSchema = z
             magnets: z.array(kebabId).min(1).optional(),
             when: simValues.optional(),
             plane: fieldPlaneSchema.optional(),
+            /** Lines per A·m² for this state (a weak electromagnet drawn with more lines than the bar magnets' default). */
+            lines: z.number().positive().max(400).optional(),
           })
           .strict(),
       )

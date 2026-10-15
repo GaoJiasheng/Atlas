@@ -646,7 +646,7 @@ lib/                     纯函数，有单测：explode / visibility（图层�
                          leader-layout（引线标注摆放：两列、避让 HUD 与被标零件、代价搜索）/ shaped（成形零件的版式数学：盘管管位、回弯、叶片）/ xform / math /
                          sweep（扫掠站点、标架、半径轮廓、环节沟）/ wing（扇形折叠）/ bilateral（双侧镜像）/ pose（姿态、关键帧）/ units（实长）/
                          rig（关节角、解剖轴、收缩、动作节拍、肌肉 ↔ 零件）/ sites（起止点）/ equipment（动作器械的基本体）/
-                         sim/（试一试：controls 值与 URL、index 模型注册表、circuit 节点分析、magnet 磁荷、bind 绑定、trial 数据表与先猜后看、diagram 电路图排版）
+                         sim/（试一试：controls 值与 URL、index 模型注册表、circuit 节点分析、magnet 磁荷与场态、field 场线与铁屑、settle 阻尼摆动、bind 绑定、trial 数据表与先猜后看、diagram 电路图排版）
 sim-schema.ts            parts.json `sim` 与章 / 拍 `sim` 的 zod 和交叉校验（见「试一试」）
 stages/model3d/          R3F 舞台：Model3DStage（createRoot 宿主）、SceneRoot、PartNode、geometry（程序化零件）、shaped（成形零件构建）、organic（sweep / wing 构建、FanDeform）、
                          materials（材质 + 选中边缘 / 剖面 shader 补丁）、textures（程序化贴图）、Lighting、
@@ -738,6 +738,7 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
   - `blades {layout, count, radius, hub, chord, twist, sweep, pitch, thickness, length?, discs}`：`axial`（默认）= XZ 平面里 `count` 片带弧度的宽叶片，叶根角 `pitch`°、到叶尖减 `twist`°、叶尖前掠 `sweep`°、弦长从根部 55 % 长到叶尖 `chord`，加穹顶轮毂；`barrel` = 贯流风扇转子，`count` 片前弯叶片（`hub` 到 `radius`，弦 `chord`，前倾 `sweep`°，默认 25°）沿 Y 长 `length`，`discs` 片隔盘（两端实心）。全部合成一个几何体
   - `coilBank {rows, cols, pitch, tubeRadius, length, finPitch, finDepth, bends, shape, legs?, corner?, tubeColor}`：翅片管换热器。管沿 X，`cols` 根沿 Y 间距 `pitch`，`rows` 排沿 Z（行距 0.866 pitch，错排）；铝翅片每 `finPitch` 一片、深 `finDepth`；U 形回弯在两端（`both`）、不要（`none`）或只要回弯（`only`：给单独的"回弯"零件）。回弯规律：+X 端偶数排空出最下一根、奇数排空出最上一根（`coilBendStart`），接管从这里进出。`shape: "L"`：第 0 段沿 X 长 `legs[0]`，在 −X 端绕 Y 转 90°（转角半径 `corner`），第 1 段沿 +Z 长 `legs[1]`（室外机后面 + 左侧的 L 形冷凝器）。铜管、回弯用 `tubeColor`（默认 copper），翅片用 `color`：一个零件两种材质、两次绘制
   - `grille {style, radius | size, count, spokes, bar}`：`rings` = XZ 平面里 `count` 圈钢丝圈（从 0.2 radius 到 radius）+ `spokes` 根辐条 + 中心圆片（室外机风扇护网）；`slats` = `size:[w,d,h]` 框里 `count` 根宽 `bar` 的格条，沿 d 方向（室内机顶部进风格栅、滤网）
+  - `filings {size: [w, d], count?, needle?, saturate?, exponent?}`：铁屑卡片（磁铁 sim 专用，一个 InstancedMesh）；`state` 绑定按场态排布，见「SpaceScene · 试一试 · 磁铁」
   - 所有 primitive 可选 `mirror: "x" | "y" | "z"`：在自身坐标里沿该轴镜像（先镜像、再 `rotation`），绕序自动翻转
 - **一个零件多个 primitive**（`extra: [primitive…]`，≤ 32）：`at` 同样是场景坐标；随零件一起移动、淡出、拆开、repeat（绕主 `at` 重复）和转动；引线指向主 `primitive`。每个 primitive 可以有自己的 `color` / `tint`：零件按材质分槽（`partMaterialSlots`：主材质在前，再按出现顺序），**同材质的所有块烘焙合并成一个几何体，一个材质一次绘制**（顶点超过 40 万才保留实例化）。压缩机 = 外壳 + 接线盒 + 底板，阀门 = 阀体 + 阀帽 + 接口，等等
 - **逐个副本的动画**（`each: true`，rotate / oscillate / pulse；b200-server 的 40 只风扇转子）：默认动画让整个零件绕零件中心（或 `pivot`）动，`repeat` 的各列和 `extra` 会一起公转。写 `each: true` 后，零件的每个**副本**——主 primitive 和每个 `extra`、乘以每个 `repeat` 实例（`lib/parts.ts partCopies`）——各自绕自己的 `at`（随 repeat 移过去）转 / 摆 / 缩放，轴仍是场景坐标。这样的零件不再烘焙合并：形状相同的 primitive（`primitiveShapeKey`：除 `at`、`rotation` 外参数与材质全同）共用一个 InstancedMesh，每个副本一个实例（`stages/model3d/geometry.ts eachPieces`，片的 `pivots` = 各实例的转心），舞台每帧写 `T(c) · 动作 · T(−c) · 静止矩阵`；所以 5 列 × 8 只转子 = 1 次绘制。限制：不能和 `pivot` 一起写；零件要有 `repeat` 或 `extra`；不能是 glb 零件；翅脉线、折叠翅在这种零件里是静止的。同一零件里不带 `each` 的动画照旧作用于整个零件，二者叠加。
@@ -987,10 +988,10 @@ docs/22 §4.3（E-SIM 核心，磁铁与电路共用）+ docs/23 §4（电路模
 }
 ```
 
-- **控件**：`toggle`（开关）、`step`（有序的数，升序）、`choice`（选项 `{ id, label }`，id 不能是 `on` / `off` / 数字）。`choice.sets`：选这个选项同时设定别的控件（接法 → X / Y / Z）；读者手拨了被覆盖的控件时，选择移到 `sets` 正好成立的选项，否则移到第一个不带 `sets` 的选项（`free`，必须有一个），被覆盖的控件停在原处；`free` 本身一直是 `free`（`lib/sim/controls.ts setSimControl`，有单测）。默认值必须与默认选项的 `sets` 一致（validate 报）。
+- **控件**：`toggle`（开关）、`step`（有序的数，升序或降序，按写的顺序步进：间隙 6 → 3 → 1.5）、`choice`（选项 `{ id, label }`，id 不能是 `on` / `off` / 数字）。`choice.sets`：选这个选项同时设定别的控件（接法 → X / Y / Z）；读者手拨了被覆盖的控件时，选择移到 `sets` 正好成立的选项，否则移到第一个不带 `sets` 的选项（`free`，必须有一个），被覆盖的控件停在原处；`free` 本身一直是 `free`（`lib/sim/controls.ts setSimControl`，有单测）。默认值必须与默认选项的 `sets` 一致（validate 报）。
 - **值从哪里来**：store 字段 `sim` 只存"设过的值"（不累积：章 `state.sim.set`，拍 `sim.set` 叠在本章的上面，读者在卡片 / 键 / 电路图上改的）；显示的值 = 默认 ⊕ 各选择的 `sets` ⊕ 设过的值，无效值忽略（`resolveSimValues`）。换章回到那一章的 `set`；ESC 不清；URL `sim`（见「URL 参数」）；演示的保存 / 恢复带着它；拍的深链接 `b` 照常。
-- **模型**（`lib/sim/index.ts evaluateSim`，同步、< 1 ms，只在值变化时算）：`circuit` = 节点分析（docs/23 §4.2）：电池是诺顿等效（每节 `emf` 默认 1.5 V、`r` 每节内阻，`flip` 指定某节由开关翻转成 −EMF；`cells` 是数或步进控件），`switch`（合上 `closed` 默认 0.001 Ω，断开去掉），`wire`（`r`），`gap`（选择控件 → `materials` 的欧姆数，没列 = 绝缘、断开），`load`（固定 `load` 或选择控件；`present` 开关 = 装没装上；`loads` 的 `lamp`（`rated` W）/ `buzzer`（`on` A 以上响）/ `motor`（`at` V 时 `rpm` 的可视转速，∝ 电压））；每个连通块接地一个节点，高斯消元（部分主元），没有电池的块电流为 0。量名（输出的 `from`）：`current:<边>`、`volts:<边>`（电池 = 端电压）、`power:<边>`、`brightness:<边>`（灯功率 ÷ `reference.power` × 100）、`speed:<边>`、`sound:<边>`（`on` / `off`）、`status:<电池边>`（`open` < 1 mA、`short` > `short` A（默认 3）、`over-rating`：同一回路里有灯超过额定 × `over`（默认 1.5）、否则 `closed`）、`edges`（每条边的带号电流，from → to）。`magnet` = 最小版（docs/22 §4.2）：前两根磁铁的 Gilbert 磁荷对（`move` 控件沿轴移动、`flip` 的选项调头），`force`（吸 + 斥 −，`reference` 设定处的吸力 = 100 %）、`facing`、`clips-cards`、`clips-stroke`、`clips-em`；场线、指南针、力箭头叠加随磁铁主题做（docs/22 §4.4 M1、M4、M5）。validate 核对输出的 `from` 是这个模型的量、种类（数 / 状态 / 向量）对得上。
-- **绑定**（`lib/sim/bind.ts simEffects`，舞台叠在章节状态上）：零件 `visible`（条件：`true` = 真值 / 非零 / 不是第一个状态；或 `{ eq | ne | in | gte | lte }`）、`pose`（值 → `poses` 里的姿态，只动这些零件，压在章 / 拍的姿态之上；几条绑定动同一零件时非静止的那条胜出）、`glow`（值 ÷ `full`，`sqrt` 或 `linear`，0–2：从暗红渐到 `color`，过 1 更白；只点亮零件自己的材质，即槽 0：灯丝不带支撑丝和铜座）、`count`（`repeat` 零件只显示前 k 份；该零件不能有 `extra`）、`offset` / `rotate`（(值 − origin) × per，沿轴移 / 绕零件中心转，0.5 s 缓动）；流 `visible`、`intensity`（向量输出按 `paths` 的 id：每条路径的粒子速度 ∝ |值| ÷ `full`（夹在 ±2），负值反向，< 1 % 的路径 0.3 s 淡出；相位逐帧积分，变速不跳）、`stops`（状态 → 粒子色，如短路 `token:hot`）；动画 `rpm`（rotate 的转速 = 值 × per，角度积分）、`enabled`（条件不成立时 0.15 s 缓停）。运转（RUN / FLOW）只管"动起来"：灯亮不亮、零件在哪儿不受它影响。
+- **模型**（`lib/sim/index.ts evaluateSim`，同步、< 1 ms，只在值变化时算）：`circuit` = 节点分析（docs/23 §4.2）：电池是诺顿等效（每节 `emf` 默认 1.5 V、`r` 每节内阻，`flip` 指定某节由开关翻转成 −EMF；`cells` 是数或步进控件），`switch`（合上 `closed` 默认 0.001 Ω，断开去掉），`wire`（`r`），`gap`（选择控件 → `materials` 的欧姆数，没列 = 绝缘、断开），`load`（固定 `load` 或选择控件；`present` 开关 = 装没装上；`loads` 的 `lamp`（`rated` W）/ `buzzer`（`on` A 以上响）/ `motor`（`at` V 时 `rpm` 的可视转速，∝ 电压））；每个连通块接地一个节点，高斯消元（部分主元），没有电池的块电流为 0。量名（输出的 `from`）：`current:<边>`、`volts:<边>`（电池 = 端电压）、`power:<边>`、`brightness:<边>`（灯功率 ÷ `reference.power` × 100）、`speed:<边>`、`sound:<边>`（`on` / `off`）、`status:<电池边>`（`open` < 1 mA、`short` > `short` A（默认 3）、`over-rating`：同一回路里有灯超过额定 × `over`（默认 1.5）、否则 `closed`）、`edges`（每条边的带号电流，from → to）。`magnet` = Gilbert 磁荷模型、场态、场线、铁屑、指南针、力箭头，见下面「SpaceScene · 试一试 · 磁铁」。validate 核对输出的 `from` 是这个模型的量、种类（数 / 状态 / 向量）对得上。
+- **绑定**（`lib/sim/bind.ts simEffects`，舞台叠在章节状态上）：零件 `visible`（条件：`true` = 真值 / 非零 / 不是第一个状态；或 `{ eq | ne | in | gte | lte }`）、`pose`（值 → `poses` 里的姿态，只动这些零件，压在章 / 拍的姿态之上；几条绑定动同一零件时非静止的那条胜出）、`glow`（值 ÷ `full`，`sqrt` 或 `linear`，0–2：从暗红渐到 `color`，过 1 更白；只点亮零件自己的材质，即槽 0：灯丝不带支撑丝和铜座）、`tint`（值 ÷ `full`，0–1，`linear` 或 `sqrt`：向 `color` 混色，强度上限同 signal 高亮；铁芯通电变磁铁）、`count`（`repeat` 零件只显示前 k 份，`true` = × 1，或 `{ per }`；该零件不能有 `extra`）、`offset` / `rotate`（(值 − origin) × per（rotate 的 per 默认 1），在姿态之后沿场景轴移 / 绕（姿态后的）零件中心或 `pivot` 场景点转，0.5 s 缓动；`settle: { period, damping }` = 阻尼摆动，转角走近路）、`at`（命名位置环）、`state`（铁屑排哪个场态）——后三者见磁铁一节；流 `visible`、`state`（场线流）、`intensity`（向量输出按 `paths` 的 id：每条路径的粒子速度 ∝ |值| ÷ `full`（夹在 ±2），负值反向，< 1 % 的路径 0.3 s 淡出；相位逐帧积分，变速不跳）、`stops`（状态 → 粒子色，如短路 `token:hot`）；动画 `rpm`（rotate 的转速 = 值 × per，角度积分）、`enabled`（条件不成立时 0.15 s 缓停）。运转（RUN / FLOW）只管"动起来"：灯亮不亮、零件在哪儿不受它影响。
 - **多路径流**（`flows[].paths: [{ id, path }]`，≤ 16 条，代替 `path`）：一条流、一次绘制；粒子按路径长度分配（每条 ≥ 4），每条路径一行浮点纹理，shader 里每条路径一个相位 / 透明度 / 闭合标志（`flowMaterial.ts`）。电路主题每条边一条路径（与导线 sweep 同源，生成脚本写出两者）。不能 `bilateral`。
 - **读数**：`telemetry` 行写 `follow: "<数输出>"`（不写 `idle` / `run`）：跟随输出值、0.3 s 一阶滞后（`lag` 可改）、小数位取输出的；本章 `try.observe` 里的输出在 PLATE 块加粗；块尾一行 `SIM <第一个状态输出> · <本章试一试控件的值>`，短路 / 超额定用 hot 色。
 - **章节**：
@@ -1022,7 +1023,89 @@ state:
 - **电路图卡**（有 `circuit.diagram` 时代替右上零件链路卡，标题 CIRCUIT DIAGRAM / 电路图；< 1024 px 收进试一试卡片里可折叠的一节）：节点的 `d` 是图上坐标，边的 `via` 是直角拐点，符号放在最长的一段直线上（`at`，默认中点）：电池 = 每节一对长（+）短（−）线、翻转的那节反过来，灯 = 圆内叉（按亮度填 `--lamp`，拔掉时虚线），开关 = 两个接线点 + 刀片（断开时抬起），缺口 = 两个接线点 + 材料（导体实线、铅笔芯虚线、绝缘体空着），蜂鸣器、电机（M）；有电流的边用 `--current` 加粗并带方向箭头（从正极出发），短路时整张图 `--hot`；开关符号 = 拨真开关（`role="button"`、`aria-pressed`、44 px 命中区，Enter / Space），其他符号 = 选中边的 `part`，选中的零件对应符号描 signal；`diagram.labels` 是图上的小字（"手电筒"）。没有 `d` 的节点不画。
 - **测试与 QA**：`__atlas.engine.sim()` → `{ values, set, outputs, try, table }`，`__atlas.engine.setSim({ id: value })`（逐个走 `setSimControl`，有非法值返回 false）；`__atlas.state().sim` = 设过的值。`pnpm shoot <slug> --keys` 测 `[` `]` `T`（在第一个有卡片的章：`]` 前进一值、`[` 回来、URL 带 `sim`；`T` 翻转一个开关再翻回）；`--beats` 每拍照常截图（拍的 `sim.set` 随 `beatScene` 应用）。
 - **token**：`--lamp`（灯丝发光，暖白）、`--current`（电流粒子，暗金；短路用 `--hot`）。
-- **已知限制**：读者不能自己拖元件、连线（docs/23 §4.5，v2）；`magnet` 只有最小模型；`overlays`（力箭头）与绑定的 `at` / `state` / `settle`（docs/22 §4.3 S4 里磁铁用的）随磁铁主题做，schema 现在不收。
+- **已知限制**：读者不能自己拖元件、连线、拖磁铁和指南针（docs/23 §4.5、docs/22 §4.5，v2：场线要在运行时重算）。
+
+### SpaceScene · 试一试 · 磁铁（magnet）
+
+docs/22 §4.2–4.4（E-MAG）。`sim.kind: "magnet"`：磁铁是 Gilbert 磁荷对，场线和铁屑按"场态"在载入时算一次并缓存（不进 parts.json、不手写），指南针读场的方向并阻尼摆动，两根磁铁之间画力箭头。代码：`lib/sim/magnet.ts`（磁荷、力、场、方位、场态选择）、`lib/sim/field.ts`（2-D 场线求解、铁屑排布、缓存）、`lib/sim/settle.ts`（阻尼摆动）、`stages/model3d/SimOverlays.tsx`（力箭头）、`Flows.tsx`（场线流）、`PartNode.tsx`（铁屑、摆动、`pivot`、`tint`）；单测 `tests/space-scene/magnet-field.test.ts`（样板台 `tests/space-scene/fixtures/magnet-bench.ts` 是 docs/22 §3 的尺度：可当作者模板），示例 `sample-space` 第 06 章。
+
+```jsonc
+"sim": {
+  "kind": "magnet",
+  "controls": [
+    { "id": "setup", "kind": "choice", "default": "pair", "label": {en, zh},          // 可选的"台上摆什么"：不进试一试卡片，章 / 拍 sim.set 用它选场态
+      "options": [ { "id": "pair", … }, { "id": "alone", … }, { "id": "horseshoe", … }, { "id": "electromagnet", … } ] },
+    { "id": "gap", "kind": "step", "values": [6, 3, 1.5], "default": 6, "unit": "cm", "label": {en, zh} },
+    { "id": "facing", "kind": "choice", "options": [ns, nn, ss], "default": "ns", … },
+    { "id": "compass-at", "kind": "step", "values": [1, 2, 3, 4, 5, 6, 7, 8], "default": 1, … },
+    { "id": "cards" | "strokes" | "em-cells", "kind": "step", … }, { "id": "em-switch", "kind": "toggle", … }
+  ],
+  "outputs": [
+    { "id": "force", "unit": "%", "decimals": 0, … },             // 吸 +、斥 −，reference 处的吸力 = 100 %（模型算出 6 / 3 / 1.5 cm：12 / 41 / 100 %）
+    { "id": "needle-bearing", "unit": "°", "decimals": 0, … },    // 0–360，从模型北（−Z）顺时针（俯视）
+    { "id": "clips-cards" }, { "id": "clips-stroke" }, { "id": "clips-em" },   // 10 5 3 2 1 1 0；0 2 4 6；3 × 节数 / 断电 1
+    { "id": "clips", … },                                         // PLATE 别名：本章卡片观察的那个回形针数，别处显示 —
+    { "id": "field-state", "kind": "state", "states": { "ns-6": {en, zh}, …, "single": {en, zh} } }   // 每个场态都要有标签（状态 id 可带点：ns-1.5）
+  ],
+  "bind": [
+    { "control": "gap", "part": "bar-magnet-b", "offset": { "axis": [1,0,0], "per": 0.01, "origin": 6 } },
+    { "control": "facing", "part": "bar-magnet-b", "pose": { "ns": null, "nn": "b-flipped", "ss": "b-flipped" } },   // 姿态绕 B 的中心转（姿态写 pivot）
+    { "control": "compass-at", "part": ["compass-case", "compass-card", "compass-needle", "compass-glass"], "at": "compass-ring" },
+    { "output": "needle-bearing", "part": "compass-needle", "rotate": { "axis": [0,-1,0], "settle": { "period": 1.2, "damping": 0.3 } } },
+    { "output": "field-state", "part": "iron-filings", "state": true },
+    { "output": "field-state", "flow": "field-lines", "state": true },
+    { "output": "clips-cards", "part": "clip-chain", "count": true },
+    { "control": "em-switch", "part": "em-nail", "tint": { "color": "token:signal", "full": 1 } },
+    { "control": "hang", "part": ["bar-magnet-n", "bar-magnet-s"], "pose": { "true": "suspended" } },
+    { "control": "hang", "part": ["bar-magnet-n", "bar-magnet-s"], "rotate": { "axis": [0,1,0], "per": 90, "pivot": [0.04, 0.005, -0.18], "settle": { "period": 1.6, "damping": 0.25 } } }
+  ],
+  "overlays": [ { "kind": "force-arrows", "between": ["bar-magnet-n", "bar-magnet-b"], "output": "force", "length"?: 0.04, "lift"?: 0.02, "when"?: { "control": "arrows" } } ],
+  "magnet": {
+    "magnets": [
+      { "id": "a", "north": [-0.118, 0.005, 0], "south": [-0.202, 0.005, 0], "moment"?: 1 },
+      { "id": "b", "north": [0.042, 0.005, 0], "south": [-0.042, 0.005, 0],
+        "move": { "control": "gap", "axis": [1,0,0], "per": 0.01, "origin": 6 }, "flip": { "control": "facing", "when": ["nn", "ss"] } },
+      { "id": "em", "north": [0.29, 0.03, -0.05], "south": [0.29, 0.11, -0.05], "moment": 0.15,
+        "power": { "switch": "em-switch", "cells": "em-cells", "residual"?: 0.15 } }
+    ],
+    "reference": 1.5,
+    "clips": { "cards": "cards", "strokes": "strokes", "switch": "em-switch", "cells": "em-cells" },
+    "earth": { "uT": 40, "north": [0, 0, -1] },
+    "rings": { "compass-ring": { "center": [-0.16, 0.017, 0], "radius": 0.085, "count": 8, "start"?: 180 } },
+    "compass"?: { "at": [x, y, z] } | { "ring": "compass-ring", "control": "compass-at" },
+    "plane": { "center": [-0.11, 0.012, 0], "size": [0.36, 0.21], "normal"?: [0, 1, 0] },
+    "lines"?: 8,
+    "fields": {
+      "ns-6":   { "magnets": ["a", "b"], "when": { "setup": "pair", "facing": "ns", "gap": 6 } },
+      …,
+      "em-on-2": { "magnets": ["em"], "when": { "setup": "electromagnet", "em-switch": true, "em-cells": 2 }, "lines": 40,
+                   "plane": { "center": [0.29, 0.07, -0.05], "size": [0.16, 0.16], "normal": [0, 0, 1] } },
+      "single": { "magnets": ["a"] }                               // 没有 when：兜底，放最后
+    }
+  }
+}
+```
+
+零件与流：
+
+```jsonc
+{ "id": "iron-filings", …, "primitive": { "kind": "filings", "size": [0.297, 0.21], "count"?: 2400, "needle"?: [0.002, 0.0003],
+    "saturate"?: 0.002, "exponent"?: 0.5, "at": [-0.16, 0.0108, 0], "color": "powder", "tint": "token:ink-2" },
+  "extra": [ { "kind": "bevelBox", "size": [0.297, 0.0004, 0.21], "bevel": 0.00005, "at": [-0.16, 0.0106, 0], "color": "enamel" } ] }   // 纸放 extra
+{ "id": "field-lines", "group": "field", "speed": 0.02, "color": "token:accent-3", "count": 640, "size": 0.5, "spread": 0, "clip": false, "whenRun": false }   // 没有 path / paths
+```
+
+- **磁铁与场**（`magnet.ts`）：每根磁铁两极各一个点磁荷，磁极强度 q = `moment`（A·m²，默认 1：学校条形磁铁）÷ 两极距离；B = μ0/4π · Σ q r̂ / r²（特斯拉）。`move` / `flip` 同最小版；`power`：电磁铁通电时 moment × 节数（`cells` 步进控件，没写 = 1），断电 × `residual`（默认 0.15：钢芯留磁）。`force` 只看前两根（相对值），`reference` = 第一根磁铁 `move` 控件取这个值、未调头时 = 100 %。
+- **场态**（`fields`，docs/22 §4.2 第 4 条）：`field-state` = 第一个 `when`（控件值，全部相等才成立）成立的场态；没有 `when` 的永远成立，只能放最后。一个场态的场线 / 铁屑按"控件默认值 ⊕ 它的 `when`"、它的 `magnets`（默认全部）算一次并按载入的数据缓存（`lib/sim/field.ts`，每套几毫秒），所以 `when` 要钉住影响位置的控件（`gap`、`facing`）。台上摆什么（只有 A、两根、马蹄形、电磁铁）用一个不进卡片的选择控件（上例 `setup`）由章 / 拍 `sim.set` 设定。指南针读数用当前场态的磁铁、当前控件值。
+- **场线**（流的 `state` 绑定，docs/22 §4.4 M1 / M2）：在场态的 `plane`（默认 `magnet.plane`）这个矩形里做 2-D 求解：磁极投影到平面上，按 1/r² 在面内积分（RK4，步长 = 短边 ÷ 400）。每根磁铁北极出发 `lines` × moment 条（`lines` = 每 A·m² 的条数，默认 8，场态可另给；每根磁铁至少 1 条，一个场态最多 16 条，超了按比例减），种子在北极周围小圆上、关于磁铁轴对称；到南极、出矩形边或零点停；每条 ≤ 120 点，画在平面上（平面中心的高度：放在纸面之上）。流：没有 `path` / `paths`，粒子沿当前场态的线走，线下面另画一层流色细线（不透明度 0.45，多一次绘制），换场态时淡入；`whenRun: false` 让它不开 RUN 也显示；图层开关照常。竖直的电磁铁用竖直平面（`normal: [0, 0, 1]`）。
+- **铁屑**（`filings` primitive + 零件的 `state` 绑定，M3）：卡片 `size` [宽, 深] 在零件的 XZ 平面（可 `rotation`，不能 `scale` / `mirror` / `repeat`，只能是主 `primitive`，纸放 `extra`）。一个 InstancedMesh，`count` 根针（默认 2400）；候选针在抖动网格上（2 × count，固定种子：换场态时同一根针原地转），按 (|B| ÷ `saturate`)^`exponent`（默认 2 mT、0.5）的概率保留——两极处全留、离开越远越稀——再均匀抽到 ≤ count；针沿 B 在卡片面内的方向，B 竖着的地方（极面上方）画短；场态 = 3-D 场在卡片高度处的值（磁铁在纸下）。没有场态时随机撒着。
+- **指南针**：`needle-bearing` 在 `magnet.compass`（固定点，或位置环 + 步进控件）读；没写时用第一条 `at` 绑定的环和控件。场 = 当前场态的磁铁 + 地磁（`earth.uT` 水平指 `earth.north`）；方位 = 场的水平分量从模型北顺时针（俯视）的度数 0–360。针零件按 `rotate` + `settle` 绑定转：**轴写 `[0, -1, 0]`**（顺时针；写 `[0, 1, 0]` 要 `per: -1`，validate 报错提示），针在静止时北半指 −Z。`settle`：二阶阻尼振子（ω = 2π ÷ period，damping = 阻尼比），走近路（350° → 10° 转 +20°），约 3–4 s 停稳，停稳后不再要帧；深链接、截图、瞬切直接到终值。
+- **位置环**（`rings` + 绑定 `at`）：`count` 个位置在水平圆上，位置 1 在方位 `start`（默认 180 = 朝读者），其余顺时针（俯视）。`at` 绑定的控件是 1 … count 的步进控件；零件按"当前位置 − 控件默认值的位置"平移——零件画在默认位置上。
+- **力箭头**（`overlays: force-arrows`，M5）：`between` 两个零件各一支，抬到中心上方 `lift`（默认 0.02），沿两者连线；吸（值 > 0）朝对方、`pull` 色（默认 `token:signal`），斥朝外、`push` 色（默认 `token:cold`）；长度 = `length`（默认 0.04）× √(|值| ÷ 100)（≤ 1.6 倍；读数是真实相对值），缓动；两支一个网格一次绘制，平涂不受光。任一零件不在场（隐藏、章 `hide`、绑定隐藏）、拆开、|值| < 0.5、`when` 不成立时淡出。`when: { control | output, is?: 条件 }`（默认真值）：比如一个 `arrows` 开关控件，章 `sim.set` 打开。
+- **悬挂磁铁**（docs/22 §4.7 `suspended`）：一个开关控件（`hang`），两条绑定：`pose` 把两半磁铁移到吊线下（姿态只做平移 + 起始朝向），`rotate`（`per: 90` 之类、`pivot` = 吊点的场景坐标、`settle`）让它摆几下停在南北向。姿态之后才转，所以 `pivot` 写姿态后的位置。
+- **电磁铁**：`power` 让场态 / 指南针 / 场线随开关和节数变；`tint` 绑定把钉子染色（通电 = 磁铁）；回形针 `count: true` 绑 `clips-em`；电流流 `visible` 绑开关（同电路）。
+- **读数**：`telemetry` `follow: "force"`（Pull %）、`"needle-bearing"`（Needle °）、`"clips"`（Clips held：本章卡片观察的回形针数，加粗；别章显示 `—`，`clips` 不能绑定）。块尾 `SIM <场态标签> · <本章控件值>`。
+- **validate**（`sim-schema.ts magnetIssues` 等）：磁铁 id、两极不重合、`move` / `flip` / `power` 的控件种类；`compass` 环与控件；`needle-bearing` 有读数位置；场态的磁铁、`when` 值、无 `when` 的放最后、每个场态有标签、有平面、平面里真能起线；`at` 的环存在、控件是 1 … count；`state` 绑定的输出是场态、零件有 `filings`、流没有自己的 `path`；每个铁屑零件和每条无路径的流都有 `state` 绑定；指南针方位的转轴方向；`clips` 不绑定；力箭头的零件、数输出、`when`。铁屑 / 场线写了 `states`（手写的生成数据）直接报错：引擎会算。
 
 ### 章节怎么写（`state`）
 

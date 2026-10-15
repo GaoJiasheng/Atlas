@@ -453,7 +453,7 @@
         "en": "Sample detail text. Tests the filings primitive: one instanced draw of needles, laid out again for each field state.",
         "zh": "示例详细说明。测试铁屑基本体：一次实例化绘制的细针，每个场态重新排一次。"
       },
-      "primitive": { "kind": "filings", "size": [0.7, 0.26], "count": 1800, "needle": [0.005, 0.0008], "saturate": 0.003, "at": [-0.8, -0.5185, 0.5], "color": "powder", "tint": "token:ink" },
+      "primitive": { "kind": "filings", "size": [0.7, 0.26], "count": 2400, "needle": [0.005, 0.0008], "saturate": 0.002, "at": [-0.8, -0.5185, 0.5], "color": "powder", "tint": "token:ink" },
       "extra": [{ "kind": "box", "size": [0.7, 0.001, 0.26], "at": [-0.8, -0.5195, 0.5], "color": "enamel" }],
       "connects": ["sample-magnet"],
       "level": "P3"
