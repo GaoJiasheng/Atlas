@@ -16,6 +16,9 @@ TOPIC = ROOT/TOPIC_NAME
 manifest = json.loads((TOPIC/'manifest.json').read_text())
 stats = {r['name']:r for r in json.loads((CACHE/f'{TOPIC_NAME}-build-stats.json').read_text())}
 summary = json.loads((CACHE/f'{TOPIC_NAME}-optimize-stats.json').read_text())
+if manifest.get('rig') is False:
+    from audit_static import audit
+    raise SystemExit(bool(audit(TOPIC_NAME)['flags']))
 rig = json.loads((TOPIC/'rig.json').read_text())
 sites = json.loads((TOPIC/'attachments.json').read_text())
 

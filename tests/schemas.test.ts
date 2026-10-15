@@ -245,11 +245,11 @@ describe('sample-space topic', () => {
 
   it('engine data parses', () => {
     const data = spaceSceneData.parse(loadData('sample-space'));
-    // 21 numbered parts, 3 mirrored twins and 3 glb twins (`bilateral.mesh`), the wall.
-    expect(data.parts.parts).toHaveLength(28);
+    // 26 numbered parts (5 on the magnet bench), 3 mirrored twins and 3 glb twins (`bilateral.mesh`), the wall.
+    expect(data.parts.parts).toHaveLength(33);
     expect(data.parts.parts.filter((p) => p.context)).toHaveLength(1);
-    expect(data.parts.groups).toHaveLength(5);
-    expect(data.parts.flows).toHaveLength(2);
+    expect(data.parts.groups).toHaveLength(6);
+    expect(data.parts.flows).toHaveLength(3);
     // 6 written + the leg's and the flexor's mirrored copies + the shoulder clip's right-side copy.
     expect(data.parts.animations).toHaveLength(9);
   });

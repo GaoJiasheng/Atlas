@@ -1,0 +1,231 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": {
+        "en": "Atlas design study, docs/25 and scripts/anatomy/digestive: a simplified adult male reference with 28 mesh nodes, 233,254 triangles and 2,089,100 bytes. Anatomy was selected, simplified and renamed from cached Z-Anatomy FBX; tube centrelines and _U coordinates were derived in the pipeline. Procedural tooth, stomach wall and villus specimens are separate teaching diagrams, with local scale bars.",
+        "zh": "Atlas 设计研究，见 docs/25 与 scripts/anatomy/digestive：简化的成年男性参考解剖，含 28 个网格节点、233,254 个三角形，文件 2,089,100 字节。网格从缓存的 Z-Anatomy FBX 中选取、简化并改名；管道中心线与 _U 坐标由管线生成。程序化牙齿、胃壁与绒毛标本是独立教学示意，有各自的比例尺。"
+      },
+      "note": {
+        "en": "Not physiological measurements. Particle speeds and staggered whole-organ contraction pulses are chosen for visibility, not a transit-time simulation or a travelling muscle wave. Mouth, saliva, helper-juice and absorption branches are schematic. Missing tube segments remain breaks. Jejunal paths omit reported source-wall overlap stations. Mesh lengths do not measure a living intestine. Rendering values: specimen enlargements ×6, ×10 and ×100; villus field 6 × 8 plus one cut specimen. Scene speeds in m/s: swallow 0.12, churn 0.05, small-gut 0.06, large-gut 0.03, saliva/bile/pancreatic 0.05, nutrient/water branches 0.025. Gullet pulse 0.5 Hz, scale [0.96, 1, 0.96]; gut sequence starts at 1 + i × 0.55 seconds, peaks 0.45 seconds later, resets 0.9 seconds after start, repeats every 7 seconds, scale [0.97, 1.015, 0.97]. Jaw oscillation 3 degrees at 0.8 Hz. Jejunal exclusions extend 8 mm either side of source overlap stations, leaving 7 runs; with the duodenum the small-gut flow has 8 separate paths.",
+        "zh": "不是生理实测。粒子速度与分时出现的整件器官收缩脉冲按可读性选定，不模拟真实通过时间，也不表示沿管壁传播的肌肉波。口腔、唾液、辅助器官消化液与吸收支路为示意。缺失的管段保持断开。空肠流避开报告中网格管壁重叠的位置。网格路径长度不能当作活体肠长。 渲染参数：标本放大 ×6、×10、×100；绒毛排列为 6 × 8，另有一个剖开标本。场景速度（米/秒）：吞咽 0.12、胃内 0.05、小肠 0.06、大肠 0.03、唾液/胆汁/胰液 0.05、营养与水吸收支路 0.025。食道脉冲 0.5 赫兹，缩放 [0.96, 1, 0.96]；肠道序列从第 1 + i × 0.55 秒开始，0.45 秒后达峰，开始后 0.9 秒复位，每 7 秒循环，缩放 [0.97, 1.015, 0.97]。下颌摆动 3 度、0.8 赫兹。空肠流在源重叠点两侧各去掉 8 毫米，余 7 段；加十二指肠后，小肠流共 8 条独立路径。"
+      }
+    },
+    {
+      "id": "S2",
+      "text": {
+        "en": "Ministry of Education Singapore. Science Teaching and Learning Syllabus, Primary Three to Six, 2023, Human System (Digestive System), P4, printed p. 53; P5 connections on p. 54.",
+        "zh": "新加坡教育部《小学三至六年级科学教学大纲》，2023 年，人体系统（消化系统），小四，印刷第 53 页；小五系统联系见第 54 页。"
+      },
+      "url": "https://www.moe.gov.sg/-/media/files/primary/syllabus/2023-primary-science.ashx",
+      "note": {
+        "en": "The official indexed PDF identifies the digestive, respiratory, circulatory, skeletal and muscular systems and the mouth, gullet, stomach, small intestine and large intestine. Detailed bone and muscle names and mechanisms are outside this P4 outcome. Helpers are labelled Further study.",
+        "zh": "官方索引的 PDF 列出消化、呼吸、循环、骨骼、肌肉系统，以及口、食道、胃、小肠、大肠。小四此项学习结果不要求骨骼和肌肉的详细名称与工作方式。辅助器官标为“再进一步”。"
+      }
+    },
+    {
+      "id": "S3",
+      "text": {
+        "en": "Betts J. G. et al. Anatomy and Physiology 2e. OpenStax, 2022, §23.1, Overview of the Digestive System.",
+        "zh": "Betts J. G. 等《解剖学与生理学》第 2 版，OpenStax，2022 年，第 23.1 节：消化系统总览。"
+      },
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-1-overview-of-the-digestive-system",
+      "note": {
+        "en": "Read online. Adult alimentary canal: about 7.62 m in life and 10.67 m after death, with loss of muscle tone; rounded here to 7.6 m and 10.7 m. Source for cooperation among body systems. Current textbook licence: CC BY-NC-SA 4.0; facts cited, no text or figures reproduced.",
+        "zh": "已读网页。成年人的消化道活体约 7.62 米，死后因肌张力消失约 10.67 米；本主题取约 7.6 米和 10.7 米。也用于身体系统合作。教材现行许可为 CC BY-NC-SA 4.0；引用事实，没有复制文字或图。"
+      }
+    },
+    {
+      "id": "S4",
+      "text": {
+        "en": "Betts et al. OpenStax Anatomy and Physiology 2e, §23.3, The Mouth, Pharynx, and Esophagus.",
+        "zh": "Betts 等，OpenStax《解剖学与生理学》第 2 版，第 23.3 节：口、咽与食道。"
+      },
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-3-the-mouth-pharynx-and-esophagus",
+      "note": {
+        "en": "Read online: chewing, saliva, tooth tissues, swallowing and peristalsis. Adult gullet about 25.4 cm; solid or semisolid swallowing about 4–8 seconds. The textbook describes 32 adult teeth, but this source model has 28 teeth without third molars.",
+        "zh": "已读网页：咀嚼、唾液、牙组织、吞咽与蠕动。成人食道约 25.4 厘米；固体或半固体食物的吞咽约 4–8 秒。教材写成年恒牙 32 颗；本参考网格只有 28 颗牙，没有第三磨牙。"
+      }
+    },
+    {
+      "id": "S5",
+      "text": {
+        "en": "Betts et al. OpenStax Anatomy and Physiology 2e, §23.4, The Stomach.",
+        "zh": "Betts 等，OpenStax《解剖学与生理学》第 2 版，第 23.4 节：胃。"
+      },
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-4-the-stomach",
+      "note": {
+        "en": "Read online. Stomach stretch capacity up to about 4 L, not a recommended meal size or a child-specific capacity. Typical meal emptying 2–4 hours, longer with some meals; full digestion 24–72 hours. Acidic contents pH 1.5–3.5; three muscle layers and protective mucus. The proposed empty volume was not used.",
+        "zh": "已读网页。胃扩张容量可达约 4 升，不是建议进食量，也不是儿童专用容量。一般一餐胃排空约 2–4 小时，有些餐更久；全程消化约 24–72 小时。胃内容物 pH 为 1.5–3.5，有三层肌肉和保护性黏液。未采用提案中的空胃容积。"
+      }
+    },
+    {
+      "id": "S6",
+      "text": {
+        "en": "Betts et al. OpenStax Anatomy and Physiology 2e, §23.5, The Small and Large Intestines.",
+        "zh": "Betts 等，OpenStax《解剖学与生理学》第 2 版，第 23.5 节：小肠与大肠。"
+      },
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-5-the-small-and-large-intestines",
+      "note": {
+        "en": "Read online. Living small intestine about 3.05 m (rounded to 3 m); villi about 0.5–1 mm long. Small-intestine passage about 3–5 hours; residue typically stays in the large intestine 12–24 hours. The textbook gives about 200 m² for small-intestine surface; compare S15 rather than treating it as an uncontested measurement.",
+        "zh": "已读网页。活体小肠约 3.05 米（取约 3 米）；绒毛长约 0.5–1 毫米。小肠通过约 3–5 小时；残余物通常在大肠停留 12–24 小时。教材给出小肠表面积约 200 平方米；与 S15 并列，不能当作没有争议的实测值。"
+      }
+    },
+    {
+      "id": "S7",
+      "text": {
+        "en": "Betts et al. OpenStax Anatomy and Physiology 2e, §23.6, Accessory Organs in Digestion: The Liver, Pancreas, and Gallbladder.",
+        "zh": "Betts 等，OpenStax《解剖学与生理学》第 2 版，第 23.6 节：消化辅助器官——肝、胰与胆囊。"
+      },
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-6-accessory-organs-in-digestion-the-liver-pancreas-and-gallbladder",
+      "note": {
+        "en": "Read online. Liver makes bile; gallbladder stores and releases it; pancreas supplies digestive juice to the duodenum. Bile disperses fat into droplets and is not an enzyme. Helper branches in the model show destinations, not measured duct courses.",
+        "zh": "已读网页。肝制造胆汁，胆囊储存和释放胆汁，胰把消化液送入十二指肠。胆汁使脂肪分散成小滴，本身不是酶。模型支路表示去向，不是实测导管路线。"
+      }
+    },
+    {
+      "id": "S8",
+      "text": {
+        "en": "Betts et al. OpenStax Anatomy and Physiology 2e, §23.7, Chemical Digestion and Absorption: A Closer Look.",
+        "zh": "Betts 等，OpenStax《解剖学与生理学》第 2 版，第 23.7 节：化学消化与吸收。"
+      },
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-7-chemical-digestion-and-absorption-a-closer-look",
+      "note": {
+        "en": "Read online. Digested nutrients cross the intestinal lining. Many enter blood directly; most dietary fat takes a lymph route first. About 9 L of fluid reaches the small intestine daily and about 90% of that water is absorbed there; the colon absorbs much of what remains.",
+        "zh": "已读网页。消化后的营养穿过肠壁，许多直接进入血液；大部分膳食脂肪先经淋巴。每天约 9 升液体进入小肠，其中约 90% 的水在小肠吸收，大肠吸收余下水分中的大部分。"
+      }
+    },
+    {
+      "id": "S9",
+      "text": {
+        "en": "US National Institute of Diabetes and Digestive and Kidney Diseases. Your Digestive System & How It Works.",
+        "zh": "美国国立糖尿病、消化与肾脏疾病研究所《消化系统及其工作方式》。"
+      },
+      "url": "https://www.niddk.nih.gov/health-information/digestive-diseases/digestive-system-how-it-works",
+      "note": {
+        "en": "Read online. Organ functions, peristalsis, digestive juices and nutrient absorption cross-check. This page supplies no fixed whole-meal travel time; timeline ranges use S5 and S6.",
+        "zh": "已读网页。用于核对器官功能、蠕动、消化液与营养吸收。此页未给固定的一餐通过时间；时间范围用 S5、S6。"
+      }
+    },
+    {
+      "id": "S10",
+      "text": {
+        "en": "Gray H. Anatomy of the Human Body, 20th edition, edited by W. H. Lewis. Philadelphia: Lea & Febiger, 1918. Splanchnology, digestive apparatus. Public-domain historical anatomy reference.",
+        "zh": "Gray H.《人体解剖学》第 20 版，W. H. Lewis 编，费城 Lea & Febiger，1918 年。内脏学：消化器。公有领域历史解剖参考。"
+      },
+      "url": "https://archive.org/details/anatomyofhumanbo1918gray",
+      "note": {
+        "en": "Archive catalogue verified. Automated scan/OCR access was unavailable in this pass; no unverified figure number or numerical physiology is attributed to Gray. Current functional explanations follow S3–S9.",
+        "zh": "已核档案目录。本轮无法自动读取扫描本或 OCR；不把未经核实的图号或生理数字归于格雷。现代功能说明依据 S3–S9。"
+      }
+    },
+    {
+      "id": "S11",
+      "text": {
+        "en": "Z-Anatomy: the open source atlas of anatomy, Gauthier Kervyn and collaborators. Cached FBX meshes supplied through the LluisV/Z-Anatomy project, CC BY-SA 4.0.",
+        "zh": "Z-Anatomy 开源解剖图谱，Gauthier Kervyn 与合作者。缓存 FBX 网格来自 LluisV/Z-Anatomy 项目，CC BY-SA 4.0。"
+      },
+      "url": "https://github.com/LluisV/Z-Anatomy",
+      "note": {
+        "en": "Repository licence and model provenance checked. Changes: structures selected for the digestive region and other body systems, simplified, renamed; centreline _U baked. No rig or clinical anatomical validation. Organ-by-organ upstream licence review remains pending; see SOURCES.md.",
+        "zh": "已核仓库许可与模型来源。改动：选取消化器官与其他身体系统结构，简化、改名，烘焙中心线 _U。没有骨架绑定，也不构成临床解剖验证。逐器官上游许可仍待发布前核对，见 SOURCES.md。"
+      }
+    },
+    {
+      "id": "S12",
+      "text": {
+        "en": "BodyParts3D, © The Database Center for Life Science. Official LSDB Archive licence, updated 27 February 2025: CC Attribution 4.0 International. Upstream anatomy data used by Z-Anatomy.",
+        "zh": "BodyParts3D，© 生命科学数据库中心（DBCLS）。LSDB 官方存档许可于 2025 年 2 月 27 日更新为 CC BY 4.0，是 Z-Anatomy 所用上游解剖数据。"
+      },
+      "url": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html",
+      "note": {
+        "en": "Official licence page read. The cached Z-Anatomy attribution retains its historical CC-BY-SA 2.1 Japan wording; this does not replace the derived Z-Anatomy model’s CC BY-SA 4.0 licence.",
+        "zh": "已读官方许可页。缓存 Z-Anatomy 的署名保留历史上的 CC-BY-SA 2.1 Japan 字样；这不会取代 Z-Anatomy 派生模型的 CC BY-SA 4.0 许可。"
+      }
+    },
+    {
+      "id": "S13",
+      "text": {
+        "en": "Health Promotion Board, Singapore. Plan Your Meals with My Healthy Plate. HealthHub.",
+        "zh": "新加坡保健促进局《用 My Healthy Plate 规划膳食》，HealthHub。"
+      },
+      "url": "https://www.healthhub.sg/well-being-and-lifestyle/food-diet-and-nutrition/plan-your-meals-with-my-healthy-plate",
+      "note": {
+        "en": "Read online. Plate guide: one quarter wholegrains, one quarter lean meat and other protein foods, half fruit and non-starchy vegetables. Used only in Further study; the chicken-rice story makes no nutritional judgement about the pictured meal.",
+        "zh": "已读网页。餐盘指南：四分之一全谷物、四分之一瘦肉及其他蛋白质食物、一半水果与非淀粉类蔬菜。只用于“再进一步”；鸡饭旅程不评价图中这餐的营养。"
+      }
+    },
+    {
+      "id": "S14",
+      "text": {
+        "en": "Health Promotion Board, Singapore. Boost Your Health: The Essential Benefits of Dietary Fiber (More Fibre for a Fit and Fabulous You). HealthHub.",
+        "zh": "新加坡保健促进局《膳食纤维的益处》（More Fibre for a Fit and Fabulous You），HealthHub。"
+      },
+      "url": "https://www.healthhub.sg/well-being-and-lifestyle/food-diet-and-nutrition/more-fibre-for-a-fit-and-fabulous-you",
+      "note": {
+        "en": "Read online. Fibre from plant foods supports bowel movements; soluble fibre absorbs water and softens stools, while insoluble fibre adds bulk. No adult daily gram target is transferred to P4 children.",
+        "zh": "已读网页。植物食物中的纤维有助排便；可溶性纤维吸水，使粪便较软；不可溶性纤维增加体积。不把成人每日克数目标套用于小四儿童。"
+      }
+    },
+    {
+      "id": "S15",
+      "text": {
+        "en": "Helander H. F. and Fändriks L. Surface area of the digestive tract – revisited. Scandinavian Journal of Gastroenterology 49(6): 681–689, 2014. doi:10.3109/00365521.2014.898326.",
+        "zh": "Helander H. F.、Fändriks L.《重新评估消化道表面积》，Scandinavian Journal of Gastroenterology，49(6): 681–689，2014 年。"
+      },
+      "url": "https://pubmed.ncbi.nlm.nih.gov/24694282/?dopt=Abstract",
+      "note": {
+        "en": "Abstract read. Morphometric review estimates mean total adult gut mucosal area about 32 m², including about 2 m² for the large intestine. This differs in scope and estimation method from S6’s textbook figure of 200 m² for the small intestine. Neither is measured from this mesh.",
+        "zh": "已读摘要。形态测量综述估计成人全消化道黏膜平均约 32 平方米，其中大肠约 2 平方米；范围和估算方法与 S6 小肠约 200 平方米的教材值不同。两者都不是从本网格量得。"
+      }
+    },
+    {
+      "id": "S16",
+      "text": {
+        "en": "Hounnou G., Destrieux C., Desmé J., Bertrand P. and Velut S. Anatomical study of the length of the human intestine. Surgical and Radiologic Anatomy 24(5): 290–294, 2002. doi:10.1007/s00276-002-0057-y.",
+        "zh": "Hounnou G. 等《人体肠道长度的解剖学研究》，Surgical and Radiologic Anatomy，24(5): 290–294，2002 年。"
+      },
+      "url": "https://pubmed.ncbi.nlm.nih.gov/12497219/",
+      "note": {
+        "en": "Indexed abstract read. Post-mortem whole-intestine mean 795.5 ± 129 cm, with variation by age and sex. This is intestine rather than mouth-to-anus canal, and post-mortem rather than living length; it is not substituted for S3.",
+        "zh": "已读索引摘要。死后全肠平均长 795.5 ± 129 厘米，随年龄、性别而异。此处量的是肠，不是从口到出口的全消化道；也是死后而非活体长度，不用来替换 S3。"
+      }
+    },
+    {
+      "id": "S17",
+      "text": {
+        "en": "Clark M. A., Douglas M. and Choi J. Biology 2e. OpenStax, 2018, §34.1, Digestive Systems.",
+        "zh": "Clark M. A.、Douglas M.、Choi J.《生物学》第 2 版，OpenStax，2018 年，第 34.1 节：消化系统。"
+      },
+      "url": "https://openstax.org/books/biology-2e/pages/34-1-digestive-systems",
+      "note": {
+        "en": "Read online for the human tube plan and physical versus chemical digestion. Its different numerical conventions and wording about enzymes from the liver are not adopted; bile and pancreatic functions follow the more specific S7.",
+        "zh": "已读网页，用于人体管道总览、物理与化学消化的区分。不采用该页不同的数值口径及“肝产生酶”的表述；胆汁和胰液功能依照更具体的 S7。"
+      }
+    },
+    {
+      "id": "S18",
+      "text": {
+        "en": "US National Library of Medicine. Digestive System. MedlinePlus organ index.",
+        "zh": "美国国家医学图书馆《消化系统》，MedlinePlus 器官索引。"
+      },
+      "url": "https://medlineplus.gov/digestivesystem.html",
+      "note": {
+        "en": "Read online. Cross-check of the named digestive organs and the separate rectum/anus labels. An index rather than a quantitative physiology source.",
+        "zh": "已读网页。用于核对消化器官名称，以及直肠与肛门应分别命名。此页是索引，不用于生理数字。"
+      }
+    },
+    {
+      "id": "S19",
+      "text": {
+        "en": "Health Promotion Board, Singapore. Singapore’s First Let’s Drink Water Campaign Encourages Children and Teens to Consume More Water and Less Sugary Drinks. 30 August 2012.",
+        "zh": "新加坡保健促进局《首个 Let’s Drink Water 活动鼓励儿童与青少年多喝水、少喝含糖饮料》，2012 年 8 月 30 日。"
+      },
+      "url": "https://www.hpb.gov.sg/newsroom/singapore-s-first-let-s-drink-water-campaign-encourages-children-and-teens-to-consume-more-water-and-less-sugary-drinks/",
+      "note": {
+        "en": "Official release read: encourages school-going children to replace sugary drinks with water and stay hydrated. The preschool-specific glass count is not used for P4 pupils.",
+        "zh": "已读官方发布：鼓励学龄儿童以水代替含糖饮料，并补充足够水分。不把学前儿童杯数套用于小四学生。"
+      }
+    }
+  ]
+}

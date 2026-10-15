@@ -8,10 +8,13 @@
  * path at its own speed and direction (a circuit's current per edge; a path
  * with no current fades out) and recolour it while a state holds (a short
  * circuit runs hot). A flow with `clip: false` ignores the cutaway plane.
+ * A field-line flow (a `state` binding, lib/sim/field.ts) runs along the
+ * lines of the magnet field state on show, drawn under the particles as
+ * hairlines in the flow's colour (one more draw call); a new state fades in.
  */
 import { useEffect, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { BufferAttribute, BufferGeometry, type PerspectiveCamera, type Plane, type Points } from 'three';
+import { BufferAttribute, BufferGeometry, LineBasicMaterial, type LineSegments, type PerspectiveCamera, type Plane, type Points } from 'three';
 import type { Flow } from '../../schema';
 import { bakeFlowPath, particlesPerPath, type BakedFlow } from '../../lib/flow-curve';
 import { resolveDataColor } from '../../lib/color';
@@ -69,6 +72,28 @@ function particleGeometry(perPath: readonly number[], seed: number, spread: Flow
 
 /** Fade rate of a path whose current starts or stops (~0.3 s). */
 const PATH_FADE = 10;
+/** Field lines' hairline opacity under their particles. */
+const FIELD_LINE_OPACITY = 0.45;
+
+type FlowPath = { id: string; path: readonly (readonly number[])[] };
+
+/** Line segments of polylines (one geometry: one draw call). */
+function hairlines(paths: readonly FlowPath[]): BufferGeometry {
+  const n = paths.reduce((k, p) => k + Math.max(0, p.path.length - 1), 0);
+  const pos = new Float32Array(n * 6);
+  let o = 0;
+  for (const p of paths)
+    for (let i = 1; i < p.path.length; i++) {
+      const a = p.path[i - 1]!;
+      const b = p.path[i]!;
+      pos.set([a[0]!, a[1]!, a[2]!, b[0]!, b[1]!, b[2]!], o);
+      o += 6;
+    }
+  const g = new BufferGeometry();
+  g.setAttribute('position', new BufferAttribute(pos, 3));
+  g.computeBoundingSphere();
+  return g;
+}
 
 function FlowParticles({
   flow,
@@ -77,6 +102,7 @@ function FlowParticles({
   look,
   clipping,
   effect,
+  fieldLines,
 }: {
   flow: Flow;
   index: number;
@@ -84,11 +110,41 @@ function FlowParticles({
   look: StageLook;
   clipping: Plane[] | null;
   effect: SimFlowEffect | undefined;
+  fieldLines: ((state: string) => readonly FlowPath[]) | undefined;
+}) {
+  const field = effect?.state ?? null;
+  const paths = useMemo<readonly FlowPath[]>(
+    () => (field !== null && fieldLines ? fieldLines(field) : (flow.paths ?? (flow.path.length >= 2 ? [{ id: flow.id, path: flow.path }] : []))),
+    [field, fieldLines, flow.paths, flow.id, flow.path],
+  );
+  if (paths.length === 0) return null;
+  return <FlowPaths flow={flow} index={index} layerOn={layerOn} look={look} clipping={clipping} effect={effect} paths={paths} lines={field !== null} />;
+}
+
+function FlowPaths({
+  flow,
+  index,
+  layerOn,
+  look,
+  clipping,
+  effect,
+  paths,
+  lines,
+}: {
+  flow: Flow;
+  index: number;
+  layerOn: boolean;
+  look: StageLook;
+  clipping: Plane[] | null;
+  effect: SimFlowEffect | undefined;
+  paths: readonly FlowPath[];
+  /** Draw the paths as hairlines too (field lines). */
+  lines: boolean;
 }) {
   const runtime = useRuntime();
   const ref = useRef<Points>(null);
+  const lineRef = useRef<LineSegments>(null);
   const fade = useRef(0);
-  const paths = useMemo(() => flow.paths ?? [{ id: flow.id, path: flow.path }], [flow.paths, flow.id, flow.path]);
   const baked = useMemo<BakedFlow[]>(() => paths.map((p) => bakeFlowPath(p.path)), [paths]);
   const perPath = useMemo(() => particlesPerPath(baked.map((b) => b.length), flow.count), [baked, flow.count]);
   const material = useMemo(() => createFlowMaterial(baked, flow.ends === 'open'), [baked, flow.ends]);
@@ -97,9 +153,18 @@ function FlowParticles({
   const state = useRef(paths.map(() => ({ phase: 0, alpha: 1 })));
   useEffect(() => {
     state.current = paths.map(() => ({ phase: 0, alpha: 1 }));
-  }, [paths]);
+    // A new set of field lines fades in.
+    if (lines) fade.current = 0;
+  }, [paths, lines]);
   useEffect(() => () => material.dispose(), [material]);
   useEffect(() => () => geometry.dispose(), [geometry]);
+  const lineGeometry = useMemo(() => (lines ? hairlines(paths) : null), [lines, paths]);
+  const lineMaterial = useMemo(() => (lines ? new LineBasicMaterial({ transparent: true, depthWrite: false, toneMapped: false }) : null), [lines]);
+  useEffect(() => () => lineGeometry?.dispose(), [lineGeometry]);
+  useEffect(() => () => lineMaterial?.dispose(), [lineMaterial]);
+  useEffect(() => {
+    lineMaterial?.color.set(resolveDataColor(flow.color, look.tokens, look.theme));
+  }, [lineMaterial, flow.color, look]);
 
   const color = effect?.color ?? null;
   useEffect(() => {
@@ -113,7 +178,11 @@ function FlowParticles({
 
   useEffect(() => {
     material.clippingPlanes = flow.clip ? clipping : null;
-  }, [material, clipping, flow.clip]);
+    if (lineMaterial) {
+      lineMaterial.clippingPlanes = flow.clip ? clipping : null;
+      lineMaterial.needsUpdate = true;
+    }
+  }, [material, lineMaterial, clipping, flow.clip]);
 
   const visible = effect?.visible ?? true;
   const speeds = effect?.paths ?? null;
@@ -149,10 +218,19 @@ function FlowParticles({
     const fov = ((cam.fov ?? 40) * Math.PI) / 180;
     u.uScale.value = (st.size.height * st.viewport.dpr) / (2 * Math.tan(fov / 2));
     if (ref.current) ref.current.visible = fade.current > 0;
+    if (lineRef.current && lineMaterial) {
+      lineRef.current.visible = fade.current > 0;
+      lineMaterial.opacity = Math.min(1, fade.current) * FIELD_LINE_OPACITY;
+    }
     if (fade.current > 0 || strength > 0 || easing) keepAnimating(st.invalidate);
   });
 
-  return <points ref={ref} geometry={geometry} material={material} frustumCulled={false} dispose={null} visible={false} />;
+  return (
+    <>
+      {lineGeometry && lineMaterial && <lineSegments ref={lineRef} geometry={lineGeometry} material={lineMaterial} dispose={null} visible={false} />}
+      <points ref={ref} geometry={geometry} material={material} frustumCulled={false} dispose={null} visible={false} />
+    </>
+  );
 }
 
 export function Flows({
@@ -161,6 +239,7 @@ export function Flows({
   look,
   clipping,
   effects,
+  fieldLines,
 }: {
   flows: readonly Flow[];
   layers: readonly string[];
@@ -168,6 +247,8 @@ export function Flows({
   clipping: Plane[] | null;
   /** Try-it bindings per flow id (lib/sim/bind.ts). */
   effects?: ReadonlyMap<string, SimFlowEffect>;
+  /** A field state's lines (a field-line flow's paths). */
+  fieldLines?: (state: string) => readonly FlowPath[];
 }) {
   return (
     <>
@@ -180,6 +261,7 @@ export function Flows({
           look={look}
           clipping={clipping}
           effect={effects?.get(flow.id)}
+          fieldLines={fieldLines}
         />
       ))}
     </>

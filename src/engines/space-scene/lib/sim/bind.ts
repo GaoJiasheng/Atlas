@@ -1,12 +1,15 @@
 /**
  * Try-it bindings → what the stage shows (docs/22 §4.3 S4; pure, unit-tested).
  * The stage applies these on top of the chapter state: visibility, a pose per
- * part (on top of the chapter / beat pose), glow, a count of `repeat` copies,
- * an offset or turn, an animation's speed or on / off, and per flow its
- * visibility, per-path intensity and colour.
+ * part (on top of the chapter / beat pose), glow, tint, a count of `repeat`
+ * copies, an offset (along an axis or to a ring position) or turn (with a
+ * damped swing, about a pivot), the field state a filings part lays out, an
+ * animation's speed or on / off, and per flow its visibility, per-path
+ * intensity, colour and field state.
  */
-import type { SimBind, SimCondition, SimData, SimValue, SimValues } from '../../sim-schema';
+import type { SimBind, SimCondition, SimData, SimSettle, SimValue, SimValues } from '../../sim-schema';
 import type { SimOutputs, SimOutputValue } from './index';
+import { ringPoint } from './magnet';
 import { normalize3, type Vec3 } from '../math';
 
 export interface SimGlow {
@@ -23,6 +26,17 @@ export interface SimFlowEffect {
   paths: Record<string, number> | null;
   /** Particle colour ref while a state asks for one, else null (the flow's own). */
   color: string | null;
+  /** The field state whose lines the flow runs along (a `state` binding), else null. */
+  state: string | null;
+}
+
+/** A try-it turn: about a unit axis, degrees, with an optional damped swing. */
+export interface SimTurn {
+  axis: Vec3;
+  deg: number;
+  settle?: SimSettle;
+  /** A scene point the turn is about (the part's posed centre without one). */
+  pivot?: Vec3;
 }
 
 export interface SimEffects {
@@ -31,12 +45,16 @@ export interface SimEffects {
   /** Parts a `pose` binding moves: the pose name (null: rest). */
   poses: Map<string, string | null>;
   glow: Map<string, SimGlow>;
+  /** Tint toward a colour ref, level 0–1. */
+  tint: Map<string, SimGlow>;
   /** Copies of a `repeat` part on show. */
   count: Map<string, number>;
   /** Scene-unit offset per part. */
   offset: Map<string, Vec3>;
-  /** Turn about a unit axis through the part centre, degrees. */
-  rotate: Map<string, { axis: Vec3; deg: number }>;
+  /** Turn about a unit axis through the part centre or a pivot, degrees. */
+  rotate: Map<string, SimTurn>;
+  /** The field state each filings part lays out. */
+  states: Map<string, string>;
   /** Per animation id: rpm (a rotate's speed) and whether it plays. */
   animations: Map<string, { rpm?: number; enabled: boolean }>;
   flows: Map<string, SimFlowEffect>;
@@ -67,14 +85,22 @@ export function holds(cond: SimCondition, v: SimValue | SimOutputValue | undefin
 
 const num = (v: SimValue | SimOutputValue | undefined) => (typeof v === 'number' ? v : typeof v === 'boolean' ? (v ? 1 : 0) : 0);
 
+/** Offsets of several bindings on one part add up. */
+function add(map: Map<string, Vec3>, id: string, d: Vec3): void {
+  const o = map.get(id);
+  map.set(id, o ? [o[0] + d[0], o[1] + d[1], o[2] + d[2]] : d);
+}
+
 export function simEffects(sim: SimData, values: SimValues, outputs: SimOutputs): SimEffects {
   const out: SimEffects = {
     hidden: new Set(),
     poses: new Map(),
     glow: new Map(),
+    tint: new Map(),
     count: new Map(),
     offset: new Map(),
     rotate: new Map(),
+    states: new Map(),
     animations: new Map(),
     flows: new Map(),
   };
@@ -96,16 +122,36 @@ export function simEffects(sim: SimData, values: SimValues, outputs: SimOutputs)
           const x = Math.min(MAX_GLOW, Math.max(0, num(v) / b.glow.full));
           out.glow.set(id, { color: b.glow.color, level: b.glow.curve === 'sqrt' ? Math.sqrt(x) : x });
         }
-        if (b.count) out.count.set(id, Math.max(0, Math.round(num(v) * b.count.per)));
+        if (b.tint) {
+          const x = Math.min(1, Math.max(0, num(v) / b.tint.full));
+          out.tint.set(id, { color: b.tint.color, level: b.tint.curve === 'sqrt' ? Math.sqrt(x) : x });
+        }
+        if (b.count) out.count.set(id, Math.max(0, Math.round(num(v) * (b.count === true ? 1 : b.count.per))));
         if (b.offset) {
           const d = (num(v) - b.offset.origin) * b.offset.per;
           const a = normalize3(b.offset.axis);
-          out.offset.set(id, [a[0] * d, a[1] * d, a[2] * d]);
+          add(out.offset, id, [a[0] * d, a[1] * d, a[2] * d]);
         }
-        if (b.rotate) out.rotate.set(id, { axis: normalize3(b.rotate.axis), deg: (num(v) - b.rotate.origin) * b.rotate.per });
+        if (b.at !== undefined) {
+          const ring = sim.magnet?.rings?.[b.at];
+          const c = sim.controls.find((x) => x.id === b.control);
+          if (ring && c?.kind === 'step') {
+            const to = ringPoint(ring, num(v));
+            const from = ringPoint(ring, c.default);
+            add(out.offset, id, [to[0] - from[0], to[1] - from[1], to[2] - from[2]]);
+          }
+        }
+        if (b.rotate) {
+          const turn: SimTurn = { axis: normalize3(b.rotate.axis), deg: (num(v) - b.rotate.origin) * b.rotate.per };
+          if (b.rotate.settle) turn.settle = b.rotate.settle;
+          if (b.rotate.pivot) turn.pivot = b.rotate.pivot;
+          out.rotate.set(id, turn);
+        }
+        if (b.state && typeof v === 'string') out.states.set(id, v);
       }
     } else if ('flow' in b) {
-      const f = out.flows.get(b.flow) ?? { visible: true, paths: null, color: null };
+      const f = out.flows.get(b.flow) ?? { visible: true, paths: null, color: null, state: null };
+      if (b.state && typeof v === 'string') f.state = v;
       if (b.visible !== undefined && !holds(b.visible, v, first)) f.visible = false;
       if (b.intensity && v !== undefined && typeof v === 'object') {
         const full = b.intensity.full;

@@ -413,6 +413,80 @@
       "material": { "color": "tissue", "tint": "token:bone" },
       "bilateral": { "axis": "x", "mesh": "sample-lower.r" },
       "level": "P5"
+    },
+    {
+      "id": "sample-magnet",
+      "name": { "en": "Sample bar magnet", "zh": "示例条形磁铁" },
+      "group": "sample-field",
+      "summary": { "en": "A placeholder bar magnet under the filings card.", "zh": "压在铁屑卡片下面的一根占位条形磁铁。" },
+      "detail": {
+        "en": "Sample detail text. Tests the magnet model: a Gilbert pole pair whose field lays out the filings and turns the compass needle.",
+        "zh": "示例详细说明。测试磁铁模型：一对磁荷，它的场排出铁屑、转动指南针的针。"
+      },
+      "primitive": { "kind": "bevelBox", "size": [0.08, 0.02, 0.04], "bevel": 0.004, "at": [-0.99, -0.53, 0.5], "color": "steel", "tint": "token:cold" },
+      "extra": [{ "kind": "bevelBox", "size": [0.08, 0.02, 0.04], "bevel": 0.004, "at": [-0.91, -0.53, 0.5], "color": "steel", "tint": "token:hot" }],
+      "explode": { "dir": [0, 1, 0], "dist": 0.12 },
+      "connects": ["sample-filings"],
+      "level": "P3"
+    },
+    {
+      "id": "sample-magnet-b",
+      "name": { "en": "Sample second magnet", "zh": "示例第二根磁铁" },
+      "group": "sample-field",
+      "summary": { "en": "A placeholder magnet that slides and turns round.", "zh": "能滑动、能调头的一根占位磁铁。" },
+      "detail": {
+        "en": "Sample detail text. Tests the gap offset, the turned-round pose and the force arrows between two magnets.",
+        "zh": "示例详细说明。测试间隙位移、调头姿态和两根磁铁之间的力箭头。"
+      },
+      "primitive": { "kind": "bevelBox", "size": [0.08, 0.02, 0.04], "bevel": 0.004, "at": [-0.68, -0.53, 0.5], "color": "steel", "tint": "token:cold" },
+      "extra": [{ "kind": "bevelBox", "size": [0.08, 0.02, 0.04], "bevel": 0.004, "at": [-0.6, -0.53, 0.5], "color": "steel", "tint": "token:hot" }],
+      "explode": { "dir": [1, 0, 0], "dist": 0.12 },
+      "connects": ["sample-magnet"],
+      "level": "P3"
+    },
+    {
+      "id": "sample-filings",
+      "name": { "en": "Sample filings card", "zh": "示例铁屑卡片" },
+      "group": "sample-field",
+      "summary": { "en": "Placeholder filings that line up with the field.", "zh": "顺着磁场排列的占位铁屑。" },
+      "detail": {
+        "en": "Sample detail text. Tests the filings primitive: one instanced draw of needles, laid out again for each field state.",
+        "zh": "示例详细说明。测试铁屑基本体：一次实例化绘制的细针，每个场态重新排一次。"
+      },
+      "primitive": { "kind": "filings", "size": [0.7, 0.26], "count": 1800, "needle": [0.005, 0.0008], "saturate": 0.003, "at": [-0.8, -0.5185, 0.5], "color": "powder", "tint": "token:ink" },
+      "extra": [{ "kind": "box", "size": [0.7, 0.001, 0.26], "at": [-0.8, -0.5195, 0.5], "color": "enamel" }],
+      "connects": ["sample-magnet"],
+      "level": "P3"
+    },
+    {
+      "id": "sample-compass",
+      "name": { "en": "Sample compass", "zh": "示例指南针" },
+      "group": "sample-field",
+      "summary": { "en": "A placeholder compass case on a ring of positions.", "zh": "放在一圈位置上的占位指南针外壳。" },
+      "detail": {
+        "en": "Sample detail text. Tests the ring binding: the step control moves the case and its needle round the magnet.",
+        "zh": "示例详细说明。测试位置环绑定：步进控件把外壳和针绕着磁铁移动。"
+      },
+      "primitive": { "kind": "cylinder", "size": [0.025, 0.025, 0.008], "at": [-0.95, -0.514, 0.62], "color": "brass" },
+      "explode": { "dir": [0, 1, 0], "dist": 0.08 },
+      "connects": ["sample-needle"],
+      "level": "P3"
+    },
+    {
+      "id": "sample-needle",
+      "name": { "en": "Sample compass needle", "zh": "示例指南针针" },
+      "group": "sample-field",
+      "summary": { "en": "A placeholder needle that swings and settles.", "zh": "摆几下再停住的占位磁针。" },
+      "detail": {
+        "en": "Sample detail text. Tests the settle binding: the needle swings to the field direction at its position and comes to rest.",
+        "zh": "示例详细说明。测试阻尼摆动绑定：针转向所在位置的场方向，摆几下后停住。"
+      },
+      "primitive": { "kind": "extrude", "shape": [[0, 0], [0.004, -0.002], [0, -0.021], [-0.004, -0.002]], "depth": 0.0015, "rotation": [90, 0, 0], "at": [-0.95, -0.508, 0.62], "color": "steel", "tint": "token:hot" },
+      "extra": [{ "kind": "extrude", "shape": [[0, 0], [0.004, 0.002], [0, 0.021], [-0.004, 0.002]], "depth": 0.0015, "rotation": [90, 0, 0], "at": [-0.95, -0.508, 0.62], "color": "steel", "tint": "token:cold" }],
+      "castShadow": false,
+      "explode": { "dir": [0, 1, 0], "dist": 0.12 },
+      "connects": ["sample-compass"],
+      "level": "P3"
     }
   ],
   "groups": [
@@ -420,7 +494,8 @@
     { "id": "sample-drive", "name": { "en": "Sample drive", "zh": "示例驱动" }, "color": "token:accent-1" },
     { "id": "sample-loop", "name": { "en": "Sample loop", "zh": "示例回路" }, "color": "token:accent-2" },
     { "id": "sample-organic", "name": { "en": "Sample organism", "zh": "示例生物" }, "color": "token:food" },
-    { "id": "sample-limb", "name": { "en": "Sample limb", "zh": "示例肢体" }, "color": "token:muscle-1" }
+    { "id": "sample-limb", "name": { "en": "Sample limb", "zh": "示例肢体" }, "color": "token:muscle-1" },
+    { "id": "sample-field", "name": { "en": "Sample field", "zh": "示例磁场" }, "color": "token:accent-3" }
   ],
   "flows": [
     {
@@ -463,6 +538,17 @@
       ],
       "parts": ["sample-pipe", "sample-flange", "sample-tank", "sample-pod", "sample-ball"],
       "whenRun": true
+    },
+    {
+      "id": "sample-field-lines",
+      "group": "sample-field",
+      "speed": 0.03,
+      "color": "token:accent-3",
+      "count": 240,
+      "size": 0.3,
+      "spread": 0,
+      "clip": false,
+      "whenRun": false
     }
   ],
   "animations": [
@@ -511,6 +597,9 @@
       "sample-wing": { "pivot": [-0.04, 0.71, 0.02], "rotation": [-14, 0, 0], "fan": 1 },
       "sample-leg": { "pivot": [0.1, 0.58, 0.05], "rotation": [0, 0, 14] }
     },
+    "sample-b-turned": {
+      "sample-magnet-b": { "pivot": [-0.64, -0.53, 0.5], "rotation": [0, 180, 0] }
+    },
     "sample-curl": {
       "joint:elbow.l": { "flexion": 100 },
       "joint:shoulder.l": { "flexion": 15 },
@@ -550,8 +639,85 @@
   "telemetry": [
     { "key": { "en": "Drum", "zh": "滚筒" }, "unit": "rpm", "idle": 0, "run": 60, "lag": 2 },
     { "key": { "en": "Loop temp.", "zh": "回路温度" }, "unit": "°C", "idle": 20, "run": 45.5, "lag": 6 },
-    { "key": { "en": "Power", "zh": "功率" }, "unit": "kW", "idle": 0, "run": 0.65, "lag": 2 }
+    { "key": { "en": "Power", "zh": "功率" }, "unit": "kW", "idle": 0, "run": 0.65, "lag": 2 },
+    { "key": { "en": "Pull", "zh": "吸力" }, "unit": "%", "follow": "force" },
+    { "key": { "en": "Needle", "zh": "磁针" }, "unit": "°", "follow": "needle-bearing" }
   ],
+  "sim": {
+    "kind": "magnet",
+    "controls": [
+      { "id": "pair", "kind": "toggle", "label": { "en": "Second magnet", "zh": "第二根磁铁" }, "default": false },
+      { "id": "gap", "kind": "step", "label": { "en": "Gap", "zh": "间隙" }, "values": [3, 2, 1], "default": 3 },
+      {
+        "id": "facing",
+        "kind": "choice",
+        "label": { "en": "Facing poles", "zh": "相对的极" },
+        "options": [
+          { "id": "ns", "label": { "en": "N–S", "zh": "北–南" } },
+          { "id": "nn", "label": { "en": "N–N", "zh": "北–北" } }
+        ],
+        "default": "ns"
+      },
+      { "id": "compass-at", "kind": "step", "label": { "en": "Compass position", "zh": "指南针位置" }, "values": [1, 2, 3, 4, 5, 6, 7, 8], "default": 1 }
+    ],
+    "outputs": [
+      { "id": "force", "label": { "en": "Pull (+) or push (−)", "zh": "吸（+）斥（−）" }, "unit": "%", "decimals": 0 },
+      { "id": "needle-bearing", "label": { "en": "Needle", "zh": "磁针" }, "unit": "°", "decimals": 0 },
+      {
+        "id": "field-state",
+        "kind": "state",
+        "label": { "en": "Pattern", "zh": "图样" },
+        "states": {
+          "ns-3": { "en": "N–S · far", "zh": "北–南 · 远" },
+          "ns-2": { "en": "N–S · nearer", "zh": "北–南 · 较近" },
+          "ns-1": { "en": "N–S · near", "zh": "北–南 · 近" },
+          "nn-3": { "en": "N–N · far", "zh": "北–北 · 远" },
+          "nn-2": { "en": "N–N · nearer", "zh": "北–北 · 较近" },
+          "nn-1": { "en": "N–N · near", "zh": "北–北 · 近" },
+          "single": { "en": "One magnet", "zh": "一根磁铁" }
+        }
+      }
+    ],
+    "bind": [
+      { "control": "pair", "part": "sample-magnet-b", "visible": true },
+      { "control": "pair", "part": ["sample-compass", "sample-needle"], "visible": { "eq": false } },
+      { "control": "gap", "part": "sample-magnet-b", "offset": { "axis": [1, 0, 0], "per": 0.05, "origin": 3 } },
+      { "control": "facing", "part": "sample-magnet-b", "pose": { "ns": null, "nn": "sample-b-turned" } },
+      { "control": "compass-at", "part": ["sample-compass", "sample-needle"], "at": "sample-ring" },
+      { "output": "needle-bearing", "part": "sample-needle", "rotate": { "axis": [0, -1, 0], "settle": { "period": 1.2, "damping": 0.3 } } },
+      { "output": "field-state", "part": "sample-filings", "state": true },
+      { "output": "field-state", "flow": "sample-field-lines", "state": true }
+    ],
+    "overlays": [
+      { "kind": "force-arrows", "between": ["sample-magnet", "sample-magnet-b"], "output": "force", "length": 0.07, "lift": 0.03, "when": { "control": "pair" } }
+    ],
+    "magnet": {
+      "magnets": [
+        { "id": "a", "north": [-0.8828, -0.53, 0.5], "south": [-1.0172, -0.53, 0.5], "moment": 4 },
+        {
+          "id": "b",
+          "north": [-0.5728, -0.53, 0.5],
+          "south": [-0.7072, -0.53, 0.5],
+          "moment": 4,
+          "move": { "control": "gap", "axis": [1, 0, 0], "per": 0.05, "origin": 3 },
+          "flip": { "control": "facing", "when": ["nn"] }
+        }
+      ],
+      "reference": 1,
+      "earth": { "uT": 40, "north": [0, 0, -1] },
+      "rings": { "sample-ring": { "center": [-0.95, -0.514, 0.5], "radius": 0.12, "count": 8 } },
+      "plane": { "center": [-0.8, -0.5175, 0.5], "size": [0.7, 0.26] },
+      "fields": {
+        "ns-3": { "magnets": ["a", "b"], "when": { "pair": true, "facing": "ns", "gap": 3 } },
+        "ns-2": { "magnets": ["a", "b"], "when": { "pair": true, "facing": "ns", "gap": 2 } },
+        "ns-1": { "magnets": ["a", "b"], "when": { "pair": true, "facing": "ns", "gap": 1 } },
+        "nn-3": { "magnets": ["a", "b"], "when": { "pair": true, "facing": "nn", "gap": 3 } },
+        "nn-2": { "magnets": ["a", "b"], "when": { "pair": true, "facing": "nn", "gap": 2 } },
+        "nn-1": { "magnets": ["a", "b"], "when": { "pair": true, "facing": "nn", "gap": 1 } },
+        "single": { "magnets": ["a"] }
+      }
+    }
+  },
   "presets": [
     { "id": "sample-left", "label": { "en": "Left", "zh": "左前" }, "camera": { "position": [-2.4, 1.0, 2.6], "target": [-0.1, -0.3, 0], "fov": 34 } },
     { "id": "sample-above", "label": { "en": "Top", "zh": "俯视" }, "camera": { "position": [0.16, 2.55, 0.35], "target": [0.16, 0.62, 0], "fov": 34 } }

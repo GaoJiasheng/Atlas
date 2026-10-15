@@ -1,0 +1,16 @@
+# MOE P3 Interaction of Forces (Magnets); docs/22, final decisions 2026-10-15.
+id: magnets
+title: { en: "Magnets", zh: "磁" }
+subtitle: { en: "Push, pull and fair tests on a science bench", zh: "在科学实验台上探究推、拉与公平测试" }
+subject: science
+tags: [science, space]
+moe: []
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: draft
+illustration: magnets
+shortTitle: { en: "Magnets", zh: "磁" }
+note: { en: "Generic design study · a school science bench · not a specific product", zh: "通用设计研究 · 小学科学实验台 · 不代表任何具体产品" }

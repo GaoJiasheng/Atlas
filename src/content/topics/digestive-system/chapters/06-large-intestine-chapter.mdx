@@ -1,0 +1,124 @@
+---
+id: large-intestine-chapter
+order: 6
+title:
+  en: The large intestine and the way out
+  zh: 大肠与出口
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: true
+  cutaway: none
+  pose: intestine-aside
+  ghost: []
+  hide: []
+  layers:
+    - large-intestine-group
+    - small-intestine-group
+    - meal
+  labels:
+    - ascending-colon
+    - transverse-colon
+    - descending-colon
+  camera:
+    position:
+      - 0.55
+      - 0.26
+      - 1.05
+    target:
+      - 0
+      - 0.02
+      - -0.08
+    fov: 30
+  summary:
+    en: The large intestine absorbs water from the remaining material.
+    zh: 大肠从剩余内容物中吸收水分。
+  beats:
+    - camera: abdomen
+      pose: intestine-aside
+      labels:
+        - ascending-colon
+        - transverse-colon
+        - descending-colon
+      caption:
+        en: The small intestine is moved aside so the wider colon can be followed around it.
+        zh: 把小肠移开，就能沿着外侧较粗的结肠观察。
+    - camera: abdomen
+      pose: intestine-aside
+      labels:
+        - transverse-colon
+        - descending-colon
+      caption:
+        en: Blue dots leaving the colon represent absorbed water. Darkening dots along it represent the remaining material.
+        zh: 离开结肠的蓝点表示被吸收的水；沿管道前进、颜色变深的点表示剩余物。
+      view: xray
+    - camera: abdomen
+      pose: intestine-aside
+      labels:
+        - sigmoid-colon
+      caption:
+        en: The final named source segment is sigmoid colon. The missing rectum and outlet are not replaced with invented geometry.
+        zh: 源文件末段标为乙状结肠；缺失的直肠和出口没有用凭空画出的结构代替。
+    - camera: abdomen
+      pose: null
+      labels:
+        - jejunum
+        - transverse-colon
+      caption:
+        en: Return to the abdominal arrangement. Most water was absorbed earlier in the small intestine; the colon absorbs more from what remains.
+        zh: 回到腹部原来位置。大部分水先在小肠吸收，结肠再从剩余物里继续吸收。
+  index:
+    parts:
+      - ascending-colon
+      - transverse-colon
+      - descending-colon
+      - sigmoid-colon
+      - appendix
+      - jejunum
+---
+
+<Lang en>
+
+The large intestine forms a wider frame around the small intestine. Move the small intestine aside to follow the colon upwards, across the abdomen and down again. The names in the model describe these directions. The large intestine absorbs water from the material left after digestion and absorption in the small intestine. Some mineral salts are absorbed here too. As water is removed, the remaining material becomes more solid.
+
+This remaining material forms <Term id="faeces">faeces</Term>. It includes undigested material, bacteria and cells shed from the intestinal lining. It is stored in the rectum and eventually passes out through the <Term id="anus">anus</Term>, the outlet of the digestive tube. This is the ordinary process of passing waste from the body. The source model has no separately identified rectum or anal canal, so those parts are described here rather than replaced with invented anatomy.
+
+Passage through the colon commonly takes about <Num s="S6">12–24 hours</Num>, and may take longer. A meal therefore does not travel through the whole digestive tract as quickly as the moving dots suggest. The blue particles leaving the colon represent absorbed water, while the darker particles following the tube represent what remains. These are teaching symbols, not measured amounts of water or waste.
+
+<More title={{ en: "Further: water, fibre and the appendix", zh: "再进一步：水、膳食纤维与阑尾" }}>
+
+HealthHub explains that fibre helps bowel movements; HPB encourages choosing water over sugary drinks. The appendix is a blind side branch near the beginning of the large intestine. Food does not follow it as part of the main route.
+
+</More>
+
+<More title={{ en: "Try it: record a daily observation", zh: "试一试：记录日常观察" }}>
+
+For <Num s="S1">2 days</Num>, record when you drink water and which meals contain fruit, vegetables or wholegrains. Compare your record with HealthHub’s information about fibre and water. This is an observation diary, not a target or a score.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+大肠比小肠粗，围在盘绕的小肠外侧。把小肠移开，可以顺着结肠向上、横过腹部，再向下看；模型里的名称反映了这些方向。小肠完成大部分消化和吸收后，剩余内容物进入大肠。大肠从中吸收水分，也吸收部分矿物盐。水分减少后，内容物逐渐变得较稠、较成形。
+
+剩余物形成<Term id="faeces">粪便</Term>，其中有未被消化的物质、细菌和肠壁脱落的细胞。它暂存在直肠，最后通过<Term id="anus">肛门</Term>排出体外。这是身体排出消化道废物的正常过程。本次网格没有可单独辨认的直肠和肛管，所以这里用文字说明，没有用其他器官或凭空画出的管子代替。小肠吸收的水最多，大肠继续吸收剩下的水。
+
+内容物通过结肠通常需要约 <Num s="S6">12–24 小时</Num>，也可能更久。整顿饭通过身体，并不像舞台上的点移动得那么快。离开结肠的蓝点表示被吸收的水，沿管道前进、颜色变深的点表示剩余物。这些点只帮助区分过程，不能用来数出真实吸收的水量或排出的废物量。
+
+<More title={{ en: "Further: water, fibre and the appendix", zh: "再进一步：水、膳食纤维与阑尾" }}>
+
+HealthHub 说明膳食纤维有助排便，保健促进局提倡以水代替含糖饮料。阑尾是靠近大肠起点的盲端支管，不是食物主线。
+
+</More>
+
+<More title={{ en: "Try it: record a daily observation", zh: "试一试：记录日常观察" }}>
+
+连续 <Num s="S1">2 天</Num>，记录喝水时间与饭菜里的蔬果、全谷物，再对照 HealthHub 的说明。这是观察日记，不是评分。
+
+</More>
+
+</Lang>

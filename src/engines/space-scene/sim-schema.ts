@@ -10,9 +10,14 @@
  */
 import { z } from 'zod';
 import { bilingual, colorRef, kebabId, vec3 } from '../../content/schema/common';
+import { fieldLines } from './lib/sim/field';
+import { CLIP_QUANTITIES, MAX_FIELD_LINES } from './lib/sim/magnet';
 
 /** A control value: a toggle's boolean, a step's number, a choice's option id. */
 export const simValue = z.union([z.boolean(), z.number(), kebabId]);
+/** A state id (an output's state, a magnet field state): kebab-case pieces joined by `-` or `.` (`ns-1.5`). */
+export const STATE_ID = /^[a-z0-9]+(?:[-.][a-z0-9]+)*$/;
+export const stateId = z.string().regex(STATE_ID, 'must be kebab-case (dots allowed between digits: ns-1.5)');
 export type SimValue = z.output<typeof simValue>;
 /** Control values by control id. */
 export const simValues = z.record(kebabId, simValue);
@@ -33,7 +38,7 @@ const controlBase = {
 export const simControlSchema = z.discriminatedUnion('kind', [
   /** On / off (a switch, a battery turned round, a bulb screwed in). */
   z.object({ ...controlBase, kind: z.literal('toggle'), default: z.boolean() }).strict(),
-  /** Ordered numbers (batteries 1–3, a gap in cm); ‹ › and `[` `]` step through them. */
+  /** Ordered numbers, ascending or descending (batteries 1–3, a gap 6 → 3 → 1.5 cm); ‹ › and `[` `]` step through them in this order. */
   z
     .object({
       ...controlBase,
@@ -78,10 +83,13 @@ export const simOutputSchema = z
     from: z.string().min(1).max(64).optional(),
     unit: z.string().trim().max(8).optional(),
     decimals: z.number().int().min(0).max(3).optional(),
-    states: z.record(kebabId, bilingual).optional(),
+    states: z.record(stateId, bilingual).optional(),
   })
   .strict();
 export type SimOutput = z.output<typeof simOutputSchema>;
+
+/** A value a condition compares with: a control value or a state id. */
+const conditionValue = z.union([z.boolean(), z.number(), stateId]);
 
 /**
  * When a binding is on: `true` (the value is truthy: on, non-zero, a state
@@ -89,9 +97,9 @@ export type SimOutput = z.output<typeof simOutputSchema>;
  */
 export const simCondition = z.union([
   z.literal(true),
-  z.object({ eq: simValue }).strict(),
-  z.object({ ne: simValue }).strict(),
-  z.object({ in: z.array(simValue).min(1) }).strict(),
+  z.object({ eq: conditionValue }).strict(),
+  z.object({ ne: conditionValue }).strict(),
+  z.object({ in: z.array(conditionValue).min(1) }).strict(),
   z.object({ gte: z.number() }).strict(),
   z.object({ lte: z.number() }).strict(),
 ]);
@@ -105,6 +113,16 @@ const source = {
 };
 
 export const GLOW_CURVES = ['linear', 'sqrt'] as const;
+
+/**
+ * A damped swing toward each new value instead of the plain 0.5 s ease (a
+ * compass needle, a hanging magnet): a second-order oscillator with this
+ * natural `period` (s) and damping ratio (0 < `damping` < 1 overshoots and
+ * swings back). A turn takes the short way round (350° → 10° is +20°).
+ * Deep links and screenshots jump to the end value.
+ */
+export const settleSchema = z.object({ period: z.number().min(0.2).max(10), damping: z.number().min(0.05).max(2) }).strict();
+export type SimSettle = z.output<typeof settleSchema>;
 
 const partBind = z
   .object({
@@ -120,12 +138,34 @@ const partBind = z
      * part glows in `color`, from a dull red at a trace to `color` at full.
      */
     glow: z.object({ color: colorRef, full: z.number().positive(), curve: z.enum(GLOW_CURVES).default('sqrt') }).strict().optional(),
-    /** Show the first k copies of a `repeat` part (k = the value, × `per`). */
-    count: z.object({ per: z.number().positive().default(1) }).strict().optional(),
-    /** Move along `axis` (scene units) by (value − `origin`) × `per`. */
+    /**
+     * Tint toward `color` (the highlight mix, up to the signal tint's strength):
+     * the value ÷ `full` (0–1, `linear` or `sqrt`) — an iron core that is a
+     * magnet while the current flows.
+     */
+    tint: z.object({ color: colorRef, full: z.number().positive(), curve: z.enum(GLOW_CURVES).default('linear') }).strict().optional(),
+    /** Show the first k copies of a `repeat` part (k = the value, × `per`; `true` = × 1). */
+    count: z.union([z.literal(true), z.object({ per: z.number().positive().default(1) }).strict()]).optional(),
+    /** Move along `axis` (scene units, after any pose) by (value − `origin`) × `per`. */
     offset: z.object({ axis: vec3, per: z.number(), origin: z.number().default(0) }).strict().optional(),
-    /** Turn about `axis` through the part centre by (value − `origin`) × `per` degrees. */
-    rotate: z.object({ axis: vec3, per: z.number(), origin: z.number().default(0) }).strict().optional(),
+    /**
+     * Turn about `axis` by (value − `origin`) × `per` degrees (default × 1),
+     * after any pose, through the part's (posed) centre or `pivot` (a scene
+     * point: the thread a hanging magnet's two halves turn about together);
+     * `settle`: a damped swing.
+     */
+    rotate: z
+      .object({ axis: vec3, per: z.number().default(1), origin: z.number().default(0), pivot: vec3.optional(), settle: settleSchema.optional() })
+      .strict()
+      .optional(),
+    /**
+     * A named ring of positions (`magnet.rings`): a step control of 1 … count
+     * moves the parts to that position (offset from the position of the
+     * control's default value, where the parts are drawn).
+     */
+    at: kebabId.optional(),
+    /** A field-state output picks the iron-filings layout of a `filings` part (`magnet.fields`). */
+    state: z.literal(true).optional(),
   })
   .strict();
 
@@ -142,7 +182,13 @@ const flowBind = z
      */
     intensity: z.object({ full: z.number().positive() }).strict().optional(),
     /** State value → particle colour while the output is in that state (a short circuit runs hot). */
-    stops: z.record(kebabId, colorRef).optional(),
+    stops: z.record(stateId, colorRef).optional(),
+    /**
+     * A field-state output: the flow runs along that state's field lines
+     * (`magnet.fields`, traced at load and cached), drawn as hairlines with
+     * particles on them; the flow then has no `path` / `paths` of its own.
+     */
+    state: z.literal(true).optional(),
   })
   .strict();
 
@@ -251,10 +297,24 @@ export const circuitSchema = z
 export type CircuitData = z.output<typeof circuitSchema>;
 
 /**
- * Bar magnets as Gilbert charge pairs (docs/22 §4.2): the magnets topic's model.
- * Each magnet has two poles (±1 charge) at scene points; `move` names the
- * control that slides it along `axis` (scene units per step value) and `flip`
- * the choice option ids that turn it round.
+ * A rectangle the field lines of a state are traced in (docs/22 §4.2 item 3):
+ * centred on `center`, `size` [along u, along v], facing `normal` (default
+ * [0, 1, 0]: the bench plane, u = +X, v = +Z; a vertical electromagnet takes
+ * [0, 0, 1]: u = +X, v = +Y). The poles are projected onto it.
+ */
+export const fieldPlaneSchema = z
+  .object({ center: vec3, size: z.tuple([z.number().positive(), z.number().positive()]), normal: vec3.optional() })
+  .strict();
+export type FieldPlane = z.output<typeof fieldPlaneSchema>;
+
+/**
+ * Magnets as Gilbert charge pairs (docs/22 §4.2): the magnets topic's model.
+ * Each magnet has two poles at scene points (pole strength = `moment` ÷ the
+ * pole distance; a school bar magnet ≈ 1 A·m²); `move` names the control that
+ * slides it along `axis` (scene units per step value), `flip` the choice
+ * option ids that turn it round, `power` the switch (and cell count) of an
+ * electromagnet: moment × cells while on, × `residual` while off (a steel core
+ * keeps a little).
  */
 export const magnetSchema = z
   .object({
@@ -265,13 +325,15 @@ export const magnetSchema = z
             id: kebabId,
             north: vec3,
             south: vec3,
+            moment: z.number().positive().optional(),
             move: z.object({ control: kebabId, axis: vec3, per: z.number(), origin: z.number().default(0) }).strict().optional(),
             flip: z.object({ control: kebabId, when: z.array(kebabId).min(1) }).strict().optional(),
+            power: z.object({ switch: kebabId, cells: kebabId.optional(), residual: z.number().min(0).max(1).default(0.15) }).strict().optional(),
           })
           .strict(),
       )
       .min(1)
-      .max(4),
+      .max(6),
     /** The first magnet's `move` control value at which the force between the first two magnets (unturned) is 100 %. */
     reference: z.number(),
     /**
@@ -280,9 +342,76 @@ export const magnetSchema = z
      * five (≤ 6); by the electromagnet, 3 per cell while `switch` is on, else 1.
      */
     clips: z.object({ cards: kebabId.optional(), strokes: kebabId.optional(), switch: kebabId.optional(), cells: kebabId.optional() }).strict().optional(),
+    /** Earth's field at the bench (µT, horizontal, toward `north`): only the compass feels it (docs/22 F-4). */
+    earth: z.object({ uT: z.number().nonnegative(), north: vec3 }).strict().optional(),
+    /**
+     * Named rings of positions (an `at` binding, the compass): `count`
+     * positions on a horizontal circle, position 1 at bearing `start` (degrees
+     * clockwise from model north seen from above; default 180 = toward the
+     * viewer), the rest clockwise.
+     */
+    rings: z
+      .record(
+        kebabId,
+        z.object({ center: vec3, radius: z.number().positive(), count: z.number().int().min(2).max(36), start: z.number().default(180) }).strict(),
+      )
+      .optional(),
+    /**
+     * Where `needle-bearing` is read: a fixed point, or a ring position given
+     * by a step control. Default: the first `at` binding's ring and control.
+     */
+    compass: z.union([z.object({ at: vec3 }).strict(), z.object({ ring: kebabId, control: kebabId }).strict()]).optional(),
+    /** The default plane field lines are traced in (each field state may give its own). */
+    plane: fieldPlaneSchema.optional(),
+    /** Field lines leaving the north pole of a 1 A·m² magnet (∝ moment; ≤ 16 a state). Default 8. */
+    lines: z.number().int().min(1).max(MAX_FIELD_LINES).default(8),
+    /**
+     * Field states (the `field-state` quantity; docs/22 §4.2 item 4): the
+     * first whose `when` control values all hold is on show (one without
+     * `when` always holds: put it last). Its lines and filings are worked out
+     * once with the controls at their defaults ⊕ `when`, for `magnets` (ids;
+     * default all) in `plane` (default the model's).
+     */
+    fields: z
+      .record(
+        stateId,
+        z
+          .object({
+            magnets: z.array(kebabId).min(1).optional(),
+            when: simValues.optional(),
+            plane: fieldPlaneSchema.optional(),
+          })
+          .strict(),
+      )
+      .optional(),
   })
   .strict();
 export type MagnetData = z.output<typeof magnetSchema>;
+
+/**
+ * Drawn over the stage from the model's outputs (docs/22 §4.4 M5):
+ * `force-arrows` = one arrow on each of two parts along the line between
+ * them, toward each other for a pull (positive value, `pull` colour, default
+ * token:signal), apart for a push (`push`, default token:cold), `length`
+ * (scene units, default 0.04) at 100 % and ∝ √|value| (the reading gives the
+ * true relative value), `lift` above the parts' centres (default 0.02).
+ * Shown while both parts are on show, the value is ≥ 0.5 and `when` holds.
+ */
+export const simOverlaySchema = z.discriminatedUnion('kind', [
+  z
+    .object({
+      kind: z.literal('force-arrows'),
+      between: z.tuple([kebabId, kebabId]),
+      output: kebabId,
+      length: z.number().positive().optional(),
+      lift: z.number().optional(),
+      pull: colorRef.optional(),
+      push: colorRef.optional(),
+      when: z.object({ ...source, is: simCondition.default(true) }).strict().optional(),
+    })
+    .strict(),
+]);
+export type SimOverlay = z.output<typeof simOverlaySchema>;
 
 export const SIM_KINDS = ['circuit', 'magnet'] as const;
 export type SimKind = (typeof SIM_KINDS)[number];
@@ -295,6 +424,7 @@ export const simSchema = z
     controls: z.array(simControlSchema).min(1).max(MAX_SIM_CONTROLS),
     outputs: z.array(simOutputSchema).min(1).max(16),
     bind: z.array(simBindSchema).max(64).default([]),
+    overlays: z.array(simOverlaySchema).max(4).default([]),
     circuit: circuitSchema.optional(),
     magnet: magnetSchema.optional(),
   })
@@ -354,11 +484,14 @@ export const beatSimSchema = z.object({ set: simValues }).strict();
 
 interface SimContext {
   parts: ReadonlySet<string>;
-  flows: ReadonlyMap<string, { paths?: readonly { id: string }[] | undefined }>;
+  /** `own`: the flow has a `path` or `paths` of its own. */
+  flows: ReadonlyMap<string, { paths?: readonly { id: string }[] | undefined; own?: boolean }>;
   animations: ReadonlyMap<string, { kind: string; target: string }>;
   poses: ReadonlySet<string>;
   /** Parts with a `repeat` and no `extra` (a `count` binding shows their first k copies). */
   countable: ReadonlySet<string>;
+  /** Parts whose primitive is `filings`. */
+  filings?: ReadonlySet<string>;
 }
 
 /** Whether a value is a legal value of a control. */
@@ -379,8 +512,14 @@ export function circuitQuantities(c: CircuitData): string[] {
   return out;
 }
 
-/** Quantity names the magnet model offers. */
-export const MAGNET_QUANTITIES = ['force', 'clips-cards', 'clips-stroke', 'clips-em', 'facing'] as const;
+/**
+ * Quantity names the magnet model offers: `force` (%), `facing` (state),
+ * `needle-bearing` (°, 0–360 clockwise from model north), `field-state`
+ * (state: `magnet.fields`), the clip counts, and `clips` (the clip count the
+ * chapter's try-it card observes; `—` elsewhere: one PLATE reading for all three).
+ */
+export const MAGNET_QUANTITIES = ['force', 'clips-cards', 'clips-stroke', 'clips-em', 'clips', 'facing', 'needle-bearing', 'field-state'] as const;
+const MAGNET_STATES: readonly string[] = ['facing', 'field-state'];
 
 /**
  * What a `sim` section names that does not exist or does not fit: control
@@ -397,7 +536,11 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
     if (sim.controls.findIndex((x) => x.id === c.id) !== i) issue(['controls', i, 'id'], `duplicate control "${c.id}"`);
     if (outputs.has(c.id)) issue(['controls', i, 'id'], `"${c.id}" is also an output`);
     if (!legalValue(c, c.default)) issue(['controls', i, 'default'], `default ${JSON.stringify(c.default)} is not one of the control's values`);
-    if (c.kind === 'step' && c.values.some((v, j) => j > 0 && v <= c.values[j - 1]!)) issue(['controls', i, 'values'], 'step values must ascend');
+    if (c.kind === 'step') {
+      const up = c.values.every((v, j) => j === 0 || v > c.values[j - 1]!);
+      const down = c.values.every((v, j) => j === 0 || v < c.values[j - 1]!);
+      if (!up && !down) issue(['controls', i, 'values'], 'step values must ascend or descend (no repeats)');
+    }
     if (c.kind === 'choice') {
       if (new Set(c.options.map((o) => o.id)).size !== c.options.length) issue(['controls', i, 'options'], 'duplicate option ids');
       for (const [opt, set] of Object.entries(c.sets ?? {})) {
@@ -425,22 +568,16 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
     if (sim.outputs.findIndex((x) => x.id === o.id) !== i) issue(['outputs', i, 'id'], `duplicate output "${o.id}"`);
     const from = o.from ?? o.id;
     if (!quantities.has(from)) issue(['outputs', i, 'from'], `the ${sim.kind} model has no quantity "${from}"`);
-    const kind = from === 'edges' ? 'vector' : from.startsWith('status:') || from.startsWith('sound:') || from === 'facing' ? 'state' : 'number';
+    const kind =
+      from === 'edges' ? 'vector' : from.startsWith('status:') || from.startsWith('sound:') || (sim.kind === 'magnet' && MAGNET_STATES.includes(from)) ? 'state' : 'number';
     if (quantities.has(from) && kind !== o.kind) issue(['outputs', i, 'kind'], `"${from}" is a ${kind}, not a ${o.kind}`);
   });
   if (sim.kind === 'circuit' && !sim.circuit) issue(['circuit'], 'a circuit sim needs `circuit`');
   if (sim.kind === 'magnet' && !sim.magnet) issue(['magnet'], 'a magnet sim needs `magnet`');
   if (sim.circuit) circuitIssues(sim.circuit, controls, ctx).forEach((x) => issue(['circuit', ...x.path], x.message));
-  if (sim.magnet) {
-    sim.magnet.magnets.forEach((m, i) => {
-      if (m.move && controls.get(m.move.control)?.kind !== 'step') issue(['magnet', 'magnets', i, 'move', 'control'], `"${m.move.control}" is not a step control`);
-      if (m.flip) {
-        const c = controls.get(m.flip.control);
-        if (c?.kind !== 'choice') issue(['magnet', 'magnets', i, 'flip', 'control'], `"${m.flip.control}" is not a choice control`);
-        else for (const w of m.flip.when) if (!c.options.some((o) => o.id === w)) issue(['magnet', 'magnets', i, 'flip', 'when'], `unknown option "${w}"`);
-      }
-    });
-  }
+  if (sim.magnet) magnetIssues(sim, sim.magnet, controls).forEach((x) => issue(['magnet', ...x.path], x.message));
+  const fieldStates = (o: SimOutput | undefined) => o?.kind === 'state' && (o.from ?? o.id) === 'field-state' && sim.kind === 'magnet';
+  const stateBound = new Set<string>();
   sim.bind.forEach((b, i) => {
     const has = (k: string) => k in b && (b as Record<string, unknown>)[k] !== undefined;
     if (has('control') === has('output')) {
@@ -457,9 +594,32 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
       for (const id of ids) if (!ctx.parts.has(id)) issue(['bind', i, 'part'], `unknown part "${id}"`);
       for (const pose of Object.values(b.pose ?? {})) if (pose !== null && !ctx.poses.has(pose)) issue(['bind', i, 'pose'], `unknown pose "${pose}"`);
       if (b.count) for (const id of ids) if (!ctx.countable.has(id)) issue(['bind', i, 'count'], `"${id}" needs a \`repeat\` and no \`extra\` to show a count of copies`);
-      if ((b.glow || b.count || b.offset || b.rotate) && outp && outp.kind !== 'number') issue(['bind', i], `glow / count / offset / rotate need a number, "${src}" is a ${outp.kind}`);
-      const fields = ['visible', 'pose', 'glow', 'count', 'offset', 'rotate'].filter(has);
-      if (fields.length === 0) issue(['bind', i], 'a part binding needs visible, pose, glow, count, offset or rotate');
+      if ((b.glow || b.tint || b.count || b.offset || b.rotate) && outp && outp.kind !== 'number')
+        issue(['bind', i], `glow / tint / count / offset / rotate need a number, "${src}" is a ${outp.kind}`);
+      if (b.rotate && outp && (outp.from ?? outp.id) === 'needle-bearing' && sim.kind === 'magnet') {
+        // A bearing turns clockwise seen from above: about −Y (a positive turn about +Y is anticlockwise).
+        const a = b.rotate.axis;
+        const spin = Math.sign(a[1]) * Math.sign(b.rotate.per);
+        if (Math.abs(a[0]) > 1e-9 || Math.abs(a[2]) > 1e-9 || spin >= 0)
+          issue(['bind', i, 'rotate'], 'a compass bearing turns clockwise seen from above: give `axis: [0, -1, 0]` (or `per: -1` about [0, 1, 0])');
+      }
+      if (outp && (outp.from ?? outp.id) === 'clips' && sim.kind === 'magnet') issue(['bind', i, 'output'], 'bind clips-cards / clips-stroke / clips-em (`clips` is the PLATE reading of whichever the card observes)');
+      if (b.at !== undefined) {
+        const ring = sim.magnet?.rings?.[b.at];
+        if (!ring) issue(['bind', i, 'at'], `unknown ring "${b.at}" (magnet.rings)`);
+        if (!ctl) issue(['bind', i, 'at'], 'a ring position comes from a step `control`');
+        else if (ctl.kind !== 'step' || (ring && ctl.values.some((v) => !Number.isInteger(v) || v < 1 || v > ring.count)))
+          issue(['bind', i, 'at'], `"${src}" must be a step control of positions 1 … ${ring?.count ?? 'count'}`);
+      }
+      if (b.state) {
+        if (!fieldStates(outp)) issue(['bind', i, 'state'], '`state` needs the magnet model\'s field-state output');
+        for (const id of ids) {
+          if (!ctx.filings?.has(id)) issue(['bind', i, 'state'], `"${id}" has no \`filings\` primitive`);
+          stateBound.add(id);
+        }
+      }
+      const fields = ['visible', 'pose', 'glow', 'tint', 'count', 'offset', 'rotate', 'at', 'state'].filter(has);
+      if (fields.length === 0) issue(['bind', i], 'a part binding needs visible, pose, glow, tint, count, offset, rotate, at or state');
     } else if ('flow' in b) {
       const flow = ctx.flows.get(b.flow);
       if (!flow) issue(['bind', i, 'flow'], `unknown flow "${b.flow}"`);
@@ -475,7 +635,13 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
         if (outp?.kind !== 'state') issue(['bind', i, 'stops'], 'stops need a state output');
         else if (outp.states) for (const k of Object.keys(b.stops)) if (!(k in outp.states)) issue(['bind', i, 'stops', k], `"${k}" is not a state of "${src}"`);
       }
-      if (!b.visible && !b.intensity && !b.stops) issue(['bind', i], 'a flow binding needs visible, intensity or stops');
+      if (b.state) {
+        if (!fieldStates(outp)) issue(['bind', i, 'state'], '`state` needs the magnet model\'s field-state output');
+        if (flow?.own) issue(['bind', i, 'state'], `flow "${b.flow}" runs along the field lines of the field state: drop its \`path\` / \`paths\``);
+        if (b.intensity) issue(['bind', i, 'intensity'], 'a field-line flow has no per-path intensity');
+        stateBound.add(`flow:${b.flow}`);
+      }
+      if (!b.visible && !b.intensity && !b.stops && !b.state) issue(['bind', i], 'a flow binding needs visible, intensity, stops or state');
     } else {
       const anim = ctx.animations.get(b.animation);
       if (!anim) issue(['bind', i, 'animation'], `unknown animation "${b.animation}"`);
@@ -488,6 +654,74 @@ export function simIssues(sim: SimData, ctx: SimContext): { path: (string | numb
       for (const k of Object.keys(b.pose)) if (!keys.includes(k)) issue(['bind', i, 'pose', k], `"${k}" is not a value of "${src}"`);
     }
   });
+  for (const id of ctx.filings ?? []) if (!stateBound.has(id)) issue(['bind'], `filings part "${id}" needs a \`state\` binding to the field-state output`);
+  for (const [id, f] of ctx.flows) if (f.own === false && !stateBound.has(`flow:${id}`)) issue(['bind'], `flow "${id}" has no path: give it one, or a \`state\` binding to the field-state output`);
+  sim.overlays.forEach((o, i) => {
+    const [a, b] = o.between;
+    for (const id of o.between) if (!ctx.parts.has(id)) issue(['overlays', i, 'between'], `unknown part "${id}"`);
+    if (a === b) issue(['overlays', i, 'between'], 'two different parts');
+    const v = outputs.get(o.output);
+    if (!v) issue(['overlays', i, 'output'], `unknown output "${o.output}"`);
+    else if (v.kind !== 'number') issue(['overlays', i, 'output'], `"${o.output}" is a ${v.kind}, not a number`);
+    if (o.when) {
+      const w = o.when;
+      if ((w.control === undefined) === (w.output === undefined)) issue(['overlays', i, 'when'], 'name exactly one `control` or `output`');
+      else if (w.control !== undefined && !controls.has(w.control)) issue(['overlays', i, 'when', 'control'], `unknown control "${w.control}"`);
+      else if (w.output !== undefined && !outputs.has(w.output)) issue(['overlays', i, 'when', 'output'], `unknown output "${w.output}"`);
+    }
+  });
+  return out;
+}
+
+/** The magnet model's own data: controls it names, rings, the compass, field states and their lines. */
+function magnetIssues(sim: SimData, m: MagnetData, controls: ReadonlyMap<string, SimControl>): { path: (string | number)[]; message: string }[] {
+  const out: { path: (string | number)[]; message: string }[] = [];
+  const issue = (path: (string | number)[], message: string) => out.push({ path, message });
+  const ids = new Set<string>();
+  m.magnets.forEach((g, i) => {
+    if (ids.has(g.id)) issue(['magnets', i, 'id'], `duplicate magnet "${g.id}"`);
+    ids.add(g.id);
+    if (Math.hypot(g.north[0] - g.south[0], g.north[1] - g.south[1], g.north[2] - g.south[2]) < 1e-6) issue(['magnets', i, 'south'], 'the two poles are at one point');
+    if (g.move && controls.get(g.move.control)?.kind !== 'step') issue(['magnets', i, 'move', 'control'], `"${g.move.control}" is not a step control`);
+    if (g.flip) {
+      const c = controls.get(g.flip.control);
+      if (c?.kind !== 'choice') issue(['magnets', i, 'flip', 'control'], `"${g.flip.control}" is not a choice control`);
+      else for (const w of g.flip.when) if (!c.options.some((o) => o.id === w)) issue(['magnets', i, 'flip', 'when'], `unknown option "${w}"`);
+    }
+    if (g.power) {
+      if (controls.get(g.power.switch)?.kind !== 'toggle') issue(['magnets', i, 'power', 'switch'], `"${g.power.switch}" is not a toggle`);
+      if (g.power.cells !== undefined) {
+        const c = controls.get(g.power.cells);
+        if (c?.kind !== 'step' || c.values.some((v) => v < 0)) issue(['magnets', i, 'power', 'cells'], `"${g.power.cells}" is not a step control of cell counts`);
+      }
+    }
+  });
+  if (m.compass && 'ring' in m.compass) {
+    const ring = m.rings?.[m.compass.ring];
+    if (!ring) issue(['compass', 'ring'], `unknown ring "${m.compass.ring}"`);
+    const c = controls.get(m.compass.control);
+    if (c?.kind !== 'step' || (ring && c.values.some((v) => !Number.isInteger(v) || v < 1 || v > ring.count)))
+      issue(['compass', 'control'], `"${m.compass.control}" must be a step control of positions 1 … ${ring?.count ?? 'count'}`);
+  }
+  const wants = (q: string) => sim.outputs.some((o) => (o.from ?? o.id) === q);
+  if (wants('needle-bearing') && !m.compass && !sim.bind.some((b) => 'part' in b && b.at !== undefined && b.control !== undefined))
+    issue(['compass'], 'needle-bearing needs `compass` (a point, or a ring and its control) or an `at` binding to read it at');
+  const fields = Object.entries(m.fields ?? {});
+  if (wants('field-state') && fields.length === 0) issue(['fields'], 'a field-state output needs `fields`');
+  const labels = sim.outputs.find((o) => (o.from ?? o.id) === 'field-state')?.states;
+  fields.forEach(([name, f], k) => {
+    for (const id of f.magnets ?? []) if (!ids.has(id)) issue(['fields', name, 'magnets'], `unknown magnet "${id}"`);
+    for (const [id, v] of Object.entries(f.when ?? {})) {
+      const c = controls.get(id);
+      if (!c) issue(['fields', name, 'when', id], `unknown control "${id}"`);
+      else if (!legalValue(c, v)) issue(['fields', name, 'when', id], `${JSON.stringify(v)} is not a value of "${id}"`);
+    }
+    if (f.when === undefined && k < fields.length - 1) issue(['fields', name], 'a state without `when` always holds: put it last');
+    if (labels && !(name in labels)) issue(['fields', name], `the field-state output has no label for "${name}"`);
+    if (!f.plane && !m.plane) issue(['fields', name, 'plane'], 'give the state a `plane` (or the model a default `plane`) to trace its lines in');
+    else if (fieldLines(sim, name).length === 0) issue(['fields', name], 'no field line starts inside the plane (is a north pole in it?)');
+  });
+  if (labels) for (const name of Object.keys(labels)) if (fields.length > 0 && !m.fields?.[name]) issue(['fields'], `field state "${name}" (an output label) is not in \`fields\``);
   return out;
 }
 

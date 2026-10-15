@@ -4,10 +4,13 @@ from pathlib import Path
 from PIL import Image, ImageDraw
 ROOT=Path(__file__).resolve().parent
 parser=argparse.ArgumentParser(description=__doc__)
-parser.add_argument('--topic',choices=['chest','back','shoulders','arms','legs','core'],default='chest')
+parser.add_argument('--topic',choices=['chest','back','shoulders','arms','legs','core','digestive'],default='chest')
 parser.add_argument('--pose',action='store_true')
 args=parser.parse_args()
 names=['pose','pose-front','pose-back','pose-left','pose-anatomy','wire-pose'] if args.pose else ['front','back','left','exploded-by-layer','skin','wire-rest']
+if args.topic=='digestive':
+    if args.pose: raise SystemExit('Static region has no pose')
+    names=['front','left','exploded-by-role','tube-only','centrelines','skin-overlay']
 canvas=Image.new('RGB',(1500,1250),'#ede7d6');draw=ImageDraw.Draw(canvas)
 for i,name in enumerate(names):
     path=ROOT/'cache'/f'{args.topic}-preview-{name}.png'

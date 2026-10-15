@@ -1,0 +1,160 @@
+---
+id: a-meals-journey
+order: 7
+title:
+  en: A meal’s journey
+  zh: 一顿饭的旅程
+sensitive: false
+state:
+  view: xray
+  explode: 0
+  part: null
+  run: true
+  cutaway: none
+  pose: null
+  ghost:
+    - skin-context
+  hide:
+    - skin-wire
+  layers:
+    - mouth-and-gullet
+    - stomach-group
+    - small-intestine-group
+    - large-intestine-group
+    - other-systems
+    - skin-context
+    - meal
+    - juices
+  labels:
+    - stomach
+    - jejunum
+    - transverse-colon
+  camera:
+    position:
+      - 1.3
+      - 0.35
+      - 2.8
+    target:
+      - 0
+      - -0.12
+      - -0.04
+    fov: 30
+  summary:
+    en: Follow chicken rice through the digestive route, with typical times rather than a fixed timetable.
+    zh: 跟着鸡饭沿消化道前进，时间只是典型范围，不是固定时刻表。
+  beats:
+    - camera: head
+      labels:
+        - teeth-lower
+        - tongue
+      caption:
+        en: The meal begins in the mouth. Teeth break food up and saliva begins digestion.
+        zh: 饭菜从口进入，牙齿弄碎食物，唾液开始消化。
+    - camera:
+        position:
+          - 0.3
+          - 0.36
+          - 0.9
+        target:
+          - 0.01
+          - 0.29
+          - -0.1
+        fov: 30
+      labels:
+        - oesophagus
+      caption:
+        en: The swallowed food moves down the gullet. Muscular contractions provide the push.
+        zh: 吞下的食物沿食道前进，推动力来自肌肉收缩。
+    - camera: stomach-view
+      labels:
+        - stomach
+      caption:
+        en: The stomach mixes food with gastric juice. A typical stay is about two to four hours, depending on the meal.
+        zh: 胃把食物与胃液混合，通常停留约两到四小时，具体随饭菜而变。
+    - camera: abdomen
+      labels:
+        - jejunum
+        - duodenum
+      caption:
+        en: In the small intestine, digestion continues and digested nutrients enter blood. Typical passage takes about three to five hours.
+        zh: 小肠继续消化，并把消化后的营养物质吸收进血液，通常通过时间约三到五小时。
+    - camera: abdomen
+      labels:
+        - transverse-colon
+        - descending-colon
+        - sigmoid-colon
+      caption:
+        en: The large intestine absorbs water. Typical passage through the colon takes about twelve to twenty-four hours and may take longer.
+        zh: 大肠吸收水分，通常通过结肠需要约十二到二十四小时，也可能更久。
+    - camera: hero
+      labels:
+        - lungs
+        - heart
+        - stomach
+      caption:
+        en: The whole passage commonly takes about twenty-four to seventy-two hours. Breathing and circulation continue throughout; each meal and person differs.
+        zh: 全程常需约二十四到七十二小时，呼吸与循环始终进行；每个人、每顿饭都不同。
+  index:
+    parts:
+      - teeth-lower
+      - tongue
+      - salivary-glands
+      - oesophagus
+      - stomach
+      - duodenum
+      - jejunum
+      - transverse-colon
+      - descending-colon
+      - sigmoid-colon
+      - lungs
+      - heart
+      - great-vessels
+---
+
+<Lang en>
+
+A plate of Hainanese chicken rice gives this journey a familiar starting point. Rice, chicken and cucumber contain different substances, but they enter the same digestive route. The presentation follows the changing contents through the syllabus parts: mouth, gullet, stomach, small intestine and large intestine. It shows the main processes separately so that each can be seen.
+
+In the mouth, teeth break up food and saliva begins digestion. The gullet pushes swallowed food towards the stomach. There, muscular mixing and gastric juice make a soft mixture. In the small intestine, digestive juices continue digestion into simpler substances, and digested nutrients are absorbed into the blood. In the large intestine, water is absorbed from the remaining material before waste leaves the body. Digestion does not make every part of the meal enter the blood.
+
+The whole passage commonly takes about <Num s="S5">24–72 hours</Num>. This is a typical range, not a timetable for this plate of food. Parts of a meal can move at different rates, and processes happen together. While food is still in the digestive tract, blood can already be carrying absorbed nutrients elsewhere. Breathing supplies oxygen, and circulation carries it too: body systems work together throughout the journey.
+
+<Figure src="figures/digestive-system-chicken-rice" alt={{ en: "Plate of Hainanese chicken rice with sliced chicken, rice, cucumber, chilli sauce and clear soup.", zh: "海南鸡饭，有切片鸡肉、米饭、黄瓜、辣椒酱与清汤。" }} caption={{ en: "A familiar meal to follow through the digestive system. An illustration made for this topic.", zh: "跟着熟悉的饭菜走过消化系统。为本主题绘制的示意图。" }} />
+
+<More title={{ en: "Symbols, gaps and elapsed time", zh: "符号、缺口与经过时间" }}>
+
+The dots and contractions use schematic speeds. Dots pause or disappear where source geometry is missing or overlaps; the real gut is continuous. Helpers beside the tube are explained in the small-intestine chapter’s Further section.
+
+</More>
+
+<More title={{ en: "Try it: follow the presentation", zh: "试一试：跟着演示走" }}>
+
+Open PRESENT and advance through the beats at your own pace. Pause to rotate each organ, then continue. Listen in English and Chinese and trace the same sequence in each language.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+舞台用海南鸡饭作为这趟旅程的起点。米饭、鸡肉和黄瓜含有不同物质，却经过相同的消化路线。演示沿着课纲的口、食道、胃、小肠和大肠前进，把主要过程分开显示，方便观察。饭菜在真实身体里不会保持盘中的形状，也不会整齐排队，等前面的过程全部结束后才进入下一段。
+
+口里的牙齿弄碎食物，唾液开始消化。食道推动吞下的食物进入胃，胃的肌肉与胃液把它混成较软的糊状物。小肠里的消化液继续把食物消化成更简单的物质，消化后的营养物质被吸收进血液。大肠从剩余物里吸收水分，废物最后离开身体。不是饭菜的所有成分都能被消化吸收。
+
+整个过程常需约 <Num s="S5">24–72 小时</Num>。这是典型范围，不是这盘鸡饭的准确时刻表。同顿饭的不同部分可以移动得快慢不同，搅拌、消化与吸收也会重叠进行。消化道里还有内容物时，血液已经能把吸收的营养运往别处。呼吸提供氧，循环系统也运送氧。身体的各个系统在整段过程中共同工作。
+
+<Figure src="figures/digestive-system-chicken-rice" alt={{ en: "Plate of Hainanese chicken rice with sliced chicken, rice, cucumber, chilli sauce and clear soup.", zh: "海南鸡饭，有切片鸡肉、米饭、黄瓜、辣椒酱与清汤。" }} caption={{ en: "A familiar meal to follow through the digestive system. An illustration made for this topic.", zh: "跟着熟悉的饭菜走过消化系统。为本主题绘制的示意图。" }} />
+
+<More title={{ en: "Symbols, gaps and elapsed time", zh: "符号、缺口与经过时间" }}>
+
+点和收缩使用示意速度；源网格缺失或重叠的位置，点会暂停或消失，真实肠道却是连续的。旁边的帮助器官见小肠章的“再进一步”。
+
+</More>
+
+<More title={{ en: "Try it: follow the presentation", zh: "试一试：跟着演示走" }}>
+
+打开演示，按自己的速度逐拍前进。停下来旋转观察器官，再继续。分别听中文与英文，沿相同顺序跟读。
+
+</More>
+
+</Lang>

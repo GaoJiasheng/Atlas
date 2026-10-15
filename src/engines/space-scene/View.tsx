@@ -566,7 +566,8 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
           const st = store.getState();
           const values = resolveSimValues(sim, st.sim);
           const state = chapters.find((c) => c.id === st.chapter)?.state as SpaceChapterState | undefined;
-          return { values, set: { ...st.sim }, outputs: evaluateSim(sim, values), try: state?.sim?.try ?? null, table: ui.getState().simTables[st.chapter ?? ''] ?? [] };
+          const card = state?.sim?.try ?? null;
+          return { values, set: { ...st.sim }, outputs: evaluateSim(sim, values, card?.observe), try: card, table: ui.getState().simTables[st.chapter ?? ''] ?? [] };
         },
         // Set controls as the reader would (one at a time, through the choices' `sets`); false if one is not a control value.
         setSim: (values: Record<string, boolean | number | string>) => {

@@ -48,7 +48,7 @@ def setup():
     scene.display.shading.show_specular_highlight = False
     scene.display.render_aa = '16'
     meshes = [o for o in scene.objects if o.type == 'MESH']
-    colours = {'region':'B57861','neighbour':'89978A','bone':'DDD4BC','skin':'C2B6A0'}
+    colours = {'region':'B57861','neighbour':'89978A','bone':'DDD4BC','skin':'C2B6A0','organ':'B77F71','tube':'CA9D83','system':'8C9B90'}
     for ob in meshes:
         ob.color = (*linear(colours[ob.get('role','bone')]),1)
     data = bpy.data.cameras.new('review-camera')
@@ -136,6 +136,10 @@ def pose(scene, meshes, camera):
 
 
 def main():
+    manifest=json.loads((ROOT/TOPIC_NAME/'manifest.json').read_text())
+    if manifest.get('rig') is False:
+        from preview_static import run
+        return run(sys.modules[__name__])
     scene,meshes,camera = setup()
     transforms = {o.name:o.location.copy() for o in meshes}
     rest = {o.name:geometry(o) for o in meshes}

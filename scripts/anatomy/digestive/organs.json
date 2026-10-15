@@ -1,0 +1,41 @@
+{
+  "units": "m",
+  "coordinates": {
+    "up": "+Y",
+    "front": "+Z",
+    "left": "+X"
+  },
+  "sourceCentre": [
+    0.0,
+    -0.11464902758598328,
+    1.0179980993270874
+  ],
+  "floorY": -1.0183805417036638,
+  "statureM": 1.7095352601027116,
+  "sourceFloorM": -0.00038244237657636404,
+  "transform": "(x,y,z) -> (x-centre.x, z-centre.z, -(y-centre.y)); apply -floorY only when grounding",
+  "groundOffsetM": 1.0183805417036638,
+  "rig": false,
+  "sourceMissing": [
+    {
+      "id": "ileum",
+      "status": "missing",
+      "reason": "No named mesh or parent exists in the cached source inventory; no substitute invented."
+    },
+    {
+      "id": "caecum",
+      "status": "missing",
+      "reason": "No named mesh or parent exists in the cached source inventory; no substitute invented."
+    },
+    {
+      "id": "rectum",
+      "status": "missing",
+      "reason": "No named mesh or parent exists in the cached source inventory; no substitute invented."
+    },
+    {
+      "id": "anal-canal",
+      "status": "missing",
+      "reason": "No named mesh or parent exists in the cached source inventory; no substitute invented."
+    }
+  ]
+}

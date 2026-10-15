@@ -131,6 +131,18 @@ export const SHAPED_KINDS = ['lathe', 'coil', 'extrude', 'curvedPanel', 'blades'
  */
 export const ORGANIC_KINDS = ['sweep', 'wing'] as const;
 
+/**
+ * Field kinds (docs/22 §4.4 M3; lib/sim/field.ts):
+ *   filings  {size: [w, d], count?, needle?, saturate?, exponent?}  iron filings on a card
+ *            w × d in the part's XZ plane (one InstancedMesh of `count` needles, default
+ *            2400, each `needle` [length, thickness], default [0.002, 0.0003]); a sim
+ *            `state` binding lays them out along the field of the magnet field state on
+ *            show, kept with probability (|B| ÷ `saturate` T, default 0.002)^`exponent`
+ *            (default 0.5); without a state they lie sprinkled at random. Only as a
+ *            part's main `primitive` (the paper goes in `extra`), never repeated.
+ */
+export const FIELD_KINDS = ['filings'] as const;
+
 const PRIMITIVE_ARITY: Record<(typeof PRIMITIVE_KINDS)[number], number> = {
   box: 3,
   cylinder: 3,
@@ -391,6 +403,19 @@ export const primitiveSchema = z
         ...placement,
       })
       .strict(),
+    z
+      .object({
+        kind: z.literal('filings'),
+        size: z.tuple([positive, positive]),
+        count: z.number().int().min(50).max(4000).default(2400),
+        needle: z.tuple([positive, positive]).default([0.002, 0.0003]),
+        saturate: positive.default(0.002),
+        exponent: z.number().min(0.2).max(1).default(0.5),
+        /** Not data: the engine lays the filings out per field state (refused below with a pointer). */
+        states: z.unknown().optional(),
+        ...placement,
+      })
+      .strict(),
   ])
   .superRefine((p, ctx) => {
     const issue = (path: (string | number)[], message: string) =>
@@ -444,6 +469,12 @@ export const primitiveSchema = z
         break;
       case 'vessel':
         if (p.length === 0 && p.headRatio === 0) issue(['length'], 'a vessel needs a length or domed heads');
+        break;
+      case 'filings':
+        if (p.needle[1] >= p.needle[0]) issue(['needle'], 'a needle is longer than it is thick');
+        if (p.mirror || p.scale) issue(['scale'], 'size the card with `size` (no `scale` / `mirror`)');
+        if (p.states !== undefined)
+          issue(['states'], 'the engine lays filings out for each field state (`sim.magnet.fields`, docs/06 磁铁): drop `states`; `size` is the card [w, d]');
         break;
       case 'sweep': {
         p.path.forEach((pt, i) => {
@@ -693,6 +724,8 @@ export const flowSchema = z
     spread: z.union([z.number().nonnegative(), z.tuple([z.number().nonnegative(), z.number().nonnegative(), z.number().nonnegative()])]).default(FLOW_DEFAULTS.spread),
     /** `false`: the cutaway plane does not cut this flow (air outside the machine). */
     clip: z.boolean().default(true),
+    /** Not data: a field-line flow's lines are traced by the engine per field state (refused below with a pointer). */
+    states: z.unknown().optional(),
     /**
      * Parts the stream passes, in order. While it runs, the part-chain card
      * colours the line between each consecutive pair (with the stop colour at
@@ -714,14 +747,22 @@ export const flowSchema = z
       const prev = f.stops![i - 1];
       if (prev && s.at < prev.at) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['stops', i, 'at'], message: 'stops must be in ascending `at` order' });
     });
-    if ((f.path === undefined) === (f.paths === undefined)) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['path'], message: 'give `path` or `paths` (not both)' });
+    if (f.states !== undefined)
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['states'],
+        message: 'field lines are traced by the engine for each field state (`sim.magnet.fields` + a `state` binding, docs/06 磁铁): drop `states` and `path` / `paths`',
+      });
+    // Neither: a field-line flow (its sim `state` binding gives the paths; checked with the sim).
+    if (f.path !== undefined && f.paths !== undefined) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['path'], message: 'give `path` or `paths` (not both)' });
+    if (f.path === undefined && f.paths === undefined && f.bilateral) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['bilateral'], message: 'a field-line flow is not mirrored' });
     f.paths?.forEach((p, i) => {
       if (f.paths!.findIndex((q) => q.id === p.id) !== i) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['paths', i, 'id'], message: `duplicate path "${p.id}"` });
     });
     if (f.paths && f.bilateral) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['bilateral'], message: 'a multi-path flow is not mirrored' });
   })
   // `path` is always there afterwards: a multi-path flow's is its first path's.
-  .transform((f) => ({ ...f, path: f.path ?? f.paths![0]!.path }));
+  .transform((f) => ({ ...f, path: f.path ?? f.paths?.[0]?.path ?? [] }));
 export type Flow = z.output<typeof flowSchema>;
 
 /** A rig joint as an animation / pose target: `joint:shoulder.l`. */
@@ -1120,13 +1161,27 @@ export const partsFileBase = z
       const countable = new Set(file.parts.filter((p) => p.repeat !== undefined && (p.extra ?? []).length === 0).map((p) => p.id));
       for (const x of simIssues(file.sim, {
         parts: new Set(file.parts.map((p) => p.id)),
-        flows: new Map(file.flows.map((f) => [f.id, { paths: f.paths }])),
+        flows: new Map(file.flows.map((f) => [f.id, { paths: f.paths, own: f.path.length > 0 }])),
         animations: new Map(file.animations.map((a) => [a.id, { kind: a.kind, target: a.target }])),
         poses: new Set(Object.keys(file.poses ?? {})),
         countable,
+        filings: new Set(file.parts.filter((p) => p.primitive?.kind === 'filings').map((p) => p.id)),
       }))
         ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['sim', ...x.path], message: x.message });
     }
+    file.parts.forEach((p, i) => {
+      const at = (path: (string | number)[], message: string) => ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['parts', i, ...path], message });
+      (p.extra ?? []).forEach((e, k) => {
+        if (e.kind === 'filings') at(['extra', k], 'filings are a part\'s main `primitive` (put the paper in `extra`)');
+      });
+      if (p.primitive?.kind !== 'filings') return;
+      if (p.repeat) at(['repeat'], 'a filings card is not repeated');
+      if (file.sim?.kind !== 'magnet') at(['primitive'], 'filings need a magnet `sim` (a `state` binding lays them out)');
+    });
+    file.flows.forEach((f, i) => {
+      if (f.path.length === 0 && file.sim?.kind !== 'magnet')
+        ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['flows', i, 'path'], message: 'give `path` or `paths` (only a magnet sim\'s field-line flow has neither)' });
+    });
     const outputs = new Map((file.sim?.outputs ?? []).map((o) => [o.id, o]));
     file.telemetry?.forEach((r, i) => {
       if (r.follow === undefined) return;

@@ -50,9 +50,14 @@ import type { PartStyle } from './materials';
 import type { Box3Like } from '../../lib/parts';
 import type { StageLook } from './look';
 import { stageDpr } from './dpr';
+import type { SimSettle } from '../../sim-schema';
 import { resolveSimValues } from '../../lib/sim/controls';
-import { evaluateSim } from '../../lib/sim';
+import { evaluateSim, type SimOutputs } from '../../lib/sim';
 import { simEffects, type SimEffects } from '../../lib/sim/bind';
+import { fieldLines, ironFilings } from '../../lib/sim/field';
+import { filingMatrices, filingsCard } from './geometry';
+import { SimOverlays } from './SimOverlays';
+import type { Matrix4 } from 'three';
 
 const GltfSource = lazy(() => import('./GltfSource'));
 
@@ -354,11 +359,13 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
   else if (exercising && bodyStyle === 'ghost') lastBody.current = 'wire';
   const bonesOn = s.exercise?.bones === true;
   // Try-it: the model's outputs for the values on show, and what they do to the parts and flows (lib/sim).
-  const sim = useMemo<SimEffects | null>(() => {
+  const simRun = useMemo<{ effects: SimEffects; outputs: SimOutputs } | null>(() => {
     if (!data.sim) return null;
     const values = resolveSimValues(data.sim, s.sim);
-    return simEffects(data.sim, values, evaluateSim(data.sim, values));
+    const outputs = evaluateSim(data.sim, values);
+    return { effects: simEffects(data.sim, values, outputs), outputs };
   }, [data.sim, s.sim]);
+  const sim = simRun?.effects ?? null;
   const displays = useMemo(() => {
     const out = resolveAllPartDisplays(data.parts, { view: s.view, part: s.part, layers: s.layers, hidden: s.hidden, ghosted, solo: s.solo, highlight });
     // A part a try-it binding hides fades out like a hidden layer (and is not picked).
@@ -488,13 +495,33 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
     return out;
   }, [sim, look]);
   const simMoves = useMemo(() => {
-    const out = new Map<string, { offset: Vec3; axis: Vec3; deg: number }>();
+    const out = new Map<string, { offset: Vec3; axis: Vec3; deg: number; settle?: SimSettle | undefined; pivot?: Vec3 | undefined }>();
     for (const id of new Set([...(sim?.offset.keys() ?? []), ...(sim?.rotate.keys() ?? [])])) {
       const r = sim?.rotate.get(id);
-      out.set(id, { offset: sim?.offset.get(id) ?? [0, 0, 0], axis: r?.axis ?? [0, 1, 0], deg: r?.deg ?? 0 });
+      out.set(id, { offset: sim?.offset.get(id) ?? [0, 0, 0], axis: r?.axis ?? [0, 1, 0], deg: r?.deg ?? 0, settle: r?.settle, pivot: r?.pivot });
     }
     return out;
   }, [sim]);
+  const simTints = useMemo(() => {
+    const out = new Map<string, { color: string; level: number }>();
+    sim?.tint.forEach((g, id) => out.set(id, { color: resolveDataColor(g.color, look.tokens, look.theme, '#cc6328'), level: g.level }));
+    return out;
+  }, [sim, look]);
+  // Filings cards: the needles of the field state on show (laid out once per part and state, lib/sim/field.ts).
+  const filingCache = useRef(new Map<string, Matrix4[]>());
+  const filingSets = useMemo(() => {
+    const out = new Map<string, Matrix4[]>();
+    sim?.states.forEach((state, id) => {
+      const prim = data.parts.find((p) => p.id === id)?.primitive;
+      if (prim?.kind !== 'filings') return;
+      const key = `${id}|${state}`;
+      let list = filingCache.current.get(key);
+      if (!list) filingCache.current.set(key, (list = filingMatrices(ironFilings(data.sim, state, id, filingsCard(prim)), prim, true)));
+      out.set(id, list);
+    });
+    return out;
+  }, [sim, data.parts, data.sim]);
+  const linesOf = useCallback((state: string) => (data.sim ? fieldLines(data.sim, state) : []), [data.sim]);
   const explodeTarget = targetExplodeAmount(s.view, s.explode);
   const anims = useMemo(() => animationsByPart(data.animations), [data.animations]);
   const alwaysOn = useMemo(
@@ -588,6 +615,8 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
             tintColor={display.tintRef ? resolveDataColor(display.tintRef, look.tokens, look.theme) : null}
             count={sim?.count.get(part.id) ?? null}
             simMove={simMoves.get(part.id) ?? null}
+            simTint={simTints.get(part.id) ?? null}
+            filings={filingSets.get(part.id) ?? null}
             animSim={sim?.animations}
             lineColor={lineColor}
             hovered={hovered === part.id}
@@ -608,9 +637,22 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
           />
         );
       })}
+      {data.sim && data.sim.overlays.length > 0 && simRun && (
+        <SimOverlays
+          overlays={data.sim.overlays}
+          sim={data.sim}
+          values={s.sim}
+          outputs={simRun.outputs}
+          handles={handles}
+          displays={displays}
+          exploded={s.view === 'exploded'}
+          look={look}
+          snapKey={snap.current.key}
+        />
+      )}
       </group>
       {/* Flow paths do not follow the parts apart: no particles while exploded (docs/12 §7.5, G16). */}
-      <Flows flows={data.flows} layers={s.view === 'exploded' ? NO_LAYERS : s.layers} look={look} clipping={clipping} effects={sim?.flows} />
+      <Flows flows={data.flows} layers={s.view === 'exploded' ? NO_LAYERS : s.layers} look={look} clipping={clipping} effects={sim?.flows} fieldLines={linesOf} />
       <CameraRig
         store={store}
         ui={ui}

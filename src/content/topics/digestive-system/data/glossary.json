@@ -1,0 +1,221 @@
+{
+  "terms": [
+    {
+      "id": "system",
+      "term": {
+        "en": "System",
+        "zh": "系统"
+      },
+      "definition": {
+        "en": "A group of body parts that work together to carry out a function.",
+        "zh": "身体里一起完成某项功能的一组部分。"
+      },
+      "see": [
+        "organ"
+      ]
+    },
+    {
+      "id": "organ",
+      "term": {
+        "en": "Organ",
+        "zh": "器官"
+      },
+      "definition": {
+        "en": "A body part made of different tissues working together to do particular jobs, such as the stomach.",
+        "zh": "由不同组织共同构成、完成特定工作的身体部分，例如胃。"
+      },
+      "see": [
+        "system"
+      ]
+    },
+    {
+      "id": "digestion",
+      "term": {
+        "en": "Digestion",
+        "zh": "消化"
+      },
+      "definition": {
+        "en": "The breakdown of food into simpler substances that the body can absorb. Chewing and digestive juices contribute in different ways.",
+        "zh": "把食物分解成身体能够吸收的更简单的物质。咀嚼与消化液以不同方式参与这个过程。"
+      },
+      "see": [
+        "digestive-juice",
+        "absorption"
+      ]
+    },
+    {
+      "id": "digestive-juice",
+      "term": {
+        "en": "Digestive juice",
+        "zh": "消化液"
+      },
+      "definition": {
+        "en": "Fluid that helps digestion, such as saliva or the juices released in the stomach and small intestine. Bile also helps the digestion of fat.",
+        "zh": "帮助消化的液体，例如唾液以及胃、小肠内的消化液。胆汁也帮助脂肪消化。"
+      },
+      "see": [
+        "saliva",
+        "bile"
+      ]
+    },
+    {
+      "id": "saliva",
+      "term": {
+        "en": "Saliva",
+        "zh": "唾液"
+      },
+      "definition": {
+        "en": "Fluid released into the mouth that moistens food and begins the chemical digestion of starch.",
+        "zh": "分泌到口腔内的液体，润湿食物，并开始分解淀粉。"
+      },
+      "see": [
+        "digestion"
+      ]
+    },
+    {
+      "id": "gullet",
+      "term": {
+        "en": "Gullet",
+        "zh": "食道"
+      },
+      "definition": {
+        "en": "The muscular tube that carries swallowed food from the throat to the stomach. Also called the oesophagus or esophagus.",
+        "zh": "把吞下的食物从咽送到胃的肌肉管。英语也叫 oesophagus 或 esophagus。"
+      },
+      "see": [
+        "peristalsis",
+        "stomach"
+      ]
+    },
+    {
+      "id": "peristalsis",
+      "term": {
+        "en": "Peristalsis",
+        "zh": "蠕动"
+      },
+      "definition": {
+        "en": "Waves of contraction and relaxation in the tube wall that move its contents along.",
+        "zh": "管壁肌肉一波波地收缩和放松，推动里面的东西前进。"
+      },
+      "see": [
+        "gullet"
+      ]
+    },
+    {
+      "id": "stomach",
+      "term": {
+        "en": "Stomach",
+        "zh": "胃"
+      },
+      "definition": {
+        "en": "An expandable organ that holds food temporarily, churns it and mixes it with acidic digestive juice.",
+        "zh": "能够扩张的器官，暂存食物，搅拌食物并与酸性的消化液混合。"
+      },
+      "see": [
+        "digestion",
+        "small-intestine"
+      ]
+    },
+    {
+      "id": "small-intestine",
+      "term": {
+        "en": "Small intestine",
+        "zh": "小肠"
+      },
+      "definition": {
+        "en": "The coiled part of the digestive tube where most digestion and nutrient absorption take place.",
+        "zh": "消化道里盘绕的一段，大部分消化与营养吸收在这里进行。"
+      },
+      "see": [
+        "villi",
+        "absorption"
+      ]
+    },
+    {
+      "id": "villi",
+      "term": {
+        "en": "Villi",
+        "zh": "绒毛"
+      },
+      "definition": {
+        "en": "Tiny finger-like projections on the lining of the small intestine that increase the area for absorption. One is a villus.",
+        "zh": "小肠内壁上细小的指状突起，增加可供吸收的面积。"
+      },
+      "see": [
+        "small-intestine",
+        "absorption"
+      ]
+    },
+    {
+      "id": "absorption",
+      "term": {
+        "en": "Absorption",
+        "zh": "吸收"
+      },
+      "definition": {
+        "en": "Movement of digested nutrients across the intestinal lining into the body. Many enter blood directly; most fats first pass through lymph.",
+        "zh": "消化后的营养穿过肠壁进入身体的过程。许多直接进入血液，大部分脂肪先经淋巴。"
+      },
+      "see": [
+        "villi"
+      ]
+    },
+    {
+      "id": "bile",
+      "term": {
+        "en": "Bile · Further study",
+        "zh": "胆汁·再进一步"
+      },
+      "definition": {
+        "en": "Fluid made by the liver and stored in the gallbladder. It breaks up large fat drops into smaller ones, helping fat digestion.",
+        "zh": "肝制造、胆囊储存的液体，使大的脂肪滴分散成小滴，帮助消化脂肪。"
+      },
+      "see": [
+        "digestive-juice"
+      ]
+    },
+    {
+      "id": "large-intestine",
+      "term": {
+        "en": "Large intestine",
+        "zh": "大肠"
+      },
+      "definition": {
+        "en": "The wider part after the small intestine. It absorbs water and salts from the remaining material and forms faeces.",
+        "zh": "接在小肠之后较宽的一段，从残余物中吸收水和盐，形成粪便。"
+      },
+      "see": [
+        "faeces"
+      ]
+    },
+    {
+      "id": "faeces",
+      "term": {
+        "en": "Faeces",
+        "zh": "粪便"
+      },
+      "definition": {
+        "en": "The material left for removal after digestion and absorption, including undigested food, bacteria and shed cells.",
+        "zh": "消化和吸收后要排出体外的物质，包括未消化的食物、细菌与脱落的细胞。"
+      },
+      "see": [
+        "anus",
+        "large-intestine"
+      ]
+    },
+    {
+      "id": "anus",
+      "term": {
+        "en": "Anus",
+        "zh": "肛门"
+      },
+      "definition": {
+        "en": "The opening at the end of the digestive tube through which faeces leave the body.",
+        "zh": "消化道末端的开口，粪便从这里排出体外。"
+      },
+      "see": [
+        "faeces"
+      ]
+    }
+  ]
+}

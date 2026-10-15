@@ -1,0 +1,218 @@
+{
+  "terms": [
+    {
+      "id": "magnet",
+      "term": {
+        "en": "Magnet",
+        "zh": "磁铁"
+      },
+      "definition": {
+        "en": "An object with north and south poles that attracts magnetic materials such as iron and steel.",
+        "zh": "有南北两极、能吸引铁和钢等磁性材料的物体。"
+      },
+      "see": [
+        "pole",
+        "magnetic-material"
+      ]
+    },
+    {
+      "id": "attract",
+      "term": {
+        "en": "Attract",
+        "zh": "吸引"
+      },
+      "definition": {
+        "en": "Pull towards each other. Unlike magnetic poles attract.",
+        "zh": "互相拉近；异极相吸。"
+      },
+      "see": [
+        "repel",
+        "unlike-poles"
+      ]
+    },
+    {
+      "id": "repel",
+      "term": {
+        "en": "Repel",
+        "zh": "排斥"
+      },
+      "definition": {
+        "en": "Push away from each other. Like magnetic poles repel.",
+        "zh": "互相推开；同极相斥。"
+      },
+      "see": [
+        "attract",
+        "like-poles"
+      ]
+    },
+    {
+      "id": "pole",
+      "term": {
+        "en": "Pole",
+        "zh": "磁极"
+      },
+      "definition": {
+        "en": "Either of the strongest regions near a magnet’s ends, called north and south.",
+        "zh": "磁铁两端附近作用最强的区域，分为北极和南极。"
+      },
+      "see": [
+        "magnet"
+      ]
+    },
+    {
+      "id": "like-poles",
+      "term": {
+        "en": "Like poles",
+        "zh": "同极"
+      },
+      "definition": {
+        "en": "Two north poles or two south poles. They repel each other.",
+        "zh": "北极对北极，或南极对南极；它们互相排斥。"
+      },
+      "see": [
+        "unlike-poles"
+      ]
+    },
+    {
+      "id": "unlike-poles",
+      "term": {
+        "en": "Unlike poles",
+        "zh": "异极"
+      },
+      "definition": {
+        "en": "A north pole and a south pole. They attract each other.",
+        "zh": "北极和南极；它们互相吸引。"
+      },
+      "see": [
+        "like-poles"
+      ]
+    },
+    {
+      "id": "magnetic-field",
+      "term": {
+        "en": "Magnetic field",
+        "zh": "磁场"
+      },
+      "definition": {
+        "en": "A way to describe the magnetic influence at positions around a magnet. Filings and compasses help show its pattern; drawn lines are a representation. This term is for a closer look beyond the P3 main text.",
+        "zh": "描述磁铁周围不同位置磁作用的方法。铁屑和指南针能显示图样；画出的线只是表示法。这个词放在超出小三主线的细看里。"
+      },
+      "see": [
+        "pole",
+        "compass"
+      ]
+    },
+    {
+      "id": "compass",
+      "term": {
+        "en": "Compass",
+        "zh": "指南针"
+      },
+      "definition": {
+        "en": "A small magnetised needle that turns freely. Away from nearby magnets, it settles roughly north–south.",
+        "zh": "能自由转动的小磁针。远离附近磁铁时，静止后大致指南北。"
+      },
+      "see": [
+        "freely-suspended",
+        "pole"
+      ]
+    },
+    {
+      "id": "freely-suspended",
+      "term": {
+        "en": "Freely suspended",
+        "zh": "自由悬挂"
+      },
+      "definition": {
+        "en": "Hanging so that an object can turn without being held or blocked.",
+        "zh": "挂起来后能自由转动，没有被握住或挡住。"
+      },
+      "see": [
+        "compass"
+      ]
+    },
+    {
+      "id": "magnetic-material",
+      "term": {
+        "en": "Magnetic material",
+        "zh": "磁性材料"
+      },
+      "definition": {
+        "en": "A material attracted noticeably by an ordinary school magnet. Iron and ordinary steel are the examples used in this topic; some special stainless steels behave differently.",
+        "zh": "能被普通学校磁铁明显吸引的材料。本课用铁和普通钢作例子；某些特殊不锈钢的表现不同。"
+      },
+      "see": [
+        "non-magnetic-material",
+        "magnet"
+      ]
+    },
+    {
+      "id": "non-magnetic-material",
+      "term": {
+        "en": "Non-magnetic material",
+        "zh": "非磁性材料"
+      },
+      "definition": {
+        "en": "A material that an ordinary school magnet does not noticeably attract, such as aluminium, copper, wood or plastic.",
+        "zh": "普通学校磁铁不能明显吸引的材料，例如铝、铜、木和塑料。"
+      },
+      "see": [
+        "magnetic-material"
+      ]
+    },
+    {
+      "id": "stroke-method",
+      "term": {
+        "en": "Stroke method",
+        "zh": "摩擦法"
+      },
+      "definition": {
+        "en": "Making a magnet by stroking iron or steel repeatedly with the same magnet pole in the same direction, lifting the magnet to return to the start.",
+        "zh": "用磁铁同一极沿同一方向反复摩擦铁或钢，每次抬起磁铁再回到起点，使物体带磁。"
+      },
+      "see": [
+        "electrical-method"
+      ]
+    },
+    {
+      "id": "electrical-method",
+      "term": {
+        "en": "Electrical method",
+        "zh": "电流法"
+      },
+      "definition": {
+        "en": "Making a magnet by passing electric current through insulated wire coiled around iron or steel.",
+        "zh": "让电流通过绕在铁或钢外的绝缘导线，使它带磁。"
+      },
+      "see": [
+        "electromagnet"
+      ]
+    },
+    {
+      "id": "electromagnet",
+      "term": {
+        "en": "Electromagnet",
+        "zh": "电磁铁"
+      },
+      "definition": {
+        "en": "A magnet produced by electric current, often a coil around an iron or steel core. Switching off stops the current; a steel core can keep some magnetism.",
+        "zh": "由电流产生的磁铁，常用线圈绕着铁芯或钢芯。断开开关后电流停止；钢芯可能保留一些磁性。"
+      },
+      "see": [
+        "electrical-method"
+      ]
+    },
+    {
+      "id": "fair-test",
+      "term": {
+        "en": "Fair test",
+        "zh": "公平测试"
+      },
+      "definition": {
+        "en": "An investigation that changes one variable while keeping other relevant conditions the same, so the results can be compared.",
+        "zh": "只改变一个量，其他相关条件保持相同，让结果可以比较的探究。"
+      },
+      "see": []
+    }
+  ]
+}

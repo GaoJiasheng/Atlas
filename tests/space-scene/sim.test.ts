@@ -418,10 +418,13 @@ describe('multi-path flows and shaped primitives', () => {
   it('a coil whose turns would overlap is refused', () => {
     expect(() => primitiveSchema.parse({ kind: 'coil', radius: 0.005, wire: 0.001, turns: 10, length: 0.01, at: [0, 0, 0], color: 'steel' })).toThrow(/overlap/);
   });
-  it('a flow takes path or paths, and a multi-path flow keeps its first path as `path`', () => {
+  it('a flow takes path or paths (not both), and a multi-path flow keeps its first path as `path`', () => {
     const f = flowSchema.parse({ id: 'f', group: 'g', paths: [{ id: 'a', path: [[0, 0, 0], [1, 0, 0]] }], speed: 1, color: 'token:current' });
     expect(f.path).toEqual([[0, 0, 0], [1, 0, 0]]);
-    expect(() => flowSchema.parse({ id: 'f', group: 'g', speed: 1, color: 'token:current' })).toThrow();
+    const both = { id: 'f', group: 'g', path: [[0, 0, 0], [1, 0, 0]], paths: [{ id: 'a', path: [[0, 0, 0], [1, 0, 0]] }], speed: 1, color: 'token:current' };
+    expect(() => flowSchema.parse(both)).toThrow(/not both/);
+    // Neither: a field-line flow (the parts file then needs a magnet sim's `state` binding, magnet-field.test.ts).
+    expect(flowSchema.parse({ id: 'f', group: 'g', speed: 1, color: 'token:current' }).path).toEqual([]);
   });
 });
 

@@ -1,0 +1,148 @@
+---
+id: small-intestine-chapter
+order: 5
+title:
+  en: The small intestine
+  zh: 小肠
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: true
+  cutaway: none
+  pose: null
+  ghost:
+    - helper-organs
+  hide: []
+  layers:
+    - stomach-group
+    - small-intestine-group
+    - helper-organs
+    - meal
+    - juices
+    - villus-closeup
+  labels:
+    - duodenum
+    - jejunum
+  camera:
+    position:
+      - 0.55
+      - 0.26
+      - 1.05
+    target:
+      - 0
+      - 0.02
+      - -0.08
+    fov: 30
+  summary:
+    en: Most digestion and nutrient absorption take place in the small intestine.
+    zh: 大部分消化和营养物质的吸收在小肠发生。
+  beats:
+    - camera: abdomen
+      labels:
+        - jejunum
+      highlight:
+        custom:
+          small-intestine-group: token:muscle-1
+      caption:
+        en: The coiled small intestine lies below the stomach. Digestive juices continue breaking food into simpler substances here.
+        zh: 盘绕的小肠位于胃下面，消化液在这里继续把食物分解成更简单的物质。
+      view: xray
+    - camera: back-organs
+      pose: lift-front
+      labels:
+        - duodenum
+        - jejunum
+      caption:
+        en: The beginning of the small intestine leads into its coils. Digestion, mixing and absorption overlap along this route.
+        zh: 小肠开头通向盘绕部分，消化、混合与吸收沿途同时进行。
+      view: assembled
+    - camera: abdomen
+      labels:
+        - jejunum
+      caption:
+        en: Ochre-green dots branch away from the intestine to represent digested nutrients absorbed into blood. The branch is schematic.
+        zh: 赭绿色的点从小肠分支向外，表示消化后的营养物质被吸收进血液；分支只是示意。
+      view: xray
+    - camera: specimens
+      layers:
+        - villus-closeup
+      labels:
+        - villi-block
+      caption:
+        en: The enlarged villi specimen shows projections of the lining and blood capillaries within. Its scale bar applies only to this specimen.
+        zh: 放大绒毛标本显示内壁突起及里面的毛细血管，旁边比例尺只适用于这个标本。
+      part: villi-block
+  index:
+    parts:
+      - jejunum
+      - duodenum
+      - villi-block
+      - villi-field
+      - liver
+      - gallbladder
+      - pancreas
+      - bile-duct
+      - stomach
+---
+
+<Lang en>
+
+The small intestine coils below the stomach. Most digestion and absorption of nutrients happen here. Digestive juices continue breaking food down into simpler substances, which pass across the wall and are absorbed into the blood. Blood then carries them around the body. Food does not pour through an open hole into a vessel.
+
+The lining has finger-like projections called <Term id="villi">villi</Term>. They increase the surface available for absorption, the taking in of substances across a surface. Blood capillaries lie inside them. The enlarged specimen shows these relationships. The short outward branch of ochre-green particles represents digested nutrients entering blood; its speed is schematic.
+
+Passage typically takes about <Num s="S6">3–5 hours</Num>. Digestion and absorption overlap. Most water entering the digestive tract is also absorbed here.
+
+<Figure src="figures/digestive-system-villus" alt={{ en: "Enlarged intestinal lining with finger-like villi, a cut-open villus, blood capillaries and a central lymph vessel.", zh: "放大的小肠内壁，有指状绒毛，剖开的绒毛里显示毛细血管和中央淋巴管。" }} caption={{ en: "Villi enlarge the surface where absorption happens. An illustration made for this topic.", zh: "绒毛增大小肠吸收的表面积。为本主题绘制的示意图。" }} />
+
+<More title={{ en: "Further: helpers beside the tube", zh: "再进一步：管道旁的帮助器官" }}>
+
+Food does not pass through the liver, gallbladder or pancreas. The liver makes <Term id="bile">bile</Term>, stored in the gallbladder; the pancreas makes pancreatic juice. Ducts deliver these fluids to the duodenum, the start of the small intestine. <FlyTo preset="back-organs">Look behind the stomach</FlyTo>
+
+</More>
+
+<More title={{ en: "Surface area and model limits", zh: "表面积与模型限制" }}>
+
+OpenStax gives about <Num s="S6">200 m²</Num> for small-intestinal absorptive area. A later study estimates about <Num s="S15">32 m²</Num> for the whole digestive mucosa using different methods. They are different estimates, not interchangeable measurements. The mesh identifies duodenum and jejunum; a separate ileum is absent.
+
+</More>
+
+<More title={{ en: "Try it: fold a surface", zh: "试一试：折叠表面" }}>
+
+Lay tissue paper flat, then fold it into pleats inside a small box. Unfold it again to compare the surface with the space it occupied.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+胃下面盘绕的管子是小肠。大部分消化和营养物质的吸收在这里发生。消化液继续把食物分解成更简单的物质；它们穿过肠壁，被吸收进血液，再运送到全身。食物不是从肠壁的洞直接倒进血管。
+
+小肠内壁有指状的<Term id="villi">绒毛</Term>，增大了发生吸收的表面积。绒毛里面有细小的血管。放大标本显示这些关系，赭绿色的点向外分支，表示消化后的营养物质进入血液，速度只是示意。
+
+食物通过小肠通常需要约 <Num s="S6">3–5 小时</Num>，消化、混合与吸收同时进行。进入消化道的水，大部分也在小肠被吸收；大肠继续处理余下的水。
+
+<Figure src="figures/digestive-system-villus" alt={{ en: "Enlarged intestinal lining with finger-like villi, a cut-open villus, blood capillaries and a central lymph vessel.", zh: "放大的小肠内壁，有指状绒毛，剖开的绒毛里显示毛细血管和中央淋巴管。" }} caption={{ en: "Villi enlarge the surface where absorption happens. An illustration made for this topic.", zh: "绒毛增大小肠吸收的表面积。为本主题绘制的示意图。" }} />
+
+<More title={{ en: "Further: helpers beside the tube", zh: "再进一步：管道旁的帮助器官" }}>
+
+食物不经过肝、胆囊或胰。肝制造<Term id="bile">胆汁</Term>，胆囊储存胆汁；胰制造胰液。导管把这些液体送到小肠开头的十二指肠。<FlyTo preset="back-organs">看看胃后面</FlyTo>
+
+</More>
+
+<More title={{ en: "Surface area and model limits", zh: "表面积与模型限制" }}>
+
+课本估算小肠吸收面积约 <Num s="S6">200 平方米</Num>；后来的研究用不同方法，估算整条消化道黏膜约 <Num s="S15">32 平方米</Num>，不能直接互换。网格标出十二指肠和空肠，没有单独的回肠。不能从这个不完整的参考模型量出真人的小肠长度，也不能用放大标本的大小推算整条肠子的面积。
+
+</More>
+
+<More title={{ en: "Try it: fold a surface", zh: "试一试：折叠表面" }}>
+
+把纸巾平铺，再折出褶皱，放进小盒子；展开后比较表面与所占空间。
+
+</More>
+
+</Lang>

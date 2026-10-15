@@ -24,10 +24,12 @@ MANIFEST = json.loads((TOPIC / 'manifest.json').read_text())
 # an unexported limb attachment to the trunk.
 import hashlib
 from rig_rules import complete_manifest
-declared_joints = set(MANIFEST['jointNames'])
-complete_manifest(MANIFEST)
-if not declared_joints <= set(MANIFEST['jointNames']):
-    raise RuntimeError('Manifest completion dropped declared rig joints')
+STATIC = MANIFEST.get('rig') is False
+if not STATIC:
+    declared_joints = set(MANIFEST['jointNames'])
+    complete_manifest(MANIFEST)
+    if not declared_joints <= set(MANIFEST['jointNames']):
+        raise RuntimeError('Manifest completion dropped declared rig joints')
 encoded = json.dumps(MANIFEST, indent=2)+'\n'
 (TOPIC/'manifest.json').write_text(encoded)
 (TOPIC/'MANIFEST-READY').write_text('sha256 '+hashlib.sha256(encoded.encode()).hexdigest()+'\n')
@@ -222,6 +224,7 @@ def simplify_selection():
         result_points = [Vector(result['positions'][i:i+3]) for i in range(0,len(result['positions']),3)]
         points = [result_points[i] for i in used]
         faces = [tuple(remap[i] for i in indices[start:start + 3]) for start in range(0, len(indices), 3)]
+        record['sourceVertexIndices'] = used
         record['ob'] = make_mesh(name, points, faces)
         record['simplifierErrorM'] = result['error']
         record['sampleDeviationM'] = result['sampleDeviationM']
@@ -697,6 +700,11 @@ def export(rig):
                               export_normals=True,export_cameras=False,export_lights=False)
     print(f'EXPORTED {CACHE / f"{TOPIC_NAME}-raw.glb"}',flush=True)
 
+
+if STATIC:
+    from static_region import build
+    build(sys.modules[__name__])
+    raise SystemExit(0)
 
 load_sources()
 centre,floor,check=select_and_transform()

@@ -9,7 +9,7 @@ from rig_rules import attachment_joint, joint_path, parents
 from skin_weights import inspect
 
 ROOT = Path(__file__).resolve().parent
-TOPICS = ('chest','back','shoulders','arms','legs','core')
+TOPICS = ('chest','back','shoulders','arms','legs','core','digestive')
 
 
 def markdown(result):
@@ -42,12 +42,19 @@ def markdown(result):
 
 
 def append_report(topic, result):
+    if topic=='digestive': return  # native static audit already writes its full report
     path = ROOT/topic/'report.md'
     content = path.read_text().split('## Published skin-weight audit')[0].rstrip()
     path.write_text(content+'\n\n'+markdown(result))
 
 
 def audit(topic):
+    manifest=json.loads((ROOT/topic/'manifest.json').read_text())
+    if manifest.get('rig') is False:
+        completed=subprocess.run(['blender','-b','--python-exit-code','1','-P',str(ROOT/'report.py'),'--','--topic',topic],check=False)
+        result=json.loads((ROOT/f'cache/{topic}-static-audit.json').read_text())
+        if completed.returncode and not result['flags']:raise RuntimeError('Native static audit did not complete')
+        return result
     subprocess.run(['pnpm','exec','node','--import','tsx',str(ROOT/'decode_weights.ts'),'--topic',topic],
                    cwd=ROOT.parents[1],check=True)
     subprocess.run(['blender','-b','--python-exit-code','1','-P',str(ROOT/'audit_fibres.py'),'--','--topic',topic],

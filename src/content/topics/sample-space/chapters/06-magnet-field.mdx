@@ -1,0 +1,43 @@
+---
+id: magnet-field
+order: 6
+title: { en: "Sample step six", zh: "示例第六步" }
+level: P3
+state:
+  view: assembled
+  explode: 0
+  run: false
+  part: null
+  camera: { position: [-0.78, 0.32, 1.22], target: [-0.8, -0.53, 0.47], fov: 30 }
+  labels: [sample-magnet, sample-filings, sample-needle]
+  sim:
+    set: { compass-at: 1 }
+    try: { vary: compass-at, keep: [{ en: "Same magnet", zh: "同一根磁铁" }], observe: [needle-bearing] }
+  beats:
+    - labels: [sample-magnet, sample-filings]
+      caption: { en: "Sample beat one: placeholder filings on a card over one bar magnet crowd at its two ends.", zh: "示例节拍一：一根条形磁铁上面的卡片里，占位铁屑挤在两端。" }
+    - sim: { set: { compass-at: 3 } }
+      labels: [sample-needle, sample-compass]
+      caption: { en: "Sample beat two: the compass moves round the ring and its needle swings to the field there, then settles.", zh: "示例节拍二：指南针沿位置环移动，针转向那里的场方向，摆几下后停住。" }
+    - sim: { set: { pair: true } }
+      labels: [sample-magnet, sample-magnet-b]
+      caption: { en: "Sample beat three: a second magnet, north facing south; the arrows show a small pull.", zh: "示例节拍三：第二根磁铁，北极对着南极；箭头表示一个不大的吸力。" }
+    - sim: { set: { pair: true, gap: 1 } }
+      labels: [sample-magnet-b, sample-filings]
+      caption: { en: "Sample beat four: closer, the pull grows and the filings join the two poles.", zh: "示例节拍四：靠近以后，吸力变大，铁屑把两极连起来。" }
+    - sim: { set: { pair: true, gap: 1, facing: nn } }
+      labels: [sample-magnet-b, sample-filings]
+      caption: { en: "Sample beat five: turned round, north faces north; the arrows point apart and the filings leave a gap.", zh: "示例节拍五：调头以后北极对北极；箭头朝外，铁屑在中间留出空白。" }
+---
+
+<Lang en>
+
+Sample step six: a placeholder magnet bench that exercises the magnet try-it model. Filings on a card line up with the field of the magnets under it, a compass needle swings to the field where it stands, and a second magnet pushes or pulls the first.
+
+</Lang>
+
+<Lang zh>
+
+示例第六步：一张占位的磁铁实验台，用来测试磁铁的试一试模型。卡片上的铁屑顺着下面磁铁的场排列，指南针的针转向所在位置的场方向，第二根磁铁推或拉第一根。
+
+</Lang>

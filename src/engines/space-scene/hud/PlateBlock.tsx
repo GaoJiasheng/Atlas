@@ -174,7 +174,10 @@ function Telemetry({ rows, run, sim }: { rows: readonly TelemetryRow[]; run: boo
   const snap = useRef(0);
   if (snapId >= 0) snap.current = snapId;
   const outputs = new Map((sim?.outputs ?? []).map((o) => [o.id, o]));
-  const targets = rows.map((r) => readingTarget(r, run, r.follow !== undefined ? numberOf(view?.outputs[r.follow]) : undefined));
+  // A followed output that does not apply here (NaN: the clips the card does not observe) reads `—`.
+  const followed = rows.map((r) => (r.follow !== undefined ? numberOf(view?.outputs[r.follow]) : undefined));
+  const na = followed.map((v) => v !== undefined && !Number.isFinite(v));
+  const targets = rows.map((r, i) => readingTarget(r, run, na[i] ? 0 : followed[i]));
   const values = useReadings(rows, targets, snap.current);
   const observed = new Set(view?.card?.observe ?? []);
   const decimals = (r: TelemetryRow) => (r.follow !== undefined ? (r.decimals ?? outputDecimals(outputs.get(r.follow) ?? {})) : readingDecimals(r));
@@ -191,12 +194,12 @@ function Telemetry({ rows, run, sim }: { rows: readonly TelemetryRow[]; run: boo
           <span
             key={i}
             className="space-plate__reading"
-            data-on={(r.follow !== undefined ? numberOf(view?.outputs[r.follow]) !== 0 : run) || undefined}
-            data-observe={r.follow !== undefined && observed.has(r.follow) ? '' : undefined}
+            data-on={(r.follow !== undefined ? !na[i] && followed[i] !== 0 : run) || undefined}
+            data-observe={r.follow !== undefined && (observed.has(r.follow) || (sim?.kind === 'magnet' && (outputs.get(r.follow)?.from ?? r.follow) === 'clips' && !na[i])) ? '' : undefined}
             title={`${r.key.en} / ${r.key.zh}`}
           >
-            {r.key.en.toUpperCase()} <b>{formatReading(values[i]!, decimals(r))}</b>
-            {r.unit && <small> {r.unit}</small>}
+            {r.key.en.toUpperCase()} <b>{na[i] ? '—' : formatReading(values[i]!, decimals(r))}</b>
+            {r.unit && !na[i] && <small> {r.unit}</small>}
           </span>
         ))}
       </p>

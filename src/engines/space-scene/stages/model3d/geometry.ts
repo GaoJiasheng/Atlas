@@ -51,6 +51,7 @@ import type { Wing } from '../../lib/wing';
 import { shapedPieces } from './shaped';
 import { latheProfileClosed } from '../../lib/shaped';
 import { FanDeform, sweepClosed, sweepGeometry, wingMembrane, wingVeins } from './organic';
+import { layFilings, type Filing, type FilingsCard } from '../../lib/sim/field';
 
 export interface ShapePiece {
   geometry: BufferGeometry;
@@ -74,6 +75,8 @@ export interface ShapePiece {
    * the stage writes `T(centre) · motion · T(−centre) · rest` every frame.
    */
   pivots?: [number, number, number][];
+  /** Iron filings (a `filings` primitive): instanced needles the stage lays out again for each field state. */
+  filings?: boolean;
 }
 
 /** A piece of one primitive before placement: geometry, instances, and a material other than the primitive's own. */
@@ -86,11 +89,38 @@ export interface BasePiece {
   lines?: boolean;
   /** The folding wing this piece belongs to (kept out of the merged meshes, redrawn for its fan). */
   wing?: Wing;
+  /** Iron filings: kept out of the merged meshes (instanced, laid out per field state). */
+  filings?: boolean;
+}
+
+type FilingsPrimitive = Extract<Primitive, { kind: 'filings' }>;
+
+/** A `filings` primitive as the card the field solver lays needles on. */
+export function filingsCard(p: FilingsPrimitive): FilingsCard {
+  return { at: p.at, rotation: p.rotation, size: p.size, count: p.count, saturate: p.saturate, exponent: p.exponent };
+}
+
+/**
+ * Instance matrices of laid-out filings in the primitive's frame (each
+ * needle: lying on the card, turned about its +Y, stretched along its +X);
+ * `rotated`: with the primitive's own `rotation` (the part frame).
+ */
+export function filingMatrices(filings: readonly Filing[], p: FilingsPrimitive, rotated: boolean): Matrix4[] {
+  const rot = rotated ? eulerMatrix(p.rotation) : null;
+  const lift = p.needle[1] / 2;
+  const q = new Quaternion();
+  const up = new Vector3(0, 1, 0);
+  const s = new Vector3();
+  const t = new Vector3();
+  return filings.map((f) => {
+    const m = new Matrix4().compose(t.set(f.x, lift, f.z), q.setFromAxisAngle(up, f.angle), s.set(f.scale, 1, 1));
+    return rot ? rot.clone().multiply(m) : m;
+  });
 }
 
 /** Kinds whose surface is closed, so back faces only show through a cut (cut face fill). */
 export function isClosedKind(kind: Primitive['kind']): boolean {
-  return !['plane', 'tube', 'coil', 'blades', 'coilBank', 'grille'].includes(kind);
+  return !['plane', 'tube', 'coil', 'blades', 'coilBank', 'grille', 'filings'].includes(kind);
 }
 
 /** Closed surface of a whole primitive (a lathe is closed only when its profile starts and ends on the axis). */
@@ -424,6 +454,9 @@ function kindPieces(p: Primitive): BasePiece[] {
         ...(veins ? [{ geometry: veins, instances: [new Matrix4()], lines: true, ...fold }] : []),
       ];
     }
+    case 'filings':
+      // At rest (no field state yet): sprinkled at random; the stage lays them out for the state on show.
+      return [{ geometry: new BoxGeometry(p.needle[0], p.needle[1], p.needle[1]), instances: filingMatrices(layFilings(null, filingsCard(p)), p, false), filings: true }];
   }
 }
 
@@ -471,6 +504,10 @@ export function partPieces(part: Pick<Part, 'primitive' | 'repeat'> & { extra?: 
       }
       if (piece.lines) {
         out.push({ geometry: bakeLines(piece.geometry, matrices), matrices: null, slot, lines: true });
+        continue;
+      }
+      if (piece.filings) {
+        out.push({ geometry: piece.geometry, matrices, slot, filings: true });
         continue;
       }
       bySlot.set(slot, [...(bySlot.get(slot) ?? []), { geometry: piece.geometry, matrices }]);
@@ -627,8 +664,9 @@ export function primitivePieces(part: Pick<Part, 'primitive' | 'repeat'>): Shape
       .set(m[0], m[1], m[2], t.offset[0], m[3], m[4], m[5], t.offset[1], m[6], m[7], m[8], t.offset[2], 0, 0, 0, 1)
       .multiply(rot);
   });
-  return basePieces(p).map(({ geometry, instances }) => {
+  return basePieces(p).map(({ geometry, instances, filings }) => {
     const matrices = reps.flatMap((r) => instances.map((m) => r.clone().multiply(m)));
+    if (filings) return { geometry, matrices, filings: true };
     if (matrices.length === 1) {
       geometry.applyMatrix4(matrices[0]!);
       return { geometry, matrices: null };

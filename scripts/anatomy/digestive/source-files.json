@@ -1,0 +1,22 @@
+[
+  {
+    "system": "visceral",
+    "file": "VisceralSystem100.fbx",
+    "bytes": 18401708,
+    "sha256": "22b301c93327929c9a14ee582d1848b550a950376e221a6d1078c7256bb83d0e",
+    "objects": 482,
+    "meshes": 301,
+    "triangles": 706935,
+    "closedMeshes": 238
+  },
+  {
+    "system": "cardiovascular",
+    "file": "CardioVascular41.fbx",
+    "bytes": 64889388,
+    "sha256": "ed7d049117cc944a8c47a416b16ade642cbd1392bbcce3c677450d3234dbf680",
+    "objects": 760,
+    "meshes": 717,
+    "triangles": 1575424,
+    "closedMeshes": 13
+  }
+]

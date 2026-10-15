@@ -1,13 +1,16 @@
 /**
- * Magnet model (docs/22 §4.2; pure, unit-tested). A first, small version for
- * the magnets topic: bar magnets as Gilbert charge pairs (north +1, south −1
- * at the pole points), the push or pull between the first two, and the
- * illustrative paper-clip counts. Field lines and the compass come with the
- * magnets topic (docs/22 §4.4 M1, M4).
+ * Magnet model (docs/22 §4.2; pure, unit-tested): magnets as Gilbert charge
+ * pairs (north +q, south −q at the pole points, q = moment ÷ pole distance;
+ * an electromagnet's moment × cells while on, × its residual while off), the
+ * push or pull between the first two, the compass bearing in their field plus
+ * Earth's, which field state is on show, and the illustrative paper-clip
+ * counts. Field lines and iron filings of a state: lib/sim/field.ts.
  *
  * Quantities: `force` (pull positive, push negative, % of the pull at the
  * `reference` setting), `facing` (`opposite` poles facing or the `same`),
- * `clips-cards`, `clips-stroke`, `clips-em`.
+ * `needle-bearing` (degrees 0–360, clockwise from model north seen from
+ * above), `field-state`, `clips-cards`, `clips-stroke`, `clips-em`
+ * (`clips`, the observed one of these, comes from lib/sim/index.ts).
  */
 import type { MagnetData, SimValues } from '../../sim-schema';
 import type { Vec3 } from '../math';
@@ -17,11 +20,28 @@ interface Pole {
   q: number;
 }
 
+type Magnet = MagnetData['magnets'][number];
+type Ring = NonNullable<MagnetData['rings']>[string];
+
+/** Most field lines one field state draws (a flow's paths: lib/flow-curve MAX_FLOW_PATHS). */
+export const MAX_FIELD_LINES = 16;
+/** Clip counts the `clips` reading picks from (the one the chapter's card observes). */
+export const CLIP_QUANTITIES = ['clips-cards', 'clips-stroke', 'clips-em'] as const;
+
+/** μ0 / 4π (T·m / A): B = μ0/4π · q / r² for a pole of strength q (A·m). */
+export const MU0_4PI = 1e-7;
+/** Moment of a magnet without `moment` (A·m²: a school bar magnet). */
+export const DEFAULT_MOMENT = 1;
+/** Model north without `earth` (−Z: into the bench, docs/22 §3.2). */
+const NORTH: Vec3 = [0, 0, -1];
+
 const sub = (a: Vec3, b: Vec3): Vec3 => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
 const len = (a: Vec3) => Math.hypot(a[0], a[1], a[2]);
+const num = (values: SimValues, id: string | undefined, fallback: number) =>
+  id !== undefined && typeof values[id] === 'number' ? (values[id] as number) : fallback;
 
-/** A magnet's two poles with these control values (moved along its axis, turned round). */
-export function magnetPoles(m: MagnetData['magnets'][number], values: SimValues): Pole[] {
+/** A magnet's two poles with these control values (moved along its axis, turned round), unit charges. */
+export function magnetPoles(m: Magnet, values: SimValues): Pole[] {
   const move = m.move;
   const d = move ? ((typeof values[move.control] === 'number' ? (values[move.control] as number) : move.origin) - move.origin) * move.per : 0;
   const n = len(move?.axis ?? [1, 0, 0]) || 1;
@@ -32,6 +52,36 @@ export function magnetPoles(m: MagnetData['magnets'][number], values: SimValues)
     { at: at(turned ? m.south : m.north), q: 1 },
     { at: at(turned ? m.north : m.south), q: -1 },
   ];
+}
+
+/** Moment now (A·m²): `moment`, × cells while an electromagnet's switch is on, × `residual` while off. */
+export function magnetMoment(m: Magnet, values: SimValues): number {
+  const base = m.moment ?? DEFAULT_MOMENT;
+  if (!m.power) return base;
+  if (values[m.power.switch] === true) return base * Math.max(0, num(values, m.power.cells, 1));
+  return base * m.power.residual;
+}
+
+/** A magnet's poles with their strengths (A·m): ± moment ÷ pole distance. */
+export function magnetCharges(m: Magnet, values: SimValues): Pole[] {
+  const d = len(sub(m.north, m.south)) || 1;
+  const q = magnetMoment(m, values) / d;
+  return magnetPoles(m, values).map((p) => ({ at: p.at, q: p.q * q }));
+}
+
+/** B (tesla) at `p` from these poles. */
+export function fieldAt(poles: readonly Pole[], p: readonly number[]): Vec3 {
+  const b: Vec3 = [0, 0, 0];
+  for (const c of poles) {
+    const r: Vec3 = [p[0]! - c.at[0], p[1]! - c.at[1], p[2]! - c.at[2]];
+    const d = len(r);
+    if (d < 1e-6) continue;
+    const k = (MU0_4PI * c.q) / (d * d * d);
+    b[0] += k * r[0];
+    b[1] += k * r[1];
+    b[2] += k * r[2];
+  }
+  return b;
 }
 
 /** Force on B from A along A → B (positive = pulled toward A), arbitrary units. */
@@ -53,10 +103,43 @@ export function pull(a: readonly Pole[], b: readonly Pole[]): number {
   return -f;
 }
 
-const count = (values: SimValues, id: string | undefined) => (id !== undefined && typeof values[id] === 'number' ? (values[id] as number) : 0);
+/** Position `k` (1-based) of a ring: bearing `start` + (k − 1) × 360 ÷ count, clockwise from model north seen from above. */
+export function ringPoint(ring: Ring, k: number): Vec3 {
+  const b = ((ring.start + ((k - 1) * 360) / ring.count) * Math.PI) / 180;
+  return [ring.center[0] + ring.radius * Math.sin(b), ring.center[1], ring.center[2] - ring.radius * Math.cos(b)];
+}
 
-/** Every magnet quantity for these control values. */
-export function solveMagnets(m: MagnetData, values: SimValues): Record<string, number | string> {
+/** The field state on show: the first whose `when` holds ('' without `fields`). */
+export function fieldStateOf(m: MagnetData, values: SimValues): string {
+  for (const [name, f] of Object.entries(m.fields ?? {})) if (Object.entries(f.when ?? {}).every(([id, v]) => values[id] === v)) return name;
+  return '';
+}
+
+/** The magnets of a field state (all of them without `fields` or `magnets`). */
+export function fieldMagnets(m: MagnetData, state: string): Magnet[] {
+  const ids = m.fields?.[state]?.magnets;
+  return ids ? m.magnets.filter((g) => ids.includes(g.id)) : m.magnets;
+}
+
+/** Earth's field (tesla) and the horizontal unit vector of model north. */
+export function earthField(m: MagnetData): { b: Vec3; north: Vec3 } {
+  const n = m.earth?.north ?? NORTH;
+  const h = Math.hypot(n[0], n[2]) || 1;
+  const north: Vec3 = [n[0] / h, 0, n[2] / h];
+  const t = (m.earth?.uT ?? 0) * 1e-6;
+  return { b: [north[0] * t, 0, north[2] * t], north };
+}
+
+/** Bearing (degrees 0–360, clockwise from model north seen from above) of a field's horizontal part. */
+export function bearingOf(b: Vec3, north: Vec3): number {
+  // East is north turned 90° clockwise seen from above (+Y up): (−n.z, 0, n.x).
+  const east: Vec3 = [-north[2], 0, north[0]];
+  const deg = (Math.atan2(b[0] * east[0] + b[2] * east[2], b[0] * north[0] + b[2] * north[2]) * 180) / Math.PI;
+  return deg < 0 ? deg + 360 : deg;
+}
+
+/** Every magnet quantity for these control values; `compass`: where the needle is (null: no needle reading). */
+export function solveMagnets(m: MagnetData, values: SimValues, compass: Vec3 | null = null): Record<string, number | string> {
   const out: Record<string, number | string> = {};
   const [a, b] = m.magnets;
   if (a && b) {
@@ -73,10 +156,18 @@ export function solveMagnets(m: MagnetData, values: SimValues): Record<string, n
     out.force = 0;
     out.facing = 'opposite';
   }
+  const state = fieldStateOf(m, values);
+  out['field-state'] = state;
+  if (compass) {
+    const poles = fieldMagnets(m, state).flatMap((g) => magnetCharges(g, values));
+    const earth = earthField(m);
+    const f = fieldAt(poles, compass);
+    out['needle-bearing'] = bearingOf([f[0] + earth.b[0], f[1], f[2] + earth.b[2]], earth.north);
+  } else out['needle-bearing'] = 0;
   const c = m.clips;
-  const gap = 2 * count(values, c?.cards);
+  const gap = 2 * num(values, c?.cards, 0);
   out['clips-cards'] = Math.floor(10 * (5 / (5 + gap)) ** 2);
-  out['clips-stroke'] = Math.min(6, Math.floor(count(values, c?.strokes) / 5));
-  out['clips-em'] = c?.switch !== undefined && values[c.switch] === true ? 3 * Math.max(1, count(values, c?.cells)) : 1;
+  out['clips-stroke'] = Math.min(6, Math.floor(num(values, c?.strokes, 0) / 5));
+  out['clips-em'] = c?.switch !== undefined && values[c.switch] === true ? 3 * Math.max(1, num(values, c?.cells, 0)) : 1;
   return out;
 }

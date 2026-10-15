@@ -1,0 +1,93 @@
+---
+id: "making-magnets"
+order: 5
+title: {"en": "Making a magnet", "zh": "制作磁铁"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: true
+  cutaway: "none"
+  layers: ["magnet-set", "compass", "materials", "making", "uses", "field", "current"]
+  hide: ["fridge-door", "door-gasket", "fridge-magnet", "cabinet-latch", "fridge-body", "cabinet-corner"]
+  labels: ["steel-rod"]
+  camera: {"position": [0.38, 0.4, 0.52], "target": [0.25, 0.045, -0.01], "fov": 30}
+  summary: {"en": "Stroking steel or passing current round it can make a magnet. The steel core keeps a little magnetism after switch-off.", "zh": "摩擦钢或让电流绕钢流动，都能制作磁铁；钢芯断电后会留一点磁性。"}
+  sim: {"set": {"strokes": 0, "em-switch": true, "em-cells": 2}, "try": {"vary": "em-cells", "keep": ["em-switch", {"en": "Same coil and steel core", "zh": "同样的线圈和钢芯"}], "observe": ["clips-em"], "record": true}}
+  beats:
+    - labels: ["steel-rod"]
+      pose: "stroke-start"
+      sim: {"set": {"strokes": 0, "em-switch": false, "em-cells": 2}}
+      caption: {"en": "The steel needle starts without enough magnetism to lift a clip. A magnetic material need not already be a magnet.", "zh": "钢针起初没有足够磁性吸起回形针。磁性材料不一定已经是磁铁。"}
+    - labels: ["steel-rod", "bar-magnet-n"]
+      pose: "stroke-start"
+      sim: {"set": {"strokes": 20, "em-switch": false, "em-cells": 2}}
+      caption: {"en": "Stroke in the same direction and lift the magnet clear before returning. After twenty strokes this model lifts four clips.", "zh": "沿同一方向摩擦，每次抬起磁铁再返回。在这个模型里，摩擦二十次能吸起四只回形针。"}
+    - labels: ["em-coil", "em-nail", "em-cells", "em-switch"]
+      pose: null
+      sim: {"set": {"strokes": 0, "em-switch": false, "em-cells": 2}}
+      caption: {"en": "The electrical method uses insulated wire wound round a steel nail, with cells, leads and a switch making a complete circuit.", "zh": "电流法把绝缘导线绕在钢钉上，用电池、引线和开关接成完整电路。"}
+    - labels: ["em-coil", "em-nail", "em-paper-clips"]
+      pose: null
+      sim: {"set": {"strokes": 0, "em-switch": true, "em-cells": 2}}
+      caption: {"en": "Close the switch. In this model two cells let the steel nail lift six clips.", "zh": "合上开关。在这个模型里，两节电池让钢钉吸起六只回形针。"}
+    - labels: ["em-cells", "em-paper-clips"]
+      pose: null
+      sim: {"set": {"strokes": 0, "em-switch": true, "em-cells": 1}}
+      caption: {"en": "Keep the switch closed and use one cell. This model lifts three clips, fewer than before.", "zh": "保持开关闭合，改用一节电池。在这个模型里吸起三只回形针，比刚才少。"}
+    - labels: ["em-switch", "em-nail", "em-paper-clips"]
+      pose: null
+      sim: {"set": {"strokes": 0, "em-switch": false, "em-cells": 2}}
+      caption: {"en": "Open the switch. In this model one clip remains: steel keeps a little magnetism. A soft iron core would keep very little.", "zh": "断开开关。在这个模型里仍留下一个回形针：钢会保留一点磁性，软铁芯保留的很少。"}
+  index: {"parts": ["steel-rod", "bar-magnet-n", "bar-magnet-s", "em-nail", "em-coil", "em-cells", "em-switch", "em-leads", "em-paper-clips"]}
+  pose: "stroke-start"
+---
+
+<Lang en>
+
+The steel needle on the making bench is a magnetic material, but it starts without enough magnetism to lift a clip. The <Term id="stroke-method">stroke method</Term> changes this. Use a pole of a bar magnet to stroke along the needle in the same direction each time. At the end, lift the magnet clear, return to the start and repeat. Rubbing backwards and forwards is not the method shown here.
+
+In this model, after <Num s="S1">20 strokes</Num> the needle holds <Num s="S1">4 clips</Num>. These are teaching values, not a promised result for every needle. Use the same pole and direction throughout, and compare its ability to lift the same clips before and after stroking. <FlyTo preset="make-bench">Follow the stroking sequence</FlyTo>
+
+The <Term id="electrical-method">electrical method</Term> uses a coil of insulated wire round a steel nail. Leads connect the coil to dry cells through a switch. Close the switch to complete the circuit. Current flows around the coil and the nail becomes a magnet. A magnet produced by electric current is an <Term id="electromagnet">electromagnet</Term>. The topic <TopicLink slug="circuits">Electric Circuits</TopicLink> explains why the loop must be complete.
+
+For the fair test, keep the switch closed and the coil and steel core unchanged. Change only the cell count and record clips lifted. In this model, <Num s="S1">1 cell</Num> lifts <Num s="S1">3 clips</Num> and <Num s="S1">2 cells</Num> lift <Num s="S1">6 clips</Num>. Opening the switch stops the current, but this steel nail keeps enough magnetism for <Num s="S1">1 clip</Num>. A soft iron core would keep very little.
+
+<More title={{"en": "The stroking table", "zh": "摩擦法的示意表"}}>
+
+In this model, <Num s="S1">0, 10, 20 and 30 strokes</Num> give <Num s="S1">0, 2, 4 and 6 clips</Num>. The model caps this result at <Num s="S1">6 clips</Num>; it is not a universal rule that every extra stroke adds a fixed amount of magnetism.
+
+</More>
+
+<More title={{"en": "Why the coil is insulated", "zh": "线圈为什么要绝缘"}}>
+
+Insulation keeps neighbouring turns from making unintended electrical contact, so current follows the wire around the core. Keep the experiment to dry cells, disconnect between observations, and follow the supervising teacher’s instructions: the wire can become warm. The model uses a fixed <Num s="S1">30-turn</Num> coil.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+制作区的钢针是磁性材料，但起初没有足够磁性吸起回形针。<Term id="stroke-method">摩擦法</Term>能改变它：用条形磁铁的一极沿着钢针摩擦，每次方向相同。到达末端后，把磁铁抬离钢针，返回起点再做。这里不是来回反复搓擦。模型的动作把接触、滑动、抬起和返回分开，方便看清。
+
+在这个模型里，摩擦 <Num s="S1">20 次</Num>后能吸住 <Num s="S1">4 只回形针</Num>。这是教学示意值，并非每根钢针都保证有同样结果。全过程保持同一磁极、同一方向，用同样的回形针比较摩擦前后。<FlyTo preset="make-bench">看摩擦法的动作</FlyTo>
+
+<Term id="electrical-method">电流法</Term>把绝缘导线绕在钢钉上，引线经过开关接到干电池。合上开关形成完整回路，电流绕线圈流动，钉子就成为磁铁。由电流产生磁性的磁铁叫<Term id="electromagnet">电磁铁</Term>。<TopicLink slug="circuits">《电路》</TopicLink>说明回路为什么必须接通。
+
+公平测试时保持开关闭合、线圈和钢芯不变，只改电池节数，记录吸起的回形针。在这个模型里，<Num s="S1">1 节</Num>吸起 <Num s="S1">3 只</Num>，<Num s="S1">2 节</Num>吸起 <Num s="S1">6 只</Num>。断开开关后电流停止，但钢钉仍留一点磁性，能吸住 <Num s="S1">1 只</Num>；软铁芯保留的磁性则很少。比较时应等回形针稳定再数，不要把刚好碰到钉尖却没有被托住的回形针算进去。
+
+<More title={{"en": "The stroking table", "zh": "摩擦法的示意表"}}>
+
+在这个模型里，摩擦 <Num s="S1">0、10、20、30 次</Num>，依次吸住 <Num s="S1">0、2、4、6 只回形针</Num>。模型上限是 <Num s="S1">6 只</Num>，不代表真实钢针每增加固定次数就一定增加固定磁性。
+
+</More>
+
+<More title={{"en": "Why the coil is insulated", "zh": "线圈为什么要绝缘"}}>
+
+绝缘层隔开相邻导线，避免电流从接触处走捷径，让电流沿导线绕过钢芯。实验只用干电池，观察之间要断开，并遵照教师指导；导线可能发热。模型的线圈固定为 <Num s="S1">30 圈</Num>。
+
+</More>
+
+</Lang>

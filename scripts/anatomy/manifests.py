@@ -86,8 +86,12 @@ def exact_sources(p):
             (base(e['name']) in p['objects'] or any(re.fullmatch(x,base(e['name'])) for x in p.get('patterns',[])))]
 
 parser = argparse.ArgumentParser(description=__doc__)
-parser.add_argument('--topic',choices=('all','chest')+TOPICS,default='all')
+parser.add_argument('--topic',choices=('all','chest','digestive')+TOPICS,default='all')
 args=parser.parse_args()
+if args.topic=='digestive':
+    import runpy
+    runpy.run_path(str(ROOT/'digestive/manifest.py'),run_name='__main__')
+    raise SystemExit(0)
 if args.topic in ('all','chest'):
     chest['referenceParts'] = list(bones.values())
     chest['budgets']['total'].update(maxBytes=4000000,maxTriangles=350000)

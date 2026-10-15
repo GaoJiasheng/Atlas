@@ -4,6 +4,57 @@ Offline native Blender pipeline for all six topics in `docs/16-muscles-content-s
 
 Round 9 acceptance, hashes, axis tables and pose links: [report.md](report.md).
 
+## Round 10 digestive region
+
+`digestive` publishes `public/models/digestive-system.glb`. Its inventory-validated
+manifest selects native visceral organs, cardiovascular heart chambers and great
+vessels, skeletal teeth/context, superficial muscles/diaphragm, and body skin.
+`rig: false` dispatches the shared build, optimizer, audit and preview entry points
+to static handling: no armature, skin weights, fibres or attachment sites. Existing
+muscle manifests keep the rigged path.
+
+```sh
+# Append/replace only the two new local FBX scans, preserving earlier inventory.
+blender -b --python-exit-code 1 -P scripts/anatomy/inventory.py -- --new-systems
+python3 scripts/anatomy/manifests.py --topic digestive
+python3 scripts/anatomy/run.py --topic digestive
+python3 scripts/anatomy/contact.py --topic digestive
+```
+
+No network access is needed. `--refresh-inventory` now scans all six cached source
+files. [digestive/inventory.md](digestive/inventory.md) lists every new FBX object;
+[source-files.json](digestive/source-files.json) records byte counts and SHA-256.
+The source has no separately labelled ileum, caecum, rectum or anal canal, and only
+28 teeth. These gaps are explicit in the manifest and hand-off.
+
+[centrelines.json](digestive/centrelines.json) uses the exact topic-local GLB frame:
+metres, +Y up, +Z anterior, +X body left. The umbilicus centre, source floor and
+optional grounding offset are in [organs.json](digestive/organs.json). All tube
+paths are sampled at most 8 mm apart; the coiled jejunum uses 2 mm samples of its
+1,153 exact topological section rings. Capped tubes use principal-axis section
+centroids; stomach/duodenum use neighbour-selected boundary rings and surface
+geodesics. Tube `_U` is normalized station; the jejunum retains its original
+section stations through decimation, so touching coils do not swap attributes.
+`connections` records endpoint gaps and `foodRoute` preserves missing segments.
+Per-tube `from`/`to` identify available-source neighbours for extraction; they
+do not assert continuity across missing anatomy.
+
+The jejunum is a real coiled tube, not a lumped mass. Its source has overlapping
+walls at tight folds; the audit independently reproduces crossings using the
+original section centres. `sourceOverlapCrossings` flags the affected flow
+stations. Oesophageal/colonic C-shaped wall windows remain exposed, with only
+audit-time transverse envelopes. [report.md](digestive/report.md) distinguishes
+mesh gates from source flow limitations; [preview-review.md](digestive/preview-review.md)
+records visual observations. These are source-derived candidates for anatomical
+review, not approval of a seamless mouth-to-anus lumen.
+
+Native previews include front, back, left, exploded-by-role, opaque skin,
+skin/skeleton overlay, tube-only, centreline front/left overlays and actual wire
+edges. They render the decoded compressed output. Budgets remain 4,000,000 bytes /
+350,000 triangles soft, 8,000,000 / 500,000 hard. Both are enforced before publish;
+source surface and topology are audited afterwards. Procedural close-ups and
+engine/content flow rendering are outside this pipeline.
+
 ## Round 9 hands and schematic
 
 Every topic exports `skin-outline`, `skin-hand.l`, `skin-hand.r`, and `skin-wire`. The outline excludes both hands. Wrist cuts are **open**, 5 mm distal to the same radial/ulnar styloid midpoint used by the hand joint, perpendicular to the real elbow-to-wrist axis. Connected distal hand surfaces are selected so splayed thumbs stay intact. The separate hands have rigid `hand.l/r` weights; hide them when procedural fists/palms are displayed.

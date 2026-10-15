@@ -1,4 +1,4 @@
-"""Inventory all four cached FBX systems; no conversion loses object names."""
+"""Inventory cached FBX systems; no conversion loses object names."""
 import json
 import sys
 from pathlib import Path
@@ -31,8 +31,10 @@ def write_report(inventory):
 if '--report-only' in sys.argv:
     inventory = json.loads((CACHE / 'inventory.json').read_text())
 else:
-    entries = []
-    for system in FILES:
+    only_new = '--new-systems' in sys.argv
+    entries = ([e for e in json.loads((CACHE/'inventory.json').read_text())['objects']
+                if e['system'] not in ('visceral','cardiovascular')] if only_new else [])
+    for system in (('visceral','cardiovascular') if only_new else FILES):
         clear_scene()
         objects = import_system(system)
         entries.extend(object_info(ob, system) for ob in objects)

@@ -1,0 +1,100 @@
+---
+id: "magnets-at-work"
+order: 6
+title: {"en": "Magnets at work", "zh": "生活中的磁铁"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: false
+  cutaway: "none"
+  layers: ["magnet-set", "compass", "materials", "making", "uses", "field", "current"]
+  hide: []
+  labels: ["fridge-door", "fridge-magnet", "door-gasket"]
+  camera: {"position": [0.98, 0.65, 0.98], "target": [0.36, 0.15, 0], "fov": 30}
+  summary: {"en": "Magnets hold doors, guide compasses and lift steel. Electromagnets let the attraction be controlled.", "zh": "磁铁能关门、让指南针定向、吊起钢材；电磁铁让吸引可以控制。"}
+  sim: {"set": {"em-switch": false, "em-cells": 2}, "try": {"vary": "em-switch", "keep": ["em-cells", {"en": "Same coil and steel core", "zh": "同样的线圈和钢芯"}], "observe": ["clips-em"]}}
+  beats:
+    - labels: ["fridge-door", "fridge-magnet", "door-gasket"]
+      sim: {"set": {"em-switch": false, "em-cells": 2}}
+      caption: {"en": "The fridge magnet sticks to the steel door. A magnetic strip hidden in the seal helps hold the door closed.", "zh": "冰箱贴吸在钢制门板上；门封里藏着的磁条帮助把门关紧。"}
+    - cutaway: "uses"
+      labels: ["door-gasket"]
+      sim: {"set": {"em-switch": false, "em-cells": 2}}
+      caption: {"en": "The cut shows the strip inside the flexible seal. Its attraction helps press the seal against the steel cabinet.", "zh": "剖面露出柔软门封里的磁条。磁条吸住钢制箱体，帮助门封贴紧。"}
+    - cutaway: "none"
+      pose: "cabinet-open"
+      labels: ["cabinet-latch"]
+      sim: {"set": {"em-switch": false, "em-cells": 2}}
+      caption: {"en": "A small magnet in the cabinet catch attracts a steel plate on the door. The miniature crane and train beside it show larger uses.", "zh": "门扣里的小磁铁吸住门上的钢片；旁边的起重机和列车模型展示更大的用途。"}
+    - camera: "compass-view"
+      labels: ["compass-case", "compass-needle"]
+      sim: {"set": {"compass-at": 1, "em-switch": false, "em-cells": 2}}
+      caption: {"en": "A compass needle is a turning magnet. Keep other magnets away when using it to find north.", "zh": "指南针的针是能转动的磁铁；用它找北时，要远离其他磁铁。"}
+    - camera: "make-bench"
+      labels: ["em-switch", "em-coil", "em-paper-clips"]
+      sim: {"set": {"em-switch": true, "em-cells": 2}}
+      caption: {"en": "Return to the bench electromagnet to model controlled pickup. With the switch closed, this model lifts six clips.", "zh": "回到台上的电磁铁，观察可控制的吸取。开关闭合时，这个模型吸起六只回形针。"}
+    - camera: "make-bench"
+      labels: ["em-nail", "em-paper-clips"]
+      sim: {"set": {"em-switch": false, "em-cells": 2}}
+      caption: {"en": "Open the switch: this steel core keeps only one clip in the model. A lifting electromagnet uses a core chosen to release its load readily.", "zh": "断开开关：模型的钢芯只留下一个回形针。吊运电磁铁会选用容易释放负载的芯材。"}
+  index: {"parts": ["fridge-door", "door-gasket", "fridge-magnet", "cabinet-latch", "compass-case", "compass-card", "compass-needle", "em-nail", "em-coil", "em-cells", "em-switch", "em-leads", "em-paper-clips", "aluminium-can"]}
+---
+
+<Lang en>
+
+At the far end of the bench, a fridge magnet holds against a steel door. Its pull can also hold a paper note between magnet and door. Inside the flexible door seal is another magnet: a strip that attracts the steel cabinet. The soft seal fits against the cabinet edge while the magnetic attraction helps keep it there. <FlyTo preset="uses-bay">Look inside the door seal</FlyTo>
+
+A cabinet catch uses the same basic attraction. A magnet fixed to the frame pulls a steel plate on the door. The door does not need a second magnet. Compare this with the aluminium tab in the test tray: a magnet does not stick just because something is metal. Choose a material that is attracted for the plate.
+
+The compass is another use. Its needle turns freely, giving a direction when other magnets are kept away. A nearby magnet can make it point elsewhere. Useful devices depend on the surroundings as well as on the magnet itself.
+
+For lifting scrap, control matters. An electromagnet can pick up steel while current flows and release it when the current is switched off. Use the bench switch to explore that idea with clips. Keep the cells unchanged and observe the pickup. This bench has a steel core that keeps some magnetism; a crane needs a core suited to releasing the load. Electric bells also use electromagnets to move a striker. Maglev systems use magnetic attraction or repulsion to support a train above its guideway. The small teaching models suggest these uses without reproducing full machines.
+
+<Figure src="figures/magnets-fridge-seal" alt={{"en": "A refrigerator door seal cut open to reveal its magnetic strip.", "zh": "剖开的冰箱门封，露出里面的磁条。"}} caption={{"en": "The flexible seal holds a magnetic strip against the steel cabinet. Illustration for this topic.", "zh": "柔软门封里的磁条吸住钢制箱体。为本主题画的示意图。"}} />
+
+<More title={{"en": "A bell that repeats", "zh": "反复敲响的电铃"}}>
+
+In a repeating electric bell, an electromagnet pulls a spring-mounted striker. Its movement opens a contact, interrupting current. The spring returns, the contact closes and the action repeats. The moving part and the contact work together; a continuously energised magnet alone would not keep ringing.
+
+</More>
+
+<More title={{"en": "Maglev does not always repel", "zh": "磁浮不全靠排斥"}}>
+
+The illustrated attraction-type system has electromagnets below steel rails. They pull upward towards the rails to support the vehicle; control keeps a gap. Other systems use repulsion. The floating rings demonstrate repulsion, so they are not a complete model of this attraction-type train.
+
+<Figure src="figures/magnets-maglev" alt={{"en": "A maglev train and a section of its guideway, with electromagnets beneath steel rails.", "zh": "磁浮列车和轨道截面，电磁铁位于钢轨下方。"}} caption={{"en": "This attraction-type design pulls the train upward towards the guideway. It is a schematic illustration.", "zh": "这种吸引式设计把车体向上吸向轨道，是原理示意图。"}} />
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+实验台右端，冰箱贴吸在钢制门板上，隔着便条也能把纸压住。柔软的门封里面还有磁铁：磁条吸住钢制箱体。门封贴合箱体边缘，磁力帮助它保持贴紧；这里展示的只是门和箱体的一小段，不是整台冰箱。<FlyTo preset="uses-bay">看门封里面</FlyTo>
+
+橱柜磁吸门扣用同样的吸引。固定在门框里的磁铁吸住门上的钢片，不必在门上再装磁铁。和测试盘中的铝拉环比较，就能看出不是金属都能吸住；做吸片必须选会被磁铁吸引的材料。
+
+指南针也是用途之一。磁针能自由转动，远离其他磁铁时可用来辨别方向；附近有磁铁，就可能改指别处。器具能否正常工作，除了看磁铁本身，也要看周围环境。
+
+吊运废钢时，需要控制什么时候吸、什么时候放。电磁铁通电吸起钢材，断电释放。用台上的开关和回形针观察这种控制，保持电池不变，只看开关造成的差别。台上的钢芯会留一点磁性，起重机则需要容易释放负载的芯材。电铃用电磁铁带动敲铃部件；磁浮系统用磁吸引或排斥支撑列车。旁边的小模型帮助联系用途，没有重现整台机器。
+
+<Figure src="figures/magnets-fridge-seal" alt={{"en": "A refrigerator door seal cut open to reveal its magnetic strip.", "zh": "剖开的冰箱门封，露出里面的磁条。"}} caption={{"en": "The flexible seal holds a magnetic strip against the steel cabinet. Illustration for this topic.", "zh": "柔软门封里的磁条吸住钢制箱体。为本主题画的示意图。"}} />
+
+<More title={{"en": "A bell that repeats", "zh": "反复敲响的电铃"}}>
+
+连续敲响的电铃里，电磁铁拉动弹性支撑上的敲铃部件，运动使触点分开，电流中断。弹性部件返回后触点重新接通，动作便能重复。运动部件和触点共同起作用；只让磁铁一直通电，并不会自动反复敲铃。
+
+</More>
+
+<More title={{"en": "Maglev does not always repel", "zh": "磁浮不全靠排斥"}}>
+
+图中是吸引式系统，电磁铁位于钢轨下方，向上吸向钢轨来支撑车体，再用控制维持间隙。也有系统用排斥。悬浮环展示的是排斥，不能完整代表这幅图的吸引式列车。
+
+<Figure src="figures/magnets-maglev" alt={{"en": "A maglev train and a section of its guideway, with electromagnets beneath steel rails.", "zh": "磁浮列车和轨道截面，电磁铁位于钢轨下方。"}} caption={{"en": "This attraction-type design pulls the train upward towards the guideway. It is a schematic illustration.", "zh": "这种吸引式设计把车体向上吸向轨道，是原理示意图。"}} />
+
+</More>
+
+</Lang>

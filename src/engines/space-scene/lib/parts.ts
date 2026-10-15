@@ -195,6 +195,8 @@ function unmirroredBox(p: Primitive): Box3Like {
       return sweepBox(p);
     case 'wing':
       return wingBox(p);
+    case 'filings':
+      return sym(p.size[0] / 2, p.needle[1], p.size[1] / 2);
   }
 }
 

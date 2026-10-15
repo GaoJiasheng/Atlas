@@ -1,0 +1,152 @@
+---
+id: mouth-and-gullet-chapter
+order: 3
+title:
+  en: Mouth and gullet
+  zh: 口与食道
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: true
+  cutaway: none
+  pose: null
+  ghost: []
+  hide: []
+  layers:
+    - mouth-and-gullet
+    - stomach-group
+    - meal
+    - juices
+    - tooth-closeup
+  labels:
+    - tongue
+    - salivary-glands
+    - oesophagus
+  camera:
+    position:
+      - 0.7
+      - 0.65
+      - 1.1
+    target:
+      - 0
+      - 0.5
+      - -0.05
+    fov: 30
+  summary:
+    en: Teeth break up food, saliva starts digestion, and the gullet transports it.
+    zh: 牙齿弄碎食物，唾液开始消化，食道输送食物。
+  beats:
+    - camera: head
+      labels:
+        - teeth-upper
+        - teeth-lower
+        - tongue
+      caption:
+        en: Upper and lower teeth surround the tongue. Chewing breaks food into smaller pieces.
+        zh: 上下排牙齿围着舌，咀嚼把食物弄成较小的碎块。
+    - camera: head
+      labels:
+        - salivary-glands
+        - tongue
+      caption:
+        en: The salivary glands supply saliva. Ochre-green dots show food; blue-grey dots show digestive juice.
+        zh: 唾液腺分泌唾液。赭绿色点表示食物，青灰色点表示消化液。
+      view: xray
+    - camera: head
+      cutaway: sagittal
+      labels:
+        - pharynx
+      caption:
+        en: A midline viewing cut shows the throat behind the mouth. Swallowing directs food towards the gullet.
+        zh: 正中观察剖面显示口后面的咽部，吞咽把食物送向食道。
+      view: assembled
+    - camera:
+        position:
+          - 0.3
+          - 0.36
+          - 0.9
+        target:
+          - 0.01
+          - 0.29
+          - -0.1
+        fov: 30
+      cutaway: none
+      labels:
+        - oesophagus
+        - stomach
+      caption:
+        en: The gullet moves food towards the stomach. The contractions and particle timing here are schematic.
+        zh: 食道把食物推向胃。这里的收缩与点的移动节奏都是示意。
+      view: xray
+    - camera: specimens
+      layers:
+        - tooth-closeup
+      cutaway: none
+      labels:
+        - tooth-section
+      caption:
+        en: The enlarged tooth section separates its hard outer layers from the softer tissue within. Read its own scale bar.
+        zh: 放大的牙剖面显示坚硬外层与内部软组织，实际大小看它自己的比例尺。
+      part: tooth-section
+  index:
+    parts:
+      - teeth-upper
+      - teeth-lower
+      - tongue
+      - salivary-glands
+      - pharynx
+      - oesophagus
+      - stomach
+      - trachea
+      - tooth-section
+---
+
+<Lang en>
+
+At the top of the model, the upper and lower teeth meet around the tongue. Teeth cut and grind food into smaller pieces. This is a physical change: smaller pieces expose more surface to digestive juices, the liquids that help digest food. <Term id="saliva">Saliva</Term>, made by the salivary glands, moistens food and begins digesting starch into simpler substances. Digestion therefore starts in the mouth, before the food reaches the stomach.
+
+The tongue mixes food with saliva and pushes it towards the throat. During swallowing, structures in the throat help direct food away from the windpipe and into the gullet behind it. The illustration shows this arrangement from the side. The windpipe carries air; it is not another route for food.
+
+The gullet moves the swallowed food towards the stomach. Its wall has muscles that contract in a travelling sequence. This movement is <Term id="peristalsis">peristalsis</Term>. The gullet transports food; it does not add digestive juices to digest it. Gravity is not the only force moving food downwards. The particles on the stage show direction, rather than individual pieces of a real meal.
+
+<Figure src="figures/digestive-system-swallowing" alt={{ en: "Side section of the head and neck with the tongue pushing food towards the gullet behind the windpipe.", zh: "头颈侧面剖视，舌把食物推向气管后面的食道。" }} caption={{ en: "Swallowing directs food into the gullet. An illustration made for this topic.", zh: "吞咽把食物送进食道。为本主题绘制的示意图。" }} />
+
+<More title={{ en: "Close-up and motion", zh: "剖面与运动" }}>
+
+The tooth section separates hard outer layers from softer tissue inside. Its own scale bar gives real size. The contractions are schematic whole-organ pulses, not travelling rings or measured swallowing timing.
+
+</More>
+
+<More title={{ en: "Try it: notice saliva", zh: "试一试：留意唾液" }}>
+
+Chew a plain cracker slowly and notice how its texture and taste change before swallowing normally. Saliva wets the pieces and begins breaking down starch. This observation shows digestion beginning in the mouth.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+模型头部，上下排牙齿围在舌的外侧。牙齿把食物切开、磨碎，使碎块变小。这是形状和大小的改变，也让更多食物表面接触消化液。唾液腺分泌的<Term id="saliva">唾液</Term>润湿食物，并开始把淀粉分解成更简单的物质。所以，消化在口里已经开始，不是等食物进入胃才发生。
+
+舌把食物和唾液拌匀，再把食物推向咽部。吞咽时，咽部的结构帮助食物避开气管，进入气管后面的食道。插图用侧面剖视显示这段路线。气管输送空气，食道输送食物，不能把它们当成相通的食物通道；模型的咽部显示了食物经过的部分。
+
+食道壁的肌肉按顺序收缩，形成推进食物的波，这种运动叫<Term id="peristalsis">蠕动</Term>。食道把食物送到胃里，不分泌消化液来消化食物。推动食物的并不只有重力。舞台上的点表示内容物前进的方向，并不是按真实大小画出的饭粒，也不能用点移动的速度推算吞咽时间。
+
+<Figure src="figures/digestive-system-swallowing" alt={{ en: "Side section of the head and neck with the tongue pushing food towards the gullet behind the windpipe.", zh: "头颈侧面剖视，舌把食物推向气管后面的食道。" }} caption={{ en: "Swallowing directs food into the gullet. An illustration made for this topic.", zh: "吞咽把食物送进食道。为本主题绘制的示意图。" }} />
+
+<More title={{ en: "Close-up and motion", zh: "剖面与运动" }}>
+
+牙齿标本把坚硬外层与内部软组织分开，独立比例尺表示实际大小。收缩动画只是整段器官的示意，不是沿管壁传播的收缩环，也不是实测的吞咽节奏。
+
+</More>
+
+<More title={{ en: "Try it: notice saliva", zh: "试一试：留意唾液" }}>
+
+慢慢咀嚼原味苏打饼干，留意口感和味道怎样改变，再正常吞咽。唾液润湿碎块，并开始分解淀粉，显示消化从口开始。
+
+</More>
+
+</Lang>

@@ -46,7 +46,7 @@ const root = dirname(fileURLToPath(import.meta.url));
 const cache = resolve(root, 'cache');
 const topicIndex = process.argv.indexOf('--topic');
 const topic = topicIndex < 0 ? 'chest' : process.argv[topicIndex + 1];
-if (!topic || !['chest','back','shoulders','arms','legs','core'].includes(topic)) throw new Error('Invalid --topic');
+if (!topic || !['chest','back','shoulders','arms','legs','core','digestive'].includes(topic)) throw new Error('Invalid --topic');
 const output = resolve(root, `../../public/models/muscles-${topic}.glb`);
 const manifest: Manifest = JSON.parse(await readFile(resolve(root, `${topic}/manifest.json`), 'utf8'));
 await Promise.all([MeshoptEncoder.ready, MeshoptDecoder.ready]);
@@ -54,6 +54,11 @@ const io = new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies(
   'meshopt.encoder': MeshoptEncoder, 'meshopt.decoder': MeshoptDecoder,
 });
 const document = await io.read(resolve(cache, `${topic}-raw.glb`));
+if ((manifest as Manifest & { rig?: boolean }).rig === false) {
+  const { optimizeStatic } = await import('./optimize_static.ts');
+  await optimizeStatic(root, topic, io, document, EXTMeshoptCompression);
+  process.exit(0);
+}
 const expected = manifest.parts.flatMap((p) =>
   p.exportGroup ? [p.exportGroup] : p.sides === 'bilateral' ? [p.id + '.l', p.id + '.r'] : [p.id]);
 const uniqueExpected = new Set<string>([...expected, ...manifest.skinNodes]);

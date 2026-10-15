@@ -35,7 +35,8 @@ export function useSimView(sim: SimData | undefined): SimView | null {
     if (!sim) return null;
     const values = resolveSimValues(sim, s.set);
     const state = chapters.find((c) => c.id === s.chapter)?.state as SpaceChapterState | undefined;
-    return { sim, values, outputs: evaluateSim(sim, values), card: state?.sim?.try ?? null };
+    const card = state?.sim?.try ?? null;
+    return { sim, values, outputs: evaluateSim(sim, values, card?.observe), card };
   }, [sim, s.set, s.chapter, chapters]);
 }
 

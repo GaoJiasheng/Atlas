@@ -16,8 +16,11 @@
  * Try-it bindings (lib/sim/bind.ts) also give a part a glow (`uGlow` on its
  * own material, slot 0; eased: a dull red at a trace warming to the lamp
  * colour, brighter past full), a
- * count of its `repeat` copies on show, and per animation a speed (a rotate's
- * rpm, integrated so a change never jumps) or an off switch (eased out).
+ * count of its `repeat` copies on show, a tint (an iron core turned magnet),
+ * a turn that swings and settles (`settle`: a compass needle) about the part
+ * centre or a pivot, a filings card's needles laid out for the field state
+ * on show, and per animation a speed (a rotate's rpm, integrated so a change
+ * never jumps) or an off switch (eased out).
  *
  * glb parts skinned to the model's skeleton draw as skinned meshes in
  * detached bind mode, so the explode / put-aside / pose transforms still
@@ -59,6 +62,8 @@ import { createPartMaterial, setPartClipping, stylePartMaterial, styleFibreGrain
 import type { FibreMeasure } from './GltfSource';
 import { skinnedRaycast } from './skinPick';
 import type { ShapePiece } from './geometry';
+import type { SimSettle } from '../../sim-schema';
+import { nearestTurn, stepSwing } from '../../lib/sim/settle';
 
 /** Geometry + rest transform of a part (from a primitive or a glb mesh). */
 export interface PartShape {
@@ -137,8 +142,12 @@ export interface PartNodeProps {
   glow?: { color: string; level: number } | null;
   /** Try-it: copies of the part's `repeat` on show (null: all). */
   count?: number | null;
-  /** Try-it offset (scene units) and turn about a unit axis through the part centre. */
-  simMove?: { offset: Vec3; axis: Vec3; deg: number } | null;
+  /** Try-it offset (scene units) and turn about a unit axis through the part centre or `pivot` (a scene point at rest), eased or swinging (`settle`). */
+  simMove?: { offset: Vec3; axis: Vec3; deg: number; settle?: SimSettle | undefined; pivot?: Vec3 | undefined } | null;
+  /** Try-it tint: colour (sRGB hex) and level 0–1. */
+  simTint?: { color: string; level: number } | null;
+  /** Try-it: a filings card's needles for the field state on show (part frame; null: as built). */
+  filings?: readonly Matrix4[] | null;
   /** Try-it animation overrides by animation id: a rotate's rpm, and whether it plays. */
   animSim?: ReadonlyMap<string, { rpm?: number; enabled: boolean }>;
   onSelect(id: string): void;
@@ -171,6 +180,8 @@ const tmpQ = new Quaternion();
 const tmpBox = new Box3();
 const tmpInv = new Matrix4();
 const tmpM = new Matrix4();
+const tmpPose = new Matrix4();
+const tmpTurn = new Matrix4();
 const tmpT = new Matrix4();
 const tmpE = new Euler();
 const tmpV = new Vector3();
@@ -186,6 +197,8 @@ const GLOW_GAIN = 2.2;
 /** Glow eases in ~0.2 s, a try-it move in ~0.5 s. */
 const GLOW_RATE = 14;
 const MOVE_RATE = 7;
+/** Scratch state of a swinging turn (stepped in place each frame). */
+const swing = { x: 0, v: 0 };
 
 /** An animation that moves every copy of its part about the copy's own centre (schema `each`). */
 const isEach = (a: PartAnimation) => (a.kind === 'rotate' || a.kind === 'oscillate' || a.kind === 'pulse') && a.each === true;
@@ -210,18 +223,25 @@ function Piece({
   castShadow,
   register,
   handlers,
+  instances,
 }: {
   piece: ShapePiece;
   material: Mesh['material'];
   castShadow: boolean;
   register(o: Object3D | null, piece: ShapePiece): void;
   handlers: Record<string, unknown>;
+  /** A filings piece's needles for the field state on show (null: as built). */
+  instances: readonly Matrix4[] | null;
 }) {
   const ref = useRef<Mesh | InstancedMesh | LineSegments | SkinnedMesh>(null);
   useLayoutEffect(() => {
     const mesh = ref.current;
     if (mesh instanceof InstancedMesh && piece.matrices) {
-      piece.matrices.forEach((m, i) => mesh.setMatrixAt(i, m));
+      // Filings: at most the built budget of needles; the rest of the instances are not drawn.
+      const list = instances ?? piece.matrices;
+      const n = Math.min(list.length, piece.matrices.length);
+      for (let i = 0; i < n; i++) mesh.setMatrixAt(i, list[i]!);
+      if (piece.filings) mesh.count = n;
       mesh.instanceMatrix.needsUpdate = true;
       mesh.computeBoundingSphere();
       // Copies that turn about their own centres (`each`) can leave the rest bounds a little: never culled.
@@ -236,7 +256,7 @@ function Piece({
     }
     register(mesh, piece);
     return () => register(null, piece);
-  }, [piece, register]);
+  }, [piece, register, instances]);
   if (piece.skin) {
     return <skinnedMesh ref={ref as Ref<SkinnedMesh>} geometry={piece.geometry} material={material} castShadow={castShadow} dispose={null} {...handlers} />;
   }
@@ -293,6 +313,8 @@ export function PartNode(props: PartNodeProps) {
     glow: props.glow?.level ?? 0,
     move: [0, 0, 0] as Vec3,
     turn: 0,
+    /** Turning speed of a swinging (`settle`) turn, degrees per second. */
+    turnV: 0,
     /** Per animation: its integrated angle (a sim-driven rotate) and how far it is switched on. */
     angle: props.animations.map(() => 0),
     on: props.animations.map((a): number => (props.animSim?.get(a.id)?.enabled === false ? 0 : 1)),
@@ -416,6 +438,7 @@ export function PartNode(props: PartNodeProps) {
   const shownCopies = props.count ?? null;
   useLayoutEffect(() => {
     for (const [piece, o] of pieces.current) {
+      if (piece.filings) continue;
       if (o instanceof InstancedMesh) o.count = shownCopies === null ? (piece.matrices?.length ?? o.count) : Math.min(piece.matrices?.length ?? 0, Math.round(((piece.matrices?.length ?? 0) * shownCopies) / copies));
       else if (o instanceof Mesh && !(o instanceof SkinnedMesh)) {
         const total = piece.geometry.getAttribute('position').count;
@@ -425,6 +448,7 @@ export function PartNode(props: PartNodeProps) {
     }
     runtime.shadowDirty = true;
   }, [shownCopies, copies, shape, runtime]);
+
 
   // Hidden, faint and context parts do not take part in picking (clicks pass through).
   const pickable = display.visible && display.selectable;
@@ -523,13 +547,15 @@ export function PartNode(props: PartNodeProps) {
     }
 
     // Highlight tint (exercise mode, `highlight`): eased like the selection; in an exercise it follows the contraction.
+    // A try-it tint (an iron core turned magnet) takes its place while bound.
     const c = runtime.contract.get(part.id) ?? 0;
-    const tintTarget = display.tint ? TINT * (props.tintLive ? TINT_REST + (1 - TINT_REST) * c : 1) : 0;
+    const st = props.simTint ?? null;
+    const tintTarget = st ? TINT * st.level : display.tint ? TINT * (props.tintLive ? TINT_REST + (1 - TINT_REST) * c : 1) : 0;
     m.tint = snap ? tintTarget : damp(m.tint, tintTarget, 8, dt);
     if (Math.abs(m.tint - tintTarget) < 0.003) m.tint = tintTarget;
     for (const pm of pms) {
       pm.uniforms.uHi.value = m.tint;
-      pm.uniforms.uHiColor.value.set(display.tint === 'custom' && props.tintColor ? props.tintColor : display.tint === 'cold' ? style.cold : style.signal);
+      pm.uniforms.uHiColor.value.set(st ? st.color : display.tint === 'custom' && props.tintColor ? props.tintColor : display.tint === 'cold' ? style.cold : style.signal);
     }
 
     // Contraction (MotionDriver): along the fibres in the shader, else a scale below.
@@ -562,9 +588,7 @@ export function PartNode(props: PartNodeProps) {
     }
     const pr = poseRef.current;
     if (pr) {
-      pr.matrix.identity();
-      if (!isRest(m.poseNow)) applyTransform(pr.matrix, m.poseNow, shape.position);
-      // Try-it offset and turn (about the part centre), eased.
+      // Try-it offset and turn, eased or swinging: applied after the pose, along the scene axes, about the posed centre or the pivot.
       const sm = props.simMove;
       for (let a = 0; a < 3; a++) {
         const to = sm?.offset[a] ?? 0;
@@ -572,12 +596,34 @@ export function PartNode(props: PartNodeProps) {
         if (Math.abs(m.move[a]! - to) < 1e-6) m.move[a] = to;
         else moving = true;
       }
-      const turnTo = sm?.deg ?? 0;
-      m.turn = snap ? turnTo : damp(m.turn, turnTo, MOVE_RATE, dt);
-      if (Math.abs(m.turn - turnTo) < 0.01) m.turn = turnTo;
-      else moving = true;
-      if (m.move[0] !== 0 || m.move[1] !== 0 || m.move[2] !== 0) pr.matrix.multiply(tmpT.makeTranslation(m.move[0], m.move[1], m.move[2]));
-      if (m.turn !== 0 && sm) pr.matrix.multiply(tmpM.makeRotationAxis(tmpV.set(sm.axis[0], sm.axis[1], sm.axis[2]), m.turn * DEG2RAD));
+      const settle = sm?.settle;
+      // A swinging turn goes the short way round to its target; a plain one eases straight there.
+      const turnTo = settle ? nearestTurn(m.turn, sm!.deg) : (sm?.deg ?? 0);
+      if (snap) {
+        m.turn = turnTo;
+        m.turnV = 0;
+      } else if (settle) {
+        swing.x = m.turn;
+        swing.v = m.turnV;
+        if (stepSwing(swing, turnTo, dt, settle)) moving = true;
+        m.turn = swing.x;
+        m.turnV = swing.v;
+      } else {
+        m.turn = damp(m.turn, turnTo, MOVE_RATE, dt);
+        m.turnV = 0;
+        if (Math.abs(m.turn - turnTo) < 0.01) m.turn = turnTo;
+        else moving = true;
+      }
+      // pose matrix P; then the whole: T(move) · about c: R · P (c = the pivot, else P's own centre).
+      tmpPose.identity();
+      if (!isRest(m.poseNow)) applyTransform(tmpPose, m.poseNow, shape.position);
+      pr.matrix.makeTranslation(m.move[0], m.move[1], m.move[2]);
+      if (m.turn !== 0 && sm) {
+        const e = tmpPose.elements;
+        const c: Vec3 = sm.pivot ? [sm.pivot[0] - shape.position[0], sm.pivot[1] - shape.position[1], sm.pivot[2] - shape.position[2]] : [e[12]!, e[13]!, e[14]!];
+        aboutPivot(pr.matrix, tmpTurn.makeRotationAxis(tmpV.set(sm.axis[0], sm.axis[1], sm.axis[2]), m.turn * DEG2RAD), c);
+      }
+      pr.matrix.multiply(tmpPose);
       pr.matrixWorldNeedsUpdate = true;
       // The label anchor follows the pose.
       const move = (rest: readonly number[], out: Vec3) => {
@@ -773,6 +819,7 @@ export function PartNode(props: PartNodeProps) {
                 castShadow={props.castShadow && !piece.lines}
                 register={register}
                 handlers={handlers}
+                instances={piece.filings ? (props.filings ?? null) : null}
               />
             ))}
           </group>

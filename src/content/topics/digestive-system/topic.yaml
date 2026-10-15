@@ -1,0 +1,17 @@
+id: digestive-system
+title: { en: "The Digestive System", zh: "消化系统" }
+subtitle: { en: "From mouth to intestine: food digested into simpler substances", zh: "从口到肠：食物消化成更简单的物质" }
+shortTitle: { en: "Digestion", zh: "消化" }
+subject: biology
+tags: [biology, space]
+moe:
+  - "MOE 2023 Science P4 Systems: identify the digestive, respiratory, circulatory, skeletal and muscular systems and their functions"
+  - "MOE 2023 Science P4 Human System (Digestive System): mouth, gullet, stomach, small intestine, large intestine and their functions"
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: draft
+illustration: digestive-system
+note: { en: "Male reference anatomy · meshes Z-Anatomy / BodyParts3D, CC BY-SA 4.0 · organs simplified; gaps explained in text", zh: "男性参考解剖 · 网格 Z-Anatomy / BodyParts3D，CC BY-SA 4.0 · 器官已简化，缺段见正文" }

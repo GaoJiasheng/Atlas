@@ -1,0 +1,95 @@
+---
+id: "two-poles"
+order: 2
+title: {"en": "Two poles, pointing north", "zh": "两极，指向南北"}
+sensitive: false
+state:
+  view: "assembled"
+  explode: 0
+  part: null
+  run: true
+  cutaway: "none"
+  layers: ["magnet-set", "compass", "materials", "making", "uses", "field", "current"]
+  hide: ["fridge-door", "door-gasket", "fridge-magnet", "cabinet-latch", "fridge-body", "cabinet-corner", "bar-magnet-b"]
+  labels: ["iron-filings", "bar-magnet-n", "bar-magnet-s"]
+  camera: {"position": [-0.16, 0.65, 0.01], "target": [-0.16, 0.01, 0], "fov": 28}
+  summary: {"en": "A magnet pulls most strongly at its poles. A freely hanging magnet settles along north and south.", "zh": "磁极处吸力最强；自由悬挂的磁铁静止时指向南北。"}
+  sim: {"set": {"compass-at": 1}, "try": {"vary": "compass-at", "keep": [{"en": "Same bar magnet", "zh": "同一根条形磁铁"}], "observe": ["needle-bearing"]}}
+  beats:
+    - labels: ["iron-filings", "bar-magnet-n", "bar-magnet-s"]
+      sim: {"set": {"compass-at": 1}}
+      caption: {"en": "The iron filings crowd near the ends of the bar. These are its poles, where its pull is strongest.", "zh": "铁屑在条形磁铁两端聚得最密。两端叫磁极，吸力最强。"}
+    - layers: ["magnet-set", "compass", "field"]
+      labels: ["iron-filings"]
+      sim: {"set": {"compass-at": 1}}
+      caption: {"en": "The filings form curved patterns around the bar. The drawn lines help us follow the pattern; they are not threads in the air.", "zh": "铁屑在磁铁周围排成弯曲图样。画出的线帮助看清图样，不是空气中真的有线。"}
+    - camera: "compass-view"
+      labels: ["compass-case", "compass-needle"]
+      sim: {"set": {"compass-at": 5}}
+      caption: {"en": "Move the compass round the bar. Its needle is a small magnet, and it turns to a new direction at each position.", "zh": "把指南针移到磁铁周围的另一位置。指针是小磁铁，会转向新的方向。"}
+    - camera: "compass-view"
+      pose: "suspended"
+      hide: ["fridge-door", "door-gasket", "fridge-magnet", "cabinet-latch", "fridge-body", "cabinet-corner", "bar-magnet-b", "compass-case", "compass-card", "compass-needle", "compass-glass", "horseshoe-magnet", "ring-magnet-upper", "ring-magnet-lower"]
+      labels: ["suspension-stand", "bar-magnet-n", "bar-magnet-s"]
+      sim: {"set": {"compass-at": 1}}
+      caption: {"en": "Hang the bar on the thread, away from other magnets. Free to turn, it swings and settles pointing north and south.", "zh": "把条形磁铁挂在线上，远离别的磁铁。让它自由转动，摆动后会指向南北停住。"}
+    - camera: "compass-view"
+      pose: "suspended"
+      hide: ["fridge-door", "door-gasket", "fridge-magnet", "cabinet-latch", "fridge-body", "cabinet-corner", "bar-magnet-b", "compass-case", "compass-card", "compass-needle", "compass-glass", "horseshoe-magnet", "ring-magnet-upper", "ring-magnet-lower"]
+      labels: ["bar-magnet-n", "bar-magnet-s"]
+      sim: {"set": {"compass-at": 1}}
+      caption: {"en": "The end pointing north is called the north pole. The other is the south pole. The colours simply help us tell them apart.", "zh": "指向北方的一端叫北极，另一端叫南极。颜色只是方便区分它们的标记。"}
+  index: {"parts": ["bar-magnet-n", "bar-magnet-s", "iron-filings", "compass-case", "compass-card", "compass-needle", "compass-glass", "suspension-stand"]}
+---
+
+<Lang en>
+
+The paper above the bar carries iron filings. They gather most densely near the ends, where the magnet's pull is strongest. These regions are called <Term id="pole">poles</Term>. Every magnet has <Num s="S3">two</Num>: a north pole and a south pole. The middle of a bar attracts the filings less strongly than its ends.
+
+The filings line up in curves around the bar. They make a pattern in the space where the magnet acts. The lines drawn beside the filings are a way of showing that pattern. They are not wires or paths that an object must travel along. <FlyTo preset="field-top">Look down at the pattern</FlyTo>
+
+A <Term id="compass">compass</Term> has a small magnetic needle that can turn. Near the bar magnet, the needle turns differently at different positions. Move it around using the Try it card. Change its position while keeping the bar magnet in place. Observe the needle's direction after it settles, rather than judging it while it is still swinging.
+
+A bar magnet can turn too. Place it in the paper support and hang it from the thread. A <Term id="freely-suspended">freely suspended</Term> magnet can turn without being blocked. Away from other magnets, it swings and eventually rests along north and south. The end that points north is its north pole; the other is its south pole. A nearby magnet changes this direction, so a compass beside the bar is not a reliable guide to geographical north.
+
+<Figure src="figures/magnets-compass" alt={{"en": "A bar magnet hanging from a thread beside a round compass.", "zh": "细线悬挂的条形磁铁，旁边放着圆形指南针。"}} caption={{"en": "A hanging magnet and a compass can both turn freely. Illustration for this topic.", "zh": "悬挂磁铁和指南针的针都能自由转动。为本主题画的示意图。"}} />
+
+<More title={{"en": "Earth and the compass", "zh": "地球与指南针"}}>
+
+Earth has a <Term id="magnetic-field">magnetic field</Term>, the name for this magnetic influence around it. Near geographical north, Earth behaves like a magnetic south pole, attracting the north-seeking end of a compass. The bench uses a simplified north direction; it does not calculate a local navigation correction.
+
+</More>
+
+<More title={{"en": "Cutting a magnet", "zh": "切开磁铁"}}>
+
+Cutting a bar does not separate north from south. Each piece becomes a magnet with <Num s="S3">two poles</Num>. The coloured halves of this model are selectable parts for labels, not physically isolated poles.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+条形磁铁上方的纸上撒着铁屑。铁屑在两端聚得最密，说明那里吸力最强。这些部位叫<Term id="pole">磁极</Term>。每块磁铁都有 <Num s="S3">两极</Num>：北极和南极。条形磁铁中间对铁屑的吸引，比两端弱。
+
+铁屑在磁铁周围排出弯曲图样，让原本看不见的作用显出来。画面中的线帮助我们看清图样，并不是实际存在的导线，也不表示物品只能沿线移动。观察疏密和方向，比只记住图的外形更有用。<FlyTo preset="field-top">从上方看铁屑图样</FlyTo>
+
+<Term id="compass">指南针</Term>里有能转动的小磁针。把它放到条形磁铁周围的不同位置，针会转向不同的方向。在「试一试」里只改变指南针的位置，保持条形磁铁不动。等指针停稳再观察，不要把摆动中的方向当成最后的结果。
+
+条形磁铁也能转动。把它放进纸托，用细线挂起来，不让别的东西挡住，这叫<Term id="freely-suspended">自由悬挂</Term>。远离其他磁铁时，它摆动后会沿南北方向停住。指北的一端叫北极，另一端叫南极。附近若有磁铁，指向就会改变，所以紧靠条形磁铁的指南针不能用来找地理上的北方。悬挂时也要让支架和细线不妨碍转动，不能用手把磁铁固定在期待的方向。
+
+<Figure src="figures/magnets-compass" alt={{"en": "A bar magnet hanging from a thread beside a round compass.", "zh": "细线悬挂的条形磁铁，旁边放着圆形指南针。"}} caption={{"en": "A hanging magnet and a compass can both turn freely. Illustration for this topic.", "zh": "悬挂磁铁和指南针的针都能自由转动。为本主题画的示意图。"}} />
+
+<More title={{"en": "Earth and the compass", "zh": "地球与指南针"}}>
+
+地球周围也有<Term id="magnetic-field">磁场</Term>，这是磁作用范围的名称。地理北极附近相当于磁南极，会吸引指南针指北的一端。模型只用简化的北方，不计算当地导航时的方向修正。
+
+</More>
+
+<More title={{"en": "Cutting a magnet", "zh": "切开磁铁"}}>
+
+把条形磁铁切开，并不能把北极和南极分开。每段都会成为有 <Num s="S3">两极</Num>的磁铁。模型把涂色的两半分成可选对象，只为方便标注，不代表孤立的磁极。
+
+</More>
+
+</Lang>

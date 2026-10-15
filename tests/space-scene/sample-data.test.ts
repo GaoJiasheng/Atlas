@@ -17,13 +17,13 @@ const data = spaceSceneData.parse(
 const file = data.parts;
 
 describe('sample-space data (placeholder)', () => {
-  it('stays small: 21 parts (6 bilateral pairs) + 1 context wall in 5 groups', () => {
-    // 21 numbered parts, 3 mirror twins and 3 glb twins added by the bilateral expansion, the wall.
-    expect(file.parts).toHaveLength(28);
+  it('stays small: 26 parts (6 bilateral pairs) + 1 context wall in 6 groups', () => {
+    // 26 numbered parts (5 on the magnet bench), 3 mirror twins and 3 glb twins added by the bilateral expansion, the wall.
+    expect(file.parts).toHaveLength(33);
     expect(file.parts.filter((p) => p.twinOf)).toHaveLength(6);
     expect(file.parts.filter((p) => p.context)).toHaveLength(1);
-    expect(file.groups).toHaveLength(5);
-    expect(file.flows).toHaveLength(2);
+    expect(file.groups).toHaveLength(6);
+    expect(file.flows).toHaveLength(3);
     // 6 written + the leg's and the flexor's mirrored copies + the shoulder clip's right-side copy.
     expect(file.animations).toHaveLength(9);
   });
@@ -63,9 +63,19 @@ describe('sample-space data (placeholder)', () => {
     expect(file.parts.filter((p) => p.repeat)).toHaveLength(1);
   });
   it('stays well under the draw-call budget', () => {
-    // One draw call per piece (instanced pieces included).
+    // One draw call per piece (instanced pieces included; the filings card is one).
     const pieces = file.parts.reduce((n, p) => n + primitivePieces(p).length, 0);
-    expect(pieces).toBeLessThan(28);
+    expect(pieces).toBeLessThan(34);
+  });
+  it('exercises the magnet try-it: a filings card, a field-line flow, a ring, a settling needle and force arrows', () => {
+    const sim = file.sim!;
+    expect(sim.kind).toBe('magnet');
+    expect(file.parts.find((p) => p.id === 'sample-filings')?.primitive?.kind).toBe('filings');
+    expect(file.flows.find((f) => f.id === 'sample-field-lines')?.path).toEqual([]);
+    expect(sim.bind.some((b) => 'part' in b && b.at === 'sample-ring')).toBe(true);
+    expect(sim.bind.some((b) => 'part' in b && b.rotate?.settle !== undefined)).toBe(true);
+    expect(sim.overlays.map((o) => o.kind)).toEqual(['force-arrows']);
+    expect(Object.keys(sim.magnet!.fields!)).toHaveLength(7);
   });
   it('exercises hide, shells, enamel, stops + open ends, spec, telemetry', () => {
     expect(file.parts.filter((p) => p.shell).length).toBeGreaterThan(0);

@@ -37,11 +37,12 @@ export function valueText(c: SimControl, v: SimValue | undefined, locale: 'en' |
   return tx(c.options.find((o) => o.id === v)?.label ?? { en: String(v), zh: String(v) }, locale);
 }
 
-/** An output's value as text: a number with its decimals, a state's label. */
+/** An output's value as text: a number with its decimals (`—` where it does not apply), a state's label. */
 export function outputText(o: SimOutput, v: SimOutputValue | undefined, locale: 'en' | 'zh'): string {
   if (o.kind === 'state') return tx(o.states?.[String(v)] ?? { en: String(v ?? ''), zh: String(v ?? '') }, locale);
   if (o.kind === 'vector') return '';
-  return formatReading(numberOf(v), outputDecimals(o));
+  const n = numberOf(v);
+  return Number.isFinite(n) ? formatReading(n, outputDecimals(o)) : '—';
 }
 
 function Control({ c, value, onSet, primary }: { c: SimControl; value: SimValue | undefined; onSet(v: SimValue): void; primary: boolean }) {
@@ -127,7 +128,7 @@ function Predict({ sim, card, ui, chapter }: { sim: SimData; card: SimTry; ui: S
     const before = { ...store.getState().sim };
     // From the prediction's starting point (the switch closed …): read the observed output there, then make the change.
     for (const [k, v] of Object.entries(p.start ?? {})) setSim(store, sim, k, v);
-    const value = numberOf(evaluateSim(sim, resolveSimValues(sim, store.getState().sim))[p.observe]);
+    const value = numberOf(evaluateSim(sim, resolveSimValues(sim, store.getState().sim), card.observe)[p.observe]);
     ui.setState({ simPredict: { chapter, guess: id, before, value } });
     for (const [k, v] of Object.entries(p.change)) setSim(store, sim, k, v);
   };
