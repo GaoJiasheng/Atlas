@@ -3,12 +3,12 @@
     {
       "id": "S1",
       "text": {
-        "en": "Atlas design study, docs/25 and scripts/anatomy/digestive: a simplified adult male reference with 28 mesh nodes, 233,254 triangles and 2,089,100 bytes. Anatomy was selected, simplified and renamed from cached Z-Anatomy FBX; tube centrelines and _U coordinates were derived in the pipeline. Procedural tooth, stomach wall and villus specimens are separate teaching diagrams, with local scale bars.",
-        "zh": "Atlas 设计研究，见 docs/25 与 scripts/anatomy/digestive：简化的成年男性参考解剖，含 28 个网格节点、233,254 个三角形，文件 2,089,100 字节。网格从缓存的 Z-Anatomy FBX 中选取、简化并改名；管道中心线与 _U 坐标由管线生成。程序化牙齿、胃壁与绒毛标本是独立教学示意，有各自的比例尺。"
+        "en": "Atlas design study, docs/25 and scripts/anatomy/digestive: a simplified adult male reference body in one glb of 28 mesh nodes, 233,786 triangles and 2,093,620 bytes, selected, simplified and renamed from cached Z-Anatomy FBX. The stomach's source display window is closed with a smooth wall patch; the food route is traced inside the meshes from mouth to anus (food_route.py). Procedural tooth, stomach-wall and villus close-ups are teaching diagrams with their own scale bars.",
+        "zh": "Atlas 设计研究，见 docs/25 与 scripts/anatomy/digestive：简化的成年男性参考身体，一个 glb，28 个网格节点、233,786 个三角形、2,093,620 字节，从缓存的 Z-Anatomy FBX 中选取、简化、改名。源文件胃前壁的展示窗用平滑的壁面补上；食物路线在网格内部从口描到肛门（food_route.py）。程序化的牙、胃壁和绒毛放大标本是教学示意，各有比例尺。"
       },
       "note": {
-        "en": "Not physiological measurements. Particle speeds and staggered whole-organ contraction pulses are chosen for visibility, not a transit-time simulation or a travelling muscle wave. Mouth, saliva, helper-juice and absorption branches are schematic. Missing tube segments remain breaks. Jejunal paths omit reported source-wall overlap stations. Mesh lengths do not measure a living intestine. Rendering values: specimen enlargements ×6, ×10 and ×100; villus field 6 × 8 plus one cut specimen. Scene speeds in m/s: swallow 0.12, churn 0.05, small-gut 0.06, large-gut 0.03, saliva/bile/pancreatic 0.05, nutrient/water branches 0.025. Gullet pulse 0.5 Hz, scale [0.96, 1, 0.96]; gut sequence starts at 1 + i × 0.55 seconds, peaks 0.45 seconds later, resets 0.9 seconds after start, repeats every 7 seconds, scale [0.97, 1.015, 0.97]. Jaw oscillation 3 degrees at 0.8 Hz. Jejunal exclusions extend 8 mm either side of source overlap stations, leaving 7 runs; with the duodenum the small-gut flow has 8 separate paths.",
-        "zh": "不是生理实测。粒子速度与分时出现的整件器官收缩脉冲按可读性选定，不模拟真实通过时间，也不表示沿管壁传播的肌肉波。口腔、唾液、辅助器官消化液与吸收支路为示意。缺失的管段保持断开。空肠流避开报告中网格管壁重叠的位置。网格路径长度不能当作活体肠长。 渲染参数：标本放大 ×6、×10、×100；绒毛排列为 6 × 8，另有一个剖开标本。场景速度（米/秒）：吞咽 0.12、胃内 0.05、小肠 0.06、大肠 0.03、唾液/胆汁/胰液 0.05、营养与水吸收支路 0.025。食道脉冲 0.5 赫兹，缩放 [0.96, 1, 0.96]；肠道序列从第 1 + i × 0.55 秒开始，0.45 秒后达峰，开始后 0.9 秒复位，每 7 秒循环，缩放 [0.97, 1.015, 0.97]。下颌摆动 3 度、0.8 赫兹。空肠流在源重叠点两侧各去掉 8 毫米，余 7 段；加十二指肠后，小肠流共 8 条独立路径。"
+        "en": "Not physiological measurements. The model's coiled small intestine measures about 2 m along its centre line (mesh, not a living length). Particle speeds and whole-organ pulses are chosen for visibility, not a transit-time simulation or a travelling muscle wave. The mouth-and-throat leg of the food route, the juice, saliva and absorption branches, and the churning loop are schematic. Close-up magnifications: tooth ×6, stomach wall ×10, villi ×100; layer thicknesses and villus spacing are not to scale.",
+        "zh": "不是生理测量值。模型里盘绕的小肠沿中线量约 2 米（网格长度，不是活体长度）。点的速度和整段器官的脉动是为了便于观看而设，不是通过时间的模拟，也不是传播的肌肉波。食物路线中口和咽的一段，消化液、唾液和吸收的支路，以及胃里的搅拌环路，都是示意。放大标本：牙 ×6、胃壁 ×10、绒毛 ×100；各层厚度和绒毛间距没有按比例。"
       }
     },
     {
@@ -115,8 +115,8 @@
       },
       "url": "https://archive.org/details/anatomyofhumanbo1918gray",
       "note": {
-        "en": "Archive catalogue verified. Automated scan/OCR access was unavailable in this pass; no unverified figure number or numerical physiology is attributed to Gray. Current functional explanations follow S3–S9.",
-        "zh": "已核档案目录。本轮无法自动读取扫描本或 OCR；不把未经核实的图号或生理数字归于格雷。现代功能说明依据 S3–S9。"
+        "en": "Full text read from the Internet Archive scan (djvu text of the 1918 edition), Splanchnology, the large intestine, printed pp. 1179–1184: the ileum opens into the caecum at the colic valve; the ascending colon rises to the under surface of the liver; the sigmoid colon is a loop of about 40 cm in the pelvis that reaches the midline at the third piece of the sacrum and ends in the rectum; the rectum runs down in the sacrococcygeal curve, is about 12 cm long and widens into the ampulla; the anal canal, 2.5–4 cm, ends at the anus. Used to identify the source meshes labelled \"descending colon\" (includes the sigmoid loop) and \"sigmoid colon\" (the rectum). No figure is reproduced.",
+        "zh": "已读互联网档案馆扫描本（1918 年版 djvu 文本）内脏学·大肠，印刷第 1179–1184 页：回肠在结肠瓣处通入盲肠；升结肠上行到肝的下面；乙状结肠是骨盆里约 40 厘米长的弯，在第三骶椎平面到达中线，接上直肠；直肠沿骶尾弯曲下行，长约 12 厘米，下端膨大成壶腹；肛管长 2.5–4 厘米，止于肛门。据此辨认源文件标为“降结肠”（含乙状结肠弯）和“乙状结肠”（实为直肠）的网格。未复制任何图。"
       }
     },
     {
@@ -127,8 +127,8 @@
       },
       "url": "https://github.com/LluisV/Z-Anatomy",
       "note": {
-        "en": "Repository licence and model provenance checked. Changes: structures selected for the digestive region and other body systems, simplified, renamed; centreline _U baked. No rig or clinical anatomical validation. Organ-by-organ upstream licence review remains pending; see SOURCES.md.",
-        "zh": "已核仓库许可与模型来源。改动：选取消化器官与其他身体系统结构，简化、改名，烘焙中心线 _U。没有骨架绑定，也不构成临床解剖验证。逐器官上游许可仍待发布前核对，见 SOURCES.md。"
+        "en": "Repository licence and model provenance checked. Changes for Atlas: structures selected for the digestive tube and four other body systems, simplified, renamed; the stomach's display window closed; centre-line _U baked. Two source labels are corrected on the page from position and shape, with Gray [S10]: the mesh labelled \"sigmoid colon\" is shown as the rectum, and the coiled \"jejunum\" stands for the jejunum and ileum. No rig; not a clinical anatomical validation.",
+        "zh": "已核仓库许可与模型来源。为 Atlas 所做的改动：选取消化道和另外四个身体系统的结构，简化、改名；补上胃的展示窗；烘焙中线 _U。根据位置和形状并参照格雷 [S10]，页面改正两处源标签：标为“乙状结肠”的网格显示为直肠，盘绕的“空肠”代表空肠与回肠。没有骨架绑定；不构成临床解剖验证。"
       }
     },
     {

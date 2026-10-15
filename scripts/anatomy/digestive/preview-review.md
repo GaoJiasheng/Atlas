@@ -27,3 +27,16 @@ missing separately labelled ileum/caecum/rectum/anal canal, and nonzero endpoint
 gaps (notably the 70.14 mm duodenum–jejunum gap) prevent claiming a seamless,
 physically enclosed mouth-to-anus path. See [report.md](report.md) and
 [centrelines.json](centrelines.json) for machine-readable stations and gaps.
+
+## Round 11 — content review (2026-10-16)
+
+Re-run after two pipeline fixes; the decoded GLB is SHA-256 `24ecf044c1c48ad4cfefbc6222d0f8c192469c18b873270372c80deb22263c95` (2,093,620 bytes, 233,786 triangles).
+
+| Change | Observation |
+|---|---|
+| Stomach display window closed (`fillOpenings`, `static_region.fill_openings`) | Front and tube-only previews: the round window is gone; the patch continues the wall's curvature with no seam or crease (bi-harmonic interior against the window ring and the wall ring outside it). 0 boundary edges added, 0 non-manifold, winding consistent; the cardia and pylorus rings stay open. |
+| Duodenum centre line (`centrelines.py`: pinholes are not tube ends) | The 0.5 mm papilla pinhole had ended the old path after 9 cm. The new path runs the whole C to the duodenojejunal end (0.21 m); duodenum to jejunum gap 70.1 mm → 6.9 mm (end insets only; the meshes touch). |
+| Segment contact | Consecutive tube meshes touch: oesophagus–stomach 0.2 mm, stomach–duodenum 0.1, duodenum–jejunum 0.2, jejunum–ascending colon 0.4, ascending–transverse 0.0, transverse–descending 0.0, descending–"sigmoid" 0.4 mm. The endpoint gaps in report.md are centre-line insets, not missing anatomy. |
+| Food route | `food_route.py` joins mouth → anus without a break; `food-route.json` holds leg lengths and a six-ray wall check. |
+| Source labels (content decision, see the topic's SOURCES.md) | "Jejunum" runs to the caecum, so it is shown as jejunum and ileum; "descending colon" includes the sigmoid loop; the midline mesh labelled "sigmoid colon" lies along the sacrum and coccyx, about 12–14 cm, widened below: Gray's rectum and anal canal, shown as the rectum. Node names unchanged. |
+| Normals | Every digestive mesh has consistent winding (no directed edge used twice) and positive signed volume; colon and gullet are double-walled (outer surface plus lumen surface), which is why their volumes are small. |

@@ -2,7 +2,7 @@
 id: a-meals-journey
 order: 7
 title:
-  en: A meal’s journey
+  en: A meal's journey
   zh: 一顿饭的旅程
 sensitive: false
 state:
@@ -21,79 +21,76 @@ state:
     - stomach-group
     - small-intestine-group
     - large-intestine-group
-    - other-systems
+    - helper-organs
     - skin-context
     - meal
-    - juices
+    - nutrients
+    - water
   labels:
+    - oesophagus
     - stomach
     - jejunum
     - transverse-colon
   camera:
-    position:
-      - 1.3
-      - 0.35
-      - 2.8
-    target:
-      - 0
-      - -0.12
-      - -0.04
+    position: [0.62, 0.32, 1.62]
+    target: [0, 0.16, -0.09]
     fov: 30
   summary:
-    en: Follow chicken rice through the digestive route, with typical times rather than a fixed timetable.
-    zh: 跟着鸡饭沿消化道前进，时间只是典型范围，不是固定时刻表。
+    en: Follow a plate of chicken rice from the first bite to the next day or two.
+    zh: 跟着一盘鸡饭，从第一口一直走到一两天以后。
   beats:
     - camera: head
       labels:
         - teeth-lower
         - tongue
+        - salivary-glands
       caption:
-        en: The meal begins in the mouth. Teeth break food up and saliva begins digestion.
-        zh: 饭菜从口进入，牙齿弄碎食物，唾液开始消化。
+        en: A plate of chicken rice. At the first bite, the teeth chew the rice and chicken, and saliva starts to digest the starch in the rice.
+        zh: 一盘鸡饭。第一口吃下去，牙齿嚼碎米饭和鸡肉，唾液开始消化米饭里的淀粉。
     - camera:
-        position:
-          - 0.3
-          - 0.36
-          - 0.9
-        target:
-          - 0.01
-          - 0.29
-          - -0.1
+        position: [0.3, 0.36, 0.9]
+        target: [0.01, 0.29, -0.1]
         fov: 30
       labels:
         - oesophagus
       caption:
-        en: The swallowed food moves down the gullet. Muscular contractions provide the push.
-        zh: 吞下的食物沿食道前进，推动力来自肌肉收缩。
+        en: Each mouthful is swallowed and squeezed down the gullet. It reaches the stomach in about four to eight seconds.
+        zh: 每一口都被吞下，沿食道被挤送下去，大约四到八秒到达胃。
     - camera: stomach-view
       labels:
         - stomach
       caption:
-        en: The stomach mixes food with gastric juice. A typical stay is about two to four hours, depending on the meal.
-        zh: 胃把食物与胃液混合，通常停留约两到四小时，具体随饭菜而变。
+        en: In the stomach the meal is churned with gastric juice into a thick, soupy mixture. The stomach is usually empty in about two to four hours.
+        zh: 在胃里，饭菜和胃液被搅拌成浓稠的糊。大约两到四小时后，胃通常就空了。
     - camera: abdomen
       labels:
-        - jejunum
         - duodenum
+        - jejunum
       caption:
-        en: In the small intestine, digestion continues and digested nutrients enter blood. Typical passage takes about three to five hours.
-        zh: 小肠继续消化，并把消化后的营养物质吸收进血液，通常通过时间约三到五小时。
-    - camera: abdomen
+        en: In the small intestine the meal is digested into simpler substances, which are absorbed into the blood. This takes about three to five hours.
+        zh: 在小肠里，饭菜被消化成更简单的物质，吸收进血液。这大约需要三到五小时。
+    - camera:
+        position: [0.48, 0.02, 1.15]
+        target: [0, -0.04, -0.1]
+        fov: 30
       labels:
+        - ascending-colon
         - transverse-colon
         - descending-colon
-        - sigmoid-colon
       caption:
-        en: The large intestine absorbs water. Typical passage through the colon takes about twelve to twenty-four hours and may take longer.
-        zh: 大肠吸收水分，通常通过结肠需要约十二到二十四小时，也可能更久。
-    - camera: hero
+        en: In the large intestine water is taken back from what is left. This usually takes twelve to twenty-four hours.
+        zh: 在大肠里，剩下的东西中的水被吸收回去，通常需要十二到二十四小时。
+    - camera:
+        position: [0.62, 0.32, 1.62]
+        target: [0, 0.16, -0.09]
+        fov: 30
       labels:
-        - lungs
-        - heart
+        - rectum
         - stomach
+        - jejunum
       caption:
-        en: The whole passage commonly takes about twenty-four to seventy-two hours. Breathing and circulation continue throughout; each meal and person differs.
-        zh: 全程常需约二十四到七十二小时，呼吸与循环始终进行；每个人、每顿饭都不同。
+        en: What is left leaves through the anus, usually one to three days after the meal. Every person and every meal is different.
+        zh: 剩下的东西从肛门排出，通常在饭后一到三天。每个人、每顿饭都不一样。
   index:
     parts:
       - teeth-lower
@@ -103,33 +100,33 @@ state:
       - stomach
       - duodenum
       - jejunum
+      - liver
+      - pancreas
+      - ascending-colon
       - transverse-colon
       - descending-colon
-      - sigmoid-colon
-      - lungs
-      - heart
-      - great-vessels
+      - rectum
 ---
 
 <Lang en>
 
-A plate of Hainanese chicken rice gives this journey a familiar starting point. Rice, chicken and cucumber contain different substances, but they enter the same digestive route. The presentation follows the changing contents through the syllabus parts: mouth, gullet, stomach, small intestine and large intestine. It shows the main processes separately so that each can be seen.
+Take a plate of Hainanese chicken rice: rice cooked in chicken stock, slices of chicken, cucumber and a little chilli sauce. Follow one meal through the five parts of the syllabus. In the mouth the teeth chew it and saliva starts to digest the starch in the rice. Each mouthful is swallowed and squeezed down the gullet in about <Num s="S4">4 to 8 seconds</Num>.
 
-In the mouth, teeth break up food and saliva begins digestion. The gullet pushes swallowed food towards the stomach. There, muscular mixing and gastric juice make a soft mixture. In the small intestine, digestive juices continue digestion into simpler substances, and digested nutrients are absorbed into the blood. In the large intestine, water is absorbed from the remaining material before waste leaves the body. Digestion does not make every part of the meal enter the blood.
+In the stomach the meal is churned with gastric juice, which starts to digest the protein in the chicken. The stomach is usually empty in about <Num s="S5">2 to 4 hours</Num>. In the small intestine, juices from the pancreas and bile from the liver join in, the rice, chicken and oil are digested into simpler substances, and these are absorbed into the blood over about <Num s="S6">3 to 5 hours</Num>. The blood carries them to every part of the body. What is left, including fibre from the cucumber, moves on to the large intestine, where water is taken back over about <Num s="S6">12 to 24 hours</Num>. Finally, faeces leave through the anus.
 
-The whole passage commonly takes about <Num s="S5">24–72 hours</Num>. This is a typical range, not a timetable for this plate of food. Parts of a meal can move at different rates, and processes happen together. While food is still in the digestive tract, blood can already be carrying absorbed nutrients elsewhere. Breathing supplies oxygen, and circulation carries it too: body systems work together throughout the journey.
+From first bite to the last of the remains, digestion usually takes about <Num s="S5">24 to 72 hours</Num>. These times are typical ranges from a textbook, not a timetable: they overlap, and they differ from person to person and from meal to meal. All the while, the other systems are working too. The heart pumps the blood that carries digested food away from the intestine, and the lungs take in the oxygen that the muscles of the gut use as they move the meal along.
 
-<Figure src="figures/digestive-system-chicken-rice" alt={{ en: "Plate of Hainanese chicken rice with sliced chicken, rice, cucumber, chilli sauce and clear soup.", zh: "海南鸡饭，有切片鸡肉、米饭、黄瓜、辣椒酱与清汤。" }} caption={{ en: "A familiar meal to follow through the digestive system. An illustration made for this topic.", zh: "跟着熟悉的饭菜走过消化系统。为本主题绘制的示意图。" }} />
+<Figure src="figures/digestive-system-chicken-rice" alt={{ en: "A plate of Hainanese chicken rice with sliced chicken, rice, cucumber, chilli sauce and a bowl of clear soup.", zh: "一盘海南鸡饭：切片鸡肉、米饭、黄瓜、辣椒酱和一碗清汤。" }} caption={{ en: "Hainanese chicken rice. An illustration made for this topic.", zh: "海南鸡饭。为本主题绘制的示意图。" }} />
 
-<More title={{ en: "Symbols, gaps and elapsed time", zh: "符号、缺口与经过时间" }}>
+<More title={{ en: "The times are typical, not exact", zh: "时间是典型范围，不是准确时刻" }}>
 
-The dots and contractions use schematic speeds. Dots pause or disappear where source geometry is missing or overlaps; the real gut is continuous. Helpers beside the tube are explained in the small-intestine chapter’s Further section.
+The stomach, small intestine and large intestine each work on a meal over a range of hours, and part of one meal can still be in the stomach while another part has reached the small intestine. The dots on the stage cover each part in seconds, far faster than food moves in a real body. For a balanced plate, the Health Promotion Board's My Healthy Plate suggests filling <Num s="S13">½</Num> with fruit and vegetables, <Num s="S13">¼</Num> with wholegrains and <Num s="S13">¼</Num> with protein foods.
 
 </More>
 
 <More title={{ en: "Try it: follow the presentation", zh: "试一试：跟着演示走" }}>
 
-Open PRESENT and advance through the beats at your own pace. Pause to rotate each organ, then continue. Listen in English and Chinese and trace the same sequence in each language.
+Press P to start the presentation and step through this chapter's beats. At each stop, say which part the meal has reached and what happens there. Then listen to the beats again in the other language.
 
 </More>
 
@@ -137,23 +134,23 @@ Open PRESENT and advance through the beats at your own pace. Pause to rotate eac
 
 <Lang zh>
 
-舞台用海南鸡饭作为这趟旅程的起点。米饭、鸡肉和黄瓜含有不同物质，却经过相同的消化路线。演示沿着课纲的口、食道、胃、小肠和大肠前进，把主要过程分开显示，方便观察。饭菜在真实身体里不会保持盘中的形状，也不会整齐排队，等前面的过程全部结束后才进入下一段。
+拿一盘海南鸡饭来说：用鸡汤煮的饭、几片鸡肉、黄瓜和一点辣椒酱。跟着这一顿饭走过课纲的五个部分。在口里，牙齿嚼碎饭菜，唾液开始消化米饭里的淀粉。每一口都被吞下，沿食道被挤送下去，大约 <Num s="S4">4–8 秒</Num>到达胃。
 
-口里的牙齿弄碎食物，唾液开始消化。食道推动吞下的食物进入胃，胃的肌肉与胃液把它混成较软的糊状物。小肠里的消化液继续把食物消化成更简单的物质，消化后的营养物质被吸收进血液。大肠从剩余物里吸收水分，废物最后离开身体。不是饭菜的所有成分都能被消化吸收。
+在胃里，饭菜和胃液一起被搅拌，胃液开始消化鸡肉里的蛋白质。大约 <Num s="S5">2–4 小时</Num>后，胃通常就空了。在小肠里，胰液和肝制造的胆汁也加入进来，米饭、鸡肉和油被消化成更简单的物质，在约 <Num s="S6">3–5 小时</Num>里被吸收进血液，再由血液送到身体各处。剩下的东西，包括黄瓜里的纤维，进入大肠；大肠在约 <Num s="S6">12–24 小时</Num>里把其中的水吸收回去。最后，粪便从肛门排出体外。
 
-整个过程常需约 <Num s="S5">24–72 小时</Num>。这是典型范围，不是这盘鸡饭的准确时刻表。同顿饭的不同部分可以移动得快慢不同，搅拌、消化与吸收也会重叠进行。消化道里还有内容物时，血液已经能把吸收的营养运往别处。呼吸提供氧，循环系统也运送氧。身体的各个系统在整段过程中共同工作。
+从第一口到最后排出，整个消化过程通常需要约 <Num s="S5">24–72 小时</Num>。这些时间是课本给出的典型范围，不是时刻表：各段会互相重叠，也因人、因饭菜而不同。在这段时间里，其他系统也一直在工作。心脏推动血液，把消化后的养分从肠运走；肺吸进的氧，供给推动食物前进的肠壁肌肉使用。
 
-<Figure src="figures/digestive-system-chicken-rice" alt={{ en: "Plate of Hainanese chicken rice with sliced chicken, rice, cucumber, chilli sauce and clear soup.", zh: "海南鸡饭，有切片鸡肉、米饭、黄瓜、辣椒酱与清汤。" }} caption={{ en: "A familiar meal to follow through the digestive system. An illustration made for this topic.", zh: "跟着熟悉的饭菜走过消化系统。为本主题绘制的示意图。" }} />
+<Figure src="figures/digestive-system-chicken-rice" alt={{ en: "A plate of Hainanese chicken rice with sliced chicken, rice, cucumber, chilli sauce and a bowl of clear soup.", zh: "一盘海南鸡饭：切片鸡肉、米饭、黄瓜、辣椒酱和一碗清汤。" }} caption={{ en: "Hainanese chicken rice. An illustration made for this topic.", zh: "海南鸡饭。为本主题绘制的示意图。" }} />
 
-<More title={{ en: "Symbols, gaps and elapsed time", zh: "符号、缺口与经过时间" }}>
+<More title={{ en: "The times are typical, not exact", zh: "时间是典型范围，不是准确时刻" }}>
 
-点和收缩使用示意速度；源网格缺失或重叠的位置，点会暂停或消失，真实肠道却是连续的。旁边的帮助器官见小肠章的“再进一步”。
+胃、小肠和大肠处理一顿饭，各要几个小时；同一顿饭，一部分可能还在胃里，另一部分已经到了小肠。舞台上的点几秒钟就走完一段，比真实身体里的食物快得多。至于怎样吃得均衡，保健促进局的“我的健康餐盘”建议：<Num s="S13">½</Num> 盘水果和蔬菜，<Num s="S13">¼</Num> 盘全谷物，<Num s="S13">¼</Num> 盘蛋白质食物。
 
 </More>
 
 <More title={{ en: "Try it: follow the presentation", zh: "试一试：跟着演示走" }}>
 
-打开演示，按自己的速度逐拍前进。停下来旋转观察器官，再继续。分别听中文与英文，沿相同顺序跟读。
+按 P 进入演示，一拍一拍看完这一章。每到一站，说出饭菜到了哪个部分、那里发生了什么。然后换另一种语言再听一遍。
 
 </More>
 

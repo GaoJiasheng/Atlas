@@ -29,3 +29,5 @@ scripts/math/drafts/
 
 # QA records only (chapter shots, map georeferencing comparisons); kept locally, never in git
 docs/screenshots/
+__pycache__/
+*.pyc

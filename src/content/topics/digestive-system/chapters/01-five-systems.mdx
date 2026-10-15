@@ -2,8 +2,8 @@
 id: five-systems
 order: 1
 title:
-  en: Five systems in a body
-  zh: 身体里的五个系统
+  en: Five systems in one body
+  zh: 一个身体里的五个系统
 sensitive: false
 state:
   view: xray
@@ -21,6 +21,7 @@ state:
     - stomach-group
     - small-intestine-group
     - large-intestine-group
+    - helper-organs
     - other-systems
     - skeleton-context
     - skin-context
@@ -29,34 +30,33 @@ state:
     - lungs
     - heart
   camera:
-    position:
-      - 1.3
-      - 0.35
-      - 2.8
-    target:
-      - 0
-      - -0.12
-      - -0.04
+    position: [1.3, 0.35, 2.8]
+    target: [0, -0.12, -0.04]
     fov: 30
   summary:
-    en: Body systems work together; digestion changes food into simpler substances.
-    zh: 身体的系统一起工作；消化把食物分解成更简单的物质。
+    en: The body's systems work together; the digestive system breaks food down so the body can use it.
+    zh: 身体的各个系统一起工作；消化系统把食物分解，让身体能够利用。
   beats:
     - camera: hero
+      labels:
+        - stomach
+        - lungs
+        - heart
       caption:
-        en: The outline locates the organs inside the body. Each system is a group of parts with a shared function.
-        zh: 轮廓显示器官在身体里的位置。每个系统都是一起完成功能的一组部分。
+        en: Inside one body are several systems. A system is a group of parts that work together to do a job.
+        zh: 一个身体里有好几个系统。系统是一起完成一项工作的一组部分。
     - camera: hero
+      view: assembled
       layers:
         - skeleton-context
         - skin-context
       labels:
         - skeleton
       caption:
-        en: The skeleton supports the body and protects organs. The other systems are hidden in this view.
-        zh: 这里只显示骨骼；骨骼系统支撑身体，并保护器官。
-      view: assembled
+        en: The skeletal system holds the body up and protects the soft organs inside it.
+        zh: 骨骼系统撑起身体，并保护里面柔软的器官。
     - camera: hero
+      view: assembled
       layers:
         - other-systems
         - skin-context
@@ -69,9 +69,8 @@ state:
       labels:
         - muscles-superficial
       caption:
-        en: The selected superficial muscles show the muscular system. Muscles move body parts, often by pulling on bones.
-        zh: 选出的浅层肌肉显示肌肉系统；肌肉使身体活动，常靠拉动骨骼产生动作。
-      view: assembled
+        en: The muscular system moves the body. Most of these muscles pull on bones.
+        zh: 肌肉系统让身体活动。这里的肌肉大多拉动骨骼。
     - camera: hero
       layers:
         - other-systems
@@ -84,26 +83,26 @@ state:
         - heart
         - great-vessels
       caption:
-        en: The windpipe leads to the lungs. The heart and main vessels belong to circulation, which transports substances in blood.
-        zh: 气管通向肺；心脏与大血管属于循环系统，用血液运送物质。
-    - camera: abdomen
+        en: The respiratory system takes in oxygen. The circulatory system, the heart and blood vessels, carries it round the body in the blood.
+        zh: 呼吸系统吸进氧。循环系统，也就是心脏和血管，用血液把氧送到全身。
+    - camera: hero
       layers:
         - mouth-and-gullet
         - stomach-group
         - small-intestine-group
         - large-intestine-group
+        - helper-organs
         - skin-context
       labels:
+        - oesophagus
         - stomach
         - jejunum
         - transverse-colon
       caption:
-        en: The digestive organs are now visible together. Food is digested into simpler substances that can be absorbed.
-        zh: 现在一起显示消化器官。食物被消化成能被吸收的更简单的物质。
+        en: The digestive system breaks food down into simpler substances that the body can take into the blood.
+        zh: 消化系统把食物分解成更简单的物质，让身体能把它们吸收进血液。
   index:
     parts:
-      - stomach
-      - jejunum
       - skeleton
       - muscles-superficial
       - lungs
@@ -111,28 +110,33 @@ state:
       - heart
       - great-vessels
       - diaphragm
+      - oesophagus
+      - stomach
+      - jejunum
       - transverse-colon
 ---
 
 <Lang en>
 
-On the stage, a body outline surrounds the digestive organs. The model also includes bones, muscles, lungs and a heart. A <Term id="system">system</Term> is a group of parts that work together to carry out a function. An <Term id="organ">organ</Term> is a body part with a particular function. The <Term id="stomach">stomach</Term>, for example, is an organ within the digestive system.
+The faint outline on the stage is one adult body. Inside it you can see bones, muscles, lungs, a heart and, in the middle, the long tube of the digestive organs. A <Term id="system">system</Term> is a group of parts that work together to do one job. Each part, such as the <Term id="stomach">stomach</Term> or the heart, is an <Term id="organ">organ</Term>: a part of the body with its own work to do.
 
-This topic introduces the <Num s="S2">five</Num> systems in the primary science syllabus. The skeletal system supports the body and protects organs. The muscular system moves body parts, often by pulling on bones. The respiratory system takes in oxygen and removes carbon dioxide. The circulatory system carries blood around the body; its heart pumps blood through vessels. These functions continue while food is being processed.
+The P4 science syllabus names <Num s="S2">five</Num> systems. The skeletal system holds the body up and protects soft organs; the skull guards the brain and the ribs guard the heart and lungs. The muscular system moves the body, mostly by pulling on bones. The respiratory system takes in oxygen and gives out carbon dioxide. The circulatory system, the heart and the blood vessels, carries oxygen and other substances round the body in the blood.
 
-The digestive system breaks food down. During <Term id="digestion">digestion</Term>, food is digested into simpler substances that can be absorbed into the blood. Chewing changes the size of the pieces; <Term id="digestive-juice">digestive juices</Term> help change the substances in them. Digestion changes food; <Term id="absorption">absorption</Term> moves digested substances across the gut wall into the blood.
+The digestive system breaks food down. In <Term id="digestion">digestion</Term>, food is digested into simpler substances that can pass into the blood. Teeth and stomach muscles break food into smaller pieces; <Term id="digestive-juice">digestive juices</Term> change what the food is made of. Taking the simpler substances into the blood is <Term id="absorption">absorption</Term>.
 
-<Figure src="figures/digestive-system-five-systems" alt={{ en: "Anatomical figures showing the skeleton, muscles, lungs and windpipe, heart and vessels, and digestive tract.", zh: "人体解剖示意图，分别显示骨骼、肌肉、肺与气管、心脏与血管，以及消化道。" }} caption={{ en: "The body systems shown separately. An illustration made for this topic.", zh: "把身体的系统分开来看。为本主题绘制的示意图。" }} />
+The systems work at the same time and depend on one another. Digested food reaches the rest of the body only because the blood carries it, and the muscles that move food along the gut need oxygen from the lungs. The next chapters follow the digestive system from end to end. <FlyTo preset="hero">See the whole body</FlyTo>
+
+<Figure src="figures/digestive-system-five-systems" alt={{ en: "Five figures of the same body, each showing one system: skeleton, muscles, lungs and windpipe, heart and blood vessels, digestive tube.", zh: "同一个身体的五幅图，各显示一个系统：骨骼、肌肉、肺与气管、心脏与血管、消化道。" }} caption={{ en: "Five systems, shown one at a time. An illustration made for this topic.", zh: "五个系统，一次看一个。为本主题绘制的示意图。" }} />
 
 <More title={{ en: "Where the model comes from", zh: "模型从哪里来" }}>
 
-This male reference anatomy uses selected, simplified Z-Anatomy / BodyParts3D meshes under <Num s="S11,S12">CC BY-SA 4.0</Num>. It shows position and shape, not every structure in a living person. Explore <TopicLink slug="muscles-chest">chest muscles</TopicLink> in the related topic.
+The organs are real anatomical meshes from Z-Anatomy, built on BodyParts3D, shared under <Num s="S11,S12">CC BY-SA 4.0</Num>. They come from one adult male reference body. For this topic they were selected, simplified and renamed; a few source labels were corrected where the shape and place show a different part, as the later chapters explain. The muscles in this topic are the same body as in <TopicLink slug="muscles-chest">the chest muscles</TopicLink>.
 
 </More>
 
-<More title={{ en: "Try it: separate the systems", zh: "试一试：分开看系统" }}>
+<More title={{ en: "Try it: one system at a time", zh: "试一试：一次看一个系统" }}>
 
-Open LAYERS and use the solo control beside a group. Compare the skeleton with the muscles, then return to the digestive organs. Describe the function that each view makes visible.
+Open LAYERS and press the round button at the end of a row to show that group alone. Look at the skeleton, then the other systems, then the digestive organs. For each, say one job it does for the body.
 
 </More>
 
@@ -140,23 +144,25 @@ Open LAYERS and use the solo control beside a group. Compare the skeleton with t
 
 <Lang zh>
 
-舞台上，身体轮廓里面是消化器官，也能看到骨骼、肌肉、肺和心脏。<Term id="system">系统</Term>是一起完成某项功能的一组部分；<Term id="organ">器官</Term>是身体里有特定功能的部分。例如，<Term id="stomach">胃</Term>属于消化系统，心脏属于循环系统。身体的各个系统同时工作，并不是轮到消化时，其余系统就停下来。
+舞台上淡淡的轮廓是一个成人的身体。里面能看到骨骼、肌肉、肺、心脏，中间是一条长长的消化器官。<Term id="system">系统</Term>是一起完成一项工作的一组部分。系统里的每个部分，例如<Term id="stomach">胃</Term>或心脏，都是一个<Term id="organ">器官</Term>，也就是身体里负责特定工作的部分。
 
-这里介绍小学科学课纲中的 <Num s="S2">五</Num>个系统。骨骼系统支撑身体，保护器官。肌肉系统让身体各部分活动，常常靠拉动骨骼产生动作。呼吸系统吸进氧，排出二氧化碳。循环系统靠心脏推动血液，沿着血管把物质运送到全身。模型只选出部分结构，没有显示全身所有血管和肌肉。
+小四科学课纲列出 <Num s="S2">五</Num>个系统。骨骼系统撑起身体，保护柔软的器官：头骨保护脑，肋骨保护心和肺。肌肉系统让身体活动，大多靠拉动骨骼。呼吸系统吸进氧，排出二氧化碳。循环系统由心脏和血管组成，用血液把氧和其他物质运送到全身。
 
-消化系统把食物分解。<Term id="digestion">消化</Term>时，食物被分解成更简单、能被吸收进血液的物质。咀嚼让食物碎块变小，<Term id="digestive-juice">消化液</Term>则帮助改变食物里的物质。消化改变食物，<Term id="absorption">吸收</Term>则让消化后的物质穿过肠壁进入血液。后面的章节沿着食物经过的路线，把这些变化分开来看。
+消化系统负责分解食物。<Term id="digestion">消化</Term>就是把食物分解成更简单的物质，让它们能够进入血液。牙齿和胃的肌肉把食物弄成更小的碎块；<Term id="digestive-juice">消化液</Term>则改变食物本身的成分。更简单的物质进入血液，叫作<Term id="absorption">吸收</Term>。
 
-<Figure src="figures/digestive-system-five-systems" alt={{ en: "Anatomical figures showing the skeleton, muscles, lungs and windpipe, heart and vessels, and digestive tract.", zh: "人体解剖示意图，分别显示骨骼、肌肉、肺与气管、心脏与血管，以及消化道。" }} caption={{ en: "The body systems shown separately. An illustration made for this topic.", zh: "把身体的系统分开来看。为本主题绘制的示意图。" }} />
+这些系统同时工作，互相依靠。消化后的养分要靠血液才能送到全身；推动食物在肠里前进的肌肉，也需要肺吸进的氧。接下来的几章，沿着消化系统从头走到尾。<FlyTo preset="hero">看看整个身体</FlyTo>
+
+<Figure src="figures/digestive-system-five-systems" alt={{ en: "Five figures of the same body, each showing one system: skeleton, muscles, lungs and windpipe, heart and blood vessels, digestive tube.", zh: "同一个身体的五幅图，各显示一个系统：骨骼、肌肉、肺与气管、心脏与血管、消化道。" }} caption={{ en: "Five systems, shown one at a time. An illustration made for this topic.", zh: "五个系统，一次看一个。为本主题绘制的示意图。" }} />
 
 <More title={{ en: "Where the model comes from", zh: "模型从哪里来" }}>
 
-模型采用男性参考解剖，选取并简化了 Z-Anatomy / BodyParts3D 网格，按 <Num s="S11,S12">CC BY-SA 4.0</Num> 署名使用。它显示位置与形状，不包括活人体内的所有结构。也可到相关主题看看<TopicLink slug="muscles-chest">胸部肌肉</TopicLink>。
+这些器官是真实的解剖网格，来自以 BodyParts3D 为基础的 Z-Anatomy，按 <Num s="S11,S12">CC BY-SA 4.0</Num> 许可使用，取自同一个成年男性参考身体。为本主题做了选取、简化和改名；少数源文件的标签与器官的形状、位置不符，已经改正，后面的章节会说明。本主题的肌肉和<TopicLink slug="muscles-chest">胸部肌肉</TopicLink>用的是同一个身体。
 
 </More>
 
-<More title={{ en: "Try it: separate the systems", zh: "试一试：分开看系统" }}>
+<More title={{ en: "Try it: one system at a time", zh: "试一试：一次看一个系统" }}>
 
-打开图层，用组旁边的单显按钮分别看骨骼与肌肉，再回到消化器官。边切换边描述它们的功能。
+打开图层，按某一行末尾的圆形按钮，就只显示这一组。先看骨骼，再看其他系统，最后看消化器官。每看一个，说出它为身体做的一项工作。
 
 </More>
 

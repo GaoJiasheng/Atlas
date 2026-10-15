@@ -2,8 +2,8 @@
 id: one-long-tube
 order: 2
 title:
-  en: A long digestive tube
-  zh: 一条长长的消化道
+  en: One long tube
+  zh: 一条长长的管子
 sensitive: false
 state:
   view: assembled
@@ -23,59 +23,71 @@ state:
     - large-intestine-group
     - skin-context
   labels:
+    - oesophagus
     - stomach
     - jejunum
     - transverse-colon
   camera:
-    position:
-      - 0.55
-      - 0.26
-      - 1.05
-    target:
-      - 0
-      - 0.02
-      - -0.08
+    position: [0.62, 0.32, 1.62]
+    target: [0, 0.16, -0.09]
     fov: 30
   summary:
-    en: Trace the digestive tube in order, from mouth to the outlet.
-    zh: 按顺序沿消化道，从口走到出口。
+    en: "Food travels along one tube: mouth, gullet, stomach, small intestine, large intestine."
+    zh: 食物沿着一条管子前进：口、食道、胃、小肠、大肠。
   beats:
-    - camera: abdomen
+    - camera:
+        position: [0.62, 0.32, 1.62]
+        target: [0, 0.16, -0.09]
+        fov: 30
+      labels:
+        - oesophagus
+        - stomach
+        - jejunum
+        - transverse-colon
       caption:
-        en: The abdominal view shows coiled small intestine inside the wider frame of the large intestine.
-        zh: 腹部视角显示盘绕的小肠，外面围着较粗的大肠。
+        en: Food travels along one long tube from the mouth to the anus. In a living adult it is about 7.6 metres long.
+        zh: 食物沿着一条从口到肛门的长管前进。成人活体的这条管子长约 7.6 米。
     - camera: head
       labels:
+        - teeth-upper
         - tongue
-        - oesophagus
+        - pharynx
       caption:
-        en: Start at the mouth, then follow the gullet down the chest.
-        zh: 从口开始，沿食道向胸部下方看。
-    - camera: stomach-view
+        en: The tube starts at the mouth. Behind the mouth, the throat leads into the gullet.
+        zh: 管子从口开始。口的后面是咽，咽通向食道。
+    - camera:
+        position: [0.36, 0.34, 0.95]
+        target: [0.02, 0.24, -0.1]
+        fov: 30
       labels:
+        - oesophagus
         - stomach
       caption:
-        en: The gullet enters the stomach, mainly on the body’s left below the ribs.
-        zh: 食道通入胃，胃主要在身体左侧的肋骨下面。
+        en: The gullet runs down through the chest and opens into the stomach, on the left side under the ribs.
+        zh: 食道向下穿过胸腔，通入胃。胃在身体左侧的肋骨下面。
     - camera: abdomen
       labels:
         - duodenum
         - jejunum
       caption:
-        en: The small intestine is narrow and coiled. Its coils occupy much of the abdomen.
-        zh: 小肠较细，盘绕着占据腹部很大一部分空间。
-    - camera: abdomen
+        en: The small intestine coils in the middle of the abdomen. It is narrow, about 2.5 centimetres wide, but about 3 metres long.
+        zh: 小肠盘绕在腹部中间。它很细，直径约 2.5 厘米，却长约 3 米。
+    - camera:
+        position: [0.48, 0.02, 1.15]
+        target: [0, -0.04, -0.1]
+        fov: 30
       labels:
         - ascending-colon
         - transverse-colon
         - descending-colon
-        - sigmoid-colon
+        - rectum
       caption:
-        en: The large intestine frames the coils. Source gaps remain visible; the real digestive tube is continuous.
-        zh: 大肠围着小肠。模型保留了源文件的缺口；真实消化道是连续的。
+        en: The wider large intestine goes up, across and down around the coils, and ends at the anus.
+        zh: 较粗的大肠围着小肠向上、横过、再向下，最后在肛门结束。
   index:
     parts:
       - tongue
+      - pharynx
       - oesophagus
       - stomach
       - duodenum
@@ -83,26 +95,27 @@ state:
       - ascending-colon
       - transverse-colon
       - descending-colon
-      - sigmoid-colon
+      - rectum
 ---
 
 <Lang en>
 
-The digestive organs form a continuous tube through the body. Food enters at the mouth, passes down the <Term id="gullet">gullet</Term> into the stomach, then enters the <Term id="small-intestine">small intestine</Term> and the <Term id="large-intestine">large intestine</Term>. Undigested material eventually leaves through the outlet. The model shows the route inside a body outline, rather than spreading the organs flat on a page.
+Here the digestive organs are shown on their own inside the body outline. Follow them in order and they make one long tube. Food goes in at the mouth, down the <Term id="gullet">gullet</Term> into the stomach, then through the <Term id="small-intestine">small intestine</Term> and the <Term id="large-intestine">large intestine</Term>. What is left leaves the body through the anus. These five parts, mouth, gullet, stomach, small intestine and large intestine, are the ones the P4 syllabus asks you to know.
 
-The gullet runs down the chest. The stomach lies mainly towards the body's left, below the ribs. The small intestine coils through the abdomen, and the wider large intestine forms a frame around much of it. Here, left and right always mean the person's own left and right. Facing the model reverses them on your screen.
+In a living adult the whole tube is about <Num s="S3">7.6 m</Num> long, more than four times the height of the body. It fits because most of it is folded and coiled. The small intestine alone is about <Num s="S6">3 m</Num> long and about <Num s="S6">2.5 cm</Num> wide. The large intestine is about three times as wide, about <Num s="S6">7.6 cm</Num>, but only about half as long. So "small" and "large" describe how wide the tubes are, not how long.
 
-In a living adult, the entire digestive tube is about <Num s="S3">7.6 m</Num> long. It fits inside the body because much of it is folded and coiled. This is a typical textbook length, not a measurement of this particular model or of a child's body. Small intestine means narrower, not shorter.
+The tube has a fixed order and a fixed place. The gullet runs down the chest behind the windpipe and heart. The stomach sits on the body's left, under the ribs. The small intestine fills the middle of the abdomen, and the large intestine runs round it like a frame. On the stage the model faces you, so its left side is on your right. <FlyTo preset="abdomen">Look at the abdomen</FlyTo>
 
-<More title={{ en: "A continuous body, an incomplete model", zh: "身体连续，模型并不完整" }}>
 
-After death, relaxed muscles can make the tube measure about <Num s="S3">10.7 m</Num>. This model omits some connecting sections. Dots disappear at those gaps; the real digestive tube is continuous. The coiled mesh is not a ruler for physiological length.
+<More title={{ en: "Longer after death", zh: "死后量得更长" }}>
+
+Measured after death, the same tube is about <Num s="S3">10.7 m</Num> long, because its muscles have relaxed. In life the muscles in its wall keep it shorter. The model's coils are about <Num s="S1">2 m</Num> long, shorter than a living small intestine: the model shows where the organs are and what shape they are, not their exact length.
 
 </More>
 
 <More title={{ en: "Try it: coil a long tube", zh: "试一试：把长管盘起来" }}>
 
-Lay out about <Num s="S3">7.6 m</Num> of string, then loosely coil it inside a bag. Compare the space occupied before and after coiling. The string illustrates packing, not the thickness of the intestine.
+Measure <Num s="S3">7.6 m</Num> of string along a corridor. Then coil it loosely into a school bag. The string shows how a long tube can fit into a small space by folding; it does not show how thick the gut is.
 
 </More>
 
@@ -110,21 +123,22 @@ Lay out about <Num s="S3">7.6 m</Num> of string, then loosely coil it inside a b
 
 <Lang zh>
 
-消化器官连成穿过身体的长管。食物从口进入，沿<Term id="gullet">食道</Term>到达胃，再进入<Term id="small-intestine">小肠</Term>和<Term id="large-intestine">大肠</Term>，没有被消化吸收的剩余物最后从出口离开。舞台把器官放在身体轮廓里，能看到它们的位置关系；书上的平面图常把管子拉开，方便读者看清顺序。
+这里只显示身体轮廓里的消化器官。按顺序看，它们连成一条长长的管子。食物从口进入，沿<Term id="gullet">食道</Term>到达胃，再经过<Term id="small-intestine">小肠</Term>和<Term id="large-intestine">大肠</Term>，剩下的东西从肛门排出体外。口、食道、胃、小肠、大肠，就是小四课纲要求认识的五个部分。
 
-食道沿胸部向下伸。胃主要在身体左侧、肋骨下面；小肠盘绕在腹部，大肠较粗，围在小肠的外侧。这里的左右都以模型本人的身体为准。面对模型时，身体的左边在屏幕右侧。不要根据画面哪边较亮来判断左右。
+成人活体的整条消化道长约 <Num s="S3">7.6 米</Num>，相当于身高的四倍多。它大部分折叠、盘绕着，所以能装进身体里。单是小肠就长约 <Num s="S6">3 米</Num>，直径约 <Num s="S6">2.5 厘米</Num>。大肠粗得多，直径约 <Num s="S6">7.6 厘米</Num>，长度却只有小肠的一半左右。所以“小”和“大”说的是管子的粗细，不是长短。
 
-成人活体的整条消化道长约 <Num s="S3">7.6 米</Num>。它大部分折叠、盘绕着，所以能容纳在身体里面。这是课本给出的典型长度，不是这个模型的实测值，也不是儿童身体的长度。“小肠”的“小”指管径较小，不是长度较短。沿着管道认顺序，比只记器官的颜色更有用。
+这条管子的顺序和位置都是固定的。食道在气管和心脏后面，沿胸腔向下；胃在身体左侧的肋骨下面；小肠占满腹部中间，大肠像一个框，围在小肠外面。舞台上的模型面对着你，所以它的左边在你的右手边。<FlyTo preset="abdomen">看看腹部</FlyTo>
 
-<More title={{ en: "A continuous body, an incomplete model", zh: "身体连续，模型并不完整" }}>
 
-死后肌肉松弛，测出的消化道可长约 <Num s="S3">10.7 米</Num>。模型缺少部分连接段，点会在空缺处消失；真实消化道是连续的。不能拿网格盘绕的长度代替生理长度。
+<More title={{ en: "Longer after death", zh: "死后量得更长" }}>
+
+人死后再量，同一条消化道长约 <Num s="S3">10.7 米</Num>，因为管壁的肌肉松弛了；活着的时候，肌肉让它保持较短。模型里盘绕的小肠约长 <Num s="S1">2 米</Num>，比活体小肠短：模型显示的是器官的位置和形状，不是准确的长度。
 
 </More>
 
 <More title={{ en: "Try it: coil a long tube", zh: "试一试：把长管盘起来" }}>
 
-把约 <Num s="S3">7.6 米</Num>长的绳子展开，再松松盘进袋里，比较占用的空间。绳子只说明盘绕，不表示肠子的粗细。
+在走廊里量出 <Num s="S3">7.6 米</Num>长的绳子，再把它松松地盘进书包。绳子说明长管怎样折叠起来放进小空间，并不表示肠子的粗细。
 
 </More>
 

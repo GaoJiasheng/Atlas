@@ -12,91 +12,98 @@ state:
   run: true
   cutaway: none
   pose: null
-  ghost: []
+  ghost:
+    - jejunum
+    - large-intestine-group
   hide: []
   layers:
+    - mouth-and-gullet
     - stomach-group
     - small-intestine-group
+    - large-intestine-group
     - meal
     - stomach-closeup
   labels:
+    - oesophagus
     - stomach
     - duodenum
   camera:
-    position:
-      - 0.5
-      - 0.28
-      - 0.8
-    target:
-      - 0.06
-      - 0.1
-      - -0.08
+    position: [0.32, 0.25, 0.62]
+    target: [0.02, 0.14, -0.08]
     fov: 30
   summary:
-    en: The stomach mixes food with acidic digestive juice before releasing it gradually.
-    zh: 胃把食物与酸性消化液混合，再逐渐送往小肠。
+    en: The stomach churns food and mixes it with digestive juice, then passes it on a little at a time.
+    zh: 胃搅拌食物，把它和消化液混合，再一点一点送走。
   beats:
     - camera: stomach-view
-      cutaway: none
       labels:
+        - oesophagus
         - stomach
+        - duodenum
       caption:
-        en: The stomach curves below the gullet. Its muscular wall surrounds a space for food.
-        zh: 胃弯曲着接在食道下面，肌肉构成的壁围着容纳食物的空间。
+        en: The stomach is a stretchy bag of muscle under the left ribs. The gullet brings food down into it.
+        zh: 胃是左侧肋骨下面一个能撑大的肌肉囊。食道把食物送进胃里。
     - camera: stomach-view
       cutaway: stomach-open
       labels:
         - stomach
       caption:
-        en: The viewing section opens the stomach. Dots change from food colour to the mixed-content colour.
-        zh: 观察剖面打开胃，点从食物色变成混合后内容物的颜色。
+        en: With the front cut away, the food inside is churned and mixed with gastric juice. The dots turn from olive to ochre as it becomes a thick, soupy mixture.
+        zh: 去掉前壁，可以看到里面的食物被搅拌，并和胃液混合。点从橄榄色变成赭黄色，表示食物变成了浓稠的糊。
     - camera: stomach-view
-      cutaway: none
       pose: stomach-full
+      labels:
+        - stomach
+      caption:
+        en: The stomach stretches as a meal arrives. Empty, it is about the size of a fist; it can hold up to about four litres.
+        zh: 饭菜进来时，胃会撑大。空的时候它只有拳头大小，最多能容纳约四升。
+    - camera: stomach-view
+      view: xray
       labels:
         - stomach
         - duodenum
       caption:
-        en: The expanded pose illustrates stretching as food arrives. Its enlargement is schematic, not a measured meal size.
-        zh: 膨胀姿态示意食物进入时的伸展；放大程度不是实测饭量。
-    - camera: specimens
+        en: A little at a time, the mixture passes into the small intestine. The stomach is usually empty two to four hours after a meal.
+        zh: 糊状的食物一点一点进入小肠。饭后两到四小时，胃通常就空了。
+    - camera:
+        position: [0.84, 0.13, 0.46]
+        target: [0.72, 0.012, 0.05]
+        fov: 30
       layers:
         - stomach-closeup
-      cutaway: none
-      pose: null
+      part: stomach-wall
       labels:
         - stomach-wall
       caption:
-        en: The separate wall specimen shows lining folds and differently directed muscle layers. Read the specimen’s own scale bar.
-        zh: 胃壁标本显示内壁褶皱与方向不同的肌肉层。实际大小看标本自己的比例尺。
-      part: stomach-wall
+        en: The stomach wall, ten times life size. Folds of lining lie on three layers of muscle that run in different directions, so the stomach can churn.
+        zh: 胃壁，放大十倍。有褶皱的内壁下面是三层走向不同的肌肉，所以胃能搅拌。
   index:
     parts:
-      - stomach
       - oesophagus
+      - stomach
       - duodenum
       - stomach-wall
 ---
 
 <Lang en>
 
-Below the gullet, the stomach curves towards the body's left. It is a muscular organ with a space inside. Its wall stretches as food arrives and contracts to mix food with gastric juice. This digestive juice is acidic. The mixing breaks up food further, while substances in the juice help digest it into simpler substances. Food is not fully digested when it leaves the stomach.
+At the bottom of the gullet the food enters the stomach, a J-shaped bag of muscle under the left ribs. Empty, it is about the size of a fist, with its lining in deep folds. As a meal arrives the folds flatten out and the stomach stretches; it can hold up to about <Num s="S5">4 litres</Num>, though a normal meal is far less.
 
-Open the stomach section to see the space within it. The folds belong to the lining; they can flatten as the stomach expands. The enlarged wall specimen separates the lining from muscle layers running in different directions. Together, the muscles squeeze and churn the contents. A protective mucus barrier helps keep the stomach lining from being damaged by its own acidic contents.
+The stomach wall has three layers of muscle running in different directions. Together they squeeze, twist and churn the food. At the same time the lining pours in gastric juice, a digestive juice that is strongly acidic, at about <Num s="S5">pH 1.5 to 3.5</Num>. The churning breaks the food up further, and the juice starts to digest the protein in it into simpler substances. A thick layer of mucus keeps the acid off the stomach's own lining. <FlyTo preset="stomach-view">Look at the stomach</FlyTo>
 
-Food commonly remains in the stomach for about <Num s="S5">2–4 hours</Num>, although meals differ. Small amounts of the soft mixture pass into the beginning of the small intestine as processing continues. The stomach can expand greatly: a textbook describes capacity up to about <Num s="S5">4 L</Num>. That is an adult anatomical capacity, not a recommended meal size.
+The food is not fully digested when it leaves. It has become a thick, soupy mixture, and a ring of muscle at the lower end of the stomach lets it out into the small intestine a little at a time. The stomach is usually empty about <Num s="S5">2 to 4 hours</Num> after a meal; some meals stay longer. On the stage the dots change from olive to ochre as the food is mixed.
 
-<Figure src="figures/digestive-system-stomach-wall" alt={{ en: "Opened stomach showing folds of its lining and a separate layered wall section.", zh: "剖开的胃显示内壁褶皱，旁边是分层的胃壁切块。" }} caption={{ en: "Folds and muscle layers in the stomach wall. An illustration made for this topic.", zh: "胃壁的褶皱与肌肉层。为本主题绘制的示意图。" }} />
+<Figure src="figures/digestive-system-stomach-wall" alt={{ en: "Stomach cut open from the front, showing folds of its lining, with a wedge of wall lifted out to show three muscle layers.", zh: "从前面剖开的胃，显示内壁褶皱，旁边取出的一块胃壁显示三层肌肉。" }} caption={{ en: "Folds of lining and layers of muscle. An illustration made for this topic.", zh: "内壁的褶皱和肌肉层。为本主题绘制的示意图。" }} />
 
-<More title={{ en: "Reading the model", zh: "怎样读模型" }}>
+<More title={{ en: "Reading the model", zh: "怎样看这个模型" }}>
 
-The section is a viewing cut, not a wound. The swelling pose and pulses exaggerate motion for visibility. They do not reproduce travelling muscular rings or measured timing. The specimen has its own scale bar.
+The source model had a round window cut in the front of the stomach, a way of showing the lining; Atlas closed it so the stomach looks whole. The cut in beat 2 is only a view. The swelling and the gentle pulsing show stretching and churning far faster and smaller than in life.
 
 </More>
 
-<More title={{ en: "Try it: model churning", zh: "试一试：模拟搅拌" }}>
+<More title={{ en: "Try it: churn some bread", zh: "试一试：搅一搅面包" }}>
 
-Seal bread and a little water in a bag, then squeeze gently. Observe the change in texture. This models mixing only; water does not reproduce gastric juice or chemical digestion.
+Put a slice of bread and a few spoonfuls of water in a sealed bag. Squeeze and knead it for a minute and watch it turn into a paste. This copies only the churning: water is not gastric juice, and nothing is chemically digested.
 
 </More>
 
@@ -104,23 +111,23 @@ Seal bread and a little water in a bag, then squeeze gently. Observe the change 
 
 <Lang zh>
 
-食道下面的胃向身体左侧弯曲。胃有肌肉构成的壁，里面有容纳食物的空间。食物进入时，胃壁能够伸展；胃壁收缩时，把食物和胃液混合。胃液是酸性的消化液，帮助把食物消化成更简单的物质。搅拌也使食物进一步碎散，但食物离开胃时，还没有完成全部消化。
+食物到了食道的下端，就进入胃。胃是左侧肋骨下面一个 J 形的肌肉囊。空的时候它只有拳头大小，内壁有很深的褶皱。饭菜进来时，褶皱展平，胃随之撑大，最多能容纳约 <Num s="S5">4 升</Num>，不过平常一顿饭远没有这么多。
 
-打开胃的剖面，可以看见内腔与内壁褶皱。胃扩大时，褶皱能够展平。旁边放大的胃壁标本把内层和方向不同的肌肉层分开表示，显示肌肉怎样挤压、搅拌内容物。胃内壁还有保护性的黏液屏障，帮助隔开酸性内容物。标本只是局部结构的示意，不是从模型切下来的真实组织。
+胃壁有三层走向不同的肌肉，一起挤压、扭动、搅拌食物。同时，胃的内壁分泌胃液。胃液是一种消化液，酸性很强，pH 约 <Num s="S5">1.5–3.5</Num>。搅拌把食物弄得更碎，胃液则开始把食物里的蛋白质分解成更简单的物质。一层厚厚的黏液保护胃自己的内壁，不被胃酸伤害。<FlyTo preset="stomach-view">看看胃</FlyTo>
 
-食物在胃里通常停留约 <Num s="S5">2–4 小时</Num>，不同饭菜并不完全相同。处理过程中，少量糊状混合物陆续进入小肠开头，并不是整顿饭同时离开。课本记载成人胃能扩张到约 <Num s="S5">4 升</Num>；这是解剖学容量，不是建议吃进的饭量，也不代表儿童的胃有相同大小。
+食物离开胃的时候，还没有完全消化，而是变成了浓稠的糊。胃下端的一圈肌肉让它一点一点地进入小肠。饭后约 <Num s="S5">2–4 小时</Num>，胃通常就空了；有些饭菜停留得更久。舞台上，食物和胃液混合后，点从橄榄色变成赭黄色。
 
-<Figure src="figures/digestive-system-stomach-wall" alt={{ en: "Opened stomach showing folds of its lining and a separate layered wall section.", zh: "剖开的胃显示内壁褶皱，旁边是分层的胃壁切块。" }} caption={{ en: "Folds and muscle layers in the stomach wall. An illustration made for this topic.", zh: "胃壁的褶皱与肌肉层。为本主题绘制的示意图。" }} />
+<Figure src="figures/digestive-system-stomach-wall" alt={{ en: "Stomach cut open from the front, showing folds of its lining, with a wedge of wall lifted out to show three muscle layers.", zh: "从前面剖开的胃，显示内壁褶皱，旁边取出的一块胃壁显示三层肌肉。" }} caption={{ en: "Folds of lining and layers of muscle. An illustration made for this topic.", zh: "内壁的褶皱和肌肉层。为本主题绘制的示意图。" }} />
 
-<More title={{ en: "Reading the model", zh: "怎样读模型" }}>
+<More title={{ en: "Reading the model", zh: "怎样看这个模型" }}>
 
-剖面是观察用的切口。膨胀姿态与脉动把变化放大，方便看清，不代表传播中的收缩环或真实节奏。胃壁标本有独立比例尺。
+源模型在胃的前壁开了一个圆窗，用来展示内壁；Atlas 把它补上，让胃看起来是完整的。第 2 拍的剖面只是观察用的切口。胃撑大和轻轻脉动的动画，比真实的变化快得多，幅度也小得多。
 
 </More>
 
-<More title={{ en: "Try it: model churning", zh: "试一试：模拟搅拌" }}>
+<More title={{ en: "Try it: churn some bread", zh: "试一试：搅一搅面包" }}>
 
-把面包和少量水封进袋里，轻轻捏揉，观察质地改变。这只模拟混合，水不能代替胃液，也不能模拟化学消化。
+把一片面包和几勺水放进密封袋，捏揉一分钟，看它变成糊。这只模仿了搅拌：水不是胃液，面包也没有被化学消化。
 
 </More>
 
