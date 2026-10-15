@@ -23,6 +23,14 @@ SpaceScene / Model3DStage，paper 默认、cinema 可切。原型：`archetypes.
 
 ---
 
+### 0.1 定稿（2026-10-15，主会话按 Gavin 惯例代定）
+
+1. 开工（与磁并行）。P4 深度为主线；肝、胰、胆作"再进一步"细看，不进主线。
+2. 一餐之旅用海南鸡饭。第 06 章（大肠、肛门、粪便）用词按课本，Gavin 发布前审中文。
+3. 网格走 `scripts/anatomy` 管线新增 `digestive` 区域；蠕动波若引擎没有，先用沿管流 + 收缩动画代替，缺口报主会话。
+4. 图：首页图版与 7 张配图已入库（`public/illustrations/digestive-system.webp`、`figures/digestive-system-*.webp`）。
+5. 施工：Codex 建主题（数据 + 正文初稿），Opus 复核事实与中文、做引擎缺口，Sonnet QA。
+
 ## 1. 范围、读者、必须讲对的事实
 
 ### 1.1 读者与范围

@@ -39,6 +39,14 @@ SpaceScene / Model3DStage，paper 默认、cinema 可切。原型：`archetypes.
 
 ---
 
+### 0.1 定稿（2026-10-15，主会话按 Gavin 惯例代定）
+
+1. 开工（与消化系统并行）。复用电路已做好的"试一试"扩展（`sim.kind: 'magnet'` 已有数据形与两极模型），补磁力线 / 铁屑预计算场态、指南针摆针、力箭头 `overlays`、线圈。
+2. 测试盘含不锈钢勺；电磁铁变量只用电池数；"地理北极是磁南极"只进细看。
+3. 课纲边界：不讲镍钴、不用"磁场"一词作主线（细看可提）。
+4. 图：首页图版与 7 张配图已入库（`public/illustrations/magnets.webp`、`figures/magnets-*.webp`）。
+5. 施工：Opus 先补引擎（磁的 sim 部分），Codex 建主题（数据 + 正文初稿），Opus 复核，Sonnet QA。
+
 ## 1. 主题、范围与事实
 
 ### 1.1 读者学到什么（P3 用词）
