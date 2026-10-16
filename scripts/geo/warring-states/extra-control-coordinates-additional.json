@@ -1,0 +1,221 @@
+{
+  "url": "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=coordinates&colimit=max&redirects=1&titles=Ji+%28capital+of+Yan%29%7CJinyang+Ancient+City%7CJinyang%7CJimo%7CJimo+%28ancient+city%29%7CGuzhu%7CLangya%7CWuguan%7CHan+River+%28Hubei+and+Shaanxi%29%7CYangtze%7CCape+Chengshan%7CChengshantou%7CLiaodong+Peninsula%7CLaotieshan%7CHaizhou+Bay%7CJiaozhou+Bay%7CHangzhou%7CYing+%28Chu%29%7CJinan%7CFushan+County%7CQinyang%7CTaiyuan",
+  "data": {
+    "batchcomplete": "",
+    "query": {
+      "redirects": [
+        {
+          "from": "Wuguan",
+          "to": "Wu Pass"
+        },
+        {
+          "from": "Jimo",
+          "to": "Jimo, Qingdao"
+        }
+      ],
+      "pages": {
+        "-1": {
+          "ns": 0,
+          "title": "Ji (capital of Yan)",
+          "missing": ""
+        },
+        "-2": {
+          "ns": 0,
+          "title": "Jinyang Ancient City",
+          "missing": ""
+        },
+        "-3": {
+          "ns": 0,
+          "title": "Jimo (ancient city)",
+          "missing": ""
+        },
+        "-4": {
+          "ns": 0,
+          "title": "Cape Chengshan",
+          "missing": ""
+        },
+        "-5": {
+          "ns": 0,
+          "title": "Chengshantou",
+          "missing": ""
+        },
+        "-6": {
+          "ns": 0,
+          "title": "Laotieshan",
+          "missing": ""
+        },
+        "-7": {
+          "ns": 0,
+          "title": "Haizhou Bay",
+          "missing": ""
+        },
+        "24370251": {
+          "pageid": 24370251,
+          "ns": 0,
+          "title": "Fushan County",
+          "coordinates": [
+            {
+              "lat": 35.968,
+              "lon": 111.849,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "36197261": {
+          "pageid": 36197261,
+          "ns": 0,
+          "title": "Guzhu"
+        },
+        "1038521": {
+          "pageid": 1038521,
+          "ns": 0,
+          "title": "Han River (Hubei and Shaanxi)",
+          "coordinates": [
+            {
+              "lat": 30.56444444,
+              "lon": 114.29166667,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "158185": {
+          "pageid": 158185,
+          "ns": 0,
+          "title": "Hangzhou",
+          "coordinates": [
+            {
+              "lat": 30.267,
+              "lon": 120.153,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "460329": {
+          "pageid": 460329,
+          "ns": 0,
+          "title": "Jiaozhou Bay",
+          "coordinates": [
+            {
+              "lat": 36.12345556,
+              "lon": 120.24563889,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "250092": {
+          "pageid": 250092,
+          "ns": 0,
+          "title": "Jinan",
+          "coordinates": [
+            {
+              "lat": 36.6702,
+              "lon": 117.0207,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "422324": {
+          "pageid": 422324,
+          "ns": 0,
+          "title": "Jinyang"
+        },
+        "24447524": {
+          "pageid": 24447524,
+          "ns": 0,
+          "title": "Langya"
+        },
+        "343498": {
+          "pageid": 343498,
+          "ns": 0,
+          "title": "Liaodong Peninsula",
+          "coordinates": [
+            {
+              "lat": 40,
+              "lon": 122.5,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "13835621": {
+          "pageid": 13835621,
+          "ns": 0,
+          "title": "Qinyang",
+          "coordinates": [
+            {
+              "lat": 35.088,
+              "lon": 112.951,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "401079": {
+          "pageid": 401079,
+          "ns": 0,
+          "title": "Taiyuan",
+          "coordinates": [
+            {
+              "lat": 37.8704,
+              "lon": 112.5497,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "6613": {
+          "pageid": 6613,
+          "ns": 0,
+          "title": "Yangtze",
+          "coordinates": [
+            {
+              "lat": 31.39361111,
+              "lon": 121.98305556,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "28912007": {
+          "pageid": 28912007,
+          "ns": 0,
+          "title": "Ying (Chu)"
+        },
+        "617965": {
+          "pageid": 617965,
+          "ns": 0,
+          "title": "Jimo, Qingdao",
+          "coordinates": [
+            {
+              "lat": 36.38333333,
+              "lon": 120.46666667,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "18428453": {
+          "pageid": 18428453,
+          "ns": 0,
+          "title": "Wu Pass",
+          "coordinates": [
+            {
+              "lat": 33.6,
+              "lon": 110.61666667,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        }
+      }
+    },
+    "limits": {
+      "coordinates": 500
+    }
+  }
+}

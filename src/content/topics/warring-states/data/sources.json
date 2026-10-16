@@ -1,0 +1,1214 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": {
+        "en": "Sima Qian, Shiji. Zhonghua Shuju punctuated edition (1959; revised 2013). English: Burton Watson, Records of the Grand Historian: Qin Dynasty (Columbia University Press, 1993); W. H. Nienhauser Jr., ed., The Grand Scribe’s Records (Indiana University Press, from 1994).",
+        "zh": "【待译】Sima Qian, Shiji. Zhonghua Shuju punctuated edition (1959; revised 2013). English: Burton Watson, Records of the Grand Historian: Qin Dynasty (Columbia University Press, 1993); W. H. Nienhauser Jr., ed., The Grand Scribe’s Records (Indiana University Press, from 1994)."
+      },
+      "note": {
+        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
+        "zh": "【待译】Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward."
+      },
+      "url": "https://ctext.org/shiji"
+    },
+    {
+      "id": "S2",
+      "text": {
+        "en": "Chunqiu Zuozhuan, annotated by Yang Bojun (Zhonghua Shuju, 1981). English: Stephen Durrant, Wai-yee Li and David Schaberg, Zuo Tradition / Zuozhuan (University of Washington Press, 2016); James Legge, The Chinese Classics, vol. V (1872).",
+        "zh": "【待译】Chunqiu Zuozhuan, annotated by Yang Bojun (Zhonghua Shuju, 1981). English: Stephen Durrant, Wai-yee Li and David Schaberg, Zuo Tradition / Zuozhuan (University of Washington Press, 2016); James Legge, The Chinese Classics, vol. V (1872)."
+      },
+      "note": {
+        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
+        "zh": "【待译】Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward."
+      },
+      "url": "https://ctext.org/chun-qiu-zuo-zhuan"
+    },
+    {
+      "id": "S3",
+      "text": {
+        "en": "Zhanguoce. English: J. I. Crump, Chan-kuo Ts’e (Oxford, 1970; revised University of Michigan edition, 1996).",
+        "zh": "【待译】Zhanguoce. English: J. I. Crump, Chan-kuo Ts’e (Oxford, 1970; revised University of Michigan edition, 1996)."
+      },
+      "note": {
+        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
+        "zh": "【待译】Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward."
+      },
+      "url": "https://ctext.org/zhan-guo-ce"
+    },
+    {
+      "id": "S4",
+      "text": {
+        "en": "Tsinghua University, Qinghua daxue cang Zhanguo zhujian (er): Xinian (Zhongxi Shuju, 2011); Yuri Pines, Zhou History Unearthed: The Bamboo Manuscript Xinian and Early Chinese Historiography (Columbia University Press, 2020).",
+        "zh": "【待译】Tsinghua University, Qinghua daxue cang Zhanguo zhujian (er): Xinian (Zhongxi Shuju, 2011); Yuri Pines, Zhou History Unearthed: The Bamboo Manuscript Xinian and Early Chinese Historiography (Columbia University Press, 2020)."
+      },
+      "note": {
+        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
+        "zh": "【待译】Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward."
+      }
+    },
+    {
+      "id": "S5",
+      "text": {
+        "en": "Shangjunshu; Yuri Pines, trans., The Book of Lord Shang (Columbia University Press, 2017). Earlier translation: J. J. L. Duyvendak (1928).",
+        "zh": "【待译】Shangjunshu; Yuri Pines, trans., The Book of Lord Shang (Columbia University Press, 2017). Earlier translation: J. J. L. Duyvendak (1928)."
+      },
+      "note": {
+        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
+        "zh": "【待译】Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward."
+      },
+      "url": "https://ctext.org/shang-jun-shu"
+    },
+    {
+      "id": "S6",
+      "text": {
+        "en": "Xunzi, Wangba; Eric L. Hutton, trans., Xunzi: The Complete Text (Princeton University Press, 2014).",
+        "zh": "【待译】Xunzi, Wangba; Eric L. Hutton, trans., Xunzi: The Complete Text (Princeton University Press, 2014)."
+      },
+      "note": {
+        "en": "The team checked the Wangba passage listing Qi Huan, Jin Wen, Chu Zhuang, Wu Helü and Yue Goujian. Hutton’s modern translation was not consulted in this pass.",
+        "zh": "【待译】The team checked the Wangba passage listing Qi Huan, Jin Wen, Chu Zhuang, Wu Helü and Yue Goujian. Hutton’s modern translation was not consulted in this pass."
+      },
+      "url": "https://zh.wikisource.org/wiki/荀子/王霸篇"
+    },
+    {
+      "id": "S7",
+      "text": {
+        "en": "Mengzi, including Liang Hui Wang II and Jin Xin II; Zhao Qi’s commentary must be distinguished from the base text.",
+        "zh": "【待译】Mengzi, including Liang Hui Wang II and Jin Xin II; Zhao Qi’s commentary must be distinguished from the base text."
+      },
+      "note": {
+        "en": "The team checked Zhao Qi’s gloss listing Qi Huan, Jin Wen, Qin Mu, Song Xiang and Chu Zhuang, and the Kuiqiu clauses about embankments and grain trade. For the base text’s criticism of the occupation of Yan, see separately checked S153. No claim is made to have consulted a modern critical edition.",
+        "zh": "【待译】The team checked Zhao Qi’s gloss listing Qi Huan, Jin Wen, Qin Mu, Song Xiang and Chu Zhuang, and the Kuiqiu clauses about embankments and grain trade. For the base text’s criticism of the occupation of Yan, see separately checked S153. No claim is made to have consulted a modern critical edition."
+      },
+      "url": "https://zh.wikisource.org/wiki/孟子注疏_(四庫全書本)/卷12下"
+    },
+    {
+      "id": "S8",
+      "text": {
+        "en": "Ban Gu, Baihu tong, Hao.",
+        "zh": "【待译】Ban Gu, Baihu tong, Hao."
+      },
+      "note": {
+        "en": "The team checked the Hao section’s list Qi Huan, Jin Wen, Qin Mu, Chu Zhuang and Wu Helü and its alternative list. The difference is preserved rather than choosing a canonical Five Hegemons.",
+        "zh": "【待译】The team checked the Hao section’s list Qi Huan, Jin Wen, Qin Mu, Chu Zhuang and Wu Helü and its alternative list. The difference is preserved rather than choosing a canonical Five Hegemons."
+      },
+      "url": "https://zh.wikisource.org/wiki/白虎通/卷01"
+    },
+    {
+      "id": "S9",
+      "text": {
+        "en": "Sima Guang, Zizhi tongjian, Zhou annals, chapter 1.",
+        "zh": "【待译】Sima Guang, Zizhi tongjian, Zhou annals, chapter 1."
+      },
+      "note": {
+        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
+        "zh": "【待译】Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward."
+      },
+      "url": "https://zh.wikisource.org/wiki/資治通鑑/卷001"
+    },
+    {
+      "id": "S10",
+      "text": {
+        "en": "Ban Gu, Hanshu, Gouxu zhi (Treatise on waterways and irrigation).",
+        "zh": "【待译】Ban Gu, Hanshu, Gouxu zhi (Treatise on waterways and irrigation)."
+      },
+      "note": {
+        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
+        "zh": "【待译】Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward."
+      },
+      "url": "https://ctext.org/han-shu"
+    },
+    {
+      "id": "S11",
+      "text": {
+        "en": "Li Daoyuan, Shuijing zhu, Mian River commentary. A sixth-century CE source for the flooding of Yan, much later than the event.",
+        "zh": "【待译】Li Daoyuan, Shuijing zhu, Mian River commentary. A sixth-century CE source for the flooding of Yan, much later than the event."
+      },
+      "note": {
+        "en": "The team directly read the Yan flood passage in the Li Daoyuan / Wang Xianqian text, lines 62–63: the narrative reports a breach and deaths in the hundreds of thousands. It is a sixth-century CE text, much later than the campaign; no independent contemporary casualty count is claimed.",
+        "zh": "【待译】The team directly read the Yan flood passage in the Li Daoyuan / Wang Xianqian text, lines 62–63: the narrative reports a breach and deaths in the hundreds of thousands. It is a sixth-century CE text, much later than the campaign; no independent contemporary casualty count is claimed."
+      },
+      "url": "https://www.shidianguji.com/book/CADAL02030776/chapter/1l1xa9iefsr9r"
+    },
+    {
+      "id": "S12",
+      "text": {
+        "en": "Mark Edward Lewis, Sanctioned Violence in Early China (SUNY Press, 1990).",
+        "zh": "【待译】Mark Edward Lewis, Sanctioned Violence in Early China (SUNY Press, 1990)."
+      },
+      "note": {
+        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
+        "zh": "【待译】Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward."
+      }
+    },
+    {
+      "id": "S13",
+      "text": {
+        "en": "Mark Edward Lewis, The Early Chinese Empires: Qin and Han (Harvard University Press, 2007).",
+        "zh": "【待译】Mark Edward Lewis, The Early Chinese Empires: Qin and Han (Harvard University Press, 2007)."
+      },
+      "note": {
+        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
+        "zh": "【待译】Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward."
+      }
+    },
+    {
+      "id": "S14",
+      "text": {
+        "en": "Michael Loewe and Edward L. Shaughnessy, eds., The Cambridge History of Ancient China (Cambridge University Press, 1999), especially Cho-yun Hsu on Spring and Autumn, Mark Edward Lewis on Warring States political history, and Lothar von Falkenhausen on the late Bronze Age.",
+        "zh": "【待译】Michael Loewe and Edward L. Shaughnessy, eds., The Cambridge History of Ancient China (Cambridge University Press, 1999), especially Cho-yun Hsu on Spring and Autumn, Mark Edward Lewis on Warring States political history, and Lothar von Falkenhausen on the late Bronze Age."
+      },
+      "note": {
+        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
+        "zh": "【待译】Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward."
+      }
+    },
+    {
+      "id": "S15",
+      "text": {
+        "en": "Li Feng, Landscape and Power in Early China: The Crisis and Fall of the Western Zhou, 1045–771 BC (Cambridge University Press, 2006); Early China: A Social and Cultural History (Cambridge University Press, 2013).",
+        "zh": "【待译】Li Feng, Landscape and Power in Early China: The Crisis and Fall of the Western Zhou, 1045–771 BC (Cambridge University Press, 2006); Early China: A Social and Cultural History (Cambridge University Press, 2013)."
+      },
+      "note": {
+        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
+        "zh": "【待译】Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward."
+      }
+    },
+    {
+      "id": "S16",
+      "text": {
+        "en": "Yuri Pines, Envisioning Eternal Empire: Chinese Political Thought of the Warring States Era (University of Hawai‘i Press, 2009).",
+        "zh": "【待译】Yuri Pines, Envisioning Eternal Empire: Chinese Political Thought of the Warring States Era (University of Hawai‘i Press, 2009)."
+      },
+      "note": {
+        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
+        "zh": "【待译】Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward."
+      }
+    },
+    {
+      "id": "S17",
+      "text": {
+        "en": "Yuri Pines, Foundations of Confucian Thought: Intellectual Life in the Chunqiu Period, 722–453 B.C.E. (University of Hawai‘i Press, 2002).",
+        "zh": "【待译】Yuri Pines, Foundations of Confucian Thought: Intellectual Life in the Chunqiu Period, 722–453 B.C.E. (University of Hawai‘i Press, 2002)."
+      },
+      "note": {
+        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
+        "zh": "【待译】Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward."
+      }
+    },
+    {
+      "id": "S18",
+      "text": {
+        "en": "Yuri Pines, Lothar von Falkenhausen, Gideon Shelach and Robin D. S. Yates, eds., Birth of an Empire: The State of Qin Revisited (University of California Press, 2014).",
+        "zh": "【待译】Yuri Pines, Lothar von Falkenhausen, Gideon Shelach and Robin D. S. Yates, eds., Birth of an Empire: The State of Qin Revisited (University of California Press, 2014)."
+      },
+      "note": {
+        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
+        "zh": "【待译】Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward."
+      }
+    },
+    {
+      "id": "S19",
+      "text": {
+        "en": "Lothar von Falkenhausen, Chinese Society in the Age of Confucius (1000–250 BC) (Cotsen Institute of Archaeology, 2006).",
+        "zh": "【待译】Lothar von Falkenhausen, Chinese Society in the Age of Confucius (1000–250 BC) (Cotsen Institute of Archaeology, 2006)."
+      },
+      "note": {
+        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
+        "zh": "【待译】Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward."
+      }
+    },
+    {
+      "id": "S20",
+      "text": {
+        "en": "Victoria Tin-bor Hui, War and State Formation in Ancient China and Early Modern Europe (Cambridge University Press, 2005).",
+        "zh": "【待译】Victoria Tin-bor Hui, War and State Formation in Ancient China and Early Modern Europe (Cambridge University Press, 2005)."
+      },
+      "note": {
+        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
+        "zh": "【待译】Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward."
+      }
+    },
+    {
+      "id": "S21",
+      "text": {
+        "en": "Ralph D. Sawyer, Ancient Chinese Warfare (Basic Books, 2011).",
+        "zh": "【待译】Ralph D. Sawyer, Ancient Chinese Warfare (Basic Books, 2011)."
+      },
+      "note": {
+        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
+        "zh": "【待译】Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward."
+      }
+    },
+    {
+      "id": "S22",
+      "text": {
+        "en": "Yang Kuan, Zhanguo shi, expanded edition (Shanghai Renmin Chubanshe, 1998), including the chronological appendix.",
+        "zh": "【待译】Yang Kuan, Zhanguo shi, expanded edition (Shanghai Renmin Chubanshe, 1998), including the chronological appendix."
+      },
+      "note": {
+        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
+        "zh": "【待译】Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward."
+      }
+    },
+    {
+      "id": "S23",
+      "text": {
+        "en": "Tong Shuye, Chunqiu shi, revised edition (Zhonghua Shuju, 2006).",
+        "zh": "【待译】Tong Shuye, Chunqiu shi, revised edition (Zhonghua Shuju, 2006)."
+      },
+      "note": {
+        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
+        "zh": "【待译】Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward."
+      }
+    },
+    {
+      "id": "S24",
+      "text": {
+        "en": "Denis Twitchett and Michael Loewe, eds., The Cambridge History of China, vol. 1 (Cambridge University Press, 1986), Derk Bodde, The State and Empire of Ch’in.",
+        "zh": "【待译】Denis Twitchett and Michael Loewe, eds., The Cambridge History of China, vol. 1 (Cambridge University Press, 1986), Derk Bodde, The State and Empire of Ch’in."
+      },
+      "note": {
+        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
+        "zh": "【待译】Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward."
+      }
+    },
+    {
+      "id": "S25",
+      "text": {
+        "en": "Zhou Zhenhe, general ed.; Li Xiaojie, Zhongguo xingzheng quhua tongshi: Zonglun, Xian-Qin juan (Fudan University Press, 2009). Tan Qixiang, The Historical Atlas of China, vol. 1 (1982), is a local comparison reference only, not redistributed or traced.",
+        "zh": "【待译】Zhou Zhenhe, general ed.; Li Xiaojie, Zhongguo xingzheng quhua tongshi: Zonglun, Xian-Qin juan (Fudan University Press, 2009). Tan Qixiang, The Historical Atlas of China, vol. 1 (1982), is a local comparison reference only, not redistributed or traced."
+      },
+      "note": {
+        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
+        "zh": "【待译】Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward."
+      }
+    },
+    {
+      "id": "S26",
+      "text": {
+        "en": "Shanxi archaeological report on Yonglu no. 1 human-remains pit, Changping battlefield. The content specification provisionally identifies Wenwu 1996 no. 6; issue, authors and skeleton count remain unverified.",
+        "zh": "【待译】Shanxi archaeological report on Yonglu no. 1 human-remains pit, Changping battlefield. The content specification provisionally identifies Wenwu 1996 no. 6; issue, authors and skeleton count remain unverified."
+      },
+      "note": {
+        "en": "[待核] Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
+        "zh": "【待译】[待核] Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward."
+      }
+    },
+    {
+      "id": "S27",
+      "text": {
+        "en": "Hubei Provincial Museum, Zeng Hou Yi mu (Wenwu Chubanshe, 1989); archaeological record of the tomb of Marquis Yi of Zeng.",
+        "zh": "【待译】Hubei Provincial Museum, Zeng Hou Yi mu (Wenwu Chubanshe, 1989); archaeological record of the tomb of Marquis Yi of Zeng."
+      },
+      "note": {
+        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
+        "zh": "【待译】Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward."
+      }
+    },
+    {
+      "id": "S28",
+      "text": {
+        "en": "Shuihudi Qinmu zhujian (Wenwu Chubanshe, 1990); A. F. P. Hulsewé, Remnants of Ch’in Law (Brill, 1985); Hunan archaeological publication series Liye Qinjian.",
+        "zh": "【待译】Shuihudi Qinmu zhujian (Wenwu Chubanshe, 1990); A. F. P. Hulsewé, Remnants of Ch’in Law (Brill, 1985); Hunan archaeological publication series Liye Qinjian."
+      },
+      "note": {
+        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
+        "zh": "【待译】Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward."
+      }
+    },
+    {
+      "id": "S29",
+      "text": {
+        "en": "Yinqueshan Hanmu zhujian (yi) (Wenwu Chubanshe, 1985), including Sunzi and Sun Bin military texts.",
+        "zh": "【待译】Yinqueshan Hanmu zhujian (yi) (Wenwu Chubanshe, 1985), including Sunzi and Sun Bin military texts."
+      },
+      "note": {
+        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
+        "zh": "【待译】Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward."
+      }
+    },
+    {
+      "id": "S30",
+      "text": {
+        "en": "Mawangdui Hanmu boshu zhengli xiaozu, Zhanguo zonghengjia shu (Wenwu Chubanshe, 1976).",
+        "zh": "【待译】Mawangdui Hanmu boshu zhengli xiaozu, Zhanguo zonghengjia shu (Wenwu Chubanshe, 1976)."
+      },
+      "note": {
+        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
+        "zh": "【待译】Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward."
+      }
+    },
+    {
+      "id": "S31",
+      "text": {
+        "en": "Shanghai Museum, Shang Yang standard grain measure; Shaanxi History Museum, Du tiger tally. Object records are research targets; a verified object-page URL has not yet been established.",
+        "zh": "【待译】Shanghai Museum, Shang Yang standard grain measure; Shaanxi History Museum, Du tiger tally. Object records are research targets; a verified object-page URL has not yet been established."
+      },
+      "note": {
+        "en": "[待核] Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
+        "zh": "【待译】[待核] Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward."
+      }
+    },
+    {
+      "id": "S35",
+      "text": {
+        "en": "UNESCO World Heritage Centre, Mausoleum of the First Qin Emperor; Mount Qingcheng and the Dujiangyan Irrigation System.",
+        "zh": "【待译】UNESCO World Heritage Centre, Mausoleum of the First Qin Emperor; Mount Qingcheng and the Dujiangyan Irrigation System."
+      },
+      "note": {
+        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
+        "zh": "【待译】Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward."
+      },
+      "url": "https://whc.unesco.org/en/list/1001/"
+    },
+    {
+      "id": "S36",
+      "text": {
+        "en": "Natural Earth, 1:10m physical geography datasets. Public domain.",
+        "zh": "【待译】Natural Earth, 1:10m physical geography datasets. Public domain."
+      },
+      "note": {
+        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
+        "zh": "【待译】Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward."
+      },
+      "url": "https://www.naturalearthdata.com/about/terms-of-use/"
+    },
+    {
+      "id": "S38",
+      "text": {
+        "en": "OpenHistoricalMap, copyright and licensing. CC0 unless an individual feature records another licence.",
+        "zh": "【待译】OpenHistoricalMap, copyright and licensing. CC0 unless an individual feature records another licence."
+      },
+      "note": {
+        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
+        "zh": "【待译】Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward."
+      },
+      "url": "https://www.openhistoricalmap.org/copyright"
+    },
+    {
+      "id": "S39",
+      "text": {
+        "en": "China Historical GIS V6. The project’s EULA restricts redistribution; no CHGIS data are included in this topic.",
+        "zh": "【待译】China Historical GIS V6. The project’s EULA restricts redistribution; no CHGIS data are included in this topic."
+      },
+      "note": {
+        "en": "Rights restriction recorded in the approved content specification. Used only as a bibliographic rights reference; no CHGIS coordinates or geometry are redistributed.",
+        "zh": "【待译】Rights restriction recorded in the approved content specification. Used only as a bibliographic rights reference; no CHGIS coordinates or geometry are redistributed."
+      },
+      "url": "https://chgis.fas.harvard.edu/data/chgis/v6/"
+    },
+    {
+      "id": "S40",
+      "text": {
+        "en": "Qian Mu, Xian-Qin zhuzi xinian (chronological studies of early thinkers).",
+        "zh": "【待译】Qian Mu, Xian-Qin zhuzi xinian (chronological studies of early thinkers)."
+      },
+      "note": {
+        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
+        "zh": "【待译】Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward."
+      }
+    },
+    {
+      "id": "S41",
+      "text": {
+        "en": "Zhang Peiyu, Zhongguo Xian-Qin shi libiao (Qilu Shushe, 1987). No modern calendar day conversions are attempted in this topic.",
+        "zh": "【待译】Zhang Peiyu, Zhongguo Xian-Qin shi libiao (Qilu Shushe, 1987). No modern calendar day conversions are attempted in this topic."
+      },
+      "note": {
+        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
+        "zh": "【待译】Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward."
+      }
+    },
+    {
+      "id": "S42",
+      "text": {
+        "en": "Gu Donggao, Chunqiu dashi biao. War-count definitions and totals require edition and page verification.",
+        "zh": "【待译】Gu Donggao, Chunqiu dashi biao. War-count definitions and totals require edition and page verification."
+      },
+      "note": {
+        "en": "[待核] Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
+        "zh": "【待译】[待核] Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward."
+      }
+    },
+    {
+      "id": "S43",
+      "text": {
+        "en": "Wikidata, geographical coordinates and identifiers. Structured data are available under CC0.",
+        "zh": "【待译】Wikidata, geographical coordinates and identifiers. Structured data are available under CC0."
+      },
+      "note": {
+        "en": "Coordinates currently follow the approximate anchors in the approved specification. [待核] Site-by-site reconciliation with Wikidata item identifiers and coordinate precision is incomplete; these are not claimed as surveyed battle locations.",
+        "zh": "【待译】Coordinates currently follow the approximate anchors in the approved specification. [待核] Site-by-site reconciliation with Wikidata item identifiers and coordinate precision is incomplete; these are not claimed as surveyed battle locations."
+      },
+      "url": "https://www.wikidata.org/wiki/Wikidata:Licensing"
+    },
+    {
+      "id": "S44",
+      "text": {
+        "en": "OpenStreetMap contributors, data under ODbL 1.0. No unverified Great Wall line is included.",
+        "zh": "【待译】OpenStreetMap contributors, data under ODbL 1.0. No unverified Great Wall line is included."
+      },
+      "note": {
+        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
+        "zh": "【待译】Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward."
+      },
+      "url": "https://www.openstreetmap.org/copyright"
+    },
+    {
+      "id": "S150",
+      "text": {
+        "en": "Shiji, chapter 6: Basic Annals of the First Emperor of Qin.",
+        "zh": "【待译】Shiji, chapter 6: Basic Annals of the First Emperor of Qin."
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷006",
+      "note": {
+        "en": "Checked the conquest sequence, 36 commanderies, book-burning edict, forced construction labour, and final imperial tour. The prose is a Han-period account and embeds Qin court proclamations; numbers are recorded claims, not modern counts.",
+        "zh": "【待译】Checked the conquest sequence, 36 commanderies, book-burning edict, forced construction labour, and final imperial tour. The prose is a Han-period account and embeds Qin court proclamations; numbers are recorded claims, not modern counts."
+      }
+    },
+    {
+      "id": "S151",
+      "text": {
+        "en": "Shiji, chapter 5: Basic Annals of Qin.",
+        "zh": "【待译】Shiji, chapter 5: Basic Annals of Qin."
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷005",
+      "note": {
+        "en": "Checked Shimen: 60,000 heads; abolition of following a ruler in death; 41 counties; Yique: 240,000 heads; Huayang: 150,000 heads; Changping: more than 400,000 killed. This differs in wording and scope from chapter 73.",
+        "zh": "【待译】Checked Shimen: 60,000 heads; abolition of following a ruler in death; 41 counties; Yique: 240,000 heads; Huayang: 150,000 heads; Changping: more than 400,000 killed. This differs in wording and scope from chapter 73."
+      }
+    },
+    {
+      "id": "S152",
+      "text": {
+        "en": "Shiji, chapter 73: Biographies of Bai Qi and Wang Jian.",
+        "zh": "【待译】Shiji, chapter 73: Biographies of Bai Qi and Wang Jian."
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷073",
+      "note": {
+        "en": "Checked Yique: 240,000 heads; Huayang: 130,000 heads and 20,000 Zhao soldiers drowned; Changping: 46 days without food, 240 young survivors released, and 450,000 cumulatively beheaded or captured; Bai Qi’s later claim that Qin dead exceeded half; Li Xin 200,000 and Wang Jian 600,000. Traditional figures are not independently verified totals.",
+        "zh": "【待译】Checked Yique: 240,000 heads; Huayang: 130,000 heads and 20,000 Zhao soldiers drowned; Changping: 46 days without food, 240 young survivors released, and 450,000 cumulatively beheaded or captured; Bai Qi’s later claim that Qin dead exceeded half; Li Xin 200,000 and Wang Jian 600,000. Traditional figures are not independently verified totals."
+      }
+    },
+    {
+      "id": "S153",
+      "text": {
+        "en": "Mengzi, Liang Hui Wang II, sections 10–11.",
+        "zh": "【待译】Mengzi, Liang Hui Wang II, sections 10–11."
+      },
+      "url": "https://zh.wikisource.org/wiki/孟子/梁惠王下",
+      "note": {
+        "en": "Checked the criticism of Qi’s occupation of Yan: killing fathers and elder brothers, binding younger relatives, destroying ancestral temples and removing valuables. No casualty total is given.",
+        "zh": "【待译】Checked the criticism of Qi’s occupation of Yan: killing fathers and elder brothers, binding younger relatives, destroying ancestral temples and removing valuables. No casualty total is given."
+      }
+    },
+    {
+      "id": "S154",
+      "text": {
+        "en": "Shiji, chapter 82: Biography of Tian Dan.",
+        "zh": "【待译】Shiji, chapter 82: Biography of Tian Dan."
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷082",
+      "note": {
+        "en": "Checked the story of Yan troops cutting the noses of captured Qi soldiers and opening graves, told as a stratagem attributed to Tian Dan. This is a retrospective narrative, not an independent casualty register.",
+        "zh": "【待译】Checked the story of Yan troops cutting the noses of captured Qi soldiers and opening graves, told as a stratagem attributed to Tian Dan. This is a retrospective narrative, not an independent casualty register."
+      }
+    },
+    {
+      "id": "S155",
+      "text": {
+        "en": "Shiji, chapter 77: Biography of the Lord of Wei.",
+        "zh": "【待译】Shiji, chapter 77: Biography of the Lord of Wei."
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷077",
+      "note": {
+        "en": "Directly checked Shiji chapter 77: Ru Ji obtains the tally, Zhu Hai kills Jin Bi, and the Wei force advances to relieve Handan. The base text locates the camp at Ye, not the approved specification’s Tangyin; the route now follows Ye. Retrospective narrative; stations are not a surveyed road.",
+        "zh": "【待译】Directly checked Shiji chapter 77: Ru Ji obtains the tally, Zhu Hai kills Jin Bi, and the Wei force advances to relieve Handan. The base text locates the camp at Ye, not the approved specification’s Tangyin; the route now follows Ye. Retrospective narrative; stations are not a surveyed road."
+      }
+    },
+    {
+      "id": "S156",
+      "text": {
+        "en": "Shiji, chapter 81: Biographies of Lian Po and Lin Xiangru.",
+        "zh": "【待译】Shiji, chapter 81: Biographies of Lian Po and Lin Xiangru."
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷081",
+      "note": {
+        "en": "Primary narrative for Zhao She at Yuyu, Lian Po, Zhao Kuo and Li Mu. A battle-place name is not a precise archaeological battlefield coordinate.",
+        "zh": "【待译】Primary narrative for Zhao She at Yuyu, Lian Po, Zhao Kuo and Li Mu. A battle-place name is not a precise archaeological battlefield coordinate."
+      }
+    },
+    {
+      "id": "S157",
+      "text": {
+        "en": "Shiji, chapter 39: Hereditary House of Jin.",
+        "zh": "【待译】Shiji, chapter 39: Hereditary House of Jin."
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷039",
+      "note": {
+        "en": "Primary text consulted for Jin’s annexations and Chong’er’s exile sequence. Chronological reconstruction remains distinct from modern route geometry.",
+        "zh": "【待译】Primary text consulted for Jin’s annexations and Chong’er’s exile sequence. Chronological reconstruction remains distinct from modern route geometry."
+      }
+    },
+    {
+      "id": "S170",
+      "text": {
+        "en": "Movement provenance for zhou-move-east; primary reference S1.",
+        "zh": "【待译】Movement provenance for zhou-move-east; primary reference S1."
+      },
+      "note": {
+        "en": "Itinerary: Haojing → Mount Li → Huayin → Hangu → Mianchi → Luoyi. Zhou annals; the approved specification identifies the Wei valley and Xiao–Hangu corridor. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[108.78, 34.23], [109.2, 34.38], [110.09, 34.57], [110.9, 34.6], [111.76, 34.76], [112.45, 34.68]].",
+        "zh": "【待译】Itinerary: Haojing → Mount Li → Huayin → Hangu → Mianchi → Luoyi. Zhou annals; the approved specification identifies the Wei valley and Xiao–Hangu corridor. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[108.78, 34.23], [109.2, 34.38], [110.09, 34.57], [110.9, 34.6], [111.76, 34.76], [112.45, 34.68]]."
+      }
+    },
+    {
+      "id": "S171",
+      "text": {
+        "en": "Movement provenance for qi-north-shanrong; primary reference S2.",
+        "zh": "【待译】Movement provenance for qi-north-shanrong; primary reference S2."
+      },
+      "note": {
+        "en": "Itinerary: Linzi → Ji → Lingzhi → Guzhu. Zuozhuan, Duke Zhuang year 30. A Ji River crossing cannot be fixed from the available text and is not invented. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[118.337908, 36.889756], [116.35, 39.88], [118.7, 40.0], [118.89, 39.89]].",
+        "zh": "【待译】Itinerary: Linzi → Ji → Lingzhi → Guzhu. Zuozhuan, Duke Zhuang year 30. A Ji River crossing cannot be fixed from the available text and is not invented. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[118.337908, 36.889756], [116.35, 39.88], [118.7, 40.0], [118.89, 39.89]]."
+      }
+    },
+    {
+      "id": "S172",
+      "text": {
+        "en": "Movement provenance for chonger-exile; primary reference S157.",
+        "zh": "【待译】Movement provenance for chonger-exile; primary reference S157."
+      },
+      "note": {
+        "en": "Itinerary: Pu → Chaoge → Linzi → Cao → Song → Xinzheng → Ying → Yong → Jiang. Shiji, Jin hereditary house; Zuozhuan. The unspecified Di residence is omitted as a point; the order of named courts is retained. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[111.09, 36.41], [114.25, 35.62], [118.337908, 36.889756], [115.55, 34.83], [115.65, 34.42], [113.73, 34.39], [112.190298, 30.405722], [107.4, 34.5], [111.48, 35.62]].",
+        "zh": "【待译】Itinerary: Pu → Chaoge → Linzi → Cao → Song → Xinzheng → Ying → Yong → Jiang. Shiji, Jin hereditary house; Zuozhuan. The unspecified Di residence is omitted as a point; the order of named courts is retained. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[111.09, 36.41], [114.25, 35.62], [118.337908, 36.889756], [115.55, 34.83], [115.65, 34.42], [113.73, 34.39], [112.190298, 30.405722], [107.4, 34.5], [111.48, 35.62]]."
+      }
+    },
+    {
+      "id": "S173",
+      "text": {
+        "en": "Movement provenance for chu-to-chengpu; primary reference S2.",
+        "zh": "【待译】Movement provenance for chu-to-chengpu; primary reference S2."
+      },
+      "note": {
+        "en": "Itinerary: Ying → Fangcheng → Chen → Song → Chengpu. Zuozhuan, Duke Xi years 27–28; approved-spec campaign corridor. Exact roads are not recovered. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[112.190298, 30.405722], [113.0, 33.25], [114.9, 33.62], [115.65, 34.42], [115.48, 35.6]].",
+        "zh": "【待译】Itinerary: Ying → Fangcheng → Chen → Song → Chengpu. Zuozhuan, Duke Xi years 27–28; approved-spec campaign corridor. Exact roads are not recovered. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[112.190298, 30.405722], [113.0, 33.25], [114.9, 33.62], [115.65, 34.42], [115.48, 35.6]]."
+      }
+    },
+    {
+      "id": "S174",
+      "text": {
+        "en": "Movement provenance for jin-to-chengpu; primary reference S2.",
+        "zh": "【待译】Movement provenance for jin-to-chengpu; primary reference S2."
+      },
+      "note": {
+        "en": "Itinerary: Jiang → Chaoge → Cao → Chengpu. Zuozhuan, Duke Xi year 28. An unlocated Yellow River crossing is not assigned an invented point. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[111.48, 35.62], [114.25, 35.62], [115.55, 34.83], [115.48, 35.6]].",
+        "zh": "【待译】Itinerary: Jiang → Chaoge → Cao → Chengpu. Zuozhuan, Duke Xi year 28. An unlocated Yellow River crossing is not assigned an invented point. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[111.48, 35.62], [114.25, 35.62], [115.55, 34.83], [115.48, 35.6]]."
+      }
+    },
+    {
+      "id": "S175",
+      "text": {
+        "en": "Movement provenance for qin-raid-zheng; primary reference S2.",
+        "zh": "【待译】Movement provenance for qin-raid-zheng; primary reference S2."
+      },
+      "note": {
+        "en": "Itinerary: Yong → Hangu → Hua → Xiao. Zuozhuan, Duke Xi years 32–33. Zheng is the intended target, not a claim that Qin reached its capital. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[107.4, 34.5], [110.9, 34.6], [112.8, 34.7], [111.6, 34.73]].",
+        "zh": "【待译】Itinerary: Yong → Hangu → Hua → Xiao. Zuozhuan, Duke Xi years 32–33. Zheng is the intended target, not a claim that Qin reached its capital. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[107.4, 34.5], [110.9, 34.6], [112.8, 34.7], [111.6, 34.73]]."
+      }
+    },
+    {
+      "id": "S176",
+      "text": {
+        "en": "Movement provenance for wu-to-ying; primary reference S2.",
+        "zh": "【待译】Movement provenance for wu-to-ying; primary reference S2."
+      },
+      "note": {
+        "en": "Itinerary: Gusu → Zhoulai → Cai → Boju → Ying. Zuozhuan, Duke Ding year 4. The specification’s river transport and disputed Yuzhang segment are acknowledged, but no unsupported river course or waypoint is added. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[120.62, 31.3], [116.72, 32.7], [114.98, 33.26], [114.95, 31.2], [112.190298, 30.405722]].",
+        "zh": "【待译】Itinerary: Gusu → Zhoulai → Cai → Boju → Ying. Zuozhuan, Duke Ding year 4. The specification’s river transport and disputed Yuzhang segment are acknowledged, but no unsupported river course or waypoint is added. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[120.62, 31.3], [116.72, 32.7], [114.98, 33.26], [114.95, 31.2], [112.190298, 30.405722]]."
+      }
+    },
+    {
+      "id": "S177",
+      "text": {
+        "en": "Movement provenance for confucius-travels; primary reference S1.",
+        "zh": "【待译】Movement provenance for confucius-travels; primary reference S1."
+      },
+      "note": {
+        "en": "Itinerary: Qufu → Chaoge → Kuang → Song → Xinzheng → Chen → Cai → Fuhan → Chaoge → Qufu. Shiji, Confucius hereditary house. The exact order and identification of some visits remain disputed; this is the conventional itinerary selected in the specification. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[116.9862, 35.5819], [114.25, 35.62], [114.88, 35.2], [115.65, 34.42], [113.73, 34.39], [114.9, 33.62], [114.98, 33.26], [114.2, 32.13], [114.25, 35.62], [116.9862, 35.5819]].",
+        "zh": "【待译】Itinerary: Qufu → Chaoge → Kuang → Song → Xinzheng → Chen → Cai → Fuhan → Chaoge → Qufu. Shiji, Confucius hereditary house. The exact order and identification of some visits remain disputed; this is the conventional itinerary selected in the specification. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[116.9862, 35.5819], [114.25, 35.62], [114.88, 35.2], [115.65, 34.42], [113.73, 34.39], [114.9, 33.62], [114.98, 33.26], [114.2, 32.13], [114.25, 35.62], [116.9862, 35.5819]]."
+      }
+    },
+    {
+      "id": "S178",
+      "text": {
+        "en": "Movement provenance for wu-to-huangchi; primary reference S2.",
+        "zh": "【待译】Movement provenance for wu-to-huangchi; primary reference S2."
+      },
+      "note": {
+        "en": "Itinerary: Gusu → Yangzhou → Huai–Si junction → Huangchi. Zuozhuan and the approved specification describe canal and river transport. Only named endpoint and junction anchors are plotted; this is not a traced ancient canal centreline. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[120.62, 31.3], [119.43, 32.4], [118.49, 33.03], [114.4, 35.05]].",
+        "zh": "【待译】Itinerary: Gusu → Yangzhou → Huai–Si junction → Huangchi. Zuozhuan and the approved specification describe canal and river transport. Only named endpoint and junction anchors are plotted; this is not a traced ancient canal centreline. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[120.62, 31.3], [119.43, 32.4], [118.49, 33.03], [114.4, 35.05]]."
+      }
+    },
+    {
+      "id": "S179",
+      "text": {
+        "en": "Movement provenance for wei-to-handan; primary reference S1.",
+        "zh": "【待译】Movement provenance for wei-to-handan; primary reference S1."
+      },
+      "note": {
+        "en": "Itinerary: Daliang → Handan. Shiji narratives of the Wei–Zhao war; the specification allows Anyi or Daliang as the departure tradition. Daliang is selected and flagged as an uncertain departure anchor. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[114.3, 34.8], [114.49, 36.6]].",
+        "zh": "【待译】Itinerary: Daliang → Handan. Shiji narratives of the Wei–Zhao war; the specification allows Anyi or Daliang as the departure tradition. Daliang is selected and flagged as an uncertain departure anchor. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[114.3, 34.8], [114.49, 36.6]]."
+      }
+    },
+    {
+      "id": "S180",
+      "text": {
+        "en": "Movement provenance for qi-to-guiling; primary reference S1.",
+        "zh": "【待译】Movement provenance for qi-to-guiling; primary reference S1."
+      },
+      "note": {
+        "en": "Itinerary: Linzi → Pinglu → Guiling. Shiji, Sunzi and Wu Qi biographies, and the approved-spec itinerary. Pinglu and Guiling are approximate identifications. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[118.337908, 36.889756], [116.31, 35.91], [114.67, 35.2]].",
+        "zh": "【待译】Itinerary: Linzi → Pinglu → Guiling. Shiji, Sunzi and Wu Qi biographies, and the approved-spec itinerary. Pinglu and Guiling are approximate identifications. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[118.337908, 36.889756], [116.31, 35.91], [114.67, 35.2]]."
+      }
+    },
+    {
+      "id": "S181",
+      "text": {
+        "en": "Movement provenance for qi-maling; primary reference S1.",
+        "zh": "【待译】Movement provenance for qi-maling; primary reference S1."
+      },
+      "note": {
+        "en": "Itinerary: Linzi → Daliang → Maling. Shiji, Sunzi and Wu Qi biographies. Daliang marks the threatened direction, not capture of the city; Maling’s identification and the account of Pang Juan are disputed. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[118.337908, 36.889756], [114.3, 34.8], [115.6, 36.2]].",
+        "zh": "【待译】Itinerary: Linzi → Daliang → Maling. Shiji, Sunzi and Wu Qi biographies. Daliang marks the threatened direction, not capture of the city; Maling’s identification and the account of Pang Juan are disputed. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[118.337908, 36.889756], [114.3, 34.8], [115.6, 36.2]]."
+      }
+    },
+    {
+      "id": "S182",
+      "text": {
+        "en": "Movement provenance for qin-to-shu; primary reference S1.",
+        "zh": "【待译】Movement provenance for qin-to-shu; primary reference S1."
+      },
+      "note": {
+        "en": "Itinerary: Xianyang → Hanzhong → Jiameng → Chengdu. Shiji, Zhang Yi biography, and the approved-spec corridor through Qinling passes and the Jinniu route. The exact choice between pass itineraries is not resolved. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[108.857778, 34.413889], [107.03, 33.07], [105.79, 32.16], [104.06, 30.66]].",
+        "zh": "【待译】Itinerary: Xianyang → Hanzhong → Jiameng → Chengdu. Shiji, Zhang Yi biography, and the approved-spec corridor through Qinling passes and the Jinniu route. The exact choice between pass itineraries is not resolved. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[108.857778, 34.413889], [107.03, 33.07], [105.79, 32.16], [104.06, 30.66]]."
+      }
+    },
+    {
+      "id": "S183",
+      "text": {
+        "en": "Movement provenance for yue-yi-qi; primary reference S1.",
+        "zh": "【待译】Movement provenance for yue-yi-qi; primary reference S1."
+      },
+      "note": {
+        "en": "Itinerary: Ji → Jixi → Linzi. Shiji, Yue Yi biography. The later spread to many Qi cities is not represented by invented unlocated branches. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[116.35, 39.88], [116.7, 36.5], [118.337908, 36.889756]].",
+        "zh": "【待译】Itinerary: Ji → Jixi → Linzi. Shiji, Yue Yi biography. The later spread to many Qi cities is not represented by invented unlocated branches. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[116.35, 39.88], [116.7, 36.5], [118.337908, 36.889756]]."
+      }
+    },
+    {
+      "id": "S184",
+      "text": {
+        "en": "Movement provenance for bai-qi-to-ying; primary reference S152.",
+        "zh": "【待译】Movement provenance for bai-qi-to-ying; primary reference S152."
+      },
+      "note": {
+        "en": "Itinerary: Deng → Yan → Ying. Shiji, Bai Qi biography, attests Yan, Deng and Ying in the campaign. The starting Wuguan/Han River corridor is not uniquely fixed and is omitted as a plotted point. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[112.09, 32.69], [112.3, 31.7], [112.190298, 30.405722]].",
+        "zh": "【待译】Itinerary: Deng → Yan → Ying. Shiji, Bai Qi biography, attests Yan, Deng and Ying in the campaign. The starting Wuguan/Han River corridor is not uniquely fixed and is omitted as a plotted point. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[112.09, 32.69], [112.3, 31.7], [112.190298, 30.405722]]."
+      }
+    },
+    {
+      "id": "S185",
+      "text": {
+        "en": "Movement provenance for qin-to-changping; primary reference S152.",
+        "zh": "【待译】Movement provenance for qin-to-changping; primary reference S152."
+      },
+      "note": {
+        "en": "Itinerary: Yewang → Changping. Shiji, Bai Qi biography, and specification G13–G14 ordering. No exact Taihang pass alignment has been traced; endpoints define a broad theatre connection. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[112.94, 35.09], [112.92, 35.8]].",
+        "zh": "【待译】Itinerary: Yewang → Changping. Shiji, Bai Qi biography, and specification G13–G14 ordering. No exact Taihang pass alignment has been traced; endpoints define a broad theatre connection. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[112.94, 35.09], [112.92, 35.8]]."
+      }
+    },
+    {
+      "id": "S186",
+      "text": {
+        "en": "Movement provenance for zhao-to-changping; primary reference S152.",
+        "zh": "【待译】Movement provenance for zhao-to-changping; primary reference S152."
+      },
+      "note": {
+        "en": "Itinerary: Handan → Shangdang → Changping. Shiji, Bai Qi biography, and specification G13–G14 ordering. The Fukou corridor is named by the specification but not turned into a precise pass point. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[114.49, 36.6], [113.1, 36.2], [112.92, 35.8]].",
+        "zh": "【待译】Itinerary: Handan → Shangdang → Changping. Shiji, Bai Qi biography, and specification G13–G14 ordering. The Fukou corridor is named by the specification but not turned into a precise pass point. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[114.49, 36.6], [113.1, 36.2], [112.92, 35.8]]."
+      }
+    },
+    {
+      "id": "S187",
+      "text": {
+        "en": "Movement provenance for xinling-to-handan; primary reference S155.",
+        "zh": "【待译】Movement provenance for xinling-to-handan; primary reference S155."
+      },
+      "note": {
+        "en": "Itinerary: Daliang → Ye → Handan. Shiji chapter 77 explicitly locates Jin Bi’s camp at Ye in both the initial deployment and the transfer of command. This corrects the approved specification’s Tangyin station using the directly read base text. Geometry joins named-place anchors, not a measured road or camp boundary. Coordinates: [[114.3, 34.8], [114.4002, 36.2748], [114.49, 36.6]]. Ye anchor: S208. [待核] Daliang and Handan station-level Wikidata linkage and exact road alignment remain incomplete.",
+        "zh": "【待译】Itinerary: Daliang → Ye → Handan. Shiji chapter 77 explicitly locates Jin Bi’s camp at Ye in both the initial deployment and the transfer of command. This corrects the approved specification’s Tangyin station using the directly read base text. Geometry joins named-place anchors, not a measured road or camp boundary. Coordinates: [[114.3, 34.8], [114.4002, 36.2748], [114.49, 36.6]]. Ye anchor: S208. [待核] Daliang and Handan station-level Wikidata linkage and exact road alignment remain incomplete."
+      }
+    },
+    {
+      "id": "S188",
+      "text": {
+        "en": "Movement provenance for qin-han-230; primary reference S150.",
+        "zh": "【待译】Movement provenance for qin-han-230; primary reference S150."
+      },
+      "note": {
+        "en": "Itinerary: Hangu → Yiyang → Xinzheng. Shiji, First Emperor annals, and the approved-spec Neishi Teng itinerary. Named stations describe the campaign corridor, not a measured army track. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[110.9, 34.6], [112.18, 34.52], [113.73, 34.39]].",
+        "zh": "【待译】Itinerary: Hangu → Yiyang → Xinzheng. Shiji, First Emperor annals, and the approved-spec Neishi Teng itinerary. Named stations describe the campaign corridor, not a measured army track. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[110.9, 34.6], [112.18, 34.52], [113.73, 34.39]]."
+      }
+    },
+    {
+      "id": "S189",
+      "text": {
+        "en": "Movement provenance for qin-zhao-229; primary reference S150.",
+        "zh": "【待译】Movement provenance for qin-zhao-229; primary reference S150."
+      },
+      "note": {
+        "en": "Itinerary: Shangdang → Jingxing → Handan. Shiji, First Emperor annals, describes advance from the upper territory and descent through Jingxing; the start anchor is the specification’s Shangdang. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[113.1, 36.2], [114.14, 38.03], [114.49, 36.6]].",
+        "zh": "【待译】Itinerary: Shangdang → Jingxing → Handan. Shiji, First Emperor annals, describes advance from the upper territory and descent through Jingxing; the start anchor is the specification’s Shangdang. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[113.1, 36.2], [114.14, 38.03], [114.49, 36.6]]."
+      }
+    },
+    {
+      "id": "S190",
+      "text": {
+        "en": "Movement provenance for qin-wei-225; primary reference S150.",
+        "zh": "【待译】Movement provenance for qin-wei-225; primary reference S150."
+      },
+      "note": {
+        "en": "Itinerary: Luoyi → Daliang. Shiji, First Emperor annals, gives Daliang’s flooding; the specification supplies Sanchuan as departure region, anchored here at Luoyi. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[112.45, 34.68], [114.3, 34.8]].",
+        "zh": "【待译】Itinerary: Luoyi → Daliang. Shiji, First Emperor annals, gives Daliang’s flooding; the specification supplies Sanchuan as departure region, anchored here at Luoyi. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[112.45, 34.68], [114.3, 34.8]]."
+      }
+    },
+    {
+      "id": "S191",
+      "text": {
+        "en": "Movement provenance for li-xin-225; primary reference S152.",
+        "zh": "【待译】Movement provenance for li-xin-225; primary reference S152."
+      },
+      "note": {
+        "en": "Itinerary: Chen → Pingyu → Chengfu. Shiji, Bai Qi and Wang Jian biographies, describes Pingyu and a westward meeting at Chengfu. Chen is the approved-spec staging anchor. Chengfu’s identification and campaign dating are disputed. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[114.9, 33.62], [114.62, 32.96], [115.0, 33.5]].",
+        "zh": "【待译】Itinerary: Chen → Pingyu → Chengfu. Shiji, Bai Qi and Wang Jian biographies, describes Pingyu and a westward meeting at Chengfu. Chen is the approved-spec staging anchor. Chengfu’s identification and campaign dating are disputed. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[114.9, 33.62], [114.62, 32.96], [115.0, 33.5]]."
+      }
+    },
+    {
+      "id": "S192",
+      "text": {
+        "en": "Movement provenance for wang-jian-224; primary reference S152.",
+        "zh": "【待译】Movement provenance for wang-jian-224; primary reference S152."
+      },
+      "note": {
+        "en": "Itinerary: Chen → Pingyu → Qi → Shouchun. Shiji chapters 6 and 73: campaign south from Chen toward Pingyu, pursuit south of Qi and capture of the Chu king. Narrative order differs; Shouchun is the specification’s capital anchor. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[114.9, 33.62], [114.62, 32.96], [117.14, 33.63], [116.78, 32.57]].",
+        "zh": "【待译】Itinerary: Chen → Pingyu → Qi → Shouchun. Shiji chapters 6 and 73: campaign south from Chen toward Pingyu, pursuit south of Qi and capture of the Chu king. Narrative order differs; Shouchun is the specification’s capital anchor. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[114.9, 33.62], [114.62, 32.96], [117.14, 33.63], [116.78, 32.57]]."
+      }
+    },
+    {
+      "id": "S193",
+      "text": {
+        "en": "Movement provenance for qin-yan-222; primary reference S150.",
+        "zh": "【待译】Movement provenance for qin-yan-222; primary reference S150."
+      },
+      "note": {
+        "en": "Itinerary: Ji → Xiangping. Shiji, First Emperor annals, records the Liaodong campaign; the endpoint is the specification’s Xiangping regional anchor, not a proven king-capture site. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[116.35, 39.88], [123.17, 41.27]].",
+        "zh": "【待译】Itinerary: Ji → Xiangping. Shiji, First Emperor annals, records the Liaodong campaign; the endpoint is the specification’s Xiangping regional anchor, not a proven king-capture site. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[116.35, 39.88], [123.17, 41.27]]."
+      }
+    },
+    {
+      "id": "S194",
+      "text": {
+        "en": "Movement provenance for qin-qi-221; primary reference S150.",
+        "zh": "【待译】Movement provenance for qin-qi-221; primary reference S150."
+      },
+      "note": {
+        "en": "Itinerary: Ji → Linzi. Shiji, First Emperor annals, says Wang Ben came south from Yan. No precise road alignment is asserted. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[116.35, 39.88], [118.337908, 36.889756]].",
+        "zh": "【待译】Itinerary: Ji → Linzi. Shiji, First Emperor annals, says Wang Ben came south from Yan. No precise road alignment is asserted. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[116.35, 39.88], [118.337908, 36.889756]]."
+      }
+    },
+    {
+      "id": "S195",
+      "text": {
+        "en": "Movement provenance for first-emperor-last-tour; primary reference S150.",
+        "zh": "【待译】Movement provenance for first-emperor-last-tour; primary reference S150."
+      },
+      "note": {
+        "en": "Itinerary: Xianyang → Yunmeng → Kuaiji → Langya → Zhifu → Shaqiu. Shiji, First Emperor annals, names these major stations in the final tour; its detailed itinerary includes additional stops not plotted. The start year follows the specification, while the final tour’s departure is often conventionally dated 210 BCE. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[108.857778, 34.413889], [113.75, 31.02], [120.58, 30.0], [119.91, 35.65], [121.38, 37.6], [115.15, 37.1]].",
+        "zh": "【待译】Itinerary: Xianyang → Yunmeng → Kuaiji → Langya → Zhifu → Shaqiu. Shiji, First Emperor annals, names these major stations in the final tour; its detailed itinerary includes additional stops not plotted. The start year follows the specification, while the final tour’s departure is often conventionally dated 210 BCE. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[108.857778, 34.413889], [113.75, 31.02], [120.58, 30.0], [119.91, 35.65], [121.38, 37.6], [115.15, 37.1]]."
+      }
+    },
+    {
+      "id": "S158",
+      "text": {
+        "en": "Shanxi, Gaoping Changping Battlefield Site Protection Plan (2024–2040), planning text, Article 16.",
+        "zh": "【待译】Shanxi, Gaoping Changping Battlefield Site Protection Plan (2024–2040), planning text, Article 16."
+      },
+      "url": "https://xxgk.jcgov.gov.cn/jcsrmzf/zc/jszb/202502/P020250722554215677423.pdf",
+      "note": {
+        "en": "According to the indexed passage checked by the team, Article 16 describes the 1995 Yonglu no. 1 pit investigation and remains of more than about 130 individuals. The government PDF download was incomplete/corrupt in this session: the full plan and original excavation report were not read. [待核] Verify the complete excavation report, issue and osteological account. This small excavated sample cannot establish the total killed at Changping.",
+        "zh": "【待译】According to the indexed passage checked by the team, Article 16 describes the 1995 Yonglu no. 1 pit investigation and remains of more than about 130 individuals. The government PDF download was incomplete/corrupt in this session: the full plan and original excavation report were not read. [待核] Verify the complete excavation report, issue and osteological account. This small excavated sample cannot establish the total killed at Changping."
+      }
+    },
+    {
+      "id": "S200",
+      "text": {
+        "en": "Qufu modern city anchor",
+        "zh": "【待译】Qufu modern city anchor"
+      },
+      "url": "https://en.wikipedia.org/wiki/Qufu",
+      "note": {
+        "en": "Wikipedia’s coordinate explicitly describes the municipal government, not the footprint of ancient Lu. Wikidata Q210287 has a coarser coordinate, 116°59′ E, 35°36′ N. The map uses the modern anchor solely to locate the Lu/Qufu region. Coordinate checked on 16 October 2026. Wikidata structured coordinates are CC0; Wikipedia page coordinates are used as factual place anchors. No map polygon is derived from these points.",
+        "zh": "【待译】Wikipedia’s coordinate explicitly describes the municipal government, not the footprint of ancient Lu. Wikidata Q210287 has a coarser coordinate, 116°59′ E, 35°36′ N. The map uses the modern anchor solely to locate the Lu/Qufu region. Coordinate checked on 16 October 2026. Wikidata structured coordinates are CC0; Wikipedia page coordinates are used as factual place anchors. No map polygon is derived from these points."
+      }
+    },
+    {
+      "id": "S201",
+      "text": {
+        "en": "Jinyang Ancient City Relic Site, Wikidata Q11089408",
+        "zh": "【待译】Jinyang Ancient City Relic Site, Wikidata Q11089408"
+      },
+      "url": "https://www.wikidata.org/wiki/Q11089408",
+      "note": {
+        "en": "Checked P625: 112°28′15.982″ E, 37°44′35.632″ N, with no reference attached to that coordinate statement. This anchors the archaeological complex, not a surveyed 453 BCE inundation extent. Coordinate checked on 16 October 2026. Wikidata structured coordinates are CC0; Wikipedia page coordinates are used as factual place anchors. No map polygon is derived from these points.",
+        "zh": "【待译】Checked P625: 112°28′15.982″ E, 37°44′35.632″ N, with no reference attached to that coordinate statement. This anchors the archaeological complex, not a surveyed 453 BCE inundation extent. Coordinate checked on 16 October 2026. Wikidata structured coordinates are CC0; Wikipedia page coordinates are used as factual place anchors. No map polygon is derived from these points."
+      }
+    },
+    {
+      "id": "S202",
+      "text": {
+        "en": "Dujiangyan irrigation system, Wikidata Q824157",
+        "zh": "【待译】Dujiangyan irrigation system, Wikidata Q824157"
+      },
+      "url": "https://www.wikidata.org/wiki/Q824157",
+      "note": {
+        "en": "Checked P625: 103°36′15.9″ E, 31°0′33.3″ N, imported from German Wikipedia. This is a surviving-system site anchor, not proof of the exact ancient headworks position. Coordinate checked on 16 October 2026. Wikidata structured coordinates are CC0; Wikipedia page coordinates are used as factual place anchors. No map polygon is derived from these points.",
+        "zh": "【待译】Checked P625: 103°36′15.9″ E, 31°0′33.3″ N, imported from German Wikipedia. This is a surviving-system site anchor, not proof of the exact ancient headworks position. Coordinate checked on 16 October 2026. Wikidata structured coordinates are CC0; Wikipedia page coordinates are used as factual place anchors. No map polygon is derived from these points."
+      }
+    },
+    {
+      "id": "S203",
+      "text": {
+        "en": "First Emperor’s mausoleum, Wikidata Q910180",
+        "zh": "【待译】First Emperor’s mausoleum, Wikidata Q910180"
+      },
+      "url": "https://www.wikidata.org/wiki/Q910180",
+      "note": {
+        "en": "Checked P625: 109°15′14″ E, 34°22′54″ N, imported from English Wikipedia. The site placard locates the mausoleum complex; it does not claim that this is the centre of a terracotta pit. Coordinate checked on 16 October 2026. Wikidata structured coordinates are CC0; Wikipedia page coordinates are used as factual place anchors. No map polygon is derived from these points.",
+        "zh": "【待译】Checked P625: 109°15′14″ E, 34°22′54″ N, imported from English Wikipedia. The site placard locates the mausoleum complex; it does not claim that this is the centre of a terracotta pit. Coordinate checked on 16 October 2026. Wikidata structured coordinates are CC0; Wikipedia page coordinates are used as factual place anchors. No map polygon is derived from these points."
+      }
+    },
+    {
+      "id": "S204",
+      "text": {
+        "en": "Tomb of Marquis Yi of Zeng coordinate anchor",
+        "zh": "【待译】Tomb of Marquis Yi of Zeng coordinate anchor"
+      },
+      "url": "https://zh.wikipedia.org/wiki/曾侯乙墓",
+      "note": {
+        "en": "The published page coordinate is rounded to arcminutes, 113°22′ E, 31°42′ N. It is a coarse tomb-area anchor; archaeological location precision is not improved beyond that source. Coordinate checked on 16 October 2026. Wikidata structured coordinates are CC0; Wikipedia page coordinates are used as factual place anchors. No map polygon is derived from these points.",
+        "zh": "【待译】The published page coordinate is rounded to arcminutes, 113°22′ E, 31°42′ N. It is a coarse tomb-area anchor; archaeological location precision is not improved beyond that source. Coordinate checked on 16 October 2026. Wikidata structured coordinates are CC0; Wikipedia page coordinates are used as factual place anchors. No map polygon is derived from these points."
+      }
+    },
+    {
+      "id": "S205",
+      "text": {
+        "en": "Chu Jinan ancient city site coordinate anchor",
+        "zh": "【待译】Chu Jinan ancient city site coordinate anchor"
+      },
+      "url": "https://zh.wikipedia.org/wiki/楚纪南故城",
+      "note": {
+        "en": "Checked page coordinate: 112°11′25.073″ E, 30°24′20.599″ N. Used as the conventional Ying/Jinan archaeological-area anchor; the several ancient sites called Ying and the city’s temporal extent require distinction. Coordinate checked on 16 October 2026. Wikidata structured coordinates are CC0; Wikipedia page coordinates are used as factual place anchors. No map polygon is derived from these points.",
+        "zh": "【待译】Checked page coordinate: 112°11′25.073″ E, 30°24′20.599″ N. Used as the conventional Ying/Jinan archaeological-area anchor; the several ancient sites called Ying and the city’s temporal extent require distinction. Coordinate checked on 16 October 2026. Wikidata structured coordinates are CC0; Wikipedia page coordinates are used as factual place anchors. No map polygon is derived from these points."
+      }
+    },
+    {
+      "id": "S206",
+      "text": {
+        "en": "Ancient Qi city at Linzi coordinate anchor",
+        "zh": "【待译】Ancient Qi city at Linzi coordinate anchor"
+      },
+      "url": "https://zh.wikipedia.org/wiki/临淄齐国故城",
+      "note": {
+        "en": "Checked page coordinate: 118°20′16.469″ E, 36°53′23.122″ N. This locates the ancient-city archaeological complex, not a precise gate, court building or Jixia lecture site. Coordinate checked on 16 October 2026. Wikidata structured coordinates are CC0; Wikipedia page coordinates are used as factual place anchors. No map polygon is derived from these points.",
+        "zh": "【待译】Checked page coordinate: 118°20′16.469″ E, 36°53′23.122″ N. This locates the ancient-city archaeological complex, not a precise gate, court building or Jixia lecture site. Coordinate checked on 16 October 2026. Wikidata structured coordinates are CC0; Wikipedia page coordinates are used as factual place anchors. No map polygon is derived from these points."
+      }
+    },
+    {
+      "id": "S207",
+      "text": {
+        "en": "Lingqu coordinate anchor",
+        "zh": "【待译】Lingqu coordinate anchor"
+      },
+      "url": "https://en.wikipedia.org/wiki/Lingqu",
+      "note": {
+        "en": "Checked page coordinate: 110°41′23″ E, 25°35′56″ N. This locates the canal area and does not reconstruct the 214 BCE channel alignment. Coordinate checked on 16 October 2026. Wikidata structured coordinates are CC0; Wikipedia page coordinates are used as factual place anchors. No map polygon is derived from these points.",
+        "zh": "【待译】Checked page coordinate: 110°41′23″ E, 25°35′56″ N. This locates the canal area and does not reconstruct the 214 BCE channel alignment. Coordinate checked on 16 October 2026. Wikidata structured coordinates are CC0; Wikipedia page coordinates are used as factual place anchors. No map polygon is derived from these points."
+      }
+    },
+    {
+      "id": "S208",
+      "text": {
+        "en": "Ye ancient-city coordinate anchor.",
+        "zh": "【待译】Ye ancient-city coordinate anchor."
+      },
+      "url": "https://en.wikipedia.org/wiki/Ye_(ancient_China)",
+      "note": {
+        "en": "Checked coordinate 114.4002 E, 36.2748 N on 16 October 2026. Shiji chapter 77’s base text twice locates Jin Bi’s camp at Ye; the approved specification names Tangyin. The movement uses Ye to follow the directly checked text. This city-site anchor does not locate the exact ancient camp.",
+        "zh": "【待译】Checked coordinate 114.4002 E, 36.2748 N on 16 October 2026. Shiji chapter 77’s base text twice locates Jin Bi’s camp at Ye; the approved specification names Tangyin. The movement uses Ye to follow the directly checked text. This city-site anchor does not locate the exact ancient camp."
+      }
+    },
+    {
+      "id": "S209",
+      "text": {
+        "en": "Qin Xianyang city ruins coordinate anchor.",
+        "zh": "【待译】Qin Xianyang city ruins coordinate anchor."
+      },
+      "url": "https://zh.wikipedia.org/wiki/秦咸阳城遗址",
+      "note": {
+        "en": "Checked coordinate 108.85777806 E, 34.41388889 N on 16 October 2026. Replaces the specification’s modern Xianyang-area point 108.7 E, 34.37 N for ancient-capital episodes. The archaeological complex anchor does not locate every court meeting or execution precisely; the capital’s footprint and political centre changed.",
+        "zh": "【待译】Checked coordinate 108.85777806 E, 34.41388889 N on 16 October 2026. Replaces the specification’s modern Xianyang-area point 108.7 E, 34.37 N for ancient-capital episodes. The archaeological complex anchor does not locate every court meeting or execution precisely; the capital’s footprint and political centre changed."
+      }
+    },
+    {
+      "id": "S301",
+      "text": {
+        "en": "[G1] Ancient North China Plain blank relief map.svg — \nKanguole; CC BY-SA 4.0.",
+        "zh": "【待译】[G1] Ancient North China Plain blank relief map.svg — \nKanguole; CC BY-SA 4.0."
+      },
+      "url": "https://commons.wikimedia.org/wiki/File:Ancient_North_China_Plain_blank_relief_map.svg",
+      "note": {
+        "en": "Commons API licence and author metadata checked. Georeferenced/digitized for this topic where used; historical boundaries remain approximate. original. SHA-256 7a2b85bd9418be884cabbe5c853d8f96939b2d9cea4e217064133ede530f6d2c. Additional geography audit: G1 registration RMS 0.030 km, max 0.049 km on fifteen shared Natural Earth river endpoints. This recovers a common modern dataset and is not independent verification of ancient river reconstructions.",
+        "zh": "【待译】Commons API licence and author metadata checked. Georeferenced/digitized for this topic where used; historical boundaries remain approximate. original. SHA-256 7a2b85bd9418be884cabbe5c853d8f96939b2d9cea4e217064133ede530f6d2c. Additional geography audit: G1 registration RMS 0.030 km, max 0.049 km on fifteen shared Natural Earth river endpoints. This recovers a common modern dataset and is not independent verification of ancient river reconstructions."
+      }
+    },
+    {
+      "id": "S302",
+      "text": {
+        "en": "[G2] Western Zhou geography.svg — \nKanguole; CC BY-SA 4.0.",
+        "zh": "【待译】[G2] Western Zhou geography.svg — \nKanguole; CC BY-SA 4.0."
+      },
+      "url": "https://commons.wikimedia.org/wiki/File:Western_Zhou_geography.svg",
+      "note": {
+        "en": "Commons API licence and author metadata checked. Georeferenced/digitized for this topic where used; historical boundaries remain approximate. original. SHA-256 58681a4a76bdc51b9b3e1bd431f6da9bfe381f3f0256cebc03c8ad45a16067fd.",
+        "zh": "【待译】Commons API licence and author metadata checked. Georeferenced/digitized for this topic where used; historical boundaries remain approximate. original. SHA-256 58681a4a76bdc51b9b3e1bd431f6da9bfe381f3f0256cebc03c8ad45a16067fd."
+      }
+    },
+    {
+      "id": "S303",
+      "text": {
+        "en": "[G3] Chinese plain 5c. BC-en.svg — Yug; CC BY-SA 3.0.",
+        "zh": "【待译】[G3] Chinese plain 5c. BC-en.svg — Yug; CC BY-SA 3.0."
+      },
+      "url": "https://commons.wikimedia.org/wiki/File:Chinese_plain_5c._BC-en.svg",
+      "note": {
+        "en": "Commons API licence and author metadata checked. Georeferenced/digitized for this topic where used; historical boundaries remain approximate. original. SHA-256 ae86cb63350ba05eb13ba36790c0f1b4eaef2b0a3e203eefb80d66802a1c908a.",
+        "zh": "【待译】Commons API licence and author metadata checked. Georeferenced/digitized for this topic where used; historical boundaries remain approximate. original. SHA-256 ae86cb63350ba05eb13ba36790c0f1b4eaef2b0a3e203eefb80d66802a1c908a."
+      }
+    },
+    {
+      "id": "S304",
+      "text": {
+        "en": "[G4] Chinese plain 5c. BC with Yue-en.png — Yug; CC BY-SA 3.0.",
+        "zh": "【待译】[G4] Chinese plain 5c. BC with Yue-en.png — Yug; CC BY-SA 3.0."
+      },
+      "url": "https://commons.wikimedia.org/wiki/File:Chinese_plain_5c._BC_with_Yue-en.png",
+      "note": {
+        "en": "Commons API licence and author metadata checked. Georeferenced/digitized for this topic where used; historical boundaries remain approximate. original. SHA-256 052394b665b3eafd7abeb8fcfbfda9ea0e35df913af8d9fe7a0605aa2a61327a.",
+        "zh": "【待译】Commons API licence and author metadata checked. Georeferenced/digitized for this topic where used; historical boundaries remain approximate. original. SHA-256 052394b665b3eafd7abeb8fcfbfda9ea0e35df913af8d9fe7a0605aa2a61327a."
+      }
+    },
+    {
+      "id": "S305",
+      "text": {
+        "en": "[G5] Royaumes combattants 350 aC.svg — Zunkir; CC BY-SA 3.0.",
+        "zh": "【待译】[G5] Royaumes combattants 350 aC.svg — Zunkir; CC BY-SA 3.0."
+      },
+      "url": "https://commons.wikimedia.org/wiki/File:Royaumes_combattants_350_aC.svg",
+      "note": {
+        "en": "Commons API licence and author metadata checked. Georeferenced/digitized for this topic where used; historical boundaries remain approximate. original. SHA-256 7c48a97616aa03c8368ea9680eb1cbddf9fe3467c8355a14f72cb075be724527.",
+        "zh": "【待译】Commons API licence and author metadata checked. Georeferenced/digitized for this topic where used; historical boundaries remain approximate. original. SHA-256 7c48a97616aa03c8368ea9680eb1cbddf9fe3467c8355a14f72cb075be724527."
+      }
+    },
+    {
+      "id": "S306",
+      "text": {
+        "en": "[G6] Royaumes combattants 250 aC.svg — Zunkir; CC BY-SA 3.0.",
+        "zh": "【待译】[G6] Royaumes combattants 250 aC.svg — Zunkir; CC BY-SA 3.0."
+      },
+      "url": "https://commons.wikimedia.org/wiki/File:Royaumes_combattants_250_aC.svg",
+      "note": {
+        "en": "Commons API licence and author metadata checked. Georeferenced/digitized for this topic where used; historical boundaries remain approximate. Commons 1280px thumbnail (original rate limited). SHA-256 034c581e3e4df21abce73b933fd69bca935a69d6b39df3ac7258f1fc7bcf4900.",
+        "zh": "【待译】Commons API licence and author metadata checked. Georeferenced/digitized for this topic where used; historical boundaries remain approximate. Commons 1280px thumbnail (original rate limited). SHA-256 034c581e3e4df21abce73b933fd69bca935a69d6b39df3ac7258f1fc7bcf4900."
+      }
+    },
+    {
+      "id": "S307",
+      "text": {
+        "en": "[G7] 战国形势图（前350年）（简）.png — Jiu Qiaozai; CC BY-SA 3.0.",
+        "zh": "【待译】[G7] 战国形势图（前350年）（简）.png — Jiu Qiaozai; CC BY-SA 3.0."
+      },
+      "url": "https://commons.wikimedia.org/wiki/File:%E6%88%98%E5%9B%BD%E5%BD%A2%E5%8A%BF%E5%9B%BE%EF%BC%88%E5%89%8D350%E5%B9%B4%EF%BC%89%EF%BC%88%E7%AE%80%EF%BC%89.png",
+      "note": {
+        "en": "Commons API licence and author metadata checked. Georeferenced/digitized for this topic where used; historical boundaries remain approximate. original. SHA-256 833eeefa5c2b19ea82c612aef05eade7a5302b373efebc333576f162eb548987.",
+        "zh": "【待译】Commons API licence and author metadata checked. Georeferenced/digitized for this topic where used; historical boundaries remain approximate. original. SHA-256 833eeefa5c2b19ea82c612aef05eade7a5302b373efebc333576f162eb548987."
+      }
+    },
+    {
+      "id": "S308",
+      "text": {
+        "en": "[G8] 战国形势图（前280年）（简）.png — 玖巧仔; CC BY-SA 3.0.",
+        "zh": "【待译】[G8] 战国形势图（前280年）（简）.png — 玖巧仔; CC BY-SA 3.0."
+      },
+      "url": "https://commons.wikimedia.org/wiki/File:%E6%88%98%E5%9B%BD%E5%BD%A2%E5%8A%BF%E5%9B%BE%EF%BC%88%E5%89%8D280%E5%B9%B4%EF%BC%89%EF%BC%88%E7%AE%80%EF%BC%89.png",
+      "note": {
+        "en": "Commons API licence and author metadata checked. Georeferenced/digitized for this topic where used; historical boundaries remain approximate. Commons 1280px thumbnail (original rate limited). SHA-256 dbddf44b5d01c5602847fa62bd43ae41b40b33e8795747bb8b662338fed60ff0. Additional geography audit: The 280 BCEsource retains a separate Qi tint; it does not distinguish the extent of Yan occupation. The map follows the published source rather than inventing an occupation frontier.",
+        "zh": "【待译】Commons API licence and author metadata checked. Georeferenced/digitized for this topic where used; historical boundaries remain approximate. Commons 1280px thumbnail (original rate limited). SHA-256 dbddf44b5d01c5602847fa62bd43ae41b40b33e8795747bb8b662338fed60ff0. Additional geography audit: The 280 BCEsource retains a separate Qi tint; it does not distinguish the extent of Yan occupation. The map follows the published source rather than inventing an occupation frontier."
+      }
+    },
+    {
+      "id": "S309",
+      "text": {
+        "en": "[G9] 春秋诸侯国分布图(简体).jpg — 玖巧仔; CC BY-SA 3.0.",
+        "zh": "【待译】[G9] 春秋诸侯国分布图(简体).jpg — 玖巧仔; CC BY-SA 3.0."
+      },
+      "url": "https://commons.wikimedia.org/wiki/File:%E6%98%A5%E7%A7%8B%E8%AF%B8%E4%BE%AF%E5%9B%BD%E5%88%86%E5%B8%83%E5%9B%BE(%E7%AE%80%E4%BD%93).jpg",
+      "note": {
+        "en": "Commons API licence and author metadata checked. Georeferenced/digitized for this topic where used; historical boundaries remain approximate. Commons 1280px thumbnail (original rate limited). SHA-256 90ff5b3a45e92c094e1c7cc87e434651b13d812eeec4511cb342428370cfc882. Additional geography audit: This is a point-distribution map with no territorial polygons. It is used only for locations and comparison; the specification’s proposed category tracing is impossible on this image.",
+        "zh": "【待译】Commons API licence and author metadata checked. Georeferenced/digitized for this topic where used; historical boundaries remain approximate. Commons 1280px thumbnail (original rate limited). SHA-256 90ff5b3a45e92c094e1c7cc87e434651b13d812eeec4511cb342428370cfc882. Additional geography audit: This is a point-distribution map with no territorial polygons. It is used only for locations and comparison; the specification’s proposed category tracing is impossible on this image."
+      }
+    },
+    {
+      "id": "S310",
+      "text": {
+        "en": "[G10] 春秋大国简图（繁）.png — 玖巧仔; CC BY 3.0.",
+        "zh": "【待译】[G10] 春秋大国简图（繁）.png — 玖巧仔; CC BY 3.0."
+      },
+      "url": "https://commons.wikimedia.org/wiki/File:%E6%98%A5%E7%A7%8B%E5%A4%A7%E5%9B%BD%E7%AE%80%E5%9B%BE%EF%BC%88%E7%B9%81%EF%BC%89.png",
+      "note": {
+        "en": "Commons API licence and author metadata checked. Georeferenced/digitized for this topic where used; historical boundaries remain approximate. original. SHA-256 087ed5018cea9afda27b35da2aff6b2503cdb0b08adb451603dd464721ad3786. Additional geography audit: Undated period schematic used for K1–K3 instead of G9. Early expansions and annexed minor states without bounded source shapes are not invented; these frames are not year-exact reconstructions.",
+        "zh": "【待译】Commons API licence and author metadata checked. Georeferenced/digitized for this topic where used; historical boundaries remain approximate. original. SHA-256 087ed5018cea9afda27b35da2aff6b2503cdb0b08adb451603dd464721ad3786. Additional geography audit: Undated period schematic used for K1–K3 instead of G9. Early expansions and annexed minor states without bounded source shapes are not invented; these frames are not year-exact reconstructions."
+      }
+    },
+    {
+      "id": "S311",
+      "text": {
+        "en": "[G11] EN-WarringStatesAll260BCE.jpg — Philg88; CC BY-SA 3.0.",
+        "zh": "【待译】[G11] EN-WarringStatesAll260BCE.jpg — Philg88; CC BY-SA 3.0."
+      },
+      "url": "https://commons.wikimedia.org/wiki/File:EN-WarringStatesAll260BCE.jpg",
+      "note": {
+        "en": "Commons API licence and author metadata checked. Georeferenced/digitized for this topic where used; historical boundaries remain approximate. Commons 1280px thumbnail (original rate limited). SHA-256 10b7a5a8fa49c1e85341a3ec2f0a4bbeb525aaa3e37d4a92ddfee3f044335289. Additional geography audit: Primary 260 BCEsource exceeds the 25 km alignment budget: RMS 26.102 km,max 66.657 km. Lu and Wey lack bounded source faces; their bounded280 BCE G8 components are carried forward as labelled inferences. This geography remains draft.",
+        "zh": "【待译】Commons API licence and author metadata checked. Georeferenced/digitized for this topic where used; historical boundaries remain approximate. Commons 1280px thumbnail (original rate limited). SHA-256 10b7a5a8fa49c1e85341a3ec2f0a4bbeb525aaa3e37d4a92ddfee3f044335289. Additional geography audit: Primary 260 BCEsource exceeds the 25 km alignment budget: RMS 26.102 km,max 66.657 km. Lu and Wey lack bounded source faces; their bounded280 BCE G8 components are carried forward as labelled inferences. This geography remains draft."
+      }
+    },
+    {
+      "id": "S312",
+      "text": {
+        "en": "[G12] 戰國七雄地圖-ZH-FR.png — User:丁志仁、User:Philg88; CC BY-SA 3.0.",
+        "zh": "【待译】[G12] 戰國七雄地圖-ZH-FR.png — User:丁志仁、User:Philg88; CC BY-SA 3.0."
+      },
+      "url": "https://commons.wikimedia.org/wiki/File:%E6%88%B0%E5%9C%8B%E4%B8%83%E9%9B%84%E5%9C%B0%E5%9C%96-ZH-FR.png",
+      "note": {
+        "en": "Commons API licence and author metadata checked. Georeferenced/digitized for this topic where used; historical boundaries remain approximate. Commons 1280px thumbnail (original rate limited). SHA-256 75cc8852159d6537e050f162fabbd2fc62d1f30c18c5e61198a8929e04e45d5f.",
+        "zh": "【待译】Commons API licence and author metadata checked. Georeferenced/digitized for this topic where used; historical boundaries remain approximate. Commons 1280px thumbnail (original rate limited). SHA-256 75cc8852159d6537e050f162fabbd2fc62d1f30c18c5e61198a8929e04e45d5f."
+      }
+    },
+    {
+      "id": "S313",
+      "text": {
+        "en": "[G13] Battle of Changping.png — SY; CC BY-SA 4.0.",
+        "zh": "【待译】[G13] Battle of Changping.png — SY; CC BY-SA 4.0."
+      },
+      "url": "https://commons.wikimedia.org/wiki/File:Battle_of_Changping.png",
+      "note": {
+        "en": "Commons API licence and author metadata checked. Georeferenced/digitized for this topic where used; historical boundaries remain approximate. Commons 330px thumbnail (original rate limited). SHA-256 4eaf94f1a4cef5aaa6b42930905d407e3ee3c6b5eb794a9a52df373edf9435a5. Additional geography audit: Only five independently identifiable city controls; diagnostic fit only, not accepted for polygon tracing.",
+        "zh": "【待译】Commons API licence and author metadata checked. Georeferenced/digitized for this topic where used; historical boundaries remain approximate. Commons 330px thumbnail (original rate limited). SHA-256 4eaf94f1a4cef5aaa6b42930905d407e3ee3c6b5eb794a9a52df373edf9435a5. Additional geography audit: Only five independently identifiable city controls; diagnostic fit only, not accepted for polygon tracing."
+      }
+    },
+    {
+      "id": "S314",
+      "text": {
+        "en": "[G14] Battle of changping,长平之战.svg — Kgbkgbkgb; CC BY-SA 4.0.",
+        "zh": "【待译】[G14] Battle of changping,长平之战.svg — Kgbkgbkgb; CC BY-SA 4.0."
+      },
+      "url": "https://commons.wikimedia.org/wiki/File:Battle_of_changping,%E9%95%BF%E5%B9%B3%E4%B9%8B%E6%88%98.svg",
+      "note": {
+        "en": "Commons API licence and author metadata checked. Georeferenced/digitized for this topic where used; historical boundaries remain approximate. Commons 1280px thumbnail (original rate limited). SHA-256 592fcc5e566917efe1c7b04f552ece12c58c0f9971fdd3a45886873efe52cdf5.",
+        "zh": "【待译】Commons API licence and author metadata checked. Georeferenced/digitized for this topic where used; historical boundaries remain approximate. Commons 1280px thumbnail (original rate limited). SHA-256 592fcc5e566917efe1c7b04f552ece12c58c0f9971fdd3a45886873efe52cdf5."
+      }
+    },
+    {
+      "id": "S315",
+      "text": {
+        "en": "[G15] Qin Unification.png — SY; CC BY-SA 4.0.",
+        "zh": "【待译】[G15] Qin Unification.png — SY; CC BY-SA 4.0."
+      },
+      "url": "https://commons.wikimedia.org/wiki/File:Qin_Unification.png",
+      "note": {
+        "en": "Commons API licence and author metadata checked. Georeferenced/digitized for this topic where used; historical boundaries remain approximate. original. SHA-256 0765017761f77cf4730ad46cd46ff36df9c7695d858503b16ed13af12c99905d. Additional geography audit: Seventeen controls; RMS 37.243 km,max 68.662 km exceeds 25 km budget. Reference only; K10 uses whole-state reassignment and does not trace new Qin commanderies from this image.",
+        "zh": "【待译】Commons API licence and author metadata checked. Georeferenced/digitized for this topic where used; historical boundaries remain approximate. original. SHA-256 0765017761f77cf4730ad46cd46ff36df9c7695d858503b16ed13af12c99905d. Additional geography audit: Seventeen controls; RMS 37.243 km,max 68.662 km exceeds 25 km budget. Reference only; K10 uses whole-state reassignment and does not trace new Qin commanderies from this image."
+      }
+    },
+    {
+      "id": "S316",
+      "text": {
+        "en": "[G16] Hou Xuanxuan The situation map of Qin's war.gif — Benedetta blair; CC BY-SA 4.0.",
+        "zh": "【待译】[G16] Hou Xuanxuan The situation map of Qin's war.gif — Benedetta blair; CC BY-SA 4.0."
+      },
+      "url": "https://commons.wikimedia.org/wiki/File:Hou_Xuanxuan_The_situation_map_of_Qin%27s_war.gif",
+      "note": {
+        "en": "Commons API licence and author metadata checked. Georeferenced/digitized for this topic where used; historical boundaries remain approximate. Commons 1280px thumbnail (original rate limited). SHA-256 49b68db5e1207db7ce519469bebac7e59af07968b492964b40ad0afeebcb4971. Additional geography audit: The animation lacks twelve independently identifiable geographic anchors. No registration RMS or traced state geometry is claimed.",
+        "zh": "【待译】Commons API licence and author metadata checked. Georeferenced/digitized for this topic where used; historical boundaries remain approximate. Commons 1280px thumbnail (original rate limited). SHA-256 49b68db5e1207db7ce519469bebac7e59af07968b492964b40ad0afeebcb4971. Additional geography audit: The animation lacks twelve independently identifiable geographic anchors. No registration RMS or traced state geometry is claimed."
+      }
+    },
+    {
+      "id": "S317",
+      "text": {
+        "en": "[G17] 秦灭六国形势图.png — 竹围墙; CC BY-SA 3.0.",
+        "zh": "【待译】[G17] 秦灭六国形势图.png — 竹围墙; CC BY-SA 3.0."
+      },
+      "url": "https://commons.wikimedia.org/wiki/File:%E7%A7%A6%E7%81%AD%E5%85%AD%E5%9B%BD%E5%BD%A2%E5%8A%BF%E5%9B%BE.png",
+      "note": {
+        "en": "Commons API licence and author metadata checked. Georeferenced/digitized for this topic where used; historical boundaries remain approximate. original. SHA-256 032ae3775da92cc888ae5f484e508127da6c431aa8d9425cc98fcfbd424a0742. Additional geography audit: Only eight secure anchors. Diagnostic fit only; not used for polygon tracing.",
+        "zh": "【待译】Commons API licence and author metadata checked. Georeferenced/digitized for this topic where used; historical boundaries remain approximate. original. SHA-256 032ae3775da92cc888ae5f484e508127da6c431aa8d9425cc98fcfbd424a0742. Additional geography audit: Only eight secure anchors. Diagnostic fit only; not used for polygon tracing."
+      }
+    },
+    {
+      "id": "S318",
+      "text": {
+        "en": "[G18] China Northern Plain relief location map.png — \nKanguole; CC0.",
+        "zh": "【待译】[G18] China Northern Plain relief location map.png — \nKanguole; CC0."
+      },
+      "url": "https://commons.wikimedia.org/wiki/File:China_Northern_Plain_relief_location_map.png",
+      "note": {
+        "en": "Commons API licence and author metadata checked. Georeferenced/digitized for this topic where used; historical boundaries remain approximate. Commons 1280px thumbnail (original rate limited). SHA-256 d6f2b9e65b9f1295a4788d88d7b77cf960d6fdc62f9799eadce6f3227ba60d45.",
+        "zh": "【待译】Commons API licence and author metadata checked. Georeferenced/digitized for this topic where used; historical boundaries remain approximate. Commons 1280px thumbnail (original rate limited). SHA-256 d6f2b9e65b9f1295a4788d88d7b77cf960d6fdc62f9799eadce6f3227ba60d45."
+      }
+    },
+    {
+      "id": "S319",
+      "text": {
+        "en": "Natural Earth 10m land and river centre lines",
+        "zh": "【待译】Natural Earth 10m land and river centre lines"
+      },
+      "url": "https://www.naturalearthdata.com/about/terms-of-use/",
+      "note": {
+        "en": "Public domain; regional modern coastline and river registration control coordinates. Historical lower Yellow River is replaced by G1 reconstructed courses.",
+        "zh": "【待译】Public domain; regional modern coastline and river registration control coordinates. Historical lower Yellow River is replaced by G1 reconstructed courses."
+      }
+    },
+    {
+      "id": "S320",
+      "text": {
+        "en": "Wikipedia geographic coordinate API audit",
+        "zh": "【待译】Wikipedia geographic coordinate API audit"
+      },
+      "url": "https://en.wikipedia.org/w/api.php",
+      "note": {
+        "en": "Coordinates used for georeferencing are in scripts/geo/warring-states/coordinates-wikipedia.json; modern municipality coordinates and ancient site anchors are distinguished.",
+        "zh": "【待译】Coordinates used for georeferencing are in scripts/geo/warring-states/coordinates-wikipedia.json; modern municipality coordinates and ancient site anchors are distinguished."
+      }
+    }
+  ]
+}

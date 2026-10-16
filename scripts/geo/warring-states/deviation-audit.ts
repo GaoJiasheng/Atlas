@@ -1,0 +1,9 @@
+/** Locate worst source-to-final boundary deviations, including intentional coast erasures. */
+import{readFileSync}from'node:fs';import{feature}from'topojson-client';import{pointInPolygon,writeJson}from'../lib/common';
+const dir='scripts/geo/warring-states',c=JSON.parse(readFileSync('src/content/topics/warring-states/data/control.json','utf8')),rt=JSON.parse(readFileSync('public/geo/warring-states-region.json','utf8'));const land=(feature(rt,Object.values(rt.objects)[0]as any)as any).features.filter((f:any)=>f.properties.kind==='land').flatMap((f:any)=>f.geometry.type==='Polygon'?[f.geometry.coordinates]:f.geometry.coordinates);
+const rings=(fc:any)=>fc.features.flatMap((f:any)=>f.geometry.type==='Polygon'?[f.geometry.coordinates]:f.geometry.type==='MultiPolygon'?f.geometry.coordinates:[]).flat();
+const seg=(rs:any[])=>rs.flatMap(r=>r.slice(1).map((b:any,i:number)=>[r[i],b]));
+function near(q:number[],segs:any[]){const co=Math.cos(q[1]!*Math.PI/180);let best=Infinity;for(const[a,b]of segs){const x=(a[0]-q[0]!)*co,y=a[1]-q[1]!,dx=(b[0]-a[0])*co,dy=b[1]-a[1],dd=dx*dx+dy*dy,t=dd?Math.max(0,Math.min(1,-(x*dx+y*dy)/dd)):0;best=Math.min(best,Math.hypot(x+t*dx,y+t*dy));}return best*111.195;}
+const coast=seg(land.flat());const out=[];
+for(const k of c.keyframes){const id=k.object,orig=JSON.parse(readFileSync(`${dir}/work/${id}.geojson`,'utf8')),final=feature(c.topology,c.topology.objects[id])as any;const ss=seg(rings(final)),worst:any[]=[];for(const f of orig.features){for(const r of rings({features:[f]})){for(let i=0;i<r.length;i+=2){const q=r[i];if(!land.some((p:any)=>pointInPolygon(q,p)))continue;if(near(q,coast)<15)continue;const km=near(q,ss);if(worst.length<5||km>worst.at(-1).km){worst.push({holder:f.properties.holder,point:q,km});worst.sort((a,b)=>b.km-a.km);worst.length=Math.min(worst.length,5);}}}}out.push({id,worst});console.log(id,worst[0]);}
+writeJson(`${dir}/deviation-audit.json`,out,true);

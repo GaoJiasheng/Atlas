@@ -1,0 +1,347 @@
+{
+  "method": "Intersection with Natural Earth10m land after shared simplification; no buffer or invented gap fill",
+  "retention": [
+    {
+      "id": "K1",
+      "before": [
+        "ba",
+        "chu",
+        "jin",
+        "ju",
+        "lu",
+        "qi",
+        "qin",
+        "song",
+        "wey",
+        "wu",
+        "yan",
+        "yue",
+        "zheng",
+        "zhou"
+      ],
+      "after": [
+        "ba",
+        "chu",
+        "jin",
+        "ju",
+        "lu",
+        "qi",
+        "qin",
+        "song",
+        "wey",
+        "wu",
+        "yan",
+        "yue",
+        "zheng",
+        "zhou"
+      ],
+      "lost": []
+    },
+    {
+      "id": "K2",
+      "before": [
+        "ba",
+        "chu",
+        "jin",
+        "ju",
+        "lu",
+        "qi",
+        "qin",
+        "song",
+        "wey",
+        "wu",
+        "yan",
+        "yue",
+        "zheng",
+        "zhou"
+      ],
+      "after": [
+        "ba",
+        "chu",
+        "jin",
+        "ju",
+        "lu",
+        "qi",
+        "qin",
+        "song",
+        "wey",
+        "wu",
+        "yan",
+        "yue",
+        "zheng",
+        "zhou"
+      ],
+      "lost": []
+    },
+    {
+      "id": "K3",
+      "before": [
+        "ba",
+        "chu",
+        "jin",
+        "ju",
+        "lu",
+        "qi",
+        "qin",
+        "song",
+        "wey",
+        "wu",
+        "yan",
+        "yue",
+        "zheng",
+        "zhou"
+      ],
+      "after": [
+        "ba",
+        "chu",
+        "jin",
+        "ju",
+        "lu",
+        "qi",
+        "qin",
+        "song",
+        "wey",
+        "wu",
+        "yan",
+        "yue",
+        "zheng",
+        "zhou"
+      ],
+      "lost": []
+    },
+    {
+      "id": "K4",
+      "before": [
+        "ba",
+        "cai",
+        "cao",
+        "chen",
+        "chu",
+        "jin",
+        "ju",
+        "lu",
+        "qi",
+        "qin",
+        "song",
+        "wey",
+        "wu",
+        "yan",
+        "yue",
+        "zheng",
+        "zhou"
+      ],
+      "after": [
+        "ba",
+        "cai",
+        "cao",
+        "chen",
+        "chu",
+        "jin",
+        "ju",
+        "lu",
+        "qi",
+        "qin",
+        "song",
+        "wey",
+        "wu",
+        "yan",
+        "yue",
+        "zheng",
+        "zhou"
+      ],
+      "lost": []
+    },
+    {
+      "id": "K5",
+      "before": [
+        "ba",
+        "cai",
+        "chu",
+        "jin",
+        "ju",
+        "lu",
+        "qi",
+        "qin",
+        "song",
+        "wey",
+        "yan",
+        "yue",
+        "zheng",
+        "zhou"
+      ],
+      "after": [
+        "ba",
+        "cai",
+        "chu",
+        "jin",
+        "ju",
+        "lu",
+        "qi",
+        "qin",
+        "song",
+        "wey",
+        "yan",
+        "yue",
+        "zheng",
+        "zhou"
+      ],
+      "lost": []
+    },
+    {
+      "id": "K6",
+      "before": [
+        "ba",
+        "chu",
+        "han",
+        "jin",
+        "lu",
+        "qi",
+        "qin",
+        "song",
+        "wei",
+        "wey",
+        "yan",
+        "yue",
+        "zhao",
+        "zheng",
+        "zhou"
+      ],
+      "after": [
+        "ba",
+        "chu",
+        "han",
+        "jin",
+        "lu",
+        "qi",
+        "qin",
+        "song",
+        "wei",
+        "wey",
+        "yan",
+        "yue",
+        "zhao",
+        "zheng",
+        "zhou"
+      ],
+      "lost": []
+    },
+    {
+      "id": "K7",
+      "before": [
+        "chu",
+        "han",
+        "lu",
+        "qi",
+        "qin",
+        "song",
+        "wei",
+        "wey",
+        "yan",
+        "yue",
+        "zhao",
+        "zhongshan"
+      ],
+      "after": [
+        "chu",
+        "han",
+        "lu",
+        "qi",
+        "qin",
+        "song",
+        "wei",
+        "wey",
+        "yan",
+        "yue",
+        "zhao",
+        "zhongshan"
+      ],
+      "lost": []
+    },
+    {
+      "id": "K8",
+      "before": [
+        "chu",
+        "han",
+        "lu",
+        "qi",
+        "qin",
+        "wei",
+        "wey",
+        "yan",
+        "zhao"
+      ],
+      "after": [
+        "chu",
+        "han",
+        "lu",
+        "qi",
+        "qin",
+        "wei",
+        "wey",
+        "yan",
+        "zhao"
+      ],
+      "lost": []
+    },
+    {
+      "id": "K9",
+      "before": [
+        "chu",
+        "han",
+        "lu",
+        "qi",
+        "qin",
+        "wei",
+        "wey",
+        "yan",
+        "zhao",
+        "zhou"
+      ],
+      "after": [
+        "chu",
+        "han",
+        "lu",
+        "qi",
+        "qin",
+        "wei",
+        "wey",
+        "yan",
+        "zhao",
+        "zhou"
+      ],
+      "lost": []
+    },
+    {
+      "id": "K10",
+      "before": [
+        "chu",
+        "qi",
+        "qin",
+        "wei",
+        "wey",
+        "yan",
+        "zhao"
+      ],
+      "after": [
+        "chu",
+        "qi",
+        "qin",
+        "wei",
+        "wey",
+        "yan",
+        "zhao"
+      ],
+      "lost": []
+    },
+    {
+      "id": "K11",
+      "before": [
+        "qin"
+      ],
+      "after": [
+        "qin"
+      ],
+      "lost": []
+    }
+  ]
+}

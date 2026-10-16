@@ -1,0 +1,31 @@
+id: warring-states
+title: { en: "The Spring and Autumn and Warring States", zh: "【待译】The Spring and Autumn and Warring States" }
+subtitle: { en: "770–221 BCE", zh: "【待译】770–221 BCE" }
+shortTitle: { en: "Spring and Autumn · Warring States", zh: "【待译】Spring and Autumn · Warring States" }
+subject: history
+tags: [history, time]
+moe: []
+mode: time
+engine: time-scene
+stage: geo
+theme: paper
+sensitivity: open
+status: draft
+illustration: warring-states
+basemap:
+  region:
+    bounds: [100, 20, 125, 44]
+    maxBounds: [98, 18, 127, 45.5]
+    land: warring-states-region
+    rivers: warring-states-rivers
+  maxZoom: 9
+colorBy: entity
+datePrecision: year
+blocLabels:
+  neutral: { en: "Zhou-era states", zh: "【待译】Zhou-era states" }
+  out: { en: "State conquered", zh: "【待译】State conquered" }
+strings:
+  joined: { en: "First represented", zh: "【待译】First represented" }
+  left: { en: "Conquered or abolished", zh: "【待译】Conquered or abolished" }
+  notYet: { en: "Not yet represented", zh: "【待译】Not yet represented" }
+note: { en: "Approximate ancient boundaries · reconstructed rivers · modern coastline · English draft; Chinese translation pending", zh: "【待译】Approximate ancient boundaries · reconstructed rivers · modern coastline · English draft; Chinese translation pending" }

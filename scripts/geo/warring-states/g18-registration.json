@@ -1,0 +1,243 @@
+{
+  "controlPoints": [
+    {
+      "name": "Wei–Yellow confluence",
+      "lnglat": [
+        110.293468,
+        34.623155
+      ],
+      "svg": [
+        462,
+        573
+      ],
+      "coordinateSource": "Natural Earth 10m rivers named endpoint; source junction visually identified"
+    },
+    {
+      "name": "Jing–Wei confluence",
+      "lnglat": [
+        109.070974,
+        34.470038
+      ],
+      "svg": [
+        383,
+        588
+      ],
+      "coordinateSource": "Natural Earth 10m rivers named endpoint; source junction visually identified"
+    },
+    {
+      "name": "Fen–Yellow confluence",
+      "lnglat": [
+        110.554861,
+        35.458604
+      ],
+      "svg": [
+        486,
+        502
+      ],
+      "coordinateSource": "Natural Earth 10m rivers named endpoint; source junction visually identified"
+    },
+    {
+      "name": "Han–Yangtze confluence",
+      "lnglat": [
+        114.289561,
+        30.566352
+      ],
+      "svg": [
+        822,
+        959
+      ],
+      "coordinateSource": "Natural Earth 10m rivers named endpoint; source junction visually identified"
+    },
+    {
+      "name": "Jialing–Yangtze confluence",
+      "lnglat": [
+        106.586843,
+        29.585639
+      ],
+      "svg": [
+        217,
+        1030
+      ],
+      "coordinateSource": "Natural Earth 10m rivers named endpoint; source junction visually identified"
+    },
+    {
+      "name": "Ying NE river vertex 0",
+      "lnglat": [
+        115.556407,
+        33.197699
+      ],
+      "svg": [
+        901,
+        720
+      ],
+      "snapPx": 0.9457997022369149,
+      "coordinateSource": "NE named river vertex; anchored nearest blue path within 5px; reference-only map"
+    },
+    {
+      "name": "Yangtze NE river vertex 1",
+      "lnglat": [
+        117.747162,
+        30.943468
+      ],
+      "svg": [
+        1091,
+        932
+      ],
+      "snapPx": 1.444985549265775,
+      "coordinateSource": "NE named river vertex; anchored nearest blue path within 5px; reference-only map"
+    },
+    {
+      "name": "Han NE river vertex 2",
+      "lnglat": [
+        111.41448,
+        32.573676
+      ],
+      "svg": [
+        573,
+        772
+      ],
+      "snapPx": 5.945974673133507,
+      "coordinateSource": "NE named river vertex; anchored nearest blue path within 5px; reference-only map"
+    },
+    {
+      "name": "Han NE river vertex 3",
+      "lnglat": [
+        107.522553,
+        33.208035
+      ],
+      "svg": [
+        262,
+        699
+      ],
+      "snapPx": 0.7255644287768747,
+      "coordinateSource": "NE named river vertex; anchored nearest blue path within 5px; reference-only map"
+    },
+    {
+      "name": "Hai NE river vertex 4",
+      "lnglat": [
+        117.55364,
+        38.996365
+      ],
+      "svg": [
+        1014,
+        190
+      ],
+      "snapPx": 3.5362536706618344,
+      "coordinateSource": "NE named river vertex; anchored nearest blue path within 5px; reference-only map"
+    },
+    {
+      "name": "Wei NE river vertex 5",
+      "lnglat": [
+        106.534679,
+        34.490098
+      ],
+      "svg": [
+        177,
+        575
+      ],
+      "snapPx": 5.1096093669694405,
+      "coordinateSource": "NE named river vertex; anchored nearest blue path within 5px; reference-only map"
+    },
+    {
+      "name": "Wei NE river vertex 6",
+      "lnglat": [
+        108.183849,
+        34.225898
+      ],
+      "svg": [
+        307,
+        604
+      ],
+      "snapPx": 3.404104188631575,
+      "coordinateSource": "NE named river vertex; anchored nearest blue path within 5px; reference-only map"
+    },
+    {
+      "name": "Jing NE river vertex 7",
+      "lnglat": [
+        107.941905,
+        35.178494
+      ],
+      "svg": [
+        280,
+        518
+      ],
+      "snapPx": 1.266903270690686,
+      "coordinateSource": "NE named river vertex; anchored nearest blue path within 5px; reference-only map"
+    }
+  ],
+  "report": {
+    "model": "equirectangular+affine",
+    "rmsKm": 4.893666976512095,
+    "maxKm": 10.93069276935007,
+    "looRmsKm": 5.655438222480891,
+    "looMaxKm": 12.086141694981894,
+    "points": [
+      {
+        "name": "Wei–Yellow confluence",
+        "residualKm": 10.93069276935007,
+        "looKm": 12.086141694981894
+      },
+      {
+        "name": "Jing–Wei confluence",
+        "residualKm": 8.54472818210559,
+        "looKm": 9.558953655469915
+      },
+      {
+        "name": "Fen–Yellow confluence",
+        "residualKm": 3.8578586921706375,
+        "looKm": 4.400115226610328
+      },
+      {
+        "name": "Han–Yangtze confluence",
+        "residualKm": 2.607085554363609,
+        "looKm": 3.6332490079009574
+      },
+      {
+        "name": "Jialing–Yangtze confluence",
+        "residualKm": 0.4644985750060434,
+        "looKm": 0.7541536904915787
+      },
+      {
+        "name": "Ying NE river vertex 0",
+        "residualKm": 1.2689218080687479,
+        "looKm": 1.5683360360134502
+      },
+      {
+        "name": "Yangtze NE river vertex 1",
+        "residualKm": 2.014652836724424,
+        "looKm": 3.6118652607099566
+      },
+      {
+        "name": "Han NE river vertex 2",
+        "residualKm": 7.533064929330304,
+        "looKm": 8.335863516779002
+      },
+      {
+        "name": "Han NE river vertex 3",
+        "residualKm": 1.0240492261605754,
+        "looKm": 1.1927615402028362
+      },
+      {
+        "name": "Hai NE river vertex 4",
+        "residualKm": 1.1725558733741612,
+        "looKm": 3.3365903917034645
+      },
+      {
+        "name": "Wei NE river vertex 5",
+        "residualKm": 4.824401234515981,
+        "looKm": 6.003689895932714
+      },
+      {
+        "name": "Wei NE river vertex 6",
+        "residualKm": 2.886072592800868,
+        "looKm": 3.3036600790883432
+      },
+      {
+        "name": "Jing NE river vertex 7",
+        "residualKm": 0.7011848265920969,
+        "looKm": 0.8409733451758545
+      }
+    ]
+  },
+  "method": "Visual junction anchors and reproducible nearest-blue NE endpoint matches. G18 is not used to reconstruct any historical geometry."
+}

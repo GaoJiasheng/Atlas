@@ -1,0 +1,111 @@
+{
+  "url": "https://zh.wikipedia.org/w/api.php?action=query&format=json&prop=coordinates&colimit=max&redirects=1&titles=%E9%BB%8E%E5%9F%8E%E5%8E%BF%7C%E6%B2%81%E6%BA%90%E5%8E%BF%7C%E6%B2%81%E5%8E%BF%7C%E9%95%BF%E6%B2%BB%E5%B8%82%7C%E6%B6%89%E5%8E%BF%7C%E6%AD%A6%E5%AE%89%E5%B8%82%7C%E9%98%B3%E5%9F%8E%E5%8E%BF%7C%E9%AB%98%E5%B9%B3%E5%B8%82%7C%E4%B8%B4%E6%B1%BE%E5%B8%82%7C%E8%92%B2%E5%B7%9E%E9%95%87",
+  "data": {
+    "batchcomplete": "",
+    "query": {
+      "pages": {
+        "14178": {
+          "pageid": 14178,
+          "ns": 0,
+          "title": "临汾市",
+          "coordinates": [
+            {
+              "lat": 36.088,
+              "lon": 111.519,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "45034": {
+          "pageid": 45034,
+          "ns": 0,
+          "title": "武安市"
+        },
+        "219095": {
+          "pageid": 219095,
+          "ns": 0,
+          "title": "沁县",
+          "coordinates": [
+            {
+              "lat": 36.75638889,
+              "lon": 112.69722222,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "255222": {
+          "pageid": 255222,
+          "ns": 0,
+          "title": "沁源县",
+          "coordinates": [
+            {
+              "lat": 36.50055556,
+              "lon": 112.33861111,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "242103": {
+          "pageid": 242103,
+          "ns": 0,
+          "title": "涉县"
+        },
+        "1885453": {
+          "pageid": 1885453,
+          "ns": 0,
+          "title": "蒲州镇",
+          "coordinates": [
+            {
+              "lat": 34.83444,
+              "lon": 110.3245,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "44674": {
+          "pageid": 44674,
+          "ns": 0,
+          "title": "长治市",
+          "coordinates": [
+            {
+              "lat": 36.1953,
+              "lon": 113.1163,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "127719": {
+          "pageid": 127719,
+          "ns": 0,
+          "title": "阳城县",
+          "coordinates": [
+            {
+              "lat": 35.48611111,
+              "lon": 112.41472222,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "152446": {
+          "pageid": 152446,
+          "ns": 0,
+          "title": "高平市"
+        },
+        "255230": {
+          "pageid": 255230,
+          "ns": 0,
+          "title": "黎城县"
+        }
+      }
+    },
+    "limits": {
+      "coordinates": 500
+    }
+  }
+}

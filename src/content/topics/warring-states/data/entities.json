@@ -1,0 +1,255 @@
+[
+  {
+    "id": "zhou",
+    "name": {
+      "en": "Zhou royal house",
+      "zh": "【待译】Zhou royal house"
+    },
+    "bloc": "neutral",
+    "joined": "-0770",
+    "left": "-0256",
+    "color": "token:holder-4"
+  },
+  {
+    "id": "qin",
+    "name": {
+      "en": "Qin",
+      "zh": "【待译】Qin"
+    },
+    "bloc": "neutral",
+    "joined": "-0770",
+    "left": "-0206",
+    "color": "token:holder-4"
+  },
+  {
+    "id": "jin",
+    "name": {
+      "en": "Jin",
+      "zh": "【待译】Jin"
+    },
+    "bloc": "neutral",
+    "joined": "-0770",
+    "left": "-0376",
+    "color": "token:holder-2"
+  },
+  {
+    "id": "qi",
+    "name": {
+      "en": "Qi",
+      "zh": "【待译】Qi"
+    },
+    "bloc": "neutral",
+    "joined": "-0770",
+    "left": "-0221",
+    "color": "token:holder-3"
+  },
+  {
+    "id": "chu",
+    "name": {
+      "en": "Chu",
+      "zh": "【待译】Chu"
+    },
+    "bloc": "neutral",
+    "joined": "-0770",
+    "left": "-0223",
+    "color": "token:holder-1"
+  },
+  {
+    "id": "lu",
+    "name": {
+      "en": "Lu",
+      "zh": "【待译】Lu"
+    },
+    "bloc": "neutral",
+    "joined": "-0770",
+    "left": "-0256",
+    "color": "token:holder-2"
+  },
+  {
+    "id": "song",
+    "name": {
+      "en": "Song",
+      "zh": "【待译】Song"
+    },
+    "bloc": "neutral",
+    "joined": "-0770",
+    "left": "-0286",
+    "color": "token:holder-4"
+  },
+  {
+    "id": "wey",
+    "name": {
+      "en": "Wey",
+      "zh": "【待译】Wey"
+    },
+    "bloc": "neutral",
+    "joined": "-0770",
+    "left": "-0209",
+    "color": "token:holder-6"
+  },
+  {
+    "id": "zheng",
+    "name": {
+      "en": "Zheng",
+      "zh": "【待译】Zheng"
+    },
+    "bloc": "neutral",
+    "joined": "-0770",
+    "left": "-0375",
+    "color": "token:holder-3"
+  },
+  {
+    "id": "chen",
+    "name": {
+      "en": "Chen",
+      "zh": "【待译】Chen"
+    },
+    "bloc": "neutral",
+    "joined": "-0770",
+    "left": "-0479",
+    "color": "token:holder-2"
+  },
+  {
+    "id": "cai",
+    "name": {
+      "en": "Cai",
+      "zh": "【待译】Cai"
+    },
+    "bloc": "neutral",
+    "joined": "-0770",
+    "left": "-0447",
+    "color": "token:holder-4"
+  },
+  {
+    "id": "cao",
+    "name": {
+      "en": "Cao",
+      "zh": "【待译】Cao"
+    },
+    "bloc": "neutral",
+    "joined": "-0770",
+    "left": "-0487",
+    "color": "token:holder-1"
+  },
+  {
+    "id": "yan",
+    "name": {
+      "en": "Yan",
+      "zh": "【待译】Yan"
+    },
+    "bloc": "neutral",
+    "joined": "-0770",
+    "left": "-0222",
+    "color": "token:holder-4"
+  },
+  {
+    "id": "wu",
+    "name": {
+      "en": "Wu",
+      "zh": "【待译】Wu"
+    },
+    "bloc": "neutral",
+    "joined": "-0585",
+    "left": "-0473",
+    "color": "token:holder-3"
+  },
+  {
+    "id": "yue",
+    "name": {
+      "en": "Yue",
+      "zh": "【待译】Yue"
+    },
+    "bloc": "neutral",
+    "joined": "-0496",
+    "left": "-0222",
+    "color": "token:holder-5"
+  },
+  {
+    "id": "han",
+    "name": {
+      "en": "Han",
+      "zh": "【待译】Han"
+    },
+    "bloc": "neutral",
+    "joined": "-0403",
+    "left": "-0230",
+    "color": "token:holder-3"
+  },
+  {
+    "id": "zhao",
+    "name": {
+      "en": "Zhao",
+      "zh": "【待译】Zhao"
+    },
+    "bloc": "neutral",
+    "joined": "-0403",
+    "left": "-0222",
+    "color": "token:holder-1"
+  },
+  {
+    "id": "wei",
+    "name": {
+      "en": "Wei",
+      "zh": "【待译】Wei"
+    },
+    "bloc": "neutral",
+    "joined": "-0403",
+    "left": "-0225",
+    "color": "token:holder-5"
+  },
+  {
+    "id": "zhongshan",
+    "name": {
+      "en": "Zhongshan",
+      "zh": "【待译】Zhongshan"
+    },
+    "bloc": "neutral",
+    "joined": "-0506",
+    "left": "-0296",
+    "color": "token:holder-2"
+  },
+  {
+    "id": "ba",
+    "name": {
+      "en": "Ba",
+      "zh": "【待译】Ba"
+    },
+    "bloc": "neutral",
+    "joined": "-0770",
+    "left": "-0316",
+    "color": "token:holder-2"
+  },
+  {
+    "id": "shu",
+    "name": {
+      "en": "Shu",
+      "zh": "【待译】Shu"
+    },
+    "bloc": "neutral",
+    "joined": "-0770",
+    "left": "-0316",
+    "color": "token:holder-1"
+  },
+  {
+    "id": "zeng",
+    "name": {
+      "en": "Zeng (Sui)",
+      "zh": "【待译】Zeng (Sui)"
+    },
+    "bloc": "neutral",
+    "joined": "-0770",
+    "left": "-0223",
+    "color": "token:holder-1"
+  },
+  {
+    "id": "ju",
+    "name": {
+      "en": "Ju",
+      "zh": "【待译】Ju"
+    },
+    "bloc": "neutral",
+    "joined": "-0770",
+    "left": "-0431",
+    "color": "token:holder-1"
+  }
+]

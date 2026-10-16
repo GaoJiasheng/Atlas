@@ -1,0 +1,6544 @@
+{
+  "datasets": {
+    "G1": {
+      "ref": "G1",
+      "title": "Ancient North China Plain blank relief map.svg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/df/Ancient_North_China_Plain_blank_relief_map.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "file": "G1.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:Ancient_North_China_Plain_blank_relief_map.svg",
+      "author": "\nKanguole",
+      "license": "CC BY-SA 4.0",
+      "role": "Published source map for tracing or independent comparison"
+    },
+    "G2": {
+      "ref": "G2",
+      "title": "Western Zhou geography.svg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/da/Western_Zhou_geography.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "file": "G2.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:Western_Zhou_geography.svg",
+      "author": "\nKanguole",
+      "license": "CC BY-SA 4.0",
+      "role": "Published source map for tracing or independent comparison"
+    },
+    "G3": {
+      "ref": "G3",
+      "title": "Chinese plain 5c. BC-en.svg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Chinese_plain_5c._BC-en.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "file": "G3.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:Chinese_plain_5c._BC-en.svg",
+      "author": "Yug",
+      "license": "CC BY-SA 3.0",
+      "role": "Published source map for tracing or independent comparison"
+    },
+    "G4": {
+      "ref": "G4",
+      "title": "Chinese plain 5c. BC with Yue-en.png",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Chinese_plain_5c._BC_with_Yue-en.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "file": "G4.png",
+      "page": "https://commons.wikimedia.org/wiki/File:Chinese_plain_5c._BC_with_Yue-en.png",
+      "author": "Yug",
+      "license": "CC BY-SA 3.0",
+      "role": "Published source map for tracing or independent comparison"
+    },
+    "G5": {
+      "ref": "G5",
+      "title": "Royaumes combattants 350 aC.svg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/09/Royaumes_combattants_350_aC.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "file": "G5.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:Royaumes_combattants_350_aC.svg",
+      "author": "Zunkir",
+      "license": "CC BY-SA 3.0",
+      "role": "Published source map for tracing or independent comparison"
+    },
+    "G7": {
+      "ref": "G7",
+      "title": "战国形势图（前350年）（简）.png",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/d6/%E6%88%98%E5%9B%BD%E5%BD%A2%E5%8A%BF%E5%9B%BE%EF%BC%88%E5%89%8D350%E5%B9%B4%EF%BC%89%EF%BC%88%E7%AE%80%EF%BC%89.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "file": "G7.png",
+      "page": "https://commons.wikimedia.org/wiki/File:%E6%88%98%E5%9B%BD%E5%BD%A2%E5%8A%BF%E5%9B%BE%EF%BC%88%E5%89%8D350%E5%B9%B4%EF%BC%89%EF%BC%88%E7%AE%80%EF%BC%89.png",
+      "author": "Jiu Qiaozai",
+      "license": "CC BY-SA 3.0",
+      "role": "Published source map for tracing or independent comparison"
+    },
+    "G9": {
+      "ref": "G9",
+      "title": "春秋诸侯国分布图(简体).jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/84/%E6%98%A5%E7%A7%8B%E8%AF%B8%E4%BE%AF%E5%9B%BD%E5%88%86%E5%B8%83%E5%9B%BE%28%E7%AE%80%E4%BD%93%29.jpg/1280px-%E6%98%A5%E7%A7%8B%E8%AF%B8%E4%BE%AF%E5%9B%BD%E5%88%86%E5%B8%83%E5%9B%BE%28%E7%AE%80%E4%BD%93%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "file": "G9.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:%E6%98%A5%E7%A7%8B%E8%AF%B8%E4%BE%AF%E5%9B%BD%E5%88%86%E5%B8%83%E5%9B%BE(%E7%AE%80%E4%BD%93).jpg",
+      "author": "玖巧仔",
+      "license": "CC BY-SA 3.0",
+      "role": "Published source map for tracing or independent comparison"
+    },
+    "G10": {
+      "ref": "G10",
+      "title": "春秋大国简图（繁）.png",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/48/%E6%98%A5%E7%A7%8B%E5%A4%A7%E5%9B%BD%E7%AE%80%E5%9B%BE%EF%BC%88%E7%B9%81%EF%BC%89.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "file": "G10.png",
+      "page": "https://commons.wikimedia.org/wiki/File:%E6%98%A5%E7%A7%8B%E5%A4%A7%E5%9B%BD%E7%AE%80%E5%9B%BE%EF%BC%88%E7%B9%81%EF%BC%89.png",
+      "author": "玖巧仔",
+      "license": "CC BY 3.0",
+      "role": "Published source map for tracing or independent comparison"
+    },
+    "G11": {
+      "ref": "G11",
+      "title": "EN-WarringStatesAll260BCE.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ca/EN-WarringStatesAll260BCE.jpg/1280px-EN-WarringStatesAll260BCE.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "file": "G11.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:EN-WarringStatesAll260BCE.jpg",
+      "author": "Philg88",
+      "license": "CC BY-SA 3.0",
+      "role": "Published source map for tracing or independent comparison"
+    },
+    "G12": {
+      "ref": "G12",
+      "title": "戰國七雄地圖-ZH-FR.png",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/%E6%88%B0%E5%9C%8B%E4%B8%83%E9%9B%84%E5%9C%B0%E5%9C%96-ZH-FR.png/1280px-%E6%88%B0%E5%9C%8B%E4%B8%83%E9%9B%84%E5%9C%B0%E5%9C%96-ZH-FR.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "file": "G12.png",
+      "page": "https://commons.wikimedia.org/wiki/File:%E6%88%B0%E5%9C%8B%E4%B8%83%E9%9B%84%E5%9C%B0%E5%9C%96-ZH-FR.png",
+      "author": "User:丁志仁、User:Philg88",
+      "license": "CC BY-SA 3.0",
+      "role": "Published source map for tracing or independent comparison"
+    },
+    "ne-land": {
+      "ref": "G19",
+      "title": "Natural Earth 10m land",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_land.geojson",
+      "file": "ne-land.geojson",
+      "author": "Natural Earth contributors",
+      "license": "Public domain",
+      "role": "Modern coastline region clipping"
+    },
+    "ne-rivers": {
+      "ref": "G20",
+      "title": "Natural Earth 10m rivers",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_rivers_lake_centerlines.geojson",
+      "file": "ne-rivers.geojson",
+      "author": "Natural Earth contributors",
+      "license": "Public domain",
+      "role": "Registration confluences, current upper and middle river reaches"
+    },
+    "G1-registration": {
+      "ref": "G1",
+      "title": "Ancient North China Plain blank relief map.svg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/df/Ancient_North_China_Plain_blank_relief_map.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "file": "G1-registration.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:Ancient_North_China_Plain_blank_relief_map.svg",
+      "author": "\nKanguole",
+      "license": "CC BY-SA 4.0",
+      "role": "Style-only registration copy of G1: inline fills, all geographic paths unmodified"
+    },
+    "G18": {
+      "ref": "G18",
+      "title": "China Northern Plain relief location map.png",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ca/China_Northern_Plain_relief_location_map.png/1280px-China_Northern_Plain_relief_location_map.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "file": "G18.png",
+      "page": "https://commons.wikimedia.org/wiki/File:China_Northern_Plain_relief_location_map.png",
+      "author": "\nKanguole",
+      "license": "CC0",
+      "role": "Published source map for tracing or independent comparison"
+    },
+    "G16": {
+      "ref": "G16",
+      "title": "Hou Xuanxuan The situation map of Qin's war.gif",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9b/Hou_Xuanxuan_The_situation_map_of_Qin%27s_war.gif/1280px-Hou_Xuanxuan_The_situation_map_of_Qin%27s_war.gif?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "file": "G16.gif",
+      "page": "https://commons.wikimedia.org/wiki/File:Hou_Xuanxuan_The_situation_map_of_Qin%27s_war.gif",
+      "author": "Benedetta blair",
+      "license": "CC BY-SA 4.0",
+      "role": "Published source map for tracing or independent comparison"
+    },
+    "G15": {
+      "ref": "G15",
+      "title": "Qin Unification.png",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Qin_Unification.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "file": "G15.png",
+      "page": "https://commons.wikimedia.org/wiki/File:Qin_Unification.png",
+      "author": "SY",
+      "license": "CC BY-SA 4.0",
+      "role": "Published source map for tracing or independent comparison"
+    },
+    "G6": {
+      "ref": "G6",
+      "title": "Royaumes combattants 250 aC.svg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/48/Royaumes_combattants_250_aC.svg/330px-Royaumes_combattants_250_aC.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "file": "G6.png",
+      "page": "https://commons.wikimedia.org/wiki/File:Royaumes_combattants_250_aC.svg",
+      "author": "Zunkir",
+      "license": "CC BY-SA 3.0",
+      "role": "Published source map for tracing or independent comparison"
+    },
+    "G14": {
+      "ref": "G14",
+      "title": "Battle of changping,长平之战.svg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/94/Battle_of_changping%2C%E9%95%BF%E5%B9%B3%E4%B9%8B%E6%88%98.svg/330px-Battle_of_changping%2C%E9%95%BF%E5%B9%B3%E4%B9%8B%E6%88%98.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "file": "G14.png",
+      "page": "https://commons.wikimedia.org/wiki/File:Battle_of_changping,%E9%95%BF%E5%B9%B3%E4%B9%8B%E6%88%98.svg",
+      "author": "Kgbkgbkgb",
+      "license": "CC BY-SA 4.0",
+      "role": "Published source map for tracing or independent comparison"
+    },
+    "G13": {
+      "ref": "G13",
+      "title": "Battle of Changping.png",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ca/Battle_of_Changping.png/330px-Battle_of_Changping.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "file": "G13.png",
+      "page": "https://commons.wikimedia.org/wiki/File:Battle_of_Changping.png",
+      "author": "SY",
+      "license": "CC BY-SA 4.0",
+      "role": "Published source map for tracing or independent comparison"
+    },
+    "G17": {
+      "ref": "G17",
+      "title": "秦灭六国形势图.png",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/%E7%A7%A6%E7%81%AD%E5%85%AD%E5%9B%BD%E5%BD%A2%E5%8A%BF%E5%9B%BE.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "file": "G17.png",
+      "page": "https://commons.wikimedia.org/wiki/File:%E7%A7%A6%E7%81%AD%E5%85%AD%E5%9B%BD%E5%BD%A2%E5%8A%BF%E5%9B%BE.png",
+      "author": "竹围墙",
+      "license": "CC BY-SA 3.0",
+      "role": "Published source map for tracing or independent comparison"
+    },
+    "G8": {
+      "ref": "G8",
+      "title": "战国形势图（前280年）（简）.png",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7f/%E6%88%98%E5%9B%BD%E5%BD%A2%E5%8A%BF%E5%9B%BE%EF%BC%88%E5%89%8D280%E5%B9%B4%EF%BC%89%EF%BC%88%E7%AE%80%EF%BC%89.png/330px-%E6%88%98%E5%9B%BD%E5%BD%A2%E5%8A%BF%E5%9B%BE%EF%BC%88%E5%89%8D280%E5%B9%B4%EF%BC%89%EF%BC%88%E7%AE%80%EF%BC%89.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "file": "G8.png",
+      "page": "https://commons.wikimedia.org/wiki/File:%E6%88%98%E5%9B%BD%E5%BD%A2%E5%8A%BF%E5%9B%BE%EF%BC%88%E5%89%8D280%E5%B9%B4%EF%BC%89%EF%BC%88%E7%AE%80%EF%BC%89.png",
+      "author": "玖巧仔",
+      "license": "CC BY-SA 3.0",
+      "role": "Published source map for tracing or independent comparison"
+    },
+    "G2-registration": {
+      "ref": "G2",
+      "title": "Western Zhou geography.svg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/da/Western_Zhou_geography.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "file": "G2-registration.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:Western_Zhou_geography.svg",
+      "author": "\nKanguole",
+      "license": "CC BY-SA 4.0",
+      "role": "Geometrically unchanged background-only registration copy; G2 shares G1 base"
+    },
+    "G7-trace": {
+      "ref": "G7",
+      "title": "G7 source-pixel digitisation mask; derivative of 战国形势图（前350年）（简）.png",
+      "url": "https://commons.wikimedia.org/wiki/File:战国形势图（前350年）（简）.png",
+      "file": "G7-trace.png",
+      "author": "玖巧仔; source-pixel digitisation for Atlas",
+      "license": "CC BY-SA 4.0 (derived from CC BY-SA 3.0)",
+      "role": "Source pixel outline tracing mask; original map control points unchanged"
+    },
+    "G10-trace": {
+      "ref": "G10",
+      "title": "G10 source-pixel digitisation mask; derivative of 春秋大国简图（繁）.png",
+      "url": "https://commons.wikimedia.org/wiki/File:春秋大国简图（繁）.png",
+      "file": "G10-trace.png",
+      "author": "玖巧仔; source-pixel digitisation for Atlas",
+      "license": "CC BY 3.0 (source); mask derivative CC BY-SA 4.0",
+      "role": "Undated period-schematic state fill tracing; replaces G9 which contains only city/state points"
+    },
+    "G8-trace": {
+      "ref": "G8",
+      "title": "G8 source-pixel digitisation mask; derivative of 战国形势图（前280年）（简）.png",
+      "url": "https://commons.wikimedia.org/wiki/File:战国形势图（前280年）（简）.png",
+      "file": "G8-trace.png",
+      "author": "玖巧仔; source-pixel digitisation for Atlas",
+      "license": "CC BY-SA 4.0 (derived from CC BY-SA 3.0)",
+      "role": "Published280BCE source-pixel fill tracing, common physical template withG7; original330x352Commons thumbnail"
+    },
+    "G11-trace": {
+      "ref": "G11",
+      "title": "G11 source-pixel classified derivative; EN-WarringStatesAll260BCE.jpg",
+      "url": "https://commons.wikimedia.org/wiki/File:EN-WarringStatesAll260BCE.jpg",
+      "file": "G11-trace.png",
+      "author": "Philg88; Atlas pixel classification",
+      "license": "CC BY-SA 4.0 (sourceCC BY-SA3.0)",
+      "role": "Original flat-state colour classification with printed tiny Zhou Capital Area digitised; registration OVER25km budget"
+    },
+    "G15-registration": {
+      "ref": "G15",
+      "title": "Qin Unification.png",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Qin_Unification.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "file": "G15.png",
+      "page": "https://commons.wikimedia.org/wiki/File:Qin_Unification.png",
+      "author": "SY",
+      "license": "CC BY-SA 4.0",
+      "role": "Registration input with source city symbols; reference only"
+    },
+    "G14-registration": {
+      "ref": "G14",
+      "title": "Battle of changping,长平之战.svg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/94/Battle_of_changping%2C%E9%95%BF%E5%B9%B3%E4%B9%8B%E6%88%98.svg/330px-Battle_of_changping%2C%E9%95%BF%E5%B9%B3%E4%B9%8B%E6%88%98.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "file": "extra-G14-input.png",
+      "page": "https://commons.wikimedia.org/wiki/File:Battle_of_changping,%E9%95%BF%E5%B9%B3%E4%B9%8B%E6%88%98.svg",
+      "author": "Kgbkgbkgb",
+      "license": "CC BY-SA 4.0",
+      "role": "Registration input with source city symbols; reference only"
+    },
+    "G6-vector": {
+      "ref": "G6",
+      "title": "Royaumes combattants 250 aC.svg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/48/Royaumes_combattants_250_aC.svg",
+      "file": "G6-original.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:Royaumes_combattants_250_aC.svg",
+      "author": "Zunkir",
+      "license": "CC BY-SA 3.0",
+      "role": "Original250BCEvector map; same cartographic base asG3"
+    }
+  },
+  "svg": {
+    "G3": {
+      "dataset": "G3",
+      "projection": "auto",
+      "classes": {},
+      "land": [
+        "#a8c68f",
+        "#efebc0",
+        "#cab982",
+        "#aa8753"
+      ],
+      "sea": [
+        "#c6ecff"
+      ],
+      "maxResidualKm": 40,
+      "controlPoints": [
+        {
+          "name": "Yong (Fengxiang)",
+          "lnglat": [
+            107.42055556,
+            34.56
+          ],
+          "svg": [
+            103.87,
+            199.85
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Fengxiang_District"
+        },
+        {
+          "name": "Linzi",
+          "lnglat": [
+            118.33790805555554,
+            36.88975611111111
+          ],
+          "svg": [
+            348.22,
+            150.86
+          ],
+          "coordinateSource": "https://zh.wikipedia.org/wiki/临淄齐国故城 (S206)"
+        },
+        {
+          "name": "Qufu",
+          "lnglat": [
+            116.9862,
+            35.5819
+          ],
+          "svg": [
+            322.92,
+            181.95
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Qufu"
+        },
+        {
+          "name": "Beijing (modern city dot)",
+          "lnglat": [
+            116.3975,
+            39.9067
+          ],
+          "svg": [
+            317.74,
+            79.08
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Beijing"
+        },
+        {
+          "name": "Shangqiu",
+          "lnglat": [
+            115.656,
+            34.415
+          ],
+          "svg": [
+            293.09,
+            210.41
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Shangqiu"
+        },
+        {
+          "name": "Ying (Jinancheng)",
+          "lnglat": [
+            112.19029805555556,
+            30.405721944444444
+          ],
+          "svg": [
+            220.62,
+            309.46
+          ],
+          "coordinateSource": "https://zh.wikipedia.org/wiki/楚纪南故城 (S205)"
+        },
+        {
+          "name": "Shanghai",
+          "lnglat": [
+            121.46916667,
+            31.2325
+          ],
+          "svg": [
+            415.35,
+            282.97
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Shanghai"
+        },
+        {
+          "name": "Tianjin",
+          "lnglat": [
+            117.2054,
+            39.1336
+          ],
+          "svg": [
+            324.35,
+            97.51
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Tianjin"
+        },
+        {
+          "name": "Wuhan",
+          "lnglat": [
+            114.2975,
+            30.595
+          ],
+          "svg": [
+            265.12,
+            304.65
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Wuhan"
+        },
+        {
+          "name": "Nanjing",
+          "lnglat": [
+            118.77888889,
+            32.06083333
+          ],
+          "svg": [
+            361.11,
+            261.43
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Nanjing"
+        },
+        {
+          "name": "Zheng (Xinzheng)",
+          "lnglat": [
+            113.7402,
+            34.3964
+          ],
+          "svg": [
+            254.4,
+            217.49
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Xinzheng"
+        },
+        {
+          "name": "Jinan",
+          "lnglat": [
+            117.0207,
+            36.6702
+          ],
+          "svg": [
+            326.45,
+            148.64
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Jinan"
+        },
+        {
+          "name": "Gusu (Suzhou)",
+          "lnglat": [
+            120.61944444,
+            31.3
+          ],
+          "svg": [
+            399.71,
+            278.11
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Suzhou"
+        },
+        {
+          "name": "Xi’an",
+          "lnglat": [
+            108.94222222,
+            34.26111111
+          ],
+          "svg": [
+            141.46,
+            208.29
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Xi%27an"
+        },
+        {
+          "name": "Hangzhou",
+          "lnglat": [
+            120.153,
+            30.267
+          ],
+          "svg": [
+            391.22,
+            303.97
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Hangzhou"
+        }
+      ]
+    },
+    "G5": {
+      "dataset": "G5",
+      "projection": "auto",
+      "classes": {},
+      "land": [
+        "#a8c68f",
+        "#efebc0",
+        "#cab982",
+        "#aa8753"
+      ],
+      "sea": [
+        "#c6ecff"
+      ],
+      "maxResidualKm": 40,
+      "controlPoints": [],
+      "controlPointsFrom": "G3"
+    },
+    "G1": {
+      "dataset": "G1-registration",
+      "projection": "equirectangular+affine",
+      "classes": {},
+      "land": [
+        "#a8c68f"
+      ],
+      "controlPoints": [
+        {
+          "name": "Fen NE confluence / endpoint",
+          "lnglat": [
+            112.075613,
+            38.861274
+          ],
+          "svg": [
+            751.3907055449217,
+            293.75886792085294
+          ],
+          "coordinateSource": "Natural Earth 10m rivers_lake_centerlines; source vertex match, not independent historical validation"
+        },
+        {
+          "name": "Wei NE confluence / endpoint",
+          "lnglat": [
+            110.293468,
+            34.623155
+          ],
+          "svg": [
+            589.5907055449225,
+            765.5588679208531
+          ],
+          "coordinateSource": "Natural Earth 10m rivers_lake_centerlines; source vertex match, not independent historical validation"
+        },
+        {
+          "name": "Han NE confluence / endpoint",
+          "lnglat": [
+            111.477631,
+            32.567816
+          ],
+          "svg": [
+            697.0907055449225,
+            994.3588679208528
+          ],
+          "coordinateSource": "Natural Earth 10m rivers_lake_centerlines; source vertex match, not independent historical validation"
+        },
+        {
+          "name": "Huai NE confluence / endpoint",
+          "lnglat": [
+            115.564464,
+            32.402371
+          ],
+          "svg": [
+            1068.190705544921,
+            1012.7588679208529
+          ],
+          "coordinateSource": "Natural Earth 10m rivers_lake_centerlines; source vertex match, not independent historical validation"
+        },
+        {
+          "name": "Dan NE confluence / endpoint",
+          "lnglat": [
+            111.47755,
+            32.569525
+          ],
+          "svg": [
+            697.0907055449225,
+            994.158867920853
+          ],
+          "coordinateSource": "Natural Earth 10m rivers_lake_centerlines; source vertex match, not independent historical validation"
+        },
+        {
+          "name": "Jing NE confluence / endpoint",
+          "lnglat": [
+            109.070974,
+            34.470038
+          ],
+          "svg": [
+            478.59070554492246,
+            782.5588679208531
+          ],
+          "coordinateSource": "Natural Earth 10m rivers_lake_centerlines; source vertex match, not independent historical validation"
+        },
+        {
+          "name": "Ying NE confluence / endpoint",
+          "lnglat": [
+            116.521902,
+            32.498847
+          ],
+          "svg": [
+            1155.0907055449225,
+            1001.9588679208528
+          ],
+          "coordinateSource": "Natural Earth 10m rivers_lake_centerlines; source vertex match, not independent historical validation"
+        },
+        {
+          "name": "Luan NE confluence / endpoint",
+          "lnglat": [
+            119.257498,
+            39.412421
+          ],
+          "svg": [
+            1403.490705544922,
+            232.3588679208533
+          ],
+          "coordinateSource": "Natural Earth 10m rivers_lake_centerlines; source vertex match, not independent historical validation"
+        },
+        {
+          "name": "Wuding NE confluence / endpoint",
+          "lnglat": [
+            110.437592,
+            37.042019
+          ],
+          "svg": [
+            602.690705544921,
+            496.25886792085294
+          ],
+          "coordinateSource": "Natural Earth 10m rivers_lake_centerlines; source vertex match, not independent historical validation"
+        },
+        {
+          "name": "Fuchun NE confluence / endpoint",
+          "lnglat": [
+            117.785167,
+            29.707302
+          ],
+          "svg": [
+            1269.7907055449214,
+            1312.758867920853
+          ],
+          "coordinateSource": "Natural Earth 10m rivers_lake_centerlines; source vertex match, not independent historical validation"
+        },
+        {
+          "name": "Yongding NE confluence / endpoint",
+          "lnglat": [
+            115.589122,
+            40.240424
+          ],
+          "svg": [
+            1070.3907055449217,
+            140.25886792085294
+          ],
+          "coordinateSource": "Natural Earth 10m rivers_lake_centerlines; source vertex match, not independent historical validation"
+        },
+        {
+          "name": "Hai NE confluence / endpoint",
+          "lnglat": [
+            117.708995,
+            38.981024
+          ],
+          "svg": [
+            1262.8907055449217,
+            280.45886792085275
+          ],
+          "coordinateSource": "Natural Earth 10m rivers_lake_centerlines; source vertex match, not independent historical validation"
+        },
+        {
+          "name": "Liao NE confluence / endpoint",
+          "lnglat": [
+            122.156261,
+            40.701606
+          ],
+          "svg": [
+            1666.690705544921,
+            88.8588679208533
+          ],
+          "coordinateSource": "Natural Earth 10m rivers_lake_centerlines; source vertex match, not independent historical validation"
+        },
+        {
+          "name": "Gan NE confluence / endpoint",
+          "lnglat": [
+            115.981944,
+            29.279161
+          ],
+          "svg": [
+            1106.0907055449225,
+            1360.4588679208528
+          ],
+          "coordinateSource": "Natural Earth 10m rivers_lake_centerlines; source vertex match, not independent historical validation"
+        },
+        {
+          "name": "Yangtze NE confluence / endpoint",
+          "lnglat": [
+            113.127615,
+            29.462755
+          ],
+          "svg": [
+            846.8907055449217,
+            1339.9588679208528
+          ],
+          "coordinateSource": "Natural Earth 10m rivers_lake_centerlines; source vertex match, not independent historical validation"
+        }
+      ],
+      "maxResidualKm": 5
+    },
+    "G2": {
+      "dataset": "G2-registration",
+      "projection": "equirectangular+affine",
+      "classes": {},
+      "land": [
+        "#a8c68f"
+      ],
+      "controlPoints": [],
+      "maxResidualKm": 5,
+      "controlPointsFrom": "G1"
+    },
+    "G6": {
+      "dataset": "G6-vector",
+      "projection": "auto",
+      "classes": {},
+      "land": [
+        "#a8c68f",
+        "#efebc0",
+        "#cab982",
+        "#aa8753"
+      ],
+      "sea": [
+        "#c6ecff"
+      ],
+      "maxResidualKm": 40,
+      "controlPoints": [],
+      "controlPointsFrom": "G3"
+    }
+  },
+  "raster": {
+    "G7": {
+      "dataset": "G7-trace",
+      "projection": "auto",
+      "palette": {
+        "#db9d5c": "wei",
+        "#9c8170": "qin",
+        "#94a286": "zhao",
+        "#b8bd5c": "han",
+        "#7da58e": "qi",
+        "#bd6e7e": "chu",
+        "#c4b476": "yan",
+        "#a6b06e": "yue",
+        "#b29e86": "song",
+        "#ce9c64": "lu",
+        "#99bdb1": "wey",
+        "#d3c49b": "zhou",
+        "#b590a1": "zhongshan",
+        "#ffffff": "_outside"
+      },
+      "tolerance": 2,
+      "land": [
+        "wei",
+        "qin",
+        "zhao",
+        "han",
+        "qi",
+        "chu",
+        "yan",
+        "yue",
+        "song",
+        "lu",
+        "wey",
+        "zhou",
+        "zhongshan"
+      ],
+      "sea": [],
+      "maxResidualKm": 25,
+      "controlPoints": [
+        {
+          "name": "Ji (Beijing)",
+          "lnglat": [
+            116.382425,
+            39.894262
+          ],
+          "svg": [
+            461,
+            128.5
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Ji_(Beijing)",
+          "coordinateMethod": "ancient city coordinate"
+        },
+        {
+          "name": "Handan",
+          "lnglat": [
+            114.487,
+            36.601
+          ],
+          "svg": [
+            425.6,
+            235.6
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Handan",
+          "coordinateMethod": "modern urban coordinate proxy near ancient capital"
+        },
+        {
+          "name": "Linzi",
+          "lnglat": [
+            118.3554,
+            36.8829
+          ],
+          "svg": [
+            521,
+            219
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Ancient_Linzi",
+          "coordinateMethod": "ancient city site coordinate"
+        },
+        {
+          "name": "Linwu",
+          "lnglat": [
+            112.55608,
+            25.28167
+          ],
+          "svg": [
+            408.2,
+            600.8
+          ],
+          "coordinateSource": "https://zh.wikipedia.org/wiki/临武县",
+          "coordinateMethod": "modern town coordinate proxy for source ancient settlement"
+        },
+        {
+          "name": "Xianyang",
+          "lnglat": [
+            108.7088,
+            34.3299
+          ],
+          "svg": [
+            288.4,
+            317.4
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Xianyang",
+          "coordinateMethod": "modern urban coordinate proxy for source ancient capital"
+        },
+        {
+          "name": "Chengdu",
+          "lnglat": [
+            104.06333,
+            30.66
+          ],
+          "svg": [
+            167,
+            439
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Chengdu",
+          "coordinateMethod": "Tianfu Square city coordinate proxy"
+        },
+        {
+          "name": "Ying (Jinancheng)",
+          "lnglat": [
+            112.19029806,
+            30.40572194
+          ],
+          "svg": [
+            384.5,
+            441
+          ],
+          "coordinateSource": "https://zh.wikipedia.org/wiki/楚纪南故城",
+          "coordinateMethod": "archaeological site coordinate; different earlier Ying locations not assumed"
+        },
+        {
+          "name": "Luoyang (Wangcheng)",
+          "lnglat": [
+            112.4539,
+            34.6197
+          ],
+          "svg": [
+            386,
+            301.5
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Luoyang",
+          "coordinateMethod": "modern urban coordinate proxy; ancient urban footprint covers several sites"
+        },
+        {
+          "name": "Daliang (Kaifeng)",
+          "lnglat": [
+            114.345,
+            34.795
+          ],
+          "svg": [
+            428,
+            296.5
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Kaifeng",
+          "coordinateMethod": "urban coordinate proxy for buried ancient capital"
+        },
+        {
+          "name": "Xinzheng",
+          "lnglat": [
+            113.7402,
+            34.3964
+          ],
+          "svg": [
+            415,
+            310
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Xinzheng",
+          "coordinateMethod": "urban coordinate proxy for ancient Zheng/Han capital"
+        },
+        {
+          "name": "Ba (Chongqing)",
+          "lnglat": [
+            106.5504,
+            29.5637
+          ],
+          "svg": [
+            233.5,
+            472
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Chongqing",
+          "coordinateMethod": "urban coordinate proxy for source Ba/Jiangzhou point"
+        },
+        {
+          "name": "Changsha",
+          "lnglat": [
+            112.939,
+            28.228
+          ],
+          "svg": [
+            411.6,
+            509.4
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Changsha",
+          "coordinateMethod": "urban coordinate proxy"
+        }
+      ],
+      "minRegionPx": 2,
+      "exclude": []
+    },
+    "G11": {
+      "dataset": "G11-trace",
+      "projection": "auto",
+      "palette": {
+        "#f29e93": "qin",
+        "#c9baa3": "zhao",
+        "#f4d3ca": "yan",
+        "#f6ec69": "qi",
+        "#f3b994": "wei",
+        "#f179e9": "han",
+        "#91cd8d": "chu",
+        "#b1c7de": "_sea",
+        "#ece5d3": "_outside",
+        "#d3c49b": "zhou"
+      },
+      "tolerance": 2,
+      "land": [
+        "qin",
+        "zhao",
+        "yan",
+        "qi",
+        "wei",
+        "han",
+        "chu",
+        "zhou"
+      ],
+      "sea": [
+        "_sea"
+      ],
+      "exclude": [],
+      "minRegionPx": 2,
+      "maxResidualKm": 25,
+      "controlPoints": [
+        {
+          "name": "Ji (Beijing)",
+          "lnglat": [
+            116.382425,
+            39.894262
+          ],
+          "svg": [
+            854,
+            300
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Ji_(Beijing)",
+          "coordinateMethod": "ancient city coordinate"
+        },
+        {
+          "name": "Dai (Yuxian)",
+          "lnglat": [
+            114.567,
+            39.833
+          ],
+          "svg": [
+            748,
+            300
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Yu_County,_Hebei",
+          "coordinateMethod": "county-seat coordinate proxy for source Dai point"
+        },
+        {
+          "name": "Handan",
+          "lnglat": [
+            114.487,
+            36.601
+          ],
+          "svg": [
+            766,
+            503
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Handan",
+          "coordinateMethod": "modern urban coordinate proxy near ancient capital"
+        },
+        {
+          "name": "Linzi",
+          "lnglat": [
+            118.3554,
+            36.8829
+          ],
+          "svg": [
+            979,
+            493
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Ancient_Linzi",
+          "coordinateMethod": "ancient city site coordinate"
+        },
+        {
+          "name": "Wey (Puyang)",
+          "lnglat": [
+            115.0292,
+            35.7627
+          ],
+          "svg": [
+            797,
+            565
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Puyang",
+          "coordinateMethod": "urban coordinate proxy for source Diqiu/Wey point"
+        },
+        {
+          "name": "Anyi",
+          "lnglat": [
+            111.17433,
+            35.18425
+          ],
+          "svg": [
+            563,
+            639
+          ],
+          "coordinateSource": "https://zh.wikipedia.org/wiki/安邑城",
+          "coordinateMethod": "actual Warring States Wei capital site; not the different 安邑古城遗址"
+        },
+        {
+          "name": "Yong (Fengxiang)",
+          "lnglat": [
+            107.42056,
+            34.56
+          ],
+          "svg": [
+            368,
+            686
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Fengxiang_District",
+          "coordinateMethod": "modern town coordinate proxy for nearby ancient Yong"
+        },
+        {
+          "name": "Xianyang",
+          "lnglat": [
+            108.7088,
+            34.3299
+          ],
+          "svg": [
+            447,
+            694
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Xianyang",
+          "coordinateMethod": "modern urban coordinate proxy for source ancient capital"
+        },
+        {
+          "name": "Luoyang (Wangcheng)",
+          "lnglat": [
+            112.4539,
+            34.6197
+          ],
+          "svg": [
+            656,
+            667
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Luoyang",
+          "coordinateMethod": "modern urban coordinate proxy; ancient urban footprint covers several sites"
+        },
+        {
+          "name": "Daliang (Kaifeng)",
+          "lnglat": [
+            114.345,
+            34.795
+          ],
+          "svg": [
+            754,
+            656
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Kaifeng",
+          "coordinateMethod": "urban coordinate proxy for buried ancient capital"
+        },
+        {
+          "name": "Yangzhai (Yuzhou)",
+          "lnglat": [
+            113.489,
+            34.142
+          ],
+          "svg": [
+            708,
+            705
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Yuzhou,_Henan",
+          "coordinateMethod": "urban coordinate proxy for ancient Yangzhai"
+        },
+        {
+          "name": "Chen (Huaiyang)",
+          "lnglat": [
+            114.85,
+            33.73306
+          ],
+          "svg": [
+            798,
+            716
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Huaiyang_District",
+          "coordinateMethod": "town coordinate proxy for source Chen/Wanqiu"
+        },
+        {
+          "name": "Shouchun",
+          "lnglat": [
+            116.7982,
+            32.545
+          ],
+          "svg": [
+            902,
+            819
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Shouchun",
+          "coordinateMethod": "modern Shou county-seat proxy for nearby source Shouchun"
+        },
+        {
+          "name": "Wu (Suzhou)",
+          "lnglat": [
+            120.61944,
+            31.3
+          ],
+          "svg": [
+            1158,
+            868
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Suzhou",
+          "coordinateMethod": "urban coordinate proxy for ancient Wu capital"
+        },
+        {
+          "name": "Ying (Jinancheng)",
+          "lnglat": [
+            112.19029806,
+            30.40572194
+          ],
+          "svg": [
+            640,
+            968
+          ],
+          "coordinateSource": "https://zh.wikipedia.org/wiki/楚纪南故城",
+          "coordinateMethod": "archaeological site coordinate; different earlier Ying locations not assumed"
+        },
+        {
+          "name": "Shu (Chengdu)",
+          "lnglat": [
+            104.06333,
+            30.66
+          ],
+          "svg": [
+            143,
+            949
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Chengdu",
+          "coordinateMethod": "Tianfu Square city coordinate proxy"
+        },
+        {
+          "name": "Ba (Chongqing)",
+          "lnglat": [
+            106.5504,
+            29.5637
+          ],
+          "svg": [
+            286,
+            976
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Chongqing",
+          "coordinateMethod": "urban coordinate proxy for source Ba/Jiangzhou point"
+        },
+        {
+          "name": "Nanzheng (Hanzhong)",
+          "lnglat": [
+            107.0232,
+            33.0664
+          ],
+          "svg": [
+            345,
+            775
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Hanzhong",
+          "coordinateMethod": "urban coordinate proxy for source Nanzheng/Hanzhong"
+        }
+      ]
+    },
+    "G4": {
+      "dataset": "G4",
+      "projection": "auto",
+      "palette": {
+        "#a8c68f": "_land",
+        "#c6ecff": "_sea"
+      },
+      "tolerance": 12,
+      "land": [
+        "_land"
+      ],
+      "sea": [
+        "_sea"
+      ],
+      "minRegionPx": 12,
+      "maxResidualKm": 40,
+      "controlPoints": [
+        {
+          "name": "Yong (Fengxiang)",
+          "lnglat": [
+            107.42055556,
+            34.56
+          ],
+          "svg": [
+            234.27675086557147,
+            450.7331540780575
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Fengxiang_District"
+        },
+        {
+          "name": "Linzi",
+          "lnglat": [
+            118.33790805555554,
+            36.88975611111111
+          ],
+          "svg": [
+            785.4033906460894,
+            340.24320052146993
+          ],
+          "coordinateSource": "https://zh.wikipedia.org/wiki/临淄齐国故城 (S206)"
+        },
+        {
+          "name": "Qufu",
+          "lnglat": [
+            116.9862,
+            35.5819
+          ],
+          "svg": [
+            728.3397361077341,
+            410.3622586164752
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Qufu"
+        },
+        {
+          "name": "Beijing (modern city dot)",
+          "lnglat": [
+            116.3975,
+            39.9067
+          ],
+          "svg": [
+            716.6563475500787,
+            178.35365436323636
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Beijing"
+        },
+        {
+          "name": "Shangqiu",
+          "lnglat": [
+            115.656,
+            34.415
+          ],
+          "svg": [
+            661.0587552824717,
+            474.54972704310273
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Shangqiu"
+        },
+        {
+          "name": "Ying (Jinancheng)",
+          "lnglat": [
+            112.19029805555556,
+            30.405721944444444
+          ],
+          "svg": [
+            497.6040894961237,
+            697.9428664548194
+          ],
+          "coordinateSource": "https://zh.wikipedia.org/wiki/楚纪南故城 (S205)"
+        },
+        {
+          "name": "Shanghai",
+          "lnglat": [
+            121.46916667,
+            31.2325
+          ],
+          "svg": [
+            936.8137910081361,
+            638.1984518862545
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Shanghai"
+        },
+        {
+          "name": "Tianjin",
+          "lnglat": [
+            117.2054,
+            39.1336
+          ],
+          "svg": [
+            731.5650731033802,
+            219.9198891876477
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Tianjin"
+        },
+        {
+          "name": "Wuhan",
+          "lnglat": [
+            114.2975,
+            30.595
+          ],
+          "svg": [
+            597.9729680319659,
+            687.0945978978245
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Wuhan"
+        },
+        {
+          "name": "Nanjing",
+          "lnglat": [
+            118.77888889,
+            32.06083333
+          ],
+          "svg": [
+            814.4765332152356,
+            589.6180558950542
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Nanjing"
+        },
+        {
+          "name": "Zheng (Xinzheng)",
+          "lnglat": [
+            113.7402,
+            34.3964
+          ],
+          "svg": [
+            573.7942179667024,
+            490.51765664466717
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Xinzheng"
+        },
+        {
+          "name": "Jinan",
+          "lnglat": [
+            117.0207,
+            36.6702
+          ],
+          "svg": [
+            736.3015819781053,
+            335.2363073413183
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Jinan"
+        },
+        {
+          "name": "Gusu (Suzhou)",
+          "lnglat": [
+            120.61944444,
+            31.3
+          ],
+          "svg": [
+            901.5380772935166,
+            627.2374154648415
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Suzhou"
+        },
+        {
+          "name": "Xi’an",
+          "lnglat": [
+            108.94222222,
+            34.26111111
+          ],
+          "svg": [
+            319.0602597231515,
+            469.76836959178684
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Xi%27an"
+        },
+        {
+          "name": "Hangzhou",
+          "lnglat": [
+            120.153,
+            30.267
+          ],
+          "svg": [
+            882.3890485571279,
+            685.5609549417421
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Hangzhou"
+        }
+      ]
+    },
+    "G6": {
+      "dataset": "G6",
+      "projection": "auto",
+      "palette": {
+        "#a8c68f": "_land",
+        "#c6ecff": "_sea"
+      },
+      "tolerance": 12,
+      "land": [
+        "_land"
+      ],
+      "sea": [
+        "_sea"
+      ],
+      "minRegionPx": 12,
+      "maxResidualKm": 40,
+      "controlPoints": [
+        {
+          "name": "Yong (Fengxiang)",
+          "lnglat": [
+            107.42055556,
+            34.56
+          ],
+          "svg": [
+            60.39947483253014,
+            116.72164914853744
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Fengxiang_District"
+        },
+        {
+          "name": "Linzi",
+          "lnglat": [
+            118.33790805555554,
+            36.88975611111111
+          ],
+          "svg": [
+            202.4868116509449,
+            88.10922186914365
+          ],
+          "coordinateSource": "https://zh.wikipedia.org/wiki/临淄齐国故城 (S206)"
+        },
+        {
+          "name": "Qufu",
+          "lnglat": [
+            116.9862,
+            35.5819
+          ],
+          "svg": [
+            187.7750882152752,
+            106.26722072842824
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Qufu"
+        },
+        {
+          "name": "Beijing (modern city dot)",
+          "lnglat": [
+            116.3975,
+            39.9067
+          ],
+          "svg": [
+            184.76296460275466,
+            46.186379858225365
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Beijing"
+        },
+        {
+          "name": "Shangqiu",
+          "lnglat": [
+            115.656,
+            34.415
+          ],
+          "svg": [
+            170.42921034626224,
+            122.8891778701214
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Shangqiu"
+        },
+        {
+          "name": "Ying (Jinancheng)",
+          "lnglat": [
+            112.19029805555556,
+            30.405721944444444
+          ],
+          "svg": [
+            128.28855432321942,
+            180.7389619489937
+          ],
+          "coordinateSource": "https://zh.wikipedia.org/wiki/楚纪南故城 (S205)"
+        },
+        {
+          "name": "Shanghai",
+          "lnglat": [
+            121.46916667,
+            31.2325
+          ],
+          "svg": [
+            241.52230549428512,
+            165.26757597979307
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Shanghai"
+        },
+        {
+          "name": "Tianjin",
+          "lnglat": [
+            117.2054,
+            39.1336
+          ],
+          "svg": [
+            188.60662040946525,
+            56.950352806974664
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Tianjin"
+        },
+        {
+          "name": "Wuhan",
+          "lnglat": [
+            114.2975,
+            30.595
+          ],
+          "svg": [
+            154.16490582074124,
+            177.92969934001465
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Wuhan"
+        },
+        {
+          "name": "Nanjing",
+          "lnglat": [
+            118.77888889,
+            32.06083333
+          ],
+          "svg": [
+            209.98223121955292,
+            152.68721909883484
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Nanjing"
+        },
+        {
+          "name": "Zheng (Xinzheng)",
+          "lnglat": [
+            113.7402,
+            34.3964
+          ],
+          "svg": [
+            147.93132181954047,
+            127.02422553572885
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Xinzheng"
+        },
+        {
+          "name": "Jinan",
+          "lnglat": [
+            117.0207,
+            36.6702
+          ],
+          "svg": [
+            189.8277516037303,
+            86.81263912653793
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Jinan"
+        },
+        {
+          "name": "Gusu (Suzhou)",
+          "lnglat": [
+            120.61944444,
+            31.3
+          ],
+          "svg": [
+            232.42778555223472,
+            162.42911105679133
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Suzhou"
+        },
+        {
+          "name": "Xi’an",
+          "lnglat": [
+            108.94222222,
+            34.26111111
+          ],
+          "svg": [
+            82.25772320987498,
+            121.65099975556099
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Xi%27an"
+        },
+        {
+          "name": "Hangzhou",
+          "lnglat": [
+            120.153,
+            30.267
+          ],
+          "svg": [
+            227.49092658113452,
+            177.5325478693066
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Hangzhou"
+        }
+      ]
+    },
+    "G18": {
+      "dataset": "G18",
+      "projection": "auto",
+      "palette": {
+        "#c6ecff": "_sea",
+        "#a8c68f": "_land"
+      },
+      "tolerance": 20,
+      "land": [
+        "_land"
+      ],
+      "sea": [
+        "_sea"
+      ],
+      "maxResidualKm": 40,
+      "controlPoints": [
+        {
+          "name": "Wei–Yellow confluence",
+          "lnglat": [
+            110.293468,
+            34.623155
+          ],
+          "svg": [
+            462,
+            573
+          ],
+          "coordinateSource": "Natural Earth 10m rivers named endpoint; source junction visually identified"
+        },
+        {
+          "name": "Jing–Wei confluence",
+          "lnglat": [
+            109.070974,
+            34.470038
+          ],
+          "svg": [
+            383,
+            588
+          ],
+          "coordinateSource": "Natural Earth 10m rivers named endpoint; source junction visually identified"
+        },
+        {
+          "name": "Fen–Yellow confluence",
+          "lnglat": [
+            110.554861,
+            35.458604
+          ],
+          "svg": [
+            486,
+            502
+          ],
+          "coordinateSource": "Natural Earth 10m rivers named endpoint; source junction visually identified"
+        },
+        {
+          "name": "Han–Yangtze confluence",
+          "lnglat": [
+            114.289561,
+            30.566352
+          ],
+          "svg": [
+            822,
+            959
+          ],
+          "coordinateSource": "Natural Earth 10m rivers named endpoint; source junction visually identified"
+        },
+        {
+          "name": "Jialing–Yangtze confluence",
+          "lnglat": [
+            106.586843,
+            29.585639
+          ],
+          "svg": [
+            217,
+            1030
+          ],
+          "coordinateSource": "Natural Earth 10m rivers named endpoint; source junction visually identified"
+        },
+        {
+          "name": "Ying NE river vertex 0",
+          "lnglat": [
+            115.556407,
+            33.197699
+          ],
+          "svg": [
+            901,
+            720
+          ],
+          "snapPx": 0.9457997022369149,
+          "coordinateSource": "NE named river vertex; anchored nearest blue path within 5px; reference-only map"
+        },
+        {
+          "name": "Yangtze NE river vertex 1",
+          "lnglat": [
+            117.747162,
+            30.943468
+          ],
+          "svg": [
+            1091,
+            932
+          ],
+          "snapPx": 1.444985549265775,
+          "coordinateSource": "NE named river vertex; anchored nearest blue path within 5px; reference-only map"
+        },
+        {
+          "name": "Han NE river vertex 2",
+          "lnglat": [
+            111.41448,
+            32.573676
+          ],
+          "svg": [
+            573,
+            772
+          ],
+          "snapPx": 5.945974673133507,
+          "coordinateSource": "NE named river vertex; anchored nearest blue path within 5px; reference-only map"
+        },
+        {
+          "name": "Han NE river vertex 3",
+          "lnglat": [
+            107.522553,
+            33.208035
+          ],
+          "svg": [
+            262,
+            699
+          ],
+          "snapPx": 0.7255644287768747,
+          "coordinateSource": "NE named river vertex; anchored nearest blue path within 5px; reference-only map"
+        },
+        {
+          "name": "Hai NE river vertex 4",
+          "lnglat": [
+            117.55364,
+            38.996365
+          ],
+          "svg": [
+            1014,
+            190
+          ],
+          "snapPx": 3.5362536706618344,
+          "coordinateSource": "NE named river vertex; anchored nearest blue path within 5px; reference-only map"
+        },
+        {
+          "name": "Wei NE river vertex 5",
+          "lnglat": [
+            106.534679,
+            34.490098
+          ],
+          "svg": [
+            177,
+            575
+          ],
+          "snapPx": 5.1096093669694405,
+          "coordinateSource": "NE named river vertex; anchored nearest blue path within 5px; reference-only map"
+        },
+        {
+          "name": "Wei NE river vertex 6",
+          "lnglat": [
+            108.183849,
+            34.225898
+          ],
+          "svg": [
+            307,
+            604
+          ],
+          "snapPx": 3.404104188631575,
+          "coordinateSource": "NE named river vertex; anchored nearest blue path within 5px; reference-only map"
+        },
+        {
+          "name": "Jing NE river vertex 7",
+          "lnglat": [
+            107.941905,
+            35.178494
+          ],
+          "svg": [
+            280,
+            518
+          ],
+          "snapPx": 1.266903270690686,
+          "coordinateSource": "NE named river vertex; anchored nearest blue path within 5px; reference-only map"
+        }
+      ]
+    },
+    "G10": {
+      "dataset": "G10-trace",
+      "projection": "auto",
+      "palette": {
+        "#d1ad76": "jin",
+        "#66b7bc": "ju",
+        "#bdd18c": "zheng",
+        "#a99bc9": "wu",
+        "#d98fb8": "ba",
+        "#9c8170": "qin",
+        "#7da58e": "qi",
+        "#bd6e7e": "chu",
+        "#c4b476": "yan",
+        "#a6b06e": "yue",
+        "#b29e86": "song",
+        "#ce9c64": "lu",
+        "#99bdb1": "wey",
+        "#d3c49b": "zhou",
+        "#ffffff": "_outside"
+      },
+      "tolerance": 2,
+      "land": [
+        "jin",
+        "ju",
+        "zheng",
+        "wu",
+        "ba",
+        "qin",
+        "qi",
+        "chu",
+        "yan",
+        "yue",
+        "song",
+        "lu",
+        "wey",
+        "zhou"
+      ],
+      "sea": [],
+      "maxResidualKm": 40,
+      "controlPoints": [
+        {
+          "name": "Ji (Beijing)",
+          "lnglat": [
+            116.382425,
+            39.894262
+          ],
+          "svg": [
+            497,
+            135
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Ji_(Beijing)",
+          "coordinateMethod": "ancient city coordinate"
+        },
+        {
+          "name": "Linzi (Yingqiu)",
+          "lnglat": [
+            118.3554,
+            36.8829
+          ],
+          "svg": [
+            580.3,
+            253
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Ancient_Linzi",
+          "coordinateMethod": "ancient city site coordinate"
+        },
+        {
+          "name": "Qufu",
+          "lnglat": [
+            116.9862,
+            35.5819
+          ],
+          "svg": [
+            552,
+            296
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Qufu",
+          "coordinateMethod": "urban coordinate proxy for ancient Lu capital"
+        },
+        {
+          "name": "Wey (Puyang)",
+          "lnglat": [
+            115.0292,
+            35.7627
+          ],
+          "svg": [
+            502,
+            301
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Puyang",
+          "coordinateMethod": "urban coordinate proxy for source Diqiu/Wey point"
+        },
+        {
+          "name": "Yong (Fengxiang)",
+          "lnglat": [
+            107.42056,
+            34.56
+          ],
+          "svg": [
+            256,
+            362
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Fengxiang_District",
+          "coordinateMethod": "modern town coordinate proxy for nearby ancient Yong"
+        },
+        {
+          "name": "Luoyang",
+          "lnglat": [
+            112.4539,
+            34.6197
+          ],
+          "svg": [
+            412,
+            347
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Luoyang",
+          "coordinateMethod": "modern urban coordinate proxy"
+        },
+        {
+          "name": "Xinzheng",
+          "lnglat": [
+            113.7402,
+            34.3964
+          ],
+          "svg": [
+            455.5,
+            354.4
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Xinzheng",
+          "coordinateMethod": "urban coordinate proxy for ancient Zheng/Han capital"
+        },
+        {
+          "name": "Song (Shangqiu)",
+          "lnglat": [
+            115.656,
+            34.415
+          ],
+          "svg": [
+            523.3,
+            352.7
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Shangqiu",
+          "coordinateMethod": "urban coordinate proxy for ancient Song capital"
+        },
+        {
+          "name": "Chen (Huaiyang)",
+          "lnglat": [
+            114.85,
+            33.73306
+          ],
+          "svg": [
+            492,
+            376
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Huaiyang_District",
+          "coordinateMethod": "town coordinate proxy for source Chen/Wanqiu"
+        },
+        {
+          "name": "Ying (Jinancheng)",
+          "lnglat": [
+            112.19029806,
+            30.40572194
+          ],
+          "svg": [
+            427,
+            521
+          ],
+          "coordinateSource": "https://zh.wikipedia.org/wiki/楚纪南故城",
+          "coordinateMethod": "archaeological site coordinate; different earlier Ying locations not assumed"
+        },
+        {
+          "name": "Wu (Suzhou)",
+          "lnglat": [
+            120.61944,
+            31.3
+          ],
+          "svg": [
+            689,
+            444
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Suzhou",
+          "coordinateMethod": "urban coordinate proxy for ancient Wu capital"
+        },
+        {
+          "name": "Kuaiji (Shaoxing)",
+          "lnglat": [
+            120.58333333,
+            30
+          ],
+          "svg": [
+            702,
+            496
+          ],
+          "coordinateSource": "https://www.wikidata.org/wiki/Q42666",
+          "coordinateMethod": "Wikidata P625 urban coordinate proxy"
+        },
+        {
+          "name": "Ba (Chongqing)",
+          "lnglat": [
+            106.5504,
+            29.5637
+          ],
+          "svg": [
+            228,
+            556
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Chongqing",
+          "coordinateMethod": "urban coordinate proxy for source Ba/Jiangzhou point"
+        },
+        {
+          "name": "Shu (Chengdu)",
+          "lnglat": [
+            104.06333,
+            30.66
+          ],
+          "svg": [
+            135,
+            519
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Chengdu",
+          "coordinateMethod": "Tianfu Square city coordinate proxy"
+        }
+      ],
+      "minRegionPx": 2,
+      "exclude": []
+    },
+    "G9": {
+      "dataset": "G9",
+      "projection": "auto",
+      "palette": {
+        "#fffefd": "_outside"
+      },
+      "tolerance": 2,
+      "land": [],
+      "sea": [],
+      "maxResidualKm": 40,
+      "controlPoints": [
+        {
+          "name": "Ji (Beijing)",
+          "lnglat": [
+            116.382425,
+            39.894262
+          ],
+          "svg": [
+            871,
+            126
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Ji_(Beijing)",
+          "coordinateMethod": "ancient city coordinate"
+        },
+        {
+          "name": "Linzi",
+          "lnglat": [
+            118.3554,
+            36.8829
+          ],
+          "svg": [
+            999,
+            310
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Ancient_Linzi",
+          "coordinateMethod": "ancient city site coordinate"
+        },
+        {
+          "name": "Qufu",
+          "lnglat": [
+            116.9862,
+            35.5819
+          ],
+          "svg": [
+            969,
+            375
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Qufu",
+          "coordinateMethod": "urban coordinate proxy for ancient Lu capital"
+        },
+        {
+          "name": "Wey (Puyang)",
+          "lnglat": [
+            115.0292,
+            35.7627
+          ],
+          "svg": [
+            865,
+            379
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Puyang",
+          "coordinateMethod": "urban coordinate proxy for source Diqiu/Wey point"
+        },
+        {
+          "name": "Yong (Fengxiang)",
+          "lnglat": [
+            107.42056,
+            34.56
+          ],
+          "svg": [
+            480,
+            477
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Fengxiang_District",
+          "coordinateMethod": "modern town coordinate proxy for nearby ancient Yong"
+        },
+        {
+          "name": "Luoyang",
+          "lnglat": [
+            112.4539,
+            34.6197
+          ],
+          "svg": [
+            725,
+            446
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Luoyang",
+          "coordinateMethod": "modern urban coordinate proxy"
+        },
+        {
+          "name": "Xinzheng",
+          "lnglat": [
+            113.7402,
+            34.3964
+          ],
+          "svg": [
+            786,
+            460
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Xinzheng",
+          "coordinateMethod": "urban coordinate proxy for ancient Zheng/Han capital"
+        },
+        {
+          "name": "Song (Shangqiu)",
+          "lnglat": [
+            115.656,
+            34.415
+          ],
+          "svg": [
+            895,
+            461
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Shangqiu",
+          "coordinateMethod": "urban coordinate proxy for ancient Song capital"
+        },
+        {
+          "name": "Chen (Huaiyang)",
+          "lnglat": [
+            114.85,
+            33.73306
+          ],
+          "svg": [
+            851,
+            497
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Huaiyang_District",
+          "coordinateMethod": "town coordinate proxy for source Chen/Wanqiu"
+        },
+        {
+          "name": "Ying (Jinancheng)",
+          "lnglat": [
+            112.19029806,
+            30.40572194
+          ],
+          "svg": [
+            728,
+            720
+          ],
+          "coordinateSource": "https://zh.wikipedia.org/wiki/楚纪南故城",
+          "coordinateMethod": "archaeological site coordinate; different earlier Ying locations not assumed"
+        },
+        {
+          "name": "Wu (Suzhou)",
+          "lnglat": [
+            120.61944,
+            31.3
+          ],
+          "svg": [
+            1157,
+            619
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Suzhou",
+          "coordinateMethod": "urban coordinate proxy for ancient Wu capital"
+        },
+        {
+          "name": "Kuaiji (Shaoxing)",
+          "lnglat": [
+            120.58333333,
+            30
+          ],
+          "svg": [
+            1173,
+            702
+          ],
+          "coordinateSource": "https://www.wikidata.org/wiki/Q42666",
+          "coordinateMethod": "Wikidata P625 urban coordinate proxy"
+        },
+        {
+          "name": "Ba (Chongqing)",
+          "lnglat": [
+            106.5504,
+            29.5637
+          ],
+          "svg": [
+            413,
+            759
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Chongqing",
+          "coordinateMethod": "urban coordinate proxy for source Ba/Jiangzhou point"
+        },
+        {
+          "name": "Shu (Chengdu)",
+          "lnglat": [
+            104.06333,
+            30.66
+          ],
+          "svg": [
+            266,
+            689
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Chengdu",
+          "coordinateMethod": "Tianfu Square city coordinate proxy"
+        }
+      ]
+    },
+    "G8": {
+      "dataset": "G8-trace",
+      "projection": "auto",
+      "palette": {
+        "#bd6e7e": "chu",
+        "#7da58e": "qi",
+        "#9c8170": "qin",
+        "#94a286": "zhao",
+        "#db9d5c": "wei",
+        "#b8bd5c": "han",
+        "#c4b476": "yan",
+        "#ce9c64": "lu",
+        "#99bdb1": "wey",
+        "#ffffff": "_outside"
+      },
+      "tolerance": 2,
+      "land": [
+        "chu",
+        "qi",
+        "qin",
+        "zhao",
+        "wei",
+        "han",
+        "yan",
+        "lu",
+        "wey"
+      ],
+      "sea": [],
+      "maxResidualKm": 25,
+      "controlPoints": [
+        {
+          "name": "Ji (Beijing)",
+          "lnglat": [
+            116.382425,
+            39.894262
+          ],
+          "svg": [
+            206.698,
+            57.547
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Ji_(Beijing)",
+          "coordinateMethod": "ancient city coordinate"
+        },
+        {
+          "name": "Handan",
+          "lnglat": [
+            114.487,
+            36.601
+          ],
+          "svg": [
+            190.826,
+            105.51
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Handan",
+          "coordinateMethod": "modern urban coordinate proxy near ancient capital"
+        },
+        {
+          "name": "Linzi",
+          "lnglat": [
+            118.3554,
+            36.8829
+          ],
+          "svg": [
+            233.601,
+            98.076
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Ancient_Linzi",
+          "coordinateMethod": "ancient city site coordinate"
+        },
+        {
+          "name": "Linwu",
+          "lnglat": [
+            112.55608,
+            25.28167
+          ],
+          "svg": [
+            183.024,
+            269.061
+          ],
+          "coordinateSource": "https://zh.wikipedia.org/wiki/临武县",
+          "coordinateMethod": "modern town coordinate proxy for source ancient settlement"
+        },
+        {
+          "name": "Xianyang",
+          "lnglat": [
+            108.7088,
+            34.3299
+          ],
+          "svg": [
+            129.31,
+            142.144
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Xianyang",
+          "coordinateMethod": "modern urban coordinate proxy for source ancient capital"
+        },
+        {
+          "name": "Chengdu",
+          "lnglat": [
+            104.06333,
+            30.66
+          ],
+          "svg": [
+            74.878,
+            196.601
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Chengdu",
+          "coordinateMethod": "Tianfu Square city coordinate proxy"
+        },
+        {
+          "name": "Ying (Jinancheng)",
+          "lnglat": [
+            112.19029806,
+            30.40572194
+          ],
+          "svg": [
+            172.398,
+            197.496
+          ],
+          "coordinateSource": "https://zh.wikipedia.org/wiki/楚纪南故城",
+          "coordinateMethod": "archaeological site coordinate; different earlier Ying locations not assumed"
+        },
+        {
+          "name": "Luoyang (Wangcheng)",
+          "lnglat": [
+            112.4539,
+            34.6197
+          ],
+          "svg": [
+            173.071,
+            135.023
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Luoyang",
+          "coordinateMethod": "modern urban coordinate proxy; ancient urban footprint covers several sites"
+        },
+        {
+          "name": "Daliang (Kaifeng)",
+          "lnglat": [
+            114.345,
+            34.795
+          ],
+          "svg": [
+            191.902,
+            132.784
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Kaifeng",
+          "coordinateMethod": "urban coordinate proxy for buried ancient capital"
+        },
+        {
+          "name": "Xinzheng",
+          "lnglat": [
+            113.7402,
+            34.3964
+          ],
+          "svg": [
+            186.073,
+            138.83
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Xinzheng",
+          "coordinateMethod": "urban coordinate proxy for ancient Zheng/Han capital"
+        },
+        {
+          "name": "Ba (Chongqing)",
+          "lnglat": [
+            106.5504,
+            29.5637
+          ],
+          "svg": [
+            104.694,
+            211.379
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Chongqing",
+          "coordinateMethod": "urban coordinate proxy for source Ba/Jiangzhou point"
+        },
+        {
+          "name": "Changsha",
+          "lnglat": [
+            112.939,
+            28.228
+          ],
+          "svg": [
+            184.549,
+            228.128
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Changsha",
+          "coordinateMethod": "urban coordinate proxy"
+        }
+      ],
+      "minRegionPx": 2,
+      "exclude": []
+    },
+    "G15": {
+      "dataset": "G15-registration",
+      "projection": "auto",
+      "palette": {
+        "#ffffff": "_land",
+        "#c6ecff": "_sea"
+      },
+      "tolerance": 20,
+      "land": [
+        "_land"
+      ],
+      "sea": [
+        "_sea"
+      ],
+      "minRegionPx": 12,
+      "maxResidualKm": 25,
+      "controlPoints": [
+        {
+          "name": "Xianyang",
+          "lnglat": [
+            108.7088,
+            34.3299
+          ],
+          "svg": [
+            323,
+            430
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Xianyang",
+          "note": "City-centre coordinate is a modern proxy for the named ancient settlement; source-map placement uncertainty is retained in residuals."
+        },
+        {
+          "name": "Handan",
+          "lnglat": [
+            114.487,
+            36.601
+          ],
+          "svg": [
+            585.5,
+            317.5
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Handan",
+          "note": "City-centre coordinate is a modern proxy for the named ancient settlement; source-map placement uncertainty is retained in residuals."
+        },
+        {
+          "name": "Changping",
+          "lnglat": [
+            112.92388889,
+            35.79805556
+          ],
+          "svg": [
+            520,
+            349
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Battle_of_Changping",
+          "note": "City-centre coordinate is a modern proxy for the named ancient settlement; source-map placement uncertainty is retained in residuals."
+        },
+        {
+          "name": "Puyang",
+          "lnglat": [
+            115.0292,
+            35.7627
+          ],
+          "svg": [
+            615,
+            357
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Puyang",
+          "note": "City-centre coordinate is a modern proxy for the named ancient settlement; source-map placement uncertainty is retained in residuals."
+        },
+        {
+          "name": "Linzi",
+          "lnglat": [
+            118.3,
+            36.81666667
+          ],
+          "svg": [
+            722,
+            297
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Linzi%2C_Zibo",
+          "note": "City-centre coordinate is a modern proxy for the named ancient settlement; source-map placement uncertainty is retained in residuals."
+        },
+        {
+          "name": "Qufu",
+          "lnglat": [
+            116.9862,
+            35.5819
+          ],
+          "svg": [
+            690,
+            371
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Qufu",
+          "note": "City-centre coordinate is a modern proxy for the named ancient settlement; source-map placement uncertainty is retained in residuals."
+        },
+        {
+          "name": "Xinzheng",
+          "lnglat": [
+            113.7402,
+            34.3964
+          ],
+          "svg": [
+            543,
+            418
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Xinzheng",
+          "note": "City-centre coordinate is a modern proxy for the named ancient settlement; source-map placement uncertainty is retained in residuals."
+        },
+        {
+          "name": "Daliang",
+          "lnglat": [
+            114.345,
+            34.795
+          ],
+          "svg": [
+            599,
+            405
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Kaifeng",
+          "note": "City-centre coordinate is a modern proxy for the named ancient settlement; source-map placement uncertainty is retained in residuals."
+        },
+        {
+          "name": "Shouchun",
+          "lnglat": [
+            116.7982,
+            32.545
+          ],
+          "svg": [
+            674,
+            507
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Shou_County",
+          "note": "City-centre coordinate is a modern proxy for the named ancient settlement; source-map placement uncertainty is retained in residuals."
+        },
+        {
+          "name": "Gusu",
+          "lnglat": [
+            120.61944444,
+            31.3
+          ],
+          "svg": [
+            838,
+            545
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Suzhou",
+          "note": "City-centre coordinate is a modern proxy for the named ancient settlement; source-map placement uncertainty is retained in residuals."
+        },
+        {
+          "name": "Kuaiji",
+          "lnglat": [
+            120.5833,
+            30.0511
+          ],
+          "svg": [
+            875,
+            618
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Shaoxing",
+          "note": "City-centre coordinate is a modern proxy for the named ancient settlement; source-map placement uncertainty is retained in residuals."
+        },
+        {
+          "name": "Changsha",
+          "lnglat": [
+            112.939,
+            28.228
+          ],
+          "svg": [
+            520,
+            671
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Changsha",
+          "note": "City-centre coordinate is a modern proxy for the named ancient settlement; source-map placement uncertainty is retained in residuals."
+        },
+        {
+          "name": "Shangyong",
+          "lnglat": [
+            110.2287,
+            32.2249
+          ],
+          "svg": [
+            404,
+            538
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Zhushan_County",
+          "note": "City-centre coordinate is a modern proxy for the named ancient settlement; source-map placement uncertainty is retained in residuals."
+        },
+        {
+          "name": "Ba capital",
+          "lnglat": [
+            106.5504,
+            29.5637
+          ],
+          "svg": [
+            221,
+            645
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Chongqing",
+          "note": "City-centre coordinate is a modern proxy for the named ancient settlement; source-map placement uncertainty is retained in residuals."
+        },
+        {
+          "name": "Shu capital",
+          "lnglat": [
+            104.06333333,
+            30.66
+          ],
+          "svg": [
+            101,
+            597
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Chengdu",
+          "note": "City-centre coordinate is a modern proxy for the named ancient settlement; source-map placement uncertainty is retained in residuals."
+        },
+        {
+          "name": "Dai",
+          "lnglat": [
+            114.56666667,
+            39.83333333
+          ],
+          "svg": [
+            582,
+            196
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Yu_County%2C_Hebei",
+          "note": "City-centre coordinate is a modern proxy for the named ancient settlement; source-map placement uncertainty is retained in residuals."
+        },
+        {
+          "name": "Ji",
+          "lnglat": [
+            116.3975,
+            39.90666667
+          ],
+          "svg": [
+            670,
+            177
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Beijing",
+          "note": "City-centre coordinate is a modern proxy for the named ancient settlement; source-map placement uncertainty is retained in residuals."
+        }
+      ],
+      "registrationInput": "raw/G15.png",
+      "role": "Check-only registration; no source territory or route is inferred by registration itself.",
+      "note": ""
+    },
+    "G14": {
+      "dataset": "G14-registration",
+      "projection": "auto",
+      "palette": {
+        "#ffffff": "_land",
+        "#c6ecff": "_sea"
+      },
+      "tolerance": 20,
+      "land": [
+        "_land"
+      ],
+      "sea": [
+        "_sea"
+      ],
+      "minRegionPx": 12,
+      "maxResidualKm": 25,
+      "controlPoints": [
+        {
+          "name": "Handan",
+          "lnglat": [
+            114.487,
+            36.601
+          ],
+          "svg": [
+            1204,
+            201
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Handan",
+          "note": "City-centre coordinate is a modern proxy for the named ancient settlement; source-map placement uncertainty is retained in residuals."
+        },
+        {
+          "name": "Anyang",
+          "lnglat": [
+            114.392,
+            36.099
+          ],
+          "svg": [
+            1178,
+            361
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Anyang",
+          "note": "City-centre coordinate is a modern proxy for the named ancient settlement; source-map placement uncertainty is retained in residuals."
+        },
+        {
+          "name": "Wuan",
+          "lnglat": [
+            114.204,
+            36.697
+          ],
+          "svg": [
+            1157,
+            171
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Wu%27an",
+          "note": "City-centre coordinate is a modern proxy for the named ancient settlement; source-map placement uncertainty is retained in residuals."
+        },
+        {
+          "name": "She",
+          "lnglat": [
+            113.691,
+            36.585
+          ],
+          "svg": [
+            1059,
+            201
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/She_County%2C_Hebei",
+          "note": "City-centre coordinate is a modern proxy for the named ancient settlement; source-map placement uncertainty is retained in residuals."
+        },
+        {
+          "name": "Licheng",
+          "lnglat": [
+            113.38215,
+            36.50694
+          ],
+          "svg": [
+            984,
+            271
+          ],
+          "coordinateSource": "https://www.wikidata.org/wiki/Q1197001",
+          "note": "Wikidata P625 is the county-seat location. English Wikipedia provides a county-wide centroid at36.6667N, which is inappropriate for the source city dot. This refinement is independent of the fit and does not delete the high-residual point."
+        },
+        {
+          "name": "Changzhi",
+          "lnglat": [
+            113.11111111,
+            36.195
+          ],
+          "svg": [
+            921,
+            365
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Changzhi",
+          "note": "City-centre coordinate is a modern proxy for the named ancient settlement; source-map placement uncertainty is retained in residuals."
+        },
+        {
+          "name": "Changzi",
+          "lnglat": [
+            112.87694444,
+            36.12388889
+          ],
+          "svg": [
+            843,
+            376
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Zhangzi_County",
+          "note": "City-centre coordinate is a modern proxy for the named ancient settlement; source-map placement uncertainty is retained in residuals."
+        },
+        {
+          "name": "Changping",
+          "lnglat": [
+            112.924,
+            35.798
+          ],
+          "svg": [
+            879,
+            449
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Gaoping",
+          "note": "City-centre coordinate is a modern proxy for the named ancient settlement; source-map placement uncertainty is retained in residuals."
+        },
+        {
+          "name": "Yewang",
+          "lnglat": [
+            112.951,
+            35.088
+          ],
+          "svg": [
+            851,
+            656
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Qinyang",
+          "note": "City-centre coordinate is a modern proxy for the named ancient settlement; source-map placement uncertainty is retained in residuals."
+        },
+        {
+          "name": "Xinzheng",
+          "lnglat": [
+            113.7402,
+            34.3964
+          ],
+          "svg": [
+            1058,
+            849
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Xinzheng",
+          "note": "City-centre coordinate is a modern proxy for the named ancient settlement; source-map placement uncertainty is retained in residuals."
+        },
+        {
+          "name": "Daliang",
+          "lnglat": [
+            114.345,
+            34.795
+          ],
+          "svg": [
+            1195,
+            733
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Kaifeng",
+          "note": "City-centre coordinate is a modern proxy for the named ancient settlement; source-map placement uncertainty is retained in residuals."
+        },
+        {
+          "name": "Luoyang",
+          "lnglat": [
+            112.4539,
+            34.6197
+          ],
+          "svg": [
+            736,
+            754
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Luoyang",
+          "note": "City-centre coordinate is a modern proxy for the named ancient settlement; source-map placement uncertainty is retained in residuals."
+        },
+        {
+          "name": "Mianchi",
+          "lnglat": [
+            111.762,
+            34.767
+          ],
+          "svg": [
+            565,
+            733
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Mianchi_County",
+          "note": "City-centre coordinate is a modern proxy for the named ancient settlement; source-map placement uncertainty is retained in residuals."
+        },
+        {
+          "name": "Xinan",
+          "lnglat": [
+            112.13194444,
+            34.72805556
+          ],
+          "svg": [
+            659,
+            742
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Xin%27an_County",
+          "note": "City-centre coordinate is a modern proxy for the named ancient settlement; source-map placement uncertainty is retained in residuals."
+        },
+        {
+          "name": "Anyi",
+          "lnglat": [
+            111.007,
+            35.0267
+          ],
+          "svg": [
+            379,
+            650
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Yuncheng",
+          "note": "City-centre coordinate is a modern proxy for the named ancient settlement; source-map placement uncertainty is retained in residuals."
+        },
+        {
+          "name": "Linfen",
+          "lnglat": [
+            111.519,
+            36.088
+          ],
+          "svg": [
+            523,
+            368
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Linfen",
+          "note": "City-centre coordinate is a modern proxy for the named ancient settlement; source-map placement uncertainty is retained in residuals."
+        },
+        {
+          "name": "Quwo",
+          "lnglat": [
+            111.4758,
+            35.6419
+          ],
+          "svg": [
+            519,
+            497
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Quwo_County",
+          "note": "City-centre coordinate is a modern proxy for the named ancient settlement; source-map placement uncertainty is retained in residuals."
+        },
+        {
+          "name": "Xinjiang",
+          "lnglat": [
+            111.225,
+            35.61638889
+          ],
+          "svg": [
+            449,
+            498
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Xinjiang_County",
+          "note": "City-centre coordinate is a modern proxy for the named ancient settlement; source-map placement uncertainty is retained in residuals."
+        },
+        {
+          "name": "Qinyuan",
+          "lnglat": [
+            112.33861111,
+            36.50055556
+          ],
+          "svg": [
+            707,
+            224
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Qinyuan_County",
+          "note": "City-centre coordinate is a modern proxy for the named ancient settlement; source-map placement uncertainty is retained in residuals."
+        },
+        {
+          "name": "Qin",
+          "lnglat": [
+            112.69722222,
+            36.75638889
+          ],
+          "svg": [
+            807,
+            203
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Qin_County",
+          "note": "City-centre coordinate is a modern proxy for the named ancient settlement; source-map placement uncertainty is retained in residuals."
+        },
+        {
+          "name": "Puban",
+          "lnglat": [
+            110.3245,
+            34.83444
+          ],
+          "svg": [
+            200,
+            680
+          ],
+          "coordinateSource": "https://zh.wikipedia.org/wiki/蒲州镇",
+          "note": "Puzhou/Puban historical settlement uses the Puzhou town coordinate; modern Yongji city centre is farther east and is an unsuitable substitute."
+        }
+      ],
+      "registrationInput": "raw/extra-G14-input.png",
+      "role": "Check-only registration; no source territory or route is inferred by registration itself.",
+      "note": "Control points measured on the newly downloaded 1280px Commons rendering, not the earlier 330px thumbnail. Cities in parentheses on the source map give modern identifications of ancient settlement names."
+    },
+    "G12": {
+      "dataset": "G12",
+      "projection": "auto",
+      "palette": {
+        "#ffffff": "_land",
+        "#c6ecff": "_sea"
+      },
+      "tolerance": 2,
+      "land": [
+        "_land"
+      ],
+      "sea": [
+        "_sea"
+      ],
+      "exclude": [],
+      "minRegionPx": 2,
+      "maxResidualKm": 25,
+      "controlPoints": [
+        {
+          "name": "Ji (Beijing)",
+          "lnglat": [
+            116.382425,
+            39.894262
+          ],
+          "svg": [
+            854,
+            300
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Ji_(Beijing)",
+          "coordinateMethod": "ancient city coordinate"
+        },
+        {
+          "name": "Dai (Yuxian)",
+          "lnglat": [
+            114.567,
+            39.833
+          ],
+          "svg": [
+            748,
+            300
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Yu_County,_Hebei",
+          "coordinateMethod": "county-seat coordinate proxy for source Dai point"
+        },
+        {
+          "name": "Handan",
+          "lnglat": [
+            114.487,
+            36.601
+          ],
+          "svg": [
+            766,
+            503
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Handan",
+          "coordinateMethod": "modern urban coordinate proxy near ancient capital"
+        },
+        {
+          "name": "Linzi",
+          "lnglat": [
+            118.3554,
+            36.8829
+          ],
+          "svg": [
+            979,
+            493
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Ancient_Linzi",
+          "coordinateMethod": "ancient city site coordinate"
+        },
+        {
+          "name": "Wey (Puyang)",
+          "lnglat": [
+            115.0292,
+            35.7627
+          ],
+          "svg": [
+            797,
+            565
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Puyang",
+          "coordinateMethod": "urban coordinate proxy for source Diqiu/Wey point"
+        },
+        {
+          "name": "Anyi",
+          "lnglat": [
+            111.17433,
+            35.18425
+          ],
+          "svg": [
+            563,
+            639
+          ],
+          "coordinateSource": "https://zh.wikipedia.org/wiki/安邑城",
+          "coordinateMethod": "actual Warring States Wei capital site; not the different 安邑古城遗址"
+        },
+        {
+          "name": "Yong (Fengxiang)",
+          "lnglat": [
+            107.42056,
+            34.56
+          ],
+          "svg": [
+            368,
+            686
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Fengxiang_District",
+          "coordinateMethod": "modern town coordinate proxy for nearby ancient Yong"
+        },
+        {
+          "name": "Xianyang",
+          "lnglat": [
+            108.7088,
+            34.3299
+          ],
+          "svg": [
+            447,
+            694
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Xianyang",
+          "coordinateMethod": "modern urban coordinate proxy for source ancient capital"
+        },
+        {
+          "name": "Luoyang (Wangcheng)",
+          "lnglat": [
+            112.4539,
+            34.6197
+          ],
+          "svg": [
+            656,
+            667
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Luoyang",
+          "coordinateMethod": "modern urban coordinate proxy; ancient urban footprint covers several sites"
+        },
+        {
+          "name": "Daliang (Kaifeng)",
+          "lnglat": [
+            114.345,
+            34.795
+          ],
+          "svg": [
+            754,
+            656
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Kaifeng",
+          "coordinateMethod": "urban coordinate proxy for buried ancient capital"
+        },
+        {
+          "name": "Yangzhai (Yuzhou)",
+          "lnglat": [
+            113.489,
+            34.142
+          ],
+          "svg": [
+            708,
+            705
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Yuzhou,_Henan",
+          "coordinateMethod": "urban coordinate proxy for ancient Yangzhai"
+        },
+        {
+          "name": "Chen (Huaiyang)",
+          "lnglat": [
+            114.85,
+            33.73306
+          ],
+          "svg": [
+            798,
+            716
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Huaiyang_District",
+          "coordinateMethod": "town coordinate proxy for source Chen/Wanqiu"
+        },
+        {
+          "name": "Shouchun",
+          "lnglat": [
+            116.7982,
+            32.545
+          ],
+          "svg": [
+            902,
+            819
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Shouchun",
+          "coordinateMethod": "modern Shou county-seat proxy for nearby source Shouchun"
+        },
+        {
+          "name": "Wu (Suzhou)",
+          "lnglat": [
+            120.61944,
+            31.3
+          ],
+          "svg": [
+            1158,
+            868
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Suzhou",
+          "coordinateMethod": "urban coordinate proxy for ancient Wu capital"
+        },
+        {
+          "name": "Ying (Jinancheng)",
+          "lnglat": [
+            112.19029806,
+            30.40572194
+          ],
+          "svg": [
+            640,
+            968
+          ],
+          "coordinateSource": "https://zh.wikipedia.org/wiki/楚纪南故城",
+          "coordinateMethod": "archaeological site coordinate; different earlier Ying locations not assumed"
+        },
+        {
+          "name": "Shu (Chengdu)",
+          "lnglat": [
+            104.06333,
+            30.66
+          ],
+          "svg": [
+            143,
+            949
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Chengdu",
+          "coordinateMethod": "Tianfu Square city coordinate proxy"
+        },
+        {
+          "name": "Ba (Chongqing)",
+          "lnglat": [
+            106.5504,
+            29.5637
+          ],
+          "svg": [
+            286,
+            976
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Chongqing",
+          "coordinateMethod": "urban coordinate proxy for source Ba/Jiangzhou point"
+        },
+        {
+          "name": "Nanzheng (Hanzhong)",
+          "lnglat": [
+            107.0232,
+            33.0664
+          ],
+          "svg": [
+            345,
+            775
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Hanzhong",
+          "coordinateMethod": "urban coordinate proxy for source Nanzheng/Hanzhong"
+        }
+      ]
+    },
+    "G7-reference": {
+      "dataset": "G7",
+      "projection": "auto",
+      "palette": {
+        "#ffffff": "_outside"
+      },
+      "tolerance": 2,
+      "land": [],
+      "sea": [],
+      "maxResidualKm": 25,
+      "controlPoints": [
+        {
+          "name": "Ji (Beijing)",
+          "lnglat": [
+            116.382425,
+            39.894262
+          ],
+          "svg": [
+            461,
+            128.5
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Ji_(Beijing)",
+          "coordinateMethod": "ancient city coordinate"
+        },
+        {
+          "name": "Handan",
+          "lnglat": [
+            114.487,
+            36.601
+          ],
+          "svg": [
+            425.6,
+            235.6
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Handan",
+          "coordinateMethod": "modern urban coordinate proxy near ancient capital"
+        },
+        {
+          "name": "Linzi",
+          "lnglat": [
+            118.3554,
+            36.8829
+          ],
+          "svg": [
+            521,
+            219
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Ancient_Linzi",
+          "coordinateMethod": "ancient city site coordinate"
+        },
+        {
+          "name": "Linwu",
+          "lnglat": [
+            112.55608,
+            25.28167
+          ],
+          "svg": [
+            408.2,
+            600.8
+          ],
+          "coordinateSource": "https://zh.wikipedia.org/wiki/临武县",
+          "coordinateMethod": "modern town coordinate proxy for source ancient settlement"
+        },
+        {
+          "name": "Xianyang",
+          "lnglat": [
+            108.7088,
+            34.3299
+          ],
+          "svg": [
+            288.4,
+            317.4
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Xianyang",
+          "coordinateMethod": "modern urban coordinate proxy for source ancient capital"
+        },
+        {
+          "name": "Chengdu",
+          "lnglat": [
+            104.06333,
+            30.66
+          ],
+          "svg": [
+            167,
+            439
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Chengdu",
+          "coordinateMethod": "Tianfu Square city coordinate proxy"
+        },
+        {
+          "name": "Ying (Jinancheng)",
+          "lnglat": [
+            112.19029806,
+            30.40572194
+          ],
+          "svg": [
+            384.5,
+            441
+          ],
+          "coordinateSource": "https://zh.wikipedia.org/wiki/楚纪南故城",
+          "coordinateMethod": "archaeological site coordinate; different earlier Ying locations not assumed"
+        },
+        {
+          "name": "Luoyang (Wangcheng)",
+          "lnglat": [
+            112.4539,
+            34.6197
+          ],
+          "svg": [
+            386,
+            301.5
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Luoyang",
+          "coordinateMethod": "modern urban coordinate proxy; ancient urban footprint covers several sites"
+        },
+        {
+          "name": "Daliang (Kaifeng)",
+          "lnglat": [
+            114.345,
+            34.795
+          ],
+          "svg": [
+            428,
+            296.5
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Kaifeng",
+          "coordinateMethod": "urban coordinate proxy for buried ancient capital"
+        },
+        {
+          "name": "Xinzheng",
+          "lnglat": [
+            113.7402,
+            34.3964
+          ],
+          "svg": [
+            415,
+            310
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Xinzheng",
+          "coordinateMethod": "urban coordinate proxy for ancient Zheng/Han capital"
+        },
+        {
+          "name": "Ba (Chongqing)",
+          "lnglat": [
+            106.5504,
+            29.5637
+          ],
+          "svg": [
+            233.5,
+            472
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Chongqing",
+          "coordinateMethod": "urban coordinate proxy for source Ba/Jiangzhou point"
+        },
+        {
+          "name": "Changsha",
+          "lnglat": [
+            112.939,
+            28.228
+          ],
+          "svg": [
+            411.6,
+            509.4
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Changsha",
+          "coordinateMethod": "urban coordinate proxy"
+        }
+      ],
+      "minRegionPx": 2,
+      "exclude": [],
+      "registrationOnly": true
+    },
+    "G8-reference": {
+      "dataset": "G8",
+      "projection": "auto",
+      "palette": {
+        "#ffffff": "_outside"
+      },
+      "tolerance": 2,
+      "land": [],
+      "sea": [],
+      "maxResidualKm": 25,
+      "controlPoints": [
+        {
+          "name": "Ji (Beijing)",
+          "lnglat": [
+            116.382425,
+            39.894262
+          ],
+          "svg": [
+            206.698,
+            57.547
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Ji_(Beijing)",
+          "coordinateMethod": "ancient city coordinate"
+        },
+        {
+          "name": "Handan",
+          "lnglat": [
+            114.487,
+            36.601
+          ],
+          "svg": [
+            190.826,
+            105.51
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Handan",
+          "coordinateMethod": "modern urban coordinate proxy near ancient capital"
+        },
+        {
+          "name": "Linzi",
+          "lnglat": [
+            118.3554,
+            36.8829
+          ],
+          "svg": [
+            233.601,
+            98.076
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Ancient_Linzi",
+          "coordinateMethod": "ancient city site coordinate"
+        },
+        {
+          "name": "Linwu",
+          "lnglat": [
+            112.55608,
+            25.28167
+          ],
+          "svg": [
+            183.024,
+            269.061
+          ],
+          "coordinateSource": "https://zh.wikipedia.org/wiki/临武县",
+          "coordinateMethod": "modern town coordinate proxy for source ancient settlement"
+        },
+        {
+          "name": "Xianyang",
+          "lnglat": [
+            108.7088,
+            34.3299
+          ],
+          "svg": [
+            129.31,
+            142.144
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Xianyang",
+          "coordinateMethod": "modern urban coordinate proxy for source ancient capital"
+        },
+        {
+          "name": "Chengdu",
+          "lnglat": [
+            104.06333,
+            30.66
+          ],
+          "svg": [
+            74.878,
+            196.601
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Chengdu",
+          "coordinateMethod": "Tianfu Square city coordinate proxy"
+        },
+        {
+          "name": "Ying (Jinancheng)",
+          "lnglat": [
+            112.19029806,
+            30.40572194
+          ],
+          "svg": [
+            172.398,
+            197.496
+          ],
+          "coordinateSource": "https://zh.wikipedia.org/wiki/楚纪南故城",
+          "coordinateMethod": "archaeological site coordinate; different earlier Ying locations not assumed"
+        },
+        {
+          "name": "Luoyang (Wangcheng)",
+          "lnglat": [
+            112.4539,
+            34.6197
+          ],
+          "svg": [
+            173.071,
+            135.023
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Luoyang",
+          "coordinateMethod": "modern urban coordinate proxy; ancient urban footprint covers several sites"
+        },
+        {
+          "name": "Daliang (Kaifeng)",
+          "lnglat": [
+            114.345,
+            34.795
+          ],
+          "svg": [
+            191.902,
+            132.784
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Kaifeng",
+          "coordinateMethod": "urban coordinate proxy for buried ancient capital"
+        },
+        {
+          "name": "Xinzheng",
+          "lnglat": [
+            113.7402,
+            34.3964
+          ],
+          "svg": [
+            186.073,
+            138.83
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Xinzheng",
+          "coordinateMethod": "urban coordinate proxy for ancient Zheng/Han capital"
+        },
+        {
+          "name": "Ba (Chongqing)",
+          "lnglat": [
+            106.5504,
+            29.5637
+          ],
+          "svg": [
+            104.694,
+            211.379
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Chongqing",
+          "coordinateMethod": "urban coordinate proxy for source Ba/Jiangzhou point"
+        },
+        {
+          "name": "Changsha",
+          "lnglat": [
+            112.939,
+            28.228
+          ],
+          "svg": [
+            184.549,
+            228.128
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Changsha",
+          "coordinateMethod": "urban coordinate proxy"
+        }
+      ],
+      "minRegionPx": 2,
+      "exclude": [],
+      "registrationOnly": true
+    },
+    "G10-reference": {
+      "dataset": "G10",
+      "projection": "auto",
+      "palette": {
+        "#ffffff": "_outside"
+      },
+      "tolerance": 2,
+      "land": [],
+      "sea": [],
+      "maxResidualKm": 40,
+      "controlPoints": [
+        {
+          "name": "Ji (Beijing)",
+          "lnglat": [
+            116.382425,
+            39.894262
+          ],
+          "svg": [
+            497,
+            135
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Ji_(Beijing)",
+          "coordinateMethod": "ancient city coordinate"
+        },
+        {
+          "name": "Linzi (Yingqiu)",
+          "lnglat": [
+            118.3554,
+            36.8829
+          ],
+          "svg": [
+            580.3,
+            253
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Ancient_Linzi",
+          "coordinateMethod": "ancient city site coordinate"
+        },
+        {
+          "name": "Qufu",
+          "lnglat": [
+            116.9862,
+            35.5819
+          ],
+          "svg": [
+            552,
+            296
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Qufu",
+          "coordinateMethod": "urban coordinate proxy for ancient Lu capital"
+        },
+        {
+          "name": "Wey (Puyang)",
+          "lnglat": [
+            115.0292,
+            35.7627
+          ],
+          "svg": [
+            502,
+            301
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Puyang",
+          "coordinateMethod": "urban coordinate proxy for source Diqiu/Wey point"
+        },
+        {
+          "name": "Yong (Fengxiang)",
+          "lnglat": [
+            107.42056,
+            34.56
+          ],
+          "svg": [
+            256,
+            362
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Fengxiang_District",
+          "coordinateMethod": "modern town coordinate proxy for nearby ancient Yong"
+        },
+        {
+          "name": "Luoyang",
+          "lnglat": [
+            112.4539,
+            34.6197
+          ],
+          "svg": [
+            412,
+            347
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Luoyang",
+          "coordinateMethod": "modern urban coordinate proxy"
+        },
+        {
+          "name": "Xinzheng",
+          "lnglat": [
+            113.7402,
+            34.3964
+          ],
+          "svg": [
+            455.5,
+            354.4
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Xinzheng",
+          "coordinateMethod": "urban coordinate proxy for ancient Zheng/Han capital"
+        },
+        {
+          "name": "Song (Shangqiu)",
+          "lnglat": [
+            115.656,
+            34.415
+          ],
+          "svg": [
+            523.3,
+            352.7
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Shangqiu",
+          "coordinateMethod": "urban coordinate proxy for ancient Song capital"
+        },
+        {
+          "name": "Chen (Huaiyang)",
+          "lnglat": [
+            114.85,
+            33.73306
+          ],
+          "svg": [
+            492,
+            376
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Huaiyang_District",
+          "coordinateMethod": "town coordinate proxy for source Chen/Wanqiu"
+        },
+        {
+          "name": "Ying (Jinancheng)",
+          "lnglat": [
+            112.19029806,
+            30.40572194
+          ],
+          "svg": [
+            427,
+            521
+          ],
+          "coordinateSource": "https://zh.wikipedia.org/wiki/楚纪南故城",
+          "coordinateMethod": "archaeological site coordinate; different earlier Ying locations not assumed"
+        },
+        {
+          "name": "Wu (Suzhou)",
+          "lnglat": [
+            120.61944,
+            31.3
+          ],
+          "svg": [
+            689,
+            444
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Suzhou",
+          "coordinateMethod": "urban coordinate proxy for ancient Wu capital"
+        },
+        {
+          "name": "Kuaiji (Shaoxing)",
+          "lnglat": [
+            120.58333333,
+            30
+          ],
+          "svg": [
+            702,
+            496
+          ],
+          "coordinateSource": "https://www.wikidata.org/wiki/Q42666",
+          "coordinateMethod": "Wikidata P625 urban coordinate proxy"
+        },
+        {
+          "name": "Ba (Chongqing)",
+          "lnglat": [
+            106.5504,
+            29.5637
+          ],
+          "svg": [
+            228,
+            556
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Chongqing",
+          "coordinateMethod": "urban coordinate proxy for source Ba/Jiangzhou point"
+        },
+        {
+          "name": "Shu (Chengdu)",
+          "lnglat": [
+            104.06333,
+            30.66
+          ],
+          "svg": [
+            135,
+            519
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Chengdu",
+          "coordinateMethod": "Tianfu Square city coordinate proxy"
+        }
+      ],
+      "minRegionPx": 2,
+      "exclude": [],
+      "registrationOnly": true
+    },
+    "G11-reference": {
+      "dataset": "G11",
+      "projection": "auto",
+      "palette": {
+        "#ffffff": "_outside"
+      },
+      "tolerance": 2,
+      "land": [],
+      "sea": [],
+      "exclude": [],
+      "minRegionPx": 2,
+      "maxResidualKm": 25,
+      "controlPoints": [
+        {
+          "name": "Ji (Beijing)",
+          "lnglat": [
+            116.382425,
+            39.894262
+          ],
+          "svg": [
+            854,
+            300
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Ji_(Beijing)",
+          "coordinateMethod": "ancient city coordinate"
+        },
+        {
+          "name": "Dai (Yuxian)",
+          "lnglat": [
+            114.567,
+            39.833
+          ],
+          "svg": [
+            748,
+            300
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Yu_County,_Hebei",
+          "coordinateMethod": "county-seat coordinate proxy for source Dai point"
+        },
+        {
+          "name": "Handan",
+          "lnglat": [
+            114.487,
+            36.601
+          ],
+          "svg": [
+            766,
+            503
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Handan",
+          "coordinateMethod": "modern urban coordinate proxy near ancient capital"
+        },
+        {
+          "name": "Linzi",
+          "lnglat": [
+            118.3554,
+            36.8829
+          ],
+          "svg": [
+            979,
+            493
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Ancient_Linzi",
+          "coordinateMethod": "ancient city site coordinate"
+        },
+        {
+          "name": "Wey (Puyang)",
+          "lnglat": [
+            115.0292,
+            35.7627
+          ],
+          "svg": [
+            797,
+            565
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Puyang",
+          "coordinateMethod": "urban coordinate proxy for source Diqiu/Wey point"
+        },
+        {
+          "name": "Anyi",
+          "lnglat": [
+            111.17433,
+            35.18425
+          ],
+          "svg": [
+            563,
+            639
+          ],
+          "coordinateSource": "https://zh.wikipedia.org/wiki/安邑城",
+          "coordinateMethod": "actual Warring States Wei capital site; not the different 安邑古城遗址"
+        },
+        {
+          "name": "Yong (Fengxiang)",
+          "lnglat": [
+            107.42056,
+            34.56
+          ],
+          "svg": [
+            368,
+            686
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Fengxiang_District",
+          "coordinateMethod": "modern town coordinate proxy for nearby ancient Yong"
+        },
+        {
+          "name": "Xianyang",
+          "lnglat": [
+            108.7088,
+            34.3299
+          ],
+          "svg": [
+            447,
+            694
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Xianyang",
+          "coordinateMethod": "modern urban coordinate proxy for source ancient capital"
+        },
+        {
+          "name": "Luoyang (Wangcheng)",
+          "lnglat": [
+            112.4539,
+            34.6197
+          ],
+          "svg": [
+            656,
+            667
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Luoyang",
+          "coordinateMethod": "modern urban coordinate proxy; ancient urban footprint covers several sites"
+        },
+        {
+          "name": "Daliang (Kaifeng)",
+          "lnglat": [
+            114.345,
+            34.795
+          ],
+          "svg": [
+            754,
+            656
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Kaifeng",
+          "coordinateMethod": "urban coordinate proxy for buried ancient capital"
+        },
+        {
+          "name": "Yangzhai (Yuzhou)",
+          "lnglat": [
+            113.489,
+            34.142
+          ],
+          "svg": [
+            708,
+            705
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Yuzhou,_Henan",
+          "coordinateMethod": "urban coordinate proxy for ancient Yangzhai"
+        },
+        {
+          "name": "Chen (Huaiyang)",
+          "lnglat": [
+            114.85,
+            33.73306
+          ],
+          "svg": [
+            798,
+            716
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Huaiyang_District",
+          "coordinateMethod": "town coordinate proxy for source Chen/Wanqiu"
+        },
+        {
+          "name": "Shouchun",
+          "lnglat": [
+            116.7982,
+            32.545
+          ],
+          "svg": [
+            902,
+            819
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Shouchun",
+          "coordinateMethod": "modern Shou county-seat proxy for nearby source Shouchun"
+        },
+        {
+          "name": "Wu (Suzhou)",
+          "lnglat": [
+            120.61944,
+            31.3
+          ],
+          "svg": [
+            1158,
+            868
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Suzhou",
+          "coordinateMethod": "urban coordinate proxy for ancient Wu capital"
+        },
+        {
+          "name": "Ying (Jinancheng)",
+          "lnglat": [
+            112.19029806,
+            30.40572194
+          ],
+          "svg": [
+            640,
+            968
+          ],
+          "coordinateSource": "https://zh.wikipedia.org/wiki/楚纪南故城",
+          "coordinateMethod": "archaeological site coordinate; different earlier Ying locations not assumed"
+        },
+        {
+          "name": "Shu (Chengdu)",
+          "lnglat": [
+            104.06333,
+            30.66
+          ],
+          "svg": [
+            143,
+            949
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Chengdu",
+          "coordinateMethod": "Tianfu Square city coordinate proxy"
+        },
+        {
+          "name": "Ba (Chongqing)",
+          "lnglat": [
+            106.5504,
+            29.5637
+          ],
+          "svg": [
+            286,
+            976
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Chongqing",
+          "coordinateMethod": "urban coordinate proxy for source Ba/Jiangzhou point"
+        },
+        {
+          "name": "Nanzheng (Hanzhong)",
+          "lnglat": [
+            107.0232,
+            33.0664
+          ],
+          "svg": [
+            345,
+            775
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Hanzhong",
+          "coordinateMethod": "urban coordinate proxy for source Nanzheng/Hanzhong"
+        }
+      ],
+      "registrationOnly": true
+    }
+  },
+  "keyframes": [
+    {
+      "id": "K1",
+      "t": "-0770",
+      "steps": [
+        {
+          "holder": "qin",
+          "from": {
+            "raster": "G10",
+            "class": "qin"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 770 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "QIN",
+            "zh": "秦"
+          }
+        },
+        {
+          "holder": "jin",
+          "from": {
+            "raster": "G10",
+            "class": "jin"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 770 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "JIN",
+            "zh": "晋"
+          }
+        },
+        {
+          "holder": "yan",
+          "from": {
+            "raster": "G10",
+            "class": "yan"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 770 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "YAN",
+            "zh": "燕"
+          }
+        },
+        {
+          "holder": "qi",
+          "from": {
+            "raster": "G10",
+            "class": "qi"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 770 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "QI",
+            "zh": "齐"
+          }
+        },
+        {
+          "holder": "wey",
+          "from": {
+            "raster": "G10",
+            "class": "wey"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 770 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "WEY",
+            "zh": "卫"
+          }
+        },
+        {
+          "holder": "lu",
+          "from": {
+            "raster": "G10",
+            "class": "lu"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 770 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "LU",
+            "zh": "鲁"
+          }
+        },
+        {
+          "holder": "ju",
+          "from": {
+            "raster": "G10",
+            "class": "ju"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 770 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "JU",
+            "zh": "莒"
+          }
+        },
+        {
+          "holder": "song",
+          "from": {
+            "raster": "G10",
+            "class": "song"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 770 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "SONG",
+            "zh": "宋"
+          }
+        },
+        {
+          "holder": "zhou",
+          "from": {
+            "raster": "G10",
+            "class": "zhou"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 770 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "ZHOU",
+            "zh": "周"
+          }
+        },
+        {
+          "holder": "zheng",
+          "from": {
+            "raster": "G10",
+            "class": "zheng"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 770 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "ZHENG (later Xinzheng seat)",
+            "zh": "郑"
+          }
+        },
+        {
+          "holder": "chu",
+          "from": {
+            "raster": "G10",
+            "class": "chu"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 770 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "CHU",
+            "zh": "楚"
+          }
+        },
+        {
+          "holder": "wu",
+          "from": {
+            "raster": "G10",
+            "class": "wu"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 770 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "WU",
+            "zh": "吴"
+          }
+        },
+        {
+          "holder": "yue",
+          "from": {
+            "raster": "G10",
+            "class": "yue"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 770 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "YUE",
+            "zh": "越"
+          }
+        },
+        {
+          "holder": "ba",
+          "from": {
+            "raster": "G10",
+            "class": "ba"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 770 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "BA",
+            "zh": "巴"
+          }
+        }
+      ],
+      "method": "G10 undated period schematic; inference, not year-exact borders",
+      "checks": [
+        {
+          "name": "G10 undated period schematic; inference, not year-exact borders",
+          "center": [
+            113,
+            33
+          ],
+          "zoom": 3.9,
+          "source": "G10"
+        }
+      ]
+    },
+    {
+      "id": "K2",
+      "t": "-0650",
+      "steps": [
+        {
+          "holder": "qin",
+          "from": {
+            "raster": "G10",
+            "class": "qin"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 650 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "QIN",
+            "zh": "秦"
+          }
+        },
+        {
+          "holder": "jin",
+          "from": {
+            "raster": "G10",
+            "class": "jin"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 650 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "JIN",
+            "zh": "晋"
+          }
+        },
+        {
+          "holder": "yan",
+          "from": {
+            "raster": "G10",
+            "class": "yan"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 650 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "YAN",
+            "zh": "燕"
+          }
+        },
+        {
+          "holder": "qi",
+          "from": {
+            "raster": "G10",
+            "class": "qi"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 650 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "QI",
+            "zh": "齐"
+          }
+        },
+        {
+          "holder": "wey",
+          "from": {
+            "raster": "G10",
+            "class": "wey"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 650 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "WEY (Chuqiu)",
+            "zh": "卫"
+          }
+        },
+        {
+          "holder": "lu",
+          "from": {
+            "raster": "G10",
+            "class": "lu"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 650 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "LU",
+            "zh": "鲁"
+          }
+        },
+        {
+          "holder": "ju",
+          "from": {
+            "raster": "G10",
+            "class": "ju"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 650 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "JU",
+            "zh": "莒"
+          }
+        },
+        {
+          "holder": "song",
+          "from": {
+            "raster": "G10",
+            "class": "song"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 650 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "SONG",
+            "zh": "宋"
+          }
+        },
+        {
+          "holder": "zhou",
+          "from": {
+            "raster": "G10",
+            "class": "zhou"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 650 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "ZHOU",
+            "zh": "周"
+          }
+        },
+        {
+          "holder": "zheng",
+          "from": {
+            "raster": "G10",
+            "class": "zheng"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 650 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "ZHENG",
+            "zh": "郑"
+          }
+        },
+        {
+          "holder": "chu",
+          "from": {
+            "raster": "G10",
+            "class": "chu"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 650 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "CHU",
+            "zh": "楚"
+          }
+        },
+        {
+          "holder": "wu",
+          "from": {
+            "raster": "G10",
+            "class": "wu"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 650 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "WU",
+            "zh": "吴"
+          }
+        },
+        {
+          "holder": "yue",
+          "from": {
+            "raster": "G10",
+            "class": "yue"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 650 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "YUE",
+            "zh": "越"
+          }
+        },
+        {
+          "holder": "ba",
+          "from": {
+            "raster": "G10",
+            "class": "ba"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 650 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "BA",
+            "zh": "巴"
+          }
+        }
+      ],
+      "method": "Same G10 period geometry; minor annexation shapes unavailable",
+      "checks": [
+        {
+          "name": "Same G10 period geometry; minor annexation shapes unavailable",
+          "center": [
+            113,
+            33
+          ],
+          "zoom": 3.9,
+          "source": "G10"
+        }
+      ]
+    },
+    {
+      "id": "K3",
+      "t": "-0600",
+      "steps": [
+        {
+          "holder": "qin",
+          "from": {
+            "raster": "G10",
+            "class": "qin"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 600 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "QIN",
+            "zh": "秦"
+          }
+        },
+        {
+          "holder": "jin",
+          "from": {
+            "raster": "G10",
+            "class": "jin"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 600 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "JIN",
+            "zh": "晋"
+          }
+        },
+        {
+          "holder": "yan",
+          "from": {
+            "raster": "G10",
+            "class": "yan"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 600 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "YAN",
+            "zh": "燕"
+          }
+        },
+        {
+          "holder": "qi",
+          "from": {
+            "raster": "G10",
+            "class": "qi"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 600 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "QI",
+            "zh": "齐"
+          }
+        },
+        {
+          "holder": "wey",
+          "from": {
+            "raster": "G10",
+            "class": "wey"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 600 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "WEY (Chuqiu)",
+            "zh": "卫"
+          }
+        },
+        {
+          "holder": "lu",
+          "from": {
+            "raster": "G10",
+            "class": "lu"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 600 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "LU",
+            "zh": "鲁"
+          }
+        },
+        {
+          "holder": "ju",
+          "from": {
+            "raster": "G10",
+            "class": "ju"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 600 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "JU",
+            "zh": "莒"
+          }
+        },
+        {
+          "holder": "song",
+          "from": {
+            "raster": "G10",
+            "class": "song"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 600 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "SONG",
+            "zh": "宋"
+          }
+        },
+        {
+          "holder": "zhou",
+          "from": {
+            "raster": "G10",
+            "class": "zhou"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 600 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "ZHOU",
+            "zh": "周"
+          }
+        },
+        {
+          "holder": "zheng",
+          "from": {
+            "raster": "G10",
+            "class": "zheng"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 600 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "ZHENG",
+            "zh": "郑"
+          }
+        },
+        {
+          "holder": "chu",
+          "from": {
+            "raster": "G10",
+            "class": "chu"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 600 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "CHU",
+            "zh": "楚"
+          }
+        },
+        {
+          "holder": "wu",
+          "from": {
+            "raster": "G10",
+            "class": "wu"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 600 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "WU",
+            "zh": "吴"
+          }
+        },
+        {
+          "holder": "yue",
+          "from": {
+            "raster": "G10",
+            "class": "yue"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 600 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "YUE",
+            "zh": "越"
+          }
+        },
+        {
+          "holder": "ba",
+          "from": {
+            "raster": "G10",
+            "class": "ba"
+          },
+          "src": [
+            "G10",
+            "G9"
+          ],
+          "note": "Undated published period schematic projected to 600 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
+          "label": {
+            "en": "BA",
+            "zh": "巴"
+          }
+        }
+      ],
+      "method": "Same G10 period geometry; early expansions not reconstructed",
+      "checks": [
+        {
+          "name": "Same G10 period geometry; early expansions not reconstructed",
+          "center": [
+            113,
+            33
+          ],
+          "zoom": 3.9,
+          "source": "G10"
+        }
+      ]
+    },
+    {
+      "id": "K4",
+      "t": "-0500",
+      "steps": [
+        {
+          "holder": "qin",
+          "from": {
+            "svg": "G3-network",
+            "class": "qin"
+          },
+          "src": [
+            "G3"
+          ],
+          "note": "Exact published fifth-century vector border paths; 1 km snapping, gaps closed within 40 km; modern NE shore used for coastal closure.",
+          "label": {
+            "en": "QIN",
+            "zh": "秦"
+          }
+        },
+        {
+          "holder": "jin",
+          "from": {
+            "svg": "G3-network",
+            "class": "jin"
+          },
+          "src": [
+            "G3"
+          ],
+          "note": "Exact published fifth-century vector border paths; 1 km snapping, gaps closed within 40 km; modern NE shore used for coastal closure.",
+          "label": {
+            "en": "JIN",
+            "zh": "晋"
+          }
+        },
+        {
+          "holder": "yan",
+          "from": {
+            "svg": "G3-network",
+            "class": "yan"
+          },
+          "src": [
+            "G3"
+          ],
+          "note": "Exact published fifth-century vector border paths; 1 km snapping, gaps closed within 40 km; modern NE shore used for coastal closure.",
+          "label": {
+            "en": "YAN",
+            "zh": "燕"
+          }
+        },
+        {
+          "holder": "qi",
+          "from": {
+            "svg": "G3-network",
+            "class": "qi"
+          },
+          "src": [
+            "G3"
+          ],
+          "note": "Exact published fifth-century vector border paths; 1 km snapping, gaps closed within 40 km; modern NE shore used for coastal closure.",
+          "label": {
+            "en": "QI",
+            "zh": "齐"
+          }
+        },
+        {
+          "holder": "lu",
+          "from": {
+            "svg": "G3-network",
+            "class": "lu"
+          },
+          "src": [
+            "G3"
+          ],
+          "note": "Exact published fifth-century vector border paths; 1 km snapping, gaps closed within 40 km; modern NE shore used for coastal closure.",
+          "label": {
+            "en": "LU",
+            "zh": "鲁"
+          }
+        },
+        {
+          "holder": "zhou",
+          "from": {
+            "svg": "G3-network",
+            "class": "zhou"
+          },
+          "src": [
+            "G3"
+          ],
+          "note": "Exact published fifth-century vector border paths; 1 km snapping, gaps closed within 40 km; modern NE shore used for coastal closure.",
+          "label": {
+            "en": "ZHOU",
+            "zh": "周"
+          }
+        },
+        {
+          "holder": "zheng",
+          "from": {
+            "svg": "G3-network",
+            "class": "zheng"
+          },
+          "src": [
+            "G3"
+          ],
+          "note": "Exact published fifth-century vector border paths; 1 km snapping, gaps closed within 40 km; modern NE shore used for coastal closure.",
+          "label": {
+            "en": "ZHENG",
+            "zh": "郑"
+          }
+        },
+        {
+          "holder": "wey",
+          "from": {
+            "svg": "G3-network",
+            "class": "wey"
+          },
+          "src": [
+            "G3"
+          ],
+          "note": "Exact published fifth-century vector border paths; 1 km snapping, gaps closed within 40 km; modern NE shore used for coastal closure.",
+          "label": {
+            "en": "WEY",
+            "zh": "卫"
+          }
+        },
+        {
+          "holder": "cao",
+          "from": {
+            "svg": "G3-network",
+            "class": "cao"
+          },
+          "src": [
+            "G3"
+          ],
+          "note": "Exact published fifth-century vector border paths; 1 km snapping, gaps closed within 40 km; modern NE shore used for coastal closure.",
+          "label": {
+            "en": "CAO",
+            "zh": "曹"
+          }
+        },
+        {
+          "holder": "song",
+          "from": {
+            "svg": "G3-network",
+            "class": "song"
+          },
+          "src": [
+            "G3"
+          ],
+          "note": "Exact published fifth-century vector border paths; 1 km snapping, gaps closed within 40 km; modern NE shore used for coastal closure.",
+          "label": {
+            "en": "SONG",
+            "zh": "宋"
+          }
+        },
+        {
+          "holder": "chen",
+          "from": {
+            "svg": "G3-network",
+            "class": "chen"
+          },
+          "src": [
+            "G3"
+          ],
+          "note": "Exact published fifth-century vector border paths; 1 km snapping, gaps closed within 40 km; modern NE shore used for coastal closure.",
+          "label": {
+            "en": "CHEN",
+            "zh": "陈"
+          }
+        },
+        {
+          "holder": "cai",
+          "from": {
+            "svg": "G3-network",
+            "class": "cai"
+          },
+          "src": [
+            "G3"
+          ],
+          "note": "Exact published fifth-century vector border paths; 1 km snapping, gaps closed within 40 km; modern NE shore used for coastal closure.",
+          "label": {
+            "en": "CAI",
+            "zh": "蔡"
+          }
+        },
+        {
+          "holder": "chu",
+          "from": {
+            "svg": "G3-network",
+            "class": "chu"
+          },
+          "src": [
+            "G3"
+          ],
+          "note": "Exact published fifth-century vector border paths; 1 km snapping, gaps closed within 40 km; modern NE shore used for coastal closure.",
+          "label": {
+            "en": "CHU",
+            "zh": "楚"
+          }
+        },
+        {
+          "holder": "wu",
+          "from": {
+            "svg": "G3-network",
+            "class": "wu"
+          },
+          "src": [
+            "G3"
+          ],
+          "note": "Exact published fifth-century vector border paths; 1 km snapping, gaps closed within 40 km; modern NE shore used for coastal closure.",
+          "label": {
+            "en": "WU",
+            "zh": "吴"
+          }
+        },
+        {
+          "holder": "ba",
+          "from": {
+            "raster": "G10",
+            "class": "ba"
+          },
+          "src": [
+            "G10"
+          ],
+          "note": "Bounded source G10 component supplements fifth-century map; date is approximate.",
+          "label": {
+            "en": "BA",
+            "zh": "巴"
+          }
+        },
+        {
+          "holder": "ju",
+          "from": {
+            "raster": "G10",
+            "class": "ju"
+          },
+          "src": [
+            "G10"
+          ],
+          "note": "Bounded source G10 component supplements fifth-century map; date is approximate.",
+          "label": {
+            "en": "JU",
+            "zh": "莒"
+          }
+        },
+        {
+          "holder": "yue",
+          "from": {
+            "raster": "G10",
+            "class": "yue"
+          },
+          "src": [
+            "G10"
+          ],
+          "note": "Bounded source G10 component supplements fifth-century map; date is approximate.",
+          "label": {
+            "en": "YUE",
+            "zh": "越"
+          }
+        }
+      ],
+      "method": "G3 vector border network + bounded G10 minor-state components",
+      "checks": [
+        {
+          "name": "G3 vector border network + bounded G10 minor-state components",
+          "center": [
+            113,
+            33
+          ],
+          "zoom": 3.9,
+          "source": "G3"
+        }
+      ]
+    },
+    {
+      "id": "K5",
+      "t": "-0473",
+      "steps": [
+        {
+          "holder": "qin",
+          "from": {
+            "svg": "G3-network",
+            "class": "qin"
+          },
+          "src": [
+            "G3",
+            "S1",
+            "S2"
+          ],
+          "note": "Whole-source-state reassignment: Wu→Yue 473 BCE; Chen→Chu 479 BCE; Cao→Song 487 BCE. No boundary redrawn.",
+          "label": {
+            "en": "QIN",
+            "zh": "秦"
+          }
+        },
+        {
+          "holder": "jin",
+          "from": {
+            "svg": "G3-network",
+            "class": "jin"
+          },
+          "src": [
+            "G3",
+            "S1",
+            "S2"
+          ],
+          "note": "Whole-source-state reassignment: Wu→Yue 473 BCE; Chen→Chu 479 BCE; Cao→Song 487 BCE. No boundary redrawn.",
+          "label": {
+            "en": "JIN",
+            "zh": "晋"
+          }
+        },
+        {
+          "holder": "yan",
+          "from": {
+            "svg": "G3-network",
+            "class": "yan"
+          },
+          "src": [
+            "G3",
+            "S1",
+            "S2"
+          ],
+          "note": "Whole-source-state reassignment: Wu→Yue 473 BCE; Chen→Chu 479 BCE; Cao→Song 487 BCE. No boundary redrawn.",
+          "label": {
+            "en": "YAN",
+            "zh": "燕"
+          }
+        },
+        {
+          "holder": "qi",
+          "from": {
+            "svg": "G3-network",
+            "class": "qi"
+          },
+          "src": [
+            "G3",
+            "S1",
+            "S2"
+          ],
+          "note": "Whole-source-state reassignment: Wu→Yue 473 BCE; Chen→Chu 479 BCE; Cao→Song 487 BCE. No boundary redrawn.",
+          "label": {
+            "en": "QI",
+            "zh": "齐"
+          }
+        },
+        {
+          "holder": "lu",
+          "from": {
+            "svg": "G3-network",
+            "class": "lu"
+          },
+          "src": [
+            "G3",
+            "S1",
+            "S2"
+          ],
+          "note": "Whole-source-state reassignment: Wu→Yue 473 BCE; Chen→Chu 479 BCE; Cao→Song 487 BCE. No boundary redrawn.",
+          "label": {
+            "en": "LU",
+            "zh": "鲁"
+          }
+        },
+        {
+          "holder": "zhou",
+          "from": {
+            "svg": "G3-network",
+            "class": "zhou"
+          },
+          "src": [
+            "G3",
+            "S1",
+            "S2"
+          ],
+          "note": "Whole-source-state reassignment: Wu→Yue 473 BCE; Chen→Chu 479 BCE; Cao→Song 487 BCE. No boundary redrawn.",
+          "label": {
+            "en": "ZHOU",
+            "zh": "周"
+          }
+        },
+        {
+          "holder": "zheng",
+          "from": {
+            "svg": "G3-network",
+            "class": "zheng"
+          },
+          "src": [
+            "G3",
+            "S1",
+            "S2"
+          ],
+          "note": "Whole-source-state reassignment: Wu→Yue 473 BCE; Chen→Chu 479 BCE; Cao→Song 487 BCE. No boundary redrawn.",
+          "label": {
+            "en": "ZHENG",
+            "zh": "郑"
+          }
+        },
+        {
+          "holder": "wey",
+          "from": {
+            "svg": "G3-network",
+            "class": "wey"
+          },
+          "src": [
+            "G3",
+            "S1",
+            "S2"
+          ],
+          "note": "Whole-source-state reassignment: Wu→Yue 473 BCE; Chen→Chu 479 BCE; Cao→Song 487 BCE. No boundary redrawn.",
+          "label": {
+            "en": "WEY",
+            "zh": "卫"
+          }
+        },
+        {
+          "holder": "song",
+          "from": {
+            "svg": "G3-network",
+            "class": "cao"
+          },
+          "src": [
+            "G3",
+            "S1",
+            "S2"
+          ],
+          "note": "Whole-source-state reassignment: Wu→Yue 473 BCE; Chen→Chu 479 BCE; Cao→Song 487 BCE. No boundary redrawn.",
+          "label": {
+            "en": "SONG",
+            "zh": "宋"
+          }
+        },
+        {
+          "holder": "song",
+          "from": {
+            "svg": "G3-network",
+            "class": "song"
+          },
+          "src": [
+            "G3",
+            "S1",
+            "S2"
+          ],
+          "note": "Whole-source-state reassignment: Wu→Yue 473 BCE; Chen→Chu 479 BCE; Cao→Song 487 BCE. No boundary redrawn.",
+          "label": {
+            "en": "SONG",
+            "zh": "宋"
+          }
+        },
+        {
+          "holder": "chu",
+          "from": {
+            "svg": "G3-network",
+            "class": "chen"
+          },
+          "src": [
+            "G3",
+            "S1",
+            "S2"
+          ],
+          "note": "Whole-source-state reassignment: Wu→Yue 473 BCE; Chen→Chu 479 BCE; Cao→Song 487 BCE. No boundary redrawn.",
+          "label": {
+            "en": "CHU",
+            "zh": "楚"
+          }
+        },
+        {
+          "holder": "cai",
+          "from": {
+            "svg": "G3-network",
+            "class": "cai"
+          },
+          "src": [
+            "G3",
+            "S1",
+            "S2"
+          ],
+          "note": "Whole-source-state reassignment: Wu→Yue 473 BCE; Chen→Chu 479 BCE; Cao→Song 487 BCE. No boundary redrawn.",
+          "label": {
+            "en": "CAI",
+            "zh": "蔡"
+          }
+        },
+        {
+          "holder": "chu",
+          "from": {
+            "svg": "G3-network",
+            "class": "chu"
+          },
+          "src": [
+            "G3",
+            "S1",
+            "S2"
+          ],
+          "note": "Whole-source-state reassignment: Wu→Yue 473 BCE; Chen→Chu 479 BCE; Cao→Song 487 BCE. No boundary redrawn.",
+          "label": {
+            "en": "CHU",
+            "zh": "楚"
+          }
+        },
+        {
+          "holder": "yue",
+          "from": {
+            "svg": "G3-network",
+            "class": "wu"
+          },
+          "src": [
+            "G3",
+            "S1",
+            "S2"
+          ],
+          "note": "Whole-source-state reassignment: Wu→Yue 473 BCE; Chen→Chu 479 BCE; Cao→Song 487 BCE. No boundary redrawn.",
+          "label": {
+            "en": "YUE (former Wu lands)",
+            "zh": "越"
+          }
+        },
+        {
+          "holder": "ba",
+          "from": {
+            "raster": "G10",
+            "class": "ba"
+          },
+          "src": [
+            "G10",
+            "S1",
+            "S2"
+          ],
+          "note": "Whole-source-state reassignment: Wu→Yue 473 BCE; Chen→Chu 479 BCE; Cao→Song 487 BCE. No boundary redrawn.",
+          "label": {
+            "en": "BA",
+            "zh": "巴"
+          }
+        },
+        {
+          "holder": "ju",
+          "from": {
+            "raster": "G10",
+            "class": "ju"
+          },
+          "src": [
+            "G10",
+            "S1",
+            "S2"
+          ],
+          "note": "Whole-source-state reassignment: Wu→Yue 473 BCE; Chen→Chu 479 BCE; Cao→Song 487 BCE. No boundary redrawn.",
+          "label": {
+            "en": "JU",
+            "zh": "莒"
+          }
+        },
+        {
+          "holder": "yue",
+          "from": {
+            "raster": "G10",
+            "class": "yue"
+          },
+          "src": [
+            "G10",
+            "S1",
+            "S2"
+          ],
+          "note": "Whole-source-state reassignment: Wu→Yue 473 BCE; Chen→Chu 479 BCE; Cao→Song 487 BCE. No boundary redrawn.",
+          "label": {
+            "en": "YUE",
+            "zh": "越"
+          }
+        }
+      ],
+      "method": "Whole-state annexations from K4 geometry; inferred",
+      "checks": [
+        {
+          "name": "Whole-state annexations from K4 geometry; inferred",
+          "center": [
+            113,
+            33
+          ],
+          "zoom": 3.9,
+          "source": "G4"
+        }
+      ]
+    },
+    {
+      "id": "K6",
+      "t": "-0403",
+      "steps": [
+        {
+          "holder": "qin",
+          "from": {
+            "svg": "G3-network",
+            "class": "qin"
+          },
+          "src": [
+            "G3",
+            "S1",
+            "S2"
+          ],
+          "note": "Whole-source-state reassignment: Wu→Yue 473 BCE; Chen→Chu 479 BCE; Cao→Song 487 BCE. No boundary redrawn.",
+          "label": {
+            "en": "QIN",
+            "zh": "秦"
+          }
+        },
+        {
+          "holder": "yan",
+          "from": {
+            "svg": "G3-network",
+            "class": "yan"
+          },
+          "src": [
+            "G3",
+            "S1",
+            "S2"
+          ],
+          "note": "Whole-source-state reassignment: Wu→Yue 473 BCE; Chen→Chu 479 BCE; Cao→Song 487 BCE. No boundary redrawn.",
+          "label": {
+            "en": "YAN",
+            "zh": "燕"
+          }
+        },
+        {
+          "holder": "qi",
+          "from": {
+            "svg": "G3-network",
+            "class": "qi"
+          },
+          "src": [
+            "G3",
+            "S1",
+            "S2"
+          ],
+          "note": "Whole-source-state reassignment: Wu→Yue 473 BCE; Chen→Chu 479 BCE; Cao→Song 487 BCE. No boundary redrawn.",
+          "label": {
+            "en": "QI",
+            "zh": "齐"
+          }
+        },
+        {
+          "holder": "lu",
+          "from": {
+            "svg": "G3-network",
+            "class": "lu"
+          },
+          "src": [
+            "G3",
+            "S1",
+            "S2"
+          ],
+          "note": "Whole-source-state reassignment: Wu→Yue 473 BCE; Chen→Chu 479 BCE; Cao→Song 487 BCE. No boundary redrawn.",
+          "label": {
+            "en": "LU",
+            "zh": "鲁"
+          }
+        },
+        {
+          "holder": "zhou",
+          "from": {
+            "svg": "G3-network",
+            "class": "zhou"
+          },
+          "src": [
+            "G3",
+            "S1",
+            "S2"
+          ],
+          "note": "Whole-source-state reassignment: Wu→Yue 473 BCE; Chen→Chu 479 BCE; Cao→Song 487 BCE. No boundary redrawn.",
+          "label": {
+            "en": "ZHOU",
+            "zh": "周"
+          }
+        },
+        {
+          "holder": "zheng",
+          "from": {
+            "svg": "G3-network",
+            "class": "zheng"
+          },
+          "src": [
+            "G3",
+            "S1",
+            "S2"
+          ],
+          "note": "Whole-source-state reassignment: Wu→Yue 473 BCE; Chen→Chu 479 BCE; Cao→Song 487 BCE. No boundary redrawn.",
+          "label": {
+            "en": "ZHENG",
+            "zh": "郑"
+          }
+        },
+        {
+          "holder": "wey",
+          "from": {
+            "svg": "G3-network",
+            "class": "wey"
+          },
+          "src": [
+            "G3",
+            "S1",
+            "S2"
+          ],
+          "note": "Whole-source-state reassignment: Wu→Yue 473 BCE; Chen→Chu 479 BCE; Cao→Song 487 BCE. No boundary redrawn.",
+          "label": {
+            "en": "WEY",
+            "zh": "卫"
+          }
+        },
+        {
+          "holder": "song",
+          "from": {
+            "svg": "G3-network",
+            "class": "cao"
+          },
+          "src": [
+            "G3",
+            "S1",
+            "S2"
+          ],
+          "note": "Whole-source-state reassignment: Wu→Yue 473 BCE; Chen→Chu 479 BCE; Cao→Song 487 BCE. No boundary redrawn.",
+          "label": {
+            "en": "SONG",
+            "zh": "宋"
+          }
+        },
+        {
+          "holder": "song",
+          "from": {
+            "svg": "G3-network",
+            "class": "song"
+          },
+          "src": [
+            "G3",
+            "S1",
+            "S2"
+          ],
+          "note": "Whole-source-state reassignment: Wu→Yue 473 BCE; Chen→Chu 479 BCE; Cao→Song 487 BCE. No boundary redrawn.",
+          "label": {
+            "en": "SONG",
+            "zh": "宋"
+          }
+        },
+        {
+          "holder": "chu",
+          "from": {
+            "svg": "G3-network",
+            "class": "chen"
+          },
+          "src": [
+            "G3",
+            "S1",
+            "S2"
+          ],
+          "note": "Whole-source-state reassignment: Wu→Yue 473 BCE; Chen→Chu 479 BCE; Cao→Song 487 BCE. No boundary redrawn.",
+          "label": {
+            "en": "CHU",
+            "zh": "楚"
+          }
+        },
+        {
+          "holder": "chu",
+          "from": {
+            "svg": "G3-network",
+            "class": "cai"
+          },
+          "src": [
+            "G3",
+            "S1",
+            "S2",
+            "S1"
+          ],
+          "note": "Whole-state annexation: Cai 447 BCE; Ju 431 BCE.",
+          "label": {
+            "en": "CHU",
+            "zh": "楚"
+          }
+        },
+        {
+          "holder": "chu",
+          "from": {
+            "svg": "G3-network",
+            "class": "chu"
+          },
+          "src": [
+            "G3",
+            "S1",
+            "S2"
+          ],
+          "note": "Whole-source-state reassignment: Wu→Yue 473 BCE; Chen→Chu 479 BCE; Cao→Song 487 BCE. No boundary redrawn.",
+          "label": {
+            "en": "CHU",
+            "zh": "楚"
+          }
+        },
+        {
+          "holder": "yue",
+          "from": {
+            "svg": "G3-network",
+            "class": "wu"
+          },
+          "src": [
+            "G3",
+            "S1",
+            "S2"
+          ],
+          "note": "Whole-source-state reassignment: Wu→Yue 473 BCE; Chen→Chu 479 BCE; Cao→Song 487 BCE. No boundary redrawn.",
+          "label": {
+            "en": "YUE (former Wu lands)",
+            "zh": "越"
+          }
+        },
+        {
+          "holder": "ba",
+          "from": {
+            "raster": "G10",
+            "class": "ba"
+          },
+          "src": [
+            "G10",
+            "S1",
+            "S2"
+          ],
+          "note": "Whole-source-state reassignment: Wu→Yue 473 BCE; Chen→Chu 479 BCE; Cao→Song 487 BCE. No boundary redrawn.",
+          "label": {
+            "en": "BA",
+            "zh": "巴"
+          }
+        },
+        {
+          "holder": "chu",
+          "from": {
+            "raster": "G10",
+            "class": "ju"
+          },
+          "src": [
+            "G10",
+            "S1",
+            "S2",
+            "S1"
+          ],
+          "note": "Whole-state annexation: Cai 447 BCE; Ju 431 BCE.",
+          "label": {
+            "en": "CHU",
+            "zh": "楚"
+          }
+        },
+        {
+          "holder": "yue",
+          "from": {
+            "raster": "G10",
+            "class": "yue"
+          },
+          "src": [
+            "G10",
+            "S1",
+            "S2"
+          ],
+          "note": "Whole-source-state reassignment: Wu→Yue 473 BCE; Chen→Chu 479 BCE; Cao→Song 487 BCE. No boundary redrawn.",
+          "label": {
+            "en": "YUE",
+            "zh": "越"
+          }
+        },
+        {
+          "holder": "jin",
+          "from": {
+            "difference": [
+              {
+                "svg": "G3-network",
+                "class": "jin"
+              },
+              {
+                "union": [
+                  {
+                    "intersect": [
+                      {
+                        "svg": "G3-network",
+                        "class": "jin"
+                      },
+                      {
+                        "raster": "G7",
+                        "class": "han"
+                      }
+                    ]
+                  },
+                  {
+                    "intersect": [
+                      {
+                        "svg": "G3-network",
+                        "class": "jin"
+                      },
+                      {
+                        "raster": "G7",
+                        "class": "zhao"
+                      }
+                    ]
+                  },
+                  {
+                    "intersect": [
+                      {
+                        "svg": "G3-network",
+                        "class": "jin"
+                      },
+                      {
+                        "raster": "G7",
+                        "class": "wei"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "src": [
+            "G3",
+            "G7"
+          ],
+          "note": "Remainder outside borrowed 350 BCE Three Jin source classes; not a reconstruction of the exact 403 BCE ducal domain.",
+          "label": {
+            "en": "JIN (residual; inferred)",
+            "zh": "晋"
+          }
+        },
+        {
+          "holder": "han",
+          "from": {
+            "intersect": [
+              {
+                "svg": "G3-network",
+                "class": "jin"
+              },
+              {
+                "raster": "G7",
+                "class": "han"
+              }
+            ]
+          },
+          "src": [
+            "G3",
+            "G7",
+            "S1",
+            "S9"
+          ],
+          "note": "403 BCE recognition; internal division borrowed from 350 BCE source and clipped to fifth-century Jin outline.",
+          "label": {
+            "en": "HAN",
+            "zh": "韩"
+          }
+        },
+        {
+          "holder": "zhao",
+          "from": {
+            "intersect": [
+              {
+                "svg": "G3-network",
+                "class": "jin"
+              },
+              {
+                "raster": "G7",
+                "class": "zhao"
+              }
+            ]
+          },
+          "src": [
+            "G3",
+            "G7",
+            "S1",
+            "S9"
+          ],
+          "note": "403 BCE recognition; internal division borrowed from 350 BCE source and clipped to fifth-century Jin outline.",
+          "label": {
+            "en": "ZHAO",
+            "zh": "赵"
+          }
+        },
+        {
+          "holder": "wei",
+          "from": {
+            "intersect": [
+              {
+                "svg": "G3-network",
+                "class": "jin"
+              },
+              {
+                "raster": "G7",
+                "class": "wei"
+              }
+            ]
+          },
+          "src": [
+            "G3",
+            "G7",
+            "S1",
+            "S9"
+          ],
+          "note": "403 BCE recognition; internal division borrowed from 350 BCE source and clipped to fifth-century Jin outline.",
+          "label": {
+            "en": "WEI",
+            "zh": "魏"
+          }
+        }
+      ],
+      "method": "Three Jin divisions borrowed from 350 BCE; inferred",
+      "checks": [
+        {
+          "name": "Three Jin divisions borrowed from 350 BCE; inferred",
+          "center": [
+            113,
+            33
+          ],
+          "zoom": 3.9,
+          "source": "G7"
+        }
+      ]
+    },
+    {
+      "id": "K7",
+      "t": "-0350",
+      "steps": [
+        {
+          "holder": "qin",
+          "from": {
+            "raster": "G7",
+            "class": "qin"
+          },
+          "src": [
+            "G7"
+          ],
+          "note": "Original-pixel colour outline digitization of published 350 BCE map; tiny royal-house symbols are not treated as territorial polygons.",
+          "label": {
+            "en": "QIN",
+            "zh": "秦"
+          }
+        },
+        {
+          "holder": "zhao",
+          "from": {
+            "raster": "G7",
+            "class": "zhao"
+          },
+          "src": [
+            "G7"
+          ],
+          "note": "Original-pixel colour outline digitization of published 350 BCE map; tiny royal-house symbols are not treated as territorial polygons.",
+          "label": {
+            "en": "ZHAO",
+            "zh": "赵"
+          }
+        },
+        {
+          "holder": "wei",
+          "from": {
+            "raster": "G7",
+            "class": "wei"
+          },
+          "src": [
+            "G7"
+          ],
+          "note": "Original-pixel colour outline digitization of published 350 BCE map; tiny royal-house symbols are not treated as territorial polygons.",
+          "label": {
+            "en": "WEI",
+            "zh": "魏"
+          }
+        },
+        {
+          "holder": "han",
+          "from": {
+            "raster": "G7",
+            "class": "han"
+          },
+          "src": [
+            "G7"
+          ],
+          "note": "Original-pixel colour outline digitization of published 350 BCE map; tiny royal-house symbols are not treated as territorial polygons.",
+          "label": {
+            "en": "HAN",
+            "zh": "韩"
+          }
+        },
+        {
+          "holder": "qi",
+          "from": {
+            "raster": "G7",
+            "class": "qi"
+          },
+          "src": [
+            "G7"
+          ],
+          "note": "Original-pixel colour outline digitization of published 350 BCE map; tiny royal-house symbols are not treated as territorial polygons.",
+          "label": {
+            "en": "QI",
+            "zh": "齐"
+          }
+        },
+        {
+          "holder": "chu",
+          "from": {
+            "raster": "G7",
+            "class": "chu"
+          },
+          "src": [
+            "G7"
+          ],
+          "note": "Original-pixel colour outline digitization of published 350 BCE map; tiny royal-house symbols are not treated as territorial polygons.",
+          "label": {
+            "en": "CHU",
+            "zh": "楚"
+          }
+        },
+        {
+          "holder": "yan",
+          "from": {
+            "raster": "G7",
+            "class": "yan"
+          },
+          "src": [
+            "G7"
+          ],
+          "note": "Original-pixel colour outline digitization of published 350 BCE map; tiny royal-house symbols are not treated as territorial polygons.",
+          "label": {
+            "en": "YAN",
+            "zh": "燕"
+          }
+        },
+        {
+          "holder": "yue",
+          "from": {
+            "raster": "G7",
+            "class": "yue"
+          },
+          "src": [
+            "G7"
+          ],
+          "note": "Original-pixel colour outline digitization of published 350 BCE map; tiny royal-house symbols are not treated as territorial polygons.",
+          "label": {
+            "en": "YUE",
+            "zh": "越"
+          }
+        },
+        {
+          "holder": "song",
+          "from": {
+            "raster": "G7",
+            "class": "song"
+          },
+          "src": [
+            "G7"
+          ],
+          "note": "Original-pixel colour outline digitization of published 350 BCE map; tiny royal-house symbols are not treated as territorial polygons.",
+          "label": {
+            "en": "SONG",
+            "zh": "宋"
+          }
+        },
+        {
+          "holder": "lu",
+          "from": {
+            "raster": "G7",
+            "class": "lu"
+          },
+          "src": [
+            "G7"
+          ],
+          "note": "Original-pixel colour outline digitization of published 350 BCE map; tiny royal-house symbols are not treated as territorial polygons.",
+          "label": {
+            "en": "LU",
+            "zh": "鲁"
+          }
+        },
+        {
+          "holder": "wey",
+          "from": {
+            "raster": "G7",
+            "class": "wey"
+          },
+          "src": [
+            "G7"
+          ],
+          "note": "Original-pixel colour outline digitization of published 350 BCE map; tiny royal-house symbols are not treated as territorial polygons.",
+          "label": {
+            "en": "WEY",
+            "zh": "卫"
+          }
+        },
+        {
+          "holder": "zhongshan",
+          "from": {
+            "raster": "G7",
+            "class": "zhongshan"
+          },
+          "src": [
+            "G7"
+          ],
+          "note": "Original-pixel colour outline digitization of published 350 BCE map; tiny royal-house symbols are not treated as territorial polygons.",
+          "label": {
+            "en": "ZHONGSHAN",
+            "zh": "中山"
+          }
+        }
+      ],
+      "method": "G7 published 350 BCE state outlines",
+      "checks": [
+        {
+          "name": "G7 published 350 BCE state outlines",
+          "center": [
+            113,
+            33
+          ],
+          "zoom": 3.9,
+          "source": "G7"
+        }
+      ]
+    },
+    {
+      "id": "K8",
+      "t": "-0280",
+      "steps": [
+        {
+          "holder": "qin",
+          "from": {
+            "raster": "G8",
+            "class": "qin"
+          },
+          "src": [
+            "G8"
+          ],
+          "note": "Original-pixel digitization of published 280 BCE map. Qi tint follows source; extent of Yan occupation is not separable in its palette.",
+          "label": {
+            "en": "QIN",
+            "zh": "秦"
+          }
+        },
+        {
+          "holder": "zhao",
+          "from": {
+            "raster": "G8",
+            "class": "zhao"
+          },
+          "src": [
+            "G8"
+          ],
+          "note": "Original-pixel digitization of published 280 BCE map. Qi tint follows source; extent of Yan occupation is not separable in its palette.",
+          "label": {
+            "en": "ZHAO",
+            "zh": "赵"
+          }
+        },
+        {
+          "holder": "wei",
+          "from": {
+            "raster": "G8",
+            "class": "wei"
+          },
+          "src": [
+            "G8"
+          ],
+          "note": "Original-pixel digitization of published 280 BCE map. Qi tint follows source; extent of Yan occupation is not separable in its palette.",
+          "label": {
+            "en": "WEI",
+            "zh": "魏"
+          }
+        },
+        {
+          "holder": "han",
+          "from": {
+            "raster": "G8",
+            "class": "han"
+          },
+          "src": [
+            "G8"
+          ],
+          "note": "Original-pixel digitization of published 280 BCE map. Qi tint follows source; extent of Yan occupation is not separable in its palette.",
+          "label": {
+            "en": "HAN",
+            "zh": "韩"
+          }
+        },
+        {
+          "holder": "qi",
+          "from": {
+            "raster": "G8",
+            "class": "qi"
+          },
+          "src": [
+            "G8"
+          ],
+          "note": "Original-pixel digitization of published 280 BCE map. Qi tint follows source; extent of Yan occupation is not separable in its palette.",
+          "label": {
+            "en": "QI",
+            "zh": "齐"
+          }
+        },
+        {
+          "holder": "chu",
+          "from": {
+            "raster": "G8",
+            "class": "chu"
+          },
+          "src": [
+            "G8"
+          ],
+          "note": "Original-pixel digitization of published 280 BCE map. Qi tint follows source; extent of Yan occupation is not separable in its palette.",
+          "label": {
+            "en": "CHU",
+            "zh": "楚"
+          }
+        },
+        {
+          "holder": "yan",
+          "from": {
+            "raster": "G8",
+            "class": "yan"
+          },
+          "src": [
+            "G8"
+          ],
+          "note": "Original-pixel digitization of published 280 BCE map. Qi tint follows source; extent of Yan occupation is not separable in its palette.",
+          "label": {
+            "en": "YAN",
+            "zh": "燕"
+          }
+        },
+        {
+          "holder": "lu",
+          "from": {
+            "raster": "G8",
+            "class": "lu"
+          },
+          "src": [
+            "G8"
+          ],
+          "note": "Original-pixel digitization of published 280 BCE map. Qi tint follows source; extent of Yan occupation is not separable in its palette.",
+          "label": {
+            "en": "LU",
+            "zh": "鲁"
+          }
+        },
+        {
+          "holder": "wey",
+          "from": {
+            "raster": "G8",
+            "class": "wey"
+          },
+          "src": [
+            "G8"
+          ],
+          "note": "Original-pixel digitization of published 280 BCE map. Qi tint follows source; extent of Yan occupation is not separable in its palette.",
+          "label": {
+            "en": "WEY",
+            "zh": "卫"
+          }
+        }
+      ],
+      "method": "G8 published 280 BCE state outlines",
+      "checks": [
+        {
+          "name": "G8 published 280 BCE state outlines",
+          "center": [
+            113,
+            33
+          ],
+          "zoom": 3.9,
+          "source": "G8"
+        }
+      ]
+    },
+    {
+      "id": "K9",
+      "t": "-0260",
+      "steps": [
+        {
+          "holder": "qin",
+          "from": {
+            "raster": "G11",
+            "class": "qin"
+          },
+          "src": [
+            "G11"
+          ],
+          "note": "Published 260 BCE colour classes; source registration exceeds 25 km budget, disclosed rather than fitted away.",
+          "label": {
+            "en": "QIN",
+            "zh": "秦"
+          }
+        },
+        {
+          "holder": "zhao",
+          "from": {
+            "raster": "G11",
+            "class": "zhao"
+          },
+          "src": [
+            "G11"
+          ],
+          "note": "Published 260 BCE colour classes; source registration exceeds 25 km budget, disclosed rather than fitted away.",
+          "label": {
+            "en": "ZHAO",
+            "zh": "赵"
+          }
+        },
+        {
+          "holder": "wei",
+          "from": {
+            "raster": "G11",
+            "class": "wei"
+          },
+          "src": [
+            "G11"
+          ],
+          "note": "Published 260 BCE colour classes; source registration exceeds 25 km budget, disclosed rather than fitted away.",
+          "label": {
+            "en": "WEI",
+            "zh": "魏"
+          }
+        },
+        {
+          "holder": "han",
+          "from": {
+            "raster": "G11",
+            "class": "han"
+          },
+          "src": [
+            "G11"
+          ],
+          "note": "Published 260 BCE colour classes; source registration exceeds 25 km budget, disclosed rather than fitted away.",
+          "label": {
+            "en": "HAN",
+            "zh": "韩"
+          }
+        },
+        {
+          "holder": "qi",
+          "from": {
+            "raster": "G11",
+            "class": "qi"
+          },
+          "src": [
+            "G11"
+          ],
+          "note": "Published 260 BCE colour classes; source registration exceeds 25 km budget, disclosed rather than fitted away.",
+          "label": {
+            "en": "QI",
+            "zh": "齐"
+          }
+        },
+        {
+          "holder": "chu",
+          "from": {
+            "raster": "G11",
+            "class": "chu"
+          },
+          "src": [
+            "G11"
+          ],
+          "note": "Published 260 BCE colour classes; source registration exceeds 25 km budget, disclosed rather than fitted away.",
+          "label": {
+            "en": "CHU",
+            "zh": "楚"
+          }
+        },
+        {
+          "holder": "yan",
+          "from": {
+            "raster": "G11",
+            "class": "yan"
+          },
+          "src": [
+            "G11"
+          ],
+          "note": "Published 260 BCE colour classes; source registration exceeds 25 km budget, disclosed rather than fitted away.",
+          "label": {
+            "en": "YAN",
+            "zh": "燕"
+          }
+        },
+        {
+          "holder": "zhou",
+          "from": {
+            "raster": "G11",
+            "class": "zhou"
+          },
+          "src": [
+            "G11"
+          ],
+          "note": "Published 260 BCE colour classes; source registration exceeds 25 km budget, disclosed rather than fitted away.",
+          "label": {
+            "en": "ZHOU",
+            "zh": "周"
+          }
+        },
+        {
+          "holder": "lu",
+          "from": {
+            "raster": "G8",
+            "class": "lu"
+          },
+          "src": [
+            "G8",
+            "G11",
+            "S1"
+          ],
+          "note": "Earlier bounded 280 BCE source component carried forward to 260 BCE; G11 labels these places without separate state faces.",
+          "label": {
+            "en": "LU (280 BCE extent)",
+            "zh": "鲁"
+          }
+        },
+        {
+          "holder": "wey",
+          "from": {
+            "raster": "G8",
+            "class": "wey"
+          },
+          "src": [
+            "G8",
+            "G11",
+            "S1"
+          ],
+          "note": "Earlier bounded 280 BCE source component carried forward to 260 BCE; G11 labels these places without separate state faces.",
+          "label": {
+            "en": "WEY (280 BCE extent)",
+            "zh": "卫"
+          }
+        }
+      ],
+      "method": "G11 published 260 BCE map; over-budget registration",
+      "checks": [
+        {
+          "name": "G11 published 260 BCE map; over-budget registration",
+          "center": [
+            113,
+            33
+          ],
+          "zoom": 3.9,
+          "source": "G11"
+        }
+      ]
+    },
+    {
+      "id": "K10",
+      "t": "-0230",
+      "steps": [
+        {
+          "holder": "qin",
+          "from": {
+            "raster": "G11",
+            "class": "qin"
+          },
+          "src": [
+            "G11",
+            "G15",
+            "G17",
+            "S1"
+          ],
+          "note": "Fallback: whole Han→Qin 230 BCE; combined Zhou→Qin by 249 BCE; Lu→Chu 256 BCE. Qin new commanderies not drawn because G15 fit exceeds budget; source geography retained.",
+          "label": {
+            "en": "QIN",
+            "zh": "秦"
+          }
+        },
+        {
+          "holder": "zhao",
+          "from": {
+            "raster": "G11",
+            "class": "zhao"
+          },
+          "src": [
+            "G11",
+            "G15",
+            "G17",
+            "S1"
+          ],
+          "note": "Fallback: whole Han→Qin 230 BCE; combined Zhou→Qin by 249 BCE; Lu→Chu 256 BCE. Qin new commanderies not drawn because G15 fit exceeds budget; source geography retained.",
+          "label": {
+            "en": "ZHAO",
+            "zh": "赵"
+          }
+        },
+        {
+          "holder": "wei",
+          "from": {
+            "raster": "G11",
+            "class": "wei"
+          },
+          "src": [
+            "G11",
+            "G15",
+            "G17",
+            "S1"
+          ],
+          "note": "Fallback: whole Han→Qin 230 BCE; combined Zhou→Qin by 249 BCE; Lu→Chu 256 BCE. Qin new commanderies not drawn because G15 fit exceeds budget; source geography retained.",
+          "label": {
+            "en": "WEI",
+            "zh": "魏"
+          }
+        },
+        {
+          "holder": "qin",
+          "from": {
+            "raster": "G11",
+            "class": "han"
+          },
+          "src": [
+            "G11",
+            "G15",
+            "G17",
+            "S1"
+          ],
+          "note": "Fallback: whole Han→Qin 230 BCE; combined Zhou→Qin by 249 BCE; Lu→Chu 256 BCE. Qin new commanderies not drawn because G15 fit exceeds budget; source geography retained.",
+          "label": {
+            "en": "QIN",
+            "zh": "秦"
+          }
+        },
+        {
+          "holder": "qi",
+          "from": {
+            "raster": "G11",
+            "class": "qi"
+          },
+          "src": [
+            "G11",
+            "G15",
+            "G17",
+            "S1"
+          ],
+          "note": "Fallback: whole Han→Qin 230 BCE; combined Zhou→Qin by 249 BCE; Lu→Chu 256 BCE. Qin new commanderies not drawn because G15 fit exceeds budget; source geography retained.",
+          "label": {
+            "en": "QI",
+            "zh": "齐"
+          }
+        },
+        {
+          "holder": "chu",
+          "from": {
+            "raster": "G11",
+            "class": "chu"
+          },
+          "src": [
+            "G11",
+            "G15",
+            "G17",
+            "S1"
+          ],
+          "note": "Fallback: whole Han→Qin 230 BCE; combined Zhou→Qin by 249 BCE; Lu→Chu 256 BCE. Qin new commanderies not drawn because G15 fit exceeds budget; source geography retained.",
+          "label": {
+            "en": "CHU",
+            "zh": "楚"
+          }
+        },
+        {
+          "holder": "yan",
+          "from": {
+            "raster": "G11",
+            "class": "yan"
+          },
+          "src": [
+            "G11",
+            "G15",
+            "G17",
+            "S1"
+          ],
+          "note": "Fallback: whole Han→Qin 230 BCE; combined Zhou→Qin by 249 BCE; Lu→Chu 256 BCE. Qin new commanderies not drawn because G15 fit exceeds budget; source geography retained.",
+          "label": {
+            "en": "YAN",
+            "zh": "燕"
+          }
+        },
+        {
+          "holder": "qin",
+          "from": {
+            "raster": "G11",
+            "class": "zhou"
+          },
+          "src": [
+            "G11",
+            "G15",
+            "G17",
+            "S1"
+          ],
+          "note": "Fallback: whole Han→Qin 230 BCE; combined Zhou→Qin by 249 BCE; Lu→Chu 256 BCE. Qin new commanderies not drawn because G15 fit exceeds budget; source geography retained.",
+          "label": {
+            "en": "QIN",
+            "zh": "秦"
+          }
+        },
+        {
+          "holder": "chu",
+          "from": {
+            "raster": "G8",
+            "class": "lu"
+          },
+          "src": [
+            "G8",
+            "G11",
+            "S1",
+            "G15",
+            "G17",
+            "S1"
+          ],
+          "note": "Fallback: whole Han→Qin 230 BCE; combined Zhou→Qin by 249 BCE; Lu→Chu 256 BCE. Qin new commanderies not drawn because G15 fit exceeds budget; source geography retained.",
+          "label": {
+            "en": "CHU",
+            "zh": "楚"
+          }
+        },
+        {
+          "holder": "wey",
+          "from": {
+            "raster": "G8",
+            "class": "wey"
+          },
+          "src": [
+            "G8",
+            "G11",
+            "S1",
+            "G15",
+            "G17",
+            "S1"
+          ],
+          "note": "Fallback: whole Han→Qin 230 BCE; combined Zhou→Qin by 249 BCE; Lu→Chu 256 BCE. Qin new commanderies not drawn because G15 fit exceeds budget; source geography retained.",
+          "label": {
+            "en": "WEY",
+            "zh": "卫"
+          }
+        }
+      ],
+      "method": "Whole-state reassignment fallback; inferred",
+      "checks": [
+        {
+          "name": "Whole-state reassignment fallback; inferred",
+          "center": [
+            113,
+            33
+          ],
+          "zoom": 3.9,
+          "source": "G15"
+        }
+      ]
+    },
+    {
+      "id": "K11",
+      "t": "-0221",
+      "steps": [
+        {
+          "holder": "qin",
+          "from": {
+            "union": [
+              {
+                "raster": "G11",
+                "class": "qin"
+              },
+              {
+                "raster": "G11",
+                "class": "zhao"
+              },
+              {
+                "raster": "G11",
+                "class": "wei"
+              },
+              {
+                "raster": "G11",
+                "class": "han"
+              },
+              {
+                "raster": "G11",
+                "class": "qi"
+              },
+              {
+                "raster": "G11",
+                "class": "chu"
+              },
+              {
+                "raster": "G11",
+                "class": "yan"
+              },
+              {
+                "raster": "G11",
+                "class": "zhou"
+              },
+              {
+                "raster": "G8",
+                "class": "lu"
+              },
+              {
+                "raster": "G8",
+                "class": "wey"
+              }
+            ]
+          },
+          "src": [
+            "G11",
+            "G15",
+            "G17",
+            "S1"
+          ],
+          "note": "Union of represented conquered-state polygons; no Lingnan or northern steppe extension, no unbounded Yue additions.",
+          "label": {
+            "en": "QIN EMPIRE",
+            "zh": "秦"
+          }
+        }
+      ],
+      "method": "Union of represented conquered states; inferred",
+      "checks": [
+        {
+          "name": "Union of represented conquered states; inferred",
+          "center": [
+            113,
+            33
+          ],
+          "zoom": 3.9,
+          "source": "G17"
+        }
+      ]
+    }
+  ],
+  "pipeline": {
+    "plannedKeyframes": 11,
+    "budgetMB": 1.2,
+    "focus": [
+      [
+        100,
+        20,
+        125,
+        44
+      ]
+    ],
+    "coast": {
+      "enabled": false,
+      "land": "public/geo/warring-states-region.json",
+      "detailBox": null,
+      "detailLand": null,
+      "worldBox": [
+        100,
+        20,
+        125,
+        44
+      ],
+      "gapKm": 6
+    },
+    "shots": "scripts/geo/warring-states/check",
+    "compose": {
+      "lightM": 100,
+      "sliverKm2": 1
+    },
+    "clean": {
+      "snapDeg": 0.001,
+      "sliverKm2": 0.5
+    },
+    "islandsKm2": {
+      "focus": 1,
+      "coarse": 5
+    }
+  }
+}

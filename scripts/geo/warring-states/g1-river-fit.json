@@ -1,0 +1,84 @@
+{
+  "model": "equirectangular+affine",
+  "rmsKm": 0.03014006616924965,
+  "maxKm": 0.04895172832319392,
+  "looRmsKm": 0.037453103702371225,
+  "looMaxKm": 0.05841686621840074,
+  "points": [
+    {
+      "name": "Fen NE confluence / endpoint",
+      "residualKm": 0.007709836572338432,
+      "looKm": 0.009669862504371799
+    },
+    {
+      "name": "Wei NE confluence / endpoint",
+      "residualKm": 0.016954569511924873,
+      "looKm": 0.020247635021396038
+    },
+    {
+      "name": "Han NE confluence / endpoint",
+      "residualKm": 0.022515686933689067,
+      "looKm": 0.025680804902978475
+    },
+    {
+      "name": "Huai NE confluence / endpoint",
+      "residualKm": 0.02462532373532014,
+      "looKm": 0.027572111224713043
+    },
+    {
+      "name": "Dan NE confluence / endpoint",
+      "residualKm": 0.010701758881083274,
+      "looKm": 0.012205822893271498
+    },
+    {
+      "name": "Jing NE confluence / endpoint",
+      "residualKm": 0.03176955299398481,
+      "looKm": 0.040958865493125496
+    },
+    {
+      "name": "Ying NE confluence / endpoint",
+      "residualKm": 0.04895172832319392,
+      "looKm": 0.05599679342758034
+    },
+    {
+      "name": "Luan NE confluence / endpoint",
+      "residualKm": 0.03271718167085941,
+      "looKm": 0.042151920547707174
+    },
+    {
+      "name": "Wuding NE confluence / endpoint",
+      "residualKm": 0.026911708703213123,
+      "looKm": 0.03388298435036848
+    },
+    {
+      "name": "Fuchun NE confluence / endpoint",
+      "residualKm": 0.0095575993930834,
+      "looKm": 0.013496866595435753
+    },
+    {
+      "name": "Yongding NE confluence / endpoint",
+      "residualKm": 0.0387136277146434,
+      "looKm": 0.047974857313694434
+    },
+    {
+      "name": "Hai NE confluence / endpoint",
+      "residualKm": 0.04194565648362426,
+      "looKm": 0.050174779218108846
+    },
+    {
+      "name": "Liao NE confluence / endpoint",
+      "residualKm": 0.01761210134982759,
+      "looKm": 0.030122745525523305
+    },
+    {
+      "name": "Gan NE confluence / endpoint",
+      "residualKm": 0.04412581140207359,
+      "looKm": 0.05841686621840074
+    },
+    {
+      "name": "Yangtze NE confluence / endpoint",
+      "residualKm": 0.03527789799474206,
+      "looKm": 0.043698547795252056
+    }
+  ]
+}

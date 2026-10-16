@@ -1,0 +1,243 @@
+{
+  "terms": [
+    {
+      "id": "fengjian",
+      "term": {
+        "en": "Enfeoffment",
+        "zh": "【待译】Enfeoffment"
+      },
+      "definition": {
+        "en": "The Zhou kings granted rights over land and people to relatives and allies, creating regional states. This is not the same institution as European feudalism.",
+        "zh": "【待译】The Zhou kings granted rights over land and people to relatives and allies, creating regional states. This is not the same institution as European feudalism."
+      },
+      "see": [
+        "zhuhou"
+      ]
+    },
+    {
+      "id": "zhuhou",
+      "term": {
+        "en": "Regional lords",
+        "zh": "【待译】Regional lords"
+      },
+      "definition": {
+        "en": "Rulers of regional states who formally acknowledged the Zhou king, although their effective independence increased.",
+        "zh": "【待译】Rulers of regional states who formally acknowledged the Zhou king, although their effective independence increased."
+      },
+      "see": [
+        "fengjian",
+        "hegemon"
+      ]
+    },
+    {
+      "id": "tianxia",
+      "term": {
+        "en": "All under Heaven",
+        "zh": "【待译】All under Heaven"
+      },
+      "definition": {
+        "en": "An idea of the inhabited political world under a king. Its scope changed over time and does not simply mean the territory of modern China.",
+        "zh": "【待译】An idea of the inhabited political world under a king. Its scope changed over time and does not simply mean the territory of modern China."
+      },
+      "see": [
+        "huaxia"
+      ]
+    },
+    {
+      "id": "huaxia",
+      "term": {
+        "en": "Huaxia",
+        "zh": "【待译】Huaxia"
+      },
+      "definition": {
+        "en": "A changing cultural and political identity used in Zhou-era texts. The contrast with Rong, Di, Yi and Man reflects the categories of those texts, not fixed modern ethnic boundaries.",
+        "zh": "【待译】A changing cultural and political identity used in Zhou-era texts. The contrast with Rong, Di, Yi and Man reflects the categories of those texts, not fixed modern ethnic boundaries."
+      },
+      "see": [
+        "tianxia"
+      ]
+    },
+    {
+      "id": "hegemon",
+      "term": {
+        "en": "Hegemon",
+        "zh": "【待译】Hegemon"
+      },
+      "definition": {
+        "en": "A leading regional lord who convened alliances and claimed to uphold the Zhou order. Later lists of the hegemons disagree.",
+        "zh": "【待译】A leading regional lord who convened alliances and claimed to uphold the Zhou order. Later lists of the hegemons disagree."
+      },
+      "see": [
+        "covenant",
+        "zunwang-rangyi"
+      ]
+    },
+    {
+      "id": "covenant",
+      "term": {
+        "en": "Covenant meeting",
+        "zh": "【待译】Covenant meeting"
+      },
+      "definition": {
+        "en": "A meeting at which rulers or ministers made an agreement and swore an oath. Excavated covenant texts show that such agreements could be written on stone or jade.",
+        "zh": "【待译】A meeting at which rulers or ministers made an agreement and swore an oath. Excavated covenant texts show that such agreements could be written on stone or jade."
+      },
+      "see": [
+        "hegemon"
+      ]
+    },
+    {
+      "id": "zunwang-rangyi",
+      "term": {
+        "en": "Honour the king, repel the Yi",
+        "zh": "【待译】Honour the king, repel the Yi"
+      },
+      "definition": {
+        "en": "A later formula associated with Qi leadership: supporting the Zhou king and opposing groups classified as outsiders. The wording presents the Zhou states’ perspective.",
+        "zh": "【待译】A later formula associated with Qi leadership: supporting the Zhou king and opposing groups classified as outsiders. The wording presents the Zhou states’ perspective."
+      },
+      "see": [
+        "hegemon"
+      ]
+    },
+    {
+      "id": "chariot-warfare",
+      "term": {
+        "en": "Chariot warfare",
+        "zh": "【待译】Chariot warfare"
+      },
+      "definition": {
+        "en": "Fighting with horse-drawn vehicles accompanied by infantry. The balance between chariots, infantry, crossbows and cavalry changed across the period.",
+        "zh": "【待译】Fighting with horse-drawn vehicles accompanied by infantry. The balance between chariots, infantry, crossbows and cavalry changed across the period."
+      },
+      "see": [
+        "crossbow"
+      ]
+    },
+    {
+      "id": "bianfa",
+      "term": {
+        "en": "Reform",
+        "zh": "【待译】Reform"
+      },
+      "definition": {
+        "en": "Changes to law, taxation, farming, military recruitment or official appointment intended to increase a ruler’s control and resources.",
+        "zh": "【待译】Changes to law, taxation, farming, military recruitment or official appointment intended to increase a ruler’s control and resources."
+      },
+      "see": [
+        "legalism",
+        "junxian"
+      ]
+    },
+    {
+      "id": "legalism",
+      "term": {
+        "en": "Legalism",
+        "zh": "【待译】Legalism"
+      },
+      "definition": {
+        "en": "A later label for thinkers and practices associated with explicit standards, rewards, punishments and ruler authority. It did not name a single organized school in this period.",
+        "zh": "【待译】A later label for thinkers and practices associated with explicit standards, rewards, punishments and ruler authority. It did not name a single organized school in this period."
+      },
+      "see": [
+        "bianfa"
+      ]
+    },
+    {
+      "id": "junxian",
+      "term": {
+        "en": "Commanderies and counties",
+        "zh": "【待译】Commanderies and counties"
+      },
+      "definition": {
+        "en": "Territorial units governed by appointed officials rather than hereditary regional rulers. Their development differed between states.",
+        "zh": "【待译】Territorial units governed by appointed officials rather than hereditary regional rulers. Their development differed between states."
+      },
+      "see": [
+        "bianfa"
+      ]
+    },
+    {
+      "id": "rank-by-merit",
+      "term": {
+        "en": "Rank by military merit",
+        "zh": "【待译】Rank by military merit"
+      },
+      "definition": {
+        "en": "A hierarchy in which recorded military service could earn status and privileges. Qin records linked rewards to counted enemy heads; those counts require critical reading.",
+        "zh": "【待译】A hierarchy in which recorded military service could earn status and privileges. Qin records linked rewards to counted enemy heads; those counts require critical reading."
+      },
+      "see": [
+        "junxian"
+      ]
+    },
+    {
+      "id": "vertical-alliance",
+      "term": {
+        "en": "Vertical alliance",
+        "zh": "【待译】Vertical alliance"
+      },
+      "definition": {
+        "en": "An alliance among several states, usually described as cooperation against Qin. Its members and commitments changed.",
+        "zh": "【待译】An alliance among several states, usually described as cooperation against Qin. Its members and commitments changed."
+      },
+      "see": [
+        "horizontal-alliance"
+      ]
+    },
+    {
+      "id": "horizontal-alliance",
+      "term": {
+        "en": "Horizontal alliance",
+        "zh": "【待译】Horizontal alliance"
+      },
+      "definition": {
+        "en": "Arrangements in which individual states dealt separately with Qin. Later narratives organize fluid diplomacy into a contrast with vertical alliances.",
+        "zh": "【待译】Arrangements in which individual states dealt separately with Qin. Later narratives organize fluid diplomacy into a contrast with vertical alliances."
+      },
+      "see": [
+        "vertical-alliance"
+      ]
+    },
+    {
+      "id": "crossbow",
+      "term": {
+        "en": "Crossbow",
+        "zh": "【待译】Crossbow"
+      },
+      "definition": {
+        "en": "A bow mounted on a stock with a trigger mechanism. Surviving bronze triggers and texts document its military use.",
+        "zh": "【待译】A bow mounted on a stock with a trigger mechanism. Surviving bronze triggers and texts document its military use."
+      },
+      "see": [
+        "chariot-warfare"
+      ]
+    },
+    {
+      "id": "tiger-tally",
+      "term": {
+        "en": "Tiger tally",
+        "zh": "【待译】Tiger tally"
+      },
+      "definition": {
+        "en": "A matching authorization token divided between a ruler and a commander. Joining the halves helped verify an order to mobilize troops.",
+        "zh": "【待译】A matching authorization token divided between a ruler and a commander. Joining the halves helped verify an order to mobilize troops."
+      },
+      "see": []
+    },
+    {
+      "id": "hundred-schools",
+      "term": {
+        "en": "Hundred Schools of Thought",
+        "zh": "【待译】Hundred Schools of Thought"
+      },
+      "definition": {
+        "en": "A conventional name for competing traditions of argument about ethics, government and society. It does not refer to an exact count of schools.",
+        "zh": "【待译】A conventional name for competing traditions of argument about ethics, government and society. It does not refer to an exact count of schools."
+      },
+      "see": [
+        "legalism"
+      ]
+    }
+  ]
+}

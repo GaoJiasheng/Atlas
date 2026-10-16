@@ -1,0 +1,855 @@
+[
+  {
+    "id": "zhou-move-east",
+    "from": "-0770",
+    "to": "-0770",
+    "holder": "zhou",
+    "kind": "land",
+    "linger": "-0750",
+    "label": {
+      "en": "Zhou court moves east (schematic itinerary)",
+      "zh": "【待译】Zhou court moves east (schematic itinerary)"
+    },
+    "path": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          108.78,
+          34.23
+        ],
+        [
+          109.2,
+          34.38
+        ],
+        [
+          110.09,
+          34.57
+        ],
+        [
+          110.9,
+          34.6
+        ],
+        [
+          111.76,
+          34.76
+        ],
+        [
+          112.45,
+          34.68
+        ]
+      ]
+    },
+    "persist": false
+  },
+  {
+    "id": "qi-north-shanrong",
+    "from": "-0664",
+    "to": "-0663",
+    "holder": "qi",
+    "kind": "land",
+    "linger": "-0650",
+    "label": {
+      "en": "Qi campaign north to aid Yan (schematic itinerary)",
+      "zh": "【待译】Qi campaign north to aid Yan (schematic itinerary)"
+    },
+    "path": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          118.337908,
+          36.889756
+        ],
+        [
+          116.35,
+          39.88
+        ],
+        [
+          118.7,
+          40.0
+        ],
+        [
+          118.89,
+          39.89
+        ]
+      ]
+    }
+  },
+  {
+    "id": "chonger-exile",
+    "from": "-0655",
+    "to": "-0636",
+    "holder": "jin",
+    "kind": "land",
+    "linger": "-0630",
+    "label": {
+      "en": "Chong’er’s exile itinerary (schematic itinerary)",
+      "zh": "【待译】Chong’er’s exile itinerary (schematic itinerary)"
+    },
+    "path": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          111.09,
+          36.41
+        ],
+        [
+          114.25,
+          35.62
+        ],
+        [
+          118.337908,
+          36.889756
+        ],
+        [
+          115.55,
+          34.83
+        ],
+        [
+          115.65,
+          34.42
+        ],
+        [
+          113.73,
+          34.39
+        ],
+        [
+          112.190298,
+          30.405722
+        ],
+        [
+          107.4,
+          34.5
+        ],
+        [
+          111.48,
+          35.62
+        ]
+      ]
+    }
+  },
+  {
+    "id": "chu-to-chengpu",
+    "from": "-0633",
+    "to": "-0632",
+    "holder": "chu",
+    "kind": "land",
+    "linger": "-0627",
+    "label": {
+      "en": "Chu campaign toward Chengpu (schematic itinerary)",
+      "zh": "【待译】Chu campaign toward Chengpu (schematic itinerary)"
+    },
+    "path": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          112.190298,
+          30.405722
+        ],
+        [
+          113.0,
+          33.25
+        ],
+        [
+          114.9,
+          33.62
+        ],
+        [
+          115.65,
+          34.42
+        ],
+        [
+          115.48,
+          35.6
+        ]
+      ]
+    }
+  },
+  {
+    "id": "jin-to-chengpu",
+    "from": "-0632",
+    "to": "-0632",
+    "holder": "jin",
+    "kind": "land",
+    "linger": "-0627",
+    "label": {
+      "en": "Jin campaign toward Chengpu (schematic itinerary)",
+      "zh": "【待译】Jin campaign toward Chengpu (schematic itinerary)"
+    },
+    "path": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          111.48,
+          35.62
+        ],
+        [
+          114.25,
+          35.62
+        ],
+        [
+          115.55,
+          34.83
+        ],
+        [
+          115.48,
+          35.6
+        ]
+      ]
+    }
+  },
+  {
+    "id": "qin-raid-zheng",
+    "from": "-0628",
+    "to": "-0627",
+    "holder": "qin",
+    "kind": "land",
+    "linger": "-0623",
+    "label": {
+      "en": "Qin raid and retreat to Xiao (schematic itinerary)",
+      "zh": "【待译】Qin raid and retreat to Xiao (schematic itinerary)"
+    },
+    "path": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          107.4,
+          34.5
+        ],
+        [
+          110.9,
+          34.6
+        ],
+        [
+          112.8,
+          34.7
+        ],
+        [
+          111.6,
+          34.73
+        ]
+      ]
+    }
+  },
+  {
+    "id": "wu-to-ying",
+    "from": "-0506",
+    "to": "-0506",
+    "holder": "wu",
+    "kind": "land",
+    "linger": "-0500",
+    "label": {
+      "en": "Wu campaign toward Ying (schematic itinerary)",
+      "zh": "【待译】Wu campaign toward Ying (schematic itinerary)"
+    },
+    "path": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          120.62,
+          31.3
+        ],
+        [
+          116.72,
+          32.7
+        ],
+        [
+          114.98,
+          33.26
+        ],
+        [
+          114.95,
+          31.2
+        ],
+        [
+          112.190298,
+          30.405722
+        ]
+      ]
+    }
+  },
+  {
+    "id": "confucius-travels",
+    "from": "-0497",
+    "to": "-0484",
+    "holder": "lu",
+    "kind": "land",
+    "linger": "-0479",
+    "label": {
+      "en": "Confucius’s travels between courts (schematic itinerary)",
+      "zh": "【待译】Confucius’s travels between courts (schematic itinerary)"
+    },
+    "path": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          116.9862,
+          35.5819
+        ],
+        [
+          114.25,
+          35.62
+        ],
+        [
+          114.88,
+          35.2
+        ],
+        [
+          115.65,
+          34.42
+        ],
+        [
+          113.73,
+          34.39
+        ],
+        [
+          114.9,
+          33.62
+        ],
+        [
+          114.98,
+          33.26
+        ],
+        [
+          114.2,
+          32.13
+        ],
+        [
+          114.25,
+          35.62
+        ],
+        [
+          116.9862,
+          35.5819
+        ]
+      ]
+    }
+  },
+  {
+    "id": "wu-to-huangchi",
+    "from": "-0482",
+    "to": "-0482",
+    "holder": "wu",
+    "kind": "land",
+    "linger": "-0473",
+    "label": {
+      "en": "Wu travels to Huangchi (schematic itinerary)",
+      "zh": "【待译】Wu travels to Huangchi (schematic itinerary)"
+    },
+    "path": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          120.62,
+          31.3
+        ],
+        [
+          119.43,
+          32.4
+        ],
+        [
+          118.49,
+          33.03
+        ],
+        [
+          114.4,
+          35.05
+        ]
+      ]
+    }
+  },
+  {
+    "id": "wei-to-handan",
+    "from": "-0354",
+    "to": "-0354",
+    "holder": "wei",
+    "kind": "land",
+    "linger": "-0353",
+    "label": {
+      "en": "Wei advances on Handan (schematic itinerary)",
+      "zh": "【待译】Wei advances on Handan (schematic itinerary)"
+    },
+    "path": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          114.3,
+          34.8
+        ],
+        [
+          114.49,
+          36.6
+        ]
+      ]
+    }
+  },
+  {
+    "id": "qi-to-guiling",
+    "from": "-0353",
+    "to": "-0353",
+    "holder": "qi",
+    "kind": "land",
+    "linger": "-0350",
+    "label": {
+      "en": "Qi’s intervention toward Guiling (schematic itinerary)",
+      "zh": "【待译】Qi’s intervention toward Guiling (schematic itinerary)"
+    },
+    "path": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          118.337908,
+          36.889756
+        ],
+        [
+          116.31,
+          35.91
+        ],
+        [
+          114.67,
+          35.2
+        ]
+      ]
+    }
+  },
+  {
+    "id": "qi-maling",
+    "from": "-0342",
+    "to": "-0342",
+    "holder": "qi",
+    "kind": "land",
+    "linger": "-0338",
+    "label": {
+      "en": "Qi’s Maling campaign (schematic itinerary)",
+      "zh": "【待译】Qi’s Maling campaign (schematic itinerary)"
+    },
+    "path": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          118.337908,
+          36.889756
+        ],
+        [
+          114.3,
+          34.8
+        ],
+        [
+          115.6,
+          36.2
+        ]
+      ]
+    }
+  },
+  {
+    "id": "qin-to-shu",
+    "from": "-0316",
+    "to": "-0316",
+    "holder": "qin",
+    "kind": "land",
+    "linger": "-0312",
+    "label": {
+      "en": "Qin campaign into Shu (schematic itinerary)",
+      "zh": "【待译】Qin campaign into Shu (schematic itinerary)"
+    },
+    "path": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          108.857778,
+          34.413889
+        ],
+        [
+          107.03,
+          33.07
+        ],
+        [
+          105.79,
+          32.16
+        ],
+        [
+          104.06,
+          30.66
+        ]
+      ]
+    }
+  },
+  {
+    "id": "yue-yi-qi",
+    "from": "-0284",
+    "to": "-0284",
+    "holder": "yan",
+    "kind": "land",
+    "linger": "-0279",
+    "label": {
+      "en": "Yue Yi’s campaign against Qi (schematic itinerary)",
+      "zh": "【待译】Yue Yi’s campaign against Qi (schematic itinerary)"
+    },
+    "path": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          116.35,
+          39.88
+        ],
+        [
+          116.7,
+          36.5
+        ],
+        [
+          118.337908,
+          36.889756
+        ]
+      ]
+    }
+  },
+  {
+    "id": "bai-qi-to-ying",
+    "from": "-0279",
+    "to": "-0278",
+    "holder": "qin",
+    "kind": "land",
+    "linger": "-0270",
+    "label": {
+      "en": "Bai Qi’s campaign toward Ying (schematic itinerary)",
+      "zh": "【待译】Bai Qi’s campaign toward Ying (schematic itinerary)"
+    },
+    "path": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          112.09,
+          32.69
+        ],
+        [
+          112.3,
+          31.7
+        ],
+        [
+          112.190298,
+          30.405722
+        ]
+      ]
+    }
+  },
+  {
+    "id": "qin-to-changping",
+    "from": "-0262",
+    "to": "-0260",
+    "holder": "qin",
+    "kind": "land",
+    "linger": "-0257",
+    "label": {
+      "en": "Qin advances toward Changping (schematic itinerary)",
+      "zh": "【待译】Qin advances toward Changping (schematic itinerary)"
+    },
+    "path": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          112.94,
+          35.09
+        ],
+        [
+          112.92,
+          35.8
+        ]
+      ]
+    }
+  },
+  {
+    "id": "zhao-to-changping",
+    "from": "-0261",
+    "to": "-0260",
+    "holder": "zhao",
+    "kind": "land",
+    "linger": "-0257",
+    "label": {
+      "en": "Zhao advances toward Changping (schematic itinerary)",
+      "zh": "【待译】Zhao advances toward Changping (schematic itinerary)"
+    },
+    "path": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          114.49,
+          36.6
+        ],
+        [
+          113.1,
+          36.2
+        ],
+        [
+          112.92,
+          35.8
+        ]
+      ]
+    }
+  },
+  {
+    "id": "xinling-to-handan",
+    "from": "-0257",
+    "to": "-0257",
+    "holder": "wei",
+    "kind": "land",
+    "linger": "-0256",
+    "label": {
+      "en": "Wei force relieves Handan (schematic itinerary)",
+      "zh": "【待译】Wei force relieves Handan (schematic itinerary)"
+    },
+    "path": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          114.3,
+          34.8
+        ],
+        [
+          114.4002,
+          36.2748
+        ],
+        [
+          114.49,
+          36.6
+        ]
+      ]
+    }
+  },
+  {
+    "id": "qin-han-230",
+    "from": "-0230",
+    "to": "-0230",
+    "holder": "qin",
+    "kind": "land",
+    "linger": "-0228",
+    "label": {
+      "en": "Qin campaign against Han (schematic itinerary)",
+      "zh": "【待译】Qin campaign against Han (schematic itinerary)"
+    },
+    "path": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          110.9,
+          34.6
+        ],
+        [
+          112.18,
+          34.52
+        ],
+        [
+          113.73,
+          34.39
+        ]
+      ]
+    }
+  },
+  {
+    "id": "qin-zhao-229",
+    "from": "-0229",
+    "to": "-0228",
+    "holder": "qin",
+    "kind": "land",
+    "linger": "-0227",
+    "label": {
+      "en": "Qin campaign against Zhao (schematic itinerary)",
+      "zh": "【待译】Qin campaign against Zhao (schematic itinerary)"
+    },
+    "path": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          113.1,
+          36.2
+        ],
+        [
+          114.14,
+          38.03
+        ],
+        [
+          114.49,
+          36.6
+        ]
+      ]
+    }
+  },
+  {
+    "id": "qin-wei-225",
+    "from": "-0225",
+    "to": "-0225",
+    "holder": "qin",
+    "kind": "land",
+    "linger": "-0224",
+    "label": {
+      "en": "Qin campaign against Wei (schematic itinerary)",
+      "zh": "【待译】Qin campaign against Wei (schematic itinerary)"
+    },
+    "path": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          112.45,
+          34.68
+        ],
+        [
+          114.3,
+          34.8
+        ]
+      ]
+    }
+  },
+  {
+    "id": "li-xin-225",
+    "from": "-0225",
+    "to": "-0225",
+    "holder": "qin",
+    "kind": "land",
+    "linger": "-0224",
+    "label": {
+      "en": "Li Xin’s failed Chu campaign (schematic itinerary)",
+      "zh": "【待译】Li Xin’s failed Chu campaign (schematic itinerary)"
+    },
+    "path": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          114.9,
+          33.62
+        ],
+        [
+          114.62,
+          32.96
+        ],
+        [
+          115.0,
+          33.5
+        ]
+      ]
+    },
+    "strength": 200000
+  },
+  {
+    "id": "wang-jian-224",
+    "from": "-0224",
+    "to": "-0223",
+    "holder": "qin",
+    "kind": "land",
+    "linger": "-0222",
+    "label": {
+      "en": "Wang Jian’s Chu campaign (schematic itinerary)",
+      "zh": "【待译】Wang Jian’s Chu campaign (schematic itinerary)"
+    },
+    "path": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          114.9,
+          33.62
+        ],
+        [
+          114.62,
+          32.96
+        ],
+        [
+          117.14,
+          33.63
+        ],
+        [
+          116.78,
+          32.57
+        ]
+      ]
+    },
+    "strength": 600000
+  },
+  {
+    "id": "qin-yan-222",
+    "from": "-0222",
+    "to": "-0222",
+    "holder": "qin",
+    "kind": "land",
+    "linger": "-0221",
+    "label": {
+      "en": "Qin campaign into Liaodong (schematic itinerary)",
+      "zh": "【待译】Qin campaign into Liaodong (schematic itinerary)"
+    },
+    "path": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          116.35,
+          39.88
+        ],
+        [
+          123.17,
+          41.27
+        ]
+      ]
+    }
+  },
+  {
+    "id": "qin-qi-221",
+    "from": "-0221",
+    "to": "-0221",
+    "holder": "qin",
+    "kind": "land",
+    "linger": "-0220",
+    "label": {
+      "en": "Qin approaches Qi from Yan (schematic itinerary)",
+      "zh": "【待译】Qin approaches Qi from Yan (schematic itinerary)"
+    },
+    "path": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          116.35,
+          39.88
+        ],
+        [
+          118.337908,
+          36.889756
+        ]
+      ]
+    }
+  },
+  {
+    "id": "first-emperor-last-tour",
+    "from": "-0211",
+    "to": "-0210",
+    "holder": "qin",
+    "kind": "land",
+    "linger": "-0209",
+    "label": {
+      "en": "The First Emperor’s final tour (schematic itinerary)",
+      "zh": "【待译】The First Emperor’s final tour (schematic itinerary)"
+    },
+    "path": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          108.857778,
+          34.413889
+        ],
+        [
+          113.75,
+          31.02
+        ],
+        [
+          120.58,
+          30.0
+        ],
+        [
+          119.91,
+          35.65
+        ],
+        [
+          121.38,
+          37.6
+        ],
+        [
+          115.15,
+          37.1
+        ]
+      ]
+    }
+  }
+]

@@ -1,0 +1,292 @@
+{
+  "url": "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=coordinates&colimit=max&redirects=1&titles=Anyang%7CWu%27an%7CShe+County%2C+Hebei%7CLicheng+County%7CChangzhi%7CChangzi+County%7CGaoping%7CQinyang%7CLuoyang%7CMianchi+County%7CXin%27an+County%7CYuncheng%7CLinfen%7CQuwo+County%7CXinjiang+County%7CQinyuan+County%7CQin+County%7CXi+County%2C+Shanxi%7CYuncheng%7CYongji%2C+Shanxi%7CYu+County%2C+Hebei%7CBeijing",
+  "data": {
+    "batchcomplete": "",
+    "query": {
+      "redirects": [
+        {
+          "from": "Changzi County",
+          "to": "Zhangzi County"
+        }
+      ],
+      "pages": {
+        "478502": {
+          "pageid": 478502,
+          "ns": 0,
+          "title": "Anyang",
+          "coordinates": [
+            {
+              "lat": 36.099,
+              "lon": 114.392,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "18603746": {
+          "pageid": 18603746,
+          "ns": 0,
+          "title": "Beijing",
+          "coordinates": [
+            {
+              "lat": 39.90666667,
+              "lon": 116.3975,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "1789817": {
+          "pageid": 1789817,
+          "ns": 0,
+          "title": "Changzhi",
+          "coordinates": [
+            {
+              "lat": 36.195,
+              "lon": 113.11111111,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "4121159": {
+          "pageid": 4121159,
+          "ns": 0,
+          "title": "Gaoping",
+          "coordinates": [
+            {
+              "lat": 35.798,
+              "lon": 112.924,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "24749585": {
+          "pageid": 24749585,
+          "ns": 0,
+          "title": "Licheng County",
+          "coordinates": [
+            {
+              "lat": 36.66666667,
+              "lon": 113.41666667,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "1797559": {
+          "pageid": 1797559,
+          "ns": 0,
+          "title": "Linfen",
+          "coordinates": [
+            {
+              "lat": 36.088,
+              "lon": 111.519,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "166420": {
+          "pageid": 166420,
+          "ns": 0,
+          "title": "Luoyang",
+          "coordinates": [
+            {
+              "lat": 34.6197,
+              "lon": 112.4539,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "13612202": {
+          "pageid": 13612202,
+          "ns": 0,
+          "title": "Mianchi County",
+          "coordinates": [
+            {
+              "lat": 34.767,
+              "lon": 111.762,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "24749596": {
+          "pageid": 24749596,
+          "ns": 0,
+          "title": "Qin County",
+          "coordinates": [
+            {
+              "lat": 36.75638889,
+              "lon": 112.69722222,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "13835621": {
+          "pageid": 13835621,
+          "ns": 0,
+          "title": "Qinyang",
+          "coordinates": [
+            {
+              "lat": 35.088,
+              "lon": 112.951,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "24749599": {
+          "pageid": 24749599,
+          "ns": 0,
+          "title": "Qinyuan County",
+          "coordinates": [
+            {
+              "lat": 36.50055556,
+              "lon": 112.33861111,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "24749697": {
+          "pageid": 24749697,
+          "ns": 0,
+          "title": "Quwo County",
+          "coordinates": [
+            {
+              "lat": 35.6419,
+              "lon": 111.4758,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "24690736": {
+          "pageid": 24690736,
+          "ns": 0,
+          "title": "She County, Hebei",
+          "coordinates": [
+            {
+              "lat": 36.585,
+              "lon": 113.691,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "9033419": {
+          "pageid": 9033419,
+          "ns": 0,
+          "title": "Wu'an",
+          "coordinates": [
+            {
+              "lat": 36.697,
+              "lon": 114.204,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "24749726": {
+          "pageid": 24749726,
+          "ns": 0,
+          "title": "Xi County, Shanxi",
+          "coordinates": [
+            {
+              "lat": 36.71166667,
+              "lon": 111,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "7502393": {
+          "pageid": 7502393,
+          "ns": 0,
+          "title": "Xin'an County",
+          "coordinates": [
+            {
+              "lat": 34.72805556,
+              "lon": 112.13194444,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "6046070": {
+          "pageid": 6046070,
+          "ns": 0,
+          "title": "Xinjiang County",
+          "coordinates": [
+            {
+              "lat": 35.61638889,
+              "lon": 111.225,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "1781381": {
+          "pageid": 1781381,
+          "ns": 0,
+          "title": "Yongji, Shanxi",
+          "coordinates": [
+            {
+              "lat": 34.867,
+              "lon": 110.448,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "18611023": {
+          "pageid": 18611023,
+          "ns": 0,
+          "title": "Yu County, Hebei",
+          "coordinates": [
+            {
+              "lat": 39.83333333,
+              "lon": 114.56666667,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "2219143": {
+          "pageid": 2219143,
+          "ns": 0,
+          "title": "Yuncheng",
+          "coordinates": [
+            {
+              "lat": 35.0267,
+              "lon": 111.007,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "24749589": {
+          "pageid": 24749589,
+          "ns": 0,
+          "title": "Zhangzi County",
+          "coordinates": [
+            {
+              "lat": 36.12388889,
+              "lon": 112.87694444,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        }
+      }
+    },
+    "limits": {
+      "coordinates": 500
+    }
+  }
+}

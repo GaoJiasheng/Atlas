@@ -1,0 +1,668 @@
+{
+  "river-1": {
+    "id": "dan-1",
+    "name": {
+      "en": "Dan River",
+      "zh": "丹水"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-2": {
+    "id": "dan-2",
+    "name": {
+      "en": "Dan River",
+      "zh": "丹水"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-3": {
+    "id": "dan-3",
+    "name": {
+      "en": "Dan River",
+      "zh": "丹水"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-4": {
+    "id": "fen-4",
+    "name": {
+      "en": "Fen River",
+      "zh": "汾水"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-5": {
+    "id": "fen-5",
+    "name": {
+      "en": "Fen River",
+      "zh": "汾水"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-6": {
+    "id": "fen-6",
+    "name": {
+      "en": "Fen River",
+      "zh": "汾水"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-7": {
+    "id": "fen-7",
+    "name": {
+      "en": "Fen River",
+      "zh": "汾水"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-8": {
+    "id": "ying-8",
+    "name": {
+      "en": "Ying River",
+      "zh": "颍水"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-9": {
+    "id": "wei-9",
+    "name": {
+      "en": "Wei River",
+      "zh": "渭水"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-10": {
+    "id": "wei-10",
+    "name": {
+      "en": "Wei River",
+      "zh": "渭水"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-11": {
+    "id": "wei-11",
+    "name": {
+      "en": "Wei River",
+      "zh": "渭水"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-12": {
+    "id": "wei-12",
+    "name": {
+      "en": "Wei River",
+      "zh": "渭水"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-13": {
+    "id": "jing-13",
+    "name": {
+      "en": "Jing River",
+      "zh": "泾水"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-14": {
+    "id": "jing-14",
+    "name": {
+      "en": "Jing River",
+      "zh": "泾水"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-15": {
+    "id": "jing-15",
+    "name": {
+      "en": "Jing River",
+      "zh": "泾水"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-16": {
+    "id": "luan-16",
+    "name": {
+      "en": "Luan River",
+      "zh": "滦水"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-17": {
+    "id": "luan-17",
+    "name": {
+      "en": "Luan River",
+      "zh": "滦水"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-18": {
+    "id": "wuding-18",
+    "name": {
+      "en": "Wuding River",
+      "zh": "无定河"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-19": {
+    "id": "fuchun-19",
+    "name": {
+      "en": "Fuchun River",
+      "zh": "富春江"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-20": {
+    "id": "fuchun-20",
+    "name": {
+      "en": "Fuchun River",
+      "zh": "富春江"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-21": {
+    "id": "fuchun-21",
+    "name": {
+      "en": "Fuchun River",
+      "zh": "富春江"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-22": {
+    "id": "fuchun-22",
+    "name": {
+      "en": "Fuchun River",
+      "zh": "富春江"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-23": {
+    "id": "fuchun-23",
+    "name": {
+      "en": "Fuchun River",
+      "zh": "富春江"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-24": {
+    "id": "huai-24",
+    "name": {
+      "en": "Huai River",
+      "zh": "淮水"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-25": {
+    "id": "huai-25",
+    "name": {
+      "en": "Huai River",
+      "zh": "淮水"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-26": {
+    "id": "huai-26",
+    "name": {
+      "en": "Huai River",
+      "zh": "淮水"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-27": {
+    "id": "huai-27",
+    "name": {
+      "en": "Huai River",
+      "zh": "淮水"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-28": {
+    "id": "yongding-28",
+    "name": {
+      "en": "Yongding River",
+      "zh": "永定河"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-29": {
+    "id": "hai-29",
+    "name": {
+      "en": "Hai River",
+      "zh": "海河"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-30": {
+    "id": "liao-30",
+    "name": {
+      "en": "Liao River",
+      "zh": "辽水"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-31": {
+    "id": "liao-31",
+    "name": {
+      "en": "Liao River",
+      "zh": "辽水"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-32": {
+    "id": "liao-32",
+    "name": {
+      "en": "Liao River",
+      "zh": "辽水"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-33": {
+    "id": "han-33",
+    "name": {
+      "en": "Han River",
+      "zh": "汉水"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-34": {
+    "id": "han-34",
+    "name": {
+      "en": "Han River",
+      "zh": "汉水"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-35": {
+    "id": "han-35",
+    "name": {
+      "en": "Han River",
+      "zh": "汉水"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-36": {
+    "id": "han-36",
+    "name": {
+      "en": "Han River",
+      "zh": "汉水"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-37": {
+    "id": "han-37",
+    "name": {
+      "en": "Han River",
+      "zh": "汉水"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-38": {
+    "id": "han-38",
+    "name": {
+      "en": "Han River",
+      "zh": "汉水"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-39": {
+    "id": "han-39",
+    "name": {
+      "en": "Han River",
+      "zh": "汉水"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-40": {
+    "id": "gan-40",
+    "name": {
+      "en": "Gan River",
+      "zh": "赣水"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-41": {
+    "id": "gan-41",
+    "name": {
+      "en": "Gan River",
+      "zh": "赣水"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-42": {
+    "id": "min-42",
+    "name": {
+      "en": "Min River",
+      "zh": "岷江"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-43": {
+    "id": "huang-43",
+    "name": {
+      "en": "Yellow River",
+      "zh": "黄河"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-44": {
+    "id": "huang-44",
+    "name": {
+      "en": "Yellow River",
+      "zh": "黄河"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-45": {
+    "id": "huang-45",
+    "name": {
+      "en": "Yellow River",
+      "zh": "黄河"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-46": {
+    "id": "huang-46",
+    "name": {
+      "en": "Yellow River",
+      "zh": "黄河"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-47": {
+    "id": "huang-47",
+    "name": {
+      "en": "Yellow River",
+      "zh": "黄河"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-48": {
+    "id": "yangtze-48",
+    "name": {
+      "en": "Yangtze River",
+      "zh": "长江"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-49": {
+    "id": "yangtze-49",
+    "name": {
+      "en": "Yangtze River",
+      "zh": "长江"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-50": {
+    "id": "yangtze-50",
+    "name": {
+      "en": "Yangtze River",
+      "zh": "长江"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-51": {
+    "id": "yangtze-51",
+    "name": {
+      "en": "Yangtze River",
+      "zh": "长江"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-52": {
+    "id": "chang-jiang-52",
+    "name": {
+      "en": "Yangtze River",
+      "zh": "长江"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-53": {
+    "id": "chang-jiang-53",
+    "name": {
+      "en": "Yangtze River",
+      "zh": "长江"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-54": {
+    "id": "chang-jiang-54",
+    "name": {
+      "en": "Yangtze River",
+      "zh": "长江"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-55": {
+    "id": "chang-jiang-55",
+    "name": {
+      "en": "Yangtze River",
+      "zh": "长江"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-56": {
+    "id": "chang-jiang-56",
+    "name": {
+      "en": "Yangtze River",
+      "zh": "长江"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  },
+  "river-57": {
+    "id": "huang-before-11-ad-57",
+    "name": {
+      "en": "Yellow River",
+      "zh": "黄河"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints.",
+    "reconstructed": true,
+    "from": "-0602",
+    "to": "0011"
+  },
+  "river-58": {
+    "id": "huang-before-602-bc-58",
+    "name": {
+      "en": "Yellow River",
+      "zh": "黄河"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints.",
+    "reconstructed": true,
+    "to": "-0602"
+  },
+  "river-59": {
+    "id": "ji-59",
+    "name": {
+      "en": "Ji River",
+      "zh": "济水"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints.",
+    "reconstructed": true
+  },
+  "river-60": {
+    "id": "huang-60",
+    "name": {
+      "en": "Yellow River",
+      "zh": "黄河"
+    },
+    "src": [
+      "G1"
+    ],
+    "method": "Open path copied from Kanguole SVG and affine registered against Natural Earth endpoints."
+  }
+}

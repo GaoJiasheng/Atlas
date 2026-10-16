@@ -1,0 +1,182 @@
+[
+  {
+    "name": "Fen NE confluence / endpoint",
+    "lnglat": [
+      112.075613,
+      38.861274
+    ],
+    "svg": [
+      751.3907055449217,
+      293.75886792085294
+    ],
+    "coordinateSource": "Natural Earth 10m rivers_lake_centerlines; source vertex match, not independent historical validation"
+  },
+  {
+    "name": "Wei NE confluence / endpoint",
+    "lnglat": [
+      110.293468,
+      34.623155
+    ],
+    "svg": [
+      589.5907055449225,
+      765.5588679208531
+    ],
+    "coordinateSource": "Natural Earth 10m rivers_lake_centerlines; source vertex match, not independent historical validation"
+  },
+  {
+    "name": "Han NE confluence / endpoint",
+    "lnglat": [
+      111.477631,
+      32.567816
+    ],
+    "svg": [
+      697.0907055449225,
+      994.3588679208528
+    ],
+    "coordinateSource": "Natural Earth 10m rivers_lake_centerlines; source vertex match, not independent historical validation"
+  },
+  {
+    "name": "Huai NE confluence / endpoint",
+    "lnglat": [
+      115.564464,
+      32.402371
+    ],
+    "svg": [
+      1068.190705544921,
+      1012.7588679208529
+    ],
+    "coordinateSource": "Natural Earth 10m rivers_lake_centerlines; source vertex match, not independent historical validation"
+  },
+  {
+    "name": "Dan NE confluence / endpoint",
+    "lnglat": [
+      111.47755,
+      32.569525
+    ],
+    "svg": [
+      697.0907055449225,
+      994.158867920853
+    ],
+    "coordinateSource": "Natural Earth 10m rivers_lake_centerlines; source vertex match, not independent historical validation"
+  },
+  {
+    "name": "Jing NE confluence / endpoint",
+    "lnglat": [
+      109.070974,
+      34.470038
+    ],
+    "svg": [
+      478.59070554492246,
+      782.5588679208531
+    ],
+    "coordinateSource": "Natural Earth 10m rivers_lake_centerlines; source vertex match, not independent historical validation"
+  },
+  {
+    "name": "Ying NE confluence / endpoint",
+    "lnglat": [
+      116.521902,
+      32.498847
+    ],
+    "svg": [
+      1155.0907055449225,
+      1001.9588679208528
+    ],
+    "coordinateSource": "Natural Earth 10m rivers_lake_centerlines; source vertex match, not independent historical validation"
+  },
+  {
+    "name": "Luan NE confluence / endpoint",
+    "lnglat": [
+      119.257498,
+      39.412421
+    ],
+    "svg": [
+      1403.490705544922,
+      232.3588679208533
+    ],
+    "coordinateSource": "Natural Earth 10m rivers_lake_centerlines; source vertex match, not independent historical validation"
+  },
+  {
+    "name": "Wuding NE confluence / endpoint",
+    "lnglat": [
+      110.437592,
+      37.042019
+    ],
+    "svg": [
+      602.690705544921,
+      496.25886792085294
+    ],
+    "coordinateSource": "Natural Earth 10m rivers_lake_centerlines; source vertex match, not independent historical validation"
+  },
+  {
+    "name": "Fuchun NE confluence / endpoint",
+    "lnglat": [
+      117.785167,
+      29.707302
+    ],
+    "svg": [
+      1269.7907055449214,
+      1312.758867920853
+    ],
+    "coordinateSource": "Natural Earth 10m rivers_lake_centerlines; source vertex match, not independent historical validation"
+  },
+  {
+    "name": "Yongding NE confluence / endpoint",
+    "lnglat": [
+      115.589122,
+      40.240424
+    ],
+    "svg": [
+      1070.3907055449217,
+      140.25886792085294
+    ],
+    "coordinateSource": "Natural Earth 10m rivers_lake_centerlines; source vertex match, not independent historical validation"
+  },
+  {
+    "name": "Hai NE confluence / endpoint",
+    "lnglat": [
+      117.708995,
+      38.981024
+    ],
+    "svg": [
+      1262.8907055449217,
+      280.45886792085275
+    ],
+    "coordinateSource": "Natural Earth 10m rivers_lake_centerlines; source vertex match, not independent historical validation"
+  },
+  {
+    "name": "Liao NE confluence / endpoint",
+    "lnglat": [
+      122.156261,
+      40.701606
+    ],
+    "svg": [
+      1666.690705544921,
+      88.8588679208533
+    ],
+    "coordinateSource": "Natural Earth 10m rivers_lake_centerlines; source vertex match, not independent historical validation"
+  },
+  {
+    "name": "Gan NE confluence / endpoint",
+    "lnglat": [
+      115.981944,
+      29.279161
+    ],
+    "svg": [
+      1106.0907055449225,
+      1360.4588679208528
+    ],
+    "coordinateSource": "Natural Earth 10m rivers_lake_centerlines; source vertex match, not independent historical validation"
+  },
+  {
+    "name": "Yangtze NE confluence / endpoint",
+    "lnglat": [
+      113.127615,
+      29.462755
+    ],
+    "svg": [
+      846.8907055449217,
+      1339.9588679208528
+    ],
+    "coordinateSource": "Natural Earth 10m rivers_lake_centerlines; source vertex match, not independent historical validation"
+  }
+]

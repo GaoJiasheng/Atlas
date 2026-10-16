@@ -1,0 +1,217 @@
+{
+  "method": "DSATUR greedy colouring of within-frame shared-arc adjacency, union across all11frames",
+  "conflicts": 0,
+  "colors": {
+    "chu": 1,
+    "jin": 2,
+    "qi": 3,
+    "song": 4,
+    "wei": 5,
+    "wey": 6,
+    "zheng": 3,
+    "zhao": 1,
+    "lu": 2,
+    "zhou": 4,
+    "han": 3,
+    "qin": 4,
+    "yue": 5,
+    "wu": 3,
+    "cao": 1,
+    "chen": 2,
+    "yan": 4,
+    "cai": 4,
+    "zhongshan": 2,
+    "ju": 1,
+    "ba": 2,
+    "shu": 1,
+    "zeng": 1
+  },
+  "adjacency": {
+    "zhou": [
+      "chu",
+      "han",
+      "jin",
+      "wei",
+      "zhao",
+      "zheng"
+    ],
+    "qin": [
+      "chu",
+      "han",
+      "jin",
+      "wei",
+      "zhao"
+    ],
+    "jin": [
+      "chu",
+      "han",
+      "qi",
+      "qin",
+      "song",
+      "wei",
+      "wey",
+      "yan",
+      "zhao",
+      "zheng",
+      "zhou"
+    ],
+    "qi": [
+      "chu",
+      "jin",
+      "ju",
+      "lu",
+      "song",
+      "wei",
+      "wey",
+      "yan",
+      "yue",
+      "zhao",
+      "zhongshan"
+    ],
+    "chu": [
+      "ba",
+      "cai",
+      "chen",
+      "han",
+      "jin",
+      "lu",
+      "qi",
+      "qin",
+      "song",
+      "wei",
+      "wey",
+      "wu",
+      "yue",
+      "zheng",
+      "zhou"
+    ],
+    "lu": [
+      "cao",
+      "chu",
+      "ju",
+      "qi",
+      "song",
+      "wey",
+      "wu",
+      "yue"
+    ],
+    "song": [
+      "cao",
+      "chen",
+      "chu",
+      "jin",
+      "lu",
+      "qi",
+      "wei",
+      "wey",
+      "wu",
+      "yue",
+      "zheng"
+    ],
+    "wey": [
+      "cao",
+      "chu",
+      "jin",
+      "lu",
+      "qi",
+      "song",
+      "wei",
+      "zhao",
+      "zheng"
+    ],
+    "zheng": [
+      "cai",
+      "cao",
+      "chen",
+      "chu",
+      "jin",
+      "song",
+      "wei",
+      "wey",
+      "zhou"
+    ],
+    "chen": [
+      "cai",
+      "chu",
+      "song",
+      "zheng"
+    ],
+    "cai": [
+      "chen",
+      "chu",
+      "zheng"
+    ],
+    "cao": [
+      "lu",
+      "song",
+      "wey",
+      "zheng"
+    ],
+    "yan": [
+      "jin",
+      "qi",
+      "zhao",
+      "zhongshan"
+    ],
+    "wu": [
+      "chu",
+      "ju",
+      "lu",
+      "song",
+      "yue"
+    ],
+    "yue": [
+      "chu",
+      "lu",
+      "qi",
+      "song",
+      "wu"
+    ],
+    "han": [
+      "chu",
+      "jin",
+      "qin",
+      "wei",
+      "zhao",
+      "zhou"
+    ],
+    "zhao": [
+      "han",
+      "jin",
+      "qi",
+      "qin",
+      "wei",
+      "wey",
+      "yan",
+      "zhongshan",
+      "zhou"
+    ],
+    "wei": [
+      "chu",
+      "han",
+      "jin",
+      "qi",
+      "qin",
+      "song",
+      "wey",
+      "zhao",
+      "zheng",
+      "zhou"
+    ],
+    "zhongshan": [
+      "qi",
+      "yan",
+      "zhao"
+    ],
+    "ba": [
+      "chu"
+    ],
+    "shu": [],
+    "zeng": [],
+    "ju": [
+      "lu",
+      "qi",
+      "wu"
+    ]
+  }
+}

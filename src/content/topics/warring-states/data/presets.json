@@ -1,0 +1,116 @@
+{
+  "presets": [
+    {
+      "id": "plate",
+      "label": {
+        "en": "Whole plate",
+        "zh": "【待译】Whole plate"
+      },
+      "camera": {
+        "center": [
+          112.5,
+          32.5
+        ],
+        "zoom": 4.9
+      }
+    },
+    {
+      "id": "central-plain",
+      "label": {
+        "en": "Central Plain",
+        "zh": "【待译】Central Plain"
+      },
+      "camera": {
+        "center": [
+          113.5,
+          35
+        ],
+        "zoom": 6.3
+      }
+    },
+    {
+      "id": "guanzhong",
+      "label": {
+        "en": "Guanzhong",
+        "zh": "【待译】Guanzhong"
+      },
+      "camera": {
+        "center": [
+          108.8,
+          34.4
+        ],
+        "zoom": 7.2
+      }
+    },
+    {
+      "id": "qi-lu",
+      "label": {
+        "en": "Qi and Lu",
+        "zh": "【待译】Qi and Lu"
+      },
+      "camera": {
+        "center": [
+          117.8,
+          36.2
+        ],
+        "zoom": 6.8
+      }
+    },
+    {
+      "id": "jiang-han",
+      "label": {
+        "en": "Jiang–Han",
+        "zh": "【待译】Jiang–Han"
+      },
+      "camera": {
+        "center": [
+          112.5,
+          31
+        ],
+        "zoom": 6.4
+      }
+    },
+    {
+      "id": "wu-yue",
+      "label": {
+        "en": "Wu and Yue",
+        "zh": "【待译】Wu and Yue"
+      },
+      "camera": {
+        "center": [
+          120,
+          30.8
+        ],
+        "zoom": 6.8
+      }
+    },
+    {
+      "id": "ba-shu",
+      "label": {
+        "en": "Ba and Shu",
+        "zh": "【待译】Ba and Shu"
+      },
+      "camera": {
+        "center": [
+          105,
+          30.5
+        ],
+        "zoom": 6.4
+      }
+    },
+    {
+      "id": "changping-view",
+      "label": {
+        "en": "Changping",
+        "zh": "【待译】Changping"
+      },
+      "camera": {
+        "center": [
+          112.9,
+          35.8
+        ],
+        "zoom": 8.6
+      }
+    }
+  ]
+}

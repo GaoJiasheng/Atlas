@@ -32,3 +32,6 @@ docs/screenshots/
 __pycache__/
 *.pyc
 ios/build/
+scripts/geo/warring-states/raw/
+scripts/geo/warring-states/check/
+scripts/geo/warring-states/work/

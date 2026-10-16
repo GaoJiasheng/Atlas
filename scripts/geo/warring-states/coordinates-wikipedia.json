@@ -1,0 +1,203 @@
+{
+  "url": "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=coordinates&colimit=max&redirects=1&titles=Fengxiang+District%7CLinzi+District%7CQufu%7CJi+%28state%29%7CShangqiu%7CYing+%28Chu%29%7CShanghai%7CTianjin%7CWuhan%7CNanjing%7CXinzheng%7CJinan%7CSuzhou%7CXi%27an%7CHangzhou",
+  "data": {
+    "batchcomplete": "",
+    "query": {
+      "redirects": [
+        {
+          "from": "Linzi District",
+          "to": "Linzi, Zibo"
+        },
+        {
+          "from": "Ji (state)",
+          "to": "Ji",
+          "tofragment": "Places in China"
+        }
+      ],
+      "pages": {
+        "17627538": {
+          "pageid": 17627538,
+          "ns": 0,
+          "title": "Fengxiang District",
+          "coordinates": [
+            {
+              "lat": 34.56,
+              "lon": 107.42055556,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "158185": {
+          "pageid": 158185,
+          "ns": 0,
+          "title": "Hangzhou",
+          "coordinates": [
+            {
+              "lat": 30.267,
+              "lon": 120.153,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "250092": {
+          "pageid": 250092,
+          "ns": 0,
+          "title": "Jinan",
+          "coordinates": [
+            {
+              "lat": 36.6702,
+              "lon": 117.0207,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "21791": {
+          "pageid": 21791,
+          "ns": 0,
+          "title": "Nanjing",
+          "coordinates": [
+            {
+              "lat": 32.06083333,
+              "lon": 118.77888889,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "611475": {
+          "pageid": 611475,
+          "ns": 0,
+          "title": "Qufu",
+          "coordinates": [
+            {
+              "lat": 35.5819,
+              "lon": 116.9862,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "27643": {
+          "pageid": 27643,
+          "ns": 0,
+          "title": "Shanghai",
+          "coordinates": [
+            {
+              "lat": 31.2325,
+              "lon": 121.46916667,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "2135222": {
+          "pageid": 2135222,
+          "ns": 0,
+          "title": "Shangqiu",
+          "coordinates": [
+            {
+              "lat": 34.415,
+              "lon": 115.656,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "292011": {
+          "pageid": 292011,
+          "ns": 0,
+          "title": "Suzhou",
+          "coordinates": [
+            {
+              "lat": 31.3,
+              "lon": 120.61944444,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "50821": {
+          "pageid": 50821,
+          "ns": 0,
+          "title": "Tianjin",
+          "coordinates": [
+            {
+              "lat": 39.1336,
+              "lon": 117.2054,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "82138": {
+          "pageid": 82138,
+          "ns": 0,
+          "title": "Wuhan",
+          "coordinates": [
+            {
+              "lat": 30.595,
+              "lon": 114.2975,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "81263": {
+          "pageid": 81263,
+          "ns": 0,
+          "title": "Xi'an",
+          "coordinates": [
+            {
+              "lat": 34.26111111,
+              "lon": 108.94222222,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "1276013": {
+          "pageid": 1276013,
+          "ns": 0,
+          "title": "Xinzheng",
+          "coordinates": [
+            {
+              "lat": 34.3964,
+              "lon": 113.7402,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "28912007": {
+          "pageid": 28912007,
+          "ns": 0,
+          "title": "Ying (Chu)"
+        },
+        "381913": {
+          "pageid": 381913,
+          "ns": 0,
+          "title": "Ji"
+        },
+        "3201992": {
+          "pageid": 3201992,
+          "ns": 0,
+          "title": "Linzi, Zibo",
+          "coordinates": [
+            {
+              "lat": 36.81666667,
+              "lon": 118.3,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        }
+      }
+    },
+    "limits": {
+      "coordinates": 500
+    }
+  }
+}

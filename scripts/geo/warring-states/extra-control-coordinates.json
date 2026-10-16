@@ -1,0 +1,374 @@
+{
+  "url": "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=coordinates&colimit=max&redirects=1&titles=Xianyang%7CJinyang%7CHandan%7CBattle+of+Changping%7CPuyang%7CLinzi+District%7CQufu%7CXinzheng%7CKaifeng%7CShou+County%7CSuzhou%7CShaoxing%7CYing+%28Chu%29%7CChangsha%7CZhushan+County%7CChongqing%7CChengdu%7CJi+%28Yan%29%7CYu+County%2C+Hebei%7CAncient+City+of+Jimo%7CLangya+%28city%29%7CCape+Chengshan%7CL%C3%BCshunkou+District%7CShanhaiguan%7CYellow+River%7CFen+River%7CWei+River%7CHuai+River%7CHan+River%7CYangtze%7CHangzhou+Bay",
+  "data": {
+    "batchcomplete": "",
+    "query": {
+      "redirects": [
+        {
+          "from": "Shanhaiguan",
+          "to": "Shanhai Pass"
+        },
+        {
+          "from": "Linzi District",
+          "to": "Linzi, Zibo"
+        },
+        {
+          "from": "Lüshunkou District",
+          "to": "Lüshunkou"
+        }
+      ],
+      "pages": {
+        "-1": {
+          "ns": 0,
+          "title": "Ji (Yan)",
+          "missing": ""
+        },
+        "-2": {
+          "ns": 0,
+          "title": "Ancient City of Jimo",
+          "missing": ""
+        },
+        "-3": {
+          "ns": 0,
+          "title": "Langya (city)",
+          "missing": ""
+        },
+        "-4": {
+          "ns": 0,
+          "title": "Cape Chengshan",
+          "missing": ""
+        },
+        "279551": {
+          "pageid": 279551,
+          "ns": 0,
+          "title": "Battle of Changping",
+          "coordinates": [
+            {
+              "lat": 35.79805556,
+              "lon": 112.92388889,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "203299": {
+          "pageid": 203299,
+          "ns": 0,
+          "title": "Changsha",
+          "coordinates": [
+            {
+              "lat": 28.228,
+              "lon": 112.939,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "170375": {
+          "pageid": 170375,
+          "ns": 0,
+          "title": "Chengdu",
+          "coordinates": [
+            {
+              "lat": 30.66,
+              "lon": 104.06333333,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "171752": {
+          "pageid": 171752,
+          "ns": 0,
+          "title": "Chongqing",
+          "coordinates": [
+            {
+              "lat": 29.5637,
+              "lon": 106.5504,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "1844264": {
+          "pageid": 1844264,
+          "ns": 0,
+          "title": "Fen River",
+          "coordinates": [
+            {
+              "lat": 35.263,
+              "lon": 110.391,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "939954": {
+          "pageid": 939954,
+          "ns": 0,
+          "title": "Han River"
+        },
+        "1375980": {
+          "pageid": 1375980,
+          "ns": 0,
+          "title": "Handan",
+          "coordinates": [
+            {
+              "lat": 36.601,
+              "lon": 114.487,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "3248880": {
+          "pageid": 3248880,
+          "ns": 0,
+          "title": "Hangzhou Bay",
+          "coordinates": [
+            {
+              "lat": 30.2852,
+              "lon": 120.924,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "1129773": {
+          "pageid": 1129773,
+          "ns": 0,
+          "title": "Huai River",
+          "coordinates": [
+            {
+              "lat": 32.3078,
+              "lon": 119.7035,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "422324": {
+          "pageid": 422324,
+          "ns": 0,
+          "title": "Jinyang"
+        },
+        "244481": {
+          "pageid": 244481,
+          "ns": 0,
+          "title": "Kaifeng",
+          "coordinates": [
+            {
+              "lat": 34.795,
+              "lon": 114.345,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "2638448": {
+          "pageid": 2638448,
+          "ns": 0,
+          "title": "Puyang",
+          "coordinates": [
+            {
+              "lat": 35.7627,
+              "lon": 115.0292,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "611475": {
+          "pageid": 611475,
+          "ns": 0,
+          "title": "Qufu",
+          "coordinates": [
+            {
+              "lat": 35.5819,
+              "lon": 116.9862,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "301263": {
+          "pageid": 301263,
+          "ns": 0,
+          "title": "Shaoxing",
+          "coordinates": [
+            {
+              "lat": 30.0511,
+              "lon": 120.5833,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "5108633": {
+          "pageid": 5108633,
+          "ns": 0,
+          "title": "Shou County",
+          "coordinates": [
+            {
+              "lat": 32.545,
+              "lon": 116.7982,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "292011": {
+          "pageid": 292011,
+          "ns": 0,
+          "title": "Suzhou",
+          "coordinates": [
+            {
+              "lat": 31.3,
+              "lon": 120.61944444,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "1097472": {
+          "pageid": 1097472,
+          "ns": 0,
+          "title": "Wei River",
+          "coordinates": [
+            {
+              "lat": 34.61166667,
+              "lon": 110.28888889,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "1544293": {
+          "pageid": 1544293,
+          "ns": 0,
+          "title": "Xianyang",
+          "coordinates": [
+            {
+              "lat": 34.3299,
+              "lon": 108.7088,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "1276013": {
+          "pageid": 1276013,
+          "ns": 0,
+          "title": "Xinzheng",
+          "coordinates": [
+            {
+              "lat": 34.3964,
+              "lon": 113.7402,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "6613": {
+          "pageid": 6613,
+          "ns": 0,
+          "title": "Yangtze",
+          "coordinates": [
+            {
+              "lat": 31.39361111,
+              "lon": 121.98305556,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "50819": {
+          "pageid": 50819,
+          "ns": 0,
+          "title": "Yellow River",
+          "coordinates": [
+            {
+              "lat": 37.763,
+              "lon": 119.162,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "28912007": {
+          "pageid": 28912007,
+          "ns": 0,
+          "title": "Ying (Chu)"
+        },
+        "18611023": {
+          "pageid": 18611023,
+          "ns": 0,
+          "title": "Yu County, Hebei",
+          "coordinates": [
+            {
+              "lat": 39.83333333,
+              "lon": 114.56666667,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "13001621": {
+          "pageid": 13001621,
+          "ns": 0,
+          "title": "Zhushan County",
+          "coordinates": [
+            {
+              "lat": 32.2249,
+              "lon": 110.2287,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "3201992": {
+          "pageid": 3201992,
+          "ns": 0,
+          "title": "Linzi, Zibo",
+          "coordinates": [
+            {
+              "lat": 36.81666667,
+              "lon": 118.3,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "414217": {
+          "pageid": 414217,
+          "ns": 0,
+          "title": "Lüshunkou",
+          "coordinates": [
+            {
+              "lat": 38.85083333,
+              "lon": 121.25694444,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        },
+        "671621": {
+          "pageid": 671621,
+          "ns": 0,
+          "title": "Shanhai Pass",
+          "coordinates": [
+            {
+              "lat": 40.00944444,
+              "lon": 119.75416667,
+              "primary": "",
+              "globe": "earth"
+            }
+          ]
+        }
+      }
+    },
+    "limits": {
+      "coordinates": 500
+    }
+  }
+}

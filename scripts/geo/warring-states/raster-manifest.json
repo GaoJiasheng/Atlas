@@ -1,0 +1,1120 @@
+{
+  "raster": {
+    "G7": {
+      "dataset": "G7-trace",
+      "projection": "auto",
+      "palette": {
+        "#db9d5c": "wei",
+        "#9c8170": "qin",
+        "#94a286": "zhao",
+        "#b8bd5c": "han",
+        "#7da58e": "qi",
+        "#bd6e7e": "chu",
+        "#c4b476": "yan",
+        "#a6b06e": "yue",
+        "#b29e86": "song",
+        "#ce9c64": "lu",
+        "#99bdb1": "wey",
+        "#d3c49b": "zhou",
+        "#b590a1": "zhongshan",
+        "#ffffff": "_outside"
+      },
+      "tolerance": 2,
+      "land": [
+        "wei",
+        "qin",
+        "zhao",
+        "han",
+        "qi",
+        "chu",
+        "yan",
+        "yue",
+        "song",
+        "lu",
+        "wey",
+        "zhou",
+        "zhongshan"
+      ],
+      "sea": [],
+      "maxResidualKm": 25,
+      "controlPoints": [
+        {
+          "name": "Ji (Beijing)",
+          "lnglat": [
+            116.382425,
+            39.894262
+          ],
+          "svg": [
+            461,
+            128.5
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Ji_(Beijing)",
+          "coordinateMethod": "ancient city coordinate"
+        },
+        {
+          "name": "Handan",
+          "lnglat": [
+            114.487,
+            36.601
+          ],
+          "svg": [
+            425.6,
+            235.6
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Handan",
+          "coordinateMethod": "modern urban coordinate proxy near ancient capital"
+        },
+        {
+          "name": "Linzi",
+          "lnglat": [
+            118.3554,
+            36.8829
+          ],
+          "svg": [
+            521,
+            219
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Ancient_Linzi",
+          "coordinateMethod": "ancient city site coordinate"
+        },
+        {
+          "name": "Linwu",
+          "lnglat": [
+            112.55608,
+            25.28167
+          ],
+          "svg": [
+            408.2,
+            600.8
+          ],
+          "coordinateSource": "https://zh.wikipedia.org/wiki/临武县",
+          "coordinateMethod": "modern town coordinate proxy for source ancient settlement"
+        },
+        {
+          "name": "Xianyang",
+          "lnglat": [
+            108.7088,
+            34.3299
+          ],
+          "svg": [
+            288.4,
+            317.4
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Xianyang",
+          "coordinateMethod": "modern urban coordinate proxy for source ancient capital"
+        },
+        {
+          "name": "Chengdu",
+          "lnglat": [
+            104.06333,
+            30.66
+          ],
+          "svg": [
+            167,
+            439
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Chengdu",
+          "coordinateMethod": "Tianfu Square city coordinate proxy"
+        },
+        {
+          "name": "Ying (Jinancheng)",
+          "lnglat": [
+            112.19029806,
+            30.40572194
+          ],
+          "svg": [
+            384.5,
+            441
+          ],
+          "coordinateSource": "https://zh.wikipedia.org/wiki/楚纪南故城",
+          "coordinateMethod": "archaeological site coordinate; different earlier Ying locations not assumed"
+        },
+        {
+          "name": "Luoyang (Wangcheng)",
+          "lnglat": [
+            112.4539,
+            34.6197
+          ],
+          "svg": [
+            386,
+            301.5
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Luoyang",
+          "coordinateMethod": "modern urban coordinate proxy; ancient urban footprint covers several sites"
+        },
+        {
+          "name": "Daliang (Kaifeng)",
+          "lnglat": [
+            114.345,
+            34.795
+          ],
+          "svg": [
+            428,
+            296.5
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Kaifeng",
+          "coordinateMethod": "urban coordinate proxy for buried ancient capital"
+        },
+        {
+          "name": "Xinzheng",
+          "lnglat": [
+            113.7402,
+            34.3964
+          ],
+          "svg": [
+            415,
+            310
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Xinzheng",
+          "coordinateMethod": "urban coordinate proxy for ancient Zheng/Han capital"
+        },
+        {
+          "name": "Ba (Chongqing)",
+          "lnglat": [
+            106.5504,
+            29.5637
+          ],
+          "svg": [
+            233.5,
+            472
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Chongqing",
+          "coordinateMethod": "urban coordinate proxy for source Ba/Jiangzhou point"
+        },
+        {
+          "name": "Changsha",
+          "lnglat": [
+            112.939,
+            28.228
+          ],
+          "svg": [
+            411.6,
+            509.4
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Changsha",
+          "coordinateMethod": "urban coordinate proxy"
+        }
+      ],
+      "minRegionPx": 2,
+      "exclude": []
+    },
+    "G11": {
+      "dataset": "G11-trace",
+      "projection": "auto",
+      "palette": {
+        "#f29e93": "qin",
+        "#c9baa3": "zhao",
+        "#f4d3ca": "yan",
+        "#f6ec69": "qi",
+        "#f3b994": "wei",
+        "#f179e9": "han",
+        "#91cd8d": "chu",
+        "#b1c7de": "_sea",
+        "#ece5d3": "_outside",
+        "#d3c49b": "zhou"
+      },
+      "tolerance": 2,
+      "land": [
+        "qin",
+        "zhao",
+        "yan",
+        "qi",
+        "wei",
+        "han",
+        "chu",
+        "zhou"
+      ],
+      "sea": [
+        "_sea"
+      ],
+      "exclude": [],
+      "minRegionPx": 2,
+      "maxResidualKm": 25,
+      "controlPoints": [
+        {
+          "name": "Ji (Beijing)",
+          "lnglat": [
+            116.382425,
+            39.894262
+          ],
+          "svg": [
+            854,
+            300
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Ji_(Beijing)",
+          "coordinateMethod": "ancient city coordinate"
+        },
+        {
+          "name": "Dai (Yuxian)",
+          "lnglat": [
+            114.567,
+            39.833
+          ],
+          "svg": [
+            748,
+            300
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Yu_County,_Hebei",
+          "coordinateMethod": "county-seat coordinate proxy for source Dai point"
+        },
+        {
+          "name": "Handan",
+          "lnglat": [
+            114.487,
+            36.601
+          ],
+          "svg": [
+            766,
+            503
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Handan",
+          "coordinateMethod": "modern urban coordinate proxy near ancient capital"
+        },
+        {
+          "name": "Linzi",
+          "lnglat": [
+            118.3554,
+            36.8829
+          ],
+          "svg": [
+            979,
+            493
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Ancient_Linzi",
+          "coordinateMethod": "ancient city site coordinate"
+        },
+        {
+          "name": "Wey (Puyang)",
+          "lnglat": [
+            115.0292,
+            35.7627
+          ],
+          "svg": [
+            797,
+            565
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Puyang",
+          "coordinateMethod": "urban coordinate proxy for source Diqiu/Wey point"
+        },
+        {
+          "name": "Anyi",
+          "lnglat": [
+            111.17433,
+            35.18425
+          ],
+          "svg": [
+            563,
+            639
+          ],
+          "coordinateSource": "https://zh.wikipedia.org/wiki/安邑城",
+          "coordinateMethod": "actual Warring States Wei capital site; not the different 安邑古城遗址"
+        },
+        {
+          "name": "Yong (Fengxiang)",
+          "lnglat": [
+            107.42056,
+            34.56
+          ],
+          "svg": [
+            368,
+            686
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Fengxiang_District",
+          "coordinateMethod": "modern town coordinate proxy for nearby ancient Yong"
+        },
+        {
+          "name": "Xianyang",
+          "lnglat": [
+            108.7088,
+            34.3299
+          ],
+          "svg": [
+            447,
+            694
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Xianyang",
+          "coordinateMethod": "modern urban coordinate proxy for source ancient capital"
+        },
+        {
+          "name": "Luoyang (Wangcheng)",
+          "lnglat": [
+            112.4539,
+            34.6197
+          ],
+          "svg": [
+            656,
+            667
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Luoyang",
+          "coordinateMethod": "modern urban coordinate proxy; ancient urban footprint covers several sites"
+        },
+        {
+          "name": "Daliang (Kaifeng)",
+          "lnglat": [
+            114.345,
+            34.795
+          ],
+          "svg": [
+            754,
+            656
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Kaifeng",
+          "coordinateMethod": "urban coordinate proxy for buried ancient capital"
+        },
+        {
+          "name": "Yangzhai (Yuzhou)",
+          "lnglat": [
+            113.489,
+            34.142
+          ],
+          "svg": [
+            708,
+            705
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Yuzhou,_Henan",
+          "coordinateMethod": "urban coordinate proxy for ancient Yangzhai"
+        },
+        {
+          "name": "Chen (Huaiyang)",
+          "lnglat": [
+            114.85,
+            33.73306
+          ],
+          "svg": [
+            798,
+            716
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Huaiyang_District",
+          "coordinateMethod": "town coordinate proxy for source Chen/Wanqiu"
+        },
+        {
+          "name": "Shouchun",
+          "lnglat": [
+            116.7982,
+            32.545
+          ],
+          "svg": [
+            902,
+            819
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Shouchun",
+          "coordinateMethod": "modern Shou county-seat proxy for nearby source Shouchun"
+        },
+        {
+          "name": "Wu (Suzhou)",
+          "lnglat": [
+            120.61944,
+            31.3
+          ],
+          "svg": [
+            1158,
+            868
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Suzhou",
+          "coordinateMethod": "urban coordinate proxy for ancient Wu capital"
+        },
+        {
+          "name": "Ying (Jinancheng)",
+          "lnglat": [
+            112.19029806,
+            30.40572194
+          ],
+          "svg": [
+            640,
+            968
+          ],
+          "coordinateSource": "https://zh.wikipedia.org/wiki/楚纪南故城",
+          "coordinateMethod": "archaeological site coordinate; different earlier Ying locations not assumed"
+        },
+        {
+          "name": "Shu (Chengdu)",
+          "lnglat": [
+            104.06333,
+            30.66
+          ],
+          "svg": [
+            143,
+            949
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Chengdu",
+          "coordinateMethod": "Tianfu Square city coordinate proxy"
+        },
+        {
+          "name": "Ba (Chongqing)",
+          "lnglat": [
+            106.5504,
+            29.5637
+          ],
+          "svg": [
+            286,
+            976
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Chongqing",
+          "coordinateMethod": "urban coordinate proxy for source Ba/Jiangzhou point"
+        },
+        {
+          "name": "Nanzheng (Hanzhong)",
+          "lnglat": [
+            107.0232,
+            33.0664
+          ],
+          "svg": [
+            345,
+            775
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Hanzhong",
+          "coordinateMethod": "urban coordinate proxy for source Nanzheng/Hanzhong"
+        }
+      ]
+    },
+    "G10": {
+      "dataset": "G10-trace",
+      "projection": "auto",
+      "palette": {
+        "#d1ad76": "jin",
+        "#66b7bc": "ju",
+        "#bdd18c": "zheng",
+        "#a99bc9": "wu",
+        "#d98fb8": "ba",
+        "#9c8170": "qin",
+        "#7da58e": "qi",
+        "#bd6e7e": "chu",
+        "#c4b476": "yan",
+        "#a6b06e": "yue",
+        "#b29e86": "song",
+        "#ce9c64": "lu",
+        "#99bdb1": "wey",
+        "#d3c49b": "zhou",
+        "#ffffff": "_outside"
+      },
+      "tolerance": 2,
+      "land": [
+        "jin",
+        "ju",
+        "zheng",
+        "wu",
+        "ba",
+        "qin",
+        "qi",
+        "chu",
+        "yan",
+        "yue",
+        "song",
+        "lu",
+        "wey",
+        "zhou"
+      ],
+      "sea": [],
+      "maxResidualKm": 40,
+      "controlPoints": [
+        {
+          "name": "Ji (Beijing)",
+          "lnglat": [
+            116.382425,
+            39.894262
+          ],
+          "svg": [
+            497,
+            135
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Ji_(Beijing)",
+          "coordinateMethod": "ancient city coordinate"
+        },
+        {
+          "name": "Linzi (Yingqiu)",
+          "lnglat": [
+            118.3554,
+            36.8829
+          ],
+          "svg": [
+            580.3,
+            253
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Ancient_Linzi",
+          "coordinateMethod": "ancient city site coordinate"
+        },
+        {
+          "name": "Qufu",
+          "lnglat": [
+            116.9862,
+            35.5819
+          ],
+          "svg": [
+            552,
+            296
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Qufu",
+          "coordinateMethod": "urban coordinate proxy for ancient Lu capital"
+        },
+        {
+          "name": "Wey (Puyang)",
+          "lnglat": [
+            115.0292,
+            35.7627
+          ],
+          "svg": [
+            502,
+            301
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Puyang",
+          "coordinateMethod": "urban coordinate proxy for source Diqiu/Wey point"
+        },
+        {
+          "name": "Yong (Fengxiang)",
+          "lnglat": [
+            107.42056,
+            34.56
+          ],
+          "svg": [
+            256,
+            362
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Fengxiang_District",
+          "coordinateMethod": "modern town coordinate proxy for nearby ancient Yong"
+        },
+        {
+          "name": "Luoyang",
+          "lnglat": [
+            112.4539,
+            34.6197
+          ],
+          "svg": [
+            412,
+            347
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Luoyang",
+          "coordinateMethod": "modern urban coordinate proxy"
+        },
+        {
+          "name": "Xinzheng",
+          "lnglat": [
+            113.7402,
+            34.3964
+          ],
+          "svg": [
+            455.5,
+            354.4
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Xinzheng",
+          "coordinateMethod": "urban coordinate proxy for ancient Zheng/Han capital"
+        },
+        {
+          "name": "Song (Shangqiu)",
+          "lnglat": [
+            115.656,
+            34.415
+          ],
+          "svg": [
+            523.3,
+            352.7
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Shangqiu",
+          "coordinateMethod": "urban coordinate proxy for ancient Song capital"
+        },
+        {
+          "name": "Chen (Huaiyang)",
+          "lnglat": [
+            114.85,
+            33.73306
+          ],
+          "svg": [
+            492,
+            376
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Huaiyang_District",
+          "coordinateMethod": "town coordinate proxy for source Chen/Wanqiu"
+        },
+        {
+          "name": "Ying (Jinancheng)",
+          "lnglat": [
+            112.19029806,
+            30.40572194
+          ],
+          "svg": [
+            427,
+            521
+          ],
+          "coordinateSource": "https://zh.wikipedia.org/wiki/楚纪南故城",
+          "coordinateMethod": "archaeological site coordinate; different earlier Ying locations not assumed"
+        },
+        {
+          "name": "Wu (Suzhou)",
+          "lnglat": [
+            120.61944,
+            31.3
+          ],
+          "svg": [
+            689,
+            444
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Suzhou",
+          "coordinateMethod": "urban coordinate proxy for ancient Wu capital"
+        },
+        {
+          "name": "Kuaiji (Shaoxing)",
+          "lnglat": [
+            120.58333333,
+            30
+          ],
+          "svg": [
+            702,
+            496
+          ],
+          "coordinateSource": "https://www.wikidata.org/wiki/Q42666",
+          "coordinateMethod": "Wikidata P625 urban coordinate proxy"
+        },
+        {
+          "name": "Ba (Chongqing)",
+          "lnglat": [
+            106.5504,
+            29.5637
+          ],
+          "svg": [
+            228,
+            556
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Chongqing",
+          "coordinateMethod": "urban coordinate proxy for source Ba/Jiangzhou point"
+        },
+        {
+          "name": "Shu (Chengdu)",
+          "lnglat": [
+            104.06333,
+            30.66
+          ],
+          "svg": [
+            135,
+            519
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Chengdu",
+          "coordinateMethod": "Tianfu Square city coordinate proxy"
+        }
+      ],
+      "minRegionPx": 2,
+      "exclude": []
+    },
+    "G9": {
+      "dataset": "G9",
+      "projection": "auto",
+      "palette": {
+        "#fffefd": "_outside"
+      },
+      "tolerance": 2,
+      "land": [],
+      "sea": [],
+      "maxResidualKm": 40,
+      "controlPoints": [
+        {
+          "name": "Ji (Beijing)",
+          "lnglat": [
+            116.382425,
+            39.894262
+          ],
+          "svg": [
+            871,
+            126
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Ji_(Beijing)",
+          "coordinateMethod": "ancient city coordinate"
+        },
+        {
+          "name": "Linzi",
+          "lnglat": [
+            118.3554,
+            36.8829
+          ],
+          "svg": [
+            999,
+            310
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Ancient_Linzi",
+          "coordinateMethod": "ancient city site coordinate"
+        },
+        {
+          "name": "Qufu",
+          "lnglat": [
+            116.9862,
+            35.5819
+          ],
+          "svg": [
+            969,
+            375
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Qufu",
+          "coordinateMethod": "urban coordinate proxy for ancient Lu capital"
+        },
+        {
+          "name": "Wey (Puyang)",
+          "lnglat": [
+            115.0292,
+            35.7627
+          ],
+          "svg": [
+            865,
+            379
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Puyang",
+          "coordinateMethod": "urban coordinate proxy for source Diqiu/Wey point"
+        },
+        {
+          "name": "Yong (Fengxiang)",
+          "lnglat": [
+            107.42056,
+            34.56
+          ],
+          "svg": [
+            480,
+            477
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Fengxiang_District",
+          "coordinateMethod": "modern town coordinate proxy for nearby ancient Yong"
+        },
+        {
+          "name": "Luoyang",
+          "lnglat": [
+            112.4539,
+            34.6197
+          ],
+          "svg": [
+            725,
+            446
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Luoyang",
+          "coordinateMethod": "modern urban coordinate proxy"
+        },
+        {
+          "name": "Xinzheng",
+          "lnglat": [
+            113.7402,
+            34.3964
+          ],
+          "svg": [
+            786,
+            460
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Xinzheng",
+          "coordinateMethod": "urban coordinate proxy for ancient Zheng/Han capital"
+        },
+        {
+          "name": "Song (Shangqiu)",
+          "lnglat": [
+            115.656,
+            34.415
+          ],
+          "svg": [
+            895,
+            461
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Shangqiu",
+          "coordinateMethod": "urban coordinate proxy for ancient Song capital"
+        },
+        {
+          "name": "Chen (Huaiyang)",
+          "lnglat": [
+            114.85,
+            33.73306
+          ],
+          "svg": [
+            851,
+            497
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Huaiyang_District",
+          "coordinateMethod": "town coordinate proxy for source Chen/Wanqiu"
+        },
+        {
+          "name": "Ying (Jinancheng)",
+          "lnglat": [
+            112.19029806,
+            30.40572194
+          ],
+          "svg": [
+            728,
+            720
+          ],
+          "coordinateSource": "https://zh.wikipedia.org/wiki/楚纪南故城",
+          "coordinateMethod": "archaeological site coordinate; different earlier Ying locations not assumed"
+        },
+        {
+          "name": "Wu (Suzhou)",
+          "lnglat": [
+            120.61944,
+            31.3
+          ],
+          "svg": [
+            1157,
+            619
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Suzhou",
+          "coordinateMethod": "urban coordinate proxy for ancient Wu capital"
+        },
+        {
+          "name": "Kuaiji (Shaoxing)",
+          "lnglat": [
+            120.58333333,
+            30
+          ],
+          "svg": [
+            1173,
+            702
+          ],
+          "coordinateSource": "https://www.wikidata.org/wiki/Q42666",
+          "coordinateMethod": "Wikidata P625 urban coordinate proxy"
+        },
+        {
+          "name": "Ba (Chongqing)",
+          "lnglat": [
+            106.5504,
+            29.5637
+          ],
+          "svg": [
+            413,
+            759
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Chongqing",
+          "coordinateMethod": "urban coordinate proxy for source Ba/Jiangzhou point"
+        },
+        {
+          "name": "Shu (Chengdu)",
+          "lnglat": [
+            104.06333,
+            30.66
+          ],
+          "svg": [
+            266,
+            689
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Chengdu",
+          "coordinateMethod": "Tianfu Square city coordinate proxy"
+        }
+      ]
+    },
+    "G8": {
+      "dataset": "G8-trace",
+      "projection": "auto",
+      "palette": {
+        "#bd6e7e": "chu",
+        "#7da58e": "qi",
+        "#9c8170": "qin",
+        "#94a286": "zhao",
+        "#db9d5c": "wei",
+        "#b8bd5c": "han",
+        "#c4b476": "yan",
+        "#ce9c64": "lu",
+        "#99bdb1": "wey",
+        "#ffffff": "_outside"
+      },
+      "tolerance": 2,
+      "land": [
+        "chu",
+        "qi",
+        "qin",
+        "zhao",
+        "wei",
+        "han",
+        "yan",
+        "lu",
+        "wey"
+      ],
+      "sea": [],
+      "maxResidualKm": 25,
+      "controlPoints": [
+        {
+          "name": "Ji (Beijing)",
+          "lnglat": [
+            116.382425,
+            39.894262
+          ],
+          "svg": [
+            206.698,
+            57.547
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Ji_(Beijing)",
+          "coordinateMethod": "ancient city coordinate"
+        },
+        {
+          "name": "Handan",
+          "lnglat": [
+            114.487,
+            36.601
+          ],
+          "svg": [
+            190.826,
+            105.51
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Handan",
+          "coordinateMethod": "modern urban coordinate proxy near ancient capital"
+        },
+        {
+          "name": "Linzi",
+          "lnglat": [
+            118.3554,
+            36.8829
+          ],
+          "svg": [
+            233.601,
+            98.076
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Ancient_Linzi",
+          "coordinateMethod": "ancient city site coordinate"
+        },
+        {
+          "name": "Linwu",
+          "lnglat": [
+            112.55608,
+            25.28167
+          ],
+          "svg": [
+            183.024,
+            269.061
+          ],
+          "coordinateSource": "https://zh.wikipedia.org/wiki/临武县",
+          "coordinateMethod": "modern town coordinate proxy for source ancient settlement"
+        },
+        {
+          "name": "Xianyang",
+          "lnglat": [
+            108.7088,
+            34.3299
+          ],
+          "svg": [
+            129.31,
+            142.144
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Xianyang",
+          "coordinateMethod": "modern urban coordinate proxy for source ancient capital"
+        },
+        {
+          "name": "Chengdu",
+          "lnglat": [
+            104.06333,
+            30.66
+          ],
+          "svg": [
+            74.878,
+            196.601
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Chengdu",
+          "coordinateMethod": "Tianfu Square city coordinate proxy"
+        },
+        {
+          "name": "Ying (Jinancheng)",
+          "lnglat": [
+            112.19029806,
+            30.40572194
+          ],
+          "svg": [
+            172.398,
+            197.496
+          ],
+          "coordinateSource": "https://zh.wikipedia.org/wiki/楚纪南故城",
+          "coordinateMethod": "archaeological site coordinate; different earlier Ying locations not assumed"
+        },
+        {
+          "name": "Luoyang (Wangcheng)",
+          "lnglat": [
+            112.4539,
+            34.6197
+          ],
+          "svg": [
+            173.071,
+            135.023
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Luoyang",
+          "coordinateMethod": "modern urban coordinate proxy; ancient urban footprint covers several sites"
+        },
+        {
+          "name": "Daliang (Kaifeng)",
+          "lnglat": [
+            114.345,
+            34.795
+          ],
+          "svg": [
+            191.902,
+            132.784
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Kaifeng",
+          "coordinateMethod": "urban coordinate proxy for buried ancient capital"
+        },
+        {
+          "name": "Xinzheng",
+          "lnglat": [
+            113.7402,
+            34.3964
+          ],
+          "svg": [
+            186.073,
+            138.83
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Xinzheng",
+          "coordinateMethod": "urban coordinate proxy for ancient Zheng/Han capital"
+        },
+        {
+          "name": "Ba (Chongqing)",
+          "lnglat": [
+            106.5504,
+            29.5637
+          ],
+          "svg": [
+            104.694,
+            211.379
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Chongqing",
+          "coordinateMethod": "urban coordinate proxy for source Ba/Jiangzhou point"
+        },
+        {
+          "name": "Changsha",
+          "lnglat": [
+            112.939,
+            28.228
+          ],
+          "svg": [
+            184.549,
+            228.128
+          ],
+          "coordinateSource": "https://en.wikipedia.org/wiki/Changsha",
+          "coordinateMethod": "urban coordinate proxy"
+        }
+      ],
+      "minRegionPx": 2,
+      "exclude": []
+    }
+  },
+  "datasets": {
+    "G7-trace": {
+      "ref": "G7",
+      "title": "G7 source-pixel digitisation mask; derivative of 战国形势图（前350年）（简）.png",
+      "url": "https://commons.wikimedia.org/wiki/File:战国形势图（前350年）（简）.png",
+      "file": "G7-trace.png",
+      "author": "玖巧仔; source-pixel digitisation for Atlas",
+      "license": "CC BY-SA 4.0 (derived from CC BY-SA 3.0)",
+      "role": "Source pixel outline tracing mask; original map control points unchanged"
+    },
+    "G10-trace": {
+      "ref": "G10",
+      "title": "G10 source-pixel digitisation mask; derivative of 春秋大国简图（繁）.png",
+      "url": "https://commons.wikimedia.org/wiki/File:春秋大国简图（繁）.png",
+      "file": "G10-trace.png",
+      "author": "玖巧仔; source-pixel digitisation for Atlas",
+      "license": "CC BY 3.0 (source); mask derivative CC BY-SA 4.0",
+      "role": "Undated period-schematic state fill tracing; replaces G9 which contains only city/state points"
+    },
+    "G8-trace": {
+      "ref": "G8",
+      "title": "G8 source-pixel digitisation mask; derivative of 战国形势图（前280年）（简）.png",
+      "url": "https://commons.wikimedia.org/wiki/File:战国形势图（前280年）（简）.png",
+      "file": "G8-trace.png",
+      "author": "玖巧仔; source-pixel digitisation for Atlas",
+      "license": "CC BY-SA 4.0 (derived from CC BY-SA 3.0)",
+      "role": "Published280BCE source-pixel fill tracing, common physical template withG7; original330x352Commons thumbnail"
+    },
+    "G11-trace": {
+      "ref": "G11",
+      "title": "G11 source-pixel classified derivative; EN-WarringStatesAll260BCE.jpg",
+      "url": "https://commons.wikimedia.org/wiki/File:EN-WarringStatesAll260BCE.jpg",
+      "file": "G11-trace.png",
+      "author": "Philg88; Atlas pixel classification",
+      "license": "CC BY-SA 4.0 (sourceCC BY-SA3.0)",
+      "role": "Original flat-state colour classification with printed tiny Zhou Capital Area digitised; registration OVER25km budget"
+    }
+  }
+}
