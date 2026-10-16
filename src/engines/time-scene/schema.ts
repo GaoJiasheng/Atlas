@@ -621,6 +621,10 @@ export function timeSceneTopicIssues(topic: TopicLike, data: TimeSceneGeoData, r
     else if (land.type !== 'Topology' || !land.objects?.[region.land]) issues.push({ level: 'error', file: geo(region.land), message: `basemap.region.land: expected a TopoJSON with an object "${region.land}"` });
     else if (!(land.objects[region.land]!.geometries ?? []).some((g) => g.properties?.kind === 'land'))
       issues.push({ level: 'error', file: geo(region.land), message: `basemap.region.land: object "${region.land}" has no kind: land geometry` });
+    // The engine's first preset on a regional plate is already the whole plate (key 1, "Whole plate" / "全图").
+    for (const p of data.presets?.presets ?? [])
+      if (p.id === 'plate' || p.id === 'whole-plate' || p.label.en === 'Whole plate' || p.label.zh === '全图')
+        issues.push({ level: 'error', file: 'data/presets.json', message: `preset "${p.id}": a regional plate already has a built-in whole-plate preset (key 1); drop this one` });
     if (region.rivers) {
       const raw = readGeo(region.rivers);
       if (raw === undefined) issues.push({ level: 'error', file: geo(region.rivers), message: 'basemap.region.rivers: file not found' });

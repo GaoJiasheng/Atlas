@@ -1,20 +1,6 @@
 {
   "presets": [
     {
-      "id": "plate",
-      "label": {
-        "en": "Whole plate",
-        "zh": "全图"
-      },
-      "camera": {
-        "center": [
-          112.5,
-          32.5
-        ],
-        "zoom": 4.9
-      }
-    },
-    {
       "id": "central-plain",
       "label": {
         "en": "Central Plain",

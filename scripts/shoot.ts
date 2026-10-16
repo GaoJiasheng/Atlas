@@ -774,32 +774,41 @@ async function runKeys(s: Session, o: Options, report: RunReport): Promise<void>
   // Dragging the stage frees the camera (no preset lit); a preset takes it back.
   const [w, h] = o.size;
   await s.apply({ chapter: firstChapter, wait: 1200 });
-  const first = keymap.find((k) => k.type === 'preset');
+  const presetKeys = keymap.filter((k) => k.type === 'preset');
   // An engine that lights its own VIEW button (MathScene's model switch) has no camera to free.
   const engineOwned = await page.evaluate(() => document.querySelector('[data-presets="engine"]') !== null);
+  let first = presetKeys[0];
   if (first && !engineOwned) {
     // Light a preset first: a chapter's own view is not a preset (TimeScene has geographic presets only), so "free" must be earned by the drag.
-    await page.keyboard.press(first.key);
-    await page.waitForTimeout(2400);
-    await page.mouse.move(w * 0.5, h * 0.5);
-    await page.mouse.down();
-    await page.mouse.move(w * 0.5 + 140, h * 0.5 + 30, { steps: 8 });
-    await page.mouse.up();
+    // A regional plate's whole-plate view sits at minimum zoom inside its bounds lock, so a drag there cannot move the camera:
+    // that view is skipped and the drag is tried from the next preset.
     let free = false;
-    // Orbit damping is frame-count based: software GL at ~10 fps takes several seconds to settle before the camera is written back.
-    for (let i = 0; i < 64 && !free; i++) {
-      await page.waitForTimeout(250);
-      free = (await s.state()).preset === null;
+    for (const k of presetKeys.slice(0, 3)) {
+      first = k;
+      await page.keyboard.press(k.key);
+      await page.waitForTimeout(2400);
+      await page.mouse.move(w * 0.5, h * 0.5);
+      await page.mouse.down();
+      await page.mouse.move(w * 0.5 + 140, h * 0.5 + 30, { steps: 8 });
+      await page.mouse.up();
+      // Orbit damping is frame-count based: software GL at ~10 fps takes several seconds to settle before the camera is written back.
+      for (let i = 0; i < 64 && !free; i++) {
+        await page.waitForTimeout(250);
+        free = (await s.state()).preset === null;
+      }
+      const locked = !free && (await page.evaluate(() => document.querySelector('[data-region-plate]') !== null));
+      if (!locked) break;
     }
+    const target = first;
     const lit = await page.evaluate(() => document.querySelectorAll('[data-preset][aria-pressed="true"]').length);
     record({ key: 'drag', type: 'camera', name: 'free-camera', ok: free && lit === 0, note: free && lit === 0 ? '' : `preset=${(await s.state()).preset} lit=${lit}` });
-    await page.keyboard.press(first.key);
+    await page.keyboard.press(target.key);
     // Wait for the preset to be applied (state and lit button), not a fixed delay: the heaviest models stall software GL.
     const back = await until(
-      async () => (await s.state()).preset === first.name && (await page.evaluate((n) => document.querySelector(`[data-preset="${n}"]`)?.getAttribute('aria-pressed'), first.name)) === 'true',
+      async () => (await s.state()).preset === target.name && (await page.evaluate((n) => document.querySelector(`[data-preset="${n}"]`)?.getAttribute('aria-pressed'), target.name)) === 'true',
     );
     const st = await s.state();
-    record({ key: first.key, type: 'camera', name: 'preset-after-free', ok: back, note: back ? '' : `preset=${st.preset}` });
+    record({ key: target.key, type: 'camera', name: 'preset-after-free', ok: back, note: back ? '' : `preset=${st.preset}` });
   }
 }
 

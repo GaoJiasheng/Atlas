@@ -610,7 +610,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   const pickedEntity = selectedEntity ? geo.entities.find((e) => e.id === selectedEntity) ?? null : null;
 
   return (
-    <div className="ts-stage" ref={stageRef} data-reference={reference || undefined} data-presenting={presenting || undefined}>
+    <div className="ts-stage" ref={stageRef} data-reference={reference || undefined} data-presenting={presenting || undefined} data-region-plate={region ? '' : undefined}>
       <GeoStage
         store={store}
         playhead={playhead}
