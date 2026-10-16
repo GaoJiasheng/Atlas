@@ -7,6 +7,11 @@
  *     --title-en "The Cold War" --title-zh "冷战" [--subtitle-en "1947–1991" --subtitle-zh "1947–1991"] \
  *     [--start 1947-03-12 --end 1991-12-26]
  *
+ *   BCE: a leading minus, years as four digits: `--start -0770 --end -0221`
+ *   (or `--start=-0770-01-01`). Dates compare as dates, not strings; a
+ *   year-only range adds `datePrecision: year` to topic.yaml, and the default
+ *   subtitle reads "770–221 BCE" / "公元前770–前221年".
+ *
  * "Object anatomy" (SpaceScene; docs/13, skill .claude/skills/atlas-space-topic):
  *
  *   pnpm tsx scripts/new-topic.ts <slug> --engine space-scene --subject science|biology \
@@ -43,11 +48,14 @@ import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
 import { KEBAB_ID, ISO_DATE } from '../src/content/schema/common';
 import { SUBJECTS } from '../src/content/schema/topic';
+import { compareTime } from '../src/lib/time';
+import { glueBceDates, yearRange } from './lib/topic-dates';
 import { BEGIN, END, sourcesBlock } from './sources-md';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
 const { values, positionals } = parseArgs({
+  args: glueBceDates(process.argv.slice(2)),
   allowPositionals: true,
   options: {
     engine: { type: 'string', default: 'time-scene' },
@@ -76,15 +84,19 @@ const subject = values.subject ?? (engine === 'space-scene' ? 'science' : 'histo
 if (!(SUBJECTS as readonly string[]).includes(subject)) fail(`--subject must be one of ${SUBJECTS.join(', ')}`);
 const titleEn = values['title-en']?.trim() || fail('missing --title-en');
 const titleZh = values['title-zh']?.trim() || fail('missing --title-zh');
-const subtitleEn =
-  values['subtitle-en']?.trim() || (engine === 'space-scene' ? 'What is inside and how it works' : `${values.start!.slice(0, 4)}–${values.end!.slice(0, 4)}`);
-const subtitleZh = values['subtitle-zh']?.trim() || (engine === 'space-scene' && !values['subtitle-en'] ? '里面有什么、怎样工作' : subtitleEn);
 const start = values.start!;
 const end = values.end!;
 for (const [flag, date] of [['--start', start], ['--end', end]] as const) {
-  if (!ISO_DATE.test(date)) fail(`${flag} must be an ISO date (YYYY, YYYY-MM or YYYY-MM-DD)`);
+  if (!ISO_DATE.test(date)) fail(`${flag} must be an ISO date (YYYY, YYYY-MM or YYYY-MM-DD; BCE with a leading minus, -0770)`);
 }
-if (end <= start) fail('--end must be after --start');
+const order = compareTime(start, end);
+if (order === null || order >= 0) fail('--end must be after --start');
+/** Both dates are bare years: the topic is dated to the year (`datePrecision: year`). */
+const yearOnly = /^-?\d{4}$/.test(start) && /^-?\d{4}$/.test(end);
+const subtitleEn = values['subtitle-en']?.trim() || (engine === 'space-scene' ? 'What is inside and how it works' : yearRange(start, end, 'en'));
+const subtitleZh =
+  values['subtitle-zh']?.trim() ||
+  (engine === 'space-scene' ? (!values['subtitle-en'] ? '里面有什么、怎样工作' : subtitleEn) : values['subtitle-en'] ? subtitleEn : yearRange(start, end, 'zh'));
 
 const topicDir = join(ROOT, 'src/content/topics', slug);
 const geoDir = join(ROOT, 'scripts/geo', slug);
@@ -369,7 +381,7 @@ stage: geo
 theme: paper
 sensitivity: open
 status: draft
-# TimeScene blocs are axis / allied / neutral; rename them for this war (docs/06 blocLabels), e.g.
+${yearOnly ? 'datePrecision: year                 # dates are years (readout, bar labels, URL t=)\n' : ''}# TimeScene blocs are axis / allied / neutral; rename them for this war (docs/06 blocLabels), e.g.
 # blocLabels:
 #   axis: { en: "Central Powers", zh: "同盟国" }
 #   allied: { en: "Allies (Entente)", zh: "协约国" }
@@ -421,7 +433,7 @@ order: 1
 title: { en: "Chapter one", zh: "第一章" }
 sensitive: false
 state:
-  time: ${q(end)}                     # the chapter's date (day precision); chapters must be in time order
+  time: ${q(end)}                     # the chapter's date, always quoted (BCE: "-0221"); chapters must be in time order
   camera: { center: [20, 25], zoom: 2.2 }
   layers: [base, control, movements, battles]
   # highlight: [event-id, movement-id]   # ids from data/*.json; each gets a leader label

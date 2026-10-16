@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { formatTime, nicePer } from '../../src/engines/time-scene/lib/format';
+import { coarser, formatTime, nicePer, yearLabel } from '../../src/engines/time-scene/lib/format';
 
 describe('formatTime', () => {
   it('formats ISO dates by precision (en)', () => {
@@ -27,6 +27,27 @@ describe('formatTime', () => {
     expect(formatTime({ ma: 0.5 }, 'zh')).toBe('50万年前');
     expect(formatTime({ ma: 0.001 }, 'zh')).toBe('1000年前');
     expect(formatTime({ ma: 0 }, 'zh')).toBe('现在');
+  });
+});
+
+describe('formatTime with a topic precision (datePrecision)', () => {
+  it('drops the finer parts, BCE included', () => {
+    expect(formatTime('-0260-05-14', 'en', 'year')).toBe('260 BCE');
+    expect(formatTime('-0260-05-14', 'zh', 'year')).toBe('公元前260年');
+    expect(formatTime('-0260-05-14', 'en', 'month')).toBe('May 260 BCE');
+    expect(formatTime('1942-02-15', 'zh', 'month')).toBe('1942年2月');
+    expect(formatTime('1942-02-15', 'en', 'day')).toBe('15 Feb 1942');
+    expect(formatTime({ ma: 66 }, 'en', 'year')).toBe('66 Ma');
+  });
+
+  it('short years for the bar segments and the coarser of two precisions', () => {
+    expect(yearLabel(-770, 'en')).toBe('770 BCE');
+    expect(yearLabel(-770, 'zh')).toBe('前770年');
+    expect(yearLabel(1914, 'en')).toBe('1914');
+    expect(yearLabel(1914, 'zh')).toBe('1914年');
+    expect(coarser('year', 'day')).toBe('year');
+    expect(coarser('day', 'month')).toBe('month');
+    expect(coarser(undefined, 'month')).toBe('month');
   });
 });
 

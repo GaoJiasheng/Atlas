@@ -37,20 +37,72 @@ export const blocLabels = z
   .strict();
 export type BlocLabels = z.output<typeof blocLabels>;
 
+/** `[west, south, east, north]` in degrees: west < east, south < north (no antimeridian crossing). */
+export const lngLatBox = z
+  .tuple([z.number().min(-180).max(180), z.number().min(-85).max(85), z.number().min(-180).max(180), z.number().min(-85).max(85)])
+  .refine(([w, s, e, n]) => w < e && s < n, 'bounds must be [west, south, east, north] with west < east and south < north');
+export type LngLatBox = z.output<typeof lngLatBox>;
+
 /**
- * TimeScene basemap options (docs/06 "TimeScene" · 底图数据). `local` names a
- * high-resolution land file `public/geo/<local>.json` (TopoJSON with `kind:
- * mask` and `kind: land` geometries, built by `scripts/geo/lib/local-land.ts`)
- * drawn over the Natural Earth layers from zoom 9 (fully at 10); `maxZoom`
- * lets the map zoom in further than the default 10 (island- and city-scale topics).
+ * A regional plate (docs/06 "TimeScene" · 区域底图): the stage shows one region
+ * only. `bounds` is the plate (land is drawn inside it; outside it the sheet is
+ * plain paper, no coastline); `maxBounds` the camera limit (default: `bounds`
+ * plus 8 % of its span on each side), so the reader can never pan or zoom out
+ * to the rest of the world. `land` names `public/geo/<land>.json` (TopoJSON,
+ * one object `<land>` with `kind: land` polygons and `kind: coast` lines, made
+ * by `scripts/geo/lib/region-land.ts`); `rivers` names an optional
+ * `public/geo/<rivers>.json` of dated river lines (lib/rivers.ts). No world
+ * land, no modern borders in this mode.
+ */
+export const regionBasemap = z
+  .object({
+    bounds: lngLatBox,
+    maxBounds: lngLatBox.optional(),
+    land: kebabId,
+    rivers: kebabId.optional(),
+  })
+  .strict()
+  .superRefine((r, ctx) => {
+    if (!r.maxBounds) return;
+    const [w, s, e, n] = r.bounds;
+    const [mw, ms, me, mn] = r.maxBounds;
+    if (mw > w || ms > s || me < e || mn < n) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['maxBounds'], message: '`maxBounds` must contain `bounds`' });
+  });
+export type RegionBasemap = z.output<typeof regionBasemap>;
+
+/**
+ * TimeScene basemap options (docs/06 "TimeScene" · 底图数据). Either `local`,
+ * a high-resolution island land file `public/geo/<local>.json` (TopoJSON with
+ * `kind: mask` and `kind: land` geometries, built by
+ * `scripts/geo/lib/local-land.ts`) drawn over the Natural Earth layers from
+ * zoom 9.4, or `region`, a regional plate instead of the world map (above).
+ * `maxZoom` changes the map's zoom ceiling (default 10).
  */
 export const basemapOptions = z
   .object({
-    local: kebabId,
-    maxZoom: z.number().min(10).max(16).optional(),
+    local: kebabId.optional(),
+    region: regionBasemap.optional(),
+    maxZoom: z.number().min(6).max(16).optional(),
+  })
+  .strict()
+  .refine((b) => (b.local === undefined) !== (b.region === undefined), 'basemap needs exactly one of `local` or `region`');
+export type BasemapOptions = z.output<typeof basemapOptions>;
+
+/**
+ * TimeScene wording a topic may override (entity card, entity leader notes):
+ * `joined` ("Joined" / "joined 1941"), `left` ("Left"), `notYet` ("Not yet at
+ * war"). A history of states writes `joined: { en: "appears", zh: "出现" }`,
+ * `left: { en: "ends", zh: "灭亡" }`.
+ */
+export const ENTITY_STRING_KEYS = ['joined', 'left', 'notYet'] as const;
+export const entityStrings = z
+  .object({
+    joined: bilingual.optional(),
+    left: bilingual.optional(),
+    notYet: bilingual.optional(),
   })
   .strict();
-export type BasemapOptions = z.output<typeof basemapOptions>;
+export type EntityStrings = z.output<typeof entityStrings>;
 
 /** `src/content/topics/<slug>/topic.yaml` (docs/02). */
 export const topicSchema = z
@@ -91,8 +143,21 @@ export const topicSchema = z
      * overriding the site-wide `time.bloc.*` strings. `out` = "no longer at war".
      */
     blocLabels: blocLabels.optional(),
-    /** TimeScene: island- / city-scale basemap (`{ local: land-sg, maxZoom: 13 }`). */
+    /** TimeScene: island- / city-scale basemap (`{ local: land-sg, maxZoom: 13 }`) or a regional plate (`{ region: { bounds, land, rivers } }`). */
     basemap: basemapOptions.optional(),
+    /**
+     * TimeScene: `entity` colours every control area by its holder (`entities[].color`,
+     * `token:holder-1` … `token:holder-8`, assigned by scripts/geo/lib/colour-holders.ts)
+     * and lists every holder in the key; `bloc` (default) colours by bloc.
+     */
+    colorBy: z.enum(['bloc', 'entity']).optional(),
+    /**
+     * TimeScene: the finest date precision shown (readout, bar labels, inspectors,
+     * `t=` written back to the URL). `year` for topics dated to the year (BCE history).
+     */
+    datePrecision: z.enum(['day', 'month', 'year']).optional(),
+    /** TimeScene: wording overrides for the entity card and entity leader notes (`joined`, `left`, `notYet`). */
+    strings: entityStrings.optional(),
     /**
      * Title-block disclaimer line (any engine), replacing the site-wide
      * "Educational visualization", e.g. "Generic design study · not a specific

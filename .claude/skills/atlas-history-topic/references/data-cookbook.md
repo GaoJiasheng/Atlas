@@ -12,7 +12,8 @@
 
 - 三种精度：`1942`、`1942-02`、`1942-02-15`（公元前加 `-`）；地质时间 `{ "ma": 200 }`。来源只给到月份的事件（ww1：`turnip-winter` 的 `1916-12`、`influenza` 的 `1918-03`）**允许写月精度 `t`**，不要编造日期；`until` 同理。
 - 换算成数值时取**时段起点**（`1942-02` = 2 月 1 日）。store 和 URL 里的 `t` 是日精度。历史主题统一写到天。
-- 章节顺序必须等于时间顺序（ww2 有测试）；时间轴上章节段的起点 = 本章 `time` 与第一拍 `t` 中较早的那个，标签写 `YYYY-MM`（段宽 < 44 px 只写章号）。
+- 章节顺序必须等于时间顺序（ww2 有测试）；时间轴上章节段的起点 = 本章 `time` 与第一拍 `t` 中较早的那个，标签写 `YYYY-MM`（段宽 < 44 px 只写章号；公元前、跨度超过百年或 `datePrecision: year` 的主题写年份：`770 BCE` / `前770年`）。
+- **公元前**：`"-0770"`（四位数字，前面加 `-`），**一律加引号**——YAML 里不加引号的 `-0770` 是数字 -770，schema 报错。比较用 `compareTime`，不用字符串比较（`"-0300" < "-0400"`）。只知道年份的主题（先秦）在 `topic.yaml` 写 `datePrecision: year`：读数、段标签、详情只显示年，拖动时 URL 写 `t=-0350`。脚手架：`--start -0770 --end -0221`（自动加 `datePrecision: year` 和"770–221 BCE"副标题）。
 
 ## entities.json
 
@@ -30,6 +31,8 @@
 - 实体 id 对应一个固定名字，**不能随时间改名**；国家换名（俄国→苏俄）写在控制区要素的 `label` 里，实体详情仍显示原名。
 - `joined` 之前、`left` 之后一律按中立显示（地图、参与卡、地名）；`joined` 驱动"何时加入"图层和参与卡的线。
 - `color` 只在必须区分同阵营实体时用，写 token。
+- **按国配色**（`topic.yaml` `colorBy: entity`，列国地图）：每个实体 `color: "token:holder-N"`（N = 1…8），由 `scripts/geo/lib/colour-holders.ts --write` 按相邻关系分配；没写的按顺序补一个（不保证相邻不同色）。图例按当前关键帧逐个列出各国（面积大的在前，手机两列），不再合成一行"诸国"；`bloc` 全写 `neutral`，`blocLabels.neutral` 写这一类的名字。
+- **用词**：实体卡和引线说明里的"加入 / 退出 / 尚未参战"可以按主题改：`topic.yaml` `strings: { joined: { en: "appears", zh: "出现" }, left: { en: "ends", zh: "灭亡" }, notYet: { … } }`（卡片标题直接用这个词；引线写 "appears 770 BCE" / "公元前770年出现"）。
 
 ## control.json（控制区关键帧）
 
@@ -38,7 +41,7 @@
 - **GeoJSON**（小主题、示例）：`{ "keyframes": [{ "t": "…", "features": { "type": "FeatureCollection", "features": [...] } }] }`
 - **TopoJSON**（真实主题，由 `scripts/geo/lib/simplify.ts` 生成，**不手写**）：`{ "topology": {...}, "keyframes": [{ "t": "1937-07-07", "object": "K1" }] }`，所有帧共用一份拓扑。
 
-要素 `properties`：`holder`（实体 id，必填）、`label`（`{ en, zh }`，**领土名称（键 N）用**，如 `Denmark (German-occupied)` / `丹麦（德国占领）`，括号内说明不显示；没有 `label` 就显示 holder 实体名，所以换名、占领状态都写在这里）、`src`（`["G1","G2"]`）。同一 holder 在相邻两帧文字不同（`Russia` → `Soviet Russia`）时，引擎把两个名字配成一个，位置滑过去、文字在交叉淡化 50 % 处换字；文字相同且位置接近的也配对，所以别为同一块地在两帧写不同 holder 又写同名。
+要素 `properties`：`holder`（实体 id，必填）、`certainty`（`"approximate"` = 示意级边界：它与别国的分界画虚线、填色变浅，图例加"边界为近似"；缺省 `certain`）、`label`（`{ en, zh }`，**领土名称（键 N）用**，如 `Denmark (German-occupied)` / `丹麦（德国占领）`，括号内说明不显示；没有 `label` 就显示 holder 实体名，所以换名、占领状态都写在这里）、`src`（`["G1","G2"]`）。同一 holder 在相邻两帧文字不同（`Russia` → `Soviet Russia`）时，引擎把两个名字配成一个，位置滑过去、文字在交叉淡化 50 % 处换字；文字相同且位置接近的也配对，所以别为同一块地在两帧写不同 holder 又写同名。
 
 **边界怎么画**：引擎沿底图海岸裁剪（管线做），运行时只画不同 holder 之间的内陆分界，海岸和同 holder 接缝不描边。图层 `borders` = 今天的内陆国界，**默认关，章节 `layers` 不要列它**（写了就盖在历史边界上）。TopoJSON 由管线生成，`simplify.ts` 必须打印 `rings: N, zero-area 0, self-crossing 0`；`pipeline.budgetMB` 写 2.5（ww1 / ww2 都是），帧没做全时 `simplify --fine <km>`。
 

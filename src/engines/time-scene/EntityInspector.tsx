@@ -14,7 +14,7 @@ import type { Playhead } from './lib/playhead';
 import { formatTime } from './lib/format';
 import { areaAt, controlAreas } from './lib/stats';
 import { BLOC_CSS, entityCssColor } from './colors';
-import { blocLabel } from './lib/blocLabels';
+import { blocLabel, entityWord } from './lib/blocLabels';
 import { usePlayheadT } from './hud/shared';
 import { fmtArea } from './hud/HudPanels';
 
@@ -41,6 +41,7 @@ export function EntityInspector({ entity, model, playhead, locale, onClose }: En
   const other = locale === 'zh' ? entity.name.en : entity.name.zh;
   const spans = typeof entity.bloc === 'string' ? [{ bloc: entity.bloc, from: undefined, to: undefined }] : entity.bloc;
   const area = areaAt(model, areas, entity.id, now);
+  const date = (p: Parameters<typeof formatTime>[0]) => formatTime(p, locale, model.datePrecision);
 
   return (
     <article ref={ref} className="ts-event ts-entity" aria-labelledby={`ts-entity-${entity.id}`}>
@@ -67,18 +68,18 @@ export function EntityInspector({ entity, model, playhead, locale, onClose }: En
               {blocLabel(topic.blocLabels, sp.bloc, locale)}
               {(sp.from || sp.to) && (
                 <small>
-                  {sp.from ? formatTime(sp.from, locale) : '…'} – {sp.to ? formatTime(sp.to, locale) : '…'}
+                  {sp.from ? date(sp.from) : '…'} – {sp.to ? date(sp.to) : '…'}
                 </small>
               )}
             </span>
           ))}
         </dd>
-        <dt>{t('time.entity.joined')}</dt>
-        <dd>{formatTime(entity.joined, locale)}</dd>
+        <dt>{entityWord(topic.strings, 'joined', locale)}</dt>
+        <dd>{date(entity.joined)}</dd>
         {entity.left && (
           <>
-            <dt>{t('time.entity.left')}</dt>
-            <dd>{formatTime(entity.left, locale)}</dd>
+            <dt>{entityWord(topic.strings, 'left', locale)}</dt>
+            <dd>{date(entity.left)}</dd>
           </>
         )}
         <dt>{t('time.entity.area')}</dt>

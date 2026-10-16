@@ -4,7 +4,7 @@
  * lookups are indexed. Pure; built once per scene in the View.
  */
 import type { Bloc, Entity, Movement, SceneEvent, TimeSceneGeoData } from '../schema';
-import { periodEnd, toNumber, type TimePoint, type TimeScale } from './time';
+import { periodEnd, toNumber, type DatePrecision, type TimePoint, type TimeScale } from './time';
 import { unwrapPathCentred, type LngLat } from './geo';
 import { blocAtSpans, blocSpansN } from './bloc';
 import { decodeControl, type DecodedKeyframe } from './control';
@@ -63,6 +63,12 @@ export interface TimeModel {
   maxStrength: number;
   /** [west, south, east, north] of all data geometry. */
   bounds: [number, number, number, number] | null;
+  /** The topic's `datePrecision`: the finest date part shown (and written back to the URL). */
+  datePrecision?: DatePrecision;
+}
+
+export interface TimeModelOptions {
+  datePrecision?: DatePrecision;
 }
 
 const finite = (n: number) => Number.isFinite(n);
@@ -74,6 +80,7 @@ const finite = (n: number) => Number.isFinite(n);
 export function buildTimeModel(
   data: TimeSceneGeoData,
   chapterTimes: readonly { id: string; t: TimePoint | null | undefined }[],
+  options: TimeModelOptions = {},
 ): TimeModel {
   // Either control.json shape (GeoJSON or TopoJSON) becomes plain FeatureCollections here, once.
   const decoded = decodeControl(data.control);
@@ -152,6 +159,7 @@ export function buildTimeModel(
     chapterNodes,
     maxStrength: Math.max(1, ...data.movements.map((m) => m.strength ?? 0)),
     bounds: dataBounds(data, keyframes, movements),
+    ...(options.datePrecision ? { datePrecision: options.datePrecision } : {}),
   };
 }
 

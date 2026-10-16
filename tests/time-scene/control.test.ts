@@ -144,4 +144,19 @@ describe('TopoJSON control keyframes', () => {
     const r = controlFile.safeParse(topoControl({ topology: wide }));
     expect(r.success).toBe(false);
   });
+
+  it('approximate areas: their frontier is split off (drawn dashed), the rest stays solid', () => {
+    const approx = structuredClone(topology);
+    (approx.objects.A.geometries[1]!.properties as Record<string, unknown>).certainty = 'approximate';
+    expect(frontierOf(approx, 'A', 'certain')).toBeNull();
+    expect(frontierOf(approx, 'A', 'approximate')!.coordinates[0]).toEqual([[1, 0], [1, 1]]);
+    expect(frontierOf(approx, 'A')!.coordinates[0]).toEqual([[1, 0], [1, 1]]);
+    const decoded = decodeControl(controlFile.parse(topoControl({ topology: approx })));
+    expect(decoded[0]!.frontier).toBeUndefined();
+    expect(decoded[0]!.frontierApprox?.coordinates[0]).toEqual([[1, 0], [1, 1]]);
+    // Without approximate areas nothing changes: one frontier, no split.
+    const plain = decodeControl(controlFile.parse(topoControl()));
+    expect(plain[0]!.frontier?.coordinates[0]).toEqual([[1, 0], [1, 1]]);
+    expect(plain[0]!.frontierApprox).toBeUndefined();
+  });
 });

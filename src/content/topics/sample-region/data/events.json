@@ -1,0 +1,44 @@
+[
+  {
+    "id": "sample-river-battle",
+    "t": "-0310",
+    "at": [-3.7, 40.4],
+    "kind": "battle",
+    "sides": { "attacker": "east-sample", "defender": "south-sample" },
+    "result": "attacker",
+    "importance": 3,
+    "title": { "en": "Sample battle", "zh": "示例战役" },
+    "summary": { "en": "Placeholder: East Sample takes the south.", "zh": "占位：东示例占领南方。" },
+    "sources": ["S1"]
+  },
+  {
+    "id": "sample-siege",
+    "t": "-0240",
+    "until": "-0230",
+    "at": [-1.6, 42.8],
+    "kind": "siege",
+    "sides": { "attacker": "east-sample", "defender": "north-sample" },
+    "result": "attacker",
+    "importance": 2,
+    "title": { "en": "Sample siege", "zh": "示例围城" },
+    "summary": { "en": "Placeholder: a ten-year siege in the north.", "zh": "占位：北方一场十年的围城。" }
+  },
+  {
+    "id": "sample-massacre",
+    "t": "-0230",
+    "at": [-0.9, 41.65],
+    "kind": "massacre",
+    "importance": 1,
+    "title": { "en": "Sample atrocity", "zh": "示例暴行" },
+    "summary": { "en": "Placeholder: the hollow-square mark.", "zh": "占位：空心方块标记。" }
+  },
+  {
+    "id": "sample-capital",
+    "t": "-0400",
+    "at": [-8.6, 41.15],
+    "kind": "site",
+    "importance": 2,
+    "title": { "en": "Sample capital", "zh": "示例都城" },
+    "summary": { "en": "Placeholder: a static site.", "zh": "占位：一个固定地点。" }
+  }
+]

@@ -23,12 +23,14 @@ import {
   theme,
   timePoint,
 } from '../../content/schema/common';
-import { areaGeometry, feature, featureCollection, lineString } from '../../content/schema/geojson';
+import { areaGeometry, feature, featureCollection, lineString, position } from '../../content/schema/geojson';
 import { geoCamera } from '../../content/schema/camera';
 import { sourceId, sourceIds, sourcesFile } from '../../content/schema/sources';
 import { glossaryFile } from '../../content/schema/glossary';
 import { compareTime } from '../../lib/time';
 import { decodeControl, decodeTopologyObject } from './lib/control';
+import { colourConflicts, holderAdjacency } from './lib/holders';
+import { riverFeatures } from './lib/rivers';
 
 /* ------------------------------------------------------------------ */
 /* entities.json                                                       */
@@ -98,11 +100,20 @@ export const entitiesFile = z.array(entitySchema);
 /* control.json                                                        */
 /* ------------------------------------------------------------------ */
 
+/**
+ * How sure the source is of an area's edge. `approximate` (a sketch-level
+ * reconstruction, e.g. ancient states traced from a schematic map): the frontier
+ * it shares with another holder is drawn dashed, its tint and hatch lighter, and
+ * the key gains "Approximate border". Default `certain`.
+ */
+export const CERTAINTIES = ['certain', 'approximate'] as const;
+
 export const controlProperties = z
   .object({
     /** Entity id holding this area at the keyframe time. */
     holder: kebabId,
     label: bilingual.optional(),
+    certainty: z.enum(CERTAINTIES).optional(),
   })
   .passthrough();
 
@@ -380,6 +391,49 @@ export const presetsFile = z
 export type PresetsFile = z.output<typeof presetsFile>;
 
 /* ------------------------------------------------------------------ */
+/* Rivers of a regional plate (public/geo/<rivers>.json)               */
+/* ------------------------------------------------------------------ */
+
+const multiLineString = z
+  .object({ type: z.literal('MultiLineString'), coordinates: z.array(z.array(position).min(2)).min(1) })
+  .strict();
+
+/**
+ * One river line of `topic.basemap.region.rivers`. `from` / `to` are the
+ * years the course existed (`[from, to)`; either open): a river that changed
+ * course is two features (the Yellow River before and after 602 BCE), a river
+ * that vanished has a `to`, a modern course has a `from` (hidden for earlier
+ * topics). `reconstructed: true` draws it dashed. `label` pins the name;
+ * default = the middle of its longest line.
+ */
+export const riverProperties = z
+  .object({
+    id: kebabId,
+    name: bilingual,
+    from: timePoint.optional(),
+    to: timePoint.optional(),
+    reconstructed: z.boolean().optional(),
+    label: lngLat.optional(),
+  })
+  .strict()
+  .superRefine((r, ctx) => {
+    if (r.from === undefined || r.to === undefined) return;
+    const cmp = compareTime(r.from, r.to);
+    if (cmp === null || cmp >= 0) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['to'], message: '`to` must be after `from` on the same time scale' });
+  });
+export type RiverProperties = z.output<typeof riverProperties>;
+
+export const riverFeature = feature(z.discriminatedUnion('type', [lineString, multiLineString]), riverProperties);
+export const riversFile = featureCollection(riverFeature).superRefine((fc, ctx) => {
+  const seen = new Set<string>();
+  fc.features.forEach((f, i) => {
+    if (seen.has(f.properties.id)) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['features', i, 'properties', 'id'], message: `duplicate river id "${f.properties.id}"` });
+    seen.add(f.properties.id);
+  });
+});
+export type RiversFile = z.output<typeof riversFile>;
+
+/* ------------------------------------------------------------------ */
 /* Whole-topic data                                                    */
 /* ------------------------------------------------------------------ */
 
@@ -528,4 +582,73 @@ export function timeScenePresetIds(data: TimeSceneGeoData): string[] {
 
 export function timeChapterRefs(state: TimeChapterState): string[] {
   return [...(state.highlight ?? []), ...(state.beats ?? []).flatMap((b) => b.highlight ?? [])];
+}
+
+/* ------------------------------------------------------------------ */
+/* Checks that need topic.yaml (basemap files, holder colours)          */
+/* ------------------------------------------------------------------ */
+
+export interface TimeTopicIssue {
+  level: 'error' | 'warning';
+  /** Repo-relative file the issue is about. */
+  file: string;
+  message: string;
+}
+
+type TopicLike = {
+  colorBy?: 'bloc' | 'entity';
+  basemap?: { local?: string; region?: { land: string; rivers?: string } };
+};
+
+/**
+ * `pnpm validate` checks of a TimeScene topic against its topic.yaml:
+ * the basemap files exist under public/geo/ (a regional plate's land is a
+ * TopoJSON with an object named after it holding `kind: land`; its rivers
+ * parse as `riversFile`, GeoJSON or TopoJSON), and with `colorBy: entity`
+ * every holder has a colour and no two neighbouring holders share one
+ * (lib/holders.ts). `readGeo(name)` returns the parsed `public/geo/<name>.json`
+ * or `undefined` when there is no such file.
+ */
+export function timeSceneTopicIssues(topic: TopicLike, data: TimeSceneGeoData, readGeo: (name: string) => unknown): TimeTopicIssue[] {
+  const issues: TimeTopicIssue[] = [];
+  const geo = (name: string) => `public/geo/${name}.json`;
+  const local = topic.basemap?.local;
+  if (local && readGeo(local) === undefined) issues.push({ level: 'error', file: geo(local), message: 'basemap.local: file not found' });
+  const region = topic.basemap?.region;
+  if (region) {
+    const land = readGeo(region.land) as { type?: unknown; objects?: Record<string, { geometries?: { properties?: { kind?: unknown } }[] }> } | undefined;
+    if (land === undefined) issues.push({ level: 'error', file: geo(region.land), message: 'basemap.region.land: file not found (scripts/geo/lib/region-land.ts writes it)' });
+    else if (land.type !== 'Topology' || !land.objects?.[region.land]) issues.push({ level: 'error', file: geo(region.land), message: `basemap.region.land: expected a TopoJSON with an object "${region.land}"` });
+    else if (!(land.objects[region.land]!.geometries ?? []).some((g) => g.properties?.kind === 'land'))
+      issues.push({ level: 'error', file: geo(region.land), message: `basemap.region.land: object "${region.land}" has no kind: land geometry` });
+    if (region.rivers) {
+      const raw = readGeo(region.rivers);
+      if (raw === undefined) issues.push({ level: 'error', file: geo(region.rivers), message: 'basemap.region.rivers: file not found' });
+      else {
+        const decoded = raw && typeof raw === 'object' && (raw as { type?: unknown }).type === 'Topology' ? { type: 'FeatureCollection', features: riverTopologyFeatures(raw) } : raw;
+        const parsed = riversFile.safeParse(decoded);
+        if (!parsed.success)
+          for (const issue of parsed.error.issues.slice(0, 10))
+            issues.push({ level: 'error', file: geo(region.rivers), message: `${issue.path.join('.')}: ${issue.message}` });
+      }
+    }
+  }
+  if (topic.colorBy === 'entity') {
+    const holders = holderAdjacency(data.control);
+    const colour = new Map(data.entities.map((e) => [e.id, e.color]));
+    for (const id of holders.keys())
+      if (!colour.get(id)) issues.push({ level: 'warning', file: 'data/entities.json', message: `colorBy: entity: "${id}" has no color (a fallback holder colour is used; run scripts/geo/lib/colour-holders.ts)` });
+    for (const [a, b] of colourConflicts(holders, (id) => colour.get(id)))
+      issues.push({ level: 'warning', file: 'data/entities.json', message: `colorBy: entity: neighbours "${a}" and "${b}" share ${colour.get(a)} (run scripts/geo/lib/colour-holders.ts)` });
+  }
+  return issues;
+}
+
+/** Features of a TopoJSON rivers file (its first object), for the schema check. */
+function riverTopologyFeatures(raw: unknown): unknown[] {
+  try {
+    return riverFeatures(raw);
+  } catch {
+    return [];
+  }
 }

@@ -78,6 +78,15 @@ describe('url-state encode/decode', () => {
     expect(toSearch({ chapter: 'a', pose: null }, { chapter: 'a', pose: null })).toBe('?ch=a');
   });
 
+  it('round-trips BCE dates (a leading minus) at every precision', () => {
+    for (const t of ['-0770', '-0350-06', '-0221-12-31']) {
+      const search = toSearch({ chapter: 'qin-conquest', t });
+      expect(search).toBe(`?ch=qin-conquest&t=${t}`);
+      expect(decodeSceneState(search).t).toBe(t);
+    }
+    expect(decodeSceneState('?t=-0770-13').t).toBeUndefined();
+  });
+
   it('round-trips geological time, orbit cameras, theme and nulls', () => {
     const state: UrlState = {
       chapter: 'pangaea',

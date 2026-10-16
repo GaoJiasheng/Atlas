@@ -92,6 +92,16 @@ pnpm tsx scripts/geo/lib/check.ts --topic <slug> [K1]        # 成品并排图 -
 - **许可**：URA / data.gov.sg = Singapore Open Data Licence v1.0（署名格式"Contains information from {数据集} accessed on {日期} from {来源} which is made available under the terms of the Singapore Open Data Licence version 1.0"）；OSM = ODbL 1.0（署名"© OpenStreetMap contributors"，导出的 GeoJSON 是衍生数据库，同许可提供，页面来源列表要有署名）；Natural Earth 公有领域。
 - **线**：输水管、铁路这类建成后一直在的线写进 `movements.json`，`persist: true`（docs/06），途经点取 OSM 的 way，记在 SOURCES.md「Movement routes」。
 
+## 区域主题（只画一个区域）
+
+一个地区的长时段历史（春秋战国，docs/27；示例 `sample-region`）：读者只该看到那个地区，世界陆地、今天的国界都不出现。引擎的 `basemap.region` 模式（docs/06「区域底图」）：
+
+- **topic.yaml**：`basemap: { region: { bounds: [w, s, e, n], maxBounds?: [...], land: <name>, rivers?: <name> }, maxZoom: 9 }`。`bounds` = 图版（有陆地的范围），`maxBounds` = 镜头界（缺省 = 图版外扩 8 %）；引擎再按舞台宽高比把它放宽，所以缩到最小时整张图版完整可见、四周是纸色，怎么拖也到不了世界别处。不加载 `land-50m`、东南亚 10m 叠层，`borders` 图层、国名和 B 键都没有。
+- **陆地**：`pnpm tsx scripts/geo/lib/region-land.ts --topic <slug>` → `public/geo/<land>.json`：Natural Earth 1:10m 陆地（`world-atlas` 的 `land-10m.json`，公有领域，已在 node_modules）裁到图版外扩 0.25°、DP 1 km、丢 < 4 km² 的岛，TopoJSON 一个对象 `<land>`（`kind: land` 填色、`kind: coast` 只含真海岸，裁切直边不描）；超预算（默认 200 KB）自动放粗。旋钮在 `scripts/geo/<slug>/sources.json` 的 `pipeline.regionLand { padDeg, simplifyKm, minIslandKm2, quantization, budgetKB }`，命令行 `--simplify <km> --budget <KB>` 优先。打印的体积、多边形数、DP 与 `rings: N, zero-area 0, self-crossing 0` 抄进 SOURCES-GEO.md。中国东部 [100, 20, 125, 44] 在缺省旋钮下约 35 KB（101 个多边形）。
+- **河流**：`public/geo/<rivers>.json`，GeoJSON（或 TopoJSON）LineString / MultiLineString，`properties: { id, name: { en, zh }, from?, to?, reconstructed?, label? }`（`riversFile`，`pnpm validate` 校验）。`[from, to)` 是河道存在的年代：改道写成两条（黄河 `huang-before-602` `to: "-0602"`、`huang-602-to-11ce` `from: "-0602"`），消失的河写 `to`，今天的下游写 `from: "1855"`（这个主题里永远不出现）。复原河道 `reconstructed: true` 画虚线；`label: [lng, lat]` 钉住河名位置（缺省 = 最长一段的中点，沿河倾斜）。河名跟领土名称一起由 N 开关。几何同样只来自数据集或配准描摹（NE `rivers_lake_centerlines` 裁剪、Commons 古河道 SVG 配准），来源和配准残差写进 SOURCES-GEO.md。
+- **控制区**：照常（`compose.ts` → `simplify.ts`）；`coast.land` 指向 `public/geo/<land>.json`，`detailBox / detailLand: null`，焦点框 = 图版。来源图只够"示意级"的帧，要素写 `certainty: "approximate"`：它和别国的分界画虚线、淡底和斜线变浅，图例出"边界为近似"。
+- **配色**：几十个小国用不了三个阵营色：`topic.yaml` 写 `colorBy: entity`，跑 `pnpm tsx scripts/geo/lib/colour-holders.ts --topic <slug> --write`（按所有关键帧里的相邻关系给每个 holder 分 `token:holder-1…8`，相邻的不同色；`--keep` 保留已写的；需要 8 色以上会报冲突、退出码 1）。改了关键帧就重跑；`pnpm validate` 对相邻同色给 warning。
+
 ## 路线
 
 行军 / 航线不进管线，直接写在 `movements.json`（见 data-cookbook）：沿真实道路 / 铁路 / 海路取点，过日界线照实写经度跳变（引擎展开走近路），途经点和来源记在 SOURCES.md「Movement routes」。

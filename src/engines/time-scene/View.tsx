@@ -50,9 +50,10 @@ import type { TimeBeat, TimeChapterState, TimeSceneGeoData } from './schema';
 import { buildTimeModel, type TimeModel } from './lib/model';
 import { createPlayhead, type Playhead } from './lib/playhead';
 import type { Anchor, SegmentSpec } from './lib/segmentScale';
-import { clamp, fromNumber, stepFor, toNumber, type TimePoint } from './lib/time';
+import { clamp, fromNumber, keyframeWindow, stepFor, toNumber, type TimePoint } from './lib/time';
 import { frameAt } from './lib/frame';
-import { referencePair } from './lib/stats';
+import { controlAreas, referencePair } from './lib/stats';
+import { withEntityColours } from './lib/holders';
 import { formatTime } from './lib/format';
 import { GeoStage } from './stages/geo/GeoStage';
 import type { GeoController } from './stages/geo/controller';
@@ -70,6 +71,8 @@ const SQUARE_KINDS = new Set<string>(['massacre', 'atrocity']);
 const TRIANGLE_KINDS = new Set<string>(['disaster']);
 /** Up to this many entities, the legend names each one; above, it groups by bloc. */
 const LEGEND_ENTITY_LIMIT = 6;
+/** Status line: BCE dates read as the readout (`350 BCE`), not the raw `-0350`. */
+const isBce = (iso: string) => iso.startsWith('-');
 const OVERLAY_OPEN_MIN_WIDTH = 720;
 const TEXT_INPUTS = 'input, select, textarea, [contenteditable="true"], [data-keys="own"], [role="slider"]';
 const WORLD_CAMERA: GeoCamera = { center: [20, 10], zoom: 1.4 };
@@ -86,7 +89,9 @@ function boundsCamera(model: TimeModel): GeoCamera {
 
 export default function TimeSceneView({ topic, data, chapters, locale }: EngineViewProps) {
   const t = useT();
-  const geo = data as TimeSceneGeoData;
+  // `colorBy: entity`: every entity is drawn in its own colour (a holder token when it names none).
+  const geo = useMemo(() => withEntityColours(data as TimeSceneGeoData, topic.colorBy), [data, topic.colorBy]);
+  const region = topic.basemap?.region ?? null;
   const store = useSceneStore<TimeSceneExt>();
   const { hud } = useSceneContext();
   const currentChapter = useScene<TimeSceneExt, string | null>((s) => s.chapter);
@@ -102,8 +107,9 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
       buildTimeModel(
         geo,
         story.map((c) => ({ id: c.id, t: store.getState().chapterTarget(c.id).t })),
+        { datePrecision: topic.datePrecision },
       ),
-    [geo, story, store],
+    [geo, story, store, topic.datePrecision],
   );
   const [playhead] = useState(() => {
     const t0 = store.getState().t;
@@ -119,7 +125,8 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     (n: number) => {
       const v = clamp(n, model.min, model.max);
       playhead.set(v);
-      const tp = fromNumber(v, model.scale);
+      // A topic dated to the year writes years back (`t=-0350`).
+      const tp = fromNumber(v, model.scale, model.datePrecision ? { precision: model.datePrecision } : {});
       const key = formatTimeParam(tp);
       if (key !== lastWritten.current) {
         lastWritten.current = key;
@@ -339,10 +346,10 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     (chapter: string, index: number) => {
       const b = presentation.beats.find((x) => x.chapter === chapter && x.index === index);
       const when = (b?.spec?.t as TimePoint | undefined) ?? store.getState().chapterTarget(chapter).t;
-      const date = when !== null && when !== undefined ? formatTime(when, locale) : '';
+      const date = when !== null && when !== undefined ? formatTime(when, locale, model.datePrecision) : '';
       return { caption: b ? tx(b.caption, locale) : '', date: locale === 'en' ? date.toLocaleUpperCase('en') : date };
     },
-    [presentation.beats, locale, store],
+    [presentation.beats, locale, store, model],
   );
   const currentSegment = story.findIndex((c) => c.id === currentChapter);
   const { presenting, isPresenting, status: presentationStatus, controls: beatControls, start: startPresentation, stop: stopPresentation } = presentation;
@@ -355,10 +362,27 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   }, [controller, beatIndex]);
 
   /* ---------- legend ---------- */
+  const byEntity = topic.colorBy === 'entity';
+  // `colorBy: entity` lists the holders of the keyframe on show, largest first: follow the dominant keyframe (re-render only when it changes).
+  const legendKeyframe = useSyncExternalStore(
+    playhead.subscribe,
+    () => (byEntity ? dominantKeyframe(model, playhead.get()) : -1),
+    () => (byEntity ? dominantKeyframe(model, playhead.get()) : -1),
+  );
+  const areas = useMemo(() => (byEntity ? controlAreas(model) : null), [byEntity, model]);
+  const approximate = useMemo(() => model.keyframes.some((k) => k.keyframe.features.features.some((f) => f.properties.certainty === 'approximate')), [model]);
   const legend = useMemo<LegendItem[]>(() => {
     const items: LegendItem[] = [];
     if (layers.includes('control') || layers.includes('participation')) {
-      if (geo.entities.length <= LEGEND_ENTITY_LIMIT) {
+      if (byEntity && areas) {
+        // Every holder of this keyframe, each in its own colour, largest area first (never collapsed into one "states" row).
+        const k = Math.max(0, legendKeyframe);
+        const holders = geo.entities
+          .map((e, i) => ({ e, i, area: areas.get(e.id)?.[k] ?? 0 }))
+          .filter((h) => h.area > 0)
+          .sort((a, b) => b.area - a.area || a.i - b.i);
+        for (const { e } of holders) items.push({ id: `entity-${e.id}`, label: e.name, color: entityCssColor(e) });
+      } else if (geo.entities.length <= LEGEND_ENTITY_LIMIT) {
         for (const e of geo.entities) {
           // An entity that changes sides is listed once per bloc it is in.
           if (!e.color && changesBloc(e)) {
@@ -372,9 +396,11 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
         for (const b of ['axis', 'allied', 'neutral'] as const)
           if (geo.entities.some((e) => blocsOf(e).includes(b))) items.push({ id: `bloc-${b}`, label: blocLabel(topic.blocLabels, b, locale), color: BLOC_CSS[b] });
       }
-      // Entities with an end date turn neutral once they are out of the war.
-      if (geo.entities.some((e) => e.left !== undefined)) items.push({ id: 'bloc-out', label: blocLabelText(topic.blocLabels, 'out'), color: BLOC_CSS.neutral });
+      // Entities with an end date turn neutral once they are out of the war (by entity: a conquered state's land has a new holder, so no grey row).
+      if (!byEntity && geo.entities.some((e) => e.left !== undefined)) items.push({ id: 'bloc-out', label: blocLabelText(topic.blocLabels, 'out'), color: BLOC_CSS.neutral });
+      if (approximate) items.push({ id: 'approximate', label: bi('time.legend.approximate'), color: 'var(--line)', kind: 'dashed' });
     }
+    if (region?.rivers) items.push({ id: 'river', label: bi('time.legend.river'), color: 'var(--rivers)', kind: 'line' });
     if (layers.includes('movements') && geo.movements.length)
       items.push({ id: 'movement', label: t('time.movement'), color: 'var(--ink-muted)', kind: 'arrow' });
     if (layers.includes('battles')) {
@@ -390,14 +416,15 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     if (layers.includes('sites') && model.sites.length)
       items.push({ id: 'site', label: t('time.legend.site'), color: 'var(--ink)', kind: 'site' });
     return items;
-  }, [geo, model, layers, locale, topic.blocLabels]); // `t` is bound to `locale`
+  }, [geo, model, layers, locale, topic.blocLabels, byEntity, areas, legendKeyframe, approximate, region]); // `t` is bound to `locale`
 
   /* ---------- control panel: LAYERS (store layers + drawing modes) and TOOLS ---------- */
   const panelLayers = useMemo<ControlRow[]>(
     () => [
       { kind: 'layer', id: 'control', label: t('time.layer.control') },
       { kind: 'mode', id: 'territory', label: t('time.layer.territory') },
-      { kind: 'mode', id: 'borders', label: t('time.layer.borders') },
+      // A regional plate has no modern borders.
+      ...(region ? [] : [{ kind: 'mode' as const, id: 'borders', label: t('time.layer.borders') }]),
       { kind: 'mode', id: 'graticule', label: t('time.layer.graticule') },
       { kind: 'mode', id: 'flow', label: t('time.layer.movements') },
       { kind: 'layer', id: 'battles', label: t('time.layer.battles') },
@@ -405,7 +432,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
       ...(model.sites.length > 0 ? [{ kind: 'layer' as const, id: 'sites', label: t('time.layer.sites') }] : []),
       { kind: 'mode', id: 'labels', label: t('time.layer.labels') },
     ],
-    [model, locale], // `t` is bound to `locale`
+    [model, locale, region], // `t` is bound to `locale`
   );
   const hasGlossary = (geo.glossary?.terms.length ?? 0) > 0;
   const panelTools = useMemo<ControlRow[]>(
@@ -437,7 +464,8 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   /* ---------- HUD controls (docs/08 §3) ---------- */
   const movementsOn = layers.includes('movements');
   const bordersOn = layers.includes('borders');
-  const statusT = storeT !== null ? formatTimeParam(storeT) : '';
+  const statusParam = storeT !== null ? formatTimeParam(storeT) : '';
+  const statusT = storeT !== null && isBce(statusParam) ? formatReadout(toNumber(storeT), model, locale) : statusParam;
   const specRows = useMemo<SpecRow[]>(
     () => [
       { id: 'entities', label: bi('time.spec.entities'), value: pad2(geo.entities.length), mono: true },
@@ -450,7 +478,10 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
   const controls = useMemo<SceneControls>(() => {
     // Geographic presets only (chapters have the rail, the rule and ← →): world, the whole area, then presets.json.
     const presets = [
-      { id: 'world', label: t('time.preset.world'), title: t('time.preset.world'), camera: WORLD_CAMERA as GeoCamera | null },
+      // A regional plate: the first preset is the whole plate (the world is out of reach).
+      region
+        ? { id: 'world', label: t('time.preset.plate'), title: t('time.preset.plate'), camera: null as GeoCamera | null }
+        : { id: 'world', label: t('time.preset.world'), title: t('time.preset.world'), camera: WORLD_CAMERA as GeoCamera | null },
       { id: 'theatre', label: t('time.preset.theatre'), title: t('time.preset.theatre'), camera: null },
       ...(geo.presets?.presets ?? []).map((p) => ({ id: p.id, label: p.label, title: p.label, camera: p.camera as GeoCamera | null })),
     ];
@@ -463,14 +494,15 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
         set: (id, { instant }) => {
           const preset = presets.find((p) => p.id === id);
           if (!preset) return;
-          const camera = preset.camera ?? controllerRef.current?.fitCamera() ?? boundsCamera(model);
+          const fitted = id === 'world' ? controllerRef.current?.plateCamera() : controllerRef.current?.fitCamera();
+          const camera = preset.camera ?? fitted ?? boundsCamera(model);
           store.getState().applyCameraPreset(camera, { instant });
         },
       },
       modes: {
         items: [
           { id: 'flow', key: 'f', label: t('time.mode.flow'), on: movementsOn, tone: 'hot', status: 'FLOW' },
-          { id: 'borders', key: 'b', label: t('time.mode.borders'), on: bordersOn },
+          ...(region ? [] : [{ id: 'borders', key: 'b', label: t('time.mode.borders'), on: bordersOn }]),
           { id: 'graticule', key: 'g', label: t('time.mode.graticule'), on: graticuleOn, phone: false },
           { id: 'territory', key: 'n', label: t('time.mode.territory'), on: territoryOn },
           {
@@ -569,6 +601,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
     selectedEntity,
     closeEvent,
     closeEntity,
+    region,
     locale, // `t` is bound to `locale`
   ]);
   useSceneControls(controls);
@@ -594,7 +627,7 @@ export default function TimeSceneView({ topic, data, chapters, locale }: EngineV
       {presentation.element}
 
       <SceneSlot name="stageOverlay">
-        <details className="atlas-overlay-card ts-overlay" open={overlayOpen} onToggle={(e) => setOverlayOpen(e.currentTarget.open)}>
+        <details className="atlas-overlay-card ts-overlay" data-legend={byEntity ? 'entities' : undefined} open={overlayOpen} onToggle={(e) => setOverlayOpen(e.currentTarget.open)}>
           <summary className="ts-overlay__summary" aria-label={t('time.layersAndKey')}>
             <span className="ts-overlay__closed">
               <Icon name="layers" size={18} />
@@ -666,7 +699,7 @@ function ReferenceBanner({ model, playhead, locale }: { model: TimeModel; playhe
   if (!pair) return null;
   const name = (i: number) => {
     const k = model.keyframes[i]!;
-    const date = formatTime(k.keyframe.t, locale);
+    const date = formatTime(k.keyframe.t, locale, model.datePrecision);
     return `K${i + 1} ${locale === 'en' ? date.toLocaleUpperCase('en') : date}`;
   };
   return (
@@ -674,6 +707,12 @@ function ReferenceBanner({ model, playhead, locale }: { model: TimeModel; playhe
       <span className="ts-stop__eyebrow">{tr('time.reference.banner', { current: name(pair.current), other: name(pair.other) })}</span>
     </div>
   );
+}
+
+/** Index of the keyframe the map shows most strongly at `t` (the incoming one past half the crossfade); 0 before the first. */
+function dominantKeyframe(model: TimeModel, t: number): number {
+  const w = keyframeWindow(model.keyframes, t, (k) => k.t);
+  return w.nextIndex >= 0 && w.blend >= 0.5 ? w.nextIndex : Math.max(0, w.prevIndex);
 }
 
 /** The caption card's date: the playhead as the timeline reads it. */

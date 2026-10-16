@@ -29,6 +29,7 @@ export function GeoStage({ store, playhead, model, locale, onSelectEvent, onCont
   const leadersSvg = slots.leaders;
   const blocLabelsRef = useRef(topic.blocLabels);
   const basemapRef = useRef(topic.basemap);
+  const stringsRef = useRef(topic.strings);
   const containerRef = useRef<HTMLDivElement>(null);
   const labelsRef = useRef<HTMLDivElement>(null);
   const territoryRef = useRef<HTMLDivElement>(null);
@@ -65,6 +66,7 @@ export function GeoStage({ store, playhead, model, locale, onSelectEvent, onCont
           locale: localeRef.current,
           blocLabels: blocLabelsRef.current,
           basemap: basemapRef.current,
+          strings: stringsRef.current,
           onSelectEvent: (id) => selectRef.current(id),
         });
         controller.setLeadersSvg(svgRef.current);

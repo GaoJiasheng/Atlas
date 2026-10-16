@@ -11,32 +11,39 @@
  * hollow squares, sieges with a dashed outer ring), static `site` points on
  * their own layer, territory names for who holds what (territory.ts), leader
  * labels for what the chapter emphasises (leaders.ts) and a scale bar. Entity colours follow the bloc valid at `t` (lib/bloc.ts).
+ * The style itself is built in style.ts. A regional plate (`basemap.region`)
+ * swaps the world for the plate's own land, keeps the camera on the sheet
+ * (lib/region.ts), and shows its dated rivers with their names (rivers.ts).
+ * Frontiers along `certainty: approximate` areas are dashed.
  *
  * Loaded lazily (dynamic import) so MapLibre stays out of the View chunk.
  */
-import { Map as MlMap, Marker, type ExpressionSpecification, type FilterSpecification, type GeoJSONSource, type LayerSpecification, type StyleSpecification } from 'maplibre-gl';
+import { Map as MlMap, Marker, type GeoJSONSource } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import type { Feature, FeatureCollection } from 'geojson';
 import { feature as topoFeature } from 'topojson-client';
 import type { SceneStore } from '../../../core/store';
 import type { GeoCamera, Locale } from '../../../core/types';
 import { isGeoCamera } from '../../../core/camera';
-import { BASE_LAYER_IDS, buildMapStyle } from '../../../../theme/map-style';
 import { readThemeTokens, resolveColorRef, type ThemeTokens } from '../../../../theme/theme';
 import { t as translate, tx, withBase } from '../../../../i18n';
 import type { TimeSceneExt } from '../../index';
 import { entityBlocAt, type TimeModel } from '../../lib/model';
 import type { SceneEvent } from '../../schema';
 import { sideAt, warStatusAt } from '../../lib/bloc';
-import { blocLabel } from '../../lib/blocLabels';
-import type { BasemapOptions, BlocLabels } from '../../../../content/schema/topic';
+import { blocLabel, entityDated, entityWord } from '../../lib/blocLabels';
+import type { BasemapOptions, BlocLabels, EntityStrings } from '../../../../content/schema/topic';
 import type { Playhead } from '../../lib/playhead';
 import { frameAt, type Frame } from '../../lib/frame';
 import { areaLabelPoint, metresPerPixel, pickWorldCopy, pointAlong, projectNearCentre, scaleBar, type LngLat } from '../../lib/geo';
 import { referencePair } from '../../lib/stats';
 import { formatTime } from '../../lib/format';
+import { aspectBounds, regionGraticule, regionMaxBounds } from '../../lib/region';
+import { parseRivers, riverCollection, riversAt, type RiverN } from '../../lib/rivers';
 import { createLeaders, intersects, type LeaderItem } from './leaders';
 import { createTerritoryLabels } from './territory';
+import { createRiverLabels } from './rivers';
+import { EMPTY, GROUPS, HI, HI_BBOX, HI_LOAD_ZOOM, LAYER, LOCAL, MAX_ZOOM, DASH_SEQUENCE, DASH_STEP_MS, REFERENCE_MS, REGION, SRC, buildGeoStyle, graticule, riverFilter } from './style';
 
 export interface GeoControllerOptions {
   container: HTMLElement;
@@ -52,8 +59,10 @@ export interface GeoControllerOptions {
   locale: Locale;
   /** The topic's own bloc names (`topic.blocLabels`); the UI strings when absent. */
   blocLabels?: BlocLabels;
-  /** The topic's island-scale land (`topic.basemap`): drawn above zoom 9, and a higher `maxZoom`. */
+  /** The topic's island-scale land or regional plate (`topic.basemap`), and its `maxZoom`. */
   basemap?: BasemapOptions;
+  /** The topic's wording for entity dates (`topic.strings`); the UI strings when absent. */
+  strings?: EntityStrings;
   onSelectEvent(id: string): void;
 }
 
@@ -75,6 +84,8 @@ export interface GeoController {
   refreshLabels(): void;
   /** Camera that fits all topic data (the `theatre` preset). */
   fitCamera(): GeoCamera | null;
+  /** Regional plate: the camera that shows the whole plate (the first preset); null on the world map. */
+  plateCamera(): GeoCamera | null;
   stats(): { features: number; zoom: number };
   destroy(): void;
 }
@@ -82,96 +93,6 @@ export interface GeoController {
 /* ------------------------------------------------------------------ */
 /* Ids and constants                                                   */
 /* ------------------------------------------------------------------ */
-
-const SRC = {
-  prev: 'ts-control-prev',
-  next: 'ts-control-next',
-  participation: 'ts-participation',
-  borders: 'ts-borders-mesh',
-  graticule: 'ts-graticule',
-  reference: 'ts-reference',
-  movements: 'ts-movements',
-  events: 'ts-events',
-  sites: 'ts-sites',
-} as const;
-
-const LAYER = {
-  graticule: 'ts-graticule',
-  prevFill: 'ts-control-prev-fill',
-  prevHatch: 'ts-control-prev-hatch',
-  prevLine: 'ts-control-prev-line',
-  nextFill: 'ts-control-next-fill',
-  nextHatch: 'ts-control-next-hatch',
-  nextLine: 'ts-control-next-line',
-  partFill: 'ts-participation-fill',
-  partLine: 'ts-participation-line',
-  borders: 'ts-borders',
-  reference: 'ts-reference-line',
-  moveTrail: 'ts-movements-trail',
-  moveLine: 'ts-movements-line',
-  eventRing: 'ts-events-ring',
-  eventDot: 'ts-events-dot',
-  /** Invisible hit targets under the site markers (HTML). */
-  siteHit: 'ts-sites-hit',
-} as const;
-
-/** Scene layer id (LayerToggles) -> map layers it shows. `base` is always on. */
-const GROUPS: Record<string, string[]> = {
-  control: [LAYER.prevFill, LAYER.prevHatch, LAYER.prevLine, LAYER.nextFill, LAYER.nextHatch, LAYER.nextLine],
-  participation: [LAYER.partFill, LAYER.partLine],
-  borders: [LAYER.borders],
-  movements: [LAYER.moveTrail, LAYER.moveLine],
-  battles: [LAYER.eventRing, LAYER.eventDot],
-  sites: [LAYER.siteHit],
-};
-
-/**
- * Regional 1:10m land (Southeast Asia, `public/geo/land-10m-sea.json`, built by
- * scripts/build-geo.ts): close-ups of Singapore and Johor (zoom 9-11) need more
- * than the 1:50m coastline. Drawn from zoom 7 and fully at 8 above the 50m land:
- * the box (`frame`) fades in in the water colour and hides the 50m land under
- * it, the 10m land and coastline sit on top. Fetched only once the camera is at
- * zoom >= 6.5 over the box, so other topics never load it.
- */
-const HI = { src: 'ts-land-hi', mask: 'ts-land-hi-mask', fill: 'ts-land-hi-fill', edge: 'ts-land-hi-edge' } as const;
-const HI_BBOX: [number, number, number, number] = [95, -9, 125, 22];
-const HI_MIN_ZOOM = 7;
-const HI_LOAD_ZOOM = 6.5;
-
-function hiResLayers(tk: ThemeTokens): LayerSpecification[] {
-  const fade: ExpressionSpecification = ['interpolate', ['linear'], ['zoom'], HI_MIN_ZOOM, 0, HI_MIN_ZOOM + 1, 1];
-  const kind = (k: string): FilterSpecification => ['==', ['get', 'kind'], k];
-  return [
-    { id: HI.mask, type: 'fill', source: HI.src, minzoom: HI_MIN_ZOOM, filter: kind('frame'), paint: { 'fill-color': tk.water || '#dde2df', 'fill-opacity': fade, 'fill-antialias': false } },
-    { id: HI.fill, type: 'fill', source: HI.src, minzoom: HI_MIN_ZOOM, filter: kind('land'), paint: { 'fill-color': tk.land || '#e1dbcc', 'fill-antialias': true } },
-    { id: HI.edge, type: 'line', source: HI.src, minzoom: HI_MIN_ZOOM, filter: kind('coast'), paint: { 'line-color': tk['land-edge'] || 'rgba(42, 40, 36, 0.3)', 'line-width': 1.2, 'line-opacity': fade } },
-  ];
-}
-
-/**
- * Island-scale land (`topic.basemap.local`, e.g. `public/geo/land-sg.json`
- * from URA planning areas, scripts/geo/lib/local-land.ts): drawn above the
- * 1:10m land from zoom 9.4, fully at 9.6. Its `mask` geometry (the coarse
- * polygons it replaces, buffered) fades in in the water colour, its `land`
- * is filled and stroked as the coast. Fetched once the map has loaded, only
- * for topics that set it; the map may then zoom to `basemap.maxZoom`.
- */
-const LOCAL = { src: 'ts-land-local', mask: 'ts-land-local-mask', fill: 'ts-land-local-fill', edge: 'ts-land-local-edge' } as const;
-const LOCAL_MIN_ZOOM = 9.4;
-/** A short fade: in between, two coastlines at half strength read as a ghosted double edge. */
-const LOCAL_FADE = 0.2;
-/** Default map zoom ceiling (world to one island); `basemap.maxZoom` raises it. */
-const MAX_ZOOM = 10;
-
-function localLandLayers(tk: ThemeTokens): LayerSpecification[] {
-  const fade: ExpressionSpecification = ['interpolate', ['linear'], ['zoom'], LOCAL_MIN_ZOOM, 0, LOCAL_MIN_ZOOM + LOCAL_FADE, 1];
-  const kind = (k: string): FilterSpecification => ['==', ['get', 'kind'], k];
-  return [
-    { id: LOCAL.mask, type: 'fill', source: LOCAL.src, minzoom: LOCAL_MIN_ZOOM, filter: kind('mask'), paint: { 'fill-color': tk.water || '#dde2df', 'fill-opacity': fade, 'fill-antialias': false } },
-    { id: LOCAL.fill, type: 'fill', source: LOCAL.src, minzoom: LOCAL_MIN_ZOOM, filter: kind('land'), paint: { 'fill-color': tk.land || '#e1dbcc', 'fill-opacity': fade, 'fill-antialias': true } },
-    { id: LOCAL.edge, type: 'line', source: LOCAL.src, minzoom: LOCAL_MIN_ZOOM, filter: kind('land'), paint: { 'line-color': tk['land-edge'] || 'rgba(42, 40, 36, 0.3)', 'line-width': 1.2, 'line-opacity': fade } },
-  ];
-}
 
 /** Event kinds drawn as a hollow square (HTML marker) instead of the ring + dot. */
 const SQUARE_KINDS = new Set<string>(['massacre', 'atrocity']);
@@ -191,6 +112,9 @@ const CONTROL_TINT = 0.28;
 const HIGHLIGHT_TINT = 1.7;
 /** Width of the frontier between two holders (px). */
 const FRONTIER_PX = 0.8;
+/** An approximate area (`certainty: approximate`): its tint and hatch this much lighter. */
+const APPROX_TINT = 0.7;
+const APPROX_HATCH = 0.55;
 /** Modern country names (borders on): a secondary class, only close in and away from territory names. */
 const MAX_PLACE_LABELS = 8;
 const PLACE_MIN_ZOOM = 5;
@@ -200,172 +124,10 @@ const PRESENTATION_MAX_LABELS = 6;
 const HIT_RADIUS = 22; // 44px hit box around events
 const PULSE_MS = 900;
 const FLY_MS = 2200;
-const REFERENCE_MS = 2000;
 const CAMERA_WRITE_DEBOUNCE = 250;
 /** Hatch tile in CSS px (one 45° line per tile). */
 const HATCH_PX = 7;
 const SCALE_MAX_PX = 120;
-
-/** Flowing dash: the classic stepped dasharray sequence (~12 fps). */
-const DASH_SEQUENCE: number[][] = [
-  [0, 4, 3],
-  [0.5, 4, 2.5],
-  [1, 4, 2],
-  [1.5, 4, 1.5],
-  [2, 4, 1],
-  [2.5, 4, 0.5],
-  [3, 4, 0],
-  [0, 0.5, 3, 3.5],
-  [0, 1, 3, 3],
-  [0, 1.5, 3, 2.5],
-  [0, 2, 3, 2],
-  [0, 2.5, 3, 1.5],
-  [0, 3, 3, 1],
-  [0, 3.5, 3, 0.5],
-];
-const DASH_STEP_MS = 83;
-
-const EMPTY: FeatureCollection = { type: 'FeatureCollection', features: [] };
-
-/** 10° graticule as GeoJSON lines (meridians to ±80°, parallels −80…80). */
-function graticule(): FeatureCollection {
-  const features: Feature[] = [];
-  const line = (coordinates: LngLat[], major: boolean): Feature => ({
-    type: 'Feature',
-    properties: { major },
-    geometry: { type: 'LineString', coordinates },
-  });
-  for (let lon = -180; lon < 180; lon += 10) features.push(line([[lon, -80], [lon, 80]], lon === 0));
-  for (let lat = -80; lat <= 80; lat += 10) {
-    const coords: LngLat[] = [];
-    for (let lon = -180; lon <= 180; lon += 10) coords.push([lon, lat]);
-    features.push(line(coords, lat === 0));
-  }
-  return { type: 'FeatureCollection', features };
-}
-
-/* ------------------------------------------------------------------ */
-/* Style                                                               */
-/* ------------------------------------------------------------------ */
-
-/** Data layers on top of the base map. Paint is token-driven; re-applied on theme change. */
-function dataLayers(tk: ThemeTokens): LayerSpecification[] {
-  const ink = tk.ink || '#2a2824';
-  const control = (source: string, fill: string, hatch: string, line: string): LayerSpecification[] => [
-    { id: fill, type: 'fill', source, paint: { 'fill-color': ['get', 'color'], 'fill-opacity': 0, 'fill-antialias': false } },
-    { id: hatch, type: 'fill', source, paint: { 'fill-pattern': ['get', 'pattern'], 'fill-opacity': 0 } },
-    {
-      id: line,
-      type: 'line',
-      source,
-      layout: { 'line-join': 'round' },
-      // Colour and width come with the feature: the frontier between holders is one ink hairline (`--line`, 0.8 px);
-      // control data without topology has no frontier, so its polygons are outlined in their holder's colour (heavier when highlighted).
-      paint: { 'line-color': ['get', 'lc'], 'line-width': ['get', 'lw'], 'line-opacity': 0 },
-    },
-  ];
-  return [
-    {
-      id: LAYER.graticule,
-      type: 'line',
-      source: SRC.graticule,
-      paint: {
-        'line-color': ink,
-        'line-width': 0.5,
-        'line-opacity': ['case', ['get', 'major'], 0.4, 0.22],
-      },
-    },
-    {
-      id: LAYER.borders,
-      type: 'line',
-      source: SRC.borders,
-      layout: { visibility: 'none', 'line-join': 'round' },
-      paint: { 'line-color': ink, 'line-opacity': 0.4, 'line-width': ['interpolate', ['linear'], ['zoom'], 1, 0.4, 6, 0.9] },
-    },
-    ...control(SRC.prev, LAYER.prevFill, LAYER.prevHatch, LAYER.prevLine),
-    ...control(SRC.next, LAYER.nextFill, LAYER.nextHatch, LAYER.nextLine),
-    {
-      id: LAYER.partFill,
-      type: 'fill',
-      source: SRC.participation,
-      paint: { 'fill-color': ['get', 'color'], 'fill-opacity': ['*', 0.3, ['get', 'flash']] },
-    },
-    {
-      id: LAYER.partLine,
-      type: 'line',
-      source: SRC.participation,
-      layout: { 'line-join': 'round' },
-      paint: {
-        'line-color': ['get', 'color'],
-        'line-width': ['+', ['case', ['get', 'hl'], 1.6, 1], ['*', 2, ['get', 'flash']]],
-        'line-opacity': 0.9,
-      },
-    },
-    {
-      id: LAYER.reference,
-      type: 'line',
-      source: SRC.reference,
-      layout: { 'line-join': 'round' },
-      paint: {
-        'line-color': ink,
-        'line-width': 1.2,
-        'line-dasharray': [4, 3],
-        'line-opacity': 0,
-        'line-opacity-transition': { duration: REFERENCE_MS, delay: 0 },
-      },
-    },
-    {
-      id: LAYER.moveTrail,
-      type: 'line',
-      source: SRC.movements,
-      layout: { 'line-cap': 'round', 'line-join': 'round' },
-      paint: { 'line-color': ['get', 'color'], 'line-width': ['get', 'width'], 'line-opacity': ['*', 0.3, ['get', 'op']] },
-    },
-    {
-      id: LAYER.moveLine,
-      type: 'line',
-      source: SRC.movements,
-      layout: { 'line-join': 'round' },
-      paint: {
-        'line-color': ['get', 'color'],
-        'line-width': ['get', 'width'],
-        'line-opacity': ['get', 'op'],
-        'line-dasharray': DASH_SEQUENCE[0] as number[],
-      },
-    },
-    {
-      id: LAYER.eventRing,
-      type: 'circle',
-      source: SRC.events,
-      paint: {
-        'circle-radius': ['get', 'r'],
-        'circle-color': tk.paper || '#e9e4d8',
-        // `o` is 0 for square-marked kinds: the circle stays as the click target only.
-        'circle-opacity': ['*', 0.55, ['get', 'o']],
-        'circle-stroke-color': ['get', 'stroke'],
-        'circle-stroke-width': ['get', 'sw'],
-        'circle-stroke-opacity': ['get', 'o'],
-      },
-    },
-    {
-      id: LAYER.eventDot,
-      type: 'circle',
-      source: SRC.events,
-      paint: {
-        'circle-radius': ['get', 'dot'],
-        'circle-color': ['get', 'color'],
-        'circle-opacity': ['get', 'o'],
-      },
-    },
-    {
-      id: LAYER.siteHit,
-      type: 'circle',
-      source: SRC.sites,
-      layout: { visibility: 'none' },
-      paint: { 'circle-radius': 7, 'circle-color': ink, 'circle-opacity': 0, 'circle-stroke-width': 0 },
-    },
-  ];
-}
 
 /** A 45° hatch tile in `color` (transparent ground), for `fill-pattern`. */
 function hatchImage(color: string, pixelRatio: number): ImageData | null {
@@ -404,26 +166,20 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   const bordersUrl = withBase('/geo/borders-50m.json');
   const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
   const pixelRatio = Math.min(3, Math.max(1, Math.round(window.devicePixelRatio || 1)));
-  const graticuleData = graticule();
+  /** A regional plate (`basemap.region`): no world land, no modern borders, the camera kept on the plate. */
+  const region = options.basemap?.region ?? null;
+  const regionLandUrl = region ? withBase(`/geo/${region.land}.json`) : null;
+  const riversUrl = region?.rivers ? withBase(`/geo/${region.rivers}.json`) : null;
+  const graticuleData = region ? regionGraticule(region.bounds) : graticule();
   let graticuleOn = true;
   let territoryOn = true;
   let referenceOn = false;
   let presenting = false;
 
-  const baseStyle = (tk: ThemeTokens) =>
-    buildMapStyle({ sources: { land: landUrl }, tokens: tk, name: 'atlas-time-scene' }) as unknown as StyleSpecification;
-
-  const style = baseStyle(tokens);
-  for (const id of Object.values(SRC)) {
-    style.sources[id] = { type: 'geojson', data: id === SRC.graticule ? graticuleData : EMPTY };
-  }
-  // The control fills: MapLibre's default tile simplification (0.375) leaves wedges at zoom 0-3 (BC, Brazil, Italy).
-  for (const id of [SRC.prev, SRC.next]) style.sources[id] = { type: 'geojson', data: EMPTY, tolerance: 0.05 };
-  style.sources[HI.src] = { type: 'geojson', data: EMPTY };
-  const regional = [...hiResLayers(tokens), ...(localLand ? localLandLayers(tokens) : [])];
-  if (localLand) style.sources[LOCAL.src] = { type: 'geojson', data: EMPTY };
-  style.layers.splice(style.layers.findIndex((l) => l.id === BASE_LAYER_IDS.landEdge) + 1, 0, ...regional);
-  style.layers.push(...dataLayers(tokens));
+  /** Camera limit of a regional plate: its `maxBounds` widened to the stage's aspect ratio (re-set on resize). */
+  const plateLimit = () => aspectBounds(regionMaxBounds(region!), container.clientWidth, container.clientHeight);
+  const styleFor = (tk: ThemeTokens) => buildGeoStyle({ tokens: tk, landUrl, graticule: graticuleData, local: localLand, region });
+  const style = styleFor(tokens);
 
   const initial = store.getState();
   const cam = isGeoCamera(initial.camera) ? initial.camera : null;
@@ -432,9 +188,13 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     style,
     ...(cam
       ? { center: cam.center, zoom: cam.zoom, pitch: cam.pitch ?? 0, bearing: cam.bearing ?? 0 }
-      : model.bounds
-        ? { bounds: model.bounds, fitBoundsOptions: { padding: 48 } }
-        : { center: [0, 20] as [number, number], zoom: 1.5 }),
+      : region
+        ? { bounds: region.bounds, fitBoundsOptions: { padding: 0 } }
+        : model.bounds
+          ? { bounds: model.bounds, fitBoundsOptions: { padding: 48 } }
+          : { center: [0, 20] as [number, number], zoom: 1.5 }),
+    // A regional plate: the viewport never leaves the sheet, so the rest of the world is out of reach (this also floors the zoom at the whole plate).
+    ...(region ? { maxBounds: plateLimit() } : {}),
     attributionControl: false,
     dragRotate: false,
     pitchWithRotate: false,
@@ -468,13 +228,19 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   });
 
   /* ---------- resize ---------- */
-  const resizeObserver = new ResizeObserver(() => map.resize());
+  const resizeObserver = new ResizeObserver(() => {
+    map.resize();
+    if (region) map.setMaxBounds(plateLimit());
+  });
   resizeObserver.observe(container);
   disposers.push(() => resizeObserver.disconnect());
 
   /* ---------- helpers ---------- */
   const source = (id: string) => map.getSource(id) as GeoJSONSource | undefined;
   const tr = (key: Parameters<typeof translate>[1], vars?: Record<string, string | number>) => translate(locale, key, vars);
+
+  /** Some control area is only approximately known: the hatch fades per feature and the dashed frontier layers are drawn. */
+  const approximate = model.keyframes.some((k) => k.keyframe.features.features.some((f) => f.properties.certainty === 'approximate'));
 
   /** Colour of entity `id` at numeric time `t`: its override, else its bloc at `t`; neutral while not at war (lib/bloc.ts). */
   const entityColor = (id: string, t: number): string => {
@@ -503,9 +269,13 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     const en = model.entities.get(id)?.entity;
     if (!en) return '';
     const status = warStatusAt(en, t);
-    if (status === 'after') return `${blocLabel(options.blocLabels, 'out', locale)}${en.left !== undefined ? ` · ${formatTime(en.left, locale)}` : ''}`;
-    if (status === 'before') return tr('time.bloc.notYet');
-    return `${blocLabel(options.blocLabels, entityBlocAt(model, id, t), locale)} · ${tr('time.joinedOn', { date: formatTime(en.joined, locale) })}`;
+    const date = (p: Parameters<typeof formatTime>[0]) => formatTime(p, locale, model.datePrecision);
+    if (status === 'after') {
+      const left = en.left !== undefined ? entityDated(options.strings, 'left', date(en.left), locale) : null;
+      return left ?? `${blocLabel(options.blocLabels, 'out', locale)}${en.left !== undefined ? ` · ${date(en.left)}` : ''}`;
+    }
+    if (status === 'before') return entityWord(options.strings, 'notYet', locale);
+    return `${blocLabel(options.blocLabels, entityBlocAt(model, id, t), locale)} · ${entityDated(options.strings, 'joined', date(en.joined), locale)}`;
   };
 
   const layersOn = () => new Set(store.getState().layers);
@@ -531,10 +301,12 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     if (!loaded) return;
     const on = layersOn();
     for (const [group, ids] of Object.entries(GROUPS)) {
-      for (const id of ids) map.setLayoutProperty(id, 'visibility', on.has(group) ? 'visible' : 'none');
+      // A regional plate has no modern borders.
+      const show = on.has(group) && !(region && group === 'borders');
+      for (const id of ids) map.setLayoutProperty(id, 'visibility', show ? 'visible' : 'none');
     }
     map.setLayoutProperty(LAYER.graticule, 'visibility', graticuleOn ? 'visible' : 'none');
-    if (on.has('borders')) void ensureCountries();
+    if (on.has('borders') && !region) void ensureCountries();
   };
 
   /* ---------- borders (lazy: only fetched when first shown): the frontier mesh and the country names ---------- */
@@ -590,10 +362,13 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     const kf = model.keyframes[index]?.keyframe;
     if (!kf) return EMPTY;
     const frontier = kf.frontier;
+    // Topology with any frontier: the edges are frontiers (certain ones solid, approximate ones dashed), not outlines.
+    const edges = Boolean(frontier || kf.frontierApprox);
     const lineColor = tokens.line || tokens.ink || '#2a2824';
     const features: Feature[] = kf.features.features.map((f) => {
       const color = entityColor(f.properties.holder, t);
       const marked = hl.has(f.properties.holder);
+      const approx = f.properties.certainty === 'approximate';
       return {
         type: 'Feature',
         geometry: f.geometry,
@@ -602,15 +377,23 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
           color,
           pattern: hatchId(f.properties.holder, t),
           hl: marked,
-          // A highlighted holder is tinted stronger where its outline is not drawn.
-          tint: frontier && marked ? HIGHLIGHT_TINT : 1,
+          // A highlighted holder is tinted stronger where its outline is not drawn; an approximate area lighter.
+          tint: (edges && marked ? HIGHLIGHT_TINT : 1) * (approx ? APPROX_TINT : 1),
+          ho: approx ? APPROX_HATCH : 1,
           lc: color,
-          lw: frontier ? 0 : marked ? 2.8 : 1,
+          lw: edges ? 0 : marked ? 2.8 : 1,
+          dash: !edges && approx,
         },
       };
     });
     // The fill layers never draw a line, but they still evaluate their colour and pattern on it: give it harmless ones.
-    if (frontier) features.push({ type: 'Feature', geometry: frontier, properties: { lc: lineColor, lw: FRONTIER_PX, color: lineColor, pattern: 'ts-hatch-b-neutral', tint: 0 } });
+    const edge = (geometry: NonNullable<typeof frontier>, dash: boolean): Feature => ({
+      type: 'Feature',
+      geometry,
+      properties: { lc: lineColor, lw: FRONTIER_PX, color: lineColor, pattern: 'ts-hatch-b-neutral', tint: 0, ho: 0, dash },
+    });
+    if (frontier) features.push(edge(frontier, false));
+    if (kf.frontierApprox) features.push(edge(kf.frontierApprox, true));
     return { type: 'FeatureCollection', features };
   };
 
@@ -618,7 +401,8 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   const referenceFc = (index: number): FeatureCollection => {
     const kf = model.keyframes[index]?.keyframe;
     if (!kf) return EMPTY;
-    if (kf.frontier) return { type: 'FeatureCollection', features: [{ type: 'Feature', geometry: kf.frontier, properties: {} }] };
+    const frontiers = [kf.frontier, kf.frontierApprox].filter((g) => g !== undefined);
+    if (frontiers.length) return { type: 'FeatureCollection', features: frontiers.map((geometry) => ({ type: 'Feature', geometry, properties: {} })) };
     return { type: 'FeatureCollection', features: kf.features.features.map((f) => ({ type: 'Feature', geometry: f.geometry, properties: {} })) };
   };
 
@@ -667,8 +451,9 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     setIfChanged(SRC.next, `${control.nextIndex}|${hlSig}|${themeSig}`, () => controlFc(control.nextIndex, hl, t));
     const fade = (prefix: 'prev' | 'next', o: number) => {
       map.setPaintProperty(prefix === 'prev' ? LAYER.prevFill : LAYER.nextFill, 'fill-opacity', ['*', CONTROL_TINT * o, ['get', 'tint']]);
-      map.setPaintProperty(prefix === 'prev' ? LAYER.prevHatch : LAYER.nextHatch, 'fill-opacity', o);
+      map.setPaintProperty(prefix === 'prev' ? LAYER.prevHatch : LAYER.nextHatch, 'fill-opacity', approximate ? ['*', o, ['get', 'ho']] : o);
       map.setPaintProperty(prefix === 'prev' ? LAYER.prevLine : LAYER.nextLine, 'line-opacity', o);
+      if (approximate) map.setPaintProperty(prefix === 'prev' ? LAYER.prevDash : LAYER.nextDash, 'line-opacity', o);
     };
     fade('prev', control.prevOpacity);
     fade('next', control.nextOpacity);
@@ -759,6 +544,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     );
     updateMarks(frame, on, hl, hlSig);
 
+    updateRivers(t);
     updateDashAnimation(on.has('movements') && frame.movements.length > 0);
     updateLeaders(frame);
     updateTerritory(false);
@@ -956,6 +742,24 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   /* ---------- territory names (who holds what at `t`; N) ---------- */
   const territory = createTerritoryLabels({ map, container, root: options.territoryRoot, model });
   disposers.push(() => territory.destroy());
+
+  /* ---------- rivers of a regional plate (dated courses; names follow N) ---------- */
+  let rivers: RiverN[] = [];
+  const riverLabels = createRiverLabels(map);
+  disposers.push(() => riverLabels.destroy());
+  let riverSig = '';
+  /** Show the courses that exist at `t`: re-filter the layers (and the names) only when that set changes. */
+  const updateRivers = (t: number) => {
+    if (!region || !rivers.length) return;
+    const ids = riversAt(rivers, t);
+    const sig = `${ids.join(',')}|${territoryOn}|${locale}`;
+    if (sig === riverSig) return;
+    riverSig = sig;
+    map.setFilter(REGION.riverLine, riverFilter(ids, false));
+    map.setFilter(REGION.riverRec, riverFilter(ids, true));
+    riverLabels.show(territoryOn ? new Set(ids) : null, locale);
+    riverLabels.resolve([...leaders.rects(), ...territory.rects()]);
+  };
   let territorySig = '';
   /**
    * Re-place territory names when what they depend on changed (keyframe pair,
@@ -999,8 +803,8 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   };
 
   const dateText = (from: Parameters<typeof formatTime>[0], to?: Parameters<typeof formatTime>[0]) => {
-    const a = formatTime(from, locale);
-    const s = to !== undefined ? `${a} – ${formatTime(to, locale)}` : a;
+    const a = formatTime(from, locale, model.datePrecision);
+    const s = to !== undefined ? `${a} – ${formatTime(to, locale, model.datePrecision)}` : a;
     return locale === 'en' ? s.toLocaleUpperCase('en') : s;
   };
 
@@ -1164,6 +968,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
    */
   const LABEL_PAD = 4;
   const resolveLabelCollisions = () => {
+    if (region) riverLabels.resolve([...leaders.rects(), ...territory.rects()]);
     const ordered = [...labels.values()].sort((a, b) => b.label.priority - a.label.priority);
     if (labels.size === 0) return;
     const occupied: DOMRect[] = [...leaders.rects(), ...territory.rects()];
@@ -1231,7 +1036,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   /* ---------- regional 1:10m land (lazy: zoomed in over Southeast Asia) ---------- */
   let hiState: 'idle' | 'loading' | 'done' = 'idle';
   const ensureHiResLand = async () => {
-    if (hiState !== 'idle' || !loaded || map.getZoom() < HI_LOAD_ZOOM) return;
+    if (region || hiState !== 'idle' || !loaded || map.getZoom() < HI_LOAD_ZOOM) return;
     const b = map.getBounds();
     const [w, s, e, n] = HI_BBOX;
     if (b.getEast() < w || b.getWest() > e || b.getNorth() < s || b.getSouth() > n) return;
@@ -1264,6 +1069,36 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
       source(LOCAL.src)?.setData(topoFeature(topo, obj) as FeatureCollection);
     } catch (err) {
       console.warn('[atlas] island-scale coastline unavailable:', err);
+    }
+  };
+
+  /* ---------- regional plate: its land (into the base `land` source) and its rivers ---------- */
+  const loadRegion = async () => {
+    if (!region || !regionLandUrl) return;
+    const land = (async () => {
+      const res = await fetch(regionLandUrl);
+      if (!res.ok) throw new Error(`${res.status} ${regionLandUrl}`);
+      const topo = (await res.json()) as Parameters<typeof topoFeature>[0];
+      if (destroyed) return;
+      const objects = topo.objects as Record<string, Parameters<typeof topoFeature>[1]>;
+      const obj = objects[region.land] ?? Object.values(objects)[0];
+      if (!obj) throw new Error(`${regionLandUrl} has no object "${region.land}"`);
+      source('land')?.setData(topoFeature(topo, obj) as FeatureCollection);
+    })();
+    const water = (async () => {
+      if (!riversUrl) return;
+      const res = await fetch(riversUrl);
+      if (!res.ok) throw new Error(`${res.status} ${riversUrl}`);
+      const raw: unknown = await res.json();
+      if (destroyed) return;
+      rivers = parseRivers(raw);
+      source(REGION.rivers)?.setData(riverCollection(rivers));
+      riverLabels.set(rivers);
+      riverSig = '';
+      requestRender();
+    })();
+    for (const result of await Promise.allSettled([land, water])) {
+      if (result.status === 'rejected') console.warn('[atlas] regional plate unavailable:', result.reason);
     }
   };
 
@@ -1339,8 +1174,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   const applyTheme = () => {
     tokens = readThemeTokens();
     applyHatches();
-    const next = baseStyle(tokens);
-    for (const layer of [...next.layers, ...hiResLayers(tokens), ...(localLand ? localLandLayers(tokens) : []), ...dataLayers(tokens)]) {
+    for (const layer of styleFor(tokens).layers) {
       if (!map.getLayer(layer.id) || !('paint' in layer) || !layer.paint) continue;
       for (const [key, value] of Object.entries(layer.paint)) {
         // Animated opacities (control crossfade, reference fade) and the dash are re-applied by render().
@@ -1367,6 +1201,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     applyTheme();
     void ensureHiResLand();
     void loadLocalLand();
+    void loadRegion();
     updateScale();
     leaders.relayout();
     const s = store.getState();
@@ -1377,6 +1212,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     setLocale(next) {
       if (next === locale) return;
       locale = next;
+      updateRivers(playhead.get());
       for (const entry of labels.values()) entry.text = '';
       if (lastFrame) updateLeaders(lastFrame);
       updateLabels();
@@ -1391,6 +1227,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     setTerritory(on) {
       if (on === territoryOn) return;
       territoryOn = on;
+      updateRivers(playhead.get());
       updateTerritory(true);
       updateLabels();
     },
@@ -1429,6 +1266,21 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
       const r = (v: number, d: number) => Math.round(v * 10 ** d) / 10 ** d;
       return { center: [r(c.lng, 3), r(c.lat, 3)], zoom: r(fit.zoom ?? map.getZoom(), 2) };
     },
+    plateCamera() {
+      if (!region) return null;
+      const [w, s, e, n] = region.bounds;
+      const fit = map.cameraForBounds(
+        [
+          [w, s],
+          [e, n],
+        ],
+        { padding: 0 },
+      );
+      if (!fit?.center) return null;
+      const c = fit.center as { lng: number; lat: number };
+      const r = (v: number, d: number) => Math.round(v * 10 ** d) / 10 ** d;
+      return { center: [r(c.lng, 3), r(c.lat, 3)], zoom: r(fit.zoom ?? map.getZoom(), 2) };
+    },
     stats() {
       const on = layersOn();
       let features = 0;
@@ -1441,7 +1293,8 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
         features += n;
       }
       if (graticuleOn) features += graticuleData.features.length;
-      if (on.has('borders') && countryLabels) features += countryLabels.length;
+      if (on.has('borders') && countryLabels && !region) features += countryLabels.length;
+      if (region) features += riverSig ? riverSig.split('|')[0]!.split(',').filter(Boolean).length : 0;
       return { features, zoom: Math.round(map.getZoom() * 10) / 10 };
     },
     destroy() {

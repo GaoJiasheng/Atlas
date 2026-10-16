@@ -65,7 +65,7 @@ tests-e2e/                    # Playwright：smoke.spec.ts, hud.spec.ts, hud-lay
 pnpm tsx scripts/new-topic.ts <slug> --engine time-scene --subject history --title-en "…" --title-zh "…" [--subtitle-en … --subtitle-zh …] [--start YYYY-MM-DD --end YYYY-MM-DD]
 ```
 
-它建 `topic.yaml`（`status: draft`）、`chapters/00-background.mdx`（`kind: background` + 阅读说明）、`chapters/01-chapter-one.mdx`（完整 TimeScene frontmatter：state、summary、beats 示例）、`data/{entities,control,movements,events,presets,sources,glossary}.json`（最小合法：无实体、一个空的控制区关键帧）、`data/SOURCES.md`（带生成块标记），以及 `scripts/geo/<slug>/sources.json` + `SOURCES-GEO.md`；已存在就拒绝，最后打印下一步。`--start / --end` 缺省是 1900 年的占位日期，记得改。
+它建 `topic.yaml`（`status: draft`）、`chapters/00-background.mdx`（`kind: background` + 阅读说明）、`chapters/01-chapter-one.mdx`（完整 TimeScene frontmatter：state、summary、beats 示例）、`data/{entities,control,movements,events,presets,sources,glossary}.json`（最小合法：无实体、一个空的控制区关键帧）、`data/SOURCES.md`（带生成块标记），以及 `scripts/geo/<slug>/sources.json` + `SOURCES-GEO.md`；已存在就拒绝，最后打印下一步。`--start / --end` 缺省是 1900 年的占位日期，记得改。公元前写 `--start -0770 --end -0221`（或 `--start=-0770-01-01`；按日期比较，不按字符串），两端都只写年时 topic.yaml 加 `datePrecision: year`，缺省副标题写 "770–221 BCE" / "公元前770–前221年"。
 
 拆解主题（SpaceScene，stage model3d）走项目级 skill `.claude/skills/atlas-space-topic/`（docs/13），用同一个脚手架：
 
@@ -463,6 +463,8 @@ schema.ts             zod（构建期），客户端只 import type
 View.tsx              组装：GeoStage + 底部条 + 参与卡 + 控制面板 + 事件 / 实体详情；store ↔ 播放头同步；控件注册（地理预设、模式、演示节拍）
 stages/geo/GeoStage.tsx    React 壳，懒加载 controller（MapLibre 在这个 chunk 里），提供引线标签层、比例尺和宿主 leaders svg
 stages/geo/controller.ts   命令式驱动 MapLibre：图层、斜线填充、流线、事件环、领土名称、国名、比例尺、REFERENCE、镜头、主题
+stages/geo/style.ts        MapLibre 样式（纯函数，有单测）：底图、1:10m 东南亚、岛尺度陆地、区域图版（陆地 / 河流 / 纸边）、数据图层
+stages/geo/rivers.ts       区域图版的河名（HTML marker，沿河倾斜，跟 N 开关）
 stages/geo/territory.ts    领土名称（谁占着哪里，跟关键帧淡入淡出、按屏幕面积分级、避让）；纯算法在 lib/territory.ts（polylabel、分级、配对、贪心放置，有单测）
 stages/geo/leaders.ts      引线标注（两列、避让、逐帧投影）
 timeline/Timeline.tsx      唯一的底部条（bottomBar）：泳道开关 · 标尺 · 状态串，下方可展开三条泳道（PRESENT 在顶栏）
@@ -470,7 +472,8 @@ hud/HudPanels.tsx          card 参与与面积条带卡（可展开、行可点
 hud/shared.tsx             useSize / usePlayheadT / useUnit / 斜线图案 / 章节时间窗
 EventInspector.tsx         点事件 → inspector 插槽（Counter / 双方 CounterVersus；细看折叠块；来源上标；伤亡始终显示）
 EntityInspector.tsx        点参与卡的一行 → inspector 插槽（名称、阵营时段、加入 / 退出、当前面积）
-lib/time.ts lib/format.ts lib/geo.ts lib/model.ts lib/frame.ts lib/playhead.ts lib/ticks.ts lib/segmentScale.ts lib/stats.ts lib/bloc.ts lib/control.ts lib/bandRows.ts   纯函数，单测在 tests/time-scene/
+lib/time.ts lib/format.ts lib/geo.ts lib/model.ts lib/frame.ts lib/playhead.ts lib/ticks.ts lib/segmentScale.ts lib/stats.ts lib/bloc.ts lib/control.ts lib/bandRows.ts
+lib/region.ts lib/rivers.ts lib/holders.ts   纯函数，单测在 tests/time-scene/
 colors.ts  time-scene.css
 ```
 
@@ -480,7 +483,7 @@ colors.ts  time-scene.css
 
 | 文件 | 要点 |
 |---|---|
-| `entities.json` | `id, name, bloc, joined, left?, color?`。`bloc` 是 `axis/allied/neutral` 之一（引擎只有这三个值，**显示名按主题改**：`topic.yaml` 可选 `blocLabels: { axis?, allied?, neutral?, out? }`，每项 `{ en, zh }`，`out` = 图例的“已退出战争”；图例、实体详情、实体引线说明都先读它，缺省回退全站 `time.bloc.*`，解析在 `lib/blocLabels.ts` 的 `blocLabel()`；一战：`allied` = 协约国、`axis` = 同盟国；实体不能随时间改名，要换名写在控制区 `label` 里），或**换阵营**时按时间排的数组 `[{ "bloc": "axis", "from": "1940-06-10", "to": "1943-10-13" }, { "bloc": "allied", "from": "1943-10-13" }]`（`[from, to)`，只有最后一段可省 `to`，段不能重叠；第一段之前按第一段算，空档里按刚结束的那段算，`sideAt(entity, t)` 在 `lib/bloc.ts`）。**`joined` 之前和 `left` 之后一律按 `neutral`（`blocAt`）**：地图填充、participation、地名、右上卡面积带、图例的“已退出战争”项（`time.bloc.out`）都用它；事件 / 行动的阵营色仍用 `sideAt`；右上卡行数多时只画 `t` 时在战的实体（有面积的在前，按 `t` 时面积；其余按 `joined`），不在战的进“+N others”。颜色默认取 `t` 时所在阵营的 token：地图控制区、participation、地名、实体引线说明、右上卡的面积带都跟 `t` 走，卡上的参与线按段分色；行动和事件用它们开始时的阵营色；图例对换阵营的实体每个阵营列一行。`color: "token:accent-3"` 或 `#hex` 覆盖（不随阵营变）。`joined` 驱动 participation 图层"点亮"和右上卡的参与线。 |
+| `entities.json` | `id, name, bloc, joined, left?, color?`。`bloc` 是 `axis/allied/neutral` 之一（引擎只有这三个值，**显示名按主题改**：`topic.yaml` 可选 `blocLabels: { axis?, allied?, neutral?, out? }`，每项 `{ en, zh }`，`out` = 图例的“已退出战争”；图例、实体详情、实体引线说明都先读它，缺省回退全站 `time.bloc.*`，解析在 `lib/blocLabels.ts` 的 `blocLabel()`；一战：`allied` = 协约国、`axis` = 同盟国；实体不能随时间改名，要换名写在控制区 `label` 里），或**换阵营**时按时间排的数组 `[{ "bloc": "axis", "from": "1940-06-10", "to": "1943-10-13" }, { "bloc": "allied", "from": "1943-10-13" }]`（`[from, to)`，只有最后一段可省 `to`，段不能重叠；第一段之前按第一段算，空档里按刚结束的那段算，`sideAt(entity, t)` 在 `lib/bloc.ts`）。**`joined` 之前和 `left` 之后一律按 `neutral`（`blocAt`）**：地图填充、participation、地名、右上卡面积带、图例的“已退出战争”项（`time.bloc.out`）都用它；事件 / 行动的阵营色仍用 `sideAt`；右上卡行数多时只画 `t` 时在战的实体（有面积的在前，按 `t` 时面积；其余按 `joined`），不在战的进“+N others”。颜色默认取 `t` 时所在阵营的 token：地图控制区、participation、地名、实体引线说明、右上卡的面积带都跟 `t` 走，卡上的参与线按段分色；行动和事件用它们开始时的阵营色；图例对换阵营的实体每个阵营列一行。`color: "token:accent-3"` 或 `#hex` 覆盖（不随阵营变）；列国地图用 `token:holder-N`（见「按国配色」）。`joined` 驱动 participation 图层"点亮"和右上卡的参与线。 |
 | `control.json` | `keyframes[]`，按时间严格升序，`properties.holder` = 实体 id，同一实体可有多个面（或 MultiPolygon）。**两种写法任选**：① GeoJSON：`{ "keyframes": [{ "t", "features": FeatureCollection }] }`（小主题、手写，如 sample-time）；② TopoJSON：`{ "topology": Topology, "keyframes": [{ "t", "object": "<topology.objects 里的名字>" }] }`——所有关键帧共用一份拓扑（不变的海岸、边界只存一次，量化 + 差分编码），大主题（ww2 的 12 帧）用它。拓扑只做宽松校验（`type: "Topology"`、`arcs` 数组、`objects` 记录、`transform` 可选），解码后每个要素按普通控制区要素再校验（`holder` 存在于 entities、环闭合、经纬度范围）。引擎在建 `TimeModel` 时用 `topojson-client` 的 `feature()` 把每帧解成 FeatureCollection（`lib/control.ts` 的 `decodeControl`，顺手把环改回 RFC 7946 绕向，MapLibre 靠绕向分外环和洞），之后的帧、面积、渲染全都不知道有两种写法。ww2 的 `control.json` 由管线生成（见「Geo pipeline」），不手写。面积（右上卡）在客户端按球面公式算，不用写。 |
 | `movements.json` | `from/to` 时间区间 + LineString `path`（从起点画到终点）。`strength`（可选，0 或缺省 = 未知，不显示“N 人”）决定线宽（1–3 px，相对全主题最大值）。**过日界线**：schema 把经度限在 -180..180，作者照实写跳变即可（`… [179.5, 38], [-175, 33] …`）；建 `TimeModel` 时 `unwrapPathCentred`（`lib/geo.ts`，思路同 `unwrapRing`）把相邻点经度差超过 180° 的后续点整体 ±360°，让线走近路（MapLibre 会把 >180 的经度画进邻近世界副本），再把整条路径平移 ∓360° 使其中心落在 -180..180。之后切线（`sliceLine`）、箭头头部、引线锚点、剧场镜头的包围盒（`model.bounds`）全部用 `MovementN.path`（展开后的坐标），不要再读 `movement.path.coordinates`。珍珠港航线（147.7°E 44.9°N → 158°W 23°N）展开后经度 147.7 → 202，长约 5,800 km，不是绕地球一圈的 30,000 km。可选 `linger`（`timePoint`，须晚于 `to`、同一时间标尺）：默认 `to` 之后整条线立刻消失；写了 `linger`，`to` 到 `linger` 之间画完成的整条线（40% 不透明，箭头停在终点），过了 `linger` 在约 2% 时间跨度内淡出。lingering 的线不计入状态串的 MOVEMENTS。可选 `persist: true`（docs/24 C2-lite：输水管、铁路这类**建成后一直在**的线，不能与 `linger` 同用）：`from`→`to` 照常画出，`to` 之后整条线以 `PERSIST_OPACITY`（60%）一直保留到时间轴末尾、不画箭头头部（`MovementFrame.persisting`）；`from` 可等于 `to`（建成那天整条出现）。同样不计入 MOVEMENTS。 |
 | `events.json` | `t`、可选 `until`、`at`、`kind`、`importance`（**3 最重要 = 点最大**，1 最小）、`sides/forces/casualties/result`。`kind`：`battle`、`landing`（这两种必须有 `sides` + `result`）、`bombing`（必须有 `sides`）、`surrender`、`political`、`massacre`、`siege`、`evacuation`、`liberation`、`atrocity`、`disaster`（流感、饥荒、击沉客轮；不分阵营）、`site`（`bombing` 以外新增的各种 `sides`/`result` 都可选）。可选 `detail: { en, zh }`（inspector 里默认收起的"细看 / More"）与 `sources: ["S1", "S7"]`（`sources.json` 的编号，inspector 摘要后显示 mono 上标，点开来源弹层）。`sensitive` 只是可选元数据，不影响显示。 |
@@ -546,7 +549,9 @@ beats:
 - `toNumber(t)`：ISO → 十进制年（取时段起点：`1942-02` = 1942 年 2 月 1 日）；`{ ma }` → 负的年数（`{ ma: 200 }` = -2e8）。`fromNumber(n, scale)` 反向，日期按日向下取整，地质时间保留 2 位小数 Ma。
 - 时间轴范围 = 关键帧、事件（含 `until`）、行动起止、章节时间的最小/最大值。
 - store 里的 `t` 是日精度 TimePoint（进 URL）；地图按连续的"播放头"渲染。**换章 = 第一拍**（Gavin 2026-10-10："点第二段不要自动播放全部"）：用户选章（底部条的段、章节轨、顶栏章节号、← →、Next / Back；不含深链、不含演示、不含 `instant`）时，章节过渡（reason `chapter`）照常发出（阅读面板收起时的条照样闪），紧接着（微任务）把本章**第一拍**的状态（`t`、`camera`、`layers`、`highlight`）用 `applyState` 套上：镜头飞（2.2 s），播放头 1.6 s 缓动到第一拍的 `t`。没有自动跑、没有 `RUNNING`。没写 `beats` 的章，章本身就是它唯一的一拍。点底部条上的拍刻度 = 那一拍的状态（同一个 `applyBeatState`；拍属于别的章就连章一起换；不进演示，HUD 和阅读面板保持原样）。深链和 `goToChapter(id, { instant: true })` 仍是本章自己的状态（截图的章节图、`--beats` 的章节高亮核对不变）。**随时可以拖播放头**：拖动 / Shift+←→ 直接移动播放头并 `patch({ t })`，不换章。没有自由播放（时间只随换章、拍、演示和拖动走）。
-- 读数格式 `formatTime(t, locale)`：`15 Feb 1942` / `1942年2月15日`；`200 Ma` / `2亿年前`、`6600万年前`。跨度 >12 年时读数降到月，>100 年降到年。HUD 里的 mono 读数用 `formatReadout`（英文大写：`15 FEB 1942`）。
+- 读数格式 `formatTime(t, locale, precision?)`：`15 Feb 1942` / `1942年2月15日`；`200 Ma` / `2亿年前`、`6600万年前`；公元前 `221 BCE` / `公元前221年`。跨度 >12 年时读数降到月，>100 年降到年。HUD 里的 mono 读数用 `formatReadout`（英文大写：`15 FEB 1942`）。
+- **公元前**（docs/27 G1–G3）：ISO 年份前加 `-`、四位数字（`"-0770"`），YAML 里**一律加引号**（不加引号是数字）；比较一律 `compareTime`（字符串比较会把 `-0300` 排在 `-0400` 前面）。`toNumber('-0221')` = -221（JS 的天文纪年：只要全站一致，排序和显示都对；跨公元前 1 年 → 公元 1 年时算出的时长多一年，见 docs/27 G12）。URL `t=-0350`、`t=-0221-12-31` 原样往返。状态行遇到公元前写读数（`350 BCE`），不写 `-0350`。
+- **`datePrecision`**（topic.yaml，`day | month | year`）：显示到哪一级为止。`year`：读数、段标签、拍的小卡、事件 / 实体详情、引线日期、REFERENCE 横幅只写年（`'-0260-05'` 读作 `260 BCE`），拖动写回 store / URL 的 `t` 也只到年（`t=-0350`）。模型上是 `model.datePrecision`（`buildTimeModel(data, chapters, { datePrecision })`），格式化时取它与跨度精度中较粗的一个（`coarser`）。
 - 刻度 `ruleTicks(min, max, scale, maxMajors, locale)`（`lib/ticks.ts`）：按跨度和宽度自适应，取主刻度数 ≤ `maxMajors` 的最细一档——几个月：主 = 月（1 月写年份）、次 = 每月 8/15/22 日；几年：主 = 年、次 = 月；更长：5/10/25/50/100… 年；地质：0.1–1000 Ma 档（如 10 Ma / 1 Ma），标尺右端写单位 `MA` / `百万年前`。
 
 ### 底部条（`bottomBar`，TimeScene 唯一的底部块）
@@ -563,7 +568,7 @@ TimeScene 不注册 `panel01–03`，宿主因此不画底部三面板带；原�
 ```
 
 - 左：泳道开关（小 chevron，`aria-expanded`）。PRESENT / 演示按钮已移到顶栏 VIEW 组右端（两个引擎共用，docs/08 §2；这里不再放第二个）。原来的播放 / 暂停和 ×1 ×2 ×4 已去掉（Gavin 2026-10-09），时间轴不再自己跑。
-- 中：**分段标尺**（Gavin 2026-10-10："外面的大时间轴做成跟演示模式类似，分几段，只标年月"）：每个正式章节一段，等宽（段间 6 px），段左界下方两行 mono 标签：章号 `07`、起始年月 `1941-12`（段宽 < 44 px 只写章号；地质时间写读数）。每段一条 2 px hairline 轨：已过的章墨色，当前章 signal 色、填到播放头。段里每个演示拍一个刻度（7 px 空心圆，坐在轨上），位置按拍的 `t` 在本段跨度里线性排、再推开到彼此 ≥ 10 px（段太窄时均分）；当前章的当前拍刻度实心 signal（刚套用的那拍；拖动后 = 播放头之前最近的一拍）。没写 `beats` 的章一个刻度（章节时间）。关键帧小空心菱形坐在轨上（同一映射）；没有年 / 月刻度。**点段**（`.ts-seg__btn`，44 px 高，`aria-label`「第 2 章：开战前的世界，自 1938-01」）= 换到那一章并落在第一拍（见「时间」）；**点刻度**（`.ts-seg__tick`，`data-beat="<章>.<拍>"`，命中区伸到与相邻刻度的中点，10–28 px 宽、24 px 高，压在段按钮上面——段在标签那一行点）= 套用那一拍；悬停 / 聚焦刻度出一张 hairline 小卡（`.ts-tip`）：拍的日期（mono signal）+ 字幕开头几个词（en 约 56 字符断在词边界，zh 22 字）。当前段的刻度是 Tab 停靠点，其余段的刻度只给指针（选了那段就能 Tab 进去）。手机宽度（条 < 560 px，容器查询）只画段、不画刻度。播放头：12 px 空心 signal 圆点（中间透出当前拍的实心刻度）加 hairline 竖线，日期写在线上方；44 px 命中区（`.ts-rule__grab`，`role="slider"`，`touch-action: none`）压在刻度上面——不拖动地点它 = 点了 22 px 内最近的刻度，没有就点了所在的段。**拖动**：在标尺上任何地方按下并移动 > 3 px 就开始拖（指针捕获），松手不再算点击；抓住播放头保持抓取偏移，从别处起拖则播放头跳到指针。鼠标和触屏都走 pointer events。
+- 中：**分段标尺**（Gavin 2026-10-10："外面的大时间轴做成跟演示模式类似，分几段，只标年月"）：每个正式章节一段，等宽（段间 6 px），段左界下方两行 mono 标签：章号 `07`、起始年月 `1941-12`（段宽 < 44 px 只写章号；地质时间写读数；公元前、跨度超过 100 年或 `datePrecision: year` 时只写年：`770 BCE` / `前770年`，`segmentDate` 用 `yearLabel`）。每段一条 2 px hairline 轨：已过的章墨色，当前章 signal 色、填到播放头。段里每个演示拍一个刻度（7 px 空心圆，坐在轨上），位置按拍的 `t` 在本段跨度里线性排、再推开到彼此 ≥ 10 px（段太窄时均分）；当前章的当前拍刻度实心 signal（刚套用的那拍；拖动后 = 播放头之前最近的一拍）。没写 `beats` 的章一个刻度（章节时间）。关键帧小空心菱形坐在轨上（同一映射）；没有年 / 月刻度。**点段**（`.ts-seg__btn`，44 px 高，`aria-label`「第 2 章：开战前的世界，自 1938-01」）= 换到那一章并落在第一拍（见「时间」）；**点刻度**（`.ts-seg__tick`，`data-beat="<章>.<拍>"`，命中区伸到与相邻刻度的中点，10–28 px 宽、24 px 高，压在段按钮上面——段在标签那一行点）= 套用那一拍；悬停 / 聚焦刻度出一张 hairline 小卡（`.ts-tip`）：拍的日期（mono signal）+ 字幕开头几个词（en 约 56 字符断在词边界，zh 22 字）。当前段的刻度是 Tab 停靠点，其余段的刻度只给指针（选了那段就能 Tab 进去）。手机宽度（条 < 560 px，容器查询）只画段、不画刻度。播放头：12 px 空心 signal 圆点（中间透出当前拍的实心刻度）加 hairline 竖线，日期写在线上方；44 px 命中区（`.ts-rule__grab`，`role="slider"`，`touch-action: none`）压在刻度上面——不拖动地点它 = 点了 22 px 内最近的刻度，没有就点了所在的段。**拖动**：在标尺上任何地方按下并移动 > 3 px 就开始拖（指针捕获），松手不再算点击；抓住播放头保持抓取偏移，从别处起拖则播放头跳到指针。鼠标和触屏都走 pointer events。
 - 右：状态串（mono）：参战方 `已加入 / 总数` · 进行中的战斗 · 进行中的行动 · 控制区关键帧 `K8→K9 23 %`；每段的 `title` 写双语全称（Participants / 参与方 …）。都是数据统计，不标 SIM。条窄于 860 px（容器查询）时状态串换到标尺下面一行。
 - 泳道（默认收起）：KEYFRAMES（菱形）、MOVEMENTS（起止条，重叠自动分行）、EVENTS（点 + 进行窗口），当前章那一段淡 signal 底，播放头一条 signal 竖线；横坐标与标尺完全一致。
 - 行为：拖动 = 连续时间不换章；点段 = 换章并落在第一拍（不展开阅读面板，见「阅读面板收起」）；点刻度 = 那一拍；Shift+← → 全局微调；焦点在播放头上时 ← → ↑ ↓ 微调一格、PageUp/PageDown 十格、Home/End 跳到播放头所在段的两端。
@@ -624,6 +629,60 @@ pnpm tsx scripts/build-geo.ts   # world-atlas(Natural Earth 1:50m) → public/ge
 ```
 
 陆地 3 位小数（~110 m），国界简化到 ~2 km，合计约 1.75 MB（预算 2 MB）。world-atlas 里跨 ±180° 的环（斐济、楚科奇、弗兰格尔岛、南极洲）原本在一条线段里从 180 跳到 -180，平面渲染会画出横贯全图的直线（P1 截图里的那条横线就是斐济的一个碎片）；构建时用 `unwrapRing`（`lib/geo.ts`，有单测）把环展开成经度连续（允许超出 ±180，MapLibre 自动画进相邻世界副本），绕极点的环（南极洲）沿极点闭合。来源与许可见 `public/geo/README.md`（Natural Earth，公有领域）。
+
+### 区域底图（`basemap.region`，docs/27 G4 / G6）
+
+一个地区的长时段主题（春秋战国）只画那个地区：舞台是一张"区域图版"，不是世界地图上的一个窗口。
+
+```yaml
+basemap:
+  region:
+    bounds: [100, 20, 125, 44]        # 图版：陆地画到这里，外面是纸
+    maxBounds: [98, 18, 127, 45.5]    # 镜头界，可省（= bounds 外扩 8 %）
+    land: china-plate                 # public/geo/china-plate.json（scripts/geo/lib/region-land.ts）
+    rivers: china-plate-rivers        # 可选：public/geo/china-plate-rivers.json
+  maxZoom: 9                          # 可省（默认 10；schema 6–16）
+```
+
+- schema：`basemapOptions` 要么 `local` 要么 `region`（`regionBasemap`：`bounds` 西 < 东、南 < 北，`maxBounds` 必须包住 `bounds`）。
+- **陆地**：`base` 的 `land` source 开始是空的，load 后 fetch `public/geo/<land>.json`（TopoJSON，对象 `<land>`：`kind: land` 填 `--land`、`kind: coast` 描海岸；裁切的直边不描）。**不加载** `land-50m.json`、`land-10m-sea.json`（那一层整个不进样式），没有 `borders` 图层、国名，B 键和图层面板里的"国界"都不出现。
+- **纸边**：图版以外整个世界铺一层纸色（`--paper`，`kind: frame`，挖掉 `bounds`），图版边上一条 0.8 px `--line` 图廓线（`kind: edge`），两层在所有 GL 图层之上（`lib/region.ts` `regionFrame`）。海仍是 `--water`，只在图版内。
+- **镜头**：`maxBounds` 按舞台宽高比放宽（`aspectBounds`，Mercator 下只放不收，resize 时重设），所以缩到最小 = 整张图版刚好装下、四周是纸，再怎么拖、缩都到不了世界别处。第一个预设（键 1，id 仍是 `world`）变成"全图 / Whole plate"（`plateCamera()` = `cameraForBounds(bounds)`）；`theatre` 照旧套住全部数据。章节镜头 zoom 比最小值还小时被夹到最小值。
+- **经纬网**：只画在图版内，5°（图版跨度 ≤ 60°）或 10° 一条（`regionGraticule`）。
+- **河流**（`rivers`）：`public/geo/<rivers>.json`，GeoJSON 或 TopoJSON（取第一个对象）的 LineString / MultiLineString，`properties: { id, name: { en, zh }, from?, to?, reconstructed?, label?: [lng, lat] }`（schema `riversFile`：id 唯一、`to` 晚于 `from`）。`[from, to)` = 这条河道存在的年代（`lib/rivers.ts` `riversAt`）：改道写成两条（前 602 年以前的黄河 `to: "-0602"`），消失的河写 `to`（济水），今天的下游写 `from: "1855"`（先秦主题里永远不出现）。陆地之上、数据之下两层 hairline（`--rivers`，0.6–1.3 px 随缩放）：实线 / `reconstructed: true` 虚线 [4, 2.5]；按播放头时间过滤，只在可见集合变化时 `setFilter`。**河名**（`stages/geo/rivers.ts`）：每条可见河道一个斜体小字（`--ink-3`，`--land` 光晕），钉在 `label` 或最长一段的中点、沿河倾斜（Mercator 保角，角度每条算一次，保持正立），给引线标注和领土名称让位、彼此避让；跟领土名称一起由 **N** 开关（不受 L 影响）。图例出"河流（虚线：复原河道）"。
+- 其他主题不受影响：样式（`stages/geo/style.ts` `buildGeoStyle`）在没有 `region` 时和以前一样（`tests/time-scene/geo-style.test.ts`）。
+- `pnpm validate`：`land` / `rivers` 文件存在、陆地对象名和 `kind: land`、河流过 `riversFile`（`timeSceneTopicIssues`）。
+- 占位示例：`sample-region`（伊比利亚半岛一张图版，四个占位国、三帧 BCE 关键帧（两帧近似边界）、四条占位河道（含一条复原故道和一条 1855 年后才出现、永远不显示的"今道"）、`colorBy: entity`、`datePrecision: year`、`strings`）。`pnpm shoot sample-region --beats` 看全部效果；它的区域、河流、控制区都是占位，不是历史。
+
+### 按国配色（`colorBy: entity`，docs/27 G5 / G11）
+
+列国地图（几十个国家，都不分阵营）用不了三个阵营色。`topic.yaml` 写 `colorBy: entity`：
+
+- 每个实体 `color: "token:holder-N"`（N = 1…8）：`tokens.css` 的 `--holder-1 … --holder-8`，paper / cinema 各一套，低饱和、按 Paul Tol 的色盲安全 "muted" 色板（靛、沙、玫、青、橄榄、天蓝、酒红、绿；前四个差别最大，着色算法最常用它们）。只有一个含义："多国地图上区分相邻的国家，国名写在图上"。
+- 分配：`pnpm tsx scripts/geo/lib/colour-holders.ts --topic <slug> [--keep] [--write]`（`lib/holders.ts`：`holderAdjacency` 统计所有关键帧里共用边界的 holder 对——TopoJSON 按弧、GeoJSON 按线段，只碰到一个角不算相邻；`assignHolderColours` 用 DSatur，空闲色里取用得最少的；`--keep` 保留已写且不冲突的）。需要 8 色以上时报冲突、退出码 1。没写 `color` 的实体按在 entities.json 里的顺序补一个 holder 色（`withEntityColours`，不保证相邻不同色）；`pnpm validate` 对缺色、相邻同色给 warning。
+- 地图淡底、斜线、领土名称、引线、参与卡都用实体自己的颜色（与 `color` 覆盖同一条路径）。`bloc` 一律写 `neutral`，`blocLabels.neutral` 写这一类的名字。
+- **图例**：不再按 6 个实体一刀切合成"诸国"一行：列出**当前主导关键帧**里的每个 holder（面积大的在前，播放头换帧时更新），各自的色块；手机宽度（< 640 px）排成两列（`.ts-overlay[data-legend="entities"]`）。不出"已退出战争"那一行（被兼并的国家，土地已经换了 holder）。
+
+### 不确定的边界（`certainty: approximate`，docs/27 G8）
+
+控制区要素可写 `properties.certainty: "approximate"`（缺省 `certain`）：来源只够"示意级"的帧（先秦列国）。
+
+- TopoJSON：`decodeControl` 把分界拆成两份——两边都确定的 `frontier`（实线 0.8 px）和碰到近似要素的 `frontierApprox`（同色同宽，`line-dasharray` [3, 2]，图层 `ts-control-{prev,next}-dash`）；没有近似要素的关键帧和以前完全一样。GeoJSON 形态：近似要素的轮廓画成虚线。
+- 近似要素的淡底 ×0.7、斜线不透明度 ×0.55（`tint` / `ho`），一眼看得出"这块不确定"。REFERENCE 的虚线叠加两份分界都画。
+- 图例加一行"边界为近似 / Approximate border"（虚线框）。
+
+### 用词覆盖（`strings`，docs/27 G7）
+
+实体卡和实体引线说明里的"加入 / 退出 / 尚未参战"是全站字串（`time.entity.joined`、`time.entity.left`、`time.joinedOn`、`time.bloc.notYet`），对战争以外的主题不对。`topic.yaml` 可选：
+
+```yaml
+strings:
+  joined: { en: "appears", zh: "出现" }
+  left: { en: "ends", zh: "灭亡" }
+  notYet: { en: "Not yet recorded", zh: "尚未见于记载" }
+```
+
+实体卡的两个标题直接用这个词；引线说明写 "appears 770 BCE" / "公元前770年出现"（`lib/blocLabels.ts` `entityWord` / `entityDated`；英文词在前、中文日期在前），`left` 之后写 "ends 221 BCE"（没设 `left` 时仍是 `blocLabels.out` + 日期）。缺省回退全站字串。
 
 ### 包体
 
@@ -1358,5 +1417,7 @@ pnpm tsx scripts/geo/lib/check.ts --topic ww2         # MapLibre（Playwright）
 - 旧实测（12 帧，2026-10-08，还没有全球海岸裁剪）：焦点区 1.5 km、1371 KB（预算 2048 KB），偏差 p50 0.24 / p95 1.17 / p99 1.47 km；3 km 时 1215 KB。体积的大头是每帧约 800 个多边形的弧引用，间隔再粗也省不多（40 km 仍 916 KB）。`--islands fine,coarse` 调丢弃小岛的面积阈值（km²）。
 - 页面体积：主题数据作为岛组件 props 序列化进 HTML，JSON 约翻倍，ww2 页约 3 MB，超过 Workbox 默认 2 MiB 预缓存上限，`astro.config.mjs` 已把 `maximumFileSizeToCacheInBytes` 提到 4 MiB。若要缩小页面，把 `control.json` 改成像 `public/geo/` 那样运行时 fetch 的静态文件。
 - 内陆国界：`scripts/build-geo.ts` 出 `public/geo/borders-50m.json`（world-atlas 国家拓扑的 `mesh(countries, (a, b) => a !== b)`，只含国与国共用的弧，无海岸；DP 2 km，量化 0.01°，TopoJSON，约 69 KB）。`borders` 图层画它，不再描国家多边形。
+- **区域图版陆地**（docs/27，`basemap.region`）：`pnpm tsx scripts/geo/lib/region-land.ts --topic <slug> [--simplify <km>] [--budget <KB>]` 读 topic.yaml 的 `basemap.region`（`bounds`、`land`），把 Natural Earth 1:10m 陆地（`world-atlas` 的 `land-10m.json`，公有领域，node_modules 里已有）裁到图版外扩 `padDeg`（0.25°，纸边盖住，图版边上不留缝）、逐环 DP（`simplifyKm` 1）、丢 < `minIslandKm2`（4）的岛和湖，写 `public/geo/<land>.json`：TopoJSON 一个对象，`kind: land` MultiPolygon + `kind: coast` MultiLineString（只含真海岸弧，裁切直边不进 coast；与 `land-10m-sea.json` 同一做法，纯函数在 `scripts/geo/lib/region.ts`，单测 `tests/geo-region.test.ts`）。超预算（`budgetKB` 200）时 DP 每次 ×1.5 重来。旋钮在清单 `pipeline.regionLand`（可没有清单）。打印体积、多边形 / 顶点 / 海岸弧数、实际 DP 和 `rings: N, zero-area 0, self-crossing 0`。实测：中国东部 [100, 20, 125, 44] 约 35 KB；`sample-region` 10 KB。
+- **按国配色**：`pnpm tsx scripts/geo/lib/colour-holders.ts --topic <slug> [--keep] [--write]`，见「按国配色」。改了关键帧就重跑。
 - **岛尺度底图**（docs/17 C1，`four-taps` 起）：`topic.yaml` 的 `basemap: { local: land-sg, maxZoom: 13 }`（schema `basemapOptions`）。`local` 是 `public/geo/<local>.json`（TopoJSON，一个对象 `<local>`，几何带 `kind: mask` 与 `kind: land`），由 `scripts/geo/lib/local-land.ts --topic <slug>` 按清单 `pipeline.localLand` 生成：`land-sg` = URA 2019 总体规划规划区边界（No Sea，data.gov.sg，SODL v1.0）并成一个面、DP 5 m、丢掉 < 0.02 km² 的小岛，再挖掉内陆水面（`water`：URA `WATERBODY` ≥ 0.02 km²——河、运河、海湾、河口蓄水池；只有淹没山谷而成的蓄水池（`keepMatch`：麦里芝、贝雅士上下段、实里达上段、勿洛、德光岛、裕廊湖）保持陆地色，因为关键帧按年份给它们上色，建成前它们是陆地；河口蓄水池建坝前本来就是河口水面），约 84 KB（预算 150 KB），原始边界顶点到成品海岸的偏差 p50 0.9 m、p95 4.8 m；`mask` = 它取代的 10m 新加坡多边形外扩 400 m、减去柔佛与廖内的 10m 陆地（水色铺上去盖住旧海岸，不盖邻国）。GeoStage 只对设了 `basemap.local` 的主题在地图 load 后 fetch 它，zoom 9.4 起绘制、9.6 完全显现（渐变区间短：两条半透明的海岸会叠成重影；章节镜头取 ≤ 9.3 或 ≥ 9.6）（mask 水色 → 陆地 `--land` → 轮廓 `--land-edge` 1.2 px，叠在 10m 层之上、控制区之下）；`maxZoom`（默认 10，可到 16）放开地图缩放上限。其他主题不加载、不受影响。
 - 东南亚近景底图：`scripts/build-geo.ts` 另出 `public/geo/land-10m-sea.json`（Natural Earth 1:10m 陆地，裁到 95°E–125°E、9°S–22°N，TopoJSON，约 234 KB）。GeoStage 在镜头 zoom ≥ 6.5 且视野与该框相交时才 fetch；zoom 7 起绘制、到 8 完全显现：框内先铺一层水色遮住 50m 陆地（不透明度 7→8 渐入），10m 陆地和海岸线叠在上面，颜色同为 `--land` / `--land-edge` / `--water` token。其他主题不加载它。

@@ -6,9 +6,21 @@
  *   en: '1942' -> '1942', '1942-02' -> 'Feb 1942', '1942-02-15' -> '15 Feb 1942',
  *       '-0221' -> '221 BCE', { ma: 200 } -> '200 Ma'
  *   zh: '1942年', '1942年2月', '1942年2月15日', '公元前221年', '2亿年前' / '6600万年前'
+ *
+ * `precision` (a topic's `datePrecision`) drops the finer parts: `'-0260-05'`
+ * at `year` reads '260 BCE'. `yearLabel` is the short form of the bar's
+ * segment labels: '770 BCE' / '前770年'.
  */
 import type { Locale } from '../../../i18n';
 import { isGeoTime, type TimePoint } from '../../../lib/time';
+
+export type DisplayPrecision = 'day' | 'month' | 'year';
+const RANK: Record<DisplayPrecision, number> = { year: 0, month: 1, day: 2 };
+
+/** The coarser of two precisions (an absent one does not count). */
+export function coarser(a: DisplayPrecision | undefined, b: DisplayPrecision): DisplayPrecision {
+  return a !== undefined && RANK[a] < RANK[b] ? a : b;
+}
 
 const MONTHS_EN = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const DATE_RE = /^(-?)(\d{4})(?:-(\d{2})(?:-(\d{2}))?)?$/;
@@ -36,14 +48,14 @@ function formatMa(ma: number, locale: Locale): string {
   return `${groupThousands(trim(ma, 2))} Ma`;
 }
 
-export function formatTime(t: TimePoint, locale: Locale): string {
+export function formatTime(t: TimePoint, locale: Locale, precision?: DisplayPrecision): string {
   if (isGeoTime(t)) return formatMa(t.ma, locale);
   const m = DATE_RE.exec(t);
   if (!m) return t;
   const bce = m[1] === '-';
   const year = Number(m[2]);
-  const month = m[3] ? Number(m[3]) : null;
-  const day = m[4] ? Number(m[4]) : null;
+  const month = m[3] && precision !== 'year' ? Number(m[3]) : null;
+  const day = m[4] && precision !== 'year' && precision !== 'month' ? Number(m[4]) : null;
 
   if (locale === 'zh') {
     let s = `${bce ? '公元前' : ''}${year}年`;
@@ -55,6 +67,12 @@ export function formatTime(t: TimePoint, locale: Locale): string {
   if (month !== null) s = `${MONTHS_EN[month - 1]} ${s}`;
   if (day !== null) s = `${day} ${s}`;
   return s;
+}
+
+/** Short year for the bar's segment labels: `770 BCE` / `前770年`, `1914` / `1914年`. */
+export function yearLabel(year: number, locale: Locale): string {
+  if (locale === 'zh') return year < 0 ? `前${-year}年` : `${year}年`;
+  return year < 0 ? `${-year} BCE` : String(year);
 }
 
 /**

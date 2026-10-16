@@ -1,0 +1,5 @@
+{
+  "presets": [
+    { "id": "sample-north-coast", "label": { "en": "North coast", "zh": "北岸" }, "camera": { "center": [-4.5, 42.9], "zoom": 6.8 } }
+  ]
+}

@@ -31,7 +31,7 @@ import { useT } from '../../core/context';
 import type { TimeModel } from '../lib/model';
 import type { Playhead } from '../lib/playhead';
 import { fromNumber, precisionFor } from '../lib/time';
-import { formatTime } from '../lib/format';
+import { coarser, formatTime, yearLabel } from '../lib/format';
 import { createSegmentScale, type Anchor, type ScaleSegment, type SegmentScale, type SegmentSpec } from '../lib/segmentScale';
 import { frameAt } from '../lib/frame';
 import { frameStats } from '../lib/stats';
@@ -73,7 +73,7 @@ const LANES = { k: [0, 12], m: [14, 34], e: [36, 48] } as const;
 const LANES_H = 48;
 
 export function formatNumber(t: number, model: TimeModel, locale: Locale): string {
-  return formatTime(fromNumber(t, model.scale, { precision: precisionFor(model.span) }), locale);
+  return formatTime(fromNumber(t, model.scale, { precision: coarser(model.datePrecision, precisionFor(model.span)) }), locale);
 }
 
 /** Mono readout: upper-case in English (`15 FEB 1942`). */
@@ -82,9 +82,15 @@ export function formatReadout(t: number, model: TimeModel, locale: Locale): stri
   return locale === 'en' ? s.toLocaleUpperCase('en') : s;
 }
 
-/** A segment's label date: `YYYY-MM` (geological time: the readout). */
+/**
+ * A segment's label date: `YYYY-MM`; the year alone (`770 BCE` / `前770年`)
+ * for BCE dates, spans over a century or a topic dated to the year
+ * (geological time: the readout).
+ */
 export function segmentDate(t: number, model: TimeModel, locale: Locale): string {
   if (model.scale === 'ma') return formatReadout(t, model, locale);
+  const year = Math.floor(t);
+  if (year < 0 || model.span > 100 || model.datePrecision === 'year') return yearLabel(year, locale);
   const p = fromNumber(t, 'date', { precision: 'month' });
   return typeof p === 'string' ? p : formatReadout(t, model, locale);
 }

@@ -1,0 +1,6 @@
+[
+  {"id": "west-sample", "name": {"en": "West Sample", "zh": "西示例"}, "bloc": "neutral", "joined": "-0450", "color": "token:holder-4"},
+  {"id": "north-sample", "name": {"en": "North Sample", "zh": "北示例"}, "bloc": "neutral", "joined": "-0450", "left": "-0230", "color": "token:holder-2"},
+  {"id": "east-sample", "name": {"en": "East Sample", "zh": "东示例"}, "bloc": "neutral", "joined": "-0450", "color": "token:holder-1"},
+  {"id": "south-sample", "name": {"en": "South Sample", "zh": "南示例"}, "bloc": "neutral", "joined": "-0450", "left": "-0310", "color": "token:holder-3"}
+]

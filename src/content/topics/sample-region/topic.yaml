@@ -1,0 +1,30 @@
+# PLACEHOLDER topic: exercises the TimeScene regional plate only (docs/06 "TimeScene" · 区域底图):
+# a plate instead of the world, dated rivers, BCE years, one colour per holder, approximate borders,
+# topic wording for entity dates. The areas, rivers and events are placeholders, not history.
+id: sample-region
+title: { en: "Sample: Regional Plate", zh: "示例：区域图版" }
+subtitle: { en: "A placeholder topic for testing the regional plate", zh: "用于测试区域图版的占位主题" }
+subject: history
+tags: [beyond-syllabus]
+moe:
+  - "Placeholder: no syllabus anchor"
+mode: time
+engine: time-scene
+stage: geo
+theme: paper
+sensitivity: open
+status: draft
+basemap:
+  region:
+    bounds: [-10, 35.5, 4.5, 44.5]
+    land: sample-region-land
+    rivers: sample-region-rivers
+  maxZoom: 9
+colorBy: entity
+datePrecision: year
+blocLabels:
+  neutral: { en: "Sample states", zh: "示例诸国" }
+strings:
+  joined: { en: "appears", zh: "出现" }
+  left: { en: "ends", zh: "灭亡" }
+  notYet: { en: "Not yet recorded", zh: "尚未见于记载" }

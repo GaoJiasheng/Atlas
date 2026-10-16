@@ -67,19 +67,33 @@ export interface DecodedKeyframe extends ControlKeyframe {
    * outlines the polygons instead.
    */
   frontier?: MultiLineString;
+  /**
+   * The part of the frontier that touches an area marked `certainty:
+   * approximate` (drawn dashed). When a keyframe has such areas, `frontier`
+   * holds only the arcs between two certain areas.
+   */
+  frontierApprox?: MultiLineString;
 }
 
 /**
  * The frontier of one named object: `mesh` of the arcs two features of
  * different holders share. `null` when there is none.
  */
-export function frontierOf(topology: unknown, name: string): MultiLineString | null {
+export function frontierOf(topology: unknown, name: string, which: 'all' | 'certain' | 'approximate' = 'all'): MultiLineString | null {
   const topo = topology as Topology;
   const object = (topo.objects as Record<string, TopoObject | undefined>)[name];
   if (!object) throw new Error(`control topology has no object "${name}"`);
   const holder = (g: unknown) => (g as { properties?: { holder?: unknown } }).properties?.holder;
-  const lines = mesh(topo, object as Parameters<typeof mesh>[1], (a, b) => a !== b && holder(a) !== holder(b));
+  const approx = (g: unknown) => (g as { properties?: { certainty?: unknown } }).properties?.certainty === 'approximate';
+  const keep = (a: unknown, b: unknown) => which === 'all' || (which === 'approximate') === (approx(a) || approx(b));
+  const lines = mesh(topo, object as Parameters<typeof mesh>[1], (a, b) => a !== b && holder(a) !== holder(b) && keep(a, b));
   return lines.coordinates.length ? lines : null;
+}
+
+/** Does a topology object have any area marked `certainty: approximate`? */
+function hasApproximate(topology: unknown, name: string): boolean {
+  const object = ((topology as Topology).objects as Record<string, { geometries?: { properties?: { certainty?: unknown } }[] } | undefined>)[name];
+  return (object?.geometries ?? []).some((g) => g.properties?.certainty === 'approximate');
 }
 
 /**
@@ -90,11 +104,14 @@ export function frontierOf(topology: unknown, name: string): MultiLineString | n
 export function decodeControl(control: ControlFile): DecodedKeyframe[] {
   if (!('topology' in control)) return control.keyframes;
   return control.keyframes.map((kf) => {
-    const frontier = frontierOf(control.topology, kf.object);
+    const split = hasApproximate(control.topology, kf.object);
+    const frontier = frontierOf(control.topology, kf.object, split ? 'certain' : 'all');
+    const frontierApprox = split ? frontierOf(control.topology, kf.object, 'approximate') : null;
     return {
       t: kf.t,
       features: decodeTopologyObject(control.topology, kf.object) as ControlKeyframe['features'],
       ...(frontier ? { frontier } : {}),
+      ...(frontierApprox ? { frontierApprox } : {}),
     };
   });
 }

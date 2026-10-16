@@ -1,0 +1,25 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "id": "sample-river", "name": { "en": "Sample River", "zh": "示例河" } },
+      "geometry": { "type": "LineString", "coordinates": [[-3.9, 43.0], [-3.0, 42.6], [-1.9, 42.2], [-0.9, 41.6], [0.0, 41.1], [0.8, 40.7]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "sample-river-old", "name": { "en": "Sample River (old course)", "zh": "示例河（故道）" }, "to": "-0300", "reconstructed": true },
+      "geometry": { "type": "LineString", "coordinates": [[-6.0, 40.6], [-5.2, 39.9], [-4.4, 39.6], [-3.4, 39.0], [-2.6, 38.2]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "sample-river-new", "name": { "en": "Sample River (new course)", "zh": "示例河（新道）" }, "from": "-0300" },
+      "geometry": { "type": "LineString", "coordinates": [[-6.0, 40.6], [-6.4, 39.8], [-6.9, 39.2], [-7.5, 38.9]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "sample-river-modern", "name": { "en": "Sample River (modern course)", "zh": "示例河（今道）" }, "from": "1855" },
+      "geometry": { "type": "LineString", "coordinates": [[-5.0, 37.8], [-5.9, 37.4], [-6.3, 36.9]] }
+    }
+  ]
+}

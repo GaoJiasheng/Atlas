@@ -7,7 +7,7 @@ import { parse as parseYaml } from 'yaml';
 import { SUBJECTS, topicSchema } from '../src/content/schema/topic';
 import { chapterSchema } from '../src/content/schema/chapter';
 import { bilingual, isoDate, timePoint } from '../src/content/schema/common';
-import { EVENT_KINDS, controlFile, entitySchema, presetsFile, timeChapterRefs, timeChapterState, timeSceneGeoData } from '../src/engines/time-scene/schema';
+import { EVENT_KINDS, controlFile, entitySchema, presetsFile, timeChapterRefs, timeChapterState, timeSceneGeoData, timeSceneTopicIssues } from '../src/engines/time-scene/schema';
 import { sourcesFile } from '../src/content/schema/sources';
 import { spaceChapterState, spaceSceneData } from '../src/engines/space-scene/schema';
 import { mathChapterState, mathSceneData, frac } from '../src/engines/math-scene/schema';
@@ -305,6 +305,80 @@ describe('topic schema', () => {
   it('treats `levels` as optional planning metadata', () => {
     const { levels: _levels, ...raw } = parseYaml(readFileSync(join(TOPICS, 'sample-time/topic.yaml'), 'utf8')) as Record<string, unknown>;
     expect(topicSchema.safeParse(raw).success).toBe(true);
+  });
+});
+
+describe('topic schema: regional plate, holder colours, BCE precision, wording (docs/06 TimeScene)', () => {
+  const raw = () => parseYaml(readFileSync(join(TOPICS, 'sample-time/topic.yaml'), 'utf8')) as Record<string, unknown>;
+  const region = { bounds: [100, 20, 125, 44], maxBounds: [98, 18, 127, 45.5], land: 'china-plate', rivers: 'china-plate-rivers' };
+
+  it('the sample-region topic uses every option and parses', () => {
+    const topic = topicSchema.parse(parseYaml(readFileSync(join(TOPICS, 'sample-region/topic.yaml'), 'utf8')));
+    expect(topic.basemap?.region?.land).toBe('sample-region-land');
+    expect(topic.colorBy).toBe('entity');
+    expect(topic.datePrecision).toBe('year');
+    expect(topic.strings?.left).toEqual({ en: 'ends', zh: '灭亡' });
+  });
+
+  it('basemap: exactly one of local / region; bounds ordered; maxBounds contains bounds', () => {
+    expect(topicSchema.safeParse({ ...raw(), basemap: { region } }).success).toBe(true);
+    expect(topicSchema.safeParse({ ...raw(), basemap: { local: 'land-sg', maxZoom: 13 } }).success).toBe(true);
+    expect(topicSchema.safeParse({ ...raw(), basemap: { local: 'land-sg', region } }).success).toBe(false);
+    expect(topicSchema.safeParse({ ...raw(), basemap: { maxZoom: 12 } }).success).toBe(false);
+    expect(topicSchema.safeParse({ ...raw(), basemap: { region: { ...region, bounds: [125, 20, 100, 44] } } }).success).toBe(false);
+    expect(topicSchema.safeParse({ ...raw(), basemap: { region: { ...region, maxBounds: [101, 18, 127, 45.5] } } }).success).toBe(false);
+    expect(topicSchema.safeParse({ ...raw(), basemap: { region: { ...region, land: 'China Plate' } } }).success).toBe(false);
+  });
+
+  it('colorBy, datePrecision and strings take only their values', () => {
+    expect(topicSchema.safeParse({ ...raw(), colorBy: 'entity', datePrecision: 'year' }).success).toBe(true);
+    expect(topicSchema.safeParse({ ...raw(), colorBy: 'holder' }).success).toBe(false);
+    expect(topicSchema.safeParse({ ...raw(), datePrecision: 'decade' }).success).toBe(false);
+    expect(topicSchema.safeParse({ ...raw(), strings: { joined: { en: 'appears', zh: '出现' }, notYet: { en: 'Not yet', zh: '尚未' } } }).success).toBe(true);
+    expect(topicSchema.safeParse({ ...raw(), strings: { 'time.entity.joined': { en: 'x' } } }).success).toBe(false);
+  });
+});
+
+describe('TimeScene checks against topic.yaml (timeSceneTopicIssues)', () => {
+  const data = () => timeSceneGeoData.parse(loadData('sample-region'));
+  const geo = (name: string) => {
+    try {
+      return JSON.parse(readFileSync(join(import.meta.dirname, '../public/geo', `${name}.json`), 'utf8'));
+    } catch {
+      return undefined;
+    }
+  };
+  const topic = parseYaml(readFileSync(join(TOPICS, 'sample-region/topic.yaml'), 'utf8')) as Parameters<typeof timeSceneTopicIssues>[0];
+
+  it('the sample-region plate, rivers and colours are clean', () => {
+    expect(timeSceneTopicIssues(topic, data(), geo)).toEqual([]);
+  });
+
+  it('missing or malformed plate files are errors', () => {
+    const issues = timeSceneTopicIssues({ basemap: { region: { land: 'nope-land', rivers: 'nope-rivers' } } }, data(), geo);
+    expect(issues.map((i) => i.message)).toEqual([expect.stringMatching(/land: file not found/), expect.stringMatching(/rivers: file not found/)]);
+    // land-10m-sea is a TopoJSON whose object is `sea`, not named after the file.
+    const wrongObject = timeSceneTopicIssues({ basemap: { region: { land: 'land-10m-sea' } } }, data(), geo);
+    expect(wrongObject.map((i) => i.message)).toEqual([expect.stringMatching(/expected a TopoJSON with an object "land-10m-sea"/)]);
+    const badRivers = timeSceneTopicIssues({ basemap: { region: { land: 'sample-region-land', rivers: 'land-sg' } } }, data(), geo);
+    expect(badRivers.length).toBeGreaterThan(0);
+    expect(timeSceneTopicIssues({ basemap: { local: 'land-sg' } }, data(), geo)).toEqual([]);
+  });
+
+  it('colorBy: entity warns about missing colours and neighbours of one colour', () => {
+    const d = data();
+    d.entities = d.entities.map((e) => (e.id === 'west-sample' ? { ...e, color: undefined } : e.id === 'south-sample' ? { ...e, color: 'token:holder-1' } : e));
+    const messages = timeSceneTopicIssues({ colorBy: 'entity' }, d, geo).map((i) => `${i.level}: ${i.message}`);
+    expect(messages).toContain('warning: colorBy: entity: "west-sample" has no color (a fallback holder colour is used; run scripts/geo/lib/colour-holders.ts)');
+    expect(messages).toContain('warning: colorBy: entity: neighbours "east-sample" and "south-sample" share token:holder-1 (run scripts/geo/lib/colour-holders.ts)');
+  });
+
+  it('control features may say how sure their edge is', () => {
+    const d = loadData('sample-time') as { control: { keyframes: { features: { features: { properties: Record<string, unknown> }[] } }[] } };
+    d.control.keyframes[0]!.features.features[0]!.properties.certainty = 'approximate';
+    expect(timeSceneGeoData.safeParse(d).success).toBe(true);
+    d.control.keyframes[0]!.features.features[0]!.properties.certainty = 'roughly';
+    expect(timeSceneGeoData.safeParse(d).success).toBe(false);
   });
 });
 

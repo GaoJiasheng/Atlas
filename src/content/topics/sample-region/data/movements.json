@@ -1,0 +1,13 @@
+[
+  {
+    "id": "sample-march",
+    "from": "-0312",
+    "to": "-0310",
+    "linger": "-0300",
+    "path": { "type": "LineString", "coordinates": [[0.4, 40.0], [-0.9, 40.3], [-2.4, 40.4], [-3.7, 40.4]] },
+    "holder": "east-sample",
+    "strength": 20000,
+    "label": { "en": "Sample march", "zh": "示例行军" },
+    "kind": "land"
+  }
+]

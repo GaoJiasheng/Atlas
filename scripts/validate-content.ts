@@ -28,6 +28,10 @@
  *     pool task, `<Beat n>` a beat of the chapter's step, and `<Frac n d>` has
  *     whole numbers (d ≥ 1)
  *   - referenced files (cover) exist
+ *   - TimeScene basemap (docs/06 "TimeScene"): `basemap.local` / `basemap.region`
+ *     files exist under public/geo/ (the plate's land holds `kind: land`, its
+ *     rivers parse as dated river lines); `colorBy: entity`: every holder has a
+ *     colour and no two neighbouring holders share one (warnings)
  *   - SpaceScene glb (`model`, scripts/lib/glb-check.ts): exists under public/,
  *     ≤ 8 MB, `asset.copyright` set, every part `mesh` and rig `node` in its
  *     node table (an error, not a warning)
@@ -51,6 +55,7 @@ import { KEBAB_ID } from '../src/content/schema/common';
 import { sourceIds, type SourcesFile } from '../src/content/schema/sources';
 import { glossaryIds, type GlossaryFile } from '../src/content/schema/glossary';
 import { engineSchemas, formatIssues } from '../src/engines/schemas';
+import { timeSceneTopicIssues, type TimeSceneGeoData } from '../src/engines/time-scene/schema';
 import {
   exercisesFile,
   musclesFile,
@@ -383,6 +388,16 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
     const skin = file.parts.some((p) => p.context === true && p.mesh !== undefined && !p.mesh.startsWith('skin-hand'));
     if (file.views?.exerciseBody === 'wire' && skin && !(await glbNodeNames(join(PUBLIC_DIR, model))).has('skin-wire'))
       warn(join(dataDir, 'parts.json'), `views.exerciseBody "wire": model ${model} has no "skin-wire" node, so the engine decimates the skin outline at load (slower, rougher)`);
+  }
+  if (data !== undefined && topic.engine === 'time-scene' && topic.stage === 'geo') {
+    const readGeo = (name: string) => {
+      const file = join(PUBLIC_DIR, 'geo', `${name}.json`);
+      return existsSync(file) ? readJson(file) : undefined;
+    };
+    for (const issue of timeSceneTopicIssues(topic, data as TimeSceneGeoData, readGeo)) {
+      const file = issue.file.startsWith('public/') ? join(ROOT, issue.file) : join(dir, issue.file);
+      (issue.level === 'error' ? error : warn)(file, issue.message);
+    }
   }
   const presets = new Set(data !== undefined ? schemas.presetIds(data) : []);
   const glossaryFile = data !== undefined ? (data as { glossary?: GlossaryFile }).glossary : undefined;

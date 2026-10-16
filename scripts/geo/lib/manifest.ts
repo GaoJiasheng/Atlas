@@ -190,10 +190,26 @@ export interface Pipeline {
   clean?: { snapDeg?: number; sliverKm2?: number };
   /** Island-scale basemap (local-land.ts): a dataset dissolved into one land layer for `basemap.local` topics. */
   localLand?: LocalLand;
+  /** Regional plate land (region-land.ts, `basemap.region` topics); read by that step only. */
+  regionLand?: RegionLand;
   /** check.ts colours: holder id -> #rrggbb (unlisted holders get a colour hashed from their id). */
   checkColors?: Record<string, string>;
   /** Repo-relative folder for check.ts screenshots. */
   shots?: string;
+}
+
+/** `pipeline.regionLand`: knobs of region-land.ts (Natural Earth 1:10m land clipped to the plate). */
+export interface RegionLand {
+  /** Cut this far (degrees) outside the plate; the GeoStage's paper frame covers it. Default 0.25. */
+  padDeg?: number;
+  /** Douglas–Peucker tolerance (km); grows by half while over budget. Default 1. */
+  simplifyKm?: number;
+  /** Smaller islands and lakes are dropped (km²). Default 4. */
+  minIslandKm2?: number;
+  /** Quantisation grid cells across the plate. Default 50000. */
+  quantization?: number;
+  /** File size budget (KB). Default 200. */
+  budgetKB?: number;
 }
 
 /**

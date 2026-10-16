@@ -215,3 +215,33 @@ test('PWA: manifest linked, manifest and service worker served', async ({ page, 
   const sw = await request.get('/sw.js');
   expect(sw.ok()).toBe(true);
 });
+
+test('regional plate (sample-region): no world land, BCE labels, dated rivers, holder key, t round trip', async ({ page }) => {
+  const errors = collectConsoleErrors(page);
+  const geo: string[] = [];
+  page.on('request', (r) => {
+    const m = /\/geo\/([^/?]+\.json)/.exec(r.url());
+    if (m) geo.push(m[1]!);
+  });
+  await page.goto('/en/topics/sample-region/?ch=second-look&t=-0350');
+  await expect(page.locator('.atlas-stage canvas').first()).toBeVisible({ timeout: 30_000 });
+  await page.waitForTimeout(1500);
+  // Only the plate's own files: never the world land, the Southeast Asia overlay or modern borders.
+  expect(geo).toEqual(expect.arrayContaining(['sample-region-land.json', 'sample-region-rivers.json']));
+  for (const world of ['land-50m.json', 'land-10m-sea.json', 'borders-50m.json', 'countries-50m.json']) expect(geo).not.toContain(world);
+  // Segment labels and the readout print BCE years, never "-0400-01".
+  await expect(page.locator('.ts-seg__date').first()).toHaveText('400 BCE');
+  await expect(page.locator('.ts-seg__date', { hasText: /^-\d/ })).toHaveCount(0);
+  // 350 BCE: the old course shows, the new one not yet; the modern course never.
+  await expect(page.locator('.ts-river[data-river="sample-river-old"]')).toBeAttached();
+  await expect(page.locator('.ts-river[data-river="sample-river-new"]')).toHaveCount(0);
+  await expect(page.locator('.ts-river[data-river="sample-river-modern"]')).toHaveCount(0);
+  // No modern borders mode on a plate; the key lists the states one by one and the approximate border.
+  await expect(page.locator('[data-mode="borders"]')).toHaveCount(0);
+  const legend = page.locator('.atlas-legend').first();
+  for (const name of ['East Sample', 'North Sample', 'West Sample', 'Approximate border']) await expect(legend).toContainText(name);
+  // The BCE time survives the URL sync.
+  await page.waitForTimeout(600);
+  expect(page.url()).toContain('t=-0350');
+  expect(errors).toEqual([]);
+});
