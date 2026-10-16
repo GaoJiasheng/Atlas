@@ -1,0 +1,1861 @@
+[
+  {
+    "name": "葵丘之会",
+    "url": "https://zh.wikipedia.org/wiki/葵丘之会",
+    "retrieved": "2026-10-16",
+    "infobox": null,
+    "pageCoordinate": null,
+    "wikidata": "Q17502333",
+    "P625": []
+  },
+  {
+    "name": "城濮之战",
+    "url": "https://zh.wikipedia.org/wiki/城濮之战",
+    "retrieved": "2026-10-16",
+    "infobox": "城濮之战 日期 西元前632年 地点 城濮（ 山东省 菏泽市 鄄城 西南） 结果 晋国大勝 参战方 晉國 齐国 秦国 宋国 群戎 楚國 陈国 蔡国 许国 郑国 群蛮夷 指挥官与领导者 晋文公 中軍將： 先轸 中军佐： 郤溱 上軍將： 狐偃 上军佐： 狐毛 下軍將： 栾枝 下军佐： 胥臣 楚成王 中軍: 子玉 左軍： 子西 右軍： 子上 兵力 晉國： 700乘戰車 [ 1 ] ，约52500人 [ 2 ] 不詳 伤亡与损失 不詳 不詳",
+    "pageCoordinate": null,
+    "wikidata": "Q2313318",
+    "P625": [
+      {
+        "value": {
+          "latitude": 34.6711,
+          "longitude": 114.529,
+          "altitude": null,
+          "precision": 0.054613408025863,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": [
+          {
+            "hash": "b3fd5e254143d8b52cd96cff43af9af5e3a82358",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "f13c99a16441677ec69fcea23f221d866f1fc98f",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 199693,
+                      "id": "Q199693"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "柏举之战",
+    "url": "https://zh.wikipedia.org/wiki/柏举之战",
+    "retrieved": "2026-10-16",
+    "infobox": "柏舉之戰 日期 前506年秋天 - 前506年11月29日 地点 柏舉 结果 吳國 勝利 参战方 吳國 蔡國 唐國 楚國 指挥官与领导者 吳王 闔閭 孫武 伍子胥 夫概 伯嚭 楚昭王 囊瓦 沈尹戍 † 大夫黑 史皇 † 兵力 不明 不明 伤亡与损失 ? ?",
+    "pageCoordinate": null,
+    "wikidata": "Q1278781",
+    "P625": []
+  },
+  {
+    "name": "夫椒之战",
+    "url": "https://zh.wikipedia.org/wiki/夫椒之战",
+    "retrieved": "2026-10-16",
+    "infobox": "夫椒之战 日期 前494年 地点 夫椒 结果 吴国获胜，兩國休兵 领土变更 越國淪為吳國附屬 参战方 吴国 越国 指挥官与领导者 夫差 勾践",
+    "pageCoordinate": null,
+    "wikidata": "Q97300301",
+    "P625": []
+  },
+  {
+    "name": "石门之战",
+    "url": "https://zh.wikipedia.org/wiki/石门之战",
+    "retrieved": "2026-10-16",
+    "error": "404 Client Error: Not Found for url: https://zh.wikipedia.org/wiki/%E7%9F%B3%E9%97%A8%E4%B9%8B%E6%88%98"
+  },
+  {
+    "name": "桂陵之战",
+    "url": "https://zh.wikipedia.org/wiki/桂陵之战",
+    "retrieved": "2026-10-16",
+    "infobox": "桂陵之戰 戰国时代的一部分 日期 周顯王 十五年前353年 地点 主戰場為桂陵，襄陵、邯鄲等地也有戰鬥爆發 结果 齊軍勝利 参战方 田齊 魏國 指挥官与领导者 齊威王 田忌 孫臏 魏惠王 龐涓 兵力 80,000人（見《 孫臏兵法 》禽龐涓篇） 80,000人（見《孫臏兵法》禽龐涓篇）",
+    "pageCoordinate": null,
+    "wikidata": "Q2065036",
+    "P625": []
+  },
+  {
+    "name": "马陵之战",
+    "url": "https://zh.wikipedia.org/wiki/马陵之战",
+    "retrieved": "2026-10-16",
+    "infobox": "馬陵之戰 日期 公元前342年 地点 山東省 聊城市 莘縣 大張家鎮 结果 齊國 獲勝 参战方 齊國 魏國 指挥官与领导者 田盼 孫臏 田忌 田婴 龐涓 † 太子申 （ 俘 ） † 兵力 120,000人 100,000人 伤亡与损失 2,100人 全軍陣亡",
+    "pageCoordinate": null,
+    "wikidata": "Q2005185",
+    "P625": [
+      {
+        "value": {
+          "latitude": 35.8858333333,
+          "longitude": 115.3975,
+          "altitude": null,
+          "precision": 1e-06,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": [
+          {
+            "hash": "b3fd5e254143d8b52cd96cff43af9af5e3a82358",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "f13c99a16441677ec69fcea23f221d866f1fc98f",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 199693,
+                      "id": "Q199693"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "修鱼之战",
+    "url": "https://zh.wikipedia.org/wiki/修鱼之战",
+    "retrieved": "2026-10-16",
+    "infobox": "函谷關之戰 合縱攻秦之戰 的一部分 日期 前318年 地点 函谷關 结果 五國聯軍大敗，但義渠大敗秦軍於李帛 参战方 楚國 （未出兵） 韓國 趙國 魏國 燕國 （未出兵） 義渠 秦國 指挥官与领导者 楚懷王 赵武灵王 公孫衍 韓太子奐 趙公子渴 樗里疾 兵力 不詳 不詳 伤亡与损失 至少被斬殺八萬二千人 不詳",
+    "pageCoordinate": null,
+    "wikidata": "Q10896691",
+    "P625": []
+  },
+  {
+    "name": "丹阳、蓝田之战",
+    "url": "https://zh.wikipedia.org/wiki/丹阳、蓝田之战",
+    "retrieved": "2026-10-16",
+    "infobox": "丹阳、蓝田之战 日期 前312年 地点 丹阳、蓝田 结果 楚国大败 参战方 秦国 楚国 指挥官与领导者 樗里疾 楚怀王 屈匄 兵力 不詳 全國軍隊 伤亡与损失 不明 八萬大軍",
+    "pageCoordinate": null,
+    "wikidata": "Q10877383",
+    "P625": []
+  },
+  {
+    "name": "阏与之战",
+    "url": "https://zh.wikipedia.org/wiki/阏与之战",
+    "retrieved": "2026-10-16",
+    "infobox": "閼與之戰 戰國時期 ，秦趙戰爭的一部分 日期 前270年（趙惠文王二十九年、韓桓惠王三年 [ 1 ] ）-前269年（秦昭襄王三十八年 [ 2 ] ） 地点 閼與（今 山西省 晋中市 和顺縣 西北） 结果 趙國獲得決定性勝利。 参战方 秦國 趙國 指挥官与领导者 胡陽 [ 2 ] 趙奢 兵力 不詳 不詳 伤亡与损失 伤亡逃散过半 不詳",
+    "pageCoordinate": null,
+    "wikidata": "Q15909774",
+    "P625": []
+  },
+  {
+    "name": "蕞之战",
+    "url": "https://zh.wikipedia.org/wiki/蕞之战",
+    "retrieved": "2026-10-16",
+    "infobox": "函谷关之战 日期 前241年 地点 函谷关 结果 聯軍攻至函谷关时败退，转而夺取齊國的饒安後返回。 参战方 趙國 楚國 魏國 韓國 燕國 秦國 齊國 指挥官与领导者 龐煖 楚考烈王 春申君 呂不韋 蒙驁 兵力 聯軍：估計約700,000人 秦軍：估計約600,000人（全國軍隊及後勤） 伤亡与损失 不详 不详",
+    "pageCoordinate": null,
+    "wikidata": "Q10896695",
+    "P625": []
+  },
+  {
+    "name": "秦赵平阳之战",
+    "url": "https://zh.wikipedia.org/wiki/秦赵平阳之战",
+    "retrieved": "2026-10-16",
+    "infobox": "秦赵平阳之战 日期 前234—前233年 地点 平阳、武城、宜安 结果 秦军大胜，赵军惨败 参战方 秦國 赵国 指挥官与领导者 桓齮 扈辄 兵力 200,000 300,000 伤亡与损失 不详 100,000",
+    "pageCoordinate": null,
+    "wikidata": "Q86725931",
+    "P625": []
+  },
+  {
+    "name": "肥之战",
+    "url": "https://zh.wikipedia.org/wiki/肥之战",
+    "retrieved": "2026-10-16",
+    "infobox": "肥之戰 日期 前233年 地点 肥(今 河北 晉州 西) 结果 趙軍勝利，大破秦軍 参战方 秦國 趙國 指挥官与领导者 桓齮 李牧 兵力 至少100000 不详 伤亡与损失 全滅 不詳",
+    "pageCoordinate": null,
+    "wikidata": "Q15920093",
+    "P625": []
+  },
+  {
+    "name": "城父之战",
+    "url": "https://zh.wikipedia.org/wiki/城父之战",
+    "retrieved": "2026-10-16",
+    "infobox": "城父之战 日期 前225年 地点 城父 结果 秦国大败 参战方 秦国 楚国 指挥官与领导者 李信 蒙恬 项燕 昌平君",
+    "pageCoordinate": null,
+    "wikidata": "Q10929962",
+    "P625": []
+  },
+  {
+    "name": "繻葛之战",
+    "url": "https://zh.wikipedia.org/wiki/繻葛之战",
+    "retrieved": "2026-10-16",
+    "infobox": "繻葛之戰 春秋時代 的一部分 日期 周桓王 十三年（公元前707年） 地点 繻葛（今 河南省 長葛市 北方） 结果 鄭軍勝利 参战方 周朝 陈国 蔡國 卫国 鄭國 指挥官与领导者 周桓王 （ 傷 ） 虢公林父 周公黑肩 郑庄公 原繁 高渠彌 祭仲 公子曼伯 兵力 不詳 不詳",
+    "pageCoordinate": null,
+    "wikidata": "Q15910551",
+    "P625": []
+  },
+  {
+    "name": "泓水之战",
+    "url": "https://zh.wikipedia.org/wiki/泓水之战",
+    "retrieved": "2026-10-16",
+    "infobox": "泓水之戰 日期 前638年 地点 宋國 邊境的泓水 结果 楚國 大勝，勢力一度擴張至黃河以北； 宋國 從此一厥不振。 参战方 宋國 、 衞國 、 許國 、 滕國 楚國 、 鄭國 指挥官与领导者 宋襄公 、 子魚 、 公孫固 楚成王 兵力 不詳 不詳 伤亡与损失 不詳 不詳",
+    "pageCoordinate": null,
+    "wikidata": "Q11143327",
+    "P625": []
+  },
+  {
+    "name": "崤之战",
+    "url": "https://zh.wikipedia.org/wiki/崤之战",
+    "retrieved": "2026-10-16",
+    "infobox": "殽之戰 日期 前627年四月辛巳日 地点 崤山（今 河南省 西部） 结果 晉國 大勝，秦軍全軍覆沒 三名指揮官百里孟明、西乞術、白乙丙悉數被俘。 参战方 秦國 晉國 姜戎国 指挥官与领导者 百里孟明 西乞術 白乙丙 先軫 兵力 不詳 不詳 伤亡与损失 不詳 不詳",
+    "pageCoordinate": null,
+    "wikidata": "Q11125828",
+    "P625": []
+  },
+  {
+    "name": "邲之战",
+    "url": "https://zh.wikipedia.org/wiki/邲之战",
+    "retrieved": "2026-10-16",
+    "infobox": "邲之戰 日期 前597年 地点 邲（今 河南 滎陽 東北） 结果 楚國大勝，大敗晉軍，成就霸業。 参战方 晉國 楚國 指挥官与领导者 中軍將 荀林父 上軍將 士會 下軍將 趙朔 司馬 韓厥 先縠 荀首 趙括 趙同 楚莊王 令尹 孫叔敖 中軍帥: 沈尹 左軍帥: 子重 右軍帥: 子反 公子穀臣 連尹襄老 † 潘黨 兵力 不詳 不詳 伤亡与损失 不詳 不詳",
+    "pageCoordinate": null,
+    "wikidata": "Q1288667",
+    "P625": [
+      {
+        "value": {
+          "latitude": 34.78777777777778,
+          "longitude": 113.39194444444445,
+          "altitude": null,
+          "precision": 0.0002777777777777778,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": []
+      }
+    ]
+  },
+  {
+    "name": "鄢陵之战",
+    "url": "https://zh.wikipedia.org/wiki/鄢陵之战",
+    "retrieved": "2026-10-16",
+    "infobox": "鄢陵之戰 日期 前575年 地点 鄢陵（今 河南 鄢陵 西北） 结果 晉國大勝，楚共王傷目，楚軍大敗逃遁。 参战方 晉國 楚國 指挥官与领导者 晉厲公 軍師： 苗賁皇 中軍-将： 欒書 佐： 士燮 上軍-将： 郤錡 佐： 中行偃 下軍-将： 韓厥 佐： 智罃 新軍-将： 郤犨 佐： 郤至 楚共王 （ 傷 ） 軍師： 伯州犂 中軍-将： 子反 左軍-将： 子重 右軍-将： 子辛 兵力 不詳 不詳 伤亡与损失 不詳 不詳",
+    "pageCoordinate": null,
+    "wikidata": "Q1278603",
+    "P625": []
+  },
+  {
+    "name": "檇李之战",
+    "url": "https://zh.wikipedia.org/wiki/檇李之战",
+    "retrieved": "2026-10-16",
+    "infobox": "檇李之战 日期 前496年 地点 檇李（今浙江嘉兴境内） 结果 越国获胜，吴王阖闾负伤而卒 参战方 吴国 越国 指挥官与领导者 阖闾 勾踐",
+    "pageCoordinate": null,
+    "wikidata": "Q55698369",
+    "P625": []
+  },
+  {
+    "name": "艾陵之战",
+    "url": "https://zh.wikipedia.org/wiki/艾陵之战",
+    "retrieved": "2026-10-16",
+    "infobox": null,
+    "pageCoordinate": null,
+    "wikidata": null,
+    "P625": []
+  },
+  {
+    "name": "晋阳之战",
+    "url": "https://zh.wikipedia.org/wiki/晋阳之战",
+    "retrieved": "2026-10-16",
+    "infobox": "晉陽之戰 春秋 、 戰國 的一部分 日期 前455年 - 前453年5月8日 [ 1 ] 地点 今 山西省 太原市 结果 赵氏转守为攻，智氏灭亡 参战方 智氏 魏氏 （初期） 韩氏 （初期） 赵氏 魏氏 （后期） 韩氏 （后期） 指挥官与领导者 智伯瑤 † 趙襄子",
+    "pageCoordinate": null,
+    "wikidata": "Q987349",
+    "P625": []
+  },
+  {
+    "name": "伊阙之战",
+    "url": "https://zh.wikipedia.org/wiki/伊阙之战",
+    "retrieved": "2026-10-16",
+    "infobox": "伊闕之戰 日期 前293年 地点 伊闕 结果 秦國戰勝，夺取 安邑 以东到 乾河 大片土地 参战方 魏國 韓國 东周国 秦國 指挥官与领导者 公孫喜 白起 兵力 約250000人（包括魏武卒） 约120000人 伤亡与损失 被斩首24万，五座城池被攻陷，公孙喜遭擒杀 數萬",
+    "pageCoordinate": null,
+    "wikidata": "Q1291237",
+    "P625": [
+      {
+        "value": {
+          "latitude": 34.55555555555556,
+          "longitude": 112.46972222222222,
+          "altitude": null,
+          "precision": 0.0002777777777777778,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": []
+      }
+    ]
+  },
+  {
+    "name": "华阳之战",
+    "url": "https://zh.wikipedia.org/wiki/华阳之战",
+    "retrieved": "2026-10-16",
+    "infobox": "華陽之戰 日期 前275年~前273年 地点 韓國 華陽（今 河南省 鄭州市 南） 结果 秦軍大勝，取 魏國 的卷縣、蔡陽和長社和 趙國 的觀津。 参战方 秦國 韓國 魏國 趙國 指挥官与领导者 白起 魏冉 胡陽 魏： 芒卯 趙： 賈偃 兵力 约十萬人 约十九萬人 伤亡与损失 数万人 魏軍：十三萬人 趙軍：兩萬人",
+    "pageCoordinate": null,
+    "wikidata": "Q13424853",
+    "P625": []
+  },
+  {
+    "name": "长平之战",
+    "url": "https://zh.wikipedia.org/wiki/长平之战",
+    "retrieved": "2026-10-16",
+    "infobox": "長平之戰 戰國時代 、 秦趙戰爭 的一部分 日期 前260年 四月／ 前261年 年初／ 前262年 四月－前260年九月 [ 1 ] 地点 長平之戰遺址 （今 山西 高平 西北） 结果 秦國 慘勝 领土变更 秦國攻佔 上黨郡 参战方 趙國 秦國 指挥官与领导者 主將： 廉頗 → 趙括 † 馮亭 † 主將： 王齕 → 白起 副将： 司马靳 兵力 趙軍：約450,000人（全國軍隊及後勤） 韓國原有上黨郡守軍：約50,000人 總動員：約500,000人 李則芬 稱嚴重誇大 [ 2 ] 約600,000人（全國軍隊及後勤） 李則芬 稱嚴重誇大 [ 2 ] 伤亡与损失 約250,000人陣亡 約200,000人投降後被處決，僅剩年幼者240人 約200,000人陣亡 [ 3 ]",
+    "pageCoordinate": null,
+    "wikidata": "Q1195760",
+    "P625": [
+      {
+        "value": {
+          "latitude": 35.79805555555556,
+          "longitude": 112.9238888888889,
+          "altitude": null,
+          "precision": 0.0002777777777777778,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": []
+      }
+    ]
+  },
+  {
+    "name": "邯郸之战",
+    "url": "https://zh.wikipedia.org/wiki/邯郸之战",
+    "retrieved": "2026-10-16",
+    "infobox": "邯鄲攻防戰 日期 前259年九月－前257年十二月 地点 趙國國都邯鄲 结果 趙國慘勝 魏楚聯軍增援，遂解邯鄲之圍 秦國受少有之大敗，國力大幅削弱並要三十多年才能回復 六國亦受惠於此戰並延祚30多年 参战方 秦國 趙國 魏國 楚國 指挥官与领导者 王陵 王齕 鄭安平 趙國： 趙孝成王 、 廉頗 及 平原君 魏國： 信陵君 楚國： 春申君 兵力 550,000人（傾國之師） 趙軍：100,000人，敢死之士3,000人（全國總動員） 魏軍：80,000人 楚軍：100,000人 伤亡与损失 秦軍大敗，損失慘重，造成五十萬人傷亡。鄭安平所部兩萬餘人被聯軍包圍後，向趙國投降。王齕率領15,000人逃回秦國。 趙：損失慘重但不至於毀滅性，約50,000人 楚、魏：輕微。各軍死傷20,000人。",
+    "pageCoordinate": null,
+    "wikidata": "Q13425716",
+    "P625": []
+  },
+  {
+    "name": "宜阳之战",
+    "url": "https://zh.wikipedia.org/wiki/宜阳之战",
+    "retrieved": "2026-10-16",
+    "infobox": "宜陽之戰 日期 前308年至前307年 地点 宜陽 结果 秦軍攻克宜陽。韓王使相國 公仲侈 持寶器入秦乞和。 参战方 秦國 魏國 韓國 指挥官与领导者 甘茂 不詳 兵力 不詳 二十萬 [ 1 ] 伤亡与损失 不詳，死傷者眾 [ 2 ] 斬首六萬 [ 3 ]",
+    "pageCoordinate": null,
+    "wikidata": "Q10949208",
+    "P625": []
+  },
+  {
+    "name": "番吾之战",
+    "url": "https://zh.wikipedia.org/wiki/番吾之战",
+    "retrieved": "2026-10-16",
+    "infobox": "番吾之战 日期 前232年 地点 狼孟、番吾 结果 秦軍失敗撤退 参战方 秦国 赵国 指挥官与领导者 李牧 兵力 約300000人 不足200000人 伤亡与损失 10余萬 數萬",
+    "pageCoordinate": null,
+    "wikidata": "Q17065852",
+    "P625": []
+  },
+  {
+    "name": "郢之战",
+    "url": "https://zh.wikipedia.org/wiki/郢之战",
+    "retrieved": "2026-10-16",
+    "error": "404 Client Error: Not Found for url: https://zh.wikipedia.org/wiki/%E9%83%A2%E4%B9%8B%E6%88%98"
+  },
+  {
+    "name": "昊京",
+    "url": "https://zh.wikipedia.org/wiki/昊京",
+    "retrieved": "2026-10-16",
+    "error": "404 Client Error: Not Found for url: https://zh.wikipedia.org/wiki/%E6%98%8A%E4%BA%AC"
+  },
+  {
+    "name": "丰镐遗址",
+    "url": "https://zh.wikipedia.org/wiki/丰镐遗址",
+    "retrieved": "2026-10-16",
+    "infobox": "丰镐遗址 作于西周中期的裘衛盉上金文「豐」 全国重点文物保护单位 中华人民共和国国务院 公布 地址 陕西省 西安市 坐标 34°13′N 108°43′E ﻿ / ﻿ 34.217°N 108.717°E ﻿ / 34.217; 108.717 分类 古遗址 时代 周 编号 1-143 认定时间 1961年",
+    "pageCoordinate": "34.217; 108.717",
+    "wikidata": "Q275515",
+    "P625": [
+      {
+        "value": {
+          "latitude": 34.21,
+          "longitude": 108.72,
+          "altitude": null,
+          "precision": 0.10860274294829,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": [
+          {
+            "hash": "d5847b9b6032aa8b13dae3c2dfd9ed5d114d21b3",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "5a343e7e758a4282a01316d3e959b6e653b767fc",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 11920,
+                      "id": "Q11920"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "雒邑",
+    "url": "https://zh.wikipedia.org/wiki/雒邑",
+    "retrieved": "2026-10-16",
+    "infobox": null,
+    "pageCoordinate": null,
+    "wikidata": "Q10565818",
+    "P625": [
+      {
+        "value": {
+          "latitude": 34.66768,
+          "longitude": 112.41452,
+          "altitude": null,
+          "precision": 1e-05,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": []
+      }
+    ]
+  },
+  {
+    "name": "曲阜",
+    "url": "https://zh.wikipedia.org/wiki/曲阜",
+    "retrieved": "2026-10-16",
+    "infobox": "曲阜市 东方圣城 县级市 曲阜孔庙 周公庙 鲁班殿 孔子博物馆 曲阜古城门 大成路 尼山圣境大学堂 廖河古街 曲阜市在济宁市的位置 坐标： 35°36′00″N 116°59′10″E ﻿ / ﻿ 35.6°N 116.986°E ﻿ / 35.6; 116.986 国家 中华人民共和国 隶属行政区 山东省 济宁市 设置时间 公元前1066年 政府駐地 鲁城街道 35°36′00″N 116°59′10″E ﻿ / ﻿ 35.6°N 116.986°E ﻿ / 35.6; 116.986 政府 • 市委书记 崔加清 面积 • 总计 896平方公里（346平方英里） 人口 （ 2020年 ） [ 1 ] • 常住 621,971人 • 密度 694人/平方公里（1,798人/平方英里） • 城區 （2011） 21 • 城镇 395,524人 时区 北京时间 （ UTC+08:00 ） 郵政編碼 273100 車輛號牌 鲁H 行政区划代码 370881 气候 温带季风气候 毗邻 泰安市 宁阳县 济宁市 兖州区 、 邹城市 、 泗水县 国内生产总值 （2011） ¥ 266亿 • 人均 ¥41510 網站 孔子故里·中国曲阜网 市象征 花 兰花 树 桧柏",
+    "pageCoordinate": "35.5916861; 116.9842833",
+    "wikidata": "Q210287",
+    "P625": [
+      {
+        "value": {
+          "latitude": 35.6,
+          "longitude": 116.98333333333,
+          "altitude": null,
+          "precision": 0.016666666666667,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": [
+          {
+            "hash": "288ab581e7d2d02995a26dfa8b091d96e78457fc",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "6a164248fc96bfa583bbb495cb63ae6401ec203c",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 206855,
+                      "id": "Q206855"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "朝歌",
+    "url": "https://zh.wikipedia.org/wiki/朝歌",
+    "retrieved": "2026-10-16",
+    "infobox": null,
+    "pageCoordinate": null,
+    "wikidata": "Q837807",
+    "P625": [
+      {
+        "value": {
+          "latitude": 35.602222222222224,
+          "longitude": 114.19416666666666,
+          "altitude": null,
+          "precision": 0.0002777777777777778,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": []
+      }
+    ]
+  },
+  {
+    "name": "楚丘",
+    "url": "https://zh.wikipedia.org/wiki/楚丘",
+    "retrieved": "2026-10-16",
+    "error": "404 Client Error: Not Found for url: https://zh.wikipedia.org/wiki/%E6%A5%9A%E4%B8%98"
+  },
+  {
+    "name": "临淄齐国故城",
+    "url": "https://zh.wikipedia.org/wiki/临淄齐国故城",
+    "retrieved": "2026-10-16",
+    "infobox": "临淄齐国故城 全国重点文物保护单位 中华人民共和国国务院 公布 地址 山东省 淄博市 坐标 36°53′23.122″N 118°20′16.469″E ﻿ / ﻿ 36.88975611°N 118.33790806°E ﻿ / 36.88975611; 118.33790806 分类 古遗址 时代 周 编号 1-144 认定时间 1961年",
+    "pageCoordinate": "36.88975611; 118.33790806",
+    "wikidata": "Q865988",
+    "P625": [
+      {
+        "value": {
+          "latitude": 36.889756,
+          "longitude": 118.337908,
+          "altitude": null,
+          "precision": 1e-06,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": []
+      }
+    ]
+  },
+  {
+    "name": "陶丘",
+    "url": "https://zh.wikipedia.org/wiki/陶丘",
+    "retrieved": "2026-10-16",
+    "error": "404 Client Error: Not Found for url: https://zh.wikipedia.org/wiki/%E9%99%B6%E4%B8%98"
+  },
+  {
+    "name": "商丘",
+    "url": "https://zh.wikipedia.org/wiki/商丘",
+    "retrieved": "2026-10-16",
+    "infobox": "商丘市 地级市 商丘古城 归德府城墙 拱阳门 商祖祠 王亥 像 “商”字雕塑 阏伯台 商丘市在河南省的地理位置 坐标： 34°24′53″N 115°39′21″E ﻿ / ﻿ 34.4146°N 115.6558°E ﻿ / 34.4146; 115.6558 国家 中华人民共和国 省级行政区 河南省 設立 1997年6月 語源 宋 人（商人后代）所居住的丘陵 政府駐地 睢阳区 34°24′53″N 115°39′21″E ﻿ / ﻿ 34.4146°N 115.6558°E ﻿ / 34.4146; 115.6558 下级行政区 2 市辖区 、1 县级市 、6 县 政府 • 市委書記 李湘豫 • 人大常委會主任 周树群 • 市長 孙起鹏 • 政協主席 楚耀华 面积 • 总计 10,704平方公里 （ 全省第6位 ，佔全河南省6.46%） • 市區 1,656平方公里 最高海拔 156.8公尺 人口 （2016） • 常住 1,012万人萬人（ 全省第3位 ，佔全河南省7.67%） • 密度 679.6人/平方公里 • 市區 （2016） 181.86萬人 • 城镇 （2016） 291.27萬人 語言 • 方言 中原官话 商阜片 时区 北京时间 （ UTC+08:00 ） 郵政編碼 476000 電話區號 370 車輛號牌 豫N 气候 暖温带半温润季风气候 • 年均温 14.1 ℃ • 年降水 681.1毫米 行政区划代码 411400 舊稱 宋州、应天府、南京、归德府 国内生产总值 （2016） ¥ 1,812.16亿（ 全省第10位 ，佔全河南省4.86%） 290.95亿 美元 （ 汇率 ） • 人均 ¥24,940（ 全省第16位 ） 4,004 美元 （汇率） 網站 商丘市人民政府门户网站 市象征 花 月季 树 国槐 本表面积、人口、经济数据参考 《河南统计年鉴－2016》",
+    "pageCoordinate": "34.4146; 115.6558",
+    "wikidata": "Q404817",
+    "P625": [
+      {
+        "value": {
+          "latitude": 34.42592,
+          "longitude": 115.64673,
+          "altitude": null,
+          "precision": null,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": [
+          {
+            "hash": "0ee3b3ba1c958f4c3dcba7ed8091fe4b57311348",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "cb49f6fa327b245e4a5aaf48c44b3f503bcd4265",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 30239,
+                      "id": "Q30239"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "新郑",
+    "url": "https://zh.wikipedia.org/wiki/新郑",
+    "retrieved": "2026-10-16",
+    "infobox": "新郑市 县级市 黄帝故里 新郑新区 凤台寺塔 具茨山 风后岭 郑韩故城 新郑市的地理位置 坐标： 34°23′46″N 113°43′30″E ﻿ / ﻿ 34.39621°N 113.7249°E ﻿ / 34.39621; 113.7249 国家 中华人民共和国 隶属行政区 河南省 郑州市 設立 1994年5月 政府駐地 新华路街道 下级行政区 15 3 街道 9 镇 1 乡 政府 • 市长 马宏伟 面积 • 总计 884.59平方公里（341.54平方英里） 人口 （ 2020年 ） [ 1 ] • 常住 1,172,237人 • 密度 1,325人/平方公里（3,432人/平方英里） • 城镇 787,544人 时区 北京时间 （ UTC+08:00 ） 郵政編碼 451100 電話區號 371 行政区划代码 410184 毗邻 二七区 、 管城回族区 、 中牟县 、 尉氏县 、 长葛市 、 禹州市 、 新密市 国内生产总值 ¥ 1335.57亿 [ 2 ] 748.6亿 [ 3 ] • 人均 ¥93,230 網站 新郑市人民政府 本表面积、人口、经济数据参考 《河南统计年鉴－2021》",
+    "pageCoordinate": "34.39621; 113.7249",
+    "wikidata": "Q1024662",
+    "P625": [
+      {
+        "value": {
+          "latitude": 34.39621,
+          "longitude": 113.7249,
+          "altitude": null,
+          "precision": null,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": [
+          {
+            "hash": "0ee3b3ba1c958f4c3dcba7ed8091fe4b57311348",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "cb49f6fa327b245e4a5aaf48c44b3f503bcd4265",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 30239,
+                      "id": "Q30239"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "楚纪南故城",
+    "url": "https://zh.wikipedia.org/wiki/楚纪南故城",
+    "retrieved": "2026-10-16",
+    "infobox": "楚纪南故城 全国重点文物保护单位 中华人民共和国国务院 公布 地址 湖北省 荆州市 荆州区 坐标 30°24′20.599″N 112°11′25.073″E ﻿ / ﻿ 30.40572194°N 112.19029806°E ﻿ / 30.40572194; 112.19029806 分类 古遗址 时代 东周 编号 147 认定时间 1961年3月4日 保护历史 1956年11月15日，湖北省文物保护单位，公布名称：紀南城",
+    "pageCoordinate": "30.40572194; 112.19029806",
+    "wikidata": "Q11119879",
+    "P625": [
+      {
+        "value": {
+          "latitude": 30.405722,
+          "longitude": 112.190298,
+          "altitude": null,
+          "precision": 1e-06,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": []
+      }
+    ]
+  },
+  {
+    "name": "雍城",
+    "url": "https://zh.wikipedia.org/wiki/雍城",
+    "retrieved": "2026-10-16",
+    "infobox": "秦雍城遗址 秦雍城遗址全国重点文物保护单位碑 全国重点文物保护单位 中华人民共和国国务院 公布 地址 中国 陕西省 宝鸡市 凤翔区 坐标 34°28′0.1″N 107°21′32.6″E ﻿ / ﻿ 34.466694°N 107.359056°E ﻿ / 34.466694; 107.359056 分类 古遗址 时代 东周 编号 3-204 认定时间 1988年",
+    "pageCoordinate": "34.466694; 107.359056",
+    "wikidata": "Q7196928",
+    "P625": [
+      {
+        "value": {
+          "latitude": 34.46669,
+          "longitude": 107.35907,
+          "altitude": null,
+          "precision": 2.77778e-05,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": []
+      }
+    ]
+  },
+  {
+    "name": "绛",
+    "url": "https://zh.wikipedia.org/wiki/绛",
+    "retrieved": "2026-10-16",
+    "infobox": null,
+    "pageCoordinate": null,
+    "wikidata": "Q15875379",
+    "P625": []
+  },
+  {
+    "name": "溧阳",
+    "url": "https://zh.wikipedia.org/wiki/溧阳",
+    "retrieved": "2026-10-16",
+    "infobox": "溧阳市 溧 县级市 南山竹海景区 溧阳市在 常州市 及 江苏省 的地理位置 江苏省 的地理位置 坐标： 31°25′N 119°29′E ﻿ / ﻿ 31.417°N 119.483°E ﻿ / 31.417; 119.483 国家 中华人民共和国 隶属行政区 江苏省 常州市 設立 1990年 [ 2 ] 語源 古溧阳城邑在 溧水 之北，水北为阳 政府駐地 溧城街道 31°25′N 119°29′E ﻿ / ﻿ 31.417°N 119.483°E ﻿ / 31.417; 119.483 下级行政区 12 3 街道 9 镇 政府 • 市委書記 李超鲲 • 人大常委會主任 张爱文 • 市長 巢彬 • 政協主席 刘国新 面积 • 总计 1,535.87平方公里（593.00平方英里） • 水域 284平方公里（110平方英里） • 城區 231.25平方公里（89.29平方英里） • 建成区 （2024 [ 1 ] ） 34.90平方公里（13.47平方英里） 海拔 541公尺（1,775英尺） 人口 （2024 [ 1 ] ） • 常住 80.69万人 • 密度 525人/平方公里（1,361人/平方英里） • 城區 28.75万人 • 城區 密度 1,243人/平方公里（3,220人/平方英里） • 乡村 26.97万人 • 城镇 53.72 • 户籍 77.35万人 • 暂住 14.19万（2,023年） 語言 • 方言 溧阳话（属 吴语 太湖片 毗陵小片） 时区 北京时间 （ UTC+08:00 ） 郵政編碼 213300 電話區號 519 車輛號牌 苏D 行政区划代码 320481 气候 亚热带季风气候 • 年均温 16.6 ℃ 毗邻 江苏省：南京市 溧水区 和 高淳区 、 句容市 、常州市 金坛区 、 宜兴市 安徽省： 郎溪县 、 广德市 最長河流 芜申运河 最大湖泊 长荡湖 国内生产总值 ¥ 1708.39亿元 • 人均 ¥21.17万元 舊稱 平陵 城市精神 团结创业 实干兴市 網站 溧阳市人民政府 市象征 花 桂花 [ 3 ] 树 香樟 [ 3 ]",
+    "pageCoordinate": "31.417; 119.483",
+    "wikidata": "Q1365505",
+    "P625": [
+      {
+        "value": {
+          "latitude": 31.41736,
+          "longitude": 119.4786,
+          "altitude": null,
+          "precision": null,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": [
+          {
+            "hash": "0ee3b3ba1c958f4c3dcba7ed8091fe4b57311348",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "cb49f6fa327b245e4a5aaf48c44b3f503bcd4265",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 30239,
+                      "id": "Q30239"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "邗沟",
+    "url": "https://zh.wikipedia.org/wiki/邗沟",
+    "retrieved": "2026-10-16",
+    "infobox": "淮扬运河扬州段 世界遗产 官方名稱 Yangzhou Section of Huaiyang Canal 位置 中华人民共和国 江苏省 扬州市 隸屬 大运河 包括 邗沟 、 瘦西湖 、 天宁寺行宫 、 个园 、 卢绍绪宅 、 盐宗庙 、 汪鲁门宅 、 刘堡闸 、 盂城驿 、 邵伯古堤 、 邵伯码头 参考编码 1443bis-012 登录年份 2014年（第38次 會議 ）",
+    "pageCoordinate": null,
+    "wikidata": "Q1574086",
+    "P625": []
+  },
+  {
+    "name": "黄池",
+    "url": "https://zh.wikipedia.org/wiki/黄池",
+    "retrieved": "2026-10-16",
+    "infobox": null,
+    "pageCoordinate": null,
+    "wikidata": null,
+    "P625": []
+  },
+  {
+    "name": "汉中",
+    "url": "https://zh.wikipedia.org/wiki/汉中",
+    "retrieved": "2026-10-16",
+    "infobox": "汉中市 汉 地级市 天汉大桥两岸风光，图上为汉台区，图下为南郑区 汉中市在陕西省的地理位置 坐标： 33°04′03″N 107°01′24″E ﻿ / ﻿ 33.0675°N 107.0233°E ﻿ / 33.0675; 107.0233 国家 中华人民共和国 省级行政区 陕西省 設立 1996年2月21日 語源 因 汉水 而得名 政府駐地 汉台区 民主街43号 33°04′03″N 107°01′24″E ﻿ / ﻿ 33.0675°N 107.0233°E ﻿ / 33.0675; 107.0233 下级行政区 2 市辖区 、9 县 政府 • 市委書記 张烨 • 人大常委會主任 杨记明 • 市長 王建平 • 政協主席 蔡煜东 面积 • 总计 27,097平方公里 （ 全省第3位 ，佔全陕西省13.18%） • 市區 3,358平方公里 最高海拔 3,071公尺 人口 （2023） • 常住 317萬人（ 全省第6位 ，佔全陕西省8.02%） • 密度 116.99人/平方公里 • 市區 （2023） 108.1萬人 • 城镇 （2023） 172.07萬人 时区 北京时间 （ UTC+08:00 ） 郵政編碼 723000 電話區號 +86 (0)916 車輛號牌 陕F 气候 北亚热带季风气候、暖温带季风气候 • 年均温 14.7 ℃ • 年降水 985.4毫米 行政区划代码 610700 舊稱 南郑、汉宁、梁州、汉川、兴元 国内生产总值 （2023） ¥ 1,894.89亿（ 全省第7位 ，佔全陕西省5.61%） 267.83亿 美元 （ 汇率 ） • 人均 ¥59,722（ 全省第7位 ） 8,441 美元 （汇率） 網站 www .hanzhong .gov .cn 市象征 花 旱莲 树 汉桂",
+    "pageCoordinate": "33.0675; 107.0233",
+    "wikidata": "Q515573",
+    "P625": [
+      {
+        "value": {
+          "latitude": 33.07938,
+          "longitude": 107.02598,
+          "altitude": null,
+          "precision": null,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": [
+          {
+            "hash": "0ee3b3ba1c958f4c3dcba7ed8091fe4b57311348",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "cb49f6fa327b245e4a5aaf48c44b3f503bcd4265",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 30239,
+                      "id": "Q30239"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "葭萌",
+    "url": "https://zh.wikipedia.org/wiki/葭萌",
+    "retrieved": "2026-10-16",
+    "infobox": "昭化镇 镇 昭化镇的位置 坐标： 32°20′13″N 105°42′51″E ﻿ / ﻿ 32.33682°N 105.71422°E ﻿ / 32.33682; 105.71422 国家 中华人民共和国 上级行政区 昭化区 村级区划单位数 10 2 社区 8 行政村 政府 时区 北京时间 （ UTC+8 ） 电话区号 + 86 统计用区划代码 51 08 11 108",
+    "pageCoordinate": "32.33682; 105.71422",
+    "wikidata": "Q11088916",
+    "P625": [
+      {
+        "value": {
+          "latitude": 32.33682,
+          "longitude": 105.71422,
+          "altitude": null,
+          "precision": null,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": [
+          {
+            "hash": "0ee3b3ba1c958f4c3dcba7ed8091fe4b57311348",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "cb49f6fa327b245e4a5aaf48c44b3f503bcd4265",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 30239,
+                      "id": "Q30239"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "成都",
+    "url": "https://zh.wikipedia.org/wiki/成都",
+    "retrieved": "2026-10-16",
+    "infobox": "成都市 蓉 地级市 成都市风光 由首图起顺时针依次为： 邛崃山脉 下的成都天际线、 青城山 、 安顺廊桥 、 成都太古里 、 都江堰 、 成都大熊猫繁育研究基地 成都市城市形象标识核心图案 綽號： 芙蓉城（蓉城）、锦官城（锦城） 成都市的地理位置（黄色部分） 坐标： 30°39′30″N 104°03′52″E ﻿ / ﻿ 30.65833°N 104.06444°E ﻿ / 30.65833; 104.06444 国家 中华人民共和国 省级行政区 四川省 設立 前311年 建城 1928年9月1日 建市 政府駐地 武侯区 30°39′30″N 104°03′52″E ﻿ / ﻿ 30.65833°N 104.06444°E ﻿ / 30.65833; 104.06444 下级行政区 12 市辖区 、5 县级市 、3 县 政府 • 市委書記 曹立军 • 人大常委會主任 何礼 • 市長 陈书平 • 政協主席 曾卿 面积 • 总计 14,335平方公里 （ 全省第8位 ，佔全四川省2.95%） • 市區 3,639.81平方公里 • 建成区 （2025 [ 2 ] ） 1,093.55平方公里 海拔 500公尺 最高海拔 5,364公尺 人口 （2025） • 常住 2,153.5萬人（ 全省第1位 ，佔全四川省19.58%） • 密度 1,139人/平方公里 • 市區 （2022 [ 2 ] ） 1,399.1萬人 • 城镇 （2020） 1,649.30萬人 • 城區常住 （2022 [ 2 ] ） 1,257.24萬人 語言 • 方言 四川话 （ 成渝小片 、 西蜀片 ）、 土廣東話 主城方言： 成都话 时区 北京时间 （ UTC+08:00 ） 郵政編碼 610000 電話區號 28 車輛號牌 川A、川G 气候 亚热带季风气候 • 年均温 16.4 ℃ • 年降水 887毫米 • 年日照 945小時 行政区划代码 510100 国内生产总值 （2025） ¥ 24763.61亿 [ 3 ] （ 全省第1位 ） 3478.12亿 美元 （ 汇率 ） HDI （2025",
+    "pageCoordinate": "30.65833; 104.06444",
+    "wikidata": "Q30002",
+    "P625": [
+      {
+        "value": {
+          "latitude": 30.66,
+          "longitude": 104.06333333333333,
+          "altitude": null,
+          "precision": 0.0002777777777777778,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": [
+          {
+            "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 328,
+                      "id": "Q328"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "济西",
+    "url": "https://zh.wikipedia.org/wiki/济西",
+    "retrieved": "2026-10-16",
+    "error": "404 Client Error: Not Found for url: https://zh.wikipedia.org/wiki/%E6%B5%8E%E8%A5%BF"
+  },
+  {
+    "name": "鄢城",
+    "url": "https://zh.wikipedia.org/wiki/鄢城",
+    "retrieved": "2026-10-16",
+    "infobox": "宜城市 县级市 宜城市的地理位置 坐标： 31°42′42″N 112°15′19″E ﻿ / ﻿ 31.71173°N 112.25514°E ﻿ / 31.71173; 112.25514 国家 中华人民共和国 隶属行政区 湖北省 襄阳市 政府 面积 • 总计 2,113.86平方公里（816.17平方英里） 人口 （ 2020年 ） [ 1 ] • 常住 469,417人 • 密度 222人/平方公里（575人/平方英里） • 城镇 244,410人 时区 北京时间 （ UTC+08:00 ） 郵政編碼 441400 行政区划代码 420684",
+    "pageCoordinate": "31.71173; 112.25514",
+    "wikidata": "Q1199240",
+    "P625": [
+      {
+        "value": {
+          "latitude": 31.71173,
+          "longitude": 112.25514,
+          "altitude": null,
+          "precision": null,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": []
+      }
+    ]
+  },
+  {
+    "name": "野王",
+    "url": "https://zh.wikipedia.org/wiki/野王",
+    "retrieved": "2026-10-16",
+    "infobox": "沁阳市 县级市 天宁寺三圣塔 沁阳市的地理位置 坐标： 35°05′26″N 112°55′54″E ﻿ / ﻿ 35.09066°N 112.93168°E ﻿ / 35.09066; 112.93168 国家 中华人民共和国 隶属行政区 河南省 焦作市 政府 面积 • 总计 594.9平方公里（229.7平方英里） 人口 （ 2020年 ） [ 1 ] • 常住 447,487人 • 密度 752人/平方公里（1,948人/平方英里） • 城镇 279,809人 时区 北京时间 （ UTC+08:00 ） 郵政編碼 454550 行政区划代码 410882",
+    "pageCoordinate": "35.09066; 112.93168",
+    "wikidata": "Q1359226",
+    "P625": [
+      {
+        "value": {
+          "latitude": 35.09066,
+          "longitude": 112.93168,
+          "altitude": null,
+          "precision": null,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": [
+          {
+            "hash": "0ee3b3ba1c958f4c3dcba7ed8091fe4b57311348",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "cb49f6fa327b245e4a5aaf48c44b3f503bcd4265",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 30239,
+                      "id": "Q30239"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "上党",
+    "url": "https://zh.wikipedia.org/wiki/上党",
+    "retrieved": "2026-10-16",
+    "infobox": null,
+    "pageCoordinate": null,
+    "wikidata": "Q10867206",
+    "P625": []
+  },
+  {
+    "name": "井陉故关",
+    "url": "https://zh.wikipedia.org/wiki/井陉故关",
+    "retrieved": "2026-10-16",
+    "error": "404 Client Error: Not Found for url: https://zh.wikipedia.org/wiki/%E4%BA%95%E9%99%89%E6%95%85%E5%85%B3"
+  },
+  {
+    "name": "大梁",
+    "url": "https://zh.wikipedia.org/wiki/大梁",
+    "retrieved": "2026-10-16",
+    "infobox": null,
+    "pageCoordinate": null,
+    "wikidata": "Q16510368",
+    "P625": [
+      {
+        "value": {
+          "latitude": 34.8,
+          "longitude": 114.35,
+          "altitude": null,
+          "precision": 0.016666666666666666,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": []
+      }
+    ]
+  },
+  {
+    "name": "蓟",
+    "url": "https://zh.wikipedia.org/wiki/蓟",
+    "retrieved": "2026-10-16",
+    "infobox": null,
+    "pageCoordinate": null,
+    "wikidata": "Q11622180",
+    "P625": []
+  },
+  {
+    "name": "辽东",
+    "url": "https://zh.wikipedia.org/wiki/辽东",
+    "retrieved": "2026-10-16",
+    "infobox": null,
+    "pageCoordinate": null,
+    "wikidata": "Q7208548",
+    "P625": []
+  },
+  {
+    "name": "会稽山",
+    "url": "https://zh.wikipedia.org/wiki/会稽山",
+    "retrieved": "2026-10-16",
+    "infobox": "会稽山 会稽山 在浙江省的位置 最高点 海拔 354米（1,161英尺） 列表 中國山峰列表 坐标 29°56′50″N 120°36′30″E ﻿ / ﻿ 29.94722°N 120.60833°E ﻿ / 29.94722; 120.60833 地理 位置 浙江省 绍兴市 南部",
+    "pageCoordinate": "29.94722; 120.60833",
+    "wikidata": "Q1790816",
+    "P625": [
+      {
+        "value": {
+          "latitude": 29.68805556,
+          "longitude": 120.58044444,
+          "altitude": null,
+          "precision": 2.777777777778e-05,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": [
+          {
+            "hash": "9a24f7c0208b05d6be97077d855671d1dfdbc0dd",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "d38375ffe6fe142663ff55cd783aa4df4301d83d",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 48183,
+                      "id": "Q48183"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "琅琊台",
+    "url": "https://zh.wikipedia.org/wiki/琅琊台",
+    "retrieved": "2026-10-16",
+    "infobox": "琅琊台遗址 琅琊台秦代建筑遗址 全国重点文物保护单位 中华人民共和国国务院 公布 地址 山东省 青岛市 黄岛区 坐标 35°38′58.00″N 119°54′7.35″E ﻿ / ﻿ 35.6494444°N 119.9020417°E ﻿ / 35.6494444; 119.9020417 分类 古遗址 时代 秦 编号 7-0253-1-253 认定时间 2013年3月",
+    "pageCoordinate": "35.6494444; 119.9020417",
+    "wikidata": "Q17060348",
+    "P625": [
+      {
+        "value": {
+          "latitude": 35.64944444444444,
+          "longitude": 119.90204166666666,
+          "altitude": null,
+          "precision": 2.777777777777778e-06,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": []
+      }
+    ]
+  },
+  {
+    "name": "芝罘岛",
+    "url": "https://zh.wikipedia.org/wiki/芝罘岛",
+    "retrieved": "2026-10-16",
+    "infobox": "芝罘岛 芝罘岛 芝罘岛在山东的位置 自然地理 坐标 37°36′43.4″N 121°22′46.3″E ﻿ / ﻿ 37.612056°N 121.379528°E ﻿ / 37.612056; 121.379528 所处海域 黄海 总面積 11.5平方公里 岸線长度 22.5公里 最高點 芝罘山（298米） 管轄 中华人民共和国 省 山东省 市 烟台市 区 芝罘区",
+    "pageCoordinate": "37.612056; 121.379528",
+    "wikidata": "Q1351822",
+    "P625": [
+      {
+        "value": {
+          "latitude": 37.612055555556,
+          "longitude": 121.37952777778,
+          "altitude": null,
+          "precision": 0.00027777777777778,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": [
+          {
+            "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 328,
+                      "id": "Q328"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "沙丘平台",
+    "url": "https://zh.wikipedia.org/wiki/沙丘平台",
+    "retrieved": "2026-10-16",
+    "error": "404 Client Error: Not Found for url: https://zh.wikipedia.org/wiki/%E6%B2%99%E4%B8%98%E5%B9%B3%E5%8F%B0"
+  },
+  {
+    "name": "肥累县",
+    "url": "https://zh.wikipedia.org/wiki/肥累县",
+    "retrieved": "2026-10-16",
+    "error": "404 Client Error: Not Found for url: https://zh.wikipedia.org/wiki/%E8%82%A5%E7%B4%AF%E5%8E%BF"
+  },
+  {
+    "name": "肥累城",
+    "url": "https://zh.wikipedia.org/wiki/肥累城",
+    "retrieved": "2026-10-16",
+    "error": "404 Client Error: Not Found for url: https://zh.wikipedia.org/wiki/%E8%82%A5%E7%B4%AF%E5%9F%8E"
+  },
+  {
+    "name": "晋州市",
+    "url": "https://zh.wikipedia.org/wiki/晋州市",
+    "retrieved": "2026-10-16",
+    "infobox": null,
+    "pageCoordinate": null,
+    "wikidata": "Q11514504",
+    "P625": []
+  },
+  {
+    "name": "和顺县",
+    "url": "https://zh.wikipedia.org/wiki/和顺县",
+    "retrieved": "2026-10-16",
+    "infobox": "和顺县 县 和顺县的地理位置 坐标： 37°19′38″N 113°34′06″E ﻿ / ﻿ 37.32725°N 113.56831°E ﻿ / 37.32725; 113.56831 国家 中华人民共和国 隶属行政区 山西省 晋中市 政府駐地 义兴镇 政府 面积 • 总计 2,194.39平方公里（847.26平方英里） 人口 （ 2020年 ） [ 1 ] • 常住 121,617人 • 密度 55.4人/平方公里（144人/平方英里） • 城镇 63,557人 时区 北京时间 （ UTC+08:00 ） 郵政編碼 032700 電話區號 354 車輛號牌 晋K 行政区划代码 140723",
+    "pageCoordinate": "37.32725; 113.56831",
+    "wikidata": "Q1197119",
+    "P625": [
+      {
+        "value": {
+          "latitude": 37.32725,
+          "longitude": 113.56831,
+          "altitude": null,
+          "precision": null,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": [
+          {
+            "hash": "0ee3b3ba1c958f4c3dcba7ed8091fe4b57311348",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "cb49f6fa327b245e4a5aaf48c44b3f503bcd4265",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 30239,
+                      "id": "Q30239"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "上蔡县",
+    "url": "https://zh.wikipedia.org/wiki/上蔡县",
+    "retrieved": "2026-10-16",
+    "infobox": "上蔡县 县 上蔡县的地理位置 坐标： 33°15′56″N 114°15′44″E ﻿ / ﻿ 33.26559°N 114.26218°E ﻿ / 33.26559; 114.26218 国家 中华人民共和国 隶属行政区 河南省 驻马店市 設立 公元前9世纪 政府駐地 重阳街道 政府 面积 • 总计 1,514.23平方公里（584.65平方英里） 人口 （ 2020年 ） [ 1 ] • 常住 1,005,745人 • 密度 664人/平方公里（1,720人/平方英里） • 城镇 347,593人 語言 • 方言 河南话 漯项片 时区 北京时间 （ UTC+08:00 ） 郵政編碼 463800 電話區號 0396 行政区划代码 411722",
+    "pageCoordinate": "33.26559; 114.26218",
+    "wikidata": "Q1199103",
+    "P625": [
+      {
+        "value": {
+          "latitude": 33.26559,
+          "longitude": 114.26218,
+          "altitude": null,
+          "precision": null,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": [
+          {
+            "hash": "0ee3b3ba1c958f4c3dcba7ed8091fe4b57311348",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "cb49f6fa327b245e4a5aaf48c44b3f503bcd4265",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 30239,
+                      "id": "Q30239"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "胡阳",
+    "url": "https://zh.wikipedia.org/wiki/胡阳",
+    "retrieved": "2026-10-16",
+    "infobox": null,
+    "pageCoordinate": null,
+    "wikidata": "Q18119037",
+    "P625": []
+  },
+  {
+    "name": "函谷关",
+    "url": "https://zh.wikipedia.org/wiki/函谷关",
+    "retrieved": "2026-10-16",
+    "infobox": "新安汉函谷关遗址 世界遗产 官方名稱 Site of Han’gu Pass of Han Dynasty in Xin’an County 隸屬 丝绸之路：长安—天山廊道的路网 標準 文化 ：(ii)(iii)(v)(vi) 参考编码 1442-018 登录年份 2014年（第38次 會議 ） 面积 98.77 公顷 緩衝區 463.41 公顷",
+    "pageCoordinate": "34.720495; 112.165864",
+    "wikidata": "Q848793",
+    "P625": [
+      {
+        "value": {
+          "latitude": 34.63,
+          "longitude": 110.92,
+          "altitude": null,
+          "precision": 0.010917267616163,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": [
+          {
+            "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 328,
+                      "id": "Q328"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      },
+      {
+        "value": {
+          "latitude": 34.7206,
+          "longitude": 112.1658,
+          "altitude": null,
+          "precision": 1e-06,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": []
+      }
+    ]
+  },
+  {
+    "name": "井陉关",
+    "url": "https://zh.wikipedia.org/wiki/井陉关",
+    "retrieved": "2026-10-16",
+    "infobox": "井陉关 井陉关 井陉关在中华人民共和国的位置 显示中华人民共和国的地图 井陉关 井陉关 (河北) 显示河北的地图 穿過 307国道 位置 中国 河北省 石家庄市 山脉 太行山 坐标 38°04′N 114°17′E ﻿ / ﻿ 38.07°N 114.28°E ﻿ / 38.07; 114.28",
+    "pageCoordinate": "38.07; 114.28",
+    "wikidata": "Q6202457",
+    "P625": []
+  },
+  {
+    "name": "平舆县",
+    "url": "https://zh.wikipedia.org/wiki/平舆县",
+    "retrieved": "2026-10-16",
+    "infobox": "平舆县 县 平舆县的地理位置 坐标： 32°57′21″N 114°37′59″E ﻿ / ﻿ 32.95597°N 114.6331°E ﻿ / 32.95597; 114.6331 国家 中华人民共和国 隶属行政区 河南省 驻马店市 政府駐地 古槐街道 下级行政区 19 3 街道 12 镇 4 乡 政府 面积 • 总计 1,284.11平方公里（495.80平方英里） 人口 （ 2020年 ） [ 1 ] • 常住 728,672人 • 密度 567人/平方公里（1,470人/平方英里） • 城镇 311,620人 时区 北京时间 （ UTC+08:00 ） 郵政編碼 463400 電話區號 0396 行政区划代码 411723 国内生产总值 ¥ 192.1億",
+    "pageCoordinate": "32.95597; 114.6331",
+    "wikidata": "Q1198765",
+    "P625": [
+      {
+        "value": {
+          "latitude": 32.95597,
+          "longitude": 114.6331,
+          "altitude": null,
+          "precision": null,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": [
+          {
+            "hash": "0ee3b3ba1c958f4c3dcba7ed8091fe4b57311348",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "cb49f6fa327b245e4a5aaf48c44b3f503bcd4265",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 30239,
+                      "id": "Q30239"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "城父镇",
+    "url": "https://zh.wikipedia.org/wiki/城父镇",
+    "retrieved": "2026-10-16",
+    "infobox": "城父镇 镇 城父镇的位置 坐标： 33°38′09″N 115°58′40″E ﻿ / ﻿ 33.63575°N 115.97777°E ﻿ / 33.63575; 115.97777 国家 中华人民共和国 上级行政区 谯城区 村级区划单位数 13 0 社区 13 行政村 政府 时区 北京时间 （ UTC+8 ） 电话区号 + 86 (0)558 统计用区划代码 34 16 02 113",
+    "pageCoordinate": "33.63575; 115.97777",
+    "wikidata": "Q10929963",
+    "P625": [
+      {
+        "value": {
+          "latitude": 33.63575,
+          "longitude": 115.97777,
+          "altitude": null,
+          "precision": null,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": []
+      }
+    ]
+  },
+  {
+    "name": "城父县",
+    "url": "https://zh.wikipedia.org/wiki/城父县",
+    "retrieved": "2026-10-16",
+    "error": "404 Client Error: Not Found for url: https://zh.wikipedia.org/wiki/%E5%9F%8E%E7%88%B6%E5%8E%BF"
+  },
+  {
+    "name": "方城县",
+    "url": "https://zh.wikipedia.org/wiki/方城县",
+    "retrieved": "2026-10-16",
+    "infobox": "方城县 县 方城县的地理位置 坐标： 33°15′23″N 113°00′09″E ﻿ / ﻿ 33.25629°N 113.00245°E ﻿ / 33.25629; 113.00245 国家 中华人民共和国 隶属行政区 河南省 南阳市 政府 面积 • 总计 2,543.18平方公里（981.93平方英里） 人口 （2023） • 常住 113万人 • 密度 444人/平方公里（1,151人/平方英里） 时区 北京时间 （ UTC+08:00 ） 郵政編碼 473200 行政区划代码 411322",
+    "pageCoordinate": "33.25629; 113.00245",
+    "wikidata": "Q340150",
+    "P625": [
+      {
+        "value": {
+          "latitude": 33.25629,
+          "longitude": 113.00245,
+          "altitude": null,
+          "precision": null,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": [
+          {
+            "hash": "0ee3b3ba1c958f4c3dcba7ed8091fe4b57311348",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "cb49f6fa327b245e4a5aaf48c44b3f503bcd4265",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 30239,
+                      "id": "Q30239"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "孤竹国",
+    "url": "https://zh.wikipedia.org/wiki/孤竹国",
+    "retrieved": "2026-10-16",
+    "infobox": "孤竹 地位 商朝 、 周朝 诸侯国 国都 1. 盧龍縣南十二里 2. 遼西令支縣 政府 封地 • 始封此國者 商湯 • 爵位 侯爵 • 姓 子姓 • 氏 孤竹氏 • 始祖 不詳 分封 • 创始 商湯十九年 • 灭亡 前660年 • 灭亡原因 被 齊桓公 所滅 史书记载 《 史記·伯夷列傳 》",
+    "pageCoordinate": null,
+    "wikidata": "Q1045615",
+    "P625": []
+  },
+  {
+    "name": "令支",
+    "url": "https://zh.wikipedia.org/wiki/令支",
+    "retrieved": "2026-10-16",
+    "infobox": null,
+    "pageCoordinate": null,
+    "wikidata": "Q10884467",
+    "P625": [
+      {
+        "value": {
+          "latitude": 40.005833333333335,
+          "longitude": 118.69722222222222,
+          "altitude": null,
+          "precision": 0.0002777777777777778,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": []
+      }
+    ]
+  },
+  {
+    "name": "蓟城",
+    "url": "https://zh.wikipedia.org/wiki/蓟城",
+    "retrieved": "2026-10-16",
+    "infobox": null,
+    "pageCoordinate": null,
+    "wikidata": "Q6192085",
+    "P625": [
+      {
+        "value": {
+          "latitude": 39.894262,
+          "longitude": 116.382425,
+          "altitude": null,
+          "precision": 1e-05,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": []
+      }
+    ]
+  },
+  {
+    "name": "汉函谷关",
+    "url": "https://zh.wikipedia.org/wiki/汉函谷关",
+    "retrieved": "2026-10-16",
+    "error": "404 Client Error: Not Found for url: https://zh.wikipedia.org/wiki/%E6%B1%89%E5%87%BD%E8%B0%B7%E5%85%B3"
+  },
+  {
+    "name": "崤山",
+    "url": "https://zh.wikipedia.org/wiki/崤山",
+    "retrieved": "2026-10-16",
+    "infobox": null,
+    "pageCoordinate": null,
+    "wikidata": "Q2858196",
+    "P625": [
+      {
+        "value": {
+          "latitude": 34.42167,
+          "longitude": 110.79111,
+          "altitude": null,
+          "precision": 1e-05,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": [
+          {
+            "hash": "43a0088c51fd85e5a85d1b46412c3a635e6d4edc",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "d8fbf8671e3c630db61bfac691068cfb6857f243",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 837615,
+                      "id": "Q837615"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "滑国",
+    "url": "https://zh.wikipedia.org/wiki/滑国",
+    "retrieved": "2026-10-16",
+    "infobox": "滑(费滑) 地位 周朝 诸侯国 国都 费 （今 河南省 安陽市 滑縣 ，另說 河南省 偃師市 ） 政府 封地 • 始封此國者 周公旦 • 爵位 伯 • 姓 姬姓 • 始祖 滑伯 分封 • 创始 不详 • 灭亡 前627年 • 灭亡原因 为 秦国 所灭 史书记载 春秋 始见于 庄公 十六年。",
+    "pageCoordinate": null,
+    "wikidata": "Q1291229",
+    "P625": []
+  },
+  {
+    "name": "鄄城县",
+    "url": "https://zh.wikipedia.org/wiki/鄄城县",
+    "retrieved": "2026-10-16",
+    "infobox": "鄄城县 县 鄄城县在 菏泽市 的位置 鄄城县的地理位置 坐标： 35°34′00″N 115°30′00″E ﻿ / ﻿ 35.5667°N 115.5°E ﻿ / 35.5667; 115.5 国家 中华人民共和国 隶属行政区 山东省 菏泽市 政府駐地 陈王街道 政府 面积 • 总计 1,037.67平方公里（400.65平方英里） 人口 （ 2020年 ） [ 1 ] • 常住 747,972人 • 密度 721人/平方公里（1,867人/平方英里） • 城镇 374,123人 时区 北京时间 （ UTC+08:00 ） 郵政編碼 274600 電話區號 530 車輛號牌 鲁R 行政区划代码 371726 網站 鄄城县政府网",
+    "pageCoordinate": "35.5667; 115.5",
+    "wikidata": "Q86776",
+    "P625": [
+      {
+        "value": {
+          "latitude": 35.566666666667,
+          "longitude": 115.5,
+          "altitude": null,
+          "precision": 0.00027777777777778,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": [
+          {
+            "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 328,
+                      "id": "Q328"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "范县",
+    "url": "https://zh.wikipedia.org/wiki/范县",
+    "retrieved": "2026-10-16",
+    "infobox": "范縣 县 范縣的地理位置 坐标： 35°51′26″N 115°30′05″E ﻿ / ﻿ 35.85722°N 115.50135°E ﻿ / 35.85722; 115.50135 国家 中华人民共和国 隶属行政区 河南省 濮陽市 政府 面积 • 总计 616.99平方公里（238.22平方英里） 人口 （ 2020年 ） [ 1 ] • 常住 447,760人 • 密度 726人/平方公里（1,880人/平方英里） • 城镇 160,678人 語言 • 方言 中原官話 - 兗菏片 时区 北京时间 （ UTC+08:00 ） 郵政編碼 457500 電話區號 0393 行政区划代码 410926",
+    "pageCoordinate": "35.85722; 115.50135",
+    "wikidata": "Q1198967",
+    "P625": [
+      {
+        "value": {
+          "latitude": 35.85722,
+          "longitude": 115.50135,
+          "altitude": null,
+          "precision": null,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": [
+          {
+            "hash": "0ee3b3ba1c958f4c3dcba7ed8091fe4b57311348",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "cb49f6fa327b245e4a5aaf48c44b3f503bcd4265",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 30239,
+                      "id": "Q30239"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "伯举",
+    "url": "https://zh.wikipedia.org/wiki/伯举",
+    "retrieved": "2026-10-16",
+    "error": "404 Client Error: Not Found for url: https://zh.wikipedia.org/wiki/%E4%BC%AF%E4%B8%BE"
+  },
+  {
+    "name": "宝丰县",
+    "url": "https://zh.wikipedia.org/wiki/宝丰县",
+    "retrieved": "2026-10-16",
+    "infobox": "宝丰县 县 宝丰县的地理位置 坐标： 33°52′06″N 113°03′46″E ﻿ / ﻿ 33.86834°N 113.0627°E ﻿ / 33.86834; 113.0627 国家 中华人民共和国 隶属行政区 河南省 平顶山市 政府駐地 文峰街道 政府 面积 • 总计 729.49平方公里（281.66平方英里） 人口 （ 2020年 ） [ 1 ] • 常住 498,157人 • 密度 683人/平方公里（1,769人/平方英里） • 城镇 231,994人 时区 北京时间 （ UTC+08:00 ） 郵政編碼 467400 行政区划代码 410421",
+    "pageCoordinate": "33.86834; 113.0627",
+    "wikidata": "Q807063",
+    "P625": [
+      {
+        "value": {
+          "latitude": 33.86834,
+          "longitude": 113.0627,
+          "altitude": null,
+          "precision": null,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": [
+          {
+            "hash": "0ee3b3ba1c958f4c3dcba7ed8091fe4b57311348",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "cb49f6fa327b245e4a5aaf48c44b3f503bcd4265",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 30239,
+                      "id": "Q30239"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "父城县",
+    "url": "https://zh.wikipedia.org/wiki/父城县",
+    "retrieved": "2026-10-16",
+    "error": "404 Client Error: Not Found for url: https://zh.wikipedia.org/wiki/%E7%88%B6%E5%9F%8E%E5%8E%BF"
+  },
+  {
+    "name": "赵王城",
+    "url": "https://zh.wikipedia.org/wiki/赵王城",
+    "retrieved": "2026-10-16",
+    "error": "404 Client Error: Not Found for url: https://zh.wikipedia.org/wiki/%E8%B5%B5%E7%8E%8B%E5%9F%8E"
+  },
+  {
+    "name": "邯郸市",
+    "url": "https://zh.wikipedia.org/wiki/邯郸市",
+    "retrieved": "2026-10-16",
+    "infobox": "邯郸市 邯 地级市 武灵丛台 邯郸道历史文化街区 响堂山石窟 人民东路 大名 石刻博物馆 赵苑公园 北门 太行五指山 赵王城遗址公园 綽號： 赵都、梦城、钢城、煤都 邯郸市在河北省的地理位置 坐标： 36°37′33″N 114°32′20″E ﻿ / ﻿ 36.6258°N 114.5388°E ﻿ / 36.6258; 114.5388 国家 中华人民共和国 省级行政区 河北省 設立 1983年11月15日 語源 因 邯山 至此而尽得名 政府駐地 丛台区 36°37′33″N 114°32′20″E ﻿ / ﻿ 36.6258°N 114.5388°E ﻿ / 36.6258; 114.5388 下级行政区 6 市辖区 、1 县级市 、11 县 政府 • 市委書記 李晋宇 • 人大常委會主任 赵洪山 • 市長 徐付军 • 政協主席 徐翀 面积 • 总计 12,065平方公里 （ 全省第8位 ，佔全河北省6.4%） • 市區 2,662平方公里 • 建成区 127.03平方公里 海拔 50公尺 最高海拔 1,898.7公尺 最低海拔 32.7公尺 人口 （2022） • 常住 1,064.3萬人（ 全省第3位 ） • 密度 781.8人/平方公里 • 市區 （2015） 367萬人 • 城镇 （2015） 484.67萬人 • 城區常住 （2018） 194.78萬人 語言 • 官方語言 普通话 • 方言 晋语 邯新片 邯郸话 、 冀鲁官话 石济片 聊泰小片 、 中原官话 郑曹片 时区 北京时间 （ UTC+08:00 ） 郵政編碼 056000 電話區號 310 車輛號牌 冀D 气候 暖温带半湿润季风气候 • 年均温 13.5 ℃ • 年降水 548.9毫米 • 年日照 2557小時 行政区划代码 130400 城市定位 区域中心城市 城市精神 开放、进取、担当、包容 国内生产总值 （2015） ¥ 3,145.43亿（ 全省第4位 ，佔全河北省10.23%） 505.01 美元 （ 汇率 ） • 人均 ¥33,450（ 全省第7位 ） 5,371 美元 （汇率） ",
+    "pageCoordinate": "36.6258; 114.5388",
+    "wikidata": "Q58570",
+    "P625": [
+      {
+        "value": {
+          "latitude": 36.61161,
+          "longitude": 114.48937,
+          "altitude": null,
+          "precision": null,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": [
+          {
+            "hash": "0ee3b3ba1c958f4c3dcba7ed8091fe4b57311348",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "cb49f6fa327b245e4a5aaf48c44b3f503bcd4265",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 30239,
+                      "id": "Q30239"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "平原津",
+    "url": "https://zh.wikipedia.org/wiki/平原津",
+    "retrieved": "2026-10-16",
+    "error": "404 Client Error: Not Found for url: https://zh.wikipedia.org/wiki/%E5%B9%B3%E5%8E%9F%E6%B4%A5"
+  },
+  {
+    "name": "会稽山大禹陵",
+    "url": "https://zh.wikipedia.org/wiki/会稽山大禹陵",
+    "retrieved": "2026-10-16",
+    "error": "404 Client Error: Not Found for url: https://zh.wikipedia.org/wiki/%E4%BC%9A%E7%A8%BD%E5%B1%B1%E5%A4%A7%E7%A6%B9%E9%99%B5"
+  },
+  {
+    "name": "秦函谷关",
+    "url": "https://zh.wikipedia.org/wiki/秦函谷关",
+    "retrieved": "2026-10-16",
+    "error": "404 Client Error: Not Found for url: https://zh.wikipedia.org/wiki/%E7%A7%A6%E5%87%BD%E8%B0%B7%E5%85%B3"
+  },
+  {
+    "name": "轘辕关",
+    "url": "https://zh.wikipedia.org/wiki/轘辕关",
+    "retrieved": "2026-10-16",
+    "infobox": "古轘辕关 河南省文物保护单位 地址 河南省 洛阳市 偃师区 府店镇 分类 古建筑 时代 清 编号 8-139 认定时间 2021年12月17日， 第八批",
+    "pageCoordinate": null,
+    "wikidata": "Q17009255",
+    "P625": []
+  },
+  {
+    "name": "叶县",
+    "url": "https://zh.wikipedia.org/wiki/叶县",
+    "retrieved": "2026-10-16",
+    "infobox": "叶县 县 叶县县衙 在平顶山市的位置 坐标： 33°37′22″N 113°21′19″E ﻿ / ﻿ 33.62268°N 113.35516°E ﻿ / 33.62268; 113.35516 国家 中华人民共和国 隶属行政区 河南省 平顶山市 政府駐地 九龍街道 下级行政区 18 3 街道 9 镇 5 乡 1 民族乡 政府 • 区委书记 古松 面积 • 总计 1,389.09平方公里（536.33平方英里） 人口 （ 2020年 ） [ 1 ] • 常住 702,345人 • 密度 506人/平方公里（1,310人/平方英里） • 城镇 246,783人 时区 北京时间 （ UTC+08:00 ） 郵政編碼 467200 電話區號 375 車輛號牌 豫D 行政区划代码 410422 • 年均温 15.2℃ [ 2 ] ℃ • 年降水 723.7 mm [ 2 ] 毫米 • 年日照 1916.4 h [ 2 ] 小時 舊稱 昆阳 網站 叶县人民政府门户网站",
+    "pageCoordinate": "33.62268; 113.35516",
+    "wikidata": "Q1337567",
+    "P625": [
+      {
+        "value": {
+          "latitude": 33.62268,
+          "longitude": 113.35516,
+          "altitude": null,
+          "precision": null,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": [
+          {
+            "hash": "0ee3b3ba1c958f4c3dcba7ed8091fe4b57311348",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "cb49f6fa327b245e4a5aaf48c44b3f503bcd4265",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 30239,
+                      "id": "Q30239"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      },
+      {
+        "value": {
+          "latitude": 33.55052,
+          "longitude": 113.33834,
+          "altitude": null,
+          "precision": 1e-05,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "references": [
+          {
+            "hash": "43a0088c51fd85e5a85d1b46412c3a635e6d4edc",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "d8fbf8671e3c630db61bfac691068cfb6857f243",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 837615,
+                      "id": "Q837615"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

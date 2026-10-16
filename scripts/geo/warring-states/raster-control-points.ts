@@ -1,3 +1,18 @@
-import fs from'node:fs';import sharp from'sharp';
-const manifest=JSON.parse(fs.readFileSync('scripts/geo/warring-states/raster-manifest.json','utf8'));
-for(const[id,src]of Object.entries(manifest.raster)as any){const file=`scripts/geo/warring-states/raw/${id}.${['G9','G11'].includes(id)?'jpg':'png'}`;const {width:w,height:h}=await sharp(file).metadata();const r=Math.max(w!/250,1.6),font=Math.max(w!/95,6);let s=`<svg width="${w}" height="${h}">`;src.controlPoints.forEach((p:any,i:number)=>{const[x,y]=p.svg;s+=`<circle cx="${x}" cy="${y}" r="${r}" fill="none" stroke="#00ffff" stroke-width="1"/><path d="M${x-r*2} ${y}H${x+r*2}M${x} ${y-r*2}V${y+r*2}" stroke="#00ffff" stroke-width=".5"/><text x="${x+r*2}" y="${y-r*2}" font-size="${font}" fill="#002cff" stroke="white" stroke-width=".2">${i+1}</text>`;});s+='</svg>';let b=await sharp(file).composite([{input:Buffer.from(s)}]).toBuffer();await sharp(b).resize({width:Math.min(1600,w!*2)}).toFile(`scripts/geo/warring-states/check/raster-${id}-control-points.png`);}
+import sharp from 'sharp';
+import { controlPoints, object, readJson, required } from './strict-input';
+const manifest = object(readJson('scripts/geo/warring-states/raster-manifest.json'));
+for (const [id, value] of Object.entries(object(manifest.raster))) {
+  const points = controlPoints(object(value).controlPoints);
+  const file = `scripts/geo/warring-states/raw/${id}.${['G9', 'G11'].includes(id) ? 'jpg' : 'png'}`;
+  const metadata = await sharp(file).metadata();
+  const width = required(metadata.width, `${id} width`), height = required(metadata.height, `${id} height`);
+  const radius = Math.max(width / 250, 1.6), font = Math.max(width / 95, 6);
+  let svg = `<svg width="${width}" height="${height}">`;
+  points.forEach((point, index) => {
+    const [x, y] = point.svg;
+    svg += `<circle cx="${x}" cy="${y}" r="${radius}" fill="none" stroke="#00ffff" stroke-width="1"/><path d="M${x - radius * 2} ${y}H${x + radius * 2}M${x} ${y - radius * 2}V${y + radius * 2}" stroke="#00ffff" stroke-width=".5"/><text x="${x + radius * 2}" y="${y - radius * 2}" font-size="${font}" fill="#002cff" stroke="white" stroke-width=".2">${index + 1}</text>`;
+  });
+  svg += '</svg>';
+  const buffer = await sharp(file).composite([{ input: Buffer.from(svg) }]).toBuffer();
+  await sharp(buffer).resize({ width: Math.min(1600, width * 2) }).toFile(`scripts/geo/warring-states/check/raster-${id}-control-points.png`);
+}

@@ -88,7 +88,7 @@
       "page": "https://commons.wikimedia.org/wiki/File:EN-WarringStatesAll260BCE.jpg",
       "author": "Philg88",
       "license": "CC BY-SA 3.0",
-      "role": "Published source map for tracing or independent comparison"
+      "role": "Diagnostic/reference only; G11 cartographic base exceeds 25 km registration budget and supplies no keyframe geometry"
     },
     "G12": {
       "ref": "G12",
@@ -98,7 +98,7 @@
       "page": "https://commons.wikimedia.org/wiki/File:%E6%88%B0%E5%9C%8B%E4%B8%83%E9%9B%84%E5%9C%B0%E5%9C%96-ZH-FR.png",
       "author": "User:丁志仁、User:Philg88",
       "license": "CC BY-SA 3.0",
-      "role": "Published source map for tracing or independent comparison"
+      "role": "Diagnostic/reference only; G11 cartographic base exceeds 25 km registration budget and supplies no keyframe geometry"
     },
     "ne-land": {
       "ref": "G19",
@@ -1186,7 +1186,8 @@
           "coordinateSource": "https://en.wikipedia.org/wiki/Hanzhong",
           "coordinateMethod": "urban coordinate proxy for source Nanzheng/Hanzhong"
         }
-      ]
+      ],
+      "registrationOnly": true
     },
     "G4": {
       "dataset": "G4",
@@ -3169,7 +3170,8 @@
           "coordinateSource": "https://en.wikipedia.org/wiki/Hanzhong",
           "coordinateMethod": "urban coordinate proxy for source Nanzheng/Hanzhong"
         }
-      ]
+      ],
+      "registrationOnly": true
     },
     "G7-reference": {
       "dataset": "G7",
@@ -4126,7 +4128,7 @@
           "note": "Undated published period schematic projected to 770 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
           "label": {
             "en": "ZHENG (later Xinzheng seat)",
-            "zh": "郑"
+            "zh": "郑（后来的新郑都城位置）"
           }
         },
         {
@@ -4288,7 +4290,7 @@
           "note": "Undated published period schematic projected to 650 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
           "label": {
             "en": "WEY (Chuqiu)",
-            "zh": "卫"
+            "zh": "卫（楚丘）"
           }
         },
         {
@@ -4530,7 +4532,7 @@
           "note": "Undated published period schematic projected to 600 BCE; broad extent retained; smaller annexed states have no individual source polygons.",
           "label": {
             "en": "WEY (Chuqiu)",
-            "zh": "卫"
+            "zh": "卫（楚丘）"
           }
         },
         {
@@ -5203,7 +5205,7 @@
           "note": "Whole-source-state reassignment: Wu→Yue 473 BCE; Chen→Chu 479 BCE; Cao→Song 487 BCE. No boundary redrawn.",
           "label": {
             "en": "YUE (former Wu lands)",
-            "zh": "越"
+            "zh": "越（原吴国地区）"
           }
         },
         {
@@ -5494,7 +5496,7 @@
           "note": "Whole-source-state reassignment: Wu→Yue 473 BCE; Chen→Chu 479 BCE; Cao→Song 487 BCE. No boundary redrawn.",
           "label": {
             "en": "YUE (former Wu lands)",
-            "zh": "越"
+            "zh": "越（原吴国地区）"
           }
         },
         {
@@ -5606,7 +5608,7 @@
           "note": "Remainder outside borrowed 350 BCE Three Jin source classes; not a reconstruction of the exact 403 BCE ducal domain.",
           "label": {
             "en": "JIN (residual; inferred)",
-            "zh": "晋"
+            "zh": "晋（剩余地区；推定）"
           }
         },
         {
@@ -6059,121 +6061,106 @@
         {
           "holder": "qin",
           "from": {
-            "raster": "G11",
+            "raster": "G8",
             "class": "qin"
           },
           "src": [
-            "G11"
+            "G8"
           ],
-          "note": "Published 260 BCE colour classes; source registration exceeds 25 km budget, disclosed rather than fitted away.",
+          "note": "280 BCE source extent carried forward to 260 BCE; not a reconstruction of intervening territorial changes. G11 is excluded because its registration exceeds budget. Zhou has no bounded G8 face and is omitted.",
           "label": {
-            "en": "QIN",
-            "zh": "秦"
+            "en": "QIN (280 BCE extent)",
+            "zh": "秦（前280年范围）"
           }
         },
         {
           "holder": "zhao",
           "from": {
-            "raster": "G11",
+            "raster": "G8",
             "class": "zhao"
           },
           "src": [
-            "G11"
+            "G8"
           ],
-          "note": "Published 260 BCE colour classes; source registration exceeds 25 km budget, disclosed rather than fitted away.",
+          "note": "280 BCE source extent carried forward to 260 BCE; not a reconstruction of intervening territorial changes. G11 is excluded because its registration exceeds budget. Zhou has no bounded G8 face and is omitted.",
           "label": {
-            "en": "ZHAO",
-            "zh": "赵"
+            "en": "ZHAO (280 BCE extent)",
+            "zh": "赵（前280年范围）"
           }
         },
         {
           "holder": "wei",
           "from": {
-            "raster": "G11",
+            "raster": "G8",
             "class": "wei"
           },
           "src": [
-            "G11"
+            "G8"
           ],
-          "note": "Published 260 BCE colour classes; source registration exceeds 25 km budget, disclosed rather than fitted away.",
+          "note": "280 BCE source extent carried forward to 260 BCE; not a reconstruction of intervening territorial changes. G11 is excluded because its registration exceeds budget. Zhou has no bounded G8 face and is omitted.",
           "label": {
-            "en": "WEI",
-            "zh": "魏"
+            "en": "WEI (280 BCE extent)",
+            "zh": "魏（前280年范围）"
           }
         },
         {
           "holder": "han",
           "from": {
-            "raster": "G11",
+            "raster": "G8",
             "class": "han"
           },
           "src": [
-            "G11"
+            "G8"
           ],
-          "note": "Published 260 BCE colour classes; source registration exceeds 25 km budget, disclosed rather than fitted away.",
+          "note": "280 BCE source extent carried forward to 260 BCE; not a reconstruction of intervening territorial changes. G11 is excluded because its registration exceeds budget. Zhou has no bounded G8 face and is omitted.",
           "label": {
-            "en": "HAN",
-            "zh": "韩"
+            "en": "HAN (280 BCE extent)",
+            "zh": "韩（前280年范围）"
           }
         },
         {
           "holder": "qi",
           "from": {
-            "raster": "G11",
+            "raster": "G8",
             "class": "qi"
           },
           "src": [
-            "G11"
+            "G8"
           ],
-          "note": "Published 260 BCE colour classes; source registration exceeds 25 km budget, disclosed rather than fitted away.",
+          "note": "280 BCE source extent carried forward to 260 BCE; not a reconstruction of intervening territorial changes. G11 is excluded because its registration exceeds budget. Zhou has no bounded G8 face and is omitted.",
           "label": {
-            "en": "QI",
-            "zh": "齐"
+            "en": "QI (280 BCE extent)",
+            "zh": "齐（前280年范围）"
           }
         },
         {
           "holder": "chu",
           "from": {
-            "raster": "G11",
+            "raster": "G8",
             "class": "chu"
           },
           "src": [
-            "G11"
+            "G8"
           ],
-          "note": "Published 260 BCE colour classes; source registration exceeds 25 km budget, disclosed rather than fitted away.",
+          "note": "280 BCE source extent carried forward to 260 BCE; not a reconstruction of intervening territorial changes. G11 is excluded because its registration exceeds budget. Zhou has no bounded G8 face and is omitted.",
           "label": {
-            "en": "CHU",
-            "zh": "楚"
+            "en": "CHU (280 BCE extent)",
+            "zh": "楚（前280年范围）"
           }
         },
         {
           "holder": "yan",
           "from": {
-            "raster": "G11",
+            "raster": "G8",
             "class": "yan"
           },
           "src": [
-            "G11"
+            "G8"
           ],
-          "note": "Published 260 BCE colour classes; source registration exceeds 25 km budget, disclosed rather than fitted away.",
+          "note": "280 BCE source extent carried forward to 260 BCE; not a reconstruction of intervening territorial changes. G11 is excluded because its registration exceeds budget. Zhou has no bounded G8 face and is omitted.",
           "label": {
-            "en": "YAN",
-            "zh": "燕"
-          }
-        },
-        {
-          "holder": "zhou",
-          "from": {
-            "raster": "G11",
-            "class": "zhou"
-          },
-          "src": [
-            "G11"
-          ],
-          "note": "Published 260 BCE colour classes; source registration exceeds 25 km budget, disclosed rather than fitted away.",
-          "label": {
-            "en": "ZHOU",
-            "zh": "周"
+            "en": "YAN (280 BCE extent)",
+            "zh": "燕（前280年范围）"
           }
         },
         {
@@ -6183,14 +6170,12 @@
             "class": "lu"
           },
           "src": [
-            "G8",
-            "G11",
-            "S1"
+            "G8"
           ],
-          "note": "Earlier bounded 280 BCE source component carried forward to 260 BCE; G11 labels these places without separate state faces.",
+          "note": "280 BCE source extent carried forward to 260 BCE; not a reconstruction of intervening territorial changes. G11 is excluded because its registration exceeds budget. Zhou has no bounded G8 face and is omitted.",
           "label": {
             "en": "LU (280 BCE extent)",
-            "zh": "鲁"
+            "zh": "鲁（前280年范围）"
           }
         },
         {
@@ -6200,27 +6185,25 @@
             "class": "wey"
           },
           "src": [
-            "G8",
-            "G11",
-            "S1"
+            "G8"
           ],
-          "note": "Earlier bounded 280 BCE source component carried forward to 260 BCE; G11 labels these places without separate state faces.",
+          "note": "280 BCE source extent carried forward to 260 BCE; not a reconstruction of intervening territorial changes. G11 is excluded because its registration exceeds budget. Zhou has no bounded G8 face and is omitted.",
           "label": {
             "en": "WEY (280 BCE extent)",
-            "zh": "卫"
+            "zh": "卫（前280年范围）"
           }
         }
       ],
-      "method": "G11 published 260 BCE map; over-budget registration",
+      "method": "G8 280 BCE extent carried forward; 260 BCE changes not reconstructed",
       "checks": [
         {
-          "name": "G11 published 260 BCE map; over-budget registration",
+          "name": "G8 280 BCE extent carried forward; 260 BCE changes not reconstructed",
           "center": [
             113,
             33
           ],
           "zoom": 3.9,
-          "source": "G11"
+          "source": "G8"
         }
       ]
     },
@@ -6231,16 +6214,14 @@
         {
           "holder": "qin",
           "from": {
-            "raster": "G11",
+            "raster": "G8",
             "class": "qin"
           },
           "src": [
-            "G11",
-            "G15",
-            "G17",
+            "G8",
             "S1"
           ],
-          "note": "Fallback: whole Han→Qin 230 BCE; combined Zhou→Qin by 249 BCE; Lu→Chu 256 BCE. Qin new commanderies not drawn because G15 fit exceeds budget; source geography retained.",
+          "note": "Whole-source-state reassignment: Han→Qin 230 BCE; Lu→Chu 256 BCE. Remaining geometry is the 280 BCE G8 extent, not a 230 BCE boundary reconstruction. No Qin commandery gains are traced; failed or insufficient G11/G13/G15/G16/G17 registrations are excluded.",
           "label": {
             "en": "QIN",
             "zh": "秦"
@@ -6249,16 +6230,14 @@
         {
           "holder": "zhao",
           "from": {
-            "raster": "G11",
+            "raster": "G8",
             "class": "zhao"
           },
           "src": [
-            "G11",
-            "G15",
-            "G17",
+            "G8",
             "S1"
           ],
-          "note": "Fallback: whole Han→Qin 230 BCE; combined Zhou→Qin by 249 BCE; Lu→Chu 256 BCE. Qin new commanderies not drawn because G15 fit exceeds budget; source geography retained.",
+          "note": "Whole-source-state reassignment: Han→Qin 230 BCE; Lu→Chu 256 BCE. Remaining geometry is the 280 BCE G8 extent, not a 230 BCE boundary reconstruction. No Qin commandery gains are traced; failed or insufficient G11/G13/G15/G16/G17 registrations are excluded.",
           "label": {
             "en": "ZHAO",
             "zh": "赵"
@@ -6267,16 +6246,14 @@
         {
           "holder": "wei",
           "from": {
-            "raster": "G11",
+            "raster": "G8",
             "class": "wei"
           },
           "src": [
-            "G11",
-            "G15",
-            "G17",
+            "G8",
             "S1"
           ],
-          "note": "Fallback: whole Han→Qin 230 BCE; combined Zhou→Qin by 249 BCE; Lu→Chu 256 BCE. Qin new commanderies not drawn because G15 fit exceeds budget; source geography retained.",
+          "note": "Whole-source-state reassignment: Han→Qin 230 BCE; Lu→Chu 256 BCE. Remaining geometry is the 280 BCE G8 extent, not a 230 BCE boundary reconstruction. No Qin commandery gains are traced; failed or insufficient G11/G13/G15/G16/G17 registrations are excluded.",
           "label": {
             "en": "WEI",
             "zh": "魏"
@@ -6285,16 +6262,14 @@
         {
           "holder": "qin",
           "from": {
-            "raster": "G11",
+            "raster": "G8",
             "class": "han"
           },
           "src": [
-            "G11",
-            "G15",
-            "G17",
+            "G8",
             "S1"
           ],
-          "note": "Fallback: whole Han→Qin 230 BCE; combined Zhou→Qin by 249 BCE; Lu→Chu 256 BCE. Qin new commanderies not drawn because G15 fit exceeds budget; source geography retained.",
+          "note": "Whole-source-state reassignment: Han→Qin 230 BCE; Lu→Chu 256 BCE. Remaining geometry is the 280 BCE G8 extent, not a 230 BCE boundary reconstruction. No Qin commandery gains are traced; failed or insufficient G11/G13/G15/G16/G17 registrations are excluded.",
           "label": {
             "en": "QIN",
             "zh": "秦"
@@ -6303,16 +6278,14 @@
         {
           "holder": "qi",
           "from": {
-            "raster": "G11",
+            "raster": "G8",
             "class": "qi"
           },
           "src": [
-            "G11",
-            "G15",
-            "G17",
+            "G8",
             "S1"
           ],
-          "note": "Fallback: whole Han→Qin 230 BCE; combined Zhou→Qin by 249 BCE; Lu→Chu 256 BCE. Qin new commanderies not drawn because G15 fit exceeds budget; source geography retained.",
+          "note": "Whole-source-state reassignment: Han→Qin 230 BCE; Lu→Chu 256 BCE. Remaining geometry is the 280 BCE G8 extent, not a 230 BCE boundary reconstruction. No Qin commandery gains are traced; failed or insufficient G11/G13/G15/G16/G17 registrations are excluded.",
           "label": {
             "en": "QI",
             "zh": "齐"
@@ -6321,16 +6294,14 @@
         {
           "holder": "chu",
           "from": {
-            "raster": "G11",
+            "raster": "G8",
             "class": "chu"
           },
           "src": [
-            "G11",
-            "G15",
-            "G17",
+            "G8",
             "S1"
           ],
-          "note": "Fallback: whole Han→Qin 230 BCE; combined Zhou→Qin by 249 BCE; Lu→Chu 256 BCE. Qin new commanderies not drawn because G15 fit exceeds budget; source geography retained.",
+          "note": "Whole-source-state reassignment: Han→Qin 230 BCE; Lu→Chu 256 BCE. Remaining geometry is the 280 BCE G8 extent, not a 230 BCE boundary reconstruction. No Qin commandery gains are traced; failed or insufficient G11/G13/G15/G16/G17 registrations are excluded.",
           "label": {
             "en": "CHU",
             "zh": "楚"
@@ -6339,37 +6310,17 @@
         {
           "holder": "yan",
           "from": {
-            "raster": "G11",
+            "raster": "G8",
             "class": "yan"
           },
           "src": [
-            "G11",
-            "G15",
-            "G17",
+            "G8",
             "S1"
           ],
-          "note": "Fallback: whole Han→Qin 230 BCE; combined Zhou→Qin by 249 BCE; Lu→Chu 256 BCE. Qin new commanderies not drawn because G15 fit exceeds budget; source geography retained.",
+          "note": "Whole-source-state reassignment: Han→Qin 230 BCE; Lu→Chu 256 BCE. Remaining geometry is the 280 BCE G8 extent, not a 230 BCE boundary reconstruction. No Qin commandery gains are traced; failed or insufficient G11/G13/G15/G16/G17 registrations are excluded.",
           "label": {
             "en": "YAN",
             "zh": "燕"
-          }
-        },
-        {
-          "holder": "qin",
-          "from": {
-            "raster": "G11",
-            "class": "zhou"
-          },
-          "src": [
-            "G11",
-            "G15",
-            "G17",
-            "S1"
-          ],
-          "note": "Fallback: whole Han→Qin 230 BCE; combined Zhou→Qin by 249 BCE; Lu→Chu 256 BCE. Qin new commanderies not drawn because G15 fit exceeds budget; source geography retained.",
-          "label": {
-            "en": "QIN",
-            "zh": "秦"
           }
         },
         {
@@ -6380,13 +6331,9 @@
           },
           "src": [
             "G8",
-            "G11",
-            "S1",
-            "G15",
-            "G17",
             "S1"
           ],
-          "note": "Fallback: whole Han→Qin 230 BCE; combined Zhou→Qin by 249 BCE; Lu→Chu 256 BCE. Qin new commanderies not drawn because G15 fit exceeds budget; source geography retained.",
+          "note": "Whole-source-state reassignment: Han→Qin 230 BCE; Lu→Chu 256 BCE. Remaining geometry is the 280 BCE G8 extent, not a 230 BCE boundary reconstruction. No Qin commandery gains are traced; failed or insufficient G11/G13/G15/G16/G17 registrations are excluded.",
           "label": {
             "en": "CHU",
             "zh": "楚"
@@ -6400,29 +6347,25 @@
           },
           "src": [
             "G8",
-            "G11",
-            "S1",
-            "G15",
-            "G17",
             "S1"
           ],
-          "note": "Fallback: whole Han→Qin 230 BCE; combined Zhou→Qin by 249 BCE; Lu→Chu 256 BCE. Qin new commanderies not drawn because G15 fit exceeds budget; source geography retained.",
+          "note": "Whole-source-state reassignment: Han→Qin 230 BCE; Lu→Chu 256 BCE. Remaining geometry is the 280 BCE G8 extent, not a 230 BCE boundary reconstruction. No Qin commandery gains are traced; failed or insufficient G11/G13/G15/G16/G17 registrations are excluded.",
           "label": {
             "en": "WEY",
             "zh": "卫"
           }
         }
       ],
-      "method": "Whole-state reassignment fallback; inferred",
+      "method": "G8 carry-forward with Han/Lu whole-state reassignment; inferred",
       "checks": [
         {
-          "name": "Whole-state reassignment fallback; inferred",
+          "name": "G8 carry-forward with Han/Lu whole-state reassignment; inferred",
           "center": [
             113,
             33
           ],
           "zoom": 3.9,
-          "source": "G15"
+          "source": "G8"
         }
       ]
     },
@@ -6435,36 +6378,32 @@
           "from": {
             "union": [
               {
-                "raster": "G11",
+                "raster": "G8",
                 "class": "qin"
               },
               {
-                "raster": "G11",
+                "raster": "G8",
                 "class": "zhao"
               },
               {
-                "raster": "G11",
+                "raster": "G8",
                 "class": "wei"
               },
               {
-                "raster": "G11",
+                "raster": "G8",
                 "class": "han"
               },
               {
-                "raster": "G11",
+                "raster": "G8",
                 "class": "qi"
               },
               {
-                "raster": "G11",
+                "raster": "G8",
                 "class": "chu"
               },
               {
-                "raster": "G11",
+                "raster": "G8",
                 "class": "yan"
-              },
-              {
-                "raster": "G11",
-                "class": "zhou"
               },
               {
                 "raster": "G8",
@@ -6477,28 +6416,26 @@
             ]
           },
           "src": [
-            "G11",
-            "G15",
-            "G17",
+            "G8",
             "S1"
           ],
-          "note": "Union of represented conquered-state polygons; no Lingnan or northern steppe extension, no unbounded Yue additions.",
+          "note": "Union of represented G8-derived state extents after the six kingdoms were annexed. This is a schematic union of 280 BCE geography, not the Qin imperial boundary in 221 BCE. No Lingnan, northern steppe or unbounded Yue addition is supplied. Wey’s dependent ruling house survived until 209 BCE; this fill does not date its abolition.",
           "label": {
-            "en": "QIN EMPIRE",
-            "zh": "秦"
+            "en": "QIN EMPIRE (schematic union)",
+            "zh": "秦帝国（示意合并）"
           }
         }
       ],
-      "method": "Union of represented conquered states; inferred",
+      "method": "Union of G8-derived represented state extents; inferred",
       "checks": [
         {
-          "name": "Union of represented conquered states; inferred",
+          "name": "Union of G8-derived represented state extents; inferred",
           "center": [
             113,
             33
           ],
           "zoom": 3.9,
-          "source": "G17"
+          "source": "G8"
         }
       ]
     }

@@ -1,4 +1,14 @@
 import fs from 'node:fs';
-import { candidates,evaluate } from '../lib/fit';
-const m=JSON.parse(fs.readFileSync('scripts/geo/warring-states/raster-manifest.json','utf8'));
-for(const [id,src] of Object.entries(m.raster) as any){const results=candidates(src.projection,src.controlPoints).map(c=>evaluate(c.proj,c.kind,src.controlPoints)).sort((a,b)=>a.report.looRmsKm-b.report.looRmsKm);console.log(id,JSON.stringify(results.map(x=>x.report),null,2));fs.writeFileSync(`scripts/geo/warring-states/check/raster-${id}-fit.json`,JSON.stringify(results[0].report,null,2));}
+import { candidates, evaluate } from '../lib/fit';
+import { controlPoints, object, readJson, required, string } from './strict-input';
+const manifest = object(readJson('scripts/geo/warring-states/raster-manifest.json'));
+for (const [id, value] of Object.entries(object(manifest.raster))) {
+  const source = object(value);
+  const points = controlPoints(source.controlPoints);
+  const results = candidates(string(source.projection), points)
+    .map((candidate) => evaluate(candidate.proj, candidate.kind, points))
+    .sort((a, b) => a.report.looRmsKm - b.report.looRmsKm);
+  const best = required(results[0], `${id} registration result`);
+  console.log(id, JSON.stringify(results.map((result) => result.report), null, 2));
+  fs.writeFileSync(`scripts/geo/warring-states/check/raster-${id}-fit.json`, JSON.stringify(best.report, null, 2));
+}

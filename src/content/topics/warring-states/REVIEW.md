@@ -1,52 +1,53 @@
-# Warring States data delivery review
+# Warring States second-pass delivery review
 
-Draft English content and map data are present. **Content validation passes; full geographic acceptance does not.** Chinese fields intentionally retain the requested 【待译】 English text.
+English and Chinese editorial drafts are complete. The topic remains `draft`: content validation and type checking do not replace historian review or establish precise ancient boundaries.
 
-Counts: 11 keyframes; 129 control features; 23 entities; 173 events (including 74 person placards and 36 battles); 26 schematic routes; 105 sources; 11 chapters; 49 beats; 17 glossary terms; 60 river features. All 18 Commons downloads have API attribution/licence metadata and verified SHA-256 hashes.
+## Requested checks
 
-Geometry: 266 rings; 0 zero-area; 0 self-crossing. control.json is 280.7 KiB against the manifest's 1.2 MB budget. Holder adjacency has no equal-colour neighbours.
+- `pnpm exec tsc --noEmit -p tsconfig.json`: clean after replacing untyped JSON use with narrowing, typed tuples and checked indexed access. Every topic TypeScript file has zero explicit `any` types, non-null assertions or suppression directives.
+- `pnpm tsx scripts/geo/lib/colour-holders.ts --topic warring-states --write`: run on the regenerated map; 21 represented holders, 70 neighbouring pairs across all 11 keyframes, 8 tokens, zero conflicts. The check-image palette now exports that same assignment.
+- Regional land already existed; no land regeneration was required.
+- `pnpm validate`: 23 topics, 0 errors, 0 warnings. `pnpm exec tsc`: clean.
+- No build, test, e2e or shoot was run. Edits are confined to the topic and its geography folder; no engine or package manifest changes.
 
-## Per-keyframe registration RMS
+## Content and source review
 
-Values are kilometres. They measure alignment with the source, not historical boundary accuracy. Supplements retain their own fit; inferred frames do not gain independent accuracy.
+Original audit accounting: **53 units; 5 fully closed and 48 remaining**, including partially resolved questions. All 26 routes were reviewed; their retained station order, deleted unsupported stops, source passages and remaining uncertainty are in their dedicated S170–S195 bilingual notes. Exact roads, many crossings and some site identifications remain open. The runtime movement schema has no `note` field, so the notes are stored in these route-specific sources and the Movement routes table, with schematic movement labels.
 
-| Frame | Date | Source RMS km |
-|---|---|---|
-| K1 | 770 BCE | G10 22.087 |
-| K2 | 650 BCE | G10 22.087 |
-| K3 | 600 BCE | G10 22.087 |
-| K4 | 500 BCE | G3 15.342; G10 22.087 |
-| K5 | 473 BCE | G3 15.342; G10 22.087 |
-| K6 | 403 BCE | G3 15.342; G7 7.869 |
-| K7 | 350 BCE | G7 7.869 |
-| K8 | 280 BCE | G8 7.869 |
-| K9 | 260 BCE | G11 26.102; G8 7.869 |
-| K10 | 230 BCE | G11 26.102; G8 7.869 |
-| K11 | 221 BCE | G11 26.102; G8 7.869 |
+Substantive corrections include removing unsupported early migration stations; removing Chaoge from the Jin approach and unsupported Wu campaign stops; replacing Pinglu with the source's Daliang direction; distinguishing the 229 BCE `shangdi` from Shangdang; and replacing Li Xin's contradictory eastward line with an explicitly disputed westward Father-city/Baofeng interpretation. Named city coordinates were checked separately from battlefield precision. Conflicting Chengpu/Maling P625 statements were not adopted blindly. The inventory preserves missing statements and redirects as evidence of limits, not successful identifications.
 
-Inference-based frames: **K1, K2, K3, K4 (G10 supplements), K5, K6, K9 (Lu/Wey supplements), K10, K11**. K7 and K8 directly trace their dated maps.
+Official museum object pages replace the unverified Shang Yang measure / Du tally research target; the Zeng bell count is checked against the museum record. Zhang Guangzhi's checked discussion gives a named modern source for Changping numerical objections and the limits of the Yonglu sample. The original excavation report and original demographic models remain unconsulted. The unsupported narrow Dujiangyan construction range and unused Gu Donggao war-count research target were removed. Wey's 209 BCE chronology is reconciled with the transmitted regnal sequence; its precise final residence remains open. Chu's 224/223 BCE chronology and Li Xin's inferred date are qualified in both languages.
 
-## Outstanding geography limits
+Details: [AUDIT.md](AUDIT.md), [HISTORICAL-REVIEW.md](HISTORICAL-REVIEW.md), [data/SOURCES.md](data/SOURCES.md), and the saved [coordinate inventory](../../../../scripts/geo/warring-states/verification-sites.json).
 
-- G9 is a point-distribution map, so G10 supplies early bounded regions. K1–K3 reuse undated period geometry: minor annexations without bounded source shapes are omitted, not invented. K1 Zheng is explicitly labelled as the later Xinzheng position.
-- G11, the 260 BCE source, has RMS 26.102 km / maximum 66.657 km and exceeds the 25 km budget. K9–K11 retain this draft limitation. The G15 county map also exceeds budget (RMS 37.237 km / maximum 68.657 km); it supplies no territorial geometry. K10 uses the specified whole-state fallback.
-- G13 has only 5 secure control points; G17 has 8. G16 has no defensible full fit. These are reference-only; the requirement for at least 12 reliable controls on every map remains unmet. G9 is slightly above its check-only 40 km maximum budget.
-- Four originals remain rate-limited (G9/G11/G12/G18); official published renders are retained. Original and render hashes are recorded separately. No guessed detail replaces missing pixels.
-- Routes connect source-supported named stations schematically. Exact ancient roads, passes and battlefield footprints are not established. All 26 individual station lists and limitations appear in data/SOURCES.md and AUDIT.md.
-- Coastline clipping changes early Ju by about 22% and G8 Yan by about 25% (including outside-plate portions). Area-retention results and the coastline-step workaround are documented in the geography ledger.
-- Intended chapter/control start is 770 BCE and the final chapter reaches 206 BCE. The spec-required 771 BCE King You event is preserved accurately; the current engine derives the overall time extent from all non-site events and therefore includes that precursor year.
+## Registration changes
 
-## Every remaining marked fact
+No residuals were made smaller by inventing control points. G11's over-budget fit, G13's five controls, G17's eight controls and G16's absent fit remain documented; these sources are excluded from all frame dependencies. G15 is also excluded. G8 has RMS 7.869 km, maximum 18.958 km and leave-one-out maximum 21.033 km. Its 280 BCE outlines are carried forward in K9, selectively reassigned in K10 and unioned schematically in K11. The missing Zhou face is not invented. These are explicitly qualified teaching approximations, not independently recovered 260/230/221 BCE boundaries.
 
-[AUDIT.md](AUDIT.md) contains all 50 marked source/event records and all 3 marked chapter passages, including full per-route station lists. The unresolved questions are:
+Final geometry: **128 features; 431 rings; zero zero-area rings; zero self-crossings**. Real-land clipping retained every incoming holder. Early G10 dating, missing minor-state geometry, borrowed Three Jin boundaries, coastline changes and clipping losses remain disclosed. Every published feature is approximate; Chinese labels mirror the English geographic caveats.
 
-- Exact sites at Kuiqiu, Chengpu, Boju, Fujiao, Shimen, Guiling, Maling, Xiuyu, Danyang, Yuyu, Zui, Pingyang, Fei and Chengfu; Shimen’s annals opponent designation; Goujian’s stay in Wu; Li Xin’s campaign year.
-- Complete Zeng tomb and Yonglu excavation publications, Yonglu issue/authors/osteology and skeleton count, named Changping demographic estimates and page references, Dujiangyan’s narrow 256–251 BCE dating.
-- Wey’s final chronology and residence; Yue after 306 BCE; the Shang Yang measure and Du tiger tally museum object records; Gu Donggao war-count definitions, edition and pages.
-- Remaining site/Wikidata matching, coordinate precision, and all 26 routes’ station-by-station textual reconciliation. Individual route notes also identify uncertain crossings/departures, Confucius visit order, Qin pass corridors and the final imperial tour’s 211/210 BCE chronology.
+Details: [SOURCES-GEO.md](../../../../scripts/geo/warring-states/SOURCES-GEO.md) and [SECOND-PASS-GEO.md](../../../../scripts/geo/warring-states/SECOND-PASS-GEO.md).
 
-## Validation and provenance
+## Chinese drafts and human review
 
-Latest pnpm validate: **23 topics, 0 errors, 0 warnings**. No pending engine-schema blockers. No build, test, e2e or shoot was run. All edits for this task are restricted to the topic, its geography folder and its two public geography files; concurrent engine work is untouched.
+All bilingual fields have Chinese drafts; no translation marker remains. Each chapter main body contains 350–500 Han characters, counted without frontmatter, markup, digits, punctuation or More blocks. Complete Num/Term opening-tag sequences match English, including source and term IDs. The existing 17 glossary terms are retained to preserve the first-draft links and chapter tag structure.
 
-Per-frame sources, licences, models, control points, RMS/max/leave-one-out residuals, methods and inferences: [data/SOURCES.md](data/SOURCES.md) and scripts/geo/warring-states/SOURCES-GEO.md. Side-by-side images: scripts/geo/warring-states/check/geo-K1.png through geo-K11.png.
+| Chapter | Main-body Han characters |
+|---|---:|
+| 00 | 358 |
+| 01 | 350 |
+| 02 | 361 |
+| 03 | 360 |
+| 04 | 369 |
+| 05 | 354 |
+| 06 | 364 |
+| 07 | 369 |
+| 08 | 363 |
+| 09 | 364 |
+| 10 | 359 |
+
+Machine-readable measurements: [CHINESE-DRAFT-CHECKS.json](CHINESE-DRAFT-CHECKS.json).
+
+A historian should check the Chinese Changping passage and Yonglu interpretation; all killing, human-sacrifice, occupation, mutilation and water-attack passages; the Chu campaign chronology and Father-city interpretation; Qin's killing of “诸生”; and the disputed sites/routes and late-frame carry-forward. Publication review of the sensitive Chinese passages has not been claimed. The detailed outstanding questions and exact original audit dispositions are in AUDIT.md.
+
+Counts after this pass: 11 keyframes, 128 control features, 23 entities, 173 events, 26 routes, 116 source records, 11 chapters, 49 beats, 17 glossary terms, 8 presets and 60 river features.

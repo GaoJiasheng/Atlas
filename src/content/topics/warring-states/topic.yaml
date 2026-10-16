@@ -1,7 +1,7 @@
 id: warring-states
-title: { en: "The Spring and Autumn and Warring States", zh: "【待译】The Spring and Autumn and Warring States" }
-subtitle: { en: "770–221 BCE", zh: "【待译】770–221 BCE" }
-shortTitle: { en: "Spring and Autumn · Warring States", zh: "【待译】Spring and Autumn · Warring States" }
+title: { en: "The Spring and Autumn and Warring States", zh: "春秋战国" }
+subtitle: { en: "770–221 BCE", zh: "前770年—前221年" }
+shortTitle: { en: "Spring and Autumn · Warring States", zh: "春秋·战国" }
 subject: history
 tags: [history, time]
 moe: []
@@ -22,10 +22,10 @@ basemap:
 colorBy: entity
 datePrecision: year
 blocLabels:
-  neutral: { en: "Zhou-era states", zh: "【待译】Zhou-era states" }
-  out: { en: "State conquered", zh: "【待译】State conquered" }
+  neutral: { en: "Zhou-era states", zh: "诸侯国" }
+  out: { en: "State conquered", zh: "已被兼并" }
 strings:
-  joined: { en: "First represented", zh: "【待译】First represented" }
-  left: { en: "Conquered or abolished", zh: "【待译】Conquered or abolished" }
-  notYet: { en: "Not yet represented", zh: "【待译】Not yet represented" }
-note: { en: "Approximate ancient boundaries · reconstructed rivers · modern coastline · English draft; Chinese translation pending", zh: "【待译】Approximate ancient boundaries · reconstructed rivers · modern coastline · English draft; Chinese translation pending" }
+  joined: { en: "First represented", zh: "首次图示" }
+  left: { en: "Conquered or abolished", zh: "被兼并或废除" }
+  notYet: { en: "Not yet represented", zh: "尚未图示" }
+note: { en: "Approximate ancient boundaries · reconstructed rivers · modern coastline · English and Chinese drafts for review", zh: "古代边界为近似·复原河道·今日海岸线·中英文均为待审稿" }

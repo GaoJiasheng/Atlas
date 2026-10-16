@@ -4,7 +4,7 @@
       "id": "plate",
       "label": {
         "en": "Whole plate",
-        "zh": "【待译】Whole plate"
+        "zh": "全图"
       },
       "camera": {
         "center": [
@@ -18,7 +18,7 @@
       "id": "central-plain",
       "label": {
         "en": "Central Plain",
-        "zh": "【待译】Central Plain"
+        "zh": "中原"
       },
       "camera": {
         "center": [
@@ -32,7 +32,7 @@
       "id": "guanzhong",
       "label": {
         "en": "Guanzhong",
-        "zh": "【待译】Guanzhong"
+        "zh": "关中"
       },
       "camera": {
         "center": [
@@ -46,7 +46,7 @@
       "id": "qi-lu",
       "label": {
         "en": "Qi and Lu",
-        "zh": "【待译】Qi and Lu"
+        "zh": "齐鲁"
       },
       "camera": {
         "center": [
@@ -60,7 +60,7 @@
       "id": "jiang-han",
       "label": {
         "en": "Jiang–Han",
-        "zh": "【待译】Jiang–Han"
+        "zh": "江汉"
       },
       "camera": {
         "center": [
@@ -74,7 +74,7 @@
       "id": "wu-yue",
       "label": {
         "en": "Wu and Yue",
-        "zh": "【待译】Wu and Yue"
+        "zh": "吴越"
       },
       "camera": {
         "center": [
@@ -88,7 +88,7 @@
       "id": "ba-shu",
       "label": {
         "en": "Ba and Shu",
-        "zh": "【待译】Ba and Shu"
+        "zh": "巴蜀"
       },
       "camera": {
         "center": [
@@ -102,7 +102,7 @@
       "id": "changping-view",
       "label": {
         "en": "Changping",
-        "zh": "【待译】Changping"
+        "zh": "长平"
       },
       "camera": {
         "center": [

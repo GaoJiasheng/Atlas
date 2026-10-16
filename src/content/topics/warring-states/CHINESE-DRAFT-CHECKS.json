@@ -1,0 +1,72 @@
+{
+  "date": "2026-10-16",
+  "method": "Main body before first More; count Han characters U+3400–U+9FFF after removing markup; exclude frontmatter, punctuation, digits and More blocks. Compare complete Num/Term opening-tag sequences across EN/ZH.",
+  "chapters": [
+    {
+      "chapter": "00-background",
+      "title": "背景：周与它的世界",
+      "mainHanCharacters": 358,
+      "numTermTagParity": true
+    },
+    {
+      "chapter": "01-eastern-zhou",
+      "title": "周王室东迁",
+      "mainHanCharacters": 350,
+      "numTermTagParity": true
+    },
+    {
+      "chapter": "02-qi-hegemony",
+      "title": "齐桓公与早期霸政",
+      "mainHanCharacters": 361,
+      "numTermTagParity": true
+    },
+    {
+      "chapter": "03-jin-and-chu",
+      "title": "晋与楚",
+      "mainHanCharacters": 360,
+      "numTermTagParity": true
+    },
+    {
+      "chapter": "04-wu-and-yue",
+      "title": "吴与越",
+      "mainHanCharacters": 369,
+      "numTermTagParity": true
+    },
+    {
+      "chapter": "05-partition-of-jin",
+      "title": "三家分晋",
+      "mainHanCharacters": 354,
+      "numTermTagParity": true
+    },
+    {
+      "chapter": "06-reforms",
+      "title": "变法：魏、楚与秦",
+      "mainHanCharacters": 364,
+      "numTermTagParity": true
+    },
+    {
+      "chapter": "07-alliances",
+      "title": "合纵与连横",
+      "mainHanCharacters": 369,
+      "numTermTagParity": true
+    },
+    {
+      "chapter": "08-changping-handan",
+      "title": "长平与邯郸",
+      "mainHanCharacters": 363,
+      "numTermTagParity": true
+    },
+    {
+      "chapter": "09-qin-conquest",
+      "title": "秦兼并六国",
+      "mainHanCharacters": 364,
+      "numTermTagParity": true
+    },
+    {
+      "chapter": "10-after-221",
+      "title": "前221年以后：帝国与记忆",
+      "mainHanCharacters": 359,
+      "numTermTagParity": true
+    }
+  ]
+}

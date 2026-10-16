@@ -8,7 +8,7 @@
     "linger": "-0750",
     "label": {
       "en": "Zhou court moves east (schematic itinerary)",
-      "zh": "【待译】Zhou court moves east (schematic itinerary)"
+      "zh": "周平王东迁（示意路线）"
     },
     "path": {
       "type": "LineString",
@@ -16,22 +16,6 @@
         [
           108.78,
           34.23
-        ],
-        [
-          109.2,
-          34.38
-        ],
-        [
-          110.09,
-          34.57
-        ],
-        [
-          110.9,
-          34.6
-        ],
-        [
-          111.76,
-          34.76
         ],
         [
           112.45,
@@ -50,7 +34,7 @@
     "linger": "-0650",
     "label": {
       "en": "Qi campaign north to aid Yan (schematic itinerary)",
-      "zh": "【待译】Qi campaign north to aid Yan (schematic itinerary)"
+      "zh": "齐北上救燕（示意路线）"
     },
     "path": {
       "type": "LineString",
@@ -60,12 +44,8 @@
           36.889756
         ],
         [
-          116.35,
-          39.88
-        ],
-        [
-          118.7,
-          40.0
+          118.697222,
+          40.005833
         ],
         [
           118.89,
@@ -83,7 +63,7 @@
     "linger": "-0630",
     "label": {
       "en": "Chong’er’s exile itinerary (schematic itinerary)",
-      "zh": "【待译】Chong’er’s exile itinerary (schematic itinerary)"
+      "zh": "重耳流亡与返晋（示意路线）"
     },
     "path": {
       "type": "LineString",
@@ -93,8 +73,8 @@
           36.41
         ],
         [
-          114.25,
-          35.62
+          114.7,
+          35.55
         ],
         [
           118.337908,
@@ -117,8 +97,8 @@
           30.405722
         ],
         [
-          107.4,
-          34.5
+          107.35907,
+          34.46669
         ],
         [
           111.48,
@@ -136,7 +116,7 @@
     "linger": "-0627",
     "label": {
       "en": "Chu campaign toward Chengpu (schematic itinerary)",
-      "zh": "【待译】Chu campaign toward Chengpu (schematic itinerary)"
+      "zh": "楚军赴城濮（示意路线）"
     },
     "path": {
       "type": "LineString",
@@ -144,14 +124,6 @@
         [
           112.190298,
           30.405722
-        ],
-        [
-          113.0,
-          33.25
-        ],
-        [
-          114.9,
-          33.62
         ],
         [
           115.65,
@@ -173,17 +145,13 @@
     "linger": "-0627",
     "label": {
       "en": "Jin campaign toward Chengpu (schematic itinerary)",
-      "zh": "【待译】Jin campaign toward Chengpu (schematic itinerary)"
+      "zh": "晋军赴城濮（示意路线）"
     },
     "path": {
       "type": "LineString",
       "coordinates": [
         [
           111.48,
-          35.62
-        ],
-        [
-          114.25,
           35.62
         ],
         [
@@ -206,18 +174,18 @@
     "linger": "-0623",
     "label": {
       "en": "Qin raid and retreat to Xiao (schematic itinerary)",
-      "zh": "【待译】Qin raid and retreat to Xiao (schematic itinerary)"
+      "zh": "秦袭郑及归途（示意路线）"
     },
     "path": {
       "type": "LineString",
       "coordinates": [
         [
-          107.4,
-          34.5
+          107.35907,
+          34.46669
         ],
         [
-          110.9,
-          34.6
+          112.45,
+          34.68
         ],
         [
           112.8,
@@ -239,7 +207,7 @@
     "linger": "-0500",
     "label": {
       "en": "Wu campaign toward Ying (schematic itinerary)",
-      "zh": "【待译】Wu campaign toward Ying (schematic itinerary)"
+      "zh": "吴军攻郢（示意路线）"
     },
     "path": {
       "type": "LineString",
@@ -247,14 +215,6 @@
         [
           120.62,
           31.3
-        ],
-        [
-          116.72,
-          32.7
-        ],
-        [
-          114.98,
-          33.26
         ],
         [
           114.95,
@@ -276,7 +236,7 @@
     "linger": "-0479",
     "label": {
       "en": "Confucius’s travels between courts (schematic itinerary)",
-      "zh": "【待译】Confucius’s travels between courts (schematic itinerary)"
+      "zh": "孔子列国行旅（示意路线）"
     },
     "path": {
       "type": "LineString",
@@ -286,8 +246,8 @@
           35.5819
         ],
         [
-          114.25,
-          35.62
+          115.03,
+          35.76
         ],
         [
           114.88,
@@ -306,16 +266,12 @@
           33.62
         ],
         [
-          114.98,
-          33.26
+          113.35516,
+          33.62268
         ],
         [
-          114.2,
-          32.13
-        ],
-        [
-          114.25,
-          35.62
+          115.03,
+          35.76
         ],
         [
           116.9862,
@@ -333,7 +289,7 @@
     "linger": "-0473",
     "label": {
       "en": "Wu travels to Huangchi (schematic itinerary)",
-      "zh": "【待译】Wu travels to Huangchi (schematic itinerary)"
+      "zh": "吴北上黄池（示意路线）"
     },
     "path": {
       "type": "LineString",
@@ -345,10 +301,6 @@
         [
           119.43,
           32.4
-        ],
-        [
-          118.49,
-          33.03
         ],
         [
           114.4,
@@ -366,7 +318,7 @@
     "linger": "-0353",
     "label": {
       "en": "Wei advances on Handan (schematic itinerary)",
-      "zh": "【待译】Wei advances on Handan (schematic itinerary)"
+      "zh": "魏军攻邯郸（示意路线）"
     },
     "path": {
       "type": "LineString",
@@ -391,7 +343,7 @@
     "linger": "-0350",
     "label": {
       "en": "Qi’s intervention toward Guiling (schematic itinerary)",
-      "zh": "【待译】Qi’s intervention toward Guiling (schematic itinerary)"
+      "zh": "齐援赵趋桂陵（示意路线）"
     },
     "path": {
       "type": "LineString",
@@ -401,8 +353,8 @@
           36.889756
         ],
         [
-          116.31,
-          35.91
+          114.3,
+          34.8
         ],
         [
           114.67,
@@ -420,7 +372,7 @@
     "linger": "-0338",
     "label": {
       "en": "Qi’s Maling campaign (schematic itinerary)",
-      "zh": "【待译】Qi’s Maling campaign (schematic itinerary)"
+      "zh": "齐军马陵战役（示意路线）"
     },
     "path": {
       "type": "LineString",
@@ -449,7 +401,7 @@
     "linger": "-0312",
     "label": {
       "en": "Qin campaign into Shu (schematic itinerary)",
-      "zh": "【待译】Qin campaign into Shu (schematic itinerary)"
+      "zh": "秦军入蜀（示意路线）"
     },
     "path": {
       "type": "LineString",
@@ -463,8 +415,8 @@
           33.07
         ],
         [
-          105.79,
-          32.16
+          105.71422,
+          32.33682
         ],
         [
           104.06,
@@ -482,14 +434,14 @@
     "linger": "-0279",
     "label": {
       "en": "Yue Yi’s campaign against Qi (schematic itinerary)",
-      "zh": "【待译】Yue Yi’s campaign against Qi (schematic itinerary)"
+      "zh": "乐毅攻齐（示意路线）"
     },
     "path": {
       "type": "LineString",
       "coordinates": [
         [
-          116.35,
-          39.88
+          116.382425,
+          39.894262
         ],
         [
           116.7,
@@ -511,7 +463,7 @@
     "linger": "-0270",
     "label": {
       "en": "Bai Qi’s campaign toward Ying (schematic itinerary)",
-      "zh": "【待译】Bai Qi’s campaign toward Ying (schematic itinerary)"
+      "zh": "白起攻郢（示意路线）"
     },
     "path": {
       "type": "LineString",
@@ -521,8 +473,8 @@
           32.69
         ],
         [
-          112.3,
-          31.7
+          112.25514,
+          31.71173
         ],
         [
           112.190298,
@@ -540,18 +492,18 @@
     "linger": "-0257",
     "label": {
       "en": "Qin advances toward Changping (schematic itinerary)",
-      "zh": "【待译】Qin advances toward Changping (schematic itinerary)"
+      "zh": "秦军向长平（示意路线）"
     },
     "path": {
       "type": "LineString",
       "coordinates": [
         [
-          112.94,
-          35.09
+          112.93168,
+          35.09066
         ],
         [
-          112.92,
-          35.8
+          112.923889,
+          35.798056
         ]
       ]
     }
@@ -565,7 +517,7 @@
     "linger": "-0257",
     "label": {
       "en": "Zhao advances toward Changping (schematic itinerary)",
-      "zh": "【待译】Zhao advances toward Changping (schematic itinerary)"
+      "zh": "赵军赴长平（示意路线）"
     },
     "path": {
       "type": "LineString",
@@ -579,8 +531,8 @@
           36.2
         ],
         [
-          112.92,
-          35.8
+          112.923889,
+          35.798056
         ]
       ]
     }
@@ -594,7 +546,7 @@
     "linger": "-0256",
     "label": {
       "en": "Wei force relieves Handan (schematic itinerary)",
-      "zh": "【待译】Wei force relieves Handan (schematic itinerary)"
+      "zh": "魏军救邯郸（示意路线）"
     },
     "path": {
       "type": "LineString",
@@ -623,18 +575,14 @@
     "linger": "-0228",
     "label": {
       "en": "Qin campaign against Han (schematic itinerary)",
-      "zh": "【待译】Qin campaign against Han (schematic itinerary)"
+      "zh": "秦攻韩（示意路线）"
     },
     "path": {
       "type": "LineString",
       "coordinates": [
         [
-          110.9,
-          34.6
-        ],
-        [
-          112.18,
-          34.52
+          112.93168,
+          35.09066
         ],
         [
           113.73,
@@ -652,15 +600,11 @@
     "linger": "-0227",
     "label": {
       "en": "Qin campaign against Zhao (schematic itinerary)",
-      "zh": "【待译】Qin campaign against Zhao (schematic itinerary)"
+      "zh": "秦攻赵（示意路线）"
     },
     "path": {
       "type": "LineString",
       "coordinates": [
-        [
-          113.1,
-          36.2
-        ],
         [
           114.14,
           38.03
@@ -681,7 +625,7 @@
     "linger": "-0224",
     "label": {
       "en": "Qin campaign against Wei (schematic itinerary)",
-      "zh": "【待译】Qin campaign against Wei (schematic itinerary)"
+      "zh": "秦攻魏（示意路线）"
     },
     "path": {
       "type": "LineString",
@@ -706,22 +650,18 @@
     "linger": "-0224",
     "label": {
       "en": "Li Xin’s failed Chu campaign (schematic itinerary)",
-      "zh": "【待译】Li Xin’s failed Chu campaign (schematic itinerary)"
+      "zh": "李信攻楚失利（示意路线）"
     },
     "path": {
       "type": "LineString",
       "coordinates": [
         [
-          114.9,
-          33.62
+          114.6331,
+          32.95597
         ],
         [
-          114.62,
-          32.96
-        ],
-        [
-          115.0,
-          33.5
+          113.06,
+          33.87
         ]
       ]
     },
@@ -736,7 +676,7 @@
     "linger": "-0222",
     "label": {
       "en": "Wang Jian’s Chu campaign (schematic itinerary)",
-      "zh": "【待译】Wang Jian’s Chu campaign (schematic itinerary)"
+      "zh": "王翦攻楚（示意路线）"
     },
     "path": {
       "type": "LineString",
@@ -746,12 +686,8 @@
           33.62
         ],
         [
-          114.62,
-          32.96
-        ],
-        [
-          117.14,
-          33.63
+          114.6331,
+          32.95597
         ],
         [
           116.78,
@@ -770,14 +706,14 @@
     "linger": "-0221",
     "label": {
       "en": "Qin campaign into Liaodong (schematic itinerary)",
-      "zh": "【待译】Qin campaign into Liaodong (schematic itinerary)"
+      "zh": "秦进攻辽东（示意路线）"
     },
     "path": {
       "type": "LineString",
       "coordinates": [
         [
-          116.35,
-          39.88
+          116.382425,
+          39.894262
         ],
         [
           123.17,
@@ -795,14 +731,14 @@
     "linger": "-0220",
     "label": {
       "en": "Qin approaches Qi from Yan (schematic itinerary)",
-      "zh": "【待译】Qin approaches Qi from Yan (schematic itinerary)"
+      "zh": "秦自燕南下攻齐（示意路线）"
     },
     "path": {
       "type": "LineString",
       "coordinates": [
         [
-          116.35,
-          39.88
+          116.382425,
+          39.894262
         ],
         [
           118.337908,
@@ -820,7 +756,7 @@
     "linger": "-0209",
     "label": {
       "en": "The First Emperor’s final tour (schematic itinerary)",
-      "zh": "【待译】The First Emperor’s final tour (schematic itinerary)"
+      "zh": "秦始皇末次巡游（示意路线）"
     },
     "path": {
       "type": "LineString",
@@ -838,12 +774,12 @@
           30.0
         ],
         [
-          119.91,
-          35.65
+          119.902042,
+          35.649444
         ],
         [
-          121.38,
-          37.6
+          121.379528,
+          37.612056
         ],
         [
           115.15,

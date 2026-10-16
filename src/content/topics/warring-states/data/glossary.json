@@ -4,11 +4,11 @@
       "id": "fengjian",
       "term": {
         "en": "Enfeoffment",
-        "zh": "【待译】Enfeoffment"
+        "zh": "分封"
       },
       "definition": {
         "en": "The Zhou kings granted rights over land and people to relatives and allies, creating regional states. This is not the same institution as European feudalism.",
-        "zh": "【待译】The Zhou kings granted rights over land and people to relatives and allies, creating regional states. This is not the same institution as European feudalism."
+        "zh": "周王把对土地与人口的支配权授予宗亲和盟友，由此形成各诸侯国。这一制度与欧洲中世纪的封建制度并不相同。"
       },
       "see": [
         "zhuhou"
@@ -18,11 +18,11 @@
       "id": "zhuhou",
       "term": {
         "en": "Regional lords",
-        "zh": "【待译】Regional lords"
+        "zh": "诸侯"
       },
       "definition": {
         "en": "Rulers of regional states who formally acknowledged the Zhou king, although their effective independence increased.",
-        "zh": "【待译】Rulers of regional states who formally acknowledged the Zhou king, although their effective independence increased."
+        "zh": "诸侯国的统治者，名义上承认周王的地位；随着时间推移，他们的实际自主权逐渐扩大。"
       },
       "see": [
         "fengjian",
@@ -33,11 +33,11 @@
       "id": "tianxia",
       "term": {
         "en": "All under Heaven",
-        "zh": "【待译】All under Heaven"
+        "zh": "天下"
       },
       "definition": {
         "en": "An idea of the inhabited political world under a king. Its scope changed over time and does not simply mean the territory of modern China.",
-        "zh": "【待译】An idea of the inhabited political world under a king. Its scope changed over time and does not simply mean the territory of modern China."
+        "zh": "古人用来表达王权所及政治世界的观念。它的范围随时代变化，不能直接等同于今天中国的国土。"
       },
       "see": [
         "huaxia"
@@ -47,11 +47,11 @@
       "id": "huaxia",
       "term": {
         "en": "Huaxia",
-        "zh": "【待译】Huaxia"
+        "zh": "华夏"
       },
       "definition": {
         "en": "A changing cultural and political identity used in Zhou-era texts. The contrast with Rong, Di, Yi and Man reflects the categories of those texts, not fixed modern ethnic boundaries.",
-        "zh": "【待译】A changing cultural and political identity used in Zhou-era texts. The contrast with Rong, Di, Yi and Man reflects the categories of those texts, not fixed modern ethnic boundaries."
+        "zh": "周代文献中使用的文化与政治认同，其含义不断变化。它与“戎”“狄”“夷”“蛮”的区别反映了当时作者的分类，不能视为固定的现代民族界线。"
       },
       "see": [
         "tianxia"
@@ -61,11 +61,11 @@
       "id": "hegemon",
       "term": {
         "en": "Hegemon",
-        "zh": "【待译】Hegemon"
+        "zh": "霸主"
       },
       "definition": {
         "en": "A leading regional lord who convened alliances and claimed to uphold the Zhou order. Later lists of the hegemons disagree.",
-        "zh": "【待译】A leading regional lord who convened alliances and claimed to uphold the Zhou order. Later lists of the hegemons disagree."
+        "zh": "主持会盟、声称维护周代秩序的强大诸侯。后世列出的霸主名单并不一致。"
       },
       "see": [
         "covenant",
@@ -76,11 +76,11 @@
       "id": "covenant",
       "term": {
         "en": "Covenant meeting",
-        "zh": "【待译】Covenant meeting"
+        "zh": "会盟"
       },
       "definition": {
         "en": "A meeting at which rulers or ministers made an agreement and swore an oath. Excavated covenant texts show that such agreements could be written on stone or jade.",
-        "zh": "【待译】A meeting at which rulers or ministers made an agreement and swore an oath. Excavated covenant texts show that such agreements could be written on stone or jade."
+        "zh": "诸侯或卿大夫相会，订立约定并宣誓。出土的盟书表明，有些誓约写在石片或玉片上。"
       },
       "see": [
         "hegemon"
@@ -90,11 +90,11 @@
       "id": "zunwang-rangyi",
       "term": {
         "en": "Honour the king, repel the Yi",
-        "zh": "【待译】Honour the king, repel the Yi"
+        "zh": "尊王攘夷"
       },
       "definition": {
         "en": "A later formula associated with Qi leadership: supporting the Zhou king and opposing groups classified as outsiders. The wording presents the Zhou states’ perspective.",
-        "zh": "【待译】A later formula associated with Qi leadership: supporting the Zhou king and opposing groups classified as outsiders. The wording presents the Zhou states’ perspective."
+        "zh": "后世用来概括齐国霸政的说法，指支持周王、对抗被归为外部的人群。这种措辞表达的是周代诸侯的立场。"
       },
       "see": [
         "hegemon"
@@ -104,11 +104,11 @@
       "id": "chariot-warfare",
       "term": {
         "en": "Chariot warfare",
-        "zh": "【待译】Chariot warfare"
+        "zh": "车战"
       },
       "definition": {
         "en": "Fighting with horse-drawn vehicles accompanied by infantry. The balance between chariots, infantry, crossbows and cavalry changed across the period.",
-        "zh": "【待译】Fighting with horse-drawn vehicles accompanied by infantry. The balance between chariots, infantry, crossbows and cavalry changed across the period."
+        "zh": "以马拉战车配合步兵作战。战车、步兵、弩和骑兵在军队中的作用，随时代而变化。"
       },
       "see": [
         "crossbow"
@@ -118,11 +118,11 @@
       "id": "bianfa",
       "term": {
         "en": "Reform",
-        "zh": "【待译】Reform"
+        "zh": "变法"
       },
       "definition": {
         "en": "Changes to law, taxation, farming, military recruitment or official appointment intended to increase a ruler’s control and resources.",
-        "zh": "【待译】Changes to law, taxation, farming, military recruitment or official appointment intended to increase a ruler’s control and resources."
+        "zh": "统治者为增强控制、增加资源而推行的制度改变，涉及法律、赋税、农业、征兵或官员任用。"
       },
       "see": [
         "legalism",
@@ -133,11 +133,11 @@
       "id": "legalism",
       "term": {
         "en": "Legalism",
-        "zh": "【待译】Legalism"
+        "zh": "法家"
       },
       "definition": {
         "en": "A later label for thinkers and practices associated with explicit standards, rewards, punishments and ruler authority. It did not name a single organized school in this period.",
-        "zh": "【待译】A later label for thinkers and practices associated with explicit standards, rewards, punishments and ruler authority. It did not name a single organized school in this period."
+        "zh": "后世对一类思想与实践的概括，强调明确的法令、赏罚和君主权力。当时并没有以此为名的统一组织。"
       },
       "see": [
         "bianfa"
@@ -147,11 +147,11 @@
       "id": "junxian",
       "term": {
         "en": "Commanderies and counties",
-        "zh": "【待译】Commanderies and counties"
+        "zh": "郡县"
       },
       "definition": {
         "en": "Territorial units governed by appointed officials rather than hereditary regional rulers. Their development differed between states.",
-        "zh": "【待译】Territorial units governed by appointed officials rather than hereditary regional rulers. Their development differed between states."
+        "zh": "由任命的官员治理的地方行政单位，区别于世袭诸侯的领地。各国郡县的形成过程并不相同。"
       },
       "see": [
         "bianfa"
@@ -161,11 +161,11 @@
       "id": "rank-by-merit",
       "term": {
         "en": "Rank by military merit",
-        "zh": "【待译】Rank by military merit"
+        "zh": "军功爵"
       },
       "definition": {
         "en": "A hierarchy in which recorded military service could earn status and privileges. Qin records linked rewards to counted enemy heads; those counts require critical reading.",
-        "zh": "【待译】A hierarchy in which recorded military service could earn status and privileges. Qin records linked rewards to counted enemy heads; those counts require critical reading."
+        "zh": "按登记的军事功劳授予身份与特权的等级制度。秦的赏爵与所记斩首数相连，阅读这些数字时须考察其记录方式和目的。"
       },
       "see": [
         "junxian"
@@ -175,11 +175,11 @@
       "id": "vertical-alliance",
       "term": {
         "en": "Vertical alliance",
-        "zh": "【待译】Vertical alliance"
+        "zh": "合纵"
       },
       "definition": {
         "en": "An alliance among several states, usually described as cooperation against Qin. Its members and commitments changed.",
-        "zh": "【待译】An alliance among several states, usually described as cooperation against Qin. Its members and commitments changed."
+        "zh": "几个国家联合的外交安排，通常指合作抗秦。参加的国家与各方承诺经常变化。"
       },
       "see": [
         "horizontal-alliance"
@@ -189,11 +189,11 @@
       "id": "horizontal-alliance",
       "term": {
         "en": "Horizontal alliance",
-        "zh": "【待译】Horizontal alliance"
+        "zh": "连横"
       },
       "definition": {
         "en": "Arrangements in which individual states dealt separately with Qin. Later narratives organize fluid diplomacy into a contrast with vertical alliances.",
-        "zh": "【待译】Arrangements in which individual states dealt separately with Qin. Later narratives organize fluid diplomacy into a contrast with vertical alliances."
+        "zh": "各国分别与秦交涉、结盟的安排。后世叙事常用合纵与连横的对照来整理不断变化的外交关系。"
       },
       "see": [
         "vertical-alliance"
@@ -203,11 +203,11 @@
       "id": "crossbow",
       "term": {
         "en": "Crossbow",
-        "zh": "【待译】Crossbow"
+        "zh": "弩"
       },
       "definition": {
         "en": "A bow mounted on a stock with a trigger mechanism. Surviving bronze triggers and texts document its military use.",
-        "zh": "【待译】A bow mounted on a stock with a trigger mechanism. Surviving bronze triggers and texts document its military use."
+        "zh": "装有弩臂和扳机的弓。传世文献与出土铜弩机共同提供了弩用于战争的证据。"
       },
       "see": [
         "chariot-warfare"
@@ -217,11 +217,11 @@
       "id": "tiger-tally",
       "term": {
         "en": "Tiger tally",
-        "zh": "【待译】Tiger tally"
+        "zh": "虎符"
       },
       "definition": {
         "en": "A matching authorization token divided between a ruler and a commander. Joining the halves helped verify an order to mobilize troops.",
-        "zh": "【待译】A matching authorization token divided between a ruler and a commander. Joining the halves helped verify an order to mobilize troops."
+        "zh": "分置于君主与领兵者手中的调兵凭证。两半相合，用来核验调兵命令。"
       },
       "see": []
     },
@@ -229,11 +229,11 @@
       "id": "hundred-schools",
       "term": {
         "en": "Hundred Schools of Thought",
-        "zh": "【待译】Hundred Schools of Thought"
+        "zh": "百家争鸣"
       },
       "definition": {
         "en": "A conventional name for competing traditions of argument about ethics, government and society. It does not refer to an exact count of schools.",
-        "zh": "【待译】A conventional name for competing traditions of argument about ethics, government and society. It does not refer to an exact count of schools."
+        "zh": "对当时围绕伦理、政治与社会问题展开的不同思想争论的通称。“百家”并不是学派数量的精确统计。"
       },
       "see": [
         "legalism"

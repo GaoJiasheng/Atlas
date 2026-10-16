@@ -1,7 +1,52 @@
 /** Area retention distinguishes removed internal seams from lost territory. */
-import{readFileSync}from'node:fs';import{feature}from'topojson-client';import{writeJson}from'../lib/common';
-const d='scripts/geo/warring-states',c=JSON.parse(readFileSync('src/content/topics/warring-states/data/control.json','utf8'));
-function ring(r:any[]){let s=0;const co=Math.cos(r.reduce((a,p)=>a+p[1],0)/r.length*Math.PI/180);for(let i=1;i<r.length;i++)s+=(r[i-1][0]*r[i][1]-r[i][0]*r[i-1][1]);return Math.abs(s)*.5*co*111.195**2;}
-function area(g:any){const polys=g.type==='Polygon'?[g.coordinates]:g.coordinates;return polys.reduce((s:number,p:any)=>s+Math.max(0,ring(p[0])-p.slice(1).reduce((a:number,r:any)=>a+ring(r),0)),0);}
-const out=[];for(const k of c.keyframes){const orig=JSON.parse(readFileSync(`${d}/work/${k.object}.geojson`,'utf8')).features,fin=(feature(c.topology,c.topology.objects[k.object])as any).features;const rows=[];for(const f of orig){const h=f.properties.holder;const before=orig.filter((x:any)=>x.properties.holder===h).reduce((s:number,x:any)=>s+area(x.geometry),0),after=fin.filter((x:any)=>x.properties.holder===h).reduce((s:number,x:any)=>s+area(x.geometry),0);if(rows.some(x=>x.holder===h))continue;rows.push({holder:h,sourceKm2:before,finalKm2:after,changePct:(after/before-1)*100});}out.push({id:k.object,rows});}
-writeJson(`${d}/area-audit.json`,{method:'Spherical-local planar area approximation, sufficient for material-loss diagnostics; coastline clipping changes are expected',frames:out},true);for(const k of out)console.log(k.id,k.rows.filter(r=>Math.abs(r.changePct)>3).map(r=>[r.holder,r.changePct.toFixed(2)]));
+import { feature } from 'topojson-client';
+type GeometryObject = Exclude<Parameters<typeof feature>[1], string>;
+import { writeJson } from '../lib/common';
+import { array, number, object, readJson, required, string, topology as narrowTopology } from './strict-input';
+const dir = 'scripts/geo/warring-states';
+const control = object(readJson('src/content/topics/warring-states/data/control.json'));
+const topology = narrowTopology(control.topology);
+function ring(value: unknown): number {
+  const points = array(value).map((value) => {
+    const point = array(value);
+    return [number(point[0]), number(point[1])] as const;
+  });
+  if (points.length === 0) return 0;
+  const cosine = Math.cos(points.reduce((sum, point) => sum + point[1], 0) / points.length * Math.PI / 180);
+  let sum = 0;
+  for (let index = 1; index < points.length; index++) {
+    const previous = required(points[index - 1], 'previous ring vertex');
+    const current = required(points[index], 'current ring vertex');
+    sum += previous[0] * current[1] - current[0] * previous[1];
+  }
+  return Math.abs(sum) * 0.5 * cosine * 111.195 ** 2;
+}
+function area(value: unknown): number {
+  const geometry = object(value);
+  const polygons = geometry.type === 'Polygon' ? [array(geometry.coordinates)] : array(geometry.coordinates).map(array);
+  return polygons.reduce((sum, polygon) => {
+    const [outer, ...holes] = polygon;
+    return sum + Math.max(0, ring(required(outer, 'polygon outer ring')) - holes.reduce<number>((subtotal, hole) => subtotal + ring(hole), 0));
+  }, 0);
+}
+function features(value: unknown): Record<string, unknown>[] { return array(object(value).features).map(object); }
+function holder(value: Record<string, unknown>): string { return string(object(value.properties).holder); }
+interface Row { holder: string; sourceKm2: number; finalKm2: number; changePct: number }
+const output: { id: string; rows: Row[] }[] = [];
+for (const value of array(control.keyframes)) {
+  const id = string(object(value).object);
+  const source = features(readJson(`${dir}/work/${id}.geojson`));
+  const geometry: GeometryObject = required(topology.objects[id], `${id} topology object`);
+  const final = features(feature(topology, geometry));
+  const rows: Row[] = [];
+  for (const original of source) {
+    const id = holder(original);
+    if (rows.some((row) => row.holder === id)) continue;
+    const before = source.filter((item) => holder(item) === id).reduce((sum, item) => sum + area(item.geometry), 0);
+    const after = final.filter((item) => holder(item) === id).reduce((sum, item) => sum + area(item.geometry), 0);
+    rows.push({ holder: id, sourceKm2: before, finalKm2: after, changePct: (after / before - 1) * 100 });
+  }
+  output.push({ id, rows });
+}
+writeJson(`${dir}/area-audit.json`, { method: 'Spherical-local planar area approximation, sufficient for material-loss diagnostics; coastline clipping changes are expected', frames: output }, true);
+for (const frame of output) console.log(frame.id, frame.rows.filter((row) => Math.abs(row.changePct) > 3).map((row) => [row.holder, row.changePct.toFixed(2)]));

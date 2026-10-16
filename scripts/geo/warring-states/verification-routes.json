@@ -1,0 +1,684 @@
+[
+  {
+    "id": "zhou-move-east",
+    "source": "S170",
+    "stations": "镐京 → 雒邑",
+    "coordinates": [
+      [
+        108.78,
+        34.23
+      ],
+      [
+        112.45,
+        34.68
+      ]
+    ],
+    "url": "https://zh.wikisource.org/wiki/史記/卷004",
+    "note": {
+      "en": "Itinerary: 镐京 → 雒邑. Shiji 4 establishes the eastward relocation, but not Mount Li, Huayin, Hangu or Mianchi as travel stations. Those four were removed; the endpoints do not establish a road through the Xiao–Hangu corridor. Passes and Yellow River crossing remain unlocated.",
+      "zh": "所画站点：镐京 → 雒邑。《周本纪》能证东迁雒邑，不能证骊山、华阴、函谷、渑池为迁徙途经站，故删去四站。两端只示迁都关系，不确定崤函古道及黄河渡口。"
+    },
+    "status": "Reviewed stations; exact road/crossings remain uncertain"
+  },
+  {
+    "id": "qi-north-shanrong",
+    "source": "S171",
+    "stations": "临淄 → 令支 → 孤竹",
+    "coordinates": [
+      [
+        118.337908,
+        36.889756
+      ],
+      [
+        118.697222,
+        40.005833
+      ],
+      [
+        118.89,
+        39.89
+      ]
+    ],
+    "url": "https://zh.wikisource.org/wiki/史記/卷032",
+    "note": {
+      "en": "Itinerary: 临淄 → 令支 → 孤竹. Shiji 32 names the relief of Yan and Guzhu; a later speech also names Lingzhi. Ji was removed as an unattested campaign station. Lingzhi P625 is checked; Guzhu remains regional. The Ji River crossing and exact approach to the mountains are unknown.",
+      "zh": "所画站点：临淄 → 令支 → 孤竹。《齐太公世家》记救燕至孤竹，后文演说还列令支。删去无该次战役站点证据的蓟。令支坐标已核，孤竹仍为区域点；济水渡口及山区道路不明。"
+    },
+    "status": "Reviewed stations; exact road/crossings remain uncertain"
+  },
+  {
+    "id": "chonger-exile",
+    "source": "S172",
+    "stations": "蒲 → 楚丘 → 临淄 → 陶丘 → 宋 → 新郑 → 郢 → 雍 → 绛",
+    "coordinates": [
+      [
+        111.09,
+        36.41
+      ],
+      [
+        114.7,
+        35.55
+      ],
+      [
+        118.337908,
+        36.889756
+      ],
+      [
+        115.55,
+        34.83
+      ],
+      [
+        115.65,
+        34.42
+      ],
+      [
+        113.73,
+        34.39
+      ],
+      [
+        112.190298,
+        30.405722
+      ],
+      [
+        107.35907,
+        34.46669
+      ],
+      [
+        111.48,
+        35.62
+      ]
+    ],
+    "url": "https://zh.wikisource.org/wiki/史記/卷039",
+    "note": {
+      "en": "Itinerary: 蒲 → 楚丘 → 临淄 → 陶丘 → 宋 → 新郑 → 郢 → 雍 → 绛. Shiji 39 supports the sequence Pu–Di–Wey–Qi–Cao–Song–Zheng–Chu–Qin–Jin. The unlocated Di stay is not plotted. Wey is now represented at Chuqiu, not abandoned Chaoge; the state capitals are contextual regional anchors, not every lodging or ferry. Repeated local movements and return crossings are not recovered.",
+      "zh": "所画站点：蒲 → 楚丘 → 临淄 → 陶丘 → 宋 → 新郑 → 郢 → 雍 → 绛。《晋世家》支持蒲、狄、卫、齐、曹、宋、郑、楚、秦、晋的次序，未定位的居狄不画点。卫改用当时楚丘区域，不再用旧都朝歌；各都城是区域锚点，并非每处住地或渡口。"
+    },
+    "status": "Reviewed stations; exact road/crossings remain uncertain"
+  },
+  {
+    "id": "chu-to-chengpu",
+    "source": "S173",
+    "stations": "郢 → 宋 → 城濮",
+    "coordinates": [
+      [
+        112.190298,
+        30.405722
+      ],
+      [
+        115.65,
+        34.42
+      ],
+      [
+        115.48,
+        35.6
+      ]
+    ],
+    "url": "https://zh.wikisource.org/wiki/春秋左氏傳/僖公",
+    "note": {
+      "en": "Itinerary: 郢 → 宋 → 城濮. Zuozhuan, Xi 27–28 supports the siege of Song followed by Chengpu. Fangcheng and Chen were removed because these passages do not establish them as stations. The Han River/Fangcheng approach and the disputed Chengpu location are unresolved; the line is a campaign connection, not an ancient road.",
+      "zh": "所画站点：郢 → 宋 → 城濮。《左传·僖公二十七、二十八年》记围宋后至城濮；方城、陈没有明确途经证据，已删。汉水、方城通道及城濮辨址未定，连线仅示战区联系，不是古道复原。"
+    },
+    "status": "Reviewed stations; exact road/crossings remain uncertain"
+  },
+  {
+    "id": "jin-to-chengpu",
+    "source": "S174",
+    "stations": "绛 → 陶丘 → 城濮",
+    "coordinates": [
+      [
+        111.48,
+        35.62
+      ],
+      [
+        115.55,
+        34.83
+      ],
+      [
+        115.48,
+        35.6
+      ]
+    ],
+    "url": "https://zh.wikisource.org/wiki/春秋左氏傳/僖公",
+    "note": {
+      "en": "Itinerary: 绛 → 陶丘 → 城濮. Zuozhuan, Xi 28 attests crossing the river, Wulu, attack on Cao and retreat to Chengpu. Chaoge was removed: attacking Wey is not proof of visiting its former capital. Wulu and the Yellow River ferry are not securely located, so neither receives an invented point. Jiang is a capital-area context anchor.",
+      "zh": "所画站点：绛 → 陶丘 → 城濮。《左传·僖公二十八年》记渡河、取五鹿、攻曹及退至城濮。攻卫不证明曾到旧都朝歌，已删该站；五鹿、黄河渡口没有可靠坐标，不编造点位。绛仅作晋都区域锚点。"
+    },
+    "status": "Reviewed stations; exact road/crossings remain uncertain"
+  },
+  {
+    "id": "qin-raid-zheng",
+    "source": "S175",
+    "stations": "雍 → 雒邑 → 滑 → 崤",
+    "coordinates": [
+      [
+        107.35907,
+        34.46669
+      ],
+      [
+        112.45,
+        34.68
+      ],
+      [
+        112.8,
+        34.7
+      ],
+      [
+        111.6,
+        34.73
+      ]
+    ],
+    "url": "https://zh.wikisource.org/wiki/史記/卷005",
+    "note": {
+      "en": "Itinerary: 雍 → 雒邑 → 滑 → 崤. Zuozhuan, Xi 32–33 and Shiji 5 describe passing Zhou’s north gate, reaching and destroying Hua, then the return ambush at Xiao. Replaced the Hangu station with the explicitly named Zhou capital region. Zheng was only the intended target. The pass, ferries and Xiao ambush position remain uncertain.",
+      "zh": "所画站点：雍 → 雒邑 → 滑 → 崤。《左传·僖公三十二、三十三年》及《秦本纪》记过周北门、至滑灭滑、归途遭崤伏击，故以周都区域替换函谷站。郑只是目标，没有画成抵达；关隘、渡口及崤的具体战场仍未定。"
+    },
+    "status": "Reviewed stations; exact road/crossings remain uncertain"
+  },
+  {
+    "id": "wu-to-ying",
+    "source": "S176",
+    "stations": "姑苏 → 柏举 → 郢",
+    "coordinates": [
+      [
+        120.62,
+        31.3
+      ],
+      [
+        114.95,
+        31.2
+      ],
+      [
+        112.190298,
+        30.405722
+      ]
+    ],
+    "url": "https://zh.wikisource.org/wiki/春秋左氏傳/定公",
+    "note": {
+      "en": "Itinerary: 姑苏 → 柏举 → 郢. Zuozhuan, Ding 4 gives leaving boats at Huairui, facing across the Han from Yuzhang, then Boju–Qingfa–Yongshi–Ying. Removed Zhoulai and Cai: alliance participation does not establish a marching stop there. Huairui, Yuzhang, the three passes, Han crossing, Qingfa and Yongshi are not securely located; the sparse line does not recover the water/land route.",
+      "zh": "所画站点：姑苏 → 柏举 → 郢。《左传·定公四年》记淮汭舍舟、豫章夹汉、柏举、清发、雍澨、郢。蔡参战不证明行军经其都城，州来、蔡两站已删。淮汭、豫章、三关、汉水渡口及清发雍澨未可靠定位，稀疏连线不能当作水陆古道。"
+    },
+    "status": "Reviewed stations; exact road/crossings remain uncertain"
+  },
+  {
+    "id": "confucius-travels",
+    "source": "S177",
+    "stations": "曲阜 → 帝丘 → 匡 → 宋 → 新郑 → 陈 → 叶 → 帝丘 → 曲阜",
+    "coordinates": [
+      [
+        116.9862,
+        35.5819
+      ],
+      [
+        115.03,
+        35.76
+      ],
+      [
+        114.88,
+        35.2
+      ],
+      [
+        115.65,
+        34.42
+      ],
+      [
+        113.73,
+        34.39
+      ],
+      [
+        114.9,
+        33.62
+      ],
+      [
+        113.35516,
+        33.62268
+      ],
+      [
+        115.03,
+        35.76
+      ],
+      [
+        116.9862,
+        35.5819
+      ]
+    ],
+    "url": "https://zh.wikisource.org/wiki/史記/卷047",
+    "note": {
+      "en": "Itinerary: Qufu → Diqiu → Kuang → Song → Xinzheng → Chen → Ye → Diqiu → Qufu. Shiji 47 supports this selected sequence of regions, not a continuous day-by-day trip. Corrected Wey from abandoned Chaoge to Diqiu/Puyang; removed assumed Shangcai and unsupported Fuhan. Added the text’s explicit Ye visit, represented by a modern county-region point. Its return to Cai is not plotted because the precise Cai location is unresolved. Repeated Wey visits, Cai’s moved centre, Kuang identification, chronology and river crossings remain uncertain.",
+      "zh": "所画站点：曲阜 → 帝丘 → 匡 → 宋 → 新郑 → 陈 → 叶 → 帝丘 → 曲阜。《孔子世家》支持这一选取的区域次序，并非连续逐日旅程。卫由旧都朝歌改为帝丘、濮阳，删假定的上蔡及无明确出处的负函；加入原文明记的访叶，叶仅用现代县域点；返蔡因具体位置未定而不编点。卫的反复访问、蔡迁都、匡辨址、年代及渡口仍不明。"
+    },
+    "status": "Reviewed stations; exact road/crossings remain uncertain"
+  },
+  {
+    "id": "wu-to-huangchi",
+    "source": "S178",
+    "stations": "姑苏 → 邗 → 黄池",
+    "coordinates": [
+      [
+        120.62,
+        31.3
+      ],
+      [
+        119.43,
+        32.4
+      ],
+      [
+        114.4,
+        35.05
+      ]
+    ],
+    "url": "https://zh.wikisource.org/wiki/春秋左氏傳/哀公",
+    "note": {
+      "en": "Itinerary: 姑苏 → 邗 → 黄池. Zuozhuan, Ai 9 attests the Han canal linking Yangtze and Huai; Ai 13 attests Huangchi. The Huai–Si junction was removed because its ancient location and use by this expedition are not established here. The Yangtze crossing, canal centreline and overland connection to Huangchi are unknown; land is a display category for this mixed-mode journey.",
+      "zh": "所画站点：姑苏 → 邗 → 黄池。《左传·哀公九年》记邗沟通江淮，十三年记黄池会盟。古淮泗会口及本次是否经此未核实，已删该点；长江渡口、古渠线、赴黄池陆段均不明，水陆混合行程在此按陆路类别展示。"
+    },
+    "status": "Reviewed stations; exact road/crossings remain uncertain"
+  },
+  {
+    "id": "wei-to-handan",
+    "source": "S179",
+    "stations": "大梁 → 邯郸",
+    "coordinates": [
+      [
+        114.3,
+        34.8
+      ],
+      [
+        114.49,
+        36.6
+      ]
+    ],
+    "url": "https://zh.wikisource.org/wiki/史記/卷065",
+    "note": {
+      "en": "Itinerary: 大梁 → 邯郸. Shiji 65 attests the attack on Handan. Daliang is Wei’s contextual capital anchor, not an attested departure; Anyi remains an alternative. The Yellow River crossing and precise northward road are unknown; no ferry is invented.",
+      "zh": "所画站点：大梁 → 邯郸。《孙子吴起列传》记魏攻邯郸。大梁仅为魏都的背景锚点，不是已证出发地，安邑说仍存；黄河渡口及北行道路未定，不编造渡口。"
+    },
+    "status": "Reviewed stations; exact road/crossings remain uncertain"
+  },
+  {
+    "id": "qi-to-guiling",
+    "source": "S180",
+    "stations": "临淄 → 大梁方向 → 桂陵",
+    "coordinates": [
+      [
+        118.337908,
+        36.889756
+      ],
+      [
+        114.3,
+        34.8
+      ],
+      [
+        114.67,
+        35.2
+      ]
+    ],
+    "url": "https://zh.wikisource.org/wiki/史記/卷065",
+    "note": {
+      "en": "Itinerary: 临淄 → 大梁方向 → 桂陵. Shiji 65 explicitly describes threatening Daliang before the encounter at Guiling. Replaced Pinglu, which is not a station in that account, with the stated strategic direction. Daliang is not a claim that Qi entered the city. The Ji/Yellow River crossings and Guiling identification are unresolved.",
+      "zh": "所画站点：临淄 → 大梁方向 → 桂陵。《孙子吴起列传》明记趋向大梁、继而战桂陵，已以大梁方向替换没有该役出处的平陆。该点不表示齐入城。济水、黄河渡口及桂陵辨址仍未定。"
+    },
+    "status": "Reviewed stations; exact road/crossings remain uncertain"
+  },
+  {
+    "id": "qi-maling",
+    "source": "S181",
+    "stations": "临淄 → 大梁方向 → 马陵",
+    "coordinates": [
+      [
+        118.337908,
+        36.889756
+      ],
+      [
+        114.3,
+        34.8
+      ],
+      [
+        115.6,
+        36.2
+      ]
+    ],
+    "url": "https://zh.wikisource.org/wiki/史記/卷065",
+    "note": {
+      "en": "Itinerary: 临淄 → 大梁方向 → 马陵. Shiji 65 gives the direction toward Daliang, entry westward into Wei, then the retreat/ambush narrative. The Daliang point is a threatened direction, not an entered city. Maling’s Shen/Fan/Tancheng identifications conflict with each other and the Wikidata point; no surveyed retreat road or exact passage is claimed.",
+      "zh": "所画站点：临淄 → 大梁方向 → 马陵。《孙子吴起列传》记趋大梁、入魏西行及退兵伏击。大梁点只表示威胁方向，不表示入城。马陵的莘县、范县、郯城说与维基数据坐标不一致，不声称已找到撤退古道或精确隘口。"
+    },
+    "status": "Reviewed stations; exact road/crossings remain uncertain"
+  },
+  {
+    "id": "qin-to-shu",
+    "source": "S182",
+    "stations": "咸阳 → 汉中 → 葭萌 → 成都",
+    "coordinates": [
+      [
+        108.857778,
+        34.413889
+      ],
+      [
+        107.03,
+        33.07
+      ],
+      [
+        105.71422,
+        32.33682
+      ],
+      [
+        104.06,
+        30.66
+      ]
+    ],
+    "url": "https://zh.wikisource.org/wiki/華陽國志/卷三",
+    "note": {
+      "en": "Itinerary: 咸阳 → 汉中 → 葭萌 → 成都. Shiji 70 gives the campaign; Huayang guozhi 3 explicitly names the Stone Ox road and fighting at Jiameng. Jiameng is corrected to the published Zhaohua-area coordinate. Hanzhong and Chengdu are regional context anchors; the Qinling pass choice and full Jinniu/Stone Ox alignment remain uncertain. No legendary road-opening scene is treated as surveyed fact.",
+      "zh": "所画站点：咸阳 → 汉中 → 葭萌 → 成都。《张仪列传》记攻蜀，《华阳国志·蜀志》明确石牛道与葭萌交战。葭萌改用公布的昭化地区坐标。汉中、成都是区域背景点；秦岭过哪一关、石牛道全线仍未定，不把开道传说当测绘事实。"
+    },
+    "status": "Reviewed stations; exact road/crossings remain uncertain"
+  },
+  {
+    "id": "yue-yi-qi",
+    "source": "S183",
+    "stations": "蓟 → 济西 → 临淄",
+    "coordinates": [
+      [
+        116.382425,
+        39.894262
+      ],
+      [
+        116.7,
+        36.5
+      ],
+      [
+        118.337908,
+        36.889756
+      ]
+    ],
+    "url": "https://zh.wikisource.org/wiki/史記/卷080",
+    "note": {
+      "en": "Itinerary: 蓟 → 济西 → 临淄. Shiji 80 supports Jixi followed by Linzi. Ji is the Yan capital context, not a documented departure. Jixi describes a battle region west of the ancient Ji, not an exact crossing point. The river ferry and successive occupied-city branches are not reconstructed.",
+      "zh": "所画站点：蓟 → 济西 → 临淄。《乐毅列传》支持济西后进临淄。蓟只是燕都背景，不是已证出发点。济西是古济水以西战区，非精确渡口，不复原渡河处或各被占城市的支线。"
+    },
+    "status": "Reviewed stations; exact road/crossings remain uncertain"
+  },
+  {
+    "id": "bai-qi-to-ying",
+    "source": "S184",
+    "stations": "邓 → 鄢 → 郢",
+    "coordinates": [
+      [
+        112.09,
+        32.69
+      ],
+      [
+        112.25514,
+        31.71173
+      ],
+      [
+        112.190298,
+        30.405722
+      ]
+    ],
+    "url": "https://zh.wikisource.org/wiki/史記/卷073",
+    "note": {
+      "en": "Itinerary: 邓 → 鄢 → 郢. Shiji 5 and 73 place Yan and Deng in the campaign before Ying, but do not give their internal marching order. Deng–Yan–Ying is a north-to-south regional reconstruction, not a textual sequence; the Wuguan/Han approach and Han crossing are unknown. The Yan point is the modern Yicheng area, not a flood footprint.",
+      "zh": "所画站点：邓 → 鄢 → 郢。《秦本纪》、卷73把鄢、邓列在郢之前，不能证明两城内部的行军先后。邓、鄢、郢是由北向南的区域复原，不是假称原文次序。武关、汉水进路与渡口未定，鄢点也非淹水范围。"
+    },
+    "status": "Reviewed stations; exact road/crossings remain uncertain"
+  },
+  {
+    "id": "qin-to-changping",
+    "source": "S185",
+    "stations": "野王 → 长平",
+    "coordinates": [
+      [
+        112.93168,
+        35.09066
+      ],
+      [
+        112.923889,
+        35.798056
+      ]
+    ],
+    "url": "https://zh.wikisource.org/wiki/史記/卷073",
+    "note": {
+      "en": "Itinerary: 野王 → 长平. Shiji 73 attests Yewang’s fall before the Shangdang/Changping war. Both endpoint coordinates are checked, but this is a sequence of theatres, not proof of one army’s exact route. The Taihang ascent and pass alignment have not been recovered.",
+      "zh": "所画站点：野王 → 长平。卷73记先取野王，继发上党、长平战事。两端坐标已核，但这只是战区次序，不证明一支军队的实际轨迹；太行上升路段及过关线未复原。"
+    },
+    "status": "Reviewed stations; exact road/crossings remain uncertain"
+  },
+  {
+    "id": "zhao-to-changping",
+    "source": "S186",
+    "stations": "邯郸 → 上党 → 长平",
+    "coordinates": [
+      [
+        114.49,
+        36.6
+      ],
+      [
+        113.1,
+        36.2
+      ],
+      [
+        112.923889,
+        35.798056
+      ]
+    ],
+    "url": "https://zh.wikisource.org/wiki/史記/卷073",
+    "note": {
+      "en": "Itinerary: 邯郸 → 上党 → 长平. Shiji 73 describes Zhao’s acceptance of Shangdang and deployment at Changping; Handan is a capital context. Shangdang is a district, represented by a regional Changzhi-area anchor. The Fukou or other Taihang pass route is not fixed, so no pass point is invented.",
+      "zh": "所画站点：邯郸 → 上党 → 长平。卷73记赵受上党、发兵长平；邯郸作都城背景。上党是郡域，以长治区域点代表。滏口等太行通道没有定线，不编造关口点位。"
+    },
+    "status": "Reviewed stations; exact road/crossings remain uncertain"
+  },
+  {
+    "id": "xinling-to-handan",
+    "source": "S187",
+    "stations": "大梁 → 邺 → 邯郸",
+    "coordinates": [
+      [
+        114.3,
+        34.8
+      ],
+      [
+        114.4002,
+        36.2748
+      ],
+      [
+        114.49,
+        36.6
+      ]
+    ],
+    "url": "https://zh.wikisource.org/wiki/史記/卷077",
+    "note": {
+      "en": "Itinerary: 大梁 → 邺 → 邯郸. Shiji 77 twice names Jin Bi’s camp at Ye, supporting the earlier correction from Tangyin. Daliang is the narrative court setting and Handan the relief destination. Ye and the capital regions are checked, but the Yellow River ferry, camp footprint and exact road are not known.",
+      "zh": "所画站点：大梁 → 邺 → 邯郸。卷77两次明确晋鄙军营在邺，支持前轮以邺替换汤阴。大梁是叙事中的魏廷，邯郸是救援目的地。城市区域已核，黄河渡口、军营范围及古道仍不明。"
+    },
+    "status": "Reviewed stations; exact road/crossings remain uncertain"
+  },
+  {
+    "id": "qin-han-230",
+    "source": "S188",
+    "stations": "野王区域 → 新郑",
+    "coordinates": [
+      [
+        112.93168,
+        35.09066
+      ],
+      [
+        113.73,
+        34.39
+      ]
+    ],
+    "url": "https://zh.wikisource.org/wiki/史記/卷006",
+    "note": {
+      "en": "Itinerary: 野王区域 → 新郑. Shiji 6 names Teng accepting Han’s Nanyang territory in year 16, then conquering Han in year 17. The Hangu–Yiyang stages were removed because that passage does not attest them. Yewang is a contextual anchor for Han Nanyang/Henei, not a proved departure. The Yellow River crossing is unknown.",
+      "zh": "所画站点：野王区域 → 新郑。卷6记十六年腾受韩南阳地，十七年攻韩。原函谷、宜阳两站没有该段途经证据，已删。野王只代表韩南阳、河内的背景区域，不是确证出发点，黄河渡口仍不明。"
+    },
+    "status": "Reviewed stations; exact road/crossings remain uncertain"
+  },
+  {
+    "id": "qin-zhao-229",
+    "source": "S189",
+    "stations": "井陉 → 邯郸",
+    "coordinates": [
+      [
+        114.14,
+        38.03
+      ],
+      [
+        114.49,
+        36.6
+      ]
+    ],
+    "url": "https://zh.wikisource.org/wiki/史記/卷006",
+    "note": {
+      "en": "Itinerary: 井陉 → 邯郸. Shiji 6 says Wang Jian led the upper territory forces down Jingxing while Yang Duanhe besieged Handan from Henei. Removed Shangdang as a supposed start: the text says shangdi, not Shangdang. The line combines the named pass region and siege destination, not all simultaneous armies; the exact pass road is unknown.",
+      "zh": "所画站点：井陉 → 邯郸。卷6记王翦将上地下井陉，杨端和自河内围邯郸。原文是上地，不是上党，已删原上党起点。连线只联系关隘区域与围城目的地，不代表全部同时出动军队，精确过关路未定。"
+    },
+    "status": "Reviewed stations; exact road/crossings remain uncertain"
+  },
+  {
+    "id": "qin-wei-225",
+    "source": "S190",
+    "stations": "雒邑区域 → 大梁",
+    "coordinates": [
+      [
+        112.45,
+        34.68
+      ],
+      [
+        114.3,
+        34.8
+      ]
+    ],
+    "url": "https://zh.wikisource.org/wiki/史記/卷006",
+    "note": {
+      "en": "Itinerary: 雒邑区域 → 大梁. Shiji 6 attests Wang Ben’s attack and diversion of water into Daliang, not an origin at Luoyi. Luoyi represents the Qin Sanchuan background assumed by the specification, explicitly unverified as departure. The river/canal diversion and marching road are not traced; a short connection must not be read as a siege-watercourse.",
+      "zh": "所画站点：雒邑区域 → 大梁。卷6能证王贲攻魏、引水灌大梁，不能证从雒邑出发。雒邑仅作定稿所取三川区域背景，出发地未证；河沟引水线及古道未描摹，不能把连线当水攻渠道。"
+    },
+    "status": "Reviewed stations; exact road/crossings remain uncertain"
+  },
+  {
+    "id": "li-xin-225",
+    "source": "S191",
+    "stations": "平舆 → 父城（宝丰区域说）",
+    "coordinates": [
+      [
+        114.6331,
+        32.95597
+      ],
+      [
+        113.06,
+        33.87
+      ]
+    ],
+    "url": "https://zh.wikisource.org/wiki/史記/卷073",
+    "note": {
+      "en": "Itinerary: 平舆 → 父城（宝丰区域说）. Shiji 73 gives Pingyu, an attack on Yan/Ying, then movement west to Chengfu; the old Chen start and eastward Chengfu point were removed. This line selects the traditional Zhengyi/Jiaqing gazetteer identification with Fucheng east of Baofeng, represented only by a modern county-area anchor. It omits the unlocated Yan/Ying stage. Bozhou is a competing identification, and 225 BCE remains inferred rather than an explicit year in the passage. Shiji 73 attributes 200,000 troops to the expedition; this is an unverified narrative figure.",
+      "zh": "所画站点：平舆 → 父城（宝丰区域说）。卷73记平舆、攻鄢郢后引兵而西会城父。已删无据的陈起点及向东的旧城父点；选《正义》与《嘉庆一统志》所取宝丰东父城说，仅用现代县域点表示，不绘未定位的鄢郢段。亳州说仍存，前225年也是推定纪年。卷73所记20万兵力属未经独立核实的叙事数字。"
+    },
+    "status": "Reviewed stations; exact road/crossings remain uncertain"
+  },
+  {
+    "id": "wang-jian-224",
+    "source": "S192",
+    "stations": "陈 → 平舆 → 寿春区域",
+    "coordinates": [
+      [
+        114.9,
+        33.62
+      ],
+      [
+        114.6331,
+        32.95597
+      ],
+      [
+        116.78,
+        32.57
+      ]
+    ],
+    "url": "https://zh.wikisource.org/wiki/史記/卷073",
+    "note": {
+      "en": "Itinerary: 陈 → 平舆 → 寿春区域. Shiji 6 gives Chen south to Pingyu; Shiji 73 instead emphasizes fortified waiting, pursuit to Qinan and eventual capture of the king. Removed the old plotted Qinan point because its identification/order cannot be established from those passages. Shouchun is a last-capital context, not a proved final march. The Huai crossing and the 224/223 capture chronology remain disputed. Shiji 73 attributes 600,000 troops to the expedition; this is an unverified narrative figure.",
+      "zh": "所画站点：陈 → 平舆 → 寿春区域。卷6记取陈以南至平舆；卷73重在坚壁、追至蕲南及俘楚王，不能把两者硬拼成精确行程。蕲南点辨址、次序不足已删。寿春只作末期楚都背景，不是已证末段行军；淮河渡口及前224／223年俘王纪年仍有争议。卷73所记60万兵力属未经独立核实的叙事数字。"
+    },
+    "status": "Reviewed stations; exact road/crossings remain uncertain"
+  },
+  {
+    "id": "qin-yan-222",
+    "source": "S193",
+    "stations": "蓟 → 辽东区域",
+    "coordinates": [
+      [
+        116.382425,
+        39.894262
+      ],
+      [
+        123.17,
+        41.27
+      ]
+    ],
+    "url": "https://zh.wikisource.org/wiki/史記/卷006",
+    "note": {
+      "en": "Itinerary: 蓟 → 辽东区域. Shiji 6 attests the Liaodong campaign and capture of King Xi, followed by Dai. Ji is a former Yan capital context, not the documented departure; no Dai branch is invented. The coastal corridor, Liao River crossing and the king’s exact capture site remain unknown.",
+      "zh": "所画站点：蓟 → 辽东区域。卷6记攻燕辽东、俘王喜后还攻代。蓟为燕旧都背景，不是已证出发点，不编造赴代支线。沿海通道、辽河渡口及俘王处仍不明。"
+    },
+    "status": "Reviewed stations; exact road/crossings remain uncertain"
+  },
+  {
+    "id": "qin-qi-221",
+    "source": "S194",
+    "stations": "蓟区域 → 临淄",
+    "coordinates": [
+      [
+        116.382425,
+        39.894262
+      ],
+      [
+        118.337908,
+        36.889756
+      ]
+    ],
+    "url": "https://zh.wikisource.org/wiki/史記/卷006",
+    "note": {
+      "en": "Itinerary: 蓟区域 → 临淄. Shiji 6 explicitly says Wang Ben attacked Qi southward from Yan. Ji and Linzi represent capital regions, not a traced departure gate or surrender site. The ancient Yellow/Ji River crossings and the detailed march are not recovered.",
+      "zh": "所画站点：蓟区域 → 临淄。卷6明确王贲从燕南攻齐。蓟、临淄代表都城区域，不是已核城门或投降现场；古黄河、济水渡口及具体行军路未复原。"
+    },
+    "status": "Reviewed stations; exact road/crossings remain uncertain"
+  },
+  {
+    "id": "first-emperor-last-tour",
+    "source": "S195",
+    "stations": "咸阳 → 云梦区域 → 会稽区域 → 琅琊 → 芝罘 → 沙丘",
+    "coordinates": [
+      [
+        108.857778,
+        34.413889
+      ],
+      [
+        113.75,
+        31.02
+      ],
+      [
+        120.58,
+        30.0
+      ],
+      [
+        119.902042,
+        35.649444
+      ],
+      [
+        121.379528,
+        37.612056
+      ],
+      [
+        115.15,
+        37.1
+      ]
+    ],
+    "url": "https://zh.wikisource.org/wiki/史記/卷006",
+    "note": {
+      "en": "Itinerary: 咸阳 → 云梦区域 → 会稽区域 → 琅琊 → 芝罘 → 沙丘. Shiji 6 gives Yunmeng, descent on the Yangtze, Danyang, Qiantang, a westward search for a Zhejiang crossing, Kuaiji, Langya, Zhifu, Pingyuan ferry and Shaqiu. The published Langya/Zhifu coordinates are checked. Yunmeng and Kuaiji remain regional choices; exact river channels, Yangtze/Zhejiang crossings, omitted stops and Shaqiu palace location are not established. The thirty-seventh regnal year begins in the tenth lunar month, so the 211–210 BCE span reflects the Qin calendar, not two separate tours.",
+      "zh": "所画站点：咸阳 → 云梦区域 → 会稽区域 → 琅琊 → 芝罘 → 沙丘。卷6记云梦、浮江下、丹阳、钱唐、西求浙江渡口、会稽、琅琊、芝罘、平原津、沙丘。琅琊、芝罘坐标已核。云梦、会稽仍为区域选点，古江道、长江浙江渡口、未画停靠点及沙丘宫址未定。秦三十七年始于十月，前211—前210年跨年不表示两次巡游。"
+    },
+    "status": "Reviewed stations; exact road/crossings remain uncertain"
+  }
+]

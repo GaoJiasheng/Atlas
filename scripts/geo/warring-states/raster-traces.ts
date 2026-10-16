@@ -5,6 +5,7 @@
  * raster georeferencer transforms this flat mask with the original map CPs.
  */
 import fs from 'node:fs';import sharp from 'sharp';
+import {object, readJson, required} from './strict-input';
 type P=[number,number];
 export const traces:Record<string,Record<string,P[]>>={G7:{
  qin:[[144,327],[144,315],[152,305],[160,296],[166,292],[175,299],[184,294],[192,283],[203,282],[218,278],[230,276],[245,283],[258,283],[270,278],[282,272],[288,260],[296,255],[302,266],[302,278],[316,282],[324,280],[326,287],[319,299],[320,310],[314,320],[317,328],[329,333],[330,342],[321,347],[309,342],[297,340],[284,343],[273,340],[254,343],[242,339],[225,338],[212,335],[204,338],[191,339],[179,335],[169,338],[159,333],[150,334]],
@@ -43,24 +44,26 @@ ba:[[281,490],[290,505],[303,510],[297,526],[290,548],[287,563],[279,573],[265,5
 };
 // G8 uses the same physical map template, here digitised in its original 736x786 authoring grid.
 // It is rendered at the downloaded Commons thumbnail dimensions (330x352).
+const g7=required(traces.G7, 'G7 trace shapes');
+const inherited=(name:string)=>required(g7[name], `G7 ${name} trace`);
 traces.G8={
-chu:traces.G7.chu!, 'chu-east':traces.G7.yue!, qi:traces.G7.qi!, 'qi-south':traces.G7.song!, lu:traces.G7.lu!, wey:traces.G7.wey!,
+chu:inherited('chu'), 'chu-east':inherited('yue'), qi:inherited('qi'), 'qi-south':inherited('song'), lu:inherited('lu'), wey:inherited('wey'),
 qin:[[145,327],[143,305],[154,292],[163,293],[175,299],[184,294],[192,283],[203,282],[218,278],[230,276],[244,282],[260,282],[270,278],[275,264],[275,252],[282,239],[283,220],[279,199],[282,179],[288,162],[295,145],[308,131],[318,136],[327,143],[341,143],[344,152],[343,165],[336,176],[333,193],[330,208],[341,219],[348,231],[356,231],[355,246],[345,249],[341,255],[339,266],[343,276],[348,286],[356,292],[365,292],[369,301],[381,302],[386,310],[382,317],[385,324],[399,329],[411,333],[415,346],[407,356],[395,367],[379,373],[367,377],[353,382],[330,385],[325,394],[322,405],[312,421],[307,435],[313,447],[329,452],[341,464],[351,478],[357,493],[351,501],[345,513],[345,526],[344,537],[334,550],[320,554],[304,554],[288,558],[276,560],[274,546],[272,531],[262,517],[251,508],[238,502],[226,502],[214,505],[200,505],[186,506],[172,501],[161,495],[149,496],[136,492],[126,487],[116,487],[113,479],[119,468],[127,457],[138,443],[143,432],[146,418],[147,402],[149,386],[153,373],[153,359],[145,350]],
 zhao:[[328,143],[340,127],[354,120],[370,119],[386,114],[400,110],[411,105],[422,98],[427,106],[427,119],[433,135],[441,154],[445,166],[450,171],[450,185],[449,198],[443,207],[445,217],[437,231],[438,241],[431,249],[427,258],[417,257],[407,263],[396,265],[392,249],[379,241],[370,238],[361,234],[356,231],[348,231],[341,219],[330,208],[333,193],[336,176],[343,165],[344,152],[341,143]],
 yan:[[422,98],[432,83],[432,71],[450,67],[460,69],[477,60],[489,59],[503,52],[518,47],[530,43],[549,46],[562,44],[573,42],[586,38],[598,44],[608,42],[613,32],[625,24],[633,18],[644,20],[655,27],[655,43],[671,58],[682,68],[684,84],[700,101],[719,119],[720,127],[705,123],[690,119],[677,114],[666,103],[650,103],[644,107],[631,105],[613,100],[597,112],[584,127],[572,138],[563,149],[550,164],[531,177],[517,175],[507,181],[497,177],[485,177],[479,170],[465,174],[450,171],[445,166],[441,154],[433,135],[427,119],[427,106]],
 wei:[[367,265],[379,259],[386,255],[396,265],[407,263],[417,257],[427,258],[431,249],[438,241],[437,256],[439,267],[439,277],[446,278],[453,276],[456,282],[463,284],[468,279],[470,287],[464,291],[452,291],[447,296],[436,295],[429,291],[423,293],[413,292],[407,298],[398,297],[392,303],[381,302],[369,301],[365,292],[356,292],[348,286],[343,276],[339,266],[341,255],[345,249],[355,246],[356,252],[364,258]],
-han:traces.G7.han!, 'han-south':[[370,311],[381,302],[392,303],[398,297],[407,298],[413,292],[423,293],[429,291],[436,295],[447,296],[446,304],[440,310],[436,317],[435,325],[425,328],[415,332],[411,333],[399,329],[385,324],[382,317],[386,310]]
+han:inherited('han'), 'han-south':[[370,311],[381,302],[392,303],[398,297],[407,298],[413,292],[423,293],[429,291],[436,295],[447,296],[446,304],[440,310],[436,317],[435,325],[425,328],[415,332],[411,333],[399,329],[385,324],[382,317],[386,310]]
 };
 const colors:Record<string,string>={'wei-central':'#db9d5c','wei-east':'#db9d5c','chu-east':'#bd6e7e','qi-south':'#7da58e',jin:'#d1ad76',ju:'#66b7bc',zheng:'#bdd18c',wu:'#a99bc9',ba:'#d98fb8',qin:'#9c8170',zhao:'#94a286',wei:'#db9d5c',han:'#b8bd5c','han-south':'#b8bd5c',qi:'#7da58e',chu:'#bd6e7e',yan:'#c4b476',yue:'#a6b06e',song:'#b29e86',lu:'#ce9c64',wey:'#99bdb1',zhou:'#d3c49b',zhongshan:'#b590a1'};
 for(const[id,polygons]of Object.entries(traces)){
- const file=`scripts/geo/warring-states/raw/${id}.png`;const meta=await sharp(file).metadata();const w=meta.width!,h=meta.height!;
+ const file=`scripts/geo/warring-states/raw/${id}.png`;const meta=await sharp(file).metadata();const w=required(meta.width, `${id} width`),h=required(meta.height, `${id} height`);
  const pathPolygons=Object.fromEntries(Object.entries(polygons).map(([n,p])=>[n,id==='G8'?p.map(([x,y])=>[x*w/736,y*h/786]as P):p]));
  const paths=Object.entries(pathPolygons).map(([n,p])=>`<polygon points="${p.map(a=>a.join(',')).join(' ')}" fill="${colors[n]}"/>`).join('');
  const svg=`<svg width="${w}" height="${h}" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="white"/>${paths}</svg>`;
  await sharp(Buffer.from(svg)).png().toFile(`scripts/geo/warring-states/raw/${id}-trace.png`);
  const edge=Object.entries(pathPolygons).map(([n,p])=>`<polygon points="${p.map(a=>a.join(',')).join(' ')}" fill="${colors[n]}" fill-opacity=".18" stroke="#00ffff" stroke-width="1"/>`).join('');
  await sharp(file).composite([{input:Buffer.from(`<svg width="${w}" height="${h}">${edge}</svg>`)}]).png().toFile(`scripts/geo/warring-states/check/raster-${id}-trace-overlay.png`);
- const mf='scripts/geo/warring-states/raster-manifest.json';const m=JSON.parse(fs.readFileSync(mf,'utf8'));const src=m.raster[id];src.dataset=`${id}-trace`;src.palette=Object.fromEntries(Object.entries(colors).filter(([n])=>polygons[n]).map(([n,c])=>[c,n==='wei-central'||n==='wei-east'?'wei':n==='han-south'?'han':n==='chu-east'?'chu':n==='qi-south'?'qi':n]));src.palette['#ffffff']='_outside';src.land=[...new Set(Object.values(src.palette))].filter(c=>c!=='_outside');src.sea=[];src.tolerance=2;src.minRegionPx=2;src.exclude=[];fs.writeFileSync(mf,JSON.stringify(m,null,2)+'\n');
+ const mf='scripts/geo/warring-states/raster-manifest.json';const m=object(readJson(mf));const src=object(object(m.raster)[id]);src.dataset=`${id}-trace`;src.palette=Object.fromEntries(Object.entries(colors).filter(([n])=>polygons[n]).map(([n,c])=>[c,n==='wei-central'||n==='wei-east'?'wei':n==='han-south'?'han':n==='chu-east'?'chu':n==='qi-south'?'qi':n]));const palette=object(src.palette);palette['#ffffff']='_outside';src.land=[...new Set(Object.values(palette))].filter(c=>c!=='_outside');src.sea=[];src.tolerance=2;src.minRegionPx=2;src.exclude=[];fs.writeFileSync(mf,JSON.stringify(m,null,2)+'\n');
 }
 
 // Refine the relief-tinted Shangdang/Yewang borders directly from source colours.

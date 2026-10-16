@@ -1,224 +1,182 @@
-# Warring States draft: verification ledger
+# Warring States: second-pass verification ledger
 
-These are unresolved source/site questions, not asserted conclusions. Chinese text remains an English draft prefixed 【待译】. A schema pass does not resolve these questions.
+Updated 16 October 2026. Both languages are **editorial drafts**, not historian-approved publication text. Validation checks structure; it does not establish historical certainty.
 
-## Historical facts requiring reconciliation
+## Audit accounting
 
-Contested anchors: Kuiqiu (Lankao/Minquan), Chengpu (Juancheng/Fan), Boju (Macheng/Hanchuan), Fujiao, Shimen, Guiling, Maling (Shen/Tancheng), Xiuyu, Danyang, Yuyu, Zui, Pingyang, Fei and Chengfu. Goujian’s stay in Wu, Li Xin’s campaign year, Wey’s final chronology/residence and Yue after 306 BCE remain unresolved in the cited passages. Full Zeng and Yonglu excavation records, named Changping demographic estimates/page references, the narrow 256–251 BCE Dujiangyan construction range and museum object records remain to be checked. Route station coordinates are schematic anchors; full station-by-station primary-text and Wikidata reconciliation remains outstanding.
+Original denominator: **53 ledger units** = 50 marked source/event records plus 3 chapter passages. **5 fully closed, 48 remaining**. Remaining includes partial resolutions and deliberately disclosed uncertainty, not 48 untouched records. The 26 routes were all reviewed against the cited narratives; none is claimed to be a recovered ancient road. Four weak-map dependencies were separately mitigated by exclusion and are not added to this denominator.
 
-## Every marked source or event record
+Closed units: S31 (verified museum records), S42 (unused research target withdrawn), site-dujiangyan and chapter 10 irrigation (unsupported narrow dates withdrawn), chapter 08 demographic passage (replaced by a specifically attributed checked secondary discussion). Wey chronology is resolved, but its final precise residence remains open, so its original combined unit is still counted as remaining.
 
-The route entries S170–S195 retain their individual station lists below. This ledger includes all 50 marked source/event records and all 3 marked chapter passages.
+## Original non-route units
 
-### S26 — Yonglu excavation bibliography
+| Original unit | Status | Resolution or remaining question |
+|---|---|---|
+| S26 | remaining / partially checked | Issue and page range cross-checked indirectly: Wenwu 1996(6), pp.33–40. Original excavation publication and osteology still not read. |
+| S31 | closed | Official Shanghai Museum and Shaanxi History Museum object records directly checked; citations S31/S162 replace the unverified research target. |
+| S42 | closed | Unused unconsulted bibliography removed. No Gu Donggao aggregate war count is asserted; this is withdrawal, not verification of a total. |
+| S43 | remaining / partially checked | Chinese infoboxes and Wikidata P625 checked in the saved inventory. Missing statements and conflicting place identifications remain; P625 is not treated as a surveyed battlefield. |
+| S158 | remaining / partially checked | Indexed protection-plan statement retained with its access limitation; S26 bibliography and S159 secondary discussion cross-check the small sample. Original report and full osteology remain open. |
+| kuiqiu | remaining / partially checked | Chinese Wikipedia places Kuiqiu in Minquan and mentions Kuiqiu Terrace; Wikidata Q17502333 has no P625. The Lankao/Minquan identification remains disputed; the marker is regional, not a surveyed meeting site. |
+| chengpu | remaining / partially checked | The Chinese infobox places Chengpu southwest of Juancheng. Wikidata Q2313318 instead gives a Catalan-Wikipedia-imported point at 114.529 E, 34.6711 N, which conflicts with that identification and is rejected here. Juancheng/Fan remains unresolved. |
+| boju | remaining / partially checked | The Chinese infobox names only Boju; Wikidata Q1278781 has no P625. Macheng and Hanchuan identifications remain unresolved. The point is an approximate region, not a located battlefield. |
+| fujiao | remaining / partially checked | The Chinese infobox gives no numeric coordinate and Q97300301 has no P625. The place remains uncertain. Shiji 41 records return to Yue and tasting gall but does not establish the familiar detailed three-year service chronology in Wu; that chronology is omitted. Sleeping on brushwood is a later elaboration. |
+| site-zeng-hou-yi | remaining / partially checked | The burial is conventionally dated around 433 BCE. Hubei Provincial Museum’s official record confirms the 65 bells and 1978 excavation. The full original tomb excavation publication has not been read; no state boundary is inferred from this coarse tomb-area coordinate. |
+| shimen | remaining / partially checked | Shiji 5, Duke Xian year 21, says the opponent was Jin and records 60,000 heads. The conventional identification with Wei is distinguished from the original wording. No matching numeric battle coordinate was verified; the Shimen marker remains provisional. The number is not an independently established casualty census. |
+| guiling | remaining / partially checked | Shiji 65 describes threatening Daliang before Guiling. Q2065036 has no P625; the Chinese page reports Heze and Changyuan identifications. The battlefield and river crossings remain uncertain; the unsupported Pinglu route station has been removed. |
+| maling | remaining / partially checked | Shiji places Pang Juan’s death at Maling; the excavated Qin Pang Juan text instead reports capture during the Guiling campaign. The Chinese infobox and prose conflict among Shen, Fan and Tancheng identifications; Q2005185 gives 115.3975 E, 35.885833 N without resolving them. No point is adopted as a definitive battlefield or independently verified casualty total. |
+| xiuyu | remaining / partially checked | The Qin annals record 82,000 heads, an unverified military claim. The Chinese Xiuyu page redirects to the 318 BCE Hangu campaign and supplies no independent coordinate for the 317 BCE encounter. The marker remains provisional and does not determine an operational route. |
+| danyang | remaining / partially checked | The Qin annals record 80,000 heads and the capture of Qu Gai, a transmitted Qin military claim. The Chinese page identifies the Dan/Xi river meeting area near Xichuan but gives no numeric coordinate. Competing Danyang identifications remain unresolved; the marker is regional. |
+| yuyu | remaining / partially checked | The Chinese infobox places Yuyu northwest of Heshun; Q15909774 has no P625. The marker is only a Heshun-area context anchor, not a surveyed battlefield; alternative identifications remain. Shiji 81 is a military-judgement narrative and supplies no independently established casualty total. |
+| changping-massacre | remaining / partially checked | Shiji 73 reports about 400,000 surrendering, 240 young survivors released and 450,000 cumulatively beheaded or captured; Shiji 5 gives more than 400,000 killed. These are transmitted claims. The Yonglu sample of about 130 individuals cannot establish the campaign total. Zhang Guangzhi (2016), pp. 7–8, identifies modern numerical objections and discusses archaeological limits; the original excavation report remains unread. Most victims have no surviving names; their deaths should remain visible apart from the campaign result. |
+| hangu-241 | remaining / partially checked | Shiji’s Zhao hereditary house says Zui, while the Lord Chunshen biography says Hangu; these are different places, and coalition membership also differs. The present point is only a Qin-capital-area proxy for the Zui account, not proof that the coalition reached it. The competing campaign geography remains for historical review. |
+| pingyang-234 | remaining / partially checked | Shiji 6 gives 100,000 heads. The Zhengyi cites Kuodi zhi locating Pingyang west of Linzhang; the Zhao house says Wucheng and chapter 81 says Wusui for related fighting. The Linzhang-area marker does not settle these differences. The number remains an unverified Qin military claim. |
+| fei-233 | remaining / partially checked | Shiji 81 describes Li Mu defeating Huan Yi near Yi’an; the Zhao house says Feixia. The Chinese infobox places Fei west of modern Jinzhou, but has no numeric coordinate. The marker remains a broad Yi’an–Fei campaign proxy; the exact battlefield and casualty total are not established. |
+| li-xin-defeat | remaining / partially checked | Shiji 73 gives 200,000 troops, two camps overrun and seven commandants killed, but no absolute campaign year. The conventional 225 BCE date remains an inference. The marker now uses the Baofeng county region as a deliberately coarse proxy for the traditional Zhengyi/Jiaqing gazetteer Fucheng interpretation, consistent with westward movement. Bozhou is a competing identification; neither the Yan/Ying stage nor the final battlefield is securely located. |
+| site-dujiangyan | closed | UNESCO places the system’s origin in the third century BCE. The unsupported narrow 256–251 BCE range has been removed. The displayed 256 BCE is only a conventional topic anchor, not an established completion year. |
+| wey-abolished | remaining / partially checked | Shiji 37 explicitly records relocation to Yewang, the unification in Lord Jiao’s ninth year, and his abolition in his twenty-first. Correlation with 221 BCE gives 209 BCE. Yewang is the textual late residence; the precise final dwelling cannot be recovered from it. |
+| yue-after-306 | remaining / partially checked | Shiji 41 describes Wuq­iang’s defeat and dispersed successor rulers without an absolute 306 BCE date. That conventional chronological reconstruction remains disputed. Shiji 6 records submission of Yue rulers in 222 BCE, not survival of one unchanged Yue state or boundary throughout. |
+| chapter08-demography | closed | Removed the unsourced generic promise of demographic calculations; named Zhang Guangzhi (2016), pp.7–8, as a checked secondary discussion. No alternative death toll adopted. Song/Shu original calculations remain outside the claims made here. |
+| chapter08-excavation | remaining / partially checked | Explains the sample cannot establish the total or distinguish every battlefield burial from an execution. Original excavation text remains unread; does not translate keng automatically as live burial. |
+| chapter10-irrigation | closed | Removed unsupported 256–251 BCE construction range in EN/ZH. Retains only the attributed third-century BCE origin and explicitly conventional event anchor. |
 
-[待核] Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.
+## All 26 route reconciliations
 
-### S31 — Shang Yang measure and Du tiger tally museum records
+Each source S170–S195 is dedicated to the corresponding movement. Its bilingual `note` contains the station order, evidence and unresolved crossings, passes or identifications. The engine's strict movement schema has no `note` property; these notes therefore live in the route-specific source records and the Movement routes table in [data/SOURCES.md](data/SOURCES.md), rather than adding an invalid runtime field. All routes retain a schematic label.
 
-[待核] Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.
+Every route below is **reviewed; remaining geographic uncertainty is explicit**. Removed stations are not quietly replaced with invented intermediate points. A county or regional proxy is labelled as such. No line is evidence for a particular ford, pass road or river centreline.
 
-### S42 — Gu Donggao war-count definitions, edition and pages
+### S170 — zhou-move-east
 
-[待核] Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.
+Itinerary: 镐京 → 雒邑. Shiji 4 establishes the eastward relocation, but not Mount Li, Huayin, Hangu or Mianchi as travel stations. Those four were removed; the endpoints do not establish a road through the Xiao–Hangu corridor. Passes and Yellow River crossing remain unlocated.
 
-### S43 — Remaining Wikidata site identifiers and precision
+### S171 — qi-north-shanrong
 
-Coordinates currently follow the approximate anchors in the approved specification. [待核] Site-by-site reconciliation with Wikidata item identifiers and coordinate precision is incomplete; these are not claimed as surveyed battle locations.
+Itinerary: 临淄 → 令支 → 孤竹. Shiji 32 names the relief of Yan and Guzhu; a later speech also names Lingzhi. Ji was removed as an unattested campaign station. Lingzhi P625 is checked; Guzhu remains regional. The Ji River crossing and exact approach to the mountains are unknown.
 
-### S170
+### S172 — chonger-exile
 
-Itinerary: Haojing → Mount Li → Huayin → Hangu → Mianchi → Luoyi. Zhou annals; the approved specification identifies the Wei valley and Xiao–Hangu corridor. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[108.78, 34.23], [109.2, 34.38], [110.09, 34.57], [110.9, 34.6], [111.76, 34.76], [112.45, 34.68]].
+Itinerary: 蒲 → 楚丘 → 临淄 → 陶丘 → 宋 → 新郑 → 郢 → 雍 → 绛. Shiji 39 supports the sequence Pu–Di–Wey–Qi–Cao–Song–Zheng–Chu–Qin–Jin. The unlocated Di stay is not plotted. Wey is now represented at Chuqiu, not abandoned Chaoge; the state capitals are contextual regional anchors, not every lodging or ferry. Repeated local movements and return crossings are not recovered.
 
-### S171
+### S173 — chu-to-chengpu
 
-Itinerary: Linzi → Ji → Lingzhi → Guzhu. Zuozhuan, Duke Zhuang year 30. A Ji River crossing cannot be fixed from the available text and is not invented. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[118.337908, 36.889756], [116.35, 39.88], [118.7, 40.0], [118.89, 39.89]].
+Itinerary: 郢 → 宋 → 城濮. Zuozhuan, Xi 27–28 supports the siege of Song followed by Chengpu. Fangcheng and Chen were removed because these passages do not establish them as stations. The Han River/Fangcheng approach and the disputed Chengpu location are unresolved; the line is a campaign connection, not an ancient road.
 
-### S172
+### S174 — jin-to-chengpu
 
-Itinerary: Pu → Chaoge → Linzi → Cao → Song → Xinzheng → Ying → Yong → Jiang. Shiji, Jin hereditary house; Zuozhuan. The unspecified Di residence is omitted as a point; the order of named courts is retained. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[111.09, 36.41], [114.25, 35.62], [118.337908, 36.889756], [115.55, 34.83], [115.65, 34.42], [113.73, 34.39], [112.190298, 30.405722], [107.4, 34.5], [111.48, 35.62]].
+Itinerary: 绛 → 陶丘 → 城濮. Zuozhuan, Xi 28 attests crossing the river, Wulu, attack on Cao and retreat to Chengpu. Chaoge was removed: attacking Wey is not proof of visiting its former capital. Wulu and the Yellow River ferry are not securely located, so neither receives an invented point. Jiang is a capital-area context anchor.
 
-### S173
+### S175 — qin-raid-zheng
 
-Itinerary: Ying → Fangcheng → Chen → Song → Chengpu. Zuozhuan, Duke Xi years 27–28; approved-spec campaign corridor. Exact roads are not recovered. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[112.190298, 30.405722], [113.0, 33.25], [114.9, 33.62], [115.65, 34.42], [115.48, 35.6]].
+Itinerary: 雍 → 雒邑 → 滑 → 崤. Zuozhuan, Xi 32–33 and Shiji 5 describe passing Zhou’s north gate, reaching and destroying Hua, then the return ambush at Xiao. Replaced the Hangu station with the explicitly named Zhou capital region. Zheng was only the intended target. The pass, ferries and Xiao ambush position remain uncertain.
 
-### S174
+### S176 — wu-to-ying
 
-Itinerary: Jiang → Chaoge → Cao → Chengpu. Zuozhuan, Duke Xi year 28. An unlocated Yellow River crossing is not assigned an invented point. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[111.48, 35.62], [114.25, 35.62], [115.55, 34.83], [115.48, 35.6]].
+Itinerary: 姑苏 → 柏举 → 郢. Zuozhuan, Ding 4 gives leaving boats at Huairui, facing across the Han from Yuzhang, then Boju–Qingfa–Yongshi–Ying. Removed Zhoulai and Cai: alliance participation does not establish a marching stop there. Huairui, Yuzhang, the three passes, Han crossing, Qingfa and Yongshi are not securely located; the sparse line does not recover the water/land route.
 
-### S175
+### S177 — confucius-travels
 
-Itinerary: Yong → Hangu → Hua → Xiao. Zuozhuan, Duke Xi years 32–33. Zheng is the intended target, not a claim that Qin reached its capital. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[107.4, 34.5], [110.9, 34.6], [112.8, 34.7], [111.6, 34.73]].
+Itinerary: Qufu → Diqiu → Kuang → Song → Xinzheng → Chen → Ye → Diqiu → Qufu. Shiji 47 supports this selected sequence of regions, not a continuous day-by-day trip. Corrected Wey from abandoned Chaoge to Diqiu/Puyang; removed assumed Shangcai and unsupported Fuhan. Added the text’s explicit Ye visit, represented by a modern county-region point. Its return to Cai is not plotted because the precise Cai location is unresolved. Repeated Wey visits, Cai’s moved centre, Kuang identification, chronology and river crossings remain uncertain.
 
-### S176
+### S178 — wu-to-huangchi
 
-Itinerary: Gusu → Zhoulai → Cai → Boju → Ying. Zuozhuan, Duke Ding year 4. The specification’s river transport and disputed Yuzhang segment are acknowledged, but no unsupported river course or waypoint is added. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[120.62, 31.3], [116.72, 32.7], [114.98, 33.26], [114.95, 31.2], [112.190298, 30.405722]].
+Itinerary: 姑苏 → 邗 → 黄池. Zuozhuan, Ai 9 attests the Han canal linking Yangtze and Huai; Ai 13 attests Huangchi. The Huai–Si junction was removed because its ancient location and use by this expedition are not established here. The Yangtze crossing, canal centreline and overland connection to Huangchi are unknown; land is a display category for this mixed-mode journey.
 
-### S177
+### S179 — wei-to-handan
 
-Itinerary: Qufu → Chaoge → Kuang → Song → Xinzheng → Chen → Cai → Fuhan → Chaoge → Qufu. Shiji, Confucius hereditary house. The exact order and identification of some visits remain disputed; this is the conventional itinerary selected in the specification. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[116.9862, 35.5819], [114.25, 35.62], [114.88, 35.2], [115.65, 34.42], [113.73, 34.39], [114.9, 33.62], [114.98, 33.26], [114.2, 32.13], [114.25, 35.62], [116.9862, 35.5819]].
+Itinerary: 大梁 → 邯郸. Shiji 65 attests the attack on Handan. Daliang is Wei’s contextual capital anchor, not an attested departure; Anyi remains an alternative. The Yellow River crossing and precise northward road are unknown; no ferry is invented.
 
-### S178
+### S180 — qi-to-guiling
 
-Itinerary: Gusu → Yangzhou → Huai–Si junction → Huangchi. Zuozhuan and the approved specification describe canal and river transport. Only named endpoint and junction anchors are plotted; this is not a traced ancient canal centreline. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[120.62, 31.3], [119.43, 32.4], [118.49, 33.03], [114.4, 35.05]].
+Itinerary: 临淄 → 大梁方向 → 桂陵. Shiji 65 explicitly describes threatening Daliang before the encounter at Guiling. Replaced Pinglu, which is not a station in that account, with the stated strategic direction. Daliang is not a claim that Qi entered the city. The Ji/Yellow River crossings and Guiling identification are unresolved.
 
-### S179
+### S181 — qi-maling
 
-Itinerary: Daliang → Handan. Shiji narratives of the Wei–Zhao war; the specification allows Anyi or Daliang as the departure tradition. Daliang is selected and flagged as an uncertain departure anchor. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[114.3, 34.8], [114.49, 36.6]].
+Itinerary: 临淄 → 大梁方向 → 马陵. Shiji 65 gives the direction toward Daliang, entry westward into Wei, then the retreat/ambush narrative. The Daliang point is a threatened direction, not an entered city. Maling’s Shen/Fan/Tancheng identifications conflict with each other and the Wikidata point; no surveyed retreat road or exact passage is claimed.
 
-### S180
+### S182 — qin-to-shu
 
-Itinerary: Linzi → Pinglu → Guiling. Shiji, Sunzi and Wu Qi biographies, and the approved-spec itinerary. Pinglu and Guiling are approximate identifications. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[118.337908, 36.889756], [116.31, 35.91], [114.67, 35.2]].
+Itinerary: 咸阳 → 汉中 → 葭萌 → 成都. Shiji 70 gives the campaign; Huayang guozhi 3 explicitly names the Stone Ox road and fighting at Jiameng. Jiameng is corrected to the published Zhaohua-area coordinate. Hanzhong and Chengdu are regional context anchors; the Qinling pass choice and full Jinniu/Stone Ox alignment remain uncertain. No legendary road-opening scene is treated as surveyed fact.
 
-### S181
+### S183 — yue-yi-qi
 
-Itinerary: Linzi → Daliang → Maling. Shiji, Sunzi and Wu Qi biographies. Daliang marks the threatened direction, not capture of the city; Maling’s identification and the account of Pang Juan are disputed. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[118.337908, 36.889756], [114.3, 34.8], [115.6, 36.2]].
+Itinerary: 蓟 → 济西 → 临淄. Shiji 80 supports Jixi followed by Linzi. Ji is the Yan capital context, not a documented departure. Jixi describes a battle region west of the ancient Ji, not an exact crossing point. The river ferry and successive occupied-city branches are not reconstructed.
 
-### S182
+### S184 — bai-qi-to-ying
 
-Itinerary: Xianyang → Hanzhong → Jiameng → Chengdu. Shiji, Zhang Yi biography, and the approved-spec corridor through Qinling passes and the Jinniu route. The exact choice between pass itineraries is not resolved. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[108.857778, 34.413889], [107.03, 33.07], [105.79, 32.16], [104.06, 30.66]].
+Itinerary: 邓 → 鄢 → 郢. Shiji 5 and 73 place Yan and Deng in the campaign before Ying, but do not give their internal marching order. Deng–Yan–Ying is a north-to-south regional reconstruction, not a textual sequence; the Wuguan/Han approach and Han crossing are unknown. The Yan point is the modern Yicheng area, not a flood footprint.
 
-### S183
+### S185 — qin-to-changping
 
-Itinerary: Ji → Jixi → Linzi. Shiji, Yue Yi biography. The later spread to many Qi cities is not represented by invented unlocated branches. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[116.35, 39.88], [116.7, 36.5], [118.337908, 36.889756]].
+Itinerary: 野王 → 长平. Shiji 73 attests Yewang’s fall before the Shangdang/Changping war. Both endpoint coordinates are checked, but this is a sequence of theatres, not proof of one army’s exact route. The Taihang ascent and pass alignment have not been recovered.
 
-### S184
+### S186 — zhao-to-changping
 
-Itinerary: Deng → Yan → Ying. Shiji, Bai Qi biography, attests Yan, Deng and Ying in the campaign. The starting Wuguan/Han River corridor is not uniquely fixed and is omitted as a plotted point. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[112.09, 32.69], [112.3, 31.7], [112.190298, 30.405722]].
+Itinerary: 邯郸 → 上党 → 长平. Shiji 73 describes Zhao’s acceptance of Shangdang and deployment at Changping; Handan is a capital context. Shangdang is a district, represented by a regional Changzhi-area anchor. The Fukou or other Taihang pass route is not fixed, so no pass point is invented.
 
-### S185
+### S187 — xinling-to-handan
 
-Itinerary: Yewang → Changping. Shiji, Bai Qi biography, and specification G13–G14 ordering. No exact Taihang pass alignment has been traced; endpoints define a broad theatre connection. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[112.94, 35.09], [112.92, 35.8]].
+Itinerary: 大梁 → 邺 → 邯郸. Shiji 77 twice names Jin Bi’s camp at Ye, supporting the earlier correction from Tangyin. Daliang is the narrative court setting and Handan the relief destination. Ye and the capital regions are checked, but the Yellow River ferry, camp footprint and exact road are not known.
 
-### S186
+### S188 — qin-han-230
 
-Itinerary: Handan → Shangdang → Changping. Shiji, Bai Qi biography, and specification G13–G14 ordering. The Fukou corridor is named by the specification but not turned into a precise pass point. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[114.49, 36.6], [113.1, 36.2], [112.92, 35.8]].
+Itinerary: 野王区域 → 新郑. Shiji 6 names Teng accepting Han’s Nanyang territory in year 16, then conquering Han in year 17. The Hangu–Yiyang stages were removed because that passage does not attest them. Yewang is a contextual anchor for Han Nanyang/Henei, not a proved departure. The Yellow River crossing is unknown.
 
-### S187
+### S189 — qin-zhao-229
 
-Itinerary: Daliang → Ye → Handan. Shiji chapter 77 explicitly locates Jin Bi’s camp at Ye in both the initial deployment and the transfer of command. This corrects the approved specification’s Tangyin station using the directly read base text. Geometry joins named-place anchors, not a measured road or camp boundary. Coordinates: [[114.3, 34.8], [114.4002, 36.2748], [114.49, 36.6]]. Ye anchor: S208. [待核] Daliang and Handan station-level Wikidata linkage and exact road alignment remain incomplete.
+Itinerary: 井陉 → 邯郸. Shiji 6 says Wang Jian led the upper territory forces down Jingxing while Yang Duanhe besieged Handan from Henei. Removed Shangdang as a supposed start: the text says shangdi, not Shangdang. The line combines the named pass region and siege destination, not all simultaneous armies; the exact pass road is unknown.
 
-### S188
+### S190 — qin-wei-225
 
-Itinerary: Hangu → Yiyang → Xinzheng. Shiji, First Emperor annals, and the approved-spec Neishi Teng itinerary. Named stations describe the campaign corridor, not a measured army track. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[110.9, 34.6], [112.18, 34.52], [113.73, 34.39]].
+Itinerary: 雒邑区域 → 大梁. Shiji 6 attests Wang Ben’s attack and diversion of water into Daliang, not an origin at Luoyi. Luoyi represents the Qin Sanchuan background assumed by the specification, explicitly unverified as departure. The river/canal diversion and marching road are not traced; a short connection must not be read as a siege-watercourse.
 
-### S189
+### S191 — li-xin-225
 
-Itinerary: Shangdang → Jingxing → Handan. Shiji, First Emperor annals, describes advance from the upper territory and descent through Jingxing; the start anchor is the specification’s Shangdang. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[113.1, 36.2], [114.14, 38.03], [114.49, 36.6]].
+Itinerary: 平舆 → 父城（宝丰区域说）. Shiji 73 gives Pingyu, an attack on Yan/Ying, then movement west to Chengfu; the old Chen start and eastward Chengfu point were removed. This line selects the traditional Zhengyi/Jiaqing gazetteer identification with Fucheng east of Baofeng, represented only by a modern county-area anchor. It omits the unlocated Yan/Ying stage. Bozhou is a competing identification, and 225 BCE remains inferred rather than an explicit year in the passage. Shiji 73 attributes 200,000 troops to the expedition; this is an unverified narrative figure.
 
-### S190
+### S192 — wang-jian-224
 
-Itinerary: Luoyi → Daliang. Shiji, First Emperor annals, gives Daliang’s flooding; the specification supplies Sanchuan as departure region, anchored here at Luoyi. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[112.45, 34.68], [114.3, 34.8]].
+Itinerary: 陈 → 平舆 → 寿春区域. Shiji 6 gives Chen south to Pingyu; Shiji 73 instead emphasizes fortified waiting, pursuit to Qinan and eventual capture of the king. Removed the old plotted Qinan point because its identification/order cannot be established from those passages. Shouchun is a last-capital context, not a proved final march. The Huai crossing and the 224/223 capture chronology remain disputed. Shiji 73 attributes 600,000 troops to the expedition; this is an unverified narrative figure.
 
-### S191
+### S193 — qin-yan-222
 
-Itinerary: Chen → Pingyu → Chengfu. Shiji, Bai Qi and Wang Jian biographies, describes Pingyu and a westward meeting at Chengfu. Chen is the approved-spec staging anchor. Chengfu’s identification and campaign dating are disputed. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[114.9, 33.62], [114.62, 32.96], [115.0, 33.5]].
+Itinerary: 蓟 → 辽东区域. Shiji 6 attests the Liaodong campaign and capture of King Xi, followed by Dai. Ji is a former Yan capital context, not the documented departure; no Dai branch is invented. The coastal corridor, Liao River crossing and the king’s exact capture site remain unknown.
 
-### S192
+### S194 — qin-qi-221
 
-Itinerary: Chen → Pingyu → Qi → Shouchun. Shiji chapters 6 and 73: campaign south from Chen toward Pingyu, pursuit south of Qi and capture of the Chu king. Narrative order differs; Shouchun is the specification’s capital anchor. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[114.9, 33.62], [114.62, 32.96], [117.14, 33.63], [116.78, 32.57]].
+Itinerary: 蓟区域 → 临淄. Shiji 6 explicitly says Wang Ben attacked Qi southward from Yan. Ji and Linzi represent capital regions, not a traced departure gate or surrender site. The ancient Yellow/Ji River crossings and the detailed march are not recovered.
 
-### S193
+### S195 — first-emperor-last-tour
 
-Itinerary: Ji → Xiangping. Shiji, First Emperor annals, records the Liaodong campaign; the endpoint is the specification’s Xiangping regional anchor, not a proven king-capture site. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[116.35, 39.88], [123.17, 41.27]].
+Itinerary: 咸阳 → 云梦区域 → 会稽区域 → 琅琊 → 芝罘 → 沙丘. Shiji 6 gives Yunmeng, descent on the Yangtze, Danyang, Qiantang, a westward search for a Zhejiang crossing, Kuaiji, Langya, Zhifu, Pingyuan ferry and Shaqiu. The published Langya/Zhifu coordinates are checked. Yunmeng and Kuaiji remain regional choices; exact river channels, Yangtze/Zhejiang crossings, omitted stops and Shaqiu palace location are not established. The thirty-seventh regnal year begins in the tenth lunar month, so the 211–210 BCE span reflects the Qin calendar, not two separate tours.
 
-### S194
+## Geography decisions
 
-Itinerary: Ji → Linzi. Shiji, First Emperor annals, says Wang Ben came south from Yan. No precise road alignment is asserted. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[116.35, 39.88], [118.337908, 36.889756]].
+G11 remains over budget (RMS 26.102 km, maximum 66.657 km); G13/G17 still have only 5/8 independently secure controls; G16 still has no defensible full fit. They were excluded from every frame dependency instead of inventing controls. G15 is also excluded. K9 carries forward G8's 280 BCE outlines; K10 applies only the documented whole-state reassignments; K11 is their schematic union. These are teaching approximations, not exact dated imperial boundaries. See [geography second-pass report](../../../../scripts/geo/warring-states/SECOND-PASS-GEO.md) and the geography source ledger.
 
-### S195
+Control geometry: 11 keyframes, 128 features, 431 rings, zero zero-area rings and zero self-crossings. Every feature is approximate. The shared colouring command checks 70 neighbouring pairs across all frames; none shares a colour. Existing regional land was present and retained.
 
-Itinerary: Xianyang → Yunmeng → Kuaiji → Langya → Zhifu → Shaqiu. Shiji, First Emperor annals, names these major stations in the final tour; its detailed itinerary includes additional stops not plotted. The start year follows the specification, while the final tour’s departure is often conventionally dated 210 BCE. Geometry joins only source-supported named-place anchors; straight links indicate approximate travel corridors, not exact ancient roads, waterways or army positions. No seven-point padding or invented intermediate stations. [待核] Station-by-station Wikidata item linkage and the itinerary’s full primary passage reconciliation are incomplete. Coordinate pairs: [[108.857778, 34.413889], [113.75, 31.02], [120.58, 30.0], [119.91, 35.65], [121.38, 37.6], [115.15, 37.1]].
+## Chinese drafts
 
-### S158
+All chapter, caption, event, entity, route-label, glossary, preset, topic and source bilingual fields now have Chinese drafts. Dates use 前770年-style notation; state names use Chinese characters. Main body counts exclude frontmatter, More blocks, markup, punctuation and digits; count Han characters U+3400–U+9FFF. Full Num/Term opening-tag order and attributes match English in every chapter. Counts are also recorded in [CHINESE-DRAFT-CHECKS.json](CHINESE-DRAFT-CHECKS.json).
 
-According to the indexed passage checked by the team, Article 16 describes the 1995 Yonglu no. 1 pit investigation and remains of more than about 130 individuals. The government PDF download was incomplete/corrupt in this session: the full plan and original excavation report were not read. [待核] Verify the complete excavation report, issue and osteological account. This small excavated sample cannot establish the total killed at Changping.
+| Chapter | Chinese title | Main-body Han characters |
+|---|---|---:|
+| 00-background | 背景：周与它的世界 | 358 |
+| 01-eastern-zhou | 周王室东迁 | 350 |
+| 02-qi-hegemony | 齐桓公与早期霸政 | 361 |
+| 03-jin-and-chu | 晋与楚 | 360 |
+| 04-wu-and-yue | 吴与越 | 369 |
+| 05-partition-of-jin | 三家分晋 | 354 |
+| 06-reforms | 变法：魏、楚与秦 | 364 |
+| 07-alliances | 合纵与连横 | 369 |
+| 08-changping-handan | 长平与邯郸 | 363 |
+| 09-qin-conquest | 秦兼并六国 | 364 |
+| 10-after-221 | 前221年以后：帝国与记忆 | 359 |
 
-### kuiqiu
+## Human historian review before publication
 
-[待核] The exact site remains disputed within the modern Lankao–Minquan area; the marker is the specification’s regional anchor. The team checked the Kuiqiu clauses in Mengzi’s transmitted tradition. The differing Five Hegemon lists in Xunzi, Baihu tong and Zhao Qi’s Mengzi commentary are preserved separately rather than choosing one list.
-
-### chengpu
-
-[待核] The traditional location near Juancheng competes with a Fan County identification. Zuozhuan, Duke Xi year 28, narrates the retreat and coalition fighting; no secure casualty total is retained here. The marker is an approximate place anchor, not a surveyed battlefield boundary. No independently established casualty total is supplied.
-
-### boju
-
-[待核] The battlefield is commonly placed near Macheng, with other identifications including Hanchuan. Zuozhuan, Duke Ding year 4, supplies the campaign narrative; the marker follows the specification. The marker is an approximate place anchor, not a surveyed battlefield boundary. No independently established casualty total is supplied.
-
-### fujiao
-
-[待核] The identification of Fujiao and the later chronology of Goujian’s stay in Wu require source-level review. Tasting gall appears in Shiji; sleeping on brushwood is a later elaboration. The marker is an approximate place anchor, not a surveyed battlefield boundary. No independently established casualty total is supplied.
-
-### site-zeng-hou-yi
-
-The burial is conventionally dated around 433 BCE. The bell set contains 65 bells. [待核] The full excavation publication and museum object record were not directly consulted in this pass; do not infer Zeng’s boundary from this coarse coordinate anchor.
-
-### shimen
-
-Shiji, Qin annals, records 60,000 heads. This is a Qin military record transmitted by a Han historian, not a verified casualty census. [待核] The exact Shimen location and the annals’ use of Jin for its opponents require review. The marker is an approximate place anchor, not a surveyed battlefield boundary. No independently established casualty total is supplied.
-
-### guiling
-
-The Sun Bin narrative describes striking toward Wei’s centre to relieve Zhao. [待核] The precise battlefield and operational route remain uncertain. The marker is an approximate place anchor, not a surveyed battlefield boundary. No independently established casualty total is supplied.
-
-### maling
-
-The usual Shiji narrative places Pang Juan’s death here; the excavated Qin Pang Juan text instead reports his capture in the Guiling campaign. The often-repeated Wei force of 100,000 is not used as an established count. [待核] Shen County and Tancheng site identifications remain unresolved. The marker is an approximate place anchor, not a surveyed battlefield boundary. No independently established casualty total is supplied.
-
-### xiuyu
-
-The Qin annals record 82,000 heads. The military record’s categories and total are not independently verified. [待核] The exact place anchor is provisional; the point should not define an operational route. The marker is an approximate place anchor, not a surveyed battlefield boundary. No independently established casualty total is supplied.
-
-### danyang
-
-The Qin annals record 80,000 heads and the capture of Qu Gai. The number is a Qin military claim transmitted through Shiji. [待核] Multiple Danyang identifications survive; the marker is provisional. The marker is an approximate place anchor, not a surveyed battlefield boundary. No independently established casualty total is supplied.
-
-### yuyu
-
-[待核] Yuyu has competing identifications; this is the specification’s provisional marker. The account in Shiji chapter 81 is a narrative of military judgement, not a measured casualty return. The marker is an approximate place anchor, not a surveyed battlefield boundary. No independently established casualty total is supplied.
-
-### changping-massacre
-
-Chapter 73 reports 240 young captives released, about 400,000 surrendering, and 450,000 cumulatively beheaded or captured; Qin annals give more than 400,000 killed. These are transmitted Qin-side records, not a verified census. The indexed government protection-plan passage reports remains of more than about 130 individuals from Yonglu no. 1, a small sample that cannot establish the total killed. [待核] The complete original excavation report, its issue and osteological account, and scholars’ exact demographic objections with page references remain unverified. Most of those killed have no surviving names; their deaths should remain visible apart from the campaign’s result.
-
-### hangu-241
-
-[待核] The Zui location near the Qin capital is approximate; this event’s traditional hangu id does not assert that fighting took place at Hangu Pass. Accounts differ over the coalition’s membership. The marker is an approximate place anchor, not a surveyed battlefield boundary. No independently established casualty total is supplied.
-
-### pingyang-234
-
-Shiji chapter 6 records 100,000 heads. The number is a Qin military record transmitted by a Han historian. [待核] The ancient Pingyang identification is provisional. The marker is an approximate place anchor, not a surveyed battlefield boundary. No independently established casualty total is supplied.
-
-### fei-233
-
-Shiji chapter 81 says Li Mu drove away Huan Yi near Yi’an; the battle is commonly called Fei. [待核] Exact battlefield placement remains unresolved. No secure casualty total is supplied. The marker is an approximate place anchor, not a surveyed battlefield boundary. No independently established casualty total is supplied.
-
-### li-xin-defeat
-
-Shiji chapter 73 attributes 200,000 troops to the Qin expedition and says Chu overran two fortified camps and killed seven commandants. These are narrative figures, not a complete casualty return. [待核] Chengfu’s identification and the campaign’s conventional 225 BCE date require review against alternative chronologies. The marker is an approximate place anchor, not a surveyed battlefield boundary. No independently established casualty total is supplied.
-
-### site-dujiangyan
-
-UNESCO identifies the system as originating in the third century BCE. [待核] The narrower 256–251 BCE dating is not established here; 256 BCE is a conventional topic anchor, not a verified construction-completion year.
-
-### wey-abolished
-
-Shiji’s Wey hereditary house distinguishes earlier loss of territory from the final removal of Lord Jiao. [待核] The exact chronological correlation and his final residence require direct verification. This explains the entity’s 209 BCE end date.
-
-### yue-after-306
-
-306 BCE is the conventional date used in many chronologies. [待核] The precise reconstruction is disputed. The entity remains represented until the 222 BCE submission of Yue rulers reported in the Qin annals; this does not assert one unchanged Yue state or one unchanged boundary throughout.
-
-### Chapter 08-changping-handan.mdx
-
-The Shiji's large totals may combine phases of the campaign. Questions about population, recruitment and food supply also make their scale disputed. Specific modern scholars' demographic calculations and page references remain [待核]; no smaller total is substituted here. The text attributes to Bai Qi the statement that more than <Num s="S152">half</Num> of Qin's soldiers had died, but supplies no secure Qin total.
-
-### Chapter 08-changping-handan.mdx
-
-The local heritage protection plan reports approximately <Num s="S158">130</Num> individuals in the Yonglu burial pit investigated in 1995 CE. The remains provide material evidence of mass death at the site, without establishing the total killed across the whole campaign or the precise circumstances of every death. The original excavation report's complete text and osteological conclusions remain [待核]. “Keng” is therefore not translated automatically as burying every prisoner alive.
-
-### Chapter 10-after-221.mdx
-
-The Shiji credits Li Bing, Lǐ Bīng 李冰, with water works in Shu. Dujiangyan's ancient beginnings lie in the third century BCE, but the narrower construction range of 256–251 BCE remains [待核] here. Its surviving works have been altered repeatedly and should not be treated as an unchanged plan from Qin times. The Zhengguo canal's conventional beginning is 246 BCE. Irrigation increased productive capacity while requiring organisation and labour; later engineering success does not make the costs of construction disappear.
-
+- Chapter 08: Changping transmitted totals, their different categories, the Qin half-deaths statement, and the distinction between Yonglu war burial and execution evidence; original excavation/osteology and the original demographic papers remain to be consulted.
+- Chapters 03–10: Chinese passages on human sacrifice, entry into Ying, Qi occupation of Yan, mutilation of captives under Yan, Yan city water attack, Huayang killings/drowning, Daliang flooding and the 212 BCE killing of zhusheng. Review figures, attribution and restrained wording together. This draft does not claim the required publication review of these passages.
+- Chapters 04/07/09/10: Goujian's later captivity tradition, Maling/Pang Juan textual conflict, Chu's 224/223 BCE capture chronology, Li Xin's inferred 225 BCE date and Father-city interpretation, Qin calendar correlations and Yue after the conventionally dated 306 BCE defeat.
+- All disputed sites and route notes above; especially Chengpu's conflicting Wikidata coordinate, Maling's competing identifications, unlocated crossings/passes and the G8 carry-forward in the last three frames. Do not infer precise control from the map fill.

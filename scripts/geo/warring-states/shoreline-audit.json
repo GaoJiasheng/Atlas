@@ -1,5 +1,5 @@
 {
-  "method": "Intersection with Natural Earth10m land after shared simplification; no buffer or invented gap fill",
+  "method": "Intersection with Natural Earth 10m land after shared simplification; no buffer or invented gap fill",
   "retention": [
     {
       "id": "K1",
@@ -294,8 +294,7 @@
         "wei",
         "wey",
         "yan",
-        "zhao",
-        "zhou"
+        "zhao"
       ],
       "after": [
         "chu",
@@ -306,8 +305,7 @@
         "wei",
         "wey",
         "yan",
-        "zhao",
-        "zhou"
+        "zhao"
       ],
       "lost": []
     },

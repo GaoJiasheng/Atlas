@@ -1,10 +1,12 @@
 /** Register published vector maps. Geometry is copied from source paths; never redrawn. */
-import {readFileSync,writeFileSync} from 'node:fs';
-import {readSvg} from '../lib/svg';
+import {writeFileSync} from 'node:fs';
+import type {ControlPoint} from '../lib/manifest';
+import {array, object, readJson, required, number} from './strict-input';
 import {candidates,evaluate} from '../lib/fit';
 const dir='scripts/geo/warring-states';
-const manifest=JSON.parse(readFileSync(`${dir}/sources.json`,'utf8'));
-const cps=[
+const manifest=object(readJson(`${dir}/sources.json`));
+type AuditedPoint = ControlPoint & {coordinateSource: string};
+const rawPoints: [string, [number, number], [number, number], string][] = [
  ['Yong (Fengxiang)',[107.39,34.52],[103.87,199.85],'https://en.wikipedia.org/wiki/Fengxiang_District'],
  ['Linzi',[118.35,36.86],[348.22,150.86],'https://en.wikipedia.org/wiki/Linzi_District'],
  ['Qufu',[116.99,35.58],[322.92,181.95],'https://en.wikipedia.org/wiki/Qufu'],
@@ -20,17 +22,28 @@ const cps=[
  ['Gusu (Suzhou)',[120.58,31.3],[399.71,278.11],'https://en.wikipedia.org/wiki/Suzhou'],
  ["Xi’an",[108.94,34.26],[141.46,208.29],'https://en.wikipedia.org/wiki/Xi%27an'],
  ['Hangzhou',[120.15,30.27],[391.22,303.97],'https://en.wikipedia.org/wiki/Hangzhou'],
-].map(([name,lnglat,svg,coordinateSource])=>({name,lnglat,svg,coordinateSource}));
+];
+const cps: AuditedPoint[]=rawPoints.map(([name,lnglat,svg,coordinateSource])=>({name,lnglat,svg,coordinateSource}));
 // Use the coordinate values actually read by the API/site audits, rather than
 // implying extra precision for the draft's rounded municipality anchors.
-const audited=JSON.parse(readFileSync(`${dir}/coordinates-wikipedia.json`,'utf8')).data.query.pages;
+const audited=object(object(object(readJson(`${dir}/coordinates-wikipedia.json`)).data).query).pages;
 const matches:Record<string,string>={'Yong (Fengxiang)':'Fengxiang District','Qufu':'Qufu','Shangqiu':'Shangqiu','Shanghai':'Shanghai','Tianjin':'Tianjin','Wuhan':'Wuhan','Nanjing':'Nanjing','Zheng (Xinzheng)':'Xinzheng','Jinan':'Jinan','Gusu (Suzhou)':'Suzhou',"Xi’an": "Xi'an",'Hangzhou':'Hangzhou'};
-for(const p of cps){const page=Object.values(audited).find((r:any)=>r.title===matches[p.name as string])as any;const c=page?.coordinates?.[0];if(c)p.lnglat=[c.lon,c.lat];}
-const ying=cps.find(p=>p.name==='Ying (Jinancheng)')!;ying.lnglat=[112+11/60+25.073/3600,30+24/60+20.599/3600];ying.coordinateSource='https://zh.wikipedia.org/wiki/楚纪南故城 (S205)';
-const linzi=cps.find(p=>p.name==='Linzi')!;linzi.lnglat=[118+20/60+16.469/3600,36+53/60+23.122/3600];linzi.coordinateSource='https://zh.wikipedia.org/wiki/临淄齐国故城 (S206)';
-manifest.svg??={};manifest.svg.G3={dataset:'G3',projection:'auto',classes:{},land:['#a8c68f','#efebc0','#cab982','#aa8753'],sea:['#c6ecff'],maxResidualKm:40,controlPoints:cps};
-manifest.svg.G5={...manifest.svg.G3,dataset:'G5',controlPoints:[],controlPointsFrom:'G3'};
+for (const point of cps) {
+ const page=Object.values(object(audited)).map(object).find(page=>page.title===matches[point.name]);
+ if (page?.coordinates === undefined) continue;
+ const coordinate=array(page.coordinates)[0];
+ if (coordinate !== undefined) { const value=object(coordinate); point.lnglat=[number(value.lon),number(value.lat)]; }
+}
+const ying=required(cps.find(point=>point.name==='Ying (Jinancheng)'), 'Ying control');
+ying.lnglat=[112+11/60+25.073/3600,30+24/60+20.599/3600];ying.coordinateSource='https://zh.wikipedia.org/wiki/楚纪南故城 (S205)';
+const linzi=required(cps.find(point=>point.name==='Linzi'), 'Linzi control');
+linzi.lnglat=[118+20/60+16.469/3600,36+53/60+23.122/3600];linzi.coordinateSource='https://zh.wikipedia.org/wiki/临淄齐国故城 (S206)';
+const svg=manifest.svg === undefined ? {} : object(manifest.svg);
+manifest.svg=svg;
+svg.G3={dataset:'G3',projection:'auto',classes:{},land:['#a8c68f','#efebc0','#cab982','#aa8753'],sea:['#c6ecff'],maxResidualKm:40,controlPoints:cps};
+svg.G5={...object(svg.G3),dataset:'G5',controlPoints:[],controlPointsFrom:'G3'};
 for(const id of ['G3','G5']) {
- const rs=candidates('auto',cps as any).map(c=>evaluate(c.proj,c.kind,cps as any)).sort((a,b)=>a.report.looRmsKm-b.report.looRmsKm);console.log(id,JSON.stringify(rs[0].report,null,2));
+ const results=candidates('auto',cps).map(candidate=>evaluate(candidate.proj,candidate.kind,cps)).sort((a,b)=>a.report.looRmsKm-b.report.looRmsKm);
+ console.log(id,JSON.stringify(required(results[0], `${id} fit result`).report,null,2));
 }
 writeFileSync(`${dir}/sources.json`,JSON.stringify(manifest,null,2)+'\n');

@@ -1,46 +1,51 @@
 {
-  "method": "DSATUR greedy colouring of within-frame shared-arc adjacency, union across all11frames",
+  "method": "Verified current entities.json assignment against the shared holderAdjacency/colourConflicts implementation; no entity colours changed",
   "conflicts": 0,
+  "neighboringPairs": 70,
   "colors": {
-    "chu": 1,
+    "zhou": 3,
+    "qin": 6,
     "jin": 2,
     "qi": 3,
-    "song": 4,
-    "wei": 5,
-    "wey": 6,
-    "zheng": 3,
-    "zhao": 1,
+    "chu": 1,
     "lu": 2,
-    "zhou": 4,
-    "han": 3,
-    "qin": 4,
-    "yue": 5,
-    "wu": 3,
+    "song": 4,
+    "wey": 7,
+    "zheng": 6,
+    "chen": 8,
+    "cai": 2,
     "cao": 1,
-    "chen": 2,
-    "yan": 4,
-    "cai": 4,
-    "zhongshan": 2,
-    "ju": 1,
-    "ba": 2,
+    "yan": 1,
+    "wu": 7,
+    "yue": 5,
+    "han": 4,
+    "zhao": 8,
+    "wei": 5,
+    "zhongshan": 5,
+    "ba": 3,
     "shu": 1,
-    "zeng": 1
+    "zeng": 1,
+    "ju": 4
   },
   "adjacency": {
-    "zhou": [
-      "chu",
-      "han",
-      "jin",
-      "wei",
-      "zhao",
-      "zheng"
+    "ba": [
+      "chu"
     ],
-    "qin": [
-      "chu",
+    "chu": [
+      "ba",
+      "cai",
+      "chen",
       "han",
       "jin",
+      "lu",
+      "qi",
+      "qin",
+      "song",
       "wei",
-      "zhao"
+      "wu",
+      "yue",
+      "zheng",
+      "zhou"
     ],
     "jin": [
       "chu",
@@ -55,6 +60,21 @@
       "zheng",
       "zhou"
     ],
+    "ju": [
+      "lu",
+      "qi",
+      "wu"
+    ],
+    "lu": [
+      "cao",
+      "chu",
+      "ju",
+      "qi",
+      "song",
+      "wey",
+      "wu",
+      "yue"
+    ],
     "qi": [
       "chu",
       "jin",
@@ -68,32 +88,12 @@
       "zhao",
       "zhongshan"
     ],
-    "chu": [
-      "ba",
-      "cai",
-      "chen",
+    "qin": [
+      "chu",
       "han",
       "jin",
-      "lu",
-      "qi",
-      "qin",
-      "song",
       "wei",
-      "wey",
-      "wu",
-      "yue",
-      "zheng",
-      "zhou"
-    ],
-    "lu": [
-      "cao",
-      "chu",
-      "ju",
-      "qi",
-      "song",
-      "wey",
-      "wu",
-      "yue"
+      "zhao"
     ],
     "song": [
       "cao",
@@ -110,7 +110,6 @@
     ],
     "wey": [
       "cao",
-      "chu",
       "jin",
       "lu",
       "qi",
@@ -118,6 +117,26 @@
       "wei",
       "zhao",
       "zheng"
+    ],
+    "wu": [
+      "chu",
+      "ju",
+      "lu",
+      "song",
+      "yue"
+    ],
+    "yan": [
+      "jin",
+      "qi",
+      "zhao",
+      "zhongshan"
+    ],
+    "yue": [
+      "chu",
+      "lu",
+      "qi",
+      "song",
+      "wu"
     ],
     "zheng": [
       "cai",
@@ -130,10 +149,12 @@
       "wey",
       "zhou"
     ],
-    "chen": [
-      "cai",
+    "zhou": [
       "chu",
-      "song",
+      "han",
+      "jin",
+      "wei",
+      "zhao",
       "zheng"
     ],
     "cai": [
@@ -147,25 +168,11 @@
       "wey",
       "zheng"
     ],
-    "yan": [
-      "jin",
-      "qi",
-      "zhao",
-      "zhongshan"
-    ],
-    "wu": [
+    "chen": [
+      "cai",
       "chu",
-      "ju",
-      "lu",
       "song",
-      "yue"
-    ],
-    "yue": [
-      "chu",
-      "lu",
-      "qi",
-      "song",
-      "wu"
+      "zheng"
     ],
     "han": [
       "chu",
@@ -173,17 +180,6 @@
       "qin",
       "wei",
       "zhao",
-      "zhou"
-    ],
-    "zhao": [
-      "han",
-      "jin",
-      "qi",
-      "qin",
-      "wei",
-      "wey",
-      "yan",
-      "zhongshan",
       "zhou"
     ],
     "wei": [
@@ -198,20 +194,21 @@
       "zheng",
       "zhou"
     ],
+    "zhao": [
+      "han",
+      "jin",
+      "qi",
+      "qin",
+      "wei",
+      "wey",
+      "yan",
+      "zhongshan",
+      "zhou"
+    ],
     "zhongshan": [
       "qi",
       "yan",
       "zhao"
-    ],
-    "ba": [
-      "chu"
-    ],
-    "shu": [],
-    "zeng": [],
-    "ju": [
-      "lu",
-      "qi",
-      "wu"
     ]
   }
 }

@@ -1,14 +1,35 @@
-/** Colour the union of within-frame adjacency graphs using the engine's holder tokens. */
-import{readFileSync}from'node:fs';import{neighbors}from'topojson-client';import{writeJson}from'../lib/common';
-const d='scripts/geo/warring-states',p='src/content/topics/warring-states/data';
-const control=JSON.parse(readFileSync(`${p}/control.json`,'utf8')),entities=JSON.parse(readFileSync(`${p}/entities.json`,'utf8'));
-const adj=new Map<string,Set<string>>(entities.map((e:any)=>[e.id,new Set<string>()]));
-for(const obj of Object.values(control.topology.objects)as any[]){const gs=obj.geometries;const ns=neighbors(gs);ns.forEach((ls,i)=>ls.forEach(j=>{const a=gs[i].properties.holder,b=gs[j].properties.holder;if(a!==b){adj.get(a)?.add(b);adj.get(b)?.add(a);}}));}
-const colors=new Map<string,number>();
-while(colors.size<adj.size){const left=[...adj.keys()].filter(k=>!colors.has(k)).sort((a,b)=>{const sat=(k:string)=>new Set([...adj.get(k)!].map(x=>colors.get(x)).filter(x=>x!==undefined)).size;return sat(b)-sat(a)||adj.get(b)!.size-adj.get(a)!.size||a.localeCompare(b)});const id=left[0]!,used=new Set([...adj.get(id)!].map(x=>colors.get(x)));let c=1;while(used.has(c))c++;if(c>8)throw new Error(`more than8 holdercolors needed at ${id}`);colors.set(id,c);}
-let conflicts=0;for(const[a,bs]of adj)for(const b of bs)if(colors.get(a)===colors.get(b))conflicts++;
-if(conflicts)throw new Error(`${conflicts} adjacency conflicts`);
-const css=readFileSync('src/theme/tokens.css','utf8'),palette:Record<string,string>={};for(const e of entities){const c=colors.get(e.id)!;e.color=`token:holder-${c}`;palette[e.id]=new RegExp(`--holder-${c}:\\s*(#[0-9a-fA-F]+)`).exec(css)![1]!;}
-writeJson(`${p}/entities.json`,entities,true);writeJson(`${d}/check-colors.json`,palette,true);
-writeJson(`${d}/color-audit.json`,{method:'DSATUR greedy colouring of within-frame shared-arc adjacency, union across all11frames',conflicts,colors:Object.fromEntries(colors),adjacency:Object.fromEntries([...adj].map(([k,v])=>[k,[...v].sort()]))},true);
-console.log(`${entities.length} entities; ${new Set(colors.values()).size} holder tokens; adjacency conflicts ${conflicts}`);
+/** Export check-image colours from the authoritative shared CLI assignment.
+ * First run: pnpm tsx scripts/geo/lib/colour-holders.ts --topic warring-states --write
+ * This script verifies that assignment and never changes entities.json.
+ */
+import { readFileSync } from 'node:fs';
+import { writeJson } from '../lib/common';
+import { controlFile, entitiesFile } from '../../../src/engines/time-scene/schema';
+import { colourConflicts, holderAdjacency, holderIndex } from '../../../src/engines/time-scene/lib/holders';
+import { readJson, required } from './strict-input';
+const dir = 'scripts/geo/warring-states', data = 'src/content/topics/warring-states/data';
+const entities = entitiesFile.parse(readJson(`${data}/entities.json`));
+const control = controlFile.parse(readJson(`${data}/control.json`));
+const adjacency = holderAdjacency(control);
+const assigned = new Map(entities.map((entity) => [entity.id, entity.color]));
+const conflicts = colourConflicts(adjacency, (id) => assigned.get(id));
+if (conflicts.length) throw new Error(`${conflicts.length} adjacency conflicts; run the shared colour-holders CLI with --write`);
+const css = readFileSync('src/theme/tokens.css', 'utf8');
+const palette: Record<string, string> = {};
+const colors: Record<string, number> = {};
+for (const entity of entities) {
+  const color = holderIndex(entity.color);
+  if (color === null) throw new Error(`${entity.id} needs a holder colour token`);
+  colors[entity.id] = color;
+  const match = required(new RegExp(`--holder-${color}:\\s*(#[0-9a-fA-F]+)`).exec(css) ?? undefined, `${entity.id} theme token`);
+  palette[entity.id] = required(match[1], `${entity.id} theme colour`);
+}
+writeJson(`${dir}/check-colors.json`, palette, true);
+writeJson(`${dir}/color-audit.json`, {
+  method: 'Verified current entities.json assignment against the shared holderAdjacency/colourConflicts implementation; no entity colours changed',
+  conflicts: conflicts.length,
+  neighboringPairs: [...adjacency.values()].reduce((sum, neighbors) => sum + neighbors.size, 0) / 2,
+  colors,
+  adjacency: Object.fromEntries([...adjacency].map(([id, neighbors]) => [id, [...neighbors].sort()])),
+}, true);
+console.log(`${entities.length} entities; ${new Set(Object.values(colors)).size} holder tokens; adjacency conflicts ${conflicts.length}`);
