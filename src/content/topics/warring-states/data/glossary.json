@@ -7,8 +7,8 @@
         "zh": "分封"
       },
       "definition": {
-        "en": "The Zhou kings granted rights over land and people to relatives and allies, creating regional states. This is not the same institution as European feudalism.",
-        "zh": "周王把对土地与人口的支配权授予宗亲和盟友，由此形成各诸侯国。这一制度与欧洲中世纪的封建制度并不相同。"
+        "en": "The Zhou kings granted land, and the people living on it, to kinsmen and allies, who founded regional states and owed the king tribute, ritual service and troops. It is often translated as 'feudalism', but differs from the European institution.",
+        "zh": "周王把土地连同土地上的人口授予亲族和功臣，让他们建立诸侯国，向周王纳贡、助祭、出兵。常被译作“封建”，但和欧洲中世纪的封建制度不是一回事。"
       },
       "see": [
         "zhuhou"
@@ -21,26 +21,12 @@
         "zh": "诸侯"
       },
       "definition": {
-        "en": "Rulers of regional states who formally acknowledged the Zhou king, although their effective independence increased.",
-        "zh": "诸侯国的统治者，名义上承认周王的地位；随着时间推移，他们的实际自主权逐渐扩大。"
+        "en": "The rulers of the states created by enfeoffment. They acknowledged the Zhou king as their senior, but over these centuries became independent rulers, and from the fourth century BCE called themselves kings.",
+        "zh": "分封所建各国的国君。他们名义上奉周王为共主，但在春秋战国时期逐渐成为独立的统治者，前4世纪起纷纷称王。"
       },
       "see": [
         "fengjian",
         "hegemon"
-      ]
-    },
-    {
-      "id": "tianxia",
-      "term": {
-        "en": "All under Heaven",
-        "zh": "天下"
-      },
-      "definition": {
-        "en": "An idea of the inhabited political world under a king. Its scope changed over time and does not simply mean the territory of modern China.",
-        "zh": "古人用来表达王权所及政治世界的观念。它的范围随时代变化，不能直接等同于今天中国的国土。"
-      },
-      "see": [
-        "huaxia"
       ]
     },
     {
@@ -50,11 +36,11 @@
         "zh": "华夏"
       },
       "definition": {
-        "en": "A changing cultural and political identity used in Zhou-era texts. The contrast with Rong, Di, Yi and Man reflects the categories of those texts, not fixed modern ethnic boundaries.",
-        "zh": "周代文献中使用的文化与政治认同，其含义不断变化。它与“戎”“狄”“夷”“蛮”的区别反映了当时作者的分类，不能视为固定的现代民族界线。"
+        "en": "The name that writers in the Zhou states used for themselves, in contrast to peoples they called Rong, Di, Yi and Man. The line was cultural and political, and it moved: Chu, Wu, Qin and Zhongshan were at times placed outside it and later inside.",
+        "zh": "周代诸侯国的作者对自己的称呼，与他们所说的戎、狄、夷、蛮相对。这条界线是文化和政治上的，而且会变动：楚、吴、秦、中山都曾被视为“外人”，后来又被算作华夏。"
       },
       "see": [
-        "tianxia"
+        "zunwang-rangyi"
       ]
     },
     {
@@ -64,8 +50,8 @@
         "zh": "霸主"
       },
       "definition": {
-        "en": "A leading regional lord who convened alliances and claimed to uphold the Zhou order. Later lists of the hegemons disagree.",
-        "zh": "主持会盟、声称维护周代秩序的强大诸侯。后世列出的霸主名单并不一致。"
+        "en": "The leading regional lord of the Spring and Autumn period, recognised by the Zhou king. He called covenant meetings, settled disputes and led joint campaigns, but did not rule the other states. Later lists of the 'Five Hegemons' disagree.",
+        "zh": "春秋时期得到周王承认的诸侯之长。他召集会盟、调解纠纷、率领联军，但并不统治其他国家。后世列出的“五霸”名单各不相同。"
       },
       "see": [
         "covenant",
@@ -79,8 +65,8 @@
         "zh": "会盟"
       },
       "definition": {
-        "en": "A meeting at which rulers or ministers made an agreement and swore an oath. Excavated covenant texts show that such agreements could be written on stone or jade.",
-        "zh": "诸侯或卿大夫相会，订立约定并宣誓。出土的盟书表明，有些誓约写在石片或玉片上。"
+        "en": "A meeting at which rulers or their ministers swore an agreement over the blood of a sacrificed animal. Covenant texts written on stone tablets have been excavated at Houma in Shanxi.",
+        "zh": "诸侯或卿大夫聚会，杀牲歃血，对神立誓订约。山西侯马出土过写在石片上的盟书。"
       },
       "see": [
         "hegemon"
@@ -93,11 +79,12 @@
         "zh": "尊王攘夷"
       },
       "definition": {
-        "en": "A later formula associated with Qi leadership: supporting the Zhou king and opposing groups classified as outsiders. The wording presents the Zhou states’ perspective.",
-        "zh": "后世用来概括齐国霸政的说法，指支持周王、对抗被归为外部的人群。这种措辞表达的是周代诸侯的立场。"
+        "en": "A later summary of Duke Huan of Qi's policy: support the Zhou king and fight the peoples called Yi, Rong and Di. It states the view of the Zhou states, not of those they fought.",
+        "zh": "后人对齐桓公方针的概括：拥护周王，抵御被称为夷、戎、狄的人群。这是华夏诸侯一方的说法，不代表被攻打者的看法。"
       },
       "see": [
-        "hegemon"
+        "hegemon",
+        "huaxia"
       ]
     },
     {
@@ -107,11 +94,25 @@
         "zh": "车战"
       },
       "definition": {
-        "en": "Fighting with horse-drawn vehicles accompanied by infantry. The balance between chariots, infantry, crossbows and cavalry changed across the period.",
-        "zh": "以马拉战车配合步兵作战。战车、步兵、弩和骑兵在军队中的作用，随时代而变化。"
+        "en": "Fighting from two-wheeled, horse-drawn chariots, each with a driver, an archer and a halberdier, with foot soldiers alongside. It dominated Spring and Autumn battles; in the Warring States period mass infantry, crossbows and cavalry took over.",
+        "zh": "以马拉的双轮战车作战，每车有御者、射手和持戈武士，车旁有步兵跟随。春秋时期的战争以车战为主；到了战国，大规模步兵、弩和骑兵取而代之。"
       },
       "see": [
-        "crossbow"
+        "rank-by-merit"
+      ]
+    },
+    {
+      "id": "hundred-schools",
+      "term": {
+        "en": "Hundred Schools of Thought",
+        "zh": "百家争鸣"
+      },
+      "definition": {
+        "en": "The many thinkers of the period, including Confucians, Mohists, Daoists and Legalists, who argued about how to govern and how to live. 'Hundred' means many, not an exact count.",
+        "zh": "春秋战国时期儒、墨、道、法等各家思想家，围绕如何治国、如何做人展开争论。“百家”是形容多，不是确数。"
+      },
+      "see": [
+        "legalism"
       ]
     },
     {
@@ -121,12 +122,13 @@
         "zh": "变法"
       },
       "definition": {
-        "en": "Changes to law, taxation, farming, military recruitment or official appointment intended to increase a ruler’s control and resources.",
-        "zh": "统治者为增强控制、增加资源而推行的制度改变，涉及法律、赋税、农业、征兵或官员任用。"
+        "en": "The programmes by which Warring States rulers changed land tenure, taxes, laws and military service so that the state could raise more grain and soldiers. Shang Yang's reforms in Qin are the best known.",
+        "zh": "战国各国改革土地、赋税、法律和兵役制度，使国家能征集更多的粮食和兵员。最有名的是商鞅在秦国的变法。"
       },
       "see": [
         "legalism",
-        "junxian"
+        "junxian",
+        "bianhu-qimin"
       ]
     },
     {
@@ -136,8 +138,8 @@
         "zh": "法家"
       },
       "definition": {
-        "en": "A later label for thinkers and practices associated with explicit standards, rewards, punishments and ruler authority. It did not name a single organized school in this period.",
-        "zh": "后世对一类思想与实践的概括，强调明确的法令、赏罚和君主权力。当时并没有以此为名的统一组织。"
+        "en": "A later label for thinkers such as Shang Yang, Shen Buhai and Han Fei, who argued for written laws, rewards and punishments and a strong ruler. They did not form a single organised school.",
+        "zh": "后人对商鞅、申不害、韩非等人的统称。他们主张以成文法、赏罚和强大的君权治国，但并没有组成统一的学派。"
       },
       "see": [
         "bianfa"
@@ -150,11 +152,27 @@
         "zh": "郡县"
       },
       "definition": {
-        "en": "Territorial units governed by appointed officials rather than hereditary regional rulers. Their development differed between states.",
-        "zh": "由任命的官员治理的地方行政单位，区别于世袭诸侯的领地。各国郡县的形成过程并不相同。"
+        "en": "Districts run by officials whom the ruler appointed and could dismiss, rather than by hereditary lords. Several states created them; Qin extended them to the whole empire in 221 BCE.",
+        "zh": "由国君任命、可以随时撤换的官吏治理的地方单位，与世袭的封地不同。好几个国家都设过郡县，前221年秦把郡县制推行到全国。"
       },
       "see": [
-        "bianfa"
+        "bianfa",
+        "fengjian"
+      ]
+    },
+    {
+      "id": "bianhu-qimin",
+      "term": {
+        "en": "Registered commoners",
+        "zh": "编户齐民"
+      },
+      "definition": {
+        "en": "A Han-period phrase for the result of the reforms: every household entered on the state's register, liable to tax, labour and military service, and equal in status before the ruler's law.",
+        "zh": "汉代人对变法结果的概括：每一户都登记在国家户籍上，承担赋税、劳役和兵役，在君主的法律面前身份相同。"
+      },
+      "see": [
+        "bianfa",
+        "rank-by-merit"
       ]
     },
     {
@@ -164,11 +182,11 @@
         "zh": "军功爵"
       },
       "definition": {
-        "en": "A hierarchy in which recorded military service could earn status and privileges. Qin records linked rewards to counted enemy heads; those counts require critical reading.",
-        "zh": "按登记的军事功劳授予身份与特权的等级制度。秦的赏爵与所记斩首数相连，阅读这些数字时须考察其记录方式和目的。"
+        "en": "Qin's system of ranks won by fighting: a soldier who took an opposing soldier's head could rise one grade and receive land. The counts of heads taken in the Shiji come from records kept for these rewards.",
+        "zh": "秦国按战功授爵的制度：士兵斩获对方一个首级，可以升爵一级并得到田宅。《史记》中的斩首数，就来自为论功行赏而作的记录。"
       },
       "see": [
-        "junxian"
+        "bianhu-qimin"
       ]
     },
     {
@@ -178,8 +196,8 @@
         "zh": "合纵"
       },
       "definition": {
-        "en": "An alliance among several states, usually described as cooperation against Qin. Its members and commitments changed.",
-        "zh": "几个国家联合的外交安排，通常指合作抗秦。参加的国家与各方承诺经常变化。"
+        "en": "An alliance of several states, strung north to south, against Qin. Such coalitions attacked Qin in 318 and 241 BCE and failed both times.",
+        "zh": "南北各国联合起来对抗秦国。这样的联军在前318年和前241年两次攻秦，都失败了。"
       },
       "see": [
         "horizontal-alliance"
@@ -192,51 +210,11 @@
         "zh": "连横"
       },
       "definition": {
-        "en": "Arrangements in which individual states dealt separately with Qin. Later narratives organize fluid diplomacy into a contrast with vertical alliances.",
-        "zh": "各国分别与秦交涉、结盟的安排。后世叙事常用合纵与连横的对照来整理不断变化的外交关系。"
+        "en": "The policy of single states making separate agreements with Qin, which lay to the west. Later writers paired it with the vertical alliance as two strategies.",
+        "zh": "各国分别与西方的秦国结盟的做法。后人把它和合纵并列为两种对立的策略。"
       },
       "see": [
         "vertical-alliance"
-      ]
-    },
-    {
-      "id": "crossbow",
-      "term": {
-        "en": "Crossbow",
-        "zh": "弩"
-      },
-      "definition": {
-        "en": "A bow mounted on a stock with a trigger mechanism. Surviving bronze triggers and texts document its military use.",
-        "zh": "装有弩臂和扳机的弓。传世文献与出土铜弩机共同提供了弩用于战争的证据。"
-      },
-      "see": [
-        "chariot-warfare"
-      ]
-    },
-    {
-      "id": "tiger-tally",
-      "term": {
-        "en": "Tiger tally",
-        "zh": "虎符"
-      },
-      "definition": {
-        "en": "A matching authorization token divided between a ruler and a commander. Joining the halves helped verify an order to mobilize troops.",
-        "zh": "分置于君主与领兵者手中的调兵凭证。两半相合，用来核验调兵命令。"
-      },
-      "see": []
-    },
-    {
-      "id": "hundred-schools",
-      "term": {
-        "en": "Hundred Schools of Thought",
-        "zh": "百家争鸣"
-      },
-      "definition": {
-        "en": "A conventional name for competing traditions of argument about ethics, government and society. It does not refer to an exact count of schools.",
-        "zh": "对当时围绕伦理、政治与社会问题展开的不同思想争论的通称。“百家”并不是学派数量的精确统计。"
-      },
-      "see": [
-        "legalism"
       ]
     }
   ]

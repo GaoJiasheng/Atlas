@@ -559,21 +559,21 @@
   {
     "id": "li-xin-225",
     "source": "S191",
-    "stations": "平舆 → 父城（宝丰区域说）",
+    "stations": "平舆 → 城父（亳州传统说）",
     "coordinates": [
       [
-        114.6331,
-        32.95597
+        114.62,
+        32.96
       ],
       [
-        113.06,
-        33.87
+        116.03,
+        33.6
       ]
     ],
     "url": "https://zh.wikisource.org/wiki/史記/卷073",
     "note": {
-      "en": "Itinerary: 平舆 → 父城（宝丰区域说）. Shiji 73 gives Pingyu, an attack on Yan/Ying, then movement west to Chengfu; the old Chen start and eastward Chengfu point were removed. This line selects the traditional Zhengyi/Jiaqing gazetteer identification with Fucheng east of Baofeng, represented only by a modern county-area anchor. It omits the unlocated Yan/Ying stage. Bozhou is a competing identification, and 225 BCE remains inferred rather than an explicit year in the passage. Shiji 73 attributes 200,000 troops to the expedition; this is an unverified narrative figure.",
-      "zh": "所画站点：平舆 → 父城（宝丰区域说）。卷73记平舆、攻鄢郢后引兵而西会城父。已删无据的陈起点及向东的旧城父点；选《正义》与《嘉庆一统志》所取宝丰东父城说，仅用现代县域点表示，不绘未定位的鄢郢段。亳州说仍存，前225年也是推定纪年。卷73所记20万兵力属未经独立核实的叙事数字。"
+      "en": "Itinerary: Pingyu → Chengfu. Shiji 73: Li Xin attacked Pingyu and Meng Tian Qin (寝); after attacking 'Yan-Ying', Li Xin turned west to join Meng Tian at Chengfu. The line uses the traditional identification of Chengfu near present-day Bozhou, Anhui (see S243); some scholars place it at Fucheng in Henan (S210). The Yan-Ying stage is not located and not drawn. 200,000 is the Shiji's figure.",
+      "zh": "所画站点：平舆 → 城父。卷73：李信攻平舆，蒙恬攻寝；李信攻“鄢郢”后引兵而西，与蒙恬会于城父。线条采用城父在今安徽亳州附近的传统说法（见S243）；也有学者认为是河南的父城（S210）。“鄢郢”一段地点不明，未画。二十万为《史记》数字。"
     },
     "status": "Reviewed stations; exact road/crossings remain uncertain"
   },

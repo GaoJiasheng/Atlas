@@ -25,7 +25,7 @@ blocLabels:
   neutral: { en: "Zhou-era states", zh: "诸侯国" }
   out: { en: "State conquered", zh: "已被兼并" }
 strings:
-  joined: { en: "First represented", zh: "首次图示" }
+  joined: { en: "First on the map", zh: "首次见于地图" }
   left: { en: "Conquered or abolished", zh: "被兼并或废除" }
-  notYet: { en: "Not yet represented", zh: "尚未图示" }
-note: { en: "Approximate ancient boundaries · reconstructed rivers · modern coastline · English and Chinese drafts for review", zh: "古代边界为近似·复原河道·今日海岸线·中英文均为待审稿" }
+  notYet: { en: "Not yet on the map", zh: "尚未见于地图" }
+note: { en: "Approximate ancient borders · reconstructed rivers · modern coastline", zh: "古代边界为示意 · 复原河道 · 今日海岸线" }

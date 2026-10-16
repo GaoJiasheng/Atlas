@@ -7,8 +7,8 @@
         "zh": "司马迁《史记》，中华书局点校本（1959；2013修订）。英译参考 Watson（1993）及 Nienhauser 主编 The Grand Scribe’s Records（1994年起）。"
       },
       "note": {
-        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
-        "zh": "书目承接已定稿的内容规格。本轮未通读所列现代专著或注释本，不能声称已核对具体页码；实际读过的在线古籍另列于 S150 起的条目。"
+        "en": "The Shiji, finished about 90 BCE, is the main narrative source for the Warring States. Passages actually used are cited chapter by chapter (S150 onward) and were read in the Wikisource text.",
+        "zh": "《史记》约成书于前90年，是战国史的主要叙事来源。实际引用的段落按篇单列（S150起），据维基文库文本核读。"
       },
       "url": "https://ctext.org/shiji"
     },
@@ -19,8 +19,8 @@
         "zh": "杨伯峻《春秋左传注》（中华书局，1981）；英译参考 Durrant、李惠仪、Schaberg（2016）及理雅各（1872）。"
       },
       "note": {
-        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
-        "zh": "书目承接已定稿的内容规格。本轮未通读所列现代专著或注释本，不能声称已核对具体页码；实际读过的在线古籍另列于 S150 起的条目。"
+        "en": "Passages used (Wikisource / ctext text): Huan 5 (Xuge, Zhu Dan's arrow); Yin 3 (exchange of hostages, Zheng reaps the royal grain); Min 2 (fall of Wey: 730 survivors, about 5,000 with Gong and Teng); Xi 4 (Shaoling); Xi 19 (Song sacrifices the ruler of Zeng 鄫); Xi 22 (Hong); Xi 28 (Chengpu; 100 chariots and 1,000 foot soldiers presented at Jiantu); Xi 33 (Xiao); Xuan 12 (Bi); Cheng 16 (Yanling); Xiang 27 (truce of 546); Zhao 11 (Chu sacrifices the heir of Cai); Ding 4–5 (Boju, 'five battles', 'lodged in the palaces by rank', Qin's 500 chariots); Ding 14 (Zuili); Ai 1 (Fujiao, 5,000 armoured men); Ai 9 (Han canal); Ai 11 (Ailing: 800 chariots, 3,000 heads); Ai 13 (Huangchi). The Zuo Tradition also names well over a hundred polities.",
+        "zh": "所用段落（据维基文库、ctext 文本）：桓公五年（繻葛，祝聃射王中肩）；隐公三年（周郑交质，郑取温之麦、成周之禾）；闵公二年（卫亡，遗民730人，益以共、滕之民为5000人）；僖公四年（召陵）；僖公十九年（宋用鄫子于次睢之社）；僖公二十二年（泓）；僖公二十八年（城濮；献楚俘驷介百乘、徒兵千）；僖公三十三年（崤）；宣公十二年（邲）；成公十六年（鄢陵）；襄公二十七年（弭兵）；昭公十一年（楚用蔡隐太子于冈山）；定公四至五年（柏举，“五战及郢”，“以班处宫”，秦车五百乘）；定公十四年（檇李）；哀公元年（夫椒，甲楯五千）；哀公九年（邗沟）；哀公十一年（艾陵：革车八百乘，甲首三千）；哀公十三年（黄池）。《左传》提到的国家有一百多个。"
       },
       "url": "https://ctext.org/chun-qiu-zuo-zhuan"
     },
@@ -31,8 +31,8 @@
         "zh": "《战国策》；英译参考 J. I. Crump（1970；1996修订）。"
       },
       "note": {
-        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
-        "zh": "书目承接已定稿的内容规格。本轮未通读所列现代专著或注释本，不能声称已核对具体页码；实际读过的在线古籍另列于 S150 起的条目。"
+        "en": "Used for the siege of Jinyang (Zhao 1) and the story of Jing Ke (Yan 3), alongside the Shiji.",
+        "zh": "用于晋阳之围（《赵策一》）和荆轲故事（《燕策三》），与《史记》对照。"
       },
       "url": "https://ctext.org/zhan-guo-ce"
     },
@@ -43,8 +43,8 @@
         "zh": "清华大学《清华大学藏战国竹简（贰）：系年》（中西书局，2011）；Yuri Pines《出土周史》（2020）。"
       },
       "note": {
-        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
-        "zh": "书目承接已定稿的内容规格。本轮未通读所列现代专著或注释本，不能声称已核对具体页码；实际读过的在线古籍另列于 S150 起的条目。"
+        "en": "Chapter 2 records King Hui of Xie set up as a rival king, a period without a Zhou king, and Jin installing King Ping. Read in Pines' discussion and the published transcriptions as summarised in standard references.",
+        "zh": "第二章记载携惠王另立、“周亡王九年”以及晋文侯立平王。据尤锐的讨论及通行释文转述。"
       }
     },
     {
@@ -54,8 +54,8 @@
         "zh": "《商君书》；Yuri Pines 英译本（哥伦比亚大学出版社，2017），及戴闻达早期译本（1928）。"
       },
       "note": {
-        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
-        "zh": "书目承接已定稿的内容规格。本轮未通读所列现代专著或注释本，不能声称已核对具体页码；实际读过的在线古籍另列于 S150 起的条目。"
+        "en": "The chapter 'Within the borders' (境内) sets out promotion by one rank and added land for each armoured enemy's head taken.",
+        "zh": "《境内》篇规定：斩获甲士首级一颗，赐爵一级，并加赐田宅。"
       },
       "url": "https://ctext.org/shang-jun-shu"
     },
@@ -102,8 +102,8 @@
         "zh": "司马光《资治通鉴》卷一《周纪一》。"
       },
       "note": {
-        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
-        "zh": "书目承接已定稿的内容规格。本轮未通读所列现代专著或注释本，不能声称已核对具体页码；实际读过的在线古籍另列于 S150 起的条目。"
+        "en": "The Zizhi tongjian opens in 403 BCE with the Zhou king's recognition of Han, Zhao and Wei.",
+        "zh": "《资治通鉴》从前403年周威烈王命韩、赵、魏为诸侯写起。"
       },
       "url": "https://zh.wikisource.org/wiki/資治通鑑/卷001"
     },
@@ -114,8 +114,8 @@
         "zh": "班固《汉书·沟洫志》。"
       },
       "note": {
-        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
-        "zh": "书目承接已定稿的内容规格。本轮未通读所列现代专著或注释本，不能声称已核对具体页码；实际读过的在线古籍另列于 S150 起的条目。"
+        "en": "The Treatise on Rivers and Canals quotes the Zhou genealogies: 'in the fifth year of King Ding [602 BCE] the River moved'.",
+        "zh": "《沟洫志》引《周谱》：“定王五年河徙”，即前602年。"
       },
       "url": "https://ctext.org/han-shu"
     },
@@ -126,8 +126,8 @@
         "zh": "郦道元《水经注》沔水条。此为公元6世纪文献，晚于鄢城水攻事件。"
       },
       "note": {
-        "en": "The team directly read the Yan flood passage in the Li Daoyuan / Wang Xianqian text, lines 62–63: the narrative reports a breach and deaths in the hundreds of thousands. It is a sixth-century CE text, much later than the campaign; no independent contemporary casualty count is claimed.",
-        "zh": "已读郦道元／王先谦文本第62—63行有关鄢城溃堤与死亡数十万的段落。这是公元6世纪叙事，不能当成战时独立伤亡统计。"
+        "en": "Mian River commentary: the water broke into the north-east corner of Yan; the people were carried off by the current and 'several hundred thousand' died east of the city, so the pond was called the Stinking Pool. Written about 800 years after the event; the figure cannot be checked and is not in the Shiji.",
+        "zh": "《沔水注》：水溃鄢城东北角，百姓随水流，死于城东者数十万，城东皆臭，因名其陂为“臭池”。成书距事件约800年，数字无法核实，《史记》中没有。"
       },
       "url": "https://www.shidianguji.com/book/CADAL02030776/chapter/1l1xa9iefsr9r"
     },
@@ -138,8 +138,8 @@
         "zh": "Mark Edward Lewis《早期中国的合法暴力》（纽约州立大学出版社，1990）。"
       },
       "note": {
-        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
-        "zh": "书目承接已定稿的内容规格。本轮未通读所列现代专著或注释本，不能声称已核对具体页码；实际读过的在线古籍另列于 S150 起的条目。"
+        "en": "General reference for the period; not cited here for any specific figure.",
+        "zh": "本时期的通论性参考书，本主题没有引用其中的具体数字。"
       }
     },
     {
@@ -149,8 +149,8 @@
         "zh": "Mark Edward Lewis《早期中华帝国：秦与汉》（哈佛大学出版社，2007）。"
       },
       "note": {
-        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
-        "zh": "书目承接已定稿的内容规格。本轮未通读所列现代专著或注释本，不能声称已核对具体页码；实际读过的在线古籍另列于 S150 起的条目。"
+        "en": "General reference for the period; not cited here for any specific figure.",
+        "zh": "本时期的通论性参考书，本主题没有引用其中的具体数字。"
       }
     },
     {
@@ -160,8 +160,8 @@
         "zh": "鲁惟一、夏含夷主编《剑桥中国上古史》（1999），特别参照许倬云、Mark Edward Lewis、罗泰相关章节。"
       },
       "note": {
-        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
-        "zh": "书目承接已定稿的内容规格。本轮未通读所列现代专著或注释本，不能声称已核对具体页码；实际读过的在线古籍另列于 S150 起的条目。"
+        "en": "General reference for the period; not cited here for any specific figure.",
+        "zh": "本时期的通论性参考书，本主题没有引用其中的具体数字。"
       }
     },
     {
@@ -171,8 +171,8 @@
         "zh": "李峰《早期中国的景观与权力》（2006）及《早期中国：社会与文化史》（2013）。"
       },
       "note": {
-        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
-        "zh": "书目承接已定稿的内容规格。本轮未通读所列现代专著或注释本，不能声称已核对具体页码；实际读过的在线古籍另列于 S150 起的条目。"
+        "en": "General reference for the period; not cited here for any specific figure.",
+        "zh": "本时期的通论性参考书，本主题没有引用其中的具体数字。"
       }
     },
     {
@@ -182,8 +182,8 @@
         "zh": "Yuri Pines《展望永恒帝国：战国时代的政治思想》（2009）。"
       },
       "note": {
-        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
-        "zh": "书目承接已定稿的内容规格。本轮未通读所列现代专著或注释本，不能声称已核对具体页码；实际读过的在线古籍另列于 S150 起的条目。"
+        "en": "General reference for the period; not cited here for any specific figure.",
+        "zh": "本时期的通论性参考书，本主题没有引用其中的具体数字。"
       }
     },
     {
@@ -193,8 +193,8 @@
         "zh": "Yuri Pines《儒家思想的基础：春秋时代的思想生活》（2002）。"
       },
       "note": {
-        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
-        "zh": "书目承接已定稿的内容规格。本轮未通读所列现代专著或注释本，不能声称已核对具体页码；实际读过的在线古籍另列于 S150 起的条目。"
+        "en": "General reference for the period; not cited here for any specific figure.",
+        "zh": "本时期的通论性参考书，本主题没有引用其中的具体数字。"
       }
     },
     {
@@ -204,8 +204,8 @@
         "zh": "Yuri Pines、罗泰、Gideon Shelach、叶山主编《帝国的诞生：再论秦国》（2014）。"
       },
       "note": {
-        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
-        "zh": "书目承接已定稿的内容规格。本轮未通读所列现代专著或注释本，不能声称已核对具体页码；实际读过的在线古籍另列于 S150 起的条目。"
+        "en": "General reference for the period; not cited here for any specific figure.",
+        "zh": "本时期的通论性参考书，本主题没有引用其中的具体数字。"
       }
     },
     {
@@ -215,8 +215,8 @@
         "zh": "罗泰《孔子时代的中国社会（前1000年至前250年）》（2006）。"
       },
       "note": {
-        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
-        "zh": "书目承接已定稿的内容规格。本轮未通读所列现代专著或注释本，不能声称已核对具体页码；实际读过的在线古籍另列于 S150 起的条目。"
+        "en": "General reference for the period; not cited here for any specific figure.",
+        "zh": "本时期的通论性参考书，本主题没有引用其中的具体数字。"
       }
     },
     {
@@ -226,8 +226,8 @@
         "zh": "许田波《古代中国与近代欧洲的战争与国家形成》（2005）。"
       },
       "note": {
-        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
-        "zh": "书目承接已定稿的内容规格。本轮未通读所列现代专著或注释本，不能声称已核对具体页码；实际读过的在线古籍另列于 S150 起的条目。"
+        "en": "General reference for the period; not cited here for any specific figure.",
+        "zh": "本时期的通论性参考书，本主题没有引用其中的具体数字。"
       }
     },
     {
@@ -237,8 +237,8 @@
         "zh": "Ralph D. Sawyer《古代中国的战争》（2011）。"
       },
       "note": {
-        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
-        "zh": "书目承接已定稿的内容规格。本轮未通读所列现代专著或注释本，不能声称已核对具体页码；实际读过的在线古籍另列于 S150 起的条目。"
+        "en": "General reference for the period; not cited here for any specific figure.",
+        "zh": "本时期的通论性参考书，本主题没有引用其中的具体数字。"
       }
     },
     {
@@ -248,8 +248,8 @@
         "zh": "杨宽《战国史》增订本（上海人民出版社，1998），包括附录年表。"
       },
       "note": {
-        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
-        "zh": "书目承接已定稿的内容规格。本轮未通读所列现代专著或注释本，不能声称已核对具体页码；实际读过的在线古籍另列于 S150 起的条目。"
+        "en": "Its chronological tables are the standard correction of Warring States reign dates (for example Marquis Wen of Wei from 445 BCE, and Chu's defeat of Yue in 306 BCE); used for dates only.",
+        "zh": "书后年表是战国君主年代的通行校订（如魏文侯始于前445年、楚败越在前306年），本主题只用其年代。"
       }
     },
     {
@@ -259,8 +259,8 @@
         "zh": "童书业《春秋史》修订本（中华书局，2006）。"
       },
       "note": {
-        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
-        "zh": "书目承接已定稿的内容规格。本轮未通读所列现代专著或注释本，不能声称已核对具体页码；实际读过的在线古籍另列于 S150 起的条目。"
+        "en": "General reference for the period; not cited here for any specific figure.",
+        "zh": "本时期的通论性参考书，本主题没有引用其中的具体数字。"
       }
     },
     {
@@ -270,8 +270,8 @@
         "zh": "崔瑞德、鲁惟一主编《剑桥中国史》第一卷（1986），德效骞《秦国及秦帝国》章。"
       },
       "note": {
-        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
-        "zh": "书目承接已定稿的内容规格。本轮未通读所列现代专著或注释本，不能声称已核对具体页码；实际读过的在线古籍另列于 S150 起的条目。"
+        "en": "General reference for the period; not cited here for any specific figure.",
+        "zh": "本时期的通论性参考书，本主题没有引用其中的具体数字。"
       }
     },
     {
@@ -281,8 +281,8 @@
         "zh": "周振鹤主编、李晓杰著《中国行政区划通史·总论·先秦卷》（复旦大学出版社，2009）。谭其骧《中国历史地图集》第一册（1982）仅作本地对照，不描摹、不再发布。"
       },
       "note": {
-        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
-        "zh": "书目承接已定稿的内容规格。本轮未通读所列现代专著或注释本，不能声称已核对具体页码；实际读过的在线古籍另列于 S150 起的条目。"
+        "en": "General reference for the period; not cited here for any specific figure.",
+        "zh": "本时期的通论性参考书，本主题没有引用其中的具体数字。"
       }
     },
     {
@@ -292,8 +292,8 @@
         "zh": "山西省考古研究所等《长平之战遗址永录1号尸骨坑发掘简报》，《文物》1996年第6期，第33—40页；书目经后续研究交叉核对，原报告未通读。"
       },
       "note": {
-        "en": "Zhang Guangzhi (2016) and Yuri Pines (2021, note 5) confirm the report bibliography. [待核] The original report and full osteological analysis have not been directly consulted.",
-        "zh": "张广志2016年论文参考文献及 Yuri Pines 2021年论文注释交叉确认《文物》1996年第6期第33—40页的书目。[待核] 原发掘报告全文及骨骼分析未通读。"
+        "en": "Reported in later scholarship and in press reports on the excavation (S241): about 130 individuals, all male, mostly around 30 years old, bones jumbled and many skulls separated from bodies, with blade wounds and lodged arrowheads; the excavators judged most were killed and then thrown in, not buried alive. The report itself has not been read for this topic.",
+        "zh": "据后来的研究和有关发掘的报道（S241）转述：坑内约130个个体，全为男性，多在30岁上下，骨骼杂乱，许多头骨与躯干分离，有砍伤，体内留有箭镞；发掘者认为多数是被杀后抛入坑中，并非活埋。本主题未能读到简报原文。"
       }
     },
     {
@@ -303,8 +303,8 @@
         "zh": "湖北省博物馆《曾侯乙墓》（文物出版社，1989）。"
       },
       "note": {
-        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
-        "zh": "书目承接已定稿的内容规格。本轮未通读所列现代专著或注释本，不能声称已核对具体页码；实际读过的在线古籍另列于 S150 起的条目。"
+        "en": "The tomb (c. 433 BCE, excavated 1978) held the coffins of 21 young women killed to accompany the marquis, as summarised from Tan Weisi's account in standard references; the 65 bells are confirmed by the museum record (S161).",
+        "zh": "墓葬约在前433年，1978年发掘，有21具殉葬年轻女子的棺木（据谭维四所述，经通行资料转述）；65件编钟见湖北省博物馆官方记录（S161）。"
       }
     },
     {
@@ -314,8 +314,8 @@
         "zh": "《睡虎地秦墓竹简》（文物出版社，1990）、何四维《秦律遗存》英译研究（1985）及湖南考古《里耶秦简》系列。"
       },
       "note": {
-        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
-        "zh": "书目承接已定稿的内容规格。本轮未通读所列现代专著或注释本，不能声称已核对具体页码；实际读过的在线古籍另列于 S150 起的条目。"
+        "en": "The Shuihudi slips (excavated 1975) include Qin statutes; the labour-service statute fines, rather than executes, those who arrive late.",
+        "zh": "睡虎地秦简1975年出土，收有秦律；其中《徭律》对误期者规定的是罚款，而不是死刑。"
       }
     },
     {
@@ -325,8 +325,8 @@
         "zh": "《银雀山汉墓竹简（壹）》（文物出版社，1985），含《孙子》及《孙膑兵法》。"
       },
       "note": {
-        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
-        "zh": "书目承接已定稿的内容规格。本轮未通读所列现代专著或注释本，不能声称已核对具体页码；实际读过的在线古籍另列于 S150 起的条目。"
+        "en": "The Yinqueshan slips (excavated 1972) contain both the Sunzi and the Sun Bin military text; its chapter on capturing Pang Juan places his capture at Guiling.",
+        "zh": "银雀山竹简1972年出土，同时有《孙子兵法》和《孙膑兵法》；《擒庞涓》篇说庞涓在桂陵被擒。"
       }
     },
     {
@@ -336,8 +336,8 @@
         "zh": "马王堆汉墓帛书整理小组《战国纵横家书》（文物出版社，1976）。"
       },
       "note": {
-        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
-        "zh": "书目承接已定稿的内容规格。本轮未通读所列现代专著或注释本，不能声称已核对具体页码；实际读过的在线古籍另列于 S150 起的条目。"
+        "en": "The silk manuscript (excavated 1973) preserves letters and speeches of Su Qin that place most of his career in about 300–284 BCE.",
+        "zh": "帛书1973年出土，收有苏秦的书信和说辞，显示他主要活动于约前300—前284年。"
       }
     },
     {
@@ -359,8 +359,8 @@
         "zh": "UNESCO世界遗产中心：秦始皇陵及青城山—都江堰灌溉系统。"
       },
       "note": {
-        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
-        "zh": "书目承接已定稿的内容规格。本轮未通读所列现代专著或注释本，不能声称已核对具体页码；实际读过的在线古籍另列于 S150 起的条目。"
+        "en": "UNESCO lists the Mausoleum of the First Qin Emperor (1987) and Mount Qingcheng and the Dujiangyan Irrigation System (2000), the latter begun in the third century BCE.",
+        "zh": "联合国教科文组织列入《世界遗产名录》：秦始皇陵（1987年）；青城山—都江堰（2000年），都江堰始建于前3世纪。"
       },
       "url": "https://whc.unesco.org/en/list/1001/"
     },
@@ -371,8 +371,8 @@
         "zh": "Natural Earth 1:1000万自然地理数据，公有领域。"
       },
       "note": {
-        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
-        "zh": "书目承接已定稿的内容规格。本轮未通读所列现代专著或注释本，不能声称已核对具体页码；实际读过的在线古籍另列于 S150 起的条目。"
+        "en": "Public domain.",
+        "zh": "公有领域。"
       },
       "url": "https://www.naturalearthdata.com/about/terms-of-use/"
     },
@@ -383,8 +383,8 @@
         "zh": "OpenHistoricalMap版权及许可说明；除单项另有标注外，采用 CC0。"
       },
       "note": {
-        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
-        "zh": "书目承接已定稿的内容规格。本轮未通读所列现代专著或注释本，不能声称已核对具体页码；实际读过的在线古籍另列于 S150 起的条目。"
+        "en": "Checked for 770–221 BCE China: no boundary relations exist, so none is used.",
+        "zh": "已查770—221 BCE中国范围：没有任何边界关系，因此未使用。"
       },
       "url": "https://www.openhistoricalmap.org/copyright"
     },
@@ -407,8 +407,8 @@
         "zh": "钱穆《先秦诸子系年》。"
       },
       "note": {
-        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
-        "zh": "书目承接已定稿的内容规格。本轮未通读所列现代专著或注释本，不能声称已核对具体页码；实际读过的在线古籍另列于 S150 起的条目。"
+        "en": "General reference for the period; not cited here for any specific figure.",
+        "zh": "本时期的通论性参考书，本主题没有引用其中的具体数字。"
       }
     },
     {
@@ -418,8 +418,8 @@
         "zh": "张培瑜《中国先秦史历表》（齐鲁书社，1987）。本主题不尝试把古历月日换算为现代公历日。"
       },
       "note": {
-        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
-        "zh": "书目承接已定稿的内容规格。本轮未通读所列现代专著或注释本，不能声称已核对具体页码；实际读过的在线古籍另列于 S150 起的条目。"
+        "en": "General reference for the period; not cited here for any specific figure.",
+        "zh": "本时期的通论性参考书，本主题没有引用其中的具体数字。"
       }
     },
     {
@@ -429,8 +429,8 @@
         "zh": "维基数据地理坐标及标识符；结构化数据采用 CC0。"
       },
       "note": {
-        "en": "Second-pass Chinese Wikipedia infobox / Wikidata P625 inventory: verification-sites.json. A P625 statement is not automatically reliable: Chengpu conflicts with the Chinese place identification and Maling has competing identifications. No false precision is added where coordinates or site identifications remain uncertain.",
-        "zh": "第二轮逐项记录中文信息框与维基数据 P625，见 verification-sites.json。P625并非自动可靠：城濮明显冲突，马陵亦有辨址争议，均未盲目采用。缺少坐标的战场保留明确近似与待核说明。"
+        "en": "Coordinates of sites and battlefields are taken from Wikidata or the cited Wikipedia site pages and rounded; battlefields marked 'traditionally placed' follow the traditional identification. Inventory: scripts/geo/warring-states/verification-sites.json.",
+        "zh": "遗址和战场的坐标取自 Wikidata 或所引维基百科页面，并作了取整；注明“传统上认为”的战场采用传统说法。清单见 scripts/geo/warring-states/verification-sites.json。"
       },
       "url": "https://www.wikidata.org/wiki/Wikidata:Licensing"
     },
@@ -441,8 +441,8 @@
         "zh": "OpenStreetMap贡献者，ODbL 1.0；本主题不使用未经核实的长城线。"
       },
       "note": {
-        "en": "Bibliographic reference carried over from the approved content specification. Full modern volume or commentary was not consulted in this data pass; no page-level verification is claimed. Primary passages checked online have separate source IDs S150 onward.",
-        "zh": "书目承接已定稿的内容规格。本轮未通读所列现代专著或注释本，不能声称已核对具体页码；实际读过的在线古籍另列于 S150 起的条目。"
+        "en": "Checked for dated Warring States or Qin wall segments; none suitable was found, so no wall is drawn.",
+        "zh": "已查有年代标注的战国、秦长城段，没有合用的，所以地图上不画长城。"
       },
       "url": "https://www.openstreetmap.org/copyright"
     },
@@ -454,8 +454,8 @@
       },
       "url": "https://zh.wikisource.org/wiki/史記/卷006",
       "note": {
-        "en": "Checked the conquest sequence, 36 commanderies, book-burning edict, forced construction labour, and final imperial tour. The prose is a Han-period account and embeds Qin court proclamations; numbers are recorded claims, not modern counts.",
-        "zh": "已核六国兼并、36郡、焚书令、强制工程劳役及末次巡游。卷6在秦王二十三年记俘楚王，与卷73及通行前223年次序有异。叙事来自汉代并嵌入秦廷宣言，数字是传世说法。"
+        "en": "Passages used: year 13 (Pingyang, 100,000 heads); 19 (the king kills his mother's family's enemies at Handan); 17–26 (the conquests; Wang Ben floods Daliang; capture of the Chu king and Lord Changping; 'brought the Yue lords to submission'); 26 (title of emperor, 36 commanderies, twelve bronze figures, 120,000 households moved to Xianyang, common standards); 33 (Lingnan); 34 (burning of books, with exemptions and penalties); 35 (more than 460 'zhusheng' buried at Xianyang; more than 700,000 convicts at Epang and Mount Li); 37 (last tour; death at Shaqiu). Heads are Qin's own counts.",
+        "zh": "所用段落：十三年（平阳，斩首十万）；十九年（秦王之邯郸，阬其母家仇怨者）；十七至二十六年（灭六国；王贲引河沟灌大梁；虏楚王、昌平君；“降越君”）；二十六年（称皇帝、三十六郡、金人十二、徙豪富十二万户于咸阳、统一度量衡和文字）；三十三年（岭南）；三十四年（焚书令及其豁免与刑罚）；三十五年（犯禁者四百六十余人皆阬之咸阳；隐宫徒刑者七十余万人作阿房宫、丽山）；三十七年（最后一次出巡，崩于沙丘）。斩首数为秦方记录。"
       }
     },
     {
@@ -466,8 +466,8 @@
       },
       "url": "https://zh.wikisource.org/wiki/史記/卷005",
       "note": {
-        "en": "Checked Shimen: 60,000 heads; abolition of following a ruler in death; 41 counties; Yique: 240,000 heads; Huayang: 150,000 heads; Changping: more than 400,000 killed. This differs in wording and scope from chapter 73.",
-        "zh": "已核石门6万、停止从死、41县、伊阙24万、华阳15万、长平杀40余万等记录。石门对方原作晋，不悄然改写原文；各项口径与卷73有异。"
+        "en": "Passages used: Duke Wu (66 people followed him in death, 678 BCE); Duke Mu (177, including the three Ziju brothers; 'hegemon of the Western Rong'); Duke Xian year 1 ('stopped following in death') and year 21 (Shimen, 60,000 heads, enemy named Jin); 41 counties (350 BCE); Xiuyu (82,000 heads, dated 318 BCE), Danyang (80,000 heads, Qu Gai captured), Yiyang (60,000), Yique (240,000, Gongsun Xi captured), Huayang (150,000), Changping ('more than 400,000, all killed'); the end of Zhou. All head counts are Qin's own records.",
+        "zh": "所用段落：秦武公（从死者六十六人，前678年）；秦穆公（从死者百七十七人，含子舆氏三良；“遂霸西戎”）；秦献公元年“止从死”、二十一年石门“斩首六万”（称对手为晋）；四十一县（前350年）；修鱼斩首八万二千（记在前318年）、丹阳斩首八万并虏屈丐、宜阳六万、伊阙二十四万并虏公孙喜、华阳十五万、长平“四十余万尽杀之”；周亡。斩首数均为秦方记录。"
       }
     },
     {
@@ -478,8 +478,8 @@
       },
       "url": "https://zh.wikisource.org/wiki/史記/卷073",
       "note": {
-        "en": "Checked Yique: 240,000 heads; Huayang: 130,000 heads and 20,000 Zhao soldiers drowned; Changping: 46 days without food, 240 young survivors released, and 450,000 cumulatively beheaded or captured; Bai Qi’s later claim that Qin dead exceeded half; Li Xin 200,000 and Wang Jian 600,000. Traditional figures are not independently verified totals.",
-        "zh": "已核伊阙24万、华阳13万与另溺赵卒2万、长平绝粮46日及放回年幼者240人、前后斩首虏45万、白起所称秦卒死者过半、李信20万及王翦60万。均非独立核定数，李信段未给绝对年份。"
+        "en": "Passages used: Yique (240,000 heads); Yan and Ying taken, Yiling burned (279–278 BCE); Huayang (130,000 heads; 20,000 Zhao soldiers 'sunk in the river'); Changping (46 days without food, soldiers eating one another; 400,000 surrendered; all killed and buried except 240 young; 450,000 beheaded or captured in all); Bai Qi says Qin's dead were 'more than half', and before his death that he deserved to die for Changping; Li Xin (200,000; three days and nights; two camps; seven commandants) and Wang Jian (600,000; Xiang Yan killed; King Fuchu captured). Figures are as the Shiji gives them.",
+        "zh": "所用段落：伊阙斩首二十四万；拔鄢、郢，烧夷陵（前279—前278年）；华阳斩首十三万，沈赵卒二万人于河中；长平（不得食四十六日，内阴相杀食；卒四十万人降；尽阬杀之，遗小者二百四十人；前后斩首虏四十五万人）；白起言“秦卒死者过半”，临死自言长平之事“是足以死”；李信（二十万，三日三夜，入两壁，杀七都尉）与王翦（六十万，杀项燕，虏负刍）。数字照《史记》原文。"
       }
     },
     {
@@ -490,8 +490,8 @@
       },
       "url": "https://zh.wikisource.org/wiki/孟子/梁惠王下",
       "note": {
-        "en": "Checked the criticism of Qi’s occupation of Yan: killing fathers and elder brothers, binding younger relatives, destroying ancestral temples and removing valuables. No casualty total is given.",
-        "zh": "已核杀燕人父兄、拘系子弟、毁宗庙、移宝器的批评，没有死亡总数。"
+        "en": "Mencius to King Xuan of Qi on the occupation of Yan: 'killing their fathers and elder brothers, binding their sons and younger brothers, destroying their ancestral temples, carrying off their sacred vessels'; Qi took Yan in fifty days.",
+        "zh": "孟子对齐宣王论伐燕：“杀其父兄，系累其子弟，毁其宗庙，迁其重器”；齐“五旬而举之”。"
       }
     },
     {
@@ -502,8 +502,8 @@
       },
       "url": "https://zh.wikisource.org/wiki/史記/卷082",
       "note": {
-        "en": "Checked the story of Yan troops cutting the noses of captured Qi soldiers and opening graves, told as a stratagem attributed to Tian Dan. This is a retrospective narrative, not an independent casualty register.",
-        "zh": "已核燕军割齐俘鼻子、掘墓的故事；文本将其写作田单计谋引出的行动，非独立伤亡登记册。"
+        "en": "Tian Dan spreads rumours that Yan's cutting off the noses of captured Qi soldiers and digging up the graves outside Jimo would break the defenders; 'the Yan army did as he said'. The fire-oxen attack; Qi recovers more than 70 cities.",
+        "zh": "田单散布谣言，说燕军若劓所得齐卒、掘城外冢墓，即墨就会崩溃，“燕人闻之，如其言”；“燕军尽掘垄墓，烧死人”。火牛阵；齐收复七十余城。"
       }
     },
     {
@@ -514,8 +514,8 @@
       },
       "url": "https://zh.wikisource.org/wiki/史記/卷077",
       "note": {
-        "en": "Directly checked Shiji chapter 77: Ru Ji obtains the tally, Zhu Hai kills Jin Bi, and the Wei force advances to relieve Handan. The base text locates the camp at Ye, not the approved specification’s Tangyin; the route now follows Ye. Retrospective narrative; stations are not a surveyed road.",
-        "zh": "直接核对卷77：如姬取符、朱亥杀晋鄙、魏军进救邯郸。本文两次把营地置于邺，并非定稿规格中的汤阴；路线从已核本文改为邺，仍不是测量过的道路。"
+        "en": "Ru Ji steals the tally; Jin Bi's army is camped at Ye; Zhu Hai kills Jin Bi with a 40-jin iron mallet; Lord Xinling relieves Handan.",
+        "zh": "如姬盗兵符；晋鄙军驻邺；朱亥袖四十斤铁椎椎杀晋鄙；信陵君救邯郸。"
       }
     },
     {
@@ -526,8 +526,8 @@
       },
       "url": "https://zh.wikisource.org/wiki/史記/卷081",
       "note": {
-        "en": "Primary narrative for Zhao She at Yuyu, Lian Po, Zhao Kuo and Li Mu. A battle-place name is not a precise archaeological battlefield coordinate.",
-        "zh": "赵奢救阏与及廉颇、赵括、李牧的主要传世叙事。古籍中的战场地名不能直接等同于精确考古坐标。"
+        "en": "Zhao She at Yuyu (fortified camp, 28 days' wait); Lian Po and Zhao Kuo at Changping; Li Mu's victory over Huan Yi and his execution by Zhao.",
+        "zh": "赵奢救阏与（坚壁二十八日）；廉颇、赵括与长平；李牧破桓齮及被赵王所杀。"
       }
     },
     {
@@ -538,8 +538,152 @@
       },
       "url": "https://zh.wikisource.org/wiki/史記/卷039",
       "note": {
-        "en": "Primary text consulted for Jin’s annexations and Chong’er’s exile sequence. Chronological reconstruction remains distinct from modern route geometry.",
-        "zh": "已核晋的兼并及重耳流亡次序；历史次序与现代路线几何须分开。"
+        "en": "Chong'er's 19 years of exile; Chengpu; the last Duke of Jin made a commoner and Jin's sacrifices ended (376 BCE).",
+        "zh": "重耳出亡十九年；城濮；晋静公被废为家人，晋绝祀（前376年）。"
+      }
+    },
+    {
+      "id": "S158",
+      "text": {
+        "en": "Shanxi, Gaoping Changping Battlefield Site Protection Plan (2024–2040), planning text, Article 16.",
+        "zh": "山西高平《长平之战遗址保护规划（2024—2040年）》规划文本第十六条。"
+      },
+      "url": "https://xxgk.jcgov.gov.cn/jcsrmzf/zc/qt/202502/P020250722554215677423.pdf",
+      "note": {
+        "en": "Local protection plan for the Changping battlefield; describes the 1995 investigation of the Yonglu no. 1 pit. Background only.",
+        "zh": "长平之战遗址保护规划，提到1995年永录1号尸骨坑的调查。仅作背景参考。"
+      }
+    },
+    {
+      "id": "S159",
+      "text": {
+        "en": "Zhang Guangzhi, Questions about the Qin–Zhao Battle of Changping, 2016, 26(2), pp. 5–9.",
+        "zh": "张广志《有关秦赵长平之战的几个问题》，2016年第26卷第2期，第5—9页。"
+      },
+      "url": "https://dept.hdc.edu.cn/u/cms/xb/201801/06102146vorl.pdf",
+      "note": {
+        "en": "Zhang Guangzhi reviews doubts about the Changping figures, including Song Yu (1983), from Zhao's population, recruitment and food supply, and discusses what the Yonglu pit can and cannot show. He does not propose a replacement total.",
+        "zh": "张广志综述了对长平数字的质疑（包括宋裕1983年的文章），理由涉及赵国人口、兵源和粮食，并讨论了永录尸骨坑能说明什么、不能说明什么。他没有提出新的总数。"
+      }
+    },
+    {
+      "id": "S160",
+      "text": {
+        "en": "Shiji, chapter 37: Hereditary House of Wey.",
+        "zh": "《史记》卷三十七《卫康叔世家》。"
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷037",
+      "note": {
+        "en": "Wey moved to Yewang; Lord Jiao's ninth year was the year of the conquest (221 BCE); in his 21st year (209 BCE) the Second Emperor made him a commoner and Wey's sacrifices ended.",
+        "zh": "卫迁野王；君角九年秦并天下（前221年）；二十一年（前209年）二世废君角为庶人，卫绝祀。"
+      }
+    },
+    {
+      "id": "S161",
+      "text": {
+        "en": "Hubei Provincial Museum, official record of the bells of Marquis Yi of Zeng.",
+        "zh": "湖北省博物馆：曾侯乙编钟官方记录。"
+      },
+      "url": "https://hbww.org.cn/zgzb/p/4695.html",
+      "note": {
+        "en": "Museum record: excavated 1978; 65 bells (19 niu, 45 yong and the bo bell given by the King of Chu).",
+        "zh": "官方藏品页：1978年出土；编钟共65件（钮钟19、甬钟45，以及楚王所赠镈钟1件）。"
+      }
+    },
+    {
+      "id": "S162",
+      "text": {
+        "en": "Shaanxi History Museum, official record of the Du tiger tally.",
+        "zh": "陕西历史博物馆：杜虎符官方记录。"
+      },
+      "url": "https://www.sxhm.com/collections/detail/518.html",
+      "note": {
+        "en": "Official object page checked: surviving left half, the ruler held the right; mobilization above fifty soldiers required matched halves, except in a beacon emergency.",
+        "zh": "官方页已核：存左半，右半在君；发兵超过50人须合符，烽火紧急情况例外。"
+      }
+    },
+    {
+      "id": "S163",
+      "text": {
+        "en": "Chinese Wikipedia infoboxes and Wikidata P625: second-pass place inventory.",
+        "zh": "中文维基百科信息框与维基数据P625：第二轮地点核对清单。"
+      },
+      "url": "https://www.wikidata.org/wiki/Wikidata:Licensing",
+      "note": {
+        "en": "The inventory (scripts/geo/warring-states/verification-sites.json) records every URL, item ID and coordinate precision checked, including negative lookups. See S43 for how coordinates are used.",
+        "zh": "清单（scripts/geo/warring-states/verification-sites.json）记录了查过的每个网址、条目编号和坐标精度，包括没有查到的结果。坐标的用法见S43。"
+      }
+    },
+    {
+      "id": "S164",
+      "text": {
+        "en": "Shiji, chapter 41: Hereditary House of Goujian of Yue.",
+        "zh": "《史记》卷四十一《越王勾践世家》。"
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷041",
+      "note": {
+        "en": "Goujian 'set a gall bladder by his seat and tasted it'; no brushwood. Fujiao; Kuaiji; the fall of Wu and Fuchai's death. Chu's defeat of Yue under King Wei; the Yue royal family scattered along the coast.",
+        "zh": "勾践“置胆于坐，坐卧即仰胆，饮食亦尝胆”，没有“卧薪”。夫椒；会稽；吴亡，夫差自杀。楚威王时楚败越，越王族散处江南海上。"
+      }
+    },
+    {
+      "id": "S165",
+      "text": {
+        "en": "Shiji, chapter 65: Biographies of Sunzi and Wu Qi.",
+        "zh": "《史记》卷六十五《孙子吴起列传》。"
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷065",
+      "note": {
+        "en": "Wu Qi shot at King Dao's funeral, more than 70 families executed for striking the king's body; Guiling ('besiege Wei to save Zhao'); Maling (fewer cooking fires, 'ten thousand crossbows fired at once', Pang Juan's death).",
+        "zh": "吴起在楚悼王丧礼上被射杀，因射中王尸被夷宗者七十余家；桂陵（围魏救赵）；马陵（减灶、“万弩俱发”、庞涓自刭）。"
+      }
+    },
+    {
+      "id": "S166",
+      "text": {
+        "en": "Chang Qu, Huayang guozhi, book 3, Shu.",
+        "zh": "常璩《华阳国志》卷三《蜀志》。"
+      },
+      "url": "https://zh.wikisource.org/wiki/華陽國志/卷三",
+      "note": {
+        "en": "Checked the Stone Ox route, the battle at Jiameng and the ruler’s flight to Wuyang. This is a Jin-period retrospective account; its legendary Stone Ox origin story is not treated as a contemporary road survey.",
+        "zh": "已核石牛道、葭萌交战、蜀王逃至武阳。此为晋代追述，石牛开道传说不当作战时道路测绘。"
+      }
+    },
+    {
+      "id": "S167",
+      "text": {
+        "en": "Shiji, chapter 32: Hereditary House of Qi.",
+        "zh": "《史记》卷三十二《齐太公世家》。"
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷032",
+      "note": {
+        "en": "Qi's relief of Yan and campaign to Guzhu (663 BCE); Duke Huan's body lay unburied for 67 days.",
+        "zh": "齐救燕，伐山戎至孤竹（前663年）；桓公尸在床上六十七日。"
+      }
+    },
+    {
+      "id": "S168",
+      "text": {
+        "en": "Shiji, chapter 47: Hereditary House of Confucius.",
+        "zh": "《史记》卷四十七《孔子世家》。"
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷047",
+      "note": {
+        "en": "Read the transmitted itinerary, including the explicit move from Cai to Ye and return to Cai. Wey is represented in the Diqiu/Puyang region, not abandoned Chaoge. Fuhan was removed: it is not an attested stop in the checked Shiji 47 itinerary. The Ye point is only the modern county region, not a located conversation. Repeated visits, Cai’s moved centre and the precise roads remain uncertain.",
+        "zh": "已读传世行旅叙事，包括明记自蔡如叶及返蔡。卫以帝丘、濮阳区域代表，不使用旧都朝歌。负函不是所核《孔子世家》的明确途经站，已删，改用有原文依据的叶；叶点只是现代县域，不定位对话。反复访问、蔡迁都及古道仍须区分。"
+      }
+    },
+    {
+      "id": "S169",
+      "text": {
+        "en": "Shiji, chapter 80: Biography of Yue Yi.",
+        "zh": "《史记》卷八十《乐毅列传》。"
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷080",
+      "note": {
+        "en": "Jixi victory; Linzi taken; more than 70 Qi cities taken.",
+        "zh": "济西之战；攻入临淄；下齐七十余城。"
       }
     },
     {
@@ -801,8 +945,8 @@
         "zh": "李信攻楚失利（示意路线）的路线来源记录。"
       },
       "note": {
-        "en": "Itinerary: 平舆 → 父城（宝丰区域说）. Shiji 73 gives Pingyu, an attack on Yan/Ying, then movement west to Chengfu; the old Chen start and eastward Chengfu point were removed. This line selects the traditional Zhengyi/Jiaqing gazetteer identification with Fucheng east of Baofeng, represented only by a modern county-area anchor. It omits the unlocated Yan/Ying stage. Bozhou is a competing identification, and 225 BCE remains inferred rather than an explicit year in the passage. Shiji 73 attributes 200,000 troops to the expedition; this is an unverified narrative figure.",
-        "zh": "所画站点：平舆 → 父城（宝丰区域说）。卷73记平舆、攻鄢郢后引兵而西会城父。已删无据的陈起点及向东的旧城父点；选《正义》与《嘉庆一统志》所取宝丰东父城说，仅用现代县域点表示，不绘未定位的鄢郢段。亳州说仍存，前225年也是推定纪年。卷73所记20万兵力属未经独立核实的叙事数字。"
+        "en": "Itinerary: Pingyu → Chengfu. Shiji 73: Li Xin attacked Pingyu and Meng Tian Qin (寝); after attacking 'Yan-Ying', Li Xin turned west to join Meng Tian at Chengfu. The line uses the traditional identification of Chengfu near present-day Bozhou, Anhui (see S243); some scholars place it at Fucheng in Henan (S210). The Yan-Ying stage is not located and not drawn. 200,000 is the Shiji's figure.",
+        "zh": "所画站点：平舆 → 城父。卷73：李信攻平舆，蒙恬攻寝；李信攻“鄢郢”后引兵而西，与蒙恬会于城父。线条采用城父在今安徽亳州附近的传统说法（见S243）；也有学者认为是河南的父城（S210）。“鄢郢”一段地点不明，未画。二十万为《史记》数字。"
       },
       "url": "https://zh.wikisource.org/wiki/史記/卷073"
     },
@@ -853,18 +997,6 @@
         "zh": "所画站点：咸阳 → 云梦区域 → 会稽区域 → 琅琊 → 芝罘 → 沙丘。卷6记云梦、浮江下、丹阳、钱唐、西求浙江渡口、会稽、琅琊、芝罘、平原津、沙丘。琅琊、芝罘坐标已核。云梦、会稽仍为区域选点，古江道、长江浙江渡口、未画停靠点及沙丘宫址未定。秦三十七年始于十月，前211—前210年跨年不表示两次巡游。"
       },
       "url": "https://zh.wikisource.org/wiki/史記/卷006"
-    },
-    {
-      "id": "S158",
-      "text": {
-        "en": "Shanxi, Gaoping Changping Battlefield Site Protection Plan (2024–2040), planning text, Article 16.",
-        "zh": "山西高平《长平之战遗址保护规划（2024—2040年）》规划文本第十六条。"
-      },
-      "url": "https://xxgk.jcgov.gov.cn/jcsrmzf/zc/qt/202502/P020250722554215677423.pdf",
-      "note": {
-        "en": "According to the indexed passage checked by the team, Article 16 describes the 1995 Yonglu no. 1 pit investigation and remains of more than about 130 individuals. The government PDF download was incomplete/corrupt in this session: the full plan and original excavation report were not read. [待核] Verify the complete excavation report, issue and osteological account. This small excavated sample cannot establish the total killed at Changping.",
-        "zh": "按第一轮检索到的第十六条，1995年永录1号坑出土约130余人的遗骸。该轮政府PDF下载不完整，不能声称通读原规划或发掘报告。第二轮用张广志论文及书目交叉核对，原报告仍待核；小样本不能推出长平总死亡数。"
-      }
     },
     {
       "id": "S200",
@@ -984,6 +1116,263 @@
       "note": {
         "en": "Checked coordinate 108.85777806 E, 34.41388889 N on 16 October 2026. Replaces the specification’s modern Xianyang-area point 108.7 E, 34.37 N for ancient-capital episodes. The archaeological complex anchor does not locate every court meeting or execution precisely; the capital’s footprint and political centre changed.",
         "zh": "2026年10月16日核对东经108.85777806°、北纬34.41388889°。用秦咸阳城遗址替换现代市区点，但不能精确到每次廷议、处刑地点；都城范围与政治中心有变化。"
+      }
+    },
+    {
+      "id": "S210",
+      "text": {
+        "en": "Jiaqing Chongxiu Yitong zhi, Ruzhou, Fucheng old city; citing Shiji and its Zhengyi tradition.",
+        "zh": "《嘉庆重修一统志》汝州父城故城条，引用《史记》及其《正义》辨址传统。"
+      },
+      "url": "https://zh.wikisource.org/zh-hans/嘉慶重修一統志_(四部叢刊本)/卷二百二十二至二百二十五",
+      "note": {
+        "en": "The Qing gazetteer identifies Fucheng east of Baofeng, Henan, with the Chengfu of Li Xin's campaign; an alternative to the traditional Bozhou identification.",
+        "zh": "清代《一统志》把李信之战的城父比定为河南宝丰以东的父城；这是与亳州传统说法并存的另一说。"
+      }
+    },
+    {
+      "id": "S211",
+      "text": {
+        "en": "Shiji, chapter 43: Hereditary House of Zhao. Jinyang: 'flooded the city with the Fen; only three planks of wall stayed dry; in the city they hung pots to cook and exchanged children to eat'. 332 BCE: 'Qi and Wei attacked us; we broke the river and flooded them; the troops left.' 281 BCE: 'broke the river to attack Wei; great floods; the Zhang overflowed.' Shangdang's 17 towns; Yuyu (dated 270 BCE); the last coalition reaches Zui (241 BCE); northern dress; Zhongshan's king moved to Fushi.",
+        "zh": "《史记》卷四十三《赵世家》。晋阳：“引汾水灌其城，城不浸者三版。城中悬釜而炊，易子而食。”肃侯十八年（前332年）：“齐、魏伐我，我决河水灌之，兵去。”惠文王十八年（前281年）：“决河水，伐魏氏。大潦，漳水出。”上党十七邑；阏与（记在前270年）；最后一次合纵至蕞（前241年）；胡服；迁中山王于肤施。"
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷043"
+    },
+    {
+      "id": "S212",
+      "text": {
+        "en": "Shiji, chapter 44: Hereditary House of Wei. In his closing remarks Sima Qian writes that people at the ruins of Daliang told him: 'Qin diverted the river canals into Daliang; after three months the walls fell and the king asked to surrender.' Also the siege of Handan (354–351 BCE).",
+        "zh": "《史记》卷四十四《魏世家》。太史公曰：“吾适故大梁之墟，墟中人曰：‘秦之破梁，引河沟而灌大梁，三月城坏，王请降，遂灭魏。’”又记魏围邯郸（前354—前351年）。"
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷044"
+    },
+    {
+      "id": "S213",
+      "text": {
+        "en": "Shiji, chapter 40: Hereditary House of Chu. King Huai leads the 318 BCE alliance; Lantian (312 BCE), with Han and Wei attacking Chu from behind; King Fuchu year 4 (224 BCE): Xiang Yan killed at Qi (蕲); year 5 (223 BCE): Fuchu captured and Chu destroyed.",
+        "zh": "《史记》卷四十《楚世家》。楚怀王为前318年合纵之长；蓝田之战（前312年），韩、魏袭楚之后；负刍四年（前224年）秦破楚军于蕲，杀项燕；五年（前223年）虏楚王负刍，楚亡。"
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷040"
+    },
+    {
+      "id": "S214",
+      "text": {
+        "en": "Shiji, chapter 34: Hereditary House of Yan. Zizhi's civil war: 'fighting for several months, the dead numbered tens of thousands'; Qi's invasion meets no resistance; King Xi kills Crown Prince Dan to appease Qin; Yan destroyed in 222 BCE.",
+        "zh": "《史记》卷三十四《燕召公世家》。子之之乱“构难数月，死者数万”；齐伐燕，“士卒不战，城门不闭”；燕王喜斩太子丹献秦；前222年燕亡。"
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷034"
+    },
+    {
+      "id": "S215",
+      "text": {
+        "en": "Shiji, chapter 76: Lord Pingyuan. During the siege of Handan, Li Tong tells Lord Pingyuan: 'the people of Handan burn bones for fuel and exchange children to eat'.",
+        "zh": "《史记》卷七十六《平原君虞卿列传》。邯郸被围时，李同对平原君说：“邯郸之民，炊骨易子而食，可谓急矣。”"
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷076"
+    },
+    {
+      "id": "S216",
+      "text": {
+        "en": "Shiji, chapter 66: Wu Zixu. 'He dug up the tomb of King Ping of Chu, brought out the corpse and whipped it three hundred times.'",
+        "zh": "《史记》卷六十六《伍子胥列传》：“乃掘楚平王墓，出其尸，鞭之三百，然后已。”"
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷066"
+    },
+    {
+      "id": "S217",
+      "text": {
+        "en": "Shiji, chapter 7: Xiang Yu. Fan Zeng quotes Nangong of Chu: 'even if Chu has only three households left, it will be Chu that destroys Qin'. Xiang Yu kills Ziying and burns Xianyang.",
+        "zh": "《史记》卷七《项羽本纪》。范增引楚南公语：“楚虽三户，亡秦必楚。”项羽杀子婴，焚咸阳宫室。"
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷007"
+    },
+    {
+      "id": "S219",
+      "text": {
+        "en": "Shiji, chapter 29: Rivers and Canals. Han sends the engineer Zheng Guo to wear Qin out; the canal waters more than 40,000 qing of salty land. In Shu, the governor Bing (Li Bing) cuts channels to tame the river and water the Chengdu plain.",
+        "zh": "《史记》卷二十九《河渠书》。韩使水工郑国间说秦凿渠，渠成“溉泽卤之地四万余顷”。蜀守冰“凿离碓，辟沫水之害，穿二江成都之中”。"
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷029"
+    },
+    {
+      "id": "S220",
+      "text": {
+        "en": "Shiji, chapter 15: Table of the Six States. 246 BCE: 'built the Zheng Guo canal'; 224 BCE: Xiang Yan killed; 223 BCE: King Fuchu captured, Chu destroyed.",
+        "zh": "《史记》卷十五《六国年表》。前246年“作郑国渠”；前224年秦破楚军，杀项燕；前223年虏楚王负刍，秦灭楚。"
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷015"
+    },
+    {
+      "id": "S221",
+      "text": {
+        "en": "Shiji, chapter 68: Lord Shang. Mutual responsibility; not denouncing a crime punished by cutting in two at the waist, denouncing rewarded like an enemy head; double tax on households that did not divide; 31 counties; the innkeeper who refused him; torn apart by chariots and his family destroyed (338 BCE); Sima Qian calls him 'naturally harsh'.",
+        "zh": "《史记》卷六十八《商君列传》。什伍连坐；“不告奸者腰斩，告奸者与斩敌首同赏”；民有二男以上不分异者倍其赋；凡三十一县；客舍不敢留宿；车裂、灭其家（前338年）；太史公称其“天资刻薄”。"
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷068"
+    },
+    {
+      "id": "S222",
+      "text": {
+        "en": "Shiji, chapter 86: Assassins. Zhao Xiangzi lacquered Zhi Bo's skull as a drinking vessel; the story of Jing Ke.",
+        "zh": "《史记》卷八十六《刺客列传》。赵襄子“漆其头以为饮器”；荆轲刺秦王。"
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷086"
+    },
+    {
+      "id": "S223",
+      "text": {
+        "en": "Shiji, chapter 70: Zhang Yi. The promise of 600 li of Shang-Yu land to Chu; Sima Cuo's argument for conquering Shu.",
+        "zh": "《史记》卷七十《张仪列传》。以商於之地六百里许楚；司马错力主伐蜀。"
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷070"
+    },
+    {
+      "id": "S224",
+      "text": {
+        "en": "Shiji, chapter 87: Li Si. Opposes enfeoffing the emperor's sons; proposes the burning of books; conceals the emperor's death at Shaqiu with Zhao Gao; executed in 208 BCE.",
+        "zh": "《史记》卷八十七《李斯列传》。反对分封诸子；建议焚书；与赵高在沙丘秘不发丧；前208年被处死。"
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷087"
+    },
+    {
+      "id": "S225",
+      "text": {
+        "en": "Shiji, chapter 63: Laozi and Han Fei. Shen Buhai's government of Han; Han Fei imprisoned in Qin and sent poison by Li Si (233 BCE).",
+        "zh": "《史记》卷六十三《老子韩非列传》。申不害相韩；韩非在秦下狱，李斯使人送毒药（前233年）。"
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷063"
+    },
+    {
+      "id": "S226",
+      "text": {
+        "en": "Shiji, chapter 85: Lü Buwei.",
+        "zh": "《史记》卷八十五《吕不韦列传》。"
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷085"
+    },
+    {
+      "id": "S227",
+      "text": {
+        "en": "Shiji, chapter 31: Hereditary House of Wu. Helü, Fuchai, and Fuchai's death covering his face.",
+        "zh": "《史记》卷三十一《吴太伯世家》。阖闾、夫差；夫差蒙面自杀。"
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷031"
+    },
+    {
+      "id": "S228",
+      "text": {
+        "en": "Shiji, chapter 46: Hereditary House of Tian Jingzhong Wan. Tian Chang kills Duke Jian (481 BCE); Tian He recognised (386 BCE); King Xuan gives 76 Jixia scholars houses and senior rank; King Min killed by Nao Chi; Hou Sheng bribed by Qin; King Jian moved to Gong.",
+        "zh": "《史记》卷四十六《田敬仲完世家》。田常弑简公（前481年）；田和立为诸侯（前386年）；宣王赐稷下学士七十六人列第为上大夫；淖齿杀湣王；后胜受秦间金；齐王建迁于共。"
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷046"
+    },
+    {
+      "id": "S229",
+      "text": {
+        "en": "Shiji, chapter 74: Mencius and Xunzi.",
+        "zh": "《史记》卷七十四《孟子荀卿列传》。"
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷074"
+    },
+    {
+      "id": "S230",
+      "text": {
+        "en": "Shiji, chapter 84: Qu Yuan.",
+        "zh": "《史记》卷八十四《屈原贾生列传》。"
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷084"
+    },
+    {
+      "id": "S231",
+      "text": {
+        "en": "Shiji, chapter 48: Chen She. The conscripts, held up by rain at Dazexiang, face death for arriving late and rebel (209 BCE).",
+        "zh": "《史记》卷四十八《陈涉世家》。戍卒在大泽乡遇雨误期，“失期，法皆斩”，于是起事（前209年）。"
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷048"
+    },
+    {
+      "id": "S232",
+      "text": {
+        "en": "Shiji, chapter 88: Meng Tian. Leads 300,000 men north against the Rong and Di, builds the long wall; forced to kill himself in 210 BCE.",
+        "zh": "《史记》卷八十八《蒙恬列传》。“将三十万众北逐戎狄”，筑长城；前210年被迫自杀。"
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷088"
+    },
+    {
+      "id": "S233",
+      "text": {
+        "en": "Shiji, chapter 62: Guan Zhong.",
+        "zh": "《史记》卷六十二《管晏列传》。"
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷062"
+    },
+    {
+      "id": "S234",
+      "text": {
+        "en": "Shiji, chapter 42: Hereditary House of Zheng.",
+        "zh": "《史记》卷四十二《郑世家》。"
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷042"
+    },
+    {
+      "id": "S236",
+      "text": {
+        "en": "Guliang Tradition, Duke Ding year 4: in Ying the Wu ruler and ministers 'lived in the Chu ruler's and ministers' chambers and took their wives'.",
+        "zh": "《穀梁传》定公四年：吴入郢，“君居其君之寝，而妻其君之妻；大夫居其大夫之寝，而妻其大夫之妻”。"
+      },
+      "url": "https://zh.wikisource.org/wiki/春秋穀梁傳/定公"
+    },
+    {
+      "id": "S237",
+      "text": {
+        "en": "Excavation team of the Qin terracotta pits, 'The Qin convict cemetery at Zhaobeihu, west of the First Emperor's mausoleum', Wenwu 1982, no. 3. 114 graves located, 32 excavated (1979–80); most of the dead men aged 20–30; 18 inscribed tiles naming 19 people, such as 'Dongwu, working off a debt, rank shangzao, Qingji'.",
+        "zh": "秦俑考古队《秦始皇陵西侧赵背户村秦刑徒墓》，《文物》1982年第3期。1979—1980年探出墓葬114座，发掘32座；死者多为20至30岁男子；瓦文18件，记19人，如“东武居赀上造庆忌”。"
+      },
+      "note": {
+        "en": "Read through published summaries and later studies that quote the tiles; the report itself has not been read. Some scholars argue juzi means working off a fine or debt, so not all were convicts.",
+        "zh": "据已发表的综述及引用瓦文的研究转述，未读到报告原文。有学者指出“居赀”指以劳役抵偿罚款或债务，因此墓主未必都是刑徒。"
+      }
+    },
+    {
+      "id": "S238",
+      "text": {
+        "en": "Li Kaiyuan, 'The truth of the burning of the books and burying of the Confucians: half a forged history', Shixue jikan 2010, no. 6, pp. 36–47; reply by Dai Guoxi, Shixue jikan 2012, no. 1.",
+        "zh": "李开元《焚书坑儒的真伪虚实——半桩伪造的历史》，《史学集刊》2010年第6期，第36—47页；代国玺《坑儒一事真伪辨》，《史学集刊》2012年第1期。"
+      },
+      "note": {
+        "en": "Li argues the book-burning was real but the 'burying of the Confucians' was built up by Han writers from a story about the emperor's magicians; Dai defends the Shiji. Known from the authors' summaries and university reports, not from the full articles.",
+        "zh": "李开元认为焚书属实，“坑儒”则是汉人在始皇坑方士故事基础上逐步加工而成；代国玺维护《史记》的记载。据作者摘要与校方报道转述，未读全文。"
+      }
+    },
+    {
+      "id": "S241",
+      "text": {
+        "en": "China News Service, report on the Changping battlefield and the Yonglu no. 1 pit, 16 July 2020: found by villagers in 1995, excavated October 1995; about 130 individuals, all male, mostly around 30, bones jumbled; most killed and then buried, with no evidence of mass live burial.",
+        "zh": "中国新闻网2020年7月16日关于长平之战遗址与永录1号尸骨坑的报道：1995年村民平整土地时发现，同年10月发掘；约130个个体，全为男性，多在30岁左右，骨骼杂乱；多数为被杀后乱葬，没有大规模活埋的证据。"
+      },
+      "url": "https://www.chinanews.com.cn/cul/2020/07-16/9240151.shtml"
+    },
+    {
+      "id": "S243",
+      "text": {
+        "en": "Xin Deyong, 'The Qin documents from Shuihudi and the geography of Li Xin's and Wang Jian's conquest of Chu', Chutu wenxian 5 (2014), pp. 190ff.",
+        "zh": "辛德勇《云梦睡虎地秦人简牍与李信、王翦南灭荆楚的地理进程》，《出土文献》第五辑（2014年），第190页起。"
+      },
+      "url": "https://www.ctwx.tsinghua.edu.cn/__local/D/78/76/04587E604BFB45EB0C5E467C51C_AB1DD685_39397C.pdf",
+      "note": {
+        "en": "Keeps the First Emperor annals' order (Chu king and Lord Changping taken, Xiang Yan dead by 223 BCE) and places Chengfu north of the Huai near present-day Guoyang and Bozhou; reviews the competing Henan identifications.",
+        "zh": "采用《秦始皇本纪》的次序（前223年时楚王、昌平君被俘或死，项燕自杀），并把城父定在淮北今涡阳、亳州一带；评述了各种河南说。"
+      }
+    },
+    {
+      "id": "S244",
+      "text": {
+        "en": "Huang Zhanyue, Zhongguo gudai de rensheng renxun wenti (human sacrifice and accompanying burial in ancient China): the tomb of Duke Jing of Qin at Fengxiang (excavated 1976–86) held 186 human victims.",
+        "zh": "黄展岳《中国古代的人牲人殉问题》：凤翔秦公一号大墓（秦景公墓，1976—1986年发掘）有殉人186具。"
+      },
+      "note": {
+        "en": "Figure as quoted in standard references from Huang's study; the book itself has not been read.",
+        "zh": "数字据通行资料所引黄展岳的研究，未读原书。"
       }
     },
     {
@@ -1224,150 +1613,6 @@
       "note": {
         "en": "Coordinates used for georeferencing are in scripts/geo/warring-states/coordinates-wikipedia.json; modern municipality coordinates and ancient site anchors are distinguished.",
         "zh": "配准使用的坐标见 coordinates-wikipedia.json；第二轮核对见 verification-sites.json，严格区分现代行政点与古代遗址点。"
-      }
-    },
-    {
-      "id": "S159",
-      "text": {
-        "en": "Zhang Guangzhi, Questions about the Qin–Zhao Battle of Changping, 2016, 26(2), pp. 5–9.",
-        "zh": "张广志《有关秦赵长平之战的几个问题》，2016年第26卷第2期，第5—9页。"
-      },
-      "url": "https://dept.hdc.edu.cn/u/cms/xb/201801/06102146vorl.pdf",
-      "note": {
-        "en": "Full scholarly paper checked. Page 7 identifies modern objections by Song Yu (1983) and Shu Yongwu (1990); page 8 discusses the Yonglu report and limits on interpreting the remains. Their original papers and original excavation report were not read. No replacement casualty estimate is adopted.",
-        "zh": "已核论文全文。第7页介绍宋裕（1983）、舒咏梧（1990）的数字质疑；第8页讨论永录报告及遗骸解释的局限。未读这两篇原论文或原发掘报告，不另选一个较小总数代替。"
-      }
-    },
-    {
-      "id": "S160",
-      "text": {
-        "en": "Shiji, chapter 37: Hereditary House of Wey.",
-        "zh": "《史记》卷三十七《卫康叔世家》。"
-      },
-      "url": "https://zh.wikisource.org/wiki/史記/卷037",
-      "note": {
-        "en": "Directly checked the move to Yewang and Lord Jiao years 9 and 21. Correlating the unification in year 9 (221 BCE) gives abolition in 209 BCE. The county is a textual residence anchor, not a precise final dwelling.",
-        "zh": "直接核对迁卫于野王及君角九年、二十一年。以九年前221年对照推得被废于前209年；县域记载不是最终住宅的精确坐标。"
-      }
-    },
-    {
-      "id": "S161",
-      "text": {
-        "en": "Hubei Provincial Museum, official record of the bells of Marquis Yi of Zeng.",
-        "zh": "湖北省博物馆：曾侯乙编钟官方记录。"
-      },
-      "url": "https://hbww.org.cn/zgzb/p/4695.html",
-      "note": {
-        "en": "Official object page checked: excavated in 1978; early Warring States; 65 bells, including 19 niu bells, 45 yong bells and the Chu king’s gift bell. This is not a claim to have read the full tomb excavation report.",
-        "zh": "官方页已核：1978年出土，战国早期，65件钟，包括19件钮钟、45件甬钟及楚王赠钟。此核对不等于通读完整墓葬报告。"
-      }
-    },
-    {
-      "id": "S162",
-      "text": {
-        "en": "Shaanxi History Museum, official record of the Du tiger tally.",
-        "zh": "陕西历史博物馆：杜虎符官方记录。"
-      },
-      "url": "https://www.sxhm.com/collections/detail/518.html",
-      "note": {
-        "en": "Official object page checked: surviving left half, the ruler held the right; mobilization above fifty soldiers required matched halves, except in a beacon emergency.",
-        "zh": "官方页已核：存左半，右半在君；发兵超过50人须合符，烽火紧急情况例外。"
-      }
-    },
-    {
-      "id": "S163",
-      "text": {
-        "en": "Chinese Wikipedia infoboxes and Wikidata P625: second-pass place inventory.",
-        "zh": "中文维基百科信息框与维基数据P625：第二轮地点核对清单。"
-      },
-      "url": "https://www.wikidata.org/wiki/Wikidata:Licensing",
-      "note": {
-        "en": "The reproducible inventory records every URL, item ID, P625 precision and references, or a negative lookup. See scripts/geo/warring-states/verification-sites.json and HISTORICAL-REVIEW.md. Administrative centres, archaeological sites and battlefield identifications remain distinct.",
-        "zh": "可复查清单保存每个URL、项目号、P625精度与引文，或未找到的结果，详见 verification-sites.json 及 HISTORICAL-REVIEW.md。行政中心、考古遗址与战场辨址严格区分。"
-      }
-    },
-    {
-      "id": "S164",
-      "text": {
-        "en": "Shiji, chapter 41: Hereditary House of Goujian of Yue.",
-        "zh": "《史记》卷四十一《越王勾践世家》。"
-      },
-      "url": "https://zh.wikisource.org/wiki/史記/卷041",
-      "note": {
-        "en": "Checked Fujiao, return to Yue and tasting gall; the passage does not establish the familiar detailed three-year Wu service chronology. The defeat of Wuqiang and dispersed successors are narrated without an absolute 306 BCE date.",
-        "zh": "已核夫椒、返越、尝胆段落；该段不能证明熟悉的在吴服役三年时间表。无强败亡及后继分散的段落没有直接给出前306年绝对纪年。"
-      }
-    },
-    {
-      "id": "S165",
-      "text": {
-        "en": "Shiji, chapter 65: Biographies of Sunzi and Wu Qi.",
-        "zh": "《史记》卷六十五《孙子吴起列传》。"
-      },
-      "url": "https://zh.wikisource.org/wiki/史記/卷065",
-      "note": {
-        "en": "Checked the Guiling and Maling route directions. Approaching Daliang is not proof of entering the city; Pinglu is not a station in these passages.",
-        "zh": "已核桂陵、马陵的行军方向。趋向大梁不证明进入城中；这些段落没有把平陆列为途经站。"
-      }
-    },
-    {
-      "id": "S166",
-      "text": {
-        "en": "Chang Qu, Huayang guozhi, book 3, Shu.",
-        "zh": "常璩《华阳国志》卷三《蜀志》。"
-      },
-      "url": "https://zh.wikisource.org/wiki/華陽國志/卷三",
-      "note": {
-        "en": "Checked the Stone Ox route, the battle at Jiameng and the ruler’s flight to Wuyang. This is a Jin-period retrospective account; its legendary Stone Ox origin story is not treated as a contemporary road survey.",
-        "zh": "已核石牛道、葭萌交战、蜀王逃至武阳。此为晋代追述，石牛开道传说不当作战时道路测绘。"
-      }
-    },
-    {
-      "id": "S167",
-      "text": {
-        "en": "Shiji, chapter 32: Hereditary House of Qi.",
-        "zh": "《史记》卷三十二《齐太公世家》。"
-      },
-      "url": "https://zh.wikisource.org/wiki/史記/卷032",
-      "note": {
-        "en": "Checked the campaign relieving Yan and reaching Guzhu, and the later speech naming Lingzhi. Ji is an inferred capital anchor, not an explicitly attested station in the campaign passage.",
-        "zh": "已核救燕、至孤竹的段落及后文列令支的演说。蓟是推定都城锚点，不是该战役段落明记的途经站。"
-      }
-    },
-    {
-      "id": "S168",
-      "text": {
-        "en": "Shiji, chapter 47: Hereditary House of Confucius.",
-        "zh": "《史记》卷四十七《孔子世家》。"
-      },
-      "url": "https://zh.wikisource.org/wiki/史記/卷047",
-      "note": {
-        "en": "Read the transmitted itinerary, including the explicit move from Cai to Ye and return to Cai. Wey is represented in the Diqiu/Puyang region, not abandoned Chaoge. Fuhan was removed: it is not an attested stop in the checked Shiji 47 itinerary. The Ye point is only the modern county region, not a located conversation. Repeated visits, Cai’s moved centre and the precise roads remain uncertain.",
-        "zh": "已读传世行旅叙事，包括明记自蔡如叶及返蔡。卫以帝丘、濮阳区域代表，不使用旧都朝歌。负函不是所核《孔子世家》的明确途经站，已删，改用有原文依据的叶；叶点只是现代县域，不定位对话。反复访问、蔡迁都及古道仍须区分。"
-      }
-    },
-    {
-      "id": "S169",
-      "text": {
-        "en": "Shiji, chapter 80: Biography of Yue Yi.",
-        "zh": "《史记》卷八十《乐毅列传》。"
-      },
-      "url": "https://zh.wikisource.org/wiki/史記/卷080",
-      "note": {
-        "en": "Checked Jixi victory followed by advance to Linzi. The text’s coalition membership differs from other accounts; the Ji River crossing is not located.",
-        "zh": "已核济西交战后进至临淄的次序。此篇联军名单与其他记载不同，未确定济水渡口。"
-      }
-    },
-    {
-      "id": "S210",
-      "text": {
-        "en": "Jiaqing Chongxiu Yitong zhi, Ruzhou, Fucheng old city; citing Shiji and its Zhengyi tradition.",
-        "zh": "《嘉庆重修一统志》汝州父城故城条，引用《史记》及其《正义》辨址传统。"
-      },
-      "url": "https://zh.wikisource.org/zh-hans/嘉慶重修一統志_(四部叢刊本)/卷二百二十二至二百二十五",
-      "note": {
-        "en": "The gazetteer identifies Fucheng east of Baofeng and connects it to Li Xin’s westward meeting at Chengfu. This is a Qing-period geographical interpretation of an ancient text, not proof of the battlefield. Baofeng Q807063 P625 (113.0627 E, 33.86834 N) is used only as a rounded county-region proxy. The competing Bozhou Chengfu Q10929963 point (115.97777 E, 33.63575 N) is not silently conflated with it.",
-        "zh": "此志将父城置于宝丰东，并联系李信西行会城父。它是清代对古文的地理解释，不证明战场已定位。宝丰Q807063的P625（东经113.0627°、北纬33.86834°）仅取整为县域代理点；不能与亳州城父Q10929963的另一坐标混同。"
       }
     }
   ]

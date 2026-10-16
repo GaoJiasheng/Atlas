@@ -1,53 +1,19 @@
-# Warring States second-pass delivery review
+# Warring States: review status (17 October 2026)
 
-English and Chinese editorial drafts are complete. The topic remains `draft`: content validation and type checking do not replace historian review or establish precise ancient boundaries.
+Status stays `draft` until Gavin has read the passages below. Facts, objectivity and the Chinese text have been reviewed; the build notes are in docs/27 §11 and the fact ledger in [AUDIT.md](AUDIT.md).
 
-## Requested checks
+## For Gavin to read before publishing (Chinese text first)
 
-- `pnpm exec tsc --noEmit -p tsconfig.json`: clean after replacing untyped JSON use with narrowing, typed tuples and checked indexed access. Every topic TypeScript file has zero explicit `any` types, non-null assertions or suppression directives.
-- `pnpm tsx scripts/geo/lib/colour-holders.ts --topic warring-states --write`: run on the regenerated map; 21 represented holders, 70 neighbouring pairs across all 11 keyframes, 8 tokens, zero conflicts. The check-image palette now exports that same assignment.
-- Regional land already existed; no land regeneration was required.
-- `pnpm validate`: 23 topics, 0 errors, 0 warnings. `pnpm exec tsc`: clean.
-- No build, test, e2e or shoot was run. Edits are confined to the topic and its geography folder; no engine or package manifest changes.
+1. **08 Changping and Handan**: body ¶2–3 (siege, 46 days, cannibalism, about 400,000 killed, 240 sent home, Qin's dead "more than half"); More "长平：死了多少人，从哪里知道" (both ¶, Yonglu pit); More "斩首：秦国自己的记录" (table); events `changping`, `changping-massacre`, `huayang-drowning`, `handan-257`, `bai-qi-death`, `yan-flood`.
+2. **09 Qin conquers the six states**: More "被兼并者的记忆" (Handan killings of 228 BCE, Daliang, "楚虽三户"); events `fall-of-zhao`, `daliang-flood`, `daliang-civilian-harm`, `li-xin-defeat`, `fall-of-chu`.
+3. **10 After 221**: body ¶3 and More "焚书与坑杀诸生" (both ¶); More "残瓦上的名字"; events `burning-books`, `scholars-killed`, `qin-construction-labour`.
+4. **05 Partition of Jin**: body ¶2 (Jinyang: "易子而食"); More "小国国君的墓：曾侯乙" (21 women); More "以水为兵"; events `jinyang-flood`, `zhi-destroyed`, `zhao-flood-332`, `zhao-flood-281`.
+5. **03 Jin and Chu**: More "为死者而死：人殉与人牲"; events `qin-mu-burial`, `bi` (fingers cut off).
+6. **04 Wu and Yue**: More "吴军在郢都做了什么"; More "勾践：《史记》怎么写" (Zuili criminals); events `wu-enters-ying`, `zuili`.
+7. **07 Alliances**: More "两次占领：齐在燕，燕在齐"; events `qi-in-yan`, `yan-occupation-qi`.
+8. **06 Reforms**: body ¶4 and More "用首级换爵位"; events `shang-yang-executed`, `wu-qi-killed`.
+9. Glossary definitions: `huaxia`, `zunwang-rangyi`, `fengjian`, `legalism`, `bianhu-qimin`.
 
-## Content and source review
+## Gates at hand-over
 
-Original audit accounting: **53 units; 5 fully closed and 48 remaining**, including partially resolved questions. All 26 routes were reviewed; their retained station order, deleted unsupported stops, source passages and remaining uncertainty are in their dedicated S170–S195 bilingual notes. Exact roads, many crossings and some site identifications remain open. The runtime movement schema has no `note` field, so the notes are stored in these route-specific sources and the Movement routes table, with schematic movement labels.
-
-Substantive corrections include removing unsupported early migration stations; removing Chaoge from the Jin approach and unsupported Wu campaign stops; replacing Pinglu with the source's Daliang direction; distinguishing the 229 BCE `shangdi` from Shangdang; and replacing Li Xin's contradictory eastward line with an explicitly disputed westward Father-city/Baofeng interpretation. Named city coordinates were checked separately from battlefield precision. Conflicting Chengpu/Maling P625 statements were not adopted blindly. The inventory preserves missing statements and redirects as evidence of limits, not successful identifications.
-
-Official museum object pages replace the unverified Shang Yang measure / Du tally research target; the Zeng bell count is checked against the museum record. Zhang Guangzhi's checked discussion gives a named modern source for Changping numerical objections and the limits of the Yonglu sample. The original excavation report and original demographic models remain unconsulted. The unsupported narrow Dujiangyan construction range and unused Gu Donggao war-count research target were removed. Wey's 209 BCE chronology is reconciled with the transmitted regnal sequence; its precise final residence remains open. Chu's 224/223 BCE chronology and Li Xin's inferred date are qualified in both languages.
-
-Details: [AUDIT.md](AUDIT.md), [HISTORICAL-REVIEW.md](HISTORICAL-REVIEW.md), [data/SOURCES.md](data/SOURCES.md), and the saved [coordinate inventory](../../../../scripts/geo/warring-states/verification-sites.json).
-
-## Registration changes
-
-No residuals were made smaller by inventing control points. G11's over-budget fit, G13's five controls, G17's eight controls and G16's absent fit remain documented; these sources are excluded from all frame dependencies. G15 is also excluded. G8 has RMS 7.869 km, maximum 18.958 km and leave-one-out maximum 21.033 km. Its 280 BCE outlines are carried forward in K9, selectively reassigned in K10 and unioned schematically in K11. The missing Zhou face is not invented. These are explicitly qualified teaching approximations, not independently recovered 260/230/221 BCE boundaries.
-
-Final geometry: **128 features; 431 rings; zero zero-area rings; zero self-crossings**. Real-land clipping retained every incoming holder. Early G10 dating, missing minor-state geometry, borrowed Three Jin boundaries, coastline changes and clipping losses remain disclosed. Every published feature is approximate; Chinese labels mirror the English geographic caveats.
-
-Details: [SOURCES-GEO.md](../../../../scripts/geo/warring-states/SOURCES-GEO.md) and [SECOND-PASS-GEO.md](../../../../scripts/geo/warring-states/SECOND-PASS-GEO.md).
-
-## Chinese drafts and human review
-
-All bilingual fields have Chinese drafts; no translation marker remains. Each chapter main body contains 350–500 Han characters, counted without frontmatter, markup, digits, punctuation or More blocks. Complete Num/Term opening-tag sequences match English, including source and term IDs. The existing 17 glossary terms are retained to preserve the first-draft links and chapter tag structure.
-
-| Chapter | Main-body Han characters |
-|---|---:|
-| 00 | 358 |
-| 01 | 350 |
-| 02 | 361 |
-| 03 | 360 |
-| 04 | 369 |
-| 05 | 354 |
-| 06 | 364 |
-| 07 | 369 |
-| 08 | 363 |
-| 09 | 364 |
-| 10 | 359 |
-
-Machine-readable measurements: [CHINESE-DRAFT-CHECKS.json](CHINESE-DRAFT-CHECKS.json).
-
-A historian should check the Chinese Changping passage and Yonglu interpretation; all killing, human-sacrifice, occupation, mutilation and water-attack passages; the Chu campaign chronology and Father-city interpretation; Qin's killing of “诸生”; and the disputed sites/routes and late-frame carry-forward. Publication review of the sensitive Chinese passages has not been claimed. The detailed outstanding questions and exact original audit dispositions are in AUDIT.md.
-
-Counts after this pass: 11 keyframes, 128 control features, 23 entities, 173 events, 26 routes, 116 source records, 11 chapters, 49 beats, 17 glossary terms, 8 presets and 60 river features.
+`pnpm check` 0 errors; `pnpm validate` 0/0; `pnpm test` 1585 passed; `pnpm build` ok; `pnpm shoot warring-states --beats` (en/zh × paper/cinema): 0 failures, every highlight labelled, chapter highlights all on screen; `--layout`: 0 issues at all sizes; `--keys`: one failure, the drag test on the "world" preset (the regional plate's camera clamp leaves nothing to drag at the fitted zoom; engine/test, not content). `pnpm e2e` not run here.
