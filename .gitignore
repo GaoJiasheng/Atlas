@@ -31,3 +31,4 @@ scripts/math/drafts/
 docs/screenshots/
 __pycache__/
 *.pyc
+ios/build/
