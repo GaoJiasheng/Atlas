@@ -564,7 +564,7 @@ ZH 显示里 `{d:…}` 用"小时 / 分钟 / 秒"，算式行（中英共用）�
 
 **配图**：§6 的 4 张进了第 01（钟楼）、02（齿轮）、04（太阳的弧）、11（换乘站）章，中英 alt 与说明都写明"为本课画的示意图"，换乘站的班次牌留白、行程是编的（D9）。
 
-**验收**：`pnpm check`、`pnpm validate`（0 / 0）、`pnpm test`、`pnpm build`、`pnpm e2e`（含新的 `tests-e2e/telling-time.spec.ts` 9 条：点刻度换拍、拖分针时针跟着走 + 托盘时步进、纯键盘拨钟并越过 12 退一小时、读钟写时刻与诊断、am / pm 单选、时间线芯片跳段 + Backspace 收回 + 写答案、练习到总结、zh、390 × 844）全绿；`pnpm shoot telling-time --beats --tasks --keys --layout --locale en,zh --theme paper,cinema` 0 失败。首页计数（`tests/home.test.ts`、`tests-e2e/smoke.spec.ts`）加上本课：已发布 20 个主题、数学 3 个、ww2 的图版号 20。
+**验收**：`pnpm check`、`pnpm validate`（0 / 0）、`pnpm test`、`pnpm build`、`pnpm e2e`（含新的 `tests-e2e/telling-time.spec.ts` 9 条：点刻度换拍、拖分针时针跟着走 + 托盘时步进、纯键盘拨钟并越过 12 退一小时、读钟写时刻与诊断、am / pm 单选、时间线芯片跳段 + Backspace 收回 + 写答案、练习到总结、zh、390 × 844）全绿；`pnpm shoot telling-time --beats --tasks --keys --layout --locale en,zh --theme paper,cinema` 0 失败。首页计数（`tests/home.test.ts`、`tests-e2e/smoke.spec.ts`）加上本课，并与同时合进 main 的乘与除对齐：已发布 21 个主题、数学 4 个、ww2 的图版号 21。
 
 ### 9.5 已知差距 / 要引擎改的
 
