@@ -1,0 +1,471 @@
+{
+  "dataset": "g16",
+  "projection": "auto",
+  "maxResidualKm": 0.06,
+  "status": "second-pass-six-named-cps-three-fixed-original-lighthouses-count-budget-unmet",
+  "controlPoints": [
+    {
+      "name": "Tanjong Changi",
+      "svg": [
+        14136,
+        5013
+      ],
+      "lnglat": [
+        103.9865343,
+        1.3928616
+      ],
+      "source": "Second-pass native G16 rocky headland tip read in work/G16-changi-review.png / G16-berlayer-review.png. OSM coordinate is CP-only; chart outer shore generalisation remains approximate."
+    },
+    {
+      "name": "Tanjong Berlayer",
+      "svg": [
+        10312,
+        7790
+      ],
+      "lnglat": [
+        103.8051074,
+        1.2622889
+      ],
+      "source": "Second-pass native G16 rocky headland tip read in work/G16-changi-review.png / G16-berlayer-review.png. OSM coordinate is CP-only; chart outer shore generalisation remains approximate."
+    },
+    {
+      "name": "Tanjong Rimau",
+      "svg": [
+        10346,
+        7838
+      ],
+      "lnglat": [
+        103.8066725,
+        1.2597496
+      ],
+      "source": "Second-pass native G16 rocky headland tip read in work/G16-changi-review.png / G16-berlayer-review.png. OSM coordinate is CP-only; chart outer shore generalisation remains approximate."
+    },
+    {
+      "name": "Sultan Shoal Lighthouse",
+      "svg": [
+        7024,
+        8277
+      ],
+      "lnglat": [
+        103.64806666666667,
+        1.2396166666666666
+      ],
+      "source": "MPA named light position, independently paired with chart named tower/star; details and native crop in georef-G16-lighthouse-candidates.json"
+    },
+    {
+      "name": "Raffles Lighthouse (Pulau Satumu)",
+      "svg": [
+        8970,
+        9940
+      ],
+      "lnglat": [
+        103.74083333333333,
+        1.1601
+      ],
+      "source": "MPA named light position, independently paired with chart named tower/star; details and native crop in georef-G16-lighthouse-candidates.json"
+    },
+    {
+      "name": "Horsburgh Lighthouse (Pedra Branca)",
+      "svg": [
+        22923,
+        6343
+      ],
+      "lnglat": [
+        104.40561666666666,
+        1.3302333333333334
+      ],
+      "source": "MPA named light position, independently paired with chart named tower/star; details and native crop in georef-G16-lighthouse-candidates.json"
+    }
+  ],
+  "coordinateSource": "Three independently read original named lighthouse symbols with official MPA named-light positions, plus three individually read rocky headland checks with OSM point coordinates only. See georef-G16-lighthouse-candidates.json for original lighthouse evidence; none of the nine anonymous Warper points is used.",
+  "knownGaps": [
+    "Six named controls do not meet the required16 whole-map qualified controls. Three fixed original lighthouse towers provide stronger anchors; three rocky cape controls retain chart-generalisation uncertainty. Western/northern Singapore inland surveyed-junction coverage is insufficient.",
+    "G16 smallcorrections1954; missing1954\u20131961 coast change must be handled by separately dated sources. Fort Canning lighthouse replica is not used as an original tower control."
+  ],
+  "priorControlPoints": [
+    {
+      "name": "Warper5112 point1, unnamed; not verified survivingfeature",
+      "svg": [
+        14147.46622984,
+        5014.601814512
+      ],
+      "lnglat": [
+        103.9868241515,
+        1.3933882328
+      ]
+    },
+    {
+      "name": "Warper5112 point2, unnamed; not verified survivingfeature",
+      "svg": [
+        2701.5887096776,
+        6486.891129025
+      ],
+      "lnglat": [
+        103.443049189,
+        1.326040844
+      ]
+    },
+    {
+      "name": "Warper5112 point3, unnamed; not verified survivingfeature",
+      "svg": [
+        2588.7036290306,
+        13635.004032250501
+      ],
+      "lnglat": [
+        103.4364831413,
+        0.9878515502
+      ]
+    },
+    {
+      "name": "Warper5112 point4, unnamed; not verified survivingfeature",
+      "svg": [
+        14028.362903224,
+        13845.4677419302
+      ],
+      "lnglat": [
+        103.9819371665,
+        0.9756653817
+      ]
+    },
+    {
+      "name": "Warper5112 point5, unnamed; not verified survivingfeature",
+      "svg": [
+        25899.472782258,
+        9014.368951607099
+      ],
+      "lnglat": [
+        104.5470893348,
+        1.2029038228
+      ]
+    },
+    {
+      "name": "Warper5112 point6, unnamed; not verified survivingfeature",
+      "svg": [
+        22924.759576615,
+        6342.436491926999
+      ],
+      "lnglat": [
+        104.4055438008,
+        1.3293551643
+      ]
+    },
+    {
+      "name": "Warper5112 point7, unnamed; not verified survivingfeature",
+      "svg": [
+        20339.882560484,
+        5470.925403220001
+      ],
+      "lnglat": [
+        104.283205566,
+        1.371824188
+      ]
+    },
+    {
+      "name": "Warper5112 point8, unnamed; not verified survivingfeature",
+      "svg": [
+        23003.683467739,
+        14170.7298387109
+      ],
+      "lnglat": [
+        104.4095584976,
+        0.9597375856
+      ]
+    },
+    {
+      "name": "Warper5112 point9, unnamed; not verified survivingfeature",
+      "svg": [
+        15293.044979772,
+        2863.0874251759997
+      ],
+      "lnglat": [
+        104.0404865372,
+        1.4955394363
+      ]
+    },
+    {
+      "name": "Tanjong Buloh",
+      "lnglat": [
+        103.730281,
+        1.4490131
+      ],
+      "node": 10307757282,
+      "svg": [
+        8758,
+        3858
+      ]
+    },
+    {
+      "name": "Tanjong Irau",
+      "lnglat": [
+        103.8499021,
+        1.4512352
+      ],
+      "node": 10312600924,
+      "svg": [
+        11266,
+        3803
+      ]
+    },
+    {
+      "name": "Tanjong Tajam",
+      "lnglat": [
+        103.9269082,
+        1.423175
+      ],
+      "node": 10312600922,
+      "svg": [
+        12853,
+        4390
+      ]
+    },
+    {
+      "name": "Tanjong Chek Jawa",
+      "lnglat": [
+        103.9921622,
+        1.4081417
+      ],
+      "node": 10312600919,
+      "svg": [
+        14165,
+        4703
+      ]
+    },
+    {
+      "name": "Bukit Timah Hill",
+      "lnglat": [
+        103.7763724,
+        1.3546901
+      ],
+      "node": 394490687,
+      "svg": [
+        9683,
+        5845
+      ]
+    },
+    {
+      "name": "Mount Faber",
+      "lnglat": [
+        103.817645,
+        1.2735672
+      ],
+      "node": 5161037014,
+      "svg": [
+        10588,
+        7568
+      ]
+    },
+    {
+      "name": "Fort Canning Hill",
+      "lnglat": [
+        103.8465965,
+        1.293576
+      ],
+      "node": 9794258968,
+      "svg": [
+        11181,
+        7108
+      ]
+    }
+  ],
+  "excludedControlPoints": [
+    {
+      "name": "Warper5112 point1, unnamed; not verified survivingfeature",
+      "svg": [
+        14147.46622984,
+        5014.601814512
+      ],
+      "lnglat": [
+        103.9868241515,
+        1.3933882328
+      ],
+      "reason": "Unnamed external Warper point has no independently established surviving-feature identity."
+    },
+    {
+      "name": "Warper5112 point2, unnamed; not verified survivingfeature",
+      "svg": [
+        2701.5887096776,
+        6486.891129025
+      ],
+      "lnglat": [
+        103.443049189,
+        1.326040844
+      ],
+      "reason": "Unnamed external Warper point has no independently established surviving-feature identity."
+    },
+    {
+      "name": "Warper5112 point3, unnamed; not verified survivingfeature",
+      "svg": [
+        2588.7036290306,
+        13635.004032250501
+      ],
+      "lnglat": [
+        103.4364831413,
+        0.9878515502
+      ],
+      "reason": "Unnamed external Warper point has no independently established surviving-feature identity."
+    },
+    {
+      "name": "Warper5112 point4, unnamed; not verified survivingfeature",
+      "svg": [
+        14028.362903224,
+        13845.4677419302
+      ],
+      "lnglat": [
+        103.9819371665,
+        0.9756653817
+      ],
+      "reason": "Unnamed external Warper point has no independently established surviving-feature identity."
+    },
+    {
+      "name": "Warper5112 point5, unnamed; not verified survivingfeature",
+      "svg": [
+        25899.472782258,
+        9014.368951607099
+      ],
+      "lnglat": [
+        104.5470893348,
+        1.2029038228
+      ],
+      "reason": "Unnamed external Warper point has no independently established surviving-feature identity."
+    },
+    {
+      "name": "Warper5112 point6, unnamed; not verified survivingfeature",
+      "svg": [
+        22924.759576615,
+        6342.436491926999
+      ],
+      "lnglat": [
+        104.4055438008,
+        1.3293551643
+      ],
+      "reason": "Unnamed external Warper point has no independently established surviving-feature identity."
+    },
+    {
+      "name": "Warper5112 point7, unnamed; not verified survivingfeature",
+      "svg": [
+        20339.882560484,
+        5470.925403220001
+      ],
+      "lnglat": [
+        104.283205566,
+        1.371824188
+      ],
+      "reason": "Unnamed external Warper point has no independently established surviving-feature identity."
+    },
+    {
+      "name": "Warper5112 point8, unnamed; not verified survivingfeature",
+      "svg": [
+        23003.683467739,
+        14170.7298387109
+      ],
+      "lnglat": [
+        104.4095584976,
+        0.9597375856
+      ],
+      "reason": "Unnamed external Warper point has no independently established surviving-feature identity."
+    },
+    {
+      "name": "Warper5112 point9, unnamed; not verified survivingfeature",
+      "svg": [
+        15293.044979772,
+        2863.0874251759997
+      ],
+      "lnglat": [
+        104.0404865372,
+        1.4955394363
+      ],
+      "reason": "Unnamed external Warper point has no independently established surviving-feature identity."
+    },
+    {
+      "name": "Tanjong Buloh",
+      "lnglat": [
+        103.730281,
+        1.4490131
+      ],
+      "node": 10307757282,
+      "svg": [
+        8758,
+        3858
+      ],
+      "reason": "Soft mangrove cape or generic hill-name point does not establish unchanged exact surveyed position."
+    },
+    {
+      "name": "Tanjong Irau",
+      "lnglat": [
+        103.8499021,
+        1.4512352
+      ],
+      "node": 10312600924,
+      "svg": [
+        11266,
+        3803
+      ],
+      "reason": "Soft mangrove cape or generic hill-name point does not establish unchanged exact surveyed position."
+    },
+    {
+      "name": "Bukit Timah Hill",
+      "lnglat": [
+        103.7763724,
+        1.3546901
+      ],
+      "node": 394490687,
+      "svg": [
+        9683,
+        5845
+      ],
+      "reason": "Soft mangrove cape or generic hill-name point does not establish unchanged exact surveyed position."
+    },
+    {
+      "name": "Mount Faber",
+      "lnglat": [
+        103.817645,
+        1.2735672
+      ],
+      "node": 5161037014,
+      "svg": [
+        10588,
+        7568
+      ],
+      "reason": "Soft mangrove cape or generic hill-name point does not establish unchanged exact surveyed position."
+    },
+    {
+      "name": "Fort Canning Hill",
+      "lnglat": [
+        103.8465965,
+        1.293576
+      ],
+      "node": 9794258968,
+      "svg": [
+        11181,
+        7108
+      ],
+      "reason": "Soft mangrove cape or generic hill-name point does not establish unchanged exact surveyed position."
+    },
+    {
+      "name": "Tanjong Tajam",
+      "lnglat": [
+        103.9269082,
+        1.423175
+      ],
+      "node": 10312600922,
+      "svg": [
+        12853,
+        4390
+      ],
+      "reason": "Native source review cannot pair this modern cape node with one unambiguous unchanged historical rocky tip among mangrove/intertidal edge symbols."
+    },
+    {
+      "name": "Tanjong Chek Jawa",
+      "lnglat": [
+        103.9921622,
+        1.4081417
+      ],
+      "node": 10312600919,
+      "svg": [
+        14165,
+        4703
+      ],
+      "reason": "Native source review cannot pair this modern cape node with one unambiguous unchanged historical rocky tip among mangrove/intertidal edge symbols."
+    }
+  ]
+}

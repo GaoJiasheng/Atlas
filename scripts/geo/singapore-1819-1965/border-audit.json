@@ -1,0 +1,200 @@
+{
+  "method": "Source-native pixel tracing and shared fit.ts projection:auto; Natural Earth land clipping. No bbox territory.",
+  "fits": {
+    "G23": {
+      "model": "mercator+affine",
+      "rmsKm": 1.801422093858793,
+      "maxKm": 2.813532789492529,
+      "looRmsKm": 2.447513051448821,
+      "looMaxKm": 4.829042824306953,
+      "points": [
+        {
+          "name": "Alor Setar",
+          "residualKm": 2.813532789492529,
+          "looKm": 4.829042824306953
+        },
+        {
+          "name": "Kota Baharu",
+          "residualKm": 1.0730201813177285,
+          "looKm": 1.6543295955965527
+        },
+        {
+          "name": "Kuala Terengganu",
+          "residualKm": 0.9868140943469471,
+          "looKm": 1.7097258842123702
+        },
+        {
+          "name": "Taiping",
+          "residualKm": 2.1287018193046694,
+          "looKm": 2.7394612391991404
+        },
+        {
+          "name": "Ipoh",
+          "residualKm": 0.8063235105089314,
+          "looKm": 0.9499909874150714
+        },
+        {
+          "name": "Kuala Lipis",
+          "residualKm": 2.523996700885662,
+          "looKm": 2.7714783597009705
+        },
+        {
+          "name": "Kuantan",
+          "residualKm": 0.7652624993190453,
+          "looKm": 1.120004804465899
+        },
+        {
+          "name": "Kuala Lumpur",
+          "residualKm": 2.1323704823047884,
+          "looKm": 2.48910288772515
+        },
+        {
+          "name": "Seremban",
+          "residualKm": 1.9505415442520848,
+          "looKm": 2.3701136511340417
+        },
+        {
+          "name": "Malacca",
+          "residualKm": 1.702767747539427,
+          "looKm": 2.2787631249178664
+        },
+        {
+          "name": "Muar",
+          "residualKm": 1.090219802774197,
+          "looKm": 1.5365189507314903
+        },
+        {
+          "name": "Teluk Intan",
+          "residualKm": 2.079179913068826,
+          "looKm": 2.4889476585832533
+        }
+      ]
+    },
+    "G34": {
+      "model": "mercator+affine",
+      "rmsKm": 0.22932591296109578,
+      "maxKm": 0.3334888767762583,
+      "looRmsKm": 0.38109429780882814,
+      "looMaxKm": 0.6972032668436594,
+      "points": [
+        {
+          "name": "Printed Greenwich grid 114E 4N",
+          "residualKm": 0.02770800039762012,
+          "looKm": 0.07258895270751861
+        },
+        {
+          "name": "Printed Greenwich grid 115E 4N",
+          "residualKm": 0.3288548880827388,
+          "looKm": 0.44884671923771996
+        },
+        {
+          "name": "Printed Greenwich grid 115E 5N",
+          "residualKm": 0.03033800539828121,
+          "looKm": 0.03627072484349635
+        },
+        {
+          "name": "Printed Greenwich grid 115E 6N",
+          "residualKm": 0.3334888767762583,
+          "looKm": 0.5050200741378146
+        },
+        {
+          "name": "Printed Greenwich grid 116E 4N",
+          "residualKm": 0.30346404596343285,
+          "looKm": 0.6972032668436594
+        },
+        {
+          "name": "Printed Greenwich grid 116E 5N",
+          "residualKm": 0.040890187649744066,
+          "looKm": 0.05589678197447426
+        },
+        {
+          "name": "Printed Greenwich grid 116E 6N",
+          "residualKm": 0.3140269641370128,
+          "looKm": 0.4211931144633524
+        },
+        {
+          "name": "Printed Greenwich grid 116E 7N",
+          "residualKm": 0.08543494479955122,
+          "looKm": 0.1793015649313845
+        }
+      ]
+    }
+  },
+  "hashes": {
+    "raw/G23.jpg": "f4e3626af3bd43256648407cc2b6cfa8ee73e349a3c1c9ab60dfee49cb430a91",
+    "raw/Borneo1903.jpg": "c9b9dc9a04b196d504b1c68220be4fc15452a26ce93c5558eb15e67b4bc9574d",
+    "raw/ne_10m_admin_1_states_provinces.geojson": "22d0e3ad85eb3e27f17cabf8ba2d50e554fbc27a87796ff891d958185da62fb5",
+    "raw/ne_10m_admin_0_countries.geojson": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255",
+    "public/geo/land-10m-sea.json": "896b869770a367a8d4037565bace0445bc52ab2eccca21e6f9dd20faea3aaead"
+  },
+  "areas": {
+    "dindings": 428.8498146458698,
+    "fms-1896": 72729.63876348296,
+    "fms-before-1935": 71461.43223480074,
+    "johor-1896": 19242.379079139046,
+    "kedah-1896": 8637.309014040466,
+    "kelantan-1896": 14331.444916903883,
+    "terengganu-1896": 13185.736688376666,
+    "reman-1896": 1015.8662142135973,
+    "siam-1896": 517648.36318657815,
+    "lawas-before-1905": 1403.500108480547,
+    "sarawak-1896": 121975.59390028914
+  },
+  "rings": {
+    "dindings": {
+      "rings": 3,
+      "zeroArea": 0,
+      "selfCrossing": 0
+    },
+    "fms-1896": {
+      "rings": 10,
+      "zeroArea": 0,
+      "selfCrossing": 0
+    },
+    "fms-before-1935": {
+      "rings": 9,
+      "zeroArea": 0,
+      "selfCrossing": 0
+    },
+    "johor-1896": {
+      "rings": 3,
+      "zeroArea": 0,
+      "selfCrossing": 0
+    },
+    "kedah-1896": {
+      "rings": 3,
+      "zeroArea": 0,
+      "selfCrossing": 0
+    },
+    "kelantan-1896": {
+      "rings": 1,
+      "zeroArea": 0,
+      "selfCrossing": 0
+    },
+    "terengganu-1896": {
+      "rings": 6,
+      "zeroArea": 0,
+      "selfCrossing": 0
+    },
+    "reman-1896": {
+      "rings": 4,
+      "zeroArea": 0,
+      "selfCrossing": 0
+    },
+    "siam-1896": {
+      "rings": 22,
+      "zeroArea": 0,
+      "selfCrossing": 0
+    },
+    "lawas-before-1905": {
+      "rings": 2,
+      "zeroArea": 0,
+      "selfCrossing": 0
+    },
+    "sarawak-1896": {
+      "rings": 2,
+      "zeroArea": 0,
+      "selfCrossing": 0
+    }
+  }
+}

@@ -1,0 +1,1284 @@
+{
+  "note": "All 103 non-WW2 event anchors remain approximate as historical positions. Eleven now use audited Wikidata CC0 or SLA OneMap SODL reference points with explicit site-role limitations; 92 retain unresolved draft anchors. See content-anchor-review.json. No OSM geometry was introduced.",
+  "events": [
+    {
+      "id": "site-fort-canning-temasek",
+      "sourceKey": "sevenhundred",
+      "sourceId": "S1",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "year",
+      "date": "1984",
+      "dateVerification": "confirmed-institutional: Beginning of the first investigation, reported as 18–28 January 1984. Evidence limit: The original 1985 field report remains unread; the year is secure at institutional level.",
+      "verifiedDateSources": [
+        "S241"
+      ]
+    },
+    {
+      "id": "site-singapore-stone",
+      "sourceKey": "stone-nhb",
+      "sourceId": "S12",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "year",
+      "date": "1843",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "site-longyamen",
+      "sourceKey": "sevenhundred",
+      "sourceId": "S1",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "year",
+      "date": "1349",
+      "dateVerification": "1349 is a report chronology, not an established foundation date for the disputed modern site."
+    },
+    {
+      "id": "site-johor-lama",
+      "sourceKey": "sevenhundred",
+      "sourceId": "S1",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "year",
+      "date": "1540",
+      "dateVerification": "confirmed-institutional: 1540 move and fort beginning; original chronicle not read.",
+      "verifiedDateSources": [
+        "S246"
+      ]
+    },
+    {
+      "id": "site-riau-penyengat",
+      "sourceKey": "landing-nlb",
+      "sourceId": "S6",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "source-backed-reference-point: Published island reference point; not the exact royal compound or an 1803 footprint.",
+      "datePrecision": "year",
+      "date": "1803",
+      "dateVerification": "confirmed-institutional-scan: Marriage gift to Engku Puteri Raja Hamidah and development of the island as government centre, per the heritage decision. Evidence limit: Earlier defensive use is recorded in 1782–1784; do not call 1803 the first settlement. Original marriage/development instrument not read.",
+      "verifiedDateSources": [
+        "S244"
+      ],
+      "anchorSources": [
+        "S257",
+        "S247"
+      ],
+      "historicalFootprintVerified": false
+    },
+    {
+      "id": "site-lingga-daik",
+      "sourceKey": "buckley",
+      "sourceId": "S7",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "year",
+      "date": "1787",
+      "dateVerification": "confirmed-institutional-scan: Transfer of the royal government from Hulu Riau to Daik, per the heritage decision. Evidence limit: This dates royal relocation, not first habitation. Exact day and contemporary instrument not read.",
+      "verifiedDateSources": [
+        "S244"
+      ]
+    },
+    {
+      "id": "site-penang",
+      "sourceKey": "sevenhundred",
+      "sourceId": "S1",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1786-08-11",
+      "dateVerification": "confirmed-institutional: British/EIC taking of Prince of Wales Island, not first settlement. Evidence limit: Original journal/instrument not read. Existing Malay settlements predated EIC possession.",
+      "verifiedDateSources": [
+        "S237",
+        "S238"
+      ]
+    },
+    {
+      "id": "site-malacca",
+      "sourceKey": "sevenhundred",
+      "sourceId": "S1",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "year",
+      "date": "1511",
+      "dateVerification": "confirmed-institutional: Portuguese capture of Malacca, per the Portuguese Navy museum account. Evidence limit: This is not the foundation of the already established trading port. Original 1511 account/instrument and exact site coordinate not inspected.",
+      "verifiedDateSources": [
+        "S245"
+      ]
+    },
+    {
+      "id": "mahmud-iii-dies",
+      "sourceKey": "buckley",
+      "sourceId": "S7",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "year",
+      "date": "1812",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "raffles-arrives",
+      "sourceKey": "landing-nlb",
+      "sourceId": "S6",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1819-01-28",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "preliminary-agreement-1819",
+      "sourceKey": "landing-nlb",
+      "sourceId": "S6",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1819-01-30",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "hussein-brought-from-riau",
+      "sourceKey": "landing-nlb",
+      "sourceId": "S6",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "month",
+      "date": "1819-02",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "treaty-1819",
+      "sourceKey": "buckley",
+      "sourceId": "S7",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1819-02-06",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "dutch-protest-1819",
+      "sourceKey": "landing-nlb",
+      "sourceId": "S6",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "year",
+      "date": "1819",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "farquhar-resident",
+      "sourceKey": "landing-nlb",
+      "sourceId": "S6",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1819-02-06",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "site-temenggong-village",
+      "sourceKey": "landing-nlb",
+      "sourceId": "S6",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "year",
+      "date": "1819",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "town-committee-1822",
+      "sourceKey": "town-letter",
+      "sourceId": "S8",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1822-11-04",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "boat-quay-fill",
+      "sourceKey": "farquhar",
+      "sourceId": "S2",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "year",
+      "date": "1822",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "convention-1823",
+      "sourceKey": "buckley",
+      "sourceId": "S7",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1823-06-07",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "site-telok-blangah",
+      "sourceKey": "buckley",
+      "sourceId": "S7",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "year",
+      "date": "1823",
+      "dateVerification": "confirmed-institutional: Relocation of the Temenggong’s Istana/settlement to Telok Blangah. Evidence limit: Exact day and original relocation order remain unread.",
+      "verifiedDateSources": [
+        "S3"
+      ]
+    },
+    {
+      "id": "site-kampong-glam-istana",
+      "sourceKey": "onpaper",
+      "sourceId": "S53",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "year",
+      "date": "1819",
+      "dateVerification": "confirmed-institutional-scan: First timber palace with attap roofs completed in 1819. Evidence limit: This is not the extant palace: the institutional account dates commissioning of the present building after Tunku Ali’s return in 1840.",
+      "verifiedDateSources": [
+        "S236"
+      ]
+    },
+    {
+      "id": "singapore-institution",
+      "sourceKey": "ri-1823",
+      "sourceId": "S9",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1823-06-05",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "anglo-dutch-treaty",
+      "sourceKey": "onpaper",
+      "sourceId": "S53",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1824-03-17",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "crawfurd-treaty",
+      "sourceKey": "buckley",
+      "sourceId": "S7",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1824-08-02",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "census-1824",
+      "sourceKey": "headcount",
+      "sourceId": "S4",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "month",
+      "date": "1824-01",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "straits-settlements-1826",
+      "sourceKey": "onpaper",
+      "sourceId": "S199",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "year",
+      "date": "1826",
+      "dateVerification": "Formation year is confirmed; exact administrative foundation day remains unverified. The 27November Charter is a distinct event."
+    },
+    {
+      "id": "capital-to-singapore",
+      "sourceKey": "onpaper",
+      "sourceId": "S199",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "year",
+      "date": "1832",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "malacca-handover",
+      "sourceKey": "malacca1825",
+      "sourceId": "S84",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "year",
+      "date": "1825",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "naning-war",
+      "sourceKey": "naning",
+      "sourceId": "S84",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "year",
+      "date": "1831",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "hong-kong-1841",
+      "sourceKey": "hongkong",
+      "sourceId": "S85",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1841-01-26",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "tanjong-pagar-dock",
+      "sourceKey": "docks",
+      "sourceId": "S87",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "year",
+      "date": "1864",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "crown-colony-1867",
+      "sourceKey": "onpaper",
+      "sourceId": "S199",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1867-04-01",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "suez-1869",
+      "sourceKey": "suez",
+      "sourceId": "S86",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1869-11-17",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "first-amoy-junk",
+      "sourceKey": "buckley",
+      "sourceId": "S7",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "month",
+      "date": "1821-02",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "convicts-arrive",
+      "sourceKey": "convicts",
+      "sourceId": "S50",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "year",
+      "date": "1825",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "convict-transport-ends",
+      "sourceKey": "convicts-2021",
+      "sourceId": "S59",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "year",
+      "date": "1873",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "chinese-protectorate",
+      "sourceKey": "police",
+      "sourceId": "S212",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "year",
+      "date": "1877",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "indian-immigration-ordinance",
+      "sourceKey": "laws",
+      "sourceId": "S150",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "year",
+      "date": "1876",
+      "dateVerification": "Original ordinances and G.N. 577 of 28 December 1883 still need inspection; do not assign an exact commencement date from this secondary article. 1876 Protection Ordinance, Singapore operation from 1883 and replacement in 1884 are different milestones.",
+      "verifiedDateSources": [
+        "S242"
+      ]
+    },
+    {
+      "id": "census-1871",
+      "sourceKey": "headcount",
+      "sourceId": "S4",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1871-04-02",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "site-sri-mariamman",
+      "sourceKey": "town-buildings",
+      "sourceId": "S70",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "source-backed-reference-point: Present monument/building reference point; not a surveyed original historical footprint or event position within the building.",
+      "datePrecision": "year",
+      "date": "1827",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts",
+      "anchorSources": [
+        "S249",
+        "S247"
+      ],
+      "historicalFootprintVerified": false
+    },
+    {
+      "id": "site-masjid-jamae",
+      "sourceKey": "town-buildings",
+      "sourceId": "S71",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "source-backed-reference-point: Present monument/building reference point; not a surveyed original historical footprint or event position within the building.",
+      "datePrecision": "year",
+      "date": "1826",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts",
+      "anchorSources": [
+        "S250",
+        "S247"
+      ],
+      "historicalFootprintVerified": false
+    },
+    {
+      "id": "site-sultan-mosque",
+      "sourceKey": "onpaper",
+      "sourceId": "S53",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "source-backed-reference-point: Present monument/building reference point; not a surveyed original historical footprint or event position within the building.",
+      "datePrecision": "year",
+      "date": "1824",
+      "dateVerification": "confirmed-institutional-scan: Construction interval for the original mosque; no exact day claimed. Evidence limit: The current building is a later replacement; do not date its fabric to 1824.",
+      "verifiedDateSources": [
+        "S236"
+      ],
+      "anchorSources": [
+        "S251",
+        "S247"
+      ],
+      "historicalFootprintVerified": false
+    },
+    {
+      "id": "site-thian-hock-keng",
+      "sourceKey": "town-buildings",
+      "sourceId": "S72",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "source-backed-reference-point: Present monument/building reference point; not a surveyed original historical footprint or event position within the building.",
+      "datePrecision": "year",
+      "date": "1839",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts",
+      "anchorSources": [
+        "S252",
+        "S247"
+      ],
+      "historicalFootprintVerified": false
+    },
+    {
+      "id": "site-armenian-church",
+      "sourceKey": "town-buildings",
+      "sourceId": "S74",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "source-backed-reference-point: Present monument/building reference point; not a surveyed original historical footprint or event position within the building.",
+      "datePrecision": "year",
+      "date": "1835",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts",
+      "anchorSources": [
+        "S253",
+        "S247"
+      ],
+      "historicalFootprintVerified": false
+    },
+    {
+      "id": "site-st-andrews",
+      "sourceKey": "convicts",
+      "sourceId": "S50",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "source-backed-reference-point: Present monument/building reference point; not a surveyed original historical footprint or event position within the building.",
+      "datePrecision": "year",
+      "date": "1856",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts",
+      "anchorSources": [
+        "S254",
+        "S247"
+      ],
+      "historicalFootprintVerified": false
+    },
+    {
+      "id": "site-tan-tock-seng-1844",
+      "sourceKey": "town-buildings",
+      "sourceId": "S73",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "source-backed-reference-point: Original hospital vicinity via modern institutional heritage reference address; exact 1844 footprint unverified.",
+      "datePrecision": "year",
+      "date": "1844",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts",
+      "anchorSources": [
+        "S258",
+        "S259",
+        "S248"
+      ],
+      "historicalFootprintVerified": false
+    },
+    {
+      "id": "site-raffles-institution",
+      "sourceKey": "ri-1823",
+      "sourceId": "S9",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "year",
+      "date": "1823",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "site-chinatown",
+      "sourceKey": "middle-road",
+      "sourceId": "S52",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "year",
+      "date": "1823",
+      "dateVerification": "1823 is a draft date for the plan marker, not a verified beginning of Chinese settlement."
+    },
+    {
+      "id": "site-kampong-glam",
+      "sourceKey": "middle-road",
+      "sourceId": "S52",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "year",
+      "date": "1823",
+      "dateVerification": "1823 is a draft date for the plan marker, not a verified beginning of the settlement."
+    },
+    {
+      "id": "site-serangoon-road",
+      "sourceKey": "middle-road",
+      "sourceId": "S52",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "year",
+      "date": "1823",
+      "dateVerification": "1823 is a draft orientation date; the street’s opening or settlement foundation was not independently verified."
+    },
+    {
+      "id": "riots-1854",
+      "sourceKey": "1854-nlb",
+      "sourceId": "S58",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1854-05-05",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "telok-ayer-reclamation",
+      "sourceKey": "reclamation",
+      "sourceId": "S76",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "year",
+      "date": "1879",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "post-office-riots-1876",
+      "sourceKey": "post-office",
+      "sourceId": "S210",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1876-12-15",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "pangkor-1874",
+      "sourceKey": "pangkor",
+      "sourceId": "S81",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1874-01-20",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "perak-war",
+      "sourceKey": "perak",
+      "sourceId": "S83",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "month",
+      "date": "1875-11",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "fms-1896",
+      "sourceKey": "malaya",
+      "sourceId": "S77",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1896-07-01",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "johor-treaty-1885",
+      "sourceKey": "johor1885",
+      "sourceId": "S82",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1885-12-11",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "labuan-to-ss",
+      "sourceKey": "labuan",
+      "sourceId": "S80",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1907-01-01",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "anglo-siamese-treaty",
+      "sourceKey": "malaya",
+      "sourceId": "S223",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1909-07-09",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "mutiny-1915",
+      "sourceKey": "mutiny",
+      "sourceId": "S57",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1915-02-15",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "mutiny-executions-1915",
+      "sourceKey": "mutiny",
+      "sourceId": "S57",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "year",
+      "date": "1915",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "causeway-1924",
+      "sourceKey": "causeway",
+      "sourceId": "S75",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "source-backed-reference-point: Modern causeway reference point; not the exact 1924 ceremony position or a historical rail alignment.",
+      "datePrecision": "day",
+      "date": "1924-06-28",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts",
+      "anchorSources": [
+        "S256",
+        "S247"
+      ],
+      "historicalFootprintVerified": false
+    },
+    {
+      "id": "kreta-ayer-1927",
+      "sourceKey": "kreta",
+      "sourceId": "S197",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "month",
+      "date": "1927-03",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "census-1931",
+      "sourceKey": "headcount",
+      "sourceId": "S220",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "month",
+      "date": "1931-04",
+      "dateVerification": "confirmed-primary-reproduced-text: Population reference night. Enumeration was taken on 2 April as at midnight the previous night. Evidence limit: SSO direct page remains 403. The contemporary report passage was read as reproduced OCR, not a visually inspected scan. If the event means enumeration activity, label it 2 April; if the census reference date, use 1 April.",
+      "verifiedDateSources": [
+        "S239",
+        "S240"
+      ]
+    },
+    {
+      "id": "dindings-to-perak",
+      "sourceKey": "dindings",
+      "sourceId": "S79",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "year",
+      "date": "1935",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "four-states-to-thailand",
+      "sourceKey": "four-states",
+      "sourceId": "S121",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1943-10-18",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "allied-raids-singapore",
+      "sourceKey": "allied-raids",
+      "sourceId": "S120",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1944-11-05",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "bahau-settlement",
+      "sourceKey": "bahau",
+      "sourceId": "S177",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "month",
+      "date": "1943-12",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "endau-settlement",
+      "sourceKey": "endau",
+      "sourceId": "S101",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "year",
+      "date": "1943",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "bma-1945",
+      "sourceKey": "proclamation-nas",
+      "sourceId": "S160",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1945-09-12",
+      "dateVerification": "12 September is the surrender/return chapter anchor. Proclamation signature on 15 August and Gazette reproduction on 1 November are confirmed; the precise assumption-of-control milestone for Singapore remains unverified.",
+      "relatedMilestoneSources": [
+        "S262"
+      ]
+    },
+    {
+      "id": "colony-of-singapore-1946",
+      "sourceKey": "postwar",
+      "sourceId": "S198",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1946-04-01",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "malayan-union",
+      "sourceKey": "postwar",
+      "sourceId": "S198",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1946-04-01",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "umno-founded",
+      "sourceKey": "postwar",
+      "sourceId": "S198",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1946-05-11",
+      "dateVerification": "confirmed-institutional: Formal founding through adoption of constitution at the congress/general assembly, Istana Besar Johor Bahru.",
+      "verifiedDateSources": [
+        "S231"
+      ]
+    },
+    {
+      "id": "federation-1948",
+      "sourceKey": "postwar",
+      "sourceId": "S198",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1948-02-01",
+      "dateVerification": "confirmed-primary: Order and State/Federation Agreements came into operation; agreement signing on 21 January is distinct.",
+      "verifiedDateSources": [
+        "S229",
+        "S230"
+      ]
+    },
+    {
+      "id": "election-1948",
+      "sourceKey": "election1948",
+      "sourceId": "S195",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1948-03-20",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "emergency-1948",
+      "sourceKey": "emergency",
+      "sourceId": "S166",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1948-06-18",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "hertogh-riots",
+      "sourceKey": "hertogh",
+      "sourceId": "S151",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1950-12-11",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "election-1955",
+      "sourceKey": "election1955",
+      "sourceId": "S195",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1955-04-02",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "hock-lee-riots",
+      "sourceKey": "hocklee",
+      "sourceId": "S153",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "source-backed-reference-point: Named riot junction, not a claim for an exact bus-depot gate.",
+      "datePrecision": "day",
+      "date": "1955-05-12",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts",
+      "anchorSources": [
+        "S260",
+        "S261",
+        "S248"
+      ],
+      "historicalFootprintVerified": false
+    },
+    {
+      "id": "marshall-resigns",
+      "sourceKey": "marshall",
+      "sourceId": "S206",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1956-06-07",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "school-riots-1956",
+      "sourceKey": "schoolriots",
+      "sourceId": "S155",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "month",
+      "date": "1956-10",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "merdeka-1957",
+      "sourceKey": "postwar",
+      "sourceId": "S191",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1957-08-31",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "citizenship-1957",
+      "sourceKey": "laws",
+      "sourceId": "S150",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "month",
+      "date": "1957-10",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "election-1959",
+      "sourceKey": "election1959",
+      "sourceId": "S190",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1959-05-30",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "self-government-1959",
+      "sourceKey": "selfgovernment",
+      "sourceId": "S195",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1959-06-03",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "first-cabinet-1959",
+      "sourceKey": "cabinet1959-iseas",
+      "sourceId": "S158",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1959-06-05",
+      "dateVerification": "confirmed-archival-and-institutional: Swearing-in ceremony at City Hall. Evidence limit: The original appointment instrument and oath text remain unread; names and portfolios use the separate ISEAS finding aid.",
+      "verifiedDateSources": [
+        "S234",
+        "S235"
+      ]
+    },
+    {
+      "id": "yusof-ishak-1959",
+      "sourceKey": "yusof",
+      "sourceId": "S194",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1959-12-03",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "tunku-proposal-1961",
+      "sourceKey": "merger",
+      "sourceId": "S191",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1961-05-27",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "barisan-sosialis-1961",
+      "sourceKey": "merger",
+      "sourceId": "S191",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "year",
+      "date": "1961",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "referendum-1962",
+      "sourceKey": "referendum",
+      "sourceId": "S193",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1962-09-01",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "brunei-revolt",
+      "sourceKey": "merger",
+      "sourceId": "S191",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1962-12-08",
+      "dateVerification": "confirmed-primary: Outbreak at 2 a.m., per contemporary British ministerial statement. Evidence limit: TNKU versus Sultan’s police and British reinforcements is supported as the British government account. Azahari’s own proclamation has not been directly read; do not present disputed motives as settled facts.",
+      "verifiedDateSources": [
+        "S232",
+        "S233"
+      ]
+    },
+    {
+      "id": "coldstore-1963",
+      "sourceKey": "coldstore",
+      "sourceId": "S186",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1963-02-02",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "malaysia-agreement",
+      "sourceKey": "malaysia-agreement",
+      "sourceId": "S203",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1963-07-09",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "malaysia-day-1963",
+      "sourceKey": "malaysia-agreement",
+      "sourceId": "S203",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1963-09-16",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "konfrontasi-begins",
+      "sourceKey": "konfrontasi",
+      "sourceId": "S191",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "year",
+      "date": "1963",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "malaysia-election-1964",
+      "sourceKey": "riots1964-nlb",
+      "sourceId": "S156",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1964-04-25",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "race-riots-july-1964",
+      "sourceKey": "julyriots",
+      "sourceId": "S156",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1964-07-21",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "race-riots-september-1964",
+      "sourceKey": "septriots",
+      "sourceId": "S156",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1964-09-02",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "macdonald-house-1965",
+      "sourceKey": "macdonald",
+      "sourceId": "S157",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "source-backed-reference-point: Present monument/building reference point; not a surveyed original historical footprint or event position within the building.",
+      "datePrecision": "day",
+      "date": "1965-03-10",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts",
+      "anchorSources": [
+        "S255",
+        "S247"
+      ],
+      "historicalFootprintVerified": false
+    },
+    {
+      "id": "independence-agreement-1965",
+      "sourceKey": "proclamation-nas",
+      "sourceId": "S217",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1965-08-07",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "separation-1965",
+      "sourceKey": "proclamation-nas",
+      "sourceId": "S160",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1965-08-09",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "first-cabinet-1965",
+      "sourceKey": "cabinet1965",
+      "sourceId": "S181",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1965-08-09",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    },
+    {
+      "id": "first-president-1965",
+      "sourceKey": "yusof",
+      "sourceId": "S194",
+      "historicalClaim": "source read; precise scope/date may still be disputed",
+      "anchorStatus": "Map anchor approximate; original site/precise location unverified. The coordinate is a draft orientation anchor, not a newly verified historical position.",
+      "datePrecision": "day",
+      "date": "1965-12-22",
+      "dateVerification": "Read-source chronology; consult RESEARCH.md for scope and conflicting accounts"
+    }
+  ],
+  "unresolvedSources": [],
+  "rowsWithOnlySpecSource": [],
+  "unverifiedEventDates": [
+    {
+      "id": "site-longyamen",
+      "reason": "1349 is a report chronology, not an established foundation date for the disputed modern site."
+    },
+    {
+      "id": "straits-settlements-1826",
+      "reason": "Formation year is confirmed; exact administrative foundation day remains unverified. The 27November Charter is a distinct event."
+    },
+    {
+      "id": "site-chinatown",
+      "reason": "1823 is a draft date for the plan marker, not a verified beginning of Chinese settlement."
+    },
+    {
+      "id": "site-kampong-glam",
+      "reason": "1823 is a draft date for the plan marker, not a verified beginning of the settlement."
+    },
+    {
+      "id": "site-serangoon-road",
+      "reason": "1823 is a draft orientation date; the street’s opening or settlement foundation was not independently verified."
+    },
+    {
+      "id": "indian-immigration-ordinance",
+      "reason": "Original ordinances and G.N. 577 of 28 December 1883 still need inspection; do not assign an exact commencement date from this secondary article. 1876 Protection Ordinance, Singapore operation from 1883 and replacement in 1884 are different milestones."
+    },
+    {
+      "id": "bma-1945",
+      "reason": "12 September is the surrender/return chapter anchor. Proclamation signature on 15 August and Gazette reproduction on 1 November are confirmed; the precise assumption-of-control milestone for Singapore remains unverified."
+    }
+  ],
+  "withheldRoutes": [
+    {
+      "id": "steamer-amoy-1900",
+      "reason": "Later steamship service not corroborated by the earlier guide",
+      "pages": "II pp. 390–394, 413–429, 473–477, 264–281; later steamship use needs an independent service timetable"
+    }
+  ],
+  "missingRoutes": [
+    {
+      "id": "causeway-rail",
+      "reason": "Requires georeferenced G11 railway trace; no OSM or guessed railway geometry substituted."
+    }
+  ],
+  "sourceKeys": {
+    "census-nlb": "S4",
+    "landing-nlb": "S6",
+    "buckley": "S7",
+    "town-letter": "S8",
+    "ri-1823": "S9",
+    "mutiny-nlb": "S57",
+    "1854-nlb": "S58",
+    "convicts-2015": "S50",
+    "convicts-2021": "S59",
+    "hertogh-nlb": "S151",
+    "hertogh-sg101": "S152",
+    "hock-lee-nlb": "S153",
+    "schools-nlb": "S154",
+    "schools-roots": "S155",
+    "riots1964-nlb": "S156",
+    "macdonald-nlb": "S157",
+    "cabinet1959-iseas": "S158",
+    "sarawak-limbang": "S60",
+    "borneo-dfat": "S159",
+    "leyden": "S10",
+    "gold-nlb": "S11",
+    "stone-nhb": "S12",
+    "proclamation-nas": "S160",
+    "albatross-nlb": "S175",
+    "aljunied-nlb": "S176",
+    "bahau-nlb": "S177",
+    "buckley-II": "S178",
+    "cabinet1965-nas": "S179",
+    "cabinet1965-noon": "S180",
+    "cabinet1965-st": "S181",
+    "causeway-nlb": "S182",
+    "census1931-secondary-index": "S183",
+    "census1931-un": "S184",
+    "census1957-un": "S185",
+    "coldstore-hansard": "S186",
+    "coldstore-mha": "S187",
+    "coldstore-thum": "S188",
+    "eld-milestones": "S189",
+    "kallang-ura": "S196",
+    "kreta-hansard": "S197",
+    "law-nas": "S199",
+    "malaysia-1963": "S203",
+    "malaysia-nlb": "S204",
+    "marriott-census": "S205",
+    "marshall-nlb": "S206",
+    "omar-nlb": "S207",
+    "opium-kim": "S208",
+    "poh-barisan": "S209",
+    "post-office": "S210",
+    "president-court": "S211",
+    "protectorate-nlb": "S212",
+    "referendum-private": "S213",
+    "rockhill": "S214",
+    "samsui-low": "S215",
+    "saw-2007": "S216",
+    "separation-agreement": "S217",
+    "separation-dfat": "S218",
+    "separation-hansard": "S219",
+    "sit-census": "S220",
+    "streets-nhb": "S221",
+    "streets-nlb": "S222",
+    "treaty1909": "S223",
+    "unread-citizenship": "S224",
+    "unread-kreta": "S225",
+    "unread-malacca": "S226"
+  },
+  "copiedWW2Events": [
+    "singapore-naval-base",
+    "kota-bharu",
+    "singapore-air-raid-1941",
+    "johor-crossing",
+    "bukit-timah",
+    "bukit-chandu",
+    "alexandra-hospital",
+    "surrender-ford",
+    "sook-ching",
+    "double-tenth",
+    "singapore-ceremony",
+    "sook-ching-trial-1947",
+    "site-alexandra-hospital",
+    "site-ford-factory",
+    "site-kempeitai-ymca",
+    "site-changi-prison",
+    "site-changi-beach",
+    "site-punggol-beach",
+    "site-municipal-building"
+  ],
+  "copiedWW2Movements": [
+    "japan-malaya",
+    "japan-malaya-patani",
+    "japan-malaya-east"
+  ],
+  "namespaceResolution": "Malayan Union holder renamed malayan-union-government so the exact required event id malayan-union remains unique."
+}

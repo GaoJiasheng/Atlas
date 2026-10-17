@@ -1,0 +1,143 @@
+{
+  "dataset": "g7",
+  "projection": "auto",
+  "maxResidualKm": 0.1,
+  "coordinateSource": "OSM named highway shared nodes from raw/control-roads-osm.json, CP-only; no output geometry",
+  "knownGaps": [
+    "Candidate city junctions read on printed map; historic continuity and Beach Road geometry need independent review."
+  ],
+  "controlPoints": [
+    {
+      "name": "Bridge Street river crossing / later Elgin Bridge centre",
+      "svg": [
+        1830,
+        1405
+      ],
+      "lnglat": [
+        103.8493033,
+        1.2890664
+      ]
+    },
+    {
+      "name": "North Bridge Road / High Street",
+      "svg": [
+        1920,
+        1404
+      ],
+      "lnglat": [
+        103.850015,
+        1.2901963
+      ]
+    },
+    {
+      "name": "North Bridge Road / Coleman Street",
+      "svg": [
+        2076,
+        1401
+      ],
+      "lnglat": [
+        103.8509674,
+        1.2917649
+      ]
+    },
+    {
+      "name": "North Bridge Road / Stamford Road canal",
+      "svg": [
+        2245,
+        1400
+      ],
+      "lnglat": [
+        103.8520429,
+        1.2935887
+      ]
+    },
+    {
+      "name": "North Bridge Road / Bras Basah Road",
+      "svg": [
+        2389,
+        1409
+      ],
+      "lnglat": [
+        103.8531036,
+        1.2951261
+      ]
+    },
+    {
+      "name": "Beach Road / Bras Basah Road",
+      "svg": [
+        2373,
+        1570
+      ],
+      "lnglat": [
+        103.8546543,
+        1.2939345
+      ]
+    },
+    {
+      "name": "North Bridge Road / Middle Road",
+      "svg": [
+        2657,
+        1431
+      ],
+      "lnglat": [
+        103.8549985,
+        1.2976349
+      ]
+    },
+    {
+      "name": "Beach Road / Middle Road",
+      "svg": [
+        2630,
+        1575
+      ],
+      "lnglat": [
+        103.8562528,
+        1.2965189
+      ]
+    },
+    {
+      "name": "South Bridge Road / Upper Pickering Street",
+      "svg": [
+        1514,
+        1410
+      ],
+      "lnglat": [
+        103.8471684,
+        1.2854539
+      ]
+    },
+    {
+      "name": "South Bridge Road / Temple Street",
+      "svg": [
+        1214,
+        1412
+      ],
+      "lnglat": [
+        103.8452956,
+        1.2822174
+      ]
+    },
+    {
+      "name": "South Bridge Road / Pagoda Street",
+      "svg": [
+        1288,
+        1412
+      ],
+      "lnglat": [
+        103.8455644,
+        1.2827013
+      ]
+    },
+    {
+      "name": "South Bridge Road / Mosque Street",
+      "svg": [
+        1352,
+        1412
+      ],
+      "lnglat": [
+        103.8458432,
+        1.283202
+      ]
+    }
+  ]
+}

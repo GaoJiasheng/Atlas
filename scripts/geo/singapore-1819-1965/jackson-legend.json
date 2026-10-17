@@ -1,0 +1,23 @@
+{
+  "source": "G1",
+  "hasColourLegend": false,
+  "method": "Printed labels and enclosing street/plot strokes; source-pixel least-cost traces, clipped to dated L1 coast",
+  "classes": {
+    "chinese-kampong": "Chinese Campong",
+    "chulia-kampong": "Chuliah Campong",
+    "government-hill": "Singapore Hill / Flag Staff (government hill identification)",
+    "cantonment": "Cantonment Plain",
+    "native-cantonment": "Native Cantonment",
+    "european-town": "European Town",
+    "arab-kampong": "Arab Campong",
+    "kampong-glam": "Sultan’s (compound; mapped as Kampong Glam)",
+    "bugis-kampong": "Bugis Campong"
+  },
+  "knownGaps": [
+    "No coloured class legend exists in the specified original.",
+    "Street/plot enclosures are interpreted from printed allocation names; actual residence is not inferred.",
+    "Kampong Glam maps the printed Sultan compound; the label itself is Sultan’s.",
+    "Government hill maps the printed Singapore Hill road enclosure.",
+    "Modern junction identifications need independent historical continuity review."
+  ]
+}

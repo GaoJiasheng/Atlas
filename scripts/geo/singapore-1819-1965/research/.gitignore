@@ -1,0 +1,7 @@
+# Downloaded research material and local visual inspection renders
+*.pdf
+*.txt
+*.png
+*-catalog.json
+*-metadata.json
+*.html

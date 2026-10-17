@@ -1,0 +1,9 @@
+{
+  "status": "Geographical acceptance has not passed",
+  "untraced": [],
+  "regional": [
+    "G23 regional source registration remains approximate, fit RMS 1.801 km and LOO RMS 2.448 km; 1898 external state-frontier corrections and Dindings trace applied.",
+    "1896 Sarawak retains Limbang and Trusan, excludes Lawas to Brunei; G34 1903 provincial boundary backcasts geometry only, not its Company ownership."
+  ],
+  "coast": "Dated source reconstructions are provisional; several maps fail residual budgets and source-date coverage. See SOURCES-GEO.md."
+}

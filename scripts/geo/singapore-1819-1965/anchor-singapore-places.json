@@ -1,0 +1,1594 @@
+[
+  {
+    "qid": "Q2392844",
+    "title": "Little India, Singapore",
+    "label": "Little India",
+    "revision": 2548694861,
+    "coordinates": [
+      {
+        "value": {
+          "latitude": 1.3077777777778,
+          "longitude": 103.8525,
+          "altitude": null,
+          "precision": 0.00027777777777778,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "qualifiers": {},
+        "references": [
+          {
+            "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 328,
+                      "id": "Q328"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ],
+    "geographicCentre": [],
+    "sha256": "d906741747b446b2d8a6fd97a86f8b9d09771d316fb7600063b097c1095ca080"
+  },
+  {
+    "qid": "Q7695362",
+    "title": "Tekka Centre",
+    "label": "Tekka Centre",
+    "revision": 2548784473,
+    "coordinates": [
+      {
+        "value": {
+          "latitude": 1.3062,
+          "longitude": 103.851,
+          "altitude": null,
+          "precision": 0.0001,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "qualifiers": {},
+        "references": [
+          {
+            "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 328,
+                      "id": "Q328"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ],
+    "geographicCentre": [],
+    "sha256": "4d32a09d21cb4e5e9aaf1e2151435d9d63e7ddf11530da24b38763c798c1811c"
+  },
+  {
+    "qid": "Q7697791",
+    "title": "Telok Ayer Street",
+    "label": "Telok Ayer Street",
+    "revision": 2543090646,
+    "coordinates": [],
+    "geographicCentre": [],
+    "sha256": "a3e36cbff990128d217bc72be0635ebc40eaf13a7b2512bafda45ab6cadc07c2"
+  },
+  {
+    "qid": "Q4302407",
+    "title": "The Adelphi",
+    "label": "The Adelphi",
+    "revision": 2379539608,
+    "coordinates": [],
+    "geographicCentre": [],
+    "sha256": "484074a1e07226e5ae7068127776e00165b2de63974310ae293fcab1604ce045"
+  },
+  {
+    "qid": "Q7449155",
+    "title": "Sembawang",
+    "label": "Sembawang",
+    "revision": 2543052157,
+    "coordinates": [
+      {
+        "value": {
+          "latitude": 1.4491111111111,
+          "longitude": 103.81849444444,
+          "altitude": null,
+          "precision": 2.7777777777778e-06,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "qualifiers": {},
+        "references": []
+      }
+    ],
+    "geographicCentre": [],
+    "sha256": "9cae83ff13e3f580871d5b7885ea09a70a0a2a433ba3384a5f084f276f834b06"
+  },
+  {
+    "title": "North Canal Road",
+    "error": "404 Client Error: Not Found for url: https://en.wikipedia.org/wiki/North_Canal_Road"
+  },
+  {
+    "qid": "Q3079780",
+    "title": "Raffles Place",
+    "label": "Raffles Place",
+    "revision": 2520449958,
+    "coordinates": [
+      {
+        "value": {
+          "latitude": 1.28389,
+          "longitude": 103.851,
+          "altitude": null,
+          "precision": 1e-05,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "qualifiers": {},
+        "references": [
+          {
+            "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 328,
+                      "id": "Q328"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ],
+    "geographicCentre": [],
+    "sha256": "1368495bac1e70c040597abe70f8ca468e521bf638c62f510b20ea57a1bf8ad8"
+  },
+  {
+    "qid": "Q7054276",
+    "title": "North Bridge Road",
+    "label": "North Bridge Road",
+    "revision": 2520567174,
+    "coordinates": [
+      {
+        "value": {
+          "latitude": 1.306124,
+          "longitude": 103.864808,
+          "altitude": null,
+          "precision": 2.777777777777778e-08,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "qualifiers": {},
+        "references": []
+      }
+    ],
+    "geographicCentre": [],
+    "sha256": "00f71b8bfdf135e8f27e9e7179b21604ff39d5775be7b0754b791235294d30f5"
+  },
+  {
+    "qid": "Q573956",
+    "title": "Long Ya Men",
+    "label": "Long Ya Men",
+    "revision": 2511667791,
+    "coordinates": [
+      {
+        "value": {
+          "latitude": 1.26251667,
+          "longitude": 103.80518889,
+          "altitude": null,
+          "precision": 2.77777777778e-06,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "qualifiers": {},
+        "references": [
+          {
+            "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 328,
+                      "id": "Q328"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ],
+    "geographicCentre": [],
+    "sha256": "e505a0311bcbc9c53c93f3c49d87c7e02dbbe7a7aeee6e3b3f3d839592d7ea6a"
+  },
+  {
+    "qid": "Q1438470",
+    "title": "Fort Canning Hill",
+    "label": "Fort Canning Hill",
+    "revision": 2513538207,
+    "coordinates": [
+      {
+        "value": {
+          "latitude": 1.29444,
+          "longitude": 103.847,
+          "altitude": null,
+          "precision": 1e-05,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "qualifiers": {},
+        "references": [
+          {
+            "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 328,
+                      "id": "Q328"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ],
+    "geographicCentre": [],
+    "sha256": "ed1b577eae047f31c696b162cb547e323fcd9b00aa2e18880f94bdfbd0ff280a"
+  },
+  {
+    "qid": "Q4409125",
+    "title": "The Fullerton Hotel Singapore",
+    "label": "The Fullerton Hotel Singapore",
+    "revision": 2541794939,
+    "coordinates": [
+      {
+        "value": {
+          "latitude": 1.2861111111111112,
+          "longitude": 103.85305555555556,
+          "altitude": null,
+          "precision": 0.0002777777777777778,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "qualifiers": {},
+        "references": [
+          {
+            "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 328,
+                      "id": "Q328"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      },
+      {
+        "value": {
+          "latitude": 1.2855902,
+          "longitude": 103.85306,
+          "altitude": null,
+          "precision": 1e-05,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "qualifiers": {},
+        "references": [
+          {
+            "hash": "82e3b0695f8629e6d49f26d1cb8a5706e28d584a",
+            "snaks": {
+              "P248": [
+                {
+                  "snaktype": "value",
+                  "property": "P248",
+                  "hash": "afd8bf352ab88a7fd87f57b9d3665a9f58999a13",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 1319169,
+                      "id": "Q1319169"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ],
+              "P10487": [
+                {
+                  "snaktype": "value",
+                  "property": "P10487",
+                  "hash": "5e1afc2637cdabc31fa18f39a07594f41e0bf7d7",
+                  "datavalue": {
+                    "value": "116122493",
+                    "type": "string"
+                  },
+                  "datatype": "external-id"
+                }
+              ],
+              "P813": [
+                {
+                  "snaktype": "value",
+                  "property": "P813",
+                  "hash": "528f685c7d0bcc4df231bed6037cb11811b3d6a4",
+                  "datavalue": {
+                    "value": {
+                      "time": "+2022-03-00T00:00:00Z",
+                      "timezone": 0,
+                      "before": 0,
+                      "after": 0,
+                      "precision": 10,
+                      "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                    },
+                    "type": "time"
+                  },
+                  "datatype": "time"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P248",
+              "P10487",
+              "P813"
+            ]
+          }
+        ]
+      }
+    ],
+    "geographicCentre": [],
+    "sha256": "2d7bc64830988bc46f77ed8e4091bc70227cdb34716e5f845fd289d1b6a893fe"
+  },
+  {
+    "qid": "Q7282563",
+    "title": "Raffles's Landing Site",
+    "label": "Raffles' Landing Site",
+    "revision": 2443997260,
+    "coordinates": [
+      {
+        "value": {
+          "latitude": 1.2877777777778,
+          "longitude": 103.85055555556,
+          "altitude": null,
+          "precision": 0.00027777777777778,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "qualifiers": {},
+        "references": [
+          {
+            "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 328,
+                      "id": "Q328"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ],
+    "geographicCentre": [],
+    "sha256": "b96bbf70dd841e663725c9607243552c619a71262c4628549e2c00ff94d90f2b"
+  },
+  {
+    "qid": "Q334",
+    "title": "Singapore",
+    "label": "Singapore",
+    "revision": 2555341784,
+    "coordinates": [
+      {
+        "value": {
+          "latitude": 1.3,
+          "longitude": 103.8,
+          "altitude": null,
+          "precision": 0.0166667,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "qualifiers": {},
+        "references": [
+          {
+            "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 328,
+                      "id": "Q328"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ],
+    "geographicCentre": [
+      {
+        "mainsnak": {
+          "snaktype": "value",
+          "property": "P5140",
+          "hash": "6353eb929d50835bc611f3eb1758d251c672f715",
+          "datavalue": {
+            "value": {
+              "latitude": 1.3521,
+              "longitude": 103.8198,
+              "altitude": null,
+              "precision": 0.0001,
+              "globe": "http://www.wikidata.org/entity/Q2"
+            },
+            "type": "globecoordinate"
+          },
+          "datatype": "globe-coordinate"
+        },
+        "type": "statement",
+        "id": "Q334$c32a973e-42b9-5145-55fb-d087259df4c7",
+        "rank": "normal"
+      }
+    ],
+    "sha256": "ded627551e27fba5eca4a0a791c9caa9be4a7030ab2d1174df6abf87ec764a8c"
+  },
+  {
+    "qid": "Q3531770",
+    "title": "Former City Hall, Singapore",
+    "label": "City Hall, Singapore",
+    "revision": 2548863714,
+    "coordinates": [
+      {
+        "value": {
+          "latitude": 1.2905555555555557,
+          "longitude": 103.85166666666667,
+          "altitude": null,
+          "precision": 0.0002777777777777778,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "qualifiers": {},
+        "references": [
+          {
+            "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 328,
+                      "id": "Q328"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      },
+      {
+        "value": {
+          "latitude": 1.29055556,
+          "longitude": 103.85180556,
+          "altitude": null,
+          "precision": 0.008985432126855401,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "qualifiers": {},
+        "references": []
+      }
+    ],
+    "geographicCentre": [],
+    "sha256": "93ef1145540ef392d9f00383f70b16d1ffc6135d74c2f96bd3d02306ed0b5feb"
+  },
+  {
+    "qid": "Q4251481",
+    "title": "Kampong Glam",
+    "label": "Kampong Glam",
+    "revision": 2543114820,
+    "coordinates": [
+      {
+        "value": {
+          "latitude": 1.3019722222222,
+          "longitude": 103.86094444444,
+          "altitude": null,
+          "precision": 2.7777777777778e-05,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "qualifiers": {},
+        "references": []
+      }
+    ],
+    "geographicCentre": [],
+    "sha256": "78160a84824653e6dea55d48398fb5a74eea5f6516dc9da8e68e714c19508ee2"
+  },
+  {
+    "qid": "Q1318670",
+    "title": "Chinatown, Singapore",
+    "label": "Chinatown",
+    "revision": 2525223699,
+    "coordinates": [
+      {
+        "value": {
+          "latitude": 1.2836111111111,
+          "longitude": 103.84416666667,
+          "altitude": null,
+          "precision": null,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "qualifiers": {},
+        "references": []
+      }
+    ],
+    "geographicCentre": [],
+    "sha256": "d87af311d46bdb10954c77d8bec74a80b149630d51147ca0eebb68647f597d8b"
+  },
+  {
+    "qid": "Q3519991",
+    "title": "Saint John's Island",
+    "label": "Saint John's Island",
+    "revision": 2543087303,
+    "coordinates": [
+      {
+        "value": {
+          "latitude": 1.2188888888889,
+          "longitude": 103.84805555556,
+          "altitude": null,
+          "precision": 0.00027777777777778,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "qualifiers": {},
+        "references": [
+          {
+            "hash": "d39c2ff7935dd46c317058a2e3bcbf5f30ec543a",
+            "snaks": {
+              "P248": [
+                {
+                  "snaktype": "value",
+                  "property": "P248",
+                  "hash": "7648f66055f57f6227dd1f872bc4ed26c70da7c6",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 1194038,
+                      "id": "Q1194038"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ],
+              "P577": [
+                {
+                  "snaktype": "value",
+                  "property": "P577",
+                  "hash": "a372c95b03a3464736c5fd1d7ed86176f0c04973",
+                  "datavalue": {
+                    "value": {
+                      "time": "+2018-06-11T00:00:00Z",
+                      "timezone": 0,
+                      "before": 0,
+                      "after": 0,
+                      "precision": 11,
+                      "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                    },
+                    "type": "time"
+                  },
+                  "datatype": "time"
+                }
+              ],
+              "P2326": [
+                {
+                  "snaktype": "value",
+                  "property": "P2326",
+                  "hash": "fc064e7d0d0fd03a30b2e802e5e704fc2323c9c2",
+                  "datavalue": {
+                    "value": "-73564",
+                    "type": "string"
+                  },
+                  "datatype": "external-id"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P248",
+              "P577",
+              "P2326"
+            ]
+          }
+        ]
+      }
+    ],
+    "geographicCentre": [],
+    "sha256": "8260cd0aba40adc183e74c16624d6222539c3706e47da6150a57b96693477b7d"
+  },
+  {
+    "qid": "Q13360293",
+    "title": "The Arts House",
+    "label": "The Arts House",
+    "revision": 2538497387,
+    "coordinates": [
+      {
+        "value": {
+          "latitude": 1.2886111111111112,
+          "longitude": 103.85111111111111,
+          "altitude": null,
+          "precision": 0.0002777777777777778,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "qualifiers": {},
+        "references": [
+          {
+            "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 328,
+                      "id": "Q328"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ],
+    "geographicCentre": [],
+    "sha256": "66cb8b3ef91450b240739e7a5d7ee7bd1753323fcc4b197deac56ba25da3da94"
+  },
+  {
+    "qid": "Q1454776",
+    "title": "Singapore River",
+    "label": "Singapore River",
+    "revision": 2491145991,
+    "coordinates": [
+      {
+        "value": {
+          "latitude": 1.2922222222222,
+          "longitude": 103.83333333333,
+          "altitude": null,
+          "precision": 0.00027777777777778,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "qualifiers": {
+          "P518": [
+            {
+              "snaktype": "value",
+              "property": "P518",
+              "hash": "2c7de14bc888b5d4d007acc4940641fc46b79ba0",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 7376362,
+                  "id": "Q7376362"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            }
+          ]
+        },
+        "references": [
+          {
+            "hash": "288ab581e7d2d02995a26dfa8b091d96e78457fc",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "6a164248fc96bfa583bbb495cb63ae6401ec203c",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 206855,
+                      "id": "Q206855"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      },
+      {
+        "value": {
+          "latitude": 1.2883333333333,
+          "longitude": 103.85361111111,
+          "altitude": null,
+          "precision": 0.00027777777777778,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "qualifiers": {
+          "P518": [
+            {
+              "snaktype": "value",
+              "property": "P518",
+              "hash": "544b353c2ef8ad17b20e5e38254f37c3b3858ebf",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 1233637,
+                  "id": "Q1233637"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            }
+          ]
+        },
+        "references": [
+          {
+            "hash": "288ab581e7d2d02995a26dfa8b091d96e78457fc",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "6a164248fc96bfa583bbb495cb63ae6401ec203c",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 206855,
+                      "id": "Q206855"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ],
+    "geographicCentre": [],
+    "sha256": "890b306cc335189636d2486f97a93d4edcab40e296b96695e1bd5907a2b8f7f6"
+  },
+  {
+    "qid": "Q4931498",
+    "title": "Boat Quay",
+    "label": "Boat Quay",
+    "revision": 2513551339,
+    "coordinates": [
+      {
+        "value": {
+          "latitude": 1.28685,
+          "longitude": 103.85,
+          "altitude": null,
+          "precision": 1e-05,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "qualifiers": {},
+        "references": [
+          {
+            "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 328,
+                      "id": "Q328"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ],
+    "geographicCentre": [],
+    "sha256": "be38b63eb850ef0dbdb51435978b8458bf73fb8b70d82b8839212563f3ed6f20"
+  },
+  {
+    "qid": "Q7697796",
+    "title": "Telok Blangah",
+    "label": "Telok Blangah",
+    "revision": 2543090660,
+    "coordinates": [
+      {
+        "value": {
+          "latitude": 1.2789,
+          "longitude": 103.8133,
+          "altitude": null,
+          "precision": 0.0001,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "qualifiers": {},
+        "references": []
+      }
+    ],
+    "geographicCentre": [],
+    "sha256": "0c7874bfc100a3734aaa9d94fbaa2e43fcd5cae85b15f89996b8c81ab7e3c87e"
+  },
+  {
+    "qid": "Q1674820",
+    "title": "Istana Kampong Glam",
+    "label": "Istana Kampong Glam",
+    "revision": 2542983239,
+    "coordinates": [
+      {
+        "value": {
+          "latitude": 1.3027777777778,
+          "longitude": 103.86,
+          "altitude": null,
+          "precision": 0.00027777777777778,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "qualifiers": {},
+        "references": [
+          {
+            "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 328,
+                      "id": "Q328"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ],
+    "geographicCentre": [],
+    "sha256": "234fc4c156005ebaa84ccf3bd76fc4ca85ac5b23af3a9f2adc9ca89bae710c19"
+  },
+  {
+    "qid": "Q5359041",
+    "title": "Raffles City Singapore",
+    "label": "Raffles City",
+    "revision": 2543050757,
+    "coordinates": [
+      {
+        "value": {
+          "latitude": 1.2936111111111,
+          "longitude": 103.85305555556,
+          "altitude": null,
+          "precision": null,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "qualifiers": {},
+        "references": [
+          {
+            "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 328,
+                      "id": "Q328"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ],
+    "geographicCentre": [],
+    "sha256": "5d1af987bd1f9f25a9e5edb9d10395596e863386c06d6762edfdc0b4809b8db8"
+  },
+  {
+    "qid": "Q11301132",
+    "title": "Keppel Harbour",
+    "label": "Keppel Harbour",
+    "revision": 2542984522,
+    "coordinates": [
+      {
+        "value": {
+          "latitude": 1.26667,
+          "longitude": 103.833,
+          "altitude": null,
+          "precision": 1e-05,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "qualifiers": {},
+        "references": [
+          {
+            "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 328,
+                      "id": "Q328"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ],
+    "geographicCentre": [],
+    "sha256": "b5513e4bd2312a7c8ad6f16eb22d4f9f1939c144d5a1c9da91178881039c1c1d"
+  },
+  {
+    "qid": "Q25247920",
+    "title": "Bras Basah",
+    "label": "Bras Basah",
+    "revision": 2413567380,
+    "coordinates": [
+      {
+        "value": {
+          "latitude": 1.297,
+          "longitude": 103.853,
+          "altitude": null,
+          "precision": 0.00027777777777778,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "qualifiers": {},
+        "references": [
+          {
+            "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 328,
+                      "id": "Q328"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ],
+    "geographicCentre": [],
+    "sha256": "706c5ba9c337ff486d90083c5d690dd63f53d4d65b30e6df0e77730f0ba5bd7c"
+  },
+  {
+    "qid": "Q7452694",
+    "title": "Serangoon Road",
+    "label": "Serangoon Road",
+    "revision": 2538433410,
+    "coordinates": [],
+    "geographicCentre": [],
+    "sha256": "c49162d559c09e91ce648bd077eed9ec7a881b601f808c4fdd13b6cd107d0886"
+  },
+  {
+    "qid": "Q7697791",
+    "title": "Telok Ayer",
+    "label": "Telok Ayer Street",
+    "revision": 2543090646,
+    "coordinates": [],
+    "geographicCentre": [],
+    "sha256": "a3e36cbff990128d217bc72be0635ebc40eaf13a7b2512bafda45ab6cadc07c2"
+  },
+  {
+    "qid": "Q4720567",
+    "title": "Alexandra, Singapore",
+    "label": "Alexandra, Singapore",
+    "revision": 2549980977,
+    "coordinates": [
+      {
+        "value": {
+          "latitude": 1.2868,
+          "longitude": 103.7963,
+          "altitude": null,
+          "precision": 0.0001,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "qualifiers": {},
+        "references": []
+      }
+    ],
+    "geographicCentre": [],
+    "sha256": "96a0c0b55c49fd835bc8bbbb86f0bc28d611c9886934128953b0dabb35acf67a"
+  },
+  {
+    "qid": "Q111032603",
+    "title": "Outram Prison",
+    "label": "Outram Prison",
+    "revision": 2543048894,
+    "coordinates": [
+      {
+        "value": {
+          "latitude": 1.283094,
+          "longitude": 103.837587,
+          "altitude": null,
+          "precision": 1e-05,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "qualifiers": {},
+        "references": []
+      }
+    ],
+    "geographicCentre": [],
+    "sha256": "bd8b9bb19afd217d19cfb57304dfb284561905fce0ff15cf8163e735d7b20bfe"
+  },
+  {
+    "qid": "Q6436849",
+    "title": "Kreta Ayer",
+    "label": "Kreta Ayer Road",
+    "revision": 2542985448,
+    "coordinates": [
+      {
+        "value": {
+          "latitude": 1.28056,
+          "longitude": 103.842,
+          "altitude": null,
+          "precision": 1e-05,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "qualifiers": {},
+        "references": [
+          {
+            "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 328,
+                      "id": "Q328"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ],
+    "geographicCentre": [],
+    "sha256": "c7922f1ab6505811d3856e7f64adfa67bf785d60247a1e619e1d85490edde21a"
+  },
+  {
+    "qid": "Q16926923",
+    "title": "Sembawang Naval Base",
+    "label": "Singapore Naval Base",
+    "revision": 2543052179,
+    "coordinates": [],
+    "geographicCentre": [],
+    "sha256": "3c4aead6d5e8b9017682c176410dd1c61e7f91a150b2928bcf1d4672731ecb63"
+  },
+  {
+    "qid": "Q1907146",
+    "title": "Sultan Mosque",
+    "label": "Masjid Sultan",
+    "revision": 2543087674,
+    "coordinates": [
+      {
+        "value": {
+          "latitude": 1.30214,
+          "longitude": 103.859,
+          "altitude": null,
+          "precision": 1e-05,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "qualifiers": {},
+        "references": [
+          {
+            "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 328,
+                      "id": "Q328"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ],
+    "geographicCentre": [],
+    "sha256": "939f2c3390bc9309e7aa4e4bf68a555334bb0712262a4459d750a5afd938ae8d"
+  },
+  {
+    "qid": "Q14874255",
+    "title": "Chinese High School, Singapore",
+    "label": "Hwa Chong Institution",
+    "revision": 2542982777,
+    "coordinates": [
+      {
+        "value": {
+          "latitude": 1.32654,
+          "longitude": 103.803491,
+          "altitude": null,
+          "precision": 0.0001,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "qualifiers": {},
+        "references": [
+          {
+            "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 328,
+                      "id": "Q328"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ],
+    "geographicCentre": [],
+    "sha256": "4d9035dcdb1f7c212ee40a85400459ee866094d78b3c54d86b58bc11f68a0c9b"
+  },
+  {
+    "qid": "Q843531",
+    "title": "Istana, Singapore",
+    "label": "The Istana",
+    "revision": 2542983232,
+    "coordinates": [
+      {
+        "value": {
+          "latitude": 1.3068561556294445,
+          "longitude": 103.84314452570429,
+          "altitude": null,
+          "precision": 1e-08,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "qualifiers": {},
+        "references": [
+          {
+            "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 328,
+                      "id": "Q328"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ],
+    "geographicCentre": [],
+    "sha256": "a18360fc3b919a31145c7d9d414d23e7daa1f6c6c6120f63fc7b1b99dc582211"
+  },
+  {
+    "qid": "Q355307",
+    "title": "Adelphi Hotel",
+    "label": "Adelphi",
+    "revision": 2538492957,
+    "coordinates": [],
+    "geographicCentre": [],
+    "sha256": "05755953ef79271f3518dd4ec7a11353eb731dbea3910f8854027279bec9611f"
+  },
+  {
+    "qid": "Q525295",
+    "title": "Geylang Serai",
+    "label": "Geylang",
+    "revision": 2518376507,
+    "coordinates": [
+      {
+        "value": {
+          "latitude": 1.3205555555556,
+          "longitude": 103.88694444444,
+          "altitude": null,
+          "precision": null,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "qualifiers": {},
+        "references": []
+      }
+    ],
+    "geographicCentre": [],
+    "sha256": "246fff106bacefd1179d8d2d9f7f272410b6d0b6ed141eaca099b4b9934cacf3"
+  },
+  {
+    "qid": "Q4216846",
+    "title": "Kallang",
+    "label": "Kallang",
+    "revision": 2542984102,
+    "coordinates": [
+      {
+        "value": {
+          "latitude": 1.31078,
+          "longitude": 103.865637,
+          "altitude": null,
+          "precision": 1e-06,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "qualifiers": {},
+        "references": []
+      }
+    ],
+    "geographicCentre": [],
+    "sha256": "0e27b10b4fff0a3a0eb4a83428e3e91e60f7af32635875913214fa6f92bcaf88"
+  },
+  {
+    "qid": "Q3810086",
+    "title": "Downtown Core",
+    "label": "Downtown Core",
+    "revision": 2520175642,
+    "coordinates": [
+      {
+        "value": {
+          "latitude": 1.2867,
+          "longitude": 103.854,
+          "altitude": null,
+          "precision": 0.089854185255195,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "qualifiers": {},
+        "references": [
+          {
+            "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 328,
+                      "id": "Q328"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ],
+    "geographicCentre": [],
+    "sha256": "6013647cd9303a26f8b9329fafc19a4398f7ae78b45f9067ca4fbc63389b0cfb"
+  },
+  {
+    "qid": "Q5374581",
+    "title": "Empress Place Building",
+    "label": "Empress Place Building",
+    "revision": 2541722598,
+    "coordinates": [
+      {
+        "value": {
+          "latitude": 1.28722,
+          "longitude": 103.852,
+          "altitude": null,
+          "precision": 1e-05,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "qualifiers": {},
+        "references": [
+          {
+            "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 328,
+                      "id": "Q328"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ],
+    "geographicCentre": [],
+    "sha256": "f3c03ee540415edf16e4dd6e4fc935d7f9f03a769c502f56c73a4d84362a86be"
+  },
+  {
+    "qid": "Q14874451",
+    "title": "Labrador Nature Reserve",
+    "label": "Labrador Nature Reserve",
+    "revision": 2543115303,
+    "coordinates": [
+      {
+        "value": {
+          "latitude": 1.26722,
+          "longitude": 103.802,
+          "altitude": null,
+          "precision": 1e-05,
+          "globe": "http://www.wikidata.org/entity/Q2"
+        },
+        "rank": "normal",
+        "qualifiers": {},
+        "references": [
+          {
+            "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+            "snaks": {
+              "P143": [
+                {
+                  "snaktype": "value",
+                  "property": "P143",
+                  "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 328,
+                      "id": "Q328"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "snaks-order": [
+              "P143"
+            ]
+          }
+        ]
+      }
+    ],
+    "geographicCentre": [],
+    "sha256": "f629cb898c1053385f3c89325d7060fd8f0046ac8401d03296c08aef76a4a1ef"
+  }
+]

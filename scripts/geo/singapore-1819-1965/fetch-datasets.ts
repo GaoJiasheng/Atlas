@@ -1,0 +1,9 @@
+/** Official Natural Earth vector inputs and CP-only town references.
+ * Keep the receipt's SHA-256 stable: a changed upstream file is not silently used.
+ */
+import{createHash}from'node:crypto';import{existsSync,readFileSync,writeFileSync,mkdirSync}from'node:fs';import{resolve}from'node:path';import{writeJson}from'../lib/common';
+const dir=resolve(import.meta.dirname);mkdirSync(`${dir}/raw`,{recursive:true});
+const inputs=[{id:'G21',file:'ne_10m_admin_1_states_provinces.geojson',sha256:'22d0e3ad85eb3e27f17cabf8ba2d50e554fbc27a87796ff891d958185da62fb5'},{id:'G22',file:'ne_10m_admin_0_countries.geojson',sha256:'239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255'},{id:'NE-town-controls',file:'ne_10m_populated_places.geojson',sha256:'9b8e3de09048ef00dfc70357dbb9fa324493f214b5e0ae4daf1aa79a8d10116b'}];
+const receipts=[];for(const i of inputs){const url=`https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/${i.file}`;let bytes:Buffer;if(existsSync(`${dir}/raw/${i.file}`))bytes=readFileSync(`${dir}/raw/${i.file}`);else{const r=await fetch(url);if(!r.ok)throw Error(`${i.id}: HTTP ${r.status}`);bytes=Buffer.from(await r.arrayBuffer());}
+const sha=createHash('sha256').update(bytes).digest('hex');if(sha!==i.sha256)throw Error(`${i.id}: upstream SHA changed; obtain the recorded snapshot rather than silently changing inputs`);writeFileSync(`${dir}/raw/${i.file}`,bytes);receipts.push({...i,url,bytes:bytes.length,author:'Natural Earth',license:'Public domain',licensePage:'https://www.naturalearthdata.com/about/terms-of-use/',role:i.id==='NE-town-controls'?'CP coordinates only; no town geometry in published files':'Modern vector administrative boundaries',checked:new Date().toISOString()});console.log(`${i.id}: SHA-256 verified`);}
+writeJson(`${dir}/raw/fetch-log-datasets.json`,receipts,true);

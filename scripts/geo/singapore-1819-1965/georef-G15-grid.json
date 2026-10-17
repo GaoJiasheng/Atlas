@@ -1,0 +1,141 @@
+{
+  "dataset": "g15",
+  "projection": "auto",
+  "maxResidualKm": 0.06,
+  "controlPoints": [
+    {
+      "name": "Printed graticule 103°38'E 1°26'N (internal registration only)",
+      "svg": [
+        2673,
+        2130
+      ],
+      "lnglat": [
+        103.63333333333334,
+        1.4333333333333333
+      ]
+    },
+    {
+      "name": "Printed graticule 103°40'E 1°26'N (internal registration only)",
+      "svg": [
+        5023,
+        2145
+      ],
+      "lnglat": [
+        103.66666666666667,
+        1.4333333333333333
+      ]
+    },
+    {
+      "name": "Printed graticule 103°42'E 1°26'N (internal registration only)",
+      "svg": [
+        7371,
+        2160
+      ],
+      "lnglat": [
+        103.7,
+        1.4333333333333333
+      ]
+    },
+    {
+      "name": "Printed graticule 103°38'E 1°24'N (internal registration only)",
+      "svg": [
+        2658,
+        4439
+      ],
+      "lnglat": [
+        103.63333333333334,
+        1.4
+      ]
+    },
+    {
+      "name": "Printed graticule 103°40'E 1°24'N (internal registration only)",
+      "svg": [
+        5007,
+        4456
+      ],
+      "lnglat": [
+        103.66666666666667,
+        1.4
+      ]
+    },
+    {
+      "name": "Printed graticule 103°42'E 1°24'N (internal registration only)",
+      "svg": [
+        7355,
+        4473
+      ],
+      "lnglat": [
+        103.7,
+        1.4
+      ]
+    },
+    {
+      "name": "Printed graticule 103°38'E 1°22'N (internal registration only)",
+      "svg": [
+        2642,
+        6757
+      ],
+      "lnglat": [
+        103.63333333333334,
+        1.3666666666666667
+      ]
+    },
+    {
+      "name": "Printed graticule 103°40'E 1°22'N (internal registration only)",
+      "svg": [
+        4991,
+        6774
+      ],
+      "lnglat": [
+        103.66666666666667,
+        1.3666666666666667
+      ]
+    },
+    {
+      "name": "Printed graticule 103°42'E 1°22'N (internal registration only)",
+      "svg": [
+        7338,
+        6792
+      ],
+      "lnglat": [
+        103.7,
+        1.3666666666666667
+      ]
+    },
+    {
+      "name": "Printed graticule 103°38'E 1°20'N (internal registration only)",
+      "svg": [
+        2627,
+        9067
+      ],
+      "lnglat": [
+        103.63333333333334,
+        1.3333333333333333
+      ]
+    },
+    {
+      "name": "Printed graticule 103°40'E 1°20'N (internal registration only)",
+      "svg": [
+        4975,
+        9086
+      ],
+      "lnglat": [
+        103.66666666666667,
+        1.3333333333333333
+      ]
+    },
+    {
+      "name": "Printed graticule 103°42'E 1°20'N (internal registration only)",
+      "svg": [
+        7322,
+        9104
+      ],
+      "lnglat": [
+        103.7,
+        1.3333333333333333
+      ]
+    }
+  ],
+  "status": "internal-printed-graticule-registration-not-external-accuracy",
+  "coordinateSource": "G15 printed meridians/parallels, native raster. Not a modern surviving-feature CP set. Survey south of Tg Karang 1960–61; corrected scan contains later port installations excluded from this natural-shore trace."
+}

@@ -1,0 +1,466 @@
+{
+  "dataset": "g11",
+  "projection": "auto",
+  "maxResidualKm": 0.06,
+  "status": "second-pass-18-surviving-road-and-rocky-cape-controls-budget-pending",
+  "coordinateSource": "OSM namedcape/peak nodes raw/control-island-osm.json, CP only; pixels read on original G11 map; twelve town junctions from existing OSM shared-node coordinates, raw/control-roads-osm.json, independently pixel-reread",
+  "knownGaps": [
+    "Modern named-cape/peak tags do not independently establish exact historical point continuity. Fort Canning and Pearls Hill summit identifications require review. Printed revision1937, British War Office1941, AMS reproduction1944.",
+    "Second pass drops seven summit/name-place controls: the sheet does not establish that the chosen dot is the surviving geodetic station. Twelve surviving town junctions individually reread in native raster added; nine capes retained as approximate shape/continuity checks, not surveyed monuments. The new town group is spatially concentrated, so whole-island acceptance is not assumed.",
+    "Excluded Buloh, Gedong and Irau soft mangrove cape controls because their present named nodes do not establish unchanged historical shoreline positions. Corrected the erroneous G9 Rimau pixel (in open water) and independently reread G11 Rimau/Berlayer rocky tips. Retained six rocky cape controls and twelve built town junctions; western-island surveyed-station controls still missing."
+  ],
+  "controlPoints": [
+    {
+      "name": "Tanjong Changi",
+      "lnglat": [
+        103.9865343,
+        1.3928616
+      ],
+      "node": 10308106625,
+      "svg": [
+        7247,
+        2718
+      ]
+    },
+    {
+      "name": "Tanjong Batu Kekek",
+      "lnglat": [
+        103.955389,
+        1.4189142
+      ],
+      "node": 10312600921,
+      "svg": [
+        6683,
+        2236
+      ]
+    },
+    {
+      "name": "Tanjong Tajam",
+      "lnglat": [
+        103.9269082,
+        1.423175
+      ],
+      "node": 10312600922,
+      "svg": [
+        6158,
+        2167
+      ]
+    },
+    {
+      "name": "Tanjong Chek Jawa",
+      "lnglat": [
+        103.9921622,
+        1.4081417
+      ],
+      "node": 10312600919,
+      "svg": [
+        7367,
+        2448
+      ]
+    },
+    {
+      "name": "Tanjong Berlayer",
+      "lnglat": [
+        103.8051074,
+        1.2622889
+      ],
+      "node": 10307757281,
+      "svg": [
+        3873,
+        5143
+      ]
+    },
+    {
+      "name": "Tanjong Rimau",
+      "lnglat": [
+        103.8066725,
+        1.2597496
+      ],
+      "node": 4568824207,
+      "svg": [
+        3899,
+        5189
+      ],
+      "source": "Second-pass native-raster review: northwestern rocky headland shoreline tip. First-pass G9 point lay in water south of the actual headland; corrected to the printed tip. Current OSM cape node is coordinate control only."
+    },
+    {
+      "name": "Bridge Street river crossing / later Elgin Bridge centre",
+      "svg": [
+        4700,
+        4629
+      ],
+      "lnglat": [
+        103.8493033,
+        1.2890664
+      ],
+      "source": "Modern shared road centreline node in raw/control-roads-osm.json (CP only); independently reread native-raster printed street topology, second pass. Historic street width/generalisation makes exact centreline matching approximate."
+    },
+    {
+      "name": "North Bridge Road / High Street",
+      "svg": [
+        4723,
+        4596
+      ],
+      "lnglat": [
+        103.850015,
+        1.2901963
+      ],
+      "source": "Modern shared road centreline node in raw/control-roads-osm.json (CP only); independently reread native-raster printed street topology, second pass. Historic street width/generalisation makes exact centreline matching approximate."
+    },
+    {
+      "name": "North Bridge Road / Coleman Street",
+      "svg": [
+        4739,
+        4573
+      ],
+      "lnglat": [
+        103.8509674,
+        1.2917649
+      ],
+      "source": "Modern shared road centreline node in raw/control-roads-osm.json (CP only); independently reread native-raster printed street topology, second pass. Historic street width/generalisation makes exact centreline matching approximate."
+    },
+    {
+      "name": "North Bridge Road / Stamford Road canal",
+      "svg": [
+        4760,
+        4543
+      ],
+      "lnglat": [
+        103.8520429,
+        1.2935887
+      ],
+      "source": "Modern shared road centreline node in raw/control-roads-osm.json (CP only); independently reread native-raster printed street topology, second pass. Historic street width/generalisation makes exact centreline matching approximate."
+    },
+    {
+      "name": "North Bridge Road / Bras Basah Road",
+      "svg": [
+        4778,
+        4514
+      ],
+      "lnglat": [
+        103.8531036,
+        1.2951261
+      ],
+      "source": "Modern shared road centreline node in raw/control-roads-osm.json (CP only); independently reread native-raster printed street topology, second pass. Historic street width/generalisation makes exact centreline matching approximate."
+    },
+    {
+      "name": "Beach Road / Bras Basah Road",
+      "svg": [
+        4814,
+        4544
+      ],
+      "lnglat": [
+        103.8546543,
+        1.2939345
+      ],
+      "source": "Modern shared road centreline node in raw/control-roads-osm.json (CP only); independently reread native-raster printed street topology, second pass. Historic street width/generalisation makes exact centreline matching approximate."
+    },
+    {
+      "name": "North Bridge Road / Middle Road",
+      "svg": [
+        4811,
+        4470
+      ],
+      "lnglat": [
+        103.8549985,
+        1.2976349
+      ],
+      "source": "Modern shared road centreline node in raw/control-roads-osm.json (CP only); independently reread native-raster printed street topology, second pass. Historic street width/generalisation makes exact centreline matching approximate."
+    },
+    {
+      "name": "Beach Road / Middle Road",
+      "svg": [
+        4837,
+        4501
+      ],
+      "lnglat": [
+        103.8562528,
+        1.2965189
+      ],
+      "source": "Modern shared road centreline node in raw/control-roads-osm.json (CP only); independently reread native-raster printed street topology, second pass. Historic street width/generalisation makes exact centreline matching approximate."
+    },
+    {
+      "name": "North Bridge Road / Arab Street",
+      "svg": [
+        4877,
+        4390
+      ],
+      "lnglat": [
+        103.8585234,
+        1.301971
+      ],
+      "source": "Modern shared road centreline node in raw/control-roads-osm.json (CP only); independently reread native-raster printed street topology, second pass. Historic street width/generalisation makes exact centreline matching approximate."
+    },
+    {
+      "name": "Beach Road / Arab Street",
+      "svg": [
+        4908,
+        4414
+      ],
+      "lnglat": [
+        103.8599148,
+        1.3002979
+      ],
+      "source": "Modern shared road centreline node in raw/control-roads-osm.json (CP only); independently reread native-raster printed street topology, second pass. Historic street width/generalisation makes exact centreline matching approximate."
+    },
+    {
+      "name": "South Bridge Road / Upper Pickering Street",
+      "svg": [
+        4664,
+        4698
+      ],
+      "lnglat": [
+        103.8471684,
+        1.2854539
+      ],
+      "source": "Modern shared road centreline node in raw/control-roads-osm.json (CP only); independently reread native-raster printed street topology, second pass. Historic street width/generalisation makes exact centreline matching approximate."
+    },
+    {
+      "name": "South Bridge Road / Cross Street",
+      "svg": [
+        4646,
+        4730
+      ],
+      "lnglat": [
+        103.8461028,
+        1.2836322
+      ],
+      "source": "Modern shared road centreline node in raw/control-roads-osm.json (CP only); independently reread native-raster printed street topology, second pass. Historic street width/generalisation makes exact centreline matching approximate."
+    }
+  ],
+  "priorControlPoints": [
+    {
+      "name": "Tanjong Buloh",
+      "lnglat": [
+        103.730281,
+        1.4490131
+      ],
+      "node": 10307757282,
+      "svg": [
+        2453,
+        1636
+      ]
+    },
+    {
+      "name": "Tanjong Gedong",
+      "lnglat": [
+        103.6756751,
+        1.4253172
+      ],
+      "node": 10307757283,
+      "svg": [
+        1444,
+        2100
+      ]
+    },
+    {
+      "name": "Tanjong Irau",
+      "lnglat": [
+        103.8499021,
+        1.4512352
+      ],
+      "node": 10312600924,
+      "svg": [
+        4759,
+        1642
+      ]
+    },
+    {
+      "name": "Tanjong Changi",
+      "lnglat": [
+        103.9865343,
+        1.3928616
+      ],
+      "node": 10308106625,
+      "svg": [
+        7247,
+        2718
+      ]
+    },
+    {
+      "name": "Tanjong Batu Kekek",
+      "lnglat": [
+        103.955389,
+        1.4189142
+      ],
+      "node": 10312600921,
+      "svg": [
+        6683,
+        2236
+      ]
+    },
+    {
+      "name": "Tanjong Tajam",
+      "lnglat": [
+        103.9269082,
+        1.423175
+      ],
+      "node": 10312600922,
+      "svg": [
+        6158,
+        2167
+      ]
+    },
+    {
+      "name": "Tanjong Chek Jawa",
+      "lnglat": [
+        103.9921622,
+        1.4081417
+      ],
+      "node": 10312600919,
+      "svg": [
+        7367,
+        2448
+      ]
+    },
+    {
+      "name": "Tanjong Berlayer",
+      "lnglat": [
+        103.8051074,
+        1.2622889
+      ],
+      "node": 10307757281,
+      "svg": [
+        3880,
+        5135
+      ]
+    },
+    {
+      "name": "Tanjong Rimau",
+      "lnglat": [
+        103.8066725,
+        1.2597496
+      ],
+      "node": 4568824207,
+      "svg": [
+        3903,
+        5207
+      ]
+    },
+    {
+      "name": "Bukit Timah Hill",
+      "lnglat": [
+        103.7763724,
+        1.3546901
+      ],
+      "node": 394490687,
+      "svg": [
+        3340,
+        3458
+      ]
+    },
+    {
+      "name": "Mount Faber",
+      "lnglat": [
+        103.817645,
+        1.2735672
+      ],
+      "node": 5161037014,
+      "svg": [
+        4090,
+        4974
+      ]
+    },
+    {
+      "name": "Fort Canning Hill",
+      "lnglat": [
+        103.8465965,
+        1.293576
+      ],
+      "node": 9794258968,
+      "svg": [
+        4646,
+        4550
+      ]
+    },
+    {
+      "name": "Pearl's Hill",
+      "lnglat": [
+        103.8399396,
+        1.2845482
+      ],
+      "node": 9794258969,
+      "svg": [
+        4522,
+        4701
+      ]
+    },
+    {
+      "name": "Bukit Gombak",
+      "lnglat": [
+        103.7577303,
+        1.3653968
+      ],
+      "node": 14208288862,
+      "svg": [
+        2980,
+        3241
+      ]
+    },
+    {
+      "name": "Bukit Batok",
+      "lnglat": [
+        103.7653798,
+        1.3517702
+      ],
+      "node": 14208295437,
+      "svg": [
+        3117,
+        3485
+      ]
+    },
+    {
+      "name": "Mount Serapong",
+      "lnglat": [
+        103.8332569,
+        1.2498869
+      ],
+      "node": 10572242704,
+      "svg": [
+        4407,
+        5398
+      ]
+    }
+  ],
+  "excludedControlPoints": [
+    {
+      "name": "Tanjong Buloh",
+      "lnglat": [
+        103.730281,
+        1.4490131
+      ],
+      "node": 10307757282,
+      "svg": [
+        2453,
+        1636
+      ],
+      "reason": "Soft mangrove shoreline cape has no fixed surviving monument; the present cape-name node does not independently establish which historical shore position is unchanged. Excluded for ambiguity, not residual."
+    },
+    {
+      "name": "Tanjong Gedong",
+      "lnglat": [
+        103.6756751,
+        1.4253172
+      ],
+      "node": 10307757283,
+      "svg": [
+        1444,
+        2100
+      ],
+      "reason": "Soft mangrove shoreline cape has no fixed surviving monument; the present cape-name node does not independently establish which historical shore position is unchanged. Excluded for ambiguity, not residual."
+    },
+    {
+      "name": "Tanjong Irau",
+      "lnglat": [
+        103.8499021,
+        1.4512352
+      ],
+      "node": 10312600924,
+      "svg": [
+        4759,
+        1642
+      ],
+      "reason": "Soft mangrove shoreline cape has no fixed surviving monument; the present cape-name node does not independently establish which historical shore position is unchanged. Excluded for ambiguity, not residual."
+    }
+  ]
+}

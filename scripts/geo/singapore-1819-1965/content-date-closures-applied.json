@@ -1,0 +1,244 @@
+{
+  "checked": "2026-10-17",
+  "sources": {
+    "federation1948-order": "S229",
+    "federation1948-sungeiujong": "S230",
+    "umno-official": "S231",
+    "brunei-hansard20": "S232",
+    "brunei-hansard10": "S233",
+    "cabinet1959-nas-oath": "S234",
+    "cabinet1959-nas-photo": "S235",
+    "sultan-kampong-trail": "S236",
+    "penang-courts": "S237",
+    "penang-state": "S238",
+    "census-orders-sso": "S239",
+    "census1931-annual-reproduction": "S240",
+    "telok-teochew-nlb": "S3",
+    "miksic-nlb2026": "S241",
+    "indian-ordinance-nus1968": "S242",
+    "johor-lama-museums": "S243",
+    "penyengat-decree2018": "S244",
+    "malacca-navy": "S245",
+    "johor-lama-jmm": "S246",
+    "wikidata-licence": "S247",
+    "onemap-licence": "S248",
+    "anchor-Q2428845": "S249",
+    "anchor-Q2993428": "S250",
+    "anchor-Q1907146": "S251",
+    "anchor-Q2158122": "S252",
+    "anchor-Q2660779": "S253",
+    "anchor-Q168806": "S254",
+    "anchor-Q6721822": "S255",
+    "anchor-Q892615": "S256",
+    "anchor-Q3374975": "S257",
+    "hospital-trail-suss": "S258",
+    "hospital-onemap": "S259",
+    "hocklee-junction": "S260",
+    "hocklee-onemap": "S261",
+    "bma-proclamation-icj": "S262"
+  },
+  "events": [
+    {
+      "id": "federation-1948",
+      "status": "confirmed-primary",
+      "closed": true,
+      "date": "1948-02-01",
+      "meaning": "Order and State/Federation Agreements came into operation; agreement signing on 21 January is distinct.",
+      "remaining": "",
+      "sourceIds": [
+        "S229",
+        "S230"
+      ]
+    },
+    {
+      "id": "umno-founded",
+      "status": "confirmed-institutional",
+      "closed": true,
+      "date": "1946-05-11",
+      "meaning": "Formal founding through adoption of constitution at the congress/general assembly, Istana Besar Johor Bahru.",
+      "remaining": "",
+      "sourceIds": [
+        "S231"
+      ]
+    },
+    {
+      "id": "brunei-revolt",
+      "status": "confirmed-primary",
+      "closed": true,
+      "date": "1962-12-08",
+      "meaning": "Outbreak at 2 a.m., per contemporary British ministerial statement.",
+      "remaining": "TNKU versus Sultan’s police and British reinforcements is supported as the British government account. Azahari’s own proclamation has not been directly read; do not present disputed motives as settled facts.",
+      "sourceIds": [
+        "S232",
+        "S233"
+      ]
+    },
+    {
+      "id": "first-cabinet-1959",
+      "status": "confirmed-archival-and-institutional",
+      "closed": true,
+      "date": "1959-06-05",
+      "meaning": "Swearing-in ceremony at City Hall.",
+      "remaining": "The original appointment instrument and oath text remain unread; names and portfolios use the separate ISEAS finding aid.",
+      "sourceIds": [
+        "S234",
+        "S235"
+      ]
+    },
+    {
+      "id": "site-sultan-mosque",
+      "status": "confirmed-institutional-scan",
+      "closed": true,
+      "date": "1824",
+      "meaning": "Construction interval for the original mosque; no exact day claimed.",
+      "remaining": "The current building is a later replacement; do not date its fabric to 1824.",
+      "sourceIds": [
+        "S236"
+      ]
+    },
+    {
+      "id": "site-penang",
+      "status": "confirmed-institutional",
+      "closed": true,
+      "date": "1786-08-11",
+      "meaning": "British/EIC taking of Prince of Wales Island, not first settlement.",
+      "remaining": "Original journal/instrument not read. Existing Malay settlements predated EIC possession.",
+      "sourceIds": [
+        "S237",
+        "S238"
+      ]
+    },
+    {
+      "id": "census-1931",
+      "status": "confirmed-primary-reproduced-text",
+      "closed": true,
+      "date": "1931-04",
+      "meaning": "Population reference night. Enumeration was taken on 2 April as at midnight the previous night.",
+      "remaining": "SSO direct page remains 403. The contemporary report passage was read as reproduced OCR, not a visually inspected scan. If the event means enumeration activity, label it 2 April; if the census reference date, use 1 April.",
+      "sourceIds": [
+        "S239",
+        "S240"
+      ]
+    },
+    {
+      "id": "site-kampong-glam-istana",
+      "status": "confirmed-institutional-scan",
+      "closed": true,
+      "date": "1819",
+      "meaning": "First timber palace with attap roofs completed in 1819.",
+      "remaining": "This is not the extant palace: the institutional account dates commissioning of the present building after Tunku Ali’s return in 1840.",
+      "sourceIds": [
+        "S236"
+      ]
+    },
+    {
+      "id": "site-telok-blangah",
+      "status": "confirmed-institutional",
+      "closed": true,
+      "date": "1823",
+      "meaning": "Relocation of the Temenggong’s Istana/settlement to Telok Blangah.",
+      "remaining": "Exact day and original relocation order remain unread.",
+      "sourceIds": [
+        "S3"
+      ]
+    },
+    {
+      "id": "site-fort-canning-temasek",
+      "status": "confirmed-institutional",
+      "closed": true,
+      "date": "1984",
+      "meaning": "Beginning of the first investigation, reported as 18–28 January 1984.",
+      "remaining": "The original 1985 field report remains unread; the year is secure at institutional level.",
+      "sourceIds": [
+        "S241"
+      ]
+    },
+    {
+      "id": "indian-immigration-ordinance",
+      "status": "partly-resolved-secondary",
+      "closed": false,
+      "date": "1876",
+      "meaning": "1876 Protection Ordinance, Singapore operation from 1883 and replacement in 1884 are different milestones.",
+      "remaining": "Original ordinances and G.N. 577 of 28 December 1883 still need inspection; do not assign an exact commencement date from this secondary article.",
+      "sourceIds": [
+        "S242"
+      ]
+    },
+    {
+      "id": "site-johor-lama",
+      "status": "confirmed-institutional",
+      "closed": true,
+      "date": "1540",
+      "meaning": "Sultan’s relocation to Tanjung Batu and construction of Kota Johor Lama, per Malaysia Museums.",
+      "remaining": "Exact day and contemporary instrument not read; precise point coordinate remains unverified.",
+      "sourceIds": [
+        "S243"
+      ]
+    },
+    {
+      "id": "site-riau-penyengat",
+      "status": "confirmed-institutional-scan",
+      "closed": true,
+      "date": "1803",
+      "meaning": "Marriage gift to Engku Puteri Raja Hamidah and development of the island as government centre, per the heritage decision.",
+      "remaining": "Earlier defensive use is recorded in 1782–1784; do not call 1803 the first settlement. Original marriage/development instrument not read.",
+      "sourceIds": [
+        "S244"
+      ]
+    },
+    {
+      "id": "site-lingga-daik",
+      "status": "confirmed-institutional-scan",
+      "closed": true,
+      "date": "1787",
+      "meaning": "Transfer of the royal government from Hulu Riau to Daik, per the heritage decision.",
+      "remaining": "This dates royal relocation, not first habitation. Exact day and contemporary instrument not read.",
+      "sourceIds": [
+        "S244"
+      ]
+    },
+    {
+      "id": "site-malacca",
+      "status": "confirmed-institutional",
+      "closed": true,
+      "date": "1511",
+      "meaning": "Portuguese capture of Malacca, per the Portuguese Navy museum account.",
+      "remaining": "This is not the foundation of the already established trading port. Original 1511 account/instrument and exact site coordinate not inspected.",
+      "sourceIds": [
+        "S245"
+      ]
+    },
+    {
+      "id": "site-johor-lama",
+      "closed": true,
+      "date": "1540",
+      "status": "confirmed-institutional",
+      "sourceIds": [
+        "S246"
+      ]
+    },
+    {
+      "id": "bma-1945",
+      "closed": false,
+      "date": "1945-09-12",
+      "confirmedRelatedDate": "1945-08-15",
+      "status": "confirmed-primary-with-milestone-distinction",
+      "meaning": "Signature of the proclamation establishing BMA in areas under Allied forces’ control.",
+      "remaining": "12 September is the surrender/return chapter anchor. Proclamation signature on 15 August and Gazette reproduction on 1 November are confirmed; the precise assumption-of-control milestone for Singapore remains unverified.",
+      "sourceIds": [
+        "S262"
+      ]
+    }
+  ],
+  "remaining": {
+    "site-longyamen": "1349 is a report chronology, not an established foundation date for the disputed modern site.",
+    "straits-settlements-1826": "Formation year is confirmed; exact administrative foundation day remains unverified. The 27November Charter is a distinct event.",
+    "site-chinatown": "1823 is a draft date for the plan marker, not a verified beginning of Chinese settlement.",
+    "site-kampong-glam": "1823 is a draft date for the plan marker, not a verified beginning of the settlement.",
+    "site-serangoon-road": "1823 is a draft orientation date; the street’s opening or settlement foundation was not independently verified.",
+    "indian-immigration-ordinance": "Original ordinances and G.N. 577 of 28 December 1883 still need inspection; do not assign an exact commencement date from this secondary article. 1876 Protection Ordinance, Singapore operation from 1883 and replacement in 1884 are different milestones.",
+    "bma-1945": "12 September is the surrender/return chapter anchor. Proclamation signature on 15 August and Gazette reproduction on 1 November are confirmed; the precise assumption-of-control milestone for Singapore remains unverified."
+  },
+  "closedDateWarnings": 14,
+  "remainingDateWarnings": 7
+}

@@ -1,0 +1,145 @@
+{
+  "dataset": "g4",
+  "projection": "auto",
+  "maxResidualKm": 0.12,
+  "coordinateSource": "OpenStreetMap highway shared-node extract, GET Overpass API, 2026-10-17, raw/control-roads-osm.json; CP only; no OSM geometry permitted in outputs",
+  "knownGaps": [
+    "Town junction identities inferred from printed named streets; rivers, road widening and planning history require review. Pixel points individually read from G4 at original 1536x1136 resolution."
+  ],
+  "controlPoints": [
+    {
+      "name": "Bridge Street river crossing / later Elgin Bridge centre",
+      "svg": [
+        365,
+        575
+      ],
+      "lnglat": [
+        103.8493033,
+        1.2890664
+      ]
+    },
+    {
+      "name": "North Bridge Road / High Street",
+      "svg": [
+        402,
+        571
+      ],
+      "lnglat": [
+        103.850015,
+        1.2901963
+      ]
+    },
+    {
+      "name": "North Bridge Road / Coleman Street",
+      "svg": [
+        471,
+        572
+      ],
+      "lnglat": [
+        103.8509674,
+        1.2917649
+      ]
+    },
+    {
+      "name": "North Bridge Road / Stamford Road canal",
+      "svg": [
+        532,
+        572
+      ],
+      "lnglat": [
+        103.8520429,
+        1.2935887
+      ]
+    },
+    {
+      "name": "North Bridge Road / Bras Basah Road",
+      "svg": [
+        590,
+        573
+      ],
+      "lnglat": [
+        103.8531036,
+        1.2951261
+      ]
+    },
+    {
+      "name": "Beach Road / Bras Basah Road",
+      "svg": [
+        591,
+        634
+      ],
+      "lnglat": [
+        103.8546543,
+        1.2939345
+      ]
+    },
+    {
+      "name": "North Bridge Road / Middle Road",
+      "svg": [
+        675,
+        575
+      ],
+      "lnglat": [
+        103.8549985,
+        1.2976349
+      ]
+    },
+    {
+      "name": "Beach Road / Middle Road",
+      "svg": [
+        673,
+        638
+      ],
+      "lnglat": [
+        103.8562528,
+        1.2965189
+      ]
+    },
+    {
+      "name": "North Bridge Road / Arab Street",
+      "svg": [
+        834,
+        583
+      ],
+      "lnglat": [
+        103.8585234,
+        1.301971
+      ]
+    },
+    {
+      "name": "Beach Road / Arab Street",
+      "svg": [
+        816,
+        645
+      ],
+      "lnglat": [
+        103.8599148,
+        1.3002979
+      ]
+    },
+    {
+      "name": "South Bridge Road / Upper Pickering Street",
+      "svg": [
+        276,
+        580
+      ],
+      "lnglat": [
+        103.8471684,
+        1.2854539
+      ],
+      "review": "Re-read the Macao/Upper Pickering junction in the full-size Coleman sheet; initial x303 was a different short street."
+    },
+    {
+      "name": "South Bridge Road / Cross Street",
+      "svg": [
+        226,
+        582
+      ],
+      "lnglat": [
+        103.8461028,
+        1.2836322
+      ],
+      "review": "Re-read printed Cross Street label and its intersection; initial x241 was not its centreline."
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+[
+  {
+    "key": "un1957-ods",
+    "url": "https://documents.un.org/doc/undoc/gen/n62/028/87/pdf/n6202887.pdf",
+    "status": 200,
+    "bytes": 83914,
+    "contentType": "application/pdf",
+    "saved": true
+  },
+  {
+    "key": "un1957-api",
+    "url": "https://documents.un.org/api/symbol/access?s=A/5079&l=en&t=pdf",
+    "status": 200,
+    "bytes": 6503998,
+    "contentType": "application/pdf",
+    "saved": true
+  },
+  {
+    "key": "un1957-dl",
+    "url": "https://digitallibrary.un.org/record/843978/files/A_5079-EN.pdf?download=1",
+    "status": 202,
+    "bytes": 0,
+    "contentType": "text/html; charset=UTF-8"
+  },
+  {
+    "key": "un1931-dl",
+    "url": "https://digitallibrary.un.org/record/839451/files/A_2134_Add.8-EN.pdf",
+    "status": 202,
+    "bytes": 0,
+    "contentType": "text/html; charset=UTF-8"
+  },
+  {
+    "key": "un1931-fr",
+    "url": "https://digitallibrary.un.org/record/839451/files/A_2134_Add.8-FR.pdf",
+    "status": 202,
+    "bytes": 0,
+    "contentType": "text/html; charset=UTF-8"
+  },
+  {
+    "key": "separation-hansard",
+    "url": "https://www.parlimen.gov.my/files/hindex/pdf/DR-09081965.pdf",
+    "status": 200,
+    "bytes": 2216985,
+    "contentType": "application/octet-stream",
+    "saved": true
+  }
+]

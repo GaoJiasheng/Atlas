@@ -1,0 +1,1018 @@
+{
+  "checked": "2026-10-18",
+  "method": "Wikipedia HTML used only to discover main Wikidata identity; each canonical entity and its exact P625 statement read from Special:EntityData JSON without search APIs or retrying rate limits. Coordinates are exact copies of the selected structured statement, in longitude/latitude order. Current localities serve as documented place-centre references where only district/city-scale location is established; they do not establish exact historical footprints. Existing event approximate flags must remain.",
+  "licence": "Wikidata structured data CC0. Supplementary text is cited/paraphrased only. No source images or other geometry reproduced.",
+  "count": 21,
+  "places": [
+    {
+      "id": "johor-lama",
+      "events": [
+        "site-johor-lama"
+      ],
+      "place": "Johor Lama",
+      "description": "mukim in Johor, Malaysia",
+      "at": [
+        104.022,
+        1.574
+      ],
+      "approximate": true,
+      "role": "Documented representative point of Johor Lama mukim, used as the regional place centre. This is not a survey of the 1540 fort or former palace footprint.",
+      "qid": "Q3524136",
+      "property": "P625",
+      "statement": "Q3524136$EB00DA3D-B143-4222-9B54-F42E797AD61A",
+      "rank": "normal",
+      "precisionDegrees": 0.0089865436208546,
+      "globe": "http://www.wikidata.org/entity/Q2",
+      "revision": 2105194588,
+      "modified": "2024-03-18T20:38:44Z",
+      "url": "https://www.wikidata.org/wiki/Q3524136",
+      "revisionUrl": "https://www.wikidata.org/w/index.php?title=Q3524136&oldid=2105194588",
+      "entityDataUrl": "https://www.wikidata.org/wiki/Special:EntityData/Q3524136.json",
+      "receipt": "raw/anchor-regional/Q3524136.json",
+      "sha256": "2d8679ef9acd7211e29baa0c45b5cf2ebadebe50a88cbde13059a42e37d70806",
+      "read": "Read the full cached entity JSON; verified English identity/description and all P625 statements; selected preferred rank if present, otherwise current non-deprecated normal rank. References are reproduced below as a statement audit, not independently read sources.",
+      "coordinateClaimReferences": [
+        {
+          "property": "P143",
+          "value": {
+            "entity-type": "item",
+            "numeric-id": 328,
+            "id": "Q328"
+          }
+        }
+      ],
+      "otherCoordinateStatements": [],
+      "supplementaryEvidence": [],
+      "sourceNote": "Approximate map anchor: Documented representative point of Johor Lama mukim, used as the regional place centre. This is not a survey of the 1540 fort or former palace footprint. Coordinate source: Wikidata Q3524136, P625 statement Q3524136$EB00DA3D-B143-4222-9B54-F42E797AD61A, revision 2105194588; [longitude, latitude] [104.022, 1.574]. Wikidata structured data is CC0. The historical footprint remains approximate."
+    },
+    {
+      "id": "daik",
+      "events": [
+        "site-lingga-daik",
+        "mahmud-iii-dies"
+      ],
+      "place": "Daik",
+      "description": "subdistrict in Lingga Regency, Riau Islands, Indonesia",
+      "at": [
+        104.614992,
+        -0.212927
+      ],
+      "approximate": true,
+      "role": "Documented representative point of Daik, used as the town/subdistrict centre. It does not identify the former royal compound or the location of a ruler’s death.",
+      "qid": "Q2407251",
+      "property": "P625",
+      "statement": "Q2407251$D7685937-A4F4-4E5B-92B1-BE007A69C142",
+      "rank": "normal",
+      "precisionDegrees": 1e-06,
+      "globe": "http://www.wikidata.org/entity/Q2",
+      "revision": 2549887036,
+      "modified": "2026-09-27T05:03:55Z",
+      "url": "https://www.wikidata.org/wiki/Q2407251",
+      "revisionUrl": "https://www.wikidata.org/w/index.php?title=Q2407251&oldid=2549887036",
+      "entityDataUrl": "https://www.wikidata.org/wiki/Special:EntityData/Q2407251.json",
+      "receipt": "raw/anchor-regional/Q2407251.json",
+      "sha256": "548f2375f12a19a465898a529541d94cd87dcf42d9d9985cf69e1dd38a20c759",
+      "read": "Read the full cached entity JSON; verified English identity/description and all P625 statements; selected preferred rank if present, otherwise current non-deprecated normal rank. References are reproduced below as a statement audit, not independently read sources.",
+      "coordinateClaimReferences": [
+        {
+          "property": "P143",
+          "value": {
+            "entity-type": "item",
+            "numeric-id": 8447,
+            "id": "Q8447"
+          }
+        }
+      ],
+      "otherCoordinateStatements": [],
+      "supplementaryEvidence": [],
+      "sourceNote": "Approximate map anchor: Documented representative point of Daik, used as the town/subdistrict centre. It does not identify the former royal compound or the location of a ruler’s death. Coordinate source: Wikidata Q2407251, P625 statement Q2407251$D7685937-A4F4-4E5B-92B1-BE007A69C142, revision 2549887036; [longitude, latitude] [104.614992, -0.212927]. Wikidata structured data is CC0. The historical footprint remains approximate."
+    },
+    {
+      "id": "george-town",
+      "events": [
+        "site-penang"
+      ],
+      "place": "George Town",
+      "description": "capital city of the Malaysian state of Penang",
+      "at": [
+        100.3292,
+        5.4145
+      ],
+      "approximate": true,
+      "role": "Documented representative point of George Town, used as the port-city centre. It does not mark the exact 1786 landing or all of Penang island. The preferred-rank P625 is selected; a second normal-rank GNS point is retained in the receipt.",
+      "qid": "Q61092",
+      "property": "P625",
+      "statement": "q61092$EE97E77F-5DE3-4C8A-ADCA-D6540C624EFA",
+      "rank": "preferred",
+      "precisionDegrees": 2.7777777777778e-06,
+      "globe": "http://www.wikidata.org/entity/Q2",
+      "revision": 2539929591,
+      "modified": "2026-09-04T04:55:39Z",
+      "url": "https://www.wikidata.org/wiki/Q61092",
+      "revisionUrl": "https://www.wikidata.org/w/index.php?title=Q61092&oldid=2539929591",
+      "entityDataUrl": "https://www.wikidata.org/wiki/Special:EntityData/Q61092.json",
+      "receipt": "raw/anchor-regional/Q61092.json",
+      "sha256": "ed2ac180d5645b7506fa3855d423f7dab53019ef31e01a23788fc76bd31a5b1d",
+      "read": "Read the full cached entity JSON; verified English identity/description and all P625 statements; selected preferred rank if present, otherwise current non-deprecated normal rank. References are reproduced below as a statement audit, not independently read sources.",
+      "coordinateClaimReferences": [
+        {
+          "property": "P143",
+          "value": {
+            "entity-type": "item",
+            "numeric-id": 328,
+            "id": "Q328"
+          }
+        }
+      ],
+      "otherCoordinateStatements": [
+        {
+          "id": "Q61092$02198CA2-3361-4C95-B49D-52D605E63A36",
+          "rank": "normal",
+          "value": {
+            "latitude": 5.4111111111111,
+            "longitude": 100.33555555556,
+            "altitude": null,
+            "precision": 0.00027777777777778,
+            "globe": "http://www.wikidata.org/entity/Q2"
+          },
+          "references": [
+            {
+              "hash": "10e7aaccf3056e6873239764361a11852670328c",
+              "snaks": {
+                "P248": [
+                  {
+                    "snaktype": "value",
+                    "property": "P248",
+                    "hash": "7648f66055f57f6227dd1f872bc4ed26c70da7c6",
+                    "datavalue": {
+                      "value": {
+                        "entity-type": "item",
+                        "numeric-id": 1194038,
+                        "id": "Q1194038"
+                      },
+                      "type": "wikibase-entityid"
+                    },
+                    "datatype": "wikibase-item"
+                  }
+                ],
+                "P577": [
+                  {
+                    "snaktype": "value",
+                    "property": "P577",
+                    "hash": "a372c95b03a3464736c5fd1d7ed86176f0c04973",
+                    "datavalue": {
+                      "value": {
+                        "time": "+2018-06-11T00:00:00Z",
+                        "timezone": 0,
+                        "before": 0,
+                        "after": 0,
+                        "precision": 11,
+                        "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                      },
+                      "type": "time"
+                    },
+                    "datatype": "time"
+                  }
+                ],
+                "P2326": [
+                  {
+                    "snaktype": "value",
+                    "property": "P2326",
+                    "hash": "95c7872dc55d8870cd9e592ebfcaea95f9a51a96",
+                    "datavalue": {
+                      "value": "-2403065",
+                      "type": "string"
+                    },
+                    "datatype": "external-id"
+                  }
+                ]
+              },
+              "snaks-order": [
+                "P248",
+                "P577",
+                "P2326"
+              ]
+            }
+          ],
+          "qualifiers": {}
+        }
+      ],
+      "supplementaryEvidence": [],
+      "sourceNote": "Approximate map anchor: Documented representative point of George Town, used as the port-city centre. It does not mark the exact 1786 landing or all of Penang island. The preferred-rank P625 is selected; a second normal-rank GNS point is retained in the receipt. Coordinate source: Wikidata Q61092, P625 statement q61092$EE97E77F-5DE3-4C8A-ADCA-D6540C624EFA, revision 2539929591; [longitude, latitude] [100.3292, 5.4145]. Wikidata structured data is CC0. The historical footprint remains approximate."
+    },
+    {
+      "id": "malacca",
+      "events": [
+        "site-malacca",
+        "malacca-handover"
+      ],
+      "place": "Malacca",
+      "description": "state capital of Malacca, Malaysia",
+      "at": [
+        102.25111111111,
+        2.1888888888889
+      ],
+      "approximate": true,
+      "role": "Documented representative point of Malacca City, used as its city centre. It does not mark a specific 1511 battle site or the precise 1825 handover ceremony.",
+      "qid": "Q61089",
+      "property": "P625",
+      "statement": "q61089$0BCC8A23-FDB0-4220-8F14-4E10BBD36990",
+      "rank": "normal",
+      "precisionDegrees": 0.00027777777777778,
+      "globe": "http://www.wikidata.org/entity/Q2",
+      "revision": 2532334777,
+      "modified": "2026-08-17T13:11:18Z",
+      "url": "https://www.wikidata.org/wiki/Q61089",
+      "revisionUrl": "https://www.wikidata.org/w/index.php?title=Q61089&oldid=2532334777",
+      "entityDataUrl": "https://www.wikidata.org/wiki/Special:EntityData/Q61089.json",
+      "receipt": "raw/anchor-regional/Q61089.json",
+      "sha256": "030ac7c279c6720250547c3ebada6ef8dd5938368d0e868fb0051bb992a27322",
+      "read": "Read the full cached entity JSON; verified English identity/description and all P625 statements; selected preferred rank if present, otherwise current non-deprecated normal rank. References are reproduced below as a statement audit, not independently read sources.",
+      "coordinateClaimReferences": [
+        {
+          "property": "P143",
+          "value": {
+            "entity-type": "item",
+            "numeric-id": 206855,
+            "id": "Q206855"
+          }
+        }
+      ],
+      "otherCoordinateStatements": [],
+      "supplementaryEvidence": [],
+      "sourceNote": "Approximate map anchor: Documented representative point of Malacca City, used as its city centre. It does not mark a specific 1511 battle site or the precise 1825 handover ceremony. Coordinate source: Wikidata Q61089, P625 statement q61089$0BCC8A23-FDB0-4220-8F14-4E10BBD36990, revision 2532334777; [longitude, latitude] [102.25111111111, 2.1888888888889]. Wikidata structured data is CC0. The historical footprint remains approximate."
+    },
+    {
+      "id": "naning",
+      "events": [
+        "naning-war"
+      ],
+      "place": "Naning",
+      "description": "district and former chiefdom in Malacca, Malaysia",
+      "at": [
+        102.169544,
+        2.45907
+      ],
+      "approximate": true,
+      "role": "Documented representative point of the Naning district/former chiefdom, used as the district centre for a conflict known only at district scale. P625 has no separate references on this item; the point is a Wikidata locality reference, not a surveyed centroid or a claimed battlefield.",
+      "qid": "Q3826240",
+      "property": "P625",
+      "statement": "Q3826240$4DF72C94-A44A-4DA2-982D-F20CC1D0049A",
+      "rank": "normal",
+      "precisionDegrees": 1e-06,
+      "globe": "http://www.wikidata.org/entity/Q2",
+      "revision": 2522079948,
+      "modified": "2026-07-24T12:06:55Z",
+      "url": "https://www.wikidata.org/wiki/Q3826240",
+      "revisionUrl": "https://www.wikidata.org/w/index.php?title=Q3826240&oldid=2522079948",
+      "entityDataUrl": "https://www.wikidata.org/wiki/Special:EntityData/Q3826240.json",
+      "receipt": "raw/anchor-regional/Q3826240.json",
+      "sha256": "846907c13f1bcf437da5609a60c1ef7a956b69923d3e2072c669ba802fe4ddb5",
+      "read": "Read the full cached entity JSON; verified English identity/description and all P625 statements; selected preferred rank if present, otherwise current non-deprecated normal rank. References are reproduced below as a statement audit, not independently read sources.",
+      "coordinateClaimReferences": [],
+      "otherCoordinateStatements": [],
+      "supplementaryEvidence": [],
+      "sourceNote": "Approximate map anchor: Documented representative point of the Naning district/former chiefdom, used as the district centre for a conflict known only at district scale. P625 has no separate references on this item; the point is a Wikidata locality reference, not a surveyed centroid or a claimed battlefield. Coordinate source: Wikidata Q3826240, P625 statement Q3826240$4DF72C94-A44A-4DA2-982D-F20CC1D0049A, revision 2522079948; [longitude, latitude] [102.169544, 2.45907]. Wikidata structured data is CC0. The historical footprint remains approximate."
+    },
+    {
+      "id": "victoria-hong-kong",
+      "events": [
+        "hong-kong-1841"
+      ],
+      "place": "Victoria",
+      "description": "historical city in Hong Kong",
+      "at": [
+        114.17444444444,
+        22.278333333333
+      ],
+      "approximate": true,
+      "role": "Documented representative point of Victoria, the historical city on Hong Kong Island. It is a historical-city centre reference, not the exact 1841 occupation/flag-raising site.",
+      "qid": "Q963152",
+      "property": "P625",
+      "statement": "q963152$3FE498D1-6DF3-40C9-83F1-3B5097B760EF",
+      "rank": "normal",
+      "precisionDegrees": null,
+      "globe": "http://www.wikidata.org/entity/Q2",
+      "revision": 2522977261,
+      "modified": "2026-07-26T16:17:24Z",
+      "url": "https://www.wikidata.org/wiki/Q963152",
+      "revisionUrl": "https://www.wikidata.org/w/index.php?title=Q963152&oldid=2522977261",
+      "entityDataUrl": "https://www.wikidata.org/wiki/Special:EntityData/Q963152.json",
+      "receipt": "raw/anchor-regional/Q963152.json",
+      "sha256": "5923f7331c41ce517c1e007521c347895c3e949ae16b0fe8364ebc508f00eb07",
+      "read": "Read the full cached entity JSON; verified English identity/description and all P625 statements; selected preferred rank if present, otherwise current non-deprecated normal rank. References are reproduced below as a statement audit, not independently read sources.",
+      "coordinateClaimReferences": [],
+      "otherCoordinateStatements": [],
+      "supplementaryEvidence": [],
+      "sourceNote": "Approximate map anchor: Documented representative point of Victoria, the historical city on Hong Kong Island. It is a historical-city centre reference, not the exact 1841 occupation/flag-raising site. Coordinate source: Wikidata Q963152, P625 statement q963152$3FE498D1-6DF3-40C9-83F1-3B5097B760EF, revision 2522977261; [longitude, latitude] [114.17444444444, 22.278333333333]. Wikidata structured data is CC0. The historical footprint remains approximate."
+    },
+    {
+      "id": "port-said",
+      "events": [
+        "suez-1869"
+      ],
+      "place": "Port Said",
+      "description": "city in northeastern Egypt",
+      "at": [
+        32.306111111111115,
+        31.2625
+      ],
+      "approximate": true,
+      "role": "Documented representative point of Port Said, used as the northern-port city centre for the canal opening. The published ceremony account places the inauguration at Port Said; this point does not locate the official stand or a ship’s track.",
+      "qid": "Q134509",
+      "property": "P625",
+      "statement": "q134509$F2B9AC1F-DA97-47CA-9530-EF5299E56F19",
+      "rank": "normal",
+      "precisionDegrees": 0.0002777777777777778,
+      "globe": "http://www.wikidata.org/entity/Q2",
+      "revision": 2532329452,
+      "modified": "2026-08-17T12:58:07Z",
+      "url": "https://www.wikidata.org/wiki/Q134509",
+      "revisionUrl": "https://www.wikidata.org/w/index.php?title=Q134509&oldid=2532329452",
+      "entityDataUrl": "https://www.wikidata.org/wiki/Special:EntityData/Q134509.json",
+      "receipt": "raw/anchor-regional/Q134509.json",
+      "sha256": "4bc7bbda7128be4814b77ed32c6f8ac6bd95a0d1d2061529920433f654c533ce",
+      "read": "Read the full cached entity JSON; verified English identity/description and all P625 statements; selected preferred rank if present, otherwise current non-deprecated normal rank. References are reproduced below as a statement audit, not independently read sources.",
+      "coordinateClaimReferences": [
+        {
+          "property": "P143",
+          "value": {
+            "entity-type": "item",
+            "numeric-id": 328,
+            "id": "Q328"
+          }
+        }
+      ],
+      "otherCoordinateStatements": [],
+      "supplementaryEvidence": [
+        {
+          "url": "https://www.napoleon.org/wp-content/themes/napoleon/annexes/hors-serie/suez/en/html-content/inauguration/ceremonie/ceremonie2.html",
+          "title": "Official Journal of the French Empire, 29 November 1869, no. 328 p. 1527, reproduced/translated by Fondation Napoléon",
+          "read": "Read the ceremony passage: Port Said was prepared for the canal blessing; official platforms were on the opposite bank from the quay. This confirms Port Said as the opening locality but provides no surveyed platform coordinate."
+        }
+      ],
+      "sourceNote": "Approximate map anchor: Documented representative point of Port Said, used as the northern-port city centre for the canal opening. The published ceremony account places the inauguration at Port Said; this point does not locate the official stand or a ship’s track. Coordinate source: Wikidata Q134509, P625 statement q134509$F2B9AC1F-DA97-47CA-9530-EF5299E56F19, revision 2532329452; [longitude, latitude] [32.306111111111115, 31.2625]. Wikidata structured data is CC0. The historical footprint remains approximate."
+    },
+    {
+      "id": "pangkor",
+      "events": [
+        "pangkor-1874"
+      ],
+      "place": "Pangkor Island",
+      "description": "island in Malaysia",
+      "at": [
+        100.555,
+        4.22
+      ],
+      "approximate": true,
+      "role": "Documented representative point of Pangkor Island, used as the island centre. The agreement was signed aboard ship in the Pangkor area; this point does not claim the ship’s exact anchorage.",
+      "qid": "Q1545708",
+      "property": "P625",
+      "statement": "q1545708$46389601-56A5-49AB-8D33-24296CED1CC9",
+      "rank": "normal",
+      "precisionDegrees": 1e-05,
+      "globe": "http://www.wikidata.org/entity/Q2",
+      "revision": 2549948307,
+      "modified": "2026-09-27T09:03:44Z",
+      "url": "https://www.wikidata.org/wiki/Q1545708",
+      "revisionUrl": "https://www.wikidata.org/w/index.php?title=Q1545708&oldid=2549948307",
+      "entityDataUrl": "https://www.wikidata.org/wiki/Special:EntityData/Q1545708.json",
+      "receipt": "raw/anchor-regional/Q1545708.json",
+      "sha256": "0b56babdc665c3101f46524fd566d51c7f4ab81e56c24047847799a055c181a9",
+      "read": "Read the full cached entity JSON; verified English identity/description and all P625 statements; selected preferred rank if present, otherwise current non-deprecated normal rank. References are reproduced below as a statement audit, not independently read sources.",
+      "coordinateClaimReferences": [
+        {
+          "property": "P143",
+          "value": {
+            "entity-type": "item",
+            "numeric-id": 10000,
+            "id": "Q10000"
+          }
+        }
+      ],
+      "otherCoordinateStatements": [],
+      "supplementaryEvidence": [],
+      "sourceNote": "Approximate map anchor: Documented representative point of Pangkor Island, used as the island centre. The agreement was signed aboard ship in the Pangkor area; this point does not claim the ship’s exact anchorage. Coordinate source: Wikidata Q1545708, P625 statement q1545708$46389601-56A5-49AB-8D33-24296CED1CC9, revision 2549948307; [longitude, latitude] [100.555, 4.22]. Wikidata structured data is CC0. The historical footprint remains approximate."
+    },
+    {
+      "id": "pasir-salak",
+      "events": [
+        "perak-war"
+      ],
+      "place": "Pasir Salak",
+      "description": "historical place in Perak, Malaysia",
+      "at": [
+        100.95,
+        4.16667
+      ],
+      "approximate": true,
+      "role": "Documented representative point of Pasir Salak, used as its locality centre for the Perak conflict. It does not mark Birch’s exact killing site or the extent of the wider war.",
+      "qid": "Q7142180",
+      "property": "P625",
+      "statement": "Q7142180$5f4b6cab-467d-0464-e7ea-9abdeebbaf75",
+      "rank": "normal",
+      "precisionDegrees": 1e-05,
+      "globe": "http://www.wikidata.org/entity/Q2",
+      "revision": 2550327811,
+      "modified": "2026-09-28T04:58:14Z",
+      "url": "https://www.wikidata.org/wiki/Q7142180",
+      "revisionUrl": "https://www.wikidata.org/w/index.php?title=Q7142180&oldid=2550327811",
+      "entityDataUrl": "https://www.wikidata.org/wiki/Special:EntityData/Q7142180.json",
+      "receipt": "raw/anchor-regional/Q7142180.json",
+      "sha256": "162139e7fa275b5f252f330f4f9100bd8367e8956af32fd1aaa361d44eb78c00",
+      "read": "Read the full cached entity JSON; verified English identity/description and all P625 statements; selected preferred rank if present, otherwise current non-deprecated normal rank. References are reproduced below as a statement audit, not independently read sources.",
+      "coordinateClaimReferences": [],
+      "otherCoordinateStatements": [],
+      "supplementaryEvidence": [],
+      "sourceNote": "Approximate map anchor: Documented representative point of Pasir Salak, used as its locality centre for the Perak conflict. It does not mark Birch’s exact killing site or the extent of the wider war. Coordinate source: Wikidata Q7142180, P625 statement Q7142180$5f4b6cab-467d-0464-e7ea-9abdeebbaf75, revision 2550327811; [longitude, latitude] [100.95, 4.16667]. Wikidata structured data is CC0. The historical footprint remains approximate."
+    },
+    {
+      "id": "kuala-lumpur",
+      "events": [
+        "fms-1896",
+        "malayan-union",
+        "federation-1948",
+        "merdeka-1957"
+      ],
+      "place": "Kuala Lumpur",
+      "description": "federal territory and capital city of Malaysia",
+      "at": [
+        101.69527777778,
+        3.1477777777778
+      ],
+      "approximate": true,
+      "role": "Documented representative point of Kuala Lumpur, used as the administrative city centre for changes affecting Malaya. It does not locate a particular agreement room, proclamation ceremony or Stadium Merdeka.",
+      "qid": "Q1865",
+      "property": "P625",
+      "statement": "q1865$96852AAE-A6C1-4141-9E1C-F731053683CB",
+      "rank": "normal",
+      "precisionDegrees": 0.00027777777777778,
+      "globe": "http://www.wikidata.org/entity/Q2",
+      "revision": 2532330666,
+      "modified": "2026-08-17T13:01:04Z",
+      "url": "https://www.wikidata.org/wiki/Q1865",
+      "revisionUrl": "https://www.wikidata.org/w/index.php?title=Q1865&oldid=2532330666",
+      "entityDataUrl": "https://www.wikidata.org/wiki/Special:EntityData/Q1865.json",
+      "receipt": "raw/anchor-regional/Q1865.json",
+      "sha256": "c8896666f09cc4cd66730ca1009294aa21849b6112a41f8e66f3fad896e377c7",
+      "read": "Read the full cached entity JSON; verified English identity/description and all P625 statements; selected preferred rank if present, otherwise current non-deprecated normal rank. References are reproduced below as a statement audit, not independently read sources.",
+      "coordinateClaimReferences": [
+        {
+          "property": "P143",
+          "value": {
+            "entity-type": "item",
+            "numeric-id": 328,
+            "id": "Q328"
+          }
+        }
+      ],
+      "otherCoordinateStatements": [],
+      "supplementaryEvidence": [],
+      "sourceNote": "Approximate map anchor: Documented representative point of Kuala Lumpur, used as the administrative city centre for changes affecting Malaya. It does not locate a particular agreement room, proclamation ceremony or Stadium Merdeka. Coordinate source: Wikidata Q1865, P625 statement q1865$96852AAE-A6C1-4141-9E1C-F731053683CB, revision 2532330666; [longitude, latitude] [101.69527777778, 3.1477777777778]. Wikidata structured data is CC0. The historical footprint remains approximate."
+    },
+    {
+      "id": "istana-besar",
+      "events": [
+        "umno-founded"
+      ],
+      "place": "Johor Grand Palace",
+      "description": "Palace in Johor Bahru, Johor, Malaysia",
+      "at": [
+        103.75636388888888,
+        1.455
+      ],
+      "approximate": true,
+      "role": "Wikidata point for Istana Besar, Johor Bahru. UMNO’s institutional history identifies this palace as the venue where the constitution was adopted and the organisation formally founded on 11 May 1946. The point identifies the palace, not the precise meeting room.",
+      "qid": "Q1065071",
+      "property": "P625",
+      "statement": "q1065071$E9F522F3-64EB-4BE9-83B1-79A047AFCBA5",
+      "rank": "normal",
+      "precisionDegrees": 2.777777777777778e-06,
+      "globe": "http://www.wikidata.org/entity/Q2",
+      "revision": 2496716809,
+      "modified": "2026-05-24T09:19:15Z",
+      "url": "https://www.wikidata.org/wiki/Q1065071",
+      "revisionUrl": "https://www.wikidata.org/w/index.php?title=Q1065071&oldid=2496716809",
+      "entityDataUrl": "https://www.wikidata.org/wiki/Special:EntityData/Q1065071.json",
+      "receipt": "raw/anchor-regional/Q1065071.json",
+      "sha256": "262e4d914ed4f1a5d0fb88be03dbcd2e6525010a4bf10f7a4a5c208d55403f99",
+      "read": "Read the full cached entity JSON; verified English identity/description and all P625 statements; selected preferred rank if present, otherwise current non-deprecated normal rank. References are reproduced below as a statement audit, not independently read sources.",
+      "coordinateClaimReferences": [
+        {
+          "property": "P143",
+          "value": {
+            "entity-type": "item",
+            "numeric-id": 328,
+            "id": "Q328"
+          }
+        }
+      ],
+      "otherCoordinateStatements": [],
+      "supplementaryEvidence": [
+        {
+          "url": "https://umno-online.my/sejarah/penubuhan/",
+          "title": "UMNO Online, Penubuhan UMNO",
+          "read": "Read the institutional founding account: the 11 May 1946 congress and first general assembly met at Istana Besar Johor Bahru, adopted the constitution and formally founded UMNO."
+        }
+      ],
+      "sourceNote": "Approximate map anchor: Wikidata point for Istana Besar, Johor Bahru. UMNO’s institutional history identifies this palace as the venue where the constitution was adopted and the organisation formally founded on 11 May 1946. The point identifies the palace, not the precise meeting room. Coordinate source: Wikidata Q1065071, P625 statement q1065071$E9F522F3-64EB-4BE9-83B1-79A047AFCBA5, revision 2496716809; [longitude, latitude] [103.75636388888888, 1.455]. Wikidata structured data is CC0. The historical footprint remains approximate."
+    },
+    {
+      "id": "victoria-labuan",
+      "events": [
+        "labuan-to-ss"
+      ],
+      "place": "Victoria",
+      "description": "capital of Labuan, Malaysia",
+      "at": [
+        115.2475,
+        5.280278
+      ],
+      "approximate": true,
+      "role": "Documented representative point of Victoria, Labuan, used as the town centre for Labuan’s administrative transfer. It does not claim an exact handover venue or all of the island.",
+      "qid": "Q2363616",
+      "property": "P625",
+      "statement": "Q2363616$ad72f0ba-4a0c-06a8-1c6f-407bfbb577d6",
+      "rank": "normal",
+      "precisionDegrees": 1e-06,
+      "globe": "http://www.wikidata.org/entity/Q2",
+      "revision": 2542351540,
+      "modified": "2026-09-08T16:36:26Z",
+      "url": "https://www.wikidata.org/wiki/Q2363616",
+      "revisionUrl": "https://www.wikidata.org/w/index.php?title=Q2363616&oldid=2542351540",
+      "entityDataUrl": "https://www.wikidata.org/wiki/Special:EntityData/Q2363616.json",
+      "receipt": "raw/anchor-regional/Q2363616.json",
+      "sha256": "e5a2cc5ce89974891bc4dc106483e2e68b05e17cfdadfb348ef702af604af790",
+      "read": "Read the full cached entity JSON; verified English identity/description and all P625 statements; selected preferred rank if present, otherwise current non-deprecated normal rank. References are reproduced below as a statement audit, not independently read sources.",
+      "coordinateClaimReferences": [
+        {
+          "property": "P248",
+          "value": {
+            "entity-type": "item",
+            "numeric-id": 1194038,
+            "id": "Q1194038"
+          }
+        },
+        {
+          "property": "P2326",
+          "value": "-2404406"
+        }
+      ],
+      "otherCoordinateStatements": [],
+      "supplementaryEvidence": [],
+      "sourceNote": "Approximate map anchor: Documented representative point of Victoria, Labuan, used as the town centre for Labuan’s administrative transfer. It does not claim an exact handover venue or all of the island. Coordinate source: Wikidata Q2363616, P625 statement Q2363616$ad72f0ba-4a0c-06a8-1c6f-407bfbb577d6, revision 2542351540; [longitude, latitude] [115.2475, 5.280278]. Wikidata structured data is CC0. The historical footprint remains approximate."
+    },
+    {
+      "id": "bangkok",
+      "events": [
+        "anglo-siamese-treaty"
+      ],
+      "place": "Bangkok",
+      "description": "capital of Thailand",
+      "at": [
+        100.51666666667,
+        13.75
+      ],
+      "approximate": true,
+      "role": "Documented representative point of Bangkok, used as the city centre for the treaty/ratification narrative. It does not locate the exact diplomatic building or the four transferred states.",
+      "qid": "Q1861",
+      "property": "P625",
+      "statement": "q1861$C7119659-8359-4BDA-842D-2F79F5B09523",
+      "rank": "normal",
+      "precisionDegrees": 0.016666666666667,
+      "globe": "http://www.wikidata.org/entity/Q2",
+      "revision": 2557615687,
+      "modified": "2026-10-16T08:38:41Z",
+      "url": "https://www.wikidata.org/wiki/Q1861",
+      "revisionUrl": "https://www.wikidata.org/w/index.php?title=Q1861&oldid=2557615687",
+      "entityDataUrl": "https://www.wikidata.org/wiki/Special:EntityData/Q1861.json",
+      "receipt": "raw/anchor-regional/Q1861.json",
+      "sha256": "c216519d51f1ce13eb0d9d52deb36088f21429c5f5db0c2a53ec864f5980fb43",
+      "read": "Read the full cached entity JSON; verified English identity/description and all P625 statements; selected preferred rank if present, otherwise current non-deprecated normal rank. References are reproduced below as a statement audit, not independently read sources.",
+      "coordinateClaimReferences": [
+        {
+          "property": "P143",
+          "value": {
+            "entity-type": "item",
+            "numeric-id": 206855,
+            "id": "Q206855"
+          }
+        }
+      ],
+      "otherCoordinateStatements": [],
+      "supplementaryEvidence": [],
+      "sourceNote": "Approximate map anchor: Documented representative point of Bangkok, used as the city centre for the treaty/ratification narrative. It does not locate the exact diplomatic building or the four transferred states. Coordinate source: Wikidata Q1861, P625 statement q1861$C7119659-8359-4BDA-842D-2F79F5B09523, revision 2557615687; [longitude, latitude] [100.51666666667, 13.75]. Wikidata structured data is CC0. The historical footprint remains approximate."
+    },
+    {
+      "id": "lumut",
+      "events": [
+        "dindings-to-perak"
+      ],
+      "place": "Lumut",
+      "description": "town in Manjung, Perak, Malaysia",
+      "at": [
+        100.633,
+        4.233
+      ],
+      "approximate": true,
+      "role": "Documented representative point of Lumut, used as the mainland Dindings locality centre. It is an approximate event reference and is not a boundary, polygon centroid or claim about the exact 1935 handover ceremony.",
+      "qid": "Q1511484",
+      "property": "P625",
+      "statement": "q1511484$07DA2247-6593-4F5E-8BC1-B0E689CEB4A7",
+      "rank": "normal",
+      "precisionDegrees": 1e-05,
+      "globe": "http://www.wikidata.org/entity/Q2",
+      "revision": 2527250151,
+      "modified": "2026-08-04T18:01:29Z",
+      "url": "https://www.wikidata.org/wiki/Q1511484",
+      "revisionUrl": "https://www.wikidata.org/w/index.php?title=Q1511484&oldid=2527250151",
+      "entityDataUrl": "https://www.wikidata.org/wiki/Special:EntityData/Q1511484.json",
+      "receipt": "raw/anchor-regional/Q1511484.json",
+      "sha256": "3a3dffdd5e401ff81ac3373ff9dbf7fdb937c62265801466a37d227f69fa54f4",
+      "read": "Read the full cached entity JSON; verified English identity/description and all P625 statements; selected preferred rank if present, otherwise current non-deprecated normal rank. References are reproduced below as a statement audit, not independently read sources.",
+      "coordinateClaimReferences": [
+        {
+          "property": "P143",
+          "value": {
+            "entity-type": "item",
+            "numeric-id": 48952,
+            "id": "Q48952"
+          }
+        }
+      ],
+      "otherCoordinateStatements": [],
+      "supplementaryEvidence": [],
+      "sourceNote": "Approximate map anchor: Documented representative point of Lumut, used as the mainland Dindings locality centre. It is an approximate event reference and is not a boundary, polygon centroid or claim about the exact 1935 handover ceremony. Coordinate source: Wikidata Q1511484, P625 statement q1511484$07DA2247-6593-4F5E-8BC1-B0E689CEB4A7, revision 2527250151; [longitude, latitude] [100.633, 4.233]. Wikidata structured data is CC0. The historical footprint remains approximate."
+    },
+    {
+      "id": "alor-setar",
+      "events": [
+        "four-states-to-thailand"
+      ],
+      "place": "Alor Setar",
+      "description": "state capital of Kedah, Malaysia",
+      "at": [
+        100.36666666667,
+        6.1166666666667
+      ],
+      "approximate": true,
+      "role": "Documented representative point of Alor Setar, used as the capital-city centre of Kedah for the four-state transfer. This regional anchor does not imply that all four states or the transfer ceremony occupied a single point.",
+      "qid": "Q474868",
+      "property": "P625",
+      "statement": "q474868$9C505191-F8A6-4CE7-BDF3-59C9021F725B",
+      "rank": "normal",
+      "precisionDegrees": 0.016666666666667,
+      "globe": "http://www.wikidata.org/entity/Q2",
+      "revision": 2550002779,
+      "modified": "2026-09-27T12:12:12Z",
+      "url": "https://www.wikidata.org/wiki/Q474868",
+      "revisionUrl": "https://www.wikidata.org/w/index.php?title=Q474868&oldid=2550002779",
+      "entityDataUrl": "https://www.wikidata.org/wiki/Special:EntityData/Q474868.json",
+      "receipt": "raw/anchor-regional/Q474868.json",
+      "sha256": "ce3b0e11e95003eb353c1319ca27b715faea0e58fbce598c0c3965dfa72a1c3f",
+      "read": "Read the full cached entity JSON; verified English identity/description and all P625 statements; selected preferred rank if present, otherwise current non-deprecated normal rank. References are reproduced below as a statement audit, not independently read sources.",
+      "coordinateClaimReferences": [
+        {
+          "property": "P143",
+          "value": {
+            "entity-type": "item",
+            "numeric-id": 206855,
+            "id": "Q206855"
+          }
+        }
+      ],
+      "otherCoordinateStatements": [],
+      "supplementaryEvidence": [],
+      "sourceNote": "Approximate map anchor: Documented representative point of Alor Setar, used as the capital-city centre of Kedah for the four-state transfer. This regional anchor does not imply that all four states or the transfer ceremony occupied a single point. Coordinate source: Wikidata Q474868, P625 statement q474868$9C505191-F8A6-4CE7-BDF3-59C9021F725B, revision 2550002779; [longitude, latitude] [100.36666666667, 6.1166666666667]. Wikidata structured data is CC0. The historical footprint remains approximate."
+    },
+    {
+      "id": "bahau",
+      "events": [
+        "bahau-settlement"
+      ],
+      "place": "Bahau",
+      "description": "subdistrict in Negeri Sembilan, Malaysia",
+      "at": [
+        102.4,
+        2.81
+      ],
+      "approximate": true,
+      "role": "Documented representative point of Bahau, used as the town/subdistrict centre. NLB explicitly places the wartime Catholic settlement about five miles from Bahau town centre; this point is a regional reference and must not be represented as the settlement footprint.",
+      "qid": "Q2246812",
+      "property": "P625",
+      "statement": "Q2246812$3EEFBB48-4A83-42EE-A1B3-40F2C4EDEE23",
+      "rank": "normal",
+      "precisionDegrees": 0.0001,
+      "globe": "http://www.wikidata.org/entity/Q2",
+      "revision": 2521400667,
+      "modified": "2026-07-22T22:20:08Z",
+      "url": "https://www.wikidata.org/wiki/Q2246812",
+      "revisionUrl": "https://www.wikidata.org/w/index.php?title=Q2246812&oldid=2521400667",
+      "entityDataUrl": "https://www.wikidata.org/wiki/Special:EntityData/Q2246812.json",
+      "receipt": "raw/anchor-regional/Q2246812.json",
+      "sha256": "bdb199a17b64af1806fd6aa463755f9e6e140f7541a2d83a96722b1fa86741d6",
+      "read": "Read the full cached entity JSON; verified English identity/description and all P625 statements; selected preferred rank if present, otherwise current non-deprecated normal rank. References are reproduced below as a statement audit, not independently read sources.",
+      "coordinateClaimReferences": [
+        {
+          "property": "P143",
+          "value": {
+            "entity-type": "item",
+            "numeric-id": 10000,
+            "id": "Q10000"
+          }
+        }
+      ],
+      "otherCoordinateStatements": [],
+      "supplementaryEvidence": [
+        {
+          "url": "https://biblioasia.nlb.gov.sg/all-sections/vol-12-issue-2-jul-sep-2016-bahau/",
+          "title": "Fiona Hodgkins, Bahau: A Utopia That Went Awry, BiblioAsia, 7 July 2016",
+          "read": "Read Where is Bahau? and Life in Bahau: the wartime settlement was about five miles from town centre and settlers completed the journey on foot. The Bahau locality coordinate is therefore explicitly a town-centre reference."
+        }
+      ],
+      "sourceNote": "Approximate map anchor: Documented representative point of Bahau, used as the town/subdistrict centre. NLB explicitly places the wartime Catholic settlement about five miles from Bahau town centre; this point is a regional reference and must not be represented as the settlement footprint. Coordinate source: Wikidata Q2246812, P625 statement Q2246812$3EEFBB48-4A83-42EE-A1B3-40F2C4EDEE23, revision 2521400667; [longitude, latitude] [102.4, 2.81]. Wikidata structured data is CC0. The historical footprint remains approximate."
+    },
+    {
+      "id": "endau",
+      "events": [
+        "endau-settlement"
+      ],
+      "place": "Endau",
+      "description": "Town in Mersing, Johor, Malaysia",
+      "at": [
+        103.61666666667,
+        2.65
+      ],
+      "approximate": true,
+      "role": "Documented representative point of Endau, Johor, used as the town centre. NLB identifies the Chinese resettlement scheme with Endau; this reference does not locate the original agricultural settlement footprint.",
+      "qid": "Q5375966",
+      "property": "P625",
+      "statement": "q5375966$F8528870-6058-40BF-B819-A55051C78DFC",
+      "rank": "normal",
+      "precisionDegrees": 0.016666666666667,
+      "globe": "http://www.wikidata.org/entity/Q2",
+      "revision": 2534233103,
+      "modified": "2026-08-21T13:32:47Z",
+      "url": "https://www.wikidata.org/wiki/Q5375966",
+      "revisionUrl": "https://www.wikidata.org/w/index.php?title=Q5375966&oldid=2534233103",
+      "entityDataUrl": "https://www.wikidata.org/wiki/Special:EntityData/Q5375966.json",
+      "receipt": "raw/anchor-regional/Q5375966.json",
+      "sha256": "676ad622cf2f971626c9c33ab5390421988bc0671f94153556af1e932ec8d573",
+      "read": "Read the full cached entity JSON; verified English identity/description and all P625 statements; selected preferred rank if present, otherwise current non-deprecated normal rank. References are reproduced below as a statement audit, not independently read sources.",
+      "coordinateClaimReferences": [
+        {
+          "property": "P143",
+          "value": {
+            "entity-type": "item",
+            "numeric-id": 328,
+            "id": "Q328"
+          }
+        }
+      ],
+      "otherCoordinateStatements": [],
+      "supplementaryEvidence": [
+        {
+          "url": "https://biblioasia.nlb.gov.sg/all-sections/vol-15-issue-1-apr-jun-2019-wartime-victuals/",
+          "title": "Wartime Victuals: Surviving the Japanese Occupation, BiblioAsia, April–June 2019",
+          "read": "Read the resettlement section and caption: farming communities were established in Endau, Johor, and Bahau, Negeri Sembilan; the Chinese settlement in Endau is identified. No exact surveyed settlement footprint is supplied."
+        }
+      ],
+      "sourceNote": "Approximate map anchor: Documented representative point of Endau, Johor, used as the town centre. NLB identifies the Chinese resettlement scheme with Endau; this reference does not locate the original agricultural settlement footprint. Coordinate source: Wikidata Q5375966, P625 statement q5375966$F8528870-6058-40BF-B819-A55051C78DFC, revision 2534233103; [longitude, latitude] [103.61666666667, 2.65]. Wikidata structured data is CC0. The historical footprint remains approximate."
+    },
+    {
+      "id": "bandar-seri-begawan",
+      "events": [
+        "brunei-revolt"
+      ],
+      "place": "Bandar Seri Begawan",
+      "description": "capital and largest city of Brunei",
+      "at": [
+        114.91666666667,
+        4.9166666666667
+      ],
+      "approximate": true,
+      "role": "Documented representative point of Bandar Seri Begawan (then Brunei Town), used as the city centre for the revolt. It does not locate a particular police station, clash or individual casualty.",
+      "qid": "Q9279",
+      "property": "P625",
+      "statement": "q9279$C5B37949-7E21-4DF4-990A-E68678C90C05",
+      "rank": "normal",
+      "precisionDegrees": 0.016666666666667,
+      "globe": "http://www.wikidata.org/entity/Q2",
+      "revision": 2539478675,
+      "modified": "2026-09-02T15:14:50Z",
+      "url": "https://www.wikidata.org/wiki/Q9279",
+      "revisionUrl": "https://www.wikidata.org/w/index.php?title=Q9279&oldid=2539478675",
+      "entityDataUrl": "https://www.wikidata.org/wiki/Special:EntityData/Q9279.json",
+      "receipt": "raw/anchor-regional/Q9279.json",
+      "sha256": "e45e9edc877860c2ad37fbc99554d8f9b77af1cece5f54f128602247d728c192",
+      "read": "Read the full cached entity JSON; verified English identity/description and all P625 statements; selected preferred rank if present, otherwise current non-deprecated normal rank. References are reproduced below as a statement audit, not independently read sources.",
+      "coordinateClaimReferences": [
+        {
+          "property": "P143",
+          "value": {
+            "entity-type": "item",
+            "numeric-id": 206855,
+            "id": "Q206855"
+          }
+        }
+      ],
+      "otherCoordinateStatements": [],
+      "supplementaryEvidence": [],
+      "sourceNote": "Approximate map anchor: Documented representative point of Bandar Seri Begawan (then Brunei Town), used as the city centre for the revolt. It does not locate a particular police station, clash or individual casualty. Coordinate source: Wikidata Q9279, P625 statement q9279$C5B37949-7E21-4DF4-990A-E68678C90C05, revision 2539478675; [longitude, latitude] [114.91666666667, 4.9166666666667]. Wikidata structured data is CC0. The historical footprint remains approximate."
+    },
+    {
+      "id": "kuching",
+      "events": [],
+      "place": "Kuching",
+      "description": "capital of Sarawak, Malaysia",
+      "at": [
+        110.34388888888888,
+        1.5575
+      ],
+      "approximate": true,
+      "role": "Documented representative point of Kuching, used as its city centre when a Sarawak-wide event needs a regional reference. The deprecated former P625 is rejected; the current normal-rank statement is retained. This does not locate a specific historical ceremony.",
+      "qid": "Q220445",
+      "property": "P625",
+      "statement": "q220445$3A30633C-9BD4-4889-88BA-6F2EB7C1F817",
+      "rank": "normal",
+      "precisionDegrees": 0.0002777777777777778,
+      "globe": "http://www.wikidata.org/entity/Q2",
+      "revision": 2532331683,
+      "modified": "2026-08-17T13:03:19Z",
+      "url": "https://www.wikidata.org/wiki/Q220445",
+      "revisionUrl": "https://www.wikidata.org/w/index.php?title=Q220445&oldid=2532331683",
+      "entityDataUrl": "https://www.wikidata.org/wiki/Special:EntityData/Q220445.json",
+      "receipt": "raw/anchor-regional/Q220445.json",
+      "sha256": "7af867e283bfdc4d874b834882a138490764d5a8e6b0b67f572a8841e9b5ede3",
+      "read": "Read the full cached entity JSON; verified English identity/description and all P625 statements; selected preferred rank if present, otherwise current non-deprecated normal rank. References are reproduced below as a statement audit, not independently read sources.",
+      "coordinateClaimReferences": [
+        {
+          "property": "P143",
+          "value": {
+            "entity-type": "item",
+            "numeric-id": 328,
+            "id": "Q328"
+          }
+        }
+      ],
+      "otherCoordinateStatements": [
+        {
+          "id": "Q220445$6A7671AF-B659-4368-95C1-919EC36A06A9",
+          "rank": "deprecated",
+          "value": {
+            "latitude": 1.55,
+            "longitude": 110.33333333333,
+            "altitude": null,
+            "precision": 0.00027777777777778,
+            "globe": "http://www.wikidata.org/entity/Q2"
+          },
+          "references": [
+            {
+              "hash": "53f6d43b879a6a462460d37fb6b8e43fa03bc1a1",
+              "snaks": {
+                "P248": [
+                  {
+                    "snaktype": "value",
+                    "property": "P248",
+                    "hash": "7648f66055f57f6227dd1f872bc4ed26c70da7c6",
+                    "datavalue": {
+                      "value": {
+                        "entity-type": "item",
+                        "numeric-id": 1194038,
+                        "id": "Q1194038"
+                      },
+                      "type": "wikibase-entityid"
+                    },
+                    "datatype": "wikibase-item"
+                  }
+                ],
+                "P577": [
+                  {
+                    "snaktype": "value",
+                    "property": "P577",
+                    "hash": "a372c95b03a3464736c5fd1d7ed86176f0c04973",
+                    "datavalue": {
+                      "value": {
+                        "time": "+2018-06-11T00:00:00Z",
+                        "timezone": 0,
+                        "before": 0,
+                        "after": 0,
+                        "precision": 11,
+                        "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                      },
+                      "type": "time"
+                    },
+                    "datatype": "time"
+                  }
+                ],
+                "P2326": [
+                  {
+                    "snaktype": "value",
+                    "property": "P2326",
+                    "hash": "8e800e1a170746fe439f28b0f9e34a0244c1123e",
+                    "datavalue": {
+                      "value": "-2402530",
+                      "type": "string"
+                    },
+                    "datatype": "external-id"
+                  }
+                ]
+              },
+              "snaks-order": [
+                "P248",
+                "P577",
+                "P2326"
+              ]
+            }
+          ],
+          "qualifiers": {}
+        }
+      ],
+      "supplementaryEvidence": [],
+      "sourceNote": "Approximate map anchor: Documented representative point of Kuching, used as its city centre when a Sarawak-wide event needs a regional reference. The deprecated former P625 is rejected; the current normal-rank statement is retained. This does not locate a specific historical ceremony. Coordinate source: Wikidata Q220445, P625 statement q220445$3A30633C-9BD4-4889-88BA-6F2EB7C1F817, revision 2532331683; [longitude, latitude] [110.34388888888888, 1.5575]. Wikidata structured data is CC0. The historical footprint remains approximate."
+    },
+    {
+      "id": "jakarta",
+      "events": [
+        "konfrontasi-begins"
+      ],
+      "place": "Jakarta",
+      "description": "capital and largest city of Indonesia",
+      "at": [
+        106.82694444444445,
+        -6.175277777777778
+      ],
+      "approximate": true,
+      "role": "Documented representative point of Jakarta, used as the capital-city centre for the Indonesian political announcement. It does not locate the precise announcement venue or military incursions in Borneo.",
+      "qid": "Q3630",
+      "property": "P625",
+      "statement": "Q3630$110B8756-6B76-424E-BF28-B28BA94A6036",
+      "rank": "normal",
+      "precisionDegrees": 0.01,
+      "globe": "http://www.wikidata.org/entity/Q2",
+      "revision": 2540534195,
+      "modified": "2026-09-05T15:11:24Z",
+      "url": "https://www.wikidata.org/wiki/Q3630",
+      "revisionUrl": "https://www.wikidata.org/w/index.php?title=Q3630&oldid=2540534195",
+      "entityDataUrl": "https://www.wikidata.org/wiki/Special:EntityData/Q3630.json",
+      "receipt": "raw/anchor-regional/Q3630.json",
+      "sha256": "4b35bf59a383d4790ff4e13d1de73c8d36cfd1b0379566f3bc15a5255f26bd73",
+      "read": "Read the full cached entity JSON; verified English identity/description and all P625 statements; selected preferred rank if present, otherwise current non-deprecated normal rank. References are reproduced below as a statement audit, not independently read sources.",
+      "coordinateClaimReferences": [],
+      "otherCoordinateStatements": [],
+      "supplementaryEvidence": [],
+      "sourceNote": "Approximate map anchor: Documented representative point of Jakarta, used as the capital-city centre for the Indonesian political announcement. It does not locate the precise announcement venue or military incursions in Borneo. Coordinate source: Wikidata Q3630, P625 statement Q3630$110B8756-6B76-424E-BF28-B28BA94A6036, revision 2540534195; [longitude, latitude] [106.82694444444445, -6.175277777777778]. Wikidata structured data is CC0. The historical footprint remains approximate."
+    },
+    {
+      "id": "london",
+      "events": [
+        "anglo-dutch-treaty",
+        "johor-treaty-1885",
+        "malaysia-agreement"
+      ],
+      "place": "London",
+      "description": "capital and largest city of England and the United Kingdom",
+      "at": [
+        -0.1275,
+        51.507222222222
+      ],
+      "approximate": true,
+      "role": "Documented representative point of London, used as the city centre for agreements described by the event evidence as signed in London. It is not the precise treaty-signing building. In particular, the 1885 Johor treaty and 1963 Malaysia Agreement should not be anchored to Johor Bahru/Singapore as if those were their signing locations.",
+      "qid": "Q84",
+      "property": "P625",
+      "statement": "q84$F21659F6-356B-4A82-A040-BDFA182A55E7",
+      "rank": "normal",
+      "precisionDegrees": 0.00027777777777778,
+      "globe": "http://www.wikidata.org/entity/Q2",
+      "revision": 2555302704,
+      "modified": "2026-10-09T10:54:56Z",
+      "url": "https://www.wikidata.org/wiki/Q84",
+      "revisionUrl": "https://www.wikidata.org/w/index.php?title=Q84&oldid=2555302704",
+      "entityDataUrl": "https://www.wikidata.org/wiki/Special:EntityData/Q84.json",
+      "receipt": "raw/anchor-regional/Q84.json",
+      "sha256": "a979951d81d954b0a66f4d3ffb7ee07629d0e6cdc5d2395d368e675ddb9b37ae",
+      "read": "Read the full cached entity JSON; verified English identity/description and all P625 statements; selected preferred rank if present, otherwise current non-deprecated normal rank. References are reproduced below as a statement audit, not independently read sources.",
+      "coordinateClaimReferences": [
+        {
+          "property": "P143",
+          "value": {
+            "entity-type": "item",
+            "numeric-id": 206855,
+            "id": "Q206855"
+          }
+        },
+        {
+          "property": "P143",
+          "value": {
+            "entity-type": "item",
+            "numeric-id": 328,
+            "id": "Q328"
+          }
+        }
+      ],
+      "otherCoordinateStatements": [],
+      "supplementaryEvidence": [],
+      "sourceNote": "Approximate map anchor: Documented representative point of London, used as the city centre for agreements described by the event evidence as signed in London. It is not the precise treaty-signing building. In particular, the 1885 Johor treaty and 1963 Malaysia Agreement should not be anchored to Johor Bahru/Singapore as if those were their signing locations. Coordinate source: Wikidata Q84, P625 statement q84$F21659F6-356B-4A82-A040-BDFA182A55E7, revision 2555302704; [longitude, latitude] [-0.1275, 51.507222222222]. Wikidata structured data is CC0. The historical footprint remains approximate."
+    }
+  ]
+}

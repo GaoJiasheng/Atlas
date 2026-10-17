@@ -19,7 +19,7 @@ describe('ringIssues', () => {
 });
 
 describe('control keyframes have no wedge-makers', () => {
-  for (const slug of ['ww1', 'ww2', 'four-taps']) {
+  for (const slug of ['ww1', 'ww2', 'four-taps', 'singapore-1819-1965']) {
     it(`${slug}: 0 zero-area and 0 self-crossing rings`, () => {
       type Topology = Parameters<typeof feature>[0];
       const data = JSON.parse(readFileSync(`src/content/topics/${slug}/data/control.json`, 'utf8')) as {

@@ -1,0 +1,253 @@
+{
+  "checked": "2026-10-18",
+  "map": "G16",
+  "mapFile": "raw/G16.jpg",
+  "mapTitle": "Admiralty Chart No.2403 Singapore Strait, published1936, small corrections through1954",
+  "method": "Independent named-lighthouse native-pixel audit. Three stars are paired with independently published current MPA named-light positions. Candidate list does not modify the active georeferencing model and does not claim residual acceptance. Pixel locations were read visually before modern-coordinate pairing. The original map may have datum/position generalisation errors.",
+  "controlPoints": [
+    {
+      "id": "sultan-shoal",
+      "name": "Sultan Shoal Lighthouse",
+      "svg": [
+        7024,
+        8277
+      ],
+      "lnglat": [
+        103.64806666666667,
+        1.2396166666666666
+      ],
+      "coordinateText": "01°14.377'N 103°38.884'E",
+      "mapLabel": "Sultan Shoal; Gp.Fl.(2) ev.15sec.60ft13M",
+      "cropBox": [
+        6800,
+        8000,
+        7400,
+        8600
+      ],
+      "reading": "Hollow centre of black five-point light star at the northwest end of the dotted Sultan Shoal islet, at the base of the magenta flash. Not the separate southeastern unlabelled flashing light.",
+      "identityEvidence": [
+        {
+          "ref": "mpa-positions",
+          "read": "The current named Sultan Shoal Lt is an official reporting reference with the precise coordinates copied here."
+        },
+        {
+          "ref": "sultan-history",
+          "read": "MPA describes Sultan Shoal Lighthouse as a longstanding historic landmark off Tuas and offers tours to the standing light. The chart explicitly names the same shoal light."
+        }
+      ],
+      "status": "named-fixed-light-candidate",
+      "caveat": "Same named standing offshore lighthouse, whose flash character has changed. The map symbol generalisation and any historical/current datum offset remain separate from tower identity.",
+      "mapsrcpixel": {
+        "map": "G16",
+        "file": "raw/G16.jpg",
+        "nativeDimensions": [
+          27521,
+          16456
+        ],
+        "pixel": [
+          7024,
+          8277
+        ],
+        "convention": "x right, y down, from original top-left; no rotation or crop coordinates substituted",
+        "readUncertaintyPx": 3,
+        "crop": "work/G16-lighthouse-sultan-shoal-native.png",
+        "cropBox": [
+          6800,
+          8000,
+          7400,
+          8600
+        ],
+        "cropPoint": [
+          224,
+          277
+        ]
+      },
+      "coordinateSource": "https://www.mpa.gov.sg/port-marine-ops/arrivals-and-departures/vessels-arriving-in-singapore",
+      "coordinateSourceType": "Official MPA current named aid-to-navigation reporting position; converted degrees + decimal minutes directly to decimal degrees; registration-only point",
+      "readMethod": "Direct visual inspection of native named light symbol; no inverse-model prediction, graticule interpolation, residual minimisation or CP fitting used to choose the pixel."
+    },
+    {
+      "id": "raffles",
+      "name": "Raffles Lighthouse (Pulau Satumu)",
+      "svg": [
+        8970,
+        9940
+      ],
+      "lnglat": [
+        103.74083333333333,
+        1.1601
+      ],
+      "coordinateText": "01°09.606'N 103°44.450'E",
+      "mapLabel": "Raffles; Gp.Fl.(3) ev.10sec.105ft16M",
+      "cropBox": [
+        8600,
+        9650,
+        9300,
+        10300
+      ],
+      "reading": "Hollow centre of black lighthouse star at the southern end of the small island, southwest of the text Raffles and at the base of the magenta flash. Not the islands labelled P.Biola or P.Senang to its north.",
+      "identityEvidence": [
+        {
+          "ref": "mpa-positions",
+          "read": "Official current Raffles Lt reporting reference has the precise coordinates copied here."
+        },
+        {
+          "ref": "raffles-history",
+          "read": "MPA identifies the standing Raffles Lighthouse on Pulau Satumu as built in 1855, confirming a fixed tower dating before the chart and still operating."
+        }
+      ],
+      "status": "named-fixed-light-candidate",
+      "caveat": "Light apparatus/flash characteristic changed, but tower identity and island are independently named. No coastline vertex or island centroid is used.",
+      "mapsrcpixel": {
+        "map": "G16",
+        "file": "raw/G16.jpg",
+        "nativeDimensions": [
+          27521,
+          16456
+        ],
+        "pixel": [
+          8970,
+          9940
+        ],
+        "convention": "x right, y down, from original top-left; no rotation or crop coordinates substituted",
+        "readUncertaintyPx": 3,
+        "crop": "work/G16-lighthouse-raffles-native.png",
+        "cropBox": [
+          8600,
+          9650,
+          9300,
+          10300
+        ],
+        "cropPoint": [
+          370,
+          290
+        ]
+      },
+      "coordinateSource": "https://www.mpa.gov.sg/port-marine-ops/arrivals-and-departures/vessels-arriving-in-singapore",
+      "coordinateSourceType": "Official MPA current named aid-to-navigation reporting position; converted degrees + decimal minutes directly to decimal degrees; registration-only point",
+      "readMethod": "Direct visual inspection of native named light symbol; no inverse-model prediction, graticule interpolation, residual minimisation or CP fitting used to choose the pixel."
+    },
+    {
+      "id": "horsburgh",
+      "name": "Horsburgh Lighthouse (Pedra Branca)",
+      "svg": [
+        22923,
+        6343
+      ],
+      "lnglat": [
+        104.40561666666666,
+        1.3302333333333334
+      ],
+      "coordinateText": "01°19.814'N 104°24.337'E",
+      "mapLabel": "Horsburgh; Fl.ev.10sec.101ft16M",
+      "cropBox": [
+        22500,
+        6000,
+        23200,
+        6650
+      ],
+      "reading": "Black star at the base of the magenta flash immediately right of the Horsburgh label on the northernmost of the Pedra Branca rocks. Not the separate +high rock or Middle Rocks to its south.",
+      "identityEvidence": [
+        {
+          "ref": "mpa-positions",
+          "read": "Official current Horsburgh Lt reporting reference has the precise coordinates copied here."
+        },
+        {
+          "ref": "horsburgh-history",
+          "read": "MFA identifies Horsburgh Lighthouse as the oldest structure still present on Pedra Branca, built between 1847 and 1851."
+        }
+      ],
+      "status": "named-fixed-light-candidate",
+      "caveat": "Independently read from the printed named symbol. It happens to coincide within a few pixels with anonymous Warper point6; that anonymous point was not used to derive this reading.",
+      "mapsrcpixel": {
+        "map": "G16",
+        "file": "raw/G16.jpg",
+        "nativeDimensions": [
+          27521,
+          16456
+        ],
+        "pixel": [
+          22923,
+          6343
+        ],
+        "convention": "x right, y down, from original top-left; no rotation or crop coordinates substituted",
+        "readUncertaintyPx": 3,
+        "crop": "work/G16-lighthouse-horsburgh-native.png",
+        "cropBox": [
+          22500,
+          6000,
+          23200,
+          6650
+        ],
+        "cropPoint": [
+          423,
+          343
+        ]
+      },
+      "coordinateSource": "https://www.mpa.gov.sg/port-marine-ops/arrivals-and-departures/vessels-arriving-in-singapore",
+      "coordinateSourceType": "Official MPA current named aid-to-navigation reporting position; converted degrees + decimal minutes directly to decimal degrees; registration-only point",
+      "readMethod": "Direct visual inspection of native named light symbol; no inverse-model prediction, graticule interpolation, residual minimisation or CP fitting used to choose the pixel."
+    }
+  ],
+  "sources": [
+    {
+      "id": "mpa-positions",
+      "url": "https://www.mpa.gov.sg/port-marine-ops/arrivals-and-departures/vessels-arriving-in-singapore",
+      "file": "raw/G16-lighthouse-mpa-positions.html",
+      "sha256": "7bd52cc13e695f046244c34928cd7a5abdc40c1e6479f8c22ec9ca5f6f8ac993"
+    },
+    {
+      "id": "raffles-history",
+      "url": "https://www.mpa.gov.sg/media-centre/details/mpa-launches-regular-guided-tours-to-raffles-lighthouse",
+      "file": "raw/G16-lighthouse-raffles-history.html",
+      "sha256": "70fce155f1e7d7bdec2742372214dce71df90b7221fcfec25d30f324eb7137ad"
+    },
+    {
+      "id": "horsburgh-history",
+      "url": "https://www.mfa.gov.sg/about-mfa/key-issues/pedra-branca/",
+      "file": "raw/G16-lighthouse-horsburgh-history.html",
+      "sha256": "46e1dd42ee2dc160141492c8416d7df2112a69ac027d884ab0f2d6a89e8f7cac"
+    },
+    {
+      "id": "sultan-history",
+      "url": "https://www.mpa.gov.sg/media-centre/details/mpa30-exhibition-invites-singaporeans-to-reimagine-the-future-of-maritime-singapore",
+      "file": "raw/G16-lighthouse-sultan-history.html",
+      "sha256": "f6e08792d91aa5cff6e88dfd0ec76c80fec0ed9a69d4d7def2189d27a1dd9828"
+    },
+    {
+      "id": "canning-replica",
+      "url": "https://www.mpa.gov.sg/media-centre/details/launch-of-the-singapore-maritime-trails-and-maritime-corner%40fort-canning",
+      "file": "raw/G16-lighthouse-canning-replica.html",
+      "sha256": "55460f05c949882f9085fc0294d98c335dea5ae5bc22d81c89b72761516703ed"
+    }
+  ],
+  "excluded": [
+    {
+      "name": "Fort Canning Lighthouse",
+      "chartSymbolPixel": [
+        11196,
+        7144
+      ],
+      "reason": "The chart explicitly marks the original Fort Canning light. Modern park lighthouse is a replica. MPA identifies adoption of the replica from NParks; no independent exact original-tower coordinate was found. Do not use modern replica P625 as a surviving original tower CP.",
+      "source": "https://www.mpa.gov.sg/media-centre/details/launch-of-the-singapore-maritime-trails-and-maritime-corner%40fort-canning"
+    },
+    {
+      "name": "Pulau Iyu Kecil / The Brothers",
+      "chartSymbolPixel": [
+        790,
+        9298
+      ],
+      "reason": "Native chart clearly labels The Brothers light, but the present station has a replacement tower of unknown date/location continuity. MPA current arrivals page also gives two slightly different Iyu coordinates (11.479 and11.466 minutesN). Named candidate for further qualification only; not added as a surviving fixed-tower CP.",
+      "source": "https://www.mpa.gov.sg/port-marine-ops/arrivals-and-departures/vessels-arriving-in-singapore"
+    },
+    {
+      "name": "Fullerton Lighthouse",
+      "reason": "Installed after the1954 correction date; cannot be a1936/1954 chart light CP."
+    },
+    {
+      "name": "Bedok Lighthouse",
+      "reason": "Modern rooftop light postdates the chart; cannot substitute for Fort Canning or another original chart light."
+    }
+  ],
+  "acceptance": "Only the three named-fixed-light candidates above are proposed. They still require combined projection:auto and LOO evaluation by the coast agent. No point may be kept or discarded solely to force residual budgets."
+}

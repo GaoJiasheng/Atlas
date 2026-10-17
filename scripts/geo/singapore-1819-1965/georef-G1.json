@@ -1,0 +1,22 @@
+{
+  "dataset": "g1",
+  "projection": "auto",
+  "maxResidualKm": 0.12,
+  "status": "candidate-identifications-not-approved-for-published-geometry",
+  "coordinateSource": "OpenStreetMap highway shared-node extract, GET Overpass API, 2026-10-17, raw/control-roads-osm.json; CP only; no OSM geometry permitted in outputs",
+  "caution": "The 1822 sheet is a proposed street plan. Modern junction identities are inferred and require historical continuity checks; a low fitted residual is not proof that a proposed junction was built there.",
+  "controlPoints": [
+    {"name":"Bridge Street river crossing / later Elgin Bridge centre", "svg":[735,327], "lnglat":[103.8493033,1.2890664]},
+    {"name":"North Bridge Road / High Street", "svg":[785,350], "lnglat":[103.850015,1.2901963]},
+    {"name":"North Bridge Road / Coleman Street", "svg":[844,376], "lnglat":[103.8509674,1.2917649]},
+    {"name":"North Bridge Road / Stamford Road canal", "svg":[936,418], "lnglat":[103.8520429,1.2935887]},
+    {"name":"North Bridge Road / Bras Basah Road", "svg":[1003,447], "lnglat":[103.8531036,1.2951261]},
+    {"name":"Beach Road / Bras Basah Road", "svg":[956,568], "lnglat":[103.8546543,1.2939345]},
+    {"name":"North Bridge Road / Middle Road", "svg":[1132,505], "lnglat":[103.8549985,1.2976349]},
+    {"name":"Beach Road / Middle Road", "svg":[1082,637], "lnglat":[103.8562528,1.2965189]},
+    {"name":"North Bridge Road / Arab Street", "svg":[1328,590], "lnglat":[103.8585234,1.301971]},
+    {"name":"Beach Road / Arab Street", "svg":[1250,748], "lnglat":[103.8599148,1.3002979]},
+    {"name":"South Bridge Road / Upper Pickering Street", "svg":[618,282], "lnglat":[103.8471684,1.2854539]},
+    {"name":"South Bridge Road / Cross Street", "svg":[511,239], "lnglat":[103.8461028,1.2836322]}
+  ]
+}

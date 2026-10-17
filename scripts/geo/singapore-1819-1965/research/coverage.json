@@ -1,0 +1,1257 @@
+{
+  "checked": "2026-10-17",
+  "scope": "Every occurrence of 待核, 待读 or 待定 in spec §1.3 and §2 (lines71–280 at check time). Paragraph line numbers reflect local file on this date; context is retained against later edits.",
+  "markers": [
+    {
+      "marker": "L74.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 74,
+      "section": "§1.3",
+      "markerText": "待核",
+      "context": "hill 1915 英译，公有领域）；P2 《马来纪年》（Leyden 1821 英译，公有领域；Brown 1952）；P3 Pires（Cortesão 1944）；P13 | 龙牙门、班卒的位置学界有不同说法（**待核**：Miksic 2013 第 4 章）；两种\"末代统治者\"叙述并列，不选边 |",
+      "ledgerChecks": [
+        "F1"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L75.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 75,
+      "section": "§1.3",
+      "markerText": "待核",
+      "context": "| F2 | **福康宁考古** | 1984 年起米克锡克（John Miksic）在福康宁山发掘，出土 14 世纪中国瓷片、玻璃、钱币等；1928 年修蓄水池时出土一批爪哇风格金饰（**年份待核**）；新加坡石（河口的刻文巨石）1843 年被炸，残片藏国家博物馆，文字尚未释读 | P14 Miksic 2013；P15 国家博物馆藏品页 | 金饰出土年份有 1926 / 1928 两说，施工时以博物馆页为准 |",
+      "ledgerChecks": [
+        "F2"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L76.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 76,
+      "section": "§1.3",
+      "markerText": "待核",
+      "context": "约** | 1819 年 1 月 28 日莱佛士、法夸尔的船队抵达；1 月 30 日与天猛公阿都拉曼订初步协议；2 月 6 日与苏丹胡先、天猛公订约，东印度公司每年付苏丹 5,000、天猛公 3,000 西班牙银元（**待核**） | P4 Buckley 1902（公有领域，条约原文）；P10 Turnbull 2009 | 抵达日有 28 / 29 日两说（**待核**） |",
+      "ledgerChecks": [
+        "F3"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L76.2",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 76,
+      "section": "§1.3",
+      "markerText": "待核",
+      "context": "，东印度公司每年付苏丹 5,000、天猛公 3,000 西班牙银元（**待核**） | P4 Buckley 1902（公有领域，条约原文）；P10 Turnbull 2009 | 抵达日有 28 / 29 日两说（**待核**） |",
+      "ledgerChecks": [
+        "F3"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L77.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 77,
+      "section": "§1.3",
+      "markerText": "待核",
+      "context": "| F4 | **1819 年岛上人口** | 约一千人：海人（Orang Kallang、Orang Seletar、Orang Gelam 等）约五百、马来人一两百、华人二三十（**各数待核**） | P10；P13 | 来源不一，写区间 |",
+      "ledgerChecks": [
+        "F4"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L78.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 78,
+      "section": "§1.3",
+      "markerText": "待核",
+      "context": "月 17 日《英荷条约》：马六甲归英、明古连归荷，马六甲海峡以南归荷兰势力范围；1824 年 8 月 2 日克劳福德条约：新加坡岛及周围 10 地理英里内岛屿永久割让给东印度公司，苏丹、天猛公得一次性款项与月俸（**数额待核**） | P4；P10；P16 Tarling 1962 | 当地统治者没有参加英荷谈判，写清楚 |",
+      "ledgerChecks": [
+        "F5"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L80.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 80,
+      "section": "§1.3",
+      "markerText": "待核",
+      "context": "| F7 | **人口普查** | 1824 年 10,683 人；1871 年 97,111；1931 年 557,745；1957 年 1,445,929（**全部待核**，含各族人数和比例） | P20 Saw Swee Hock 2012；各次普查报告（P21） | 1824 年的数字是点算（enumeration），不是正式普查；1871 年起才是正式普查 |",
+      "ledgerChecks": [
+        "F7",
+        "census-1931-day"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L81.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 81,
+      "section": "§1.3",
+      "markerText": "待核",
+      "context": "| F8 | **印度罪犯劳工** | 1825 年起从明古连、印度各口岸运来罪犯，修路、填地、盖圣安德烈座堂和总督府；1873 年停止运送（**待核**） | P22 Anand Yang 2021；P23 Pieris 2009 | 人数逐年不同，写区间 |",
+      "ledgerChecks": [
+        "F8"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L82.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 82,
+      "section": "§1.3",
+      "markerText": "待核",
+      "context": "| F9 | **华人移民与苦力贸易** | 客头、\"猪仔馆\"、赊单（credit-ticket）制度；1877 年设华民护卫司（毕麒麟）；20 世纪初每年经新加坡入境的华人移民数以十万计（**年份与数字待核**） | P24 Yen Ching-hwang 1986；P25 Kuhn 2008；P26 Warren 1986 | 船上死亡率、拐骗的记载要有出处，不用小说化的描写 |",
+      "ledgerChecks": [
+        "F9",
+        "ch04-ordinances"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L83.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 83,
+      "section": "§1.3",
+      "markerText": "待核",
+      "context": "| F10 | **鸦片饷码** | 政府把鸦片专卖权拍卖给饷码商，19 世纪鸦片税收常占海峡殖民地财政收入的四成到一半（**待核**） | P27 Trocki 1990 | 1910 年政府接手专卖，1946 年禁吸（**待核**） |",
+      "ledgerChecks": [
+        "F10"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L83.2",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 83,
+      "section": "§1.3",
+      "markerText": "待核",
+      "context": "10 | **鸦片饷码** | 政府把鸦片专卖权拍卖给饷码商，19 世纪鸦片税收常占海峡殖民地财政收入的四成到一半（**待核**） | P27 Trocki 1990 | 1910 年政府接手专卖，1946 年禁吸（**待核**） |",
+      "ledgerChecks": [
+        "F10"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L84.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 84,
+      "section": "§1.3",
+      "markerText": "待核",
+      "context": "| F11 | **1854 年械斗** | 1854 年 5 月福建帮与潮州帮冲突，持续约十天，死者约 400–500 人（**待核**） | P4；P10 | 数字来自英文报纸与官员记载，写\"据当时记载\" |",
+      "ledgerChecks": [
+        "F11"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L85.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 85,
+      "section": "§1.3",
+      "markerText": "待核",
+      "context": "| F12 | **1915 年兵变** | 1915 年 2 月 15 日驻新加坡的印度第 5 轻步兵团部分士兵兵变，打死英国军官、士兵与平民约 47 人（**待核**）；兵变被镇压后 47 人在欧南路监狱外被公开枪决（**待核**） | P28 Harper & Miller 1984（**待核**书目）；NLB | 兵变者的动机（战争宣传、宗教、对调防的担心）有几种解释，并列 ",
+      "ledgerChecks": [
+        "F12"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L85.2",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 85,
+      "section": "§1.3",
+      "markerText": "待核",
+      "context": "12 | **1915 年兵变** | 1915 年 2 月 15 日驻新加坡的印度第 5 轻步兵团部分士兵兵变，打死英国军官、士兵与平民约 47 人（**待核**）；兵变被镇压后 47 人在欧南路监狱外被公开枪决（**待核**） | P28 Harper & Miller 1984（**待核**书目）；NLB | 兵变者的动机（战争宣传、宗教、对调防的担心）有几种解释，并列 |",
+      "ledgerChecks": [
+        "F12"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L85.3",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 85,
+      "section": "§1.3",
+      "markerText": "待核",
+      "context": "驻新加坡的印度第 5 轻步兵团部分士兵兵变，打死英国军官、士兵与平民约 47 人（**待核**）；兵变被镇压后 47 人在欧南路监狱外被公开枪决（**待核**） | P28 Harper & Miller 1984（**待核**书目）；NLB | 兵变者的动机（战争宣传、宗教、对调防的担心）有几种解释，并列 |",
+      "ledgerChecks": [
+        "F12"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L87.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 87,
+      "section": "§1.3",
+      "markerText": "待核",
+      "context": "| F14 | **玛丽亚·赫托暴乱** | 1950 年 12 月 11–13 日，围绕一名荷兰裔少女的监护权判决爆发暴乱，死 18 人、伤 173 人（**待核**） | P30 NLB Infopedia；P31 Hughes 1980 | 死者包括欧洲人、欧亚裔和被警察打死的参与者，逐类写 |",
+      "ledgerChecks": [
+        "F14"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L88.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 88,
+      "section": "§1.3",
+      "markerText": "待核",
+      "context": "| F15 | **福利巴士工潮** | 1955 年 5 月 12 日，4 人死亡（含一名警察、一名学生、一名美国记者，**名字与身份待核**） | P30；P32 | 工人、学生、政府三方的说法 |",
+      "ledgerChecks": [
+        "F15"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L89.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 89,
+      "section": "§1.3",
+      "markerText": "待核",
+      "context": "| F16 | **1956 年华校学潮** | 1956 年 10 月 24–29 日，死 13 人、伤百余人（**待核**） | P30 | |",
+      "ledgerChecks": [
+        "F16"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L90.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 90,
+      "section": "§1.3",
+      "markerText": "待核",
+      "context": "| F17 | **自治与第一届内阁** | 1959 年 5 月 30 日大选，行动党得 51 席中的 43 席（**待核**）；6 月 3 日自治；6 月 5 日李光耀宣誓就任总理，内阁 9 人（**名单待核**）；12 月尤索夫·伊萨就任元首 | P33 新加坡国家档案馆 / Singapore Statutes；P10 | |",
+      "ledgerChecks": [
+        "F17",
+        "ch09-cabinet-oath"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L90.2",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 90,
+      "section": "§1.3",
+      "markerText": "待核",
+      "context": "| F17 | **自治与第一届内阁** | 1959 年 5 月 30 日大选，行动党得 51 席中的 43 席（**待核**）；6 月 3 日自治；6 月 5 日李光耀宣誓就任总理，内阁 9 人（**名单待核**）；12 月尤索夫·伊萨就任元首 | P33 新加坡国家档案馆 / Singapore Statutes；P10 | |",
+      "ledgerChecks": [
+        "F17",
+        "ch09-cabinet-oath"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L91.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 91,
+      "section": "§1.3",
+      "markerText": "待核",
+      "context": "| F18 | **合并公投** | 1962 年 9 月 1 日，A 案约 71%，空白票约 25%（**待核**） | P30；P34 Lau 1998（**待核**） | 选项设计本身有争议（没有\"反对合并\"一项），两边写 |",
+      "ledgerChecks": [
+        "F18"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L91.2",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 91,
+      "section": "§1.3",
+      "markerText": "待核",
+      "context": "| F18 | **合并公投** | 1962 年 9 月 1 日，A 案约 71%，空白票约 25%（**待核**） | P30；P34 Lau 1998（**待核**） | 选项设计本身有争议（没有\"反对合并\"一项），两边写 |",
+      "ledgerChecks": [
+        "F18"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L92.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 92,
+      "section": "§1.3",
+      "markerText": "待核",
+      "context": "| F19 | **冷藏行动** | 1963 年 2 月 2 日，内部安全理事会下令逮捕 100 余人（113 / 111 / 107 说法不一，**待核**） | P35 Thum 2013；P36 Ramakrishna 2015；P37 李光耀 1998 | 两种解释各一段，不下结论 |",
+      "ledgerChecks": [
+        "F19"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L93.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 93,
+      "section": "§1.3",
+      "markerText": "待核",
+      "context": " 9 日在伦敦签《马来西亚协定》；9 月 16 日马来亚、新加坡、沙巴、砂拉越组成马来西亚，文莱没有加入；印尼\"对抗\"、菲律宾对沙巴的主张 | P9 Malaysia Agreement（UNTS vol. 750，**待核**）；P38 Tan Tai Yong 2008；P39 Sopiee 1974 | 原定 8 月 31 日，因联合国调查团推迟（**待核**） |",
+      "ledgerChecks": [
+        "F20"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L93.2",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 93,
+      "section": "§1.3",
+      "markerText": "待核",
+      "context": "| P9 Malaysia Agreement（UNTS vol. 750，**待核**）；P38 Tan Tai Yong 2008；P39 Sopiee 1974 | 原定 8 月 31 日，因联合国调查团推迟（**待核**） |",
+      "ledgerChecks": [
+        "F20"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L94.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 94,
+      "section": "§1.3",
+      "markerText": "待读",
+      "context": "族骚乱** | 7 月 21 日先知诞辰游行时爆发，死 23 人、伤 454 人；9 月 3 日起第二次，死 13 人、伤 106 人（另有 12 人之说） | P30 NLB Infopedia SIP_45（**原文待读**）；P34 | 两次都写；亲善委员会、宵禁；各方当时的说法并列 |",
+      "ledgerChecks": [
+        "F21"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L95.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 95,
+      "section": "§1.3",
+      "markerText": "待核",
+      "context": "| F22 | **麦唐纳大厦爆炸** | 1965 年 3 月 10 日，印尼突击队员在乌节路麦唐纳大厦放炸弹，3 人死、33 人伤（**待核**） | P30 | 两名突击队员 1968 年被处决，写在细看，不进时间轴 |",
+      "ledgerChecks": [
+        "F22"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L96.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 96,
+      "section": "§1.3",
+      "markerText": "待核",
+      "context": "| F23 | **分家** | 1965 年 8 月 7 日签《新加坡独立协定》；8 月 9 日马来西亚国会以 126 票对 0 票通过修宪（**待核**）；同日新加坡宣布独立；12 月 22 日尤索夫·伊萨成为第一任总统 | P9 Singapore Statutes Online（Independence of Singapore Agreement 1965、R",
+      "ledgerChecks": [
+        "F23"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L129.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 129,
+      "section": "§2/background",
+      "markerText": "待核",
+      "context": "- 正文：马六甲海峡与新加坡海峡是季风航路的咽喉；14 世纪的淡马锡（F1、F2）；15 世纪起马六甲王国，1511 年葡萄牙人占马六甲后，马六甲王室在柔佛重建，1613 年新加坡河口的据点被葡萄牙人焚毁（**待核**：Borschberg）；17–18 世纪新加坡海峡属柔佛—廖内，海人替苏丹巡海；18 世纪武吉士贵族在廖内掌权；1812 年苏丹马哈茂德三世去世后的继承之争（§1.2）。地图怎么读：区域图上的点是港口和都城；控制区",
+      "ledgerChecks": [
+        "F1",
+        "F2",
+        "background-regalia",
+        "background-site-coordinates"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L130.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 130,
+      "section": "§2/background",
+      "markerText": "待核",
+      "context": "- 细看：①**桑尼拉乌他马与狮子：故事，不是记载**（《马来纪年》的情节；新加坡不产狮子，\"他看见的可能是什么\"有几种猜测；1299 年是后人推算，**待核**）；②**史书里的淡马锡**（汪大渊、《爪哇史颂》、皮列士：三份记载各说了什么）；③**地下的淡马锡**（福康宁的瓷片、金饰，新加坡石；**配图 `temasek-finds`**）；④\"小渔村\"之说从哪里来。",
+      "ledgerChecks": [
+        "F1",
+        "F2",
+        "background-regalia",
+        "background-site-coordinates"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L136.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 136,
+      "section": "§2/background",
+      "markerText": "待核",
+      "context": "ng-temasek` · 1984 · [103.846, 1.295] · site｜`site-singapore-stone` · 1843 · [103.853, 1.288] · site（河口原址，**坐标待核**）｜`site-longyamen` · 1349 · [103.82, 1.265]（**位置有争议**，detail 写各说）· site｜`site-johor-lama` · 1540 · [104.0, 1",
+      "ledgerChecks": [
+        "F1",
+        "F2",
+        "background-regalia",
+        "background-site-coordinates"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L148.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 148,
+      "section": "§2/founding-1819",
+      "markerText": "待核",
+      "context": "litical｜`preliminary-agreement-1819` · 1819-01-30 · 同上 · political｜`hussein-brought-from-riau` · 1819-02-01（**待核**）· [104.42, 0.94] · political｜`treaty-1819` · 1819-02-06 · [103.853, 1.289] · political｜`dutch-protest-1819`",
+      "ledgerChecks": [
+        "F3",
+        "F4",
+        "ch01-hussein",
+        "ch01-farquhar",
+        "ch01-route"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L149.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 149,
+      "section": "§2/founding-1819",
+      "markerText": "待核",
+      "context": "- 路线：`eic-to-singapore-1819` · 1819-01-19 → 1819-01-28 · 槟城—马六甲海峡—卡里摩岛—新加坡河口（sea；**途经待核**：Buckley）｜`hussein-riau-1819` · 1819-01-31 → 1819-02-01 · 廖内—新加坡海峡—河口。",
+      "ledgerChecks": [
+        "F3",
+        "F4",
+        "ch01-hussein",
+        "ch01-farquhar",
+        "ch01-route"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L161.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 161,
+      "section": "§2/town-plan",
+      "markerText": "待核",
+      "context": "- 事件：`town-committee-1822` · 1822-11-04（**日期待核**）· [103.851, 1.292] · political｜`boat-quay-fill` · 1822 – 1823 · [103.849, 1.286] · political｜`convention-18",
+      "ledgerChecks": [
+        "F5",
+        "F7",
+        "ch02-committee",
+        "ch02-institution",
+        "ch02-convention",
+        "ch02-plan-legend",
+        "ch02-streets",
+        "census-1931-day"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L161.2",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 161,
+      "section": "§2/town-plan",
+      "markerText": "待核",
+      "context": "27] · site｜`site-kampong-glam-istana` · 1819 · [103.859, 1.302] · site｜`singapore-institution` · 1823-06-05（**待核**）· [103.85, 1.297] · political｜`anglo-dutch-treaty` · 1824-03-17 · [103.4, 1.6]（锚点放在海峡上，detail 写签于伦敦）· polit",
+      "ledgerChecks": [
+        "F5",
+        "F7",
+        "ch02-committee",
+        "ch02-institution",
+        "ch02-convention",
+        "ch02-plan-legend",
+        "ch02-streets",
+        "census-1931-day"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L166.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 166,
+      "section": "§2/free-port",
+      "markerText": "待核",
+      "context": "把锡、胡椒、海产运往中国；1840 年代鸦片战争、1841 年香港开埠，新加坡转口贸易的对手和伙伴；1864 年丹戎巴葛船坞；1867 年改直辖殖民地；1869 年苏伊士运河通航，蒸汽船让航程从三四个月缩到一个多月（**待核**）。",
+      "ledgerChecks": [
+        "F6",
+        "F10",
+        "ch03-straits-date",
+        "ch03-malacca",
+        "ch03-suez-forests"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L167.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 167,
+      "section": "§2/free-port",
+      "markerText": "待核",
+      "context": "- 细看：①**季风时刻表**：什么时候哪里的船来（**配图 `ocean-junk`**）；②**谁出钱养殖民地**：饷码制度和饷码商（Trocki）；③**甘蜜与胡椒**：种植园、森林被砍光、老虎伤人的记载（**数字待核**）；④香港开埠以后。",
+      "ledgerChecks": [
+        "F6",
+        "F10",
+        "ch03-straits-date",
+        "ch03-malacca",
+        "ch03-suez-forests"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L173.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 173,
+      "section": "§2/free-port",
+      "markerText": "待核",
+      "context": "- 事件：`straits-settlements-1826` · 1826-11-27（**日期待核**）· [100.34, 5.42] · political｜`capital-to-singapore` · 1832 · [103.851, 1.292] · political｜`malacca-handover",
+      "ledgerChecks": [
+        "F6",
+        "F10",
+        "ch03-straits-date",
+        "ch03-malacca",
+        "ch03-suez-forests"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L173.2",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 173,
+      "section": "§2/free-port",
+      "markerText": "待核",
+      "context": "2] · political｜`capital-to-singapore` · 1832 · [103.851, 1.292] · political｜`malacca-handover` · 1825-04-09（**待核**）· [102.25, 2.19] · political｜`naning-war` · 1831 – 1832 · [102.3, 2.4] · battle · `straits-settlements` vs ",
+      "ledgerChecks": [
+        "F6",
+        "F10",
+        "ch03-straits-date",
+        "ch03-malacca",
+        "ch03-suez-forests"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L187.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 187,
+      "section": "§2/arrivals",
+      "markerText": "待核",
+      "context": "- 事件：`first-amoy-junk` · 1821-02（**待核**）· [103.853, 1.287] · political｜`convicts-arrive` · 1825 · [103.85, 1.295] · political｜`convict-transport-en",
+      "ledgerChecks": [
+        "F7",
+        "F8",
+        "F9",
+        "ch04-first-amoy",
+        "ch04-ordinances",
+        "census-1931-day"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L187.2",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 187,
+      "section": "§2/arrivals",
+      "markerText": "待核",
+      "context": ", 1.295] · political｜`convict-transport-ends` · 1873 · 同上 · political｜`chinese-protectorate` · 1877-05-01（**日期待核**）· [103.845, 1.285] · political｜`indian-immigration-ordinance` · 1876 / 1884（**待核**）· political｜`census-1871",
+      "ledgerChecks": [
+        "F7",
+        "F8",
+        "F9",
+        "ch04-first-amoy",
+        "ch04-ordinances",
+        "census-1931-day"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L187.3",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 187,
+      "section": "§2/arrivals",
+      "markerText": "待核",
+      "context": "ectorate` · 1877-05-01（**日期待核**）· [103.845, 1.285] · political｜`indian-immigration-ordinance` · 1876 / 1884（**待核**）· political｜`census-1871` · 1871-04-03（**待核**）· political。",
+      "ledgerChecks": [
+        "F7",
+        "F8",
+        "F9",
+        "ch04-first-amoy",
+        "ch04-ordinances",
+        "census-1931-day"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L187.4",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 187,
+      "section": "§2/arrivals",
+      "markerText": "待核",
+      "context": "285] · political｜`indian-immigration-ordinance` · 1876 / 1884（**待核**）· political｜`census-1871` · 1871-04-03（**待核**）· political。",
+      "ledgerChecks": [
+        "F7",
+        "F8",
+        "F9",
+        "ch04-first-amoy",
+        "ch04-ordinances",
+        "census-1931-day"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L194.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 194,
+      "section": "§2/town-life",
+      "markerText": "待核",
+      "context": "- 细看：①**街名里的人**：一张表，街名、人名、他是谁、做了什么（**每条待核**，NLB Infopedia 与 Roots.sg）；②**会馆与私会党**：同乡互助和暴力是同一套组织的两面；③**1854 年**：发生了什么、多少人死、为什么今天还要记住（死者没有名字，只知道是普通人）；④亚逸",
+      "ledgerChecks": [
+        "F11",
+        "ch05-buildings",
+        "ch05-post-office"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L200.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 200,
+      "section": "§2/town-life",
+      "markerText": "待核",
+      "context": "ian-hock-keng`（1839）、`site-armenian-church`（1835）、`site-st-andrews`（1856）、`site-tan-tock-seng-1844`（1844，原址 **待核**）、`site-raffles-institution`（1823）、`site-chinatown`、`site-kampong-glam`、`site-serangoon-road`；`riots-1854` ·",
+      "ledgerChecks": [
+        "F11",
+        "ch05-buildings",
+        "ch05-post-office"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L200.2",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 200,
+      "section": "§2/town-life",
+      "markerText": "待核",
+      "context": "1823）、`site-chinatown`、`site-kampong-glam`、`site-serangoon-road`；`riots-1854` · 1854-05-05（until 1854-05-16，**待核**）· [103.85, 1.30] · massacre｜`telok-ayer-reclamation` · 1879（until 1887）· [103.848, 1.279] · political｜`post",
+      "ledgerChecks": [
+        "F11",
+        "ch05-buildings",
+        "ch05-post-office"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L200.3",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 200,
+      "section": "§2/town-life",
+      "markerText": "待核",
+      "context": "telok-ayer-reclamation` · 1879（until 1887）· [103.848, 1.279] · political｜`post-office-riots-1876` · 1876-12（**待核**）· political。",
+      "ledgerChecks": [
+        "F11",
+        "ch05-buildings",
+        "ch05-post-office"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L205.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 205,
+      "section": "§2/british-malaya",
+      "markerText": "待核",
+      "context": "保护\"而不是\"殖民地\"（马来统治者的视角、英国的视角）；锡和橡胶让新加坡成为加工与出口港（**配图 `rubber-and-tin`**）；1915 年兵变（F12）；1923–24 年长堤；1927 年牛车水事件（**待核**）；1930 年代大萧条，政府遣返失业华工、1933 年起限制男性移民（**待核**）；1931 年普查；1938 年海军基地（复用 ww2 `singapore-naval-base`）；水：1927 年与柔佛订第",
+      "ledgerChecks": [
+        "F12",
+        "ch06-states",
+        "ch06-mutiny-location",
+        "ch06-causeway",
+        "ch06-kreta-ayer",
+        "ch06-depression"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L205.2",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 205,
+      "section": "§2/british-malaya",
+      "markerText": "待核",
+      "context": "口港（**配图 `rubber-and-tin`**）；1915 年兵变（F12）；1923–24 年长堤；1927 年牛车水事件（**待核**）；1930 年代大萧条，政府遣返失业华工、1933 年起限制男性移民（**待核**）；1931 年普查；1938 年海军基地（复用 ww2 `singapore-naval-base`）；水：1927 年与柔佛订第一份供水协议（链到 `<TopicLink slug=\"four-taps\">`）。",
+      "ledgerChecks": [
+        "F12",
+        "ch06-states",
+        "ch06-mutiny-location",
+        "ch06-causeway",
+        "ch06-kreta-ayer",
+        "ch06-depression"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L206.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 206,
+      "section": "§2/british-malaya",
+      "markerText": "待核",
+      "context": "、马来属邦各是什么（名词表）；②**1915 年**：兵变、镇压、公开处决，以及新加坡各族志愿军（**两边写**）；③橡胶园里的人：工头制度下的泰米尔劳工；④大萧条：为什么这十年移民变少了、女性移民变多了（萨姆水女，**待核**）。",
+      "ledgerChecks": [
+        "F12",
+        "ch06-states",
+        "ch06-mutiny-location",
+        "ch06-causeway",
+        "ch06-kreta-ayer",
+        "ch06-depression"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L213.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 213,
+      "section": "§2/british-malaya",
+      "markerText": "待核",
+      "context": "- 事件：`pangkor-1874` · 1874-01-20 · [100.56, 4.22] · political｜`perak-war` · 1875-11 – 1876（**待核**；马来一方：毕治被杀与英军镇压）· battle｜`fms-1896` · 1896-07-01 · [101.69, 3.15] · political｜`johor-treaty-1885` · 1885-12-",
+      "ledgerChecks": [
+        "F12",
+        "ch06-states",
+        "ch06-mutiny-location",
+        "ch06-causeway",
+        "ch06-kreta-ayer",
+        "ch06-depression"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L213.2",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 213,
+      "section": "§2/british-malaya",
+      "markerText": "待核",
+      "context": "一方：毕治被杀与英军镇压）· battle｜`fms-1896` · 1896-07-01 · [101.69, 3.15] · political｜`johor-treaty-1885` · 1885-12-11（**待核**）· [103.76, 1.46] · political｜`labuan-to-ss` · 1907 · [115.24, 5.28] · political｜`anglo-siamese-treaty` · 19",
+      "ledgerChecks": [
+        "F12",
+        "ch06-states",
+        "ch06-mutiny-location",
+        "ch06-causeway",
+        "ch06-kreta-ayer",
+        "ch06-depression"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L213.3",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 213,
+      "section": "§2/british-malaya",
+      "markerText": "待核",
+      "context": "09-07-09 · [100.5, 13.75] · political｜`mutiny-1915` · 1915-02-15（until 1915-02-22）· [103.80, 1.30]（亚历山大兵营，**坐标待核**）· atrocity｜`mutiny-executions-1915` · 1915-03-25（**待核**）· [103.837, 1.282]（欧南路监狱）· atrocity｜`causeway-1924`",
+      "ledgerChecks": [
+        "F12",
+        "ch06-states",
+        "ch06-mutiny-location",
+        "ch06-causeway",
+        "ch06-kreta-ayer",
+        "ch06-depression"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L213.4",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 213,
+      "section": "§2/british-malaya",
+      "markerText": "待核",
+      "context": "15-02-15（until 1915-02-22）· [103.80, 1.30]（亚历山大兵营，**坐标待核**）· atrocity｜`mutiny-executions-1915` · 1915-03-25（**待核**）· [103.837, 1.282]（欧南路监狱）· atrocity｜`causeway-1924` · 1924-06-28 · [103.77, 1.452] · political｜`kreta-ayer-",
+      "ledgerChecks": [
+        "F12",
+        "ch06-states",
+        "ch06-mutiny-location",
+        "ch06-causeway",
+        "ch06-kreta-ayer",
+        "ch06-depression"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L213.5",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 213,
+      "section": "§2/british-malaya",
+      "markerText": "待核",
+      "context": "（欧南路监狱）· atrocity｜`causeway-1924` · 1924-06-28 · [103.77, 1.452] · political｜`kreta-ayer-1927` · 1927-03-12（**待核**）· massacre｜`census-1931` · 1931-04 · political｜`dindings-to-perak` · 1935-02-16（**待核**）· [100.63, 4.23] · p",
+      "ledgerChecks": [
+        "F12",
+        "ch06-states",
+        "ch06-mutiny-location",
+        "ch06-causeway",
+        "ch06-kreta-ayer",
+        "ch06-depression"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L213.6",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 213,
+      "section": "§2/british-malaya",
+      "markerText": "待核",
+      "context": "r-1927` · 1927-03-12（**待核**）· massacre｜`census-1931` · 1931-04 · political｜`dindings-to-perak` · 1935-02-16（**待核**）· [100.63, 4.23] · political｜`singapore-naval-base`（复制 ww2）。",
+      "ledgerChecks": [
+        "F12",
+        "ch06-states",
+        "ch06-mutiny-location",
+        "ch06-causeway",
+        "ch06-kreta-ayer",
+        "ch06-depression"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L219.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 219,
+      "section": "§2/war-and-occupation",
+      "markerText": "待核",
+      "context": "薯）；**各群体的处境**：华人首当其冲（肃清、五千万\"奉纳金\"），马来人与印度人被拉拢也被强征（印度国民军、泰缅铁路的亚洲劳工），欧亚裔与欧洲平民被拘禁、迁往巴哈乌；林谋盛、136 部队、马来亚人民抗日军、周美玉（**待核**）；1943 年日本把北马四州交给泰国（K9）；1944–45 年盟军空袭新加坡，平民伤亡（**数字待核**，Commons 有 USAAF 目标图作核对）；1945 年 9 月 12 日市政大厦受降。",
+      "ledgerChecks": [
+        "F13",
+        "ch07-resistance",
+        "ch07-four-states-raids",
+        "ch07-bahau",
+        "ch07-endau",
+        "ch08-bma-proclamation"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L219.2",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 219,
+      "section": "§2/war-and-occupation",
+      "markerText": "待核",
+      "context": "、泰缅铁路的亚洲劳工），欧亚裔与欧洲平民被拘禁、迁往巴哈乌；林谋盛、136 部队、马来亚人民抗日军、周美玉（**待核**）；1943 年日本把北马四州交给泰国（K9）；1944–45 年盟军空袭新加坡，平民伤亡（**数字待核**，Commons 有 USAAF 目标图作核对）；1945 年 9 月 12 日市政大厦受降。",
+      "ledgerChecks": [
+        "F13",
+        "ch07-resistance",
+        "ch07-four-states-raids",
+        "ch07-bahau",
+        "ch07-endau",
+        "ch08-bma-proclamation"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L227.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 227,
+      "section": "§2/war-and-occupation",
+      "markerText": "待核",
+      "context": "-to-thailand` · 1943-10-18 · [100.37, 6.12] · political｜`allied-raids-singapore` · 1944-11-05（until 1945-03，**待核**）· [103.84, 1.265] · bombing · `sides: { attacker: uk?/usa }`（**按来源定**）｜`bahau-settlement` · 1943-12（**待核**）",
+      "ledgerChecks": [
+        "F13",
+        "ch07-resistance",
+        "ch07-four-states-raids",
+        "ch07-bahau",
+        "ch07-endau",
+        "ch08-bma-proclamation"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L227.2",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 227,
+      "section": "§2/war-and-occupation",
+      "markerText": "待核",
+      "context": "，**待核**）· [103.84, 1.265] · bombing · `sides: { attacker: uk?/usa }`（**按来源定**）｜`bahau-settlement` · 1943-12（**待核**）· [102.4, 2.82] · political｜`endau-settlement` · 1943（**待核**）· [103.62, 2.65] · political。",
+      "ledgerChecks": [
+        "F13",
+        "ch07-resistance",
+        "ch07-four-states-raids",
+        "ch07-bahau",
+        "ch07-endau"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L227.3",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 227,
+      "section": "§2/war-and-occupation",
+      "markerText": "待核",
+      "context": "/usa }`（**按来源定**）｜`bahau-settlement` · 1943-12（**待核**）· [102.4, 2.82] · political｜`endau-settlement` · 1943（**待核**）· [103.62, 2.65] · political。",
+      "ledgerChecks": [
+        "F13",
+        "ch07-resistance",
+        "ch07-four-states-raids",
+        "ch07-bahau",
+        "ch07-endau"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L233.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 233,
+      "section": "§2/after-the-war",
+      "markerText": "待核",
+      "context": "成为单独的直辖殖民地，半岛组成马来亚联盟——马来人反对（巫统 1946 年成立），1948 年改为马来亚联合邦；新加坡留在外面的原因（华人人口比例、英国的基地与港口）；1948 年第一次立法议会选举（6 个民选议席，**待核**）；1948 年 6 月紧急状态（马共、英国、新村，三方写）；1950 年玛丽亚·赫托暴乱（F14）；1953 年林德宪制委员会，1955 年选举，马绍尔任首席部长；1955 年福利巴士工潮（F15）。",
+      "ledgerChecks": [
+        "F14",
+        "F15",
+        "ch08-elections",
+        "ch08-locations",
+        "ch08-federation",
+        "ch08-umno"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L234.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 234,
+      "section": "§2/after-the-war",
+      "markerText": "待核",
+      "context": "②**紧急状态**：在马来亚打的仗、在新加坡怎样感受到（逮捕、学校、工会）；③**玛丽亚·赫托**：一宗监护权官司为什么引发暴乱，死者是谁（逐类写，不渲染）；④**福利巴士**：工人、学生、警察三方，四个死者的名字（**待核**）。",
+      "ledgerChecks": [
+        "F14",
+        "F15",
+        "ch08-elections",
+        "ch08-locations"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L241.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 241,
+      "section": "§2/after-the-war",
+      "markerText": "待核",
+      "context": " 1.46] · political｜`federation-1948` · 1948-02-01 · [101.69, 3.15] · political｜`election-1948` · 1948-03-20（**待核**）· political｜`emergency-1948` · 1948-06-18 · [101.0, 4.6] · political｜`hertogh-riots` · 1950-12-11（until 12-",
+      "ledgerChecks": [
+        "F14",
+        "F15",
+        "ch08-elections",
+        "ch08-locations",
+        "ch08-federation",
+        "ch08-umno"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L241.2",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 241,
+      "section": "§2/after-the-war",
+      "markerText": "待核",
+      "context": "· 1948-06-18 · [101.0, 4.6] · political｜`hertogh-riots` · 1950-12-11（until 12-13）· [103.856, 1.302]（苏丹回教堂附近，**待核**）· massacre｜`election-1955` · 1955-04-02 · political｜`hock-lee-riots` · 1955-05-12 · [103.88, 1.322]（亚历山大路车厂",
+      "ledgerChecks": [
+        "F14",
+        "F15",
+        "ch08-elections",
+        "ch08-locations",
+        "ch02-sultan-istana",
+        "ch08-federation",
+        "ch08-umno"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L241.3",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 241,
+      "section": "§2/after-the-war",
+      "markerText": "待核",
+      "context": "· massacre｜`election-1955` · 1955-04-02 · political｜`hock-lee-riots` · 1955-05-12 · [103.88, 1.322]（亚历山大路车厂，**待核**）· massacre。",
+      "ledgerChecks": [
+        "F14",
+        "F15",
+        "ch08-elections",
+        "ch08-locations"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L246.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 246,
+      "section": "§2/self-government",
+      "markerText": "待核",
+      "context": "绍尔与劳工阵线政府，1956 年伦敦宪制谈判破裂、马绍尔辞职，林有福接任；1956 年 10 月华校学潮（F16）与随后的逮捕；1957 年 8 月 31 日马来亚独立（东姑阿都拉曼）；1957 年新加坡公民权法令（**待核**）；1958 年《新加坡州宪法》；1959 年 5 月 30 日大选（F17）、6 月 3 日自治、6 月 5 日第一届内阁；12 月尤索夫·伊萨就任元首，州旗、州徽、州歌《前进吧，新加坡》（1959 年 12 月 ",
+      "ledgerChecks": [
+        "F16",
+        "F17",
+        "ch09-marshall",
+        "ch09-citizenship",
+        "ch09-enfranchisement-symbols",
+        "ch09-cabinet-oath"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L246.2",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 246,
+      "section": "§2/self-government",
+      "markerText": "待核",
+      "context": "加坡州宪法》；1959 年 5 月 30 日大选（F17）、6 月 3 日自治、6 月 5 日第一届内阁；12 月尤索夫·伊萨就任元首，州旗、州徽、州歌《前进吧，新加坡》（1959 年 12 月 3 日首次正式使用，**待核**）。",
+      "ledgerChecks": [
+        "F16",
+        "F17",
+        "ch09-marshall",
+        "ch09-citizenship",
+        "ch09-enfranchisement-symbols",
+        "ch09-cabinet-oath"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L247.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 247,
+      "section": "§2/self-government",
+      "markerText": "待核",
+      "context": "- 细看：①**谁能投票**：1955 年自动登记、1957 年公民权，选民从几万变成几十万（**数字待核**）；②**1956 年的学生**：华校生、工会、政府各自的说法；③**第一届内阁**：九个人是谁（表，**待核**）；④马来亚独立对新加坡意味着什么。",
+      "ledgerChecks": [
+        "F16",
+        "F17",
+        "ch09-marshall",
+        "ch09-citizenship",
+        "ch09-enfranchisement-symbols",
+        "ch09-cabinet-oath"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L247.2",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 247,
+      "section": "§2/self-government",
+      "markerText": "待核",
+      "context": "- 细看：①**谁能投票**：1955 年自动登记、1957 年公民权，选民从几万变成几十万（**数字待核**）；②**1956 年的学生**：华校生、工会、政府各自的说法；③**第一届内阁**：九个人是谁（表，**待核**）；④马来亚独立对新加坡意味着什么。",
+      "ledgerChecks": [
+        "F16",
+        "F17",
+        "ch09-marshall",
+        "ch09-citizenship",
+        "ch09-enfranchisement-symbols",
+        "ch09-cabinet-oath"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L253.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 253,
+      "section": "§2/self-government",
+      "markerText": "待核",
+      "context": "- 事件：`marshall-resigns` · 1956-06-07（**待核**）· political｜`school-riots-1956` · 1956-10-24（until 10-29）· [103.835, 1.32]（**待核**）· massacre｜`merdeka-1957`",
+      "ledgerChecks": [
+        "F16",
+        "F17",
+        "ch09-marshall",
+        "ch09-citizenship",
+        "ch09-enfranchisement-symbols",
+        "ch09-cabinet-oath"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L253.2",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 253,
+      "section": "§2/self-government",
+      "markerText": "待核",
+      "context": "all-resigns` · 1956-06-07（**待核**）· political｜`school-riots-1956` · 1956-10-24（until 10-29）· [103.835, 1.32]（**待核**）· massacre｜`merdeka-1957` · 1957-08-31 · [101.69, 3.15] · political｜`citizenship-1957` · 1957（**待核**）· poli",
+      "ledgerChecks": [
+        "F16",
+        "F17",
+        "ch09-marshall",
+        "ch09-citizenship",
+        "ch09-enfranchisement-symbols",
+        "ch09-cabinet-oath"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L253.3",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 253,
+      "section": "§2/self-government",
+      "markerText": "待核",
+      "context": " 1.32]（**待核**）· massacre｜`merdeka-1957` · 1957-08-31 · [101.69, 3.15] · political｜`citizenship-1957` · 1957（**待核**）· political｜`election-1959` · 1959-05-30 · [103.85, 1.30] · political｜`self-government-1959` · 1959-06-03 ·",
+      "ledgerChecks": [
+        "F16",
+        "F17",
+        "ch09-marshall",
+        "ch09-citizenship",
+        "ch09-enfranchisement-symbols",
+        "ch09-cabinet-oath"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L258.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 258,
+      "section": "§2/merger",
+      "markerText": "待核",
+      "context": " 月 2 日冷藏行动（F19，两种解释）；沙巴、砂拉越的意见（科博德调查委员会）、文莱 1962 年 12 月起事、不加入；印尼的\"对抗\"、菲律宾对沙巴的主张；1963 年 8 月 31 日李光耀宣布新加坡\"独立\"（**待核**）；9 月 16 日马来西亚成立（F20）；9 月 21 日新加坡州选举（**待核**）。",
+      "ledgerChecks": [
+        "F18",
+        "F19",
+        "F20",
+        "ch10-barisan",
+        "ch10-konfrontasi",
+        "ch10-august-declaration",
+        "ch10-brunei"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L258.2",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 258,
+      "section": "§2/merger",
+      "markerText": "待核",
+      "context": " 1962 年 12 月起事、不加入；印尼的\"对抗\"、菲律宾对沙巴的主张；1963 年 8 月 31 日李光耀宣布新加坡\"独立\"（**待核**）；9 月 16 日马来西亚成立（F20）；9 月 21 日新加坡州选举（**待核**）。",
+      "ledgerChecks": [
+        "F18",
+        "F19",
+        "F20",
+        "ch10-barisan",
+        "ch10-konfrontasi",
+        "ch10-august-declaration",
+        "ch10-brunei"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L265.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 265,
+      "section": "§2/merger",
+      "markerText": "待核",
+      "context": "- 事件：`tunku-proposal-1961` · 1961-05-27 · [103.85, 1.29] · political｜`barisan-sosialis-1961` · 1961-07-26（**待核**）· political｜`referendum-1962` · 1962-09-01 · political｜`brunei-revolt` · 1962-12-08 · [114.94, 4.89] · batt",
+      "ledgerChecks": [
+        "F18",
+        "F19",
+        "F20",
+        "ch10-barisan",
+        "ch10-konfrontasi",
+        "ch10-august-declaration",
+        "ch10-brunei"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L265.2",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 265,
+      "section": "§2/merger",
+      "markerText": "待定",
+      "context": "cal｜`referendum-1962` · 1962-09-01 · political｜`brunei-revolt` · 1962-12-08 · [114.94, 4.89] · battle（**sides 待定**）｜`coldstore-1963` · 1963-02-02 · [103.85, 1.30] · political｜`malaysia-agreement` · 1963-07-09 · [-0.13, 51.",
+      "ledgerChecks": [
+        "F18",
+        "F19",
+        "F20",
+        "ch10-barisan",
+        "ch10-konfrontasi",
+        "ch10-august-declaration",
+        "ch10-brunei"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L265.3",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 265,
+      "section": "§2/merger",
+      "markerText": "待核",
+      "context": "sia-day-1963` · 1963-09-16 · [101.69, 3.15] · political｜`konfrontasi-begins` · 1963-01-20 / 1963-04-12（**哪天算开始待核**）· [110.3, 1.5] · political。",
+      "ledgerChecks": [
+        "F18",
+        "F19",
+        "F20",
+        "ch10-barisan",
+        "ch10-konfrontasi",
+        "ch10-august-declaration",
+        "ch10-brunei"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L270.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 270,
+      "section": "§2/separation",
+      "markerText": "待核",
+      "context": "21）、宵禁、各族亲善委员会；1965 年 3 月 10 日麦唐纳大厦爆炸（F22）；1965 年 5 月马来西亚团结总机构；8 月 7 日签约、8 月 9 日分家（F23），李光耀的记者会；第一届内阁（独立后，**名单待核**）；12 月 22 日尤索夫·伊萨就任总统；拉惹勒南、奥斯曼·渥等人对多元种族的主张（P5 课纲）；章末一段：今天新加坡把 7 月 21 日定为种族和谐日，马来西亚和新加坡怎样各自记住 1965 年。",
+      "ledgerChecks": [
+        "F21",
+        "F22",
+        "F23",
+        "ch11-cabinet",
+        "ch11-harmony"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L271.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 271,
+      "section": "§2/separation",
+      "markerText": "待核",
+      "context": "①**1964 年：谁在说什么**：两次骚乱前后各方的公开说法，死伤与逮捕数（F21）；②**分家：两边的说法**：东姑（避免流血）、李光耀（\"痛苦的时刻\"）、英国档案（Lau 1998）；③**第一届内阁**：表（**待核**）；④**种族和谐日与亲善委员会**（P5 课纲 · 拉惹勒南、奥斯曼·渥）。",
+      "ledgerChecks": [
+        "F21",
+        "F22",
+        "F23",
+        "ch11-cabinet",
+        "ch11-harmony"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L278.1",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 278,
+      "section": "§2/separation",
+      "markerText": "待核",
+      "context": "· 1964-04-25 · political｜`race-riots-july-1964` · 1964-07-21（until 1964-08-07）· [103.858, 1.303]（游行路线上冲突开始处，**待核**）· massacre｜`race-riots-september-1964` · 1964-09-03（until 09-07）· [103.897, 1.317]（芽笼士乃，**待核**）· massacre｜`",
+      "ledgerChecks": [
+        "F21",
+        "F22",
+        "F23",
+        "ch11-cabinet",
+        "ch11-harmony"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L278.2",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 278,
+      "section": "§2/separation",
+      "markerText": "待核",
+      "context": "]（游行路线上冲突开始处，**待核**）· massacre｜`race-riots-september-1964` · 1964-09-03（until 09-07）· [103.897, 1.317]（芽笼士乃，**待核**）· massacre｜`macdonald-house-1965` · 1965-03-10 · [103.845, 1.299] · bombing · `sides: { attacker: indonesia",
+      "ledgerChecks": [
+        "F21",
+        "F22",
+        "F23",
+        "ch11-cabinet",
+        "ch11-harmony"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    },
+    {
+      "marker": "L278.3",
+      "spec": "docs/28-singapore-1819-1965-content-spec.md",
+      "line": 278,
+      "section": "§2/separation",
+      "markerText": "待核",
+      "context": "· political｜`separation-1965` · 1965-08-09 · [103.851, 1.291] · political｜`first-cabinet-1965` · 1965-08-09（**待核**）· political｜`first-president-1965` · 1965-12-22 · 同上 · political。",
+      "ledgerChecks": [
+        "F21",
+        "F22",
+        "F23",
+        "ch11-cabinet",
+        "ch11-harmony"
+      ],
+      "status": "covered by explicit findings; see each check status"
+    }
+  ],
+  "dateFollowup": "research/date-closures.json inventories all 21 date gaps; 15 milestones confirmed at stated evidence levels, one partly resolved, five unverified. BMA signing is distinct from local military control and surrender."
+}

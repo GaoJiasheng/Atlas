@@ -1,0 +1,263 @@
+{
+  "url": "https://www.eld.gov.sg/elections_past_parliamentary1959.html",
+  "method": "For each constituency results table select largest Total Votes; count winning PAP candidates. Uncontested seats if present need separate accounting.",
+  "constituencies": 51,
+  "PAP_winners": 43,
+  "winners": [
+    [
+      "S. V. Lingam",
+      "PAP",
+      5701
+    ],
+    [
+      "Baharudin bin Mohamed Ariff",
+      "PAP",
+      5167
+    ],
+    [
+      "Hoe Puay Choo",
+      "PAP",
+      6014
+    ],
+    [
+      "Sellappa Ramaswamy",
+      "PAP",
+      5922
+    ],
+    [
+      "Lee Khoon Choy",
+      "PAP",
+      6156
+    ],
+    [
+      "Yaacob bin Mohamed",
+      "PAP",
+      6174
+    ],
+    [
+      "Lim Yew Hock",
+      "SPA",
+      5275
+    ],
+    [
+      "Teo Hock Guan",
+      "PAP",
+      3480
+    ],
+    [
+      "Ong Chang Sam",
+      "PAP",
+      3536
+    ],
+    [
+      "K. M. Byrne",
+      "PAP",
+      7120
+    ],
+    [
+      "Chan Choy Sun",
+      "PAP",
+      9301
+    ],
+    [
+      "A. P. Rajah",
+      "-  \u00a0 \r\n\t\t\t\t\t\t\t\t\t\t\t\t  Independent Candidate",
+      4077
+    ],
+    [
+      "Mohamed Ismail bin Abdul Rahim",
+      "PAP",
+      7153
+    ],
+    [
+      "Abdul Hamid bin Haji Jumat",
+      "PKMS",
+      7940
+    ],
+    [
+      "Yong Nyuk Lin",
+      "PAP",
+      8923
+    ],
+    [
+      "Lau Peter",
+      "PAP",
+      9227
+    ],
+    [
+      "Ong Eng Guan",
+      "PAP",
+      8834
+    ],
+    [
+      "Chan Chee Seng",
+      "PAP",
+      7600
+    ],
+    [
+      "Tan Cheng Tong",
+      "PAP",
+      4837
+    ],
+    [
+      "C. H. Koh",
+      "SPA",
+      6136
+    ],
+    [
+      "Chor Yeok Eng",
+      "PAP",
+      4502
+    ],
+    [
+      "Buang bin Omar Junid",
+      "PAP",
+      5690
+    ],
+    [
+      "S. Rajaratnam",
+      "PAP",
+      6324
+    ],
+    [
+      "G. Kandasamy",
+      "PAP",
+      6059
+    ],
+    [
+      "Mohd. Ali b. Alwi",
+      "PKMS",
+      4443
+    ],
+    [
+      "Goh Keng Swee",
+      "PAP",
+      9313
+    ],
+    [
+      "Lin You Eng",
+      "PAP",
+      4324
+    ],
+    [
+      "Chua Seng Kim",
+      "SPA",
+      3031
+    ],
+    [
+      "Sheng Nam Chin",
+      "PAP",
+      5622
+    ],
+    [
+      "Tee Kim Leng",
+      "PAP",
+      2123
+    ],
+    [
+      "Tan Kia Gan",
+      "PAP",
+      6531
+    ],
+    [
+      "Ng Teng Kian",
+      "PAP",
+      4072
+    ],
+    [
+      "Lee Siew Choh",
+      "PAP",
+      5301
+    ],
+    [
+      "Lim Cheng Lock",
+      "PAP",
+      3430
+    ],
+    [
+      "Toh Chin Chye",
+      "PAP",
+      7995
+    ],
+    [
+      "Ahmad Bin Ibrahim",
+      "PAP",
+      4316
+    ],
+    [
+      "Wee Toon Boon",
+      "PAP",
+      5352
+    ],
+    [
+      "Leong Keng Seng",
+      "PAP",
+      3843
+    ],
+    [
+      "Sahorah bte Ahmat",
+      "PAP",
+      4407
+    ],
+    [
+      "Ahmad Jabri B. M. Akib",
+      "PKMS",
+      2598
+    ],
+    [
+      "Fung Yin Ching",
+      "PAP",
+      5372
+    ],
+    [
+      "Goh Chew Chua",
+      "PAP",
+      7461
+    ],
+    [
+      "Thio Chan Bee",
+      "SPA",
+      2698
+    ],
+    [
+      "Lee Kuan Yew",
+      "PAP",
+      7617
+    ],
+    [
+      "Ong Pang Boon",
+      "PAP",
+      8372
+    ],
+    [
+      "John Mammen",
+      "PAP",
+      5803
+    ],
+    [
+      "T. Bani",
+      "PAP",
+      4978
+    ],
+    [
+      "Lee Teck Him",
+      "PAP",
+      5175
+    ],
+    [
+      "Wong Soon Fong",
+      "PAP",
+      8693
+    ],
+    [
+      "Mohd. Ariff bin Suradi",
+      "PAP",
+      4420
+    ],
+    [
+      "Chan Sun Wing",
+      "PAP",
+      4497
+    ]
+  ]
+}

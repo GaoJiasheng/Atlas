@@ -1,0 +1,73 @@
+{
+  "checked": "2026-10-18",
+  "event": "race-riots-september-1964",
+  "finding": "The existing Geylang Serai HTML discovery redirects to Geylang Q525295. That item is the broader planning area, and its P625 must not be labelled as a Geylang Serai district centre. No separate neighbourhood-only Geylang Serai item with a qualified coordinate was identified in this pass.",
+  "recommended": {
+    "qid": "Q107803916",
+    "place": "Geylang Serai Market",
+    "revision": 2457340969,
+    "statement": "Q107803916$58e763e3-4973-ecf8-8ca8-9d4001b2549b",
+    "property": "P625",
+    "at": [
+      103.8982195336871,
+      1.3166958
+    ],
+    "precisionDegrees": 1e-08,
+    "url": "https://www.wikidata.org/wiki/Q107803916",
+    "revisionUrl": "https://www.wikidata.org/w/index.php?title=Q107803916&oldid=2457340969",
+    "receipt": "raw/anchor-geylang-Q107803916.json",
+    "sha256": "11f919b0abc677ee88254ffc0e73a228507fd2dc30d6c5e8eb2aa1743c058ea9",
+    "licence": "Wikidata structured data CC0",
+    "read": "Read complete cached entity identity and P625; no individual P625 claim references are supplied by the item.",
+    "id": "geylang-serai-market-reference",
+    "events": [
+      "race-riots-september-1964"
+    ],
+    "approximate": true,
+    "role": "Present Geylang Serai Market as a documented locality-centre reference for the Geylang Serai area. NHB defines the locality around this market and describes the market as its social/economic centre. This is not a claim for the exact trishaw killing site, the opposite Changi Market, or the footprint of the former1964 market.",
+    "sourceNote": "Approximate map anchor: present Geylang Serai Market, used as the documented centre/reference of the surrounding Geylang Serai locality. NHB Roots’ Geylang Serai Heritage Gallery defines Geylang Serai around the market and describes its social/economic role. Position: Wikidata Q107803916, P625 statement Q107803916$58e763e3-4973-ecf8-8ca8-9d4001b2549b, revision 2457340969; longitude/latitude [103.8982195336871, 1.3166958]. NLB’s Communal riots of1964 places the September trigger opposite the Changi market at Geylang Serai. The modern market coordinate does not establish that vanished market’s footprint or the exact killing site. Retain approximate. Structured data CC0."
+  },
+  "alternative": {
+    "qid": "Q525295",
+    "place": "Geylang",
+    "revision": 2518376507,
+    "statement": "q525295$2B126D27-2C11-4C44-B072-C049A61F923A",
+    "property": "P625",
+    "at": [
+      103.88694444444,
+      1.3205555555556
+    ],
+    "precisionDegrees": null,
+    "url": "https://www.wikidata.org/wiki/Q525295",
+    "revisionUrl": "https://www.wikidata.org/w/index.php?title=Q525295&oldid=2518376507",
+    "receipt": "raw/anchor-geylang-Q525295.json",
+    "sha256": "246fff106bacefd1179d8d2d9f7f272410b6d0b6ed141eaca099b4b9934cacf3",
+    "licence": "Wikidata structured data CC0",
+    "read": "Read complete cached entity identity and P625; no individual P625 claim references are supplied by the item.",
+    "role": "Broader Geylang planning-area representative point. May be retained only with this broader wording and an explicit note that NLB identifies the more specific Geylang Serai locality; do not call it a Serai centre.",
+    "assessment": "The market-reference correction is geographically more specific and directly supported by NHB’s locality definition."
+  },
+  "historicalLocusEvidence": {
+    "url": "https://www.nlb.gov.sg/main/article-detail?cmsuuid=3cb72867-1eec-4caa-96b2-365e1301cbb1",
+    "title": "Jamie Han, Communal riots of1964, Singapore Infopedia, NLB",
+    "read": "Read September riots and casualties/damage paragraphs: the trigger was the trishaw rider’s killing opposite Changi market at Geylang Serai; subsequent damage was especially severe in Geylang Serai. This proves the locality, not a point coordinate."
+  },
+  "localityCentreEvidence": {
+    "url": "https://www.roots.gov.sg/stories-landing/stories/Geylang-Serai-Heritage-Gallery",
+    "title": "NHB Roots, Geylang Serai Heritage Gallery",
+    "read": "Read introduction and Geylang Serai Market section: locality conventionally refers to businesses/residences surrounding Geylang Serai Market, between PayaLebarRoad and JalanEunos. Market was the social/economic centre; original1964 market was demolished/replaced in2006–2010, so use a present-centre reference with explicit historical-footprint limits."
+  },
+  "receipts": [
+    {
+      "url": "https://www.nlb.gov.sg/main/article-detail?cmsuuid=3cb72867-1eec-4caa-96b2-365e1301cbb1",
+      "file": "raw/anchor-geylang-nlb-riots.html",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "url": "https://www.roots.gov.sg/stories-landing/stories/Geylang-Serai-Heritage-Gallery",
+      "file": "raw/anchor-geylang-roots-gallery.html",
+      "sha256": "b3ec89e6ce95902f5bb69abfaae8930dafdf9888279d54a95a90ba82f35fff5b"
+    }
+  ],
+  "writes": "Research artifact and raw receipts only; no event, source catalog or assignment changes."
+}

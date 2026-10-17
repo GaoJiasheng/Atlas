@@ -1,0 +1,312 @@
+[
+  {
+    "id": "eic",
+    "name": {
+      "en": "East India Company",
+      "zh": "【待译】East India Company"
+    },
+    "joined": "1819-01-28",
+    "bloc": "neutral",
+    "color": "token:holder-3"
+  },
+  {
+    "id": "johor",
+    "name": {
+      "en": "Johor",
+      "zh": "【待译】Johor"
+    },
+    "joined": "1819-01-28",
+    "bloc": "neutral",
+    "color": "token:holder-5"
+  },
+  {
+    "id": "netherlands",
+    "name": {
+      "en": "Netherlands",
+      "zh": "【待译】Netherlands"
+    },
+    "joined": "1819-01-28",
+    "bloc": "neutral",
+    "color": "token:holder-4"
+  },
+  {
+    "id": "european-town",
+    "name": {
+      "en": "European Town (1822 plan)",
+      "zh": "【待译】European Town (1822 plan)"
+    },
+    "joined": "1823-06-09",
+    "bloc": "neutral",
+    "color": "token:holder-3"
+  },
+  {
+    "id": "chinese-kampong",
+    "name": {
+      "en": "Chinese Kampong (1822 plan)",
+      "zh": "【待译】Chinese Kampong (1822 plan)"
+    },
+    "joined": "1823-06-09",
+    "bloc": "neutral",
+    "color": "token:holder-7"
+  },
+  {
+    "id": "chulia-kampong",
+    "name": {
+      "en": "Chulia Kampong (1822 plan)",
+      "zh": "【待译】Chulia Kampong (1822 plan)"
+    },
+    "joined": "1823-06-09",
+    "bloc": "neutral",
+    "color": "token:holder-8"
+  },
+  {
+    "id": "bugis-kampong",
+    "name": {
+      "en": "Bugis Kampong (1822 plan)",
+      "zh": "【待译】Bugis Kampong (1822 plan)"
+    },
+    "joined": "1823-06-09",
+    "bloc": "neutral",
+    "color": "token:holder-6"
+  },
+  {
+    "id": "arab-kampong",
+    "name": {
+      "en": "Arab Kampong (1822 plan)",
+      "zh": "【待译】Arab Kampong (1822 plan)"
+    },
+    "joined": "1823-06-09",
+    "bloc": "neutral",
+    "color": "token:holder-4"
+  },
+  {
+    "id": "kampong-glam",
+    "name": {
+      "en": "Sultan’s Kampong (1822 plan)",
+      "zh": "【待译】Sultan’s Kampong (1822 plan)"
+    },
+    "joined": "1823-06-09",
+    "bloc": "neutral",
+    "color": "token:holder-1"
+  },
+  {
+    "id": "government-hill",
+    "name": {
+      "en": "Government Hill (1822 plan)",
+      "zh": "【待译】Government Hill (1822 plan)"
+    },
+    "joined": "1823-06-09",
+    "bloc": "neutral",
+    "color": "token:holder-7"
+  },
+  {
+    "id": "cantonment",
+    "name": {
+      "en": "Cantonment (1822 plan)",
+      "zh": "【待译】Cantonment (1822 plan)"
+    },
+    "joined": "1823-06-09",
+    "bloc": "neutral",
+    "color": "token:holder-6"
+  },
+  {
+    "id": "straits-settlements",
+    "name": {
+      "en": "Straits Settlements",
+      "zh": "【待译】Straits Settlements"
+    },
+    "joined": "1826",
+    "bloc": "neutral",
+    "color": "token:holder-4"
+  },
+  {
+    "id": "fms",
+    "name": {
+      "en": "Federated Malay States",
+      "zh": "【待译】Federated Malay States"
+    },
+    "joined": "1896-07-01",
+    "bloc": "neutral",
+    "color": "token:holder-2"
+  },
+  {
+    "id": "kedah",
+    "name": {
+      "en": "Kedah",
+      "zh": "【待译】Kedah"
+    },
+    "joined": "1896-07-01",
+    "bloc": "neutral",
+    "color": "token:holder-3"
+  },
+  {
+    "id": "perlis",
+    "name": {
+      "en": "Perlis",
+      "zh": "【待译】Perlis"
+    },
+    "joined": "1896-07-01",
+    "bloc": "neutral",
+    "color": "token:holder-8"
+  },
+  {
+    "id": "kelantan",
+    "name": {
+      "en": "Kelantan",
+      "zh": "【待译】Kelantan"
+    },
+    "joined": "1896-07-01",
+    "bloc": "neutral",
+    "color": "token:holder-6"
+  },
+  {
+    "id": "terengganu",
+    "name": {
+      "en": "Terengganu",
+      "zh": "【待译】Terengganu"
+    },
+    "joined": "1896-07-01",
+    "bloc": "neutral",
+    "color": "token:holder-7"
+  },
+  {
+    "id": "siam",
+    "name": {
+      "en": "Siam / Thailand",
+      "zh": "【待译】Siam / Thailand"
+    },
+    "joined": "1896-07-01",
+    "bloc": "neutral",
+    "color": "token:holder-1"
+  },
+  {
+    "id": "sarawak",
+    "name": {
+      "en": "Sarawak",
+      "zh": "【待译】Sarawak"
+    },
+    "joined": "1896-07-01",
+    "bloc": "neutral",
+    "color": "token:holder-3"
+  },
+  {
+    "id": "north-borneo",
+    "name": {
+      "en": "North Borneo",
+      "zh": "【待译】North Borneo"
+    },
+    "joined": "1896-07-01",
+    "bloc": "neutral",
+    "color": "token:holder-2"
+  },
+  {
+    "id": "brunei",
+    "name": {
+      "en": "Brunei",
+      "zh": "【待译】Brunei"
+    },
+    "joined": "1896-07-01",
+    "bloc": "neutral",
+    "color": "token:holder-1"
+  },
+  {
+    "id": "japan",
+    "name": {
+      "en": "Japan",
+      "zh": "【待译】Japan"
+    },
+    "joined": "1941-12-08",
+    "bloc": "neutral",
+    "color": "token:holder-8"
+  },
+  {
+    "id": "bma",
+    "name": {
+      "en": "British Military Administration",
+      "zh": "【待译】British Military Administration"
+    },
+    "joined": "1945-09-12",
+    "bloc": "neutral",
+    "color": "token:holder-4"
+  },
+  {
+    "id": "malayan-union-government",
+    "name": {
+      "en": "Malayan Union",
+      "zh": "【待译】Malayan Union"
+    },
+    "joined": "1946-04-01",
+    "bloc": "neutral",
+    "color": "token:holder-2"
+  },
+  {
+    "id": "federation-of-malaya",
+    "name": {
+      "en": "Federation of Malaya",
+      "zh": "【待译】Federation of Malaya"
+    },
+    "joined": "1948-02-01",
+    "bloc": "neutral",
+    "color": "token:holder-5"
+  },
+  {
+    "id": "singapore",
+    "name": {
+      "en": "Singapore",
+      "zh": "【待译】Singapore"
+    },
+    "joined": "1946-04-01",
+    "bloc": "neutral",
+    "color": "token:holder-1"
+  },
+  {
+    "id": "malaysia",
+    "name": {
+      "en": "Malaysia",
+      "zh": "【待译】Malaysia"
+    },
+    "joined": "1963-09-16",
+    "bloc": "neutral",
+    "color": "token:holder-2"
+  },
+  {
+    "id": "indonesia",
+    "name": {
+      "en": "Indonesia",
+      "zh": "【待译】Indonesia"
+    },
+    "joined": "1963",
+    "bloc": "neutral",
+    "color": "token:holder-5"
+  },
+  {
+    "id": "uk",
+    "name": {
+      "en": "United Kingdom",
+      "zh": "【待译】United Kingdom"
+    },
+    "joined": "1819-01-28",
+    "bloc": "neutral",
+    "color": "token:holder-5"
+  },
+  {
+    "id": "usa",
+    "name": {
+      "en": "United States",
+      "zh": "【待译】United States"
+    },
+    "joined": "1944",
+    "bloc": "neutral",
+    "color": "token:holder-6"
+  },
+  {
+    "id": "australia",
+    "name": {
+      "en": "Australia",
+      "zh": "【待译】Australia"
+    },
+    "joined": "1941-12-08",
+    "bloc": "neutral",
+    "color": "token:holder-7"
+  }
+]

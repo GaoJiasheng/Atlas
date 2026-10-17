@@ -1,0 +1,543 @@
+{
+  "censuses": [
+    {
+      "year": 1824,
+      "date": "January 1824",
+      "total": 10683,
+      "status": "confirmed",
+      "source": "buckley",
+      "note": "Buckley I p. 154. Enumeration using historical categories; not a modern census.",
+      "groups": [
+        {
+          "group": "Europeans",
+          "n": 74,
+          "percent": 0.69
+        },
+        {
+          "group": "Armenians",
+          "n": 16,
+          "percent": 0.15
+        },
+        {
+          "group": "Arabs",
+          "n": 15,
+          "percent": 0.14
+        },
+        {
+          "group": "Malays",
+          "n": 4580,
+          "percent": 42.87
+        },
+        {
+          "group": "Chinese",
+          "n": 3317,
+          "percent": 31.05
+        },
+        {
+          "group": "Natives of India",
+          "n": 756,
+          "percent": 7.08
+        },
+        {
+          "group": "Bugis and others",
+          "n": 1925,
+          "percent": 18.02
+        }
+      ]
+    },
+    {
+      "year": 1871,
+      "date": "2 April 1871",
+      "total": 97111,
+      "status": "confirmed-original-categories",
+      "source": "marriott-census",
+      "note": "Marriott p. 358. Others includes 856 convicts. Saw’s different total of 96,087 is unresolved.",
+      "groups": [
+        {
+          "group": "Total Europeans",
+          "n": 1946,
+          "percent": 2.0
+        },
+        {
+          "group": "Eurasians",
+          "n": 2164,
+          "percent": 2.23
+        },
+        {
+          "group": "Chinese",
+          "n": 54572,
+          "percent": 56.2
+        },
+        {
+          "group": "Total Malays",
+          "n": 26148,
+          "percent": 26.93
+        },
+        {
+          "group": "Total Indians",
+          "n": 10754,
+          "percent": 11.07
+        },
+        {
+          "group": "Total others",
+          "n": 1527,
+          "percent": 1.57
+        }
+      ]
+    },
+    {
+      "year": 1931,
+      "date": "1 April 1931 (reference night); enumeration 2 April",
+      "total": 557745,
+      "status": "confirmed-government-return-scan",
+      "source": "census1931-un",
+      "note": "UN A/2134/Add.8, printed p.2, scan visually read. Six groups sum to 557,745. SIT’s combined Others 23,280 equals 8,082 Europeans+6,903 Eurasians+8,295 Others. The indexed secondary 8,275 remains a conflicting lead. The contemporary annual report distinguishes the 1 April reference night from enumeration on 2 April; its reproduced OCR was read, not its scan.",
+      "groups": [
+        {
+          "group": "Chinese",
+          "n": 418640,
+          "percent": 75.06
+        },
+        {
+          "group": "Malays",
+          "n": 65014,
+          "percent": 11.66
+        },
+        {
+          "group": "Indians",
+          "n": 50811,
+          "percent": 9.11
+        },
+        {
+          "group": "Europeans",
+          "n": 8082,
+          "percent": 1.45
+        },
+        {
+          "group": "Eurasians",
+          "n": 6903,
+          "percent": 1.24
+        },
+        {
+          "group": "Others",
+          "n": 8295,
+          "percent": 1.49
+        }
+      ],
+      "dateSources": [
+        "census-orders-sso",
+        "census1931-annual-reproduction"
+      ]
+    },
+    {
+      "year": 1957,
+      "date": "17 June 1957",
+      "total": 1445929,
+      "status": "confirmed-government-return-scan",
+      "source": "census1957-un",
+      "note": "UN A/5079, printed p.105, scan visually read. Six community groups and total confirmed. Footnote a/ explicitly marks later 1958–1960 estimate columns; the scope of the original 1957 census requires its own report.",
+      "groups": [
+        {
+          "group": "Chinese",
+          "n": 1090595,
+          "percent": 75.43
+        },
+        {
+          "group": "Malaysians",
+          "n": 197060,
+          "percent": 13.63
+        },
+        {
+          "group": "Indians and Pakistanis",
+          "n": 124084,
+          "percent": 8.58
+        },
+        {
+          "group": "Europeans",
+          "n": 10826,
+          "percent": 0.75
+        },
+        {
+          "group": "Eurasians",
+          "n": 11382,
+          "percent": 0.79
+        },
+        {
+          "group": "Others",
+          "n": 11982,
+          "percent": 0.83
+        }
+      ],
+      "dateSource": "census-nlb"
+    },
+    {
+      "year": 1957,
+      "date": "17 June 1957 (reported in SIT 1959)",
+      "total": 1445930,
+      "status": "confirmed-government-scan;different-published-return",
+      "source": "sit-census",
+      "note": "SIT 1959 p. ix, PDF p. 418. Counts differ slightly from the later UN return and Saw; reason unresolved. Both published returns are retained.",
+      "groups": [
+        {
+          "group": "Chinese",
+          "n": 1090570,
+          "percent": 75.42
+        },
+        {
+          "group": "Malaysian",
+          "n": 197067,
+          "percent": 13.63
+        },
+        {
+          "group": "Indians and Pakistanis",
+          "n": 124083,
+          "percent": 8.58
+        },
+        {
+          "group": "Others combined",
+          "n": 34210,
+          "percent": 2.37
+        }
+      ]
+    }
+  ],
+  "casualties": [
+    {
+      "event": "1854 Hokkien–Teochew violence",
+      "date": "5 May 1854; about ten days",
+      "deaths": "400 or more (Buckley); about 500 (NLB)",
+      "injured": null,
+      "people": "Victims in town and plantations; individual names not established",
+      "sources": [
+        "buckley-II",
+        "1854-nlb"
+      ],
+      "status": "conflicting"
+    },
+    {
+      "event": "1915 mutiny",
+      "date": "15 February 1915; almost a week",
+      "deaths": "44 (NLB); spec’s 47 not confirmed",
+      "injured": null,
+      "people": "British, Chinese and Malay military personnel and civilians; full breakdown unverified",
+      "sources": [
+        "mutiny-nlb"
+      ],
+      "status": "conflicting"
+    },
+    {
+      "event": "1915 execution aftermath",
+      "date": "Multiple occasions, March–May 1915",
+      "deaths": "More than 47 (NLB); 47 (indexed NHB teacher resource)",
+      "injured": null,
+      "people": "Mutineers convicted by courts martial; 25 March does not represent all occasions",
+      "sources": [
+        "mutiny-nlb"
+      ],
+      "status": "conflicting"
+    },
+    {
+      "event": "1950 Hertogh riots",
+      "date": "11–13 December 1950",
+      "deaths": 18,
+      "injured": 173,
+      "people": "Europeans and Eurasians attacked; Malays suspected of assisting were also attacked. Police/military fired. Community death subtotals unverified",
+      "sources": [
+        "hertogh-nlb",
+        "hertogh-sg101"
+      ],
+      "status": "confirmed-total"
+    },
+    {
+      "event": "1955 Hock Lee riot",
+      "date": "12 May 1955",
+      "deaths": 4,
+      "injured": 31,
+      "people": "Andrew Teo Bok Lan, VSC corporal; Yuen Yau Pang, detective corporal; Gene Symonds, American journalist; Chong Lon Chong, student",
+      "sources": [
+        "hock-lee-nlb"
+      ],
+      "status": "confirmed"
+    },
+    {
+      "event": "1956 schools disturbances",
+      "date": "25–28 October 1956; exact scope unresolved",
+      "deaths": 13,
+      "injured": 123,
+      "people": "Names and community subtotals unverified",
+      "sources": [
+        "schools-roots",
+        "schools-nlb",
+        "poh-barisan"
+      ],
+      "status": "partly-confirmed;injury count indexed"
+    },
+    {
+      "event": "1964 July riots",
+      "date": "From 21 July 1964",
+      "deaths": 23,
+      "injured": 454,
+      "arrested": 3568,
+      "people": "Malay and Chinese victims; community subtotals unverified",
+      "sources": [
+        "riots1964-nlb"
+      ],
+      "status": "confirmed-total"
+    },
+    {
+      "event": "1964 September riots",
+      "date": "From 2 September 1964",
+      "deaths": 13,
+      "injured": 106,
+      "arrested": 1439,
+      "people": "Malay and Chinese victims; community subtotals unverified",
+      "sources": [
+        "riots1964-nlb"
+      ],
+      "status": "confirmed-total;12 alternative unverified"
+    },
+    {
+      "event": "1965 MacDonald House",
+      "date": "10 March 1965",
+      "deaths": 3,
+      "injured": "About 33",
+      "people": "Elizabeth (Suzie) Choo, 36, assistant secretary; Juliet Goh, 23, assistant secretary; Mohammed Yasin bin Kesit, 45, driver (died later)",
+      "sources": [
+        "macdonald-nlb"
+      ],
+      "status": "confirmed"
+    },
+    {
+      "event": "Sook Ching",
+      "date": "18 February–4 March 1942; urban screening 21–23 February",
+      "deaths": "Japanese about 5,000; Chinese community around 100,000; widely assumed 25,000–50,000",
+      "injured": null,
+      "people": "Chinese civilians. Changi: 66 on 20 February; Punggol: about 400 on 28 February",
+      "sources": [
+        "ww2-S95",
+        "ww2-S96",
+        "ww2-S97",
+        "ww2-S98",
+        "ww2-S99"
+      ],
+      "status": "copied-ww2;estimates not reconciled"
+    }
+  ],
+  "cabinet1959": [
+    {
+      "name": "Lee Kuan Yew",
+      "portfolio": "Prime Minister",
+      "source": "cabinet1959-iseas",
+      "status": "confirmed-finding-aid"
+    },
+    {
+      "name": "Toh Chin Chye",
+      "portfolio": "Deputy Prime Minister",
+      "source": "cabinet1959-iseas",
+      "status": "confirmed-finding-aid"
+    },
+    {
+      "name": "Ong Eng Guan",
+      "portfolio": "National Development",
+      "source": "cabinet1959-iseas",
+      "status": "confirmed-finding-aid"
+    },
+    {
+      "name": "Ahmad Ibrahim",
+      "portfolio": "Health",
+      "source": "cabinet1959-iseas",
+      "status": "confirmed-finding-aid"
+    },
+    {
+      "name": "Goh Keng Swee",
+      "portfolio": "Finance",
+      "source": "cabinet1959-iseas",
+      "status": "confirmed-finding-aid"
+    },
+    {
+      "name": "K. M. Byrne",
+      "portfolio": "Labour and Law",
+      "source": "cabinet1959-iseas",
+      "status": "confirmed-finding-aid"
+    },
+    {
+      "name": "S. Rajaratnam",
+      "portfolio": "Culture",
+      "source": "cabinet1959-iseas",
+      "status": "confirmed-finding-aid"
+    },
+    {
+      "name": "Ong Pang Boon",
+      "portfolio": "Home Affairs",
+      "source": "cabinet1959-iseas",
+      "status": "confirmed-finding-aid"
+    },
+    {
+      "name": "Yong Nyuk Lin",
+      "portfolio": "Education",
+      "source": "cabinet1959-iseas",
+      "status": "confirmed-finding-aid"
+    }
+  ],
+  "cabinet1965": [
+    {
+      "name": "Lee Kuan Yew",
+      "portfolio7AugustVerified": "Prime Minister",
+      "source": "separation-agreement",
+      "status": "confirmed-contemporary-report",
+      "portfolio9AugustConfirmed": "Prime Minister",
+      "evidenceKey": "cabinet1965-st"
+    },
+    {
+      "name": "Toh Chin Chye",
+      "portfolio7AugustVerified": "Deputy Prime Minister",
+      "source": "separation-agreement",
+      "status": "confirmed-contemporary-report",
+      "portfolio9AugustConfirmed": "Deputy Prime Minister",
+      "evidenceKey": "cabinet1965-st"
+    },
+    {
+      "name": "Goh Keng Swee",
+      "portfolio7AugustVerified": "Finance",
+      "source": "separation-agreement",
+      "status": "confirmed-contemporary-report",
+      "portfolio9AugustConfirmed": "Defence and Security",
+      "evidenceKey": "cabinet1965-st"
+    },
+    {
+      "name": "Lim Kim San",
+      "portfolio7AugustVerified": "National Development",
+      "source": "separation-agreement",
+      "status": "confirmed-contemporary-report",
+      "portfolio9AugustConfirmed": "Finance",
+      "evidenceKey": "cabinet1965-st"
+    },
+    {
+      "name": "S. Rajaratnam",
+      "portfolio7AugustVerified": "Culture",
+      "source": "separation-agreement",
+      "status": "confirmed-contemporary-report",
+      "portfolio9AugustConfirmed": "Foreign Affairs and Culture",
+      "evidenceKey": "cabinet1965-st"
+    },
+    {
+      "name": "E. W. Barker",
+      "portfolio7AugustVerified": "Law",
+      "source": "separation-agreement",
+      "status": "confirmed-contemporary-report",
+      "portfolio9AugustConfirmed": "Law and National Development",
+      "evidenceKey": "cabinet1965-st"
+    },
+    {
+      "name": "Ong Pang Boon",
+      "portfolio7AugustVerified": "Education",
+      "source": "separation-agreement",
+      "status": "confirmed-contemporary-report",
+      "portfolio9AugustConfirmed": "Education",
+      "evidenceKey": "cabinet1965-st"
+    },
+    {
+      "name": "Yong Nyuk Lin",
+      "portfolio7AugustVerified": "Health",
+      "source": "separation-agreement",
+      "status": "confirmed-contemporary-report",
+      "portfolio9AugustConfirmed": "Health",
+      "evidenceKey": "cabinet1965-st"
+    },
+    {
+      "name": "Jek Yeun Thong",
+      "portfolio7AugustVerified": "Labour",
+      "source": "separation-agreement",
+      "status": "confirmed-contemporary-report",
+      "portfolio9AugustConfirmed": "Labour",
+      "evidenceKey": "cabinet1965-st"
+    },
+    {
+      "name": "Othman Wok",
+      "portfolio7AugustVerified": "Social Affairs",
+      "source": "separation-agreement",
+      "status": "confirmed-contemporary-report",
+      "portfolio9AugustConfirmed": "Social Affairs",
+      "evidenceKey": "cabinet1965-st"
+    }
+  ],
+  "streets": [
+    {
+      "street": "Kim Seng Road",
+      "person": "Tan Kim Seng",
+      "role": "Merchant and philanthropist; funded road works",
+      "status": "confirmed",
+      "source": "streets-nlb"
+    },
+    {
+      "street": "Eu Tong Sen Street",
+      "person": "Eu Tong Sen",
+      "role": "Businessman; rebuilt former Wayang Street in 1918; renamed in 1919",
+      "status": "confirmed",
+      "source": "streets-nlb"
+    },
+    {
+      "street": "Jiak Kim Street",
+      "person": "Tan Jiak Kim",
+      "role": "Merchant and philanthropist; grandson of Tan Kim Seng",
+      "status": "confirmed",
+      "source": "streets-nlb"
+    },
+    {
+      "street": "Aljunied Road",
+      "person": "Syed Omar Ali Aljunied",
+      "role": "Hadhrami merchant and philanthropist; mosque, hospital and cemetery land",
+      "status": "partly-confirmed-indexed",
+      "source": "aljunied-nlb; omar-nlb"
+    },
+    {
+      "street": "Syed Alwi Road",
+      "person": "Syed Allie bin Mohamed Aljunied",
+      "role": "Aljunied family; distinguish from Alsagoff",
+      "status": "provisional-indexed",
+      "source": "streets-nhb"
+    },
+    {
+      "street": "Pickering Street",
+      "person": "William Pickering",
+      "role": "First Protector of Chinese; previously Upper Macao/Macao Street",
+      "status": "partly-confirmed",
+      "source": "streets-nhb; protectorate-nlb"
+    },
+    {
+      "street": "Coleman Street",
+      "person": "George D. Coleman",
+      "role": "Architect and surveyor",
+      "status": "provisional-indexed",
+      "source": "streets-nhb"
+    },
+    {
+      "street": "Crawford Street [spec: Crawfurd Street]",
+      "person": "John Crawfurd [provisional]",
+      "role": "Resident; direct street etymology and spelling evidence unread",
+      "status": "unverifiable",
+      "source": null
+    },
+    {
+      "street": "Hill Street",
+      "person": null,
+      "role": "Topographical name; exact original source unread",
+      "status": "unverifiable",
+      "source": null
+    },
+    {
+      "street": "Bencoolen Street",
+      "person": null,
+      "role": "Bengkulu connection; original naming evidence unread",
+      "status": "unverifiable",
+      "source": null
+    },
+    {
+      "street": "Alsagoff [no verified street]",
+      "person": "Alsagoff family",
+      "role": "Do not invent an Alsagoff street. Madrasah Alsagoff is an institution on Jalan Sultan",
+      "status": "street-unverifiable",
+      "source": null
+    }
+  ]
+}

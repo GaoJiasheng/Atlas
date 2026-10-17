@@ -1,0 +1,161 @@
+{
+  "checked": "2026-10-18",
+  "scope": "Independent G9/G11 fixed-building CP survey; active georef and line recipes untouched. One direct G9 named-footprint candidate and nine explicitly withheld map/building pairs.",
+  "controlPoints": [
+    {
+      "map": "G9",
+      "name": "St Andrew’s Cathedral, standing1861 nave/footprint centre",
+      "svg": [
+        5552,
+        4705
+      ],
+      "lnglat": [
+        103.85224460336309,
+        1.2923368361275789
+      ],
+      "coordinateSource": "Single point calculated as the centroid of OSM church building way155980025 version17; CP only, no geometry published",
+      "mapsrcpixel": {
+        "file": "raw/G9.jpg",
+        "nativeDimensions": [
+          11234,
+          8203
+        ],
+        "pixel": [
+          5552,
+          4705
+        ],
+        "convention": "native original raster x right/y down; no inverse-model prediction",
+        "cropBox": [
+          5350,
+          4550,
+          5700,
+          4900
+        ],
+        "crop": "work/G9-cathedral-native.png",
+        "annotatedCrop": "work/G9-cathedral-read.png",
+        "observedSymbolBounds": [
+          5544,
+          4698,
+          5559,
+          4712
+        ],
+        "observedInkCentroid": [
+          5551.669230769231,
+          4704.992307692308
+        ],
+        "readUncertaintyPx": 3
+      },
+      "identityEvidence": "G9 explicitly labels StAndrewsCath next to this distinct cruciform black footprint west of RafflesPlain. NHB Roots confirms the same surviving1861 church. OSM named building is independently tagged Q168806 and located at the same street address. No road-neighbourhood guess or residual minimisation selected the point.",
+      "status": "fixed-surviving-building-candidate",
+      "caveats": [
+        "At whole-island scale, the published church footprint can be cartographically generalised; CP identity is stronger than a movable cape, but residual acceptance still requires projection:auto LOO.",
+        "Modern OSM footprint centroid is a documented registration point, not a surveyed geodetic monument. The historic footprint and current nave outline may differ at small extensions.",
+        "Point was selected before any fit/residual calculation; it must not be moved to optimise the model."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://api.openstreetmap.org/api/0.6/way/155980025/full.json",
+      "file": "raw/fixed-building-st-andrews-osm.json",
+      "sha256": "2d81da5b75efe74440f346495e7c8b33ab7afe1758911a1a6e126d9d59453183",
+      "read": "Read complete way155980025 v17 and its constituent nodes; verified tags Saint Andrew’s Cathedral, address11 StAndrew’s Road, buildingchurch, wikidataQ168806. Only a single centroid coordinate is retained as a registration CP; no OSM building/road/coast geometry enters published topic assets. OSM start_date tag is not used as historical chronology.",
+      "attribution": "© OpenStreetMap contributors, ODbL1.0; registration controls only.",
+      "licenceUrl": "https://www.openstreetmap.org/copyright"
+    },
+    {
+      "url": "https://www.roots.gov.sg/places/places-landing/Places/national-monuments/saint-andrews-cathedral",
+      "file": "raw/fixed-building-saint-andrews-roots.html",
+      "sha256": "cc197c08f524c1581285776a57d4ac63eef744262bebc9a71f2c31eedb541fa4",
+      "read": "Read the standing national monument identity, 11SaintAndrew’s Road address and construction history: present church completed1861, cathedral1870. GetDirections numeric point is a site reference northeast of the actual church footprint and is not used for registration."
+    },
+    {
+      "url": "https://www.wikidata.org/wiki/Q168806",
+      "revision": 2543087228,
+      "property": "P625",
+      "file": "raw/fixed-building-Q168806.json",
+      "sha256": "cf1e28dd668552d97ddbf45e1f432ecfd5ad74c01d76fe2a37536c6144c85986",
+      "read": "Read current full entity and P625; its one-arcsecond-precision point corroborates church location, but its rounded coordinate is not a surveyed tower/footprint centre."
+    }
+  ],
+  "coordinateCrossCheck": {
+    "buildingCentroid": [
+      103.85224460336309,
+      1.2923368361275789
+    ],
+    "wikidataP625": [
+      103.85222222222222,
+      1.2922222222222222
+    ],
+    "rootsDirections": [
+      103.85282087861968,
+      1.2925522912385685
+    ],
+    "distanceBuildingCentroidToWikidataM": 12.985085283065422,
+    "distanceBuildingCentroidToRootsDirectionsM": 68.39578615103962,
+    "interpretation": "Roots GetDirections is a broad site/entrance reference, not the church footprint centroid, so cannot silently substitute for a point at the historic footprint centre. Both alternative published points are recorded transparently."
+  },
+  "excluded": [
+    {
+      "map": "G11",
+      "name": "St Andrew’s Cathedral",
+      "observedSymbolPixel": [
+        4760,
+        4594
+      ],
+      "crop": "work/G11-cathedral-native.png",
+      "annotatedCrop": "work/G11-cathedral-read.png",
+      "status": "withheld-generalised-symbol-anchor",
+      "reason": "Named Cathedral label is legible, but the red mark is an upright tapered tower/church icon. Its tip, visual centroid and baseline differ by roughly15nativepixels (~80m), so a specific geographic anchor inside the symbol cannot be qualified from this scan. No point is supplied for fitting."
+    },
+    {
+      "map": "G9",
+      "name": "Armenian Church",
+      "status": "withheld-ambiguous-symbol",
+      "reason": "Standing modern building identity/coordinates do not establish a distinct old-map mark. At this whole-island scan scale the candidate neighbourhood has overlapping text or unlabelled building marks; no named feature correspondence can be made independently. No coordinate was projected back and accepted as a CP."
+    },
+    {
+      "map": "G9",
+      "name": "Cathedral of the Good Shepherd",
+      "status": "withheld-ambiguous-symbol",
+      "reason": "Standing modern building identity/coordinates do not establish a distinct old-map mark. At this whole-island scan scale the candidate neighbourhood has overlapping text or unlabelled building marks; no named feature correspondence can be made independently. No coordinate was projected back and accepted as a CP."
+    },
+    {
+      "map": "G9",
+      "name": "Thian Hock Keng",
+      "status": "withheld-ambiguous-symbol",
+      "reason": "Standing modern building identity/coordinates do not establish a distinct old-map mark. At this whole-island scan scale the candidate neighbourhood has overlapping text or unlabelled building marks; no named feature correspondence can be made independently. No coordinate was projected back and accepted as a CP."
+    },
+    {
+      "map": "G9",
+      "name": "Sri Mariamman Temple",
+      "status": "withheld-ambiguous-symbol",
+      "reason": "Standing modern building identity/coordinates do not establish a distinct old-map mark. At this whole-island scan scale the candidate neighbourhood has overlapping text or unlabelled building marks; no named feature correspondence can be made independently. No coordinate was projected back and accepted as a CP."
+    },
+    {
+      "map": "G11",
+      "name": "Armenian Church",
+      "status": "withheld-ambiguous-symbol",
+      "reason": "Standing modern building identity/coordinates do not establish a distinct old-map mark. At this whole-island scan scale the candidate neighbourhood has overlapping text or unlabelled building marks; no named feature correspondence can be made independently. No coordinate was projected back and accepted as a CP."
+    },
+    {
+      "map": "G11",
+      "name": "Cathedral of the Good Shepherd",
+      "status": "withheld-ambiguous-symbol",
+      "reason": "Standing modern building identity/coordinates do not establish a distinct old-map mark. At this whole-island scan scale the candidate neighbourhood has overlapping text or unlabelled building marks; no named feature correspondence can be made independently. No coordinate was projected back and accepted as a CP."
+    },
+    {
+      "map": "G11",
+      "name": "Thian Hock Keng",
+      "status": "withheld-ambiguous-symbol",
+      "reason": "Standing modern building identity/coordinates do not establish a distinct old-map mark. At this whole-island scan scale the candidate neighbourhood has overlapping text or unlabelled building marks; no named feature correspondence can be made independently. No coordinate was projected back and accepted as a CP."
+    },
+    {
+      "map": "G11",
+      "name": "Sri Mariamman Temple",
+      "status": "withheld-ambiguous-symbol",
+      "reason": "Standing modern building identity/coordinates do not establish a distinct old-map mark. At this whole-island scan scale the candidate neighbourhood has overlapping text or unlabelled building marks; no named feature correspondence can be made independently. No coordinate was projected back and accepted as a CP."
+    }
+  ],
+  "acceptance": "This audit qualifies building identity and direct source-pixel reading, not map fit. No claim that any map meets its budget is made. The map-scale generalisation and current-point meaning can themselves expose a limit that additional controls do not fix."
+}

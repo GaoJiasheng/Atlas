@@ -1,0 +1,110 @@
+{
+  "dataset": "g34-borneo1903",
+  "projection": "auto",
+  "controlPointType": "Printed Greenwich degree graticule; internal registration only, not external surveyed controls",
+  "controlPoints": [
+    {
+      "name": "Printed Greenwich grid 114E 4N",
+      "svg": [
+        1603,
+        5391
+      ],
+      "lnglat": [
+        114,
+        4
+      ],
+      "reading": "Observed line intersection; see work/border-grid-crops.png. \u00b13 native pixels reading allowance."
+    },
+    {
+      "name": "Printed Greenwich grid 115E 4N",
+      "svg": [
+        3142,
+        5387
+      ],
+      "lnglat": [
+        115,
+        4
+      ],
+      "reading": "Observed line intersection; see work/border-grid-crops.png. \u00b13 native pixels reading allowance."
+    },
+    {
+      "name": "Printed Greenwich grid 115E 5N",
+      "svg": [
+        3136,
+        3861
+      ],
+      "lnglat": [
+        115,
+        5
+      ],
+      "reading": "Observed line intersection; see work/border-grid-crops.png. \u00b13 native pixels reading allowance."
+    },
+    {
+      "name": "Printed Greenwich grid 115E 6N",
+      "svg": [
+        3130,
+        2332
+      ],
+      "lnglat": [
+        115,
+        6
+      ],
+      "reading": "Observed line intersection; see work/border-grid-crops.png. \u00b13 native pixels reading allowance."
+    },
+    {
+      "name": "Printed Greenwich grid 116E 4N",
+      "svg": [
+        4681,
+        5396
+      ],
+      "lnglat": [
+        116,
+        4
+      ],
+      "reading": "Observed line intersection; see work/border-grid-crops.png. \u00b13 native pixels reading allowance."
+    },
+    {
+      "name": "Printed Greenwich grid 116E 5N",
+      "svg": [
+        4675,
+        3861
+      ],
+      "lnglat": [
+        116,
+        5
+      ],
+      "reading": "Observed line intersection; see work/border-grid-crops.png. \u00b13 native pixels reading allowance."
+    },
+    {
+      "name": "Printed Greenwich grid 116E 6N",
+      "svg": [
+        4666,
+        2324
+      ],
+      "lnglat": [
+        116,
+        6
+      ],
+      "reading": "Observed line intersection; see work/border-grid-crops.png. \u00b13 native pixels reading allowance."
+    },
+    {
+      "name": "Printed Greenwich grid 116E 7N",
+      "svg": [
+        4663,
+        791
+      ],
+      "lnglat": [
+        116,
+        7
+      ],
+      "reading": "Observed line intersection; see work/border-grid-crops.png. \u00b13 native pixels reading allowance."
+    }
+  ],
+  "method": "Native raster grid intersections read from marginal labelled Greenwich degree lines. Regional source geodetic datum/compilation accuracy unknown. Approximate retained; pixel read uncertainty \u00b13px, not claimed absolute map accuracy.",
+  "source": "https://commons.wikimedia.org/wiki/File:A_map_of_British_North_Borneo_(II).jpg",
+  "rejectedCandidates": [
+    "114E5N: source graticule not printed overblanksea",
+    "114E6N: inside inset on different projection/extent",
+    "114E7N and115E7N: title covers main-map graticule; no inferred intersection used"
+  ]
+}

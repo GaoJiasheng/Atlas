@@ -1,0 +1,319 @@
+{
+  "checked": "2026-10-17",
+  "scope": "Follow-up to content-date-gaps.json; published topic data remains frozen. Each quote is the source catalog quotation, reused by reference rather than an additional quotation.",
+  "events": {
+    "federation-1948": {
+      "confirmedDate": "1948-02-01",
+      "status": "confirmed-primary",
+      "meaning": "Order and State/Federation Agreements came into operation; agreement signing on 21 January is distinct.",
+      "remaining": "",
+      "sources": [
+        {
+          "key": "federation1948-order",
+          "title": "Federation of Malaya Order in Council 1948, SI 1948/108, sections 2–4 and Second Schedule",
+          "url": "https://www.legislation.gov.uk/uksi/1948/108/pdfs/uksi_19480108_en.pdf",
+          "quote": "This Order shall come into operation on the first day of February, 1948.",
+          "readExtent": "Directly read the original 109-page PDF through the web reader: printed pp. 1231–1234, 1276–1277 (PDF pages 1–4, 46–47). Section 3 makes both the Order and State/Federation Agreements effective on 1 February 1948. The Second Schedule reproduces the agreement dated 21 January. Initial direct downloads returned empty or timed out; later web access successfully supplied the original PDF text. The complete instrument was not read."
+        },
+        {
+          "key": "federation1948-sungeiujong",
+          "title": "Majlis Dato Lembaga Adat Sungei Ujong, Dato Undang Yang Empat Sama Berdaulat Dengan Raja-Raja Melayu Tubuhkan Persekutuan Tanah Melayu",
+          "url": "https://majlisdatolsu.gov.my/undang-yang-empat-raja-raja-melayu-tubuhkan-persekutuan-tanah-melayu/",
+          "quote": "pada 21 Januari 1948 dan dikuatkuasakan pada 1 Februari 1948",
+          "readExtent": "Read the full institutional account and list of signatories. It distinguishes agreement on 21 January from effect on 1 February 1948; the British legal instrument independently confirms the latter."
+        }
+      ]
+    },
+    "umno-founded": {
+      "confirmedDate": "1946-05-11",
+      "status": "confirmed-institutional",
+      "meaning": "Formal founding through adoption of constitution at the congress/general assembly, Istana Besar Johor Bahru.",
+      "remaining": "",
+      "sources": [
+        {
+          "key": "umno-official",
+          "title": "UMNO Online, Penubuhan UMNO",
+          "url": "https://umno-online.my/sejarah/penubuhan/",
+          "quote": "Pada 11 Mei 1946 di Istana Besar Johor Bahru.",
+          "readExtent": "Read the complete official party history page in Malay. It dates the third Malay Congress/first UMNO general assembly and adoption of its constitution to 11 May 1946 at Istana Besar, Johor Bahru. This is the party’s institutional account, not the original 1946 constitution."
+        }
+      ]
+    },
+    "brunei-revolt": {
+      "confirmedDate": "1962-12-08",
+      "status": "confirmed-primary",
+      "meaning": "Outbreak at 2 a.m., per contemporary British ministerial statement.",
+      "remaining": "TNKU versus Sultan’s police and British reinforcements is supported as the British government account. Azahari’s own proclamation has not been directly read; do not present disputed motives as settled facts.",
+      "sources": [
+        {
+          "key": "brunei-hansard20",
+          "title": "UK House of Lords, Brunei, 20 December 1962, vol. 245, cols. 1262–1266",
+          "url": "https://api.parliament.uk/historic-hansard/lords/1962/dec/20/brunei",
+          "quote": "the outbreak of violence at 2 a.m. on the morning of the 8th December",
+          "readExtent": "Read the complete contemporary statement and questions. Col. 1263 dates violence to 2 a.m. on 8 December and describes North Borneo police and British forces from Singapore. Its losses are provisional British government reports, not a final reconciliation."
+        },
+        {
+          "key": "brunei-hansard10",
+          "title": "UK House of Lords, Rising in Brunei, 10 December 1962, vol. 245, cols. 415–419",
+          "url": "https://api.parliament.uk/historic-hansard/lords/1962/dec/10/rising-in-brunei",
+          "quote": "an underground body which calls itself the North Kalimantan National Army",
+          "readExtent": "Read the complete contemporary statement and questions. The minister identifies the North Kalimantan National Army, attacks on Brunei police/government buildings, the Sultan’s request for British help, British Army/Royal Marines/naval/air units and police from Sarawak/North Borneo. This is one government’s contemporaneous account; allegations about Azahari’s claims and plans must stay attributed."
+        }
+      ]
+    },
+    "first-cabinet-1959": {
+      "confirmedDate": "1959-06-05",
+      "status": "confirmed-archival-and-institutional",
+      "meaning": "Swearing-in ceremony at City Hall.",
+      "remaining": "The original appointment instrument and oath text remain unread; names and portfolios use the separate ISEAS finding aid.",
+      "sources": [
+        {
+          "key": "cabinet1959-nas-oath",
+          "title": "National Archives of Singapore, All Must Vote, 1959 (9 September 2015)",
+          "url": "https://corporate.nas.gov.sg/discover-archives/media/all-must-vote/",
+          "quote": "The first cabinet of self-government was sworn in on 5 June 1959.",
+          "readExtent": "Read the full institutional article. It explicitly dates the first Cabinet’s swearing-in to 5 June 1959 and the election to 30 May. It is not the original appointment instrument or oath text."
+        },
+        {
+          "key": "cabinet1959-nas-photo",
+          "title": "NAS photograph B0033/30, Swearing-in of PAP Government at City Hall",
+          "url": "https://www.nas.gov.sg/archivesonline/photographs/record-details/82b34005-8e9d-11e5-ac2a-0050568939ad",
+          "quote": "SWEARING-IN OF PEOPLE'S ACTION PARTY (PAP) GOVERNMENT AT CITY HALL",
+          "readExtent": "Read the complete original photograph catalog metadata: covering date 05/06/1959, negative B0033/30, Ministry of Information and the Arts Collection. Its description identifies Lee and Cabinet ministers after the ceremony. Catalog metadata corroborates the institutional date; the oath document itself was not read. Photo reproduction requires permission and is not proposed here."
+        }
+      ]
+    },
+    "site-sultan-mosque": {
+      "confirmedDate": {
+        "from": "1824",
+        "to": "1826"
+      },
+      "status": "confirmed-institutional-scan",
+      "meaning": "Construction interval for the original mosque; no exact day claimed.",
+      "remaining": "The current building is a later replacement; do not date its fabric to 1824.",
+      "sources": [
+        {
+          "key": "sultan-kampong-trail",
+          "title": "National Heritage Board, Kampong Glam Heritage Trail, printed pp. 4–5 and 38–39",
+          "url": "https://www.roots.gov.sg/-/media/Roots/Files/kampong-glam-heritage-trail/kampongglamtrail3-brochure.pdf?la=en",
+          "quote": "the mosque was constructed between 1824 and 1826",
+          "readExtent": "Downloaded the complete 4.96 MB official trail PDF. Read and visually inspected PDF pages 4 and 21 (printed pp. 4–5 and 38–39). The original mosque was constructed 1824–1826; the first timber Istana was completed in 1819, while Tunku Ali returned in 1840 and commissioned the current building. These are historical institutional summaries, not construction contracts."
+        }
+      ]
+    },
+    "site-penang": {
+      "confirmedDate": "1786-08-11",
+      "status": "confirmed-institutional",
+      "meaning": "British/EIC taking of Prince of Wales Island, not first settlement.",
+      "remaining": "Original journal/instrument not read. Existing Malay settlements predated EIC possession.",
+      "sources": [
+        {
+          "key": "penang-courts",
+          "title": "Official Penang State Courts portal, Sejarah Mahkamah Pulau Pinang",
+          "url": "https://pulaupinang.kehakiman.gov.my/mengenai-kami/sejarah-mahkamah-pulau-pinang",
+          "quote": "penaklukan Prince of Wales Island (Pulau Pinang) pada 11 Ogos 1786 oleh Kapten Francis Light",
+          "readExtent": "Read the historical section in full, particularly its opening paragraph and the Butterworth section. It explicitly places British taking of Prince of Wales Island on 11 August 1786. This dates EIC possession, not the first human settlement of Penang. The original Francis Light journal was not read."
+        },
+        {
+          "key": "penang-state",
+          "title": "Penang State Government, Sejarah, attributed to Lembaga Muzium Pulau Pinang",
+          "url": "https://www.penang.gov.my/index.php?Itemid=1729&id=360809&lang=en&option=com_content&view=article",
+          "quote": "Lama sebelum diambilalih oleh Syarikat Hindia Timur Inggeris kedua-dua kawasan ini telahpun mempunyai penghuni.",
+          "readExtent": "Read the full Malay historical page. It dates British arrival to 1786 and explicitly records earlier habitation and Malay settlements. Used to prevent a British-possession date being presented as the origin of settlement."
+        }
+      ]
+    },
+    "census-1931": {
+      "confirmedDate": "1931-04-01",
+      "status": "confirmed-primary-reproduced-text",
+      "meaning": "Population reference night. Enumeration was taken on 2 April as at midnight the previous night.",
+      "remaining": "SSO direct page remains 403. The contemporary report passage was read as reproduced OCR, not a visually inspected scan. If the event means enumeration activity, label it 2 April; if the census reference date, use 1 April.",
+      "sources": [
+        {
+          "key": "census-orders-sso",
+          "title": "Census of Population and Agriculture (Consolidation) Orders, O 1, Revised Edition 1990 (25 March 1992), table (a)",
+          "url": "https://sso.agc.gov.sg/SL/CA1973-OR1?DocDate=19920325",
+          "quote": "1st April 1931",
+          "readExtent": "Read the complete indexed legal order table returned by search, including the 1931 row (1 April 1931; G.N. 1956/30; 26 September 1930) and 1957 row. Direct page retrieval returned HTTP 403; do not claim a directly inspected original Gazette scan. A separate contemporary annual report’s reproduced text corroborates the distinction between reference night and enumeration."
+        },
+        {
+          "key": "census1931-annual-reproduction",
+          "title": "Straits Settlements Annual Report for 1931, Colonial Reports Annual no. 1599 (HMSO, 1932), printed p. 5; reproduced text",
+          "url": "https://www.scribd.com/document/690768985/Annual-Report-Straits-Settlements-1931",
+          "quote": "A census of the population as at midnight on the previous night was taken on the 2nd April, 1931.",
+          "readExtent": "Read the reproduced original report text, title/contents and printed pp. 1–6, especially the opening of Chapter III on p. 5. It states enumeration on 2 April 1931 as at midnight the previous night. This is directly read primary-report OCR/reproduced text on Scribd, not a downloaded or visually checked original scan. Do not transcribe its garbled community table. The official SSO indexed order independently states the reference night of 1 April."
+        }
+      ]
+    },
+    "site-kampong-glam-istana": {
+      "confirmedDate": "1819",
+      "status": "confirmed-institutional-scan",
+      "meaning": "First timber palace with attap roofs completed in 1819.",
+      "remaining": "This is not the extant palace: the institutional account dates commissioning of the present building after Tunku Ali’s return in 1840.",
+      "sources": [
+        {
+          "key": "sultan-kampong-trail",
+          "title": "National Heritage Board, Kampong Glam Heritage Trail, printed pp. 4–5 and 38–39",
+          "url": "https://www.roots.gov.sg/-/media/Roots/Files/kampong-glam-heritage-trail/kampongglamtrail3-brochure.pdf?la=en",
+          "quote": "the mosque was constructed between 1824 and 1826",
+          "readExtent": "Downloaded the complete 4.96 MB official trail PDF. Read and visually inspected PDF pages 4 and 21 (printed pp. 4–5 and 38–39). The original mosque was constructed 1824–1826; the first timber Istana was completed in 1819, while Tunku Ali returned in 1840 and commissioned the current building. These are historical institutional summaries, not construction contracts."
+        }
+      ]
+    },
+    "site-telok-blangah": {
+      "confirmedDate": "1823",
+      "status": "confirmed-institutional",
+      "meaning": "Relocation of the Temenggong’s Istana/settlement to Telok Blangah.",
+      "remaining": "Exact day and original relocation order remain unread.",
+      "sources": [
+        {
+          "key": "telok-teochew-nlb",
+          "title": "Jason Heng, An Old Teochew Oral Account Sheds New Light on the 1819 Founding of Singapore (NLB, 2018)",
+          "url": "https://biblioasia.nlb.gov.sg/chapters-of-asia/chapters-on-asia-2014-2017-teochew-1819-founding-singapore/",
+          "quote": "the British compelled the relocation of his* istana* (palace) to Telok Blangah in 1823",
+          "readExtent": "Read the complete article, especially the paragraph following the oral account, note 26 and settlement sections. It dates compelled relocation of the Temenggong’s Istana to Telok Blangah to 1823. Note 26 cites Buckley pp. 81–82, not an original relocation order read here. Year is confirmed at the institutional secondary level; an exact day remains unverified."
+        }
+      ]
+    },
+    "site-fort-canning-temasek": {
+      "confirmedDate": "1984-01-18",
+      "status": "confirmed-institutional",
+      "meaning": "Beginning of the first investigation, reported as 18–28 January 1984.",
+      "remaining": "The original 1985 field report remains unread; the year is secure at institutional level.",
+      "sources": [
+        {
+          "key": "miksic-nlb2026",
+          "title": "Kwa Chong Guan, Remembering John Norman Miksic (NLB, 1 January 2026)",
+          "url": "https://biblioasia.nlb.gov.sg/all-sections/vol-21-issue-4-jan-mar-2026-john-miksic-singapore-archaeology/",
+          "quote": "from 18 to 28 January 1984",
+          "readExtent": "Read the full institutional article. Its investigation paragraph dates the first Fort Canning dig from 18 to 28 January 1984 and reports pottery finds. This closes the 1984 start at institutional level; the 1985 original field report remains unread."
+        }
+      ]
+    },
+    "indian-immigration-ordinance": {
+      "confirmedDate": null,
+      "status": "partly-resolved-secondary",
+      "meaning": "1876 Protection Ordinance, Singapore operation from 1883 and replacement in 1884 are different milestones.",
+      "remaining": "Original ordinances and G.N. 577 of 28 December 1883 still need inspection; do not assign an exact commencement date from this secondary article.",
+      "sources": [
+        {
+          "key": "indian-ordinance-nus1968",
+          "title": "A Conspectus of the Labour Laws of Singapore, Malaya Law Review 10(2) (December 1968), p. 208, notes 35–36",
+          "url": "https://law.nus.edu.sg/sjls/wp-content/uploads/sites/14/2024/07/550-1968-10-mal-dec-202.pdf",
+          "quote": "not operative in Singapore until 1883",
+          "readExtent": "Read original scholarly PDF pp. 206–209, particularly p. 208 and notes 35–36. Distinguishes Indian Immigrants’ Protection Ordinance No. 1 of 1876, suspension in Singapore/Malacca under No. 5 of 1876 until 1883, and replacement No. 4 of 1884. It points to Gazette G.N. 577 of 28 December 1883. This resolves why several years coexist but does not substitute for reading the original ordinance and commencement notification."
+        }
+      ]
+    },
+    "site-longyamen": {
+      "confirmedDate": null,
+      "status": "unverifiable-in-this-pass",
+      "meaning": "1349 is a report chronology, not an established foundation date for the disputed modern site.",
+      "remaining": "1349 is a report chronology, not an established foundation date for the disputed modern site.",
+      "sources": []
+    },
+    "site-johor-lama": {
+      "confirmedDate": "1540",
+      "status": "confirmed-institutional",
+      "meaning": "Sultan’s relocation to Tanjung Batu and construction of Kota Johor Lama, per Malaysia Museums.",
+      "remaining": "Exact day and contemporary instrument not read; precise point coordinate remains unverified.",
+      "sources": [
+        {
+          "key": "johor-lama-museums",
+          "title": "Department of Museums Malaysia, Kota Johor Lama Historical Complex",
+          "url": "https://www.jmm.gov.my/en/kota-johor-lama-historical-complex",
+          "quote": "The history of Kota Johor Lama began in 1540",
+          "readExtent": "Directly read the complete institutional history, especially the first foundation paragraph. It dates Sultan Alauddin Riayat Shah II’s relocation to Tanjung Batu and construction of the fort to 1540. This confirms the year at museum-history level; it is not a directly inspected contemporary foundation instrument. Do not treat the fort date as the origin of all habitation along the river."
+        }
+      ]
+    },
+    "site-riau-penyengat": {
+      "confirmedDate": "1803",
+      "status": "confirmed-institutional-scan",
+      "meaning": "Marriage gift to Engku Puteri Raja Hamidah and development of the island as government centre, per the heritage decision.",
+      "remaining": "Earlier defensive use is recorded in 1782–1784; do not call 1803 the first settlement. Original marriage/development instrument not read.",
+      "sources": [
+        {
+          "key": "penyengat-decree2018",
+          "title": "Indonesian Ministry of Education and Culture, Decision 112/M/2018, Kawasan Cagar Budaya Pulau Penyengat, historical attachment pp. 10–11",
+          "url": "https://pulaupenyengat.id/wp-content/uploads/2018/08/SK-PENETAPAN-KAWASAN-CB-PULAU-PENYENGAT.pdf",
+          "quote": "Pada tahun 1803 Sultan Mahmud Syah III menikah … ke Daik pada tahun 1787",
+          "readExtent": "Downloaded the complete 113-page, 3.98 MB official decision copy. Visually inspected title/cover and PDF pages 11–13 (printed historical attachment pp. 9–11). Page 10 places Sultan Mahmud Syah III’s marriage to Engku Puteri Raja Hamidah and development of the island as government centre in 1803. Page 11 dates the shift from Hulu Riau to Daik to 1787. This is an original 2018 heritage instrument presenting historical findings, not original 1803/1787 documents. Its own text records an earlier defensive base in 1782–1784, so 1803 is not first habitation."
+        }
+      ]
+    },
+    "site-lingga-daik": {
+      "confirmedDate": "1787",
+      "status": "confirmed-institutional-scan",
+      "meaning": "Transfer of the royal government from Hulu Riau to Daik, per the heritage decision.",
+      "remaining": "This dates royal relocation, not first habitation. Exact day and contemporary instrument not read.",
+      "sources": [
+        {
+          "key": "penyengat-decree2018",
+          "title": "Indonesian Ministry of Education and Culture, Decision 112/M/2018, Kawasan Cagar Budaya Pulau Penyengat, historical attachment pp. 10–11",
+          "url": "https://pulaupenyengat.id/wp-content/uploads/2018/08/SK-PENETAPAN-KAWASAN-CB-PULAU-PENYENGAT.pdf",
+          "quote": "Pada tahun 1803 Sultan Mahmud Syah III menikah … ke Daik pada tahun 1787",
+          "readExtent": "Downloaded the complete 113-page, 3.98 MB official decision copy. Visually inspected title/cover and PDF pages 11–13 (printed historical attachment pp. 9–11). Page 10 places Sultan Mahmud Syah III’s marriage to Engku Puteri Raja Hamidah and development of the island as government centre in 1803. Page 11 dates the shift from Hulu Riau to Daik to 1787. This is an original 2018 heritage instrument presenting historical findings, not original 1803/1787 documents. Its own text records an earlier defensive base in 1782–1784, so 1803 is not first habitation."
+        }
+      ]
+    },
+    "site-malacca": {
+      "confirmedDate": "1511-08-24",
+      "status": "confirmed-institutional",
+      "meaning": "Portuguese capture of Malacca, per the Portuguese Navy museum account.",
+      "remaining": "This is not the foundation of the already established trading port. Original 1511 account/instrument and exact site coordinate not inspected.",
+      "sources": [
+        {
+          "key": "malacca-navy",
+          "title": "Portuguese Navy Cultural Directorate, Efeméride: Tomada de Malaca (24 August 2020)",
+          "url": "https://cultura.marinha.pt/pt/museumarinha_web/multimedia_web/Paginas/efemeride-tomada-malaca-24ago20.aspx",
+          "quote": "Tomada de Malaca, a 24 de Agosto de 1511",
+          "readExtent": "Read the full institutional museum article in Portuguese. Its heading and narrative identify the taking of Malacca on 24 August 1511, after Albuquerque sailed from India on 1 July. The same article describes the port’s importance before the Portuguese arrival. This confirms the conquest milestone at naval-museum level, not the foundation of Malacca and not an original 1511 instrument. Do not adopt its military numbers without independent scrutiny."
+        }
+      ]
+    },
+    "straits-settlements-1826": {
+      "confirmedDate": null,
+      "status": "unverifiable-in-this-pass",
+      "meaning": "Formation year is confirmed; exact administrative foundation day remains unverified. The 27 November Charter is a distinct event.",
+      "remaining": "Formation year is confirmed; exact administrative foundation day remains unverified. The 27 November Charter is a distinct event.",
+      "sources": []
+    },
+    "site-chinatown": {
+      "confirmedDate": null,
+      "status": "unverifiable-in-this-pass",
+      "meaning": "1823 is a draft date for the plan marker, not a verified beginning of Chinese settlement.",
+      "remaining": "1823 is a draft date for the plan marker, not a verified beginning of Chinese settlement.",
+      "sources": []
+    },
+    "site-kampong-glam": {
+      "confirmedDate": null,
+      "status": "unverifiable-in-this-pass",
+      "meaning": "1823 is a draft date for the plan marker, not a verified beginning of the settlement.",
+      "remaining": "1823 is a draft date for the plan marker, not a verified beginning of the settlement.",
+      "sources": []
+    },
+    "site-serangoon-road": {
+      "confirmedDate": null,
+      "status": "unverifiable-in-this-pass",
+      "meaning": "1823 is a draft orientation date; the street’s opening or settlement foundation was not independently verified.",
+      "remaining": "1823 is a draft orientation date; the street’s opening or settlement foundation was not independently verified.",
+      "sources": []
+    },
+    "bma-1945": {
+      "confirmedDate": "1945-08-15",
+      "status": "confirmed-primary-with-milestone-distinction",
+      "meaning": "Signature of the proclamation establishing BMA in areas under Allied forces’ control.",
+      "remaining": "This is not an island-wide control date. Gazette publication is 1 November 1945; the surrender ceremony is 12 September. Keep an event labelled BMA return/surrender anchored separately unless its meaning is explicitly changed to the proclamation.",
+      "sources": [
+        {
+          "key": "bma-proclamation-icj",
+          "title": "British Military Administration, Malaya, Proclamation No. 1, signed 15 August 1945; reproduced in Singapore ICJ Memorial Annex 84, p. 743",
+          "url": "https://icj-web.leman.un-icc.cloud/sites/default/files/case-related/130/130-20040325-WRI-02-04-EN.pdf",
+          "quote": "Signed at Kandy, this 15th day of August, 1945. … under the control of Forces under my command",
+          "readExtent": "Downloaded the complete 13,084,375-byte, 221-page ICJ annex volume. Read OCR and visually inspected PDF page 143, Annex 84 p. 743: original Gazette reproduction of Proclamation No. 1, signed at Kandy on 15 August 1945, published in the Malay Peninsula Gazette no. 1 of 1 November 1945. Read all eight clauses. Clause 1 establishes BMA in areas of Malaya under forces’ control at any given time; clause 2 similarly conditions jurisdiction. Thus signing, publication, local military control and the 12 September surrender ceremony are distinct milestones. Do not infer Singapore control on 15 August."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,1302 @@
+{
+  "checked": "2026-10-17",
+  "totalNonWW2Anchors": 103,
+  "sourceBackedReferencePoints": 103,
+  "exactHistoricalFootprintsEstablished": 0,
+  "unresolvedDraftAnchors": 0,
+  "note": "A source-backed current reference point is not a measured historical footprint. Coordinates were accepted only from Wikidata structured data or SLA published georeferenced maps/API. No OSM geometry. Only the entries with detailed read records below were actively audited; remaining entries are explicitly unreviewed in this pass.",
+  "licenceSourceIds": [
+    "S247",
+    "S248"
+  ],
+  "verifiedUpdates": [
+    {
+      "id": "site-sri-mariamman",
+      "before": [
+        103.845,
+        1.283
+      ],
+      "at": [
+        103.845,
+        1.282611
+      ],
+      "status": "source-backed-reference-point",
+      "geometrySource": "Wikidata Q2428845 P625",
+      "url": "https://www.wikidata.org/wiki/Q2428845",
+      "licence": "CC0",
+      "sourceIds": [
+        "S249",
+        "S247"
+      ],
+      "readExtent": "Read identity, P625 and its references; DMS converted arithmetically to decimal degrees.",
+      "claimReference": "English Wikipedia import",
+      "role": "Present monument/building reference point; not a surveyed original historical footprint or event position within the building.",
+      "historicalFootprintVerified": false,
+      "institutionalCrossCheck": {
+        "url": "https://www.roots.gov.sg/places/places-landing/Places/national-monuments/sri-mariamman-temple",
+        "address": [
+          "244 South Bridge Road, Singapore 058793"
+        ],
+        "at": [
+          103.84522340568611,
+          1.2827080583625599
+        ],
+        "readExtent": "Read page title, institution historical text, address and numeric Get Directions target. No Google basemap geometry was copied.",
+        "geometryCopied": false
+      }
+    },
+    {
+      "id": "site-masjid-jamae",
+      "before": [
+        103.846,
+        1.283
+      ],
+      "at": [
+        103.8455,
+        1.283194
+      ],
+      "status": "source-backed-reference-point",
+      "geometrySource": "Wikidata Q2993428 P625",
+      "url": "https://www.wikidata.org/wiki/Q2993428",
+      "licence": "CC0",
+      "sourceIds": [
+        "S250",
+        "S247"
+      ],
+      "readExtent": "Read identity, P625 and its references; DMS converted arithmetically to decimal degrees.",
+      "claimReference": "English Wikipedia import",
+      "role": "Present monument/building reference point; not a surveyed original historical footprint or event position within the building.",
+      "historicalFootprintVerified": false
+    },
+    {
+      "id": "site-sultan-mosque",
+      "before": [
+        103.859,
+        1.302
+      ],
+      "at": [
+        103.859,
+        1.302139
+      ],
+      "status": "source-backed-reference-point",
+      "geometrySource": "Wikidata Q1907146 P625",
+      "url": "https://www.wikidata.org/wiki/Q1907146",
+      "licence": "CC0",
+      "sourceIds": [
+        "S251",
+        "S247"
+      ],
+      "readExtent": "Read identity, P625 and its references; DMS converted arithmetically to decimal degrees.",
+      "claimReference": "English Wikipedia import",
+      "role": "Present monument/building reference point; not a surveyed original historical footprint or event position within the building.",
+      "historicalFootprintVerified": false,
+      "institutionalCrossCheck": {
+        "url": "https://www.roots.gov.sg/places/places-landing/Places/national-monuments/sultan-mosque",
+        "address": [
+          "3 Muscat Street, Singapore 198833"
+        ],
+        "at": [
+          103.859214,
+          1.302391
+        ],
+        "readExtent": "Read page title, institution historical text, address and numeric Get Directions target. No Google basemap geometry was copied.",
+        "geometryCopied": false
+      }
+    },
+    {
+      "id": "site-thian-hock-keng",
+      "before": [
+        103.847,
+        1.281
+      ],
+      "at": [
+        103.847531,
+        1.281061
+      ],
+      "status": "source-backed-reference-point",
+      "geometrySource": "Wikidata Q2158122 P625",
+      "url": "https://www.wikidata.org/wiki/Q2158122",
+      "licence": "CC0",
+      "sourceIds": [
+        "S252",
+        "S247"
+      ],
+      "readExtent": "Read identity, P625 and its references; DMS converted arithmetically to decimal degrees.",
+      "claimReference": "Dutch Wikipedia import",
+      "role": "Present monument/building reference point; not a surveyed original historical footprint or event position within the building.",
+      "historicalFootprintVerified": false,
+      "institutionalCrossCheck": {
+        "url": "https://www.roots.gov.sg/places/places-landing/Places/national-monuments/thian-hock-keng",
+        "address": [
+          "158 Telok Ayer Street, Singapore 068613"
+        ],
+        "at": [
+          103.847466,
+          1.281005
+        ],
+        "readExtent": "Read page title, institution historical text, address and numeric Get Directions target. No Google basemap geometry was copied.",
+        "geometryCopied": false
+      }
+    },
+    {
+      "id": "site-armenian-church",
+      "before": [
+        103.849,
+        1.293
+      ],
+      "at": [
+        103.849306,
+        1.293056
+      ],
+      "status": "source-backed-reference-point",
+      "geometrySource": "Wikidata Q2660779 P625",
+      "url": "https://www.wikidata.org/wiki/Q2660779",
+      "licence": "CC0",
+      "sourceIds": [
+        "S253",
+        "S247"
+      ],
+      "readExtent": "Read identity, P625 and its references; DMS converted arithmetically to decimal degrees.",
+      "claimReference": "Russian Wikipedia import",
+      "role": "Present monument/building reference point; not a surveyed original historical footprint or event position within the building.",
+      "historicalFootprintVerified": false,
+      "institutionalCrossCheck": {
+        "url": "https://www.roots.gov.sg/places/places-landing/Places/national-monuments/armenian-apostolic-church-of-saint-gregory-the-illuminator",
+        "address": [
+          "60 Hill Street, Singapore 179366"
+        ],
+        "at": [
+          103.849361,
+          1.29311
+        ],
+        "readExtent": "Read page title, institution historical text, address and numeric Get Directions target. No Google basemap geometry was copied.",
+        "geometryCopied": false
+      }
+    },
+    {
+      "id": "site-st-andrews",
+      "before": [
+        103.852,
+        1.292
+      ],
+      "at": [
+        103.852222,
+        1.292222
+      ],
+      "status": "source-backed-reference-point",
+      "geometrySource": "Wikidata Q168806 P625",
+      "url": "https://www.wikidata.org/wiki/Q168806",
+      "licence": "CC0",
+      "sourceIds": [
+        "S254",
+        "S247"
+      ],
+      "readExtent": "Read identity, P625 and its references; DMS converted arithmetically to decimal degrees.",
+      "claimReference": "English Wikipedia import",
+      "role": "Present monument/building reference point; not a surveyed original historical footprint or event position within the building.",
+      "historicalFootprintVerified": false
+    },
+    {
+      "id": "macdonald-house-1965",
+      "before": [
+        103.845,
+        1.299
+      ],
+      "at": [
+        103.846,
+        1.299194
+      ],
+      "status": "source-backed-reference-point",
+      "geometrySource": "Wikidata Q6721822 P625",
+      "url": "https://www.wikidata.org/wiki/Q6721822",
+      "licence": "CC0",
+      "sourceIds": [
+        "S255",
+        "S247"
+      ],
+      "readExtent": "Read identity, P625 and its references; DMS converted arithmetically to decimal degrees.",
+      "claimReference": "English Wikipedia import",
+      "role": "Present monument/building reference point; not a surveyed original historical footprint or event position within the building.",
+      "historicalFootprintVerified": false,
+      "institutionalCrossCheck": {
+        "url": "https://www.roots.gov.sg/places/places-landing/Places/national-monuments/macdonald-house",
+        "address": [
+          "40 Orchard Road, Singapore 238838"
+        ],
+        "at": [
+          103.846044,
+          1.29918
+        ],
+        "readExtent": "Read page title, institution historical text, address and numeric Get Directions target. No Google basemap geometry was copied.",
+        "geometryCopied": false
+      }
+    },
+    {
+      "id": "causeway-1924",
+      "before": [
+        103.77,
+        1.452
+      ],
+      "at": [
+        103.769153,
+        1.452772
+      ],
+      "status": "source-backed-reference-point",
+      "geometrySource": "Wikidata Q892615 P625",
+      "url": "https://www.wikidata.org/wiki/Q892615",
+      "licence": "CC0",
+      "sourceIds": [
+        "S256",
+        "S247"
+      ],
+      "readExtent": "Read identity, P625 and its references; DMS converted arithmetically to decimal degrees.",
+      "claimReference": "English Wikipedia import",
+      "role": "Modern causeway reference point; not the exact 1924 ceremony position or a historical rail alignment.",
+      "historicalFootprintVerified": false
+    },
+    {
+      "id": "site-riau-penyengat",
+      "before": [
+        104.42,
+        0.94
+      ],
+      "at": [
+        104.417778,
+        0.928331
+      ],
+      "status": "source-backed-reference-point",
+      "geometrySource": "Wikidata Q3374975 P625",
+      "url": "https://www.wikidata.org/wiki/Q3374975",
+      "licence": "CC0",
+      "sourceIds": [
+        "S257",
+        "S247"
+      ],
+      "readExtent": "Read identity, P625 and its references; DMS converted arithmetically to decimal degrees.",
+      "claimReference": "Republic of Indonesia Gazetteer, Islands vol.3 (2024), p.232, and Home Affairs decrees 2022/2025",
+      "role": "Published island reference point; not the exact royal compound or an 1803 footprint.",
+      "historicalFootprintVerified": false
+    },
+    {
+      "id": "site-tan-tock-seng-1844",
+      "before": [
+        103.847,
+        1.281
+      ],
+      "at": [
+        103.841555,
+        1.284019
+      ],
+      "sourceIds": [
+        "S258",
+        "S259",
+        "S248"
+      ],
+      "status": "source-backed-reference-point",
+      "historicalFootprintVerified": false,
+      "geometrySource": "SLA OneMap address-search response",
+      "url": "https://www.onemap.gov.sg/api/common/elastic/search?searchVal=195%20Pearl%27s%20Hill%20Terrace&returnGeom=Y&getAddrDetails=Y&pageNum=1",
+      "licence": "Singapore Open Data Licence 1.0",
+      "readExtent": "Full API response and SUSS/MSF trail annex site 12 read.",
+      "role": "Original hospital vicinity via modern institutional heritage reference address; exact 1844 footprint unverified."
+    },
+    {
+      "id": "hock-lee-riots",
+      "before": [
+        103.88,
+        1.322
+      ],
+      "at": [
+        103.810217,
+        1.292361
+      ],
+      "sourceIds": [
+        "S260",
+        "S261",
+        "S248"
+      ],
+      "status": "source-backed-reference-point",
+      "historicalFootprintVerified": false,
+      "geometrySource": "Published SLA OneMap EPSG:3857 XYZ tile",
+      "url": "https://www.onemap.gov.sg/maps/tiles/Default/18/206664/130130.png",
+      "licence": "Singapore Open Data Licence 1.0",
+      "readExtent": "Full SG101 account, NHB brochure location text and tile image read.",
+      "role": "Named riot junction, not a claim for an exact bus-depot gate.",
+      "pixel": [
+        75,
+        218
+      ],
+      "grid": {
+        "z": 18,
+        "x": 206664,
+        "y": 130130
+      },
+      "estimatedReadingUncertaintyMetres": 30
+    }
+  ],
+  "checkedUnresolved": [
+    {
+      "id": "race-riots-july-1964",
+      "status": "historical-location-text-confirmed-coordinate-unresolved",
+      "url": "https://www.nlb.gov.sg/main/article-detail?cmsuuid=3cb72867-1eec-4caa-96b2-365e1301cbb1",
+      "readExtent": "Full article read; initial clashes described at Kallang Road and Kampong Soo Poo off Padang Jeringau towards Geylang. No reliable exact onset coordinate obtained.",
+      "action": "No coordinate changed; the existing marker remains approximate and is not an onset claim."
+    },
+    {
+      "id": "site-johor-lama",
+      "status": "date-closed-coordinate-unresolved",
+      "url": "https://www.jmm.gov.my/en/content/kota-johor-lama-museum",
+      "readExtent": "Complete museum historical background/address read. Modern mukim and museum Wikidata points do not measure the original fort footprint.",
+      "action": "Close the 1540 fort-date gap only; retain the draft coordinate warning."
+    },
+    {
+      "id": "site-lingga-daik",
+      "status": "modern-place-candidate-not-adopted",
+      "url": "https://www.wikidata.org/wiki/Q2407251",
+      "readExtent": "Read modern administrative-place identity and Wikipedia-import P625. It does not establish the historical royal compound.",
+      "action": "Retain historical point gap; no replacement."
+    },
+    {
+      "id": "site-fort-canning-temasek",
+      "status": "hill-centre-not-excavation-site",
+      "url": "https://www.wikidata.org/wiki/Q1438470",
+      "readExtent": "Read hill identity/P625; modern hill centre is not the precise 1984 archaeological trench.",
+      "action": "Date closed separately; retain archaeological-location gap."
+    },
+    {
+      "id": "first-cabinet-1959",
+      "status": "venue-confirmed-coordinate-claim-conflict",
+      "url": "https://www.wikidata.org/wiki/Q3531770",
+      "readExtent": "Two discordant P625 points found. NAS B0033/30 confirms City Hall as the ceremony venue; NHB address identifies building.",
+      "action": "Do not select between discordant statements silently; retain approximate original point."
+    },
+    {
+      "id": "site-chinatown",
+      "status": "modern-neighbourhood-point-not-historical-extent",
+      "url": "https://www.wikidata.org/wiki/Q1318670",
+      "readExtent": "Modern neighbourhood P625 has no claim references; it does not map the 1823 plan division.",
+      "action": "No coordinate changed."
+    },
+    {
+      "id": "site-kampong-glam",
+      "status": "modern-neighbourhood-point-not-historical-extent",
+      "url": "https://www.wikidata.org/wiki/Q4251481",
+      "readExtent": "Modern neighbourhood P625 has no claim references; it does not map the 1823 plan division.",
+      "action": "No coordinate changed."
+    },
+    {
+      "id": "site-serangoon-road",
+      "status": "no-coordinate-claim-obtained",
+      "url": "https://www.wikidata.org/wiki/Q7452693",
+      "readExtent": "Read entity; no P625 obtained.",
+      "action": "No coordinate invented."
+    }
+  ],
+  "rejectedCandidates": [
+    {
+      "url": "https://www.wikidata.org/wiki/Q12484698",
+      "reason": "Daik mountain is the wrong feature and its coordinate claim cites OpenStreetMap; excluded."
+    }
+  ],
+  "events": [
+    {
+      "id": "site-fort-canning-temasek",
+      "status": "source-backed-approximate-reference",
+      "url": "https://www.wikidata.org/wiki/Q1438470",
+      "readExtent": "Read hill identity/P625; modern hill centre is not the precise 1984 archaeological trench.",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "hill-centre-not-excavation-site"
+    },
+    {
+      "id": "site-singapore-stone",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "site-longyamen",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "site-johor-lama",
+      "status": "source-backed-approximate-reference",
+      "url": "https://www.jmm.gov.my/en/content/kota-johor-lama-museum",
+      "readExtent": "Complete museum historical background/address read. Modern mukim and museum Wikidata points do not measure the original fort footprint.",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "date-closed-coordinate-unresolved"
+    },
+    {
+      "id": "site-riau-penyengat",
+      "before": [
+        104.42,
+        0.94
+      ],
+      "at": [
+        104.417778,
+        0.928331
+      ],
+      "status": "source-backed-reference-point",
+      "geometrySource": "Wikidata Q3374975 P625",
+      "url": "https://www.wikidata.org/wiki/Q3374975",
+      "licence": "CC0",
+      "sourceIds": [
+        "S257",
+        "S247"
+      ],
+      "readExtent": "Read identity, P625 and its references; DMS converted arithmetically to decimal degrees.",
+      "claimReference": "Republic of Indonesia Gazetteer, Islands vol.3 (2024), p.232, and Home Affairs decrees 2022/2025",
+      "role": "Published island reference point; not the exact royal compound or an 1803 footprint.",
+      "historicalFootprintVerified": false
+    },
+    {
+      "id": "site-lingga-daik",
+      "status": "source-backed-approximate-reference",
+      "url": "https://www.wikidata.org/wiki/Q2407251",
+      "readExtent": "Read modern administrative-place identity and Wikipedia-import P625. It does not establish the historical royal compound.",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "modern-place-candidate-not-adopted"
+    },
+    {
+      "id": "site-penang",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "site-malacca",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "mahmud-iii-dies",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "raffles-arrives",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "preliminary-agreement-1819",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "hussein-brought-from-riau",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "treaty-1819",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "dutch-protest-1819",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "farquhar-resident",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "site-temenggong-village",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "town-committee-1822",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "boat-quay-fill",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "convention-1823",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "site-telok-blangah",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "site-kampong-glam-istana",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "singapore-institution",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "anglo-dutch-treaty",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "crawfurd-treaty",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "census-1824",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "straits-settlements-1826",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "capital-to-singapore",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "malacca-handover",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "naning-war",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "hong-kong-1841",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "tanjong-pagar-dock",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "crown-colony-1867",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "suez-1869",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "first-amoy-junk",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "convicts-arrive",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "convict-transport-ends",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "chinese-protectorate",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "indian-immigration-ordinance",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "census-1871",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "site-sri-mariamman",
+      "before": [
+        103.845,
+        1.283
+      ],
+      "at": [
+        103.845,
+        1.282611
+      ],
+      "status": "source-backed-reference-point",
+      "geometrySource": "Wikidata Q2428845 P625",
+      "url": "https://www.wikidata.org/wiki/Q2428845",
+      "licence": "CC0",
+      "sourceIds": [
+        "S249",
+        "S247"
+      ],
+      "readExtent": "Read identity, P625 and its references; DMS converted arithmetically to decimal degrees.",
+      "claimReference": "English Wikipedia import",
+      "role": "Present monument/building reference point; not a surveyed original historical footprint or event position within the building.",
+      "historicalFootprintVerified": false,
+      "institutionalCrossCheck": {
+        "url": "https://www.roots.gov.sg/places/places-landing/Places/national-monuments/sri-mariamman-temple",
+        "address": [
+          "244 South Bridge Road, Singapore 058793"
+        ],
+        "at": [
+          103.84522340568611,
+          1.2827080583625599
+        ],
+        "readExtent": "Read page title, institution historical text, address and numeric Get Directions target. No Google basemap geometry was copied.",
+        "geometryCopied": false
+      }
+    },
+    {
+      "id": "site-masjid-jamae",
+      "before": [
+        103.846,
+        1.283
+      ],
+      "at": [
+        103.8455,
+        1.283194
+      ],
+      "status": "source-backed-reference-point",
+      "geometrySource": "Wikidata Q2993428 P625",
+      "url": "https://www.wikidata.org/wiki/Q2993428",
+      "licence": "CC0",
+      "sourceIds": [
+        "S250",
+        "S247"
+      ],
+      "readExtent": "Read identity, P625 and its references; DMS converted arithmetically to decimal degrees.",
+      "claimReference": "English Wikipedia import",
+      "role": "Present monument/building reference point; not a surveyed original historical footprint or event position within the building.",
+      "historicalFootprintVerified": false
+    },
+    {
+      "id": "site-sultan-mosque",
+      "before": [
+        103.859,
+        1.302
+      ],
+      "at": [
+        103.859,
+        1.302139
+      ],
+      "status": "source-backed-reference-point",
+      "geometrySource": "Wikidata Q1907146 P625",
+      "url": "https://www.wikidata.org/wiki/Q1907146",
+      "licence": "CC0",
+      "sourceIds": [
+        "S251",
+        "S247"
+      ],
+      "readExtent": "Read identity, P625 and its references; DMS converted arithmetically to decimal degrees.",
+      "claimReference": "English Wikipedia import",
+      "role": "Present monument/building reference point; not a surveyed original historical footprint or event position within the building.",
+      "historicalFootprintVerified": false,
+      "institutionalCrossCheck": {
+        "url": "https://www.roots.gov.sg/places/places-landing/Places/national-monuments/sultan-mosque",
+        "address": [
+          "3 Muscat Street, Singapore 198833"
+        ],
+        "at": [
+          103.859214,
+          1.302391
+        ],
+        "readExtent": "Read page title, institution historical text, address and numeric Get Directions target. No Google basemap geometry was copied.",
+        "geometryCopied": false
+      }
+    },
+    {
+      "id": "site-thian-hock-keng",
+      "before": [
+        103.847,
+        1.281
+      ],
+      "at": [
+        103.847531,
+        1.281061
+      ],
+      "status": "source-backed-reference-point",
+      "geometrySource": "Wikidata Q2158122 P625",
+      "url": "https://www.wikidata.org/wiki/Q2158122",
+      "licence": "CC0",
+      "sourceIds": [
+        "S252",
+        "S247"
+      ],
+      "readExtent": "Read identity, P625 and its references; DMS converted arithmetically to decimal degrees.",
+      "claimReference": "Dutch Wikipedia import",
+      "role": "Present monument/building reference point; not a surveyed original historical footprint or event position within the building.",
+      "historicalFootprintVerified": false,
+      "institutionalCrossCheck": {
+        "url": "https://www.roots.gov.sg/places/places-landing/Places/national-monuments/thian-hock-keng",
+        "address": [
+          "158 Telok Ayer Street, Singapore 068613"
+        ],
+        "at": [
+          103.847466,
+          1.281005
+        ],
+        "readExtent": "Read page title, institution historical text, address and numeric Get Directions target. No Google basemap geometry was copied.",
+        "geometryCopied": false
+      }
+    },
+    {
+      "id": "site-armenian-church",
+      "before": [
+        103.849,
+        1.293
+      ],
+      "at": [
+        103.849306,
+        1.293056
+      ],
+      "status": "source-backed-reference-point",
+      "geometrySource": "Wikidata Q2660779 P625",
+      "url": "https://www.wikidata.org/wiki/Q2660779",
+      "licence": "CC0",
+      "sourceIds": [
+        "S253",
+        "S247"
+      ],
+      "readExtent": "Read identity, P625 and its references; DMS converted arithmetically to decimal degrees.",
+      "claimReference": "Russian Wikipedia import",
+      "role": "Present monument/building reference point; not a surveyed original historical footprint or event position within the building.",
+      "historicalFootprintVerified": false,
+      "institutionalCrossCheck": {
+        "url": "https://www.roots.gov.sg/places/places-landing/Places/national-monuments/armenian-apostolic-church-of-saint-gregory-the-illuminator",
+        "address": [
+          "60 Hill Street, Singapore 179366"
+        ],
+        "at": [
+          103.849361,
+          1.29311
+        ],
+        "readExtent": "Read page title, institution historical text, address and numeric Get Directions target. No Google basemap geometry was copied.",
+        "geometryCopied": false
+      }
+    },
+    {
+      "id": "site-st-andrews",
+      "before": [
+        103.852,
+        1.292
+      ],
+      "at": [
+        103.852222,
+        1.292222
+      ],
+      "status": "source-backed-reference-point",
+      "geometrySource": "Wikidata Q168806 P625",
+      "url": "https://www.wikidata.org/wiki/Q168806",
+      "licence": "CC0",
+      "sourceIds": [
+        "S254",
+        "S247"
+      ],
+      "readExtent": "Read identity, P625 and its references; DMS converted arithmetically to decimal degrees.",
+      "claimReference": "English Wikipedia import",
+      "role": "Present monument/building reference point; not a surveyed original historical footprint or event position within the building.",
+      "historicalFootprintVerified": false
+    },
+    {
+      "id": "site-tan-tock-seng-1844",
+      "before": [
+        103.847,
+        1.281
+      ],
+      "at": [
+        103.841555,
+        1.284019
+      ],
+      "sourceIds": [
+        "S258",
+        "S259",
+        "S248"
+      ],
+      "status": "source-backed-reference-point",
+      "historicalFootprintVerified": false,
+      "geometrySource": "SLA OneMap address-search response",
+      "url": "https://www.onemap.gov.sg/api/common/elastic/search?searchVal=195%20Pearl%27s%20Hill%20Terrace&returnGeom=Y&getAddrDetails=Y&pageNum=1",
+      "licence": "Singapore Open Data Licence 1.0",
+      "readExtent": "Full API response and SUSS/MSF trail annex site 12 read.",
+      "role": "Original hospital vicinity via modern institutional heritage reference address; exact 1844 footprint unverified."
+    },
+    {
+      "id": "site-raffles-institution",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "site-chinatown",
+      "status": "source-backed-approximate-reference",
+      "url": "https://www.wikidata.org/wiki/Q1318670",
+      "readExtent": "Modern neighbourhood P625 has no claim references; it does not map the 1823 plan division.",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "modern-neighbourhood-point-not-historical-extent"
+    },
+    {
+      "id": "site-kampong-glam",
+      "status": "source-backed-approximate-reference",
+      "url": "https://www.wikidata.org/wiki/Q4251481",
+      "readExtent": "Modern neighbourhood P625 has no claim references; it does not map the 1823 plan division.",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "modern-neighbourhood-point-not-historical-extent"
+    },
+    {
+      "id": "site-serangoon-road",
+      "status": "source-backed-approximate-reference",
+      "url": "https://www.wikidata.org/wiki/Q7452693",
+      "readExtent": "Read entity; no P625 obtained.",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "no-coordinate-claim-obtained"
+    },
+    {
+      "id": "riots-1854",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "telok-ayer-reclamation",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "post-office-riots-1876",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "pangkor-1874",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "perak-war",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "fms-1896",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "johor-treaty-1885",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "labuan-to-ss",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "anglo-siamese-treaty",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "mutiny-1915",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "mutiny-executions-1915",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "causeway-1924",
+      "before": [
+        103.77,
+        1.452
+      ],
+      "at": [
+        103.769153,
+        1.452772
+      ],
+      "status": "source-backed-reference-point",
+      "geometrySource": "Wikidata Q892615 P625",
+      "url": "https://www.wikidata.org/wiki/Q892615",
+      "licence": "CC0",
+      "sourceIds": [
+        "S256",
+        "S247"
+      ],
+      "readExtent": "Read identity, P625 and its references; DMS converted arithmetically to decimal degrees.",
+      "claimReference": "English Wikipedia import",
+      "role": "Modern causeway reference point; not the exact 1924 ceremony position or a historical rail alignment.",
+      "historicalFootprintVerified": false
+    },
+    {
+      "id": "kreta-ayer-1927",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "census-1931",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "dindings-to-perak",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "four-states-to-thailand",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "allied-raids-singapore",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "bahau-settlement",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "endau-settlement",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "bma-1945",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "colony-of-singapore-1946",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "malayan-union",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "umno-founded",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "federation-1948",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "election-1948",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "emergency-1948",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "hertogh-riots",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "election-1955",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "hock-lee-riots",
+      "before": [
+        103.88,
+        1.322
+      ],
+      "at": [
+        103.810217,
+        1.292361
+      ],
+      "sourceIds": [
+        "S260",
+        "S261",
+        "S248"
+      ],
+      "status": "source-backed-reference-point",
+      "historicalFootprintVerified": false,
+      "geometrySource": "Published SLA OneMap EPSG:3857 XYZ tile",
+      "url": "https://www.onemap.gov.sg/maps/tiles/Default/18/206664/130130.png",
+      "licence": "Singapore Open Data Licence 1.0",
+      "readExtent": "Full SG101 account, NHB brochure location text and tile image read.",
+      "role": "Named riot junction, not a claim for an exact bus-depot gate.",
+      "pixel": [
+        75,
+        218
+      ],
+      "grid": {
+        "z": 18,
+        "x": 206664,
+        "y": 130130
+      },
+      "estimatedReadingUncertaintyMetres": 30
+    },
+    {
+      "id": "marshall-resigns",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "school-riots-1956",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "merdeka-1957",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "citizenship-1957",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "election-1959",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "self-government-1959",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "first-cabinet-1959",
+      "status": "source-backed-approximate-reference",
+      "url": "https://www.wikidata.org/wiki/Q3531770",
+      "readExtent": "Two discordant P625 points found. NAS B0033/30 confirms City Hall as the ceremony venue; NHB address identifies building.",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "venue-confirmed-coordinate-claim-conflict"
+    },
+    {
+      "id": "yusof-ishak-1959",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "tunku-proposal-1961",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "barisan-sosialis-1961",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "referendum-1962",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "brunei-revolt",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "coldstore-1963",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "malaysia-agreement",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "malaysia-day-1963",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "konfrontasi-begins",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "malaysia-election-1964",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "race-riots-july-1964",
+      "status": "source-backed-approximate-reference",
+      "url": "https://www.nlb.gov.sg/main/article-detail?cmsuuid=3cb72867-1eec-4caa-96b2-365e1301cbb1",
+      "readExtent": "Full article read; initial clashes described at Kallang Road and Kampong Soo Poo off Padang Jeringau towards Geylang. No reliable exact onset coordinate obtained.",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "historical-location-text-confirmed-coordinate-unresolved"
+    },
+    {
+      "id": "race-riots-september-1964",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "macdonald-house-1965",
+      "before": [
+        103.845,
+        1.299
+      ],
+      "at": [
+        103.846,
+        1.299194
+      ],
+      "status": "source-backed-reference-point",
+      "geometrySource": "Wikidata Q6721822 P625",
+      "url": "https://www.wikidata.org/wiki/Q6721822",
+      "licence": "CC0",
+      "sourceIds": [
+        "S255",
+        "S247"
+      ],
+      "readExtent": "Read identity, P625 and its references; DMS converted arithmetically to decimal degrees.",
+      "claimReference": "English Wikipedia import",
+      "role": "Present monument/building reference point; not a surveyed original historical footprint or event position within the building.",
+      "historicalFootprintVerified": false,
+      "institutionalCrossCheck": {
+        "url": "https://www.roots.gov.sg/places/places-landing/Places/national-monuments/macdonald-house",
+        "address": [
+          "40 Orchard Road, Singapore 238838"
+        ],
+        "at": [
+          103.846044,
+          1.29918
+        ],
+        "readExtent": "Read page title, institution historical text, address and numeric Get Directions target. No Google basemap geometry was copied.",
+        "geometryCopied": false
+      }
+    },
+    {
+      "id": "independence-agreement-1965",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "separation-1965",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "first-cabinet-1965",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    },
+    {
+      "id": "first-president-1965",
+      "status": "source-backed-approximate-reference",
+      "action": "Second pass sourced position and placement scope in anchor-second-pass.json.",
+      "firstPassStatus": "unreviewed-in-this-pass"
+    }
+  ],
+  "networkLimit": "Wikidata API returned HTTP429 during broader discovery; no location was invented to fill the remaining gaps.",
+  "secondPass": {
+    "checked": "2026-10-18",
+    "resolved": 92,
+    "remaining": 0,
+    "ledger": "anchor-second-pass.json",
+    "scope": "Approximate sourced place/locality references, not exact original footprints."
+  }
+}

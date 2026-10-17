@@ -1,0 +1,438 @@
+{
+  "dataset": "g23-quarter",
+  "projection": "auto",
+  "maxResidualKm": 10,
+  "controlPointType": "external named-town symbol audit; not exact surveyed surviving-feature control",
+  "sourceRaster": "raw/G23.jpg",
+  "nativePixelSize": [
+    15614,
+    20593
+  ],
+  "coordinateConvention": "Native raster pixels measured from upper-left; svg is nativePixel / 4 for the parent quarter raster. lnglat is copied from Natural Earth, not inferred from the printed grid.",
+  "sourceMapSha256": "f4e3626af3bd43256648407cc2b6cfa8ee73e349a3c1c9ab60dfee49cb430a91",
+  "referenceDataset": {
+    "file": "raw/ne_10m_populated_places.geojson",
+    "sha256": "9b8e3de09048ef00dfc70357dbb9fa324493f214b5e0ae4daf1aa79a8d10116b",
+    "licence": "Natural Earth public domain",
+    "use": "Control-point coordinates only; no published geometry."
+  },
+  "method": "Predicted crop locations from the parent graticule approximation; visually read printed named town symbols in full-resolution source crops. Pixel prediction was not used as the final coordinate. Excluded unproven identities and large blue circles. No fit or residual calculated here; parent should fit these independent observations and label its external results separately from internal grid precision.",
+  "controlPoints": [
+    {
+      "name": "Alor Setar",
+      "printedName": "ALOR STAR",
+      "svg": [
+        1064.25,
+        1353.5
+      ],
+      "nativePixel": [
+        4257,
+        5414
+      ],
+      "lnglat": [
+        100.372933,
+        6.113308
+      ],
+      "neId": 1159136519,
+      "sourceCrop": "work/G23-landmark-2.png",
+      "cropOriginNativePixel": [
+        4004,
+        5168
+      ],
+      "cropLocalPixel": [
+        253,
+        246
+      ],
+      "pixelUncertaintyNative": 8,
+      "coordinateCorrespondenceUncertaintyKm": 2.5,
+      "quality": "good-town-symbol",
+      "reading": "Centre of the small printed town dot on the east bank of the river, beneath Alor Sta label.",
+      "reference": "Natural Earth 1:10m populated_places point for this named town, public domain; used only as independent external control, never published geometry."
+    },
+    {
+      "name": "Kota Baharu",
+      "printedName": "KOTA BHARU",
+      "svg": [
+        2281.5,
+        1351.0
+      ],
+      "nativePixel": [
+        9126,
+        5404
+      ],
+      "lnglat": [
+        102.229977,
+        6.119974
+      ],
+      "neId": 1159148317,
+      "sourceCrop": "work/G23-landmark-4.png",
+      "cropOriginNativePixel": [
+        8752,
+        5150
+      ],
+      "cropLocalPixel": [
+        374,
+        254
+      ],
+      "pixelUncertaintyNative": 12,
+      "coordinateCorrespondenceUncertaintyKm": 2.5,
+      "quality": "moderate-town-symbol",
+      "reading": "Small printed town mark beside the river at the start of the bold capital label; not the large lettering.",
+      "reference": "Natural Earth 1:10m populated_places point for this named town, public domain; used only as independent external control, never published geometry."
+    },
+    {
+      "name": "Kuala Terengganu",
+      "printedName": "KUALA TRENGGANU",
+      "svg": [
+        2841.5,
+        1859.5
+      ],
+      "nativePixel": [
+        11366,
+        7438
+      ],
+      "lnglat": [
+        103.12,
+        5.33041
+      ],
+      "neId": 1159136553,
+      "sourceCrop": "work/G23-landmark-5.png",
+      "cropOriginNativePixel": [
+        11028,
+        7188
+      ],
+      "cropLocalPixel": [
+        338,
+        250
+      ],
+      "pixelUncertaintyNative": 15,
+      "coordinateCorrespondenceUncertaintyKm": 2.5,
+      "quality": "moderate-town-symbol",
+      "reading": "Coastal town symbol at the south side of the river entrance, immediately before the bold town label.",
+      "reference": "Natural Earth 1:10m populated_places point for this named town, public domain; used only as independent external control, never published geometry."
+    },
+    {
+      "name": "Taiping",
+      "printedName": "THAIPING",
+      "svg": [
+        1302.5,
+        2183.75
+      ],
+      "nativePixel": [
+        5210,
+        8735
+      ],
+      "lnglat": [
+        100.719991,
+        4.86496
+      ],
+      "neId": 1159148311,
+      "sourceCrop": "work/G23-landmark-6.png",
+      "cropOriginNativePixel": [
+        4891,
+        8388
+      ],
+      "cropLocalPixel": [
+        319,
+        347
+      ],
+      "pixelUncertaintyNative": 18,
+      "coordinateCorrespondenceUncertaintyKm": 2.5,
+      "quality": "moderate-built-up-symbol",
+      "reading": "Printed built-up/rail-road junction symbol immediately west of the bold town label; blue circle to the east excluded.",
+      "reference": "Natural Earth 1:10m populated_places point for this named town, public domain; used only as independent external control, never published geometry."
+    },
+    {
+      "name": "Ipoh",
+      "printedName": "IPOH",
+      "svg": [
+        1521.75,
+        2347.25
+      ],
+      "nativePixel": [
+        6087,
+        9389
+      ],
+      "lnglat": [
+        101.064983,
+        4.599989
+      ],
+      "neId": 1159148315,
+      "sourceCrop": "work/G23-landmark-7.png",
+      "cropOriginNativePixel": [
+        5773,
+        9072
+      ],
+      "cropLocalPixel": [
+        314,
+        317
+      ],
+      "pixelUncertaintyNative": 15,
+      "coordinateCorrespondenceUncertaintyKm": 2.5,
+      "quality": "moderate-built-up-symbol",
+      "reading": "Small printed built-up/road-river junction immediately west of IPOH; blue circle southeast excluded.",
+      "reference": "Natural Earth 1:10m populated_places point for this named town, public domain; used only as independent external control, never published geometry."
+    },
+    {
+      "name": "Kuala Lipis",
+      "printedName": "KUALA LIPIS",
+      "svg": [
+        2162.75,
+        2613.25
+      ],
+      "nativePixel": [
+        8651,
+        10453
+      ],
+      "lnglat": [
+        102.042001,
+        4.184001
+      ],
+      "neId": 1159117441,
+      "sourceCrop": "work/G23-landmark-8.png",
+      "cropOriginNativePixel": [
+        8271,
+        10145
+      ],
+      "cropLocalPixel": [
+        380,
+        308
+      ],
+      "pixelUncertaintyNative": 18,
+      "coordinateCorrespondenceUncertaintyKm": 2.5,
+      "quality": "moderate-confluence-town-anchor",
+      "reading": "Printed river-confluence/settlement junction just above the KUALA LIPIS lettering, not its typographic centre.",
+      "reference": "Natural Earth 1:10m populated_places point for this named town, public domain; used only as independent external control, never published geometry."
+    },
+    {
+      "name": "Kuantan",
+      "printedName": "Kwantan",
+      "svg": [
+        2968.25,
+        2838.0
+      ],
+      "nativePixel": [
+        11873,
+        11352
+      ],
+      "lnglat": [
+        103.320039,
+        3.829959
+      ],
+      "neId": 1159148321,
+      "sourceCrop": "work/G23-landmark-9.png",
+      "cropOriginNativePixel": [
+        11539,
+        11059
+      ],
+      "cropLocalPixel": [
+        334,
+        293
+      ],
+      "pixelUncertaintyNative": 12,
+      "coordinateCorrespondenceUncertaintyKm": 2.5,
+      "quality": "moderate-town-symbol",
+      "reading": "Small town mark on the north side of the Kuantan river entrance, next to the diagonal Kwantan label.",
+      "reference": "Natural Earth 1:10m populated_places point for this named town, public domain; used only as independent external control, never published geometry."
+    },
+    {
+      "name": "Kuala Lumpur",
+      "printedName": "KUALA LUMPUR",
+      "svg": [
+        1906.5,
+        3282.75
+      ],
+      "nativePixel": [
+        7626,
+        13131
+      ],
+      "lnglat": [
+        101.688699,
+        3.139797
+      ],
+      "neId": 1159151317,
+      "sourceCrop": "work/G23-landmark-10.png",
+      "cropOriginNativePixel": [
+        7368,
+        12839
+      ],
+      "cropLocalPixel": [
+        258,
+        292
+      ],
+      "pixelUncertaintyNative": 20,
+      "coordinateCorrespondenceUncertaintyKm": 2.5,
+      "quality": "moderate-built-up-symbol",
+      "reading": "Centre of the compact printed built-up symbol at the river/road junction; modern NE city point is not a surveyed confluence coordinate.",
+      "reference": "Natural Earth 1:10m populated_places point for this named town, public domain; used only as independent external control, never published geometry."
+    },
+    {
+      "name": "Seremban",
+      "printedName": "SEREMBAN",
+      "svg": [
+        2072.5,
+        3555.25
+      ],
+      "nativePixel": [
+        8290,
+        14221
+      ],
+      "lnglat": [
+        101.94002,
+        2.710492
+      ],
+      "neId": 1159136537,
+      "sourceCrop": "work/G23-landmark-11.png",
+      "cropOriginNativePixel": [
+        8011,
+        13947
+      ],
+      "cropLocalPixel": [
+        279,
+        274
+      ],
+      "pixelUncertaintyNative": 18,
+      "coordinateCorrespondenceUncertaintyKm": 2.5,
+      "quality": "moderate-built-up-symbol",
+      "reading": "Centre of the printed town/road junction just northeast of the SEREMBAN label; blue circles excluded.",
+      "reference": "Natural Earth 1:10m populated_places point for this named town, public domain; used only as independent external control, never published geometry."
+    },
+    {
+      "name": "Malacca",
+      "printedName": "MALACCA TOWN",
+      "svg": [
+        2281.75,
+        3897.0
+      ],
+      "nativePixel": [
+        9127,
+        15588
+      ],
+      "lnglat": [
+        102.246461,
+        2.206414
+      ],
+      "neId": 1159148319,
+      "sourceCrop": "work/G23-landmark-12.png",
+      "cropOriginNativePixel": [
+        8794,
+        15247
+      ],
+      "cropLocalPixel": [
+        333,
+        341
+      ],
+      "pixelUncertaintyNative": 25,
+      "coordinateCorrespondenceUncertaintyKm": 2.5,
+      "quality": "moderate-built-up-symbol",
+      "reading": "Centre of the coastal built-up hatching at the river mouth, northeast of the MALACCA TOWN lettering.",
+      "reference": "Natural Earth 1:10m populated_places point for this named town, public domain; used only as independent external control, never published geometry."
+    },
+    {
+      "name": "Muar",
+      "printedName": "BANDAR MAHARANI / KUALA MUAR",
+      "svg": [
+        2475.25,
+        3997.5
+      ],
+      "nativePixel": [
+        9901,
+        15990
+      ],
+      "lnglat": [
+        102.566597,
+        2.033738
+      ],
+      "neId": 1159136525,
+      "sourceCrop": "work/G23-landmark-15.png",
+      "cropOriginNativePixel": [
+        9613,
+        15693
+      ],
+      "cropLocalPixel": [
+        288,
+        297
+      ],
+      "pixelUncertaintyNative": 18,
+      "coordinateCorrespondenceUncertaintyKm": 2.5,
+      "quality": "moderate-built-up-symbol",
+      "reading": "Small built-up/road-start symbol on the south side of the river mouth, at the Bandar Maharani label.",
+      "reference": "Natural Earth 1:10m populated_places point for this named town, public domain; used only as independent external control, never published geometry."
+    },
+    {
+      "name": "Teluk Intan",
+      "printedName": "TELOK ANSON",
+      "svg": [
+        1508.75,
+        2723.5
+      ],
+      "nativePixel": [
+        6035,
+        10894
+      ],
+      "lnglat": [
+        101.031445,
+        4.01186
+      ],
+      "neId": 1159136507,
+      "sourceCrop": "work/G23-landmark-18.png",
+      "cropOriginNativePixel": [
+        5687,
+        10589
+      ],
+      "cropLocalPixel": [
+        348,
+        305
+      ],
+      "pixelUncertaintyNative": 20,
+      "coordinateCorrespondenceUncertaintyKm": 2.5,
+      "quality": "moderate-built-up-symbol",
+      "reading": "Centre of the printed built-up symbol within the river bend under the ANSON lettering; modern name Teluk Intan.",
+      "reference": "Natural Earth 1:10m populated_places point for this named town, public domain; used only as independent external control, never published geometry."
+    }
+  ],
+  "rejectedCandidates": [
+    {
+      "name": "Kangar",
+      "crop": "work/G23-landmark-3.png",
+      "reason": "Predicted area shows PALIT (PERLIS), not a printed Kangar identifier. No documentary proof that the Palit marker equals the modern NE Kangar point; excluded."
+    },
+    {
+      "name": "George Town",
+      "crop": "work/G23-landmark-1.png",
+      "reason": "Large built-up street-hatching extent with no unique point; twelve clearer town symbols available."
+    },
+    {
+      "name": "Johor Bahru",
+      "crop": "work/G23-landmark-13.png",
+      "reason": "Large built-up extent and modern NE city-point offset make a unique point less defensible; excluded."
+    },
+    {
+      "name": "Singapore",
+      "crop": "work/G23-landmark-14.png",
+      "reason": "Large built-up extent with no unique point corresponding to the generalized NE capital coordinate; excluded."
+    },
+    {
+      "name": "Batu Pahat",
+      "crop": "work/G23-landmark-16.png",
+      "reason": "Crop shows Batu Chondong and Kuala Batu Pahat; cannot assume either is the NE Batu Pahat city centre."
+    },
+    {
+      "name": "Raub",
+      "crop": "work/G23-landmark-17.png",
+      "reason": "Town label and road node visible but large coloured circle overlaps nearby terrain; not needed among the selected twelve."
+    },
+    {
+      "name": "Kelang",
+      "crop": "work/G23-landmark-19.png",
+      "reason": "Town label and river/road junction visible; excluded because selected twelve give broader coverage and similar or better symbol legibility."
+    }
+  ],
+  "knownGaps": [
+    "These controls compare persistent named towns to generalized Natural Earth city points. They do not independently prove the exact coordinate of a surviving 1898 street junction or surveyed feature.",
+    "The 2.5 km correspondence allowance is a conservative declared uncertainty, not a measured NE accuracy or a derived error bound. Do not treat it as a residual.",
+    "Built-up-symbol centres involve interpretation; uncertainty is recorded per point in native pixels. The printed town symbol is not a municipal territory polygon.",
+    "Do not describe a fitted low RMS as metre-level external accuracy. The source geodetic datum and map compilation accuracy remain unidentified.",
+    "No Borneo coverage. No source grid coordinates were used as the reference longitude/latitude for these controls."
+  ]
+}

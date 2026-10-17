@@ -1,0 +1,821 @@
+{
+  "phase": "First-pass evidence archive; superseded by sources.json, SECOND-PASS-COAST.md and CODEX-REPORT.md Second pass. Retained for before/after diagnostics, not current acceptance.",
+  "eras": [
+    {
+      "id": "L0",
+      "evidence": {
+        "maps": [
+          "G9",
+          "G1",
+          "G30"
+        ],
+        "acceptance": "rejected-draft",
+        "knownGaps": [
+          "Geographical acceptance FAILED: source/modern control-point continuity incomplete and residual budgets exceeded.",
+          "Historical land now gone is not restored; trace coverage and shoreline-ink identity review incomplete.",
+          "G9 later whole-island source substitutes outside early town; source age is1911/1912–1916, not1819.",
+          "G1 is an1822 proposedplan backcast to1819; initial natural shore not directly established.",
+          "Untraced detached historical islands are omitted; only source-traced mainland/connected-source portions are retained. This is incomplete coverage, not a complete Singapore coastline.",
+          "Inland river-water exclusions are incomplete; URA planning-area land can retain river water, including a missing Singapore River inlet in the L0 review plate."
+        ],
+        "fits": {
+          "G9": {
+            "model": "mercator+affine",
+            "rmsKm": 0.18969636074578214,
+            "maxKm": 0.35949789161879236,
+            "looRmsKm": 0.23283708964166633,
+            "looMaxKm": 0.44070975333627505,
+            "points": [
+              {
+                "name": "Tanjong Buloh",
+                "residualKm": 0.07785181449938204,
+                "looKm": 0.11084312559136777
+              },
+              {
+                "name": "Tanjong Gedong",
+                "residualKm": 0.15465682008956533,
+                "looKm": 0.24525017061323778
+              },
+              {
+                "name": "Tanjong Irau",
+                "residualKm": 0.35949789161879236,
+                "looKm": 0.44070975333627505
+              },
+              {
+                "name": "Tanjong Changi",
+                "residualKm": 0.02950787493664308,
+                "looKm": 0.039507951386857615
+              },
+              {
+                "name": "Tanjong Batu Kekek",
+                "residualKm": 0.1893972716381631,
+                "looKm": 0.240519786627804
+              },
+              {
+                "name": "Tanjong Tajam",
+                "residualKm": 0.18998130794924029,
+                "looKm": 0.22921569122469188
+              },
+              {
+                "name": "Tanjong Chek Jawa",
+                "residualKm": 0.18311955118984025,
+                "looKm": 0.25274464701116917
+              },
+              {
+                "name": "Tanjong Berlayer",
+                "residualKm": 0.11021033652987908,
+                "looKm": 0.13229690659203824
+              },
+              {
+                "name": "Tanjong Rimau",
+                "residualKm": 0.35471935220302003,
+                "looKm": 0.43338217404415824
+              },
+              {
+                "name": "Bukit Timah Hill",
+                "residualKm": 0.31609857019817683,
+                "looKm": 0.3487368843996668
+              },
+              {
+                "name": "Mount Faber",
+                "residualKm": 0.014772373780784321,
+                "looKm": 0.017244430743007636
+              },
+              {
+                "name": "Fort Canning Hill",
+                "residualKm": 0.15612070669656153,
+                "looKm": 0.1754670236764928
+              },
+              {
+                "name": "Pearl's Hill",
+                "residualKm": 0.05560629879046263,
+                "looKm": 0.06350423276658286
+              },
+              {
+                "name": "Bukit Gombak",
+                "residualKm": 0.15264784604603587,
+                "looKm": 0.17282354751181073
+              },
+              {
+                "name": "Bukit Batok",
+                "residualKm": 0.012274335297994994,
+                "looKm": 0.013674687121761852
+              },
+              {
+                "name": "Mount Serapong",
+                "residualKm": 0.14540578685332242,
+                "looKm": 0.18112618015799412
+              }
+            ]
+          },
+          "G1": {
+            "model": "laea(103.9,1.3)+affine",
+            "rmsKm": 0.042222599919924705,
+            "maxKm": 0.08743064369440132,
+            "looRmsKm": 0.05838849832300288,
+            "looMaxKm": 0.11358310857183532,
+            "points": [
+              {
+                "name": "Bridge Street river crossing / later Elgin Bridge centre",
+                "residualKm": 0.030424324460789128,
+                "looKm": 0.03572353750368514
+              },
+              {
+                "name": "North Bridge Road / High Street",
+                "residualKm": 0.026636814443740074,
+                "looKm": 0.030522233598006293
+              },
+              {
+                "name": "North Bridge Road / Coleman Street",
+                "residualKm": 0.05283768283522808,
+                "looKm": 0.0596979225992548
+              },
+              {
+                "name": "North Bridge Road / Stamford Road canal",
+                "residualKm": 0.03128109849554192,
+                "looKm": 0.035473537192499335
+              },
+              {
+                "name": "North Bridge Road / Bras Basah Road",
+                "residualKm": 0.029571106209011565,
+                "looKm": 0.03447132125804892
+              },
+              {
+                "name": "Beach Road / Bras Basah Road",
+                "residualKm": 0.026482197239935595,
+                "looKm": 0.036407874585874425
+              },
+              {
+                "name": "North Bridge Road / Middle Road",
+                "residualKm": 0.03568909544137126,
+                "looKm": 0.046298363287799925
+              },
+              {
+                "name": "Beach Road / Middle Road",
+                "residualKm": 0.04249244005924352,
+                "looKm": 0.0604364302279273
+              },
+              {
+                "name": "North Bridge Road / Arab Street",
+                "residualKm": 0.04745131783449221,
+                "looKm": 0.09208516953485109
+              },
+              {
+                "name": "Beach Road / Arab Street",
+                "residualKm": 0.02379377052568876,
+                "looKm": 0.045791510402211175
+              },
+              {
+                "name": "South Bridge Road / Upper Pickering Street",
+                "residualKm": 0.08743064369440132,
+                "looKm": 0.11358310857183532
+              },
+              {
+                "name": "South Bridge Road / Cross Street",
+                "residualKm": 0.0295046343701977,
+                "looKm": 0.04574975266382318
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "L1",
+      "evidence": {
+        "maps": [
+          "G9",
+          "G4",
+          "G30"
+        ],
+        "acceptance": "rejected-draft",
+        "knownGaps": [
+          "Geographical acceptance FAILED: source/modern control-point continuity incomplete and residual budgets exceeded.",
+          "Historical land now gone is not restored; trace coverage and shoreline-ink identity review incomplete.",
+          "G9 later whole-island source outside town.",
+          "G4 published1839 town source substitutes for1823 start; harbour/west-dock later changes not traced.",
+          "Untraced detached historical islands are omitted; only source-traced mainland/connected-source portions are retained. This is incomplete coverage, not a complete Singapore coastline.",
+          "Inland river-water exclusions are incomplete; URA planning-area land can retain river water, including a missing Singapore River inlet in the L0 review plate."
+        ],
+        "fits": {
+          "G9": {
+            "model": "mercator+affine",
+            "rmsKm": 0.18969636074578214,
+            "maxKm": 0.35949789161879236,
+            "looRmsKm": 0.23283708964166633,
+            "looMaxKm": 0.44070975333627505,
+            "points": [
+              {
+                "name": "Tanjong Buloh",
+                "residualKm": 0.07785181449938204,
+                "looKm": 0.11084312559136777
+              },
+              {
+                "name": "Tanjong Gedong",
+                "residualKm": 0.15465682008956533,
+                "looKm": 0.24525017061323778
+              },
+              {
+                "name": "Tanjong Irau",
+                "residualKm": 0.35949789161879236,
+                "looKm": 0.44070975333627505
+              },
+              {
+                "name": "Tanjong Changi",
+                "residualKm": 0.02950787493664308,
+                "looKm": 0.039507951386857615
+              },
+              {
+                "name": "Tanjong Batu Kekek",
+                "residualKm": 0.1893972716381631,
+                "looKm": 0.240519786627804
+              },
+              {
+                "name": "Tanjong Tajam",
+                "residualKm": 0.18998130794924029,
+                "looKm": 0.22921569122469188
+              },
+              {
+                "name": "Tanjong Chek Jawa",
+                "residualKm": 0.18311955118984025,
+                "looKm": 0.25274464701116917
+              },
+              {
+                "name": "Tanjong Berlayer",
+                "residualKm": 0.11021033652987908,
+                "looKm": 0.13229690659203824
+              },
+              {
+                "name": "Tanjong Rimau",
+                "residualKm": 0.35471935220302003,
+                "looKm": 0.43338217404415824
+              },
+              {
+                "name": "Bukit Timah Hill",
+                "residualKm": 0.31609857019817683,
+                "looKm": 0.3487368843996668
+              },
+              {
+                "name": "Mount Faber",
+                "residualKm": 0.014772373780784321,
+                "looKm": 0.017244430743007636
+              },
+              {
+                "name": "Fort Canning Hill",
+                "residualKm": 0.15612070669656153,
+                "looKm": 0.1754670236764928
+              },
+              {
+                "name": "Pearl's Hill",
+                "residualKm": 0.05560629879046263,
+                "looKm": 0.06350423276658286
+              },
+              {
+                "name": "Bukit Gombak",
+                "residualKm": 0.15264784604603587,
+                "looKm": 0.17282354751181073
+              },
+              {
+                "name": "Bukit Batok",
+                "residualKm": 0.012274335297994994,
+                "looKm": 0.013674687121761852
+              },
+              {
+                "name": "Mount Serapong",
+                "residualKm": 0.14540578685332242,
+                "looKm": 0.18112618015799412
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "L2",
+      "evidence": {
+        "maps": [
+          "G9",
+          "G7",
+          "G30"
+        ],
+        "acceptance": "rejected-draft",
+        "knownGaps": [
+          "Geographical acceptance FAILED: source/modern control-point continuity incomplete and residual budgets exceeded.",
+          "Historical land now gone is not restored; trace coverage and shoreline-ink identity review incomplete.",
+          "G9 later whole-island source outside town.",
+          "G7 is1893, six years after1887 era start; west docks separate watercomponent untraced.",
+          "Untraced detached historical islands are omitted; only source-traced mainland/connected-source portions are retained. This is incomplete coverage, not a complete Singapore coastline.",
+          "Inland river-water exclusions are incomplete; URA planning-area land can retain river water, including a missing Singapore River inlet in the L0 review plate."
+        ],
+        "fits": {
+          "G9": {
+            "model": "mercator+affine",
+            "rmsKm": 0.18969636074578214,
+            "maxKm": 0.35949789161879236,
+            "looRmsKm": 0.23283708964166633,
+            "looMaxKm": 0.44070975333627505,
+            "points": [
+              {
+                "name": "Tanjong Buloh",
+                "residualKm": 0.07785181449938204,
+                "looKm": 0.11084312559136777
+              },
+              {
+                "name": "Tanjong Gedong",
+                "residualKm": 0.15465682008956533,
+                "looKm": 0.24525017061323778
+              },
+              {
+                "name": "Tanjong Irau",
+                "residualKm": 0.35949789161879236,
+                "looKm": 0.44070975333627505
+              },
+              {
+                "name": "Tanjong Changi",
+                "residualKm": 0.02950787493664308,
+                "looKm": 0.039507951386857615
+              },
+              {
+                "name": "Tanjong Batu Kekek",
+                "residualKm": 0.1893972716381631,
+                "looKm": 0.240519786627804
+              },
+              {
+                "name": "Tanjong Tajam",
+                "residualKm": 0.18998130794924029,
+                "looKm": 0.22921569122469188
+              },
+              {
+                "name": "Tanjong Chek Jawa",
+                "residualKm": 0.18311955118984025,
+                "looKm": 0.25274464701116917
+              },
+              {
+                "name": "Tanjong Berlayer",
+                "residualKm": 0.11021033652987908,
+                "looKm": 0.13229690659203824
+              },
+              {
+                "name": "Tanjong Rimau",
+                "residualKm": 0.35471935220302003,
+                "looKm": 0.43338217404415824
+              },
+              {
+                "name": "Bukit Timah Hill",
+                "residualKm": 0.31609857019817683,
+                "looKm": 0.3487368843996668
+              },
+              {
+                "name": "Mount Faber",
+                "residualKm": 0.014772373780784321,
+                "looKm": 0.017244430743007636
+              },
+              {
+                "name": "Fort Canning Hill",
+                "residualKm": 0.15612070669656153,
+                "looKm": 0.1754670236764928
+              },
+              {
+                "name": "Pearl's Hill",
+                "residualKm": 0.05560629879046263,
+                "looKm": 0.06350423276658286
+              },
+              {
+                "name": "Bukit Gombak",
+                "residualKm": 0.15264784604603587,
+                "looKm": 0.17282354751181073
+              },
+              {
+                "name": "Bukit Batok",
+                "residualKm": 0.012274335297994994,
+                "looKm": 0.013674687121761852
+              },
+              {
+                "name": "Mount Serapong",
+                "residualKm": 0.14540578685332242,
+                "looKm": 0.18112618015799412
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "L3",
+      "evidence": {
+        "maps": [
+          "G9",
+          "G30"
+        ],
+        "acceptance": "rejected-draft",
+        "knownGaps": [
+          "Geographical acceptance FAILED: source/modern control-point continuity incomplete and residual budgets exceeded.",
+          "Historical land now gone is not restored; trace coverage and shoreline-ink identity review incomplete.",
+          "G9 printed1911, editionFebruary1912, revisedFebruary1916; its exact shoreline survey date is mixed.",
+          "Untraced detached historical islands are omitted; only source-traced mainland/connected-source portions are retained. This is incomplete coverage, not a complete Singapore coastline.",
+          "Inland river-water exclusions are incomplete; URA planning-area land can retain river water, including a missing Singapore River inlet in the L0 review plate."
+        ],
+        "fits": {
+          "G9": {
+            "model": "mercator+affine",
+            "rmsKm": 0.18969636074578214,
+            "maxKm": 0.35949789161879236,
+            "looRmsKm": 0.23283708964166633,
+            "looMaxKm": 0.44070975333627505,
+            "points": [
+              {
+                "name": "Tanjong Buloh",
+                "residualKm": 0.07785181449938204,
+                "looKm": 0.11084312559136777
+              },
+              {
+                "name": "Tanjong Gedong",
+                "residualKm": 0.15465682008956533,
+                "looKm": 0.24525017061323778
+              },
+              {
+                "name": "Tanjong Irau",
+                "residualKm": 0.35949789161879236,
+                "looKm": 0.44070975333627505
+              },
+              {
+                "name": "Tanjong Changi",
+                "residualKm": 0.02950787493664308,
+                "looKm": 0.039507951386857615
+              },
+              {
+                "name": "Tanjong Batu Kekek",
+                "residualKm": 0.1893972716381631,
+                "looKm": 0.240519786627804
+              },
+              {
+                "name": "Tanjong Tajam",
+                "residualKm": 0.18998130794924029,
+                "looKm": 0.22921569122469188
+              },
+              {
+                "name": "Tanjong Chek Jawa",
+                "residualKm": 0.18311955118984025,
+                "looKm": 0.25274464701116917
+              },
+              {
+                "name": "Tanjong Berlayer",
+                "residualKm": 0.11021033652987908,
+                "looKm": 0.13229690659203824
+              },
+              {
+                "name": "Tanjong Rimau",
+                "residualKm": 0.35471935220302003,
+                "looKm": 0.43338217404415824
+              },
+              {
+                "name": "Bukit Timah Hill",
+                "residualKm": 0.31609857019817683,
+                "looKm": 0.3487368843996668
+              },
+              {
+                "name": "Mount Faber",
+                "residualKm": 0.014772373780784321,
+                "looKm": 0.017244430743007636
+              },
+              {
+                "name": "Fort Canning Hill",
+                "residualKm": 0.15612070669656153,
+                "looKm": 0.1754670236764928
+              },
+              {
+                "name": "Pearl's Hill",
+                "residualKm": 0.05560629879046263,
+                "looKm": 0.06350423276658286
+              },
+              {
+                "name": "Bukit Gombak",
+                "residualKm": 0.15264784604603587,
+                "looKm": 0.17282354751181073
+              },
+              {
+                "name": "Bukit Batok",
+                "residualKm": 0.012274335297994994,
+                "looKm": 0.013674687121761852
+              },
+              {
+                "name": "Mount Serapong",
+                "residualKm": 0.14540578685332242,
+                "looKm": 0.18112618015799412
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "L4",
+      "evidence": {
+        "maps": [
+          "G11",
+          "G30"
+        ],
+        "acceptance": "rejected-draft",
+        "knownGaps": [
+          "Geographical acceptance FAILED: source/modern control-point continuity incomplete and residual budgets exceeded.",
+          "Historical land now gone is not restored; trace coverage and shoreline-ink identity review incomplete.",
+          "G11 printed revision1937, British1941 map/AMS1944 reproduction.",
+          "G11 colour classification may merge nearby river/coast/grid-ink features; 87% on ink is below90% solid-line target.",
+          "Untraced detached historical islands are omitted; only source-traced mainland/connected-source portions are retained. This is incomplete coverage, not a complete Singapore coastline.",
+          "Inland river-water exclusions are incomplete; URA planning-area land can retain river water, including a missing Singapore River inlet in the L0 review plate."
+        ],
+        "fits": {
+          "G11": {
+            "model": "mercator+affine",
+            "rmsKm": 0.14558919776466156,
+            "maxKm": 0.29066743655858757,
+            "looRmsKm": 0.17764027935117993,
+            "looMaxKm": 0.3539584967494488,
+            "points": [
+              {
+                "name": "Tanjong Buloh",
+                "residualKm": 0.2037494480989559,
+                "looKm": 0.29237683508817397
+              },
+              {
+                "name": "Tanjong Gedong",
+                "residualKm": 0.03815090220781495,
+                "looKm": 0.06068718583566939
+              },
+              {
+                "name": "Tanjong Irau",
+                "residualKm": 0.29066743655858757,
+                "looKm": 0.3539584967494488
+              },
+              {
+                "name": "Tanjong Changi",
+                "residualKm": 0.1379430102181105,
+                "looKm": 0.18419432976543834
+              },
+              {
+                "name": "Tanjong Batu Kekek",
+                "residualKm": 0.024743678675877984,
+                "looKm": 0.03142719771067669
+              },
+              {
+                "name": "Tanjong Tajam",
+                "residualKm": 0.06251186533229347,
+                "looKm": 0.07568643586617596
+              },
+              {
+                "name": "Tanjong Chek Jawa",
+                "residualKm": 0.05420432533961557,
+                "looKm": 0.07499635083652592
+              },
+              {
+                "name": "Tanjong Berlayer",
+                "residualKm": 0.12676581462360206,
+                "looKm": 0.15213266867627595
+              },
+              {
+                "name": "Tanjong Rimau",
+                "residualKm": 0.04440940312604222,
+                "looKm": 0.05384516692475276
+              },
+              {
+                "name": "Bukit Timah Hill",
+                "residualKm": 0.18655554808669775,
+                "looKm": 0.20516384399440535
+              },
+              {
+                "name": "Mount Faber",
+                "residualKm": 0.19979804298956635,
+                "looKm": 0.2341260176344665
+              },
+              {
+                "name": "Fort Canning Hill",
+                "residualKm": 0.13084985588429768,
+                "looKm": 0.14703619691085057
+              },
+              {
+                "name": "Pearl's Hill",
+                "residualKm": 0.23264371711794327,
+                "looKm": 0.2647491969869701
+              },
+              {
+                "name": "Bukit Gombak",
+                "residualKm": 0.09003312419322267,
+                "looKm": 0.10188318524082153
+              },
+              {
+                "name": "Bukit Batok",
+                "residualKm": 0.06528129020102931,
+                "looKm": 0.07278744693044555
+              },
+              {
+                "name": "Mount Serapong",
+                "residualKm": 0.09391372121317211,
+                "looKm": 0.1176197456658693
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "L5",
+      "evidence": {
+        "maps": [
+          "G16",
+          "G11",
+          "G30"
+        ],
+        "acceptance": "rejected-draft",
+        "knownGaps": [
+          "Geographical acceptance FAILED: source/modern control-point continuity incomplete and residual budgets exceeded.",
+          "Historical land now gone is not restored; trace coverage and shoreline-ink identity review incomplete.",
+          "G16 printed small corrections extend to1954, not1961; no Jurong1961 G14/G15/G17 trace has been completed.",
+          "G16 tracing uses G11 printed coast as searchguides; nearby stipple/soundings may be mistaken for shoreline. Independent shoreline verification is incomplete.",
+          "G16 nominal16CP includes9 unnamed external Warper points: not16 independently qualified surviving features.",
+          "Untraced detached historical islands are omitted; only source-traced mainland/connected-source portions are retained. This is incomplete coverage, not a complete Singapore coastline.",
+          "Inland river-water exclusions are incomplete; URA planning-area land can retain river water, including a missing Singapore River inlet in the L0 review plate."
+        ],
+        "fits": {
+          "G16": {
+            "model": "equirectangular+affine",
+            "rmsKm": 0.13914779027502922,
+            "maxKm": 0.38661073870292345,
+            "looRmsKm": 0.16023588146586903,
+            "looMaxKm": 0.4259552540556634,
+            "points": [
+              {
+                "name": "Warper5112 point1, unnamed; not verified survivingfeature",
+                "residualKm": 0.11482517185273212,
+                "looKm": 0.12553079839071132
+              },
+              {
+                "name": "Warper5112 point2, unnamed; not verified survivingfeature",
+                "residualKm": 0.07515625941831691,
+                "looKm": 0.0991814502252292
+              },
+              {
+                "name": "Warper5112 point3, unnamed; not verified survivingfeature",
+                "residualKm": 0.07455700986958162,
+                "looKm": 0.14499793814004416
+              },
+              {
+                "name": "Warper5112 point4, unnamed; not verified survivingfeature",
+                "residualKm": 0.040881013382236826,
+                "looKm": 0.057095004910865804
+              },
+              {
+                "name": "Warper5112 point5, unnamed; not verified survivingfeature",
+                "residualKm": 0.04093565126890761,
+                "looKm": 0.05778183113730456
+              },
+              {
+                "name": "Warper5112 point6, unnamed; not verified survivingfeature",
+                "residualKm": 0.042811988133315354,
+                "looKm": 0.05318482565540027
+              },
+              {
+                "name": "Warper5112 point7, unnamed; not verified survivingfeature",
+                "residualKm": 0.09023855361190497,
+                "looKm": 0.10568431520543278
+              },
+              {
+                "name": "Warper5112 point8, unnamed; not verified survivingfeature",
+                "residualKm": 0.038399202343857415,
+                "looKm": 0.06484909175346486
+              },
+              {
+                "name": "Warper5112 point9, unnamed; not verified survivingfeature",
+                "residualKm": 0.22482879583311235,
+                "looKm": 0.26731281854327027
+              },
+              {
+                "name": "Tanjong Buloh",
+                "residualKm": 0.10075382294991723,
+                "looKm": 0.11785993210844432
+              },
+              {
+                "name": "Tanjong Irau",
+                "residualKm": 0.08195842855563744,
+                "looKm": 0.09341721099507048
+              },
+              {
+                "name": "Tanjong Tajam",
+                "residualKm": 0.07843425973689755,
+                "looKm": 0.08711992162531534
+              },
+              {
+                "name": "Tanjong Chek Jawa",
+                "residualKm": 0.38661073870292345,
+                "looKm": 0.4259552540556634
+              },
+              {
+                "name": "Bukit Timah Hill",
+                "residualKm": 0.13399417862642674,
+                "looKm": 0.14768409580260075
+              },
+              {
+                "name": "Mount Faber",
+                "residualKm": 0.07199660816808214,
+                "looKm": 0.0781352622771228
+              },
+              {
+                "name": "Fort Canning Hill",
+                "residualKm": 0.1563012824206428,
+                "looKm": 0.1684343283923718
+              }
+            ]
+          },
+          "G11": {
+            "model": "mercator+affine",
+            "rmsKm": 0.14558919776466156,
+            "maxKm": 0.29066743655858757,
+            "looRmsKm": 0.17764027935117993,
+            "looMaxKm": 0.3539584967494488,
+            "points": [
+              {
+                "name": "Tanjong Buloh",
+                "residualKm": 0.2037494480989559,
+                "looKm": 0.29237683508817397
+              },
+              {
+                "name": "Tanjong Gedong",
+                "residualKm": 0.03815090220781495,
+                "looKm": 0.06068718583566939
+              },
+              {
+                "name": "Tanjong Irau",
+                "residualKm": 0.29066743655858757,
+                "looKm": 0.3539584967494488
+              },
+              {
+                "name": "Tanjong Changi",
+                "residualKm": 0.1379430102181105,
+                "looKm": 0.18419432976543834
+              },
+              {
+                "name": "Tanjong Batu Kekek",
+                "residualKm": 0.024743678675877984,
+                "looKm": 0.03142719771067669
+              },
+              {
+                "name": "Tanjong Tajam",
+                "residualKm": 0.06251186533229347,
+                "looKm": 0.07568643586617596
+              },
+              {
+                "name": "Tanjong Chek Jawa",
+                "residualKm": 0.05420432533961557,
+                "looKm": 0.07499635083652592
+              },
+              {
+                "name": "Tanjong Berlayer",
+                "residualKm": 0.12676581462360206,
+                "looKm": 0.15213266867627595
+              },
+              {
+                "name": "Tanjong Rimau",
+                "residualKm": 0.04440940312604222,
+                "looKm": 0.05384516692475276
+              },
+              {
+                "name": "Bukit Timah Hill",
+                "residualKm": 0.18655554808669775,
+                "looKm": 0.20516384399440535
+              },
+              {
+                "name": "Mount Faber",
+                "residualKm": 0.19979804298956635,
+                "looKm": 0.2341260176344665
+              },
+              {
+                "name": "Fort Canning Hill",
+                "residualKm": 0.13084985588429768,
+                "looKm": 0.14703619691085057
+              },
+              {
+                "name": "Pearl's Hill",
+                "residualKm": 0.23264371711794327,
+                "looKm": 0.2647491969869701
+              },
+              {
+                "name": "Bukit Gombak",
+                "residualKm": 0.09003312419322267,
+                "looKm": 0.10188318524082153
+              },
+              {
+                "name": "Bukit Batok",
+                "residualKm": 0.06528129020102931,
+                "looKm": 0.07278744693044555
+              },
+              {
+                "name": "Mount Serapong",
+                "residualKm": 0.09391372121317211,
+                "looKm": 0.1176197456658693
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

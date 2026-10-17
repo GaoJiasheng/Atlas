@@ -1,0 +1,26 @@
+# Research and English draft; content specification: docs/28.
+id: singapore-1819-1965
+title: { en: "Singapore, 1819–1965", zh: "新加坡 1819–1965" }
+subtitle: { en: "From trading port to republic", zh: "【待译】From trading port to republic" }
+shortTitle: { en: "Singapore 1819–1965", zh: "新加坡 1819–1965" }
+subject: history
+levels: [P4, P5]
+tags: [singapore, history, map]
+illustration: singapore-1819-1965
+mode: time
+engine: time-scene
+stage: geo
+theme: paper
+sensitivity: open
+status: draft
+basemap: { local: land-sg-history, maxZoom: 14 }
+colorBy: entity
+blocLabels:
+  neutral: { en: "Governments and plan divisions", zh: "【待译】Governments and plan divisions" }
+strings:
+  joined: { en: "from", zh: "【待译】from" }
+  left: { en: "until", zh: "【待译】until" }
+  notYet: { en: "Not yet on the map", zh: "【待译】Not yet on the map" }
+note:
+  en: "Island coast by date from georeferenced historical maps · Malayan state borders from Natural Earth"
+  zh: "【待译】Island coast by date from georeferenced historical maps · Malayan state borders from Natural Earth"

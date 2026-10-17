@@ -1,0 +1,98 @@
+[
+  {
+    "events": [
+      "site-singapore-stone"
+    ],
+    "title": "NLB, Bukit Larangan: Early Singapore in Maps, Texts, and Artifacts",
+    "url": "https://curiocity.nlb.gov.sg/digital-stories/fort-canning-hill/bukit-larangan/",
+    "read": "Read the Singapore Stone passage and its description of the 1825 map: original Rocky Point location near present Fullerton. This supports a vicinity reference; the present hotel coordinate does not survey the destroyed boulder."
+  },
+  {
+    "events": [
+      "site-temenggong-village",
+      "preliminary-agreement-1819",
+      "treaty-1819"
+    ],
+    "title": "National Heritage Board, The Padang",
+    "url": "https://www.roots.gov.sg/places/places-landing/Places/national-monuments/the-padang",
+    "read": "Read the institutional passage locating the open space of the Temenggong's house at today's Arts House vicinity, and its qualified association with negotiations. The source says may; no exact treaty location is asserted."
+  },
+  {
+    "events": [
+      "treaty-1819",
+      "crawfurd-treaty"
+    ],
+    "title": "NLB, On Paper exhibition guide, Singapura/Singapore: 1819–1824",
+    "url": "https://exhibitions.nlb.gov.sg/files/onpaper/nlb-on-paper-exhibition-guide_en.pdf",
+    "read": "Read the treaty-location qualification in the institutional guide. The guide states that the important treaties' locations remain unknown. This is the reason a locality reference remains approximate rather than receiving an invented signing-building position."
+  },
+  {
+    "events": [
+      "site-longyamen"
+    ],
+    "title": "NParks, Dragon's Teeth Gate at Labrador Nature Reserve",
+    "url": "https://www.nparks.gov.sg/visit/parks/labrador-nature-reserve/special-features/dragon-teeth-gate",
+    "read": "Read the heritage feature account: Keppel western entrance, removal in 1848 and symbolic replica installed in 2005. Used to distinguish the documented present reference and interpretive medieval site from surviving original rock."
+  },
+  {
+    "events": [
+      "singapore-institution",
+      "site-raffles-institution"
+    ],
+    "title": "Timothy Pwee, Singapore's First School, NLB BiblioAsia (2016)",
+    "url": "https://biblioasia.nlb.gov.sg/all-sections/vol-11-issue-4-jan-mar-2016-singapore-institution-school-stamford-raffles/",
+    "read": "Read the old-campus passage identifying the Bras Basah premises with today's Raffles City. The current complex is used as a reference point for the former site, not as a surviving school footprint or an exact foundation-stone location."
+  },
+  {
+    "events": [
+      "mutiny-1915"
+    ],
+    "title": "NLB Infopedia, Alexandra Road: Alexandra Barracks",
+    "url": "https://www.nlb.gov.sg/main/article-detail?cmsuuid=65a21ad2-f54a-4700-ab87-1b847384ab02",
+    "read": "Read the barracks passage identifying the 5th Light Infantry's Alexandra Barracks near Alexandra Road. The source also dates Gillman Barracks to 1936, so that later compound is not substituted for the 1915 site. The district reference remains approximate."
+  },
+  {
+    "events": [
+      "mutiny-executions-1915"
+    ],
+    "title": "NLB Infopedia, Outram Prison (Pearl's Hill Prison)",
+    "url": "https://www.nlb.gov.sg/main/article-detail?cmsuuid=a1140d34-0dd6-4932-b35e-9b30f4ce529d",
+    "read": "Read punishment and executions passage: 1915 public firing-squad executions outside prison gates. The current former-prison reference does not establish exact gate alignment or individual execution positions."
+  },
+  {
+    "events": [
+      "site-serangoon-road"
+    ],
+    "title": "NHB, Little India Heritage Trail booklet, Becoming Little India",
+    "url": "https://www.roots.gov.sg/~/media/Roots/Files/little-india-heritage-trail/nhb_littleindia_trail-booklet.pdf",
+    "read": "Read the district-core passage returned from the official booklet: the pre-tourist Little India core at Serangoon comprised the Kandang Kerbau area centred on Tekka Market. Today's Tekka coordinate is an explicitly approximate district-centre reference; it does not date the present building to 1823."
+  },
+  {
+    "events": [
+      "self-government-1959",
+      "separation-1965"
+    ],
+    "title": "NHB, Jubilee Walk booklet, National Gallery Singapore, printed p.44",
+    "url": "https://www.roots.sg/~/media/Roots/Files/jubilee-walk/nhb-jubilee-walk-booklet.pdf",
+    "read": "Read the City Hall heritage entry, printed p.44: 3 June 1959 self-government rally on the steps, the first cabinet's 1959 oath in the Chamber, and the 1965 Proclamation issued from Lee's City Hall office. It distinguishes those events; a current building coordinate does not establish an exact platform, desk or broadcast studio."
+  },
+  {
+    "events": [
+      "first-cabinet-1965",
+      "yusof-ishak-1959",
+      "first-cabinet-1959"
+    ],
+    "title": "NHB Roots, Former City Hall",
+    "url": "https://www.roots.gov.sg/places/places-landing/Places/national-monuments/former-city-hall",
+    "read": "Read Road to Independence section: the 1959 cabinet oath, Yusof's installation in December, the 1963 Malaysia proclamation and subsequent PM/ministry offices in City Hall. Used for a documented building reference, not a claim that every administrative act or a new 1965 oath occurred in one room."
+  },
+  {
+    "events": [
+      "race-riots-september-1964"
+    ],
+    "title": "NHB Roots, Geylang Serai Heritage Gallery",
+    "url": "https://www.roots.gov.sg/stories-landing/stories/Geylang-Serai-Heritage-Gallery",
+    "read": "Read introduction and Geylang Serai Market section: locality conventionally refers to businesses/residences surrounding Geylang Serai Market, between PayaLebarRoad and JalanEunos. Market was the social/economic centre; original1964 market was demolished/replaced in2006–2010, so use a present-centre reference with explicit historical-footprint limits.",
+    "scope": "Present locality-centre reference only; does not establish the former Changi Market or exact incident point."
+  }
+]

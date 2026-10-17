@@ -1,0 +1,370 @@
+{
+  "site-fort-canning-temasek": [
+    "Fort Canning Hill",
+    "Hill-centre reference for archaeological activity across Fort Canning; the 1984 trench is not located by this point."
+  ],
+  "site-singapore-stone": [
+    "The Fullerton Hotel Singapore",
+    "Rocky Point river-mouth vicinity, using the documented present Fullerton landmark as reference. NLB's Bukit Larangan map account places the former stone near present Fullerton; this is not the museum or a survey of the destroyed rock."
+  ],
+  "site-longyamen": [
+    "Long Ya Men",
+    "Documented western Keppel entrance reference. NLB and NParks identify the Labrador entrance; the medieval identification remains interpretive and the present replica is not an original rock."
+  ],
+  "site-johor-lama": [
+    "johor-lama",
+    "Documented centre/reference point of Johor Lama mukim; not the surveyed original fort footprint."
+  ],
+  "site-lingga-daik": [
+    "daik",
+    "Documented Daik town-centre reference for the Lingga court; not a palace footprint."
+  ],
+  "site-penang": [
+    "george-town",
+    "Documented George Town city-centre reference for the Penang settlement."
+  ],
+  "site-malacca": [
+    "malacca",
+    "Documented Malacca city-centre reference for the regional settlement."
+  ],
+  "mahmud-iii-dies": [
+    "daik",
+    "Documented Daik town-centre reference for the ruler's Lingga court; no exact death chamber is asserted."
+  ],
+  "raffles-arrives": [
+    "Raffles's Landing Site",
+    "Documented commemorative landing-site reference behind Parliament House, identified by NLB. The fleet first anchored off St John's Island; this point represents the subsequent mainland visit, not the ships' anchorage or a certain 1819 landing spot."
+  ],
+  "preliminary-agreement-1819": [
+    "The Arts House",
+    "North-bank Temenggong settlement vicinity, using the later Arts House site as the present reference. Roots' Padang history identifies the Temenggong's house in this open-space area; the exact signing place is unproved."
+  ],
+  "hussein-brought-from-riau": [
+    "penyengat",
+    "Documented Penyengat island/locality-centre reference for Hussein's Riau origin, supported by the Law Gazette historical account. The point is not an invented departure shore or ship position."
+  ],
+  "treaty-1819": [
+    "The Arts House",
+    "Temenggong settlement/open-space vicinity, referenced by today's Arts House. NLB's On Paper guide explicitly says the treaty location is unknown; this is a source-backed vicinity marker, not a claim that this later building existed in 1819."
+  ],
+  "dutch-protest-1819": [
+    "malacca",
+    "Documented Malacca city-centre reference for the Dutch regional context. This is a locality-level political marker, not the place where a particular protest letter was drafted."
+  ],
+  "farquhar-resident": [
+    "Downtown Core",
+    "Documented central-town district reference for the Singapore appointment; the exact office or appointment ceremony is not established."
+  ],
+  "site-temenggong-village": [
+    "The Arts House",
+    "Roots' Padang history identifies the later Arts House open-space area with the Temenggong's settlement. Present building coordinate is a vicinity reference; the 1819 village extent is not reconstructed."
+  ],
+  "town-committee-1822": [
+    "Downtown Core",
+    "Documented central-town district reference for the planning committee's remit; no meeting-room position is claimed."
+  ],
+  "boat-quay-fill": [
+    "Boat Quay",
+    "Documented Boat Quay place-centre reference for the south-bank reclamation; not the centroid of a measured 1822 earthwork footprint."
+  ],
+  "convention-1823": [
+    "Downtown Core",
+    "Documented central-town district reference for the Singapore agreement; exact signing room is unproved."
+  ],
+  "site-telok-blangah": [
+    "Telok Blangah",
+    "Documented Telok Blangah district-centre reference for the Temenggong's relocated settlement; the original residence footprint is not asserted."
+  ],
+  "site-kampong-glam-istana": [
+    "Istana Kampong Glam",
+    "Documented present Istana monument reference; distinguishes the later masonry building from Hussein's earlier establishment."
+  ],
+  "singapore-institution": [
+    "Raffles City Singapore",
+    "Documented present Raffles City site reference for the former Bras Basah Institution. NLB's Singapore's First School identifies Raffles City as the old premises; not the present Bishan school."
+  ],
+  "anglo-dutch-treaty": [
+    "london",
+    "Documented London city-centre reference for the treaty's signing locality; no signing-room coordinate is claimed."
+  ],
+  "crawfurd-treaty": [
+    "Downtown Core",
+    "Documented Singapore central-town district centre/reference. NLB's On Paper guide says the treaty signing location is unknown; a precise building is not inferred."
+  ],
+  "census-1824": [
+    "Singapore",
+    "Documented geographic centre of Singapore (Wikidata P5140), representing the island-wide return rather than an enumeration office."
+  ],
+  "straits-settlements-1826": [
+    "george-town",
+    "Documented George Town city-centre reference for the initial Penang administrative seat; no exact founding-day ceremony is inferred."
+  ],
+  "capital-to-singapore": [
+    "Downtown Core",
+    "Documented central-town district reference for transfer of the Straits administrative seat, not a surveyed 1832 office footprint."
+  ],
+  "malacca-handover": [
+    "malacca",
+    "Documented Malacca city-centre reference for the change in administration; no exact handover ceremony point is established."
+  ],
+  "naning-war": [
+    "naning",
+    "Documented Naning district reference point, used as its locality centre. The Wikidata point is unreferenced and is not a surveyed centroid or individual battlefield."
+  ],
+  "hong-kong-1841": [
+    "victoria-hong-kong",
+    "Documented Victoria city-centre reference for British Hong Kong; not the exact 1841 landing or flagstaff position."
+  ],
+  "tanjong-pagar-dock": [
+    "Keppel Harbour",
+    "Documented Keppel/New Harbour locality reference for the dock development; not an exact early dock boundary."
+  ],
+  "crown-colony-1867": [
+    "Downtown Core",
+    "Documented central-town district reference for Singapore's administration, rather than an invented proclamation venue."
+  ],
+  "suez-1869": [
+    "port-said",
+    "Documented Port Said city-centre reference for the canal's Mediterranean opening locality; no ceremonial yacht position or canal route is inferred."
+  ],
+  "first-amoy-junk": [
+    "Singapore River",
+    "Documented river-mouth coordinate (the mouth-qualified P625 statement), representing the port of arrival. It is not a ship's reconstructed berth."
+  ],
+  "convicts-arrive": [
+    "Bras Basah",
+    "Documented Bras Basah district-centre reference for the convict establishment described in NLB's convict-labour history; not the brig's berth or a surveyed original prison footprint."
+  ],
+  "convict-transport-ends": [
+    "Bras Basah",
+    "Documented Bras Basah district-centre reference for the penal establishment; no exact place for the administrative termination decision is known."
+  ],
+  "chinese-protectorate": [
+    "Boat Quay",
+    "Documented Boat Quay locality-centre reference adjoining North Canal Road, where NLB locates the first Protectorate office. No shophouse number or later Havelock Road office is substituted."
+  ],
+  "indian-immigration-ordinance": [
+    "Downtown Core",
+    "Documented central-town district reference for colonial legislation applying across Singapore; no enactment-room location is inferred."
+  ],
+  "census-1871": [
+    "Singapore",
+    "Documented geographic centre of Singapore (P5140), representing the island-wide return rather than a census office."
+  ],
+  "site-raffles-institution": [
+    "Raffles City Singapore",
+    "Documented present Raffles City reference for the former Bras Basah campus, identified by NLB; not the current Bishan campus."
+  ],
+  "site-chinatown": [
+    "Chinatown, Singapore",
+    "Documented Chinatown district-centre reference; not a measured boundary or a claim that the plan created settlement on a precise day."
+  ],
+  "site-kampong-glam": [
+    "Kampong Glam",
+    "Documented Kampong Glam district-centre reference; the plan allocation and actual settlement are different matters."
+  ],
+  "site-serangoon-road": [
+    "Tekka Centre",
+    "Documented core of the Serangoon/Little India locality: NHB's Little India trail describes the pre-1980 district core as centred on Tekka Market. The modern Tekka coordinate is a district-centre reference, not an 1823 building."
+  ],
+  "riots-1854": [
+    "Kampong Glam",
+    "Documented Kampong Glam district-centre reference for the North Bridge Road town clashes described by NLB. Violence also spread to rural districts; the point is not a unique onset or casualty site."
+  ],
+  "telok-ayer-reclamation": [
+    "Raffles Place",
+    "Documented Raffles Place/Commercial Square locality-centre reference for the commercial waterfront. NLB's Land From Sand describes extension from Collyer Quay into Cecil Street and Telok Ayer; the point is not a measured reclamation centroid."
+  ],
+  "post-office-riots-1876": [
+    "Raffles Place",
+    "Documented Raffles Place commercial-district centre/reference for the Market Street disturbance. Lane Harris's source identifies the Chinese sub-post office at 81 Market Street and Philip/King Streets; the vanished address is not assigned an invented parcel point."
+  ],
+  "pangkor-1874": [
+    "pangkor",
+    "Documented Pangkor island/locality reference for the treaty; no vessel's position is reconstructed."
+  ],
+  "perak-war": [
+    "pasir-salak",
+    "Documented Pasir Salak locality centre/reference for Birch's killing and the war's origin; it does not represent every campaign site."
+  ],
+  "fms-1896": [
+    "kuala-lumpur",
+    "Documented Kuala Lumpur city-centre reference for the federal administrative seat; not a signing-room coordinate."
+  ],
+  "johor-treaty-1885": [
+    "london",
+    "Documented London city-centre reference: the event's historical source locates the treaty signature in London, rather than at its former Johor orientation point."
+  ],
+  "labuan-to-ss": [
+    "victoria-labuan",
+    "Documented Victoria/Labuan town-centre reference for the administrative transfer; no exact ceremony venue is claimed."
+  ],
+  "anglo-siamese-treaty": [
+    "bangkok",
+    "Documented Bangkok city-centre reference for the treaty locality, not an invented signing venue."
+  ],
+  "mutiny-1915": [
+    "Alexandra, Singapore",
+    "Documented Alexandra district-centre reference: NLB locates the regiment at Alexandra Barracks near Alexandra Road. The lost barracks' precise footprint remains unproved; Gillman Barracks, built later, is not substituted."
+  ],
+  "mutiny-executions-1915": [
+    "Outram Prison",
+    "Documented former Outram Prison reference, cross-checked with NLB's account of public executions outside its gates. The exact firing-squad spot or gate alignment is not surveyed."
+  ],
+  "kreta-ayer-1927": [
+    "Kreta Ayer",
+    "Documented Kreta Ayer district-centre reference for the police-station shooting; not an invented original station footprint."
+  ],
+  "census-1931": [
+    "Singapore",
+    "Documented geographic centre of Singapore (P5140), representing the island-wide census rather than an enumeration office."
+  ],
+  "dindings-to-perak": [
+    "lumut",
+    "Documented Lumut town-centre reference for the Dindings administrative district and transfer; no boundary or cession ceremony is inferred from this point."
+  ],
+  "four-states-to-thailand": [
+    "alor-setar",
+    "Documented Alor Setar city-centre reference representing Kedah, one of four transferred states. It is not the location of every transfer ceremony."
+  ],
+  "allied-raids-singapore": [
+    "Sembawang",
+    "Documented Sembawang district-centre reference for the naval-base target of the first November 1944 raid. The operation covered other targets and months; the exact dry-dock caisson is not located here."
+  ],
+  "bahau-settlement": [
+    "bahau",
+    "Documented Bahau town-centre reference for the settlement's vicinity. NLB says the camp was five miles from town; the town point must not be read as the camp footprint."
+  ],
+  "endau-settlement": [
+    "endau",
+    "Documented Endau town-centre reference for the wider agricultural-settlement locality; the original settlement plot is not surveyed."
+  ],
+  "bma-1945": [
+    "Former City Hall, Singapore",
+    "Documented City Hall reference for the September surrender/return chapter anchor. This does not put the proclamation's August signature at City Hall or resolve the precise first day of island-wide control."
+  ],
+  "colony-of-singapore-1946": [
+    "Singapore",
+    "Documented geographic centre (P5140), representing an island-wide constitutional change; not an invented ceremony venue."
+  ],
+  "malayan-union": [
+    "kuala-lumpur",
+    "Documented Kuala Lumpur city-centre reference for the Union's administrative seat; not a measured proclamation venue."
+  ],
+  "umno-founded": [
+    "istana-besar",
+    "Documented Istana Besar building reference for the founding congress's Johor venue, as identified by the institutional chronology; not a surveyed seat within its hall."
+  ],
+  "federation-1948": [
+    "kuala-lumpur",
+    "Documented Kuala Lumpur city-centre reference for the federal administrative seat; not a surveyed signature or ceremony location."
+  ],
+  "election-1948": [
+    "Singapore",
+    "Documented geographic centre (P5140), representing voting across Singapore; no single polling station represents all contests."
+  ],
+  "emergency-1948": [
+    "sungai-siput",
+    "Documented Sungai Siput town-centre reference for the Perak district where the June plantation killings precipitated Emergency declarations, as NLB describes. The exact estates and each declaration venue are not surveyed."
+  ],
+  "hertogh-riots": [
+    "Kampong Glam",
+    "Documented Kampong Glam district-centre reference for the town-area unrest; NLB also identifies court-area clashes. This marker is not asserted as the first clash point or as proof that unrest began at Sultan Mosque."
+  ],
+  "election-1955": [
+    "Singapore",
+    "Documented geographic centre (P5140), representing the island-wide election rather than a particular polling station."
+  ],
+  "marshall-resigns": [
+    "The Arts House",
+    "Documented Assembly House reference for the chief minister's legislative context; no exact resignation handover room is inferred."
+  ],
+  "school-riots-1956": [
+    "Chinese High School, Singapore",
+    "Documented Chinese High School reference, one of the occupied campuses named by NHB. Chung Cheng High and wider disturbances are also involved; this is not the sole riot site."
+  ],
+  "merdeka-1957": [
+    "stadium-merdeka",
+    "Documented Stadium Merdeka building/site reference, the independence celebration venue identified by Arkib Negara Malaysia. The exact ceremonial platform is not surveyed."
+  ],
+  "citizenship-1957": [
+    "The Arts House",
+    "Documented Assembly House reference for Singapore legislation; exact assent or commencement venue is not inferred."
+  ],
+  "election-1959": [
+    "Singapore",
+    "Documented geographic centre (P5140), representing the island-wide election rather than one polling place."
+  ],
+  "self-government-1959": [
+    "Former City Hall, Singapore",
+    "Documented City Hall reference: NHB's Jubilee Walk booklet places Lee's 3 June self-government mass rally on its steps. This does not turn the island-wide constitutional change into a measured platform footprint."
+  ],
+  "first-cabinet-1959": [
+    "Former City Hall, Singapore",
+    "Documented City Hall building reference for the 5 June oath ceremony identified in NAS records; exact room position is not surveyed."
+  ],
+  "yusof-ishak-1959": [
+    "Former City Hall, Singapore",
+    "Documented City Hall building reference for the December inauguration/public symbols locality; not a new surveyed ceremony footprint."
+  ],
+  "tunku-proposal-1961": [
+    "the-adelphi-onemap",
+    "SLA OneMap current The Adelphi site reference at 1 Coleman Street, where NLB locates the demolished Adelphi Hotel. Arkib Negara identifies the 27 May luncheon venue there. It is a present site coordinate, not the exact former dining room."
+  ],
+  "barisan-sosialis-1961": [
+    "Singapore",
+    "Documented geographic centre (P5140), representing the party's Singapore formation; founding, registration and individual premises are not collapsed into an invented venue."
+  ],
+  "referendum-1962": [
+    "Singapore",
+    "Documented geographic centre (P5140), representing voting throughout Singapore rather than one polling place."
+  ],
+  "brunei-revolt": [
+    "bandar-seri-begawan",
+    "Documented Brunei Town (today Bandar Seri Begawan) city-centre reference for the uprising; not a unique engagement site."
+  ],
+  "coldstore-1963": [
+    "Singapore",
+    "Documented geographic centre (P5140), representing arrests across Singapore; not a particular detainee's home or police station."
+  ],
+  "malaysia-agreement": [
+    "london",
+    "Documented London city-centre reference for the 9 July signature locality, confirmed by the UN treaty text; no signing-room coordinate is claimed."
+  ],
+  "malaysia-day-1963": [
+    "stadium-merdeka",
+    "Documented Stadium Merdeka site reference for the Malaysia proclamation ceremony identified by Arkib Negara Malaysia; not a surveyed platform or the venue of every simultaneous state ceremony."
+  ],
+  "konfrontasi-begins": [
+    "kuching",
+    "Documented Kuching city-centre reference for the Borneo theatre of confrontation. This regional marker is not the Jakarta policy-declaration venue or an individual incursion site."
+  ],
+  "malaysia-election-1964": [
+    "kuala-lumpur",
+    "Documented Kuala Lumpur city-centre reference for the federal political context of a nationwide election; not one polling station."
+  ],
+  "race-riots-july-1964": [
+    "Kallang",
+    "Documented Kallang district-centre reference: NLB places the first reported clashes near Kallang Road and Kampong Soo Poo. It does not establish an exact street-corner onset position."
+  ],
+  "race-riots-september-1964": [
+    "Geylang Serai Market",
+    "Present Geylang Serai Market as a documented locality-centre reference for the Geylang Serai area. NHB defines the locality around this market and describes the market as its social/economic centre. This is not a claim for the exact trishaw killing site, the opposite Changi Market, or the footprint of the former1964 market."
+  ],
+  "independence-agreement-1965": [
+    "kuala-lumpur",
+    "Documented Kuala Lumpur city-centre reference for the separation negotiations and signature locality; the exact residence room is not surveyed."
+  ],
+  "separation-1965": [
+    "Former City Hall, Singapore",
+    "Documented City Hall reference: NHB's Jubilee Walk account says the Proclamation of Singapore was issued from Lee's office there. The radio reading and Malaysian parliamentary vote occurred elsewhere; no broadcast studio or exact office desk is inferred."
+  ],
+  "first-cabinet-1965": [
+    "Former City Hall, Singapore",
+    "Documented City Hall government-office reference for the cabinet reorganisation. NHB identifies the Prime Minister's and ministries' offices here; the contemporary source reports an announcement, not a fresh collective oath. No exact meeting room is inferred."
+  ],
+  "first-president-1965": [
+    "The Arts House",
+    "Documented Parliament House reference for the 22 December statutory change, as described in the legal source; not an invented new presidential oath venue."
+  ]
+}

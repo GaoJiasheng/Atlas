@@ -1,0 +1,117 @@
+{
+  "dataset": "Natural Earth 1:10m admin-0 countries (public domain); all polygon parts incl small islands; source-derived corridors sampled every <=0.002 degrees and exact line/boundary intersections",
+  "results": [
+    {
+      "id": "eic-to-singapore-1819",
+      "segments": 13,
+      "samples": 2668,
+      "shoreCrossings": 0,
+      "landSamples": []
+    },
+    {
+      "id": "hussein-riau-1819",
+      "segments": 8,
+      "samples": 407,
+      "shoreCrossings": 0,
+      "landSamples": []
+    },
+    {
+      "id": "junk-amoy",
+      "segments": 16,
+      "samples": 12206,
+      "shoreCrossings": 0,
+      "landSamples": []
+    },
+    {
+      "id": "junk-canton",
+      "segments": 13,
+      "samples": 10739,
+      "shoreCrossings": 0,
+      "landSamples": []
+    },
+    {
+      "id": "junk-swatow",
+      "segments": 14,
+      "samples": 11539,
+      "shoreCrossings": 0,
+      "landSamples": []
+    },
+    {
+      "id": "junk-hainan",
+      "segments": 12,
+      "samples": 8748,
+      "shoreCrossings": 0,
+      "landSamples": []
+    },
+    {
+      "id": "steamer-amoy-1900",
+      "segments": 18,
+      "samples": 12759,
+      "shoreCrossings": 0,
+      "landSamples": []
+    },
+    {
+      "id": "bugis-prahu",
+      "segments": 32,
+      "samples": 9401,
+      "shoreCrossings": 0,
+      "landSamples": []
+    },
+    {
+      "id": "bawean-route",
+      "segments": 29,
+      "samples": 6122,
+      "shoreCrossings": 0,
+      "landSamples": []
+    },
+    {
+      "id": "country-trade-opium",
+      "segments": 32,
+      "samples": 23263,
+      "shoreCrossings": 0,
+      "landSamples": []
+    },
+    {
+      "id": "convicts-madras",
+      "segments": 19,
+      "samples": 12723,
+      "shoreCrossings": 0,
+      "landSamples": []
+    },
+    {
+      "id": "convicts-bencoolen",
+      "segments": 33,
+      "samples": 7155,
+      "shoreCrossings": 0,
+      "landSamples": []
+    },
+    {
+      "id": "chulia-route",
+      "segments": 19,
+      "samples": 12658,
+      "shoreCrossings": 0,
+      "landSamples": []
+    },
+    {
+      "id": "hadhrami-route",
+      "segments": 30,
+      "samples": 33785,
+      "shoreCrossings": 0,
+      "landSamples": []
+    },
+    {
+      "id": "cape-route",
+      "segments": 31,
+      "samples": 94885,
+      "shoreCrossings": 0,
+      "landSamples": []
+    },
+    {
+      "id": "suez-route-1869",
+      "segments": 40,
+      "samples": 39776,
+      "shoreCrossings": 0,
+      "landSamples": []
+    }
+  ]
+}

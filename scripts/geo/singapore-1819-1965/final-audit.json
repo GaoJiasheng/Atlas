@@ -1,0 +1,277 @@
+{
+  "counts": {
+    "eras": 6,
+    "keyframes": 23,
+    "controlFeatures": 163,
+    "entities": 31,
+    "events": 122,
+    "routes": 18,
+    "sources": 243,
+    "glossaryTerms": 16
+  },
+  "bytes": {
+    "control": 526264,
+    "coast": 193916
+  },
+  "rings": {
+    "rings": 1960,
+    "zeroArea": 0,
+    "selfCrossing": 0
+  },
+  "holdChecks": [
+    {
+      "id": "K4",
+      "previous": "K3",
+      "exact": true
+    },
+    {
+      "id": "K7",
+      "previous": "K6b",
+      "exact": true
+    },
+    {
+      "id": "K10",
+      "previous": "K9",
+      "exact": true
+    },
+    {
+      "id": "K14",
+      "previous": "K13",
+      "exact": true
+    },
+    {
+      "id": "K16",
+      "previous": "K15a",
+      "exact": true
+    },
+    {
+      "id": "K18",
+      "previous": "K17",
+      "exact": true
+    }
+  ],
+  "unchangedWW2": {
+    "events": 19,
+    "movements": 3
+  },
+  "coastFeatureKinds": [
+    "mask",
+    "land",
+    "land",
+    "land",
+    "land",
+    "land",
+    "land",
+    "coast-today"
+  ],
+  "singaporeClipping": [
+    {
+      "id": "K1",
+      "era": "L0",
+      "localFeatures": 1,
+      "booleanOutsideKm2": 2.521836149097723,
+      "outsideEdgeSamples": 3654,
+      "maxOutwardM": 11.816819877832984,
+      "within5m": false
+    },
+    {
+      "id": "K2",
+      "era": "L1",
+      "localFeatures": 9,
+      "booleanOutsideKm2": 2.1823937817108097,
+      "outsideEdgeSamples": 3691,
+      "maxOutwardM": 11.816819877832984,
+      "within5m": false
+    },
+    {
+      "id": "K3",
+      "era": "L1",
+      "localFeatures": 1,
+      "booleanOutsideKm2": 2.517289250842291,
+      "outsideEdgeSamples": 3671,
+      "maxOutwardM": 11.816819877832984,
+      "within5m": false
+    },
+    {
+      "id": "K4",
+      "era": "L1",
+      "localFeatures": 1,
+      "booleanOutsideKm2": 2.517289250842291,
+      "outsideEdgeSamples": 3671,
+      "maxOutwardM": 11.816819877832984,
+      "within5m": false
+    },
+    {
+      "id": "K4a",
+      "era": "L2",
+      "localFeatures": 1,
+      "booleanOutsideKm2": 2.52401091955588,
+      "outsideEdgeSamples": 3712,
+      "maxOutwardM": 11.816819877832984,
+      "within5m": false
+    },
+    {
+      "id": "K5",
+      "era": "L2",
+      "localFeatures": 1,
+      "booleanOutsideKm2": 3.2065485510274137,
+      "outsideEdgeSamples": 3675,
+      "maxOutwardM": 11.816819877832984,
+      "within5m": false
+    },
+    {
+      "id": "K6",
+      "era": "L2",
+      "localFeatures": 1,
+      "booleanOutsideKm2": 3.2065485510274137,
+      "outsideEdgeSamples": 3675,
+      "maxOutwardM": 11.816819877832984,
+      "within5m": false
+    },
+    {
+      "id": "K6a",
+      "era": "L3",
+      "localFeatures": 1,
+      "booleanOutsideKm2": 3.238320923075006,
+      "outsideEdgeSamples": 3611,
+      "maxOutwardM": 11.816819877832984,
+      "within5m": false
+    },
+    {
+      "id": "K6b",
+      "era": "L4",
+      "localFeatures": 1,
+      "booleanOutsideKm2": 13.630880469157345,
+      "outsideEdgeSamples": 2925,
+      "maxOutwardM": 11.057199805194792,
+      "within5m": false
+    },
+    {
+      "id": "K7",
+      "era": "L4",
+      "localFeatures": 1,
+      "booleanOutsideKm2": 13.630880469157345,
+      "outsideEdgeSamples": 2925,
+      "maxOutwardM": 11.057199805194792,
+      "within5m": false
+    },
+    {
+      "id": "K8",
+      "era": "L4",
+      "localFeatures": 1,
+      "booleanOutsideKm2": 13.630880469157345,
+      "outsideEdgeSamples": 2925,
+      "maxOutwardM": 11.057199805194792,
+      "within5m": false
+    },
+    {
+      "id": "K9",
+      "era": "L4",
+      "localFeatures": 1,
+      "booleanOutsideKm2": 13.630880469157345,
+      "outsideEdgeSamples": 2925,
+      "maxOutwardM": 11.057199805194792,
+      "within5m": false
+    },
+    {
+      "id": "K10",
+      "era": "L4",
+      "localFeatures": 1,
+      "booleanOutsideKm2": 13.630880469157345,
+      "outsideEdgeSamples": 2925,
+      "maxOutwardM": 11.057199805194792,
+      "within5m": false
+    },
+    {
+      "id": "K11",
+      "era": "L4",
+      "localFeatures": 1,
+      "booleanOutsideKm2": 13.630880469157345,
+      "outsideEdgeSamples": 2925,
+      "maxOutwardM": 11.057199805194792,
+      "within5m": false
+    },
+    {
+      "id": "K12",
+      "era": "L4",
+      "localFeatures": 1,
+      "booleanOutsideKm2": 13.630880469157345,
+      "outsideEdgeSamples": 2925,
+      "maxOutwardM": 11.057199805194792,
+      "within5m": false
+    },
+    {
+      "id": "K13",
+      "era": "L4",
+      "localFeatures": 1,
+      "booleanOutsideKm2": 13.630880469157345,
+      "outsideEdgeSamples": 2925,
+      "maxOutwardM": 11.057199805194792,
+      "within5m": false
+    },
+    {
+      "id": "K14",
+      "era": "L4",
+      "localFeatures": 1,
+      "booleanOutsideKm2": 13.630880469157345,
+      "outsideEdgeSamples": 2925,
+      "maxOutwardM": 11.057199805194792,
+      "within5m": false
+    },
+    {
+      "id": "K15",
+      "era": "L4",
+      "localFeatures": 1,
+      "booleanOutsideKm2": 13.630880469157345,
+      "outsideEdgeSamples": 2925,
+      "maxOutwardM": 11.057199805194792,
+      "within5m": false
+    },
+    {
+      "id": "K15a",
+      "era": "L5",
+      "localFeatures": 1,
+      "booleanOutsideKm2": 6.65998489353674,
+      "outsideEdgeSamples": 3564,
+      "maxOutwardM": 10.685531413580405,
+      "within5m": false
+    },
+    {
+      "id": "K16",
+      "era": "L5",
+      "localFeatures": 1,
+      "booleanOutsideKm2": 6.65998489353674,
+      "outsideEdgeSamples": 3564,
+      "maxOutwardM": 10.685531413580405,
+      "within5m": false
+    },
+    {
+      "id": "K17",
+      "era": "L5",
+      "localFeatures": 1,
+      "booleanOutsideKm2": 6.65998489353674,
+      "outsideEdgeSamples": 3564,
+      "maxOutwardM": 10.685531413580405,
+      "within5m": false
+    },
+    {
+      "id": "K18",
+      "era": "L5",
+      "localFeatures": 1,
+      "booleanOutsideKm2": 6.65998489353674,
+      "outsideEdgeSamples": 3564,
+      "maxOutwardM": 10.685531413580405,
+      "within5m": false
+    },
+    {
+      "id": "K19",
+      "era": "L5",
+      "localFeatures": 1,
+      "booleanOutsideKm2": 6.65998489353674,
+      "outsideEdgeSamples": 3564,
+      "maxOutwardM": 10.685531413580405,
+      "within5m": false
+    }
+  ],
+  "clippingNote": "Independent odd-even membership and indexed edge distances on published vertices/midpoints. Boolean outside areas are diagnostic only: coincident water boundaries can produce erase artifacts. Numeric geometry is separate from rejected historical accuracy/coverage gates."
+}

@@ -1,0 +1,88 @@
+{
+  "presets": [
+    {
+      "id": "indian-ocean",
+      "label": {
+        "en": "Indian Ocean",
+        "zh": "【待译】Indian Ocean"
+      },
+      "camera": {
+        "center": [
+          88,
+          9
+        ],
+        "zoom": 3.1
+      }
+    },
+    {
+      "id": "straits",
+      "label": {
+        "en": "Straits",
+        "zh": "【待译】Straits"
+      },
+      "camera": {
+        "center": [
+          102.5,
+          2.5
+        ],
+        "zoom": 6
+      }
+    },
+    {
+      "id": "malaya",
+      "label": {
+        "en": "Malaya",
+        "zh": "【待译】Malaya"
+      },
+      "camera": {
+        "center": [
+          102.4,
+          4.2
+        ],
+        "zoom": 5.6
+      }
+    },
+    {
+      "id": "malaysia-1963",
+      "label": {
+        "en": "Malaysia 1963",
+        "zh": "【待译】Malaysia 1963"
+      },
+      "camera": {
+        "center": [
+          109,
+          4
+        ],
+        "zoom": 4.8
+      }
+    },
+    {
+      "id": "island",
+      "label": {
+        "en": "Singapore island",
+        "zh": "【待译】Singapore island"
+      },
+      "camera": {
+        "center": [
+          103.82,
+          1.36
+        ],
+        "zoom": 10.2
+      }
+    },
+    {
+      "id": "town",
+      "label": {
+        "en": "Town",
+        "zh": "【待译】Town"
+      },
+      "camera": {
+        "center": [
+          103.852,
+          1.291
+        ],
+        "zoom": 13.8
+      }
+    }
+  ]
+}

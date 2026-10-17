@@ -1,0 +1,93 @@
+{
+  "chapters": 12,
+  "entities": 31,
+  "events": 122,
+  "movements": 18,
+  "sources": 173,
+  "glossaryTerms": 16,
+  "approximateNonWW2Anchors": 103,
+  "eventDateGaps": 7,
+  "specOnlyClaimRows": 0,
+  "copiedWW2Events": 19,
+  "copiedWW2Movements": 3,
+  "glossaryCoverage": 16,
+  "structure": [
+    {
+      "chapter": "00-background",
+      "bodyWords": 261,
+      "bodyParagraphs": 4,
+      "more": 3
+    },
+    {
+      "chapter": "01-founding-1819",
+      "bodyWords": 245,
+      "bodyParagraphs": 4,
+      "more": 3
+    },
+    {
+      "chapter": "02-town-plan",
+      "bodyWords": 263,
+      "bodyParagraphs": 4,
+      "more": 3
+    },
+    {
+      "chapter": "03-free-port",
+      "bodyWords": 245,
+      "bodyParagraphs": 4,
+      "more": 3
+    },
+    {
+      "chapter": "04-arrivals",
+      "bodyWords": 250,
+      "bodyParagraphs": 4,
+      "more": 3
+    },
+    {
+      "chapter": "05-town-life",
+      "bodyWords": 261,
+      "bodyParagraphs": 4,
+      "more": 3
+    },
+    {
+      "chapter": "06-british-malaya",
+      "bodyWords": 253,
+      "bodyParagraphs": 4,
+      "more": 3
+    },
+    {
+      "chapter": "07-war-and-occupation",
+      "bodyWords": 270,
+      "bodyParagraphs": 4,
+      "more": 4
+    },
+    {
+      "chapter": "08-after-the-war",
+      "bodyWords": 258,
+      "bodyParagraphs": 4,
+      "more": 3
+    },
+    {
+      "chapter": "09-self-government",
+      "bodyWords": 248,
+      "bodyParagraphs": 4,
+      "more": 3
+    },
+    {
+      "chapter": "10-merger",
+      "bodyWords": 264,
+      "bodyParagraphs": 4,
+      "more": 3
+    },
+    {
+      "chapter": "11-separation",
+      "bodyWords": 269,
+      "bodyParagraphs": 4,
+      "more": 4
+    }
+  ],
+  "validation": "pnpm validate after evidence closures:1error,0warnings; missing public/geo/land-sg-history.json.",
+  "sourceBackedReferenceAnchors": 11,
+  "unresolvedDraftAnchors": 92,
+  "exactHistoricalFootprintsEstablished": 0,
+  "closedEventDateWarnings": 14
+}

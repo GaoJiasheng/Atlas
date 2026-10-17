@@ -1,0 +1,107 @@
+{
+  "dataset": "g16",
+  "projection": "auto",
+  "maxResidualKm": 0.06,
+  "status": "external9CPdiagnostic-only-insufficientcount-and-identity",
+  "controlPoints": [
+    {
+      "name": "Warper5112 point1, unnamed; not verified survivingfeature",
+      "svg": [
+        14147.46622984,
+        5014.601814512
+      ],
+      "lnglat": [
+        103.9868241515,
+        1.3933882328
+      ]
+    },
+    {
+      "name": "Warper5112 point2, unnamed; not verified survivingfeature",
+      "svg": [
+        2701.5887096776,
+        6486.891129025
+      ],
+      "lnglat": [
+        103.443049189,
+        1.326040844
+      ]
+    },
+    {
+      "name": "Warper5112 point3, unnamed; not verified survivingfeature",
+      "svg": [
+        2588.7036290306,
+        13635.004032250501
+      ],
+      "lnglat": [
+        103.4364831413,
+        0.9878515502
+      ]
+    },
+    {
+      "name": "Warper5112 point4, unnamed; not verified survivingfeature",
+      "svg": [
+        14028.362903224,
+        13845.4677419302
+      ],
+      "lnglat": [
+        103.9819371665,
+        0.9756653817
+      ]
+    },
+    {
+      "name": "Warper5112 point5, unnamed; not verified survivingfeature",
+      "svg": [
+        25899.472782258,
+        9014.368951607099
+      ],
+      "lnglat": [
+        104.5470893348,
+        1.2029038228
+      ]
+    },
+    {
+      "name": "Warper5112 point6, unnamed; not verified survivingfeature",
+      "svg": [
+        22924.759576615,
+        6342.436491926999
+      ],
+      "lnglat": [
+        104.4055438008,
+        1.3293551643
+      ]
+    },
+    {
+      "name": "Warper5112 point7, unnamed; not verified survivingfeature",
+      "svg": [
+        20339.882560484,
+        5470.925403220001
+      ],
+      "lnglat": [
+        104.283205566,
+        1.371824188
+      ]
+    },
+    {
+      "name": "Warper5112 point8, unnamed; not verified survivingfeature",
+      "svg": [
+        23003.683467739,
+        14170.7298387109
+      ],
+      "lnglat": [
+        104.4095584976,
+        0.9597375856
+      ]
+    },
+    {
+      "name": "Warper5112 point9, unnamed; not verified survivingfeature",
+      "svg": [
+        15293.044979772,
+        2863.0874251759997
+      ],
+      "lnglat": [
+        104.0404865372,
+        1.4955394363
+      ]
+    }
+  ]
+}
