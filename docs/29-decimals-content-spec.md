@@ -777,6 +777,7 @@ validate：每层 `zoom` 是上一层的**恰好一段**（`to − from = 上一
 - **X11** 每个新题型和扩到小数的题型都有 `solve` / `sampleState` / `proveTask`、`goToTask`、`shoot --tasks` 三张、键盘路径；docs/06「MathScene · 小数」。
 - **A6** 百格 / 千格（放大镜）`stage/DecimalGrid.tsx` + `lib/dgrid.ts`；位值表（圆片、竖式小数点对齐、`slide`）`stage/PlaceValueChart.tsx` + `stage/DecimalColumn.tsx` + `lib/placevalue.ts`；小数数轴（两层放大、四舍五入的两端与中点、双刻度）`stage/DecimalLine.tsx` + `lib/dline.ts`；钱（素面硬币与纸币，按位三列）`stage/MoneyModel.tsx` + `lib/money.ts`。题型状态 / 检查 / 解法 / 错例集中在 `lib/decimal-tasks.ts`，算式行在 `lib/decimal-working.ts`，规则在 `validate-decimals.ts`。
 - **示例主题** `sample-lesson-decimal`（draft，占位数据）：四步 37 道，每个模型、过渡、题型、写法各一次；`tests/math-scene/{decimal,decimal-models,diagnose-decimals,sample-lesson-decimal}.test.ts`。截图：1920 × 1080 下百格边长约 460 px（舞台高的 43 %），位值表 250–370 px，钱按位三列约 300–560 px；390 × 844 托盘打开时都放得下（百格约 155 px，小格 15 px，按条按钮和步进器操作）。
+- **与钟面 / 时间线合并**（main 2f70a01，docs/20 A3）：两边的注册都留着——题型 28 种（`read-clock` `set-clock` `duration` 与本课四种）、模型联合（`clock` `timeline` 与 `decimal-grid` `place-value` `money`，小数数轴仍按 `scale: "decimal"` 分流）、`limits`（`sameDay` 与小数各键）、右上卡（TIME 带节拍时刻、DECIMAL）、讲解背景章（小数课的百格优先，其次钟面）；数位块的 `regroup` 值在小数时不参与"有百位"的判断。
 
 ### 9.2 与本文 §3 不同的地方
 
