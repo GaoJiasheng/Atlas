@@ -23,6 +23,10 @@ export interface StageLayout {
   free: Rect;
   /** Distance from the stage's bottom to the top of the dock plus the HUD's row gap (where the docked tray's bottom goes). */
   dock: number;
+  /** The HUD panels the model keeps clear of (stage coordinates, padded), for what is laid out around the model (its sentence). */
+  obstacles: Rect[];
+  /** The lowest the drawing may reach (the dock, the docked tray or the caption card, padded). */
+  floor: number;
 }
 
 export type LayoutMode = 'hud' | 'bare' | 'present';
@@ -74,25 +78,68 @@ function measure(root: HTMLElement, mode: LayoutMode, tray: HTMLElement | null):
     const title = scene.querySelector('[data-hud-panel="present-title"]');
     if (title && visible(title)) obstacles.push({ r: title.getBoundingClientRect(), side: 'left' });
   }
+  // In stage coordinates from here on.
+  const panels: Panel[] = obstacles.map(({ r, side }) => ({ x: r.left - S.left, y: r.top - S.top, w: r.width, h: r.height, side }));
+  return { w: W, h: H, free: freeRect(W, floor, panels, mode), dock: dockGap, obstacles: panels.map((o) => ({ x: o.x - PAD, y: o.y - PAD, w: o.w + 2 * PAD, h: o.h + 2 * PAD })), floor };
+}
+
+/** A HUD panel on the stage (stage coordinates) and the column it belongs to. */
+export interface Panel extends Rect {
+  side: 'left' | 'right';
+}
+
+/**
+ * The model's rectangle on a stage `W` wide above `floor`, clear of the panels by PAD: the largest of between the two columns,
+ * under both, and (with the HUD) under the column that ends higher beside the other one, judged by area with the width capped at
+ * 2.2 × the height (a model wants width more than height).
+ */
+export function freeRect(W: number, floor: number, panels: readonly Panel[], mode: LayoutMode): Rect {
   const top = PAD;
-  const leftEdge = Math.max(PAD, ...obstacles.filter((o) => o.side === 'left').map((o) => o.r.right - S.left + PAD));
-  const rightEdge = Math.min(W - PAD, ...obstacles.filter((o) => o.side === 'right').map((o) => o.r.left - S.left - PAD));
-  const under = Math.max(top, ...obstacles.map((o) => o.r.bottom - S.top + PAD));
+  const lefts = panels.filter((o) => o.side === 'left');
+  const rights = panels.filter((o) => o.side === 'right');
+  const leftEdge = Math.max(PAD, ...lefts.map((o) => o.x + o.w + PAD));
+  const rightEdge = Math.min(W - PAD, ...rights.map((o) => o.x - PAD));
+  const bottomOf = (os: readonly Panel[]) => Math.max(top, ...os.map((o) => o.y + o.h + PAD));
   // Presenting, only the title block stands in the way: keep the model centred on the screen.
   const right = mode === 'present' ? Math.min(rightEdge, W - leftEdge) : rightEdge;
-  const between: Rect = { x: leftEdge, y: top, w: Math.max(0, right - leftEdge), h: Math.max(0, floor - top) };
-  const below: Rect = { x: PAD, y: under, w: Math.max(0, W - 2 * PAD), h: Math.max(0, floor - under) };
-  // A model wants width more than height: judge a rectangle by its area with the width capped at 2.2 × the height.
+  const rect = (x: number, y: number, x2: number): Rect => ({ x, y, w: Math.max(0, x2 - x), h: Math.max(0, floor - y) });
+  const candidates: Rect[] = [
+    // Between the two columns, the full height.
+    rect(leftEdge, top, right),
+    // Under both columns, the full width.
+    rect(PAD, bottomOf(panels), W - PAD),
+  ];
+  if (mode === 'hud') {
+    // Where one column ends higher than the other (a short card column beside a tall rail, as on a 1024 px screen with the
+    // reader open): under the short one, beside the long one.
+    if (rights.length) candidates.push(rect(leftEdge, bottomOf(rights), W - PAD));
+    if (lefts.length) candidates.push(rect(PAD, bottomOf(lefts), rightEdge));
+  }
   const usable = (r: Rect) => Math.min(r.w, 2.2 * r.h) * r.h;
-  const free = usable(below) > usable(between) ? below : between;
-  return { w: W, h: H, free, dock: dockGap };
+  return candidates.reduce((best, r) => (usable(r) > usable(best) ? r : best));
+}
+
+/**
+ * The widest span of the stage at height `y`…`y + h` that no HUD panel covers and that holds `x` (the model's centre), so a
+ * line laid under the model (its sentence) can run past the model's own width without running under a panel.
+ */
+export function spanAt(L: StageLayout, y: number, h: number, x: number): { x: number; w: number } {
+  let lo = PAD;
+  let hi = L.w - PAD;
+  for (const o of L.obstacles) {
+    if (o.y >= y + h || o.y + o.h <= y) continue;
+    if (o.x + o.w <= x) lo = Math.max(lo, o.x + o.w);
+    else if (o.x >= x) hi = Math.min(hi, o.x);
+    else return { x, w: 0 };
+  }
+  return { x: lo, w: Math.max(0, hi - lo) };
 }
 
 const same = (a: StageLayout, b: StageLayout) => JSON.stringify(a) === JSON.stringify(b);
 
 /** Lay the stage out now and whenever the stage or the HUD around it changes size. */
 export function useStageLayout(root: RefObject<HTMLElement | null>, tray: RefObject<HTMLElement | null>, mode: LayoutMode, key: string): StageLayout {
-  const [layout, setLayout] = useState<StageLayout>({ w: 0, h: 0, free: { x: 0, y: 0, w: 0, h: 0 }, dock: 0 });
+  const [layout, setLayout] = useState<StageLayout>({ w: 0, h: 0, free: { x: 0, y: 0, w: 0, h: 0 }, dock: 0, obstacles: [], floor: 0 });
   useLayoutEffect(() => {
     const el = root.current;
     if (!el) return;

@@ -10,7 +10,7 @@
  */
 import type { ReactNode } from 'react';
 import type { Locale } from '../../core/types';
-import { t } from '../../../i18n';
+import { t, tx } from '../../../i18n';
 import type { BeatMove, MoneyPiece, MoneySpec } from '../schema';
 import { columnOf, isNote, moneyText, pieceCents, piecesOf, totalCents } from '../lib/money';
 import type { Rect } from './layout';
@@ -92,15 +92,27 @@ export function MoneyModel({ box, model: m, locale, label, move, mini }: { box: 
   const layoutOf = (pieces: readonly MoneyPiece[], uu: number) => (byPlace ? COLS.map((c) => flow(pieces.filter((p) => columnOf(p) === c), uu, colW - uu * 0.8)) : [flow(pieces, uu, gw - uu * 1.6)]);
   const HEAD = 42;
   const FOOT = 40;
-  const heightOf = (uu: number) => Math.max(...groups.map((g) => Math.max(...layoutOf(g, uu).map((l) => l.h)))) + (byPlace ? HEAD + FOOT + 12 : uu * 1.4);
+  // Each amount's name over it (a pair's `label`, or the model's own): a line of small type, as a pair of clocks or arrays has.
+  const titles = m.pair ? m.pair.map((g) => (g.label ? tx(g.label, locale) : '')) : [m.label ? tx(m.label, locale) : ''];
+  const titleH = !mini && titles.some(Boolean) ? 26 : 0;
+  // Every group's body as tall as the tallest, so a pair's boxes are one height.
+  const bodyOf = (uu: number) => Math.max(...groups.map((g) => Math.max(...layoutOf(g, uu).map((l) => l.h))));
+  const heightOf = (uu: number) => titleH + bodyOf(uu) + (byPlace ? HEAD + FOOT + 12 : uu * 1.4);
   while (heightOf(u) > box.h - 10 && u > (mini ? 5 : 12)) u -= 1;
   const totalH = heightOf(u);
   const x0 = box.x + (box.w - (n * gw + (n - 1) * 40)) / 2;
-  const y0 = box.y + Math.max(0, (box.h - totalH) / 2);
+  const y0 = box.y + Math.max(0, (box.h - totalH) / 2) + titleH;
+  const bodyH = bodyOf(u) + 12;
   groups.forEach((pieces, gi) => {
     const gx = x0 + gi * (gw + 40);
     const tone = gi === 0 ? 'cold' : 'hot';
     const layouts = layoutOf(pieces, u);
+    if (titleH && titles[gi])
+      out.push(
+        <text key={`t${gi}`} className="ms-array__title ms-money__title" x={gx + gw / 2} y={y0 - 12} textAnchor="middle">
+          {titles[gi]}
+        </text>,
+      );
     let litLeft = m.trade === 't>O' ? 10 : 0;
     const lit = (p: MoneyPiece) => {
       if (p !== '0.1' || litLeft <= 0) return false;
@@ -108,7 +120,6 @@ export function MoneyModel({ box, model: m, locale, label, move, mini }: { box: 
       return true;
     };
     if (byPlace) {
-      const bodyH = Math.max(...layouts.map((l) => l.h)) + 12;
       COLS.forEach((c, ci) => {
         const cx = gx + ci * colW;
         const lay = layouts[ci]!;
@@ -146,9 +157,9 @@ export function MoneyModel({ box, model: m, locale, label, move, mini }: { box: 
     } else {
       const lay = layouts[0]!;
       const tw = Math.min(gw, lay.w + u * 1.6);
-      const tx = gx + (gw - tw) / 2;
-      out.push(<rect key={`tray${gi}`} className="ms-money__tray" x={tx} y={y0} width={tw} height={lay.h + u * 1.4} rx={u * 0.5} />);
-      lay.placed.forEach((pl, i) => out.push(<Piece key={`p${gi}${i}`} p={pl.p} x={tx + u * 0.8 + pl.x} y={y0 + u * 0.7 + pl.y} u={u} lit={lit(pl.p)} tone={tone} />));
+      const left = gx + (gw - tw) / 2;
+      out.push(<rect key={`tray${gi}`} className="ms-money__tray" x={left} y={y0} width={tw} height={bodyH - 12 + u * 1.4} rx={u * 0.5} />);
+      lay.placed.forEach((pl, i) => out.push(<Piece key={`p${gi}${i}`} p={pl.p} x={left + u * 0.8 + pl.x} y={y0 + u * 0.7 + pl.y} u={u} lit={lit(pl.p)} tone={tone} />));
     }
   });
   return (

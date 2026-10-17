@@ -11,7 +11,7 @@
  */
 import type { Locale } from '../../core/types';
 import { t, tx } from '../../../i18n';
-import type { Beat } from '../schema';
+import type { Beat, DecimalLineSpec } from '../schema';
 import { toImproper, toMixed, valueOnLine, type Frac } from '../lib/fraction';
 import type { Rect } from './layout';
 import { BarModel, EQUIV_ROW, LINE_ROW, WHOLE_GAP } from './BarModel';
@@ -28,6 +28,7 @@ import type { DisplayModes } from './Stage';
 import { plainText } from '../../../lib/rich-text';
 import { layoutOf, thingsOf } from '../lib/array';
 import { DecimalGrid } from './DecimalGrid';
+import { gridsOf, wholesOf } from '../lib/dgrid';
 import { PlaceValueChart } from './PlaceValueChart';
 import { DecimalLine } from './DecimalLine';
 import { MoneyModel } from './MoneyModel';
@@ -112,7 +113,17 @@ export function BeatModel({ beat, box, defs, modes, locale }: { beat: Beat; box:
 
   if (m.kind === 'grid') return <GridModel defs={defs} box={box} model={m} locale={locale} label={label} />;
   if (isDecimalModel(m)) {
-    // A second model under the first (a grid over its number line): the box is shared, the first above.
+    if (m.kind === 'decimal-grid' && beat.under) {
+      const lined = gridOverLine(m, beat.under, box);
+      if (lined)
+        return (
+          <g>
+            <DecimalGrid defs={defs} box={box} model={m} locale={locale} label={label} move={beat.move ?? null} fit={lined.grid} />
+            <DecimalLine defs={defs} box={box} model={beat.under as DecimalLineSpec} locale={locale} label={label} move={beat.move ?? null} frame={lined.line} />
+          </g>
+        );
+    }
+    // A second model under the first: the box is shared, the first above.
     const top: Rect = beat.under ? { ...box, h: box.h * 0.6 } : box;
     const bottom: Rect | null = beat.under ? { ...box, y: box.y + box.h * 0.62, h: box.h * 0.38 } : null;
     return (
@@ -263,6 +274,36 @@ export function DecimalModel({ model: m, box, defs, label, locale, move }: { mod
   if (m.kind === 'money') return <MoneyModel box={box} model={m} locale={locale} label={label} move={move} />;
   if (m.kind === 'numberline' && m.scale === 'decimal') return <DecimalLine defs={defs} box={box} model={m} locale={locale} label={label} move={move} />;
   return null;
+}
+
+/** Room a decimal line needs above its line (a mark's value) and below it (the numbers, a second scale), the gap under a grid. */
+const DLINE_UP = 40;
+const DLINE_DOWN = 42;
+const DLINE_DUAL = 22;
+const GRID_LINE_GAP = 26;
+
+/**
+ * A hundred grid over its number line (docs/29 §2.2 step 02): the two as one figure in the middle of the box, the grid's wholes
+ * side by side with no gap and the line laid out under them so that 0…1 on the line is exactly the first whole's width (a strip
+ * over each tenth). `null` when they cannot line up (two grids, a magnifier, a zoomed line, a line past the grid's wholes).
+ */
+export function gridOverLine(m: Beat['model'], under: Beat['model'], box: Rect): { grid: { x: number; y: number; s: number }; line: { x: number; w: number; y: number } } | null {
+  if (m.kind !== 'decimal-grid' || m.pair || m.zoom || m.level === 1000) return null;
+  if (under.kind !== 'numberline' || under.scale !== 'decimal' || (under.zoom?.length ?? 0) > 0) return null;
+  const wholes = wholesOf(gridsOf(m)[0]!);
+  const from = under.from.units / 1_000_000;
+  const to = under.to.units / 1_000_000;
+  if (from < 0 || to > wholes || to <= from) return null;
+  const labelH = m.labels && m.labels !== 'none' ? 24 : 0;
+  const lineH = DLINE_UP + DLINE_DOWN + (under.dual ? DLINE_DUAL : 0);
+  // Above the grid its "1 whole" dimension line; at the line's ends their numbers, after it its unit.
+  const fixed = 30 + labelH + GRID_LINE_GAP + lineH;
+  const s = clamp(Math.min((box.w - 48 - (under.unit ? 56 : 0)) / wholes, box.h - fixed), 60, 460);
+  const total = s + fixed;
+  const top = box.y + Math.max(0, (box.h - total) / 2);
+  const gx = box.x + (box.w - wholes * s) / 2;
+  const gy = top + 30;
+  return { grid: { x: gx, y: gy, s }, line: { x: gx + from * s, w: (to - from) * s, y: gy + s + labelH + GRID_LINE_GAP + DLINE_UP } };
 }
 
 /** Room a whole-number line needs above its line (the arcs and their "+5") and below it (the numbers). */

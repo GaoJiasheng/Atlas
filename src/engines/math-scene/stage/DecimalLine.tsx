@@ -39,9 +39,17 @@ export interface DecimalLineProps {
   /** "Show me". */
   ghost?: TaskState | null;
   mini?: boolean;
+  /** Under a hundred grid (a beat's `under`): the line's ends and height, so its 0…1 lies under the grid's 0…1. */
+  frame?: { x: number; w: number; y: number };
 }
 
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
+/** Advance of one character (mono, 0.6 em) of a mark's value (13 px), the halfway value (11 px), a smaller-unit reading (12 px). */
+const MARK_CH = 7.8;
+const HALF_CH = 6.6;
+const DUAL_CH = 7.2;
+/** A tick's number (14 px). */
+const NUM_CH = 8.4;
 const D = (d: Decimal) => formatDecimal(d);
 
 export function DecimalLine(p: DecimalLineProps) {
@@ -53,11 +61,11 @@ export function DecimalLine(p: DecimalLineProps) {
   const levels: LineLevel[] = placing ? levelsFor(m, state!.zoomPath) : levelsOf(m).filter((l): l is LineLevel => !!l);
   const depth = placing && task?.kind === 'place' ? (task.zoom ?? 0) : 0;
   const n = Math.max(1, levels.length);
-  const w = clamp(box.w - (p.mini ? 20 : 110), p.mini ? 80 : 260, 1080);
+  const w = p.frame ? p.frame.w : clamp(box.w - (p.mini ? 20 : 110), p.mini ? 80 : 260, 1080);
   const dualH = m.dual ? 22 : 0;
   const gap = clamp((box.h - 70) / n, p.mini ? 40 : 100, 190);
-  const x0 = box.x + (box.w - w) / 2;
-  const top = box.y + Math.max(46, (box.h - gap * (n - 1) - 60 - dualH) / 2 + 34);
+  const x0 = p.frame ? p.frame.x : box.x + (box.w - w) / 2;
+  const top = p.frame ? p.frame.y : box.y + Math.max(46, (box.h - gap * (n - 1) - 60 - dualH) / 2 + 34);
   const yOf = (i: number) => top + i * gap;
   const X = (l: LineLevel, v: Decimal) => x0 + share(v, l.from, l.to) * w;
   const marks = m.marks ?? (rounding && task?.kind === 'round-on-line' ? [task.value] : []);
@@ -71,7 +79,12 @@ export function DecimalLine(p: DecimalLineProps) {
     const v = valueAt(l, k);
     const kind = i === 0 ? m.labels : w / l.steps > 64 ? 'all' : 'ends';
     if (kind === 'none') return false;
-    if (kind === 'all') return true;
+    if (kind === 'all') {
+      // Every tick, unless their numbers would touch: then every second (or fifth) one, the ends always.
+      const longest = Math.max(D(l.from).length, D(l.to).length, D(valueAt(l, 1)).length);
+      const stride = [1, 2, 5, 10].find((n) => (w / l.steps) * n >= longest * NUM_CH + 8) ?? 10;
+      return k % stride === 0 || k === l.steps;
+    }
     if (kind === 'wholes') return v.units % 1_000_000 === 0 || k === 0 || k === l.steps;
     return k === 0 || k === l.steps;
   };
@@ -79,6 +92,24 @@ export function DecimalLine(p: DecimalLineProps) {
   // The ends of a line as they are written (3.0 keeps its 0), the ticks between with the step's places.
   const tickText = (l: LineLevel, k: number) => D(k === 0 ? l.from : k === l.steps ? l.to : valueAt(l, k));
   const below = m.dual ? 58 : 38;
+  // The deepest line each mark lies on: its value above the ring, its smaller-unit reading under the line.
+  const placed = marks.map((mk) => {
+    const li = levels.indexOf([...levels].reverse().find((l) => cmp(mk, l.from) >= 0 && cmp(mk, l.to) <= 0) ?? levels.at(-1)!);
+    const at = levels[li];
+    return { mk, li, x: at ? X(at, mk) : 0, dual: m.dual ? D(scale(mk, String(m.dual.factor).length - 1) ?? mk) : '' };
+  });
+  // A mark's value that would touch the one before it on its line goes a row higher, on a hairline leader.
+  const rowOf: number[] = [];
+  placed
+    .map((pm, k) => ({ ...pm, k }))
+    .sort((a, b) => a.li - b.li || a.x - b.x)
+    .forEach((pm, i, all) => {
+      const prev = all[i - 1];
+      const touches = prev && prev.li === pm.li && pm.x - prev.x < ((D(prev.mk).length + D(pm.mk).length) * MARK_CH) / 2 + 6;
+      rowOf[pm.k] = touches ? ((rowOf[prev.k] ?? 0) + 1) % 2 : 0;
+    });
+  // A tick's smaller-unit reading gives way to a mark's at the same place (drawn once, the mark's), and to one it would touch.
+  const dualTaken = (i: number, x: number, text: string) => placed.some((pm) => pm.li === i && Math.abs(pm.x - x) < ((pm.dual.length + text.length) * DUAL_CH) / 2 + 4);
   levels.forEach((l, i) => {
     const y = yOf(i);
     const next = levels[i + 1];
@@ -100,7 +131,7 @@ export function DecimalLine(p: DecimalLineProps) {
                   {tickText(l, k)}
                 </text>
               )}
-              {m.dual && labelled(l, i, k) && (
+              {m.dual && labelled(l, i, k) && !dualTaken(i, x, D(scale(v, String(m.dual.factor).length - 1) ?? v)) && (
                 <text className="ms-dline__dual" x={x} y={y + 50} textAnchor="middle">
                   {D(scale(v, String(m.dual.factor).length - 1) ?? v)}
                 </text>
@@ -135,32 +166,45 @@ export function DecimalLine(p: DecimalLineProps) {
   const last = levels.at(-1);
   if (last) {
     const y = yOf(levels.length - 1);
-    // Halfway between the ends, dashed.
+    // Halfway between the ends, dashed. Its value sits above the line unless a mark's value is there: then it goes
+    // under the line on a longer dashed leader, or, when that tick already has its number under the line, is left to it.
     if (m.halfway) {
       const mid: Decimal = { units: (last.from.units + last.to.units) / 2, dp: last.step.dp };
+      const hx = X(last, mid);
+      const text = D(mid);
+      const crowded = placed.some((pm) => pm.li === levels.length - 1 && Math.abs(pm.x - hx) < (D(pm.mk).length * MARK_CH + text.length * HALF_CH) / 2 + 6);
+      const k = tickOf(last, mid);
+      const underTaken = k !== null && labelled(last, levels.length - 1, k);
       out.push(
-        <g key="half" className="ms-dline__half" aria-hidden="true">
-          <line x1={X(last, mid)} x2={X(last, mid)} y1={y - 18} y2={y + 4} />
-          <text x={X(last, mid)} y={y - 24} textAnchor="middle">
-            {D(mid)}
-          </text>
+        <g key="half" className="ms-dline__half" aria-hidden="true" data-under={(crowded && !underTaken) || undefined}>
+          <line x1={hx} x2={hx} y1={y - 18} y2={crowded && !underTaken ? y + 17 : y + 4} />
+          {!crowded ? (
+            <text x={hx} y={y - 24} textAnchor="middle">
+              {text}
+            </text>
+          ) : (
+            !underTaken && (
+              <text x={hx} y={y + 30} textAnchor="middle">
+                {text}
+              </text>
+            )
+          )}
         </g>,
       );
     }
     // Marks: on the deepest line they lie on.
-    marks.forEach((mk, k) => {
-      const at = [...levels].reverse().find((l) => cmp(mk, l.from) >= 0 && cmp(mk, l.to) <= 0) ?? last;
-      const li = levels.indexOf(at);
-      const x = X(at, mk);
+    placed.forEach(({ mk, li, x, dual }, k) => {
+      const at = levels[li]!;
       out.push(
         <g key={`mk${k}`} className="ms-dline__mark ms-line__point">
           <circle cx={x} cy={yOf(li)} r={6.5} />
-          <text x={x} y={yOf(li) - 16} textAnchor="middle">
+          {rowOf[k] ? <line className="ms-dline__tag" x1={x} x2={x} y1={yOf(li) - 9} y2={yOf(li) - 28} /> : null}
+          <text x={x} y={yOf(li) - 16 - (rowOf[k] ?? 0) * 18} textAnchor="middle">
             {D(mk)}
           </text>
           {m.dual && (
             <text className="ms-dline__dual ms-dline__dual--mark" x={x} y={yOf(li) + 50} textAnchor="middle">
-              {D(scale(mk, String(m.dual.factor).length - 1) ?? mk)}
+              {dual}
             </text>
           )}
         </g>,

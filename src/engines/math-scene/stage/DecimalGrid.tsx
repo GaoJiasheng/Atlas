@@ -42,6 +42,8 @@ export interface DecimalGridProps {
   /** "Show me": the amount to shade, in thousandths (dashed). */
   ghost?: number | null;
   mini?: boolean;
+  /** Drawn over a number line (a beat's `under`): this size and place, the wholes side by side with no gap, so 0…1 of the grid is 0…1 of the line. */
+  fit?: { x: number; y: number; s: number };
 }
 
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
@@ -54,10 +56,10 @@ interface WholeAt {
 }
 
 /** One grid's geometry: wholes side by side, each a square of side `s`. */
-function wholeRect(at: WholeAt, s: number, level: GridLevel, cell: number): { x: number; y: number; w: number; h: number } {
+function wholeRect(at: WholeAt, s: number, level: GridLevel, cell: number, gap = GAP): { x: number; y: number; w: number; h: number } {
   const p = cellPlace(level, cell);
   const cw = s / 10;
-  const x = at.x + p.whole * (s + GAP) + p.strip * cw;
+  const x = at.x + p.whole * (s + gap) + p.strip * cw;
   return level === 10 ? { x, y: at.y, w: cw, h: s } : { x, y: at.y + p.square * cw, w: cw, h: cw };
 }
 
@@ -84,23 +86,24 @@ export function DecimalGrid(p: DecimalGridProps) {
   const pairGap = grids.length > 1 ? 56 : 0;
   // The square: as large as the box allows (the magnifier, 0.62 of a square, beside it or under it), never past a readable size.
   const magShare = magnifier ? 0.62 : 0;
-  const gaps = (totalWholes - grids.length) * GAP + pairGap * (grids.length - 1);
+  const gap = p.fit ? 0 : GAP;
+  const gaps = (totalWholes - grids.length) * gap + pairGap * (grids.length - 1);
   const sW = (box.w - 24 - gaps - (wide && magnifier ? 70 : 0)) / (totalWholes + (wide ? magShare : 0));
   const sH = (box.h - below - 26 - (!wide && magnifier ? 50 : 0)) / (wide ? 1 : 1 + magShare);
-  const s = clamp(Math.min(sW, sH), p.mini ? 40 : 110, p.mini ? 200 : 460);
+  const s = p.fit ? p.fit.s : clamp(Math.min(sW, sH), p.mini ? 40 : 110, p.mini ? 200 : 460);
   const mag = magnifier ? s * magShare : 0;
   const cw = s / 10;
-  const gridsW = wholes.reduce((sum, n) => sum + n * s + (n - 1) * GAP, 0) + pairGap * (grids.length - 1);
+  const gridsW = wholes.reduce((sum, n) => sum + n * s + (n - 1) * gap, 0) + pairGap * (grids.length - 1);
   const contentW = wide && magnifier ? gridsW + 70 + mag : Math.max(gridsW, mag);
   const contentH = (wide || !magnifier ? s : s + 50 + mag) + below;
-  const x0 = box.x + (box.w - contentW) / 2;
-  const y0 = box.y + Math.max(26, (box.h - contentH) / 2 + 22);
+  const x0 = p.fit ? p.fit.x : box.x + (box.w - contentW) / 2;
+  const y0 = p.fit ? p.fit.y : box.y + Math.max(26, (box.h - contentH) / 2 + 22);
   const out: ReactNode[] = [];
   let gx = x0;
   const origins: WholeAt[] = [];
   grids.forEach((_, gi) => {
     origins.push({ x: gx, y: y0 });
-    gx += wholes[gi]! * s + (wholes[gi]! - 1) * GAP + pairGap;
+    gx += wholes[gi]! * s + (wholes[gi]! - 1) * gap + pairGap;
   });
 
   /* the child's shading (a check) */
@@ -125,7 +128,7 @@ export function DecimalGrid(p: DecimalGridProps) {
     out.push(
       <g key={`g${gi}`} className="ms-dgrid__grid" data-tone={g.tone ?? undefined}>
         {Array.from({ length: n }, (_, w) => {
-          const x = at.x + w * (s + GAP);
+          const x = at.x + w * (s + gap);
           return (
             <g key={`w${w}`}>
               <rect className="ms-dgrid__whole" x={x} y={at.y} width={s} height={s} />
@@ -139,25 +142,26 @@ export function DecimalGrid(p: DecimalGridProps) {
           );
         })}
         {fl.map((f, i) => {
-          const r = piece(wholeRect(at, s, level, f.cell), f);
+          const r = piece(wholeRect(at, s, level, f.cell, gap), f);
           return <rect key={`f${i}`} className="ms-dgrid__fill" data-tone={f.tone} x={r.x + 0.5} y={r.y + 0.5} width={Math.max(0, r.w - 1)} height={Math.max(0, r.h - 1)} style={{ animationDelay: p.move === 'shade' ? `${Math.min(700, i * 6)}ms` : undefined }} />;
         })}
         {crossed.map((f, i) => {
-          const r = piece(wholeRect(at, s, level, f.cell), f);
+          const r = piece(wholeRect(at, s, level, f.cell, gap), f);
           return (
             <g key={`x${i}`} className="ms-dgrid__crossed">
               <rect x={r.x} y={r.y} width={r.w} height={r.h} fill={`url(#${p.defs}-hatch)`} />
             </g>
           );
         })}
-        {lit.length > 0 && <path className="ms-dgrid__lit" d={lit.map((c) => { const r = wholeRect(at, s, level, c); return `M${r.x} ${r.y}h${r.w}v${r.h}h${-r.w}Z`; }).join('')} />}
+        {lit.length > 0 && <path className="ms-dgrid__lit" d={lit.map((c) => { const r = wholeRect(at, s, level, c, gap); return `M${r.x} ${r.y}h${r.w}v${r.h}h${-r.w}Z`; }).join('')} />}
         {ghostFills.map((f, i) => {
-          const r = piece(wholeRect(at, s, level, f.cell), f);
+          const r = piece(wholeRect(at, s, level, f.cell, gap), f);
           return <rect key={`gh${i}`} className="ms-dgrid__ghost" x={r.x + 2} y={r.y + 2} width={Math.max(0, r.w - 4)} height={Math.max(0, r.h - 4)} />;
         })}
+        {gap === 0 && n > 1 && <path className="ms-dgrid__seam" d={Array.from({ length: n - 1 }, (_, w) => `M${at.x + (w + 1) * s} ${at.y}v${s}`).join('')} />}
         {g.labels && g.labels !== 'none' &&
           Array.from({ length: n * 10 }, (_, k) => {
-            const r = wholeRect(at, s, 10, k);
+            const r = wholeRect(at, s, 10, k, gap);
             const value = g.labels === 'tenths' ? formatDecimal({ units: (k + 1) * 100_000, dp: 1 }) : String((k + 1) * 10);
             return (
               <text key={`l${k}`} className="ms-dgrid__label" x={r.x + r.w / 2} y={at.y + s + 17} textAnchor="middle">

@@ -44,7 +44,7 @@ import { Defs } from './stage/svg';
 import { SPECIMEN_ARRAY, SPECIMEN_CLOCK, SPECIMEN_DECIMAL, SPECIMEN_GRID, StageContent } from './stage/Stage';
 import { isDecimalModel } from './lib/decimal-tasks';
 import { beatCounts, beatFraction, beatPair, beatShape, beatTime } from './stage/BeatModel';
-import { useStageLayout, type LayoutMode, type Rect } from './stage/layout';
+import { spanAt, useStageLayout, type LayoutMode, type Rect } from './stage/layout';
 import { Tray, partsAreNarrow } from './tray/Tray';
 import { Card, CARD_TITLE, cardKindOf, type CardKind } from './hud/cards';
 import { decimalPlateRows, valuePlateRows } from './hud/plate';
@@ -94,8 +94,14 @@ function gridRows(m: GridModelSpec, state: { tiles: string[]; edges: string[] } 
 }
 /** A beat's model change settles (the stage is SVG: a short ease). */
 const BEAT_SETTLE_MS = 650;
+/** Below this stage width the control panel is folded (the model's room between the HUD columns would be under ~300 px). */
+const NARROW_STAGE = 860;
 /** Height of the number-sentence line under the model. */
 const EQUATION_H = 58;
+/** The sentence's side padding (math-scene.css), and how far its type may shrink before it wraps. */
+const EQUATION_PAD = 12;
+const EQUATION_MIN_SCALE = 0.72;
+const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
 
 type Saved = { chapter: string | null; beat: number; model: ModelView | null };
 
@@ -258,6 +264,9 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
   const trayRef = useRef<HTMLDivElement>(null);
   const mode: LayoutMode = presenting ? 'present' : hudOn ? 'hud' : 'bare';
   const L = useStageLayout(rootRef, trayRef, mode, `${s.chapter}|${cur.beat}|${u.summary}|${run?.state.phase}|${run?.feedback?.tone}|${sheet}|${locale}`);
+  // A stage too narrow for the model between the HUD columns (the reader open beside it on a 1024–1279 px screen): the control
+  // panel folds behind its button, as on a phone, so the card's column ends high and the model takes the stage under it.
+  const narrowStage = L.w > 0 && L.w < NARROW_STAGE;
 
   // The docked tray's band in the HUD grid (math-scene.css): the left and right columns end above it.
   const docked = sheet && !presenting && !(practice && u.summary) && !!task && !!run;
@@ -294,6 +303,31 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
     const top = Math.round(Math.min(modelBox.y + modelBox.h, Math.max(modelBox.y, bb.y + bb.height + 10)));
     if (top !== equationTop) setEquationTop(top);
   });
+  // The sentence's box: at least the model's width, as wide as its text needs where the HUD leaves room at that height
+  // (centred on the model when it can be), its type a little smaller and then wrapped only past that; never clipped.
+  const measureRef = useRef<HTMLSpanElement>(null);
+  const [equationW, setEquationW] = useState(0);
+  useLayoutEffect(() => {
+    const w = measureRef.current ? Math.ceil(measureRef.current.getBoundingClientRect().width) : 0;
+    if (w !== equationW) setEquationW(w);
+  });
+  // A web font that arrives later changes the sentence's width: measure again then.
+  const [, setFontsLoaded] = useState(0);
+  useEffect(() => {
+    const fonts = document.fonts;
+    const again = () => setFontsLoaded((n) => n + 1);
+    fonts?.addEventListener('loadingdone', again);
+    return () => fonts?.removeEventListener('loadingdone', again);
+  }, []);
+  const eqTop = equationTop || modelBox.y + modelBox.h;
+  const eqCentre = L.free.x + L.free.w / 2;
+  const eqSpan = spanAt(L, eqTop, EQUATION_H, eqCentre);
+  const eqNeed = equationW + 2 * EQUATION_PAD;
+  const eqRoom = eqSpan.w >= L.free.w ? eqSpan : { x: L.free.x, w: L.free.w };
+  const eqBoxW = Math.min(eqRoom.w, Math.max(L.free.w, eqNeed));
+  const eqBoxX = clamp(eqCentre - eqBoxW / 2, eqRoom.x, eqRoom.x + eqRoom.w - eqBoxW);
+  const eqScale = equationW > 0 && eqNeed > eqBoxW ? Math.max(EQUATION_MIN_SCALE, (eqBoxW - 2 * EQUATION_PAD) / equationW) : 1;
+  const eqWrap = equationW > 0 && equationW * eqScale + 2 * EQUATION_PAD > eqBoxW + 0.5;
   const value = task && run ? cardValue(task, run.state, run.done) : explain ? beatFraction(explain) : background && fractionLesson ? { n: 3, d: 4 } : null;
   /** The model on show (a check's, a beat's, the specimen's): it picks the card and the plate rows. */
   const modelOnShow: Model | null = task ? task.model : explain ? explain.model : background ? specimenModel : null;
@@ -457,7 +491,7 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
 
   return (
     <NotationContext.Provider value={lesson.notation}>
-    <div className="ms-root" ref={rootRef} data-presenting={presenting || undefined}>
+    <div className="ms-root" ref={rootRef} data-presenting={presenting || undefined} data-stage-free={L.w > 0 && !showSummary ? `${Math.round(L.free.w)} ${Math.round(L.free.h)}` : undefined}>
       <svg className="ms-svg" data-stage-surface="" width={L.w} height={L.h} viewBox={`0 0 ${Math.max(1, L.w)} ${Math.max(1, L.h)}`} role="group" aria-label={t(locale, 'math.stage')}>
         <Defs id={defs} />
         {!showSummary &&
@@ -475,9 +509,20 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
         {u.pulse > 0 && !showSummary && !explain && <rect key={u.pulse} className="ms-pulse" x={L.free.x - 6} y={L.free.y - 6} width={L.free.w + 12} height={L.free.h + 12} />}
       </svg>
       {equation && !showSummary && L.free.w > 0 && (
-        <p key={`${s.chapter}|${cur.beat}|${equation}`} className="ms-equation" data-hud-panel="equation" style={{ left: L.free.x, width: L.free.w, top: equationTop || modelBox.y + modelBox.h, height: EQUATION_H }}>
+        <p
+          key={`${s.chapter}|${cur.beat}|${equation}`}
+          className="ms-equation"
+          data-hud-panel="equation"
+          data-wrap={eqWrap || undefined}
+          style={{ left: eqBoxX, width: eqBoxW, top: eqTop, height: EQUATION_H, ['--eq-scale' as string]: eqScale }}
+        >
           <span>{renderRich(equation, locale, { line: true })}</span>
         </p>
+      )}
+      {equation && !showSummary && (
+        <div className="ms-equation-measure" aria-hidden="true">
+          <span ref={measureRef}>{renderRich(equation, locale, { line: true })}</span>
+        </div>
       )}
       {docked && task && run && (
         <div ref={trayRef} className="ms-tray-dock" style={{ bottom: L.dock }}>
@@ -506,7 +551,7 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
         <PlateBlock rows={plateRows} locale={locale} />
       </SceneSlot>
       <SceneSlot name="stageOverlay">
-        <MathOverlay glossary={(file.glossary?.terms.length ?? 0) > 0} compact={phone} />
+        <MathOverlay glossary={(file.glossary?.terms.length ?? 0) > 0} compact={phone || narrowStage} />
       </SceneSlot>
       <SceneSlot name="bottomBar">
         <ChapterAxis

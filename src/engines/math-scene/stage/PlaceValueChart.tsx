@@ -19,7 +19,7 @@
  */
 import type { KeyboardEvent, PointerEvent, ReactNode } from 'react';
 import type { Locale } from '../../core/types';
-import { t } from '../../../i18n';
+import { t, tx } from '../../../i18n';
 import type { BeatMove, DPlace, DTrade, PlaceValueSpec, Task } from '../schema';
 import { DPLACES } from '../schema';
 import type { Action, TaskState } from '../lib/state';
@@ -164,33 +164,76 @@ export function PlaceValueChart(p: PlaceValueChartProps) {
   /* layout */
   const cols = columns.length;
   const cc = m.column && !task ? decimalColumnCells(m.column) : null;
-  // The column method beside the chart on a wide stage; under it on a narrow one, or when plates take the row under the chart.
-  const wide = box.w >= 720 && !plates;
+  // The column method beside the chart (and its plates) on a wide stage; under them on a narrow one.
+  const wide = box.w >= 720;
+  const titleH = m.label && !p.mini ? 28 : 0;
+  // The plates hold the discs dealt so far, each plate as wide as its discs at the end of a share need.
+  const final = task?.kind === 'share' && typeof task.value !== 'number' ? dstandard(asDecimal(Math.round((thousandths(task.value) ?? 0) / task.k))) : dealt;
+  const held = columns.map((pl) => Math.max(dealt[pl], final[pl])).filter((n) => n > 0);
   const discRowsOf = (c: DCounts | undefined, perRow: number) => (c ? Math.max(1, ...columns.map((pl) => Math.ceil(c[pl] / perRow))) : 0);
-  let cw = clamp((box.w - 40 - (cc && wide ? cc.cols * 30 + 50 : 0)) / cols, p.mini ? 18 : 46, p.mini ? 60 : 200);
-  let layout = sizes(cw);
-  while (layout.total > box.h - 20 && cw > (p.mini ? 14 : 40)) {
-    cw -= 4;
-    layout = sizes(cw);
+  const colArea = cc && wide ? cc.cols * 30 + 50 : 0;
+  const chartDiscs = lines.some((l) => l.discs && columns.some((pl) => l.discs![pl] > 0));
+  let cw = clamp((box.w - 40 - colArea) / cols, p.mini ? 18 : 46, p.mini ? 60 : 200);
+  let shrink = 1;
+  let layout = sizes(cw, shrink);
+  // Too tall, or the plates left with discs much smaller than the chart's: the chart and the column method give way together.
+  const cramped = (l: typeof layout) => l.total > box.h - 20 - titleH || (plates > 0 && l.pl.pd < (chartDiscs ? l.disc * 0.8 : p.mini ? 8 : 20));
+  const minCw = p.mini ? 14 : 40;
+  while (cramped(layout) && (cw > minCw || shrink > 0.45)) {
+    cw = Math.max(minCw, cw - 4);
+    shrink = Math.max(0.45, shrink - 0.04);
+    layout = sizes(cw, shrink);
   }
-  function sizes(w: number) {
+  /**
+   * The plates' discs, the plates in one to three rows, each place's discs `q` to a row in a plate: the largest discs (up to the
+   * chart's largest) that fit `room` wide and `tall` high.
+   */
+  function platesOf(room: number, tall: number, chartDisc: number) {
+    // As large as the chart's discs when the chart still holds some (the same coins), else up to the chart's largest.
+    const disc = chartDiscs ? chartDisc : p.mini ? 20 : 40;
+    if (!plates) return { pd: 0, q: 5, rows: 0, pw: 0, ph: 0, h: 0, w: 0 };
+    let best = { pd: 0, q: 5, rows: 1 };
+    for (const rows of [1, 2, 3]) {
+      if (rows > plates) break;
+      for (const q of [5, 4, 3, 2]) {
+        const across = Math.ceil(plates / rows);
+        const units = held.reduce((sum, n) => sum + Math.min(n, q), 0) * 1.15;
+        const fixed = 16 + held.length * 6;
+        const deep = Math.max(1, ...held.map((n) => Math.ceil(n / q)));
+        const byWidth = units > 0 ? (room / across - 10 - fixed) / units : disc;
+        const byHeight = ((tall + 10) / rows - 10 - 24) / (deep * 1.15);
+        const pd = Math.min(disc, byWidth, byHeight);
+        // A plate row more, or narrower blocks, only for discs clearly larger.
+        if (pd > best.pd + 2) best = { pd, q, rows };
+      }
+    }
+    const pd = Math.max(10, best.pd);
+    const pw = Math.max(70, 16 + held.reduce((sum, n) => sum + Math.min(n, best.q) * pd * 1.15 + 6, 0));
+    const deep = Math.max(1, ...held.map((n) => Math.ceil(n / best.q)));
+    const ph = Math.max(pd * 2.2, deep * pd * 1.15 + 24);
+    const across = Math.ceil(plates / best.rows);
+    return { ...best, pd, pw, ph, h: best.rows * (ph + 10) - 10, w: across * (pw + 10) };
+  }
+  function sizes(w: number, k: number) {
     const disc = clamp((w - 14) / 4.4, 12, 40);
     const perRow = clamp(Math.floor((w - 8) / (disc * 1.18)), 2, 5);
     const digitH = clamp(w * 0.95, 40, 170);
     const rowHs = lines.map((l) => (l.digits && showDigits ? digitH : 0) + (l.discs ? discRowsOf(l.discs, perRow) * disc * 1.18 + 14 : 0) + 8);
-    const plateH = plates ? Math.max(disc * 0.8 * 2.6, Math.max(...columns.map((pl) => Math.ceil(dealt[pl] / 5))) * disc * 0.8 * 1.15 + 24) : 0;
     const chartH = HEAD + rowHs.reduce((a, b) => a + b, 0) + 6;
-    const colCell = cc ? clamp(wide ? Math.min(34, (box.h * 0.7) / (cc.rows * 1.5)) : Math.min(32, (box.w - 40) / cc.cols), 16, 34) : 0;
+    const colCell = cc ? clamp((wide ? Math.min(34, (box.h * 0.7) / (cc.rows * 1.5)) : Math.min(32, (box.w - 40) / cc.cols)) * k, 14, 34) : 0;
     const colH = cc ? cc.rows * colCell * 1.5 : 0;
-    const total = wide ? Math.max(chartH + (plates ? plateH + 18 : 0), colH) : chartH + (plates ? plateH + 18 : 0) + (cc ? colH + 24 : 0);
-    return { disc, perRow, digitH, rowHs, plateH, chartH, colCell, colH, total };
+    const colW = cc ? cc.cols * colCell : 0;
+    const pl = platesOf(box.w - 20 - (cc && wide ? colW + 50 : 0), box.h - 20 - titleH - chartH - 18 - (cc && !wide ? colH + 24 : 0), disc);
+    const leftH = chartH + (plates ? pl.h + 18 : 0);
+    const total = wide ? Math.max(leftH, colH) : leftH + (cc ? colH + 24 : 0);
+    return { disc, perRow, digitH, rowHs, chartH, colCell, colH, colW, pl, leftH, total };
   }
-  const { disc, perRow, digitH, rowHs, plateH, chartH, colCell, colH } = layout;
+  const { disc, perRow, digitH, rowHs, chartH, colCell, colH, colW, pl: plate, leftH } = layout;
   const chartW = cols * cw;
-  const colW = cc ? cc.cols * colCell : 0;
-  const contentW = wide && cc ? chartW + 50 + colW : Math.max(chartW, colW);
-  const x0 = box.x + (box.w - contentW) / 2 + (lines.some((l) => l.rowLabel) ? 14 : 0);
-  const y0 = box.y + Math.max(0, (box.h - layout.total) / 2);
+  const leftW = Math.max(chartW, plate.w);
+  const contentW = wide && cc ? leftW + 50 + colW : Math.max(leftW, colW);
+  const x0 = box.x + (box.w - contentW) / 2 + (wide && cc ? (leftW - chartW) / 2 : (contentW - chartW) / 2) + (lines.some((l) => l.rowLabel) ? 14 : 0);
+  const y0 = box.y + titleH + Math.max(0, (box.h - titleH - layout.total) / 2);
   const colX = (pl: DPlace) => x0 + columns.indexOf(pl) * cw;
   const has = (pl: DPlace) => columns.includes(pl);
   const pointX = has('O') ? colX('O') + cw : has('t') ? colX('t') : x0 + chartW;
@@ -272,47 +315,51 @@ export function PlaceValueChart(p: PlaceValueChartProps) {
   // The point's own line through the chart, so the eye finds it.
   out.push(<line key="pointline" className="ms-pvc__pointline" x1={pointX} x2={pointX} y1={y0 + HEAD} y2={y0 + chartH} />);
 
-  /* plates (÷), each as wide as its discs (at the end of a share) need */
+  /* plates (÷), each as wide as its discs (at the end of a share) need, in one to three rows */
   if (plates) {
-    const py = y0 + chartH + 18;
-    const final = task?.kind === 'share' && typeof task.value !== 'number' ? dstandard(asDecimal(Math.round((thousandths(task.value) ?? 0) / task.k))) : dealt;
-    const need = (d: number) => 16 + columns.reduce((s, pl) => s + (Math.max(dealt[pl], final[pl]) > 0 ? Math.min(Math.max(dealt[pl], final[pl]), 5) * d * 1.15 + 6 : 0), 0);
-    let pd = disc * 0.8;
-    while (plates * (Math.max(70, need(pd)) + 10) > box.w - 20 && pd > 10) pd -= 1;
-    const pw = Math.max(70, need(pd));
-    const left0 = x0 + chartW / 2 - (plates * (pw + 10)) / 2;
+    const { pd, q, pw, ph } = plate;
+    const across = Math.ceil(plates / plate.rows);
     for (let j = 0; j < plates; j++) {
-      const px = left0 + j * (pw + 10) + 5;
-      out.push(<rect key={`pl${j}`} className="ms-plate-dish" x={px} y={py} width={pw} height={plateH} rx={10} />);
+      const row = Math.floor(j / across);
+      const inRow = Math.min(across, plates - row * across);
+      const px = x0 + chartW / 2 - (inRow * (pw + 10)) / 2 + (j % across) * (pw + 10) + 5;
+      const py = y0 + chartH + 18 + row * (ph + 10);
+      out.push(<rect key={`pl${j}`} className="ms-plate-dish" x={px} y={py} width={pw} height={ph} rx={10} />);
       let bx = px + 8;
       for (const pl of columns) {
         for (let i = 0; i < dealt[pl]; i++) {
-          const cx = bx + ((i % 5) + 0.5) * pd * 1.15;
-          const cy = py + 12 + (Math.floor(i / 5) + 0.5) * pd * 1.15;
+          const cx = bx + ((i % q) + 0.5) * pd * 1.15;
+          const cy = py + 12 + (Math.floor(i / q) + 0.5) * pd * 1.15;
           out.push(
             <g key={`pd${j}${pl}${i}`} className="ms-disc ms-disc--dealt">
               <circle cx={cx} cy={cy} r={pd / 2} />
-              <text x={cx} y={cy + pd * 0.13} textAnchor="middle" fontSize={clamp(pd * ([0, 0.42, 0.42, 0.38, 0.3, 0.25][discFace(pl, money).length] ?? 0.25), 6, 12)}>
+              <text x={cx} y={cy + pd * 0.13} textAnchor="middle" fontSize={clamp(pd * ([0, 0.42, 0.42, 0.38, 0.3, 0.25][discFace(pl, money).length] ?? 0.25), 6, 15)}>
                 {discFace(pl, money)}
               </text>
             </g>,
           );
         }
         const n = Math.max(dealt[pl], final[pl]);
-        if (n) bx += Math.min(n, 5) * pd * 1.15 + 6;
+        if (n) bx += Math.min(n, q) * pd * 1.15 + 6;
       }
     }
   }
 
   /* the column method */
   if (cc && m.column) {
-    const cx = wide ? x0 + chartW + 50 : x0 + (contentW - colW) / 2;
-    const cy = wide ? y0 + Math.max(0, (chartH - colH) / 2) : y0 + chartH + (plates ? plateH + 18 : 0) + 24;
+    const cx = wide ? x0 + chartW / 2 + leftW / 2 + 50 : x0 + chartW / 2 - colW / 2;
+    const cy = wide ? y0 + Math.max(0, (leftH - colH) / 2) : y0 + leftH + 24;
     out.push(<DecimalColumn key="col" spec={m.column} x={cx} y={cy} cell={colCell} />);
   }
+  if (titleH && m.label)
+    out.push(
+      <text key="title" className="ms-array__title ms-pvc__title" x={x0 + chartW / 2} y={y0 - 14} textAnchor="middle">
+        {tx(m.label, locale)}
+      </text>,
+    );
   if (p.ghost && task?.kind === 'share') {
     out.push(
-      <text key="ghost" className="ms-array__ghost-count" x={x0 + chartW / 2} y={y0 + chartH + (plates ? plateH + 18 : 0) + 22} textAnchor="middle" aria-hidden="true">
+      <text key="ghost" className="ms-array__ghost-count" x={x0 + chartW / 2} y={y0 + leftH + 22} textAnchor="middle" aria-hidden="true">
         {T('math.tray.eachValue', { v: formatDecimal(asDecimal(DPLACES.reduce((s, pl) => s + p.ghost!.pvDealt[pl] * 10 ** (PLACE_EXP[pl] + 3), 0))) })}
       </text>,
     );

@@ -6,8 +6,8 @@
  */
 import { describe, expect, it } from 'vitest';
 import { DECIMAL_CODES, DECIMAL_SHARED_CODES, MISCONCEPTION_DOMAINS, type ConvertUnit, type DecimalWork, type MisconceptionCode } from '../../src/engines/math-scene/schema';
-import { compareShows, decimalShows, fractionShows, orderShows, placeShows, shadeShows, shiftShows, type Claim } from '../../src/engines/math-scene/lib/diagnose/decimals';
-import { parseDecimal, type Decimal } from '../../src/engines/math-scene/lib/decimal';
+import { carryDroppedProduct, carryDroppedSum, compareShows, decimalShows, fractionShows, orderShows, placeShows, shadeShows, shiftShows, type Claim } from '../../src/engines/math-scene/lib/diagnose/decimals';
+import { formatDecimal, parseDecimal, type Decimal } from '../../src/engines/math-scene/lib/decimal';
 
 const d = (s: string): Decimal => parseDecimal(s)!;
 const dec = (s: string) => ({ kind: 'dec' as const, ...d(s) });
@@ -149,6 +149,22 @@ describe('adding, subtracting, multiplying, dividing', () => {
     expect(shows('carry-not-added', multiply('2.35', '3'), '7.05', '6.95')).toBe(true);
     expect(shows('carry-not-added', multiply('0.75', '4'), '3', '0.80')).toBe(true);
     expect(shows('carry-not-added', add('0.68', '0.57'), '1.25', '1.15')).toBe(false);
+  });
+  it('carry-not-added keeps the top place whole (as 47 × 3 → 121 for whole numbers)', () => {
+    const sum = (a: string, b: string) => formatDecimal(carryDroppedSum(d(a), d(b)));
+    const product = (a: string, k: number) => formatDecimal(carryDroppedProduct(d(a), k));
+    // The top place written is the ones at least: 0 × 3 and 0 + 0 stay 0.
+    expect(product('0.47', 3)).toBe('0.21');
+    expect(product('2.35', 3)).toBe('6.95');
+    expect(product('4.7', 3)).toBe('12.1');
+    expect(product('12.5', 9)).toBe('98.5');
+    expect(sum('0.68', '0.57')).toBe('0.15');
+    expect(sum('4.7', '8.5')).toBe('12.2');
+    expect(sum('6.25', '5.85')).toBe('11.00');
+    expect(shows('carry-not-added', multiply('4.7', '3'), '14.1', '12.1')).toBe(true);
+    expect(shows('carry-not-added', multiply('4.7', '3'), '14.1', '2.1')).toBe(false);
+    expect(shows('carry-not-added', add('4.7', '8.5'), '13.2', '12.2')).toBe(true);
+    expect(shows('carry-not-added', add('4.7', '8.5'), '13.2', '2.2')).toBe(false);
   });
   it('smaller-from-larger', () => {
     expect(shows('smaller-from-larger', subtract('0.72', '0.35'), '0.37', '0.43')).toBe(true);

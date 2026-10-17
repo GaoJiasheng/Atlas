@@ -8,7 +8,7 @@
  *   pnpm shoot sample-time --locale zh --theme cinema --size 3840x2160 --suffix _4k
  *   pnpm shoot sample-time --shots my-shots.json     # custom shot list (format below)
  *   pnpm shoot sample-time --keys                    # every key changes state + its button
- *   pnpm shoot sample-time --layout                  # HUD overlap / overflow at seven sizes (incl. 1600x900)
+ *   pnpm shoot sample-time --layout                  # HUD overlap / overflow / a squeezed stage at eight sizes (incl. 1600x900, 1024x768), after a chapter change and opened from a beat link
  *   pnpm shoot ww2 --beats                           # every presentation beat -> shots/<topic>/<locale>-<theme>/beat-<chapter>-<n>.png
  *   pnpm shoot sample-space --perf --json out.json   # renderer numbers per shot
  *   pnpm shoot fractions --tasks                     # MathScene: every check-pool task (start, a planned wrong answer, solved) and every practice question + the summary
@@ -185,6 +185,7 @@ class Session {
   constructor(
     readonly page: Page,
     readonly origin: string,
+    readonly topic: string,
   ) {}
 
   static async open(
@@ -201,7 +202,7 @@ class Session {
       (window as unknown as { __name: <T>(fn: T) => T }).__name = (fn) => fn;
     });
     const page = await context.newPage();
-    const s = new Session(page, origin);
+    const s = new Session(page, origin, topic);
     page.on('console', (m) => {
       if ((m.type() === 'error' || m.type() === 'warning') && !IGNORED.some((re) => re.test(m.text()))) s.logs.push({ type: m.type(), text: m.text() });
     });
@@ -818,17 +819,31 @@ async function runKeys(s: Session, o: Options, report: RunReport): Promise<void>
 /* Layout                                                              */
 /* ------------------------------------------------------------------ */
 
-async function runLayout(s: Session, out: string, report: RunReport): Promise<void> {
+/** The layout sizes, with the 1024 × 768 tablet (the reader open beside the stage, the tightest desktop HUD). */
+const SHOOT_LAYOUT_SIZES: readonly (readonly [number, number])[] = [...LAYOUT_SIZES.slice(0, 5), [1024, 768], ...LAYOUT_SIZES.slice(5)];
+
+/** Beyond the HUD panels: a stage that keeps its model (`data-stage-free` = the model's room, "w h") at least this size. */
+async function stageIssues(page: Page): Promise<string[]> {
+  return page.evaluate(() => {
+    const el = document.querySelector('[data-stage-free]');
+    if (!el) return [];
+    const [w = 0, h = 0] = (el.getAttribute('data-stage-free') ?? '').split(' ').map(Number);
+    const phone = window.innerWidth < 760;
+    return w < (phone ? 150 : 200) || h < 100 ? [`stage squeezed: the model has ${w} × ${h} px`] : [];
+  });
+}
+
+async function runLayout(s: Session, out: string, report: RunReport, locale: string, theme: string): Promise<void> {
   const { page } = s;
   const [chapters, presets] = await Promise.all([s.ev(() => window.__atlas!.chapters()), s.ev(() => window.__atlas!.presets())]);
   const extraPresets = presets.filter((p) => !chapters.includes(p) && !/^\d+$/.test(p));
   mkdirSync(out, { recursive: true });
-  for (const [w, h] of LAYOUT_SIZES) {
+  for (const [w, h] of SHOOT_LAYOUT_SIZES) {
     await page.setViewportSize({ width: w, height: h });
     await page.waitForTimeout(500);
     const issues: string[] = [];
-    const check = async (where: string) => {
-      for (const i of await hudLayoutIssues(page)) {
+    const check = async (where: string, target: Page = page) => {
+      for (const i of [...(await hudLayoutIssues(target)), ...(await stageIssues(target))]) {
         issues.push(`${where}: ${i}`);
         report.layout.push({ size: `${w}x${h}`, where, issues: [i] });
       }
@@ -843,6 +858,28 @@ async function runLayout(s: Session, out: string, report: RunReport): Promise<vo
     }
     await s.apply({ chapter: chapters[0], wait: 800 });
     await page.screenshot({ path: join(out, `layout-${w}x${h}.png`) });
+    // Opened from a link at this size (a shared beat: `?ch=<chapter>&b=2`, the reader and the HUD laid out on load, not after a
+    // resize), in a page of its own. Engines without beats ignore `b` and open at the chapter.
+    const linked = await page.context().newPage();
+    linked.on('console', (m) => {
+      if (m.type() === 'error' && !IGNORED.some((re) => re.test(m.text()))) s.logs.push({ type: m.type(), text: m.text() });
+    });
+    linked.on('pageerror', (e) => {
+      if (!IGNORED.some((re) => re.test(e.message))) s.logs.push({ type: 'pageerror', text: e.message });
+    });
+    try {
+      await linked.setViewportSize({ width: w, height: h });
+      for (const c of chapters) {
+        await linked.goto(`${s.origin}/${locale}/topics/${s.topic}/?ch=${encodeURIComponent(c)}&b=2&theme=${theme}`);
+        await linked.waitForFunction(() => window.__atlas !== undefined, null, { timeout: 60_000 });
+        await linked.evaluate(() => window.__atlas!.ready);
+        await linked.waitForTimeout(700);
+        await check(`${c} opened at beat 2`, linked);
+      }
+      await linked.screenshot({ path: join(out, `layout-${w}x${h}-linked.png`) });
+    } finally {
+      await linked.close();
+    }
     console.log(`  ${`${w}x${h}`.padEnd(10)} ${issues.length ? issues.length + ' issue(s)' : 'OK'}`);
     for (const i of issues) console.log(`      ${i}`);
   }
@@ -948,7 +985,7 @@ async function main(): Promise<number> {
           }
           if (o.layout) {
             console.log('  -- layout');
-            await runLayout(s, out, report);
+            await runLayout(s, out, report, locale, theme);
             await s.page.setViewportSize({ width: o.size[0], height: o.size[1] });
           }
         } finally {

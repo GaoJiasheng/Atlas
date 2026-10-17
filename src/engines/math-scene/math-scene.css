@@ -1612,12 +1612,35 @@
   justify-content: center;
   margin: 0;
   padding: 0 12px;
-  font: 500 clamp(17px, calc(26 * var(--u)), 30px) / 1.2 var(--font-mono);
+  font: 500 calc(clamp(17px, calc(26 * var(--u)), 30px) * var(--eq-scale, 1)) / 1.2 var(--font-mono);
   color: var(--ink);
   text-align: center;
   text-wrap: balance;
   pointer-events: none;
   animation: ms-equation-in 480ms var(--ease-out) 120ms both;
+}
+/* The box is as wide as the sentence needs (View.tsx): one line, unless even the smaller type cannot fit the room. */
+.ms-equation > span {
+  white-space: nowrap;
+}
+.ms-equation[data-wrap] > span {
+  white-space: normal;
+}
+/* The sentence set once more, unseen and unwrapped, to measure it. */
+.ms-equation-measure {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  pointer-events: none;
+  font: 500 clamp(17px, calc(26 * var(--u)), 30px) / 1.2 var(--font-mono);
+}
+.ms-equation-measure > span {
+  display: inline-block;
+  white-space: nowrap;
 }
 @keyframes ms-equation-in {
   from {
@@ -1631,6 +1654,9 @@
 }
 @media (max-width: 759px) {
   .ms-equation {
+    font-size: calc(16px * var(--eq-scale, 1));
+  }
+  .ms-equation-measure {
     font-size: 16px;
   }
 }
@@ -2776,6 +2802,12 @@
   stroke: var(--ink);
   stroke-width: 1.5;
 }
+/* Wholes side by side with no gap (a grid over its number line): the join drawn heavier than a strip. */
+.ms-dgrid__seam {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 3;
+}
 .ms-dgrid__hair {
   fill: none;
   stroke: color-mix(in srgb, var(--ink) 18%, transparent);
@@ -3042,6 +3074,10 @@
   fill: var(--panel-solid);
   stroke: var(--cold);
   stroke-width: 2;
+}
+.ms-dline__tag {
+  stroke: var(--ink-3);
+  stroke-width: 1;
 }
 .ms-dline__mark text {
   fill: var(--ink);

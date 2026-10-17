@@ -42,10 +42,32 @@ function columnsOf(a: Decimal, b: Decimal): { A: number[]; B: number[]; places: 
   const digits = (d: Decimal) => String(Math.round(d.units / pow10(6 - places))).split('').reverse().map(Number);
   const A = digits(a);
   const B = digits(b);
-  const n = Math.max(A.length, B.length);
+  // Down to the ones place at least (0.47 is 0 . 4 7): the top place is the highest place written.
+  const n = Math.max(A.length, B.length, places + 1);
   while (A.length < n) A.push(0);
   while (B.length < n) B.push(0);
   return { A, B, places };
+}
+
+/**
+ * `a + b` worked place by place, each place keeping only its ones digit and the carries never added; the
+ * top place (the ones at least) is written whole, as a child writes it: 0.68 + 0.57 → 0.15, 4.7 + 8.5 → 12.2.
+ */
+export function carryDroppedSum(a: Decimal, b: Decimal): Decimal {
+  const { A, B, places } = columnsOf(a, b);
+  const top = A.length - 1;
+  return fromColumns(A.map((d, i) => (i === top ? d + B[i]! : (d + B[i]!) % 10)), places);
+}
+
+/**
+ * `a × k` (one-digit k) worked place by place, each place keeping only its product's ones digit; the top
+ * place (the ones at least) keeps its whole product, as for whole numbers (47 × 3 → 121): 2.35 × 3 → 6.95,
+ * 4.7 × 3 → 12.1, 0.47 × 3 → 0.21.
+ */
+export function carryDroppedProduct(a: Decimal, k: number): Decimal {
+  const { A, places } = columnsOf(a, a);
+  const top = A.length - 1;
+  return fromColumns(A.map((d, i) => (i === top ? d * k : (d * k) % 10)), places);
 }
 
 /** Digits lowest place first back into a decimal with `places` places. */
@@ -243,14 +265,10 @@ export function decimalShows(code: MisconceptionCode, c: DecimalContext, x: Deci
     }
     case 'carry-not-added': {
       if (!w || !a || !b) return false;
-      if (w.do === 'add') {
-        const { A, B, places } = columnsOf(a, b);
-        return eq(x, fromColumns(A.map((d, i) => (d + B[i]!) % 10), places));
-      }
+      if (w.do === 'add') return eq(x, carryDroppedSum(a, b));
       if (w.do === 'multiply') {
         const k = wholePart(b);
-        const { A, places } = columnsOf(a, a);
-        return k < 10 && eq(x, fromColumns(A.map((d) => (d * k) % 10), places));
+        return k < 10 && eq(x, carryDroppedProduct(a, k));
       }
       return false;
     }
