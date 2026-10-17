@@ -195,7 +195,7 @@
           "equation": "2 + 5 + 5 = 12",
           "caption": {
             "en": "Now the plates hold 2, 5 and 5. The groups are not equal, so you cannot say how many are in each group.",
-            "zh": "换一种放法：2 块、5 块、5 块。每盘不一样多，就说不出\"每盘几块\"。"
+            "zh": "换一种放法：2 块、5 块、5 块。每盘不一样多，就说不出“每盘几块”。"
           }
         },
         {
@@ -258,7 +258,7 @@
           "hints": [
             {
               "en": "Use \"Deal one round\" to give each plate one orange.",
-              "zh": "按\"每盘发一个\"，每个盘子各放一个。"
+              "zh": "按“每盘发一个”，每个盘子各放一个。"
             },
             {
               "en": "Keep dealing until the tray is empty.",
@@ -2896,7 +2896,7 @@
             ],
             "fallback": {
               "en": "Not yet. Write each part as rows × 8, then add the two parts.",
-              "zh": "还没对。每一部分写成\"几行 × 8\"，再把两部分加起来。"
+              "zh": "还没对。每一部分写成“几行 × 8”，再把两部分加起来。"
             },
             "reveal": {
               "en": "2 rows of 8 is 16; 1 row of 8 is 8. Together 3 × 8 = 24.",
@@ -3682,7 +3682,7 @@
           "equation": "12 ÷ 3 = 4",
           "caption": {
             "en": "Deal them out one at a time, round and round. Each plate gets 4. 12 ÷ 3 = 4 is read \"12 divided by 3 equals 4\".",
-            "zh": "一轮一个地发，发完每盘 4 个。12 ÷ 3 = 4，读作\"12 除以 3 等于 4\"。"
+            "zh": "一轮一个地发，发完每盘 4 个。12 ÷ 3 = 4，读作“12 除以 3 等于 4”。"
           }
         },
         {
@@ -3785,7 +3785,7 @@
           "hints": [
             {
               "en": "Use \"Deal one round\" to give each plate one kueh.",
-              "zh": "按\"每盘发一个\"，每盘各放一块。"
+              "zh": "按“每盘发一个”，每盘各放一块。"
             },
             {
               "en": "Keep going until none are left, then count one plate.",
@@ -10962,7 +10962,7 @@
         "hints": [
           {
             "en": "Use \"Deal one round\" until the tray is empty.",
-            "zh": "一直按\"每盘发一个\"，发到托盘空了为止。"
+            "zh": "一直按“每盘发一个”，发到托盘空了为止。"
           }
         ],
         "feedback": {
@@ -11104,14 +11104,14 @@
               "when": "added-not-multiplied",
               "say": {
                 "en": "7 + 8 adds the rows and the columns. Each part is rows × 8.",
-                "zh": "7 + 8 是把行数和列数相加。每一块都是\"几行 × 8\"。"
+                "zh": "7 + 8 是把行数和列数相加。每一块都是“几行 × 8”。"
               },
               "sample": "=40,16,15"
             }
           ],
           "fallback": {
             "en": "Not yet. Write each part as rows × 8, then add the two parts.",
-            "zh": "还没对。每块写成\"几行 × 8\"，再把两块加起来。"
+            "zh": "还没对。每块写成“几行 × 8”，再把两块加起来。"
           },
           "reveal": {
             "en": "5 rows of 8 is 40 and 2 rows of 8 is 16: 7 × 8 = 40 + 16 = 56.",
